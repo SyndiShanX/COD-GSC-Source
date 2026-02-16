@@ -168,7 +168,7 @@ main() {
 }
 
 drop_afterlife_start_points_to_ground() {
-  var_0 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("afterlife_arcade", "targetname");
   foreach(var_2 in var_0) {
     var_2.origin = scripts\engine\utility::drop_to_ground(var_2.origin, 10, -100);
   }
@@ -202,7 +202,7 @@ show_soul_key_progress(var_0) {
 
 init_wall_buys_array() {
   level.wall_buy_interactions = [];
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.name) && var_2.name == "wall_buy") {
       level.wall_buy_interactions[level.wall_buy_interactions.size] = var_2;
@@ -372,7 +372,7 @@ setup_pap_token() {
       continue;
     }
 
-    if(scripts\engine\utility::within_fov(var_2 getEye(), var_2 getplayerangles(), var_1.origin + (0, 0, 1), level.cosine["45"]) && var_2 usebuttonpressed()) {
+    if(scripts\engine\utility::within_fov(var_2 getEye(), var_2 getplayerangles(), var_1.origin + (0, 0, 1), level.cosine["45"]) && var_2 useButtonPressed()) {
       take_peepshow_token(var_2, var_1);
       return;
     }
@@ -1094,7 +1094,7 @@ removeinvalidstructs(var_0, var_1) {
     }
 
     if(isDefined(var_4.target)) {
-      var_5 = scripts\engine\utility::getstructarray(var_4.var_336, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.var_336, "targetname");
       foreach(var_7 in var_5) {
         if(isDefined(var_7.target) && var_7.target == var_4.target) {
           var_0 = scripts\engine\utility::array_remove(var_0, var_7);
@@ -1324,7 +1324,7 @@ cp_disco_event_wave_init() {
 
 init_disco_spawner_locations() {
   level.goon_spawners = [];
-  var_0 = scripts\engine\utility::getstructarray("dog_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("dog_spawner", "targetname");
   if(isDefined(level.goon_spawner_patch_func)) {
     [[level.goon_spawner_patch_func]](var_0);
   }
@@ -1625,14 +1625,14 @@ take_peepshow_flyer(var_0, var_1) {
   level.peepshow_flyer_found = 1;
   var_1 thread scripts\cp\cp_vo::try_to_play_vo("pap_quest_collect_ticket", "disco_comment_vo", "low", 10, 0, 2, 0, 40);
   level scripts\cp\utility::set_quest_icon(11);
-  level.peepshow_entrances = scripts\engine\utility::getstructarray("enter_peepshow", "script_noteworthy");
+  level.peepshow_entrances = scripts\engine\utility::getStructArray("enter_peepshow", "script_noteworthy");
   foreach(var_3 in level.peepshow_entrances) {
     var_3.script_noteworthy = "enter_peepshow_allowed";
   }
 }
 
 init_peepshow_flyer() {
-  var_0 = scripts\engine\utility::getstructarray("peepshow_flyer", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("peepshow_flyer", "script_noteworthy");
   var_1 = scripts\engine\utility::random(var_0);
   var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
   var_1.randomintrange = spawn("script_model", var_2.origin);
@@ -1658,7 +1658,7 @@ init_projector() {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(level.booth_projector_struct);
   level.interactions["add_reel"].disable_guided_interactions = 1;
   level.interactions["pickup_reel"].disable_guided_interactions = 1;
-  var_0 = scripts\engine\utility::getstructarray("pickup_reel", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pickup_reel", "script_noteworthy");
   var_1 = scripts\engine\utility::random(var_0);
   var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
   var_1.randomintrange = spawn("script_model", var_2.origin);
@@ -1757,13 +1757,13 @@ place_pap_fuse() {
       continue;
     }
 
-    if(!var_0 usebuttonpressed()) {
+    if(!var_0 useButtonPressed()) {
       continue;
     }
 
     if((scripts\engine\utility::istrue(level.pap_fuses_placed) || !scripts\engine\utility::istrue(level.pap_fuses_found)) && !scripts\engine\utility::istrue(level.pap_fuses_upgraded)) {
       var_0 playlocalsound("perk_machine_deny");
-      while(var_0 scripts\cp\utility::is_valid_player(1) && var_0 usebuttonpressed()) {
+      while(var_0 scripts\cp\utility::is_valid_player(1) && var_0 useButtonPressed()) {
         wait(0.05);
       }
 
@@ -2550,7 +2550,7 @@ set_in_pap_room(var_0, var_1) {
 }
 
 teleport_to_safe_spot(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("pap_exit_spots", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("pap_exit_spots", "targetname");
   var_2 = undefined;
   while(!isDefined(var_2)) {
     foreach(var_4 in var_1) {
@@ -3427,7 +3427,7 @@ rat_king_lair_doors() {
 }
 
 disco_lost_and_found() {
-  var_0 = scripts\engine\utility::getstructarray("lost_and_found", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("lost_and_found", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.name) && var_2.name == "rk_fight") {
       level thread scripts\cp\maps\cp_disco\cp_disco_interactions::delay_remove_from_interactions(var_2);
@@ -3779,7 +3779,7 @@ cp_disco_zap_end_func(var_0) {
 }
 
 adjuststructs() {
-  var_0 = scripts\engine\utility::getstructarray("iw7_udm45_zm", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("iw7_udm45_zm", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
   }
@@ -4186,7 +4186,7 @@ choose_correct_strings_for_lost_and_found(var_0, var_1) {
 }
 
 movedefaultspawners() {
-  var_0 = scripts\engine\utility::getstructarray("default_player_start", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
   var_1 = [(579, 3025, 286.5), (535, 2538, 286.5), (571, 2399, 286.5), (595, 2978, 286.5)];
   var_2 = [(0, 216, 0), (0, 220, 0), (0, 40, 0), (0, 333, 0)];
   for(var_3 = 0; var_3 < var_1.size; var_3++) {

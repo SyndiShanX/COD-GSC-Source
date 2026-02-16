@@ -14,8 +14,8 @@ init_littlebird_landing() {
 
 init_littlebird_landing_thread() {
   waittillframeend;
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("gag_stage_littlebird_unload", "script_noteworthy"), ::setup_gag_stage_littlebird_unload);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("gag_stage_littlebird_load", "script_noteworthy"), ::setup_gag_stage_littlebird_load);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("gag_stage_littlebird_unload", "script_noteworthy"), ::setup_gag_stage_littlebird_unload);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("gag_stage_littlebird_load", "script_noteworthy"), ::setup_gag_stage_littlebird_load);
 }
 
 littlebird_landing() {

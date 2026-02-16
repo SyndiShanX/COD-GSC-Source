@@ -16,7 +16,7 @@ init_ghost_n_skull_5_quest() {
 blank() {}
 
 blow_up_ghost_box() {
-  var_0 = scripts\engine\utility::getstructarray("ghost_n_skull_box", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("ghost_n_skull_box", "script_noteworthy");
   var_1 = scripts\engine\utility::random(var_0);
   set_up_ghost_box(var_1);
   wait_for_explosive_damage(var_1);
@@ -90,7 +90,7 @@ is_explosive_damage(var_0) {
 }
 
 set_up_ghost_box(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "ghost_n_skull_door":
@@ -168,14 +168,14 @@ play_charge_complete_sfx() {
 }
 
 turn_on_map_marker() {
-  var_0 = scripts\engine\utility::getstructarray("pressure_plate_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.vfx_ent setscriptablepartstate("map_marker", "on");
   }
 }
 
 turn_off_map_marker() {
-  var_0 = scripts\engine\utility::getstructarray("pressure_plate_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.vfx_ent setscriptablepartstate("map_marker", "off");
   }
@@ -331,7 +331,7 @@ all_players_touch_volume(var_0) {
 }
 
 spawn_vfx_ent_at_plate_center() {
-  var_0 = scripts\engine\utility::getstructarray("pressure_plate_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     var_3 setModel("final_gns_quest_origin");
@@ -340,7 +340,7 @@ spawn_vfx_ent_at_plate_center() {
 }
 
 turn_on_plate_center_vfx() {
-  var_0 = scripts\engine\utility::getstructarray("pressure_plate_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(player_standing_on_plate(var_2)) {
       var_2.vfx_ent setscriptablepartstate("pressure_plate", "on");
@@ -349,7 +349,7 @@ turn_on_plate_center_vfx() {
 }
 
 turn_off_plate_center_vfx() {
-  var_0 = scripts\engine\utility::getstructarray("pressure_plate_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.vfx_ent setscriptablepartstate("pressure_plate", "off");
   }
@@ -366,7 +366,7 @@ player_standing_on_plate(var_0) {
 }
 
 clean_up_vfx_ent() {
-  var_0 = scripts\engine\utility::getstructarray("pressure_plate_center", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pressure_plate_center", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.vfx_ent)) {
       var_2.vfx_ent delete();
@@ -720,7 +720,7 @@ any_player_look_at_target(var_0) {
 
 player_look_at_target(var_0, var_1) {
   var_2 = 6400;
-  if(!var_1 adsbuttonpressed()) {
+  if(!var_1 adsButtonPressed()) {
     return 0;
   }
 
@@ -827,7 +827,7 @@ expand_light_node_path() {
 }
 
 get_light_node_structs_to_expand() {
-  var_0 = scripts\engine\utility::getstructarray(level.leading_light_node_struct.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(level.leading_light_node_struct.target, "targetname");
   if(isDefined(level.leading_light_node_struct.script_parameters) && level.leading_light_node_struct.script_parameters == "gns_path_split") {
     return [scripts\engine\utility::random(var_0)];
   }
@@ -1161,7 +1161,7 @@ player_interact_with_chess_board(var_0, var_1) {
     return 0;
   }
 
-  if(!var_0 usebuttonpressed()) {
+  if(!var_0 useButtonPressed()) {
     return 0;
   }
 
@@ -1330,7 +1330,7 @@ get_queen_piece_struct_at(var_0, var_1) {
 }
 
 create_queen_pieces_for_pick_up(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("eight_queen_pick_up", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("eight_queen_pick_up", "targetname");
   var_1 = remove_non_empty_queen_struct(var_1);
   var_1 = scripts\engine\utility::array_randomize_objects(var_1);
   for(var_2 = 0; var_2 < var_0; var_2++) {
@@ -1414,7 +1414,7 @@ player_use_queen_piece_struct(var_0, var_1) {
     return 0;
   }
 
-  if(!var_1 usebuttonpressed()) {
+  if(!var_1 useButtonPressed()) {
     return 0;
   }
 
@@ -1461,7 +1461,7 @@ set_up_controlling_struct() {
     var_0.queen_piece_struct[var_1 + ""] = [];
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_4 in var_2) {
     var_5 = var_4.script_noteworthy;
     var_5 = strtok(var_5, " ");
@@ -1657,7 +1657,7 @@ determine_secret_button_combo() {
 }
 
 place_papers_in_level(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray("gns_button_combo_paper", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("gns_button_combo_paper", "targetname");
   var_3 = scripts\engine\utility::array_randomize_objects(var_3);
   place_paper_at(var_3[0], var_0);
   place_paper_at(var_3[1], var_1);
@@ -1788,7 +1788,7 @@ wait_for_player_activation() {
         break;
       }
 
-      if(!var_4 usebuttonpressed()) {
+      if(!var_4 useButtonPressed()) {
         var_2 = 0;
         break;
       }
@@ -1818,7 +1818,7 @@ wait_for_player_activation() {
           break;
         }
 
-        if(!var_4 usebuttonpressed()) {
+        if(!var_4 useButtonPressed()) {
           var_2 = 0;
           break;
         }

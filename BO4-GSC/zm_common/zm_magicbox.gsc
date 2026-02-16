@@ -890,7 +890,7 @@ function_e4dcca48() {
       }
     }
 
-    if(isDefined(var_369ce419) && var_369ce419 meleebuttonpressed() && self.var_c2f3a87c && var_369ce419 istouching(var_1e99deea)) {
+    if(isDefined(var_369ce419) && var_369ce419 meleeButtonPressed() && self.var_c2f3a87c && var_369ce419 istouching(var_1e99deea)) {
       self.var_481aa649 = 1;
       self.var_75c86f89 = var_369ce419;
 

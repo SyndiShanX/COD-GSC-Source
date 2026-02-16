@@ -2388,7 +2388,7 @@ func_CCBE() {
   var_0 setModel("fx_org_view");
   var_0 linkto(level.player, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.var_C04F = 1;
-  var_1 = scripts\engine\utility::getstructarray("fxchain_start", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("fxchain_start", "script_noteworthy");
   level.var_AD40 = [];
   level.var_C1E0 = var_1.size;
 
@@ -2404,7 +2404,7 @@ func_CCBE() {
   level.var_37CE = 0;
   playFXOnTag(scripts\engine\utility::getfx(level.var_37CF.script_parameters), var_0, "tag_origin");
   level.var_AD40 = undefined;
-  var_3 = scripts\engine\utility::getstructarray("fxchain_transition", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("fxchain_transition", "targetname");
   thread func_68A8(var_0);
 
   for(;;) {
@@ -2436,18 +2436,18 @@ func_CCBE() {
 
     var_9 = [];
 
-    foreach(var_11 in scripts\engine\utility::getstructarray(level.var_37CF.targetname, "target")) {
+    foreach(var_11 in scripts\engine\utility::getStructArray(level.var_37CF.targetname, "target")) {
       var_9[var_9.size] = func_7A8D(var_11, level.var_37CF);
     }
 
     if(isDefined(level.var_37CF.target)) {
-      var_13 = scripts\engine\utility::getstructarray(level.var_37CF.target, "targetname");
+      var_13 = scripts\engine\utility::getStructArray(level.var_37CF.target, "targetname");
 
       foreach(var_15 in var_13) {
         var_9[var_9.size] = func_7A8D(level.var_37CF, var_15);
 
         if(isDefined(var_15.target)) {
-          var_16 = scripts\engine\utility::getstructarray(var_15.target, "targetname");
+          var_16 = scripts\engine\utility::getStructArray(var_15.target, "targetname");
 
           foreach(var_18 in var_16) {
             var_9[var_9.size] = func_7A8D(var_15, var_18);
@@ -2472,7 +2472,7 @@ func_CCBE() {
 
 func_6C76() {
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
     foreach(var_2 in var_0) {
       if(!isDefined(var_2.var_3C0A)) {

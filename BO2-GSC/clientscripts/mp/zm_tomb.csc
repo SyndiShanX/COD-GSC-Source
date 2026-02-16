@@ -156,7 +156,7 @@ start_zombie_stuff() {
   clientscripts\mp\_visionset_mgr::vsmgr_register_overlay_info_style_burn("zm_transit_burn", 14000, 15, 2);
 }
 
-include_equipment_for_level() {
+#include_equipment_for_level() {
   clientscripts\mp\zombies\_zm_equipment::include_equipment("equip_dieseldrone_zm");
   clientscripts\mp\zombies\_zm_equipment::include_equipment("tomb_shield_zm");
 }
@@ -309,7 +309,7 @@ init_clientflag_variables() {}
 
 register_clientflag_callbacks() {}
 
-include_weapons() {
+#include_weapons() {
   include_weapon("hamr_zm");
   include_weapon("hamr_upgraded_zm", 0);
   include_weapon("mg08_zm");
@@ -394,7 +394,7 @@ include_weapons() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -1081,7 +1081,7 @@ lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
 player_tablet_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}
 
 foot_print_box_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  a_structs = getstructarray("foot_box_pos", "targetname");
+  a_structs = getStructArray("foot_box_pos", "targetname");
   s_box = get_array_of_closest(self.origin, a_structs)[0];
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
   e_fx setModel("tag_origin");

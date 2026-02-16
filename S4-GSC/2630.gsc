@@ -43,7 +43,7 @@ _id_FE51(var_0) {
     return 0;
   }
 
-  var_2 = scripts\engine\utility::getstructarray("org_dog_spawn", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("org_dog_spawn", "targetname");
   var_3 = _id_0015::_id_3B84(scripts\engine\utility::ter_op(scripts\mp\utility\game::isholidayenabled(2), "actor_s4_mp_guard_dog_codmas", "actor_s4_mp_guard_dog"), self.team);
 
   if(!isDefined(var_3)) {

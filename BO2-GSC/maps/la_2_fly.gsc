@@ -451,7 +451,7 @@ spawn_end_helis() {
 }
 
 wait_until_convoy_can_move(str_structs_name) {
-  a_moveto_structs = getstructarray(str_structs_name, "targetname");
+  a_moveto_structs = getStructArray(str_structs_name, "targetname");
   a_vehicles = level.convoy.vehicles;
   can_move = 0;
 
@@ -1654,7 +1654,7 @@ _dogfight_drone_attack_missile_fire() {
   while(true) {
     self waittill("drone_fire_missile");
     level notify("missile_fired_at_convoy");
-    structs = getstructarray("drone_attack_struct_" + self.n_wave_num, "targetname");
+    structs = getStructArray("drone_attack_struct_" + self.n_wave_num, "targetname");
     origin = random(structs).origin;
     self setgunnertargetvec(origin, 0);
     self setgunnertargetvec(origin, 1);
@@ -2013,7 +2013,7 @@ dogfight_ambient_building_explosions() {
   level endon("dogfight_done");
   n_max_dist = 400000000;
   n_min_dist = 0;
-  a_explosion_structs = getstructarray("drone_amb_building_explosion", "targetname");
+  a_explosion_structs = getStructArray("drone_amb_building_explosion", "targetname");
 
   while(true) {
     s_current_struct = undefined;

@@ -161,7 +161,7 @@ put this in your GSC:
 maps\_truck::main( "vehicle_opfor_truck" );
 
 and these lines in your CSV:
-include,vehicle_opfor_truck_truck
+#include,vehicle_opfor_truck_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -173,7 +173,7 @@ put this in your GSC:
 maps\_truck::main( "vehicle_pickup_4door" );
 
 and these lines in your CSV:
-include,vehicle_pickup_4door_truck
+#include,vehicle_pickup_4door_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -185,7 +185,7 @@ put this in your GSC:
 maps\_truck::main( "vehicle_pickup_roobars" );
 
 and these lines in your CSV:
-include,vehicle_pickup_roobars_truck
+#include,vehicle_pickup_roobars_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -197,7 +197,7 @@ put this in your GSC:
 maps\_truck::main( "vehicle_pickup_roobars", "truck_physics" );
 
 and these lines in your CSV:
-include,vehicle_pickup_roobars_truck
+#include,vehicle_pickup_roobars_truck
 sound,vehicle_truck,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 

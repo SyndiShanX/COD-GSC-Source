@@ -231,8 +231,8 @@ playEnvironmentAnims() {
 }
 
 playButtonFX() {
-  greenButtons = getstructarray("button_green", "targetname");
-  redButtons = getstructarray("button_red", "targetname");
+  greenButtons = getStructArray("button_green", "targetname");
+  redButtons = getStructArray("button_red", "targetname");
 
   if(isDefined(greenButtons)) {
     foreach(button in greenButtons) {

@@ -1135,7 +1135,7 @@ _id_AC31() {
   for(;;) {
     self._id_FEAA waittill("trigger_progress", var_0);
 
-    if(var_0 meleebuttonpressed()) {
+    if(var_0 meleeButtonPressed()) {
       continue;
     }
     if(var_0 scripts\mp\utility\player::_id_8ACE()) {
@@ -1144,7 +1144,7 @@ _id_AC31() {
     var_1 = 0;
 
     while(var_1 < 0.1) {
-      if(!var_0 usebuttonpressed()) {
+      if(!var_0 useButtonPressed()) {
         break;
       }
 
@@ -1487,7 +1487,7 @@ _id_39DA() {
   for(;;) {
     self._id_FEAA waittill("trigger_progress", var_0);
 
-    if(var_0 meleebuttonpressed()) {
+    if(var_0 meleeButtonPressed()) {
       continue;
     }
     if(var_0 scripts\mp\utility\player::_id_8ACE()) {
@@ -1496,7 +1496,7 @@ _id_39DA() {
     var_1 = 0;
 
     while(var_1 < 0.1) {
-      if(!var_0 usebuttonpressed()) {
+      if(!var_0 useButtonPressed()) {
         break;
       }
 
@@ -1910,7 +1910,7 @@ _id_96FD() {
     if(!scripts\mp\utility\player::isreallyalive(var_0)) {
       continue;
     }
-    if(var_0 meleebuttonpressed()) {
+    if(var_0 meleeButtonPressed()) {
       continue;
     }
     if(var_0 scripts\mp\utility\player::_id_8ACE()) {
@@ -2006,7 +2006,7 @@ _id_0B25(var_0) {
     if(!scripts\mp\utility\player::isreallyalive(var_1)) {
       continue;
     }
-    if(var_1 meleebuttonpressed()) {
+    if(var_1 meleeButtonPressed()) {
       continue;
     }
     if(var_1 scripts\mp\utility\player::_id_8ACE()) {
@@ -2069,7 +2069,7 @@ _id_C46B() {
     if(!scripts\mp\utility\player::isreallyalive(var_0)) {
       continue;
     }
-    if(var_0 meleebuttonpressed()) {
+    if(var_0 meleeButtonPressed()) {
       continue;
     }
     if(var_0 scripts\mp\utility\player::_id_8ACE()) {
@@ -2196,7 +2196,7 @@ _id_2B6E() {
   for(;;) {
     self._id_9705 waittill("trigger", var_0);
 
-    if(var_0 meleebuttonpressed()) {
+    if(var_0 meleeButtonPressed()) {
       continue;
     }
     if(var_0 scripts\mp\utility\player::_id_8ACE()) {

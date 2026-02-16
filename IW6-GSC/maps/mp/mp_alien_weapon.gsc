@@ -104,7 +104,7 @@ wait_for_detonation(projectile, weapname) {
 
   self thread projectile_safety(projectile);
 
-  while(self AdsButtonPressed() && buttonTime < DETONATE_TIME_LIMIT) {
+  while(self adsButtonPressed() && buttonTime < DETONATE_TIME_LIMIT) {
     wait(.05);
     buttonTime = buttonTime + 1;
   }
@@ -146,7 +146,7 @@ ads_watcher() {
   self endon("ads_pressed");
 
   while(1) {
-    if(self AdsButtonPressed()) {
+    if(self adsButtonPressed()) {
       self.adsPressed = true;
       self notify("ads_pressed");
     }

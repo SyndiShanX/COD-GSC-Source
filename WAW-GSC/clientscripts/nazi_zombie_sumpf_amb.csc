@@ -112,13 +112,13 @@ start_lights() {
   level waittill("start_lights");
   wait(2.0);
 
-  array_thread(getstructarray("electrical_circuit", "targetname"), ::circuit_sound);
+  array_thread(getStructArray("electrical_circuit", "targetname"), ::circuit_sound);
   playSound(0, "turn_on", (0, 0, 0));
 
   wait(3.0);
-  array_thread(getstructarray("electrical_surge", "targetname"), ::light_sound);
-  array_thread(getstructarray("low_buzz", "targetname"), ::buzz_sound);
-  array_thread(getstructarray("perksacola", "targetname"), ::perks_a_cola_jingle);
+  array_thread(getStructArray("electrical_surge", "targetname"), ::light_sound);
+  array_thread(getStructArray("low_buzz", "targetname"), ::buzz_sound);
+  array_thread(getStructArray("perksacola", "targetname"), ::perks_a_cola_jingle);
   playertrack = clientscripts\_audio::playloopat(0, "players_ambience", (0, 0, 0));
 }
 light_sound() {
@@ -152,7 +152,7 @@ start_jugganog_sounds() {
 
   iprintlnbold("Machine_ON!!!");
 
-  machine = getstructarray("perksacola", "targetname");
+  machine = getStructArray("perksacola", "targetname");
   for(i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_jugger_jingle") {
       machine[i] thread perks_a_cola_jingle();
@@ -165,7 +165,7 @@ start_speed_sounds() {
 
   iprintlnbold("Machine_ON!!!");
 
-  machine = getstructarray("perksacola", "targetname");
+  machine = getStructArray("perksacola", "targetname");
   for(i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_speed_jingle") {
       machine[i] thread perks_a_cola_jingle();
@@ -178,7 +178,7 @@ start_revive_sounds() {
 
   iprintlnbold("Machine_ON!!!");
 
-  machine = getstructarray("perksacola", "targetname");
+  machine = getStructArray("perksacola", "targetname");
   for(i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_revive_jingle") {
       machine[i] thread perks_a_cola_jingle();
@@ -191,7 +191,7 @@ start_doubletap_sounds() {
 
   iprintlnbold("Machine_ON!!!");
 
-  machine = getstructarray("perksacola", "targetname");
+  machine = getStructArray("perksacola", "targetname");
   for(i = 0; i < machine.size; i++) {
     if(machine[i].script_sound == "mx_doubletap_jingle") {
       machine[i] thread perks_a_cola_jingle();

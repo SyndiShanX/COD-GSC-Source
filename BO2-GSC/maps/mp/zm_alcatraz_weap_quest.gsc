@@ -30,7 +30,7 @@ init() {
   onplayerconnect_callback(::toggle_redeemer_trigger);
   onplayerconnect_callback(::hellhole_projectile_watch);
   onplayerconnect_callback(::hellhole_tomahawk_watch);
-  level.a_wolf_structs = getstructarray("wolf_position", "targetname");
+  level.a_wolf_structs = getStructArray("wolf_position", "targetname");
 
   for(i = 0; i < level.a_wolf_structs.size; i++) {
     registerclientfield("world", level.a_wolf_structs[i].script_parameters, 9000, 3, "int");

@@ -17,7 +17,7 @@ init_all_debris_and_door_positions() {
 }
 
 func_F945(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     set_nonstick(var_3);
@@ -170,7 +170,7 @@ func_115B2(var_0) {
 }
 
 init_sliding_power_doors() {
-  var_0 = scripts\engine\utility::getstructarray("power_door_sliding", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_2 thread sliding_power_door();

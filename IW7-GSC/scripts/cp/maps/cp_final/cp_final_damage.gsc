@@ -755,7 +755,7 @@ monitorplayerviewangles(var_0, var_1) {
   }
 }
 
-watchforattackbuttonpressed(var_0, var_1) {
+watchforattackButtonPressed(var_0, var_1) {
   var_0 endon("disconnect");
   var_1 endon("death");
   var_0 endon("end_Ghost_Idle_Loop");

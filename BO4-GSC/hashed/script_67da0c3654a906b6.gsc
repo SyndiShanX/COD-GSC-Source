@@ -102,7 +102,7 @@ function_26f124d8() {
     case # "ads":
       var_389b3ef1 = self playerads();
 
-      if(self adsbuttonpressed() && var_389b3ef1 > 0) {
+      if(self adsButtonPressed() && var_389b3ef1 > 0) {
         return true;
       }
 

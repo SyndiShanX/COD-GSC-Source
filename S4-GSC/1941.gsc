@@ -216,16 +216,16 @@ _id_A18A(var_0) {
   }
 
   for(;;) {
-    if(self stancebuttonpressed() || self attackbuttonpressed()) {
-      if(self attackbuttonpressed()) {
-        while(self attackbuttonpressed()) {
+    if(self stancebuttonPressed() || self attackButtonPressed()) {
+      if(self attackButtonPressed()) {
+        while(self attackButtonPressed()) {
           wait 0.05;
         }
 
         return var_1;
       }
 
-      while(self stancebuttonpressed()) {
+      while(self stancebuttonPressed()) {
         wait 0.05;
       }
 

@@ -989,7 +989,7 @@ monitor_machine_gun() {
 
     self.osprey_turret.turret_target.origin = self getEye() + anglesToForward(self getplayerangles()) * var_1;
 
-    if(self adsbuttonpressed(1)) {
+    if(self adsButtonPressed(1)) {
       if(!var_0) {
         level.player playSound("scn_carr_osprey_gun_start");
         self.osprey_turret startfiring();

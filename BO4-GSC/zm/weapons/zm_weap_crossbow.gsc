@@ -72,7 +72,7 @@ function_89ec3604() {
   while(true) {
     w_current = self getcurrentweapon();
 
-    if(is_crossbow(w_current) && self function_8426ad52(w_current) && self attackbuttonpressed() && !self ismeleeing()) {
+    if(is_crossbow(w_current) && self function_8426ad52(w_current) && self attackButtonPressed() && !self ismeleeing()) {
       if(self.var_bcc8f4f0) {
         self.var_bcc8f4f0 = 0;
       }
@@ -80,7 +80,7 @@ function_89ec3604() {
       self clientfield::set("" + # "hash_290836b72f987780", 1);
       b_charged = 0;
 
-      while(self attackbuttonpressed() && is_crossbow(w_current) && !self meleebuttonpressed() && !self laststand::player_is_in_laststand()) {
+      while(self attackButtonPressed() && is_crossbow(w_current) && !self meleeButtonPressed() && !self laststand::player_is_in_laststand()) {
         if(!b_charged && is_crossbow_charged(w_current, self)) {
           self clientfield::set("" + # "hash_290836b72f987780", 0);
           b_charged = 1;
@@ -168,11 +168,11 @@ function_7157628d() {
       if(is_crossbow(w_current)) {
         self clientfield::set("" + # "hash_b38c687db71dae", 1);
       }
-    } else if(is_crossbow(w_current) && function_8426ad52(w_current) && self.chargeshotlevel > 1 && !self.b_crossbow_charged && self attackbuttonpressed()) {
+    } else if(is_crossbow(w_current) && function_8426ad52(w_current) && self.chargeshotlevel > 1 && !self.b_crossbow_charged && self attackButtonPressed()) {
       self clientfield::set("" + # "hash_faa2f4808c12f8d", 1);
       self clientfield::set("" + # "hash_b38c687db71dae", 0);
       self.b_crossbow_charged = 1;
-    } else if(self.b_crossbow_charged && (self.chargeshotlevel <= 1 || !self attackbuttonpressed())) {
+    } else if(self.b_crossbow_charged && (self.chargeshotlevel <= 1 || !self attackButtonPressed())) {
       self clientfield::set("" + # "hash_faa2f4808c12f8d", 0);
       self clientfield::set("" + # "hash_b38c687db71dae", 1);
       self.b_crossbow_charged = 0;

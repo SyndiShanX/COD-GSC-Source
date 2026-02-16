@@ -277,23 +277,23 @@ function display_scene_menu(str_type) {
         selected = 0;
       }
     }
-    if(level.host buttonpressed("")) {
+    if(level.host buttonPressed("")) {
       setDvar("", 0);
     }
     if(names[selected] != "") {
-      if(level.host buttonpressed("") || level.host buttonpressed("")) {
+      if(level.host buttonPressed("") || level.host buttonPressed("")) {
         level.host move_to_scene(names[selected]);
-        while(level.host buttonpressed("") || level.host buttonpressed("")) {
+        while(level.host buttonPressed("") || level.host buttonPressed("")) {
           wait(0.05);
         }
-      } else if(level.host buttonpressed("") || level.host buttonpressed("")) {
+      } else if(level.host buttonPressed("") || level.host buttonPressed("")) {
         level.host move_to_scene(names[selected], 1);
-        while(level.host buttonpressed("") || level.host buttonpressed("")) {
+        while(level.host buttonPressed("") || level.host buttonPressed("")) {
           wait(0.05);
         }
       }
     }
-    if(level.host buttonpressed("") || level.host buttonpressed("") || level.host buttonpressed("")) {
+    if(level.host buttonPressed("") || level.host buttonPressed("") || level.host buttonPressed("")) {
       if(names[selected] == "") {
         setDvar("", 0);
       } else {
@@ -311,7 +311,7 @@ function display_scene_menu(str_type) {
           }
         }
       }
-      while(level.host buttonpressed("") || level.host buttonpressed("") || level.host buttonpressed("")) {
+      while(level.host buttonPressed("") || level.host buttonPressed("") || level.host buttonPressed("")) {
         wait(0.05);
       }
     }

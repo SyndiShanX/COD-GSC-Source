@@ -306,7 +306,7 @@ get_randomized_corpse_list() {
 
 setup_random_corpse_positions() {
   a_corpse_models = get_randomized_corpse_list();
-  a_corpse_structs = array_randomize(getstructarray("sq_tpo_corpse_spawn_location", "targetname"));
+  a_corpse_structs = array_randomize(getStructArray("sq_tpo_corpse_spawn_location", "targetname"));
 
   for(i = 0; i < a_corpse_models.size; i++) {
     a_corpse_structs[i] promote_to_corpse_model(a_corpse_models[i]);
@@ -437,7 +437,7 @@ unitrigger_think() {
     b_progress_bar_done = 0;
     n_frame_count = 0;
 
-    while(player usebuttonpressed() && !b_progress_bar_done) {
+    while(player useButtonPressed() && !b_progress_bar_done) {
       if(!isDefined(self.progress_bar)) {
         self.progress_bar = player createprimaryprogressbar();
         self.progress_bar_text = player createprimaryprogressbartext();

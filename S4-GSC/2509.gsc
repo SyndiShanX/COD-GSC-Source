@@ -226,7 +226,7 @@ _id_1E56() {
 }
 
 _id_1E4D() {
-  var_0 = scripts\engine\utility::getstructarray("atv_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("atv_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

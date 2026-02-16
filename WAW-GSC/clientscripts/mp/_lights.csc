@@ -144,7 +144,7 @@ fire_flicker(clientNum) {
 }
 
 init_lights(clientNum) {
-  lights = GetStructArray("light", "classname");
+  lights = getStructArray("light", "classname");
 
   if(isDefined(lights)) {
     array_thread(lights, ::create_lights, clientNum);
@@ -157,11 +157,11 @@ init_lights(clientNum) {
     return;
   }
 
-  flickering_lights = GetStructArray("generic_flickering", "targetname");
-  pulsing_lights = GetStructArray("generic_pulsing", "targetname");
-  double_strobe = GetStructArray("generic_double_strobe", "targetname");
-  fire_flickers = GetStructArray("fire_flicker", "targetname");
-  fire_casters = GetStructArray("firecaster", "targetname");
+  flickering_lights = getStructArray("generic_flickering", "targetname");
+  pulsing_lights = getStructArray("generic_pulsing", "targetname");
+  double_strobe = getStructArray("generic_double_strobe", "targetname");
+  fire_flickers = getStructArray("fire_flicker", "targetname");
+  fire_casters = getStructArray("firecaster", "targetname");
 
   if(isDefined(flickering_lights)) {
     println("*** Client : " + flickering_lights.size + " flickering lights.");

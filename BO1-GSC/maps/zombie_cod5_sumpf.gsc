@@ -159,7 +159,7 @@ register_offhand_weapons_for_level_defaults_override() {
   register_melee_weapon_for_level("knife_zm");
   level.zombie_melee_weapon_player_init = "knife_zm";
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
   include_weapon("g11_lps_zm");
@@ -222,7 +222,7 @@ include_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -537,7 +537,7 @@ sumpf_find_exit_point() {
   self thread maps\_zombiemode_spawner::find_flesh();
 }
 sumpf_player_spawn_placement() {
-  structs = getstructarray("initial_spawn_points", "targetname");
+  structs = getStructArray("initial_spawn_points", "targetname");
   flag_wait("all_players_connected");
   players = get_players();
   for(i = 0; i < players.size; i++) {

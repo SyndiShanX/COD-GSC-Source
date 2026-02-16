@@ -47,7 +47,7 @@ put this in your GSC:
 maps\_ambulance::main( "vehicle_ambulance_russian" );
 
 and these lines in your CSV:
-include,vehicle_ambulance_russian
+#include,vehicle_ambulance_russian
 sound,vehicle_ambulance,vehicle_standard,all_sp
 
 defaultmdl="vehicle_ambulance_russian"default:"vehicletype" "ambulance"

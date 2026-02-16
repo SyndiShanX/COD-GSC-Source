@@ -279,7 +279,7 @@ set_flashlight_fx(localclientnum, flashlight_fx) {
 }
 
 grab_generator_light_array() {
-  lights = getstructarray("light", "classname");
+  lights = getStructArray("light", "classname");
   level.generator_lights_array = [];
 
   foreach(light in lights) {
@@ -487,7 +487,7 @@ init_level_specific_wall_buy_fx() {
   level._effect["tazer_knuckles_zm_fx"] = loadfx("maps/zombie/fx_zmb_buried_buy_taseknuck");
 }
 
-include_weapons() {
+#include_weapons() {
   if(getDvar(#"createfx") != "") {
     return;
   }
@@ -561,7 +561,7 @@ include_weapons() {
   include_weapon("knife_ballistic_bowie_upgraded_zm", 0);
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -573,7 +573,7 @@ include_powerups() {
   include_powerup("random_weapon");
 }
 
-include_equipment_for_level() {}
+#include_equipment_for_level() {}
 
 setup_personality_character_exerts() {
   level.exert_sounds[1]["playerbreathinsound"][0] = "vox_plr_0_exert_inhale_0";

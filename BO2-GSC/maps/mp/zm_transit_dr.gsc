@@ -80,7 +80,7 @@ transit_standard_intermission() {
   self.friendlydamage = undefined;
   maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_transit_burn", self);
   self stopshellshock();
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
   point = undefined;
 
   if(!isDefined(points) || points.size == 0) {
@@ -305,7 +305,7 @@ precache_team_characters() {
 }
 
 precache_survival_barricade_assets() {
-  survival_barricades = getstructarray("game_mode_object");
+  survival_barricades = getStructArray("game_mode_object");
 
   for(i = 0; i < survival_barricades.size; i++) {
     if(isDefined(survival_barricades[i].script_string) && survival_barricades[i].script_string == "survival") {
@@ -502,7 +502,7 @@ transit_zone_init() {
   add_adjacent_zone("zone_gas", "zone_gar", "always_on");
 }
 
-include_powerups() {
+#include_powerups() {
   gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -552,7 +552,7 @@ offhand_weapon_overrride() {
   level.zombie_equipment_player_init = undefined;
 }
 
-include_weapons() {
+#include_weapons() {
   gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
@@ -665,7 +665,7 @@ custom_add_weapons() {
   add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", &"ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
 }
 
-include_game_modules() {}
+#include_game_modules() {}
 
 initial_round_wait_func() {
   flag_wait("initial_blackscreen_passed");

@@ -1812,15 +1812,15 @@ manual_drop_think() {
   self endon(#"disconnect", #"death", #"drop_object");
 
   for(;;) {
-    while(self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
+    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryoffhandbuttonPressed() || self meleeButtonPressed()) {
       waitframe(1);
     }
 
-    while(!self attackbuttonpressed() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self meleebuttonpressed()) {
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryoffhandbuttonPressed() && !self meleeButtonPressed()) {
       waitframe(1);
     }
 
-    if(isDefined(self.carryobject) && !self usebuttonpressed()) {
+    if(isDefined(self.carryobject) && !self useButtonPressed()) {
       self.carryobject thread set_dropped();
     }
   }
@@ -1830,11 +1830,11 @@ droponusebutton() {
   level endon(#"game_ended");
   self endon(#"disconnect", #"death", #"drop_object");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     waitframe(1);
   }
 
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     waitframe(1);
   }
 
@@ -1853,7 +1853,7 @@ watchholdusedrop() {
   while(true) {
     waitresult = trigger waittill(#"trigger");
 
-    if(self usebuttonpressed() && !self.throwinggrenade && !self meleebuttonpressed() && !self attackbuttonpressed() && !(isDefined(self.isplanting) && self.isplanting) && !(isDefined(self.isdefusing) && self.isdefusing) && !self isremotecontrolling()) {
+    if(self useButtonPressed() && !self.throwinggrenade && !self meleeButtonPressed() && !self attackButtonPressed() && !(isDefined(self.isplanting) && self.isplanting) && !(isDefined(self.isdefusing) && self.isdefusing) && !self isremotecontrolling()) {
       if(isDefined(self.carryobject)) {
         if(!isDefined(self.carryobject.ignore_use_time)) {
           self.carryobject.ignore_use_time = [];
@@ -1881,7 +1881,7 @@ droponholdusebutton() {
     return;
   }
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     waitframe(1);
   }
 
@@ -1908,13 +1908,13 @@ function_2544bab6() {
   assert(isDefined(self.carryobject));
 
   while(true) {
-    while(!self usebuttonpressed()) {
+    while(!self useButtonPressed()) {
       waitframe(1);
     }
 
     var_f783260f = gettime();
 
-    while(self usebuttonpressed() && var_f783260f + 500 > gettime()) {
+    while(self useButtonPressed() && var_f783260f + 500 > gettime()) {
       waitframe(1);
     }
 
@@ -1922,7 +1922,7 @@ function_2544bab6() {
       continue;
     }
 
-    while(!self usebuttonpressed() && var_f783260f + 1000 > gettime()) {
+    while(!self useButtonPressed() && var_f783260f + 1000 > gettime()) {
       waitframe(1);
     }
 
@@ -3309,7 +3309,7 @@ continue_hold_think_loop(player, waitforweapon, timedout, usetime) {
     return false;
   }
 
-  if(!player usebuttonpressed()) {
+  if(!player useButtonPressed()) {
     return false;
   }
 
@@ -4655,7 +4655,7 @@ play_interact_anim(e_player) {
         self set_use_time(var_484df237);
       }
 
-      while(e_player usebuttonpressed() && isDefined(self) && isDefined(self.e_object) && !self.e_object flag::get("gameobject_end_use")) {
+      while(e_player useButtonPressed() && isDefined(self) && isDefined(self.e_object) && !self.e_object flag::get("gameobject_end_use")) {
         waitframe(1);
       }
 
@@ -4682,7 +4682,7 @@ play_interact_anim(e_player) {
       self.e_object thread animation::play(self.str_obj_anim, self.e_object, undefined, 1, 0.2, 0);
     }
 
-    while(e_player usebuttonpressed() && isDefined(self) && !self.e_object flag::get("gameobject_end_use")) {
+    while(e_player useButtonPressed() && isDefined(self) && !self.e_object flag::get("gameobject_end_use")) {
       waitframe(1);
     }
 

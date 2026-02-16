@@ -369,7 +369,7 @@ playerWatchForEarlyExit(MissileWeapon) {
 
   while(true) {
     useHold = 0;
-    while(self UseButtonPressed()) {
+    while(self useButtonPressed()) {
       useHold += 0.05;
       if(useHold > 0.5) {
         MissileWeapon notify("ms_early_exit");

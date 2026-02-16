@@ -583,7 +583,7 @@ function door_wait_until_user_release(c_door, e_triggerer, str_kill_on_door_noti
   n_dist = 0;
   do {
     wait(0.05);
-    b_pressed = e_triggerer usebuttonpressed();
+    b_pressed = e_triggerer useButtonPressed();
     n_dist = distancesquared(e_triggerer.origin, self.origin);
   }
   while(b_pressed && n_dist < max_dist_sq);

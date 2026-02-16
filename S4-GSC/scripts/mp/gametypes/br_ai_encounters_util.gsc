@@ -41,7 +41,7 @@ _id_67B6() {
   var_0 = [];
 
   if(isDefined(self.target)) {
-    var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
     foreach(var_3 in var_1) {
       var_0[var_0.size] = var_3;

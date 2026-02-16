@@ -1308,9 +1308,9 @@ watchC4AltDetonate() {
 
   buttonTime = 0;
   for(;;) {
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       buttonTime = 0;
-      while(self UseButtonPressed()) {
+      while(self useButtonPressed()) {
         buttonTime += 0.05;
         wait(0.05);
       }
@@ -1320,7 +1320,7 @@ watchC4AltDetonate() {
         continue;
       }
       buttonTime = 0;
-      while(!self UseButtonPressed() && buttonTime < 0.5) {
+      while(!self useButtonPressed() && buttonTime < 0.5) {
         buttonTime += 0.05;
         wait(0.05);
       }

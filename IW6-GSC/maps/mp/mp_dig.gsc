@@ -192,7 +192,7 @@ setupEvents(setup, setupExceptions) {
 
     if(scarabs) {
       level.digScarabPots = [];
-      level.digScarabPots = getstructarray("scarab_pot", "targetname");
+      level.digScarabPots = getStructArray("scarab_pot", "targetname");
 
       foreach(pot in level.digScarabPots) {
         level thread setupScarabPot(pot.origin);

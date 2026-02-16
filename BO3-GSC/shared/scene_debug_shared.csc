@@ -232,10 +232,10 @@ function display_scene_menu(str_type) {
         selected = 0;
       }
     }
-    if(level.localplayers[0] buttonpressed("")) {
+    if(level.localplayers[0] buttonPressed("")) {
       setDvar("", 0);
     }
-    if(level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("")) {
+    if(level.localplayers[0] buttonPressed("") || level.localplayers[0] buttonPressed("") || level.localplayers[0] buttonPressed("")) {
       if(names[selected] == "") {
         setDvar("", 0);
       } else {
@@ -253,7 +253,7 @@ function display_scene_menu(str_type) {
           }
         }
       }
-      while(level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("") || level.localplayers[0] buttonpressed("")) {
+      while(level.localplayers[0] buttonPressed("") || level.localplayers[0] buttonPressed("") || level.localplayers[0] buttonPressed("")) {
         wait(0.016);
       }
     }

@@ -16,7 +16,7 @@ init_item_meat() {
 }
 
 move_ring(ring) {
-  positions = getstructarray(ring.target, "targetname");
+  positions = getStructArray(ring.target, "targetname");
   positions = array_randomize(positions);
   level endon("end_game");
 

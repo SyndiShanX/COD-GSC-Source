@@ -2533,7 +2533,7 @@ function_e291246d(params) {
 
     move = pilot getnormalizedmovement();
 
-    if(pilot vehiclemoveupbuttonpressed() || isDefined(move) && (abs(move[0]) > 0.2 || abs(move[1]) > 0.2)) {
+    if(pilot vehiclemoveupbuttonPressed() || isDefined(move) && (abs(move[0]) > 0.2 || abs(move[1]) > 0.2)) {
       self.var_4e76046a = undefined;
       self returnplayercontrol();
       self vehicle_ai::set_state("driving");
@@ -2625,7 +2625,7 @@ function_b705c816(params) {
 
     move = player getnormalizedmovement();
 
-    if(player vehiclemoveupbuttonpressed() || isDefined(move) && (abs(move[0]) > 0.2 || abs(move[1]) > 0.2)) {
+    if(player vehiclemoveupbuttonPressed() || isDefined(move) && (abs(move[0]) > 0.2 || abs(move[1]) > 0.2)) {
       self vehicle_ai::set_state("driving");
       break;
     }
@@ -2806,7 +2806,7 @@ function_4885ce1(params) {
   if(state === "driving") {
     player = self getseatoccupant(0);
 
-    if(!isDefined(player) || !player vehiclemovedownbuttonpressed()) {
+    if(!isDefined(player) || !player vehiclemovedownbuttonPressed()) {
       return;
     }
 

@@ -87,7 +87,7 @@ loop_tracers(startPoint, endPoint) {
 intro_fakefire() {
   level waittill("iff");
 
-  struct_tracers = getstructarray("e1_tracer_struct", "targetname");
+  struct_tracers = getStructArray("e1_tracer_struct", "targetname");
 
   for(i = 0; i < struct_tracers.size; i++) {
     thread loop_tracers(struct_tracers[i].origin, struct_tracers[i].targeted[0].origin);
@@ -184,7 +184,7 @@ ambient_fakefire(endonString, delayStart, endonTrig) {
 reich_fakefire() {
   level waittill("rff");
 
-  fake_reich_mg_trigs = getstructarray("e3_reich_mg_trig", "targetname");
+  fake_reich_mg_trigs = getStructArray("e3_reich_mg_trig", "targetname");
 
   for(i = 0; i < fake_reich_mg_trigs.size; i++) {
     fake_reich_mg_trigs[i] thread ambient_fakefire("srff", true, fake_reich_mg_trigs[i]);

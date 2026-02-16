@@ -24,7 +24,7 @@ put this in your GSC:
 maps\_submarine_nuclear::main( "vehicle_submarine_nuclear" );
 
 and these lines in your CSV:
-include,vehicle_submarine_nuclear_submarine_nuclear
+#include,vehicle_submarine_nuclear_submarine_nuclear
 
 defaultmdl="vehicle_submarine_nuclear"default:"vehicletype" "submarine_nuclear"default:"script_team" "allies"
 */

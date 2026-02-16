@@ -787,11 +787,11 @@ _id_C7F9(var_0) {
   for(;;) {
     self waittill("trigger", var_1);
 
-    while(!var_1 isonground() && var_1 usebuttonpressed() || istrue(var_1._id_EF84)) {
+    while(!var_1 isonground() && var_1 useButtonPressed() || istrue(var_1._id_EF84)) {
       waitframe();
     }
 
-    if(!var_1 usebuttonpressed()) {
+    if(!var_1 useButtonPressed()) {
       continue;
     }
     self.owner scripts\mp\playerlogic::_id_D496(1);
@@ -1105,7 +1105,7 @@ _id_FE7F(var_0) {
   var_1 endon("death_or_disconnect");
   var_1 endon("last_stand_finished");
 
-  while(scripts\mp\utility\player::isreallyalive(var_0) && var_0 usebuttonpressed() && self._id_4143 < self._id_FEE7 && (!isDefined(var_0.inlaststand) || !var_0.inlaststand)) {
+  while(scripts\mp\utility\player::isreallyalive(var_0) && var_0 useButtonPressed() && self._id_4143 < self._id_FEE7 && (!isDefined(var_0.inlaststand) || !var_0.inlaststand)) {
     if(istrue(var_0._id_ED19)) {
       return scripts\mp\utility\player::isreallyalive(var_0);
     }
@@ -1141,7 +1141,7 @@ _id_EAF4() {
   for(;;) {
     waitframe();
 
-    if(self stancebuttonpressed() && self _meth_86C9() == 0) {
+    if(self stancebuttonPressed() && self _meth_86C9() == 0) {
       var_0 = var_0 + level._id_5F3A;
 
       if(var_0 >= 0.5) {

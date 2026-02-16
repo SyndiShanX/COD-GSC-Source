@@ -137,7 +137,7 @@ func_3D95(var_0) {
   var_2 = vectornormalize(self.origin - var_0.origin);
   var_3 = vectordot(var_2, var_1);
 
-  if(var_0 meleebuttonpressed() && isDefined(var_0.meleestrength) && var_0.meleestrength == 1 && var_3 > 0.5) {
+  if(var_0 meleeButtonPressed() && isDefined(var_0.meleestrength) && var_0.meleestrength == 1 && var_3 > 0.5) {
     return 1;
   } else {
     return 0;

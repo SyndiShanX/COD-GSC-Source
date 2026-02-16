@@ -20,7 +20,7 @@ init_crafting() {
 }
 
 init_crafting_station() {
-  var_0 = scripts\engine\utility::getstructarray("crafting_station", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("crafting_station", "script_noteworthy");
   foreach(var_3, var_2 in var_0) {
     var_2 thread crafting_station_power(var_3);
   }
@@ -31,7 +31,7 @@ crafting_station_power(var_0) {
     wait(0.1 * var_0);
   }
 
-  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_3 in var_1) {
     if(var_3.script_noteworthy == "fx_spot") {
       self.crafting_fx_spot = var_3;

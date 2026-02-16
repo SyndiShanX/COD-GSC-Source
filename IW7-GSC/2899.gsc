@@ -117,7 +117,7 @@ func_B907(var_0) {
   }
   level.var_B901[var_0].var_7605.origin = var_1.origin;
   level.var_B901[var_0].var_7605.angles = var_1.angles;
-  level.var_B901[var_0].var_7605.var_75C6 = scripts\engine\utility::getstructarray(var_0 + "_fx_point", "targetname");
+  level.var_B901[var_0].var_7605.var_75C6 = scripts\engine\utility::getStructArray(var_0 + "_fx_point", "targetname");
 }
 
 func_B906(var_0, var_1, var_2, var_3) {

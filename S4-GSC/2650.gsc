@@ -72,7 +72,7 @@ _id_10BDC(var_0) {
   for(;;) {
     var_2 = 0;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       var_2 = var_2 + var_1;
 
       if(var_2 > 0.75) {

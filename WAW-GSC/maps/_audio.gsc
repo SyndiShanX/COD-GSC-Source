@@ -21,7 +21,7 @@ wait_until_first_player() {
 thread_sound_trigger() {
   self waittill("trigger");
 
-  struct_targs = getstructarray(self.target, "targetname");
+  struct_targs = getStructArray(self.target, "targetname");
   ent_targs = getEntArray(self.target, "targetname");
 
   if(isDefined(struct_targs)) {
@@ -147,7 +147,7 @@ closest_point_on_line_to_point(Point, LineStart, LineEnd) {
   }
 }
 stop_line_sound(startOfLineEntity) {
-  startpoints = getstructarray(startOfLineEntity, "script_noteworthy");
+  startpoints = getStructArray(startOfLineEntity, "script_noteworthy");
 
   for(i = 0; i < startpoints.size; i++) {
     if(!isDefined(startpoints[i].soundmover)) {

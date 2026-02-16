@@ -48,7 +48,7 @@ setup_fake_dest_lvts() {
 }
 
 event1_fake_dist_lvts() {
-  lvts_structs = getstructarray("fake_dist_lvts", "targetname");
+  lvts_structs = getStructArray("fake_dist_lvts", "targetname");
 
   lvts = [];
 
@@ -239,7 +239,7 @@ beach_fakefire_starter() {
   println("*** Client : Got to starting beachfire.");
   level waittill("ab");
   println("*** Client : Starting beach fakefire");
-  firePoints = GetStructArray("beachwall_mgs", "targetname");
+  firePoints = getStructArray("beachwall_mgs", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
 
   array_thread(firePoints, ::ambient_fakefire, "bfe", true);

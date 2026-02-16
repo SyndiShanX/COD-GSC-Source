@@ -341,7 +341,7 @@ clean_zone(var_0) {
 
 try_continue_breach(var_0, var_1) {
   if(var_0.size > 0) {
-    var_2 = common_scripts\utility::getstructarray("soldier_teleport_struct", "targetname");
+    var_2 = common_scripts\utility::getStructArray("soldier_teleport_struct", "targetname");
 
     for(var_3 = 0; var_3 < var_0.size; var_3++) {
       var_4 = var_0[var_3];

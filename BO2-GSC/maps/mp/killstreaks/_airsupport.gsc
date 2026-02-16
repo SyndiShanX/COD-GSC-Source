@@ -14,7 +14,7 @@ initairsupport() {
   level.airsupportheightscale = getdvarintdefault("scr_airsupportHeightScale", level.airsupportheightscale);
   level.noflyzones = [];
   level.noflyzones = getEntArray("no_fly_zone", "targetname");
-  airsupport_heights = getstructarray("air_support_height", "targetname");
+  airsupport_heights = getStructArray("air_support_height", "targetname");
 
   if(airsupport_heights.size > 1)
     error("Found more then one 'air_support_height' structs in the map");

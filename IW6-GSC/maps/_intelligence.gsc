@@ -167,7 +167,7 @@ hold_count_check() {
   self endon("stopped_pressing");
 
   while(isDefined(self) && isDefined(level.player)) {
-    if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player))
+    if(level.player useButtonPressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player))
       level.player.hold_count++;
     else {
       setDvar("ui_securing", "");

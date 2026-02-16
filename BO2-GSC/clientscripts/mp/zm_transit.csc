@@ -77,7 +77,7 @@ main() {
   register_screecher_lights();
   level._override_eye_fx = level._effect["blue_eyes"];
   zombe_gametype_premain();
-  claymores = getstructarray("claymore_purchase", "targetname");
+  claymores = getStructArray("claymore_purchase", "targetname");
 
   if(isDefined(claymores)) {
     foreach(struct in claymores) {
@@ -221,7 +221,7 @@ start_zombie_stuff() {
   clientscripts\mp\_visionset_mgr::vsmgr_register_overlay_info_style_burn("zm_transit_burn", 1, 15, 2);
 }
 
-include_weapons() {
+#include_weapons() {
   gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
@@ -303,7 +303,7 @@ include_weapons() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -320,7 +320,7 @@ include_powerups() {
   include_powerup("teller_withdrawl");
 }
 
-include_equipment_for_level() {
+#include_equipment_for_level() {
   clientscripts\mp\zombies\_zm_equipment::include_equipment("riotshield_zm");
 }
 
@@ -574,7 +574,7 @@ turbine_door_sparks(wire) {
 }
 
 register_screecher_lights() {
-  level.safety_lights = getstructarray("screecher_escape", "targetname");
+  level.safety_lights = getStructArray("screecher_escape", "targetname");
   level.safety_lights_callbacks = [];
 
   for(i = 0; i < level.safety_lights.size; i++) {

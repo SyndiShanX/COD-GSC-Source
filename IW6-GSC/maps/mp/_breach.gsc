@@ -15,7 +15,7 @@ main_thread() {
   breach_precache();
   waitframe();
 
-  breach = getstructarray("breach", "targetname");
+  breach = getStructArray("breach", "targetname");
   array_thread(breach, ::breach_init);
 }
 
@@ -50,7 +50,7 @@ breach_init() {
   }
 
   ents = getEntArray(self.target, "targetname");
-  structs = getstructarray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
   targets = array_combine(ents, structs);
   nodes = self getLinknameNodes();
   foreach(node in nodes) {
@@ -194,7 +194,7 @@ add_breach_target(target, action, event_name, useSide) {
     s.facing_dir = anglesToForward(target.angles);
 
     if(isDefined(target.target)) {
-      target_targets = getstructarray(target.target, "targetname");
+      target_targets = getStructArray(target.target, "targetname");
       foreach(target_target in target_targets) {
         if(!isDefined(target_target.script_noteworthy)) {
           continue;

@@ -1681,7 +1681,7 @@ updatescoperadar(var_0) {
   var_1 = 2.4;
   var_2 = 1750;
   for(;;) {
-    if(!var_0 adsbuttonpressed()) {
+    if(!var_0 adsButtonPressed()) {
       var_3 = var_0 scripts\engine\utility::waittill_any_return_no_endon_death_3("scope_radar_ads_in", "scope_radar_ads_out", "last_stand", "death", "weapon_change");
     } else {
       var_3 = "scope_radar_ads_in";
@@ -1704,7 +1704,7 @@ runscoperadarinloop(var_0, var_1, var_2) {
   var_0 endon("death");
   var_0 endon("disconnect");
   var_3 = 0.75;
-  while(var_0 adsbuttonpressed()) {
+  while(var_0 adsButtonPressed()) {
     if(var_0 playerads() >= var_3) {
       var_0 playlocalsound("uav_ping");
       var_0 thread scoperadar_executeping(var_0, var_1, var_2);

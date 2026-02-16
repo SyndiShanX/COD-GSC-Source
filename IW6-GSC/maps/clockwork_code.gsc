@@ -573,7 +573,7 @@ fire_grenade() {
     if(isDefined(var_6) && var_6 == "fire_grenade")
       var_7 = 1;
     else
-      var_7 = level.player attackbuttonpressed();
+      var_7 = level.player attackButtonPressed();
 
     while(var_7 && level.switchactive) {
       if(var_3 < gettime()) {
@@ -616,7 +616,7 @@ fire_grenade() {
       }
 
       wait 0.1;
-      var_7 = level.player attackbuttonpressed();
+      var_7 = level.player attackButtonPressed();
     }
   }
 }
@@ -1268,18 +1268,18 @@ player_viewhands_minigun_hand(var_0) {
   }
 }
 
-spinbuttonpressed() {
-  if(level.player adsbuttonpressed())
+spinbuttonPressed() {
+  if(level.player adsButtonPressed())
     return 1;
 
-  if(level.player attackbuttonpressed())
+  if(level.player attackButtonPressed())
     return 1;
 
   return 0;
 }
 
-firebuttonpressed() {
-  return level.player attackbuttonpressed();
+firebuttonPressed() {
+  return level.player attackButtonPressed();
 }
 
 player_viewhands_minigun_idle(var_0) {

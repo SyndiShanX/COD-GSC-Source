@@ -411,7 +411,7 @@ func_7C3B(var_0, var_1, var_2) {
   var_7 = [];
   var_8 = getnodearray("seek_patrol", "targetname");
   var_6 = scripts\engine\utility::array_combine(var_8, var_6);
-  var_8 = scripts\engine\utility::getstructarray("seek_patrol", "targetname");
+  var_8 = scripts\engine\utility::getStructArray("seek_patrol", "targetname");
   var_6 = scripts\engine\utility::array_combine(var_8, var_6);
   var_6 = sortbydistance(var_6, var_0);
   foreach(var_10 in var_6) {

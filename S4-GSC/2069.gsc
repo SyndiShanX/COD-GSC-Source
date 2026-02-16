@@ -29,7 +29,7 @@ _id_815B() {
     level._id_41B5[var_1] = "default";
   }
 
-  var_3 = scripts\engine\utility::getstructarray("spawn_selection_camera", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("spawn_selection_camera", "targetname");
 
   if(var_3.size == 0) {
     _id_3FBB();

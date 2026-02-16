@@ -797,13 +797,13 @@ binoculars_monitor_scanning_button() {
   self.show_binoc_scan_hint = 1;
 
   for(;;) {
-    while(!self attackbuttonpressed())
+    while(!self attackButtonPressed())
       common_scripts\utility::waitframe();
 
     self notify("scanning");
     self.show_binoc_scan_hint = 0;
 
-    while(self attackbuttonpressed())
+    while(self attackButtonPressed())
       common_scripts\utility::waitframe();
 
     self notify("stop_scanning");
@@ -817,7 +817,7 @@ binoculars_monitor_scanning() {
   thread binoculars_monitor_scanning_button();
 
   for(;;) {
-    while(!self attackbuttonpressed() || self.current_binocular_zoom_level == 0)
+    while(!self attackButtonPressed() || self.current_binocular_zoom_level == 0)
       wait 0.05;
 
     if(isDefined(self.binoculars_scan_target) && isDefined(self.binocular_target.linked_to_ent) && self.binocular_target.linked_to_ent == self.binoculars_scan_target) {
@@ -831,7 +831,7 @@ binoculars_monitor_scanning() {
       thread binoculars_lock_to_target(var_0);
       thread scan_blur();
 
-      while(self attackbuttonpressed() && isDefined(var_0) && isDefined(self.binoculars_linked_to_target) && self.binoculars_linked_to_target && !target_isincircle(self.binocular_target, self, getdvarint("cg_fov"), 50) && bullettracepassed(self getEye(), var_0 gettagorigin("J_Head"), 0, undefined))
+      while(self attackButtonPressed() && isDefined(var_0) && isDefined(self.binoculars_linked_to_target) && self.binoculars_linked_to_target && !target_isincircle(self.binocular_target, self, getdvarint("cg_fov"), 50) && bullettracepassed(self getEye(), var_0 gettagorigin("J_Head"), 0, undefined))
         wait 0.05;
 
       if(!bullettracepassed(self getEye(), var_0 gettagorigin("J_Head"), 0, undefined)) {
@@ -839,7 +839,7 @@ binoculars_monitor_scanning() {
         var_0 = undefined;
       }
 
-      if(!self attackbuttonpressed() || !isDefined(var_0)) {
+      if(!self attackButtonPressed() || !isDefined(var_0)) {
         binoculars_unlock_from_target();
         self notify("stop_scanning");
         continue;
@@ -890,7 +890,7 @@ binoculars_monitor_scanning() {
           self.binoculars_hud_item["profile"].alpha = 0;
         }
 
-        while(self attackbuttonpressed() && var_2 < 0.5) {
+        while(self attackButtonPressed() && var_2 < 0.5) {
           var_2 = var_2 + 0.05;
           wait 0.05;
         }
@@ -908,7 +908,7 @@ binoculars_monitor_scanning() {
 
         thread binocular_face_scanning_lines_complete(0.5);
 
-        while(self attackbuttonpressed() && bullettracepassed(self getEye(), var_0 gettagorigin("J_Head"), 0, undefined))
+        while(self attackButtonPressed() && bullettracepassed(self getEye(), var_0 gettagorigin("J_Head"), 0, undefined))
           wait 0.05;
       } else
         self notify("stop_scanning");
@@ -991,7 +991,7 @@ monitor_binoculars_zoom() {
   for(;;) {
     self waittill("binocular_zoom");
 
-    if(!self attackbuttonpressed() || self.current_binocular_zoom_level == 0) {
+    if(!self attackButtonPressed() || self.current_binocular_zoom_level == 0) {
       self.binocular_zooming = 1;
 
       if(self.current_binocular_zoom_level == 0) {
@@ -1254,7 +1254,7 @@ binocular_reticle_target_reaction() {
   var_5 = undefined;
 
   for(;;) {
-    if((!isDefined(self.binocular_zooming) || isDefined(self.binocular_zooming) && !self.binocular_zooming) && (!self.binocular_target islinked() || !self attackbuttonpressed())) {
+    if((!isDefined(self.binocular_zooming) || isDefined(self.binocular_zooming) && !self.binocular_zooming) && (!self.binocular_target islinked() || !self attackButtonPressed())) {
       if(isDefined(self.binoculars_trace) && isDefined(self.binoculars_scan_target)) {
         if(!isDefined(var_5) || var_5 != self.binoculars_scan_target) {
           var_4 = 0;

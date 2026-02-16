@@ -75,7 +75,7 @@ _id_CDD6() {
   self._id_AC78 = self;
   self._id_FE17 = [];
   self._id_94FD = [];
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     if(!isDefined(var_2._id_039B)) {
@@ -172,7 +172,7 @@ _id_CDDF() {
   var_1 = [];
 
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
     var_1 = getEntArray(self.target, "targetname");
   }
 
@@ -186,7 +186,7 @@ _id_CDDF() {
     switch (var_3._id_039B) {
       case "ignore":
         if(isDefined(var_3.target)) {
-          var_4 = scripts\engine\utility::getstructarray(var_3.target, "targetname");
+          var_4 = scripts\engine\utility::getStructArray(var_3.target, "targetname");
 
           foreach(var_6 in var_4) {
             var_0[var_0.size] = var_6;

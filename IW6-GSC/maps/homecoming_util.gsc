@@ -25,7 +25,7 @@ move_to_goal(var_0, var_1, var_2) {
       var_4 = maps\_utility::set_goal_node;
       break;
     case "struct":
-      var_3 = common_scripts\utility::getstructarray(var_0, var_1);
+      var_3 = common_scripts\utility::getStructArray(var_0, var_1);
       var_4 = ::set_goal_pos_think;
       break;
     case "ent":
@@ -215,7 +215,7 @@ dog_spawn() {
 }
 
 alliesteletostartspot(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
     if(var_3.script_noteworthy == "player") {
@@ -1079,7 +1079,7 @@ create_dead_guys(var_0, var_1, var_2) {
     common_scripts\utility::flag_wait(var_1);
 
   var_3 = getent(var_0 + "_spawner", "targetname");
-  var_4 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_4 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_5 = [];
 
   foreach(var_7 in var_4) {
@@ -1143,7 +1143,7 @@ ambient_runner_think() {
       break;
     }
 
-    var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+    var_2 = common_scripts\utility::getStructArray(var_0.target, "targetname");
 
     if(var_2.size > 1) {
       var_0 = var_2[randomint(var_2.size)];
@@ -3311,7 +3311,7 @@ hovercraft_allow_death() {
 }
 
 ship_artillery_init(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_2 = [];
 
   foreach(var_4 in var_1) {
@@ -3613,7 +3613,7 @@ ambient_distant_battlechatter(var_0, var_1, var_2) {
     level endon(var_1);
 
   if(isstring(var_0))
-    var_0 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_0 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   if(isDefined(var_2)) {
     foreach(var_4 in var_0) {

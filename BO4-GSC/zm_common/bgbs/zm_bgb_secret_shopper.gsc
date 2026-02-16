@@ -34,7 +34,7 @@ function_bdbf3da2(player) {
   player endon(#"bgb_update", #"disconnect");
 
   while(true) {
-    is_melee = player meleebuttonpressed();
+    is_melee = player meleeButtonPressed();
 
     if(!is_melee) {
       waitframe(1);

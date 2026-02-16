@@ -408,11 +408,11 @@ waitskipkillcambutton(var_0) {
   self endon("disconnect");
   self endon("killcam_ended");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait 0.05;
   }
 
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     wait 0.05;
   }
 
@@ -498,11 +498,11 @@ cancelkillcamonuse() {
 }
 
 cancelkillcamusebutton() {
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 cancelkillcamsafespawnbutton() {
-  return self fragbuttonpressed();
+  return self fragButtonPressed();
 }
 
 cancelkillcamcallback() {

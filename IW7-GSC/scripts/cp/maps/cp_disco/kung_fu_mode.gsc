@@ -819,7 +819,7 @@ setup_player_kung_fu_progression(var_0) {
 }
 
 ma_style_init() {
-  var_0 = scripts\engine\utility::getstructarray("martial_arts_animals", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("martial_arts_animals", "script_noteworthy");
   level.all_animal_structs = [];
   level.special_mode_activation_funcs["martial_arts_animals"] = ::setstylescriptables;
   level.normal_mode_activation_funcs["martial_arts_animals"] = ::setstylescriptables;
@@ -875,7 +875,7 @@ setstylescriptables(var_0, var_1, var_2, var_3) {
 }
 
 guord_interaction_init() {
-  var_0 = scripts\engine\utility::getstructarray("gourd_station", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("gourd_station", "script_noteworthy");
   level.all_gourds = [];
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
@@ -947,7 +947,7 @@ setgourdstationscriptables(var_0, var_1, var_2, var_3) {
 
 init_martial_arts_trainer() {
   scripts\engine\utility::flag_init("first_kung_fu_mode");
-  var_0 = scripts\engine\utility::getstructarray("martial_arts_trainer", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("martial_arts_trainer", "script_noteworthy");
   level.current_trainer_quest = 0;
   level.current_trainer_quest_backup = 0;
   level.trainer_quests = [];
@@ -1117,7 +1117,7 @@ blackcatusefunc(var_0, var_1) {
 blackcatinitfunc() {
   level.special_mode_activation_funcs["black_cat"] = ::blackcatinteractions;
   level.normal_mode_activation_funcs["black_cat"] = ::blackcatblank;
-  var_0 = scripts\engine\utility::getstructarray("black_cat", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("black_cat", "script_noteworthy");
   level.allcatstructs = var_0;
   level thread watchforplayerconnect(var_0);
   foreach(var_2 in var_0) {

@@ -70,7 +70,7 @@ main() {
   if(maps\_utility::game_is_current_gen())
     setsaveddvar("fx_alphathreshold", 10);
 
-  level.tower_courtyard_mortars = common_scripts\utility::getstructarray("courtyard_mortar_spots", "script_noteworthy");
+  level.tower_courtyard_mortars = common_scripts\utility::getStructArray("courtyard_mortar_spots", "script_noteworthy");
   level.mortarexcluders = [];
   level.nomaxmortardist = 1;
   level.mortarearthquakeradius = 3000;
@@ -577,7 +577,7 @@ start_a10_test() {
     var_4 maps\_utility::delaythread(var_5, maps\homecoming_drones::beach_path_drones);
   }
 
-  var_7 = common_scripts\utility::getstructarray("hovercraft_drone_fightspots_reference", "targetname");
+  var_7 = common_scripts\utility::getStructArray("hovercraft_drone_fightspots_reference", "targetname");
 
   foreach(var_9 in var_7) {
     var_10 = var_9 maps\_utility::get_linked_structs();

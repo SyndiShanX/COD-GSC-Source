@@ -170,7 +170,7 @@ sq_setup_player_connect(clientnum) {
   if(isDefined(level.gamedifficulty) && level.gamedifficulty == 0) {
     return;
   }
-  a_button_structs = getstructarray("sq_bp_button", "targetname");
+  a_button_structs = getStructArray("sq_bp_button", "targetname");
   array_thread(a_button_structs, ::sq_bp_spawn_button, clientnum);
   sq_spawn_model_at_struct(clientnum, "sq_gallows", "p6_zm_bu_gallows");
   sq_spawn_model_at_struct(clientnum, "sq_endgame_machine", "p6_zm_bu_end_game_machine");

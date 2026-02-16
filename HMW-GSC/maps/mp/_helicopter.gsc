@@ -160,7 +160,7 @@ init() {
 }
 
 getentorstructarray(var_0, var_1) {
-  var_2 = getstructarray(var_0, var_1);
+  var_2 = getStructArray(var_0, var_1);
   var_3 = getEntArray(var_0, var_1);
 
   if(isDefined(var_3) && var_3.size > 0)

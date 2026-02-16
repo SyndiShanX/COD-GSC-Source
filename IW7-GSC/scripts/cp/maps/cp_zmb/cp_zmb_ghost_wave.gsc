@@ -239,7 +239,7 @@ init_ghost_related_vfx() {
 }
 
 init_ghost_spawn_loc() {
-  level.zombie_ghost_spawn_nodes = scripts\engine\utility::getstructarray("ghost_spawn", "targetname");
+  level.zombie_ghost_spawn_nodes = scripts\engine\utility::getStructArray("ghost_spawn", "targetname");
 }
 
 spawn_zombie_ghost(var_0, var_1, var_2) {
@@ -590,7 +590,7 @@ moving_targets_sequence() {
   level endon("stop_moving_target_sequence");
   start_ghost_portal_vfx();
   for(var_0 = 1; var_0 <= level.gns_num_of_wave; var_0++) {
-    var_1 = scripts\engine\utility::getstructarray("ghost_formation_" + get_formationfunc_for_wave(var_0), "targetname");
+    var_1 = scripts\engine\utility::getStructArray("ghost_formation_" + get_formationfunc_for_wave(var_0), "targetname");
     if(var_1.size > 0) {
       level.ghostskulls_total_waves++;
       run_moving_target_wave(var_0, var_1);
@@ -709,7 +709,7 @@ spawn_moving_target_group(var_0) {
   var_1 = [];
   var_1[var_1.size] = spawn_moving_target(var_0);
   scripts\engine\utility::waitframe();
-  foreach(var_3 in scripts\engine\utility::getstructarray(var_0.target, "targetname")) {
+  foreach(var_3 in scripts\engine\utility::getStructArray(var_0.target, "targetname")) {
     var_1[var_1.size] = spawn_moving_target(var_3);
     scripts\engine\utility::waitframe();
   }
@@ -1258,14 +1258,14 @@ delay_end_ghost_wave_on_fail() {
 }
 
 teleport_into_arcade_console(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("ghost_wave_player_start", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("ghost_wave_player_start", "targetname");
   var_2 = var_1[var_0 getentitynumber()];
   var_0 setorigin(var_2.origin);
   var_0 setplayerangles(var_2.angles);
 }
 
 teleport_out_of_arcade_console(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("ghost_wave_player_end", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("ghost_wave_player_end", "targetname");
   var_2 = var_1[var_0 getentitynumber()];
   var_0 setorigin(scripts\engine\utility::drop_to_ground(var_2.origin, 50, -300));
   var_0 setplayerangles(var_2.angles);

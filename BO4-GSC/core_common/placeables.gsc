@@ -267,7 +267,7 @@ waitforplaceabletobebuilt(player) {
   finishedbuilding = 1;
 
   while(gettime() < endtime) {
-    if(!player attackbuttonpressed()) {
+    if(!player attackButtonPressed()) {
       finishedbuilding = 0;
       break;
     }
@@ -279,7 +279,7 @@ waitforplaceabletobebuilt(player) {
     waitframe(1);
   }
 
-  finished = player attackbuttonpressed();
+  finished = player attackButtonPressed();
 
   if(isDefined(placeable.buildfinishedfunc)) {
     [[placeable.buildfinishedfunc]](placeable, player, finishedbuilding);
@@ -336,11 +336,11 @@ watchplacement(placeable) {
       lastattempt = placeable.canbeplaced;
     }
 
-    while(waitingforattackbuttonrelease && !player attackbuttonpressed()) {
+    while(waitingforattackbuttonrelease && !player attackButtonPressed()) {
       waitingforattackbuttonrelease = 0;
     }
 
-    if(!waitingforattackbuttonrelease && placeable.canbeplaced && player attackbuttonpressed() || placeable.placeimmediately) {
+    if(!waitingforattackbuttonrelease && placeable.canbeplaced && player attackButtonPressed() || placeable.placeimmediately) {
       buildallowed = 1;
 
       if(isDefined(placeable.buildtime) && placeable.buildtime > 0) {
@@ -427,9 +427,9 @@ function_e222876f(placeable) {
   placeable endon(#"placed", #"cancelled");
 
   while(true) {
-    if((isDefined(placeable.var_e3be448) ? placeable.var_e3be448 : 0) && player changeseatbuttonpressed()) {
+    if((isDefined(placeable.var_e3be448) ? placeable.var_e3be448 : 0) && player changeseatbuttonPressed()) {
       placeable notify(#"cancelled");
-    } else if(!(isDefined(placeable.var_e3be448) ? placeable.var_e3be448 : 0) && placeable.cancelable && player actionslotfourbuttonpressed()) {
+    } else if(!(isDefined(placeable.var_e3be448) ? placeable.var_e3be448 : 0) && placeable.cancelable && player actionslotfourbuttonPressed()) {
       placeable notify(#"cancelled");
     } else if(isDefined(placeable.var_25404db4) && placeable.var_25404db4 && player laststand::player_is_in_laststand()) {
       placeable notify(#"cancelled");
@@ -590,7 +590,7 @@ watchpickup(player) {
       continue;
     }
 
-    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && !player attackbuttonpressed() && !(isDefined(player.isplanting) && player.isplanting) && !(isDefined(player.isdefusing) && player.isdefusing) && !player isremotecontrolling() && !isDefined(player.holding_placeable)) {
+    if(player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed() && !player attackButtonPressed() && !(isDefined(player.isplanting) && player.isplanting) && !(isDefined(player.isdefusing) && player.isdefusing) && !player isremotecontrolling() && !isDefined(player.holding_placeable)) {
       placeable notify(#"picked_up");
 
       if(isDefined(placeable.weapon_instance)) {

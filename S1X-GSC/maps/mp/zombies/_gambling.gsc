@@ -23,7 +23,7 @@ init() {
   level._effect["plinko_credits_1000"] = loadfx("vfx/gameplay/mp/zombie/dlc_plinko_score_1000");
   level._effect["plinko_light_green"] = loadfx("vfx/gameplay/mp/zombie/dlc_plinko_light_green");
   level._effect["plinko_light_red"] = loadfx("vfx/gameplay/mp/zombie/dlc_plinko_light_red");
-  var_0 = common_scripts\utility::getstructarray("plinko", "targetname");
+  var_0 = common_scripts\utility::getStructArray("plinko", "targetname");
   common_scripts\utility::array_thread(var_0, ::plinko_init);
   level.zmbteleportgrenadestuckcustom = ::plink_do_grenade_in_all_hoppers_test;
 }
@@ -73,7 +73,7 @@ reward(var_0, var_1, var_2) {
 
 plinko_init() {
   var_0 = getEntArray(self.target, "targetname");
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
   self.activetokencount = 0;
   self.tokens = [];
@@ -151,10 +151,10 @@ plinko_init_chute(var_0) {
   var_0.default_location.origin = var_0.origin;
   var_0.default_location.starts = self.starts;
   var_0.current_location = var_0.default_location;
-  var_0.locations = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_0.locations = common_scripts\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_2 in var_0.locations) {
-    var_2.starts = common_scripts\utility::getstructarray(var_2.target, "targetname");
+    var_2.starts = common_scripts\utility::getStructArray(var_2.target, "targetname");
   }
 
   var_0.locations[var_0.locations.size] = var_0.default_location;
@@ -249,7 +249,7 @@ plinko_init_gate(var_0) {
 
   var_0.activateexplosivedrone = 1;
   var_0.close_origin = var_0.origin;
-  var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     if(!isDefined(var_3.script_noteworthy)) {
@@ -657,7 +657,7 @@ plinko_grenade_in_hopper_watch(var_0, var_1, var_2) {
 }
 
 plink_do_grenade_in_all_hoppers_test(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray("plinko", "targetname");
+  var_3 = common_scripts\utility::getStructArray("plinko", "targetname");
 
   foreach(var_5 in var_3) {
     if(var_5 plinko_do_grenade_in_hopper_test(var_0, var_1, var_2)) {

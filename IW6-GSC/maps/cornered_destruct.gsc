@@ -717,7 +717,7 @@ hvt_office_environment() {
   level.player playrumbleonentity("heavy_3s");
   earthquake(0.5, 4, level.player.origin, 2500);
   level thread lobby_and_stair_fx();
-  var_0 = common_scripts\utility::getstructarray("hvt_office_phys", "targetname");
+  var_0 = common_scripts\utility::getStructArray("hvt_office_phys", "targetname");
 
   foreach(var_2 in var_0)
   physicsjitter(var_2.origin, 300, 200, 1.0, 1.0);
@@ -1094,7 +1094,7 @@ office_props() {
   common_scripts\utility::flag_wait("office_explosion");
   setphysicsgravitydir((0, -0.02, -0.03));
   var_9 = getEntArray("office_debris", "targetname");
-  var_10 = common_scripts\utility::getstructarray("office_phys", "targetname");
+  var_10 = common_scripts\utility::getStructArray("office_phys", "targetname");
 
   foreach(var_12 in var_9) {
     var_12 physicslaunchclient(var_12.origin + (0, 0, -6), (0, -0.05, 0.02));

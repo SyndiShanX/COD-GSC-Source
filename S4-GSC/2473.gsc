@@ -1291,7 +1291,7 @@ _id_10ABF(var_0, var_1) {
   var_2._id_FEB1 = scripts\engine\utility::ter_op(isDefined(var_0._id_A8EC), var_0._id_A8EC, 1);
   _id_B916(var_0, var_1);
 
-  while(isDefined(var_0) && var_0 scripts\cp_mp\utility\player_utility::_isalive() && _id_3190(var_0, var_1) && var_0 usebuttonpressed()) {
+  while(isDefined(var_0) && var_0 scripts\cp_mp\utility\player_utility::_isalive() && _id_3190(var_0, var_1) && var_0 useButtonPressed()) {
     var_2._id_4143 = var_2._id_4143 + level._id_5F3A * var_2._id_FEB1;
 
     if(var_2._id_4143 >= var_2._id_FEE7) {
@@ -1496,7 +1496,7 @@ _id_3190(var_0, var_1) {
     return 0;
   }
 
-  if(var_0 meleebuttonpressed()) {
+  if(var_0 meleeButtonPressed()) {
     return 0;
   }
 

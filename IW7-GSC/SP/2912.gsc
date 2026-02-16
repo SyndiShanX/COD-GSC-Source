@@ -703,7 +703,7 @@ func_11493() {
   }
 
   if(weaponinventorytype(var_1) == "altmode") {
-    var_0[var_0.size] = adsbuttonpressed(var_1);
+    var_0[var_0.size] = adsButtonPressed(var_1);
   } else {
     var_2 = weaponaltweaponname(var_1);
     if(var_2 != "none") {
@@ -718,7 +718,7 @@ func_11493() {
   }
 }
 
-adsbuttonpressed(var_0) {
+adsButtonPressed(var_0) {
   var_1 = getsubstr(var_0, 4);
   return var_1;
 }

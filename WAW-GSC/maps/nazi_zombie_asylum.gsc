@@ -198,8 +198,8 @@ init_zombie_asylum() {
 
   level thread init_elec_trap_trigs();
 
-  north_ext_goals = getstructarray("north_init_goal", "script_noteworthy");
-  south_ext_goals = getstructarray("south_init_goal", "script_noteworthy");
+  north_ext_goals = getStructArray("north_init_goal", "script_noteworthy");
+  south_ext_goals = getStructArray("south_init_goal", "script_noteworthy");
 
   for(i = 0; i < north_ext_goals.size; i++) {
     north_ext_goals[i].is_active = 1;
@@ -301,7 +301,7 @@ activate_goals_when_door_opened(door, key, type) {
   }
   lock_zombie_spawners(purchase_trigs[0].target);
 
-  entry_points = getstructarray(door, key);
+  entry_points = getStructArray(door, key);
   for(i = 0; i < entry_points.size; i++) {
     if(entry_points[i].script_noteworthy == door) {
       entry_points[i].is_active = undefined;
@@ -315,7 +315,7 @@ activate_goals_when_door_opened(door, key, type) {
 
   flag_wait(purchase_trigs[0].script_flag);
 
-  entry_points = getstructarray(door, key);
+  entry_points = getStructArray(door, key);
   for(i = 0; i < entry_points.size; i++) {
     if(entry_points[i].script_noteworthy == door) {
       entry_points[i].is_active = 1;
@@ -339,7 +339,7 @@ manage_zone() {
     }
   }
 
-  goals = getstructarray("exterior_goal", "targetname");
+  goals = getStructArray("exterior_goal", "targetname");
   check_ent = undefined;
   while(getdvarint("noclip") == 0 || getdvarint("notarget") != 0) {
     zone_active = false;
@@ -808,7 +808,7 @@ activate_electric_trap() {
 
   clientnotify(self.target);
 
-  fire_points = getstructarray(self.target, "targetname");
+  fire_points = getStructArray(self.target, "targetname");
 
   for(i = 0; i < fire_points.size; i++) {
     wait_network_frame();
@@ -943,8 +943,8 @@ spawn_point_override() {
 
   players = get_players();
 
-  north_structs = getstructarray("north_spawn", "script_noteworthy");
-  south_structs = getstructarray("south_spawn", "script_noteworthy");
+  north_structs = getStructArray("north_spawn", "script_noteworthy");
+  south_structs = getStructArray("south_spawn", "script_noteworthy");
 
   side1 = north_structs;
   side2 = south_structs;

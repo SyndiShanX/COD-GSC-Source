@@ -2355,7 +2355,7 @@ skipto_teleport_ai(skipto_name, friendly_ai) {
   if(!isarray(friendly_ai))
     friendly_ai = array(friendly_ai);
 
-  a_skipto_structs = getstructarray(skipto_name + "_ai", "targetname");
+  a_skipto_structs = getStructArray(skipto_name + "_ai", "targetname");
 
   if(!a_skipto_structs.size) {
     return;
@@ -2406,7 +2406,7 @@ skipto_teleport_players(skipto_name, coop_sort) {
   if(isDefined(coop_sort) && coop_sort)
     skipto_spots = get_sorted_skipto_spots(skipto_name);
   else
-    skipto_spots = getstructarray(skipto_name, "targetname");
+    skipto_spots = getStructArray(skipto_name, "targetname");
 
   assert(skipto_spots.size >= players.size, "Need more skipto positions for players!");
 
@@ -2421,7 +2421,7 @@ skipto_teleport_players(skipto_name, coop_sort) {
 }
 
 get_sorted_skipto_spots(skipto_name) {
-  player_skipto_spots = getstructarray(skipto_name, "targetname");
+  player_skipto_spots = getStructArray(skipto_name, "targetname");
 
   for(i = 0; i < player_skipto_spots.size; i++) {
     for(j = i; j < player_skipto_spots.size; j++) {
@@ -6008,17 +6008,17 @@ attack_button_held() {
 
 use_button_pressed() {
   assert(isPlayer(self), "Must call use_button_pressed() on a player.");
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 ads_button_pressed() {
   assert(isPlayer(self), "Must call ads_button_pressed() on a player.");
-  return self adsbuttonpressed();
+  return self adsButtonPressed();
 }
 
 attack_button_pressed() {
   assert(isPlayer(self), "Must call attack_button_pressed() on a player.");
-  return self attackbuttonpressed();
+  return self attackButtonPressed();
 }
 
 waittill_use_button_pressed() {
@@ -6876,7 +6876,7 @@ get_struct_array(str_value, str_key, b_assert_if_missing) {
     b_assert_if_missing = 0;
 
   assert(isDefined(str_value), "str_value is required parameter for get_struct_array");
-  a_found = getstructarray(str_value, str_key);
+  a_found = getStructArray(str_value, str_key);
 
   if(a_found.size == 0 && b_assert_if_missing)
     assertmsg("get_struct_array found no structs with " + str_key + " " + str_value + "!");
@@ -8061,16 +8061,16 @@ get_normalized_camera_movement(do_ignore_config, do_ignore_inversion) {
 get_normalized_dpad_movement() {
   a_dpad_movement = [];
 
-  if(self buttonpressed("DPAD_UP"))
+  if(self buttonPressed("DPAD_UP"))
     a_dpad_movement[0] = 1;
-  else if(self buttonpressed("DPAD_DOWN"))
+  else if(self buttonPressed("DPAD_DOWN"))
     a_dpad_movement[0] = -1;
   else
     a_dpad_movement[0] = 0;
 
-  if(self buttonpressed("DPAD_RIGHT"))
+  if(self buttonPressed("DPAD_RIGHT"))
     a_dpad_movement[1] = 1;
-  else if(self buttonpressed("DPAD_LEFT"))
+  else if(self buttonPressed("DPAD_LEFT"))
     a_dpad_movement[1] = -1;
   else
     a_dpad_movement[1] = 0;

@@ -1001,12 +1001,12 @@ get_minigame_sloth_barriers() {
 get_minigame_blocker_structs() {
   if(flag_exists("sq_minigame_active") && flag("sq_minigame_active")) {
     if(flag("richtofen_minigame_active") || flag("richtofen_game_complete"))
-      a_structs = getstructarray("minigame_richtofen_blocker", "targetname");
+      a_structs = getStructArray("minigame_richtofen_blocker", "targetname");
     else
-      a_structs = getstructarray("minigame_maxis_blocker", "script_noteworthy");
+      a_structs = getStructArray("minigame_maxis_blocker", "script_noteworthy");
   } else {
-    a_structs = getstructarray("minigame_richtofen_blocker", "targetname");
-    a_structs = arraycombine(a_structs, getstructarray("minigame_maxis_blocker", "script_noteworthy"), 0, 0);
+    a_structs = getStructArray("minigame_richtofen_blocker", "targetname");
+    a_structs = arraycombine(a_structs, getStructArray("minigame_maxis_blocker", "script_noteworthy"), 0, 0);
   }
 
   return a_structs;

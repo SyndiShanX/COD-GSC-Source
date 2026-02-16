@@ -509,7 +509,7 @@ func_8927(var_0, var_1, var_2) {
 }
 
 func_A2D0(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("jackal_targets", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("jackal_targets", "targetname");
   var_0 thread func_A13D();
   var_0 thread func_A1C0(var_1);
   var_0 thread func_A1C3(var_1);

@@ -474,7 +474,7 @@ intro_fakefire() {
   if(level.clientscripts) {
     maps\_utility::setClientSysState("levelNotify", "intro_fakefire_start");
   } else {
-    firePoints = GetStructArray("struct_intro_fakefire", "targetname");
+    firePoints = getStructArray("struct_intro_fakefire", "targetname");
     ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
 
     array_thread(firePoints, maps\ber3b_fx::ambient_fakefire, "intro_fakefire_end", false);

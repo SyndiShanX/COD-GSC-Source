@@ -341,7 +341,7 @@ watch_for_rocket_firing() {
   while(true) {
     player = get_players()[0];
 
-    while(!player throwbuttonpressed() || self._rocket_pods.free_rockets <= 0) {
+    while(!player throwbuttonPressed() || self._rocket_pods.free_rockets <= 0) {
       wait 0.05;
     }
 
@@ -349,7 +349,7 @@ watch_for_rocket_firing() {
     self ent_flag_set("arming_rockets");
     player = get_players()[0];
 
-    while(player throwbuttonpressed()) {
+    while(player throwbuttonPressed()) {
       wait 0.05;
     }
 
@@ -554,7 +554,7 @@ rocket_reload_button() {
       wait 0.1;
     }
 
-    while(!player usebuttonpressed()) {
+    while(!player useButtonPressed()) {
       wait 0.05;
     }
 
@@ -913,11 +913,11 @@ minigun_sound() {
   player = get_players()[0];
 
   while(true) {
-    while(!player attackbuttonpressed()) {
+    while(!player attackButtonPressed()) {
       wait 0.05;
     }
 
-    while(player attackbuttonpressed()) {
+    while(player attackButtonPressed()) {
       wait 0.05;
       player playLoopSound("wpn_hind_pilot_fire_loop_plr");
     }
@@ -933,7 +933,7 @@ hud_minigun_think() {
   player = get_players()[0];
 
   while(true) {
-    while(!player attackbuttonpressed()) {
+    while(!player attackButtonPressed()) {
       wait 0.05;
     }
 
@@ -941,7 +941,7 @@ hud_minigun_think() {
     self.minigun_hud["gun"] fadeovertime(0.05);
     self.minigun_hud["gun"].alpha = 0.65;
 
-    while(player attackbuttonpressed()) {
+    while(player attackButtonPressed()) {
       wait 0.05;
       player playLoopSound("wpn_hind_pilot_fire_loop_plr");
       self.minigun_hud["gun"] setshader("hud_hind_cannon0" + swap_counter, 64, 64);

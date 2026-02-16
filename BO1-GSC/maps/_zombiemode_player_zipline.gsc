@@ -177,7 +177,7 @@ is_ok_to_zipline(zip_path) {
     if(!isDefined(self.jumptime)) {
       return false;
     }
-    if(self jumpbuttonpressed() || (gettime() - self.jumptime <= 800) || is_true(self.divetoprone)) {
+    if(self jumpbuttonPressed() || (gettime() - self.jumptime <= 800) || is_true(self.divetoprone)) {
       return true;
     }
   }
@@ -276,7 +276,7 @@ player_exit_zipline(vehicle, zip_trig) {
   self allowmelee(true);
 }
 move_to_safe_landing_spot(zip_trig, vehicle, zipliner) {
-  landing_spots = getstructarray(zip_trig.target, "targetname");
+  landing_spots = getStructArray(zip_trig.target, "targetname");
   if(landing_spots.size < 1) {
     return;
   }
@@ -410,7 +410,7 @@ jump_button_monitor() {
   level endon("intermission");
   self endon("disconnect");
   while(1) {
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       self.jumptime = gettime();
     }
     wait(.1);

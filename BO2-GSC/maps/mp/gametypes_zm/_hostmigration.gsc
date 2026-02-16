@@ -415,7 +415,7 @@ hostmigration_put_player_in_better_place() {
 
     match_string = level.scr_zm_ui_gametype + "_" + location;
     spawnpoints = [];
-    structs = getstructarray("initial_spawn", "script_noteworthy");
+    structs = getStructArray("initial_spawn", "script_noteworthy");
 
     if(isDefined(structs)) {
       foreach(struct in structs) {
@@ -431,7 +431,7 @@ hostmigration_put_player_in_better_place() {
     }
 
     if(!isDefined(spawnpoints) || spawnpoints.size == 0)
-      spawnpoints = getstructarray("initial_spawn_points", "targetname");
+      spawnpoints = getStructArray("initial_spawn_points", "targetname");
 
     assert(isDefined(spawnpoints), "Could not find initial spawn points!");
     spawnpoint = maps\mp\zombies\_zm::getfreespawnpoint(spawnpoints, self);

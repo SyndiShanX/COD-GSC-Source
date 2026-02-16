@@ -113,7 +113,7 @@ is_weapon_included(weapon_name) {
   }
   return isDefined(level.zombie_weapons[weapon_name]);
 }
-include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
+#include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
   if(!isDefined(level.zombie_include_weapons)) {
     level.zombie_include_weapons = [];
     level.collector_achievement_weapons = [];

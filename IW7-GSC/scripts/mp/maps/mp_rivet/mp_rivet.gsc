@@ -266,7 +266,7 @@ func_1DA5() {
 func_1D9F() {
   level endon("game_ended");
   var_0 = [];
-  var_1 = scripts\engine\utility::getstructarray("ambient_drone_start_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("ambient_drone_start_loc", "script_noteworthy");
   foreach(var_3 in var_1) {
     if(!isDefined(var_3.script_parameters)) {
       continue;

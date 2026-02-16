@@ -386,7 +386,7 @@ parachute_open_rotate() {
 }
 
 assemble_debris() {
-  var_0 = common_scripts\utility::getstructarray("debris", "targetname");
+  var_0 = common_scripts\utility::getStructArray("debris", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
@@ -1885,7 +1885,7 @@ do_f15_raise_and_attack(var_0, var_1, var_2) {
   var_3.origin = var_0.origin;
   var_3 attachpath(var_0);
   var_3 startpath(var_0);
-  var_4 = common_scripts\utility::getstructarray(var_1, "targetname");
+  var_4 = common_scripts\utility::getStructArray(var_1, "targetname");
   common_scripts\utility::flag_wait("fire_ropes");
   wait 1;
   var_5 = spawn("script_model", var_3 gettagorigin("tag_left_wingtip") - (0, 0, -40));

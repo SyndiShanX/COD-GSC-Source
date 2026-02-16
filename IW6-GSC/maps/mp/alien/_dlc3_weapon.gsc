@@ -79,7 +79,7 @@ wait_for_detonation(var_0, var_1) {
   var_3 = 0;
   var_4 = (0, 0, 0);
 
-  for(var_5 = var_4; self adsbuttonpressed() && var_3 < var_2; var_3 = var_3 + 1)
+  for(var_5 = var_4; self adsButtonPressed() && var_3 < var_2; var_3 = var_3 + 1)
     wait 0.05;
 
   while(var_3 < var_2) {
@@ -119,7 +119,7 @@ ads_watcher() {
   self endon("ads_pressed");
 
   for(;;) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       self.adspressed = 1;
       self notify("ads_pressed");
     }

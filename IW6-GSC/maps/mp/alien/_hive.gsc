@@ -787,7 +787,7 @@ init_hive_locs() {
       }
 
       drill_teleport_targetname = location_ent.target + "_drill_teleport_loc";
-      location_ent.drill_teleport_structs = getstructarray(drill_teleport_targetname, "targetname");
+      location_ent.drill_teleport_structs = getStructArray(drill_teleport_targetname, "targetname");
 
       location_ent.removeables = removeables;
       location_ent.fx_ents = fx_ents;

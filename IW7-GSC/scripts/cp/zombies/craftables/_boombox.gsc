@@ -430,7 +430,7 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
               continue;
             } else if(!self.discotrap_disabled) {
               self.discotrap_disabled = 1;
-              var_11 = scripts\engine\utility::getstructarray("interaction_discoballtrap", "script_noteworthy");
+              var_11 = scripts\engine\utility::getStructArray("interaction_discoballtrap", "script_noteworthy");
               level thread scripts\cp\cp_interaction::interaction_cooldown(var_11[0], 30);
             }
           }

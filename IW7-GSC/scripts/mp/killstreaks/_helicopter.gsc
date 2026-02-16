@@ -13,7 +13,7 @@ init() {
   level.chopper = undefined;
   level.var_8D96 = getEntArray("heli_start", "targetname");
   level.heli_loop_nodes = getEntArray("heli_loop_start", "targetname");
-  level.var_110D1 = scripts\engine\utility::getstructarray("strafe_path", "targetname");
+  level.var_110D1 = scripts\engine\utility::getStructArray("strafe_path", "targetname");
   level.heli_leave_nodes = getEntArray("heli_leave", "targetname");
   level.heli_crash_nodes = getEntArray("heli_crash_start", "targetname");
   level.var_8D75 = 5;

@@ -138,7 +138,7 @@ _id_D8B5() {
       var_5 = getEntArray(var_4.target, "targetname");
 
       if(!isDefined(var_5) || var_5.size == 0) {
-        var_5 = scripts\engine\utility::getstructarray(var_4.target, "targetname");
+        var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
       }
 
       if(var_5.size == 0) {
@@ -909,7 +909,7 @@ _id_75B7(var_0, var_1) {
 }
 
 _id_D6DC() {
-  var_0 = scripts\engine\utility::getstructarray("axisLeft_alliesRight", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("axisLeft_alliesRight", "targetname");
 
   if(isDefined(scripts\cp_mp\utility\game_utility::_id_6B18())) {
     var_1 = undefined;
@@ -2279,7 +2279,7 @@ _id_1085B() {
   self endon("end_respawn");
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
 

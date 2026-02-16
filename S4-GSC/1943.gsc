@@ -721,13 +721,13 @@ _id_B81E() {
 
       switch (getdvarint("#x38a2495b4769b72b1", 0)) {
         case 0:
-          if(var_1 == 0 && self jumpbuttonpressed()) {
+          if(var_1 == 0 && self jumpbuttonPressed()) {
             var_2 = 1;
           }
 
           break;
         case 1:
-          if(self jumpbuttonpressed() && var_1 + 500 < gettime()) {
+          if(self jumpbuttonPressed() && var_1 + 500 < gettime()) {
             var_2 = 1;
           }
 
@@ -763,7 +763,7 @@ _id_B81E() {
     }
 
     if(isDefined(self) && _id_E07D()) {
-      if(!self jumpbuttonpressed()) {
+      if(!self jumpbuttonPressed()) {
         var_1 = 0;
       } else if(var_1 == 0) {
         var_1 = gettime();
@@ -781,13 +781,13 @@ _id_10B09() {
   self._id_4E9F = 0;
 
   for(;;) {
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       var_0 = gettime();
       var_1 = 0;
       waitframe();
 
       for(;;) {
-        if(!self jumpbuttonpressed()) {
+        if(!self jumpbuttonPressed()) {
           if(gettime() < var_0 + 500 && !self isonground()) {
             var_1 = gettime();
           }
@@ -808,7 +808,7 @@ _id_10B09() {
       waitframe();
 
       for(;;) {
-        if(self jumpbuttonpressed()) {
+        if(self jumpbuttonPressed()) {
           if(gettime() < var_1 + 500 && !self isonground()) {
             self._id_4E9F = 1;
             waitframe();

@@ -454,7 +454,7 @@ func_7CE0() {
   var_0 = [];
 
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   }
 
   return var_0;

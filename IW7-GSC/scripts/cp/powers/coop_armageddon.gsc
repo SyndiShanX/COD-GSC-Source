@@ -168,7 +168,7 @@ do_armageddon_earthquake(var_0) {
 
 init_armageddon_areas() {
   level.armageddon_areas = [];
-  var_0 = scripts\engine\utility::getstructarray("armageddon_area_marker", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("armageddon_area_marker", "targetname");
   foreach(var_2 in var_0) {
     var_3 = [];
     var_4 = scripts\engine\utility::getstruct(var_2.target, "targetname");

@@ -1293,7 +1293,7 @@ _id_1A02() {
   }
   level._id_1A04.label = "Actor: " + var_2;
 
-  if(level.player buttonpressed("f12")) {
+  if(level.player buttonPressed("f12")) {
     if(!level._id_1A05) {
       level._id_1A06 = !level._id_1A06;
       level._id_1A05 = 1;
@@ -1301,12 +1301,12 @@ _id_1A02() {
   } else {
     level._id_1A05 = 0;
   }
-  if(level.player buttonpressed("UPARROW")) {
+  if(level.player buttonPressed("UPARROW")) {
     if(level._id_1A07 != "up") {
       level._id_1A08--;
     }
     level._id_1A07 = "up";
-  } else if(level.player buttonpressed("DOWNARROW")) {
+  } else if(level.player buttonPressed("DOWNARROW")) {
     if(level._id_1A07 != "down") {
       level._id_1A08++;
     }
@@ -1381,7 +1381,7 @@ _id_1A02() {
     }
   }
 
-  if(level.player buttonpressed("del")) {
+  if(level.player buttonPressed("del")) {
     var_9 = var_1[level._id_1A08];
     var_10 = _id_1A0D(var_9);
 

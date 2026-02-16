@@ -1257,7 +1257,7 @@ _id_5BF9() {
           level.players[var_2] thread maps\_utility::_id_1823("contact_hostage", undefined);
         }
 
-        if(level.players[var_2] usebuttonpressed()) {
+        if(level.players[var_2] useButtonPressed()) {
           var_1 = 0;
           break;
         }
@@ -1489,7 +1489,7 @@ _id_5093(var_0, var_1) {
     }
   }
 
-  var_7 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_7 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_9 in var_7) {
     var_10 = var_9.script_noteworthy;

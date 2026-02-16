@@ -2019,7 +2019,7 @@ getstruct(var_0, var_1) {
   return var_2[0];
 }
 
-getstructarray(var_0, var_1) {
+getStructArray(var_0, var_1) {
   var_2 = level._id_EA70[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -2186,7 +2186,7 @@ _id_113D(var_0) {
 }
 
 _id_4795(var_0, var_1, var_2) {
-  var_3 = getstructarray(var_0, var_1);
+  var_3 = getStructArray(var_0, var_1);
   _id_4796(var_3, var_2);
 }
 
@@ -2285,7 +2285,7 @@ _id_6D99(var_0, var_1) {
 }
 
 _id_6D9B(var_0, var_1, var_2) {
-  var_3 = getstructarray(var_0, var_1);
+  var_3 = getStructArray(var_0, var_1);
   _id_4796(var_3, var_2);
   return var_3;
 }
@@ -5512,7 +5512,7 @@ _id_67A9(var_0) {
     }
   }
 
-  var_1 = getstructarray(var_0, "targetname");
+  var_1 = getStructArray(var_0, "targetname");
 
   if(var_1.size > 0) {
     return var_1;
@@ -5564,7 +5564,7 @@ _id_65F2(var_0) {
     }
   }
 
-  var_1 = getstructarray(var_0, "script_noteworthy");
+  var_1 = getStructArray(var_0, "script_noteworthy");
 
   if(var_1.size > 0) {
     return var_1;
@@ -6400,7 +6400,7 @@ _id_655C() {
     var_1 = _id_6562();
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      var_3 = getstructarray(var_1[var_2], "script_linkname");
+      var_3 = getStructArray(var_1[var_2], "script_linkname");
 
       if(var_3.size > 0) {
         var_0 = array_combine(var_0, var_3);

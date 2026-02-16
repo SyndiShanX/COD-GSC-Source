@@ -442,7 +442,7 @@ function_57692917(s_ring) {
   player = undefined;
 
   while(true) {
-    if(!isDefined(waitresult) || isalive(player) && (!player usebuttonpressed() || !player istouching(self))) {
+    if(!isDefined(waitresult) || isalive(player) && (!player useButtonPressed() || !player istouching(self))) {
       waitresult = self waittill(#"trigger");
       player = waitresult.activator;
     }
@@ -683,7 +683,7 @@ function_250cf19b() {
       continue;
     }
 
-    while(isalive(player) && player usebuttonpressed() && isDefined(self.trigger) && player istouching(self.trigger)) {
+    while(isalive(player) && player useButtonPressed() && isDefined(self.trigger) && player istouching(self.trigger)) {
       if(level.n_turns < 16) {
         self.mdl_wheel rotateroll(-90, 0.25);
         self.mdl_wheel playLoopSound(#"hash_70057df239d8bb23");
@@ -809,7 +809,7 @@ function_3f64b455() {
   s_result = undefined;
 
   while(true) {
-    if(!isDefined(s_result) || isalive(s_result.e_who) && (!s_result.e_who usebuttonpressed() || isDefined(mdl_wheel.s_unitrigger.trigger) && !s_result.e_who istouching(mdl_wheel.s_unitrigger.trigger))) {
+    if(!isDefined(s_result) || isalive(s_result.e_who) && (!s_result.e_who useButtonPressed() || isDefined(mdl_wheel.s_unitrigger.trigger) && !s_result.e_who istouching(mdl_wheel.s_unitrigger.trigger))) {
       s_result = mdl_wheel waittill(#"trigger_activated");
     }
 
@@ -1316,7 +1316,7 @@ function_31e641f5() {
 
     while(n_time < 3) {
       foreach(player in getplayers()) {
-        if(!player usebuttonpressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
+        if(!player useButtonPressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
           b_using = 0;
           n_time = 0;
           break;

@@ -589,7 +589,7 @@ watchreturnturrettoinventory(turret) {
   wait 0.05;
 
   while(true) {
-    if(self actionslotfourbuttonpressed()) {
+    if(self actionslotfourbuttonPressed()) {
       returnturrettoinventory(turret);
       return;
     }
@@ -663,11 +663,11 @@ watchturretplacement(turret) {
   turret endon("turret_placed");
   turret endon("turret_deactivated");
 
-  while(self attackbuttonpressed())
+  while(self attackButtonPressed())
     wait 0.05;
 
   while(true) {
-    if(self attackbuttonpressed() && turret.canbeplaced) {
+    if(self attackButtonPressed() && turret.canbeplaced) {
       placement = self canplayerplaceturret(turret);
 
       if(placement["result"]) {
@@ -1251,7 +1251,7 @@ watchturretuse(trigger) {
     if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
       continue;
     }
-    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && !player attackbuttonpressed() && !player maps\mp\killstreaks\_killstreaks::isinteractingwithobject() && !player isremotecontrolling()) {
+    if(player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed() && !player attackButtonPressed() && !player maps\mp\killstreaks\_killstreaks::isinteractingwithobject() && !player isremotecontrolling()) {
       if(isDefined(self.spawninfluencerid)) {
         removeinfluencer(self.spawninfluencerid);
         self.spawninfluencerid = undefined;
@@ -1873,7 +1873,7 @@ disableresult(player, owner) {
       break;
     }
 
-    if(!player usebuttonpressed()) {
+    if(!player useButtonPressed()) {
       success = 0;
       break;
     }
@@ -2050,7 +2050,7 @@ watchremotesentryfire(turret) {
   level endon("game_ended");
 
   while(true) {
-    if(self attackbuttonpressed() && turret.stunnedbytacticalgrenade == 0) {
+    if(self attackButtonPressed() && turret.stunnedbytacticalgrenade == 0) {
       firetime = weaponfiretime("auto_gun_turret_mp");
       earthquake(0.15, 0.2, turret.origin, 200);
       wait(firetime);

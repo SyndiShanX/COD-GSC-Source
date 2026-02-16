@@ -324,7 +324,7 @@ foyer_support() {
   }
 
   nd_exit = getnode("nd_foyer_upper_exit", "targetname");
-  a_s_support = getstructarray("s_foyer_upper", "targetname");
+  a_s_support = getStructArray("s_foyer_upper", "targetname");
 
   foreach(s_support in a_s_support) {
     s_support thread ambient_support_respawner(a_sp_support, "throw_flashbangs", "foyer_upper_defenders", nd_exit);
@@ -624,7 +624,7 @@ fill_theater_right(player) {
   m_door movey(59, 1.0);
   n_start_time = gettime();
   s_start_loc = getstruct("s_theater_enter_right", "targetname");
-  a_s_stage_right = getstructarray("s_theater_right_scout", "targetname");
+  a_s_stage_right = getStructArray("s_theater_right_scout", "targetname");
 
   foreach(s_loc in a_s_stage_right) {
     thread enter_theater(s_start_loc, s_loc, 1);
@@ -632,7 +632,7 @@ fill_theater_right(player) {
   }
 
   wait 2;
-  a_s_stage_right = getstructarray("s_theater_right", "targetname");
+  a_s_stage_right = getStructArray("s_theater_right", "targetname");
 
   foreach(s_loc in a_s_stage_right) {
     thread enter_theater(s_start_loc, s_loc);
@@ -651,7 +651,7 @@ fill_theater_right(player) {
 fill_theater_left(player) {
   n_start_time = gettime();
   s_start_loc = getstruct("s_theater_enter_left", "targetname");
-  a_s_stage_left = getstructarray("s_theater_left_scout", "targetname");
+  a_s_stage_left = getStructArray("s_theater_left_scout", "targetname");
 
   foreach(s_loc in a_s_stage_left) {
     thread enter_theater(s_start_loc, s_loc, 1);
@@ -659,7 +659,7 @@ fill_theater_left(player) {
   }
 
   wait 2;
-  a_s_stage_left = getstructarray("s_theater_left", "targetname");
+  a_s_stage_left = getStructArray("s_theater_left", "targetname");
 
   foreach(s_loc in a_s_stage_left) {
     thread enter_theater(s_start_loc, s_loc);
@@ -983,7 +983,7 @@ teleport_harper_to_end() {
   e_volume = getent("vol_final_hallway", "targetname");
 
   if(!level.ai_harper istouching(e_volume)) {
-    a_s_tp_locs = getstructarray("s_harper_skipto_end", "targetname");
+    a_s_tp_locs = getStructArray("s_harper_skipto_end", "targetname");
 
     foreach(s_tp_loc in a_s_tp_locs) {
       if(level.ai_harper teleport(s_tp_loc.origin, s_tp_loc.angles)) {

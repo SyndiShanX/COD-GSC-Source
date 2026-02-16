@@ -37,7 +37,7 @@ put this in your GSC:
 maps\_sa6::main( "vehicle_sa6_no_missiles_desert" );
 
 and these lines in your CSV:
-include,vehicle_sa6_no_missiles_desert_sa6
+#include,vehicle_sa6_no_missiles_desert_sa6
 sound,vehicle_t72,vehicle_standard,all_sp
 
 defaultmdl="vehicle_sa6_no_missiles_desert"default:"vehicletype" "sa6"default:"script_team" "allies"*/
@@ -48,7 +48,7 @@ put this in your GSC:
 maps\_sa6::main( "vehicle_sa6_no_missiles_woodland" );
 
 and these lines in your CSV:
-include,vehicle_sa6_no_missiles_woodland_sa6
+#include,vehicle_sa6_no_missiles_woodland_sa6
 sound,vehicle_t72,vehicle_standard,all_sp
 
 defaultmdl="vehicle_sa6_no_missiles_woodland"default:"vehicletype" "sa6"default:"script_team" "allies"

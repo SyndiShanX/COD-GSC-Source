@@ -3988,8 +3988,8 @@ fairground_battle() {
   var_3 = getEntArray("secondary_path", "script_noteworthy");
   common_scripts\utility::array_thread(var_3, ::secondary_path_think);
   thread fairground_force_high_intensity();
-  level.fair_paths = common_scripts\utility::getstructarray("fair_path", "targetname");
-  level.fair_paths_alt = common_scripts\utility::getstructarray("fair_path_alt", "targetname");
+  level.fair_paths = common_scripts\utility::getStructArray("fair_path", "targetname");
+  level.fair_paths_alt = common_scripts\utility::getStructArray("fair_path_alt", "targetname");
   var_4 = getent("field_ref_spot", "targetname");
   level.fair_paths = common_scripts\utility::get_array_of_closest(var_4.origin, level.fair_paths);
   common_scripts\utility::array_thread(level.fair_paths, ::init_fair_paths);
@@ -4516,7 +4516,7 @@ kill_heli_logic() {
   var_7 setvehweapon("hind_turret_penetration");
   var_7 waittill("reached_dynamic_path_end");
   common_scripts\utility::flag_set("kill_heli_attacks");
-  var_8 = common_scripts\utility::getstructarray("kill_heli_spot", "targetname");
+  var_8 = common_scripts\utility::getStructArray("kill_heli_spot", "targetname");
 
   for(;;) {
     var_9 = common_scripts\utility::getclosest(level.player.origin, var_8);

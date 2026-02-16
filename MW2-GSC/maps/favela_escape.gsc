@@ -979,7 +979,7 @@ market_evac() {
   level notify("color_flags_advance_stop");
 
   // warp friendlies forward if the player has slammed through this area
-  warpSpots = GetStructArray("struct_market_evac_friendly_warp", "targetname");
+  warpSpots = getStructArray("struct_market_evac_friendly_warp", "targetname");
   ASSERT(warpSpots.size >= level.friends.size);
 
   foreach(idx, guy in level.friends) {

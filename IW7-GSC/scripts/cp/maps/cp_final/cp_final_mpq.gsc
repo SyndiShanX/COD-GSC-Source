@@ -104,7 +104,7 @@ updateneilheadangles(var_0, var_1, var_2) {
           if(!var_12 && vectordot(vectornormalize(var_6 - var_0.origin), var_11) > 0.75 && vectordot(vectornormalize(var_10.origin - var_0.origin), var_11) > 0.75) {
             if(distance(var_0.origin, var_6) > distance(var_0.origin, var_2.origin)) {
               if(scripts\engine\utility::istrue(var_10.var_4284)) {
-                var_13 = scripts\engine\utility::getstructarray(var_10.script_noteworthy, "script_noteworthy");
+                var_13 = scripts\engine\utility::getStructArray(var_10.script_noteworthy, "script_noteworthy");
                 foreach(var_15 in var_13) {
                   if(var_15.target == var_15.target) {
                     var_15.nointeraction = undefined;
@@ -150,7 +150,7 @@ checkbuttoncollision(var_0, var_1, var_2) {
   level endon("game_ended");
   var_0 waittill("collision");
   var_3 = var_0.origin;
-  var_4 = scripts\engine\utility::getstructarray("dlc4_poster", "targetname");
+  var_4 = scripts\engine\utility::getStructArray("dlc4_poster", "targetname");
   var_0 notify("end_entangler_funcs");
   var_5 = scripts\engine\utility::getclosest(var_3, var_4);
   if(distance(var_3, var_5.origin) <= 36) {
@@ -272,7 +272,7 @@ registermpqinteractions() {
 }
 
 initneilfinalpos() {
-  var_0 = scripts\engine\utility::getstructarray("neil_head_final_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("neil_head_final_pos", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.custom_search_dist = 96;
   }
@@ -336,7 +336,7 @@ usepuzzlebutton(var_0, var_1) {
 }
 
 startairventfx() {
-  var_0 = scripts\engine\utility::getstructarray("air_suck_loc", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("air_suck_loc", "targetname");
   foreach(var_2 in var_0) {
     thread playventfx(var_2);
   }
@@ -385,7 +385,7 @@ checkfornearbydisk(var_0) {
 
 initneilmonitors() {
   level.currentneilstate = "neutral";
-  var_0 = scripts\engine\utility::getstructarray("neil_monitors", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("neil_monitors", "script_noteworthy");
   level.special_mode_activation_funcs["neil_monitors"] = ::setneilstatepent;
   level.normal_mode_activation_funcs["neil_monitors"] = ::setneilstatepent;
   foreach(var_2 in var_0) {
@@ -456,10 +456,10 @@ initpuzzlebutton() {
 initpuzzlebuttoninternal() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("button_entered_poster");
-  var_0 = scripts\engine\utility::getstructarray("puzzle_door_button", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("puzzle_door_button", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
-      var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname")[0];
+      var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname")[0];
     } else {
       var_3 = var_2;
     }
@@ -861,7 +861,7 @@ initentanglerbutton() {
   var_0 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
   var_0.nextneilvotime = 0;
   var_0.dontdelaytrigger = 1;
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   assignbuttonindex(var_1, var_0);
   var_0.var_32F7 = [];
   var_1 = scripts\engine\utility::array_randomize_objects(var_1);
@@ -897,7 +897,7 @@ initentanglerbutton() {
 solvetogglepuzzle() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::getstruct("entangler_button", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     var_3.var_32D9.color = "horizontal";
     var_3.var_32D9 rotateto((0, 90, 0), 0.1);
@@ -1586,7 +1586,7 @@ watchforentanglerdamage(var_0) {
 }
 
 initneilconsole() {
-  foreach(var_1 in scripts\engine\utility::getstructarray("neil_console", "script_noteworthy")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("neil_console", "script_noteworthy")) {
     var_1.nextneilvotime = 0;
   }
 
@@ -1599,14 +1599,14 @@ initfusepuzzleinteraction() {
 }
 
 deactivateinteractionsbynoteworthy(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
   }
 }
 
 deletemodelsbynoteworthy(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     if(isDefined(var_3.model)) {
       var_3.model delete();
@@ -1615,7 +1615,7 @@ deletemodelsbynoteworthy(var_0) {
 }
 
 activateinteractionsbynoteworthy(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
   }
@@ -1654,7 +1654,7 @@ spawnmodelatstruct(var_0, var_1) {
 }
 
 initmedbaymonitors() {
-  var_0 = scripts\engine\utility::getstructarray("med_bay_monitors", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("med_bay_monitors", "targetname");
   var_1 = [];
   foreach(var_3 in var_0) {
     var_4 = spawn("script_model", var_3.origin);
@@ -1673,7 +1673,7 @@ initmedbaymonitors() {
 }
 
 spawnpuzzlepieces() {
-  var_0 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("puzzle_pieces", "script_noteworthy");
   level.puzzlestates = getvalidpuzzlestates();
   level.phantomdisk = level.puzzlestates[level.puzzlestates.size - 1];
   foreach(var_3, var_2 in var_0) {
@@ -1780,7 +1780,7 @@ disableaftermovethroughvent(var_0) {
   level.struct_class_names["targetname"]["interaction"] = var_2;
   level.struct_class_names["script_noteworthy"]["puzzle_pieces"] = var_3;
   var_4 = level._effect["air_vent_out"];
-  var_5 = scripts\engine\utility::getstructarray("puzzle_piece_landing", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("puzzle_piece_landing", "targetname");
   var_6 = scripts\engine\utility::random(var_5);
   playFX(var_4, var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
   var_1 notify("end_entangler_funcs");
@@ -1810,7 +1810,7 @@ disableaftermovethroughvent(var_0) {
 
 diskcustomcollisionfunc(var_0, var_1, var_2) {
   level endon("game_ended");
-  var_3 = scripts\engine\utility::getstructarray("air_suck_loc", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("air_suck_loc", "targetname");
   for(var_4 = 0; var_4 <= 100; var_4++) {
     var_5 = var_0.origin;
     var_6 = var_0.angles;
@@ -1857,7 +1857,7 @@ getvalidpuzzlestates() {
 }
 
 spawnn31lhead() {
-  var_0 = scripts\engine\utility::getstructarray("neil_head", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("neil_head", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   var_1 = var_0[0];
   if(isDefined(var_1.target)) {
@@ -2126,7 +2126,7 @@ fusepuzzleusefunc(var_0, var_1) {
 }
 
 removeinvalidpuzzlepieces(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("puzzle_pieces", "script_noteworthy");
   foreach(var_3 in var_1) {
     if(var_0 == var_3.state) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
@@ -2150,7 +2150,7 @@ retrieveneilshead() {
 completeretrieveneilshead() {
   scripts\cp\utility::set_quest_icon(6);
   activateinteractionsbynoteworthy("neil_console");
-  var_0 = scripts\engine\utility::getstructarray("neil_head", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("neil_head", "script_noteworthy");
   deactivateinteractionsbynoteworthy("neil_head");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.headmodel)) {
@@ -2355,7 +2355,7 @@ turnonfacilitypower() {
 }
 
 initpuzzledoors() {
-  var_0 = scripts\engine\utility::getstructarray("toggle_puzzle_doors", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("toggle_puzzle_doors", "targetname");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     var_3.angles = var_2.angles;
@@ -2382,7 +2382,7 @@ securitydoorsdestroyed() {
 
 openpuzzledoors() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("toggle_puzzle_doors", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("toggle_puzzle_doors", "targetname");
   foreach(var_2 in var_0) {
     var_2.doormodel delete();
   }
@@ -2413,7 +2413,7 @@ completefusepuzzle() {
 
   deactivateinteractionsbynoteworthy("fuse_puzzle");
   deactivateinteractionsbynoteworthy("puzzle_pieces");
-  var_5 = scripts\engine\utility::getstructarray("puzzle_pieces", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray("puzzle_pieces", "script_noteworthy");
   foreach(var_7 in var_5) {
     if(isDefined(var_7.model)) {
       var_7.model delete();
@@ -2481,7 +2481,7 @@ debugfusepuzzle() {
 }
 
 initbridgepieces() {
-  var_0 = scripts\engine\utility::getstructarray("pap_bridge", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pap_bridge", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.name = "pap_quest";
     var_3 = spawn("script_model", var_2.origin);
@@ -2495,7 +2495,7 @@ initbridgepieces() {
 
 spawnastronauts() {
   level.astronautsshot = 0;
-  var_0 = scripts\engine\utility::getstructarray("hidden_song_nick", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("hidden_song_nick", "script_noteworthy");
   var_0 = sortbydistance(var_0, (5715, -4040, 131));
   level.astronaut_structs = [];
   foreach(var_4, var_2 in var_0) {
@@ -2723,7 +2723,7 @@ incrementbridgequest(var_0, var_1) {
 }
 
 showbridgepieces() {
-  scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("pap_bridge", "script_noteworthy"), ::draw_debug_sphere);
+  scripts\engine\utility::array_thread(scripts\engine\utility::getStructArray("pap_bridge", "script_noteworthy"), ::draw_debug_sphere);
 }
 
 draw_debug_sphere() {}
@@ -3118,9 +3118,9 @@ adjustmovespeed(var_0, var_1, var_2) {
 }
 
 neiltriggertrap() {
-  var_0 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
-  var_2 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("electric_trap", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("acid_rain_trap", "script_noteworthy");
   level thread scripts\cp\maps\cp_final\cp_final_traps::use_lasers_trap(var_0[0], undefined);
   level thread scripts\cp\maps\cp_final\cp_final_traps::electric_trap_use(var_1[0], undefined);
   level thread scripts\cp\maps\cp_final\cp_final_traps::use_rain_trap(var_2[0], undefined);
@@ -3133,9 +3133,9 @@ neildoevilstuff() {
   level endon("deactivateNeil");
   level endon("inFinalPosition");
   var_0 = ["laser_trap", "electric_trap", "acid_rain_trap"];
-  var_1 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
-  var_2 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("electric_trap", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("acid_rain_trap", "script_noteworthy");
   var_4 = scripts\engine\utility::array_combine(var_1, var_2, var_3);
   wait(5);
   for(;;) {

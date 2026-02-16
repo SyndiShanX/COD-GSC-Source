@@ -1728,7 +1728,7 @@ spectator_respawn() {
 }
 check_for_valid_spawn_near_team(revivee) {
   players = get_players();
-  spawn_points = getstructarray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   closest_group = undefined;
   closest_distance = 100000000;
   backup_group = undefined;
@@ -1764,7 +1764,7 @@ check_for_valid_spawn_near_team(revivee) {
       closest_group = backup_group;
     }
     if(isDefined(closest_group)) {
-      spawn_array = getstructarray(spawn_points[closest_group].target, "targetname");
+      spawn_array = getStructArray(spawn_points[closest_group].target, "targetname");
       for(k = 0; k < spawn_array.size; k++) {
         if(spawn_array[k].script_int == (revivee.entity_num + 1)) {
           return spawn_array[k].origin;
@@ -2518,19 +2518,19 @@ playerzombie_soundboard() {
       wait(0.05);
       continue;
     }
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       if(self can_do_input("use")) {
         self thread playerzombie_play_sound(useSound);
         self thread playerzombie_waitfor_buttonrelease("use");
         self.useSound_nextTime = GetTime() + self.useSound_waitTime;
       }
-    } else if(self AttackButtonPressed()) {
+    } else if(self attackButtonPressed()) {
       if(self can_do_input("attack")) {
         self thread playerzombie_play_sound(attackSound);
         self thread playerzombie_waitfor_buttonrelease("attack");
         self.attackSound_nextTime = GetTime() + self.attackSound_waitTime;
       }
-    } else if(self AdsButtonPressed()) {
+    } else if(self adsButtonPressed()) {
       if(self can_do_input("ads")) {
         self thread playerzombie_play_sound(adsSound);
         self thread playerzombie_waitfor_buttonrelease("ads");
@@ -2580,19 +2580,19 @@ playerzombie_waitfor_buttonrelease(inputType) {
   self endon(notifyString);
   if(inputType == "use") {
     self.buttonpressed_use = true;
-    while(self UseButtonPressed()) {
+    while(self useButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_use = false;
   } else if(inputType == "attack") {
     self.buttonpressed_attack = true;
-    while(self AttackButtonPressed()) {
+    while(self attackButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_attack = false;
   } else if(inputType == "ads") {
     self.buttonpressed_ads = true;
-    while(self AdsButtonPressed()) {
+    while(self adsButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_ads = false;
@@ -3133,7 +3133,7 @@ adjust_angles_to_player(stumble_angles) {
   return angles + (0, stumble_angles[1], 0);
 }
 coop_player_spawn_placement() {
-  structs = getstructarray("initial_spawn_points", "targetname");
+  structs = getStructArray("initial_spawn_points", "targetname");
   temp_ent = spawn("script_model", (0, 0, 0));
   for(i = 0; i < structs.size; i++) {
     temp_ent.origin = structs[i].origin;
@@ -3481,7 +3481,7 @@ player_intermission() {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");
     if(points.size < 1) {

@@ -54,7 +54,7 @@ _id_673C(var_0, var_1) {
     return [];
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_1, var_0);
+  var_2 = scripts\engine\utility::getStructArray(var_1, var_0);
   var_3 = [];
 
   foreach(var_5 in var_2) {
@@ -94,7 +94,7 @@ _id_D7A1() {
   if(!isDefined(level._id_EA70["variantname"])) {
     return;
   }
-  var_0 = scripts\engine\utility::getstructarray("content_destination", "variantname");
+  var_0 = scripts\engine\utility::getStructArray("content_destination", "variantname");
 
   foreach(var_2 in var_0) {
     level._id_3BE9._id_4828[var_2._id_0481] = var_2;
@@ -134,7 +134,7 @@ _id_D7E2() {
   if(!isDefined(level._id_EA70["variantname"])) {
     return;
   }
-  var_0 = scripts\engine\utility::getstructarray("content_location", "variantname");
+  var_0 = scripts\engine\utility::getStructArray("content_location", "variantname");
 
   foreach(var_2 in var_0) {
     level._id_3BE9._id_96DE[var_2._id_0481] = var_2;
@@ -401,5 +401,5 @@ _id_63C2(var_0) {
     return [];
   }
 
-  return scripts\engine\utility::getstructarray(var_0._id_0481, "target");
+  return scripts\engine\utility::getStructArray(var_0._id_0481, "target");
 }

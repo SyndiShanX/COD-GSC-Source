@@ -61,7 +61,7 @@ stage_logic() {
   iprintlnbold("IP Started");
 
   if(flag("sq_is_max_tower_built")) {
-    a_button_structs = getstructarray("sq_bp_button", "targetname");
+    a_button_structs = getStructArray("sq_bp_button", "targetname");
     array_thread(a_button_structs, ::sq_bp_spawn_trigger);
     m_lightboard = getent("sq_bp_board", "targetname");
     m_lightboard setclientfield("buried_sq_bp_set_lightboard", 1);
@@ -138,7 +138,7 @@ sq_bp_button_pressed(str_tag, trig) {
 sq_bp_start_puzzle_lights() {
   level endon("sq_bp_wrong_button");
   level endon("sq_bp_timeout");
-  a_button_structs = getstructarray("sq_bp_button", "targetname");
+  a_button_structs = getStructArray("sq_bp_button", "targetname");
   a_tags = [];
 
   foreach(m_button in a_button_structs)
@@ -165,7 +165,7 @@ sq_bp_start_puzzle_lights() {
   }
 
   flag_set("sq_ip_puzzle_complete");
-  a_button_structs = getstructarray("sq_bp_button", "targetname");
+  a_button_structs = getStructArray("sq_bp_button", "targetname");
 
   foreach(s_button in a_button_structs) {
     if(isDefined(s_button.trig))
@@ -188,7 +188,7 @@ sq_bp_set_current_bulb(str_tag) {
 }
 
 sq_bp_delete_green_lights() {
-  a_button_structs = getstructarray("sq_bp_button", "targetname");
+  a_button_structs = getStructArray("sq_bp_button", "targetname");
 
   foreach(m_button in a_button_structs) {
     str_clientfield = "buried_sq_bp_" + m_button.script_string;
@@ -299,7 +299,7 @@ sq_ml_spawn_levers() {
   if(maps\mp\zombies\_zm_zonemgr::player_in_zone("zone_maze"))
     level waittill("zm_buried_maze_changed");
 
-  a_lever_structs = getstructarray("sq_maze_lever", "targetname");
+  a_lever_structs = getStructArray("sq_maze_lever", "targetname");
 
   for(i = 0; i < a_lever_structs.size; i++)
     a_lever_structs[i] thread sq_ml_spawn_lever(i);

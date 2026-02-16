@@ -69,7 +69,7 @@ lastshottime() {
   level.hasfiredrecently = true;
   lastshottime = 0;
   while(1) {
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       lastshottime = 0;
     else
       lastshottime += .05;

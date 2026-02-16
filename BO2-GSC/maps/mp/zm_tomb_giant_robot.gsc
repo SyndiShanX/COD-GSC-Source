@@ -42,7 +42,7 @@ init_giant_robot_glows() {
   level.gr_foot_hatch_closed[0] = 1;
   level.gr_foot_hatch_closed[1] = 1;
   level.gr_foot_hatch_closed[2] = 1;
-  a_gr_head_triggers = getstructarray("giant_robot_head_exit_trigger", "script_noteworthy");
+  a_gr_head_triggers = getStructArray("giant_robot_head_exit_trigger", "script_noteworthy");
 
   foreach(struct in a_gr_head_triggers)
   gr_head_exit_trigger_start(struct);
@@ -1211,7 +1211,7 @@ teleport_player_to_gr_footprint_safe_spot() {
   self endon("disconnect");
 
   if(isDefined(self.entered_foot_from_tank_bunker) && self.entered_foot_from_tank_bunker) {
-    a_s_orgs = getstructarray("tank_platform_safe_spots", "targetname");
+    a_s_orgs = getStructArray("tank_platform_safe_spots", "targetname");
 
     foreach(struct in a_s_orgs) {
       if(!positionwouldtelefrag(struct.origin)) {
@@ -1224,7 +1224,7 @@ teleport_player_to_gr_footprint_safe_spot() {
     return;
   }
 
-  a_s_footprints = getstructarray("giant_robot_footprint", "targetname");
+  a_s_footprints = getStructArray("giant_robot_footprint", "targetname");
   a_s_footprints = get_array_of_closest(self.teleport_initial_origin, a_s_footprints);
   s_footprint = a_s_footprints[0];
   a_v_offset = [];
@@ -1271,7 +1271,7 @@ giant_robot_head_teleport_timeout(n_robot_id) {
   a_players = getplayers();
   a_players[0] setclientfield("all_tubes_play_eject_steam_fx", 1);
   level waittill("timeout_warning_vo_complete_" + n_robot_id);
-  a_gr_head_triggers = getstructarray("giant_robot_head_exit_trigger", "script_noteworthy");
+  a_gr_head_triggers = getStructArray("giant_robot_head_exit_trigger", "script_noteworthy");
   a_shutdown_triggers = [];
 
   foreach(trigger in a_gr_head_triggers) {
@@ -1334,7 +1334,7 @@ giant_robot_head_teleport_timeout(n_robot_id) {
 start_drag_player_to_eject_tube(n_robot_id, m_linkspot) {
   self endon("death");
   self endon("disconnect");
-  a_gr_head_triggers = getstructarray("giant_robot_head_exit_trigger", "script_noteworthy");
+  a_gr_head_triggers = getStructArray("giant_robot_head_exit_trigger", "script_noteworthy");
   a_gr_head_triggers = get_array_of_closest(self.origin, a_gr_head_triggers);
 
   foreach(trigger in a_gr_head_triggers) {
@@ -1455,7 +1455,7 @@ tomb_standard_intermission() {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");
@@ -1627,7 +1627,7 @@ start_robot_stomp_warning_vo(foot_side) {
     str_tag = "TAG_ATTACH_HATCH_LE";
 
   v_origin = self gettagorigin(str_tag);
-  a_s_footprint_all = getstructarray("giant_robot_footprint_center", "targetname");
+  a_s_footprint_all = getStructArray("giant_robot_footprint_center", "targetname");
   a_s_footprint = [];
 
   foreach(footprint in a_s_footprint_all) {
@@ -1739,7 +1739,7 @@ play_timeout_warning_vo(n_robot_id) {
 
 start_footprint_warning_vo(n_robot_id) {
   wait 20.0;
-  a_structs = getstructarray("giant_robot_footprint_center", "targetname");
+  a_structs = getStructArray("giant_robot_footprint_center", "targetname");
 
   foreach(struct in a_structs) {
     if(struct.script_int == n_robot_id)

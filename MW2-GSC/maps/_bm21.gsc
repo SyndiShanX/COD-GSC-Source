@@ -96,7 +96,7 @@ put this in your GSC:
 maps\_bm21::main( "vehicle_bm21_mobile" );
 
 and these lines in your CSV:
-include,vehicle_bm21_mobile_bm21
+#include,vehicle_bm21_mobile_bm21
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile"default:"vehicletype" "bm21"default:"script_team" "allies"

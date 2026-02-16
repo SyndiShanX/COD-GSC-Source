@@ -109,13 +109,13 @@ gl_lantern_move(s_current) {
 
 gl_lantern_get_next_struct(s_current) {
   a_struct_links = [];
-  a_target_structs = getstructarray(s_current.target, "targetname");
+  a_target_structs = getStructArray(s_current.target, "targetname");
 
   if(isDefined(s_current.script_string)) {
     a_names = strtok(s_current.script_string, " ");
 
     foreach(str_name in a_names) {
-      a_new_structs = getstructarray(str_name, "targetname");
+      a_new_structs = getStructArray(str_name, "targetname");
       a_target_structs = arraycombine(a_target_structs, a_new_structs, 0, 0);
     }
   }
@@ -136,7 +136,7 @@ gl_lantern_teleport() {
   playFX(level._effect["fx_wisp_lg_m"], self.origin);
   playsoundatposition("zmb_sq_glantern_impact", self.origin);
   gl_lantern_delete();
-  a_path_spots = getstructarray("sq_ghost_lamp_path", "script_noteworthy");
+  a_path_spots = getStructArray("sq_ghost_lamp_path", "script_noteworthy");
   s_teleport_spot = array_randomize(a_path_spots)[0];
   gl_lantern_spawn(s_teleport_spot);
   return s_teleport_spot;

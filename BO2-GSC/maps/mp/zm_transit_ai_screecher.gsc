@@ -138,7 +138,7 @@ portal_use(player) {
 }
 
 teleport_player(player) {
-  lights = getstructarray("screecher_escape", "targetname");
+  lights = getStructArray("screecher_escape", "targetname");
   lights = array_randomize(lights);
   dest_light = undefined;
 

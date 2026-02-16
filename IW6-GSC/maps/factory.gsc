@@ -111,7 +111,7 @@ mission_hint_string_init() {
 motion_blur_during_melee() {
   if(maps\_utility::is_gen4()) {
     for(;;) {
-      if(level.player meleebuttonpressed() && !level.player isthrowinggrenade()) {
+      if(level.player meleeButtonPressed() && !level.player isthrowinggrenade()) {
         setsaveddvar("r_mbEnable", 2);
         setsaveddvar("r_mbCameraRotationInfluence", 1);
         setsaveddvar("r_mbCameraTranslationInfluence", 0.01);
@@ -269,7 +269,7 @@ fly_around_start() {
 
 fly_around() {
   for(;;) {
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     maps\factory_util::load_transient("factory_intro_tr");
@@ -277,7 +277,7 @@ fly_around() {
     while(!istransientloaded("factory_intro_tr"))
       wait 0.05;
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     maps\factory_util::load_transient("factory_mid_tr");
@@ -285,7 +285,7 @@ fly_around() {
     while(!istransientloaded("factory_mid_tr"))
       wait 0.05;
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     maps\factory_util::load_transient("factory_outro_tr");

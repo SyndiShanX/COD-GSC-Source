@@ -255,7 +255,7 @@ function_119af40d(w_katana) {
       self notify(#"hash_50c324a04c7e0b09");
       self.var_5605c31e = undefined;
 
-      while(self adsbuttonpressed()) {
+      while(self adsButtonPressed()) {
         wait 0.1;
       }
     }

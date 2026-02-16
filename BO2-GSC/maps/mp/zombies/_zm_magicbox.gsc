@@ -29,7 +29,7 @@ init() {
     maps\mp\zombies\_zm_magicbox_lock::init();
 
   if(is_classic()) {
-    level.chests = getstructarray("treasure_chest_use", "targetname");
+    level.chests = getStructArray("treasure_chest_use", "targetname");
     treasure_chest_init("start_chest");
   }
 

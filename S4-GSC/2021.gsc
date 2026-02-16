@@ -151,7 +151,7 @@ _id_8B96() {
     }
 
     _id_8B92("hold");
-  } else if(self attackbuttonpressed()) {
+  } else if(self attackButtonPressed()) {
     if(self._id_8B7C._id_71CF >= 1) {
       self._id_8B7C._id_71CF = 0;
       self._id_8B7C._id_71D3 = undefined;
@@ -369,7 +369,7 @@ _id_8B7D(var_0) {
   }
 
   if(isDefined(self._id_8B7C._id_71D0)) {
-    if(!self attackbuttonpressed()) {
+    if(!self attackButtonPressed()) {
       return 0;
     }
   }

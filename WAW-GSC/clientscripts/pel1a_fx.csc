@@ -61,7 +61,7 @@ increase_mortar_delay() {
 event1_mortars() {
   level waittill("sm");
 
-  dust_points = getstructarray("ceiling_dust", "targetname");
+  dust_points = getStructArray("ceiling_dust", "targetname");
   for(i = 0; i < dust_points.size; i++) {
     dust_points[i].is_struct = true;
   }

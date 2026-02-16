@@ -19,7 +19,7 @@ spawn_hind_enemies(var_0, var_1) {
   if(!isDefined(var_1))
     var_1 = "heli_nav_mesh_start";
 
-  var_3 = common_scripts\utility::getstructarray(var_1, "targetname");
+  var_3 = common_scripts\utility::getStructArray(var_1, "targetname");
   var_4 = [];
 
   while(var_2 < var_0) {

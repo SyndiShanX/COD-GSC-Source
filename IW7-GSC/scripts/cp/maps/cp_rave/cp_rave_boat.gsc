@@ -22,7 +22,7 @@ init_pap_boat() {
 
   level.boat_vehicle hidepart("tag_motor");
   wait(1);
-  level.boat_water_spawners = scripts\engine\utility::getstructarray("boat_water_spawners", "targetname");
+  level.boat_water_spawners = scripts\engine\utility::getStructArray("boat_water_spawners", "targetname");
 }
 
 activate_pap(var_0) {
@@ -200,7 +200,7 @@ set_in_pap_room(var_0, var_1) {
 }
 
 teleport_to_safe_spot(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(scripts\engine\utility::getstruct("porta_effect_location", "targetname").target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(scripts\engine\utility::getstruct("porta_effect_location", "targetname").target, "targetname");
   var_2 = undefined;
   while(!isDefined(var_2)) {
     foreach(var_4 in var_1) {
@@ -405,7 +405,7 @@ all_players_near_boat(var_0) {
 }
 
 reset_player_spots(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     var_3.linked_player = undefined;
   }
@@ -541,7 +541,7 @@ stop_and_drop_players(var_0) {
 drop_off_player(var_0, var_1) {
   var_0 unlink();
   var_2 = var_0 getentitynumber();
-  var_3 = scripts\engine\utility::getstructarray(var_1, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_1, "targetname");
   var_4 = undefined;
   foreach(var_6 in var_3) {
     if(var_6.script_count == var_2) {
@@ -577,7 +577,7 @@ boat_last_stand_monitor(var_0) {
   var_0 waittill("last_stand");
   var_0 unlink();
   var_1 = var_0 getentitynumber();
-  var_2 = scripts\engine\utility::getstructarray("packboat_player_exit", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("packboat_player_exit", "targetname");
   var_3 = undefined;
   foreach(var_5 in var_2) {
     if(var_5.script_count == var_1) {
@@ -627,7 +627,7 @@ fix_pap(var_0, var_1) {
 
   if(!scripts\engine\utility::flag("pap_fixed")) {
     scripts\engine\utility::flag_set("pap_fixed");
-    var_2 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+    var_2 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
     foreach(var_4 in var_2) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_4);
     }
@@ -903,7 +903,7 @@ fade_in_for_ss_fight() {
 move_player_to_shore(var_0, var_1) {
   var_0 unlink();
   var_2 = var_0 getentitynumber();
-  var_3 = scripts\engine\utility::getstructarray(var_1, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_1, "targetname");
   var_4 = undefined;
   foreach(var_6 in var_3) {
     if(var_6.script_count == var_2) {

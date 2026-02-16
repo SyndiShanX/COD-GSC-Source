@@ -568,7 +568,7 @@ film_grain_init() {
   grain Destroy();
 }
 eeroom_powerup_drop() {
-  struct_array = getstructarray("struct_random_powerup_post_teleport", "targetname");
+  struct_array = getStructArray("struct_random_powerup_post_teleport", "targetname");
   powerup_array = [];
   powerup_array[powerup_array.size] = "nuke";
   powerup_array[powerup_array.size] = "insta_kill";
@@ -599,7 +599,7 @@ theater_player_jumps() {
 theater_moon_jumps(guy, str_endon) {
   self endon(str_endon);
   while(true) {
-    if(guy JumpButtonPressed()) {
+    if(guy JumpbuttonPressed()) {
       guy._moon_jumps = guy._moon_jumps + 1;
       wait(0.9);
     }

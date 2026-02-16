@@ -225,7 +225,7 @@ function_bd071599(player, smartcover) {
       break;
     }
 
-    if(!player offhandspecialbuttonpressed()) {
+    if(!player offhandspecialbuttonPressed()) {
       player clientfield::set_player_uimodel("huditems.abilityDelayProgress", 0);
       player.var_622765b5 = 0;
       return;
@@ -292,7 +292,7 @@ function_7ecb04ff(player) {
       player clientfield::set_player_uimodel("huditems.abilityHoldToActivate", 2);
       player clientfield::set_player_uimodel("hudItems.smartCoverState", 1);
 
-      if((isDefined(level.smartcoversettings.bundle.var_ad7084b4) ? level.smartcoversettings.bundle.var_ad7084b4 : 0) && player offhandspecialbuttonpressed() && (!isDefined(player.var_622765b5) || !player.var_622765b5) && !(isDefined(player.var_d3bf8986) ? player.var_d3bf8986 : 0)) {
+      if((isDefined(level.smartcoversettings.bundle.var_ad7084b4) ? level.smartcoversettings.bundle.var_ad7084b4 : 0) && player offhandspecialbuttonPressed() && (!isDefined(player.var_622765b5) || !player.var_622765b5) && !(isDefined(player.var_d3bf8986) ? player.var_d3bf8986 : 0)) {
         foreach(smartcover in player.smartcover.var_58e8b64d) {
           if(!isDefined(smartcover)) {
             continue;
@@ -305,7 +305,7 @@ function_7ecb04ff(player) {
         continue;
       }
 
-      if(!player offhandspecialbuttonpressed() && (isDefined(player.var_d3bf8986) ? player.var_d3bf8986 : 0)) {
+      if(!player offhandspecialbuttonPressed() && (isDefined(player.var_d3bf8986) ? player.var_d3bf8986 : 0)) {
         player.var_d3bf8986 = 0;
       }
     }
@@ -790,7 +790,7 @@ watchweaponchange() {
   self endon(#"watchweaponchange_singleton");
 
   while(true) {
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       if(isDefined(player.smartcover)) {
         player.smartcover.var_5af6633b = 1;
       }

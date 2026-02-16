@@ -989,7 +989,7 @@ prep_victory_shot() {
 
 place_victory_bodies() {
   index = 0;
-  death_node_array = getstructarray("deathpose", "targetname");
+  death_node_array = getStructArray("deathpose", "targetname");
 
   for(x = 0; x < death_node_array.size; x++) {
     death_struct = death_node_array[x];
@@ -1512,7 +1512,7 @@ heli_weapon_controls() {
   fire_time = weaponfiretime(self seatgetweapon(1));
 
   while(true) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       self firegunnerweapon(0);
       self firegunnerweapon(1);
       wait(fire_time);
@@ -1526,7 +1526,7 @@ heli_missile_controls() {
   fire_time = weaponfiretime(self seatgetweapon(3));
 
   while(true) {
-    if(level.player throwbuttonpressed()) {
+    if(level.player throwbuttonPressed()) {
       self firegunnerweapon(2);
       self firegunnerweapon(3);
       wait(fire_time);
@@ -1875,12 +1875,12 @@ eland_think(b_reach) {
   switch (self.targetname) {
     case "eland_hero":
     case "riverbed_convoy_eland":
-      a_target_pos1 = getstructarray("left_side", "script_noteworthy");
-      a_target_pos2 = getstructarray("left_center", "script_noteworthy");
+      a_target_pos1 = getStructArray("left_side", "script_noteworthy");
+      a_target_pos2 = getStructArray("left_center", "script_noteworthy");
       a_target_pos = arraycombine(a_target_pos1, a_target_pos2, 1, 0);
       break;
     default:
-      a_target_pos = getstructarray("right_side", "script_noteworthy");
+      a_target_pos = getStructArray("right_side", "script_noteworthy");
       break;
   }
 
@@ -2009,22 +2009,22 @@ buffel_gunner_think(b_reach, a_fire_nodes) {
   } else {
     switch (self.targetname) {
       case "convoy_destroy_1":
-        a_target_pos = getstructarray("right_side", "script_noteworthy");
+        a_target_pos = getStructArray("right_side", "script_noteworthy");
         break;
       case "savimbi_buffel":
-        a_target_pos = getstructarray("center", "script_noteworthy");
+        a_target_pos = getStructArray("center", "script_noteworthy");
         break;
       case "riverbed_convoy_buffel":
-        a_target_pos = getstructarray("left_center", "script_noteworthy");
+        a_target_pos = getStructArray("left_center", "script_noteworthy");
         break;
       case "convoy_destroy_2":
-        a_target_pos = getstructarray("mortar_help", "targetname");
+        a_target_pos = getStructArray("mortar_help", "targetname");
         break;
       case "push_buffel":
-        a_target_pos = getstructarray("push_buffel_fire", "targetname");
+        a_target_pos = getStructArray("push_buffel_fire", "targetname");
         break;
       default:
-        a_target_pos = getstructarray("right_side", "script_noteworthy");
+        a_target_pos = getStructArray("right_side", "script_noteworthy");
         break;
     }
   }
@@ -2142,8 +2142,8 @@ cleanup_riverbed_scenes() {
 }
 
 cleanup_riverbed() {
-  array_delete(getstructarray("mortar_intro", "targetname"), 1);
-  array_delete(getstructarray("mortar_riverbed", "targetname"), 1);
+  array_delete(getStructArray("mortar_intro", "targetname"), 1);
+  array_delete(getStructArray("mortar_riverbed", "targetname"), 1);
   array_delete(getEntArray("intro_soldier", "targetname"));
   array_delete(getEntArray("intro_soldier", "script_noteworthy"));
   delete_array("burning_man", "targetname");
@@ -2333,7 +2333,7 @@ wave_one_tank_fire() {
 }
 
 cleanup_hill() {
-  s_mortars = getstructarray("mortar_savannah_start", "targetname");
+  s_mortars = getStructArray("mortar_savannah_start", "targetname");
 
   foreach(mortar in s_mortars) {
     mortar structdelete();
@@ -2391,7 +2391,7 @@ cleanup_final_push() {
 
 prep_wave_two() {
   flag_clear("wave_one_done");
-  axis_drone_array = getstructarray("drone_axis_wave_one_cut", "script_noteworthy");
+  axis_drone_array = getStructArray("drone_axis_wave_one_cut", "script_noteworthy");
 
   foreach(new_end in axis_drone_array) {
     new_end.dr_death_timer = 0;
@@ -2526,7 +2526,7 @@ mortar_guy_damage(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death
 
 savannah_attack_mortars() {
   vh_buffel_helper = getent("convoy_destroy_2", "targetname");
-  a_fire_nodes = getstructarray("mortar_help", "targetname");
+  a_fire_nodes = getStructArray("mortar_help", "targetname");
   flag_set("buffel2_continue_path");
   vh_buffel_helper waittill("buffel_helper_explode");
   vh_buffel_helper thread savannah_destroy_buffel2();

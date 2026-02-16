@@ -545,7 +545,7 @@ _id_6D0A(var_0, var_1, var_2, var_3) {
       var_16 = scripts\engine\math::_id_645E(var_0.origin, anglesToForward(var_0.angles), var_12.origin);
 
       if(isDefined(var_12.target)) {
-        var_17 = scripts\engine\utility::getstructarray(var_12.target, "targetname");
+        var_17 = scripts\engine\utility::getStructArray(var_12.target, "targetname");
 
         if(var_17.size > 1) {
           var_18 = var_10 * 500;
@@ -999,7 +999,7 @@ _id_E0BE(var_0) {
     }
 
     if(isDefined(var_1.target)) {
-      var_2._id_5E96 = scripts\engine\utility::random(scripts\engine\utility::getstructarray(var_1.target, "targetname"));
+      var_2._id_5E96 = scripts\engine\utility::random(scripts\engine\utility::getStructArray(var_1.target, "targetname"));
     }
 
     if(isDefined(var_0._id_F15F)) {

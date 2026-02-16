@@ -252,7 +252,7 @@ findnewowner(var_0) {
 }
 
 spawnchests(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("sotf_chest_spawnpoint", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("sotf_chest_spawnpoint", "targetname");
   var_2 = getrandompoint(var_1);
   if(isDefined(var_2)) {
     playfxatpoint(var_2);

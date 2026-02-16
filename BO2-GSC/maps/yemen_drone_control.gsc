@@ -496,7 +496,7 @@ _get_player_look_position() {
 }
 
 drone_control_fire_magic_rpgs_at_target(str_s_rpgs_name, str_s_rpg_target) {
-  a_rpgs = getstructarray(str_s_rpgs_name, "targetname");
+  a_rpgs = getStructArray(str_s_rpgs_name, "targetname");
   s_target = getstruct(str_s_rpg_target, "targetname");
 
   foreach(s_rpg in a_rpgs) {
@@ -643,7 +643,7 @@ drone_control_quadrotor_sounds() {
   while(true) {
     flag_wait("fire_direction_shader_on");
 
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       level thread maps\yemen_amb::play_drone_control_tones_single();
 
       if(randomintrange(1, 3) > 2) {
@@ -653,7 +653,7 @@ drone_control_quadrotor_sounds() {
 
       level.player thread say_dialog("vtol_firing_0");
 
-      while(level.player attackbuttonpressed()) {
+      while(level.player attackButtonPressed()) {
         wait 0.05;
       }
     }

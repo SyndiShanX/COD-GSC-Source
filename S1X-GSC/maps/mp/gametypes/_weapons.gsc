@@ -1232,7 +1232,7 @@ init() {
         return;
       }
 
-      if(self MeleeButtonPressed()) {
+      if(self meleeButtonPressed()) {
         return;
       }
 
@@ -2354,9 +2354,9 @@ init() {
 
       buttonTime = 0;
       for(;;) {
-        if(self UseButtonPressed()) {
+        if(self useButtonPressed()) {
           buttonTime = 0;
-          while(self UseButtonPressed()) {
+          while(self useButtonPressed()) {
             buttonTime += 0.05;
             wait(0.05);
           }
@@ -2367,7 +2367,7 @@ init() {
           }
 
           buttonTime = 0;
-          while(!self UseButtonPressed() && buttonTime < 0.35) {
+          while(!self useButtonPressed() && buttonTime < 0.35) {
             buttonTime += 0.05;
             wait(0.05);
           }

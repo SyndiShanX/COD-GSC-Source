@@ -398,7 +398,7 @@ getnumofgasspawn() {
 
 getspawnposarray(var_0) {
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray("death_wall_spawner", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("death_wall_spawner", "targetname");
   var_2 = scripts\engine\utility::array_randomize(var_2);
 
   for(var_3 = 0; var_3 < var_0; var_3++) {

@@ -319,7 +319,7 @@ monitorrocketfire2(var_0, var_1) {
   var_1.targetlist = [];
 
   while(var_1.numrocketsleft > 0) {
-    if(!self adsbuttonpressed()) {
+    if(!self adsButtonPressed()) {
       self waittill("rocket_fire_pressed");
     }
 
@@ -512,7 +512,7 @@ monitorweaponfire(var_0, var_1) {
   self notifyonplayercommand("a10_cannon_stop", "-attack_akimbo_accessible");
 
   while(var_1.ammocount > 0) {
-    if(!self attackbuttonpressed()) {
+    if(!self attackButtonPressed()) {
       self waittill("a10_cannon_start");
     }
 

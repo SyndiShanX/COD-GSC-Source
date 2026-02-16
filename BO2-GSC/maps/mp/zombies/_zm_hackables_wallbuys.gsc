@@ -9,7 +9,7 @@
 #include maps\mp\zombies\_zm_equip_hacker;
 
 hack_wallbuys() {
-  weapon_spawns = getstructarray("weapon_upgrade", "targetname");
+  weapon_spawns = getStructArray("weapon_upgrade", "targetname");
 
   for(i = 0; i < weapon_spawns.size; i++) {
     if(weapontype(weapon_spawns[i].zombie_weapon_upgrade) == "grenade") {

@@ -4482,7 +4482,7 @@ get_vehicle_ai_spawners() {
     }
 
     if(isDefined(level.spawn_pool_enabled)) {
-      var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+      var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
 
       foreach(var_3 in var_1) {
         if(isDefined(var_3.script_spawn_pool))

@@ -352,7 +352,7 @@ drop_path_to_ground(path) {
 }
 
 add_collision_to_path(path) {
-  collision_lines = getstructarray("moto_line", "targetname");
+  collision_lines = getStructArray("moto_line", "targetname");
   foreach(collision_line in collision_lines) {
     collision_line.origin = (collision_line.origin[0], collision_line.origin[1], 0);
     next_line = getstruct(collision_line.target, "targetname");

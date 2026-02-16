@@ -86,7 +86,7 @@ main() {
 }
 
 fixupcratepositions() {
-  var_0 = common_scripts\utility::getstructarray("ozCarepackagePosition", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ozCarepackagePosition", "targetname");
 
   foreach(var_2 in var_0) {
     if(var_2.origin == (-349, -4305, -632)) {

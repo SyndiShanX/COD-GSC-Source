@@ -18,13 +18,13 @@ onprecachegametype() {}
 
 hardpoint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(level.hardpoints.size == 0) {
-    hardpoints = getstructarray("koth_zone_center", "targetname");
+    hardpoints = getStructArray("koth_zone_center", "targetname");
 
     foreach(point in hardpoints)
     level.hardpoints[point.script_index] = point;
 
     foreach(point in level.hardpoints)
-    level.visuals[point.script_index] = getstructarray(point.target, "targetname");
+    level.visuals[point.script_index] = getStructArray(point.target, "targetname");
 
     if(isDefined(level.overridemapdefinedhardpointsfunc))
       level[[level.overridemapdefinedhardpointsfunc]]();

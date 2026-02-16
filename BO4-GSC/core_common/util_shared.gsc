@@ -1732,7 +1732,7 @@ button_right_held() {
 }
 
 waittill_use_button_pressed() {
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     waitframe(1);
   }
 }
@@ -1744,7 +1744,7 @@ waittill_use_button_held() {
 }
 
 waittill_stance_button_pressed() {
-  while(!self stancebuttonpressed()) {
+  while(!self stancebuttonPressed()) {
     waitframe(1);
   }
 }
@@ -1756,19 +1756,19 @@ waittill_stance_button_held() {
 }
 
 waittill_attack_button_pressed() {
-  while(!self attackbuttonpressed()) {
+  while(!self attackButtonPressed()) {
     waitframe(1);
   }
 }
 
 waittill_ads_button_pressed() {
-  while(!self adsbuttonpressed()) {
+  while(!self adsButtonPressed()) {
     waitframe(1);
   }
 }
 
 waittill_vehicle_move_up_button_pressed() {
-  while(!self vehiclemoveupbuttonpressed()) {
+  while(!self vehiclemoveupbuttonPressed()) {
     waitframe(1);
   }
 }
@@ -1809,7 +1809,7 @@ down_button_held() {
 }
 
 up_button_pressed() {
-  return self buttonpressed("<dev string:x872>") || self buttonpressed("<dev string:x87c>");
+  return self buttonPressed("<dev string:x872>") || self buttonPressed("<dev string:x87c>");
 }
 
 waittill_up_button_pressed() {
@@ -1819,7 +1819,7 @@ waittill_up_button_pressed() {
 }
 
 down_button_pressed() {
-  return self buttonpressed("<dev string:x886>") || self buttonpressed("<dev string:x892>");
+  return self buttonPressed("<dev string:x886>") || self buttonPressed("<dev string:x892>");
 }
 
 waittill_down_button_pressed() {

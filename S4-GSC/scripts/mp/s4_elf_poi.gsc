@@ -20,7 +20,7 @@ init() {
     waitframe();
   }
 
-  foreach(var_1 in scripts\engine\utility::getstructarray("elf_poi", "targetname")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("elf_poi", "targetname")) {
     add_elf_poi_position(var_1.origin, var_1.angles, var_1._id_039B);
   }
 

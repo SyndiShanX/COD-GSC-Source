@@ -218,12 +218,12 @@ onplayerconnect_ee_jump_scare() {
   while(!level.b_saw_jump_scare) {
     n_time = 0;
 
-    while(self adsbuttonpressed() && n_time < 25) {
+    while(self adsButtonPressed() && n_time < 25) {
       n_time++;
       wait 0.05;
     }
 
-    if(n_time >= 25 && self adsbuttonpressed() && self maps\mp\zombies\_zm_zonemgr::is_player_in_zone("zone_nml_18") && sq_is_weapon_sniper(self getcurrentweapon()) && is_player_looking_at(level.jump_scare_lookat_point.origin, 0.998, 0, undefined)) {
+    if(n_time >= 25 && self adsButtonPressed() && self maps\mp\zombies\_zm_zonemgr::is_player_in_zone("zone_nml_18") && sq_is_weapon_sniper(self getcurrentweapon()) && is_player_looking_at(level.jump_scare_lookat_point.origin, 0.998, 0, undefined)) {
       self playsoundtoplayer("zmb_easteregg_scarydog", self);
       self.wth_elem = newclienthudelem(self);
       self.wth_elem.horzalign = "fullscreen";
@@ -234,7 +234,7 @@ onplayerconnect_ee_jump_scare() {
       self.wth_elem.hidewheninmenu = 1;
       j_time = 0;
 
-      while(self adsbuttonpressed() && j_time < 5) {
+      while(self adsButtonPressed() && j_time < 5) {
         j_time++;
         wait 0.05;
       }
@@ -523,7 +523,7 @@ spawn_tablet_model(n_player_id, str_location, str_state) {
 radio_ee_song() {
   level.found_ee_radio_count = 0;
   wait 3;
-  a_structs = getstructarray("ee_radio_pos", "targetname");
+  a_structs = getStructArray("ee_radio_pos", "targetname");
 
   foreach(unitrigger_stub in a_structs) {
     unitrigger_stub.radius = 50;

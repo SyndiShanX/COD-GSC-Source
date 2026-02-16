@@ -1437,7 +1437,7 @@ _id_7856() {
     var_3 = undefined;
     var_4 = level._id_5F3A;
 
-    while(self.owner usebuttonpressed()) {
+    while(self.owner useButtonPressed()) {
       var_2 = var_2 + var_4;
 
       if(var_2 > 0.1) {

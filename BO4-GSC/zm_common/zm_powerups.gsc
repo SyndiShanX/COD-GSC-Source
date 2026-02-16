@@ -587,7 +587,7 @@ add_zombie_special_drop(powerup_name) {
   level.zombie_special_drop_array[level.zombie_special_drop_array.size] = powerup_name;
 }
 
-include_zombie_powerup(powerup_name) {
+#include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups)) {
     level.zombie_include_powerups = [];
   }
@@ -1085,7 +1085,7 @@ powerup_grab(powerup_team) {
         continue;
       }
 
-      if((self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink") && (!isPlayer(grabber) || player laststand::player_is_in_laststand() || player usebuttonpressed() && player zm_utility::in_revive_trigger() || player bgb::is_enabled(#"zm_bgb_disorderly_combat"))) {
+      if((self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink") && (!isPlayer(grabber) || player laststand::player_is_in_laststand() || player useButtonPressed() && player zm_utility::in_revive_trigger() || player bgb::is_enabled(#"zm_bgb_disorderly_combat"))) {
         continue;
       }
 

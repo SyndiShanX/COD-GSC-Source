@@ -841,7 +841,7 @@ function_377cd9ae() {
   level endon(#"combattraining_logic_finished");
 
   while(!level.gameended) {
-    while(!self actionslotfourbuttonpressed()) {
+    while(!self actionslotfourbuttonPressed()) {
       waitframe(1);
     }
 
@@ -861,7 +861,7 @@ function_78aff698() {
   level endon(#"combattraining_logic_finished");
 
   while(!level.gameended) {
-    while(!self actionslotthreebuttonpressed()) {
+    while(!self actionslotthreebuttonPressed()) {
       waitframe(1);
     }
 

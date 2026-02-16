@@ -299,7 +299,7 @@ mason_hill_end_infinite_sprint() {
 mason_hill_magic_grenades() {
   flag_wait("mason_hill_player_looking_at_start");
   wait 1.0;
-  a_s_origins = getstructarray("mason_hill_magicgrenade_origin", "script_noteworthy");
+  a_s_origins = getStructArray("mason_hill_magicgrenade_origin", "script_noteworthy");
   a_s_origins = array_randomize(a_s_origins);
 
   for(i = 0; i < a_s_origins.size; i++) {

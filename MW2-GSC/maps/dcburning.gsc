@@ -580,7 +580,7 @@ AAA_sequence_bunker_to_commerce() {
   //stopFXOnTag( getfx( "dlight_laptop" ), laptop_light_model, "tag_origin" );
   //laptop_light_model delete();
 
-  mortar_bunker = getstructarray("mortar_bunker", "targetname");
+  mortar_bunker = getStructArray("mortar_bunker", "targetname");
   mortar_bunker_radius_triggers = getEntArray("mortar_bunker", "targetname");
   array_call(mortar_bunker_radius_triggers, ::delete);
   thread struct_delete(mortar_bunker, "delete_bunker_mortars");
@@ -1604,7 +1604,7 @@ javelins_trench() {
   flag_set("second_abrams_killed");
   wait(8);
 
-  javelin_targets_trench = getstructarray("javelin_targets_trench", "targetname");
+  javelin_targets_trench = getStructArray("javelin_targets_trench", "targetname");
   javelin_vehicle_target_array = javelin_vehicle_targets;
   eTargetVehicle = undefined;
   eTargetTrenchOrg = undefined;
@@ -2285,7 +2285,7 @@ AAA_sequence_elevator_bottom_to_top() {
 
 samsite_c4_think() {
   //self ==> the samsite struct
-  c4_locations = getstructarray("c4_slamraam", "script_noteworthy");
+  c4_locations = getStructArray("c4_slamraam", "script_noteworthy");
   foreach(c4_location in c4_locations) {
     //c4_location( tag, origin_offset, angles_offset, org )
     level.c4_models[level.c4_models.size] = self.base maps\_c4::c4_location(undefined, undefined, undefined, c4_location.origin);

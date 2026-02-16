@@ -134,7 +134,7 @@ wait_for_use(monitor) {
   while(1) {
     self waittill("trigger", who);
     while(isPlayer(who) && who IsTouching(self)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         flag_set("rerouted_power");
         monitor playSound("zmb_comp_activate");
         return;
@@ -144,7 +144,7 @@ wait_for_use(monitor) {
   }
 }
 sync_switch_event() {
-  switches = GetStructArray("sync_switch_start", "targetname");
+  switches = getStructArray("sync_switch_start", "targetname");
   success = false;
   while(!flag("switches_synced")) {
     flag_wait("monkey_round");
@@ -182,7 +182,7 @@ wait_for_sync_use(ss) {
   while(1) {
     self waittill("trigger", who);
     while(isPlayer(who) && who IsTouching(self)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         level notify("sync_button_pressed");
         playsoundatposition("zmb_push_button", ss.origin);
         ss.pressed = 1;
@@ -194,7 +194,7 @@ wait_for_sync_use(ss) {
 switch_watcher() {
   level endon("between_round_over");
   pressed = 0;
-  switches = GetStructArray("sync_switch_start", "targetname");
+  switches = getStructArray("sync_switch_start", "targetname");
   while(1) {
     level waittill("sync_button_pressed");
     timeout = GetTime() + 500;
@@ -510,7 +510,7 @@ wait_for_gersh_vox() {
   }
 }
 reward_wait() {
-  while(!is_player_valid(self) || (self UseButtonPressed() && self in_revive_trigger())) {
+  while(!is_player_valid(self) || (self useButtonPressed() && self in_revive_trigger())) {
     wait(1.0);
   }
   level thread maps\_zombiemode_powerups::minigun_weapon_powerup(self, 90);

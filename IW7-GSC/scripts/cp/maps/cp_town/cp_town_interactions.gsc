@@ -190,7 +190,7 @@ backstory_hint_func(var_0, var_1) {
 }
 
 init_backstory_interaction() {
-  var_0 = scripts\engine\utility::getstructarray("backstory_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("backstory_interaction", "script_noteworthy");
   foreach(var_4, var_2 in var_0) {
     var_3 = undefined;
     switch (var_2.name) {
@@ -214,7 +214,7 @@ init_backstory_interaction() {
 }
 
 init_sliding_power_doors() {
-  var_0 = scripts\engine\utility::getstructarray("power_door_sliding", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread sliding_power_door();
   }
@@ -377,7 +377,7 @@ town_wait_for_interaction_triggered(var_0) {
       continue;
     }
 
-    while(var_1 ismeleeing() || var_1 meleebuttonpressed()) {
+    while(var_1 ismeleeing() || var_1 meleeButtonPressed()) {
       wait(0.05);
     }
 
@@ -839,7 +839,7 @@ init_papfusebox() {
   scripts\engine\utility::flag_init("fuses_charged");
   scripts\engine\utility::flag_wait("interactions_initialized");
   var_0 = getEntArray("pap_upgrade_door", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("pap_fusebox", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("pap_fusebox", "script_noteworthy");
   var_2 = getent("pap_upgrade_door_handle", "targetname");
   var_2 notsolid();
   foreach(var_4 in var_1) {
@@ -922,7 +922,7 @@ init_papanomaly() {
   level.secretpapstructs = [];
   scripts\engine\utility::flag_init("pap_portal_used");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("fast_travel_panel", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel_panel", "script_noteworthy");
   level thread pap_anomaly_logic();
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin + (0, 0, 40));
@@ -1040,7 +1040,7 @@ usegeneratorfieldcenter(var_0, var_1) {
 
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
     scripts\engine\utility::flag_clear("picked_up_uncharged_fuses");
-    var_11 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+    var_11 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
     var_2 = getEntArray("pap_fuses", "targetname");
     foreach(var_14, var_13 in var_11) {
       var_4 = var_2[var_14];
@@ -1072,7 +1072,7 @@ chargefuses(var_0, var_1) {
   level endon("game_ended");
   level waittill("use_electric_trap");
   wait(2);
-  var_2 = scripts\engine\utility::getstructarray("electric_trap_spots", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("electric_trap_spots", "targetname");
   var_3 = scripts\engine\utility::getclosest(var_1.origin, var_2);
   var_4 = var_3.origin + (0, 0, randomintrange(100, 170));
   var_5 = var_1.origin;
@@ -1167,7 +1167,7 @@ usepapanomaly(var_0, var_1) {
 teleporttopaproom(var_0, var_1) {
   var_0 endon("disconnect");
   var_0 endon("left_hidden_room_early");
-  var_2 = scripts\engine\utility::getstructarray("pap_spawners", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("pap_spawners", "targetname");
   var_0.pap_interaction = var_1;
   wait(0.1);
   var_0 scripts\cp\zombies\zombie_afterlife_arcade::add_white_screen();
@@ -1267,10 +1267,10 @@ hidden_room_exit_tube(var_0) {
 
 get_valid_pap_return_spot(var_0, var_1) {
   if(!isDefined(var_0)) {
-    var_0 = scripts\engine\utility::getstructarray("pap_return_spots", "targetname")[0];
+    var_0 = scripts\engine\utility::getStructArray("pap_return_spots", "targetname")[0];
   }
 
-  var_2 = scripts\engine\utility::get_array_of_closest(var_0.origin, scripts\engine\utility::getstructarray("pap_return_spots", "targetname"), undefined, 4);
+  var_2 = scripts\engine\utility::get_array_of_closest(var_0.origin, scripts\engine\utility::getStructArray("pap_return_spots", "targetname"), undefined, 4);
   if(scripts\engine\utility::istrue(var_1)) {
     return var_2;
   }
@@ -1293,7 +1293,7 @@ get_valid_pap_return_spot(var_0, var_1) {
 }
 
 get_valid_pap_upgrade_spot() {
-  var_0 = scripts\engine\utility::getstructarray("pap_upgrade_player", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pap_upgrade_player", "script_noteworthy");
   var_1 = undefined;
   var_2 = undefined;
   var_3 = undefined;
@@ -1376,7 +1376,7 @@ tcspieceinit() {
   scripts\engine\utility::flag_init("found_tcs_piece");
   scripts\engine\utility::flag_init("tcs_piece_placed");
   scripts\engine\utility::flag_init("main_power_on");
-  var_0 = scripts\engine\utility::getstructarray("tcs_piece", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("tcs_piece", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
       var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
@@ -1723,7 +1723,7 @@ applyvisionsettoallplayers(var_0) {
 missinghandleinit() {
   scripts\engine\utility::flag_init("found_missing_handle");
   scripts\engine\utility::flag_init("placed_missing_handle");
-  var_0 = scripts\engine\utility::getstructarray("missing_handle", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("missing_handle", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   var_1 = var_0[0];
   if(isDefined(var_1.target)) {
@@ -1749,7 +1749,7 @@ missinghandlehint(var_0, var_1) {
 usemissinghandle(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   scripts\engine\utility::flag_set("found_missing_handle");
-  var_2 = scripts\engine\utility::getstructarray("mpq_zom_body_part", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("mpq_zom_body_part", "script_noteworthy");
   var_3 = scripts\engine\utility::getclosest(var_0.origin, var_2);
   scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
   playFX(level._effect["generic_pickup"], var_0.model.origin);
@@ -1833,8 +1833,8 @@ applyvisionsetarraytoplayer(var_0) {
 
 initmeleeweapons() {
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("iw7_knife_zm_crowbar", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("iw7_knife_zm_cleaver", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("iw7_knife_zm_crowbar", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("iw7_knife_zm_cleaver", "script_noteworthy");
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
   foreach(var_4 in var_2) {
     if(isDefined(var_4.target)) {
@@ -1867,10 +1867,10 @@ initwwpieces() {
   scripts\engine\utility::flag_wait("interactions_initialized");
   level.weapon_change_func["iw7_cutie_zm"] = ::runcutielogic;
   level.weapon_change_func["iw7_cutier_zm"] = ::runcutielogic;
-  var_0 = scripts\engine\utility::getstructarray("front_barrel", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("plunger", "script_noteworthy");
-  var_2 = scripts\engine\utility::getstructarray("crank", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstructarray("cutie", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("front_barrel", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("plunger", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("crank", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("cutie", "script_noteworthy");
   var_4 = scripts\engine\utility::array_combine(var_0, var_1);
   var_5 = scripts\engine\utility::array_combine(var_2, var_3);
   var_6 = scripts\engine\utility::array_combine(var_4, var_5);
@@ -1933,7 +1933,7 @@ runcutielogic(var_0, var_1) {
     var_0 notifyonplayercommand("cutie_used", "+ads_akimbo_accessible");
     for(;;) {
       var_0 waittill("cutie_used");
-      if(var_0 usebuttonpressed() || scripts\engine\utility::istrue(var_0.playingperkgesture)) {
+      if(var_0 useButtonPressed() || scripts\engine\utility::istrue(var_0.playingperkgesture)) {
         continue;
       }
 
@@ -1947,7 +1947,7 @@ runcutielogic(var_0, var_1) {
         var_0 stopgestureviewmodel("ges_cutie_crank");
         var_5 = 0;
         if(var_0 getweaponammoclip(var_1) >= 5) {
-          while(!scripts\engine\utility::istrue(var_0.disablecrank) && var_0 adsbuttonpressed(1) && var_0 scripts\cp\utility::getvalidtakeweapon() == var_1) {
+          while(!scripts\engine\utility::istrue(var_0.disablecrank) && var_0 adsButtonPressed(1) && var_0 scripts\cp\utility::getvalidtakeweapon() == var_1) {
             var_5 = 1;
             var_0 runcutiegestureloop(var_0, var_1);
             break;
@@ -2053,7 +2053,7 @@ runcutiegestureloop(var_0, var_1) {
   var_0.disableplunger = 1;
   var_3 = 5;
   var_0 playgestureviewmodel("ges_cutie_crank", undefined, 0);
-  while(var_0.cutiechargecount < var_3 && var_0 adsbuttonpressed(1) && var_0 scripts\cp\utility::getvalidtakeweapon() == var_1) {
+  while(var_0.cutiechargecount < var_3 && var_0 adsButtonPressed(1) && var_0 scripts\cp\utility::getvalidtakeweapon() == var_1) {
     wait(0.75);
     var_0.cutiechargecount++;
   }
@@ -2214,7 +2214,7 @@ fast_travel_use(var_0, var_1) {
       break;
   }
 
-  var_9 = scripts\engine\utility::getstructarray(var_8 + "_fast_travel", "script_noteworthy");
+  var_9 = scripts\engine\utility::getStructArray(var_8 + "_fast_travel", "script_noteworthy");
   var_6 thread scripts\cp\maps\cp_town\cp_town_fast_travel::move_player_through_portal_tube(var_7, var_9);
   level thread fast_travel_cooldown(var_6);
 }
@@ -2240,7 +2240,7 @@ fast_travel_cooldown(var_0) {
 fast_travel_init() {
   scripts\engine\utility::flag_init("fast_travel_ready");
   scripts\engine\utility::flag_init("fast_travel_powered");
-  level.fast_travel_devices = scripts\engine\utility::getstructarray("town_fast_travel", "script_noteworthy");
+  level.fast_travel_devices = scripts\engine\utility::getStructArray("town_fast_travel", "script_noteworthy");
   level scripts\engine\utility::waittill_any("power_on", level.fast_travel_devices[0].power_area + " power_on");
   foreach(var_1 in level.fast_travel_devices) {
     var_1.cooldown = 0;
@@ -2414,7 +2414,7 @@ play_town_hidden_song(var_0, var_1) {
 }
 
 setup_additional_cutie_ammo() {
-  var_0 = scripts\engine\utility::getstructarray("plunger_ammo", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("plunger_ammo", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
     var_2 = undefined;

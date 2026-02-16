@@ -218,7 +218,7 @@ func_BD13(var_0, var_1, var_2, var_3) {
 }
 
 func_F5B1(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":

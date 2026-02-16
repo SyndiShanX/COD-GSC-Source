@@ -560,7 +560,7 @@ remoteUAV_playerExit(remoteUAV) {
 
   while(true) {
     timeUsed = 0;
-    while(self UseButtonPressed()) {
+    while(self useButtonPressed()) {
       timeUsed += 0.05;
       if(timeUsed > 0.75) {
         remoteUAV thread remoteUAV_leave();

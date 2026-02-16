@@ -181,7 +181,7 @@ set_stage_time_limit(var_0, var_1, var_2, var_3) {
 }
 
 declare_stage_asset_from_struct(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = common_scripts\utility::getstructarray(var_2, "targetname");
+  var_5 = common_scripts\utility::getStructArray(var_2, "targetname");
 
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
     var_7 = spawnStruct();
@@ -222,7 +222,7 @@ declare_sidequest_asset(var_0, var_1, var_2, var_3) {
 }
 
 declare_sidequest_asset_from_struct(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstructarray(var_1, "targetname");
+  var_4 = common_scripts\utility::getStructArray(var_1, "targetname");
 
   for(var_5 = 0; var_5 < var_4.size; var_5++) {
     var_6 = spawnStruct();
@@ -754,7 +754,7 @@ fake_use(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
     for(var_7 = 0; var_7 < level.players.size; var_7++) {
       if(distancesquared(self.origin, level.players[var_7].origin) < var_6 && (!var_5 && level.players[var_7] is_facing(self) || var_5 && level.players[var_7] is_facing_3d(self))) {
-        if(level.players[var_7] usebuttonpressed()) {
+        if(level.players[var_7] useButtonPressed()) {
           var_8 = 1;
 
           if(isDefined(var_1) && isDefined(var_2)) {

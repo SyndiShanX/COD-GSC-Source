@@ -947,7 +947,7 @@ should_revive_continue(var_0) {
     return 1;
   }
 
-  return !level.gameended && scripts\cp\utility::isreallyalive(var_0) && var_0 usebuttonpressed() && !player_in_laststand(var_0);
+  return !level.gameended && scripts\cp\utility::isreallyalive(var_0) && var_0 useButtonPressed() && !player_in_laststand(var_0);
 }
 
 _takeweaponsexceptlist(var_0) {

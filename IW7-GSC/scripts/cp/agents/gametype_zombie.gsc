@@ -465,7 +465,7 @@ streamweaponsonzonechange(var_0) {
   var_0 scripts\engine\utility::waittill_any_timeout(10, "player_spawned");
   scripts\engine\utility::flag_wait("wall_buy_setup_done");
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_4 in var_2) {
     if(isDefined(var_4.name) && var_4.name == "wall_buy") {
       var_1[var_1.size] = var_4;
@@ -1172,12 +1172,12 @@ melee_strength_timer() {
       self.meleestrength = 0;
     }
 
-    if(self meleebuttonpressed() && !self getteamsize() && !self usebuttonpressed()) {
+    if(self meleeButtonPressed() && !self getteamsize() && !self useButtonPressed()) {
       var_1 = gettime();
       if(var_0 == 1) {
         var_0 = 0;
       }
-    } else if(!self meleebuttonpressed()) {
+    } else if(!self meleeButtonPressed()) {
       var_0 = 1;
     } else {
       var_0 = 0;
@@ -1498,7 +1498,7 @@ resetplayerhud() {
 validate_door_buy_setup() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("introscreen_over");
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_2 in var_0) {
     if(issubstr(var_2.script_noteworthy, "debris")) {
       var_3 = getEntArray(var_2.target, "targetname");

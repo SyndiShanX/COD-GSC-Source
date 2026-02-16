@@ -362,7 +362,7 @@ dunn_objective_dvars() {
 
 start_oval_office() {
   spawn_team();
-  dcwh_teleport_team(level.team, getstructarray("oval_office_start_points", "targetname"));
+  dcwh_teleport_team(level.team, getStructArray("oval_office_start_points", "targetname"));
   dcwh_teleport_player();
 
   chandelier_setup();
@@ -1078,7 +1078,7 @@ whitehouse_drone_war_drone() {
 
 start_flare() {
   spawn_team();
-  dcwh_teleport_team(level.team, getstructarray("flare_start_points", "targetname"));
+  dcwh_teleport_team(level.team, getStructArray("flare_start_points", "targetname"));
   dcwh_teleport_player();
 
   thread maps\_utility::set_ambient("dcemp_dry");

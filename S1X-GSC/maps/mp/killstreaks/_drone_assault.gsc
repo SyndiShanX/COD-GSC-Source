@@ -1005,7 +1005,7 @@ AssaultPlayerExit(vehicle) {
 
   while(true) {
     timeUsed = 0;
-    while(!vehicle.hasAIOption && owner UseButtonPressed()) {
+    while(!vehicle.hasAIOption && owner useButtonPressed()) {
       timeUsed += 0.05;
       if(timeUsed > 0.75) {
         vehicle notify("death");

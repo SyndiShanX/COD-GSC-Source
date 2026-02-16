@@ -1682,12 +1682,12 @@ function checkforgestures(topplayerindex) {
   wait(0.05);
   while(true) {
     if(isDefined(self)) {
-      if(self actionslotonebuttonpressed()) {
+      if(self actionslotonebuttonPressed()) {
         self setgestureclientfield(fieldname, 0);
       } else {
-        if(self actionslotthreebuttonpressed()) {
+        if(self actionslotthreebuttonPressed()) {
           self setgestureclientfield(fieldname, 1);
-        } else if(self actionslotfourbuttonpressed()) {
+        } else if(self actionslotfourbuttonPressed()) {
           self setgestureclientfield(fieldname, 2);
         }
       }

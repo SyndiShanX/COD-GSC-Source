@@ -288,7 +288,7 @@ speech_courtyard_ai() {
   level thread run_scene_and_delete("shooting_drones_ter4");
   level thread run_scene_and_delete("shooting_drones_ter5");
   level thread run_scene_and_delete("shooting_drones_ter6");
-  a_courtyard_spots = getstructarray("speech_court_ai_spot", "targetname");
+  a_courtyard_spots = getStructArray("speech_court_ai_spot", "targetname");
 
   a_courtyard_spots = [];
 

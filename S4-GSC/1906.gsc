@@ -3221,10 +3221,10 @@ _id_10AA8(var_0) {
   var_1 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_1 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_1 = var_1 + 0.05;
         wait 0.05;
       }
@@ -3234,7 +3234,7 @@ _id_10AA8(var_0) {
       }
       var_1 = 0;
 
-      while(!self usebuttonpressed() && var_1 < 0.5) {
+      while(!self useButtonPressed() && var_1 < 0.5) {
         var_1 = var_1 + 0.05;
         wait 0.05;
       }
@@ -6860,7 +6860,7 @@ _id_81EE() {
     var_0 = ["iw8_ar_falpha", "iw8_sm_papa90", "iw8_sm_augolf", "iw8_lm_pkilo", "iw8_sn_alpha50", "iw8_pi_mike1911", "iw8_ar_mike4", "iw8_ar_akilo47", "iw8_sm_mpapa5", "iw8_sh_dpapa12", "iw8_lm_kilo121", "iw8_sn_mike14", "iw8_sn_kilo98", "iw8_pi_golf21", "iw8_sn_crossbow"];
   }
 
-  var_1 = scripts\engine\utility::getstructarray("weapon_pickup", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("weapon_pickup", "script_noteworthy");
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3._id_CE18)) {
@@ -7330,7 +7330,7 @@ _id_10BD9() {
 }
 
 _id_3F93() {
-  var_0 = scripts\engine\utility::getstructarray("weapon_pickup", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("weapon_pickup", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = strtok(var_0[var_1]._id_039B, "+");

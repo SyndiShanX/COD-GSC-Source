@@ -4,7 +4,7 @@
 *******************************************************/
 
 init_fishtrap() {
-  var_0 = scripts\engine\utility::getstructarray("trap_electric", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
   foreach(var_2 in var_0) {
     level thread func_F956(var_2);
   }

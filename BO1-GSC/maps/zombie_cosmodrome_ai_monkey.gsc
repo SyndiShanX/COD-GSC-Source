@@ -50,7 +50,7 @@ monkey_lander_get_closest_dest() {
   }
   if(!isDefined(level._lander_endarray[self.script_noteworthy])) {
     level._lander_endarray[self.script_noteworthy] = [];
-    end_spots = getstructarray("monkey_land", "targetname");
+    end_spots = getStructArray("monkey_land", "targetname");
     for(i = 0; i < end_spots.size; i++) {
       if(self.script_noteworthy == end_spots[i].script_noteworthy) {
         level._lander_endarray[self.script_noteworthy][level._lander_endarray[self.script_noteworthy].size] = end_spots[i];

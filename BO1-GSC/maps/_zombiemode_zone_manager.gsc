@@ -52,7 +52,7 @@ player_in_zone(zone_name) {
   return false;
 }
 deactivate_initial_barrier_goals() {
-  special_goals = GetStructArray("exterior_goal", "targetname");
+  special_goals = getStructArray("exterior_goal", "targetname");
   for(i = 0; i < special_goals.size; i++) {
     if(isDefined(special_goals[i].script_noteworthy)) {
       special_goals[i].is_active = false;
@@ -97,11 +97,11 @@ zone_init(zone_name) {
         zone.spawners[zone.spawners.size] = spawner;
       }
     }
-    zone.dog_locations = GetStructArray(zone.volumes[0].target + "_dog", "targetname");
+    zone.dog_locations = getStructArray(zone.volumes[0].target + "_dog", "targetname");
     for(i = 0; i < zone.dog_locations.size; i++) {
       zone.dog_locations[i].is_enabled = true;
     }
-    zone.rise_locations = GetStructArray(zone.volumes[0].target + "_rise", "targetname");
+    zone.rise_locations = getStructArray(zone.volumes[0].target + "_rise", "targetname");
     for(i = 0; i < zone.rise_locations.size; i++) {
       zone.rise_locations[i].is_enabled = true;
     }
@@ -135,13 +135,13 @@ enable_zone(zone_name) {
   }
   level.zones[zone_name].is_enabled = true;
   level notify(zone_name);
-  spawn_points = GetStructArray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   for(i = 0; i < spawn_points.size; i++) {
     if(spawn_points[i].script_noteworthy == zone_name) {
       spawn_points[i].locked = false;
     }
   }
-  entry_points = GetStructArray(zone_name + "_barriers", "script_noteworthy");
+  entry_points = getStructArray(zone_name + "_barriers", "script_noteworthy");
   for(i = 0; i < entry_points.size; i++) {
     entry_points[i].is_active = true;
     entry_points[i] trigger_on();
@@ -285,7 +285,7 @@ connect_zones(zone_name_a, zone_name_b, one_way) {
 manage_zones(initial_zone) {
   AssertEx(isDefined(initial_zone), "You must specify an initial zone to manage");
   deactivate_initial_barrier_goals();
-  spawn_points = GetStructArray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   for(i = 0; i < spawn_points.size; i++) {
     AssertEx(isDefined(spawn_points[i].script_noteworthy), "player_respawn_point: You must specify a script noteworthy with the zone name");
     spawn_points[i].locked = true;

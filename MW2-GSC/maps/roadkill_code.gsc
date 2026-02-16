@@ -3884,7 +3884,7 @@ warn_if_player_shoots_prematurely() {
 }
 
 player_shoots_at_non_enemy() {
-  if(!level.player AttackButtonPressed())
+  if(!level.player attackButtonPressed())
     return false;
 
   ai = GetAIArray("axis");
@@ -3914,7 +3914,7 @@ fail_player_for_excessive_firing() {
   time = 5;
   sustained_firing_frames = time * 20;
   for(;;) {
-    if(level.player AttackButtonPressed()) {
+    if(level.player attackButtonPressed()) {
       count += 1;
     } else {
       // penality wears off slower than it gains so you can't just fire little bursts overand over
@@ -6315,7 +6315,7 @@ grenade_barrage_if_you_delay() {
 
   count = 0;
 
-  structs = getstructarray("grenade_dismount_spawner", "targetname");
+  structs = getStructArray("grenade_dismount_spawner", "targetname");
   structs = array_randomize(structs);
   index = 0;
 
@@ -7340,7 +7340,7 @@ spy_on_convoy() {
   self SetGoalNode(node);
   self waittill("goal");
 
-  nodes = getstructarray("spy_node", "script_noteworthy");
+  nodes = getStructArray("spy_node", "script_noteworthy");
 
   for(;;) {
     timer = RandomFloat(0.8);
@@ -7524,7 +7524,7 @@ arab_line(msg) {
 }
 
 arab_line_proc(msg) {
-  speakers = getstructarray("arab_speaker", "targetname");
+  speakers = getStructArray("arab_speaker", "targetname");
   nearest = getClosest(level.player.origin, speakers);
   play_sound_in_space(msg, nearest.origin);
 }

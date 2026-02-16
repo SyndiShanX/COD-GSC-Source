@@ -1082,7 +1082,7 @@ sentry_placement_initial_wait(var_0, var_1) {
   if(!var_1) {
     var_0 makeunusable();
 
-    while(self usebuttonpressed())
+    while(self useButtonPressed())
       wait 0.05;
 
     for(;;) {
@@ -1311,10 +1311,10 @@ waitactivatebutton(var_0) {
   }
 
   if(var_0 == 1) {
-    while(!self attackbuttonpressed() && !self usebuttonpressed())
+    while(!self attackButtonPressed() && !self useButtonPressed())
       wait 0.05;
   } else if(var_0 == 0) {
-    while(self attackbuttonpressed() || self usebuttonpressed())
+    while(self attackButtonPressed() || self useButtonPressed())
       wait 0.05;
   }
 }

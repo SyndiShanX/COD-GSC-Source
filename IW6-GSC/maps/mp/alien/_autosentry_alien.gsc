@@ -808,9 +808,9 @@ turret_handlePickup(turret) {
   buttonTime = 0;
   for(;;) {
     if(IsAlive(self) && self IsTouching(turret.ownerTrigger) && !isDefined(turret.inUseBy) && !isDefined(turret.carriedBy) && self IsOnGround() && !isDefined(turret.deleting)) {
-      if(self UseButtonPressed()) {
+      if(self useButtonPressed()) {
         buttonTime = 0;
-        while(self UseButtonPressed()) {
+        while(self useButtonPressed()) {
           buttonTime += 0.05;
           wait(0.05);
         }
@@ -820,7 +820,7 @@ turret_handlePickup(turret) {
           continue;
         }
         buttonTime = 0;
-        while(!self UseButtonPressed() && buttonTime < 0.25) {
+        while(!self useButtonPressed() && buttonTime < 0.25) {
           buttonTime += 0.05;
           wait(0.05);
         }
@@ -855,9 +855,9 @@ turret_handlePickup_pc(turret) {
   buttonTime = 0;
   for(;;) {
     if(IsAlive(self) && self IsTouching(turret.ownerTrigger) && !isDefined(turret.inUseBy) && !isDefined(turret.carriedBy) && self IsOnGround() && !isDefined(turret.deleting)) {
-      if(self MeleeButtonPressed()) {
+      if(self meleeButtonPressed()) {
         buttonTime = 0;
-        while(self MeleeButtonPressed()) {
+        while(self meleeButtonPressed()) {
           buttonTime += 0.05;
           wait(0.05);
         }
@@ -867,7 +867,7 @@ turret_handlePickup_pc(turret) {
           continue;
         }
         buttonTime = 0;
-        while(!self MeleeButtonPressed() && buttonTime < 0.5) {
+        while(!self meleeButtonPressed() && buttonTime < 0.5) {
           buttonTime += 0.05;
           wait(0.05);
         }

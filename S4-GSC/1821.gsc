@@ -622,7 +622,7 @@ _id_C47D() {
 }
 
 _id_89A4(var_0) {
-  return !level.gameended && isDefined(var_0) && scripts\cp_mp\utility\player_utility::_isalive() && self usebuttonpressed() && !self isonladder() && !self meleebuttonpressed() && var_0._id_4143 < var_0._id_FEE7 && (!isDefined(self._id_F03B) || !self._id_F03B);
+  return !level.gameended && isDefined(var_0) && scripts\cp_mp\utility\player_utility::_isalive() && self useButtonPressed() && !self isonladder() && !self meleeButtonPressed() && var_0._id_4143 < var_0._id_FEE7 && (!isDefined(self._id_F03B) || !self._id_F03B);
 }
 
 _id_8880(var_0) {

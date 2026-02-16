@@ -953,7 +953,7 @@ function down_button_held() {
 }
 
 function up_button_pressed() {
-  return self buttonpressed("") || self buttonpressed("");
+  return self buttonPressed("") || self buttonPressed("");
 }
 
 function waittill_up_button_pressed() {
@@ -963,7 +963,7 @@ function waittill_up_button_pressed() {
 }
 
 function down_button_pressed() {
-  return self buttonpressed("") || self buttonpressed("");
+  return self buttonPressed("") || self buttonPressed("");
 }
 
 function waittill_down_button_pressed() {

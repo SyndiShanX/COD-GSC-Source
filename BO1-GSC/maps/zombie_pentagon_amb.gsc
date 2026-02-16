@@ -69,7 +69,7 @@ play_pentagon_announcer_vox(alias, defcon_level) {
   }
 }
 play_initial_alarm() {
-  structs = getstructarray("defcon_alarms", "targetname");
+  structs = getStructArray("defcon_alarms", "targetname");
   for(i = 0; i < structs.size; i++) {
     playsoundatposition("evt_thief_alarm_single", structs[i].origin);
   }

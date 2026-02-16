@@ -1089,7 +1089,7 @@ muggerCrateThink(dropType) {
 createDropZones() {
   level.mugger_dropZones = [];
 
-  dropZones = getstructarray("horde_drop", "targetname");
+  dropZones = getStructArray("horde_drop", "targetname");
   if(isDefined(dropZones) && dropZones.size) {
     i = 0;
     foreach(dropZone in dropZones) {

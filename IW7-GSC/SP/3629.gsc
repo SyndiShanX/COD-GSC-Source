@@ -933,7 +933,7 @@ func_5C22() {
 func_112B8() {
   var_0 = getEntArray("drone_point_of_interest", "targetname");
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
     foreach(var_5 in var_3) {
       var_6 = var_5.origin[2];
       var_5.var_8D12 = (0, 0, var_6);

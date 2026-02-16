@@ -712,25 +712,25 @@ set_fail_mortars(n_side) {
   if(n_side) {
     switch (level.mortar_fail) {
       case 1:
-        a_mortars = getstructarray("mortar_savannah_hill_left", "targetname");
+        a_mortars = getStructArray("mortar_savannah_hill_left", "targetname");
         break;
       case 2:
-        a_mortars = getstructarray("mortar_savannah_left", "targetname");
+        a_mortars = getStructArray("mortar_savannah_left", "targetname");
         break;
       default:
-        a_mortars = getstructarray("mortar_savannah_start_left", "targetname");
+        a_mortars = getStructArray("mortar_savannah_start_left", "targetname");
         break;
     }
   } else {
     switch (level.mortar_fail) {
       case 1:
-        a_mortars = getstructarray("mortar_savannah_hill_right", "targetname");
+        a_mortars = getStructArray("mortar_savannah_hill_right", "targetname");
         break;
       case 2:
-        a_mortars = getstructarray("mortar_savannah_right", "targetname");
+        a_mortars = getStructArray("mortar_savannah_right", "targetname");
         break;
       default:
-        a_mortars = getstructarray("mortar_savannah_start_right", "targetname");
+        a_mortars = getStructArray("mortar_savannah_start_right", "targetname");
         break;
     }
   }
@@ -800,13 +800,13 @@ watch_savannah_short_warn() {
 create_after_strafe_fights(n_heli_runs) {
   switch (n_heli_runs) {
     case 1:
-      a_spots = getstructarray("post_heli_fight_spot", "targetname");
+      a_spots = getStructArray("post_heli_fight_spot", "targetname");
       break;
     case 2:
-      a_spots = getstructarray("post_heli_fight_spot2", "targetname");
+      a_spots = getStructArray("post_heli_fight_spot2", "targetname");
       break;
     case 4:
-      a_spots = getstructarray("push_fight_spot", "targetname");
+      a_spots = getStructArray("push_fight_spot", "targetname");
       break;
     default:
       return;
@@ -1024,7 +1024,7 @@ delete_array(value, key) {
 }
 
 delete_struct_array(value, key) {
-  stuff = getstructarray(value, key);
+  stuff = getStructArray(value, key);
 
   for(i = 0; i < stuff.size; i++) {
     stuff[i] structdelete();

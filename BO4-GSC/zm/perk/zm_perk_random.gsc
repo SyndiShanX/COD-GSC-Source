@@ -438,7 +438,7 @@ machine_selector() {
   new_machine thread machine_think();
 }
 
-include_perk_in_random_rotation(perk) {
+#include_perk_in_random_rotation(perk) {
   if(!isDefined(level._random_perk_machine_perk_list)) {
     level._random_perk_machine_perk_list = [];
   }

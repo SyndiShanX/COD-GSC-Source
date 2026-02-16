@@ -462,7 +462,7 @@ _id_B842(var_0, var_1, var_2, var_3) {
 }
 
 _id_CE72() {
-  level._id_EA73 = scripts\engine\utility::getstructarray("struct_fx", "targetname");
+  level._id_EA73 = scripts\engine\utility::getStructArray("struct_fx", "targetname");
 
   foreach(var_1 in level._id_EA73) {
     if(!scripts\common\utility::issp() || !isDefined(var_1._id_CD64)) {

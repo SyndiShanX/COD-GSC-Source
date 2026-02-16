@@ -529,7 +529,7 @@ function_e1a452f5(e_homunculus, var_21bb918c, var_c8279d50) {
     if(isalive(player)) {
       weapon = player getcurrentweapon();
 
-      if(player === self && isDefined(weapon) && player adsbuttonpressed() && util::getweaponclass(weapon) === # "weapon_sniper") {
+      if(player === self && isDefined(weapon) && player adsButtonPressed() && util::getweaponclass(weapon) === # "weapon_sniper") {
         wait 0.2;
 
         if(isalive(player)) {
@@ -541,7 +541,7 @@ function_e1a452f5(e_homunculus, var_21bb918c, var_c8279d50) {
           do {
             wait 0.25;
           }
-          while(isalive(player) && player adsbuttonpressed() && player istouching(t_vis) && player util::is_looking_at(e_homunculus));
+          while(isalive(player) && player adsButtonPressed() && player istouching(t_vis) && player util::is_looking_at(e_homunculus));
 
           if(isalive(player)) {
             e_homunculus setinvisibletoplayer(player);

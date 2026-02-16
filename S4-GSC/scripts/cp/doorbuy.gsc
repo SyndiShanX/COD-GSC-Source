@@ -11,7 +11,7 @@ _init_doorbuy() {
   level.a_s_doorbuys = [];
   _id_06EF::_id_C215("doorbuy", ::on_spawn_doorbuy);
   wait 0.1;
-  var_0 = scripts\engine\utility::getstructarray("content_destination", "variantname");
+  var_0 = scripts\engine\utility::getStructArray("content_destination", "variantname");
 
   if(isDefined(var_0) && var_0.size > 0) {
     level thread spawn_doorbuy_destination(var_0[0]);
@@ -91,7 +91,7 @@ doorbuy_init(var_0) {
       }
     }
   } else {
-    var_4 = scripts\engine\utility::getstructarray(self.target2, "targetname");
+    var_4 = scripts\engine\utility::getStructArray(self.target2, "targetname");
     var_1 = [];
 
     if(_func_0107(var_4)) {
@@ -223,7 +223,7 @@ doorbuy_used(var_0, var_1) {
   var_9 = [];
 
   if(isDefined(var_0._id_0481)) {
-    var_9 = scripts\engine\utility::getstructarray(var_0._id_0481, "targetname");
+    var_9 = scripts\engine\utility::getStructArray(var_0._id_0481, "targetname");
   } else {
     var_9[0] = var_0;
   }

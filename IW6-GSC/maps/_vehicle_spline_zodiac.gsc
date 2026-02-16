@@ -223,7 +223,7 @@ drop_path_to_ground(var_0) {
 }
 
 add_collision_to_path(var_0) {
-  var_1 = common_scripts\utility::getstructarray("moto_line", "targetname");
+  var_1 = common_scripts\utility::getStructArray("moto_line", "targetname");
 
   foreach(var_3 in var_1) {
     var_3.origin = (var_3.origin[0], var_3.origin[1], 0);

@@ -966,7 +966,7 @@ function_ad7ad6ce(trigger_struct) {
   if(activator item_world_util::can_pick_up(item)) {
     activator pickup_item(item);
 
-    while(isDefined(activator) && activator usebuttonpressed()) {
+    while(isDefined(activator) && activator useButtonPressed()) {
       waitframe(1);
     }
   }

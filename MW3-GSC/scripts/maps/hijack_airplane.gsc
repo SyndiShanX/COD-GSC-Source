@@ -1126,7 +1126,7 @@ _id_5AD1() {
   var_2 = getent("door_breach", "targetname");
   level.player playFX(common_scripts\utility::getfx("conference_room_breach"), var_2.origin, anglesToForward((0, 0, 0)));
   level._id_5AB8 delete();
-  var_3 = common_scripts\utility::getstructarray("breach_physics", "targetname");
+  var_3 = common_scripts\utility::getStructArray("breach_physics", "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = var_5.radius;

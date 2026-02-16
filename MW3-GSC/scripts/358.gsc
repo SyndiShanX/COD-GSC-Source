@@ -432,7 +432,7 @@ _id_203D() {
         break;
       }
 
-      var_6 = common_scripts\utility::getstructarray(var_1.target, "targetname");
+      var_6 = common_scripts\utility::getStructArray(var_1.target, "targetname");
 
       if(var_6.size) {
         break;
@@ -480,7 +480,7 @@ _id_203D() {
       if(!isDefined(var_2[var_1.targetname])) {
         return;
       }
-      var_6 = common_scripts\utility::getstructarray(var_1.target, "targetname");
+      var_6 = common_scripts\utility::getStructArray(var_1.target, "targetname");
 
       if(var_6.size) {
         break;

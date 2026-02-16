@@ -144,7 +144,7 @@ world_tilt() {
   }
 
   level.vista_rotation_origins = [];
-  rotation_orgs = getstructarray("rotation_point", "targetname");
+  rotation_orgs = getStructArray("rotation_point", "targetname");
   foreach(org in rotation_orgs) {
     if(!isDefined(org.script_noteworthy)) {
       continue;
@@ -500,7 +500,7 @@ tilt_wait_dvar() {
 }
 
 tilt_sounds() {
-  sound_origins = getstructarray("tilt_sound", "targetname");
+  sound_origins = getStructArray("tilt_sound", "targetname");
 
   foreach(org in sound_origins) {
     playSoundAtPos(org.origin, "cobra_helicopter_crash");
@@ -882,7 +882,7 @@ setupSniperDuct(entName) {
 
 setupBuildingCollapse() {
   level.soundSources = [];
-  soundStructs = getstructarray("tilt_sound", "targetname");
+  soundStructs = getStructArray("tilt_sound", "targetname");
   if(isDefined(soundStructs)) {
     foreach(struct in soundStructs) {
       level.soundSources[struct.script_label] = struct;

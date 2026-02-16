@@ -517,7 +517,7 @@ func_F611() {
 
 func_1277E(var_0) {
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_3 = getEntArray(var_0.target, "targetname");
   foreach(var_5 in var_3) {
     var_6 = spawnStruct();
@@ -655,7 +655,7 @@ func_7D1F() {
       }
     }
 
-    var_2 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_2 = scripts\engine\utility::getStructArray(self.target, "targetname");
     foreach(var_5 in var_2) {
       var_3[var_3.size] = var_5;
     }

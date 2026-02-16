@@ -161,13 +161,13 @@ update_mortars() {
 
   waitframe();
 
-  level.mortar_sources = getstructarray("rumble_mortar_source", "targetname");
+  level.mortar_sources = getStructArray("rumble_mortar_source", "targetname");
   foreach(source in level.mortar_sources) {
     if(!isDefined(source.radius))
       source.radius = 300;
   }
 
-  level.mortar_targets = getstructarray("rumble_mortar_target", "targetname");
+  level.mortar_targets = getStructArray("rumble_mortar_target", "targetname");
   foreach(mortart_target in level.mortar_targets) {
     if(!isDefined(mortart_target.radius))
       mortart_target.radius = 100;
@@ -875,7 +875,7 @@ update_trolley() {
   Objective_OnEntityWithRotation(curObjID, trolley);
   self.curObjID = curObjID;
 
-  trolley_lights = getstructarray("trolley_light", "targetname");
+  trolley_lights = getStructArray("trolley_light", "targetname");
   array_thread(trolley_lights, ::trolley_attach_lights, trolley);
 
   trolley_mesh = getent("moving_trolley_mesh", "targetname");

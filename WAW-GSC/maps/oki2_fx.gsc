@@ -156,7 +156,7 @@ cliffside_ambient_fire() {
 
 battleship_artillery_fire() {
   level endon("stop firing");
-  fire_starts = getstructarray("14inch", "targetname");
+  fire_starts = getStructArray("14inch", "targetname");
 
   for(i = 0; i < fire_starts.size; i++) {
     level.battleship_firing_states[i] = "not_firing";
@@ -206,7 +206,7 @@ fire_arty_gun(org) {
 }
 
 arty_launch() {
-  targets = getstructarray("ridge_arty", "targetname");
+  targets = getStructArray("ridge_arty", "targetname");
   target = targets[randomint(targets.size)];
 
   if(target.script_fxid != "rock" && level.event_1_finished) {

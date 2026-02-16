@@ -3615,7 +3615,7 @@ vehicle_spawner_tool(allvehicles) {
         origin = player.origin + anglesToForward(player getplayerangles()) * 270.0;
         origin = origin + vectorscale((0, 0, 1), 40.0);
 
-        if(player usebuttonpressed()) {
+        if(player useButtonPressed()) {
           dynamic_spawn_dummy_model hide();
           vehicle = codespawnvehicle(1, "debug_spawn_vehicle", types[type_index], origin, player.angles);
           vehicle_init(vehicle);
@@ -3629,7 +3629,7 @@ vehicle_spawner_tool(allvehicles) {
           wait 0.3;
         }
 
-        if(player buttonpressed("DPAD_RIGHT")) {
+        if(player buttonPressed("DPAD_RIGHT")) {
           dynamic_spawn_dummy_model hide();
           type_index++;
 
@@ -3640,7 +3640,7 @@ vehicle_spawner_tool(allvehicles) {
           wait 0.3;
         }
 
-        if(player buttonpressed("DPAD_LEFT")) {
+        if(player buttonPressed("DPAD_LEFT")) {
           dynamic_spawn_dummy_model hide();
           type_index--;
 

@@ -271,7 +271,7 @@ disco_register_interaction(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 }
 
 init_pivot_power_doors() {
-  var_0 = scripts\engine\utility::getstructarray("power_door_pivot", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("power_door_pivot", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread pivot_power_door();
   }
@@ -323,7 +323,7 @@ pivot_power_door() {
 }
 
 init_sliding_power_doors() {
-  var_0 = scripts\engine\utility::getstructarray("power_door_sliding", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread sliding_power_door();
   }
@@ -704,9 +704,9 @@ init_memory_tv() {
 
   level.tv_channels_models = ["cp_disco_tv_crt", "cp_disco_tv_sally", "cp_disco_tv_pointd", "cp_disco_tv_andre", "cp_disco_tv_aj", "cp_disco_tv_yeti"];
   level.tv_modelsarray = [];
-  level.tv_modelsarray = scripts\engine\utility::getstructarray("tv_model", "script_noteworthy");
+  level.tv_modelsarray = scripts\engine\utility::getStructArray("tv_model", "script_noteworthy");
   level.tv_array = [];
-  level.tv_array = scripts\engine\utility::getstructarray("memory_tv", "script_noteworthy");
+  level.tv_array = scripts\engine\utility::getStructArray("memory_tv", "script_noteworthy");
   if(level.tv_array.size <= 0) {
     return;
   }
@@ -1051,7 +1051,7 @@ start_fake_spawn_sequence(var_0) {
 
 determine_best_shovel_spawns(var_0, var_1) {
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray("camper_to_lake_spawner", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("camper_to_lake_spawner", "targetname");
   var_3 = sortbydistance(var_3, var_0);
   for(var_4 = 0; var_4 < var_1; var_4++) {
     var_2[var_4] = var_3[var_4];
@@ -1200,11 +1200,11 @@ init_nunchucks() {
   }
 
   level.quest_one_objects = [];
-  foreach(var_1 in scripts\engine\utility::getstructarray("clock", "script_noteworthy")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("clock", "script_noteworthy")) {
     level.clock[0] = var_1;
   }
 
-  var_3 = scripts\engine\utility::getstructarray("mem", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("mem", "targetname");
   foreach(var_2, var_1 in var_3) {
     var_5 = undefined;
     switch (var_1.script_noteworthy) {
@@ -1436,13 +1436,13 @@ watch_for_sequence_trigger(var_0, var_1) {
       case "2":
         var_2 = var_0.quest_two_objects;
         var_3 = 2;
-        var_6 = scripts\engine\utility::getstructarray("memory_object_three", "script_noteworthy");
+        var_6 = scripts\engine\utility::getStructArray("memory_object_three", "script_noteworthy");
         foreach(var_8 in var_6) {
           var_0.quest_active_q2 = 1;
           var_0 scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_8, var_0);
         }
 
-        var_6 = scripts\engine\utility::getstructarray("memory_object_four", "script_noteworthy");
+        var_6 = scripts\engine\utility::getStructArray("memory_object_four", "script_noteworthy");
         foreach(var_8 in var_6) {
           var_0.quest_active_q2 = 1;
           var_0 scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_8, var_0);
@@ -1455,13 +1455,13 @@ watch_for_sequence_trigger(var_0, var_1) {
       case "3":
         var_2 = var_0.quest_three_objects;
         var_3 = 2;
-        var_6 = scripts\engine\utility::getstructarray("memory_object_five", "script_noteworthy");
+        var_6 = scripts\engine\utility::getStructArray("memory_object_five", "script_noteworthy");
         foreach(var_8 in var_6) {
           var_0.quest_active_q3 = 1;
           var_0 scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_8, var_0);
         }
 
-        var_6 = scripts\engine\utility::getstructarray("memory_object_six", "script_noteworthy");
+        var_6 = scripts\engine\utility::getStructArray("memory_object_six", "script_noteworthy");
         foreach(var_8 in var_6) {
           var_0.quest_active_q3 = 1;
           var_0 scripts\cp\cp_interaction::add_to_current_interaction_list_for_player(var_8, var_0);
@@ -2171,7 +2171,7 @@ applymemquestattributes(var_0, var_1, var_2, var_3) {
 init_mem3() {
   level.special_mode_activation_funcs["memory_object_three"] = ::applymemquestattributes;
   level.normal_mode_activation_funcs["memory_object_three"] = ::applymemquestattributes;
-  var_0 = scripts\engine\utility::getstructarray("memory_object_three", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_object_three", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2182,7 +2182,7 @@ init_mem3() {
 init_mem4() {
   level.special_mode_activation_funcs["memory_object_four"] = ::applymemquestattributes;
   level.normal_mode_activation_funcs["memory_object_four"] = ::applymemquestattributes;
-  var_0 = scripts\engine\utility::getstructarray("memory_object_four", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_object_four", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2193,7 +2193,7 @@ init_mem4() {
 init_mem5() {
   level.special_mode_activation_funcs["memory_object_five"] = ::applymemquestattributes;
   level.normal_mode_activation_funcs["memory_object_five"] = ::applymemquestattributes;
-  var_0 = scripts\engine\utility::getstructarray("memory_object_five", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_object_five", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2204,7 +2204,7 @@ init_mem5() {
 init_mem6() {
   level.special_mode_activation_funcs["memory_object_six"] = ::applymemquestattributes;
   level.normal_mode_activation_funcs["memory_object_six"] = ::applymemquestattributes;
-  var_0 = scripts\engine\utility::getstructarray("memory_object_six", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_object_six", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2218,7 +2218,7 @@ init_nunchucks_2() {
     level.clock[1] = undefined;
   }
 
-  foreach(var_1 in scripts\engine\utility::getstructarray("clock_2", "script_noteworthy")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("clock_2", "script_noteworthy")) {
     level.clock[1] = var_1;
   }
 
@@ -2454,7 +2454,7 @@ init_nunchucks_3() {
     level.clock[2] = undefined;
   }
 
-  foreach(var_1 in scripts\engine\utility::getstructarray("clock_3", "script_noteworthy")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("clock_3", "script_noteworthy")) {
     level.clock[2] = var_1;
   }
 
@@ -3397,7 +3397,7 @@ rotate_center_fan() {
 init_fan_trap() {
   level.sewer_fans = getEntArray("sewer_fans", "targetname");
   level.center_sewer_fan = getent("center_fan", "targetname");
-  level.sewer_fan_interactions = scripts\engine\utility::getstructarray("fan_trap", "script_noteworthy");
+  level.sewer_fan_interactions = scripts\engine\utility::getStructArray("fan_trap", "script_noteworthy");
   level.sewer_fan_switches = getEntArray(level.sewer_fan_interactions[0].target, "targetname");
   level.lower_sewer_phys_vol = getent("lower_sewer_phys_vol", "targetname");
   level.upper_sewer_phys_vol = getent("upper_sewer_phys_vol", "targetname");
@@ -3420,7 +3420,7 @@ sewer_fan_power_handler() {
 
 init_electric_trap() {
   scripts\engine\utility::flag_init("rooftop_walkway_open");
-  var_0 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("electric_trap", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
   }

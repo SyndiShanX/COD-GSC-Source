@@ -223,7 +223,7 @@ _id_1676() {
     }
 
     if(var_8 && !var_6 isreloading() && !var_6 isswitchingweapon()) {
-      if(var_6 maps\_utility::_id_167C() && var_6 adsbuttonpressed()) {
+      if(var_6 maps\_utility::_id_167C() && var_6 adsButtonPressed()) {
         var_6 _id_167E(var_3);
         var_3 = 1;
 
@@ -684,7 +684,7 @@ _id_16A8(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   var_12 = 0;
 
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     var_10 maps\_hud_util::updatebar(var_8 / var_2);
     wait 0.05;
     var_8 = var_8 + 0.05;
@@ -794,7 +794,7 @@ _id_16B0() {
 }
 
 _id_16B1() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = vectornormalize(self.origin - var_2.origin);

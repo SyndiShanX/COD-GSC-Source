@@ -1787,7 +1787,7 @@ rog_targeting_logic() {
     var_2 = level.player getplayerangles();
     var_3 = anglesToForward(var_2);
 
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       if(var_0 && common_scripts\utility::flag("ROG_can_fire") && !common_scripts\utility::flag("ROG_is_cooling_down")) {
         var_0 = 0;
         var_4 = bulletTrace(var_1, var_1 + var_3 * 250000, 0, level.uav_model, 0);

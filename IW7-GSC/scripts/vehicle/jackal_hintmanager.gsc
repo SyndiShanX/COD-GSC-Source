@@ -347,11 +347,11 @@ hint_weapdrone_conditions(var_0) {
     return 0;
   }
 
-  if(level.player adsbuttonpressed()) {
+  if(level.player adsButtonPressed()) {
     return 0;
   }
 
-  if(level.player attackbuttonpressed()) {
+  if(level.player attackButtonPressed()) {
     return 0;
   }
 

@@ -1599,7 +1599,7 @@ _id_1F0D() {
       }
     }
 
-    var_2 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_2 = common_scripts\utility::getStructArray(self.target, "targetname");
 
     foreach(var_5 in var_2) {}
     var_3[var_3.size] = var_5;
@@ -1992,7 +1992,7 @@ _id_1F24() {
   var_11 = var_7;
 
   for(;;) {
-    if(!level.player buttonpressed("F10")) {
+    if(!level.player buttonPressed("F10")) {
       level._id_1F25 = 0;
     }
     if(var_11 != var_7) {
@@ -2001,19 +2001,19 @@ _id_1F24() {
     }
 
     if(!var_8) {
-      if(level.player buttonpressed("UPARROW") || level.player buttonpressed("DPAD_UP") || level.player buttonpressed("APAD_UP")) {
+      if(level.player buttonPressed("UPARROW") || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("APAD_UP")) {
         var_8 = 1;
         var_7--;
       }
-    } else if(!level.player buttonpressed("UPARROW") && !level.player buttonpressed("DPAD_UP") && !level.player buttonpressed("APAD_UP")) {
+    } else if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP")) {
       var_8 = 0;
     }
     if(!var_9) {
-      if(level.player buttonpressed("DOWNARROW") || level.player buttonpressed("DPAD_DOWN") || level.player buttonpressed("APAD_DOWN")) {
+      if(level.player buttonPressed("DOWNARROW") || level.player buttonPressed("DPAD_DOWN") || level.player buttonPressed("APAD_DOWN")) {
         var_9 = 1;
         var_7++;
       }
-    } else if(!level.player buttonpressed("DOWNARROW") && !level.player buttonpressed("DPAD_DOWN") && !level.player buttonpressed("APAD_DOWN")) {
+    } else if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN")) {
       var_9 = 0;
     }
     if(var_7 < 0) {
@@ -2022,12 +2022,12 @@ _id_1F24() {
     if(var_7 >= var_0.size) {
       var_7 = 0;
     }
-    if(level.player buttonpressed("BUTTON_B")) {
+    if(level.player buttonPressed("BUTTON_B")) {
       _id_1F28(var_1, var_2);
       break;
     }
 
-    if(level.player buttonpressed("kp_enter") || level.player buttonpressed("BUTTON_A") || level.player buttonpressed("enter")) {
+    if(level.player buttonPressed("kp_enter") || level.player buttonPressed("BUTTON_A") || level.player buttonPressed("enter")) {
       if(var_0[var_7] == "cancel") {
         _id_1F28(var_1, var_2);
         break;
@@ -2461,7 +2461,7 @@ _id_1F47(var_0) {
 
 _id_1F48(var_0) {
   var_1 = [];
-  var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0.target, "targetname");
   var_3 = getEntArray(var_0.target, "targetname");
 
   foreach(var_5 in var_3) {

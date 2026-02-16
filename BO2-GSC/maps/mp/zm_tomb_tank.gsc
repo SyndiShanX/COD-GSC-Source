@@ -162,7 +162,7 @@ tank_debug_tags() {
   setDvar("debug_tank", "off");
   adddebugcommand("devgui_cmd \"Zombies:2/Tomb:1/Tank Debug:5\" \"debug_tank on\"\n");
   flag_wait("start_zombie_round_logic");
-  a_spots = getstructarray("tank_jump_down_spots", "script_noteworthy");
+  a_spots = getStructArray("tank_jump_down_spots", "script_noteworthy");
 
   while(true) {
     if(getDvar(#"_id_55B41FB9") == "on") {
@@ -231,7 +231,7 @@ tank_setup() {
   self.t_kill linkto(self);
   m_tank_path_blocker = getent("tank_path_blocker", "targetname");
   m_tank_path_blocker delete();
-  a_tank_jump_down_spots = getstructarray("tank_jump_down_spots", "script_noteworthy");
+  a_tank_jump_down_spots = getStructArray("tank_jump_down_spots", "script_noteworthy");
 
   foreach(s_spot in a_tank_jump_down_spots)
   self tank_jump_down_store_offset(s_spot);

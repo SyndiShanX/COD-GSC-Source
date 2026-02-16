@@ -78,7 +78,7 @@ func_37D4() {
   }
 
   for(;;) {
-    if((self issprinting() || self iswallrunning()) && !self ismeleeing() && !scripts\mp\killstreaks\emp_common::isemped() && !self ismantling() && !self usebuttonpressed() && !self adsbuttonpressed() && !isDefined(self.var_9FF6) && !isDefined(self.var_6F43)) {
+    if((self issprinting() || self iswallrunning()) && !self ismeleeing() && !scripts\mp\killstreaks\emp_common::isemped() && !self ismantling() && !self useButtonPressed() && !self adsButtonPressed() && !isDefined(self.var_9FF6) && !isDefined(self.var_6F43)) {
       func_37DA();
     } else {
       wait(1.5);
@@ -171,7 +171,7 @@ func_37DB() {
   level endon("game_ended");
   self endon("removeArchetype");
   for(;;) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       self notify("camo_off");
       self waittill("camo_on");
     }
@@ -246,7 +246,7 @@ func_37DE() {
   self endon("disconnect");
   self endon("camo_off");
   for(;;) {
-    if(self usebuttonpressed() || self adsbuttonpressed() && !isDefined(self.var_9FF6)) {
+    if(self useButtonPressed() || self adsButtonPressed() && !isDefined(self.var_9FF6)) {
       self notify("camo_off");
     }
 

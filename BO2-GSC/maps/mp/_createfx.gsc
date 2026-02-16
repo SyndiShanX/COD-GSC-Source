@@ -932,7 +932,7 @@ buttonpressed_internal(button) {
     return 0;
 
   player = get_players()[0];
-  return player buttonpressed(button);
+  return player buttonPressed(button);
 }
 
 get_selected_move_vector() {
@@ -1093,11 +1093,11 @@ add_button(name) {
     return;
   }
   if(!isDefined(level.buttonisheld[name])) {
-    if(player buttonpressed(name)) {
+    if(player buttonPressed(name)) {
       level.buttonisheld[name] = 1;
       level.buttonclick[name] = 1;
     }
-  } else if(!player buttonpressed(name))
+  } else if(!player buttonPressed(name))
     level.buttonisheld[name] = undefined;
 }
 
@@ -1291,7 +1291,7 @@ generate_fx_log(type, autosave) {
     else
       return 3;
   } else {
-    cfxprintln(file, "//_createfx generated. Do not touch!!");
+    cfxprintln(file, "");
     cfxprintln(file, "main()");
     cfxprintln(file, "{");
 
@@ -1723,7 +1723,7 @@ write_error_msg(filename) {
     for(;;) {
       player = get_players()[0];
 
-      if(player buttonpressed("BUTTON_A")) {
+      if(player buttonPressed("BUTTON_A")) {
         center_text_clear();
         level.write_error = "";
         break;

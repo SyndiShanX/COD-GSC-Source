@@ -290,7 +290,7 @@ onStartGameType() {
 initHordeSettings() {
   setDvar("g_keyboarduseholdtime", 250);
 
-  level.hordeDropLocations = getstructarray("horde_drop", "targetname");
+  level.hordeDropLocations = getStructArray("horde_drop", "targetname");
   AssertEx(isDefined(level.hordeDropLocations) && (level.hordeDropLocations.size > 11), "map needs horde game objects");
 
   level.blastShieldMod = 0.75;

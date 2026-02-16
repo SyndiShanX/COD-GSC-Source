@@ -139,12 +139,12 @@ init_ghost_zone() {
   level.ghost_start_area = getent("ghost_start_area", "targetname");
   level.ghost_zone_door_clips = getEntArray("ghost_zone_door_clip", "targetname");
   enable_ghost_zone_door_ai_clips();
-  level.ghost_zone_start_lower_locations = getstructarray("ghost_zone_start_lower_location", "targetname");
-  level.ghost_drop_down_locations = getstructarray("ghost_start_zone_spawners", "targetname");
-  level.ghost_front_standing_locations = getstructarray("ghost_front_standing_location", "targetname");
-  level.ghost_back_standing_locations = getstructarray("ghost_back_standing_location", "targetname");
-  level.ghost_front_flying_out_path_starts = getstructarray("ghost_front_flying_out_path_start", "targetname");
-  level.ghost_back_flying_out_path_starts = getstructarray("ghost_back_flying_out_path_start", "targetname");
+  level.ghost_zone_start_lower_locations = getStructArray("ghost_zone_start_lower_location", "targetname");
+  level.ghost_drop_down_locations = getStructArray("ghost_start_zone_spawners", "targetname");
+  level.ghost_front_standing_locations = getStructArray("ghost_front_standing_location", "targetname");
+  level.ghost_back_standing_locations = getStructArray("ghost_back_standing_location", "targetname");
+  level.ghost_front_flying_out_path_starts = getStructArray("ghost_front_flying_out_path_start", "targetname");
+  level.ghost_back_flying_out_path_starts = getStructArray("ghost_back_flying_out_path_start", "targetname");
   level.ghost_gazebo_pit_volume = getent("sloth_pack_volume", "targetname");
   level.ghost_gazebo_pit_perk_pos = getstruct("ghost_gazebo_pit_perk_pos", "targetname");
   level.ghost_entry_room_to_mansion = "ghost_to_maze_zone_1";
@@ -168,7 +168,7 @@ init_ghost_zone() {
     }
 
     assert(isDefined(room.target), "ghost zone with targetname '" + str_targetname + "' is missing spawner target! This is used to pair zones with spawners.");
-    a_ghost_spawn_locations = getstructarray(room.target, "targetname");
+    a_ghost_spawn_locations = getStructArray(room.target, "targetname");
     level.ghost_rooms[str_targetname].ghost_spawn_locations = arraycombine(a_ghost_spawn_locations, level.ghost_rooms[str_targetname].ghost_spawn_locations, 0, 0);
     level.ghost_rooms[str_targetname].volumes[level.ghost_rooms[str_targetname].volumes.size] = room;
 

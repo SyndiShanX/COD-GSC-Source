@@ -134,9 +134,9 @@ watchtransponderaltdetonate(var_0) {
   var_0 waittill("activated");
   var_1 = 0;
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_1 = 0;
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_1 = var_1 + 0.05;
         wait(0.05);
       }
@@ -146,7 +146,7 @@ watchtransponderaltdetonate(var_0) {
       }
 
       var_1 = 0;
-      while(!self usebuttonpressed() && var_1 < 0.5) {
+      while(!self useButtonPressed() && var_1 < 0.5) {
         var_1 = var_1 + 0.05;
         wait(0.05);
       }

@@ -9,7 +9,7 @@ init_teleport_portals() {
   level._effect["portal_glyph"] = loadfx("vfx\iw7\levels\cp_final\portal\vfx_portal_symbol_1.vfx");
   level._effect["vfx_pap_return_portal"] = loadfx("vfx\iw7\levels\cp_disco\vfx_paproom_portal.vfx");
   wait(5);
-  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   foreach(var_2 in var_0) {
     var_2 thread trigger_when_player_close_by();
     wait(0.1);
@@ -26,7 +26,7 @@ register_portal_interactions() {
 }
 
 portal_console_init_func() {
-  var_0 = scripts\engine\utility::getstructarray("portal_console", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("portal_console", "script_noteworthy");
   foreach(var_2 in var_0) {
     level thread stand_on_glyph(var_2);
   }
@@ -39,7 +39,7 @@ portal_console_hint_func(var_0, var_1) {
 portal_console_activate_func(var_0, var_1) {}
 
 stand_on_glyph(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("fast_travel_portal_symbol", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("fast_travel_portal_symbol", "targetname");
   var_2 = scripts\engine\utility::getclosest(var_0.origin, var_1, 500);
   if(!isDefined(var_2)) {
     return;
@@ -62,7 +62,7 @@ stand_on_glyph(var_0) {
     wait(0.5);
   }
 
-  var_9 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_9 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   var_10 = scripts\engine\utility::getclosest(var_0.origin, var_9, 500);
   var_10.opened = 1;
   var_10.end_point.opened = 1;
@@ -87,7 +87,7 @@ trigger_when_player_close_by() {
     self.angles = (0, 0, 0);
   }
 
-  self.teleport_spots = scripts\engine\utility::getstructarray(self.end_point.target, "targetname");
+  self.teleport_spots = scripts\engine\utility::getStructArray(self.end_point.target, "targetname");
   foreach(var_2 in self.teleport_spots) {
     if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
@@ -99,7 +99,7 @@ trigger_when_player_close_by() {
   }
 
   scripts\engine\utility::flag_wait("power_on");
-  var_4 = scripts\engine\utility::getstructarray("fast_travel_portal_spot", "targetname");
+  var_4 = scripts\engine\utility::getStructArray("fast_travel_portal_spot", "targetname");
   self.portal_spot = scripts\engine\utility::getclosest(self.origin, var_4, 500);
   self.portal_scriptable = spawn("script_model", self.portal_spot.origin + (0, 0, 53));
   self.portal_scriptable setModel("tag_origin_final_portal");
@@ -215,7 +215,7 @@ crack_portal_doors() {
   var_0 = getEntArray("center_portal_door_left", "targetname");
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0, 500);
   if(isDefined(var_1)) {
-    var_2 = scripts\engine\utility::getstructarray("center_portal_door_left_pos", "targetname");
+    var_2 = scripts\engine\utility::getStructArray("center_portal_door_left_pos", "targetname");
     var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 500);
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_1.origin;
@@ -227,7 +227,7 @@ crack_portal_doors() {
   var_6 = getEntArray("center_portal_door_right", "targetname");
   var_7 = scripts\engine\utility::getclosest(self.origin, var_6, 500);
   if(isDefined(var_7)) {
-    var_2 = scripts\engine\utility::getstructarray("center_portal_door_right_pos", "targetname");
+    var_2 = scripts\engine\utility::getStructArray("center_portal_door_right_pos", "targetname");
     var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 500);
     if(isDefined(var_3)) {
       var_4 = var_3.origin - var_7.origin;
@@ -243,7 +243,7 @@ open_portal_doors() {
   var_0 = getEntArray("portal_door_left", "targetname");
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0, 500);
   if(isDefined(var_1)) {
-    var_2 = scripts\engine\utility::getstructarray("portal_door_left_pos", "targetname");
+    var_2 = scripts\engine\utility::getStructArray("portal_door_left_pos", "targetname");
     var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 500);
     var_1 moveto(var_3.origin, 0.5, 0.1, 0.1);
   }
@@ -251,7 +251,7 @@ open_portal_doors() {
   var_4 = getEntArray("portal_door_right", "targetname");
   var_5 = scripts\engine\utility::getclosest(self.origin, var_4, 500);
   if(isDefined(var_5)) {
-    var_2 = scripts\engine\utility::getstructarray("portal_door_right_pos", "targetname");
+    var_2 = scripts\engine\utility::getStructArray("portal_door_right_pos", "targetname");
     var_3 = scripts\engine\utility::getclosest(self.origin, var_2, 500);
     var_5 moveto(var_3.origin, 0.5, 0.1, 0.1);
   }
@@ -268,7 +268,7 @@ blast_doors_with_gun() {
   var_0 = "death_ray_cannon_beam";
   var_1 = "tag_origin_laser_ray_fx";
   var_2 = "death_ray_cannon_rock_impact";
-  var_3 = scripts\engine\utility::getstructarray("gun_barrel", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("gun_barrel", "targetname");
   var_3 = level.portal_gun.barrel_ents;
   while(!level.portal_gun_activated) {
     wait(0.1);
@@ -300,7 +300,7 @@ blast_doors_with_gun() {
 
   playFX(level._effect[var_2], var_8);
   var_13 = undefined;
-  var_14 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_14 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   foreach(var_10 in var_14) {
     if(var_10.script_noteworthy == "cargo_room") {
       var_13 = var_10;
@@ -329,7 +329,7 @@ debug_portal_door_open() {
     wait(1);
   }
 
-  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.portal_spot)) {
       var_2.opened = 1;
@@ -352,7 +352,7 @@ portal_gun_init_func(var_0, var_1) {
   level.portal_gun_crane.var_62EE = var_2.origin;
   level.portal_gun_crane.end_ang = var_2.angles;
   wait(5);
-  var_3 = scripts\engine\utility::getstructarray("gun_barrel", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("gun_barrel", "targetname");
   level.portal_gun.barrel_ents = [];
   foreach(var_5 in var_3) {
     var_6 = spawn("script_origin", var_5.origin);
@@ -798,7 +798,7 @@ teleport_from_hidden_room_before_time_up(var_0) {
 
 teleport_to_hidden_room() {
   self endon("left_hidden_room_early");
-  var_0 = scripts\engine\utility::getstructarray("pap_spawners", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("pap_spawners", "targetname");
   move_player_through_pap_tube(self, var_0);
   self playershow();
   scripts\cp\utility::adddamagemodifier("papRoom", 0, 0);

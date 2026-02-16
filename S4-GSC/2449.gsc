@@ -135,7 +135,7 @@ _id_C9FC(var_0, var_1, var_2, var_3) {
   var_4._id_E2DA = [];
 
   if(!isDefined(var_2)) {
-    var_7 = scripts\engine\utility::getstructarray(var_1, "targetname");
+    var_7 = scripts\engine\utility::getStructArray(var_1, "targetname");
   } else {
     var_7 = var_2;
   }

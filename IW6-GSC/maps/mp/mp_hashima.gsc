@@ -172,7 +172,7 @@ init_missiles() {
 
   waittillframeend;
 
-  level.missile_starts = getstructarray("missile_start", "targetname");
+  level.missile_starts = getStructArray("missile_start", "targetname");
 }
 
 missiles_
@@ -206,7 +206,7 @@ run_missiles() {
 }
 
 fake_missile_launch(target_array, missile_launch_height, missile_drop_height, calling_player) {
-  launch_start_array = getstructarray("missile_start", "targetname");
+  launch_start_array = getStructArray("missile_start", "targetname");
   launch_start_array = array_randomize(launch_start_array);
 
   index = 0;
@@ -468,7 +468,7 @@ disconnect_path_periodic(interval) {
 
 use_switch_toggle_multiple() {
   level.door_buttons = [];
-  useSwitch = getstructarray("switch_toggle", "targetname");
+  useSwitch = getStructArray("switch_toggle", "targetname");
   array_thread(useSwitch, ::use_switch_toggle_multiple_init);
 }
 

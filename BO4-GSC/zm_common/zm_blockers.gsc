@@ -225,7 +225,7 @@ door_buy() {
     return true;
   }
 
-  if(!isDefined(who) || !who usebuttonpressed()) {
+  if(!isDefined(who) || !who useButtonPressed()) {
     return false;
   }
 
@@ -1070,7 +1070,7 @@ debris_think() {
           continue;
         }
       } else if(getdvarint(#"zombie_unlock_all", 0) > 0 || isDefined(waitresult.is_forced) && waitresult.is_forced || isDefined(level.var_5791d548) && level.var_5791d548) {} else {
-        if(!who usebuttonpressed()) {
+        if(!who useButtonPressed()) {
           continue;
         }
 
@@ -1808,7 +1808,7 @@ player_fails_blocker_repair_trigger_preamble(player, players, trigger, hold_requ
     return true;
   }
 
-  if(hold_required && !player usebuttonpressed()) {
+  if(hold_required && !player useButtonPressed()) {
     return true;
   }
 

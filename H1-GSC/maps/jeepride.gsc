@@ -165,7 +165,7 @@ main() {
   level.vehicle_aianimcheck["react"] = maps\jeepride_code::guy_react_check;
 
   if(!isDefined(level.fxplay_model) || getDvar("jeepride_crashrepro") != "off") {
-    common_scripts\utility::array_thread(common_scripts\utility::getstructarray("ghetto_tag", "targetname"), maps\jeepride_code::ghetto_tag);
+    common_scripts\utility::array_thread(common_scripts\utility::getStructArray("ghetto_tag", "targetname"), maps\jeepride_code::ghetto_tag);
     common_scripts\utility::array_thread(getvehiclenodearray("sparks_on", "script_noteworthy"), maps\jeepride_code::trigger_sparks_on);
     common_scripts\utility::array_thread(getvehiclenodearray("sparks_off", "script_noteworthy"), maps\jeepride_code::trigger_sparks_off);
   }
@@ -192,11 +192,11 @@ main() {
   common_scripts\utility::array_thread(maps\_vehicle_code::_getvehiclespawnerarray(), maps\jeepride_code::process_vehicles_spawned);
   common_scripts\utility::array_thread(getEntArray("missile_offshoot", "targetname"), maps\jeepride_code::missile_offshoot);
   maps\jeepride_code::crashed_vehicles_setup();
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("fliptruck_ghettoanimate", "targetname"), maps\jeepride_code::fliptruck_ghettoanimate);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("fliptruck_ghettoanimate", "targetname"), maps\jeepride_code::fliptruck_ghettoanimate);
 
   if(isDefined(level.fxplay_model)) {
-    common_scripts\utility::array_thread(common_scripts\utility::getstructarray("attack_dummy_path", "targetname"), maps\jeepride_code::attack_dummy_path);
-    common_scripts\utility::array_thread(common_scripts\utility::getstructarray("vehicle_badplacer", "targetname"), maps\jeepride_code::vehicle_badplacer);
+    common_scripts\utility::array_thread(common_scripts\utility::getStructArray("attack_dummy_path", "targetname"), maps\jeepride_code::attack_dummy_path);
+    common_scripts\utility::array_thread(common_scripts\utility::getStructArray("vehicle_badplacer", "targetname"), maps\jeepride_code::vehicle_badplacer);
     common_scripts\utility::array_thread(getEntArray("exploder", "targetname"), maps\jeepride_code::exploder_animate);
     common_scripts\utility::array_thread(getEntArray("exploder", "targetname"), maps\jeepride_code::exploder_phys);
   }
@@ -2692,12 +2692,12 @@ fx_thing() {
   var_0 = loadfx("fx\explosions\small_vehicle_explosion");
 
   for(;;) {
-    while(!level.player usebuttonpressed())
+    while(!level.player useButtonPressed())
       wait 0.05;
 
     playFX(var_0, level.player getEye());
 
-    while(level.player usebuttonpressed())
+    while(level.player useButtonPressed())
       wait 0.05;
   }
 }

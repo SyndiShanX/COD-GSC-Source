@@ -14,7 +14,7 @@ start_shrimp_path(shrimp_effect, str_path_start, min_speed, max_speed, min_respa
     wait(start_delay);
   }
 
-  a_all_path_starts = getstructarray(str_path_start, "targetname");
+  a_all_path_starts = getStructArray(str_path_start, "targetname");
   assert(isDefined(a_all_path_starts), "Shrimp missing start struct - " + str_path_start);
 
   if(!isDefined(activate_all_paths)) {

@@ -333,7 +333,7 @@ function_458bc8de(dog) {
   wait 0.5;
 
   while(true) {
-    if(!(isDefined(level.var_347a87db) && level.var_347a87db) && self offhandspecialbuttonpressed() && !self function_104d7b4d() && !self isusingoffhand()) {
+    if(!(isDefined(level.var_347a87db) && level.var_347a87db) && self offhandspecialbuttonPressed() && !self function_104d7b4d() && !self isusingoffhand()) {
       dog toggle_state(self);
       wait 0.5;
     }

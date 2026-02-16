@@ -1516,7 +1516,7 @@ adjust_angles_to_player(stumble_angles) {
 }
 
 coop_player_spawn_placement() {
-  structs = getstructarray("initial_spawn_points", "targetname");
+  structs = getStructArray("initial_spawn_points", "targetname");
 
   flag_wait("all_players_connected");
 
@@ -1749,7 +1749,7 @@ player_intermission() {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");

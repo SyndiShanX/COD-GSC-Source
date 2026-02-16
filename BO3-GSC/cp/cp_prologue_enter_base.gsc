@@ -612,7 +612,7 @@ function function_3f3cae8c() {
   self util::show_hint_text(&"CP_MI_ETH_PROLOGUE_TUTORIAL_CROUCH", 0, undefined, 10);
   self.var_9db68ebf = 0;
   while(!self.var_9db68ebf) {
-    if(self stancebuttonpressed()) {
+    if(self stancebuttonPressed()) {
       self util::hide_hint_text();
       self.var_9db68ebf = 1;
       self flag::set_val("tutorial_allowed", 1);

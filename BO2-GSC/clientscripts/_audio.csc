@@ -173,7 +173,7 @@ create_sound_random(origin, alias, min_delay, max_delay) {
 
 startsoundrandoms(localclientnum) {
   level.soundrandomsstarted = 1;
-  randoms = getstructarray("random", "script_label");
+  randoms = getStructArray("random", "script_label");
 
   if(isDefined(level.user_created_soundrandoms)) {
     randoms = arraycombine(randoms, level.user_created_soundrandoms, 1, 0);
@@ -288,7 +288,7 @@ soundlinethink() {
 }
 
 startsoundloops() {
-  loopers = getstructarray("looper", "script_label");
+  loopers = getStructArray("looper", "script_label");
 
   if(isDefined(loopers) && loopers.size > 0) {
     delay = 0;
@@ -305,7 +305,7 @@ startsoundloops() {
 }
 
 startlineemitters() {
-  lineemitters = getstructarray("line_emitter", "script_label");
+  lineemitters = getStructArray("line_emitter", "script_label");
 
   if(isDefined(lineemitters) && lineemitters.size > 0) {
     delay = 0;

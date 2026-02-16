@@ -63,13 +63,13 @@ function ai_puppet_manager() {
     if(isDefined(level.playercursor[""]) && isDefined(level.ai_puppet) && isDefined(level.ai_puppet.debuglookatenabled) && level.ai_puppet.debuglookatenabled == 1) {
       level.ai_puppet lookatpos(level.playercursor[""]);
     }
-    if(self buttonpressed("") && self buttonpressed("")) {
+    if(self buttonPressed("") && self buttonPressed("")) {
       if(isDefined(level.ai_puppet)) {
         level.ai_puppet forceteleport(level.playercursor[""], level.ai_puppet.angles);
       }
       wait(0.2);
     } else {
-      if(self buttonpressed("")) {
+      if(self buttonPressed("")) {
         if(isDefined(level.ai_puppet)) {
           if(isDefined(level.ai_puppet_target)) {
             if(isai(level.ai_puppet_target)) {
@@ -99,7 +99,7 @@ function ai_puppet_manager() {
         }
         wait(0.2);
       } else {
-        if(self buttonpressed("")) {
+        if(self buttonPressed("")) {
           if(isDefined(level.ai_puppet)) {
             if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
               level.ai_puppet setgoal(level.playercursorai);
@@ -123,7 +123,7 @@ function ai_puppet_manager() {
           }
           wait(0.2);
         } else {
-          if(self buttonpressed("") && self buttonpressed("")) {
+          if(self buttonPressed("") && self buttonPressed("")) {
             if(isDefined(level.ai_puppet)) {
               if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
                 level.ai_puppet setgoal(level.playercursorai);
@@ -147,7 +147,7 @@ function ai_puppet_manager() {
             }
             wait(0.2);
           } else {
-            if(self buttonpressed("")) {
+            if(self buttonPressed("")) {
               if(isDefined(level.playercursorai)) {
                 if(isDefined(level.ai_puppet) && level.playercursorai == level.ai_puppet) {
                   ai_puppet_release(1);
@@ -160,7 +160,7 @@ function ai_puppet_manager() {
                 }
               }
               wait(0.2);
-            } else if(self buttonpressed("")) {
+            } else if(self buttonPressed("")) {
               if(isDefined(level.ai_puppet)) {
                 level.ai_puppet clearforcedgoal();
               }
@@ -181,16 +181,16 @@ function ai_puppet_manager() {
       }
     }
     if(isDefined(level.ai_puppet)) {
-      if(self buttonpressed("")) {
+      if(self buttonPressed("")) {
         level.ai_puppet.goalradius = level.ai_puppet.goalradius + 64;
       } else {
-        if(self buttonpressed("")) {
+        if(self buttonPressed("")) {
           radius = level.ai_puppet.goalradius - 64;
           if(radius < 16) {
             radius = 16;
           }
           level.ai_puppet.goalradius = radius;
-        } else if(self buttonpressed("")) {
+        } else if(self buttonPressed("")) {
           level.ai_puppet.goalradius = 16;
         }
       }

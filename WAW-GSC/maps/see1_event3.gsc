@@ -625,7 +625,7 @@ play_center_car_anims_side() {
 
   guys = [];
 
-  left_spawn_points = getstructarray("center_car_guy_left", "targetname");
+  left_spawn_points = getStructArray("center_car_guy_left", "targetname");
 
   guys[0] = spawn_fake_guy_outro(left_spawn_points[0].origin, left_spawn_points[0].angles, "guyl1");
   guys[1] = spawn_fake_guy_outro(left_spawn_points[1].origin, left_spawn_points[1].angles, "guyl2");
@@ -636,7 +636,7 @@ play_center_car_anims_side() {
 
   guys[5] = spawn_fake_guy_outro(left_spawn_points[5].origin, left_spawn_points[5].angles, "guyl6");
 
-  right_spawn_points = getstructarray("center_car_guy_left", "targetname");
+  right_spawn_points = getStructArray("center_car_guy_left", "targetname");
 
   guys[6] = spawn_fake_guy_outro(right_spawn_points[0].origin, right_spawn_points[0].angles, "guyr1");
   guys[7] = spawn_fake_guy_outro(right_spawn_points[1].origin, right_spawn_points[1].angles, "guyr2");
@@ -649,7 +649,7 @@ play_center_car_anims_middle() {
 
   guys = [];
 
-  center_spawn_points = getstructarray("center_car_guy_center", "targetname");
+  center_spawn_points = getStructArray("center_car_guy_center", "targetname");
 
   guys[0] = spawn_fake_guy_outro(center_spawn_points[0].origin, center_spawn_points[0].angles, "guyc1");
   guys[1] = spawn_fake_guy_outro(center_spawn_points[1].origin, center_spawn_points[1].angles, "guyc2");
@@ -1398,7 +1398,7 @@ ev3_tower_event_tracers_loop(tower_name, blow_up_msg) {
   fire_end_name = tower_name + "_end";
 
   fire_start = getstruct(fire_start_name, "script_noteworthy");
-  fire_ends = getstructarray(fire_end_name, "script_noteworthy");
+  fire_ends = getStructArray(fire_end_name, "script_noteworthy");
 
   level endon(blow_up_msg);
   level endon("both_halftracks_eliminated");
@@ -1417,7 +1417,7 @@ ev3_tower_event_panzershreck_loop(tower_name, blow_up_msg) {
   fire_end_name = tower_name + "_end";
 
   fire_start = getstruct(fire_start_name, "script_noteworthy");
-  fire_ends = getstructarray(fire_end_name, "script_noteworthy");
+  fire_ends = getStructArray(fire_end_name, "script_noteworthy");
 
   level endon(blow_up_msg);
   level endon("both_halftracks_eliminated");
@@ -1500,7 +1500,7 @@ ev3_tower_event_force_blow_up(tower_name, exploder_trigger) {
 
 ev3_ambient_tank_hits() {
   level endon("retreat_done_done");
-  friendly_targets = getstructarray("ev3_camp_amb_explosion", "targetname");
+  friendly_targets = getStructArray("ev3_camp_amb_explosion", "targetname");
   while(1) {
     index = randomint(friendly_targets.size);
     playFX(level._effect["dirt_blow_up"], friendly_targets[index].origin);

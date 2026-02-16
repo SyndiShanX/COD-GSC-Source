@@ -536,7 +536,7 @@ watch_use_trigger(trigger, callback) {
     if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
       continue;
     }
-    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed()) {
+    if(player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed()) {
       self thread[[callback]]();
     }
   }

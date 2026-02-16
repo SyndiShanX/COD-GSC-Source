@@ -570,13 +570,13 @@ manualdropthink() {
   self endon("drop_object");
 
   for(;;) {
-    while(self attackbuttonpressed() || self fragbuttonpressed() || self meleebuttonpressed())
+    while(self attackButtonPressed() || self fragButtonPressed() || self meleeButtonPressed())
       wait 0.05;
 
-    while(!self attackbuttonpressed() && !self fragbuttonpressed() && !self meleebuttonpressed())
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self meleeButtonPressed())
       wait 0.05;
 
-    if(isDefined(self.carryobject) && !self usebuttonpressed())
+    if(isDefined(self.carryobject) && !self useButtonPressed())
       self.carryobject thread setdropped();
   }
 }
@@ -1082,7 +1082,7 @@ useholdthinkloop(player, lastweapon) {
   waitforweapon = 1;
   timedout = 0;
 
-  while(isalive(player) && player istouching(self.trigger) && player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && self.curprogress < self.usetime && (self.userate || waitforweapon) && !(waitforweapon && timedout > 1.5)) {
+  while(isalive(player) && player istouching(self.trigger) && player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed() && self.curprogress < self.usetime && (self.userate || waitforweapon) && !(waitforweapon && timedout > 1.5)) {
     timedout = timedout + 0.05;
 
     if(!isDefined(useweapon) || player getcurrentweapon() == useweapon) {

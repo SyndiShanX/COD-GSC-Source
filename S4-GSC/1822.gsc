@@ -237,7 +237,7 @@ _id_0FB6(var_0, var_1) {
 
   if(isDefined(var_1.target)) {
     var_2 = getEntArray(var_1.target, "targetname");
-    var_3 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
     if(isDefined(var_2) && var_2.size > 0) {
       foreach(var_5 in var_2) {
@@ -543,7 +543,7 @@ _id_50E3(var_0) {
   var_0 endon("set_interaction_point");
   var_0 endon("trigger_success");
 
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     waitframe();
   }
 
@@ -1140,7 +1140,7 @@ _id_FEE0(var_0, var_1) {
     return 0;
   }
 
-  if(!var_1 usebuttonpressed()) {
+  if(!var_1 useButtonPressed()) {
     return 0;
   }
 
@@ -1148,7 +1148,7 @@ _id_FEE0(var_0, var_1) {
     return 0;
   }
 
-  if(var_1 meleebuttonpressed()) {
+  if(var_1 meleeButtonPressed()) {
     return 0;
   }
 

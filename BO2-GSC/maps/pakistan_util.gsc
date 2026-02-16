@@ -563,7 +563,7 @@ surveillance_mode_hint() {
   if(flag("xcam_off")) {
     level thread screen_message_create(&"PAKISTAN_SHARED_SURV_ACTIVATE", undefined, undefined, undefined, 6);
 
-    while(!level.player actionslotonebuttonpressed()) {
+    while(!level.player actionslotonebuttonPressed()) {
       wait 0.05;
     }
 
@@ -1222,7 +1222,7 @@ datapad_rumble(m_player_body) {
 }
 
 spawn_grenades_at_structs(str_struct) {
-  a_s_spots = getstructarray(str_struct, "targetname");
+  a_s_spots = getStructArray(str_struct, "targetname");
 
   foreach(s_spot in a_s_spots) {
     e_temp = spawn("script_origin", s_spot.origin);
@@ -1246,7 +1246,7 @@ ragdoll_corpse_control_think() {
 }
 
 spawn_ragdoll_corpses_at_structs(str_struct) {
-  a_s_spots = getstructarray(str_struct, "targetname");
+  a_s_spots = getStructArray(str_struct, "targetname");
   i = 0;
 
   foreach(s_spot in a_s_spots) {
@@ -1292,7 +1292,7 @@ sink_ragdoll_corpses(str_name) {
 
 kill_ragdoll_corpse_control() {
   level notify("kill_corpse_control");
-  a_s_spots = getstructarray("stealth_corpse_spot", "script_noteworthy");
+  a_s_spots = getStructArray("stealth_corpse_spot", "script_noteworthy");
   a_t_trigs = getEntArray("corpse_spawn_trig", "targetname");
 
   foreach(s_spot in a_s_spots) {
@@ -1310,7 +1310,7 @@ static_bodies_enable(str_scene_prefix, n_start_index, n_stop_index) {
 }
 
 static_bodies_disable(str_scene_prefix, n_start_index, n_stop_index) {
-  a_s_align_spots = getstructarray("death_pose_align", "script_noteworthy");
+  a_s_align_spots = getStructArray("death_pose_align", "script_noteworthy");
 
   for(i = n_start_index; i <= n_stop_index; i++) {
     delete_scene_all(str_scene_prefix + i, 1, 0, 1);
@@ -1447,7 +1447,7 @@ deconstruct_fxanims_in_trigger(str_trigger) {
 
 reconstruct_fxanims_from_list(a_str_names) {
   foreach(str_name in a_str_names) {
-    s_m_each_fxanim_with_name = getstructarray(str_name, "targetname");
+    s_m_each_fxanim_with_name = getStructArray(str_name, "targetname");
 
     foreach(s_fxanim in s_m_each_fxanim_with_name) {
       fxanim_reconstruct(s_fxanim.targetname);
@@ -1573,12 +1573,12 @@ _first_person_claw_flamethrower_fire_watch() {
   while(true) {
     a_ai_enemies = getaiarray("axis");
 
-    while(level.player adsbuttonpressed()) {
+    while(level.player adsButtonPressed()) {
       self flamethrower_pick_target(a_ai_enemies);
       wait 0.25;
     }
 
-    while(!level.player adsbuttonpressed()) {
+    while(!level.player adsButtonPressed()) {
       wait 0.1;
     }
   }
@@ -1693,7 +1693,7 @@ objects_to_vectors() {
 }
 
 delete_structs(str_value, str_key) {
-  s_a_structs = getstructarray(str_value, str_key);
+  s_a_structs = getStructArray(str_value, str_key);
 
   foreach(s_struct in s_a_structs) {
     s_struct structdelete();

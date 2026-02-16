@@ -604,57 +604,57 @@ orb_follow_post_ship_spawner_fixup(var_0) {
 
   if(scripts\engine\utility::is_equal(self._id_0481, "objective_sumpf_top_orb_follow")) {
     if(scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_01") || scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_02")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_01", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_02", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_04", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_01", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_02", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_04", "targetname");
     }
 
     if(scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_03")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_04", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_05", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_04", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_05", "targetname");
     }
 
     if(scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_06") || scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_07")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_06", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_07", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_06", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_07", "targetname");
     }
 
     if(scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_09") || scripts\engine\utility::is_equal(var_0, "sumpf_top_orb_follow_spawner_cluster_10")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_09", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_top_orb_follow_spawner_cluster_10", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_03", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_09", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_top_orb_follow_spawner_cluster_10", "targetname");
     }
   } else if(scripts\engine\utility::is_equal(self._id_0481, "objective_sumpf_orb_follow")) {
     if(scripts\engine\utility::is_equal(var_0, "sumpf_bottom_orb_follow_spawner_cluster_07")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_07", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_08", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_01", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_07", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_08", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_01", "targetname");
     }
 
     if(scripts\engine\utility::is_equal(var_0, "sumpf_bottom_orb_follow_spawner_cluster_08")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_09", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_08", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_01", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_09", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_08", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_01", "targetname");
     }
 
     if(scripts\engine\utility::is_equal(var_0, "sumpf_bottom_orb_follow_spawner_cluster_09")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_09", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_10", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("sumpf_bottom_orb_follow_spawner_cluster_01", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_09", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_10", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("sumpf_bottom_orb_follow_spawner_cluster_01", "targetname");
     }
   } else if(scripts\engine\utility::is_equal(self._id_0481, "objective_royal_hotel_east_orb_follow")) {
     if(scripts\engine\utility::is_equal(var_0, "royal_hotel_east_orb_follow_spawner_cluster_12") || scripts\engine\utility::is_equal(var_0, "royal_hotel_east_orb_follow_spawner_cluster_10")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("royal_hotel_east_orb_follow_spawner_cluster_10", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("royal_hotel_east_orb_follow_spawner_cluster_7", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("royal_hotel_east_orb_follow_spawner_cluster_12", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("royal_hotel_east_orb_follow_spawner_cluster_10", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("royal_hotel_east_orb_follow_spawner_cluster_7", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("royal_hotel_east_orb_follow_spawner_cluster_12", "targetname");
     }
 
     if(scripts\engine\utility::is_equal(var_0, "royal_hotel_east_orb_follow_spawner_cluster_9")) {
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("royal_hotel_east_orb_follow_spawner_cluster_9", "targetname");
-      var_1[var_1.size] = ::scripts\engine\utility::getstructarray("royal_hotel_east_orb_follow_spawner_cluster_7", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("royal_hotel_east_orb_follow_spawner_cluster_9", "targetname");
+      var_1[var_1.size] = ::scripts\engine\utility::getStructArray("royal_hotel_east_orb_follow_spawner_cluster_7", "targetname");
     }
   }
 

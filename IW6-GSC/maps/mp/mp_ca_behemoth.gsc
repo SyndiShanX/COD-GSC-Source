@@ -273,7 +273,7 @@ update_bucketwheel() {
 
 CONST_STEAM_SFX_END_DELAY = 0.25;
 setup_burstpipes() {
-  burstpipes = getstructarray("burstpipe", "targetname");
+  burstpipes = getStructArray("burstpipe", "targetname");
   array_thread(burstpipes, ::setup_pipe);
 }
 
@@ -319,7 +319,7 @@ play_effects_at_loc_array(loc_array, effect_id, rand_angle) {
 }
 
 setup_pipe() {
-  fx_locs = GetStructArray(self.target, "targetname");
+  fx_locs = getStructArray(self.target, "targetname");
 
   level.steam_burst_points[level.steam_burst_points.size] = self.origin;
   level.steam_bokeh_points[level.steam_bokeh_points.size] = self.origin + (0, 0, 30.0);
@@ -345,7 +345,7 @@ play_bokeh() {
 update_pipe() {
   self.waiting = 1;
 
-  fx_locs = GetStructArray(self.target, "targetname");
+  fx_locs = getStructArray(self.target, "targetname");
 
   damage_models = getEntArray(self.target, "targetname");
   if(damage_models.size) {

@@ -902,7 +902,7 @@ register_light_type(type, func) {
   }
 }
 get_lights_by_label(label) {
-  lights = GetStructArray("light", "classname");
+  lights = getStructArray("light", "classname");
   return_array = [];
   for(i = 0; i < lights.size; i++) {
     if((isDefined(lights[i].script_light_label)) && (lights[i].script_light_label == label)) {
@@ -912,7 +912,7 @@ get_lights_by_label(label) {
   return return_array;
 }
 get_lights_in_radius(pos, rad) {
-  lights = GetStructArray("light", "classname");
+  lights = getStructArray("light", "classname");
   return_array = [];
   rad_squared = rad * rad;
   for(i = 0; i < lights.size; i++) {
@@ -923,7 +923,7 @@ get_lights_in_radius(pos, rad) {
   return return_array;
 }
 get_labelled_lights_in_radius(label, pos, rad) {
-  lights = GetStructArray("light", "classname");
+  lights = getStructArray("light", "classname");
   return_array = [];
   rad_squared = rad * rad;
   for(i = 0; i < lights.size; i++) {
@@ -1012,7 +1012,7 @@ init_lights(clientNum) {
   register_light_type("light_solid", ::light_solid);
   register_light_type("television", ::television);
   register_light_type("triggered_lights", ::triggered_lights_think);
-  lights = GetStructArray("light", "classname");
+  lights = getStructArray("light", "classname");
   level.max_local_clients = GetMaxLocalClients();
   if(isDefined(lights)) {
     array_thread(lights, ::create_lights, clientNum);

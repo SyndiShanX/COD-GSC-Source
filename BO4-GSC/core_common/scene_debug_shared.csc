@@ -284,9 +284,9 @@ display_scene_menu(str_type, str_scene) {
       selected = 0;
     }
 
-    if(level.localplayers[0] buttonpressed("<dev string:x134>")) {
+    if(level.localplayers[0] buttonPressed("<dev string:x134>")) {
       if(b_shot_menu) {
-        while(level.localplayers[0] buttonpressed("<dev string:x134>")) {
+        while(level.localplayers[0] buttonPressed("<dev string:x134>")) {
           waitframe(1);
         }
 
@@ -298,11 +298,11 @@ display_scene_menu(str_type, str_scene) {
       }
     }
 
-    if(level.localplayers[0] buttonpressed("<dev string:x13f>") || level.localplayers[0] buttonpressed("<dev string:x14a>") || level.localplayers[0] buttonpressed("<dev string:x155>")) {
+    if(level.localplayers[0] buttonPressed("<dev string:x13f>") || level.localplayers[0] buttonPressed("<dev string:x14a>") || level.localplayers[0] buttonPressed("<dev string:x155>")) {
       if(names[selected] == "<dev string:xa9>") {
         level flagsys::toggle("<dev string:x15d>");
 
-        while(level.localplayers[0] buttonpressed("<dev string:x13f>") || level.localplayers[0] buttonpressed("<dev string:x14a>") || level.localplayers[0] buttonpressed("<dev string:x155>")) {
+        while(level.localplayers[0] buttonPressed("<dev string:x13f>") || level.localplayers[0] buttonPressed("<dev string:x14a>") || level.localplayers[0] buttonPressed("<dev string:x155>")) {
           waitframe(1);
         }
 
@@ -313,7 +313,7 @@ display_scene_menu(str_type, str_scene) {
         if(names[selected] == "<dev string:xa2>") {
           level.scene_menu_shot_index = selected;
 
-          while(level.localplayers[0] buttonpressed("<dev string:x13f>") || level.localplayers[0] buttonpressed("<dev string:x14a>") || level.localplayers[0] buttonpressed("<dev string:x155>")) {
+          while(level.localplayers[0] buttonPressed("<dev string:x13f>") || level.localplayers[0] buttonPressed("<dev string:x14a>") || level.localplayers[0] buttonPressed("<dev string:x155>")) {
             waitframe(1);
           }
 
@@ -329,7 +329,7 @@ display_scene_menu(str_type, str_scene) {
         }
       }
 
-      while(level.localplayers[0] buttonpressed("<dev string:x13f>") || level.localplayers[0] buttonpressed("<dev string:x14a>") || level.localplayers[0] buttonpressed("<dev string:x155>")) {
+      while(level.localplayers[0] buttonPressed("<dev string:x13f>") || level.localplayers[0] buttonPressed("<dev string:x14a>") || level.localplayers[0] buttonPressed("<dev string:x155>")) {
         waitframe(1);
       }
 

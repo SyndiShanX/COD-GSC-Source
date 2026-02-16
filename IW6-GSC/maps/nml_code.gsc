@@ -264,7 +264,7 @@ mansion_dialogue() {
   level notify("trigger_earthquake");
   level.dog maps\_utility_dogs::dyn_sniff_disable();
   thread mansion_quake_sounds();
-  var_0 = common_scripts\utility::getstructarray("mansion_physics_node", "targetname");
+  var_0 = common_scripts\utility::getStructArray("mansion_physics_node", "targetname");
 
   foreach(var_2 in var_0)
   var_2 thread physics_jolt_node();
@@ -2082,7 +2082,7 @@ pipe_warning_shift() {
 }
 
 pipe_warning_fx() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0)
   common_scripts\utility::noself_delaycall(randomfloatrange(0, 0.5), ::playfx, common_scripts\utility::getfx("pipe_dust"), var_2.origin);

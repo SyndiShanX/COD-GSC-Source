@@ -536,7 +536,7 @@ monitorads() {
   for(;;) {
     var_3 = 0;
 
-    if(self.adszoomed && var_1 && !var_0 adsbuttonpressed()) {
+    if(self.adszoomed && var_1 && !var_0 adsButtonPressed()) {
       var_2 = "LISTEN_apache_player_stop_ADS";
       var_3 = 1;
     }

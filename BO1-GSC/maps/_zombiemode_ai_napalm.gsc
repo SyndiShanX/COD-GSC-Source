@@ -150,7 +150,7 @@ _napalm_InitSpawners() {
     zone = level.zones[zoneName];
     zone.napalm_spawn_locations = [];
   }
-  spawnPoints = GetStructArray("special_zombie_spawn", "targetname");
+  spawnPoints = getStructArray("special_zombie_spawn", "targetname");
   for(i = 0; i < spawnPoints.size; i++) {
     s = spawnPoints[i];
     testOrigin.origin = s.origin + (0, 0, 50);

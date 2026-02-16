@@ -613,10 +613,10 @@ _id_F840(var_0) {
 
   for(;;) {
     if(isalive(self) && self istouching(var_0._id_ADB1) && !isDefined(var_0._id_84F0) && !isDefined(var_0._id_32CA) && self isonground()) {
-      if(self usebuttonpressed()) {
+      if(self useButtonPressed()) {
         var_1 = 0;
 
-        while(self usebuttonpressed()) {
+        while(self useButtonPressed()) {
           var_1 = var_1 + level._id_5F3A;
           waitframe();
         }
@@ -626,7 +626,7 @@ _id_F840(var_0) {
         }
         var_1 = 0;
 
-        while(!self usebuttonpressed() && var_1 < 0.5) {
+        while(!self useButtonPressed() && var_1 < 0.5) {
           var_1 = var_1 + level._id_5F3A;
           waitframe();
         }
@@ -1871,7 +1871,7 @@ _id_D0DA() {
     self waittill("trigger", var_0);
 
     while(var_0 _meth_81F4()) {
-      if(var_0 attackbuttonpressed()) {
+      if(var_0 attackButtonPressed()) {
         self _meth_83C1();
       }
 

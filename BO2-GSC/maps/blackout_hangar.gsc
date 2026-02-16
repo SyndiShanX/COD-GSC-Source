@@ -220,7 +220,7 @@ mason_elevator() {
 }
 
 elevator_jetpacks_land() {
-  a_s_landing = getstructarray("jetpack_elevator_struct", "targetname");
+  a_s_landing = getStructArray("jetpack_elevator_struct", "targetname");
 
   foreach(s_align in a_s_landing) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_assault_guy", 0, maps\blackout_deck::func_jetpack_live_to_deck);

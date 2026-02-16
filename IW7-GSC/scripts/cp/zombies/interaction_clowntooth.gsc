@@ -6,7 +6,7 @@
 init_clowntooth_game() {
   var_0 = 4;
   var_1 = 7;
-  var_2 = scripts\engine\utility::getstructarray("clown_tooth_game", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("clown_tooth_game", "script_noteworthy");
   foreach(var_4 in var_2) {
     var_4 thread func_F918();
     var_4 thread scripts\cp\zombies\arcade_game_utility::turn_off_machine_after_uses(var_0, var_1);
@@ -15,7 +15,7 @@ init_clowntooth_game() {
 }
 
 init_afterlife_clowntooth_game() {
-  var_0 = scripts\engine\utility::getstructarray("clown_tooth_game_afterlife", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("clown_tooth_game_afterlife", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_F918("afterlife");
     var_2.in_afterlife_arcade = 1;
@@ -99,7 +99,7 @@ use_clowntooth_game(var_0, var_1) {
   }
 
   var_1.pre_arcade_game_weapon = var_1 scripts\cp\zombies\arcade_game_utility::saveplayerpregameweapon(var_1);
-  var_2 = scripts\engine\utility::getstructarray("cryptid_sound", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("cryptid_sound", "targetname");
   if(var_2.size > 0) {
     var_3 = scripts\engine\utility::getclosest(var_0.origin, var_2);
     playsoundatpos(var_3.origin, "arcade_cryptid_attack_start");

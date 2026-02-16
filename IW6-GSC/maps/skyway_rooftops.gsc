@@ -1010,9 +1010,9 @@ bmcd_debug_loop() {
   level notify("stop_cody_debug");
 
   for(;;) {
-    if(level.player buttonpressed("DPAD_RIGHT")) {
+    if(level.player buttonPressed("DPAD_RIGHT")) {
       break;
-    } else if(level.player buttonpressed("DPAD_LEFT") || level.player buttonpressed("DPAD_UP") || level.player buttonpressed("DPAD_DOWN")) {
+    } else if(level.player buttonPressed("DPAD_LEFT") || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("DPAD_DOWN")) {
       return;
     }
     wait 0.1;
@@ -1022,19 +1022,19 @@ bmcd_debug_loop() {
   wait 1;
 
   for(;;) {
-    if(level.player buttonpressed("DPAD_LEFT")) {
+    if(level.player buttonPressed("DPAD_LEFT")) {
       iprintln("blue");
       level._ally thread maps\_utility::set_force_color("b");
       wait 0.2;
-    } else if(level.player buttonpressed("DPAD_RIGHT")) {
+    } else if(level.player buttonPressed("DPAD_RIGHT")) {
       iprintln("red");
       level._ally thread maps\_utility::set_force_color("r");
       wait 0.2;
-    } else if(level.player buttonpressed("DPAD_UP")) {
+    } else if(level.player buttonPressed("DPAD_UP")) {
       iprintln("dist check");
       thread temp_dist_check();
       wait 0.2;
-    } else if(level.player buttonpressed("DPAD_DOWN")) {
+    } else if(level.player buttonPressed("DPAD_DOWN")) {
       if(isDefined(level._ally.ignoreall) && level._ally.ignoreall) {
         iprintln("ignoreall off");
         level._ally maps\_utility::set_ignoreme(0);

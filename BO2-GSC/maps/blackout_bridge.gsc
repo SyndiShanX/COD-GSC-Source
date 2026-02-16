@@ -321,7 +321,7 @@ sniper_plane_takeoff() {
 }
 
 bridge_break_windows() {
-  a_s_bullets = getstructarray("bridge_magic_bullet", "targetname");
+  a_s_bullets = getStructArray("bridge_magic_bullet", "targetname");
 
   foreach(s_bullet in a_s_bullets) {
     s_bullet_end = getstruct(s_bullet.target, "targetname");
@@ -365,9 +365,9 @@ catwalk_random_rockets() {
   self endon("random_rockets_stop");
   done_trigger = getent("catwalk_exit_trigger", "targetname");
   done_trigger endon("trigger");
-  structs = getstructarray("catwalk_magic_bullet_target", "targetname");
+  structs = getStructArray("catwalk_magic_bullet_target", "targetname");
   assert(structs.size > 0);
-  sources = getstructarray("catwalk_magic_bullet_source", "targetname");
+  sources = getStructArray("catwalk_magic_bullet_source", "targetname");
 
   for(wait_time = 5.0; 1; wait_time = wait_time + randomfloatrange(5.0, 10.0)) {
     wait(wait_time);
@@ -396,9 +396,9 @@ catwalk_random_shooting() {
   self endon("spec_ops_failed");
   done_trigger = getent("catwalk_exit_trigger", "targetname");
   done_trigger endon("trigger");
-  structs = getstructarray("catwalk_magic_bullet_target", "targetname");
+  structs = getStructArray("catwalk_magic_bullet_target", "targetname");
   assert(structs.size > 0);
-  sources = getstructarray("catwalk_magic_bullet_source", "targetname");
+  sources = getStructArray("catwalk_magic_bullet_source", "targetname");
 
   while(true) {
     nearest = get_array_of_closest(level.player.origin, structs, undefined, 2);
@@ -499,7 +499,7 @@ catwalk_spawn_snipers() {
 }
 
 bridge_chair_pulses() {
-  a_pulses = getstructarray("cic_chair_pulse", "targetname");
+  a_pulses = getStructArray("cic_chair_pulse", "targetname");
 
   while(true) {
     foreach(pulse in a_pulses) {
@@ -619,7 +619,7 @@ scene_cic_hackers() {
 
 scene_front_bridge_hackers() {
   trigger_wait("start_front_bridge");
-  a_positions = getstructarray("front_bridge_hack", "targetname");
+  a_positions = getStructArray("front_bridge_hack", "targetname");
 
   foreach(s_align in a_positions) {
     simple_spawn_single("bridge_hacker", ::start_hacking, s_align, s_align.script_noteworthy);
@@ -1073,7 +1073,7 @@ cleanup_deck() {
 }
 
 bridge_catwalk_jetpack_ai(str_flag) {
-  a_s_landing_spot = getstructarray("bridge_catwalk_jetpack_spot", "targetname");
+  a_s_landing_spot = getStructArray("bridge_catwalk_jetpack_spot", "targetname");
 
   while(!flag(str_flag)) {
     for(i = 0; i < 3; i++) {
@@ -1107,7 +1107,7 @@ bridge_catwalk_jetpack_drones(str_flag, str_targetname) {
     str_targetname = "port_vista_drone_jetpack_spot";
   }
 
-  a_s_landing_spot = getstructarray(str_targetname, "targetname");
+  a_s_landing_spot = getStructArray(str_targetname, "targetname");
 
   while(!flag(str_flag)) {
     for(i = 0; i < a_s_landing_spot.size; i++) {

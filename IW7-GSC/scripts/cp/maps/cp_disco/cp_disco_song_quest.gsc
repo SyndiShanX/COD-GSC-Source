@@ -16,7 +16,7 @@ song_quest_init() {
   scripts\engine\utility::flag_wait("interactions_initialized");
   scripts\engine\utility::flag_set("noCheatTimeQuest");
   thread savage_hot_coffee();
-  var_0 = scripts\engine\utility::getstructarray("music_quest_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("music_quest_struct", "targetname");
   if(!isDefined(var_0) || var_0.size == 0) {
     return;
   }
@@ -217,7 +217,7 @@ treasure_quest_step_1(var_0) {
     var_2 = build_treasure_cipher_word(var_0);
     var_0.loc_struct display_cipher_to_player(var_2, undefined, undefined, undefined, self);
     self.first_cipher_seen = 1;
-    var_3 = scripts\engine\utility::getstructarray("trash_cans", "script_noteworthy");
+    var_3 = scripts\engine\utility::getStructArray("trash_cans", "script_noteworthy");
     if(scripts\engine\utility::flag("savageCipherDebug")) {
       thread debug_the_trashcans();
     }
@@ -537,7 +537,7 @@ display_cipher_to_player(var_0, var_1, var_2, var_3, var_4) {
 
 debug_the_trashcans() {
   level endon("game_ended");
-  for(var_0 = scripts\engine\utility::getstructarray("trash_cans", "script_noteworthy"); var_0.size > 0; var_0 = scripts\engine\utility::array_remove(var_0, var_0[0])) {
+  for(var_0 = scripts\engine\utility::getStructArray("trash_cans", "script_noteworthy"); var_0.size > 0; var_0 = scripts\engine\utility::array_remove(var_0, var_0[0])) {
     var_0 = sortbydistance(var_0, level.players[0].origin);
     level waittill("player_used_trashcan");
   }

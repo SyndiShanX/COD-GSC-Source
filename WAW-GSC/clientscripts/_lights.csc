@@ -145,7 +145,7 @@ fire_flicker(clientNum) {
 }
 
 init_lights(clientNum) {
-  lights = GetStructArray("light", "classname");
+  lights = getStructArray("light", "classname");
 
   if(isDefined(lights)) {
     array_thread(lights, ::create_lights, clientNum);
@@ -158,14 +158,14 @@ init_lights(clientNum) {
     return;
   }
 
-  flickering_lights = GetStructArray("generic_flickering", "targetname");
-  pulsing_lights = GetStructArray("generic_pulsing", "targetname");
-  double_strobe = GetStructArray("generic_double_strobe", "targetname");
-  fire_flickers = GetStructArray("fire_flicker", "targetname");
-  fire_casters = GetStructArray("firecaster", "targetname");
+  flickering_lights = getStructArray("generic_flickering", "targetname");
+  pulsing_lights = getStructArray("generic_pulsing", "targetname");
+  double_strobe = getStructArray("generic_double_strobe", "targetname");
+  fire_flickers = getStructArray("fire_flicker", "targetname");
+  fire_casters = getStructArray("firecaster", "targetname");
 
-  asylum_lights = GetStructArray("elect_light", "targetname");
-  asylum_controlroom_light = getstructarray("elect_flicker", "script_noteworthy");
+  asylum_lights = getStructArray("elect_light", "targetname");
+  asylum_controlroom_light = getStructArray("elect_flicker", "script_noteworthy");
 
   if(isDefined(flickering_lights)) {
     println("*** Client : " + flickering_lights.size + " flickering lights.");
@@ -202,7 +202,7 @@ init_lights(clientNum) {
     array_thread(asylum_controlroom_light, ::asylum_controlroom_light_think, clientNum);
   }
 
-  power_lights = GetStructArray("light_electric", "targetname");
+  power_lights = getStructArray("light_electric", "targetname");
   if(isDefined(power_lights)) {
     println("*** Client : " + power_lights.size + " power lights.");
     array_thread(power_lights, ::power_lights_think, clientNum);

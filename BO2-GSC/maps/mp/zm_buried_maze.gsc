@@ -14,7 +14,7 @@
 #include maps\mp\zombies\_zm_audio;
 
 maze_precache() {
-  blocker_locations = getstructarray("maze_blocker", "targetname");
+  blocker_locations = getStructArray("maze_blocker", "targetname");
   model_list = [];
 
   for(i = 0; i < blocker_locations.size; i++)
@@ -44,14 +44,14 @@ unlink_nodes_for_blocker_location() {
 }
 
 init_maze_clientfields() {
-  blocker_locations = getstructarray("maze_blocker", "targetname");
+  blocker_locations = getStructArray("maze_blocker", "targetname");
 
   foreach(blocker in blocker_locations)
   registerclientfield("world", "maze_blocker_" + blocker.script_noteworthy, 12000, 1, "int");
 }
 
 init_maze_permutations() {
-  blocker_locations = getstructarray("maze_blocker", "targetname");
+  blocker_locations = getStructArray("maze_blocker", "targetname");
   level._maze._blocker_locations = [];
 
   for(i = 0; i < blocker_locations.size; i++) {
@@ -278,7 +278,7 @@ maze_think() {
 }
 
 init_hedge_maze_spawnpoints() {
-  level.maze_hedge_spawnpoints = getstructarray("custom_spawner_entry hedge_location", "script_noteworthy");
+  level.maze_hedge_spawnpoints = getStructArray("custom_spawner_entry hedge_location", "script_noteworthy");
 }
 
 maze_do_zombie_spawn(spot) {

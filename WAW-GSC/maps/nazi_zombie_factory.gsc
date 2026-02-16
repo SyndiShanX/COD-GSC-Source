@@ -259,7 +259,7 @@ anim_override_func() {
 }
 
 lock_additional_player_spawner() {
-  spawn_points = getstructarray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   for(i = 0; i < spawn_points.size; i++) {
     spawn_points[i].locked = true;
   }
@@ -741,7 +741,7 @@ activate_electric_trap() {
 
   clientnotify(self.target);
 
-  fire_points = getstructarray(self.target, "targetname");
+  fire_points = getStructArray(self.target, "targetname");
 
   for(i = 0; i < fire_points.size; i++) {
     wait_network_frame();

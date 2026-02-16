@@ -405,7 +405,7 @@ nuke_slow_motion(transition_to_slow, players_are_slow, transition_to_normal) {
 }
 
 nuke_earthquake(scale, time) {
-  quakes = getstructarray("nuke_earthquake", "targetname");
+  quakes = getStructArray("nuke_earthquake", "targetname");
   foreach(quake in quakes) {
     Earthquake(scale, time, quake.origin, quake.radius);
   }
@@ -537,7 +537,7 @@ fall_object_init() {
   things = [];
 
   if(isDefined(self.target)) {
-    structs = getstructarray(self.target, "targetname");
+    structs = getStructArray(self.target, "targetname");
     set_default_script_noteworthy(structs, "angle_ref");
     things = array_combine(things, structs);
 
@@ -546,7 +546,7 @@ fall_object_init() {
   }
 
   if(isDefined(self.script_linkto)) {
-    structs = getstructarray(self.script_linkto, "script_linkname");
+    structs = getStructArray(self.script_linkto, "script_linkname");
     set_default_script_noteworthy(structs, "start");
     things = array_combine(things, structs);
 

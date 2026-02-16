@@ -8,7 +8,7 @@ main() {
 }
 
 main_thread() {
-  var_0 = common_scripts\utility::getstructarray("teleport_world_origin", "targetname");
+  var_0 = common_scripts\utility::getStructArray("teleport_world_origin", "targetname");
   var_1 = level.gametype;
 
   if(!var_0.size || !(var_1 == "dom" || var_1 == "ctf" || var_1 == "hp" || var_1 == "ball")) {
@@ -34,7 +34,7 @@ main_thread() {
 
 teleport_init() {
   level.teleport_spawn_info = [];
-  var_0 = common_scripts\utility::getstructarray("teleport_world_origin", "targetname");
+  var_0 = common_scripts\utility::getStructArray("teleport_world_origin", "targetname");
 
   if(!var_0.size) {
     return;
@@ -180,7 +180,7 @@ teleport_onstartgamehorde() {
     var_1.horde_drops = [];
   }
 
-  var_3 = common_scripts\utility::getstructarray("horde_drop", "targetname");
+  var_3 = common_scripts\utility::getStructArray("horde_drop", "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = teleport_closest_zone(var_5.origin);
@@ -525,7 +525,7 @@ teleport_onteleporthp(var_0) {
 }
 
 teleport_onteleportball(var_0) {
-  level.ball_starts_post_event = common_scripts\utility::getstructarray("ball_start_post_event", "targetname");
+  level.ball_starts_post_event = common_scripts\utility::getStructArray("ball_start_post_event", "targetname");
 
   if(game["switchedsides"]) {
     level.ball_goals_post_event["allies"] = common_scripts\utility::getstruct("ball_goal_axis_post_event", "targetname");
@@ -740,10 +740,10 @@ teleport_parse_zone_targets(var_0) {
   var_0.teleport_origins["none"] = [];
   var_0.teleport_origins["allies"] = [];
   var_0.teleport_origins["axis"] = [];
-  var_1 = common_scripts\utility::getstructarray("teleport_zone_" + var_0.name, "targetname");
+  var_1 = common_scripts\utility::getStructArray("teleport_zone_" + var_0.name, "targetname");
 
   if(isDefined(var_0.target)) {
-    var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+    var_2 = common_scripts\utility::getStructArray(var_0.target, "targetname");
     var_1 = common_scripts\utility::array_combine(var_2, var_1);
   }
 
@@ -1091,7 +1091,7 @@ teleport_add_delta_targets(var_0, var_1) {
 
   if(isDefined(var_0.target)) {
     var_2 = getEntArray(var_0.target, "targetname");
-    var_3 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+    var_3 = common_scripts\utility::getStructArray(var_0.target, "targetname");
     var_4 = common_scripts\utility::array_combine(var_2, var_3);
     common_scripts\utility::array_levelthread(var_4, ::teleport_add_delta_targets, var_1);
   }

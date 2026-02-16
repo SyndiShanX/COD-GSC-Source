@@ -413,7 +413,7 @@ interaction_pickup_unique_weapon(var_0, var_1) {
 }
 
 melee_weapon_init() {
-  var_0 = scripts\engine\utility::getstructarray("starting_melee_weapons", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("starting_melee_weapons", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.model = spawn("script_weapon", var_2.origin, 0, 0, var_2.name);
     var_2.model.angles = var_2.angles;
@@ -468,7 +468,7 @@ survivor_hint_func(var_0, var_1) {
 }
 
 survivor_use_func(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_4 in var_2) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_4);
   }
@@ -503,7 +503,7 @@ add_back_to_interaction_system(var_0, var_1, var_2) {
     }
   }
 
-  var_9 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_9 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_11 in var_9) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_11);
   }
@@ -613,7 +613,7 @@ init_pap_quest() {
   var_2 setModel("cp_rave_projector");
   level.projector_struct = var_2;
   level.pap_pieces_found = 0;
-  var_3 = scripts\engine\utility::getstructarray("pap_quest_piece", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("pap_quest_piece", "script_noteworthy");
   foreach(var_5 in var_3) {
     if(!isDefined(var_5.name)) {
       continue;
@@ -637,7 +637,7 @@ init_pap_quest() {
 
 init_boat_quest() {
   level.boat_pieces_found = 0;
-  var_0 = scripts\engine\utility::getstructarray("boat_quest_piece", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("boat_quest_piece", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(!isDefined(var_2.name)) {
       continue;
@@ -853,9 +853,9 @@ setup_rave_dust_interactions() {
   var_0 = [1, 2, 3, 4];
   for(var_1 = 0; var_1 <= var_0.size; var_1++) {
     if(var_1 == 0) {
-      var_2 = scripts\engine\utility::getstructarray("mushroom_patch", "targetname");
+      var_2 = scripts\engine\utility::getStructArray("mushroom_patch", "targetname");
     } else {
-      var_2 = scripts\engine\utility::getstructarray("mushroom_patch_" + var_1, "targetname");
+      var_2 = scripts\engine\utility::getStructArray("mushroom_patch_" + var_1, "targetname");
     }
 
     foreach(var_4 in var_2) {
@@ -940,7 +940,7 @@ use_rave_ritual_stone(var_0, var_1) {
     return;
   }
 
-  var_2 = scripts\engine\utility::get_array_of_closest(var_1.origin, scripts\engine\utility::getstructarray("ritual_stone", "script_noteworthy"), undefined, 4);
+  var_2 = scripts\engine\utility::get_array_of_closest(var_1.origin, scripts\engine\utility::getStructArray("ritual_stone", "script_noteworthy"), undefined, 4);
   var_1.has_rave_dust = undefined;
   var_1 setclientomnvar("zm_hud_inventory_2", 0);
   level thread trigger_rave_mode_ritual(var_0, var_1);
@@ -948,7 +948,7 @@ use_rave_ritual_stone(var_0, var_1) {
 
 trigger_rave_mode_ritual(var_0, var_1) {
   var_2 = gettime() + 5000;
-  var_3 = scripts\engine\utility::getclosest(var_0.origin, scripts\engine\utility::getstructarray("rave_fx", "targetname"));
+  var_3 = scripts\engine\utility::getclosest(var_0.origin, scripts\engine\utility::getStructArray("rave_fx", "targetname"));
   var_4 = (var_3.origin[0], var_3.origin[1], var_1.origin[2]);
   playFX(level._effect["ritual_stone_use"], var_4 + (0, 0, 25));
   var_5 = -25536;
@@ -1422,7 +1422,7 @@ cp_rave_wait_for_interaction_triggered(var_0) {
 }
 
 init_lair_door() {
-  level.lair_door_switch_structs = scripts\engine\utility::getstructarray("lair_secret_door", "script_noteworthy");
+  level.lair_door_switch_structs = scripts\engine\utility::getStructArray("lair_secret_door", "script_noteworthy");
   level thread init_lair_door_switches();
 }
 
@@ -1431,7 +1431,7 @@ use_lair_door(var_0, var_1) {
   var_0.pressed = 1;
   getent(var_0.script_objective, "targetname") setscriptablepartstate("light", "on");
   var_1 playlocalsound("zmb_power_switch");
-  while(var_1 scripts\cp\utility::is_valid_player() && var_1 usebuttonpressed() && distance(var_1.origin, var_0.origin) < 96 && !scripts\engine\utility::flag("survivor_released")) {
+  while(var_1 scripts\cp\utility::is_valid_player() && var_1 useButtonPressed() && distance(var_1.origin, var_0.origin) < 96 && !scripts\engine\utility::flag("survivor_released")) {
     try_to_release_survivor();
     wait(0.05);
   }
@@ -1641,7 +1641,7 @@ set_switch_pressed(var_0, var_1, var_2, var_3) {
 }
 
 enable_slasher_weapon() {
-  var_0 = scripts\engine\utility::getstructarray("iw7_slasher_zm", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("iw7_slasher_zm", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
     var_2.trigger show();
@@ -1651,7 +1651,7 @@ enable_slasher_weapon() {
 disable_slasher_weapon() {
   level endon("game_ended");
   level waittill("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("iw7_slasher_zm", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("iw7_slasher_zm", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
     var_2.trigger hide();

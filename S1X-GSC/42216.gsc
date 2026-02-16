@@ -1901,7 +1901,7 @@ write_entity(var_0, var_1) {
 write_log(var_0, var_1, var_2, var_3, var_4) {
   var_5 = "\t";
   cfxprintlnstart();
-  cfxprintln("//_createfx generated. Do not touch!!");
+  cfxprintln("");
   cfxprintln("#include common_scripts\\utility;");
   cfxprintln("#include common_scripts\\_createfx;\n");
   cfxprintln("");
@@ -2186,11 +2186,11 @@ add_button(var_0) {
     return;
   }
   if(!isDefined(level.buttonisheld[var_0])) {
-    if(level.player buttonpressed(var_0)) {
+    if(level.player buttonPressed(var_0)) {
       level.buttonisheld[var_0] = 1;
       level.buttonclick[var_0] = 1;
     }
-  } else if(!level.player buttonpressed(var_0)) {
+  } else if(!level.player buttonPressed(var_0)) {
     level.buttonisheld[var_0] = undefined;
   }
 }
@@ -2213,7 +2213,7 @@ buttonpressed_internal(var_0) {
     return 0;
   }
 
-  return level.player buttonpressed(var_0);
+  return level.player buttonPressed(var_0);
 }
 
 button_is_held(var_0, var_1) {

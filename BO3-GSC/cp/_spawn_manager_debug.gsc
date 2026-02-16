@@ -126,15 +126,15 @@ function spawn_manager_debug_spawn_manager() {
         current_spawn_manager_index = 0;
         old_spawn_manager_index = 0;
       }
-      if(level.test_player buttonpressed("")) {
+      if(level.test_player buttonPressed("")) {
         old_spawn_manager_index = current_spawn_manager_index;
-        if(level.test_player buttonpressed("")) {
+        if(level.test_player buttonPressed("")) {
           current_spawn_manager_index--;
           if(current_spawn_manager_index < 0) {
             current_spawn_manager_index = 0;
           }
         }
-        if(level.test_player buttonpressed("")) {
+        if(level.test_player buttonPressed("")) {
           current_spawn_manager_index++;
           if(current_spawn_manager_index > (level.debugactivemanagers.size - 1)) {
             current_spawn_manager_index = level.debugactivemanagers.size - 1;
@@ -269,14 +269,14 @@ function spawn_manager_debug_spawn_manager_values_dpad() {
     level.sm_spawner_count_max_hud.y = 270;
     level.sm_spawner_count_max_hud.color = (1, 1, 1);
   }
-  if(level.test_player buttonpressed("")) {
-    if(level.test_player buttonpressed("")) {
+  if(level.test_player buttonPressed("")) {
+    if(level.test_player buttonPressed("")) {
       level.current_debug_index++;
       if(level.current_debug_index > 7) {
         level.current_debug_index = 7;
       }
     }
-    if(level.test_player buttonpressed("")) {
+    if(level.test_player buttonPressed("")) {
       level.current_debug_index--;
       if(level.current_debug_index < 0) {
         level.current_debug_index = 0;
@@ -286,11 +286,11 @@ function spawn_manager_debug_spawn_manager_values_dpad() {
   set_debug_hud_colors();
   increase_value = 0;
   decrease_value = 0;
-  if(level.test_player buttonpressed("")) {
-    if(level.test_player buttonpressed("")) {
+  if(level.test_player buttonPressed("")) {
+    if(level.test_player buttonPressed("")) {
       decrease_value = 1;
     }
-    if(level.test_player buttonpressed("")) {
+    if(level.test_player buttonPressed("")) {
       increase_value = 1;
     }
   }

@@ -416,10 +416,10 @@ setup_gate_ai() {
   var_1 = maps\_utility::array_spawn_targetname("road_guys", 1);
   thread maps\_utility::array_spawn_targetname("patrol_jog_guys", 1);
   var_2 = getent("gate_spawner", "targetname");
-  var_3 = common_scripts\utility::getstructarray("jeep_anims", "targetname");
+  var_3 = common_scripts\utility::getStructArray("jeep_anims", "targetname");
   spawn_ai_for_structs(var_2, var_3, 1);
   var_2 = getent("gate_civ", "targetname");
-  var_3 = common_scripts\utility::getstructarray("jeep_anims_civ", "targetname");
+  var_3 = common_scripts\utility::getStructArray("jeep_anims_civ", "targetname");
   spawn_ai_for_structs(var_2, var_3, 1);
   common_scripts\utility::flag_set("jeep_ai_spawned");
   var_4 = getent("gate_entrance", "targetname");
@@ -434,7 +434,7 @@ setup_gate_ai() {
 
   common_scripts\utility::flag_wait("gate_clear");
   var_2 = getent("garage_spawner", "targetname");
-  var_3 = common_scripts\utility::getstructarray("after_gate", "targetname");
+  var_3 = common_scripts\utility::getStructArray("after_gate", "targetname");
   spawn_ai_for_structs(var_2, var_3, 1);
   maps\_utility::spawn_targetname("garage_standing_guy", 1);
   thread maps\_utility::delaythread(1, ::spawn_stair_runner);
@@ -650,7 +650,7 @@ setup_house() {
   }
 
   var_1 = getent("house_spawner", "targetname");
-  var_2 = common_scripts\utility::getstructarray("house_scene", "targetname");
+  var_2 = common_scripts\utility::getStructArray("house_scene", "targetname");
   spawn_ai_for_structs(var_1, var_2, 1, 1);
   var_0 = maps\_utility::get_drones_with_targetname("house_spawner");
   var_3 = ["Cpl. ", "Pvt. ", "Sgt. ", "Lt. "];
@@ -878,7 +878,7 @@ elias_logic() {
 balcony_read() {
   common_scripts\utility::flag_wait("3rd_floor_player");
   var_0 = getent("beach_scene_actor", "targetname");
-  var_1 = common_scripts\utility::getstructarray("beach_anims", "targetname");
+  var_1 = common_scripts\utility::getStructArray("beach_anims", "targetname");
   spawn_ai_for_structs(var_0, var_1, 1);
   thread beach_matv();
   wait 0.1;

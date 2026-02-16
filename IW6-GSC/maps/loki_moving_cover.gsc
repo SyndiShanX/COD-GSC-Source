@@ -362,7 +362,7 @@ wait_for_x_pressed() {
   while(!(var_0 > var_1)) {
     var_0 = 0;
 
-    while(level.player usebuttonpressed()) {
+    while(level.player useButtonPressed()) {
       if(var_0 > var_1) {
         break;
       }

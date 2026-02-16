@@ -4526,7 +4526,7 @@ function_7d2500d8() {
   }
 
   while(true) {
-    if(self fragbuttonpressed()) {
+    if(self fragButtonPressed()) {
       n_time = gettime() / 1000;
       dt = n_time - self.boss_sm_warlord_support;
 

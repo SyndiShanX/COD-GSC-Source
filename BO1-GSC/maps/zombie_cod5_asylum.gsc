@@ -276,7 +276,7 @@ init_sounds() {
   maps\_zombiemode_utility::add_sound("zmb_couch_slam", "couch_slam");
   maps\_zombiemode_utility::add_sound("door_slide_open", "door_slide_open");
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
   include_weapon("g11_lps_zm");
@@ -339,7 +339,7 @@ include_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -510,7 +510,7 @@ activate_electric_trap() {
     clientnotify("south");
   }
   clientnotify(self.target);
-  fire_points = getstructarray(self.target, "targetname");
+  fire_points = getStructArray(self.target, "targetname");
   for(i = 0; i < fire_points.size; i++) {
     wait_network_frame();
     fire_points[i] thread electric_trap_fx(self);
@@ -623,8 +623,8 @@ zombie_flame_watch() {
 spawn_point_override() {
   flag_wait("all_players_connected");
   players = get_players();
-  north_structs = getstructarray("north_spawn", "script_noteworthy");
-  south_structs = getstructarray("south_spawn", "script_noteworthy");
+  north_structs = getStructArray("north_spawn", "script_noteworthy");
+  south_structs = getStructArray("south_spawn", "script_noteworthy");
   side1 = north_structs;
   side2 = south_structs;
   if(randomint(100) > 50) {

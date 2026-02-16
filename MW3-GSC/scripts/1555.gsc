@@ -615,7 +615,7 @@ _id_3C0E(var_0) {
     if(isDefined(level._id_3BDD)) {
       return 0;
     }
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       return 0;
     }
     if(!common_scripts\utility::flag("uav_enabled")) {
@@ -1436,10 +1436,10 @@ staticeffect(var_0) {
 
 _id_3C44() {
   self endon("controlling_UAV");
-  var_0 = self attackbuttonpressed();
+  var_0 = self attackButtonPressed();
 
   for(;;) {
-    var_1 = self attackbuttonpressed();
+    var_1 = self attackButtonPressed();
 
     if(!var_0 && var_1) {
       self._id_3C2A++;

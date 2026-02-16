@@ -183,7 +183,7 @@ function do_supplydrop(maxrange = 1400) {
     }
     inuse = isDefined(crate.useent) && (isDefined(crate.useent.inuse) && crate.useent.inuse);
     if(cratedistsq <= useradiussq) {
-      if(inuse && !self usebuttonpressed()) {
+      if(inuse && !self useButtonPressed()) {
         continue;
       }
       self press_use_button();

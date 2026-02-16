@@ -542,7 +542,7 @@ function function_afb24eeb(s_unitrigger) {
   if(self laststand::player_is_in_laststand() || self zm_laststand::is_reviving_any()) {
     return false;
   }
-  if(!self usebuttonpressed()) {
+  if(!self useButtonPressed()) {
     return false;
   }
   if(!self zm_utility::is_player_looking_at(self.var_77f9de0d.e_destructible.origin, 0.4, 0)) {

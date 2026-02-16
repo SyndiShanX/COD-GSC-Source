@@ -296,7 +296,7 @@ dj_jump_spawn() {
 }
 
 bar_fight_spawn_cover_guys() {
-  foreach(s_pos in getstructarray("club_fight_cover_start", "targetname")) {
+  foreach(s_pos in getStructArray("club_fight_cover_start", "targetname")) {
     s_pos thread bar_fight_cover_spawn();
   }
 }
@@ -358,7 +358,7 @@ bar_fight_spawn_wave(str_pos, n_delay, do_cleanup) {
     do_cleanup = 1;
   }
 
-  a_mid_positions = getstructarray(str_pos, "targetname");
+  a_mid_positions = getStructArray(str_pos, "targetname");
   a_ai_living = getaiarray("axis");
 
   if(do_cleanup) {
@@ -483,7 +483,7 @@ change_club_lights(n_time_floor, n_time_exposure) {
 }
 
 club_fx() {
-  a_s_candles = getstructarray("candle_flame", "targetname");
+  a_s_candles = getStructArray("candle_flame", "targetname");
 
   foreach(s_candle in a_s_candles) {
     if(isDefined(s_candle.angles)) {
@@ -495,7 +495,7 @@ club_fx() {
     level thread play_fx("kar_candle01", s_candle.origin, s_candle.angles, undefined, 0, undefined, 1);
   }
 
-  a_s_ashtrays = getstructarray("ashtray_smoke", "targetname");
+  a_s_ashtrays = getStructArray("ashtray_smoke", "targetname");
 
   foreach(s_ashtray in a_s_ashtrays) {
     if(isDefined(s_ashtray.angles)) {
@@ -896,8 +896,8 @@ dj_killed(ai_callback) {
 }
 
 fire_at_bar() {
-  a_s_shooters = getstructarray("shooter_squib", "targetname");
-  a_s_bar_targets = getstructarray("bar_squib", "targetname");
+  a_s_shooters = getStructArray("shooter_squib", "targetname");
+  a_s_bar_targets = getStructArray("bar_squib", "targetname");
   n_timeout = gettime() + 6500;
 
   while(gettime() < n_timeout) {
@@ -1395,7 +1395,7 @@ player_whizbys_start(n_delay, n_time) {
     wait(n_delay);
   }
 
-  foreach(s_start in getstructarray("player_whizbys1", "targetname")) {
+  foreach(s_start in getStructArray("player_whizbys1", "targetname")) {
     s_start thread player_whizby_think(n_time);
   }
 }
@@ -1424,7 +1424,7 @@ player_dynents_start(str_structs, n_delay, n_time) {
     level.player.club_dynents[3] = "p6_bar_al_jinan_napkin_single";
   }
 
-  foreach(s_start in getstructarray(str_structs, "targetname")) {
+  foreach(s_start in getStructArray(str_structs, "targetname")) {
     s_start thread player_dynents_think(n_time);
   }
 }
@@ -1451,7 +1451,7 @@ player_physpulses_start(str_struct, n_delay) {
     wait(n_delay);
   }
 
-  foreach(s_struct in getstructarray(str_struct, "targetname")) {
+  foreach(s_struct in getStructArray(str_struct, "targetname")) {
     s_struct thread player_physents_think();
   }
 }

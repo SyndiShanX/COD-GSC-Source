@@ -56,7 +56,7 @@ toggle_objective_clip(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     foreach(var_8 in var_0) {
       if(var_1) {
-        var_9 = scripts\engine\utility::getstructarray(var_8._id_0481, "script_noteworthy");
+        var_9 = scripts\engine\utility::getStructArray(var_8._id_0481, "script_noteworthy");
         var_10 = [];
 
         if(isDefined(var_8._id_3BE8["blocker"])) {
@@ -165,8 +165,8 @@ should_spawn_vlo_barriers() {
 }
 
 get_vlo_barrier_array() {
-  var_0 = scripts\engine\utility::getstructarray("vlo_objective_barrier", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("vlo_objective_barrier_rune", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("vlo_objective_barrier", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("vlo_objective_barrier_rune", "targetname");
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
   return var_2;
 }

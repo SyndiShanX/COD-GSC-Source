@@ -222,7 +222,7 @@ updateburgertowndoorcosts() {
   var_0 = "mp/dlc2CostTable.csv";
   var_1 = 0;
   var_2 = 1;
-  var_3 = common_scripts\utility::getstructarray("door", "targetname");
+  var_3 = common_scripts\utility::getStructArray("door", "targetname");
   wait 5;
 
   foreach(var_5 in var_3) {
@@ -262,7 +262,7 @@ initextractions() {
 
 warbirdintro() {
   wait 2;
-  var_0 = common_scripts\utility::getstructarray("warbird_intro", "targetname");
+  var_0 = common_scripts\utility::getStructArray("warbird_intro", "targetname");
   var_1 = common_scripts\utility::random(var_0);
   var_2 = spawnhelicopter(level.players[0], var_1.origin, var_1.angles, "warbird_player_mp", "vehicle_xh9_warbird_low_cloaked_in_out_mp_cloak");
   var_2 vehicle_turnengineoff();
@@ -763,7 +763,7 @@ initcharactermodels() {
 
 initgranulardoors(var_0, var_1, var_2) {
   var_3 = [];
-  var_4 = common_scripts\utility::getstructarray("door", "targetname");
+  var_4 = common_scripts\utility::getStructArray("door", "targetname");
 
   if(!isDefined(var_1)) {
     var_1 = 0.5;
@@ -924,7 +924,7 @@ inittraps() {
 
 trap_console_audio(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
-  var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0.target, "targetname");
   var_3 = common_scripts\utility::array_combine(var_1, var_2);
 
   foreach(var_5 in var_3) {
@@ -1473,7 +1473,7 @@ toxicgaszonefx(var_0) {
 }
 
 toxicgaszonefillfx(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0 + "_ToxicFillGas", "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0 + "_ToxicFillGas", "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = spawn("script_model", var_3.origin);
@@ -1885,7 +1885,7 @@ exploittriggermonitor() {
 
           if(var_4 < 100) {
             if(self.script_noteworthy == "exploitTriggerUseStructs") {
-              var_5 = common_scripts\utility::getstructarray(self.target, "targetname");
+              var_5 = common_scripts\utility::getStructArray(self.target, "targetname");
               var_6 = common_scripts\utility::getclosest(var_0.origin, var_5);
 
               if(isDefined(var_6)) {
@@ -1942,7 +1942,7 @@ zombiezonedebug(var_0) {
 
   foreach(var_3 in var_1) {
     if(var_3.targetname != "burger_tower_vol") {
-      var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
+      var_4 = common_scripts\utility::getStructArray(var_3.target, "targetname");
       var_3 thread zombiezonedebugplayerlocation(var_4);
     }
   }

@@ -2292,7 +2292,7 @@ function vehicle_spawner_tool() {
       while(getdvarint("") > 0) {
         origin = player.origin + (anglesToForward(player getplayerangles()) * 270);
         origin = origin + vectorscale((0, 0, 1), 40);
-        if(player usebuttonpressed()) {
+        if(player useButtonPressed()) {
           dynamic_spawn_dummy_model hide();
           vehicle = spawnvehicle(types[type_index], origin, player.angles, "");
           vehicle makevehicleusable();
@@ -2302,7 +2302,7 @@ function vehicle_spawner_tool() {
           }
           wait(0.3);
         }
-        if(player buttonpressed("")) {
+        if(player buttonPressed("")) {
           dynamic_spawn_dummy_model hide();
           type_index++;
           if(type_index >= types.size) {
@@ -2310,7 +2310,7 @@ function vehicle_spawner_tool() {
           }
           wait(0.3);
         }
-        if(player buttonpressed("")) {
+        if(player buttonPressed("")) {
           dynamic_spawn_dummy_model hide();
           type_index--;
           if(type_index < 0) {

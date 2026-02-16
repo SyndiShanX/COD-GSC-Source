@@ -424,13 +424,13 @@ _id_44B6(var_0, var_1) {
 }
 
 _id_6865() {
-  var_0 = scripts\engine\utility::getstructarray("solo_featured", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("solo_featured", "script_noteworthy");
 
   if(var_0.size > 0) {
     return var_0[0];
   }
 
-  var_1 = scripts\engine\utility::array_combine(scripts\engine\utility::getstructarray("solo_featured", "script_noteworthy"), scripts\engine\utility::getstructarray("group_featured", "script_noteworthy"));
+  var_1 = scripts\engine\utility::array_combine(scripts\engine\utility::getStructArray("solo_featured", "script_noteworthy"), scripts\engine\utility::getStructArray("group_featured", "script_noteworthy"));
 
   foreach(var_3 in var_1) {
     if(scripts\engine\utility::is_equal(var_3._id_CD99, "characters_3_middle")) {

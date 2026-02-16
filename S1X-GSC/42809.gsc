@@ -1319,7 +1319,7 @@ watchforpickup(var_0) {
     if(self.owner istouching(var_0) && var_2) {
       var_3 = 0;
 
-      while(self.owner usebuttonpressed()) {
+      while(self.owner useButtonPressed()) {
         if(!maps\mp\_utility::isreallyalive(self.owner)) {
           break;
         }
@@ -1328,7 +1328,7 @@ watchforpickup(var_0) {
           break;
         }
 
-        if(self.owner fragbuttonpressed() || self.owner secondaryoffhandbuttonpressed() || isDefined(self.owner.throwinggrenade)) {
+        if(self.owner fragButtonPressed() || self.owner secondaryoffhandbuttonPressed() || isDefined(self.owner.throwinggrenade)) {
           break;
         }
 

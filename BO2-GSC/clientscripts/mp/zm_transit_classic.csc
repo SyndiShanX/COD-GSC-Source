@@ -47,7 +47,7 @@ sidequest_complete_watch() {
 
 sidequest_complete_fx(story, skiprunners) {
   level endon("sq_kfx");
-  electric_structs = getstructarray("sq_common_pole_fx", "targetname");
+  electric_structs = getStructArray("sq_common_pole_fx", "targetname");
   electric_struct = getstruct("sq_common_tower_fx", "targetname");
   players = getlocalplayers();
 
@@ -190,7 +190,7 @@ get_screecher_zone(str) {
       break;
   }
 
-  structs = getstructarray("screecher_escape", "targetname");
+  structs = getStructArray("screecher_escape", "targetname");
 
   for(x = 0; x < structs.size; x++) {
     if(isDefined(structs[x].script_noteworthy) && structs[x].script_noteworthy == key)

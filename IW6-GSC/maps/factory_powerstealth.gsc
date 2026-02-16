@@ -1622,7 +1622,7 @@ check_for_melee_stab(var_0) {
     if(var_3 < 45 && var_2 < var_1) {
       ready_to_stab();
 
-      if(level.player meleebuttonpressed() && isalive(self) && !level.player ismeleeing() && !level.player isthrowinggrenade()) {
+      if(level.player meleeButtonPressed() && isalive(self) && !level.player ismeleeing() && !level.player isthrowinggrenade()) {
         thread throat_stab_me(var_0);
         return;
       }

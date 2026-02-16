@@ -289,7 +289,7 @@ is_within_volume(min_x, max_x, min_y, max_y, min_z, max_z) {
 init_sounds() {
   maps\_zombiemode_utility::add_sound("break_stone", "break_stone");
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
   include_weapon("g11_lps_zm");
@@ -350,7 +350,7 @@ include_weapons() {
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

@@ -1398,7 +1398,7 @@ _id_234F() {
   var_0 = gettime();
 
   for(;;) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       var_0 = gettime();
     }
     level._id_2350 = gettime() - var_0;
@@ -1602,7 +1602,7 @@ _id_235F(var_0) {
     return 0;
   }
   for(var_2 = 1; var_2 < var_1["count"] + 1; var_2++) {
-    if(self buttonpressed(var_1["key" + var_2])) {
+    if(self buttonPressed(var_1["key" + var_2])) {
       return 1;
     }
   }

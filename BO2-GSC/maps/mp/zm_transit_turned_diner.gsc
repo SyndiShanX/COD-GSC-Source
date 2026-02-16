@@ -42,7 +42,7 @@ main() {
 }
 
 getspawnpoints() {
-  level._turned_zombie_respawnpoints = getstructarray("initial_spawn_points", "targetname");
+  level._turned_zombie_respawnpoints = getStructArray("initial_spawn_points", "targetname");
   level._turned_powerup_spawnpoints = [];
   level._turned_powerup_spawnpoints[0] = spawnStruct();
   level._turned_powerup_spawnpoints[0].origin = (-6072, -7808, 8);

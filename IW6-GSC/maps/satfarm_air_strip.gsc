@@ -829,7 +829,7 @@ sat_dish_a10_crash_waits(var_0, var_1) {
 }
 
 setup_windsocks() {
-  var_0 = common_scripts\utility::getstructarray("saf_airfield_windsock_animated", "targetname");
+  var_0 = common_scripts\utility::getStructArray("saf_airfield_windsock_animated", "targetname");
   var_1 = 0;
 
   foreach(var_3 in var_0) {

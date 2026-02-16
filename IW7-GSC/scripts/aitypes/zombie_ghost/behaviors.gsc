@@ -30,7 +30,7 @@ ghostlaunched(var_0) {
 
 ghostentangled(var_0) {
   if(getghostnavmode() == "entangled") {
-    if(isDefined(self.player_entangled_by) && !scripts\cp\cp_laststand::player_in_laststand(self.player_entangled_by) && self.player_entangled_by attackbuttonpressed()) {
+    if(isDefined(self.player_entangled_by) && !scripts\cp\cp_laststand::player_in_laststand(self.player_entangled_by) && self.player_entangled_by attackButtonPressed()) {
       var_1 = self.player_entangled_by;
       var_2 = anglesToForward(self.player_entangled_by getplayerangles());
       var_3 = var_1.origin + (0, 0, 5);
@@ -373,7 +373,7 @@ get_exp_vfx_color(var_0) {
 }
 
 ghostshouldexplode(var_0) {
-  if(isDefined(var_0.player_entangled_by) && var_0.player_entangled_by secondaryoffhandbuttonpressed()) {
+  if(isDefined(var_0.player_entangled_by) && var_0.player_entangled_by secondaryoffhandbuttonPressed()) {
     return 1;
   }
 

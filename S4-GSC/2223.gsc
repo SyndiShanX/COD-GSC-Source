@@ -297,7 +297,7 @@ _id_7212(var_0, var_1, var_2) {
   var_4 = 1000000;
   var_5 = [];
   var_6 = _func_00B3("seek_patrol", "targetname");
-  var_7 = scripts\engine\utility::getstructarray("seek_patrol", "targetname");
+  var_7 = scripts\engine\utility::getStructArray("seek_patrol", "targetname");
   var_6 = scripts\engine\utility::array_combine(var_6, var_7);
   var_8 = 0;
 

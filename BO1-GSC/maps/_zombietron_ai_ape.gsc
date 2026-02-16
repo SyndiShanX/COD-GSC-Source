@@ -564,7 +564,7 @@ ape_taunt_player() {
     if(RandomInt(100) < percentMod) {
       lastRound = level.round_number;
       runToTarget = level.arenas[level.current_arena] + "_pickup";
-      run_locations = GetStructArray(runToTarget, "targetname");
+      run_locations = getStructArray(runToTarget, "targetname");
       players = GetPlayers();
       if(players.size > 1) {
         player = players[RandomInt(players.size)];

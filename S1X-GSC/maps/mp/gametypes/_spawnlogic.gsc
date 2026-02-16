@@ -49,8 +49,8 @@ MonitorBadSpawnReporting() {
         continue;
       }
 
-      if((player ButtonPressed("BUTTON_BACK")) &&
-        (player AdsButtonPressed()) &&
+      if((player buttonPressed("BUTTON_BACK")) &&
+        (player adsButtonPressed()) &&
         !isDefined(player.recon_notice_TO)) {
         player.recon_notice_TO = 30;
         ReconSpatialEvent(player.origin, "script_badspawn_notice: gameTime %d, player_name %s", GetTime(), player.name);

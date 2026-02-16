@@ -302,7 +302,7 @@ heli_crash_box_hit_2(var_0) {
   }
 
   wait 2;
-  var_4 = common_scripts\utility::getstructarray("weapon_spawn", "targetname");
+  var_4 = common_scripts\utility::getStructArray("weapon_spawn", "targetname");
 
   for(var_3 = 0; var_3 < 4; var_3++) {
     foreach(var_6 in var_4) {

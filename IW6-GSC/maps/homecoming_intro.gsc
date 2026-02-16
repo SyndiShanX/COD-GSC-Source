@@ -17,7 +17,7 @@ intro_spawn_functions() {
 intro_sequence_street() {
   level.player setclienttriggeraudiozone("homecoming_black", 0.1);
   thread intro_scripted_sequence();
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("intro_bunker_turret", "targetname"), ::intro_bunker_turrets);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("intro_bunker_turret", "targetname"), ::intro_bunker_turrets);
   maps\_vehicle::spawn_vehicles_from_targetname_and_drive("intro_flyovers");
   thread intro_flavorburst("intro_flavorburst_spots");
   thread intro_animated_scenes();
@@ -38,7 +38,7 @@ intro_scripted_sequence() {
   thread intro_rangers_scene();
   thread intro_flyby_a10();
   thread intro_house_blocker_truck();
-  var_0 = common_scripts\utility::getstructarray("intro_bunker_turret", "targetname");
+  var_0 = common_scripts\utility::getStructArray("intro_bunker_turret", "targetname");
   var_1 = undefined;
   var_2 = undefined;
 
@@ -133,7 +133,7 @@ intro_player_nh90() {
   var_1 setanimrestart(%nh90_landing_gear_down, 1, 1, 10);
   level.intro_player_nh90 = var_1;
   level.dog = maps\homecoming_util::dog_spawn();
-  var_2 = common_scripts\utility::getstructarray("intro_nh90_hero_spots", "targetname");
+  var_2 = common_scripts\utility::getStructArray("intro_nh90_hero_spots", "targetname");
 
   foreach(var_4 in var_2) {
     var_5 = common_scripts\utility::spawn_tag_origin();
@@ -527,7 +527,7 @@ intro_catwalk_shooters() {
 }
 
 intro_animated_scenes() {
-  var_0 = common_scripts\utility::getstructarray("intro_animated_scene", "targetname");
+  var_0 = common_scripts\utility::getStructArray("intro_animated_scene", "targetname");
   var_1 = getent("intro_anim_drone", "targetname");
   var_2 = getent("intro_anim_ai", "targetname");
 
@@ -871,7 +871,7 @@ intro_bunker_waver_sound() {
 intro_fake_mortars() {
   level endon("TRIGFLAG_player_up_bunker_stairs");
   common_scripts\utility::flag_wait("FLAG_player_out_of_nh90");
-  var_0 = common_scripts\utility::getstructarray("intro_fake_mortars", "targetname");
+  var_0 = common_scripts\utility::getStructArray("intro_fake_mortars", "targetname");
   var_1 = getent("intro_fake_mortars_trigger", "targetname");
   var_2 = var_0;
   var_3 = 0;
@@ -924,7 +924,7 @@ intro_flavorburst(var_0) {
   level endon("stop_intro_flavorburst");
   maps\_utility::battlechatter_off("allies");
   maps\_utility::flavorbursts_off("allies");
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   for(;;) {
     var_2 = common_scripts\utility::getclosest(level.player.origin, var_1, 800);
@@ -1058,7 +1058,7 @@ intro_runners() {
   if(var_0 == "death") {
     return;
   }
-  var_1 = common_scripts\utility::getstructarray("intro_street_runners_hesco_goals", "script_noteworthy");
+  var_1 = common_scripts\utility::getStructArray("intro_street_runners_hesco_goals", "script_noteworthy");
 
   if(common_scripts\utility::flag("TRIGFLAG_barbed_wire_close")) {
     self notify("stop_path");

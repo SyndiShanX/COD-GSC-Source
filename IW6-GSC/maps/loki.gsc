@@ -90,12 +90,12 @@ space_sprinting_adjustments() {
     while(self issprinting())
       common_scripts\utility::waitframe();
 
-    if(!self adsbuttonpressed()) {
+    if(!self adsButtonPressed()) {
       maps\loki_util::jkuprint("lerp out no ads");
       continue;
     }
 
-    while(self adsbuttonpressed())
+    while(self adsButtonPressed())
       common_scripts\utility::waitframe();
 
     maps\loki_util::jkuprint("fov post ads");

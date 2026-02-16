@@ -103,7 +103,7 @@ yemen_speech_setup() {
 
 speech_clean_up() {
   trigger_wait("speech_clean_up");
-  a_drone_structs = getstructarray("speech_drone_struct", "script_noteworthy");
+  a_drone_structs = getStructArray("speech_drone_struct", "script_noteworthy");
   array_delete(a_drone_structs, 1);
 
   if(!is_after_skipto("speech")) {
@@ -281,11 +281,11 @@ menendez_speech() {
   set_objective(level.obj_speech, undefined, "done");
   wait_network_frame();
   maps\createart\yemen_art::hallway_exposure();
-  a_speech_structs = getstructarray("speech_crowd_center", "targetname");
+  a_speech_structs = getStructArray("speech_crowd_center", "targetname");
   array_delete(a_speech_structs, 1);
-  a_speech_structs = getstructarray("speech_crowd_close", "targetname");
+  a_speech_structs = getStructArray("speech_crowd_close", "targetname");
   array_delete(a_speech_structs, 1);
-  a_speech_structs = getstructarray("speech_court_ai_spot", "targetname");
+  a_speech_structs = getStructArray("speech_court_ai_spot", "targetname");
   array_delete(a_speech_structs, 1);
   level.menendez custom_ai_weapon_loadout("judge_sp");
   maps\createart\yemen_art::large_crowd();

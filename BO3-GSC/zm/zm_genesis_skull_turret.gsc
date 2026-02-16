@@ -340,7 +340,7 @@ function fire_beam() {
     do {
       wait(0.05);
     }
-    while(zm_utility::is_player_valid(e_player) && e_player attackbuttonpressed() && e_player === self getvehicleowner());
+    while(zm_utility::is_player_valid(e_player) && e_player attackButtonPressed() && e_player === self getvehicleowner());
     self clientfield::set("skull_turret_beam_fire", 0);
     self function_d54746f0();
     self notify("stop_damage");
@@ -426,7 +426,7 @@ function function_c4a9de44() {
     if(isDefined(w_weapon) && isDefined(e_player)) {
       n_start_time = gettime();
       n_total_time = 0;
-      while(e_player attackbuttonpressed() && n_total_time < 0.15 && e_player function_1d6baeec(self)) {
+      while(e_player attackButtonPressed() && n_total_time < 0.15 && e_player function_1d6baeec(self)) {
         n_current_time = gettime();
         n_total_time = (n_current_time - n_start_time) / 1000;
         util::wait_network_frame();

@@ -56,7 +56,7 @@ put this in your GSC:
 maps\_zpu_antiair::main( "vehicle_zpu4" );
 
 and these lines in your CSV:
-include,vehicle_zpu4_zpu_antiair
+#include,vehicle_zpu4_zpu_antiair
 
 defaultmdl="vehicle_zpu4"default:"vehicletype" "zpu_antiair"*/
 
@@ -66,7 +66,7 @@ put this in your GSC:
 maps\_zpu_antiair::main( "vehicle_zpu4_low" );
 
 and these lines in your CSV:
-include,vehicle_zpu4_low_zpu_antiair
+#include,vehicle_zpu4_low_zpu_antiair
 
 defaultmdl="vehicle_zpu4_low"default:"vehicletype" "zpu_antiair"
 */

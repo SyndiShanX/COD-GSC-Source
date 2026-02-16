@@ -480,7 +480,7 @@ use_button_stopped_notify(self_notify_1, self_notify_2) {
   self endon("stop_usebutton_watcher");
 
   wait(0.05);
-  while(self UseButtonPressed()) {
+  while(self useButtonPressed()) {
     wait(0.05);
   }
   self notify("use_button_no_longer_pressed");

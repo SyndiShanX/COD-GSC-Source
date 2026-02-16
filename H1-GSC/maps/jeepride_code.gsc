@@ -890,7 +890,7 @@ can_cannon() {
   precachemodel("com_trashcan_metal");
 
   for(;;) {
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       fire_can();
 
     wait 0.05;
@@ -1855,7 +1855,7 @@ delaythread_loc(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 twobuttonspressed(var_0, var_1) {
-  return level.player buttonpressed(var_0) && level.player buttonpressed(var_1);
+  return level.player buttonPressed(var_0) && level.player buttonPressed(var_1);
 }
 
 jeepride_start_dumphandle() {
@@ -2310,7 +2310,7 @@ setup_throwchain_dummy_path(var_0) {
     var_1++;
 
     if(isDefined(var_0.target)) {
-      var_0 = common_scripts\utility::getstructarray(var_0.target, "targetname")[0];
+      var_0 = common_scripts\utility::getStructArray(var_0.target, "targetname")[0];
       continue;
     }
 
@@ -2342,7 +2342,7 @@ setup_throwchain(var_0) {
     var_1++;
 
     if(isDefined(var_0.target)) {
-      var_0 = common_scripts\utility::getstructarray(var_0.target, "targetname")[0];
+      var_0 = common_scripts\utility::getStructArray(var_0.target, "targetname")[0];
       continue;
     }
 

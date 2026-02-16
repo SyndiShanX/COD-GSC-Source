@@ -352,19 +352,19 @@ display_skiptos() {
     }
 
     if(!up_pressed) {
-      if(get_players()[0] buttonpressed("UPARROW") || get_players()[0] buttonpressed("DPAD_UP") || get_players()[0] buttonpressed("APAD_UP")) {
+      if(get_players()[0] buttonPressed("UPARROW") || get_players()[0] buttonPressed("DPAD_UP") || get_players()[0] buttonPressed("APAD_UP")) {
         up_pressed = 1;
         selected--;
       }
-    } else if(!get_players()[0] buttonpressed("UPARROW") && !get_players()[0] buttonpressed("DPAD_UP") && !get_players()[0] buttonpressed("APAD_UP"))
+    } else if(!get_players()[0] buttonPressed("UPARROW") && !get_players()[0] buttonPressed("DPAD_UP") && !get_players()[0] buttonPressed("APAD_UP"))
       up_pressed = 0;
 
     if(!down_pressed) {
-      if(get_players()[0] buttonpressed("DOWNARROW") || get_players()[0] buttonpressed("DPAD_DOWN") || get_players()[0] buttonpressed("APAD_DOWN")) {
+      if(get_players()[0] buttonPressed("DOWNARROW") || get_players()[0] buttonPressed("DPAD_DOWN") || get_players()[0] buttonPressed("APAD_DOWN")) {
         down_pressed = 1;
         selected++;
       }
-    } else if(!get_players()[0] buttonpressed("DOWNARROW") && !get_players()[0] buttonpressed("DPAD_DOWN") && !get_players()[0] buttonpressed("APAD_DOWN"))
+    } else if(!get_players()[0] buttonPressed("DOWNARROW") && !get_players()[0] buttonPressed("DPAD_DOWN") && !get_players()[0] buttonPressed("APAD_DOWN"))
       down_pressed = 0;
 
     if(selected < 0) {
@@ -375,12 +375,12 @@ display_skiptos() {
       selected = 0;
     }
 
-    if(get_players()[0] buttonpressed("BUTTON_B")) {
+    if(get_players()[0] buttonPressed("BUTTON_B")) {
       skipto_display_cleanup(elems, title);
       break;
     }
 
-    if(get_players()[0] buttonpressed("kp_enter") || get_players()[0] buttonpressed("BUTTON_A") || get_players()[0] buttonpressed("enter")) {
+    if(get_players()[0] buttonPressed("kp_enter") || get_players()[0] buttonPressed("BUTTON_A") || get_players()[0] buttonPressed("enter")) {
       if(names[selected] == "cancel") {
         skipto_display_cleanup(elems, title);
         break;

@@ -6570,7 +6570,7 @@ function_a2147cf() {
 
 function_9bd33cca() {
   w_current = self getcurrentweapon();
-  return zm_utility::is_player_valid(self) && self attackbuttonpressed() && is_wonder_weapon(w_current, #"air", 0) && self.chargeshotlevel === 2 && self getweaponammoclip(w_current);
+  return zm_utility::is_player_valid(self) && self attackButtonPressed() && is_wonder_weapon(w_current, #"air", 0) && self.chargeshotlevel === 2 && self getweaponammoclip(w_current);
 }
 
 ignite_ballista_setup(b_skipped) {

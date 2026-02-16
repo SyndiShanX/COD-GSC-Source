@@ -82,7 +82,7 @@ function function_e6cfa209() {
   while(true) {
     if(self util::ads_button_held()) {
       if(self getcurrentweapon() !== level.var_c003f5b) {
-        while(self adsbuttonpressed()) {
+        while(self adsButtonPressed()) {
           wait(0.05);
         }
       } else if(self getammocount(level.var_c003f5b)) {
@@ -420,7 +420,7 @@ function function_da0bbc71() {
   self endon("disconnect");
   wait(3.75);
   while(true) {
-    if(self meleebuttonpressed() && self sprintbuttonpressed()) {
+    if(self meleeButtonPressed() && self sprintbuttonPressed()) {
       if(self zm_utility::in_revive_trigger()) {
         wait(0.1);
         continue;

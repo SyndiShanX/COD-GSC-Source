@@ -150,7 +150,7 @@ function watch_for_code(code) {
 function button_not_pressed(button, time) {
   endtime = gettime() + (time * 1000);
   while(gettime() < endtime) {
-    if(!self buttonpressed(button)) {
+    if(!self buttonPressed(button)) {
       return true;
     }
     wait(0.01);
@@ -161,7 +161,7 @@ function button_not_pressed(button, time) {
 function button_pressed(button, time) {
   endtime = gettime() + (time * 1000);
   while(gettime() < endtime) {
-    if(self buttonpressed(button)) {
+    if(self buttonPressed(button)) {
       return true;
     }
     wait(0.01);

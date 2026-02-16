@@ -133,7 +133,7 @@ player_turret_shoot(var_0) {
   var_0 endon("stop_use_turret");
 
   for(;;) {
-    while(!self attackbuttonpressed())
+    while(!self attackButtonPressed())
       wait 0.05;
 
     var_0 shootturret();

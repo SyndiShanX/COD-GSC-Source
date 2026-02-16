@@ -697,7 +697,7 @@ init_elevator_perks() {
   random_perk_structs = [];
   revive_perk_struct = getstruct("force_quick_revive", "targetname");
   revive_perk_struct = getstruct(revive_perk_struct.target, "targetname");
-  perk_structs = getstructarray("zm_random_machine", "script_noteworthy");
+  perk_structs = getStructArray("zm_random_machine", "script_noteworthy");
 
   for(i = 0; i < perk_structs.size; i++) {
     random_perk_structs[i] = getstruct(perk_structs[i].target, "targetname");
@@ -929,8 +929,8 @@ elevator_sparks_fx(elevator) {
 
 faller_location_logic() {
   wait 1;
-  faller_spawn_points = getstructarray("faller_location", "script_noteworthy");
-  leaper_spawn_points = getstructarray("leaper_location", "script_noteworthy");
+  faller_spawn_points = getStructArray("faller_location", "script_noteworthy");
+  leaper_spawn_points = getStructArray("leaper_location", "script_noteworthy");
   spawn_points = arraycombine(faller_spawn_points, leaper_spawn_points, 1, 0);
   dist_check = 16384;
   elevator_names = getarraykeys(level.elevators);

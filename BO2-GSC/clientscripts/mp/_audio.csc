@@ -112,7 +112,7 @@ soundrandom_thread(localclientnum, randsound) {
 }
 
 startsoundrandoms(localclientnum) {
-  randoms = getstructarray("random", "script_label");
+  randoms = getStructArray("random", "script_label");
 
   if(isDefined(randoms) && randoms.size > 0) {
     nscriptthreadedrandoms = 0;
@@ -202,7 +202,7 @@ soundlinethink() {
 }
 
 startsoundloops() {
-  loopers = getstructarray("looper", "script_label");
+  loopers = getStructArray("looper", "script_label");
 
   if(isDefined(loopers) && loopers.size > 0) {
     delay = 0;
@@ -224,7 +224,7 @@ startsoundloops() {
 }
 
 startlineemitters() {
-  lineemitters = getstructarray("line_emitter", "script_label");
+  lineemitters = getStructArray("line_emitter", "script_label");
 
   if(isDefined(lineemitters) && lineemitters.size > 0) {
     delay = 0;

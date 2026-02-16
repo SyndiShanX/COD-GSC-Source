@@ -1808,8 +1808,8 @@ bomber_crash_vo() {
 ambient_high_bombers() {
   level endon("pacing_vignette_started");
 
-  origs = getstructarray("orig_ambient_high_bomber", "targetname");
-  origs_2 = getstructarray("orig_ambient_high_bomber_2", "targetname");
+  origs = getStructArray("orig_ambient_high_bomber", "targetname");
+  origs_2 = getStructArray("orig_ambient_high_bomber_2", "targetname");
 
   just_had_four_bombers = false;
 

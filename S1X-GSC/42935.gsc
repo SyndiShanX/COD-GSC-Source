@@ -926,7 +926,7 @@ waitplayerstuckoncarepackagereturn(var_0) {
   var_2 = var_0.origin;
   var_3 = gettime();
 
-  while(isDefined(var_0) && maps\mp\_utility::isreallyalive(var_0) && !var_0 isonground() && var_2 == var_0.origin && var_0 usebuttonpressed()) {
+  while(isDefined(var_0) && maps\mp\_utility::isreallyalive(var_0) && !var_0 isonground() && var_2 == var_0.origin && var_0 useButtonPressed()) {
     var_4 = gettime() - var_3;
 
     if(var_4 >= var_1) {
@@ -1243,7 +1243,7 @@ ishordelaststand(var_0) {
 useholdthinkloop(var_0) {
   var_0 endon("stop_useHoldThinkLoop");
 
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && !ishordelaststand(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && !ishordelaststand(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
     if(isDefined(self.objectivescaler)) {
@@ -1294,7 +1294,7 @@ crateownerdoubletapthink() {
 
   while(!level.gameended && isDefined(self)) {
     if(maps\mp\_utility::isreallyalive(self.owner) && distancesquared(self.origin, self.owner.origin) < 10000) {
-      if(self.owner usebuttonpressed()) {
+      if(self.owner useButtonPressed()) {
         self.packageholdtimer++;
       } else if(self.packageholdtimer > 0) {
         if(self.packageholdtimer < 5) {

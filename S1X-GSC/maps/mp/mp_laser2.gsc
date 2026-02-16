@@ -122,9 +122,7 @@ set_lighting_values() {
   }
 }
 
-set_umbra_values()
-
-{
+set_umbra_values() {
   setDvar("r_umbraAccurateOcclusionThreshold", 256);
 }
 

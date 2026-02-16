@@ -111,7 +111,7 @@ event1_lingering_smoke() {
 
   println("*** Client : Lingering smoke");
 
-  fxSpots = GetStructArray("struct_building_collapse_lingering_smoke", "targetname");
+  fxSpots = getStructArray("struct_building_collapse_lingering_smoke", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Couldn't find the lingering smoke spots!");
 
   lingeringSmokeFX = level._effect["battle_smoke_heavy"];
@@ -221,7 +221,7 @@ ambient_fakefire_init() {
 event1_fakefire_starter() {
   level waittill("e1fs");
 
-  firePoints = GetStructArray("struct_e1_fakefire", "targetname");
+  firePoints = getStructArray("struct_e1_fakefire", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
 
   array_thread(firePoints, ::ambient_fakefire, "subway_gate_closed", false);
@@ -230,12 +230,12 @@ event1_fakefire_starter() {
 street_fakefire_starter() {
   level waittill("sfs");
 
-  firePoints = GetStructArray("struct_street_fakefire", "targetname");
+  firePoints = getStructArray("struct_street_fakefire", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
   array_thread(firePoints, ::ambient_fakefire, "bcf", true);
 
   firePoints = [];
-  firePoints = GetStructArray("struct_street_building_fakefire", "targetname");
+  firePoints = getStructArray("struct_street_building_fakefire", "targetname");
   ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
   array_thread(firePoints, ::ambient_fakefire, "btf", true);
 }
@@ -487,7 +487,7 @@ ambient_cloudburst_fx(endonString) {
 }
 
 event1_cloudbursts() {
-  fxSpots = GetStructArray("origin_e1_ambient_cloudburst", "targetname");
+  fxSpots = getStructArray("origin_e1_ambient_cloudburst", "targetname");
   ASSERTEX(isDefined(fxSpots) && fxSpots.size > 0, "Can't find ambient cloudburst fxSpots.");
 
   for(i = 0; i < fxSpots.size; i++) {

@@ -647,7 +647,7 @@ _id_448D() {
 _id_8291() {
   level endon("game_ended");
   scripts\engine\utility::_id_5C24("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("spawner_seed", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("spawner_seed", "targetname");
 
   foreach(var_2 in var_0) {
     var_2._id_E2DA = scripts\engine\utility::_id_6369(var_2.origin, level._id_1479, undefined, 50);

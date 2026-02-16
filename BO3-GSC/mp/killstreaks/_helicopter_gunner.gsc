@@ -373,7 +373,7 @@ function watchplayerexitrequestthread(player) {
   owner = mothership.ownerentnum == player.entnum;
   while(true) {
     timeused = 0;
-    while(player usebuttonpressed()) {
+    while(player useButtonPressed()) {
       timeused = timeused + 0.05;
       if(timeused > 0.25) {
         mothership killstreaks::play_pilot_dialog_on_owner("remoteOperatorRemoved", "helicopter_gunner", level.vtol.killstreak_id);
@@ -789,7 +789,7 @@ function watchvisionswitchthread() {
   inverted = 0;
   player clientfield::set_to_player("toggle_flir_postfx", 2);
   while(true) {
-    if(player jumpbuttonpressed()) {
+    if(player jumpbuttonPressed()) {
       if(inverted) {
         player clientfield::set_to_player("toggle_flir_postfx", 2);
         player playsoundtoplayer("mpl_cgunner_flir_off", player);
@@ -798,7 +798,7 @@ function watchvisionswitchthread() {
         player playsoundtoplayer("mpl_cgunner_flir_on", player);
       }
       inverted = !inverted;
-      while(player jumpbuttonpressed()) {
+      while(player jumpbuttonPressed()) {
         wait(0.05);
       }
     }
@@ -916,7 +916,7 @@ function watchlocationchangethread(destnodes) {
   helicopter waittill("near_goal");
   helicopter waittill("goal");
   while(true) {
-    if(self secondaryoffhandbuttonpressed()) {
+    if(self secondaryoffhandbuttonPressed()) {
       player.moves++;
       player thread setplayermovedrecentlythread();
       node = self updateareanodes(destnodes, 1);
@@ -935,7 +935,7 @@ function watchlocationchangethread(destnodes) {
       helicopter setvehgoalpos(targetnode.origin + (0, 0, 2000), 1);
       helicopter setgoalyaw(targetnode.angles[1] + 0);
       helicopter waittill("goal");
-      while(self secondaryoffhandbuttonpressed()) {
+      while(self secondaryoffhandbuttonPressed()) {
         wait(0.05);
       }
     }

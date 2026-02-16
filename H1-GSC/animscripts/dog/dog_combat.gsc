@@ -606,7 +606,7 @@ attackteleportthread(var_0) {
 }
 
 player_attacked() {
-  return isalive(self.meleeingplayer) && self.meleeingplayer meleebuttonpressed();
+  return isalive(self.meleeingplayer) && self.meleeingplayer meleeButtonPressed();
 }
 
 destroy_dog_hint() {

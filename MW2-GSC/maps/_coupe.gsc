@@ -64,7 +64,7 @@ put this in your GSC:
 maps\_coupe::main( "vehicle_coupe_gray_destructible" );
 
 and these lines in your CSV:
-include,vehicle_coupe_gray
+#include,vehicle_coupe_gray
 sound,vehicle_coupe,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -76,7 +76,7 @@ put this in your GSC:
 maps\_coupe::main( "vehicle_coupe_gold_destructible" );
 
 and these lines in your CSV:
-include,vehicle_coupe_gold
+#include,vehicle_coupe_gold
 sound,vehicle_coupe,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 

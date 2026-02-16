@@ -340,7 +340,7 @@ gettagfrommodel(var_0) {
 }
 
 initentanglermodels() {
-  var_0 = scripts\engine\utility::getstructarray("entangler_structs", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("entangler_structs", "targetname");
   foreach(var_2 in var_0) {
     level thread spawnentanglermodel(var_2);
   }

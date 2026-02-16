@@ -1098,7 +1098,7 @@ _id_4051(var_0, var_1, var_2) {
 
 _id_6C86() {
   var_0 = 0;
-  var_1 = scripts\engine\utility::getstructarray("br_prematch_insertion_point", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("br_prematch_insertion_point", "targetname");
 
   if(isDefined(level._id_2AA7)) {
     var_0 = 1;

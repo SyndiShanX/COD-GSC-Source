@@ -152,10 +152,10 @@ function watchplacement(placeable) {
       }
       lastattempt = placeable.canbeplaced;
     }
-    while(waitingforattackbuttonrelease && !player attackbuttonpressed()) {
+    while(waitingforattackbuttonrelease && !player attackButtonPressed()) {
       waitingforattackbuttonrelease = 0;
     }
-    if(!waitingforattackbuttonrelease && placeable.canbeplaced && player attackbuttonpressed()) {
+    if(!waitingforattackbuttonrelease && placeable.canbeplaced && player attackButtonPressed()) {
       if(placement["result"]) {
         placeable.origin = placement["origin"];
         placeable.angles = placement["angles"];
@@ -206,7 +206,7 @@ function watchplacement(placeable) {
         placeable notify("placed");
       }
     }
-    if(placeable.cancelable && player actionslotfourbuttonpressed()) {
+    if(placeable.cancelable && player actionslotfourbuttonPressed()) {
       placeable notify("cancelled");
     }
     wait(0.05);
@@ -310,7 +310,7 @@ function watchpickup(player) {
     if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
       continue;
     }
-    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && !player attackbuttonpressed() && (!(isDefined(player.isplanting) && player.isplanting)) && (!(isDefined(player.isdefusing) && player.isdefusing)) && !player isremotecontrolling() && !isDefined(player.holding_placeable)) {
+    if(player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed() && !player attackButtonPressed() && (!(isDefined(player.isplanting) && player.isplanting)) && (!(isDefined(player.isdefusing) && player.isdefusing)) && !player isremotecontrolling() && !isDefined(player.holding_placeable)) {
       placeable notify("picked_up");
       placeable.held = 1;
       placeable setCanDamage(0);

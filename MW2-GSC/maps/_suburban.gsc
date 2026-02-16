@@ -13,7 +13,7 @@ put this in your GSC:
 maps\_suburban::main( "vehicle_suburban" );
 
 and these lines in your CSV:
-include,vehicle_suburban_suburban
+#include,vehicle_suburban_suburban
 sound,vehicle_suburban,vehicle_standard,all_sp
 
 defaultmdl="vehicle_suburban"default:"vehicletype" "suburban"default:"script_team" "allies"*/

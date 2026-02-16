@@ -62,7 +62,7 @@ func_4F2A() {
     }
 
     var_0 = 1;
-    while(!level.var_C2C8 buttonpressed("BUTTON_Y")) {
+    while(!level.var_C2C8 buttonPressed("BUTTON_Y")) {
       wait(0.05);
     }
 
@@ -72,7 +72,7 @@ func_4F2A() {
       var_0 = 0;
     }
 
-    while(level.var_C2C8 buttonpressed("BUTTON_Y")) {
+    while(level.var_C2C8 buttonPressed("BUTTON_Y")) {
       wait(0.05);
     }
   }
@@ -206,7 +206,7 @@ func_13B36() {
     }
 
     var_0 = 1;
-    while(!level.var_C2C8 buttonpressed("BUTTON_A")) {
+    while(!level.var_C2C8 buttonPressed("BUTTON_A")) {
       wait(0.05);
     }
 
@@ -217,7 +217,7 @@ func_13B36() {
       var_0 = 0;
     }
 
-    while(level.var_C2C8 buttonpressed("BUTTON_A")) {
+    while(level.var_C2C8 buttonPressed("BUTTON_A")) {
       wait(0.05);
     }
   }
@@ -232,7 +232,7 @@ func_139A7() {
     }
 
     var_0 = 1;
-    while(!level.var_C2C8 buttonpressed("BUTTON_X")) {
+    while(!level.var_C2C8 buttonPressed("BUTTON_X")) {
       wait(0.05);
     }
 
@@ -242,7 +242,7 @@ func_139A7() {
       var_0 = 0;
     }
 
-    while(level.var_C2C8 buttonpressed("BUTTON_X")) {
+    while(level.var_C2C8 buttonPressed("BUTTON_X")) {
       wait(0.05);
     }
   }

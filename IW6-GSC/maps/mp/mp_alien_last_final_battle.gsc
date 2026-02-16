@@ -154,7 +154,7 @@ turn_off_cortex_fx() {
 }
 
 handle_cross_vignette_aliens() {
-  var_0 = common_scripts\utility::getstructarray("cross_vignette_spawners", "targetname");
+  var_0 = common_scripts\utility::getStructArray("cross_vignette_spawners", "targetname");
   level.cross_aliens = [];
 
   foreach(var_2 in var_0)
@@ -1119,7 +1119,7 @@ watch_for_use_cortex_trigger(var_0, var_1) {
       if(distancesquared(self getEye(), var_0.origin) < var_3) {
         self forceusehinton(var_2);
 
-        if(self usebuttonpressed()) {
+        if(self useButtonPressed()) {
           self.player_using_cortex = 1;
           self notify("using_cortex");
           thread reset_cortex_usage();

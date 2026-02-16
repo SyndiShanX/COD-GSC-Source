@@ -335,7 +335,7 @@ func_39C7(var_0) {
   if(!isDefined(var_2)) {
     return;
   }
-  var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
   if(!isDefined(var_3) || var_3.size == 0) {
     return;
@@ -383,7 +383,7 @@ func_39C9() {
     var_1.angles = (0, 0, 0);
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
   if(!isDefined(var_2) || var_2.size == 0) {}
 

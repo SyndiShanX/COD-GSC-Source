@@ -96,7 +96,7 @@ _id_1CFD(var_0) {
   if(var_2.size == 3) {
     var_3 = (int(var_2[0]), int(var_2[1]), int(var_2[2]));
   } else if(var_2.size == 2) {
-    var_3 = scripts\engine\utility::getstructarray(var_2[0], var_2[1]);
+    var_3 = scripts\engine\utility::getStructArray(var_2[0], var_2[1]);
 
     if(!isDefined(var_3)) {
       var_3 = getEntArray(var_1, var_2[1]);

@@ -42,7 +42,7 @@ remote_vehicle_setup() {
   level.bot_ks_funcs["odin_get_target"]["odin_assault"] = ::odin_assault_get_target;
   level.bot_ks_funcs["odin_get_target"]["odin_support"] = ::odin_support_get_target;
 
-  all_heli_nodes = GetStructArray("so_chopper_boss_path_struct", "script_noteworthy");
+  all_heli_nodes = getStructArray("so_chopper_boss_path_struct", "script_noteworthy");
   level.bot_heli_nodes = [];
   foreach(heli_node in all_heli_nodes) {
     if(isDefined(heli_node.script_linkname))

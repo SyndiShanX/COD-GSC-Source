@@ -234,7 +234,7 @@ _id_3990() {}
 _id_D6C5(var_0) {}
 
 _id_6A03(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_2 = scripts\engine\utility::getStructArray(var_0, var_1);
   var_3 = getEntArray(var_0, var_1);
 
   if(var_3.size > 0) {

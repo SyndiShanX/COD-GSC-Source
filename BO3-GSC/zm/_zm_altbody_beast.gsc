@@ -527,7 +527,7 @@ function player_watch_cancel() {
   }
   self.beast_cancel_timer = 0;
   while(isDefined(self)) {
-    if(self stancebuttonpressed()) {
+    if(self stancebuttonPressed()) {
       self notify("hide_equipment_hint_text");
       self player_stance_hold_think();
     }
@@ -587,7 +587,7 @@ function player_continue_cancel() {
   if(self isthrowinggrenade()) {
     return false;
   }
-  if(!self stancebuttonpressed()) {
+  if(!self stancebuttonPressed()) {
     return false;
   }
   if(isDefined(self.teleporting) && self.teleporting) {

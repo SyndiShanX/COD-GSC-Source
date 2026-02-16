@@ -1295,7 +1295,7 @@ hellfire_threaten_player(player, max_shots) {
   level endon("hellfire_attack_stop");
   level endon("hellfire_attack_pause");
 
-  targets = getstructarray("so_hellfire_target", "script_noteworthy");
+  targets = getStructArray("so_hellfire_target", "script_noteworthy");
   targets = get_within_range(player.origin, targets, 1800); // Close enough to feel scary
   targets = get_outside_range(player.origin, targets, 600); // Outside explosion radius
   if(is_coop()) {

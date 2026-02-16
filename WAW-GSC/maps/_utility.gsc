@@ -6160,7 +6160,7 @@ trigger_coop_warp(trigger) {
     return;
   }
 
-  structs = getstructarray(trigger.target, "targetname");
+  structs = getStructArray(trigger.target, "targetname");
   structs = array_randomize(structs);
 
   if(isDefined(trigger.script_linkto)) {

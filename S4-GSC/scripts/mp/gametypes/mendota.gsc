@@ -122,27 +122,27 @@ mendota_register_recenter_script(var_0, var_1) {
     var_8 = level.player getEye() + var_6 * vectornormalize(anglesToForward(level.player getplayerangles()));
     var_2 moveto(var_8 - (0, 0, var_7), 0.2, 0.1, 0.1);
 
-    if(level.player fragbuttonpressed()) {
+    if(level.player fragButtonPressed()) {
       var_2.angles = var_2.angles + (0, 2, 0);
     }
 
-    if(level.player secondaryoffhandbuttonpressed()) {
+    if(level.player secondaryoffhandbuttonPressed()) {
       var_2.angles = var_2.angles - (0, 2, 0);
     }
 
-    if(level.player stancebuttonpressed()) {
+    if(level.player stancebuttonPressed()) {
       var_7 = var_7 + 128;
     }
 
-    if(level.player reloadbuttonpressed()) {
+    if(level.player reloadbuttonPressed()) {
       var_7 = var_7 - 128;
     }
 
-    if(level.player meleebuttonpressed()) {
+    if(level.player meleeButtonPressed()) {
       var_6 = var_6 + 128;
     }
 
-    if(level.player sprintbuttonpressed()) {
+    if(level.player sprintbuttonPressed()) {
       var_6 = var_6 - 128;
     }
 

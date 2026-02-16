@@ -466,7 +466,7 @@ event1_rocket_hints() {
   level thread event1_sullivan_instruct_rockets();
   maps\_utility::autosave_by_name("Pel1 Coral");
 
-  starts = getstructarray("post_lvt_player_breadcrumbs", "targetname");
+  starts = getStructArray("post_lvt_player_breadcrumbs", "targetname");
   set_breadcrumbs(starts);
 
   level.rocket_barrage_allowed = true;
@@ -988,7 +988,7 @@ event1_ambient_lci_trigger() {
 
   start_points = [];
 
-  orgs = getstructarray("rocketbarrage_points2", "targetname");
+  orgs = getStructArray("rocketbarrage_points2", "targetname");
 
   q = 0;
   for(i = 0; i < num_rockets; i++) {
@@ -1004,7 +1004,7 @@ event1_ambient_lci_trigger() {
 
   start_points = [];
 
-  orgs = getstructarray("rocketbarrage_points2", "targetname");
+  orgs = getStructArray("rocketbarrage_points2", "targetname");
 
   q = 0;
   for(i = 0; i < num_rockets; i++) {
@@ -1020,7 +1020,7 @@ event1_ambient_lci_trigger() {
 
   start_points = [];
 
-  orgs = getstructarray("rocketbarrage_points1", "targetname");
+  orgs = getStructArray("rocketbarrage_points1", "targetname");
 
   q = 0;
   for(i = 0; i < num_rockets; i++) {
@@ -1123,8 +1123,8 @@ event1_post_aftermath_mortars() {
 }
 
 event1_squibline() {
-  starts = getstructarray("squibline", "targetname");
-  starts2 = getstructarray("squiblinev2", "targetname");
+  starts = getStructArray("squibline", "targetname");
+  starts2 = getStructArray("squiblinev2", "targetname");
 
   array_thread(starts2, ::event1_squibline_think_v2);
 }
@@ -2085,7 +2085,7 @@ event1_model3_fire_at_random_targets() {
   artypiece_quaketime = 2.25;
   artypiece_quakeradius = 3000;
 
-  structs = getstructarray("water_mortar", "targetname");
+  structs = getStructArray("water_mortar", "targetname");
 
   while(isDefined(self)) {
     target_struct = structs[randomint(structs.size)];
@@ -2098,7 +2098,7 @@ event1_model3_fire_at_random_targets() {
 }
 
 event1_floating_bodies() {
-  body_points = getstructarray("floating_bodies", "targetname");
+  body_points = getStructArray("floating_bodies", "targetname");
   bodyA = [];
   for(i = 0; i < body_points.size; i++) {
     rand = randomint(4);
@@ -3334,7 +3334,7 @@ event2_main_rocket_attack() {
 
   start_points = [];
 
-  orgs = getstructarray("rocketbarrage_points2", "targetname");
+  orgs = getStructArray("rocketbarrage_points2", "targetname");
 
   q = 0;
   for(i = 0; i < num_rockets; i++) {
@@ -3348,7 +3348,7 @@ event2_main_rocket_attack() {
 
   start_points = [];
 
-  orgs = getstructarray("rocketbarrage_points1", "targetname");
+  orgs = getStructArray("rocketbarrage_points1", "targetname");
 
   q = 0;
   for(i = 0; i < num_rockets; i++) {
@@ -4103,7 +4103,7 @@ event3_suppressed_amtank() {
 amtank_firing_loop() {
   level endon("mortar guys dead");
 
-  structs = getstructarray("suppressed_amtank_firepoints", "targetname");
+  structs = getStructArray("suppressed_amtank_firepoints", "targetname");
 
   while(isalive(self)) {
     struct = structs[randomint(structs.size)];
@@ -4185,7 +4185,7 @@ end_tank_death_watcher(num) {
 end_tank_firing_positions() {
   self endon("death");
 
-  structs = getstructarray("end_tank_firing_positions", "targetname");
+  structs = getStructArray("end_tank_firing_positions", "targetname");
 
   while(isalive(self)) {
     struct = structs[randomint(structs.size)];
@@ -4205,27 +4205,27 @@ grab_start_points(startpoint, ai_or_player) {
 
   if(ai_or_player == "ai") {
     if(startpoint == "beach") {
-      starts = getstructarray("start_beach_ai", "targetname");
+      starts = getStructArray("start_beach_ai", "targetname");
     } else if(startpoint == "1st_fight") {
-      starts = getstructarray("start_1st_fight_ai", "targetname");
+      starts = getStructArray("start_1st_fight_ai", "targetname");
     } else if(startpoint == "2nd_fight_l") {
-      starts = getstructarray("start_2nd_fight_l_ai", "targetname");
+      starts = getStructArray("start_2nd_fight_l_ai", "targetname");
     } else if(startpoint == "3rd_fight") {
-      starts = getstructarray("start_3rd_fight_ai", "targetname");
+      starts = getStructArray("start_3rd_fight_ai", "targetname");
     } else if(startpoint == "mortars") {
-      starts = getstructarray("start_mortar_ai", "targetname");
+      starts = getStructArray("start_mortar_ai", "targetname");
     }
   } else if(ai_or_player == "players") {
     if(startpoint == "beach") {
-      starts = getstructarray("beach_start_points", "targetname");
+      starts = getStructArray("beach_start_points", "targetname");
     } else if(startpoint == "1st_fight") {
-      starts = getstructarray("1st_fight_start_points", "targetname");
+      starts = getStructArray("1st_fight_start_points", "targetname");
     } else if(startpoint == "2nd_fight_l") {
-      starts = getstructarray("2nd_fight_l_start_points", "targetname");
+      starts = getStructArray("2nd_fight_l_start_points", "targetname");
     } else if(startpoint == "3rd_fight") {
-      starts = getstructarray("3rd_fight_start_points", "targetname");
+      starts = getStructArray("3rd_fight_start_points", "targetname");
     } else if(startpoint == "mortars") {
-      starts = getstructarray("mortar_start_points", "targetname");
+      starts = getStructArray("mortar_start_points", "targetname");
     }
   }
 
@@ -4409,7 +4409,7 @@ start_beach() {
 
   warp_starting_guys("beach");
 
-  starts = getstructarray("beach_start_points", "targetname");
+  starts = getStructArray("beach_start_points", "targetname");
 
   level notify("ai teleported");
 
@@ -4526,7 +4526,7 @@ start_first_fight() {
 
   warp_starting_guys("1st_fight");
 
-  starts = getstructarray("1st_fight_start_points", "targetname");
+  starts = getStructArray("1st_fight_start_points", "targetname");
 
   level notify("ai teleported");
 
@@ -4583,7 +4583,7 @@ start_second_fight_left() {
 
   warp_starting_guys("2nd_fight_l");
 
-  starts = getstructarray("2nd_fight_l_start_points", "targetname");
+  starts = getStructArray("2nd_fight_l_start_points", "targetname");
 
   level notify("ai teleported");
 
@@ -4618,7 +4618,7 @@ start_third_fight() {
 
   warp_starting_guys("3rd_fight");
 
-  starts = getstructarray("3rd_fight_start_points", "targetname");
+  starts = getStructArray("3rd_fight_start_points", "targetname");
 
   level notify("ai teleported");
 
@@ -4653,7 +4653,7 @@ start_mortars() {
 
   warp_starting_guys("mortars");
 
-  starts = getstructarray("mortars_start_points", "targetname");
+  starts = getStructArray("mortars_start_points", "targetname");
 
   wait 0.1;
 
@@ -4694,7 +4694,7 @@ start_ending() {
 
   warp_starting_guys("mortars");
 
-  starts = getstructarray("mortars_start_points", "targetname");
+  starts = getStructArray("mortars_start_points", "targetname");
 
   wait 0.1;
 
@@ -4757,7 +4757,7 @@ always_fire(fireondrones) {
 
   squibs = [];
   if(!isDefined(fireondrones) || fireondrones == 0) {
-    squibs = getstructarray("squibline_flame_bunker", "targetname");
+    squibs = getStructArray("squibline_flame_bunker", "targetname");
   }
 
   while(1) {
@@ -5682,7 +5682,7 @@ start_teleport_players(start_name, coop) {
   if(isDefined(coop) && coop) {
     starts = get_sorted_starts(start_name);
   } else {
-    starts = getstructarray(start_name, "targetname");
+    starts = getStructArray(start_name, "targetname");
   }
 
   assertex(starts.size >= players.size, "Need more start positions for players!");
@@ -5702,7 +5702,7 @@ start_teleport_players(start_name, coop) {
 get_sorted_starts(start_name) {
   player_starts = [];
 
-  player_starts = getstructarray(start_name, "targetname");
+  player_starts = getStructArray(start_name, "targetname");
 
   for(i = 0; i < player_starts.size; i++) {
     for(j = i; j < player_starts.size; j++) {

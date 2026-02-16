@@ -28,7 +28,7 @@ init() {
   level thread coast_director_fx();
 }
 FIX_bad_dog_location() {
-  locations = getstructarray("shipback_near_zone_spawners_dog");
+  locations = getStructArray("shipback_near_zone_spawners_dog");
   bad_org = (-1800.2, -1613, 344.1);
   new_org = (-1792.2, -1581, 344.1);
   for(i = 0; i < locations.size; i++) {

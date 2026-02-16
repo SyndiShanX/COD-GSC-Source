@@ -28,7 +28,7 @@ setup_faller_locations() {
   for(i = 0; i < level.zones.size; i++) {
     zone = level.zones[zkeys[i]];
     if(isDefined(zone.volumes[0].target)) {
-      zone.fall_locations = GetStructArray(zone.volumes[0].target + "_fall", "targetname");
+      zone.fall_locations = getStructArray(zone.volumes[0].target + "_fall", "targetname");
       for(x = 0; x < zone.fall_locations.size; x++) {
         zone.fall_locations[x].is_enabled = true;
       }
@@ -45,7 +45,7 @@ get_available_fall_locations() {
       }
     }
   } else {
-    spots = GetStructArray("zombie_fall", "targetname");
+    spots = getStructArray("zombie_fall", "targetname");
     for(x = 0; x < spots.size; x++) {
       if(spots[x].is_enabled) {
         level.zombie_fall_spawners[level.zombie_fall_spawners.size] = spots[x];

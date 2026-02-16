@@ -1910,7 +1910,7 @@ _id_28FA() {
   for(;;) {
     wait 3;
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       continue;
     }
     if(scripts\mp\utility\player::_id_8ACE()) {

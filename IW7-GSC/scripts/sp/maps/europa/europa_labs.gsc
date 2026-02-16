@@ -1205,7 +1205,7 @@ func_F158() {
 
 func_F156() {
   level.var_EF59 = 0;
-  var_0 = scripts\engine\utility::getstructarray("rummage_scene", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rummage_scene", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_E7D3();
     wait(0.05);
@@ -1695,7 +1695,7 @@ func_8463() {
     var_3 scripts\sp\utility::func_61E7();
   }
 
-  var_11 = scripts\engine\utility::getstructarray("airlock_fx", "targetname");
+  var_11 = scripts\engine\utility::getStructArray("airlock_fx", "targetname");
   foreach(var_13 in var_11) {
     var_14 = undefined;
     if(isDefined(var_13.angles)) {
@@ -1830,7 +1830,7 @@ func_A744() {
   scripts\sp\utility::func_22CA("locker_enemies", ::func_AF07);
   thread func_134E3();
   scripts\sp\maps\europa\europa_util::func_13815("lab_entrance_airlock_trig");
-  var_4 = scripts\engine\utility::getstructarray("locker_scenes", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("locker_scenes", "script_noteworthy");
   var_5 = scripts\sp\utility::func_22CD("locker_enemies", 1);
   thread func_200E(var_5);
   var_6 = func_F8BF();
@@ -2060,7 +2060,7 @@ func_CF55(var_0) {
 }
 
 func_200E(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("antigrav_react", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("antigrav_react", "script_noteworthy");
   foreach(var_4, var_3 in var_1) {
     var_0[var_4] thread func_2018(var_3);
   }
@@ -2164,7 +2164,7 @@ func_A76F() {
 }
 
 func_A765() {
-  var_0 = scripts\engine\utility::getstructarray("lab_emergency_light", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("lab_emergency_light", "targetname");
   var_1 = [];
   foreach(var_3 in var_0) {
     var_4 = var_3 scripts\engine\utility::spawn_tag_origin();
@@ -2563,7 +2563,7 @@ func_3385() {
   scripts\sp\utility::func_22CA("c6_locker_spawner", ::func_AF01);
   scripts\sp\utility::func_22CA("c6_hacker", ::func_3371);
   var_0 = 1;
-  var_1 = scripts\engine\utility::getstructarray("c6_locker", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("c6_locker", "script_noteworthy");
   level.var_AF02 = [];
   foreach(var_3 in var_1) {
     var_3 func_48AD();

@@ -354,7 +354,7 @@ waitrespawnbutton() {
   self endon("end_respawn");
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
 

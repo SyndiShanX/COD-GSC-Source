@@ -34,7 +34,7 @@ getstruct(name, type) {
   return array[0];
 }
 
-getstructarray(name, type) {
+getStructArray(name, type) {
   assert(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
   array = level.struct_class_names[type][name];
 
@@ -461,8 +461,8 @@ initlocalplayers() {
 
 init_exploders() {
   script_exploders = [];
-  ents = getstructarray("script_brushmodel", "classname");
-  smodels = getstructarray("script_model", "classname");
+  ents = getStructArray("script_brushmodel", "classname");
+  smodels = getStructArray("script_model", "classname");
 
   for(i = 0; i < smodels.size; i++) {
     ents[ents.size] = smodels[i];
@@ -474,7 +474,7 @@ init_exploders() {
     }
   }
 
-  potentialexploders = getstructarray("script_brushmodel", "classname");
+  potentialexploders = getStructArray("script_brushmodel", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder)) {
@@ -486,7 +486,7 @@ init_exploders() {
     }
   }
 
-  potentialexploders = getstructarray("script_model", "classname");
+  potentialexploders = getStructArray("script_model", "classname");
 
   for(i = 0; i < potentialexploders.size; i++) {
     if(isDefined(potentialexploders[i].script_prefab_exploder)) {

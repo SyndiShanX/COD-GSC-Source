@@ -194,7 +194,7 @@ debug_deathray_step_3() {
   var_0 hide();
   level.mirrors_picked_up["bathroom_mirror_piece"] = 1;
   set_quest_omnvar_by_targetname(var_0);
-  var_1 = scripts\engine\utility::getstructarray("mirror_placement", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("mirror_placement", "script_noteworthy");
   foreach(var_3 in var_1) {
     var_4 = scripts\engine\utility::getstruct(var_3.target, "targetname");
     var_0 = spawn("script_model", var_4.origin);
@@ -498,10 +498,10 @@ zom_body_part_init_func(var_0, var_1) {
 
 update_struct_positions() {
   wait(10);
-  var_0 = scripts\engine\utility::getstructarray("mirror", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mirror", "script_noteworthy");
   var_1 = scripts\engine\utility::getclosest((5579, 363.5, 342), var_0, 1000);
   var_1.origin = (5579, 363.5, 342);
-  var_0 = scripts\engine\utility::getstructarray("mpq_zom_body_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mpq_zom_body_part", "script_noteworthy");
   var_1 = scripts\engine\utility::getclosest((6242, -526, 378), var_0, 1000);
   var_1.origin = var_1.origin + (0, 0, 60);
   var_1 = scripts\engine\utility::getclosest((-317, 3665, 475), var_0, 1000);
@@ -673,7 +673,7 @@ set_quest_omnvar_by_targetname(var_0) {
 
 listen_for_power_handle() {
   level.mpq_zom_body_parts["left_arm"].high_point = level.mpq_zom_body_parts["left_arm"].origin[2];
-  var_0 = scripts\engine\utility::getstructarray("mpq_zom_body_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mpq_zom_body_part", "script_noteworthy");
   var_1 = scripts\engine\utility::getclosest(level.mpq_zom_body_parts["left_arm"].origin, var_0);
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_1);
   scripts\engine\utility::flag_wait("found_missing_handle");
@@ -979,9 +979,9 @@ garage_door_activation_func(var_0, var_1) {
 
 ray_gun_init_func() {
   level.ray_gun_interaction_structs = [];
-  var_0 = scripts\engine\utility::getstructarray("ray_gun_start", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("ray_gun_start", "script_noteworthy");
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
     foreach(var_5 in var_3) {
       switch (var_5.script_noteworthy) {
         case "bomb_counter":
@@ -1297,7 +1297,7 @@ listen_for_death_by_cleaver() {
     scripts\engine\utility::waitframe();
   }
 
-  var_0 = scripts\engine\utility::getstructarray("mpq_zom_body_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mpq_zom_body_part", "script_noteworthy");
   var_1 = scripts\engine\utility::getclosest(level.mpq_zom_body_parts["right_leg"].origin, var_0);
   level.mpq_zom_body_parts["right_leg"] notsolid();
   level.mpq_zom_body_parts["right_leg"].origin = level.death_by_cleaver_org + (0, 0, -5);
@@ -1943,7 +1943,7 @@ phase3_place_bomb_parts(var_0, var_1) {
         return;
       }
 
-      if(!var_4 usebuttonpressed()) {
+      if(!var_4 useButtonPressed()) {
         return;
       }
     }
@@ -1965,7 +1965,7 @@ phase3_place_bomb_parts(var_0, var_1) {
         return;
       }
 
-      if(!var_8 usebuttonpressed()) {
+      if(!var_8 useButtonPressed()) {
         return;
       }
     }

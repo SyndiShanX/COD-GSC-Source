@@ -25,7 +25,7 @@ player_in_zone(zone_name) {
   return false;
 }
 deactivate_initial_barrier_goals() {
-  special_goals = getstructarray("exterior_goal", "targetname");
+  special_goals = getStructArray("exterior_goal", "targetname");
   for(i = 0; i < special_goals.size; i++) {
     if(isDefined(special_goals[i].script_noteworthy)) {
       special_goals[i].is_active = undefined;
@@ -34,7 +34,7 @@ deactivate_initial_barrier_goals() {
   }
 }
 activate_barrier_goals(barrier_name, key) {
-  entry_points = getstructarray(barrier_name, key);
+  entry_points = getStructArray(barrier_name, key);
 
   for(i = 0; i < entry_points.size; i++) {
     entry_points[i].is_active = 1;
@@ -68,15 +68,15 @@ zone_init(zone_name) {
       }
     }
 
-    level.zones[zone_name].dog_locations = GetStructArray(level.zones[zone_name].volumes[0].target + "_dog", "targetname");
+    level.zones[zone_name].dog_locations = getStructArray(level.zones[zone_name].volumes[0].target + "_dog", "targetname");
 
-    level.zones[zone_name].rise_locations = GetStructArray(level.zones[zone_name].volumes[0].target + "_rise", "targetname");
+    level.zones[zone_name].rise_locations = getStructArray(level.zones[zone_name].volumes[0].target + "_rise", "targetname");
   }
 }
 enable_zone(zone_name) {
   level.zones[zone_name].is_enabled = true;
 
-  spawn_points = getstructarray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   for(i = 0; i < spawn_points.size; i++) {
     if(spawn_points[i].script_noteworthy == zone_name) {
       spawn_points[i].locked = false;

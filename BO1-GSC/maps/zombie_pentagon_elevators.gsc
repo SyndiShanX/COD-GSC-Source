@@ -523,9 +523,9 @@ zombies_elev_teleport(elevator, pos_num, going_up) {
   self endon("death");
   teleport_pos = [];
   if(going_up == true) {
-    teleport_pos = getstructarray(elevator.targetname + "_up_zombie", "targetname");
+    teleport_pos = getStructArray(elevator.targetname + "_up_zombie", "targetname");
   } else {
-    teleport_pos = getstructarray(elevator.targetname + "_down_zombie", "targetname");
+    teleport_pos = getStructArray(elevator.targetname + "_down_zombie", "targetname");
   }
   if(isDefined(teleport_pos[pos_num])) {
     self forceteleport(teleport_pos[pos_num].origin, teleport_pos[pos_num].angles);
@@ -535,9 +535,9 @@ zombies_elev_teleport_hidden(elevator, pos_num, going_up) {
   self endon("death");
   teleport_pos = [];
   if(going_up == true) {
-    teleport_pos = getstructarray(elevator.targetname + "_up_hidden", "targetname");
+    teleport_pos = getStructArray(elevator.targetname + "_up_hidden", "targetname");
   } else {
-    teleport_pos = getstructarray(elevator.targetname + "_down_hidden", "targetname");
+    teleport_pos = getStructArray(elevator.targetname + "_down_hidden", "targetname");
   }
   if(isDefined(teleport_pos[pos_num])) {
     self forceteleport(teleport_pos[pos_num].origin + (RandomFloatRange(0, 22), RandomFloatRange(0, 22), 0), teleport_pos[pos_num].angles);

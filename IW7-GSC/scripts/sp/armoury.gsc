@@ -22,9 +22,9 @@ func_489F(var_0) {
   var_1 = [];
   var_2 = [];
   var_3 = [];
-  var_1 = scripts\engine\utility::getstructarray("loot_weapon_node", "targetname");
-  var_2 = scripts\engine\utility::getstructarray("loot_terminal", "targetname");
-  var_3 = scripts\engine\utility::getstructarray("locker_node", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("loot_weapon_node", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("loot_terminal", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("locker_node", "targetname");
   var_4 = level.var_D9E5["equip_upgrades"];
   var_4 = var_4 / level.var_21E2;
   if(isDefined(level.var_FCD6) && level.var_FCD6 == 1) {

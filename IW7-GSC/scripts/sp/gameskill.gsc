@@ -1783,7 +1783,7 @@ func_2625() {
 func_2626() {
   var_0 = gettime();
   for(;;) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       var_0 = gettime();
     }
 
@@ -1988,7 +1988,7 @@ func_4423(var_0) {
   }
 
   for(var_2 = 1; var_2 < var_1["count"] + 1; var_2++) {
-    if(self buttonpressed(var_1["key" + var_2])) {
+    if(self buttonPressed(var_1["key" + var_2])) {
       return 1;
     }
   }

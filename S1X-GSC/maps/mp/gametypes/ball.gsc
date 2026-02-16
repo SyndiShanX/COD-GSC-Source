@@ -1815,10 +1815,10 @@ ball_create_team_goal(var_0) {
 }
 
 ball_create_ball_starts(var_0) {
-  var_1 = common_scripts\utility::getstructarray("ball_start", "targetname");
+  var_1 = common_scripts\utility::getStructArray("ball_start", "targetname");
 
   if(!maps\mp\_utility::isaugmentedgamemode()) {
-    var_2 = common_scripts\utility::getstructarray("ball_start_non_augmented", "targetname");
+    var_2 = common_scripts\utility::getStructArray("ball_start_non_augmented", "targetname");
 
     if(var_2.size > 0) {
       var_1 = var_2;

@@ -57,7 +57,7 @@ watch_alien_soflam_usage() {
     wait(0.05);
 
   for(;;) {
-    if(self AttackButtonPressed() && self GetCurrentWeapon() == "aliensoflam_mp" && self AdsButtonPressed() && !self IsUsingTurret()) {
+    if(self attackButtonPressed() && self GetCurrentWeapon() == "aliensoflam_mp" && self adsButtonPressed() && !self IsUsingTurret()) {
       self WeaponLockTargetTooClose(false);
       self WeaponLockFree();
 

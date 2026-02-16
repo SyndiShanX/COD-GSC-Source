@@ -598,7 +598,7 @@ drive_blend_anims_with_steering(vehicle, animflag, endNotify, leftAnim, centerAn
 
 is_shoot_button_pressed() {
   // pc
-  return self AttackButtonPressed();
+  return self attackButtonPressed();
 }
 
 drive_shooting_update_anims(vehicle) {

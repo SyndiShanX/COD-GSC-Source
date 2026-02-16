@@ -15,13 +15,13 @@ gas_station() {
 
   wait 0.05;
 
-  structs = getstructarray("gas", "targetname");
+  structs = getStructArray("gas", "targetname");
   array_thread(structs, ::gas_station_init);
 }
 
 gas_station_init() {
   target_ents = getEntArray(self.target, "targetname");
-  target_structs = getstructarray(self.target, "targetname");
+  target_structs = getStructArray(self.target, "targetname");
   target_ents = array_combine(target_ents, target_structs);
   nodes = self getLinknameNodes();
   targets = array_combine(target_ents, nodes);
@@ -345,7 +345,7 @@ notify_explode(gas_station, gas_pumps) {
 }
 
 broken_walls() {
-  walls = getstructarray("broken_wall", "targetname");
+  walls = getStructArray("broken_wall", "targetname");
   array_thread(walls, ::broken_wall_init);
 }
 
@@ -425,9 +425,9 @@ breach() {
   dart_breach_anims_init();
   waitframe();
 
-  breaches = getstructarray("breach", "targetname");
+  breaches = getStructArray("breach", "targetname");
 
-  proxy = getstructarray("breach_proxy", "targetname");
+  proxy = getStructArray("breach_proxy", "targetname");
   foreach(p in proxy) {
     if(!isDefined(p.target)) {
       continue;
@@ -483,7 +483,7 @@ breach_init() {
   self.solid_ents = [];
 
   target_ents = getEntArray(self.target, "targetname");
-  target_structs = getstructarray(self.target, "targetname");
+  target_structs = getStructArray(self.target, "targetname");
 
   targets = array_combine(target_structs, target_ents);
 
@@ -624,7 +624,7 @@ clear_attached_items(breach_struct) {
 
 breach_door_init(door) {
   target_ents = getEntArray(door.target, "targetname");
-  target_structs = getstructarray(door.target, "targetname");
+  target_structs = getStructArray(door.target, "targetname");
 
   targets = array_combine(target_structs, target_ents);
 
@@ -954,7 +954,7 @@ player_connect_watch() {
 }
 
 hide_gas_station_physics_pieces() {
-  structs = getstructarray("gas", "targetname");
+  structs = getStructArray("gas", "targetname");
   foreach(struct in structs) {
     foreach(ent in struct.launch_ents) {
       ent Hide();

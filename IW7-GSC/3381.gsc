@@ -6,7 +6,7 @@
 init_knifethrow_game() {
   level._effect["shot_impact"] = loadfx("vfx\iw7\core\zombie\blood\vfx_zmb_blood_frontend.vfx");
   load_animation();
-  var_0 = scripts\engine\utility::getstructarray("interaction_knife_throw", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("interaction_knife_throw", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_F9BE();
     var_2 thread scripts\cp\zombies\arcade_game_utility::turn_off_machine_after_uses(4, 7);
@@ -35,7 +35,7 @@ func_F9BE(var_0) {
     }
   }
 
-  var_5 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_7 in var_5) {
     if(!isDefined(var_7.script_noteworthy)) {
       continue;

@@ -11,7 +11,7 @@ resolve_struct_targets() {
     struct = level.struct[i];
 
     if(isDefined(struct.target)) {
-      targ_struct = getstructarray(struct.target, "targetname");
+      targ_struct = getStructArray(struct.target, "targetname");
 
       if(isDefined(targ_struct)) {
         struct.targeted = [];
@@ -39,7 +39,7 @@ decorate_level() {
 
   level waittill("dl");
 
-  structs = getstructarray("coop_dest_tank_spot", "targetname");
+  structs = getStructArray("coop_dest_tank_spot", "targetname");
 
   players = getlocalplayers();
 

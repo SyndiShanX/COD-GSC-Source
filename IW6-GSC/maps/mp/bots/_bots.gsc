@@ -2574,7 +2574,7 @@ bot_think_crate_blocking_path() {
   while(true) {
     wait(3);
 
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       continue;
     }
 

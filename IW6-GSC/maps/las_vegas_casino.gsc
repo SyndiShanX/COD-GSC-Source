@@ -221,7 +221,7 @@ ambush_riley_getout() {
 }
 
 ambush_gas_grenades() {
-  var_0 = common_scripts\utility::getstructarray("ambush_nade_structs", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ambush_nade_structs", "targetname");
   var_0 = common_scripts\utility::array_randomize(var_0);
 
   foreach(var_3, var_2 in var_0) {
@@ -1360,7 +1360,7 @@ bar() {
 bar_dialogue() {
   common_scripts\utility::flag_wait("at_bar");
   var_0 = ["vegas_fs5_shitmandidyou", "vegas_pmc3_nowhat", "vegas_fs5_hetookagarrote", "vegas_pmc3_holyshitthatsbrutalman", "vegas_fs5_yeahremindmenever", "vegas_saf2_youwanttoknow", "vegas_fs5_whatsthat", "vegas_saf2_ithinkoneof", "vegas_pmc3_whatthefuck", "vegas_saf2_yeahhekilledthe"];
-  var_1 = common_scripts\utility::getstructarray("bar_sound_structs", "targetname");
+  var_1 = common_scripts\utility::getStructArray("bar_sound_structs", "targetname");
   var_2 = [];
 
   foreach(var_4 in var_1)
@@ -1486,7 +1486,7 @@ bar_player_ads_breathin() {
   var_0 = "weap_sniper_breathin";
 
   for(;;) {
-    if(level.player maps\_utility::isads() || level.player adsbuttonpressed()) {
+    if(level.player maps\_utility::isads() || level.player adsButtonPressed()) {
       level.player thread maps\_utility::play_sound_on_entity(var_0);
       level.player notify("stop_fake_shellshock");
       break;
@@ -2436,7 +2436,7 @@ atrium_player_shoots() {
       continue;
     }
     wait(randomfloatrange(1, 3));
-    var_5 = common_scripts\utility::getstructarray("balcony_rope", "script_noteworthy");
+    var_5 = common_scripts\utility::getStructArray("balcony_rope", "script_noteworthy");
     var_5 = sortbydistance(var_5, var_2.origin);
     var_2 thread actor_rappel("rail", var_5[0]);
   }
@@ -3283,7 +3283,7 @@ nade_room() {
   maps\_spawner::killspawner(600);
   var_0 = getEntArray("chase_enemy_ai", "targetname");
   common_scripts\utility::array_call(var_0, ::delete);
-  var_1 = common_scripts\utility::getstructarray("nade_room_struct", "targetname");
+  var_1 = common_scripts\utility::getStructArray("nade_room_struct", "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");
@@ -3599,11 +3599,11 @@ casino_jumpout_trenchrun() {
   level.objectforce["ac_prs_imp_com_lamp_ornate_off"] = 400;
   level.objectforce["lv_luggagedestroyed_03_dust"] = 100;
   level.objectforce["lv_luggagedestroyed_04_dust"] = 100;
-  var_1 = common_scripts\utility::getstructarray("hotel_hallway_trenchrun_fake_shooters", "targetname");
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("hotel_hallway_trenchrun_shot_obj", "targetname"), ::trenchrun_objdamage, "bullet");
+  var_1 = common_scripts\utility::getStructArray("hotel_hallway_trenchrun_fake_shooters", "targetname");
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("hotel_hallway_trenchrun_shot_obj", "targetname"), ::trenchrun_objdamage, "bullet");
   common_scripts\utility::array_thread(var_0, ::trenchrun_objdamage, "phys", undefined);
   var_2 = 0;
-  var_3 = common_scripts\utility::getstructarray("hotel_hallway_trenchrun_lights_start", "targetname");
+  var_3 = common_scripts\utility::getStructArray("hotel_hallway_trenchrun_lights_start", "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = var_5;

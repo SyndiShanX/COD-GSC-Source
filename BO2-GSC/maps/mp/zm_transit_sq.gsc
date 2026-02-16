@@ -383,7 +383,7 @@ maxis_sidequest_c() {
   level.sq_progress["maxis"]["C_complete"] = 0;
   turbine_1_talked = 0;
   turbine_2_talked = 0;
-  screech_zones = getstructarray("screecher_escape", "targetname");
+  screech_zones = getStructArray("screecher_escape", "targetname");
 
   while(true) {
     if(!isDefined(level.sq_progress["maxis"]["C_turbine_1"]))
@@ -641,7 +641,7 @@ lure_zombies_to_tower_hint() {
 richtofen_sidequest_c() {
   level endon("power_off");
   level endon("richtofen_sq_complete");
-  screech_zones = getstructarray("screecher_escape", "targetname");
+  screech_zones = getStructArray("screecher_escape", "targetname");
   level thread screecher_light_hint();
   level thread screecher_light_on_sq();
   level.sq_richtofen_c_screecher_lights = [];
@@ -930,12 +930,12 @@ survivor_vox() {
 
     foreach(player in players) {
       if(distance2dsquared(player.origin, (8000, -6656, 160)) < 1225) {
-        if(player usebuttonpressed()) {
+        if(player useButtonPressed()) {
           playsoundatposition("zmb_zombie_arc", (8000, -6656, 160));
           start_time = gettime();
           end_time = start_time + 5000;
 
-          while(player usebuttonpressed() && distance2dsquared(player.origin, (8000, -6656, 160)) < 1225 && is_player_valid(player)) {
+          while(player useButtonPressed() && distance2dsquared(player.origin, (8000, -6656, 160)) < 1225 && is_player_valid(player)) {
             if(gettime() > end_time)
               initiated = 1;
 
@@ -958,7 +958,7 @@ survivor_vox() {
 
     foreach(player in players) {
       if(distance2dsquared(player.origin, (8000, -6656, 160)) < 1225) {
-        if(player usebuttonpressed() && is_player_valid(player)) {
+        if(player useButtonPressed() && is_player_valid(player)) {
           if(flag("power_on")) {
             if(i == -1 || i > 4)
               playsoundatposition("vox_maxi_tv_distress_0", (8000, -6656, 160));
@@ -993,7 +993,7 @@ screecher_light_hint() {
   while(!level.sq_progress["rich"]["A_jetgun_tower"])
     wait 1;
 
-  screech_zones = getstructarray("screecher_escape", "targetname");
+  screech_zones = getStructArray("screecher_escape", "targetname");
   dist = 122500;
 
   while(true) {

@@ -5,7 +5,7 @@
 
 init_zombie_entrances() {
   level.var_13D37 = [];
-  level.window_entrances = scripts\engine\utility::getstructarray("window_entrance", "targetname");
+  level.window_entrances = scripts\engine\utility::getStructArray("window_entrance", "targetname");
   scripts\engine\utility::array_thread(level.window_entrances, ::func_97A8);
 }
 
@@ -13,7 +13,7 @@ func_4F32() {
   wait(5);
   for(;;) {
     var_0 = scripts\engine\utility::getclosest(level.players[0].origin, level.window_entrances);
-    var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
     var_1 = scripts\engine\utility::add_to_array(var_1, var_0);
     foreach(var_3 in var_1) {
       var_4 = 0;
@@ -54,7 +54,7 @@ func_97A8() {
   self.barrier.var_2BEB[3] = "boarded";
   self.barrier.var_2BEB[4] = "boarded";
   self.barrier.var_2BEB[5] = "boarded";
-  var_4 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_4 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_6 in var_4) {
     if(isDefined(var_6.script_noteworthy) && var_6.script_noteworthy == "attack_spot") {
       self.attack_position = var_6;
@@ -67,7 +67,7 @@ func_97A8() {
   }
 
   level.var_13D37[level.var_13D37.size] = self;
-  var_8 = scripts\engine\utility::getclosest(self.origin, scripts\engine\utility::getstructarray("secure_window", "script_noteworthy"));
+  var_8 = scripts\engine\utility::getclosest(self.origin, scripts\engine\utility::getStructArray("secure_window", "script_noteworthy"));
   self.script_noteworthy = func_7D7E(var_8);
   self.script_label = "mid";
   if(isDefined(self.var_EED9) && self.var_EED9 == "extended") {
@@ -104,7 +104,7 @@ func_7D7E(var_0) {
 func_6259(var_0) {
   var_0.enabled = 1;
   var_0.var_C2D0 = undefined;
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     var_3.var_C2D0 = undefined;
     var_3.enabled = 1;
@@ -114,7 +114,7 @@ func_6259(var_0) {
 func_55A8(var_0) {
   var_0.enabled = 0;
   var_0.var_C2D0 = undefined;
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     var_3.var_C2D0 = undefined;
     var_3.enabled = 0;
@@ -122,7 +122,7 @@ func_55A8(var_0) {
 }
 
 enable_windows_in_area(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     func_6259(var_3);
   }
@@ -241,7 +241,7 @@ func_9CD2(var_0) {
 
 func_F95E() {
   var_0 = anglestoright(self.angles);
-  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_3 in var_1) {
     var_4 = var_3.origin - self.origin;
     var_5 = vectordot(var_4, var_0);
@@ -302,7 +302,7 @@ func_7A29(var_0) {
     }
   }
 
-  var_5 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_5 = scripts\engine\utility::add_to_array(var_5, var_0);
   var_6 = sortbydistance(var_5, self.origin);
   return var_6[0];
@@ -314,7 +314,7 @@ get_open_attack_spot(var_0) {
     return var_1;
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = scripts\engine\utility::add_to_array(var_2, var_0);
   var_2 = scripts\engine\utility::array_randomize(var_2);
   foreach(var_4 in var_2) {
@@ -359,7 +359,7 @@ remove_barrier_from_entrance(var_0, var_1) {
     return;
   }
 
-  var_2 = scripts\engine\utility::getstructarray("secure_window", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("secure_window", "script_noteworthy");
   var_3 = scripts\engine\utility::getclosest(var_0.origin, var_2);
   if(!isDefined(var_1)) {
     var_1 = var_0.barrier.var_C1DE;

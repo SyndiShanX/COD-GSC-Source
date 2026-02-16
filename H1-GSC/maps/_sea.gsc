@@ -103,7 +103,7 @@ sea_objectbob(var_0) {
       var_1[var_2] linkto(self);
   }
 
-  var_3 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_3 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_4 = var_3[0].origin;
   var_5 = undefined;
   var_6 = spawn("script_origin", (0, 0, 0));
@@ -381,7 +381,7 @@ sea_closestwavelogic(var_0, var_1) {
 }
 
 sea_waves_setup() {
-  var_0 = common_scripts\utility::getstructarray("wave_fx", "targetname");
+  var_0 = common_scripts\utility::getStructArray("wave_fx", "targetname");
   var_1 = common_scripts\utility::getstruct("wave_fx_center", "targetname");
 
   if(!var_0.size)

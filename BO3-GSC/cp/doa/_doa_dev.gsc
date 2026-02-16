@@ -23,10 +23,10 @@ function function_40206fdf() {
       continue;
     }
     var_a67ace85 = randomint(255) << 22;
-    if(player stancebuttonpressed()) {
+    if(player stancebuttonPressed()) {
       var_a67ace85 = var_a67ace85 | 1;
     }
-    if(player jumpbuttonpressed()) {
+    if(player jumpbuttonPressed()) {
       var_a67ace85 = var_a67ace85 | 65536;
     }
     lstick = player getnormalizedmovement();

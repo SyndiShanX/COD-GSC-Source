@@ -77,7 +77,7 @@ put this in your GSC:
 maps\_stryker::main( "vehicle_stryker" );
 
 and these lines in your CSV:
-include,vehicle_stryker
+#include,vehicle_stryker
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker"default:"vehicletype" "stryker"default:"script_team" "allies"*/
@@ -88,7 +88,7 @@ put this in your GSC:
 maps\_stryker::main( "vehicle_stryker", "stryker_nophysics" );
 
 and these lines in your CSV:
-include,vehicle_stryker
+#include,vehicle_stryker
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
@@ -99,7 +99,7 @@ put this in your GSC:
 maps\_stryker::main( "vehicle_stryker_desert", "stryker_nophysics" );
 
 and these lines in your CSV:
-include,vehicle_stryker_desert
+#include,vehicle_stryker_desert
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
@@ -110,7 +110,7 @@ put this in your GSC:
 maps\_stryker::main( "vehicle_stryker_desert", "stryker_nophysics", "no_destroyed" );
 
 and these lines in your CSV:
-include,vehicle_stryker_desert_nodestroyed
+#include,vehicle_stryker_desert_nodestroyed
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker_nophysics"default:"script_team" "allies"*/
@@ -121,7 +121,7 @@ put this in your GSC:
 maps\_stryker::main( "vehicle_stryker_desert" );
 
 and these lines in your CSV:
-include,vehicle_stryker_desert
+#include,vehicle_stryker_desert
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker"default:"script_team" "allies"*/
@@ -132,7 +132,7 @@ put this in your GSC:
 maps\_stryker::main( "vehicle_stryker_desert", undefined, "no_destroyed" );
 
 and these lines in your CSV:
-include,vehicle_stryker_desert_nodestroyed
+#include,vehicle_stryker_desert_nodestroyed
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker_desert"default:"vehicletype" "stryker"default:"script_team" "allies"

@@ -794,13 +794,13 @@ manualdropthink() {
   self endon("drop_object");
 
   for(;;) {
-    while(self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed())
+    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryoffhandbuttonPressed() || self meleeButtonPressed())
       wait 0.05;
 
-    while(!self attackbuttonpressed() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self meleebuttonpressed())
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryoffhandbuttonPressed() && !self meleeButtonPressed())
       wait 0.05;
 
-    if(isDefined(self.carryobject) && !self usebuttonpressed())
+    if(isDefined(self.carryobject) && !self useButtonPressed())
       self.carryobject thread setdropped();
   }
 }
@@ -1697,13 +1697,13 @@ usetest(var_0, var_1, var_2, var_3) {
   if(!var_0 istouching(self.trigger))
     return 0;
 
-  if(!var_0 usebuttonpressed())
+  if(!var_0 useButtonPressed())
     return 0;
 
   if(isDefined(var_0.throwinggrenade))
     return 0;
 
-  if(var_0 meleebuttonpressed())
+  if(var_0 meleeButtonPressed())
     return 0;
 
   if(self.curprogress >= self.usetime)

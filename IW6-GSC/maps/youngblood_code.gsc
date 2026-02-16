@@ -1062,7 +1062,7 @@ chaos_cull_more() {
 }
 
 chaos_falling_debris() {
-  var_0 = common_scripts\utility::getstructarray("chaos_falling_debris", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("chaos_falling_debris", "script_noteworthy");
 
   for(;;) {
     var_1 = anglesToForward(level.player.angles);

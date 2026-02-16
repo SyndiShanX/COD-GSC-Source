@@ -4,7 +4,7 @@
 *******************************************/
 
 infantry_teleport_start(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname")[0];
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname")[0];
   level.player maps\_utility::teleport_player(var_1);
   spawn_start_guys(var_1);
   level.player takeallweapons();
@@ -41,7 +41,7 @@ convert_old_spawners_to_structs(var_0) {
   var_1 = getEntArray(var_0.target, "targetname");
 
   if(var_1.size == 0)
-    return common_scripts\utility::getstructarray(var_0.target, "targetname");
+    return common_scripts\utility::getStructArray(var_0.target, "targetname");
 
   var_2 = [];
 

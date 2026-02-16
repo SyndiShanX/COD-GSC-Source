@@ -460,7 +460,7 @@ drone_init_path() {
         break;
       }
 
-      nextNodes = getstructarray(node.target, "targetname");
+      nextNodes = getStructArray(node.target, "targetname");
       if(nextNodes.size) {
         break;
       }
@@ -510,7 +510,7 @@ drone_init_path() {
       if(!isDefined(vectors[node.targetname])) {
         return;
       }
-      nextNodes = getstructarray(node.target, "targetname");
+      nextNodes = getStructArray(node.target, "targetname");
       if(nextNodes.size) {
         break;
       }

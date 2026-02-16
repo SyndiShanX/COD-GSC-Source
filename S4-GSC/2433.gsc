@@ -2175,7 +2175,7 @@ _id_97D1(var_0) {
   var_1 = 0;
 
   for(;;) {
-    if(self adsbuttonpressed() && !var_1) {
+    if(self adsButtonPressed() && !var_1) {
       if(scripts\cp\utility::_id_8632(self getcurrentweapon()) || scripts\cp\utility::_id_10D02(self getcurrentweapon())) {
         waitframe();
         continue;

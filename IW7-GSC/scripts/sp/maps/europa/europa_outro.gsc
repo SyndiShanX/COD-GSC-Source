@@ -586,7 +586,7 @@ func_11628() {
     level.player unlink(1);
   }
 
-  var_1 = scripts\engine\utility::getstructarray("outro_spot", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("outro_spot", "targetname");
   foreach(var_3 in var_1) {
     foreach(var_5 in var_0) {
       if(isPlayer(var_5) && var_3.script_noteworthy == "player") {

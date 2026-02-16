@@ -153,7 +153,7 @@ function watchremotetriggerdisable() {
 
 function allowremotestart() {
   player = self;
-  if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() && !player util::isusingremote() && (!(isDefined(player.carryobject) && (isDefined(player.carryobject.disallowremotecontrol) && player.carryobject.disallowremotecontrol)))) {
+  if(player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed() && !player util::isusingremote() && (!(isDefined(player.carryobject) && (isDefined(player.carryobject.disallowremotecontrol) && player.carryobject.disallowremotecontrol)))) {
     return true;
   }
   return false;
@@ -249,7 +249,7 @@ function watchremotecontroldeactivate() {
   weapon.remoteowner endon("disconnect");
   while(true) {
     timeused = 0;
-    while(weapon.remoteowner usebuttonpressed()) {
+    while(weapon.remoteowner useButtonPressed()) {
       timeused = timeused + 0.05;
       if(timeused > 0.25) {
         weapon thread endremotecontrolweaponuse(1);

@@ -45,7 +45,7 @@ put this in your GSC:
 maps\_snowmobile_player::main( "vehicle_snowmobile" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile_player
+#include,vehicle_snowmobile_snowmobile_player
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player"default:"script_team" "allies"*/
@@ -56,7 +56,7 @@ put this in your GSC:
 maps\_snowmobile_player::main( "vehicle_snowmobile_alt" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile_player
+#include,vehicle_snowmobile_snowmobile_player
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile_player"default:"script_team" "allies"

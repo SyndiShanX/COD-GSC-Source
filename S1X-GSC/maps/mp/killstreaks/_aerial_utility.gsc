@@ -1088,7 +1088,7 @@ getEntOrStruct(name, type) {
 }
 
 getEntOrStructArray(name, type) {
-  structArray = getstructarray(name, type);
+  structArray = getStructArray(name, type);
   entArray = getEntArray(name, type);
   if(entArray.size > 0) {
     structArray = array_combine(structArray, entArray);

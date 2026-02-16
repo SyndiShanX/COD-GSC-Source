@@ -148,7 +148,7 @@ trapflingzombie(var_0) {
 
 trapgetwatervolume() {
   var_0 = getEntArray(self.target, "targetname");
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {

@@ -563,7 +563,7 @@ _id_89CF(var_0) {
 _id_89CE(var_0) {
   var_1 = 0;
   var_2 = self getcurrentweapon();
-  var_3 = self adsbuttonpressed();
+  var_3 = self adsButtonPressed();
   var_4 = 0;
   var_5 = 0;
   var_6 = 0;

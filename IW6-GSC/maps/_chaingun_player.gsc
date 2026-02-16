@@ -89,7 +89,7 @@ custom_mount_hint_return_when_mounted(var_0) {
 
       self.mount_hint settext(&"PLATFORM_HOLD_TO_USE");
 
-      if(level.player usebuttonpressed()) {
+      if(level.player useButtonPressed()) {
         self.mount_hint destroy();
         return;
       }
@@ -228,7 +228,7 @@ player_use_chaingun_with_viewmodel(var_0, var_1, var_2) {
   var_10 = 0;
 
   while(common_scripts\utility::flag("player_on_chaingun_turret")) {
-    var_9 = level.player attackbuttonpressed();
+    var_9 = level.player attackButtonPressed();
 
     if(var_10 != var_9) {
       if(var_9)
@@ -285,7 +285,7 @@ chaingun_shells(var_0, var_1) {
   common_scripts\utility::flag_wait("player_on_chaingun_turret");
 
   while(common_scripts\utility::flag("player_on_chaingun_turret")) {
-    while(level.player attackbuttonpressed()) {
+    while(level.player attackButtonPressed()) {
       playFXOnTag(var_2, self, var_3);
       wait(var_4);
     }

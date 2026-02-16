@@ -156,7 +156,7 @@ _id_6B17(var_0, var_1) {
 }
 
 _id_6B19(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_3 = undefined;
 
   if(isDefined(_id_6B18())) {
@@ -184,7 +184,7 @@ _id_6B19(var_0, var_1) {
 }
 
 _id_6B1A(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_3 = [];
 
   if(isDefined(_id_6B18())) {

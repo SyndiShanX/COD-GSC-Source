@@ -46,7 +46,7 @@ put this in your GSC:
 maps\_luxurysedan::main( "vehicle_luxurysedan" );
 
 and these lines in your CSV:
-include,vehicle_luxurysedan_luxurysedan
+#include,vehicle_luxurysedan_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
 defaultmdl="vehicle_luxurysedan"default:"vehicletype" "luxurysedan"default:"script_team" "allies"*/
@@ -57,7 +57,7 @@ put this in your GSC:
 maps\_luxurysedan::main( "vehicle_luxurysedan", "luxurysedan_physics" );
 
 and these lines in your CSV:
-include,vehicle_luxurysedan_luxurysedan
+#include,vehicle_luxurysedan_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
 defaultmdl="vehicle_luxurysedan"default:"vehicletype" "luxurysedan_physics"default:"script_team" "allies"*/
@@ -68,7 +68,7 @@ put this in your GSC:
 maps\_luxurysedan::main( "vehicle_luxurysedan_test" );
 
 and these lines in your CSV:
-include,vehicle_luxurysedan_test_luxurysedan
+#include,vehicle_luxurysedan_test_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
 defaultmdl="vehicle_luxurysedan_test"default:"vehicletype" "luxurysedan"default:"script_team" "allies"*/
@@ -79,7 +79,7 @@ put this in your GSC:
 maps\_luxurysedan::main( "vehicle_luxurysedan_2009_viewmodel" );
 
 and these lines in your CSV:
-include,vehicle_luxurysedan_viewmodel_luxurysedan
+#include,vehicle_luxurysedan_viewmodel_luxurysedan
 sound,vehicle_luxerysedan,vehicle_standard,all_sp
 
 defaultmdl="vehicle_luxurysedan_2009_viewmodel"default:"vehicletype" "luxurysedan"default:"script_team" "allies"

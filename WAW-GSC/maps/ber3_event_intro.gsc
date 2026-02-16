@@ -253,7 +253,7 @@ play_intro_on_all_players(anode) {
   flag_wait("all_players_spawned");
 
   players = get_players();
-  lerp_nodes = getstructarray("intro_coop_starts", "targetname");
+  lerp_nodes = getStructArray("intro_coop_starts", "targetname");
   for(i = 0; i < players.size; i++) {
     players[i] thread play_intro_on_player("intro", anode, i, lerp_nodes[i]);
   }
@@ -550,7 +550,7 @@ loop_fire_katyusha() {
   kat1 = getent("e1_katyusha", "targetname");
   kat2 = getent("e1_katyusha2", "targetname");
 
-  targets = getstructarray("e1_katyusha_target", "targetname");
+  targets = getStructArray("e1_katyusha_target", "targetname");
 
   kat1 thread katyusha_trucks_fire(targets, 2500, 150);
   kat2 thread katyusha_trucks_fire(targets, 2500, 150);
@@ -884,7 +884,7 @@ warp_players_after_library() {
   getent("trig_warp_after_library", "targetname") waittill("trigger");
 
   volume = getent("trig_trap_warpto_check", "targetname");
-  warpto_spots = getstructarray("struct_warp_after_library", "targetname");
+  warpto_spots = getStructArray("struct_warp_after_library", "targetname");
 
   players = get_players();
 
@@ -928,7 +928,7 @@ amb_alley_katyusha() {
   wait(10);
 
   kat = getent("e1_alley_katyusha", "targetname");
-  targets = getstructarray("e1_katyusha_target", "targetname");
+  targets = getStructArray("e1_katyusha_target", "targetname");
 
   kat thread katyusha_trucks_fire(targets, 2500, 150);
 

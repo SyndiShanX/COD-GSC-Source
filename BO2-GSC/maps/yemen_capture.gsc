@@ -44,14 +44,14 @@ skipto_outro_vtol() {
 
 skipto_outro_vtol_play_anim() {
   while(true) {
-    while(!level.player actionslotonebuttonpressed()) {
+    while(!level.player actionslotonebuttonPressed()) {
       wait 0.05;
     }
 
     level thread run_scene("surrender_menendez");
     level thread run_scene("surrender_menendez_player");
 
-    while(level.player actionslotonebuttonpressed()) {
+    while(level.player actionslotonebuttonPressed()) {
       wait 0.05;
     }
   }
@@ -361,7 +361,7 @@ capture_get_vector_dot(v_pos) {
 }
 
 capture_spawn_fake_qrotors_at_structs_and_move(str_drone_pos, n_move_time) {
-  a_drone_pos = getstructarray(str_drone_pos, "targetname");
+  a_drone_pos = getStructArray(str_drone_pos, "targetname");
 
   foreach(s_drone_pos in a_drone_pos) {
     m_drone = spawn("script_model", s_drone_pos.origin);

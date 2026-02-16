@@ -613,7 +613,7 @@ discover_dig_site_trigger_touch() {
 }
 
 maxis_audio_logs() {
-  a_s_radios = getstructarray("maxis_audio_log", "targetname");
+  a_s_radios = getStructArray("maxis_audio_log", "targetname");
 
   foreach(s_origin in a_s_radios) {
     s_origin.unitrigger_stub = spawnStruct();
@@ -683,7 +683,7 @@ play_maxis_audio_log(v_trigger_origin, n_audiolog_id) {
 
   e_vo_origin = spawn("script_origin", v_trigger_origin);
   flag_set("maxis_audio_log_" + n_audiolog_id);
-  a_s_triggers = getstructarray("maxis_audio_log", "targetname");
+  a_s_triggers = getStructArray("maxis_audio_log", "targetname");
 
   foreach(s_trigger in a_s_triggers) {
     if(s_trigger.script_int == n_audiolog_id) {
@@ -721,7 +721,7 @@ reset_maxis_audiolog_unitrigger(n_robot_id) {
   if(flag("maxis_audio_log_" + n_script_int)) {
     return;
   }
-  a_s_radios = getstructarray("maxis_audio_log", "targetname");
+  a_s_radios = getStructArray("maxis_audio_log", "targetname");
 
   foreach(s_origin in a_s_radios) {
     if(s_origin.script_int == n_script_int) {
@@ -739,7 +739,7 @@ restart_maxis_audiolog_unitrigger(n_robot_id) {
   else if(n_robot_id == 2)
     n_script_int = 6;
 
-  a_s_radios = getstructarray("maxis_audio_log", "targetname");
+  a_s_radios = getStructArray("maxis_audio_log", "targetname");
 
   foreach(s_origin in a_s_radios) {
     if(s_origin.script_int == n_script_int) {

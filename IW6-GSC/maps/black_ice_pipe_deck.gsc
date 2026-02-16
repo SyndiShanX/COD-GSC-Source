@@ -461,7 +461,7 @@ heli_support_pipe_deck() {
   self setvehgoalpos(var_2.origin, 1);
   thread heli_spot_on_single(var_1, 2);
   wait 5;
-  var_3 = common_scripts\utility::getstructarray("struct_heli_aim_boats_2", "script_noteworthy");
+  var_3 = common_scripts\utility::getStructArray("struct_heli_aim_boats_2", "script_noteworthy");
   var_3 = sortbydistance(var_3, self.origin);
 
   for(var_4 = 1; var_4 < var_3.size; var_4++) {

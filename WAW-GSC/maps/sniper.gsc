@@ -148,7 +148,7 @@ main() {
       level.hero = getent("sniper_hero", "script_noteworthy");
       level.hero allowedstances("stand", "crouch", "prone");
       players = get_players();
-      event3_players_start = getstructarray(eventname + "_playerstart", "targetname");
+      event3_players_start = getStructArray(eventname + "_playerstart", "targetname");
       for(i = 0; i < players.size; i++) {
         players[i] setOrigin(event3_players_start[i].origin + (0, 0, -10000));
         players[i] setplayerangles(event3_players_start[i].angles);

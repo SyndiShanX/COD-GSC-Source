@@ -578,7 +578,7 @@ function_715588b3() {
           continue;
         }
 
-        if(!player usebuttonpressed() || !zm_utility::can_use(player) || player isinmovemode("ufo", "noclip") || !player istouching(self)) {
+        if(!player useButtonPressed() || !zm_utility::can_use(player) || player isinmovemode("ufo", "noclip") || !player istouching(self)) {
           b_using = 0;
           n_time = 0;
           break;

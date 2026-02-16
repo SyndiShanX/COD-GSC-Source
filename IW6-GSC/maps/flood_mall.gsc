@@ -204,7 +204,7 @@ watch_player() {
         wait 0.75;
 
       break;
-    } else if(level.player attackbuttonpressed()) {
+    } else if(level.player attackButtonPressed()) {
       break;
     }
 

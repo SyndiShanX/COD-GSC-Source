@@ -787,7 +787,7 @@ can_suicide() {
 }
 
 is_suiciding(revivee) {
-  return self usebuttonpressed() && can_suicide();
+  return self useButtonPressed() && can_suicide();
 }
 
 check_self_revive_for_hotjoin() {
@@ -894,7 +894,7 @@ function_76043ec3() {
   self endon(#"disconnect", #"zombified", #"player_revived", #"bled_out");
   level endon(#"end_game");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait 1;
   }
 
@@ -935,7 +935,7 @@ function_76043ec3() {
 }
 
 function_550c4ac4() {
-  return self usebuttonpressed() && function_30b9cdd5();
+  return self useButtonPressed() && function_30b9cdd5();
 }
 
 function_30b9cdd5() {
@@ -1247,10 +1247,10 @@ is_reviving(e_revivee, t_secondary) {
   }
 
   if(isDefined(t_secondary)) {
-    return (self usebuttonpressed() && self can_revive(e_revivee, 1, 1) && self istouching(t_secondary));
+    return (self useButtonPressed() && self can_revive(e_revivee, 1, 1) && self istouching(t_secondary));
   }
 
-  return self usebuttonpressed() && can_revive(e_revivee);
+  return self useButtonPressed() && can_revive(e_revivee);
 }
 
 is_reviving_any() {

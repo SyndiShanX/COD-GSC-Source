@@ -548,7 +548,7 @@ _id_F956(var_0, var_1, var_2, var_3) {
       continue;
     }
 
-    if(var_1 && self attackbuttonpressed()) {
+    if(var_1 && self attackButtonPressed()) {
       level notify(var_4, "fire");
       wait 0.1;
       continue;

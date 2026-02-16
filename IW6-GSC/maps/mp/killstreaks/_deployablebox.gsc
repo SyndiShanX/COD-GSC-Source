@@ -662,5 +662,5 @@ createBombSquadModel(streakName) {
 }
 
 isPlayerUsingBox(box) {
-  return (!level.gameEnded && isDefined(box) && isReallyAlive(self) && self UseButtonPressed() && !(self IsOnLadder()) && !(self MeleeButtonPressed()) && !(isDefined(self.throwingGrenade)) && box.curProgress < box.useTime && (!isDefined(self.teleporting) || !self.teleporting));
+  return (!level.gameEnded && isDefined(box) && isReallyAlive(self) && self useButtonPressed() && !(self IsOnLadder()) && !(self meleeButtonPressed()) && !(isDefined(self.throwingGrenade)) && box.curProgress < box.useTime && (!isDefined(self.teleporting) || !self.teleporting));
 }

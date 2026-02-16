@@ -125,7 +125,7 @@ run_sacrifice_ignition(e_volume) {
     return;
   }
   level endon("fire_puzzle_1_complete");
-  a_torch_pos = getstructarray(self.target, "targetname");
+  a_torch_pos = getStructArray(self.target, "targetname");
   array_thread(a_torch_pos, ::run_sacrifice_plinth, e_volume);
   sndorigin = a_torch_pos[0].origin;
 
@@ -273,7 +273,7 @@ fire_puzzle_2_init() {
     a_ternary[0] ghost();
   }
 
-  a_torches = getstructarray("church_torch_target", "script_noteworthy");
+  a_torches = getStructArray("church_torch_target", "script_noteworthy");
   array_thread(a_torches, ::fire_puzzle_torch_run);
 }
 
@@ -290,7 +290,7 @@ fire_puzzle_2_run() {
 }
 
 fire_puzzle_2_cleanup() {
-  a_torches = getstructarray("church_torch_target", "script_noteworthy");
+  a_torches = getStructArray("church_torch_target", "script_noteworthy");
 
   foreach(s_torch in a_torches) {
     if(!isDefined(s_torch.e_fx)) {
@@ -310,7 +310,7 @@ fire_puzzle_2_cleanup() {
 }
 
 fire_puzzle_2_is_complete() {
-  a_torches = getstructarray("church_torch_target", "script_noteworthy");
+  a_torches = getStructArray("church_torch_target", "script_noteworthy");
   wrong_torch = 0;
   unlit_torch = 0;
 

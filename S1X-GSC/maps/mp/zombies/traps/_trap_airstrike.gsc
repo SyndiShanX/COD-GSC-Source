@@ -11,7 +11,7 @@ init() {
 
 trap_airstrike_begin() {
   var_0 = [];
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_3 in var_1) {
     if(!isDefined(var_3.script_noteworthy)) {

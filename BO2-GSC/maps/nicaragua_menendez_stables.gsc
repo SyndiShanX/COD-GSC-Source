@@ -271,7 +271,7 @@ pitchfork_think() {
   level endon("pitchfork_logic_done");
 
   while(!flag("player_grabbed_pitchfork")) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       flag_set("player_grabbed_pitchfork");
     }
 

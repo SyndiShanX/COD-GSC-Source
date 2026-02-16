@@ -1882,7 +1882,7 @@ _id_3DDE() {
 }
 
 _id_3DDF() {
-  var_0 = common_scripts\utility::getstructarray("drop_path_start", "targetname");
+  var_0 = common_scripts\utility::getStructArray("drop_path_start", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2;
@@ -2073,7 +2073,7 @@ _id_3DE9() {
 }
 
 _id_3DEA() {
-  var_0 = common_scripts\utility::getstructarray("so_claymore_loc", "targetname");
+  var_0 = common_scripts\utility::getStructArray("so_claymore_loc", "targetname");
   return var_0;
 }
 

@@ -298,7 +298,7 @@ endmgstreakwhenleavemg() {
   level endon("game_ended");
 
   for(;;) {
-    if(!isalive(self) || self usebuttonpressed()) {
+    if(!isalive(self) || self useButtonPressed()) {
       self.pers["MGStreak"] = undefined;
       break;
     }

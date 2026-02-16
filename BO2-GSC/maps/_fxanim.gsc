@@ -667,7 +667,7 @@ fxanim_delete(str_script_string, b_assert_if_missing) {
   }
 
   assert(isDefined(str_script_string), "str_script_string is a required argument for fxanim_delete");
-  a_fxanims = arraycombine(getEntArray("fxanim", "script_noteworthy"), getstructarray("fxanim", "script_noteworthy"), 0, 0);
+  a_fxanims = arraycombine(getEntArray("fxanim", "script_noteworthy"), getStructArray("fxanim", "script_noteworthy"), 0, 0);
   n_delete_counter = 0;
 
   foreach(object in a_fxanims) {
@@ -719,7 +719,7 @@ fxanim_deconstruct(str_fxanim) {
 
 fxanim_reconstruct(str_fxanim) {
   flag_wait("fxanim_setup_complete");
-  a_s_parent_fxanim = getstructarray(str_fxanim, "targetname");
+  a_s_parent_fxanim = getStructArray(str_fxanim, "targetname");
   assert(a_s_parent_fxanim.size > 0, "FX anim parent struct not found, make sure deconstruct was called for this FX anim.");
 
   foreach(s_parent_fxanim in a_s_parent_fxanim) {

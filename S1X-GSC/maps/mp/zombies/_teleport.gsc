@@ -16,13 +16,13 @@ init() {
     level.zmteleportlookarcs = [20, 20, 0, 30];
   }
 
-  level.teleportrooms = common_scripts\utility::getstructarray("teleport_room", "targetname");
+  level.teleportrooms = common_scripts\utility::getStructArray("teleport_room", "targetname");
 
   if(level.teleportrooms.size) {
     level.teleportroomindex = 0;
   }
 
-  level.zombieteleporters = common_scripts\utility::getstructarray("zombie_teleport", "targetname");
+  level.zombieteleporters = common_scripts\utility::getStructArray("zombie_teleport", "targetname");
   common_scripts\utility::array_thread(level.zombieteleporters, ::teleporter_init);
   level thread teleporter_cost();
 }
@@ -30,7 +30,7 @@ init() {
 teleporter_init() {
   self.disabled = 0;
   var_0 = getEntArray(self.target, "targetname");
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {
@@ -415,7 +415,7 @@ teleport_add_location(var_0) {
   }
 
   if(isDefined(var_0.target)) {
-    var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+    var_1 = common_scripts\utility::getStructArray(var_0.target, "targetname");
     var_2 = [];
 
     foreach(var_4 in var_1) {

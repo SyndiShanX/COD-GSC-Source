@@ -134,7 +134,7 @@ player_look_at_target(var_0, var_1) {
     return 0;
   }
 
-  if(!var_1 adsbuttonpressed()) {
+  if(!var_1 adsButtonPressed()) {
     return 0;
   }
 
@@ -193,7 +193,7 @@ complete_hit_skull_at_wheel_of_misfortune() {
 debug_hit_skull_at_wheel_of_misfortune() {}
 
 setup_skull_on_wheel_of_misfortune() {
-  var_0 = scripts\engine\utility::getstructarray("interaction_knife_throw", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("interaction_knife_throw", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.knife_throw_target.origin);
     var_3.angles = var_2.knife_throw_target.angles;
@@ -205,7 +205,7 @@ setup_skull_on_wheel_of_misfortune() {
 }
 
 clear_skull_on_wheel_of_misfortune() {
-  var_0 = scripts\engine\utility::getstructarray("interaction_knife_throw", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("interaction_knife_throw", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.knife_throw_target.skull_target)) {
       var_2.knife_throw_target.skull_target delete();
@@ -474,7 +474,7 @@ wait_for_player_activation() {
         break;
       }
 
-      if(!var_4 usebuttonpressed()) {
+      if(!var_4 useButtonPressed()) {
         var_2 = 0;
         break;
       }
@@ -499,7 +499,7 @@ wait_for_player_activation() {
           break;
         }
 
-        if(!var_4 usebuttonpressed()) {
+        if(!var_4 useButtonPressed()) {
           var_2 = 0;
           break;
         }

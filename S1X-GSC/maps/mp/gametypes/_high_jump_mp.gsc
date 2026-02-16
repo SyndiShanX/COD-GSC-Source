@@ -7,9 +7,7 @@
 #include common_scripts\utility;
 #include maps\mp\gametypes\_hud_util;
 
-init()
-
-{
+init() {
   if(!isAugmentedGameMode()) {
     return;
   }
@@ -22,9 +20,7 @@ init()
   thread high_jump_on_player_spawn();
 }
 
-high_jump_enable()
-
-{
+high_jump_enable() {
   SetDevDvar("slide_hold_change_stance_time_ms", 1);
   SetDevDvar("power_slide_cooldown_time_sec", 1);
   SetDevDvar("power_slide_on_radar", 1);
@@ -42,9 +38,7 @@ high_jump_enable()
   SetDevDvar("ground_slam_max_radius", maps\mp\_exo_suit::getGroundSlamMaxRadius());
 }
 
-high_jump_on_player_spawn()
-
-{
+high_jump_on_player_spawn() {
   level endon("game_ended");
 
   while(true) {
@@ -62,9 +56,7 @@ high_jump_on_player_spawn()
   }
 }
 
-high_jump_host_migration()
-
-{
+high_jump_host_migration() {
   level endon("game_ended");
 
   while(true) {
@@ -74,9 +66,7 @@ high_jump_host_migration()
   }
 }
 
-map_border_hud_updater()
-
-{
+map_border_hud_updater() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -110,9 +100,7 @@ map_border_hud_updater()
   }
 }
 
-exo_dodge_think()
-
-{
+exo_dodge_think() {
   self endon("death");
   self endon("disconnect");
   self endon("faux_spawn");
@@ -127,9 +115,7 @@ exo_dodge_think()
   }
 }
 
-exo_dodge_cooldown()
-
-{
+exo_dodge_cooldown() {
   canUseWeapon = GetDvarFloat("dodge_weapon_enable", true);
 
   if(!canUseWeapon) {

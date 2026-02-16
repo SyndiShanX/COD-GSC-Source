@@ -245,7 +245,7 @@ _id_3ECE() {
     }
     wait 0.1;
 
-    if(!var_1 usebuttonpressed()) {
+    if(!var_1 useButtonPressed()) {
       continue;
     }
     self notify("armory_use", var_1);

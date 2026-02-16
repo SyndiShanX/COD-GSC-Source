@@ -802,7 +802,7 @@ dryer_teleports_zombie() {
 
   if(self.ai_state == "find_flesh") {
     self.zapped = 1;
-    a_nodes = getstructarray("dryer_zombie_teleports", "targetname");
+    a_nodes = getStructArray("dryer_zombie_teleports", "targetname");
     nd_target = random(a_nodes);
     playFX(level._effect["afterlife_teleport"], self.origin);
     self hide();

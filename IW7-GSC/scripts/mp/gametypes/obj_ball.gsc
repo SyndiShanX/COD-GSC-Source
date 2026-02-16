@@ -82,11 +82,11 @@ checkpostshipballspawns(var_0) {
 getballstarts() {
   var_0 = undefined;
   if(level.gametype == "tdef") {
-    var_0 = scripts\engine\utility::getstructarray("tdef_ball_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("tdef_ball_start", "targetname");
   }
 
   if(!isDefined(var_0) || !var_0.size) {
-    var_0 = scripts\engine\utility::getstructarray("ball_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("ball_start", "targetname");
   }
 
   if(level.satellitecount > 1) {

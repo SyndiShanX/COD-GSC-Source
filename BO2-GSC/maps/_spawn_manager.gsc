@@ -841,10 +841,10 @@ spawn_manager_debug_spawn_manager() {
         old_spawn_manager_index = 0;
       }
 
-      if(level.test_player buttonpressed("BUTTON_LSHLDR")) {
+      if(level.test_player buttonPressed("BUTTON_LSHLDR")) {
         old_spawn_manager_index = current_spawn_manager_index;
 
-        if(level.test_player buttonpressed("DPAD_UP")) {
+        if(level.test_player buttonPressed("DPAD_UP")) {
           current_spawn_manager_index--;
 
           if(current_spawn_manager_index < 0) {
@@ -852,7 +852,7 @@ spawn_manager_debug_spawn_manager() {
           }
         }
 
-        if(level.test_player buttonpressed("DPAD_DOWN")) {
+        if(level.test_player buttonPressed("DPAD_DOWN")) {
           current_spawn_manager_index++;
 
           if(current_spawn_manager_index > level.debugactivemanagers.size - 1) {
@@ -1005,8 +1005,8 @@ spawn_manager_debug_spawn_manager_values_dpad() {
     level.sm_spawner_count_max_hud.color = (1, 1, 1);
   }
 
-  if(level.test_player buttonpressed("BUTTON_LTRIG")) {
-    if(level.test_player buttonpressed("DPAD_DOWN")) {
+  if(level.test_player buttonPressed("BUTTON_LTRIG")) {
+    if(level.test_player buttonPressed("DPAD_DOWN")) {
       level.current_debug_index++;
 
       if(level.current_debug_index > 7) {
@@ -1014,7 +1014,7 @@ spawn_manager_debug_spawn_manager_values_dpad() {
       }
     }
 
-    if(level.test_player buttonpressed("DPAD_UP")) {
+    if(level.test_player buttonPressed("DPAD_UP")) {
       level.current_debug_index--;
 
       if(level.current_debug_index < 0) {
@@ -1027,12 +1027,12 @@ spawn_manager_debug_spawn_manager_values_dpad() {
   increase_value = 0;
   decrease_value = 0;
 
-  if(level.test_player buttonpressed("BUTTON_LTRIG")) {
-    if(level.test_player buttonpressed("DPAD_LEFT")) {
+  if(level.test_player buttonPressed("BUTTON_LTRIG")) {
+    if(level.test_player buttonPressed("DPAD_LEFT")) {
       decrease_value = 1;
     }
 
-    if(level.test_player buttonpressed("DPAD_RIGHT")) {
+    if(level.test_player buttonPressed("DPAD_RIGHT")) {
       increase_value = 1;
     }
   }

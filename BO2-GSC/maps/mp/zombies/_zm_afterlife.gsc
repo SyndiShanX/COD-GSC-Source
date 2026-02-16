@@ -58,7 +58,7 @@ init() {
   array_thread(a_afterlife_interact, ::afterlife_interact_object_think);
   level.zombie_spawners = getEntArray("zombie_spawner", "script_noteworthy");
   array_thread(level.zombie_spawners, ::add_spawn_function, ::afterlife_zombie_damage);
-  a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
+  a_afterlife_triggers = getStructArray("afterlife_trigger", "targetname");
 
   foreach(struct in a_afterlife_triggers)
   afterlife_trigger_create(struct);
@@ -346,12 +346,12 @@ afterlife_enter() {
   if(!isDefined(self.keep_perks) && flag("afterlife_start_over"))
     self increment_downed_stat();
 
-  a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
+  a_afterlife_triggers = getStructArray("afterlife_trigger", "targetname");
 
   foreach(struct in a_afterlife_triggers)
   struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
 
-  a_exterior_goals = getstructarray("exterior_goal", "targetname");
+  a_exterior_goals = getStructArray("exterior_goal", "targetname");
 
   foreach(struct in a_exterior_goals) {
     if(isDefined(struct.unitrigger_stub))
@@ -406,7 +406,7 @@ afterlife_leave(b_revived) {
         else
           str_location = level.e_gondola.location;
 
-        a_s_orgs = getstructarray("gondola_dropped_parts_" + str_location, "targetname");
+        a_s_orgs = getStructArray("gondola_dropped_parts_" + str_location, "targetname");
 
         foreach(struct in a_s_orgs) {
           if(!positionwouldtelefrag(struct.origin)) {
@@ -1051,7 +1051,7 @@ revive_clean_up_on_gameover() {
 }
 
 is_reviving_afterlife(revivee) {
-  return self usebuttonpressed() && afterlife_can_revive(revivee);
+  return self useButtonPressed() && afterlife_can_revive(revivee);
 }
 
 afterlife_save_loadout() {
@@ -1286,7 +1286,7 @@ afterlife_get_spawnpoint() {
 
     match_string = level.scr_zm_ui_gametype + "_" + location;
     spawnpoints = [];
-    structs = getstructarray("initial_spawn", "script_noteworthy");
+    structs = getStructArray("initial_spawn", "script_noteworthy");
 
     if(isDefined(structs)) {
       foreach(struct in structs) {
@@ -1302,7 +1302,7 @@ afterlife_get_spawnpoint() {
     }
 
     if(!isDefined(spawnpoints) || spawnpoints.size == 0)
-      spawnpoints = getstructarray("initial_spawn_points", "targetname");
+      spawnpoints = getStructArray("initial_spawn_points", "targetname");
 
     assert(isDefined(spawnpoints), "Could not find initial spawn points!");
     spawnpoint = maps\mp\zombies\_zm::getfreespawnpoint(spawnpoints, self);
@@ -1329,7 +1329,7 @@ check_for_valid_spawn_in_zone(player) {
 
   foreach(spawn_point in a_spawn_points) {
     if(spawn_point.script_noteworthy == str_player_zone) {
-      a_spawn_structs = getstructarray(spawn_point.target, "targetname");
+      a_spawn_structs = getStructArray(spawn_point.target, "targetname");
       a_spawn_structs = get_array_of_closest(player.origin, a_spawn_structs);
 
       foreach(s_spawn in a_spawn_structs) {
@@ -1451,7 +1451,7 @@ afterlife_trigger_create(s_origin) {
 }
 
 reset_all_afterlife_unitriggers() {
-  a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
+  a_afterlife_triggers = getStructArray("afterlife_trigger", "targetname");
 
   foreach(struct in a_afterlife_triggers) {
     maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(struct.unitrigger_stub);

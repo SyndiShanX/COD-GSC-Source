@@ -1377,11 +1377,11 @@ function_b9b8f31d() {
 }
 
 function_f80bde48(player) {
-  if(isPlayer(player) && player getstance() === # "crouch" && player usebuttonpressed()) {
+  if(isPlayer(player) && player getstance() === # "crouch" && player useButtonPressed()) {
     player endon(#"death", #"weapon_fired", #"weapon_ads");
     e_path = getent("berths_walk", "targetname");
 
-    while(player getstance() === # "crouch" && player usebuttonpressed() && player istouching(e_path)) {
+    while(player getstance() === # "crouch" && player useButtonPressed() && player istouching(e_path)) {
       wait 0.2;
     }
 

@@ -473,9 +473,9 @@ monitorDoubleTap(player) {
   buttonTime = 0;
 
   while(true) {
-    if(player UseButtonPressed()) {
+    if(player useButtonPressed()) {
       buttonTime = 0;
-      while(player UseButtonPressed()) {
+      while(player useButtonPressed()) {
         buttonTime += 0.05;
         wait(0.05);
       }
@@ -484,7 +484,7 @@ monitorDoubleTap(player) {
         continue;
       }
       buttonTime = 0;
-      while(!player UseButtonPressed() && buttonTime < 0.5) {
+      while(!player useButtonPressed() && buttonTime < 0.5) {
         buttonTime += 0.05;
         wait(0.05);
       }

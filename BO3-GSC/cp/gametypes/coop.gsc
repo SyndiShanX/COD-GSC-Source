@@ -394,10 +394,10 @@ function function_c14603ce() {
   level endon("game_ended");
   self clientfield::set_to_player("killcam_menu", 1);
   printtoprightln("", (1, 0, 1));
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait(0.05);
   }
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     wait(0.05);
   }
   self.var_acfedf1c = 1;
@@ -435,10 +435,10 @@ function function_44e35f1a() {
   level endon("game_ended");
   self function_e82a1210();
   printtoprightln("", (1, 0, 1));
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait(0.05);
   }
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     wait(0.05);
   }
   self.var_acfedf1c = 1;

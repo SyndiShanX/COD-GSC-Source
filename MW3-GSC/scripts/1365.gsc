@@ -48,7 +48,7 @@ _id_4178(var_0) {
       continue;
     }
 
-    if(self attackbuttonpressed() && !self._id_3C98.overheated) {
+    if(self attackButtonPressed() && !self._id_3C98.overheated) {
       self._id_3C98._id_416D = self._id_3C98._id_416D + self._id_3C98._id_416F;
     } else {
       self._id_3C98._id_416D = self._id_3C98._id_416D - self._id_3C98._id_4170;

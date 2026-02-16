@@ -1095,7 +1095,7 @@ insert_alien_fuses() {
 }
 
 init_pap_upgrade() {
-  var_0 = scripts\engine\utility::getstructarray("pap_upgrade", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pap_upgrade", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
@@ -1343,7 +1343,7 @@ ufo_zombie_death_monitor(var_0) {
 get_beam_down_ground_location() {
   var_0 = level.ufo;
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray("ufo_zombie_spawn_loc", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("ufo_zombie_spawn_loc", "targetname");
 
   foreach(var_4 in var_2) {
     if(distance2dsquared(var_0.origin, var_4.origin) < 250000) {

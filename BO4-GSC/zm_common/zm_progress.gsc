@@ -58,7 +58,7 @@ function_89769800(params, unitrigger, b_start, var_c060d2c8) {
     return false;
   }
 
-  if(!self usebuttonpressed()) {
+  if(!self useButtonPressed()) {
     return false;
   }
 

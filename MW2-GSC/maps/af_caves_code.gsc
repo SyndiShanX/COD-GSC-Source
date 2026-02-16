@@ -729,13 +729,13 @@ af_caves_rappel_behavior() {
     if(player_rig GetAnimTime(far_anim) >= 0.94) // .94
       flag_set("rappel_end");
 
-    breaking = level.player AdsButtonPressed() || level.player AttackButtonPressed() && !flag("rappel_end");
+    breaking = level.player adsButtonPressed() || level.player attackButtonPressed() && !flag("rappel_end");
 
     if(breaking)
       flag_set("player_braked");
 
     if(flag("rappel_end")) {
-      if(level.player MeleeButtonPressed()) {
+      if(level.player meleeButtonPressed()) {
         break;
       }
     }
@@ -880,7 +880,7 @@ af_caves_rappel_behavior() {
         break;
       }
 
-      if(level.player MeleeButtonPressed()) {
+      if(level.player meleeButtonPressed()) {
         break;
       }
       wait(0.05);

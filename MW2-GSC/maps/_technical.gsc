@@ -182,7 +182,7 @@ put this in your GSC:
 maps\_technical::main( "vehicle_pickup_technical" );
 
 and these lines in your CSV:
-include,vehicle_pickup_technical_technical
+#include,vehicle_pickup_technical_technical
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -194,7 +194,7 @@ put this in your GSC:
 maps\_technical::main( "vehicle_pickup_technical", "technical_physics" );
 
 and these lines in your CSV:
-include,vehicle_pickup_technical_technical
+#include,vehicle_pickup_technical_technical
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 

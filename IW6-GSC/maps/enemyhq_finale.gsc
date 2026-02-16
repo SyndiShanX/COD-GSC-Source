@@ -726,7 +726,7 @@ handle_final_finale_guys() {
 }
 
 finale_explosions() {
-  var_0 = common_scripts\utility::getstructarray("finale_explosion", "targetname");
+  var_0 = common_scripts\utility::getStructArray("finale_explosion", "targetname");
 
   foreach(var_2 in var_0) {
     playFX(level._effect["finale_explosion"], var_2.origin);

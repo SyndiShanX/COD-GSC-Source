@@ -941,7 +941,7 @@ monitor_gun_audio() {
 
   fire_sound = "veh_a10_npc_fire_gatling_lp";
   while(1) {
-    if(!(self.owner AttackButtonPressed())) {
+    if(!(self.owner attackButtonPressed())) {
       self.owner waittill("a10_cannon_start");
     }
 

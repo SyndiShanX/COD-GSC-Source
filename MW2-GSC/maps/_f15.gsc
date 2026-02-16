@@ -291,7 +291,7 @@ put this in your GSC:
 maps\_f15::main( "vehicle_f15" );
 
 and these lines in your CSV:
-include,vehicle_f15
+#include,vehicle_f15
 sound,vehicle_f15,vehicle_standard,all_sp
 
 defaultmdl="vehicle_f15"default:"vehicletype" "f15"default:"script_team" "allies"

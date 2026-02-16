@@ -1273,7 +1273,7 @@ func_8750(var_0) {
   }
 
   var_1 = getnodearray(var_0.target, "targetname");
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   if(var_1.size > 0 || var_2.size > 0) {
     return 0;
   }

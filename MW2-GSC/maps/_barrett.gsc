@@ -144,7 +144,7 @@ exchange_trace_converter() {
     flag_wait("player_is_on_turret");
     wait_for_buffer_time_to_pass(firetime, 1.0);
 
-    if(!level.player attackbuttonpressed()) {
+    if(!level.player attackButtonPressed()) {
       wait(0.05);
       continue;
     }
@@ -153,7 +153,7 @@ exchange_trace_converter() {
     firetime = gettime();
 
     // wait for the player to release the fire, as its a semi auto weapon
-    while(level.player attackbuttonpressed()) {
+    while(level.player attackButtonPressed()) {
       wait(0.05);
     }
   }

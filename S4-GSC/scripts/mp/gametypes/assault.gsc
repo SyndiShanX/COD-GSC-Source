@@ -389,7 +389,7 @@ _id_1081C() {
     self waittill("playerPing");
 
     if(scripts\mp\utility\player::isreallyalive(self) && !scripts\mp\utility\player::_id_8ACE()) {
-      if(self adsbuttonpressed()) {
+      if(self adsButtonPressed()) {
         _id_4E64();
         wait 0.5;
       }

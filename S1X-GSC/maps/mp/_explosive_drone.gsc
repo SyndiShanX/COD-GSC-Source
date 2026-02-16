@@ -1420,7 +1420,7 @@ watchForPickup(trigger) {
     if(self.owner IsTouching(trigger) && inRange) {
       timeUsed = 0;
 
-      while(self.owner UseButtonPressed()) {
+      while(self.owner useButtonPressed()) {
         if(!isReallyAlive(self.owner)) {
           break;
         }
@@ -1429,7 +1429,7 @@ watchForPickup(trigger) {
           break;
         }
 
-        if(self.owner FragButtonPressed() || self.owner SecondaryOffhandButtonPressed() || isDefined(self.owner.throwingGrenade)) {
+        if(self.owner fragButtonPressed() || self.owner SecondaryOffhandbuttonPressed() || isDefined(self.owner.throwingGrenade)) {
           break;
         }
 

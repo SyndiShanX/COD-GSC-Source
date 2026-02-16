@@ -651,7 +651,7 @@ handlecoopshooting(var_0, var_1, var_2) {
       continue;
     }
 
-    if(var_1.owner attackbuttonpressed() && !var_1 isturretoverheated()) {
+    if(var_1.owner attackButtonPressed() && !var_1 isturretoverheated()) {
       var_1 turretshootblank(var_1.baseowner);
       wait(var_3);
       continue;
@@ -1662,7 +1662,7 @@ ishordelaststand(var_0) {
 useholdthinkloop(var_0) {
   var_0 endon("stop_useHoldThinkLoop");
 
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && !maps\mp\zombies\_util::isplayerinlaststand(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && !maps\mp\zombies\_util::isplayerinlaststand(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
     if(isDefined(self.objectivescaler)) {
@@ -2036,13 +2036,13 @@ state_chaingun_pump() {
   if(var_0 == "ready") {
     if(self.mechuistate.chaingun.overheated) {
       set_mech_chaingun_state("overheat");
-    } else if(self attackbuttonpressed()) {
+    } else if(self attackButtonPressed()) {
       set_mech_chaingun_state("firing");
     }
   } else if(var_0 == "firing") {
     if(self.mechuistate.chaingun.overheated) {
       set_mech_chaingun_state("overheat");
-    } else if(!self attackbuttonpressed()) {
+    } else if(!self attackButtonPressed()) {
       set_mech_chaingun_state("ready");
     }
   } else if(var_0 == "overheat" && !self.mechuistate.chaingun.overheated) {
@@ -2300,7 +2300,7 @@ setupeject(var_0, var_1) {
     waitframe();
     var_2 = 0;
 
-    while(var_1 jumpbuttonpressed()) {
+    while(var_1 jumpbuttonPressed()) {
       var_2 = var_2 + 0.05;
 
       if(var_2 > 0.7) {

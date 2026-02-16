@@ -1675,7 +1675,7 @@ start_roadkill_endfight() {
   level.player SetOrigin(start.origin);
   level.player SetPlayerAngles(start.angles);
 
-  ally_starts = getstructarray("start_ally_endfight", "targetname");
+  ally_starts = getStructArray("start_ally_endfight", "targetname");
 
   foley_spawner = GetEnt("dismount_macey", "script_noteworthy");
   foley_spawner.origin = ally_starts[0].origin;

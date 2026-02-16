@@ -338,7 +338,7 @@ f35_fire_guns() {
       self setgunnertargetvec(v_aim_pos, 1);
     }
 
-    if(level.player attackbuttonpressed() && !b_overheating) {
+    if(level.player attackButtonPressed() && !b_overheating) {
       self firegunnerweapon(0);
       self firegunnerweapon(1);
 
@@ -837,7 +837,7 @@ f35_enable_ads() {
   b_pressed_last_frame = 0;
 
   while(isalive(self)) {
-    if(e_player meleebuttonpressed()) {
+    if(e_player meleeButtonPressed()) {
       b_is_vtol_mode = 1;
       b_can_toggle_ads = !b_pressed_last_frame && b_is_vtol_mode;
       n_fov = n_fov_zoomed;
@@ -967,7 +967,7 @@ death_blossom_think() {
   while(isalive(self)) {
     self.death_blossom_active = 0;
 
-    if(isDefined(e_player.missileturrettarget) && isDefined(e_player.missileturrettarget.locked_on) && e_player.missileturrettarget.locked_on && e_player secondaryoffhandbuttonpressed()) {
+    if(isDefined(e_player.missileturrettarget) && isDefined(e_player.missileturrettarget.locked_on) && e_player.missileturrettarget.locked_on && e_player secondaryoffhandbuttonPressed()) {
       n_current_time = gettime();
       b_cooldown_ok = n_current_time - n_death_blossom_time_last > n_death_blossom_cooldown_ms;
 
@@ -1739,17 +1739,17 @@ f35_tutorial_func(str_message_1, str_message_2, func_button_check, str_flag, n_o
 }
 
 f35_control_check_hover() {
-  b_is_pressing_button = level.player fragbuttonpressed() || level.player secondaryoffhandbuttonpressed();
+  b_is_pressing_button = level.player fragButtonPressed() || level.player secondaryoffhandbuttonPressed();
   return b_is_pressing_button;
 }
 
 f35_control_check_deathblossom() {
-  b_is_pressing_button = level.player jumpbuttonpressed();
+  b_is_pressing_button = level.player jumpbuttonPressed();
   return b_is_pressing_button;
 }
 
 f35_control_check_mode() {
-  b_is_pressing_button = level.player usebuttonpressed();
+  b_is_pressing_button = level.player useButtonPressed();
   return b_is_pressing_button;
 }
 
@@ -1764,17 +1764,17 @@ f35_control_check_movement() {
 }
 
 f35_control_check_weapons() {
-  b_is_pressing_button = level.player attackbuttonpressed() || level.player throwbuttonpressed();
+  b_is_pressing_button = level.player attackButtonPressed() || level.player throwbuttonPressed();
   return b_is_pressing_button;
 }
 
 f35_control_check_ads() {
-  b_is_pressing_button = level.player meleebuttonpressed();
+  b_is_pressing_button = level.player meleeButtonPressed();
   return b_is_pressing_button;
 }
 
 f35_control_check_boost() {
-  b_is_pressing_button = level.player sprintbuttonpressed();
+  b_is_pressing_button = level.player sprintbuttonPressed();
 
   if(b_is_pressing_button) {
     wait 2;
@@ -1820,7 +1820,7 @@ _watch_for_boost() {
     speed = self getspeedmph();
     forward = anglesToForward(self.angles);
     bcansprint = bmeterempty == 0 && speed > self.min_sprint_speed;
-    bpressingsprint = level.player sprintbuttonpressed();
+    bpressingsprint = level.player sprintbuttonPressed();
 
     if(bcansprint && bpressingsprint) {
       self.sprint_meter = self.sprint_meter - sprint_drain_rate * 0.05;

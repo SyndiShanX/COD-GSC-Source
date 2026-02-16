@@ -880,7 +880,7 @@ getbuttonpress() {
       break;
     }
 
-    if(level.rts.player platformbuttonpressed(level.rts.buttons.tags[i]) && level.rts.buttons.bits[i] == 0) {
+    if(level.rts.player platformbuttonPressed(level.rts.buttons.tags[i]) && level.rts.buttons.bits[i] == 0) {
       level.rts.buttons.bits[i] = 1;
       level.rts.buttons.times[i] = gettime();
     }
@@ -890,7 +890,7 @@ getbuttonpress() {
 
   for(i = 0; i < level.rts.buttons.tags.size; i++) {
     if(level.rts.buttons.bits[i] == 1) {
-      if(!level.rts.player platformbuttonpressed(level.rts.buttons.tags[i])) {
+      if(!level.rts.player platformbuttonPressed(level.rts.buttons.tags[i])) {
         level.rts.buttons.bits[i] = 3;
         continue;
       }
@@ -902,7 +902,7 @@ getbuttonpress() {
       }
     }
 
-    if(level.rts.buttons.bits[i] == 4 && !level.rts.player platformbuttonpressed(level.rts.buttons.tags[i])) {
+    if(level.rts.buttons.bits[i] == 4 && !level.rts.player platformbuttonPressed(level.rts.buttons.tags[i])) {
       level.rts.buttons.bits[i] = 0;
     }
   }
@@ -928,7 +928,7 @@ getbuttonpress() {
   return retval;
 }
 
-platformbuttonpressed(button) {
+platformbuttonPressed(button) {
   if(!level.console && !level.rts.player gamepadusedlast()) {
     switch (button) {
       case "BUTTON_BACK":
@@ -955,11 +955,11 @@ platformbuttonpressed(button) {
 
     if(isDefined(binding)) {
       if(binding["count"]) {
-        pressed = self buttonpressed(tolower(binding["key1"]));
+        pressed = self buttonPressed(tolower(binding["key1"]));
       }
 
       if(!pressed && binding["count"] == 2) {
-        pressed = self buttonpressed(tolower(binding["key2"]));
+        pressed = self buttonPressed(tolower(binding["key2"]));
       }
 
       return pressed;
@@ -968,23 +968,23 @@ platformbuttonpressed(button) {
 
   switch (button) {
     case "BUTTON_LSHLDR":
-      return self secondaryoffhandbuttonpressed();
+      return self secondaryoffhandbuttonPressed();
     case "BUTTON_RSHLDR":
-      return self fragbuttonpressed();
+      return self fragButtonPressed();
     case "BUTTON_LSTICK":
-      return self sprintbuttonpressed();
+      return self sprintbuttonPressed();
     case "BUTTON_RSTICK":
-      return self meleebuttonpressed();
+      return self meleeButtonPressed();
     case "BUTTON_LTRIG":
-      return self adsbuttonpressed();
+      return self adsButtonPressed();
     case "BUTTON_RTRIG":
-      return self attackbuttonpressed();
+      return self attackButtonPressed();
     case "BUTTON_X":
-      return self usebuttonpressed();
+      return self useButtonPressed();
     case "BUTTON_Y":
-      return self inventorybuttonpressed();
+      return self inventorybuttonPressed();
     case "BUTTON_A":
-      return self jumpbuttonpressed();
+      return self jumpbuttonPressed();
   }
 
   if(level.wiiu) {
@@ -1012,7 +1012,7 @@ platformbuttonpressed(button) {
     }
   }
 
-  return self buttonpressed(button);
+  return self buttonPressed(button);
 }
 
 get_ents_touching_trigger(total_ents) {
@@ -2732,11 +2732,11 @@ trigger_use(trigger, banner, usednote, altbutton, team) {
       time = gettime();
 
       if(isDefined(altbutton) && altbutton) {
-        if(who jumpbuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown)) {
+        if(who jumpbuttonPressed() && !who.throwinggrenade && !who meleeButtonPressed() && !isDefined(btndown)) {
           btndown = time;
         }
 
-        if(!who jumpbuttonpressed()) {
+        if(!who jumpbuttonPressed()) {
           btndown = undefined;
         }
 
@@ -2745,11 +2745,11 @@ trigger_use(trigger, banner, usednote, altbutton, team) {
           break;
         }
       } else {
-        if(who usebuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown)) {
+        if(who useButtonPressed() && !who.throwinggrenade && !who meleeButtonPressed() && !isDefined(btndown)) {
           btndown = time;
         }
 
-        if(!who usebuttonpressed()) {
+        if(!who useButtonPressed()) {
           btndown = undefined;
         }
 
@@ -2873,11 +2873,11 @@ turret_pickupwatcher(trigger, usednote) {
     while(isDefined(trigger) && who istouching(trigger)) {
       time = gettime();
 
-      if(who jumpbuttonpressed() && !who.throwinggrenade && !who meleebuttonpressed() && !isDefined(btndown)) {
+      if(who jumpbuttonPressed() && !who.throwinggrenade && !who meleeButtonPressed() && !isDefined(btndown)) {
         btndown = time;
       }
 
-      if(!who jumpbuttonpressed()) {
+      if(!who jumpbuttonPressed()) {
         btndown = undefined;
       }
 

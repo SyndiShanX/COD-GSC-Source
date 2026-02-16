@@ -207,7 +207,7 @@ main() {
   level thread level_start_solar_duck();
   level thread play_muzak_lobby();
   level thread spawn_center_fountain_solar();
-  array_thread(getstructarray("primary_alarm", "targetname"), ::primary_alarm);
+  array_thread(getStructArray("primary_alarm", "targetname"), ::primary_alarm);
 }
 
 play_muzak_lobby() {

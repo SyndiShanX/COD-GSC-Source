@@ -17,7 +17,7 @@ temple_init_zone_spawn_locations() {
     zoneName = zkeys[z];
     zone = level.zones[zoneName];
     zone.spawn_locations = [];
-    spawn_locations = GetStructArray(zone.volumes[0].target, "targetname");
+    spawn_locations = getStructArray(zone.volumes[0].target, "targetname");
     for(i = 0; i < spawn_locations.size; i++) {
       loc = spawn_locations[i];
       loc.zone_name = zoneName;

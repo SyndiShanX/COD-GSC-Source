@@ -212,7 +212,7 @@ any_hackers_active() {
 }
 
 register_hackable(name, callback_func, qualifier_func) {
-  structs = getstructarray(name, "script_noteworthy");
+  structs = getStructArray(name, "script_noteworthy");
 
   if(!isDefined(structs)) {
     println("Error:register_hackable called on script_noteworthy " + name + " but no such structs exist.");
@@ -380,10 +380,10 @@ can_hack(hackable) {
       return false;
   }
 
-  if(self throwbuttonpressed())
+  if(self throwbuttonPressed())
     return false;
 
-  if(self fragbuttonpressed())
+  if(self fragButtonPressed())
     return false;
 
   if(isDefined(hackable._hack_qualifier_func)) {
@@ -423,7 +423,7 @@ can_hack(hackable) {
 }
 
 is_hacking(hackable) {
-  return can_hack(hackable) && self usebuttonpressed();
+  return can_hack(hackable) && self useButtonPressed();
 }
 
 set_hack_hint_string() {

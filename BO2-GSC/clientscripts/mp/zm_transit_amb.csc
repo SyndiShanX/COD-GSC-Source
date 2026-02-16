@@ -203,7 +203,7 @@ bus_interior_loop_end() {
 poweron_audio() {
   level waittill("pwr");
   playSound(0, "zmb_power_on_quad", (0, 0, 0));
-  array_thread(getstructarray("airraid", "targetname"), ::air_raid_alarm);
+  array_thread(getStructArray("airraid", "targetname"), ::air_raid_alarm);
 }
 
 air_raid_alarm() {

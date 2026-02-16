@@ -103,7 +103,7 @@ pillage_init() {
   if(isDefined(level.crafting_item_table))
     level.alien_crafting_items = level.crafting_item_table;
 
-  pillage_areas = getstructarray("pillage_area", "targetname");
+  pillage_areas = getStructArray("pillage_area", "targetname");
   foreach(index, area in pillage_areas) {
     if(!isDefined(level.pillage_areas[index]))
       level.pillage_areas[index] = [];
@@ -111,7 +111,7 @@ pillage_init() {
     level.pillage_areas[index]["medium"] = [];
     level.pillage_areas[index]["hard"] = [];
 
-    pillage_spots = getstructarray(area.target, "targetname");
+    pillage_spots = getStructArray(area.target, "targetname");
     foreach(spot in pillage_spots) {
       if(isDefined(spot.script_noteworthy)) {
         tokens = StrTok(spot.script_noteworthy, ",");
@@ -753,7 +753,7 @@ delete_pillage_trigger() {
 }
 
 get_pillaged_item(pillage_spot, player) {
-  if(getdvar("scr_force_pillageitem") != "") {
+  if(getDvar("scr_force_pillageitem") != "") {
     item = getDvar("scr_force_pillageitem");
     pillaged_item = spawnStruct();
     pillaged_item.type = "attachment";
@@ -1894,14 +1894,14 @@ re_distribute_pillage_spots() {
   while(1) {
     level waittill("drill_detonated");
 
-    pillage_areas = getstructarray("pillage_area", "targetname");
+    pillage_areas = getStructArray("pillage_area", "targetname");
     foreach(index, area in pillage_areas) {
       level.pillage_areas[index] = [];
       level.pillage_areas[index]["easy"] = [];
       level.pillage_areas[index]["medium"] = [];
       level.pillage_areas[index]["hard"] = [];
 
-      pillage_spots = getstructarray(area.target, "targetname");
+      pillage_spots = getStructArray(area.target, "targetname");
       foreach(spot in pillage_spots) {
         if(isDefined(spot.script_noteworthy)) {
           tokens = StrTok(spot.script_noteworthy, ",");

@@ -636,11 +636,11 @@ _id_1AF5() {
   } else
     var_4 = var_0._id_7E9E[var_3];
 
-  var_5 = scripts\engine\utility::getstructarray("arena_evo_weapon_drop_struct", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("arena_evo_weapon_drop_struct", "targetname");
 
   foreach(var_7 in var_5) {
     if(getdvarint("#x38812fec46d9df98f", 0) && scripts\mp\gametypes\arena_evo_tourney_util::_id_88CF() && scripts\mp\gametypes\arena_evo_tourney_util::_id_6603(1) > 0) {
-      foreach(var_9 in scripts\engine\utility::getstructarray(var_7.target, "targetname")) {
+      foreach(var_9 in scripts\engine\utility::getStructArray(var_7.target, "targetname")) {
         _id_E184("arena_evo_loot_cash", var_9.origin);
       }
 
@@ -742,7 +742,7 @@ _id_B3A0(var_0) {
 
 _id_E250(var_0, var_1) {
   var_2 = self;
-  var_3 = _func_0204(scripts\engine\utility::getstructarray(var_2.target, "targetname"), var_2.origin);
+  var_3 = _func_0204(scripts\engine\utility::getStructArray(var_2.target, "targetname"), var_2.origin);
   var_3[0]._id_87A9 = 1;
 
   foreach(var_5 in var_3) {

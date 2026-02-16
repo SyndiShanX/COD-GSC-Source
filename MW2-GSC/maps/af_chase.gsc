@@ -241,7 +241,7 @@ main() {
   //	price_tells_player_go_right = GetEnt( "price_tells_player_go_right", "targetname" );
   //	price_tells_player_go_right thread trigger_price_tells_player_go_right();
 
-  heli_attack_player_idle = getstructarray("heli_attack_player_idle", "script_noteworthy");
+  heli_attack_player_idle = getStructArray("heli_attack_player_idle", "script_noteworthy");
   array_thread(heli_attack_player_idle, ::heli_attack_player_idle);
 
   heli_attack_player_idle = getEntArray("heli_attack_player_idle", "script_noteworthy");

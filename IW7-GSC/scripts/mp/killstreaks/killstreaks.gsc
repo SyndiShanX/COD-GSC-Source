@@ -1036,7 +1036,7 @@ getstreakcost(var_0) {
   return var_1;
 }
 
-buttonpressed(var_0, var_1) {
+buttonPressed(var_0, var_1) {
   var_2 = 0;
   if(scripts\mp\utility::_hasperk("specialty_support_killstreaks")) {
     var_3 = scripts\mp\utility::getkillstreakindex(var_0);
@@ -1756,7 +1756,7 @@ allowridekillstreakplayerexit(var_0) {
   self endon("death");
   for(;;) {
     var_2 = 0;
-    while(var_1 usebuttonpressed()) {
+    while(var_1 useButtonPressed()) {
       var_2 = var_2 + 0.05;
       if(var_2 > 0.75) {
         self notify("killstreakExit");

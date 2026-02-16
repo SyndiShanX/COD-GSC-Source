@@ -514,7 +514,7 @@ func_13631() {
 }
 
 func_54FB() {
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
   }
@@ -523,7 +523,7 @@ func_54FB() {
 }
 
 func_61CF() {
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
   }
@@ -1192,7 +1192,7 @@ pickup_firmware(var_0, var_1) {
 }
 
 func_9696(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("neil_battery", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("neil_battery", "script_noteworthy");
   foreach(var_3 in var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
   }
@@ -1204,7 +1204,7 @@ func_10778(var_0) {
 }
 
 func_9697(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("neil_firmware", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("neil_firmware", "script_noteworthy");
   foreach(var_3 in var_1) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
   }
@@ -1216,7 +1216,7 @@ func_10779() {
 }
 
 func_1077B(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   var_3 = scripts\engine\utility::random(var_2);
   foreach(var_5 in var_2) {
     if(var_5 == var_3) {

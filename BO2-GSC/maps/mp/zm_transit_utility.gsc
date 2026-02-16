@@ -13,7 +13,7 @@
 #include maps\mp\_compass;
 
 playercanafford(player, cost) {
-  if(!player usebuttonpressed())
+  if(!player useButtonPressed())
     return false;
 
   if(player in_revive_trigger())

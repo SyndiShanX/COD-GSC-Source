@@ -2840,7 +2840,7 @@ supply_dialog() {
 event1_warp_supplydrop() {
   players = get_players();
   volume = getent("gate_check", "targetname");
-  ents = getstructarray("warp_supplies", "targetname");
+  ents = getStructArray("warp_supplies", "targetname");
 
   count = 0;
   for(i = 0; i < players.size; i++) {
@@ -2857,7 +2857,7 @@ bunker_cleared_think() {
   trig waittill("trigger", user);
 
   players = get_players();
-  ents = getstructarray("tunnel_exit", "targetname");
+  ents = getStructArray("tunnel_exit", "targetname");
 
   warp_players("tunnel_exit", user);
   for(i = 0; i < players.size; i++) {

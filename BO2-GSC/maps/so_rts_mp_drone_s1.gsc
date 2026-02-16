@@ -182,7 +182,7 @@ emp_and_die() {
 }
 
 kill_transport() {
-  locs = sortarraybyclosest(self.origin, getstructarray("retreat_loc", "targetname"), undefined, undefined, 1);
+  locs = sortarraybyclosest(self.origin, getStructArray("retreat_loc", "targetname"), undefined, undefined, 1);
   self maps\_vehicle::getoffpath();
   self setvehgoalpos(locs[0].origin);
   self waittill("goal");
@@ -196,7 +196,7 @@ kill_transport() {
 
 kill_transports() {
   transports = getEntArray("transport", "script_noteworthy");
-  retreatlocs = getstructarray("retreat_loc", "targetname");
+  retreatlocs = getStructArray("retreat_loc", "targetname");
 
   foreach(transport in transports) {
     if(!(isDefined(transport.unloading_cargo) && transport.unloading_cargo)) {
@@ -755,7 +755,7 @@ intro_jetpack_wait(stagger) {
   self.no_takeover = 1;
   self.rts_unloaded = 0;
   self thread magic_bullet_shield();
-  s_jetpack_entries = getstructarray("rts_ally_jetpack_entry_struct", "targetname");
+  s_jetpack_entries = getStructArray("rts_ally_jetpack_entry_struct", "targetname");
   s_jetpack_entry = s_jetpack_entries[randomintrange(0, s_jetpack_entries.size)];
   self forceteleport(s_jetpack_entry.origin + vectorscale((0, 0, 1), 10000.0), (0, 0, 0));
   wait(2.5 * stagger);
@@ -860,7 +860,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
 
       return -1;
     } else {
-      spawnlocs = getstructarray("enemy_laststand_spawn_loc", "targetname");
+      spawnlocs = getStructArray("enemy_laststand_spawn_loc", "targetname");
       valid = [];
 
       foreach(loc in spawnlocs) {

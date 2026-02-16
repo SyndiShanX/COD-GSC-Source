@@ -12,7 +12,7 @@ init() {
 }
 
 init_blockers() {
-  level.exterior_goals = getstructarray("exterior_goal", "targetname");
+  level.exterior_goals = getStructArray("exterior_goal", "targetname");
 
   for(i = 0; i < level.exterior_goals.size; i++) {
     level.exterior_goals[i] thread blocker_init();

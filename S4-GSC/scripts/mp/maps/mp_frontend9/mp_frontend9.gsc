@@ -38,7 +38,7 @@ _id_AB5F() {
 run_explosions() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::getstruct("frontend3_explosion_struct", "targetname");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   for(;;) {
     wait 1;

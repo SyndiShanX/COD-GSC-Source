@@ -7,7 +7,7 @@ func_211C() {
   wait(10);
   if(getDvar("zmb_arcade_test") != "") {
     setDvar("debug_pause_spawning", 1);
-    var_0 = scripts\engine\utility::getstructarray("dance_floor_attract_spots", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("dance_floor_attract_spots", "targetname");
     level.players[0] setorigin(var_0[0].origin);
     level.players[0] setplayerangles(var_0[0].angles);
     wait(3);
@@ -61,7 +61,7 @@ use_arcade_game(var_0, var_1) {
     var_2 = "arcade_chopper";
   }
 
-  while(var_1 usebuttonpressed()) {
+  while(var_1 useButtonPressed()) {
     wait(0.05);
   }
 

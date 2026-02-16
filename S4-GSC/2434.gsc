@@ -4,7 +4,7 @@
 *************************************************/
 
 _id_7EC1(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("weapon_upgrade", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("weapon_upgrade", "script_noteworthy");
   level._id_683F = scripts\cp\cp_weapon::_id_683D;
 
   foreach(var_3 in var_1) {

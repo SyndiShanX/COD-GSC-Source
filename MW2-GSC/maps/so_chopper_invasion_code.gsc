@@ -63,7 +63,7 @@ chopper_minigun_shells() {
   tag = "tag_turret";
 
   while(1) {
-    if(self AttackButtonPressed()) {
+    if(self attackButtonPressed()) {
       playFXOnTag(fx, level.chopper, tag);
     }
 
@@ -158,7 +158,7 @@ seconds(milliseconds) {
     return;
   }
 
-  points = getstructarray(self.target, "targetname");
+  points = getStructArray(self.target, "targetname");
   while(1) {
     if(points.size == 0) {
       return;
@@ -209,7 +209,7 @@ seconds(milliseconds) {
       break;
     }
 
-    points = getstructarray(point.target, "targetname");
+    points = getStructArray(point.target, "targetname");
   }
 
   self.goalradius = level.default_goalradius;
@@ -642,7 +642,7 @@ chopper_move_till_goal() {
 }
 
 chopperplayer_pressing_slowdown() {
-  if(level.chopperplayer AdsButtonPressed() || level.chopperplayer UseButtonPressed()) {
+  if(level.chopperplayer adsButtonPressed() || level.chopperplayer useButtonPressed()) {
     return true;
   }
 
@@ -739,7 +739,7 @@ chopper_get_pointheight(point) {
 
 // Return the closest and highest struct
 chopper_get_closest_obstacle_info(point) {
-  structs = getstructarray("high_obstacle", "targetname");
+  structs = getStructArray("high_obstacle", "targetname");
 
   // First find all of the structs the point within it's radius.
   close_structs = [];
@@ -1005,7 +1005,7 @@ get_parkinglot_point() {
 
 get_closest_point_on_base_path() {
   paths = [];
-  struct_array = getstructarray("base_player_path", "targetname");
+  struct_array = getStructArray("base_player_path", "targetname");
 
   foreach(struct in struct_array) {
     paths[paths.size] = get_targeted_line_array(struct);
@@ -1238,7 +1238,7 @@ debug_player_pos() {
     while(1) {
       wait(0.05);
 
-      if(level.player UseButtonPressed()) {
+      if(level.player useButtonPressed()) {
         eye = level.player getEye();
         forward = anglesToForward(level.player GetPlayerAngles());
         forward_origin = eye + vector_multiply(forward, 10000);
@@ -1334,7 +1334,7 @@ draw_player_pos(pos) {
 
 // Draws all of the high objstacle points
 draw_high_obstacles() {
-  structs = getstructarray("high_obstacle", "targetname");
+  structs = getStructArray("high_obstacle", "targetname");
   foreach(struct in structs) {
     struct thread draw_high_obstacle();
   }

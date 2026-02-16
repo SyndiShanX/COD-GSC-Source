@@ -39,7 +39,7 @@ event1_mortars() {
 }
 
 event1_fakefire() {
-  firepoints = getstructarray("prerocket_muzzleflashes", "script_noteworthy");
+  firepoints = getStructArray("prerocket_muzzleflashes", "script_noteworthy");
 
   level thread event1_fakefire_think(firepoints);
   level thread event1_fakefire_think(firepoints);
@@ -114,7 +114,7 @@ event1_katyusha_rocket_barrage(truck_name, trigger_name) {
 }
 
 event1_katyusha_rocket_barrage_side(struct_name, trigger_name) {
-  trucks = getstructarray(struct_name, "targetname");
+  trucks = getStructArray(struct_name, "targetname");
   trigger = getent(trigger_name, "targetname");
 
   for(i = 0; i < trucks.size; i++) {
@@ -188,7 +188,7 @@ event3() {
 }
 
 event3_flak_flashes() {
-  targets = getstructarray("ev3_flash", "targetname");
+  targets = getStructArray("ev3_flash", "targetname");
 
   for(i = 0; i < targets.size; i++) {
     level thread event3_flak_flash_single(targets[i].origin);

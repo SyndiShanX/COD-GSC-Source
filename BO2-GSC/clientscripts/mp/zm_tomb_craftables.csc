@@ -19,7 +19,7 @@ init_craftables() {
   level thread clientscripts\mp\zombies\_zm_craftables::set_clientfield_craftables_code_callbacks();
 }
 
-include_craftables() {
+#include_craftables() {
   clientscripts\mp\zombies\_zm_craftables::include_zombie_craftable("equip_dieseldrone_zm");
   clientscripts\mp\zombies\_zm_craftables::include_zombie_craftable("tomb_shield_zm");
   clientscripts\mp\zombies\_zm_craftables::include_zombie_craftable("shovel");

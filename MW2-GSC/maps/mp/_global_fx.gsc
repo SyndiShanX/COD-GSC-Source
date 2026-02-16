@@ -112,7 +112,7 @@ global_FX("light_glow_white_lamp_FX_origin", "light_glow_white_lamp_FX", "misc/l
 
 global_FX(targetname, fxName, fxFile, delay, soundalias) {
   // script_structs
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
   if(!isDefined(ents))
     return;
   if(ents.size <= 0) {

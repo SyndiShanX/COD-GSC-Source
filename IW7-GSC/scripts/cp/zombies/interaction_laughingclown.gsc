@@ -62,7 +62,7 @@ laughing_clown(var_0, var_1) {
   for(;;) {
     var_12 = var_15.origin;
     wait(0.5);
-    var_13 = scripts\engine\utility::getstructarray(var_6.target, "targetname");
+    var_13 = scripts\engine\utility::getStructArray(var_6.target, "targetname");
     var_10 = scripts\engine\utility::getclosest(var_15.origin, var_13, 3);
     if(isDefined(var_10)) {
       break;
@@ -172,7 +172,7 @@ func_FF2B(var_0, var_1) {
 }
 
 init_all_laughing_clowns() {
-  var_0 = scripts\engine\utility::getstructarray("laughingclown", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("laughingclown", "script_noteworthy");
   var_1 = 4;
   var_2 = 7;
   foreach(var_4 in var_0) {
@@ -182,7 +182,7 @@ init_all_laughing_clowns() {
 }
 
 init_all_afterlife_laughing_clowns() {
-  var_0 = scripts\engine\utility::getstructarray("laughingclown_afterlife", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("laughingclown_afterlife", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_9655();
   }

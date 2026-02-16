@@ -38,7 +38,7 @@ push_bomb(var_0, var_1) {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(var_0);
   enter_bomb_push(var_1, var_0);
   increase_escort_vehicle_speed();
-  while(var_1 usebuttonpressed()) {
+  while(var_1 useButtonPressed()) {
     scripts\engine\utility::waitframe();
   }
 
@@ -65,7 +65,7 @@ push_bomb_cart_sfx_stop() {
 }
 
 init_escort_sequence() {
-  var_0 = scripts\engine\utility::getstructarray("push_bomb", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
   }
@@ -162,7 +162,7 @@ update_escort_vehicle_speed() {
 }
 
 pair_push_origins_with_interaction_struct(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("push_bomb", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
   foreach(var_3 in var_1) {
     var_4 = scripts\engine\utility::getclosest(var_3.origin, var_0);
     var_3.push_origin = var_4;
@@ -171,14 +171,14 @@ pair_push_origins_with_interaction_struct(var_0) {
 }
 
 enable_bomb_push_interactions() {
-  var_0 = scripts\engine\utility::getstructarray("push_bomb", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_2);
   }
 }
 
 disable_bomb_push_interactions() {
-  var_0 = scripts\engine\utility::getstructarray("push_bomb", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("push_bomb", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
   }
@@ -195,7 +195,7 @@ follow_push_origin(var_0, var_1) {
 spawn_push_origins() {
   var_0 = [];
   var_1 = level.escort_vehicle;
-  var_2 = scripts\engine\utility::getstructarray("vehicle_push_origin", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("vehicle_push_origin", "targetname");
   foreach(var_4 in var_2) {
     var_5 = spawn("script_origin", var_4.origin);
     var_5 linkto(var_1);

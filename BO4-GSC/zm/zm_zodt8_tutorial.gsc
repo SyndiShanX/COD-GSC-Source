@@ -748,7 +748,7 @@ points() {
   wait 3;
   level thread function_68da8e33(#"hash_51f56d21fa70d946");
 
-  if(!self adsbuttonpressed()) {
+  if(!self adsButtonPressed()) {
     self thread function_3e1e39f8(#"hash_c360659fdde1ca7", "ads_completed", &function_7b8a4b02);
   }
 
@@ -1635,7 +1635,7 @@ function_7b8a4b02() {
   self endon(#"death", #"ads_completed");
 
   while(true) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       waitframe(1);
       self notify(#"ads_completed");
       return;
@@ -1688,7 +1688,7 @@ function_3a885b9d() {
       return;
     }
 
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       waitframe(1);
       self notify(#"switch_completed");
       return;

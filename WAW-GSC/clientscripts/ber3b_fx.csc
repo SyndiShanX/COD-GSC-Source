@@ -198,7 +198,7 @@ intro_fakefire_starter() {
   while(1) {
     level waittill("intro_fakefire_start");
     println("*** Client : Starting intro fakefire");
-    firePoints = GetStructArray("struct_intro_fakefire", "targetname");
+    firePoints = getStructArray("struct_intro_fakefire", "targetname");
     ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
 
     array_thread(firePoints, ::ambient_fakefire, "intro_fakefire_end", false);

@@ -784,7 +784,7 @@ cougar_controls_instructions() {
   screen_message_create(&"LA_SHARED_COUGAR_GAS", &"LA_SHARED_COUGAR_BRAKE");
   n_timeout = 0;
 
-  while(!level.player gasbuttonpressed()) {
+  while(!level.player gasbuttonPressed()) {
     wait 0.05;
     n_timeout++;
 

@@ -782,7 +782,7 @@ listen_player_press_x() {
   level endon("player_exited_truck");
 
   for(;;) {
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       common_scripts\utility::flag_set("FLAG_player_exit_truck");
 
     wait 0.05;

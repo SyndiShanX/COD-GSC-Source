@@ -372,7 +372,7 @@ fireworks_launch(launch_spot) {
 
   while(isDefined(dest) && isDefined(dest.target)) {
     random_offset = (randomintrange(-60, 60), randomintrange(-60, 60), 0);
-    new_dests = getstructarray(dest.target, "targetname");
+    new_dests = getStructArray(dest.target, "targetname");
     new_dest = random(new_dests);
     dest = new_dest;
     dist = distance(new_dest.origin + random_offset, firework.origin);

@@ -1058,7 +1058,7 @@ playerTestCloak() {
   self endon("warbirdStreakComplete");
 
   while(true) {
-    if(level.player SecondaryOffhandButtonPressed()) {
+    if(level.player SecondaryOffhandbuttonPressed()) {
       self notify("Cloak");
       wait 3;
     }

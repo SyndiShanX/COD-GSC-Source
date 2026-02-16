@@ -54,7 +54,7 @@ plates() {
   level waittill("ctvg_tp_done");
   level.black_hole_bomb_loc_check_func = undefined;
   level waittill("restart_round");
-  targs = getstructarray("sq_ctvg_tp2", "targetname");
+  targs = getStructArray("sq_ctvg_tp2", "targetname");
   for(i = 0; i < plates.size; i++) {
     plates[i] DontInterpolate();
     plates[i].origin = targs[i].origin;
@@ -86,7 +86,7 @@ monitor_wire_disconnect() {
 }
 wire() {
   level endon("wire_restart");
-  wires = getstructarray("sq_wire_pos", "targetname");
+  wires = getStructArray("sq_wire_pos", "targetname");
   wires = array_randomize(wires);
   wire_struct = wires[0];
   wire = spawn("script_model", wire_struct.origin);
@@ -177,7 +177,7 @@ teleport_target(grenade, models) {
     models[i] MoveTo(grenade.origin + (0, 0, 50), time, time - 0.05);
   }
   wait(time);
-  teleport_targets = getstructarray("sq_ctvg_tp", "targetname");
+  teleport_targets = getStructArray("sq_ctvg_tp", "targetname");
   for(i = 0; i < models.size; i++) {
     models[i] Hide();
   }
@@ -319,7 +319,7 @@ do_bucket_fill(target) {
     level._charge_sound_ent waittill("press");
     presses++;
     level._typing_time = GetTime();
-    while(isDefined(richtofen) && richtofen UseButtonPressed()) {
+    while(isDefined(richtofen) && richtofen useButtonPressed()) {
       wait 0.05;
     }
   }

@@ -196,7 +196,7 @@ function private function_6ba7e9d6(e_player) {
     util::wait_network_frame();
   }
   e_player thread zm_craftables::player_progress_bar(n_start_time, var_20c067ae);
-  while(e_player usebuttonpressed() && n_total_time < 3) {
+  while(e_player useButtonPressed() && n_total_time < 3) {
     n_current_time = gettime();
     n_total_time = (n_current_time - n_start_time) / 1000;
     util::wait_network_frame();
@@ -349,7 +349,7 @@ function function_d6422d13() {
     self waittill("trigger", e_player);
     b_result = self function_384f884a(e_player);
     if(b_result) {
-      while(e_player usebuttonpressed()) {
+      while(e_player useButtonPressed()) {
         util::wait_network_frame();
       }
       if(isDefined(e_player)) {

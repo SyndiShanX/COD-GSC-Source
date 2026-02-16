@@ -10,7 +10,7 @@ init() {
   var_0.soulprojectilemonitorfunc = ::soulprojectilemonitor;
   var_0.soulprojectiledeathfunc = ::soulprojectiledeathmonitor;
   initfx();
-  var_0.circles = scripts\engine\utility::getstructarray("capture_points", "targetname");
+  var_0.circles = scripts\engine\utility::getStructArray("capture_points", "targetname");
   var_0.activatedcircles = [];
   foreach(var_3, var_2 in var_0.circles) {
     var_2.var_3CB7 = 0;
@@ -68,7 +68,7 @@ bossfight_loadout() {
   thread spawn_perk_pickup();
   var_8 = 300;
   level thread auto_start_boss_fight(var_8);
-  var_9 = scripts\engine\utility::getstructarray("afterlife_selfrevive_door", "script_noteworthy");
+  var_9 = scripts\engine\utility::getStructArray("afterlife_selfrevive_door", "script_noteworthy");
   foreach(var_11 in var_9) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_11);
   }
@@ -76,7 +76,7 @@ bossfight_loadout() {
   scripts\cp\cp_interaction::remove_from_current_interaction_list(scripts\engine\utility::getstruct("afterlife_spectate_door", "script_noteworthy"));
   var_13 = getent("bossfight_ala_clip", "targetname");
   var_13 solid();
-  var_14 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
+  var_14 = scripts\engine\utility::getStructArray("afterlife_arcade", "targetname");
   var_14 = scripts\engine\utility::array_randomize(var_14);
   foreach(var_10, var_1 in level.players) {
     var_1.ability_invulnerable = 1;
@@ -395,7 +395,7 @@ spawn_meph() {
 }
 
 respawn_in_meph_fight(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("boss_player_starts", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("boss_player_starts", "targetname");
   if(isDefined(var_0) && isPlayer(var_0)) {
     foreach(var_3 in var_1) {
       if(positionwouldtelefrag(var_3.origin, var_0)) {
@@ -535,7 +535,7 @@ start(var_0) {
 }
 
 pre_fight_cleanup() {
-  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.trigger)) {
       var_2.trigger delete();

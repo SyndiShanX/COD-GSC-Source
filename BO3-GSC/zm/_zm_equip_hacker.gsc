@@ -365,10 +365,10 @@ function can_hack(hackable) {
       return false;
     }
   }
-  if(self throwbuttonpressed()) {
+  if(self throwbuttonPressed()) {
     return false;
   }
-  if(self fragbuttonpressed()) {
+  if(self fragButtonPressed()) {
     return false;
   }
   if(isDefined(hackable._hack_qualifier_func)) {
@@ -406,7 +406,7 @@ function can_hack(hackable) {
 }
 
 function is_hacking(hackable) {
-  return can_hack(hackable) && self usebuttonpressed();
+  return can_hack(hackable) && self useButtonPressed();
 }
 
 function set_hack_hint_string() {

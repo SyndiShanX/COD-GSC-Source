@@ -784,20 +784,20 @@ function universal_input_loop(button_group, end_on, use_attackbutton, mod_button
       wait(0.05);
       continue;
     }
-    if(isDefined(mod_button) && !level.player buttonpressed(mod_button)) {
+    if(isDefined(mod_button) && !level.player buttonPressed(mod_button)) {
       wait(0.05);
       continue;
-    } else if(isDefined(no_mod_button) && level.player buttonpressed(no_mod_button)) {
+    } else if(isDefined(no_mod_button) && level.player buttonPressed(no_mod_button)) {
       wait(0.05);
       continue;
     }
-    if(use_attackbutton && level.player attackbuttonpressed()) {
+    if(use_attackbutton && level.player attackButtonPressed()) {
       level notify(notify_name, "");
       wait(0.1);
       continue;
     }
     for(i = 0; i < buttons.size; i++) {
-      if(level.player buttonpressed(buttons[i])) {
+      if(level.player buttonPressed(buttons[i])) {
         level notify(notify_name, buttons[i]);
         wait(0.1);
         break;

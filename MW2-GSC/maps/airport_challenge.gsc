@@ -32,7 +32,7 @@ start_challenge_ggs() {
   }
 
   ap_teleport_player();
-  ap_teleport_team(getstructarray("tarmac_start_nodes", "targetname"));
+  ap_teleport_team(getStructArray("tarmac_start_nodes", "targetname"));
 
   thread tarmac_main();
 }

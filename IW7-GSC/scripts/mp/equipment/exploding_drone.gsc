@@ -304,9 +304,9 @@ func_69CC() {
   self endon("explodingDrone_listenForAltDetonate");
   var_0 = 0;
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = 0;
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + 0.05;
         wait(0.05);
       }
@@ -316,7 +316,7 @@ func_69CC() {
       }
 
       var_0 = 0;
-      while(!self usebuttonpressed() && var_0 < 0.5) {
+      while(!self useButtonPressed() && var_0 < 0.5) {
         var_0 = var_0 + 0.05;
         wait(0.05);
       }

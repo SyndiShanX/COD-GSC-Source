@@ -1175,10 +1175,10 @@ watch_debug_input(callback) {
     level.devgui_dpad_watch = 1;
 
     for(;;) {
-      if(self actionslottwobuttonpressed()) {
+      if(self actionslottwobuttonPressed()) {
         self thread[[callback]]();
 
-        while(self actionslottwobuttonpressed()) {
+        while(self actionslottwobuttonPressed()) {
           waitframe(1);
         }
       }

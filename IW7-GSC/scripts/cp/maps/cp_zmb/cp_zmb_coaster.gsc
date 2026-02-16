@@ -5,7 +5,7 @@
 
 init_coaster() {
   scripts\engine\utility::flag_init("coaster_active");
-  var_0 = scripts\engine\utility::getstructarray("coaster", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("coaster", "script_noteworthy");
   level.coasterplayers = [];
   foreach(var_2 in var_0) {
     var_2 thread coaster_wait_for_power();
@@ -209,7 +209,7 @@ use_coaster(var_0, var_1) {
     return;
   }
 
-  if(var_1 secondaryoffhandbuttonpressed() || var_1 fragbuttonpressed()) {
+  if(var_1 secondaryoffhandbuttonPressed() || var_1 fragButtonPressed()) {
     var_1 scripts\cp\cp_interaction::refresh_interaction();
     return;
   }
@@ -554,7 +554,7 @@ spawn_coaster_zombies(var_0, var_1, var_2) {
     return;
   }
 
-  var_3 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_4 = 0;
   if(var_2.linked_players == 1) {
     var_4 = 1;
@@ -776,7 +776,7 @@ open_coaster_arm_gates(var_0) {
 }
 
 spawn_targets(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_3 = [];
   foreach(var_6, var_5 in var_2) {
     var_3[var_6] = spawn("script_model", var_5.origin);
@@ -800,7 +800,7 @@ spawn_targets(var_0, var_1) {
 }
 
 spawn_lasers(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray("coaster_laser_fx_spot", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("coaster_laser_fx_spot", "targetname");
   var_3 = getEntArray("coaster_laser_trigger", "targetname");
   foreach(var_5 in var_2) {
     var_6 = spawnfx(level._effect["coaster_laser"], var_5.origin, anglesToForward(var_5.angles), anglestoup(var_5.angles));

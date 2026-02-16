@@ -1335,7 +1335,7 @@ function hackerresult(player, owner) {
       success = 0;
       break;
     }
-    if(!player usebuttonpressed()) {
+    if(!player useButtonPressed()) {
       success = 0;
       break;
     }
@@ -2296,7 +2296,7 @@ function watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
     if(weapon.isequipment) {
       grenade = 0;
     }
-    if(player usebuttonpressed() && !grenade && !player meleebuttonpressed()) {
+    if(player useButtonPressed() && !grenade && !player meleeButtonPressed()) {
       if(isDefined(playersoundonuse)) {
         player playlocalsound(playersoundonuse);
       }

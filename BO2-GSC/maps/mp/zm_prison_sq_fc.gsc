@@ -35,7 +35,7 @@ watch_for_touching_controls() {
     v_new_forward_vec = vectornormalize(v_new_forward_point - self.origin);
     move_length = length((self.origin[0], self.origin[1], 0) - v_original_origin);
 
-    if(self actionslotonebuttonpressed() || self actionslottwobuttonpressed() || self actionslotthreebuttonpressed() || self actionslotfourbuttonpressed() || self adsbuttonpressed() || self attackbuttonpressed() || self fragbuttonpressed() || self inventorybuttonpressed() || self jumpbuttonpressed() || self meleebuttonpressed() || self secondaryoffhandbuttonpressed() || self sprintbuttonpressed() || self stancebuttonpressed() || self throwbuttonpressed() || self usebuttonpressed() || self changeseatbuttonpressed() || move_length > 2 || vectordot(v_original_forward_vec, v_new_forward_vec) < 0.99)
+    if(self actionslotonebuttonPressed() || self actionslottwobuttonPressed() || self actionslotthreebuttonPressed() || self actionslotfourbuttonPressed() || self adsButtonPressed() || self attackButtonPressed() || self fragButtonPressed() || self inventorybuttonPressed() || self jumpbuttonPressed() || self meleeButtonPressed() || self secondaryoffhandbuttonPressed() || self sprintbuttonPressed() || self stancebuttonPressed() || self throwbuttonPressed() || self useButtonPressed() || self changeseatbuttonPressed() || move_length > 2 || vectordot(v_original_forward_vec, v_new_forward_vec) < 0.99)
       level.sq_fc_still_valid = 0;
 
     wait 0.05;
@@ -72,7 +72,7 @@ player_intermission_prison() {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  points = getstructarray("dblock_cam", "targetname");
+  points = getStructArray("dblock_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");

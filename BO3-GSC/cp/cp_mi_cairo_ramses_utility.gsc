@@ -885,11 +885,11 @@ function turret_pickup_hint(t_pickup, w_hero) {
 }
 
 function turret_pickup_button_pressed() {
-  return self meleebuttonpressed();
+  return self meleeButtonPressed();
 }
 
 function turret_exit_button_pressed() {
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 function remove_inventory_turret() {

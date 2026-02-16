@@ -26,7 +26,7 @@ isbulletimpactmod(smeansofdeath) {
 waitrespawnbutton() {
   self endon(#"disconnect", #"end_respawn");
 
-  while(self usebuttonpressed() != 1) {
+  while(self useButtonPressed() != 1) {
     waitframe(1);
   }
 }
@@ -535,7 +535,7 @@ self_delete() {
 
 use_button_pressed() {
   assert(isPlayer(self), "<dev string:x9d>");
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 waittill_use_button_pressed() {

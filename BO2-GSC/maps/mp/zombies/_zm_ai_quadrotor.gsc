@@ -936,7 +936,7 @@ quadrotor_self_destruct() {
 
   while(true) {
     if(!self_destruct) {
-      if(level.player meleebuttonpressed()) {
+      if(level.player meleeButtonPressed()) {
         self_destruct = 1;
         self_destruct_time = 5;
       }

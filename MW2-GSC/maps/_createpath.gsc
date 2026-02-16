@@ -126,14 +126,14 @@ path_connectlines() {
 path_activatebutton() {
   level endon("path_refresh");
   while(1) {
-    while(!level.player usebuttonpressed())
+    while(!level.player useButtonPressed())
       wait .05;
     pick = path_getvisible();
     if(isDefined(pick.index)) {
       level.path_selectindex = pick.index;
       level.path_selectid = path_createid(pick.ident);
     }
-    while(level.player usebuttonpressed())
+    while(level.player useButtonPressed())
       wait .05;
   }
 }
@@ -162,7 +162,7 @@ path_hudshow() {
   level.player setorigin(self.origin + (level.player.origin - level.player getEye()) - vector_multiply(anglesToForward(self.angles), 3));
   level.player setplayerangles(self.angles);
   flag_set("path_refresh");
-  while(level.player islookingorg(self) && level.player usebuttonpressed())
+  while(level.player islookingorg(self) && level.player useButtonPressed())
     wait .05;
   level.player freezecontrols(false);
   flag_set("path_Notviewing");

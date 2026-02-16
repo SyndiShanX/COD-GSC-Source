@@ -349,7 +349,7 @@ squad_replenish_init() {
   }
 
   if(!isDefined(level.a_s_squad_spawn)) {
-    level.a_s_squad_spawn = getstructarray("s_replenish_ally", "targetname");
+    level.a_s_squad_spawn = getStructArray("s_replenish_ally", "targetname");
   }
 
   level.n_squad_spawn_index = 0;
@@ -378,7 +378,7 @@ replenish_loc_update() {
     flag_wait(self.script_flag_wait);
   }
 
-  level.a_s_squad_spawn = getstructarray(self.target, "targetname");
+  level.a_s_squad_spawn = getStructArray(self.target, "targetname");
   level.n_squad_spawn_index = 0;
   level notify("replenish_loc_updated");
 }
@@ -574,7 +574,7 @@ spawn_static_actors(str_structname, n_delay_max) {
     n_delay_max = 2.0;
   }
 
-  a_s_static_locs = getstructarray(str_structname, "targetname");
+  a_s_static_locs = getStructArray(str_structname, "targetname");
   n_index = 0;
 
   foreach(s_static_loc in a_s_static_locs) {
@@ -737,7 +737,7 @@ kill_array(a_stuff_to_kill) {
 }
 
 turn_on_interior_light_fx() {
-  structs = getstructarray("fx_struct", "targetname");
+  structs = getStructArray("fx_struct", "targetname");
 
   foreach(struct in structs) {
     if(isDefined(struct.script_string)) {

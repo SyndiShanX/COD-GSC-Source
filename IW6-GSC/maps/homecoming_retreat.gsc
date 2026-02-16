@@ -1480,7 +1480,7 @@ elias_house_lift_rubble_scene() {
   var_2 = getent("falling_beam", "targetname");
   var_3 = maps\_utility::spawn_anim_model("blocker");
   var_2 linkto(var_3, "tag_origin", (0, 0, 0), (0, 0, 0));
-  var_4 = common_scripts\utility::getstructarray("beam_fx_spot", "script_noteworthy");
+  var_4 = common_scripts\utility::getStructArray("beam_fx_spot", "script_noteworthy");
   var_5 = [];
 
   foreach(var_7 in var_4) {

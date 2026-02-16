@@ -318,10 +318,10 @@ playerinit() {
 }
 
 button_down(var_0, var_1) {
-  var_2 = level.player buttonpressed(var_0);
+  var_2 = level.player buttonPressed(var_0);
 
   if(!var_2) {
-    var_2 = level.player buttonpressed(var_1);
+    var_2 = level.player buttonPressed(var_1);
   }
 
   if(!isDefined(level.buttons[var_0])) {

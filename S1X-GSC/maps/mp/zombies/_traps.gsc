@@ -15,7 +15,7 @@ init() {
   level.trap_state_func["cooldown"] = ::trap_state_cooldown;
   level.trap_state_func["deactivate"] = ::trap_state_deactivate;
   level.laser_alarm_started = 0;
-  level.traps = common_scripts\utility::getstructarray("zombie_trap", "targetname");
+  level.traps = common_scripts\utility::getStructArray("zombie_trap", "targetname");
   common_scripts\utility::array_thread(level.traps, ::trap_init);
 }
 
@@ -28,7 +28,7 @@ trap_init() {
 
   maps\mp\zombies\_util::settokencost(maps\mp\zombies\_util::creditstotokens(self.cost));
   var_0 = getEntArray(self.target, "targetname");
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {
@@ -344,7 +344,7 @@ trap_fx_move(var_0) {
 
   if(isDefined(var_0.target)) {
     var_3 = getEntArray(var_0.target, "targetname");
-    var_4 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+    var_4 = common_scripts\utility::getStructArray(var_0.target, "targetname");
     var_2 = common_scripts\utility::array_combine(var_3, var_4);
   }
 
@@ -423,7 +423,7 @@ trap_laser(var_0) {
 
   if(isDefined(var_0.target)) {
     var_3 = getEntArray(var_0.target, "targetname");
-    var_4 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+    var_4 = common_scripts\utility::getStructArray(var_0.target, "targetname");
     var_2 = common_scripts\utility::array_combine(var_3, var_4);
   }
 
@@ -798,7 +798,7 @@ trap_state_fx(var_0) {
 }
 
 trap_setup_custom_hints(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_0, "script_noteworthy");
+  var_3 = common_scripts\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_5 in var_3) {
     if(!isDefined(var_5.hint_strings)) {
@@ -811,7 +811,7 @@ trap_setup_custom_hints(var_0, var_1, var_2) {
 }
 
 trap_setup_custom_function(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_0, "script_noteworthy");
+  var_3 = common_scripts\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_5 in var_3) {
     var_5 thread trap_custom_function_think(var_1, var_2);
@@ -958,7 +958,7 @@ trap_zomboni(var_0) {
 
   var_1.iszomboni = 1;
   var_13 = getEntArray(var_0.target, "targetname");
-  var_14 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_14 = common_scripts\utility::getStructArray(var_0.target, "targetname");
   var_15 = common_scripts\utility::array_combine(var_13, var_14);
   var_1.doors = [];
 

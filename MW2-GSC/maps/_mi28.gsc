@@ -101,7 +101,7 @@ put this in your GSC:
 maps\_mi28::main( "vehicle_mi-28_flying" );
 
 and these lines in your CSV:
-include,vehicle_mi-28_flying_mi28
+#include,vehicle_mi-28_flying_mi28
 sound,vehicle_havoc,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi-28_flying"default:"vehicletype" "mi28"default:"script_team" "allies"*/
@@ -112,7 +112,7 @@ put this in your GSC:
 maps\_mi28::main( "vehicle_mi-28_flying_low" );
 
 and these lines in your CSV:
-include,vehicle_mi-28_flying_mi28_low
+#include,vehicle_mi-28_flying_mi28_low
 sound,vehicle_havoc,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi-28_flying_low"default:"vehicletype" "mi28"default:"script_team" "allies"

@@ -565,7 +565,7 @@ set_wait_then_clear_skipbloodpool() {
 
 trigger_physics(var_0) {
   var_1 = [];
-  var_2 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0.target, "targetname");
   var_3 = getEntArray(var_0.target, "targetname");
 
   foreach(var_5 in var_3) {
@@ -727,7 +727,7 @@ get_trigger_targs() {
         var_0[var_0.size] = var_5;
     }
 
-    var_2 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_2 = common_scripts\utility::getStructArray(self.target, "targetname");
 
     foreach(var_5 in var_2)
     var_3[var_3.size] = var_5;

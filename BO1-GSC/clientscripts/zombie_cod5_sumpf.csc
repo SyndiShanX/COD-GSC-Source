@@ -49,7 +49,7 @@ register_zombie_types() {
   character\clientscripts\char_jap_zombie::register_gibs();
   character\clientscripts\char_jap_zombie_nocap::register_gibs();
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
   include_weapon("g11_lps_zm");

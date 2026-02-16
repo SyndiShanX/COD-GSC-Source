@@ -768,7 +768,7 @@ function_9868e24e(player) {
     angles = player getplayerangles();
     var_5781dbe = anglesToForward(angles);
     fwd = vectorscale(var_5781dbe, 2000);
-    locking = player adsbuttonpressed();
+    locking = player adsButtonPressed();
     nlocks = 0;
     enemies = getplayers();
 

@@ -1782,7 +1782,7 @@ _id_82BC() {
 }
 
 _id_D8C7() {
-  var_0 = scripts\engine\utility::getstructarray("weapon_pickup", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("weapon_pickup", "targetname");
 
   foreach(var_2 in var_0) {
     if(var_2._id_CD99 == "1") {
@@ -3216,14 +3216,14 @@ _id_5951() {
       wait 3;
     }
 
-    if(!self attackbuttonpressed() && !self _meth_81E0() && !self usebuttonpressed()) {
+    if(!self attackButtonPressed() && !self _meth_81E0() && !self useButtonPressed()) {
       self _meth_804E("use", 0.5);
       continue;
     }
 
     wait 0.5;
 
-    if(!self attackbuttonpressed() && !self _meth_81E0() && !self usebuttonpressed()) {
+    if(!self attackButtonPressed() && !self _meth_81E0() && !self useButtonPressed()) {
       self _meth_804E("use", 0.5);
     }
   }

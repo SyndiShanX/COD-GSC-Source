@@ -47,7 +47,7 @@ lightGlows(targetname, fxName, fxFile, delay, soundalias) {
   waittillframeend;
 
   // script_structs
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
   if(!isDefined(ents))
     return;
   if(ents.size <= 0) {

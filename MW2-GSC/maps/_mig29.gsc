@@ -260,7 +260,7 @@ put this in your GSC:
 maps\_mig29::main( "vehicle_mig29" );
 
 and these lines in your CSV:
-include,vehicle_mig29_mig29
+#include,vehicle_mig29_mig29
 sound,vehicle_mig29,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mig29"default:"vehicletype" "mig29"default:"script_team" "allies"*/
@@ -271,7 +271,7 @@ put this in your GSC:
 maps\_mig29::main( "vehicle_mig29_low" );
 
 and these lines in your CSV:
-include,vehicle_mig29_low
+#include,vehicle_mig29_low
 sound,vehicle_mig29,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mig29_low"default:"vehicletype" "mig29"default:"script_team" "allies"*/
@@ -285,7 +285,7 @@ put this in your GSC:
 maps\_mig29::main( "vehicle_av8b_harrier_jet" );
 
 and these lines in your CSV:
-include,vehicle_av8b_harrier_jet_mig29
+#include,vehicle_av8b_harrier_jet_mig29
 sound,vehicle_mig29,vehicle_standard,all_sp
 
 defaultmdl="vehicle_av8b_harrier_jet"default:"vehicletype" "mig29"default:"script_team" "allies"*/
@@ -298,7 +298,7 @@ put this in your GSC:
 maps\_mig29::main( "vehicle_mig29_desert" );
 
 and these lines in your CSV:
-include,vehicle_mig29_desert_mig29
+#include,vehicle_mig29_desert_mig29
 sound,vehicle_mig29,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mig29_desert"default:"vehicletype" "mig29"default:"script_team" "allies"

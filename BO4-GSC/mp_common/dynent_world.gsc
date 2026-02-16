@@ -225,7 +225,7 @@ function_2b9e2224(trigger) {
 
     success = 0;
 
-    while(isalive(self) && !self inlaststand() && self usebuttonpressed() && trigger istriggerenabled() && self istouching(trigger) && isDefined(dynent) && trigger.var_a9309589 === dynent) {
+    while(isalive(self) && !self inlaststand() && self useButtonPressed() && trigger istriggerenabled() && self istouching(trigger) && isDefined(dynent) && trigger.var_a9309589 === dynent) {
       if(isDefined(level.gameended) && level.gameended) {
         trigger triggerenable(0);
         break;
@@ -268,7 +268,7 @@ function_e882de59(trigger) {
   level endon(#"game_ended");
   self endon(#"death", #"disconnect");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     waitframe(1);
   }
 

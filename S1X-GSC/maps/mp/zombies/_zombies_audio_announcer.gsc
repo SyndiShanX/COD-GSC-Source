@@ -390,7 +390,7 @@ terminalattractormonitor() {
     var_6 thread _terminalattractormonitor("weapon_upgrade", 300, 80);
   }
 
-  var_14 = common_scripts\utility::getstructarray("power_switch", "targetname");
+  var_14 = common_scripts\utility::getStructArray("power_switch", "targetname");
 
   foreach(var_16 in var_14) {
     var_16 thread _terminalattractormonitor("power_switch", 150, 80);

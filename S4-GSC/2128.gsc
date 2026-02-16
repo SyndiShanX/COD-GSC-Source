@@ -339,7 +339,7 @@ _id_8A67(var_0) {
 
 _id_6DC0(var_0) {
   var_1 = getEntArray(var_0, "targetname");
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_3 = [];
   var_4 = _func_00E6(var_0, "targetname");
 
@@ -455,7 +455,7 @@ _id_B80B(var_0, var_1) {
     waitframe();
     waittillframeend;
 
-    if(!var_0 usebuttonpressed()) {
+    if(!var_0 useButtonPressed()) {
       break;
     }
   }
@@ -1105,7 +1105,7 @@ _id_787F(var_0) {
 _id_6725(var_0, var_1) {
   var_1 = scripts\engine\utility::_id_FF6C(var_1, 1);
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray(var_0, "scriptbundlename");
+  var_3 = scripts\engine\utility::getStructArray(var_0, "scriptbundlename");
   var_2 = scripts\engine\utility::array_combine(var_3, var_2);
   var_4 = [];
   var_2 = scripts\engine\utility::array_combine(var_4, var_2);

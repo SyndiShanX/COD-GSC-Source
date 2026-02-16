@@ -13,7 +13,7 @@ put this in your GSC:
 maps\_suburban_minigun::main( "vehicle_suburban_minigun_viewmodel" );
 
 and these lines in your CSV:
-include,vehicle_suburban_minigun_viewmodel
+#include,vehicle_suburban_minigun_viewmodel
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,weapon_minigun,vehicle_standard,all_sp
 
@@ -25,7 +25,7 @@ put this in your GSC:
 maps\_suburban_minigun::main( "vehicle_suburban_technical" );
 
 and these lines in your CSV:
-include,vehicle_suburban_minigun_technical
+#include,vehicle_suburban_minigun_technical
 sound,vehicle_pickup,vehicle_standard,all_sp
 sound,weapon_minigun,vehicle_standard,all_sp
 

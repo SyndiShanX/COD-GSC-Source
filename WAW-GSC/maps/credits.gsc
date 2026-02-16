@@ -132,7 +132,7 @@ play_scene_controller() {
     time += delay;
   }
 
-  scenes = getstructarray("scene", "targetname");
+  scenes = getStructArray("scene", "targetname");
   div_time = time / (scenes.size + 1);
 
   for(i = 0; i < scenes.size; i++) {
@@ -158,7 +158,7 @@ play_scenes() {
 
   fadein_fog();
 
-  scenes = getstructarray("scene", "targetname");
+  scenes = getStructArray("scene", "targetname");
   scenes = array_randomize(scenes);
 
   for(i = 0; i < scenes.size; i++) {

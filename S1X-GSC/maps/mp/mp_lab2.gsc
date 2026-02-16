@@ -657,7 +657,7 @@ SetupCraneChem() {
 
   level.GasMachine.chemical_rackPauseTime = 0;
   level.GasMachine.chemical_racksActive = true;
-  level.GasMachine.chemical_rackGotosArray = getstructarray("missile_rack_start01", "targetname");
+  level.GasMachine.chemical_rackGotosArray = getStructArray("missile_rack_start01", "targetname");
 
   level.GasMachine.DamageRadius = 375;
   level.GasMachine.MaxDamageAmount = 300;

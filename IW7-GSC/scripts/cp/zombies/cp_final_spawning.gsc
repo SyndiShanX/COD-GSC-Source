@@ -736,7 +736,7 @@ update_special_round_counter() {
 
 update_origin(var_0, var_1) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_3 in level.spawn_struct_list) {
@@ -749,7 +749,7 @@ update_origin(var_0, var_1) {
 
 remove_origin(var_0) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_2 in level.spawn_struct_list) {
@@ -762,7 +762,7 @@ remove_origin(var_0) {
 
 update_kvp(var_0, var_1, var_2) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_4 in level.spawn_struct_list) {

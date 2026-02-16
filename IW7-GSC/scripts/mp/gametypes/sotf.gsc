@@ -257,7 +257,7 @@ findnewowner(var_0) {
 }
 
 spawnchests(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("sotf_chest_spawnpoint", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("sotf_chest_spawnpoint", "targetname");
   if(level.firstcratedrop) {
     var_2 = getcenterpoint(var_1);
     level.firstcratedrop = 0;

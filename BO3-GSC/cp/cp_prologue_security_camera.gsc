@@ -212,7 +212,7 @@ function player_uses_the_security_camera_station(s_player_use, extra_cam_index) 
   wait(2);
   while(!level.minister_located) {
     self util::screen_message_create_client(&"CP_MI_ETH_PROLOGUE_CAMERA_CHANGE", undefined, undefined, 170);
-    if(self actionbuttonpressed()) {
+    if(self actionbuttonPressed()) {
       self util::screen_message_delete_client();
       self playlocalsound("evt_camera_scan_switch");
       level.var_d658503a++;

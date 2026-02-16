@@ -65,7 +65,7 @@ move_crafting_totem(var_0) {
 }
 
 init_crafting_station() {
-  level.crafting_totems = scripts\engine\utility::getstructarray("crafting_station", "script_noteworthy");
+  level.crafting_totems = scripts\engine\utility::getStructArray("crafting_station", "script_noteworthy");
   foreach(var_1 in level.crafting_totems) {
     var_1 thread init_crafting_totem();
   }
@@ -97,7 +97,7 @@ init_crafting_totem() {
     }
   }
 
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_2 in var_0) {
     if(var_2.script_noteworthy == "crafting_item_spot") {
       self.craft_item_spot = var_2;

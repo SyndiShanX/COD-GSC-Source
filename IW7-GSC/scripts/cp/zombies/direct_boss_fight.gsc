@@ -53,7 +53,7 @@ get_direct_to_boss_fight_starting_currency() {
 
 get_direct_to_boss_spawn_point() {
   var_0 = self;
-  var_1 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("afterlife_arcade", "targetname");
   if(isDefined(level.additional_afterlife_arcade_start_point)) {
     var_1 = scripts\engine\utility::array_combine(var_1, level.additional_afterlife_arcade_start_point);
   }
@@ -67,7 +67,7 @@ disable_things_in_afterlife_arcade() {
   var_1 = ["afterlife_spectate_door", "afterlife_selfrevive_door", "basketball_game_afterlife", "laughingclown_afterlife", "clown_tooth_game_afterlife", "game_race", "bowling_for_planets_afterlife", "shooting_gallery_afterlife", "arcade_icehock", "arcade_hero", "arcade_seaques", "arcade_boxing", "arcade_oink", "arcade_crackpo", "arcade_plaque", "arcade_keyston", "arcade_spider", "arcade_robottank", "arcade_riverraid", "arcade_pitfall", "arcade_demon", "arcade_barnstorming", "arcade_starmaster", "arcade_cosmic"];
   wait(var_0);
   foreach(var_3 in var_1) {
-    var_4 = scripts\engine\utility::getstructarray(var_3, "script_noteworthy");
+    var_4 = scripts\engine\utility::getStructArray(var_3, "script_noteworthy");
     foreach(var_6 in var_4) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_6);
       if(var_3 == "shooting_gallery_afterlife") {
@@ -80,7 +80,7 @@ disable_things_in_afterlife_arcade() {
 enable_things_in_afterlife_arcade() {
   var_0 = ["afterlife_spectate_door", "afterlife_selfrevive_door", "basketball_game_afterlife", "laughingclown_afterlife", "clown_tooth_game_afterlife", "game_race", "bowling_for_planets_afterlife", "shooting_gallery_afterlife", "arcade_icehock", "arcade_hero", "arcade_seaques", "arcade_boxing", "arcade_oink", "arcade_crackpo", "arcade_plaque", "arcade_keyston", "arcade_spider", "arcade_robottank", "arcade_riverraid", "arcade_pitfall", "arcade_demon", "arcade_barnstorming", "arcade_starmaster", "arcade_cosmic"];
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstructarray(var_2, "script_noteworthy");
+    var_3 = scripts\engine\utility::getStructArray(var_2, "script_noteworthy");
     foreach(var_5 in var_3) {
       scripts\cp\cp_interaction::add_to_current_interaction_list(var_5);
       if(var_2 == "shooting_gallery_afterlife") {
@@ -1541,7 +1541,7 @@ wait_all_players_press_use(var_0) {
         break;
       }
 
-      if(!var_4 usebuttonpressed()) {
+      if(!var_4 useButtonPressed()) {
         var_2 = 0;
         break;
       }
@@ -1571,7 +1571,7 @@ wait_all_players_press_use(var_0) {
           break;
         }
 
-        if(!var_4 usebuttonpressed()) {
+        if(!var_4 useButtonPressed()) {
           var_2 = 0;
           break;
         }
@@ -1675,7 +1675,7 @@ level_specific_setup() {
 }
 
 disable_weapon_upgrade_interaction() {
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   var_1 = [];
   foreach(var_3 in var_0) {
     if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "weapon_upgrade") {
@@ -1721,9 +1721,9 @@ open_sesame() {
       }
     }
 
-    var_10 = scripts\engine\utility::getstructarray("interaction", "targetname");
+    var_10 = scripts\engine\utility::getStructArray("interaction", "targetname");
     foreach(var_12 in var_10) {
-      var_13 = scripts\engine\utility::getstructarray(var_12.script_noteworthy, "script_noteworthy");
+      var_13 = scripts\engine\utility::getStructArray(var_12.script_noteworthy, "script_noteworthy");
       foreach(var_15 in var_13) {
         if(isDefined(var_15.target) && isDefined(var_12.target)) {
           if(var_15.target == var_12.target && var_15 != var_12) {

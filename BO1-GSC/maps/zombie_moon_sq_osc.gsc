@@ -13,7 +13,7 @@ init() {
   PreCacheModel("p_zom_moon_py_glyph_dial_cap");
   PreCacheModel("p_zom_moon_button_console_lid");
   level._osc_rb_jolie_spots = [];
-  level._osc_rbs = getstructarray("struct_osc_button", "targetname");
+  level._osc_rbs = getStructArray("struct_osc_button", "targetname");
   if(!isDefined(level._osc_rbs)) {
     PrintLn("$$$$ missing _osc_rbs, need bsp $$$$");
     wait(1.0);
@@ -37,7 +37,7 @@ init() {
     }
   }
   level._jolie_greet_array = array(level._osc_flags[4], level._osc_flags[5], level._osc_flags[6], level._osc_flags[7]);
-  level._osc_st = getstructarray("struct_osc_st", "targetname");
+  level._osc_st = getStructArray("struct_osc_st", "targetname");
   for(k = 0; k < level._osc_st.size; k++) {
     level._osc_st[k].focus = spawnStruct();
     level._osc_st[k].focus.origin = level._osc_st[k].origin;

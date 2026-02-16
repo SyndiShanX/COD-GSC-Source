@@ -4197,12 +4197,12 @@ steamroom_door_lightswap() {
   wait(0.25);
   level.player playSound("scn_blackout_breaker_box");
 
-  glowspots = GetStructArray("cave_red_light_glowspot", "targetname");
+  glowspots = getStructArray("cave_red_light_glowspot", "targetname");
   foreach(spot in glowspots) {
     playFX(getfx("redlight_glow"), spot.origin);
   }
 
-  dlightspots = GetStructArray("cave_red_light_dlight_spot", "targetname");
+  dlightspots = getStructArray("cave_red_light_dlight_spot", "targetname");
   foreach(dlight in dlightspots) {
     dlight.looper = PlayLoopedFX(getfx("dlight_red"), 50, dlight.origin, 2500);
   }

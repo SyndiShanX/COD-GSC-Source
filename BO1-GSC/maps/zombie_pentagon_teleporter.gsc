@@ -271,7 +271,7 @@ teleport_player(user) {
     }
     self thread no_zombie_left_behind(level.portal_trig[dest_trig], user);
   }
-  player_destination = getstructarray(level.portal_trig[dest_trig].target, "targetname");
+  player_destination = getStructArray(level.portal_trig[dest_trig].target, "targetname");
   if(isDefined(player_destination)) {
     for(i = 0; i < player_destination.size; i++) {
       if(isDefined(player_destination[i].script_noteworthy) && player_destination[i].script_noteworthy == "player_pos") {
@@ -467,7 +467,7 @@ enable_zone_portals() {
 no_zombie_left_behind(portal_trig, targeted_player) {
   portal_enter = undefined;
   teleporting_zombies = 0;
-  portal_entered = getstructarray(self.target, "targetname");
+  portal_entered = getStructArray(self.target, "targetname");
   for(i = 0; i < portal_entered.size; i++) {
     if(isDefined(portal_entered[i].script_noteworthy) && portal_entered[i].script_noteworthy == "zombie_pos") {
       portal_enter = portal_entered[i];
@@ -519,7 +519,7 @@ zombie_through_portal(portal_enter, portal_exit, targeted_player) {
   }
   playFX(level._effect["transporter_start"], self.origin);
   playsoundatposition("evt_teleporter_out", portal_enter.origin);
-  final_destination = getstructarray(portal_exit.target, "targetname");
+  final_destination = getStructArray(portal_exit.target, "targetname");
   for(i = 0; i < final_destination.size; i++) {
     if(isDefined(final_destination[i].script_noteworthy) && final_destination[i].script_noteworthy == "zombie_pos") {
       portal_exit = final_destination[i];
@@ -909,21 +909,21 @@ cleanup_unoccupied_floor(move_speed, current_floor, next_floor) {
         self Delete();
       } else if(isDefined(next_floor) && isDefined(current_floor)) {
         if(next_floor == 3 && current_floor == 2) {
-          teleport_pos = getstructarray("elevator1_down_hidden", "targetname");
+          teleport_pos = getStructArray("elevator1_down_hidden", "targetname");
         } else if(next_floor == 2 && current_floor == 3) {
-          teleport_pos = getstructarray("elevator1_up_hidden", "targetname");
+          teleport_pos = getStructArray("elevator1_up_hidden", "targetname");
         } else if(next_floor == 2 && current_floor == 1) {
-          teleport_pos = getstructarray("elevator2_down_hidden", "targetname");
+          teleport_pos = getStructArray("elevator2_down_hidden", "targetname");
         } else if(next_floor == 1 && current_floor == 2) {
-          teleport_pos = getstructarray("elevator2_up_hidden", "targetname");
+          teleport_pos = getStructArray("elevator2_up_hidden", "targetname");
         }
       } else {
         if(num_floor3 > 0 && num_floor3 != num_floor3_laststand && self.floor != 3) {
-          teleport_pos = getstructarray("elevator1_down_hidden", "targetname");
+          teleport_pos = getStructArray("elevator1_down_hidden", "targetname");
         } else if(num_floor2 > 0 && num_floor2 != num_floor2_laststand && self.floor != 2) {
-          teleport_pos = getstructarray("elevator2_down_hidden", "targetname");
+          teleport_pos = getStructArray("elevator2_down_hidden", "targetname");
         } else if(num_floor1 > 0 && num_floor1 != num_floor1_laststand && self.floor != 1) {
-          teleport_pos = getstructarray("elevator2_up_hidden", "targetname");
+          teleport_pos = getStructArray("elevator2_up_hidden", "targetname");
         } else {
           return;
         }
@@ -985,7 +985,7 @@ pentagon_ignore_spawner(spawner) {
   return false;
 }
 play_defcon5_alarms() {
-  structs = getstructarray("defcon_alarms", "targetname");
+  structs = getStructArray("defcon_alarms", "targetname");
   sound_ent = [];
   for(i = 0; i < structs.size; i++) {
     sound_ent[i] = spawn("script_origin", structs[i].origin);

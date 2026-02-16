@@ -73,7 +73,7 @@ _id_0CA2(var_0) {
   var_2 = gettime() + var_1;
 
   while(var_2 > gettime()) {
-    if(!self usebuttonpressed()) {
+    if(!self useButtonPressed()) {
       return 0;
     }
 
@@ -184,7 +184,7 @@ _id_0B92(var_0) {
   var_0 endon("deploy_weapon_switch_ended");
 
   for(;;) {
-    if(!self usebuttonpressed()) {
+    if(!self useButtonPressed()) {
       break;
     }
 

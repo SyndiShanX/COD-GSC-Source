@@ -8,7 +8,7 @@
 #include clientscripts\mp\_visionset_mgr;
 
 init() {
-  s_traps_array = getstructarray("zm_traps", "targetname");
+  s_traps_array = getStructArray("zm_traps", "targetname");
   a_registered_traps = [];
 
   foreach(trap in s_traps_array) {

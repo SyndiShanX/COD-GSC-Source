@@ -24,7 +24,7 @@ clean_arcade_cabinet() {
 }
 
 make_cleaning_item_to_collect(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_0, "targetname");
   var_4 = scripts\engine\utility::random(var_3);
   var_5 = spawn("script_model", var_4.origin);
   var_5 setModel(var_1);
@@ -64,7 +64,7 @@ player_picking_up_item(var_0, var_1) {
     return 0;
   }
 
-  if(!var_0 usebuttonpressed()) {
+  if(!var_0 useButtonPressed()) {
     return 0;
   }
 
@@ -101,7 +101,7 @@ player_cleaning_up_arcade_cabinet(var_0) {
     return 0;
   }
 
-  if(!var_0 usebuttonpressed()) {
+  if(!var_0 useButtonPressed()) {
     return 0;
   }
 
@@ -341,7 +341,7 @@ player_interact_with_mahjong_set(var_0, var_1) {
     return 0;
   }
 
-  if(!var_0 usebuttonpressed()) {
+  if(!var_0 useButtonPressed()) {
     return 0;
   }
 
@@ -538,7 +538,7 @@ coin_flip() {
 
 set_up_tiles_for_pick_up(var_0) {
   level.mahjong_struct_for_pick_up = [];
-  var_1 = scripts\engine\utility::getstructarray("sb_mahjong_tile", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("sb_mahjong_tile", "targetname");
   var_1 = scripts\engine\utility::array_randomize(var_1);
   foreach(var_5, var_3 in var_0) {
     var_4 = var_1[var_5];
@@ -622,7 +622,7 @@ player_use_mahjong_struct(var_0, var_1) {
     return 0;
   }
 
-  if(!var_1 usebuttonpressed()) {
+  if(!var_1 useButtonPressed()) {
     return 0;
   }
 
@@ -680,7 +680,7 @@ get_mahjong_model(var_0, var_1) {
 
 init_mahjong_set_controlling_struct(var_0) {
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_4 in var_2) {
     var_5 = int(var_4.script_noteworthy);
     var_1[var_5] = var_4;
@@ -944,7 +944,7 @@ set_up_controlling_struct(var_0) {
   var_0.timer_structs = [];
   var_0.damage_marker_structs = [];
   set_should_detect_damage(var_0, 0);
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     var_4 = var_3.script_noteworthy;
     if(issubstr(var_4, "timer")) {
@@ -1207,7 +1207,7 @@ player_is_on_top_sky_step(var_0, var_1) {
 }
 
 get_sky_steps_at_tier(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray("sky_step_tier_" + var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray("sky_step_tier_" + var_0, "targetname");
   var_3 = [];
   foreach(var_5 in var_2) {
     if(distancesquared(var_1.origin, var_5.origin) > 27225) {
@@ -1386,7 +1386,7 @@ wait_for_player_activation() {
         break;
       }
 
-      if(!var_4 usebuttonpressed()) {
+      if(!var_4 useButtonPressed()) {
         var_2 = 0;
         break;
       }
@@ -1411,7 +1411,7 @@ wait_for_player_activation() {
           break;
         }
 
-        if(!var_4 usebuttonpressed()) {
+        if(!var_4 useButtonPressed()) {
           var_2 = 0;
           break;
         }
@@ -1860,7 +1860,7 @@ play_combo_arc_vfx(var_0, var_1, var_2) {
 adjust_player_exit_gns_pos() {
   level endon("game_ended");
   wait(5);
-  var_0 = scripts\engine\utility::getstructarray("ghost_wave_player_end", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ghost_wave_player_end", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.origin == (-743, 2620, 906)) {
       var_2.origin = (-745, 2620, 906);
@@ -1884,7 +1884,7 @@ adjust_player_exit_gns_pos() {
 adjust_mahjong_pick_up_pos() {
   level endon("game_ended");
   wait(5);
-  var_0 = scripts\engine\utility::getstructarray("sb_mahjong_tile", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("sb_mahjong_tile", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.origin == (1393, 816, 801)) {
       var_2.origin = (1040, 568, 790.6);

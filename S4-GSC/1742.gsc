@@ -1708,7 +1708,7 @@ _id_628C(var_0) {}
 _id_10FBE(var_0, var_1, var_2, var_3) {
   var_4 = "\t";
   _id_3398();
-  _id_3396("//_createfx generated. Do not touch!!");
+  _id_3396("");
   _id_3396("#include scripts\\engine\\utility;");
   _id_3396("#include scripts\\common\\utility;");
   _id_3396("#include scripts\\common\\createfx;\n");

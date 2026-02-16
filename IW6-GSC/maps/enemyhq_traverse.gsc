@@ -140,8 +140,8 @@ handle_rpg_ambush() {
   level endon("cancel_rpg");
   common_scripts\utility::flag_wait("start_pre_rpg_ambush");
   level.player enabledeathshield(1);
-  var_0 = common_scripts\utility::getstructarray("rpg_originB", "targetname");
-  var_1 = common_scripts\utility::getstructarray("rpg_targB", "targetname");
+  var_0 = common_scripts\utility::getStructArray("rpg_originB", "targetname");
+  var_1 = common_scripts\utility::getStructArray("rpg_targB", "targetname");
   var_2 = missile_createattractororigin(var_1[0].origin, 1000, 300);
   thread fire_fake_rpgs(var_0, var_1);
   level.allies[1] maps\_utility::delaythread(0.5, maps\enemyhq_code::char_dialog_add_and_go, "enemyhq_kgn_ambush");
@@ -150,8 +150,8 @@ handle_rpg_ambush() {
   thread maps\_utility::battlechatter_on("axis");
   thread rpg_crash();
   wait 1;
-  var_0 = common_scripts\utility::getstructarray("rpg_origin", "targetname");
-  var_1 = common_scripts\utility::getstructarray("rpg_targ", "targetname");
+  var_0 = common_scripts\utility::getStructArray("rpg_origin", "targetname");
+  var_1 = common_scripts\utility::getStructArray("rpg_targ", "targetname");
   thread fire_fake_rpgs(var_0, var_1);
   thread fudge_ally_accuracy();
   maps\_utility::delaythread(2, ::player_rpg_shield);
@@ -214,13 +214,13 @@ handle_skip_rpg_sniping() {
 
   if(!common_scripts\utility::flag("start_sniper_rpg_ambush") && !common_scripts\utility::flag("ambush1_dead")) {
     thread player_rpg_attractor();
-    var_0 = common_scripts\utility::getstructarray("rpg_origin", "targetname");
-    var_1 = common_scripts\utility::getstructarray("rpg_targ2", "targetname");
+    var_0 = common_scripts\utility::getStructArray("rpg_origin", "targetname");
+    var_1 = common_scripts\utility::getStructArray("rpg_targ2", "targetname");
     thread fire_fake_rpgs(var_0, var_1);
     common_scripts\utility::flag_wait("final_rpg_ambush");
 
     if(!common_scripts\utility::flag("start_sniper_rpg_ambush") && !common_scripts\utility::flag("ambush1_dead")) {
-      var_1 = common_scripts\utility::getstructarray("rpg_targ3", "targetname");
+      var_1 = common_scripts\utility::getStructArray("rpg_targ3", "targetname");
       thread fire_fake_rpgs(var_0, var_1);
     }
   }

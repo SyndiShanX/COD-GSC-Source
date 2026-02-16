@@ -75,8 +75,8 @@ put this in your GSC:
 maps\_80s_wagon1::main( "vehicle_80s_wagon1_brn_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_wagon1_brn_destructible_mp_80s_wagon1
-include,destructible_vehicle_80s_wagon1_brn_destructible_mp
+#include,vehicle_80s_wagon1_brn_destructible_mp_80s_wagon1
+#include,destructible_vehicle_80s_wagon1_brn_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -88,8 +88,8 @@ put this in your GSC:
 maps\_80s_wagon1::main( "vehicle_80s_wagon1_green_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_wagon1_green_destructible_mp_80s_wagon1
-include,destructible_vehicle_80s_wagon1_green_destructible_mp
+#include,vehicle_80s_wagon1_green_destructible_mp_80s_wagon1
+#include,destructible_vehicle_80s_wagon1_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -101,8 +101,8 @@ put this in your GSC:
 maps\_80s_wagon1::main( "vehicle_80s_wagon1_red_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_wagon1_red_destructible_mp_80s_wagon1
-include,destructible_vehicle_80s_wagon1_red_destructible_mp
+#include,vehicle_80s_wagon1_red_destructible_mp_80s_wagon1
+#include,destructible_vehicle_80s_wagon1_red_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -114,8 +114,8 @@ put this in your GSC:
 maps\_80s_wagon1::main( "vehicle_80s_wagon1_silv_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_wagon1_silv_destructible_mp_80s_wagon1
-include,destructible_vehicle_80s_wagon1_silv_destructible_mp
+#include,vehicle_80s_wagon1_silv_destructible_mp_80s_wagon1
+#include,destructible_vehicle_80s_wagon1_silv_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -127,8 +127,8 @@ put this in your GSC:
 maps\_80s_wagon1::main( "vehicle_80s_wagon1_tan_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_wagon1_tan_destructible_mp_80s_wagon1
-include,destructible_vehicle_80s_wagon1_tan_destructible_mp
+#include,vehicle_80s_wagon1_tan_destructible_mp_80s_wagon1
+#include,destructible_vehicle_80s_wagon1_tan_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -140,8 +140,8 @@ put this in your GSC:
 maps\_80s_wagon1::main( "vehicle_80s_wagon1_yel_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_wagon1_yel_destructible_mp_80s_wagon1
-include,destructible_vehicle_80s_wagon1_yel_destructible_mp
+#include,vehicle_80s_wagon1_yel_destructible_mp_80s_wagon1
+#include,destructible_vehicle_80s_wagon1_yel_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 

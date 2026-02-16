@@ -105,7 +105,7 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
       continue;
     }
 
-    if(player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed()) {
+    if(player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed()) {
       if(isDefined(playersoundonuse)) {
         player playlocalsound(playersoundonuse);
       }
@@ -294,10 +294,10 @@ cancel_button_think() {
 
 canceltackinsertionbutton() {
   if(level.console) {
-    return self changeseatbuttonpressed();
+    return self changeseatbuttonPressed();
   }
 
-  return self jumpbuttonpressed();
+  return self jumpbuttonPressed();
 }
 
 cancel_button_press() {

@@ -103,11 +103,11 @@ _id_82B7() {
 }
 
 _id_726C() {
-  var_0 = scripts\engine\utility::getstructarray("gulag", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("gulag", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
 
   if(scripts\mp\gametypes\br_public::_id_878D()) {
-    var_0 = scripts\engine\utility::getstructarray("gulag_tutorial", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("gulag_tutorial", "targetname");
   }
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
@@ -136,7 +136,7 @@ _id_D848(var_0) {
   var_0._id_AA3F["ui_br_gulag_players_1"] = 0;
   var_0._id_AA3F["ui_br_gulag_data"] = 0;
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_4 in var_2) {
     if(var_4._id_039B == "prison_spawn") {
@@ -4510,7 +4510,7 @@ _id_0C94(var_0) {
   var_1 = 17000;
   self endon("bink_complete");
 
-  while(gettime() - var_0 < var_1 && !self _meth_848D() && !self usebuttonpressed() && !self jumpbuttonpressed()) {
+  while(gettime() - var_0 < var_1 && !self _meth_848D() && !self useButtonPressed() && !self jumpbuttonPressed()) {
     waitframe();
   }
 }

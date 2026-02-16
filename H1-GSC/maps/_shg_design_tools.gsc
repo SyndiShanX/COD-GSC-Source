@@ -709,7 +709,7 @@ getthingarray(var_0, var_1) {
   if(var_2.size > 0)
     return var_2;
 
-  var_2 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_2 = common_scripts\utility::getStructArray(var_0, var_1);
 
   if(var_2.size > 0)
     return var_2;

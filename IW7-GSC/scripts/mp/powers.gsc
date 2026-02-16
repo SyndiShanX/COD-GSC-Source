@@ -1304,13 +1304,13 @@ func_D767(var_0, var_1, var_2, var_3) {
 
     if(func_9F09(var_7)) {
       while(func_9F09(var_7)) {
-        if(self usebuttonpressed()) {
+        if(self useButtonPressed()) {
           if(var_5 == 0) {
             var_6 = 0.05;
           }
 
           var_10 = 0;
-          while(self usebuttonpressed()) {
+          while(self useButtonPressed()) {
             var_10 = var_10 + 0.05;
             if(var_10 >= var_6) {
               var_1 = func_93FD(var_1, var_2, var_3);
@@ -1327,7 +1327,7 @@ func_D767(var_0, var_1, var_2, var_3) {
         }
 
         wait(0.05);
-        if(self usebuttonpressed() == 0) {
+        if(self useButtonPressed() == 0) {
           var_5 = 0;
           break;
         }
@@ -1351,7 +1351,7 @@ func_D767(var_0, var_1, var_2, var_3) {
 }
 
 func_9F09(var_0) {
-  if((var_0 == "+frag" && self fragbuttonpressed()) || var_0 == "+smoke" && self secondaryoffhandbuttonpressed()) {
+  if((var_0 == "+frag" && self fragButtonPressed()) || var_0 == "+smoke" && self secondaryoffhandbuttonPressed()) {
     return 1;
   }
 

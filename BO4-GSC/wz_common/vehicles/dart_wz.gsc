@@ -231,12 +231,12 @@ watchremotecontroldeactivate() {
   dart endon(#"death", #"remote_weapon_end");
   player endon(#"disconnect");
 
-  while(player attackbuttonpressed()) {
+  while(player attackButtonPressed()) {
     waitframe(1);
   }
 
   while(true) {
-    if(player attackbuttonpressed()) {
+    if(player attackButtonPressed()) {
       player thread function_ea9fe221(dart);
       return;
     }

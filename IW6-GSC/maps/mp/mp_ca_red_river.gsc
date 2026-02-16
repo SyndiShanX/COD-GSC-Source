@@ -64,8 +64,8 @@ main() {
 redriver_breach_init() {
   wait 0.5;
 
-  breaches = getstructarray("breach", "targetname");
-  proxy = getstructarray("breach_proxy", "targetname");
+  breaches = getStructArray("breach", "targetname");
+  proxy = getStructArray("breach_proxy", "targetname");
 
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");

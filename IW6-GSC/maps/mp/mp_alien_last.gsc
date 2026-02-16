@@ -288,14 +288,14 @@ last_easter_egg_off() {
 }
 
 carwash_intel_easter_egg() {
-  var_0 = common_scripts\utility::getstructarray("ee_n", "targetname");
-  var_1 = common_scripts\utility::getstructarray("ee_e", "targetname");
-  var_2 = common_scripts\utility::getstructarray("ee_v", "targetname");
-  var_3 = common_scripts\utility::getstructarray("ee_r", "targetname");
-  var_4 = common_scripts\utility::getstructarray("ee_s", "targetname");
-  var_5 = common_scripts\utility::getstructarray("ee_o", "targetname");
-  var_6 = common_scripts\utility::getstructarray("ee_f", "targetname");
-  var_7 = common_scripts\utility::getstructarray("ee_t", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ee_n", "targetname");
+  var_1 = common_scripts\utility::getStructArray("ee_e", "targetname");
+  var_2 = common_scripts\utility::getStructArray("ee_v", "targetname");
+  var_3 = common_scripts\utility::getStructArray("ee_r", "targetname");
+  var_4 = common_scripts\utility::getStructArray("ee_s", "targetname");
+  var_5 = common_scripts\utility::getStructArray("ee_o", "targetname");
+  var_6 = common_scripts\utility::getStructArray("ee_f", "targetname");
+  var_7 = common_scripts\utility::getStructArray("ee_t", "targetname");
   level.easter_egg_trigs = getEntArray("ee_trig", "targetname");
   var_8 = [var_0, var_1, var_2, var_1, var_3, var_4, var_5, var_6, var_7];
   var_9 = ["^1N", "^2E", "^3V", "^4E", "^5R", "^6S", "^7O", "^8F", "^9T"];

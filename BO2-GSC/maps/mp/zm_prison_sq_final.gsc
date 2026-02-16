@@ -750,7 +750,7 @@ player_intermission_bridge() {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  points = getstructarray("final_cam", "targetname");
+  points = getStructArray("final_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");

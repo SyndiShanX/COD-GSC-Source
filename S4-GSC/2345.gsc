@@ -176,9 +176,9 @@ _id_AB65() {
 
 _id_6331(var_0) {
   if(isDefined(var_0)) {
-    return scripts\engine\utility::getstructarray("infil_type", "script_noteworthy");
+    return scripts\engine\utility::getStructArray("infil_type", "script_noteworthy");
   } else {
-    return scripts\engine\utility::getstructarray("cp_infil", "targetname");
+    return scripts\engine\utility::getStructArray("cp_infil", "targetname");
   }
 }
 

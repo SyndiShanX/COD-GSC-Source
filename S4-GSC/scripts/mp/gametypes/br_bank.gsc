@@ -18,7 +18,7 @@ init() {
     }
     var_1._id_B7BE = 0;
     var_1._id_1420 = 0;
-    var_1._id_21D2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+    var_1._id_21D2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
     var_1 thread _id_0AA6::_id_99E8(var_1, ::_id_21D3, ::_id_21D4);
   }
 }

@@ -662,7 +662,7 @@ populate_and_fire_lci_rockets(fire_point) {
 
   start_points = [];
 
-  orgs = getstructarray(ship, "targetname");
+  orgs = getStructArray(ship, "targetname");
 
   for(i = 0; i < num_rockets; i++) {
     start_points[i] = orgs[i].origin;

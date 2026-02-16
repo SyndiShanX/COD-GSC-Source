@@ -285,7 +285,7 @@ _id_8ED7() {
 }
 
 _id_8ECF() {
-  var_0 = scripts\engine\utility::getstructarray("largetransport_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("largetransport_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

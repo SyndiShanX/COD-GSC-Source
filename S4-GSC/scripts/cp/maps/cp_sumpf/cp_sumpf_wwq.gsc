@@ -138,7 +138,7 @@ init_step_two_search_for_components() {
   level.s_barrel_drop_loc = scripts\engine\utility::getstruct("wwq_barrel_drop_loc", "script_noteworthy");
   level.s_radio_tower = scripts\engine\utility::getstruct("wwq_radio_tower_center_loc", "script_noteworthy");
   level.s_radio_tower.n_health = 100;
-  level.a_s_commroom_spawners = scripts\engine\utility::getstructarray("comm_room_outside_zone", "target");
+  level.a_s_commroom_spawners = scripts\engine\utility::getStructArray("comm_room_outside_zone", "target");
   level.a_s_commroom_screamer_spawners = [];
 
   foreach(var_2 in level.a_s_commroom_spawners) {
@@ -156,7 +156,7 @@ init_step_two_search_for_components() {
   }
 
   level.a_ai_zombies_attacking_radio_tower = scripts\cp\utility::_id_459B(level.a_ai_zombies_attacking_radio_tower, []);
-  level.a_s_radio_attacker_locs = scripts\engine\utility::getstructarray("wwq_radio_attacker_loc", "script_noteworthy");
+  level.a_s_radio_attacker_locs = scripts\engine\utility::getStructArray("wwq_radio_attacker_loc", "script_noteworthy");
   level.s_tube_03_loc.t_dmg = getent("wwq_tesla_dmg_trig", "targetname");
   level.s_tube_03_loc thread tesla_device_dmg_watcher();
   level.n_tesla_charge_times = 0;
@@ -934,7 +934,7 @@ check_defending_juggernaut_has_no_target_monitor() {
   level endon("game_ended");
   self endon("death");
   var_0 = 3;
-  var_1 = scripts\engine\utility::getstructarray("wwq_defend_alternate_point", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("wwq_defend_alternate_point", "script_noteworthy");
 
   for(;;) {
     if(!isDefined(self._id_0192) || !self _meth_8067(self._id_0192)) {
@@ -1214,7 +1214,7 @@ sub_thunder_fx_watcher() {
   level endon("wwq_step_two_is_done");
   level endon("wwq_win_defend");
   level endon("wwq_lose_defend");
-  var_0 = scripts\engine\utility::getstructarray("wwq_sub_thunder_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("wwq_sub_thunder_loc", "script_noteworthy");
 
   for(;;) {
     var_1 = var_0[randomint(var_0.size)];
@@ -1496,7 +1496,7 @@ ww_crafting_watcher(var_0) {
     if(isDefined(self) && distancesquared(self.origin, var_0.origin) > 6400) {
       return;
     }
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       if(!level scripts\engine\utility::_id_5C00("craft_btn_in_use")) {
         level scripts\engine\utility::_id_5C1B("craft_btn_in_use");
         var_0.user = self;

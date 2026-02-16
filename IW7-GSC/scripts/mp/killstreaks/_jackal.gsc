@@ -1255,7 +1255,7 @@ func_13AD6(var_0, var_1) {
     }
 
     var_3 = 0;
-    while(self.owner usebuttonpressed()) {
+    while(self.owner useButtonPressed()) {
       var_3 = var_3 + 0.05;
       if(var_3 > 0.1) {
         var_4 = getothermode(self.var_BC);

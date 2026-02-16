@@ -339,7 +339,7 @@ bunker_style_mortar() {
   mortar_bunker_array = [];
   ents = undefined;
   groupNum = [];
-  structs = getstructarray("mortar_bunker", "targetname");
+  structs = getStructArray("mortar_bunker", "targetname");
   trigs = getEntArray("mortar_bunker", "targetname");
   if((isDefined(trigs)) && (trigs.size > 0))
     ents = array_merge(structs, trigs);
@@ -473,7 +473,7 @@ bog_style_mortar() {
 
   groups = [];
   groupNum = [];
-  structs = getstructarray("mortar", "targetname");
+  structs = getStructArray("mortar", "targetname");
   assert(isDefined(structs));
   assert(structs.size > 0);
   for(i = 0; i < structs.size; i++) {

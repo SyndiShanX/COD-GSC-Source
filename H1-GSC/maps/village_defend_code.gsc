@@ -200,32 +200,32 @@ minigun_used() {
     if(common_scripts\utility::flag("player_on_minigun")) {
       if(!level.inuse) {
         if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-          if(level.player adsbuttonpressed()) {
+          if(level.player adsButtonPressed()) {
             level.inuse = 1;
             thread minigun_sound_spinup();
           }
-        } else if(level.player attackbuttonpressed()) {
+        } else if(level.player attackButtonPressed()) {
           level.inuse = 1;
           thread minigun_sound_spinup();
         }
       } else if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-        if(!level.player adsbuttonpressed()) {
+        if(!level.player adsButtonPressed()) {
           level.inuse = 0;
           thread minigun_sound_spindown();
-        } else if(!level.player adsbuttonpressed() && level.player attackbuttonpressed() && var_15) {
+        } else if(!level.player adsButtonPressed() && level.player attackButtonPressed() && var_15) {
           level.inuse = 0;
           thread minigun_sound_spindown();
         }
-      } else if(!level.player attackbuttonpressed()) {
+      } else if(!level.player attackButtonPressed()) {
         level.inuse = 0;
         thread minigun_sound_spindown();
-      } else if(level.player attackbuttonpressed() && var_15) {
+      } else if(level.player attackButtonPressed() && var_15) {
         level.inuse = 0;
         thread minigun_sound_spindown();
       }
 
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
-        if(level.player adsbuttonpressed()) {
+        if(level.player adsButtonPressed()) {
           var_6 = var_6 + 0.05;
 
           if(var_6 >= 2.75)
@@ -235,23 +235,23 @@ minigun_used() {
       }
 
       if(!var_13) {
-        if(level.player attackbuttonpressed() && !var_15 && var_12) {
+        if(level.player attackButtonPressed() && !var_15 && var_12) {
           var_13 = 1;
           var_17 = gettime();
 
           if(!level.player common_scripts\utility::is_player_gamepad_enabled())
             common_scripts\utility::flag_set("minigun_lesson_learned");
-        } else if(level.player attackbuttonpressed() && var_15) {
+        } else if(level.player attackButtonPressed() && var_15) {
           var_13 = 0;
           var_17 = undefined;
         }
       } else {
-        if(!level.player attackbuttonpressed()) {
+        if(!level.player attackButtonPressed()) {
           var_13 = 0;
           var_17 = undefined;
         }
 
-        if(level.player attackbuttonpressed() && !var_12) {
+        if(level.player attackButtonPressed() && !var_12) {
           var_13 = 0;
           var_17 = undefined;
         }

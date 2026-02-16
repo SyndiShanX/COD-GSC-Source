@@ -490,11 +490,11 @@ function_875fc588() {
 wait_skip_killcam_button() {
   self endon(#"disconnect", #"end_killcam");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     waitframe(1);
   }
 
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     waitframe(1);
   }
 
@@ -506,11 +506,11 @@ wait_skip_killcam_button() {
 function_fa405b23() {
   self endon(#"disconnect", #"end_killcam");
 
-  while(self jumpbuttonpressed()) {
+  while(self jumpbuttonPressed()) {
     waitframe(1);
   }
 
-  while(!self jumpbuttonpressed()) {
+  while(!self jumpbuttonPressed()) {
     waitframe(1);
   }
 
@@ -529,11 +529,11 @@ wait_team_change_end_killcam() {
 wait_skip_killcam_safe_spawn_button() {
   self endon(#"disconnect", #"end_killcam");
 
-  while(self fragbuttonpressed()) {
+  while(self fragButtonPressed()) {
     waitframe(1);
   }
 
-  while(!self fragbuttonpressed()) {
+  while(!self fragButtonPressed()) {
     waitframe(1);
   }
 
@@ -591,11 +591,11 @@ function_f5f2d8e6() {
 }
 
 cancel_use_button() {
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 cancel_safe_spawn_button() {
-  return self fragbuttonpressed();
+  return self fragButtonPressed();
 }
 
 cancel_callback() {

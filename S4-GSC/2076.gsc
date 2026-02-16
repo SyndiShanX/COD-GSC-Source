@@ -397,7 +397,7 @@ _id_A227(var_0, var_1, var_2) {
 }
 
 _id_D85B() {
-  var_0 = scripts\engine\utility::getstructarray("tac_ops_map_config", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2._id_039B;
@@ -407,7 +407,7 @@ _id_D85B() {
     }
 
     _id_4011(var_3, var_2);
-    var_4 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_6 in var_4) {
       switch (var_6._id_CD99) {

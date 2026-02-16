@@ -793,7 +793,7 @@ event1_hutexplosion() {
 }
 
 event1_hutexplosion_remains() {
-  fire_points = getstructarray("hut_fire_effect", "targetname");
+  fire_points = getStructArray("hut_fire_effect", "targetname");
 
   for(i = 0; i < fire_points.size; i++) {
     size = randomintrange(0, 1);
@@ -825,7 +825,7 @@ event1_hut_waiter_setup2() {
 event1_explosion_near_right_side_friendlies() {
   level waittill("tank3_attacked");
 
-  friendlyattacked = getstructarray("right_friendly_attacked", "targetname");
+  friendlyattacked = getStructArray("right_friendly_attacked", "targetname");
 
   for(i = 0; i < friendlyattacked.size; i++) {
     playFX(level._effect["rocket_explode"], friendlyattacked[i].origin);
@@ -1328,8 +1328,8 @@ event1_ambient_planes_setup() {
 }
 
 planes_flying_strat(start_struct_name) {
-  start_struct = getstructarray(start_struct_name, "targetname");
-  end_struct = getstructarray(start_struct_name, "targetname");
+  start_struct = getStructArray(start_struct_name, "targetname");
+  end_struct = getStructArray(start_struct_name, "targetname");
 
   thread planes_move(start_struct, end_struct);
 }
@@ -1888,7 +1888,7 @@ event1b_skipto_setup() {
   node waittill("trigger");
   level.flametank setspeed(0, 6, 35);
 
-  hero_start_structs = getstructarray("ev2_temp_teleport_heroes", "targetname");
+  hero_start_structs = getStructArray("ev2_temp_teleport_heroes", "targetname");
   level.heroes[0] forceteleport(hero_start_structs[0].origin, hero_start_structs[0].angles);
   level.heroes[1] forceteleport(hero_start_structs[1].origin, hero_start_structs[1].angles);
 
@@ -1910,7 +1910,7 @@ outro_skipto_setup() {
 
   level.radio_guy thread magic_bullet_shield();
 
-  hero_start_structs = getstructarray("ev2_outro_teleport_heroes", "targetname");
+  hero_start_structs = getStructArray("ev2_outro_teleport_heroes", "targetname");
 
   level.heroes[0] forceteleport(hero_start_structs[0].origin, hero_start_structs[0].angles);
   level.heroes[1] forceteleport(hero_start_structs[1].origin, hero_start_structs[1].angles);
@@ -2209,7 +2209,7 @@ get_sorted_players() {
 }
 
 get_sorted_starts(start_name) {
-  starts = getstructarray("player_starts", "targetname");
+  starts = getStructArray("player_starts", "targetname");
 
   player_starts = [];
 

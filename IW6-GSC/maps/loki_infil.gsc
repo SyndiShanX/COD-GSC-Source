@@ -204,7 +204,7 @@ infil_blend_push_out() {
       }
     }
 
-    if(level.player fragbuttonpressed()) {
+    if(level.player fragButtonPressed()) {
       var_0++;
 
       if(var_0 > 20) {

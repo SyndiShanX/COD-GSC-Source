@@ -369,7 +369,7 @@ cleanup_rope_on_zodiac_death(var_0) {
 spawn_fake_zodiacs(var_0, var_1) {
   if(var_1 == 0) {}
 
-  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
     var_5 = spawn_fake_zodiac(var_4);

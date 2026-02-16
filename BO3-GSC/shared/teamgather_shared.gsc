@@ -200,7 +200,7 @@ class cteamgather {
   }
 
   function team_member_zoom_button_check(e_player) {
-    if(e_player usebuttonpressed()) {
+    if(e_player useButtonPressed()) {
       teleport_player_into_position(e_player);
     }
   }

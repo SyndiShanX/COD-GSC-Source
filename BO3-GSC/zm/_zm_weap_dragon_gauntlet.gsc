@@ -263,7 +263,7 @@ function function_c0093887() {
   self endon("hash_89dc36f4");
   self notify("hash_309d2dbf");
   self endon("hash_309d2dbf");
-  while(self adsbuttonpressed()) {
+  while(self adsButtonPressed()) {
     wait(0.05);
   }
   while(!(isDefined(self.var_cc844f4c) && self.var_cc844f4c)) {
@@ -276,7 +276,7 @@ function function_c0093887() {
       wait(0.05);
       continue;
     }
-    if(self adsbuttonpressed() && self getcurrentweapon() === self.weapon_dragon_gauntlet && (!(isDefined(self.var_a0a9409e) && self.var_a0a9409e)) && (!isDefined(level.var_163a43e4) || !is_in_array(self, level.var_163a43e4))) {
+    if(self adsButtonPressed() && self getcurrentweapon() === self.weapon_dragon_gauntlet && (!(isDefined(self.var_a0a9409e) && self.var_a0a9409e)) && (!isDefined(level.var_163a43e4) || !is_in_array(self, level.var_163a43e4))) {
       self disableweaponcycling();
       self function_f5802b55();
       self.var_8afc8427 = self gadgetpowerget(0);
@@ -309,7 +309,7 @@ function function_d7a4275d() {
   self endon("bled_out");
   self endon("hash_b24d78f");
   self endon("hash_3307435");
-  while(self adsbuttonpressed()) {
+  while(self adsButtonPressed()) {
     if(isDefined(self.var_a0a9409e) && self.var_a0a9409e || (isDefined(level.var_163a43e4) && is_in_array(self, level.var_163a43e4))) {
       continue;
     }
@@ -329,7 +329,7 @@ function function_d7a4275d() {
       wait(0.05);
       continue;
     }
-    if(self adsbuttonpressed() && self getcurrentweapon() === self.var_ae0fff53 || (isDefined(self.var_a0a9409e) && self.var_a0a9409e) || (isDefined(level.var_163a43e4) && is_in_array(self, level.var_163a43e4)) || !isalive(self.var_4bd1ce6b)) {
+    if(self adsButtonPressed() && self getcurrentweapon() === self.var_ae0fff53 || (isDefined(self.var_a0a9409e) && self.var_a0a9409e) || (isDefined(level.var_163a43e4) && is_in_array(self, level.var_163a43e4)) || !isalive(self.var_4bd1ce6b)) {
       self disableweaponcycling();
       self function_22d7caeb();
       self.var_8afc8427 = self gadgetpowerget(0);

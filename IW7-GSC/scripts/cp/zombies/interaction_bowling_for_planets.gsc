@@ -4,7 +4,7 @@
 ******************************************************************/
 
 init_bfp_game() {
-  var_0 = scripts\engine\utility::getstructarray("bowling_for_planets", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("bowling_for_planets", "script_noteworthy");
   var_1 = 2;
   var_2 = 4;
   foreach(var_4 in var_0) {
@@ -15,7 +15,7 @@ init_bfp_game() {
 }
 
 init_bfp_afterlife_game() {
-  var_0 = scripts\engine\utility::getstructarray("bowling_for_planets_afterlife", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("bowling_for_planets_afterlife", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_F8CC();
     wait(0.05);
@@ -43,7 +43,7 @@ func_F8CC() {
     }
   }
 
-  var_5 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_3 in var_5) {
     if(!isDefined(var_3.script_noteworthy)) {
       continue;

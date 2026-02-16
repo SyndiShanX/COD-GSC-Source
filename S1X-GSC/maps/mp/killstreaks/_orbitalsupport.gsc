@@ -341,7 +341,7 @@ removeOrbitalSupportPlayerOnCommand() {
   button_hold_time = 0;
 
   while(true) {
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       button_hold_time += 0.05;
       if(button_hold_time > 1.0) {
         if((isDefined(level.orbitalsupport_buddy) && level.orbitalsupport_buddy.joined == true) || !isDefined(level.orbitalsupport_buddy)) {
@@ -923,7 +923,7 @@ fireMediumOrbitalSupportGun() {
       reloadTime = CONST_ORBITALSUPPORT_40_RELOAD_TIME_UPGRADE;
     }
 
-    if(self.controlled_orbitalsupport_turret == "medium" && self AttackButtonPressed() && !isDefined(level.hostMigrationTimer)) {
+    if(self.controlled_orbitalsupport_turret == "medium" && self attackButtonPressed() && !isDefined(level.hostMigrationTimer)) {
       startpoint = level.orbitalsupport_big_turret GetTagOrigin("tag_missile1");
       endpoint = self playerGetTurretEndpoint();
       level.orbitalsupport_planeModel playSound("paladin_mgun_burst_plr");
@@ -994,7 +994,7 @@ fireBuddyMediumOrbitalSupportGun() {
       reloadTime = CONST_ORBITALSUPPORT_40_BUDDY_RELOAD_TIME_UPGRADE;
     }
 
-    if(self AttackButtonPressed()) {
+    if(self attackButtonPressed()) {
       startpoint = level.orbitalsupport_buddy_turret GetTagOrigin("tag_missile1");
       endpoint = self playerGetTurretEndpoint(true);
       level.orbitalsupport_planeModel playSound("paladin_mgun_burst_plr");
@@ -1098,7 +1098,7 @@ fireRocketOrbitalSupportGun() {
   while(true) {
     self.reloading_rocket_orbitalsupport_gun = false;
 
-    if(self.controlled_orbitalsupport_turret == "rocket" && self AttackButtonPressed() && !isDefined(level.hostMigrationTimer)) {
+    if(self.controlled_orbitalsupport_turret == "rocket" && self attackButtonPressed() && !isDefined(level.hostMigrationTimer)) {
       Earthquake(0.3, 1, level.orbitalsupport_planeModel.origin, 1000);
       playFXOnTag(level.chopper_fx["rocketlaunch"]["warbird"], level.orbitalsupport_big_turret, "tag_missile1");
 

@@ -241,7 +241,7 @@ main() {
   if(level.gameskill == 0)
     thread remove_flash_bang_enemies();
 
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("armada_tirefire_fx", "targetname"), ::tirefire_fx);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("armada_tirefire_fx", "targetname"), ::tirefire_fx);
   thread override_lighting_lobby();
   maps\armada_code::init_pickup_technical_badplace();
   level.office_tvs = getEntArray("isdestroyed", "script_noteworthy");

@@ -301,7 +301,7 @@ garden_window_break() {
   maps\_utility::array_spawn_function_targetname("garden_glass_breaker_spawners", ::garden_glass_room_guy_spawnfunc);
   maps\_utility::array_spawn_targetname("garden_glass_breaker_spawners", 1);
   wait 1.5;
-  var_1 = common_scripts\utility::getstructarray("garden_glass_breaker_struct", "targetname");
+  var_1 = common_scripts\utility::getStructArray("garden_glass_breaker_struct", "targetname");
 
   foreach(var_3 in var_1) {
     glassradiusdamage(var_3.origin, 40, 100, 100);

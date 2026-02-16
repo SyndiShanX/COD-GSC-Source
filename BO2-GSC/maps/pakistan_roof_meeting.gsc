@@ -438,13 +438,13 @@ trigger_jump_down_scene() {
     trigger_wait("trigger_jump_down_scene");
 
     while(level.player istouching(t_trig)) {
-      mantle_pressed = level.player jumpbuttonpressed();
+      mantle_pressed = level.player jumpbuttonPressed();
 
       if(level.wiiu) {
         controller_type = level.player getcontrollertype();
 
         if(controller_type == "remote") {
-          mantle_pressed = mantle_pressed || level.player sprintbuttonpressed();
+          mantle_pressed = mantle_pressed || level.player sprintbuttonPressed();
         }
       }
 
@@ -625,7 +625,7 @@ attach_trigger_gaz_victim() {
     screen_message_create(&"PAKISTAN_SHARED_MELEE_HINT");
 
     while(level.player istouching(t_melee)) {
-      if(level.player meleebuttonpressed()) {
+      if(level.player meleeButtonPressed()) {
         screen_message_delete();
         level thread run_scene("jump_down_attack_player");
         level thread maps\_audio::switch_music_wait("PAK_VAN_KILL", 0.25);
@@ -1274,7 +1274,7 @@ fake_fire_front_player() {
 
 magic_bullet_hitting_water() {
   level endon("start_defend_convoy");
-  a_s_gunfire = getstructarray("underground_fake_fire_location", "targetname");
+  a_s_gunfire = getStructArray("underground_fake_fire_location", "targetname");
 
   for(i = 0; i < a_s_gunfire.size; i++) {
     a_s_gunfire[i] thread pick_firing_targets();
@@ -1283,7 +1283,7 @@ magic_bullet_hitting_water() {
 
 pick_firing_targets() {
   level endon("start_defend_convoy");
-  a_s_targets = getstructarray("underground_fake_fire_target", "targetname");
+  a_s_targets = getStructArray("underground_fake_fire_target", "targetname");
 
   while(true) {
     index = randomint(a_s_targets.size);

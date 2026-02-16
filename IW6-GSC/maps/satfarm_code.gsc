@@ -2439,7 +2439,7 @@ handle_mg_firing() {
       level.player playrumbleonentity("minigun_rumble");
       var_2 = gettime() + var_1 * 1000;
 
-      if(!level.player fragbuttonpressed()) {
+      if(!level.player fragButtonPressed()) {
         level.player notify("BUTTON_STOP_MG");
         common_scripts\utility::flag_clear("MG_FIRE");
       }
@@ -5779,12 +5779,12 @@ player_missile_control(var_0) {
         var_0 playrumblelooponentity("tank_missile");
       }
 
-      if(!var_0 adsbuttonpressed(1) && var_2 > self.speed) {
+      if(!var_0 adsButtonPressed(1) && var_2 > self.speed) {
         var_2 = var_2 - self.acceleration * 0.05;
         var_2 = max(var_2, self.speed);
       } else {
-        var_2 = var_2 + self.acceleration * 0.05 * common_scripts\utility::ter_op(var_0 adsbuttonpressed(1), 2, 1);
-        var_2 = min(var_2, self.speed * common_scripts\utility::ter_op(var_0 adsbuttonpressed(1), 1.5, 1));
+        var_2 = var_2 + self.acceleration * 0.05 * common_scripts\utility::ter_op(var_0 adsButtonPressed(1), 2, 1);
+        var_2 = min(var_2, self.speed * common_scripts\utility::ter_op(var_0 adsButtonPressed(1), 1.5, 1));
       }
     } else {
       var_2 = var_2 - self.deceleration * 0.05;
@@ -5900,10 +5900,10 @@ missile_handle_boost_fov_lerps(var_0, var_1) {
   var_2 = 0;
 
   for(;;) {
-    if(self adsbuttonpressed(1) && !var_2) {
+    if(self adsButtonPressed(1) && !var_2) {
       self lerpfov(var_1, 0.1);
       var_2 = 1;
-    } else if(!self adsbuttonpressed(1) && var_2) {
+    } else if(!self adsButtonPressed(1) && var_2) {
       self lerpfov(var_0, 0.1);
       var_2 = 0;
     }
@@ -6214,7 +6214,7 @@ kill_vehicle_spawners_now(var_0) {
 kill_spawners_per_checkpoint(var_0) {}
 
 saf_streetlight_dynamic_setup(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray("saf_streetlight_dynamic_" + var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray("saf_streetlight_dynamic_" + var_0, "targetname");
   var_3 = 0;
 
   foreach(var_5 in var_2) {
@@ -6282,7 +6282,7 @@ saf_streetlight_dynamic_func(var_0) {
 }
 
 saf_concrete_barrier_dynamic_setup(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray("saf_concrete_barrier_dynamic_" + var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray("saf_concrete_barrier_dynamic_" + var_0, "targetname");
   var_3 = 0;
 
   foreach(var_5 in var_2) {
@@ -6333,7 +6333,7 @@ saf_concrete_barrier_dynamic_func(var_0) {
 }
 
 saf_large_sign_01_dynamic_setup(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray("saf_large_sign_01_dynamic_" + var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray("saf_large_sign_01_dynamic_" + var_0, "targetname");
   var_3 = 0;
 
   foreach(var_5 in var_2) {

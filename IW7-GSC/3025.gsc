@@ -81,7 +81,7 @@ func_6809(var_0) {
 }
 
 func_5F9C(var_0) {
-  while(!level.player buttonpressed("DPAD_DOWN")) {
+  while(!level.player buttonPressed("DPAD_DOWN")) {
     wait 0.05;
   }
 
@@ -191,7 +191,7 @@ func_688B() {
   self endon("death");
 
   for(;;) {
-    while(!self.var_AEDF.var_2A93 && !level.player buttonpressed("button_lstick")) {
+    while(!self.var_AEDF.var_2A93 && !level.player buttonPressed("button_lstick")) {
       wait 0.05;
     }
 
@@ -1848,7 +1848,7 @@ func_F0C6(var_0) {
 
 func_D30D() {
   var_0 = level.player func_848A();
-  var_1 = level.player adsbuttonpressed();
+  var_1 = level.player adsButtonPressed();
 
   if(var_1 && isDefined(var_0) && isDefined(var_0[0]) && var_0[1] > 0.1) {
     return 1;

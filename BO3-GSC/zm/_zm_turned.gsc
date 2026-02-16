@@ -248,17 +248,17 @@ function turned_player_buttons() {
   self endon("humanify");
   level endon("end_game");
   while(isDefined(self.is_zombie) && self.is_zombie) {
-    if(self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
+    if(self attackButtonPressed() || self adsButtonPressed() || self meleeButtonPressed()) {
       if(math::cointoss()) {
         self notify("bhtn_action_notify", "attack");
       }
-      while(self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
+      while(self attackButtonPressed() || self adsButtonPressed() || self meleeButtonPressed()) {
         wait(0.05);
       }
     }
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       self notify("bhtn_action_notify", "taunt");
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         wait(0.05);
       }
     }

@@ -578,17 +578,17 @@ function_dbb49281() {
   while(!b_saw_the_wth) {
     n_time = 0;
 
-    while(self adsbuttonpressed() && n_time < 30) {
+    while(self adsButtonPressed() && n_time < 30) {
       n_time++;
       waitframe(1);
     }
 
-    if(n_time >= 30 && self adsbuttonpressed() && (self zm_zonemgr::entity_in_zone("main_entrance") || self zm_zonemgr::entity_in_zone("outer_walkway") || self zm_zonemgr::entity_in_zone("loading_platform")) && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
+    if(n_time >= 30 && self adsButtonPressed() && (self zm_zonemgr::entity_in_zone("main_entrance") || self zm_zonemgr::entity_in_zone("outer_walkway") || self zm_zonemgr::entity_in_zone("loading_platform")) && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
       self clientfield::increment_to_player("" + # "hash_12114abc7407913b", 1);
       j_time = 0;
 
-      while(self adsbuttonpressed() && j_time < 5) {
+      while(self adsButtonPressed() && j_time < 5) {
         j_time++;
         waitframe(1);
       }

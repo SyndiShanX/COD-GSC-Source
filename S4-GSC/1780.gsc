@@ -416,7 +416,7 @@ _id_C4D6(var_0, var_1) {
       continue;
     }
     if(isDefined(var_4.target)) {
-      var_5 = scripts\engine\utility::getstructarray(var_4._id_0481, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4._id_0481, "targetname");
 
       foreach(var_7 in var_5) {
         if(isDefined(var_7.target) && var_7.target == var_4.target) {

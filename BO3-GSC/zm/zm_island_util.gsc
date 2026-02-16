@@ -119,7 +119,7 @@ function function_7448e472(e_target) {
     if(self hasweapon(level.var_c003f5b)) {
       if(self util::ads_button_held()) {
         if(self getcurrentweapon() !== level.var_c003f5b) {
-          while(self adsbuttonpressed()) {
+          while(self adsButtonPressed()) {
             wait(0.05);
           }
         } else if(self getammocount(level.var_c003f5b)) {

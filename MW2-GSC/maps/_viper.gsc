@@ -97,7 +97,7 @@ put this in your GSC:
 maps\_viper::main( "vehicle_viper_gunship" );
 
 and these lines in your CSV:
-include,vehicle_viper_gunship
+#include,vehicle_viper_gunship
 sound,vehicle_cobra,vehicle_standard,all_sp
 
 defaultmdl="vehicle_viper_gunship"default:"vehicletype" "viper"default:"script_team" "allies"

@@ -149,7 +149,7 @@ player_interaction(guy) {
   self thread cancel_waittill_melee(guy);
   cancled = false;
   if(level._contextual_melee_allow_fire_button) {
-    while(!guy is_auto_melee() && !self MeleeButtonPressed() && !cancled && !self MeleeButtonPressed()) {
+    while(!guy is_auto_melee() && !self meleeButtonPressed() && !cancled && !self meleeButtonPressed()) {
       if(!self player_can_melee(guy) || !IsAlive(guy)) {
         self enable_weapon();
         cancled = true;
@@ -159,7 +159,7 @@ player_interaction(guy) {
       wait(0.05);
     }
   } else {
-    while(!guy is_auto_melee() && !self MeleeButtonPressed() && !cancled) {
+    while(!guy is_auto_melee() && !self meleeButtonPressed() && !cancled) {
       if(!self player_can_melee(guy) || !IsAlive(guy)) {
         self enable_weapon();
         cancled = true;

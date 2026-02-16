@@ -1115,7 +1115,7 @@ bunker_ambient_mortars() {
   t_room1 = getent("bunker_mortars_room1", "targetname");
   t_room2 = getent("bunker_mortars_room2", "targetname");
   level.player thread bunker_mortar_dust_fx(t_room1, t_room2);
-  a_s_mortarspots = getstructarray("mason_bunker_mortar", "targetname");
+  a_s_mortarspots = getStructArray("mason_bunker_mortar", "targetname");
 
   while(true) {
     wait(randomfloatrange(5.0, 17.5));
@@ -1128,7 +1128,7 @@ bunker_ambient_mortars() {
 
 bunker_mortar_swinging_lights() {
   level endon("player_left_bunker");
-  a_s_lights = getstructarray("mason_bunker_light", "targetname");
+  a_s_lights = getStructArray("mason_bunker_light", "targetname");
 
   while(true) {
     level waittill("mason_bunker_fake_mortar");

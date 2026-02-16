@@ -858,7 +858,7 @@ update_harpoon_upgrade_quest(var_0, var_1) {
 
   if(isDefined(level.animal_quest_volume) && scripts\engine\utility::flag("harpoon_upgrade_quest_active")) {
     if(ispointinvolume(var_0.origin, level.animal_quest_volume)) {
-      var_3 = scripts\engine\utility::getstructarray("animal_statues", "script_noteworthy");
+      var_3 = scripts\engine\utility::getStructArray("animal_statues", "script_noteworthy");
       var_4 = sortbydistance(var_3, var_0.origin)[0];
       level.animal_statue_kills[var_4.targetname]++;
     }
@@ -2786,10 +2786,10 @@ watchc4altdetonate(var_0) {
   var_1 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_1 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_1 = var_1 + 0.05;
         wait 0.05;
       }
@@ -2799,7 +2799,7 @@ watchc4altdetonate(var_0) {
       }
       var_1 = 0;
 
-      while(!self usebuttonpressed() && var_1 < 0.5) {
+      while(!self useButtonPressed() && var_1 < 0.5) {
         var_1 = var_1 + 0.05;
         wait 0.05;
       }

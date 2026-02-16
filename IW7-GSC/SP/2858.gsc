@@ -68,21 +68,21 @@ func_6697() {
   var_0 = 0;
   var_1 = 0;
   for(;;) {
-    if(self fragbuttonpressed() && !var_0) {
+    if(self fragButtonPressed() && !var_0) {
       scripts\engine\utility::flag_set("primary_equipment_input_down");
       level.player notify("primary_equipment_pressed");
       var_0 = 1;
-    } else if(!self fragbuttonpressed() && var_0) {
+    } else if(!self fragButtonPressed() && var_0) {
       scripts\engine\utility::flag_clear("primary_equipment_input_down");
       level.player notify("primary_equipment_released");
       var_0 = 0;
     }
 
-    if(self secondaryoffhandbuttonpressed() && !var_1) {
+    if(self secondaryoffhandbuttonPressed() && !var_1) {
       scripts\engine\utility::flag_set("secondary_equipment_input_down");
       level.player notify("secondary_equipment_pressed");
       var_1 = 1;
-    } else if(!self secondaryoffhandbuttonpressed() && var_1) {
+    } else if(!self secondaryoffhandbuttonPressed() && var_1) {
       scripts\engine\utility::flag_clear("secondary_equipment_input_down");
       level.player notify("secondary_equipment_released");
       var_1 = 0;

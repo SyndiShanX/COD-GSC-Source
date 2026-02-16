@@ -331,7 +331,7 @@ chaos_weapon_collect() {
     if(isPlayer(var_0) && !maps\_utility::_id_1A43(var_0)) {
       var_0 maps\_so_survival_chaos::chaoseventpopup(self.display_name, (1, 1, 1));
     }
-    if(!isPlayer(var_0) || maps\_utility::_id_1A43(var_0) || !var_0 usebuttonpressed()) {
+    if(!isPlayer(var_0) || maps\_utility::_id_1A43(var_0) || !var_0 useButtonPressed()) {
       continue;
     }
     var_1 = 0;

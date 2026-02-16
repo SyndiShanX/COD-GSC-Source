@@ -695,7 +695,7 @@ function waitrespawnorsafespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
   while(true) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
     wait(0.05);

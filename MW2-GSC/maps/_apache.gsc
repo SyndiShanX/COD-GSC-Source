@@ -71,7 +71,7 @@ put this in your GSC:
 maps\_apache::main( "vehicle_apache" );
 
 and these lines in your CSV:
-include,vehicle_apache_apache
+#include,vehicle_apache_apache
 sound,vehicle_apache,vehicle_standard,all_sp
 
 defaultmdl="vehicle_apache"default:"vehicletype" "apache"default:"script_team" "allies"*/
@@ -82,7 +82,7 @@ put this in your GSC:
 maps\_apache::main( "vehicle_apache_dark" );
 
 and these lines in your CSV:
-include,vehicle_apache_dark_apache
+#include,vehicle_apache_dark_apache
 sound,vehicle_apache,vehicle_standard,all_sp
 
 defaultmdl="vehicle_apache_dark"default:"vehicletype" "apache"default:"script_team" "allies"

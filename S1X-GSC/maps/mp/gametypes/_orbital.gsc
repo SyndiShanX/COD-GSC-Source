@@ -7,9 +7,7 @@
 #include common_scripts\utility;
 #include maps\mp\_audio;
 
-precacheOrbital()
-
-{
+precacheOrbital() {
   PreCacheModel("tag_player");
   PreCacheModel("vehicle_ac130_coop");
   PreCacheModel("vehicle_drop_pod_base");
@@ -52,9 +50,7 @@ precacheOrbital()
   }
 }
 
-initializeOribtalMode()
-
-{
+initializeOribtalMode() {
   precacheOrbital();
 
   level.drop_pod = spawnStruct();
@@ -180,9 +176,7 @@ initializeOribtalMode()
   thread spawnPlayerInOrbital();
 }
 
-monitorTrackSwitching()
-
-{
+monitorTrackSwitching() {
   level endon("game_ended");
 
   self.started_bank = false;
@@ -270,9 +264,7 @@ monitorTrackSwitching()
   }
 }
 
-rotateOrbitalShips()
-
-{
+rotateOrbitalShips() {
   level endon("game_ended");
 
   while(true) {
@@ -281,9 +273,7 @@ rotateOrbitalShips()
   }
 }
 
-rotateOrbitalShipPivots()
-
-{
+rotateOrbitalShipPivots() {
   level endon("game_ended");
 
   while(true) {
@@ -296,9 +286,7 @@ rotateOrbitalShipPivots()
   }
 }
 
-spawnPlayerInOrbital()
-
-{
+spawnPlayerInOrbital() {
   level endon("game_ended");
 
   while(true) {
@@ -323,9 +311,7 @@ spawnPlayerInOrbital()
   }
 }
 
-showDropPodFX()
-
-{
+showDropPodFX() {
   self endon("death");
   self endon("disconnect");
   self endon("joined_team");
@@ -347,9 +333,7 @@ showDropPodFX()
   }
 }
 
-hidePodFx()
-
-{
+hidePodFx() {
   foreach(player in level.players) {
     if(isDefined(player.drop_pod)) {
       if(isDefined(player.drop_pod.trophyFX_friendly)) {
@@ -371,9 +355,7 @@ hidePodFx()
   }
 }
 
-showPodDroppingFXToPlayer()
-
-{
+showPodDroppingFXToPlayer() {
   foreach(player in level.players) {
     if(isDefined(player.drop_pod)) {
       if(player.team == self.team) {
@@ -389,9 +371,7 @@ showPodDroppingFXToPlayer()
   }
 }
 
-showPodGroundFXToPlayer()
-
-{
+showPodGroundFXToPlayer() {
   foreach(player in level.players) {
     if(isDefined(player.drop_pod)) {
       if(player.team == self.team) {
@@ -407,9 +387,7 @@ showPodGroundFXToPlayer()
   }
 }
 
-waitForSpawnFinished()
-
-{
+waitForSpawnFinished() {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -422,9 +400,7 @@ waitForSpawnFinished()
   self thread destroyPlayerIcons();
 }
 
-playerInOrbital()
-
-{
+playerInOrbital() {
   self endon("death");
   self endon("disconnect");
   self endon("joined_team");
@@ -494,15 +470,15 @@ playerInOrbital()
         }
       }
 
-      if(!self AdsButtonPressed()) {
+      if(!self adsButtonPressed()) {
         self.mode_button_released = 1;
       }
 
-      if(!self AttackButtonPressed()) {
+      if(!self attackButtonPressed()) {
         self.spawn_button_released = 1;
       }
 
-      if(self AdsButtonPressed() && self.mode_button_released == 1) {
+      if(self adsButtonPressed() && self.mode_button_released == 1) {
         self.mode_button_released = 0;
 
         if(self.respawn_mode == 0 && isDefined(self.drop_pod) && self.drop_pod.destroyed == false) {
@@ -522,7 +498,7 @@ playerInOrbital()
             self linkPlayerOrbitalShip();
           }
         }
-      } else if((self AttackButtonPressed() && self.spawn_button_released == 1) || self.forcerespawn) {
+      } else if((self attackButtonPressed() && self.spawn_button_released == 1) || self.forcerespawn) {
         self.spawn_button_released = 0;
 
         if(isDefined(self.drop_pod) && self.drop_pod.destroyed == false && self.respawn_mode == 1 && self.is_linked_to_pod == true) {
@@ -571,9 +547,7 @@ playerInOrbital()
   }
 }
 
-linkPlayerPod()
-
-{
+linkPlayerPod() {
   self.is_linked_to_pod = true;
   self.is_linked_to_ship = false;
   self.isdropping = false;
@@ -594,9 +568,7 @@ linkPlayerPod()
   self thread centerPodSpawnView();
 }
 
-linkPlayerOrbitalShip()
-
-{
+linkPlayerOrbitalShip() {
   self.is_linked_to_pod = false;
   self.is_linked_to_ship = true;
   self.isdropping = true;
@@ -641,9 +613,7 @@ linkPlayerOrbitalShip()
   self thread traceCollisionWarn();
 }
 
-unlinkPlayer()
-
-{
+unlinkPlayer() {
   self DontInterpolate();
   self ControlsUnlink();
   self CameraUnlink();
@@ -654,9 +624,7 @@ unlinkPlayer()
   self ShowViewModel();
 }
 
-centerOrbitalView()
-
-{
+centerOrbitalView() {
   startPos = level.orbital_ships.cameraView[self.pers["team"]].origin;
   endPos = level.orbital_ships.missileSpawn["target"].origin;
   angles = VectorToAngles(endPos - startPos);
@@ -664,9 +632,7 @@ centerOrbitalView()
   self SetPlayerAngles(angles);
 }
 
-centerPodSpawnView()
-
-{
+centerPodSpawnView() {
   startPos = self.drop_pod.camera.origin;
   endPos = level.orbital_ships.missileSpawn["target"].origin;
   angles = VectorToAngles(endPos - startPos);
@@ -708,9 +674,7 @@ setOrbitalView(view, wait_delay)
   }
 }
 
-traceCollisionWarn()
-
-{
+traceCollisionWarn() {
   self endon("player_drop_pod_spawned");
   self endon("disconnect");
   self endon("player_spawned_at_drop_pod");
@@ -954,17 +918,13 @@ waitForRocketDeath(player)
   player notify("rocket_destroyed");
 }
 
-vmLandingImpact()
-
-{
+vmLandingImpact() {
   wait(0.5);
 
   self StunPlayer(0.3);
 }
 
-dropPodBaseUnfold()
-
-{
+dropPodBaseUnfold() {
   wait(level.drop_pod.deploy_delay - 1);
   self.drop_pod thread dropPodSpikeImpacts();
   self.drop_pod_enemy_model thread dropPodSpikeImpacts();
@@ -973,9 +933,7 @@ dropPodBaseUnfold()
   self.drop_pod_enemy_model ScriptModelPlayAnimDeltaMotion("mp_orbital_pod_base_unfold");
 }
 
-dropPodSpikeImpacts()
-
-{
+dropPodSpikeImpacts() {
   wait 0.68;
 
   spikeLength = 2;
@@ -1051,9 +1009,7 @@ unfreezeControlsDelay(delay)
   self FreezeControls(false);
 }
 
-dropPodBadSpawnDeathFX()
-
-{
+dropPodBadSpawnDeathFX() {
   self endon("disconnect");
 
   self waittill("death");
@@ -1061,9 +1017,7 @@ dropPodBadSpawnDeathFX()
   playFX(level.drop_pod_effect["drop_pod_explode"], self.origin + (0, 0, 10));
 }
 
-getNearestPathNode()
-
-{
+getNearestPathNode() {
   nodes = GetNodesInTrigger(self);
 
   if(isDefined(nodes) && nodes.size > 0) {
@@ -1102,9 +1056,7 @@ getNearestPathNode()
   }
 }
 
-Rocket_CleanupOnDeath()
-
-{
+Rocket_CleanupOnDeath() {
   entityNumber = self getEntityNumber();
   level.rockets[entityNumber] = self;
   self waittill("death");
@@ -1152,18 +1104,14 @@ Player_CleanupOnTeamChange(rocket)
   level.remoteMissileInProgress = undefined;
 }
 
-dropPod_CleanupOnTeamChange()
-
-{
+dropPod_CleanupOnTeamChange() {
   self.drop_pod endon("death");
   self waittill_any("joined_team", "joined_spectators");
 
   self deletePlayerDropPod();
 }
 
-dropPod_CleanupOnDisconnect()
-
-{
+dropPod_CleanupOnDisconnect() {
   self.drop_pod endon("death");
   self waittill("disconnect");
 
@@ -1233,9 +1181,7 @@ createPlayerDropPod(coords)
   self thread dropPod_CleanupOnTeamChange();
 }
 
-destroyPlayerDropPod()
-
-{
+destroyPlayerDropPod() {
   if(!isDefined(self.drop_pod)) {
     return;
   }
@@ -1273,9 +1219,7 @@ destroyPlayerDropPod()
   self deletePlayerDropPod();
 }
 
-deletePlayerDropPod()
-
-{
+deletePlayerDropPod() {
   if(isDefined(self.drop_pod_enemy_model)) {
     self.drop_pod_enemy_model Delete();
   }
@@ -1291,9 +1235,7 @@ deletePlayerDropPod()
   }
 }
 
-deletePlayerDropPodVFX()
-
-{
+deletePlayerDropPodVFX() {
   if(isDefined(self.drop_pod)) {
     if(isDefined(self.drop_pod.trophyFX_friendly)) {
       self.drop_pod.trophyFX_friendly delete();
@@ -1342,9 +1284,7 @@ removeKillCamEntity() {
   }
 }
 
-drop_pod_handleDeath()
-
-{
+drop_pod_handleDeath() {
   entNum = self GetEntityNumber();
 
   self waittill("death");
@@ -1357,9 +1297,7 @@ drop_pod_handleDeath()
   self.owner destroyPlayerDropPod();
 }
 
-dropPodTrophySystem()
-
-{
+dropPodTrophySystem() {
   self endon("death");
   self.owner endon("disconnect");
   self.owner endon("joined_team");
@@ -1529,9 +1467,7 @@ showPlayerIcons(team)
   }
 }
 
-destroyPlayerIcons()
-
-{
+destroyPlayerIcons() {
   level endon("game_ended");
   self endon("disconnect");
 
@@ -1545,9 +1481,7 @@ destroyPlayerIcons()
   }
 }
 
-showDropPodBadSpawnOverlay()
-
-{
+showDropPodBadSpawnOverlay() {
   level endon("game_ended");
 
   while(true) {
@@ -1563,17 +1497,13 @@ showDropPodBadSpawnOverlay()
   }
 }
 
-showOverlaysToPlayer()
-
-{
+showOverlaysToPlayer() {
   foreach(overlay in level.drop_pod_bad_spawn_overlay) {
     overlay ShowToPlayer(self);
   }
 }
 
-hideOverlays()
-
-{
+hideOverlays() {
   foreach(overlay in level.drop_pod_bad_spawn_overlay) {
     overlay hide();
   }
@@ -1608,9 +1538,7 @@ deletePodTrophyFXOnTeamChange(owner)
   self deletePodTrophyFX();
 }
 
-deletePodTrophyFX()
-
-{
+deletePodTrophyFX() {
   if(isDefined(self.trophyFX_friendly)) {
     self.trophyFX_friendly delete();
   }
@@ -1620,9 +1548,7 @@ deletePodTrophyFX()
   }
 }
 
-dropPodForceRespawn()
-
-{
+dropPodForceRespawn() {
   self endon("death");
   self endon("disconnect");
   self endon("joined_team");

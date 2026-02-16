@@ -179,7 +179,7 @@ place_staffs_encasement() {
 chambers_init() {
   flag_init("gramophone_placed");
   array_thread(getEntArray("trigger_death_floor", "targetname"), ::monitor_chamber_death_trigs);
-  a_stargate_gramophones = getstructarray("stargate_gramophone_pos", "targetname");
+  a_stargate_gramophones = getStructArray("stargate_gramophone_pos", "targetname");
   array_thread(a_stargate_gramophones, ::run_gramophone_teleporter);
   a_door_main = getEntArray("chamber_entrance", "targetname");
   array_thread(a_door_main, ::run_gramophone_door, "vinyl_master");
@@ -615,7 +615,7 @@ mechz_staff_piece_failsafe() {
     wait 1.0;
   }
 
-  a_locations = getstructarray("mechz_location", "script_noteworthy");
+  a_locations = getStructArray("mechz_location", "script_noteworthy");
   s_location = get_closest_2d(self.origin, a_locations);
   self moveto(s_location.origin + vectorscale((0, 0, 1), 32.0), 3.0);
 }

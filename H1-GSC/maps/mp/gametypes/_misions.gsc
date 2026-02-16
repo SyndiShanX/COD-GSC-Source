@@ -242,7 +242,7 @@ endmgstreakwhenleavemg() {
   self endon("disconnect");
 
   for(;;) {
-    if(!isalive(self) || self usebuttonpressed()) {
+    if(!isalive(self) || self useButtonPressed()) {
       self.pers["MGStreak"] = undefined;
       break;
     }

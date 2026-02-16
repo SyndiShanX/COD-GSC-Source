@@ -288,7 +288,7 @@ player_intermission_ee() {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  points = getstructarray("ee_cam", "targetname");
+  points = getStructArray("ee_cam", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");
@@ -371,10 +371,10 @@ setup_ee_main_devgui() {
 
   while(!b_activated) {
     foreach(player in getplayers()) {
-      if(distance2d(player.origin, (2904, 5040, -336)) < 100 && player usebuttonpressed()) {
+      if(distance2d(player.origin, (2904, 5040, -336)) < 100 && player useButtonPressed()) {
         wait 2;
 
-        if(player usebuttonpressed())
+        if(player useButtonPressed())
           b_activated = 1;
       }
     }

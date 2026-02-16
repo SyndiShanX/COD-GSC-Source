@@ -626,11 +626,11 @@ func_12E0() {
 func_11A0() {
   self endon("death");
   for(;;) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       self notify("aim");
     }
 
-    if(self meleebuttonpressed()) {
+    if(self meleeButtonPressed()) {
       self notify("melee");
     }
 

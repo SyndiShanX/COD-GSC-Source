@@ -1663,7 +1663,7 @@ spawn_guy_placement(spawner) {
 }
 spawn_anywhere(spawner) {
   level endon("kill dynamic spawning");
-  if(self UseButtonPressed()) {
+  if(self useButtonPressed()) {
     spawn = spawner spawn_ai();
     if(spawn_failed(spawn)) {
       assertex(0, "spawn failed from spawn anywhere guy");
@@ -1694,7 +1694,7 @@ ai_puppet_manager() {
   level endon("kill ai puppeteer");
   self endon("death");
   while(1) {
-    if(self ButtonPressed("BUTTON_RTRIG")) {
+    if(self buttonPressed("BUTTON_RTRIG")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.ai_puppet_target)) {
           if(IsAi(level.ai_puppet_target)) {
@@ -1724,7 +1724,7 @@ ai_puppet_manager() {
         }
       }
       wait(0.2);
-    } else if(self ButtonPressed("BUTTON_A")) {
+    } else if(self buttonPressed("BUTTON_A")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.playerCursorAi) && level.playerCursorAi != level.ai_puppet) {
           level.ai_puppet SetGoalEntity(level.playerCursorAi);
@@ -1747,7 +1747,7 @@ ai_puppet_manager() {
         }
       }
       wait(0.2);
-    } else if(self ButtonPressed("BUTTON_X")) {
+    } else if(self buttonPressed("BUTTON_X")) {
       if(isDefined(level.playerCursorAi)) {
         if(isDefined(level.ai_puppet) && level.playerCursorAi == level.ai_puppet) {
           ai_puppet_release(true);

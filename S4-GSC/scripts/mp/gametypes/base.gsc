@@ -1940,7 +1940,7 @@ initspawndamageboundaryvisuals() {
     var_3.spawn_room_collision_array = scripts\engine\utility::_id_1B8D(var_3.spawn_room_collision_array, var_2);
   }
 
-  var_5 = scripts\engine\utility::getstructarray("spawn_room_boundary", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("spawn_room_boundary", "targetname");
 
   foreach(var_7 in var_5) {
     var_3 = level._id_A8E8[var_7._id_CD99];
@@ -2050,7 +2050,7 @@ _id_CA67(var_0) {
   level._id_1516 = [level._id_1513];
   var_1 = getEntArray("buystation_icon", "targetname");
   var_2 = getscriptablearray("build_scriptable", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstructarray("fireworks_struct", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("fireworks_struct", "script_noteworthy");
 
   if(istrue(level._id_FE94)) {
     foreach(var_5 in level._id_14F5) {
@@ -2878,7 +2878,7 @@ nuke_crate_init() {
   }
 
   baseconnections_init();
-  level.nuke_spawn_nodes = scripts\engine\utility::getstructarray("nuke_spawn_node", "targetname");
+  level.nuke_spawn_nodes = scripts\engine\utility::getStructArray("nuke_spawn_node", "targetname");
   level.nuke_crate_spawns_and_carriers = [];
   level.nuke_crate_neutral_count = 0;
   level.postnuke_spawn_nodes = [];
@@ -4026,7 +4026,7 @@ base_teleportplayeronnukecapture(var_0) {
   }
 
   var_0._id_D066 = scripts\engine\utility::_id_6369(var_0.origin, var_6)[0]._id_0481;
-  var_12 = scripts\engine\utility::getstructarray("locale_17", "script_noteworthy");
+  var_12 = scripts\engine\utility::getStructArray("locale_17", "script_noteworthy");
   var_13 = undefined;
 
   foreach(var_15 in var_12) {
@@ -4502,7 +4502,7 @@ findnukezonetrigger(var_0) {
 }
 
 findnukezonevfxorigin(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("nukeBlastZone_fx_origin", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("nukeBlastZone_fx_origin", "targetname");
 
   foreach(var_3 in var_1) {
     if(var_3._id_CD99 == var_0) {
@@ -4514,7 +4514,7 @@ findnukezonevfxorigin(var_0) {
 }
 
 findbasecenterfxorigin(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("basecenter_fx_origin", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("basecenter_fx_origin", "targetname");
 
   foreach(var_3 in var_1) {
     if(var_3._id_CD99 == var_0) {
@@ -6467,11 +6467,11 @@ getbasecontestedtier(var_0) {
 _id_8296() {
   level._id_E3EA = [];
   level._id_41F3 = "cop_2";
-  var_0 = scripts\engine\utility::getstructarray("tac_ops_map_config", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2._id_039B;
-    var_4 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_6 in var_4) {
       switch (var_6._id_CD99) {
@@ -7485,8 +7485,8 @@ _id_2EE8() {
 }
 
 _id_6A1D() {
-  var_0 = scripts\engine\utility::getstructarray("airdropLocation_allies", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("airdropLocation_axis", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("airdropLocation_allies", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("airdropLocation_axis", "targetname");
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
   var_3 = scripts\engine\utility::_id_6969(level._id_8EA9._id_41DC._id_60D8.origin, var_2);
   var_4 = scripts\engine\utility::_id_6969(level._id_8EAA._id_41DC._id_60D8.origin, var_2);

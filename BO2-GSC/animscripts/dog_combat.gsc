@@ -532,7 +532,7 @@ attackteleportthread(offset) {
 }
 
 player_attacked() {
-  return isalive(self) && self meleebuttonpressed();
+  return isalive(self) && self meleeButtonPressed();
 }
 
 dog_hint(player) {

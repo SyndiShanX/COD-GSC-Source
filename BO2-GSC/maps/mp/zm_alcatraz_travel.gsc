@@ -760,7 +760,7 @@ player_escaped_gondola_failsafe() {
     if(isDefined(player.is_on_gondola) && player.is_on_gondola) {
       if(!player is_player_on_gondola()) {
         if(!(isDefined(player.afterlife) && player.afterlife) && isalive(player)) {
-          a_s_orgs = getstructarray("gondola_dropped_parts_" + level.e_gondola.destination, "targetname");
+          a_s_orgs = getStructArray("gondola_dropped_parts_" + level.e_gondola.destination, "targetname");
 
           foreach(struct in a_s_orgs) {
             if(!positionwouldtelefrag(struct.origin)) {

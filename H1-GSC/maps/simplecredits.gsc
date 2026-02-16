@@ -35,25 +35,25 @@ main() {
   thread endlevel_transition();
 }
 
-skipbuttonpressed() {
+skipbuttonPressed() {
   if(level.player usinggamepad()) {
     if(level.ps4) {
       var_0 = getdvarint("loc_language", 0);
 
       if(var_0 == 15 || var_0 == 11 || var_0 == 10 || var_0 == 9 || var_0 == 8)
-        return level.player buttonpressed("BUTTON_B");
+        return level.player buttonPressed("BUTTON_B");
     }
 
-    return level.player buttonpressed("BUTTON_A");
+    return level.player buttonPressed("BUTTON_A");
   } else
-    return level.player buttonpressed("ENTER");
+    return level.player buttonPressed("ENTER");
 }
 
-showskipbuttonpressed() {
+showskipbuttonPressed() {
   if(level.player usinggamepad())
-    return level.player buttonpressed("BUTTON_Y") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_X");
+    return level.player buttonPressed("BUTTON_Y") || level.player buttonPressed("BUTTON_B") || level.player buttonPressed("BUTTON_A") || level.player buttonPressed("BUTTON_X");
   else
-    return level.player buttonpressed("SPACE") || level.player buttonpressed("ESCAPE") || level.player buttonpressed("ENTER") || level.player buttonpressed("MOUSE1");
+    return level.player buttonPressed("SPACE") || level.player buttonPressed("ESCAPE") || level.player buttonPressed("ENTER") || level.player buttonPressed("MOUSE1");
 }
 
 skipcreditscheck() {
@@ -64,8 +64,8 @@ skipcreditscheck() {
   level endon("credits_ended");
 
   for(;;) {
-    var_0 = skipbuttonpressed();
-    var_1 = showskipbuttonpressed();
+    var_0 = skipbuttonPressed();
+    var_1 = showskipbuttonPressed();
 
     if(var_0 || var_1) {
       if(level.wanttoskip) {

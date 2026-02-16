@@ -507,11 +507,11 @@ _id_4D45() {
 _id_8296() {
   level._id_E3EA = [];
   level._id_41F3 = "rush_1";
-  var_0 = scripts\engine\utility::getstructarray("tac_ops_map_config", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2._id_039B;
-    var_4 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_6 in var_4) {
       switch (var_6._id_CD99) {

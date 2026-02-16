@@ -81,7 +81,7 @@ on_music_ee_interact(var_0, var_1) {
 }
 
 init_cow_skulls() {
-  var_0 = scripts\engine\utility::getstructarray("s_skull", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_skull", "targetname");
   level.n_hit_index = 0;
 
   foreach(var_2 in var_0) {

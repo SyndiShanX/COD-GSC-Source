@@ -694,7 +694,7 @@ func_D0DB(var_0) {
 
 func_A1DA() {
   self notify("crashing");
-  var_0 = scripts\engine\utility::getstructarray("jackal_death_node", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("jackal_death_node", "targetname");
   func_0BDC::func_19AE("dont_shoot");
   self.var_4E15 = scripts\engine\utility::spawn_tag_origin(self.origin, self.angles);
   self linkto(self.var_4E15);

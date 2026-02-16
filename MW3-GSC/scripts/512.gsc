@@ -1122,7 +1122,7 @@ buttonpressed_internal(var_0) {
   if(kb_locked(var_0)) {
     return 0;
   }
-  return level.player buttonpressed(var_0);
+  return level.player buttonPressed(var_0);
 }
 
 get_selected_move_vector() {
@@ -1246,11 +1246,11 @@ add_button(var_0) {
     return;
   }
   if(!isDefined(level.buttonisheld[var_0])) {
-    if(level.player buttonpressed(var_0)) {
+    if(level.player buttonPressed(var_0)) {
       level.buttonisheld[var_0] = 1;
       level.buttonclick[var_0] = 1;
     }
-  } else if(!level.player buttonpressed(var_0)) {
+  } else if(!level.player buttonPressed(var_0)) {
     level.buttonisheld[var_0] = undefined;
   }
 }

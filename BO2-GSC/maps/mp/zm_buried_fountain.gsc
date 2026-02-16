@@ -148,7 +148,7 @@ transport_player_to_start_zone() {
   if(!isDefined(level._fountain_transporter)) {
     level._fountain_transporter = spawnStruct();
     level._fountain_transporter.index = 0;
-    level._fountain_transporter.end_points = getstructarray("fountain_transport_end_location", "targetname");
+    level._fountain_transporter.end_points = getStructArray("fountain_transport_end_location", "targetname");
   }
 
   self playsoundtoplayer("zmb_buried_teleport", self);

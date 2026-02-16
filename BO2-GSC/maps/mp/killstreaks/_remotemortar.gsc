@@ -187,7 +187,7 @@ remote_owner_exit() {
   while(true) {
     timeused = 0;
 
-    while(self.owner usebuttonpressed()) {
+    while(self.owner useButtonPressed()) {
       timeused = timeused + 0.05;
 
       if(timeused > 0.25) {
@@ -517,7 +517,7 @@ player_fire_think(remote) {
   while(gettime() < end_time) {
     self.active_pegasus = undefined;
 
-    if(!self attackbuttonpressed()) {
+    if(!self attackButtonPressed()) {
       wait 0.05;
       continue;
     }
@@ -698,7 +698,7 @@ visionswitch() {
   self setvisionsetforplayer(level.remore_mortar_infrared_vision, 1);
 
   for(;;) {
-    if(self changeseatbuttonpressed()) {
+    if(self changeseatbuttonPressed()) {
       if(!inverted) {
         self setinfraredvision(1);
         self setvisionsetforplayer(level.remore_mortar_infrared_vision, 0.5);
@@ -711,7 +711,7 @@ visionswitch() {
 
       inverted = !inverted;
 
-      while(self changeseatbuttonpressed())
+      while(self changeseatbuttonPressed())
         wait 0.05;
     }
 

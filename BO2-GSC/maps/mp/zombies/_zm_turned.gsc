@@ -265,18 +265,18 @@ turned_player_buttons() {
   level endon("end_game");
 
   while(isDefined(self.is_zombie) && self.is_zombie) {
-    if(self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
+    if(self attackButtonPressed() || self adsButtonPressed() || self meleeButtonPressed()) {
       if(cointoss())
         self thread maps\mp\zombies\_zm_audio::do_zombies_playvocals("attack", undefined);
 
-      while(self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed())
+      while(self attackButtonPressed() || self adsButtonPressed() || self meleeButtonPressed())
         wait 0.05;
     }
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       self thread maps\mp\zombies\_zm_audio::do_zombies_playvocals("taunt", undefined);
 
-      while(self usebuttonpressed())
+      while(self useButtonPressed())
         wait 0.05;
     }
 

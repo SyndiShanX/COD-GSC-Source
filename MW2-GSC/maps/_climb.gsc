@@ -657,11 +657,11 @@ wait_until_player_climbs() {
 }
 
 rightSwingPressed() {
-  return level.player buttonpressed("mouse2"); // adsButtonPressed();
+  return level.player buttonPressed("mouse2"); // adsButtonPressed();
 }
 
 leftSwingPressed() {
-  return level.player buttonpressed("mouse1"); // attackButtonPressed();
+  return level.player buttonPressed("mouse1"); // attackButtonPressed();
 }
 
 set_normal_fov() {
@@ -1438,13 +1438,13 @@ GetStick(ent) {
   vert = movement[0];
   horz = movement[1];
 
-  if(ent.player ButtonPressed("DPAD_UP")) {
+  if(ent.player buttonPressed("DPAD_UP")) {
     vert = 1;
   }
-  if(ent.player ButtonPressed("DPAD_LEFT")) {
+  if(ent.player buttonPressed("DPAD_LEFT")) {
     horz = -1;
   }
-  if(ent.player ButtonPressed("DPAD_RIGHT")) {
+  if(ent.player buttonPressed("DPAD_RIGHT")) {
     horz = 1;
   }
 
@@ -2633,13 +2633,13 @@ track_trigger_pulls(globals) {
 }
 
 icepick_button_pressed(ent) {
-  if(ent.player ButtonPressed(ent.key))
+  if(ent.player buttonPressed(ent.key))
     return true;
   return ent.last_button_press + 750 > GetTime();
 }
 
 icepick_button_pressed_instant(ent) {
-  if(ent.player ButtonPressed(ent.key))
+  if(ent.player buttonPressed(ent.key))
     return true;
   return ent.player[[ent.buttonCheck]]();
 }

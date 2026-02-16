@@ -604,7 +604,7 @@ function missile_deploy_watch(rocket) {
   wait(0.25);
   self thread create_missile_hud(rocket);
   while(true) {
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       self thread missile_deploy(rocket, 0);
     } else {
       wait(0.05);

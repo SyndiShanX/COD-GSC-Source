@@ -183,7 +183,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer" );
 
 and these lines in your CSV:
-include,vehicle_hummer
+#include,vehicle_hummer
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 
@@ -195,7 +195,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer_no_doors" );
 
 and these lines in your CSV:
-include,vehicle_hummer_nodoors
+#include,vehicle_hummer_nodoors
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 
@@ -207,7 +207,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer_opentop" );
 
 and these lines in your CSV:
-include,vehicle_hummer_opentop
+#include,vehicle_hummer_opentop
 sound,vehicle_hummer,vehicle_standard,all_sp
 
 defaultmdl="vehicle_hummer_opentop"default:"vehicletype" "humvee"default:"script_team" "allies"*/
@@ -218,7 +218,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer_viewmodel" );
 
 and these lines in your CSV:
-include,vehicle_hummer_viewmodel
+#include,vehicle_hummer_viewmodel
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 
@@ -230,7 +230,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer_viewmodel", "hummer_physics" );
 
 and these lines in your CSV:
-include,vehicle_hummer_viewmodel
+#include,vehicle_hummer_viewmodel
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -242,7 +242,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer_opentop", "hummer_opentop_physics" );
 
 and these lines in your CSV:
-include,vehicle_hummer_opentop
+#include,vehicle_hummer_opentop
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -254,7 +254,7 @@ put this in your GSC:
 maps\_humvee::main( "vehicle_hummer", "hummer_physics" );
 
 and these lines in your CSV:
-include,vehicle_hummer
+#include,vehicle_hummer
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 

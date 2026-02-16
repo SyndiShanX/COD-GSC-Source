@@ -387,7 +387,7 @@ set_default_hud_stuff() {
 }
 
 use_pressed() {
-  return level.player attackbuttonpressed();
+  return level.player attackButtonPressed();
 }
 
 player_gives_up() {
@@ -602,7 +602,7 @@ trench_wakeup() {
   level.player freezecontrols(1);
   level.player disableweapons();
   common_scripts\utility::waitframe();
-  var_1 = common_scripts\utility::getstructarray("new_trench", "targetname");
+  var_1 = common_scripts\utility::getStructArray("new_trench", "targetname");
   var_2 = undefined;
 
   foreach(var_4 in var_1) {

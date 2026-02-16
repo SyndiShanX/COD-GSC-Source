@@ -231,7 +231,7 @@ offhand_weapon_give_override(str_weapon) {
   return false;
 }
 
-include_weapons() {}
+#include_weapons() {}
 
 precachecustomcharacters() {}
 

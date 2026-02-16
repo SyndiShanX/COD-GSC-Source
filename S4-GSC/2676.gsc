@@ -6,7 +6,7 @@
 _id_E2FF(var_0) {
   level endon("game_ended");
   wait 1;
-  var_1 = scripts\engine\utility::getstructarray("hvt", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("hvt", "targetname");
   var_2 = undefined;
   var_3 = undefined;
   level._id_15BB = 1;

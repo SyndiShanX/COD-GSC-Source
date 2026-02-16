@@ -11,7 +11,7 @@
 #include maps\mp\zombies\_zm_blockers;
 
 hack_boards() {
-  windows = getstructarray("exterior_goal", "targetname");
+  windows = getStructArray("exterior_goal", "targetname");
 
   for(i = 0; i < windows.size; i++) {
     window = windows[i];

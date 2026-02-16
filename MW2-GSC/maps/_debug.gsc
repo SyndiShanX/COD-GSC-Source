@@ -864,9 +864,9 @@ debug_reflection_buttons() {
   lastoffset = offset;
   offsetinc = 50;
   while(GetDebugDvar("debug_reflection") == "1" || GetDebugDvar("debug_reflection") == "3") {
-    if(level.player ButtonPressed("BUTTON_X"))
+    if(level.player buttonPressed("BUTTON_X"))
       offset += offsetinc;
-    if(level.player ButtonPressed("BUTTON_Y"))
+    if(level.player buttonPressed("BUTTON_Y"))
       offset -= offsetinc;
     if(offset > 1000)
       offset = 1000;
@@ -921,9 +921,9 @@ debug_fxlighting_buttons() {
   lastoffset = offset;
   offsetinc = 50;
   while(GetDebugDvar("debug_fxlighting") == "1" || GetDebugDvar("debug_fxlighting") == "3") {
-    if(level.player ButtonPressed("BUTTON_X"))
+    if(level.player buttonPressed("BUTTON_X"))
       offset += offsetinc;
-    if(level.player ButtonPressed("BUTTON_Y"))
+    if(level.player buttonPressed("BUTTON_Y"))
       offset -= offsetinc;
     if(offset > 1000)
       offset = 1000;
@@ -2153,7 +2153,7 @@ draw_animsounds_in_hud() {
     animname = guy.animname;
   level.animsound_hud_animname.label = "Actor: " + animname;
 
-  if(level.player ButtonPressed("f12")) {
+  if(level.player buttonPressed("f12")) {
     if(!level.animsound_locked_pressed) {
       level.animsound_locked = !level.animsound_locked;
       level.animsound_locked_pressed = true;
@@ -2162,14 +2162,14 @@ draw_animsounds_in_hud() {
     level.animsound_locked_pressed = false;
   }
 
-  if(level.player ButtonPressed("UPARROW")) {
+  if(level.player buttonPressed("UPARROW")) {
     if(level.animsound_input != "up") {
       level.animsound_selected--;
     }
 
     level.animsound_input = "up";
   } else
-  if(level.player ButtonPressed("DOWNARROW")) {
+  if(level.player buttonPressed("DOWNARROW")) {
     if(level.animsound_input != "down") {
       level.animsound_selected++;
     }
@@ -2243,7 +2243,7 @@ draw_animsounds_in_hud() {
     }
   }
 
-  if(level.player ButtonPressed("del")) {
+  if(level.player buttonPressed("del")) {
     // delete a sound on a guy
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
@@ -2383,7 +2383,7 @@ debug_animSoundSave() {
   filename = "createfx/"+level.script+"_fx.gsc";
   file = OpenFile( filename, "write" );
   AssertEx( file != -1, "File not writeable( maybe you should check it out ): " + filename );
-  cfxprintln( file, "//_createfx generated. Do not touch!!" );
+  cfxprintln( file, "" );
   cfxprintln( file, "main()" );
   cfxprintln( file, "{" );
   */

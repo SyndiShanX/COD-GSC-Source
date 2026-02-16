@@ -90,7 +90,7 @@ add_zombie_powerup(powerup_name, client_field_name, clientfield_version = 1) {
   }
 }
 
-include_zombie_powerup(powerup_name) {
+#include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups)) {
     level.zombie_include_powerups = [];
   }

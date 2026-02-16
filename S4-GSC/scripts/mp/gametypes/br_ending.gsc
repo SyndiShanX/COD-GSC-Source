@@ -377,7 +377,7 @@ _id_3F08(var_0, var_1) {
 
 _id_6473(var_0, var_1) {
   if(level.script == "mp_br_mechanics") {
-    var_2 = scripts\engine\utility::getstructarray("br_ending_spot", "targetname");
+    var_2 = scripts\engine\utility::getStructArray("br_ending_spot", "targetname");
   } else if(level.script == "mp_br_quarry") {
     var_2 = _id_A290();
   } else {

@@ -35,7 +35,7 @@ _id_4597() {
   self._id_7344 = 0;
 
   if(isDefined(self.target)) {
-    self._id_E34D = scripts\engine\utility::getstructarray(self.target, "targetname");
+    self._id_E34D = scripts\engine\utility::getStructArray(self.target, "targetname");
   }
 
   var_0 = [];
@@ -427,12 +427,12 @@ _id_D4E3(var_0, var_1) {
 _id_AF0F(var_0, var_1) {
   self endon("death");
   self endon("alerted");
-  var_2 = scripts\engine\utility::getstructarray("soldier_patrol", "script_noteworthy");
-  var_3 = scripts\engine\utility::_id_6369(var_0.origin, scripts\engine\utility::getstructarray("soldier_patrol", "script_noteworthy"), [var_0], 15);
+  var_2 = scripts\engine\utility::getStructArray("soldier_patrol", "script_noteworthy");
+  var_3 = scripts\engine\utility::_id_6369(var_0.origin, scripts\engine\utility::getStructArray("soldier_patrol", "script_noteworthy"), [var_0], 15);
 
   if(var_3.size < 1) {
-    var_2 = scripts\engine\utility::getstructarray(var_0._id_0481, "targetname");
-    var_3 = scripts\engine\utility::_id_6369(var_0.origin, scripts\engine\utility::getstructarray(var_0._id_0481, "targetname"), [var_0], 15);
+    var_2 = scripts\engine\utility::getStructArray(var_0._id_0481, "targetname");
+    var_3 = scripts\engine\utility::_id_6369(var_0.origin, scripts\engine\utility::getStructArray(var_0._id_0481, "targetname"), [var_0], 15);
   }
 
   var_4 = scripts\engine\utility::_id_6969(var_0.origin, var_3, 256);
@@ -453,7 +453,7 @@ _id_AF0F(var_0, var_1) {
     }
 
     if(isDefined(var_5.target)) {
-      var_6 = scripts\engine\utility::getstructarray(var_5.target, "targetname")[0];
+      var_6 = scripts\engine\utility::getStructArray(var_5.target, "targetname")[0];
 
       if(isDefined(var_6)) {
         var_5 = var_6;
@@ -1108,7 +1108,7 @@ _id_D7B4() {
 
 _id_5962(var_0) {
   self endon("death");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = scripts\engine\utility::_id_6969(self.origin, var_1);
   self._id_0201 = 128;
   self _meth_8326(_func_02AB(var_2.origin));
@@ -1383,7 +1383,7 @@ _id_4E13(var_0, var_1, var_2, var_3) {
 }
 
 _id_8D24() {
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger", var_1);

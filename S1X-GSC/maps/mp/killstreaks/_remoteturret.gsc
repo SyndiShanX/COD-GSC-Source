@@ -1033,7 +1033,7 @@ waittillRemoteTurretLeaveReturn() {
 
   while(true) {
     useHold = 0;
-    while(owner UseButtonPressed()) {
+    while(owner useButtonPressed()) {
       useHold += 0.05;
       if(useHold > 1 && owner playerCanUseTurret(self)) {
         return;
@@ -1046,7 +1046,7 @@ waittillRemoteTurretLeaveReturn() {
 }
 
 playerCanUseTurret(turret) {
-  if(self FragButtonPressed() || isDefined(self.throwingGrenade) || self SecondaryOffhandButtonPressed()) {
+  if(self fragButtonPressed() || isDefined(self.throwingGrenade) || self SecondaryOffhandbuttonPressed()) {
     return false;
   }
 
@@ -1169,7 +1169,7 @@ player_handleTurretPickup(turret) {
       !isDefined(turret.carriedBy) &&
       self IsOnGround()) {
       timeUsed = 0;
-      while(self UseButtonPressed()) {
+      while(self useButtonPressed()) {
         if(!isReallyAlive(self)) {
           break;
         }
@@ -1178,7 +1178,7 @@ player_handleTurretPickup(turret) {
           break;
         }
 
-        if(self FragButtonPressed() || self SecondaryOffhandButtonPressed() || isDefined(self.throwingGrenade)) {
+        if(self fragButtonPressed() || self SecondaryOffhandbuttonPressed() || isDefined(self.throwingGrenade)) {
           break;
         }
 
@@ -1261,13 +1261,13 @@ player_handleTurretRippable(turret) {
       self IsTouching(turret.ownerTrigger) &&
       !isDefined(turret.carriedBy) &&
       self IsOnGround()) {
-      if(self UseButtonPressed()) {
+      if(self useButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;
         }
 
         buttonTime = 0;
-        while(self UseButtonPressed()) {
+        while(self useButtonPressed()) {
           buttonTime += 0.05;
           wait(0.05);
         }
@@ -1277,7 +1277,7 @@ player_handleTurretRippable(turret) {
         }
 
         buttonTime = 0;
-        while(!self UseButtonPressed() && buttonTime < 0.5) {
+        while(!self useButtonPressed() && buttonTime < 0.5) {
           buttonTime += 0.05;
           wait(0.05);
         }

@@ -44,7 +44,7 @@ main() {
 }
 
 global_FX(targetname, fxName, fxFile, delay, soundalias) {
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
   if(!isDefined(ents)) {
     return;
   }

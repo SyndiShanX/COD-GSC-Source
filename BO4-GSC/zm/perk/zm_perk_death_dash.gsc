@@ -126,7 +126,7 @@ function_607b1eb0() {
       }
     }
 
-    if(!self.var_d675d730.var_af84e9df && self getstance() === "crouch" && !self zm_utility::is_jumping() && !self stancebuttonpressed()) {
+    if(!self.var_d675d730.var_af84e9df && self getstance() === "crouch" && !self zm_utility::is_jumping() && !self stancebuttonPressed()) {
       self.var_d675d730.var_af84e9df = 1;
       self.var_d675d730.var_40cb1997 = gettime();
       self.var_d675d730.var_ec50ac8e = 0;
@@ -140,7 +140,7 @@ function_607b1eb0() {
       self function_3d5b29a6();
     }
 
-    if(self.var_d675d730.var_af84e9df && self stancebuttonpressed()) {
+    if(self.var_d675d730.var_af84e9df && self stancebuttonPressed()) {
       self.var_d675d730.var_af84e9df = self function_f3d1b75c();
 
       if(self.var_d675d730.var_af84e9df && self.var_d675d730.var_ec50ac8e > 0.2) {

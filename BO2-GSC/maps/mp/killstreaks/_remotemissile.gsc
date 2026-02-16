@@ -800,7 +800,7 @@ missile_deploy_watch(rocket) {
   explosionradius = 0;
 
   while(true) {
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       targets = self getvalidtargets(rocket, 0);
 
       if(targets.size > 0) {

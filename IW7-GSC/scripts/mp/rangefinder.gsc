@@ -35,10 +35,10 @@ monitorplacement() {
   self.placementmode = "player";
   for(;;) {
     if(getdvarint("scr_rangeFinder", 0) == 1) {
-      if(level.players[0] usebuttonpressed()) {
+      if(level.players[0] useButtonPressed()) {
         self.placementmode = scripts\engine\utility::ter_op(self.placementmode == "player", "stationary", "player");
         level.players[0] notify("changed_placementMode");
-        while(level.players[0] usebuttonpressed()) {
+        while(level.players[0] useButtonPressed()) {
           wait(0.05);
         }
       }

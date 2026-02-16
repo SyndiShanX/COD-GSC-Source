@@ -130,7 +130,7 @@ put this in your GSC:
 maps\_btr80::main( "vehicle_btr80" );
 
 and these lines in your CSV:
-include,vehicle_btr80
+#include,vehicle_btr80
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -151,7 +151,7 @@ put this in your GSC:
 maps\_btr80::main( "vehicle_btr80_low" );
 
 and these lines in your CSV:
-include,vehicle_btr80_low
+#include,vehicle_btr80_low
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -163,7 +163,7 @@ put this in your GSC:
 maps\_btr80::main( "vehicle_btr80_snow" );
 
 and these lines in your CSV:
-include,vehicle_btr80_snow
+#include,vehicle_btr80_snow
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -175,7 +175,7 @@ put this in your GSC:
 maps\_btr80::main( "vehicle_btr80_snow", "btr80_physics");
 
 and these lines in your CSV:
-include,vehicle_btr80_snow
+#include,vehicle_btr80_snow
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -187,7 +187,7 @@ put this in your GSC:
 maps\_btr80::main( "vehicle_btr80", "btr80_physics" );
 
 and these lines in your CSV:
-include,vehicle_btr80
+#include,vehicle_btr80
 sound,vehicle_btr80,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 

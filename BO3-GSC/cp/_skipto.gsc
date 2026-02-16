@@ -671,7 +671,7 @@ function devgui() {
 function menu() {
   level flag::wait_till("");
   player = getplayers()[0];
-  while(isDefined(player) && player buttonpressed("")) {
+  while(isDefined(player) && player buttonPressed("")) {
     wait(0.05);
   }
   level thread watch_key_combo();
@@ -688,7 +688,7 @@ function menu() {
 
 function key_combo_pressed() {
   player = getplayers()[0];
-  if(isDefined(player) && player buttonpressed("BUTTON_X") && player buttonpressed("DPAD_RIGHT") && player buttonpressed("BUTTON_LSHLDR") && player buttonpressed("BUTTON_RSHLDR")) {
+  if(isDefined(player) && player buttonPressed("BUTTON_X") && player buttonPressed("DPAD_RIGHT") && player buttonPressed("BUTTON_LSHLDR") && player buttonPressed("BUTTON_RSHLDR")) {
     return true;
   }
   return false;
@@ -766,19 +766,19 @@ function display() {
       old_selected = selected;
     }
     if(!up_pressed) {
-      if(getplayers()[0] buttonpressed("UPARROW") || getplayers()[0] buttonpressed("DPAD_UP") || getplayers()[0] buttonpressed("APAD_UP")) {
+      if(getplayers()[0] buttonPressed("UPARROW") || getplayers()[0] buttonPressed("DPAD_UP") || getplayers()[0] buttonPressed("APAD_UP")) {
         up_pressed = 1;
         selected--;
       }
-    } else if(!getplayers()[0] buttonpressed("UPARROW") && !getplayers()[0] buttonpressed("DPAD_UP") && !getplayers()[0] buttonpressed("APAD_UP")) {
+    } else if(!getplayers()[0] buttonPressed("UPARROW") && !getplayers()[0] buttonPressed("DPAD_UP") && !getplayers()[0] buttonPressed("APAD_UP")) {
       up_pressed = 0;
     }
     if(!down_pressed) {
-      if(getplayers()[0] buttonpressed("DOWNARROW") || getplayers()[0] buttonpressed("DPAD_DOWN") || getplayers()[0] buttonpressed("APAD_DOWN")) {
+      if(getplayers()[0] buttonPressed("DOWNARROW") || getplayers()[0] buttonPressed("DPAD_DOWN") || getplayers()[0] buttonPressed("APAD_DOWN")) {
         down_pressed = 1;
         selected++;
       }
-    } else if(!getplayers()[0] buttonpressed("DOWNARROW") && !getplayers()[0] buttonpressed("DPAD_DOWN") && !getplayers()[0] buttonpressed("APAD_DOWN")) {
+    } else if(!getplayers()[0] buttonPressed("DOWNARROW") && !getplayers()[0] buttonPressed("DPAD_DOWN") && !getplayers()[0] buttonPressed("APAD_DOWN")) {
       down_pressed = 0;
     }
     if(selected < 0) {
@@ -787,11 +787,11 @@ function display() {
     if(selected >= names.size) {
       selected = 0;
     }
-    if(getplayers()[0] buttonpressed("BUTTON_B")) {
+    if(getplayers()[0] buttonPressed("BUTTON_B")) {
       display_cleanup(elems, title);
       break;
     }
-    if(getplayers()[0] buttonpressed("kp_enter") || getplayers()[0] buttonpressed("BUTTON_A") || getplayers()[0] buttonpressed("enter")) {
+    if(getplayers()[0] buttonPressed("kp_enter") || getplayers()[0] buttonPressed("BUTTON_A") || getplayers()[0] buttonPressed("enter")) {
       if(names[selected] == "cancel") {
         display_cleanup(elems, title);
         break;

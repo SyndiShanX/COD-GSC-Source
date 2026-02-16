@@ -4,11 +4,11 @@
 **************************************/
 
 init() {
-  var_0 = common_scripts\utility::getstructarray("zombie_tube", "targetname");
+  var_0 = common_scripts\utility::getStructArray("zombie_tube", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = getEntArray(var_2.target, "targetname");
-    var_4 = common_scripts\utility::getstructarray(var_2.target, "targetname");
+    var_4 = common_scripts\utility::getStructArray(var_2.target, "targetname");
     var_5 = common_scripts\utility::array_combine(var_3, var_4);
 
     foreach(var_7 in var_5) {

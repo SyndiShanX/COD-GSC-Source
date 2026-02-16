@@ -55,7 +55,7 @@ put this in your GSC:
 maps\_t72::main( "vehicle_t72_tank" );
 
 and these lines in your CSV:
-include,vehicle_t72_tank_t72
+#include,vehicle_t72_tank_t72
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -67,7 +67,7 @@ put this in your GSC:
 maps\_t72::main( "vehicle_t72_tank_low" );
 
 and these lines in your CSV:
-include,vehicle_t72_tank_low_t72
+#include,vehicle_t72_tank_low_t72
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -79,7 +79,7 @@ put this in your GSC:
 maps\_t72::main( "vehicle_t72_tank_woodland" );
 
 and these lines in your CSV:
-include,vehicle_t72_tank_woodland_t72
+#include,vehicle_t72_tank_woodland_t72
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -91,7 +91,7 @@ put this in your GSC:
 maps\_t72::main( "vehicle_t72_tank_woodland_low" );
 
 and these lines in your CSV:
-include,vehicle_t72_tank_woodland_low
+#include,vehicle_t72_tank_woodland_low
 sound,vehicle_t72,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 

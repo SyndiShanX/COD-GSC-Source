@@ -68,7 +68,7 @@ init() {
     level.brutus_spawners[i].script_forcespawn = 1;
   }
 
-  level.brutus_spawn_positions = getstructarray("brutus_location", "script_noteworthy");
+  level.brutus_spawn_positions = getStructArray("brutus_location", "script_noteworthy");
   level thread setup_interaction_matrix();
   level.sndbrutusistalking = 0;
   level.brutus_health = 500;

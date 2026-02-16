@@ -81,7 +81,7 @@ perk_start_up() {
   timer = 0;
   duration = 0.1;
 
-  machines = GetStructArray("perksacola", "targetname");
+  machines = getStructArray("perksacola", "targetname");
 
   while(true) {
     for(i = 0; i < machines.size; i++) {

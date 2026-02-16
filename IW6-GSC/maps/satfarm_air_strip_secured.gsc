@@ -63,7 +63,7 @@ air_strip_secured_begin() {
 }
 
 air_strip_victory() {
-  var_0 = common_scripts\utility::getstructarray("green_smoke_structs", "targetname");
+  var_0 = common_scripts\utility::getStructArray("green_smoke_structs", "targetname");
 
   foreach(var_2 in var_0) {
     if(level.start_point != "air_strip_secured")
@@ -188,11 +188,11 @@ air_strip_to_chopper() {
   level.air_strip_secured_ambient_enemies_wave_1 = maps\_utility::array_spawn_targetname("air_strip_secured_ambient_enemies_wave_1", 1);
   var_0 = getent("air_strip_secured_ac_unit_damage_brush", "targetname");
   var_0 setCanDamage(1);
-  var_1 = common_scripts\utility::getstructarray("air_strip_secured_ac_unit_damage_struct", "targetname");
+  var_1 = common_scripts\utility::getStructArray("air_strip_secured_ac_unit_damage_struct", "targetname");
   var_0 thread watch_damage_to_rooftop_destructibles(var_1, 250, "air_strip_secured_ambient_enemies_volume_3");
   var_2 = getent("air_strip_secured_gas_tank_damage_brush", "targetname");
   var_2 setCanDamage(1);
-  var_3 = common_scripts\utility::getstructarray("air_strip_secured_gas_tank_damage_struct", "targetname");
+  var_3 = common_scripts\utility::getStructArray("air_strip_secured_gas_tank_damage_struct", "targetname");
   var_2 thread watch_damage_to_rooftop_destructibles(var_3, 300, "air_strip_secured_ambient_enemies_volume_1");
   thread chopper_drive_in_vo();
   thread control_room_combat();

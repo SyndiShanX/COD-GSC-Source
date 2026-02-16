@@ -289,7 +289,7 @@ waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
 
@@ -917,7 +917,7 @@ spawnspectatormapcam(var_0) {
 
   self setclientomnvar("ui_mapshot_camera", 1);
   self lerpfovbypreset("mapflyover");
-  var_2 = scripts\engine\utility::getstructarray("camera_intro", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("camera_intro", "targetname");
   if(var_2.size == 0) {
     self visionsetfadetoblackforplayer("", 0.75);
     return;

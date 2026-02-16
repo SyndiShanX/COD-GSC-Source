@@ -508,7 +508,7 @@ allies_first_advance() {
 }
 
 infil_sidestreet() {
-  var_0 = common_scripts\utility::getstructarray("infil_sidestreet_bullet_array", "targetname");
+  var_0 = common_scripts\utility::getStructArray("infil_sidestreet_bullet_array", "targetname");
   var_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("infil_heli_flyby01");
   var_1 thread create_passengers();
   var_1 vehicle_setspeedimmediate(60, 999);
@@ -1576,7 +1576,7 @@ infil_flyin_battle() {
   var_3 = getEntArray("infil_flyin_battle_static", "targetname");
   var_4 = getent("infil_flyin_battle_tank_enemy", "targetname");
   var_5 = common_scripts\utility::getstruct("infil_flyin_battle_tank_enemy_target", "targetname");
-  var_6 = common_scripts\utility::getstructarray("infil_flyin_battle_tank_enemy_barrier_target", "targetname");
+  var_6 = common_scripts\utility::getStructArray("infil_flyin_battle_tank_enemy_barrier_target", "targetname");
   var_7 = getent("infil_flyin_battle_tank_ally_aim", "targetname");
   var_8 = getent("infil_flyin_battle_tank_ally_bridge_l", "targetname");
   var_9 = getent("infil_flyin_battle_tank_ally_bridge_r", "targetname");

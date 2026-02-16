@@ -103,7 +103,7 @@ func_9CF7() {
 }
 
 func_9B50() {
-  return level.player adsbuttonpressed();
+  return level.player adsButtonPressed();
 }
 
 func_D42B() {
@@ -2194,7 +2194,7 @@ func_4202(var_0) {
 func_4207() {
   scripts\engine\utility::flag_wait("teleport_scar1");
   wait(1.7);
-  var_0 = scripts\engine\utility::getstructarray("drop_landing_start", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("drop_landing_start", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.script_noteworthy != "scar2") {
       level.var_EBBB func_80F1(var_2.origin, var_2.angles, -15536);

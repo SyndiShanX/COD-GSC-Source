@@ -1020,7 +1020,7 @@ find_zones() {
 get_zone_origins() {
   origins = [];
 
-  flags = GetStructArray("twar_zone", "targetname");
+  flags = getStructArray("twar_zone", "targetname");
   foreach(flag in flags) {
     if(!isDefined(flag.script_index)) {
       return origins;
@@ -1028,7 +1028,7 @@ get_zone_origins() {
   }
 
   if(isAugmentedGameMode()) {
-    flags_augmented = GetStructArray("twar_zone_augmented", "targetname");
+    flags_augmented = getStructArray("twar_zone_augmented", "targetname");
     foreach(flag_a in flags_augmented) {
       if(!isDefined(flag_a.script_index)) {
         continue;

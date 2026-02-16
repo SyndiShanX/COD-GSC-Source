@@ -111,7 +111,7 @@ put this in your GSC:
 maps\_policecar::main( "vehicle_policecar_lapd_destructible" );
 
 and these lines in your CSV:
-include,vehicle_policecar_lapd
+#include,vehicle_policecar_lapd
 sound,vehicle_policecar_lapd,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -123,7 +123,7 @@ put this in your GSC:
 maps\_policecar::main( "vehicle_policecar_russia_destructible" );
 
 and these lines in your CSV:
-include,vehicle_policecar_russia
+#include,vehicle_policecar_russia
 sound,vehicle_policecar_lapd,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 

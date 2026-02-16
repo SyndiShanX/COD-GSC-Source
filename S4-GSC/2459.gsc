@@ -6,7 +6,7 @@
 _id_806F() {
   wait 5;
   level._id_6292 = [];
-  level._id_6292 = scripts\engine\utility::getstructarray("generator", "script_noteworthy");
+  level._id_6292 = scripts\engine\utility::getStructArray("generator", "script_noteworthy");
   scripts\engine\utility::_id_5C11("power_on");
   level._id_BAB8 = ::_id_BAB9;
 

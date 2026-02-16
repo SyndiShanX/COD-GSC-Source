@@ -876,7 +876,7 @@ binoculars_monitor_scanning() {
       thread binoculars_lock_to_target(var_1);
       self notify("scanning_target");
 
-      if(!self attackbuttonpressed()) {
+      if(!self attackButtonPressed()) {
         self notify("stop_binocular_flash");
         binoculars_unlock_from_target();
         continue;
@@ -898,7 +898,7 @@ binoculars_monitor_scanning() {
       self.camera_hud_item["recognition_system"].alpha = 1.0;
       var_2 = 0.0;
 
-      while(self attackbuttonpressed() && var_2 < self.binoculars_scan_time) {
+      while(self attackButtonPressed() && var_2 < self.binoculars_scan_time) {
         var_2 = var_2 + 0.05;
         wait 0.05;
         self.camera_hud_item["uploading_bar"] setshader("white", int(var_2 / 2.0 * (self.camera_hud_item["profile"].width - 3)), 8);
@@ -908,7 +908,7 @@ binoculars_monitor_scanning() {
         self notify("scanning_complete");
         self.binoculars_scanning_complete = 1;
 
-        while(self attackbuttonpressed() && var_2 < 1.5) {
+        while(self attackButtonPressed() && var_2 < 1.5) {
           var_2 = var_2 + 0.05;
           wait 0.05;
         }
@@ -941,7 +941,7 @@ binoculars_monitor_scanning() {
         self.camera_hud_item["id_confirmed"] settext("Payload Confirmed");
         self notify("stop_binocular_flash");
 
-        while(self attackbuttonpressed())
+        while(self attackButtonPressed())
           wait 0.05;
 
         if(isDefined(self.camera_hud_item["id_confirmed"])) {
@@ -1035,7 +1035,7 @@ monitor_binoculars_variable_zoom() {
     self waittill("binocular_zoom");
     level notify("binocular_zoom");
 
-    if(self.binoculars_zoom_enabled && !self attackbuttonpressed()) {
+    if(self.binoculars_zoom_enabled && !self attackButtonPressed()) {
       self.binocular_zooming = 1;
       self.current_binocular_zoom_level++;
 

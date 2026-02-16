@@ -2075,7 +2075,7 @@ init_structs() {
     wait 0.05;
   }
 
-  level.evac_points = common_scripts\utility::getstructarray("evac_point", "targetname");
+  level.evac_points = common_scripts\utility::getStructArray("evac_point", "targetname");
 }
 
 runzombiesmode() {
@@ -2981,7 +2981,7 @@ playersetupem1ammo() {
   }
 
   for(;;) {
-    if(!self attackbuttonpressed()) {
+    if(!self attackButtonPressed()) {
       self waittill("fire_em1_weapon");
     }
 

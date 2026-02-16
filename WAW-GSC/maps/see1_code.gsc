@@ -16,7 +16,7 @@ teleport_actor(node_targetname) {
   }
 
   players = get_players();
-  teleport_points = getstructarray("temp_player_pos", "targetname");
+  teleport_points = getStructArray("temp_player_pos", "targetname");
 
   if(teleport_points.size < 4) {
     return;
@@ -32,7 +32,7 @@ teleport_actor(node_targetname) {
 
 teleport_actor_to_node(node) {
   players = get_players();
-  teleport_points = getstructarray("temp_player_pos", "targetname");
+  teleport_points = getStructArray("temp_player_pos", "targetname");
 
   if(teleport_points.size < 4) {
     return;
@@ -878,7 +878,7 @@ lower_friendlies_accuracy(value, restore_msg) {
 
 setup_dead_bodies(struct_name, delete_msg) {
   bodies = [];
-  structs = getstructarray(struct_name, "targetname");
+  structs = getStructArray(struct_name, "targetname");
 
   for(i = 0; i < structs.size; i++) {
     bodies[i] = spawn("script_model", structs[i].origin);

@@ -657,7 +657,7 @@ createZones() {
   level.grnd_dropZones1 = [];
   level.grnd_dropZones2 = [];
 
-  chestSpawns = getstructarray("sotf_chest_spawnpoint", "targetname");
+  chestSpawns = getStructArray("sotf_chest_spawnpoint", "targetname");
 
   if(getDvar("mapname") == "mp_strikezone") {
     zone2grnd_zones = [];

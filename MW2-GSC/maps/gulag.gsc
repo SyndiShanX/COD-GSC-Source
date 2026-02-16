@@ -276,7 +276,7 @@ main() {
   array_thread(tarp_pull_orgs, ::tarp_pull_org_think);
 
   player_start = getstruct("start_approach", "script_noteworthy");
-  friendly_starts = getstructarray("start_approach_friendly", "script_noteworthy");
+  friendly_starts = getStructArray("start_approach_friendly", "script_noteworthy");
   friendly_starts["p"] = player_start;
 
   thread blow_up_first_tower_soon();
@@ -530,7 +530,7 @@ gulag_approach() {
     remap_targets(heli_intro_player.target, player_start.targetname);
     heli_intro_player.target = player_start.targetname;
 
-    friendly_starts = getstructarray("start_approach_friendly", "script_noteworthy");
+    friendly_starts = getStructArray("start_approach_friendly", "script_noteworthy");
     friendly_heli_spawners = getEntArray("intro_heli_1", "targetname");
     foreach(index, spawner in friendly_heli_spawners) {
       remap_targets(spawner.target, friendly_starts[index].targetname);
@@ -556,7 +556,7 @@ gulag_approach() {
     remap_targets(heli_intro_player.target, player_start.targetname);
     heli_intro_player.target = player_start.targetname;
 
-    friendly_starts = getstructarray("start_approach_friendly", "script_noteworthy");
+    friendly_starts = getStructArray("start_approach_friendly", "script_noteworthy");
     new_start = getstruct("test_unload_node", "script_noteworthy");
     friendly_starts[2] = new_start;
     friendly_heli_spawners = getEntArray("intro_heli_1", "targetname");
@@ -841,7 +841,7 @@ start_unload()
 	remap_targets( heli_intro_player.target, player_start.targetname );
 	heli_intro_player.target = player_start.targetname;
 
-	friendly_starts = getstructarray("start_unload_friendly", "script_noteworthy" );
+	friendly_starts = getStructArray("start_unload_friendly", "script_noteworthy" );
 	friendly_heli_spawners = getEntArray( "intro_heli_1", "targetname" );
 	foreach ( index, spawner in friendly_heli_spawners )
 	{

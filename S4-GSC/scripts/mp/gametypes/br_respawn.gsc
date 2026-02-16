@@ -18,7 +18,7 @@ init() {
 }
 
 _id_C473() {
-  var_0 = scripts\engine\utility::getstructarray("br_respawn_station", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("br_respawn_station", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = getent(var_0[var_1].target, "targetname");
@@ -421,8 +421,8 @@ _id_B6A9() {
   var_0 = undefined;
 
   for(;;) {
-    var_1 = self fragbuttonpressed();
-    var_2 = self secondaryoffhandbuttonpressed();
+    var_1 = self fragButtonPressed();
+    var_2 = self secondaryoffhandbuttonPressed();
 
     if(var_1 || var_2 || !isDefined(var_0) || !isalive(var_0) || isDefined(var_0._id_C6A0) || istrue(var_0._id_59E0)) {
       var_3 = _id_6C6B(self.team, var_0, var_1 || !isDefined(var_0));
@@ -435,11 +435,11 @@ _id_B6A9() {
       }
 
       if(var_1) {
-        while(self fragbuttonpressed()) {
+        while(self fragButtonPressed()) {
           waitframe();
         }
       } else if(var_2) {
-        while(self secondaryoffhandbuttonpressed()) {
+        while(self secondaryoffhandbuttonPressed()) {
           waitframe();
         }
       }
@@ -628,7 +628,7 @@ _id_B73D(var_0, var_1) {
     }
   }
 
-  while(!self stancebuttonpressed() || !self isonground()) {
+  while(!self stancebuttonPressed() || !self isonground()) {
     waitframe();
   }
 

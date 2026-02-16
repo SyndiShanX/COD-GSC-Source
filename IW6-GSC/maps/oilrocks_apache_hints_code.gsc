@@ -11,28 +11,28 @@ apache_hints_break_ads() {
   if(apache_player_dead())
     return 1;
 
-  return self adsbuttonpressed();
+  return self adsButtonPressed();
 }
 
 apache_hints_break_mg() {
   if(apache_player_dead())
     return 1;
 
-  return self attackbuttonpressed();
+  return self attackButtonPressed();
 }
 
 apache_hints_break_flares() {
   if(apache_player_dead())
     return 1;
 
-  return self secondaryoffhandbuttonpressed();
+  return self secondaryoffhandbuttonPressed();
 }
 
 apache_hints_break_missile_straight() {
   if(apache_player_dead())
     return 1;
 
-  return self fragbuttonpressed();
+  return self fragButtonPressed();
 }
 
 apache_hints_break_missile_lockon() {
@@ -70,7 +70,7 @@ get_players_apache_weapon() {
 }
 
 apache_hints_released_homing() {
-  return !level.player fragbuttonpressed();
+  return !level.player fragButtonPressed();
 }
 
 apache_player_dead() {

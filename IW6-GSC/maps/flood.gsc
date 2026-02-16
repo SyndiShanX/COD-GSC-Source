@@ -1058,14 +1058,14 @@ fly_around() {
     thread maps\flood_swept::swept_water_toggle("debri_bridge", "hide");
     thread maps\flood_util::hide_scriptmodel_by_targetname_array("embassy_hide");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     iprintln("flood_intro_tr transient fastfile dam");
     thread maps\flood_util::show_models_by_targetname("embassy_hide");
     wait 1.0;
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     thread maps\_utility::transient_unloadall_and_load("flood_mid_tr");
@@ -1076,7 +1076,7 @@ fly_around() {
     thread maps\flood_util::hide_scriptmodel_by_targetname_array("embassy_hide");
     thread maps\flood_mall::mallroof_firstframe();
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     wait 1.0;
@@ -1085,7 +1085,7 @@ fly_around() {
     thread maps\flood_util::show_models_by_targetname("garage_facade");
     iprintln("flood_mid_tr transient fastfile loaded swept");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     wait 1.0;
@@ -1095,7 +1095,7 @@ fly_around() {
     thread maps\flood_util::hide_models_by_targetname("swept_underwater_cleanup");
     thread maps\flood_util::hide_models_by_targetname("garage_facade");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     thread maps\_utility::transient_unloadall_and_load("flood_end_tr");
@@ -1104,7 +1104,7 @@ fly_around() {
     wait 1.0;
     iprintln("flood_end_tr transient fastfile loaded");
 
-    while(!level.player buttonpressed("BUTTON_X"))
+    while(!level.player buttonPressed("BUTTON_X"))
       wait 0.05;
 
     thread maps\_utility::transient_unloadall_and_load("flood_intro_tr");

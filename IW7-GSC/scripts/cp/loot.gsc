@@ -1261,7 +1261,7 @@ display_powerup_popup(var_0) {
 
 get_fx_points(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
-  var_6 = scripts\engine\utility::getstructarray(var_1, var_2);
+  var_6 = scripts\engine\utility::getStructArray(var_1, var_2);
   var_6[var_6.size] = var_0;
   foreach(var_8 in var_6) {
     var_9 = scripts\engine\utility::get_array_of_closest(var_8.origin, level.players, undefined, 1, var_4, 1);

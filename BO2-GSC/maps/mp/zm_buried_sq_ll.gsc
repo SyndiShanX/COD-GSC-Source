@@ -31,7 +31,7 @@ stage_logic() {
 }
 
 sq_ll_show_code() {
-  a_spots = getstructarray("sq_code_pos", "targetname");
+  a_spots = getStructArray("sq_code_pos", "targetname");
   a_signs = getEntArray("sq_tunnel_sign", "targetname");
   a_codes = [];
 

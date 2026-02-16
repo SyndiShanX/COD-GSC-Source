@@ -205,7 +205,7 @@ updatedevsettingszm() {
       match_string = level.scr_zm_ui_gametype + "_" + location;
 
       if(level.streamdumpteamindex < level.teams.size) {
-        structs = getstructarray("initial_spawn", "script_noteworthy");
+        structs = getStructArray("initial_spawn", "script_noteworthy");
 
         if(isDefined(structs)) {
           foreach(struct in structs) {
@@ -221,7 +221,7 @@ updatedevsettingszm() {
         }
 
         if(!isDefined(spawnpoints) || spawnpoints.size == 0)
-          spawnpoints = getstructarray("initial_spawn_points", "targetname");
+          spawnpoints = getStructArray("initial_spawn_points", "targetname");
 
         if(isDefined(spawnpoints))
           numpoints = spawnpoints.size;
@@ -776,16 +776,16 @@ devgui_spawn_think() {
     self setactionslot(3, "");
     self setactionslot(4, "");
 
-    if(!dpad_left && self buttonpressed("DPAD_LEFT")) {
+    if(!dpad_left && self buttonPressed("DPAD_LEFT")) {
       setDvar("scr_playerwarp", "prev_spawn");
       dpad_left = 1;
-    } else if(!self buttonpressed("DPAD_LEFT"))
+    } else if(!self buttonPressed("DPAD_LEFT"))
       dpad_left = 0;
 
-    if(!dpad_right && self buttonpressed("DPAD_RIGHT")) {
+    if(!dpad_right && self buttonPressed("DPAD_RIGHT")) {
       setDvar("scr_playerwarp", "next_spawn");
       dpad_right = 1;
-    } else if(!self buttonpressed("DPAD_RIGHT"))
+    } else if(!self buttonPressed("DPAD_RIGHT"))
       dpad_right = 0;
 
     wait 0.05;
@@ -1922,10 +1922,10 @@ larry_init(larry) {
     larry.model.origin = position;
     larry.model.angles = self.angles + vectorscale((0, 1, 0), 180.0);
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       self larry_ai(larry);
 
-      while(self usebuttonpressed())
+      while(self useButtonPressed())
         wait 0.05;
     }
   }
@@ -2147,51 +2147,51 @@ watchattachmentchange() {
   dpad_modifier_button = getattachmentchangemodifierbutton();
 
   for(;;) {
-    if(self buttonpressed(dpad_modifier_button)) {
-      if(!dpad_left && self buttonpressed("DPAD_LEFT")) {
+    if(self buttonPressed(dpad_modifier_button)) {
+      if(!dpad_left && self buttonPressed("DPAD_LEFT")) {
         self giveweaponnextattachment("muzzle");
         dpad_left = 1;
         self thread print_weapon_name();
       }
 
-      if(!dpad_right && self buttonpressed("DPAD_RIGHT")) {
+      if(!dpad_right && self buttonPressed("DPAD_RIGHT")) {
         self giveweaponnextattachment("trigger");
         dpad_right = 1;
         self thread print_weapon_name();
       }
 
-      if(!dpad_up && self buttonpressed("DPAD_UP")) {
+      if(!dpad_up && self buttonPressed("DPAD_UP")) {
         self giveweaponnextattachment("top");
         dpad_up = 1;
         self thread print_weapon_name();
       }
 
-      if(!dpad_down && self buttonpressed("DPAD_DOWN")) {
+      if(!dpad_down && self buttonPressed("DPAD_DOWN")) {
         self giveweaponnextattachment("bottom");
         dpad_down = 1;
         self thread print_weapon_name();
       }
 
-      if(!lstick_down && self buttonpressed("BUTTON_LSTICK")) {
+      if(!lstick_down && self buttonPressed("BUTTON_LSTICK")) {
         self giveweaponnextattachment("gunperk");
         lstick_down = 1;
         self thread print_weapon_name();
       }
     }
 
-    if(!self buttonpressed("DPAD_LEFT"))
+    if(!self buttonPressed("DPAD_LEFT"))
       dpad_left = 0;
 
-    if(!self buttonpressed("DPAD_RIGHT"))
+    if(!self buttonPressed("DPAD_RIGHT"))
       dpad_right = 0;
 
-    if(!self buttonpressed("DPAD_UP"))
+    if(!self buttonPressed("DPAD_UP"))
       dpad_up = 0;
 
-    if(!self buttonpressed("DPAD_DOWN"))
+    if(!self buttonPressed("DPAD_DOWN"))
       dpad_down = 0;
 
-    if(!self buttonpressed("BUTTON_LSTICK"))
+    if(!self buttonPressed("BUTTON_LSTICK"))
       lstick_down = 0;
 
     wait 0.05;
@@ -2364,7 +2364,7 @@ bot_dpad_think() {
     players = get_players();
     max = players.size;
 
-    if(!dpad_left && host buttonpressed("DPAD_LEFT")) {
+    if(!dpad_left && host buttonPressed("DPAD_LEFT")) {
       level.bot_index--;
 
       if(level.bot_index < 0)
@@ -2374,10 +2374,10 @@ bot_dpad_think() {
         continue;
       }
       dpad_left = 1;
-    } else if(!host buttonpressed("DPAD_LEFT"))
+    } else if(!host buttonPressed("DPAD_LEFT"))
       dpad_left = 0;
 
-    if(!dpad_right && host buttonpressed("DPAD_RIGHT")) {
+    if(!dpad_right && host buttonPressed("DPAD_RIGHT")) {
       level.bot_index++;
 
       if(level.bot_index >= max)
@@ -2387,7 +2387,7 @@ bot_dpad_think() {
         continue;
       }
       dpad_right = 1;
-    } else if(!host buttonpressed("DPAD_RIGHT"))
+    } else if(!host buttonPressed("DPAD_RIGHT"))
       dpad_right = 0;
 
     level notify("bot_index_changed");
@@ -2726,9 +2726,9 @@ node_get(player) {
     if(!isDefined(node)) {
       continue;
     }
-    if(player buttonpressed("BUTTON_A"))
+    if(player buttonPressed("BUTTON_A"))
       return node;
-    else if(player buttonpressed("BUTTON_B"))
+    else if(player buttonPressed("BUTTON_B"))
       return undefined;
 
     if(node.type == "Path") {
@@ -2747,7 +2747,7 @@ dev_get_node_pair() {
   while(!isDefined(start)) {
     start = node_get(player);
 
-    if(player buttonpressed("BUTTON_B")) {
+    if(player buttonPressed("BUTTON_B")) {
       level notify("draw_pathnode_stop");
       return undefined;
     }
@@ -2755,7 +2755,7 @@ dev_get_node_pair() {
 
   level thread draw_pathnode_think(start, (0, 1, 0));
 
-  while(player buttonpressed("BUTTON_A"))
+  while(player buttonPressed("BUTTON_A"))
     wait 0.05;
 
   end = undefined;
@@ -2763,7 +2763,7 @@ dev_get_node_pair() {
   while(!isDefined(end)) {
     end = node_get(player);
 
-    if(player buttonpressed("BUTTON_B")) {
+    if(player buttonPressed("BUTTON_B")) {
       level notify("draw_pathnode_stop");
       return undefined;
     }

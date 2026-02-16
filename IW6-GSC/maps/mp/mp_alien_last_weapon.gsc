@@ -119,7 +119,7 @@ cortex_gun_charge_watcher() {
 
     var_2 = 0;
 
-    if(self adsbuttonpressed() && self.adsallowed && !self meleebuttonpressed()) {
+    if(self adsButtonPressed() && self.adsallowed && !self meleeButtonPressed()) {
       var_3 = gettime();
 
       if(!self.adspressed) {
@@ -163,7 +163,7 @@ cortex_gun_charge_watcher() {
         self.adsallowed = 0;
         self allowads(0);
 
-        if(self meleebuttonpressed())
+        if(self meleeButtonPressed())
           thread allow_ads_reset();
         else
           thread allow_ads_reset(0.25);

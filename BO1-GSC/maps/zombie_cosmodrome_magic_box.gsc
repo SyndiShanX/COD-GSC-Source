@@ -77,10 +77,10 @@ cosmodrome_collision_fix() {
   collision Hide();
 }
 cosmodrome_maintenance_respawn_fix() {
-  respawn_points = GetStructArray("player_respawn_point", "targetname");
+  respawn_points = getStructArray("player_respawn_point", "targetname");
   for(i = 0; i < respawn_points.size; i++) {
     if(respawn_points[i].script_noteworthy == "storage_lander_zone") {
-      respawn_positions = GetStructArray(respawn_points[i].target, "targetname");
+      respawn_positions = getStructArray(respawn_points[i].target, "targetname");
       for(j = 0; j < respawn_positions.size; j++) {
         if(isDefined(respawn_positions[j].script_int) && respawn_positions[j].script_int == 1 && respawn_positions[j].origin[0] == -159.5) {
           respawn_positions[j].origin = (-159.5, -1292.7, -119);

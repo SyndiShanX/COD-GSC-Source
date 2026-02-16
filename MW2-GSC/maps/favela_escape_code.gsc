@@ -36,7 +36,7 @@ triggered_hostile_bursts_setup() {
       continue;
     }
 
-    orgs = GetStructArray(trig.target, "targetname");
+    orgs = getStructArray(trig.target, "targetname");
 
     foreach(org in orgs) {
       if(isDefined(org.script_noteworthy) && org.script_noteworthy == "hostile_burst") {
@@ -463,7 +463,7 @@ radiotower_enemy_vehicles_badplaces() {
   self waitfor_some_speed();
 
   refs = [];
-  refs = GetStructArray("struct_radiotower_vehicle1_road_badplaceRef", "targetname");
+  refs = getStructArray("struct_radiotower_vehicle1_road_badplaceRef", "targetname");
   refs[refs.size] = GetStruct("struct_radiotower_vehicle1_donut_badplaceRef", "targetname");
 
   names = [];
@@ -1295,7 +1295,7 @@ market_evac_enemy_foreshadowing() {
   lineWaitMin = 8;
   lineWaitMax = 13;
 
-  spots = GetStructArray("struct_market_evac_foreshadow_dialoguespot", "targetname");
+  spots = getStructArray("struct_market_evac_foreshadow_dialoguespot", "targetname");
   playOrg = spawn("script_origin", (0, 0, 0));
 
   wait(RandomFloat(firstWaitMax));
@@ -1328,7 +1328,7 @@ market_evac_enemy_foreshadowing() {
 }
 
 market_evac_fakefire_smallarms() {
-  spots = GetStructArray("market_evac_ambush_rpg_firespot", "targetname");
+  spots = getStructArray("market_evac_ambush_rpg_firespot", "targetname");
   array_thread(spots, ::fakefire_smallarms_spot, "market_evac_chopper_leaves_scene");
 }
 
@@ -1404,7 +1404,7 @@ fakefire_smallarms_spot(flagname) {
 }
 
 market_evac_fakefire_rpgs() {
-  allSpots = GetStructArray("market_evac_ambush_rpg_firespot", "targetname");
+  allSpots = getStructArray("market_evac_ambush_rpg_firespot", "targetname");
 
   // the ones with script_start set should go first
   fireSpots = [];
@@ -3303,7 +3303,7 @@ player_bullet_whizby_trig() {
   shotWaitMax = 0.1;
 
   // either target a bunch of spots (for random squibs), //or just one spot that targets a line of spots (for ordered squibs)
-  squibs = GetStructArray(self.target, "targetname");
+  squibs = getStructArray(self.target, "targetname");
   if(squibs.size == 1) {
     squibs = get_targeted_line_array(squibs[0]);
   }
@@ -3359,7 +3359,7 @@ get_targeted_line_array(start) {
 }
 
 player_bullet_whizby_location_trig() {
-  spots = GetStructArray(self.target, "targetname");
+  spots = getStructArray(self.target, "targetname");
   ASSERT(spots.size);
 
   while(1) {
@@ -3491,7 +3491,7 @@ solorun_rooftop_chopper_fakefire() {
 }
 
 solorun_rooftop_chopper_fakefire_trig() {
-  spots = GetStructArray(self.target, "targetname");
+  spots = getStructArray(self.target, "targetname");
 
   self waittill("trigger");
 
@@ -3634,7 +3634,7 @@ solorun_chopperjump(waitBeforeJump) {
   jumpForward = anglesToForward((0, 90, 0));
   thread player_jump_watcher();
 
-  altLookSpots = GetStructArray("struct_chopperjump_alt_lookspot", "targetname");
+  altLookSpots = getStructArray("struct_chopperjump_alt_lookspot", "targetname");
   ASSERT(altLookSpots.size);
 
   while(1) {
@@ -4563,7 +4563,7 @@ warp_friends_and_player(str) {
   level.friends = array_removeundefined(level.friends);
   level.friends = array_removedead(level.friends);
 
-  friendSpots = GetStructArray(str, "targetname");
+  friendSpots = getStructArray(str, "targetname");
   playerSpot = GetStruct(str + "_player", "targetname");
 
   ASSERT(friendSpots.size >= level.friends.size);

@@ -17,7 +17,7 @@ main() {
   level thread init_doll_eggs();
 }
 power_clangs() {
-  clangs = getstructarray("amb_power_clang", "targetname");
+  clangs = getStructArray("amb_power_clang", "targetname");
   if(clangs.size) {}
   for(i = 0; i < clangs.size; i++) {
     playsoundatposition("zmb_circuit", clangs[i].origin);
@@ -62,7 +62,7 @@ play_gersh_vox(alias) {
   }
 }
 play_initial_alarm() {
-  structs = getstructarray("amb_warning_siren", "targetname");
+  structs = getStructArray("amb_warning_siren", "targetname");
   for(i = 0; i < structs.size; i++) {
     playsoundatposition("evt_cosmo_alarm_single", structs[i].origin);
   }
@@ -98,7 +98,7 @@ activate_radio_egg(num) {
   while(1) {
     radio_trig waittill("trigger", who);
     while(who IsTouching(radio_trig)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         radio_trig.completed = true;
         break;
       }
@@ -142,7 +142,7 @@ teddybear_egg_wait() {
   while(1) {
     teddybear_trig waittill("trigger", who);
     while(who IsTouching(teddybear_trig)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         teddybear_trig.completed = true;
         break;
       }
@@ -219,7 +219,7 @@ wait_for_redphone_trigger(ring_time) {
       return false;
     }
     while(who IsTouching(redphone_trig)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         level notify("redphone_egg_end_failsafe");
         redphone_trig Delete();
         looper Delete();

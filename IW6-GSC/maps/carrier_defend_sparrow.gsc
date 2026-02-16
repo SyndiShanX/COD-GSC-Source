@@ -297,7 +297,7 @@ destroyer_mg_monitor() {
 
 destroyer_mg_fire() {
   level endon("defend_sparrow_finished");
-  var_0 = common_scripts\utility::getstructarray("destroyer4_mg_fire", "targetname");
+  var_0 = common_scripts\utility::getStructArray("destroyer4_mg_fire", "targetname");
   var_1 = common_scripts\utility::getclosest(self.origin, var_0);
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
   var_3 = common_scripts\utility::getstruct(var_1.target, "targetname");
@@ -316,7 +316,7 @@ destroyer_mg_fire() {
 
 destroyer_ac130_exchange() {
   level endon("defend_sparrow_finished");
-  var_0 = common_scripts\utility::getstructarray("destroyer_ac130_fire", "targetname");
+  var_0 = common_scripts\utility::getStructArray("destroyer_ac130_fire", "targetname");
   var_1 = level.destroyer_target;
 
   for(;;) {
@@ -440,7 +440,7 @@ heli_background_attack_mg() {
   self endon("heli_attack_mg_stop");
   common_scripts\utility::array_call(self.mgturret, ::turretfiredisable);
   common_scripts\utility::array_call(self.mgturret, ::setmode, "manual");
-  var_0 = common_scripts\utility::getstructarray("sparrow_heli_background_attack", "targetname");
+  var_0 = common_scripts\utility::getStructArray("sparrow_heli_background_attack", "targetname");
   var_1 = common_scripts\utility::spawn_tag_origin();
   thread self_cleanup(var_1);
 

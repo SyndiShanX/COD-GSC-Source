@@ -71,7 +71,7 @@ onanyplayerspawned() {
 }
 
 startarksidequest() {
-  var_0 = common_scripts\utility::getstructarray("power_switch", "targetname");
+  var_0 = common_scripts\utility::getStructArray("power_switch", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_flag) && var_2.script_flag == "zomboni_room") {
@@ -1432,7 +1432,7 @@ zmplayeraltteleport(var_0, var_1, var_2) {
     return 1;
   } else if(isDefined(var_3) && ispointinvolume(var_0, var_3)) {
     if(!common_scripts\utility::flag("zomboni_room") && !isDefined(level.zmplayerinzomboniroom)) {
-      var_7 = common_scripts\utility::getstructarray("zomboni_room_teleport", "targetname");
+      var_7 = common_scripts\utility::getStructArray("zomboni_room_teleport", "targetname");
 
       foreach(var_9 in var_7) {
         if(capsuletracepassed(var_9.origin + (0, 0, 5), 15, 60, self, 1)) {
@@ -1465,7 +1465,7 @@ playerinzomboniroom(var_0) {
   wait 5;
 
   if(isDefined(self)) {
-    var_1 = common_scripts\utility::getstructarray("zomboni_teleport_out", "targetname");
+    var_1 = common_scripts\utility::getStructArray("zomboni_teleport_out", "targetname");
     var_2 = [];
 
     foreach(var_4 in var_1) {
@@ -1570,7 +1570,7 @@ stage2_logic() {
       var_9 playertakeitem("code");
       var_1++;
       var_10 = var_1 + 1;
-      var_11 = common_scripts\utility::getstructarray("sqEngineRoomDoorFx" + var_10, "targetname");
+      var_11 = common_scripts\utility::getStructArray("sqEngineRoomDoorFx" + var_10, "targetname");
 
       foreach(var_13 in var_11) {
         level thread turnondoorfx(var_13);
@@ -1680,7 +1680,7 @@ alldoorlights() {
   level.sqdoorfx = [];
 
   for(var_0 = 1; var_0 <= 5; var_0++) {
-    var_1 = common_scripts\utility::getstructarray("sqEngineRoomDoorFx" + var_0, "targetname");
+    var_1 = common_scripts\utility::getStructArray("sqEngineRoomDoorFx" + var_0, "targetname");
 
     foreach(var_3 in var_1) {
       var_3.fx = spawn("script_model", var_3.origin);
@@ -1941,9 +1941,9 @@ code1_stage1_end(var_0) {
 runteleportmachine() {
   level.sqtreasurefound = 0;
   level.sqtreasurepickedup = 0;
-  var_0 = common_scripts\utility::getstructarray("sqIslandTeleport", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("sqIslandTeleport", "script_noteworthy");
   var_1 = common_scripts\utility::getstruct("sqTeleportMachineUse", "targetname");
-  level.zmbsqteleportbackspots = common_scripts\utility::getstructarray("sqTeleportBack", "targetname");
+  level.zmbsqteleportbackspots = common_scripts\utility::getStructArray("sqTeleportBack", "targetname");
   var_2 = getent("sqTeleporterLights", "targetname");
   var_3 = getEntArray("sqTeleportLight", "targetname");
 
@@ -1951,7 +1951,7 @@ runteleportmachine() {
     return;
   }
   if(!isDefined(level.sqtreasure)) {
-    var_4 = common_scripts\utility::getstructarray("sqIslandDigPos", "targetname");
+    var_4 = common_scripts\utility::getStructArray("sqIslandDigPos", "targetname");
     level.sqtreasure = var_4[randomint(var_4.size)];
     var_5 = bulletTrace(level.sqtreasure.origin + (0, 0, 200), level.sqtreasure.origin + (0, 0, -200), 0);
     level.sqtreasure.origin = var_5["position"];
@@ -2293,7 +2293,7 @@ playerdig() {
         self.digprompt.usable = 1;
       }
 
-      if(self usebuttonpressed()) {
+      if(self useButtonPressed()) {
         self.digprompt makeglobalunusable();
         self.digprompt.usable = 0;
         var_4 = var_3["position"];
@@ -3527,7 +3527,7 @@ code4_stage1_init() {
 
 findsqplinkohint() {
   level.zmbfindgamblecustomvo = ::doplayerfoundplinkosq;
-  var_0 = common_scripts\utility::getstructarray("plinko", "targetname");
+  var_0 = common_scripts\utility::getStructArray("plinko", "targetname");
 
   foreach(var_2 in var_0) {
     level thread maps\mp\zombies\_gambling::discoverplinkologic(var_2);

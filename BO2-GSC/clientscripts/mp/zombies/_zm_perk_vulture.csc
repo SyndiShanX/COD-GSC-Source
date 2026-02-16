@@ -481,7 +481,7 @@ vulture_vision_init(localclientnumber, b_first_run) {
     level.perk_vulture.vulture_vision.custom = [];
     vulture_vision_update_wallbuy_list(localclientnumber, b_first_run);
     setup_perk_machine_fx();
-    a_perk_machines = getstructarray("zm_perk_machine", "targetname");
+    a_perk_machines = getStructArray("zm_perk_machine", "targetname");
 
     foreach(struct in a_perk_machines)
     level.perk_vulture.vulture_vision.perk_machines[struct.script_noteworthy] = struct;

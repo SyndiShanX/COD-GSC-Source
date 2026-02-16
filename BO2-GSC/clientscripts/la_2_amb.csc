@@ -173,7 +173,7 @@ health_warnings() {
 
 cleanup_ground_emitters() {
   level waittill("sgc");
-  ground_battles = getstructarray("amb_fadeup_disaster_sirens", "targetname");
+  ground_battles = getStructArray("amb_fadeup_disaster_sirens", "targetname");
 
   if(isDefined(ground_battles)) {
     for(i = 0; i < ground_battles.size; i++) {
@@ -181,7 +181,7 @@ cleanup_ground_emitters() {
     }
   }
 
-  amb_ground_battle_loopers = getstructarray("amb_fadeup_battle", "targetname");
+  amb_ground_battle_loopers = getStructArray("amb_fadeup_battle", "targetname");
 
   if(isDefined(amb_ground_battle_loopers)) {
     for(i = 0; i < amb_ground_battle_loopers.size; i++) {

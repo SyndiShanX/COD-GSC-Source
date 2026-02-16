@@ -258,7 +258,7 @@ resettrapcooldownseachwave() {
 hackfxfan() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("fx_fan", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fx_fan", "targetname");
   foreach(var_2 in var_0) {
     var_3 = spawnfx(level._effect["vfx_fan_hack"], var_2.origin, anglesToForward(var_2.angles), anglestoup(var_2.angles));
     triggerfx(var_3);
@@ -494,7 +494,7 @@ show_wheel_location(var_0) {
 }
 
 get_location_struct(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("mw_topdown_locs", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("mw_topdown_locs", "targetname");
   if(var_1.size == 0) {
     return undefined;
   }
@@ -666,7 +666,7 @@ streamweaponsonzonechange(var_0) {
   var_0 scripts\engine\utility::waittill_any_timeout(10, "player_spawned");
   scripts\engine\utility::flag_wait("wall_buy_setup_done");
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_4 in var_2) {
     if(isDefined(var_4.name) && var_4.name == "wall_buy") {
       var_1[var_1.size] = var_4;
@@ -735,7 +735,7 @@ cp_final_event_wave_init() {
 
 init_final_spawner_locations() {
   level.goon_spawners = [];
-  var_0 = scripts\engine\utility::getstructarray("dog_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("dog_spawner", "targetname");
   if(isDefined(level.goon_spawner_patch_func)) {
     [[level.goon_spawner_patch_func]](var_0);
   }
@@ -1613,7 +1613,7 @@ removeinvalidstructs(var_0, var_1) {
     }
 
     if(isDefined(var_4.target)) {
-      var_5 = scripts\engine\utility::getstructarray(var_4.var_336, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.var_336, "targetname");
       foreach(var_7 in var_5) {
         if(isDefined(var_7.target) && var_7.target == var_4.target) {
           var_0 = scripts\engine\utility::array_remove(var_0, var_7);
@@ -2149,7 +2149,7 @@ cp_final_introscreen_text() {
 
 init_wall_buys_array() {
   level.wall_buy_interactions = [];
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.name) && var_2.name == "wall_buy") {
       level.wall_buy_interactions[level.wall_buy_interactions.size] = var_2;
@@ -2213,7 +2213,7 @@ cp_final_slasher_loot_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 }
 
 nudge_turret_interaction() {
-  var_0 = scripts\engine\utility::getstructarray("rhino_sentry", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("rhino_sentry", "targetname");
   var_1 = scripts\engine\utility::getclosest((2913, 2313, -26), var_0);
   var_1.origin = var_1.origin + (-16, 0, -4);
 }

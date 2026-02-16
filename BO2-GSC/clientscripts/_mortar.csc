@@ -369,7 +369,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
 
   while(num_points == 0) {
     explosion_points = getEntArray(0, mortar_name, "targetname");
-    explosion_points_structs = getstructarray(mortar_name, "targetname");
+    explosion_points_structs = getStructArray(mortar_name, "targetname");
     num_points = explosion_points.size + explosion_points_structs.size;
     wait 0.5;
   }
@@ -386,7 +386,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
     dust_name = level._explosion_dust_name[mortar_name];
     dust_points = getEntArray(0, dust_name, "targetname");
     dust_points_structs = [];
-    dust_points_structs = getstructarray(dust_name, "targetname");
+    dust_points_structs = getStructArray(dust_name, "targetname");
 
     for(i = 0; i < dust_points_structs.size; i++) {
       dust_points_structs[i].is_struct = 1;

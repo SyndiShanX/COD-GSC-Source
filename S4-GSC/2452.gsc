@@ -217,7 +217,7 @@ _id_396D(var_0) {
 }
 
 _id_6304(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("afterlife_arcade", "targetname");
 
   if(isDefined(level._id_10CC)) {
     var_1 = scripts\engine\utility::array_combine(var_1, level._id_10CC);

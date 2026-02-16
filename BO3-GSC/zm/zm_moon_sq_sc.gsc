@@ -82,7 +82,7 @@ function sam_reveal_richtofen_vox() {
 }
 
 function room_sweeper() {
-  while(!zombie_utility::is_player_valid(self) || (self usebuttonpressed() && self zm_utility::in_revive_trigger())) {
+  while(!zombie_utility::is_player_valid(self) || (self useButtonPressed() && self zm_utility::in_revive_trigger())) {
     wait(1);
   }
   level thread zm_powerup_weapon_minigun::minigun_weapon_powerup(self, 90);

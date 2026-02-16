@@ -1793,7 +1793,7 @@ function player_noire_ee() {
   var_3acf33ec = 0;
   while(!var_3acf33ec) {
     if(self getstance() == "crouch") {
-      if(self reloadbuttonpressed()) {
+      if(self reloadbuttonPressed()) {
         n_dist = distance(self.origin, s_start.origin);
         if(n_dist < 85) {
           v_forward = self getweaponforwarddir();

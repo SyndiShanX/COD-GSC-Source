@@ -243,7 +243,7 @@ helicopter_crash_movement(point, dir) {
     }
   }
 
-  crash_zones = getstructarray("heli_crash_zone", "targetname");
+  crash_zones = getStructArray("heli_crash_zone", "targetname");
 
   if(crash_zones.size > 0) {
     best_dist = 99999;

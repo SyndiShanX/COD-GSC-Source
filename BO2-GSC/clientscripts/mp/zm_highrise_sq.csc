@@ -20,7 +20,7 @@ sq_play_maxis_vo(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   if(binitialsnap) {
     return;
   }
-  a_maxis_vo_structs = getstructarray("sq_maxis_vo_loc", "targetname");
+  a_maxis_vo_structs = getStructArray("sq_maxis_vo_loc", "targetname");
 
   if(a_maxis_vo_structs.size < 3) {
     return;

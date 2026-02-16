@@ -375,7 +375,7 @@ setup_chaos_collision() {
 
 handle_dead_bodies() {
   level.dead_bodies = [];
-  var_0 = common_scripts\utility::getstructarray("chaos_body_a", "targetname");
+  var_0 = common_scripts\utility::getStructArray("chaos_body_a", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
@@ -383,7 +383,7 @@ handle_dead_bodies() {
     var_3 setModel("fed_army_corpse_a");
   }
 
-  var_0 = common_scripts\utility::getstructarray("chaos_body_b", "targetname");
+  var_0 = common_scripts\utility::getStructArray("chaos_body_b", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
@@ -391,7 +391,7 @@ handle_dead_bodies() {
     var_3 setModel("fed_army_corpse_b");
   }
 
-  var_0 = common_scripts\utility::getstructarray("chaos_body_c", "targetname");
+  var_0 = common_scripts\utility::getStructArray("chaos_body_c", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
@@ -2005,7 +2005,7 @@ dieing_revival() {
   var_0 = common_scripts\utility::getstruct("chaos_dieing_patient_loc", "targetname");
   var_1 = common_scripts\utility::getstruct("chaos_dead_patient_loc", "targetname");
   var_2 = common_scripts\utility::getstruct("chaos_doctor_loc", "targetname");
-  var_3 = common_scripts\utility::getstructarray("chaos_dead_patient_mdloc", "targetname");
+  var_3 = common_scripts\utility::getStructArray("chaos_dead_patient_mdloc", "targetname");
   var_4 = maps\_utility::spawn_targetname("chaos_dieing_doctor");
   var_5 = maps\_utility::spawn_targetname("chaos_dieing_patient");
   var_4.animname = "generic";

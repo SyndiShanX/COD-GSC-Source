@@ -245,7 +245,7 @@ reset_trap_uses_each_round() {
 init_hidden_song_quest() {
   level.toys_found = 0;
   level.hidden_toys = [];
-  var_0 = scripts\engine\utility::getstructarray("hidden_song_toy", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("hidden_song_toy", "targetname");
   var_1 = scripts\engine\utility::array_randomize(var_0);
   var_2 = 5;
   for(var_3 = 0; var_3 < var_2; var_3++) {
@@ -540,7 +540,7 @@ free_ents_for_createfx() {
 }
 
 remove_escape_entities() {
-  var_0 = scripts\engine\utility::getstructarray("escape_exit", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("escape_exit", "script_noteworthy");
   if(isDefined(var_0)) {
     foreach(var_2 in var_0) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
@@ -593,7 +593,7 @@ player_down_slide(var_0) {
   self endon("disconnect");
   self.is_slide_sfx_playing = 0;
   self.is_slide_land_sfx_playing = 0;
-  var_1 = scripts\engine\utility::getclosest(self.origin, scripts\engine\utility::getstructarray("slide_start_spot", "targetname"));
+  var_1 = scripts\engine\utility::getclosest(self.origin, scripts\engine\utility::getStructArray("slide_start_spot", "targetname"));
   var_2 = scripts\engine\utility::getstruct(var_1.target, "targetname");
   if(distance2dsquared(self.origin, var_1.origin) > 65536) {
     while(self istouching(var_0)) {
@@ -1162,7 +1162,7 @@ update_team_door_buy_on_spawn() {
     return;
   }
 
-  var_0 = scripts\engine\utility::getstructarray("team_door_switch", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("team_door_switch", "script_noteworthy");
   var_1 = 0;
   var_2 = 0;
   var_3 = 0;
@@ -1296,7 +1296,7 @@ knock_off_battery(var_0) {
 geysers_and_boatride() {
   level waittill("swamp_stage power_on");
   level thread boat_ride();
-  var_0 = scripts\engine\utility::getstructarray("geyser", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("geyser", "targetname");
   foreach(var_2 in var_0) {
     thread scripts\engine\utility::play_loopsound_in_space("trap_geyser_idle_lp", var_2.origin);
     playFX(level._effect["geyser_splash_lg"], var_2.origin);
@@ -1330,7 +1330,7 @@ geyser_sequence() {
 }
 
 get_geyser(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("geyser", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("geyser", "targetname");
   foreach(var_3 in var_1) {
     if(var_3.script_noteworthy == var_0) {
       return var_3;
@@ -1442,7 +1442,7 @@ launch_player_to_kepler(var_0, var_1) {
   self playerlinkto(self.anchor);
   thread unset_player_flung(2);
   playfxontagforclients(level._effect["geyser_fullscreen_fx"], self, "tag_eye", self);
-  var_2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
   var_3 = scripts\engine\utility::random(var_2);
   thread handle_host_migration_during_launch();
   thread watch_player_landing(var_1, var_0);
@@ -1462,7 +1462,7 @@ launch_player_to_kepler(var_0, var_1) {
       break;
     }
 
-    var_2 = scripts\engine\utility::getstructarray(var_3.target, "targetname");
+    var_2 = scripts\engine\utility::getStructArray(var_3.target, "targetname");
     var_3 = scripts\engine\utility::random(var_2);
   }
 
@@ -1877,7 +1877,7 @@ gator_tooth_broken() {
   level.gator_mouth_door unlink();
   level.gator_mouth_door playSound("croc_trap_door_open");
   level.gator_mouth_door moveto(level.gator_mouth_door.origin + (0, 0, -200), 2);
-  var_0 = scripts\engine\utility::getstructarray("gator_door_dust", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("gator_door_dust", "targetname");
   if(var_0.size > 0) {
     var_0 = scripts\engine\utility::array_randomize(var_0);
     foreach(var_2 in var_0) {
@@ -1981,7 +1981,7 @@ gator_mouth_activation_func(var_0, var_1) {
       var_3 show();
     }
 
-    var_5 = scripts\engine\utility::getstructarray("gator_teeth_placement", "script_noteworthy");
+    var_5 = scripts\engine\utility::getStructArray("gator_teeth_placement", "script_noteworthy");
     foreach(var_7 in var_5) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_7);
     }
@@ -2272,7 +2272,7 @@ setup_generic_zombie_model_list() {
 
 post_nondeterministic_func() {
   wait(10);
-  var_0 = scripts\engine\utility::getstructarray("team_door_switch", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("team_door_switch", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = getEntArray(var_2.target, "targetname");
     foreach(var_5 in var_3) {
@@ -2561,7 +2561,7 @@ cp_zmb_goon_spawner_patch_func(var_0) {
 }
 
 cp_zmb_interaction_struct_adjustment(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     var_3.origin = var_3.origin + anglesToForward(var_3.angles) * 2;
   }
@@ -2778,7 +2778,7 @@ zmb_start_direct_boss_fight_func() {
 }
 
 disable_n3il_head_pickup() {
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   var_1 = [];
   foreach(var_3 in var_0) {
     if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "neil_head") {

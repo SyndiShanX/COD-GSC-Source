@@ -411,7 +411,7 @@ wait_for_start_trigger(var_0, var_1) {
     }
 
     if(var_4) {
-      var_8 = scripts\engine\utility::getstructarray(var_1 + "_symbol", "targetname");
+      var_8 = scripts\engine\utility::getStructArray(var_1 + "_symbol", "targetname");
       display_symbols(var_8, 2);
       continue;
     }
@@ -427,13 +427,13 @@ wait_for_start_trigger(var_0, var_1) {
 
 hide_kev() {
   level.survivor hide();
-  var_0 = scripts\engine\utility::getstructarray("survivor_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("survivor_interaction", "script_noteworthy");
   scripts\cp\cp_interaction::disable_like_interactions(var_0[0]);
 }
 
 show_kev() {
   level.survivor show();
-  var_0 = scripts\engine\utility::getstructarray("survivor_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("survivor_interaction", "script_noteworthy");
   scripts\cp\cp_interaction::enable_like_interactions(var_0[0]);
 }
 

@@ -775,7 +775,7 @@ class csceneobject {
   }
 
   function function_376c9d87(var_ec50a0d3, n_movement, player) {
-    if(player adsbuttonpressed()) {
+    if(player adsButtonPressed()) {
       return _str_current_anim;
     }
 

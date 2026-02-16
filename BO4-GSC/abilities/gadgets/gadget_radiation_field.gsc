@@ -538,15 +538,15 @@ function_579fff1b() {
   wait isDefined(player.gadget_weapon.var_1123a989 / 1000) ? player.gadget_weapon.var_1123a989 / 1000 : 0.5;
 
   if(player function_d79b93e(player.gadget_weapon.var_44c79c09)) {
-    waspressed = player fragbuttonpressed();
+    waspressed = player fragButtonPressed();
 
     for(var_5aea88c3 = waspressed;
-      (!var_5aea88c3 || waspressed) && player function_ff04e054(); var_5aea88c3 = player fragbuttonpressed()) {
+      (!var_5aea88c3 || waspressed) && player function_ff04e054(); var_5aea88c3 = player fragButtonPressed()) {
       waitframe(1);
       waspressed = var_5aea88c3;
     }
   } else {
-    while(player fragbuttonpressed()) {
+    while(player fragButtonPressed()) {
       waitframe(1);
     }
   }

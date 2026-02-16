@@ -33,7 +33,7 @@ main_thread() {
 teleport_init() {
   level.teleport_spawn_info = [];
 
-  zones = getStructarray("teleport_world_origin", "targetname");
+  zones = getStructArray("teleport_world_origin", "targetname");
   if(!zones.size) {
     return;
   }
@@ -261,7 +261,7 @@ teleport_onStartGameSOTF() {
     zone.sotf_chest_spawnpoints = [];
   }
 
-  sotf_chest_spawnpoints = getstructarray("sotf_chest_spawnpoint", "targetname");
+  sotf_chest_spawnpoints = getStructArray("sotf_chest_spawnpoint", "targetname");
   foreach(point in sotf_chest_spawnpoints) {
     closest_zone = teleport_closest_zone(point.origin);
     if(isDefined(closest_zone)) {
@@ -360,7 +360,7 @@ teleport_onStartGameHORDE() {
     zone.horde_drops = [];
   }
 
-  hordeDropLocations = getstructarray("horde_drop", "targetname");
+  hordeDropLocations = getStructArray("horde_drop", "targetname");
   foreach(loc in hordeDropLocations) {
     closest_zone = teleport_closest_zone(loc.origin);
     if(isDefined(closest_zone)) {
@@ -715,10 +715,10 @@ teleport_parse_zone_targets(zone) {
   zone.teleport_origins["allies"] = [];
   zone.teleport_origins["axis"] = [];
 
-  structs = getstructarray("teleport_zone_" + zone.name, "targetname");
+  structs = getStructArray("teleport_zone_" + zone.name, "targetname");
 
   if(isDefined(zone.target)) {
-    zone_targets = getstructarray(zone.target, "targetname");
+    zone_targets = getStructArray(zone.target, "targetname");
     structs = array_combine(zone_targets, structs);
   }
 
@@ -1181,7 +1181,7 @@ teleport_add_delta_targets(ent, delta) {
   teleport_add_delta(ent, delta);
   if(isDefined(ent.target)) {
     ents = getEntArray(ent.target, "targetname");
-    structs = getstructarray(ent.target, "targetname");
+    structs = getStructArray(ent.target, "targetname");
     targets = array_combine(ents, structs);
     array_levelthread(targets, ::teleport_add_delta_targets, delta);
   }

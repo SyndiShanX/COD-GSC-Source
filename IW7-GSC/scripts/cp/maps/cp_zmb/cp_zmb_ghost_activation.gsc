@@ -745,7 +745,7 @@ wait_for_player_activation() {
         break;
       }
 
-      if(!var_6 usebuttonpressed()) {
+      if(!var_6 useButtonPressed()) {
         var_4 = 0;
         break;
       }
@@ -770,7 +770,7 @@ wait_for_player_activation() {
           break;
         }
 
-        if(!var_6 usebuttonpressed()) {
+        if(!var_6 useButtonPressed()) {
           var_4 = 0;
           break;
         }

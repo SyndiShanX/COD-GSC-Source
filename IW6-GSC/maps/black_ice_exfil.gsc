@@ -646,7 +646,7 @@ exfil_heli_spotlight() {
 
 fires() {
   var_0 = ["exfil_fire"];
-  var_1 = common_scripts\utility::getstructarray("struct_exfil_fires", "targetname");
+  var_1 = common_scripts\utility::getStructArray("struct_exfil_fires", "targetname");
 
   foreach(var_3 in var_1)
   playFX(common_scripts\utility::getfx(common_scripts\utility::random(var_0)), var_3.origin + (0, 0, -200));
@@ -731,7 +731,7 @@ ladder_player_jumpcheck() {
   var_5 linkto(level.player);
 
   while(!common_scripts\utility::flag("flag_ladder_jump")) {
-    if(level.player jumpbuttonpressed()) {
+    if(level.player jumpbuttonPressed()) {
       if(var_0)
         var_1 = 1;
       else

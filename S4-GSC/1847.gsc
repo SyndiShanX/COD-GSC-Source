@@ -18,7 +18,7 @@ init() {
 
   level._id_8393 = [];
   level._id_835D = [];
-  level._id_146C = scripts\engine\utility::getstructarray("interaction", "targetname");
+  level._id_146C = scripts\engine\utility::getStructArray("interaction", "targetname");
   level._id_417B = level._id_146C;
   level._id_10CFC = ::_id_459E;
   level thread _id_8386();
@@ -84,7 +84,7 @@ init() {
 
   for(var_4 = 0; var_4 < var_3.size; var_4++) {
     if(isDefined(level._id_8393[var_3[var_4]]._id_7F8B)) {
-      var_5 = scripts\engine\utility::getstructarray(var_3[var_4], "script_noteworthy");
+      var_5 = scripts\engine\utility::getStructArray(var_3[var_4], "script_noteworthy");
       level thread[[level._id_8393[var_3[var_4]]._id_7F8B]](var_5);
     }
   }
@@ -95,7 +95,7 @@ init() {
     }
     if(isDefined(var_1._id_CDC1)) {
       if(isDefined(var_1.target)) {
-        var_7 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+        var_7 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
         foreach(var_9 in var_7) {
           if(!isDefined(var_9._id_039B) || tolower(var_9._id_039B) != "scenenode" && tolower(var_9._id_039B) != "manual_script_model") {
@@ -273,7 +273,7 @@ _id_C266(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, v
   var_16.hinttype = undefined;
   var_16.hint_type_func = undefined;
   level._id_8393[var_0] = var_16;
-  var_17 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_17 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
   if(scripts\engine\utility::is_equal(var_8, 1)) {
     level thread add_interaction_markers(var_17, var_0, var_9, var_11);
@@ -484,7 +484,7 @@ _id_3106(var_0) {
     return 0;
   }
 
-  if(self secondaryoffhandbuttonpressed() || self _meth_81EF() || self fragbuttonpressed()) {
+  if(self secondaryoffhandbuttonPressed() || self _meth_81EF() || self fragButtonPressed()) {
     return 0;
   }
 
@@ -1096,7 +1096,7 @@ _id_46B9() {
 }
 
 _id_1160(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     _id_1037(var_3);
@@ -1104,7 +1104,7 @@ _id_1160(var_0) {
 }
 
 _id_C4AB(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     _id_C3C5(var_3);
@@ -1512,7 +1512,7 @@ _id_835A(var_0, var_1, var_2, var_3) {
 }
 
 _id_8355(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0._id_039B, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_0._id_039B, "script_noteworthy");
 
   foreach(var_4 in var_2) {
     if(var_4.target == var_0.target) {
@@ -1558,7 +1558,7 @@ _id_C1A2() {
 }
 
 _id_4A68() {
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_2 in var_0) {
     if(_id_836F(var_2) || _id_8367(var_2) || _id_836C(var_2) || isDefined(var_2._id_CE18) && var_2._id_CE18 == "tickets") {

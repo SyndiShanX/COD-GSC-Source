@@ -224,7 +224,7 @@ _id_BD70(var_0) {
     var_3 = (int(var_2[0]), int(var_2[1]), int(var_2[2]));
   } else if(var_2.size == 2) {
     if(isDefined(level._id_EA70[var_2[1]]) && isDefined(level._id_EA70[var_2[1]][var_2[0]])) {
-      var_3 = scripts\engine\utility::getstructarray(var_2[0], var_2[1]);
+      var_3 = scripts\engine\utility::getStructArray(var_2[0], var_2[1]);
     } else {
       var_3 = getent(var_2[0], var_2[1]);
     }
@@ -2084,7 +2084,7 @@ _id_3EDC(var_0, var_1, var_2, var_3) {
   var_4 = spawnStruct();
   var_4._id_E83C = [];
   var_4._id_E83D = [];
-  var_5 = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray(var_1, "script_noteworthy");
 
   if(var_5.size <= 0) {
     return undefined;

@@ -8,7 +8,7 @@ _id_C9BA() {
     return;
   }
   var_0 = scripts\cp_mp\utility\game_utility::_id_6B2D() == "mp_red_star";
-  var_1 = scripts\engine\utility::array_randomize(scripts\engine\utility::getstructarray("mp_scripted_corpse_spawn", "targetname"));
+  var_1 = scripts\engine\utility::array_randomize(scripts\engine\utility::getStructArray("mp_scripted_corpse_spawn", "targetname"));
   var_2 = 0;
   scripts\engine\utility::_id_0FDC("deathfx_bloodpool_generic", "vfx/iw8/char/blood/vfx_deathfx_bloodpool_01.vfx");
 

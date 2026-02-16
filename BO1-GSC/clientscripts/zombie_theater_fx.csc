@@ -108,7 +108,7 @@ precache_createfx_fx() {
   level._effect["fx_quad_dust_roof"] = loadfx("maps/zombie/fx_zombie_crawler_dust_roof");
 }
 trap_fx_monitor(name, loc, trap_type) {
-  structs = getstructarray(name, "targetname");
+  structs = getStructArray(name, "targetname");
   points = [];
   for(i = 0; i < structs.size; i++) {
     if(!isDefined(structs[i].model)) {

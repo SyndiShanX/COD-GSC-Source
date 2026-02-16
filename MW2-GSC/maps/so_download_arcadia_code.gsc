@@ -18,7 +18,7 @@ STRYKER_SUPPRESSION_RADIUS = 1500 * 1500;
   level.downloadObjectiveIdx = objIdx;
   level.downloadsComplete = 0;
 
-  level.downloads = GetStructArray("download", "targetname");
+  level.downloads = getStructArray("download", "targetname");
 
   foreach(index, download in level.downloads) {
     download.objPos = index;

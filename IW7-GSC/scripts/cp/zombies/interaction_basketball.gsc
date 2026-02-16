@@ -4,7 +4,7 @@
 *********************************************************/
 
 init_basketball_game() {
-  var_0 = scripts\engine\utility::getstructarray("basketball_game", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("basketball_game", "script_noteworthy");
   var_1 = 4;
   var_2 = 7;
   foreach(var_4 in var_0) {
@@ -15,7 +15,7 @@ init_basketball_game() {
 }
 
 init_afterlife_basketball_game() {
-  var_0 = scripts\engine\utility::getstructarray("basketball_game_afterlife", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("basketball_game_afterlife", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread setup_basketball_game();
     wait(0.05);
@@ -103,7 +103,7 @@ move_hoop(var_0, var_1) {
 
   wait(randomintrange(1, 4));
   var_2 = self.origin;
-  var_3 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(self.target, "targetname");
   for(;;) {
     if(scripts\engine\utility::istrue(var_1) && var_0.powered_on == 0) {
       self moveto(var_2, 2);

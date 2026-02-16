@@ -107,7 +107,7 @@ class chackableobject {
       }
       m_e_hack_trigger sethintstring(m_str_hackable_hint);
       m_e_hack_trigger sethintlowpriority(1);
-      if(!e_triggerer usebuttonpressed()) {
+      if(!e_triggerer useButtonPressed()) {
         continue;
       }
       foreach(player in level.players) {
@@ -135,7 +135,7 @@ class chackableobject {
         n_hack_range_sq = n_user_dist_sq;
       }
       b_looking = 1;
-      while(n_start_time < n_hack_time && e_triggerer usebuttonpressed() && n_user_dist_sq <= n_hack_range_sq && b_looking) {
+      while(n_start_time < n_hack_time && e_triggerer useButtonPressed() && n_user_dist_sq <= n_hack_range_sq && b_looking) {
         n_start_time = n_start_time + 0.05;
         if(!isDefined(m_progress_bar)) {
           m_progress_bar = e_triggerer hud::createprimaryprogressbar();
@@ -159,7 +159,7 @@ class chackableobject {
         }
         self thread[[m_hack_complete_func]](e_triggerer);
       }
-      while(e_triggerer usebuttonpressed()) {
+      while(e_triggerer useButtonPressed()) {
         wait(0.1);
       }
     }

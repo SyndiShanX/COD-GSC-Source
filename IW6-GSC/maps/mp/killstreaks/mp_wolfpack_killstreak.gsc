@@ -77,7 +77,7 @@ spawnWolf(id) {
   spawnAngles = self.angles;
   agent.wolfId = id;
 
-  agent.pathNodeArray = getstructarray("wolf_path_0" + id, "script_noteworthy");
+  agent.pathNodeArray = getStructArray("wolf_path_0" + id, "script_noteworthy");
 
   agent thread[[agent agentFunc("spawn")]](spawnOrigin, spawnAngles, self);
 

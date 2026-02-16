@@ -9,11 +9,11 @@
 
 init() {
   init_maze_clientfields();
-  level._maze_structs = getstructarray("maze_blocker", "targetname");
+  level._maze_structs = getStructArray("maze_blocker", "targetname");
 }
 
 init_maze_clientfields() {
-  blocker_locations = getstructarray("maze_blocker", "targetname");
+  blocker_locations = getStructArray("maze_blocker", "targetname");
   level._maze_structs_indexed_for_callback = [];
 
   foreach(blocker in blocker_locations) {

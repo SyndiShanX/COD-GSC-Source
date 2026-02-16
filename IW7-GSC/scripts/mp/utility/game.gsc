@@ -2080,7 +2080,7 @@ create_lua_progress_bar(var_0, var_1) {
 }
 
 lua_progress_bar_think_loop(var_0, var_1, var_2, var_3, var_4) {
-  while(!level.gameended && isDefined(self) && isreallyalive(var_0) && (var_0 usebuttonpressed() || isDefined(var_3) || var_0 attackbuttonpressed() && isDefined(var_4)) && should_continue_progress_bar_think(var_0)) {
+  while(!level.gameended && isDefined(self) && isreallyalive(var_0) && (var_0 useButtonPressed() || isDefined(var_3) || var_0 attackButtonPressed() && isDefined(var_4)) && should_continue_progress_bar_think(var_0)) {
     wait 0.05;
 
     if(isDefined(var_1) && isDefined(var_2)) {

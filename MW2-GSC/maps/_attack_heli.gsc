@@ -347,7 +347,7 @@ heli_circling_think(heli_points, baseSpeed) {
 
   points = getEntArray(heli_points, "targetname");
   if(!isDefined(points) || (points.size < 1))
-    points = getstructarray(heli_points, "targetname");
+    points = getStructArray(heli_points, "targetname");
 
   Assert(isDefined(points));
 
@@ -368,7 +368,7 @@ heli_circling_think(heli_points, baseSpeed) {
     player_location = getClosest(playerOrigin, points);
     heli_locations = getEntArray(player_location.target, "targetname");
     if(!isDefined(heli_locations) || (heli_locations.size < 1))
-      heli_locations = getstructarray(player_location.target, "targetname");
+      heli_locations = getStructArray(player_location.target, "targetname");
     Assert(isDefined(heli_locations));
     goal = heli_locations[RandomInt(heli_locations.size)];
     heli SetVehGoalPos(goal.origin, 1);
@@ -503,7 +503,7 @@ heli_goal_think(baseSpeed) {
 player_is_aiming_with_rocket(eHeli) {
   if(!level.player usingAntiAirWeapon())
     return false;
-  if(!level.player AdsButtonPressed())
+  if(!level.player adsButtonPressed())
     return false;
   playerEye = level.player getEye();
   if(SightTracePassed(playerEye, eHeli.origin, false, level.player)) {
@@ -1627,7 +1627,7 @@ heli_fire_missiles(eTarget, iShots, delay, customMissiles) {
 
 boneyard_style_heli_missile_attack() {
   self waittill("trigger", vehicle);
-  struct_arr = getstructarray(self.target, "targetname");
+  struct_arr = getStructArray(self.target, "targetname");
   struct_arr = array_index_by_script_index(struct_arr);
 
   boneyard_fire_at_targets(vehicle, struct_arr);

@@ -164,7 +164,7 @@ func_906C() {
   self endon("stopped_pressing");
 
   while(isDefined(self) && isDefined(level.player)) {
-    if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
+    if(level.player useButtonPressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
       level.player.var_906B++;
     } else {
       setDvar("ui_securing", "");

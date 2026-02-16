@@ -125,7 +125,7 @@ deconstruct_fxanims() {
 }
 
 flyin_hide_cells() {
-  foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname")) {
+  foreach(s_cell in getStructArray("intro_flyin_cell_pos", "targetname")) {
     setcellinvisibleatpos(s_cell.origin);
   }
 }
@@ -137,7 +137,7 @@ flyin_show_cells() {
     setDvar("r_znear", level.n_znear_old);
   }
 
-  foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname")) {
+  foreach(s_cell in getStructArray("intro_flyin_cell_pos", "targetname")) {
     setcellvisibleatpos(s_cell.origin);
   }
 }

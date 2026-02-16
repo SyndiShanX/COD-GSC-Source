@@ -1133,15 +1133,15 @@ _id_9A64() {
   self endon("drop_object");
 
   for(;;) {
-    while(self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
+    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryoffhandbuttonPressed() || self meleeButtonPressed()) {
       wait 0.05;
     }
 
-    while(!self attackbuttonpressed() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryoffhandbuttonPressed() || self meleeButtonPressed()) {
       wait 0.05;
     }
 
-    if(isDefined(self._id_32EC) && !self usebuttonpressed()) {
+    if(isDefined(self._id_32EC) && !self useButtonPressed()) {
       self._id_32EC thread _id_D537();
     }
   }
@@ -3175,7 +3175,7 @@ _id_FEE0(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(!level._id_15CE && !var_0 usebuttonpressed(1)) {
+  if(!level._id_15CE && !var_0 useButtonPressed(1)) {
     return 0;
   }
 
@@ -3183,7 +3183,7 @@ _id_FEE0(var_0, var_1, var_2, var_3) {
     return 0;
   }
 
-  if(var_0 meleebuttonpressed()) {
+  if(var_0 meleeButtonPressed()) {
     return 0;
   }
 

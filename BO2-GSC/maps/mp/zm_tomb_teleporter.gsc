@@ -45,18 +45,18 @@ teleporter_init() {
   }
 
   level.a_teleport_exits = [];
-  a_exits = getstructarray("portal_exit", "script_noteworthy");
+  a_exits = getStructArray("portal_exit", "script_noteworthy");
 
   foreach(s_portal in a_exits)
   level.a_teleport_exits[s_portal.script_int] = s_portal;
 
   level.a_teleport_exit_triggers = [];
-  a_trigs = getstructarray("chamber_exit_trigger", "script_noteworthy");
+  a_trigs = getStructArray("chamber_exit_trigger", "script_noteworthy");
 
   foreach(s_trig in a_trigs)
   level.a_teleport_exit_triggers[s_trig.script_int] = s_trig;
 
-  a_s_teleporters = getstructarray("trigger_teleport_pad", "targetname");
+  a_s_teleporters = getStructArray("trigger_teleport_pad", "targetname");
   array_thread(a_s_teleporters, ::run_chamber_entrance_teleporter);
   spawn_stargate_fx_origins();
   root = % root;
@@ -272,7 +272,7 @@ stargate_play_fx() {
 }
 
 spawn_stargate_fx_origins() {
-  a_teleport_positions = getstructarray("teleport_room", "script_noteworthy");
+  a_teleport_positions = getStructArray("teleport_room", "script_noteworthy");
 
   foreach(s_teleport in a_teleport_positions) {
     v_fx_pos = s_teleport.origin + (0, 0, 64) + anglesToForward(s_teleport.angles) * 120;
@@ -337,7 +337,7 @@ stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec, show_fx) 
   }
 
   image_room notify("stop_teleport_fx");
-  a_pos = getstructarray(str_teleport_to, "targetname");
+  a_pos = getStructArray(str_teleport_to, "targetname");
   s_pos = get_free_teleport_pos(player, a_pos);
   player unlink();
 

@@ -584,7 +584,7 @@ createbombsquadmodel(var_0) {
 }
 
 isplayerusingbox(var_0) {
-  return !level.gameended && isDefined(var_0) && scripts\mp\utility::isreallyalive(self) && self usebuttonpressed() && !self isonladder() && !self meleebuttonpressed() && var_0.curprogress < var_0.usetime && !isDefined(self.teleporting) || !self.teleporting;
+  return !level.gameended && isDefined(var_0) && scripts\mp\utility::isreallyalive(self) && self useButtonPressed() && !self isonladder() && !self meleeButtonPressed() && var_0.curprogress < var_0.usetime && !isDefined(self.teleporting) || !self.teleporting;
 }
 
 isgrenadedeployable(var_0) {

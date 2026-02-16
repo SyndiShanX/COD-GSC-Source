@@ -1220,7 +1220,7 @@ down_button_held() {
 }
 
 up_button_pressed() {
-  return self buttonpressed("<dev string:x28f>") || self buttonpressed("<dev string:x299>");
+  return self buttonPressed("<dev string:x28f>") || self buttonPressed("<dev string:x299>");
 }
 
 waittill_up_button_pressed() {
@@ -1230,7 +1230,7 @@ waittill_up_button_pressed() {
 }
 
 down_button_pressed() {
-  return self buttonpressed("<dev string:x2a3>") || self buttonpressed("<dev string:x2af>");
+  return self buttonPressed("<dev string:x2a3>") || self buttonPressed("<dev string:x2af>");
 }
 
 waittill_down_button_pressed() {

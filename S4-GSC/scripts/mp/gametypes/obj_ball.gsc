@@ -83,11 +83,11 @@ _id_68F4() {
   var_0 = undefined;
 
   if(scripts\mp\utility\game::getgametype() == "tdef") {
-    var_0 = scripts\engine\utility::getstructarray("tdef_ball_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("tdef_ball_start", "targetname");
   }
 
   if(!isDefined(var_0) || !var_0.size) {
-    var_0 = scripts\engine\utility::getstructarray("ball_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("ball_start", "targetname");
   }
 
   if(level._id_CB2A > 1) {

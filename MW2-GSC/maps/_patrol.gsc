@@ -378,7 +378,7 @@ get_target_structs() {
   array = [];
 
   if(isDefined(self.target))
-    array = getstructarray(self.target, "targetname");
+    array = getStructArray(self.target, "targetname");
 
   return array;
 }

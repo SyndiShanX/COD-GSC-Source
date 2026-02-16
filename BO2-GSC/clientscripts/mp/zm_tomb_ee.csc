@@ -142,7 +142,7 @@ run_plane_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 }
 
 tablet_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  a_structs = getstructarray("tablet_charge_pos", "targetname");
+  a_structs = getStructArray("tablet_charge_pos", "targetname");
   s_box = get_array_of_closest(self.origin, a_structs)[0];
   e_fx = spawn(localclientnum, self gettagorigin("J_SpineUpper"), "script_model");
   e_fx setModel("tag_origin");

@@ -192,7 +192,7 @@ move_charging_tanks() {
 e2_charge_tanks_shoot() {
   self endon("death");
 
-  tank_targs = getstructarray("e2_charge_tank_targ", "targetname");
+  tank_targs = getStructArray("e2_charge_tank_targ", "targetname");
 
   while(true) {
     wait(randomintrange(2, 6));
@@ -401,7 +401,7 @@ e2_tank_plaza_logic() {
 e2_tank_plaza_shoot() {
   self endon("death");
 
-  tank_targs = getstructarray("e2_plaza_tank_targ", "targetname");
+  tank_targs = getStructArray("e2_plaza_tank_targ", "targetname");
   statue_targ = getstruct("e2_tank1_target2", "targetname");
 
   wait(7);
@@ -552,7 +552,7 @@ reich_fake_mg_fire() {
 }
 
 first_mortar() {
-  launchers = getstructarray("e2_mortar_start", "targetname");
+  launchers = getStructArray("e2_mortar_start", "targetname");
   targ = getstruct("e2_mortar_targ_first", "targetname");
 
   launchers[0] thread fire_mortar(targ);
@@ -567,7 +567,7 @@ e2_mortar_looping() {
   thread e2_mortar_looping2();
   level endon("stop first mortar set");
 
-  targs = getstructarray("e2_mortar_targ", "targetname");
+  targs = getStructArray("e2_mortar_targ", "targetname");
   while(true) {
     self thread fire_mortar(targs[randomint(targs.size)]);
     wait(randomintrange(4, 7));
@@ -579,14 +579,14 @@ e2_mortar_looping2() {
 
   level notify("stop first mortar set");
 
-  targs = getstructarray("e2_mortar_targ2", "targetname");
+  targs = getStructArray("e2_mortar_targ2", "targetname");
   while(true) {
     self thread fire_mortar(targs[randomint(targs.size)]);
     wait(randomintrange(4, 7));
   }
 }
 fake_launch(org) {
-  targs = getstructarray("dirt_mortar", "targetname");
+  targs = getStructArray("dirt_mortar", "targetname");
   targ = targs[randomint(targs.size)];
 }
 

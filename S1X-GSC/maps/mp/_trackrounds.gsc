@@ -6,9 +6,7 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-trackrounds_think()
-
-{
+trackrounds_think() {
   if(getDvar("mapname") == getDvar("virtualLobbyMap")) {
     return;
   }
@@ -96,9 +94,7 @@ trackrounds_death() {
   self.painted_tracked = false;
 }
 
-trackrounds_mark_till_death()
-
-{
+trackrounds_mark_till_death() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");

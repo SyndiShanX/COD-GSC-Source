@@ -298,7 +298,7 @@ cardetonatewaiter(vehicle) {
   vehicle endon("death");
   watcher = maps\mp\gametypes\_weaponobjects::getweaponobjectwatcher("rcbomb");
 
-  while(!self attackbuttonpressed())
+  while(!self attackButtonPressed())
     wait 0.05;
 
   watcher thread maps\mp\gametypes\_weaponobjects::waitanddetonate(vehicle, 0);
@@ -322,7 +322,7 @@ jumpwaiter(vehicle) {
   while(true) {
     self.jump_hud settext("[{+gostand}]" + "Jump");
 
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       vehicle launchvehicle((0, 0, -1) * -10, vehicle.origin, 0);
       self.jump_hud settext("");
       wait 5;

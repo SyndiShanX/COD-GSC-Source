@@ -3186,20 +3186,20 @@ function playerzombie_soundboard() {
       wait(0.05);
       continue;
     }
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       if(self can_do_input("use")) {
         self thread playerzombie_play_sound(usesound);
         self thread playerzombie_waitfor_buttonrelease("use");
         self.usesound_nexttime = gettime() + self.usesound_waittime;
       }
     } else {
-      if(self attackbuttonpressed()) {
+      if(self attackButtonPressed()) {
         if(self can_do_input("attack")) {
           self thread playerzombie_play_sound(attacksound);
           self thread playerzombie_waitfor_buttonrelease("attack");
           self.attacksound_nexttime = gettime() + self.attacksound_waittime;
         }
-      } else if(self adsbuttonpressed()) {
+      } else if(self adsButtonPressed()) {
         if(self can_do_input("ads")) {
           self thread playerzombie_play_sound(adssound);
           self thread playerzombie_waitfor_buttonrelease("ads");
@@ -3257,20 +3257,20 @@ function playerzombie_waitfor_buttonrelease(inputtype) {
   self endon(notifystring);
   if(inputtype == "use") {
     self.buttonpressed_use = 1;
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       wait(0.05);
     }
     self.buttonpressed_use = 0;
   } else {
     if(inputtype == "attack") {
       self.buttonpressed_attack = 1;
-      while(self attackbuttonpressed()) {
+      while(self attackButtonPressed()) {
         wait(0.05);
       }
       self.buttonpressed_attack = 0;
     } else if(inputtype == "ads") {
       self.buttonpressed_ads = 1;
-      while(self adsbuttonpressed()) {
+      while(self adsButtonPressed()) {
         wait(0.05);
       }
       self.buttonpressed_ads = 0;

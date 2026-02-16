@@ -339,7 +339,7 @@ bunker_style_mortar() {
   var_0 = [];
   var_1 = undefined;
   var_2 = [];
-  var_3 = common_scripts\utility::getstructarray("mortar_bunker", "targetname");
+  var_3 = common_scripts\utility::getStructArray("mortar_bunker", "targetname");
   var_4 = getEntArray("mortar_bunker", "targetname");
 
   if(isDefined(var_4) && var_4.size > 0)

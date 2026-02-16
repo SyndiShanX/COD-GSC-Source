@@ -2288,7 +2288,7 @@ monitor_debug_addfakemembers(player, camParams) {
   while(true) {
     if(isDefined(level.vl_fakemembers) && level.vl_fakemembers > 0 && !isDefined(level.debug_fly)) {
       if(isDefined(camParams.mode) && camParams.mode == "game_lobby") {
-        if(player AdsButtonPressed()) {
+        if(player adsButtonPressed()) {
           ownerId = level.vl_focus - 1;
           if(ownerId < 0) {
             ownerId = 17;
@@ -2309,10 +2309,10 @@ monitor_debug_addfakemembers(player, camParams) {
             }
           }
           level.vl_focus = ownerId;
-          while(player AdsButtonPressed()) {
+          while(player adsButtonPressed()) {
             wait 0.05;
           }
-        } else if(player AttackButtonPressed()) {
+        } else if(player attackButtonPressed()) {
           ownerId = level.vl_focus + 1;
           if(ownerId > 17) {
             ownerId = 0;
@@ -2333,7 +2333,7 @@ monitor_debug_addfakemembers(player, camParams) {
             }
           }
           level.vl_focus = ownerId;
-          while(player AttackButtonPressed()) {
+          while(player attackButtonPressed()) {
             wait 0.05;
           }
         }
@@ -3447,8 +3447,8 @@ debug_pathing() {
   obstaclemask = "111111111111111111";
   radius = OBSTACLE_RADIUS;
   while(true) {
-    if(self FragButtonPressed()) {
-      while(self FragButtonPressed()) {
+    if(self fragButtonPressed()) {
+      while(self fragButtonPressed()) {
         wait 0.05;
       }
       endIdx++;
@@ -3463,8 +3463,8 @@ debug_pathing() {
       }
       trigger = true;
     }
-    if(self SecondaryOffhandButtonPressed()) {
-      while(self SecondaryOffhandButtonPressed()) {
+    if(self SecondaryOffhandbuttonPressed()) {
+      while(self SecondaryOffhandbuttonPressed()) {
         wait 0.05;
       }
       startIdx++;
@@ -3517,12 +3517,12 @@ debug_fly(camera) {
   up = AnglesToUp(angles);
   right = AnglesToRight(angles);
   deltaUp = 0;
-  if(self AdsButtonPressed()) {
+  if(self adsButtonPressed()) {
     deltaUp = -1;
-  } else if(self AttackButtonPressed()) {
+  } else if(self attackButtonPressed()) {
     deltaUp = 1;
   }
-  if(self SecondaryOffhandButtonPressed()) {
+  if(self SecondaryOffhandbuttonPressed()) {
     speed = speed * 0.1;
     latspeed = latspeed * 0.1;
     upspeed = upspeed * 0.1;

@@ -1235,7 +1235,7 @@ _id_4B6C(var_0) {
 
 _id_64BE(var_0, var_1, var_2, var_3, var_4) {
   var_5 = [];
-  var_6 = scripts\engine\utility::getstructarray(var_1, var_2);
+  var_6 = scripts\engine\utility::getStructArray(var_1, var_2);
   var_6[var_6.size] = var_0;
 
   foreach(var_8 in var_6) {

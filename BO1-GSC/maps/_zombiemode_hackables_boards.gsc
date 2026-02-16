@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 hack_boards() {
-  windows = getstructarray("exterior_goal", "targetname");
+  windows = getStructArray("exterior_goal", "targetname");
   for(i = 0; i < windows.size; i++) {
     window = windows[i];
     struct = spawnStruct();

@@ -111,7 +111,7 @@ main() {
 acid_trap_fx_monitor(name, side) {
   while(true) {
     level waittill(name);
-    fire_points = getstructarray(name, "targetname");
+    fire_points = getStructArray(name, "targetname");
 
     for(i = 0; i < fire_points.size; i++)
       fire_points[i] thread acid_trap_fx(name, side);

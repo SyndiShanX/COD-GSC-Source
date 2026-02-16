@@ -1883,11 +1883,11 @@ continueholdthinkloop(player) {
     return false;
   }
 
-  if(!player usebuttonpressed()) {
+  if(!player useButtonPressed()) {
     return false;
   }
 
-  if(player meleebuttonpressed()) {
+  if(player meleeButtonPressed()) {
     return false;
   }
 

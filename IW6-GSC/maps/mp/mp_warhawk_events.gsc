@@ -58,7 +58,7 @@ random_destruction(min_wait_time, max_wait_time) {
   level endon("stop_dynamic_events");
   waitframe();
   if(!isDefined(level.destructible_array)) {
-    level.destructible_array = getstructarray("random_destructible", "targetname");
+    level.destructible_array = getStructArray("random_destructible", "targetname");
   }
   random_destruction_preprocess(level.destructible_array);
 
@@ -183,7 +183,7 @@ random_destruction_destroy(index) {
   exploder(50 + index);
   exploder_cache(50 + index);
 
-  destructible_struct_targets = getstructarray(level.destructible_array[index].target, "targetname");
+  destructible_struct_targets = getStructArray(level.destructible_array[index].target, "targetname");
   foreach(destructible_element in destructible_struct_targets) {
     if(isDefined(destructible_element.script_noteworthy) && isDefined(level._effect[destructible_element.script_noteworthy])) {
       playFX(level._effect[destructible_element.script_noteworthy], destructible_element.origin);
@@ -236,7 +236,7 @@ random_destruction_preprocess(destructible_array) {
     after_start_origin = undefined;
     after_end_origin = undefined;
 
-    structs = getstructarray(element.target, "targetname");
+    structs = getStructArray(element.target, "targetname");
     foreach(destructible_element in structs) {
       switch (destructible_element.script_noteworthy) {
         case "before_start_origin":
@@ -296,7 +296,7 @@ random_destruction_preprocess(destructible_array) {
     }
 
     if(element.mortar_starts.size == 0) {
-      element.mortar_starts = getstructarray("air_raid", "targetname");
+      element.mortar_starts = getStructArray("air_raid", "targetname");
     }
 
     if(element.mortar_ends.size == 0) {
@@ -314,7 +314,7 @@ plane_crash_init() {
     return;
   }
   ents = getEntArray(self.target, "targetname");
-  structs = getstructarray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
 
   targets = array_combine(ents, structs);
   foreach(target in targets) {
@@ -547,7 +547,7 @@ random_mortars_incoming_sound(org) {
 }
 
 random_mortars_get_target() {
-  targets = getstructarray(self.target, "targetname");
+  targets = getStructArray(self.target, "targetname");
   if(targets.size == 0)
     return undefined;
 
@@ -598,7 +598,7 @@ draw_model_path() {
 
 jet_flyby() {
   jet_flyby = [];
-  jet_flyby_radial = getstructarray("jet_flyby_radial", "targetname");
+  jet_flyby_radial = getStructArray("jet_flyby_radial", "targetname");
 
   planes = array_combine(jet_flyby, jet_flyby_radial);
   foreach(plane in planes) {
@@ -635,7 +635,7 @@ jet_flyby() {
           end.origin = end.origin + (0, 0, RandomFloatRange(0, plane.height));
         }
       } else {
-        targets = getstructarray(plane.target, "targetname");
+        targets = getStructArray(plane.target, "targetname");
 
         target = random(targets);
         if(!isDefined(target)) {
@@ -672,7 +672,7 @@ air_raid() {
 
   waitframe();
 
-  level.air_raids = getstructarray("air_raid", "targetname");
+  level.air_raids = getStructArray("air_raid", "targetname");
   foreach(air_raid_path in level.air_raids) {
     if(!isDefined(air_raid_path.radius))
       air_raid_path.radius = 300;
@@ -791,7 +791,7 @@ random_point_in_circle(origin, radius) {
 heli_anims() {
   level endon("stop_dynamic_events");
 
-  heli_anims = getstructarray("heli_anim", "targetname");
+  heli_anims = getStructArray("heli_anim", "targetname");
   if(heli_anims.size == 0) {
     return;
   }

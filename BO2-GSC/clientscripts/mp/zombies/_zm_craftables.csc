@@ -44,7 +44,7 @@ set_clientfield_craftables_code_callbacks() {
   }
 }
 
-include_zombie_craftable(craftable_name) {
+#include_zombie_craftable(craftable_name) {
   if(!isDefined(level.zombie_include_craftables))
     level.zombie_include_craftables = [];
 

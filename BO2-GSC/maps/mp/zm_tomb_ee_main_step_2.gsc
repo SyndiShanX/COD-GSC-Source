@@ -19,7 +19,7 @@ init() {
 
 init_stage() {
   level._cur_stage_name = "step_2";
-  a_structs = getstructarray("robot_head_staff", "targetname");
+  a_structs = getStructArray("robot_head_staff", "targetname");
 
   foreach(unitrigger_stub in a_structs) {
     level thread create_robot_head_trigger(unitrigger_stub);
@@ -40,7 +40,7 @@ stage_logic() {
 }
 
 exit_stage(success) {
-  a_structs = getstructarray("robot_head_staff", "targetname");
+  a_structs = getStructArray("robot_head_staff", "targetname");
 
   foreach(struct in a_structs) {
     struct thread remove_plinth();

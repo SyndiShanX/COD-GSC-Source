@@ -400,7 +400,7 @@ _id_CA15(var_0) {
 }
 
 _id_C227(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = scripts\engine\utility::ter_op(isDefined(var_0._id_CCEA), int(var_0._id_CCEA), undefined);
   var_3 = scripts\engine\utility::ter_op(isDefined(var_0._id_CCEC), int(var_0._id_CCEC), 0);
   var_4 = scripts\engine\utility::ter_op(isDefined(var_0._id_CCEB), int(var_0._id_CCEB), var_1.size);
@@ -505,25 +505,25 @@ _id_107AD(var_0, var_1, var_2, var_3) {
 }
 
 _id_C223(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   _id_C23C(var_0.target, 0, var_1.size, undefined, 0.25, undefined, var_0.target, undefined, undefined, undefined);
   _id_D3B2(var_0.target, undefined, undefined, var_0._id_CDB3, undefined);
 }
 
 _id_C224(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   _id_C23C(var_0.target, 0, var_1.size, var_1.size, 0.25, ::_id_106ED, var_0.target, undefined, var_0.target, undefined);
   _id_D3B2(var_0.target, undefined, undefined, var_0._id_CDB3, undefined);
 }
 
 _id_C225(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   _id_C23C(var_0.target, 0, var_1.size, var_1.size, 0.25, undefined, var_0.target, undefined, undefined, undefined);
   _id_D3B2(var_0.target, undefined, undefined, var_0._id_CDB3, undefined);
 }
 
 _id_C226(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   _id_C23C(var_0.target, 0, var_1.size, var_1.size, 0.25, undefined, var_0.target, undefined, undefined, undefined);
   _id_C1F7(var_0.target, _id_0762::_id_4A13);
   _id_C1F7(var_0.target, _id_0762::_id_49ED);
@@ -1134,7 +1134,7 @@ _id_5AD4(var_0) {
 }
 
 _id_65C7() {
-  var_0 = scripts\engine\utility::getstructarray(self._id_FFF0._id_CEB3, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self._id_FFF0._id_CEB3, "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(var_0[var_1] == self._id_FFF0) {
@@ -1378,7 +1378,7 @@ _id_C23C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
       var_10._id_E1C5 = var_6;
     } else if(_func_0107(var_6)) {
       foreach(var_13 in var_6) {
-        var_10._id_E1C5 = scripts\engine\utility::array_combine(var_10._id_E1C5, scripts\engine\utility::getstructarray(var_13, "targetname"));
+        var_10._id_E1C5 = scripts\engine\utility::array_combine(var_10._id_E1C5, scripts\engine\utility::getStructArray(var_13, "targetname"));
       }
 
       for(var_15 = 0; var_15 < var_10._id_E1C5.size; var_15++) {
@@ -1388,7 +1388,7 @@ _id_C23C(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 
       var_10._id_E1C5 = [::_id_C780, var_6];
     } else {
-      var_10._id_E1C5 = scripts\engine\utility::getstructarray(var_6, "targetname");
+      var_10._id_E1C5 = scripts\engine\utility::getStructArray(var_6, "targetname");
 
       foreach(var_16 in var_10._id_E1C5) {
         var_16 thread _id_E2CD();
@@ -1451,7 +1451,7 @@ _id_C780(var_0, var_1) {
   var_4 = [];
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
-    var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getstructarray(var_1[var_3], "targetname"));
+    var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getStructArray(var_1[var_3], "targetname"));
   }
 
   return var_4;
@@ -1511,7 +1511,7 @@ _id_80BC() {
   _id_D3B2("cover_node_spawning", 750, 2000, 5000, 1);
   level thread _id_468D();
   level thread _id_4691();
-  var_0 = scripts\engine\utility::getstructarray("cover_node_parents", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("cover_node_parents", "targetname");
   var_1 = _id_6336();
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -1600,7 +1600,7 @@ _id_C770(var_0) {
     var_1 = [];
 
     for(var_3 = 0; var_3 < var_0._id_10CAC.size; var_3++) {
-      var_4 = scripts\engine\utility::getstructarray(var_0._id_10CAC[var_3], "targetname");
+      var_4 = scripts\engine\utility::getStructArray(var_0._id_10CAC[var_3], "targetname");
       var_1 = scripts\engine\utility::array_combine(var_1, var_4);
     }
 
@@ -1611,7 +1611,7 @@ _id_C770(var_0) {
     var_1 = [];
 
     for(var_3 = 0; var_3 < var_0._id_C56D.size; var_3++) {
-      var_4 = scripts\engine\utility::getstructarray(var_0._id_C56D[var_3], "targetname");
+      var_4 = scripts\engine\utility::getStructArray(var_0._id_C56D[var_3], "targetname");
       var_1 = scripts\engine\utility::array_combine(var_1, var_4);
     }
 
@@ -4257,7 +4257,7 @@ _id_E2CD() {
     }
 
     if(isDefined(self._id_039D)) {
-      var_0 = scripts\engine\utility::getstructarray(self._id_039D, "targetname");
+      var_0 = scripts\engine\utility::getStructArray(self._id_039D, "targetname");
 
       if(var_0.size > 0) {
         self._id_3577 = [];
@@ -4390,7 +4390,7 @@ _id_D3B7() {
   }
 
   if(isDefined(self._id_039D)) {
-    var_3 = scripts\engine\utility::getstructarray(self._id_039D, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(self._id_039D, "targetname");
 
     if(var_3.size > 0) {
       _id_4632("cluster_spawner");
@@ -4480,7 +4480,7 @@ _id_85AA() {
           var_1 = getEntArray(self._id_E342._id_0399, "script_linkname");
 
           if(!isDefined(var_1) || var_1.size < 1) {
-            var_1 = scripts\engine\utility::getstructarray(self._id_E342._id_0399, "script_linkname");
+            var_1 = scripts\engine\utility::getStructArray(self._id_E342._id_0399, "script_linkname");
           }
 
           if(isDefined(var_1) && var_1.size > 0) {
@@ -4528,7 +4528,7 @@ _id_85AA() {
       var_1 = getEntArray(self._id_E342._id_0399, "script_linkname");
 
       if(!isDefined(var_1) || var_1.size < 1) {
-        var_1 = scripts\engine\utility::getstructarray(self._id_E342._id_0399, "script_linkname");
+        var_1 = scripts\engine\utility::getStructArray(self._id_E342._id_0399, "script_linkname");
       }
 
       if(isDefined(var_1) && var_1.size > 0) {
@@ -5119,7 +5119,7 @@ _id_BB5A(var_0) {
 
 _id_D360(var_0) {
   if(getdvarint("#x3fb70172ee8c19324", 1)) {
-    var_1 = scripts\engine\utility::getstructarray("dwn_twn_patrol_structs", "targetname");
+    var_1 = scripts\engine\utility::getStructArray("dwn_twn_patrol_structs", "targetname");
     var_2 = scripts\engine\utility::_id_6969(self.origin, var_1);
 
     if(isDefined(var_2) && isDefined(var_2._id_0398)) {
@@ -6598,7 +6598,7 @@ _id_65E0() {
 
 _id_67AC(var_0) {
   var_1 = _func_00B3(var_0, "targetname");
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
     var_1[var_1.size] = var_4;
@@ -7341,7 +7341,7 @@ _id_A017() {
 
 _id_6809(var_0) {
   if(getDvar("#x3a5ce9d6014ffeb19", "") != "") {
-    var_1 = scripts\engine\utility::getstructarray(getDvar("#x3a5ce9d6014ffeb19", ""), "targetname");
+    var_1 = scripts\engine\utility::getStructArray(getDvar("#x3a5ce9d6014ffeb19", ""), "targetname");
 
     if(var_1.size > 0) {
       return var_1;
@@ -8129,7 +8129,7 @@ _id_C42A(var_0) {
 
 _id_1022(var_0) {
   if(!scripts\engine\utility::array_contains(self._id_C56D, var_0)) {
-    var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
     if(var_1.size > 0) {
       self._id_C56D[self._id_C56D.size] = var_0;
@@ -8146,7 +8146,7 @@ _id_C44E(var_0) {
 
 _id_106D(var_0) {
   if(!scripts\engine\utility::array_contains(self._id_C570, var_0)) {
-    var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
     if(var_1.size > 0) {
       self._id_C570[self._id_C570.size] = var_0;

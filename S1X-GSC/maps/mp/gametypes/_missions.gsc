@@ -1090,7 +1090,7 @@ ch_kills(data) {
       }
     }
 
-    if(is_on_enemy_team && player _hasPerk("specialty_class_quickdraw") && player AdsButtonPressed()) {
+    if(is_on_enemy_team && player _hasPerk("specialty_class_quickdraw") && player adsButtonPressed()) {
       player processChallenge("ch_perk_quickdraw");
     }
 

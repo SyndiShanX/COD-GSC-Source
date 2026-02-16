@@ -54,7 +54,7 @@ path_activatebutton() {
   level endon("path_refresh");
   while(1) {
     players = get_players();
-    while(!players[0] usebuttonpressed()) {
+    while(!players[0] useButtonPressed()) {
       wait .05;
     }
     pick = path_getvisible();
@@ -62,7 +62,7 @@ path_activatebutton() {
       level.path_selectindex = pick.index;
       level.path_selectid = path_createid(pick.ident);
     }
-    while(players[0] usebuttonpressed()) {
+    while(players[0] useButtonPressed()) {
       wait .05;
     }
   }
@@ -92,7 +92,7 @@ path_hudshow() {
   players[0] setorigin(self.origin + (players[0].origin - players[0] getEye()) - vector_scale(anglesToForward(self.angles), 3));
   players[0] setplayerangles(self.angles);
   flag_set("path_refresh");
-  while(players[0] islookingorg(self) && players[0] usebuttonpressed()) {
+  while(players[0] islookingorg(self) && players[0] useButtonPressed()) {
     wait .05;
   }
   players[0] freezecontrols(false);

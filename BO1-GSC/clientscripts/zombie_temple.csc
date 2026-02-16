@@ -350,7 +350,7 @@ water_gush_debug() {
   }
 }
 waterfall_watcher() {
-  targets = getstructarray("sq_sad", "targetname");
+  targets = getStructArray("sq_sad", "targetname");
   while(1) {
     level waittill("WF");
     for(i = 0; i < 4; i++) {
@@ -371,7 +371,7 @@ sq_std_watcher() {
   players = getlocalplayers();
   level waittill("SR");
   PrintLn("watcher : post SR");
-  targets = getstructarray("sq_sad", "targetname");
+  targets = getStructArray("sq_sad", "targetname");
   PrintLn("Client : Threading sq_std_struct_watcher on " + targets.size + " structs.");
   for(i = 0; i < targets.size; i++) {
     targets[i] thread sq_std_struct_watcher(players.size);
@@ -543,7 +543,7 @@ temple_remove_visionset_caves(i_local_client_num) {
     self thread clientscripts\_zombiemode::zombie_vision_set_remove(level._temple_caves_eclipse_vision_set, 2.0, i_local_client_num);
   }
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
   include_weapon("m1911_zm", false);
@@ -626,7 +626,7 @@ _init_magic_box() {
   level.initialized = [];
 }
 _init_indicators(clientNum) {
-  structs = GetStructArray("magic_box_indicator", "targetname");
+  structs = getStructArray("magic_box_indicator", "targetname");
   for(i = 0; i < structs.size; i++) {
     s = structs[i];
     if(!isDefined(s.viewModels)) {
@@ -661,7 +661,7 @@ temple_box_monitor(clientNum, state, oldState) {
   }
 }
 _delete_location(clientNum, location) {
-  structs = GetStructArray(location, "script_noteworthy");
+  structs = getStructArray(location, "script_noteworthy");
   array_thread(structs, ::_setup_view_model, clientNum, undefined);
 }
 _delete_all_locations(clientNum) {
@@ -671,7 +671,7 @@ _delete_all_locations(clientNum) {
   }
 }
 _show_location(clientNum, location) {
-  structs = GetStructArray(location, "script_noteworthy");
+  structs = getStructArray(location, "script_noteworthy");
   array_thread(structs, ::_setup_view_model, clientNum, "zt_map_knife");
 }
 _setup_location(clientNum, location) {

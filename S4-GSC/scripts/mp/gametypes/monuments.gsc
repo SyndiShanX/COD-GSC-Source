@@ -86,7 +86,7 @@ _id_ABAD() {
     _id_8294();
   }
 
-  var_5 = scripts\engine\utility::getstructarray("monument_location", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray("monument_location", "script_noteworthy");
 }
 
 _id_FC7D() {

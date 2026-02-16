@@ -1657,7 +1657,7 @@ _aircraft_launcher_logic() {
       }
     }
 
-    a_boat_vehicles = getstructarray("sea_cowbell_target", "targetname");
+    a_boat_vehicles = getStructArray("sea_cowbell_target", "targetname");
 
     if(a_boat_vehicles.size > 0) {
       e_boat = random(a_boat_vehicles);
@@ -1763,7 +1763,7 @@ end_bridge_launchers() {
 _bridge_launcher_logic(n_index) {
   level endon("stop_bridge_launchers");
   v_launcher_forward = anglesToForward(self.angles);
-  a_battleship_structs = getstructarray("battleship_end", "targetname");
+  a_battleship_structs = getStructArray("battleship_end", "targetname");
 
   if(a_battleship_structs.size == 0) {
     iprintln("THERE ARE NO BATTLESHIP_END STRUCTS");
@@ -2169,7 +2169,7 @@ clean_up_ent_array(a_to_delete) {
 }
 
 cleanup_structs(str_value, str_key) {
-  a_s_structs = getstructarray(str_value, str_key);
+  a_s_structs = getStructArray(str_value, str_key);
 
   foreach(s_struct in a_s_structs) {
     s_struct structdelete();
@@ -2365,7 +2365,7 @@ kill_persist_damaged_tanker(str_model) {
 }
 
 init_ambient_models() {
-  a_s_spots = getstructarray("ambient_ship_spot", "script_noteworthy");
+  a_s_spots = getStructArray("ambient_ship_spot", "script_noteworthy");
 
   foreach(s_spot in a_s_spots) {
     s_spot thread ambient_model_move_loop(int(s_spot.script_string));
@@ -2373,7 +2373,7 @@ init_ambient_models() {
 }
 
 init_ambient_oneoff_models(str_start_struct) {
-  a_s_spots = getstructarray(str_start_struct, "script_noteworthy");
+  a_s_spots = getStructArray(str_start_struct, "script_noteworthy");
   a_str_fx = array("fx_com_distant_exp_1", "fx_com_distant_exp_2");
 
   foreach(s_spot in a_s_spots) {
@@ -2487,7 +2487,7 @@ kill_ambient_vehicles() {
 }
 
 init_phalanx_cannons(str_cannon_spot) {
-  a_s_cannon = getstructarray(str_cannon_spot, "targetname");
+  a_s_cannon = getStructArray(str_cannon_spot, "targetname");
   level thread phalanx_cannon_target_update();
 
   foreach(s_cannon in a_s_cannon) {
@@ -3244,7 +3244,7 @@ set_flag_on_ai_group_clear(str_flag, str_ai_group_name, str_ai_group_name_2) {
 }
 
 deck_turn_off_cells() {
-  a_structs = getstructarray("deck_cell_struct", "targetname");
+  a_structs = getStructArray("deck_cell_struct", "targetname");
 
   for(i = 0; i < a_structs.size; i++) {
     setcellinvisibleatpos(a_structs[i].origin);

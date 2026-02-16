@@ -103,7 +103,7 @@ _id_C5BC() {
   self endon("death");
   self disableoffhandweapons();
 
-  while(self fragbuttonpressed()) {
+  while(self fragButtonPressed()) {
     wait 0.1;
   }
 
@@ -1039,7 +1039,7 @@ _id_10AD6(var_0, var_1, var_2) {
 }
 
 _id_89C3(var_0) {
-  if(var_0 == "+frag" && self fragbuttonpressed() || var_0 == "+smoke" && self secondaryoffhandbuttonpressed()) {
+  if(var_0 == "+frag" && self fragButtonPressed() || var_0 == "+smoke" && self secondaryoffhandbuttonPressed()) {
     return 1;
   } else {
     return 0;

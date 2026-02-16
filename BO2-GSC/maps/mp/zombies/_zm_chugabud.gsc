@@ -412,7 +412,7 @@ chugabud_get_spawnpoint() {
 
     match_string = level.scr_zm_ui_gametype + "_" + location;
     spawnpoints = [];
-    structs = getstructarray("initial_spawn", "script_noteworthy");
+    structs = getStructArray("initial_spawn", "script_noteworthy");
 
     if(isDefined(structs)) {
       foreach(struct in structs) {
@@ -428,7 +428,7 @@ chugabud_get_spawnpoint() {
     }
 
     if(!isDefined(spawnpoints) || spawnpoints.size == 0)
-      spawnpoints = getstructarray("initial_spawn_points", "targetname");
+      spawnpoints = getStructArray("initial_spawn_points", "targetname");
 
     assert(isDefined(spawnpoints), "Could not find initial spawn points!");
     spawnpoint = maps\mp\zombies\_zm::getfreespawnpoint(spawnpoints, self);

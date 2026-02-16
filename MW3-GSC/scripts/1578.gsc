@@ -334,7 +334,7 @@ _id_4454(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) {
 }
 
 _id_4455() {
-  if(level.player buttonpressed("z") == 1) {
+  if(level.player buttonPressed("z") == 1) {
     return 1;
   } else {
     return 0;

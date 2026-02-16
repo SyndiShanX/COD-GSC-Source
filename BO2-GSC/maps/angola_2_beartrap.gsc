@@ -352,7 +352,7 @@ beartrap_explosive_think() {
           self.message = 1;
         }
 
-        if(self.message && level.player usebuttonpressed()) {
+        if(self.message && level.player useButtonPressed()) {
           level notify("player_trying_to_plant");
         }
       }

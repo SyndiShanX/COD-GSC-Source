@@ -329,7 +329,7 @@ gulliver_wait_for_tazer() {
   wait 0.225;
   thread screen_message(&"KARMA_HINT_SPIDERBOT_TAZER", 2);
 
-  while(!level.player attackbuttonpressed()) {
+  while(!level.player attackButtonPressed()) {
     wait 0.05;
   }
 

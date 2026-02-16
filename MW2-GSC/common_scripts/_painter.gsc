@@ -379,7 +379,7 @@ setgroup_up() {
   if(index == keys.size)
     return;
   setcurrentgroup(keys[index]);
-  while(level.painter_player buttonpressed("BUTTON_Y"))
+  while(level.painter_player buttonPressed("BUTTON_Y"))
     wait .05;
 }
 
@@ -394,7 +394,7 @@ setgroup_down() {
   if(index < 0)
     return;
   setcurrentgroup(keys[index]);
-  while(level.painter_player buttonpressed("BUTTON_X"))
+  while(level.painter_player buttonPressed("BUTTON_X"))
     wait .05;
 }
 
@@ -439,32 +439,32 @@ playerInit() {
   while(1) {
     trace = player_view_trace();
     draw_placement_circle(trace);
-    if(level.painter_player buttonpressed("f"))
+    if(level.painter_player buttonPressed("f"))
       dump_models();
-    if(level.painter_player buttonpressed("DPAD_UP"))
+    if(level.painter_player buttonPressed("DPAD_UP"))
       customrotation_mode(trace, "DPAD_UP");
-    else if(level.painter_player buttonpressed("DPAD_DOWN"))
+    else if(level.painter_player buttonPressed("DPAD_DOWN"))
       customrotation_mode_off();
-    else if(level.painter_player buttonpressed("DPAD_RIGHT"))
+    else if(level.painter_player buttonPressed("DPAD_RIGHT"))
       customheight_mode(trace, "DPAD_RIGHT");
-    else if(level.painter_player buttonpressed("DPAD_LEFT"))
+    else if(level.painter_player buttonPressed("DPAD_LEFT"))
       customheight_mode_off();
-    else if(level.painter_player buttonpressed("BUTTON_X"))
+    else if(level.painter_player buttonPressed("BUTTON_X"))
       setgroup_down();
-    else if(level.painter_player buttonpressed("BUTTON_Y"))
+    else if(level.painter_player buttonPressed("BUTTON_Y"))
       setgroup_up();
-    else if(level.painter_player buttonpressed("BUTTON_LSTICK"))
+    else if(level.painter_player buttonPressed("BUTTON_LSTICK"))
       spam_model_circlescale(trace, -1);
-    else if(level.painter_player buttonpressed("BUTTON_RSTICK"))
+    else if(level.painter_player buttonPressed("BUTTON_RSTICK"))
       spam_model_circlescale(trace, 1);
-    else if(level.painter_player buttonpressed("BUTTON_A"))
+    else if(level.painter_player buttonPressed("BUTTON_A"))
       spam_model_densityscale(trace, -1);
-    else if(level.painter_player buttonpressed("BUTTON_B"))
+    else if(level.painter_player buttonPressed("BUTTON_B"))
       spam_model_densityscale(trace, 1);
     else {
-      if(level.painter_player buttonpressed("BUTTON_LSHLDR"))
+      if(level.painter_player buttonPressed("BUTTON_LSHLDR"))
         spam_model_erase(trace);
-      if(level.painter_player buttonpressed("BUTTON_RSHLDR"))
+      if(level.painter_player buttonPressed("BUTTON_RSHLDR"))
         thread spam_model_place(trace); // threaded for delay
     }
     level notify("clear_previews");
@@ -482,7 +482,7 @@ customheight_mode(trace, button) {
   if(trace["fraction"] == 1) {
     return;
   }
-  while(level.painter_player buttonpressed(button))
+  while(level.painter_player buttonPressed(button))
     wait .05;
 
   level.spam_models_isCustomheight = true;
@@ -494,11 +494,11 @@ customheight_mode(trace, button) {
   dir = 1;
 
   origin = trace["position"];
-  while(!level.painter_player buttonpressed(button)) {
+  while(!level.painter_player buttonPressed(button)) {
     height = level.spam_models_customheight;
-    if(level.painter_player buttonpressed("BUTTON_A"))
+    if(level.painter_player buttonPressed("BUTTON_A"))
       dir = -1;
-    else if(level.painter_player buttonpressed("BUTTON_B"))
+    else if(level.painter_player buttonPressed("BUTTON_B"))
       dir = 1;
     else
       dir = 0;
@@ -514,7 +514,7 @@ customheight_mode(trace, button) {
   }
   array_thread(models, ::deleteme);
   hint_buttons_main();
-  while(level.painter_player buttonpressed(button))
+  while(level.painter_player buttonPressed(button))
     wait .05;
 }
 
@@ -531,7 +531,7 @@ customrotation_mode(trace, button) {
   if(trace["fraction"] == 1) {
     return;
   }
-  while(level.painter_player buttonpressed(button))
+  while(level.painter_player buttonPressed(button))
     wait .05;
 
   hint_buttons_rotation();
@@ -545,11 +545,11 @@ customrotation_mode(trace, button) {
   otherangleinc = 1;
   dir = 0;
 
-  while(!level.painter_player buttonpressed(button)) {
+  while(!level.painter_player buttonPressed(button)) {
     dir = 0;
-    if(level.painter_player buttonpressed("BUTTON_A"))
+    if(level.painter_player buttonPressed("BUTTON_A"))
       dir = -1;
-    else if(level.painter_player buttonpressed("BUTTON_B"))
+    else if(level.painter_player buttonPressed("BUTTON_B"))
       dir = 1;
     otherangle += dir * otherangleinc;
     if(otherangle > 360)
@@ -566,7 +566,7 @@ customrotation_mode(trace, button) {
 
   hint_buttons_main();
 
-  while(level.painter_player buttonpressed(button))
+  while(level.painter_player buttonPressed(button))
     wait .05;
 
   for(i = 0; i < models.size; i++)

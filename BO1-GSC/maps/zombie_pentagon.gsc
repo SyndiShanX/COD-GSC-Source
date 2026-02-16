@@ -64,7 +64,7 @@ init_pentagon_client_flags() {
 }
 delete_in_createfx() {
   if(getDvar(#"createfx") != "") {
-    exterior_goals = getstructarray("exterior_goal", "targetname");
+    exterior_goals = getStructArray("exterior_goal", "targetname");
     for(i = 0; i < exterior_goals.size; i++) {
       if(!isDefined(exterior_goals[i].target)) {
         continue;
@@ -110,7 +110,7 @@ enable_zone_elevators_init() {
   elev_zone_trig2 = GetEnt("elevator2_down_riders", "targetname");
   elev_zone_trig2 thread maps\zombie_pentagon_teleporter::enable_zone_portals();
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false, true);
   include_weapon("claymore_zm", false, true);
   include_weapon("m1911_zm", false);
@@ -187,7 +187,7 @@ include_weapons() {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

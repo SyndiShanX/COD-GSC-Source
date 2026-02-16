@@ -12,7 +12,7 @@ _id_3B6D(var_0) {
   level._id_3B70 = [];
 
   if(isDefined(var_0) && var_0) {
-    var_1 = common_scripts\utility::getstructarray("leader", "script_noteworthy");
+    var_1 = common_scripts\utility::getStructArray("leader", "script_noteworthy");
   } else {
     var_1 = getEntArray("leader", "script_noteworthy");
   }
@@ -155,7 +155,7 @@ _id_3B7B(var_0, var_1, var_2, var_3) {
   if(isspawner(var_0[0])) {
     var_12 = getEntArray(var_8.target, "targetname");
   } else {
-    var_12 = common_scripts\utility::getstructarray(var_8.target, "targetname");
+    var_12 = common_scripts\utility::getStructArray(var_8.target, "targetname");
   }
   var_12[var_12.size] = var_8;
 

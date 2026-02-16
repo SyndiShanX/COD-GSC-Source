@@ -805,7 +805,7 @@ func_114B9(var_0) {
   var_0 endon("death");
   var_1 = 0;
   for(;;) {
-    if(self fragbuttonpressed() && !var_0.empgrenaded) {
+    if(self fragButtonPressed() && !var_0.empgrenaded) {
       var_2 = var_0.mgturret.origin;
       var_3 = var_0.mgturret.angles;
       switch (var_1) {
@@ -841,7 +841,7 @@ func_114B6(var_0) {
   level endon("game_ended");
   var_0 endon("death");
   for(;;) {
-    if(self secondaryoffhandbuttonpressed()) {
+    if(self secondaryoffhandbuttonPressed()) {
       var_1 = bulletTrace(var_0.origin + (0, 0, 4), var_0.origin - (0, 0, 4), 0, var_0);
       var_2 = vectornormalize(var_1["normal"]);
       var_3 = vectortoangles(var_2);
@@ -885,7 +885,7 @@ func_114CA() {
   self endon("death");
   for(;;) {
     var_1 = 0;
-    while(var_0 usebuttonpressed()) {
+    while(var_0 useButtonPressed()) {
       var_1 = var_1 + 0.05;
       if(var_1 > 0.75) {
         self notify("death");

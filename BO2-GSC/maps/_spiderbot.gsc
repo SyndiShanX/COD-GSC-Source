@@ -134,7 +134,7 @@ watch_for_jump() {
   self endon("no_driver");
 
   while(true) {
-    if(self.driver jumpbuttonpressed() && !self.in_air && !self ent_flag("playing_scripted_anim")) {
+    if(self.driver jumpbuttonPressed() && !self.in_air && !self ent_flag("playing_scripted_anim")) {
       self.in_air = 1;
       v_movement = vectornormalize(level.player getnormalizedmovement() + (0, 0, 1));
       v_forward = anglesToForward(self.angles);
@@ -161,14 +161,14 @@ watch_for_jump() {
       self.driver setclientdvar("phys_vehicleGravityMultiplier", 1.0);
       n_restart_time = gettime() + 0.2;
 
-      while(gettime() < n_restart_time && self.driver jumpbuttonpressed()) {
+      while(gettime() < n_restart_time && self.driver jumpbuttonPressed()) {
         wait 0.05;
       }
 
       self.in_air = 0;
     }
 
-    while(self.driver jumpbuttonpressed()) {
+    while(self.driver jumpbuttonPressed()) {
       wait 0.05;
     }
 

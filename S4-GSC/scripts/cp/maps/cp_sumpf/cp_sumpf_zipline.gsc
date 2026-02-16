@@ -34,7 +34,7 @@ zipline_init() {
   level.zipline linkto(var_4, "tag_origin", var_5, (0, 0, 0));
   level.zipline._id_94E8 = var_4;
   var_6 = [];
-  var_7 = scripts\engine\utility::getstructarray("zipline_motor_loc", "script_noteworthy");
+  var_7 = scripts\engine\utility::getStructArray("zipline_motor_loc", "script_noteworthy");
 
   foreach(var_9 in var_7) {
     var_10 = spawn("script_model", var_9.origin);

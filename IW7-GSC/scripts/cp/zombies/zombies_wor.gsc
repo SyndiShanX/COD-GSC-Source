@@ -40,7 +40,7 @@ init() {
 }
 
 getarkqueststruct() {
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_2 in var_0) {
     if(!isDefined(var_2.script_noteworthy)) {
       continue;
@@ -312,7 +312,7 @@ update_ufo_angles(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 start_crystal_path(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
-  var_7 = scripts\engine\utility::getclosest(var_6.origin, scripts\engine\utility::getstructarray("essence_ufo_path", "script_noteworthy"));
+  var_7 = scripts\engine\utility::getclosest(var_6.origin, scripts\engine\utility::getStructArray("essence_ufo_path", "script_noteworthy"));
   var_8 = 0;
   var_9 = var_7;
   var_10 = 1;
@@ -390,7 +390,7 @@ can_use_struct_for_final_pos(var_0, var_1) {
 }
 
 get_next_valid_struct(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
   var_3 = [];
   var_4 = undefined;
   var_4 = scripts\engine\utility::random(var_2);
@@ -869,7 +869,7 @@ run_toy_logic(var_0, var_1, var_2, var_3, var_4) {
   var_0.angles = var_6;
   wait(0.1);
   var_0 setscriptablepartstate("model", var_1.toy_model_state);
-  var_8 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_8 = scripts\engine\utility::getStructArray("interaction", "targetname");
   var_9 = scripts\engine\utility::getclosest(var_0.origin, var_8);
   if(!isDefined(var_9.angles)) {
     var_9.angles = (0, 0, 0);
@@ -1096,7 +1096,7 @@ init_headcutter_data() {
   self.largeessencefx = "yellow";
   self.placement_fx = level._effect["part_glow_yellow"];
   self.placement_fx_complete = level._effect["part_glow_yellow_complete"];
-  self.starting_move_structs = scripts\engine\utility::getstructarray("hc_start_struct", "targetname");
+  self.starting_move_structs = scripts\engine\utility::getStructArray("hc_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 0;
   self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_HC";
@@ -1113,7 +1113,7 @@ init_facemelter_data() {
   self.largeessencefx = "blue";
   self.placement_fx = level._effect["part_glow_blue"];
   self.placement_fx_complete = level._effect["part_glow_blue_complete"];
-  self.starting_move_structs = scripts\engine\utility::getstructarray("fm_start_struct", "targetname");
+  self.starting_move_structs = scripts\engine\utility::getStructArray("fm_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 1;
   self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_FACEMELTER";
@@ -1130,7 +1130,7 @@ init_dischord_data() {
   self.largeessencefx = "green";
   self.placement_fx = level._effect["part_glow_green"];
   self.placement_fx_complete = level._effect["part_glow_green_complete"];
-  self.starting_move_structs = scripts\engine\utility::getstructarray("dischord_start_struct", "targetname");
+  self.starting_move_structs = scripts\engine\utility::getStructArray("dischord_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 2;
   self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_DISCHORD";
@@ -1147,7 +1147,7 @@ init_shredder_data() {
   self.largeessencefx = "red";
   self.placement_fx = level._effect["part_glow_red"];
   self.placement_fx_complete = level._effect["part_glow_red_complete"];
-  self.starting_move_structs = scripts\engine\utility::getstructarray("shredder_start_struct", "targetname");
+  self.starting_move_structs = scripts\engine\utility::getStructArray("shredder_start_struct", "targetname");
   self.charge_distance = 750;
   self.crystal_slot = 3;
   self.place_on_standee_string = &"CP_QUEST_WOR_PLACE_SHREDDER";
@@ -1389,7 +1389,7 @@ array_remove_single(var_0, var_1) {
 }
 
 follow_struct_trail(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray("toy_trail_start", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("toy_trail_start", "targetname");
   var_4 = scripts\engine\utility::getclosest(self.origin, var_3);
   wait(0.5);
   self moveto(var_4.origin, 0.5);
@@ -1564,7 +1564,7 @@ wait_for_impact(var_0, var_1, var_2) {
   self endon("death");
   var_3 = 20;
   var_4 = var_3 * var_3;
-  var_5 = scripts\engine\utility::getstructarray("freeze_breath_struct", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("freeze_breath_struct", "targetname");
   var_5 = scripts\engine\utility::get_array_of_closest(self.origin, var_5);
   var_6 = var_5[0];
   if(!isDefined(level.facemelter_portal)) {
@@ -2017,7 +2017,7 @@ headcutter_freeze_test() {
   }
 
   level thread wait_to_drop_headcutter_battery();
-  var_0 = scripts\engine\utility::getstructarray("freeze_breath_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("freeze_breath_struct", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.target == "freeze_volume_1") {
       var_2 thread headcutter_freeze_loop();
@@ -2271,7 +2271,7 @@ watchforplayerdeath(var_0, var_1, var_2) {
 }
 
 init_standee_interaction() {
-  var_0 = scripts\engine\utility::getstructarray("wor_standee", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("wor_standee", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.target)) {
       var_3 = getscriptablearray(var_2.target, "targetname");

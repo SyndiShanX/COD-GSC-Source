@@ -123,7 +123,7 @@ dialog_lower_level_turret_hallway() {
 break_sensitive_windows() {
   flag_wait("start_sensitive_room");
   autosave_by_name("start_sensitive_room");
-  a_s_bullets = getstructarray("sensitive_magic_bullet", "targetname");
+  a_s_bullets = getStructArray("sensitive_magic_bullet", "targetname");
 
   foreach(s_bullet in a_s_bullets) {
     s_bullet_end = getstruct(s_bullet.target, "targetname");

@@ -158,8 +158,8 @@ global_inits() {
   ridge_guy_right = getEntArray("ridge_guy_right", "script_noteworthy");
   array_thread(ridge_guy_right, ::add_spawn_function, ::set_first_alert_patrol, "ridge_guy_right_first_alert");
 
-  array_thread(getstructarray("price_target_start", "script_noteworthy"), ::price_target_start);
-  array_thread(getstructarray("price_target_stop", "script_noteworthy"), ::price_target_stop);
+  array_thread(getStructArray("price_target_start", "script_noteworthy"), ::price_target_start);
+  array_thread(getStructArray("price_target_stop", "script_noteworthy"), ::price_target_stop);
 
   array_thread(getEntArray("blue_building_smoker", "script_noteworthy"), ::add_spawn_function, ::reduce_footstep_detect_dist);
   array_thread(getEntArray("blue_building_loader", "script_noteworthy"), ::add_spawn_function, ::reduce_footstep_detect_dist);
@@ -1501,7 +1501,7 @@ ch_teleport_player(name) {
   if(!isDefined(name))
     name = level.start_point;
 
-  array = getstructarray("start_point", "targetname");
+  array = getStructArray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {

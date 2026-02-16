@@ -73,7 +73,7 @@ _id_1D12() {
   }
 
   var_4 = [];
-  var_5 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_7 in var_5) {
     if(isDefined(var_7._id_FFC5) && var_7._id_FFC5 == "wall_buy") {
@@ -83,7 +83,7 @@ _id_1D12() {
         if(istrue(var_7._id_1642)) {
           continue;
         }
-        var_8 = scripts\engine\utility::getstructarray(var_7.target, "target");
+        var_8 = scripts\engine\utility::getStructArray(var_7.target, "target");
 
         foreach(var_10 in var_8) {
           if(var_10 == var_7) {
@@ -848,7 +848,7 @@ _id_C1EF() {
       level._id_8393[var_4]._id_3108 = ::_id_310E;
       level._id_8393[var_4]._id_3D92 = ::_id_682D;
       level._id_8393[var_4].hint_type_func = ::get_wall_buy_hint_type;
-      var_6 = scripts\engine\utility::getstructarray(var_4, "script_noteworthy");
+      var_6 = scripts\engine\utility::getStructArray(var_4, "script_noteworthy");
 
       for(var_7 = 0; var_7 < var_6.size; var_7++) {
         _id_0737::add_interaction_marker_internal(var_6[var_7], "wallbuy", "v_ui_icons_zombies_minimap_wallbuys", 0);

@@ -26,7 +26,7 @@ init() {
 }
 
 init_blockers() {
-  level.exterior_goals = getstructarray("exterior_goal", "targetname");
+  level.exterior_goals = getStructArray("exterior_goal", "targetname");
   array_thread(level.exterior_goals, ::blocker_init);
   zombie_doors = getEntArray("zombie_door", "targetname");
 
@@ -166,7 +166,7 @@ door_buy() {
   if(getdvarint(#"zombie_unlock_all") > 0 || isDefined(force) && force)
     return true;
 
-  if(!who usebuttonpressed())
+  if(!who useButtonPressed())
     return false;
 
   if(who in_revive_trigger())
@@ -794,7 +794,7 @@ debris_think() {
     self waittill("trigger", who, force);
 
     if(getdvarint(#"zombie_unlock_all") > 0 || isDefined(force) && force) {} else {
-      if(!who usebuttonpressed()) {
+      if(!who useButtonPressed()) {
         continue;
       }
       if(who in_revive_trigger())
@@ -1136,7 +1136,7 @@ player_fails_blocker_repair_trigger_preamble(player, players, trigger, hold_requ
   if(players.size == 1 && isDefined(players[0].intermission) && players[0].intermission == 1)
     return true;
 
-  if(hold_required && !player usebuttonpressed())
+  if(hold_required && !player useButtonPressed())
     return true;
 
   if(!hold_required && !player use_button_held())

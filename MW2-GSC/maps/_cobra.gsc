@@ -101,7 +101,7 @@ put this in your GSC:
 maps\_cobra::main( "vehicle_cobra_helicopter" );
 
 and these lines in your CSV:
-include,vehicle_cobra_helicopter_cobra
+#include,vehicle_cobra_helicopter_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
 defaultmdl="vehicle_cobra_helicopter"default:"vehicletype" "cobra"default:"script_team" "allies"*/
@@ -112,7 +112,7 @@ put this in your GSC:
 maps\_cobra::main( "vehicle_cobra_helicopter_fly" );
 
 and these lines in your CSV:
-include,vehicle_cobra_helicopter_fly_cobra
+#include,vehicle_cobra_helicopter_fly_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
 defaultmdl="vehicle_cobra_helicopter_fly"default:"vehicletype" "cobra"default:"script_team" "allies"*/
@@ -123,7 +123,7 @@ put this in your GSC:
 maps\_cobra::main( "vehicle_cobra_helicopter_fly_low" );
 
 and these lines in your CSV:
-include,vehicle_cobra_helicopter_fly_low_cobra
+#include,vehicle_cobra_helicopter_fly_low_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
 defaultmdl="vehicle_cobra_helicopter_fly_low"default:"vehicletype" "cobra"default:"script_team" "allies"*/
@@ -134,7 +134,7 @@ put this in your GSC:
 maps\_cobra::main( "vehicle_cobra_helicopter_low" );
 
 and these lines in your CSV:
-include,vehicle_cobra_helicopter_low_cobra
+#include,vehicle_cobra_helicopter_low_cobra
 sound,vehicle_cobra,vehicle_standard,all_sp
 
 defaultmdl="vehicle_cobra_helicopter_low"default:"vehicletype" "cobra"default:"script_team" "allies"

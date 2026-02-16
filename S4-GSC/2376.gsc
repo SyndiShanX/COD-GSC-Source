@@ -901,11 +901,11 @@ _id_4E96() {
   self endon("game_ended");
 
   for(;;) {
-    if(!self isonground() && self jumpbuttonpressed()) {
+    if(!self isonground() && self jumpbuttonPressed()) {
       wait 0.2;
       earthquake(0.25, 0.75, self.origin + (0, 0, 60), 100);
 
-      while(self jumpbuttonpressed() && !self isonground()) {
+      while(self jumpbuttonPressed() && !self isonground()) {
         wait 0.05;
       }
     }

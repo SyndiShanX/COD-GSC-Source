@@ -712,7 +712,7 @@ watch_for_use_gas_trigger(var_0) {
       if(distancesquared(self getEye(), var_0.origin) < var_2) {
         self forceusehinton(var_1);
 
-        if(self usebuttonpressed()) {
+        if(self useButtonPressed()) {
           self.player_using_gas = 1;
           self notify("using_gas");
           thread reset_gas_usage();

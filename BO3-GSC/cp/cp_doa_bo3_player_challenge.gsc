@@ -924,12 +924,12 @@ function function_c71e611c(vehicle) {
     if(!level flag::get("doa_challenge_running")) {
       continue;
     }
-    if(isDefined(self.doa.vehicle) && self changeseatbuttonpressed() && self.doa.var_37efabf7 > 0 && (!(isDefined(self.doa.var_e651a75e) && self.doa.var_e651a75e))) {
+    if(isDefined(self.doa.vehicle) && self changeseatbuttonPressed() && self.doa.var_37efabf7 > 0 && (!(isDefined(self.doa.var_e651a75e) && self.doa.var_e651a75e))) {
       self.doa.var_37efabf7--;
       curdir = (level.launchforce, 0, 0);
       vehicle launchvehicle(curdir, (0, 0, 0), 1);
       vehicle thread function_fa6d5f56();
-      while(self changeseatbuttonpressed()) {
+      while(self changeseatbuttonPressed()) {
         wait(0.05);
       }
       wait(1);
@@ -1498,12 +1498,12 @@ function function_e619ee5(vehicle) {
     if(!level flag::get("doa_challenge_running")) {
       continue;
     }
-    if(isDefined(self.doa.vehicle) && self changeseatbuttonpressed() && gettime() > self.doa.var_f6a4f3f && (!(isDefined(self.doa.var_1951557) && self.doa.var_1951557))) {
+    if(isDefined(self.doa.vehicle) && self changeseatbuttonPressed() && gettime() > self.doa.var_f6a4f3f && (!(isDefined(self.doa.var_1951557) && self.doa.var_1951557))) {
       self.doa.var_f6a4f3f = gettime() + getdvarint("scr_doa_chicken_bowl_boostinterval", 4000);
       curdir = (level.launchforce, 0, 0);
       vehicle launchvehicle(curdir, (0, 0, 0), 1);
       vehicle thread function_fa6d5f56();
-      while(self changeseatbuttonpressed()) {
+      while(self changeseatbuttonPressed()) {
         wait(0.05);
       }
     }

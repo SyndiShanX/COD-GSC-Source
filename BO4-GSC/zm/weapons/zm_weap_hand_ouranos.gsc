@@ -147,7 +147,7 @@ function_54922a21() {
   self endon(#"death", #"weapon_change");
 
   while(true) {
-    while((self.chargeshotlevel != 2 || !self attackbuttonpressed()) && (self.currentweapon === level.w_hand_ouranos || self.currentweapon === level.w_hand_ouranos_upgraded)) {
+    while((self.chargeshotlevel != 2 || !self attackButtonPressed()) && (self.currentweapon === level.w_hand_ouranos || self.currentweapon === level.w_hand_ouranos_upgraded)) {
       waitframe(1);
     }
 
@@ -595,7 +595,7 @@ player_charged_shot(weapon) {
   self clientfield::set("" + # "hash_4fb73e88d45af0ef", 1);
   self clientfield::set("" + # "ouranos_beam_fire", 1);
 
-  while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && self getweaponammostock(weapon) && self getcurrentweapon() === weapon && !self meleebuttonpressed()) {
+  while(zm_utility::is_player_valid(self) && self attackButtonPressed() && self getweaponammostock(weapon) && self getcurrentweapon() === weapon && !self meleeButtonPressed()) {
     waitframe(5);
     self.var_e34577ca = 1;
     waitframe(2);
@@ -626,7 +626,7 @@ function_a2065170() {
   self endon(#"death", #"weapon_change", #"stop_beaming", #"weapon_fired");
 
   while(true) {
-    if(self meleebuttonpressed()) {
+    if(self meleeButtonPressed()) {
       self notify(#"stop_beaming");
     }
 
@@ -638,7 +638,7 @@ function_1e39fbc5(weapon) {
   self endon(#"death", #"stop_beaming", #"weapon_change");
   wait 0.3;
 
-  while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
+  while(zm_utility::is_player_valid(self) && self attackButtonPressed()) {
     self thread function_6e71e724();
     n_ammo = self getweaponammoclip(weapon);
 
@@ -673,7 +673,7 @@ function_6e71e724() {
   self notify(#"beaming");
   self endon(#"death", #"beaming", #"stop_beaming", #"weapon_change");
 
-  while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
+  while(zm_utility::is_player_valid(self) && self attackButtonPressed()) {
     waitframe(1);
   }
 

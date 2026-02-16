@@ -152,7 +152,7 @@ next_mission(m_player_body) {
 
 player_breach_fake_fire() {
   while(flag("breach_gun_raised")) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       level.player playrumbleonentity("damage_heavy");
       playFXOnTag(getfx("maginified_muzzle_flash"), level.ai_thug_4, "tag_flash");
     }
@@ -184,7 +184,7 @@ player_breach_button_press() {
   screen_message_create(&"PANAMA_MOTEL_BREACH");
 
   while(true) {
-    if(level.player usebuttonpressed() || level.player secondaryoffhandbuttonpressed()) {
+    if(level.player useButtonPressed() || level.player secondaryoffhandbuttonPressed()) {
       screen_message_delete();
       flag_set("player_pull_pin");
       level clientnotify("aS_off");

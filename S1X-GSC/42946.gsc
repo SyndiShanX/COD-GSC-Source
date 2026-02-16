@@ -762,7 +762,7 @@ handlecoopshooting(var_0, var_1, var_2) {
       continue;
     }
 
-    if(var_1.owner attackbuttonpressed() && !var_1 isturretoverheated()) {
+    if(var_1.owner attackButtonPressed() && !var_1 isturretoverheated()) {
       var_1 turretshootblank(var_1.baseowner);
       wait(var_3);
       continue;
@@ -2397,13 +2397,13 @@ state_chaingun_pump() {
   if(var_0 == "ready") {
     if(self.mechuistate.chaingun.overheated) {
       set_mech_chaingun_state("overheat");
-    } else if(self attackbuttonpressed()) {
+    } else if(self attackButtonPressed()) {
       set_mech_chaingun_state("firing");
     }
   } else if(var_0 == "firing") {
     if(self.mechuistate.chaingun.overheated) {
       set_mech_chaingun_state("overheat");
-    } else if(!self attackbuttonpressed()) {
+    } else if(!self attackButtonPressed()) {
       set_mech_chaingun_state("ready");
     }
   } else if(var_0 == "overheat" && !self.mechuistate.chaingun.overheated) {
@@ -2624,7 +2624,7 @@ self_destruct_goliath() {
   var_0 = 0;
 
   while(maps\mp\_utility::isjuggernaut()) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = var_0 + 0.05;
 
       if(var_0 > 1.0) {

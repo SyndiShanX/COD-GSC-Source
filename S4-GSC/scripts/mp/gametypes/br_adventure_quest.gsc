@@ -10,7 +10,7 @@ init() {
   if(!istrue(level.br_quests_enabled)) {
     return;
   }
-  level.br_queststashlocations = scripts\engine\utility::getstructarray("quest_stash_location", "targetname");
+  level.br_queststashlocations = scripts\engine\utility::getStructArray("quest_stash_location", "targetname");
 
   if(level.br_queststashlocations.size < 0) {
     level.br_quests_enabled = 0;
@@ -33,7 +33,7 @@ _id_EDD3(var_0) {
 
 _id_48B1() {
   if(!isDefined(level.br_queststashlocations)) {
-    level.br_queststashlocations = scripts\engine\utility::getstructarray("quest_stash_location", "targetname");
+    level.br_queststashlocations = scripts\engine\utility::getStructArray("quest_stash_location", "targetname");
   }
 
   return scripts\engine\utility::random(level.br_queststashlocations);

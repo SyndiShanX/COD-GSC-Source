@@ -465,7 +465,7 @@ function_17485b5(veh, var_7e0e1fa6, var_3d0e8f5b) {
     var_facd4b29 = 0;
 
     while(isDefined(rocket)) {
-      if(isDefined(rocket.owner) && rocket.owner attackbuttonpressed()) {
+      if(isDefined(rocket.owner) && rocket.owner attackButtonPressed()) {
         if(!(isDefined(var_facd4b29) && var_facd4b29)) {
           if(missiles_fired < var_ecf86986) {
             rocket function_71f4cd34();
@@ -1049,12 +1049,12 @@ missile_deploy_watch(rocket) {
   var_dc54c0bd = isDefined(params.var_538e1d5) ? params.var_538e1d5 : 3000;
   wait 0.25;
 
-  while(self attackbuttonpressed()) {
+  while(self attackButtonPressed()) {
     waitframe(1);
   }
 
   while(true) {
-    if(self attackbuttonpressed() || rocket.origin[2] < var_dc54c0bd) {
+    if(self attackButtonPressed() || rocket.origin[2] < var_dc54c0bd) {
       self thread missile_deploy(rocket, 0);
       continue;
     }

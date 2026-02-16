@@ -147,7 +147,7 @@ rotate_loop_by_targetname(var_0, var_1, var_2) {
 }
 
 init_perk_machines_func(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_4, var_3 in var_1) {
     var_3 thread revive_power_on_func(var_4);
   }
@@ -876,7 +876,7 @@ run_deadeye_charge_watcher() {
   for(;;) {
     var_2 = scripts\cp\utility::getweapontoswitchbackto();
     var_3 = func_9B58(var_2);
-    if(self adsbuttonpressed() && !scripts\engine\utility::istrue(self.no_deadeye) && !var_3) {
+    if(self adsButtonPressed() && !scripts\engine\utility::istrue(self.no_deadeye) && !var_3) {
       var_4 = gettime();
       if(!isDefined(var_0)) {
         var_0 = var_4;

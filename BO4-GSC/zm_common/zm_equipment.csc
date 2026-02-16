@@ -103,7 +103,7 @@ is_included(equipment) {
   return isDefined(level._included_equipment[equipment.rootweapon]);
 }
 
-include(equipment_name) {
+#include(equipment_name) {
   if(!isDefined(level._included_equipment)) {
     level._included_equipment = [];
   }

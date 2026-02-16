@@ -235,7 +235,7 @@ removeMPDamPlayerOnCommand() {
 
   while(true) {
     button_hold_time = 0;
-    while(self UseButtonPressed()) {
+    while(self useButtonPressed()) {
       button_hold_time += 0.05;
       if(button_hold_time > 0.75) {
         level thread removeMPDamPlayer(self, false);

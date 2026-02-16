@@ -472,7 +472,7 @@ suicide_trigger_think() {
   self thread clean_up_suicide_hud_on_end_game();
   self thread clean_up_suicide_hud_on_bled_out();
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed())
     wait 1;
 
   if(!isDefined(self.suicideprompt)) {
@@ -584,7 +584,7 @@ can_suicide() {
 }
 
 is_suiciding(revivee) {
-  return self usebuttonpressed() && can_suicide();
+  return self useButtonPressed() && can_suicide();
 }
 
 revive_trigger_spawn() {
@@ -737,7 +737,7 @@ can_revive(revivee) {
 }
 
 is_reviving(revivee) {
-  return self usebuttonpressed() && can_revive(revivee);
+  return self useButtonPressed() && can_revive(revivee);
 }
 
 is_reviving_any() {

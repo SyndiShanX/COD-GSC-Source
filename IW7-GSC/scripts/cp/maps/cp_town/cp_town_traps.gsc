@@ -94,10 +94,10 @@ trap_debug_devgui() {
 }
 
 electric_trap_init() {
-  var_0 = scripts\engine\utility::getstructarray("trap_electric_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("trap_electric_part", "script_noteworthy");
   var_1 = randomint(var_0.size);
   var_2 = var_0[var_1];
-  var_3 = scripts\engine\utility::getstructarray("trap_electric", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
     level thread func_13611(var_5);
@@ -132,7 +132,7 @@ electric_trap_init() {
 
 elec_trap_sparks() {
   level endon("electric_trap_part_added");
-  var_0 = scripts\engine\utility::getstructarray("electric_trap_sparks", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("electric_trap_sparks", "targetname");
   for(;;) {
     var_1 = scripts\engine\utility::random(var_0).origin;
     playFX(level._effect["elec_trap_sparks"], var_1);
@@ -158,7 +158,7 @@ electric_trap_fix(var_0, var_1) {
   var_3 = spawn("script_model", var_2.origin);
   var_3.angles = var_2.angles;
   var_3 setModel("container_electrical_box_01_components");
-  var_4 = scripts\engine\utility::getstructarray("trap_electric", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
   foreach(var_6 in var_4) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_6);
     var_7 = getent(var_6.target, "targetname");
@@ -210,7 +210,7 @@ electric_trap_use(var_0, var_1) {
     return;
   }
 
-  var_2 = scripts\engine\utility::getstructarray("trap_electric", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("trap_electric", "script_noteworthy");
   foreach(var_4 in var_2) {
     level thread scripts\cp\cp_interaction::interaction_cooldown(var_4, 325);
     var_5 = getent(var_4.target, "targetname");
@@ -283,7 +283,7 @@ is_crog() {
 electrocute_zombie(var_0, var_1) {
   var_0 endon("death");
   wait(randomfloat(3));
-  var_2 = scripts\engine\utility::getstructarray("electric_trap_spots", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("electric_trap_spots", "targetname");
   var_3 = scripts\engine\utility::getclosest(var_0.origin, var_2);
   var_4 = var_3.origin + (0, 0, randomintrange(100, 170));
   var_5 = var_0.origin + (0, 0, randomintrange(20, 60));
@@ -321,10 +321,10 @@ electric_trap_rumble() {
 }
 
 freeze_trap_init() {
-  var_0 = scripts\engine\utility::getstructarray("trap_freeze_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("trap_freeze_part", "script_noteworthy");
   var_1 = randomint(var_0.size);
   var_2 = var_0[var_1];
-  var_3 = scripts\engine\utility::getstructarray("trap_freeze", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
   }
@@ -357,7 +357,7 @@ freeze_trap_init() {
   }
 
   scripts\engine\utility::exploder(75);
-  var_3 = scripts\engine\utility::getstructarray("trap_freeze", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
   foreach(var_5 in var_3) {
     var_15 = getent(var_5.target, "targetname");
     var_15 setModel("mp_frag_button_on_green");
@@ -422,7 +422,7 @@ freeze_trap_fix(var_0, var_1) {
   var_2 = getent(var_0.target, "targetname");
   var_2 setModel("ship_hallway_fuse_box");
   playFX(level._effect["elec_trap_sparks"], var_2.origin);
-  var_3 = scripts\engine\utility::getstructarray("trap_freeze", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_5);
   }
@@ -446,7 +446,7 @@ freeze_trap_take_part(var_0, var_1) {
 }
 
 freeze_trap_use(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray("trap_freeze", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("trap_freeze", "script_noteworthy");
   foreach(var_4 in var_2) {
     var_4.cooling_down = 1;
     var_5 = getent(var_4.target, "targetname");
@@ -542,10 +542,10 @@ chill_scrnfx() {
 }
 
 pool_trap_init() {
-  var_0 = scripts\engine\utility::getstructarray("trap_pool_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("trap_pool_part", "script_noteworthy");
   var_1 = randomint(var_0.size);
   var_2 = var_0[var_1];
-  var_3 = scripts\engine\utility::getstructarray("trap_pool", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("trap_pool", "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
   }
@@ -585,7 +585,7 @@ pool_trap_fix(var_0, var_1) {
 
   level notify("pool_trap_fixed");
   scripts\engine\utility::flag_set("pool_trap_part_added");
-  var_2 = scripts\engine\utility::getstructarray("trap_pool", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("trap_pool", "script_noteworthy");
   foreach(var_4 in var_2) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_4);
   }
@@ -699,10 +699,10 @@ pool_damage_zombie(var_0, var_1) {
 }
 
 propane_trap_init() {
-  var_0 = scripts\engine\utility::getstructarray("trap_propane_part", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("trap_propane_part", "script_noteworthy");
   var_1 = randomint(var_0.size);
   var_2 = var_0[var_1];
-  var_3 = scripts\engine\utility::getstructarray("trap_propane", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("trap_propane", "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
   }
@@ -742,7 +742,7 @@ propane_trap_fix(var_0, var_1) {
 
   level notify("propane_trap_fixed");
   scripts\engine\utility::flag_set("propane_trap_part_added");
-  var_2 = scripts\engine\utility::getstructarray("trap_propane", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("trap_propane", "script_noteworthy");
   foreach(var_4 in var_2) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_4);
   }

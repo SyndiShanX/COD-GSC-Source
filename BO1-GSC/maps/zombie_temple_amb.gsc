@@ -88,7 +88,7 @@ setup_music_egg() {
   wait(3);
   level.meteor_counter = 0;
   level.music_override = false;
-  array_thread(getstructarray("mus_easteregg", "targetname"), ::music_egg);
+  array_thread(getStructArray("mus_easteregg", "targetname"), ::music_egg);
 }
 music_egg() {
   if(!isDefined(self)) {
@@ -113,7 +113,7 @@ music_egg_wait() {
   while(1) {
     music_egg_trig waittill("trigger", who);
     while(who IsTouching(music_egg_trig)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         music_egg_trig.completed = true;
         break;
       }

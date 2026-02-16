@@ -59,13 +59,13 @@ wait_for_player_to_place_cortex() {
   level endon("cortex_dropped");
   level endon("cortex_planted");
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed())
     wait 1;
 
   var_0 = 6400;
 
   for(;;) {
-    if(self usebuttonpressed() && isDefined(level.cortex_carrier) && level.cortex_carrier == self && self hasweapon("aliencortex_mp") && self isonground()) {
+    if(self useButtonPressed() && isDefined(level.cortex_carrier) && level.cortex_carrier == self && self hasweapon("aliencortex_mp") && self isonground()) {
       if(isDefined(level.current_cortex_spot) && distancesquared(self.origin, level.current_cortex_spot.origin) <= var_0) {
         self setweaponammoclip("aliencortex_mp", 0);
         self setweaponammostock("aliencortex_mp", 0);
@@ -378,7 +378,7 @@ drop_cortex_on_death() {
   level thread remove_cortex_player_icon();
 
   if(maps\mp\alien\_utility::is_true(self.kill_trigger_event_processed)) {
-    var_0 = common_scripts\utility::getclosest(self.origin, common_scripts\utility::getstructarray("respawn_cortex", "targetname"));
+    var_0 = common_scripts\utility::getclosest(self.origin, common_scripts\utility::getStructArray("respawn_cortex", "targetname"));
 
     if(!isDefined(var_0.angles))
       var_0.angles = (0, 0, 0);
@@ -402,7 +402,7 @@ drop_cortex_on_disconnect() {
   self endon("last_stand");
   self waittill("disconnect");
   var_0 = level.last_cortex_pickup_origin;
-  var_1 = common_scripts\utility::getclosest(var_0, common_scripts\utility::getstructarray("respawn_cortex", "targetname"));
+  var_1 = common_scripts\utility::getclosest(var_0, common_scripts\utility::getStructArray("respawn_cortex", "targetname"));
 
   if(!isDefined(var_1.angles))
     var_1.angles = (0, 0, 0);

@@ -31,11 +31,11 @@ init() {
 }
 
 func_F764() {
-  level.var_A433 = scripts\engine\utility::getstructarray("jammer_drone_start", "targetname");
+  level.var_A433 = scripts\engine\utility::getStructArray("jammer_drone_start", "targetname");
 }
 
 func_F765() {
-  level.var_A432 = scripts\engine\utility::getstructarray("jammer_drone_emp", "script_noteworthy");
+  level.var_A432 = scripts\engine\utility::getStructArray("jammer_drone_emp", "script_noteworthy");
 }
 
 func_618B(var_0) {

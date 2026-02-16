@@ -276,7 +276,7 @@ _id_FFA1() {
 }
 
 _id_FF8D() {
-  var_0 = scripts\engine\utility::getstructarray("van_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("van_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

@@ -139,7 +139,7 @@ fix_doors() {
     wait(1);
   }
 
-  var_0 = scripts\engine\utility::getstructarray("debris_750", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("debris_750", "script_noteworthy");
   var_1 = scripts\engine\utility::getclosest((4792.2, -4374, 9.5), var_0);
   var_1.script_area = "drive_in_elvira";
   var_2 = scripts\engine\utility::getclosest((4832.3, -4347.3, 9.5), var_0);
@@ -380,7 +380,7 @@ streamweaponsonzonechange(var_0) {
   var_0 scripts\engine\utility::waittill_any_timeout(10, "player_spawned");
   scripts\engine\utility::flag_wait("wall_buy_setup_done");
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_4 in var_2) {
     if(isDefined(var_4.name) && var_4.name == "wall_buy") {
       var_1[var_1.size] = var_4;
@@ -432,7 +432,7 @@ cp_town_event_wave_init() {
 
 init_town_spawner_locations() {
   level.goon_spawners = [];
-  var_0 = scripts\engine\utility::getstructarray("dog_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("dog_spawner", "targetname");
   if(isDefined(level.goon_spawner_patch_func)) {
     [[level.goon_spawner_patch_func]](var_0);
   }
@@ -1407,7 +1407,7 @@ removeinvalidstructs(var_0, var_1) {
     }
 
     if(isDefined(var_4.target)) {
-      var_5 = scripts\engine\utility::getstructarray(var_4.var_336, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.var_336, "targetname");
       foreach(var_7 in var_5) {
         if(isDefined(var_7.target) && var_7.target == var_4.target) {
           var_0 = scripts\engine\utility::array_remove(var_0, var_7);
@@ -1841,7 +1841,7 @@ setupdamagetriggers(var_0) {
   var_0 endon("disconnect");
   scripts\engine\utility::flag_wait("interactions_initialized");
   var_1 = getent("boundary_toxic_line", "targetname");
-  var_2 = scripts\engine\utility::getstructarray("boundary_toxic_line_center", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("boundary_toxic_line_center", "targetname");
   for(;;) {
     if(var_0 scripts\cp\utility::is_valid_player() && ispointinvolume(var_0.origin, var_1)) {
       if(!isDefined(var_0.geiger_counter)) {
@@ -2007,7 +2007,7 @@ setupweaponupgradearray() {
 water_triggers() {
   var_0 = getEntArray("water_trigger", "targetname");
   scripts\engine\utility::array_thread(var_0, ::water_trigger);
-  level.water_respawn_spots = scripts\engine\utility::getstructarray("water_respawn_spot", "targetname");
+  level.water_respawn_spots = scripts\engine\utility::getStructArray("water_respawn_spot", "targetname");
 }
 
 water_trigger() {

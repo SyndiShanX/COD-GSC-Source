@@ -15,7 +15,7 @@ init() {
   }
 }
 init_blockers() {
-  level.exterior_goals = getstructarray("exterior_goal", "targetname");
+  level.exterior_goals = getStructArray("exterior_goal", "targetname");
   for(i = 0; i < level.exterior_goals.size; i++) {
     level.exterior_goals[i] thread blocker_init();
   }
@@ -122,7 +122,7 @@ door_buy() {
   if(GetDvarInt(#"zombie_unlock_all") > 0 || is_true(force)) {
     return true;
   }
-  if(!who UseButtonPressed()) {
+  if(!who useButtonPressed()) {
     return false;
   }
   if(who in_revive_trigger()) {
@@ -496,7 +496,7 @@ debris_think() {
   while(1) {
     self waittill("trigger", who, force);
     if(GetDvarInt(#"zombie_unlock_all") > 0 || is_true(force)) {} else {
-      if(!who UseButtonPressed()) {
+      if(!who useButtonPressed()) {
         continue;
       }
       if(who in_revive_trigger()) {
@@ -1647,7 +1647,7 @@ shutter_move_switch() {
 shutter_think() {
   while(1) {
     self waittill("trigger", who);
-    if(!who UseButtonPressed()) {
+    if(!who useButtonPressed()) {
       continue;
     }
     if(who in_revive_trigger()) {

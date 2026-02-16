@@ -240,7 +240,7 @@ ship_shoot_vert_missile(var_0, var_1, var_2, var_3) {
   var_4 = common_scripts\utility::spawn_tag_origin();
   var_4.origin = self.origin;
   var_4.angles = self.angles;
-  var_5 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_5 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_6 = var_5[randomint(var_5.size)];
   var_7 = randomintrange(15000, 18000);
   var_8 = randomintrange(13, 15);
@@ -323,7 +323,7 @@ land_shoot_vert_missile(var_0, var_1, var_2, var_3) {
   var_4.origin = self.origin;
   var_4.angles = self.angles;
   level.land_missiles[level.land_missiles.size] = var_4;
-  var_5 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_5 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_6 = var_5[randomint(var_5.size)];
   var_7 = randomintrange(15000, 18000);
   var_8 = randomintrange(13, 15);
@@ -374,7 +374,7 @@ dz_enemy_destroyer_mortars() {
   level endon(var_0);
   var_1 = ["dz_enemy_mortar_01_dest_01", "dz_enemy_mortar_01_dest_02", "dz_enemy_mortar_01_dest_03", "dz_enemy_mortar_01_dest_04"];
   var_2 = common_scripts\utility::getstruct("dz_enemy_mortar_01", "targetname");
-  var_3 = common_scripts\utility::getstructarray("dz_enemy_mortar_01_dest", "targetname");
+  var_3 = common_scripts\utility::getStructArray("dz_enemy_mortar_01_dest", "targetname");
 
   for(;;) {
     var_4 = var_1[randomint(var_1.size)];
@@ -414,7 +414,7 @@ defend_sparrow_ships() {
   common_scripts\utility::flag_wait("defend_sparrow_start");
 
   for(;;) {
-    var_0 = common_scripts\utility::getstructarray("defend_sparrow_ship_missiles", "targetname");
+    var_0 = common_scripts\utility::getStructArray("defend_sparrow_ship_missiles", "targetname");
 
     foreach(var_2 in var_0) {
       playFX(common_scripts\utility::getfx("battleship_flash_large_withmissile"), var_2.origin, anglesToForward(var_2.angles));
@@ -424,7 +424,7 @@ defend_sparrow_ships() {
 }
 
 playfx_targetname_endon(var_0, var_1, var_2, var_3) {
-  var_4 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_4 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_6 in var_4) {
     var_7 = var_6.angles;

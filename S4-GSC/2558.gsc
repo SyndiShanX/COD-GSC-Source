@@ -719,7 +719,7 @@ _id_1706(var_0, var_1) {
   var_3 = 1;
 
   while(gettime() - var_2 < 500) {
-    if(!var_1 usebuttonpressed()) {
+    if(!var_1 useButtonPressed()) {
       var_3 = 0;
       break;
     }

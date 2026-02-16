@@ -183,7 +183,7 @@ turn_effects_on(var_0, var_1) {
     if(!common_scripts\utility::flag_exist(var_0))
       common_scripts\utility::flag_init(var_0);
 
-    var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
     var_3 = [];
     var_4 = 0;
 

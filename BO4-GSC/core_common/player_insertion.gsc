@@ -1964,7 +1964,7 @@ function_b80277f7() {
       level.insertionpassenger[[level.var_ce84dde9]](self, level.insertion.passengercount);
     }
 
-    if(self flagsys::get(#"hash_224cb97b8f682317") || self flagsys::get(#"hash_287397edba8966f9") && self usebuttonpressed()) {
+    if(self flagsys::get(#"hash_224cb97b8f682317") || self flagsys::get(#"hash_287397edba8966f9") && self useButtonPressed()) {
       return;
     }
   }

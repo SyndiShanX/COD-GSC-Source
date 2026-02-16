@@ -971,7 +971,7 @@ waitPlayerStuckOnCarepackageReturn(player) {
   startOrg = player.origin;
   stuckTimeStart = GetTime();
 
-  while(isDefined(player) && isReallyAlive(player) && !player IsOnGround() && startOrg == player.origin && player UseButtonPressed()) {
+  while(isDefined(player) && isReallyAlive(player) && !player IsOnGround() && startOrg == player.origin && player useButtonPressed()) {
     curTimeButtonHeld = GetTime() - stuckTimeStart;
     if(curTimeButtonHeld >= TIME_UNTIL_STUCK) {
       return true;

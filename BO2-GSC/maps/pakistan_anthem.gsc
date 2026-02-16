@@ -399,14 +399,14 @@ wall_grapple_event() {
   level.player enableweapons();
   level.player enableoffhandweapons();
 
-  while(level.player fragbuttonpressed()) {
+  while(level.player fragButtonPressed()) {
     wait 0.05;
   }
 
   screen_message_create(&"PAKISTAN_SHARED_GRENADE_GRAPPLE");
   e_grapple_target = getent("grapple_target", "targetname");
 
-  while(!level.player fragbuttonpressed()) {
+  while(!level.player fragButtonPressed()) {
     wait 0.05;
   }
 
@@ -486,13 +486,13 @@ check_grapple_target() {
   while(true) {
     add_visor_text("PAKISTAN_SHARED_GRAPPLE_STANDBY", 0);
 
-    while(!self fragbuttonpressed()) {
+    while(!self fragButtonPressed()) {
       wait 0.05;
     }
 
     remove_visor_text("PAKISTAN_SHARED_GRAPPLE_STANDBY");
 
-    if(self fragbuttonpressed()) {
+    if(self fragButtonPressed()) {
       if(self get_dot_from_eye(e_grapple_target.origin) > cos(n_angle) && !level.b_grapple_success) {
         rpc("clientscripts/pakistan_2", "SetGrappelTarget", 1);
         remove_visor_text("PAKISTAN_SHARED_GRAPPLE_SCAN");
@@ -884,7 +884,7 @@ surveillance_zoom_hint() {
   wait 2.0;
   level thread screen_message_create(&"PAKISTAN_SHARED_SURV_ZOOM", undefined, undefined, undefined, 5);
 
-  while(!level.player adsbuttonpressed()) {
+  while(!level.player adsButtonPressed()) {
     wait 0.05;
   }
 
@@ -1039,7 +1039,7 @@ id_melee() {
     screen_message_create(&"PAKISTAN_SHARED_MELEE_HINT");
 
     while(level.player istouching(t_melee)) {
-      if(level.player meleebuttonpressed()) {
+      if(level.player meleeButtonPressed()) {
         screen_message_delete();
         flag_set("rooftop_melee");
         break;
@@ -1801,7 +1801,7 @@ handle_surveillance_toggle() {
   flag_set("xcam_off");
   screen_message_create(&"PAKISTAN_SHARED_SURV_ACTIVATE");
 
-  while(!level.player actionslotonebuttonpressed()) {
+  while(!level.player actionslotonebuttonPressed()) {
     wait 0.05;
   }
 
@@ -2044,7 +2044,7 @@ drone_punishment() {
     stop_surveillance();
   }
 
-  a_s_drones = getstructarray("drone_punisher", "targetname");
+  a_s_drones = getStructArray("drone_punisher", "targetname");
   a_vh_drones = [];
 
   for(i = 0; i < a_s_drones.size; i++) {

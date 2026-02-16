@@ -14,7 +14,7 @@ init() {
   movable_cover_precache();
   waitframe();
   covers = getEntArray("movable_cover", "targetname");
-  cover_proxy = getstructarray("movable_cover", "targetname");
+  cover_proxy = getStructArray("movable_cover", "targetname");
   foreach(proxy in cover_proxy) {
     if(isDefined(proxy.target)) {
       cover = GetEnt(proxy.target, "targetname");
@@ -75,7 +75,7 @@ movable_cover_init() {
 
   targets = [];
   if(isDefined(self.target)) {
-    structs = GetStructArray(self.target, "targetname");
+    structs = getStructArray(self.target, "targetname");
     ents = getEntArray(self.target, "targetname");
     targets = array_combine(structs, ents);
   }

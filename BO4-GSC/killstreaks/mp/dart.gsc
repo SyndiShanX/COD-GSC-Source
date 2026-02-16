@@ -199,12 +199,12 @@ watchremotecontroldeactivate() {
   dart endon(#"watchremotecontroldeactivate_remoteweapons", #"death", #"remote_weapon_end");
   dart.remoteowner endon(#"disconnect");
 
-  while(dart.remoteowner attackbuttonpressed()) {
+  while(dart.remoteowner attackButtonPressed()) {
     waitframe(1);
   }
 
   while(true) {
-    if(dart.remoteowner attackbuttonpressed()) {
+    if(dart.remoteowner attackButtonPressed()) {
       dart thread remote_weapons::endremotecontrolweaponuse(1);
       dart.lastusetime = gettime();
       return;

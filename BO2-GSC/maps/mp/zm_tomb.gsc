@@ -975,7 +975,7 @@ custom_add_weapons() {
   add_shared_ammo_weapon("beretta93r_extclip_zm", "beretta93r_zm");
 }
 
-include_weapons() {
+#include_weapons() {
   include_weapon("hamr_zm");
   include_weapon("hamr_upgraded_zm", 0);
   include_weapon("mg08_zm");
@@ -1083,7 +1083,7 @@ include_weapons() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -1103,7 +1103,7 @@ include_powerups() {
   setup_tablet_devgui();
 }
 
-include_perks_in_random_rotation() {
+#include_perks_in_random_rotation() {
   include_perk_in_random_rotation("specialty_armorvest");
   include_perk_in_random_rotation("specialty_quickrevive");
   include_perk_in_random_rotation("specialty_fastreload");

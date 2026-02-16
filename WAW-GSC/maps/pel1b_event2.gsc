@@ -162,7 +162,7 @@ second_plane_napalm_drop() {
 
   wait(1);
 
-  fire_points = getstructarray("naplam_battle_residual_fire", "targetname");
+  fire_points = getStructArray("naplam_battle_residual_fire", "targetname");
   for(i = 0; i < fire_points.size; i++) {
     playFX(level._effect["fire_foliage_large"], fire_points[i].origin);
   }

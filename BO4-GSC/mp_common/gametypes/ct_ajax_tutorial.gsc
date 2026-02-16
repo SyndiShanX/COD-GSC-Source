@@ -704,7 +704,7 @@ function_9f3ecaf2() {
     var_b509dacb = 0;
 
     while(!var_b509dacb) {
-      while(!e_player fragbuttonpressed()) {
+      while(!e_player fragButtonPressed()) {
         waitframe(1);
       }
 
@@ -714,7 +714,7 @@ function_9f3ecaf2() {
       waypoint = ct_utils::create_waypoint(#"hash_1f1deaa6bff12db8", s_loc.origin, s_loc.angles, #"any", undefined, 40, undefined);
 
       while(true) {
-        if(!e_player fragbuttonpressed()) {
+        if(!e_player fragButtonPressed()) {
           break;
         }
 

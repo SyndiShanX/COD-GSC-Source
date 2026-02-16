@@ -474,7 +474,7 @@ player_ammo_monitor_clip_01() {
 //}
 
 waittill_player_fires_empty_gun() {
-  while(!level.player AttackButtonPressed())
+  while(!level.player attackButtonPressed())
     wait(0.05);
 }
 

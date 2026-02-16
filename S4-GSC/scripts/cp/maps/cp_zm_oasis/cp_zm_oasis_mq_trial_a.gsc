@@ -78,7 +78,7 @@ init_charging_obelisk() {
   if(!isDefined(level.trial_of_mindfulness_orb._id_832C)) {
     return;
   }
-  level.a_trial_of_mindfulness_rune_symbols = scripts\engine\utility::getstructarray("symbol_rune_trial_of_mindfulness", "script_noteworthy");
+  level.a_trial_of_mindfulness_rune_symbols = scripts\engine\utility::getStructArray("symbol_rune_trial_of_mindfulness", "script_noteworthy");
   waitframe();
   level.a_trial_of_mindfulness_rune_symbols = scripts\engine\utility::array_randomize(level.a_trial_of_mindfulness_rune_symbols);
   handle_dig_out_orb();
@@ -679,7 +679,7 @@ random_gauntlet_challenge_kickoff(var_0) {
 }
 
 set_spawn_zombie_during_gauntlet(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray("trial_of_mindfulness_agent_spawn", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("trial_of_mindfulness_agent_spawn", "targetname");
   var_3 = level.players.size;
   var_4 = [3, 3, 2, 1];
   var_5 = [4, 6, 8, 12];
@@ -900,7 +900,7 @@ trial_of_mindfulness_challenge_kickoff() {
   level.n_trial_of_mindfulness_challenge_rune_captured = 0;
   level.trial_of_mindfulness_damage_dealt = 0;
   trial_a_wall_block(1);
-  var_0 = scripts\engine\utility::getstructarray("mq_trial_a_teleport_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_trial_a_teleport_loc", "script_noteworthy");
   var_1 = 0;
   var_2 = [];
 
@@ -994,7 +994,7 @@ trial_of_mindfulness_challenge_begin() {
 
 set_challenge_zombie_spawn() {
   scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_root::disable_none_kill_score_event();
-  var_0 = scripts\engine\utility::getstructarray("trial_of_mindfulness_agent_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("trial_of_mindfulness_agent_spawn", "targetname");
   var_1 = level.players.size;
   var_2 = [2, 2, 1, 1];
   var_3 = [5, 8, 12, 16];
@@ -1077,7 +1077,7 @@ wait_and_set_zombie_fx(var_0) {
 
 show_challenge_runes() {
   level endon("game_ended");
-  level.a_trial_of_mindfulness_challenge_runes = scripts\engine\utility::getstructarray("rune_trial_of_mindfulness", "script_noteworthy");
+  level.a_trial_of_mindfulness_challenge_runes = scripts\engine\utility::getStructArray("rune_trial_of_mindfulness", "script_noteworthy");
   waitframe();
 
   if(!isDefined(level.a_trial_of_mindfulness_challenge_runes)) {
@@ -1189,7 +1189,7 @@ prepare_next_challenge_phase() {
   clear_alive_zombies();
   wait 10;
   level.n_trial_of_mindfulness_challenge_rune_captured = 0;
-  var_0 = scripts\engine\utility::getstructarray("mq_trial_a_teleport_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_trial_a_teleport_loc", "script_noteworthy");
 
   foreach(var_2 in level.players) {
     level thread teleport_to_challenge_area(var_0, var_2);

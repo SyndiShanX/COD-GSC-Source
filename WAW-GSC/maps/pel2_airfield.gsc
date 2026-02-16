@@ -295,7 +295,7 @@ ambient_left_battle() {
 }
 
 ridge_flashes() {
-  origs = getstructarray("orig_ridge_flash", "targetname");
+  origs = getStructArray("orig_ridge_flash", "targetname");
 
   last_rand = 0;
   rand = 0;
@@ -2746,7 +2746,7 @@ chis_fire_at_players() {
 chis_fire_at_players_and_bunker() {
   self endon("death");
 
-  targs = getstructarray("orig_last_tank_targ", "targetname");
+  targs = getStructArray("orig_last_tank_targ", "targetname");
 
   left_aa_gun = getent("aaGun_2", "targetname");
   right_aa_gun = getent("aaGun_3", "targetname");

@@ -183,7 +183,7 @@ apache_factory_allies_apache_think() {
 
   foreach(var_2 in var_0) {
     var_3 = maps\oilrocks_apache_code::get_apache_ally(var_2);
-    var_4 = common_scripts\utility::getstructarray("apache_factory_ally_guard_path_starts_0" + var_2, "script_noteworthy");
+    var_4 = common_scripts\utility::getStructArray("apache_factory_ally_guard_path_starts_0" + var_2, "script_noteworthy");
     var_5 = common_scripts\utility::getclosest(var_3.origin, var_4);
     var_3 thread maps\_vehicle::vehicle_paths(var_5);
   }

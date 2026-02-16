@@ -112,7 +112,7 @@ func_106B8(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_9 scripts\sp\utility::func_65E0("damage_system_active");
   var_9 scripts\sp\utility::func_65E0("player_dropship_ready");
   var_9 scripts\sp\utility::func_65E0("player_dropship_seats_ready");
-  foreach(var_10, var_13 in scripts\engine\utility::getstructarray(var_5.var_1325F, "script_noteworthy")) {
+  foreach(var_10, var_13 in scripts\engine\utility::getStructArray(var_5.var_1325F, "script_noteworthy")) {
     var_14 = var_13 scripts\engine\utility::spawn_tag_origin();
     if(isDefined(var_13.script_index)) {
       var_14.script_index = var_13.script_index;
@@ -1171,7 +1171,7 @@ func_4CC0() {
 func_4CBF() {
   for(;;) {
     for(;;) {
-      if(level.player meleebuttonpressed()) {
+      if(level.player meleeButtonPressed()) {
         break;
       }
 
@@ -1676,7 +1676,7 @@ func_123F(var_0) {
     level.player.var_C3BF = getdvarint("cg_fov");
     level.player func_81DE(80, 0.5);
     wait(1);
-    while(!level.player usebuttonpressed()) {
+    while(!level.player useButtonPressed()) {
       scripts\engine\utility::waitframe();
     }
 

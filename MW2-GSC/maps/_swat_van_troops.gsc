@@ -150,7 +150,7 @@ put this in your GSC:
 maps\_swat_van_troops::main( "vehicle_russian_swat_van" );
 
 and these lines in your CSV:
-include,vehicle_russian_swat_van_troops
+#include,vehicle_russian_swat_van_troops
 sound,vehicle_swat_van,vehicle_standard,all_sp
 
 defaultmdl="vehicle_russian_swat_van"default:"vehicletype" "swat_van_troops"default:"script_team" "axis"

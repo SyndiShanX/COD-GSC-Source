@@ -158,7 +158,7 @@ global_axis_settings() {
 }
 
 init_defalco_osprey() {
-  self.a_crash_zones = getstructarray("defalco_crash_zone", "script_noteworthy");
+  self.a_crash_zones = getStructArray("defalco_crash_zone", "script_noteworthy");
 }
 
 spawn_func_follow_path() {

@@ -48,7 +48,7 @@ autoexec _init_wounded() {
 
   foreach(trig in get_triggers()) {
     if(isDefined(trig.target)) {
-      a_structs = getstructarray(trig.target);
+      a_structs = getStructArray(trig.target);
       a_structs = _process_structs(a_structs);
 
       if(a_structs.size > 0) {

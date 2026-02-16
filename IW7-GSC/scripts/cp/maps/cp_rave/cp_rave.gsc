@@ -456,7 +456,7 @@ init_zombie_heads() {
 
 setup_harpoon_cabinet_weapons() {
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("iw7_harpoon_zm", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("iw7_harpoon_zm", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
     var_2 thread activate_struct_when_quest_complete(var_2);
@@ -487,7 +487,7 @@ turn_on_effect_with_power(var_0, var_1, var_2) {
 setup_scares() {
   level endon("gamed_ended");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("slasher_scenes", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("slasher_scenes", "targetname");
   foreach(var_2 in var_0) {
     var_2 thread wait_for_player_approach(var_2);
   }
@@ -768,7 +768,7 @@ init_rave_quests() {
   move_struct((-2254.8, -5120.2, 359.9), (-2059.06, 1297.45, -155.511), (357.057, 358.937, 8.51935));
   move_struct((-3036, 481.7, -77.3), (-3082, 580.7, -77.3), (0, 116.2, 0));
   add_additional_fix_pap_structs();
-  var_0 = scripts\engine\utility::getstructarray("animal_statue_toys", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("animal_statue_toys", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   foreach(var_2 in var_0) {
     var_2 thread delay_remove_from_interactions(var_2);
@@ -1163,7 +1163,7 @@ wait_for_charge_complete(var_0) {
 }
 
 disable_all_similar_interactions(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_3 in var_1) {
     if(isDefined(var_3.name) && var_3.name == var_0.name) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
@@ -1194,7 +1194,7 @@ toy_animal_statue_end_pos(var_0, var_1) {
       var_1 scripts\cp\utility::_giveweapon(level.animal_statue_weapons[var_0.name], undefined, undefined, 0);
       var_1 notify("harpoon_quest_completed", level.animal_statue_weapons[var_0.name]);
       var_1 switchtoweapon(level.animal_statue_weapons[var_0.name]);
-      var_9 = scripts\engine\utility::getstructarray("animal_statue_end_pos", "script_noteworthy");
+      var_9 = scripts\engine\utility::getStructArray("animal_statue_end_pos", "script_noteworthy");
       foreach(var_11 in var_9) {
         if(var_11.name != var_0.name) {
           continue;
@@ -1214,7 +1214,7 @@ toy_animal_statue_end_pos(var_0, var_1) {
 
   if(!scripts\engine\utility::flag(var_0.name + "_toy_placed")) {
     scripts\engine\utility::flag_set(var_0.name + "_toy_placed");
-    var_9 = scripts\engine\utility::getstructarray("animal_statue_end_pos", "script_noteworthy");
+    var_9 = scripts\engine\utility::getStructArray("animal_statue_end_pos", "script_noteworthy");
     var_13 = [];
     foreach(var_11 in var_9) {
       if(var_11.name != var_0.name) {
@@ -1320,7 +1320,7 @@ rave_processenemykilledfunc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
 init_wall_buys_array() {
   level.wall_buy_interactions = [];
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.name) && var_2.name == "wall_buy") {
       level.wall_buy_interactions[level.wall_buy_interactions.size] = var_2;
@@ -1345,7 +1345,7 @@ use_lawn_mower(var_0) {
   var_0 thread unset_mower(var_0);
   var_0 setscriptablepartstate("mower", "activated");
   for(;;) {
-    if(var_0 adsbuttonpressed(1)) {
+    if(var_0 adsButtonPressed(1)) {
       var_0 allowfire(0);
       var_0 mower_gesture(var_0);
     }
@@ -1369,7 +1369,7 @@ mower_gesture(var_0) {
   var_0 endon("disconnect");
   var_0 forceplaygestureviewmodel("ges_mower_melee", undefined, 1, undefined, 1, 1);
   var_0 thread run_lawn_mower_logic(var_0);
-  while(var_0 adsbuttonpressed(1) && var_0 isgestureplaying("ges_mower_melee")) {
+  while(var_0 adsButtonPressed(1) && var_0 isgestureplaying("ges_mower_melee")) {
     scripts\engine\utility::waitframe();
   }
 
@@ -1383,7 +1383,7 @@ run_lawn_mower_logic(var_0) {
   var_0 endon("disconnect");
   var_0 endon("stop_lawn_mower_attack_logic");
   var_1 = 64;
-  while(var_0 adsbuttonpressed(1) && var_0 isgestureplaying("ges_mower_melee")) {
+  while(var_0 adsButtonPressed(1) && var_0 isgestureplaying("ges_mower_melee")) {
     wait(1);
   }
 }
@@ -1397,7 +1397,7 @@ use_slasher_saw(var_0) {
   var_1 = 0;
   for(;;) {
     var_1 = var_0 getweaponammoclip("iw7_slasher_zm") + var_0 getweaponammostock("iw7_slasher_zm");
-    if(var_1 > 0 && var_0 adsbuttonpressed(1) && !var_0 secondaryoffhandbuttonpressed() && !var_0 isthrowinggrenade() && !var_0 fragbuttonpressed()) {
+    if(var_1 > 0 && var_0 adsButtonPressed(1) && !var_0 secondaryoffhandbuttonPressed() && !var_0 isthrowinggrenade() && !var_0 fragButtonPressed()) {
       var_0 getraidspawnpoint();
       var_0 allowfire(0);
       var_0 thread watch_for_player_attack(var_0);
@@ -1419,7 +1419,7 @@ slasher_gesture(var_0) {
   var_0 forceplaygestureviewmodel("ges_slasher_charge", undefined, 1, undefined, 1, 1);
   var_0 setscriptablepartstate("slasher_saw_sound", "idle_high");
   var_0 setscriptablepartstate("slasher_weapon", "active");
-  while(var_0 adsbuttonpressed(1) && var_0 isgestureplaying("ges_slasher_charge") || var_0 isgestureplaying("ges_slasher_charge_hit")) {
+  while(var_0 adsButtonPressed(1) && var_0 isgestureplaying("ges_slasher_charge") || var_0 isgestureplaying("ges_slasher_charge_hit")) {
     var_1 = var_0 getweaponammoclip("iw7_slasher_zm") + var_0 getweaponammostock("iw7_slasher_zm");
     if(var_1 < 1) {
       break;
@@ -1466,7 +1466,7 @@ watch_for_player_attack(var_0) {
   var_0 endon("stop_slasher_saw_attack_logic");
   var_0 notifyonplayercommand("lunge_weapon", "+attack");
   var_0 notifyonplayercommand("lunge_weapon", "+attack_akimbo_accessible");
-  while(var_0 adsbuttonpressed(1) && var_0 isgestureplaying("ges_slasher_charge")) {
+  while(var_0 adsButtonPressed(1) && var_0 isgestureplaying("ges_slasher_charge")) {
     var_0 waittill("lunge_weapon");
     var_0 notify("slasher_weapon_hit_zombie");
     var_0.should_lunge = 1;
@@ -1480,7 +1480,7 @@ run_slasher_saw_logic(var_0) {
   var_0 endon("disconnect");
   var_0 endon("stop_slasher_saw_attack_logic");
   var_1 = 64;
-  for(var_2 = 0; var_0 adsbuttonpressed(1); var_2 = 0) {
+  for(var_2 = 0; var_0 adsButtonPressed(1); var_2 = 0) {
     var_3 = checkenemiesinfov(35, var_1, 5);
     foreach(var_5 in var_3) {
       if(isDefined(var_5.agent_type) && var_5.agent_type == "superslasher") {
@@ -1889,7 +1889,7 @@ setup_rave_mode_door(var_0) {
     foreach(var_3 in var_1) {
       if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "rave_objects") {
         if(isDefined(var_3.target)) {
-          var_4 = scripts\engine\utility::getstructarray(var_3.target, "targetname");
+          var_4 = scripts\engine\utility::getStructArray(var_3.target, "targetname");
           foreach(var_6 in var_4) {
             var_6 setup_rave_shimmer_fx(var_3);
           }
@@ -2000,8 +2000,8 @@ cp_rave_should_continue_progress_bar_think(var_0) {
 }
 
 init_boat_and_pap_quest_structs() {
-  var_0 = scripts\engine\utility::getstructarray("pap_quest_piece", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("boat_quest_piece", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("pap_quest_piece", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("boat_quest_piece", "script_noteworthy");
   foreach(var_3 in var_0) {
     var_3.groupname = "locOverride";
   }
@@ -2012,8 +2012,8 @@ init_boat_and_pap_quest_structs() {
 }
 
 setupmemoryquestitems() {
-  var_0 = scripts\engine\utility::getstructarray("memory_quest_start_pos", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("memory_quest_end_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_quest_start_pos", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("memory_quest_end_pos", "script_noteworthy");
   var_2 = scripts\engine\utility::array_randomize_objects(var_0);
   var_3 = [];
   for(var_4 = 0; var_4 < var_2.size; var_4++) {
@@ -2059,7 +2059,7 @@ delay_add_to_interactions(var_0) {
 
 get_valid_id(var_0) {
   var_1 = ["pacifier", "shovel", "tiki_mask", "arrowhead", "lure", "toad", "pool_ball", "ring", "binoculars", "boots"];
-  var_2 = scripts\engine\utility::getstructarray("memory_quest_end_pos", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("memory_quest_end_pos", "script_noteworthy");
   var_3 = sortbydistance(var_2, var_0);
   var_4 = [];
   for(var_5 = 0; var_5 < var_1.size; var_5++) {
@@ -2076,7 +2076,7 @@ get_valid_id(var_0) {
 }
 
 setupravetoys() {
-  var_0 = scripts\engine\utility::getstructarray("rave_toys", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rave_toys", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_modelname)) {
       var_2.rave_model = var_2.script_modelname;
@@ -3021,7 +3021,7 @@ removeinvalidstructs(var_0, var_1) {
     }
 
     if(isDefined(var_4.target)) {
-      var_5 = scripts\engine\utility::getstructarray(var_4.var_336, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.var_336, "targetname");
       foreach(var_7 in var_5) {
         if(isDefined(var_7.target) && var_7.target == var_4.target) {
           var_0 = scripts\engine\utility::array_remove(var_0, var_7);
@@ -3513,7 +3513,7 @@ check_level_rave_status() {
 create_rave_fx_walls_after_time() {
   level endon("rave_mode_empty");
   level.someones_in_rave = 1;
-  var_0 = scripts\engine\utility::getstructarray("rave_fx_structs", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("rave_fx_structs", "targetname");
   foreach(var_2 in var_0) {
     var_2.claimed = undefined;
   }
@@ -3600,7 +3600,7 @@ knockback_nearby_rave_players(var_0, var_1) {
   level endon("rave_mode_empty");
   var_1 endon("death");
   var_2 = var_0.origin;
-  var_3 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   for(;;) {
     var_4 = get_players_in_rave_mode();
     foreach(var_6 in var_4) {
@@ -4850,7 +4850,7 @@ cp_rave_event_wave_init() {
 
 init_rave_spawner_locations() {
   level.goon_spawners = [];
-  var_0 = scripts\engine\utility::getstructarray("dog_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("dog_spawner", "targetname");
   if(isDefined(level.goon_spawner_patch_func)) {
     [[level.goon_spawner_patch_func]](var_0);
   }
@@ -5485,7 +5485,7 @@ cp_rave_auto_melee_agent_type_check(var_0) {
 setup_pool_balls() {
   level endon("gamed_ended");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("pool_balls", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("pool_balls", "targetname");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     if(isDefined(var_2.angles)) {
@@ -5505,7 +5505,7 @@ setup_pool_balls() {
 setup_glyph_targets() {
   level endon("gamed_ended");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("ee_song_structs", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ee_song_structs", "targetname");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   level.total_glyphs_to_find = int(var_0.size);
   level.total_glyphs_found = 0;
@@ -5540,7 +5540,7 @@ glyph_watch_for_player_interaction(var_0, var_1, var_2) {
         continue;
       }
 
-      if(var_4 adsbuttonpressed()) {
+      if(var_4 adsButtonPressed()) {
         var_4 thread check_ads_validity(var_4, var_0);
       }
     }
@@ -6120,7 +6120,7 @@ watch_player_on_ladders(var_0) {
 }
 
 adjust_player_spawn_pos() {
-  var_0 = scripts\engine\utility::getstructarray("default_player_start", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_2 = var_0[var_1];
     switch (var_1) {
@@ -6168,7 +6168,7 @@ cp_rave_patch_update_spawners() {
 }
 
 respawn_on_island(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("island_dropoff_player", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("island_dropoff_player", "targetname");
   for(var_2 = 0; var_2 < 40; var_2++) {
     foreach(var_4 in var_1) {
       if(canspawn(var_4.origin) && !positionwouldtelefrag(var_4.origin)) {
@@ -6218,7 +6218,7 @@ hotjoin_on_boat() {
 remove_door_ala() {
   level endon("game_ended");
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("afterlife_selfrevive_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("afterlife_selfrevive_door", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(var_2.origin == (-10270.5, 259.7, -1759)) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
@@ -6310,7 +6310,7 @@ cp_rave_gns_2_setup() {
 }
 
 ghost_player_end_pos() {
-  var_0 = scripts\engine\utility::getstructarray("ghost_wave_player_end", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ghost_wave_player_end", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.origin == (-8431.5, 10156.5, -753.5)) {
       var_2.origin = (-320, -1458, 403);
@@ -6449,10 +6449,10 @@ determine_color(var_0) {
 }
 
 form_5_priority() {
-  var_0 = scripts\engine\utility::getstructarray("ghost_formation_5", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ghost_formation_5", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.script_parameters == "RD") {
-      var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+      var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
       foreach(var_5 in var_3) {
         if(var_5.origin == (-10304, 9604, -2288.5)) {
           var_5.script_noteworthy = "low";

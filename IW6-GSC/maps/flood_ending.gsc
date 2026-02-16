@@ -306,10 +306,10 @@ ending_player_qte_0_logic() {
   self waittill("qte_0_start");
   level thread ending_qte_0_prompt_logic();
 
-  while(level.player attackbuttonpressed())
+  while(level.player attackButtonPressed())
     wait 0.05;
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackButtonPressed())
     wait 0.05;
 
   self playrumbleonentity("heavygun_fire");
@@ -337,7 +337,7 @@ ending_player_pickup_logic() {
   while(level.can_still_save_price && var_0) {
     var_1 = 0;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       var_1 = var_1 + 0.05;
       wait 0.05;
 
@@ -463,12 +463,12 @@ ending_player_qte_button_smash_logic() {
   self.button_smash_count = 0;
 
   while(!common_scripts\utility::flag("vignette_ending_qte_grabbed")) {
-    while(!level.player usebuttonpressed())
+    while(!level.player useButtonPressed())
       wait 0.05;
 
     self.button_smash_count++;
 
-    while(level.player usebuttonpressed())
+    while(level.player useButtonPressed())
       wait 0.05;
   }
 }
@@ -496,10 +496,10 @@ ending_player_let_go_interaction(var_0) {
   common_scripts\utility::flag_wait("qte_prompt_solid");
 
   if(isDefined(level.console) && level.console) {
-    while(!level.player buttonpressed("BUTTON_B"))
+    while(!level.player buttonPressed("BUTTON_B"))
       common_scripts\utility::waitframe();
   } else {
-    while(!level.player meleebuttonpressed())
+    while(!level.player meleeButtonPressed())
       common_scripts\utility::waitframe();
   }
 
@@ -707,7 +707,7 @@ ending_qte_catch(var_0) {
   common_scripts\utility::flag_wait("ending_qte_catch_active");
   wait 0.05;
 
-  while(!self adsbuttonpressed() || !self attackbuttonpressed())
+  while(!self adsButtonPressed() || !self attackButtonPressed())
     wait 0.05;
 
   common_scripts\utility::flag_set("vignette_ending_qte_success");
@@ -765,7 +765,7 @@ ending_qte_reach() {
   ending_fade_qte_prompt(0.1, 1.0);
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
 

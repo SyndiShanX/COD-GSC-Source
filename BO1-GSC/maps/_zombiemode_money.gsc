@@ -45,7 +45,7 @@ money_dump() {
   self.moneyDump = undefined;
   while(1) {
     if(self player_can_dump()) {
-      while(self actionslottwobuttonpressed()) {
+      while(self actionslottwobuttonPressed()) {
         if(!isDefined(self.moneyDump)) {
           self.moneyDump = thread money_spawn(self);
         }

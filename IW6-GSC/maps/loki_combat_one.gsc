@@ -197,10 +197,10 @@ movement_hints() {
   wait 2;
 
   for(;;) {
-    if(level.player secondaryoffhandbuttonpressed()) {
+    if(level.player secondaryoffhandbuttonPressed()) {
       var_0 = gettime();
 
-      while(level.player secondaryoffhandbuttonpressed()) {
+      while(level.player secondaryoffhandbuttonPressed()) {
         if(gettime() - var_0 > 500) {
           common_scripts\utility::flag_set("stop_movement_hint");
           return;

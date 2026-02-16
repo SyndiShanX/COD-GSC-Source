@@ -41,7 +41,7 @@ onplayerconnect() {
 
 electric_puzzle_watch_staff() {
   self endon("disconnect");
-  a_piano_keys = getstructarray("piano_key", "script_noteworthy");
+  a_piano_keys = getStructArray("piano_key", "script_noteworthy");
 
   while(true) {
     self waittill("projectile_impact", str_weap_name, v_explode_point, n_radius, e_projectile, n_impact);
@@ -69,7 +69,7 @@ electric_puzzle_1_init() {
 }
 
 electric_puzzle_1_run() {
-  a_piano_keys = getstructarray("piano_key", "script_noteworthy");
+  a_piano_keys = getStructArray("piano_key", "script_noteworthy");
   level.a_piano_keys_playing = [];
   array_thread(a_piano_keys, ::piano_key_run);
   level thread piano_run_chords();
@@ -84,7 +84,7 @@ show_chord_debug(a_chord_notes) {
   if(!isDefined(a_chord_notes))
     a_chord_notes = [];
 
-  a_piano_keys = getstructarray("piano_key", "script_noteworthy");
+  a_piano_keys = getStructArray("piano_key", "script_noteworthy");
 
   foreach(e_key in a_piano_keys) {
     e_key notify("stop_debug_position");
@@ -99,7 +99,7 @@ show_chord_debug(a_chord_notes) {
 }
 
 piano_run_chords() {
-  a_chords = getstructarray("piano_chord", "targetname");
+  a_chords = getStructArray("piano_chord", "targetname");
 
   foreach(s_chord in a_chords) {
     s_chord.notes = strtok(s_chord.script_string, " ");

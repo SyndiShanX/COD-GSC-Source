@@ -339,7 +339,7 @@ trigger_noteworthy_if_player0(trigger, end_notify) {
 
 move_players(spots) {
   players = get_players();
-  points = getstructarray(spots, "targetname");
+  points = getStructArray(spots, "targetname");
 
   for(x = 0; x < players.size; x++) {
     players[x] setorigin(points[x].origin);
@@ -507,7 +507,7 @@ org_trigger(org, radius, notification) {
 move_ai(spots) {
   ai = get_ai_group_ai("dasquad");
 
-  points = getstructarray(spots, "targetname");
+  points = getStructArray(spots, "targetname");
 
   for(x = 0; x < ai.size; x++) {
     okiPrint("move_ai: Moving AI to " + points[x].origin);

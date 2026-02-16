@@ -317,7 +317,7 @@ can_revive(revivee) {
   return true;
 }
 is_reviving(revivee) {
-  return (can_revive(revivee) && self UseButtonPressed());
+  return (can_revive(revivee) && self useButtonPressed());
 }
 is_facing(facee) {
   orientation = self getPlayerAngles();

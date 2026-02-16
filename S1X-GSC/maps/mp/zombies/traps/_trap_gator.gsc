@@ -7,7 +7,7 @@ trap_gator_enter(var_0) {
   var_1 = undefined;
   var_2 = undefined;
   self.water_level = undefined;
-  var_3 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_3 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_5 in var_3) {
     if(!isDefined(var_5.script_noteworthy)) {

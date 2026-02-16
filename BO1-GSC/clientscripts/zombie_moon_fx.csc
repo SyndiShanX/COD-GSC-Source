@@ -118,7 +118,7 @@ power_on_spinning_lights() {
 trap_fx_monitor(name, side, trap_type) {
   while(1) {
     level waittill(name);
-    points = getstructarray(name, "targetname");
+    points = getStructArray(name, "targetname");
     for(i = 0; i < points.size; i++) {
       points[i] thread electric_trap_fx(name, side, trap_type);
     }

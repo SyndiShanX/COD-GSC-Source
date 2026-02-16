@@ -376,7 +376,7 @@ monitormachinegun() {
 
   for(;;) {
     wait 0.05;
-    var_3 = var_0 attackbuttonpressed() && !var_1.overheated;
+    var_3 = var_0 attackButtonPressed() && !var_1.overheated;
 
     if(var_2 == var_3) {
       continue;

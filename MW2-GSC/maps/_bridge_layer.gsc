@@ -40,7 +40,7 @@ put this in your GSC:
 maps\_bridge_layer::main( "vehicle_bridge_layer" );
 
 and these lines in your CSV:
-include,vehicle_bridge_layer
+#include,vehicle_bridge_layer
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_bridge_layer,vehicle_standard,all_sp
 

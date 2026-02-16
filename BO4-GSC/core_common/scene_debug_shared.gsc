@@ -373,9 +373,9 @@ display_scene_menu(str_type, str_scene) {
       selected = 0;
     }
 
-    if(level.host buttonpressed("<dev string:x226>")) {
+    if(level.host buttonPressed("<dev string:x226>")) {
       if(b_shot_menu) {
-        while(level.host buttonpressed("<dev string:x226>")) {
+        while(level.host buttonPressed("<dev string:x226>")) {
           waitframe(1);
         }
 
@@ -388,16 +388,16 @@ display_scene_menu(str_type, str_scene) {
     }
 
     if(names[selected] != "<dev string:x1cd>" && !b_shot_menu) {
-      if(level.host buttonpressed("<dev string:x231>") || level.host buttonpressed("<dev string:x23e>")) {
+      if(level.host buttonPressed("<dev string:x231>") || level.host buttonPressed("<dev string:x23e>")) {
         level.host move_to_scene(names[selected]);
 
-        while(level.host buttonpressed("<dev string:x231>") || level.host buttonpressed("<dev string:x23e>")) {
+        while(level.host buttonPressed("<dev string:x231>") || level.host buttonPressed("<dev string:x23e>")) {
           waitframe(1);
         }
-      } else if(level.host buttonpressed("<dev string:x24b>") || level.host buttonpressed("<dev string:x257>")) {
+      } else if(level.host buttonPressed("<dev string:x24b>") || level.host buttonPressed("<dev string:x257>")) {
         level.host move_to_scene(names[selected], 1);
 
-        while(level.host buttonpressed("<dev string:x24b>") || level.host buttonpressed("<dev string:x257>")) {
+        while(level.host buttonPressed("<dev string:x24b>") || level.host buttonPressed("<dev string:x257>")) {
           waitframe(1);
         }
       }
@@ -461,7 +461,7 @@ function_c0f30783(s_scenedef) {
 }
 
 function_606f1f21() {
-  if(level.host buttonpressed("<dev string:x28d>") || level.host buttonpressed("<dev string:x298>") || level.host buttonpressed("<dev string:x2a3>")) {
+  if(level.host buttonPressed("<dev string:x28d>") || level.host buttonPressed("<dev string:x298>") || level.host buttonPressed("<dev string:x2a3>")) {
     return 1;
   }
 
@@ -469,7 +469,7 @@ function_606f1f21() {
 }
 
 function_940c526f() {
-  if(level.host buttonpressed("<dev string:x2ab>")) {
+  if(level.host buttonPressed("<dev string:x2ab>")) {
     return 1;
   }
 

@@ -2475,18 +2475,18 @@ initial_depth_charge_run() {
   wait 4.5;
 
   for(;;) {
-    common_scripts\utility::array_thread(common_scripts\utility::getstructarray("depth_charge_test", "targetname"), maps\ship_graveyard_util::depth_charge_org);
+    common_scripts\utility::array_thread(common_scripts\utility::getStructArray("depth_charge_test", "targetname"), maps\ship_graveyard_util::depth_charge_org);
     wait 4;
-    common_scripts\utility::array_thread(common_scripts\utility::getstructarray("depth_charge_test_2", "targetname"), maps\ship_graveyard_util::depth_charge_org);
+    common_scripts\utility::array_thread(common_scripts\utility::getStructArray("depth_charge_test_2", "targetname"), maps\ship_graveyard_util::depth_charge_org);
     wait 6.5;
-    common_scripts\utility::array_thread(common_scripts\utility::getstructarray("depth_charge_test_3", "targetname"), maps\ship_graveyard_util::depth_charge_org);
+    common_scripts\utility::array_thread(common_scripts\utility::getStructArray("depth_charge_test_3", "targetname"), maps\ship_graveyard_util::depth_charge_org);
     wait 6.5;
   }
 }
 
 depth_charges() {
   maps\_utility::autosave_by_name("depth_charges");
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("depth_charge_test", "targetname"), maps\ship_graveyard_util::depth_charge_org);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("depth_charge_test", "targetname"), maps\ship_graveyard_util::depth_charge_org);
   wait 1.5;
   wait 2.75;
   wait 1.5;

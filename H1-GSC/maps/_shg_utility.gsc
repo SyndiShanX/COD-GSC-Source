@@ -144,7 +144,7 @@ monitorscopechange() {
     }
 
     if(var_8 && !var_6 isreloading() && !var_6 isswitchingweapon()) {
-      if(var_6 maps\_utility::isads() && var_6 adsbuttonpressed()) {
+      if(var_6 maps\_utility::isads() && var_6 adsButtonPressed()) {
         var_6 turnonvariablescopehud(var_3);
         var_3 = 1;
 

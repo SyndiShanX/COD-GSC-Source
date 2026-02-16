@@ -59,8 +59,8 @@ init() {
   level.drones.allies_triggers = getEntArray("drone_allies", "targetname");
   array_thread(level.drones.axis_triggers, ::drones_setup_spawner, 1);
   array_thread(level.drones.allies_triggers, ::drones_setup_spawner, 1);
-  level.drones.axis_structs = getstructarray("drone_axis", "targetname");
-  level.drones.allies_structs = getstructarray("drone_allies", "targetname");
+  level.drones.axis_structs = getStructArray("drone_axis", "targetname");
+  level.drones.allies_structs = getStructArray("drone_allies", "targetname");
   array_thread(level.drones.axis_structs, ::drones_setup_spawner, 0);
   array_thread(level.drones.allies_structs, ::drones_setup_spawner, 0);
   flag_init("drones_stop_looped_anims");
@@ -284,7 +284,7 @@ drones_get_spawner(targetname, target) {
   data.parent_script_struct = undefined;
 
   if(isDefined(target)) {
-    data.a_targeted = getstructarray(target, "targetname");
+    data.a_targeted = getStructArray(target, "targetname");
   }
 
   assert(isDefined(data.a_targeted));

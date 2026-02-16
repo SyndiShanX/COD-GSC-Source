@@ -169,7 +169,7 @@ watch_use_trigger(trigger, model, callback, weapon, playersoundonuse, npcsoundon
     if(total_ammo >= max_ammo || !hasreloaded) {
       continue;
     }
-    if(autorecover || player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() || is_true(trigger.force_pickup)) {
+    if(autorecover || player useButtonPressed() && !player.throwinggrenade && !player meleeButtonPressed() || is_true(trigger.force_pickup)) {
       if(isDefined(playersoundonuse))
         player playlocalsound(playersoundonuse);
 

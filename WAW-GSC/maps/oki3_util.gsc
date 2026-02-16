@@ -124,7 +124,7 @@ move_players(spots) {
   players = get_players();
   points = getEntArray(spots, "targetname");
   if(!points.size > 0) {
-    points = getstructarray(spots, "targetname");
+    points = getStructArray(spots, "targetname");
   }
 
   for(x = 0; x < players.size; x++) {
@@ -159,7 +159,7 @@ move_ai(spots) {
   }
   points = getEntArray(spots, "targetname");
   if(!points.size > 0) {
-    points = getstructarray(spots, "targetname");
+    points = getStructArray(spots, "targetname");
   }
 
   sarge_point = undefined;
@@ -946,7 +946,7 @@ set_player_ammo_loadout() {
 }
 
 warp_players(warpto_positions, exclude) {
-  ents = getstructarray(warpto_positions, "targetname");
+  ents = getStructArray(warpto_positions, "targetname");
 
   if(ents.size == 0) {
     ents = getEntArray(warpto_positions, "targetname");
@@ -1212,7 +1212,7 @@ rush_player() {
 }
 
 sniper_leafy_conceal() {
-  trees = getstructarray("treesniper_origin", "targetname");
+  trees = getStructArray("treesniper_origin", "targetname");
 
   for(i = 0; i < trees.size; i++) {
     wait(.15);

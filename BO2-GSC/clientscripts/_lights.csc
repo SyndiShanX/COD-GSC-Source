@@ -661,7 +661,7 @@ register_light_type(type, func) {
 }
 
 get_lights_by_label(label) {
-  lights = getstructarray("light", "classname");
+  lights = getStructArray("light", "classname");
   return_array = [];
 
   for(i = 0; i < lights.size; i++) {
@@ -674,7 +674,7 @@ get_lights_by_label(label) {
 }
 
 get_lights_in_radius(pos, rad) {
-  lights = getstructarray("light", "classname");
+  lights = getStructArray("light", "classname");
   return_array = [];
   rad_squared = rad * rad;
 
@@ -688,7 +688,7 @@ get_lights_in_radius(pos, rad) {
 }
 
 get_labelled_lights_in_radius(label, pos, rad) {
-  lights = getstructarray("light", "classname");
+  lights = getStructArray("light", "classname");
   return_array = [];
   rad_squared = rad * rad;
 
@@ -718,7 +718,7 @@ init_lights(clientnum) {
     level._light_types = [];
   }
 
-  lights = getstructarray("light", "classname");
+  lights = getStructArray("light", "classname");
   level.max_local_clients = getmaxlocalclients();
 
   if(isDefined(lights)) {

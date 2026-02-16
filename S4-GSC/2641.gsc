@@ -2083,7 +2083,7 @@ _id_15CF(var_0) {
       var_4 = 0;
     }
 
-    while(var_1 usebuttonpressed()) {
+    while(var_1 useButtonPressed()) {
       var_5 = var_5 + var_2;
       var_4 = 1;
       var_1 setclientomnvar("ui_exit_progress", var_5 / var_3);

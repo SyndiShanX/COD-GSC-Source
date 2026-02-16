@@ -3204,12 +3204,12 @@ ending_harmless_shots_logic(var_0) {
   level.ending_gun thread common_scripts\utility::delaycall(0.5 + var_3 * (var_5[0] - var_4[0]), ::linkto, level.ending_arms, "tag_knife_attach");
 
   for(;;) {
-    while(!level.player attackbuttonpressed())
+    while(!level.player attackButtonPressed())
       wait 0.05;
 
     level.player thread ending_player_shoot_gun();
 
-    while(level.player attackbuttonpressed())
+    while(level.player attackButtonPressed())
       wait 0.05;
   }
 }

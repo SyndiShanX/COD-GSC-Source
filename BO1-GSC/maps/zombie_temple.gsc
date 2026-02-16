@@ -172,7 +172,7 @@ local_zone_init() {
   add_adjacent_zone("caves2_zone", "caves3_zone", "cave03_to_power");
   temple_init_zone_spawn_locations();
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false, true);
   include_weapon("spikemore_zm", false, true);
@@ -250,7 +250,7 @@ include_weapons() {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -708,14 +708,14 @@ temple_death_screen_cleanup() {
   self SetBlur(0, 0.1);
 }
 temple_check_valid_spawn(revivee) {
-  spawn_points = getstructarray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   zkeys = GetArrayKeys(level.zones);
   for(z = 0; z < zkeys.size; z++) {
     zone_str = zkeys[z];
     if(level.zones[zone_str].is_occupied) {
       for(i = 0; i < spawn_points.size; i++) {
         if(spawn_points[i].script_noteworthy == zone_str) {
-          spawn_array = getstructarray(spawn_points[i].target, "targetname");
+          spawn_array = getStructArray(spawn_points[i].target, "targetname");
           for(j = 0; j < spawn_array.size; j++) {
             if(spawn_array[j].script_int == (revivee.entity_num + 1)) {
               return spawn_array[j].origin;

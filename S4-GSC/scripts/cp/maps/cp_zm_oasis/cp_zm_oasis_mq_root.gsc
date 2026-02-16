@@ -226,7 +226,7 @@ set_up_zombie_spawning(var_0, var_1) {
   var_7 = [1, 2, 3, 4];
   var_8 = [1, 1, 1, 1];
   var_9 = [1, 1, 2, 2];
-  var_10 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_10 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   level thread spawn_zombie("base", "enemy_base_zombie_cp", var_3[var_2 - 1], var_6[var_2 - 1], undefined, var_1, var_10, var_10);
   level thread spawn_zombie("screamer", "enemy_zombie_screamer_cp", var_4[var_2 - 1], var_7[var_2 - 1], undefined, var_1, var_10, var_10);
   level thread spawn_zombie("juggernaut", "enemy_zombie_juggernaut_cp", var_5[var_2 - 1], var_8[var_2 - 1], var_9[var_2 - 1], var_1, var_10, var_10);
@@ -581,14 +581,14 @@ init_first_visit_ktfx() {
   }
 
   level.a_mdl_da_barriers = [];
-  var_4 = scripts\engine\utility::getstructarray("mq_magic_barrier_da", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("mq_magic_barrier_da", "script_noteworthy");
 
   foreach(var_6 in var_4) {
     var_7 = scripts\cp\utility::_id_E190("vfx_zm_obj_holdout_barrier_mod_bottom_center_56x48", var_6.origin, var_6.angles);
     level.a_mdl_da_barriers = scripts\engine\utility::array_add(level.a_mdl_da_barriers, var_7);
   }
 
-  var_9 = scripts\engine\utility::getstructarray("mq_magic_barrier_rune_da", "script_noteworthy");
+  var_9 = scripts\engine\utility::getStructArray("mq_magic_barrier_rune_da", "script_noteworthy");
 
   foreach(var_6 in var_9) {
     var_7 = scripts\cp\utility::_id_E190("s4_zm_rune_decal_inviktor", var_6.origin, var_6.angles);
@@ -730,7 +730,7 @@ do_interact_1st_portal(var_0) {
   level endon("mq_step_three_done");
   level scripts\engine\utility::_id_5C1B("disallow_rbz_exfil");
   _func_01E3("pap_defend");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   level thread do_teleporting(var_1, level.mdl_ktfx_da.origin, "cp_zm_oasis_drk_tr");
   level waittill("portal_warp_finished");
   level scripts\engine\utility::_id_5C04("disallow_rbz_exfil");
@@ -826,7 +826,7 @@ scene_fight_complete() {
 teleport_players_back_to_oasis() {
   level endon("game_ended");
   level endon("mq_step_three_done");
-  var_0 = scripts\engine\utility::getstructarray("mq_1st_da_visit_return_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_1st_da_visit_return_loc", "script_noteworthy");
   level thread do_teleporting(var_0, undefined, "cp_zm_oasis_oasis_tr");
   level waittill("portal_warp_finished");
   level thread play_vo_return_oasis();
@@ -875,7 +875,7 @@ handle_player_outofmap() {
   self endon("disconnect");
   level endon("mq_step_three_done");
   var_0 = getent("mq_ktfx_fight_fall_check", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("mq_1sr_portal_dest", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("mq_1sr_portal_dest", "targetname");
 
   for(;;) {
     if(self istouching(var_0)) {
@@ -1218,7 +1218,7 @@ do_interact_2nd_portal(var_0) {
   level endon("game_ended");
   level endon("mq_step_three_done");
   level scripts\engine\utility::_id_5C1B("disallow_rbz_exfil");
-  var_1 = scripts\engine\utility::getstructarray("mq_2nd_teleport_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("mq_2nd_teleport_loc", "script_noteworthy");
 
   foreach(var_3 in level.players) {
     var_3 thread boss_fight_start_watcher();

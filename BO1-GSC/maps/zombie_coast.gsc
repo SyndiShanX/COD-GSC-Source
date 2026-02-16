@@ -208,7 +208,7 @@ coast_zone_init() {
   add_adjacent_zone("lighthouse1_zone", "lighthouse2_zone", "lighthouse2_enter");
   add_adjacent_zone("catwalk_zone", "lighthouse2_zone", "catwalk_enter");
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false, true);
   include_weapon("claymore_zm", false, true);
@@ -336,7 +336,7 @@ zombie_coast_player_damage_level_override(eInflictor, eAttacker, iDamage, iDFlag
   }
   return -1;
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -553,7 +553,7 @@ stairs_init() {
 stairs_think(planks, debris, clip) {
   while(1) {
     self waittill("trigger", who);
-    if(!who UseButtonPressed()) {
+    if(!who useButtonPressed()) {
       continue;
     }
     if(who in_revive_trigger()) {

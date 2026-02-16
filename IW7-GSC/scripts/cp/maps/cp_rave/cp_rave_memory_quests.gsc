@@ -821,7 +821,7 @@ is_in_box(var_0, var_1, var_2, var_3, var_4) {
 
 run_pool_ball_quest(var_0) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::getstructarray("pool_balls", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("pool_balls", "targetname");
   var_0.total_pool_balls = 0;
   foreach(var_3 in var_1) {
     thread watch_for_player_damage(var_3, var_0, var_1.size);
@@ -858,9 +858,9 @@ watch_for_player_damage(var_0, var_1, var_2) {
 run_ring_quest(var_0) {
   level endon("game_ended");
   if(isDefined(var_0.target)) {
-    var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   } else {
-    var_1 = scripts\engine\utility::getstructarray("lanterns", "targetname");
+    var_1 = scripts\engine\utility::getStructArray("lanterns", "targetname");
   }
 
   foreach(var_3 in var_1) {
@@ -899,7 +899,7 @@ adjust_light_angles(var_0) {
 }
 
 set_up_ring_quest_interactions() {
-  var_0 = scripts\engine\utility::getstructarray("memory_quest_end_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_quest_end_pos", "script_noteworthy");
   var_1 = randomintrange(1, 4);
   var_2 = undefined;
   foreach(var_2 in var_0) {
@@ -911,7 +911,7 @@ set_up_ring_quest_interactions() {
   }
 
   var_1 = randomintrange(1, 4);
-  var_5 = scripts\engine\utility::getstructarray("lanterns", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("lanterns", "targetname");
   foreach(var_7 in var_5) {
     var_7.script_noteworthy = "ring_quest_lights";
     var_7.requires_power = 0;
@@ -945,7 +945,7 @@ run_lure_quest(var_0) {
 }
 
 start_fish_path(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("lure_quest_struct", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("lure_quest_struct", "script_noteworthy");
   var_2 = spawn("script_model", var_1[0].origin);
   var_2 endon("fish_quest_completed");
   var_2 setModel("tag_origin_memory_quest");
@@ -1107,7 +1107,7 @@ make_active_target(var_0, var_1) {
 }
 
 arrange_archery_targets(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("archery_quest_target", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("archery_quest_target", "script_noteworthy");
   var_2 = scripts\engine\utility::getstruct("last_archery_target", "targetname");
   var_1 = scripts\engine\utility::array_remove(var_1, var_2);
   var_1 = scripts\engine\utility::array_randomize(var_1);
@@ -1177,7 +1177,7 @@ run_shovel_quest(var_0) {
 
 determine_best_shovel_spawns(var_0, var_1) {
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray("camper_to_lake_spawner", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("camper_to_lake_spawner", "targetname");
   var_3 = sortbydistance(var_3, var_0);
   for(var_4 = 0; var_4 < var_1; var_4++) {
     var_2[var_4] = var_3[var_4];
@@ -1721,7 +1721,7 @@ enable_end_struct(var_0, var_1) {
     return;
   }
 
-  var_2 = scripts\engine\utility::getstructarray("memory_quest_end_pos", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("memory_quest_end_pos", "script_noteworthy");
   foreach(var_4 in var_2) {
     if(var_0.has_memory_quest_item == var_4.name) {
       var_0.end_struct = var_4;

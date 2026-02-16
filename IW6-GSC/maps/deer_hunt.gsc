@@ -439,7 +439,7 @@ lobby_entrance() {
   thread maps\deer_hunt_util::play_loop_sound_in_space_stop_on_flag("scn_deer_ruckus_loop", (-8951, 12053, -138), "lobby_entrance");
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
-  var_0 = common_scripts\utility::getstructarray("lobby_entrance_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("lobby_entrance_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\_utility::enable_ai_color();
@@ -465,7 +465,7 @@ outside_start() {
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
   maps\_utility::activate_trigger_with_targetname("lobby_exit_approach");
-  var_0 = common_scripts\utility::getstructarray("outside_start_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("outside_start_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\_utility::enable_ai_color();
@@ -494,7 +494,7 @@ street_start() {
   common_scripts\utility::flag_wait("friendlies_spawned");
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
-  var_0 = common_scripts\utility::getstructarray("street_start_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("street_start_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\_utility::enable_ai_color();
@@ -515,7 +515,7 @@ encounter1_start() {
   common_scripts\utility::flag_wait("friendlies_spawned");
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
-  var_0 = common_scripts\utility::getstructarray("encounter1_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("encounter1_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\deer_hunt_util::ignore_me_ignore_all();
@@ -524,7 +524,7 @@ encounter1_start() {
 
   level.hesh maps\_utility::disable_ai_color();
   level.hesh maps\_utility::enable_cqbwalk();
-  var_4 = common_scripts\utility::getstructarray("team2_encounter1", "targetname");
+  var_4 = common_scripts\utility::getStructArray("team2_encounter1", "targetname");
 
   while(!isDefined(level.team2))
     wait 0.25;
@@ -549,14 +549,14 @@ encounter2_start() {
   common_scripts\utility::flag_wait("friendlies_spawned");
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
-  var_0 = common_scripts\utility::getstructarray("gasstation_start_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("gasstation_start_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\_utility::delaythread(1, maps\_utility::enable_ai_color);
     var_2 forceteleport(var_0[var_3].origin, var_0[var_3].angles);
   }
 
-  var_4 = common_scripts\utility::getstructarray("team2_encounter2", "targetname");
+  var_4 = common_scripts\utility::getStructArray("team2_encounter2", "targetname");
 
   while(!isDefined(level.team2))
     wait 0.25;
@@ -578,14 +578,14 @@ lariver_start() {
   common_scripts\utility::flag_wait("friendlies_spawned");
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
-  var_0 = common_scripts\utility::getstructarray("la_river_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("la_river_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\_utility::enable_ai_color();
     var_2 forceteleport(var_0[var_3].origin, var_0[var_3].angles);
   }
 
-  var_4 = common_scripts\utility::getstructarray("team2_lariver", "targetname");
+  var_4 = common_scripts\utility::getStructArray("team2_lariver", "targetname");
 
   foreach(var_3, var_6 in var_4)
   level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
@@ -615,7 +615,7 @@ lariver_defend_start() {
   common_scripts\utility::flag_wait("friendlies_spawned");
   level.hesh maps\_utility::set_force_color("red");
   level.dog maps\_utility::set_force_color("blue");
-  var_0 = common_scripts\utility::getstructarray("la_river_defend_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("la_river_defend_ai", "targetname");
 
   foreach(var_3, var_2 in level.squad) {
     var_2 maps\_utility::enable_ai_color();
@@ -629,7 +629,7 @@ lariver_defend_start() {
   level.matv.obj_ent linkto(level.matv);
   var_4 = getvehiclenode("matv_start", "targetname");
   level.matv attachpath(var_4);
-  var_5 = common_scripts\utility::getstructarray("la_river_defend_team2", "targetname");
+  var_5 = common_scripts\utility::getStructArray("la_river_defend_team2", "targetname");
 
   foreach(var_3, var_7 in var_5)
   level.team2[var_3] forceteleport(var_7.origin, var_7.angles);
@@ -720,7 +720,7 @@ elias_start() {
   level.hesh = maps\_utility::spawn_targetname("hesh", 1);
   level.squad = [level.hesh];
   thread maps\deer_hunt_intro::move_player_to_start("elias_start_player");
-  var_0 = common_scripts\utility::getstructarray("elias_start_ai", "targetname");
+  var_0 = common_scripts\utility::getStructArray("elias_start_ai", "targetname");
   var_1 = undefined;
 
   foreach(var_4, var_3 in level.squad) {

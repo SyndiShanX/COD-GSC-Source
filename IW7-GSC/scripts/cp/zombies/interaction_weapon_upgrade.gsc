@@ -4,7 +4,7 @@
 *************************************************************/
 
 init_all_weapon_upgrades() {
-  var_0 = scripts\engine\utility::getstructarray("weapon_upgrade", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("weapon_upgrade", "script_noteworthy");
   level.get_weapon_level_func = scripts\cp\cp_weapon::get_weapon_level;
   foreach(var_2 in var_0) {
     var_2.powered_on = 1;

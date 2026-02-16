@@ -4,7 +4,7 @@
 *************************************************/
 
 _id_6ABA(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   if(!isDefined(var_1)) {
     return;

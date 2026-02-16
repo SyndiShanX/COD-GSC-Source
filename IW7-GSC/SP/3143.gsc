@@ -281,7 +281,7 @@ func_35F4() {
   var_0 = 0;
   for(;;) {
     scripts\engine\utility::waitframe();
-    if(level.player usebuttonpressed()) {
+    if(level.player useButtonPressed()) {
       if(!var_0) {
         self.var_A8E4 = gettime();
         thread func_12DE6();
@@ -456,7 +456,7 @@ func_12DE6() {
 func_D91A(var_0) {}
 
 func_D3B0() {
-  return isalive(level.player) && level.player meleebuttonpressed();
+  return isalive(level.player) && level.player meleeButtonPressed();
 }
 
 func_D433(var_0, var_1) {

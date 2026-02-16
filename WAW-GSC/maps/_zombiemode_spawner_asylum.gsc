@@ -1745,7 +1745,7 @@ do_zombie_rise() {
   self.anchor.angles = self.angles;
   self linkto(self.anchor);
 
-  spots = GetStructArray("zombie_rise", "targetname");
+  spots = getStructArray("zombie_rise", "targetname");
   spot = random(spots);
 
   if(GetDVarInt("zombie_rise_test")) {

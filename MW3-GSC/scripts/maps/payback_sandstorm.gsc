@@ -576,7 +576,7 @@ _id_65A8(var_0) {
 
 _id_65A9() {
   wait 1;
-  var_0 = common_scripts\utility::getstructarray("wind_physics", "targetname");
+  var_0 = common_scripts\utility::getStructArray("wind_physics", "targetname");
   var_1 = 0.25;
 
   foreach(var_3 in var_0) {

@@ -46,7 +46,7 @@ _id_7EC1(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-    var_1 = scripts\engine\utility::getstructarray(var_3._id_039B, "script_noteworthy");
+    var_1 = scripts\engine\utility::getStructArray(var_3._id_039B, "script_noteworthy");
   }
 
   level._id_683F = scripts\cp\cp_weapon::_id_683D;

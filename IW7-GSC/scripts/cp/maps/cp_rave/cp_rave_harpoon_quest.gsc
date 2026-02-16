@@ -90,7 +90,7 @@ fly_off_the_handle() {
   wait(0.1);
   self setModel("tag_origin");
   playFXOnTag(level._effect["harpoon_symbol_1"], self, "tag_origin");
-  var_0 = scripts\engine\utility::getstructarray("bait_head_end_spot", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("bait_head_end_spot", "targetname");
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0, 500);
   self moveto(var_1.origin, 2);
   self waittill("movedone");
@@ -192,7 +192,7 @@ head_logic() {
   self endon("stop_attacking_player");
   self.wall_spot = self.origin;
   self.wall_angles = self.angles;
-  self.move_spots = scripts\engine\utility::getstructarray("bait_head_move_spot", "targetname");
+  self.move_spots = scripts\engine\utility::getStructArray("bait_head_move_spot", "targetname");
   self.bait_spot = undefined;
   self.bait = undefined;
   self.on_wall = 1;
@@ -256,7 +256,7 @@ move_back_to_wall() {
 }
 
 get_move_spot() {
-  var_0 = scripts\engine\utility::getstructarray("bait_head_move_spot", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("bait_head_move_spot", "targetname");
   var_1 = [];
   foreach(var_3 in var_0) {
     if(!isenemyinfrontofme(var_3, 0.25, (0, 45, 0))) {
@@ -315,7 +315,7 @@ wait_for_key_pickup() {
 
 spawn_chain_locks() {
   level.lock_spots = [];
-  var_0 = scripts\engine\utility::getstructarray("chain_lock", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("chain_lock", "targetname");
   var_1 = 1;
   foreach(var_3 in var_0) {
     var_4 = spawn("script_model", var_3.origin);

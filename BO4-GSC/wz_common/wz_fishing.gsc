@@ -356,7 +356,7 @@ function_16e4e507(dynent) {
   }
 
   while(dynent.var_fb09ad1c != 3) {
-    if(self attackbuttonpressed() && dynent.var_fb09ad1c != 3) {
+    if(self attackButtonPressed() && dynent.var_fb09ad1c != 3) {
       dynent.var_fb09ad1c = 3;
 
       if(isDefined(dynent.buoy)) {
@@ -410,7 +410,7 @@ function_176e516(dynent) {
   self endoncallback(&function_73532e4f, #"death", #"hash_61bb9580151c93d5");
 
   while(dynent.var_fb09ad1c != 3) {
-    if(dynent.var_fb09ad1c != 3 && (self jumpbuttonpressed() || self stancebuttonpressed())) {
+    if(dynent.var_fb09ad1c != 3 && (self jumpbuttonPressed() || self stancebuttonPressed())) {
       dynent.var_fb09ad1c = 3;
       self function_12747006("fishing_cancel");
       self waittill(#"fishing_end_minigame");

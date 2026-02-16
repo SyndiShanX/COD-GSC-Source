@@ -1464,7 +1464,7 @@ get_manually_filtered_spawners(var_0, var_1) {
     return var_1;
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   switch (var_0) {
     case "basement_outdoor_domination_spawner_03":

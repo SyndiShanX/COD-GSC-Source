@@ -284,7 +284,7 @@ add_zombie_powerup(powerup_name, model_name, hint, fx) {
 add_zombie_special_drop(powerup_name) {
   level.zombie_special_drop_array[level.zombie_special_drop_array.size] = powerup_name;
 }
-include_zombie_powerup(powerup_name) {
+#include_zombie_powerup(powerup_name) {
   if("1" == getDvar(#"mutator_noPowerups")) {
     return;
   }
@@ -591,7 +591,7 @@ start_bonfire_sale(item) {
   temp_ent Delete();
 }
 start_carpenter(origin) {
-  window_boards = getstructarray("exterior_goal", "targetname");
+  window_boards = getStructArray("exterior_goal", "targetname");
   total = level.exterior_goals.size;
   carp_ent = spawn("script_origin", (0, 0, 0));
   carp_ent playLoopSound("evt_carpenter");

@@ -457,7 +457,7 @@ getvalidplayersinarray() {
 
 func_9608() {
   level.goon_spawners = [];
-  var_0 = scripts\engine\utility::getstructarray("dog_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("dog_spawner", "targetname");
   if(isDefined(level.goon_spawner_patch_func)) {
     [[level.goon_spawner_patch_func]](var_0);
   }
@@ -527,7 +527,7 @@ func_7CE3() {
 
   var_0 = getEntArray(self.target, "targetname");
   if(!isDefined(var_0) || var_0.size == 0) {
-    var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   }
 
   var_1 = [];
@@ -546,7 +546,7 @@ func_7CE3() {
 
 update_origin(var_0, var_1) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_3 in level.spawn_struct_list) {
@@ -559,7 +559,7 @@ update_origin(var_0, var_1) {
 
 remove_origin(var_0) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_2 in level.spawn_struct_list) {
@@ -572,7 +572,7 @@ remove_origin(var_0) {
 
 update_kvp(var_0, var_1, var_2) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_4 in level.spawn_struct_list) {

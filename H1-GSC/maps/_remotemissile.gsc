@@ -597,7 +597,7 @@ waitwithabortondamage(var_0) {
     if(isDefined(level.uav_is_destroyed))
       return 0;
 
-    if(self usebuttonpressed())
+    if(self useButtonPressed())
       return 0;
 
     if(!common_scripts\utility::flag("uav_enabled"))
@@ -1404,10 +1404,10 @@ staticeffect(var_0) {
 
 player_can_cycle_uav_rigs() {
   self endon("controlling_UAV");
-  var_0 = self attackbuttonpressed();
+  var_0 = self attackButtonPressed();
 
   for(;;) {
-    var_1 = self attackbuttonpressed();
+    var_1 = self attackButtonPressed();
 
     if(!var_0 && var_1) {
       self.current_uav_index++;

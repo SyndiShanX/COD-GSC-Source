@@ -784,7 +784,7 @@ function fake_use(notify_string, qualifier_func) {
       }
       if(qualifier_passed && distancesquared(self.origin, players[i].origin) < 4096) {
         if(players[i] is_facing(self)) {
-          if(players[i] usebuttonpressed()) {
+          if(players[i] useButtonPressed()) {
             self notify(notify_string, players[i]);
             return;
           }

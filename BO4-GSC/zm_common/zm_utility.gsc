@@ -2364,7 +2364,7 @@ play_sound_2d(sound) {
   temp_ent delete();
 }
 
-include_weapon(weapon_name, in_box) {
+#include_weapon(weapon_name, in_box) {
   println("<dev string:x22f>" + function_9e72a96(weapon_name));
 
   if(!isDefined(in_box)) {

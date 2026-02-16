@@ -1215,7 +1215,7 @@ play_spinner_fx() {
 }
 
 ambush_fake_rpg_barrage() {
-  fakeRpgs = getstructarray("fake_rpg", "targetname");
+  fakeRpgs = getStructArray("fake_rpg", "targetname");
 
   foreach(index, fakeRpg in fakeRpgs) {
     repulsor = Missile_CreateRepulsorEnt(level.player, 1000, 512);
@@ -3374,7 +3374,7 @@ strike_package_birchfield_smokeassault() {
     thread strike_package_birchfield_smokeassault_dialogue();
   }
 
-  fence_detonators = getstructarray("chainlink_fence_detonator", "targetname");
+  fence_detonators = getStructArray("chainlink_fence_detonator", "targetname");
   foreach(detonator in fence_detonators) {
     wait randomfloatrange(0.25, 1);
     playFX(getfx("fenceblast"), detonator.origin);
@@ -5541,7 +5541,7 @@ should_break_claymore_hint() {
     return (true);
   }
 
-  if(!(level.player buttonpressed("DPAD_RIGHT"))) {
+  if(!(level.player buttonPressed("DPAD_RIGHT"))) {
     return (false);
   } else {
     return (true);

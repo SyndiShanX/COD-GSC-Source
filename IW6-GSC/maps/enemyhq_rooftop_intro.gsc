@@ -390,7 +390,7 @@ monitor_player_bishop() {
   var_5["stadium_left"] = 0;
   var_5["stadium_right"] = 0;
   var_5["armada"] = 0;
-  var_6 = common_scripts\utility::getstructarray("bishop_search", "targetname");
+  var_6 = common_scripts\utility::getStructArray("bishop_search", "targetname");
   var_7 = 0;
   var_8 = [];
   var_8[var_8.size] = "enemyhq_mrk_enemypatrolsnothingmore";

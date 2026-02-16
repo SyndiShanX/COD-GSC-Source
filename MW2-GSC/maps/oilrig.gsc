@@ -1328,7 +1328,7 @@ grate_enemy_hint_cleanup() {
 waittill_player_triggers_stealth_kill() {
   while(!flag("player_starting_stealth_kill")) {
     wait(0.05);
-    if((flag("player_looking_at_grate_guard")) && (level.player MeleeButtonPressed())) {
+    if((flag("player_looking_at_grate_guard")) && (level.player meleeButtonPressed())) {
       break;
     }
   }
@@ -1791,7 +1791,7 @@ is_player_looking_at_railing() {
   railing_org = getent("railing_org", "targetname");
   while(true) {
     wait(.25);
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       playerEye = self getEye();
       if(within_fov(playerEye, self getPlayerAngles(), railing_org.origin, level.cosine["25"]))
         flag_set("player_looking_at_railing");
@@ -4822,7 +4822,7 @@ waittill_using_thermal_scope_or_timeout_func(time) {
     wait(0.1);
     while(!level.player player_has_thermal())
       wait(.5);
-    if(level.player adsbuttonpressed()) {
+    if(level.player adsButtonPressed()) {
       break;
     }
   }

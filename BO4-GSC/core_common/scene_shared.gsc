@@ -2308,7 +2308,7 @@ function_a4ad0308(o_scene) {
 
     var_8133fe2b = 0;
 
-    if(var_6b859e8c || self primarybuttonpressedlocal() || (ispc() ? self attackbuttonpressed() : self jumpbuttonpressed())) {
+    if(var_6b859e8c || self primarybuttonpressedlocal() || (ispc() ? self attackButtonPressed() : self jumpbuttonPressed())) {
       var_8133fe2b = 1;
     }
 
@@ -2437,31 +2437,31 @@ function_63033fc3(str_notify) {
 }
 
 any_button_pressed() {
-  if(self actionslotonebuttonpressed()) {
+  if(self actionslotonebuttonPressed()) {
     return true;
-  } else if(self actionslottwobuttonpressed()) {
+  } else if(self actionslottwobuttonPressed()) {
     return true;
-  } else if(self actionslotthreebuttonpressed()) {
+  } else if(self actionslotthreebuttonPressed()) {
     return true;
-  } else if(self actionslotfourbuttonpressed()) {
+  } else if(self actionslotfourbuttonPressed()) {
     return true;
-  } else if(self jumpbuttonpressed()) {
+  } else if(self jumpbuttonPressed()) {
     return true;
-  } else if(self stancebuttonpressed()) {
+  } else if(self stancebuttonPressed()) {
     return true;
-  } else if(self weaponswitchbuttonpressed()) {
+  } else if(self weaponswitchbuttonPressed()) {
     return true;
-  } else if(self reloadbuttonpressed()) {
+  } else if(self reloadbuttonPressed()) {
     return true;
-  } else if(self fragbuttonpressed()) {
+  } else if(self fragButtonPressed()) {
     return true;
-  } else if(self throwbuttonpressed()) {
+  } else if(self throwbuttonPressed()) {
     return true;
-  } else if(self attackbuttonpressed()) {
+  } else if(self attackButtonPressed()) {
     return true;
-  } else if(self secondaryoffhandbuttonpressed()) {
+  } else if(self secondaryoffhandbuttonPressed()) {
     return true;
-  } else if(self meleebuttonpressed()) {
+  } else if(self meleeButtonPressed()) {
     return true;
   }
 

@@ -291,7 +291,7 @@ ev2_ambient_tank_hits() {
 
 ev2_ambient_tank_hits_friend() {
   level endon("stop_ambient_explosions");
-  friendly_targets = getstructarray("ev2_tank_battle_ambient_friend", "targetname");
+  friendly_targets = getStructArray("ev2_tank_battle_ambient_friend", "targetname");
   while(1) {
     index = randomint(friendly_targets.size);
     playFX(level._effect["dirt_blow_up"], friendly_targets[index].origin);
@@ -302,7 +302,7 @@ ev2_ambient_tank_hits_friend() {
 
 ev2_ambient_tank_hits_enemy() {
   level endon("stop_ambient_explosions");
-  enemy_targets = getstructarray("ev2_tank_battle_ambient_enemy", "targetname");
+  enemy_targets = getStructArray("ev2_tank_battle_ambient_enemy", "targetname");
 
   while(1) {
     index = randomint(enemy_targets.size);
@@ -922,8 +922,8 @@ ev2_shreck_loop() {
   level endon("stop_shreck_loop");
   level endon("shreck_guy_killed");
 
-  shreck_points = getstructarray("ev2_shreck_spawn", "targetname");
-  shreck_targets = getstructarray("ev2_shreck_target", "targetname");
+  shreck_points = getStructArray("ev2_shreck_spawn", "targetname");
+  shreck_targets = getStructArray("ev2_shreck_target", "targetname");
 
   fire_point = 0;
   while(1) {
@@ -949,8 +949,8 @@ ev2_shreck_loop() {
 ev2_shreck_barrage() {
   level endon("shreck_guy_killed");
 
-  shreck_points = getstructarray("ev2_shreck_spawn", "targetname");
-  shreck_targets = getstructarray("ev2_shreck_barrage_target", "targetname");
+  shreck_points = getStructArray("ev2_shreck_spawn", "targetname");
+  shreck_targets = getStructArray("ev2_shreck_barrage_target", "targetname");
 
   flag_wait("ev2_tank_friend_in_position");
   level thread dialog_panzershreck_window();
@@ -1318,7 +1318,7 @@ ev2_panzershreck_barrage(start, end) {
 
   start_struct = getstruct(start, "targetname");
 
-  ends = getstructarray(end, "targetname");
+  ends = getStructArray(end, "targetname");
 
   index = 0;
 

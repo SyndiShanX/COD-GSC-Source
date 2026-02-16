@@ -249,7 +249,7 @@ warp_players_underworld() {
   }
 }
 warp_players(startValue, startKey) {
-  starts = GetStructArray(startValue, startKey);
+  starts = getStructArray(startValue, startKey);
   ASSERT(starts.size == 4);
 
   players = get_players();
@@ -299,7 +299,7 @@ ber3b_friendly_startup_thread() {
 warp_friendlies(startValue, startKey) {
   ASSERTEX(flag("friends_setup"), "warp_friendlies(): level.friends needs to be set up before this runs.");
 
-  friendlyStarts = GetStructArray(startValue, startKey);
+  friendlyStarts = getStructArray(startValue, startKey);
   ASSERTEX(friendlyStarts.size > 0, "warp_friendlies(): didn't find enough friendly start points!");
 
   for(i = 0; i < level.friends.size; i++) {

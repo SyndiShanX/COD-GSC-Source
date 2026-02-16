@@ -2572,7 +2572,7 @@ ambient_phantoms() {
   wait 5;
 
   while(true) {
-    a_s_spawnpts = getstructarray("phantom_rooftop_spawnpt", "targetname");
+    a_s_spawnpts = getStructArray("phantom_rooftop_spawnpt", "targetname");
     s_spawnpt = a_s_spawnpts[randomint(a_s_spawnpts.size)];
 
     for(i = 0; i < randomintrange(1, 5); i++) {
@@ -2610,7 +2610,7 @@ ambient_littlebirds() {
   wait 3;
 
   while(true) {
-    a_s_spawnpts = getstructarray("littlebird_rooftop_spawnpt", "targetname");
+    a_s_spawnpts = getStructArray("littlebird_rooftop_spawnpt", "targetname");
     s_spawnpt = a_s_spawnpts[randomint(a_s_spawnpts.size)];
     vh_littlebird = spawn_vehicle_from_targetname("us_littlebird");
     v_offset = (randomintrange(-300, 300), randomintrange(-300, 300), randomintrange(-200, 200));

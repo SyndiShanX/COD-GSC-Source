@@ -179,7 +179,7 @@ lineEmitter_Thread(localClientNum) {
 }
 
 startSoundRandoms(localClientNum) {
-  randoms = GetStructArray("random", "script_label");
+  randoms = getStructArray("random", "script_label");
 
   if(isDefined(randoms) && randoms.size > 0) {
     println("*** Client : Initialising random sounds - " + randoms.size + " emitters.");
@@ -192,7 +192,7 @@ startSoundRandoms(localClientNum) {
 }
 
 startSoundLoops(localClientNum) {
-  loopers = GetStructArray("looper", "script_label");
+  loopers = getStructArray("looper", "script_label");
 
   if(isDefined(loopers) && loopers.size > 0) {
     println("*** Client : Initialising looper sounds - " + loopers.size + " emitters.");
@@ -205,7 +205,7 @@ startSoundLoops(localClientNum) {
 }
 
 startLineEmitters(localClientNum) {
-  lineEmitters = GetStructArray("line_emitter", "script_label");
+  lineEmitters = getStructArray("line_emitter", "script_label");
 
   if(isDefined(lineEmitters) && lineEmitters.size > 0) {
     println("*** Client : Initialising line emitter sounds - " + lineEmitters.size + " emitters.");

@@ -23,7 +23,7 @@ init_step_one_marker(var_0) {
 
   foreach(var_3 in var_1) {
     var_4 = spawnStruct();
-    var_4.markers = scripts\engine\utility::getstructarray(var_3, "script_noteworthy");
+    var_4.markers = scripts\engine\utility::getStructArray(var_3, "script_noteworthy");
     level.a_dig_site_breadcrumbs[level.a_dig_site_breadcrumbs.size] = var_4;
   }
 }
@@ -58,7 +58,7 @@ debug_step_one_marker() {
 
 init_step_two_marker() {
   var_0 = spawnStruct();
-  var_0.markers = scripts\engine\utility::getstructarray("dig_site_breadcrumbs_4", "script_noteworthy");
+  var_0.markers = scripts\engine\utility::getStructArray("dig_site_breadcrumbs_4", "script_noteworthy");
   var_0.finish_flag = "dig_site_discovery_marker_final_found";
   level.a_dig_site_breadcrumbs[level.a_dig_site_breadcrumbs.size] = var_0;
 }
@@ -97,7 +97,7 @@ find_marker_sequence(var_0) {
     return;
   } else {
     check_players_find_markers([var_0]);
-    var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
     foreach(var_3 in var_1) {
       level thread find_marker_sequence(var_3);
@@ -209,11 +209,11 @@ check_players_find_markers(var_0) {
     level.a_dig_site_active_markers = scripts\engine\utility::array_remove(level.a_dig_site_active_markers, var_2);
 
     if(isDefined(var_2._id_039B)) {
-      var_8 = scripts\engine\utility::getstructarray(var_2._id_039B, "script_noteworthy");
+      var_8 = scripts\engine\utility::getStructArray(var_2._id_039B, "script_noteworthy");
 
       foreach(var_10 in var_8) {
         if(isDefined(var_10._id_0481)) {
-          var_11 = scripts\engine\utility::getstructarray(var_10._id_0481, "target");
+          var_11 = scripts\engine\utility::getStructArray(var_10._id_0481, "target");
 
           foreach(var_13 in var_11) {
             if(scripts\engine\utility::array_contains(level.a_dig_site_active_markers, var_13)) {

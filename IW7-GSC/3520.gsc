@@ -873,7 +873,7 @@ func_105A7(var_0) {
     var_0 setclientomnvar("ui_securing", 8);
     var_0 setclientomnvar("ui_securing_progress", var_1);
 
-    while(var_0 usebuttonpressed()) {
+    while(var_0 useButtonPressed()) {
       scripts\engine\utility::waitframe();
       var_1 = var_1 + 0.0666667;
 
@@ -1266,10 +1266,10 @@ func_105E3(var_0) {
         break;
       case "playerStarts":
       case "spawnpoints":
-        var_0.var_D42C = scripts\engine\utility::getstructarray(var_4[1], "targetname");
+        var_0.var_D42C = scripts\engine\utility::getStructArray(var_4[1], "targetname");
         break;
       case "jackalStarts":
-        var_0.var_A422 = scripts\engine\utility::getstructarray(var_4[1], "targetname");
+        var_0.var_A422 = scripts\engine\utility::getStructArray(var_4[1], "targetname");
         break;
       case "autouse":
         var_0.var_2699 = var_4[1] == "true";

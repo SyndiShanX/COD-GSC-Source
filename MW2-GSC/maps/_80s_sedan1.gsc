@@ -59,7 +59,7 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_brn" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_brn_80s_sedan1
+#include,vehicle_80s_sedan1_brn_80s_sedan1
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_80s_sedan1_brn"default:"vehicletype" "80s_sedan1"default:"script_team" "allies"*/
@@ -70,8 +70,8 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_brn_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_brn_destructible_mp_80s_sedan1
-include,destructible_vehicle_80s_sedan1_brn_destructible_mp
+#include,vehicle_80s_sedan1_brn_destructible_mp_80s_sedan1
+#include,destructible_vehicle_80s_sedan1_brn_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -83,7 +83,7 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_green" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_green_80s_sedan1
+#include,vehicle_80s_sedan1_green_80s_sedan1
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_80s_sedan1_green"default:"vehicletype" "80s_sedan1"default:"script_team" "allies"*/
@@ -94,8 +94,8 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_green_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_green_destructible_mp_80s_sedan1
-include,destructible_vehicle_80s_sedan1_green_destructible_mp
+#include,vehicle_80s_sedan1_green_destructible_mp_80s_sedan1
+#include,destructible_vehicle_80s_sedan1_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -107,7 +107,7 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_red" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_red_80s_sedan1
+#include,vehicle_80s_sedan1_red_80s_sedan1
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_80s_sedan1_red"default:"vehicletype" "80s_sedan1"default:"script_team" "allies"*/
@@ -118,8 +118,8 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_red_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_red_destructible_mp_80s_sedan1
-include,destructible_vehicle_80s_sedan1_red_destructible_mp
+#include,vehicle_80s_sedan1_red_destructible_mp_80s_sedan1
+#include,destructible_vehicle_80s_sedan1_red_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -131,7 +131,7 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_silv" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_silv_80s_sedan1
+#include,vehicle_80s_sedan1_silv_80s_sedan1
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_80s_sedan1_silv"default:"vehicletype" "80s_sedan1"default:"script_team" "allies"*/
@@ -142,8 +142,8 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_silv_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_silv_destructible_mp_80s_sedan1
-include,destructible_vehicle_80s_sedan1_silv_destructible_mp
+#include,vehicle_80s_sedan1_silv_destructible_mp_80s_sedan1
+#include,destructible_vehicle_80s_sedan1_silv_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -155,7 +155,7 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_tan" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_tan_80s_sedan1
+#include,vehicle_80s_sedan1_tan_80s_sedan1
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_80s_sedan1_tan"default:"vehicletype" "80s_sedan1"default:"script_team" "allies"*/
@@ -166,8 +166,8 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_tan_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_tan_destructible_mp_80s_sedan1
-include,destructible_vehicle_80s_sedan1_tan_destructible_mp
+#include,vehicle_80s_sedan1_tan_destructible_mp_80s_sedan1
+#include,destructible_vehicle_80s_sedan1_tan_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -179,7 +179,7 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_yel" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_yel_80s_sedan1
+#include,vehicle_80s_sedan1_yel_80s_sedan1
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_80s_sedan1_yel"default:"vehicletype" "80s_sedan1"default:"script_team" "allies"*/
@@ -190,8 +190,8 @@ put this in your GSC:
 maps\_80s_sedan1::main( "vehicle_80s_sedan1_yel_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_80s_sedan1_yel_destructible_mp_80s_sedan1
-include,destructible_vehicle_80s_sedan1_yel_destructible_mp
+#include,vehicle_80s_sedan1_yel_destructible_mp_80s_sedan1
+#include,destructible_vehicle_80s_sedan1_yel_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 

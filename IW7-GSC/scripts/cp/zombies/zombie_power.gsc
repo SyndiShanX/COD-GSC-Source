@@ -6,7 +6,7 @@
 func_96F4() {
   wait(5);
   level.generators = [];
-  level.generators = scripts\engine\utility::getstructarray("generator", "script_noteworthy");
+  level.generators = scripts\engine\utility::getStructArray("generator", "script_noteworthy");
   scripts\engine\utility::flag_init("power_on");
   level.power_off_func = ::func_D744;
   foreach(var_1 in level.generators) {

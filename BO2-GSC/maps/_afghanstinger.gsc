@@ -54,11 +54,11 @@ _afghanstinger_airburst_button_check(e_missile) {
   wait 0.05;
 
   do {
-    while(self attackbuttonpressed()) {
+    while(self attackButtonPressed()) {
       wait 0.05;
     }
 
-    while(!self attackbuttonpressed()) {
+    while(!self attackButtonPressed()) {
       wait 0.05;
     }
 

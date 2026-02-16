@@ -117,7 +117,7 @@ ambient_hinds(var_0) {
 
 beach_ship_ambient_artillery() {
   level endon("stop_beach_ambient_artillery");
-  var_0 = common_scripts\utility::getstructarray("beach_ship_ambient_artillery_spots", "targetname");
+  var_0 = common_scripts\utility::getStructArray("beach_ship_ambient_artillery_spots", "targetname");
 
   for(;;) {
     var_0 = common_scripts\utility::array_randomize(var_0);
@@ -138,7 +138,7 @@ beach_ship_ambient_artillery() {
 }
 
 beach_ship_phalanx_start(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_2 = 0;
 
   foreach(var_4 in var_1) {
@@ -148,7 +148,7 @@ beach_ship_phalanx_start(var_0) {
 }
 
 beach_ship_phalanx_system() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   for(;;) {
     var_0 = common_scripts\utility::array_randomize(var_0);
@@ -193,7 +193,7 @@ phalanx_incoming_hit(var_0) {
 }
 
 beach_ship_phalanx_system_complex() {
-  var_0 = common_scripts\utility::getstructarray("ship_phalanx_system", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ship_phalanx_system", "targetname");
 
   foreach(var_2 in var_0)
   var_2.used = 0;

@@ -319,7 +319,7 @@ put this in your GSC:
 maps\_hind::main( "vehicle_mi24p_hind_desert" );
 
 and these lines in your CSV:
-include,vehicle_mi24p_hind_desert_hind
+#include,vehicle_mi24p_hind_desert_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi24p_hind_desert"default:"vehicletype" "hind"default:"script_team" "axis"*/
@@ -330,7 +330,7 @@ put this in your GSC:
 maps\_hind::main( "vehicle_mi24p_hind_desert" );
 
 and these lines in your CSV:
-include,vehicle_mi24p_hind_desert_hind
+#include,vehicle_mi24p_hind_desert_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi24p_hind_desert"default:"vehicletype" "hind"default:"script_team" "axis"*/
@@ -341,7 +341,7 @@ put this in your GSC:
 maps\_hind::main( "vehicle_mi24p_hind_chernobyl" );
 
 and these lines in your CSV:
-include,vehicle_mi24p_hind_chernobyl
+#include,vehicle_mi24p_hind_chernobyl
 sound,vehicle_hind,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi24p_hind_chernobyl"default:"vehicletype" "hind"default:"script_team" "axis"*/
@@ -352,7 +352,7 @@ put this in your GSC:
 maps\_hind::main( "vehicle_mi24p_hind_woodland" );
 
 and these lines in your CSV:
-include,vehicle_mi24p_hind_woodland_hind
+#include,vehicle_mi24p_hind_woodland_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi24p_hind_woodland"default:"vehicletype" "hind"default:"script_team" "axis"*/
@@ -363,7 +363,7 @@ put this in your GSC:
 maps\_hind::main( "vehicle_mi24p_hind_woodland" );
 
 and these lines in your CSV:
-include,vehicle_mi24p_hind_woodland_hind
+#include,vehicle_mi24p_hind_woodland_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi24p_hind_woodland"default:"vehicletype" "hind"default:"script_team" "axis"*/
@@ -374,7 +374,7 @@ put this in your GSC:
 maps\_hind::main( "vehicle_mi24p_hind_woodland_opened_door" );
 
 and these lines in your CSV:
-include,vehicle_mi24p_hind_woodland_opened_door_hind
+#include,vehicle_mi24p_hind_woodland_opened_door_hind
 sound,vehicle_hind,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi24p_hind_woodland_opened_door"default:"vehicletype" "hind"default:"script_team" "axis"

@@ -452,9 +452,9 @@ mp_alien_town_onStartGameTypeFunc() {
 mp_alien_town_pillage_modification() {
   distcheck = 10 * 10;
 
-  pillage_areas = getstructarray("pillage_area", "targetname");
+  pillage_areas = getStructArray("pillage_area", "targetname");
   foreach(index, area in pillage_areas) {
-    pillage_spots = getstructarray(area.target, "targetname");
+    pillage_spots = getStructArray(area.target, "targetname");
     foreach(spot in pillage_spots) {
       if(DistanceSquared(spot.origin, (-3771, 1288, 830)) <= distcheck) {
         spot.origin = spot.origin + (0, 15, -4);
@@ -592,7 +592,7 @@ mp_alien_town_onSpawnPlayer_func() {
 }
 
 update_weapon_placement() {
-  items = getstructarray("item", "targetname");
+  items = getStructArray("item", "targetname");
 
   foreach(world_item in items) {
     if(!isDefined(world_item.script_noteworthy)) {

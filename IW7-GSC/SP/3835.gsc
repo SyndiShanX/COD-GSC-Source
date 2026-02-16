@@ -65,7 +65,7 @@ func_7D7A(var_0, var_1) {
 }
 
 func_7CBB(var_0, var_1, var_2, var_3) {
-  var_4 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_4 = scripts\engine\utility::getStructArray(var_0, var_1);
   foreach(var_6 in var_4) {
     if(isDefined(var_6.script_parameters)) {
       if(var_6.script_parameters == var_2) {
@@ -106,7 +106,7 @@ func_7CBE(var_0, var_1, var_2) {
     return scripts\engine\utility::getstruct(var_0, var_1);
   }
 
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
       if(var_5.script_parameters == var_2) {
@@ -117,7 +117,7 @@ func_7CBE(var_0, var_1, var_2) {
 }
 
 func_7CBC(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   foreach(var_5 in var_3) {
     if(isDefined(var_5.var_EE52)) {
       if(var_5.var_EE52 == var_2) {
@@ -139,7 +139,7 @@ func_798A(var_0, var_1, var_2) {
 }
 
 func_7CC0(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   foreach(var_5 in var_3) {
     if(isDefined(var_5.var_EE52)) {
       if(var_5.var_EE52 != var_2) {
@@ -340,10 +340,10 @@ func_7CBD(var_0, var_1, var_2, var_3) {
 
 func_7CC1(var_0, var_1, var_2) {
   if(var_2 == "_ignore_last_sparam") {
-    return scripts\engine\utility::getstructarray(var_0, var_1);
+    return scripts\engine\utility::getStructArray(var_0, var_1);
   }
 
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {
       if(var_5.script_parameters != var_2) {

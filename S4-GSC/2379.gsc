@@ -173,7 +173,7 @@ _id_4BDF(var_0) {
 
 _id_7EF4() {
   level._id_1B17 = [];
-  var_0 = scripts\engine\utility::getstructarray("armageddon_area_marker", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("armageddon_area_marker", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = [];

@@ -76,7 +76,7 @@ whitehouse_spotlight_pathing(target_struct) {
       break;
     }
 
-    target_struct_array = getstructarray(target_struct.target, "targetname");
+    target_struct_array = getStructArray(target_struct.target, "targetname");
     target_struct = random(target_struct_array);
   }
 }
@@ -270,9 +270,9 @@ magic_rpg_setup() {
 magic_rpg_trigger() {
   self waittill("trigger");
 
-  source_arr = getstructarray(self.target, "targetname");
+  source_arr = getStructArray(self.target, "targetname");
   foreach(source in source_arr) {
-    target_arr = getstructarray(source.target, "targetname");
+    target_arr = getStructArray(source.target, "targetname");
     array_thread(target_arr, ::magic_rpg, source);
   }
 }
@@ -305,7 +305,7 @@ sandbag_group_setup(str_targetname) {
 }
 
 sandbag_group_create_models(str_targetname) {
-  struct_arr = getstructarray(str_targetname, "targetname");
+  struct_arr = getStructArray(str_targetname, "targetname");
   foreach(struct in struct_arr) {
     model = spawn("script_model", struct.origin);
     model.angles = struct.angles;
@@ -952,7 +952,7 @@ tunnels_teleport()
 
 	// teleport ai
 	volume = getent( "tunnels_teleport_volume", "targetname" );
-	dest_arr = getstructarray("tunnels_teleport_struct", "targetname" );
+	dest_arr = getStructArray("tunnels_teleport_struct", "targetname" );
 	index = 0;
 
 	angles_rotation = target_ent.angles - start_ent.angles;
@@ -1086,7 +1086,7 @@ dcwh_teleport_player(name) {
   if(!isDefined(name))
     name = level.start_point;
 
-  array = getstructarray("start_point", "targetname");
+  array = getStructArray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {

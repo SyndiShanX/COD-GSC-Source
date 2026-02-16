@@ -7,7 +7,7 @@ init_scrambler() {
   level.scrambletrapuses = 0;
   var_0 = undefined;
   var_1 = undefined;
-  var_2 = scripts\engine\utility::getstructarray("scrambler", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("scrambler", "script_noteworthy");
   foreach(var_4 in var_2) {
     var_4 thread func_EC9E();
     var_4.rockets = [];
@@ -197,7 +197,7 @@ fling_zombie(var_0, var_1) {
 
 func_6734() {
   self endon("stop_dmg");
-  var_0 = scripts\engine\utility::getstructarray("escape_velocity_attractors", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("escape_velocity_attractors", "targetname");
   var_1 = getent("escape_velocity_volume", "targetname");
   for(;;) {
     var_2 = scripts\cp\cp_agent_utils::getaliveagentsofteam("axis");

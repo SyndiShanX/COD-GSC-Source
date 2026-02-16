@@ -7,9 +7,7 @@
 #include common_scripts\utility;
 #include maps\mp\_snd_common_mp;
 
-give_exo_cloak()
-
-{
+give_exo_cloak() {
   cloakWeapon = get_exo_cloak_weapon();
 
   if(self HasWeapon(cloakWeapon)) {
@@ -52,9 +50,7 @@ give_exo_cloak()
   self thread wait_for_game_end();
 }
 
-wait_for_exocloak_pressed()
-
-{
+wait_for_exocloak_pressed() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -77,9 +73,7 @@ wait_for_exocloak_pressed()
   }
 }
 
-wait_for_exocloak_cancel()
-
-{
+wait_for_exocloak_cancel() {
   level endon("game_ended");
   self endon("death");
   self endon("disconnect");
@@ -94,9 +88,7 @@ wait_for_exocloak_cancel()
   }
 }
 
-wait_for_player_death()
-
-{
+wait_for_player_death() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("exo_cloak_reset");
@@ -106,9 +98,7 @@ wait_for_player_death()
   self active_cloaking_disable(true);
 }
 
-handle_exocloak()
-
-{
+handle_exocloak() {
   level endon("game_ended");
   self endon("disconnect");
   self endon("death");
@@ -128,9 +118,7 @@ handle_exocloak()
   }
 }
 
-active_cloaking_enable()
-
-{
+active_cloaking_enable() {
   println("active_cloaking_enable() called.");
 
   self.exo_cloak_on = true;
@@ -191,9 +179,7 @@ active_cloaking_disable(should_play_fx)
   self notify("exo_cloak_disabled");
 }
 
-take_exo_cloak()
-
-{
+take_exo_cloak() {
   cloakWeapon = get_exo_cloak_weapon();
 
   self notify("kill_battery");
@@ -202,9 +188,7 @@ take_exo_cloak()
   self notify("exo_cloak_reset");
 }
 
-wait_for_game_end()
-
-{
+wait_for_game_end() {
   self endon("death");
   self endon("disconnect");
   self endon("joined_team");
@@ -216,9 +200,7 @@ wait_for_game_end()
   self active_cloaking_disable(true);
 }
 
-hideAttachmentsWhileCloaked()
-
-{
+hideAttachmentsWhileCloaked() {
   if(self HasWeapon("adrenaline_mp")) {
     if(isDefined(self.overclock_on) && self.overclock_on == true) {
       KillFXOnTag(level.exo_overclock_vfx_le_active, self, "J_Hip_LE");
@@ -256,9 +238,7 @@ hideAttachmentsWhileCloaked()
   }
 }
 
-showAttachmentsAfterCloak()
-
-{
+showAttachmentsAfterCloak() {
   if(self HasWeapon("adrenaline_mp")) {
     if(isDefined(self.overclock_on) && self.overclock_on == true) {
       playFXOnTag(level.exo_overclock_vfx_le_active, self, "J_Hip_LE");

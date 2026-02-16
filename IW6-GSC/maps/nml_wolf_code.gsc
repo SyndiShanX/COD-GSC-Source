@@ -1494,9 +1494,9 @@ set_default_hud_stuff() {
 
 use_pressed() {
   if(!level.console && !level.player usinggamepad())
-    return level.player attackbuttonpressed();
+    return level.player attackButtonPressed();
   else
-    return level.player usebuttonpressed();
+    return level.player useButtonPressed();
 }
 
 wolf_scene_end() {

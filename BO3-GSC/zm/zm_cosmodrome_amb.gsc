@@ -226,7 +226,7 @@ function function_99199901() {
       continue;
     }
     while(who istouching(self.var_7f6e3a35)) {
-      if(who usebuttonpressed()) {
+      if(who useButtonPressed()) {
         self notify("phone_activated");
         self.var_7f6e3a35 delete();
         self.var_48df29fd delete();

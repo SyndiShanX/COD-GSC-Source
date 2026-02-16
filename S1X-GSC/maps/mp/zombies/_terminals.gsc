@@ -1006,7 +1006,7 @@ perkterminalactivatehostcurefx(var_0) {
 perkterminalsethostcure(var_0, var_1) {
   self notify("cured", 1);
   self setwatersheeting(1, 0.5);
-  var_2 = common_scripts\utility::getstructarray("host_cure_teleport", "targetname");
+  var_2 = common_scripts\utility::getStructArray("host_cure_teleport", "targetname");
 
   if(var_2.size) {
     var_3 = common_scripts\utility::random(var_2);

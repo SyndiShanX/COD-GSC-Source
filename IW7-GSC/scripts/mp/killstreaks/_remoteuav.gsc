@@ -289,7 +289,7 @@ func_12E70(var_0) {
           self forceusehinton(&"KILLSTREAKS_REMOTE_UAV_PLACE");
         }
 
-        if(self attackbuttonpressed()) {
+        if(self attackButtonPressed()) {
           self notify("place_carryRemoteUAV");
         }
       } else if(self.team != "spectator") {
@@ -496,7 +496,7 @@ remoteuav_playerexit(var_0) {
   wait(2);
   for(;;) {
     var_1 = 0;
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       var_1 = var_1 + 0.05;
       if(var_1 > 0.75) {
         var_0 thread remoteuav_leave();

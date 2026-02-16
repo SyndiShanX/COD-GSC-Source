@@ -45,7 +45,7 @@ defend_zodiac_pre_load() {
   level.dz_intermission_enemies = [];
   level.dead_ally_drones = [];
   level.cut_ropes = [];
-  level.zodiac_ally_shoot_targets = common_scripts\utility::getstructarray("zodiac_ally_shoot_target", "targetname");
+  level.zodiac_ally_shoot_targets = common_scripts\utility::getStructArray("zodiac_ally_shoot_target", "targetname");
   level.zodiac_allies = [];
   level.corpse_entnums = [];
   level.defend_zodiac_arrived_right = getent("defend_zodiac_arrived_right", "targetname");
@@ -811,7 +811,7 @@ run_helis() {
 
 update_heli_crash_location() {
   self endon("death");
-  var_0 = common_scripts\utility::getstructarray("dz_heli_01_crash_location", "targetname");
+  var_0 = common_scripts\utility::getStructArray("dz_heli_01_crash_location", "targetname");
 
   for(;;) {
     self.perferred_crash_location = common_scripts\utility::getclosest(self.origin, var_0);
@@ -1416,7 +1416,7 @@ run_enemy_destroyer() {
   level.fake_targets = common_scripts\utility::array_removeundefined(level.fake_targets);
   level.fed_destroyer_osprey.rig setanimtime(level.scr_anim["boat"]["carrier_destroyer_idle"][0], 0);
   thread run_enemy_destroyer_gun();
-  var_0 = common_scripts\utility::getstructarray("destroyer_target_big", "targetname");
+  var_0 = common_scripts\utility::getStructArray("destroyer_target_big", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = common_scripts\utility::spawn_tag_origin();
@@ -1591,7 +1591,7 @@ waittill_knockdown_moment() {
 gunship_damage() {
   common_scripts\utility::array_thread(level.deck_ac130_dmg, maps\carrier_code::show_and_raise_entity);
   common_scripts\utility::array_thread(level.deck_ac130_dmg_clip, maps\_utility::show_entity);
-  var_0 = common_scripts\utility::getstructarray("deck_ac130_dmg_badplace", "targetname");
+  var_0 = common_scripts\utility::getStructArray("deck_ac130_dmg_badplace", "targetname");
 
   foreach(var_3, var_2 in var_0)
   badplace_cylinder("deck_ac130_dmg_badplace" + var_3, -1, var_2.origin, var_2.radius, 100, "allies");
@@ -1628,7 +1628,7 @@ teleport_player_post_osprey() {
 
   foreach(var_1 in var_2) {
     if(var_0 istouching(var_1)) {
-      var_4 = common_scripts\utility::getstructarray("gunship_attack_player_teleport_node", "targetname");
+      var_4 = common_scripts\utility::getStructArray("gunship_attack_player_teleport_node", "targetname");
       var_4 = sortbydistance(var_4, level.player.origin);
       maps\_utility::teleport_player(var_4[0]);
       break;
@@ -1756,9 +1756,9 @@ reset_player_speed() {
 
 teleport_hesh_post_osprey() {
   if(level.player.origin[2] > 1380)
-    var_0 = common_scripts\utility::getstructarray("hesh_post_osprey_teleport_deck", "targetname");
+    var_0 = common_scripts\utility::getStructArray("hesh_post_osprey_teleport_deck", "targetname");
   else
-    var_0 = common_scripts\utility::getstructarray("hesh_post_osprey_teleport", "targetname");
+    var_0 = common_scripts\utility::getStructArray("hesh_post_osprey_teleport", "targetname");
 
   var_0 = sortbydistance(var_0, level.player.origin + (0, 550, 0));
   var_1 = var_0[0];
@@ -1853,7 +1853,7 @@ gunship_trans_death_warning() {
 }
 
 launch_props(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = spawn("script_model", var_3.origin);

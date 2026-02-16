@@ -201,7 +201,7 @@ _id_3E1B(var_0) {
 
 _id_383A() {
   if(getDvar("#x36d16f02578d0ee10") == "cp_landlord_2") {
-    var_0 = scripts\engine\utility::getstructarray("default_player_start", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
     var_0[0].origin = (4143.57, 61393.6, 774.27);
     var_0[0].angles = (0, 181.31, 0);
     var_0[1].origin = (4134.67, 61466.8, 774.54);
@@ -498,7 +498,7 @@ setjiprulesbyround() {
 }
 
 _id_45B3() {
-  return _id_68DA(scripts\engine\utility::getstructarray("default_player_start", "targetname"));
+  return _id_68DA(scripts\engine\utility::getStructArray("default_player_start", "targetname"));
 }
 
 _id_68DA(var_0) {
@@ -1945,7 +1945,7 @@ _id_8208() {
 }
 
 _id_8206() {
-  level._id_8DF3 = scripts\engine\utility::getstructarray("respawn_edge", "targetname");
+  level._id_8DF3 = scripts\engine\utility::getStructArray("respawn_edge", "targetname");
 }
 
 _id_6AEE() {

@@ -173,7 +173,7 @@ ejected_overrun(trig) {
 
 change_bad_spawner() {
   flag_wait("always_on");
-  spawner_array = getstructarray("zone_blue_level4a_spawners", "targetname");
+  spawner_array = getStructArray("zone_blue_level4a_spawners", "targetname");
 
   foreach(struct in spawner_array) {
     if(isDefined(struct.origin) && struct.origin == (2154, 748.5, 1312)) {

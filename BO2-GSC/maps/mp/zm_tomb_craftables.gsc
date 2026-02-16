@@ -22,7 +22,7 @@ randomize_craftable_spawns() {
 
   foreach(str_craftable in a_randomized_craftables) {
     s_original_pos = getstruct(str_craftable, "targetname");
-    a_alt_locations = getstructarray(str_craftable + "_alt", "targetname");
+    a_alt_locations = getStructArray(str_craftable + "_alt", "targetname");
     n_loc_index = randomintrange(0, a_alt_locations.size + 1);
 
     if(n_loc_index == a_alt_locations.size)
@@ -168,7 +168,7 @@ run_craftables_devgui() {
   }
 }
 
-include_craftables() {
+#include_craftables() {
   level thread run_craftables_devgui();
   craftable_name = "equip_dieseldrone_zm";
   quadrotor_body = generate_zombie_craftable_piece(craftable_name, "body", "veh_t6_dlc_zm_quad_piece_body", 32, 64, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_body", 1, "build_dd");
@@ -771,7 +771,7 @@ quadrotor_control_thread() {
   self endon("disconnect");
 
   while(true) {
-    if(self actionslottwobuttonpressed() && self hasweapon("equip_dieseldrone_zm")) {
+    if(self actionslottwobuttonPressed() && self hasweapon("equip_dieseldrone_zm")) {
       self waittill("weapon_change_complete");
       self playSound("veh_qrdrone_takeoff");
       weapons = self getweaponslistprimaries();
@@ -803,7 +803,7 @@ quadrotor_debug_send_home(player_owner) {
   level endon("drone_available");
 
   while(true) {
-    if(player_owner actionslottwobuttonpressed())
+    if(player_owner actionslottwobuttonPressed())
       self quadrotor_fly_back_to_table();
 
     wait 0.05;

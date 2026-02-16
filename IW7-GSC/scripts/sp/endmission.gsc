@@ -784,15 +784,15 @@ func_CCA8(var_0, var_1, var_2, var_3) {
     scripts\engine\utility::waitframe();
   }
 
-  while(level.player gettimeremainingpercentage() || level.player usebuttonpressed()) {
+  while(level.player gettimeremainingpercentage() || level.player useButtonPressed()) {
     scripts\engine\utility::waitframe();
   }
 
-  while(iscinematicplaying() && !level.player gettimeremainingpercentage() && !level.player usebuttonpressed()) {
+  while(iscinematicplaying() && !level.player gettimeremainingpercentage() && !level.player useButtonPressed()) {
     scripts\engine\utility::waitframe();
   }
 
-  while(level.player gettimeremainingpercentage() || level.player usebuttonpressed()) {
+  while(level.player gettimeremainingpercentage() || level.player useButtonPressed()) {
     scripts\engine\utility::waitframe();
   }
 

@@ -203,7 +203,7 @@ function airlock_buy() {
   if(getdvarint("zombie_unlock_all") > 0 || (isDefined(force) && force)) {
     return true;
   }
-  if(!who usebuttonpressed()) {
+  if(!who useButtonPressed()) {
     return false;
   }
   if(who zm_utility::in_revive_trigger()) {

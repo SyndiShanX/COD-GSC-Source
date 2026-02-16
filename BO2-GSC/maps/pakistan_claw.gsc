@@ -390,7 +390,7 @@ monitor_first_claw_switch() {
   level endon("player_switched_to_claw");
 
   while(true) {
-    if(self actionslotthreebuttonpressed()) {
+    if(self actionslotthreebuttonPressed()) {
       flag_set("player_switched_to_claw");
     }
 
@@ -716,7 +716,7 @@ claw_fail_condition() {
   screen_message_create(&"PAKISTAN_SHARED_COURTYARD_WARNING");
   level thread warning_message_timeout();
   trigger_wait("claw_street_fail");
-  a_tunnel_claw_rpgs = getstructarray("tunnel_claw_rpgs", "targetname");
+  a_tunnel_claw_rpgs = getStructArray("tunnel_claw_rpgs", "targetname");
 
   foreach(s_rpg_start_pos in a_tunnel_claw_rpgs) {
     s_rpg_end_pos = getstruct(s_rpg_start_pos.target, "targetname");
@@ -1143,7 +1143,7 @@ claw_switch_think() {
   flag_set("claw_switch_done");
 
   while(!flag("stop_claw_switch_think")) {
-    if(self actionslottwobuttonpressed() && level.player.current_claw != 0) {
+    if(self actionslottwobuttonPressed() && level.player.current_claw != 0) {
       flag_clear("claw_switch_done");
       level.player.current_claw = 0;
       level.player ent_flag_clear("player_claw");
@@ -1168,7 +1168,7 @@ claw_switch_think() {
       flag_set("claw_switch_done");
     }
 
-    if(self actionslotthreebuttonpressed() && level.player.current_claw != 1 && !flag("street_claw_dead")) {
+    if(self actionslotthreebuttonPressed() && level.player.current_claw != 1 && !flag("street_claw_dead")) {
       flag_clear("claw_switch_done");
       level.player.current_claw = 1;
       level.player ent_flag_set("player_claw");
@@ -1192,7 +1192,7 @@ claw_switch_think() {
       flag_set("claw_switch_done");
     }
 
-    if(self actionslotfourbuttonpressed() && level.player.current_claw != 2 && !flag("rooftop_claw_dead")) {
+    if(self actionslotfourbuttonPressed() && level.player.current_claw != 2 && !flag("rooftop_claw_dead")) {
       flag_clear("claw_switch_done");
       level.player.current_claw = 2;
       level.player ent_flag_set("player_claw");
@@ -1255,7 +1255,7 @@ claw_grenade_turret_think(veh_claw) {
 waittill_frag_button_pressed(e_player) {
   level endon("courtyard_event_done");
 
-  while(!e_player fragbuttonpressed()) {
+  while(!e_player fragButtonPressed()) {
     wait 0.05;
   }
 }
@@ -2025,7 +2025,7 @@ _fire_turret(e_target, n_index) {
 
 spawn_ending_claw_at_struct(str_end_pos) {
   ai_claw = simple_spawn_single("claw_ai");
-  a_s_start_spots = getstructarray(str_end_pos, "targetname");
+  a_s_start_spots = getStructArray(str_end_pos, "targetname");
   a_v_start_spots = a_s_start_spots objects_to_vectors();
   v_start_spot = get_closest_point(ai_claw.origin, a_v_start_spots);
   ai_claw magic_bullet_shield();
@@ -2188,7 +2188,7 @@ dev_ending() {
   iprintlnbold("Press Use to Start");
 
   while(true) {
-    if(level.player usebuttonpressed()) {
+    if(level.player useButtonPressed()) {
       break;
     }
 
@@ -2259,7 +2259,7 @@ vo_claw_grenade_enemy() {
 vo_claw_flamethrower_enemy() {
   level endon("courtyard_event_done");
 
-  while(!level.player adsbuttonpressed()) {
+  while(!level.player adsButtonPressed()) {
     wait 0.1;
   }
 
@@ -2269,7 +2269,7 @@ vo_claw_flamethrower_enemy() {
 vo_claw_rooftop_enemy() {
   level endon("courtyard_event_done");
 
-  while(!level.player actionslotfourbuttonpressed()) {
+  while(!level.player actionslotfourbuttonPressed()) {
     wait 0.1;
   }
 

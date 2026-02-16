@@ -740,7 +740,7 @@ wait_for_player_activation() {
         break;
       }
 
-      if(!var_4 usebuttonpressed()) {
+      if(!var_4 useButtonPressed()) {
         var_2 = 0;
         break;
       }
@@ -765,7 +765,7 @@ wait_for_player_activation() {
           break;
         }
 
-        if(!var_4 usebuttonpressed()) {
+        if(!var_4 useButtonPressed()) {
           var_2 = 0;
           break;
         }
@@ -845,7 +845,7 @@ cp_town_gns_4_setup() {
   level.hidden_figures[0].script_noteworthy = "figure_1";
   level.hidden_figures[0].script_parameters = "default";
   level.hidden_figures[0].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_1", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_1", "script_noteworthy");
   level.hidden_figures[1] = spawnStruct();
   level.hidden_figures[1].origin = (4058, -4359, 76);
   level.hidden_figures[1].powered_on = 0;
@@ -854,7 +854,7 @@ cp_town_gns_4_setup() {
   level.hidden_figures[1].script_noteworthy = "figure_2";
   level.hidden_figures[1].script_parameters = "default";
   level.hidden_figures[1].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_2", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_2", "script_noteworthy");
   level.hidden_figures[2] = spawnStruct();
   level.hidden_figures[2].origin = (4058, -4359, 76);
   level.hidden_figures[2].powered_on = 0;
@@ -863,7 +863,7 @@ cp_town_gns_4_setup() {
   level.hidden_figures[2].script_noteworthy = "figure_3";
   level.hidden_figures[2].script_parameters = "default";
   level.hidden_figures[2].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_3", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_3", "script_noteworthy");
   level.hidden_figures[3] = spawnStruct();
   level.hidden_figures[3].origin = (4058, -4359, 76);
   level.hidden_figures[3].powered_on = 0;
@@ -872,7 +872,7 @@ cp_town_gns_4_setup() {
   level.hidden_figures[3].script_noteworthy = "figure_4";
   level.hidden_figures[3].script_parameters = "default";
   level.hidden_figures[3].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_4", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_4", "script_noteworthy");
   foreach(var_2 in level.hidden_figures) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -999,7 +999,7 @@ init_cipher_interactions() {
 }
 
 init_cipher_choices() {
-  var_0 = scripts\engine\utility::getstructarray("cipher_choice_model", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("cipher_choice_model", "script_noteworthy");
   level.cipher_choices = [];
   foreach(var_2 in var_0) {
     var_3 = undefined;
@@ -1049,7 +1049,7 @@ init_cipher_letters() {
   level.chosen_cipher_word = scripts\engine\utility::random(level.words_for_cipher[0]);
   roll_correct_letter_combination(level.chosen_cipher_word);
   level thread set_omnvar_based_on_word(level.chosen_cipher_word);
-  var_0 = scripts\engine\utility::getstructarray("cipher_letter_model", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("cipher_letter_model", "script_noteworthy");
   level.cipher_model_structs = [];
   foreach(var_2 in var_0) {
     switch (var_2.name) {
@@ -1556,7 +1556,7 @@ move_model_after_tick(var_0) {
 }
 
 init_cipher_interaction_structs() {
-  var_0 = scripts\engine\utility::getstructarray("cipher_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("cipher_interaction", "script_noteworthy");
   if(isDefined(level.cipher_interactions_structs)) {
     return;
   }
@@ -1662,7 +1662,7 @@ watch_for_damage_on_cipher_letter(var_0) {
 }
 
 init_paintings_interaction() {
-  var_0 = scripts\engine\utility::getstructarray("painting_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("painting_interaction", "script_noteworthy");
   if(isDefined(level.paintings_struct)) {
     return;
   }
@@ -1675,7 +1675,7 @@ init_paintings_interaction() {
 }
 
 init_collector_func() {
-  var_0 = scripts\engine\utility::getstructarray("radiation_collector_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("radiation_collector_interaction", "script_noteworthy");
   foreach(var_4, var_2 in var_0) {
     var_3 = undefined;
     switch (var_2.name) {
@@ -1698,7 +1698,7 @@ init_collector_func() {
 }
 
 init_extraction_point_func() {
-  var_0 = scripts\engine\utility::getstructarray("radiation_extraction_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("radiation_extraction_interaction", "script_noteworthy");
   foreach(var_4, var_2 in var_0) {
     var_3 = undefined;
     switch (var_2.name) {
@@ -1725,7 +1725,7 @@ radiation_collection_hint_func(var_0, var_1) {
 }
 
 init_skulls_to_shoot() {
-  var_0 = scripts\engine\utility::getstructarray("gns_skull", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("gns_skull", "script_noteworthy");
   var_1 = ["skull1", "skull2", "skull3", "skull4", "skull5", "skull6", "skull7", "skull8", "skull9", "skull10"];
   var_2 = 0;
   foreach(var_8, var_4 in var_0) {
@@ -2154,7 +2154,7 @@ play_combo_arc_vfx(var_0, var_1, var_2) {
 adjust_player_exit_gns_pos() {
   level endon("game_ended");
   wait(5);
-  var_0 = scripts\engine\utility::getstructarray("ghost_wave_player_end", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ghost_wave_player_end", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.origin == (-743, 2620, 906)) {
       var_2.origin = (-745, 2620, 906);
@@ -2178,7 +2178,7 @@ adjust_player_exit_gns_pos() {
 adjust_mahjong_pick_up_pos() {
   level endon("game_ended");
   wait(5);
-  var_0 = scripts\engine\utility::getstructarray("sb_mahjong_tile", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("sb_mahjong_tile", "targetname");
   foreach(var_2 in var_0) {
     if(var_2.origin == (1393, 816, 801)) {
       var_2.origin = (1040, 568, 790.6);
@@ -2202,7 +2202,7 @@ reactivate_skullbuster_cabinet() {
 }
 
 init_weeping_angels_note() {
-  var_0 = scripts\engine\utility::getstructarray("weeping_angels_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("weeping_angels_struct", "script_noteworthy");
   level.weeping_angels_note = [];
   foreach(var_4, var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin + (0, 0, 0.05));
@@ -2763,7 +2763,7 @@ init_fig1() {
   level.hidden_figures[0].script_noteworthy = "figure_1";
   level.hidden_figures[0].script_parameters = "default";
   level.hidden_figures[0].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_1", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_1", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2782,7 +2782,7 @@ init_fig2() {
   level.hidden_figures[1].script_noteworthy = "figure_2";
   level.hidden_figures[1].script_parameters = "default";
   level.hidden_figures[1].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_2", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_2", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2801,7 +2801,7 @@ init_fig3() {
   level.hidden_figures[2].script_noteworthy = "figure_3";
   level.hidden_figures[2].script_parameters = "default";
   level.hidden_figures[2].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_3", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_3", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -2820,7 +2820,7 @@ init_fig4() {
   level.hidden_figures[3].script_noteworthy = "figure_4";
   level.hidden_figures[3].script_parameters = "default";
   level.hidden_figures[3].var_336 = "interaction";
-  var_0 = scripts\engine\utility::getstructarray("figure_4", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("figure_4", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];

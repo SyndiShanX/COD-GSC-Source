@@ -1643,7 +1643,7 @@ _id_FD1A(var_0) {
   var_2 = 1750;
 
   for(;;) {
-    if(!var_0 adsbuttonpressed()) {
+    if(!var_0 adsButtonPressed()) {
       var_3 = var_0 scripts\engine\utility::_id_108A2("scope_radar_ads_in", "scope_radar_ads_out", "last_stand", "death", "weapon_change");
     } else {
       var_3 = "scope_radar_ads_in";
@@ -1667,7 +1667,7 @@ _id_CA70(var_0, var_1, var_2) {
   var_0 endon("disconnect");
   var_3 = 0.75;
 
-  while(var_0 adsbuttonpressed()) {
+  while(var_0 adsButtonPressed()) {
     if(var_0 playerads() >= var_3) {
       var_0 playlocalsound("uav_ping");
       var_0 thread _id_CBD8(var_0, var_1, var_2);

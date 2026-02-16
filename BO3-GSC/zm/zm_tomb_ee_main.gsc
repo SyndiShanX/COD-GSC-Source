@@ -373,9 +373,9 @@ function setup_ee_main_devgui() {
   b_activated = 0;
   while(!b_activated) {
     foreach(player in getplayers()) {
-      if((distance2d(player.origin, (2904, 5040, -336))) < 100 && player usebuttonpressed()) {
+      if((distance2d(player.origin, (2904, 5040, -336))) < 100 && player useButtonPressed()) {
         wait(2);
-        if(player usebuttonpressed()) {
+        if(player useButtonPressed()) {
           b_activated = 1;
         }
       }

@@ -323,7 +323,7 @@ _id_28A3(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
 
   if(!isDefined(var_2) || var_2.size < 1) {
-    var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
   }
   var_3 = self;
   var_3 endon("stop_circling");
@@ -341,7 +341,7 @@ _id_28A3(var_0, var_1) {
     var_7 = getEntArray(var_6.target, "targetname");
 
     if(!isDefined(var_7) || var_7.size < 1) {
-      var_7 = common_scripts\utility::getstructarray(var_6.target, "targetname");
+      var_7 = common_scripts\utility::getStructArray(var_6.target, "targetname");
     }
     var_8 = var_7[randomint(var_7.size)];
     var_3 setvehgoalpos(var_8.origin, 1);
@@ -444,7 +444,7 @@ _id_28A5(var_0) {
   if(!level.player _id_28CE()) {
     return 0;
   }
-  if(!level.player adsbuttonpressed()) {
+  if(!level.player adsButtonPressed()) {
     return 0;
   }
   var_1 = level.player getEye();
@@ -1430,7 +1430,7 @@ _id_28E2(var_0, var_1, var_2, var_3) {
 
 _id_28E5() {
   self waittill("trigger", var_0);
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_1 = maps\_utility::_id_27EC(var_1);
   _id_28E7(var_0, var_1);
 }

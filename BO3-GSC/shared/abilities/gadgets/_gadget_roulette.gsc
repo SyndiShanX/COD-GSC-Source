@@ -261,7 +261,7 @@ function set_gadget_status(status, time) {
 }
 
 function dpad_left_pressed() {
-  return self actionslotthreebuttonpressed();
+  return self actionslotthreebuttonPressed();
 }
 
 function getrandomgadget(isprimaryroll) {

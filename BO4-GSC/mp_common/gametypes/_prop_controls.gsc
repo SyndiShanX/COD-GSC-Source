@@ -772,7 +772,7 @@ propmoveunlock() {
   while(true) {
     waitframe(1);
     movement = self getnormalizedmovement();
-    jumping = self jumpbuttonpressed();
+    jumping = self jumpbuttonPressed();
 
     if(!isDefined(movement)) {
       continue;

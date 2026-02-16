@@ -216,7 +216,7 @@ globallogic_setupdefault_zombiecallbacks() {
 }
 
 setup_standard_objects(location) {
-  structs = getstructarray("game_mode_object");
+  structs = getStructArray("game_mode_object");
 
   foreach(struct in structs) {
     if(isDefined(struct.script_noteworthy) && struct.script_noteworthy != location) {
@@ -737,7 +737,7 @@ setup_classic_gametype() {
     }
   }
 
-  structs = getstructarray("game_mode_object");
+  structs = getStructArray("game_mode_object");
 
   foreach(struct in structs) {
     if(!isDefined(struct.script_string)) {
@@ -1232,7 +1232,7 @@ onspawnplayer(predictedspawn) {
 
       match_string = level.scr_zm_ui_gametype + "_" + location;
       spawnpoints = [];
-      structs = getstructarray("initial_spawn", "script_noteworthy");
+      structs = getStructArray("initial_spawn", "script_noteworthy");
 
       if(isDefined(structs)) {
         foreach(struct in structs) {
@@ -1248,7 +1248,7 @@ onspawnplayer(predictedspawn) {
       }
 
       if(!isDefined(spawnpoints) || spawnpoints.size == 0)
-        spawnpoints = getstructarray("initial_spawn_points", "targetname");
+        spawnpoints = getStructArray("initial_spawn_points", "targetname");
 
       assert(isDefined(spawnpoints), "Could not find initial spawn points!");
       spawnpoint = maps\mp\zombies\_zm::getfreespawnpoint(spawnpoints, self);
@@ -1303,7 +1303,7 @@ get_player_spawns_for_gametype() {
 
   match_string = level.scr_zm_ui_gametype + "_" + location;
   player_spawns = [];
-  structs = getstructarray("player_respawn_point", "targetname");
+  structs = getStructArray("player_respawn_point", "targetname");
 
   foreach(struct in structs) {
     if(isDefined(struct.script_string)) {

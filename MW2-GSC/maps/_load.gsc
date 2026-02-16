@@ -1942,7 +1942,7 @@ get_trigger_targs() {
         triggers[triggers.size] = target;
     }
 
-    targets = getstructarray(self.target, "targetname");
+    targets = getStructArray(self.target, "targetname");
 
     foreach(target in targets) {
       orgs[orgs.size] = target;
@@ -2364,7 +2364,7 @@ display_starts() {
   down_pressed = false;
 
   for(;;) {
-    if(!(level.player ButtonPressed("F10"))) {
+    if(!(level.player buttonPressed("F10"))) {
       level.display_starts_Pressed = false;
     }
 
@@ -2375,22 +2375,22 @@ display_starts() {
     elems[selected].color = (1, 1, 0);
 
     if(!up_pressed) {
-      if(level.player ButtonPressed("UPARROW") || level.player ButtonPressed("DPAD_UP") || level.player ButtonPressed("APAD_UP")) {
+      if(level.player buttonPressed("UPARROW") || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("APAD_UP")) {
         up_pressed = true;
         selected++;
       }
     } else {
-      if(!level.player ButtonPressed("UPARROW") && !level.player ButtonPressed("DPAD_UP") && !level.player ButtonPressed("APAD_UP"))
+      if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP"))
         up_pressed = false;
     }
 
     if(!down_pressed) {
-      if(level.player ButtonPressed("DOWNARROW") || level.player ButtonPressed("DPAD_DOWN") || level.player ButtonPressed("APAD_DOWN")) {
+      if(level.player buttonPressed("DOWNARROW") || level.player buttonPressed("DPAD_DOWN") || level.player buttonPressed("APAD_DOWN")) {
         down_pressed = true;
         selected--;
       }
     } else {
-      if(!level.player ButtonPressed("DOWNARROW") && !level.player ButtonPressed("DPAD_DOWN") && !level.player ButtonPressed("APAD_DOWN"))
+      if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN"))
         down_pressed = false;
     }
 
@@ -2400,7 +2400,7 @@ display_starts() {
     if(selected >= dvars.size)
       selected = 0;
 
-    if(level.player ButtonPressed("kp_enter") || level.player ButtonPressed("BUTTON_A") || level.player ButtonPressed("enter")) {
+    if(level.player buttonPressed("kp_enter") || level.player buttonPressed("BUTTON_A") || level.player buttonPressed("enter")) {
       if(dvars[selected] == "cancel") {
         title Destroy();
         for(i = 0; i < elems.size; i++) {
@@ -2418,10 +2418,10 @@ display_starts() {
 }
 
 start_button_combo() {
-  if(!(level.player ButtonPressed("BUTTON_RSTICK")))
+  if(!(level.player buttonPressed("BUTTON_RSTICK")))
     return false;
 
-  if(!(level.player ButtonPressed("BUTTON_RSHLDR")))
+  if(!(level.player buttonPressed("BUTTON_RSHLDR")))
     return false;
 
   return true;
@@ -2498,9 +2498,9 @@ devhelp() {
 
   while(1) {
     update = false;
-    if(level.player ButtonPressed("F1")) {
+    if(level.player buttonPressed("F1")) {
       devhelp_hudElements(hudarray, 1);
-      while(level.player ButtonPressed("F1"))
+      while(level.player buttonPressed("F1"))
         wait .05;
     }
     devhelp_hudElements(hudarray, 0);
@@ -2931,7 +2931,7 @@ trigger_multiple_physics(trigger) {
 
   ents = [];
 
-  structs = getstructarray(trigger.target, "targetname");
+  structs = getStructArray(trigger.target, "targetname");
   orgs = getEntArray(trigger.target, "targetname");
 
   foreach(org in orgs) {

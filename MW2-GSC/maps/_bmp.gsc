@@ -108,7 +108,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp" );
 
 and these lines in your CSV:
-include,vehicle_bmp_bmp
+#include,vehicle_bmp_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -120,7 +120,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_winter", "bmp_physics" );
 
 and these lines in your CSV:
-include,vehicle_bmp_winter
+#include,vehicle_bmp_winter
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -132,7 +132,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_winter" );
 
 and these lines in your CSV:
-include,vehicle_bmp_winter
+#include,vehicle_bmp_winter
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -144,7 +144,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_desert" );
 
 and these lines in your CSV:
-include,vehicle_bmp_desert_bmp
+#include,vehicle_bmp_desert_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -157,7 +157,7 @@ maps\_bmp::main( "vehicle_bmp_low" );
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
 and these lines in your CSV:
-include,vehicle_bmp_low_bmp
+#include,vehicle_bmp_low_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bmp_low"default:"vehicletype" "bmp"default:"script_team" "axis"*/
@@ -168,7 +168,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_thermal" );
 
 and these lines in your CSV:
-include,vehicle_bmp_thermal_bmp
+#include,vehicle_bmp_thermal_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -180,7 +180,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_woodland" );
 
 and these lines in your CSV:
-include,vehicle_bmp_woodland_bmp
+#include,vehicle_bmp_woodland_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -192,7 +192,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_woodland_jeepride" );
 
 and these lines in your CSV:
-include,vehicle_bmp_woodland_jeepride_bmp
+#include,vehicle_bmp_woodland_jeepride_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -204,7 +204,7 @@ put this in your GSC:
 maps\_bmp::main( "vehicle_bmp_woodland_low" );
 
 and these lines in your CSV:
-include,vehicle_bmp_woodland_low_bmp
+#include,vehicle_bmp_woodland_low_bmp
 sound,vehicle_bmp,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 

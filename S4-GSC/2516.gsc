@@ -257,7 +257,7 @@ _id_8BC0() {
 }
 
 _id_8BB8() {
-  var_0 = scripts\engine\utility::getstructarray("jeep_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("jeep_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

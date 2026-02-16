@@ -132,7 +132,7 @@ function_dc818f99() {
 
   while(isDefined(self)) {
     if(function_2ee076a7()) {
-      if(self meleebuttonpressed() || self sprintbuttonpressed() || self isinmovemode("ufo", "noclip") || level flagsys::get(#"menu_open")) {
+      if(self meleeButtonPressed() || self sprintbuttonPressed() || self isinmovemode("ufo", "noclip") || level flagsys::get(#"menu_open")) {
         self.var_7c6f53f9 = 1;
         waitframe(1);
         continue;
@@ -147,38 +147,38 @@ function_dc818f99() {
       continue;
     }
 
-    if(zm_trial_disable_bgbs::is_active() && (self actionslotonebuttonpressed() || self actionslotfourbuttonpressed() || self actionslottwobuttonpressed() || self actionslotthreebuttonpressed())) {
+    if(zm_trial_disable_bgbs::is_active() && (self actionslotonebuttonPressed() || self actionslotfourbuttonPressed() || self actionslottwobuttonPressed() || self actionslotthreebuttonPressed())) {
       self zm_trial_util::function_97444b02();
 
       do {
         waitframe(1);
       }
-      while(self actionslotonebuttonpressed() || self actionslotfourbuttonpressed() || self actionslottwobuttonpressed() || self actionslotthreebuttonpressed());
+      while(self actionslotonebuttonPressed() || self actionslotfourbuttonPressed() || self actionslottwobuttonPressed() || self actionslotthreebuttonPressed());
 
       continue;
     }
 
     n_index = 0;
 
-    if(self actionslotonebuttonpressed() && !self function_6f7d5230(n_index)) {
+    if(self actionslotonebuttonPressed() && !self function_6f7d5230(n_index)) {
       self function_ea17bc2a(n_index);
     }
 
     n_index = 1;
 
-    if(self actionslotfourbuttonpressed() && !self function_6f7d5230(n_index)) {
+    if(self actionslotfourbuttonPressed() && !self function_6f7d5230(n_index)) {
       self function_ea17bc2a(n_index);
     }
 
     n_index = 2;
 
-    if(self actionslottwobuttonpressed() && !self function_6f7d5230(n_index)) {
+    if(self actionslottwobuttonPressed() && !self function_6f7d5230(n_index)) {
       self function_ea17bc2a(n_index);
     }
 
     n_index = 3;
 
-    if(self actionslotthreebuttonpressed() && !self function_6f7d5230(n_index)) {
+    if(self actionslotthreebuttonPressed() && !self function_6f7d5230(n_index)) {
       self function_ea17bc2a(n_index);
     }
 
@@ -284,25 +284,25 @@ function_23b7cdd8(n_index) {
 
     switch (n_index) {
       case 0:
-        while(self actionslotonebuttonpressed()) {
+        while(self actionslotonebuttonPressed()) {
           waitframe(1);
         }
 
         break;
       case 1:
-        while(self actionslotfourbuttonpressed()) {
+        while(self actionslotfourbuttonPressed()) {
           waitframe(1);
         }
 
         break;
       case 2:
-        while(self actionslottwobuttonpressed()) {
+        while(self actionslottwobuttonPressed()) {
           waitframe(1);
         }
 
         break;
       case 3:
-        while(self actionslotthreebuttonpressed()) {
+        while(self actionslotthreebuttonPressed()) {
           waitframe(1);
         }
 
@@ -350,7 +350,7 @@ function_c47c57e8() {
   self endon(#"hash_25f0b773a3164732", #"disconnect");
 
   for(;;) {
-    if(!self secondaryoffhandbuttonpressed()) {
+    if(!self secondaryoffhandbuttonPressed()) {
       wait 0.05;
       continue;
     }
@@ -360,7 +360,7 @@ function_c47c57e8() {
     for(;;) {
       wait 0.05;
 
-      if(!self secondaryoffhandbuttonpressed()) {
+      if(!self secondaryoffhandbuttonPressed()) {
         break;
       }
     }
@@ -375,7 +375,7 @@ function_619ee0f4() {
   self.zmb_weapons_mastery_lmg = 0;
 
   for(;;) {
-    if(!self secondaryoffhandbuttonpressed()) {
+    if(!self secondaryoffhandbuttonPressed()) {
       wait 0.05;
       continue;
     }
@@ -385,7 +385,7 @@ function_619ee0f4() {
     for(;;) {
       wait 0.05;
 
-      if(!self secondaryoffhandbuttonpressed()) {
+      if(!self secondaryoffhandbuttonPressed()) {
         break;
       }
     }
@@ -400,7 +400,7 @@ function_261a46f4() {
   self.var_6e1ea617 = 0;
 
   for(;;) {
-    if(!self actionslotfourbuttonpressed()) {
+    if(!self actionslotfourbuttonPressed()) {
       wait 0.05;
       continue;
     }
@@ -410,7 +410,7 @@ function_261a46f4() {
     for(;;) {
       wait 0.05;
 
-      if(!self actionslotfourbuttonpressed()) {
+      if(!self actionslotfourbuttonPressed()) {
         break;
       }
     }

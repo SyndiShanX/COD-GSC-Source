@@ -160,7 +160,7 @@ function wait_for_use(monitor) {
   while(true) {
     self waittill("trigger", who);
     while(isPlayer(who) && who istouching(self)) {
-      if(who usebuttonpressed()) {
+      if(who useButtonPressed()) {
         level flag::set("rerouted_power");
         monitor playSound("zmb_ee_monitor_button");
         return;
@@ -221,12 +221,12 @@ function wait_for_sync_use(ss, button) {
   while(true) {
     self waittill("trigger", who);
     while(isPlayer(who) && who istouching(self)) {
-      if(who usebuttonpressed()) {
+      if(who useButtonPressed()) {
         level notify("sync_button_pressed");
         button playSound("zmb_ee_syncbutton_button");
         ss.pressed = 1;
         iprintlnbold("");
-        while(who usebuttonpressed()) {
+        while(who useButtonPressed()) {
           wait(0.05);
         }
       }
@@ -665,7 +665,7 @@ function wait_for_gersh_vox() {
 }
 
 function reward_wait() {
-  while(!zombie_utility::is_player_valid(self) || (self usebuttonpressed() && self zm_utility::in_revive_trigger())) {
+  while(!zombie_utility::is_player_valid(self) || (self useButtonPressed() && self zm_utility::in_revive_trigger())) {
     wait(1);
   }
   if(!self bgb::is_enabled("zm_bgb_disorderly_combat")) {

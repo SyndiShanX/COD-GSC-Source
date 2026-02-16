@@ -10,7 +10,7 @@ fast_travel_init() {
   func_95D9();
   level.fast_travel_spots = [];
   level.var_6B91 = [];
-  var_0 = scripts\engine\utility::getstructarray("fast_travel", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel", "script_noteworthy");
   level.var_5592 = ::disable_teleportation;
   level.var_6B8D = ::func_126BF;
   level.portal_exit_fx_org = (646.605, 701.459, 105.882);
@@ -49,7 +49,7 @@ func_95DA() {
     func_F4AA();
   }
 
-  self.end_positions = scripts\engine\utility::getstructarray(self.target, "targetname");
+  self.end_positions = scripts\engine\utility::getStructArray(self.target, "targetname");
   level.fast_travel_spots[self.script_area] = self;
   var_2 = getEntArray("portal_trigger", "targetname");
   var_2 = scripts\engine\utility::get_array_of_closest(self.origin, var_2);

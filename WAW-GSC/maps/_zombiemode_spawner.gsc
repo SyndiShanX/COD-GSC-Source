@@ -2094,7 +2094,7 @@ do_zombie_rise() {
   if(level.script == "nazi_zombie_sumpf" && isDefined(level.zombie_rise_spawners)) {
     spots = level.zombie_rise_spawners;
   } else {
-    spots = GetStructArray("zombie_rise", "targetname");
+    spots = getStructArray("zombie_rise", "targetname");
   }
 
   if(spots.size < 1) {

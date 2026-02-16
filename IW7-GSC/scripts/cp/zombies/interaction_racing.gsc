@@ -6,7 +6,7 @@
 init_all_race_games() {
   scripts\engine\utility::flag_init("arcade_race_pregame");
   scripts\engine\utility::flag_init("afterlife_race_pregame");
-  var_0 = scripts\engine\utility::getstructarray("game_race", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("game_race", "script_noteworthy");
   var_1 = 2;
   var_2 = 3;
   foreach(var_4 in var_0) {
@@ -124,7 +124,7 @@ use_race_game(var_0, var_1) {
 }
 
 func_E1F4(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray("game_race", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("game_race", "script_noteworthy");
   var_3 = [];
   foreach(var_5 in var_2) {
     if(var_5.script_location == var_0) {
@@ -164,7 +164,7 @@ func_DBB2(var_0, var_1) {
   }
 
   setomnvar("zombie_" + var_0 + "_race_countdown", -1);
-  var_5 = scripts\engine\utility::getstructarray("game_race", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray("game_race", "script_noteworthy");
   foreach(var_7 in var_5) {
     if(var_7.script_location != var_0) {
       continue;
@@ -200,7 +200,7 @@ func_DBB2(var_0, var_1) {
   scripts\engine\utility::flag_clear(var_0 + "_race_pregame");
   thread func_FBEA(var_1);
   wait(3);
-  var_5 = scripts\engine\utility::getstructarray("game_race", "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray("game_race", "script_noteworthy");
   foreach(var_7 in var_5) {
     if(var_7.script_location != var_0) {
       continue;
@@ -212,7 +212,7 @@ func_DBB2(var_0, var_1) {
 }
 
 func_E1EE(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("game_race", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("game_race", "script_noteworthy");
   var_2 = [];
   foreach(var_4 in var_1) {
     if(var_4.script_location == var_0) {
@@ -405,7 +405,7 @@ race_game_hint_logic(var_0, var_1) {
 }
 
 func_FBEB(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("zombiezoom_sound", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("zombiezoom_sound", "targetname");
   if(var_1.size > 0) {
     var_2 = scripts\engine\utility::getclosest(var_0.origin, var_1);
     if(var_0.script_location == "arcade" && !isDefined(level.var_2118)) {
@@ -495,7 +495,7 @@ func_5555(var_0, var_1) {
     level.var_2119++;
     if(level.var_2119 == var_2) {
       var_2 = randomintrange(var_0, var_1);
-      var_3 = scripts\engine\utility::getstructarray("game_race", "script_noteworthy");
+      var_3 = scripts\engine\utility::getStructArray("game_race", "script_noteworthy");
       foreach(var_5 in var_3) {
         if(var_5.script_location != "arcade") {
           continue;

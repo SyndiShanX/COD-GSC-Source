@@ -861,11 +861,11 @@ parse_input_data_for_thruster() {
       var_0[var_2] = var_0[var_2] * -1;
   }
 
-  if(self jumpbuttonpressed() || self fragbuttonpressed())
-    var_0[2] = var_0[2] + common_scripts\utility::ter_op(self fragbuttonpressed(), 3, 2);
+  if(self jumpbuttonPressed() || self fragButtonPressed())
+    var_0[2] = var_0[2] + common_scripts\utility::ter_op(self fragButtonPressed(), 3, 2);
 
-  if(is_change_stance_pressed() || self secondaryoffhandbuttonpressed())
-    var_0[3] = var_0[3] + common_scripts\utility::ter_op(self secondaryoffhandbuttonpressed(), 3, 2);
+  if(is_change_stance_pressed() || self secondaryoffhandbuttonPressed())
+    var_0[3] = var_0[3] + common_scripts\utility::ter_op(self secondaryoffhandbuttonPressed(), 3, 2);
 
   return var_0;
 }
@@ -873,7 +873,7 @@ parse_input_data_for_thruster() {
 is_change_stance_pressed() {
   var_0 = 0;
 
-  if(self buttonpressed("BUTTON_CROUCH") || self buttonpressed("BUTTON_PRONE") || self buttonpressed("BUTTON_B") || self buttonpressed("BUTTON_RSTICK"))
+  if(self buttonPressed("BUTTON_CROUCH") || self buttonPressed("BUTTON_PRONE") || self buttonPressed("BUTTON_B") || self buttonPressed("BUTTON_RSTICK"))
     var_0 = 1;
 
   return var_0;

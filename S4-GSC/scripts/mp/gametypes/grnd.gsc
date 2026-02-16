@@ -345,7 +345,7 @@ _id_D8CC() {
   }
 
   var_6 = [];
-  var_7 = scripts\engine\utility::getstructarray("dz_flare", "targetname");
+  var_7 = scripts\engine\utility::getStructArray("dz_flare", "targetname");
 
   if(level.mapname == "mp_shipment") {
     var_8 = [];

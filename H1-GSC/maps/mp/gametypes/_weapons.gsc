@@ -933,7 +933,7 @@ checkhit(var_0, var_1) {
   if(!isprimaryweapon(var_0) && !issidearm(var_0) && !var_8) {
     return;
   }
-  if(self meleebuttonpressed() && !var_8) {
+  if(self meleeButtonPressed() && !var_8) {
     return;
   }
   switch (weaponclass(var_0)) {
@@ -1789,10 +1789,10 @@ watchmanuallydetonatedfordoubletap() {
   var_0 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + 0.05;
         wait 0.05;
       }
@@ -1802,7 +1802,7 @@ watchmanuallydetonatedfordoubletap() {
       }
       var_0 = 0;
 
-      while(!self usebuttonpressed() && var_0 < 0.35) {
+      while(!self useButtonPressed() && var_0 < 0.35) {
         var_0 = var_0 + 0.05;
         wait 0.05;
       }

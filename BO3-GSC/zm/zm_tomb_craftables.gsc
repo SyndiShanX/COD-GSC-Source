@@ -827,7 +827,7 @@ function quadrotor_control_thread() {
   self endon("new_placeable_mine");
   while(true) {
     var_703e6a13 = getweapon("equip_dieseldrone");
-    if(self actionslotfourbuttonpressed() && self hasweapon(var_703e6a13)) {
+    if(self actionslotfourbuttonPressed() && self hasweapon(var_703e6a13)) {
       self util::waittill_any_timeout(1, "weapon_change_complete");
       self playSound("veh_qrdrone_takeoff");
       self zm_weapons::switch_back_primary_weapon();
@@ -852,7 +852,7 @@ function quadrotor_debug_send_home(player_owner) {
   self endon("drone_should_return");
   level endon("drone_available");
   while(true) {
-    if(player_owner actionslotfourbuttonpressed()) {
+    if(player_owner actionslotfourbuttonPressed()) {
       self quadrotor_fly_back_to_table();
     }
     wait(0.05);

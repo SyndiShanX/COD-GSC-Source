@@ -2928,7 +2928,7 @@ _id_681A() {
     var_1 = scripts\engine\utility::_id_A5DA("getspawnerarray", self.target);
 
     if(!isDefined(var_1)) {
-      var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+      var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
     }
 
     if(!isDefined(var_1)) {

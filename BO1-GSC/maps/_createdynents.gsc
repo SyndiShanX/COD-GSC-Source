@@ -802,20 +802,20 @@ universal_input_loop(button_group, end_on, use_attackbutton, mod_button, no_mod_
       wait(0.05);
       continue;
     }
-    if(isDefined(mod_button) && !level.debug_player ButtonPressed(mod_button)) {
+    if(isDefined(mod_button) && !level.debug_player buttonPressed(mod_button)) {
       wait(0.05);
       continue;
-    } else if(isDefined(no_mod_button) && level.debug_player ButtonPressed(no_mod_button)) {
+    } else if(isDefined(no_mod_button) && level.debug_player buttonPressed(no_mod_button)) {
       wait(0.05);
       continue;
     }
-    if(use_attackbutton && level.debug_player AttackButtonPressed()) {
+    if(use_attackbutton && level.debug_player attackButtonPressed()) {
       level notify(notify_name, "fire");
       wait(0.15);
       continue;
     }
     for(i = 0; i < buttons.size; i++) {
-      if(level.debug_player ButtonPressed(buttons[i])) {
+      if(level.debug_player buttonPressed(buttons[i])) {
         level notify(notify_name, buttons[i]);
         wait(0.15);
         break;
@@ -1117,7 +1117,7 @@ xform_input_handler() {
     if(!isDefined(object)) {
       object = level.highlighted_object;
     }
-    if(!level.debug_player ButtonPressed("button_ltrig")) {
+    if(!level.debug_player buttonPressed("button_ltrig")) {
       if(key == "button_rshldr") {
         level.selected_object_z_offset += 4;
         update_selected_object_position();

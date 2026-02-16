@@ -112,9 +112,9 @@ bank_deposit_box() {
   level.bank_deposit_ddl_increment_amount = 1000;
   level.bank_account_max = level.bank_deposit_max_amount / level.bank_deposit_ddl_increment_amount;
   level.bank_account_increment = int(level.bank_deposit_ddl_increment_amount / 1000);
-  deposit_triggers = getstructarray("bank_deposit", "targetname");
+  deposit_triggers = getStructArray("bank_deposit", "targetname");
   array_thread(deposit_triggers, ::bank_deposit_unitrigger);
-  withdraw_triggers = getstructarray("bank_withdraw", "targetname");
+  withdraw_triggers = getStructArray("bank_withdraw", "targetname");
   array_thread(withdraw_triggers, ::bank_withdraw_unitrigger);
 }
 

@@ -381,7 +381,7 @@ tower_punch_watch_leg(a_leg_trigs) {
 mahjong_tiles_setup() {
   a_winds = array_randomize(array("north", "south", "east", "west"));
   a_colors = array_randomize(array("blk", "blu", "grn", "red"));
-  a_locs = array_randomize(getstructarray("sq_tile_loc_random", "targetname"));
+  a_locs = array_randomize(getStructArray("sq_tile_loc_random", "targetname"));
   assert(a_locs.size > a_winds.size, "zm_highrise_sq: not enough locations for mahjong tiles!");
   a_wind_order = array("none");
 

@@ -585,10 +585,10 @@ playerInit() {
 }
 
 button_down(btn, btn2) {
-  pressed = level.player ButtonPressed(btn);
+  pressed = level.player buttonPressed(btn);
 
   if(!pressed) {
-    pressed = level.player ButtonPressed(btn2);
+    pressed = level.player buttonPressed(btn2);
   }
 
   if(!isDefined(level.buttons[btn])) {

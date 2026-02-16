@@ -8,7 +8,7 @@ _id_8252() {
   wait 1;
   level._id_24D2 = undefined;
   level._id_BC3D = undefined;
-  var_0 = scripts\engine\utility::getstructarray("soldier_patrol", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("soldier_patrol", "script_noteworthy");
   level._id_15ED = var_0;
   var_1 = 1;
   level._id_8F4C = 0;
@@ -89,7 +89,7 @@ _id_EE83(var_0) {
   self endon("stop_patrol_logic");
   self endon("death");
   self endon("alerted");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = var_1[randomint(var_1.size)];
 
   for(;;) {
@@ -98,7 +98,7 @@ _id_EE83(var_0) {
     var_2 thread _id_FA74(var_2);
 
     if(isDefined(var_2.target)) {
-      var_1 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+      var_1 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
       var_2 = var_1[randomint(var_1.size)];
       continue;
     }
@@ -217,7 +217,7 @@ _id_6D09(var_0, var_1, var_2, var_3) {
       var_15 = scripts\engine\math::_id_645E(var_0.origin, anglesToForward(var_0.angles), var_12.origin);
 
       if(isDefined(var_12.target)) {
-        var_16 = scripts\engine\utility::getstructarray(var_12.target, "targetname");
+        var_16 = scripts\engine\utility::getStructArray(var_12.target, "targetname");
 
         if(var_16.size > 1) {
           var_17 = var_10 * 500;
@@ -412,8 +412,8 @@ _id_AF0F(var_0, var_1) {
     var_4 = scripts\engine\utility::_id_6369(var_0.origin, var_2, var_3, 10);
 
     if(var_4.size < 1) {
-      var_2 = scripts\engine\utility::getstructarray(var_0._id_0481, "targetname");
-      var_4 = scripts\engine\utility::_id_6369(var_0.origin, scripts\engine\utility::getstructarray(var_0._id_0481, "targetname"), var_3, 5);
+      var_2 = scripts\engine\utility::getStructArray(var_0._id_0481, "targetname");
+      var_4 = scripts\engine\utility::_id_6369(var_0.origin, scripts\engine\utility::getStructArray(var_0._id_0481, "targetname"), var_3, 5);
     }
 
     var_5 = scripts\engine\utility::_id_6969(var_0.origin, var_4, 256);
@@ -1171,7 +1171,7 @@ _id_4470() {
 
         if(isDefined(var_6._id_AF4E)) {
           if(isDefined(var_6.target)) {
-            var_7 = scripts\engine\utility::getstructarray(var_6.target, "targetname");
+            var_7 = scripts\engine\utility::getStructArray(var_6.target, "targetname");
 
             if(var_7.size >= 1) {
               foreach(var_9 in var_7) {

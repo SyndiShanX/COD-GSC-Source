@@ -1006,7 +1006,7 @@ function secretuse(notify_string, color, qualifier_func, arg1, arg2) {
       }
       if(qualifier_passed && distancesquared(self.origin, player.origin) < 4096) {
         if(player laststand::is_facing(self)) {
-          if(player usebuttonpressed()) {
+          if(player useButtonPressed()) {
             self notify(notify_string, player);
             return;
           }

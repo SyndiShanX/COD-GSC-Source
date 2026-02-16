@@ -13,7 +13,7 @@ spawn_smoke(smoke_tag, smoke_trigger, smoke_pause) {
   if(!isDefined(smoke_pause))
     smoke_pause = 1.0;
 
-  smoke_spots = getstructarray(smoke_tag, "targetname");
+  smoke_spots = getStructArray(smoke_tag, "targetname");
   foreach(spot in smoke_spots)
   MagicGrenadeManual("smoke_grenade_american", spot.origin, (0, 0, -1), randomfloat(smoke_pause));
 }
@@ -24,7 +24,7 @@ shoot_out_glass() {
   activate_trigger("enemy_dining_area_riot_movein_trig", "targetname");
 
   start = getstruct("shoot_out_glass_start", "script_noteworthy");
-  ends = getstructarray("shoot_out_glass_end", "script_noteworthy");
+  ends = getStructArray("shoot_out_glass_end", "script_noteworthy");
   combat_start = undefined;
   foreach(end in ends) {
     shots = randomintrange(5, 8);

@@ -207,7 +207,7 @@ watchremotetriggeruse(weaponname) {
       continue;
     }
 
-    if(self usebuttonpressed() && !self.throwinggrenade && !self meleebuttonpressed() && !self isusingremote())
+    if(self useButtonPressed() && !self.throwinggrenade && !self meleeButtonPressed() && !self isusingremote())
       self useremotecontrolweapon(weaponname);
   }
 }
@@ -281,7 +281,7 @@ watchremotecontroldeactivate(weaponname) {
   while(true) {
     timeused = 0;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       timeused = timeused + 0.05;
 
       if(timeused > 0.25) {

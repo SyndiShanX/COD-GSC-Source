@@ -635,7 +635,7 @@ function_514b8f17(player) {
   player.crafting_melee = 0;
 
   while(isDefined(player)) {
-    melee_now = player meleebuttonpressed();
+    melee_now = player meleeButtonPressed();
 
     if(melee_now && !player.crafting_melee) {
       if(isDefined(self.var_90dfb0bf) && isDefined(level.var_b87dee47[self.var_90dfb0bf].var_cb2020d8)) {

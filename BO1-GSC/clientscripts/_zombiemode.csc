@@ -331,7 +331,7 @@ perk_start_up() {
   level waittill("power_on");
   timer = 0;
   duration = 0.1;
-  machines = GetStructArray("perksacola", "targetname");
+  machines = getStructArray("perksacola", "targetname");
   while(true) {
     for(i = 0; i < machines.size; i++) {
       switch (machines[i].script_sound) {

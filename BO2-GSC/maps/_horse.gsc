@@ -1278,7 +1278,7 @@ waitch_for_180turn(driver) {
   self endon("no_driver");
 
   while(true) {
-    if(driver jumpbuttonpressed()) {
+    if(driver jumpbuttonPressed()) {
       self horse_turn180();
     } else {
       wait 0.05;
@@ -1323,7 +1323,7 @@ watch_for_sprint(driver) {
     forward = anglesToForward(self.angles);
     stick = driver getnormalizedmovement();
     bcanstartsprint = bmeterempty == 0 && speed > self.min_sprint_start_speed && stick[0] > 0.85;
-    bpressingsprint = self.driver sprintbuttonpressed();
+    bpressingsprint = self.driver sprintbuttonPressed();
 
     if(is_true(self.needs_sprint_release)) {
       if(!bpressingsprint) {
@@ -1346,8 +1346,8 @@ watch_for_sprint(driver) {
         self.sprint_meter = 0;
         bmeterempty = 1;
         self sprint_end(driver);
-      } else if(throttle < 0.3 || self.driver attackbuttonpressed() || speed < self.min_sprint_speed || self.driver adsbuttonpressed() || self.driver changeseatbuttonpressed() || absangleclamp180(self.driver getplayerangles()[1] - self.angles[1]) > 60 || !self.needs_sprint_release && bpressingsprint) {
-        if(self.driver changeseatbuttonpressed()) {
+      } else if(throttle < 0.3 || self.driver attackButtonPressed() || speed < self.min_sprint_speed || self.driver adsButtonPressed() || self.driver changeseatbuttonPressed() || absangleclamp180(self.driver getplayerangles()[1] - self.angles[1]) > 60 || !self.needs_sprint_release && bpressingsprint) {
+        if(self.driver changeseatbuttonPressed()) {
           wait 0.1;
         }
 
@@ -1834,7 +1834,7 @@ is_on_horseback() {
 
 watch_for_horse_melee(horse) {
   while(true) {
-    if(level.player meleebuttonpressed()) {}
+    if(level.player meleeButtonPressed()) {}
 
     wait 0.05;
   }

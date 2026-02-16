@@ -1236,7 +1236,7 @@ checkHit(weaponName, victim) {
   if(!maps\mp\gametypes\_weapons::isPrimaryWeapon(weaponName) && !maps\mp\gametypes\_weapons::isSideArm(weaponName)) {
     return;
   }
-  if(self MeleeButtonPressed() && weaponName != "iw6_knifeonly_mp" && weaponName != "iw6_knifeonlyfast_mp") {
+  if(self meleeButtonPressed() && weaponName != "iw6_knifeonly_mp" && weaponName != "iw6_knifeonlyfast_mp") {
     return;
   }
   switch (WeaponClass(weaponName)) {
@@ -2412,9 +2412,9 @@ watchC4AltDetonate() {
 
   buttonTime = 0;
   for(;;) {
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       buttonTime = 0;
-      while(self UseButtonPressed()) {
+      while(self useButtonPressed()) {
         buttonTime += 0.05;
         wait(0.05);
       }
@@ -2424,7 +2424,7 @@ watchC4AltDetonate() {
         continue;
       }
       buttonTime = 0;
-      while(!self UseButtonPressed() && buttonTime < 0.5) {
+      while(!self useButtonPressed() && buttonTime < 0.5) {
         buttonTime += 0.05;
         wait(0.05);
       }

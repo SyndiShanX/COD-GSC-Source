@@ -362,7 +362,7 @@ adswatcher(var_0, var_1, var_2) {
   for(;;) {
     wait(0.05);
     var_0.timeused = var_0.timeused + 0.05;
-    if(self adsbuttonpressed(1)) {
+    if(self adsButtonPressed(1)) {
       if(var_3 <= gettime()) {
         var_0 stoploopsound();
         self earthquakeforplayer(0.23, 1, self.origin, 128);

@@ -371,7 +371,7 @@ do_unique_assault() {
   level.str_portal_first_person_effect_label_override = undefined;
   level.str_portal_end_first_person_effect_label_override = undefined;
   scripts\engine\utility::_id_5C1B("yelow_crystal_cracked");
-  var_0 = scripts\engine\utility::getstructarray("mq_shield_crystal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_shield_crystal_loc", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     playFXOnTag(level._effect["mq_shield_crystal_ambient"], var_2.mdl_crystal, "tag_origin");
@@ -960,7 +960,7 @@ player_ignore_watcher(var_0) {
 }
 
 spawn_shield_crystals() {
-  var_0 = scripts\engine\utility::getstructarray("mq_shield_crystal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_shield_crystal_loc", "script_noteworthy");
 
   if(level.n_shield_crystals_remaining < 4) {
     foreach(var_2 in var_0) {
@@ -985,14 +985,14 @@ give_mq_reward() {
 
   level.get_pap_cost_override = undefined;
   level.b_s2_mq_complete = 1;
-  var_4 = scripts\engine\utility::getstructarray("s2_mq_final_reward_chest_loc", "targetname");
+  var_4 = scripts\engine\utility::getStructArray("s2_mq_final_reward_chest_loc", "targetname");
 
   foreach(var_6 in var_4) {
     spawn_golden_chest(var_6.origin, var_6.angles);
   }
 
   wait 0.5;
-  var_8 = scripts\engine\utility::getstructarray("s2_mq_final_reward_loc", "targetname");
+  var_8 = scripts\engine\utility::getStructArray("s2_mq_final_reward_loc", "targetname");
 
   foreach(var_6 in var_8) {
     drop_final_loot(var_6);

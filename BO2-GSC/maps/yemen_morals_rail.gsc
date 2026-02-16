@@ -99,7 +99,7 @@ mr_spawn_salazar() {
 }
 
 spawn_vtols_at_structs(str_struct_name, str_nd_name) {
-  a_spots = getstructarray(str_struct_name, "targetname");
+  a_spots = getStructArray(str_struct_name, "targetname");
 
   foreach(s_spot in a_spots) {
     v_vtol = spawn_vehicle_from_targetname("yemen_drone_control_vtol_spawner");
@@ -366,7 +366,7 @@ mr_get_magic_target_position(e_shooter, n_dist) {
 
 fire_rpgs_from_structs(str_struct, v_target, n_min, n_max) {
   n_wait = undefined;
-  a_rpgs = getstructarray(str_struct, "targetname");
+  a_rpgs = getStructArray(str_struct, "targetname");
 
   foreach(s_rpg in a_rpgs) {
     if(!isDefined(s_rpg.script_noteworthy)) {

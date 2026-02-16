@@ -124,7 +124,7 @@ _id_40A9(var_0, var_1) {
   var_3 = getEntArray(var_2, "targetname");
 
   if(!var_3.size) {
-    var_3 = common_scripts\utility::getstructarray("heli_ride_in", "targetname");
+    var_3 = common_scripts\utility::getStructArray("heli_ride_in", "targetname");
 
     if(!var_3.size) {}
   }

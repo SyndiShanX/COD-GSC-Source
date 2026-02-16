@@ -236,7 +236,7 @@ put this in your GSC:
 maps\_mi17::main( "vehicle_mi17_woodland" );
 
 and these lines in your CSV:
-include,vehicle_mi17_woodland_mi17
+#include,vehicle_mi17_woodland_mi17
 sound,vehicle_mi17,vehicle_standard,all_sp
 sound,item_fastrope,vehicle_standard,all_sp
 
@@ -248,7 +248,7 @@ put this in your GSC:
 maps\_mi17::main( "vehicle_mi17_woodland_fly" );
 
 and these lines in your CSV:
-include,vehicle_mi17_woodland_fly_mi17
+#include,vehicle_mi17_woodland_fly_mi17
 sound,vehicle_mi17,vehicle_standard,all_sp
 sound,item_fastrope,vehicle_standard,all_sp
 
@@ -260,7 +260,7 @@ put this in your GSC:
 maps\_mi17::main( "vehicle_mi17_woodland_fly_cheap" );
 
 and these lines in your CSV:
-include,vehicle_mi17_woodland_fly_cheap_mi17
+#include,vehicle_mi17_woodland_fly_cheap_mi17
 sound,vehicle_mi17,vehicle_standard,all_sp
 sound,item_fastrope,vehicle_standard,all_sp
 

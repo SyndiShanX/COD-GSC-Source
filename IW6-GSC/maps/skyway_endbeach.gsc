@@ -511,16 +511,16 @@ player_drags_ally(var_0) {
 
 get_ltrig_press(var_0) {
   if(var_0)
-    return level.player buttonpressed("mouse1");
+    return level.player buttonPressed("mouse1");
   else
-    return level.player adsbuttonpressed();
+    return level.player adsButtonPressed();
 }
 
 get_rtrig_press(var_0) {
   if(var_0)
-    return level.player buttonpressed("mouse2");
+    return level.player buttonPressed("mouse2");
   else
-    return level.player attackbuttonpressed();
+    return level.player attackButtonPressed();
 }
 
 beach_idle(var_0, var_1) {

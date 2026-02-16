@@ -197,7 +197,7 @@ gasVisualsSetup() {
   }
 
   if(!isDefined(level.mp_prison_killstreak.gas_tags)) {
-    orgs = getstructarray("gas_org", "targetname");
+    orgs = getStructArray("gas_org", "targetname");
     level.mp_prison_killstreak.gas_tags = [];
     foreach(org in orgs) {
       tag_origin = org spawn_tag_origin();
@@ -207,7 +207,7 @@ gasVisualsSetup() {
   }
 
   if(!isDefined(level.mp_prison_killstreak.gas_warning_light_tags)) {
-    orgs = getstructarray("flashing_red_light", "targetname");
+    orgs = getStructArray("flashing_red_light", "targetname");
     level.mp_prison_killstreak.gas_warning_light_tags = [];
     foreach(org in orgs) {
       tag_origin = org spawn_tag_origin();

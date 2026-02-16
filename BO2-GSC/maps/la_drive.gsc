@@ -163,7 +163,7 @@ kill_player_driver() {
 
 peel_out_sound() {
   while(true) {
-    if(level.player buttonpressed("BUTTON_RTRIG")) {
+    if(level.player buttonPressed("BUTTON_RTRIG")) {
       level.player playSound("veh_cougar_peel_f", "sounddone");
       level waittill("sounddone");
       return;

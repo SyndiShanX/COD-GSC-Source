@@ -1782,7 +1782,7 @@ function_b49b8fc6() {
         self.var_561f7ea3 = 1;
       }
 
-      if(self.e_player meleebuttonpressed() && self.var_561f7ea3 && self.e_player istouching(self.s_unitrigger.trigger)) {
+      if(self.e_player meleeButtonPressed() && self.var_561f7ea3 && self.e_player istouching(self.s_unitrigger.trigger)) {
         self.var_54596501 = 0;
 
         if(isDefined(mdl_reward)) {

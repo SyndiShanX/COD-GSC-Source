@@ -53,7 +53,7 @@ moon_astro_get_spawn_struct() {
       continue;
     }
     if(level.zones[keys[i]].is_occupied) {
-      locs = getstructarray(level.zones[keys[i]].volumes[0].target + "_astro", "targetname");
+      locs = getStructArray(level.zones[keys[i]].volumes[0].target + "_astro", "targetname");
       if(isDefined(locs) && locs.size > 0) {
         locs = array_randomize(locs);
         return locs[0];
@@ -65,7 +65,7 @@ moon_astro_get_spawn_struct() {
       continue;
     }
     if(level.zones[keys[i]].is_active) {
-      locs = getstructarray(level.zones[keys[i]].volumes[0].target + "_astro", "targetname");
+      locs = getStructArray(level.zones[keys[i]].volumes[0].target + "_astro", "targetname");
       if(isDefined(locs) && locs.size > 0) {
         locs = array_randomize(locs);
         return locs[0];

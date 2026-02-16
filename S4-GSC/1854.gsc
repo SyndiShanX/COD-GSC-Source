@@ -47,7 +47,7 @@ _id_7FE8() {
   self._id_03A9 _meth_8359(1);
   var_1 = getEntArray("magic_box_bunny", "targetname");
   self.bunny = scripts\engine\utility::_id_6969(self._id_03A9.origin, var_1);
-  var_2 = scripts\engine\utility::getstructarray("box_fx_spot", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("box_fx_spot", "targetname");
   self._id_6076 = scripts\engine\utility::_id_6969(self._id_03A9.origin, var_2);
 
   if(isDefined(level._id_994C) && level._id_994C == self) {

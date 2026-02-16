@@ -409,7 +409,7 @@ add_zombie_special_drop(powerup_name) {
   level.zombie_special_drop_array[level.zombie_special_drop_array.size] = powerup_name;
 }
 
-include_zombie_powerup(powerup_name) {
+#include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups))
     level.zombie_include_powerups = [];
 
@@ -863,7 +863,7 @@ powerup_grab(powerup_team) {
     players = get_players();
 
     for(i = 0; i < players.size; i++) {
-      if((self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink") && (players[i] maps\mp\zombies\_zm_laststand::player_is_in_laststand() || players[i] usebuttonpressed() && players[i] in_revive_trigger())) {
+      if((self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink") && (players[i] maps\mp\zombies\_zm_laststand::player_is_in_laststand() || players[i] useButtonPressed() && players[i] in_revive_trigger())) {
         continue;
       }
       if(isDefined(self.can_pick_up_in_last_stand) && !self.can_pick_up_in_last_stand && players[i] maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
@@ -1070,7 +1070,7 @@ start_bonfire_sale(item) {
 }
 
 start_carpenter(origin) {
-  window_boards = getstructarray("exterior_goal", "targetname");
+  window_boards = getStructArray("exterior_goal", "targetname");
   total = level.exterior_goals.size;
   carp_ent = spawn("script_origin", (0, 0, 0));
   carp_ent playLoopSound("evt_carpenter");
@@ -2197,7 +2197,7 @@ register_carpenter_node(node, callback) {
 
 start_carpenter_new(origin) {
   level.carpenter_powerup_active = 1;
-  window_boards = getstructarray("exterior_goal", "targetname");
+  window_boards = getStructArray("exterior_goal", "targetname");
 
   if(isDefined(level._additional_carpenter_nodes))
     window_boards = arraycombine(window_boards, level._additional_carpenter_nodes, 0, 0);

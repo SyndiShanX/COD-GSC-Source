@@ -34,7 +34,7 @@ init_phonebooth() {
   level.phone.numbers["5550152"] = ::skullbuster;
   snd_setup();
   level.phone.booths = [];
-  foreach(var_1 in scripts\engine\utility::getstructarray("phonebooth", "script_noteworthy")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy")) {
     var_1 thread init_phone();
     wait(0.1);
   }
@@ -267,7 +267,7 @@ init_phone() {
   self.linkpoint_struct = undefined;
   self.keypad_buttons = [];
   self.quest_state = 0;
-  foreach(var_1 in scripts\engine\utility::getstructarray(self.target, "targetname")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray(self.target, "targetname")) {
     if(var_1.script_parameters == "linkpoint") {
       self.linkpoint_struct = var_1;
     }

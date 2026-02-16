@@ -244,7 +244,7 @@ _id_AFEE() {
 }
 
 _id_AFED() {
-  if(self usebuttonpressed() || self attackbuttonpressed() || self adsbuttonpressed() || self meleebuttonpressed()) {
+  if(self useButtonPressed() || self attackButtonPressed() || self adsButtonPressed() || self meleeButtonPressed()) {
     return 0;
   }
 

@@ -4,7 +4,7 @@
 *******************************************************/
 
 init_buffer_trap() {
-  scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("trap_buffer", "script_noteworthy"), ::power_on_buffer);
+  scripts\engine\utility::array_thread(scripts\engine\utility::getStructArray("trap_buffer", "script_noteworthy"), ::power_on_buffer);
 }
 
 power_on_buffer() {
@@ -32,7 +32,7 @@ use_buffer_trap(var_0, var_1) {
   var_2 = getent(var_0.target, "targetname");
   if(!isDefined(var_2.var_127C9)) {
     var_3 = [];
-    foreach(var_5 in scripts\engine\utility::getstructarray(var_0.target, "targetname")) {
+    foreach(var_5 in scripts\engine\utility::getStructArray(var_0.target, "targetname")) {
       var_3[var_3.size] = spawn("trigger_radius", var_5.origin, 0, var_5.fgetarg, var_5.height);
     }
 
@@ -97,7 +97,7 @@ use_buffer_trap(var_0, var_1) {
 buffer_move() {
   self endon("stop_buffer");
   var_0 = 1;
-  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
   var_2 = squared(192);
   for(;;) {
     var_3 = [];
@@ -209,7 +209,7 @@ init_hydrant_trap() {
 use_hydrant_trap(var_0, var_1) {
   var_2 = getent(var_0.target, "targetname");
   var_3 = [];
-  foreach(var_5 in scripts\engine\utility::getstructarray(var_0.target, "targetname")) {
+  foreach(var_5 in scripts\engine\utility::getStructArray(var_0.target, "targetname")) {
     var_5.pool_spot = scripts\engine\utility::getstruct(var_5.target, "targetname");
     foreach(var_7 in getEntArray(var_5.target, "targetname")) {
       if(issubstr(var_7.classname, "phys")) {
@@ -306,14 +306,14 @@ fling_zombie_hydrant(var_0, var_1) {
 
 init_mosh_trap() {
   scripts\engine\utility::flag_init("flag_moshing_allowed");
-  scripts\engine\utility::array_thread(scripts\engine\utility::getstructarray("trap_mosh", "script_noteworthy"), ::power_on_mosh);
+  scripts\engine\utility::array_thread(scripts\engine\utility::getStructArray("trap_mosh", "script_noteworthy"), ::power_on_mosh);
 }
 
 power_on_mosh() {
   level.punk_rockspots = [];
   level.punk_speakers = [];
   self.aoe = undefined;
-  foreach(var_1 in scripts\engine\utility::getstructarray(self.target, "targetname")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray(self.target, "targetname")) {
     if(var_1.script_area == "rockout") {
       level.punk_rockspots[level.punk_rockspots.size] = var_1;
       continue;

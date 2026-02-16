@@ -1300,7 +1300,7 @@ waitrespawnorsafespawnbutton() {
   self endon(#"disconnect", #"end_respawn");
 
   while(true) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       break;
     }
 

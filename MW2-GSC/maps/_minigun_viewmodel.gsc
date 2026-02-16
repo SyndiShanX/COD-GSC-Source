@@ -68,16 +68,16 @@ player_viewhands_minigun_hand(hand) {
   }
 }
 
-spinButtonPressed() {
-  if(level.player AdsButtonPressed())
+spinbuttonPressed() {
+  if(level.player adsButtonPressed())
     return true;
-  if(level.player AttackButtonPressed())
+  if(level.player attackButtonPressed())
     return true;
   return false;
 }
 
-fireButtonPressed() {
-  return level.player AttackButtonPressed();
+firebuttonPressed() {
+  return level.player attackButtonPressed();
 }
 
 player_viewhands_minigun_idle(hand) {

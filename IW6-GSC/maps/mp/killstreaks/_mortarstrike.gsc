@@ -105,7 +105,7 @@ update_mortars() {
   waitframe();
 
   if(isDefined(self.sourceStructs)) {
-    self.mortar_sources = getstructarray(self.sourceStructs, "targetname");
+    self.mortar_sources = getStructArray(self.sourceStructs, "targetname");
   } else if(isDefined(self.sourceEnts)) {
     self.mortar_sources = getEntArray(self.sourceEnts, "targetname");
   }
@@ -114,7 +114,7 @@ update_mortars() {
       source.radius = 300;
   }
 
-  self.mortar_targets = getstructarray(self.targetStructs, "targetname");
+  self.mortar_targets = getStructArray(self.targetStructs, "targetname");
   foreach(mortar_target in self.mortar_targets) {
     if(!isDefined(mortar_target.radius))
       mortar_target.radius = 100;

@@ -20,7 +20,7 @@ enemy_spawner_init() {
   level.max_dynamic_spawners = 0;
   level.dynamic_enemy_types = ["generic_zombie"];
   level.var_BFB7 = 200;
-  level.var_1BF5 = scripts\engine\utility::getstructarray("spawner_location", "targetname");
+  level.var_1BF5 = scripts\engine\utility::getStructArray("spawner_location", "targetname");
   level.var_1002D = ::func_FF55;
   level.stop_spawning = 1;
   level.var_B433 = 20;
@@ -741,7 +741,7 @@ func_79EA() {
 
 func_9608() {
   level.goon_spawners = [];
-  var_0 = scripts\engine\utility::getstructarray("dog_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("dog_spawner", "targetname");
 
   if(isDefined(level.goon_spawner_patch_func)) {
     [[level.goon_spawner_patch_func]](var_0);
@@ -785,7 +785,7 @@ move_goon_spawner(var_0, var_1, var_2) {
 
 func_9605() {
   level.rotateyaw = [];
-  var_0 = scripts\engine\utility::getstructarray("ghost_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ghost_spawn", "targetname");
 
   foreach(var_2 in var_0) {
     var_2.active = 1;
@@ -853,7 +853,7 @@ func_7CE3() {
   var_0 = getEntArray(self.target, "targetname");
 
   if(!isDefined(var_0) || var_0.size == 0) {
-    var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   }
 
   var_1 = [];
@@ -873,7 +873,7 @@ func_7CE3() {
 
 update_origin(var_0, var_1, var_2) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_4 in level.spawn_struct_list) {
@@ -891,7 +891,7 @@ update_origin(var_0, var_1, var_2) {
 
 remove_origin(var_0) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_2 in level.spawn_struct_list) {
@@ -904,7 +904,7 @@ remove_origin(var_0) {
 
 update_kvp(var_0, var_1, var_2) {
   if(!isDefined(level.spawn_struct_list)) {
-    level.spawn_struct_list = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+    level.spawn_struct_list = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   }
 
   foreach(var_4 in level.spawn_struct_list) {
@@ -1070,7 +1070,7 @@ escape_room_init() {
 }
 
 func_106D8() {
-  var_0 = scripts\engine\utility::getstructarray("escape_spawn_trigger", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("escape_spawn_trigger", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawn("trigger_radius", var_2.origin, 0, var_2.radius, 96);
@@ -1095,7 +1095,7 @@ func_6730() {
     thread func_6731();
   }
 
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread func_6722(self.var_E6DB);
@@ -1156,7 +1156,7 @@ func_6731(var_0) {
 
 func_12DBF() {
   func_1294D();
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_2.active = 1;
@@ -1755,7 +1755,7 @@ spawn_wave_enemy(var_0, var_1, var_2, var_3) {
   }
 
   if(isDefined(self.target) && !scripts\engine\utility::is_true(self.var_1024B)) {
-    var_7 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_7 = scripts\engine\utility::getStructArray(self.target, "targetname");
     var_8 = scripts\engine\utility::random(var_7);
     var_4 = var_8.origin;
   }
@@ -2311,7 +2311,7 @@ make_volume_active() {
     }
   }
 
-  var_8 = scripts\engine\utility::getstructarray("secure_window", "script_noteworthy");
+  var_8 = scripts\engine\utility::getStructArray("secure_window", "script_noteworthy");
 
   foreach(var_10 in var_8) {
     if(ispointinvolume(var_10.origin, self)) {
@@ -3605,7 +3605,7 @@ create_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 func_7D87() {
-  level.var_13F33 = scripts\engine\utility::getstructarray("zombie_idle_spot", "targetname");
+  level.var_13F33 = scripts\engine\utility::getStructArray("zombie_idle_spot", "targetname");
   level thread func_962E();
 }
 
@@ -3789,7 +3789,7 @@ func_DF41() {
 }
 
 func_F546(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("player_respawn_loc", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("player_respawn_loc", "targetname");
   var_2 = [];
 
   foreach(var_4 in var_1) {

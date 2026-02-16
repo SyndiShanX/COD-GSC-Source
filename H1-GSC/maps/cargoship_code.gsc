@@ -165,7 +165,7 @@ escape_event() {
 
   switch (var_0) {
     case "fx":
-      var_13 = common_scripts\utility::getstructarray(self.target, "targetname");
+      var_13 = common_scripts\utility::getStructArray(self.target, "targetname");
 
       for(var_16 = 0; var_16 < var_13.size; var_16++) {
         var_18 = spawn("script_model", var_13[var_16].origin);

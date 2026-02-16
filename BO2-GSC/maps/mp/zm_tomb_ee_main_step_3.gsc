@@ -35,14 +35,14 @@ exit_stage(success) {
   flag_set("fire_link_enabled");
   a_buttons = getEntArray("fire_link_button", "targetname");
   array_delete(a_buttons);
-  a_structs = getstructarray("fire_link", "targetname");
+  a_structs = getStructArray("fire_link", "targetname");
 
   foreach(unitrigger_stub in a_structs)
   unregister_unitrigger(unitrigger_stub);
 }
 
 create_buttons_and_triggers() {
-  a_structs = getstructarray("fire_link", "targetname");
+  a_structs = getStructArray("fire_link", "targetname");
 
   foreach(unitrigger_stub in a_structs) {
     unitrigger_stub.radius = 36;

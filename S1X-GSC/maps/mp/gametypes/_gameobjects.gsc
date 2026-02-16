@@ -802,11 +802,11 @@ manualDropThink() {
   self endon("drop_object");
 
   for(;;) {
-    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryOffhandButtonPressed() || self meleeButtonPressed()) {
+    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryOffhandbuttonPressed() || self meleeButtonPressed()) {
       wait .05;
     }
 
-    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryOffhandButtonPressed() && !self meleeButtonPressed()) {
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryOffhandbuttonPressed() && !self meleeButtonPressed()) {
       wait .05;
     }
 

@@ -75,7 +75,7 @@ watchSoflamUsage() {
     wait(0.05);
 
   for(;;) {
-    if(self AttackButtonPressed() && self GetCurrentWeapon() == "iw5_soflam_mp" && self AdsButtonPressed()) {
+    if(self attackButtonPressed() && self GetCurrentWeapon() == "iw5_soflam_mp" && self adsButtonPressed()) {
       self WeaponLockTargetTooClose(false);
       self WeaponLockFree();
 

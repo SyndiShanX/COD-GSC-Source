@@ -192,7 +192,7 @@ watchads(var_0) {
   thread watchweaponswitch(var_0);
 
   for(;;) {
-    var_1 = self adsbuttonpressed();
+    var_1 = self adsButtonPressed();
     var_2 = self getcurrentweapon();
 
     if(var_2 == var_0) {
@@ -1077,7 +1077,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
       level.player enableweaponpickup();
     }
 
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       var_12++;
 
     if(common_scripts\utility::flag(var_10) && var_12 >= var_5) {
@@ -1113,7 +1113,7 @@ waittill_fire_trigger_activate(var_0, var_1, var_2) {
   var_4 = 0;
 
   for(;;) {
-    if(level.player attackbuttonpressed())
+    if(level.player attackButtonPressed())
       var_4++;
     else
       var_4 = 0;

@@ -51,9 +51,7 @@ onPlayerConnect() {
   }
 }
 
-monitorGroundSlam()
-
-{
+monitorGroundSlam() {
   self endon("disconnect");
 
   time = 10;
@@ -135,9 +133,7 @@ draw_circle_for_time(center, radius, color, depthTest, segments, time) {
   }
 }
 
-monitorGroundSlamHitPlayer()
-
-{
+monitorGroundSlamHitPlayer() {
   self endon("disconnect");
 
   while(1) {

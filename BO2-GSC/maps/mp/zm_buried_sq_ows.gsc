@@ -70,7 +70,7 @@ ows_targets_start() {
   n_cur_second = 0;
   flag_clear("sq_ows_target_missed");
   level thread sndsidequestowsmusic();
-  a_sign_spots = getstructarray("otw_target_spot", "script_noteworthy");
+  a_sign_spots = getStructArray("otw_target_spot", "script_noteworthy");
 
   while(n_cur_second < 40) {
     a_spawn_spots = ows_targets_get_cur_spots(n_cur_second);
@@ -92,7 +92,7 @@ ows_targets_start() {
 }
 
 ows_targets_get_cur_spots(n_time) {
-  a_target_spots = getstructarray("otw_target_spot", "script_noteworthy");
+  a_target_spots = getStructArray("otw_target_spot", "script_noteworthy");
   a_to_spawn = [];
   str_time = "" + n_time;
 

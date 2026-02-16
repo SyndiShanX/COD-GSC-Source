@@ -44,7 +44,7 @@ func_8FDF() {
 func_5A38() {
   func_0B1F::func_5A4B();
   var_0 = [];
-  var_0 = scripts\engine\utility::array_combine(var_0, scripts\engine\utility::getstructarray("doors_hinged", "targetname"));
+  var_0 = scripts\engine\utility::array_combine(var_0, scripts\engine\utility::getStructArray("doors_hinged", "targetname"));
 
   foreach(var_2 in var_0) {
     var_2 scripts\sp\utility::func_65E0("push_triggered");

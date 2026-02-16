@@ -443,7 +443,7 @@ watch_nav_computer_built() {
 }
 
 sq_assign_signs() {
-  a_signs = getstructarray("sq_tunnel_sign", "targetname");
+  a_signs = getStructArray("sq_tunnel_sign", "targetname");
 
   foreach(s_sign in a_signs) {
     m_sign = spawn("script_model", s_sign.origin);
@@ -906,7 +906,7 @@ warp_to_struct_position(str_value, str_key) {
   if(!isDefined(str_key))
     str_key = "targetname";
 
-  a_warp_structs = getstructarray(str_value, str_key);
+  a_warp_structs = getStructArray(str_value, str_key);
   a_players = get_players();
   assert(a_warp_structs.size > a_players.size, "warp_to_struct_position found more players than structs for '" + str_key + "' = '" + str_value + "'! Add more structs to fix this");
 

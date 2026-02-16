@@ -22,7 +22,7 @@ init_buildables() {
   level thread set_clientfield_buildables_code_callbacks();
 }
 
-include_buildables() {
+#include_buildables() {
   include_buildable("riotshield_zm");
   include_buildable("powerswitch");
   include_buildable("pap");

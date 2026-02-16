@@ -1067,7 +1067,7 @@ get_start_points(start_name, only_players) {
   starts = [];
 
   if(only_players) {
-    structs = getstructarray(start_name, "targetname");
+    structs = getStructArray(start_name, "targetname");
 
     for(i = 0; i < structs.size; i++) {
       if(isDefined(structs[i].script_int)) {
@@ -1077,7 +1077,7 @@ get_start_points(start_name, only_players) {
 
     starts = ascend_starts(starts);
   } else {
-    structs = getstructarray(start_name, "targetname");
+    structs = getStructArray(start_name, "targetname");
 
     for(i = 0; i < structs.size; i++) {
       if(!isDefined(structs[i].script_int)) {
@@ -1146,7 +1146,7 @@ start_warp_guys(start_name, only_players) {
     guys = get_starting_guys();
   }
 
-  starts = getstructarray(start_name, "targetname");
+  starts = getStructArray(start_name, "targetname");
 
   if(!isDefined(starts) || starts.size < 1 || !isDefined(guys)) {
     println("^1start_warp_guys(), starts or guys are not defined!");
@@ -1566,7 +1566,7 @@ lastpit_trap() {
   }
 
   getent("lastpit_trap_trig", "targetname") waittill("trigger");
-  nadespots = getstructarray("lastpit_trap_nadespots", "script_noteworthy");
+  nadespots = getStructArray("lastpit_trap_nadespots", "script_noteworthy");
   startspot = getstruct("lastpit_trap_nadestart", "targetname");
   for(i = 0; i < nadespots.size; i++) {
     axis = getaiarray("axis");

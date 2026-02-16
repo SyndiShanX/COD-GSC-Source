@@ -1626,7 +1626,7 @@ watch_player_for_attack() {
   level thread watch_for_player_grenade();
 
   while(!common_scripts\utility::flag("enemy_alerted")) {
-    if(level.player attackbuttonpressed() && level.player getcurrentweaponclipammo() > 0) {
+    if(level.player attackButtonPressed() && level.player getcurrentweaponclipammo() > 0) {
       break;
     }
 
@@ -2272,7 +2272,7 @@ mlrs_start_qte(var_0) {
   setslowmotion(1.0, 0.25, 0.5);
 
   for(;;) {
-    if(level.player meleebuttonpressed()) {
+    if(level.player meleeButtonPressed()) {
       common_scripts\utility::flag_set("qte_window_closed");
       setslowmotion(0.25, 1.0, 0.05);
       thread maps\flood_audio::launcher_destroy_stop_slomo_sfx();

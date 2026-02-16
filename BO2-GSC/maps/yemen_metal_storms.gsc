@@ -447,7 +447,7 @@ intruder_turret_move_qrdrones() {
   }
 
   extra_qrs = 0;
-  s_spots = getstructarray("streets_qr_spawn_far", "targetname");
+  s_spots = getStructArray("streets_qr_spawn_far", "targetname");
 
   while(extra_qrs < 8) {
     a_qrs = getEntArray("street_drone", "script_noteworthy");

@@ -728,9 +728,9 @@ watchcratererollcommand(var_0) {
   var_1 = 0;
   var_2 = 16384;
   for(;;) {
-    if(var_0 usebuttonpressed()) {
+    if(var_0 useButtonPressed()) {
       var_1 = 0;
-      while(var_0 usebuttonpressed()) {
+      while(var_0 useButtonPressed()) {
         var_1 = var_1 + 0.05;
         wait(0.05);
       }
@@ -740,7 +740,7 @@ watchcratererollcommand(var_0) {
       }
 
       var_1 = 0;
-      while(!var_0 usebuttonpressed() && var_1 < 0.5) {
+      while(!var_0 useButtonPressed() && var_1 < 0.5) {
         var_1 = var_1 + 0.05;
         wait(0.05);
       }

@@ -77,7 +77,7 @@ clingtriggerusethink(positionindex) {
     if(!level.cling_enabled) {
       continue;
     }
-    if(!who usebuttonpressed()) {
+    if(!who useButtonPressed()) {
       continue;
     }
     if(who in_revive_trigger()) {

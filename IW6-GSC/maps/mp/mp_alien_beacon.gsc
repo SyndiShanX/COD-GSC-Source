@@ -719,7 +719,7 @@ mp_alien_beacon_pillage_init() {
 }
 
 relocate_bad_pillage_spots() {
-  var_0 = common_scripts\utility::getstructarray("lab_crafting_pillage", "targetname");
+  var_0 = common_scripts\utility::getStructArray("lab_crafting_pillage", "targetname");
 
   foreach(var_2 in var_0) {
     if(var_2.origin == (-1034, 5744.2, 1214)) {
@@ -2777,7 +2777,7 @@ beacon_adjust_spawnlocation(var_0) {
 }
 
 spawn_weapon_in_boss_area() {
-  var_0 = common_scripts\utility::getstructarray("item", "targetname");
+  var_0 = common_scripts\utility::getStructArray("item", "targetname");
 
   foreach(var_2 in var_0) {
     if(!isDefined(var_2.script_noteworthy)) {

@@ -909,8 +909,8 @@ _id_1085B() {
   var_0 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
-      while(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + 0.05;
 
         if(var_0 >= 1.0) {

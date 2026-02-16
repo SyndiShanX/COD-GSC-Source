@@ -644,27 +644,27 @@ class csceneplayer: csceneobject {
         v_movement = player getnormalizedmovement();
         return v_movement[1];
       case # "jump":
-        return (player actionbuttonpressed() ? 1 : 0);
+        return (player actionbuttonPressed() ? 1 : 0);
       case # "stance":
-        return (player stancebuttonpressed() ? 1 : 0);
+        return (player stancebuttonPressed() ? 1 : 0);
       case # "use":
-        return (player usebuttonpressed() ? 1 : 0);
+        return (player useButtonPressed() ? 1 : 0);
       case # "weapon_switch":
-        return (player weaponswitchbuttonpressed() ? 1 : 0);
+        return (player weaponswitchbuttonPressed() ? 1 : 0);
       case # "sprint":
-        return (player sprintbuttonpressed() ? 1 : 0);
+        return (player sprintbuttonPressed() ? 1 : 0);
       case # "melee":
-        return (player meleebuttonpressed() ? 1 : 0);
+        return (player meleeButtonPressed() ? 1 : 0);
       case # "attack":
         return (!player flagsys::get(#"hash_6ce14241f77af1e7") && var_966ea21d ? 1 : 0);
       case # "dpad_up":
-        return (player actionslotonebuttonpressed() ? 1 : 0);
+        return (player actionslotonebuttonPressed() ? 1 : 0);
       case # "dpad_down":
-        return (player actionslottwobuttonpressed() ? 1 : 0);
+        return (player actionslottwobuttonPressed() ? 1 : 0);
       case # "dpad_left":
-        return (player actionslotthreebuttonpressed() ? 1 : 0);
+        return (player actionslotthreebuttonPressed() ? 1 : 0);
       case # "dpad_right":
-        return (player actionslotfourbuttonpressed() ? 1 : 0);
+        return (player actionslotfourbuttonPressed() ? 1 : 0);
       default:
         v_movement = player getnormalizedmovement();
         return v_movement[0];

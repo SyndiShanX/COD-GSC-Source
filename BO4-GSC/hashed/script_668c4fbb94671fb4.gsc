@@ -366,7 +366,7 @@ function_5b7bbc40() {
     w_current = e_player getcurrentweapon();
 
     if(w_current == level.var_4e845c84 || w_current == level.var_58e17ce3) {
-      if(e_player adsbuttonpressed()) {
+      if(e_player adsButtonPressed()) {
         e_player clientfield::set("" + # "afterlife_vision_play", 0);
         util::wait_network_frame();
         e_player clientfield::set("" + # "afterlife_vision_play", 1);
@@ -791,7 +791,7 @@ function_bfe4e5a9(var_5faf08a9, n_entry) {
     for(i = 0; i < var_5faf08a9.size; i++) {
       var_6dcb990a = var_5faf08a9[i];
 
-      while(isDefined(self) && !self usebuttonpressed() && isDefined(self.var_da61dab6) && self.var_da61dab6) {
+      while(isDefined(self) && !self useButtonPressed() && isDefined(self.var_da61dab6) && self.var_da61dab6) {
         waitframe(1);
       }
 
@@ -799,7 +799,7 @@ function_bfe4e5a9(var_5faf08a9, n_entry) {
       mdl_radio thread scene::play(#"p8_zm_esc_kmc_bundle", "DOWN", mdl_radio);
       mdl_radio clientfield::set("" + # "hash_7f7790ca43a7fffe", 1);
 
-      while(isDefined(self) && self usebuttonpressed() && isDefined(self.var_da61dab6) && self.var_da61dab6) {
+      while(isDefined(self) && self useButtonPressed() && isDefined(self.var_da61dab6) && self.var_da61dab6) {
         waitframe(1);
       }
 
@@ -3277,7 +3277,7 @@ function_1cda4094(e_player) {
 
   var_d64818ae = e_player clientfield::get("" + # "spectral_key_beam_flash");
 
-  if(e_player attackbuttonpressed() && var_d64818ae === 2) {
+  if(e_player attackButtonPressed() && var_d64818ae === 2) {
     e_player clientfield::set("" + # "spectral_key_beam_flash", 1);
   }
 

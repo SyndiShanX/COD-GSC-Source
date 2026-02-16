@@ -119,7 +119,7 @@ is_weapon_included(weapon_name) {
   return false;
 }
 
-include_weapon(weapon, display_in_box, func) {
+#include_weapon(weapon, display_in_box, func) {
   if(!isDefined(level._included_weapons))
     level._included_weapons = [];
 
@@ -152,14 +152,14 @@ treasure_chest_chooserandomweapon() {
 
 init() {
   spawn_list = [];
-  spawnable_weapon_spawns = getstructarray("weapon_upgrade", "targetname");
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("bowie_upgrade", "targetname"), 1, 0);
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("sickle_upgrade", "targetname"), 1, 0);
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("tazer_upgrade", "targetname"), 1, 0);
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("buildable_wallbuy", "targetname"), 1, 0);
+  spawnable_weapon_spawns = getStructArray("weapon_upgrade", "targetname");
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("bowie_upgrade", "targetname"), 1, 0);
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("sickle_upgrade", "targetname"), 1, 0);
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("tazer_upgrade", "targetname"), 1, 0);
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("buildable_wallbuy", "targetname"), 1, 0);
 
   if(!level.headshots_only)
-    spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("claymore_purchase", "targetname"), 1, 0);
+    spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("claymore_purchase", "targetname"), 1, 0);
 
   location = level.scr_zm_map_start_location;
 

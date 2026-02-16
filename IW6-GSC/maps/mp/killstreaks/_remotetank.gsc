@@ -970,7 +970,7 @@ tank_FireMissiles(remoteTank) {
   rocketNum = 0;
 
   while(true) {
-    if(self FragButtonPressed() && !remoteTank.empGrenaded) {
+    if(self fragButtonPressed() && !remoteTank.empGrenaded) {
       tagOrigin = remoteTank.mgTurret.origin;
       tagAngles = remoteTank.mgTurret.angles;
       switch (rocketNum) {
@@ -1008,7 +1008,7 @@ tank_DropMines(remoteTank) {
   remoteTank endon("death");
 
   while(true) {
-    if(self SecondaryOffhandButtonPressed()) {
+    if(self SecondaryOffhandbuttonPressed()) {
       trace = bulletTrace(remoteTank.origin + (0, 0, 4), remoteTank.origin - (0, 0, 4), false, remoteTank);
       normal = VectorNormalize(trace["normal"]);
       plantAngles = VectorToAngles(normal);
@@ -1056,7 +1056,7 @@ tank_playerExit() {
 
   while(true) {
     timeUsed = 0;
-    while(owner UseButtonPressed()) {
+    while(owner useButtonPressed()) {
       timeUsed += 0.05;
       if(timeUsed > 0.75) {
         self notify("death");

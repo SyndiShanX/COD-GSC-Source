@@ -563,7 +563,7 @@ _id_B17A() {
 
 _id_E31F() {
   scripts\cp_mp\killstreaks\airdrop::_id_8272();
-  var_0 = scripts\engine\utility::getstructarray("pillage_cache_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("pillage_cache_spawn", "targetname");
   var_1 = int(100 * var_0.size / 100);
   var_0 = scripts\engine\utility::array_randomize(var_0);
   level._id_414D = [];

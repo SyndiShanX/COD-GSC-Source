@@ -105,7 +105,7 @@ _id_3E11() {
 
 _id_3E12() {
   level._id_3C2C endon("death");
-  var_0 = common_scripts\utility::getstructarray("uav_focus_point", "targetname");
+  var_0 = common_scripts\utility::getStructArray("uav_focus_point", "targetname");
 
   for(;;) {
     var_1 = level.player.origin;
@@ -847,7 +847,7 @@ _id_3E3D(var_0, var_1, var_2) {
 }
 
 _id_3E3E(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_1, "targetname");
+  var_3 = common_scripts\utility::getStructArray(var_1, "targetname");
   var_4 = undefined;
   var_5 = undefined;
   var_6 = undefined;
@@ -979,7 +979,7 @@ _id_3DA5(var_0, var_1, var_2) {
 }
 
 _id_6F52() {
-  var_0 = common_scripts\utility::getstructarray("struct_break_glass", "targetname");
+  var_0 = common_scripts\utility::getStructArray("struct_break_glass", "targetname");
 
   foreach(var_2 in var_0) {}
   glassradiusdamage(var_2.origin, 64, 100, 99);
@@ -998,9 +998,9 @@ _id_3E46() {
   var_7[var_7.size] = getent("armory_weapon", "targetname");
   var_7[var_7.size] = getent("armory_equipment", "targetname");
   var_7[var_7.size] = getent("armory_airsupport", "targetname");
-  var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getstructarray("so_claymore_loc", "targetname"));
-  var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getstructarray("leader", "script_noteworthy"));
-  var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getstructarray("follower", "script_noteworthy"));
+  var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("so_claymore_loc", "targetname"));
+  var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("leader", "script_noteworthy"));
+  var_7 = common_scripts\utility::array_combine(var_7, common_scripts\utility::getStructArray("follower", "script_noteworthy"));
 
   foreach(var_9 in var_7) {}
   var_9 _id_3E48(var_4, var_5, var_6);

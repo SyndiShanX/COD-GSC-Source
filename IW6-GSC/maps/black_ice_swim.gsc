@@ -839,7 +839,7 @@ swim_surface_dialog() {
 swim_wait_for_detonate() {
   level.player allowfire(1);
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackButtonPressed())
     wait(level.timestep);
 
   level.player allowfire(0);
@@ -848,7 +848,7 @@ swim_wait_for_detonate() {
 }
 
 detonate_string_func() {
-  return common_scripts\utility::ter_op(level.player attackbuttonpressed() || common_scripts\utility::flag("flag_detonate_fail"), 1, 0);
+  return common_scripts\utility::ter_op(level.player attackButtonPressed() || common_scripts\utility::flag("flag_detonate_fail"), 1, 0);
 }
 
 ice_breach_logic() {

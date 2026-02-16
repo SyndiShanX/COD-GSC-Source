@@ -3734,43 +3734,43 @@ function should_skip_scene_loop() {
 }
 
 function any_button_pressed() {
-  if(self actionslotonebuttonpressed()) {
+  if(self actionslotonebuttonPressed()) {
     return true;
   }
-  if(self actionslottwobuttonpressed()) {
+  if(self actionslottwobuttonPressed()) {
     return true;
   }
-  if(self actionslotthreebuttonpressed()) {
+  if(self actionslotthreebuttonPressed()) {
     return true;
   }
-  if(self actionslotfourbuttonpressed()) {
+  if(self actionslotfourbuttonPressed()) {
     return true;
   }
-  if(self jumpbuttonpressed()) {
+  if(self jumpbuttonPressed()) {
     return true;
   }
-  if(self stancebuttonpressed()) {
+  if(self stancebuttonPressed()) {
     return true;
   }
-  if(self weaponswitchbuttonpressed()) {
+  if(self weaponswitchbuttonPressed()) {
     return true;
   }
-  if(self reloadbuttonpressed()) {
+  if(self reloadbuttonPressed()) {
     return true;
   }
-  if(self fragbuttonpressed()) {
+  if(self fragButtonPressed()) {
     return true;
   }
-  if(self throwbuttonpressed()) {
+  if(self throwbuttonPressed()) {
     return true;
   }
-  if(self attackbuttonpressed()) {
+  if(self attackButtonPressed()) {
     return true;
   }
-  if(self secondaryoffhandbuttonpressed()) {
+  if(self secondaryoffhandbuttonPressed()) {
     return true;
   }
-  if(self meleebuttonpressed()) {
+  if(self meleeButtonPressed()) {
     return true;
   }
   return false;

@@ -1894,7 +1894,7 @@ event4_part1_transition_boats() {
 
 event4_drowning_drones() {
   treading_drones_spawn = [];
-  treading_drones_spawn = GetStructArray("rescue1_treadwater_drone", "targetname");
+  treading_drones_spawn = getStructArray("rescue1_treadwater_drone", "targetname");
 
   treading_drones = [];
   for(i = 0; i < treading_drones_spawn.size; i++) {
@@ -1908,7 +1908,7 @@ event4_raft_drones() {
   level.plane_a waittill("overhead_flyby");
 
   raft_drones_spawn = [];
-  raft_drones_spawn = GetStructArray("rescue_1_raft_drones", "targetname");
+  raft_drones_spawn = getStructArray("rescue_1_raft_drones", "targetname");
 
   raft_drones = [];
   for(i = 0; i < raft_drones_spawn.size; i++) {
@@ -1924,7 +1924,7 @@ event4_raft_drones() {
   raft MoveTo(goal_struct.origin, 60, 10, 10);
 
   raft_drones_spawn = [];
-  raft_drones_spawn = GetStructArray("rescue_1_raft_drones_b", "targetname");
+  raft_drones_spawn = getStructArray("rescue_1_raft_drones_b", "targetname");
 
   raft_drones = [];
   for(i = 0; i < raft_drones_spawn.size; i++) {
@@ -1940,7 +1940,7 @@ event4_raft_drones() {
   raft MoveTo(goal_struct.origin, 60, 10, 10);
 
   raft_drones_spawn = [];
-  raft_drones_spawn = GetStructArray("rescue_1_raft_drones_c", "targetname");
+  raft_drones_spawn = getStructArray("rescue_1_raft_drones_c", "targetname");
 
   raft_drones = [];
   for(i = 0; i < raft_drones_spawn.size; i++) {
@@ -1960,7 +1960,7 @@ event4_first_ship_drones() {
   level waittill("spawn_first_ship_drones");
 
   standing_drones_spawn = [];
-  standing_drones_spawn = GetStructArray("destroyer_1_stand_drone", "targetname");
+  standing_drones_spawn = getStructArray("destroyer_1_stand_drone", "targetname");
 
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
@@ -1973,7 +1973,7 @@ event4_first_ship_drones() {
   level waittill("spawn_first_ship_drones");
 
   standing_drones_spawn = [];
-  standing_drones_spawn = GetStructArray("destroyer_1_stand_drone_2", "targetname");
+  standing_drones_spawn = getStructArray("destroyer_1_stand_drone_2", "targetname");
 
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
@@ -3159,7 +3159,7 @@ rescue_scene_init_1() {
 
 event4_rescue_1_ambient_flee_pt() {
   goal_structs = [];
-  goal_structs = GetStructArray("rescue_1_swimmers_goal", "targetname");
+  goal_structs = getStructArray("rescue_1_swimmers_goal", "targetname");
 
   for(i = 0; i < level.amb_surv_group_1.size; i++) {
     level.amb_surv_group_1[i] notify("stop treading");
@@ -7093,7 +7093,7 @@ check_and_print_damage(ship_number) {
 
 event2_spawn_drowners(_targetname) {
   drowning_drones_spawn = [];
-  drowning_drones_spawn = GetStructArray(_targetname, "targetname");
+  drowning_drones_spawn = getStructArray(_targetname, "targetname");
 
   drowning_drones = [];
   for(i = 0; i < drowning_drones_spawn.size; i++) {
@@ -7108,7 +7108,7 @@ event2_spawn_drowners(_targetname) {
 event2_spawn_rowboat_with_drones(_targetname, waittill_spawn) {
   level.plane_a waittill(waittill_spawn);
 
-  raft_struct = GetStructArray(_targetname, "targetname");
+  raft_struct = getStructArray(_targetname, "targetname");
 
   for(i = 0; i < raft_struct.size; i++) {
     pby_ok_to_spawn();
@@ -7117,7 +7117,7 @@ event2_spawn_rowboat_with_drones(_targetname, waittill_spawn) {
     raft.angles = raft_struct[i].angles;
 
     rescueboat_drones_spawn = [];
-    rescueboat_drones_spawn = GetStructArray(raft_struct[i].target, "targetname");
+    rescueboat_drones_spawn = getStructArray(raft_struct[i].target, "targetname");
 
     rescue_drones = [];
 
@@ -7946,7 +7946,7 @@ event2_setup_first_ship_drones_respond_tower() {
   level.plane_a waittill("boat_1_running_drones_aft");
 
   standing_drones_spawn = [];
-  standing_drones_spawn = GetStructArray("boat_1_con_drone_stand", "targetname");
+  standing_drones_spawn = getStructArray("boat_1_con_drone_stand", "targetname");
   standing_drones = [];
   for(i = 0; i < standing_drones_spawn.size; i++) {
     pby_ok_to_spawn("drone");
@@ -8003,7 +8003,7 @@ event2_setup_first_ship_drones_respond_tower() {
 
 event2_setup_first_ship_drones_respond_bow() {
   standing_drones_spawn = [];
-  standing_drones_spawn = GetStructArray("boat_1_bow_drone_stand", "targetname");
+  standing_drones_spawn = getStructArray("boat_1_bow_drone_stand", "targetname");
 
   wait(0.05);
 
@@ -8022,7 +8022,7 @@ event2_setup_second_ship_drones() {
   level thread event2_setup_second_ship_drones_con();
   level thread event2_setup_second_ship_drones_bow();
 
-  standing_drones_spawn = GetStructArray("boat_2_stand_drone", "targetname");
+  standing_drones_spawn = getStructArray("boat_2_stand_drone", "targetname");
 
   level waittill("first ship drones done");
 
@@ -8152,7 +8152,7 @@ event2_setup_second_ship_drones_bow() {
 event2_setup_third_ship_drones() {
   level thread event2_setup_third_ship_drones_con();
 
-  standing_drones_spawn = GetStructArray("boat_3_stand_drone", "targetname");
+  standing_drones_spawn = getStructArray("boat_3_stand_drone", "targetname");
 
   level waittill("second ship drones done");
 

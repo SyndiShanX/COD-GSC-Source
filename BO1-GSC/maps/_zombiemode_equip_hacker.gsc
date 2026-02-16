@@ -171,7 +171,7 @@ any_hackers_active() {
   return false;;
 }
 register_hackable(name, callback_func, qualifier_func) {
-  structs = getstructarray(name, "script_noteworthy");
+  structs = getStructArray(name, "script_noteworthy");
   if(!isDefined(structs)) {
     return;
   }
@@ -310,10 +310,10 @@ can_hack(hackable) {
       return false;
     }
   }
-  if(self throwbuttonpressed()) {
+  if(self throwbuttonPressed()) {
     return false;
   }
-  if(self FragButtonPressed()) {
+  if(self fragButtonPressed()) {
     return false;
   }
   if(isDefined(hackable._hack_qualifier_func)) {
@@ -350,7 +350,7 @@ can_hack(hackable) {
   return true;
 }
 is_hacking(hackable) {
-  return (can_hack(hackable) && self UseButtonPressed());
+  return (can_hack(hackable) && self useButtonPressed());
 }
 set_hack_hint_string() {
   if(isDefined(self._trigger)) {

@@ -99,7 +99,7 @@ escape_weapon_progression() {
 
 spawn_next_weapon(var_0, var_1, var_2) {
   var_3 = undefined;
-  var_4 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_4 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
   foreach(var_6 in var_4) {
     if(var_6.script_noteworthy == "waypoint_spot") {
       var_3 = var_6;
@@ -358,7 +358,7 @@ make_waypoint_to_door(var_0) {
   var_1 = newhudelem();
   var_1 setshader("waypoint_blitz_goal", 8, 8);
   var_1 setwaypoint(1, 1);
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_4 in var_2) {
     if(var_4.script_noteworthy == "waypoint_spot") {
       var_5 = spawn("script_origin", var_4.origin);
@@ -863,12 +863,12 @@ melee_strength_timer() {
       self.meleestrength = 0;
     }
 
-    if(self meleebuttonpressed() && !self getteamsize() && !self usebuttonpressed()) {
+    if(self meleeButtonPressed() && !self getteamsize() && !self useButtonPressed()) {
       var_1 = gettime();
       if(var_0 == 1) {
         var_0 = 0;
       }
-    } else if(!self meleebuttonpressed()) {
+    } else if(!self meleeButtonPressed()) {
       var_0 = 1;
     } else {
       var_0 = 0;
@@ -977,7 +977,7 @@ precachelb() {
 }
 
 getescapespawnpoint() {
-  return scripts\cp\cp_globallogic::getassignedspawnpoint(scripts\engine\utility::getstructarray("escape_player_start", "targetname"));
+  return scripts\cp\cp_globallogic::getassignedspawnpoint(scripts\engine\utility::getStructArray("escape_player_start", "targetname"));
 }
 
 setup_escape_hud(var_0) {
@@ -1050,7 +1050,7 @@ wave_num_timer_loop() {
 player_escape(var_0, var_1) {
   var_2 = "player_after_escape_pos";
   var_1 iprintlnbold("You successfully escaped from the park!");
-  var_3 = scripts\engine\utility::getstructarray(var_2, "targetname")[0];
+  var_3 = scripts\engine\utility::getStructArray(var_2, "targetname")[0];
   var_1 setorigin(var_3.origin);
   var_1.successfully_escaped = 1;
   test_win_condition(var_1);

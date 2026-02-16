@@ -171,7 +171,7 @@ clear_buildable_clientfield(slot) {
   self set_buildable_clientfield(slot, 0);
 }
 
-include_zombie_buildable(buiildable_struct) {
+#include_zombie_buildable(buiildable_struct) {
   if(!isDefined(level.zombie_include_buildables))
     level.zombie_include_buildables = [];
 
@@ -188,7 +188,7 @@ generate_zombie_buildable_piece(buildablename, modelname, radius, height, drop_o
 
   piece = spawnStruct();
   buildable_pieces = [];
-  buildable_pieces_structs = getstructarray(buildablename + "_" + modelname, "targetname");
+  buildable_pieces_structs = getStructArray(buildablename + "_" + modelname, "targetname");
 
   if(buildable_pieces_structs.size < 1)
     println("ERROR: Missing buildable piece <" + buildablename + "> <" + modelname + ">\\n");
@@ -1546,7 +1546,7 @@ player_continue_building(buildablezone, build_stub) {
   if(isDefined(self.screecher))
     return false;
 
-  if(!self usebuttonpressed())
+  if(!self useButtonPressed())
     return false;
 
   slot = build_stub.buildablestruct.buildable_slot;

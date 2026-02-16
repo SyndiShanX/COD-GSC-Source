@@ -2925,7 +2925,7 @@ vehicle_spawner_tool() {
         origin = player.origin + anglesToForward(player getplayerangles()) * 270;
         origin += (0, 0, 40);
 
-        if(player usebuttonpressed()) {
+        if(player useButtonPressed()) {
           dynamic_spawn_dummy_model hide();
           vehicle = spawnvehicle(vehicleassets[type_index].name, origin, player.angles, "<dev string:x3a3>");
           vehicle makevehicleusable();
@@ -2938,7 +2938,7 @@ vehicle_spawner_tool() {
           wait 0.3;
         }
 
-        if(player buttonpressed("<dev string:x3b9>")) {
+        if(player buttonPressed("<dev string:x3b9>")) {
           dynamic_spawn_dummy_model hide();
           type_index++;
 
@@ -2949,7 +2949,7 @@ vehicle_spawner_tool() {
           wait 0.3;
         }
 
-        if(player buttonpressed("<dev string:x3c6>")) {
+        if(player buttonPressed("<dev string:x3c6>")) {
           dynamic_spawn_dummy_model hide();
           type_index--;
 

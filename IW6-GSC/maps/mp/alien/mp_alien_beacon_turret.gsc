@@ -232,13 +232,13 @@ wait_for_disable_turret() {
 listen_for_player_use_button() {
   self endon("stop_watching");
 
-  while(self.owner usebuttonpressed())
+  while(self.owner useButtonPressed())
     wait 0.05;
 
   for(;;) {
     var_0 = 0;
 
-    while(self.owner usebuttonpressed()) {
+    while(self.owner useButtonPressed()) {
       var_0 = var_0 + 0.05;
       wait 0.05;
 

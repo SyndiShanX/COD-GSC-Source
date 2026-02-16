@@ -77,7 +77,7 @@ set_clientfield_code_callbacks() {
   }
 }
 
-include_zombie_powerup(powerup_name) {
+#include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups))
     level.zombie_include_powerups = [];
 

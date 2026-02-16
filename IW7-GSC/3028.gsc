@@ -409,7 +409,7 @@ func_104A7() {
 
     level.var_A056.var_A82D = scripts\engine\utility::array_add(level.var_A056.var_A82D, var_4);
     var_4.lights = [];
-    var_6 = scripts\engine\utility::getstructarray(var_4.targetname, "target");
+    var_6 = scripts\engine\utility::getStructArray(var_4.targetname, "target");
 
     foreach(var_8 in var_6) {
       if(var_8.script_parameters == "landing_pad_light") {

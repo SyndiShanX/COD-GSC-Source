@@ -1094,7 +1094,7 @@ graveyard_hind_find_best_perimeter(var_0, var_1) {
   var_4 = self.currentnode;
 
   for(;;) {
-    var_5 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_5 = common_scripts\utility::getStructArray(var_0, "targetname");
     var_3 = common_scripts\utility::get_array_of_closest(level.player.origin, var_5)[0];
 
     if(!isDefined(var_2) || var_2 != var_3) {

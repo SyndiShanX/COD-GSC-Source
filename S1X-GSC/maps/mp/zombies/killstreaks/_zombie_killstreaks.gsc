@@ -139,7 +139,7 @@ getnextscorestreakindex(var_0, var_1, var_2) {
 }
 
 setupdroppositions() {
-  level.zmcarepackagelandingspots = common_scripts\utility::getstructarray("carepackageDropPosition", "targetname");
+  level.zmcarepackagelandingspots = common_scripts\utility::getStructArray("carepackageDropPosition", "targetname");
 
   foreach(var_1 in level.zmcarepackagelandingspots) {
     var_1.indoors = isDefined(var_1.script_parameters) && var_1.script_parameters == "indoors";
@@ -181,7 +181,7 @@ getnextmoneyamount() {
 }
 
 roundlogic() {
-  level.zmcarepackagelandingspots = common_scripts\utility::getstructarray("carepackageDropPosition", "targetname");
+  level.zmcarepackagelandingspots = common_scripts\utility::getStructArray("carepackageDropPosition", "targetname");
 
   if(level.zmcarepackagelandingspots.size == 0) {
     return;

@@ -237,7 +237,7 @@ static_bodies() {
     maps\pakistan_util::static_bodies_disable("death_pose_", 5, 20);
   }
 
-  a_s_align_spots = getstructarray("death_pose_align", "script_noteworthy");
+  a_s_align_spots = getStructArray("death_pose_align", "script_noteworthy");
 
   foreach(s_align in a_s_align_spots) {
     s_align structdelete();
@@ -597,7 +597,7 @@ alley_player_jump() {
     trigger_wait("transition_to_anthem_approach");
 
     while(level.player istouching(t_anim)) {
-      if(level.player jumpbuttonpressed()) {
+      if(level.player jumpbuttonPressed()) {
         setsaveddvar("mantle_enable", 0);
         level thread player_jump_into_water();
         flag_set("start_player_jump_water");
@@ -1837,7 +1837,7 @@ skipto_sewer_exterior_bodies() {
     maps\pakistan_util::static_bodies_disable("death_pose_", 5, 20);
   }
 
-  a_s_align_spots = getstructarray("death_pose_align", "script_noteworthy");
+  a_s_align_spots = getStructArray("death_pose_align", "script_noteworthy");
 
   foreach(s_align in a_s_align_spots) {
     s_align structdelete();

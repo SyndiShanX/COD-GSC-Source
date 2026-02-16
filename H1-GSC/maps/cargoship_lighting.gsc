@@ -173,7 +173,7 @@ activate_lights(var_0, var_1, var_2) {
     return;
   }
   var_3 = getEntArray(var_0, "targetname");
-  var_4 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_4 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_6 in var_3)
   var_6 set_light_intensity(!var_1, var_2);

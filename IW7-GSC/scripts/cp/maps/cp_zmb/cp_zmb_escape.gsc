@@ -25,7 +25,7 @@ init_escape_interactions() {
 }
 
 get_escape_exit_interactions() {
-  return scripts\engine\utility::getstructarray("escape_exit", "script_noteworthy");
+  return scripts\engine\utility::getStructArray("escape_exit", "script_noteworthy");
 }
 
 delete_zombie_gamemode_entities() {
@@ -46,13 +46,13 @@ delete_zombie_gamemode_entities() {
 }
 
 delete_all_doors() {
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_2 in var_0) {
     if(!isDefined(var_2.target)) {
       continue;
     }
 
-    var_3 = scripts\engine\utility::getstructarray(var_2.script_noteworthy, "script_noteworthy");
+    var_3 = scripts\engine\utility::getStructArray(var_2.script_noteworthy, "script_noteworthy");
     foreach(var_5 in var_3) {
       if(!isDefined(var_5.target)) {
         continue;
@@ -116,7 +116,7 @@ spawn_escape_entities() {
   var_0 movez(-1024, 0.1);
   var_0 waittill("movedone");
   var_0 disconnectpaths();
-  var_1 = scripts\engine\utility::getstructarray("escape_1_blocker", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("escape_1_blocker", "targetname");
   level.escape_barriers = [];
   foreach(var_5, var_3 in var_1) {
     var_4 = spawn("script_model", var_3.origin);
@@ -168,7 +168,7 @@ setup_door(var_0) {
   var_0 waittill("movedone");
   var_0 disconnectpaths();
   var_0.panels = [];
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     if(var_3.script_noteworthy == "waypoint_spot") {
       continue;

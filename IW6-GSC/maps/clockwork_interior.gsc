@@ -317,7 +317,7 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
       }
     }
 
-    if((level.player adsbuttonpressed() || level.player attackbuttonpressed()) && level.player getcurrentweapon() == "drill_press" && !level.player isswitchingweapon()) {
+    if((level.player adsButtonPressed() || level.player attackButtonPressed()) && level.player getcurrentweapon() == "drill_press" && !level.player isswitchingweapon()) {
       if(isDefined(var_10)) {
         var_10 maps\_utility::hint_delete();
         var_10 = undefined;
@@ -353,7 +353,7 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
         var_9 = 0;
       }
 
-      if(level.player attackbuttonpressed() && level.player getcurrentweapon() == "drill_press" && !level.player isswitchingweapon()) {
+      if(level.player attackButtonPressed() && level.player getcurrentweapon() == "drill_press" && !level.player isswitchingweapon()) {
         if(isDefined(var_11)) {
           var_11 maps\_utility::hint_delete();
           var_11 = undefined;
@@ -553,10 +553,10 @@ handle_drilling(var_0, var_1) {
   while(!common_scripts\utility::flag(var_0) && !common_scripts\utility::flag("drill_toofar")) {
     common_scripts\utility::flag_wait(var_1);
 
-    if((level.player adsbuttonpressed() || level.player attackbuttonpressed()) && level.player getcurrentweapon() == "drill_press" && !level.player isswitchingweapon()) {
+    if((level.player adsButtonPressed() || level.player attackButtonPressed()) && level.player getcurrentweapon() == "drill_press" && !level.player isswitchingweapon()) {
       var_15 = cinematicgetframe();
 
-      if(level.player attackbuttonpressed()) {
+      if(level.player attackButtonPressed()) {
         common_scripts\utility::flag_set("aud_drilling_door");
         var_13 = var_13 + var_8;
         var_11.angles = var_11.angles + (45, 0, 0);
@@ -653,7 +653,7 @@ drillthrough_plate_sound(var_0, var_1) {
     level.backplate_sound_on = 1;
     common_scripts\utility::flag_wait("drill_attached");
 
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       var_0 playSound(var_1);
       level waittill("stop_drilling_sounds");
       var_0 stopsounds();
@@ -702,7 +702,7 @@ handle_misc_drill_details() {
       level.player setactionslot(1, "nightvision");
     }
 
-    if(var_4 == "drill_press" && level.player attackbuttonpressed() && !level.aiming_at_ally) {
+    if(var_4 == "drill_press" && level.player attackButtonPressed() && !level.aiming_at_ally) {
       common_scripts\utility::waitframe();
 
       if(var_1 != 1) {
@@ -726,8 +726,8 @@ handle_misc_drill_details() {
       level.player givemaxammo(var_4);
       level.player setweaponammoclip(var_4, weaponclipsize(var_4));
 
-      if(level.player attackbuttonpressed()) {
-        if((common_scripts\utility::flag("drill1_start") || common_scripts\utility::flag("drill2_start")) && (level.player adsbuttonpressed() || level.player attackbuttonpressed())) {
+      if(level.player attackButtonPressed()) {
+        if((common_scripts\utility::flag("drill1_start") || common_scripts\utility::flag("drill2_start")) && (level.player adsButtonPressed() || level.player attackButtonPressed())) {
           thread maps\clockwork_code::screenshakefade(0.15, 0.5);
           level.player playrumbleonentity("drill_vault");
         } else if(!level.aiming_at_ally) {
@@ -736,7 +736,7 @@ handle_misc_drill_details() {
         }
       }
 
-      if(level.player adsbuttonpressed() || level.player attackbuttonpressed()) {
+      if(level.player adsButtonPressed() || level.player attackButtonPressed()) {
         if(var_2 == 0) {
           var_3 = 0;
           var_2 = 1;

@@ -4,8 +4,8 @@
 **********************************************/
 
 init_atm() {
-  var_0 = scripts\engine\utility::getstructarray("atm_deposit", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("atm_withdrawal", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("atm_deposit", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("atm_withdrawal", "script_noteworthy");
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
   level.atm_amount_deposited = 0;
   level.atm_transaction_amount = 1000;
@@ -20,7 +20,7 @@ func_3C5A(var_0) {
     case "atm_deposit":
       var_1 = scripts\engine\utility::getstruct("atm_deposit_machine", "targetname");
       var_1 thread func_1131B(var_0, var_1, "zmb_atm_machine");
-      var_2 = scripts\engine\utility::getstructarray("atm_deposit_screen", "targetname");
+      var_2 = scripts\engine\utility::getStructArray("atm_deposit_screen", "targetname");
       var_2 = sortbydistance(var_2, var_0.origin);
       var_3 = var_2[0];
       var_4 = spawn("script_model", var_3.origin);
@@ -32,7 +32,7 @@ func_3C5A(var_0) {
     case "atm_withdrawal":
       var_5 = scripts\engine\utility::getstruct("atm_withdrawal_machine", "targetname");
       var_5 thread func_1131B(var_0, var_5, "zmb_atm_withdraw");
-      var_2 = scripts\engine\utility::getstructarray("atm_withdrawal_screen", "targetname");
+      var_2 = scripts\engine\utility::getStructArray("atm_withdrawal_screen", "targetname");
       var_2 = sortbydistance(var_2, var_0.origin);
       var_3 = var_2[0];
       var_4 = spawn("script_model", var_3.origin);

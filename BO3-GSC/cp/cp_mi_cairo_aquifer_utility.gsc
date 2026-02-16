@@ -2308,7 +2308,7 @@ function watch_player_lockon() {
           best_enemy.lockon_time = gettime() + lockon_ms;
         }
         if(gettime() > best_enemy.lockon_time) {
-          if(self adsbuttonpressed()) {
+          if(self adsButtonPressed()) {
             self handle_player_lockon(best_enemy);
             continue;
           }
@@ -2331,7 +2331,7 @@ function handle_player_lockon(enemy) {
   self.pvtol attachpath(enemy.currentnode);
   wait(lerptime);
   self.pvtol startpath();
-  while(self adsbuttonpressed() && isalive(enemy)) {
+  while(self adsButtonPressed() && isalive(enemy)) {
     wait(0.05);
   }
   self.pvtol clearlookatent();
@@ -2423,10 +2423,10 @@ function function_9baa6cb5() {
     self.ev_state = 0;
   }
   while(true) {
-    if(self actionslotfourbuttonpressed()) {
+    if(self actionslotfourbuttonPressed()) {
       self.ev_state = !(isDefined(self.ev_state) && self.ev_state);
       self oed::ev_activate_on_player(self.ev_state);
-      while(self actionslotfourbuttonpressed()) {
+      while(self actionslotfourbuttonPressed()) {
         wait(0.05);
       }
     } else {

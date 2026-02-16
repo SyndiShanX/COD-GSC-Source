@@ -54,7 +54,7 @@ build_struct_targeted_origins() {
   if(!isDefined(self.target)) {
     return;
   }
-  self.targeted = getstructarray(self.target, "targetname");
+  self.targeted = getStructArray(self.target, "targetname");
 }
 drone_triggers_think() {
   self endon("death");

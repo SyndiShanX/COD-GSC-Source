@@ -902,7 +902,7 @@ spectator_respawn() {
 
 check_for_valid_spawn_near_team(revivee) {
   players = get_players();
-  spawn_points = getstructarray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
 
   if(spawn_points.size == 0) {
     return undefined;
@@ -912,7 +912,7 @@ check_for_valid_spawn_near_team(revivee) {
     if(is_player_valid(players[i])) {
       for(j = 0; j < spawn_points.size; j++) {
         if(DistanceSquared(players[i].origin, spawn_points[j].origin) < (1000 * 1000)) {
-          spawn_array = getstructarray(spawn_points[j].target, "targetname");
+          spawn_array = getStructArray(spawn_points[j].target, "targetname");
 
           for(k = 0; k < spawn_array.size; k++) {
             if(spawn_array[k].script_int == (revivee.entity_num + 1)) {
@@ -1962,7 +1962,7 @@ adjust_angles_to_player(stumble_angles) {
 }
 
 coop_player_spawn_placement() {
-  structs = getstructarray("initial_spawn_points", "targetname");
+  structs = getStructArray("initial_spawn_points", "targetname");
 
   flag_wait("all_players_connected");
 
@@ -2280,7 +2280,7 @@ player_intermission() {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");

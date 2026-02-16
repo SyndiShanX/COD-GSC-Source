@@ -208,7 +208,7 @@ function_665b4fa6() {
     while(b_using) {
       b_using = 1;
 
-      if(!e_who usebuttonpressed() || !zm_utility::can_use(e_who) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !e_who istouching(self.s_unitrigger.trigger)) {
+      if(!e_who useButtonPressed() || !zm_utility::can_use(e_who) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !e_who istouching(self.s_unitrigger.trigger)) {
         b_using = 0;
         break;
       }

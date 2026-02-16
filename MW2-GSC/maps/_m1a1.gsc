@@ -52,7 +52,7 @@ put this in your GSC:
 maps\_m1a1::main( "vehicle_m1a1_abrams" );
 
 and these lines in your CSV:
-include,vehicle_m1a1_abrams_m1a1
+#include,vehicle_m1a1_abrams_m1a1
 sound,vehicle_abrams,vehicle_standard,all_sp
 
 defaultmdl="vehicle_m1a1_abrams"default:"vehicletype" "m1a1"default:"script_team" "allies"*/
@@ -63,7 +63,7 @@ put this in your GSC:
 maps\_m1a1_player::main( "vehicle_m1a1_abrams" );
 
 and these lines in your CSV:
-include,vehicle_m1a1_abrams_m1a1_player
+#include,vehicle_m1a1_abrams_m1a1_player
 sound,vehicle_abrams,vehicle_standard,all_sp
 
 defaultmdl="vehicle_m1a1_abrams"default:"vehicletype" "m1a1_player"default:"script_team" "allies"

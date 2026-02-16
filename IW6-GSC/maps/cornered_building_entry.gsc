@@ -825,10 +825,10 @@ watch_player_button_press() {
     if(common_scripts\utility::flag("player_leave_upload")) {
       return;
     }
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       var_0 = 0;
 
-      while(level.player attackbuttonpressed()) {
+      while(level.player attackButtonPressed()) {
         common_scripts\utility::flag_set("player_start_upload");
         common_scripts\utility::flag_clear("player_stop_upload");
         wait 0.05;
@@ -1404,7 +1404,7 @@ shut_server_rack() {
 }
 
 festival_spotlights() {
-  var_0 = common_scripts\utility::getstructarray("festival_spotlight", "targetname");
+  var_0 = common_scripts\utility::getStructArray("festival_spotlight", "targetname");
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -2040,7 +2040,7 @@ watch_for_player_to_shoot_while_enemy_in_volume(var_0, var_1, var_2) {
 
   while(!common_scripts\utility::flag(var_2)) {
     if(self istouching(var_0) && level.player istouching(var_0)) {
-      if(level.player attackbuttonpressed() && !isDefined(level.player.is_in_upload) && level.player getcurrentweapon() != "computer_idf") {
+      if(level.player attackButtonPressed() && !isDefined(level.player.is_in_upload) && level.player getcurrentweapon() != "computer_idf") {
         if(isDefined(level.allow_fire)) {
           if(!common_scripts\utility::flag(var_1))
             common_scripts\utility::flag_set(var_1);
@@ -2651,7 +2651,7 @@ virus_deploy_bink() {
 }
 
 virus_deploy() {
-  if(!level.player attackbuttonpressed()) {
+  if(!level.player attackButtonPressed()) {
     level.player notifyonplayercommand("deploy", "+attack");
     level.player notifyonplayercommand("deploy", "+attack_akimbo_accessible");
 
@@ -2948,7 +2948,7 @@ player_initiates_inverted_kill() {
           level.player maps\_utility::display_hint_timeout("inverted_kill", 5);
       }
 
-      if(level.player meleebuttonpressed() || level.player attackbuttonpressed()) {
+      if(level.player meleeButtonPressed() || level.player attackButtonPressed()) {
         if(!common_scripts\utility::flag("player_jumping")) {
           if(!common_scripts\utility::flag("inverted_kill_fail_kill_player")) {
             break;
@@ -3094,7 +3094,7 @@ player_shoots(var_0) {
     common_scripts\utility::flag_wait(var_0);
 
   for(;;) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       common_scripts\utility::flag_set("player_shot");
       break;
     }

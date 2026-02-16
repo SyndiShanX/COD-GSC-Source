@@ -23,7 +23,7 @@ init_ee_music_quest() {
 
 init_samantha_step_one() {
   level scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstructarray("metal_dish_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("metal_dish_pos", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = scripts\cp\utility::_id_E190("s4_zm_metal_plate", var_2.origin, var_2.angles);
@@ -51,7 +51,7 @@ take_damage_listener() {
 
 do_samantha_step_one() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("metal_dish_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("metal_dish_pos", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     level waittill("hit_metal_dish");
@@ -147,7 +147,7 @@ init_samantha_step_two() {}
 
 do_samantha_step_two() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("doll_target_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("doll_target_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
 
   while(scripts\engine\utility::_id_5C00("ee_music_is_busy")) {

@@ -146,7 +146,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_fabric" );
 
 and these lines in your CSV:
-include,vehicle_uaz_fabric_uaz
+#include,vehicle_uaz_fabric_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_fabric"default:"vehicletype" "uaz"default:"script_team" "axis"*/
@@ -157,7 +157,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_hardtop" );
 
 and these lines in your CSV:
-include,vehicle_uaz_hardtop_uaz
+#include,vehicle_uaz_hardtop_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_hardtop"default:"vehicletype" "uaz"default:"script_team" "axis"*/
@@ -168,7 +168,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_hardtop_thermal" );
 
 and these lines in your CSV:
-include,vehicle_uaz_hardtop_thermal_uaz
+#include,vehicle_uaz_hardtop_thermal_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_hardtop_thermal"default:"vehicletype" "uaz"default:"script_team" "axis"*/
@@ -179,7 +179,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_open" );
 
 and these lines in your CSV:
-include,vehicle_uaz_open_uaz
+#include,vehicle_uaz_open_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_open"default:"vehicletype" "uaz"default:"script_team" "axis"*/
@@ -190,7 +190,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_open_for_ride" );
 
 and these lines in your CSV:
-include,vehicle_uaz_open_for_ride_uaz
+#include,vehicle_uaz_open_for_ride_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_open_for_ride"default:"vehicletype" "uaz"*/
@@ -201,7 +201,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_open_destructible", "uaz_physics" );
 
 and these lines in your CSV:
-include,vehicle_uaz_open_destructible
+#include,vehicle_uaz_open_destructible
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_uaz,vehicle_standard,all_sp
 
@@ -213,7 +213,7 @@ put this in your GSC:
 maps\_uaz_ac130::main( "vehicle_uaz_hardtop_thermal" );
 
 and these lines in your CSV:
-include,vehicle_uaz_hardtop_thermal_uaz_ac130
+#include,vehicle_uaz_hardtop_thermal_uaz_ac130
 
 defaultmdl="vehicle_uaz_hardtop_thermal"default:"vehicletype" "uaz_ac130"*/
 
@@ -224,7 +224,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_winter_destructible" );
 
 and these lines in your CSV:
-include,vehicle_uaz_winter_destructible
+#include,vehicle_uaz_winter_destructible
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_uaz,vehicle_standard,all_sp
 
@@ -236,7 +236,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_winter_destructible", "uaz_physics" );
 
 and these lines in your CSV:
-include,vehicle_uaz_winter_destructible
+#include,vehicle_uaz_winter_destructible
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_uaz,vehicle_standard,all_sp
 
@@ -248,7 +248,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_winter" );
 
 and these lines in your CSV:
-include,vehicle_uaz_winter
+#include,vehicle_uaz_winter
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_winter"default:"vehicletype" "uaz"*/
@@ -259,7 +259,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_light" );
 
 and these lines in your CSV:
-include,vehicle_uaz_light
+#include,vehicle_uaz_light
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_light"default:"vehicletype" "uaz"*/
@@ -270,7 +270,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_open", "uaz_physics" );
 
 and these lines in your CSV:
-include,vehicle_uaz_open_uaz
+#include,vehicle_uaz_open_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 
@@ -282,7 +282,7 @@ put this in your GSC:
 maps\_uaz::main( "vehicle_uaz_hardtop", "uaz_physics" );
 
 and these lines in your CSV:
-include,vehicle_uaz_hardtop_uaz
+#include,vehicle_uaz_hardtop_uaz
 sound,vehicle_uaz,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 

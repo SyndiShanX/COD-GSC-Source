@@ -172,7 +172,7 @@ wait_and_remove(stub, piece) {
 }
 
 generatebuildabletarps() {
-  struct_locations = getstructarray("buildables_tarp", "targetname");
+  struct_locations = getStructArray("buildables_tarp", "targetname");
   level.buildable_tarps = [];
 
   foreach(struct in struct_locations) {

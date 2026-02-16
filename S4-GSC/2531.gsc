@@ -1495,7 +1495,7 @@ _id_101CB(var_0, var_1, var_2) {
   var_1 setclientomnvar("ui_veh_exit_button_holdtime", 0);
 
   for(;;) {
-    if(!var_1 usebuttonpressed()) {
+    if(!var_1 useButtonPressed()) {
       var_4 = 1;
     }
 
@@ -1515,7 +1515,7 @@ _id_101CB(var_0, var_1, var_2) {
     var_9 = 0;
     var_1 setclientomnvar("ui_veh_exit_button_holdtime", 0);
 
-    while(var_1 usebuttonpressed()) {
+    while(var_1 useButtonPressed()) {
       var_1 _meth_874E();
       var_1 _meth_8751();
       var_9 = 1;
@@ -1536,7 +1536,7 @@ _id_101CB(var_0, var_1, var_2) {
         return;
       } else if(var_15 && var_7 >= var_6) {
         var_1 cancelreloading();
-        var_1 reloadbuttonpressed();
+        var_1 reloadbuttonPressed();
       }
 
       wait(var_5);
@@ -1546,7 +1546,7 @@ _id_101CB(var_0, var_1, var_2) {
       return;
     } else if(var_9) {
       var_1 cancelreloading();
-      var_1 reloadbuttonpressed();
+      var_1 reloadbuttonPressed();
     }
 
     waitframe();

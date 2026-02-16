@@ -190,7 +190,7 @@ ride_start(optional_players_array, optional_max_riders) {
   pathstart = getEntArray(targetname, "targetname");
   assertEx(pathstart.size <= 1, "too many script_origins with targetname \"" + targetname + "\" ");
   if(!pathstart.size) {
-    pathstart = getstructarray("heli_ride_in", "targetname");
+    pathstart = getStructArray("heli_ride_in", "targetname");
     assertEx(pathstart.size <= 1, "too many script_structs with targetname \"heli_ride_in\" ");
     if(!pathstart.size)
       assertMSG("no helicopter paths with \"heli_ride_in\", can't start ride");

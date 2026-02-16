@@ -11,7 +11,7 @@ unlockspecialist() {
   if(level.script == "europa") {
     wait(1);
     var_0 = gettime() + 10000;
-    while(gettime() < var_0 && level.player buttonpressed("BUTTON_LSTICK") || level.player buttonpressed("m")) {
+    while(gettime() < var_0 && level.player buttonPressed("BUTTON_LSTICK") || level.player buttonPressed("m")) {
       wait(0.05);
     }
 
@@ -731,7 +731,7 @@ func_86C9() {
 }
 
 func_86C8() {
-  return level.player usebuttonpressed();
+  return level.player useButtonPressed();
 }
 
 func_86CF(var_0) {
@@ -2250,7 +2250,7 @@ func_2C88() {
     return 0;
   }
 
-  if(level.player fragbuttonpressed()) {
+  if(level.player fragButtonPressed()) {
     return 0;
   }
 
@@ -3014,7 +3014,7 @@ delete_specialist_crates() {
 specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
   var_5 = (0, 0, 13);
   var_1 = var_1 + var_5;
-  var_6 = scripts\engine\utility::getstructarray("equipment_pickup", "targetname");
+  var_6 = scripts\engine\utility::getStructArray("equipment_pickup", "targetname");
   var_7 = scripts\engine\utility::getclosest(var_1, var_6);
   if(!isDefined(var_3)) {
     var_3 = var_7.angles;
@@ -3059,7 +3059,7 @@ specialist_crate_move(var_0, var_1, var_2, var_3, var_4) {
 specialist_crate_delete(var_0) {
   var_1 = (0, 0, 13);
   var_0 = var_0 + var_1;
-  var_2 = scripts\engine\utility::getstructarray("equipment_pickup", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("equipment_pickup", "targetname");
   var_3 = scripts\engine\utility::getclosest(var_0, var_2);
   var_4 = getEntArray("specialist_mode_only", "targetname");
   var_5 = sortbydistance(var_4, var_3.origin);

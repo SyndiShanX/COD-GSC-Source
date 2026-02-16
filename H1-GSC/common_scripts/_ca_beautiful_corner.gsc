@@ -151,7 +151,7 @@ beautiful_view_init() {
 
 beautiful_view_move_request() {
   for(;;) {
-    while(!(level.player buttonpressed("DPAD_UP") || level.player buttonpressed("HOME")))
+    while(!(level.player buttonPressed("DPAD_UP") || level.player buttonPressed("HOME")))
       wait 0.05;
 
     if(!common_scripts\utility::flag("beautiful_view_transitioning")) {
@@ -179,7 +179,7 @@ beautiful_view_get_next_position() {
 
 beautiful_view_state_request() {
   for(;;) {
-    while(!(level.player buttonpressed("DPAD_DOWN") || level.player buttonpressed("END")))
+    while(!(level.player buttonPressed("DPAD_DOWN") || level.player buttonPressed("END")))
       wait 0.05;
 
     if(!common_scripts\utility::flag("beautiful_view_transitioning")) {

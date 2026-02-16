@@ -7,8 +7,8 @@ init() {
   setdvarifuninitialized("#x39fca73e956658afc", 360.0);
   setdvarifuninitialized("#x34add1d7c72c236ce", 460.0);
   setdvarifuninitialized("#x3b38d52e6a43a0ad0", 540.0);
-  level._id_1C2C = scripts\engine\utility::getstructarray("ascend_begin", "script_noteworthy");
-  level._id_480B = scripts\engine\utility::getstructarray("descend_begin", "script_noteworthy");
+  level._id_1C2C = scripts\engine\utility::getStructArray("ascend_begin", "script_noteworthy");
+  level._id_480B = scripts\engine\utility::getStructArray("descend_begin", "script_noteworthy");
   level._id_1C2F = [];
 
   foreach(var_1 in level._id_1C2C) {

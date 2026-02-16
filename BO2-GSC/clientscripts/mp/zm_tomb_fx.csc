@@ -218,7 +218,7 @@ chamber_rocks_think() {
 trap_fx_monitor(str_name, str_side) {
   while(true) {
     level waittill(str_name);
-    a_trap_points = getstructarray(str_name, "targetname");
+    a_trap_points = getStructArray(str_name, "targetname");
 
     for(i = 0; i < a_trap_points.size; i++) {
       if(str_name == "flame_trap")

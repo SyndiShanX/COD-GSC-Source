@@ -701,7 +701,7 @@ deathMariachiEndMusic() {
 zulu_breach_init() {
   wait 0.5;
 
-  breaches = getstructarray("breach", "targetname");
+  breaches = getStructArray("breach", "targetname");
 
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");
@@ -709,7 +709,7 @@ zulu_breach_init() {
     p DisconnectNode();
   }
 
-  proxy = getstructarray("breach_proxy", "targetname");
+  proxy = getStructArray("breach_proxy", "targetname");
   foreach(p in proxy) {
     if(!isDefined(p.target))
       continue;

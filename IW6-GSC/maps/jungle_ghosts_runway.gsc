@@ -12,7 +12,7 @@ runway_setup() {
 }
 
 runway_bad_places() {
-  var_0 = common_scripts\utility::getstructarray("escape_badplace", "targetname");
+  var_0 = common_scripts\utility::getStructArray("escape_badplace", "targetname");
 
   foreach(var_2 in var_0)
   badplace_cylinder("bp", 0, var_2.origin, var_2.radius, var_2.height, "allies");
@@ -575,7 +575,7 @@ runway_apache_logic(var_0) {
       maps\_utility::trigger_wait_targetname("river_slide_trig");
 
       if(common_scripts\utility::flag("choppers_saw_player")) {
-        var_14 = common_scripts\utility::getstructarray("waterfall_missile_impact", "targetname");
+        var_14 = common_scripts\utility::getStructArray("waterfall_missile_impact", "targetname");
         wait 1;
         thread escape_apache_shoot_missiles_at_structs(var_14);
       }
@@ -728,7 +728,7 @@ get_target_structs() {
   var_0 = [];
 
   if(isDefined(self.target))
-    var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   return var_0;
 }
@@ -913,8 +913,8 @@ escape_friendly_movement(var_0) {
     case "river":
       common_scripts\utility::flag_wait("escape_halfway");
       common_scripts\utility::array_thread(level.squad, maps\_utility::enable_ai_color);
-      var_7 = common_scripts\utility::getstructarray("waterfall_jump", "targetname");
-      var_8 = common_scripts\utility::getstructarray("waterfall_ai_land", "targetname");
+      var_7 = common_scripts\utility::getStructArray("waterfall_jump", "targetname");
+      var_8 = common_scripts\utility::getStructArray("waterfall_ai_land", "targetname");
       common_scripts\utility::flag_wait("player_at_river");
 
       foreach(var_4, var_3 in level.squad)
@@ -1575,7 +1575,7 @@ escape_setup_trees() {
   common_scripts\utility::array_thread(var_2, ::escape_dest_tree_logic);
   var_3 = getEntArray("do_tree_damage", "targetname");
   common_scripts\utility::array_thread(var_3, ::escape_do_tree_damage_trig_logic, var_0);
-  var_4 = common_scripts\utility::getstructarray("player_radius_damage", "targetname");
+  var_4 = common_scripts\utility::getStructArray("player_radius_damage", "targetname");
   common_scripts\utility::array_thread(var_4, ::radius_damage_when_player_is_close);
 }
 

@@ -409,7 +409,7 @@ chopper_fail_mission() {
       var_3 = level.player getcurrentweapon();
       var_4 = distancesquared(level.player.origin, var_0.origin);
 
-      if(var_4 < var_2 && level.player attackbuttonpressed() && var_3 != "c4") {
+      if(var_4 < var_2 && level.player attackButtonPressed() && var_3 != "c4") {
         var_5 = anglesToForward(level.player getplayerangles());
         var_6 = vectornormalize(var_0.origin - level.player.origin);
         var_7 = vectordot(var_6, var_5);
@@ -882,7 +882,7 @@ base_lights() {
 }
 
 base_fx_on() {
-  var_0 = common_scripts\utility::getstructarray("icbm_post_FX_origin", "targetname");
+  var_0 = common_scripts\utility::getStructArray("icbm_post_FX_origin", "targetname");
   var_1 = 0.05;
   var_2 = 1.5;
 

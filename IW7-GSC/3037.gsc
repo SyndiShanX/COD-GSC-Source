@@ -594,7 +594,7 @@ func_A277() {
   var_2 = 0;
 
   for(;;) {
-    if(level.player fragbuttonpressed() && !var_2 && !level.player scripts\sp\utility::func_65DB("disable_jackal_missiles")) {
+    if(level.player fragButtonPressed() && !var_2 && !level.player scripts\sp\utility::func_65DB("disable_jackal_missiles")) {
       if(self.missiles.count <= 0) {
         func_A273();
       } else {
@@ -604,7 +604,7 @@ func_A277() {
       }
     }
 
-    if(level.player fragbuttonpressed()) {
+    if(level.player fragButtonPressed()) {
       var_2 = 1;
     } else {
       var_2 = 0;

@@ -611,7 +611,7 @@ asd_intro_destruction() {
 
 ceiling_rappelers() {
   flag_wait("start_ceiling_rappelers");
-  a_rappel_glass_structs = getstructarray("rappel_glass_structs", "targetname");
+  a_rappel_glass_structs = getStructArray("rappel_glass_structs", "targetname");
 
   foreach(glass_struct in a_rappel_glass_structs) {
     radiusdamage(glass_struct.origin, 100, 400, 200);

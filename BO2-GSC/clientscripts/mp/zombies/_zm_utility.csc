@@ -202,7 +202,7 @@ waittill_notify_or_timeout(msg, timer) {
   wait(timer);
 }
 
-include_powerup(powerup_name) {
+#include_powerup(powerup_name) {
   clientscripts\mp\zombies\_zm_powerups::include_zombie_powerup(powerup_name);
 }
 
@@ -227,7 +227,7 @@ is_createfx_active() {
   return level.createfx_enabled;
 }
 
-include_buildable(buildable_name) {
+#include_buildable(buildable_name) {
   clientscripts\mp\zombies\_zm_buildables::include_zombie_buildable(buildable_name);
 }
 

@@ -118,7 +118,7 @@ function activatercbomb(hardpointtype) {
   if(!player killstreakrules::iskillstreakallowed(hardpointtype, player.team)) {
     return false;
   }
-  if(player usebuttonpressed()) {
+  if(player useButtonPressed()) {
     return false;
   }
   placement = calculatespawnorigin(self.origin, self.angles);
@@ -192,7 +192,7 @@ function watchdetonation() {
   rcbomb = self;
   rcbomb endon("rcbomb_shutdown");
   rcbomb endon("death");
-  while(!rcbomb.owner attackbuttonpressed()) {
+  while(!rcbomb.owner attackButtonPressed()) {
     wait(0.05);
   }
   rcbomb notify("rcbomb_shutdown");

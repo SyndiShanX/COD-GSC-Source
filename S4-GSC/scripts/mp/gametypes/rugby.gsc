@@ -124,7 +124,7 @@ _id_827E() {
 
 _id_818D() {
   var_0 = level._id_C98B;
-  var_1 = scripts\engine\utility::getstructarray("rugby_endzone", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("rugby_endzone", "targetname");
 
   foreach(var_3 in var_1) {
     _id_818C(var_3);
@@ -160,7 +160,7 @@ _id_818C(var_0) {
 
 _id_8201() {
   var_0 = level._id_C98B;
-  var_1 = scripts\engine\utility::getstructarray("rugby_jugg_crate", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("rugby_jugg_crate", "targetname");
 
   foreach(var_3 in var_1) {
     var_0._id_8C30[var_0._id_8C30.size] = var_3;

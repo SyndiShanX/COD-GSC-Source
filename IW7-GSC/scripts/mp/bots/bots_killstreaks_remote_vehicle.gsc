@@ -36,7 +36,7 @@ remote_vehicle_setup() {
   level.bot_ks_funcs["odin_perform_action"]["odin_support"] = ::odin_support_perform_action;
   level.bot_ks_funcs["odin_get_target"]["odin_assault"] = ::odin_assault_get_target;
   level.bot_ks_funcs["odin_get_target"]["odin_support"] = ::odin_support_get_target;
-  var_0 = scripts\engine\utility::getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("so_chopper_boss_path_struct", "script_noteworthy");
   level.bot_heli_nodes = [];
   foreach(var_2 in var_0) {
     if(isDefined(var_2.destroynavobstacle)) {

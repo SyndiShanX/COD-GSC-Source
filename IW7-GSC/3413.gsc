@@ -219,7 +219,7 @@ player_zipline(var_0, var_1) {
   var_9 = var_0 func_816D();
   var_0 givegoproattachments("viewmodel_arms_invisi");
   var_10 = var_2;
-  var_11 = scripts\engine\utility::getstructarray(var_10.target, "targetname");
+  var_11 = scripts\engine\utility::getStructArray(var_10.target, "targetname");
   var_12 = scripts\engine\utility::random(var_11);
   var_13 = distance(var_10.origin, var_5);
   var_1 = var_13 / 500;
@@ -227,7 +227,7 @@ player_zipline(var_0, var_1) {
   var_0 thread func_ECC7(var_1);
   wait(var_1);
   for(var_10 = var_12; isDefined(var_10.target); var_10 = var_12) {
-    var_11 = scripts\engine\utility::getstructarray(var_10.target, "targetname");
+    var_11 = scripts\engine\utility::getStructArray(var_10.target, "targetname");
     var_12 = scripts\engine\utility::random(var_11);
     var_5 = var_12.origin;
     var_13 = distance(var_10.origin, var_5);

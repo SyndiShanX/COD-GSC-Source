@@ -289,7 +289,7 @@ slasher_trapped(var_0) {
 }
 
 get_trap_trigger() {
-  var_0 = scripts\engine\utility::getstructarray("memory_trap_trigger", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_trap_trigger", "script_noteworthy");
   var_1 = [];
   foreach(var_3 in var_0) {
     if(scripts\engine\utility::istrue(var_3.completed)) {
@@ -305,7 +305,7 @@ get_trap_trigger() {
 }
 
 init_memory_traps() {
-  var_0 = scripts\engine\utility::getstructarray("memory_trap_trigger", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("memory_trap_trigger", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.completed = 0;
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
@@ -313,7 +313,7 @@ init_memory_traps() {
 }
 
 set_up_trap_trigger(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_0.floating_charm_locs = [];
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
@@ -964,7 +964,7 @@ wait_clear_wave() {
 }
 
 reg_spawns() {
-  level.super_slasher_zombie_spawn_loc = scripts\engine\utility::getstructarray("super_slasher_zombie_spawn_loc", "script_noteworthy");
+  level.super_slasher_zombie_spawn_loc = scripts\engine\utility::getStructArray("super_slasher_zombie_spawn_loc", "script_noteworthy");
   var_0 = gettime();
   foreach(var_2 in level.super_slasher_zombie_spawn_loc) {
     var_2.previous_used_time_stamp = var_0;
@@ -1058,7 +1058,7 @@ get_least_targeted_player() {
 
 get_spawn_shockwave(var_0) {
   if(isDefined(var_0.super_slasher_shockwave_safe_area) && ispointinvolume(var_0.origin, var_0.super_slasher_shockwave_safe_area)) {
-    var_1 = scripts\engine\utility::getstructarray(var_0.super_slasher_shockwave_safe_area.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0.super_slasher_shockwave_safe_area.target, "targetname");
     var_2 = scripts\engine\utility::random(var_1);
     return var_2.origin;
   }
@@ -1096,7 +1096,7 @@ activate_super_slasher_barrier(var_0) {
 
   var_1.barrier_models = [];
   play_barrier_sfx(var_0);
-  var_4 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_4 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
   foreach(var_6 in var_4) {
     var_1 thread barrier_deploy_sequence(var_1, var_6);
     scripts\engine\utility::waitframe();

@@ -50,7 +50,7 @@ init_buildables(buildablesenabledlist) {
   level thread set_clientfield_buildables_code_callbacks();
 }
 
-include_buildables(buildablesenabledlist) {
+#include_buildables(buildablesenabledlist) {
   foreach(buildable in buildablesenabledlist)
   include_buildable(buildable);
 }

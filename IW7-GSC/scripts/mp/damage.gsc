@@ -3077,9 +3077,9 @@ func_AA05() {
   self endon("game_ended");
   self endon("revive");
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = gettime();
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         wait(0.05);
         if(gettime() - var_0 > 700) {
           break;
@@ -3401,7 +3401,7 @@ useholdthinkloop(var_0) {
   level endon("game_ended");
   self.owner endon("death");
   self.owner endon("disconnect");
-  while(scripts\mp\utility::isreallyalive(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime && !isDefined(var_0.setlasermaterial) || !var_0.setlasermaterial) {
+  while(scripts\mp\utility::isreallyalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime && !isDefined(var_0.setlasermaterial) || !var_0.setlasermaterial) {
     self.curprogress = self.curprogress + 50 * self.userate;
     self.userate = 1;
     var_0 scripts\mp\gameobjects::updateuiprogress(self, 1);

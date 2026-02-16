@@ -535,7 +535,7 @@ _id_3BCF(var_0, var_1) {
 }
 
 _id_3BD1(var_0) {
-  while(isDefined(self) && isalive(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime) {
+  while(isDefined(self) && isalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
     if(isDefined(self.objectivescaler)) {

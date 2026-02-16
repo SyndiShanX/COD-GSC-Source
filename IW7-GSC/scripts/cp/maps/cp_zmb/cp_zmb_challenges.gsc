@@ -337,7 +337,7 @@ area_kills(var_0) {
 }
 
 get_kill_spot_in_area(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("area_kill_" + var_0.basename, "targetname");
+  var_1 = scripts\engine\utility::getStructArray("area_kill_" + var_0.basename, "targetname");
   return scripts\engine\utility::random(var_1);
 }
 

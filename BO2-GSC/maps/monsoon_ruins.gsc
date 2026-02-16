@@ -1414,7 +1414,7 @@ inner_ruins_destruction_right() {
 
 inner_ruins_destruction_left() {
   t_event = getent("trigger_ruins_left_destroyed", "targetname");
-  a_c4_pos = getstructarray(t_event.target, "targetname");
+  a_c4_pos = getStructArray(t_event.target, "targetname");
   a_c4 = [];
 
   for(i = 0; i < a_c4_pos.size; i++) {

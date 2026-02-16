@@ -44,7 +44,7 @@ main() {
   level._override_eye_fx = level._effect["blue_eyes"];
   thread clientscripts\mp\zm_highrise_amb::main();
   zombe_gametype_premain();
-  claymores = getstructarray("claymore_purchase", "targetname");
+  claymores = getStructArray("claymore_purchase", "targetname");
 
   if(isDefined(claymores)) {
     foreach(struct in claymores) {
@@ -102,7 +102,7 @@ init_clientflag_variables() {}
 
 register_clientflag_callbacks() {}
 
-include_weapons() {
+#include_weapons() {
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);
@@ -184,7 +184,7 @@ include_weapons() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

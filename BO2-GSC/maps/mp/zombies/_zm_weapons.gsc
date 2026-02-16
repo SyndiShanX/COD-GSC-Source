@@ -607,7 +607,7 @@ is_weapon_or_base_included(weapon_name) {
   return false;
 }
 
-include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
+#include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
   if(!isDefined(level.zombie_include_weapons))
     level.zombie_include_weapons = [];
 
@@ -738,14 +738,14 @@ player_can_use_content(weapon) {
 
 init_spawnable_weapon_upgrade() {
   spawn_list = [];
-  spawnable_weapon_spawns = getstructarray("weapon_upgrade", "targetname");
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("bowie_upgrade", "targetname"), 1, 0);
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("sickle_upgrade", "targetname"), 1, 0);
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("tazer_upgrade", "targetname"), 1, 0);
-  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("buildable_wallbuy", "targetname"), 1, 0);
+  spawnable_weapon_spawns = getStructArray("weapon_upgrade", "targetname");
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("bowie_upgrade", "targetname"), 1, 0);
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("sickle_upgrade", "targetname"), 1, 0);
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("tazer_upgrade", "targetname"), 1, 0);
+  spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("buildable_wallbuy", "targetname"), 1, 0);
 
   if(!is_true(level.headshots_only))
-    spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getstructarray("claymore_purchase", "targetname"), 1, 0);
+    spawnable_weapon_spawns = arraycombine(spawnable_weapon_spawns, getStructArray("claymore_purchase", "targetname"), 1, 0);
 
   match_string = "";
   location = level.scr_zm_map_start_location;

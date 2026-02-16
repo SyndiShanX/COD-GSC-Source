@@ -2517,7 +2517,7 @@ func_7D47() {
     }
 
     if(isDefined(level.var_107A7)) {
-      var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+      var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
       foreach(var_3 in var_1) {
         if(isDefined(var_3.var_EEB6)) {
           var_0[var_0.size] = var_3;

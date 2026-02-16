@@ -438,7 +438,7 @@ spawn_avoid_vtols() {
     array_delete(level.vtols);
   }
 
-  vtol_structs = getstructarray("avoid_vtol", "targetname");
+  vtol_structs = getStructArray("avoid_vtol", "targetname");
 
   foreach(struct in vtol_structs) {
     vtol = spawn("script_model", struct.origin);
@@ -1315,7 +1315,7 @@ landing_air_battle_manager(struct_name, min, max) {
 }
 
 spawn_clouds(struct_name, str_endon, angles) {
-  structs = getstructarray(struct_name, "targetname");
+  structs = getStructArray(struct_name, "targetname");
 
   foreach(struct in structs) {
     name = "cloud_spawner";

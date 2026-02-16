@@ -192,7 +192,7 @@ small_hatch_headlights() {
 
 play_ambulence_light_fx() {
   wait 2;
-  ambulence_light_struct = getstructarray("ambulence_light_struct", "targetname");
+  ambulence_light_struct = getStructArray("ambulence_light_struct", "targetname");
 
   for(i = 0; i < ambulence_light_struct.size; i++) {
     ambulence_fx = spawn("script_model", ambulence_light_struct[i].origin);

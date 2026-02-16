@@ -32,7 +32,7 @@ team_2_unset_colors(var_0) {
 }
 
 set_start_positions(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
@@ -232,7 +232,7 @@ tree_pitch() {
 earthquake_trigger() {
   self waittill("trigger");
   thread common_scripts\utility::do_earthquake(self.script_earthquake, self.origin);
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
   common_scripts\utility::array_thread(var_0, ::fx_ent_think);
 
   if(isDefined(self.script_soundalias))
@@ -306,8 +306,8 @@ ledge_sway(var_0) {
 
 ledge_fx() {
   level endon("stop_ledge");
-  var_0 = common_scripts\utility::getstructarray("ledge_top_fx", "targetname");
-  var_1 = common_scripts\utility::getstructarray("ledge_edge_fx", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ledge_top_fx", "targetname");
+  var_1 = common_scripts\utility::getStructArray("ledge_edge_fx", "targetname");
   level.ledge_old_player_pos = level.player.origin;
   childthread ledge_track_player_pos();
   wait 2;
@@ -392,7 +392,7 @@ hero_follow_path_trig() {
 }
 
 hero_paths(var_0, var_1, var_2, var_3, var_4, var_5) {
-  var_6 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_6 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_6 = common_scripts\utility::array_combine(var_6, getnodearray(var_0, "targetname"));
 
   foreach(var_8 in var_6) {
@@ -431,7 +431,7 @@ hero_paths(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 hero_paths_cairo_first(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_2 = common_scripts\utility::array_combine(var_2, getnodearray(var_0, "targetname"));
 
   foreach(var_4 in var_2) {

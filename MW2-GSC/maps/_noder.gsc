@@ -466,9 +466,9 @@ playerInit() {
 button_modifier() {
   while(1) {
     foreach(button, blah in level.button_modifier_func)
-    if(self buttonpressed(button)) {
+    if(self buttonPressed(button)) {
       [[level.button_modifier_func[button]]]();
-      while(self buttonpressed(button))
+      while(self buttonPressed(button))
         wait .05;
       assert(isDefined(level.button_modifier_release_func));
       [[level.button_modifier_release_func[button]]]();
@@ -481,11 +481,11 @@ button_modifier() {
 button_monitor() {
   while(1) {
     foreach(button, lalala in level.button_func) {
-      if(self buttonpressed(button)) {
+      if(self buttonPressed(button)) {
         [[level.button_func[button]]]();
 
         if(!level.button_func_isflow[button])
-          while(self buttonpressed(button))
+          while(self buttonPressed(button))
             wait .05;
         break;
       }

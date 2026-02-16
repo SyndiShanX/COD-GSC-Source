@@ -822,7 +822,7 @@ monkey_zombie_update() {
   }
 }
 monkey_zombie_get_perk_pos() {
-  points = getstructarray(self.pack.machine.target, "targetname");
+  points = getStructArray(self.pack.machine.target, "targetname");
   for(i = 0; i < points.size; i++) {
     if(isDefined(self.pack.attack[i])) {
       continue;
@@ -1369,7 +1369,7 @@ monkey_zombie_grenade_watcher() {
 monkey_zombie_bhb_teleport() {
   self endon("death");
   monkey_print("bhb teleport");
-  black_hole_teleport = getstructarray("struct_black_hole_teleport", "targetname");
+  black_hole_teleport = getStructArray("struct_black_hole_teleport", "targetname");
   assertex(black_hole_teleport.size > 0, "struct_black_hole_teleport not found");
   zone_name = self get_current_zone();
   locations = [];

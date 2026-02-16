@@ -43,7 +43,7 @@ function_54922a21() {
   while(true) {
     b_charged = 0;
 
-    while(self attackbuttonpressed() && !self meleebuttonpressed() && !self laststand::player_is_in_laststand()) {
+    while(self attackButtonPressed() && !self meleeButtonPressed() && !self laststand::player_is_in_laststand()) {
       if(!b_charged && isDefined(self.chargeshotlevel) && self.chargeshotlevel > 1) {
         self function_bfbef8cc(self getcurrentweapon());
         self clientfield::set("" + # "ray_gun_mk2y_charged", 1);

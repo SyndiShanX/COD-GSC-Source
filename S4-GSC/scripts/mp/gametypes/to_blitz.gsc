@@ -96,7 +96,7 @@ _id_ABAD(var_0) {
 
 _id_D850() {
   level._id_EE44 = [];
-  var_0 = scripts\engine\utility::getstructarray("tank_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tank_spawn", "targetname");
   var_1 = 0;
 
   foreach(var_3 in var_0) {}

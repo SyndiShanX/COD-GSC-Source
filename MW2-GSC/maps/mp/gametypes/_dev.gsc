@@ -1071,9 +1071,9 @@ xKillsY(attackerName, victimName) {
       offsetinc = 50;
 
       while(getDvarInt("debug_reflection") == 1) {
-        if(self buttonpressed("BUTTON_X"))
+        if(self buttonPressed("BUTTON_X"))
           offset += offsetinc;
-        if(self buttonpressed("BUTTON_Y"))
+        if(self buttonPressed("BUTTON_Y"))
           offset -= offsetinc;
         if(offset > 1000)
           offset = 1000;

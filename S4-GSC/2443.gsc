@@ -24,7 +24,7 @@ _id_BA4E() {
     var_0 = level._id_59D1;
   }
 
-  var_1 = scripts\engine\utility::getstructarray("fasttravel_trigger", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("fasttravel_trigger", "targetname");
 
   foreach(var_3 in var_1) {
     level thread[[var_0]](var_3);
@@ -646,7 +646,7 @@ _id_7F81() {
   level endon("end_game");
   level waittill("all_players_spawned");
   level scripts\engine\utility::_id_5C24(level._id_E9E1);
-  var_0 = scripts\engine\utility::getstructarray("fasttravel_trigger", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fasttravel_trigger", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2._id_F954._id_4649)) {

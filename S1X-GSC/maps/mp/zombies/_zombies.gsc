@@ -36,8 +36,8 @@ init() {
     level.zombies_spawners_zombie = [];
   }
 
-  level.zombies_spawners_zombie = common_scripts\utility::array_combine(level.zombies_spawners_zombie, common_scripts\utility::getstructarray("zombie_spawner", "targetname"));
-  level.zombies_spawners_zombie = common_scripts\utility::array_combine(level.zombies_spawners_zombie, common_scripts\utility::getstructarray("Spawner_A", "targetname"));
+  level.zombies_spawners_zombie = common_scripts\utility::array_combine(level.zombies_spawners_zombie, common_scripts\utility::getStructArray("zombie_spawner", "targetname"));
+  level.zombies_spawners_zombie = common_scripts\utility::array_combine(level.zombies_spawners_zombie, common_scripts\utility::getStructArray("Spawner_A", "targetname"));
   level thread markpathnodezombiezones();
   level thread monitorplayerzone();
   level thread monitorplayerinexploitvolume();

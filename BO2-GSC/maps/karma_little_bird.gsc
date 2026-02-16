@@ -156,7 +156,7 @@ sundeck_save() {
 
 spawn_floating_bodies() {
   sp = getent("rich_male_shot", "targetname");
-  a_pos = getstructarray("floating_body", "targetname");
+  a_pos = getStructArray("floating_body", "targetname");
 
   foreach(s_pos in a_pos) {
     m_body = sp spawn_drone();

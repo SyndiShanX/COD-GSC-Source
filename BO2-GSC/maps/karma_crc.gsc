@@ -405,13 +405,13 @@ wait_for_input(str_input) {
 
     switch (str_input) {
       case "attack":
-        if(level.player attackbuttonpressed()) {
+        if(level.player attackButtonPressed()) {
           b_got_input = 1;
         }
 
         break;
       case "melee":
-        if(level.player meleebuttonpressed()) {
+        if(level.player meleeButtonPressed()) {
           b_got_input = 1;
         }
 
@@ -441,13 +441,13 @@ wait_for_input(str_input) {
 
         break;
       case "sprint":
-        if(level.player sprintbuttonpressed()) {
+        if(level.player sprintbuttonPressed()) {
           b_got_input = 1;
         }
 
         break;
       case "use":
-        if(level.player usebuttonpressed()) {
+        if(level.player useButtonPressed()) {
           b_got_input = 1;
         }
 

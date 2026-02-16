@@ -3846,7 +3846,7 @@ end_sinking_scenario_vfx() {
   var_12 = maps\_utility::getfxarraybyid("cgoshp_light_tip_red");
   var_12 = common_scripts\utility::array_combine(var_12, maps\_utility::getfxarraybyid("cgoshp_light_tip_green"));
   var_12 = common_scripts\utility::array_combine(var_12, maps\_utility::getfxarraybyid("cgoshp_light_tip_white"));
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("spotlights", "targetname"), ::end_sinking_spotlight_fx, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("spotlights", "targetname"), ::end_sinking_spotlight_fx, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   common_scripts\utility::array_thread(maps\_utility::getfxarraybyid("cgoshp_lights_cr_fly_light"), ::end_sinking_light_fx, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   common_scripts\utility::array_thread(var_12, ::end_sinking_light_fx, var_5, var_6, var_7, var_8, var_9, var_10, 0.05);
   wait 3.0;
@@ -4015,7 +4015,7 @@ misc_dummy() {
 }
 
 misc_setup() {
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("spotlights", "targetname"), ::misc_spotlight_fx);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("spotlights", "targetname"), ::misc_spotlight_fx);
   thread cargohold_lights_logic();
   common_scripts\utility::array_thread(getEntArray("falling_water_heavydoor_cgoshp", "targetname"), ::misc_drip_sway_fx);
   common_scripts\utility::array_thread(getEntArray("falling_water_heavydoor_cgoshp_noripple", "targetname"), ::misc_drip_sway_fx);
@@ -4114,7 +4114,7 @@ misc_setup() {
 }
 
 misc_setup_waterlevel() {
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray(self.target, "targetname"), maps\cargoship_code::escape_waterlevel_parts, self);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray(self.target, "targetname"), maps\cargoship_code::escape_waterlevel_parts, self);
   wait 1;
   maps\_utility::geo_off();
 }
@@ -4248,7 +4248,7 @@ cargohold_lights_logic() {
 }
 
 cargohold_lights_getlights() {
-  level.cargohold_lights = common_scripts\utility::getstructarray("cargohold_lightsway", "script_noteworthy");
+  level.cargohold_lights = common_scripts\utility::getStructArray("cargohold_lightsway", "script_noteworthy");
 
   foreach(var_1 in level.cargohold_lights) {
     var_1.light = undefined;

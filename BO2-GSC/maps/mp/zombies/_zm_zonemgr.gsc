@@ -133,7 +133,7 @@ entity_in_zone(zone_name, ignore_enabled_check) {
 }
 
 deactivate_initial_barrier_goals() {
-  special_goals = getstructarray("exterior_goal", "targetname");
+  special_goals = getStructArray("exterior_goal", "targetname");
 
   for(i = 0; i < special_goals.size; i++) {
     if(isDefined(special_goals[i].script_noteworthy)) {
@@ -169,7 +169,7 @@ zone_init(zone_name) {
   assert(isDefined(zone.volumes[0]), "zone_init: No volumes found for zone: " + zone_name);
 
   if(isDefined(zone.volumes[0].target)) {
-    spots = getstructarray(zone.volumes[0].target, "targetname");
+    spots = getStructArray(zone.volumes[0].target, "targetname");
     zone.spawn_locations = [];
     zone.dog_locations = [];
     zone.screecher_locations = [];
@@ -183,8 +183,8 @@ zone_init(zone_name) {
     zone.napalm_locations = [];
     zone.zbarriers = [];
     zone.magic_boxes = [];
-    barricades = getstructarray("exterior_goal", "targetname");
-    box_locs = getstructarray("treasure_chest_use", "targetname");
+    barricades = getStructArray("exterior_goal", "targetname");
+    box_locs = getStructArray("treasure_chest_use", "targetname");
 
     for(i = 0; i < spots.size; i++) {
       spots[i].zone_name = zone_name;
@@ -291,7 +291,7 @@ reinit_zone_spawners() {
     zone = level.zones[zkeys[i]];
 
     if(isDefined(zone.volumes[0].target)) {
-      spots = getstructarray(zone.volumes[0].target, "targetname");
+      spots = getStructArray(zone.volumes[0].target, "targetname");
       zone.spawn_locations = [];
       zone.dog_locations = [];
       zone.screecher_locations = [];
@@ -382,7 +382,7 @@ enable_zone(zone_name) {
       spawn_points[i].locked = 0;
   }
 
-  entry_points = getstructarray(zone_name + "_barriers", "script_noteworthy");
+  entry_points = getStructArray(zone_name + "_barriers", "script_noteworthy");
 
   for(i = 0; i < entry_points.size; i++) {
     entry_points[i].is_active = 1;

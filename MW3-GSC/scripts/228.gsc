@@ -326,7 +326,7 @@ _id_1A6E() {
 }
 
 _id_1A71(var_0) {
-  if(!self usebuttonpressed()) {
+  if(!self useButtonPressed()) {
     return 0;
   }
   if(isDefined(var_0._id_1A6F) && var_0._id_1A6F == self) {

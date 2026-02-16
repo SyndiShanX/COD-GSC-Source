@@ -2447,7 +2447,7 @@ rotate_relative_to_yaw(yaw) {
 }
 
 bhd_heli_attacks_overlook_guys(heli) {
-  structs = getstructarray("heli_grenade_struct", "targetname");
+  structs = getStructArray("heli_grenade_struct", "targetname");
   foreach(struct in structs) {
     struct.time = 0;
   }
@@ -2473,7 +2473,7 @@ bhd_physics_explosion_from_turrets() {
 }
 
 set_off_overlook_grenades() {
-  structs = getstructarray("heli_grenade_struct", "targetname");
+  structs = getStructArray("heli_grenade_struct", "targetname");
   fx = getfx("grenade_wood");
 
   for(;;) {
@@ -3307,7 +3307,7 @@ wait_until_player_breaches_bathroom() {
 }
 
 cellblock_spawn_lots_of_grenades() {
-  //	armory_grenade_spawners = getstructarray("armory_grenade_spawner", "targetname" );
+  //	armory_grenade_spawners = getStructArray("armory_grenade_spawner", "targetname" );
   //	array_thread( armory_grenade_spawners, ::armory_grenade_think );
   ai = GetAIArray("axis");
   array_thread(ai, ::throw_crazy_grenades);
@@ -3815,7 +3815,7 @@ prepare_perimeter_slamraam_attack() {
   wait(3.70);
 
   spawners = getEntArray("intro_heli_1", "targetname");
-  orgs = getstructarray("heli_restart_path", "script_noteworthy");
+  orgs = getStructArray("heli_restart_path", "script_noteworthy");
 
   foreach(spawner in spawners) {
     old_origin = spawner.origin;
@@ -3940,7 +3940,7 @@ gulag_boats() {
   array_call(later_boats, ::Show);
 
   flag_wait("pre_boats_attack");
-  boat_artillerys = getstructarray("boat_artillery", "targetname");
+  boat_artillerys = getStructArray("boat_artillery", "targetname");
   array_thread(boat_artillerys, ::boat_artillery_think);
 
   delayThread(10.5, ::flag_set, "red_goes_in_for_early_landing");
@@ -4030,7 +4030,7 @@ helis_respawn_to_land() {
   array_thread(extra_flyin_spawners, ::self_delete);
 
   spawners = getEntArray("heli_respawn_spawner", "script_noteworthy");
-  orgs = getstructarray("heli_landing_org", "script_noteworthy");
+  orgs = getStructArray("heli_landing_org", "script_noteworthy");
 
   real_spawners = [];
   foreach(spawner in spawners) {
@@ -4940,7 +4940,7 @@ blend_fov( progress, start, end )
 */
 
 sewer_slide_trigger() {
-  targets = getstructarray(self.target, "targetname");
+  targets = getStructArray(self.target, "targetname");
   targets = array_index_by_script_index(targets);
   index = 0;
   for(;;) {

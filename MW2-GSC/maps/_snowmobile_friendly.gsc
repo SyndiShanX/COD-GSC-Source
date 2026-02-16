@@ -13,7 +13,7 @@ put this in your GSC:
 maps\_snowmobile_friendly::main( "vehicle_snowmobile_alt" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile
+#include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile_friendly"default:"script_team" "allies"

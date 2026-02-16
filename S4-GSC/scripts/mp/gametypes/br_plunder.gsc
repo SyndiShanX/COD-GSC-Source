@@ -2490,7 +2490,7 @@ _id_B94B(var_0, var_1) {
   var_4 = 0;
   var_5 = var_2._id_FEE7;
 
-  for(var_6 = 0; var_1 usebuttonpressed(); var_4 = var_4 + 0.05) {
+  for(var_6 = 0; var_1 useButtonPressed(); var_4 = var_4 + 0.05) {
     var_7 = undefined;
 
     if(var_3) {

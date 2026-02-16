@@ -12,7 +12,7 @@ init() {
   level._brock_naglines = [];
   level._brock_corpse_locations = [];
   PreCacheModel("p_ztem_digital_recorder");
-  level._radio_structs = getstructarray("sq_radios", "targetname");
+  level._radio_structs = getStructArray("sq_radios", "targetname");
 }
 delete_radio_internal() {
   if(isDefined(level._active_sq_radio)) {

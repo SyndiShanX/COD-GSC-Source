@@ -572,7 +572,7 @@ play_truck_crash_anim(truck) {
   playFX(level._effect["truck_explosion_phys"], truck_new gettagorigin("tag_driver"));
   playFX(level._effect["tank_smoke_column"], truck_new gettagorigin("tag_driver"));
 
-  fire_targets = getstructarray("truck_fall_flame", "targetname");
+  fire_targets = getStructArray("truck_fall_flame", "targetname");
   for(i = 0; i < fire_targets.size; i++) {
     playFX(level._effect["tree_brush_fire"], fire_targets[i].origin);
   }

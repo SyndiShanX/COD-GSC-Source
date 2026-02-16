@@ -491,7 +491,7 @@ function watchforoptionuse(slot, victimbodyindex, justspawned) {
 }
 
 function dpad_left_pressed() {
-  return self actionslotthreebuttonpressed();
+  return self actionslotthreebuttonPressed();
 }
 
 function watchheroweaponchanged() {

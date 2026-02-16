@@ -393,7 +393,7 @@ waitforplayerping() {
   for(;;) {
     self waittill("playerPing");
     if(scripts\mp\utility::isreallyalive(self) && !scripts\mp\utility::isusingremote()) {
-      if(self adsbuttonpressed()) {
+      if(self adsButtonPressed()) {
         doping();
         wait(0.5);
       }

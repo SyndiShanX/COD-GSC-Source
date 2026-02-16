@@ -257,7 +257,7 @@ class cbaseinteractable {
 
   function _wait_for_button_release() {
     self endon("player_downed");
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       wait(0.05);
     }
   }
@@ -353,10 +353,10 @@ class cbaseinteractable {
     e_triggerer endon("death");
     e_triggerer endon("player_downed");
     self thread drop_on_death(e_triggerer);
-    while(e_triggerer usebuttonpressed()) {
+    while(e_triggerer useButtonPressed()) {
       wait(0.05);
     }
-    while(!e_triggerer usebuttonpressed()) {
+    while(!e_triggerer useButtonPressed()) {
       wait(0.05);
     }
     self thread drop(e_triggerer);

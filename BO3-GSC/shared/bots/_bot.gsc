@@ -404,7 +404,7 @@ function check_stuck() {
   if(!getdvarint("")) {
     return;
   }
-  if(self botundermanualcontrol() || self botgoalreached() || self util::isstunned() || self ismeleeing() || self meleebuttonpressed() || (self bot_combat::has_threat() && self.bot.threat.lastdistancesq < 16384)) {
+  if(self botundermanualcontrol() || self botgoalreached() || self util::isstunned() || self ismeleeing() || self meleeButtonPressed() || (self bot_combat::has_threat() && self.bot.threat.lastdistancesq < 16384)) {
     return;
   }
   velocity = self getvelocity();
@@ -571,7 +571,7 @@ function coop_pre_combat() {
   if(self bot_combat::has_threat()) {
     return;
   }
-  if(self isreloading() || self isswitchingweapons() || self isthrowinggrenade() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self ismeleeing() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
+  if(self isreloading() || self isswitchingweapons() || self isthrowinggrenade() || self fragButtonPressed() || self secondaryoffhandbuttonPressed() || self ismeleeing() || self isremotecontrolling() || self isinvehicle() || self isweaponviewonlylinked()) {
     return;
   }
   if(self bot_combat::switch_weapon()) {
@@ -897,15 +897,15 @@ function get_nav_points() {
         sphere(point, 16, (0, 0, 1), 0.25, 0, 16, 1);
       }
     }
-    if(self buttonpressed("")) {
+    if(self buttonPressed("")) {
       if(isDefined(point) && (points.size == 0 || (distance2d(point, points[points.size - 1])) > 16)) {
         points[points.size] = point;
       }
     } else {
-      if(self buttonpressed("")) {
+      if(self buttonPressed("")) {
         return points;
       }
-      if(self buttonpressed("")) {
+      if(self buttonPressed("")) {
         return undefined;
       }
     }

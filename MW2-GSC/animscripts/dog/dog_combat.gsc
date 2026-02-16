@@ -662,7 +662,7 @@ attackTeleportThread(offset) {
 }
 
 player_attacked() {
-  return isalive(self.meleeingPlayer) && (self.meleeingPlayer MeleeButtonPressed());
+  return isalive(self.meleeingPlayer) && (self.meleeingPlayer meleeButtonPressed());
 }
 
 dog_hint() {

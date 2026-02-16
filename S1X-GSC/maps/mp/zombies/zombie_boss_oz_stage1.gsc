@@ -71,12 +71,12 @@ spawnoz() {
 }
 
 initozrooms() {
-  level.bossozrooms = common_scripts\utility::getstructarray("boss_oz_spot", "targetname");
+  level.bossozrooms = common_scripts\utility::getStructArray("boss_oz_spot", "targetname");
 
   foreach(var_1 in level.bossozrooms) {
     var_1.explosion_locations = [];
     var_1.fire_locations = [];
-    var_2 = common_scripts\utility::array_combine(getEntArray(var_1.target, "targetname"), common_scripts\utility::getstructarray(var_1.target, "targetname"));
+    var_2 = common_scripts\utility::array_combine(getEntArray(var_1.target, "targetname"), common_scripts\utility::getStructArray(var_1.target, "targetname"));
 
     foreach(var_4 in var_2) {
       if(var_4.script_noteworthy == "door") {

@@ -37,7 +37,7 @@ init_bumper_cars() {
     scripts\engine\utility::waitframe();
   }
 
-  level.bumper_car_impact_spots = scripts\engine\utility::getstructarray("bumpercar_impact", "targetname");
+  level.bumper_car_impact_spots = scripts\engine\utility::getStructArray("bumpercar_impact", "targetname");
   for(;;) {
     var_0 = scripts\engine\utility::array_randomize(var_0);
     foreach(var_6, var_2 in var_0) {
@@ -244,7 +244,7 @@ push_and_damage_player(var_0) {
   self endon("death");
   self playSound("bumpercars_push_damage_plr");
   self.flung = 1;
-  var_1 = sortbydistance(scripts\engine\utility::getstructarray("bumper_car_throw_spots", "targetname"), self.origin);
+  var_1 = sortbydistance(scripts\engine\utility::getStructArray("bumper_car_throw_spots", "targetname"), self.origin);
   self setorigin(var_1[0].origin, 0);
   self setvelocity(vectornormalize(self.origin - var_0.origin) * 300 + (0, 0, 100));
   wait(0.1);

@@ -103,10 +103,10 @@ play_alarm_b() {
   alarm_bell delete();
 }
 alarm_a() {
-  array_thread(getstructarray("amb_warning_siren", "targetname"), ::play_alarm_a);
+  array_thread(getStructArray("amb_warning_siren", "targetname"), ::play_alarm_a);
 }
 alarm_b() {
-  array_thread(getstructarray("amb_warning_bell", "targetname"), ::play_alarm_b);
+  array_thread(getStructArray("amb_warning_bell", "targetname"), ::play_alarm_b);
 }
 play_pa_vox() {
   wait(2);

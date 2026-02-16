@@ -159,7 +159,7 @@ cleanup_audio_log(var_0, var_1) {
 }
 
 set_interactions_not_drop_to_ground_when_init(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     var_3._id_722E = "locOverride";

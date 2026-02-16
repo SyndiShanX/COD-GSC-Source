@@ -2261,7 +2261,7 @@ get_max_sentry_count(rank, streakname) {
 }
 
 default_canUse(def) {
-  if(self AttackButtonPressed()) {
+  if(self attackButtonPressed()) {
     return false;
   }
 
@@ -2293,7 +2293,7 @@ default_canPurchase(def, rank) {
 }
 
 alt_canPurchase(def, rank) {
-  if(self AttackButtonPressed()) {
+  if(self attackButtonPressed()) {
     return false;
   }
 

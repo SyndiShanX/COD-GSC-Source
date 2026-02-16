@@ -910,7 +910,7 @@ _id_1622(var_0) {
     var_2 = 2 * sqrt(var_5 * var_5 + var_6 * var_6);
     var_2 = clamp(var_2, 0, 1);
   } else if(isDefined(var_0._id_15E9) && var_0._id_15E9 == "attack") {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       var_2 = 1.0;
     } else {
       var_2 = 0.0;

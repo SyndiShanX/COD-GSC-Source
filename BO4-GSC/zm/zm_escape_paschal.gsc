@@ -968,7 +968,7 @@ function_e4a9da98() {
   level.var_dcc985c4.mdl_origin endon(#"death");
   level.var_dcc985c4.mdl_origin clientfield::set("" + # "hash_670a34b297f8faca", 1);
 
-  while(isDefined(self) && isDefined(level.var_dcc985c4.mdl_bird sightconetrace(self getweaponmuzzlepoint(), self, self getweaponforwarddir(), 10)) && level.var_dcc985c4.mdl_bird sightconetrace(self getweaponmuzzlepoint(), self, self getweaponforwarddir(), 10) && self adsbuttonpressed()) {
+  while(isDefined(self) && isDefined(level.var_dcc985c4.mdl_bird sightconetrace(self getweaponmuzzlepoint(), self, self getweaponforwarddir(), 10)) && level.var_dcc985c4.mdl_bird sightconetrace(self getweaponmuzzlepoint(), self, self getweaponforwarddir(), 10) && self adsButtonPressed()) {
     waitframe(1);
   }
 

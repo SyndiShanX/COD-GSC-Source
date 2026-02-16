@@ -635,7 +635,7 @@ ReconPlayerExit(vehicle) {
 
   while(true) {
     timeUsed = 0;
-    while(owner UseButtonPressed()) {
+    while(owner useButtonPressed()) {
       timeUsed += 0.05;
       if(timeUsed > 0.75) {
         vehicle notify("death");

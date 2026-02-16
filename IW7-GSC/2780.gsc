@@ -342,8 +342,8 @@ func_1000B(var_0) {
       self waittill("power_secondary_used");
     }
 
-    if(var_2 == "+frag" && self fragbuttonpressed() || var_2 == "+smoke" && self secondaryoffhandbuttonpressed()) {
-      while(var_2 == "+frag" && self fragbuttonpressed() || var_2 == "+smoke" && self secondaryoffhandbuttonpressed()) {
+    if(var_2 == "+frag" && self fragButtonPressed() || var_2 == "+smoke" && self secondaryoffhandbuttonPressed()) {
+      while(var_2 == "+frag" && self fragButtonPressed() || var_2 == "+smoke" && self secondaryoffhandbuttonPressed()) {
         if(var_1) {
           var_1 = 0;
           var_0 thread balldrone_attacktargets(self, var_1);

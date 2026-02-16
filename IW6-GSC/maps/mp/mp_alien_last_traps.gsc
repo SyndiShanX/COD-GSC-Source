@@ -467,7 +467,7 @@ useholdthink(var_0, var_1) {
 useholdthinkloop(var_0, var_1, var_2) {
   level endon("traps_reenabled");
 
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && (!isDefined(var_0.laststand) || !var_0.laststand) && self.curprogress < self.usetime) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && (!isDefined(var_0.laststand) || !var_0.laststand) && self.curprogress < self.usetime) {
     if(isDefined(var_1) && isDefined(var_2)) {
       if(distancesquared(var_0.origin, var_1.origin) > var_2)
         return 0;

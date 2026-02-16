@@ -68,7 +68,7 @@ init() {
 set_up_mq_models() {
   var_0 = scripts\engine\utility::getstruct("mq_zombie_blood_fountain", "script_noteworthy");
   level.e_zombie_blood_fountain = scripts\cp\utility::_id_E190("s4_zm_broken_demonic_fountain", var_0.origin, var_0.angles);
-  var_1 = scripts\engine\utility::getstructarray("mq_step_three_small_stele_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("mq_step_three_small_stele_loc", "script_noteworthy");
 
   foreach(var_3 in var_1) {
     var_0 = scripts\engine\utility::getstruct(var_3.target, "script_noteworthy");
@@ -87,7 +87,7 @@ set_up_mq_models() {
   scripts\cp\utility::_id_E190("s4_zm_cypher_wheel_e", var_0.origin, var_0.angles);
   var_0 = scripts\engine\utility::getstruct("mq_blood_altar", "script_noteworthy");
   scripts\cp\utility::_id_E190("s4_zm_blood_altar", var_0.origin, var_0.angles);
-  var_6 = scripts\engine\utility::getstructarray("mq_lost_monolith", "script_noteworthy");
+  var_6 = scripts\engine\utility::getStructArray("mq_lost_monolith", "script_noteworthy");
 
   foreach(var_0 in var_6) {
     scripts\cp\utility::_id_E190("s4_zm_lost_monolith", var_0.origin, var_0.angles);
@@ -126,7 +126,7 @@ generate_cypher_code() {
 
 set_up_symbol_mdls() {
   var_0 = ["s4_zm_kanji_symbols_01", "s4_zm_kanji_symbols_02", "s4_zm_kanji_symbols_03", "s4_zm_kanji_symbols_04", "s4_zm_kanji_symbols_05", "s4_zm_kanji_symbols_06", "s4_zm_kanji_symbols_07", "s4_zm_kanji_symbols_08", "s4_zm_kanji_symbols_09", "s4_zm_kanji_symbols_10", "s4_zm_kanji_symbols_11", "s4_zm_kanji_symbols_12", "s4_zm_kanji_symbols_13", "s4_zm_kanji_symbols_14", "s4_zm_kanji_symbols_15"];
-  var_1 = scripts\engine\utility::getstructarray("mq_kanji_spawn_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("mq_kanji_spawn_loc", "script_noteworthy");
   generate_cypher_code();
 
   for(var_2 = 0; var_2 < level.a_n_kanji_symbols.size; var_2++) {
@@ -885,7 +885,7 @@ decipher_wheels(var_0) {
       var_2 = undefined;
     }
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       if(var_1) {
         playsoundatpos(level.cypher_wheel_center.origin, "zmb_cipher_wheel_lock");
         var_3 = level try_decipher_wheel_symbols();
@@ -894,7 +894,7 @@ decipher_wheels(var_0) {
     } else
       var_1 = 1;
 
-    if(self stancebuttonpressed()) {
+    if(self stancebuttonPressed()) {
       break;
     }
 
@@ -902,11 +902,11 @@ decipher_wheels(var_0) {
       var_10 = 0;
       var_11 = 0;
 
-      if(self secondaryoffhandbuttonpressed()) {
+      if(self secondaryoffhandbuttonPressed()) {
         var_10 = 1;
       }
 
-      if(self fragbuttonpressed()) {
+      if(self fragButtonPressed()) {
         var_11 = 1;
       }
 
@@ -948,12 +948,12 @@ play_cypher_wheels_fail_vo() {
 }
 
 init_step_three_soul_charge() {
-  level.a_s_small_stele_interacts = scripts\engine\utility::getstructarray("mq_step_three_small_stele_loc", "script_noteworthy");
+  level.a_s_small_stele_interacts = scripts\engine\utility::getStructArray("mq_step_three_small_stele_loc", "script_noteworthy");
   level thread awake_small_steles();
   level.n_total_awaken_steles = 0;
   level.n_player_amount_interact_small_stele = 0;
-  var_0 = scripts\engine\utility::getstructarray("doctors_quarters_outside_zone", "target");
-  var_1 = scripts\engine\utility::getstructarray("doctors_quarters_outside_to_center_building_zone", "target");
+  var_0 = scripts\engine\utility::getStructArray("doctors_quarters_outside_zone", "target");
+  var_1 = scripts\engine\utility::getStructArray("doctors_quarters_outside_to_center_building_zone", "target");
   level.a_s_lock_down_zombie_spawners = scripts\cp\utility::_id_1BB8(var_0, var_1);
   level.a_s_lock_down_screamer_spawners = [];
   level.a_s_charge_zombie_spawners = [];
@@ -1206,7 +1206,7 @@ stop_lock_down() {
 
 force_teleport_player() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("mq_step3_teleport_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_step3_teleport_loc", "script_noteworthy");
 
   foreach(var_2 in level.players) {
     var_3 = var_2 scripts\cp\zone_manager::_id_642F();
@@ -1806,7 +1806,7 @@ init_step_five_mirror() {
   playFXOnTag(level._effect["mq_flogger_kill_blood_surface"], level.e_blood_surface, "tag_origin");
   level.e_blood_surface set_blood_surface_height(-20);
   level thread set_up_mirror_part_one();
-  var_0 = scripts\engine\utility::getstructarray("mq_mirror_part_finder_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_mirror_part_finder_loc", "script_noteworthy");
   var_1 = randomint(var_0.size);
   var_2 = var_0[var_1];
   var_2.mdl_fx = scripts\cp\utility::_id_E190("tag_origin", var_2.origin, var_2.angles);
@@ -1845,7 +1845,7 @@ debug_step_five_mirror() {
 set_up_mirror_part_one() {
   level endon("game_ended");
   level endon("step_five_is_done");
-  var_0 = scripts\engine\utility::getstructarray("mq_mirror_part_01_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_mirror_part_01_loc", "script_noteworthy");
   var_1 = randomint(var_0.size);
   var_2 = var_0[var_1];
   var_2.mdl_mirror_part = scripts\cp\utility::_id_E190("s4_zm_bronze_mirror_full_break", var_2.origin, var_2.angles);
@@ -2222,7 +2222,7 @@ mirror_part_finder_move() {
   level endon("step_five_is_done");
   var_0 = self;
   var_1 = scripts\engine\utility::getstruct(self.target, "targetname");
-  var_2 = scripts\engine\utility::getstructarray(var_1._id_039B, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_1._id_039B, "script_noteworthy");
 
   for(var_3 = 0; var_3 < var_2.size; var_3++) {
     if(var_3 < var_2.size - 1) {
@@ -2554,7 +2554,7 @@ play_both_mirror_parts_placed_vo() {
 }
 
 init_step_six_altar() {
-  level.a_s_monolith_locs = scripts\engine\utility::getstructarray("mq_monolith_loc", "targetname");
+  level.a_s_monolith_locs = scripts\engine\utility::getStructArray("mq_monolith_loc", "targetname");
   level.n_players_interacted_with_monolith = 0;
   level.n_players_completed_orb_chasing = 0;
   level.s_mirror_loc = scripts\engine\utility::getstruct("mq_central_altar_fx_sender_loc", "script_noteworthy");
@@ -2812,7 +2812,7 @@ play_monolith_orbs_chasing_finish_vo() {
 init_step_seven_final_fight() {
   _func_01E3("boss_intro");
   set_lock_down_clips(1, level.a_mdl_stp7_door_blocks, level.a_mdl_stp7_door_block_fxs);
-  level.a_s_final_fight_zombie_spawners = scripts\engine\utility::getstructarray("dig_site_final_fight", "target");
+  level.a_s_final_fight_zombie_spawners = scripts\engine\utility::getStructArray("dig_site_final_fight", "target");
   level.a_s_final_fight_screamer_spawners = [];
 
   foreach(var_1 in level.a_s_final_fight_zombie_spawners) {

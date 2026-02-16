@@ -597,7 +597,7 @@ jungle_corridor_start() {
   common_scripts\utility::flag_wait("jungle_entrance");
   maps\_utility::autosave_stealth();
   common_scripts\utility::flag_wait("crash_arrive");
-  var_1 = common_scripts\utility::getstructarray("jungle_corridor_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("jungle_corridor_ai", "targetname");
 
   while(!isDefined(level.alpha))
     wait 0.1;
@@ -703,7 +703,7 @@ execution_start() {
   maps\jungle_ghosts_util::arm_player(var_0, 1);
   level.alpha = maps\_utility::array_spawn_targetname("alpha_team", 1);
   assign_alpha();
-  var_1 = common_scripts\utility::getstructarray("waterfall_execution_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("waterfall_execution_ai", "targetname");
 
   foreach(var_4, var_3 in var_1) {
     level.alpha[var_4] forceteleport(var_3.origin, var_3.angles);
@@ -736,7 +736,7 @@ stream_start() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_2 = common_scripts\utility::getstructarray("stream_start_ai", "targetname");
+  var_2 = common_scripts\utility::getStructArray("stream_start_ai", "targetname");
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
   var_3 = getaiarray("allies");
 
@@ -772,7 +772,7 @@ stream_waterfall_start() {
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
-  var_1 = common_scripts\utility::getstructarray("stream_waterfall_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("stream_waterfall_ai", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)
@@ -805,7 +805,7 @@ stream_backend_start() {
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
-  var_1 = common_scripts\utility::getstructarray("stream_backend_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("stream_backend_ai", "targetname");
   common_scripts\utility::array_thread(level.squad, maps\_utility::ent_flag_init, "stealth_kill");
   var_2 = getaiarray("allies");
 
@@ -842,7 +842,7 @@ tall_grass_start() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_2 = common_scripts\utility::getstructarray("tall_grass_ai", "targetname");
+  var_2 = common_scripts\utility::getStructArray("tall_grass_ai", "targetname");
   var_3 = getaiarray("allies");
 
   foreach(var_6, var_5 in var_2)
@@ -887,7 +887,7 @@ tall_grass_start_cold() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_2 = common_scripts\utility::getstructarray("tall_grass_ai", "targetname");
+  var_2 = common_scripts\utility::getStructArray("tall_grass_ai", "targetname");
   var_3 = getaiarray("allies");
 
   foreach(var_6, var_5 in var_2)
@@ -928,7 +928,7 @@ tall_grass_chopper_start() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_1 = common_scripts\utility::getstructarray("tall_grass_chopper_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("tall_grass_chopper_ai", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)
@@ -974,7 +974,7 @@ runway_start() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_1 = common_scripts\utility::getstructarray("runway_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("runway_ai", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)
@@ -1011,7 +1011,7 @@ escape_runway_start() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_1 = common_scripts\utility::getstructarray("escape_runway_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("escape_runway_ai", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)
@@ -1049,7 +1049,7 @@ escape_jungle_start() {
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
   assign_bravo();
-  var_1 = common_scripts\utility::getstructarray("escape_jungle_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("escape_jungle_ai", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)
@@ -1094,7 +1094,7 @@ escape_river_start() {
   level.alpha = maps\_utility::array_spawn_targetname("alpha_team", 1);
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
-  var_1 = common_scripts\utility::getstructarray("escape_river_ai", "targetname");
+  var_1 = common_scripts\utility::getStructArray("escape_river_ai", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)
@@ -1131,7 +1131,7 @@ escape_waterfall_start() {
   level.alpha = maps\_utility::array_spawn_targetname("alpha_team", 1);
   assign_alpha();
   level.bravo = maps\_utility::array_spawn_targetname("bravo_team", 1);
-  var_1 = common_scripts\utility::getstructarray("waterfall_ai_land", "targetname");
+  var_1 = common_scripts\utility::getStructArray("waterfall_ai_land", "targetname");
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1)

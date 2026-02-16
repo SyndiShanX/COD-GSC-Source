@@ -390,14 +390,14 @@ input_reactive_radius(menu_index) {
 
   while(1) {
     wait(0.05);
-    if(level.player ButtonPressed("escape") || level.player ButtonPressed("x")) {
+    if(level.player buttonPressed("escape") || level.player buttonPressed("x")) {
       break;
     }
 
     val = 0;
-    if(level.player ButtonPressed("-"))
+    if(level.player buttonPressed("-"))
       val = -10;
-    else if(level.player ButtonPressed("="))
+    else if(level.player buttonPressed("="))
       val = 10;
 
     if(val != 0) {

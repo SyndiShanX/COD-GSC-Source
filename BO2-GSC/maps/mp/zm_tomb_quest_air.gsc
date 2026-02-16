@@ -122,7 +122,7 @@ ceiling_ring_run() {
 }
 
 air_puzzle_2_init() {
-  a_smoke_pos = getstructarray("puzzle_smoke_origin", "targetname");
+  a_smoke_pos = getStructArray("puzzle_smoke_origin", "targetname");
 
   foreach(s_smoke_pos in a_smoke_pos) {
     s_smoke_pos.detector_brush = getent(s_smoke_pos.target, "targetname");
@@ -131,7 +131,7 @@ air_puzzle_2_init() {
 }
 
 air_puzzle_2_run() {
-  a_smoke_pos = getstructarray("puzzle_smoke_origin", "targetname");
+  a_smoke_pos = getStructArray("puzzle_smoke_origin", "targetname");
 
   foreach(s_smoke_pos in a_smoke_pos)
   s_smoke_pos thread air_puzzle_smoke();

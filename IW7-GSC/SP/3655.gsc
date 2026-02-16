@@ -20,7 +20,7 @@ func_4D8A() {
 
     self waittill("juke");
     var_1 = self getnormalizedmovement();
-    if(self adsbuttonpressed() || self getstance() == "prone") {
+    if(self adsButtonPressed() || self getstance() == "prone") {
       continue;
     }
 
@@ -159,7 +159,7 @@ func_11ABF() {
   while(level.player scripts\sp\utility::func_65DB("player_gravity_off")) {
     var_0 = self getnormalizedmovement();
     var_1 = length(var_0);
-    if((self buttonpressed("BUTTON_LSTICK") && var_1 > 0.3) || self func_843B() || self gettimeremainingpercentage()) {
+    if((self buttonPressed("BUTTON_LSTICK") && var_1 > 0.3) || self func_843B() || self gettimeremainingpercentage()) {
       if(self.var_4D8B) {
         self notify("juke");
       }
@@ -172,8 +172,8 @@ func_11ABF() {
 func_A4D9() {
   while(level.player scripts\sp\utility::func_65DB("player_gravity_off")) {
     self waittill("jump");
-    if(self buttonpressed("BUTTON_LSTICK")) {
-      while(self buttonpressed("BUTTON_LSTICK")) {
+    if(self buttonPressed("BUTTON_LSTICK")) {
+      while(self buttonPressed("BUTTON_LSTICK")) {
         self notify("track_sprint_button");
         scripts\engine\utility::waitframe();
       }

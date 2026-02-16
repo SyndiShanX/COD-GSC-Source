@@ -3141,7 +3141,7 @@ detect_player_mantle() {
     level.hud_mantle["text"].fontscale = 0.5;
     level.hud_mantle["text"].alpha = 1;
 
-    if(level.player jumpbuttonpressed())
+    if(level.player jumpbuttonPressed())
       common_scripts\utility::flag_set("player_gets_on_heli");
 
     wait 0.05;

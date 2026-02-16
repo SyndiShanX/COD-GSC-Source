@@ -180,7 +180,7 @@ func_1AC1() {
 
 func_1AD9() {
   scripts\engine\utility::waitframe();
-  var_0 = scripts\engine\utility::getstructarray("generic_airlock_assets", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("generic_airlock_assets", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     if(!isDefined(var_2.targetname)) {
@@ -1245,7 +1245,7 @@ func_21E5() {
 }
 
 func_9530(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("door_peek_struct", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("door_peek_struct", "script_noteworthy");
 
   if(var_1.size > 0) {
     foreach(var_3 in var_1) {

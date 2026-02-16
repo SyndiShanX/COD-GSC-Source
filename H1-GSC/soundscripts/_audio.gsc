@@ -878,7 +878,7 @@ aud_start_slow_mo_gunshot_callback(var_0, var_1) {
   var_7 = level.player getcurrentweapon();
 
   for(;;) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       if(!var_6) {
         var_6 = 1;
         [[var_0]](var_7);

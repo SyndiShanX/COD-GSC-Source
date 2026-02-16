@@ -2919,7 +2919,7 @@ get_all_target_ents(var_0) {
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
   var_2 = getnodearray(var_0, "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
-  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
   var_2 = getvehiclenodearray(var_0, "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
@@ -5491,7 +5491,7 @@ array_spawn_targetname(var_0, var_1, var_2, var_3) {
   var_4 = getEntArray(var_0, "targetname");
 
   if(isDefined(level.spawn_pool_enabled)) {
-    var_5 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_5 = common_scripts\utility::getStructArray(var_0, "targetname");
 
     if(isDefined(var_3) && var_3)
       deletestructarray_ref(var_5);
@@ -5507,7 +5507,7 @@ array_spawn_targetname_cg(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0, "targetname");
 
   if(isDefined(level.spawn_pool_enabled)) {
-    var_6 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_6 = common_scripts\utility::getStructArray(var_0, "targetname");
 
     if(isDefined(var_4) && var_4)
       deletestructarray_ref(var_6);
@@ -5540,7 +5540,7 @@ array_spawn_noteworthy(var_0, var_1, var_2, var_3) {
   var_4 = getEntArray(var_0, "script_noteworthy");
 
   if(isDefined(level.spawn_pool_enabled)) {
-    var_5 = common_scripts\utility::getstructarray(var_0, "script_noteworthy");
+    var_5 = common_scripts\utility::getStructArray(var_0, "script_noteworthy");
 
     if(isDefined(var_3) && var_3)
       deletestructarray_ref(var_5);
@@ -9371,7 +9371,7 @@ is_demo() {
 }
 
 deletestructarray(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_3 = common_scripts\utility::getStructArray(var_0, var_1);
   deletestructarray_ref(var_3, var_2);
 }
 
@@ -9460,7 +9460,7 @@ getstruct_delete(var_0, var_1) {
 }
 
 getstructarray_delete(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_3 = common_scripts\utility::getStructArray(var_0, var_1);
   deletestructarray_ref(var_3, var_2);
   return var_3;
 }

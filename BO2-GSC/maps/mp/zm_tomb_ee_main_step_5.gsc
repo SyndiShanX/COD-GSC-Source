@@ -60,7 +60,7 @@ spawn_zombie_blood_plane() {
   ai_pilot.b_zombie_blood_damage_only = 1;
   playFX(level._effect["biplane_explode"], vh_biplane.origin);
   vh_biplane delete();
-  a_start_pos = getstructarray("pilot_goal", "script_noteworthy");
+  a_start_pos = getStructArray("pilot_goal", "script_noteworthy");
   a_start_pos = get_array_of_closest(ai_pilot.origin, a_start_pos);
   linker = spawn("script_model", ai_pilot.origin);
   linker setModel("tag_origin");

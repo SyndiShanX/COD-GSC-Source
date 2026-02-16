@@ -335,10 +335,10 @@ debug_reflection_buttons() {
   while(getDvar(#"debug_reflection") == "1" || getDvar(#"debug_reflection") == "3" || getDvar(#"debug_reflection_matte") == "1" || getDvar(#"debug_color_pallete") == "1" || getDvar(#"debug_color_pallete") == "2") {
     players = get_players();
 
-    if(players[0] buttonpressed("BUTTON_X"))
+    if(players[0] buttonPressed("BUTTON_X"))
       offset = offset + 50;
 
-    if(players[0] buttonpressed("BUTTON_Y"))
+    if(players[0] buttonPressed("BUTTON_Y"))
       offset = offset - 50;
 
     if(offset > 1000)

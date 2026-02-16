@@ -113,7 +113,7 @@ start_zombie_stuff() {
   clientscripts\mp\_visionset_mgr::vsmgr_register_overlay_info_style_burn("zm_transit_burn", 1, 15, 2);
 }
 
-include_weapons() {
+#include_weapons() {
   gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
@@ -181,7 +181,7 @@ include_weapons() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -194,7 +194,7 @@ include_powerups() {
   include_powerup("teller_withdrawl");
 }
 
-include_equipment_for_level() {
+#include_equipment_for_level() {
   clientscripts\mp\zombies\_zm_equipment::include_equipment("riotshield_zm");
 }
 

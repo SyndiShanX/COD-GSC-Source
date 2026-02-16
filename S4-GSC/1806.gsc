@@ -144,7 +144,7 @@ _id_2E66() {
   self notify("watchForAltDetonation");
   self endon("watchForAltDetonation");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     waitframe();
   }
 
@@ -152,10 +152,10 @@ _id_2E66() {
   var_1 = level._id_5F3A;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + var_1;
         wait(var_1);
       }
@@ -165,7 +165,7 @@ _id_2E66() {
       }
       var_0 = 0;
 
-      while(!self usebuttonpressed() && var_0 < 0.25) {
+      while(!self useButtonPressed() && var_0 < 0.25) {
         var_0 = var_0 + var_1;
         wait(var_1);
       }

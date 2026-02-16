@@ -282,7 +282,7 @@ func_FA92() {
 func_FA94() {
   if(!isDefined(game["roundsPlayed"])) {
     level.var_2B2F.var_DAE3 = scripts\engine\utility::getstruct("breakneck_blackhole_target_loc", "script_noteworthy");
-    level.var_2B2F.var_DAE5 = func_FA93(scripts\engine\utility::getstructarray("breakneck_blackhole_spawn_loc", "script_noteworthy"));
+    level.var_2B2F.var_DAE5 = func_FA93(scripts\engine\utility::getStructArray("breakneck_blackhole_spawn_loc", "script_noteworthy"));
     level.var_2B2F.var_DAE4 = getEntArray("breakneck_blackhole_pull", "targetname");
     if(isDefined(level.var_2B2F.var_DAE3)) {
       if(level.var_2B2F.var_DAE3.size != 0) {

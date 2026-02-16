@@ -23,7 +23,7 @@ wait_until_first_player() {
 }
 thread_sound_trigger() {
   self waittill("trigger");
-  struct_targs = getstructarray(self.target, "targetname");
+  struct_targs = getStructArray(self.target, "targetname");
   ent_targs = getEntArray(self.target, "targetname");
   if(isDefined(struct_targs)) {
     for(i = 0; i < struct_targs.size; i++) {

@@ -32,7 +32,7 @@ main() {
   activateAmbientPackage(0, "default_pkg", 0);
   activateAmbientRoom(0, "default_room", 0);
 
-  array_thread(getstructarray("lightning", "targetname"), ::lightning_audio);
+  array_thread(getStructArray("lightning", "targetname"), ::lightning_audio);
 }
 
 lightning_audio() {

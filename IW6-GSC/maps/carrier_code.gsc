@@ -1751,7 +1751,7 @@ fake_vehicles_loop_until_endon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
   if(var_0 == 0) {}
 
-  var_9 = common_scripts\utility::getstructarray(var_1, "targetname");
+  var_9 = common_scripts\utility::getStructArray(var_1, "targetname");
   var_10 = [];
 
   foreach(var_12 in var_9) {

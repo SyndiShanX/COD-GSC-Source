@@ -81,7 +81,7 @@ event1_moveup_start() {
   maps\_spawner::kill_spawnernum(1);
   maps\_spawner::kill_spawnernum(2);
   getent("officer_jeep_trig", "targetname") notify("trigger");
-  spots = getstructarray("bombers_distance_start", "targetname");
+  spots = getStructArray("bombers_distance_start", "targetname");
   planes = [];
   for(i = 0; i < spots.size; i++) {
     planes[i] = spawn("script_model", spots[i].origin);
@@ -239,7 +239,7 @@ wakeup_in_fountain() {
   self setweaponammostock("stick_grenade", 0);
   self setweaponammoclip("stick_grenade", 0);
 
-  spots = getstructarray("bombers_distance_start", "targetname");
+  spots = getStructArray("bombers_distance_start", "targetname");
   planes = [];
   for(i = 0; i < spots.size; i++) {
     planes[i] = spawn("script_model", spots[i].origin);
@@ -273,7 +273,7 @@ wakeup_in_fountain() {
 
 spawn_fast_planes() {
   for(j = 1; j < 4; j++) {
-    spots = getstructarray("plane_group_fast_" + j, "script_noteworthy");
+    spots = getStructArray("plane_group_fast_" + j, "script_noteworthy");
     planes = [];
     speed = randomintrange(90, 115);
     for(i = 0; i < spots.size; i++) {
@@ -305,7 +305,7 @@ set_overhead_planegroup_speed() {
   plane_groups_done = false;
   num = 0;
   while(plane_groups_done == false) {
-    planes = getstructarray("wave2_group" + num, "script_noteworthy");
+    planes = getStructArray("wave2_group" + num, "script_noteworthy");
     if(isDefined(planes) && planes.size > 0) {
       speed = randomintrange(60, 85);
       for(i = 0; i < planes.size; i++) {
@@ -326,7 +326,7 @@ set_distant_planegroup_speed() {
   plane_groups_done = false;
   num = 0;
   while(plane_groups_done == false) {
-    planes = getstructarray("plane_group" + num, "script_noteworthy");
+    planes = getStructArray("plane_group" + num, "script_noteworthy");
     if(isDefined(planes) && planes.size > 0) {
       speed = 75;
       for(i = 0; i < planes.size; i++) {
@@ -756,7 +756,7 @@ e1_waitfor_player_break_stealth() {
     guys[i] setgoalentity(get_players()[0]);
     get_players()[0].ignoreme = false;
   }
-  spots = getstructarray("stealthbreak_shotspots", "targetname");
+  spots = getStructArray("stealthbreak_shotspots", "targetname");
   level.hero solo_set_pacifist(false);
   level.hero animscripts\shared::placeweaponOn("ppsh", "right");
   counter = 0;
@@ -879,14 +879,14 @@ bomber_wave_come(planenames, lastwave, new_configuration, shadowdistdraw) {
   playsoundatposition("bombers_dist_exit", (1384, 8016, -1944));
 
   if(isDefined(new_configuration) && new_configuration == 1) {
-    spots = getstructarray("wave2_planes", "targetname");
+    spots = getStructArray("wave2_planes", "targetname");
   } else if(isDefined(new_configuration) && new_configuration == 2) {
-    spots = getstructarray("wave2_planes2", "targetname");
+    spots = getStructArray("wave2_planes2", "targetname");
   } else if(isDefined(new_configuration) && new_configuration == 3) {
-    spots = getstructarray("bombers_sniperwave", "targetname");
+    spots = getStructArray("bombers_sniperwave", "targetname");
     mph = 75;
   } else {
-    spots = getstructarray("bombers_start", "targetname");
+    spots = getStructArray("bombers_start", "targetname");
   }
   planes = [];
   for(i = 0; i < spots.size; i++) {
@@ -1117,7 +1117,7 @@ e1_player_breaks_stealth_during_pacing() {
   maps\_spawner::flood_spawner_scripted(spawners);
   thread hunters_after_hero();
   wait 10;
-  nadespots = getstructarray("e1_grenade_flush_spot", "targetname");
+  nadespots = getStructArray("e1_grenade_flush_spot", "targetname");
   array_thread(nadespots, ::lob_them_nades);
 }
 

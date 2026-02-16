@@ -117,7 +117,7 @@ collectibles_world_init() {
   level.itemexplodethisframe = false;
   level.collectibles_worldcount = [];
 
-  items = getstructarray("item", "targetname");
+  items = getStructArray("item", "targetname");
 
   if(isDefined(level.additional_boss_weapon)) {
     additional_boss_weapon = [[level.additional_boss_weapon]]();

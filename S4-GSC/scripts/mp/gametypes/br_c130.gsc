@@ -826,7 +826,7 @@ _id_79D3(var_0) {
   var_7 = 2700;
   var_8 = 999999999;
 
-  while(!self usebuttonpressed() && var_8 > var_7) {
+  while(!self useButtonPressed() && var_8 > var_7) {
     var_9 = scripts\common\utility::groundpos(var_1.origin);
     var_8 = var_1.origin[2] - var_9[2];
 
@@ -893,7 +893,7 @@ _id_BE5A(var_0, var_1) {
   var_2 thread _id_B739();
   var_3 = length(var_1);
 
-  while(!var_2 isonground() && !var_2 usebuttonpressed() && isDefined(var_0) && !var_2 _meth_86B8()) {
+  while(!var_2 isonground() && !var_2 useButtonPressed() && isDefined(var_0) && !var_2 _meth_86B8()) {
     var_4 = var_0 getplayerangles();
     var_5 = _func_01C6((0, 0, 1), var_1, var_4[1]);
     var_6 = var_0.origin + var_5 - var_2.origin;

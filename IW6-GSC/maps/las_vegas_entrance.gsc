@@ -320,7 +320,7 @@ entrance_enemy_alert_thread() {
   thread maps\las_vegas_code::waittill_flag_set("explode", "entrance_combat_start");
   thread maps\las_vegas_code::too_close_to_allies("too_close", 250, "entrance_combat_start");
   self waittill("jumpedout");
-  var_1 = common_scripts\utility::getstructarray("entrance_shooter_path", "targetname");
+  var_1 = common_scripts\utility::getStructArray("entrance_shooter_path", "targetname");
   var_1 = sortbydistance(var_1, self.origin);
   var_2 = undefined;
 

@@ -14,7 +14,7 @@ _id_8278() {
     return;
   }
   level waittill("prematch_done");
-  var_0 = scripts\engine\utility::getstructarray("base_grid_anchor", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("base_grid_anchor", "targetname");
 
   foreach(var_2 in level._id_A8E8) {
     var_3 = _id_696D(var_2, var_0);
@@ -254,7 +254,7 @@ _handleloadoutpurchase(var_0, var_1) {
 }
 
 _id_0C1D(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray("vehicle_spawn_node", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("vehicle_spawn_node", "targetname");
   var_3 = undefined;
   var_4 = 1000;
 
@@ -358,7 +358,7 @@ _id_0DB7(var_0, var_1) {
   }
 
   if(var_0.type == "vehicle") {
-    var_3 = scripts\engine\utility::getstructarray("vehicle_spawn_node", "targetname");
+    var_3 = scripts\engine\utility::getStructArray("vehicle_spawn_node", "targetname");
     var_4 = undefined;
     var_5 = 1000;
 

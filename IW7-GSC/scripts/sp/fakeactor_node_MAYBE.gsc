@@ -32,9 +32,9 @@ func_6B3D() {
           }
         }
 
-        var_4 = scripts\engine\utility::getstructarray(self.target, "targetname");
+        var_4 = scripts\engine\utility::getStructArray(self.target, "targetname");
         if(isDefined(self.script_linkto)) {
-          var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getstructarray(self.script_linkto, "script_linkname"));
+          var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getStructArray(self.script_linkto, "script_linkname"));
         }
 
         foreach(var_6 in var_4) {
@@ -222,7 +222,7 @@ func_6B1D() {
     return var_0;
   }
 
-  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
   foreach(var_3 in var_1) {
     if(!var_3 func_9BE0()) {
       continue;
@@ -243,7 +243,7 @@ func_6B22() {
     return 0;
   }
 
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   var_1 = 0;
   foreach(var_3 in var_0) {
     if(!var_3 func_9BE0()) {

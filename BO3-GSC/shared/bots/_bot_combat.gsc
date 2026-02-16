@@ -142,7 +142,7 @@ function get_greatest_threat(maxdistance) {
 }
 
 function engage_threat() {
-  if(!self.bot.threat.wasvisible && self.bot.threat.visible && !self isthrowinggrenade() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self isswitchingweapons()) {
+  if(!self.bot.threat.wasvisible && self.bot.threat.visible && !self isthrowinggrenade() && !self fragButtonPressed() && !self secondaryoffhandbuttonPressed() && !self isswitchingweapons()) {
     visibleroll = randomint(100);
     rollweight = (isDefined(level.botsettings.lethalweight) ? level.botsettings.lethalweight : 0);
     if(visibleroll < rollweight && self.bot.threat.lastdistancesq >= level.botsettings.lethaldistanceminsq && self.bot.threat.lastdistancesq <= level.botsettings.lethaldistancemaxsq && self getweaponammostock(self.grenadetypeprimary)) {
@@ -159,16 +159,16 @@ function engage_threat() {
     }
     self.bot.threat.aimoffset = self get_aim_offset(self.bot.threat.entity);
   }
-  if(self fragbuttonpressed()) {
+  if(self fragButtonPressed()) {
     self throw_grenade(self.grenadetypeprimary, self.bot.threat.lastposition);
     return;
   }
-  if(self secondaryoffhandbuttonpressed()) {
+  if(self secondaryoffhandbuttonPressed()) {
     self throw_grenade(self.grenadetypesecondary, self.bot.threat.lastposition);
     return;
   }
   self update_weapon_aim();
-  if(self isreloading() || self isswitchingweapons() || self isthrowinggrenade() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self ismeleeing()) {
+  if(self isreloading() || self isswitchingweapons() || self isthrowinggrenade() || self fragButtonPressed() || self secondaryoffhandbuttonPressed() || self ismeleeing()) {
     return;
   }
   if(melee_attack()) {
@@ -210,7 +210,7 @@ function fire_weapon() {
     return;
   }
   if(weapon.firetype == "Single Shot" || weapon.firetype == "Burst" || weapon.firetype == "Charge Shot") {
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       return;
     }
   }

@@ -270,7 +270,7 @@ temp_vtol_rappel_start() {
 }
 
 temp_vtol_rappel_guys(str_struct_starts, str_rappeler) {
-  a_start_structs = getstructarray(str_struct_starts, "targetname");
+  a_start_structs = getStructArray(str_struct_starts, "targetname");
   sp_rappeler = getent(str_rappeler, "targetname");
 
   foreach(s_rappel_start in a_start_structs) {
@@ -302,7 +302,7 @@ spawn_quadrotors_at_structs(str_struct_name, str_noteworthy, b_copy_noteworthy) 
     b_copy_noteworthy = 0;
   }
 
-  a_spots = getstructarray(str_struct_name, "targetname");
+  a_spots = getStructArray(str_struct_name, "targetname");
   a_qrotors = [];
 
   foreach(s_spot in a_spots) {
@@ -324,7 +324,7 @@ spawn_quadrotors_at_structs(str_struct_name, str_noteworthy, b_copy_noteworthy) 
 }
 
 spawn_vtols_at_structs(str_struct_name, str_nd_name) {
-  a_spots = getstructarray(str_struct_name, "targetname");
+  a_spots = getStructArray(str_struct_name, "targetname");
 
   foreach(s_spot in a_spots) {
     v_vtol = spawn_vehicle_from_targetname("yemen_drone_control_vtol_spawner");

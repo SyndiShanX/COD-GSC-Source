@@ -27,7 +27,7 @@ func_94EF() {
 
     var_1.var_E74A = func_7C20();
     var_1.var_13C25 = func_7ABF();
-    var_2 = scripts\engine\utility::getclosest(var_1.origin, scripts\engine\utility::getstructarray("spinner", "script_noteworthy"));
+    var_2 = scripts\engine\utility::getclosest(var_1.origin, scripts\engine\utility::getStructArray("spinner", "script_noteworthy"));
     var_3 = spawn("script_model", var_2.origin + (0, 0, 0.15));
     if(!isDefined(var_2.angles)) {
       var_2.angles = (0, 0, 0);
@@ -283,7 +283,7 @@ func_12FFA(var_0, var_1, var_2) {
   var_1.var_10A05 = 1;
   var_1.inuse = 1;
   var_0 playlocalsound("zmb_wheel_spin_buy");
-  var_3 = scripts\engine\utility::getclosest(var_1.origin, scripts\engine\utility::getstructarray("wheel_fx_spot", "targetname"));
+  var_3 = scripts\engine\utility::getclosest(var_1.origin, scripts\engine\utility::getStructArray("wheel_fx_spot", "targetname"));
   var_1 setscriptablepartstate("spin_light", "on");
   scripts\engine\utility::waitframe();
   var_4 = var_0 getweaponslistall();
@@ -547,7 +547,7 @@ func_1010C(var_0, var_1) {
   loadworldweapons(var_5);
   var_9 = -1;
   var_10 = 0;
-  var_11 = scripts\engine\utility::getclosest(var_0.origin, scripts\engine\utility::getstructarray("wheel_fx_spot", "targetname"));
+  var_11 = scripts\engine\utility::getclosest(var_0.origin, scripts\engine\utility::getStructArray("wheel_fx_spot", "targetname"));
   var_0.weapon = undefined;
   while(var_0.var_10A05) {
     wait(var_0.var_E74D);
@@ -776,7 +776,7 @@ wait_for_player_to_take_weapon(var_0) {
   self endon("death");
   for(;;) {
     self waittill("trigger", var_1);
-    if(var_1 ismeleeing() || var_1 meleebuttonpressed() || scripts\engine\utility::istrue(var_1.isusingsupercard)) {
+    if(var_1 ismeleeing() || var_1 meleeButtonPressed() || scripts\engine\utility::istrue(var_1.isusingsupercard)) {
       continue;
     }
 

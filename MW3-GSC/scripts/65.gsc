@@ -3016,7 +3016,7 @@ _id_1F4F(var_0) {
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
   var_2 = getnodearray(var_0, "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
-  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
   var_2 = getvehiclenodearray(var_0, "targetname");
   var_1 = common_scripts\utility::array_combine(var_1, var_2);
@@ -5155,7 +5155,7 @@ _id_272C(var_0, var_1, var_2, var_3) {
   var_4 = getEntArray(var_0, "targetname");
 
   if(isDefined(level._id_2120)) {
-    var_5 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_5 = common_scripts\utility::getStructArray(var_0, "targetname");
 
     if(isDefined(var_3) && var_3) {
       _id_2122(var_5);
@@ -5171,7 +5171,7 @@ _id_272D(var_0, var_1, var_2, var_3) {
   var_4 = getEntArray(var_0, "script_noteworthy");
 
   if(isDefined(level._id_2120)) {
-    var_5 = common_scripts\utility::getstructarray(var_0, "script_noteworthy");
+    var_5 = common_scripts\utility::getStructArray(var_0, "script_noteworthy");
 
     if(isDefined(var_3) && var_3) {
       _id_2122(var_5);
@@ -8989,7 +8989,7 @@ _id_1957() {
 }
 
 _id_2839(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_3 = common_scripts\utility::getStructArray(var_0, var_1);
   _id_2122(var_3, var_2);
 }
 
@@ -9087,7 +9087,7 @@ _id_283B(var_0, var_1) {
 }
 
 _id_1BF9(var_0, var_1, var_2) {
-  var_3 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_3 = common_scripts\utility::getStructArray(var_0, var_1);
   _id_2122(var_3, var_2);
   return var_3;
 }

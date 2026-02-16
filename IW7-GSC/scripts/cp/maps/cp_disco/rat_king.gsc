@@ -4,7 +4,7 @@
 *************************************************/
 
 rat_king_init() {
-  var_0 = scripts\engine\utility::getstructarray("rat_king_spawner", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("rat_king_spawner", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_noteworthy)) {
       continue;
@@ -19,7 +19,7 @@ rat_king_init() {
 }
 
 setuprkbouncestructs() {
-  level.rat_king_bounce_structs = scripts\engine\utility::getstructarray("shield_bounce_loc", "targetname");
+  level.rat_king_bounce_structs = scripts\engine\utility::getStructArray("shield_bounce_loc", "targetname");
 }
 
 spawn_rat_king(var_0, var_1, var_2) {

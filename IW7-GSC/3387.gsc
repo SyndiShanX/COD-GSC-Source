@@ -5,14 +5,14 @@
 
 init_rockettrap() {
   level.rockettrapuses = 0;
-  var_0 = scripts\engine\utility::getstructarray("rockettrap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rockettrap", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_E5D9();
   }
 }
 
 func_E5D9() {
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   var_1 = undefined;
   var_2 = undefined;
   foreach(var_4 in var_0) {
@@ -66,7 +66,7 @@ func_E5D9() {
 
 use_rocket_trap(var_0, var_1) {
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
-  var_2 = sortbydistance(scripts\engine\utility::getstructarray("fm_start_struct", "targetname"), var_1.origin);
+  var_2 = sortbydistance(scripts\engine\utility::getStructArray("fm_start_struct", "targetname"), var_1.origin);
   level.rockettrapuses++;
   level.rocket_trap_kills = 0;
   level.fmtraptrigger = var_2[0];

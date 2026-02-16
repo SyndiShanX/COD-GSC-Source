@@ -1428,7 +1428,7 @@ really_play_2D_sound(sound) {
 play_sound_2D(sound) {
   level thread really_play_2D_sound(sound);
 }
-include_weapon(weapon_name, in_box, collector, weighting_func) {
+#include_weapon(weapon_name, in_box, collector, weighting_func) {
   if(!isDefined(in_box)) {
     in_box = true;
   }
@@ -1437,7 +1437,7 @@ include_weapon(weapon_name, in_box, collector, weighting_func) {
   }
   maps\_zombiemode_weapons::include_zombie_weapon(weapon_name, in_box, collector, weighting_func);
 }
-include_powerup(powerup_name) {
+#include_powerup(powerup_name) {
   maps\_zombiemode_powerups::include_zombie_powerup(powerup_name);
 }
 trigger_invisible(enable) {

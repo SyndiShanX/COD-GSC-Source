@@ -30,7 +30,7 @@ init() {
     damage_ring.maxhealth = damage_ring.Max_fake_health;
     damage_ring.fakehealth = damage_ring.Max_fake_health;
 
-    VFX_points = getstructarray(damage_ring.target, "targetname");
+    VFX_points = getStructArray(damage_ring.target, "targetname");
     damage_ring.tag_array = [];
     foreach(VFX_point in VFX_points) {
       tag = spawn_tag_origin();

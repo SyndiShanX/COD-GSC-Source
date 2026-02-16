@@ -43,7 +43,7 @@ function isbulletimpactmod(smeansofdeath) {
 function waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
-  while(self usebuttonpressed() != 1) {
+  while(self useButtonPressed() != 1) {
     wait(0.05);
   }
 }
@@ -705,7 +705,7 @@ function ghost_wait_show_to_others(player, wait_time = 0.1, self_endon_string1) 
 
 function use_button_pressed() {
   assert(isPlayer(self), "");
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 function waittill_use_button_pressed() {

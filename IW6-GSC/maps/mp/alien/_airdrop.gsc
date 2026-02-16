@@ -460,7 +460,7 @@ watch_for_use_nuke_trigger(nuke_trig) {
   self.player_using_nuke = false;
 
   while(true) {
-    if(self UseButtonPressed() && DistanceSquared(self.origin, nuke_trig.origin) < 130 * 130) {
+    if(self useButtonPressed() && DistanceSquared(self.origin, nuke_trig.origin) < 130 * 130) {
       self.player_using_nuke = true;
       self notify("using_nuke");
       self thread reset_nuke_usage();
@@ -902,7 +902,7 @@ hive_heli_assault_loop() {
   level endon("blocker_hive_destroyed");
 
   hover_nodes = [];
-  hover_nodes = getstructarray("assault_hover_" + maps\mp\alien\_hive::get_blocker_hive_index(), "targetname");
+  hover_nodes = getStructArray("assault_hover_" + maps\mp\alien\_hive::get_blocker_hive_index(), "targetname");
   assert(isDefined(hover_nodes) && hover_nodes.size);
 
   assault_duration_per_node = 10;
@@ -1532,14 +1532,14 @@ call_in_airdrop_heli(drop_loc, player_loops, drop_loops) {
 }
 
 init_chaos_airdrop() {
-  level.chaos_airdrop_locs = getstructarray("chaos_airdrop", "targetname");
+  level.chaos_airdrop_locs = getStructArray("chaos_airdrop", "targetname");
   if(!isDefined(level.chaos_airdrop_locs) || level.chaos_airdrop_locs.size == 0) {
     return;
   }
   foreach(loc in level.chaos_airdrop_locs) {
     loc.sub_locs = [];
     loc.sub_locs[0] = loc.origin;
-    sub_locs = getstructarray(loc.target, "targetname");
+    sub_locs = getStructArray(loc.target, "targetname");
     foreach(sub_loc in sub_locs)
     loc.sub_locs[loc.sub_locs.size] = sub_loc.origin;
 

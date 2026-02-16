@@ -633,7 +633,7 @@ allow_free_griggs_when_looking_in_position() {
     if((var_1 || level.player islookingat(level.griggs)) && level.player istouching(self) && !level.player isleaning()) {
       self sethintstring(&"ICBM_GRIGGSUSETRIGGER");
 
-      if(level.player usebuttonpressed()) {
+      if(level.player useButtonPressed()) {
         self notify("griggs_trigger_used");
         break;
       }
@@ -834,7 +834,7 @@ second_c4_plant_check() {
       level.player allowfire(var_0);
     }
 
-    if(level.player attackbuttonpressed() && !var_0 && gettime() > var_1) {
+    if(level.player attackButtonPressed() && !var_0 && gettime() > var_1) {
       thread maps\_utility::hint(&"ICBM_ONE_MORE_C4", 3);
       var_1 = gettime() + 4000;
     }

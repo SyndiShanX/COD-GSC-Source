@@ -71,7 +71,7 @@ fixpostlaunchspawns() {
 fixbadpatrollink() {
   var_0 = undefined;
   var_1 = undefined;
-  var_2 = scripts\engine\utility::getstructarray("patrol_route", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("patrol_route", "script_noteworthy");
 
   foreach(var_4 in var_2) {
     if(scripts\engine\utility::_id_4B8C(var_4.origin, (255.695, -33.187, 122.04)) <= 10) {

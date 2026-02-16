@@ -172,7 +172,7 @@ is_included(equipment) {
   return isDefined(level.zombie_include_equipment[equipment.rootweapon]);
 }
 
-include(equipment_name) {
+#include(equipment_name) {
   if(!isDefined(level.zombie_include_equipment)) {
     level.zombie_include_equipment = [];
   }

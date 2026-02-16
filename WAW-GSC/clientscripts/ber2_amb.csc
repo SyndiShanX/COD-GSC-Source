@@ -153,9 +153,9 @@ set_collapse_bus() {
 }
 start_lights() {
   level waittill("start_lights");
-  array_thread(getstructarray("light_surge", "targetname"), ::light_sound);
-  array_thread(getstructarray("subway_generator", "targetname"), ::generator_sound);
-  array_thread(getstructarray("electrical_room", "targetname"), ::electrical_room_sound);
+  array_thread(getStructArray("light_surge", "targetname"), ::light_sound);
+  array_thread(getStructArray("subway_generator", "targetname"), ::generator_sound);
+  array_thread(getStructArray("electrical_room", "targetname"), ::electrical_room_sound);
 }
 light_sound() {
   for(;;) {

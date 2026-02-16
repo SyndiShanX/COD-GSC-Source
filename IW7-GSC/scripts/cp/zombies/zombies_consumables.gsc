@@ -1930,7 +1930,7 @@ look_at_and_outline_enemies(var_0) {
   self endon(var_0 + "_timeup");
   var_1 = 0;
   for(;;) {
-    if(self adsbuttonpressed() && !var_1) {
+    if(self adsButtonPressed() && !var_1) {
       if(scripts\cp\utility::is_melee_weapon(self getcurrentweapon()) || scripts\cp\utility::weapon_is_dlc_melee(self getcurrentweapon())) {
         scripts\engine\utility::waitframe();
         continue;
@@ -2996,7 +2996,7 @@ wait_for_player_activation(var_0) {
         break;
       }
 
-      if(!var_8 usebuttonpressed()) {
+      if(!var_8 useButtonPressed()) {
         var_6 = 0;
         break;
       }
@@ -3031,7 +3031,7 @@ wait_for_player_activation(var_0) {
           break;
         }
 
-        if(!var_8 usebuttonpressed()) {
+        if(!var_8 useButtonPressed()) {
           var_6 = 0;
           break;
         }

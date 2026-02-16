@@ -900,7 +900,7 @@ _id_3F49(var_0) {
 
 _id_3ECA() {
   wait 50;
-  var_0 = scripts\engine\utility::getstructarray("loadout_change_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("loadout_change_struct", "script_noteworthy");
   level._id_EA6E = [];
 
   foreach(var_2 in var_0) {
@@ -945,7 +945,7 @@ _id_E0B5(var_0) {
 
 _id_3F4A() {
   _id_0737::_id_C1EE("loadout_change_interaction", "null", undefined, ::_id_961C, ::_id_961B, 0, 0, undefined);
-  var_0 = scripts\engine\utility::getstructarray("loadout_change_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("loadout_change_struct", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     _id_3F49(var_2);

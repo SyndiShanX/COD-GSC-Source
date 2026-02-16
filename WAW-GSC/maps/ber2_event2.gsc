@@ -500,7 +500,7 @@ metrowave_rats() {
 
   level waittill("start_rats");
 
-  ratStarts = GetStructArray("metrowave_rat_start", "targetname");
+  ratStarts = getStructArray("metrowave_rat_start", "targetname");
   ASSERTEX(isDefined(ratStarts) && ratStarts.size > 0, "metrowave_rats(): can't find any rat start spots.");
 
   level.ratsMax = 40;
@@ -552,7 +552,7 @@ metrowave_rat_runpath() {
   pathpoint = self.pathstart;
   while(isDefined(pathpoint)) {
     if(isDefined(pathpoint.target)) {
-      targets = GetStructArray(pathpoint.target, "targetname");
+      targets = getStructArray(pathpoint.target, "targetname");
       nextpoint = get_random(targets);
 
       zOffset = -5;
@@ -1112,7 +1112,7 @@ epd_demo_outro() {
   nextmission();
 }
 event2_arty_setup() {
-  emitters = GetStructArray("struct_metro_artyfx_emitter", "targetname");
+  emitters = getStructArray("struct_metro_artyfx_emitter", "targetname");
   ASSERTEX(isDefined(emitters) && emitters.size > 0, "Can't find any metro arty fx emitters.");
   level.metro_arty_emitters = emitters;
 

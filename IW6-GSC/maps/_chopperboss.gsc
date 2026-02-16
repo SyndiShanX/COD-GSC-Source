@@ -19,7 +19,7 @@ chopper_boss_locs_populate(var_0, var_1) {
 }
 
 chopper_boss_locs_populate_thread(var_0, var_1) {
-  level.chopper_boss_locs = common_scripts\utility::getstructarray(var_1, var_0);
+  level.chopper_boss_locs = common_scripts\utility::getStructArray(var_1, var_0);
   var_2 = 0;
 
   foreach(var_4 in level.chopper_boss_locs) {
@@ -49,7 +49,7 @@ chopper_boss_locs_populate_thread(var_0, var_1) {
 }
 
 chopper_boss_locs_populate_thread_optimized(var_0, var_1, var_2) {
-  level.chopper_boss_locs = common_scripts\utility::getstructarray(var_1, var_0);
+  level.chopper_boss_locs = common_scripts\utility::getStructArray(var_1, var_0);
   var_3 = [];
 
   for(var_4 = var_2; isDefined(var_4); var_4 = getent(var_4.target, "targetname")) {

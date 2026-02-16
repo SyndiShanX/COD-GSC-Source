@@ -4,7 +4,7 @@
 *************************************************/
 
 _id_703E(var_0, var_1, var_2, var_3, var_4) {
-  var_5 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   if(var_5.size <= 0) {
     return;

@@ -36,7 +36,7 @@ wait_for_initial_conditions() {
 
   level waittill("bouncing_tomahawk_zm_aquired");
   level.sq_bg_macguffins = [];
-  a_s_mcguffin = getstructarray("struct_sq_bg_macguffin", "targetname");
+  a_s_mcguffin = getStructArray("struct_sq_bg_macguffin", "targetname");
 
   foreach(struct in a_s_mcguffin) {
     m_temp = spawn("script_model", struct.origin, 0);

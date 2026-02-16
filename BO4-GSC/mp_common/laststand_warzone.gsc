@@ -723,7 +723,7 @@ laststand_bleedout(bleedouttime, var_969fabf4) {
   self.var_eb33efbc = 0;
   var_cb141a23 = int(0.1 * 1000);
   var_93b9385d = bleedouttime * 0.06;
-  var_cebeb781 = !self usebuttonpressed();
+  var_cebeb781 = !self useButtonPressed();
 
   if(self.bleedout_time > 0) {
     self thread laststand_bleedout_damage();
@@ -733,7 +733,7 @@ laststand_bleedout(bleedouttime, var_969fabf4) {
     while(self.bleedout_time > 0) {
       time = gettime();
 
-      if(isDefined(level.var_46a21fe9) && level.var_46a21fe9 && !(self is_being_revived() || self function_72e0c544()) && var_cebeb781 && self usebuttonpressed()) {
+      if(isDefined(level.var_46a21fe9) && level.var_46a21fe9 && !(self is_being_revived() || self function_72e0c544()) && var_cebeb781 && self useButtonPressed()) {
         if(!isDefined(var_7c962084)) {
           var_7c962084 = time;
         }
@@ -758,7 +758,7 @@ laststand_bleedout(bleedouttime, var_969fabf4) {
       }
 
       waitframe(1);
-      var_cebeb781 |= !self usebuttonpressed();
+      var_cebeb781 |= !self useButtonPressed();
       self.var_eb33efbc = 0;
 
       while(!(isDefined(self.var_1cc38de0) && self.var_1cc38de0) && (self is_being_revived() || self function_72e0c544())) {
@@ -952,7 +952,7 @@ revive_trigger_think() {
 
     self.revivetrigger sethintstring("");
 
-    if(getdvarint(#"lastand_selfrevive", 0) && self attackbuttonpressed() && self throwbuttonpressed() && self fragbuttonpressed()) {
+    if(getdvarint(#"lastand_selfrevive", 0) && self attackButtonPressed() && self throwbuttonPressed() && self fragButtonPressed()) {
       self thread revive_success(self);
       self function_2907ce7a();
       return;
@@ -1252,7 +1252,7 @@ is_reviving(revivee, ignore_touch_checks = 0, height = undefined) {
     return false;
   }
 
-  return self usebuttonpressed() && self can_revive(revivee, ignore_touch_checks, height);
+  return self useButtonPressed() && self can_revive(revivee, ignore_touch_checks, height);
 }
 
 is_reviving_any() {
@@ -1364,7 +1364,7 @@ revive_do_revive(playerbeingrevived) {
 function_adecbc95() {
   self endon(#"disconnect");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     waitframe(1);
   }
 

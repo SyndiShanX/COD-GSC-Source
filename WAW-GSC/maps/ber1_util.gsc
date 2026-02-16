@@ -161,7 +161,7 @@ warp_players_underworld() {
   }
 }
 warp_players(startValue, startKey) {
-  starts = GetStructArray(startValue, startKey);
+  starts = getStructArray(startValue, startKey);
   ASSERT(starts.size == 4);
 
   players = get_players();
@@ -176,7 +176,7 @@ warp_friendlies(startValue, startKey) {
   friendly_squad = get_ai_group_ai("start_guys");
   friendly_squad = array_combine(friendly_squad, level.heroes);
 
-  friendlyStarts = GetStructArray(startValue, startKey);
+  friendlyStarts = getStructArray(startValue, startKey);
 
   ASSERTEX(friendlyStarts.size >= friendly_squad.size, "warp_friendlies(): not enough friendly start points for friendlies!");
 

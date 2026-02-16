@@ -1926,7 +1926,7 @@ fire_rocket_series(launch_points_targetname, destination_vector, total_rockets, 
 
   start_points = [];
 
-  orgs = getstructarray(launch_points_targetname, "targetname");
+  orgs = getStructArray(launch_points_targetname, "targetname");
 
   q = 0;
   for(i = 0; i < num_rockets; i++) {

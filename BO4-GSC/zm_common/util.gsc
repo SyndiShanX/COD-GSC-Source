@@ -116,7 +116,7 @@ isbulletimpactmod(smeansofdeath) {
 waitrespawnbutton() {
   self endon(#"disconnect", #"end_respawn");
 
-  while(self usebuttonpressed() != 1) {
+  while(self useButtonPressed() != 1) {
     waitframe(1);
   }
 }

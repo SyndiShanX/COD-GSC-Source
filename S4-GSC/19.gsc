@@ -1772,7 +1772,7 @@ _id_479C(var_0) {
 }
 
 _id_89A3(var_0) {
-  return !level.gameended && isDefined(var_0) && scripts\mp\utility\player::isreallyalive(self) && self usebuttonpressed() && !self isonladder() && !self meleebuttonpressed() && var_0._id_4143 < var_0._id_FEE7 && (!isDefined(self._id_F03B) || !self._id_F03B);
+  return !level.gameended && isDefined(var_0) && scripts\mp\utility\player::isreallyalive(self) && self useButtonPressed() && !self isonladder() && !self meleeButtonPressed() && var_0._id_4143 < var_0._id_FEE7 && (!isDefined(self._id_F03B) || !self._id_F03B);
 }
 
 _id_10D68(var_0) {
@@ -1869,7 +1869,7 @@ _id_3519(var_0, var_1) {
   if(!_id_10D68(var_0)) {
     return;
   }
-  var_3 = self meleebuttonpressed();
+  var_3 = self meleeButtonPressed();
 
   if(var_3 && var_0.basename != "s4_me_knife") {
     return;

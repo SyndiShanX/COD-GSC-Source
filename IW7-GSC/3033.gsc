@@ -374,7 +374,7 @@ func_D15A() {
 
   for(;;) {
     if(!level.player scripts\sp\utility::func_65DB("disable_jackal_mode_switch") && !level.player scripts\sp\utility::func_65DB("jackal_force_mode")) {
-      if(!level.player buttonpressed("button_ltrig")) {
+      if(!level.player buttonPressed("button_ltrig")) {
         if(var_0 != "fly") {
           self notify("switchmode");
           thread func_1023A();
@@ -418,7 +418,7 @@ func_D14F() {
   thread func_B8A7();
 
   for(;;) {
-    while(!level.player secondaryoffhandbuttonpressed() || level.player scripts\sp\utility::func_65DB("disable_jackal_guns") || level.player scripts\sp\utility::func_65DB("disable_jackal_flares")) {
+    while(!level.player secondaryoffhandbuttonPressed() || level.player scripts\sp\utility::func_65DB("disable_jackal_guns") || level.player scripts\sp\utility::func_65DB("disable_jackal_flares")) {
       wait 0.05;
     }
 
@@ -430,7 +430,7 @@ func_D14F() {
       func_D150();
     }
 
-    while(level.player secondaryoffhandbuttonpressed()) {
+    while(level.player secondaryoffhandbuttonPressed()) {
       wait 0.05;
     }
   }
@@ -640,7 +640,7 @@ func_13984() {
   self endon("player_exit_jackal");
   self endon("stop_shooting_flares");
 
-  while(level.player secondaryoffhandbuttonpressed()) {
+  while(level.player secondaryoffhandbuttonPressed()) {
     wait 0.05;
   }
 
@@ -1368,11 +1368,11 @@ func_D170() {
 func_D173() {
   self endon("self_weapons_cooled");
 
-  while(level.player attackbuttonpressed()) {
+  while(level.player attackButtonPressed()) {
     wait 0.05;
   }
 
-  while(!level.player attackbuttonpressed()) {
+  while(!level.player attackButtonPressed()) {
     wait 0.05;
   }
 
@@ -1406,7 +1406,7 @@ func_D19C() {
 func_D19D() {
   level.player endon("jackal_switch_weapons");
 
-  while(level.player attackbuttonpressed() && !level.player scripts\sp\utility::func_65DB("disable_jackal_guns")) {
+  while(level.player attackButtonPressed() && !level.player scripts\sp\utility::func_65DB("disable_jackal_guns")) {
     wait 0.05;
   }
 }
@@ -2745,7 +2745,7 @@ func_13930(var_0) {
   self endon("fd_notify_ace_mode_disengaged");
   var_0 endon("death");
 
-  while(self adsbuttonpressed() && !level.player scripts\sp\utility::func_65DB("disable_jackal_dogfight")) {
+  while(self adsButtonPressed() && !level.player scripts\sp\utility::func_65DB("disable_jackal_dogfight")) {
     wait 0.05;
   }
 
@@ -2983,7 +2983,7 @@ func_58B4() {
               self.var_4BE7 notify("predogfight_disengage");
             }
 
-            var_18 = level.player adsbuttonpressed();
+            var_18 = level.player adsButtonPressed();
             func_E079(var_18);
           }
 
@@ -3104,7 +3104,7 @@ func_587B() {
   level.player func_8490("disable_ads", 1);
   level.player func_8490("disable_lockon", 1);
   var_0 = 0;
-  var_1 = level.player adsbuttonpressed();
+  var_1 = level.player adsButtonPressed();
   var_2 = 0.2;
   var_3 = 1.6;
 
@@ -3118,7 +3118,7 @@ func_587B() {
     } else if(var_0 > var_2) {
       break;
     }
-    if(!level.player adsbuttonpressed() && var_1) {
+    if(!level.player adsButtonPressed() && var_1) {
       var_4 = 0;
     }
 

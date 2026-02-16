@@ -136,7 +136,7 @@ iss_satellite() {
 iss_organize_ents() {
   level.iss_ents = [];
 
-  nodes = getstructarray("iss_group_node", "targetname");
+  nodes = getStructArray("iss_group_node", "targetname");
   array_thread(nodes, ::iss_organize_ents_by_node);
   array_wait(nodes, "done_organizing");
 
@@ -1092,7 +1092,7 @@ street_btr_scene() {
 }
 
 street_crash_cars() {
-  parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+  parts = array_combine(getEntArray(self.target, "targetname"), getStructArray(self.target, "targetname"));
   info = [];
   info["fx"] = [];
   info["light"] = [];
@@ -1155,7 +1155,7 @@ street_crash_cars() {
 }
 
 street_crash_helis() {
-  parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+  parts = array_combine(getEntArray(self.target, "targetname"), getStructArray(self.target, "targetname"));
   deathmodel = [];
   fx_array = [];
   clip = undefined;
@@ -1240,7 +1240,7 @@ street_crash_helis_anim() {
   dmg = undefined;
 
   if(isDefined(self.target))
-    parts = array_combine(getEntArray(self.target, "targetname"), getstructarray(self.target, "targetname"));
+    parts = array_combine(getEntArray(self.target, "targetname"), getStructArray(self.target, "targetname"));
 
   foreach(part in parts) {
     switch (part.script_noteworthy) {
@@ -1377,14 +1377,14 @@ street_crash_helis_anim() {
 street_heli_crash_secondaries_2() {
   trees = getEntArray("street_blackhawk_tree", "targetname");
   array_thread(trees, ::street_trees);
-  dmg = getstructarray("street_damage_node_2", "targetname");
+  dmg = getStructArray("street_damage_node_2", "targetname");
   array_thread(dmg, ::street_damage_radius);
 }
 
 street_heli_crash_secondaries_3() {
   trees = getEntArray("street_heli3_tree", "targetname");
   array_thread(trees, ::street_trees);
-  dmg = getstructarray("street_damage_node_3", "targetname");
+  dmg = getStructArray("street_damage_node_3", "targetname");
   array_thread(dmg, ::street_damage_radius);
 }
 
@@ -2365,7 +2365,7 @@ send_team_to_specific_nodes(name, type) {
   if(!nodes.size)
     nodes = getEntArray(name, type);
   if(!nodes.size)
-    nodes = getstructarray(name, type);
+    nodes = getStructArray(name, type);
 
   foreach(node in nodes) {
     name = node.script_noteworthy;
@@ -2379,7 +2379,7 @@ emp_teleport_player(name) {
   if(!isDefined(name))
     name = level.start_point;
 
-  array = getstructarray("start_point", "targetname");
+  array = getStructArray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {
@@ -3152,11 +3152,11 @@ bodyshot(fx) {
 
 script2model_precache() {
   precachelist = [];
-  data = getstructarray("script_to_model_swap_intro", "script_noteworthy");
+  data = getStructArray("script_to_model_swap_intro", "script_noteworthy");
   data = array_add(data, getstruct("earth_model", "targetname"));
-  data = array_combine(data, getstructarray("crash_cars", "targetname"));
-  data = array_combine(data, getstructarray("street_cars_bounce", "targetname"));
-  data = array_combine(data, getstructarray("iss_entity", "targetname"));
+  data = array_combine(data, getStructArray("crash_cars", "targetname"));
+  data = array_combine(data, getStructArray("street_cars_bounce", "targetname"));
+  data = array_combine(data, getStructArray("iss_entity", "targetname"));
 
   foreach(obj in data) {
     if(isDefined(precachelist[obj.script_modelname])) {
@@ -3173,9 +3173,9 @@ script2model_intro() {
   if(flag("script2model_intro")) {
     return;
   }
-  data = getstructarray("script_to_model_swap_intro", "script_noteworthy");
-  data = array_combine(data, getstructarray("crash_cars", "targetname"));
-  data = array_combine(data, getstructarray("street_cars_bounce", "targetname"));
+  data = getStructArray("script_to_model_swap_intro", "script_noteworthy");
+  data = array_combine(data, getStructArray("crash_cars", "targetname"));
+  data = array_combine(data, getStructArray("street_cars_bounce", "targetname"));
 
   foreach(obj in data) {
     model = spawn("script_model", obj.origin);
@@ -3198,7 +3198,7 @@ script2model_iss() {
   earth.targetname = earthdata.targetname;
   earth setModel(earthdata.script_modelname);
 
-  data = getstructarray("iss_entity", "targetname");
+  data = getStructArray("iss_entity", "targetname");
 
   //spawning 700 entities...so need to break it up into several frames
   num = 0;

@@ -27,7 +27,7 @@ register_interactions() {
   }
 
   register_ritual_circle_interactions();
-  foreach(var_1 in scripts\engine\utility::getstructarray("iw7_kbs_zm", "script_noteworthy")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("iw7_kbs_zm", "script_noteworthy")) {
     var_1.custom_search_dist = 96;
   }
 
@@ -464,7 +464,7 @@ use_ritual_site(var_0, var_1) {}
 setup_atm_system() {
   level.atm_transaction_amount = 1000;
   level.atm_amount_deposited = 0;
-  var_0 = scripts\engine\utility::array_combine(scripts\engine\utility::getstructarray("atm_deposit", "script_noteworthy"), scripts\engine\utility::getstructarray("atm_withdrawal", "script_noteworthy"));
+  var_0 = scripts\engine\utility::array_combine(scripts\engine\utility::getStructArray("atm_deposit", "script_noteworthy"), scripts\engine\utility::getStructArray("atm_withdrawal", "script_noteworthy"));
   foreach(var_2 in var_0) {
     var_2.requires_power = 0;
     var_2.powered_on = 1;
@@ -574,7 +574,7 @@ init_pap_portal() {
   scripts\engine\utility::flag_init("disable_portals");
   scripts\engine\utility::flag_init("fuses_inserted");
   var_0 = scripts\engine\utility::getstruct("pap_portal", "script_noteworthy");
-  var_0.end_positions = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_0.end_positions = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 }
 
 pap_portal_hint(var_0, var_1) {
@@ -760,11 +760,11 @@ pickup_zis_reel(var_0, var_1) {
 }
 
 initslidingdoor() {
-  var_0 = scripts\engine\utility::getstructarray("facility_sliding_door_750", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("facility_sliding_door_1000", "script_noteworthy");
-  var_2 = scripts\engine\utility::getstructarray("facility_sliding_door_1250", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstructarray("facility_sliding_door_1500", "script_noteworthy");
-  var_4 = scripts\engine\utility::getstructarray("facility_sliding_door_2000", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("facility_sliding_door_750", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("facility_sliding_door_1000", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("facility_sliding_door_1250", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("facility_sliding_door_1500", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("facility_sliding_door_2000", "script_noteworthy");
   var_0 = scripts\engine\utility::array_combine(var_0, var_1);
   var_0 = scripts\engine\utility::array_combine(var_0, var_2, var_3, var_4);
   var_0 = scripts\engine\utility::array_remove_duplicates(var_0);

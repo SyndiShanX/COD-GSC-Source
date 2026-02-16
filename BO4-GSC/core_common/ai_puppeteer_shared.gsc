@@ -65,13 +65,13 @@ ai_puppet_manager() {
       level.ai_puppet lookatpos(level.playercursor[# "position"]);
     }
 
-    if(self buttonpressed("<dev string:x4c>") && self buttonpressed("<dev string:x5c>")) {
+    if(self buttonPressed("<dev string:x4c>") && self buttonPressed("<dev string:x5c>")) {
       if(isDefined(level.ai_puppet)) {
         level.ai_puppet forceteleport(level.playercursor[# "position"], level.ai_puppet.angles);
       }
 
       wait 0.2;
-    } else if(self buttonpressed("<dev string:x4c>")) {
+    } else if(self buttonPressed("<dev string:x4c>")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.ai_puppet_target)) {
           if(isai(level.ai_puppet_target)) {
@@ -101,7 +101,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("<dev string:x7b>")) {
+    } else if(self buttonPressed("<dev string:x7b>")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.ai_puppet) && isusingnavvolume(level.ai_puppet)) {
           var_8d9fdff6 = vectornormalize(level.playercursor[# "position"] - self.origin);
@@ -137,7 +137,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("<dev string:x86>") && self buttonpressed("<dev string:x91>")) {
+    } else if(self buttonPressed("<dev string:x86>") && self buttonPressed("<dev string:x91>")) {
       if(isDefined(level.ai_puppet)) {
         if(isusingnavvolume(level.ai_puppet)) {
           var_8d9fdff6 = vectornormalize(level.playercursor[# "position"] - self.origin);
@@ -183,7 +183,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("<dev string:x9c>")) {
+    } else if(self buttonPressed("<dev string:x9c>")) {
       if(isDefined(level.playercursorai)) {
         if(isDefined(level.ai_puppet) && level.playercursorai == level.ai_puppet) {
           ai_puppet_release(1);
@@ -198,7 +198,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("<dev string:x91>")) {
+    } else if(self buttonPressed("<dev string:x91>")) {
       if(isDefined(level.ai_puppet)) {
         level.ai_puppet clearforcedgoal();
       }
@@ -219,10 +219,10 @@ ai_puppet_manager() {
     }
 
     if(isDefined(level.ai_puppet)) {
-      if(self buttonpressed("<dev string:xa7>")) {
+      if(self buttonPressed("<dev string:xa7>")) {
         level.ai_puppet.goalradius += 64;
         level.ai_puppet.goalheight = level.ai_puppet.goalradius;
-      } else if(self buttonpressed("<dev string:xb1>")) {
+      } else if(self buttonPressed("<dev string:xb1>")) {
         radius = level.ai_puppet.goalradius - 64;
 
         if(radius < 16) {
@@ -235,7 +235,7 @@ ai_puppet_manager() {
 
         level.ai_puppet.goalradius = radius;
         level.ai_puppet.goalheight = level.ai_puppet.goalradius;
-      } else if(self buttonpressed("<dev string:xbd>")) {
+      } else if(self buttonPressed("<dev string:xbd>")) {
         level.ai_puppet.goalradius = 16;
 
         if(isusingnavvolume(level.ai_puppet)) {

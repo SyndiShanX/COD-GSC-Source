@@ -98,7 +98,7 @@ bunker_wait_for_explosives(bnkr, trig, exploderID) {
 
   wait(1);
 
-  spots = getstructarray("bunker_" + bnkr + "_fire", "targetname");
+  spots = getStructArray("bunker_" + bnkr + "_fire", "targetname");
   x1 = spots[randomint(spots.size)];
 
   array_remove(spots, x1);
@@ -139,7 +139,7 @@ kill_guys_in_bunker(bnkr) {
 }
 
 bunker_interior_fire(bnkr, fx) {
-  spots = getstructarray("bunker_" + bnkr + "_fire", "targetname");
+  spots = getStructArray("bunker_" + bnkr + "_fire", "targetname");
   for(i = 0; i < spots.size; i++) {
     playFX(level._effect[fx], spots[i].origin);
   }

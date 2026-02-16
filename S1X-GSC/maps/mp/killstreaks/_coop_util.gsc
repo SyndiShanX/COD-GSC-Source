@@ -326,7 +326,7 @@ playerTakeStreakSupportInput(streakPrompt) {
       return;
     }
 
-    if(isDefined(self PlayerGetUseEnt()) && self PlayerGetUseEnt() == streakPrompt && self UseButtonPressed() && self IsOnGround()) {
+    if(isDefined(self PlayerGetUseEnt()) && self PlayerGetUseEnt() == streakPrompt && self useButtonPressed() && self IsOnGround()) {
       useTime = self PlayerGetUseTime();
       result = self playerHandleJoining(streakPrompt, useTime);
       if(result || !streakPrompt.active) {

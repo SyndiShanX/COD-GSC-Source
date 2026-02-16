@@ -861,7 +861,7 @@ spawn_chaos_squad(var_0, var_1, var_2, var_3) {
   if(isspawner(var_0[0])) {
     var_24 = getEntArray(var_20.target, "targetname");
   } else {
-    var_24 = common_scripts\utility::getstructarray(var_20.target, "targetname");
+    var_24 = common_scripts\utility::getStructArray(var_20.target, "targetname");
   }
   var_24[var_24.size] = var_20;
 
@@ -3919,7 +3919,7 @@ cratetriggerthink(var_0) {
     self waittill("trigger", var_3);
     var_3 chaoseventpopup(var_0, (1, 1, 1));
 
-    if(!isPlayer(var_3) || var_3 _id_0611::isusingremote() || !var_3 usebuttonpressed()) {
+    if(!isPlayer(var_3) || var_3 _id_0611::isusingremote() || !var_3 useButtonPressed()) {
       continue;
     }
     if(isDefined(var_3.justopencrate) && var_3.justopencrate == 1) {
@@ -4096,7 +4096,7 @@ _id_3BCF(var_0, var_1) {
 }
 
 _id_3BD1(var_0) {
-  while(isDefined(self) && isalive(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime) {
+  while(isDefined(self) && isalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
     if(isDefined(self.objectivescaler)) {

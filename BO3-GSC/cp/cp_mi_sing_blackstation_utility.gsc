@@ -102,7 +102,7 @@ function player_anchor() {
       while(util::use_button_held()) {
         wait(0.05);
       }
-      while(!self usebuttonpressed() && !self jumpbuttonpressed() && !self sprintbuttonpressed() && self.is_anchored) {
+      while(!self useButtonPressed() && !self jumpbuttonPressed() && !self sprintbuttonPressed() && self.is_anchored) {
         wait(0.05);
       }
       if(self.is_anchored) {
@@ -1597,7 +1597,7 @@ function launcher_hint_watcher() {
   self endon("death");
   self endon("weapon_change");
   n_timeout = 0;
-  while(!self adsbuttonpressed() && n_timeout >= 10) {
+  while(!self adsButtonPressed() && n_timeout >= 10) {
     n_timeout = n_timeout + 0.05;
     wait(0.05);
   }

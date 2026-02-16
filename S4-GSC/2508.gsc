@@ -432,7 +432,7 @@ _id_198F() {
 }
 
 _id_1987() {
-  var_0 = scripts\engine\utility::getstructarray("apcrussian_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("apcrussian_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);
@@ -503,7 +503,7 @@ _id_1992(var_0) {
     var_0 endon("vehicle_seat_exit");
     var_0 endon("death_or_disconnect");
 
-    while(var_0 reloadbuttonpressed()) {
+    while(var_0 reloadbuttonPressed()) {
       waitframe();
     }
 
@@ -513,7 +513,7 @@ _id_1992(var_0) {
       var_3 = 0.0;
       var_4 = var_0 _meth_874B();
 
-      while(var_0 reloadbuttonpressed()) {
+      while(var_0 reloadbuttonPressed()) {
         if(!var_0 usinggamepad() && var_1._id_DA6A < 14) {
           var_1 notify("turret_reload");
           break;

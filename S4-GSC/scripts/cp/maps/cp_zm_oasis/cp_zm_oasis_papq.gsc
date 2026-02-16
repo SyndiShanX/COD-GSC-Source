@@ -150,8 +150,8 @@ play_pap_merge_fx() {
 spawn_echo_zombies() {
   level endon("game_ended");
   level endon("papq_step_one_done");
-  var_0 = scripts\engine\utility::getstructarray("papq_echo_zmb_spawn_loc", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("papq_echo_jugg_spawn_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("papq_echo_zmb_spawn_loc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("papq_echo_jugg_spawn_loc", "script_noteworthy");
   var_2 = ["iw7_cp_king_idle_03", "iw7_cp_king_idle_nostaff_01", "ai_s4_zm_zombie_screamer_idle_unaware_01", "ai_s4_zm_zombie_screamer_idle_unaware_03"];
   wait 3;
 
@@ -191,7 +191,7 @@ pap_distance_watch() {
 set_up_aether_aeras() {
   level endon("game_ended");
   level endon("papq_step_one_done");
-  level.a_s_aether_locs = scripts\engine\utility::getstructarray("papq_aether_area_loc", "script_noteworthy");
+  level.a_s_aether_locs = scripts\engine\utility::getStructArray("papq_aether_area_loc", "script_noteworthy");
 }
 
 enter_aether_pocket_watcher() {
@@ -236,7 +236,7 @@ player_in_aether_pocket_watcher(var_0) {
 }
 
 set_up_loot_crystals() {
-  var_0 = scripts\engine\utility::getstructarray("papq_aether_loot_crystal_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("papq_aether_loot_crystal_loc", "script_noteworthy");
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -948,7 +948,7 @@ set_echo_zmbs() {
     level.a_mdl_echo_zombies = scripts\engine\utility::array_remove(level.a_mdl_echo_zombies, var_1);
   }
 
-  var_3 = scripts\engine\utility::getstructarray("papq_echo_zmb_spawn_loc", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("papq_echo_zmb_spawn_loc", "script_noteworthy");
 
   foreach(var_5 in var_3) {
     var_6 = _id_09A4::_id_110AD("enemy_base_zombie_cp", var_5.origin, var_5.angles, var_5);
@@ -961,7 +961,7 @@ set_echo_zmbs() {
     level.a_mdl_echo_juggs = scripts\engine\utility::array_remove(level.a_mdl_echo_juggs, var_1);
   }
 
-  var_10 = scripts\engine\utility::getstructarray("papq_echo_jugg_spawn_loc", "script_noteworthy");
+  var_10 = scripts\engine\utility::getStructArray("papq_echo_jugg_spawn_loc", "script_noteworthy");
 
   foreach(var_5 in var_10) {
     var_6 = _id_09A4::_id_110AD("enemy_zombie_juggernaut_cp", var_5.origin, var_5.angles, var_5);
@@ -979,7 +979,7 @@ set_up_zombie_spawning() {
   var_5 = [1, 2, 3, 4];
   var_6 = [1, 1, 1, 1];
   var_7 = [0, 0, 1, 1];
-  var_8 = scripts\engine\utility::getstructarray("papq_ff_zmb_spawner", "script_noteworthy");
+  var_8 = scripts\engine\utility::getStructArray("papq_ff_zmb_spawner", "script_noteworthy");
   level thread spawn_zombie_pap_ff("base", "enemy_base_zombie_cp", var_1[var_0 - 1], var_4[var_0 - 1], undefined, "pap_ff_done", var_8, var_8);
   level thread spawn_zombie_pap_ff("screamer", "enemy_zombie_screamer_cp", var_2[var_0 - 1], var_5[var_0 - 1], undefined, "pap_ff_done", var_8, var_8);
   level thread spawn_zombie_pap_ff("juggernaut", "enemy_zombie_juggernaut_cp", var_3[var_0 - 1], var_6[var_0 - 1], var_7[var_0 - 1], "pap_ff_done", var_8, var_8);
@@ -1179,7 +1179,7 @@ set_up_echo_zombie() {
 clean_objective_markers() {
   level.s_pap_center cleanup_marker("assemble_pap");
   level.s_altar_loc cleanup_marker("obj_search_temple");
-  var_0 = scripts\engine\utility::getstructarray("papq_part_interact", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("papq_part_interact", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.mdl_loc) && isDefined(var_2.mdl_loc._id_CE18)) {

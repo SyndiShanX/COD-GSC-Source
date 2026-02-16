@@ -6,7 +6,7 @@
 #include common_scripts\utility;
 
 global_FX(targetname, fxFile, delay, fxName, soundalias) {
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
   if(ents.size <= 0) {
     return;
   }

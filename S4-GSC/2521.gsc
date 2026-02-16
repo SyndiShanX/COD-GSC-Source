@@ -247,7 +247,7 @@ _id_B09C() {
 }
 
 _id_B094() {
-  var_0 = scripts\engine\utility::getstructarray("pickuptruck_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("pickuptruck_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

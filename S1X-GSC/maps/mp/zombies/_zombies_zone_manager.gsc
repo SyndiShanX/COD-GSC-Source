@@ -585,7 +585,7 @@ initializezone(var_0, var_1) {
 }
 
 getpowerswitchinzone(var_0) {
-  var_1 = common_scripts\utility::getstructarray("power_switch", "targetname");
+  var_1 = common_scripts\utility::getStructArray("power_switch", "targetname");
 
   foreach(var_3 in var_1) {
     if(isswitchinzonevolumes(var_3, level.zone_data.zones[var_0].volumes)) {
@@ -613,7 +613,7 @@ getspawnersinzone(var_0) {
     if(!isDefined(var_3.target)) {
       continue;
     }
-    var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
+    var_4 = common_scripts\utility::getStructArray(var_3.target, "targetname");
 
     foreach(var_6 in var_4) {
       var_6.zone_name = var_0;

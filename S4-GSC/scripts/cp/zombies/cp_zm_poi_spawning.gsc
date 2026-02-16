@@ -139,7 +139,7 @@ adjust_poi_values_for_num_players(var_0) {
 }
 
 get_valid_poi_structs() {
-  var_0 = scripts\engine\utility::getstructarray("poi_location", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("poi_location", "script_noteworthy");
 
   if(isDefined(level.a_active_zones)) {
     foreach(var_2 in var_0) {
@@ -236,7 +236,7 @@ determine_number_of_ambushes() {
 }
 
 get_valid_ambush_structs() {
-  var_0 = scripts\engine\utility::getstructarray("ambush_location", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("ambush_location", "script_noteworthy");
 
   if(isDefined(level.a_active_zones)) {
     foreach(var_2 in var_0) {

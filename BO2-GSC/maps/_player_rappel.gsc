@@ -460,12 +460,12 @@ _rappel_init_movement() {
 }
 
 _check_rappel_button() {
-  b_is_rappelling = self throwbuttonpressed();
+  b_is_rappelling = self throwbuttonPressed();
   return b_is_rappelling;
 }
 
 _check_rappel_brake_button() {
-  b_is_braking = self attackbuttonpressed();
+  b_is_braking = self attackButtonPressed();
   return b_is_braking;
 }
 

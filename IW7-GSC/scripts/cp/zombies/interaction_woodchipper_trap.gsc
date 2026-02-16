@@ -5,10 +5,10 @@
 
 init_woodchipper_trap() {
   level.blackholetrapuses = 0;
-  var_0 = scripts\engine\utility::getstructarray("interaction_woodchipper", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("interaction_woodchipper", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread woodchipper_trap_wait_for_power();
-    var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
     foreach(var_5 in var_3) {
       if(isDefined(var_5.fgetarg)) {
         var_2.suction_spot = var_5;

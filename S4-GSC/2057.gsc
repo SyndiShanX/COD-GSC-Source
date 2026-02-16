@@ -40,11 +40,11 @@ _id_A131() {
 
   for(;;) {
     if(getdvarint("#x3d0e58bbc7ffcf8ae", 0) == 1) {
-      if(level.players[0] usebuttonpressed()) {
+      if(level.players[0] useButtonPressed()) {
         self._id_B171 = scripts\engine\utility::ter_op(self._id_B171 == "player", "stationary", "player");
         level.players[0] notify("changed_placementMode");
 
-        while(level.players[0] usebuttonpressed()) {
+        while(level.players[0] useButtonPressed()) {
           waitframe();
         }
       }

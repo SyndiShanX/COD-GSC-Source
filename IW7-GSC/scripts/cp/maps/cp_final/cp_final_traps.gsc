@@ -55,17 +55,17 @@ cp_final_should_be_affected_by_trap(var_0, var_1, var_2) {
 }
 
 force_panels_powered_on() {
-  var_0 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.powered_on = 1;
   }
 
-  var_4 = scripts\engine\utility::getstructarray("blackhole_trap", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("blackhole_trap", "script_noteworthy");
   foreach(var_2 in var_4) {
     var_2.powered_on = 1;
   }
 
-  var_7 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
+  var_7 = scripts\engine\utility::getStructArray("acid_rain_trap", "script_noteworthy");
   foreach(var_2 in var_7) {
     var_2.powered_on = 1;
   }
@@ -79,7 +79,7 @@ force_panels_powered_on() {
 lasers_trap_init() {
   level.trapcooldownarray["laser_trap"] = 0;
   level.lasertriggers = [];
-  var_0 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.powered_on = 0;
     var_2 thread listen_for_power();
@@ -319,7 +319,7 @@ updatefxlaserdisconnected() {}
 use_lasers_trap(var_0, var_1) {
   level.trapcooldownarray["laser_trap"]++;
   var_2 = isDefined(var_1) && isPlayer(var_1);
-  var_3 = scripts\engine\utility::getstructarray("laser_trap", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("laser_trap", "script_noteworthy");
   foreach(var_5 in var_3) {
     var_6 = getent(var_5.target, "targetname");
     var_6 setModel("mp_frag_button_on");
@@ -369,12 +369,12 @@ init_blackhole_trap() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = undefined;
-  var_3 = scripts\engine\utility::getstructarray("blackhole_trap", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("blackhole_trap", "script_noteworthy");
   foreach(var_5 in var_3) {
     var_5.powered_on = 0;
     var_5 thread listen_for_power();
     var_5.body = getent(var_5.target, "targetname");
-    var_6 = scripts\engine\utility::getstructarray(var_5.target, "targetname");
+    var_6 = scripts\engine\utility::getStructArray(var_5.target, "targetname");
     foreach(var_8 in var_6) {
       if(isDefined(var_8.fgetarg)) {
         var_5.var_2B32 = var_8;
@@ -891,7 +891,7 @@ create_attract_positions(var_0, var_1, var_2, var_3) {
 
 electric_trap_init() {
   level.trapcooldownarray["electric_trap"] = 0;
-  var_0 = scripts\engine\utility::getstructarray("electric_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("electric_trap", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.powered_on = 0;
     var_2 thread listen_for_power();
@@ -902,7 +902,7 @@ electric_trap_init() {
 
 elec_trap_sparks() {
   level endon("electric_trap_part_added");
-  var_0 = scripts\engine\utility::getstructarray("electric_trap_sparks", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("electric_trap_sparks", "targetname");
   for(;;) {
     var_1 = scripts\engine\utility::random(var_0).origin;
     playFX(level._effect["elec_trap_sparks"], var_1);
@@ -927,7 +927,7 @@ electric_trap_use(var_0, var_1) {
   level.trapcooldownarray["electric_trap"]++;
   var_2 = isDefined(var_1) && isPlayer(var_1);
   activate_trap_feedback(var_1);
-  var_3 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_5 in var_3) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
     var_6 = getent(var_5.target, "targetname");
@@ -1046,7 +1046,7 @@ electrocute_zombie(var_0, var_1) {
   var_0.electrocuted = 1;
   var_0.marked_for_death = 1;
   wait(randomfloat(3));
-  var_2 = scripts\engine\utility::getstructarray("electric_trap_spots", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("electric_trap_spots", "targetname");
   var_3 = scripts\engine\utility::getclosest(var_0.origin, var_2);
   var_4 = var_3.origin + (0, 0, randomintrange(-17, 17));
   var_5 = var_0.origin + (0, 0, randomintrange(20, 60));
@@ -1083,14 +1083,14 @@ electric_trap_rumble() {
 
 init_rain_trap() {
   level.trapcooldownarray["acid_rain_trap"] = 0;
-  var_0 = scripts\engine\utility::getstructarray("acid_rain_trap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("acid_rain_trap", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.powered_on = 0;
     var_2 thread listen_for_power();
   }
 
   level.ambient_acid_water = [];
-  var_4 = scripts\engine\utility::getstructarray("leaking_water_acid", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("leaking_water_acid", "script_noteworthy");
   foreach(var_6 in var_4) {
     var_7 = spawnfx(scripts\engine\utility::getfx("acid_drip"), var_6.origin);
     level.ambient_acid_water[level.ambient_acid_water.size] = var_7;
@@ -1102,7 +1102,7 @@ use_rain_trap(var_0, var_1) {
   level.trapcooldownarray["acid_rain_trap"]++;
   var_2 = isDefined(var_1) && isPlayer(var_1);
   activate_trap_feedback(var_1);
-  var_3 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
   foreach(var_5 in var_3) {
     level thread scripts\cp\cp_interaction::remove_from_current_interaction_list(var_5);
     var_6 = getent(var_5.target, "targetname");

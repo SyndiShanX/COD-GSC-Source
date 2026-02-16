@@ -58,11 +58,11 @@ start_peeking_zombie_listener() {
 }
 
 init_shooting_gallery_data() {
-  level.a_s_peeking_zombies = scripts\engine\utility::getstructarray("s_peeking_zombie", "targetname");
+  level.a_s_peeking_zombies = scripts\engine\utility::getStructArray("s_peeking_zombie", "targetname");
 
   if(_func_0107(level.a_s_peeking_zombies)) {
     foreach(var_1 in level.a_s_peeking_zombies) {
-      var_2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
       if(_func_0107(var_2)) {
         foreach(var_4 in var_2) {
@@ -178,7 +178,7 @@ init_peeking_zombie(var_0) {
   if(!isDefined(var_1._id_039B)) {
     return;
   }
-  var_10 = scripts\engine\utility::getstructarray(var_1.s_teleport_pos.target, "targetname");
+  var_10 = scripts\engine\utility::getStructArray(var_1.s_teleport_pos.target, "targetname");
   teleport_player_join(var_10, var_5);
 
   if(scripts\engine\utility::_id_5C00("start_rbz_exfil")) {
@@ -269,7 +269,7 @@ spawn_barricades() {
   self.s_blocker.mdl_block = scripts\cp\utility::_id_E190("s4_zm_rune_decal_inviktor_barrier", self.s_blocker.origin, self.s_blocker.angles);
   scripts\cp\utility::_id_B8ED(self.s_blocker.origin, "zmb_wicker_fence_flames");
   self.s_blocker.mdl_block playLoopSound("zmb_kortifex_wall_lp");
-  var_0 = scripts\engine\utility::getstructarray(self.s_blocker.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.s_blocker.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_2.mdl = spawn("script_model", var_2.origin);
@@ -285,7 +285,7 @@ cleanup_barricades() {
     self.s_blocker.mdl_block delete();
   }
 
-  var_0 = scripts\engine\utility::getstructarray(self.s_blocker.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.s_blocker.target, "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.mdl)) {
@@ -647,7 +647,7 @@ health_listener() {
 
       if(!scripts\cp\utility::_id_88B7(self.joined_players, var_1) && istrue(self.b_can_join)) {
         self.joined_players = scripts\engine\utility::array_add(self.joined_players, var_1);
-        var_6 = scripts\engine\utility::getstructarray(self.s_teleport_pos.target, "targetname");
+        var_6 = scripts\engine\utility::getStructArray(self.s_teleport_pos.target, "targetname");
         level thread teleport_player_join(var_6, var_1);
         self.limit_time = self.limit_time + 30;
         self notify("kill_timer");
@@ -1063,7 +1063,7 @@ look_at_players() {
 flash_zombie_head() {
   level endon("game_ended");
   level endon("complete_shooting_gallery");
-  var_0 = scripts\engine\utility::getstructarray(self.s_zombie_head.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.s_zombie_head.target, "targetname");
 
   for(;;) {
     var_0 = scripts\engine\utility::array_randomize(var_0);
@@ -1178,7 +1178,7 @@ start_fly() {
   scripts\cp\utility::_id_B8ED(self.origin, "zmb_orb_sg_moving_start");
   wait 0.5;
   self.moving_proxy playLoopSound("zmb_orb_sg_moving_lp");
-  var_0 = scripts\engine\utility::getstructarray(self.s_zombie_head.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.s_zombie_head.target, "targetname");
 
   for(;;) {
     var_0 = scripts\engine\utility::array_randomize(var_0);

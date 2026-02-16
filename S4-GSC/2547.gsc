@@ -18,7 +18,7 @@ _id_44EE(var_0) {
 }
 
 _id_8241() {
-  var_0 = scripts\engine\utility::getstructarray("computer_location", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("computer_location", "targetname");
   var_1 = var_0[randomint(var_0.size)];
   level._id_A890 = var_1 _id_406C(var_1.origin, var_1.angles, "intel_laptop", &"MP_ESCAPE_MODE/PULL_WMD_DATA_CORE", "objectUsed");
   level._id_A890._id_4140 = level._id_A890.origin;
@@ -257,7 +257,7 @@ _id_479C(var_0) {
 }
 
 _id_89A3(var_0) {
-  return !level.gameended && isDefined(var_0) && scripts\mp\utility\player::isreallyalive(self) && self usebuttonpressed() && !self isonladder() && !self meleebuttonpressed() && var_0._id_4143 < var_0._id_FEE7 && (!isDefined(self._id_F03B) || !self._id_F03B);
+  return !level.gameended && isDefined(var_0) && scripts\mp\utility\player::isreallyalive(self) && self useButtonPressed() && !self isonladder() && !self meleeButtonPressed() && var_0._id_4143 < var_0._id_FEE7 && (!isDefined(self._id_F03B) || !self._id_F03B);
 }
 
 _id_B8A5(var_0) {

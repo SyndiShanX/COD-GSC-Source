@@ -125,7 +125,7 @@ minigun_fire_sounds() {
   self.playingLoopSound = false;
   while(flag("player_on_minigun")) {
     wait(0.05);
-    if((self.minigunUser attackbuttonpressed()) && (self.allowedToFire == true)) {
+    if((self.minigunUser attackButtonPressed()) && (self.allowedToFire == true)) {
       self thread minigun_fire_loop();
       waittill_player_not_holding_fire_trigger_or_overheat();
     }
@@ -146,7 +146,7 @@ minigun_fire_loop() {
 }
 
 waittill_player_not_holding_fire_trigger_or_overheat() {
-  while((self.minigunUser attackbuttonpressed()) && (self.allowedToFire == true))
+  while((self.minigunUser attackButtonPressed()) && (self.allowedToFire == true))
     wait(0.05);
 }
 
@@ -212,37 +212,37 @@ minigun_used() {
     level.normframes++;
     if(flag("player_on_minigun")) {
       if(!level.inuse) {
-        if((self.minigunUser adsbuttonpressed()) || (self.minigunUser attackbuttonpressed())) {
+        if((self.minigunUser adsButtonPressed()) || (self.minigunUser attackButtonPressed())) {
           level.inuse = true;
           self thread minigun_sound_spinup();
         }
       } else {
-        if((!self.minigunUser attackbuttonpressed()) && (!self.minigunUser adsbuttonpressed())) {
+        if((!self.minigunUser attackButtonPressed()) && (!self.minigunUser adsButtonPressed())) {
           level.inuse = false;
           self thread minigun_sound_spindown();
         } else
-        if(self.minigunUser attackbuttonpressed() && overheated) {
+        if(self.minigunUser attackButtonPressed() && overheated) {
           level.inuse = false;
           self thread minigun_sound_spindown();
         }
       }
 
       if(!firing) {
-        if(self.minigunUser attackbuttonpressed() && !overheated && maxed) {
+        if(self.minigunUser attackButtonPressed() && !overheated && maxed) {
           firing = true;
           startFiringTime = gettime();
         } else
-        if(self.minigunUser attackbuttonpressed() && overheated) {
+        if(self.minigunUser attackButtonPressed() && overheated) {
           firing = false;
           startFiringTime = undefined;
         }
       } else {
-        if(!self.minigunUser attackbuttonpressed()) {
+        if(!self.minigunUser attackButtonPressed()) {
           firing = false;
           startFiringTime = undefined;
         }
 
-        if(self.minigunUser attackbuttonpressed() && !maxed) {
+        if(self.minigunUser attackButtonPressed() && !maxed) {
           firing = false;
           startFiringTime = undefined;
         }

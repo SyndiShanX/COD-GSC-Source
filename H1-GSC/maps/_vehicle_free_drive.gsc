@@ -247,7 +247,7 @@ create_path(var_0) {
 }
 
 add_collision_to_path(var_0) {
-  var_1 = common_scripts\utility::getstructarray("road_path_col", "targetname");
+  var_1 = common_scripts\utility::getStructArray("road_path_col", "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = common_scripts\utility::getstruct(var_3.target, "targetname");

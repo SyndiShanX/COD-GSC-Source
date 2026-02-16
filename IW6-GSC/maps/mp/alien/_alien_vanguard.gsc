@@ -432,7 +432,7 @@ vanguard_monitormanualplayerexit(var_0) {
   for(;;) {
     var_2 = 0;
 
-    while(var_0.owner usebuttonpressed()) {
+    while(var_0.owner useButtonPressed()) {
       var_2 = var_2 + 0.05;
 
       if(var_2 > 0.75) {
@@ -541,7 +541,7 @@ vanguard_monitorbullet(var_0) {
   var_0.bullet_ready_time = gettime();
 
   for(;;) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
       if(isDefined(level.hostmigrationtimer)) {

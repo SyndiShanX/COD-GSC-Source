@@ -540,7 +540,7 @@ func_19FF(var_0) {
   }
 
   if(!isDefined(var_1.var_1B04)) {
-    var_1.var_1B04 = var_1 scripts\engine\utility::getstructarray(var_1.target, "targetname");
+    var_1.var_1B04 = var_1 scripts\engine\utility::getStructArray(var_1.target, "targetname");
   }
 
   if(!isDefined(var_1.var_C375)) {
@@ -803,7 +803,7 @@ func_9B57() {
 }
 
 func_1D84() {
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   var_1 = func_39D3(var_0);
   var_2 = func_39D2();
   self.var_B8B4 = var_1;

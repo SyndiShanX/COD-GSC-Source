@@ -1456,7 +1456,7 @@ generate_fx_log(autosave) {
   file = -1;
 
   cfxprintlnStart();
-  cfxprintln(file, "//_createfx generated. Do not touch!!");
+  cfxprintln(file, "");
   cfxprintln(file, "#include common_scripts\\utility;");
   cfxprintln(file, "#include common_scripts\\_createfx;\n");
   cfxprintln(file, "main()");

@@ -127,14 +127,14 @@ psource_viewmode() {
 psource_activatebutton() {
   level endon("psource_refresh");
   while(1) {
-    while(!level.player usebuttonpressed())
+    while(!level.player useButtonPressed())
       wait .05;
     pick = psource_getvisible();
     if(isDefined(pick)) {
       level.psource_selectindex = pick;
       level.psource_views[pick] thread psource_hudshow();
     }
-    while(level.player usebuttonpressed())
+    while(level.player useButtonPressed())
       wait .05;
   }
 }
@@ -296,7 +296,7 @@ psource_hudshow() {
   level.player setplayerangles(self.angles);
   level.photosource.alpha = 1;
   flag_set("psource_refresh");
-  while(level.player islookingorg(self) && level.player usebuttonpressed())
+  while(level.player islookingorg(self) && level.player useButtonPressed())
     wait .05;
   level.player freezecontrols(false);
 

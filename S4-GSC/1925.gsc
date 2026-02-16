@@ -1358,7 +1358,7 @@ _id_15CF(var_0, var_1) {
       var_5 = 0;
     }
 
-    while(var_2 usebuttonpressed()) {
+    while(var_2 useButtonPressed()) {
       var_6 = var_6 + var_3;
       var_5 = 1;
       var_2 setclientomnvar("ui_exit_progress", var_6 / var_4);
@@ -2569,7 +2569,7 @@ _id_3F3C(var_0, var_1) {
 }
 
 _id_9908(var_0, var_1, var_2, var_3, var_4) {
-  while(!level.gameended && isDefined(self) && var_0 scripts\cp_mp\utility\player_utility::_isalive() && (var_0 usebuttonpressed() || isDefined(var_3) || var_0 attackbuttonpressed() && isDefined(var_4)) && _id_DA7F(var_0)) {
+  while(!level.gameended && isDefined(self) && var_0 scripts\cp_mp\utility\player_utility::_isalive() && (var_0 useButtonPressed() || isDefined(var_3) || var_0 attackButtonPressed() && isDefined(var_4)) && _id_DA7F(var_0)) {
     wait 0.05;
 
     if(isDefined(var_1) && isDefined(var_2)) {
@@ -4252,7 +4252,7 @@ _id_C705() {
 }
 
 _id_6974(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray(var_1, "script_noteworthy");
   var_4 = _func_0204(var_3, var_0)[0];
 
   if(isDefined(var_2) && distancesquared(var_0, var_4.origin) > _func_0219(var_2)) {
@@ -7954,35 +7954,35 @@ _id_DC6C() {
       var_0 = var_0 + ",guide";
     }
 
-    if(self stancebuttonpressed()) {
+    if(self stancebuttonPressed()) {
       var_0 = var_0 + ",stance";
     }
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = var_0 + ",use";
     }
 
-    if(self fragbuttonpressed()) {
+    if(self fragButtonPressed()) {
       var_0 = var_0 + ",frag";
     }
 
-    if(self meleebuttonpressed()) {
+    if(self meleeButtonPressed()) {
       var_0 = var_0 + ",melee";
     }
 
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       var_0 = var_0 + ",jump";
     }
 
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       var_0 = var_0 + ",attack";
     }
 
-    if(self secondaryoffhandbuttonpressed()) {
+    if(self secondaryoffhandbuttonPressed()) {
       var_0 = var_0 + ",secondary";
     }
 
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       var_0 = var_0 + ",ADS";
     }
 
@@ -8989,7 +8989,7 @@ _id_6C61(var_0) {
 }
 
 _id_F036(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_1, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_1, "targetname");
 
   if(!isDefined(var_3) || var_3.size < 4) {
     return;
@@ -9030,7 +9030,7 @@ _id_F03E(var_0, var_1) {
 }
 
 _id_F03D(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_1, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_1, "targetname");
 
   if(!isDefined(var_2) || var_2.size < 4) {
     return;

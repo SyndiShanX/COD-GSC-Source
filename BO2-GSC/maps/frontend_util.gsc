@@ -246,9 +246,9 @@ data_glove_input_button() {
   pressed = 0;
 
   if(!level.console && !level.player gamepadusedlast()) {
-    pressed = level.player buttonpressed("MOUSE1") || level.player buttonpressed("ESCAPE") || level.player buttonpressed("ENTER");
+    pressed = level.player buttonPressed("MOUSE1") || level.player buttonPressed("ESCAPE") || level.player buttonPressed("ENTER");
   } else {
-    pressed = level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_X") || level.player buttonpressed("BUTTON_Y");
+    pressed = level.player buttonPressed("BUTTON_A") || level.player buttonPressed("BUTTON_B") || level.player buttonPressed("BUTTON_X") || level.player buttonPressed("BUTTON_Y");
   }
 
   return pressed;
@@ -320,9 +320,9 @@ stop_credits_button() {
   pressed = 0;
 
   if(!level.console && !level.player gamepadusedlast()) {
-    pressed = level.player buttonpressed("MOUSE1");
+    pressed = level.player buttonPressed("MOUSE1");
   } else {
-    pressed = level.player buttonpressed(getenterbutton());
+    pressed = level.player buttonPressed(getenterbutton());
   }
 
   return pressed;
@@ -700,8 +700,8 @@ cm_input_watcher() {
 
   while(true) {
     for(i = 0; i < buttons.size; i++) {
-      if(level.player buttonpressed(buttons[i])) {
-        while(level.player buttonpressed(buttons[i])) {
+      if(level.player buttonPressed(buttons[i])) {
+        while(level.player buttonPressed(buttons[i])) {
           wait 0.05;
         }
 
@@ -726,7 +726,7 @@ cm_input_watcher() {
       }
     }
 
-    if(level.player buttonpressed("BUTTON_RSTICK")) {
+    if(level.player buttonPressed("BUTTON_RSTICK")) {
       lvl_index = 0;
       unit_index = 0;
     }
@@ -807,11 +807,11 @@ skip_intro_prompt() {
   luinotifyevent(&"show_skip_prompt");
 
   while(true) {
-    if(level.player buttonpressed(getenterbutton())) {
+    if(level.player buttonPressed(getenterbutton())) {
       break;
     }
 
-    if(!level.console && (level.player buttonpressed("MOUSE1") || level.player buttonpressed("ENTER"))) {
+    if(!level.console && (level.player buttonPressed("MOUSE1") || level.player buttonPressed("ENTER"))) {
       break;
     }
 
@@ -1378,9 +1378,9 @@ flag_is_set_and_defined(flag_name) {
 
 frontend_platform_skip_button_check() {
   if(!level.console && !level.player gamepadusedlast()) {
-    return level.player buttonpressed("MOUSE1") || level.player buttonpressed("ENTER") || level.player buttonpressed("ESCAPE");
+    return level.player buttonPressed("MOUSE1") || level.player buttonPressed("ENTER") || level.player buttonPressed("ESCAPE");
   } else {
-    return level.player buttonpressed(getenterbutton());
+    return level.player buttonPressed(getenterbutton());
   }
 }
 

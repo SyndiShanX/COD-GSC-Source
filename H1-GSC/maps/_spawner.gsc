@@ -303,7 +303,7 @@ trigger_spawner(var_0) {
 }
 
 trigger_pool_spawners(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   if(getEntArray(var_0, "target").size <= 1)
     maps\_utility::deletestructarray_ref(var_1);
@@ -1679,7 +1679,7 @@ get_target_vehicle_nodes(var_0) {
 }
 
 get_target_structs(var_0) {
-  return common_scripts\utility::getstructarray(var_0, "targetname");
+  return common_scripts\utility::getStructArray(var_0, "targetname");
 }
 
 node_has_radius(var_0) {
@@ -1987,7 +1987,7 @@ get_node_funcs_based_on_target(var_0, var_1) {
       var_0 = getnodearray(self.target, "targetname");
 
       if(!var_0.size) {
-        var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+        var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
         if(!var_0.size) {
           return;

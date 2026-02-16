@@ -91,12 +91,12 @@ _id_F89A(var_0) {
 }
 
 _id_5352(var_0, var_1) {
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     waitframe();
   }
 
   for(;;) {
-    if(var_0 usebuttonpressed()) {
+    if(var_0 useButtonPressed()) {
       self notify("end_turret_use");
       break;
     }

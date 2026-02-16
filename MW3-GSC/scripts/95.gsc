@@ -15,15 +15,15 @@ _id_1E92() {
   _id_2900();
   common_scripts\utility::array_thread(getEntArray("truckjunk", "targetname"), ::_id_2974);
   common_scripts\utility::array_thread(getEntArray("truckjunk", "script_noteworthy"), ::_id_2974);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("truckjunk", "targetname"), ::_id_2974);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("truckjunk", "script_noteworthy"), ::_id_2974);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("truckjunk", "targetname"), ::_id_2974);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("truckjunk", "script_noteworthy"), ::_id_2974);
   _id_2A21();
   _id_2A29();
   var_0 = _id_2A05();
   _id_2A2B(var_0);
   common_scripts\utility::array_levelthread(level._id_28F4, ::_id_2906, var_0);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("gag_stage_littlebird_unload", "script_noteworthy"), ::_id_2B06);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("gag_stage_littlebird_load", "script_noteworthy"), ::_id_2B07);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("gag_stage_littlebird_unload", "script_noteworthy"), ::_id_2B06);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("gag_stage_littlebird_load", "script_noteworthy"), ::_id_2B07);
   level._id_28F4 = undefined;
   _id_28F9();
   maps\_utility::add_hint_string("invulerable_frags", &"SCRIPT_INVULERABLE_FRAGS", undefined);
@@ -5664,7 +5664,7 @@ _id_2AE4(var_0) {
 }
 
 _id_2AE5(var_0, var_1) {
-  return level.player buttonpressed(var_0) && level.player buttonpressed(var_1);
+  return level.player buttonPressed(var_0) && level.player buttonPressed(var_1);
 }
 
 _id_2515(var_0, var_1, var_2) {

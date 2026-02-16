@@ -551,7 +551,7 @@ func_13A1D() {
 
     var_2 = 0;
 
-    while(var_0 usebuttonpressed() && !var_0 fragbuttonpressed() && !var_0 scripts\mp\utility\game::func_85C7() && !var_0 secondaryoffhandbuttonpressed() && !var_0 isusingturret() && var_0 isonground() && !var_0 istouching(self.ownertrigger) && (!isDefined(var_0.empgrenaded) || !var_0.empgrenaded)) {
+    while(var_0 useButtonPressed() && !var_0 fragButtonPressed() && !var_0 scripts\mp\utility\game::func_85C7() && !var_0 secondaryoffhandbuttonPressed() && !var_0 isusingturret() && var_0 isonground() && !var_0 istouching(self.ownertrigger) && (!isDefined(var_0.empgrenaded) || !var_0.empgrenaded)) {
       if(isDefined(var_0.iscarrying) && var_0.iscarrying) {
         break;
       }
@@ -637,13 +637,13 @@ turret_handlepickup(var_0) {
         self.var_CB39 = 0;
       }
 
-      if(self usebuttonpressed()) {
+      if(self useButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;
         }
         var_1 = 0;
 
-        while(self usebuttonpressed()) {
+        while(self useButtonPressed()) {
           var_1 = var_1 + 0.05;
           wait 0.05;
         }
@@ -653,7 +653,7 @@ turret_handlepickup(var_0) {
         }
         var_1 = 0;
 
-        while(!self usebuttonpressed() && var_1 < 0.5) {
+        while(!self useButtonPressed() && var_1 < 0.5) {
           var_1 = var_1 + 0.05;
           wait 0.05;
         }

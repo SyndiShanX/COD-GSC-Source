@@ -195,7 +195,7 @@ crab_boss_bomb(var_0) {
 
 set_up_death_ray_cannons() {
   level.death_ray_cannons = [];
-  var_0 = scripts\engine\utility::getstructarray("death_ray_cannon", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("death_ray_cannon", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = spawnturret("misc_turret", var_2.origin, "death_ray_cannon_zm");
     var_3 setModel("cp_town_laser_death_ray");
@@ -295,7 +295,7 @@ death_ray_player_use_monitor(var_0) {
     update_charge_progress(var_2, var_4 / var_1);
     var_2 thread leave_death_ray_cannon_monitor(var_2);
     while(var_2 isusingturret()) {
-      if(var_2 attackbuttonpressed()) {
+      if(var_2 attackButtonPressed()) {
         if(!var_3) {
           var_0 playSound("town_laser_cannon_charge");
           playFXOnTag(level._effect["death_ray_cannon_buildup"], var_0, "tag_flash");

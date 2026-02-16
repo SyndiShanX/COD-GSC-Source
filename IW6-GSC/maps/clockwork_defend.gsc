@@ -868,7 +868,7 @@ defend_do_smoke() {
   level.player forceusehintoff();
   level notify("got_smoke");
   wait 2;
-  var_0 = common_scripts\utility::getstructarray("defend_smoke", "targetname");
+  var_0 = common_scripts\utility::getStructArray("defend_smoke", "targetname");
   var_1 = 0;
 
   foreach(var_3 in var_0) {
@@ -2449,15 +2449,15 @@ setup_blockers() {
   level.phys_blockers_model[0] = getEntArray("phys_blocker_north_model", "targetname");
   level.fire_blockers_brush[0] = getEntArray("fire_blocker_north_brush", "targetname");
   level.fire_blockers_hurt[0] = getEntArray("fire_blocker_north_hurt", "targetname");
-  level.fire_blockers_jet[0] = common_scripts\utility::getstructarray("fire_blocker_north_jet", "targetname");
-  level.fire_blockers_body[0] = common_scripts\utility::getstructarray("fire_blocker_north_body", "targetname");
+  level.fire_blockers_jet[0] = common_scripts\utility::getStructArray("fire_blocker_north_jet", "targetname");
+  level.fire_blockers_body[0] = common_scripts\utility::getStructArray("fire_blocker_north_body", "targetname");
   level.fire_radiusdamage[0] = common_scripts\utility::getstruct("fire_blocker_north_radiusdamage", "targetname");
   level.phys_blockers_brush[1] = getEntArray("phys_blocker_south_brush", "targetname");
   level.phys_blockers_model[1] = getEntArray("phys_blocker_south_model", "targetname");
   level.fire_blockers_brush[1] = getEntArray("fire_blocker_south_brush", "targetname");
   level.fire_blockers_hurt[1] = getEntArray("fire_blocker_south_hurt", "targetname");
-  level.fire_blockers_jet[1] = common_scripts\utility::getstructarray("fire_blocker_south_jet", "targetname");
-  level.fire_blockers_body[1] = common_scripts\utility::getstructarray("fire_blocker_south_body", "targetname");
+  level.fire_blockers_jet[1] = common_scripts\utility::getStructArray("fire_blocker_south_jet", "targetname");
+  level.fire_blockers_body[1] = common_scripts\utility::getStructArray("fire_blocker_south_body", "targetname");
   level.fire_radiusdamage[1] = common_scripts\utility::getstruct("fire_blocker_south_radiusdamage", "targetname");
   level.spiral_blocker = getent("spiral_stair_blocker", "targetname");
 
@@ -2693,8 +2693,8 @@ allies_throw_smoke() {
 
 handle_random_mg_fire() {
   common_scripts\utility::flag_wait("defend_smoke_thrown");
-  var_0 = common_scripts\utility::getstructarray("defend_mg_fire", "targetname");
-  var_1 = common_scripts\utility::getstructarray("defend_mg_fire_target", "targetname");
+  var_0 = common_scripts\utility::getStructArray("defend_mg_fire", "targetname");
+  var_1 = common_scripts\utility::getStructArray("defend_mg_fire_target", "targetname");
   var_2 = 0;
 
   while(!common_scripts\utility::flag("door_close")) {

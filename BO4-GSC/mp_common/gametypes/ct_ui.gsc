@@ -118,7 +118,7 @@ function_1ae56656(b_success) {
   self endon(#"death");
   level endon(#"aar_done");
 
-  while(!self actionbuttonpressed()) {
+  while(!self actionbuttonPressed()) {
     waitframe(1);
   }
 
@@ -130,13 +130,13 @@ function_f667701c() {
   level endon(#"aar_done");
 
   while(true) {
-    while(!self stancebuttonpressed()) {
+    while(!self stancebuttonPressed()) {
       waitframe(1);
     }
 
     n_count = 0;
 
-    while(self stancebuttonpressed() && n_count < 30) {
+    while(self stancebuttonPressed() && n_count < 30) {
       n_count++;
       waitframe(1);
     }

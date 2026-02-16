@@ -1412,7 +1412,7 @@ upload_codes_h1() {
 
     var_1 sethintstring(&"LAUNCHFACILITY_B_HINT_UPLOAD_CODES");
 
-    if(!level.player usebuttonpressed()) {
+    if(!level.player useButtonPressed()) {
       waitframe();
       continue;
     }
@@ -1436,7 +1436,7 @@ upload_codes_h1() {
     level thread h1_typing_dof_start();
 
     for(;;) {
-      if(!level.player usebuttonpressed()) {
+      if(!level.player useButtonPressed()) {
         break;
       }
 
@@ -1506,7 +1506,7 @@ upload_codes() {
     var_5 = 0;
 
     for(;;) {
-      if(!level.player usebuttonpressed()) {
+      if(!level.player useButtonPressed()) {
         break;
       }
 

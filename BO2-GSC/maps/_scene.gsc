@@ -2317,19 +2317,19 @@ display_scene_menu() {
     scene_list_settext(elems, names, selected, a_selected_scenes);
 
     if(!up_pressed) {
-      if(get_players()[0] buttonpressed("UPARROW") || get_players()[0] buttonpressed("DPAD_UP")) {
+      if(get_players()[0] buttonPressed("UPARROW") || get_players()[0] buttonPressed("DPAD_UP")) {
         up_pressed = 1;
         selected--;
       }
-    } else if(!get_players()[0] buttonpressed("UPARROW") && !get_players()[0] buttonpressed("DPAD_UP"))
+    } else if(!get_players()[0] buttonPressed("UPARROW") && !get_players()[0] buttonPressed("DPAD_UP"))
       up_pressed = 0;
 
     if(!down_pressed) {
-      if(get_players()[0] buttonpressed("DOWNARROW") || get_players()[0] buttonpressed("DPAD_DOWN")) {
+      if(get_players()[0] buttonPressed("DOWNARROW") || get_players()[0] buttonPressed("DPAD_DOWN")) {
         down_pressed = 1;
         selected++;
       }
-    } else if(!get_players()[0] buttonpressed("DOWNARROW") && !get_players()[0] buttonpressed("DPAD_DOWN"))
+    } else if(!get_players()[0] buttonPressed("DOWNARROW") && !get_players()[0] buttonPressed("DPAD_DOWN"))
       down_pressed = 0;
 
     if(selected < 0) {
@@ -2340,11 +2340,11 @@ display_scene_menu() {
       selected = 0;
     }
 
-    if(get_players()[0] buttonpressed("BUTTON_B")) {
+    if(get_players()[0] buttonPressed("BUTTON_B")) {
       exit_scene_menu();
     }
 
-    if(get_players()[0] buttonpressed("kp_enter") || get_players()[0] buttonpressed("BUTTON_A") || get_players()[0] buttonpressed("enter")) {
+    if(get_players()[0] buttonPressed("kp_enter") || get_players()[0] buttonPressed("BUTTON_A") || get_players()[0] buttonPressed("enter")) {
       if(names[selected] == "exit") {
         exit_scene_menu();
       } else if(isinarray(a_selected_scenes, names[selected])) {
@@ -2358,7 +2358,7 @@ display_scene_menu() {
         setDvar("run_scene", names[selected]);
       }
 
-      while(get_players()[0] buttonpressed("kp_enter") || get_players()[0] buttonpressed("BUTTON_A") || get_players()[0] buttonpressed("enter")) {
+      while(get_players()[0] buttonPressed("kp_enter") || get_players()[0] buttonPressed("BUTTON_A") || get_players()[0] buttonPressed("enter")) {
         wait 0.05;
       }
     }

@@ -232,7 +232,7 @@ change_location(destnodes) {
   self.heli waittill("goal");
 
   for(;;) {
-    if(self secondaryoffhandbuttonpressed()) {
+    if(self secondaryoffhandbuttonPressed()) {
       self.moves++;
       self thread player_moved_recently_think();
       currentnode = self get_best_area_attack_node(destnodes, 1);
@@ -252,7 +252,7 @@ change_location(destnodes) {
       self.heli setgoalyaw(currentnode.angles[1] + level.heli_angle_offset);
       self.heli waittill("goal");
 
-      while(self secondaryoffhandbuttonpressed())
+      while(self secondaryoffhandbuttonPressed())
         wait 0.05;
     }
 
@@ -662,7 +662,7 @@ visionswitch(delay) {
   self clientnotify("cgfutz");
 
   for(;;) {
-    if(self changeseatbuttonpressed()) {
+    if(self changeseatbuttonPressed()) {
       if(!inverted) {
         self setinfraredvision(1);
         self setvisionsetforplayer(level.chopper_infrared_vision, 0.5);
@@ -675,7 +675,7 @@ visionswitch(delay) {
 
       inverted = !inverted;
 
-      while(self changeseatbuttonpressed())
+      while(self changeseatbuttonPressed())
         wait 0.05;
     }
 
@@ -993,7 +993,7 @@ heli_owner_exit(hardpointtype) {
   while(true) {
     timeused = 0;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       timeused = timeused + 0.05;
 
       if(timeused > 0.25) {
@@ -1160,14 +1160,14 @@ hud_minigun_think() {
   player = get_players()[0];
 
   while(true) {
-    while(!player attackbuttonpressed())
+    while(!player attackButtonPressed())
       wait 0.05;
 
     swap_counter = 1;
     self.minigun_hud["gun"] fadeovertime(0.05);
     self.minigun_hud["gun"].alpha = 0.65;
 
-    while(player attackbuttonpressed()) {
+    while(player attackButtonPressed()) {
       wait 0.05;
       player playLoopSound("wpn_hind_minigun_fire_plr_loop");
       self.minigun_hud["gun"] setshader("hud_hind_cannon0" + swap_counter, 64, 64);
@@ -1367,7 +1367,7 @@ debugcheckforexit(hardpointtype) {
     return;
   }
   while(true) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       player_heli_leave(hardpointtype);
       debug_print_heli(">>>>>>>send notify [exit_vehicle***heli_timeup]");
       return;

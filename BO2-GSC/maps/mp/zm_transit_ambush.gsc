@@ -228,7 +228,7 @@ setupdogspawnlocs() {
   }
 
   assert(isDefined(currentzone), "Bus needs to be in an ambush zone for an ambush round: " + level.the_bus.origin);
-  level.enemy_dog_locations = getstructarray(currentzone.target, "targetname");
+  level.enemy_dog_locations = getStructArray(currentzone.target, "targetname");
 }
 
 ambushroundkeeper() {

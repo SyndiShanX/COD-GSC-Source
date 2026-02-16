@@ -181,7 +181,7 @@ watchremotetriggerdisable() {
 allowremotestart(var_59d2c24b) {
   player = self;
 
-  if((isDefined(var_59d2c24b) && var_59d2c24b || player usebuttonpressed()) && !player.throwinggrenade && !player meleebuttonpressed() && !player util::isusingremote() && !(isDefined(player.carryobject) && isDefined(player.carryobject.disallowremotecontrol) && player.carryobject.disallowremotecontrol)) {
+  if((isDefined(var_59d2c24b) && var_59d2c24b || player useButtonPressed()) && !player.throwinggrenade && !player meleeButtonPressed() && !player util::isusingremote() && !(isDefined(player.carryobject) && isDefined(player.carryobject.disallowremotecontrol) && player.carryobject.disallowremotecontrol)) {
     return 1;
   }
 
@@ -309,14 +309,14 @@ watchremotecontroldeactivate() {
   weapon endon(#"remote_weapon_end", #"death");
   weapon.remoteowner endon(#"disconnect");
 
-  while(weapon.remoteowner usebuttonpressed()) {
+  while(weapon.remoteowner useButtonPressed()) {
     waitframe(1);
   }
 
   while(true) {
     timeused = 0;
 
-    while(weapon.remoteowner usebuttonpressed()) {
+    while(weapon.remoteowner useButtonPressed()) {
       timeused += 0.05;
 
       if(timeused > 0.25) {

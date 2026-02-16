@@ -462,7 +462,7 @@ function_af9bb307() {
         vo_played = 1;
       }
 
-      var_a447797f = e_player fragbuttonpressed();
+      var_a447797f = e_player fragButtonPressed();
 
       if(var_56b89658 != 1 && var_a447797f) {
         var_56b89658 = 1;
@@ -496,7 +496,7 @@ function_8d8bad52() {
     var_965b7e01 = n_time - n_start_time;
     e_player = getplayers()[0];
 
-    if(e_player fragbuttonpressed()) {
+    if(e_player fragButtonPressed()) {
       if(!var_2d3e1b92) {
         level thread ct_vo::function_831e0584(array(#"hash_6923605495bbfa1c"));
         var_2d3e1b92 = 1;

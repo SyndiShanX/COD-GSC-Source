@@ -31,7 +31,7 @@ updatedevsettingszm() {
       match_string = level.scr_zm_ui_gametype + "_" + location;
 
       if(level.streamdumpteamindex < level.teams.size) {
-        structs = getstructarray("initial_spawn", "script_noteworthy");
+        structs = getStructArray("initial_spawn", "script_noteworthy");
 
         if(isDefined(structs)) {
           foreach(struct in structs) {
@@ -47,7 +47,7 @@ updatedevsettingszm() {
         }
 
         if(!isDefined(spawnpoints) || spawnpoints.size == 0)
-          spawnpoints = getstructarray("initial_spawn_points", "targetname");
+          spawnpoints = getStructArray("initial_spawn_points", "targetname");
 
         if(isDefined(spawnpoints))
           numpoints = spawnpoints.size;

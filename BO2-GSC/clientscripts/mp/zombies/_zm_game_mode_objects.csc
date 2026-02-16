@@ -62,7 +62,7 @@ setup_game_mode_objects(mode, location) {
     return;
   }
   spawned = 0;
-  structs = getstructarray("game_mode_object", "targetname");
+  structs = getStructArray("game_mode_object", "targetname");
   level._game_mode_spawned_objects = [];
 
   for(x = 0; x < getlocalplayers().size; x++) {
@@ -448,7 +448,7 @@ soul_runner_test(zombie, team) {
   if(!isDefined(zombie))
     return undefined;
 
-  points = getstructarray("soul_path_" + team, "script_noteworthy");
+  points = getStructArray("soul_path_" + team, "script_noteworthy");
 
   if(points.size < 1)
     return undefined;
@@ -472,7 +472,7 @@ soul_runner_test(zombie, team) {
 setup_animated_signs() {
   wait 1;
   localplayers = getlocalplayers();
-  structs = getstructarray("game_mode_object", "targetname");
+  structs = getStructArray("game_mode_object", "targetname");
 
   for(i = 0; i < structs.size; i++) {
     if(!isDefined(structs[i])) {

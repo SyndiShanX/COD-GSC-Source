@@ -302,7 +302,7 @@ playertakestreaksupportinput(var_0) {
     if(!var_0.active) {
       return;
     }
-    if(isDefined(self playergetuseent()) && self playergetuseent() == var_0 && self usebuttonpressed() && self isonground()) {
+    if(isDefined(self playergetuseent()) && self playergetuseent() == var_0 && self useButtonPressed() && self isonground()) {
       var_2 = playergetusetime();
       var_1 = playerhandlejoining(var_0, var_2);
 
@@ -501,7 +501,7 @@ personalusebar(var_0, var_1) {
 useholdthinkloop(var_0, var_1) {
   var_1 endon("streakPromptStopped");
 
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
     if(isDefined(self.objectivescaler)) {

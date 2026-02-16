@@ -341,7 +341,7 @@ heli_circling_think(var_0, var_1) {
   var_2 = getEntArray(var_0, "targetname");
 
   if(!isDefined(var_2) || var_2.size < 1)
-    var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+    var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   var_3 = self;
   var_3 endon("stop_circling");
@@ -359,7 +359,7 @@ heli_circling_think(var_0, var_1) {
     var_7 = getEntArray(var_6.target, "targetname");
 
     if(!isDefined(var_7) || var_7.size < 1)
-      var_7 = common_scripts\utility::getstructarray(var_6.target, "targetname");
+      var_7 = common_scripts\utility::getStructArray(var_6.target, "targetname");
 
     var_8 = var_7[randomint(var_7.size)];
     var_3 setvehgoalpos(var_8.origin, 1);
@@ -461,7 +461,7 @@ player_is_aiming_with_rocket(var_0) {
   if(!level.player usingantiairweapon())
     return 0;
 
-  if(!level.player adsbuttonpressed())
+  if(!level.player adsButtonPressed())
     return 0;
 
   var_1 = level.player getEye();
@@ -1478,7 +1478,7 @@ heli_fire_missiles(var_0, var_1, var_2, var_3) {
 
 boneyard_style_heli_missile_attack() {
   self waittill("trigger", var_0);
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_1 = maps\_utility::array_index_by_script_index(var_1);
   boneyard_fire_at_targets(var_0, var_1);
 }

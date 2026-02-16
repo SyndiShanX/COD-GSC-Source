@@ -23,8 +23,8 @@ init() {
   PrecacheRumble("explosion_generic");
   level.nextMonkeyStealRound = 1;
   level.monkey_zombie_health = level.zombie_vars["zombie_health_start"];
-  level.stealer_monkey_spawns = GetStructArray("stealer_monkey_spawn", "targetname");
-  level.stealer_monkey_exits = GetStructArray("stealer_monkey_exit", "targetname");
+  level.stealer_monkey_spawns = getStructArray("stealer_monkey_spawn", "targetname");
+  level.stealer_monkey_exits = getStructArray("stealer_monkey_exit", "targetname");
   if(getDvar("monkey_steal_debug") == "") {
     setDvar("monkey_steal_debug", "0");
   }
@@ -853,7 +853,7 @@ precache_ambient_monkey_anims() {
 monkey_ambient_init() {
   flag_init("monkey_ambient_excited");
   monkey_ambient_level_set_next_sound();
-  level.ambient_monkey_locations = GetStructArray("monkey_ambient", "targetname");
+  level.ambient_monkey_locations = getStructArray("monkey_ambient", "targetname");
   level thread monkey_crowd_noise();
   level thread monkey_ambient_drops_add_array();
   level thread monkey_ambient_drops_remove_array();

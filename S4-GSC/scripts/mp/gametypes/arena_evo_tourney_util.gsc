@@ -965,7 +965,7 @@ _id_81C6(var_0, var_1, var_2, var_3) {
     }
   }
 
-  var_9._id_228A = scripts\engine\utility::_id_6369(var_9.origin, scripts\engine\utility::getstructarray("red_barrel_explode_struct", "targetname"), undefined, 1000);
+  var_9._id_228A = scripts\engine\utility::_id_6369(var_9.origin, scripts\engine\utility::getStructArray("red_barrel_explode_struct", "targetname"), undefined, 1000);
 
   foreach(var_14 in var_9._id_228A) {
     var_14[[level._id_227B]]();

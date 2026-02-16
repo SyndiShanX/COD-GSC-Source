@@ -1991,7 +1991,7 @@ cnd_plyr_catch_fire_reload(var_0, var_1) {
     var_2 = level.player getcurrentprimaryweapon();
     var_3 = 1;
 
-    while(level.player isfiring() || level.player attackbuttonpressed() || var_3) {
+    while(level.player isfiring() || level.player attackButtonPressed() || var_3) {
       var_4 = level.player getweaponammoclip(var_2);
 
       if(var_4 == 0) {

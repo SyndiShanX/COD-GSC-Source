@@ -271,7 +271,7 @@ function_e870d33d() {
         player.var_e7e2e3e5 = 1;
         player.var_766deb67 = vehicle;
 
-        while(player adsbuttonpressed()) {
+        while(player adsButtonPressed()) {
           wait float(function_60d95f53()) / 1000;
           slot = player gadgetgetslot(current_weapon.altweapon != level.weaponnone ? current_weapon.altweapon : current_weapon);
 
@@ -330,7 +330,7 @@ function_e870d33d() {
     var_7db1ac70 = 1;
 
     while(var_7db1ac70) {
-      if(player adsbuttonpressed() == 0) {
+      if(player adsButtonPressed() == 0) {
         player unlink();
         var_7db1ac70 = 0;
         continue;

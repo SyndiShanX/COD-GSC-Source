@@ -586,7 +586,7 @@ play_extra_seaknight_sound() {
 }
 
 bus_grenade_think() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   for(;;) {
     self waittill("trigger");
@@ -648,7 +648,7 @@ remove_can_sighttrace(var_0, var_1) {
 }
 
 fair_grenade_trigger_think() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_1 = [];
   var_1[0] = 25;
   var_1[1] = 20;

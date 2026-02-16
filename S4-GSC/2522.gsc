@@ -258,7 +258,7 @@ _id_ECD9() {
 }
 
 _id_ECD1() {
-  var_0 = scripts\engine\utility::getstructarray("tacrover_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tacrover_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

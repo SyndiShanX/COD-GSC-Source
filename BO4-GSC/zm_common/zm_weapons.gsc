@@ -490,7 +490,7 @@ is_weapon_or_base_included(weapon) {
   return isDefined(level.zombie_weapons[function_386dacbc(weapon)]) || isDefined(level.zombie_weapons[get_base_weapon(weapon)]);
 }
 
-include_zombie_weapon(weapon_name, in_box) {
+#include_zombie_weapon(weapon_name, in_box) {
   if(!isDefined(level.zombie_include_weapons)) {
     level.zombie_include_weapons = [];
   }

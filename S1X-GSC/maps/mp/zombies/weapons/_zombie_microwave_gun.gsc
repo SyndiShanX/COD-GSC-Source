@@ -397,7 +397,7 @@ playersetupmicrowaveammo(var_0) {
   }
 
   for(;;) {
-    if(!self attackbuttonpressed()) {
+    if(!self attackButtonPressed()) {
       self waittill("fire_microwave_weapon");
     }
 

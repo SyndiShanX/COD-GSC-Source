@@ -18,9 +18,9 @@ valid ai groups are:
 maps\_littlebird::main( "vehicle_little_bird_armed" );
 
 and these lines in your CSV:
-include,vehicle_littlebird_armed
+#include,vehicle_littlebird_armed
 sound,vehicle_littlebird,vehicle_standard,all_sp
-include,_attack_heli
+#include,_attack_heli
 
 defaultmdl="vehicle_little_bird_armed"default:"vehicletype" "littlebird"default:"script_team" "axis"*/
 
@@ -35,7 +35,7 @@ valid ai groups are:
 maps\_littlebird::main( "vehicle_little_bird_bench" );
 
 and these lines in your CSV:
-include,vehicle_littlebird_bench
+#include,vehicle_littlebird_bench
 sound,vehicle_littlebird,vehicle_standard,all_sp
 
 defaultmdl="vehicle_little_bird_bench"default:"vehicletype" "littlebird"default:"script_team" "axis"*/

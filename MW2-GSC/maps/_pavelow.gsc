@@ -110,7 +110,7 @@ put this in your GSC:
 maps\_pavelow::main( "vehicle_pavelow" );
 
 and these lines in your CSV:
-include,vehicle_pavelow
+#include,vehicle_pavelow
 sound,vehicle_pavelow,vehicle_standard,all_sp
 
 defaultmdl="vehicle_pavelow"default:"vehicletype" "pavelow"default:"script_team" "allies"

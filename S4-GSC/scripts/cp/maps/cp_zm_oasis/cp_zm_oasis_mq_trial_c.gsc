@@ -142,7 +142,7 @@ handle_trial_c_flow() {
 
   waitframe();
   level.e_shield _meth_82CB("s4_zm_shield_demonic_idle", "shield_idle");
-  level.a_s_crystals = scripts\engine\utility::getstructarray("trial_of_resilience_red_crystal", "script_noteworthy");
+  level.a_s_crystals = scripts\engine\utility::getStructArray("trial_of_resilience_red_crystal", "script_noteworthy");
   var_2 = level.a_s_crystals[randomint(level.a_s_crystals.size)];
   _id_07A1::_id_CEC7(::destroy_soul_crystal);
 
@@ -189,7 +189,7 @@ handle_trial_c_flow() {
   level.curse_item_names["s4_skull_01_bloody"] = &"CP_ZM_OASIS/TRIAL_C_CURSE_ITEM_SKULL";
   level.curse_item_names["femur_01"] = &"CP_ZM_OASIS/TRIAL_C_CURSE_ITEM_FEMUR";
   level.delivery_cursed = 0;
-  var_10 = scripts\engine\utility::getstructarray("trial_of_resilience_cursed_item", "script_noteworthy");
+  var_10 = scripts\engine\utility::getStructArray("trial_of_resilience_cursed_item", "script_noteworthy");
   var_10 = scripts\engine\utility::array_randomize(var_10);
   var_11 = scripts\engine\utility::array_randomize(scripts\engine\utility::_id_1BD1(level.trial_c_curses));
   var_12 = 0;
@@ -282,7 +282,7 @@ handle_trial_c_flow() {
 
 handle_zombie_spawn_around_item() {
   self endon("delivery_cursed");
-  var_0 = scripts\engine\utility::getstructarray(self._id_0481, "target");
+  var_0 = scripts\engine\utility::getStructArray(self._id_0481, "target");
 
   if(var_0.size == 0) {
     var_1 = _func_02AA(self.origin, 300, 20);
@@ -339,7 +339,7 @@ handle_zombie_spawn_around_item() {
 handle_zombie_spawn_alone_path(var_0) {
   self endon("lose_curse_item");
   var_0 endon("death_or_disconnect");
-  var_1 = scripts\engine\utility::getstructarray(self._id_0481, "target");
+  var_1 = scripts\engine\utility::getStructArray(self._id_0481, "target");
   childthread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::spawn_zombies_defeat("base", "enemy_base_zombie_cp", 0.5, 5, "leave_curse_item", var_1);
   childthread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::spawn_zombies_defeat("screamer", "enemy_zombie_screamer_cp", 5, 1, "leave_curse_item", var_1);
 
@@ -348,7 +348,7 @@ handle_zombie_spawn_alone_path(var_0) {
   }
 
   self notify("leave_curse_item");
-  var_2 = scripts\engine\utility::getstructarray("trial_c_spawner_along_route", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("trial_c_spawner_along_route", "script_noteworthy");
   self.a_spawn_zombies = [];
 
   for(;;) {
@@ -702,7 +702,7 @@ shield_challenge_flow() {
   level endon("shield_challenge_finished");
   level thread watch_shield_challenge_finished();
   scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_mq_trial_b::play_vo_to_players(level.players, ["zm_cpm5_mqs5_dcmt_qifk", "zm_cpm5_mqs5_dcmt_qifl", "zm_cpm5_mqs5_dcmt_qifm", "zm_cpm5_mqs5_dcmt_qifn", "zm_cpm5_mqs5_dcmt_qifo", "zm_cpm5_mqs5_dcmt_qifp"]);
-  var_0 = scripts\engine\utility::getstructarray("mq_trial_c_teleport_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_trial_c_teleport_loc", "script_noteworthy");
   var_1 = ["zone_crash_site", "zone_crash_site_west", "zone_crash_site_east_south"];
 
   foreach(var_3 in level.players) {
@@ -749,7 +749,7 @@ shield_challenge_flow() {
   level._id_8393["trial_of_resilience_syphoncore"].hint_type_func = ::get_resilience_syphoncore_hint_type_func;
   var_6 = level.players.size;
   var_7 = var_6 + 2;
-  var_8 = scripts\engine\utility::getstructarray("trial_of_resilience_syphoncore", "script_noteworthy");
+  var_8 = scripts\engine\utility::getStructArray("trial_of_resilience_syphoncore", "script_noteworthy");
   var_9 = [];
   level.a_trial_c_syphoncore = [];
 

@@ -1727,10 +1727,10 @@ function continueholdthinkloop(player) {
   if(player.throwinggrenade) {
     return false;
   }
-  if(!player usebuttonpressed()) {
+  if(!player useButtonPressed()) {
     return false;
   }
-  if(player meleebuttonpressed()) {
+  if(player meleeButtonPressed()) {
     return false;
   }
   if(player isinvehicle()) {

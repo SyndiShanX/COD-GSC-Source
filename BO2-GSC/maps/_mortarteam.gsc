@@ -56,7 +56,7 @@ mortarspawner(delayent) {
   node = random(getnodearray(self.target, "targetname"));
   assert(isDefined(node), "Mortar_team spawner at origin " + self.origin + " must target a node or nodes");
   assert(isDefined(node.target), "Mortar node at origin " + node.origin + " must target script origins for mortar targetting");
-  mortar_targets = getstructarray(node.target, "targetname");
+  mortar_targets = getStructArray(node.target, "targetname");
   delay_base = 0;
   delay_range = 0;
 

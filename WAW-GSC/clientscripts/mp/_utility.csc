@@ -28,7 +28,7 @@ getstruct(name, type) {
   return array[0];
 }
 
-getstructarray(name, type) {
+getStructArray(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];

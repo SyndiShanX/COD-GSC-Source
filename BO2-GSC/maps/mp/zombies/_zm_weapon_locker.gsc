@@ -17,7 +17,7 @@ main() {
     level.weapon_locker_map = level.script;
 
   level.weapon_locker_online = sessionmodeisonlinegame();
-  weapon_lockers = getstructarray("weapons_locker", "targetname");
+  weapon_lockers = getStructArray("weapons_locker", "targetname");
   array_thread(weapon_lockers, ::triggerweaponslockerwatch);
 }
 

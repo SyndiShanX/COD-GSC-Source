@@ -79,7 +79,7 @@ func_D1F6() {
         self.var_B36F = var_6;
       }
 
-      if(level.player usebuttonpressed()) {
+      if(level.player useButtonPressed()) {
         level notify("stop_landingpad_pulse");
         level.player scripts\sp\utility::func_65E1("flag_player_is_landing");
         func_412F();
@@ -1415,7 +1415,7 @@ func_11481() {
     }
   }
 
-  var_8 = scripts\engine\utility::getstructarray("jackal_takeoff_lights", "script_noteworthy");
+  var_8 = scripts\engine\utility::getStructArray("jackal_takeoff_lights", "script_noteworthy");
   var_9 = scripts\engine\utility::getclosest(level.var_D127.origin, var_8);
   var_2 = scripts\engine\utility::spawn_tag_origin();
   var_2.origin = var_9.origin;
@@ -1434,7 +1434,7 @@ func_11481() {
 
   var_2.lights = [];
   var_2.cleanup = [];
-  var_10 = scripts\engine\utility::getstructarray(var_2.targetname, "target");
+  var_10 = scripts\engine\utility::getStructArray(var_2.targetname, "target");
 
   foreach(var_12 in var_10) {
     var_5 = scripts\engine\utility::spawn_tag_origin();

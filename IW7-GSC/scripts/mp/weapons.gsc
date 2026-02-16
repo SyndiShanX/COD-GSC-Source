@@ -1647,7 +1647,7 @@ func_3E1E(var_0, var_1) {
     return;
   }
 
-  if(self meleebuttonpressed() && var_0 != "iw7_knife_mp") {
+  if(self meleeButtonPressed() && var_0 != "iw7_knife_mp") {
     return;
   }
 
@@ -2970,7 +2970,7 @@ func_56E4(var_0, var_1, var_2, var_3) {
   var_7 = vectornormalize(var_6);
   playFX(var_2.var_D828, var_4, rotatevector(var_6, (0, 180, 0)) * (1, 1, -1));
   wait(0.75);
-  if(var_0 adsbuttonpressed() && var_0 worldpointinreticle_circle(var_4, 65, 300)) {
+  if(var_0 adsButtonPressed() && var_0 worldpointinreticle_circle(var_4, 65, 300)) {
     var_0 shellshock("disruptor_mp", 2.5, 0, 1);
     return;
   }
@@ -3368,9 +3368,9 @@ watchc4altdetonate() {
   level endon("game_ended");
   var_0 = 0;
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = 0;
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + 0.05;
         wait(0.05);
       }
@@ -3380,7 +3380,7 @@ watchc4altdetonate() {
       }
 
       var_0 = 0;
-      while(!self usebuttonpressed() && var_0 < 0.5) {
+      while(!self useButtonPressed() && var_0 < 0.5) {
         var_0 = var_0 + 0.05;
         wait(0.05);
       }

@@ -144,20 +144,20 @@ moon_vertical_jump(ent_start_point, struct_end_point) {
 }
 moon_biodome_temptation_init() {
   level._biodome_tempt_arrays = [];
-  level._biodome_tempt_arrays["struct_tempt_left_medium_start"] = getstructarray("struct_tempt_left_medium_start", "targetname");
-  level._biodome_tempt_arrays["struct_tempt_right_medium_start"] = getstructarray("struct_tempt_right_medium_start", "targetname");
-  level._biodome_tempt_arrays["struct_tempt_left_tall"] = getstructarray("struct_tempt_left_tall", "targetname");
-  level._biodome_tempt_arrays["struct_tempt_middle_tall"] = getstructarray("struct_tempt_middle_tall", "targetname");
-  level._biodome_tempt_arrays["struct_tempt_right_tall"] = getstructarray("struct_tempt_right_tall", "targetname");
-  level._biodome_tempt_arrays["struct_tempt_left_medium_end"] = getstructarray("struct_tempt_left_medium_end", "targetname");
-  level._biodome_tempt_arrays["struct_tempt_right_medium_end"] = getstructarray("struct_tempt_right_medium_end", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_left_medium_start"] = getStructArray("struct_tempt_left_medium_start", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_right_medium_start"] = getStructArray("struct_tempt_right_medium_start", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_left_tall"] = getStructArray("struct_tempt_left_tall", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_middle_tall"] = getStructArray("struct_tempt_middle_tall", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_right_tall"] = getStructArray("struct_tempt_right_tall", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_left_medium_end"] = getStructArray("struct_tempt_left_medium_end", "targetname");
+  level._biodome_tempt_arrays["struct_tempt_right_medium_end"] = getStructArray("struct_tempt_right_medium_end", "targetname");
   level._pad_powerup = false;
   flag_wait("all_players_connected");
   level thread moon_biodome_random_pad_temptation();
 }
 moon_biodome_random_pad_temptation() {
   level endon("end_game");
-  structs = getstructarray("struct_biodome_temptation", "script_noteworthy");
+  structs = getStructArray("struct_biodome_temptation", "script_noteworthy");
   while(true) {
     rand = RandomInt(structs.size);
     if(isDefined(level._biodome_tempt_arrays[structs[rand].targetname])) {

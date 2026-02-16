@@ -1709,7 +1709,7 @@ addTestClientSpawnPoint() {
     trace = bulletTrace(marker.origin + (0, 0, 50), marker.origin + (0, 0, -100), false, marker);
     marker.origin = trace["position"];
 
-    if(notBot UseButtonPressed()) {
+    if(notBot useButtonPressed()) {
       ent = addtestclient(1);
 
       if(!isDefined(ent)) {
@@ -2719,7 +2719,7 @@ devLBGuardPathDebugDraw() {
 
   while(true) {
     if(GetDvarInt("scr_devLBGuardPathDebugDraw") > 0) {
-      script_structs = getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
+      script_structs = getStructArray("so_chopper_boss_path_struct", "script_noteworthy");
 
       foreach(ent in script_structs) {
         Line(ent.origin, ent.origin + (10, 0, 0), red);
@@ -3022,10 +3022,10 @@ reflectionProbeButtons() {
   offsetinc = 50;
 
   while(GetDvarInt("debug_reflection") == 1) {
-    if(self buttonpressed("BUTTON_X")) {
+    if(self buttonPressed("BUTTON_X")) {
       offset += offsetinc;
     }
-    if(self buttonpressed("BUTTON_Y")) {
+    if(self buttonPressed("BUTTON_Y")) {
       offset -= offsetinc;
     }
     if(offset > 1000) {

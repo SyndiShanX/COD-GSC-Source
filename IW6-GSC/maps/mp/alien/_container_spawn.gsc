@@ -35,7 +35,7 @@ activate_container_spawner_by_id(var_0) {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     return;
   }
-  var_1 = common_scripts\utility::getstructarray("container_spawn", "targetname");
+  var_1 = common_scripts\utility::getStructArray("container_spawn", "targetname");
 
   foreach(var_3 in var_1) {
     if(already_activated(var_3)) {
@@ -76,7 +76,7 @@ activate_container(var_0, var_1) {
 spawn_alien_from_container(var_0, var_1) {
   var_2 = 0.2;
   var_3 = 10;
-  var_4 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_4 = common_scripts\utility::getStructArray(var_0.target, "targetname");
   var_4 = sort_based_on_priority(var_4, var_1);
   var_5 = get_spawn_info(var_1, var_4.size);
   var_6 = get_should_force_spawn(var_1);
@@ -255,7 +255,7 @@ get_activation_method(var_0) {
 select_container_structs_in_area(var_0) {
   var_1 = getent(var_0, "targetname");
   var_2 = [];
-  var_3 = common_scripts\utility::getstructarray("container_spawn", "targetname");
+  var_3 = common_scripts\utility::getStructArray("container_spawn", "targetname");
 
   foreach(var_5 in var_3) {
     if(ispointinvolume(var_5.origin, var_1))

@@ -1205,7 +1205,7 @@ break_light() {
 }
 
 building_hit_fx() {
-  var_0 = common_scripts\utility::getstructarray("ceiling_dust_fx_first_floor", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("ceiling_dust_fx_first_floor", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_fxid))
@@ -2192,7 +2192,7 @@ exit_on_train() {
 }
 
 train_car() {
-  var_0 = common_scripts\utility::getstructarray("model_to_spawn_in", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("model_to_spawn_in", "script_noteworthy");
 
   foreach(var_2 in var_0)
   spawn_model_from_struct(var_2);
@@ -2476,7 +2476,7 @@ ambient_building_explosions(var_0) {
 
   while(!common_scripts\utility::flag("start_ambient_warehouse_scenarios")) {
     if(common_scripts\utility::flag("building_hit")) {
-      var_5 = common_scripts\utility::getstructarray("ceiling_light_spark_fx", "targetname");
+      var_5 = common_scripts\utility::getStructArray("ceiling_light_spark_fx", "targetname");
       var_6 = common_scripts\utility::getclosest(level.player.origin, var_5);
 
       if(isDefined(level.last_ceiling_light_spark_fx_struct)) {
@@ -2497,9 +2497,9 @@ ambient_building_explosions(var_0) {
     }
 
     if(level.player istouching(var_4))
-      var_2 = common_scripts\utility::getstructarray("ceiling_dust_fx_first_floor", "script_noteworthy");
+      var_2 = common_scripts\utility::getStructArray("ceiling_dust_fx_first_floor", "script_noteworthy");
     else if(level.player istouching(var_3))
-      var_2 = common_scripts\utility::getstructarray("ceiling_dust_fx_second_floor", "script_noteworthy");
+      var_2 = common_scripts\utility::getStructArray("ceiling_dust_fx_second_floor", "script_noteworthy");
 
     foreach(var_8 in var_2) {
       if(isDefined(var_8.script_fxid))
@@ -2508,14 +2508,14 @@ ambient_building_explosions(var_0) {
 
     var_10 = randomfloatrange(0.1, 0.4);
     earthquake(var_10, 1, level.player.origin, 512);
-    var_11 = common_scripts\utility::getstructarray("mortar_explosion_sound_struct", "targetname");
+    var_11 = common_scripts\utility::getStructArray("mortar_explosion_sound_struct", "targetname");
     var_1 = common_scripts\utility::getclosest(level.player.origin, var_11);
     level thread maps\satfarm_audio::tower_ambient_explosions(var_1.origin);
     wait(randomfloatrange(8, 12));
   }
 
   for(;;) {
-    var_2 = common_scripts\utility::getstructarray("ceiling_dust_fx_warehouse", "script_noteworthy");
+    var_2 = common_scripts\utility::getStructArray("ceiling_dust_fx_warehouse", "script_noteworthy");
 
     foreach(var_8 in var_2) {
       if(isDefined(var_8.script_fxid))
@@ -2524,7 +2524,7 @@ ambient_building_explosions(var_0) {
 
     var_10 = randomfloatrange(0.1, 0.4);
     earthquake(var_10, 1, level.player.origin, 512);
-    var_11 = common_scripts\utility::getstructarray("mortar_explosion_sound_struct", "targetname");
+    var_11 = common_scripts\utility::getStructArray("mortar_explosion_sound_struct", "targetname");
     var_1 = common_scripts\utility::getclosest(level.player.origin, var_11);
     level.player playSound("satf_building_shake_ly2");
     wait(randomfloatrange(0.4, 0.7));
@@ -2569,7 +2569,7 @@ wall_lights_think(var_0) {
 }
 
 sprinkler_fx() {
-  var_0 = common_scripts\utility::getstructarray("fire_sprinkler_fx", "targetname");
+  var_0 = common_scripts\utility::getStructArray("fire_sprinkler_fx", "targetname");
   var_1 = undefined;
 
   foreach(var_3 in var_0) {

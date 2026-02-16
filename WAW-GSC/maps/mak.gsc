@@ -993,7 +993,7 @@ event1_hut1_fx() {
 
       max_lower_fx--;
     } else {
-      structs = getstructarray(pieces[i].script_linkto, "script_noteworthy");
+      structs = getStructArray(pieces[i].script_linkto, "script_noteworthy");
       pieces[i].upper = true;
 
       for(q = 0; q < structs.size; q++) {
@@ -2593,7 +2593,7 @@ event2_spotlight() {
   light.angles = VectorToAngles(light.spot_target.origin - light.origin);
 
   boat = GetEnt("event2_boatsquad2_raft", "targetname");
-  targets = GetStructArray("spotlight_targets", "targetname");
+  targets = getStructArray("spotlight_targets", "targetname");
   old_target = targets[0];
 
   red = get_force_color_guys("allies", "r");
@@ -4085,7 +4085,7 @@ event5_bunker_guy_spawn() {
 }
 
 event5_drone_thread() {
-  structs = GetStructArray("event5_drone_wave1", "targetname");
+  structs = getStructArray("event5_drone_wave1", "targetname");
   min_delay = 0.3;
   max_delay = 0.7;
 
@@ -6274,7 +6274,7 @@ add_extra_starting_guy() {
   level.starting_guys[level.starting_guys.size] = self;
 }
 get_sorted_starts(start_name) {
-  starts = getstructarray(start_name, "targetname");
+  starts = getStructArray(start_name, "targetname");
 
   player_starts = [];
   ai_starts = [];

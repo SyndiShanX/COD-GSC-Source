@@ -10,7 +10,7 @@ init() {
     level.doorhintstrings = [];
   }
 
-  level.zombiedoors = common_scripts\utility::getstructarray("door", "targetname");
+  level.zombiedoors = common_scripts\utility::getStructArray("door", "targetname");
   common_scripts\utility::array_thread(level.zombiedoors, ::init_door);
 }
 
@@ -114,7 +114,7 @@ init_door_mover(var_0) {
   var_0.is_door = 1;
   var_0.blood = [];
   var_0.movegoals = [];
-  var_1 = common_scripts\utility::getstructarray(var_0.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = var_3.script_noteworthy;

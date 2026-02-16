@@ -63,7 +63,7 @@ section_hint_string_init() {
 }
 
 hints_ads_escape() {
-  if(common_scripts\utility::flag("esc_combat_done") || level.player adsbuttonpressed())
+  if(common_scripts\utility::flag("esc_combat_done") || level.player adsButtonPressed())
     return 1;
   else
     return 0;

@@ -80,7 +80,7 @@ rh_boss_interactions() {
   scripts\cp\maps\cp_final\cp_final_interactions::levelinteractionregistration(1, "rhino_neil_monitors", undefined, undefined, ::blankhintfunc, ::blankusefunc, 0, 0, ::init_rh_neil_monitors);
   init_rk_candy_interactions();
   scripts\cp\maps\cp_final\cp_final_mpq::activateinteractionsbynoteworthy("rhino_sentry");
-  var_0 = scripts\engine\utility::getstructarray("rhino_sentry", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rhino_sentry", "script_noteworthy");
   var_1 = "rhino_sentry_door";
   var_2 = getEntArray(var_1, "targetname");
   var_3 = scripts\engine\utility::getclosest(var_2[0].origin, var_0);
@@ -266,7 +266,7 @@ respawn_in_rhino_fight(var_0) {
     return var_2;
   }
 
-  var_1 = scripts\engine\utility::getstructarray("rhino_boss_spawn_loc", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("rhino_boss_spawn_loc", "targetname");
   var_5 = scripts\engine\utility::array_randomize(var_5);
   var_2 = spawnStruct();
   foreach(var_6 in var_4) {
@@ -381,11 +381,11 @@ stage_5() {
   turn_on_lights(1);
   scripts\cp\maps\cp_final\cp_final_mpq::playneilvo("final_n31l_evil_portal_open");
   var_0 = [];
-  var_1 = scripts\engine\utility::getstructarray("goon_spawner", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("goon_spawner", "targetname");
   var_0 = scripts\engine\utility::array_combine(var_0, var_1);
-  var_1 = scripts\engine\utility::getstructarray("rhino_sentry", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("rhino_sentry", "script_noteworthy");
   var_0 = scripts\engine\utility::array_combine(var_0, var_1);
-  var_1 = scripts\engine\utility::getstructarray("rhino_console", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("rhino_console", "targetname");
   var_0 = scripts\engine\utility::array_combine(var_0, var_1);
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_2 = 0;
@@ -496,7 +496,7 @@ listen_for_rhino_trigger() {
 waitforplayersnearby() {
   level endon("game_ended");
   level endon("start_rhino_fight");
-  var_0 = scripts\engine\utility::getstructarray("initial_rhino_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("initial_rhino_spawn", "targetname");
   var_1 = var_0[0].origin;
   var_2 = 150;
   var_3 = var_2 * var_2;
@@ -639,8 +639,8 @@ func_1071B() {
 }
 
 get_current_spawners() {
-  var_0 = scripts\engine\utility::getstructarray("spawner_1", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("spawner_2", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("spawner_1", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("spawner_2", "script_noteworthy");
   var_0 = scripts\engine\utility::array_combine(var_0, var_1);
   var_2 = [];
   foreach(var_4 in var_0) {
@@ -653,7 +653,7 @@ get_current_spawners() {
 }
 
 update_spawn_portals() {
-  var_0 = scripts\engine\utility::getstructarray("spawner_1", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("spawner_1", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(!isDefined(var_0[var_1].target)) {
@@ -676,7 +676,7 @@ update_spawn_portals() {
     }
   }
 
-  var_0 = scripts\engine\utility::getstructarray("spawner_2", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("spawner_2", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(!isDefined(var_0[var_1].target)) {
@@ -701,14 +701,14 @@ update_spawn_portals() {
 }
 
 delete_portal_models() {
-  var_0 = scripts\engine\utility::getstructarray("spawner_1", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("spawner_1", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.portal_struct) && isDefined(var_2.portal_struct.fx)) {
       var_2.portal_struct.fx delete();
     }
   }
 
-  var_0 = scripts\engine\utility::getstructarray("spawner_2", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("spawner_2", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.portal_struct) && isDefined(var_2.portal_struct.fx)) {
       var_2.portal_struct.fx delete();
@@ -1162,7 +1162,7 @@ update_emp_spawners() {
 
 turn_off_spawners(var_0, var_1) {
   var_2 = getEntArray("rhino_console_screen", "targetname");
-  var_3 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_5 in var_3) {
     var_5.portal_struct.fx setscriptablepartstate("portal", "off");
     var_5.var_19 = 0;
@@ -1176,7 +1176,7 @@ turn_off_spawners(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    var_10 = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
+    var_10 = scripts\engine\utility::getStructArray(var_1, "script_noteworthy");
     foreach(var_5 in var_10) {
       var_5.portal_struct.fx setscriptablepartstate("portal", "off");
       var_5.var_19 = 0;
@@ -1193,7 +1193,7 @@ turn_off_spawners(var_0, var_1) {
 
 turn_on_spawners(var_0, var_1, var_2) {
   var_3 = getEntArray("rhino_console_screen", "targetname");
-  var_4 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_6 in var_4) {
     var_6.portal_struct.fx setscriptablepartstate("portal", "cooldown");
     var_6.var_19 = 1;
@@ -1207,7 +1207,7 @@ turn_on_spawners(var_0, var_1, var_2) {
   }
 
   if(isDefined(var_1)) {
-    var_11 = scripts\engine\utility::getstructarray(var_1, "script_noteworthy");
+    var_11 = scripts\engine\utility::getStructArray(var_1, "script_noteworthy");
     foreach(var_6 in var_11) {
       var_6.portal_struct.fx setscriptablepartstate("portal", "cooldown");
       var_6.var_19 = 1;
@@ -1223,7 +1223,7 @@ turn_on_spawners(var_0, var_1, var_2) {
 }
 
 open_sentry_doors() {
-  var_0 = scripts\engine\utility::getstructarray("rhino_sentry", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rhino_sentry", "script_noteworthy");
   var_1 = "rhino_sentry_door";
   var_2 = getEntArray(var_1, "targetname");
   var_3 = aim_at_target(var_2[0]);
@@ -1990,7 +1990,7 @@ rhino_console_act(var_0, var_1) {
   var_0.activated = 1;
   scripts\cp\maps\cp_final\cp_final_mpq::playneilvo("final_n31l_evil_entangler_panels");
   var_2 = var_0.script_parameters;
-  var_3 = scripts\engine\utility::getstructarray("goon_spawner", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("goon_spawner", "targetname");
   foreach(var_5 in var_3) {
     if(var_5.script_parameters == var_2) {
       var_5.portal_struct.fx setscriptablepartstate("portal", "off");
@@ -2005,7 +2005,7 @@ rhino_console_act(var_0, var_1) {
   var_8 = scripts\engine\utility::getclosest(var_0.origin, var_7, 500);
   var_8 show();
   wait(20 / level.players.size);
-  var_3 = scripts\engine\utility::getstructarray("goon_spawner", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("goon_spawner", "targetname");
   foreach(var_5 in var_3) {
     if(var_5.script_parameters == var_2) {
       var_5.portal_struct.fx setscriptablepartstate("portal", "cooldown");
@@ -2049,14 +2049,14 @@ rhino_sentry_act(var_0, var_1) {
 init_rk_candy_interactions() {
   level.num_crates_broken = 0;
   level.available_crate_perks = scripts\engine\utility::array_randomize_objects(["perk_machine_revive", "perk_machine_flash", "perk_machine_tough", "perk_machine_run", "perk_machine_rat_a_tat"]);
-  var_0 = scripts\engine\utility::getstructarray("perk_candy_box", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
   foreach(var_2 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_2);
   }
 }
 
 turn_on_perk_boxes() {
-  var_0 = scripts\engine\utility::getstructarray("perk_candy_box", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
   foreach(var_2 in var_0) {
     createperkboxes(var_2);
   }
@@ -2224,7 +2224,7 @@ init_rh_neil_monitors() {
     wait(0.1);
   }
 
-  var_0 = scripts\engine\utility::getstructarray("rhino_neil_monitors", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rhino_neil_monitors", "script_noteworthy");
   level.special_mode_activation_funcs["rhino_neil_monitors"] = ::setrhinoneilstatepent;
   level.normal_mode_activation_funcs["rhino_neil_monitors"] = ::setrhinoneilstatepent;
   foreach(var_2 in var_0) {
@@ -2285,7 +2285,7 @@ getmodelfromstruct(var_0) {
 }
 
 setuplnfinteractions() {
-  var_0 = scripts\engine\utility::getstructarray("lost_and_found", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("lost_and_found", "script_noteworthy");
   var_1 = undefined;
   foreach(var_3 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
@@ -2309,7 +2309,7 @@ setuplnfinteractions() {
 }
 
 restorelnfinteractions() {
-  var_0 = scripts\engine\utility::getstructarray("lost_and_found", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("lost_and_found", "script_noteworthy");
   var_1 = undefined;
   foreach(var_3 in var_0) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);

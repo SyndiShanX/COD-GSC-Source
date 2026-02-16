@@ -186,7 +186,7 @@ game_skipPage_watcher() {
   level endon("exit_taken");
   player = GetPlayers()[0];
   while(1) {
-    if(player UseButtonPressed()) {
+    if(player useButtonPressed()) {
       level notify("next_page");
       wait 1;
     }
@@ -335,7 +335,7 @@ introduction_abort_watcher() {
   level.skip_msg SetText(&"ZOMBIETRON_SKIP_SCENE");
   level.skip_msg.hidewheninmenu = true;
   while(1) {
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       princess = GetEnt("princess", "script_noteworthy");
       princess startragdoll();
       princess launchragdoll((0, 0, 200));
@@ -772,7 +772,7 @@ summary_abort_watcher() {
     level.skip_msg SetText(&"ZOMBIETRON_SKIP_SCENE");
   }
   while(1) {
-    if(isDefined(winner) && winner UseButtonPressed()) {
+    if(isDefined(winner) && winner useButtonPressed()) {
       maps\_zombietron_pickups::clear_all_pickups();
       level notify("bubbles_off");
       level notify("end_the_summary");

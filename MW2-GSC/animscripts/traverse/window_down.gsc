@@ -106,7 +106,7 @@ printerdebugger(msg, org) {
 /*
 
 dif = startNode.origin[2] - self.origin[2];
-included = false;
+#included = false;
 for(i=0;i<level.traverseFall.size;i++)
 {
 	if(level.traverseFall[i] != dif)

@@ -255,7 +255,7 @@ func_1327B() {
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
 
   for(;;) {
-    if(var_0 attackbuttonpressed()) {
+    if(var_0 attackButtonPressed()) {
       var_1 = distancesquared(self.spawnpos, self.origin);
 
       if(var_1 >= 5760000) {

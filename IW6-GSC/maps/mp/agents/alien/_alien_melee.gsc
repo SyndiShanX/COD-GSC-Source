@@ -882,7 +882,7 @@ check_for_player_meleeing(player) {
   playerToEnemyVector = VectorNormalize(self.origin - player.origin);
   dotProduct = VectorDot(playerToEnemyVector, playerForwardVector);
 
-  if(player MeleeButtonPressed() && isDefined(player.meleeStrength) && player.meleeStrength == 1 && dotProduct > 0.5)
+  if(player meleeButtonPressed() && isDefined(player.meleeStrength) && player.meleeStrength == 1 && dotProduct > 0.5)
     return true;
   else
     return false;

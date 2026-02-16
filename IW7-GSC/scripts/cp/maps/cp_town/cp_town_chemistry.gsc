@@ -154,7 +154,7 @@ setup_chemistry_lab_models_in_world() {
 }
 
 setup_heat_pressure_buttons() {
-  var_0 = scripts\engine\utility::getstructarray("h_p_button", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("h_p_button", "script_noteworthy");
   var_1 = getent("chem_computer", "targetname");
   foreach(var_6, var_3 in var_0) {
     var_4 = undefined;
@@ -503,7 +503,7 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
 
   if(var_1 == "copper") {
     level.silver = [];
-    var_1B = scripts\engine\utility::getstructarray("cp_town_pennies", "script_noteworthy");
+    var_1B = scripts\engine\utility::getStructArray("cp_town_pennies", "script_noteworthy");
     foreach(var_1D in var_1B) {
       var_1A = spawn("script_model", var_1D.origin);
       var_1A setModel("tag_origin_chemical");
@@ -523,7 +523,7 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
 
   if(var_1 == "silver") {
     level.copper = [];
-    var_1F = scripts\engine\utility::getstructarray("cp_town_quarters", "script_noteworthy");
+    var_1F = scripts\engine\utility::getStructArray("cp_town_quarters", "script_noteworthy");
     var_20 = spawnStruct();
     var_20.origin = (5270, 1596, 387);
     var_20.angles = (10, 184, 0);
@@ -552,7 +552,7 @@ register_element(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
   if(var_1 == "chill") {
     var_1A = undefined;
     level.chill = [];
-    var_24 = scripts\engine\utility::getstructarray("cp_town_chill", "script_noteworthy");
+    var_24 = scripts\engine\utility::getStructArray("cp_town_chill", "script_noteworthy");
     foreach(var_1D in var_24) {
       var_1A = spawn("script_model", var_1D.origin);
       var_1A setModel("tag_origin_chemical");
@@ -890,7 +890,7 @@ show_reaction_hint_for_time(var_0, var_1) {
 watch_for_reaction_start_pressed(var_0) {
   self endon("disconnect");
   for(;;) {
-    if(!self usebuttonpressed()) {
+    if(!self useButtonPressed()) {
       wait(0.05);
       continue;
     }
@@ -1429,7 +1429,7 @@ element_pickup_hint_func(var_0, var_1) {
 
 init_beakers() {
   level._effect["sb_quest_item_pickup"] = loadfx("vfx\iw7\core\zombie\vfx_zom_souvenir_pickup.vfx");
-  var_0 = scripts\engine\utility::getstructarray("chemistry_container_model", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("chemistry_container_model", "script_noteworthy");
   foreach(var_4, var_2 in var_0) {
     var_3 = undefined;
     switch (var_2.name) {
@@ -1472,7 +1472,7 @@ init_beakers() {
 }
 
 init_compound_storage_objects() {
-  var_0 = scripts\engine\utility::getstructarray("compound_storage_model", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("compound_storage_model", "script_noteworthy");
   foreach(var_4, var_2 in var_0) {
     var_3 = undefined;
     switch (var_2.name) {
@@ -1883,7 +1883,7 @@ init_chem_radios() {
   level.chem_radio_5_sounds[0] = "db_day_7";
   level.chem_radio_6_sounds = [];
   level.chem_radio_6_sounds[0] = "db_day_8";
-  var_0 = scripts\engine\utility::getstructarray("chem_radio_interaction", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("chem_radio_interaction", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.radio = spawn("script_origin", var_2.origin);
     var_3 = undefined;

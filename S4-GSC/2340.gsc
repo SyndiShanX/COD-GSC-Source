@@ -286,7 +286,7 @@ _id_13A6(var_0, var_1) {
 }
 
 _id_10D71(var_0, var_1, var_2) {
-  level._id_582E = scripts\engine\utility::_id_6369(var_1, scripts\engine\utility::getstructarray("cp_donetsk_heli_spawns", "targetname"), undefined, 1, 6669);
+  level._id_582E = scripts\engine\utility::_id_6369(var_1, scripts\engine\utility::getStructArray("cp_donetsk_heli_spawns", "targetname"), undefined, 1, 6669);
   var_3 = (var_1[0], var_1[1], 5000);
 
   if(level.script == "cp_donetsk") {

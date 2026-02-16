@@ -133,7 +133,7 @@ put this in your GSC:
 maps\_seaknight::main( "vehicle_ch46e" );
 
 and these lines in your CSV:
-include,vehicle_ch46e_seaknight
+#include,vehicle_ch46e_seaknight
 sound,vehicle_seaknight,vehicle_standard,all_sp
 
 defaultmdl="vehicle_ch46e"default:"vehicletype" "seaknight"default:"script_team" "allies"*/
@@ -144,7 +144,7 @@ put this in your GSC:
 maps\_seaknight::main( "vehicle_ch46e_low" );
 
 and these lines in your CSV:
-include,vehicle_ch46e_seaknight_low
+#include,vehicle_ch46e_seaknight_low
 sound,vehicle_seaknight,vehicle_standard,all_sp
 
 defaultmdl="vehicle_ch46e_low"default:"vehicletype" "seaknight"default:"script_team" "allies"

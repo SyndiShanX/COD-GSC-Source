@@ -21,7 +21,7 @@ init() {
 
   level.interactions = [];
   level.interaction_hintstrings = [];
-  level.all_interaction_structs = scripts\engine\utility::getstructarray("interaction", "targetname");
+  level.all_interaction_structs = scripts\engine\utility::getStructArray("interaction", "targetname");
   level.current_interaction_structs = level.all_interaction_structs;
   level.var_9A46 = 0;
   level.weapon_hint_func = ::func_502F;
@@ -206,11 +206,11 @@ func_BC88(var_0) {
       foreach(var_14 in var_6) {
         var_4 = 0;
 
-        if(var_0 adsbuttonpressed()) {
+        if(var_0 adsButtonPressed()) {
           func_12E34(var_0, -1, undefined, undefined);
           var_1 = undefined;
 
-          while(var_0 adsbuttonpressed()) {
+          while(var_0 adsButtonPressed()) {
             wait 0.05;
           }
         }
@@ -741,7 +741,7 @@ can_use_interaction(var_0) {
     return 0;
   }
 
-  if(self secondaryoffhandbuttonpressed() || self isthrowinggrenade() || self fragbuttonpressed()) {
+  if(self secondaryoffhandbuttonPressed() || self isthrowinggrenade() || self fragButtonPressed()) {
     return 0;
   }
 
@@ -1863,7 +1863,7 @@ interaction_fail_internal(var_0, var_1, var_2, var_3) {
 }
 
 disable_linked_interactions(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     if(var_3.target == var_0.target) {
@@ -1874,7 +1874,7 @@ disable_linked_interactions(var_0) {
 }
 
 enable_linked_interactions(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     if(var_3.target == var_0.target) {
@@ -1885,7 +1885,7 @@ enable_linked_interactions(var_0) {
 }
 
 disable_like_interactions(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 0);
@@ -1894,7 +1894,7 @@ disable_like_interactions(var_0) {
 }
 
 enable_like_interactions(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     scripts\cp\zombies\zombie_analytics::func_AF74(var_3.name, 1);
@@ -1903,7 +1903,7 @@ enable_like_interactions(var_0) {
 }
 
 interaction_cooldown(var_0, var_1) {
-  var_2 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach(var_4 in var_2) {
     if(var_4.target == var_0.target) {
@@ -1937,7 +1937,7 @@ interaction_cooldown(var_0, var_1) {
 
 get_linked_interactions(var_0) {
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray(var_0.script_noteworthy, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_0.script_noteworthy, "script_noteworthy");
 
   foreach(var_4 in var_2) {
     if(var_4.target == var_0.target) {
@@ -1964,7 +1964,7 @@ func_9A3A(var_0) {
 }
 
 func_55A2() {
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_2 in var_0) {
     if(interaction_is_weapon_buy(var_2) || interaction_is_grenade_wall_buy(var_2) || interaction_is_ticket_buy(var_2) || isDefined(var_2.script_parameters) && var_2.script_parameters == "tickets") {
@@ -1976,7 +1976,7 @@ func_55A2() {
 }
 
 func_55A3(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_3 in var_1) {
     if(interaction_is_weapon_buy(var_3) || interaction_is_grenade_wall_buy(var_3) || interaction_is_ticket_buy(var_3) || isDefined(var_3.script_parameters) && var_3.script_parameters == "tickets") {
@@ -1988,7 +1988,7 @@ func_55A3(var_0) {
 }
 
 func_6255(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_3 in var_1) {
     if(interaction_is_weapon_buy(var_3) || interaction_is_grenade_wall_buy(var_3) || interaction_is_ticket_buy(var_3) || isDefined(var_3.script_parameters) && var_3.script_parameters == "tickets") {

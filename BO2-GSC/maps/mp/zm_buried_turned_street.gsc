@@ -55,9 +55,9 @@ custom_zombie_player_loadout() {
 
 getspawnpoints() {
   level._turned_zombie_spawners = getEntArray("game_mode_spawners", "targetname");
-  level._turned_zombie_spawnpoints = getstructarray("street_turned_zombie_spawn", "targetname");
-  level._turned_zombie_respawnpoints = getstructarray("street_turned_player_respawns", "targetname");
-  level._turned_powerup_spawnpoints = getstructarray("street_turned_powerups", "targetname");
+  level._turned_zombie_spawnpoints = getStructArray("street_turned_zombie_spawn", "targetname");
+  level._turned_zombie_respawnpoints = getStructArray("street_turned_player_respawns", "targetname");
+  level._turned_powerup_spawnpoints = getStructArray("street_turned_powerups", "targetname");
 }
 
 onendgame() {}

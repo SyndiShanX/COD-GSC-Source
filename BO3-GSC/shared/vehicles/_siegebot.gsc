@@ -168,7 +168,7 @@ function siegebot_player_fireupdate() {
   driver = self getseatoccupant(0);
   self thread siegebot_player_aimupdate();
   while(true) {
-    if(driver attackbuttonpressed()) {
+    if(driver attackButtonPressed()) {
       self fireweapon(2);
       wait(firetime);
     } else {

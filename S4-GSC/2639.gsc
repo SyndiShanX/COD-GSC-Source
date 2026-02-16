@@ -1274,7 +1274,7 @@ _id_10BAF(var_0, var_1) {
     }
     var_4 = 0;
 
-    while(self.owner usebuttonpressed()) {
+    while(self.owner useButtonPressed()) {
       var_4 = var_4 + var_2;
 
       if(var_4 > 0.1) {

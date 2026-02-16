@@ -310,7 +310,7 @@ _id_8D85() {
 }
 
 _id_6C21() {
-  var_0 = scripts\engine\utility::getstructarray("patrol_route_start", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("patrol_route_start", "targetname");
   return var_0;
 }
 
@@ -361,7 +361,7 @@ _id_CA6A() {
       var_4 = scripts\engine\utility::getstruct(var_1.target, "targetname");
 
       if(isDefined(var_4._id_039B) && var_4._id_039B == var_1._id_039B) {
-        var_5 = scripts\engine\utility::getstructarray(var_1._id_039B, "script_noteworthy");
+        var_5 = scripts\engine\utility::getStructArray(var_1._id_039B, "script_noteworthy");
         var_5 = scripts\engine\utility::array_remove(var_5, var_1);
         var_2 = var_5[randomint(var_5.size)];
         var_3 = var_1._id_039B;

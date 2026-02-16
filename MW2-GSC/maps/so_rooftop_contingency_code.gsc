@@ -620,7 +620,7 @@ distance2d_squared(pos1, pos2) {
 //		pos = trace[ "position" ];
 //		draw_circle( pos, 32 );
 //
-//		if( level.player UseButtonPressed() )
+//		if( level.player useButtonPressed() )
 //		{
 //			missile = MagicBullet( "remote_missile_snow", pos + ( 0, 0, 200 ), pos, level.player );
 //			thread do_physics_impact_on_explosion( level.player );

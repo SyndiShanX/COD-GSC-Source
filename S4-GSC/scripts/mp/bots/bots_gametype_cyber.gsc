@@ -140,7 +140,7 @@ _id_1093D(var_0) {
   var_2 = var_1 + var_0 * 1000;
   wait 0.05;
 
-  while(self usebuttonpressed() && gettime() < var_2 && level._id_2663) {
+  while(self useButtonPressed() && gettime() < var_2 && level._id_2663) {
     wait 0.05;
   }
 }

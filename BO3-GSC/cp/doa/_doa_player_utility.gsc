@@ -186,70 +186,70 @@ function function_e2a1a825() {
 
 function function_eb67e3d2() {
   while(true) {
-    if(self stancebuttonpressed()) {
+    if(self stancebuttonPressed()) {
       stance = 1;
     }
-    if(self fragbuttonpressed()) {
+    if(self fragButtonPressed()) {
       frag = 1;
     }
-    if(self reloadbuttonpressed()) {
+    if(self reloadbuttonPressed()) {
       reload = 1;
     }
-    if(self secondaryoffhandbuttonpressed()) {
+    if(self secondaryoffhandbuttonPressed()) {
       var_6275e96c = 1;
     }
-    if(self inventorybuttonpressed()) {
+    if(self inventorybuttonPressed()) {
       inventory = 1;
     }
-    if(self offhandspecialbuttonpressed()) {
+    if(self offhandspecialbuttonPressed()) {
       var_41f5c788 = 1;
     }
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       var_ad9943fa = 1;
     }
-    if(self vehiclemoveupbuttonpressed()) {
+    if(self vehiclemoveupbuttonPressed()) {
       var_affc5722 = 1;
     }
-    if(self actionbuttonpressed()) {
+    if(self actionbuttonPressed()) {
       action = 1;
     }
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       jump = 1;
     }
-    if(self sprintbuttonpressed()) {
+    if(self sprintbuttonPressed()) {
       sprint = 1;
     }
-    if(self meleebuttonpressed()) {
+    if(self meleeButtonPressed()) {
       melee = 1;
     }
-    if(self throwbuttonpressed()) {
+    if(self throwbuttonPressed()) {
       throw = 1;
     }
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       ads = 1;
     }
-    if(self actionslotfourbuttonpressed()) {
+    if(self actionslotfourbuttonPressed()) {
       action4 = 1;
     }
-    if(self actionslotthreebuttonpressed()) {
+    if(self actionslotthreebuttonPressed()) {
       action3 = 1;
     }
-    if(self actionslottwobuttonpressed()) {
+    if(self actionslottwobuttonPressed()) {
       action2 = 1;
     }
-    if(self actionslotonebuttonpressed()) {
+    if(self actionslotonebuttonPressed()) {
       action1 = 1;
     }
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       attack = 1;
     }
-    if(self boostbuttonpressed()) {
+    if(self boostbuttonPressed()) {
       boost = 1;
     }
-    if(self changeseatbuttonpressed()) {
+    if(self changeseatbuttonPressed()) {
       changeseat = 1;
     }
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       use = 1;
     }
     wait(0.05);
@@ -740,7 +740,7 @@ function function_ab0e2cf3() {
     if(isDefined(self.doa.var_3e3bcaa1) && self.doa.var_3e3bcaa1) {
       continue;
     }
-    if(isDefined(self.doa.var_3be905bb) && self.doa.var_3be905bb || (!isDefined(self.doa.vehicle) && self fragbuttonpressed())) {
+    if(isDefined(self.doa.var_3be905bb) && self.doa.var_3be905bb || (!isDefined(self.doa.vehicle) && self fragButtonPressed())) {
       self.doa.var_3be905bb = 0;
       if(isDefined(self.doa.boosters) && self.doa.boosters > 0) {
         self.doa.rhino_deaths = 0;
@@ -864,13 +864,13 @@ function function_73d40751() {
   self endon("disconnect");
   while(true) {
     wait(0.05);
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       if(!(isDefined(self.doa.var_655cbff1) && self.doa.var_655cbff1)) {
         self clientfield::increment_to_player("changeCamera");
         self notify("hash_348c5f29");
         level notify("hash_348c5f29", self);
       }
-      while(self weaponswitchbuttonpressed()) {
+      while(self weaponswitchbuttonPressed()) {
         wait(0.05);
       }
     }
@@ -886,13 +886,13 @@ function function_f19e9b07() {
     if(!isalive(self)) {
       continue;
     }
-    if(self stancebuttonpressed()) {
+    if(self stancebuttonPressed()) {
       if(isDefined(self.doa.vehicle)) {
         self notify("hash_d28ba89d");
       } else {
         self doa_pickups::function_9615d68f();
       }
-      while(self stancebuttonpressed()) {
+      while(self stancebuttonPressed()) {
         wait(0.05);
       }
     }
@@ -925,13 +925,13 @@ function function_4eabae51() {
       }
     }
     if(isDefined(self.doa.var_f30b49ec) && self.doa.var_f30b49ec) {
-      if(self jumpbuttonpressed()) {
+      if(self jumpbuttonPressed()) {
         continue;
       } else {
         self.doa.var_f30b49ec = undefined;
       }
     }
-    if(isDefined(self.doa.var_f2870a9e) && self.doa.var_f2870a9e || self jumpbuttonpressed()) {
+    if(isDefined(self.doa.var_f2870a9e) && self.doa.var_f2870a9e || self jumpbuttonPressed()) {
       self.doa.var_f2870a9e = 0;
       self.doa.var_f30b49ec = 1;
       if(isDefined(self.doa.bombs) && self.doa.bombs > 0) {

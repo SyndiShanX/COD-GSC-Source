@@ -383,7 +383,7 @@ player_titus_tutorial() {
 _player_titus_tutorial_watch() {
   self endon("weapon_switched");
 
-  while(!self actionslotthreebuttonpressed()) {
+  while(!self actionslotthreebuttonPressed()) {
     wait 0.05;
   }
 
@@ -1046,7 +1046,7 @@ _input_both_triggers_pulled() {
   self endon("stop_input_detection");
 
   while(true) {
-    if(self throwbuttonpressed() && self attackbuttonpressed()) {
+    if(self throwbuttonPressed() && self attackButtonPressed()) {
       flag_set("input_trigs_detected");
       break;
     }
@@ -1060,7 +1060,7 @@ _input_left_trigger_pulled() {
   self endon("stop_input_detection");
 
   while(true) {
-    if(self throwbuttonpressed()) {
+    if(self throwbuttonPressed()) {
       break;
     }
 
@@ -1110,25 +1110,25 @@ _input_button(str_button) {
   while(!b_input) {
     switch (str_button) {
       case "reload_button":
-        if(self usebuttonpressed()) {
+        if(self useButtonPressed()) {
           b_input = 1;
         }
 
         break;
       case "ads_button":
-        if(self throwbuttonpressed()) {
+        if(self throwbuttonPressed()) {
           b_input = 1;
         }
 
         break;
       case "attack_button":
-        if(self attackbuttonpressed()) {
+        if(self attackButtonPressed()) {
           b_input = 1;
         }
 
         break;
       case "jump_button":
-        if(self jumpbuttonpressed()) {
+        if(self jumpbuttonPressed()) {
           b_input = 1;
         }
 
@@ -1143,7 +1143,7 @@ _input_button(str_button) {
 
 sway_init() {
   flag_wait("monsoon_gump_exterior");
-  a_structs = getstructarray("sway", "targetname");
+  a_structs = getStructArray("sway", "targetname");
 
   foreach(struct in a_structs) {
     e_origin = spawn("script_origin", struct.origin);
@@ -1325,7 +1325,7 @@ plant_c4_think() {
 plant_c4_trigger_think() {
   self endon("death");
   self waittill("trigger");
-  a_s_pos = getstructarray(self.target, "targetname");
+  a_s_pos = getStructArray(self.target, "targetname");
 
   foreach(s_pos in a_s_pos) {
     level thread plant_c4(s_pos);

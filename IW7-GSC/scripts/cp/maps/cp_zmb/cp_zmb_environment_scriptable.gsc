@@ -112,7 +112,7 @@ arcade() {
 }
 
 power_on_arcade_machines(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     scripts\engine\utility::waitframe();
     var_3.powered_on = 1;

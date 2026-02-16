@@ -12,7 +12,7 @@
 #include maps\mp\zombies\_zm_audio;
 
 box_hacks() {
-  boxes = getstructarray("treasure_chest_use", "targetname");
+  boxes = getStructArray("treasure_chest_use", "targetname");
 
   for(i = 0; i < boxes.size; i++) {
     box = boxes[i];
@@ -241,7 +241,7 @@ fake_weapon_powerup_timeout(weapon1, weapon2) {
 }
 
 init_summon_hacks() {
-  chests = getstructarray("treasure_chest_use", "targetname");
+  chests = getStructArray("treasure_chest_use", "targetname");
 
   for(i = 0; i < chests.size; i++) {
     chest = chests[i];

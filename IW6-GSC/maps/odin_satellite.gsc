@@ -62,7 +62,7 @@ section_hint_string_init() {
 }
 
 odin_rcs_prompt() {
-  if(level.player usebuttonpressed())
+  if(level.player useButtonPressed())
     return 1;
   else
     return 0;

@@ -270,7 +270,7 @@ put this in your GSC:
 maps\_blackhawk::main( "vehicle_blackhawk" );
 
 and these lines in your CSV:
-include,vehicle_blackhawk_blackhawk
+#include,vehicle_blackhawk_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
 defaultmdl="vehicle_blackhawk"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
@@ -281,7 +281,7 @@ put this in your GSC:
 maps\_blackhawk::main( "vehicle_blackhawk_hero_sas_night" );
 
 and these lines in your CSV:
-include,vehicle_blackhawk_hero_sas_night_blackhawk
+#include,vehicle_blackhawk_hero_sas_night_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
 defaultmdl="vehicle_blackhawk_hero_sas_night"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
@@ -292,7 +292,7 @@ put this in your GSC:
 maps\_blackhawk::main( "vehicle_blackhawk_low" );
 
 and these lines in your CSV:
-include,vehicle_blackhawk_low_blackhawk
+#include,vehicle_blackhawk_low_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
 defaultmdl="vehicle_blackhawk_low"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
@@ -303,7 +303,7 @@ put this in your GSC:
 maps\_blackhawk::main( "vehicle_blackhawk_low_thermal" );
 
 and these lines in your CSV:
-include,vehicle_blackhawk_low_thermal_blackhawk
+#include,vehicle_blackhawk_low_thermal_blackhawk
 sound,vehicle_blackhawk,vehicle_standard,all_sp
 
 defaultmdl="vehicle_blackhawk_low_thermal"default:"vehicletype" "blackhawk"default:"script_team" "allies"*/
@@ -314,7 +314,7 @@ put this in your GSC:
 maps\_blackhawk_minigun::main( "vehicle_blackhawk_minigun_low" );
 
 and these lines in your CSV:
-include,vehicle_blackhawk_minigun_low_blackhawk_minigun
+#include,vehicle_blackhawk_minigun_low_blackhawk_minigun
 
 defaultmdl="vehicle_blackhawk_minigun_low"default:"vehicletype" "blackhawk_minigun"default:"script_team" "allies"
 */

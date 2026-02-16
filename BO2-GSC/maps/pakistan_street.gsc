@@ -137,7 +137,7 @@ turn_off_claw_firing() {
 
 cleanup_market() {
   a_e_market_ents = getEntArray("market_ent", "script_noteworthy");
-  a_s_structs = getstructarray("market_struct", "script_noteworthy");
+  a_s_structs = getStructArray("market_struct", "script_noteworthy");
   array_delete(a_e_market_ents);
 
   foreach(s_struct in a_s_structs) {
@@ -665,7 +665,7 @@ street_cleanup() {
   vol_touching delete_ents_touching("script_model");
   vol_touching delete_ents_touching("trigger_box");
   vol_touching delete();
-  a_s_market_exit = getstructarray("market_exit_struct", "script_noteworthy");
+  a_s_market_exit = getStructArray("market_exit_struct", "script_noteworthy");
 
   foreach(s_exit in a_s_market_exit) {
     s_exit structdelete();
@@ -896,7 +896,7 @@ bus_dam_button_mash() {
 }
 
 _bus_dam_button_push_poll() {
-  return level.player usebuttonpressed();
+  return level.player useButtonPressed();
 }
 
 _hack_screen_message() {
@@ -991,7 +991,7 @@ make_floating_body(s_float_point) {
 
 frogger_start_spawning_dyn_ents() {
   level endon("frogger_done");
-  a_s_spawn_points = getstructarray("frogger_dyn_ent_spawn_point", "targetname");
+  a_s_spawn_points = getStructArray("frogger_dyn_ent_spawn_point", "targetname");
 
   while(true) {
     a_s_spawn_points safely_spawn_dynent();

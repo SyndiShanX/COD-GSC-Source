@@ -296,7 +296,7 @@ _id_FC28(var_0) {
           self _meth_80FD(&"KILLSTREAKS_REMOTE_UAV_PLACE");
         }
 
-        if(self attackbuttonpressed()) {
+        if(self attackButtonPressed()) {
           self notify("place_carryRemoteUAV");
         }
       } else if(self.team != "spectator")
@@ -509,7 +509,7 @@ _id_C35E(var_0) {
   for(;;) {
     var_2 = 0;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       var_2 = var_2 + var_1;
 
       if(var_2 > 0.75) {

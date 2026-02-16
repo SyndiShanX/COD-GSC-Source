@@ -4,8 +4,8 @@
 *****************************************************************/
 
 registerscriptedagent() {
-  level.zombie_ghost_hide_nodes = scripts\engine\utility::getstructarray("zombie_ghost_hide_node", "script_noteworthy");
-  level.zombie_ghost_hover_nodes = scripts\engine\utility::getstructarray("zombie_ghost_hover_node", "targetname");
+  level.zombie_ghost_hide_nodes = scripts\engine\utility::getStructArray("zombie_ghost_hide_node", "script_noteworthy");
+  level.zombie_ghost_hover_nodes = scripts\engine\utility::getStructArray("zombie_ghost_hover_node", "targetname");
   scripts\aitypes\bt_util::init();
   lib_03B4::func_DEE8();
   lib_0F46::func_2371();

@@ -257,7 +257,7 @@ func_1381B(var_0, var_1) {
   var_2 = gettime();
   var_3 = var_2 + var_0 * 1000;
   wait(0.05);
-  while(self usebuttonpressed() && gettime() < var_3 && isDefined(self.current_bombzone) && var_1 != func_9B7E(self.current_bombzone)) {
+  while(self useButtonPressed() && gettime() < var_3 && isDefined(self.current_bombzone) && var_1 != func_9B7E(self.current_bombzone)) {
     wait(0.05);
   }
 }

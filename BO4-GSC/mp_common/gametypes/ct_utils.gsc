@@ -1347,13 +1347,13 @@ is_button_pressed(var_64ef1697 = "BUTTON_A") {
       b_check = self primarybuttonpressedlocal();
       break;
     case # "button_lshdr":
-      b_check = self secondaryoffhandbuttonpressed();
+      b_check = self secondaryoffhandbuttonPressed();
       break;
     case # "button_rshdr":
-      b_check = self fragbuttonpressed();
+      b_check = self fragButtonPressed();
       break;
     case # "button_square":
-      b_check = self reloadbuttonpressed();
+      b_check = self reloadbuttonPressed();
       break;
     default:
       b_check = 0;

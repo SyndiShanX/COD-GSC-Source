@@ -364,7 +364,7 @@ function function_97997a8c(perk_machine, var_326ccfe3, var_3628045a) {
   self endon("disconnect");
   self endon("player_downed");
   self endon("hash_56e16440");
-  while(!self meleebuttonpressed()) {
+  while(!self meleeButtonPressed()) {
     wait(0.05);
   }
   perk_machine notify("hash_55cf60a4");

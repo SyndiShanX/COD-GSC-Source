@@ -147,7 +147,7 @@ objective_follow_ent(objectiveNum, ent) {
   }
 }
 warp_players(startValue, startKey) {
-  starts = GetStructArray(startValue, startKey);
+  starts = getStructArray(startValue, startKey);
   ASSERT(starts.size == 4);
 
   players = get_players();
@@ -213,7 +213,7 @@ setup_friendlies() {
   level.chernov.animname = "reznov";
 }
 warp_friendlies(startValue, startKey) {
-  friendlyStarts = GetStructArray(startValue, startKey);
+  friendlyStarts = getStructArray(startValue, startKey);
   ASSERTEX(friendlyStarts.size > 0, "warp_friendlies(): didn't find enough friendly start points!");
 
   for(i = 0; i < level.friends.size; i++) {

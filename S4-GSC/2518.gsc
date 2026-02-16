@@ -166,7 +166,7 @@ _id_93D8() {
 
 _id_93DF() {
   var_0 = _id_93CF();
-  var_0._id_5065 = scripts\engine\utility::getstructarray("lighttank_drop", "targetname");
+  var_0._id_5065 = scripts\engine\utility::getStructArray("lighttank_drop", "targetname");
 
   if(scripts\cp_mp\utility\script_utility::issharedfuncdefined("light_tank", "filterDropSpawns")) {
     var_0._id_5065 = [[scripts\cp_mp\utility\script_utility::getsharedfunc("light_tank", "filterDropSpawns")]](var_0._id_5065);
@@ -1028,7 +1028,7 @@ _id_93E9(var_0) {
     var_0 endon("vehicle_seat_exit");
     var_0 endon("death_or_disconnect");
 
-    while(var_0 reloadbuttonpressed()) {
+    while(var_0 reloadbuttonPressed()) {
       waitframe();
     }
 
@@ -1038,7 +1038,7 @@ _id_93E9(var_0) {
       var_3 = 0.0;
       var_4 = var_0 _meth_874B();
 
-      while(var_0 reloadbuttonpressed()) {
+      while(var_0 reloadbuttonPressed()) {
         if(!var_0 usinggamepad() && var_1._id_DA6A < 8) {
           var_1 notify("turret_reload");
           break;
@@ -1993,7 +1993,7 @@ _id_93DE() {
 }
 
 _id_93D1() {
-  var_0 = scripts\engine\utility::getstructarray("lighttank_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("lighttank_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

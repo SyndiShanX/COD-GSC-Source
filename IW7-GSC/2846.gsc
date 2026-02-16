@@ -56,12 +56,12 @@ func_794D(var_0) {
 }
 
 func_118F() {
-  var_0 = scripts\engine\utility::getstructarray("door_peek_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("door_peek_struct", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.spawnflags) && var_2.spawnflags & 1) {
       var_3 = getEntArray(var_2.targetname, "targetname");
-      var_4 = scripts\engine\utility::getstructarray(var_2.targetname, "targetname");
+      var_4 = scripts\engine\utility::getStructArray(var_2.targetname, "targetname");
       var_3 = scripts\engine\utility::array_combine(var_3, var_4);
 
       if(var_2.spawnflags & 2) {
@@ -77,7 +77,7 @@ func_118F() {
 
     func_59D5(var_2.targetname, 0);
     var_5 = getEntArray(var_2.targetname, "targetname");
-    var_5 = scripts\engine\utility::array_combine(var_5, scripts\engine\utility::getstructarray(var_2.targetname, "targetname"));
+    var_5 = scripts\engine\utility::array_combine(var_5, scripts\engine\utility::getStructArray(var_2.targetname, "targetname"));
     var_6 = func_12A6(var_5, "door_peek_door");
     var_7 = var_6.var_EE52;
 
@@ -88,7 +88,7 @@ func_118F() {
 }
 
 func_118E() {
-  var_0 = scripts\engine\utility::getstructarray("door_peek_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("door_peek_struct", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.targetname) && var_2.targetname == "door_peek_armory") {
@@ -172,7 +172,7 @@ func_1211(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = getEntArray(var_0, "targetname");
-  var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getstructarray(var_0, "targetname"));
+  var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getStructArray(var_0, "targetname"));
   level.var_5A23[var_0].var_5978 = func_12A6(var_4, "door_peek_door");
   level.var_5A23[var_0].var_5A57 = level.var_5A23[var_0].var_5978.var_EE52;
   level.var_5A23[var_0].var_5978 scripts\sp\utility::func_23B7("doorpeek_door");
@@ -996,7 +996,7 @@ func_11FC(var_0) {
 }
 
 func_12F4(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("door_peek_struct", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("door_peek_struct", "script_noteworthy");
   var_2 = [];
 
   foreach(var_4 in var_1) {
@@ -1028,7 +1028,7 @@ func_12F4(var_0) {
 func_11FD(var_0) {
   var_1 = undefined;
 
-  foreach(var_3 in scripts\engine\utility::getstructarray("door_peek_struct", "script_noteworthy")) {
+  foreach(var_3 in scripts\engine\utility::getStructArray("door_peek_struct", "script_noteworthy")) {
     if(var_3.targetname == var_0.targetname) {
       var_1 = var_3;
       break;
@@ -1523,7 +1523,7 @@ func_59BE(var_0, var_1, var_2, var_3) {
   }
 
   var_4 = getEntArray(var_0, "targetname");
-  var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getstructarray(var_0, "targetname"));
+  var_4 = scripts\engine\utility::array_combine(var_4, scripts\engine\utility::getStructArray(var_0, "targetname"));
   var_5 = func_12A6(var_4, "door_peek_door");
   var_6 = var_5.var_EE52;
   var_7 = 0;
@@ -1547,7 +1547,7 @@ func_59BE(var_0, var_1, var_2, var_3) {
 
   level waittill(var_0 + "door_peek_start");
 
-  while(level.player usebuttonpressed()) {
+  while(level.player useButtonPressed()) {
     wait 0.05;
   }
 
@@ -1782,7 +1782,7 @@ func_11EC(var_0) {
   level endon(var_0 + "door_kick_newdoor_think");
   level endon(var_0 + "door_peek_opened_fully");
   var_1 = getEntArray(var_0, "targetname");
-  var_1 = scripts\engine\utility::array_combine(var_1, scripts\engine\utility::getstructarray(var_0, "targetname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, scripts\engine\utility::getStructArray(var_0, "targetname"));
   var_2 = func_12A6(var_1, "door_peek_door");
   var_3 = func_12A6(var_1, "door_peek_clip");
   var_4 = var_2.var_EE52;
@@ -1841,7 +1841,7 @@ func_11ED(var_0) {
   level endon(var_0 + "door_kick_newdoor_think");
   level endon(var_0 + "door_peek_opened_fully");
   var_1 = getEntArray(var_0, "targetname");
-  var_1 = scripts\engine\utility::array_combine(var_1, scripts\engine\utility::getstructarray(var_0, "targetname"));
+  var_1 = scripts\engine\utility::array_combine(var_1, scripts\engine\utility::getStructArray(var_0, "targetname"));
   var_2 = func_12A6(var_1, "door_peek_door");
   var_3 = func_12A6(var_1, "door_peek_clip");
   var_4 = var_2.var_EE52;
@@ -1940,7 +1940,7 @@ func_11F0(var_0, var_1, var_2) {
   level endon(var_0 + "door_kick_newdoor_think");
   thread func_11F2(var_0, var_1, var_2);
   var_3 = getEntArray(var_0, "targetname");
-  var_3 = scripts\engine\utility::array_combine(var_3, scripts\engine\utility::getstructarray(var_0, "targetname"));
+  var_3 = scripts\engine\utility::array_combine(var_3, scripts\engine\utility::getStructArray(var_0, "targetname"));
   var_4 = func_12A6(var_3, "door_peek_door");
   var_5 = func_12A6(var_3, "door_peek_clip");
   var_6 = var_4.var_EE52;

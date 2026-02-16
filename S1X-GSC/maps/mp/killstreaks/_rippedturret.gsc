@@ -228,7 +228,7 @@ playerSetupTurretEnergyBar(weapon, ammo) {
   self SetClientOmnvar("ui_energy_ammo", percent);
 
   while(true) {
-    if(!self AttackButtonPressed()) {
+    if(!self attackButtonPressed()) {
       self waittill("fire_turret_weapon");
     }
 

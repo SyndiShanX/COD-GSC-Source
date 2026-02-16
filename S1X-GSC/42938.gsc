@@ -372,13 +372,13 @@ turret_handlepickup(var_0) {
 
   for(;;) {
     if(isalive(self) && self istouching(var_0.ownertrigger) && !isDefined(var_0.inuseby) && !isDefined(var_0.carriedby) && self isonground()) {
-      if(self usebuttonpressed()) {
+      if(self useButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;
         }
         var_1 = 0;
 
-        while(self usebuttonpressed()) {
+        while(self useButtonPressed()) {
           var_1 = var_1 + 0.05;
           wait 0.05;
         }
@@ -388,7 +388,7 @@ turret_handlepickup(var_0) {
         }
         var_1 = 0;
 
-        while(!self usebuttonpressed() && var_1 < 0.5) {
+        while(!self useButtonPressed() && var_1 < 0.5) {
           var_1 = var_1 + 0.05;
           wait 0.05;
         }

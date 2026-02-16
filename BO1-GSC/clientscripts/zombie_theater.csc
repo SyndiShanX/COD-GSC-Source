@@ -27,7 +27,7 @@ register_zombie_types() {
   character\clientscripts\c_ger_honorguard_zt::register_gibs();
   character\clientscripts\c_zom_quad::register_gibs();
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
   include_weapon("m1911_zm", false);
@@ -100,7 +100,7 @@ init_theater_box_indicator() {
   OnPlayerConnect_Callback(::init_board_lights);
 }
 init_board_lights(clientNum) {
-  structs = getstructarray("magic_box_loc_light", "targetname");
+  structs = getStructArray("magic_box_loc_light", "targetname");
   for(j = 0; j < structs.size; j++) {
     s = structs[j];
     if(!isDefined(s.lights)) {
@@ -120,7 +120,7 @@ init_board_lights(clientNum) {
   }
 }
 get_lights(clientNum, name) {
-  structs = getstructarray(name, "script_noteworthy");
+  structs = getStructArray(name, "script_noteworthy");
   lights = [];
   for(i = 0; i < structs.size; i++) {
     lights[lights.size] = structs[i].lights[clientNum];

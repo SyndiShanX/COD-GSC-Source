@@ -363,7 +363,7 @@ _id_6522() {
 _id_6523() {
   _id_6522();
   _id_657D(0);
-  var_0 = common_scripts\utility::getstructarray("rescue_phantom_fire_source1", "targetname");
+  var_0 = common_scripts\utility::getStructArray("rescue_phantom_fire_source1", "targetname");
   thread maps\payback_util::_id_64E9(level.player, "ak47", var_0, 0.05, 1.5, 3000, 5000);
   level waittill("rescue_escape_dialogue");
   level notify("stop_rescue_respawns");
@@ -1467,7 +1467,7 @@ _id_6577(var_0, var_1) {
 
 _id_6578() {
   maps\_audio::aud_send_msg("set_pre_rescue_mix");
-  var_0 = common_scripts\utility::getstructarray("rescue_phantom_fire_source1", "targetname");
+  var_0 = common_scripts\utility::getStructArray("rescue_phantom_fire_source1", "targetname");
   thread maps\payback_util::_id_64E9(level._id_64A5, "ak47", var_0, 0.05, 1.5, 3000, 5000, 0.5);
   thread _id_6581(level.player, "rescue_escape_dialogue");
   getent("pb_end_vista", "targetname") show();
@@ -1542,7 +1542,7 @@ _id_657E() {
 _id_657F() {
   if(isDefined(self.target)) {
     self waittill("trigger");
-    var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
     thread maps\payback_util::_id_64E9(level.player, "ak47", var_0, 0.05, 1.5, 3000, 5000);
   }
 }

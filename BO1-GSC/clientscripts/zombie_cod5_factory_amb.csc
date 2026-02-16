@@ -57,10 +57,10 @@ main() {
 }
 start_lights() {
   level waittill("pl1");
-  array_thread(getstructarray("dyn_light", "targetname"), ::light_sound);
-  array_thread(getstructarray("switch_progress", "targetname"), ::switch_progress_sound);
-  array_thread(getstructarray("dyn_generator", "targetname"), ::generator_sound);
-  array_thread(getstructarray("dyn_breakers", "targetname"), ::breakers_sound);
+  array_thread(getStructArray("dyn_light", "targetname"), ::light_sound);
+  array_thread(getStructArray("switch_progress", "targetname"), ::switch_progress_sound);
+  array_thread(getStructArray("dyn_generator", "targetname"), ::generator_sound);
+  array_thread(getStructArray("dyn_breakers", "targetname"), ::breakers_sound);
 }
 light_sound() {
   if(isDefined(self)) {
@@ -113,9 +113,9 @@ homepad_loop() {
   }
 }
 teleport_pad_init(pad) {
-  telepad = getstructarray("telepad_" + pad, "targetname");
-  telepad_loop = getstructarray("telepad_" + pad + "_looper", "targetname");
-  homepad = getstructarray("homepad", "targetname");
+  telepad = getStructArray("telepad_" + pad, "targetname");
+  telepad_loop = getStructArray("telepad_" + pad + "_looper", "targetname");
+  homepad = getStructArray("homepad", "targetname");
   level waittill("tp" + pad);
   array_thread(telepad_loop, ::telepad_loop);
   array_thread(telepad, ::teleportation_audio, pad);
@@ -143,13 +143,13 @@ teleportation_audio(pad) {
   }
 }
 pa_init(pad) {
-  pa_sys = getstructarray("pa_system", "targetname");
+  pa_sys = getStructArray("pa_system", "targetname");
   array_thread(pa_sys, ::pa_teleport, pad);
   array_thread(pa_sys, ::pa_countdown, pad);
   array_thread(pa_sys, ::pa_countdown_success, pad);
 }
 pa_single_init() {
-  pa_sys = getstructarray("pa_system", "targetname");
+  pa_sys = getStructArray("pa_system", "targetname");
   array_thread(pa_sys, ::pa_electric_trap, "bridge");
   array_thread(pa_sys, ::pa_electric_trap, "wuen");
   array_thread(pa_sys, ::pa_electric_trap, "warehouse");
@@ -236,7 +236,7 @@ linkall_2d() {
   playSound(0, "linkall_2d", (0, 0, 0));
 }
 pole_fx_audio_init(pad) {
-  pole = getstructarray("pole_fx_" + pad, "targetname");
+  pole = getStructArray("pole_fx_" + pad, "targetname");
   array_thread(pole, ::pole_fx_audio, pad);
 }
 pole_fx_audio(pad) {

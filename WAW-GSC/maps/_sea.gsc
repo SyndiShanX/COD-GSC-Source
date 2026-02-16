@@ -105,7 +105,7 @@ sea_objectbob(org) {
     }
   }
 
-  nodes = getstructarray(self.target, "targetname");
+  nodes = getStructArray(self.target, "targetname");
   A = nodes[0].origin;
   B = undefined;
   ent = spawn("script_origin", (0, 0, 0));
@@ -412,7 +412,7 @@ sea_closestWaveLogic(array, object) {
 }
 
 sea_waves_setup() {
-  nodes = getstructarray("wave_fx", "targetname");
+  nodes = getStructArray("wave_fx", "targetname");
   center = getstruct("wave_fx_center", "targetname");
 
   if(!nodes.size) {

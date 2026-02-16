@@ -47,7 +47,7 @@ register_nonlinear_outpost(var_0, var_1) {
   var_2.name = var_0;
   var_2.opened = common_scripts\utility::ter_op(isDefined(var_1), var_1, 0);
   var_2.outpost_encounters = [];
-  var_3 = common_scripts\utility::getstructarray(var_2.target, "targetname");
+  var_3 = common_scripts\utility::getStructArray(var_2.target, "targetname");
 
   foreach(var_5 in var_3) {
     if(isDefined(var_5.script_parameters)) {

@@ -669,7 +669,7 @@ leaper_combat_animmode() {
 }
 
 leaper_spawn_logic_old(leaper_array, favorite_enemy) {
-  all_locs = getstructarray("leaper_location", "script_noteworthy");
+  all_locs = getStructArray("leaper_location", "script_noteworthy");
   leaper_locs = array_randomize(all_locs);
 
   for(i = 0; i < leaper_locs.size; i++) {

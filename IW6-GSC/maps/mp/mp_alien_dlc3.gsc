@@ -769,7 +769,7 @@ setup_attachment_crafting_area(var_0, var_1, var_2) {
       var_0[var_3] thread setup_attachment_pickup_spot();
       continue;
     } else {
-      var_10 = common_scripts\utility::getstructarray("crafting_area_" + var_2 + "_section_" + (var_3 + 1), "targetname");
+      var_10 = common_scripts\utility::getStructArray("crafting_area_" + var_2 + "_section_" + (var_3 + 1), "targetname");
 
       foreach(var_12 in var_10) {
         var_13 = spawn("script_model", var_12.origin);

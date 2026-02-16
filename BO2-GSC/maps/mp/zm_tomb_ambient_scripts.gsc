@@ -26,7 +26,7 @@ init_tomb_ambient_scripts() {
 
 init_zeppelin(str_script_noteworthy, str_ender) {
   level endon(str_ender);
-  a_path_structs = getstructarray(str_script_noteworthy, "script_noteworthy");
+  a_path_structs = getStructArray(str_script_noteworthy, "script_noteworthy");
 
   if(a_path_structs.size > 0) {
     m_zeppelin = spawn("script_model", (0, 0, 0));
@@ -88,7 +88,7 @@ start_sky_battle() {
 
 vista_robot_pose() {
   flag_wait("start_zombie_round_logic");
-  a_robots = getstructarray("trench_downed_robot_struct", "targetname");
+  a_robots = getStructArray("trench_downed_robot_struct", "targetname");
 
   for(i = 0; i < a_robots.size; i++) {
     if(!isDefined(a_robots[i].angles))

@@ -2067,7 +2067,7 @@ auto_adjust_difficulty_track_player_shots() {
   // reduce the "time spent alive" by the time between shots fired if there has been significant time between shots
   lastShotTime = GetTime();
   for(;;) {
-    if(level.player AttackButtonPressed())
+    if(level.player attackButtonPressed())
       lastShotTime = GetTime();
 
     level.timeBetweenShots = GetTime() - lastShotTime;
@@ -2298,7 +2298,7 @@ command_used(cmd) {
   }
 
   for(i = 1; i < binding["count"] + 1; i++) {
-    if(self ButtonPressed(binding["key" + i])) {
+    if(self buttonPressed(binding["key" + i])) {
       //prof_end( "command_used" );
       return true;
     }

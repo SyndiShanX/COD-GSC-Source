@@ -80,8 +80,8 @@ init_vehicles() {
   // send the setup triggers to be processed
   array_levelthread(level.vehicle_processtriggers, ::trigger_process, allvehiclesprespawn);
 
-  array_thread(getstructarray("gag_stage_littlebird_unload", "script_noteworthy"), ::setup_gag_stage_littlebird_unload);
-  array_thread(getstructarray("gag_stage_littlebird_load", "script_noteworthy"), ::setup_gag_stage_littlebird_load);
+  array_thread(getStructArray("gag_stage_littlebird_unload", "script_noteworthy"), ::setup_gag_stage_littlebird_unload);
+  array_thread(getStructArray("gag_stage_littlebird_load", "script_noteworthy"), ::setup_gag_stage_littlebird_load);
 
   level.vehicle_processtriggers = undefined;
 
@@ -5409,7 +5409,7 @@ ghetto_tag_create(target) {
 //}
 
 twobuttonspressed(button1, button2) {
-  return level.player ButtonPressed(button1) && level.player ButtonPressed(button2);
+  return level.player buttonPressed(button1) && level.player buttonPressed(button2);
 }
 
 /*
@@ -5938,7 +5938,7 @@ setup_gag_stage_littlebird_load() {
   Assert(isDefined(self.targetname));
   Assert(isDefined(self.angles));
 
-  //	nodes = getstructarray(self.targetname,"target");
+  //	nodes = getStructArray(self.targetname,"target");
   //	Assert(nodes.size);
 
   while(1) {

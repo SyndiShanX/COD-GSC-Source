@@ -25,7 +25,7 @@ event4_start() {
 
   level.hero = getent("sniper_hero", "script_noteworthy");
   players = get_players();
-  event4_players_start = getstructarray("event4_player_start", "targetname");
+  event4_players_start = getStructArray("event4_player_start", "targetname");
   for(i = 0; i < players.size; i++) {
     players[i] setOrigin(event4_players_start[i].origin + (0, 0, -10000));
     players[i] setplayerangles(event4_players_start[i].angles);
@@ -40,7 +40,7 @@ event4_start() {
     players[i] setplayerangles(event4_players_start[i].angles);
   }
 
-  spots = getstructarray("e4_squad_start_spots", "targetname");
+  spots = getStructArray("e4_squad_start_spots", "targetname");
 
   wait 0.5;
   for(i = 0; i < spots.size; i++) {
@@ -69,7 +69,7 @@ event4_start() {
 event5_skipto() {
   level.hero = getent("sniper_hero", "script_noteworthy");
   players = get_players();
-  event4_players_start = getstructarray("event4_player_start", "targetname");
+  event4_players_start = getStructArray("event4_player_start", "targetname");
   for(i = 0; i < players.size; i++) {
     players[i] setOrigin(event4_players_start[i].origin + (0, 0, -10000));
     players[i] setplayerangles(event4_players_start[i].angles);
@@ -1304,7 +1304,7 @@ e5_bomber_wave() {
   playsoundatposition("bombers_dist_inc", (1384, 8016, -1944));
   playsoundatposition("bombers_dist_exit", (1384, 8016, -1944));
 
-  spots = getstructarray("e5_bombers", "targetname");
+  spots = getStructArray("e5_bombers", "targetname");
 
   planes = [];
   for(i = 0; i < spots.size; i++) {
@@ -1406,7 +1406,7 @@ event4_damage_control() {
 
 scareshots() {
   level endon("player_up_after_tankblast");
-  scareshots = getstructarray("e5_playerdown_scareshot_start", "targetname");
+  scareshots = getStructArray("e5_playerdown_scareshot_start", "targetname");
   endshot = getstruct("e5_playerdown_scareshot_target", "targetname");
   shots = randomintrange(100, 110);
   for(i = 0; i < shots; i++) {
@@ -1434,7 +1434,7 @@ e5_playerdown_fakenades() {
   if(level.difficulty == 1) {
     return;
   }
-  spots = getstructarray("e5_playerdown_fakenades", "targetname");
+  spots = getStructArray("e5_playerdown_fakenades", "targetname");
   for(i = 0; i < spots.size; i++) {
     guys = getaiarray("axis");
     if(isDefined(guys[0])) {

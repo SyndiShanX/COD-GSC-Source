@@ -64,9 +64,9 @@ holo_table_run_poi(allow_player_input) {
       while(distancesquared(level.player.origin, self.e_origin.origin) <= 16384) {
         index_change = 0;
 
-        if(level.player buttonpressed("DPAD_LEFT")) {
+        if(level.player buttonPressed("DPAD_LEFT")) {
           index_change = -1;
-        } else if(level.player buttonpressed("DPAD_RIGHT")) {
+        } else if(level.player buttonPressed("DPAD_RIGHT")) {
           index_change = 1;
         }
 
@@ -162,7 +162,7 @@ holo_table_initialize(str_hologram, str_map_center_origin) {
   holo_table.poi_list = [];
 
   if(isDefined(holo_table.e_origin.target)) {
-    s_poi_list = getstructarray(holo_table.e_origin.target);
+    s_poi_list = getStructArray(holo_table.e_origin.target);
 
     foreach(s_poi in s_poi_list) {
       fvec = anglesToForward(holo_table.display.angles);

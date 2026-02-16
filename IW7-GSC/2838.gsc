@@ -501,10 +501,10 @@ func_B9C4() {
   var_1 = 0.3;
 
   for(;;) {
-    if(level.player usebuttonpressed()) {
+    if(level.player useButtonPressed()) {
       var_0 = 0;
 
-      while(level.player usebuttonpressed()) {
+      while(level.player useButtonPressed()) {
         var_0 = var_0 + 0.05;
         wait 0.05;
       }
@@ -514,7 +514,7 @@ func_B9C4() {
       }
       var_0 = 0;
 
-      while(!level.player usebuttonpressed() && var_0 < var_1) {
+      while(!level.player useButtonPressed() && var_0 < var_1) {
         var_0 = var_0 + 0.05;
         wait 0.05;
       }

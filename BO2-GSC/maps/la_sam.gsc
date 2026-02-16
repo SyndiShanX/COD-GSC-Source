@@ -500,7 +500,7 @@ sam_turret_instructions() {
   level._screen_message_2.hidewheninmenu = 0;
   wait 4;
 
-  while(!level.player attackbuttonpressed()) {
+  while(!level.player attackButtonPressed()) {
     wait 0.05;
   }
 
@@ -915,7 +915,7 @@ death_cheat() {
   self endon("death");
 
   while(true) {
-    if(level.player sprintbuttonpressed() && level.player meleebuttonpressed()) {
+    if(level.player sprintbuttonPressed() && level.player meleeButtonPressed()) {
       self dodamage(100000, self.origin, level.player, 0, "projectile");
       break;
     }
@@ -969,10 +969,10 @@ get_best_drone_for_straffing() {
 
 drone_fly() {
   self endon("death");
-  a_goal_groups[0] = getstructarray("plane_goto1", "targetname");
-  a_goal_groups[1] = getstructarray("plane_goto2", "targetname");
-  a_goal_groups[2] = getstructarray("plane_goto3", "targetname");
-  a_goal_groups[3] = getstructarray("plane_goto4", "targetname");
+  a_goal_groups[0] = getStructArray("plane_goto1", "targetname");
+  a_goal_groups[1] = getStructArray("plane_goto2", "targetname");
+  a_goal_groups[2] = getStructArray("plane_goto3", "targetname");
+  a_goal_groups[3] = getStructArray("plane_goto4", "targetname");
 
   if(cointoss()) {
     a_goal_groups = array_reverse(a_goal_groups);

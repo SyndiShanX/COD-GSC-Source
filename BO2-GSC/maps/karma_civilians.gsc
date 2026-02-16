@@ -638,7 +638,7 @@ spawn_static_civs(str_structnames, n_delay_max) {
   }
 
   a_civ_types_keys = getarraykeys(a_civ_types);
-  a_s_static_locs = getstructarray(str_structnames, "targetname");
+  a_s_static_locs = getStructArray(str_structnames, "targetname");
   a_static_locs = [];
 
   for(i = 0; i < a_s_static_locs.size; i++) {
@@ -700,7 +700,7 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
 
   a_sp_male = level.a_sp_civs[str_male_spawners];
   a_sp_female = level.a_sp_civs[str_female_spawners];
-  a_s_static_locs = getstructarray(str_structnames, "targetname");
+  a_s_static_locs = getStructArray(str_structnames, "targetname");
   a_s_static_locs = sort_by_script_int(a_s_static_locs, 1);
   a_static_locs = [];
 

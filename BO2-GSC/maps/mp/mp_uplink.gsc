@@ -52,7 +52,7 @@ main() {
   maps\mp\gametypes\_spawning::level_use_unified_spawning(1);
   level.remotemotarviewdown = 50;
   level thread gondola_sway();
-  glasses = getstructarray("glass_shatter_on_spawn", "targetname");
+  glasses = getStructArray("glass_shatter_on_spawn", "targetname");
 
   for(i = 0; i < glasses.size; i++)
     radiusdamage(glasses[i].origin, 64, 101, 100);

@@ -526,7 +526,7 @@ watch_for_boost() {
     speed = self getspeedmph();
     forward = anglesToForward(self.angles);
     bcansprint = bmeterempty == 0 && speed >= boost_min_start_speed && (isDefined(self.driver) && self.driver == level.player);
-    bpressingsprint = level.player jumpbuttonpressed();
+    bpressingsprint = level.player jumpbuttonPressed();
 
     if(bcansprint && bpressingsprint && level.player.vehicle_state == 1) {
       self.sprint_meter = self.sprint_meter - sprint_drain_rate * 0.05;
@@ -887,7 +887,7 @@ vehicle_collision_slows_down_player(mag_scale) {
 can_player_takedown(n_intensity) {
   can_takedown = 0;
 
-  if(level.player sprintbuttonpressed()) {
+  if(level.player sprintbuttonPressed()) {
     can_takedown = 1;
   }
 
@@ -973,7 +973,7 @@ firescout_fire_missiles() {
       self setgunnertargetvec(v_aim_pos, 1);
     }
 
-    if(level.player throwbuttonpressed() && n_fire_count_down <= 0) {
+    if(level.player throwbuttonPressed() && n_fire_count_down <= 0) {
       self firegunnerweapon(0);
       self firegunnerweapon(1);
       luinotifyevent(&"hud_gunner_missile_fire", 2, 1, int(n_fire_time * hud_fire_wait_scale * 1000));
@@ -984,7 +984,7 @@ firescout_fire_missiles() {
     wait 0.05;
 
     if(missiles_fired) {
-      while(level.player throwbuttonpressed()) {
+      while(level.player throwbuttonPressed()) {
         wait 0.05;
       }
 

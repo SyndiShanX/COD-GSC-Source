@@ -1321,7 +1321,7 @@ function button_right_held() {
 }
 
 function waittill_use_button_pressed() {
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     wait(0.05);
   }
 }
@@ -1333,7 +1333,7 @@ function waittill_use_button_held() {
 }
 
 function waittill_stance_button_pressed() {
-  while(!self stancebuttonpressed()) {
+  while(!self stancebuttonPressed()) {
     wait(0.05);
   }
 }
@@ -1345,19 +1345,19 @@ function waittill_stance_button_held() {
 }
 
 function waittill_attack_button_pressed() {
-  while(!self attackbuttonpressed()) {
+  while(!self attackButtonPressed()) {
     wait(0.05);
   }
 }
 
 function waittill_ads_button_pressed() {
-  while(!self adsbuttonpressed()) {
+  while(!self adsButtonPressed()) {
     wait(0.05);
   }
 }
 
 function waittill_vehicle_move_up_button_pressed() {
-  while(!self vehiclemoveupbuttonpressed()) {
+  while(!self vehiclemoveupbuttonPressed()) {
     wait(0.05);
   }
 }
@@ -1393,7 +1393,7 @@ function down_button_held() {
 }
 
 function up_button_pressed() {
-  return self buttonpressed("") || self buttonpressed("");
+  return self buttonPressed("") || self buttonPressed("");
 }
 
 function waittill_up_button_pressed() {
@@ -1403,7 +1403,7 @@ function waittill_up_button_pressed() {
 }
 
 function down_button_pressed() {
-  return self buttonpressed("") || self buttonpressed("");
+  return self buttonPressed("") || self buttonPressed("");
 }
 
 function waittill_down_button_pressed() {

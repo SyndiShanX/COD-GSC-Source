@@ -1781,7 +1781,7 @@ function_51aa96c6(var_8efcfa9f) {
       self.var_561f7ea3 = 1;
     }
 
-    if(self meleebuttonpressed() && self.var_561f7ea3 && self istouching(self.challenge_struct.var_4931480f) && !self flag::get(#"flag_player_completed_all_challenges")) {
+    if(self meleeButtonPressed() && self.var_561f7ea3 && self istouching(self.challenge_struct.var_4931480f) && !self flag::get(#"flag_player_completed_all_challenges")) {
       self notify(#"hash_4ac0558a94ba3fd7");
       self.challenge_struct notify(#"hash_4ac0558a94ba3fd7");
       self.challenge_struct notify(#"hash_4ac0558a94ba3fd7");

@@ -324,11 +324,11 @@ player_wait_for_jump_button() {
   for(;;) {
     wait 0.05;
 
-    if(level.player jumpbuttonpressed()) {
+    if(level.player jumpbuttonPressed()) {
       var_0 = 0;
       var_1 = need_to_hold();
 
-      while(level.player jumpbuttonpressed() && var_1) {
+      while(level.player jumpbuttonPressed() && var_1) {
         if(var_0 >= 0.25) {
           break;
         }
@@ -1267,7 +1267,7 @@ copymachine_ai() {
 }
 
 copymachine_break_glass(var_0) {
-  var_1 = common_scripts\utility::getstructarray("p1_upper_glass_damage_struct", "targetname");
+  var_1 = common_scripts\utility::getStructArray("p1_upper_glass_damage_struct", "targetname");
   var_2 = common_scripts\utility::getclosest(level.closest_start_struct.origin, var_1);
   glassradiusdamage(var_2.origin, 96, 50, 50);
   var_3 = common_scripts\utility::spawn_tag_origin();

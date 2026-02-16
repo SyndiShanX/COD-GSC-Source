@@ -511,7 +511,7 @@ function_d0348c2c(var_69cbd99d = 0) {
   self endon(#"disconnect");
 
   if(var_69cbd99d) {
-    while((self isthrowinggrenade() || self isusingoffhand() || self function_55acff10()) && !self fragbuttonpressed()) {
+    while((self isthrowinggrenade() || self isusingoffhand() || self function_55acff10()) && !self fragButtonPressed()) {
       waitframe(1);
     }
   }

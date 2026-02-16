@@ -10,7 +10,7 @@ main() {
   thread main_thread();
 }
 main_thread() {
-  zones = getStructarray("teleport_world_origin", "targetname");
+  zones = getStructArray("teleport_world_origin", "targetname");
   gametype = level.gametype;
   if(!zones.size || !(gameType == "dom" || gametype == "ctf" || gametype == "hp" || gametype == "ball")) {
     return;
@@ -38,7 +38,7 @@ main_thread() {
 teleport_init() {
   level.teleport_spawn_info = [];
 
-  zones = getStructarray("teleport_world_origin", "targetname");
+  zones = getStructArray("teleport_world_origin", "targetname");
   if(!zones.size) {
     return;
   }
@@ -183,7 +183,7 @@ teleport_onStartGameHORDE() {
     zone.horde_drops = [];
   }
 
-  hordeDropLocations = getstructarray("horde_drop", "targetname");
+  hordeDropLocations = getStructArray("horde_drop", "targetname");
   foreach(loc in hordeDropLocations) {
     closest_zone = teleport_closest_zone(loc.origin);
     if(isDefined(closest_zone)) {
@@ -523,7 +523,7 @@ teleport_onTeleportHP(next_zone_name) {
 }
 
 teleport_onTeleportBALL(next_zone_name) {
-  level.ball_starts_post_event = getstructarray("ball_start_post_event", "targetname");
+  level.ball_starts_post_event = getStructArray("ball_start_post_event", "targetname");
   if(game["switchedsides"]) {
     level.ball_goals_post_event["allies"] = getstruct("ball_goal_axis_post_event", "targetname");
     level.ball_goals_post_event["axis"] = getstruct("ball_goal_allies_post_event", "targetname");
@@ -734,10 +734,10 @@ teleport_parse_zone_targets(zone) {
   zone.teleport_origins["allies"] = [];
   zone.teleport_origins["axis"] = [];
 
-  structs = getstructarray("teleport_zone_" + zone.name, "targetname");
+  structs = getStructArray("teleport_zone_" + zone.name, "targetname");
 
   if(isDefined(zone.target)) {
-    zone_targets = getstructarray(zone.target, "targetname");
+    zone_targets = getStructArray(zone.target, "targetname");
     structs = array_combine(zone_targets, structs);
   }
 
@@ -1120,7 +1120,7 @@ teleport_add_delta_targets(ent, delta) {
   teleport_add_delta(ent, delta);
   if(isDefined(ent.target)) {
     ents = getEntArray(ent.target, "targetname");
-    structs = getstructarray(ent.target, "targetname");
+    structs = getStructArray(ent.target, "targetname");
     targets = array_combine(ents, structs);
     array_levelthread(targets, ::teleport_add_delta_targets, delta);
   }

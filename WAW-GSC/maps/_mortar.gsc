@@ -188,7 +188,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
   explosion_points = getEntArray(mortar_name, "targetname");
 
   explosion_points_structs = [];
-  explosion_points_structs = getstructarray(mortar_name, "targetname");
+  explosion_points_structs = getStructArray(mortar_name, "targetname");
 
   for(i = 0; i < explosion_points_structs.size; i++) {
     explosion_points_structs[i].is_struct = true;
@@ -204,7 +204,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
     dust_points = getEntArray(dust_name, "targetname");
 
     dust_points_structs = [];
-    dust_points_structs = getstructarray(dust_name, "targetname");
+    dust_points_structs = getStructArray(dust_name, "targetname");
 
     for(i = 0; i < dust_points_structs.size; i++) {
       dust_points_structs[i].is_struct = true;

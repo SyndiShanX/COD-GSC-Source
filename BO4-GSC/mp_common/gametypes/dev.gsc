@@ -916,7 +916,7 @@ function_48a6b85() {
     self setactionslot(3, "<dev string:x38>");
     self setactionslot(4, "<dev string:x38>");
 
-    if(!dpad_up && self buttonpressed("<dev string:x4a0>")) {
+    if(!dpad_up && self buttonPressed("<dev string:x4a0>")) {
       level.var_94f4ca81.currentsetindex++;
 
       if(level.var_94f4ca81.currentsetindex >= level.var_94f4ca81.dataset.size) {
@@ -926,11 +926,11 @@ function_48a6b85() {
       level.var_94f4ca81.currentspawnindex = 0;
       dpad_up = 1;
       var_f94a23 = 1;
-    } else if(!self buttonpressed("<dev string:x4a0>")) {
+    } else if(!self buttonPressed("<dev string:x4a0>")) {
       dpad_up = 0;
     }
 
-    if(!dpad_down && self buttonpressed("<dev string:x4aa>")) {
+    if(!dpad_down && self buttonPressed("<dev string:x4aa>")) {
       level.var_94f4ca81.currentsetindex--;
 
       if(level.var_94f4ca81.currentsetindex < 0) {
@@ -940,11 +940,11 @@ function_48a6b85() {
       level.var_94f4ca81.currentspawnindex = 0;
       var_f94a23 = 1;
       dpad_down = 1;
-    } else if(!self buttonpressed("<dev string:x4aa>")) {
+    } else if(!self buttonPressed("<dev string:x4aa>")) {
       dpad_down = 0;
     }
 
-    if(!dpad_left && self buttonpressed("<dev string:x4b6>")) {
+    if(!dpad_left && self buttonPressed("<dev string:x4b6>")) {
       while(true) {
         level.var_94f4ca81.currentspawnindex--;
 
@@ -959,11 +959,11 @@ function_48a6b85() {
 
       var_f94a23 = 1;
       dpad_left = 1;
-    } else if(!self buttonpressed("<dev string:x4b6>")) {
+    } else if(!self buttonPressed("<dev string:x4b6>")) {
       dpad_left = 0;
     }
 
-    if(!dpad_right && self buttonpressed("<dev string:x4c2>")) {
+    if(!dpad_right && self buttonPressed("<dev string:x4c2>")) {
       while(true) {
         level.var_94f4ca81.currentspawnindex++;
 
@@ -978,7 +978,7 @@ function_48a6b85() {
 
       var_f94a23 = 1;
       dpad_right = 1;
-    } else if(!self buttonpressed("<dev string:x4c2>")) {
+    } else if(!self buttonPressed("<dev string:x4c2>")) {
       dpad_right = 0;
     }
 
@@ -1010,31 +1010,31 @@ devgui_spawn_think() {
     self setactionslot(3, "<dev string:x38>");
     self setactionslot(4, "<dev string:x38>");
 
-    if(!dpad_left && self buttonpressed("<dev string:x4b6>")) {
+    if(!dpad_left && self buttonPressed("<dev string:x4b6>")) {
       setDvar(#"scr_playerwarp", "<dev string:x1d8>");
       dpad_left = 1;
-    } else if(!self buttonpressed("<dev string:x4b6>")) {
+    } else if(!self buttonPressed("<dev string:x4b6>")) {
       dpad_left = 0;
     }
 
-    if(!dpad_right && self buttonpressed("<dev string:x4c2>")) {
+    if(!dpad_right && self buttonPressed("<dev string:x4c2>")) {
       setDvar(#"scr_playerwarp", "<dev string:x1cb>");
       dpad_right = 1;
-    } else if(!self buttonpressed("<dev string:x4c2>")) {
+    } else if(!self buttonPressed("<dev string:x4c2>")) {
       dpad_right = 0;
     }
 
-    if(!dpad_up && self buttonpressed("<dev string:x4a0>")) {
+    if(!dpad_up && self buttonPressed("<dev string:x4a0>")) {
       setDvar(#"scr_playerwarp", "<dev string:x1b8>");
       dpad_up = 1;
-    } else if(!self buttonpressed("<dev string:x4a0>")) {
+    } else if(!self buttonPressed("<dev string:x4a0>")) {
       dpad_up = 0;
     }
 
-    if(!dpad_down && self buttonpressed("<dev string:x4aa>")) {
+    if(!dpad_down && self buttonPressed("<dev string:x4aa>")) {
       setDvar(#"scr_playerwarp", "<dev string:x1a5>");
       dpad_down = 1;
-    } else if(!self buttonpressed("<dev string:x4aa>")) {
+    } else if(!self buttonPressed("<dev string:x4aa>")) {
       dpad_down = 0;
     }
 
@@ -1776,10 +1776,10 @@ larry_init(larry) {
     larry.model.origin = position;
     larry.model.angles = self.angles + (0, 180, 0);
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       self larry_ai(larry);
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         waitframe(1);
       }
     }

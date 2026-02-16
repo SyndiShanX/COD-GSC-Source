@@ -40,7 +40,7 @@ put this in your GSC:
 maps\_stryker50cal::main( "vehicle_stryker_config2" );
 
 and these lines in your CSV:
-include,vehicle_stryker50cal
+#include,vehicle_stryker50cal
 sound,vehicle_stryker,vehicle_standard,all_sp
 
 defaultmdl="vehicle_stryker_config2"default:"vehicletype" "stryker50cal"default:"script_team" "allies"

@@ -170,7 +170,7 @@ start_map() {
 
   // replaced pawlows with blackhawks to get rid of helicopter in the minimap.
   so_ambient_vehicles();
-  array_thread(getstructarray("delete_heli_node", "script_noteworthy"), ::delete_heli_node);
+  array_thread(getStructArray("delete_heli_node", "script_noteworthy"), ::delete_heli_node);
   array_thread(getEntArray("ai_ambient", "script_noteworthy"), maps\trainer::AI_delete);
   array_thread(getEntArray("translator", "script_noteworthy"), maps\trainer::AI_delete);
   array_thread(getEntArray("trainee_01", "script_noteworthy"), maps\trainer::AI_delete);
@@ -468,7 +468,7 @@ pit_cases_and_door() {
 }
 
 so_ambient_vehicles() {
-  path_arr = getstructarray("blackhawk_path", "script_noteworthy");
+  path_arr = getStructArray("blackhawk_path", "script_noteworthy");
   heli_arr = getEntArray("heli_group_01", "targetname");
 
   blackhawk = undefined;

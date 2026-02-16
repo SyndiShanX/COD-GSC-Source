@@ -329,7 +329,7 @@ archway_fxanim() {
 }
 
 arch_impacts_ground(e_chunks) {
-  a_s_structs = getstructarray("archway_fxanim_rubble_spots", "targetname");
+  a_s_structs = getStructArray("archway_fxanim_rubble_spots", "targetname");
 
   foreach(struct in a_s_structs) {
     radiusdamage(struct.origin, 56, 100, 100);

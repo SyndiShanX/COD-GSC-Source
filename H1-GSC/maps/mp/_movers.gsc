@@ -89,7 +89,7 @@ script_mover_init() {
   var_0 = [];
 
   if(isDefined(self.target))
-    var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     if(!isDefined(var_2.script_noteworthy)) {
@@ -227,7 +227,7 @@ script_mover_parse_targets() {
   var_1 = [];
 
   if(isDefined(self.target)) {
-    var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
     var_1 = getEntArray(self.target, "targetname");
   }
 
@@ -240,7 +240,7 @@ script_mover_parse_targets() {
     switch (var_3.script_noteworthy) {
       case "ignore":
         if(isDefined(var_3.target)) {
-          var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
+          var_4 = common_scripts\utility::getStructArray(var_3.target, "targetname");
 
           foreach(var_6 in var_4)
           var_0[var_0.size] = var_6;

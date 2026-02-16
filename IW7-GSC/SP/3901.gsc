@@ -835,7 +835,7 @@ func_B618(var_0, var_1) {
 }
 
 func_D377() {
-  return isalive(level.player) && level.player meleebuttonpressed();
+  return isalive(level.player) && level.player meleeButtonPressed();
 }
 
 func_B610(var_0, var_1) {

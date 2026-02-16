@@ -234,7 +234,7 @@ func_8FF3() {
   var_1 = -1;
 
   for(;;) {
-    if(level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B")) {
+    if(level.player buttonPressed("BUTTON_A") || level.player buttonPressed("BUTTON_B")) {
       if(var_1 == -1) {
         var_1 = gettime() / 1000;
       } else if(gettime() / 1000 - var_1 > var_0) {
@@ -1944,7 +1944,7 @@ func_13D81(var_0, var_1) {
 
   if(!isDefined(var_1.var_13D86) || !isDefined(var_1.var_13D86[var_0])) {}
 
-  var_2 = scripts\engine\utility::getstructarray(var_1.var_13D86[var_0], "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_1.var_13D86[var_0], "script_noteworthy");
 
   if(!isDefined(var_2) || var_2.size == 0) {}
 
@@ -2351,7 +2351,7 @@ func_12B7B(var_0) {
 }
 
 func_23A3() {
-  var_0 = scripts\engine\utility::getstructarray("debris_cloud_struct_assault", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("debris_cloud_struct_assault", "script_noteworthy");
   var_1 = undefined;
   var_2 = [];
 

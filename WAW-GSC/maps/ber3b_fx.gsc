@@ -158,8 +158,8 @@ precache_createfx_fx() {
 }
 
 spotlight_fx() {
-  spots = GetStructArray("struct_spotlight_fx", "targetname");
-  spots_nonprimary = GetStructArray("struct_spotlight_fx_non_prime", "targetname");
+  spots = getStructArray("struct_spotlight_fx", "targetname");
+  spots_nonprimary = getStructArray("struct_spotlight_fx_non_prime", "targetname");
 
   array_thread(spots, ::spotlight_fx_spawn);
   array_thread(spots_nonprimary, ::spotlight_fx_spawn);

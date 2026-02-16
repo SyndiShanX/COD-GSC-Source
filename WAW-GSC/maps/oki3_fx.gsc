@@ -241,7 +241,7 @@ light_zort(mdl) {
 }
 
 mortarpits_fake_launch() {
-  ents = getstructarray("fake_mortar", "targetname");
+  ents = getStructArray("fake_mortar", "targetname");
   while(!flag("stop_fake_mortar")) {
     for(i = 0; i < ents.size; i++) {
       thread fake_launch(ents[i]);
@@ -253,7 +253,7 @@ mortarpits_fake_launch() {
 }
 
 fake_launch(org) {
-  targs = getstructarray("dirt_mortar", "targetname");
+  targs = getStructArray("dirt_mortar", "targetname");
   playsoundatposition(level.scr_sound["mortar_flash"], org.origin);
   playFX(level._effect["mortar_flash"], org.origin, anglesToForward(org.angles));
   wait(randomintrange(4, 7));

@@ -39,7 +39,7 @@ main() {
 trap_fx_monitor(name, side) {
   while(1) {
     level waittill(name);
-    fire_points = getstructarray(name, "targetname");
+    fire_points = getStructArray(name, "targetname");
     for(i = 0; i < fire_points.size; i++) {
       fire_points[i] thread electric_trap_fx(name, side);
     }
@@ -291,7 +291,7 @@ light_model_swap(name, model) {
   }
 }
 get_guide_struct_angles(ent) {
-  guide_structs = GetStructArray("map_fx_guide_struct", "targetname");
+  guide_structs = getStructArray("map_fx_guide_struct", "targetname");
   if(guide_structs.size > 0) {
     guide = guide_structs[0];
     dist = DistanceSquared(ent.origin, guide.origin);

@@ -28,7 +28,7 @@ wait_for_puppet_pickup() {
 
     player = getplayers()[0];
 
-    if(isDefined(player) && player buttonpressed("<dev string:x38>")) {
+    if(isDefined(player) && player buttonPressed("<dev string:x38>")) {
       if(self.iscurrentlypuppet) {
         if(zm_utility::check_point_in_playable_area(self.goalpos) && !zm_utility::check_point_in_playable_area(self.origin)) {
           self.backedupgoal = self.goalpos;

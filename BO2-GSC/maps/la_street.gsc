@@ -73,7 +73,7 @@ main() {
 }
 
 street_opitimizations() {
-  a_cell_structs = getstructarray("plaza_cell", "targetname");
+  a_cell_structs = getStructArray("plaza_cell", "targetname");
 
   foreach(struct in a_cell_structs) {
     setcellinvisibleatpos(struct.origin);

@@ -63,7 +63,7 @@ put this in your GSC:
 maps\_mi17_noai::main( "vehicle_mi17_woodland" );
 
 and these lines in your CSV:
-include,vehicle_mi17_woodland_mi17_noai
+#include,vehicle_mi17_woodland_mi17_noai
 sound,vehicle_mi17,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi17_woodland"default:"vehicletype" "mi17_noai"default:"script_team" "axis"*/
@@ -74,7 +74,7 @@ put this in your GSC:
 maps\_mi17_noai::main( "vehicle_mi17_woodland_fly" );
 
 and these lines in your CSV:
-include,vehicle_mi17_woodland_fly_mi17_noai
+#include,vehicle_mi17_woodland_fly_mi17_noai
 sound,vehicle_mi17,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi17_woodland_fly"default:"vehicletype" "mi17_noai"default:"script_team" "axis"*/
@@ -85,7 +85,7 @@ put this in your GSC:
 maps\_mi17_noai::main( "vehicle_mi17_woodland_fly_cheap" );
 
 and these lines in your CSV:
-include,vehicle_mi17_woodland_fly_cheap_mi17_noai
+#include,vehicle_mi17_woodland_fly_cheap_mi17_noai
 sound,vehicle_mi17,vehicle_standard,all_sp
 
 defaultmdl="vehicle_mi17_woodland_fly_cheap"default:"vehicletype" "mi17_noai"default:"script_team" "axis"

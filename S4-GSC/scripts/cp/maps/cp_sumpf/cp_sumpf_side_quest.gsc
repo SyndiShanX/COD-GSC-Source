@@ -371,7 +371,7 @@ set_custom_search_distance_on_structs(var_0, var_1) {
 }
 
 init_oil_lamps() {
-  var_0 = scripts\engine\utility::getstructarray("s_lamp", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_lamp", "targetname");
   level.n_hit_index = 0;
 
   foreach(var_2 in var_0) {

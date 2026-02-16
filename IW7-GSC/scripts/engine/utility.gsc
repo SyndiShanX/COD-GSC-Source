@@ -967,7 +967,7 @@ getstruct(var_0, var_1) {
   return var_2[0];
 }
 
-getstructarray(var_0, var_1) {
+getStructArray(var_0, var_1) {
   var_2 = level.struct_class_names[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -2951,7 +2951,7 @@ isprotectedbyriotshield(var_0) {
 isprotectedbyaxeblock(var_0) {
   var_1 = 0;
   var_2 = self getcurrentweapon();
-  var_3 = self adsbuttonpressed();
+  var_3 = self adsButtonPressed();
   var_4 = 0;
   var_5 = 0;
   var_6 = 0;
@@ -3693,7 +3693,7 @@ get_target_array(var_0) {
     }
   }
 
-  var_1 = getstructarray(var_0, "targetname");
+  var_1 = getStructArray(var_0, "targetname");
 
   if(var_1.size > 0) {
     return var_1;
@@ -3827,7 +3827,7 @@ get_noteworthy_array(var_0) {
     }
   }
 
-  var_1 = getstructarray(var_0, "script_noteworthy");
+  var_1 = getStructArray(var_0, "script_noteworthy");
 
   if(var_1.size > 0) {
     return var_1;

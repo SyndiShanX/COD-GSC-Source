@@ -665,7 +665,7 @@ sdv_silt_kickup() {
 }
 
 set_start_positions(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
     if(isDefined(level.player_rig) && var_3.script_noteworthy == "player") {
@@ -1145,7 +1145,7 @@ barrel_roll() {
 
 trigger_depth_charges() {
   self waittill("trigger");
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
   common_scripts\utility::array_thread(var_0, ::depth_charge_org);
 }
 
@@ -1535,7 +1535,7 @@ shark_think_real() {
 }
 
 dead_body_spawner() {
-  var_0 = common_scripts\utility::getstructarray(self.script_noteworthy, "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray(self.script_noteworthy, "script_noteworthy");
 
   foreach(var_2 in var_0) {
     self.origin = var_2.origin;
@@ -2290,7 +2290,7 @@ melee_wait_for_player_input() {
 }
 
 player_attacked() {
-  return isalive(self) && self meleebuttonpressed();
+  return isalive(self) && self meleeButtonPressed();
 }
 
 melee_hint() {

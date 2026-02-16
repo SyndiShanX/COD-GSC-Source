@@ -548,7 +548,7 @@ monitorRocketFire2(streakName, plane) {
     self SetClientOmnvar("ui_a10_rocket", plane.numRocketsLeft);
 
     while(plane.numRocketsLeft > 0) {
-      if(!(self AdsButtonPressed())) {
+      if(!(self adsButtonPressed())) {
         self waittill("rocket_fire_pressed");
       }
 
@@ -892,7 +892,7 @@ monitor_attack_button(plane) {
 
   self.is_attacking = 0;
   while(isDefined(plane)) {
-    if(self AttackButtonPressed())
+    if(self attackButtonPressed())
       self.is_attacking = 1;
     else
       self.is_attacking = 0;

@@ -394,7 +394,7 @@ player_action_slot_internal(resource, get_rank_func, waittillname) {
       continue;
     }
 
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       continue;
     }
     if(self IsOnLadder()) {
@@ -510,8 +510,8 @@ is_drop_button_pressed() {
   if(isDefined(self.laststand) && self.laststand)
     return false;
 
-  pressed_button_1 = self AdsButtonPressed();
-  pressed_button_2 = self JumpButtonPressed();
+  pressed_button_1 = self adsButtonPressed();
+  pressed_button_2 = self JumpbuttonPressed();
 
   return pressed_button_1 && pressed_button_2;
 }

@@ -516,7 +516,7 @@ _id_1085B() {
   self.waitingforrespawnbutton = 1;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       self.waitingforrespawnbutton = 0;
       break;
     }
@@ -1336,7 +1336,7 @@ _id_E37E(var_0) {
 
   self setclientomnvar("ui_mapshot_camera", 1);
   self _meth_8577("mapflyover");
-  var_2 = scripts\engine\utility::getstructarray("camera_intro", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("camera_intro", "targetname");
 
   if(var_2.size == 0 || _id_07D1::_id_60BE("infil_will_run")) {
     self _meth_844E("", 0.75);

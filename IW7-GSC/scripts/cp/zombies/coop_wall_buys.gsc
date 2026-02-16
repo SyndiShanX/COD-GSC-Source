@@ -181,7 +181,7 @@ func_23DA() {
   }
 
   var_4 = [];
-  var_5 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_7 in var_5) {
     if(isDefined(var_7.name) && var_7.name == "wall_buy") {
       var_4[var_4.size] = var_7;
@@ -190,7 +190,7 @@ func_23DA() {
           continue;
         }
 
-        var_8 = scripts\engine\utility::getstructarray(var_7.target, "target");
+        var_8 = scripts\engine\utility::getStructArray(var_7.target, "target");
         foreach(var_10 in var_8) {
           if(var_10 == var_7) {
             continue;

@@ -55,7 +55,7 @@ init() {
   level._effect["kortifex_ambient"] = loadfx("vfx/s4/level/cp_zm_oasis/vfx_kortifex_lighting_ambient");
   level._effect["shield_exp"] = loadfx("vfx/s4/level/cp_zm_oasis/vfx_rune_shield_exp");
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstructarray("kortifex_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("kortifex_pos", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2._id_039B)) {
@@ -83,7 +83,7 @@ init() {
 
 spawn_dark_aether_anemones() {
   level.a_anemones = [];
-  var_0 = scripts\engine\utility::getstructarray("s_anemones", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_anemones", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = _func_03C5("s4_zm_dark_aether_anemone", var_2.origin, var_2.angles);
@@ -126,7 +126,7 @@ spawn_dark_aether_crystal() {
 }
 
 setup_kortifex_fight_structs() {
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     if(var_2._id_039B == "skill_pos") {
@@ -461,7 +461,7 @@ kick_off_boss_fight() {
   _id_B267();
   level thread scripts\cp\maps\cp_zm_oasis\cp_zm_oasis_papq::fadetowhite(0.3, 1);
   wait 0.4;
-  var_0 = scripts\engine\utility::getstructarray("s_crystal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_crystal", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread spawn_dark_aether_crystal();
@@ -732,11 +732,11 @@ spawn_barricades() {
   if(!isDefined(self.blocker)) {
     return;
   }
-  var_0 = scripts\engine\utility::getstructarray(self.blocker.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.blocker.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_2.mdl = scripts\cp\utility::_id_E190("s4_zm_rune_decal_inviktor", var_2.origin, var_2.angles);
-    var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {
       var_5.mdl = scripts\cp\utility::_id_E190("vfx_zm_obj_holdout_barrier_mod_bottom_center_56x48", var_5.origin, var_5.angles);
@@ -748,10 +748,10 @@ cleanup_barricades() {
   if(!isDefined(self._id_B9FE.blocker)) {
     return;
   }
-  var_0 = scripts\engine\utility::getstructarray(self._id_B9FE.blocker.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self._id_B9FE.blocker.target, "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {
       if(isDefined(var_5.mdl)) {
@@ -793,7 +793,7 @@ on_portal_interact(var_0, var_1) {
   }
 
   level scripts\engine\utility::_id_5C04("disallow_rbz_exfil");
-  var_3 = scripts\engine\utility::getstructarray("default_player_start", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("default_player_start", "targetname");
   level thread _id_098A::warp_for_rbz(var_3, "cp_zm_oasis_oasis_tr");
   _id_0737::_id_C3C5(var_0);
   wait 11;
@@ -1319,7 +1319,7 @@ play_intro_sequence_vos(var_0) {
 
 teleport_to_next_platform(var_0) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::getstructarray("kortifex_pos", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("kortifex_pos", "targetname");
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3._id_039B) && var_3._id_039B == var_0) {
@@ -1373,7 +1373,7 @@ teleport_to_next_platform(var_0) {
 }
 
 teleport_player_to_fight_area() {
-  var_0 = scripts\engine\utility::getstructarray(level.kortifex._id_B9FE.teleport_pos.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(level.kortifex._id_B9FE.teleport_pos.target, "targetname");
 
   foreach(var_2 in level.players) {
     if(isPlayer(var_2)) {
@@ -1662,7 +1662,7 @@ spawn_lighting() {
   level endon("kortifex_die");
   level endon("kortifex_stun_down");
   level endon("jump_to_next_stage");
-  var_0 = scripts\engine\utility::getstructarray(self._id_B9FE.skill_pos.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self._id_B9FE.skill_pos.target, "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = level.kortifex get_lighting_spawn_count();
 
@@ -1917,7 +1917,7 @@ _id_E258() {
     level.kortifex.sound_proxy playSound("zmb_kort_zmb_horde_stinger");
   }
 
-  var_0 = scripts\engine\utility::getstructarray(self._id_B9FE._id_E1C6.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self._id_B9FE._id_E1C6.target, "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = 0;
 
@@ -2165,7 +2165,7 @@ weapon_actor_start_move(var_0) {
   level endon("game_ended");
   self endon("kill");
   self endon("death");
-  var_1 = scripts\engine\utility::getstructarray(level.kortifex._id_B9FE.skill_pos.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(level.kortifex._id_B9FE.skill_pos.target, "targetname");
   var_2 = scripts\engine\utility::array_random(var_1);
   var_3 = level.players;
   var_3 = scripts\engine\utility::array_randomize(var_3);
@@ -2811,13 +2811,13 @@ refresh_stage2_actors() {
   wait 60;
 
   for(;;) {
-    var_0 = scripts\engine\utility::getstructarray("s_crystal", "targetname");
+    var_0 = scripts\engine\utility::getStructArray("s_crystal", "targetname");
 
     foreach(var_2 in var_0) {
       var_2 spawn_dark_aether_crystal();
     }
 
-    var_4 = scripts\engine\utility::getstructarray("s_floating_pillar", "targetname");
+    var_4 = scripts\engine\utility::getStructArray("s_floating_pillar", "targetname");
 
     foreach(var_6 in var_4) {
       if(!isDefined(var_6.mdl_pillar)) {
@@ -2834,7 +2834,7 @@ refresh_stage2_actors() {
 spawn_floating_pillars() {
   level endon("game_ended");
   wait 3;
-  var_0 = scripts\engine\utility::getstructarray("s_floating_pillar", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_floating_pillar", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread pillar_jump_into_level();

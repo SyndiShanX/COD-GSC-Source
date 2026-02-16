@@ -446,10 +446,10 @@ _id_1B41() {
 _id_1B6B() {
   for(;;) {
     foreach(var_2, var_1 in level._id_1B69) {
-      if(self buttonpressed(var_2)) {
+      if(self buttonPressed(var_2)) {
         [[level._id_1B69[var_2]]]();
 
-        while(self buttonpressed(var_2)) {
+        while(self buttonPressed(var_2)) {
           wait 0.05;
         }
         [[level._id_1B6C[var_2]]]();
@@ -464,11 +464,11 @@ _id_1B6B() {
 _id_1B6D() {
   for(;;) {
     foreach(var_2, var_1 in level._id_1B6A) {
-      if(self buttonpressed(var_2)) {
+      if(self buttonPressed(var_2)) {
         [[level._id_1B6A[var_2]]]();
 
         if(!level._id_1B6E[var_2]) {
-          while(self buttonpressed(var_2)) {
+          while(self buttonPressed(var_2)) {
             wait 0.05;
           }
         }

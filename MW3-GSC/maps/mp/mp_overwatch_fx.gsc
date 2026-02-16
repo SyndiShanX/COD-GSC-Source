@@ -9,9 +9,7 @@ main() {
   precache_scripted_fx();
 }
 
-precache_createfx_fx()
-
-{
+precache_createfx_fx() {
   level._effect["light_godray_bloom_a"] = loadfx("maps/mp_overwatch/light_godray_bloom_a");
   level._effect["light_godray_bloom_b"] = loadfx("maps/mp_overwatch/light_godray_bloom_b");
 

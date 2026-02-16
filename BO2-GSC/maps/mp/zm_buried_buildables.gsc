@@ -149,7 +149,7 @@ init_buildables(buildablesenabledlist) {
   level thread chalk_host_migration();
 }
 
-include_buildables(buildablesenabledlist) {
+#include_buildables(buildablesenabledlist) {
   turbine_fan = generate_zombie_buildable_piece("turbine", "p6_zm_buildable_turbine_fan", 32, 64, 0, "zm_hud_icon_fan", ::onpickup_common, ::ondrop_common, undefined, "tag_part_03", undefined, 1);
   turbine_panel = generate_zombie_buildable_piece("turbine", "p6_zm_buildable_turbine_rudder", 32, 64, 0, "zm_hud_icon_rudder", ::onpickup_common, ::ondrop_common, undefined, "tag_part_04", undefined, 2);
   turbine_body = generate_zombie_buildable_piece("turbine", "p6_zm_buildable_turbine_mannequin", 32, 15, 0, "zm_hud_icon_mannequin", ::onpickup_common, ::ondrop_common, undefined, "tag_part_01", undefined, 3);
@@ -1151,7 +1151,7 @@ generate_piece_makers() {
   level.piece_maker_prompts = [];
   level.piece_maker_prompts["booze"] = &"ZM_BURIED_BOOZE_B";
   level.piece_maker_prompts["candy"] = &"ZM_BURIED_CANDY_B";
-  piece_maker_structs = getstructarray("piece_purchase", "targetname");
+  piece_maker_structs = getStructArray("piece_purchase", "targetname");
 
   foreach(pm in piece_maker_structs) {
     piecename = pm.script_noteworthy;

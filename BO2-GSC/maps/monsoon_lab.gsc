@@ -212,7 +212,7 @@ init_lab_flags() {
 }
 
 init_lab_interior() {
-  a_lab_lens_flare = getstructarray("lab_lens_flare", "targetname");
+  a_lab_lens_flare = getStructArray("lab_lens_flare", "targetname");
 
   foreach(lens_flare in a_lab_lens_flare) {
     v_forward = anglesToForward(lens_flare.angles);

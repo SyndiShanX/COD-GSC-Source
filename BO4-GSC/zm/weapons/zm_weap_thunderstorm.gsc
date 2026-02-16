@@ -145,7 +145,7 @@ function_3b0168a9(v_origin, v_angles, player) {
 
   if(isDefined(v_origin)) {
     if(zm_utility::check_point_in_playable_area(v_origin) && zm_utility::check_point_in_enabled_zone(v_origin, 1)) {
-      if(!player fragbuttonpressed()) {
+      if(!player fragButtonPressed()) {
         if(isDefined(player)) {
           player thread function_cf0a2056();
         }

@@ -779,16 +779,16 @@ function devgui_spawn_think() {
   for(;;) {
     self setactionslot(3, "");
     self setactionslot(4, "");
-    if(!dpad_left && self buttonpressed("")) {
+    if(!dpad_left && self buttonPressed("")) {
       setDvar("", "");
       dpad_left = 1;
-    } else if(!self buttonpressed("")) {
+    } else if(!self buttonPressed("")) {
       dpad_left = 0;
     }
-    if(!dpad_right && self buttonpressed("")) {
+    if(!dpad_right && self buttonPressed("")) {
       setDvar("", "");
       dpad_right = 1;
-    } else if(!self buttonpressed("")) {
+    } else if(!self buttonPressed("")) {
       dpad_right = 0;
     }
     wait(0.05);
@@ -1573,9 +1573,9 @@ function larry_init(larry) {
     position = eye + (vectorscale(direction_vec, dist - 64));
     larry.model.origin = position;
     larry.model.angles = self.angles + vectorscale((0, 1, 0), 180);
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       self larry_ai(larry);
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         wait(0.05);
       }
     }
@@ -1784,46 +1784,46 @@ function watchattachmentchange() {
   lstick_down = 0;
   dpad_modifier_button = getattachmentchangemodifierbutton();
   for(;;) {
-    if(self buttonpressed(dpad_modifier_button)) {
-      if(!dpad_left && self buttonpressed("")) {
+    if(self buttonPressed(dpad_modifier_button)) {
+      if(!dpad_left && self buttonPressed("")) {
         self giveweaponnextattachment("");
         dpad_left = 1;
         self thread print_weapon_name();
       }
-      if(!dpad_right && self buttonpressed("")) {
+      if(!dpad_right && self buttonPressed("")) {
         self giveweaponnextattachment("");
         dpad_right = 1;
         self thread print_weapon_name();
       }
-      if(!dpad_up && self buttonpressed("")) {
+      if(!dpad_up && self buttonPressed("")) {
         self giveweaponnextattachment("");
         dpad_up = 1;
         self thread print_weapon_name();
       }
-      if(!dpad_down && self buttonpressed("")) {
+      if(!dpad_down && self buttonPressed("")) {
         self giveweaponnextattachment("");
         dpad_down = 1;
         self thread print_weapon_name();
       }
-      if(!lstick_down && self buttonpressed("")) {
+      if(!lstick_down && self buttonPressed("")) {
         self giveweaponnextattachment("");
         lstick_down = 1;
         self thread print_weapon_name();
       }
     }
-    if(!self buttonpressed("")) {
+    if(!self buttonPressed("")) {
       dpad_left = 0;
     }
-    if(!self buttonpressed("")) {
+    if(!self buttonPressed("")) {
       dpad_right = 0;
     }
-    if(!self buttonpressed("")) {
+    if(!self buttonPressed("")) {
       dpad_up = 0;
     }
-    if(!self buttonpressed("")) {
+    if(!self buttonPressed("")) {
       dpad_down = 0;
     }
-    if(!self buttonpressed("")) {
+    if(!self buttonPressed("")) {
       lstick_down = 0;
     }
     wait(0.05);
@@ -1983,7 +1983,7 @@ function bot_dpad_think() {
     host setactionslot(4, "");
     players = getplayers();
     max = players.size;
-    if(!dpad_left && host buttonpressed("")) {
+    if(!dpad_left && host buttonPressed("")) {
       level.bot_index--;
       if(level.bot_index < 0) {
         level.bot_index = max - 1;
@@ -1992,10 +1992,10 @@ function bot_dpad_think() {
         continue;
       }
       dpad_left = 1;
-    } else if(!host buttonpressed("")) {
+    } else if(!host buttonPressed("")) {
       dpad_left = 0;
     }
-    if(!dpad_right && host buttonpressed("")) {
+    if(!dpad_right && host buttonPressed("")) {
       level.bot_index++;
       if(level.bot_index >= max) {
         level.bot_index = 0;
@@ -2004,7 +2004,7 @@ function bot_dpad_think() {
         continue;
       }
       dpad_right = 1;
-    } else if(!host buttonpressed("")) {
+    } else if(!host buttonPressed("")) {
       dpad_right = 0;
     }
     level notify("bot_index_changed");
@@ -2327,10 +2327,10 @@ function node_get(player) {
     if(!isDefined(node)) {
       continue;
     }
-    if(player buttonpressed("")) {
+    if(player buttonPressed("")) {
       return node;
     }
-    if(player buttonpressed("")) {
+    if(player buttonPressed("")) {
       return undefined;
     }
     if(node.type == "") {
@@ -2346,19 +2346,19 @@ function dev_get_node_pair() {
   start = undefined;
   while(!isDefined(start)) {
     start = node_get(player);
-    if(player buttonpressed("")) {
+    if(player buttonPressed("")) {
       level notify("draw_pathnode_stop");
       return undefined;
     }
   }
   level thread draw_pathnode_think(start, (0, 1, 0));
-  while(player buttonpressed("")) {
+  while(player buttonPressed("")) {
     wait(0.05);
   }
   end = undefined;
   while(!isDefined(end)) {
     end = node_get(player);
-    if(player buttonpressed("")) {
+    if(player buttonPressed("")) {
       level notify("draw_pathnode_stop");
       return undefined;
     }
@@ -2382,10 +2382,10 @@ function point_get(player) {
   for(;;) {
     wait(0.05);
     origin = get_lookat_origin(player);
-    if(player buttonpressed("")) {
+    if(player buttonPressed("")) {
       return origin;
     }
-    if(player buttonpressed("")) {
+    if(player buttonPressed("")) {
       return undefined;
     }
     draw_point(origin, (1, 0, 1));
@@ -2402,7 +2402,7 @@ function dev_get_point_pair() {
       return points;
     }
   }
-  while(player buttonpressed("")) {
+  while(player buttonPressed("")) {
     wait(0.05);
   }
   end = undefined;

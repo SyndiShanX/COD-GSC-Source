@@ -162,10 +162,10 @@ endlog_common() {
   evac_rock = GetEnt("evac_rock", "targetname");
   evac_rock NotSolid();
 
-  swing_light_orgs = getstructarray("swing_light_org", "targetname");
+  swing_light_orgs = getStructArray("swing_light_org", "targetname");
   array_thread(swing_light_orgs, ::swing_light_org_think);
 
-  swing_light_orgs = getstructarray("swing_light_org_off", "targetname");
+  swing_light_orgs = getStructArray("swing_light_org_off", "targetname");
   array_thread(swing_light_orgs, ::swing_light_org_off_think);
 
   run_thread_on_noteworthy("hunted_hanging_light", ::hunted_hanging_light);
@@ -247,7 +247,7 @@ gulag_run_for_it() {
 
   // level.player FreezeControls( false );
 
-  orgs = getstructarray("friendly_escape_org", "targetname");
+  orgs = getStructArray("friendly_escape_org", "targetname");
   orgs = array_index_by_parameters(orgs);
 
   //level.player AllowSprint( false );
@@ -305,7 +305,7 @@ gulag_run_for_it() {
   thread chase_train(); // the cave in chases you
   wait(0.2);
 
-  orgs = getstructarray("friendly_changedirection_org", "targetname");
+  orgs = getStructArray("friendly_changedirection_org", "targetname");
   orgs = array_index_by_parameters(orgs);
 
   ducks = [];
@@ -412,7 +412,7 @@ start_endshow() {
 }
 
 start_cafeteria() {
-  friendly_escape_orgs = getstructarray("start_cafe_friendly", "targetname");
+  friendly_escape_orgs = getStructArray("start_cafe_friendly", "targetname");
   orgs = array_index_by_parameters(friendly_escape_orgs);
 
   map_spawners_to_starts(orgs);
@@ -434,10 +434,10 @@ start_cafeteria() {
 
   level.cafe_tables = getEntArray("cafe_table", "targetname");
   array_thread(level.cafe_tables, ::cafe_table_think);
-  cafe_table_orgs = getstructarray("cafe_table_org", "targetname");
+  cafe_table_orgs = getStructArray("cafe_table_org", "targetname");
   array_thread(cafe_table_orgs, ::cafe_table_org_think);
 
-  cafe_table_eq_orgs = getstructarray("cafe_table_eq_org", "targetname");
+  cafe_table_eq_orgs = getStructArray("cafe_table_eq_org", "targetname");
   array_thread(cafe_table_eq_orgs, ::cafe_table_eq_org_think);
 
   thread cafe_lights_explode();

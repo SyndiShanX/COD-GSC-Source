@@ -137,7 +137,7 @@ activate_vehicle(type) {
     return false;
   }
 
-  if(player usebuttonpressed()) {
+  if(player useButtonPressed()) {
     return false;
   }
 
@@ -260,7 +260,7 @@ function_2cee4434() {
     waitframe(1);
   }
 
-  while(!(isDefined(vehicle.owner) && (vehicle.owner attackbuttonpressed() || vehicle.owner vehicleattackbuttonpressed()))) {
+  while(!(isDefined(vehicle.owner) && (vehicle.owner attackButtonPressed() || vehicle.owner vehicleattackButtonPressed()))) {
     waitframe(1);
   }
 
@@ -274,7 +274,7 @@ watch_exit() {
   while(true) {
     timeused = 0;
 
-    while(vehicle.owner usebuttonpressed()) {
+    while(vehicle.owner useButtonPressed()) {
       timeused += level.var_9fee970c;
 
       if(timeused >= 250) {

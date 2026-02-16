@@ -199,7 +199,7 @@ put this in your GSC:
 maps\_bm21_drivable::main( "vehicle_bm21_mobile_bed" );
 
 and these lines in your CSV:
-include,vehicle_bm21_drivable
+#include,vehicle_bm21_drivable
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile_bed"default:"vehicletype" "bm21_drivable"default:"script_team" "axis"

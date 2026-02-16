@@ -115,7 +115,7 @@ zgrief_mode_fix() {
 zgrief_respawn_override(revivee, return_struct) {
   players = get_players();
   spawn_points = maps\mp\gametypes_zm\_zm_gametype::get_player_spawns_for_gametype();
-  grief_initial = getstructarray("street_standard_player_spawns", "targetname");
+  grief_initial = getStructArray("street_standard_player_spawns", "targetname");
 
   foreach(struct in grief_initial) {
     if(isDefined(struct.script_int) && struct.script_int == 2000) {
@@ -489,7 +489,7 @@ get_push_vector() {
 bar_spawner_fix() {
   bad_pos = (459.5, -1984, 84);
   dist_fix = 64;
-  bar_spawners = getstructarray("zone_bar_spawners", "targetname");
+  bar_spawners = getStructArray("zone_bar_spawners", "targetname");
 
   foreach(spawner in bar_spawners) {
     if(isDefined(spawner.script_string) && spawner.script_string == "bar2") {
@@ -502,7 +502,7 @@ bar_spawner_fix() {
 }
 
 player_respawn_fix() {
-  maze_spawners = getstructarray("maze_spawn_points", "targetname");
+  maze_spawners = getStructArray("maze_spawn_points", "targetname");
 
   foreach(spawner in maze_spawners) {
     if(spawner.origin == (3469, 1026, 20))

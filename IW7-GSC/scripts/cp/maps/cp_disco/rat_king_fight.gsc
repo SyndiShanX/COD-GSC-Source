@@ -36,7 +36,7 @@ rkfightinit() {
 }
 
 setuprkcrates() {
-  var_0 = scripts\engine\utility::getstructarray("rk_perk_crate", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rk_perk_crate", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     if(isDefined(var_2.angles)) {
@@ -45,7 +45,7 @@ setuprkcrates() {
 
     var_3 setModel("cp_disco_crates_rk");
     var_2.model = var_3;
-    var_2.fx_struct = scripts\engine\utility::getclosest(var_2.origin, scripts\engine\utility::getstructarray("crate_fx", "script_noteworthy"));
+    var_2.fx_struct = scripts\engine\utility::getclosest(var_2.origin, scripts\engine\utility::getStructArray("crate_fx", "script_noteworthy"));
     var_2 thread cratewaitfordamage(var_2);
   }
 }
@@ -80,7 +80,7 @@ breakcrateandwait(var_0) {
   thread throwperkboxes(var_0);
   level waittill("rk_fight_completed");
   var_0.model setscriptablepartstate("crate", "active");
-  var_1 = scripts\engine\utility::getstructarray("perk_candy_box", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
   foreach(var_3 in var_1) {
     if(isDefined(var_3.model)) {
       var_3.model delete();
@@ -91,7 +91,7 @@ breakcrateandwait(var_0) {
 }
 
 init_rk_candy_interactions() {
-  var_0 = scripts\engine\utility::getstructarray("perk_candy_box", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("perk_candy_box", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = scripts\engine\utility::getstruct(var_2.target, "targetname");
     var_3.parent_struct = var_2;
@@ -336,7 +336,7 @@ start_rk_fight() {
   level.ratking_fight = 1;
   level.old_karate_zombie_model_list = level.karate_zombie_model_list;
   level.karate_zombie_model_list = level.rkfight_karate_zombie_model_list;
-  var_0 = scripts\engine\utility::getstructarray("rk_player_spawns", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rk_player_spawns", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   level thread setuprkfightpas();
   foreach(var_4, var_2 in level.players) {
@@ -374,7 +374,7 @@ start_rk_fight() {
 
   level thread spawnpamgrier();
   level waittill("rk_intro_done");
-  var_5 = scripts\engine\utility::getstructarray("rat_king_spawner", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("rat_king_spawner", "targetname");
   var_6 = scripts\engine\utility::getclosest((-628.8, 1422.4, 178), var_5, 500);
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_ratking_finalspawn", "rave_announcer_vo", "highest", 70, 0, 0, 1);
   scripts\cp\maps\cp_disco\rat_king::spawn_rat_king(var_6.origin, var_6.angles, 1);
@@ -532,13 +532,13 @@ rkusegourdfunc(var_0) {
 }
 
 respawninrkarena(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("rkRespawnLoc", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("rkRespawnLoc", "script_noteworthy");
   var_2 = scripts\cp\gametypes\zombie::get_respawn_loc_rated(level.players, var_1);
   return var_2;
 }
 
 setuplnfinteractions() {
-  var_0 = scripts\engine\utility::getstructarray("lost_and_found", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("lost_and_found", "script_noteworthy");
   var_1 = undefined;
   foreach(var_3 in var_0) {
     scripts\cp\cp_interaction::remove_from_current_interaction_list(var_3);
@@ -559,7 +559,7 @@ setuplnfinteractions() {
 }
 
 restorelnfinteractions() {
-  var_0 = scripts\engine\utility::getstructarray("lost_and_found", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("lost_and_found", "script_noteworthy");
   var_1 = undefined;
   foreach(var_3 in var_0) {
     scripts\cp\cp_interaction::add_to_current_interaction_list(var_3);
@@ -631,7 +631,7 @@ max_ammo_pick_up_listener() {
 
 setuprkarenabarriers() {
   level.rk_barriers = [];
-  foreach(var_1 in scripts\engine\utility::getstructarray("rk_fx_loc", "targetname")) {
+  foreach(var_1 in scripts\engine\utility::getStructArray("rk_fx_loc", "targetname")) {
     var_2 = spawn("script_model", var_1.origin);
     var_2.angles = var_1.angles;
     var_2 setModel("temp_dbl_door_barrier");
@@ -727,7 +727,7 @@ stage2attacksettings() {
 
 activaterelics() {
   scripts\engine\utility::flag_set("rk_fight_relic_stage");
-  var_0 = scripts\engine\utility::getstructarray("rk_relic_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rk_relic_pos", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = spawnfx(level._effect["relic_active"], var_2.origin);
     if(isDefined(var_2.model)) {
@@ -770,7 +770,7 @@ startactiveloop(var_0, var_1) {
 }
 
 deactivaterelics() {
-  var_0 = scripts\engine\utility::getstructarray("rk_relic_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rk_relic_pos", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.model)) {
       var_2 notify("relic_deactivated");
@@ -1103,7 +1103,7 @@ spawnrkdeathmodel() {
 }
 
 cleanuprelics() {
-  var_0 = scripts\engine\utility::getstructarray("rk_relic_pos", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("rk_relic_pos", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.model)) {
       var_2.model delete();
@@ -1240,7 +1240,7 @@ init_rkrelic() {
     level.rk_center_arena_struct.model = var_0;
   }
 
-  var_1 = scripts\engine\utility::getstructarray("rk_relic_pos", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("rk_relic_pos", "script_noteworthy");
   var_2 = scripts\engine\utility::array_randomize_objects(["heart", "brain", "eye"]);
   foreach(var_5, var_4 in var_1) {
     var_4.ogpos = var_4.origin + (0, 0, 4);
@@ -1399,8 +1399,8 @@ heartsolotunedata(var_0) {
 }
 
 startheartquestfunctionality() {
-  var_0 = scripts\engine\utility::getstructarray("sewage_pool_start_loc", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("sewage_pool_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("sewage_pool_start_loc", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("sewage_pool_loc", "script_noteworthy");
   var_2 = getent("slime_pool", "targetname");
   var_2.team = "axis";
   var_2.objective_icon = var_1.size;
@@ -1804,7 +1804,7 @@ sendtargetstobrain(var_0, var_1, var_2) {
 }
 
 getvalidbrainpos(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("brain_targets", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("brain_targets", "targetname");
   var_2 = sortbydistance(var_1, var_0.origin);
   foreach(var_4 in var_2) {
     if(scripts\engine\utility::istrue(var_4.claimed)) {
@@ -1850,7 +1850,7 @@ runeyerelicquest(var_0) {
   }
 
   setstage2attackpriorities();
-  var_2 = scripts\engine\utility::getstructarray("rk_eye_damage_structs", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("rk_eye_damage_structs", "targetname");
   var_2 = scripts\engine\utility::array_randomize_objects(var_2);
   level.all_eye_targets = var_2;
   var_0.objective_icon = getmaxactivetargets();
@@ -2313,9 +2313,9 @@ open_sesame(var_0) {
     }
   }
 
-  var_11 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_11 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_13 in var_11) {
-    var_14 = scripts\engine\utility::getstructarray(var_13.script_noteworthy, "script_noteworthy");
+    var_14 = scripts\engine\utility::getStructArray(var_13.script_noteworthy, "script_noteworthy");
     foreach(var_16 in var_14) {
       if(isDefined(var_16.target) && isDefined(var_13.target)) {
         if(var_16.target == var_13.target && var_16 != var_13) {
@@ -2592,7 +2592,7 @@ stagecomplete() {
 }
 
 enablerkspawners() {
-  var_0 = scripts\engine\utility::getstructarray("static", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("static", "script_noteworthy");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.groupname) && var_2.groupname == "rk_spawners") {
       var_2 scripts\cp\zombies\zombies_spawning::make_spawner_active();

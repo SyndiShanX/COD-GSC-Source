@@ -127,7 +127,7 @@ pap_rise_fx() {
   }
 }
 get_new_pack_spot() {
-  spots = getstructarray("pap_location", "targetname");
+  spots = getStructArray("pap_location", "targetname");
   if(isDefined(level.current_pap_spot)) {
     spots = array_remove(spots, level.current_pap_spot);
   }

@@ -196,7 +196,7 @@ flogger_handle_activate(var_0, var_1) {
   var_2 = undefined;
 
   if(isDefined(var_0) && isDefined(var_0._id_039B)) {
-    var_2 = scripts\engine\utility::getstructarray(var_0._id_039B, "script_noteworthy");
+    var_2 = scripts\engine\utility::getStructArray(var_0._id_039B, "script_noteworthy");
     level thread flogger_trap_cooldown(var_2, 75);
   }
 

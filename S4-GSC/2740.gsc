@@ -301,7 +301,7 @@ _id_93EE() {
     return 0;
   }
 
-  if(!self._id_B80E usebuttonpressed()) {
+  if(!self._id_B80E useButtonPressed()) {
     return 0;
   }
 
@@ -309,7 +309,7 @@ _id_93EE() {
     return 0;
   }
 
-  if(self._id_B80E meleebuttonpressed()) {
+  if(self._id_B80E meleeButtonPressed()) {
     return 0;
   }
 

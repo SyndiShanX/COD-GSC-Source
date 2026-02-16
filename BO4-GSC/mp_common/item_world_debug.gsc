@@ -230,13 +230,13 @@ function_938d798a() {
   prev_index = 0;
 
   while(level.var_938d798a) {
-    if(player jumpbuttonpressed() && player function_78931318("<dev string:x730>")) {
+    if(player jumpbuttonPressed() && player function_78931318("<dev string:x730>")) {
       if(level.var_eedfa327 < var_7099d03.size - 1) {
         level.var_eedfa327++;
       } else {
         level.var_eedfa327 = 0;
       }
-    } else if(player jumpbuttonpressed() && player function_78931318("<dev string:x38>")) {
+    } else if(player jumpbuttonPressed() && player function_78931318("<dev string:x38>")) {
       if(level.var_eedfa327 <= 0) {
         level.var_eedfa327 = var_7099d03.size - 1;
       } else {
@@ -284,13 +284,13 @@ function_f9efe895() {
   iprintlnbold("<dev string:x78a>");
 
   while(level.var_f9efe895) {
-    if(player adsbuttonpressed() && player function_78931318("<dev string:x7de>")) {
+    if(player adsButtonPressed() && player function_78931318("<dev string:x7de>")) {
       if(n_index < var_7f0b4b6b.size - 1) {
         n_index++;
       } else {
         n_index = 0;
       }
-    } else if(player adsbuttonpressed() && player function_78931318("<dev string:x7e3>")) {
+    } else if(player adsButtonPressed() && player function_78931318("<dev string:x7e3>")) {
       if(n_index == 0) {
         n_index = var_7f0b4b6b.size - 1;
       } else {
@@ -330,13 +330,13 @@ function_f0d72128() {
   adddebugcommand("<dev string:x727>");
 
   while(level.var_f0d72128) {
-    if(player jumpbuttonpressed() && player function_78931318("<dev string:x730>")) {
+    if(player jumpbuttonPressed() && player function_78931318("<dev string:x730>")) {
       if(level.var_99026891 < var_df1e5fef.size - 1) {
         level.var_99026891++;
       } else {
         level.var_99026891 = 0;
       }
-    } else if(player jumpbuttonpressed() && player function_78931318("<dev string:x38>")) {
+    } else if(player jumpbuttonPressed() && player function_78931318("<dev string:x38>")) {
       if(level.var_99026891 == 0) {
         level.var_99026891 = var_df1e5fef.size - 1;
       } else {
@@ -383,8 +383,8 @@ function_78931318(str_button) {
   }
 
   if(isDefined(str_btn)) {
-    if(self buttonpressed(str_btn) || self buttonpressed(var_7a00db94)) {
-      while(self buttonpressed(str_btn) || self buttonpressed(var_7a00db94)) {
+    if(self buttonPressed(str_btn) || self buttonPressed(var_7a00db94)) {
+      while(self buttonPressed(str_btn) || self buttonPressed(var_7a00db94)) {
         waitframe(1);
       }
 

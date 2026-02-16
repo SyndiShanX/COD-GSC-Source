@@ -62,7 +62,7 @@ start_hub_zombie_spawning(var_0) {
 
     if(isDefined(var_0._id_0DF5)) {
       foreach(var_2 in var_0._id_0DF5) {
-        var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+        var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
         var_3 = scripts\engine\utility::array_randomize(var_3);
         spawn_hub_zombies_at_locs(var_3, var_2);
         level.a_hub_spawning_zones = scripts\engine\utility::array_remove(level.a_hub_spawning_zones, var_2);
@@ -99,7 +99,7 @@ spawn_ai_at_portal_location(var_0) {
   var_2 = getEntArray("portal_spawner_zone", "script_noteworthy");
   var_3 = _func_0204(var_2, var_1);
   var_4 = var_3[0];
-  var_5 = scripts\engine\utility::getstructarray(var_4.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
   var_5 = scripts\engine\utility::array_randomize(var_5);
   spawn_hub_zombies_at_locs(var_5, var_4);
 }
@@ -110,7 +110,7 @@ get_array_of_hub_spawning_zones() {
   level.a_hub_spawning_locs = [];
 
   foreach(var_1 in level.a_hub_spawning_zones) {
-    var_2 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+    var_2 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
     level.a_hub_spawning_locs = scripts\engine\utility::array_combine(var_2, level.a_hub_spawning_locs);
   }
 }

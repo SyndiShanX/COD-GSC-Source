@@ -790,7 +790,7 @@ do_reaction() {
 }
 
 set_start_locations(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_4 in var_2) {
     if(var_4.script_noteworthy == "player")
@@ -3198,7 +3198,7 @@ pa_playSound(var_0, var_1) {
   foreach(var_3 in level.pa.speakers)
   var_3 thread pa_playsound_internal(var_0);
 
-  var_5 = common_scripts\utility::getstructarray("pa_speaker", "targetname");
+  var_5 = common_scripts\utility::getStructArray("pa_speaker", "targetname");
 
   while(level.pa.is_playing) {
     var_5 = sortbydistance(var_5, level.player.origin);
@@ -3233,7 +3233,7 @@ launch_gas_by_targetname(var_0, var_1, var_2) {
   if(!isDefined(var_2))
     var_2 = 0.6;
 
-  var_3 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_3 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_3 = common_scripts\utility::array_randomize(var_3);
 
   foreach(var_6, var_5 in var_3) {
@@ -3332,7 +3332,7 @@ round_to(var_0, var_1) {
 }
 
 get_sorted_structs(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_2 = sortbydistance(var_2, var_1);
   return var_2;
 }
@@ -3610,7 +3610,7 @@ hand_hint_fade(var_0, var_1) {
 
 player_smash_use() {
   level endon("stop_player_smash_use");
-  var_0 = level.player usebuttonpressed();
+  var_0 = level.player useButtonPressed();
   var_1 = 0;
   level.player.smash_use_count = 0;
   var_2 = 100;
@@ -3625,7 +3625,7 @@ player_smash_use() {
       continue;
     }
 
-    var_6 = level.player usebuttonpressed();
+    var_6 = level.player useButtonPressed();
     var_7 = gettime();
 
     if(var_6 && !var_0) {

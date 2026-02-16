@@ -1299,7 +1299,7 @@ within_player_rappel_fov_2d(var_0, var_1, var_2) {
 }
 
 player_get_favorite_enemy(var_0) {
-  if(!self adsbuttonpressed()) {
+  if(!self adsButtonPressed()) {
     return;
   }
   var_1 = getaiarray("axis");

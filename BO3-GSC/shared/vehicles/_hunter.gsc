@@ -1013,7 +1013,7 @@ function player_fire_update_rocket() {
   firetime = weapon.firetime;
   driver = self getseatoccupant(0);
   while(true) {
-    if(driver buttonpressed("BUTTON_A")) {
+    if(driver buttonPressed("BUTTON_A")) {
       spawntag0 = self.missiletags[0];
       spawntag1 = self.missiletags[1];
       origin0 = self gettagorigin(spawntag0);
@@ -1065,7 +1065,7 @@ function hunter_self_destruct() {
   self_destruct_time = 0;
   while(true) {
     if(!self_destruct) {
-      if(level.player meleebuttonpressed()) {
+      if(level.player meleeButtonPressed()) {
         self_destruct = 1;
         self_destruct_time = 5;
       }

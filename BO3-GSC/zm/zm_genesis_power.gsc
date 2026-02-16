@@ -415,7 +415,7 @@ function function_8a3885f2() {
         var_2638ea5e = self function_8961cbdb(e_player);
         if(var_2638ea5e) {
           n_cost = function_fe2cf77b(self);
-          if(e_player usebuttonpressed() && e_player zm_score::can_player_purchase(n_cost) && (!(isDefined(e_player.laststand) && e_player.laststand)) && (!(isDefined(e_player.is_reviving_any) && e_player.is_reviving_any))) {
+          if(e_player useButtonPressed() && e_player zm_score::can_player_purchase(n_cost) && (!(isDefined(e_player.laststand) && e_player.laststand)) && (!(isDefined(e_player.is_reviving_any) && e_player.is_reviving_any))) {
             if(!isDefined(e_player.var_8e8c165c)) {
               e_player.var_8e8c165c = gettime();
             }

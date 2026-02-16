@@ -16,8 +16,8 @@ weapon_switch_watcher(driver) {
   self endon(#"exit_vehicle");
 
   while(true) {
-    if(driver weaponswitchbuttonpressed()) {
-      while(driver weaponswitchbuttonpressed()) {
+    if(driver weaponswitchbuttonPressed()) {
+      while(driver weaponswitchbuttonPressed()) {
         waitframe(1);
       }
 

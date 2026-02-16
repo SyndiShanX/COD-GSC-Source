@@ -231,7 +231,7 @@ init_dj_quest_part(var_0, var_1) {
     level.djpartsareas = ["area_1", "area_2", "area_3"];
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   var_3 = scripts\engine\utility::random(level.djpartsareas);
   var_4 = scripts\engine\utility::array_randomize(var_2);
   var_5 = undefined;
@@ -293,7 +293,7 @@ add_to_dj_quest_part_list(var_0) {
 }
 
 setup_dj_doors() {
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.selected = 0;
   }
@@ -330,7 +330,7 @@ choose_new_dj_door() {
     }
   }
 
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.selected = 0;
   }
@@ -467,7 +467,7 @@ ufo_light_sequence_pre_defense() {
 debug_beat_speaker_defense() {}
 
 select_speaker_defense_locations() {
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_speaker", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_speaker", "script_noteworthy");
   var_3 = [];
   var_4 = [];
   foreach(var_6 in var_0) {
@@ -724,7 +724,7 @@ dj_door_hintstring(var_0, var_1) {
 }
 
 init_dj_speaker() {
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_speaker", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_speaker", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = scripts\cp\cp_interaction::get_area_for_power(var_2);
     if(isDefined(var_3)) {
@@ -1312,7 +1312,7 @@ playspeakerdefencefailsound() {
   self endon("disconnect");
   self endon("game_ended");
   self endon("play_vo_speaker_defence");
-  var_0 = scripts\engine\utility::getstructarray("dj_quest_door", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
   for(;;) {
     level.dj waittill("state_changed", var_1);
     if(var_1 == "close_window") {
@@ -1358,7 +1358,7 @@ defense_sequence_fail(var_0) {
 defense_sequence_success(var_0) {
   level.frequency_device_clip dontinterpolate();
   level.frequency_device_clip.origin = level.frequency_device_clip.originalloc;
-  var_1 = scripts\engine\utility::getstructarray("dj_quest_door", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("dj_quest_door", "script_noteworthy");
   level.use_dj_door_func = ::use_dj_door_to_pick_up_analyzer;
   clear_defense_sequence_zombie_model();
   level.frequency_device_clip freeentitysentient();

@@ -15,7 +15,7 @@ init_craftables() {
   level thread clientscripts\mp\zombies\_zm_craftables::set_clientfield_craftables_code_callbacks();
 }
 
-include_craftables() {
+#include_craftables() {
   clientscripts\mp\zombies\_zm_craftables::include_zombie_craftable("alcatraz_shield_zm");
   clientscripts\mp\zombies\_zm_craftables::include_zombie_craftable("packasplat");
   clientscripts\mp\zombies\_zm_craftables::include_zombie_craftable("plane");

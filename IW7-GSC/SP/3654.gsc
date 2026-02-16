@@ -338,7 +338,7 @@ func_4C20() {
         var_13 func_100E9("circle");
       }
 
-      if(!isDefined(var_11)) {} else if(level.player usebuttonpressed()) {
+      if(!isDefined(var_11)) {} else if(level.player useButtonPressed()) {
         if(isDefined(var_11.var_9075)) {
           var_15 = 0;
           if(!isDefined(var_3)) {

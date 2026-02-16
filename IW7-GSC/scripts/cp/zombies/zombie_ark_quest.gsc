@@ -108,7 +108,7 @@ wait_for_ufo_quest_completion() {
   var_0 makeunusable();
   var_0 makeusable();
   var_0 setcursorhint("HINT_NODISPLAY");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "arkpink,pink") {
       continue;

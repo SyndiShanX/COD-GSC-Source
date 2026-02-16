@@ -13,7 +13,7 @@ _id_C0DC(var_0, var_1) {
   var_6 = var_3.origin + var_5;
   var_1._id_C0DE = var_0;
 
-  while(!level.gameended && isDefined(var_1) && scripts\cp\utility\player::isreallyalive(var_1) && (var_1 usebuttonpressed() && (!isDefined(var_1._id_0271) || !var_1._id_0271))) {
+  while(!level.gameended && isDefined(var_1) && scripts\cp\utility\player::isreallyalive(var_1) && (var_1 useButtonPressed() && (!isDefined(var_1._id_0271) || !var_1._id_0271))) {
     if(distancesquared(var_1.origin, var_0.origin) > var_4) {
       break;
     }

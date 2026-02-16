@@ -34,7 +34,7 @@ _id_C337() {
   level._id_282B["odin_perform_action"]["odin_support"] = ::_id_A93C;
   level._id_282B["odin_get_target"]["odin_assault"] = ::_id_A92C;
   level._id_282B["odin_get_target"]["odin_support"] = ::_id_A93B;
-  var_0 = scripts\engine\utility::getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("so_chopper_boss_path_struct", "script_noteworthy");
   level._id_27F0 = [];
 
   foreach(var_2 in var_0) {

@@ -465,7 +465,7 @@ function_c88a99db(str_hint) {
     b_wait = 0;
 
     foreach(player in getplayers()) {
-      if(!(player istouching(vol_apd_console) && player usebuttonpressed()) && zm_utility::is_player_valid(player, 0, 1)) {
+      if(!(player istouching(vol_apd_console) && player useButtonPressed()) && zm_utility::is_player_valid(player, 0, 1)) {
         b_wait = 1;
       }
     }
@@ -486,7 +486,7 @@ function_3b0da1a8(str_hint) {
 
   while(b_wait) {
     foreach(player in getplayers()) {
-      if(player istouching(vol_apd_console) && player usebuttonpressed() && zm_utility::is_player_valid(player, 0, 1)) {
+      if(player istouching(vol_apd_console) && player useButtonPressed() && zm_utility::is_player_valid(player, 0, 1)) {
         b_wait = 0;
       }
     }

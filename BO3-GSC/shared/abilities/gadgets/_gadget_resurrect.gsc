@@ -231,7 +231,7 @@ function wait_for_activate(msg) {
   self endon("game_ended");
   self endon(msg);
   while(true) {
-    if(self offhandspecialbuttonpressed()) {
+    if(self offhandspecialbuttonPressed()) {
       self flagsys::set("gadget_resurrect_activated");
       self notify(msg);
     }
@@ -409,13 +409,13 @@ function watch_rejack_suicide() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait(1);
   }
   if(isDefined(self.laststand) && self.laststand) {
     starttime = gettime();
     while(true) {
-      if(!self usebuttonpressed()) {
+      if(!self useButtonPressed()) {
         starttime = gettime();
       }
       if((starttime + 500) < gettime()) {
@@ -441,12 +441,12 @@ function watch_rejack_activate_requested() {
   self endon("disconnect");
   self endon("death");
   level endon("game_ended");
-  while(self offhandspecialbuttonpressed()) {
+  while(self offhandspecialbuttonPressed()) {
     wait(0.05);
   }
   self.rejack_activate_requested = 0;
   while(!self.rejack_activate_requested) {
-    if(self offhandspecialbuttonpressed()) {
+    if(self offhandspecialbuttonPressed()) {
       self.rejack_activate_requested = 1;
     }
     wait(0.05);

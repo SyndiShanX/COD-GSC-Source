@@ -5,14 +5,14 @@
 
 func_10690(var_0) {
   if(!isDefined(var_0)) {
-    foreach(var_2 in scripts\engine\utility::getstructarray("corpse_struct", "targetname")) {
+    foreach(var_2 in scripts\engine\utility::getStructArray("corpse_struct", "targetname")) {
       var_2 func_1068F();
     }
 
     return;
   }
 
-  foreach(var_4 in scripts\engine\utility::getstructarray("corpse_struct", "targetname")) {
+  foreach(var_4 in scripts\engine\utility::getStructArray("corpse_struct", "targetname")) {
     if(isDefined(var_4.script_noteworthy) && var_4.script_noteworthy == var_2) {
       var_4 func_1068F();
     }
@@ -732,7 +732,7 @@ func_C8ED(var_0, var_1) {
 }
 
 func_F5B1(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "player":
@@ -1330,7 +1330,7 @@ func_A761(var_0, var_1, var_2) {
     level.var_5A91 = [];
   }
 
-  var_3 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_0, "targetname");
   foreach(var_5 in var_3) {
     var_5 thread func_A764(var_0, var_1, var_2);
   }
@@ -1932,7 +1932,7 @@ func_D35D(var_0) {
     return 0;
   }
 
-  if(level.player adsbuttonpressed() && scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin, cos(5))) {
+  if(level.player adsButtonPressed() && scripts\engine\utility::within_fov(level.player.origin, level.player getplayerangles(), var_0.origin, cos(5))) {
     if(scripts\sp\detonategrenades::func_385C(level.player getEye(), var_0)) {
       return 1;
     }
@@ -2226,7 +2226,7 @@ func_BE3C(var_0, var_1, var_2, var_3, var_4) {
 
 func_6F30() {
   func_95E7();
-  var_0 = scripts\engine\utility::getstructarray("fling_object", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fling_object", "targetname");
   foreach(var_2 in var_0) {
     var_2 thread func_6F2E();
   }

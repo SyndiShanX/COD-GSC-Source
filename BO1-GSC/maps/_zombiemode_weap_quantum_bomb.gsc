@@ -340,7 +340,7 @@ quantum_bomb_player_teleport_result(position) {
   }
 }
 quantum_bomb_teleport_player(player) {
-  black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
+  black_hole_teleport_structs = getStructArray("struct_black_hole_teleport", "targetname");
   chosen_spot = undefined;
   if(isDefined(level._special_blackhole_bomb_structs)) {
     black_hole_teleport_structs = [[level._special_blackhole_bomb_structs]]();

@@ -725,7 +725,7 @@ custom_add_weapons() {
     add_zombie_weapon_prison("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
 }
 
-include_weapons() {
+#include_weapons() {
   include_weapon("knife_zm", 0);
   include_weapon("knife_zm_alcatraz", 0);
   include_weapon("spoon_zm_alcatraz", 0);
@@ -861,7 +861,7 @@ add_zombie_weapon_prison(weapon_name, upgrade_name, hint, cost, weaponvo, weapon
     [[level.devgui_add_weapon]](weapon_name, upgrade_name, hint, cost, weaponvo, weaponvoresp, ammo_cost);
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -869,7 +869,7 @@ include_powerups() {
   include_powerup("fire_sale");
 }
 
-include_equipment_for_level() {
+#include_equipment_for_level() {
   include_equipment("alcatraz_shield_zm");
 }
 
@@ -887,7 +887,7 @@ working_zone_init() {
   flag_set("always_on");
 
   if(is_gametype_active("zgrief")) {
-    a_s_spawner = getstructarray("zone_cellblock_west_roof_spawner", "targetname");
+    a_s_spawner = getStructArray("zone_cellblock_west_roof_spawner", "targetname");
 
     foreach(spawner in a_s_spawner) {
       if(isDefined(spawner.script_parameters) && spawner.script_parameters == "zclassic_prison")

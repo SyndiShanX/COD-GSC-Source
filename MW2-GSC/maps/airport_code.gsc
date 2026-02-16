@@ -6915,7 +6915,7 @@ ap_teleport_player(name) {
   if(!isDefined(name))
     name = level.start_point;
 
-  array = getstructarray("start_point", "targetname");
+  array = getStructArray("start_point", "targetname");
 
   nodes = [];
   foreach(ent in array) {

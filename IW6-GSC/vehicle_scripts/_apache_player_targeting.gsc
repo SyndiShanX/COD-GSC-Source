@@ -247,7 +247,7 @@ hud_outline_enable_withinview(var_0, var_1) {
 
   while(var_3) {
     wait 0.05;
-    var_4 = (target_isincircle(self, level.player, 66, 130) || distancesquared(level.player getEye(), self.origin) < 9000000) && (level.player attackbuttonpressed() || level.player fragbuttonpressed());
+    var_4 = (target_isincircle(self, level.player, 66, 130) || distancesquared(level.player getEye(), self.origin) < 9000000) && (level.player attackButtonPressed() || level.player fragButtonPressed());
     var_3 = isDefined(level.player.riding_heli);
 
     if(var_2) {

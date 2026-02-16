@@ -92,7 +92,7 @@ func_5F16() {
   var_0 = level.var_EBBB;
   var_0.objective_playermask_showto = 32;
   for(;;) {
-    if(level.player usebuttonpressed()) {
+    if(level.player useButtonPressed()) {
       var_1 = func_11A7E();
       if(isDefined(var_1)) {
         var_0 give_mp_super_weapon(var_1);
@@ -563,7 +563,7 @@ func_C84D(var_0, var_1) {
   }
 
   level.var_C845.speakers[0] thread func_C84E(var_0);
-  var_2 = scripts\engine\utility::getstructarray("pa_speaker", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("pa_speaker", "targetname");
   while(level.var_C845.is_playing) {
     var_2 = sortbydistance(var_2, level.player.origin);
     foreach(var_6, var_4 in level.var_C845.speakers) {
@@ -1700,7 +1700,7 @@ func_11B3F() {
   level.var_11B30.var_113F2.angles = var_4.angles;
   level.var_11B30.var_113F2 setModel("tag_flash");
   level.var_11B30.var_113F2 linkto(level.var_11B30);
-  var_5 = scripts\engine\utility::getstructarray(level.var_11B30.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(level.var_11B30.target, "targetname");
   level.var_11B30.var_C058 = [];
   foreach(var_7 in var_5) {
     var_7.offset = rotatevectorinverted(var_7.origin - level.var_11B30.origin, level.var_11B30.angles);
@@ -2508,7 +2508,7 @@ func_CFA3(var_0) {
   thread func_CFCD();
   wait(1);
   var_1 = [];
-  foreach(var_3 in scripts\engine\utility::getstructarray("c12_rocket_target", "targetname")) {
+  foreach(var_3 in scripts\engine\utility::getStructArray("c12_rocket_target", "targetname")) {
     var_1[var_1.size] = ::scripts\engine\utility::spawn_script_origin(var_3.origin);
   }
 
@@ -2928,7 +2928,7 @@ func_A9E0() {
   scripts\sp\utility::func_22CD("lastroom_fleer_bridge", 1);
   func_537D("lastroom_destruction_start");
   func_A9E3();
-  var_0 = scripts\engine\utility::getstructarray("lastroom_destruction_end", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("lastroom_destruction_end", "targetname");
   scripts\engine\utility::array_levelthread(var_0, ::func_537C);
 }
 
@@ -3178,7 +3178,7 @@ func_4FAB() {
 }
 
 func_4FA3() {
-  var_0 = scripts\engine\utility::getstructarray("decompress_door_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("decompress_door_struct", "targetname");
   thread scripts\sp\utility::func_1034D("europa_plr_scramblingtofindso");
   var_1 = undefined;
   func_95A3();
@@ -3232,7 +3232,7 @@ func_4FAA(var_0) {
 }
 
 func_95A3() {
-  var_0 = scripts\engine\utility::getstructarray("decompression_path", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("decompression_path", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.path)) {
       continue;
@@ -3310,7 +3310,7 @@ func_48EC(var_0) {
 }
 
 func_78C6(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("decompression_path", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("decompression_path", "targetname");
   foreach(var_3 in var_1) {
     var_3.var_429C = func_78C5(var_3.path, var_0);
   }
@@ -3461,7 +3461,7 @@ func_4F9F() {
 }
 
 func_4F9B() {
-  var_0 = scripts\engine\utility::getstructarray("decompress_side", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("decompress_side", "targetname");
   var_0 = sortbydistance(var_0, level.player.origin);
   var_1 = var_0[0];
   var_2 = "right_decompress";
@@ -3819,7 +3819,7 @@ func_2874() {
   wait(4);
   var_2 = 0;
   var_3 = level.var_289B;
-  var_4 = scripts\engine\utility::getstructarray("base_destruction_point", "targetname");
+  var_4 = scripts\engine\utility::getStructArray("base_destruction_point", "targetname");
   var_5 = 0;
   var_6 = var_4[0];
   while(!scripts\engine\utility::flag("player_holding_on")) {
@@ -3870,7 +3870,7 @@ func_537D(var_0, var_1) {
     wait(var_1);
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
   scripts\engine\utility::array_levelthread(var_2, ::func_537C);
 }
 
@@ -3912,7 +3912,7 @@ func_FB6C() {
 }
 
 func_532E(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("explosion_dust", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("explosion_dust", "targetname");
   if(!isDefined(level.var_532F)) {
     level.var_532F = 1;
     foreach(var_3 in var_1) {
@@ -3967,7 +3967,7 @@ func_10F7F() {
   var_3 = 1000;
   for(;;) {
     wait(0.05);
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       if(level.player getcurrentweapon() == "iw7_steeldragon+europaspeedmod") {
         if(!var_0) {
           var_1 = gettime();
@@ -4071,7 +4071,7 @@ func_DAEC(var_0) {
 }
 
 func_DAED(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("lab_emergency_light", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("lab_emergency_light", "targetname");
   var_2 = [];
   foreach(var_4 in var_1) {
     var_5 = var_4 scripts\engine\utility::spawn_tag_origin();

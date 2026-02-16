@@ -819,7 +819,7 @@ e_02_heli_think() {
   fxanim_reconstruct("gazebo_collapse");
   level thread e_02_gazebo_destruction();
   level waittill("blow_gazebo");
-  a_target_pos = getstructarray("capitol_hill_target", "targetname");
+  a_target_pos = getStructArray("capitol_hill_target", "targetname");
   e_target = spawn("script_origin", a_target_pos[0].origin);
   self set_turret_target(e_target, (0, 0, 0), 1);
   self set_turret_target(e_target, (0, 0, 0), 2);
@@ -848,7 +848,7 @@ e_02_heli_think() {
 }
 
 move_gazebo_target(e_target) {
-  a_target_pos = getstructarray("capitol_hill_target", "targetname");
+  a_target_pos = getStructArray("capitol_hill_target", "targetname");
 
   while(!flag("slums_apache_retreat")) {
     e_target moveto(a_target_pos[randomint(a_target_pos.size)].origin, 3.0);
@@ -980,7 +980,7 @@ e_07_delete_on_goal(goal_node_targetname) {
 
 e_10_zpu_think() {
   self endon("death");
-  a_target_pos = getstructarray("slums_zpu_target", "targetname");
+  a_target_pos = getStructArray("slums_zpu_target", "targetname");
   e_target = spawn("script_origin", a_target_pos[0].origin);
   self setturrettargetent(e_target);
   self thread e_10_zpu_burst_fire();
@@ -1257,7 +1257,7 @@ ambience_alley_fire(flag_ender) {
 }
 
 ambient_alley_fire_think(flag_ender) {
-  a_fire_pos = getstructarray(self.target, "targetname");
+  a_fire_pos = getStructArray(self.target, "targetname");
 
   while(!flag(flag_ender)) {
     self waittill("trigger");

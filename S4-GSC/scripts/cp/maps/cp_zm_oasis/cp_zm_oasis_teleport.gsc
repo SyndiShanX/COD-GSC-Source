@@ -41,7 +41,7 @@ init_teleport_portals(var_0) {
     if(!isDefined(var_3)) {
       return;
     }
-    var_2.a_teleport_destination = scripts\engine\utility::getstructarray(var_3.target, "targetname");
+    var_2.a_teleport_destination = scripts\engine\utility::getStructArray(var_3.target, "targetname");
     var_2.in_cooldown = 0;
     playFXOnTag(level._effect["teleport_portal_red"], var_2._id_605B, "tag_origin");
     var_2._id_605B playLoopSound("zmb_player_portal_lp");

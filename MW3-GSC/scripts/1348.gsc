@@ -170,7 +170,7 @@ _id_405C() {
 
   for(;;) {
     if(level.console) {
-      if(var_0 buttonpressed("BUTTON_A")) {
+      if(var_0 buttonPressed("BUTTON_A")) {
         self notify("briefingskip");
         end();
         return;
@@ -180,7 +180,7 @@ _id_405C() {
       continue;
     }
 
-    if(var_0 attackbuttonpressed()) {
+    if(var_0 attackButtonPressed()) {
       self notify("briefingskip");
       end();
       return;

@@ -426,7 +426,7 @@ _id_9A9D(var_0, var_1) {
     var_3 _meth_80AF();
 
     if(var_3 == var_0) {
-      for(var_5 = 0; var_3 usebuttonpressed() && var_5 < 0.25; var_5 = var_5 + level._id_5F3A) {
+      for(var_5 = 0; var_3 useButtonPressed() && var_5 < 0.25; var_5 = var_5 + level._id_5F3A) {
         waitframe();
       }
 
@@ -819,12 +819,12 @@ _id_9A83(var_0) {
   var_0 endon("disconnect");
   level endon("game_ended");
 
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     waitframe();
   }
 
   for(;;) {
-    if(var_0 usebuttonpressed()) {
+    if(var_0 useButtonPressed()) {
       var_0 _id_9A7E(self);
       break;
     }
@@ -866,7 +866,7 @@ _id_9A98(var_0) {
   while(isDefined(self) && isDefined(self.useownerobj)) {
     self.useownerobj waittill("trigger_progress", var_1);
 
-    for(var_2 = 0; var_0 usebuttonpressed() && var_2 < 0.25; var_2 = var_2 + level._id_5F3A) {
+    for(var_2 = 0; var_0 useButtonPressed() && var_2 < 0.25; var_2 = var_2 + level._id_5F3A) {
       waitframe();
     }
 
@@ -1113,7 +1113,7 @@ _id_9A91(var_0) {
   }
 
   while(var_0 _meth_81F4()) {
-    while(var_0 attackbuttonpressed()) {
+    while(var_0 attackButtonPressed()) {
       self.streakinfo._id_DA63++;
       self.ammocount--;
       var_0 setclientomnvar("ui_killstreak_weapon_1_ammo", self.ammocount);

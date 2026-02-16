@@ -1243,7 +1243,7 @@ useholdthinkloop(var_0) {
   var_0 endon("enter_last_stand");
   var_0 endon("stop_useHoldThinkLoop");
 
-  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime) {
+  while(!level.gameended && isDefined(self) && maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime) {
     self.curprogress = self.curprogress + 50 * self.userate;
 
     if(isDefined(self.objectivescaler)) {
@@ -1962,7 +1962,7 @@ initcapacitors() {
 }
 
 capacitormetersinit() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     switch (var_2.script_noteworthy) {
@@ -2278,7 +2278,7 @@ jumpquest_initgoal() {
 }
 
 jumpquest_initreset() {
-  level.jumpquest.resetlocs = common_scripts\utility::getstructarray("jumpQuest_reset_loc", "targetname");
+  level.jumpquest.resetlocs = common_scripts\utility::getStructArray("jumpQuest_reset_loc", "targetname");
   var_0 = getEntArray("jumpQuest_reset_trigger", "targetname");
 
   foreach(var_2 in var_0) {
@@ -3032,7 +3032,7 @@ stage14_end(var_0) {
 stage11_init() {}
 
 stage11_logic() {
-  var_0 = common_scripts\utility::getstructarray("sqLightPuzzle", "targetname");
+  var_0 = common_scripts\utility::getStructArray("sqLightPuzzle", "targetname");
 
   if(var_0.size == 0) {
     return;
@@ -4465,7 +4465,7 @@ busroundcomplete() {
       level.zmbsqpreviousroundhealth = undefined;
     }
 
-    var_1 = common_scripts\utility::getstructarray("sqBusPlayerSpawner", "targetname");
+    var_1 = common_scripts\utility::getStructArray("sqBusPlayerSpawner", "targetname");
 
     foreach(var_3 in var_1) {
       var_3.used = undefined;
@@ -4720,7 +4720,7 @@ getprefixbycharacterindex(var_0) {
 }
 
 getbuszonecharacterspawns() {
-  var_0 = common_scripts\utility::getstructarray("sqBusPlayerSpawner", "targetname");
+  var_0 = common_scripts\utility::getStructArray("sqBusPlayerSpawner", "targetname");
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -4838,7 +4838,7 @@ teleportplayerstobuszone() {
     var_2 dodamage(var_2.health + 500000, var_2.origin);
   }
 
-  var_4 = common_scripts\utility::getstructarray("sqBusPlayerSpawner", "targetname");
+  var_4 = common_scripts\utility::getStructArray("sqBusPlayerSpawner", "targetname");
 
   if(!isDefined(var_4)) {
     var_4 = [];
@@ -4885,7 +4885,7 @@ teleportfxdelete(var_0) {
 }
 
 teleportplayersback() {
-  var_0 = common_scripts\utility::getstructarray("sqExoCorePlayerSpawner", "targetname");
+  var_0 = common_scripts\utility::getStructArray("sqExoCorePlayerSpawner", "targetname");
 
   if(!isDefined(var_0)) {
     var_0 = [];

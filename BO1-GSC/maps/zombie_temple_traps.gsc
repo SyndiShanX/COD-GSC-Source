@@ -213,7 +213,7 @@ waterfall_trap_init() {
     trapStruct.trap_shake = [];
     trapStruct.water_drop_trigs = [];
     targetEnts = getEntArray(trapStruct.useTrigger.target, "targetname");
-    targetStructs = GetStructArray(trapStruct.useTrigger.target, "targetname");
+    targetStructs = getStructArray(trapStruct.useTrigger.target, "targetname");
     targets = array_combine(targetEnts, targetStructs);
     for(j = 0; j < targets.size; j++) {
       if(!isDefined(targets[j].script_noteworthy)) {

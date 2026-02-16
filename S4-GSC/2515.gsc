@@ -269,7 +269,7 @@ _id_7A28() {
 }
 
 _id_7A20() {
-  var_0 = scripts\engine\utility::getstructarray("hooptytruck_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("hooptytruck_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

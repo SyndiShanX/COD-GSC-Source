@@ -23,9 +23,9 @@ main() {
     }
 
     teleport_pad_init(pad) {
-      telepad = getstructarray("telepad_" + pad, "targetname");
-      telepad_loop = getstructarray("telepad_" + pad + "_looper", "targetname");
-      homepad = getstructarray("homepad", "targetname");
+      telepad = getStructArray("telepad_" + pad, "targetname");
+      telepad_loop = getStructArray("telepad_" + pad + "_looper", "targetname");
+      homepad = getStructArray("homepad", "targetname");
 
       level waittill("tp" + pad);
       array_thread(telepad_loop, ::telepad_loop);
@@ -61,7 +61,7 @@ main() {
     /
 
     pole_fx_audio_init(pad) {
-      pole = getstructarray("pole_fx_" + pad, "targetname");
+      pole = getStructArray("pole_fx_" + pad, "targetname");
       array_thread(pole, ::pole_fx_audio, pad);
     }
 

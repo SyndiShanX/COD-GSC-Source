@@ -300,7 +300,7 @@ _id_1EA2(var_0) {
 }
 
 _id_2121(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   if(getEntArray(var_0, "target").size <= 1) {
     maps\_utility::_id_2122(var_1);
@@ -1611,7 +1611,7 @@ _id_1410(var_0) {
 }
 
 _id_140F(var_0) {
-  return common_scripts\utility::getstructarray(var_0, "targetname");
+  return common_scripts\utility::getStructArray(var_0, "targetname");
 }
 
 _id_21A1(var_0) {
@@ -1926,7 +1926,7 @@ _id_21B0(var_0, var_1) {
       var_0 = getnodearray(self.target, "targetname");
 
       if(!var_0.size) {
-        var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+        var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
         if(!var_0.size) {
           return;

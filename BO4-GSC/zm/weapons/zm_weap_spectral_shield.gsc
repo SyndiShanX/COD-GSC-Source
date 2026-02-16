@@ -764,7 +764,7 @@ function_1b33fb6d(var_155e1cdd) {
     self thread function_d1a7390b(var_155e1cdd);
     self thread function_423e10ee();
 
-    while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && !self fragbuttonpressed() && !self adsbuttonpressed() && !self zm_utility::is_drinking() && !(isDefined(self.var_4154aa8f) && self.var_4154aa8f)) {
+    while(zm_utility::is_player_valid(self) && self attackButtonPressed() && !self fragButtonPressed() && !self adsButtonPressed() && !self zm_utility::is_drinking() && !(isDefined(self.var_4154aa8f) && self.var_4154aa8f)) {
       if(self isweaponlocked(var_155e1cdd) || namespace_fcd611c3::is_active() && !self namespace_fcd611c3::function_26f124d8()) {
         break;
       }
@@ -778,7 +778,7 @@ function_1b33fb6d(var_155e1cdd) {
     self notify(#"hash_7a5ea8904c04f16b");
     self thread function_804309c();
 
-    while(isDefined(self.var_4154aa8f) && self.var_4154aa8f && zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
+    while(isDefined(self.var_4154aa8f) && self.var_4154aa8f && zm_utility::is_player_valid(self) && self attackButtonPressed()) {
       waitframe(1);
     }
 
@@ -1022,7 +1022,7 @@ function_35d74d73(e_attacker) {
 
   var_d64818ae = e_attacker clientfield::get("" + # "spectral_key_beam_flash");
 
-  if(e_attacker attackbuttonpressed() && var_d64818ae === 2) {
+  if(e_attacker attackButtonPressed() && var_d64818ae === 2) {
     e_attacker clientfield::set("" + # "spectral_key_beam_flash", 1);
   }
 
@@ -1069,7 +1069,7 @@ function_986701ac(e_attacker) {
 
   var_d64818ae = e_attacker clientfield::get("" + # "spectral_key_beam_flash");
 
-  if(e_attacker attackbuttonpressed() && var_d64818ae === 2) {
+  if(e_attacker attackButtonPressed() && var_d64818ae === 2) {
     e_attacker clientfield::set("" + # "spectral_key_beam_flash", 1);
   }
 
@@ -1119,7 +1119,7 @@ function_a370d183(e_attacker) {
 
   var_d64818ae = e_attacker clientfield::get("" + # "spectral_key_beam_flash");
 
-  if(e_attacker attackbuttonpressed() && var_d64818ae === 2) {
+  if(e_attacker attackButtonPressed() && var_d64818ae === 2) {
     e_attacker clientfield::set("" + # "spectral_key_beam_flash", 1);
   }
 

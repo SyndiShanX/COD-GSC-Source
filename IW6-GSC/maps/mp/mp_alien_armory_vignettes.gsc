@@ -256,7 +256,7 @@ boss_introduction() {
 gunswap() {
   wait 15.866;
   self unlink();
-  var_0 = common_scripts\utility::getstructarray("item", "targetname");
+  var_0 = common_scripts\utility::getStructArray("item", "targetname");
   var_1 = undefined;
 
   foreach(var_3 in var_0) {

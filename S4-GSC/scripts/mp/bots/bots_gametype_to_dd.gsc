@@ -240,7 +240,7 @@ _id_1093C(var_0, var_1) {
   var_3 = var_2 + var_0 * 1000;
   wait 0.05;
 
-  while(self usebuttonpressed() && gettime() < var_3 && isDefined(self._id_4154) && var_1 != _id_8568(self._id_4154)) {
+  while(self useButtonPressed() && gettime() < var_3 && isDefined(self._id_4154) && var_1 != _id_8568(self._id_4154)) {
     wait 0.05;
   }
 }

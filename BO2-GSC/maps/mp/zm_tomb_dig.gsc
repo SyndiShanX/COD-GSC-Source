@@ -25,7 +25,7 @@ init_shovel() {
   precachemodel("t6_wpn_claymore_world");
   maps\mp\zombies\_zm_audio_announcer::createvox("blood_money", "powerup_blood_money");
   onplayerconnect_callback(::init_shovel_player);
-  a_shovel_pos = getstructarray("shovel_location", "targetname");
+  a_shovel_pos = getStructArray("shovel_location", "targetname");
   a_shovel_zone = [];
 
   foreach(s_shovel_pos in a_shovel_pos) {
@@ -165,7 +165,7 @@ dig_spots_init() {
   flag_wait("start_zombie_round_logic");
   level.n_dig_spots_cur = 0;
   level.n_dig_spots_max = 15;
-  level.a_dig_spots = getstructarray("dig_spot", "targetname");
+  level.a_dig_spots = getStructArray("dig_spot", "targetname");
 
   foreach(s_dig_spot in level.a_dig_spots) {
     if(!isDefined(s_dig_spot.angles))
@@ -562,7 +562,7 @@ increment_player_perk_purchase_limit() {
 ee_zombie_blood_dig() {
   self endon("disconnect");
   n_z_spots_found = 0;
-  a_z_spots = getstructarray("zombie_blood_dig_spot", "targetname");
+  a_z_spots = getStructArray("zombie_blood_dig_spot", "targetname");
   self.t_zombie_blood_dig = spawn("trigger_radius_use", (0, 0, 0), 0, 100, 50);
   self.t_zombie_blood_dig.e_unique_player = self;
   self.t_zombie_blood_dig triggerignoreteam();
@@ -598,7 +598,7 @@ ee_zombie_blood_dig_disconnect_watch() {
   if(isDefined(self.t_zombie_blood_dig))
     self.t_zombie_blood_dig delete();
 
-  a_z_spots = getstructarray("zombie_blood_dig_spot", "targetname");
+  a_z_spots = getStructArray("zombie_blood_dig_spot", "targetname");
 
   foreach(s_pos in a_z_spots) {
     if(isDefined(s_pos.n_player) && s_pos.n_player == self getentitynumber())
@@ -799,7 +799,7 @@ watch_devgui_dig() {
 
     if(getDvar(#"_id_9D237849") == "on") {
       setDvar("test_blood_mounds", "off");
-      a_z_spots = getstructarray("zombie_blood_dig_spot", "targetname");
+      a_z_spots = getStructArray("zombie_blood_dig_spot", "targetname");
 
       foreach(s_spot in a_z_spots) {
         s_spot.m_dig = spawn("script_model", s_spot.origin + vectorscale((0, 0, -1), 40.0));

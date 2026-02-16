@@ -276,7 +276,7 @@ bot_oldschool_handle_pickup_goals() {
   for(;;) {
     wait 0.5;
 
-    if(!isalive(self) || maps\mp\_utility::is_true(self.inlaststand) || maps\mp\bots\_bots_util::bot_is_remote_or_linked() || self usebuttonpressed()) {
+    if(!isalive(self) || maps\mp\_utility::is_true(self.inlaststand) || maps\mp\bots\_bots_util::bot_is_remote_or_linked() || self useButtonPressed()) {
       continue;
     }
     var_1 = maps\mp\bots\_bots_strategy::bot_get_active_tactical_goals_of_type("oldschool_pickup");

@@ -579,7 +579,7 @@ watchEnterAndExit() {
     }
 
     timeUsed = 0;
-    while(owner UseButtonPressed() && !owner FragButtonPressed() && !isDefined(owner.throwingGrenade) && !owner SecondaryOffhandButtonPressed() && !owner IsUsingTurret() && owner IsOnGround() && !owner IsTouching(self.ownerTrigger) && (!isDefined(owner.empGrenaded) || !owner.empGrenaded)) {
+    while(owner useButtonPressed() && !owner fragButtonPressed() && !isDefined(owner.throwingGrenade) && !owner SecondaryOffhandbuttonPressed() && !owner IsUsingTurret() && owner IsOnGround() && !owner IsTouching(self.ownerTrigger) && (!isDefined(owner.empGrenaded) || !owner.empGrenaded)) {
       if(isDefined(owner.isCarrying) && owner.isCarrying) {
         break;
       }
@@ -667,12 +667,12 @@ turret_handlePickup(turret) {
         self.pickup_message_deleted = false;
       }
 
-      if(self UseButtonPressed()) {
+      if(self useButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;
         }
         buttonTime = 0;
-        while(self UseButtonPressed()) {
+        while(self useButtonPressed()) {
           buttonTime += 0.05;
           wait(0.05);
         }
@@ -682,7 +682,7 @@ turret_handlePickup(turret) {
           continue;
         }
         buttonTime = 0;
-        while(!self UseButtonPressed() && buttonTime < 0.5) {
+        while(!self useButtonPressed() && buttonTime < 0.5) {
           buttonTime += 0.05;
           wait(0.05);
         }

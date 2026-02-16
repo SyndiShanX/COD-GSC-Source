@@ -15,7 +15,7 @@ init_nuked_perks() {
   level.perk_arrival_vehicle = getent("perk_arrival_vehicle", "targetname");
   level.perk_arrival_vehicle setModel("tag_origin");
   flag_init("perk_vehicle_bringing_in_perk");
-  structs = getstructarray("zm_perk_machine", "targetname");
+  structs = getStructArray("zm_perk_machine", "targetname");
 
   for(i = 0; i < structs.size; i++)
     structs[i] structdelete();
@@ -45,7 +45,7 @@ init_nuked_perks() {
 
   if(players == 1) {
     level.override_perk_targetname = "zm_perk_machine_override";
-    revive_perk_structs = getstructarray("solo_revive", "targetname");
+    revive_perk_structs = getStructArray("solo_revive", "targetname");
 
     for(i = 0; i < revive_perk_structs.size; i++) {
       random_revive_structs[i] = getstruct(revive_perk_structs[i].target, "targetname");
@@ -67,7 +67,7 @@ init_nuked_perks() {
     level.random_revive_structs[0] thread draw_debug_location();
 
     random_perk_structs = [];
-    perk_structs = getstructarray("zm_random_machine", "script_noteworthy");
+    perk_structs = getStructArray("zm_random_machine", "script_noteworthy");
     perk_structs = array_exclude(perk_structs, revive_perk_structs);
 
     for(i = 0; i < perk_structs.size; i++) {
@@ -94,7 +94,7 @@ init_nuked_perks() {
   } else {
     level.override_perk_targetname = "zm_perk_machine_override";
     random_perk_structs = [];
-    perk_structs = getstructarray("zm_random_machine", "script_noteworthy");
+    perk_structs = getStructArray("zm_random_machine", "script_noteworthy");
 
     for(i = 0; i < perk_structs.size; i++) {
       random_perk_structs[i] = getstruct(perk_structs[i].target, "targetname");

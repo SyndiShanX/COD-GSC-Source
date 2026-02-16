@@ -9,8 +9,8 @@ _id_7AA0() {
   level._id_7D84 = [];
   level._id_0F3F = [];
   level._id_0F40 = [];
-  level._id_7A92 = scripts\engine\utility::getstructarray("hostage", "targetname");
-  level._id_7A90 = scripts\engine\utility::getstructarray("hostage_exit", "targetname");
+  level._id_7A92 = scripts\engine\utility::getStructArray("hostage", "targetname");
+  level._id_7A90 = scripts\engine\utility::getStructArray("hostage_exit", "targetname");
 
   foreach(var_1 in level._id_7A90) {
     level._id_A863[level._id_A863.size] = spawn("trigger_radius", var_1.origin, 0, 90, 128);
@@ -898,13 +898,13 @@ _id_10B7F(var_0, var_1, var_2) {
   var_4 = level._id_5F3A;
 
   while(self._id_32B9) {
-    if(!var_0 usebuttonpressed()) {
+    if(!var_0 useButtonPressed()) {
       var_3 = 1;
     }
 
     var_5 = 0;
 
-    while(var_3 && var_0 usebuttonpressed()) {
+    while(var_3 && var_0 useButtonPressed()) {
       var_5 = var_5 + var_4;
 
       if(var_5 > 0.3) {

@@ -333,7 +333,7 @@ start_base() {
   friendlies = array_combine(friendlies, friendlies2);
 
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("base_start_friendly", "targetname");
+  friendly_starts = getStructArray("base_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -361,7 +361,7 @@ start_defend_sub() {
   friendlies = array_combine(friendlies, friendlies2);
 
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("defend_sub_start_friendly", "targetname");
+  friendly_starts = getStructArray("defend_sub_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -497,7 +497,7 @@ start_slide() {
 
   friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("slide_start_friendly", "targetname");
+  friendly_starts = getStructArray("slide_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -628,7 +628,7 @@ start_woods() {
 
   friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("woods_start_friendly", "targetname");
+  friendly_starts = getStructArray("woods_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -652,7 +652,7 @@ start_midwoods() {
 
   friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("midwoods_start_friendly", "targetname");
+  friendly_starts = getStructArray("midwoods_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -744,7 +744,7 @@ start_ridge() {
 
   friendlies = getEntArray("start_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("ridge_start_friendly", "targetname");
+  friendly_starts = getStructArray("ridge_start_friendly", "targetname");
 
   for(i = 0; i < friendlies.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -1234,7 +1234,7 @@ handle_defend_sub() {
 //	friendlies = array_combine( friendlies, friendlies2 );
 //	
 //	//array_thread( friendlies, ::spawn_ai );
-//	friendly_starts = getstructarray("sub_start_friendly", "targetname" );
+//	friendly_starts = getStructArray("sub_start_friendly", "targetname" );
 //	
 //	for( i = 0 ; i < friendlies.size ; i++ )
 //	{
@@ -1416,7 +1416,7 @@ handle_defend_sub() {
 //	//friendlies = array_combine( friendlies, friendlies2 );
 //	
 //	//array_thread( friendlies, ::spawn_ai );
-//	friendly_starts = getstructarray("exit_sub_start_friendly", "targetname" );
+//	friendly_starts = getStructArray("exit_sub_start_friendly", "targetname" );
 //	
 //	for( i = 0 ; i < friendlies.size ; i++ )
 //	{

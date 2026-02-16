@@ -176,15 +176,15 @@ c4_watchforaltdetonation() {
   level endon("game_ended");
   self notify("watchForAltDetonation");
   self endon("watchForAltDetonation");
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     scripts\engine\utility::waitframe();
   }
 
   var_0 = 0;
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = 0;
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + 0.05;
         wait(0.05);
       }
@@ -194,7 +194,7 @@ c4_watchforaltdetonation() {
       }
 
       var_0 = 0;
-      while(!self usebuttonpressed() && var_0 < 0.25) {
+      while(!self useButtonPressed() && var_0 < 0.25) {
         var_0 = var_0 + 0.05;
         wait(0.05);
       }

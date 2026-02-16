@@ -1037,12 +1037,12 @@ _id_9091(var_0) {
     var_0 setclientomnvar("zm_hint_index", var_1);
   }
 
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     waitframe();
   }
 
   for(;;) {
-    if(var_0 _id_30F7() && var_0 usebuttonpressed() && !istrue(var_0.b_force_block_revive)) {
+    if(var_0 _id_30F7() && var_0 useButtonPressed() && !istrue(var_0.b_force_block_revive)) {
       var_0._id_86B3 = 1;
       var_2 = _id_6705(var_0, var_0, self.origin, var_0 _id_6706(var_0));
 
@@ -2089,11 +2089,11 @@ _id_DAC7(var_0) {
     return 1;
   }
 
-  return !level.gameended && var_0 scripts\cp_mp\utility\player_utility::_isalive() && var_0 usebuttonpressed() && (var_0 == self.owner || !_id_B4EF(var_0) && var_0 _id_310C(self.owner, self));
+  return !level.gameended && var_0 scripts\cp_mp\utility\player_utility::_isalive() && var_0 useButtonPressed() && (var_0 == self.owner || !_id_B4EF(var_0) && var_0 _id_310C(self.owner, self));
 }
 
 _id_DAA1(var_0) {
-  return !level.gameended && var_0 scripts\cp_mp\utility\player_utility::_isalive() && var_0 usebuttonpressed() && !_id_B4EF(var_0);
+  return !level.gameended && var_0 scripts\cp_mp\utility\player_utility::_isalive() && var_0 useButtonPressed() && !_id_B4EF(var_0);
 }
 
 _id_0D94(var_0) {

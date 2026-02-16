@@ -501,7 +501,7 @@ alien_death_trail(var_0) {
 
 do_trail_death() {
   wait 0.1;
-  var_0 = common_scripts\utility::get_array_of_closest(self.origin, common_scripts\utility::getstructarray("bio_path", "targetname"));
+  var_0 = common_scripts\utility::get_array_of_closest(self.origin, common_scripts\utility::getStructArray("bio_path", "targetname"));
   var_1 = distance(self.origin, var_0[0].origin);
   playFXOnTag(level._effect["bio_trail"], self, "tag_origin");
   var_2 = 1500;
@@ -538,7 +538,7 @@ do_trail_death() {
   }
 
   for(;;) {
-    var_6 = common_scripts\utility::getstructarray(var_3.target, "targetname");
+    var_6 = common_scripts\utility::getStructArray(var_3.target, "targetname");
     var_7 = common_scripts\utility::random(var_6);
     var_1 = distance(var_3.origin, var_7.origin);
     var_5 = var_1 / var_2;

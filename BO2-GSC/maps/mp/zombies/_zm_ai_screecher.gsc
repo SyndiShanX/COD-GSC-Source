@@ -920,10 +920,10 @@ screecher_melee_button_watcher() {
   while(isDefined(self.linked_ent)) {
     player = self.linked_ent;
 
-    if(player meleebuttonpressed() && player ismeleeing()) {
+    if(player meleeButtonPressed() && player ismeleeing()) {
       self screecher_melee_damage(player);
 
-      while(player meleebuttonpressed() || player ismeleeing())
+      while(player meleeButtonPressed() || player ismeleeing())
         wait 0.05;
     }
 

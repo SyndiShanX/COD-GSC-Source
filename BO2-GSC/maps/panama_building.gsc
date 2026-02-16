@@ -139,7 +139,7 @@ clinic_light_shake() {
   level.player playSound("evt_hospital_shake_0");
   exploder(621);
   earthquake(0.5, 1.5, level.player.origin, 250);
-  a_structs = getstructarray("clinic_move_light", "targetname");
+  a_structs = getStructArray("clinic_move_light", "targetname");
 
   foreach(s_pos in a_structs) {
     physicsexplosioncylinder(s_pos.origin, 200, 190, 0.5);
@@ -382,8 +382,8 @@ building_stairwell_soldier_fire(str_start_struct, str_end_struct) {
   n_burst_delay_max = 0.15;
   n_post_burst_delay_min = 0.2;
   n_post_burst_delay_max = 0.3;
-  a_start_structs = getstructarray(str_start_struct, "targetname");
-  a_end_structs = getstructarray(str_end_struct, "targetname");
+  a_start_structs = getStructArray(str_start_struct, "targetname");
+  a_end_structs = getStructArray(str_end_struct, "targetname");
 
   while(true) {
     n_burst_count = randomintrange(n_burst_count_min, n_burst_count_max);

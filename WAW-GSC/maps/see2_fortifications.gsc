@@ -271,7 +271,7 @@ do_flame_bunker(bunker_name, event, front_death, side_death, rear_death, kill_dr
 
   tank_Trigger thread debug_line_on_damage();
 
-  anim_nodes = GetStructArray(bunker_name + " anim node", "script_noteworthy");
+  anim_nodes = getStructArray(bunker_name + " anim node", "script_noteworthy");
   anim_node = anim_nodes[0];
   front_guard = undefined;
   side_guard = undefined;

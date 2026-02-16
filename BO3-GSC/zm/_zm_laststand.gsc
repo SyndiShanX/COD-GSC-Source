@@ -451,7 +451,7 @@ function suicide_trigger_think() {
   level endon("stop_suicide_trigger");
   self thread laststand::clean_up_suicide_hud_on_end_game();
   self thread laststand::clean_up_suicide_hud_on_bled_out();
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait(1);
   }
   if(!isDefined(self.suicideprompt)) {
@@ -554,7 +554,7 @@ function can_suicide() {
 }
 
 function is_suiciding(revivee) {
-  return self usebuttonpressed() && can_suicide();
+  return self useButtonPressed() && can_suicide();
 }
 
 function revive_trigger_spawn() {
@@ -739,9 +739,9 @@ function is_reviving(e_revivee, t_secondary) {
     return 1;
   }
   if(isDefined(t_secondary)) {
-    return self usebuttonpressed() && self can_revive(e_revivee, 1, 1) && self istouching(t_secondary);
+    return self useButtonPressed() && self can_revive(e_revivee, 1, 1) && self istouching(t_secondary);
   }
-  return self usebuttonpressed() && can_revive(e_revivee);
+  return self useButtonPressed() && can_revive(e_revivee);
 }
 
 function is_reviving_any() {

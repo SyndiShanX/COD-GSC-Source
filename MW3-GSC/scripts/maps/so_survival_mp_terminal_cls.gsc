@@ -28,7 +28,7 @@ main() {
 }
 
 break_windows() {
-  var_0 = common_scripts\utility::getstructarray("window_break", "targetname");
+  var_0 = common_scripts\utility::getStructArray("window_break", "targetname");
 
   foreach(var_2 in var_0) {}
   glassradiusdamage(var_2.origin, 64.0, 500, 500);

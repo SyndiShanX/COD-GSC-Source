@@ -184,10 +184,10 @@ add_vision_set(vision_set_name) {
 }
 
 button_down(btn, btn2) {
-  pressed = level.players[0] ButtonPressed(btn);
+  pressed = level.players[0] buttonPressed(btn);
 
   if(!pressed) {
-    pressed = level.players[0] ButtonPressed(btn2);
+    pressed = level.players[0] buttonPressed(btn2);
   }
 
   if(!isDefined(level.buttons[btn])) {

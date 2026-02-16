@@ -1041,7 +1041,7 @@ waittillremoteturretleavereturn() {
   for(;;) {
     var_1 = 0;
 
-    while(var_0 usebuttonpressed()) {
+    while(var_0 useButtonPressed()) {
       var_1 = var_1 + 0.05;
 
       if(var_1 > 1 && var_0 playercanuseturret(self)) {
@@ -1055,7 +1055,7 @@ waittillremoteturretleavereturn() {
 }
 
 playercanuseturret(var_0) {
-  if(self fragbuttonpressed() || isDefined(self.throwinggrenade) || self secondaryoffhandbuttonpressed()) {
+  if(self fragButtonPressed() || isDefined(self.throwinggrenade) || self secondaryoffhandbuttonPressed()) {
     return 0;
   }
 
@@ -1160,7 +1160,7 @@ player_handleturretpickup(var_0) {
     if(maps\mp\_utility::isreallyalive(self) && self istouching(var_0.ownertrigger) && !isDefined(var_0.carriedby) && self isonground()) {
       var_2 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         if(!maps\mp\_utility::isreallyalive(self)) {
           break;
         }
@@ -1169,7 +1169,7 @@ player_handleturretpickup(var_0) {
           break;
         }
 
-        if(self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || isDefined(self.throwinggrenade)) {
+        if(self fragButtonPressed() || self secondaryoffhandbuttonPressed() || isDefined(self.throwinggrenade)) {
           break;
         }
 
@@ -1249,13 +1249,13 @@ player_handleturretrippable(var_0) {
     }
 
     if(maps\mp\_utility::isreallyalive(self) && self istouching(var_0.ownertrigger) && !isDefined(var_0.carriedby) && self isonground()) {
-      if(self usebuttonpressed()) {
+      if(self useButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;
         }
         var_1 = 0;
 
-        while(self usebuttonpressed()) {
+        while(self useButtonPressed()) {
           var_1 = var_1 + 0.05;
           wait 0.05;
         }
@@ -1265,7 +1265,7 @@ player_handleturretrippable(var_0) {
         }
         var_1 = 0;
 
-        while(!self usebuttonpressed() && var_1 < 0.5) {
+        while(!self useButtonPressed() && var_1 < 0.5) {
           var_1 = var_1 + 0.05;
           wait 0.05;
         }

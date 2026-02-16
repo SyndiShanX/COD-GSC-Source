@@ -374,17 +374,17 @@ set_flags_on_input() {
       common_scripts\utility::flag_clear("forward_pressed");
     }
 
-    if(level.player jumpbuttonpressed())
+    if(level.player jumpbuttonPressed())
       common_scripts\utility::flag_set("jump_pressed");
     else
       common_scripts\utility::flag_clear("jump_pressed");
 
-    if(level.player attackbuttonpressed())
+    if(level.player attackButtonPressed())
       common_scripts\utility::flag_set("attack_pressed");
     else
       common_scripts\utility::flag_clear("attack_pressed");
 
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       common_scripts\utility::flag_set("use_pressed");
     else
       common_scripts\utility::flag_clear("use_pressed");

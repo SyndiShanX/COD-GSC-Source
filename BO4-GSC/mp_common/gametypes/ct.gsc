@@ -98,7 +98,7 @@ function_377cd9ae() {
   level endon(#"combattraining_logic_finished");
 
   while(!level.gameended) {
-    while(!self actionslotfourbuttonpressed()) {
+    while(!self actionslotfourbuttonPressed()) {
       waitframe(1);
     }
 
@@ -118,7 +118,7 @@ function_78aff698() {
   level endon(#"combattraining_logic_finished");
 
   while(!level.gameended) {
-    while(!self actionslotthreebuttonpressed()) {
+    while(!self actionslotthreebuttonPressed()) {
       waitframe(1);
     }
 
@@ -143,7 +143,7 @@ j_fore_le_01() {
   e_player thread function_78aff698();
 
   while(!level.gameended) {
-    while(!e_player actionslotonebuttonpressed()) {
+    while(!e_player actionslotonebuttonPressed()) {
       waitframe(1);
     }
 
@@ -154,7 +154,7 @@ j_fore_le_01() {
 
     waitframe(1);
 
-    while(!e_player actionslottwobuttonpressed()) {
+    while(!e_player actionslottwobuttonPressed()) {
       waitframe(1);
     }
 

@@ -7,7 +7,7 @@ init() {
   setdvarifuninitialized("#x3c0cd1f9e5d943339", 0);
   waitframe();
   level._id_CC70 = spawnStruct();
-  level._id_CC70._id_CC70 = scripts\engine\utility::getstructarray("screens_system", "script_noteworthy");
+  level._id_CC70._id_CC70 = scripts\engine\utility::getStructArray("screens_system", "script_noteworthy");
 
   if(!isDefined(level._id_CC70._id_CC70) || level._id_CC70._id_CC70.size <= 0) {
     return;

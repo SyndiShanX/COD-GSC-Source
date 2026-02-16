@@ -67,7 +67,7 @@ _id_0D7F() {
     scripts\mp\gametypes\br_plunder::_id_D54C(var_8);
   }
 
-  var_9 = scripts\engine\utility::getstructarray("br_respawn_station", "targetname");
+  var_9 = scripts\engine\utility::getStructArray("br_respawn_station", "targetname");
 
   for(var_10 = 0; var_10 < var_9.size; var_10++) {
     wait(var_0);
@@ -75,7 +75,7 @@ _id_0D7F() {
   }
 
   var_11 = getdvarint("#x3dc55207d8be70603", var_1);
-  var_12 = scripts\engine\utility::getstructarray("br_mobile_armory_location", "targetname");
+  var_12 = scripts\engine\utility::getStructArray("br_mobile_armory_location", "targetname");
 
   if(var_12.size > 0) {
     var_13 = _id_0C09(var_12, var_11);
@@ -87,7 +87,7 @@ _id_0D7F() {
   }
 
   var_14 = getdvarint("#x3153b72b463993f87", var_2);
-  var_15 = scripts\engine\utility::getstructarray("br_satellite_truck_location", "targetname");
+  var_15 = scripts\engine\utility::getStructArray("br_satellite_truck_location", "targetname");
 
   if(var_15.size > 0) {
     var_16 = _id_0C09(var_15, var_14);

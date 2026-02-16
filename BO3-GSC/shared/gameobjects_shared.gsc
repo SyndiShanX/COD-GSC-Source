@@ -896,13 +896,13 @@ function manual_drop_think() {
   self endon("death");
   self endon("drop_object");
   for(;;) {
-    while(self attackbuttonpressed() || self fragbuttonpressed() || self secondaryoffhandbuttonpressed() || self meleebuttonpressed()) {
+    while(self attackButtonPressed() || self fragButtonPressed() || self secondaryoffhandbuttonPressed() || self meleeButtonPressed()) {
       wait(0.05);
     }
-    while(!self attackbuttonpressed() && !self fragbuttonpressed() && !self secondaryoffhandbuttonpressed() && !self meleebuttonpressed()) {
+    while(!self attackButtonPressed() && !self fragButtonPressed() && !self secondaryoffhandbuttonPressed() && !self meleeButtonPressed()) {
       wait(0.05);
     }
-    if(isDefined(self.carryobject) && !self usebuttonpressed()) {
+    if(isDefined(self.carryobject) && !self useButtonPressed()) {
       self.carryobject thread set_dropped();
     }
   }
@@ -1677,7 +1677,7 @@ function continue_hold_think_loop(player, waitforweapon, timedout, usetime) {
   if(self.curprogress >= usetime) {
     return false;
   }
-  if(!player usebuttonpressed()) {
+  if(!player useButtonPressed()) {
     return false;
   }
   if(player.throwinggrenade) {

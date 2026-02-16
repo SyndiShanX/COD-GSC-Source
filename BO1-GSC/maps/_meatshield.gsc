@@ -298,7 +298,7 @@ idle_loop(which_idle) {
   self endon("_meatshield:death");
   self endon("meatshield_active");
   while(true) {
-    if(self.player AdsButtonPressed()) {
+    if(self.player adsButtonPressed()) {
       self.align thread anim_loop_aligned(self.anim_ents, which_idle + "_steady");
       self.player waittill("!_ads_button_pressed");
     } else {
@@ -315,7 +315,7 @@ ms_timer() {
     flag_wait("timer_on");
     self.time_left = level._meatshield_timer;
     for(i = level._meatshield_timer; i >= -1; i--) {
-      if(self.player AttackButtonPressed()) {
+      if(self.player attackButtonPressed()) {
         fired_gun = true;
       }
       if(i < level._meatshield_timer * NON_FIRE_IDLE_PERCENT && !fired_gun && level._meatshield_kill_player == true) {
@@ -475,10 +475,10 @@ ads_loop() {
   self thread ads_loop_reallow_aim_assist();
   self.player setAdsWidthAndLerp(400, 10);
   while(true) {
-    if(self.player AdsButtonPressed()) {
+    if(self.player adsButtonPressed()) {
       self.player notify("_ads_button_pressed");
     }
-    while(self.player AdsButtonPressed()) {
+    while(self.player adsButtonPressed()) {
       wait .05;
     }
     self.player notify("!_ads_button_pressed");
@@ -492,9 +492,9 @@ test() {
 }
 link_loop() {
   while(true) {
-    if(self ButtonPressed("DPAD_DOWN")) {
+    if(self buttonPressed("DPAD_DOWN")) {
       self Unlink();
-    } else if(self ButtonPressed("DPAD_UP")) {
+    } else if(self buttonPressed("DPAD_UP")) {
       if(isDefined(self.player_hands)) {
         self link_player();
       }
@@ -504,7 +504,7 @@ link_loop() {
 }
 toggle_timer() {
   while(true) {
-    while(!self ButtonPressed("DPAD_RIGHT")) {
+    while(!self buttonPressed("DPAD_RIGHT")) {
       wait .05;
     }
     flag_toggle("timer_on");

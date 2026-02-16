@@ -545,7 +545,7 @@ black_hole_time_before_teleport(ent_player, str_endon) {
   if(!BulletTracePassed(ent_player getEye(), self.origin + (0, 0, 65), false, ent_player)) {
     return;
   }
-  black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
+  black_hole_teleport_structs = getStructArray("struct_black_hole_teleport", "targetname");
   chosen_spot = undefined;
   if(isDefined(level._special_blackhole_bomb_structs)) {
     black_hole_teleport_structs = [[level._special_blackhole_bomb_structs]]();

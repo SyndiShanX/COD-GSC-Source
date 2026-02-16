@@ -524,7 +524,7 @@ trap_can_player_trigger(player) {
 tree_bridges() {
   PrecacheMpAnim("mp_prisonbreak_tree_fall");
 
-  bridges = getstructarray("tree_bridge", "targetname");
+  bridges = getStructArray("tree_bridge", "targetname");
   array_thread(bridges, ::tree_bridge_init);
 }
 
@@ -536,7 +536,7 @@ tree_bridge_init() {
 
   self.linked_ents = [];
   targets = getEntArray(self.target, "targetname");
-  structs = getstructarray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
 
   targets = array_combine(targets, structs);
 
@@ -687,7 +687,7 @@ log_piles() {
 
   wait .05;
 
-  piles = getstructArray("logpile", "targetname");
+  piles = getStructArray("logpile", "targetname");
   array_thread(piles, ::log_pile_init);
 }
 
@@ -723,7 +723,7 @@ log_pile_init() {
     self.angles = (0, 0, 0);
 
   targets = getEntArray(self.target, "targetname");
-  targets = array_combine(targets, getstructarray(self.target, "targetname"));
+  targets = array_combine(targets, getStructArray(self.target, "targetname"));
 
   foreach(target_ent in targets) {
     if(!isDefined(target_ent.script_noteworthy)) {
@@ -994,7 +994,7 @@ falling_rock_init() {
   self.clip_move = [];
 
   targets = getEntArray(self.target, "targetname");
-  structs = getstructarray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
 
   targets = array_combine(targets, structs);
   foreach(target in targets) {

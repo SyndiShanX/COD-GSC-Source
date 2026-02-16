@@ -414,13 +414,13 @@ turret_handlePickup(turret) {
       !isDefined(turret.inUseBy) &&
       !isDefined(turret.carriedBy) &&
       self IsOnGround()) {
-      if(self UseButtonPressed()) {
+      if(self useButtonPressed()) {
         if(isDefined(self.using_remote_turret) && self.using_remote_turret) {
           continue;
         }
 
         buttonTime = 0;
-        while(self UseButtonPressed()) {
+        while(self useButtonPressed()) {
           buttonTime += 0.05;
           wait(0.05);
         }
@@ -431,7 +431,7 @@ turret_handlePickup(turret) {
         }
 
         buttonTime = 0;
-        while(!self UseButtonPressed() && buttonTime < 0.5) {
+        while(!self useButtonPressed() && buttonTime < 0.5) {
           buttonTime += 0.05;
           wait(0.05);
         }

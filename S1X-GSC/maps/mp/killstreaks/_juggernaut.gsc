@@ -787,7 +787,7 @@ handleCoopShooting(data, turret, player) {
       continue;
     }
 
-    if(turret.owner AttackButtonPressed() && !turret IsTurretOverheated()) {
+    if(turret.owner attackButtonPressed() && !turret IsTurretOverheated()) {
       turret turretShootBlank(turret.baseOwner);
       wait fireTime;
       continue;
@@ -2495,13 +2495,13 @@ state_chaingun_pump() {
   if(current_state == "ready") {
     if(self.mechUIState.chaingun.overheated) {
       set_mech_chaingun_state("overheat");
-    } else if(self AttackButtonPressed()) {
+    } else if(self attackButtonPressed()) {
       set_mech_chaingun_state("firing");
     }
   } else if(current_state == "firing") {
     if(self.mechUIState.chaingun.overheated) {
       set_mech_chaingun_state("overheat");
-    } else if(!self AttackButtonPressed()) {
+    } else if(!self attackButtonPressed()) {
       set_mech_chaingun_state("ready");
     }
   } else if(current_state == "overheat" && !self.mechUIState.chaingun.overheated) {
@@ -2723,7 +2723,7 @@ self_destruct_goliath() {
   button_hold_time = 0;
 
   while(true) {
-    if(self UseButtonPressed()) {
+    if(self useButtonPressed()) {
       button_hold_time += 0.05;
       if(button_hold_time > 1.0) {
         self maps\mp\_snd_common_mp::snd_message("goliath_self_destruct");

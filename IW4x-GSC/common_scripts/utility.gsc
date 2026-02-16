@@ -739,7 +739,7 @@ getstruct(name, type) {
   return array[0];
 }
 
-getstructarray(name, type) {
+getStructArray(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];
@@ -1270,7 +1270,7 @@ run_thread_on_targetname(msg, func, param1, param2, param3) {
   array = getEntArray(msg, "targetname");
   array_thread(array, func, param1, param2, param3);
 
-  array = getstructarray(msg, "targetname");
+  array = getStructArray(msg, "targetname");
   array_thread(array, func, param1, param2, param3);
 
   array = call[[level.getNodeArrayFunction]](msg, "targetname");
@@ -1284,7 +1284,7 @@ run_thread_on_noteworthy(msg, func, param1, param2, param3) {
   array = getEntArray(msg, "script_noteworthy");
   array_thread(array, func, param1, param2, param3);
 
-  array = getstructarray(msg, "script_noteworthy");
+  array = getStructArray(msg, "script_noteworthy");
   array_thread(array, func, param1, param2, param3);
 
   array = call[[level.getNodeArrayFunction]](msg, "script_noteworthy");

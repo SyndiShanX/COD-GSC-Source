@@ -356,7 +356,7 @@ function do_bucket_fill(target) {
     level._charge_sound_ent waittill("press");
     presses++;
     level._typing_time = gettime();
-    while(isDefined(richtofen) && richtofen usebuttonpressed()) {
+    while(isDefined(richtofen) && richtofen useButtonPressed()) {
       wait(0.05);
     }
   }

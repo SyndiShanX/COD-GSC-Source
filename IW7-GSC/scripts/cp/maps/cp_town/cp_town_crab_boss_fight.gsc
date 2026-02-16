@@ -663,7 +663,7 @@ replay_final_sequence() {
 
 activate_crab_boss_fight_blocker() {
   level.crab_boss_fight_blocker_models = [];
-  var_0 = scripts\engine\utility::getstructarray("crab_boss_fight_door_model", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("crab_boss_fight_door_model", "targetname");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     var_3 setModel("cp_disco_street_barricade");
@@ -794,9 +794,9 @@ open_sesame(var_0) {
     }
   }
 
-  var_11 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_11 = scripts\engine\utility::getStructArray("interaction", "targetname");
   foreach(var_13 in var_11) {
-    var_14 = scripts\engine\utility::getstructarray(var_13.script_noteworthy, "script_noteworthy");
+    var_14 = scripts\engine\utility::getStructArray(var_13.script_noteworthy, "script_noteworthy");
     foreach(var_16 in var_14) {
       if(isDefined(var_16.target) && isDefined(var_13.target)) {
         if(var_16.target == var_13.target && var_16 != var_13) {

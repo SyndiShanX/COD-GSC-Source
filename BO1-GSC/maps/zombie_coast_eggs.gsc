@@ -427,7 +427,7 @@ coast_egg_fuse_box_think() {
   }
 }
 coast_egg_fuse_controller() {
-  fuse_array = getstructarray("struct_ep", "targetname");
+  fuse_array = getStructArray("struct_ep", "targetname");
   fuse_delivered = undefined;
   fuse_array = array_randomize(fuse_array);
   flag_wait("ffs");
@@ -556,7 +556,7 @@ coast_egg_holy_grenade_watcher() {
 virgo() {
   enta_egg_ice_break_trigger = getEntArray("trig_egg_break_ice", "targetname");
   ice_blocks = getEntArray("ent_bartender", "targetname");
-  holsters = getstructarray("struct_that_thing", "targetname");
+  holsters = getStructArray("struct_that_thing", "targetname");
   if(!isDefined(enta_egg_ice_break_trigger)) {
     return;
   }

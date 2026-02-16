@@ -292,7 +292,7 @@ bunker_final_strafe(var_0) {
   var_0 thread bunker_final_strafe_hind_missiles();
   common_scripts\utility::waitframe();
   thread maps\_vehicle::gopath(var_0);
-  var_1 = common_scripts\utility::getstructarray("bunker_ending_a10_strafe_spots", "targetname");
+  var_1 = common_scripts\utility::getStructArray("bunker_ending_a10_strafe_spots", "targetname");
   var_1[0] thread bunker_final_strafe_think();
   wait 1.5;
   var_2 = ["tag_engine_left", "tag_origin", "tag_engine_right"];
@@ -734,7 +734,7 @@ beach_wave1_artillery_retreat() {
   common_scripts\utility::flag_set("FLAG_start_wave1_retreat");
   common_scripts\utility::flag_set("FLAG_stop_wave1_trench_loops");
   thread beach_wave1_artillery_dialog();
-  var_0 = common_scripts\utility::getstructarray("bunker_wave1_retreat_spot", "targetname");
+  var_0 = common_scripts\utility::getStructArray("bunker_wave1_retreat_spot", "targetname");
   var_1 = maps\homecoming_util::get_ai_array("bunker_wave1_first_nh90_guys");
   var_1 = common_scripts\utility::array_combine(var_1, maps\homecoming_util::get_ai_array("bunker_wave1_second_nh90_guys"));
 
@@ -787,7 +787,7 @@ hovercraft_missile_barrage_player() {
 }
 
 hovercraft_missile_barrage(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
   var_2 = [];
 
   foreach(var_4 in var_1)
@@ -1089,20 +1089,20 @@ beach_wave2_logic() {
     var_5 maps\_utility::delaythread(var_6, maps\homecoming_drones::beach_path_drones);
   }
 
-  var_8 = common_scripts\utility::getstructarray("hovercraft_drone_fightspots_reference", "targetname");
+  var_8 = common_scripts\utility::getStructArray("hovercraft_drone_fightspots_reference", "targetname");
 
   foreach(var_10 in var_8) {
     var_11 = var_10 maps\_utility::get_linked_structs();
     common_scripts\utility::array_thread(var_11, maps\homecoming_drones::hovercraft_drone_fightspots);
   }
 
-  var_13 = common_scripts\utility::getstructarray("fake_beach_javelins", "targetname");
+  var_13 = common_scripts\utility::getStructArray("fake_beach_javelins", "targetname");
 
   foreach(var_15 in var_13) {
     var_16 = undefined;
 
     if(isDefined(var_15.target))
-      var_16 = common_scripts\utility::getstructarray(var_15.target, "targetname");
+      var_16 = common_scripts\utility::getStructArray(var_15.target, "targetname");
 
     if(var_15 maps\homecoming_util::parameters_check("target_tanks"))
       var_15.javelin_smarttargeting = 1;
@@ -1180,7 +1180,7 @@ beach_wave2_inithinds() {
   level endon("FLAG_start_balcony_collapse");
   level.playerhind_attackspots = [];
   level.playerhind_attackspots["default"] = [];
-  var_0 = common_scripts\utility::getstructarray("beach_wave2_hind_targets", "targetname");
+  var_0 = common_scripts\utility::getStructArray("beach_wave2_hind_targets", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2.script_noteworthy)) {
@@ -1904,7 +1904,7 @@ bunker_balcony_bullet_impacts_manager() {
 
 bunker_balcony_bullet_impacts() {
   level endon("stop_balcony_bullet_impacts");
-  var_0 = common_scripts\utility::getstructarray("bunker_balcony_impacts", "targetname");
+  var_0 = common_scripts\utility::getStructArray("bunker_balcony_impacts", "targetname");
   var_1 = anglesToForward((0, 180, 0));
   var_2 = ["balcony_impact_sand_1", "balcony_impact_sand_1"];
 
@@ -2123,7 +2123,7 @@ beach_bunker_stumble_event() {
   wait 0.5;
   thread common_scripts\utility::play_sound_in_space("scn_homecoming_house_exp", var_1.origin);
   var_2 thread beach_bunker_stumbler_sound();
-  var_3 = common_scripts\utility::getstructarray("bunker_stairs_explosion_soundspot", "targetname");
+  var_3 = common_scripts\utility::getStructArray("bunker_stairs_explosion_soundspot", "targetname");
 
   foreach(var_5 in var_3)
   thread common_scripts\utility::play_sound_in_space(var_5.script_sound, var_5.origin);

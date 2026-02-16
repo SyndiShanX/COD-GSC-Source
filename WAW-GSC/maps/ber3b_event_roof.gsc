@@ -402,7 +402,7 @@ roof_katyushas() {
 
   level thread roof_crawlers();
 
-  starts = GetStructArray("struct_roof_katyusha_start", "targetname");
+  starts = getStructArray("struct_roof_katyusha_start", "targetname");
   ASSERTEX(array_validate(starts), "Can't find any roof katyusha starts.");
 
   numVolleys = 3;

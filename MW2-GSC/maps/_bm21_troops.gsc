@@ -200,7 +200,7 @@ put this in your GSC:
 maps\_bm21_troops::main( "vehicle_bm21_mobile" );
 
 and these lines in your CSV:
-include,vehicle_bm21_mobile_bm21_troops
+#include,vehicle_bm21_mobile_bm21_troops
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile"default:"vehicletype" "bm21_troops"default:"script_team" "axis"*/
@@ -211,7 +211,7 @@ put this in your GSC:
 maps\_bm21_troops::main( "vehicle_bm21_mobile_bed" );
 
 and these lines in your CSV:
-include,vehicle_bm21_mobile_bed_bm21_troops
+#include,vehicle_bm21_mobile_bed_bm21_troops
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile_bed"default:"vehicletype" "bm21_troops"default:"script_team" "axis"*/
@@ -222,7 +222,7 @@ put this in your GSC:
 maps\_bm21_troops::main( "vehicle_bm21_mobile_cover_snow" );
 
 and these lines in your CSV:
-include,vehicle_bm21_mobile_cover_bm21_troops_snow
+#include,vehicle_bm21_mobile_cover_bm21_troops_snow
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile_cover_snow"default:"vehicletype" "bm21_troops"default:"script_team" "axis"*/
@@ -233,7 +233,7 @@ put this in your GSC:
 maps\_bm21_troops::main( "vehicle_bm21_mobile_cover" );
 
 and these lines in your CSV:
-include,vehicle_bm21_mobile_cover_bm21_troops
+#include,vehicle_bm21_mobile_cover_bm21_troops
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile_cover"default:"vehicletype" "bm21_troops"default:"script_team" "axis"*/
@@ -244,7 +244,7 @@ put this in your GSC:
 maps\_bm21_troops::main( "vehicle_bm21_mobile_cover_no_bench" );
 
 and these lines in your CSV:
-include,vehicle_bm21_mobile_cover_no_bench_bm21_troops
+#include,vehicle_bm21_mobile_cover_no_bench_bm21_troops
 sound,vehicle_bm21,vehicle_standard,all_sp
 
 defaultmdl="vehicle_bm21_mobile_cover_no_bench"default:"vehicletype" "bm21_troops"default:"script_team" "axis"

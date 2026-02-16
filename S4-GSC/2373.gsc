@@ -272,7 +272,7 @@ _id_C9BE() {
   var_2 = 500;
 
   for(;;) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       var_3 = gettime();
 
       if(!isDefined(var_0)) {

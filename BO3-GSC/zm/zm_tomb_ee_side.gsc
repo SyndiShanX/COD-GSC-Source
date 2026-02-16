@@ -196,15 +196,15 @@ function onplayerconnect_ee_jump_scare() {
   }
   while(!level.b_saw_jump_scare) {
     n_time = 0;
-    while(self adsbuttonpressed() && n_time < 25) {
+    while(self adsButtonPressed() && n_time < 25) {
       n_time++;
       wait(0.05);
     }
-    if(n_time >= 25 && self adsbuttonpressed() && self getcurrentweapon().issniperweapon && self zm_zonemgr::entity_in_zone("zone_nml_18") && zm_utility::is_player_looking_at(level.jump_scare_lookat_point.origin, 0.998, 0, undefined)) {
+    if(n_time >= 25 && self adsButtonPressed() && self getcurrentweapon().issniperweapon && self zm_zonemgr::entity_in_zone("zone_nml_18") && zm_utility::is_player_looking_at(level.jump_scare_lookat_point.origin, 0.998, 0, undefined)) {
       self playsoundtoplayer("zmb_easteregg_scarydog", self);
       self.var_92fcfed8 = self openluimenu("JumpScare-Tomb");
       n_time = 0;
-      while(self adsbuttonpressed() && n_time < 5) {
+      while(self adsButtonPressed() && n_time < 5) {
         n_time++;
         wait(0.05);
       }

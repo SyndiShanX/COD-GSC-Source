@@ -22,7 +22,7 @@ main() {
 power_clangs() {
   wait(5);
   flag_wait("power_on");
-  clangs = getstructarray("amb_power_clang", "targetname");
+  clangs = getStructArray("amb_power_clang", "targetname");
   if(!isDefined(clangs)) {
     return;
   }
@@ -283,7 +283,7 @@ activate_radio_egg(num) {
   while(1) {
     radio_trig waittill("trigger", who);
     while(who IsTouching(radio_trig)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         radio_trig.completed = true;
         break;
       }
@@ -300,7 +300,7 @@ setup_music_egg() {
   wait(3);
   level.meteor_counter = 0;
   level.music_override = false;
-  array_thread(getstructarray("mus_easteregg", "targetname"), ::music_egg);
+  array_thread(getStructArray("mus_easteregg", "targetname"), ::music_egg);
 }
 music_egg() {
   if(!isDefined(self)) {
@@ -325,7 +325,7 @@ music_egg_wait() {
   while(1) {
     music_egg_trig waittill("trigger", who);
     while(who IsTouching(music_egg_trig)) {
-      if(who UseButtonPressed()) {
+      if(who useButtonPressed()) {
         music_egg_trig.completed = true;
         break;
       }

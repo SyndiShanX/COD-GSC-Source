@@ -372,7 +372,7 @@ diner_hatch_access() {
 }
 
 inert_zombies_init() {
-  inert_spawn_location = getstructarray("inert_location", "script_noteworthy");
+  inert_spawn_location = getStructArray("inert_location", "script_noteworthy");
 
   if(isDefined(inert_spawn_location))
     array_thread(inert_spawn_location, ::spawn_inert_zombies);

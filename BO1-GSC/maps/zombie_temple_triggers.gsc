@@ -86,7 +86,7 @@ watch_for_code(code) {
 button_not_pressed(button, time) {
   endTime = gettime() + time * 1000;
   while(getTime() < endTime) {
-    if(!self buttonpressed(button)) {
+    if(!self buttonPressed(button)) {
       return true;
     }
     wait .01;
@@ -96,7 +96,7 @@ button_not_pressed(button, time) {
 button_pressed(button, time) {
   endTime = gettime() + time * 1000;
   while(getTime() < endTime) {
-    if(self buttonpressed(button)) {
+    if(self buttonPressed(button)) {
       return true;
     }
     wait .01;

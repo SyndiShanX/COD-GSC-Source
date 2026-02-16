@@ -129,7 +129,7 @@ func_FA9F() {
 
 func_FAA0(var_0) {
   waittillframeend;
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
   foreach(var_3 in var_1) {
     level.var_479A[level.var_479A.size] = var_3.origin;
     scripts\sp\utility::func_51D4(var_3);

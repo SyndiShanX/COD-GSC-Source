@@ -388,7 +388,7 @@ endmgstreakwhenleavemg() {
   self endon("disconnect");
 
   for(;;) {
-    if(!isalive(self) || self usebuttonpressed()) {
+    if(!isalive(self) || self useButtonPressed()) {
       self.pers["MGStreak"] = undefined;
       break;
     }
@@ -1162,7 +1162,7 @@ ch_kills(var_0) {
       }
     }
 
-    if(var_54 && var_1 maps\mp\_utility::_hasperk("specialty_class_quickdraw") && var_1 adsbuttonpressed()) {
+    if(var_54 && var_1 maps\mp\_utility::_hasperk("specialty_class_quickdraw") && var_1 adsButtonPressed()) {
       var_1 processchallenge("ch_perk_quickdraw");
     }
 

@@ -107,7 +107,7 @@ freakout_sun_reaction() {
   ResetSunlight();
 }
 get_packapunch_location(pap_script_string) {
-  pap_locations = getstructarray("pap_location", "targetname");
+  pap_locations = getStructArray("pap_location", "targetname");
   pap_location = undefined;
   for(i = 0; i < pap_locations.size; i++) {
     if(pap_locations[i].script_string == pap_script_string) {

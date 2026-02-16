@@ -1029,13 +1029,13 @@ set_breadcrumb_fail_time(fail_time, transition_time) {
 
 bread_crumb_button() {
   while(1) {
-    while(!level.player ButtonPressed("BUTTON_Y"))
+    while(!level.player buttonPressed("BUTTON_Y"))
       wait .05;
     if(flag("debug_crumbs"))
       flag_clear("debug_crumbs");
     else
       flag_set("debug_crumbs");
-    while(level.player ButtonPressed("BUTTON_Y"))
+    while(level.player buttonPressed("BUTTON_Y"))
       wait .05;
   }
 }
@@ -1089,7 +1089,7 @@ has_good_enemy_for_grenade_launcher(start, angles) {
   if(!within_fov(start, angles, self.enemy GetShootAtPos(), FOV_M203))
     return false;
 
-  good_spot_for_grenade_launcher = getstructarray("good_spot_for_grenade_launcher", "targetname");
+  good_spot_for_grenade_launcher = getStructArray("good_spot_for_grenade_launcher", "targetname");
   foreach(spot in good_spot_for_grenade_launcher) {
     Assert(isDefined(spot.radius));
     if(Distance(spot.origin, self.enemy.origin) < spot.radius)
@@ -1366,10 +1366,10 @@ ignoreall_till_not_touch(guy) {
 
 dump_on_command() {
   while(1) {
-    while(!level.player ButtonPressed("BUTTON_B"))
+    while(!level.player buttonPressed("BUTTON_B"))
       wait .05;
     vehicle_dump();
-    while(level.player ButtonPressed("BUTTON_B"))
+    while(level.player buttonPressed("BUTTON_B"))
       wait .05;
   }
 }
@@ -1642,7 +1642,7 @@ flip_when_player_dies() {
     level.player waittill("death");
 
   if(TEST_FLIP) {
-    while(!level.player ButtonPressed("BUTTON_B"))
+    while(!level.player buttonPressed("BUTTON_B"))
       wait .05;
   }
 
@@ -2493,7 +2493,7 @@ explode_barrels_in_radius_think() {
 }
 
 player_steadies_boat() {
-  return level.player ButtonPressed("BUTTON_B") || 1;
+  return level.player buttonPressed("BUTTON_B") || 1;
 }
 
 remove_global_spawn_funcs() {

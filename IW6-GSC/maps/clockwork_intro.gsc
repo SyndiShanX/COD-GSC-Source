@@ -670,7 +670,7 @@ look_at_tower_early_vo() {
   var_0 = getent("towerorg", "targetname");
 
   for(;;) {
-    if(level.player maps\_utility::isads() && level.player adsbuttonpressed()) {
+    if(level.player maps\_utility::isads() && level.player adsButtonPressed()) {
       var_0 maps\_utility::waittill_player_lookat_for_time(1, 0.98);
       level notify("reset_radio_tower_vo");
       level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_talltower");
@@ -1782,7 +1782,7 @@ waittill_player_triggers_stealth_kill() {
   while(!common_scripts\utility::flag("ambush_scene_stab")) {
     wait 0.05;
 
-    if(common_scripts\utility::flag("player_looking_at_stab_guy") && level.player meleebuttonpressed()) {
+    if(common_scripts\utility::flag("player_looking_at_stab_guy") && level.player meleeButtonPressed()) {
       break;
     }
   }

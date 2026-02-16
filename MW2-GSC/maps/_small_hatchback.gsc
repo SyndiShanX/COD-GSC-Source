@@ -48,8 +48,8 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatch_blue_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_small_hatch_blue_destructible_mp_small_hatchback
-include,destructible_vehicle_small_hatch_blue_destructible_mp
+#include,vehicle_small_hatch_blue_destructible_mp_small_hatchback
+#include,destructible_vehicle_small_hatch_blue_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -61,8 +61,8 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatch_green_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_small_hatch_green_destructible_mp_small_hatchback
-include,destructible_vehicle_small_hatch_green_destructible_mp
+#include,vehicle_small_hatch_green_destructible_mp_small_hatchback
+#include,destructible_vehicle_small_hatch_green_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -74,8 +74,8 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatch_turq_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_small_hatch_turq_destructible_mp_small_hatchback
-include,destructible_vehicle_small_hatch_turq_destructible_mp
+#include,vehicle_small_hatch_turq_destructible_mp_small_hatchback
+#include,destructible_vehicle_small_hatch_turq_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -87,8 +87,8 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatch_white_destructible_mp" );
 
 and these lines in your CSV:
-include,vehicle_small_hatch_white_destructible_mp_small_hatchback
-include,destructible_vehicle_small_hatch_white_destructible_mp
+#include,vehicle_small_hatch_white_destructible_mp_small_hatchback
+#include,destructible_vehicle_small_hatch_white_destructible_mp
 sound,vehicle_car_exp,vehicle_standard,all_sp
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
@@ -100,7 +100,7 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatchback_blue" );
 
 and these lines in your CSV:
-include,vehicle_small_hatchback_blue_small_hatchback
+#include,vehicle_small_hatchback_blue_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_small_hatchback_blue"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
@@ -111,7 +111,7 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatchback_green" );
 
 and these lines in your CSV:
-include,vehicle_small_hatchback_green_small_hatchback
+#include,vehicle_small_hatchback_green_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_small_hatchback_green"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
@@ -122,7 +122,7 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatchback_turq" );
 
 and these lines in your CSV:
-include,vehicle_small_hatchback_turq_small_hatchback
+#include,vehicle_small_hatchback_turq_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_small_hatchback_turq"default:"vehicletype" "small_hatchback"default:"script_team" "allies"*/
@@ -133,7 +133,7 @@ put this in your GSC:
 maps\_small_hatchback::main( "vehicle_small_hatchback_white" );
 
 and these lines in your CSV:
-include,vehicle_small_hatchback_white_small_hatchback
+#include,vehicle_small_hatchback_white_small_hatchback
 sound,vehicle_80s_car,vehicle_standard,all_sp
 
 defaultmdl="vehicle_small_hatchback_white"default:"vehicletype" "small_hatchback"default:"script_team" "allies"

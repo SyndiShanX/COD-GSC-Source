@@ -761,7 +761,7 @@ _id_775D(var_0, var_1, var_2) {
 }
 
 _id_664A() {
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   if(var_0.size == 1) {
     return var_0[0];

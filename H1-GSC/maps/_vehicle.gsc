@@ -14,8 +14,8 @@ init_vehicles() {
   maps\_vehicle_code::setup_vehicle_spawners();
   common_scripts\utility::array_thread(getEntArray("truckjunk", "targetname"), maps\_vehicle_code::truckjunk);
   common_scripts\utility::array_thread(getEntArray("truckjunk", "script_noteworthy"), maps\_vehicle_code::truckjunk);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("truckjunk", "targetname"), maps\_vehicle_code::truckjunk);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("truckjunk", "script_noteworthy"), maps\_vehicle_code::truckjunk);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("truckjunk", "targetname"), maps\_vehicle_code::truckjunk);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("truckjunk", "script_noteworthy"), maps\_vehicle_code::truckjunk);
   maps\_vehicle_code::setup_ai();
   maps\_vehicle_code::setup_triggers();
   var_0 = maps\_vehicle_code::precache_scripts();

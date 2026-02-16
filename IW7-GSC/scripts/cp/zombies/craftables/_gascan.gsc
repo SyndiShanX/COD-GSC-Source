@@ -197,7 +197,7 @@ func_76C8(var_0, var_1) {
   }
 
   for(;;) {
-    for(var_2 = 0; var_1 attackbuttonpressed() && var_2 <= 4; var_2++) {
+    for(var_2 = 0; var_1 attackButtonPressed() && var_2 <= 4; var_2++) {
       if(!self.canbeplaced) {
         wait(0.05);
         continue;

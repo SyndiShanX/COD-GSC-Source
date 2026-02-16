@@ -2133,7 +2133,7 @@ func_12736(var_0) {
     return;
   }
 
-  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  var_1 = scripts\engine\utility::getStructArray(var_0.var_336, "target");
   if(var_1.size == 0) {
     return;
   }
@@ -2151,7 +2151,7 @@ func_12738(var_0) {
     return;
   }
 
-  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  var_1 = scripts\engine\utility::getStructArray(var_0.var_336, "target");
   if(var_1.size == 0) {
     return;
   }
@@ -2191,7 +2191,7 @@ func_1273B(var_0) {
     return;
   }
 
-  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  var_1 = scripts\engine\utility::getStructArray(var_0.var_336, "target");
   if(var_1.size == 0) {
     return;
   }
@@ -2209,7 +2209,7 @@ func_1273A(var_0) {
     return;
   }
 
-  var_1 = scripts\engine\utility::getstructarray(var_0.var_336, "target");
+  var_1 = scripts\engine\utility::getStructArray(var_0.var_336, "target");
   if(var_1.size == 0) {
     return;
   }

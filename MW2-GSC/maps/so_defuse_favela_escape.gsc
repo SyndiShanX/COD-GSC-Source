@@ -172,7 +172,7 @@ defuse_c4_light(briefcase) {
 }
 
 change_combatmode_setup() {
-  array = getstructarray("change_combatmode_node", "script_noteworthy");
+  array = getStructArray("change_combatmode_node", "script_noteworthy");
   array_thread(array, ::change_combatmode_node);
 
   array = getEntArray("change_combatmode_trigger", "targetname");
@@ -476,7 +476,7 @@ notify_area_clear() {
 }
 
 use_active() {
-  if(!self UseButtonPressed())
+  if(!self useButtonPressed())
     return false;
   if(flag("special_op_failed"))
     return false;

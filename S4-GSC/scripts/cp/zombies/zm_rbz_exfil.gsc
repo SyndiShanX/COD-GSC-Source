@@ -624,7 +624,7 @@ watch_spawn_exfil_interact() {
   childthread _id_E135(self._id_5716, self, "s4_zm_exfil_end_01");
   wait 1;
   _id_0987::set_objective_ui_state(3, 1, 4);
-  var_0 = scripts\engine\utility::getstructarray(self._id_5716._id_0481, "target");
+  var_0 = scripts\engine\utility::getStructArray(self._id_5716._id_0481, "target");
   level thread _id_0991::_id_C9FC("cp_zm_zod_exfil_final", var_0[0]._id_0481);
 }
 

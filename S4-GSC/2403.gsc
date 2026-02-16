@@ -408,7 +408,7 @@ _id_53B0() {
     _id_0743::_id_C9FD("start_body_guard");
   }
 
-  var_0 = scripts\engine\utility::getstructarray("bodyguard_spawn_trigger", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("bodyguard_spawn_trigger", "targetname");
 
   foreach(var_2 in var_0) {
     var_0 thread _id_25E1(var_2, "spawn_bodyguard_vehicle");
@@ -427,7 +427,7 @@ _id_53B0() {
 _id_5389() {
   level._id_2595 = [];
   level thread _id_2593();
-  var_0 = scripts\engine\utility::getstructarray("blocker_spawn_trigger", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("blocker_spawn_trigger", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread _id_2592(var_2, "spawn_blocker_vehicle");
@@ -444,7 +444,7 @@ _id_5389() {
 }
 
 _id_53ED() {
-  var_0 = scripts\engine\utility::getstructarray("suicide_truck_spawn_trigger", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("suicide_truck_spawn_trigger", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread _id_EAEA(var_2);
@@ -959,7 +959,7 @@ _id_53B6(var_0) {
 }
 
 _id_47CB() {
-  var_0 = scripts\engine\utility::getstructarray("concrete_blocker_controlling_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("concrete_blocker_controlling_struct", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     _id_BD42(var_2);
@@ -977,7 +977,7 @@ _id_BD52(var_0) {
   var_0._id_A756 = int(var_0._id_CE18);
   var_1 = [];
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_5 in var_3) {
     switch (var_5._id_039B) {
@@ -1346,7 +1346,7 @@ _id_F3E5(var_0) {
 
 _id_E5BE(var_0) {
   level._id_53B5 endon("death");
-  var_1 = scripts\engine\utility::getstructarray("hvt_boss_combat_marker", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("hvt_boss_combat_marker", "targetname");
 
   foreach(var_3 in var_1) {
     var_3 thread _id_7BF6(var_3);

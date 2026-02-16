@@ -45,11 +45,11 @@ useAlien(spawn_point, number_of_aliens) {
     agent set_agent_team(self.team, self);
 
     if(i == 0)
-      PathNodeArray = getstructarray("seeker_path_01", "script_noteworthy");
+      PathNodeArray = getStructArray("seeker_path_01", "script_noteworthy");
     else if(i == 1)
-      PathNodeArray = getstructarray("seeker_path_02", "script_noteworthy");
+      PathNodeArray = getStructArray("seeker_path_02", "script_noteworthy");
     else
-      PathNodeArray = getstructarray("seeker_path_03", "script_noteworthy");
+      PathNodeArray = getStructArray("seeker_path_03", "script_noteworthy");
 
     agent thread spawn_alien(spawn_point.origin, spawn_point.angles, self, PathNodeArray);
 

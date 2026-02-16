@@ -11,7 +11,7 @@ init() {
   precachempanim("dlc_power_station_activate");
   level.power_switches = [];
   level.roundpowerstations = [];
-  var_0 = common_scripts\utility::getstructarray("power_switch", "targetname");
+  var_0 = common_scripts\utility::getStructArray("power_switch", "targetname");
   common_scripts\utility::array_thread(var_0, ::power_switch_init);
   var_1 = getEntArray("power_show", "targetname");
   common_scripts\utility::array_thread(var_1, ::power_show_ent_run);

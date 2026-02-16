@@ -524,7 +524,7 @@ get_teleport_end_pos(var_0) {
 
   var_1 = "ufo_zombie_spawn_loc";
   var_2 = 300;
-  var_3 = scripts\engine\utility::getstructarray(var_1, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_1, "targetname");
   var_3 = scripts\engine\utility::get_array_of_closest(var_0, var_3, undefined, undefined, undefined, var_2);
   foreach(var_5 in var_3) {
     var_6 = scripts\engine\utility::drop_to_ground(var_5.origin, 5, -50);

@@ -894,7 +894,7 @@ playSound25mm() {
 
     self playLoopSound("ac130iw6_25mm_fire_loop");
 
-    while(self AttackButtonPressed() && self GetWeaponAmmoClip(weaponName)) {
+    while(self attackButtonPressed() && self GetWeaponAmmoClip(weaponName)) {
       wait(0.05);
     }
 

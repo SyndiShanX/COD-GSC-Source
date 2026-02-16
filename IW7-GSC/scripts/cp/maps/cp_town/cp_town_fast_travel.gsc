@@ -5,7 +5,7 @@
 
 init_teleport_portals() {
   scripts\engine\utility::flag_wait("interactions_initialized");
-  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   foreach(var_2 in var_0) {
     var_3 = getEntArray("chi_door_fast_travel_portal_trigger", "targetname");
     self.trigger = scripts\engine\utility::getclosest(self.origin, var_3, 500);
@@ -25,7 +25,7 @@ init_teleport_portals() {
       self.angles = (0, 0, 0);
     }
 
-    self.teleport_spots = scripts\engine\utility::getstructarray(self.end_point.target, "targetname");
+    self.teleport_spots = scripts\engine\utility::getStructArray(self.end_point.target, "targetname");
     script_add_teleport_spots();
     foreach(var_6 in self.teleport_spots) {
       if(!isDefined(var_6.angles)) {

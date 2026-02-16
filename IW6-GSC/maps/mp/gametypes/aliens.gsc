@@ -2154,12 +2154,12 @@ melee_strength_timer() {
     } else
       self.meleeStrength = 0;
 
-    if(self MeleeButtonPressed() && !self IsReloading() && !self UseButtonPressed()) {
+    if(self meleeButtonPressed() && !self IsReloading() && !self useButtonPressed()) {
       last_time = Gettime();
       if(melee_button_released == true) {
         melee_button_released = false;
       }
-    } else if(!self MeleeButtonPressed())
+    } else if(!self meleeButtonPressed())
       melee_button_released = true;
     else
       melee_button_released = false;

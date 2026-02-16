@@ -116,7 +116,7 @@ global_FX(targetname, fxName, fxFile, delay, soundalias, randomrange) {
   level.global_fx[targetname] = fxName;
 
   // script_structs
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
   if(!isDefined(ents))
     return;
   if(ents.size <= 0) {

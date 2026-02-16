@@ -119,7 +119,7 @@ crash_site_cleanup() {
 }
 
 setup_solar_panel_player_sound_triggers() {
-  var_0 = common_scripts\utility::getstructarray("solar_panel_player_sound_trigger_org", "targetname");
+  var_0 = common_scripts\utility::getStructArray("solar_panel_player_sound_trigger_org", "targetname");
   var_1 = 0;
 
   foreach(var_3 in var_0) {

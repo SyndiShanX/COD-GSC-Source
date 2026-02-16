@@ -254,7 +254,7 @@ func_12797(var_0) {
 }
 
 func_12781(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
   if(getEntArray(var_0, "target").size <= 1) {
     scripts\sp\utility::func_51D6(var_1);
   }
@@ -1605,7 +1605,7 @@ func_F3DE() {
 
 func_7CDA(var_0) {
   var_1 = getnodearray(var_0, "targetname");
-  var_2 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0, "targetname");
   foreach(var_4 in var_2) {
     var_1[var_1.size] = var_4;
   }
@@ -2085,7 +2085,7 @@ func_D31C(var_0) {
   while(!var_2) {
     var_1 waittill("trigger");
     while(level.player istouching(var_1)) {
-      if(level.player usebuttonpressed()) {
+      if(level.player useButtonPressed()) {
         var_2 = 1;
         break;
       }

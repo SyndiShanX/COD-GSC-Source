@@ -25,7 +25,7 @@ init() {
   level.sentrysettings["zombies_trap"].streakname = "sentry";
   level.sentrysettings["zombies_trap"].weaponinfo = "zombie_trap_turret_mp";
   level.sentrysettings["zombies_trap"].modelbase = "zark_trap_turret";
-  var_0 = common_scripts\utility::getstructarray("turret_trap", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("turret_trap", "script_noteworthy");
 
   if(var_0.size > 0) {
     thread maps\mp\zombies\_traps::trap_setup_custom_function("turret_trap", "active", ::begintrap);
@@ -60,7 +60,7 @@ begintrap(var_0) {
 
 trapgetturrets() {
   var_0 = getEntArray(self.target, "targetname");
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
   var_3 = [];
 

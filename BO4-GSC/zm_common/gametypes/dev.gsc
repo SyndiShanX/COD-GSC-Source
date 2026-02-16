@@ -528,17 +528,17 @@ devgui_spawn_think() {
     self setactionslot(3, "<dev string:x38>");
     self setactionslot(4, "<dev string:x38>");
 
-    if(!dpad_left && self buttonpressed("<dev string:x2cc>")) {
+    if(!dpad_left && self buttonPressed("<dev string:x2cc>")) {
       setDvar(#"scr_playerwarp", "<dev string:x2d8>");
       dpad_left = 1;
-    } else if(!self buttonpressed("<dev string:x2cc>")) {
+    } else if(!self buttonPressed("<dev string:x2cc>")) {
       dpad_left = 0;
     }
 
-    if(!dpad_right && self buttonpressed("<dev string:x2e5>")) {
+    if(!dpad_right && self buttonPressed("<dev string:x2e5>")) {
       setDvar(#"scr_playerwarp", "<dev string:x2f2>");
       dpad_right = 1;
-    } else if(!self buttonpressed("<dev string:x2e5>")) {
+    } else if(!self buttonPressed("<dev string:x2e5>")) {
       dpad_right = 0;
     }
 

@@ -61,10 +61,10 @@ function_31f500f() {
   self endon(#"disconnect", #"allow_sprint");
 
   while(true) {
-    if(isalive(self) && self sprintbuttonpressed()) {
+    if(isalive(self) && self sprintbuttonPressed()) {
       self zm_trial_util::function_97444b02();
 
-      while(self sprintbuttonpressed()) {
+      while(self sprintbuttonPressed()) {
         waitframe(1);
       }
     }

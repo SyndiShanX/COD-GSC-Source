@@ -6,7 +6,7 @@
 init_loudspeaker_trap() {
   wait(3);
   level.loudspeaker_trap_uses = 0;
-  var_0 = scripts\engine\utility::getstructarray("trap_loudspeaker", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("trap_loudspeaker", "script_noteworthy");
   foreach(var_3, var_2 in var_0) {
     if(var_3 == 0) {
       var_2.origin = (2412, -2136.5, var_2.origin[2]);
@@ -33,7 +33,7 @@ init_loudspeaker_trap() {
 
   wait(1);
   level.rave_dance_attract_sorter = scripts\engine\utility::getstruct("rave_dance_sorter", "targetname");
-  level.rave_dance_spots = scripts\engine\utility::getstructarray("rave_dance_spots", "targetname");
+  level.rave_dance_spots = scripts\engine\utility::getStructArray("rave_dance_spots", "targetname");
   func_E1E0();
 }
 

@@ -13,7 +13,7 @@ put this in your GSC:
 maps\_motorcycle::main( "vehicle_motorcycle_01" );
 
 and these lines in your CSV:
-include,vehicle_motorcycle
+#include,vehicle_motorcycle
 
 defaultmdl="vehicle_motorcycle_01"default:"vehicletype" "motorcycle"*/
 
@@ -23,7 +23,7 @@ put this in your GSC:
 maps\_motorcycle::main( "vehicle_motorcycle_02" );
 
 and these lines in your CSV:
-include,vehicle_motorcycle
+#include,vehicle_motorcycle
 
 defaultmdl="vehicle_motorcycle_02"default:"vehicletype" "motorcycle"*/
 

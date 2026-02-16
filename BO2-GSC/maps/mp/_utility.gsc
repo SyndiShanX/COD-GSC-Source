@@ -389,7 +389,7 @@ waitrespawnbutton() {
   self endon("disconnect");
   self endon("end_respawn");
 
-  while(self usebuttonpressed() != 1)
+  while(self useButtonPressed() != 1)
     wait 0.05;
 }
 

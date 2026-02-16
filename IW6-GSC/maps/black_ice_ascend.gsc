@@ -321,7 +321,7 @@ ascend_logic() {
   var_5 = 2000;
   var_6 = gettime();
 
-  while(!level.player attackbuttonpressed()) {
+  while(!level.player attackButtonPressed()) {
     if(!isDefined(level._allies[0].line_shot) || !level._allies[0].line_shot) {
       if(gettime() - var_6 > var_5) {
         thread maps\black_ice_audio::sfx_blackice_rig_start3_ss();
@@ -396,7 +396,7 @@ ascend_logic() {
   calculate_bravo_rubberband_base();
   maps\_utility::display_hint("hint_ascend");
 
-  while(!level.player attackbuttonpressed())
+  while(!level.player attackButtonPressed())
     wait(level.timestep);
 
   common_scripts\utility::flag_set("flag_player_ascending");
@@ -837,7 +837,7 @@ ascend_idle_state_transition() {
 }
 
 ascend_idle_state() {
-  if(level.player attackbuttonpressed()) {
+  if(level.player attackButtonPressed()) {
     level.ascend_state = "ascend";
     level.ascend_state_transition = 1;
   }
@@ -857,7 +857,7 @@ ascend_ascend_state() {
   var_0 = 500;
 
   if(gettime() - level.start_ascend_time > var_0) {
-    if(!level.player attackbuttonpressed()) {
+    if(!level.player attackButtonPressed()) {
       level.ascend_state = "stop";
       level.ascend_state_transition = 1;
     }
@@ -1040,7 +1040,7 @@ hint_ascend_init_func() {
 }
 
 hint_ascend_func() {
-  return common_scripts\utility::ter_op(level.player attackbuttonpressed(), 1, 0);
+  return common_scripts\utility::ter_op(level.player attackButtonPressed(), 1, 0);
 }
 
 notetrack_fire_shake(var_0) {

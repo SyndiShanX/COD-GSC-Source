@@ -309,9 +309,9 @@ _id_10809() {
   scripts\mp\gametypes\tac_ops::_id_EF93(&"MISC_MESSAGES_MP/TO_ALLY_DD_ESCAPE_1", &"MISC_MESSAGES_MP/TO_AXIS_DD_ESCAPE_1");
 
   if(level._id_7C22 == "_a") {
-    level._id_5839 = scripts\engine\utility::getstructarray("hostage_extraction_a", "targetname")[0].origin;
+    level._id_5839 = scripts\engine\utility::getStructArray("hostage_extraction_a", "targetname")[0].origin;
   } else {
-    level._id_5839 = scripts\engine\utility::getstructarray("hostage_extraction_b", "targetname")[0].origin;
+    level._id_5839 = scripts\engine\utility::getStructArray("hostage_extraction_b", "targetname")[0].origin;
   }
 
   level._id_436C = spawn("trigger_radius", level._id_5839, 0, 90, 128);

@@ -370,7 +370,7 @@ function_f624b4a4() {
     level.var_96358ab6 = 1;
     e_player = ct_utils::get_player();
 
-    if(e_player adsbuttonpressed()) {
+    if(e_player adsButtonPressed()) {
       level.var_7b83b757 = 1;
       continue;
     }
@@ -925,7 +925,7 @@ function_283155c3() {
     e_player = getplayers()[0];
 
     if(isDefined(e_player)) {
-      if(e_player actionbuttonpressed() || e_player reloadbuttonpressed()) {
+      if(e_player actionbuttonPressed() || e_player reloadbuttonPressed()) {
         level.var_fa06889a = gettime() / 1000;
       }
     }
@@ -1622,7 +1622,7 @@ gunship_event() {
   e_player thread ct_utils::function_61c3d59c(#"hash_1aa5c2216481240e", undefined);
 
   while(true) {
-    if(e_player attackbuttonpressed()) {
+    if(e_player attackButtonPressed()) {
       break;
     }
 
@@ -1642,15 +1642,15 @@ gunship_event() {
   while(true) {
     e_player = ct_utils::get_player();
 
-    if(e_player weaponswitchbuttonpressed()) {
-      while(e_player weaponswitchbuttonpressed()) {
+    if(e_player weaponswitchbuttonPressed()) {
+      while(e_player weaponswitchbuttonPressed()) {
         waitframe(1);
       }
 
       var_5e939643++;
     }
 
-    if(e_player attackbuttonpressed()) {
+    if(e_player attackButtonPressed()) {
       b_fire = 1;
     }
 

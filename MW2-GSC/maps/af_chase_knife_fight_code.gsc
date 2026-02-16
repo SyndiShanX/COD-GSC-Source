@@ -10,7 +10,7 @@
 #include maps\_vehicle;
 
 /include maps\af_chase_code; /
-include maps\af_chase_zodiac;#include maps\_hud_util;
+#include maps\af_chase_zodiac;#include maps\_hud_util;
 
 ENDING_MOVE_SPEED = 0.45;
 
@@ -848,7 +848,7 @@ player_melees_shepherd(dist_to_shepherd) {
   meleepressed = GetTime() - level.melee_button_pressed_last <= 50;
 
   return meleepressed;
-  //	return level.player MeleeButtonPressed();
+  //	return level.player meleeButtonPressed();
 }
 
 knife_in_player(guy) {
@@ -1176,7 +1176,7 @@ fade_out_knife_hint(time) {
 }
 
 use_pressed() {
-  return level.player UseButtonPressed();
+  return level.player useButtonPressed();
 }
 
 impaled_guy() {
@@ -1917,11 +1917,11 @@ should_cough(dist_to_shepherd, cough_timer) {
 }
 
 hint_crawl_right() {
-  return level.player buttonpressed("mouse2");
+  return level.player buttonPressed("mouse2");
 }
 
 hint_crawl_left() {
-  return level.player buttonpressed("mouse1");
+  return level.player buttonPressed("mouse1");
 }
 
 teleport_to_truck_area() {
@@ -2773,7 +2773,7 @@ wait_for_player_to_start_pulling_knife() {
   thread fade_to_death_if_no_use();
 
   for(;;) {
-    if(level.player UseButtonPressed()) {
+    if(level.player useButtonPressed()) {
       break;
     }
 
@@ -3067,7 +3067,7 @@ fight_physics(scene, scene_time) {
 }
 
 init_fight_physics() {
-  structs = getstructarray("physics_struct", "targetname");
+  structs = getStructArray("physics_struct", "targetname");
   array = [];
 
   ent = spawnStruct();

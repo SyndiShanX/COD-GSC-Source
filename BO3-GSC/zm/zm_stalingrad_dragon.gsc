@@ -1348,7 +1348,7 @@ function player_continue_crafting(t_console) {
   if(isDefined(self.screecher)) {
     return false;
   }
-  if(!self usebuttonpressed()) {
+  if(!self useButtonPressed()) {
     return false;
   }
   trigger = t_console.stub zm_unitrigger::unitrigger_trigger(self);

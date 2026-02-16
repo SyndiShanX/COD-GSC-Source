@@ -222,7 +222,7 @@ handle_trial_b_flow() {
 
   if(!isDefined(level.main_obelisk_b.mdl)) {
     childthread spawn_obelisk_model(level.main_obelisk_b);
-    var_0 = scripts\engine\utility::getstructarray("mq_trial_b_torch", "script_noteworthy");
+    var_0 = scripts\engine\utility::getStructArray("mq_trial_b_torch", "script_noteworthy");
 
     foreach(var_2 in var_0) {
       scripts\cp\utility::_id_E190("egy_torch_02", var_2.origin, var_2.angles);
@@ -231,7 +231,7 @@ handle_trial_b_flow() {
 
   level childthread trial_b_intro_vo();
   level childthread molotov_use_check();
-  level.a_torches = scripts\engine\utility::getstructarray("mq_trial_b_torch_fire", "script_noteworthy");
+  level.a_torches = scripts\engine\utility::getStructArray("mq_trial_b_torch_fire", "script_noteworthy");
   level.lighting_torches = 0;
   scripts\engine\utility::_id_1BE2(level.a_torches, ::handle_lighting_torche);
   level scripts\engine\utility::_id_5C24("trial_b_all_torches_lighting");
@@ -614,7 +614,7 @@ ring_of_fire_challenge_flow() {
   level endon("game_ended");
   level endon("ring_of_fire_challenge_finished");
   level thread watch_ring_of_fire_challenge_finished();
-  var_0 = scripts\engine\utility::getstructarray("mq_trial_b_teleport_loc", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("mq_trial_b_teleport_loc", "script_noteworthy");
   var_1 = ["zone_train_north", "zone_train_west", "zone_train_south"];
 
   foreach(var_3 in level.players) {
@@ -639,7 +639,7 @@ ring_of_fire_challenge_flow() {
   var_7 = [6, 8, 12, 16];
   level.main_obelisk_b.n_charged_max = var_7[var_6 - 1];
   level.n_obelisk_charged = 0;
-  level.a_sub_obelisk_b = scripts\engine\utility::getstructarray("mq_trial_b_sub_obelisk", "script_noteworthy");
+  level.a_sub_obelisk_b = scripts\engine\utility::getStructArray("mq_trial_b_sub_obelisk", "script_noteworthy");
 
   foreach(var_9 in level.a_sub_obelisk_b) {
     if(!isDefined(var_9.mdl)) {
@@ -845,7 +845,7 @@ give_challenge_complete_rewards(var_0) {
   var_1 = [];
 
   if(isDefined(var_0)) {
-    var_2 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+    var_2 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
     foreach(var_4 in var_2) {
       var_1[var_1.size] = var_4.origin;

@@ -451,11 +451,11 @@ function private function_729af361(vh_glaive) {
   vh_glaive endon("disconnect");
   self thread function_86ee93a8();
   self.var_c0d25105._glaive_must_return_to_owner = 0;
-  while(isDefined(self) && self throwbuttonpressed()) {
+  while(isDefined(self) && self throwbuttonPressed()) {
     wait(0.05);
   }
   while(isDefined(self)) {
-    if(self throwbuttonpressed()) {
+    if(self throwbuttonPressed()) {
       self.var_c0d25105._glaive_must_return_to_owner = 1;
       return;
     }

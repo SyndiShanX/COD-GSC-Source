@@ -40,7 +40,7 @@ init_crafting() {
 
 setup_crafting_stations() {
   wait(15);
-  var_0 = scripts\engine\utility::getstructarray("crafting_station", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("crafting_station", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = getent(var_2.target, "targetname");
     var_3 setscriptablepartstate("crafting_bench", "off");
@@ -49,7 +49,7 @@ setup_crafting_stations() {
 
 init_crafting_pieces() {
   level.crafting_pieces = [];
-  var_0 = scripts\engine\utility::getstructarray("crafting_piece", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("crafting_piece", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_3 = strtok(var_2.name, "_");
     if(!isDefined(level.crafting_pieces[var_3[0]])) {
@@ -94,10 +94,10 @@ spawn_crafting_piece(var_0) {
 }
 
 init_crafting_blueprints() {
-  var_0 = scripts\engine\utility::getstructarray("violetray_blueprint", "script_noteworthy");
-  var_1 = scripts\engine\utility::getstructarray("seismic_blueprint", "script_noteworthy");
-  var_2 = scripts\engine\utility::getstructarray("mindcontrol_blueprint", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstructarray("hypnosis_blueprint", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("violetray_blueprint", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("seismic_blueprint", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("mindcontrol_blueprint", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("hypnosis_blueprint", "script_noteworthy");
   spawn_crafting_blueprint(var_0, "cp_town_blueprint_violet_xray_roll");
   spawn_crafting_blueprint(var_1, "cp_town_blueprint_seismic_wave_roll");
   spawn_crafting_blueprint(var_2, "cp_town_blueprint_mind_control_roll");
@@ -186,7 +186,7 @@ use_crafting_station(var_0, var_1) {
     var_1.blueprint_interaction = undefined;
     var_1 setclientomnvar("zm_hud_inventory_1", 0);
     var_1 notify("reset_blueprint_on_disconnect");
-    var_3 = scripts\engine\utility::getstructarray("fan_sound", "targetname");
+    var_3 = scripts\engine\utility::getStructArray("fan_sound", "targetname");
     if(var_3.size > 0) {
       var_4 = scripts\engine\utility::getclosest(var_1.origin, var_3);
       level thread scripts\engine\utility::play_loopsound_in_space("town_fan_lp", var_4.origin);
@@ -196,7 +196,7 @@ use_crafting_station(var_0, var_1) {
   if(scripts\engine\utility::istrue(var_0.blueprint_added) && isDefined(var_1.crafting_piece)) {
     if(is_valid_crafting_piece(var_1, var_0)) {
       var_1 scripts\cp\utility::play_interaction_gesture("iw7_souvenircoin_zm");
-      var_5 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
       foreach(var_7 in var_5) {
         if(var_1.crafting_piece == var_7.name) {
           if(!isDefined(var_0.added_parts)) {
@@ -364,7 +364,7 @@ show_crafted_item(var_0, var_1, var_2, var_3) {
     var_0 playlocalsound("town_craft_magic");
   }
 
-  var_4 = scripts\engine\utility::getstructarray("crafting_fx_spot", "targetname");
+  var_4 = scripts\engine\utility::getStructArray("crafting_fx_spot", "targetname");
   var_1.crafting_fx = spawnfx(level._effect[var_2], scripts\engine\utility::getclosest(var_1.origin, var_4).origin + (0, 0, 5));
   var_1.fx_spot = scripts\engine\utility::getclosest(var_1.origin, var_4);
   wait(1);

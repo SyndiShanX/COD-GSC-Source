@@ -60,7 +60,7 @@ init_firingrange() {
 }
 
 getlanespawnarray() {
-  var_0 = common_scripts\utility::getstructarray("firingrange_start_lane", "targetname");
+  var_0 = common_scripts\utility::getStructArray("firingrange_start_lane", "targetname");
   var_1 = [];
 
   foreach(var_3 in var_0) {

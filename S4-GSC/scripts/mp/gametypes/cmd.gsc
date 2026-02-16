@@ -339,12 +339,12 @@ _id_F89A(var_0) {
 _id_5352(var_0, var_1) {
   var_0 endon("death_or_disconnect");
 
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     waitframe();
   }
 
   for(;;) {
-    if(var_0 usebuttonpressed()) {
+    if(var_0 useButtonPressed()) {
       self notify("end_turret_use");
       break;
     }
@@ -369,11 +369,11 @@ _id_8207() {
 _id_8296() {
   level._id_E3EA = [];
   level._id_41F3 = "cop_2";
-  var_0 = scripts\engine\utility::getstructarray("tac_ops_map_config", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2._id_039B;
-    var_4 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_6 in var_4) {
       switch (var_6._id_CD99) {

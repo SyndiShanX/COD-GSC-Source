@@ -4331,7 +4331,7 @@ func_22CD(var_0, var_1, var_2, var_3) {
   var_4 = getspawnerarray(var_0);
   var_4 = func_22A2(var_4, getEntArray(var_0, "targetname"));
   if(isDefined(level.var_107A7)) {
-    var_5 = scripts\engine\utility::getstructarray(var_0, "targetname");
+    var_5 = scripts\engine\utility::getStructArray(var_0, "targetname");
     if(isDefined(var_3) && var_3) {
       func_51D6(var_5);
     }
@@ -4347,7 +4347,7 @@ func_22CB(var_0, var_1, var_2, var_3) {
   var_4 = func_7C84(var_0, "script_noteworthy");
   var_4 = func_22A2(var_4, getEntArray(var_0, "script_noteworthy"));
   if(isDefined(level.var_107A7)) {
-    var_5 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+    var_5 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
     if(isDefined(var_3) && var_3) {
       func_51D6(var_5);
     }
@@ -7643,7 +7643,7 @@ func_9C32() {
 }
 
 func_51D5(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   func_51D6(var_3, var_2);
 }
 
@@ -7741,7 +7741,7 @@ getstruct_delete(var_0, var_1) {
 }
 
 func_8181(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   func_51D6(var_3, var_2);
   return var_3;
 }
@@ -9939,7 +9939,7 @@ func_E820(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_5 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(var_0, "targetname");
   scripts\engine\utility::array_thread(var_5, var_1, var_2, var_3, var_4);
   var_5 = [[level.getnodearrayfunction]](var_0, "targetname");
   scripts\engine\utility::array_thread(var_5, var_1, var_2, var_3, var_4);
@@ -9959,7 +9959,7 @@ func_E81F(var_0, var_1, var_2, var_3, var_4) {
     }
   }
 
-  var_5 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_5 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   scripts\engine\utility::array_thread(var_5, var_1, var_2, var_3, var_4);
   var_5 = [[level.getnodearrayfunction]](var_0, "script_noteworthy");
   scripts\engine\utility::array_thread(var_5, var_1, var_2, var_3, var_4);

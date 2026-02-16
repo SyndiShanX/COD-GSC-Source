@@ -790,7 +790,7 @@ custom_add_weapons() {
     add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
 }
 
-include_weapons() {
+#include_weapons() {
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);
@@ -894,7 +894,7 @@ include_weapons() {
   }
 }
 
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -904,7 +904,7 @@ include_powerups() {
   include_powerup("free_perk");
 }
 
-include_equipment_for_level() {
+#include_equipment_for_level() {
   level.springpad_trigger_radius = 96;
   include_equipment("equip_springpad_zm");
 
@@ -1564,7 +1564,7 @@ survivor_vox() {
     start_time = gettime();
     end_time = start_time + 5000;
 
-    while(player usebuttonpressed() && player istouching(trigger) && is_player_valid(player)) {
+    while(player useButtonPressed() && player istouching(trigger) && is_player_valid(player)) {
       if(gettime() > end_time)
         initiated = 1;
 

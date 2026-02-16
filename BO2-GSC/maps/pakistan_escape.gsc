@@ -183,7 +183,7 @@ escape_battle_hint() {
 }
 
 boost_while_in_soct() {
-  for(n_counter = 0; !level.player sprintbuttonpressed() && n_counter < 10.5; n_counter = n_counter + 0.05) {
+  for(n_counter = 0; !level.player sprintbuttonPressed() && n_counter < 10.5; n_counter = n_counter + 0.05) {
     wait 0.05;
   }
 
@@ -684,7 +684,7 @@ check_vehicle_button_lt() {
   level endon("dukes_of_hazard_button_choice_made");
 
   while(true) {
-    if(level.player usebuttonpressed()) {
+    if(level.player useButtonPressed()) {
       break;
     }
 
@@ -698,11 +698,11 @@ check_vehicle_button_rt() {
   level endon("dukes_of_hazard_button_choice_made");
 
   while(true) {
-    if(!level.console && !level.player gamepadusedlast() && level.player reloadbuttonpressed()) {
+    if(!level.console && !level.player gamepadusedlast() && level.player reloadbuttonPressed()) {
       break;
     }
 
-    if(level.player stancebuttonpressed()) {
+    if(level.player stancebuttonPressed()) {
       break;
     }
 

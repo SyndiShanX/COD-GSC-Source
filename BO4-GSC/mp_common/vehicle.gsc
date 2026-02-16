@@ -155,7 +155,7 @@ watchplayerexitrequestthread(player) {
   while(true) {
     timeused = 0;
 
-    while(player usebuttonpressed()) {
+    while(player useButtonPressed()) {
       timeused += 0.05;
 
       if(timeused > 0.25) {

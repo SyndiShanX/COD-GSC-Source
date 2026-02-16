@@ -308,7 +308,7 @@ function_d89c1628(vehicle) {
     return false;
   }
 
-  if(!self fragbuttonpressed()) {
+  if(!self fragButtonPressed()) {
     return false;
   }
 
@@ -378,7 +378,7 @@ function_1e7eecd7(vehicle, var_44e9a475) {
       if(isDefined(vehicle.var_e9f68b24)) {
         self setplayerangles(vehicle.var_e9f68b24);
       }
-    } else if(!self fragbuttonpressed()) {
+    } else if(!self fragButtonPressed()) {
       self.hawk.var_a3b23d12 = 0;
     }
 
@@ -416,7 +416,7 @@ function_1b057db2() {
 }
 
 function_9096c10() {
-  return self usebuttonpressed() || self stancebuttonpressed() && self gamepadusedlast();
+  return self useButtonPressed() || self stancebuttonPressed() && self gamepadusedlast();
 }
 
 function_c4770b46(vehicle) {

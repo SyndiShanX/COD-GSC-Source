@@ -30,14 +30,14 @@ locker_pillage_init() {
   level.pillageinfo.locker_soflam = 0;
   level.pillageinfo.locker_trophy = 0;
   level.pillageinfo.locker_locker_weapon = 100;
-  var_0 = common_scripts\utility::getstructarray("pillage_area", "targetname");
+  var_0 = common_scripts\utility::getStructArray("pillage_area", "targetname");
 
   foreach(var_8, var_2 in var_0) {
     if(!isDefined(level.pillage_areas[var_8]))
       level.pillage_areas[var_8] = [];
 
     level.pillage_areas[var_8]["locker"] = [];
-    var_3 = common_scripts\utility::getstructarray(var_2.target, "targetname");
+    var_3 = common_scripts\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_5 in var_3) {
       if(isDefined(var_5.script_noteworthy)) {

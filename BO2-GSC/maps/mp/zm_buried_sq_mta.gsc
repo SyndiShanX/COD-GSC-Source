@@ -11,7 +11,7 @@
 
 init() {
   flag_init("sq_amplifiers_on");
-  a_amp_structs = getstructarray("sq_amplifier_spot");
+  a_amp_structs = getStructArray("sq_amplifier_spot");
 
   foreach(s_amp_spot in a_amp_structs) {
     m_amplifier = spawn("script_model", s_amp_spot.origin);

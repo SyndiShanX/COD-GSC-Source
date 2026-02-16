@@ -997,7 +997,7 @@ balldrone_watchmodeswitch() {
     }
     var_1 = 0;
 
-    while(self.owner usebuttonpressed()) {
+    while(self.owner useButtonPressed()) {
       var_1 = var_1 + 0.05;
 
       if(var_1 > 0.1) {

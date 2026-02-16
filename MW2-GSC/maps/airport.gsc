@@ -484,13 +484,13 @@ lobby_scene() {
   delayThread(5, ::lobby_sign);
 
   wait .5;
-  thread explode_targets(getstructarray("lobby_dyn_targets", "targetname"));
+  thread explode_targets(getStructArray("lobby_dyn_targets", "targetname"));
 
   wait 2;
-  thread explode_targets(getstructarray("lobby_dyn_targets_lights", "targetname"), 96, 3.5);
+  thread explode_targets(getStructArray("lobby_dyn_targets_lights", "targetname"), 96, 3.5);
 
   wait 5.35;
-  thread explode_targets(getstructarray("lobby_dyn_targets_last", "targetname"));
+  thread explode_targets(getStructArray("lobby_dyn_targets_last", "targetname"));
 }
 
 /************************************************************************************************************/
@@ -519,7 +519,7 @@ stairs_main() {
   array_thread(getEntArray("upperdeck_runners1c", "script_noteworthy"), ::add_spawn_function, ::upperdeck_runners_more, "upperdeck_flow1c");
   array_thread(getEntArray("upperdeck_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "stairs_top_open_fire");
   array_thread(getEntArray("upperdeck_fakesound", "targetname"), ::upperdeck_fakesound);
-  array_thread(getstructarray("upperdeck_turn_on_arrival", "script_noteworthy"), ::upperdeck_turn_on_arrival);
+  array_thread(getStructArray("upperdeck_turn_on_arrival", "script_noteworthy"), ::upperdeck_turn_on_arrival);
 
   GetEnt("stairs_cop", "targetname") add_spawn_function(::stairs_cop);
 
@@ -589,7 +589,7 @@ stairs_main() {
   flag_wait("stairs_upperdeck_civs_dead");
   flag_wait("player_set_speed_stairs");
 
-  nodes = getstructarray("upperdeck_team_path", "targetname");
+  nodes = getStructArray("upperdeck_team_path", "targetname");
   foreach(node in nodes)
   level.team[node.script_noteworthy] thread upperdeck_team_moveup(node);
 
@@ -618,7 +618,7 @@ massacre_main() {
 
   thread massacre_restaurant_destroy();
 
-  nodes = getstructarray("massacre_nodes", "targetname");
+  nodes = getStructArray("massacre_nodes", "targetname");
   foreach(node in nodes)
   level.team[node.script_noteworthy] thread massacre_killers(node);
 
@@ -952,7 +952,7 @@ tarmac_main() {
   thread do_wait();
 
   add_wait(::flag_wait, "tarmac_moveout");
-  add_func(::array_thread, getstructarray("tarmac_smoke_nodes", "targetname"), ::tarmac_smoke_nodes);
+  add_func(::array_thread, getStructArray("tarmac_smoke_nodes", "targetname"), ::tarmac_smoke_nodes);
   thread do_wait();
 
   add_wait(::flag_wait, "tarmac_hear_fsb");
@@ -977,7 +977,7 @@ tarmac_main() {
   if(!flag("do_not_save"))
     thread autosave_by_name("tarmac_moveout");
 
-  nodes = getstructarray("tarmac_moveout_nodes", "targetname");
+  nodes = getStructArray("tarmac_moveout_nodes", "targetname");
   nodes = array_merge(nodes, GetNodeArray("tarmac_moveout_nodes", "targetname"));
   foreach(node in nodes)
   level.team[node.script_noteworthy] thread tarmac_moveout(node);
@@ -1833,7 +1833,7 @@ start_massacre() {
   thread battlechatter_off("allies");
 
   ap_teleport_player();
-  ap_teleport_team(getstructarray("massacre_start_nodes", "targetname"));
+  ap_teleport_team(getStructArray("massacre_start_nodes", "targetname"));
 
   thread blend_movespeedscale_custom(CONST_SPEEDUPPER);
 
@@ -1867,7 +1867,7 @@ start_gate() {
 
   thread battlechatter_off("allies");
   ap_teleport_player();
-  ap_teleport_team(getstructarray("gate_start_nodes", "targetname"));
+  ap_teleport_team(getStructArray("gate_start_nodes", "targetname"));
 
   flag_set("gate_main");
   foreach(actor in level.team) {
@@ -1902,7 +1902,7 @@ start_basement() {
   GetEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
 
   ap_teleport_player();
-  ap_teleport_team(getstructarray("basement_start_nodes", "targetname"));
+  ap_teleport_team(getStructArray("basement_start_nodes", "targetname"));
 
   thread blend_movespeedscale_custom(CONST_TARMAC);
   level.drs_ahead_test = ::gate_drs_ahead_test;
@@ -1962,7 +1962,7 @@ start_tarmac() {
   GetEnt("tarmac_swat_van2", "targetname") thread tarmac_van_fake("tarmac_swat_van2");
 
   ap_teleport_player();
-  ap_teleport_team(getstructarray("tarmac_start_nodes", "targetname"));
+  ap_teleport_team(getStructArray("tarmac_start_nodes", "targetname"));
 
   thread blend_movespeedscale_custom(CONST_TARMAC);
 
@@ -2000,7 +2000,7 @@ start_escape() {
   level.team = array_removeDead_keepkeys(level.team);
 
   ap_teleport_player();
-  ap_teleport_team(getstructarray("escape_start_nodes", "targetname"));
+  ap_teleport_team(getStructArray("escape_start_nodes", "targetname"));
 
   level.player AllowSprint(true);
   thread blend_movespeedscale_custom(100);
@@ -2063,7 +2063,7 @@ grigs_test() {
 
 start_common_airport() {
   thread escalator_sounds();
-  array_thread(getstructarray("glass_break_snd", "script_noteworthy"), ::glass_break_snds);
+  array_thread(getStructArray("glass_break_snd", "script_noteworthy"), ::glass_break_snds);
   //	add_global_spawn_function( "axis", ::disable_blood_pool );
   //	add_global_spawn_function( "neutral", ::disable_blood_pool );
 

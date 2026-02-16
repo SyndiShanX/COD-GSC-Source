@@ -3,7 +3,6 @@
  * Script: maps\createfx\mp_vacant_fx.gsc
 ********************************************************/
 
-//_createfx generated. Do not touch!!
 #include common_scripts\utility;
 #include common_scripts\_createfx;
 

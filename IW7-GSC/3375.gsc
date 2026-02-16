@@ -5,7 +5,7 @@
 
 init_beam_trap() {
   level.beamtrapuses = 0;
-  var_0 = scripts\engine\utility::getstructarray("beamtrap", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("beamtrap", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_2A39();
   }
@@ -25,7 +25,7 @@ use_beam_trap(var_0, var_1) {
   level.head_cutter_trap_kills = 0;
   level.beamtrapuses++;
   var_2 = 25;
-  var_3 = sortbydistance(scripts\engine\utility::getstructarray("hc_start_struct", "targetname"), var_1.origin);
+  var_3 = sortbydistance(scripts\engine\utility::getStructArray("hc_start_struct", "targetname"), var_1.origin);
   var_0.trap_kills = 0;
   var_0.var_126A5 = var_1;
   level.hctraptrigger = var_3[0];

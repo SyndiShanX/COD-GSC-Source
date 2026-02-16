@@ -4,7 +4,7 @@
 *************************************************/
 
 _id_7FC5(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("jaroslav_machine", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("jaroslav_machine", "script_noteworthy");
   level._id_8B7B = level._id_8393["jaroslav_machine"]._id_3D91;
   level._id_5F04 = 3000;
   level._id_5F05 = 6000;

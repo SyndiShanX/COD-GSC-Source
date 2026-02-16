@@ -6,7 +6,7 @@
 init_zone_spawner() {
   scripts\cp\spawners\agent_spawner::register_spawner("zone", ::_id_E0AC);
   level.spawner_zone_map = [];
-  level.zone_spawn_locations = scripts\engine\utility::getstructarray("zone_agent_spawn", "targetname");
+  level.zone_spawn_locations = scripts\engine\utility::getStructArray("zone_agent_spawn", "targetname");
 
   if(level.zone_spawn_locations.size > 0) {
     foreach(var_1 in level.zone_spawn_locations) {

@@ -51,7 +51,7 @@ init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgrade
     melee_weapon_triggers[i] usetriggerrequirelookat();
   }
 
-  melee_weapon_structs = getstructarray(wallbuy_targetname, "targetname");
+  melee_weapon_structs = getStructArray(wallbuy_targetname, "targetname");
 
   for(i = 0; i < melee_weapon_structs.size; i++)
     prepare_stub(melee_weapon_structs[i].trigger_stub, weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgraded_weapon_name, cost, wallbuy_targetname, hint_string, vo_dialog_id, flourish_fn);

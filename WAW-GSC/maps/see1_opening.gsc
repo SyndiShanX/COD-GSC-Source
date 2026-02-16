@@ -1071,7 +1071,7 @@ opening_loop_fire_at_target(target_ent, fire_msg, end_msg) {
 }
 
 play_puddle_fx(tank_origin, target_origin) {
-  puddle_origins = getstructarray("opening_puddle", "targetname");
+  puddle_origins = getStructArray("opening_puddle", "targetname");
   nearest_puddle = puddle_origins[0];
   nearest_puddle_dist = distance(nearest_puddle.origin, tank_origin);
 
@@ -1225,7 +1225,7 @@ opening_spawn_move_tank(start_node) {
 additional_fires() {
   flag_wait("molotov_tossed");
 
-  structs = getstructarray("opening_burning_field_points", "targetname");
+  structs = getStructArray("opening_burning_field_points", "targetname");
   for(i = 0; i < structs.size; i++) {
     if(isDefined(structs[i].script_noteworthy) && structs[i].script_noteworthy == "temp_disable") {
       continue;
@@ -1235,7 +1235,7 @@ additional_fires() {
     }
   }
 
-  structs2 = getstructarray("opening_burning_field_points_large", "targetname");
+  structs2 = getStructArray("opening_burning_field_points_large", "targetname");
   for(i = 0; i < structs2.size; i++) {
     if(isDefined(structs2[i].script_noteworthy) && structs2[i].script_noteworthy == "temp_disable") {
       continue;
@@ -1245,7 +1245,7 @@ additional_fires() {
     }
   }
 
-  structs3 = getstructarray("opening_burning_field_points_smoke", "targetname");
+  structs3 = getStructArray("opening_burning_field_points_smoke", "targetname");
   for(i = 0; i < structs3.size; i++) {
     wait(0.05);
     playFX(level._effect["wheat_smoke"], structs3[i].origin);

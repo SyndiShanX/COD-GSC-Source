@@ -111,7 +111,7 @@ register_zombie_types() {
   character\clientscripts\c_zom_cosmo_spetznaz::register_gibs();
   character\clientscripts\c_zom_cosmo_cosmonaut::register_gibs();
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
   include_weapon("m1911_zm", false);
@@ -254,7 +254,7 @@ plane_position_updater(fake_ent, plane) {
   deletefakeent(0, fake_ent);
 }
 migs_fly_by() {
-  points = getstructarray("spawn_flyby", "targetname");
+  points = getStructArray("spawn_flyby", "targetname");
   while(1) {
     point = random(points);
     planes = [];
@@ -321,7 +321,7 @@ radar_dish_rotate() {
 nml_electric_barriers(client_num) {
   level endon("nm0");
   while(1) {
-    buildup_spots = GetStructArray("nml_build_sparks", "targetname");
+    buildup_spots = getStructArray("nml_build_sparks", "targetname");
     for(i = 0; i < buildup_spots.size; i++) {
       level waittill("eb+");
       angles = (0, 0, 0);
@@ -352,7 +352,7 @@ nml_electric_barriers(client_num) {
         }
       }
     }
-    trap_spots = GetStructArray("nml_trap_sparks", "targetname");
+    trap_spots = getStructArray("nml_trap_sparks", "targetname");
     for(i = 0; i < trap_spots.size; i++) {
       angles = (0, 0, 0);
       if(isDefined(trap_spots[i].angles)) {
@@ -373,13 +373,13 @@ nml_fx_monitor(client_num) {
   while(1) {
     level thread nml_electric_barriers(client_num);
     level waittill("nm0");
-    buildup_spots = GetStructArray("nml_build_sparks", "targetname");
+    buildup_spots = getStructArray("nml_build_sparks", "targetname");
     for(i = 0; i < buildup_spots.size; i++) {
       if(isDefined(buildup_spots[i].fx)) {
         buildup_spots[i].fx Delete();
       }
     }
-    trap_spots = GetStructArray("nml_trap_sparks", "targetname");
+    trap_spots = getStructArray("nml_trap_sparks", "targetname");
     for(i = 0; i < trap_spots.size; i++) {
       if(isDefined(trap_spots[i].fx)) {
         trap_spots[i].fx Delete();

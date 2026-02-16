@@ -154,7 +154,7 @@ alien_scene_init() {
 }
 
 setup_scene() {
-  self.scene_spawners = getstructarray(self.target, "targetname");
+  self.scene_spawners = getStructArray(self.target, "targetname");
 
   foreach(spawner in self.scene_spawners) {
     assert(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy != "");
@@ -249,7 +249,7 @@ scene_loop() {
 
   self maps\mp\agents\alien\_alien_think::set_alien_movemode("run");
 
-  nodes = getstructarray(self.spawner.target, "targetname");
+  nodes = getStructArray(self.spawner.target, "targetname");
   assert(isDefined(nodes));
   cur_node = nodes[RandomIntRange(0, nodes.size)];
 
@@ -309,7 +309,7 @@ scene_loop() {
       }
     }
 
-    nodes = getstructarray(cur_node.target, "targetname");
+    nodes = getStructArray(cur_node.target, "targetname");
     if(!isDefined(nodes))
       return;
     cur_node = nodes[RandomIntRange(0, nodes.size)];
@@ -324,7 +324,7 @@ alien_lurker_init() {
 
   thread init_patrol_paths();
 
-  spawn_locs = getstructarray("alien_spawn_struct", "targetname");
+  spawn_locs = getStructArray("alien_spawn_struct", "targetname");
 
   level.alien_lurkers = [];
   level.max_lurker_population = 18;
@@ -371,7 +371,7 @@ alien_lurker_init() {
 }
 
 init_patrol_paths() {
-  level.patrol_start_nodes = Getstructarray("patrol_start_node", "targetname");
+  level.patrol_start_nodes = getStructArray("patrol_start_node", "targetname");
 }
 
 wave_spawners_init() {
@@ -384,7 +384,7 @@ wave_spawners_init() {
     level.alien_wave[key_string] = alien_wave_struct;
   }
 
-  alien_spawn_locs = getstructarray("alien_spawn_struct", "targetname");
+  alien_spawn_locs = getStructArray("alien_spawn_struct", "targetname");
   assertex(isDefined(alien_spawn_locs) && alien_spawn_locs.size > 0, "Not enough spawn locations (alien_spawn_struct)");
 
   foreach(spawn_loc in alien_spawn_locs) {
@@ -1267,7 +1267,7 @@ setup_meteoroid_paths() {
   level._effect["vfx_alien_lightning_impact"] = loadfx("vfx/gameplay/alien/vfx_alien_lightning_impact_debris_01");
 
   level.meteoroid_impact_nodes = [];
-  level.meteoroid_impact_nodes = getstructarray("meteoroid_impact", "targetname");
+  level.meteoroid_impact_nodes = getStructArray("meteoroid_impact", "targetname");
 
   level.meteoroid_clips = [];
   level.meteoroid_clips = getEntArray("meteoroid_clip", "targetname");
@@ -1283,7 +1283,7 @@ setup_meteoroid_paths() {
     impact_node.rocks = [];
     impact_node.occupied = false;
 
-    targeted_array = GetStructArray(impact_node.target, "targetname");
+    targeted_array = getStructArray(impact_node.target, "targetname");
 
     foreach(targeted in targeted_array) {
       if(!isDefined(targeted.script_noteworthy)) {

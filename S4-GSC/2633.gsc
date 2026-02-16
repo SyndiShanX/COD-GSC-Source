@@ -403,7 +403,7 @@ _id_77CD() {
 
   for(;;) {
     if(isDefined(self.owner)) {
-      if(self.owner adsbuttonpressed()) {
+      if(self.owner adsButtonPressed()) {
         if(!var_0) {
           self.owner setclientomnvar("ui_heli_pilot", 2);
           var_0 = 1;
@@ -419,7 +419,7 @@ _id_77CD() {
 }
 
 _id_77CC() {
-  level._id_1367 = scripts\engine\utility::getstructarray("chopper_boss_path_start", "targetname");
+  level._id_1367 = scripts\engine\utility::getStructArray("chopper_boss_path_start", "targetname");
 }
 
 _id_77C9(var_0) {

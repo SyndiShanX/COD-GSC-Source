@@ -62,11 +62,11 @@ devgui_test_chart_think() {
       level.test_chart_model.angles = (0, direction[1], 0) + (0, 90, 0);
       level.test_chart_model.origin = player getEye() + direction_vec;
 
-      if(player meleebuttonpressed()) {
+      if(player meleeButtonPressed()) {
         scale += 10;
       }
 
-      if(player sprintbuttonpressed()) {
+      if(player sprintbuttonPressed()) {
         scale -= 10;
       }
     }
@@ -562,9 +562,9 @@ node_get(player) {
       continue;
     }
 
-    if(player buttonpressed("<dev string:x3ef>")) {
+    if(player buttonPressed("<dev string:x3ef>")) {
       return node;
-    } else if(player buttonpressed("<dev string:x3fa>")) {
+    } else if(player buttonPressed("<dev string:x3fa>")) {
       return undefined;
     }
 
@@ -584,7 +584,7 @@ dev_get_node_pair() {
   while(!isDefined(start)) {
     start = node_get(player);
 
-    if(player buttonpressed("<dev string:x3fa>")) {
+    if(player buttonPressed("<dev string:x3fa>")) {
       level notify(#"draw_pathnode_stop");
       return undefined;
     }
@@ -592,7 +592,7 @@ dev_get_node_pair() {
 
   level thread draw_pathnode_think(start, (0, 1, 0));
 
-  while(player buttonpressed("<dev string:x3ef>")) {
+  while(player buttonPressed("<dev string:x3ef>")) {
     waitframe(1);
   }
 
@@ -601,7 +601,7 @@ dev_get_node_pair() {
   while(!isDefined(end)) {
     end = node_get(player);
 
-    if(player buttonpressed("<dev string:x3fa>")) {
+    if(player buttonPressed("<dev string:x3fa>")) {
       level notify(#"draw_pathnode_stop");
       return undefined;
     }
@@ -628,9 +628,9 @@ point_get(player) {
     waitframe(1);
     origin = get_lookat_origin(player);
 
-    if(player buttonpressed("<dev string:x3ef>")) {
+    if(player buttonPressed("<dev string:x3ef>")) {
       return origin;
-    } else if(player buttonpressed("<dev string:x3fa>")) {
+    } else if(player buttonPressed("<dev string:x3fa>")) {
       return undefined;
     }
 
@@ -651,7 +651,7 @@ dev_get_point_pair() {
     }
   }
 
-  while(player buttonpressed("<dev string:x3ef>")) {
+  while(player buttonPressed("<dev string:x3ef>")) {
     waitframe(1);
   }
 

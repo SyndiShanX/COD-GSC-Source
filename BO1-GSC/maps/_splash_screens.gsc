@@ -58,7 +58,7 @@ wait_for_x_press() {
   while(!breakme) {
     players = get_players();
     for(i = 0; i < players.size; i++) {
-      if(players[i] UseButtonPressed()) {
+      if(players[i] useButtonPressed()) {
         breakme = true;
       }
     }

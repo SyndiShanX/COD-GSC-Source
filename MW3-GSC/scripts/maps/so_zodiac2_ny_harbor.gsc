@@ -386,7 +386,7 @@ _id_4C12() {
 
 _id_4C13() {
   common_scripts\utility::flag_wait("stop_missile_launch");
-  var_0 = common_scripts\utility::getstructarray("ambient_sound", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ambient_sound", "targetname");
   var_1 = ["harb_battleship_stress", "harb_battleship_sink", "harb_sub_stress", "harb_sub_stress_sub_by", "russian_sub_missile_door"];
   var_2 = common_scripts\utility::spawn_tag_origin();
 
@@ -755,7 +755,7 @@ _id_4C33(var_0, var_1, var_2) {
     }
 
     if(isDefined(level._id_4656) && level._id_4656.hidden && distance(var_4, level._id_4656.origin) < var_2 && (!isDefined(level._id_4656.inuse) || !level._id_4656.inuse)) {
-      while(!common_scripts\utility::flag("laststand_downed") && self usebuttonpressed()) {
+      while(!common_scripts\utility::flag("laststand_downed") && self useButtonPressed()) {
         self forceusehintoff();
 
         if(_id_4C31(level._id_4656) && level._id_4656 maps\_shg_common::_id_16A8(self, undefined, 2, &"SO_ZODIAC2_NY_HARBOR_HINT_DEFUSING", &"SO_ZODIAC2_NY_HARBOR_HINT_DISARM_SUCCESS", undefined, &"SO_ZODIAC2_NY_HARBOR_HINT_DISARM_FAIL")) {
@@ -974,7 +974,7 @@ _id_4C49() {
 }
 
 _id_4C4B() {
-  var_0 = common_scripts\utility::getstructarray("ambient_light", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ambient_light", "targetname");
   common_scripts\utility::array_thread(var_0, ::_id_4C4C);
 }
 
@@ -1039,7 +1039,7 @@ _id_4C52(var_0) {
 _id_4C53(var_0) {
   var_1 = 10;
 
-  while(var_0 usebuttonpressed()) {
+  while(var_0 useButtonPressed()) {
     level._id_4C4F = 1;
     var_2 = self.angles;
     self rotateto((var_2[0], var_2[1], var_2[2] - var_1), 0.1);
@@ -1088,7 +1088,7 @@ _id_4C56() {
   level._id_4C57 = 0;
 
   foreach(var_1 in level.players) {
-    if(var_1 usebuttonpressed()) {
+    if(var_1 useButtonPressed()) {
       level._id_4C57++;
     }
   }
@@ -1950,7 +1950,7 @@ _id_4C94() {
 
 _id_4C95(var_0, var_1) {
   var_2 = [];
-  var_3 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_3 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_5 in var_3) {
     var_6 = _id_4C99(var_5, var_1);
@@ -2483,7 +2483,7 @@ blackout(var_0) {
 }
 
 _id_4CA5() {
-  var_0 = common_scripts\utility::getstructarray("missile_smoke", "targetname");
+  var_0 = common_scripts\utility::getStructArray("missile_smoke", "targetname");
 
   foreach(var_2 in var_0) {}
   playFX(common_scripts\utility::getfx("smokescreen"), var_2.origin);

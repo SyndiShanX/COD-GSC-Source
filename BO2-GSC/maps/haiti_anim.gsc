@@ -395,7 +395,7 @@ intro_flak(ent) {
   level thread intro_impact_missile();
   level thread intro_vtol_pieces();
   level thread intro_flak_hatch_open();
-  structs = getstructarray("intro_flak_struct", "script_noteworthy");
+  structs = getStructArray("intro_flak_struct", "script_noteworthy");
   index = 0;
 
   while(true) {
@@ -415,7 +415,7 @@ intro_flak(ent) {
 intro_flak_hatch_open() {
   level endon("end_intro_flak");
   level waittill("fxanim_vtol_int_open_start");
-  structs = getstructarray("intro_flak_struct", "script_noteworthy");
+  structs = getStructArray("intro_flak_struct", "script_noteworthy");
   index = 0;
   playFX(level._effect["flak_explode"], structs[index].origin);
   earthquake(0.35, 1, structs[index].origin, 1500, level.player);

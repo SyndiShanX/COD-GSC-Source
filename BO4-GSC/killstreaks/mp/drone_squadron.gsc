@@ -728,7 +728,7 @@ function_c7284de2() {
       function_bef71297(player, leaddrone.targets[0]);
     }
 
-    if(player jumpbuttonpressed()) {
+    if(player jumpbuttonPressed()) {
       if(isDefined(leaddrone.targets) && leaddrone.targets.size > 0) {
         function_410e488d(leaddrone, leaddrone.targets[0]);
         function_bef71297(player, undefined);

@@ -87,7 +87,7 @@ func_8CFB(var_0) {
       }
     }
 
-    while(self buttonpressed("BUTTON_Y")) {
+    while(self buttonPressed("BUTTON_Y")) {
       scripts\engine\utility::waitframe();
     }
   }
@@ -103,7 +103,7 @@ func_8CEF() {
   self waittill("weapnext");
   if(isDefined(self.var_8CED) && self getcurrentweapon() != self.var_8CED) {
     childthread func_C137();
-    while(self buttonpressed("BUTTON_Y")) {
+    while(self buttonPressed("BUTTON_Y")) {
       scripts\engine\utility::waitframe();
     }
   }

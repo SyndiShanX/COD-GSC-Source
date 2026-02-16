@@ -3787,7 +3787,7 @@ player_mashing_buttons() {
   level endon("obj_return_pilot_complete");
 
   while(!common_scripts\utility::flag("obj_return_pilot_complete")) {
-    if(level.player attackbuttonpressed() || level.player usebuttonpressed() || level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_Y"))
+    if(level.player attackButtonPressed() || level.player useButtonPressed() || level.player buttonPressed("BUTTON_A") || level.player buttonPressed("BUTTON_B") || level.player buttonPressed("BUTTON_Y"))
       level notify("player_mashing_buttons");
 
     wait 0.05;

@@ -1517,7 +1517,7 @@ hackerresult(player, owner) {
       break;
     }
 
-    if(!player usebuttonpressed()) {
+    if(!player useButtonPressed()) {
       success = 0;
       break;
     }
@@ -2484,7 +2484,7 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse, callback_dat
       grenade = 0;
     }
 
-    if(player usebuttonpressed() && !(isDefined(grenade) && grenade) && !player meleebuttonpressed()) {
+    if(player useButtonPressed() && !(isDefined(grenade) && grenade) && !player meleeButtonPressed()) {
       if(isDefined(playersoundonuse)) {
         player playlocalsound(playersoundonuse);
       }

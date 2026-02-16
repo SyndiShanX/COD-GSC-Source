@@ -123,7 +123,7 @@ function function_a85eaca4() {
     if(!isDefined(winner)) {
       return;
     }
-    if(winner throwbuttonpressed()) {
+    if(winner throwbuttonPressed()) {
       level notify("hash_115c344c");
     }
     wait(0.05);

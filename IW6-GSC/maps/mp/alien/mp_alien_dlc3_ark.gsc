@@ -1174,7 +1174,7 @@ personalusebarcortex(var_0, var_1) {
 }
 
 useholdthinkloop(var_0, var_1, var_2) {
-  while(!level.gameended && isDefined(self) && isDefined(var_0) && isDefined(var_0.repair_spot) && var_0.sessionstate == "playing" && var_0 usebuttonpressed() && var_0.repair_spot.curprogress < var_0.repair_spot.usetime) {
+  while(!level.gameended && isDefined(self) && isDefined(var_0) && isDefined(var_0.repair_spot) && var_0.sessionstate == "playing" && var_0 useButtonPressed() && var_0.repair_spot.curprogress < var_0.repair_spot.usetime) {
     if(isDefined(var_1) && isDefined(var_2)) {
       if(distancesquared(var_0.origin, var_1.origin) > var_2)
         return 0;
@@ -1199,7 +1199,7 @@ useholdthinkloopcortex(var_0, var_1, var_2, var_3) {
   var_4 = -1;
   var_5 = 0;
 
-  while(!level.gameended && isDefined(self) && isDefined(var_0) && isDefined(var_0.cortex_spot) && var_0.sessionstate == "playing" && var_0 usebuttonpressed() && var_0.cortex_spot.curprogress < var_0.cortex_spot.usetime) {
+  while(!level.gameended && isDefined(self) && isDefined(var_0) && isDefined(var_0.cortex_spot) && var_0.sessionstate == "playing" && var_0 useButtonPressed() && var_0.cortex_spot.curprogress < var_0.cortex_spot.usetime) {
     if(isDefined(var_1) && isDefined(var_2)) {
       if(distancesquared(var_0.origin, var_1.origin) > var_2)
         return 0;

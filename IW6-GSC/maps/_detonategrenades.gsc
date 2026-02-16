@@ -506,10 +506,10 @@ watchc4altdetonate() {
   var_0 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = 0;
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         var_0 = var_0 + 0.05;
         wait 0.05;
       }
@@ -519,7 +519,7 @@ watchc4altdetonate() {
       }
       var_0 = 0;
 
-      while(!self usebuttonpressed() && var_0 < 0.5) {
+      while(!self useButtonPressed() && var_0 < 0.5) {
         var_0 = var_0 + 0.05;
         wait 0.05;
       }

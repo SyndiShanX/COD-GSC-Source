@@ -31,7 +31,7 @@ _id_FE51(var_0) {
     return 0;
   }
 
-  var_1 = scripts\engine\utility::getstructarray("org_dog_spawn", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("org_dog_spawn", "targetname");
 
   if(!_id_0A3E::_id_B5F9(var_0)) {
     return 0;
@@ -232,7 +232,7 @@ _id_4CC6(var_0) {
   self endon("death");
   wait 40;
   level thread scripts\mp\battlechatter_mp::_id_F759(self.owner, "adog_time");
-  var_1 = scripts\engine\utility::getstructarray("org_dog_spawn", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("org_dog_spawn", "targetname");
   self.owner scripts\cp_mp\utility\killstreak_utility::_id_C14A(var_0);
 
   if(!isDefined(var_1) || var_1.size == 0) {
@@ -322,7 +322,7 @@ _id_E32B(var_0) {
 
   var_0._id_4CD0[var_2] = var_1;
   var_1 _id_09EF::_id_D136(var_0.owner.sessionteam, var_0.owner);
-  var_4 = scripts\engine\utility::getstructarray("org_dog_spawn", "targetname");
+  var_4 = scripts\engine\utility::getStructArray("org_dog_spawn", "targetname");
 
   if(!isDefined(var_4) || var_4.size == 0) {
     var_5 = undefined;

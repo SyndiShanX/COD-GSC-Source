@@ -26,7 +26,7 @@ put this in your GSC:
 maps\_submarine_sdv::main( "vehicle_submarine_sdv" );
 
 and these lines in your CSV:
-include,vehicle_submarine_sdv_submarine_sdv
+#include,vehicle_submarine_sdv_submarine_sdv
 sound,vehicle_submarine_sdv,vehicle_standard,all_sp
 
 defaultmdl="vehicle_submarine_sdv"default:"vehicletype" "submarine_sdv"default:"script_team" "allies"

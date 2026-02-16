@@ -98,9 +98,9 @@ _id_ABAD() {
   _id_3FF6();
   level._id_5837 = getent("hvtExtractionLoc", "targetname");
   level._id_7A8C = [];
-  level._id_7A8C[0] = ::scripts\engine\utility::getstructarray("hostage_waypoint_1", "targetname");
-  level._id_7A8C[1] = ::scripts\engine\utility::getstructarray("hostage_waypoint_2", "targetname");
-  level._id_7A8C[2] = ::scripts\engine\utility::getstructarray("hostage_waypoint_3", "targetname");
+  level._id_7A8C[0] = ::scripts\engine\utility::getStructArray("hostage_waypoint_1", "targetname");
+  level._id_7A8C[1] = ::scripts\engine\utility::getStructArray("hostage_waypoint_2", "targetname");
+  level._id_7A8C[2] = ::scripts\engine\utility::getStructArray("hostage_waypoint_3", "targetname");
   thread _id_3FF7();
   level._id_7A92 = [];
   level._id_7A92[0] = level._id_7C24;
@@ -203,8 +203,8 @@ _id_A11C() {
 }
 
 _id_4073() {
-  var_0 = scripts\engine\utility::getstructarray("hostage_extract_zone_A", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("hostage_extract_zone_B", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("hostage_extract_zone_A", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("hostage_extract_zone_B", "targetname");
   level._id_5BEC = scripts\engine\utility::array_combine(var_0, var_1);
   level._id_A8E8 = [];
 }

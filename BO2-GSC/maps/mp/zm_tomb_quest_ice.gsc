@@ -219,7 +219,7 @@ ceiling_tile_process_damage() {
 ice_puzzle_2_init() {}
 
 ice_puzzle_2_run() {
-  a_stone_positions = getstructarray("puzzle_stone_water", "targetname");
+  a_stone_positions = getStructArray("puzzle_stone_water", "targetname");
   level.ice_stones_remaining = a_stone_positions.size;
 
   foreach(s_stone in a_stone_positions) {

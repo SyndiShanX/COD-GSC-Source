@@ -805,9 +805,9 @@ player_spawn_test() {
     level thread draw_debug_box_on(spawn_node, CONST_RED_COLOR, 5);
     if(isDefined(spawn_node.script_noteworthy))
       print3d(spawn_node.origin + (0, 0, 12), spawn_node.script_noteworthy, (0, 1, 0), 1, 1, 20);
-    if(level.players[0] UseButtonPressed()) {
+    if(level.players[0] useButtonPressed()) {
       alien = maps\mp\alien\_spawn_director::process_spawn(alien_type, spawn_node, intro_vignette_anim);
-      while(level.players[0] UseButtonPressed())
+      while(level.players[0] useButtonPressed())
         wait 0.05;
     }
     wait 0.05;

@@ -170,7 +170,7 @@ add_zombie_craftable_vox_category(craftable_name, vox_id) {
   craftable_struct.vox_id = vox_id;
 }
 
-include_zombie_craftable(craftablestub) {
+#include_zombie_craftable(craftablestub) {
   if(!isDefined(level.zombie_include_craftables))
     level.zombie_include_craftables = [];
 
@@ -198,7 +198,7 @@ generate_zombie_craftable_piece(craftablename, piecename, modelname, radius, hei
   if(!isDefined(piecename))
     piecename = modelname;
 
-  craftable_pieces_structs = getstructarray(craftablename + "_" + piecename, "targetname");
+  craftable_pieces_structs = getStructArray(craftablename + "_" + piecename, "targetname");
 
   if(craftable_pieces_structs.size < 1)
     println("ERROR: Missing craftable piece <" + craftablename + "> <" + piecename + ">\\n");
@@ -1510,10 +1510,10 @@ choose_open_craftable(player) {
   self.opencraftablehudelem[n_playernum] = hinttexthudelem;
 
   while(isDefined(self.playertrigger[n_playernum]) && !self.crafted) {
-    if(player actionslotonebuttonpressed()) {
+    if(player actionslotonebuttonPressed()) {
       self.n_open_craftable_choice++;
       b_got_input = 1;
-    } else if(player actionslottwobuttonpressed()) {
+    } else if(player actionslottwobuttonPressed()) {
       self.n_open_craftable_choice--;
       b_got_input = 1;
     }
@@ -1598,7 +1598,7 @@ player_continue_crafting(craftablespawn) {
   if(isDefined(self.screecher))
     return false;
 
-  if(!self usebuttonpressed())
+  if(!self useButtonPressed())
     return false;
 
   if(!craftablespawn craftable_is_piece_crafting(self.current_craftable_piece))

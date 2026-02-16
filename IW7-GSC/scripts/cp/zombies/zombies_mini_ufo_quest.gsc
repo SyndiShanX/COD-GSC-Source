@@ -10,7 +10,7 @@ init() {
   level.active_mini_ufo_trap["blackhole"] = 0;
   level.active_mini_ufo_trap["rocket"] = 0;
   var_0 = getent("pap_room_mini_ufo_trigger", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("pap_room_mini_ufos", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("pap_room_mini_ufos", "targetname");
   var_0.miniufos = [];
   level thread waitforplayertriggered(var_0);
   var_2 = scripts\engine\utility::array_randomize(["yellow", "blue", "green", "red"]);
@@ -74,7 +74,7 @@ getminiufopath(var_0, var_1) {
       var_4 = var_3;
       var_3 = undefined;
     } else if(isDefined(var_2.target)) {
-      var_5 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
       if(var_5.size > 1) {
         foreach(var_7 in var_5) {
           if(isDefined(var_7.script_noteworthy) && var_7.script_noteworthy == var_1.color) {
@@ -212,7 +212,7 @@ changeangledelay(var_0, var_1, var_2, var_3, var_4) {
 }
 
 get_next_valid_struct(var_0, var_1, var_2) {
-  var_3 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
   var_4 = [];
   var_5 = undefined;
   foreach(var_7 in var_3) {

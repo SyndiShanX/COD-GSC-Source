@@ -14,7 +14,7 @@ try_collect_from_lost_and_found(var_0, var_1) {
 save_items_to_lost_and_found(var_0) {
   clear_previous_lost_and_found(var_0);
   var_1 = undefined;
-  var_2 = scripts\engine\utility::getstructarray("lost_and_found", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("lost_and_found", "script_noteworthy");
   var_2 = scripts\engine\utility::array_randomize_objects(var_2);
   foreach(var_4 in var_2) {
     if(scripts\engine\utility::array_contains(level.current_interaction_structs, var_4)) {

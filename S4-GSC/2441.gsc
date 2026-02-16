@@ -876,7 +876,7 @@ demonic_idol_hold_duration_watcher(var_0, var_1) {
   self endon("disconnect");
 
   for(;;) {
-    if(isDefined(self._id_8388) && scripts\engine\utility::is_equal(self._id_8388._id_7D7E, 1) && isDefined(var_1) && scripts\engine\utility::is_equal(var_1._id_039B, "idol") && !self usebuttonpressed()) {
+    if(isDefined(self._id_8388) && scripts\engine\utility::is_equal(self._id_8388._id_7D7E, 1) && isDefined(var_1) && scripts\engine\utility::is_equal(var_1._id_039B, "idol") && !self useButtonPressed()) {
       self._id_8388 setuseholdduration(get_hold_duration(self));
     }
 
@@ -894,10 +894,10 @@ demonic_idol_interaction_watcher(var_0, var_1) {
 
   for(;;) {
     if(isDefined(self._id_8388) && scripts\engine\utility::is_equal(self._id_8388._id_7D7E, 1) && isDefined(var_1) && scripts\engine\utility::is_equal(var_1._id_039B, "idol") && !scripts\engine\utility::is_equal(self.inlaststand, 1) && isDefined(var_0.demonic_idol_interact) && scripts\engine\utility::_id_10E76(self.origin, self getplayerangles(), var_0.demonic_idol_interact.origin, cos(85))) {
-      if(self usebuttonpressed() && isDefined(self.soul_count) && self.soul_count > 0) {
+      if(self useButtonPressed() && isDefined(self.soul_count) && self.soul_count > 0) {
         wait 0.4;
 
-        if(self usebuttonpressed() && isDefined(self._id_8388)) {
+        if(self useButtonPressed() && isDefined(self._id_8388)) {
           _id_FBC6(level._id_3BE9._id_0F51, 1, self);
           self playrumbleonentity("damage_light");
           var_0 play_sin_eater_fx(var_0.demonic_idol_interact, "sin_eater_deliver", "runestone_delivery", 0);

@@ -918,7 +918,7 @@ canlockon() {
   }
 
   if(game["missileTurret_useadslockon"]) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       if(self.lockonmissilezoom == 0) {
         self.lockonmissilezoom = 1;
         luinotifyevent(&"hud_turret_zoom", 1, 1);

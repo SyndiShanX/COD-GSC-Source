@@ -22,7 +22,7 @@ setupcqbpointsofinterest() {
 
   level.cqbsetupcomplete = 1;
   pointents = getEntArray("cqb_point_of_interest", "targetname");
-  pointstructs = getstructarray("cqb_point_of_interest", "targetname");
+  pointstructs = getStructArray("cqb_point_of_interest", "targetname");
   points = arraycombine(pointents, pointstructs, 1, 0);
 
   for(i = 0; i < points.size; i++) {

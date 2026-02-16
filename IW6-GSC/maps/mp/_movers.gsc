@@ -79,7 +79,7 @@ script_mover_int() {
   self.use_triggers = [];
   self.linked_ents = [];
 
-  structs = GetStructArray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
 
   foreach(target in structs) {
     if(!isDefined(target.script_noteworthy)) {
@@ -173,7 +173,7 @@ script_mover_parse_targets() {
   structs = [];
   ents = [];
   if(isDefined(self.target)) {
-    structs = GetStructArray(self.target, "targetname");
+    structs = getStructArray(self.target, "targetname");
     ents = getEntArray(self.target, "targetname");
   }
   for(i = 0; i < structs.size; i++) {
@@ -184,7 +184,7 @@ script_mover_parse_targets() {
     switch (target.script_noteworthy) {
       case "ignore":
         if(isDefined(target.target)) {
-          add_structs = GetStructArray(target.target, "targetname");
+          add_structs = getStructArray(target.target, "targetname");
           foreach(add in add_structs) {
             structs[structs.size] = add;
           }

@@ -386,7 +386,7 @@ _id_1B38() {
   }
   _id_1B3B(var_1[var_0]);
 
-  while(level._id_1BD3 buttonpressed("BUTTON_Y")) {
+  while(level._id_1BD3 buttonPressed("BUTTON_Y")) {
     wait 0.05;
   }
 }
@@ -407,7 +407,7 @@ _id_1B39() {
   }
   _id_1B3B(var_1[var_0]);
 
-  while(level._id_1BD3 buttonpressed("BUTTON_X")) {
+  while(level._id_1BD3 buttonPressed("BUTTON_X")) {
     wait 0.05;
   }
 }
@@ -456,34 +456,34 @@ _id_1B41() {
     var_0 = _id_1B57();
     _id_1BE7(var_0);
 
-    if(level._id_1BD3 buttonpressed("f")) {
+    if(level._id_1BD3 buttonPressed("f")) {
       _id_1BF2();
     }
-    if(level._id_1BD3 buttonpressed("DPAD_UP")) {
+    if(level._id_1BD3 buttonPressed("DPAD_UP")) {
       _id_1BE1(var_0, "DPAD_UP");
-    } else if(level._id_1BD3 buttonpressed("DPAD_DOWN")) {
+    } else if(level._id_1BD3 buttonPressed("DPAD_DOWN")) {
       _id_1BE0();
-    } else if(level._id_1BD3 buttonpressed("DPAD_RIGHT")) {
+    } else if(level._id_1BD3 buttonPressed("DPAD_RIGHT")) {
       _id_1BDD(var_0, "DPAD_RIGHT");
-    } else if(level._id_1BD3 buttonpressed("DPAD_LEFT")) {
+    } else if(level._id_1BD3 buttonPressed("DPAD_LEFT")) {
       _id_1BDC();
-    } else if(level._id_1BD3 buttonpressed("BUTTON_X")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_X")) {
       _id_1B39();
-    } else if(level._id_1BD3 buttonpressed("BUTTON_Y")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_Y")) {
       _id_1B38();
-    } else if(level._id_1BD3 buttonpressed("BUTTON_LSTICK")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_LSTICK")) {
       _id_1BE5(var_0, -1);
-    } else if(level._id_1BD3 buttonpressed("BUTTON_RSTICK")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_RSTICK")) {
       _id_1BE5(var_0, 1);
-    } else if(level._id_1BD3 buttonpressed("BUTTON_A")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_A")) {
       _id_1BE6(var_0, -1);
-    } else if(level._id_1BD3 buttonpressed("BUTTON_B")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_B")) {
       _id_1BE6(var_0, 1);
     } else {
-      if(level._id_1BD3 buttonpressed("BUTTON_LSHLDR")) {
+      if(level._id_1BD3 buttonPressed("BUTTON_LSHLDR")) {
         _id_1BF1(var_0);
       }
-      if(level._id_1BD3 buttonpressed("BUTTON_RSHLDR")) {
+      if(level._id_1BD3 buttonPressed("BUTTON_RSHLDR")) {
         thread _id_1BEA(var_0);
       }
     }
@@ -503,7 +503,7 @@ _id_1BDD(var_0, var_1) {
   if(var_0["fraction"] == 1) {
     return;
   }
-  while(level._id_1BD3 buttonpressed(var_1)) {
+  while(level._id_1BD3 buttonPressed(var_1)) {
     wait 0.05;
   }
   level._id_1BCD = 1;
@@ -514,12 +514,12 @@ _id_1BDD(var_0, var_1) {
   var_4 = 1;
   var_5 = var_0["position"];
 
-  while(!level._id_1BD3 buttonpressed(var_1)) {
+  while(!level._id_1BD3 buttonPressed(var_1)) {
     var_6 = level._id_1BCE;
 
-    if(level._id_1BD3 buttonpressed("BUTTON_A")) {
+    if(level._id_1BD3 buttonPressed("BUTTON_A")) {
       var_4 = -1;
-    } else if(level._id_1BD3 buttonpressed("BUTTON_B")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_B")) {
       var_4 = 1;
     } else {
       var_4 = 0;
@@ -538,7 +538,7 @@ _id_1BDD(var_0, var_1) {
   common_scripts\utility::array_thread(var_2, ::_id_1B71);
   _id_1B9A();
 
-  while(level._id_1BD3 buttonpressed(var_1)) {
+  while(level._id_1BD3 buttonPressed(var_1)) {
     wait 0.05;
   }
 }
@@ -556,7 +556,7 @@ _id_1BE1(var_0, var_1) {
   if(var_0["fraction"] == 1) {
     return;
   }
-  while(level._id_1BD3 buttonpressed(var_1)) {
+  while(level._id_1BD3 buttonPressed(var_1)) {
     wait 0.05;
   }
   _id_1BD6();
@@ -568,12 +568,12 @@ _id_1BE1(var_0, var_1) {
   var_4 = 1;
   var_5 = 0;
 
-  while(!level._id_1BD3 buttonpressed(var_1)) {
+  while(!level._id_1BD3 buttonPressed(var_1)) {
     var_5 = 0;
 
-    if(level._id_1BD3 buttonpressed("BUTTON_A")) {
+    if(level._id_1BD3 buttonPressed("BUTTON_A")) {
       var_5 = -1;
-    } else if(level._id_1BD3 buttonpressed("BUTTON_B")) {
+    } else if(level._id_1BD3 buttonPressed("BUTTON_B")) {
       var_5 = 1;
     }
     var_3 = var_3 + var_5 * var_4;
@@ -596,7 +596,7 @@ _id_1BE1(var_0, var_1) {
 
   _id_1B9A();
 
-  while(level._id_1BD3 buttonpressed(var_1)) {
+  while(level._id_1BD3 buttonPressed(var_1)) {
     wait 0.05;
   }
   for(var_6 = 0; var_6 < var_2.size; var_6++) {

@@ -15,7 +15,7 @@ init() {
   level.agent_funcs["zombie_civilian"]["on_damaged_finished"] = ::oncivdamagefinished;
   level.agent_funcs["zombie_civilian"]["spawn"] = ::onzombiecivilianspawn;
   level.agent_funcs["zombie_civilian"]["think"] = ::zombiecivilianthink;
-  level.zombies_spawners_civ = common_scripts\utility::getstructarray("civ_spawner", "targetname");
+  level.zombies_spawners_civ = common_scripts\utility::getStructArray("civ_spawner", "targetname");
   var_0 = spawnStruct();
   var_0.agent_type = "zombie_civilian";
   var_0.animclass = "zombie_civilian_animclass";
@@ -37,7 +37,7 @@ init() {
   level.extractionescortfuncs["default"] = ::defaultextractionescort;
   level.extractionfuncs["default"] = ::defaultextraction;
   level.numberofalivecivilians = 0;
-  level.civiliancowerpoints = common_scripts\utility::getstructarray("cower_point", "script_noteworthy");
+  level.civiliancowerpoints = common_scripts\utility::getStructArray("cower_point", "script_noteworthy");
   level._effect["Extraction_Flare"] = loadfx("vfx/props/flare_ambient");
   level.civiliansextracting = 0;
   level.civiliansrescued = 0;

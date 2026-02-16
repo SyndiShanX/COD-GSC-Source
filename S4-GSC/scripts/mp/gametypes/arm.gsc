@@ -931,8 +931,8 @@ _id_502C(var_0) {
 _id_C2C4() {
   scripts\cp_mp\killstreaks\airdrop::_id_8272();
   level._id_FF60 = spawnStruct();
-  level._id_FF60._id_3A0B = scripts\engine\utility::getstructarray("dropBagCluterNode", "script_noteworthy");
-  var_0 = scripts\engine\utility::getstructarray("dropBagLocation", "script_noteworthy");
+  level._id_FF60._id_3A0B = scripts\engine\utility::getStructArray("dropBagCluterNode", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dropBagLocation", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_2._id_84EF = 0;
@@ -1442,11 +1442,11 @@ _id_AB3F(var_0, var_1, var_2, var_3, var_4, var_5) {
 _id_8296() {
   level._id_E3EA = [];
   level._id_41F3 = "cop_2";
-  var_0 = scripts\engine\utility::getstructarray("tac_ops_map_config", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("tac_ops_map_config", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = var_2._id_039B;
-    var_4 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_4 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
 
     foreach(var_6 in var_4) {
       switch (var_6._id_CD99) {
@@ -2690,7 +2690,7 @@ _id_8081() {
 
   waitframe();
   level._id_BFC9 = [];
-  var_0 = scripts\engine\utility::getstructarray("rallyPointTechnical", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("rallyPointTechnical", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(scripts\cp_mp\utility\game_utility::_id_6B18()) && isDefined(var_2._id_039B) && var_2._id_039B != level._id_96CC) {
@@ -2707,7 +2707,7 @@ _id_8081() {
     }
   }
 
-  var_0 = scripts\engine\utility::getstructarray("rallyPointLittleBird", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("rallyPointLittleBird", "targetname");
 
   if(!istrue(level._id_4AC2)) {
     foreach(var_2 in var_0) {
@@ -2757,7 +2757,7 @@ _id_8081() {
     }
   }
 
-  var_0 = scripts\engine\utility::getstructarray("rallyPointAPC", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("rallyPointAPC", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(scripts\cp_mp\utility\game_utility::_id_6B18()) && isDefined(var_2._id_039B) && var_2._id_039B != level._id_96CC) {
@@ -2998,8 +2998,8 @@ _id_2EE8() {
 }
 
 _id_6A1D() {
-  var_0 = scripts\engine\utility::getstructarray("airdropLocation_allies", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("airdropLocation_axis", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("airdropLocation_allies", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("airdropLocation_axis", "targetname");
   var_2 = scripts\engine\utility::array_combine(var_0, var_1);
   var_3 = scripts\engine\utility::_id_6969(level._id_8EA9._id_41DC._id_60D8.origin, var_2);
   var_4 = scripts\engine\utility::_id_6969(level._id_8EAA._id_41DC._id_60D8.origin, var_2);

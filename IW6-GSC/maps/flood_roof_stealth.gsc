@@ -555,7 +555,7 @@ check_for_melee_stab() {
     if(var_1 < var_0 && maps\_utility::player_looking_at(self.origin + (0, 0, 30), 0.7)) {
       ready_to_attack();
 
-      if(level.player meleebuttonpressed() && !level.player ismeleeing() && !level.player isthrowinggrenade()) {
+      if(level.player meleeButtonPressed() && !level.player ismeleeing() && !level.player isthrowinggrenade()) {
         common_scripts\utility::flag_set("player_start_stealth_kill_02");
         level notify("player_start_stealth_kill_02");
         level.player.in_attack = 1;

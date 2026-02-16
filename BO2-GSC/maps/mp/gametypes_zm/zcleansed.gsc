@@ -941,7 +941,7 @@ playerfakedeath(vdir) {
 onspawnzombie() {}
 
 makefindfleshstructs() {
-  structs = getstructarray("spawn_location", "script_noteworthy");
+  structs = getStructArray("spawn_location", "script_noteworthy");
 
   foreach(struct in structs)
   struct.script_string = "find_flesh";

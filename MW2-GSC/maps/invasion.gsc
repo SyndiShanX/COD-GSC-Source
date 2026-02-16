@@ -398,7 +398,7 @@ start_yards() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_yards_friendly", "targetname");
+  friendly_starts = getStructArray("start_yards_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -417,7 +417,7 @@ start_bmp() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_bmp_friendly", "targetname");
+  friendly_starts = getStructArray("start_bmp_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -436,7 +436,7 @@ start_pizza() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_pizza_friendly", "targetname");
+  friendly_starts = getStructArray("start_pizza_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -458,7 +458,7 @@ start_gas_station() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_gas_station_friendly", "targetname");
+  friendly_starts = getStructArray("start_gas_station_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -479,7 +479,7 @@ start_crash() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_crash_friendly", "targetname");
+  friendly_starts = getStructArray("start_crash_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -508,7 +508,7 @@ start_nates_roof() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -530,7 +530,7 @@ start_roof_northside() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -557,7 +557,7 @@ start_attack_diner() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -584,7 +584,7 @@ start_btr80_smash() {
 
   friendlies = getEntArray("secretservice_friendly", "targetname");
   //array_thread( friendlies, ::spawn_ai );
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
 
   for(i = 0; i < friendly_starts.size; i++) {
     friendlies[i].origin = friendly_starts[i].origin;
@@ -615,7 +615,7 @@ start_diner_defend() {
   taco_spawner spawn_ai();
 
   raptor_spawner = getent("commander", "script_noteworthy");
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
   raptor_spawner spawn_ai();
@@ -647,7 +647,7 @@ start_diner() {
   taco_spawner spawn_ai();
 
   raptor_spawner = getent("commander", "script_noteworthy");
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
   raptor_spawner spawn_ai();
@@ -683,7 +683,7 @@ start_burgertown() {
   taco_spawner spawn_ai();
 
   raptor_spawner = getent("commander", "script_noteworthy");
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
   raptor_spawner spawn_ai();
@@ -718,7 +718,7 @@ start_vip_escort() {
   taco_spawner spawn_ai();
 
   raptor_spawner = getent("commander", "script_noteworthy");
-  friendly_starts = getstructarray("start_roof_friendly", "targetname");
+  friendly_starts = getStructArray("start_roof_friendly", "targetname");
   raptor_spawner.origin = friendly_starts[0].origin;
   raptor_spawner.angles = friendly_starts[0].angles;
   raptor_spawner spawn_ai();
@@ -1790,7 +1790,7 @@ handler_convoy() {
 
   thread music_invasion_regroup_and_end();
 
-  targets = getstructarray("convoy_targets", "targetname");
+  targets = getStructArray("convoy_targets", "targetname");
   humvees = [];
 
   thread dialog_come_to_convoy();
@@ -2018,7 +2018,7 @@ friendlies_enter_humvees(humvees) {
 spawn_humvee_boarders() {
   group = "redshirt_spawn_group_BT";
 
-  redshirt_spawn_groups = getstructarray(group, "targetname");
+  redshirt_spawn_groups = getStructArray(group, "targetname");
   farthest = getfarthest(level.player.origin, redshirt_spawn_groups);
   spawners = getEntArray(farthest.target, "targetname");
   println(" selected redshirt group: " + farthest.script_noteworthy);
@@ -3919,7 +3919,7 @@ spawn_redshirts(desired_num) {
   else
     group = "redshirt_spawn_group";
 
-  redshirt_spawn_groups = getstructarray(group, "targetname");
+  redshirt_spawn_groups = getStructArray(group, "targetname");
   farthest = getfarthest(level.player.origin, redshirt_spawn_groups);
   spawners = getEntArray(farthest.target, "targetname");
   println(" selected redshirt group: " + farthest.script_noteworthy);

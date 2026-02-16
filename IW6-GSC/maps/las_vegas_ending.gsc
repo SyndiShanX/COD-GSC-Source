@@ -39,9 +39,9 @@ start_save() {
 }
 
 drop_structs() {
-  var_0 = common_scripts\utility::getstructarray("ending1_start_spot", "targetname");
-  var_0 = common_scripts\utility::array_combine(common_scripts\utility::getstructarray("ending2_start_spot", "targetname"), var_0);
-  var_0 = common_scripts\utility::array_combine(common_scripts\utility::getstructarray("ending3_start_spot", "targetname"), var_0);
+  var_0 = common_scripts\utility::getStructArray("ending1_start_spot", "targetname");
+  var_0 = common_scripts\utility::array_combine(common_scripts\utility::getStructArray("ending2_start_spot", "targetname"), var_0);
+  var_0 = common_scripts\utility::array_combine(common_scripts\utility::getStructArray("ending3_start_spot", "targetname"), var_0);
 
   foreach(var_2 in var_0)
   var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -100);
@@ -176,7 +176,7 @@ dream() {
 }
 
 dream_warriors() {
-  var_0 = common_scripts\utility::getstructarray("warrior_spot", "targetname");
+  var_0 = common_scripts\utility::getStructArray("warrior_spot", "targetname");
   var_1 = getent("warrior_spawner", "targetname");
   var_2 = [];
 

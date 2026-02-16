@@ -657,10 +657,10 @@ function_143ffb68(_hash) {
 
 function_c7f49476() {
   while(!level.gameended) {
-    var_4bd02b0a = self actionslotonebuttonpressed();
-    var_1d904e8f = self actionslottwobuttonpressed();
-    var_275f622d = self actionslotthreebuttonpressed();
-    var_92c138ef = self actionslotfourbuttonpressed();
+    var_4bd02b0a = self actionslotonebuttonPressed();
+    var_1d904e8f = self actionslottwobuttonPressed();
+    var_275f622d = self actionslotthreebuttonPressed();
+    var_92c138ef = self actionslotfourbuttonPressed();
 
     while(!var_4bd02b0a && !var_1d904e8f && !var_275f622d && !var_92c138ef) {
       waitframe(1);

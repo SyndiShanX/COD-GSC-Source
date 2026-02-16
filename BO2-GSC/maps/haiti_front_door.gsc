@@ -348,14 +348,14 @@ sco_east_walkway_support() {
   s_loc = getstruct("s_sco_east_walkway_smoke", "targetname");
   level thread play_fx("sco_smoke", s_loc.origin, s_loc.angles, 30);
   level thread sco_east_walkway_support_dialog();
-  a_s_jetwings = getstructarray("s_sco_east_walkway", "targetname");
+  a_s_jetwings = getStructArray("s_sco_east_walkway", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_east_walkway");
     wait(randomfloatrange(0.1, 1.0));
   }
 
-  a_s_jetwings = getstructarray("s_sco_east_walkway_drones", "targetname");
+  a_s_jetwings = getStructArray("s_sco_east_walkway_drones", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_assault", 1);
@@ -364,7 +364,7 @@ sco_east_walkway_support() {
 }
 
 sco_east_walkway_support_interior() {
-  a_s_jetwings = getstructarray("s_sco_east_walkway2", "targetname");
+  a_s_jetwings = getStructArray("s_sco_east_walkway2", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_east_walkway");
@@ -485,14 +485,14 @@ sco_west_walkway_support() {
   sco_west_walkway_support_wait();
   s_loc = getstruct("s_sco_west_walkway_smoke", "targetname");
   level thread play_fx("sco_smoke", s_loc.origin, s_loc.angles, 30);
-  a_s_jetwings = getstructarray("s_sco_west_walkway", "targetname");
+  a_s_jetwings = getStructArray("s_sco_west_walkway", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_west_walkway");
     wait(randomfloatrange(0.1, 1.0));
   }
 
-  a_s_jetwings = getstructarray("s_sco_west_walkway_drones", "targetname");
+  a_s_jetwings = getStructArray("s_sco_west_walkway_drones", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_assault", 1);
@@ -519,14 +519,14 @@ main_entrance_claw_think() {
 sco_main_entrance_support() {
   s_loc = getstruct("s_sco_main_entrance_smoke", "targetname");
   level thread play_fx("sco_smoke", s_loc.origin, s_loc.angles, 30);
-  a_s_jetwings = getstructarray("s_sco_main_entrance", "targetname");
+  a_s_jetwings = getStructArray("s_sco_main_entrance", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_main_entrance");
     wait(randomfloatrange(0.1, 1.0));
   }
 
-  a_s_jetwings = getstructarray("s_sco_main_entrance_launcher", "targetname");
+  a_s_jetwings = getStructArray("s_sco_main_entrance_launcher", "targetname");
 
   foreach(s_jetwing in a_s_jetwings) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_jetwing, "sco_main_entrance_launcher");
@@ -568,7 +568,7 @@ ambient_jetwing_init() {
   level.a_str_jetwing_waves["beachhead"] = array("s_jetwing_drones_n1", "s_jetwing_drones_n2", "s_jetwing_drones_n3", "s_jetwing_drones_n4", "s_jetwing_drones_n5", "s_jetwing_drones_n6", "s_jetwing_drones_n7", "s_jetwing_drones_n8", "s_jetwing_drones_n11", "s_jetwing_drones_ne1", "s_jetwing_drones_ne2", "s_jetwing_drones_nw2");
   level.a_str_jetwing_waves["rooftops"] = array("s_jetwing_drones_e1", "s_jetwing_drones_e2", "s_jetwing_drones_e3", "s_jetwing_drones_e4", "s_jetwing_drones_ne3", "s_jetwing_drones_nw1", "s_jetwing_drones_nw4", "s_jetwing_drones_nw5", "s_jetwing_drones_w1", "s_jetwing_drones_w2", "s_jetwing_drones_s1", "s_jetwing_drones_s2", "s_jetwing_drones_s3", "s_jetwing_drones_sw1");
   level.a_jetwing_groups = [];
-  a_s_jetwings = getstructarray("jetwing_landing_spot", "script_noteworthy");
+  a_s_jetwings = getStructArray("jetwing_landing_spot", "script_noteworthy");
 
   foreach(s_jetwing in a_s_jetwings) {
     if(!isDefined(level.a_jetwing_groups[s_jetwing.targetname])) {

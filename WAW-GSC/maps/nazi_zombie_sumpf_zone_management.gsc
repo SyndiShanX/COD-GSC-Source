@@ -156,7 +156,7 @@ manage_outside_zone(zone_area, key, building) {
     }
 
     zombie_rise_locations = [];
-    zombie_rise_locations = GetStructArray(zone.targetname + "_zombie_rise", "targetname");
+    zombie_rise_locations = getStructArray(zone.targetname + "_zombie_rise", "targetname");
 
     if(zone_active) {
       if(isDefined(spawners)) {

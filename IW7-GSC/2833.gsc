@@ -13,7 +13,7 @@ func_CCBE() {
   var_0 linkto(level.player, "tag_origin", (0, 0, 0), (0, 0, 0));
   var_0.var_C04F = 1;
   level.player.var_763C = var_0;
-  var_1 = scripts\engine\utility::getstructarray("fxchain_start", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("fxchain_start", "script_noteworthy");
   level.var_AD40 = [];
   level.var_C1E0 = var_1.size;
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -28,7 +28,7 @@ func_CCBE() {
   level.var_37CE = 0;
   playFXOnTag(scripts\engine\utility::getfx(level.var_37CF.script_parameters), var_0, "tag_origin");
   level.var_AD40 = undefined;
-  var_3 = scripts\engine\utility::getstructarray("fxchain_transition", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("fxchain_transition", "targetname");
   thread func_68A8(var_0);
   for(;;) {
     wait(0.25);
@@ -58,16 +58,16 @@ func_CCBE() {
     }
 
     var_9 = [];
-    foreach(var_11 in scripts\engine\utility::getstructarray(level.var_37CF.var_336, "target")) {
+    foreach(var_11 in scripts\engine\utility::getStructArray(level.var_37CF.var_336, "target")) {
       var_9[var_9.size] = func_7A8D(var_11, level.var_37CF);
     }
 
     if(isDefined(level.var_37CF.target)) {
-      var_13 = scripts\engine\utility::getstructarray(level.var_37CF.target, "targetname");
+      var_13 = scripts\engine\utility::getStructArray(level.var_37CF.target, "targetname");
       foreach(var_15 in var_13) {
         var_9[var_9.size] = func_7A8D(level.var_37CF, var_15);
         if(isDefined(var_15.target)) {
-          var_10 = scripts\engine\utility::getstructarray(var_15.target, "targetname");
+          var_10 = scripts\engine\utility::getStructArray(var_15.target, "targetname");
           foreach(var_12 in var_10) {
             var_9[var_9.size] = func_7A8D(var_15, var_12);
           }
@@ -90,7 +90,7 @@ func_CCBE() {
 
 func_6C76() {
   if(isDefined(self.target)) {
-    var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+    var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
     foreach(var_2 in var_0) {
       if(!isDefined(var_2.var_3C0A)) {
         var_2.var_3C0A = self.var_3C0A;

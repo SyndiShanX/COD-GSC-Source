@@ -81,7 +81,7 @@ func_5C3A() {
         break;
       }
 
-      var_6 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      var_6 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
       if(var_6.size) {
         break;
       }
@@ -128,7 +128,7 @@ func_5C3A() {
         return;
       }
 
-      var_6 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      var_6 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
       if(var_6.size) {
         break;
       }

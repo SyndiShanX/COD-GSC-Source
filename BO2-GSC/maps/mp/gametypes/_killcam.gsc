@@ -277,10 +277,10 @@ waitskipkillcambutton() {
   self endon("disconnect");
   self endon("end_killcam");
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed())
     wait 0.05;
 
-  while(!self usebuttonpressed())
+  while(!self useButtonPressed())
     wait 0.05;
 
   self notify("end_killcam");
@@ -298,10 +298,10 @@ waitskipkillcamsafespawnbutton() {
   self endon("disconnect");
   self endon("end_killcam");
 
-  while(self fragbuttonpressed())
+  while(self fragButtonPressed())
     wait 0.05;
 
-  while(!self fragbuttonpressed())
+  while(!self fragButtonPressed())
     wait 0.05;
 
   self.wantsafespawn = 1;
@@ -370,11 +370,11 @@ endedfinalkillcamcleanup() {
 }
 
 cancelkillcamusebutton() {
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 cancelkillcamsafespawnbutton() {
-  return self fragbuttonpressed();
+  return self fragButtonPressed();
 }
 
 cancelkillcamcallback() {

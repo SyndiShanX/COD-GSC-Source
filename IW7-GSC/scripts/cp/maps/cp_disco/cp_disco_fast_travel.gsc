@@ -5,7 +5,7 @@
 
 init_teleport_portals() {
   wait(5);
-  var_0 = scripts\engine\utility::getstructarray("fast_travel_portal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("fast_travel_portal", "targetname");
   foreach(var_2 in var_0) {
     var_2 thread trigger_when_player_close_by();
     wait(0.1);
@@ -31,7 +31,7 @@ trigger_when_player_close_by() {
     self.angles = (0, 0, 0);
   }
 
-  self.teleport_spots = scripts\engine\utility::getstructarray(self.end_point.target, "targetname");
+  self.teleport_spots = scripts\engine\utility::getStructArray(self.end_point.target, "targetname");
   script_add_teleport_spots();
   foreach(var_3 in self.teleport_spots) {
     if(!isDefined(var_3.angles)) {
@@ -61,7 +61,7 @@ trigger_when_player_close_by() {
     self.teleport_door_symbol hide();
   }
 
-  var_15 = scripts\engine\utility::getstructarray("chi_door_fast_travel_portal_spot", "targetname");
+  var_15 = scripts\engine\utility::getStructArray("chi_door_fast_travel_portal_spot", "targetname");
   self.portal_spot = scripts\engine\utility::getclosest(self.origin, var_15, 500);
   self.portal_scriptable = spawn("script_model", self.portal_spot.origin + (0, 0, 53));
   self.portal_scriptable setModel("tag_origin_chi_portal");

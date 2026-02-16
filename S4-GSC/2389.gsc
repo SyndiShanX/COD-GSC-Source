@@ -128,13 +128,13 @@ _id_123C() {
 }
 
 _id_1238(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("ascend_begin", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("ascend_begin", "script_noteworthy");
   var_2 = scripts\engine\utility::_id_6969(var_0, var_1);
   return var_2;
 }
 
 _id_1239(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("descend_begin", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("descend_begin", "script_noteworthy");
   var_2 = scripts\engine\utility::_id_6969(var_0, var_1);
   return var_2;
 }

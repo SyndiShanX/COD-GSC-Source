@@ -61,8 +61,8 @@ main() {
 onprecachegametype() {
   level thread maps\mp\zombies\_zm_game_module_meat_utility::init_item_meat("zmeat");
   maps\mp\gametypes_zm\_zm_gametype::rungametypeprecache("zmeat");
-  game_mode_objects = getstructarray("game_mode_object", "targetname");
-  meat_objects = getstructarray("meat_object", "targetname");
+  game_mode_objects = getStructArray("game_mode_object", "targetname");
+  meat_objects = getStructArray("meat_object", "targetname");
   all_structs = arraycombine(game_mode_objects, meat_objects, 1, 0);
 
   for(i = 0; i < all_structs.size; i++) {
@@ -190,7 +190,7 @@ watch_debug_input() {
   self endon("disconnect");
 
   for(;;) {
-    if(self actionslottwobuttonpressed()) {
+    if(self actionslottwobuttonPressed()) {
       if(getDvar(#"_id_0B188A91") != "") {
         self disableinvulnerability();
         self dodamage(self.health + 666, self.origin);
@@ -615,7 +615,7 @@ kick_meat_monitor() {
       if(isDefined(level._last_person_to_throw_meat) && player == level._last_person_to_throw_meat && curr_time - level._last_person_to_throw_meat_time <= kick_meat_timeout) {
         continue;
       }
-      if(distancesquared(player.origin, self.origin) < 2304 && player issprinting() && !player usebuttonpressed()) {
+      if(distancesquared(player.origin, self.origin) < 2304 && player issprinting() && !player useButtonPressed()) {
         if(isDefined(player._meat_team) && isDefined(level._meat_on_team) && level._meat_on_team == player._meat_team) {
           add_meat_event("player_kick_meat", player, self);
           player thread kick_the_meat(self);
@@ -1343,12 +1343,12 @@ can_touch_meat() {
 }
 
 trying_to_use() {
-  self.use_ever_released = self.use_ever_released | !self usebuttonpressed();
-  return self.use_ever_released && self usebuttonpressed();
+  self.use_ever_released = self.use_ever_released | !self useButtonPressed();
+  return self.use_ever_released && self useButtonPressed();
 }
 
 trying_to_spike(item) {
-  return item.meat_is_flying && self meleebuttonpressed();
+  return item.meat_is_flying && self meleeButtonPressed();
 }
 
 item_quick_trigger(meat_id, trigger) {
@@ -1365,7 +1365,7 @@ item_quick_trigger(meat_id, trigger) {
 
   for(i = 0; i < players.size; i++) {
     player = players[i];
-    player.use_ever_released = !player usebuttonpressed();
+    player.use_ever_released = !player useButtonPressed();
   }
 
   while(isDefined(trigger)) {
@@ -1434,7 +1434,7 @@ item_meat_watch_trigger(meat_id, trigger, callback, playersoundonuse, npcsoundon
     if(player maps\mp\zombies\_zm_laststand::is_reviving_any()) {
       continue;
     }
-    volley = self.meat_is_flying && player meleebuttonpressed();
+    volley = self.meat_is_flying && player meleeButtonPressed();
     player.volley_meat = volley;
 
     if(isDefined(self._fake_meat) && self._fake_meat)

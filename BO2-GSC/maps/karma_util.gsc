@@ -106,14 +106,14 @@ cleanup_structs(str_category) {
   level thread delete_structs(str_category, "script_noteworthy");
 
   if(str_category == "cleanup_outersolar") {
-    foreach(s_dancer in getstructarray("dancers", "script_noteworthy")) {
+    foreach(s_dancer in getStructArray("dancers", "script_noteworthy")) {
       s_dancer structdelete();
     }
   }
 }
 
 delete_structs(str_value, str_key) {
-  foreach(s_struct in getstructarray(str_value, str_key)) {
+  foreach(s_struct in getStructArray(str_value, str_key)) {
     s_struct structdelete();
   }
 }

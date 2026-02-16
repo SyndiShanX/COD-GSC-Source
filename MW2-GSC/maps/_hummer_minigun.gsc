@@ -163,7 +163,7 @@ put this in your GSC:
 maps\_hummer_minigun::main( "vehicle_hummer" );
 
 and these lines in your CSV:
-include,vehicle_hummer_minigun
+#include,vehicle_hummer_minigun
 sound,weapon_minigun,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
@@ -176,7 +176,7 @@ put this in your GSC:
 maps\_hummer_minigun::main( "vehicle_hummer", "hummer_minigun_physics" );
 
 and these lines in your CSV:
-include,vehicle_hummer_minigun
+#include,vehicle_hummer_minigun
 sound,weapon_minigun,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp
@@ -189,7 +189,7 @@ put this in your GSC:
 maps\_hummer_minigun::main( "vehicle_hummer", "hummer_minigun_physics_player", "minigun_hummer_player" );
 
 and these lines in your CSV:
-include,vehicle_hummer_minigun
+#include,vehicle_hummer_minigun
 sound,weapon_minigun,vehicle_standard,all_sp
 sound,vehicle_hummer,vehicle_standard,all_sp
 sound,vehicle_car_exp,vehicle_standard,all_sp

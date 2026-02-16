@@ -991,7 +991,7 @@ _id_BB03(var_0) {
       if(isDefined(level._id_0BAF) && isDefined(level._id_0BAF[self._id_BB0E]) && istrue(level._id_0BAF[self._id_BB0E]._id_BC18)) {
         continue;
       }
-      if((self._id_BB0E == "minigun" || self._id_BB0E == "tesla" || self._id_BB0E == "random_weapon" || self._id_BB0E == "meat_stink") && (!isPlayer(var_5) || _id_073B::_id_B4EF(var_2) || var_2 usebuttonpressed())) {
+      if((self._id_BB0E == "minigun" || self._id_BB0E == "tesla" || self._id_BB0E == "random_weapon" || self._id_BB0E == "meat_stink") && (!isPlayer(var_5) || _id_073B::_id_B4EF(var_2) || var_2 useButtonPressed())) {
         continue;
       }
       if(!istrue(self._id_30D6) && _id_073B::_id_B4EF(var_2)) {

@@ -113,7 +113,7 @@ exploder_trigger_run() {
     exploder(self.script_index);
 
     if(isDefined(sounds_for_exploder[self.script_index]) && isDefined(self.target)) {
-      sound_origins = getstructarray(self.target, "targetname");
+      sound_origins = getStructArray(self.target, "targetname");
       foreach(org in sound_origins) {
         playSoundAtPos(org.origin, sounds_for_exploder[self.script_index]);
       }
@@ -333,7 +333,7 @@ quake_event_trigger_wait(func, var1, var2, var3, var4, var5, var6) {
 }
 
 quake_events() {
-  events = getstructarray("quake_event", "targetname");
+  events = getStructArray("quake_event", "targetname");
   array_thread(events, ::quake_event_init);
   return events;
 }
@@ -431,7 +431,7 @@ quake_event_init() {
     }
   }
 
-  structs = getstructarray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
   foreach(struct in structs) {
     if(!isDefined(struct.script_noteworthy)) {
       continue;
@@ -514,7 +514,7 @@ quake_event_init_ent(ent) {
   if(!isDefined(ent.target)) {
     return;
   }
-  structs = getstructarray(ent.target, "targetname");
+  structs = getStructArray(ent.target, "targetname");
   ents = getEntArray(ent.target, "targetname");
 
   targets = array_combine(structs, ents);

@@ -1203,7 +1203,7 @@ pre_tall_grass_patroller_break_on_sight() {
 pre_tall_grass_friendly_movement() {
   level endon("_stealth_spotted");
   level endon("backend_friendlies_go_hot");
-  var_0 = common_scripts\utility::getstructarray("pre_grass_friendly_bad_places", "targetname");
+  var_0 = common_scripts\utility::getStructArray("pre_grass_friendly_bad_places", "targetname");
 
   foreach(var_3, var_2 in var_0)
   badplace_cylinder("pre_tall_grass" + var_3, 0, var_2.origin, var_2.radius, 300, "allies");
@@ -1412,7 +1412,7 @@ tall_grass_guys_path_to_trees() {
   maps\_stealth_utility::enable_stealth_for_ai();
   maps\_utility::enable_cqbwalk();
   wait 10;
-  var_0 = common_scripts\utility::getstructarray("tall_grass_guys_paths_out", "targetname");
+  var_0 = common_scripts\utility::getStructArray("tall_grass_guys_paths_out", "targetname");
 
   for(var_1 = undefined; !isDefined(var_1) || var_0.size > 0; var_0 = common_scripts\utility::array_remove(var_0, var_2)) {
     var_2 = common_scripts\utility::getclosest(self.origin, var_0);
@@ -1546,7 +1546,7 @@ tall_grass_friendly_navigation() {
 
   common_scripts\utility::flag_wait("moving_into_tall_grass");
   common_scripts\utility::flag_wait("clear_to_move_into_tall_grass");
-  var_0 = common_scripts\utility::getstructarray("friendly_start_structs", "targetname");
+  var_0 = common_scripts\utility::getStructArray("friendly_start_structs", "targetname");
   wait 0.25;
 
   foreach(var_2 in level.squad) {

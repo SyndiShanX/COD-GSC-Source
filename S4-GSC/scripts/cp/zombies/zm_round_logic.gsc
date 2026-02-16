@@ -179,7 +179,7 @@ init_rounds() {
 
 init_player_respawn_locations() {
   self.respawn_locations = [];
-  var_0 = scripts\engine\utility::getstructarray("player_respawn_location", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("player_respawn_location", "targetname");
 
   if(var_0.size > 0) {
     foreach(var_2 in var_0) {

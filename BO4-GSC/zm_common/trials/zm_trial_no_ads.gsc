@@ -101,10 +101,10 @@ function_16824dc3() {
   while(true) {
     w_curr = self getcurrentweapon();
 
-    if(isalive(self) && self adsbuttonpressed() && (w_curr.dualwieldweapon === level.weaponnone || w_curr.isriotshield)) {
+    if(isalive(self) && self adsButtonPressed() && (w_curr.dualwieldweapon === level.weaponnone || w_curr.isriotshield)) {
       self zm_trial_util::function_97444b02();
 
-      while(self adsbuttonpressed()) {
+      while(self adsButtonPressed()) {
         waitframe(1);
       }
     }

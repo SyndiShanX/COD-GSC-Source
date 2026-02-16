@@ -850,7 +850,7 @@ _id_F956(var_0, var_1, var_2, var_3, var_4) {
       continue;
     }
 
-    if(var_2 && level.player attackbuttonpressed()) {
+    if(var_2 && level.player attackButtonPressed()) {
       level notify(var_5, "fire");
       wait 0.1;
       continue;
@@ -918,7 +918,7 @@ _id_82DB() {
   level._id_60A3 = 0;
 
   for(;;) {
-    if(gettime() > level._id_60A3 && level.player usebuttonpressed() || isDefined(level._id_5E6C)) {
+    if(gettime() > level._id_60A3 && level.player useButtonPressed() || isDefined(level._id_5E6C)) {
       if(isDefined(level._id_5E6C)) {
         level._id_793A = level._id_5E6C;
       }

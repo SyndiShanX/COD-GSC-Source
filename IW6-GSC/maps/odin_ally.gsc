@@ -828,7 +828,7 @@ space_shotgun_firing(var_0, var_1) {
   for(;;) {
     var_7 = gettime() - 9000;
 
-    if(level.player attackbuttonpressed() && var_10 == 1) {
+    if(level.player attackButtonPressed() && var_10 == 1) {
       fire_space_microtar(var_2, var_3);
       var_4 = gettime();
       var_5 = var_4 - 500;
@@ -837,7 +837,7 @@ space_shotgun_firing(var_0, var_1) {
       thread struggle_shot_grunt();
     }
 
-    if(level.player attackbuttonpressed(1))
+    if(level.player attackButtonPressed(1))
       var_10 = 0;
     else
       var_10 = 1;

@@ -241,7 +241,7 @@ func_1327B() {
   level endon("game_ended");
   scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(0.5);
   for(;;) {
-    if(var_0 attackbuttonpressed()) {
+    if(var_0 attackButtonPressed()) {
       var_1 = distancesquared(self.spawnpos, self.origin);
       if(var_1 >= 5760000) {
         var_0 scripts\mp\missions::func_D991("ch_venom_distance");

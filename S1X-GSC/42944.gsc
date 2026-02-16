@@ -526,7 +526,7 @@ reconplayerexit(var_0) {
   for(;;) {
     var_2 = 0;
 
-    while(var_1 usebuttonpressed()) {
+    while(var_1 useButtonPressed()) {
       var_2 = var_2 + 0.05;
 
       if(var_2 > 0.75) {

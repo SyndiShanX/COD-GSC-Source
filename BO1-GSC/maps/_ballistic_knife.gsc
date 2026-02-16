@@ -131,7 +131,7 @@ watch_use_trigger(trigger, model, callback, weapon, playerSoundOnUse, npcSoundOn
     if(isDefined(trigger.claimedBy) && (player != trigger.claimedBy)) {
       continue;
     }
-    if(player UseButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
+    if(player useButtonPressed() && !player.throwingGrenade && !player meleeButtonPressed()) {
       if(isDefined(playerSoundOnUse)) {
         player playLocalSound(playerSoundOnUse);
       }

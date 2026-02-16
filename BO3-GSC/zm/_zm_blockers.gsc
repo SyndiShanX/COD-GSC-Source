@@ -187,7 +187,7 @@ function door_buy() {
   if(getdvarint("zombie_unlock_all") > 0 || (isDefined(force) && force)) {
     return true;
   }
-  if(!who usebuttonpressed()) {
+  if(!who useButtonPressed()) {
     return false;
   }
   if(who zm_utility::in_revive_trigger()) {
@@ -837,7 +837,7 @@ function debris_think() {
   while(true) {
     self waittill("trigger", who, force);
     if(getdvarint("zombie_unlock_all") > 0 || (isDefined(force) && force)) {} else {
-      if(!who usebuttonpressed()) {
+      if(!who useButtonPressed()) {
         continue;
       }
       if(who.is_drinking > 0) {
@@ -1183,7 +1183,7 @@ function player_fails_blocker_repair_trigger_preamble(player, players, trigger, 
   if(players.size == 1 && isDefined(players[0].intermission) && players[0].intermission == 1) {
     return true;
   }
-  if(hold_required && !player usebuttonpressed()) {
+  if(hold_required && !player useButtonPressed()) {
     return true;
   }
   if(!hold_required && !player util::use_button_held()) {

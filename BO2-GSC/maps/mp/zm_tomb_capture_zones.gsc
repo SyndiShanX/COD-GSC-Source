@@ -91,7 +91,7 @@ init_pap_animtree() {
 setup_capture_zones() {
   spawner_capture_zombie = getent("capture_zombie_spawner", "targetname");
   spawner_capture_zombie add_spawn_function(::capture_zombie_spawn_init);
-  a_s_generator = getstructarray("s_generator", "targetname");
+  a_s_generator = getStructArray("s_generator", "targetname");
   registerclientfield("world", "packapunch_anim", 14000, 3, "int");
   registerclientfield("actor", "zone_capture_zombie", 14000, 1, "int");
   registerclientfield("scriptmover", "zone_capture_emergence_hole", 14000, 1, "int");
@@ -725,7 +725,7 @@ activate_capture_zone(b_show_emergence_holes) {
   if(!flag("recapture_event_in_progress"))
     self thread generator_initiated_vo();
 
-  self.a_emergence_hole_structs = getstructarray(self.target, "targetname");
+  self.a_emergence_hole_structs = getStructArray(self.target, "targetname");
   self show_emergence_holes(b_show_emergence_holes);
 
   if(flag("recapture_event_in_progress") && self ent_flag("current_recapture_target_zone")) {
@@ -825,7 +825,7 @@ get_emergence_hole_spawn_point() {
       s_spawn_point.spawned_zombie = 1;
       return s_spawn_point;
     } else
-      self.a_emergence_hole_structs = getstructarray(self.target, "targetname");
+      self.a_emergence_hole_structs = getStructArray(self.target, "targetname");
 
     wait 0.05;
   }
@@ -1695,7 +1695,7 @@ get_recapture_attacker_count() {
 watch_for_open_sesame() {
   level waittill("open_sesame");
   level.b_open_sesame = 1;
-  a_generators = getstructarray("s_generator", "targetname");
+  a_generators = getStructArray("s_generator", "targetname");
 
   foreach(s_generator in a_generators) {
     s_temp = level.zone_capture.zones[s_generator.script_noteworthy];

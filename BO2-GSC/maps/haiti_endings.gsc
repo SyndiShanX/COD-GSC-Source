@@ -419,7 +419,7 @@ watch_shoot_menendez() {
   level endon("ending_outside_killed");
 
   while(true) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       level thread maps\_audio::switch_music_wait("HAI_CHOICE_KILL", 4);
       break;
     }
@@ -447,7 +447,7 @@ watch_capture_menendez() {
   level endon("ending_outside_killed");
 
   while(true) {
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       setmusicstate("HAI_CHOICE_CAPTURE");
       break;
     }

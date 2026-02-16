@@ -863,14 +863,14 @@ rooftop_jumpcheck(var_0, var_1) {
   var_2 = 0;
 
   while(!common_scripts\utility::flag(var_1)) {
-    var_2 = level.player jumpbuttonpressed();
+    var_2 = level.player jumpbuttonPressed();
     wait 0.05;
   }
 
   maps\_utility::delaythread(var_0, ::rooftop_jumpfail);
 
   for(;;) {
-    if(level.player jumpbuttonpressed()) {
+    if(level.player jumpbuttonPressed()) {
       if(!var_2 && common_scripts\utility::flag(var_1))
         return;
       else if(!var_2)
@@ -975,7 +975,7 @@ test_func_on_button() {
     return;
   }
   for(;;) {
-    if(level.player buttonpressed("DPAD_DOWN")) {
+    if(level.player buttonPressed("DPAD_DOWN")) {
       var_0 = getent("sea_floor_animated", "targetname");
       var_1 = 0;
 
@@ -994,7 +994,7 @@ test_func_on_button() {
       wait 1;
     }
 
-    if(level.player buttonpressed("DPAD_UP")) {
+    if(level.player buttonPressed("DPAD_UP")) {
       for(;;) {
         iprintln(level.player_sway_weight);
         iprintln(level.player_wind_weight);
@@ -1002,10 +1002,10 @@ test_func_on_button() {
       }
     }
 
-    if(level.player buttonpressed("DPAD_LEFT"))
+    if(level.player buttonPressed("DPAD_LEFT"))
       common_scripts\utility::flag_set("flag_breach_final_tracks");
 
-    if(level.player buttonpressed("DPAD_RIGHT")) {}
+    if(level.player buttonPressed("DPAD_RIGHT")) {}
 
     wait(level.timestep);
   }
@@ -3082,7 +3082,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
       level.player enableweaponpickup();
     }
 
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       var_12++;
 
     if(common_scripts\utility::flag(var_10) && var_12 >= var_5) {

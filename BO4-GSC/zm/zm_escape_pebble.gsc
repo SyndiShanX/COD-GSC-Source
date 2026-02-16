@@ -239,17 +239,17 @@ track_player_eyes() {
   while(!b_saw_the_wth) {
     n_time = 0;
 
-    while(self adsbuttonpressed() && n_time < 25) {
+    while(self adsButtonPressed() && n_time < 25) {
       n_time++;
       waitframe(1);
     }
 
-    if(n_time >= 25 && self adsbuttonpressed() && self zm_zonemgr::entity_in_zone("zone_catwalk_03") && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
+    if(n_time >= 25 && self adsButtonPressed() && self zm_zonemgr::entity_in_zone("zone_catwalk_03") && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
       self clientfield::increment_to_player("" + # "hash_f2d0b920043dbbd", 1);
       j_time = 0;
 
-      while(self adsbuttonpressed() && j_time < 5) {
+      while(self adsButtonPressed() && j_time < 5) {
         j_time++;
         waitframe(1);
       }

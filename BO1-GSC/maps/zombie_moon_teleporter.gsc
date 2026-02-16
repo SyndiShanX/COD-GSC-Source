@@ -109,7 +109,7 @@ is_player_teleport_valid(player) {
 get_teleporter_target_positions(teleporter_ent, name) {
   target_positions = [];
   if((isDefined(teleporter_ent.script_noteworthy)) && (teleporter_ent.script_noteworthy == "enter_no_mans_land")) {
-    player_starts = getstructarray("packp_respawn_point", "script_noteworthy");
+    player_starts = getStructArray("packp_respawn_point", "script_noteworthy");
     for(i = 0; i < player_starts.size; i++) {
       target_positions[i] = player_starts[i];
     }

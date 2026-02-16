@@ -1220,7 +1220,7 @@ func_B514() {
   var_0 = [];
   var_1 = 0;
   while(getdvarint("debug_measure")) {
-    if(level.player usebuttonpressed() && gettime() > var_1) {
+    if(level.player useButtonPressed() && gettime() > var_1) {
       if(var_0.size == 2) {
         var_0 = [];
       } else {

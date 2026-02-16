@@ -328,7 +328,7 @@ _switch_to_weapon() {
         level._fire_direction.m_aimpoint.origin = v_aim_pos;
       }
 
-      b_pressed_attack = self attackbuttonpressed();
+      b_pressed_attack = self attackButtonPressed();
 
       if(b_pressed_attack) {
         weapon_info = level._fire_direction.a_weapons[str_weapon_current];

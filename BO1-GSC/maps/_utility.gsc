@@ -2336,7 +2336,7 @@ start_teleport_players(start_name, coop_sort) {
   if(isDefined(coop_sort) && coop_sort) {
     starts = get_sorted_starts(start_name);
   } else {
-    starts = getstructarray(start_name, "targetname");
+    starts = getStructArray(start_name, "targetname");
   }
   assertex(starts.size >= players.size, "Need more start positions for players!");
   for(i = 0; i < players.size; i++) {
@@ -2348,7 +2348,7 @@ start_teleport_players(start_name, coop_sort) {
   set_breadcrumbs(starts);
 }
 get_sorted_starts(start_name) {
-  player_starts = getstructarray(start_name, "targetname");
+  player_starts = getStructArray(start_name, "targetname");
   for(i = 0; i < player_starts.size; i++) {
     for(j = i; j < player_starts.size; j++) {
       assertex(isDefined(player_starts[j].script_int), "start at: " + player_starts[j].origin + " must have a script_int set for coop spawning");
@@ -2364,7 +2364,7 @@ get_sorted_starts(start_name) {
 }
 start_teleport_ai(start_name, ai_names) {
   friendly_ai = get_ai_array(ai_names, "script_noteworthy");
-  ai_starts = getstructarray(start_name + "_ai", "targetname");
+  ai_starts = getStructArray(start_name + "_ai", "targetname");
   assertex(ai_starts.size >= friendly_ai.size, "Need more start positions for ai!");
   for(i = 0; i < friendly_ai.size; i++) {
     start_i = 0;
@@ -5814,13 +5814,13 @@ attack_button_held() {
   return self._holding_button[level.BUTTON_ATTACK];
 }
 use_button_pressed() {
-  return (self UseButtonPressed());
+  return (self useButtonPressed());
 }
 ads_button_pressed() {
-  return (self AdsButtonPressed());
+  return (self adsButtonPressed());
 }
 attack_button_pressed() {
-  return (self AttackButtonPressed());
+  return (self attackButtonPressed());
 }
 init_button_wrappers() {
   if(!isDefined(level._button_funcs)) {

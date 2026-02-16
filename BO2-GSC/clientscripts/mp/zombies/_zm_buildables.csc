@@ -59,7 +59,7 @@ set_clientfield_buildables_code_callbacks() {
   }
 }
 
-include_zombie_buildable(buiildable_name) {
+#include_zombie_buildable(buiildable_name) {
   if(!isDefined(level.zombie_include_buildables))
     level.zombie_include_buildables = [];
 

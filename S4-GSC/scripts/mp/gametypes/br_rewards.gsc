@@ -268,8 +268,8 @@ _id_8186() {
   scripts\cp_mp\killstreaks\airdrop::_id_8272();
   level._id_10CD9["icon_waypoint_marker"] = "DROP_BAG";
   level._id_500F = spawnStruct();
-  level._id_500F._id_3A0B = scripts\engine\utility::getstructarray("dropBagCluterNode", "script_noteworthy");
-  var_0 = scripts\engine\utility::getstructarray("dropBagLocation", "script_noteworthy");
+  level._id_500F._id_3A0B = scripts\engine\utility::getStructArray("dropBagCluterNode", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("dropBagLocation", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     var_2._id_84EF = 0;

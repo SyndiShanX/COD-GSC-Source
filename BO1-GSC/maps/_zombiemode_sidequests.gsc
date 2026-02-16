@@ -139,7 +139,7 @@ set_stage_time_limit(sidequest_name, stage_name, time_limit, timer_func) {
   level._zombie_sidequests[sidequest_name].stages[stage_name].time_limit_func = timer_func;
 }
 declare_stage_asset_from_struct(sidequest_name, stage_name, target_name, thread_func, trigger_thread_func) {
-  structs = getstructarray(target_name, "targetname");
+  structs = getStructArray(target_name, "targetname");
   for(i = 0; i < structs.size; i++) {
     asset = spawnStruct();
     asset.type = "struct";
@@ -177,7 +177,7 @@ declare_sidequest_asset(sidequest_name, target_name, thread_func, trigger_thread
   }
 }
 declare_sidequest_asset_from_struct(sidequest_name, target_name, thread_func, trigger_thread_func) {
-  structs = getstructarray(target_name, "targetname");
+  structs = getStructArray(target_name, "targetname");
   for(i = 0; i < structs.size; i++) {
     asset = spawnStruct();
     asset.type = "struct";
@@ -615,7 +615,7 @@ fake_use(notify_string, qualifier_func) {
       }
       if(qualifier_passed && (DistanceSquared(self.origin, players[i].origin) < 64 * 64)) {
         if(players[i] is_facing(self)) {
-          if(players[i] UseButtonPressed()) {
+          if(players[i] useButtonPressed()) {
             self notify(notify_string, players[i]);
             return;
           }

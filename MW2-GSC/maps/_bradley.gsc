@@ -46,7 +46,7 @@ put this in your GSC:
 maps\_bradley::main( "vehicle_bradley" );
 
 and these lines in your CSV:
-include,vehicle_bradley_bradley
+#include,vehicle_bradley_bradley
 sound,vehicle_bradley,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 
@@ -58,7 +58,7 @@ put this in your GSC:
 maps\_bradley::main( "vehicle_bradley", "bradley_physics" );
 
 and these lines in your CSV:
-include,vehicle_bradley_bradley
+#include,vehicle_bradley_bradley
 sound,vehicle_bradley,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 

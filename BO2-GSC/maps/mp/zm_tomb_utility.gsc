@@ -172,7 +172,7 @@ watch_devgui_quadrotor() {
   }
 }
 
-include_craftable(craftable_struct) {
+#include_craftable(craftable_struct) {
   println("ZM >> include_craftable = " + craftable_struct.name);
 
   maps\mp\zombies\_zm_craftables::include_zombie_craftable(craftable_struct);
@@ -585,7 +585,7 @@ staff_charge_watch() {
   self endon("weapon_change");
   self endon("weapon_fired");
 
-  while(!self attackbuttonpressed())
+  while(!self attackButtonPressed())
     wait 0.05;
 
   n_old_charge = 0;

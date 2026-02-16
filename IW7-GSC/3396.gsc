@@ -234,7 +234,7 @@ clearplayersweaponlevels(var_0) {
 }
 
 get_afterlife_arcade_start_point(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("afterlife_arcade", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("afterlife_arcade", "targetname");
 
   if(isDefined(level.additional_afterlife_arcade_start_point)) {
     var_1 = scripts\engine\utility::array_combine(var_1, level.additional_afterlife_arcade_start_point);

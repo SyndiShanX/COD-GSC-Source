@@ -126,13 +126,13 @@ func_CF49() {
   var_0 = 0;
 
   for(;;) {
-    if(level.player adsbuttonpressed() && !var_0) {
+    if(level.player adsButtonPressed() && !var_0) {
       _setsaveddvar("spaceshipForceSetFovBlendStrength", 4);
       _setsaveddvar("spaceshipForceSetFov", 42);
       var_0 = 1;
     }
 
-    if(!level.player adsbuttonpressed() && var_0) {
+    if(!level.player adsButtonPressed() && var_0) {
       _setsaveddvar("spaceshipForceSetFov", 0);
       var_0 = 0;
     }
@@ -1892,7 +1892,7 @@ func_FA70() {
 }
 
 func_104D0() {
-  var_0 = scripts\engine\utility::getstructarray("debris_cloud_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("debris_cloud_struct", "script_noteworthy");
   var_1 = undefined;
   var_2 = scripts\engine\utility::spawn_tag_origin(level.var_3670 gettagorigin("fx_light_running_lrg_b3_1"), level.var_3670 gettagangles("fx_light_running_lrg_b3_1"));
   var_3 = anglesToForward(level.var_3670.angles);

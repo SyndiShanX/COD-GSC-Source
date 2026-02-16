@@ -657,10 +657,10 @@ function_6c023d11() {
 
 function_e56220fe() {
   self endon(#"death");
-  var_d04b86 = self usebuttonpressed();
+  var_d04b86 = self useButtonPressed();
 
   while(self.var_dda9b735.prompt < 3) {
-    pressed = self usebuttonpressed();
+    pressed = self useButtonPressed();
 
     if(var_d04b86) {
       if(!pressed) {

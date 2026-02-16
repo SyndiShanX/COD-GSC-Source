@@ -362,7 +362,7 @@ _id_FEE0(var_0, var_1) {
     return 0;
   }
 
-  if(!var_1 usebuttonpressed()) {
+  if(!var_1 useButtonPressed()) {
     return 0;
   }
 
@@ -370,7 +370,7 @@ _id_FEE0(var_0, var_1) {
     return 0;
   }
 
-  if(var_1 meleebuttonpressed()) {
+  if(var_1 meleeButtonPressed()) {
     return 0;
   }
 
@@ -776,7 +776,7 @@ _id_10BE8(var_0, var_1) {
   }
 
   while(!isDefined(var_3) || gettime() < var_3) {
-    if(!var_0 usebuttonpressed()) {
+    if(!var_0 useButtonPressed()) {
       var_0._id_C2FE = 1;
       break;
     }
@@ -874,7 +874,7 @@ _id_4AF8() {
 
 _id_0FAC() {
   level._id_3C56 = [];
-  var_0 = scripts\engine\utility::getstructarray("contextualwalltraversal", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("contextualwalltraversal", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawnStruct();

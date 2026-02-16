@@ -970,7 +970,7 @@ killstreakwaiter() {
     if(iskillstreakremoteoverrideweapon(killstreak, weapon)) {
       continue;
     }
-    inventorybuttonpressed = self inventorybuttonpressed() || isDefined(self.pers["isBot"]);
+    inventorybuttonpressed = self inventorybuttonPressed() || isDefined(self.pers["isBot"]);
     waittillframeend;
 
     if(isDefined(self.usingkillstreakheldweapon) && self.usingkillstreakheldweapon && maps\mp\killstreaks\_killstreak_weapons::isheldkillstreakweapon(killstreak)) {

@@ -6,7 +6,7 @@
 _id_8121() {
   level._id_A464 = ::_id_65DB;
   level._id_10E34 = [];
-  level._id_10E3B = scripts\engine\utility::getstructarray("window_entrance", "targetname");
+  level._id_10E3B = scripts\engine\utility::getStructArray("window_entrance", "targetname");
   scripts\engine\utility::_id_1BE2(level._id_10E3B, ::_id_811A);
 }
 
@@ -15,7 +15,7 @@ _id_44B7() {
 
   for(;;) {
     var_0 = scripts\engine\utility::_id_6969(level.players[0].origin, level._id_10E3B);
-    var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
     var_1 = scripts\engine\utility::_id_1B8D(var_1, var_0);
 
     foreach(var_3 in var_1) {
@@ -60,7 +60,7 @@ _id_811A() {
   self._id_2290._id_25C4[3] = "boarded";
   self._id_2290._id_25C4[4] = "boarded";
   self._id_2290._id_25C4[5] = "boarded";
-  var_4 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_4 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   foreach(var_6 in var_4) {
     if(isDefined(var_6._id_039B) && var_6._id_039B == "attack_spot") {
@@ -74,7 +74,7 @@ _id_811A() {
   }
 
   level._id_10E34[level._id_10E34.size] = self;
-  var_8 = scripts\engine\utility::_id_6969(self.origin, scripts\engine\utility::getstructarray("secure_window", "script_noteworthy"));
+  var_8 = scripts\engine\utility::_id_6969(self.origin, scripts\engine\utility::getStructArray("secure_window", "script_noteworthy"));
   self._id_039B = _id_6864(var_8);
   self._id_CD99 = "mid";
 
@@ -115,7 +115,7 @@ _id_6864(var_0) {
 _id_5236(var_0) {
   var_0._id_523F = 1;
   var_0._id_A927 = undefined;
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_3._id_A927 = undefined;
@@ -126,7 +126,7 @@ _id_5236(var_0) {
 _id_4A73(var_0) {
   var_0._id_523F = 0;
   var_0._id_A927 = undefined;
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_3._id_A927 = undefined;
@@ -135,7 +135,7 @@ _id_4A73(var_0) {
 }
 
 _id_5237(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
 
   foreach(var_3 in var_1) {
     _id_5236(var_3);
@@ -256,7 +256,7 @@ _id_86CC(var_0) {
 
 _id_D7AF() {
   var_0 = anglestoright(self.angles);
-  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
 
   foreach(var_3 in var_1) {
     var_4 = var_3.origin - self.origin;
@@ -322,7 +322,7 @@ _id_6503(var_0) {
     }
   }
 
-  var_5 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_5 = scripts\engine\utility::_id_1B8D(var_5, var_0);
   var_6 = _func_0204(var_5, self.origin);
   return var_6[0];
@@ -335,7 +335,7 @@ _id_6618(var_0) {
     return var_1;
   }
 
-  var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = scripts\engine\utility::_id_1B8D(var_2, var_0);
   var_2 = scripts\engine\utility::array_randomize(var_2);
 
@@ -380,7 +380,7 @@ _id_C382(var_0, var_1) {
   if(!_id_5519(var_0)) {
     return;
   }
-  var_2 = scripts\engine\utility::getstructarray("secure_window", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("secure_window", "script_noteworthy");
   var_3 = scripts\engine\utility::_id_6969(var_0.origin, var_2);
 
   if(!isDefined(var_1)) {

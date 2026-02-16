@@ -131,7 +131,7 @@ trap_init() {
     }
   }
   self._trap_fx_structs = [];
-  components = GetStructArray(self.target, "targetname");
+  components = getStructArray(self.target, "targetname");
   for(i = 0; i < components.size; i++) {
     if(isDefined(components[i].script_string) && components[i].script_string == "use_this_angle") {
       self.use_this_angle = components[i];
@@ -279,7 +279,7 @@ trap_activate_electric() {
       clientnotify(self.script_string + "1");
     }
   }
-  fx_points = getstructarray(self.target, "targetname");
+  fx_points = getStructArray(self.target, "targetname");
   for(i = 0; i < fx_points.size; i++) {
     wait_network_frame();
     fx_points[i] thread trap_audio_fx(self);
@@ -296,7 +296,7 @@ trap_activate_fire() {
   self._trap_cooldown_time = 60;
   clientnotify(self.script_string + "1");
   clientnotify(self.script_parameters);
-  fx_points = getstructarray(self.target, "targetname");
+  fx_points = getStructArray(self.target, "targetname");
   for(i = 0; i < fx_points.size; i++) {
     wait_network_frame();
     fx_points[i] thread trap_audio_fx(self);

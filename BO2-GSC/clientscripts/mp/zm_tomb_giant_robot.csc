@@ -121,7 +121,7 @@ play_eject_steam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
 loop_eject_steam_fx(localclientnum) {
   self endon("stop_eject_steam_fx");
-  a_s_tubes = getstructarray("giant_robot_eject_tube", "script_noteworthy");
+  a_s_tubes = getStructArray("giant_robot_eject_tube", "script_noteworthy");
   a_s_tubes = get_array_of_closest(self.origin, a_s_tubes);
   s_tube = a_s_tubes[0];
   self thread sndplaysteamfx("stop_eject_steam_fx", s_tube.origin);
@@ -134,7 +134,7 @@ loop_eject_steam_fx(localclientnum) {
 
 all_tubes_play_eject_steam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    a_s_alltubes = getstructarray("giant_robot_eject_tube", "script_noteworthy");
+    a_s_alltubes = getStructArray("giant_robot_eject_tube", "script_noteworthy");
     a_s_alltubes = get_array_of_closest(self.origin, a_s_alltubes);
     n_robot_id = a_s_alltubes[0].script_int;
     level.a_s_tubes = [];
@@ -208,17 +208,17 @@ toggle_robot_warning_lights(localclientnum, oldval, newval, bnewent, binitialsna
     level.robot_light_positions = [];
     level.robot_light_positions[0] = spawnStruct();
     level.robot_light_positions[0].struct_name = "nml_warn_light_fp_ref";
-    level.robot_light_positions[0].warning_lights = getstructarray("nml_foot_warn_light", "targetname");
+    level.robot_light_positions[0].warning_lights = getStructArray("nml_foot_warn_light", "targetname");
     assert(level.robot_light_positions[0].warning_lights.size > 0, "DID NOT FIND THE STRUCTS FOR THE FOOTPRINT LIGHTS - NML");
     level.robot_light_positions[1] = spawnStruct();
     level.robot_light_positions[1].struct_name = "trench_warn_light_fp_ref";
     level.robot_light_positions[1].warning_lights = [];
-    level.robot_light_positions[1].warning_lights = getstructarray("trench_foot_warn_light", "targetname");
+    level.robot_light_positions[1].warning_lights = getStructArray("trench_foot_warn_light", "targetname");
     assert(level.robot_light_positions[1].warning_lights.size > 0, "DID NOT FIND THE STRUCTS FOR THE FOOTPRINT LIGHTS - TRENCHES");
     level.robot_light_positions[2] = spawnStruct();
     level.robot_light_positions[2].struct_name = "church_warn_light_fp_ref";
     level.robot_light_positions[2].warning_lights = [];
-    level.robot_light_positions[2].warning_lights = getstructarray("church_foot_warn_light", "targetname");
+    level.robot_light_positions[2].warning_lights = getStructArray("church_foot_warn_light", "targetname");
     assert(level.robot_light_positions[2].warning_lights.size > 0, "DID NOT FIND THE STRUCTS FOR THE FOOTPRINT LIGHTS - CHURCH");
   }
 

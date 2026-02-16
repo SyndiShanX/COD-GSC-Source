@@ -786,7 +786,7 @@ function_2dd4aa9d(player) {
   concertinawire = self;
   var_1c365dd = !(isDefined(level.var_cbec7a45) && level.var_cbec7a45) && level.var_87226c31.bundle.var_baf7c45 && player status_effect::function_3c54ae98(2) >= level.var_87226c31.bundle.var_baf7c45;
 
-  if(player jumpbuttonpressed() && (isDefined(player.var_10fb4c3d) ? player.var_10fb4c3d : 1)) {
+  if(player jumpbuttonPressed() && (isDefined(player.var_10fb4c3d) ? player.var_10fb4c3d : 1)) {
     if(!isDefined(player.var_357edf99) || !player.var_357edf99) {
       if(var_1c365dd) {
         damageamount = isDefined(level.var_87226c31.bundle.var_24458de7) ? level.var_87226c31.bundle.var_24458de7 : 0;
@@ -1002,7 +1002,7 @@ watchweaponchange() {
   self endon(#"watchweaponchange_singleton");
 
   while(true) {
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       if(isDefined(player.concertinawire)) {
         player.concertinawire.var_5af6633b = 1;
       }

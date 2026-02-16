@@ -719,7 +719,7 @@ debug_queue_monitor() {
 }
 
 build_spawn_zones(cycle_data) {
-  spawnLocations = getstructarray("alien_spawn_struct", "targetname");
+  spawnLocations = getStructArray("alien_spawn_struct", "targetname");
   spawnZones = getEntArray("spawn_zone", "targetname");
 
   cycle_data.spawn_zones = [];

@@ -894,7 +894,7 @@ set_flag_when_not_firing(var_0) {
   var_2 = var_1;
 
   for(;;) {
-    if(level.player attackbuttonpressed()) {
+    if(level.player attackButtonPressed()) {
       var_2 = 0;
 
       if(!common_scripts\utility::flag("player_is_firing"))

@@ -584,19 +584,19 @@ function faultdeath() {
 }
 
 function dpad_up_pressed() {
-  return self actionslotonebuttonpressed();
+  return self actionslotonebuttonPressed();
 }
 
 function dpad_down_pressed() {
-  return self actionslottwobuttonpressed();
+  return self actionslottwobuttonPressed();
 }
 
 function dpad_right_pressed() {
-  return self actionslotfourbuttonpressed();
+  return self actionslotfourbuttonPressed();
 }
 
 function dpad_left_pressed() {
-  return self actionslotthreebuttonpressed();
+  return self actionslotthreebuttonPressed();
 }
 
 function end_game_state() {

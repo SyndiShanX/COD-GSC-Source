@@ -92,7 +92,7 @@ _id_6764() {
 }
 
 _id_5F06(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_2 = common_scripts\utility::getStructArray(var_0, var_1);
 
   foreach(var_4 in var_2) {}
   _id_6700(var_4);

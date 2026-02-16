@@ -130,7 +130,7 @@ electric_trap_move_switch(parent) {
 }
 activate_electric_trap(who) {
   clientnotify(self.target);
-  fire_points = getstructarray(self.target, "targetname");
+  fire_points = getStructArray(self.target, "targetname");
   for(i = 0; i < fire_points.size; i++) {
     wait_network_frame();
     fire_points[i] thread electric_trap_fx(self);

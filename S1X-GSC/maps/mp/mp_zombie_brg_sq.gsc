@@ -487,7 +487,7 @@ stage2_open_door() {
 }
 
 stage2_cave_valves() {
-  var_0 = common_scripts\utility::getstructarray("cave_valve_loc", "targetname");
+  var_0 = common_scripts\utility::getStructArray("cave_valve_loc", "targetname");
 
   for(var_1 = 0; var_1 < 4; var_1++) {
     var_2 = common_scripts\utility::random(var_0);
@@ -1416,7 +1416,7 @@ stage12_spawn_key() {
 }
 
 stage12_tower_access() {
-  var_0 = common_scripts\utility::getstructarray("burger_tower_destination", "targetname");
+  var_0 = common_scripts\utility::getStructArray("burger_tower_destination", "targetname");
   var_1 = common_scripts\utility::getstruct("drive_decrypted_use", "targetname");
   var_2 = getent("burger_screen_disabled", "targetname");
   var_3 = getent("burger_screen_decrypt", "targetname");
@@ -1481,7 +1481,7 @@ burger_room_free_access() {
     return;
   }
   level.zmbsqburgerroomopen = 1;
-  var_0 = common_scripts\utility::getstructarray("burger_tower_destination", "targetname");
+  var_0 = common_scripts\utility::getStructArray("burger_tower_destination", "targetname");
   var_1 = common_scripts\utility::getstruct("burger_tower_use", "targetname");
 
   if(!isDefined(var_1)) {
@@ -1522,7 +1522,7 @@ burger_room_free_access() {
 }
 
 burger_room_lockdown() {
-  var_0 = common_scripts\utility::getstructarray("burger_tower_exit", "targetname");
+  var_0 = common_scripts\utility::getStructArray("burger_tower_exit", "targetname");
   var_1 = getent("burger_tower_vol", "targetname");
   wait 2;
   level notify("close_burger_for_rocket");
@@ -1551,7 +1551,7 @@ burger_room_lockdown() {
 }
 
 burger_room_monitor() {
-  var_0 = common_scripts\utility::getstructarray("burger_tower_exit", "targetname");
+  var_0 = common_scripts\utility::getStructArray("burger_tower_exit", "targetname");
   var_1 = getent("burger_tower_vol", "targetname");
   var_2 = gettime() + 20000;
 
@@ -1577,7 +1577,7 @@ burger_room_monitor() {
 }
 
 burger_room_escape() {
-  var_0 = common_scripts\utility::getstructarray("burger_tower_exit", "targetname");
+  var_0 = common_scripts\utility::getStructArray("burger_tower_exit", "targetname");
   var_1 = common_scripts\utility::getstruct("burger_tower_escape_use", "targetname");
 
   for(;;) {
@@ -1873,7 +1873,7 @@ bombs_init() {
   wait 1;
   level.bombsonstandby = [];
   level.launch_point = common_scripts\utility::getstruct("org_bomb_launch", "targetname");
-  level.bomb_targets = common_scripts\utility::getstructarray("org_bomb_targets", "targetname");
+  level.bomb_targets = common_scripts\utility::getStructArray("org_bomb_targets", "targetname");
   level.bomb_count_max = 12;
   level.bomb_count_min = 2;
 

@@ -1892,7 +1892,7 @@ _id_82BC() {
 }
 
 _id_D8C7() {
-  var_0 = scripts\engine\utility::getstructarray("weapon_pickup", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("weapon_pickup", "targetname");
 
   if(istrue(level._id_E3C8)) {
     _id_D8B6();
@@ -3438,7 +3438,7 @@ _id_D8B0() {
   }
 
   level._id_B069 = 0;
-  var_0 = scripts\engine\utility::getstructarray("weapon_pickup", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("weapon_pickup", "targetname");
 
   foreach(var_2 in var_0) {
     if(istrue(level._id_165E) || istrue(game["practiceRound"]) || level._id_1AB9 != 3) {

@@ -30,7 +30,7 @@ main() {
   setDvar("scr_spawn_enemy_influencer_radius", 1620);
   level thread gondola_sway();
   level thread glass_exploder_init();
-  glasses = GetStructArray("glass_shatter_on_spawn", "targetname");
+  glasses = getStructArray("glass_shatter_on_spawn", "targetname");
   for(i = 0; i < glasses.size; i++) {
     RadiusDamage(glasses[i].origin, 64, 101, 100);
   }

@@ -581,7 +581,7 @@ func_AAD3() {
 }
 
 func_AADA() {
-  level.air_start_nodes = scripts\engine\utility::getstructarray("chopper_boss_path_start", "targetname");
+  level.air_start_nodes = scripts\engine\utility::getStructArray("chopper_boss_path_start", "targetname");
 
   foreach(var_1 in level.air_start_nodes) {
     var_1.neighbors = var_1 func_AAD3();
@@ -589,7 +589,7 @@ func_AADA() {
 }
 
 func_AAD9() {
-  level.var_1A67 = scripts\engine\utility::getstructarray("chopper_boss_path", "targetname");
+  level.var_1A67 = scripts\engine\utility::getStructArray("chopper_boss_path", "targetname");
 
   foreach(var_1 in level.var_1A67) {
     var_1.neighbors = var_1 func_AAD3();
@@ -597,7 +597,7 @@ func_AAD9() {
 }
 
 func_AAD8() {
-  level.var_1A66 = scripts\engine\utility::getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
+  level.var_1A66 = scripts\engine\utility::getStructArray("so_chopper_boss_path_struct", "script_noteworthy");
 
   foreach(var_1 in level.var_1A66) {
     var_1.neighbors = var_1 func_AAD3();

@@ -425,7 +425,7 @@ astro_headbutt_damage(astro, org) {
 astro_zombie_teleport_enemy() {
   self endon("death");
   player = self.player_to_headbutt;
-  black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
+  black_hole_teleport_structs = getStructArray("struct_black_hole_teleport", "targetname");
   chosen_spot = undefined;
   if(isDefined(level._special_blackhole_bomb_structs)) {
     black_hole_teleport_structs = [[level._special_blackhole_bomb_structs]]();

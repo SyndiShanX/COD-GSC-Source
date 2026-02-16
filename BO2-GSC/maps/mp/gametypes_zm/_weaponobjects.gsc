@@ -1072,7 +1072,7 @@ hackerresult(player, owner) {
       break;
     }
 
-    if(!player usebuttonpressed()) {
+    if(!player useButtonPressed()) {
       success = 0;
       break;
     }
@@ -1809,7 +1809,7 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
     if(isDefined(isequipment) && isequipment)
       grenade = 0;
 
-    if(player usebuttonpressed() && !grenade && !player meleebuttonpressed()) {
+    if(player useButtonPressed() && !grenade && !player meleeButtonPressed()) {
       if(isDefined(playersoundonuse))
         player playlocalsound(playersoundonuse);
 

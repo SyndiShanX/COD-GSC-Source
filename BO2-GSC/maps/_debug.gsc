@@ -1012,11 +1012,11 @@ debug_reflection_buttons() {
   while(getdebugdvar("debug_reflection") == "1" || getdebugdvar("debug_reflection") == "3" || getdebugdvar("debug_reflection_matte") == "1" || getdebugdvar("debug_color_pallete") == "1" || getdebugdvar("debug_color_pallete") == "2") {
     players = get_players();
 
-    if(players[0] buttonpressed("BUTTON_X")) {
+    if(players[0] buttonPressed("BUTTON_X")) {
       offset = offset + 50;
     }
 
-    if(players[0] buttonpressed("BUTTON_Y")) {
+    if(players[0] buttonPressed("BUTTON_Y")) {
       offset = offset - 50;
     }
 
@@ -2057,7 +2057,7 @@ draw_animsounds_in_hud() {
   level.animsound_hud_animname.label = "Actor: " + animname;
   players = get_players();
 
-  if(players[0] buttonpressed("f12")) {
+  if(players[0] buttonPressed("f12")) {
     if(!level.animsound_locked_pressed) {
       level.animsound_locked = !level.animsound_locked;
       level.animsound_locked_pressed = 1;
@@ -2065,13 +2065,13 @@ draw_animsounds_in_hud() {
   } else
     level.animsound_locked_pressed = 0;
 
-  if(players[0] buttonpressed("UPARROW")) {
+  if(players[0] buttonPressed("UPARROW")) {
     if(level.animsound_input != "up") {
       level.animsound_selected--;
     }
 
     level.animsound_input = "up";
-  } else if(players[0] buttonpressed("DOWNARROW")) {
+  } else if(players[0] buttonPressed("DOWNARROW")) {
     if(level.animsound_input != "down") {
       level.animsound_selected++;
     }
@@ -2151,7 +2151,7 @@ draw_animsounds_in_hud() {
 
   players = get_players();
 
-  if(players[0] buttonpressed("del")) {
+  if(players[0] buttonPressed("del")) {
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
 
@@ -2995,7 +2995,7 @@ spawn_guy_placement(spawner) {
 spawn_anywhere(spawner) {
   level endon("kill dynamic spawning");
 
-  if(self usebuttonpressed()) {
+  if(self useButtonPressed()) {
     spawn = spawner spawn_ai();
 
     if(spawn_failed(spawn)) {
@@ -3095,7 +3095,7 @@ ai_puppet_manager() {
       level.ai_puppet lookatpos(level.playercursor["position"]);
     }
 
-    if(self buttonpressed("BUTTON_RSTICK")) {
+    if(self buttonPressed("BUTTON_RSTICK")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.ai_puppet_target)) {
           if(isai(level.ai_puppet_target)) {
@@ -3127,7 +3127,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("BUTTON_A")) {
+    } else if(self buttonPressed("BUTTON_A")) {
       if(isDefined(level.ai_puppet)) {
         if(isDefined(level.playercursorai) && level.playercursorai != level.ai_puppet) {
           level.ai_puppet setgoalentity(level.playercursorai);
@@ -3152,7 +3152,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("BUTTON_X")) {
+    } else if(self buttonPressed("BUTTON_X")) {
       if(isDefined(level.playercursorai)) {
         if(isDefined(level.ai_puppet) && level.playercursorai == level.ai_puppet) {
           ai_puppet_release(1);
@@ -3167,7 +3167,7 @@ ai_puppet_manager() {
       }
 
       wait 0.2;
-    } else if(self buttonpressed("BUTTON_Y")) {
+    } else if(self buttonPressed("BUTTON_Y")) {
       if(isDefined(level.ai_puppet)) {
         if(!isDefined(level.ai_puppet.debuglookatenabled)) {
           level.ai_puppet.debuglookatenabled = 0;

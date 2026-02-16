@@ -29,7 +29,7 @@ start_tunnels() {
   delaythread(0.5, maps\_weather::rainHard, 0.1);
   delaythread(0.5, maps\_weather::lightning, maps\dcemp_fx::lightning_normal, maps\dcemp_fx::lightning_flash);
 
-  emp_teleport_team(level.team, getstructarray("tunnels_start_points", "targetname"));
+  emp_teleport_team(level.team, getStructArray("tunnels_start_points", "targetname"));
   emp_teleport_player();
 
   level.sky delete();
@@ -46,7 +46,7 @@ start_whitehouse()
 	vision_set_whitehouse();
 	level.sky delete();
 
-	emp_teleport_team( level.team, getstructarray("whitehouse_start_points", "targetname" ) );
+	emp_teleport_team( level.team, getStructArray("whitehouse_start_points", "targetname" ) );
 	emp_teleport_player();
 
 	maps\_weather::rainMedium( 1 );
@@ -812,7 +812,7 @@ start_flare()
 	vision_set_whitehouse();
 	level.sky delete();
 
-	emp_teleport_team( level.team, getstructarray("flare_start_points", "targetname" ) );
+	emp_teleport_team( level.team, getStructArray("flare_start_points", "targetname" ) );
 	emp_teleport_player();
 
 	whitehouse_flags();

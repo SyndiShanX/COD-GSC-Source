@@ -955,7 +955,7 @@ setup_electric_fence(generator) {
 
   fence.generator = generator;
 
-  generator_targets = getstructarray(generator.target, "targetname");
+  generator_targets = getStructArray(generator.target, "targetname");
   fence_sparks = [];
   top_left = generator_targets[0];
   foreach(generator_target in generator_targets) {

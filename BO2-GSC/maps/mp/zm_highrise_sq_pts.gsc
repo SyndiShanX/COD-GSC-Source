@@ -89,7 +89,7 @@ stage_logic_2() {
 
 wait_for_balls_launched() {
   level.current_generator = 1;
-  a_lion_spots = getstructarray("pts_lion", "targetname");
+  a_lion_spots = getStructArray("pts_lion", "targetname");
 
   foreach(s_lion_spot in a_lion_spots) {
     s_lion_spot.a_place_ball_trigs = [];
@@ -183,7 +183,7 @@ springpad_count_watcher(is_generator) {
   if(is_generator)
     str_which_spots = "pts_lion";
 
-  a_spots = getstructarray(str_which_spots, "targetname");
+  a_spots = getStructArray(str_which_spots, "targetname");
 
   while(true) {
     level waittill("sq_pts_springpad_in_place");
@@ -199,8 +199,8 @@ springpad_count_watcher(is_generator) {
 }
 
 is_springpad_in_place(m_springpad, is_generator) {
-  a_lion_spots = getstructarray("pts_lion", "targetname");
-  a_ghoul_spots = getstructarray("pts_ghoul", "targetname");
+  a_lion_spots = getStructArray("pts_lion", "targetname");
+  a_ghoul_spots = getStructArray("pts_ghoul", "targetname");
   a_spots = arraycombine(a_lion_spots, a_ghoul_spots, 0, 0);
 
   foreach(s_spot in a_spots) {
@@ -313,7 +313,7 @@ pts_springpad_waittill_removed(m_springpad) {
 }
 
 wait_for_all_springpads_placed(str_type, str_flag) {
-  a_spots = getstructarray(str_type, "targetname");
+  a_spots = getStructArray(str_type, "targetname");
 
   while(!flag(str_flag)) {
     is_clear = 0;
@@ -331,7 +331,7 @@ wait_for_all_springpads_placed(str_type, str_flag) {
 }
 
 pts_should_player_create_trigs(player) {
-  a_lion_spots = getstructarray("pts_lion", "targetname");
+  a_lion_spots = getStructArray("pts_lion", "targetname");
 
   foreach(s_lion_spot in a_lion_spots) {
     if(isDefined(s_lion_spot.springpad) && isDefined(s_lion_spot.springpad_buddy.springpad))
@@ -398,7 +398,7 @@ pts_reset_ball(s_lion_spot) {
 }
 
 pts_putdown_trigs_remove_for_player(player) {
-  a_lion_spots = getstructarray("pts_lion", "targetname");
+  a_lion_spots = getStructArray("pts_lion", "targetname");
 
   foreach(s_lion_spot in a_lion_spots) {
     if(!isDefined(s_lion_spot.pts_putdown_trigs))

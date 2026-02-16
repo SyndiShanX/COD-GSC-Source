@@ -155,7 +155,7 @@ p2t1_0_receive_quest() {
 p2t1_1_destroy_cages() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t1_1", "skq_p2t1_1dbg");
-  var_1 = scripts\engine\utility::getstructarray("mpq_rat_cage", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
   foreach(var_3 in var_1) {
     var_3 thread monitor_cage_visibility();
   }
@@ -171,13 +171,13 @@ p2t1_1_destroy_cages() {
 
   remove_cage_quest();
   if(!isDefined(level.next_cage)) {
-    var_1 = scripts\engine\utility::getstructarray("mpq_rat_cage", "targetname");
+    var_1 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
     var_1 = sortbydistance(var_1, level.players[0].origin);
     level.next_cage = var_1[0];
   }
 
   var_3 = undefined;
-  var_1 = scripts\engine\utility::getstructarray("cage_challenge_ring", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("cage_challenge_ring", "targetname");
   foreach(var_7 in var_1) {
     if(var_7.script_noteworthy == level.next_cage.script_noteworthy) {
       var_3 = var_7;
@@ -243,7 +243,7 @@ rat_cage_kung_fu_zombies() {
 }
 
 remove_cage_quest() {
-  var_0 = scripts\engine\utility::getstructarray("mpq_rat_cage", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
   foreach(var_2 in var_0) {
     if(isDefined(var_2.cage_model)) {
       var_2.cage_model delete();
@@ -265,7 +265,7 @@ remove_cage_quest() {
 
 reset_cage_puzzle() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("mpq_rat_cage", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_quest_failure", "rave_announcer_vo", "highest", 70, 0, 0, 1);
   level notify("cage_fail");
   foreach(var_2 in var_0) {
@@ -382,7 +382,7 @@ build_path_network(var_0, var_1, var_2) {
   level endon("cage_win");
   var_3 = [];
   var_4 = 0;
-  var_5 = scripts\engine\utility::getstructarray("mpq_rat_traversal", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("mpq_rat_traversal", "targetname");
   var_6 = undefined;
   for(;;) {
     if(var_3.size == 0) {
@@ -487,7 +487,7 @@ select_next_cage() {
   level endon("game_ended");
   level endon("cage_fail");
   level endon("cage_win");
-  var_0 = scripts\engine\utility::getstructarray("mpq_rat_cage", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("mpq_rat_cage", "targetname");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(!isDefined(var_0[var_1].claimed_cage)) {
@@ -675,7 +675,7 @@ p2t1_3_decal_puzzle() {
 setup_chinese_targ_clip() {
   level endon("game_ended");
   level endon("active_word_done");
-  var_0 = scripts\engine\utility::getstructarray("graffiti_check_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("graffiti_check_struct", "targetname");
   for(;;) {
     self setCanDamage(1);
     self.health = 9999;
@@ -877,8 +877,8 @@ phase_2_task_2() {
 p2t2_0_symbol_hunt(var_0) {
   level endon("game_ended");
   var_1 = scripts\engine\utility::flag_wait_any_return("skq_p2t2_0", "skq_p2t2_0dbg");
-  var_2 = scripts\engine\utility::getstructarray("phonebooth", "script_noteworthy");
-  var_3 = scripts\engine\utility::getstructarray("symbol_point", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("symbol_point", "targetname");
   var_2 = scripts\engine\utility::array_randomize_objects(var_2);
   var_3 = scripts\engine\utility::array_randomize_objects(var_3);
   var_4 = 0;
@@ -994,7 +994,7 @@ reset_phone_puzzle() {
   level notify("puzzle_phone_reset");
   scripts\engine\utility::flag_clear("skq_p2t2_1");
   level thread scripts\cp\cp_vo::try_to_play_vo("ww_magicbox_laughter", "rave_announcer_vo", "highest", 70, 0, 0, 1);
-  var_0 = scripts\engine\utility::getstructarray("phonebooth", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.quest_state = 0;
   }
@@ -1012,7 +1012,7 @@ p2t2_1_phone_puzzle() {
   level endon("game_ended");
   var_0 = scripts\engine\utility::flag_wait_any_return("skq_p2t2_1", "skq_p2t2_1dbg");
   if(!isDefined(level.phone_puzzle_phone)) {
-    var_1 = scripts\engine\utility::getstructarray("phonebooth", "script_noteworthy");
+    var_1 = scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy");
     var_1 = scripts\engine\utility::array_randomize_objects(var_1);
     level.phone_puzzle_phone = var_1[0];
     thread payphone_ringing(level.phone_puzzle_phone);
@@ -1074,7 +1074,7 @@ p2t2_3_poster_puzzle() {
     var_7 thread scripts\cp\cp_vo::add_to_nag_vo("missing_item_misc", "disco_comment_vo", 200, 120, 4, 1);
   }
 
-  var_9 = scripts\engine\utility::getstructarray("phonebooth", "script_noteworthy");
+  var_9 = scripts\engine\utility::getStructArray("phonebooth", "script_noteworthy");
   foreach(var_11 in var_9) {
     var_11.quest_state = 0;
   }
@@ -1344,7 +1344,7 @@ waittill_character_change() {
 setup_cipher_glyphs() {
   level endon("game_ended");
   level endon("skq_p2t2_6");
-  var_0 = scripts\engine\utility::getstructarray("letter_puzzle_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("letter_puzzle_struct", "script_noteworthy");
   var_1 = getent("letter_puzzle_clip", "targetname");
   var_2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
   foreach(var_4 in var_0) {
@@ -1744,9 +1744,9 @@ p2t3_0_missing_reel() {
     wait(0.1);
   }
 
-  var_5 = scripts\engine\utility::getstructarray("missing_reel_tp_struct", "targetname");
+  var_5 = scripts\engine\utility::getStructArray("missing_reel_tp_struct", "targetname");
   var_6 = getent("missing_reel_fire_trig", "targetname");
-  var_7 = scripts\engine\utility::getstructarray("missing_reel_fire_struct", "targetname");
+  var_7 = scripts\engine\utility::getStructArray("missing_reel_fire_struct", "targetname");
   stop_spawn_wave();
   foreach(var_3 in level.players) {
     var_3 playlocalsound("bink_ducking_alias");
@@ -1847,7 +1847,7 @@ spawn_missing_reel_wave(var_0) {
   var_2 = 0;
   foreach(var_4 in var_0) {
     if(isDefined(var_4.tp_active)) {
-      var_5 = scripts\engine\utility::getstructarray(var_4.target, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
       var_6 = 6;
       var_6 = var_6 - floor(level.players.size / 2);
       var_6 = int(var_6);
@@ -1889,7 +1889,7 @@ spawn_missing_reel_wave(var_0) {
 }
 
 teleport_zoms(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(self.target, "targetname");
   var_2 = 0;
   foreach(var_4 in var_0) {
     var_4 scripts\cp\zombies\cp_disco_spawning::move_to_spot(var_1[var_2]);
@@ -2034,7 +2034,7 @@ p2t3_2_chi_symbol() {
 }
 
 next_ring_struct() {
-  var_0 = scripts\engine\utility::getstructarray("task_3_ring_struct_rand", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("task_3_ring_struct_rand", "targetname");
   var_0 = scripts\engine\utility::array_randomize_objects(var_0);
   foreach(var_2 in var_0) {
     if(level.task3ring_fxstruct != var_2) {
@@ -2426,7 +2426,7 @@ notify_after_time(var_0, var_1) {
 
 determine_best_shovel_spawns(var_0, var_1) {
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray("camper_to_lake_spawner", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("camper_to_lake_spawner", "targetname");
   var_3 = sortbydistance(var_3, var_0);
   for(var_4 = 0; var_4 < var_1; var_4++) {
     var_2[var_4] = var_3[var_4];

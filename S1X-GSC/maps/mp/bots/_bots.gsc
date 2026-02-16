@@ -2210,7 +2210,7 @@ bot_think_crate_blocking_path() {
   for(;;) {
     wait 3;
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       continue;
     }
     if(maps\mp\_utility::isusingremote()) {

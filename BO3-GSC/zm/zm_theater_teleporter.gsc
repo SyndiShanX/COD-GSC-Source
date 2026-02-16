@@ -680,7 +680,7 @@ function function_edc40283(var_4e54c41) {
   self endon("death");
   var_4e54c41 endon("death");
   while(self._moon_jumps < 5) {
-    if(self jumpbuttonpressed()) {
+    if(self jumpbuttonPressed()) {
       self._moon_jumps = self._moon_jumps + 1;
       wait(0.9);
     }

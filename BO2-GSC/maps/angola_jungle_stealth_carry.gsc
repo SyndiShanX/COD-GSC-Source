@@ -145,7 +145,7 @@ mason_movement() {
       wait 0.15;
 
       while(true) {
-        if(level.mason_carry_button_pressed || flag("woods_carry_cough") || level.player buttonpressed("BUTTON_A")) {
+        if(level.mason_carry_button_pressed || flag("woods_carry_cough") || level.player buttonPressed("BUTTON_A")) {
           break;
         }
 
@@ -390,20 +390,20 @@ mason_movement_rotation(m_player_rig) {
   }
 }
 
-carry_crouch_buttonpressed() {
+carry_crouch_buttonPressed() {
   if(!level.console) {
-    pressed = self stancebuttonpressed();
+    pressed = self stancebuttonPressed();
 
     if(!pressed && !self gamepadusedlast()) {
       binding = getkeybinding("togglecrouch");
 
       if(isDefined(binding)) {
         if(binding["count"]) {
-          pressed = self buttonpressed(tolower(binding["key1"]));
+          pressed = self buttonPressed(tolower(binding["key1"]));
         }
 
         if(!pressed && binding["count"] == 2) {
-          pressed = self buttonpressed(tolower(binding["key2"]));
+          pressed = self buttonPressed(tolower(binding["key2"]));
         }
       }
 
@@ -413,11 +413,11 @@ carry_crouch_buttonpressed() {
 
         if(isDefined(binding)) {
           if(binding["count"]) {
-            pressed = self buttonpressed(tolower(binding["key1"]));
+            pressed = self buttonPressed(tolower(binding["key1"]));
           }
 
           if(!pressed && binding["count"] == 2) {
-            pressed = self buttonpressed(tolower(binding["key2"]));
+            pressed = self buttonPressed(tolower(binding["key2"]));
           }
         }
       }
@@ -426,7 +426,7 @@ carry_crouch_buttonpressed() {
     return pressed;
   } else {
     binding = getkeybinding("+stance");
-    return self buttonpressed(binding["key1"]);
+    return self buttonPressed(binding["key1"]);
   }
 }
 
@@ -436,7 +436,7 @@ mason_carry_crouch_button() {
   wait 1.5;
 
   while(!level.woods_carry_complete) {
-    if(self carry_crouch_buttonpressed() || isDefined(level.__force_stand_up) && level.__force_stand_up) {
+    if(self carry_crouch_buttonPressed() || isDefined(level.__force_stand_up) && level.__force_stand_up) {
       level.__force_stand_up = undefined;
       level.mason_carry_button_pressed = 1;
       wait 0.1;
@@ -446,7 +446,7 @@ mason_carry_crouch_button() {
       level.mason_carry_button_pressed = 0;
 
       while(true) {
-        if(!self carry_crouch_buttonpressed()) {
+        if(!self carry_crouch_buttonPressed()) {
           break;
         }
 

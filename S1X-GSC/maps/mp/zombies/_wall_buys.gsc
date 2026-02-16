@@ -702,14 +702,14 @@ givemaxscriptedammo(var_0) {
 }
 
 magicboxmaps() {
-  var_0 = common_scripts\utility::getstructarray("magic_box_map", "targetname");
+  var_0 = common_scripts\utility::getStructArray("magic_box_map", "targetname");
   common_scripts\utility::array_thread(var_0, ::magicboxmapinit);
 }
 
 magicboxmapinit() {
   self.box_locs = [];
   var_0 = getEntArray(self.target, "targetname");
-  var_1 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_1 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {

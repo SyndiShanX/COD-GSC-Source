@@ -432,7 +432,7 @@ function_e8f0335f() {
   while(getdvarint(#"hash_15ce8723d2ead5ef", 1)) {
     waitframe(1);
 
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       var_b3a9e916 += 1;
 
       if(var_b3a9e916 > 2) {
@@ -441,7 +441,7 @@ function_e8f0335f() {
 
       setDvar(#"hash_796c892495c48172", var_b3a9e916);
 
-      while(self weaponswitchbuttonpressed()) {
+      while(self weaponswitchbuttonPressed()) {
         waitframe(1);
       }
     }

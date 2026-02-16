@@ -145,7 +145,7 @@ _id_915A() {
   }
 
   if(isDefined(self._id_5716) && isDefined(self._id_5716.target)) {
-    var_1 = scripts\engine\utility::getstructarray(self._id_5716.target, "targetname");
+    var_1 = scripts\engine\utility::getStructArray(self._id_5716.target, "targetname");
     var_2 = var_1[0];
     var_3 = (var_2.origin[0], var_2.origin[1], self.origin[2]);
     var_4 = vectornormalize(var_3 - self.origin);
@@ -294,16 +294,16 @@ _id_B53C() {
   self waittill("allow_exfil");
 
   for(;;) {
-    if(self usebuttonpressed() && self getcurrentweapon().basename == "ks_remote_map_cp") {
+    if(self useButtonPressed() && self getcurrentweapon().basename == "ks_remote_map_cp") {
       self iprintlnbold("EXFIL CALLED");
       level notify("call_exfil", self.origin);
       return;
     }
 
-    if(self meleebuttonpressed()) {
+    if(self meleeButtonPressed()) {
       var_0 = 0;
 
-      while(self meleebuttonpressed()) {
+      while(self meleeButtonPressed()) {
         var_0++;
         wait 0.05;
 
@@ -352,7 +352,7 @@ _id_953C(var_0, var_1, var_2) {
     level._id_5709 = var_6;
   }
 
-  var_7 = scripts\engine\utility::_id_6969(var_3, scripts\engine\utility::getstructarray(var_0, "targetname"));
+  var_7 = scripts\engine\utility::_id_6969(var_3, scripts\engine\utility::getStructArray(var_0, "targetname"));
 
   if(isDefined(level._id_FDBA)) {
     magicgrenademanual("deploy_airdrop_mp", getgroundposition(var_7.origin, 16), (0, 90, 0), 0.01);

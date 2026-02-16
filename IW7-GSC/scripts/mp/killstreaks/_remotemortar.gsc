@@ -148,7 +148,7 @@ remotedetonateonset(var_0) {
   self.var_6DB6 = 0;
   for(;;) {
     var_1 = gettime();
-    if(self attackbuttonpressed() && var_1 - var_2 > 3000) {
+    if(self attackButtonPressed() && var_1 - var_2 > 3000) {
       var_3--;
       self setclientdvar("ui_reaper_ammoCount", var_3);
       var_2 = var_1;
@@ -214,7 +214,7 @@ func_DFB3(var_0) {
   var_0.var_13FCA = 0;
   var_1 = 0;
   for(;;) {
-    if(self adsbuttonpressed()) {
+    if(self adsButtonPressed()) {
       wait(0.05);
       if(isDefined(self.remote_detonation_monitor)) {
         var_1 = 1;
@@ -227,13 +227,13 @@ func_DFB3(var_0) {
   }
 
   for(;;) {
-    if((!var_1 && self adsbuttonpressed()) || var_1 && self.remote_detonation_monitor) {
+    if((!var_1 && self adsButtonPressed()) || var_1 && self.remote_detonation_monitor) {
       if(var_0.var_13FCA == 0) {
         scripts\mp\utility::_giveweapon("mortar_remote_zoom_mp");
         scripts\mp\utility::_switchtoweapon("mortar_remote_zoom_mp");
         var_0.var_13FCA = 1;
       }
-    } else if((!var_1 && !self adsbuttonpressed()) || var_1 && !self.remote_detonation_monitor) {
+    } else if((!var_1 && !self adsButtonPressed()) || var_1 && !self.remote_detonation_monitor) {
       if(var_0.var_13FCA == 1) {
         scripts\mp\utility::_giveweapon("mortar_remote_mp");
         scripts\mp\utility::_switchtoweapon("mortar_remote_mp");

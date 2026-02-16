@@ -20,7 +20,7 @@ init() {
   stubs = [];
 
   for(i = 0; i < stubs_keys.size; i++)
-    stubs = arraycombine(stubs, getstructarray(stubs_keys[i], "script_unitrigger_type"), 1, 0);
+    stubs = arraycombine(stubs, getStructArray(stubs_keys[i], "script_unitrigger_type"), 1, 0);
 
   for(i = 0; i < stubs.size; i++)
     register_unitrigger(stubs[i]);

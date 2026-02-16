@@ -969,7 +969,7 @@ function_b6a5e7fa(repeatcount = 1) {
           player = level.players[index];
 
           if(game.var_6bd02863) {
-            if(player jumpbuttonpressed()) {
+            if(player jumpbuttonPressed()) {
               exit = 1;
               println("<dev string:x2e6>");
             }

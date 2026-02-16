@@ -4,7 +4,7 @@
 *********************************************/
 
 init_jaroslav() {
-  var_0 = scripts\engine\utility::getstructarray("jaroslav_machine", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("jaroslav_machine", "script_noteworthy");
   level.jaroslav_original_cost = level.interactions["jaroslav_machine"].cost;
   level.fortune_visit_cost_1 = 3000;
   level.fortune_visit_cost_2 = 6000;

@@ -165,7 +165,7 @@ watchforattack() {
   for(;;) {
     wait 0.05;
 
-    if(self attackbuttonpressed())
+    if(self attackButtonPressed())
       self notify("place_carryQRDrone");
   }
 }
@@ -243,7 +243,7 @@ updatecarryqrdroneplacement(carryqrdrone) {
 
     if(carryqrdrone.canbeplaced != lastcanplacecarryqrdrone) {
       if(carryqrdrone.canbeplaced) {
-        if(self attackbuttonpressed())
+        if(self attackButtonPressed())
           self notify("place_carryQRDrone");
       } else {}
     }
@@ -499,7 +499,7 @@ qrdrone_playerexit(qrdrone) {
   while(true) {
     timeused = 0;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       timeused = timeused + 0.05;
 
       if(timeused > 0.75) {
@@ -978,7 +978,7 @@ qrdrone_leave() {
 }
 
 qrdrone_exit_button_pressed() {
-  return self usebuttonpressed();
+  return self useButtonPressed();
 }
 
 qrdrone_watch_for_exit() {
@@ -1079,12 +1079,12 @@ qrdrone_detonatewaiter() {
   self.owner endon("disconnect");
   self endon("death");
 
-  while(self.owner attackbuttonpressed())
+  while(self.owner attackButtonPressed())
     wait 0.05;
 
   watcher = self.owner maps\mp\gametypes\_weaponobjects::getweaponobjectwatcher("qrdrone");
 
-  while(!self.owner attackbuttonpressed())
+  while(!self.owner attackButtonPressed())
     wait 0.05;
 
   self setclientfield("qrdrone_state", 3);
@@ -1102,7 +1102,7 @@ qrdrone_fireguns(qrdrone) {
   wait 1;
 
   while(true) {
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       qrdrone fireweapon("tag_flash");
       firetime = weaponfiretime("qrdrone_turret_mp");
       wait(firetime);

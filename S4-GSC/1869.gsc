@@ -273,7 +273,7 @@ get_perk_machine_activations(var_0, var_1) {
 
 set_minimap_icon_persistent(var_0) {
   foreach(var_5, var_2 in level.zm_perks) {
-    var_3 = scripts\engine\utility::getstructarray(var_5, "script_noteworthy");
+    var_3 = scripts\engine\utility::getStructArray(var_5, "script_noteworthy");
 
     if(var_3.size == 0) {
       continue;

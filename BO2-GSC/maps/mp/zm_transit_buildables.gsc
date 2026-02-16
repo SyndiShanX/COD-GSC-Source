@@ -27,7 +27,7 @@ init_buildables() {
   add_zombie_buildable("sq_common", &"ZOMBIE_BUILD_SQ_COMMON", &"ZOMBIE_BUILDING_SQ_COMMON");
 }
 
-include_buildables() {
+#include_buildables() {
   battery = generate_zombie_buildable_piece("pap", "p6_zm_buildable_battery", 32, 64, 0, "zm_hud_icon_battery", ::onpickup_common, ::ondrop_common, undefined, "tag_part_03", undefined, 1);
   riotshield_dolly = generate_zombie_buildable_piece("riotshield_zm", "t6_wpn_zmb_shield_dolly", 32, 64, 0, "zm_hud_icon_dolly", ::onpickup_common, ::ondrop_common, undefined, "TAG_RIOT_SHIELD_DOLLY", undefined, 2);
   riotshield_door = generate_zombie_buildable_piece("riotshield_zm", "t6_wpn_zmb_shield_door", 48, 15, 25, "zm_hud_icon_cardoor", ::onpickup_common, ::ondrop_common, undefined, "TAG_RIOT_SHIELD_DOOR", undefined, 3);

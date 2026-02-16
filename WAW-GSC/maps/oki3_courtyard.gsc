@@ -916,7 +916,7 @@ courtyard_prespawn_smoke(min_force, max_force, orgs) {
     max_force = 800;
   }
 
-  ents = getstructarray(orgs, "targetname");
+  ents = getStructArray(orgs, "targetname");
 
   for(i = 0; i < ents.size; i++) {
     if(!isDefined(ents[i].original_angles)) {
@@ -1210,7 +1210,7 @@ spawnfunc_too_enemy() {
 }
 
 courtyard_spawn_bomber_test(iplane_spline, offset_vector, noFX) {
-  spline_array = getstructarray(iplane_spline, "targetname");
+  spline_array = getStructArray(iplane_spline, "targetname");
 
   plane_spline = [];
   plane_spline[0] = spline_array[randomint(spline_array.size)];
@@ -1684,7 +1684,7 @@ fake_surrender_guys() {
 warp_players_to_courtyard() {
   vol1 = getent("courtyard_player_check", "targetname");
   vol2 = getent("drop_volume", "targetname");
-  spots = getstructarray("courtyard_players", "targetname");
+  spots = getStructArray("courtyard_players", "targetname");
 
   players = get_players();
   players_2_warp = [];

@@ -518,7 +518,7 @@ firetornado(var_0) {
   var_2 thread firetornadodamage();
   playsoundatpos(var_0.arenacenter + (0, 0, 5), "cp_final_meph_tornado_big_spawn");
   wait(3);
-  var_3 = scripts\engine\utility::getstructarray("tornado_start", "targetname");
+  var_3 = scripts\engine\utility::getStructArray("tornado_start", "targetname");
   foreach(var_5 in var_3) {
     level thread createfiretornado(var_5);
     wait(0.05);
@@ -545,7 +545,7 @@ createfiretornado(var_0) {
   var_1 thread firetornadodamage();
   wait(0.05);
   var_2 playLoopSound("cp_final_meph_tornado_small_lp");
-  var_2 moveto(scripts\engine\utility::random(scripts\engine\utility::getstructarray(var_0.target, "targetname")).origin, 3);
+  var_2 moveto(scripts\engine\utility::random(scripts\engine\utility::getStructArray(var_0.target, "targetname")).origin, 3);
   var_2 waittill("movedone");
   var_2 stoploopsound();
   playsoundatpos(var_2.origin, "cp_final_meph_tornado_small_end");

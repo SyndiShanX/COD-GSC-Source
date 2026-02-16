@@ -608,7 +608,7 @@ function_68fd3863() {
   level endon(#"combattraining_logic_finished");
   level flag::clear("tut_seeker3_button_pressed");
 
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     waitframe(1);
   }
 
@@ -884,7 +884,7 @@ function_8bbca25b() {
     waitframe(1);
     n_time_passed = (gettime() - n_start_time) / 1000;
   }
-  while(!self attackbuttonpressed() && n_time_passed < var_8db96f30);
+  while(!self attackButtonPressed() && n_time_passed < var_8db96f30);
 
   if(n_time_passed >= var_8db96f30) {
     level notify(#"hash_6af26ccf744145f0");
@@ -1755,11 +1755,11 @@ function_6ccd49e4() {
   level endon(#"combattraining_logic_finished", #"hash_34edff5a65a947f1");
   var_3ad4f71e = 90000;
 
-  while(!self attackbuttonpressed()) {
+  while(!self attackButtonPressed()) {
     waitframe(1);
   }
 
-  while(self attackbuttonpressed()) {
+  while(self attackButtonPressed()) {
     waitframe(1);
   }
 

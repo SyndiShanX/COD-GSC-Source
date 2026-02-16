@@ -893,7 +893,7 @@ _id_EA21(var_0) {
   var_0 scripts\engine\utility::_id_108A7(10, "player_spawned");
   scripts\engine\utility::_id_5C24("wall_buy_setup_done");
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_4 in var_2) {
     if(isDefined(var_4._id_FFC5) && var_4._id_FFC5 == "wall_buy") {
@@ -1630,13 +1630,13 @@ _id_9D5B() {
       self._id_9DA8 = 0;
     }
 
-    if(self meleebuttonpressed() && !self _meth_81E0() && !self usebuttonpressed()) {
+    if(self meleeButtonPressed() && !self _meth_81E0() && !self useButtonPressed()) {
       var_1 = gettime();
 
       if(var_0 == 1) {
         var_0 = 0;
       }
-    } else if(!self meleebuttonpressed())
+    } else if(!self meleeButtonPressed())
       var_0 = 1;
     else {
       var_0 = 0;
@@ -1957,7 +1957,7 @@ _id_C630() {
 _id_FF39() {
   level endon("game_ended");
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstructarray("interaction", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("interaction", "targetname");
 
   foreach(var_2 in var_0) {
     if(isDefined(var_2._id_039B) && issubstr(var_2._id_039B, "debris")) {

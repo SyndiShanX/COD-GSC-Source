@@ -277,7 +277,7 @@ _id_9CF5() {
 }
 
 _id_9CED() {
-  var_0 = scripts\engine\utility::getstructarray("mediumtransport_spawn", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("mediumtransport_spawn", "targetname");
 
   if(var_0.size > 0) {
     var_0 = scripts\cp_mp\vehicles\vehicle_spawn::_id_1028A(var_0, 1);

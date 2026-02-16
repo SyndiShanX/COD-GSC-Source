@@ -13,7 +13,7 @@ init_all_debris_and_door_positions() {
 }
 
 func_F945(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_3 in var_1) {
     set_nonstick(var_3);
   }
@@ -48,7 +48,7 @@ func_102F3(var_0, var_1) {
 }
 
 init_sliding_power_doors() {
-  var_0 = scripts\engine\utility::getstructarray("power_door_sliding", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("power_door_sliding", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread sliding_power_door();
   }
@@ -179,7 +179,7 @@ rave_door_buy() {
     var_3 delete();
   }
 
-  var_5 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(self.target, "targetname");
   scripts\cp\zombies\zombies_spawning::func_1751(var_5[0], var_5[1]);
   scripts\cp\zombies\zombies_spawning::activate_volume_by_name(var_5[0].script_area);
   scripts\cp\zombies\zombies_spawning::activate_volume_by_name(var_5[1].script_area);

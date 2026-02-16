@@ -796,7 +796,7 @@ dog_indirect_control_input(var_0) {
         var_1 = var_1 * var_5;
         var_6 = distance((0, 0, 0), var_1);
 
-        if(self attackbuttonpressed() || var_0.sprint)
+        if(self attackButtonPressed() || var_0.sprint)
           var_7 = 1.5;
         else
           var_7 = 1;

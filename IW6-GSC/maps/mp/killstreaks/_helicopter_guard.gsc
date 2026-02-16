@@ -615,7 +615,7 @@ lbSupport_getLinkedStructs() {
 }
 
 lbSupport_setAirStartNodes() {
-  level.air_start_nodes = getstructarray("chopper_boss_path_start", "targetname");
+  level.air_start_nodes = getStructArray("chopper_boss_path_start", "targetname");
 
   foreach(loc in level.air_start_nodes) {
     loc.neighbors = loc lbSupport_getLinkedStructs();
@@ -623,7 +623,7 @@ lbSupport_setAirStartNodes() {
 }
 
 lbSupport_setAirNodeMesh() {
-  level.air_node_mesh = getstructarray("so_chopper_boss_path_struct", "script_noteworthy");
+  level.air_node_mesh = getStructArray("so_chopper_boss_path_struct", "script_noteworthy");
 
   foreach(loc in level.air_node_mesh) {
     loc.neighbors = loc lbSupport_getLinkedStructs();

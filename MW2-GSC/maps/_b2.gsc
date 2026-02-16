@@ -89,7 +89,7 @@ put this in your GSC:
 maps\_b2::main( "vehicle_b2_bomber" );
 
 and these lines in your CSV:
-include,vehicle_b2
+#include,vehicle_b2
 sound,vehicle_b2,vehicle_standard,all_sp
 
 defaultmdl="vehicle_b2_bomber"default:"vehicletype" "b2"default:"script_team" "allies"

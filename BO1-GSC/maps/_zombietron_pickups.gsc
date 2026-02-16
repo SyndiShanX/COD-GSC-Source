@@ -374,7 +374,7 @@ get_random_pickup_type() {
 get_random_pickup_location(ignore) {
   spawn_locations = [];
   pickupTarget = level.arenas[level.current_arena] + "_pickup";
-  spawn_locations = GetStructArray(pickupTarget, "targetname");
+  spawn_locations = getStructArray(pickupTarget, "targetname");
   if(spawn_locations.size == 0) {
     return undefined;
   }
@@ -1241,7 +1241,7 @@ heli_rocket_loop(mini_heli) {
   fire_index = 0;
   while(1) {
     driver = mini_heli GetSeatOccupant(0);
-    if(isDefined(driver) && driver AttackButtonPressed()) {
+    if(isDefined(driver) && driver attackButtonPressed()) {
       fire_tag = fire_tags[fire_index];
       origin = mini_heli GetTagOrigin(fire_tag);
       angles = mini_heli GetTagAngles("tag_flash_gunner1");
@@ -1524,7 +1524,7 @@ powerup_timeout(trigger, timeout) {
 get_random_mine_location() {
   spawn_locations = [];
   hazardTarget = level.arenas[level.current_arena] + "_hazard";
-  spawn_locations = GetStructArray(hazardTarget, "targetname");
+  spawn_locations = getStructArray(hazardTarget, "targetname");
   if(spawn_locations.size == 0) {
     return undefined;
   }
@@ -1710,7 +1710,7 @@ update_drop_booster() {
   self endon("update_drop_booster");
   while(1) {
     wait 0.05;
-    if(IsAlive(self) && !level.in_intermission && !isDefined(self.tank) && !isDefined(self.heli) && self jumpButtonPressed()) {
+    if(IsAlive(self) && !level.in_intermission && !isDefined(self.tank) && !isDefined(self.heli) && self jumpbuttonPressed()) {
       if(isDefined(self.boosters) && self.boosters > 0) {
         self.rhino_deaths = 0;
         self playSound("zmb_speed_boost_activate");

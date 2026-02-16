@@ -753,7 +753,7 @@ playsound25mm() {
     self waittill("weapon_fired");
     self stoplocalsound("ac130iw6_25mm_fire_loop_cooldown");
     self playLoopSound("ac130iw6_25mm_fire_loop");
-    while(self attackbuttonpressed() && self getweaponammoclip(var_0)) {
+    while(self attackButtonPressed() && self getweaponammoclip(var_0)) {
       wait(0.05);
     }
 

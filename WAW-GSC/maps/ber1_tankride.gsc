@@ -499,7 +499,7 @@ retreat_away_from_tank_3_delay(delay) {
 tank_1_shoot_strat() {
   flag_wait_all("outro_tanks_fire_1", "asylum_exit");
 
-  targets = getstructarray("tank_1_outro_targets_1", "script_noteworthy");
+  targets = getStructArray("tank_1_outro_targets_1", "script_noteworthy");
 
   while(!flag("outro_tanks_fire_2")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
@@ -508,7 +508,7 @@ tank_1_shoot_strat() {
 
   shots_counter = 0;
 
-  targets = getstructarray("tank_1_outro_targets_2", "script_noteworthy");
+  targets = getStructArray("tank_1_outro_targets_2", "script_noteworthy");
 
   while(!flag("outro_tank_move_3")) {
     if(shots_counter == 1) {
@@ -533,21 +533,21 @@ tank_1_shoot_strat() {
     wait(RandomIntRange(5, 6));
   }
 
-  targets = getstructarray("tank_1_outro_targets_3", "script_noteworthy");
+  targets = getStructArray("tank_1_outro_targets_3", "script_noteworthy");
 
   while(!flag("outro_tanks_fire_4")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
 
-  targets = getstructarray("tank_1_outro_targets_4", "script_noteworthy");
+  targets = getStructArray("tank_1_outro_targets_4", "script_noteworthy");
 
   while(!flag("outro_tanks_fire_5")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
 
-  targets = getstructarray("tank_1_outro_targets_5", "script_noteworthy");
+  targets = getStructArray("tank_1_outro_targets_5", "script_noteworthy");
 
   while(1) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
@@ -558,35 +558,35 @@ tank_1_shoot_strat() {
 tank_2_shoot_strat() {
   flag_wait("outro_tanks_fire_1");
 
-  targets = getstructarray("tank_2_outro_targets_1", "script_noteworthy");
+  targets = getStructArray("tank_2_outro_targets_1", "script_noteworthy");
 
   while(!flag("outro_tanks_fire_2")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
 
-  targets = getstructarray("tank_2_outro_targets_2", "script_noteworthy");
+  targets = getStructArray("tank_2_outro_targets_2", "script_noteworthy");
 
   while(!flag("outro_tank_move_3")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 6));
   }
 
-  targets = getstructarray("tank_2_outro_targets_3", "script_noteworthy");
+  targets = getStructArray("tank_2_outro_targets_3", "script_noteworthy");
 
   while(!flag("outro_tanks_fire_4")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
 
-  targets = getstructarray("tank_2_outro_targets_4", "script_noteworthy");
+  targets = getStructArray("tank_2_outro_targets_4", "script_noteworthy");
 
   while(!flag("outro_tanks_fire_5")) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
     wait(RandomIntRange(5, 7));
   }
 
-  targets = getstructarray("tank_2_outro_targets_5", "script_noteworthy");
+  targets = getStructArray("tank_2_outro_targets_5", "script_noteworthy");
 
   while(1) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);
@@ -597,12 +597,12 @@ tank_2_shoot_strat() {
 tank_3_shoot_strat() {
   wait(2);
 
-  targets = getstructarray("tank_3_outro_targets_1", "script_noteworthy");
+  targets = getStructArray("tank_3_outro_targets_1", "script_noteworthy");
 
   self tank_fire_at_struct(targets[randomint(targets.size)]);
   wait(RandomIntRange(5, 6));
 
-  targets = getstructarray("tank_3_outro_targets_2", "script_noteworthy");
+  targets = getStructArray("tank_3_outro_targets_2", "script_noteworthy");
 
   while(1) {
     self tank_fire_at_struct(targets[randomint(targets.size)]);

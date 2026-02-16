@@ -353,7 +353,7 @@ _id_C52E() {
 }
 
 _id_821B() {
-  var_0 = scripts\engine\utility::getstructarray("loot_cache", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("loot_cache", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = var_0.size * 0.5;
   level._id_9866 = [];

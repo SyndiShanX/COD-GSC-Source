@@ -381,7 +381,7 @@ _id_FEEB(var_0) {
       return 0;
     }
 
-    if(var_1 meleebuttonpressed()) {
+    if(var_1 meleeButtonPressed()) {
       return 0;
     }
 

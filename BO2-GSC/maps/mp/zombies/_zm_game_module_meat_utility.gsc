@@ -504,7 +504,7 @@ meat_intro(launch_spot) {
 
 launch_meat(launch_spot) {
   level waittill("launch_meat");
-  spots = getstructarray(launch_spot, "targetname");
+  spots = getStructArray(launch_spot, "targetname");
 
   if(isDefined(spots) && spots.size > 0) {
     spot = random(spots);
@@ -540,7 +540,7 @@ launch_meat(launch_spot) {
 }
 
 multi_launch(launch_spot) {
-  spots = getstructarray(launch_spot, "targetname");
+  spots = getStructArray(launch_spot, "targetname");
 
   if(isDefined(spots) && spots.size > 0) {
     for(x = 0; x < 3; x++) {

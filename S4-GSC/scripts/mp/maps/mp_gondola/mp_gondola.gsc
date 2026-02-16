@@ -121,7 +121,7 @@ gondola_run(var_0) {
     var_6 = 1;
 
     for(;;) {
-      var_7 = scripts\engine\utility::getstructarray(var_5.target, "targetname");
+      var_7 = scripts\engine\utility::getStructArray(var_5.target, "targetname");
       var_8 = undefined;
 
       foreach(var_10 in var_7) {

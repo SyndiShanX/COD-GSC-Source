@@ -1253,7 +1253,7 @@ street_setup_stuff() {
   level.fallguy add_spawn_function(::street_guy_fall_guy);
 
   array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
-  array_thread(getstructarray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
+  array_thread(getStructArray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
 
   array_thread(getEntArray("corner_truck_engine_crash", "targetname"), ::corner_truck_engine_crash);
   thread corner_plane_crash();
@@ -1618,13 +1618,13 @@ corner_plane_crash() {
 
   wait .25;
 
-  array_thread(getstructarray("corner_plane_launch", "targetname"), ::corner_plane_launch);
+  array_thread(getStructArray("corner_plane_launch", "targetname"), ::corner_plane_launch);
   thread flag_set_delayed("corner_engine_crash", .5);
   wait 1.0;
 
   exploder("corner_fire_streaks");
   delaythread(.75, ::exploder, "corner_fire_streaks");
-  array_thread(getstructarray("corner_plane_launch", "targetname"), ::corner_plane_launch);
+  array_thread(getStructArray("corner_plane_launch", "targetname"), ::corner_plane_launch);
 
   flag_wait("corner_engine_hit");
 
@@ -2506,7 +2506,7 @@ office_kill_enemies() {
 
   wait .1;
 
-  nodes = getstructarray("parking_start_points", "targetname");
+  nodes = getStructArray("parking_start_points", "targetname");
   foreach(node in nodes) {
     level.team[node.script_noteworthy] thread teleport_actor(node);
   }
@@ -3871,7 +3871,7 @@ start_corner() {
   thread vision_set_sunset(0);
 
   array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
-  array_thread(getstructarray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
+  array_thread(getStructArray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
 
   array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
   activate_trigger("meetup_allies", "target");
@@ -3931,7 +3931,7 @@ start_meetup() {
   thread vision_set_sunset(0);
 
   array_thread(getEntArray("street_crash_heli", "script_noteworthy"), ::street_crash_helis);
-  array_thread(getstructarray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
+  array_thread(getStructArray("street_crash_heli_anim", "script_noteworthy"), ::street_crash_helis_anim);
 
   array_thread(getEntArray("meetup_allies", "targetname"), ::add_spawn_function, ::init_meetup_allies);
   activate_trigger("meetup_allies", "target");
@@ -3946,7 +3946,7 @@ start_meetup() {
   array_thread(level.team, ::walkdist_zero);
   array_thread(level.team, ::set_generic_run_anim_array, "casual_killer_jog");
 
-  emp_teleport_team_specific(level.team, getstructarray("meetup_ai_nodes", "targetname"));
+  emp_teleport_team_specific(level.team, getStructArray("meetup_ai_nodes", "targetname"));
   emp_teleport_player();
 
   thread flag_set_delayed("meetup_main", .5);
@@ -4026,7 +4026,7 @@ start_office() {
   level.team["marine3"] kill();
   level.team["marine2"] thread magic_bullet_shield();
 
-  emp_teleport_team_specific(level.team, getstructarray("office_start_points1", "targetname"));
+  emp_teleport_team_specific(level.team, getStructArray("office_start_points1", "targetname"));
   emp_teleport_player();
 
   level.team = array_removedead(level.team);
@@ -4073,7 +4073,7 @@ start_parking() {
 
   waittillframeend;
 
-  emp_teleport_team_specific(level.team, getstructarray("parking_start_points", "targetname"));
+  emp_teleport_team_specific(level.team, getStructArray("parking_start_points", "targetname"));
   emp_teleport_player();
 
   thread flag_set_delayed("office_done", .15);
@@ -4119,7 +4119,7 @@ start_plaza() {
   array_thread(level.team, ::set_ignoreall, true);
   array_thread(level.team, ::disable_ai_color);
 
-  emp_teleport_team_specific(level.team, getstructarray("plaza_start_points", "targetname"));
+  emp_teleport_team_specific(level.team, getStructArray("plaza_start_points", "targetname"));
   emp_teleport_player();
 
   flag_set("parking_btr_guys_dead");

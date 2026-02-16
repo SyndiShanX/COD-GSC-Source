@@ -425,7 +425,7 @@ _id_A10B(var_0, var_1, var_2) {
     var_6 = 0;
     var_1 setclientomnvar("ui_veh_exit_button_holdtime", 0);
 
-    while(var_1 stancebuttonpressed()) {
+    while(var_1 stancebuttonPressed()) {
       var_6 = var_6 + var_5;
 
       if(var_1 usinggamepad()) {
@@ -459,7 +459,7 @@ _id_A108(var_0, var_1, var_2) {
     var_6 = 0;
     var_1 setclientomnvar("ui_veh_exit_button_holdtime", 0);
 
-    while(var_1 usebuttonpressed()) {
+    while(var_1 useButtonPressed()) {
       var_6 = var_6 + var_5;
 
       if(var_1 usinggamepad()) {
@@ -1988,13 +1988,13 @@ _id_307F(var_0, var_1) {
   var_1 endon("death ");
 
   for(;;) {
-    if(var_0 attackbuttonpressed()) {
+    if(var_0 attackButtonPressed()) {
       var_0 notify("start_moving_camera");
       var_0._id_AD79._id_300E = max(var_0._id_AD79._id_306F, var_0._id_AD79._id_300E - 160);
       var_0._id_AD79.origin = (var_0._id_AD79.origin[0], var_0._id_AD79.origin[1], var_0._id_AD79._id_300E);
     }
 
-    if(var_0 adsbuttonpressed()) {
+    if(var_0 adsButtonPressed()) {
       var_0 notify("start_moving_camera");
       var_0._id_AD79._id_300E = min(var_0._id_AD79._id_306E, var_0._id_AD79._id_300E + 160);
       var_0._id_AD79.origin = (var_0._id_AD79.origin[0], var_0._id_AD79.origin[1], var_0._id_AD79._id_300E);
@@ -2899,7 +2899,7 @@ _id_D40A() {
   if(!_id_7CDB()) {
     return;
   }
-  var_0 = scripts\engine\utility::getstructarray("IED_controller", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("IED_controller", "script_noteworthy");
 
   foreach(var_2 in var_0) {
     _id_E167(var_2);
@@ -2915,7 +2915,7 @@ _id_E167(var_0) {
   var_1 = _id_65FD(var_0);
 
   if(isDefined(var_0.target)) {
-    var_2 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+    var_2 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   } else {
     var_2 = [];
   }
@@ -2996,7 +2996,7 @@ _id_65FD(var_0) {
   if(isDefined(var_0._id_CE18)) {
     return int(var_0._id_CE18);
   } else {
-    return scripts\engine\utility::getstructarray(var_0.target, "targetname").size;
+    return scripts\engine\utility::getStructArray(var_0.target, "targetname").size;
   }
 }
 
@@ -3042,7 +3042,7 @@ _id_7CD9(var_0) {
 }
 
 _id_437E(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(isDefined(var_1[var_2]._id_7CD8) && istrue(var_1[var_2]._id_0026)) {
@@ -3053,7 +3053,7 @@ _id_437E(var_0) {
 }
 
 _id_0EBE(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
 
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     if(isDefined(var_1[var_2]._id_7CD8) && !istrue(var_1[var_2]._id_0026)) {

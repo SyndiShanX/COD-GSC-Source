@@ -144,7 +144,7 @@ _id_C77B(var_0) {
   if(istrue(var_0._id_C6A3)) {
     return _id_0743::_id_C770(var_0);
   } else {
-    var_1 = scripts\engine\utility::getstructarray("wave_paratroopers", "targetname");
+    var_1 = scripts\engine\utility::getStructArray("wave_paratroopers", "targetname");
     return var_1;
   }
 }
@@ -174,7 +174,7 @@ _id_52B6() {
 }
 
 _id_A1FB() {
-  var_0 = scripts\engine\utility::getstructarray("wave_paratroopers", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("wave_paratroopers", "targetname");
 
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     var_0[var_1].origin = self._id_0E18.origin;
@@ -184,7 +184,7 @@ _id_A1FB() {
 }
 
 _id_A1FC(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("wave_paratroopers", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("wave_paratroopers", "targetname");
   var_2 = _id_66B4(scripts\cp\utility::_id_63BD(level.players));
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
@@ -243,17 +243,17 @@ _id_C78C(var_0) {
     var_1 = [];
 
     for(var_2 = 0; var_2 < var_0._id_C570.size; var_2++) {
-      var_3 = scripts\engine\utility::getstructarray(var_0._id_C570[var_2], "targetname");
+      var_3 = scripts\engine\utility::getStructArray(var_0._id_C570[var_2], "targetname");
       var_1 = scripts\engine\utility::array_combine(var_1, var_3);
     }
 
     if(var_1.size > 0) {
       return var_1;
     } else if(istrue(var_0._id_10CB1)) {
-      return scripts\engine\utility::getstructarray("wave_veh_spawners", "targetname");
+      return scripts\engine\utility::getStructArray("wave_veh_spawners", "targetname");
     }
   } else if(istrue(var_0._id_10CB1))
-    return scripts\engine\utility::getstructarray("wave_veh_spawners", "targetname");
+    return scripts\engine\utility::getStructArray("wave_veh_spawners", "targetname");
   else {
     return [];
   }

@@ -114,7 +114,7 @@ ee_mechz_spawn(n_spawn_pos) {
   self thread maps\mp\zombies\_zm_spawner::zombie_eye_glow();
   level thread maps\mp\zombies\_zm_spawner::zombie_death_event(self);
   self thread maps\mp\zombies\_zm_spawner::enemy_death_detection();
-  a_spawner_structs = getstructarray("mech_hole_spawner", "targetname");
+  a_spawner_structs = getStructArray("mech_hole_spawner", "targetname");
   spawn_pos = a_spawner_structs[n_spawn_pos];
 
   if(!isDefined(spawn_pos.angles))

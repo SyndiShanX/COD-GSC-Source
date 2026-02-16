@@ -1641,7 +1641,7 @@ func_E602(var_0) {
   }
 
   if(!isDefined(self.bt.var_E5FB)) {
-    var_1 = scripts\engine\utility::getstructarray("c12_rodeo_struct", "targetname");
+    var_1 = scripts\engine\utility::getStructArray("c12_rodeo_struct", "targetname");
     if(var_1.size == 0) {
       self.bt.var_E5FB = self.origin;
       self.var_6D = 32;

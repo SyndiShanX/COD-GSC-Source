@@ -1039,7 +1039,7 @@ nofirecrosshair() {
   thread nofirecrosshair_remove();
 
   for(;;) {
-    while(level.player attackbuttonpressed()) {
+    while(level.player attackButtonPressed()) {
       if(isDefined(level.doing_cinematic)) {
         wait 0.05;
         break;

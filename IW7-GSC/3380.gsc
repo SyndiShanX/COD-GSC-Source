@@ -11,8 +11,8 @@ init_discoball_trap() {
   }
 
   level.discotrapuses = 0;
-  level.var_562E = scripts\engine\utility::getstructarray("discoball_switch_fx_spot", "script_noteworthy");
-  var_0 = scripts\engine\utility::getstructarray("interaction_discoballtrap", "script_noteworthy");
+  level.var_562E = scripts\engine\utility::getStructArray("discoball_switch_fx_spot", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("interaction_discoballtrap", "script_noteworthy");
   level.var_562F = getent(var_0[0].target, "targetname");
   level.var_562F enablelinkto();
   level.var_5631 = scripts\engine\utility::getstruct(var_0[0].target, "targetname");
@@ -24,7 +24,7 @@ init_discoball_trap() {
   }
 
   wait(1);
-  level.var_4D7A = scripts\engine\utility::getstructarray("dance_floor_attract_spots", "targetname");
+  level.var_4D7A = scripts\engine\utility::getStructArray("dance_floor_attract_spots", "targetname");
   func_E1E0();
 }
 
@@ -57,7 +57,7 @@ func_5632() {
 
 use_discoball_trap(var_0, var_1) {
   playFX(level._effect["console_spark"], var_0.origin + (0, 0, 40));
-  var_2 = sortbydistance(scripts\engine\utility::getstructarray("dischord_start_struct", "targetname"), var_1.origin);
+  var_2 = sortbydistance(scripts\engine\utility::getStructArray("dischord_start_struct", "targetname"), var_1.origin);
   level.discotrapuses++;
   level.discotrap_active = 1;
   level.disco_trap_kills = 0;

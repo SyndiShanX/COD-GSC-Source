@@ -445,14 +445,14 @@ input_reactive_radius(var_0) {
   for(;;) {
     wait 0.05;
 
-    if(level.player buttonpressed("escape") || level.player buttonpressed("x")) {
+    if(level.player buttonPressed("escape") || level.player buttonPressed("x")) {
       break;
     }
     var_1 = 0;
 
-    if(level.player buttonpressed("-")) {
+    if(level.player buttonPressed("-")) {
       var_1 = -10;
-    } else if(level.player buttonpressed("=")) {
+    } else if(level.player buttonPressed("=")) {
       var_1 = 10;
     }
 

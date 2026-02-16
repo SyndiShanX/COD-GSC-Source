@@ -65,7 +65,7 @@ watchplayerkillstreakearlyexit(var_0) {
   self endon(var_0);
   for(;;) {
     var_1 = 0;
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       var_1 = var_1 + 0.05;
       if(var_1 > 0.75) {
         self.var_D3CB = self.origin;

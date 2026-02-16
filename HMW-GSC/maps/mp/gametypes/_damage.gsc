@@ -972,10 +972,10 @@ waitspawnrandombutton() {
   self endon("disconnect");
   self endon("abort_fireteam_spawn");
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed())
     wait 0.05;
 
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     wait 0.05;
 
     if(!maps\mp\_utility::isreallyalive(self.partner)) {
@@ -995,10 +995,10 @@ waitteamspawnbutton() {
   self endon("disconnect");
   self endon("abort_fireteam_spawn");
 
-  while(self attackbuttonpressed())
+  while(self attackButtonPressed())
     wait 0.05;
 
-  while(!self attackbuttonpressed())
+  while(!self attackButtonPressed())
     wait 0.05;
 
   self.partnerspawning = 1;
@@ -2332,8 +2332,8 @@ handlelaststandweaponsmwr(var_0) {
 
   allowoffhand = self maps\mp\_utility::_hasPerk("specialty_laststandoffhand");
 
-  var_1 = self isthrowinggrenade() && !self fragbuttonpressed();
-  var_2 = self isthrowinggrenade() && self fragbuttonpressed();
+  var_1 = self isthrowinggrenade() && !self fragButtonPressed();
+  var_2 = self isthrowinggrenade() && self fragButtonPressed();
   var_3 = self getweaponslistall();
 
   foreach(var_5 in var_3) {
@@ -2559,10 +2559,10 @@ laststandallowsuicide() {
   level endon("game_ended");
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = gettime();
 
-      while(self usebuttonpressed()) {
+      while(self useButtonPressed()) {
         wait 0.05;
 
         if(gettime() - var_0 > 700) {
@@ -3016,7 +3016,7 @@ reviveholdthinkloop(var_0) {
   self.owner endon("death");
   self.owner endon("disconnect");
 
-  while(maps\mp\_utility::isreallyalive(var_0) && var_0 usebuttonpressed() && self.curprogress < self.usetime && !(isDefined(var_0.inlaststand) && var_0.inlaststand)) {
+  while(maps\mp\_utility::isreallyalive(var_0) && var_0 useButtonPressed() && self.curprogress < self.usetime && !(isDefined(var_0.inlaststand) && var_0.inlaststand)) {
     self.curprogress += 50 * self.userate;
     self.userate = 1;
 

@@ -870,7 +870,7 @@ player_entered_safety_zone(player) {
 }
 
 player_entered_safety_light(player) {
-  safety = getstructarray("screecher_escape", "targetname");
+  safety = getStructArray("screecher_escape", "targetname");
 
   if(!isDefined(safety))
     return false;
@@ -924,7 +924,7 @@ precache_personality_characters() {
 }
 
 precache_survival_barricade_assets() {
-  survival_barricades = getstructarray("game_mode_object");
+  survival_barricades = getStructArray("game_mode_object");
 
   for(i = 0; i < survival_barricades.size; i++) {
     if(isDefined(survival_barricades[i].script_string) && survival_barricades[i].script_string == "survival") {
@@ -1229,7 +1229,7 @@ transit_standard_intermission() {
   self.friendlydamage = undefined;
   maps\mp\_visionset_mgr::vsmgr_deactivate("overlay", "zm_transit_burn", self);
   self stopshellshock();
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
   point = undefined;
 
   if(!isDefined(points) || points.size == 0) {
@@ -1424,7 +1424,7 @@ transit_zone_init() {
   add_adjacent_zone("zone_tbu", "zone_tow", "vault_opened", 1);
 }
 
-include_powerups() {
+#include_powerups() {
   gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -1445,7 +1445,7 @@ add_transit_powerups() {
   maps\mp\zombies\_zm_powerups::add_zombie_powerup("teller_withdrawl", "zombie_z_money_icon", &"ZOMBIE_TELLER_PICKUP_DEPOSIT", maps\mp\zombies\_zm_powerups::func_should_never_drop, 1, 0, 0);
 }
 
-include_equipment_for_level() {
+#include_equipment_for_level() {
   level.equipment_turret_needs_power = 1;
   level.equipment_etrap_needs_power = 1;
   include_equipment("jetgun_zm");
@@ -1653,7 +1653,7 @@ offhand_weapon_overrride() {
   level.zombie_equipment_player_init = undefined;
 }
 
-include_weapons() {
+#include_weapons() {
   gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
@@ -1816,7 +1816,7 @@ custom_add_weapons() {
     add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
 }
 
-include_game_modules() {}
+#include_game_modules() {}
 
 initial_round_wait_func() {
   flag_wait("initial_blackscreen_passed");
@@ -2023,7 +2023,7 @@ zm_transit_emp_detonate(grenade_origin) {
 emp_detonate_boss(grenade_origin) {}
 
 register_screecher_lights() {
-  level.safety_lights = getstructarray("screecher_escape", "targetname");
+  level.safety_lights = getStructArray("screecher_escape", "targetname");
 
   for(i = 0; i < level.safety_lights.size; i++) {
     safety = level.safety_lights[i];
@@ -2041,7 +2041,7 @@ register_screecher_lights() {
   }
 }
 
-include_powered_items() {
+#include_powered_items() {
   if(is_classic()) {
     include_powered_item(::bus_power_on, ::bus_power_off, ::bus_range, maps\mp\zombies\_zm_power::cost_negligible, 1, 1, undefined);
 
@@ -2322,7 +2322,7 @@ insta_kill_player() {
       if(isDefined(self.lives) && self.lives > 0) {
         self.waiting_to_revive = 1;
         points = getstruct("zone_pcr", "script_noteworthy");
-        spawn_points = getstructarray(points.target, "targetname");
+        spawn_points = getStructArray(points.target, "targetname");
         point = spawn_points[0];
         self dodamage(self.health + 1000, (0, 0, 0));
         maps\mp\_visionset_mgr::vsmgr_activate("overlay", "zm_transit_burn", self, 1, level.zm_transit_burn_max_duration);

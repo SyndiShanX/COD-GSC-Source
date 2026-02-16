@@ -653,7 +653,7 @@ rotating_windows_init() {
   if(!isDefined(self.target)) {
     return;
   }
-  structs = getstructarray(self.target, "targetname");
+  structs = getStructArray(self.target, "targetname");
   foreach(struct in structs) {
     switch (struct.script_noteworthy) {
       case "open_angles":

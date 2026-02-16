@@ -74,9 +74,9 @@ _id_7751(var_0, var_1, var_2) {
   var_0 endon("leave_area");
 
   if(isDefined(var_2)) {
-    var_1 = scripts\engine\utility::getstructarray(var_2, "script_noteworthy")[0].origin[2];
+    var_1 = scripts\engine\utility::getStructArray(var_2, "script_noteworthy")[0].origin[2];
   } else if(!isDefined(var_1)) {
-    var_1 = scripts\engine\utility::getstructarray("heli_search", "script_noteworthy")[0].origin[2];
+    var_1 = scripts\engine\utility::getStructArray("heli_search", "script_noteworthy")[0].origin[2];
   }
 
   var_0._id_3658 = var_1;
@@ -130,7 +130,7 @@ _id_7716(var_0) {
     return;
   }
   var_0 endon("death");
-  var_1 = scripts\engine\utility::getstructarray("heli_search", "script_noteworthy")[0].origin[2];
+  var_1 = scripts\engine\utility::getStructArray("heli_search", "script_noteworthy")[0].origin[2];
   var_0._id_750E = 1;
   var_0._id_3658 = var_1;
   var_0 thread _id_C997();
@@ -522,9 +522,9 @@ _id_76CB(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     var_3 = var_0;
   } else if(isDefined(var_2)) {
-    var_3 = scripts\engine\utility::_id_6969(self.origin, scripts\engine\utility::getstructarray(var_2, "script_noteworthy"));
+    var_3 = scripts\engine\utility::_id_6969(self.origin, scripts\engine\utility::getStructArray(var_2, "script_noteworthy"));
   } else {
-    var_3 = scripts\engine\utility::_id_6969(self.origin, scripts\engine\utility::getstructarray("heli_search", "script_noteworthy"));
+    var_3 = scripts\engine\utility::_id_6969(self.origin, scripts\engine\utility::getStructArray("heli_search", "script_noteworthy"));
   }
 
   self _meth_807E();
@@ -765,7 +765,7 @@ _id_4BE7(var_0) {
   if(var_2.size > 0) {
     var_1 = scripts\engine\utility::_id_6969(var_0.origin, var_2);
   } else {
-    var_1 = scripts\engine\utility::_id_6969(var_0.origin, scripts\engine\utility::getstructarray(var_0._id_5664, "targetname"));
+    var_1 = scripts\engine\utility::_id_6969(var_0.origin, scripts\engine\utility::getStructArray(var_0._id_5664, "targetname"));
   }
 
   var_0 setneargoalnotifydist(250);
@@ -779,7 +779,7 @@ _id_75C9(var_0) {
     return 0;
   }
 
-  var_1 = scripts\engine\utility::getstructarray(var_0._id_5664, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0._id_5664, "targetname");
 
   if(var_1.size == 0) {
     return 0;
@@ -790,7 +790,7 @@ _id_75C9(var_0) {
 
 _id_6489(var_0) {
   var_1 = [];
-  var_2 = scripts\engine\utility::getstructarray(var_0._id_5664, "targetname");
+  var_2 = scripts\engine\utility::getStructArray(var_0._id_5664, "targetname");
   var_3 = anglesToForward(var_0.angles);
 
   foreach(var_5 in var_2) {

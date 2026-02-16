@@ -336,7 +336,7 @@ function function_426caba9() {
   }
   level flag::wait_till("flag_zipline_in_use");
   self waittill("zipline_start");
-  while(!self meleebuttonpressed()) {
+  while(!self meleeButtonPressed()) {
     wait(0.05);
   }
   if(isDefined(self.var_53539670)) {

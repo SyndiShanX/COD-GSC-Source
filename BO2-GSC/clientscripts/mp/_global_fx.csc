@@ -149,7 +149,7 @@ wind_initial_setting() {
 }
 
 global_fx(targetname, fxname, fxfile, delay, soundalias) {
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
 
   if(!isDefined(ents)) {
     return;

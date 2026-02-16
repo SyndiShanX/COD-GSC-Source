@@ -202,7 +202,7 @@ func_F6BC() {
 }
 
 defaultgetspawnpoint() {
-  return getassignedspawnpoint(scripts\engine\utility::getstructarray("default_player_start", "targetname"));
+  return getassignedspawnpoint(scripts\engine\utility::getStructArray("default_player_start", "targetname"));
 }
 
 getassignedspawnpoint(var_0) {
@@ -1090,7 +1090,7 @@ func_988E() {
 }
 
 func_988B() {
-  level.var_A6CB = scripts\engine\utility::getstructarray("respawn_edge", "targetname");
+  level.var_A6CB = scripts\engine\utility::getStructArray("respawn_edge", "targetname");
 }
 
 func_7F56() {

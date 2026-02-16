@@ -59,7 +59,7 @@ put this in your GSC:
 maps\_zodiac_player::main( "vehicle_zodiac_viewmodel" );
 
 and these lines in your CSV:
-include,vehicle_zodiac_player
+#include,vehicle_zodiac_player
 sound,vehicle_zodiac,vehicle_standard,all_sp
 
 defaultmdl="vehicle_zodiac_viewmodel"default:"vehicletype" "zodiac_player"default:"script_team" "allies"

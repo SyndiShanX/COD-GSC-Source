@@ -383,7 +383,7 @@ can_revive(revivee) {
 }
 
 is_reviving(revivee) {
-  return can_revive(revivee) && self usebuttonpressed();
+  return can_revive(revivee) && self useButtonPressed();
 }
 
 is_facing(facee) {

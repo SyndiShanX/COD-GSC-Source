@@ -218,7 +218,7 @@ monitorscopechange() {
     }
 
     if(var_8 && !var_6 isreloading() && !var_6 isswitchingweapon()) {
-      if(var_6 maps\_utility::isads() && var_6 adsbuttonpressed()) {
+      if(var_6 maps\_utility::isads() && var_6 adsButtonPressed()) {
         var_6 turnonvariablescopehud(var_3);
         var_3 = 1;
 
@@ -611,7 +611,7 @@ vision_change_multiple_init() {
 }
 
 vision_change_multiple_internal() {
-  var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = vectornormalize(self.origin - var_2.origin);

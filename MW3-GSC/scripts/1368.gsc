@@ -96,7 +96,7 @@ _id_41B8(var_0) {
     }
   }
 
-  var_3 = common_scripts\utility::getstructarray(self.target, "targetname");
+  var_3 = common_scripts\utility::getStructArray(self.target, "targetname");
   var_4 = var_3[0].origin;
   var_5 = undefined;
   var_6 = spawn("script_origin", (0, 0, 0));
@@ -370,7 +370,7 @@ _id_41C6(var_0, var_1) {
 }
 
 _id_41C7() {
-  var_0 = common_scripts\utility::getstructarray("wave_fx", "targetname");
+  var_0 = common_scripts\utility::getStructArray("wave_fx", "targetname");
   var_1 = common_scripts\utility::getstruct("wave_fx_center", "targetname");
 
   if(!var_0.size) {

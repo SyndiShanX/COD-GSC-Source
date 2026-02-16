@@ -80,7 +80,7 @@ func_5C3A() {
       if(!isDefined(var_1.target)) {
         break;
       }
-      var_6 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      var_6 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
       if(var_6.size) {
         break;
@@ -126,7 +126,7 @@ func_5C3A() {
       if(!isDefined(var_2[var_1.targetname])) {
         return;
       }
-      var_6 = scripts\engine\utility::getstructarray(var_1.target, "targetname");
+      var_6 = scripts\engine\utility::getStructArray(var_1.target, "targetname");
 
       if(var_6.size) {
         break;

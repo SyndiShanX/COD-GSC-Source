@@ -202,7 +202,7 @@ func_76C8(var_0, var_1) {
   var_2 = 0;
 
   for(;;) {
-    while(var_1 attackbuttonpressed() && var_2 <= 4) {
+    while(var_1 attackButtonPressed() && var_2 <= 4) {
       if(!self.canbeplaced) {
         wait 0.05;
         continue;

@@ -26,7 +26,7 @@ main() {
   global_FX("light_pulse_orange_FX_origin", "light_pulse_orange_FX", "misc/light_glow_orange_generic_pulse", -2);
 }
 global_FX(targetname, fxName, fxFile, delay, soundalias) {
-  ents = getstructarray(targetname, "targetname");
+  ents = getStructArray(targetname, "targetname");
   if(!isDefined(ents)) {
     return;
   }

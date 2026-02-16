@@ -719,7 +719,7 @@ revive_trigger_think() {
 
     self.revivetrigger sethintstring("");
 
-    if(getdvarint(#"lastand_selfrevive", 0) && self attackbuttonpressed() && self throwbuttonpressed() && self fragbuttonpressed()) {
+    if(getdvarint(#"lastand_selfrevive", 0) && self attackButtonPressed() && self throwbuttonPressed() && self fragButtonPressed()) {
       self thread revive_success(self);
       self function_2907ce7a();
       return;
@@ -1052,7 +1052,7 @@ is_reviving(revivee, ignore_touch_checks = 0, height = undefined) {
     return false;
   }
 
-  return self usebuttonpressed() && can_revive(revivee, ignore_touch_checks, height);
+  return self useButtonPressed() && can_revive(revivee, ignore_touch_checks, height);
 }
 
 is_reviving_any() {

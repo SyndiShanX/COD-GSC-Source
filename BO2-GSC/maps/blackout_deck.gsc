@@ -263,7 +263,7 @@ spawn_seals_from_optional_objective() {
 
 deck_event_jetpack_ai() {
   level thread deck_event_jetpack_drones("deck_jetpack_takeoff_drone", "menendez_escaped");
-  a_s_landing = getstructarray("menendez_protect_jetpack", "targetname");
+  a_s_landing = getStructArray("menendez_protect_jetpack", "targetname");
 
   foreach(s_align in a_s_landing) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_assault_guy", 0, ::func_jetpack_run_to_cover);
@@ -273,7 +273,7 @@ deck_event_jetpack_ai() {
   flag_wait("menendez_escaped");
   level thread deck_event_jetpack_drones("deck_jetpack_debris_drone", "create_falling_debris_cover");
   flag_wait("create_falling_debris_cover");
-  a_s_landing = getstructarray("vtol_fight_jetpack", "targetname");
+  a_s_landing = getStructArray("vtol_fight_jetpack", "targetname");
 
   foreach(s_align in a_s_landing) {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_align, "pmc_assault_guy", 0, ::func_jetpack_run_to_cover);
@@ -299,7 +299,7 @@ deck_event_jetpack_drones(str_struct, str_flag, n_wait_min, n_wait_max) {
 
   level endon(str_flag);
   level thread deck_event_jetpack_drones_cleanup(str_struct, str_flag);
-  a_s_landing = getstructarray(str_struct, "targetname");
+  a_s_landing = getStructArray(str_struct, "targetname");
 
   if(a_s_landing.size > 0) {
     while(true) {
@@ -1139,7 +1139,7 @@ brute_force_rumble() {
 
 drone_barrage() {
   self endon("death");
-  fire_at_array = getstructarray("drone_strike_at", "targetname");
+  fire_at_array = getStructArray("drone_strike_at", "targetname");
   index = randomint(fire_at_array.size);
   level waittill("drone_barrage");
   rand_wait = randomint(10);
@@ -1197,7 +1197,7 @@ fire_missile_from_behind_the_player() {
 }
 
 find_missile_fire_at_target_the_player_is_looking_at() {
-  a_elements = getstructarray("drone_fire_missles_target", "targetname");
+  a_elements = getStructArray("drone_fire_missles_target", "targetname");
   b_found_element = 0;
   e_player = level.player;
   b_do_trace = 0;
@@ -1234,7 +1234,7 @@ run_dev_drones() {
   level thread dev_drones_ambience();
 
   while(true) {
-    if(level.player usebuttonpressed()) {
+    if(level.player useButtonPressed()) {
       break;
     }
 

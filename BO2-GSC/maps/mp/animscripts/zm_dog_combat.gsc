@@ -300,7 +300,7 @@ attackteleportthread(offset) {
 }
 
 player_attacked() {
-  return isalive(self) && self meleebuttonpressed();
+  return isalive(self) && self meleeButtonPressed();
 }
 
 set_melee_timer(player) {

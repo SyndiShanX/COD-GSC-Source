@@ -367,7 +367,7 @@ sniff_system_init() {
 
   common_scripts\utility::flag_wait("introscreen_complete");
   wait 1;
-  var_0 = common_scripts\utility::getstructarray("dog_sniff", "targetname");
+  var_0 = common_scripts\utility::getStructArray("dog_sniff", "targetname");
 
   foreach(var_2 in var_0) {
     var_3 = spawn("script_origin", var_2.origin);
@@ -544,7 +544,7 @@ dog_stays_in_front_of_player() {
   level.target_ent = spawn("script_origin", var_3);
   level.target_ent.angles = (0, var_0[1], 0);
   level.target_ent linkto(level.player);
-  var_4 = common_scripts\utility::getstructarray("sniff_spots", "targetname");
+  var_4 = common_scripts\utility::getStructArray("sniff_spots", "targetname");
   maps\_utility_dogs::disable_dog_sniff();
 
   for(;;) {
@@ -765,7 +765,7 @@ lariver_ambient_magicbullets() {
 gasstation_ambient_aa72() {
   level endon("pipe_enter");
   common_scripts\utility::flag_wait("gasstation_front_approach");
-  var_0 = common_scripts\utility::getstructarray("ambient_aa72x_splines", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ambient_aa72x_splines", "targetname");
   var_1 = 2;
   var_2 = [];
   var_3 = 0;
@@ -1844,7 +1844,7 @@ chopper_strafe_attack() {
   self.is_strafing = 1;
   self.attack_pos = undefined;
   self setneargoalnotifydist(500);
-  var_0 = common_scripts\utility::getstructarray("strafe_attack", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("strafe_attack", "script_noteworthy");
   self.old_node = self.currentnode;
   maps\_utility::vehicle_detachfrompath();
   var_1 = common_scripts\utility::getclosest(self.origin, var_0);
@@ -2689,7 +2689,7 @@ la_river_defend_weapons_spawn() {
   }
   level.possible_guns = common_scripts\utility::array_randomize(level.possible_guns);
   level.defend_weapons = [];
-  var_0 = common_scripts\utility::getstructarray("defend_weapons", "targetname");
+  var_0 = common_scripts\utility::getStructArray("defend_weapons", "targetname");
 
   foreach(var_6, var_2 in var_0) {
     if(!isDefined(level.possible_guns[var_6])) {
@@ -2915,7 +2915,7 @@ matv_player_jumped_in(var_0) {
   level endon("player_in_matv");
 
   for(;;) {
-    if(distance2dsquared(var_0.origin, level.player.origin) < var_1 && level.player jumpbuttonpressed()) {
+    if(distance2dsquared(var_0.origin, level.player.origin) < var_1 && level.player jumpbuttonPressed()) {
       while(!level.player isonground())
         wait 0.05;
 
@@ -2929,10 +2929,10 @@ matv_player_jumped_in(var_0) {
 
 wall_ride_cilivians() {
   common_scripts\utility::flag_wait("load_matv");
-  var_0 = common_scripts\utility::getstructarray("river_gate_civs", "targetname");
+  var_0 = common_scripts\utility::getStructArray("river_gate_civs", "targetname");
   var_1 = getent("river_gate_civ", "targetname");
   level.river_drones = maps\deer_hunt_ride::spawn_ai_for_structs(var_1, var_0, 1);
-  var_0 = common_scripts\utility::getstructarray("river_gate_soldiers", "targetname");
+  var_0 = common_scripts\utility::getStructArray("river_gate_soldiers", "targetname");
   var_1 = getent("river_soldier_spawner", "targetname");
   var_2 = maps\deer_hunt_ride::spawn_ai_for_structs(var_1, var_0, 1);
   level.river_drones = common_scripts\utility::array_combine(level.river_drones, var_2);
@@ -3301,7 +3301,7 @@ lariver_bridge_rappel_enemies() {
   while(level.player.origin[2] > -410)
     wait 1;
 
-  var_0 = common_scripts\utility::getstructarray("rappel_spot", "targetname");
+  var_0 = common_scripts\utility::getStructArray("rappel_spot", "targetname");
   var_1 = common_scripts\utility::getclosest(level.player.origin, var_0);
   var_2 = maps\_utility::groundpos(var_1.origin) + (0, 0, 810);
   var_3 = var_1.angles;

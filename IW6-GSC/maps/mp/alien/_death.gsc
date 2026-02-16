@@ -513,7 +513,7 @@ blackBox_alienKilled(eAttacker) {
 
 KILL_TRIGGER_SPAWN_STRUCT_TARGET_NAME = "respawn_edge";
 kill_trigger_spawn_init() {
-  level.killTriggerSpawnLocs = getstructArray(KILL_TRIGGER_SPAWN_STRUCT_TARGET_NAME, "targetname");
+  level.killTriggerSpawnLocs = getStructArray(KILL_TRIGGER_SPAWN_STRUCT_TARGET_NAME, "targetname");
 }
 
 getKillTriggerSpawnLoc() {

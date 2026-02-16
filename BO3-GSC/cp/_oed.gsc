@@ -84,22 +84,22 @@ function function_cec8e852() {
   self endon("killoedmonitor");
   while(true) {
     level flagsys::wait_till_clear("");
-    if(level.b_enhanced_vision_enabled && self.b_enhanced_vision_enabled && self actionslotonebuttonpressed()) {
+    if(level.b_enhanced_vision_enabled && self.b_enhanced_vision_enabled && self actionslotonebuttonPressed()) {
       if(!scene::is_igc_active()) {
         self.ev_state = !(isDefined(self.ev_state) && self.ev_state);
         self ev_activate_on_player(self.ev_state);
-        while(self actionslotonebuttonpressed()) {
+        while(self actionslotonebuttonPressed()) {
           wait(0.05);
         }
       }
     }
-    if(!sessionmodeiscampaignzombiesgame() && level.b_tactical_mode_enabled && self.b_tactical_mode_enabled && self actionslotfourbuttonpressed()) {
+    if(!sessionmodeiscampaignzombiesgame() && level.b_tactical_mode_enabled && self.b_tactical_mode_enabled && self actionslotfourbuttonPressed()) {
       if(!scene::is_igc_active()) {
         self.tmode_state = !(isDefined(self.tmode_state) && self.tmode_state);
         self tmode_activate_on_player(self.tmode_state);
         visionset_mgr::activate("visionset", "tac_mode", self, 0.05, 0, 0.8);
         wait(0.85);
-        while(self actionslotfourbuttonpressed()) {
+        while(self actionslotfourbuttonPressed()) {
           wait(0.05);
         }
       }

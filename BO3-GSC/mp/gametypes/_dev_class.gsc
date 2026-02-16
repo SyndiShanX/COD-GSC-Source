@@ -156,16 +156,16 @@ function dev_cac_dpad_think(part_name, cycle_function, tag) {
   for(;;) {
     self setactionslot(3, "");
     self setactionslot(4, "");
-    if(!dpad_left && self buttonpressed("")) {
+    if(!dpad_left && self buttonPressed("")) {
       [[cycle_function]](0, tag);
       dpad_left = 1;
-    } else if(!self buttonpressed("")) {
+    } else if(!self buttonPressed("")) {
       dpad_left = 0;
     }
-    if(!dpad_right && self buttonpressed("")) {
+    if(!dpad_right && self buttonPressed("")) {
       [[cycle_function]](1, tag);
       dpad_right = 1;
-    } else if(!self buttonpressed("")) {
+    } else if(!self buttonPressed("")) {
       dpad_right = 0;
     }
     wait(0.05);

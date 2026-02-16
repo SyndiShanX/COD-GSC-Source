@@ -588,7 +588,7 @@ anim_override_func() {
   level.scr_anim["zombie"]["walk3"] = % ai_zombie_walk_v2;
   level.scr_anim["zombie"]["run6"] = % ai_zombie_run_v2;
 }
-include_weapons() {
+#include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false);
   include_weapon("claymore_zm", false);
@@ -833,7 +833,7 @@ offhand_weapon_give_override(str_weapon) {
   }
   return false;
 }
-include_powerups() {
+#include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -850,7 +850,7 @@ include_powerups() {
   include_powerup("lose_perk");
   include_powerup("empty_clip");
 }
-include_equipment_for_level() {
+#include_equipment_for_level() {
   include_equipment("equip_gasmask_zm");
   include_equipment("equip_hacker_zm");
 }
@@ -970,13 +970,13 @@ insta_kill_player() {
           point = moon_digger_respawn(self);
           if(!isDefined(point)) {
             points = getstruct("bridge_zone", "script_noteworthy");
-            spawn_points = getstructarray(points.target, "targetname");
+            spawn_points = getStructArray(points.target, "targetname");
             num = self getentitynumber();
             point = spawn_points[num];
           }
         } else {
           points = getstruct("bridge_zone", "script_noteworthy");
-          spawn_points = getstructarray(points.target, "targetname");
+          spawn_points = getStructArray(points.target, "targetname");
           num = self getentitynumber();
           point = spawn_points[num];
         }
@@ -1042,11 +1042,11 @@ is_player_killable(player, checkIgnoreMeFlag) {
   return true;
 }
 moon_digger_respawn(revivee) {
-  spawn_points = getstructarray("player_respawn_point", "targetname");
+  spawn_points = getStructArray("player_respawn_point", "targetname");
   if(level.zones["airlock_west2_zone"].is_enabled) {
     for(i = 0; i < spawn_points.size; i++) {
       if(spawn_points[i].script_noteworthy == "airlock_west2_zone") {
-        spawn_array = getstructarray(spawn_points[i].target, "targetname");
+        spawn_array = getStructArray(spawn_points[i].target, "targetname");
         for(j = 0; j < spawn_array.size; j++) {
           if(spawn_array[j].script_int == (revivee.entity_num + 1)) {
             return spawn_array[j];
@@ -1058,7 +1058,7 @@ moon_digger_respawn(revivee) {
   } else if(level.zones["airlock_east2_zone"].is_enabled) {
     for(i = 0; i < spawn_points.size; i++) {
       if(spawn_points[i].script_noteworthy == "airlock_east2_zone") {
-        spawn_array = getstructarray(spawn_points[i].target, "targetname");
+        spawn_array = getStructArray(spawn_points[i].target, "targetname");
         for(j = 0; j < spawn_array.size; j++) {
           if(spawn_array[j].script_int == (revivee.entity_num + 1)) {
             return spawn_array[j];
@@ -1101,9 +1101,9 @@ blackhole_bomb_area_check() {
   black_hole_teleport_structs = undefined;
   org = spawn("script_origin", (0, 0, 0));
   if(flag("enter_nml")) {
-    black_hole_teleport_structs = getstructarray("struct_black_hole_teleport_nml", "targetname");
+    black_hole_teleport_structs = getStructArray("struct_black_hole_teleport_nml", "targetname");
   } else if(flag("both_tunnels_blocked")) {
-    black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
+    black_hole_teleport_structs = getStructArray("struct_black_hole_teleport", "targetname");
     all_players_trapped = false;
     final_structs = black_hole_teleport_structs;
     discarded_zones = [];
@@ -1152,10 +1152,10 @@ blackhole_bomb_area_check() {
       }
       black_hole_teleport_structs = final_structs;
     } else {
-      black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
+      black_hole_teleport_structs = getStructArray("struct_black_hole_teleport", "targetname");
     }
   } else {
-    black_hole_teleport_structs = getstructarray("struct_black_hole_teleport", "targetname");
+    black_hole_teleport_structs = getStructArray("struct_black_hole_teleport", "targetname");
   }
   org delete();
   return black_hole_teleport_structs;

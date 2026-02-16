@@ -233,7 +233,7 @@ func_FA3C() {
         var_7.var_12B96 = getnode("vr_ring0_" + var_7.script_index + "_leftnode", "targetname");
         var_7.var_12B97 = getnode("vr_ring0_" + var_7.script_index + "_rightnode", "targetname");
         var_7.var_6B71 = getEntArray("vr_ring" + var_1.var_EDD5 + "_" + var_7.script_index + "_falling_geo", "script_noteworthy");
-        var_7.var_75B5 = scripts\engine\utility::getstructarray("vr_ring" + var_1.var_EDD5 + "_" + var_7.script_index + "_fx", "targetname");
+        var_7.var_75B5 = scripts\engine\utility::getStructArray("vr_ring" + var_1.var_EDD5 + "_" + var_7.script_index + "_fx", "targetname");
       }
 
       if(var_1.var_EDD5 == 5) {
@@ -450,7 +450,7 @@ func_7989(var_0, var_1) {
 
 func_7AFE(var_0, var_1) {
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray(var_0, var_1);
+  var_3 = scripts\engine\utility::getStructArray(var_0, var_1);
   var_4 = getEntArray(var_0, var_1);
   var_5 = getnodearray(var_0, var_1);
   var_6 = scripts\engine\utility::array_combine(var_3, var_4);

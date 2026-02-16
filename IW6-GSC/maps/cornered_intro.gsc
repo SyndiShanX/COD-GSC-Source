@@ -1274,13 +1274,13 @@ intro_binocs_oracle_scanning_vo() {
     while(!isDefined(level.player.current_binocular_zoom_level) && !isDefined(level.player.binocular_zoom_levels))
       wait 0.05;
 
-    if(!level.player attackbuttonpressed())
+    if(!level.player attackButtonPressed())
       level.player waittill("scanning_target");
 
     if(level.player.current_binocular_zoom_level == level.player.binocular_zoom_levels - 1) {
       wait 0.05;
 
-      if(level.player attackbuttonpressed() && common_scripts\utility::flag("scan_target_not_facing")) {
+      if(level.player attackButtonPressed() && common_scripts\utility::flag("scan_target_not_facing")) {
         var_4 = randomint(var_2.size);
 
         if(var_4 == var_3) {
@@ -1308,7 +1308,7 @@ intro_binocs_oracle_scanning_vo() {
         var_1 = var_6;
       }
 
-      while(level.player attackbuttonpressed())
+      while(level.player attackButtonPressed())
         wait 0.05;
     }
 

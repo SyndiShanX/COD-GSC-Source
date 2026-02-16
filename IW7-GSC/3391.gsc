@@ -4,14 +4,14 @@
 *********************************************/
 
 init_arcade_counter_ammo_slot() {
-  var_0 = scripts\engine\utility::getstructarray("arcade_counter_ammo", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("arcade_counter_ammo", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_9593();
   }
 }
 
 init_arcade_grenade_slot() {
-  var_0 = scripts\engine\utility::getstructarray("arcade_counter_grenade", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("arcade_counter_grenade", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_9593();
   }
@@ -19,7 +19,7 @@ init_arcade_grenade_slot() {
 
 init_small_counter_slot() {
   level thread func_3E93();
-  var_0 = scripts\engine\utility::getstructarray("small_ticket_prize", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("small_ticket_prize", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_9593();
     wait(0.05);
@@ -27,7 +27,7 @@ init_small_counter_slot() {
 }
 
 init_medium_counter_slot() {
-  var_0 = scripts\engine\utility::getstructarray("medium_ticket_prize", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("medium_ticket_prize", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_9593();
     wait(0.05);
@@ -36,7 +36,7 @@ init_medium_counter_slot() {
 
 init_large_counter_slot() {
   level.var_A857 = ["attachment_zmb_arcane_muzzlebrake_wm"];
-  var_0 = scripts\engine\utility::getstructarray("large_ticket_prize", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("large_ticket_prize", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2 thread func_9593();
   }
@@ -56,7 +56,7 @@ func_9593() {
     wait(0.25);
   }
 
-  var_0 = scripts\engine\utility::getstructarray(self.target, "targetname");
+  var_0 = scripts\engine\utility::getStructArray(self.target, "targetname");
   var_1 = scripts\engine\utility::getclosest(self.origin, var_0);
   self.randomintrange = spawn("script_model", var_1.origin);
   self.randomintrange.angles = var_1.angles;

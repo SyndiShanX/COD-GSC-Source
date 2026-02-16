@@ -76,8 +76,8 @@ jetwing_barrel_roll() {
 
   while(true) {
     if(!self.rolling) {
-      roll_right = level.player fragbuttonpressed();
-      roll_left = level.player secondaryoffhandbuttonpressed();
+      roll_right = level.player fragButtonPressed();
+      roll_left = level.player secondaryoffhandbuttonPressed();
 
       if(roll_left || roll_right) {
         offset = self getpathfixedoffset();

@@ -438,7 +438,7 @@ getfreespawnpoint(spawnpoints, player) {
 }
 
 delete_in_createfx() {
-  exterior_goals = getstructarray("exterior_goal", "targetname");
+  exterior_goals = getStructArray("exterior_goal", "targetname");
 
   for(i = 0; i < exterior_goals.size; i++) {
     if(!isDefined(exterior_goals[i].target)) {
@@ -485,7 +485,7 @@ add_bots() {
 
 zbot_spawn() {
   player = gethostplayer();
-  spawnpoints = getstructarray("initial_spawn_points", "targetname");
+  spawnpoints = getStructArray("initial_spawn_points", "targetname");
   spawnpoint = getfreespawnpoint(spawnpoints);
   bot = addtestclient();
 
@@ -2530,7 +2530,7 @@ check_for_valid_spawn_near_team(revivee, return_struct) {
 }
 
 get_valid_spawn_location(revivee, spawn_points, closest_group, return_struct) {
-  spawn_array = getstructarray(spawn_points[closest_group].target, "targetname");
+  spawn_array = getStructArray(spawn_points[closest_group].target, "targetname");
   spawn_array = array_randomize(spawn_array);
 
   for(k = 0; k < spawn_array.size; k++) {
@@ -3650,19 +3650,19 @@ playerzombie_soundboard() {
       continue;
     }
 
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       if(self can_do_input("use")) {
         self thread playerzombie_play_sound(usesound);
         self thread playerzombie_waitfor_buttonrelease("use");
         self.usesound_nexttime = gettime() + self.usesound_waittime;
       }
-    } else if(self attackbuttonpressed()) {
+    } else if(self attackButtonPressed()) {
       if(self can_do_input("attack")) {
         self thread playerzombie_play_sound(attacksound);
         self thread playerzombie_waitfor_buttonrelease("attack");
         self.attacksound_nexttime = gettime() + self.attacksound_waittime;
       }
-    } else if(self adsbuttonpressed()) {
+    } else if(self adsButtonPressed()) {
       if(self can_do_input("ads")) {
         self thread playerzombie_play_sound(adssound);
         self thread playerzombie_waitfor_buttonrelease("ads");
@@ -3725,7 +3725,7 @@ playerzombie_waitfor_buttonrelease(inputtype) {
   if(inputtype == "use") {
     self.buttonpressed_use = 1;
 
-    while(self usebuttonpressed()) {
+    while(self useButtonPressed()) {
       wait 0.05;
     }
 
@@ -3733,7 +3733,7 @@ playerzombie_waitfor_buttonrelease(inputtype) {
   } else if(inputtype == "attack") {
     self.buttonpressed_attack = 1;
 
-    while(self attackbuttonpressed()) {
+    while(self attackButtonPressed()) {
       wait 0.05;
     }
 
@@ -3741,7 +3741,7 @@ playerzombie_waitfor_buttonrelease(inputtype) {
   } else if(inputtype == "ads") {
     self.buttonpressed_ads = 1;
 
-    while(self adsbuttonpressed()) {
+    while(self adsButtonPressed()) {
       wait 0.05;
     }
 
@@ -4688,7 +4688,7 @@ player_intermission() {
   self.archivetime = 0;
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
-  points = getstructarray("intermission", "targetname");
+  points = getStructArray("intermission", "targetname");
 
   if(!isDefined(points) || points.size == 0) {
     points = getEntArray("info_intermission", "classname");

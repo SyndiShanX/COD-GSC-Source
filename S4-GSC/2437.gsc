@@ -200,7 +200,7 @@ _id_9A14() {
   waittillframeend;
   _id_D1F5();
   childthread _id_E135(self._id_5716, self, "s4_zm_exfil_end_01");
-  var_0 = scripts\engine\utility::getstructarray(self._id_5716._id_0481, "target");
+  var_0 = scripts\engine\utility::getStructArray(self._id_5716._id_0481, "target");
   level thread _id_0991::_id_C9FC("cp_zm_zod_exfil_final", var_0[0]._id_0481);
   _id_0987::set_objective_ui_state(3, 1, 4);
   self.exfil_portal_start_time = gettime();

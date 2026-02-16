@@ -105,7 +105,7 @@ bossozstage2teleportout() {
   bossozstage2disableai();
   self hide();
   self scragentsetphysicsmode("noclip");
-  var_0 = common_scripts\utility::getstructarray("boss_oz_spot", "targetname");
+  var_0 = common_scripts\utility::getStructArray("boss_oz_spot", "targetname");
   self setorigin(var_0[0].origin, 1);
   self scragentsetgoalpos(self.origin);
 }

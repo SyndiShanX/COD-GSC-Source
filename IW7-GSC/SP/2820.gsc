@@ -16,8 +16,8 @@ func_94F9() {
   precachemodel("equipment_mp_nanoshot");
   precachemodel("helmet_hero_protagonist");
   precachemodel("equipment_pickup_plane_01");
-  var_0 = scripts\engine\utility::getstructarray("ammo_pickup", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("equipment_pickup", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ammo_pickup", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("equipment_pickup", "targetname");
   scripts\engine\utility::array_thread(var_0, ::func_4842, "ammo");
   scripts\engine\utility::array_thread(var_1, ::func_4842, "equipment");
   precachestring(&"EQUIPMENT_PICKUP_SEEKER");

@@ -1150,7 +1150,7 @@ getstruct(name, type) {
   return array[0];
 }
 
-getstructarray(name, type) {
+getStructArray(name, type) {
   if(!isDefined(type)) {
     type = "targetname";
   }

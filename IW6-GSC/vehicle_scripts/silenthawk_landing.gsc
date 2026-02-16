@@ -13,8 +13,8 @@ init_silenthawk_landing() {
 
 init_silenthawk_landing_thread() {
   waittillframeend;
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("gag_stage_silenthawk_unload", "script_noteworthy"), ::setup_gag_stage_silenthawk_unload);
-  common_scripts\utility::array_thread(common_scripts\utility::getstructarray("gag_stage_silenthawk_load", "script_noteworthy"), ::setup_gag_stage_silenthawk_load);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("gag_stage_silenthawk_unload", "script_noteworthy"), ::setup_gag_stage_silenthawk_unload);
+  common_scripts\utility::array_thread(common_scripts\utility::getStructArray("gag_stage_silenthawk_load", "script_noteworthy"), ::setup_gag_stage_silenthawk_load);
 }
 
 silenthawk_landing() {

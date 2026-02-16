@@ -156,7 +156,7 @@ setup_wire_models() {
 
 setup_wires(var_0) {
   level.wire_models = [];
-  var_1 = scripts\engine\utility::getstructarray("wire_puzzle_model", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("wire_puzzle_model", "script_noteworthy");
   var_2 = ["red", "blue", "green", "black", "white", "yellow"];
   var_3 = ["cp_final_control_box_button_01_red", "cp_final_control_box_button_01_black", "cp_final_control_box_button_01_blue", "cp_final_control_box_button_01_green", "cp_final_control_box_button_01_white", "cp_final_control_box_button_01_yellow"];
   var_4 = [(813.5, 4734.1, 165.9), (813.5, 4734.1, 160.9), (813.5, 4734.1, 156.9), (813.5, 4734.1, 152.9), (813.5, 4734.1, 148.9), (813.5, 4734.1, 144.9)];
@@ -186,7 +186,7 @@ setup_wires(var_0) {
 }
 
 setup_maze_models() {
-  level.unsolved_struct_positions_array = scripts\engine\utility::getstructarray("unsolved_grid_start", "script_noteworthy");
+  level.unsolved_struct_positions_array = scripts\engine\utility::getStructArray("unsolved_grid_start", "script_noteworthy");
   foreach(var_1 in level.unsolved_struct_positions_array) {
     var_2 = strtok(var_1.name, "_");
     var_1.x_coord = int(var_2[3]);
@@ -198,7 +198,7 @@ setup_maze_models() {
   level.test_model.angles = (340.8, 269.6, -0.00136747);
   level.test_model setModel("tag_origin_venomx_puzzle");
   level.test_model setscriptablepartstate("maze_puzzle", "neutral");
-  level.unsolved_struct_positions_array_2 = scripts\engine\utility::getstructarray("unsolved_grid_start_2", "script_noteworthy");
+  level.unsolved_struct_positions_array_2 = scripts\engine\utility::getStructArray("unsolved_grid_start_2", "script_noteworthy");
   foreach(var_5 in level.unsolved_struct_positions_array_2) {
     var_2 = strtok(var_5.name, "_");
     var_5.x_coord = int(var_2[3]);
@@ -1166,7 +1166,7 @@ init_venomx_models_interactions() {
   level.hidden_figures[0].script_noteworthy = "fig_1";
   level.hidden_figures[0].script_parameters = "default";
   level.hidden_figures[0].var_336 = "interaction";
-  var_4 = scripts\engine\utility::getstructarray("fig_1", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("fig_1", "script_noteworthy");
   level.hidden_figures[1] = spawnStruct();
   level.hidden_figures[1].origin = (3764, 6940, 227);
   level.hidden_figures[1].powered_on = 0;
@@ -1175,7 +1175,7 @@ init_venomx_models_interactions() {
   level.hidden_figures[1].script_noteworthy = "fig_2";
   level.hidden_figures[1].script_parameters = "default";
   level.hidden_figures[1].var_336 = "interaction";
-  var_4 = scripts\engine\utility::getstructarray("fig_2", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("fig_2", "script_noteworthy");
   level.hidden_figures[2] = spawnStruct();
   level.hidden_figures[2].origin = (3764, 6940, 227);
   level.hidden_figures[2].powered_on = 0;
@@ -1184,7 +1184,7 @@ init_venomx_models_interactions() {
   level.hidden_figures[2].script_noteworthy = "fig_3";
   level.hidden_figures[2].script_parameters = "default";
   level.hidden_figures[2].var_336 = "interaction";
-  var_4 = scripts\engine\utility::getstructarray("fig_3", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("fig_3", "script_noteworthy");
   level.hidden_figures[3] = spawnStruct();
   level.hidden_figures[3].origin = (3764, 6940, 227);
   level.hidden_figures[3].powered_on = 0;
@@ -1193,7 +1193,7 @@ init_venomx_models_interactions() {
   level.hidden_figures[3].script_noteworthy = "fig_4";
   level.hidden_figures[3].script_parameters = "default";
   level.hidden_figures[3].var_336 = "interaction";
-  var_4 = scripts\engine\utility::getstructarray("fig_4", "script_noteworthy");
+  var_4 = scripts\engine\utility::getStructArray("fig_4", "script_noteworthy");
   foreach(var_6 in level.hidden_figures) {
     var_6.groupname = "locOverride";
     var_6.playeroffset = [];
@@ -3916,7 +3916,7 @@ set_skeleton_attributes() {
 init_fig1() {
   level.special_mode_activation_funcs["fig_1"] = ::showhiddenfigurestoplayer;
   level.normal_mode_activation_funcs["fig_1"] = ::showhiddenfigurestoplayer;
-  var_0 = scripts\engine\utility::getstructarray("fig_1", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("fig_1", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -3927,7 +3927,7 @@ init_fig1() {
 init_fig2() {
   level.special_mode_activation_funcs["fig_2"] = ::showhiddenfigurestoplayer;
   level.normal_mode_activation_funcs["fig_2"] = ::showhiddenfigurestoplayer;
-  var_0 = scripts\engine\utility::getstructarray("fig_2", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("fig_2", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -3938,7 +3938,7 @@ init_fig2() {
 init_fig3() {
   level.special_mode_activation_funcs["fig_3"] = ::showhiddenfigurestoplayer;
   level.normal_mode_activation_funcs["fig_3"] = ::showhiddenfigurestoplayer;
-  var_0 = scripts\engine\utility::getstructarray("fig_3", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("fig_3", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];
@@ -3949,7 +3949,7 @@ init_fig3() {
 init_fig4() {
   level.special_mode_activation_funcs["fig_4"] = ::showhiddenfigurestoplayer;
   level.normal_mode_activation_funcs["fig_4"] = ::showhiddenfigurestoplayer;
-  var_0 = scripts\engine\utility::getstructarray("fig_4", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("fig_4", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.groupname = "locOverride";
     var_2.playeroffset = [];

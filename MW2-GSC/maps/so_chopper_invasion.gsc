@@ -563,7 +563,7 @@ end_spawners() {
   // Wait for the guys_in_buildings to spawn in, then set their goals.
   wait(0.1);
 
-  structs = getstructarray("so_end_ai_points", "script_noteworthy");
+  structs = getStructArray("so_end_ai_points", "script_noteworthy");
   foreach(ai in GetAiArray("axis")) {
     ai.target = structs[RandomInt(structs.size)].targetname;
     ai thread ai_post_spawn();
@@ -625,7 +625,7 @@ end_go_to_diner_thread() {
 
   wait(RandomFloat(1));
 
-  spots = getstructarray("so_roof_spot", "targetname");
+  spots = getStructArray("so_roof_spot", "targetname");
   self SetGoalPos(spots[RandomInt(spots.size)].origin);
 
   wait(3 + RandomFloat(5));

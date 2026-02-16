@@ -197,7 +197,7 @@ dof_blend_interior_ads() {
   var_0 = level.dof["ads"]["goal"]["weight"];
 
   if(var_0 < 1.0) {
-    if(self adsbuttonpressed() && self playerads() > 0.0)
+    if(self adsButtonPressed() && self playerads() > 0.0)
       var_0 = min(1, var_0 + 0.7);
     else
       var_0 = 0;

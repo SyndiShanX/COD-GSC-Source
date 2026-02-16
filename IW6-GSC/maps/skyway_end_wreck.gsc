@@ -413,7 +413,7 @@ part_2_draw_player(var_0, var_1, var_2, var_3) {
   thread trigger_qte_prompt_check(var_4);
 
   for(;;) {
-    if(level.player usebuttonpressed() && level.player istouching(var_4)) {
+    if(level.player useButtonPressed() && level.player istouching(var_4)) {
       break;
     }
 
@@ -758,7 +758,7 @@ event_qte_bullet_catch() {
     thread prompt_qte_grow(var_1);
 
     for(;;) {
-      if(level.player usebuttonpressed()) {
+      if(level.player useButtonPressed()) {
         level notify("notify_kill_prompt");
         thread fade_qte_prompt(0.1, 0);
         common_scripts\utility::flag_wait("flag_qte_end");

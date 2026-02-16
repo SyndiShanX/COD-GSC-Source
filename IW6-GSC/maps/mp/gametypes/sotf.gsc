@@ -310,7 +310,7 @@ findNewOwner(playerPool) {
 }
 
 spawnChests(player) {
-  chestSpawns = getstructarray("sotf_chest_spawnpoint", "targetname");
+  chestSpawns = getStructArray("sotf_chest_spawnpoint", "targetname");
 
   if(level.firstCrateDrop) {
     chestSpawnPoint = getCenterPoint(chestSpawns);

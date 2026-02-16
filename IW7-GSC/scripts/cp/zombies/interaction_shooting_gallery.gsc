@@ -66,14 +66,14 @@ func_94DA() {
 }
 
 func_9741(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   foreach(var_4, var_3 in var_1) {
     var_3 thread func_FA41(var_4);
   }
 }
 
 func_FA41(var_0) {
-  self.var_45C5 = scripts\engine\utility::getstructarray(self.target, "targetname")[0];
+  self.var_45C5 = scripts\engine\utility::getStructArray(self.target, "targetname")[0];
   self.var_13C27 = self.origin;
   self.var_13BFE = self.angles;
   func_CC05(self, var_0);
@@ -101,7 +101,7 @@ func_FA41(var_0) {
 }
 
 func_9690() {
-  level.var_FEB7 = scripts\engine\utility::getstructarray("shooting_gallery_moving_target_path", "script_noteworthy");
+  level.var_FEB7 = scripts\engine\utility::getStructArray("shooting_gallery_moving_target_path", "script_noteworthy");
 }
 
 func_10D1E(var_0) {
@@ -252,7 +252,7 @@ func_FEB6(var_0, var_1) {
         break;
       }
 
-      var_3 = scripts\engine\utility::getstructarray(var_3.target, "targetname")[0];
+      var_3 = scripts\engine\utility::getStructArray(var_3.target, "targetname")[0];
       continue;
     }
 
@@ -372,7 +372,7 @@ func_6208(var_0) {
 }
 
 func_9740() {
-  var_0 = scripts\engine\utility::getstructarray("shooting_gallery_controlling_struct", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("shooting_gallery_controlling_struct", "script_noteworthy");
   foreach(var_2 in var_0) {
     func_973F(var_2);
   }
@@ -386,7 +386,7 @@ func_973F(var_0) {
   var_0.var_FEB8 = [];
   var_0.var_FEBD = undefined;
   var_0.var_FEB0 = undefined;
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_3 in var_1) {
     switch (var_3.script_noteworthy) {
       case "shooting_gallery_target_row_1":
@@ -744,7 +744,7 @@ func_5555(var_0) {
     level waittill("gallery_used");
     level.var_210D++;
     if(level.var_210D == var_0) {
-      var_1 = scripts\engine\utility::getstructarray("shooting_gallery", "script_noteworthy");
+      var_1 = scripts\engine\utility::getStructArray("shooting_gallery", "script_noteworthy");
       foreach(var_3 in var_1) {
         var_3.out_of_order = 1;
       }

@@ -86,7 +86,7 @@ drill_out_of_playable() {
 
 init_drill_drop_loc() {
   level.drill_locs = [];
-  level.drill_locs = getstructarray("bomb_drop_loc", "targetname");
+  level.drill_locs = getStructArray("bomb_drop_loc", "targetname");
 }
 
 init_fx() {

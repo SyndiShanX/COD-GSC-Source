@@ -466,7 +466,7 @@ heliPilot_watchADS() {
   already_set = false;
   while(true) {
     if(isDefined(self.owner)) {
-      if(self.owner AdsButtonPressed()) {
+      if(self.owner adsButtonPressed()) {
         if(!already_set) {
           self.owner SetClientOmnvar("ui_heli_pilot", 2);
           already_set = true;
@@ -484,7 +484,7 @@ heliPilot_watchADS() {
 }
 
 heliPilot_setAirStartNodes() {
-  level.air_start_nodes = getstructarray("chopper_boss_path_start", "targetname");
+  level.air_start_nodes = getStructArray("chopper_boss_path_start", "targetname");
 }
 
 heliPilot_getLinkedStruct(struct) {

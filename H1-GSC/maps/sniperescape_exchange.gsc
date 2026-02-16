@@ -113,7 +113,7 @@ exchange_trace_converter() {
     common_scripts\utility::flag_wait("player_is_on_turret");
     maps\_utility::wait_for_buffer_time_to_pass(var_1, 1.0);
 
-    if(!level.player attackbuttonpressed()) {
+    if(!level.player attackButtonPressed()) {
       wait 0.05;
       continue;
     }
@@ -121,7 +121,7 @@ exchange_trace_converter() {
     thread exchange_player_fires();
     var_1 = gettime();
 
-    while(level.player attackbuttonpressed())
+    while(level.player attackButtonPressed())
       wait 0.05;
   }
 }
@@ -1762,7 +1762,7 @@ exchange_heli_preps_missiles() {
 }
 
 exchange_heli_shoots_hotel() {
-  var_0 = common_scripts\utility::getstructarray("hotel_org", "targetname");
+  var_0 = common_scripts\utility::getStructArray("hotel_org", "targetname");
   var_1 = spawn("script_origin", (0, 0, 0));
   var_2 = common_scripts\utility::random(var_0);
   var_1.origin = var_2.origin;

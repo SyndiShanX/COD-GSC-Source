@@ -821,7 +821,7 @@ stage4_incinerator_ground() {
 
   if(!isDefined(level.incinerator_key)) {
     var_1 = common_scripts\utility::random(var_0);
-    var_2 = common_scripts\utility::getstructarray(var_1.target, "targetname");
+    var_2 = common_scripts\utility::getStructArray(var_1.target, "targetname");
     var_3 = (max(var_2[0].origin[0], var_2[1].origin[0]), max(var_2[0].origin[1], var_2[1].origin[1]), 0);
     var_4 = (min(var_2[0].origin[0], var_2[1].origin[0]), min(var_2[0].origin[1], var_2[1].origin[1]), 0);
     var_5 = (randomfloatrange(var_4[0], var_3[0]), randomfloatrange(var_4[1], var_3[1]), 0);
@@ -1351,7 +1351,7 @@ stage8_init() {
 }
 
 stage8_logic() {
-  var_0 = common_scripts\utility::getstructarray("cardReader", "targetname");
+  var_0 = common_scripts\utility::getStructArray("cardReader", "targetname");
 
   if(var_0.size == 0) {
     return;
@@ -1594,7 +1594,7 @@ playrewardvo() {
 }
 
 stage11_init() {
-  level.heli_crash_nodes = common_scripts\utility::getstructarray("heli_crash_node", "targetname");
+  level.heli_crash_nodes = common_scripts\utility::getStructArray("heli_crash_node", "targetname");
 }
 
 stage11_logic() {

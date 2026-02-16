@@ -695,14 +695,14 @@ sam_ads() {
   self.sam_ads = 0;
 
   for(;;) {
-    if(!self adsbuttonpressed())
+    if(!self adsButtonPressed())
       self waittill("ads_on");
 
     self lerpfov(15, 0.25);
     self.sam_ads = 1;
     wait 0.25;
 
-    if(self adsbuttonpressed())
+    if(self adsButtonPressed())
       self waittill("ads_off");
 
     self lerpfov(65, 0.25);

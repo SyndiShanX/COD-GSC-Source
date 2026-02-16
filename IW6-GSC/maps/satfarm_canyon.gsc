@@ -81,7 +81,7 @@ train_car_fall(var_0) {
 
 sparks(var_0, var_1) {
   common_scripts\utility::flag_wait(var_0);
-  var_2 = common_scripts\utility::getstructarray(var_1, "targetname");
+  var_2 = common_scripts\utility::getStructArray(var_1, "targetname");
 
   foreach(var_4 in var_2) {
     var_5 = common_scripts\utility::spawn_tag_origin();
@@ -308,7 +308,7 @@ pop_smoke() {
   wait 0.5;
   iprintlnbold("Pop the smoke!");
   wait 0.5;
-  var_0 = common_scripts\utility::getstructarray("ambush_smoke_screen", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ambush_smoke_screen", "targetname");
   common_scripts\utility::flag_set("ambush_reverse");
 
   foreach(var_2 in var_0) {

@@ -658,7 +658,7 @@ function function_d99ed9ac() {
     if(e_player util::use_button_held()) {
       continue;
     }
-    if(e_player usebuttonpressed()) {
+    if(e_player useButtonPressed()) {
       e_player.var_7621b9dd = gettime();
       if(isDefined(e_player.var_57db2550) && (e_player.var_7621b9dd - e_player.var_57db2550) > 250) {
         e_player thread function_a84a1aec(self.script_int);

@@ -2462,7 +2462,7 @@ bunkers_flame_pre_explosions() {
 chain_reaction_fx() {
   level endon("obj_flame_complete");
 
-  fx_origins = getstructarray("orig_bunker_chain_reaction", "targetname");
+  fx_origins = getStructArray("orig_bunker_chain_reaction", "targetname");
 
   while(1) {
     fx_orig = fx_origins[randomint(fx_origins.size)];

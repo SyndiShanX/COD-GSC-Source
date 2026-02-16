@@ -9,7 +9,7 @@ _id_3D06() {
 }
 
 _id_3D07(var_0, var_1) {
-  level._id_3D08 = common_scripts\utility::getstructarray(var_1, var_0);
+  level._id_3D08 = common_scripts\utility::getStructArray(var_1, var_0);
 
   foreach(var_3 in level._id_3D08) {
     var_3.neighbors = var_3 maps\_utility::_id_2051();

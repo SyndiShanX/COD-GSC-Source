@@ -29,7 +29,7 @@ enable_linkto_on_all_triggers() {
     return;
   }
 
-  var_0 = scripts\engine\utility::getstructarray("sonic_ring_controlling_struct", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("sonic_ring_controlling_struct", "targetname");
   foreach(var_2 in var_0) {
     var_3 = getent(var_2.target, "targetname");
     var_3 enablelinkto();
@@ -39,7 +39,7 @@ enable_linkto_on_all_triggers() {
 }
 
 prepare_for_sonic_ring_attack(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("sonic_ring_controlling_struct", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("sonic_ring_controlling_struct", "targetname");
   var_2 = scripts\engine\utility::random(var_1);
   var_3 = spawn("script_model", var_2.origin);
   var_3 setModel("tag_origin");
@@ -85,7 +85,7 @@ sonic_ring_wail_all_player_trigger_teleporter(var_0, var_1) {
         break;
       }
 
-      if(!var_5 usebuttonpressed()) {
+      if(!var_5 useButtonPressed()) {
         var_3 = 0;
         break;
       }
@@ -110,7 +110,7 @@ sonic_ring_wail_all_player_trigger_teleporter(var_0, var_1) {
           break;
         }
 
-        if(!var_5 usebuttonpressed()) {
+        if(!var_5 useButtonPressed()) {
           var_3 = 0;
           break;
         }
@@ -158,7 +158,7 @@ func_15F1(var_0, var_1) {
 
 activate_vfx_ent(var_0, var_1) {
   var_2 = [];
-  var_3 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_3 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   foreach(var_5 in var_3) {
     var_6 = spawn("script_model", var_5.origin);
     var_6 setModel("crab_boss_origin");

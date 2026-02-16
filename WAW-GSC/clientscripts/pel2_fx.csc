@@ -143,7 +143,7 @@ precache_createfx_fx() {
 }
 
 ridge_flashes() {
-  origs = getstructarray("orig_ridge_flash", "targetname");
+  origs = getStructArray("orig_ridge_flash", "targetname");
 
   last_rand = 0;
   rand = 0;

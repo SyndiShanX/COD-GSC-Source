@@ -2963,14 +2963,14 @@ play_center_car_anims_side() {
 
   guys = [];
 
-  left_spawn_points = getstructarray("center_car_guy_left", "targetname");
+  left_spawn_points = getStructArray("center_car_guy_left", "targetname");
 
   guys[0] = spawn_fake_guy_outro(left_spawn_points[1].origin, left_spawn_points[1].angles, "guyl2");
   guys[1] = spawn_fake_guy_outro(left_spawn_points[2].origin, left_spawn_points[2].angles, "guyl3");
   guys[2] = spawn_fake_guy_outro(left_spawn_points[3].origin, left_spawn_points[3].angles, "guyl4");
   guys[3] = spawn_fake_hero_outro(left_spawn_points[4].origin, left_spawn_points[4].angles, "guyl5", "chernov");
 
-  right_spawn_points = getstructarray("center_car_guy_left", "targetname");
+  right_spawn_points = getStructArray("center_car_guy_left", "targetname");
 
   guys[4] = spawn_fake_guy_outro(right_spawn_points[0].origin, right_spawn_points[0].angles, "guyr1");
   guys[5] = spawn_fake_guy_outro(right_spawn_points[1].origin, right_spawn_points[1].angles, "guyr2");
@@ -2989,7 +2989,7 @@ play_center_car_anims_middle() {
 
   guys = [];
 
-  center_spawn_points = getstructarray("center_car_guy_center", "targetname");
+  center_spawn_points = getStructArray("center_car_guy_center", "targetname");
 
   guys[0] = spawn_fake_hero_outro(center_spawn_points[0].origin, center_spawn_points[0].angles, "guyc1", "chernov");
   guys[1] = spawn_fake_guy_outro(center_spawn_points[1].origin, center_spawn_points[1].angles, "guyc2");

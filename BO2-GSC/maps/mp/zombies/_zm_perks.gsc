@@ -2603,9 +2603,9 @@ perk_machine_spawn_init() {
   pos = [];
 
   if(isDefined(level.override_perk_targetname))
-    structs = getstructarray(level.override_perk_targetname, "targetname");
+    structs = getStructArray(level.override_perk_targetname, "targetname");
   else
-    structs = getstructarray("zm_perk_machine", "targetname");
+    structs = getStructArray("zm_perk_machine", "targetname");
 
   foreach(struct in structs) {
     if(isDefined(struct.script_string)) {

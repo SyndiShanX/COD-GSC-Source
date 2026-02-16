@@ -473,11 +473,11 @@ watch_shoot_harper() {
   level endon("morals_rail_start");
   level endon("menendez_shot");
 
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait 0.05;
   }
 
-  while(!self usebuttonpressed()) {
+  while(!self useButtonPressed()) {
     wait 0.05;
   }
 
@@ -490,11 +490,11 @@ watch_shoot_menendez() {
   level endon("harper_shot");
   level endon("morals_rail_start");
 
-  while(self jumpbuttonpressed()) {
+  while(self jumpbuttonPressed()) {
     wait 0.05;
   }
 
-  while(!self jumpbuttonpressed()) {
+  while(!self jumpbuttonPressed()) {
     wait 0.05;
   }
 

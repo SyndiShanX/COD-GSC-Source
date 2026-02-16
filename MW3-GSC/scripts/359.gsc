@@ -347,7 +347,7 @@ _id_140F() {
   var_0 = [];
 
   if(isDefined(self.target)) {
-    var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
   }
   return var_0;
 }

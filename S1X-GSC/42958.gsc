@@ -214,7 +214,7 @@ playersetupturretenergybar(var_0, var_1) {
   self setclientomnvar("ui_energy_ammo", var_3);
 
   for(;;) {
-    if(!self attackbuttonpressed()) {
+    if(!self attackButtonPressed()) {
       self waittill("fire_turret_weapon");
     }
 

@@ -939,7 +939,7 @@ play_fullscreen_splash_cinematic(var_0) {
 
 play_splash_on_activate() {
   for(;;) {
-    while(!self usebuttonpressed())
+    while(!self useButtonPressed())
       wait 0.05;
 
     common_scripts\utility::flag_set("pip_flag");

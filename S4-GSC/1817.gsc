@@ -908,7 +908,7 @@ _id_CAB0() {
 }
 
 _id_E10A(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
     if(!isDefined(var_3.angles)) {
@@ -974,7 +974,7 @@ _id_E10A(var_0) {
 }
 
 _id_470A(var_0) {
-  var_1 = scripts\engine\utility::getstructarray(var_0, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
     if(isDefined(var_3._id_011F)) {

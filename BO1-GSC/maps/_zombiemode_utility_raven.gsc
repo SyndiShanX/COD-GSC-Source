@@ -8,7 +8,7 @@
 #include maps\_zombiemode_utility;
 
 playerCanAfford(player, cost) {
-  if(!player UseButtonPressed()) {
+  if(!player useButtonPressed()) {
     return false;
   }
   if(player in_revive_trigger()) {

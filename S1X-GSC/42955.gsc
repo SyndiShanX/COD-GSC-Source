@@ -255,7 +255,7 @@ removeorbitalsupportplayeroncommand() {
   var_0 = 0;
 
   for(;;) {
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       var_0 = var_0 + 0.05;
 
       if(var_0 > 1.0) {
@@ -704,7 +704,7 @@ firemediumorbitalsupportgun() {
       var_0 = 2;
     }
 
-    if(self.controlled_orbitalsupport_turret == "medium" && self attackbuttonpressed() && !isDefined(level.hostmigrationtimer)) {
+    if(self.controlled_orbitalsupport_turret == "medium" && self attackButtonPressed() && !isDefined(level.hostmigrationtimer)) {
       var_1 = level.orbitalsupport_big_turret gettagorigin("tag_missile1");
       var_2 = playergetturretendpoint();
       level.orbitalsupport_planemodel playSound("paladin_mgun_burst_plr");
@@ -755,7 +755,7 @@ firebuddymediumorbitalsupportgun() {
       var_1 = 3;
     }
 
-    if(self attackbuttonpressed()) {
+    if(self attackButtonPressed()) {
       var_2 = level.orbitalsupport_buddy_turret gettagorigin("tag_missile1");
       var_3 = playergetturretendpoint(1);
       level.orbitalsupport_planemodel playSound("paladin_mgun_burst_plr");
@@ -829,7 +829,7 @@ firerocketorbitalsupportgun() {
   for(;;) {
     self.reloading_rocket_orbitalsupport_gun = 0;
 
-    if(self.controlled_orbitalsupport_turret == "rocket" && self attackbuttonpressed() && !isDefined(level.hostmigrationtimer)) {
+    if(self.controlled_orbitalsupport_turret == "rocket" && self attackButtonPressed() && !isDefined(level.hostmigrationtimer)) {
       earthquake(0.3, 1, level.orbitalsupport_planemodel.origin, 1000, self);
       var_3 = level.orbitalsupport_big_turret gettagorigin("tag_missile1");
       var_4 = vectornormalize(anglesToForward(self getangles()));

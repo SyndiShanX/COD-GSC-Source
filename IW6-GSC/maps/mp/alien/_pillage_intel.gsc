@@ -18,10 +18,10 @@ create_intel_spots() {
 }
 
 create_intel_by_section(var_0) {
-  var_1 = common_scripts\utility::getstructarray(var_0, "targetname");
+  var_1 = common_scripts\utility::getStructArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-    var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
+    var_4 = common_scripts\utility::getStructArray(var_3.target, "targetname");
     var_3 create_intel_section(var_4);
   }
 }

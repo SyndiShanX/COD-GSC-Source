@@ -1356,7 +1356,7 @@ function_31e641f5() {
 
     while(n_time < 3) {
       foreach(player in getplayers()) {
-        if(!player usebuttonpressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
+        if(!player useButtonPressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
           b_using = 0;
           n_time = 0;
           break;
@@ -1772,7 +1772,7 @@ trigger_forest_entrance() {
 
     while(n_time < 2.5) {
       foreach(player in getplayers()) {
-        if(!player usebuttonpressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
+        if(!player useButtonPressed() || !zm_utility::can_use(player) || !isDefined(self.s_unitrigger) || !isDefined(self.s_unitrigger.trigger) || !player istouching(self.s_unitrigger.trigger)) {
           b_using = 0;
           n_time = 0;
           break;

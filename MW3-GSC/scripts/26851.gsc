@@ -311,7 +311,7 @@ _id_68CD(var_0, var_1) {
 }
 
 _id_68CE(var_0) {
-  var_1 = common_scripts\utility::getstructarray("dont_assist_destructible_destruction_here", "targetname");
+  var_1 = common_scripts\utility::getStructArray("dont_assist_destructible_destruction_here", "targetname");
 
   foreach(var_3 in var_1) {
     if(distance(var_3.origin, var_0.origin) < var_3.radius) {
@@ -591,9 +591,9 @@ _id_68DB(var_0, var_1) {
 
 _id_68DC() {
   if(!level.console) {
-    return self attackbuttonpressed();
+    return self attackButtonPressed();
   }
-  return self vehicleattackbuttonpressed();
+  return self vehicleattackButtonPressed();
 }
 
 #using_animtree("vehicles");

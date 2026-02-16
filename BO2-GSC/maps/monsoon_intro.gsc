@@ -477,7 +477,7 @@ lift_control() {
 
 ambient_poi_zoom() {
   wait 1;
-  level.intro_poi = getstructarray("intro_poi", "targetname");
+  level.intro_poi = getStructArray("intro_poi", "targetname");
   level.intro_poi = add_to_array(level.intro_poi, getent("lift_ruins", "targetname"), 0);
   level.intro_poi = add_to_array(level.intro_poi, getent("heli_goggles_intro", "targetname"), 0);
   str_poi = undefined;

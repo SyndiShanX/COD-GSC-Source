@@ -1565,10 +1565,10 @@ function choose_open_craftable(player) {
   }
   self.opencraftablehudelem[n_playernum] = hinttexthudelem;
   while(isDefined(self.playertrigger[n_playernum]) && !self.crafted) {
-    if(player actionslotonebuttonpressed()) {
+    if(player actionslotonebuttonPressed()) {
       self.n_open_craftable_choice++;
       b_got_input = 1;
-    } else if(player actionslottwobuttonpressed()) {
+    } else if(player actionslottwobuttonPressed()) {
       self.n_open_craftable_choice--;
       b_got_input = 1;
     }
@@ -1668,7 +1668,7 @@ function player_continue_crafting(craftablespawn, slot) {
   if(isDefined(self.screecher)) {
     return false;
   }
-  if(!self usebuttonpressed()) {
+  if(!self useButtonPressed()) {
     return false;
   }
   if(craftablespawn.stub.usetime > 0 && isDefined(slot) && !craftablespawn craftable_is_piece_crafting(self.current_craftable_pieces[slot])) {

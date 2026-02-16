@@ -2092,7 +2092,7 @@ do_zombie_rise() {
   if(isDefined(self.zone_name)) {
     spots = level.zones[self.zone_name].rise_locations;
   } else if(isDefined(self.rise_target_name)) {
-    spots = GetStructArray(self.rise_target_name, "targetname");
+    spots = getStructArray(self.rise_target_name, "targetname");
   } else if(isDefined(level.zombie_rise_spawners)) {
     if(IsArray(level.zombie_rise_spawners)) {
       spots = level.zombie_rise_spawners[self.script_index];
@@ -2100,7 +2100,7 @@ do_zombie_rise() {
       spots = level.zombie_rise_spawners;
     }
   } else {
-    spots = GetStructArray("zombie_rise", "targetname");
+    spots = getStructArray("zombie_rise", "targetname");
   }
   if(spots.size < 1) {
     self unlink();

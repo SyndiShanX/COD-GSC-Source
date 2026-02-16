@@ -160,20 +160,20 @@ func_56CC() {
     }
 
     if(!var_8) {
-      if(level.player buttonpressed("UPARROW") || level.player buttonpressed("DPAD_UP") || level.player buttonpressed("APAD_UP")) {
+      if(level.player buttonPressed("UPARROW") || level.player buttonPressed("DPAD_UP") || level.player buttonPressed("APAD_UP")) {
         var_8 = 1;
         var_7--;
       }
-    } else if(!level.player buttonpressed("UPARROW") && !level.player buttonpressed("DPAD_UP") && !level.player buttonpressed("APAD_UP")) {
+    } else if(!level.player buttonPressed("UPARROW") && !level.player buttonPressed("DPAD_UP") && !level.player buttonPressed("APAD_UP")) {
       var_8 = 0;
     }
 
     if(!var_9) {
-      if(level.player buttonpressed("DOWNARROW") || level.player buttonpressed("DPAD_DOWN") || level.player buttonpressed("APAD_DOWN")) {
+      if(level.player buttonPressed("DOWNARROW") || level.player buttonPressed("DPAD_DOWN") || level.player buttonPressed("APAD_DOWN")) {
         var_9 = 1;
         var_7++;
       }
-    } else if(!level.player buttonpressed("DOWNARROW") && !level.player buttonpressed("DPAD_DOWN") && !level.player buttonpressed("APAD_DOWN")) {
+    } else if(!level.player buttonPressed("DOWNARROW") && !level.player buttonPressed("DPAD_DOWN") && !level.player buttonPressed("APAD_DOWN")) {
       var_9 = 0;
     }
 
@@ -185,12 +185,12 @@ func_56CC() {
       var_7 = 0;
     }
 
-    if(level.player buttonpressed("BUTTON_B")) {
+    if(level.player buttonPressed("BUTTON_B")) {
       func_10C18(var_1, var_2);
       break;
     }
 
-    if(level.player buttonpressed("kp_enter") || level.player buttonpressed("BUTTON_A") || level.player buttonpressed("enter")) {
+    if(level.player buttonPressed("kp_enter") || level.player buttonPressed("BUTTON_A") || level.player buttonPressed("enter")) {
       if(var_0[var_7] == "cancel") {
         func_10C18(var_1, var_2);
         break;

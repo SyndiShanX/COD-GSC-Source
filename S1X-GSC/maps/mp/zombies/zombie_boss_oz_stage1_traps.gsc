@@ -291,7 +291,7 @@ turretgetenemy(var_0, var_1) {
 
 stationaryturret_init() {
   level._effect["stationary_turret_teleport"] = loadfx("vfx/unique/dlc_teleport_soldier_bad");
-  var_0 = common_scripts\utility::getstructarray("arena_turret_door", "targetname");
+  var_0 = common_scripts\utility::getStructArray("arena_turret_door", "targetname");
 
   foreach(var_2 in var_0) {
     var_2 thread init_arena_turret_door();
@@ -550,7 +550,7 @@ mountedturret_init() {
   level.sentrysettings[var_0].streakname = "sentry";
   level.sentrysettings[var_0].weaponinfo = "boss_oz_mounted_turret_mp";
   level.sentrysettings[var_0].modelbase = "boss_oz_mounted_turret";
-  return common_scripts\utility::getstructarray("boss_turret_elevated", "targetname");
+  return common_scripts\utility::getStructArray("boss_turret_elevated", "targetname");
 }
 
 mountedturret_initsentry() {
@@ -690,7 +690,7 @@ aeriallaser_init() {
   var_0 = getEntArray("boss_oz_air_laser", "targetname");
 
   foreach(var_2 in var_0) {
-    var_3 = common_scripts\utility::getstructarray(var_2.target, "targetname");
+    var_3 = common_scripts\utility::getStructArray(var_2.target, "targetname");
     var_2.laser_ents = [];
 
     foreach(var_5 in var_3) {
@@ -811,13 +811,13 @@ stop_laser_sounds() {
 electrotrap_init() {
   level._effect["trap_electric_floor_shock_warning"] = loadfx("vfx/map/mp_zombie_h2o/electrified_floor_warning");
   level._effect["trap_electric_floor_shock_active"] = loadfx("vfx/map/mp_zombie_brg/electrified_floor");
-  var_0 = common_scripts\utility::getstructarray("trap_electricity", "targetname");
+  var_0 = common_scripts\utility::getStructArray("trap_electricity", "targetname");
 
   foreach(var_2 in var_0) {
     var_2.damage_triggers = [];
     var_2.fx_structs = [];
     var_2.enabled = 0;
-    var_3 = common_scripts\utility::array_combine(getEntArray(var_2.target, "targetname"), common_scripts\utility::getstructarray(var_2.target, "targetname"));
+    var_3 = common_scripts\utility::array_combine(getEntArray(var_2.target, "targetname"), common_scripts\utility::getStructArray(var_2.target, "targetname"));
 
     foreach(var_5 in var_3) {
       if(var_5.script_noteworthy == "damage_over_time") {

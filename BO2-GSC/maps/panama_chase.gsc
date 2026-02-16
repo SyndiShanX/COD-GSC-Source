@@ -266,7 +266,7 @@ prevent_player_damage_if_the_player_is_sprinting() {
   level endon("chase_jump_cleared");
 
   while(true) {
-    if(level.player sprintbuttonpressed()) {
+    if(level.player sprintbuttonPressed()) {
       level.player.overrideplayerdamage = ::player_damage_override_for_apache;
     } else {
       level.player.overrideplayerdamage = undefined;

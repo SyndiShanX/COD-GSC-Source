@@ -1775,7 +1775,7 @@ toggle_vlo_pois_and_ambushes(var_0) {
   var_1 = ["vloffice_poi_05", "vloffice_poi_06", "vloffice_poi_07", "vloffice_poi_08", "vloffice_ambush_03"];
 
   foreach(var_3 in var_1) {
-    foreach(var_5 in scripts\engine\utility::getstructarray(var_3, "targetname")) {
+    foreach(var_5 in scripts\engine\utility::getStructArray(var_3, "targetname")) {
       if(istrue(var_0)) {
         var_5.b_disabled = undefined;
         continue;

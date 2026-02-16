@@ -1471,7 +1471,7 @@ _id_4B6D() {
 
 _id_4B6F() {
   common_scripts\utility::flag_wait("sub_exterior_hind_1_fire");
-  var_0 = common_scripts\utility::getstructarray("sub_exterior_fire_at_hind", "targetname");
+  var_0 = common_scripts\utility::getStructArray("sub_exterior_fire_at_hind", "targetname");
   var_1 = gettime() + 10000;
 
   while(var_1 > gettime()) {

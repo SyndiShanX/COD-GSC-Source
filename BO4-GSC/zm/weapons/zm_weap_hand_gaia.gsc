@@ -699,7 +699,7 @@ function_1d315fcd(e_target) {
 function_1e39fbc5() {
   self endon(#"death", #"stop_beaming", #"weapon_change");
 
-  while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && !self fragbuttonpressed()) {
+  while(zm_utility::is_player_valid(self) && self attackButtonPressed() && !self fragButtonPressed()) {
     n_ammo = self getweaponammoclip(level.w_hand_gaia);
 
     if(n_ammo) {

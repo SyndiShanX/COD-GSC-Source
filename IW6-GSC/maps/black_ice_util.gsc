@@ -750,7 +750,7 @@ getentany(var_0, var_1) {
   var_3 = getEntArray(var_0, var_2);
 
   if(var_3.size == 0)
-    var_3 = common_scripts\utility::getstructarray(var_0, var_2);
+    var_3 = common_scripts\utility::getStructArray(var_0, var_2);
   else if(var_3.size == 1)
     return var_3[0];
   else
@@ -1422,7 +1422,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
       level.player enableweaponpickup();
     }
 
-    if(level.player usebuttonpressed())
+    if(level.player useButtonPressed())
       var_12++;
 
     if(common_scripts\utility::flag(var_10) && var_12 >= var_5) {

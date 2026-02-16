@@ -57,7 +57,7 @@ register_subquest_funcs(var_0, var_1, var_2) {
 
 init_subquest_types(var_0) {
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_1 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
   var_1 = scripts\engine\utility::array_randomize(var_1);
 
   foreach(var_3 in var_1) {
@@ -201,7 +201,7 @@ on_soid_interact(var_0, var_1) {
     level.n_dig_count++;
   }
 
-  var_2 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
 
   if(level.n_dig_count == level.n_num_of_subquests) {
     level scripts\engine\utility::_id_5C1B("finish_dig_all_positions");
@@ -301,7 +301,7 @@ init_radios() {
   var_0 = scripts\engine\utility::getstruct("th_radio_start", "targetname");
   var_0.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_0.origin, var_0.angles);
   var_0.spawn_locations = [];
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = 1;
 
   foreach(var_4 in var_1) {
@@ -314,7 +314,7 @@ init_radios() {
       var_4.script_int = var_2;
       var_4.mdl_radio = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_4.origin, var_4.angles);
       var_4.spawn_locations = [];
-      var_5 = scripts\engine\utility::getstructarray(var_4.target, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
 
       foreach(var_7 in var_5) {
         if(_func_0121(var_7._id_CE18) && var_7._id_CE18 == "prop_antenna") {
@@ -339,7 +339,7 @@ init_radios() {
   var_10 = scripts\engine\utility::getstruct("th_radio_end", "targetname");
   var_10.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_10.origin, var_10.angles);
   var_10.spawn_locations = [];
-  var_11 = scripts\engine\utility::getstructarray(var_10.target, "targetname");
+  var_11 = scripts\engine\utility::getStructArray(var_10.target, "targetname");
 
   foreach(var_4 in var_11) {
     if(_func_0121(var_4._id_CE18) && var_4._id_CE18 == "prop_antenna") {
@@ -360,7 +360,7 @@ init_shovels() {
     scripts\engine\utility::_id_5C24("introscreen_over");
   }
 
-  var_0 = scripts\engine\utility::getstructarray("s_shovel_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_shovel_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
@@ -457,7 +457,7 @@ init_lock_heart() {
   var_4 = scripts\engine\utility::getstruct(var_0.target, "targetname");
   var_4.mdl_fx_proxy = scripts\cp\utility::_id_E190("tag_origin", var_4.origin + (0, 0, 5), var_4.angles);
   playFXOnTag(level._effect["domination_rune_capturing_1"], var_4.mdl_fx_proxy, "tag_origin");
-  var_5 = scripts\engine\utility::getstructarray(var_4.target, "targetname");
+  var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
   var_5 = scripts\engine\utility::array_randomize(var_5);
 
   for(var_6 = 0; var_6 < var_5.size; var_6++) {
@@ -732,7 +732,7 @@ find_lost_pages_start(var_0, var_1) {
   level endon("game_ended");
   _id_0737::_id_C266("place_page_inactive", ::get_page_placed_hint_func, ::on_page_placed_interact, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 80);
   _id_0737::addinteractionhinttypecallback("place_page_inactive", ::page_placed_hint_type);
-  var_2 = scripts\engine\utility::getstructarray("place_page_inactive", "script_noteworthy");
+  var_2 = scripts\engine\utility::getStructArray("place_page_inactive", "script_noteworthy");
   var_3 = scripts\engine\utility::getstruct("lock_door_fx_pos", "targetname");
 
   foreach(var_5 in var_2) {
@@ -751,7 +751,7 @@ find_lost_pages_start(var_0, var_1) {
       level.b_disable_place_page_trigger = 1;
       wait 2;
       scripts\cp\utility::_id_B8ED(var_3.origin, "zmb_paperdoor_fail");
-      var_8 = scripts\engine\utility::getstructarray("place_page_inactive", "script_noteworthy");
+      var_8 = scripts\engine\utility::getStructArray("place_page_inactive", "script_noteworthy");
 
       foreach(var_10 in var_8) {
         if(isDefined(var_10.mdl_page) && isent(var_10.mdl_page)) {
@@ -799,7 +799,7 @@ find_lost_pages_start(var_0, var_1) {
   var_15 delete();
   var_12 = scripts\engine\utility::getstruct("lost_pages_quest_pos", "targetname");
   var_13 = scripts\engine\utility::getstruct(var_12.target, "targetname");
-  var_16 = scripts\engine\utility::getstructarray(var_13.target, "targetname");
+  var_16 = scripts\engine\utility::getStructArray(var_13.target, "targetname");
 
   for(var_17 = 0; var_17 < var_16.size; var_17++) {
     if(isDefined(var_16[var_17].fx_proxy)) {
@@ -1094,7 +1094,7 @@ start_moving() {
 
   self waittill("movedone");
   self playSound("zmb_orb_flyaway");
-  var_0 = scripts\engine\utility::getstructarray("golden_ball_start_point", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("golden_ball_start_point", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = undefined;
 
@@ -1266,7 +1266,7 @@ _id_0FE3(var_0) {
 pick_next_fly_point(var_0) {
   level endon("end_game");
   level endon("game_ended");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = 0;
 
   for(;;) {
@@ -1426,7 +1426,7 @@ player_play_curse_fxs_listener() {
 get_free_bury_position() {
   level endon("end_game");
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = [];
   var_2 = 0;

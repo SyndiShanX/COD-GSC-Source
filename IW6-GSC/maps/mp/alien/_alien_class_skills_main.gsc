@@ -273,7 +273,7 @@ super_punch() {
   self endon("super_expired");
 
   while(1) {
-    if(self MeleeButtonPressed() && self IsMeleeing()) {
+    if(self meleeButtonPressed() && self IsMeleeing()) {
       wait 0.05;
       Earthquake(0.30, 0.2, self.origin, 10);
       RadiusDamage(self.origin, level.meleeStunRadius, level.meleeStunMaxDamage, level.meleeStunMinDamage, self, "MOD_MELEE", "meleestun_mp");

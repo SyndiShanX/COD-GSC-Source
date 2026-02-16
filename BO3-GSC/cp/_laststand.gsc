@@ -198,7 +198,7 @@ function refire_player_downed() {
 
 function wait_for_weapon_pullout() {
   self endon("weapon_change");
-  while(!self attackbuttonpressed()) {
+  while(!self attackButtonPressed()) {
     wait(0.05);
   }
 }
@@ -466,7 +466,7 @@ function suicide_trigger_think() {
   level endon("stop_suicide_trigger");
   self thread clean_up_suicide_hud_on_end_game();
   self thread clean_up_suicide_hud_on_bled_out();
-  while(self usebuttonpressed()) {
+  while(self useButtonPressed()) {
     wait(1);
   }
   if(!isDefined(self.suicideprompt)) {
@@ -566,7 +566,7 @@ function can_suicide() {
 }
 
 function is_suiciding(revivee) {
-  return self usebuttonpressed() && can_suicide();
+  return self useButtonPressed() && can_suicide();
 }
 
 function revive_trigger_spawn() {
@@ -699,7 +699,7 @@ function can_revive(revivee) {
 }
 
 function is_reviving(revivee) {
-  return self usebuttonpressed() && can_revive(revivee);
+  return self useButtonPressed() && can_revive(revivee);
 }
 
 function is_reviving_any() {

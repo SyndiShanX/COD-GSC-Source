@@ -345,7 +345,7 @@ put this in your GSC:
 maps\_snowmobile::main( "vehicle_snowmobile" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile
+#include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile"default:"script_team" "allies"*/
@@ -356,7 +356,7 @@ put this in your GSC:
 maps\_snowmobile::main( "vehicle_snowmobile_alt" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile
+#include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile"default:"script_team" "allies"*/
@@ -367,7 +367,7 @@ put this in your GSC:
 maps\_snowmobile::main( "vehicle_snowmobile", "snowmobile_player_coop" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile
+#include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile"default:"vehicletype" "snowmobile_player_coop"default:"script_team" "allies"*/
@@ -378,7 +378,7 @@ put this in your GSC:
 maps\_snowmobile::main( "vehicle_snowmobile_alt", "snowmobile_player_coop" );
 
 and these lines in your CSV:
-include,vehicle_snowmobile_snowmobile
+#include,vehicle_snowmobile_snowmobile
 sound,vehicle_snowmobile,vehicle_standard,all_sp
 
 defaultmdl="vehicle_snowmobile_alt"default:"vehicletype" "snowmobile_player_coop"default:"script_team" "allies"

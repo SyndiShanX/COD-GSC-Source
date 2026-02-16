@@ -604,7 +604,7 @@ _id_3B2F(var_0) {
 }
 
 _id_3B30() {
-  return isalive(self.meleeingplayer) && self.meleeingplayer meleebuttonpressed();
+  return isalive(self.meleeingplayer) && self.meleeingplayer meleeButtonPressed();
 }
 
 _id_3B31() {

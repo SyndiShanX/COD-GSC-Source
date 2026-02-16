@@ -86,7 +86,7 @@ put this in your GSC:
 maps\_zodiac::main( "vehicle_zodiac" );
 
 and these lines in your CSV:
-include,vehicle_zodiac
+#include,vehicle_zodiac
 sound,vehicle_zodiac,vehicle_standard,all_sp
 
 defaultmdl="vehicle_zodiac"default:"vehicletype" "zodiac"default:"script_team" "allies"*/
@@ -97,7 +97,7 @@ put this in your GSC:
 maps\_zodiac::main( "vehicle_zodiac","zodiac_physics" );
 
 and these lines in your CSV:
-include,vehicle_zodiac
+#include,vehicle_zodiac
 sound,vehicle_zodiac,vehicle_standard,all_sp
 
 defaultmdl="vehicle_zodiac"default:"vehicletype" "zodiac_physics"default:"script_team" "allies"

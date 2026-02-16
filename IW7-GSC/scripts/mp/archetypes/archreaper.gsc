@@ -84,9 +84,9 @@ func_13994() {
       continue;
     }
 
-    if(self adsbuttonpressed() && !self.var_FCA5 && !self.var_C4DA) {
+    if(self adsButtonPressed() && !self.var_FCA5 && !self.var_C4DA) {
       func_FCA5(var_4, var_3);
-    } else if(!self adsbuttonpressed() && self.var_FCA5) {
+    } else if(!self adsButtonPressed() && self.var_FCA5) {
       func_FC98(var_4, var_3, var_1);
     }
 

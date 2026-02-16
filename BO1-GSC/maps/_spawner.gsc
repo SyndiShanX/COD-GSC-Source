@@ -706,7 +706,7 @@ get_target_nodes(target) {
   return getnodearray(target, "targetname");
 }
 get_target_structs(target) {
-  return getstructarray(target, "targetname");
+  return getStructArray(target, "targetname");
 }
 node_has_radius(node) {
   return isDefined(node.radius) && node.radius != 0;
@@ -1049,7 +1049,7 @@ get_node_funcs_based_on_target(node, goal_type) {
     if(goal_type == "node") {
       node = getnodearray(self.target, "targetname");
       if(!node.size) {
-        node = getstructarray(self.target, "targetname");
+        node = getStructArray(self.target, "targetname");
         if(!node.size) {
           return;
         }

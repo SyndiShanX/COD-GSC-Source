@@ -8,11 +8,11 @@ init_blackhole_trap() {
   var_0 = undefined;
   var_1 = undefined;
   var_2 = undefined;
-  var_3 = scripts\engine\utility::getstructarray("blackhole_trap", "script_noteworthy");
+  var_3 = scripts\engine\utility::getStructArray("blackhole_trap", "script_noteworthy");
   foreach(var_5 in var_3) {
     var_5 thread func_2B36();
     var_5.body = getent(var_5.target, "targetname");
-    var_6 = scripts\engine\utility::getstructarray(var_5.target, "targetname");
+    var_6 = scripts\engine\utility::getStructArray(var_5.target, "targetname");
     foreach(var_8 in var_6) {
       if(isDefined(var_8.fgetarg)) {
         var_5.var_2B32 = var_8;

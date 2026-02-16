@@ -32,7 +32,7 @@ init() {
 }
 
 initpillars() {
-  level.bossozpillars = common_scripts\utility::getstructarray("oz_room_pillar", "targetname");
+  level.bossozpillars = common_scripts\utility::getStructArray("oz_room_pillar", "targetname");
 
   foreach(var_1 in level.bossozpillars) {
     var_1.destroyed = 0;
@@ -277,7 +277,7 @@ startinfinitezombiespawning() {
 }
 
 teleportplayerstoarena() {
-  var_0 = common_scripts\utility::getstructarray(level.teleportname, "targetname");
+  var_0 = common_scripts\utility::getStructArray(level.teleportname, "targetname");
 
   for(var_1 = 0; var_1 < level.players.size; var_1++) {
     level.players[var_1] thread teleporttostructandbackatend(var_0[var_1]);
@@ -289,7 +289,7 @@ teleportplayerstoarena() {
 
 ensureeveryplayerteleports() {
   level endon("game_ended");
-  var_0 = common_scripts\utility::getstructarray(level.teleportname, "targetname");
+  var_0 = common_scripts\utility::getStructArray(level.teleportname, "targetname");
   var_1 = 1;
   var_2 = undefined;
 
@@ -572,7 +572,7 @@ handlepostroundcure() {
 }
 
 givereward() {
-  var_0 = common_scripts\utility::getstructarray("ozCarepackagePosition", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ozCarepackagePosition", "targetname");
 
   foreach(var_2 in var_0) {
     var_2.in_use = 0;
@@ -608,7 +608,7 @@ giverewardtoplayer(var_0) {
 }
 
 getmoneyposition() {
-  var_0 = common_scripts\utility::getstructarray("ozCarepackagePosition", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ozCarepackagePosition", "targetname");
   var_1 = [];
 
   foreach(var_3 in var_0) {
@@ -645,7 +645,7 @@ handleammodrops() {
   level endon("zombie_wave_interrupt");
   level endon("zombie_boss_wave_ended");
   level.noammodroptriggers = [];
-  var_0 = common_scripts\utility::getstructarray("ozCarepackagePosition", "targetname");
+  var_0 = common_scripts\utility::getStructArray("ozCarepackagePosition", "targetname");
 
   for(;;) {
     wait 12.0;

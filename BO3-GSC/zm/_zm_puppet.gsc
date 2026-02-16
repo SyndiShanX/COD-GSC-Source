@@ -23,7 +23,7 @@ function wait_for_puppet_pickup() {
       self.barricade_enter = 0;
     }
     player = getplayers()[0];
-    if(isDefined(player) && player buttonpressed("")) {
+    if(isDefined(player) && player buttonPressed("")) {
       if(self.iscurrentlypuppet) {
         if(zm_utility::check_point_in_playable_area(self.goalpos) && !zm_utility::check_point_in_playable_area(self.origin)) {
           self.backedupgoal = self.goalpos;

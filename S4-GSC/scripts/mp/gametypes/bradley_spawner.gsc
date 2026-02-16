@@ -7,9 +7,9 @@ _id_82A9() {
   if(getdvarint("#x3472b950714ddf102", 0) <= 0) {
     return;
   }
-  var_0 = scripts\engine\utility::getstructarray("veh_bromeo_neutral", "targetname");
-  var_1 = scripts\engine\utility::getstructarray("veh_bromeo_allies", "targetname");
-  var_2 = scripts\engine\utility::getstructarray("veh_bromeo_axis", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("veh_bromeo_neutral", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("veh_bromeo_allies", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("veh_bromeo_axis", "targetname");
   level._id_EE5E = [];
   _id_E390(var_0);
   _id_E390(var_1, "allies");
@@ -108,19 +108,19 @@ _id_E38E(var_0, var_1, var_2, var_3, var_4) {
 }
 
 _id_82A8() {
-  level._id_EE57 = scripts\engine\utility::getstructarray("tdm_bradley_allies", "targetname");
-  level._id_EE5A = scripts\engine\utility::getstructarray("tdm_bradley_axis", "targetname");
-  level._id_EE5D = scripts\engine\utility::getstructarray("tdm_bradley_neutral", "targetname");
-  level._id_EE59 = scripts\engine\utility::getstructarray("dom_bradley_allies", "targetname");
-  level._id_EE5C = scripts\engine\utility::getstructarray("dom_bradley_axis", "targetname");
-  level._id_EE4D = scripts\engine\utility::getstructarray("dom_bradley_a", "targetname");
-  level._id_EE4E = scripts\engine\utility::getstructarray("dom_bradley_b", "targetname");
-  level._id_EE4F = scripts\engine\utility::getstructarray("dom_bradley_c", "targetname");
-  level._id_EE58 = scripts\engine\utility::getstructarray("cmd_bradley_allies", "targetname");
-  level._id_EE5B = scripts\engine\utility::getstructarray("cmd_bradley_axis", "targetname");
-  level._id_EE4B = scripts\engine\utility::getstructarray("cmd_bradley_2", "targetname");
-  level._id_EE4C = scripts\engine\utility::getstructarray("cmd_bradley_3", "targetname");
-  level._id_EE4A = scripts\engine\utility::getstructarray("cmd_bradley_1", "targetname");
+  level._id_EE57 = scripts\engine\utility::getStructArray("tdm_bradley_allies", "targetname");
+  level._id_EE5A = scripts\engine\utility::getStructArray("tdm_bradley_axis", "targetname");
+  level._id_EE5D = scripts\engine\utility::getStructArray("tdm_bradley_neutral", "targetname");
+  level._id_EE59 = scripts\engine\utility::getStructArray("dom_bradley_allies", "targetname");
+  level._id_EE5C = scripts\engine\utility::getStructArray("dom_bradley_axis", "targetname");
+  level._id_EE4D = scripts\engine\utility::getStructArray("dom_bradley_a", "targetname");
+  level._id_EE4E = scripts\engine\utility::getStructArray("dom_bradley_b", "targetname");
+  level._id_EE4F = scripts\engine\utility::getStructArray("dom_bradley_c", "targetname");
+  level._id_EE58 = scripts\engine\utility::getStructArray("cmd_bradley_allies", "targetname");
+  level._id_EE5B = scripts\engine\utility::getStructArray("cmd_bradley_axis", "targetname");
+  level._id_EE4B = scripts\engine\utility::getStructArray("cmd_bradley_2", "targetname");
+  level._id_EE4C = scripts\engine\utility::getStructArray("cmd_bradley_3", "targetname");
+  level._id_EE4A = scripts\engine\utility::getStructArray("cmd_bradley_1", "targetname");
 
   if(getdvarint("#x3d5540792cc3f54f1", 0) == 0) {
     return;

@@ -52,7 +52,7 @@ put this in your GSC:
 maps\_gauntlet::main( "vehicle_sa15_gauntlet" );
 
 and these lines in your CSV:
-include,vehicle_gauntlet_gauntlet
+#include,vehicle_gauntlet_gauntlet
 sound,vehicle_gauntlet,vehicle_standard,all_sp
 sound,vehicle_armor_exp,vehicle_standard,all_sp
 

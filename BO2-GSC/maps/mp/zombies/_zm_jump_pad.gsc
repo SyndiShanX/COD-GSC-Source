@@ -22,7 +22,7 @@ jump_pad_init() {
   }
   for(i = 0; i < jump_pad_triggers.size; i++) {
     jump_pad_triggers[i].start = getstruct(jump_pad_triggers[i].target, "targetname");
-    jump_pad_triggers[i].destination = getstructarray(jump_pad_triggers[i].start.target, "targetname");
+    jump_pad_triggers[i].destination = getStructArray(jump_pad_triggers[i].start.target, "targetname");
 
     if(isDefined(jump_pad_triggers[i].script_string))
       jump_pad_triggers[i].overrides = strtok(jump_pad_triggers[i].script_string, ",");

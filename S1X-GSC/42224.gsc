@@ -1006,7 +1006,7 @@ getstruct(var_0, var_1) {
   return var_2[0];
 }
 
-getstructarray(var_0, var_1) {
+getStructArray(var_0, var_1) {
   var_2 = level.struct_class_names[var_1][var_0];
 
   if(!isDefined(var_2)) {
@@ -1791,7 +1791,7 @@ get_links() {
 run_thread_on_targetname(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0, "targetname");
   array_thread(var_5, var_1, var_2, var_3, var_4);
-  var_5 = getstructarray(var_0, "targetname");
+  var_5 = getStructArray(var_0, "targetname");
   array_thread(var_5, var_1, var_2, var_3, var_4);
   var_5 = call[[level.getnodearrayfunction]](var_0, "targetname");
   array_thread(var_5, var_1, var_2, var_3, var_4);
@@ -1802,7 +1802,7 @@ run_thread_on_targetname(var_0, var_1, var_2, var_3, var_4) {
 run_thread_on_noteworthy(var_0, var_1, var_2, var_3, var_4) {
   var_5 = getEntArray(var_0, "script_noteworthy");
   array_thread(var_5, var_1, var_2, var_3, var_4);
-  var_5 = getstructarray(var_0, "script_noteworthy");
+  var_5 = getStructArray(var_0, "script_noteworthy");
   array_thread(var_5, var_1, var_2, var_3, var_4);
   var_5 = call[[level.getnodearrayfunction]](var_0, "script_noteworthy");
   array_thread(var_5, var_1, var_2, var_3, var_4);

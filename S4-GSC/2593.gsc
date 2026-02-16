@@ -265,12 +265,12 @@ _id_AB58() {
 
 _id_6331(var_0) {
   if(isDefined(var_0)) {
-    return scripts\engine\utility::getstructarray(var_0, "script_noteworthy");
+    return scripts\engine\utility::getStructArray(var_0, "script_noteworthy");
   } else {
-    var_1 = scripts\engine\utility::getstructarray("mp_infil", "targetname");
+    var_1 = scripts\engine\utility::getStructArray("mp_infil", "targetname");
   }
 
-  return scripts\engine\utility::getstructarray("mp_infil", "targetname");
+  return scripts\engine\utility::getStructArray("mp_infil", "targetname");
 }
 
 _id_7E48(var_0) {

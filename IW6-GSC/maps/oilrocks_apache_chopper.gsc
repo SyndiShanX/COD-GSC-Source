@@ -42,7 +42,7 @@ objectives() {
 }
 
 apache_chopper_enemies() {
-  var_0 = common_scripts\utility::getstructarray("apache_chopper_enemy_hind_path_start", "targetname");
+  var_0 = common_scripts\utility::getStructArray("apache_chopper_enemy_hind_path_start", "targetname");
   level.apache_chopper_hinds = [];
 
   foreach(var_2 in var_0)
@@ -52,7 +52,7 @@ apache_chopper_enemies() {
     level common_scripts\utility::waittill_any_timeout(1.0, "apache_chopper_hind_died");
 
   common_scripts\utility::flag_set("FLAG_apache_chopper_hind_destroyed_two");
-  var_0 = common_scripts\utility::getstructarray("apache_chopper_enemy_hind_path_start_part_2", "targetname");
+  var_0 = common_scripts\utility::getStructArray("apache_chopper_enemy_hind_path_start_part_2", "targetname");
 
   foreach(var_2 in var_0)
   apache_chopper_hind_spawn(var_2);

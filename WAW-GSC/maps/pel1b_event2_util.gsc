@@ -326,7 +326,7 @@ tree_fall() {
   tree RotatePitch(80, 2, 1.5, 0.1);
 }
 play_dust_fx_near_players() {
-  struct_pos = getstructarray("ev2_cave_dust", "targetname");
+  struct_pos = getStructArray("ev2_cave_dust", "targetname");
 
   org_closest = [];
   players = get_players();

@@ -186,7 +186,7 @@ function_4521ac7e(w_curr, n_lvl) {
         var_43b42a60 = 1;
       }
     }
-    while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && !self fragbuttonpressed());
+    while(zm_utility::is_player_valid(self) && self attackButtonPressed() && !self fragButtonPressed());
 
     self clientfield::set("" + # "skull_turret_beam_fire", 0);
     self clientfield::set("" + # "scepter_beam_flash", 0);

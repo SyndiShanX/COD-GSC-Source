@@ -218,7 +218,7 @@ unlink_later(link_ent) {
   }
 }
 player_launch(flipper_area, gate) {
-  launch_spots = getstructarray("player_launch_spot", "targetname");
+  launch_spots = getStructArray("player_launch_spot", "targetname");
   players = get_players();
   for(i = 0; i < players.size; i++) {
     if(is_true(players[i]._being_flung) || is_true(players[i].sessionstate == "spectator")) {
@@ -302,7 +302,7 @@ wait_for_flung_players_to_land() {
   self deactivate_zombie_point_of_interest();
 }
 boss_launch(flipper_area) {
-  launch_spots = getstructarray("engineer_launch_spot", "targetname");
+  launch_spots = getStructArray("engineer_launch_spot", "targetname");
   if(self istouching(flipper_area)) {
     dest = random(launch_spots);
     wait_network_frame();

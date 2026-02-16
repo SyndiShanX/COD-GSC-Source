@@ -55,13 +55,13 @@ init() {
 isactionslotpressed() {
   switch (level.actionslot) {
     case 1:
-      return self actionslottwobuttonpressed();
+      return self actionslottwobuttonPressed();
     case 2:
-      return self actionslottwobuttonpressed();
+      return self actionslottwobuttonPressed();
     case 3:
-      return self actionslotthreebuttonpressed();
+      return self actionslotthreebuttonPressed();
     case 4:
-      return self actionslotfourbuttonpressed();
+      return self actionslotfourbuttonPressed();
   }
 
   return 0;

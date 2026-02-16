@@ -542,7 +542,7 @@ building_burn() {
     spawners[i] stalingradspawn();
   }
   guys = getaiarray("axis");
-  spots = getstructarray("left_side_bb_shotspots", "script_noteworthy");
+  spots = getStructArray("left_side_bb_shotspots", "script_noteworthy");
   nodes = getnodearray("own_left_side_nodes", "script_noteworthy");
   nodecounter = 0;
   for(i = 0; i < guys.size; i++) {
@@ -1018,7 +1018,7 @@ player_bb_jumpout() {
 
   player disableweapons();
   spot moveto(spot.origin + (0, 30, 0), 0.5);
-  spots = getstructarray("rollspots", "script_noteworthy");
+  spots = getStructArray("rollspots", "script_noteworthy");
   time = 0;
   VisionSetNaked("Sniper_default", 1);
 
@@ -2086,11 +2086,11 @@ sniper_on_u(trig, player) {
           jumpout_fx() {
             stop_exploder(9);
             stop_exploder(10);
-            spots = getstructarray("bb_jumpout_wall_spots", "script_noteworthy");
+            spots = getStructArray("bb_jumpout_wall_spots", "script_noteworthy");
             for(i = 0; i < spots.size; i++) {
               playFX(level._effect["fire_indoor_wall_crawl2"], spots[i].origin, anglesToForward(spots[i].angles), anglestoup(spots[i].angles));
             }
-            spots = getstructarray("bb_jumpout_fire_spots", "script_noteworthy");
+            spots = getStructArray("bb_jumpout_fire_spots", "script_noteworthy");
             for(i = 0; i < spots.size; i++) {
               playFX(level._effect["fire_debris_large"], spots[i].origin);
             }

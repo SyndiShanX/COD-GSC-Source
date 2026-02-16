@@ -1720,7 +1720,7 @@ helicopter_getturrettargetent() {
 }
 
 setup_spot_target() {
-  var_0 = common_scripts\utility::getstructarray("spot_target", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("spot_target", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, ::spot_target_node);
 }
 
@@ -1793,7 +1793,7 @@ spot_target_path_end() {
 }
 
 setup_tmp_detour_node() {
-  var_0 = common_scripts\utility::getstructarray("tmp_detour_node", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("tmp_detour_node", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, ::tmp_detour_node);
 }
 
@@ -1806,7 +1806,7 @@ tmp_detour_node() {
 }
 
 setup_helicopter_delete_node() {
-  var_0 = common_scripts\utility::getstructarray("delete_helicopter", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("delete_helicopter", "script_noteworthy");
   common_scripts\utility::array_thread(var_0, ::helicopter_delete_node);
 }
 
@@ -3991,9 +3991,9 @@ setthreatbiasgroup_on_array(var_0, var_1, var_2) {
 setup_heli_guy() {
   var_0 = getent("heli_guy", "targetname");
   var_0 maps\_utility::add_spawn_function(::heli_guy);
-  var_1 = common_scripts\utility::getstructarray("activate_heli_guy", "script_noteworthy");
+  var_1 = common_scripts\utility::getStructArray("activate_heli_guy", "script_noteworthy");
   common_scripts\utility::array_thread(var_1, ::activate_heli_guy_trigger);
-  var_2 = common_scripts\utility::getstructarray("deactivate_heli_guy", "script_noteworthy");
+  var_2 = common_scripts\utility::getStructArray("deactivate_heli_guy", "script_noteworthy");
   common_scripts\utility::array_thread(var_2, ::deactivate_heli_guy_trigger);
 }
 
@@ -4258,7 +4258,7 @@ helicopter_attack_points(var_0) {
     var_0 notify("new_trigger");
     var_0.current_trigger = self;
     var_0.new_selection = 1;
-    var_0.attack_points = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0.attack_points = common_scripts\utility::getStructArray(self.target, "targetname");
     var_0 waittill("new_trigger");
   }
 }
@@ -4311,7 +4311,7 @@ node_have_delay() {
     return 1;
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "spot_target") {
-    var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
+    var_0 = common_scripts\utility::getStructArray(self.target, "targetname");
 
     if(!isDefined(var_0))
       return 1;

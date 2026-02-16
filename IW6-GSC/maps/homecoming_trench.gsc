@@ -312,7 +312,7 @@ trenches_combat_right_path() {
 
 trench_custom_mortars() {
   level endon("stop_trench_custom_mortars");
-  var_0 = common_scripts\utility::getstructarray("trench_mortars", "targetname");
+  var_0 = common_scripts\utility::getStructArray("trench_mortars", "targetname");
   var_1 = gettime();
   var_2 = 400;
   var_3 = 1200;
@@ -842,7 +842,7 @@ trench_tower_explode() {
 }
 
 trench_tower_explode_missiles() {
-  var_0 = common_scripts\utility::getstructarray("tower_explosion_missile_start", "targetname");
+  var_0 = common_scripts\utility::getStructArray("tower_explosion_missile_start", "targetname");
   var_0 = sort_by_index(var_0);
   var_1 = 1.2;
   var_2 = 1;
@@ -1027,7 +1027,7 @@ trench_tower_hind_targetent() {
 trench_tower_hind_pathlogic() {
   self endon("death");
   self endon("tower_hind_stop_logic");
-  var_0 = common_scripts\utility::getstructarray("tower_hind_dynamic_paths", "targetname");
+  var_0 = common_scripts\utility::getStructArray("tower_hind_dynamic_paths", "targetname");
   var_1 = getEntArray("tower_hind_trigs", "targetname");
   var_2 = [];
   var_3 = [];
@@ -1161,7 +1161,7 @@ trench_beach_axis_ambient() {
   maps\_utility::array_spawn_function(var_1, maps\homecoming_util::hovercraft_drone_default);
   var_4 = [5, 8];
   var_1 thread maps\homecoming_drones::drone_infinite_runners("FLAG_stop_trench_beach_runners", var_3, var_2, undefined, var_4, 10);
-  var_5 = common_scripts\utility::getstructarray("trench_beach_ambient_fire", "targetname");
+  var_5 = common_scripts\utility::getStructArray("trench_beach_ambient_fire", "targetname");
 
   foreach(var_7 in var_5)
   thread maps\homecoming_util::ambient_smallarms_fire(var_7, "beach_ambient_stop");

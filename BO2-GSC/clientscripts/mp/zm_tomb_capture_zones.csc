@@ -22,7 +22,7 @@ init_structs() {
   setupclientfieldcodecallbacks("world", 1, "zone_capture_hud_all_generators_captured");
   registerclientfield("world", "pap_monolith_ring_shake", 14000, 1, "int", ::pap_monolith_ring_shake);
   registerclientfield("world", "zone_capture_perk_machine_smoke_fx_always_on", 14000, 1, "int", ::perk_machine_smoke_fx_always_on_callback);
-  a_s_generator = getstructarray("s_generator", "targetname");
+  a_s_generator = getStructArray("s_generator", "targetname");
 
   foreach(struct in a_s_generator) {
     registerclientfield("world", struct.script_noteworthy, 14000, 7, "float", ::set_generator_capture_progress, 0);

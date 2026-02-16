@@ -470,7 +470,7 @@ docks_objectives() {
 
 destroy_parking_lot_vehicles_before_parking_lot_on_veteran() {
   if(getdifficulty() == "fu") {
-    structs = getstructarray("destroy_vehicles_struct", "targetname");
+    structs = getStructArray("destroy_vehicles_struct", "targetname");
 
     foreach(struct in structs) {
       radiusdamage(struct.origin, 1000, 9001, 9001);
@@ -559,7 +559,7 @@ nightingale_hint() {
   level thread hint_timer("nightingale_selected");
   screen_message_create(&"PANAMA_HINT_NIGHTINGALE_SELECT");
 
-  while(!level.player actionslotonebuttonpressed()) {
+  while(!level.player actionslotonebuttonPressed()) {
     wait 0.05;
   }
 
@@ -733,7 +733,7 @@ ir_strobe_watch() {
 watch_ir_strobe_equipped() {
   self endon("hint_over");
 
-  while(!self actionslotfourbuttonpressed()) {
+  while(!self actionslotfourbuttonPressed()) {
     wait 0.05;
   }
 
@@ -743,7 +743,7 @@ watch_ir_strobe_equipped() {
 watch_ir_strobe_fired() {
   self endon("hint_over");
 
-  while(!self attackbuttonpressed()) {
+  while(!self attackButtonPressed()) {
     wait 0.05;
   }
 

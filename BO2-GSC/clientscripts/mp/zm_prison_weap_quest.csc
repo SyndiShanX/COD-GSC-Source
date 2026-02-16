@@ -24,7 +24,7 @@ tomahawk_rune_init() {
   level.wolfhead_body_anims["right"] = % ai_zombie_dreamcatcher_wallconsume_align_r;
   level.wolfhead_body_anims["left"] = % ai_zombie_dreamcatcher_wallconsume_align_l;
   level.wolfhead_body_anims["front"] = % ai_zombie_dreamcatcher_wallconsume_align_f;
-  level.a_wolf_structs = getstructarray("wolf_position", "targetname");
+  level.a_wolf_structs = getStructArray("wolf_position", "targetname");
   registerclientfield("actor", "make_client_clone", 9000, 4, "int", ::pose_dead_body);
 
   for(i = 0; i < level.a_wolf_structs.size; i++)

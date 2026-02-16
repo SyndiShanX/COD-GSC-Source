@@ -52,7 +52,7 @@ put this in your GSC:
 maps\_pavelow_noai::main( "vehicle_pavelow" );
 
 and these lines in your CSV:
-include,vehicle_pavelow_noai
+#include,vehicle_pavelow_noai
 sound,vehicle_pavelow,vehicle_standard,all_sp
 
 defaultmdl="vehicle_pavelow"default:"vehicletype" "pavelow_noai"default:"script_team" "allies"

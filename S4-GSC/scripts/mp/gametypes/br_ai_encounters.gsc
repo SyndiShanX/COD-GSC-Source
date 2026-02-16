@@ -112,7 +112,7 @@ _id_7F6D(var_0, var_1) {
 _id_7FE0() {
   self._id_151A = [];
   self._id_0F4D = [];
-  var_0 = scripts\engine\utility::getstructarray("ai_encounters", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("ai_encounters", "targetname");
 
   foreach(var_2 in var_0) {
     _id_7FDF(var_2);
@@ -967,7 +967,7 @@ _id_21C2() {
   var_0 = getent("bank_vol_01", "targetname");
   var_1 = getent("bank_vol_01_upper", "targetname");
   level._id_10C61 = [];
-  var_2 = scripts\engine\utility::getstructarray("enemy_wave_01", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("enemy_wave_01", "targetname");
 
   foreach(var_4 in var_2) {
     var_5 = _id_EF05(var_4);
@@ -986,7 +986,7 @@ _id_21C2() {
   level notify("spawn_wave2");
   var_8 = getent("bank_vol_02", "targetname");
   var_9 = [];
-  var_10 = scripts\engine\utility::getstructarray("enemy_wave_02", "targetname");
+  var_10 = scripts\engine\utility::getStructArray("enemy_wave_02", "targetname");
 
   foreach(var_12 in var_10) {
     var_5 = _id_EF05(var_12);
@@ -1140,7 +1140,7 @@ _id_13B7() {
   var_7 = getent("airport_vol_01", "targetname");
   wait 2;
   var_8 = [];
-  var_9 = scripts\engine\utility::getstructarray("airport_enemy_wave_01", "targetname");
+  var_9 = scripts\engine\utility::getStructArray("airport_enemy_wave_01", "targetname");
 
   foreach(var_11 in var_9) {
     var_12 = _id_EF05(var_11);
@@ -1764,7 +1764,7 @@ _id_582D(var_0, var_1) {
   self allowjump(0);
   scripts\mp\gametypes\br_respawn::_id_B79F(1);
 
-  while(!self stancebuttonpressed() || !self isonground()) {
+  while(!self stancebuttonPressed() || !self isonground()) {
     waitframe();
   }
 

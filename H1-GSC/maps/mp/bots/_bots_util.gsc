@@ -333,7 +333,7 @@ use_button_stopped_notify(var_0, var_1) {
   self endon("stop_usebutton_watcher");
   wait 0.05;
 
-  while(self usebuttonpressed())
+  while(self useButtonPressed())
     wait 0.05;
 
   self notify("use_button_no_longer_pressed");

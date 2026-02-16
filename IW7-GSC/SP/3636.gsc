@@ -98,7 +98,7 @@ func_2A33(var_0) {
   thread func_2A27(var_0);
   for(;;) {
     self allowfire(0);
-    if(!self attackbuttonpressed()) {} else if(self issprinting()) {} else if(self issprintsliding()) {} else if(self ismeleeing()) {} else if(self isthrowinggrenade()) {} else if(self.var_9F47) {} else if(self.var_2A2F) {} else {
+    if(!self attackButtonPressed()) {} else if(self issprinting()) {} else if(self issprintsliding()) {} else if(self ismeleeing()) {} else if(self isthrowinggrenade()) {} else if(self.var_9F47) {} else if(self.var_2A2F) {} else {
       self playSound("weap_steeldragon_fire");
       wait(0.2);
       self notify("beam_rifle_fire");
@@ -111,7 +111,7 @@ func_2A33(var_0) {
         wait(0.3);
       }
 
-      while(self attackbuttonpressed()) {
+      while(self attackButtonPressed()) {
         self allowfire(0);
         if(self issprinting()) {
           break;
@@ -183,7 +183,7 @@ func_2A33(var_0) {
         thread scripts\sp\utility::play_sound_on_entity("weap_steeldragon_off");
       }
 
-      while(self attackbuttonpressed()) {
+      while(self attackButtonPressed()) {
         wait(0.05);
       }
     }
@@ -195,7 +195,7 @@ func_2A33(var_0) {
 func_FC1E() {
   self endon("beam_rifle_off");
   wait(0.35);
-  if(self attackbuttonpressed()) {
+  if(self attackButtonPressed()) {
     thread scripts\engine\utility::play_loop_sound_on_entity("weap_steeldragon_lp");
   }
 }
@@ -204,12 +204,12 @@ func_2A22() {
   var_0 = 45;
   var_1 = 0.5;
   for(;;) {
-    while(!self adsbuttonpressed()) {
+    while(!self adsButtonPressed()) {
       wait(0.05);
     }
 
     self func_81DE(var_0, var_1);
-    while(self adsbuttonpressed()) {
+    while(self adsButtonPressed()) {
       wait(0.05);
     }
 
@@ -359,7 +359,7 @@ func_2A31(var_0) {
 }
 
 func_2A24() {
-  var_0 = scripts\engine\utility::getstructarray("steel_dragon_ammo", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("steel_dragon_ammo", "targetname");
   foreach(var_2 in var_0) {
     var_3 = var_2 scripts\engine\utility::spawn_tag_origin();
     thread func_2A25(var_3);

@@ -47,7 +47,7 @@ put this in your GSC:
 maps\_van::main( "vehicle_uaz_van" );
 
 and these lines in your CSV:
-include,vehicle_uaz_van_van
+#include,vehicle_uaz_van_van
 sound,vehicle_uaz,vehicle_standard,all_sp
 
 defaultmdl="vehicle_uaz_van"default:"vehicletype" "van"

@@ -343,7 +343,7 @@ drive_firstperson_anims(vehicle) {
 
 shootable_stuff_assist_damage(obj) {
   // don't assist destruction of these objects.
-  dont_assist_destructible_destruction_here = getstructarray("dont_assist_destructible_destruction_here", "targetname");
+  dont_assist_destructible_destruction_here = getStructArray("dont_assist_destructible_destruction_here", "targetname");
   foreach(spot in dont_assist_destructible_destruction_here) {
     Assert(isDefined(spot.radius));
     if(Distance(spot.origin, obj.origin) < spot.radius)
@@ -652,7 +652,7 @@ drive_shooting_anims(vehicle) {
 
 is_shoot_button_pressed() {
   // pc
-  return self AttackButtonPressed();
+  return self attackButtonPressed();
 }
 
 #using_animtree("vehicles");

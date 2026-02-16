@@ -466,9 +466,9 @@ reset_bomb_interaction_struct() {
 
 init_bomb_interaction() {
   level.bomb_interaction_structs = [];
-  var_0 = scripts\engine\utility::getstructarray("bomb_start", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("bomb_start", "script_noteworthy");
   foreach(var_2 in var_0) {
-    var_3 = scripts\engine\utility::getstructarray(var_2.target, "targetname");
+    var_3 = scripts\engine\utility::getStructArray(var_2.target, "targetname");
     foreach(var_5 in var_3) {
       switch (var_5.script_noteworthy) {
         case "bomb_counter":

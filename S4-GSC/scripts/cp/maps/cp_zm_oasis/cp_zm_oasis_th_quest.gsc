@@ -56,7 +56,7 @@ register_subquest_funcs(var_0, var_1, var_2) {
 
 init_subquest_types(var_0) {
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_1 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_1 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
   var_1 = scripts\engine\utility::array_randomize(var_1);
   level.n_num_of_subquests = 0;
 
@@ -149,7 +149,7 @@ on_soid_interact(var_0, var_1) {
     level.n_dig_count++;
   }
 
-  var_2 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_2 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
 
   if(level.n_dig_count == level.n_num_of_subquests) {
     level scripts\engine\utility::_id_5C1B("finish_dig_all_positions");
@@ -233,7 +233,7 @@ init_radios() {
   var_0 = scripts\engine\utility::getstruct("th_radio_start", "targetname");
   var_0.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_0.origin, var_0.angles);
   var_0.spawn_locations = [];
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = 1;
 
   foreach(var_4 in var_1) {
@@ -246,7 +246,7 @@ init_radios() {
       var_4.script_int = var_2;
       var_4.mdl_radio = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_4.origin, var_4.angles);
       var_4.spawn_locations = [];
-      var_5 = scripts\engine\utility::getstructarray(var_4.target, "targetname");
+      var_5 = scripts\engine\utility::getStructArray(var_4.target, "targetname");
 
       foreach(var_7 in var_5) {
         if(_func_0121(var_7._id_CE18) && var_7._id_CE18 == "prop_antenna") {
@@ -271,7 +271,7 @@ init_radios() {
   var_10 = scripts\engine\utility::getstruct("th_radio_end", "targetname");
   var_10.mdl = scripts\cp\utility::_id_E190("s4_zm_jpn_radio_equipment_06_dmg", var_10.origin, var_10.angles);
   var_10.spawn_locations = [];
-  var_11 = scripts\engine\utility::getstructarray(var_10.target, "targetname");
+  var_11 = scripts\engine\utility::getStructArray(var_10.target, "targetname");
 
   foreach(var_4 in var_11) {
     if(_func_0121(var_4._id_CE18) && var_4._id_CE18 == "prop_antenna") {
@@ -287,7 +287,7 @@ init_radios() {
 
 init_shovels() {
   scripts\engine\utility::_id_5C24("introscreen_over");
-  var_0 = scripts\engine\utility::getstructarray("s_shovel_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_shovel_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
 
   foreach(var_2 in var_0) {
@@ -757,7 +757,7 @@ start_moving() {
 
   self waittill("movedone");
   self playSound("zmb_orb_flyaway");
-  var_0 = scripts\engine\utility::getstructarray("golden_ball_start_point", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("golden_ball_start_point", "script_noteworthy");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = undefined;
 
@@ -915,7 +915,7 @@ _id_0FE3(var_0) {
 
 pick_next_fly_point(var_0) {
   level endon("game_ended");
-  var_1 = scripts\engine\utility::getstructarray(var_0.target, "targetname");
+  var_1 = scripts\engine\utility::getStructArray(var_0.target, "targetname");
   var_2 = 0;
 
   for(;;) {
@@ -1067,7 +1067,7 @@ player_play_curse_fxs_listener() {
 
 get_free_bury_position() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = [];
   var_2 = 0;
@@ -1197,7 +1197,7 @@ bury_back_cleanup(var_0, var_1) {
 
 init_ray_gun_pos() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = undefined;
 
@@ -1329,7 +1329,7 @@ set_up_next_bunny_part(var_0) {
 
 get_ray_gun_free_position() {
   level endon("game_ended");
-  var_0 = scripts\engine\utility::getstructarray("s_subquest_pos", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("s_subquest_pos", "targetname");
   var_0 = scripts\engine\utility::array_randomize(var_0);
   var_1 = undefined;
 

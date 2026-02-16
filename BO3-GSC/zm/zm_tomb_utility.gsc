@@ -814,7 +814,7 @@ function staff_charge_watch() {
   self endon("player_downed");
   self endon("weapon_change");
   self endon("weapon_fired");
-  while(!self attackbuttonpressed()) {
+  while(!self attackButtonPressed()) {
     wait(0.05);
   }
   n_old_charge = 0;

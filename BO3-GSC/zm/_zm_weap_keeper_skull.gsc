@@ -295,11 +295,11 @@ function function_e703c25f() {
   while(true) {
     if(self util::ads_button_held()) {
       if(!self function_97d08b97()) {
-        while(self adsbuttonpressed()) {
+        while(self adsButtonPressed()) {
           wait(0.05);
         }
       } else {
-        if(self.var_118ab24e && !self attackbuttonpressed() && !self.var_e1f8edd6 && !self ismeleeing()) {
+        if(self.var_118ab24e && !self attackButtonPressed() && !self.var_e1f8edd6 && !self ismeleeing()) {
           if(!self.var_141d363e) {
             self.var_141d363e = 1;
             self clientfield::set_to_player("skull_torch_fx", 1);
@@ -462,7 +462,7 @@ function function_6a46a0e0() {
 function function_79e34741() {
   self endon("disconnect");
   while(true) {
-    if(self weaponswitchbuttonpressed()) {
+    if(self weaponswitchbuttonPressed()) {
       self.var_230f31ae = 0;
       self gadgetpowerset(0, self.var_118ab24e - 2);
       self setweaponammoclip(level.var_c003f5b, 0);
@@ -484,7 +484,7 @@ function function_97d08b97() {
 function watch_weapon_change() {
   self endon("disconnect");
   while(true) {
-    if(self weaponswitchbuttonpressed() || self.var_118ab24e < 1) {
+    if(self weaponswitchbuttonPressed() || self.var_118ab24e < 1) {
       self function_e00bc70a();
     }
     wait(0.05);

@@ -123,11 +123,11 @@ init_interiors() {
 }
 
 init_teleport_points() {
-  level.maze_depart = getstructarray("sloth_to_maze_begin", "targetname");
-  level.maze_arrive = getstructarray("sloth_to_maze_end", "targetname");
-  level.courtyard_depart = getstructarray("sloth_from_maze_begin", "targetname");
-  level.courtyard_arrive = getstructarray("sloth_from_maze_end", "targetname");
-  level.maze_to_mansion = getstructarray("sloth_maze_to_mansion", "targetname");
+  level.maze_depart = getStructArray("sloth_to_maze_begin", "targetname");
+  level.maze_arrive = getStructArray("sloth_to_maze_end", "targetname");
+  level.courtyard_depart = getStructArray("sloth_from_maze_begin", "targetname");
+  level.courtyard_arrive = getStructArray("sloth_from_maze_end", "targetname");
+  level.maze_to_mansion = getStructArray("sloth_maze_to_mansion", "targetname");
 }
 
 sloth_init_roam_point() {
@@ -497,7 +497,7 @@ behind_mansion_zone() {
 
 setup_door_markers() {
   level.sloth_doors = [];
-  level.sloth_hunched_structs = getstructarray("hunched_struct", "targetname");
+  level.sloth_hunched_structs = getStructArray("hunched_struct", "targetname");
   idx = 0;
   doors = getEntArray("zombie_door", "targetname");
 
@@ -2257,7 +2257,7 @@ action_roam_point(point) {
     if(point.script_noteworthy != self.current_roam.script_noteworthy) {
       sloth_print("using sloth_mover " + self.current_roam.script_noteworthy);
 
-      sub_goal_array = getstructarray(self.current_roam.script_noteworthy, "script_noteworthy");
+      sub_goal_array = getStructArray(self.current_roam.script_noteworthy, "script_noteworthy");
 
       foreach(sg in sub_goal_array) {
         if(isDefined(sg.targetname) && sg.targetname == "player_respawn_point") {
@@ -3493,7 +3493,7 @@ sloth_debug_input() {
 
     player = get_players()[0];
 
-    if(player actionslotonebuttonpressed()) {} else if(player actionslottwobuttonpressed()) {} else if(player actionslotthreebuttonpressed()) {} else if(player actionslotfourbuttonpressed()) {}
+    if(player actionslotonebuttonPressed()) {} else if(player actionslottwobuttonPressed()) {} else if(player actionslotthreebuttonPressed()) {} else if(player actionslotfourbuttonPressed()) {}
 
     wait 0.1;
   }

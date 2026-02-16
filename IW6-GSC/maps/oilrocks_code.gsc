@@ -320,7 +320,7 @@ apache_mission_impact_water_missile_think() {
 }
 
 get_apache_spawn_struct(var_0) {
-  var_1 = common_scripts\utility::getstructarray("apache", "targetname");
+  var_1 = common_scripts\utility::getStructArray("apache", "targetname");
   var_2 = ["script_noteworthy", "script_parameters"];
   var_3 = ["player", var_0];
   var_4 = array_keep_values(var_1, var_2, var_3)[0];

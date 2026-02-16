@@ -823,7 +823,7 @@ mp_alien_armory_pillage_init() {
 }
 
 relocate_bad_pillage_spots() {
-  var_0 = common_scripts\utility::getstructarray("pillage_compound_3", "targetname");
+  var_0 = common_scripts\utility::getStructArray("pillage_compound_3", "targetname");
 
   foreach(var_2 in var_0) {
     if(var_2.origin == (-1324.8, -3134.5, 687.9)) {
@@ -883,7 +883,7 @@ easter_egg_conduit() {
     var_3.id = var_2;
     var_3.hit = 0;
     var_3.window_active = 0;
-    var_3.spark_structs = common_scripts\utility::getstructarray(var_3.target, "targetname");
+    var_3.spark_structs = common_scripts\utility::getStructArray(var_3.target, "targetname");
     var_1[var_1.size] = var_3;
   }
 
@@ -1067,7 +1067,7 @@ mp_alien_armory_intermission_func() {
 
 select_best_intermission_point() {
   var_0 = maps\mp\alien\_utility::get_current_area_name();
-  var_1 = common_scripts\utility::getstructarray(var_0 + "_intermission", "script_noteworthy");
+  var_1 = common_scripts\utility::getStructArray(var_0 + "_intermission", "script_noteworthy");
 
   switch (var_0) {
     case "loadingdock":
@@ -1194,7 +1194,7 @@ should_play_next_hive_vo_func() {
 }
 
 force_all_players_in_final_area() {
-  var_0 = common_scripts\utility::getstructarray("final_battle_player_teleport", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("final_battle_player_teleport", "script_noteworthy");
   var_1 = [];
 
   foreach(var_3 in level.players) {
@@ -1246,7 +1246,7 @@ force_all_players_in_final_area() {
 }
 
 teleport_dog_tags() {
-  var_0 = common_scripts\utility::getstructarray("final_battle_player_teleport", "script_noteworthy");
+  var_0 = common_scripts\utility::getStructArray("final_battle_player_teleport", "script_noteworthy");
   var_1 = (0, 0, 30);
 
   foreach(var_4, var_3 in level.players) {

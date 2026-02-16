@@ -482,7 +482,7 @@ event1_fakefire() {
     flag_set("event1_fakefire_start");
     clientNotify("e1fs");
   } else {
-    firePoints = GetStructArray("struct_e1_fakefire", "targetname");
+    firePoints = getStructArray("struct_e1_fakefire", "targetname");
     ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
 
     array_thread(firePoints, maps\ber2_fx::ambient_fakefire, "subway_gate_closed", true);
@@ -502,7 +502,7 @@ event1_katyusha() {
 
   if(!flag("street_charge_moveup1")) {
     while(!flag("street_charge_moveup1")) {
-      targets = GetStructArray("struct_e1_katyusha_target", "targetname");
+      targets = getStructArray("struct_e1_katyusha_target", "targetname");
       kat maps\_katyusha::rocket_barrage(10, targets, 600, 1800);
 
       if(!flag("street_charge_moveup1")) {
@@ -2295,12 +2295,12 @@ street_fakefire() {
   if(isDefined(level.clientscripts) && level.clientscripts) {
     clientNotify("sfs");
   } else {
-    firePoints = GetStructArray("struct_street_fakefire", "targetname");
+    firePoints = getStructArray("struct_street_fakefire", "targetname");
     ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
     array_thread(firePoints, maps\ber2_fx::ambient_fakefire, "building_critical_hit", true);
 
     firePoints = [];
-    firePoints = GetStructArray("struct_street_building_fakefire", "targetname");
+    firePoints = getStructArray("struct_street_building_fakefire", "targetname");
     ASSERTEX(isDefined(firePoints) && firePoints.size > 0, "Can't find fakefire points.");
     array_thread(firePoints, maps\ber2_fx::ambient_fakefire, "building_tower_fall", true);
   }
@@ -2383,7 +2383,7 @@ street_bank_window_exp() {
 
   playFX(level._effect["bank_window_money_exp"], fxSpot.origin, anglesToForward(fxSpot.angles));
 
-  windowFxSpots = GetStructArray(fxSpot.target, "targetname");
+  windowFxSpots = getStructArray(fxSpot.target, "targetname");
   windowFX = level._effect["window_explosion"];
   array_thread(windowFxSpots, ::scr_playfx, windowFX, RandomFloatRange(0.15, 0.35));
 }
@@ -2419,7 +2419,7 @@ street_bank_flag_sequence() {
 street_ambient_rockets() {
   flag_wait("player_outside");
 
-  startSpots = GetStructArray("street_charge_ambient_rockets", "targetname");
+  startSpots = getStructArray("street_charge_ambient_rockets", "targetname");
   ASSERTEX(isDefined(startSpots) && startSpots.size > 0, "couldn't find any street charge ambient rocket spots.");
 
   array_thread(startSpots, ::street_ambient_rocket_think);
@@ -2861,7 +2861,7 @@ street_dialogue() {
 building_collapse_street_executions() {
   timeToSpawnGroundGuys = GetTime() + 2000;
 
-  animSpots = GetStructArray("struct_e1_street_executions", "targetname");
+  animSpots = getStructArray("struct_e1_street_executions", "targetname");
   ASSERTEX(isDefined(animSpots) && animSpots.size > 0, "Couldn't find any animspot script_structs for street executions.");
 
   level.metrogateRegroupNodes = GetNodeArray("node_street_regroup", "targetname");
@@ -3047,10 +3047,10 @@ rocket_barrage(guys) {
 
   thread players_safe_belowground();
 
-  waveSpots1 = GetStructArray("metrogate_rocket_wave1", "targetname");
-  waveSpots2 = GetStructArray("metrogate_rocket_wave2", "targetname");
-  waveSpots3 = GetStructArray("metrogate_rocket_wave3", "targetname");
-  waveSpots4 = GetStructArray("metrogate_rocket_wave4", "targetname");
+  waveSpots1 = getStructArray("metrogate_rocket_wave1", "targetname");
+  waveSpots2 = getStructArray("metrogate_rocket_wave2", "targetname");
+  waveSpots3 = getStructArray("metrogate_rocket_wave3", "targetname");
+  waveSpots4 = getStructArray("metrogate_rocket_wave4", "targetname");
   ASSERTEX(array_validate(waveSpots1), "Couldn't find wave 1 rocket spots");
   ASSERTEX(array_validate(waveSpots2), "Couldn't find wave 2 rocket spots");
   ASSERTEX(array_validate(waveSpots3), "Couldn't find wave 3 rocket spots");
@@ -4087,7 +4087,7 @@ opener_move(anime) {
 event1_rooftop_rockets() {
   level endon("subway_gate_closed");
 
-  startSpots = GetStructArray("struct_e1_rooftop_rockets", "targetname");
+  startSpots = getStructArray("struct_e1_rooftop_rockets", "targetname");
   if(!isDefined(startSpots) || startSpots.size <= 0) {
     ASSERTMSG("can't find any rocket start spots for event1_rooftop_rockets()!");
     return;

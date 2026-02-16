@@ -95,7 +95,7 @@ strength_test_update(player, button_prompt_text) {
       player ent_flag_set("strength_test_half_way");
     }
 
-    if(player usebuttonpressed()) {
+    if(player useButtonPressed()) {
       if(button_state == 1 || button_state == 3) {
         button_state = 2;
       } else if(button_state == 2) {

@@ -1891,7 +1891,7 @@ socotra_rooftopinit() {
 
 socotra_quad_spawn(squadid) {
   i = 0;
-  spawnloc = arraycombine(getstructarray("quad_spawn_loc", "targetname"), getstructarray("asd_spawn_loc", "targetname"), 0, 0);
+  spawnloc = arraycombine(getStructArray("quad_spawn_loc", "targetname"), getStructArray("asd_spawn_loc", "targetname"), 0, 0);
   squad = level.rts.squads[squadid];
 
   foreach(quad in squad.members) {
@@ -2048,7 +2048,7 @@ socotra_geo_changes() {
 }
 
 populate_dying_bodies() {
-  dead_body_locs = getstructarray("dying_body", "targetname");
+  dead_body_locs = getStructArray("dying_body", "targetname");
   wait_for_first_player();
   male_spawner = getent("male_civ_spawner", "targetname");
   assert(isDefined(male_spawner));
@@ -2082,7 +2082,7 @@ play_anim_on_civ(animname) {
 }
 
 populate_dead_bodies() {
-  dead_body_locs = getstructarray("dead_body", "targetname");
+  dead_body_locs = getStructArray("dead_body", "targetname");
   male_spawner = getent("male_civ_spawner", "targetname");
   assert(isDefined(male_spawner));
   female_spawner = getent("female_civ_spawner", "targetname");

@@ -92,7 +92,7 @@ client_distance_planes(str_structname, str_waittill) {
   level endon(str_waittill + "_stop");
   level waittill(str_waittill);
 
-  plane_splines = GetStructArray(str_structname, "targetname");
+  plane_splines = getStructArray(str_structname, "targetname");
 
   while(1) {
     for(i = 0; i < plane_splines.size; i++) {
@@ -107,7 +107,7 @@ client_field_planes(str_structname, str_waittill, spawn_percent, delay_min, dela
   level endon(str_waittill + "_stop");
   level waittill(str_waittill);
 
-  plane_splines = GetStructArray(str_structname, "targetname");
+  plane_splines = getStructArray(str_structname, "targetname");
   players = getlocalplayers();
 
   planes_max = 5;

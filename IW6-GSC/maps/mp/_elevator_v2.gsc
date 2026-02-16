@@ -68,7 +68,7 @@ init_elevator(config) {
     button setupButton(elevator);
   }
 
-  destinationStructs = getstructarray(config.destinations, "targetname");
+  destinationStructs = getStructArray(config.destinations, "targetname");
   foreach(destination in destinationStructs) {
     elevator setupDestination(destination);
   }

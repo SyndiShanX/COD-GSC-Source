@@ -644,7 +644,7 @@ function powerup_grab(powerup_team) {
       if(isDefined(player.is_drinking) && player.is_drinking > 0 && isDefined(level._custom_powerups) && isDefined(level._custom_powerups[self.powerup_name]) && (isDefined(level._custom_powerups[self.powerup_name].prevent_pick_up_if_drinking) && level._custom_powerups[self.powerup_name].prevent_pick_up_if_drinking)) {
         continue;
       }
-      if(self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink" && (!isPlayer(grabber) || player laststand::player_is_in_laststand() || (player usebuttonpressed() && player zm_utility::in_revive_trigger()) || player bgb::is_enabled("zm_bgb_disorderly_combat"))) {
+      if(self.powerup_name == "minigun" || self.powerup_name == "tesla" || self.powerup_name == "random_weapon" || self.powerup_name == "meat_stink" && (!isPlayer(grabber) || player laststand::player_is_in_laststand() || (player useButtonPressed() && player zm_utility::in_revive_trigger()) || player bgb::is_enabled("zm_bgb_disorderly_combat"))) {
         continue;
       }
       if(!(isDefined(self.can_pick_up_in_last_stand) && self.can_pick_up_in_last_stand) && player laststand::player_is_in_laststand()) {

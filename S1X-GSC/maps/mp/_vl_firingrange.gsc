@@ -84,22 +84,22 @@ firing_range_setup_3dui_screens() {
 }
 
 firing_range_setup_min_range() {
-  TargetTrackMinArray = getstructarray("target_track_min", "targetname");
+  TargetTrackMinArray = getStructArray("target_track_min", "targetname");
   return TargetTrackMinArray;
 }
 
 firing_range_setup_max_range() {
-  TargetTrackMaxArray = getstructarray("target_track_max", "targetname");
+  TargetTrackMaxArray = getStructArray("target_track_max", "targetname");
   return TargetTrackMaxArray;
 }
 
 firing_range_setup_booth_displays() {
-  BoothDisplays01 = getstructarray("booth_display_01", "targetname");
-  BoothDisplays02 = getstructarray("booth_display_02", "targetname");
-  BoothDisplays03 = getstructarray("booth_display_03", "targetname");
-  BoothDisplays04 = getstructarray("booth_display_04", "targetname");
-  BoothDisplays05 = getstructarray("booth_display_05", "targetname");
-  BoothDisplays06 = getstructarray("booth_display_06", "targetname");
+  BoothDisplays01 = getStructArray("booth_display_01", "targetname");
+  BoothDisplays02 = getStructArray("booth_display_02", "targetname");
+  BoothDisplays03 = getStructArray("booth_display_03", "targetname");
+  BoothDisplays04 = getStructArray("booth_display_04", "targetname");
+  BoothDisplays05 = getStructArray("booth_display_05", "targetname");
+  BoothDisplays06 = getStructArray("booth_display_06", "targetname");
 
   BoothDisplaysArray = [BoothDisplays01, BoothDisplays02, BoothDisplays03, BoothDisplays04, BoothDisplays05, BoothDisplays06];
 
@@ -1456,7 +1456,7 @@ firing_range_setup_env() {
 }
 
 firing_range_setup_env_VFX() {
-  EnvVFX_Array = getstructarray("round_environment", "targetname");
+  EnvVFX_Array = getStructArray("round_environment", "targetname");
 
   EnvVFX_GroupArray = [];
 

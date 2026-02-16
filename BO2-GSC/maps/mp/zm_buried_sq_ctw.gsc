@@ -102,7 +102,7 @@ ctw_ric_get_next_wisp_struct(s_current) {
   if(!isDefined(s_current.target))
     return undefined;
 
-  a_structs = getstructarray(s_current.target, "targetname");
+  a_structs = getStructArray(s_current.target, "targetname");
   return array_randomize(a_structs)[0];
 }
 

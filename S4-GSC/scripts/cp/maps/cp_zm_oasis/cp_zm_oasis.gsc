@@ -82,7 +82,7 @@ main() {
   scripts\cp\zombies\zm_ww_riotshield::init();
   scripts\cp\zombies\zm_ww_dg2::init();
   level.outofmap_volume = getent("drk_aether_fall_volume", "targetname");
-  level.outofmap_teleport_points = scripts\engine\utility::getstructarray("drk_aether_fall_respawn_point", "targetname");
+  level.outofmap_teleport_points = scripts\engine\utility::getStructArray("drk_aether_fall_respawn_point", "targetname");
   _id_06CB::_id_AA4E(::onplayerconnect);
   level thread scripts\cp\zombies\zm_rbz_utility::rbz_initialize();
   level thread setup_animation_models();

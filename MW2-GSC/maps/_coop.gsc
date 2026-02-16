@@ -839,7 +839,7 @@ player_coop_create_use_target() {
     }
 
     player_coop_is_reviving() {
-      if(!self UseButtonPressed()) {
+      if(!self useButtonPressed()) {
         return false;
       }
 

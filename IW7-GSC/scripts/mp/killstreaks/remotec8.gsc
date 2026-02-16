@@ -1007,7 +1007,7 @@ func_13AD7(var_0) {
       var_5 = 0.3;
     }
 
-    while(var_1 usebuttonpressed()) {
+    while(var_1 useButtonPressed()) {
       var_4 = var_4 + 0.05;
       if(var_4 > var_5) {
         var_6 = getothermode(var_3);

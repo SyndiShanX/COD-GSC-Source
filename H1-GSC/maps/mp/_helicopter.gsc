@@ -102,7 +102,7 @@ getentorstruct(var_0, var_1) {
 }
 
 getentorstructarray(var_0, var_1) {
-  var_2 = common_scripts\utility::getstructarray(var_0, var_1);
+  var_2 = common_scripts\utility::getStructArray(var_0, var_1);
   var_3 = getEntArray(var_0, var_1);
 
   if(var_3.size > 0)

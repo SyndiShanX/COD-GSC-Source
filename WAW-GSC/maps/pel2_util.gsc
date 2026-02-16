@@ -13,7 +13,7 @@ start_teleport_players(start_name, coop) {
   if(isDefined(coop) && coop) {
     starts = get_sorted_starts(start_name);
   } else {
-    starts = getstructarray(start_name, "targetname");
+    starts = getStructArray(start_name, "targetname");
   }
 
   assertex(starts.size >= players.size, "Need more start positions for players!");
@@ -33,7 +33,7 @@ start_teleport_players(start_name, coop) {
 get_sorted_starts(start_name) {
   player_starts = [];
 
-  player_starts = getstructarray(start_name, "targetname");
+  player_starts = getStructArray(start_name, "targetname");
 
   for(i = 0; i < player_starts.size; i++) {
     for(j = i; j < player_starts.size; j++) {
@@ -51,7 +51,7 @@ get_sorted_starts(start_name) {
 start_teleport_ai(start_name) {
   friendly_ai = getEntArray("friendly_squad_ai", "script_noteworthy");
 
-  ai_starts = getstructarray(start_name + "_ai", "targetname");
+  ai_starts = getStructArray(start_name + "_ai", "targetname");
 
   assertex(ai_starts.size >= friendly_ai.size, "Need more start positions for ai!");
 

@@ -11,7 +11,7 @@ init_crafting() {
   init_crafting_station("craft_turret", (0, 1, 0));
   init_crafting_station("craft_robot", (0, 0, 1));
   init_crafting_station("craft_zombgone", (1, 1, 0));
-  var_0 = scripts\engine\utility::getstructarray("puzzle", "script_noteworthy");
+  var_0 = scripts\engine\utility::getStructArray("puzzle", "script_noteworthy");
   foreach(var_2 in var_0) {
     var_2.custom_search_dist = 96;
     var_2.disable_guided_interactions = 1;
@@ -49,7 +49,7 @@ init_crafting_station(var_0, var_1) {
     var_2.crafted_item = var_4;
   }
 
-  var_7 = scripts\engine\utility::getstructarray("puzzle", "script_noteworthy");
+  var_7 = scripts\engine\utility::getStructArray("puzzle", "script_noteworthy");
   foreach(var_9 in var_7) {
     if(var_9.name == var_0 && !scripts\engine\utility::istrue(var_9.used)) {
       scripts\cp\cp_interaction::remove_from_current_interaction_list(var_9);
@@ -246,7 +246,7 @@ get_icon_index_based_on_model(var_0) {
 }
 
 get_puzzle_piece_location(var_0) {
-  var_1 = scripts\engine\utility::getstructarray("puzzle", "script_noteworthy");
+  var_1 = scripts\engine\utility::getStructArray("puzzle", "script_noteworthy");
   var_2 = [];
   foreach(var_4 in var_1) {
     if(!var_4 is_valid_tile_spot()) {

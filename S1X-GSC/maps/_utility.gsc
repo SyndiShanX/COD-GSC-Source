@@ -3013,7 +3013,7 @@ get_all_target_ents(target) {
   ents = GetNodeArray(target, "targetname");
   array = array_combine(array, ents);
 
-  ents = getstructarray(target, "targetname");
+  ents = getStructArray(target, "targetname");
   array = array_combine(array, ents);
 
   ents = GetVehicleNodeArray(target, "targetname");
@@ -5673,7 +5673,7 @@ array_spawn_cg(spawners, bForceSpawn, skipIncorrectNumberAssert, spawnDelay) {
 array_spawn_targetname(targetname, forcespawn, skipIncorrectNumberAssert, deleteDronePool) {
   spawners = getEntArray(targetname, "targetname");
   if(isDefined(level.spawn_pool_enabled)) {
-    struct_spawners = getstructarray(targetname, "targetname");
+    struct_spawners = getStructArray(targetname, "targetname");
     if(isDefined(deleteDronePool) && deleteDronePool) {
       deletestructarray_ref(struct_spawners);
     }
@@ -5687,7 +5687,7 @@ array_spawn_targetname(targetname, forcespawn, skipIncorrectNumberAssert, delete
 array_spawn_targetname_cg(targetname, forcespawn, spawnDelay, skipIncorrectNumberAssert, deleteDronePool) {
   spawners = getEntArray(targetname, "targetname");
   if(isDefined(level.spawn_pool_enabled)) {
-    struct_spawners = getstructarray(targetname, "targetname");
+    struct_spawners = getStructArray(targetname, "targetname");
     if(isDefined(deleteDronePool) && deleteDronePool) {
       deletestructarray_ref(struct_spawners);
     }
@@ -5701,7 +5701,7 @@ array_spawn_targetname_cg(targetname, forcespawn, spawnDelay, skipIncorrectNumbe
 array_spawn_noteworthy(noteworthy, forcespawn, skipIncorrectNumberAssert, deleteDronePool) {
   spawners = getEntArray(noteworthy, "script_noteworthy");
   if(isDefined(level.spawn_pool_enabled)) {
-    struct_spawners = getstructarray(noteworthy, "script_noteworthy");
+    struct_spawners = getStructArray(noteworthy, "script_noteworthy");
     if(isDefined(deleteDronePool) && deleteDronePool) {
       deletestructarray_ref(struct_spawners);
     }
@@ -9938,7 +9938,7 @@ is_demo() {
 }
 
 deletestructarray(value, key, delay) {
-  structs = getstructarray(value, key);
+  structs = getStructArray(value, key);
   deletestructarray_ref(structs, delay);
 }
 
@@ -10041,7 +10041,7 @@ getstruct_delete(value, key) {
 }
 
 getstructarray_delete(value, key, delay) {
-  structs = getstructarray(value, key);
+  structs = getStructArray(value, key);
   deletestructarray_ref(structs, delay);
   return structs;
 }

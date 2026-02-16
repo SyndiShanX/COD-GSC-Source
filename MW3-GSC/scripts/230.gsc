@@ -79,10 +79,10 @@ main() {
 tweakart() {}
 
 _id_1AE7(var_0, var_1) {
-  var_2 = level.player buttonpressed(var_0);
+  var_2 = level.player buttonPressed(var_0);
 
   if(!var_2) {
-    var_2 = level.player buttonpressed(var_1);
+    var_2 = level.player buttonPressed(var_1);
   }
   if(!isDefined(level._id_1AE0[var_0])) {
     level._id_1AE0[var_0] = 0;

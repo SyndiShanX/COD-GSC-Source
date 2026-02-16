@@ -460,7 +460,7 @@ activate_final_sequence_blocker() {
   }
 
   level.wall_of_death_blocker_models = [];
-  var_0 = scripts\engine\utility::getstructarray("death_wall_door_model", "targetname");
+  var_0 = scripts\engine\utility::getStructArray("death_wall_door_model", "targetname");
   foreach(var_2 in var_0) {
     var_3 = spawn("script_model", var_2.origin);
     var_3 setModel("cp_disco_street_barricade");
@@ -521,7 +521,7 @@ wail_all_player_trigger_teleporter(var_0, var_1) {
         break;
       }
 
-      if(!var_5 usebuttonpressed()) {
+      if(!var_5 useButtonPressed()) {
         var_3 = 0;
         break;
       }
@@ -546,7 +546,7 @@ wail_all_player_trigger_teleporter(var_0, var_1) {
           break;
         }
 
-        if(!var_5 usebuttonpressed()) {
+        if(!var_5 useButtonPressed()) {
           var_3 = 0;
           break;
         }

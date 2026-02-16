@@ -29,7 +29,7 @@ getstruct(name, type) {
   return array[0];
 }
 
-getstructarray(name, type) {
+getStructArray(name, type) {
   assertEx(isDefined(level.struct_class_names), "Tried to getstruct before the structs were init");
 
   array = level.struct_class_names[type][name];
@@ -192,10 +192,10 @@ init_exploders() {
   println("*** Init exploders...");
   script_exploders = [];
 
-  ents = GetStructArray("script_brushmodel", "classname");
+  ents = getStructArray("script_brushmodel", "classname");
   println("Client : s_bm " + ents.size);
 
-  smodels = GetStructArray("script_model", "classname");
+  smodels = getStructArray("script_model", "classname");
   println("Client : sm " + smodels.size);
 
   for(i = 0; i < smodels.size; i++) {
@@ -208,7 +208,7 @@ init_exploders() {
     }
   }
 
-  potentialExploders = GetStructArray("script_brushmodel", "classname");
+  potentialExploders = getStructArray("script_brushmodel", "classname");
   println("Client : Potential exploders from script_brushmodel " + potentialExploders.size);
 
   for(i = 0; i < potentialExploders.size; i++) {
@@ -221,7 +221,7 @@ init_exploders() {
     }
   }
 
-  potentialExploders = GetStructArray("script_model", "classname");
+  potentialExploders = getStructArray("script_model", "classname");
   println("Client : Potential exploders from script_model " + potentialExploders.size);
 
   for(i = 0; i < potentialExploders.size; i++) {

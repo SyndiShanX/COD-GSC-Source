@@ -622,7 +622,7 @@ aud_30mm_tail() {
 a10_inital_fire_check() {
   self endon("a10_stop_fire_30mm");
 
-  while(self attackbuttonpressed()) {
+  while(self attackButtonPressed()) {
     level.player notify("a10_fire_30mm");
     wait 0.05;
   }
@@ -1050,7 +1050,7 @@ a10_hud_ammo_counter() {
   self settext(var_0);
 
   for(;;) {
-    while(level.player attackbuttonpressed()) {
+    while(level.player attackButtonPressed()) {
       var_0--;
       self settext(var_0);
       wait 0.05;
@@ -1536,7 +1536,7 @@ a10_hint_func() {
 }
 
 a10_fire_hint_func() {
-  if(level.player attackbuttonpressed()) {
+  if(level.player attackButtonPressed()) {
     common_scripts\utility::flag_set("FLAG_player_used_a10_30mm");
     return 1;
   }

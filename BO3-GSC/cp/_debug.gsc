@@ -868,7 +868,7 @@ function draw_animsounds_in_hud() {
   }
   level.animsound_hud_animname.label = "" + animname;
   players = getplayers();
-  if(players[0] buttonpressed("")) {
+  if(players[0] buttonPressed("")) {
     if(!level.animsound_locked_pressed) {
       level.animsound_locked = !level.animsound_locked;
       level.animsound_locked_pressed = 1;
@@ -876,13 +876,13 @@ function draw_animsounds_in_hud() {
   } else {
     level.animsound_locked_pressed = 0;
   }
-  if(players[0] buttonpressed("")) {
+  if(players[0] buttonPressed("")) {
     if(level.animsound_input != "") {
       level.animsound_selected--;
     }
     level.animsound_input = "";
   } else {
-    if(players[0] buttonpressed("")) {
+    if(players[0] buttonPressed("")) {
       if(level.animsound_input != "") {
         level.animsound_selected++;
       }
@@ -949,7 +949,7 @@ function draw_animsounds_in_hud() {
     }
   }
   players = getplayers();
-  if(players[0] buttonpressed("")) {
+  if(players[0] buttonPressed("")) {
     animsound = animsounds[level.animsound_selected];
     soundalias = get_alias_from_stored(animsound);
     if(!isDefined(soundalias)) {
@@ -1736,7 +1736,7 @@ function spawn_guy_placement() {
     level.dynamic_spawn_dummy_model setModel(level.aitypes[level.aitype_index].classname);
     level.dynamic_spawn_dummy_model show();
     level.dynamic_spawn_dummy_model notsolid();
-    if(self usebuttonpressed()) {
+    if(self useButtonPressed()) {
       level.dynamic_spawn_dummy_model hide();
       if(level.aitypes[level.aitype_index].isvehicle) {
         spawn = spawnvehicle(level.aitypes[level.aitype_index].classname, origin, angles, "");
@@ -1749,7 +1749,7 @@ function spawn_guy_placement() {
       spawn.fixednode = 0;
       wait(0.3);
     } else {
-      if(self buttonpressed("")) {
+      if(self buttonPressed("")) {
         level.dynamic_spawn_dummy_model hide();
         level.aitype_index++;
         if(level.aitype_index >= level.aitypes.size) {
@@ -1757,14 +1757,14 @@ function spawn_guy_placement() {
         }
         wait(0.3);
       } else {
-        if(self buttonpressed("")) {
+        if(self buttonPressed("")) {
           level.dynamic_spawn_dummy_model hide();
           level.aitype_index--;
           if(level.aitype_index < 0) {
             level.aitype_index = level.aitypes.size - 1;
           }
           wait(0.3);
-        } else if(self buttonpressed("")) {
+        } else if(self buttonPressed("")) {
           setDvar("", "");
         }
       }
