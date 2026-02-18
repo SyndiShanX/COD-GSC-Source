@@ -1,0 +1,80 @@
+/**************************************************************
+ * Decompiled by Ate47 and Edited by SyndiShanX
+ * Script: zm_common\trials\zm_trial_damage_drains_points.gsc
+**************************************************************/
+
+#using scripts\core_common\array_shared;
+#using scripts\core_common\callbacks_shared;
+#using scripts\core_common\system_shared;
+#using scripts\core_common\util_shared;
+#using scripts\zm_common\zm_score;
+#using scripts\zm_common\zm_trial;
+#namespace zm_trial_damage_drains_points;
+
+function private autoexec __init__system__() {
+  system::register(#"zm_trial_damage_drains_points", &preinit, undefined, undefined, undefined);
+}
+
+function private preinit() {
+  if(!zm_trial::is_trial_mode()) {
+    return;
+  }
+
+  zm_trial::register_challenge(#"damage_drains_points", &on_begin, &on_end);
+}
+
+function private on_begin(var_66fe7443, var_ec90b685) {
+  if(isDefined(var_ec90b685)) {
+    self.var_ec90b685 = 1;
+    callback::on_ai_killed(&function_8e0401ab);
+    level.var_a58dc99e = zm_trial::function_5769f26a(var_66fe7443);
+    return;
+  }
+
+  var_620e7dea = zm_trial::function_5769f26a(var_66fe7443) / 100;
+  level.var_baf7ae7f = level.var_a2d8b7eb;
+  level.var_a2d8b7eb = var_620e7dea;
+}
+
+function private on_end(round_reset) {
+  if(is_true(self.var_ec90b685)) {
+    callback::remove_on_ai_killed(&function_8e0401ab);
+    level.var_a58dc99e = undefined;
+    self.var_ec90b685 = undefined;
+    return;
+  }
+
+  level.var_a2d8b7eb = level.var_baf7ae7f;
+  level.var_baf7ae7f = undefined;
+}
+
+function is_active(var_a32bbdd = 0) {
+  s_challenge = zm_trial::function_a36e8c38(#"damage_drains_points");
+
+  if(var_a32bbdd) {
+    if(isDefined(s_challenge) && is_true(s_challenge.var_ec90b685)) {
+      return true;
+    }
+
+    return false;
+  }
+
+  return isDefined(s_challenge);
+}
+
+function private function_8e0401ab(params) {
+  if(is_true(self.nuked)) {
+    a_players = function_a1ef346b();
+    var_fc97ca4d = array::random(a_players);
+
+    if(isPlayer(var_fc97ca4d)) {
+      var_fc97ca4d zm_score::minus_to_player_score(level.var_a58dc99e, 1);
+    }
+
+    return;
+  }
+
+  if(isPlayer(params.eattacker)) {
+    params.eattacker zm_score::minus_to_player_score(level.var_a58dc99e, 1);
+  }
+}

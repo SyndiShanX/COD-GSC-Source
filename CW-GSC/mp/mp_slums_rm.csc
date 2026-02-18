@@ -1,0 +1,85 @@
+/***********************************************
+ * Decompiled by Ate47 and Edited by SyndiShanX
+ * Script: mp\mp_slums_rm.csc
+***********************************************/
+
+#using scripts\core_common\callbacks_shared;
+#using scripts\core_common\load_shared;
+#using scripts\core_common\util_shared;
+#namespace mp_slums_rm;
+
+function event_handler[level_init] main(eventstruct) {
+  setsaveddvar(#"enable_global_wind", 1);
+  setsaveddvar(#"wind_global_vector", "88 0 0");
+  setsaveddvar(#"wind_global_low_altitude", 0);
+  setsaveddvar(#"wind_global_hi_altitude", 10000);
+  setsaveddvar(#"wind_global_low_strength_percent", 100);
+  callback::on_gameplay_started(&on_gameplay_started);
+  load::main();
+  level.domflagbasefxoverride = &dom_flag_base_fx_override;
+  level.domflagcapfxoverride = &dom_flag_cap_fx_override;
+  util::waitforclient(0);
+}
+
+function on_gameplay_started(localclientnum) {
+  waitframe(1);
+  util::function_8eb5d4b0(500, 1.5);
+}
+
+function dom_flag_base_fx_override(flag, team) {
+  switch (flag.name) {
+    case # "a":
+      if(team == # "neutral") {
+        return "ui/fx_dom_marker_neutral_r120";
+      } else {
+        return "ui/fx_dom_marker_team_r120";
+      }
+
+      break;
+    case # "b":
+      if(team == # "neutral") {
+        return "ui/fx_dom_marker_neutral_r120";
+      } else {
+        return "ui/fx_dom_marker_team_r120";
+      }
+
+      break;
+    case # "c":
+      if(team == # "neutral") {
+        return "ui/fx_dom_marker_neutral_r120";
+      } else {
+        return "ui/fx_dom_marker_team_r120";
+      }
+
+      break;
+  }
+}
+
+function dom_flag_cap_fx_override(flag, team) {
+  switch (flag.name) {
+    case # "a":
+      if(team == # "neutral") {
+        return "ui/fx_dom_cap_indicator_neutral_r120";
+      } else {
+        return "ui/fx_dom_cap_indicator_team_r120";
+      }
+
+      break;
+    case # "b":
+      if(team == # "neutral") {
+        return "ui/fx_dom_cap_indicator_neutral_r120";
+      } else {
+        return "ui/fx_dom_cap_indicator_team_r120";
+      }
+
+      break;
+    case # "c":
+      if(team == # "neutral") {
+        return "ui/fx_dom_cap_indicator_neutral_r120";
+      } else {
+        return "ui/fx_dom_cap_indicator_team_r120";
+      }
+
+      break;
+  }
+}
