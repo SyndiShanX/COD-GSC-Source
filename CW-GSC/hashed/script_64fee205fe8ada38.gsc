@@ -529,7 +529,7 @@ function private function_d321dcc8(var_af0000ca, to_target) {
   var_dc77dd5c = vectorcross(to_target, (0, 0, var_817b26d2));
   var_d01d9a4b = to_target * 100 + var_dc77dd5c * 100 + self.origin;
   bullet_trace = bulletTrace(self.origin, var_d01d9a4b, 0, self);
-  fraction = bullet_trace[# "fraction"];
+  fraction = bullet_trace[#"fraction"];
   result = (0, 0, 0);
 
   if(fraction > 0 && fraction < 1) {

@@ -69,7 +69,7 @@ function function_93b178ae() {
 }
 
 function function_a4b3da97(trace) {
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 

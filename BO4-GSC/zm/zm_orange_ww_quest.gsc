@@ -185,7 +185,7 @@ function_f7a8831a() {
     var_3eb924ae = spawn("script_origin", self.origin);
     var_3eb924ae playLoopSound(#"hash_549b97233315d94");
     level.s_ww_quest.s_icicle_in_pot scene::play("melt");
-    level.s_ww_quest.var_27a40ea3 = level.s_ww_quest.s_icicle_in_pot.scene_ents[# "prop 1"];
+    level.s_ww_quest.var_27a40ea3 = level.s_ww_quest.s_icicle_in_pot.scene_ents[#"prop 1"];
     level.s_ww_quest.var_27a40ea3 hidepart("tag_icicle", "p8_fxanim_zm_orange_frozen_key", 1);
     level.s_ww_quest.s_icicle_in_pot scene::play("evaporate");
     var_3eb924ae delete();

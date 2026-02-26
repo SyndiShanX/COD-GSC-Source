@@ -182,53 +182,53 @@ hiding_door_guy(door_org, trigger, door, door_clip, badplaceBrush) {
 
     //----------------- // CHARGE CONDITION + CHANCE
     //----------------- if(self hiding_door_guy_should_charge(direction, enemy, timesFired)) {
-      scene = "jump";
-      if(coinToss()) {
-        if(self mayMoveToPoint(animscripts\utility::getAnimEndPos(level.scr_anim[self.animname]["kick"])))
-          scene = "kick";
-      }
-
-      // connect paths on the door and handle player clip
-      thread hiding_door_death_door_connections(door_clip, badplaceBrush);
-      door_org notify("push_player");
-
-      // stop the thread that waits for him to break out of door behavior to open the door since this anim opens it for us
-      self notify("charge");
-
-      // guy charges out
-      self.allowdeath = true;
-      self.health = 100;
-      self clear_deathanim();
-      door_org anim_single(guy_and_door, scene);
-
-      // now he goes to exposed combat
-      self quit_door_behavior();
-      return;
+    scene = "jump";
+    if(coinToss()) {
+      if(self mayMoveToPoint(animscripts\utility::getAnimEndPos(level.scr_anim[self.animname]["kick"])))
+        scene = "kick";
     }
 
-    //----------------- // THROW A GRENADE?
-    //----------------- // randomly do grenade throw if the AI has grenade ammo. More likely if hte AI has more grenades
-    if(self hiding_door_guy_should_throw_grenade(direction, timesFired)) {
-      self.grenadeammo--;
-      scene = "grenade";
-    }
+    // connect paths on the door and handle player clip
+    thread hiding_door_death_door_connections(door_clip, badplaceBrush);
+    door_org notify("push_player");
 
-    counter = 0;
-    timesFired++;
+    // stop the thread that waits for him to break out of door behavior to open the door since this anim opens it for us
+    self notify("charge");
 
-    //----------------- // DO ANIM
-    //----------------- door_org thread anim_single(guy_and_door, scene);
+    // guy charges out
+    self.allowdeath = true;
+    self.health = 100;
+    self clear_deathanim();
+    door_org anim_single(guy_and_door, scene);
 
-    // delay the settime by a frame or it wont work
-    // this is so we can skip the slow creep part of the animation
-    delaythread(0.05, ::anim_set_time, guy_and_door, scene, 0.3);
-    door_org waittill(scene);
-
-    //----------------- // IDLE FOR A MOMENT
-    //----------------- door_org thread anim_first_frame(guy_and_door, "open");
-    wait(randomfloatrange(0.2, 1.0));
-    door_org notify("stop_loop");
+    // now he goes to exposed combat
+    self quit_door_behavior();
+    return;
   }
+
+  //----------------- // THROW A GRENADE?
+  //----------------- // randomly do grenade throw if the AI has grenade ammo. More likely if hte AI has more grenades
+  if(self hiding_door_guy_should_throw_grenade(direction, timesFired)) {
+    self.grenadeammo--;
+    scene = "grenade";
+  }
+
+  counter = 0;
+  timesFired++;
+
+  //----------------- // DO ANIM
+  //----------------- door_org thread anim_single(guy_and_door, scene);
+
+  // delay the settime by a frame or it wont work
+  // this is so we can skip the slow creep part of the animation
+  delaythread(0.05, ::anim_set_time, guy_and_door, scene, 0.3);
+  door_org waittill(scene);
+
+  //----------------- // IDLE FOR A MOMENT
+  //----------------- door_org thread anim_first_frame(guy_and_door, "open");
+  wait(randomfloatrange(0.2, 1.0));
+  door_org notify("stop_loop");
+}
 }
 
 quit_door_behavior(sightTraceRequired, door_org) {

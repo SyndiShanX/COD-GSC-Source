@@ -347,12 +347,12 @@ function_23978edd() {
   }
 
   if(zm_utility::get_story() == 1) {
-    self.var_fd05e363 = level.hero_weapon[# "gravityspikes"][self.var_72d6f15d];
+    self.var_fd05e363 = level.hero_weapon[#"gravityspikes"][self.var_72d6f15d];
     self.var_b708af7b = "gravityspikes";
     return;
   }
 
-  self.var_fd05e363 = level.hero_weapon[# "chakram"][self.var_72d6f15d];
+  self.var_fd05e363 = level.hero_weapon[#"chakram"][self.var_72d6f15d];
   self.var_b708af7b = "chakram";
 }
 

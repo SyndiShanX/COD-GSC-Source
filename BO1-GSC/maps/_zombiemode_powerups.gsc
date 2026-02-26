@@ -284,7 +284,7 @@ add_zombie_powerup(powerup_name, model_name, hint, fx) {
 add_zombie_special_drop(powerup_name) {
   level.zombie_special_drop_array[level.zombie_special_drop_array.size] = powerup_name;
 }
-#include_zombie_powerup(powerup_name) {
+include_zombie_powerup(powerup_name) {
   if("1" == getDvar(#"mutator_noPowerups")) {
     return;
   }

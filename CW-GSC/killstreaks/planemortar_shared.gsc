@@ -33,7 +33,7 @@ function init_shared() {
 
 function function_a385666(slot) {
   assert(slot != 3);
-  var_127d1ed1 = isDefined(self.pers[# "hash_1aaccfe69e328d6e"][slot]) ? self.pers[# "hash_1aaccfe69e328d6e"][slot] : 0;
+  var_127d1ed1 = isDefined(self.pers[#"hash_1aaccfe69e328d6e"][slot]) ? self.pers[#"hash_1aaccfe69e328d6e"][slot] : 0;
   return var_127d1ed1 > 0;
 }
 
@@ -68,7 +68,7 @@ function selectplanemortarlocation(hardpointtype) {
   params = killstreaks::get_script_bundle("planemortar");
   self airsupport::function_9e2054b0(&function_a3cb6b44);
 
-  if(is_true(params.var_7436c1c5) && !is_true(self.pers[# "mortarradarused"])) {
+  if(is_true(params.var_7436c1c5) && !is_true(self.pers[#"mortarradarused"])) {
     self thread airsupport::singleradarsweep();
   }
 
@@ -84,14 +84,14 @@ function selectplanemortarlocation(hardpointtype) {
   killstreakid = undefined;
   slot = killstreaks::function_a2c375bb(hardpointtype);
 
-  if(!isDefined(self.pers[# "hash_1aaccfe69e328d6e"])) {
-    self.pers[# "hash_1aaccfe69e328d6e"] = [];
-  } else if(!isarray(self.pers[# "hash_1aaccfe69e328d6e"])) {
-    self.pers[# "hash_1aaccfe69e328d6e"] = array(self.pers[# "hash_1aaccfe69e328d6e"]);
+  if(!isDefined(self.pers[#"hash_1aaccfe69e328d6e"])) {
+    self.pers[#"hash_1aaccfe69e328d6e"] = [];
+  } else if(!isarray(self.pers[#"hash_1aaccfe69e328d6e"])) {
+    self.pers[#"hash_1aaccfe69e328d6e"] = array(self.pers[#"hash_1aaccfe69e328d6e"]);
   }
 
-  selections = isDefined(self.pers[# "hash_1aaccfe69e328d6e"][slot]) ? self.pers[# "hash_1aaccfe69e328d6e"][slot] : 3;
-  self.pers[# "hash_1aaccfe69e328d6e"][slot] = selections;
+  selections = isDefined(self.pers[#"hash_1aaccfe69e328d6e"][slot]) ? self.pers[#"hash_1aaccfe69e328d6e"][slot] : 3;
+  self.pers[#"hash_1aaccfe69e328d6e"][slot] = selections;
   clientfield::set_player_uimodel("hudItems.planeMortarShotsRemaining", selections);
   yaw = randomintrange(0, 360);
 
@@ -103,8 +103,8 @@ function selectplanemortarlocation(hardpointtype) {
         self thread function_16f87e96(6);
       }
 
-      self.pers[# "hash_1aaccfe69e328d6e"][slot] = selections - i;
-      self.pers[# "mortarradarused"] = 1;
+      self.pers[#"hash_1aaccfe69e328d6e"][slot] = selections - i;
+      self.pers[#"mortarradarused"] = 1;
       self notify(#"cancel_selection");
       return false;
     }
@@ -141,8 +141,8 @@ function selectplanemortarlocation(hardpointtype) {
   }
 
   self notify(#"used");
-  self.pers[# "hash_1aaccfe69e328d6e"][slot] = undefined;
-  self.pers[# "mortarradarused"] = 0;
+  self.pers[#"hash_1aaccfe69e328d6e"][slot] = undefined;
+  self.pers[#"mortarradarused"] = 0;
   self thread function_16f87e96(6);
   return true;
 }
@@ -175,7 +175,7 @@ function function_fd2f978f(params, position, team, yaw, killstreakid) {
 
   var_b0490eb9 = getheliheightlockheight(position);
   trace = groundtrace(position + (0, 0, var_b0490eb9), position + (0, 0, var_b0490eb9 * -1), 1, undefined);
-  hitposition = trace[# "position"];
+  hitposition = trace[#"position"];
   level influencers::create_enemy_influencer("artillery", hitposition, team);
   self thread function_83e61117(hitposition, yaw, killstreakid);
 }
@@ -233,7 +233,7 @@ function function_5f89ffc2(hardpointtype, isfrominventory = 0, slot) {
 
   if(isDefined(self) && result._notify == "death") {
     if(!is_true(getgametypesetting(#"hash_7647d0e9a45eeca6"))) {
-      self.pers[# "hash_1aaccfe69e328d6e"][slot] = undefined;
+      self.pers[#"hash_1aaccfe69e328d6e"][slot] = undefined;
     }
 
     self killstreaks::function_aa56f6a0(hardpointtype, isfrominventory);
@@ -251,7 +251,7 @@ function planemortar_watchforendnotify(team, killstreak_id, killstreaktype, isfr
   killstreakrules::killstreakstop("planemortar", killstreak_id, killstreaktype);
 
   if(isDefined(self) && !isfrominventory) {
-    var_b47e114f = isDefined(self.pers[# "hash_1aaccfe69e328d6e"][slot]) ? self.pers[# "hash_1aaccfe69e328d6e"][slot] : 0;
+    var_b47e114f = isDefined(self.pers[#"hash_1aaccfe69e328d6e"][slot]) ? self.pers[#"hash_1aaccfe69e328d6e"][slot] : 0;
 
     if(!var_b47e114f) {
       self killstreakrules::function_d9f8f32b("planemortar");
@@ -260,7 +260,7 @@ function planemortar_watchforendnotify(team, killstreak_id, killstreaktype, isfr
 }
 
 function private function_ac3ad2f8(ents) {
-  var_5496c504 = ents[# "bomb"];
+  var_5496c504 = ents[#"bomb"];
   var_5496c504 endon(#"death");
   var_5496c504 waittill(#"spawn_killcam");
   angles = (35, self.angles[1] - 180, 0);
@@ -380,7 +380,7 @@ function followbomb(plane, position, direction, impact, player) {
   player endon(#"emp_jammed");
   wait 2 * 5 / 12;
   position.killcament unlink();
-  position.killcament moveto(impact[# "position"] + (0, 0, 1000) + vectorscale(direction, -600), 0.8, 0, 0.2);
+  position.killcament moveto(impact[#"position"] + (0, 0, 1000) + vectorscale(direction, -600), 0.8, 0, 0.2);
 }
 
 function lookatexplosion(bomb) {

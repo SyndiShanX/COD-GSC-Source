@@ -63,7 +63,7 @@ function private postinit() {
 
   level thread setup_devgui();
 
-  level._effect[# "samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
 }
 
 function private on_player_connect() {

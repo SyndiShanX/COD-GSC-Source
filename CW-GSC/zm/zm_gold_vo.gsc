@@ -130,7 +130,7 @@ function private function_303e39b2() {
   }
 
   level flag::wait_till(#"intro_scene_done");
-  var_d0767760 = array::random([# "hash_6650ecafb63fe3fc", #"hash_6650efafb63fe915", #"hash_6650eeafb63fe762", #"hash_6650e9afb63fdee3", #"hash_6650e8afb63fdd30"]);
+  var_d0767760 = array::random([#"hash_6650ecafb63fe3fc", #"hash_6650efafb63fe915", #"hash_6650eeafb63fe762", #"hash_6650e9afb63fdee3", #"hash_6650e8afb63fdd30"]);
   level zm_vo::function_7622cb70(var_d0767760);
   level flag::set("match_start_vo_done");
 }
@@ -146,8 +146,8 @@ function function_81971b17() {
 
 function function_e23b5b30() {
   level endon(#"end_game", #"pap_quest_completed");
-  var_a2bc7f20 = array::random([# "hash_23c8a602a3fb55a9", #"hash_23c8a302a3fb5090", #"hash_23c8a402a3fb5243", #"hash_23c8a902a3fb5ac2", #"hash_23c8aa02a3fb5c75"]);
-  var_c08d39 = array::random([# "hash_7e78bbc835a04048", #"hash_7e78bec835a04561", #"hash_7e78bdc835a043ae", #"hash_7e78c0c835a048c7", #"hash_7e78bfc835a04714"]);
+  var_a2bc7f20 = array::random([#"hash_23c8a602a3fb55a9", #"hash_23c8a302a3fb5090", #"hash_23c8a402a3fb5243", #"hash_23c8a902a3fb5ac2", #"hash_23c8aa02a3fb5c75"]);
+  var_c08d39 = array::random([#"hash_7e78bbc835a04048", #"hash_7e78bec835a04561", #"hash_7e78bdc835a043ae", #"hash_7e78c0c835a048c7", #"hash_7e78bfc835a04714"]);
   level waittill(#"enable_firebase_zone", #"fasttravel_bought");
   zm_vo::function_3c173d37();
 
@@ -354,7 +354,7 @@ function function_df0c6e4e() {
 
   if(var_bd78bbd3 > 0) {
     level.var_95f26c94 = 1;
-    str_vo_alias = array::random([# "hash_3a7acc934b1f6ecb", #"hash_4d40668d67dbdd5c", #"hash_1745cd3e306dda05"]);
+    str_vo_alias = array::random([#"hash_3a7acc934b1f6ecb", #"hash_4d40668d67dbdd5c", #"hash_1745cd3e306dda05"]);
     level.ravenov thread zm_vo::function_d6f8bbd9(str_vo_alias);
   }
 }
@@ -380,7 +380,7 @@ function function_891da57a() {
 
   if(!is_true(level.var_c52dc4d4)) {
     level.var_c52dc4d4 = 1;
-    var_d0767760 = array::random([# "hash_a3e6449ce5efb6e", #"hash_a3e6349ce5ef9bb", #"hash_a3e6249ce5ef808", #"hash_a3e6949ce5f03ed", #"hash_a3e6849ce5f023a"]);
+    var_d0767760 = array::random([#"hash_a3e6449ce5efb6e", #"hash_a3e6349ce5ef9bb", #"hash_a3e6249ce5ef808", #"hash_a3e6949ce5f03ed", #"hash_a3e6849ce5f023a"]);
     level zm_vo::function_7622cb70(var_d0767760, 1);
   }
 
@@ -390,7 +390,7 @@ function function_891da57a() {
     level thread zm_vo::function_7622cb70(#"hash_399464c7667b8dfb");
     level waittill(#"end_of_round");
     wait 2;
-    var_d0767760 = array::random([# "hash_b4026459c0ce1d4", #"hash_b4029459c0ce6ed", #"hash_b4028459c0ce53a", #"hash_b4023459c0cdcbb", #"hash_b4022459c0cdb08"]);
+    var_d0767760 = array::random([#"hash_b4026459c0ce1d4", #"hash_b4029459c0ce6ed", #"hash_b4028459c0ce53a", #"hash_b4023459c0cdcbb", #"hash_b4022459c0cdb08"]);
     level zm_vo::function_7622cb70(var_d0767760);
     wait 2;
     level thread function_a99c18d7();
@@ -411,7 +411,7 @@ function function_65937665() {
       var_d0767760 = # "hash_359dd066218ec563";
       break;
     default:
-      var_d0767760 = array::random([# "hash_359dc466218eb0ff", #"hash_359dd466218ecc2f", #"hash_359dd066218ec563"]);
+      var_d0767760 = array::random([#"hash_359dc466218eb0ff", #"hash_359dd466218ecc2f", #"hash_359dd066218ec563"]);
       break;
   }
 
@@ -422,7 +422,7 @@ function function_65937665() {
   }
 
   wait 2;
-  var_b3b54a4 = array::random([# "hash_4e1dbaa19aa92b93", #"hash_4e1dbba19aa92d46", #"hash_4e1dbca19aa92ef9"]);
+  var_b3b54a4 = array::random([#"hash_4e1dbaa19aa92b93", #"hash_4e1dbba19aa92d46", #"hash_4e1dbca19aa92ef9"]);
   level zm_vo::function_7622cb70(var_b3b54a4);
 }
 
@@ -617,16 +617,16 @@ function function_421f7a59() {
 
   switch (level.var_85422c0e) {
     case # "strauss":
-      var_b3b54a4 = array::random([# "hash_4b1d5badb2764a84", #"hash_4b1d5eadb2764f9d", #"hash_4b1d5dadb2764dea"]);
+      var_b3b54a4 = array::random([#"hash_4b1d5badb2764a84", #"hash_4b1d5eadb2764f9d", #"hash_4b1d5dadb2764dea"]);
       break;
     case # "carver":
-      var_b3b54a4 = array::random([# "hash_4b53dbadb2a4b374", #"hash_4b53deadb2a4b88d", #"hash_4b53ddadb2a4b6da"]);
+      var_b3b54a4 = array::random([#"hash_4b53dbadb2a4b374", #"hash_4b53deadb2a4b88d", #"hash_4b53ddadb2a4b6da"]);
       break;
     case # "grey":
-      var_b3b54a4 = array::random([# "hash_4b4643adb29926d0", #"hash_4b4646adb2992be9", #"hash_4b4645adb2992a36"]);
+      var_b3b54a4 = array::random([#"hash_4b4643adb29926d0", #"hash_4b4646adb2992be9", #"hash_4b4645adb2992a36"]);
       break;
     default:
-      var_b3b54a4 = array::random([# "hash_4b1d5badb2764a84", #"hash_4b1d5eadb2764f9d", #"hash_4b1d5dadb2764dea"]);
+      var_b3b54a4 = array::random([#"hash_4b1d5badb2764a84", #"hash_4b1d5eadb2764f9d", #"hash_4b1d5dadb2764dea"]);
       break;
   }
 
@@ -740,16 +740,16 @@ function function_c732de82(e_player) {
 function function_68c6149e() {
   switch (level.var_85422c0e) {
     case # "strauss":
-      var_b3b54a4 = array::random([# "hash_1b5b23733cdc4178", #"hash_1b5b26733cdc4691", #"hash_1b5b25733cdc44de"]);
+      var_b3b54a4 = array::random([#"hash_1b5b23733cdc4178", #"hash_1b5b26733cdc4691", #"hash_1b5b25733cdc44de"]);
       break;
     case # "carver":
-      var_b3b54a4 = array::random([# "hash_1b91a3733d0aaa68", #"hash_1b91a6733d0aaf81", #"hash_1b91a5733d0aadce"]);
+      var_b3b54a4 = array::random([#"hash_1b91a3733d0aaa68", #"hash_1b91a6733d0aaf81", #"hash_1b91a5733d0aadce"]);
       break;
     case # "grey":
-      var_b3b54a4 = array::random([# "hash_1b9f1b733d1600ac", #"hash_1b9f1e733d1605c5", #"hash_1b9f1d733d160412"]);
+      var_b3b54a4 = array::random([#"hash_1b9f1b733d1600ac", #"hash_1b9f1e733d1605c5", #"hash_1b9f1d733d160412"]);
       break;
     default:
-      var_b3b54a4 = array::random([# "hash_1b5b23733cdc4178", #"hash_1b5b26733cdc4691", #"hash_1b5b25733cdc44de"]);
+      var_b3b54a4 = array::random([#"hash_1b5b23733cdc4178", #"hash_1b5b26733cdc4691", #"hash_1b5b25733cdc44de"]);
       break;
   }
 
@@ -776,7 +776,7 @@ function function_a71f7322() {
 }
 
 function private function_d50a530() {
-  level flag::wait_till_all([# "hash_1dc3d47b1604d916", #"hash_2651a51980ef57ee"]);
+  level flag::wait_till_all([#"hash_1dc3d47b1604d916", #"hash_2651a51980ef57ee"]);
 
   switch (level.var_85422c0e) {
     case # "strauss":

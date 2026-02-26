@@ -81,18 +81,18 @@ init() {
 }
 
 function_3d4e24ea() {
-  level._effect[# "hash_4a38c13e2040d160"] = # "hash_11e609d597dcebf2";
-  level.fx_elevator_light = level._effect[# "hash_4a38c13e2040d160"];
-  level._effect[# "hash_336249bfea00c9ea"] = # "hash_48ec8658075edc9d";
-  level.var_dca712ff = level._effect[# "hash_336249bfea00c9ea"];
-  level._effect[# "hash_3718db938f7babf7"] = # "hash_142b1b8f881ae741";
-  level.var_715ae9f9 = level._effect[# "hash_3718db938f7babf7"];
-  level._effect[# "hash_3b796b3101b76878"] = # "hash_4fc36e212e5b5b8a";
-  level.var_e33251c7 = level._effect[# "hash_3b796b3101b76878"];
-  level._effect[# "hash_1d090c7817f1e26d"] = # "hash_340a3cade524696d";
-  level.var_41a1bc06 = level._effect[# "hash_1d090c7817f1e26d"];
-  level._effect[# "hash_7c83294db356d63a"] = # "hash_499e66437fc6ab02";
-  level.var_8caf5068 = level._effect[# "hash_7c83294db356d63a"];
+  level._effect[#"hash_4a38c13e2040d160"] = # "hash_11e609d597dcebf2";
+  level.fx_elevator_light = level._effect[#"hash_4a38c13e2040d160"];
+  level._effect[#"hash_336249bfea00c9ea"] = # "hash_48ec8658075edc9d";
+  level.var_dca712ff = level._effect[#"hash_336249bfea00c9ea"];
+  level._effect[#"hash_3718db938f7babf7"] = # "hash_142b1b8f881ae741";
+  level.var_715ae9f9 = level._effect[#"hash_3718db938f7babf7"];
+  level._effect[#"hash_3b796b3101b76878"] = # "hash_4fc36e212e5b5b8a";
+  level.var_e33251c7 = level._effect[#"hash_3b796b3101b76878"];
+  level._effect[#"hash_1d090c7817f1e26d"] = # "hash_340a3cade524696d";
+  level.var_41a1bc06 = level._effect[#"hash_1d090c7817f1e26d"];
+  level._effect[#"hash_7c83294db356d63a"] = # "hash_499e66437fc6ab02";
+  level.var_8caf5068 = level._effect[#"hash_7c83294db356d63a"];
 }
 
 registergondola_moving_watcher() {
@@ -643,7 +643,7 @@ elev_clean_up_corpses() {
 }
 
 elev_remove_corpses() {
-  playFX(level._effect[# "dog_gib"], self.origin);
+  playFX(level._effect[#"dog_gib"], self.origin);
   self delete();
 }
 

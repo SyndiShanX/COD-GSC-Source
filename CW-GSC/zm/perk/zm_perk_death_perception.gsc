@@ -83,11 +83,11 @@ function on_item_pickup(s_params) {
 function function_9b484511() {}
 
 function function_f9d745da() {
-  level._effect[# "deathperception_light"] = "zombie/fx9_perk_death_perception";
-  level.machine_assets[# "talent_deathperception"] = spawnStruct();
-  level.machine_assets[# "talent_deathperception"].weapon = getweapon("zombie_perk_bottle_death_perception");
-  level.machine_assets[# "talent_deathperception"].off_model = "p9_sur_machine_death_perception";
-  level.machine_assets[# "talent_deathperception"].on_model = "p9_sur_machine_death_perception";
+  level._effect[#"deathperception_light"] = "zombie/fx9_perk_death_perception";
+  level.machine_assets[#"talent_deathperception"] = spawnStruct();
+  level.machine_assets[#"talent_deathperception"].weapon = getweapon("zombie_perk_bottle_death_perception");
+  level.machine_assets[#"talent_deathperception"].off_model = "p9_sur_machine_death_perception";
+  level.machine_assets[#"talent_deathperception"].on_model = "p9_sur_machine_death_perception";
 }
 
 function function_14ab8b5c() {

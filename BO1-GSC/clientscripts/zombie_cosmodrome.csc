@@ -111,7 +111,7 @@ register_zombie_types() {
   character\clientscripts\c_zom_cosmo_spetznaz::register_gibs();
   character\clientscripts\c_zom_cosmo_cosmonaut::register_gibs();
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
   include_weapon("m1911_zm", false);

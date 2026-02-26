@@ -87,46 +87,46 @@ StingerIRTLoop() {
     //		CLU is locking on to a target.
     //		CLU is searching for a target to begin locking on to.
     //------------------------- if(self.stinger.stingerLockFinalized) {
-      if(!self IsStillValidTarget(self.stinger.stingerTarget)) {
-        self ClearIRTarget();
-        continue;
-      }
-
-      self thread LoopLocalLockSound("javelin_clu_lock", 0.75);
-
-      self SetTargetTooClose(self.stinger.stingerTarget);
+    if(!self IsStillValidTarget(self.stinger.stingerTarget)) {
+      self ClearIRTarget();
       continue;
     }
 
-    if(self.stinger.stingerLockStarted) {
-      if(!self IsStillValidTarget(self.stinger.stingerTarget)) {
-        self ClearIRTarget();
-        continue;
-      }
+    self thread LoopLocalLockSound("javelin_clu_lock", 0.75);
 
-      timePassed = getTime() - self.stinger.stingerLockStartTime;
-      if(timePassed < LOCK_LENGTH) {
-        continue;
-      }
-      assert(isDefined(self.stinger.stingerTarget));
-      self notify("stop_lockon_sound");
-      self.stinger.stingerLockFinalized = true;
-      self WeaponLockFinalize(self.stinger.stingerTarget);
-      self SetTargetTooClose(self.stinger.stingerTarget);
-
-      continue;
-    }
-
-    bestTarget = self GetBestStingerTarget();
-    if(!isDefined(bestTarget)) {
-      continue;
-    }
-    self.stinger.stingerTarget = bestTarget;
-    self.stinger.stingerLockStartTime = getTime();
-    self.stinger.stingerLockStarted = true;
-
-    self thread LoopLocalSeekSound("javelin_clu_aquiring_lock", 0.6);
+    self SetTargetTooClose(self.stinger.stingerTarget);
+    continue;
   }
+
+  if(self.stinger.stingerLockStarted) {
+    if(!self IsStillValidTarget(self.stinger.stingerTarget)) {
+      self ClearIRTarget();
+      continue;
+    }
+
+    timePassed = getTime() - self.stinger.stingerLockStartTime;
+    if(timePassed < LOCK_LENGTH) {
+      continue;
+    }
+    assert(isDefined(self.stinger.stingerTarget));
+    self notify("stop_lockon_sound");
+    self.stinger.stingerLockFinalized = true;
+    self WeaponLockFinalize(self.stinger.stingerTarget);
+    self SetTargetTooClose(self.stinger.stingerTarget);
+
+    continue;
+  }
+
+  bestTarget = self GetBestStingerTarget();
+  if(!isDefined(bestTarget)) {
+    continue;
+  }
+  self.stinger.stingerTarget = bestTarget;
+  self.stinger.stingerLockStartTime = getTime();
+  self.stinger.stingerLockStarted = true;
+
+  self thread LoopLocalSeekSound("javelin_clu_aquiring_lock", 0.6);
+}
 }
 
 GetBestStingerTarget() {

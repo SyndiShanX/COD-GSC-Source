@@ -648,6 +648,6 @@ function function_4b2f19cb() {
   angle = randomint(360);
   vec = (distance, 0, 0);
   rotated = namespace_ec06fe4a::rotatevec(vec, angle);
-  groundpos = groundtrace(self.var_c8b974fe + rotated + (0, 0, 1024) + (0, 0, 8), self.var_c8b974fe + rotated + (0, 0, 1024) + (0, 0, -100000), 0, self)[# "position"];
+  groundpos = groundtrace(self.var_c8b974fe + rotated + (0, 0, 1024) + (0, 0, 8), self.var_c8b974fe + rotated + (0, 0, 1024) + (0, 0, -100000), 0, self)[#"position"];
   return getclosestpointonnavmesh(groundpos, 10000);
 }

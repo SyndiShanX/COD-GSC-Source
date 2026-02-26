@@ -37,17 +37,17 @@ function register(var_cb91ced3) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_tungsten_title_cards"])) {
-    level.var_ae746e8f[# "zm_tungsten_title_cards"] = [];
+  if(!isDefined(level.var_ae746e8f[#"zm_tungsten_title_cards"])) {
+    level.var_ae746e8f[#"zm_tungsten_title_cards"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_tungsten_title_cards"])) {
-    level.var_ae746e8f[# "zm_tungsten_title_cards"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "zm_tungsten_title_cards"])) {
-    level.var_ae746e8f[# "zm_tungsten_title_cards"] = array(level.var_ae746e8f[# "zm_tungsten_title_cards"]);
+  if(!isDefined(level.var_ae746e8f[#"zm_tungsten_title_cards"])) {
+    level.var_ae746e8f[#"zm_tungsten_title_cards"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"zm_tungsten_title_cards"])) {
+    level.var_ae746e8f[#"zm_tungsten_title_cards"] = array(level.var_ae746e8f[#"zm_tungsten_title_cards"]);
   }
 
-  level.var_ae746e8f[# "zm_tungsten_title_cards"][level.var_ae746e8f[# "zm_tungsten_title_cards"].size] = elem;
+  level.var_ae746e8f[#"zm_tungsten_title_cards"][level.var_ae746e8f[#"zm_tungsten_title_cards"].size] = elem;
 }
 
 function register_clientside() {

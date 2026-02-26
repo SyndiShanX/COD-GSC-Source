@@ -2299,7 +2299,7 @@ taking_cover_tanks_(player, perk, n_slot, var_3468124) {
   }
 
   if(player.var_47654123[n_slot]) {
-    player function_81bc6765(n_slot, level._custom_perks[# "specialty_mystery"].alias);
+    player function_81bc6765(n_slot, level._custom_perks[#"specialty_mystery"].alias);
     player function_2ac7579(n_slot, 0);
   }
 
@@ -2592,7 +2592,7 @@ function_329ae65e(perk, n_slot) {
 
     if(self.var_47654123[n_slot]) {
       if(var_ac32c1b8) {
-        self function_81bc6765(n_slot, level._custom_perks[# "specialty_mystery"].alias);
+        self function_81bc6765(n_slot, level._custom_perks[#"specialty_mystery"].alias);
       }
     } else {
       self function_fb633f9d(n_slot, 0);
@@ -2871,7 +2871,7 @@ function_8b413937(var_3468124) {
 }
 
 function_72c30be7(var_dd74d130, var_3468124) {
-  var_3468124.mdl_altar = var_dd74d130[# "prop 1"];
+  var_3468124.mdl_altar = var_dd74d130[#"prop 1"];
   var_3468124.mdl_altar clientfield::set("" + # "hash_cf74c35ecc5a49", 1);
 }
 

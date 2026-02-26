@@ -143,7 +143,7 @@ function_3e9077b(localclientnum) {
         trace_end = test_point + vectorscale(player_forward, trace_dist * -1);
         trace = bulletTrace(test_point, trace_end, 1, self);
 
-        if(trace[# "fraction"] < 1 && trace[# "entity"] === player) {
+        if(trace[#"fraction"] < 1 && trace[#"entity"] === player) {
           los = 1;
           break;
         }

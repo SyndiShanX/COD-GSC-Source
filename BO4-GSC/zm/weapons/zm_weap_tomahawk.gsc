@@ -362,21 +362,21 @@ tomahawk_ricochet_attack(var_65f2e452, e_grenade, var_bc201c9e, e_ignore) {
   do {
     s_trace = bulletTrace(v_start_pos, v_start_pos + anglesToForward(self getplayerangles()) * 900, 1, e_ignore);
 
-    if(isDefined(s_trace[# "entity"]) && isinarray(getaiteamarray(level.zombie_team), s_trace[# "entity"])) {
-      if(!(isDefined(s_trace[# "entity"].hit_by_tomahawk) && s_trace[# "entity"].hit_by_tomahawk)) {
+    if(isDefined(s_trace[#"entity"]) && isinarray(getaiteamarray(level.zombie_team), s_trace[#"entity"])) {
+      if(!(isDefined(s_trace[#"entity"].hit_by_tomahawk) && s_trace[#"entity"].hit_by_tomahawk)) {
         if(!isDefined(var_f500f73e)) {
           var_f500f73e = [];
         } else if(!isarray(var_f500f73e)) {
           var_f500f73e = array(var_f500f73e);
         }
 
-        if(!isinarray(var_f500f73e, s_trace[# "entity"])) {
-          var_f500f73e[var_f500f73e.size] = s_trace[# "entity"];
+        if(!isinarray(var_f500f73e, s_trace[#"entity"])) {
+          var_f500f73e[var_f500f73e.size] = s_trace[#"entity"];
         }
       }
 
-      v_start_pos = s_trace[# "entity"].origin + (0, 0, 50);
-      e_ignore = s_trace[# "entity"];
+      v_start_pos = s_trace[#"entity"].origin + (0, 0, 50);
+      e_ignore = s_trace[#"entity"];
     }
 
     if(var_f500f73e.size >= var_939f6f02) {
@@ -385,7 +385,7 @@ tomahawk_ricochet_attack(var_65f2e452, e_grenade, var_bc201c9e, e_ignore) {
 
     waitframe(1);
   }
-  while(isDefined(s_trace[# "entity"]) && isinarray(a_ai_zombies, s_trace[# "entity"]));
+  while(isDefined(s_trace[#"entity"]) && isinarray(a_ai_zombies, s_trace[#"entity"]));
 
   var_f500f73e = array::remove_undefined(var_f500f73e, 0);
   a_ai_zombies = array::remove_undefined(a_ai_zombies, 0);

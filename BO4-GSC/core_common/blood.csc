@@ -284,12 +284,12 @@ player_splatter(localclientnum) {
       opacity = 0;
 
       for(i = 0; i < 4; i++) {
-        if(isDefined(splatter.splatters[i][# "blur amount"]) && splatter.splatters[i][# "blur amount"] > blur) {
-          blur = splatter.splatters[i][# "blur amount"];
+        if(isDefined(splatter.splatters[i][#"blur amount"]) && splatter.splatters[i][#"blur amount"] > blur) {
+          blur = splatter.splatters[i][#"blur amount"];
         }
 
-        if(isDefined(splatter.splatters[i][# "opacity"]) && splatter.splatters[i][# "opacity"] > opacity) {
-          opacity = splatter.splatters[i][# "opacity"];
+        if(isDefined(splatter.splatters[i][#"opacity"]) && splatter.splatters[i][#"opacity"] > opacity) {
+          opacity = splatter.splatters[i][#"opacity"];
         }
       }
 

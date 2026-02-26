@@ -130,10 +130,10 @@ ambient_flak_flash(point, min_burst_time, max_burst_time) {
     }
 
     fxpos = point.origin + vectorscale(point.forward, randomintrange(min_dist, max_dist));
-    playFX(0, level._effect[# "flak_burst_single"], fxpos);
+    playFX(0, level._effect[#"flak_burst_single"], fxpos);
 
     if(isDefined(level.timeofday) && (level.timeofday == "evening" || level.timeofday == "night")) {
-      playFX(0, level._effect[# "flak_cloudflash_night"], fxpos);
+      playFX(0, level._effect[#"flak_cloudflash_night"], fxpos);
     }
 
     wait randomfloatrange(min_burst_time, max_burst_time);
@@ -369,21 +369,21 @@ clocks_init(clientnum) {
   seconds = curr_time[2];
   hour_hand = getEntArray(clientnum, "hour_hand", "targetname");
   hour_values = [];
-  hour_values[# "hand_time"] = hours;
-  hour_values[# "rotate"] = 30;
-  hour_values[# "rotate_bit"] = 0.00833333;
-  hour_values[# "first_rotate"] = (minutes * 60 + seconds) * hour_values[# "rotate_bit"];
+  hour_values[#"hand_time"] = hours;
+  hour_values[#"rotate"] = 30;
+  hour_values[#"rotate_bit"] = 0.00833333;
+  hour_values[#"first_rotate"] = (minutes * 60 + seconds) * hour_values[#"rotate_bit"];
   minute_hand = getEntArray(clientnum, "minute_hand", "targetname");
   minute_values = [];
-  minute_values[# "hand_time"] = minutes;
-  minute_values[# "rotate"] = 6;
-  minute_values[# "rotate_bit"] = 0.1;
-  minute_values[# "first_rotate"] = seconds * minute_values[# "rotate_bit"];
+  minute_values[#"hand_time"] = minutes;
+  minute_values[#"rotate"] = 6;
+  minute_values[#"rotate_bit"] = 0.1;
+  minute_values[#"first_rotate"] = seconds * minute_values[#"rotate_bit"];
   second_hand = getEntArray(clientnum, "second_hand", "targetname");
   second_values = [];
-  second_values[# "hand_time"] = seconds;
-  second_values[# "rotate"] = 6;
-  second_values[# "rotate_bit"] = 6;
+  second_values[#"hand_time"] = seconds;
+  second_values[#"rotate"] = 6;
+  second_values[#"rotate_bit"] = 6;
   hour_hand_array = getEntArray(clientnum, "hour_hand", "targetname");
 
   if(isDefined(hour_hand_array)) {
@@ -407,7 +407,7 @@ clock_run(time_values) {
   self endon(#"death");
 
   if(isDefined(self.script_noteworthy)) {
-    hour = time_values[# "hand_time"];
+    hour = time_values[#"hand_time"];
     curr_time = getsystemtime(1);
 
     switch (tolower(self.script_noteworthy)) {
@@ -463,14 +463,14 @@ clock_run(time_values) {
       hour -= 12;
     }
 
-    time_values[# "hand_time"] = hour;
+    time_values[#"hand_time"] = hour;
   }
 
-  self rotatepitch(time_values[# "hand_time"] * time_values[# "rotate"], 0.05);
+  self rotatepitch(time_values[#"hand_time"] * time_values[#"rotate"], 0.05);
   self waittill(#"rotatedone");
 
-  if(isDefined(time_values[# "first_rotate"])) {
-    self rotatepitch(time_values[# "first_rotate"], 0.05);
+  if(isDefined(time_values[#"first_rotate"])) {
+    self rotatepitch(time_values[#"first_rotate"], 0.05);
     self waittill(#"rotatedone");
   }
 
@@ -480,7 +480,7 @@ clock_run(time_values) {
     curr_time = getsystemtime();
 
     if(prev_time != curr_time) {
-      self rotatepitch(time_values[# "rotate_bit"], 0.05);
+      self rotatepitch(time_values[#"rotate_bit"], 0.05);
       prev_time = curr_time;
     }
 

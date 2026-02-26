@@ -23,9 +23,9 @@ __init__() {
   level.hawk_settings.bundle = getscriptbundle("hawk_settings_wz");
   level.var_ef287aa1 = [];
   level.var_eba5e1cc = [];
-  level.var_eba5e1cc[# "stand"] = (0, 0, 60);
-  level.var_eba5e1cc[# "crouch"] = (0, 0, 40);
-  level.var_eba5e1cc[# "prone"] = (0, 0, 12);
+  level.var_eba5e1cc[#"stand"] = (0, 0, 60);
+  level.var_eba5e1cc[#"crouch"] = (0, 0, 40);
+  level.var_eba5e1cc[#"prone"] = (0, 0, 12);
   level.var_aac98621 = [];
   level.var_8dfa7ed7 = [];
 
@@ -619,7 +619,7 @@ function_8487fabe(localclientnum) {
     stance_offset = level.var_eba5e1cc[player getstance()];
 
     if(isDefined(vehicle)) {
-      stance_offset = level.var_eba5e1cc[# "crouch"];
+      stance_offset = level.var_eba5e1cc[#"crouch"];
     }
 
     toplayer = vectornormalize(player.origin + stance_offset - self.origin);
@@ -633,7 +633,7 @@ function_8487fabe(localclientnum) {
       if(!in_sight && isDefined(vehicle)) {
         trace_result = bulletTrace(self.origin, player.origin + stance_offset, 0, self);
 
-        if(trace_result[# "fraction"] < 1 && trace_result[# "entity"] === vehicle) {
+        if(trace_result[#"fraction"] < 1 && trace_result[#"entity"] === vehicle) {
           in_sight = 1;
           bullet_traces_this_frame++;
         }

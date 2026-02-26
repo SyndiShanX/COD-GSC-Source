@@ -241,7 +241,7 @@ gladiatortargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return zm_utility::function_64259898(wait_locations[0].origin);
@@ -1249,8 +1249,8 @@ function_78b33d6c(spin_dir = 1) {
 function_88d65504(axe, var_7900b267, move_pos) {
   trace = physicstrace(axe.origin, move_pos, (-16, -16, -12), (16, 16, 12), self);
 
-  if(trace[# "fraction"] < 1) {
-    hit_ent = trace[# "entity"];
+  if(trace[#"fraction"] < 1) {
+    hit_ent = trace[#"entity"];
     level notify(#"hash_435816ec8f13c19b", {
       #var_f1445bd6: trace, #ai_gladiator: self, #mdl_axe: axe, #hit_ent: hit_ent
     });

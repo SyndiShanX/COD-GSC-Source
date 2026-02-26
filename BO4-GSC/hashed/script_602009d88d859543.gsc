@@ -40,8 +40,8 @@ init() {
   level.var_8f8f85f5 = 1;
 
   if(level.var_8f8f85f5) {
-    level.var_261ad4d[# "cafeteria_west_side"] = 0;
-    level.var_261ad4d[# "warden_house_shower"] = 0;
+    level.var_261ad4d[#"cafeteria_west_side"] = 0;
+    level.var_261ad4d[#"warden_house_shower"] = 0;
   }
 
   level.var_dfd49265 = 1;
@@ -283,8 +283,8 @@ function_f789d6ed() {
 }
 
 function_fa3bdfb7() {
-  if(isarray(level.zm_loc_types[# "dog_location"])) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "dog_location"]);
+  if(isarray(level.zm_loc_types[#"dog_location"])) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"dog_location"]);
   }
 
   return s_spawn_loc;

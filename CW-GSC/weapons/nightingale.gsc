@@ -114,7 +114,7 @@ function private function_acc36c55(watcher) {
     }
 
     if(!level.weaponobjectdebug && level.teambased && isPlayer(attacker) && isDefined(self.owner)) {
-      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }
@@ -281,14 +281,14 @@ function private function_400826e(zombie) {
     return self.var_acdc8d71;
   }
 
-  return groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+  return groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
 }
 
 function private function_65ee50ba() {
   check_dist = 10;
   var_1a055edd = [];
   basepos = self.origin;
-  var_2eefd050 = groundtrace(basepos + (0, 0, 8), basepos + (0, 0, -100000), 0, self)[# "position"];
+  var_2eefd050 = groundtrace(basepos + (0, 0, 8), basepos + (0, 0, -100000), 0, self)[#"position"];
 
   if(!isDefined(var_1a055edd)) {
     var_1a055edd = [];
@@ -304,7 +304,7 @@ function private function_65ee50ba() {
 
     while(yoffset <= 1) {
       checkpos = basepos + (xoffset * check_dist, yoffset * check_dist, 0);
-      groundpos = groundtrace(checkpos + (0, 0, 8), checkpos + (0, 0, -100000), 0, self)[# "position"];
+      groundpos = groundtrace(checkpos + (0, 0, 8), checkpos + (0, 0, -100000), 0, self)[#"position"];
 
       if(!isDefined(var_1a055edd)) {
         var_1a055edd = [];

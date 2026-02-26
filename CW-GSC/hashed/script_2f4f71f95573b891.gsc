@@ -377,7 +377,7 @@ function function_4a536ec1() {
 
       level.var_dae3084a.origin = level.var_b949cb00 - v_offset;
       a_trace = bulletTrace(self gettagorigin("tag_flash"), level.var_dae3084a.origin, 1, self, 0, 1);
-      level.var_dae3084a.origin = a_trace[# "position"];
+      level.var_dae3084a.origin = a_trace[#"position"];
       self turret::fire(0);
       wait 0.05;
       i += 0.05;
@@ -427,7 +427,7 @@ function private graveyard_adler_right_stair() {
   e_blocker solid();
   e_blocker disconnectpaths();
   a_ents = [];
-  a_ents[# "adler"] = level.adler;
+  a_ents[#"adler"] = level.adler;
   s_scene = struct::get("scene_adler_right_stair");
   s_scene scene::init(a_ents);
   s_scene scene::play(a_ents);
@@ -504,24 +504,24 @@ function private function_ea6cda92() {
 
 function private function_c40d0905() {
   a_ents = [];
-  a_ents[# "hash_363ff12eba02d468"] = getent("flip_table", "targetname");
-  a_ents[# "hash_363ff12eba02d468"] hide();
+  a_ents[#"hash_363ff12eba02d468"] = getent("flip_table", "targetname");
+  a_ents[#"hash_363ff12eba02d468"] hide();
   var_87b16d96 = getent("flip_table_visible", "targetname");
   var_87b16d96 notsolid();
   level flag::wait_till("flg_graveyard_table_flip");
   s_scene = struct::get("scene_table_flip");
   s_scene scene::init(a_ents);
-  a_ents[# "enemy"] = spawner::simple_spawn_single("vig_table_flip_spawner");
-  a_ents[# "enemy"] endon(#"death");
-  s_scene thread function_b1f33833(a_ents[# "enemy"]);
+  a_ents[#"enemy"] = spawner::simple_spawn_single("vig_table_flip_spawner");
+  a_ents[#"enemy"] endon(#"death");
+  s_scene thread function_b1f33833(a_ents[#"enemy"]);
   s_scene scene::play(a_ents);
   var_e4bd6323 = getnode("table_flip_node", "targetname");
-  a_ents[# "enemy"] ai::set_goal_node(var_e4bd6323);
+  a_ents[#"enemy"] ai::set_goal_node(var_e4bd6323);
 }
 
 function function_b1f33833(var_541d697) {
   var_541d697 endoncallback(&function_6ea46f39, #"death");
-  var_e189955e = self.scene_ents[# "hash_363ff12eba02d468"];
+  var_e189955e = self.scene_ents[#"hash_363ff12eba02d468"];
   var_e189955e waittill(#"flip");
   snd::client_msg("audio_table_flip");
   physicsexplosionsphere(var_e189955e.origin + (0, -16, 32), 60, 0, 0.1);

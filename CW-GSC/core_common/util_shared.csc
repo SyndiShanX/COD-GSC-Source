@@ -1463,17 +1463,17 @@ function preload_frontend(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function set_team_mapping(str_team_for_sidea, str_team_for_sideb) {
   assert(str_team_for_sidea != str_team_for_sideb, "<dev string:x312>");
-  level.team_mapping[# "sidea"] = str_team_for_sidea;
-  level.team_mapping[# "sideb"] = str_team_for_sideb;
-  level.team_mapping[# "attacker"] = str_team_for_sidea;
-  level.team_mapping[# "defender"] = str_team_for_sideb;
-  level.team_mapping[# "attackers"] = str_team_for_sidea;
-  level.team_mapping[# "defenders"] = str_team_for_sideb;
-  level.team_mapping[# "cia"] = # "allies";
-  level.team_mapping[# "kgb"] = # "axis";
-  level.team_mapping[# "teama"] = level.team_mapping[# "sidea"];
-  level.team_mapping[# "teamb"] = level.team_mapping[# "sideb"];
-  level.team_mapping[# "side3"] = # "team3";
+  level.team_mapping[#"sidea"] = str_team_for_sidea;
+  level.team_mapping[#"sideb"] = str_team_for_sideb;
+  level.team_mapping[#"attacker"] = str_team_for_sidea;
+  level.team_mapping[#"defender"] = str_team_for_sideb;
+  level.team_mapping[#"attackers"] = str_team_for_sidea;
+  level.team_mapping[#"defenders"] = str_team_for_sideb;
+  level.team_mapping[#"cia"] = # "allies";
+  level.team_mapping[#"kgb"] = # "axis";
+  level.team_mapping[#"teama"] = level.team_mapping[#"sidea"];
+  level.team_mapping[#"teamb"] = level.team_mapping[#"sideb"];
+  level.team_mapping[#"side3"] = # "team3";
 }
 
 function get_team_mapping(str_team) {
@@ -1781,14 +1781,14 @@ function function_ca4b4e19(localclientnum, var_b5338ccb = 1, var_7bb490d6 = 1) {
   input = [];
 
   if(!gamepadusedlast(localclientnum)) {
-    input[# "look"] = function_3ec868ea(localclientnum, var_7bb490d6);
-    input[# "move"] = (isbuttonPressed(localclientnum, 75) ? -1 : isbuttonPressed(localclientnum, 76) ? 1 : 0, isbuttonPressed(localclientnum, 74) ? -1 : isbuttonPressed(localclientnum, 73) ? 1 : 0, 0);
+    input[#"look"] = function_3ec868ea(localclientnum, var_7bb490d6);
+    input[#"move"] = (isbuttonPressed(localclientnum, 75) ? -1 : isbuttonPressed(localclientnum, 76) ? 1 : 0, isbuttonPressed(localclientnum, 74) ? -1 : isbuttonPressed(localclientnum, 73) ? 1 : 0, 0);
   } else {
     input = self function_b8e6d95c();
 
     if(var_b5338ccb) {
-      input[# "look"] = function_63320ea1(input[# "look"]);
-      input[# "move"] = function_63320ea1(input[# "move"]);
+      input[#"look"] = function_63320ea1(input[#"look"]);
+      input[#"move"] = function_63320ea1(input[#"move"]);
     }
   }
 
@@ -1808,9 +1808,9 @@ function private function_3bb62fcf(localclientnum, right_stick = 1, var_b5338ccb
   var_2e35e6c1 = (0, 0, 0);
 
   if(right_stick) {
-    var_2e35e6c1 = input[# "rightstick"];
+    var_2e35e6c1 = input[#"rightstick"];
   } else {
-    var_2e35e6c1 = input[# "leftstick"];
+    var_2e35e6c1 = input[#"leftstick"];
   }
 
   if(var_b5338ccb) {
@@ -1825,11 +1825,11 @@ function private function_3bb62fcf(localclientnum, right_stick = 1, var_b5338ccb
 }
 
 function function_57f1ac46(localclientnum) {
-  return function_491c4d64(localclientnum)[# "left"];
+  return function_491c4d64(localclientnum)[#"left"];
 }
 
 function function_f35576c(localclientnum) {
-  return function_491c4d64(localclientnum)[# "right"];
+  return function_491c4d64(localclientnum)[#"right"];
 }
 
 function init_dvar(str_dvar, default_val, func_callback) {

@@ -1506,13 +1506,13 @@ split_cleanup(b_skipped, var_19e802fa) {
 function_3ffc2c9e() {
   s_prophecy = spawnStruct();
   level.var_cc9c60d2 = s_prophecy;
-  a_s_roots[# "easy"] = struct::get_array(#"hash_2783a0c589b287e5");
-  a_s_roots[# "medium"] = struct::get_array(#"hash_7262d5ff710a3d2c");
-  a_s_roots[# "hard"] = struct::get_array(#"hash_3686ffef2f4fe836");
+  a_s_roots[#"easy"] = struct::get_array(#"hash_2783a0c589b287e5");
+  a_s_roots[#"medium"] = struct::get_array(#"hash_7262d5ff710a3d2c");
+  a_s_roots[#"hard"] = struct::get_array(#"hash_3686ffef2f4fe836");
   s_prophecy.a_s_roots = a_s_roots;
-  a_mdl_sundial[# "outer"] = getent("mdl_prophecy_code_easy", "targetname");
-  a_mdl_sundial[# "middle"] = getent("mdl_prophecy_code_medium", "targetname");
-  a_mdl_sundial[# "inner"] = getent("mdl_prophecy_code_hard", "targetname");
+  a_mdl_sundial[#"outer"] = getent("mdl_prophecy_code_easy", "targetname");
+  a_mdl_sundial[#"middle"] = getent("mdl_prophecy_code_medium", "targetname");
+  a_mdl_sundial[#"inner"] = getent("mdl_prophecy_code_hard", "targetname");
   s_prophecy.a_mdl_sundial = a_mdl_sundial;
   var_7bb826c5 = getent("mdl_prophecy_block", "targetname");
 
@@ -1850,7 +1850,7 @@ take_spear_setup(b_skipped) {
   a_info = zm_utility::function_b0eeaada(v_origin);
 
   if(isDefined(a_info)) {
-    v_navmesh = a_info[# "point"];
+    v_navmesh = a_info[#"point"];
 
     if(isDefined(v_navmesh)) {
       v_origin = v_navmesh;
@@ -2445,13 +2445,13 @@ init_light() {
 
 function_9d73ee19(a_ents) {
   s_light = level.var_5299790a;
-  s_light.var_8d22740d = a_ents[# "prop 1"];
+  s_light.var_8d22740d = a_ents[#"prop 1"];
   level scene::remove_scene_func(#"p8_fxanim_zm_red_ankh_chaos_scene", &function_9d73ee19, "init");
 }
 
 function_abba38a8(a_ents, str_shot) {
   s_light = level.var_5299790a;
-  s_light.var_19d2da88 = a_ents[# "prop 1"];
+  s_light.var_19d2da88 = a_ents[#"prop 1"];
   level scene::remove_scene_func(#"p8_fxanim_zm_red_vapor_altar_ra_arms_bundle", &function_abba38a8, str_shot);
 }
 
@@ -2555,7 +2555,7 @@ function_49b3f5aa() {
   v_target = s_target.origin;
 
   while(true) {
-    a_s_spawns = level.zm_loc_types[# "gegenees_location"];
+    a_s_spawns = level.zm_loc_types[#"gegenees_location"];
 
     if(a_s_spawns.size > 0) {
       s_spawn = arraygetclosest(v_target, a_s_spawns);
@@ -3585,25 +3585,25 @@ function_59ef31c5() {
 init_play() {
   s_play = spawnStruct();
   level.var_28dcf408 = s_play;
-  var_38e73d19[# "death"] = "" + # "hash_4aeb7fcdd8302eaa";
-  var_38e73d19[# "earth"] = "" + # "hash_7a99ff005314c5fc";
-  var_38e73d19[# "air"] = "" + # "hash_7f85dc0ce20a6f2c";
-  var_38e73d19[# "light"] = "" + # "hash_4e3e66f200f76f34";
-  var_38e73d19[# "return"] = "" + # "hash_565ca9982285f23e";
+  var_38e73d19[#"death"] = "" + # "hash_4aeb7fcdd8302eaa";
+  var_38e73d19[#"earth"] = "" + # "hash_7a99ff005314c5fc";
+  var_38e73d19[#"air"] = "" + # "hash_7f85dc0ce20a6f2c";
+  var_38e73d19[#"light"] = "" + # "hash_4e3e66f200f76f34";
+  var_38e73d19[#"return"] = "" + # "hash_565ca9982285f23e";
   s_play.var_38e73d19 = var_38e73d19;
-  a_s_spotlights[# "death"] = struct::get(#"hash_11302005e130b7eb");
-  a_s_spotlights[# "earth"] = struct::get(#"hash_2b292979020933aa");
-  a_s_spotlights[# "air"] = struct::get(#"hash_286a392e24892dee");
-  a_s_spotlights[# "light"] = struct::get(#"hash_5ae30fa5823821ee");
+  a_s_spotlights[#"death"] = struct::get(#"hash_11302005e130b7eb");
+  a_s_spotlights[#"earth"] = struct::get(#"hash_2b292979020933aa");
+  a_s_spotlights[#"air"] = struct::get(#"hash_286a392e24892dee");
+  a_s_spotlights[#"light"] = struct::get(#"hash_5ae30fa5823821ee");
   a_s_spotlights[1] = struct::get(#"hash_2038ad2a6cbb9188");
   a_s_spotlights[2] = struct::get(#"hash_2038b02a6cbb96a1");
   a_s_spotlights[3] = struct::get(#"hash_2038af2a6cbb94ee");
   a_s_spotlights[4] = struct::get(#"hash_2038b22a6cbb9a07");
   s_play.a_s_spotlights = a_s_spotlights;
-  var_ed2fbe40[# "death"] = "" + # "hash_74aaba5c17a71e0d";
-  var_ed2fbe40[# "earth"] = "" + # "hash_7e49e921c4dd052f";
-  var_ed2fbe40[# "air"] = "" + # "hash_9d4aab5c25b93ff";
-  var_ed2fbe40[# "light"] = "" + # "hash_58e58259618537e7";
+  var_ed2fbe40[#"death"] = "" + # "hash_74aaba5c17a71e0d";
+  var_ed2fbe40[#"earth"] = "" + # "hash_7e49e921c4dd052f";
+  var_ed2fbe40[#"air"] = "" + # "hash_9d4aab5c25b93ff";
+  var_ed2fbe40[#"light"] = "" + # "hash_58e58259618537e7";
   s_play.var_ed2fbe40 = var_ed2fbe40;
   var_cbf56f63 = getent("mdl_play_leave", "targetname");
   s_play.var_cbf56f63 = var_cbf56f63;
@@ -4913,7 +4913,7 @@ function_4462d56a(e_player, str_ww) {
     a_info = zm_utility::function_b0eeaada(v_origin);
 
     if(isDefined(a_info)) {
-      v_navmesh = a_info[# "point"];
+      v_navmesh = a_info[#"point"];
 
       if(isDefined(v_navmesh)) {
         v_origin = v_navmesh;
@@ -5433,8 +5433,8 @@ function_b224d9eb(s_params) {
   a_trace = bulletTrace(var_2ed6f142, v_end, 0, self);
 
   if(isDefined(a_trace)) {
-    mdl_hit = a_trace[# "entity"];
-    v_hit = a_trace[# "position"];
+    mdl_hit = a_trace[#"entity"];
+    v_hit = a_trace[#"position"];
     mdl_door = getent("mdl_blood_code", "targetname");
 
     if(mdl_hit === mdl_door && isDefined(v_hit)) {
@@ -5549,8 +5549,8 @@ door_interact_cleanup(b_skipped, var_19e802fa) {
 function_c3735f60(e_player) {
   if(zm_utility::is_player_valid(e_player) && e_player function_90836224() && isDefined(e_player.var_4f958d45) && e_player.var_4f958d45 && !(isDefined(e_player.var_564dec14) && e_player.var_564dec14)) {
     a_e_players = function_e3142c13();
-    e_stanton = a_e_players[# "stanton"];
-    e_bruno = a_e_players[# "bruno"];
+    e_stanton = a_e_players[#"stanton"];
+    e_bruno = a_e_players[#"bruno"];
 
     if(e_stanton === e_player) {
       e_partner = e_bruno;
@@ -5598,11 +5598,11 @@ function_e3142c13() {
   e_bruno = function_153ee6c7(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"));
 
   if(isDefined(e_stanton)) {
-    a_e_players[# "stanton"] = e_stanton;
+    a_e_players[#"stanton"] = e_stanton;
   }
 
   if(isDefined(e_bruno)) {
-    a_e_players[# "bruno"] = e_bruno;
+    a_e_players[#"bruno"] = e_bruno;
   }
 
   return a_e_players;
@@ -5610,7 +5610,7 @@ function_e3142c13() {
 
 function_9eacf92d() {
   a_e_players = function_e3142c13();
-  return isDefined(a_e_players[# "stanton"]) || isDefined(a_e_players[# "bruno"]);
+  return isDefined(a_e_players[#"stanton"]) || isDefined(a_e_players[#"bruno"]);
 }
 
 function_90836224() {
@@ -5844,8 +5844,8 @@ mid_igc_setup(b_skipped) {
 function_f81bfa93(a_ents) {
   mdl_weapon_clip = getent("mdl_blood_bounce", "targetname");
   mdl_weapon_clip solid();
-  e_stanton = a_ents[# "e_blood_scar"];
-  e_bruno = a_ents[# "e_blood_brute"];
+  e_stanton = a_ents[#"e_blood_scar"];
+  e_bruno = a_ents[#"e_blood_brute"];
   e_bruno playsoundtoplayer(#"hash_6469d6b70bfbf855", e_bruno);
   e_stanton playsoundtoplayer(#"hash_3a00192f62922210", e_stanton);
   level thread function_cce14a84(e_stanton, e_bruno);
@@ -6181,7 +6181,7 @@ function_db9be550(a_ents) {
   s_cleanse = level.var_29e8cce2;
 
   if(isDefined(s_cleanse)) {
-    s_cleanse.mdl_ballista = a_ents[# "prop 1"];
+    s_cleanse.mdl_ballista = a_ents[#"prop 1"];
     level scene::remove_scene_func(#"p8_fxanim_zm_red_ballista_bundle", &function_db9be550);
   }
 }
@@ -6449,7 +6449,7 @@ function_67e537fd(a_ents) {
   s_cleanse = level.var_29e8cce2;
 
   if(isDefined(s_cleanse)) {
-    s_cleanse.var_10d4f67d = a_ents[# "prop 1"];
+    s_cleanse.var_10d4f67d = a_ents[#"prop 1"];
     level scene::remove_scene_func(self.scriptbundlename, &function_67e537fd);
   }
 }

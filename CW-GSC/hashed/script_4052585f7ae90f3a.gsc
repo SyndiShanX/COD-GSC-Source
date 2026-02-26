@@ -207,20 +207,20 @@ function allies_init() {
   level.var_dafd41b2[level.var_dafd41b2.size] = level.mason;
   arrayremovevalue(level.var_dafd41b2, undefined);
   var_c11d92ab = [];
-  var_c11d92ab[# "adler"] = "adler";
-  var_c11d92ab[# "lazar"] = "lazar";
-  var_c11d92ab[# "park"] = "park";
-  var_c11d92ab[# "sims"] = "sims";
-  var_c11d92ab[# "hudson"] = "hudson";
-  var_c11d92ab[# "woods"] = "woods";
-  var_c11d92ab[# "mason"] = "mason";
-  var_c11d92ab[# "hash_4a80558bcd5f168d"] = "adler";
-  var_c11d92ab[# "lazar_cuba"] = "lazar";
-  var_c11d92ab[# "park_cuba"] = "park";
-  var_c11d92ab[# "hash_36e48d20b2a2a817"] = "sims";
-  var_c11d92ab[# "hash_1cdd5d46cf8f0056"] = "hudson";
-  var_c11d92ab[# "hash_4d2b01aab553821b"] = "woods";
-  var_c11d92ab[# "hash_2f2bc790a3127bb"] = "mason";
+  var_c11d92ab[#"adler"] = "adler";
+  var_c11d92ab[#"lazar"] = "lazar";
+  var_c11d92ab[#"park"] = "park";
+  var_c11d92ab[#"sims"] = "sims";
+  var_c11d92ab[#"hudson"] = "hudson";
+  var_c11d92ab[#"woods"] = "woods";
+  var_c11d92ab[#"mason"] = "mason";
+  var_c11d92ab[#"hash_4a80558bcd5f168d"] = "adler";
+  var_c11d92ab[#"lazar_cuba"] = "lazar";
+  var_c11d92ab[#"park_cuba"] = "park";
+  var_c11d92ab[#"hash_36e48d20b2a2a817"] = "sims";
+  var_c11d92ab[#"hash_1cdd5d46cf8f0056"] = "hudson";
+  var_c11d92ab[#"hash_4d2b01aab553821b"] = "woods";
+  var_c11d92ab[#"hash_2f2bc790a3127bb"] = "mason";
 
   foreach(ally in level.var_dafd41b2) {
     if(isstring(ally.targetname)) {

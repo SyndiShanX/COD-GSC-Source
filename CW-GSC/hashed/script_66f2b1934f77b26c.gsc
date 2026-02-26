@@ -102,7 +102,7 @@ function function_ee034322() {
 }
 
 function function_919df79f() {
-  return !level flag::get_any([# "hash_5dce120a8e013b48", #"rbz_exfil_beacon_active", #"hash_3e765c26047c9f54"]);
+  return !level flag::get_any([#"hash_5dce120a8e013b48", #"rbz_exfil_beacon_active", #"hash_3e765c26047c9f54"]);
 }
 
 function function_815a82fb() {
@@ -275,7 +275,7 @@ function function_b6fef4c2() {
 }
 
 function function_10108818(a_ents) {
-  ent = a_ents[# "hash_26c68883043990a6"];
+  ent = a_ents[#"hash_26c68883043990a6"];
   var_28c547d2 = util::spawn_model("tag_origin", ent.origin, ent.angles);
   ent linkto(var_28c547d2);
 
@@ -438,7 +438,7 @@ function function_b23d16b9() {
 }
 
 function function_ea2f5d05(a_ents) {
-  ent = a_ents[# "hash_26c68883043990a6"];
+  ent = a_ents[#"hash_26c68883043990a6"];
   var_28c547d2 = util::spawn_model("tag_origin", ent.origin, ent.angles);
   ent linkto(var_28c547d2);
   var_28c547d2 bobbing((0, 0, 1), randomfloatrange(5, 20), randomfloatrange(3, 6));
@@ -448,7 +448,7 @@ function function_70b8bf8f() {
   foreach(destination in level.contentmanager.destinations) {
     if(destination.targetname === # "dest_dp") {
       foreach(location in destination.locations) {
-        var_19845e62 = location.instances[# "explore_chests"];
+        var_19845e62 = location.instances[#"explore_chests"];
 
         if(isDefined(var_19845e62)) {
           content_manager::spawn_instance(var_19845e62);
@@ -1124,7 +1124,7 @@ function function_8ee22ffd() {
 
 function function_2f6288d8() {
   level endon(#"end_game");
-  level flag::wait_till_all([# "hash_3dff248b4edaface", #"hash_2e43edba67c87ef1"]);
+  level flag::wait_till_all([#"hash_3dff248b4edaface", #"hash_2e43edba67c87ef1"]);
   wait 0.5;
   level thread scene::play(#"hash_3cf9d0aa24d89124");
 
@@ -1228,7 +1228,7 @@ function function_98957f5b() {
   v_start = self.origin + (0, 0, 32);
   v_end = self.origin - (0, 0, 1000);
   a_trace = groundtrace(v_start, v_end, 0, self, 1);
-  v_ground = isDefined(a_trace[# "position"]) ? a_trace[# "position"] : self.origin;
+  v_ground = isDefined(a_trace[#"position"]) ? a_trace[#"position"] : self.origin;
   self playSound(#"hash_384b11f9c14189aa");
   level.e_head = level function_1f14f16f(v_ground + (0, 0, 8));
 }

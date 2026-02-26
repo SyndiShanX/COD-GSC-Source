@@ -14,10 +14,10 @@
 #namespace util;
 
 brush_delete() {
-  num = self.v[# "exploder"];
+  num = self.v[#"exploder"];
 
-  if(isDefined(self.v[# "delay"])) {
-    wait self.v[# "delay"];
+  if(isDefined(self.v[#"delay"])) {
+    wait self.v[#"delay"];
   } else {
     wait 0.05;
   }
@@ -28,8 +28,8 @@ brush_delete() {
 
   assert(isDefined(self.model));
 
-  if(!isDefined(self.v[# "fxid"]) || self.v[# "fxid"] == "No FX") {
-    self.v[# "exploder"] = undefined;
+  if(!isDefined(self.v[#"fxid"]) || self.v[#"fxid"] == "No FX") {
+    self.v[#"exploder"] = undefined;
   }
 
   waittillframeend();
@@ -37,8 +37,8 @@ brush_delete() {
 }
 
 brush_show() {
-  if(isDefined(self.v[# "delay"])) {
-    wait self.v[# "delay"];
+  if(isDefined(self.v[#"delay"])) {
+    wait self.v[#"delay"];
   }
 
   assert(isDefined(self.model));
@@ -47,14 +47,14 @@ brush_show() {
 }
 
 brush_throw() {
-  if(isDefined(self.v[# "delay"])) {
-    wait self.v[# "delay"];
+  if(isDefined(self.v[#"delay"])) {
+    wait self.v[#"delay"];
   }
 
   ent = undefined;
 
-  if(isDefined(self.v[# "target"])) {
-    ent = getent(self.v[# "target"], "targetname");
+  if(isDefined(self.v[#"target"])) {
+    ent = getent(self.v[#"target"], "targetname");
   }
 
   if(!isDefined(ent)) {
@@ -63,16 +63,16 @@ brush_throw() {
   }
 
   self.model show();
-  startorg = self.v[# "origin"];
-  startang = self.v[# "angles"];
+  startorg = self.v[#"origin"];
+  startang = self.v[#"angles"];
   org = ent.origin;
-  temp_vec = org - self.v[# "origin"];
+  temp_vec = org - self.v[#"origin"];
   x = temp_vec[0];
   y = temp_vec[1];
   z = temp_vec[2];
   self.model rotatevelocity((x, y, z), 12);
   self.model movegravity((x, y, z), 12);
-  self.v[# "exploder"] = undefined;
+  self.v[#"exploder"] = undefined;
   wait 6;
   self.model delete();
 }
@@ -92,7 +92,7 @@ playsoundonplayers(sound, team) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+      if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
         player playlocalsound(sound);
       }
     }
@@ -127,7 +127,7 @@ printonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player iprintln(text);
     }
   }
@@ -139,7 +139,7 @@ printboldonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player iprintlnbold(text);
     }
   }
@@ -151,7 +151,7 @@ printboldonteamarg(text, team, arg) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -164,7 +164,7 @@ printonplayers(text, team) {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if(isDefined(players[i].pers[# "team"]) && players[i].pers[# "team"] == team) {
+      if(isDefined(players[i].pers[#"team"]) && players[i].pers[#"team"] == team) {
         players[i] iprintln(text);
       }
 
@@ -191,7 +191,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
   if(level.splitscreen || !shoulddosounds) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      playerteam = player.pers[# "team"];
+      playerteam = player.pers[#"team"];
 
       if(isDefined(playerteam)) {
         if(playerteam == team && isDefined(printfriendly) && printfriendly != # "") {
@@ -225,7 +225,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
   if(shoulddoenemysounds) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      playerteam = player.pers[# "team"];
+      playerteam = player.pers[#"team"];
 
       if(isDefined(playerteam)) {
         if(playerteam == team) {
@@ -252,7 +252,7 @@ printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, soundfriendl
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    playerteam = player.pers[# "team"];
+    playerteam = player.pers[#"team"];
 
     if(isDefined(playerteam)) {
       if(playerteam == team) {

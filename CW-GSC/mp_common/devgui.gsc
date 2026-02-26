@@ -872,7 +872,7 @@ function add_vehicle_at_eye_trace(vehiclename) {
   vehicle asmrequestsubstate(#"locomotion@movement");
   waitframe(1);
   vehicle makevehicleusable();
-  vehicle.origin = trace[# "position"];
+  vehicle.origin = trace[#"position"];
   vehicle.nojumping = 1;
   vehicle thread watch_player_death();
   return vehicle;

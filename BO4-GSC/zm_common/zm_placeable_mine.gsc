@@ -284,7 +284,7 @@ placeable_mine_damage() {
       continue;
     }
 
-    if(isDefined(waitresult.attacker.pers) && isDefined(waitresult.attacker.pers[# "team"]) && waitresult.attacker.pers[# "team"] != level.zombie_team) {
+    if(isDefined(waitresult.attacker.pers) && isDefined(waitresult.attacker.pers[#"team"]) && waitresult.attacker.pers[#"team"] != level.zombie_team) {
       continue;
     }
 

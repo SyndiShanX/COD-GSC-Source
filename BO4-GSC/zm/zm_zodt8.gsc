@@ -191,7 +191,7 @@ function_42cfb9f0(a_ents) {
 
 function_5988b12(a_ents) {
   util::wait_network_frame(5);
-  level.e_sway = a_ents[# "skybox_water"];
+  level.e_sway = a_ents[#"skybox_water"];
   level.e_sway clientfield::set("tilt", 1);
   var_492eb620 = getEntArray("ocean_water", "targetname");
 
@@ -226,7 +226,7 @@ init_level_vars() {
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.player_out_of_playable_area_monitor_callback = &player_out_of_playable_area_monitor_callback;
-  level.custom_spawner_entry[# "crawl"] = &zm_spawner::function_45bb11e4;
+  level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
   level.var_2358785f = &function_26d54397;
   level.var_cb30f17e = getweapon(#"ww_tricannon_t8");
   level.var_618201fe = getweapon(#"ww_tricannon_t8_upgraded");
@@ -738,8 +738,8 @@ function_6058ef28() {
     }
   }
 
-  if(isDefined(level.ai[# "axis"]) && level.ai[# "axis"].size) {
-    var_dce7716b = array::get_all_closest(nd_cargo_hatch.origin, level.ai[# "axis"], undefined, undefined, 312);
+  if(isDefined(level.ai[#"axis"]) && level.ai[#"axis"].size) {
+    var_dce7716b = array::get_all_closest(nd_cargo_hatch.origin, level.ai[#"axis"], undefined, undefined, 312);
     var_cd02461b = array::filter(var_dce7716b, 0, &zm_fasttravel::function_6c856fde);
 
     foreach(e_zombie in var_cd02461b) {
@@ -807,7 +807,7 @@ function_b0a7ca7(var_32be30af, var_4c2f2156, var_eb6a4856, var_bbaf1a87, n_time,
   }
 
   var_32be30af setvisibletoall();
-  var_a33249cf = var_4c2f2156.scene_ents[# "prop 1"];
+  var_a33249cf = var_4c2f2156.scene_ents[#"prop 1"];
   waitresult = var_32be30af waittill(#"trigger");
   var_32be30af setinvisibletoall();
 
@@ -967,12 +967,12 @@ function_4b17dd44(a_ents) {
     wait 1;
   }
 
-  if(isDefined(a_ents[# "p8_fxanim_zm_zod_iceberg_forecastle_damage_ice_chunks_mod"])) {
-    a_ents[# "p8_fxanim_zm_zod_iceberg_forecastle_damage_ice_chunks_mod"] delete();
+  if(isDefined(a_ents[#"p8_fxanim_zm_zod_iceberg_forecastle_damage_ice_chunks_mod"])) {
+    a_ents[#"p8_fxanim_zm_zod_iceberg_forecastle_damage_ice_chunks_mod"] delete();
   }
 
-  if(isDefined(a_ents[# "p8_fxanim_zm_zod_iceberg_forecastle_avalanche_mod"])) {
-    a_ents[# "p8_fxanim_zm_zod_iceberg_forecastle_avalanche_mod"] delete();
+  if(isDefined(a_ents[#"p8_fxanim_zm_zod_iceberg_forecastle_avalanche_mod"])) {
+    a_ents[#"p8_fxanim_zm_zod_iceberg_forecastle_avalanche_mod"] delete();
   }
 }
 
@@ -1233,8 +1233,8 @@ function_d2ba8baa() {
   a_s_spawn_locs = [];
 
   if(isDefined(str_player_zone)) {
-    if(isDefined(level.zm_loc_types[# "stoker_location"]) && level.zm_loc_types[# "stoker_location"].size > 0) {
-      foreach(s_loc in level.zm_loc_types[# "stoker_location"]) {
+    if(isDefined(level.zm_loc_types[#"stoker_location"]) && level.zm_loc_types[#"stoker_location"].size > 0) {
+      foreach(s_loc in level.zm_loc_types[#"stoker_location"]) {
         if(s_loc.zone_name === str_player_zone) {
           if(getdvarint(#"hash_1f8efa579fee787c", 0)) {
             iprintlnbold("<dev string:x38>" + s_loc.zone_name + "<dev string:x55>");
@@ -1388,8 +1388,8 @@ function_994c6ce1() {
     for(var_5f1d1229 = 0; var_5f1d1229 < 2; var_5f1d1229++) {
       if(!var_255ae8a5) {
         foreach(var_d7eff26a in level.var_801efcc7) {
-          if(isDefined(level.zm_loc_types[# "blight_father_location"]) && level.zm_loc_types[# "blight_father_location"].size > 0) {
-            foreach(s_loc in level.zm_loc_types[# "blight_father_location"]) {
+          if(isDefined(level.zm_loc_types[#"blight_father_location"]) && level.zm_loc_types[#"blight_father_location"].size > 0) {
+            foreach(s_loc in level.zm_loc_types[#"blight_father_location"]) {
               if(isinarray(var_f7f9223f, s_loc.zone_name)) {
                 if(!var_5f1d1229) {
                   if(!isinarray(var_aab9fdf2, s_loc.zone_name)) {
@@ -1566,30 +1566,30 @@ setupmusic() {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[1][# "hitmed"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitmed"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitmed"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[4][# "hitmed"] = "vox_plr_4_exert_pain";
-  level.exert_sounds[1][# "hitlrg"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[4][# "hitlrg"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[1][# "drowning"] = "vox_plr_1_exert_underwater_air_low";
-  level.exert_sounds[2][# "drowning"] = "vox_plr_2_exert_underwater_air_low";
-  level.exert_sounds[3][# "drowning"] = "vox_plr_3_exert_underwater_air_low";
-  level.exert_sounds[4][# "drowning"] = "vox_plr_4_exert_underwater_air_low";
-  level.exert_sounds[1][# "cough"] = "vox_plr_1_exert_gas_cough";
-  level.exert_sounds[2][# "cough"] = "vox_plr_2_exert_gas_cough";
-  level.exert_sounds[3][# "cough"] = "vox_plr_3_exert_gas_cough";
-  level.exert_sounds[4][# "cough"] = "vox_plr_4_exert_gas_cough";
-  level.exert_sounds[1][# "underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
-  level.exert_sounds[2][# "underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
-  level.exert_sounds[3][# "underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
-  level.exert_sounds[4][# "underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
-  level.exert_sounds[1][# "underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
-  level.exert_sounds[2][# "underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
-  level.exert_sounds[3][# "underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
-  level.exert_sounds[4][# "underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
+  level.exert_sounds[1][#"hitmed"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitmed"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitmed"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[4][#"hitmed"] = "vox_plr_4_exert_pain";
+  level.exert_sounds[1][#"hitlrg"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[4][#"hitlrg"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[1][#"drowning"] = "vox_plr_1_exert_underwater_air_low";
+  level.exert_sounds[2][#"drowning"] = "vox_plr_2_exert_underwater_air_low";
+  level.exert_sounds[3][#"drowning"] = "vox_plr_3_exert_underwater_air_low";
+  level.exert_sounds[4][#"drowning"] = "vox_plr_4_exert_underwater_air_low";
+  level.exert_sounds[1][#"cough"] = "vox_plr_1_exert_gas_cough";
+  level.exert_sounds[2][#"cough"] = "vox_plr_2_exert_gas_cough";
+  level.exert_sounds[3][#"cough"] = "vox_plr_3_exert_gas_cough";
+  level.exert_sounds[4][#"cough"] = "vox_plr_4_exert_gas_cough";
+  level.exert_sounds[1][#"underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
+  level.exert_sounds[2][#"underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
+  level.exert_sounds[3][#"underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
+  level.exert_sounds[4][#"underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
+  level.exert_sounds[1][#"underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
+  level.exert_sounds[2][#"underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
+  level.exert_sounds[3][#"underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
+  level.exert_sounds[4][#"underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
 }
 
 on_player_spawned() {

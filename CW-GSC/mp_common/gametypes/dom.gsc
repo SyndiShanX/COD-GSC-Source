@@ -167,10 +167,10 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
   if(isDefined(attacker) && isPlayer(attacker)) {
     scoreeventprocessed = 0;
 
-    if(!scoreeventprocessed && isDefined(attacker.touchtriggers) && attacker.touchtriggers.size && attacker.pers[# "team"] != idamage.pers[# "team"]) {
+    if(!scoreeventprocessed && isDefined(attacker.touchtriggers) && attacker.touchtriggers.size && attacker.pers[#"team"] != idamage.pers[#"team"]) {
       triggerids = getarraykeys(attacker.touchtriggers);
       domflag = attacker.touchtriggers[triggerids[0]].gameobject;
-      team = attacker.pers[# "team"];
+      team = attacker.pers[#"team"];
 
       if(team != domflag gameobjects::get_owner_team()) {
         if(!is_true(weaponiskillstreak) && var_1cfdf798) {
@@ -179,10 +179,10 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
         }
 
         attacker challenges::function_2f462ffd(idamage, weapon, victim, domflag);
-        attacker.pers[# "objectiveekia"]++;
-        attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-        attacker.pers[# "objectives"]++;
-        attacker.objectives = attacker.pers[# "objectives"];
+        attacker.pers[#"objectiveekia"]++;
+        attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+        attacker.pers[#"objectives"]++;
+        attacker.objectives = attacker.pers[#"objectives"];
         scoreeventprocessed = 1;
       }
     }
@@ -197,14 +197,14 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       if(idamage istouching(trigger) || attacker istouching(trigger)) {
         inflagzone = 1;
 
-        if(trigger getflagteam() == attacker.pers[# "team"] || trigger getflagteam() == # "neutral") {
+        if(trigger getflagteam() == attacker.pers[#"team"] || trigger getflagteam() == # "neutral") {
           defendedflag = 1;
         } else {
           offendedflag = 1;
         }
       }
 
-      if(inflagzone && isPlayer(attacker) && attacker.pers[# "team"] != idamage.pers[# "team"]) {
+      if(inflagzone && isPlayer(attacker) && attacker.pers[#"team"] != idamage.pers[#"team"]) {
         if(offendedflag) {
           if(!isDefined(attacker.dom_defends)) {
             attacker.dom_defends = 0;
@@ -225,10 +225,10 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
               }
 
               attacker challenges::function_2f462ffd(idamage, weapon, victim, trigger.gameobject);
-              attacker.pers[# "objectiveekia"]++;
-              attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-              attacker.pers[# "objectives"]++;
-              attacker.objectives = attacker.pers[# "objectives"];
+              attacker.pers[#"objectiveekia"]++;
+              attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+              attacker.pers[#"objectives"]++;
+              attacker.objectives = attacker.pers[#"objectives"];
               scoreeventprocessed = 1;
             }
 
@@ -251,8 +251,8 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
 
           if(level.playeroffensivemax >= attacker.dom_offends) {
             if(var_1cfdf798) {
-              attacker.pers[# "defends"]++;
-              attacker.defends = attacker.pers[# "defends"];
+              attacker.pers[#"defends"]++;
+              attacker.defends = attacker.pers[#"defends"];
               attacker recordgameevent("return");
               level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
                 #player: attacker, #eventtype: # "return"});
@@ -268,10 +268,10 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
               }
 
               attacker challenges::function_2f462ffd(idamage, weapon, victim, trigger.gameobject);
-              attacker.pers[# "objectiveekia"]++;
-              attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-              attacker.pers[# "objectives"]++;
-              attacker.objectives = attacker.pers[# "objectives"];
+              attacker.pers[#"objectiveekia"]++;
+              attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+              attacker.pers[#"objectives"]++;
+              attacker.objectives = attacker.pers[#"objectives"];
               scoreeventprocessed = 1;
             }
 
@@ -283,11 +283,11 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       }
     }
 
-    if(var_1cfdf798 && !is_true(weaponiskillstreak) && isDefined(idamage.touchtriggers) && idamage.touchtriggers.size && attacker.pers[# "team"] != idamage.pers[# "team"]) {
+    if(var_1cfdf798 && !is_true(weaponiskillstreak) && isDefined(idamage.touchtriggers) && idamage.touchtriggers.size && attacker.pers[#"team"] != idamage.pers[#"team"]) {
       triggerids = getarraykeys(idamage.touchtriggers);
       flag = idamage.touchtriggers[triggerids[0]].gameobject;
       ownerteam = flag gameobjects::get_owner_team();
-      team = idamage.pers[# "team"];
+      team = idamage.pers[#"team"];
 
       if(team != ownerteam) {
         scoreevents::processscoreevent(#"kill_enemy_that_is_capping_your_objective", attacker, idamage, weapon);
@@ -320,18 +320,18 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function function_a800815(victim, attacker) {
-  if(!isDefined(victim) || !isDefined(victim.pers) || !isDefined(victim.pers[# "team"])) {
+  if(!isDefined(victim) || !isDefined(victim.pers) || !isDefined(victim.pers[#"team"])) {
     return false;
   }
 
-  if(!isDefined(attacker) || !isDefined(attacker.pers) || !isDefined(attacker.pers[# "team"])) {
+  if(!isDefined(attacker) || !isDefined(attacker.pers) || !isDefined(attacker.pers[#"team"])) {
     return false;
   }
 
-  if(isDefined(victim.touchtriggers) && victim.touchtriggers.size && attacker.pers[# "team"] != victim.pers[# "team"]) {
+  if(isDefined(victim.touchtriggers) && victim.touchtriggers.size && attacker.pers[#"team"] != victim.pers[#"team"]) {
     triggerids = getarraykeys(victim.touchtriggers);
     domflag = victim.touchtriggers[triggerids[0]].gameobject;
-    team = victim.pers[# "team"];
+    team = victim.pers[#"team"];
 
     if(team != domflag gameobjects::get_owner_team()) {
       return true;
@@ -355,7 +355,7 @@ function killwhilecontesting(flag, weapon) {
   self notify(#"killwhilecontesting");
   self endon(#"killwhilecontesting", #"disconnect");
   killtime = gettime();
-  playerteam = self.pers[# "team"];
+  playerteam = self.pers[#"team"];
 
   if(!isDefined(self.clearenemycount)) {
     self.clearenemycount = 0;
@@ -364,7 +364,7 @@ function killwhilecontesting(flag, weapon) {
   self.clearenemycount++;
   flag waittill(#"contest_over");
 
-  if(playerteam != self.pers[# "team"] || isDefined(self.spawntime) && killtime < self.spawntime) {
+  if(playerteam != self.pers[#"team"] || isDefined(self.spawntime) && killtime < self.spawntime) {
     self.clearenemycount = 0;
     return;
   }

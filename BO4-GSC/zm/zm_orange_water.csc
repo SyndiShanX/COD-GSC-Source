@@ -19,12 +19,12 @@ init() {
   clientfield::register("toplayer", "" + # "hash_13f1aaee7ebf9986", 24000, 2, "int", &function_3c820626, 0, 1);
   clientfield::register("toplayer", "" + # "hash_603fc9d210bdbc4d", 24000, 1, "int", &function_45df4c17, 0, 0);
   clientfield::register("toplayer", "" + # "hash_67340426cd141891", 24000, 2, "int", &function_6b5ed7f9, 0, 0);
-  level._effect[# "hash_4a12914ab0026a9d"] = # "hash_50599e96f376b4fa";
-  level._effect[# "hash_211384df1c05676c"] = # "hash_434ed0cd342c0caa";
-  level._effect[# "hash_3cf697eb0a408b2e"] = # "hash_432cd0cd340f2644";
-  level._effect[# "hash_2f305a0bea20d6ed"] = # "hash_6910f1de979f539f";
-  level._effect[# "hash_28591d0dc8bbbf02"] = # "hash_8197ce41f763db3";
-  level._effect[# "hash_2818130dc884170f"] = # "hash_86876e41fba07d2";
+  level._effect[#"hash_4a12914ab0026a9d"] = # "hash_50599e96f376b4fa";
+  level._effect[#"hash_211384df1c05676c"] = # "hash_434ed0cd342c0caa";
+  level._effect[#"hash_3cf697eb0a408b2e"] = # "hash_432cd0cd340f2644";
+  level._effect[#"hash_2f305a0bea20d6ed"] = # "hash_6910f1de979f539f";
+  level._effect[#"hash_28591d0dc8bbbf02"] = # "hash_8197ce41f763db3";
+  level._effect[#"hash_2818130dc884170f"] = # "hash_86876e41fba07d2";
 }
 
 main() {
@@ -74,9 +74,9 @@ function_84fcb204(localclientnum) {
   }
 
   self.var_67dab332[localclientnum] = [];
-  function_832ba3ee(localclientnum, level._effect[# "hash_4a12914ab0026a9d"], "torso", "j_spinelower");
-  function_832ba3ee(localclientnum, level._effect[# "hash_3cf697eb0a408b2e"], "right_leg", "j_knee_ri");
-  function_832ba3ee(localclientnum, level._effect[# "hash_211384df1c05676c"], "left_leg", "j_knee_le");
+  function_832ba3ee(localclientnum, level._effect[#"hash_4a12914ab0026a9d"], "torso", "j_spinelower");
+  function_832ba3ee(localclientnum, level._effect[#"hash_3cf697eb0a408b2e"], "right_leg", "j_knee_ri");
+  function_832ba3ee(localclientnum, level._effect[#"hash_211384df1c05676c"], "left_leg", "j_knee_le");
 }
 
 function_832ba3ee(localclientnum, fx, key, tag) {
@@ -223,7 +223,7 @@ function_39cdeb29(localclientnum) {
     self postfx::stoppostfxbundle("pstfx_frost_loop_fullscreen_zmo");
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[# "hash_2818130dc884170f"], self, "J_Spine4");
+  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_2818130dc884170f"], self, "J_Spine4");
 }
 
 function_6b5ed7f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -231,7 +231,7 @@ function_6b5ed7f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_7c8ad424 = 0;
     self.var_f809ca21 = 0.9;
     self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
-    self thread util::playFXOnTag(localclientnum, level._effect[# "hash_28591d0dc8bbbf02"], self, "J_Spine4");
+    self thread util::playFXOnTag(localclientnum, level._effect[#"hash_28591d0dc8bbbf02"], self, "J_Spine4");
     return;
   }
 
@@ -239,7 +239,7 @@ function_6b5ed7f9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_7c8ad424 = 0;
     self.var_f809ca21 = 0.8;
     self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen_zmo", #"reveal threshold", self.var_f809ca21);
-    self thread util::playFXOnTag(localclientnum, level._effect[# "hash_28591d0dc8bbbf02"], self, "J_Spine4");
+    self thread util::playFXOnTag(localclientnum, level._effect[#"hash_28591d0dc8bbbf02"], self, "J_Spine4");
   }
 }
 

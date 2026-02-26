@@ -63,13 +63,13 @@ function main(var_d3440450, var_50cc0d4f) {
   }
 
   hidden = [];
-  hidden[# "prone"] = 50;
-  hidden[# "crouch"] = 200;
-  hidden[# "stand"] = 400;
+  hidden[#"prone"] = 50;
+  hidden[#"crouch"] = 200;
+  hidden[#"stand"] = 400;
   spotted = [];
-  spotted[# "prone"] = 200;
-  spotted[# "crouch"] = 400;
-  spotted[# "stand"] = 800;
+  spotted[#"prone"] = 200;
+  spotted[#"crouch"] = 400;
+  spotted[#"stand"] = 800;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
   setDvar(#"hash_62b11f12963c68d4", 1200);
   thread function_61f33d07();
@@ -369,27 +369,27 @@ function function_2fc20b49(a_ents) {
 }
 
 function function_309e4828(a_ents) {
-  if(isDefined(a_ents[# "driver"])) {
-    a_ents[# "driver"] val::set(#"hash_48aa53f40d892719", "ignoreme", 1);
+  if(isDefined(a_ents[#"driver"])) {
+    a_ents[#"driver"] val::set(#"hash_48aa53f40d892719", "ignoreme", 1);
   }
 
-  if(isDefined(a_ents[# "bell"])) {
-    a_ents[# "bell"] val::set(#"hash_48aa53f40d892719", "ignoreme", 1);
+  if(isDefined(a_ents[#"bell"])) {
+    a_ents[#"bell"] val::set(#"hash_48aa53f40d892719", "ignoreme", 1);
   }
 }
 
 function function_f0cab8f5(a_ents) {
-  level.var_2124e12b = a_ents[# "hash_f4e2bb35f1a6ff3"];
+  level.var_2124e12b = a_ents[#"hash_f4e2bb35f1a6ff3"];
 
-  if(isDefined(a_ents[# "af_enemy4"])) {
-    guy = a_ents[# "af_enemy4"];
+  if(isDefined(a_ents[#"af_enemy4"])) {
+    guy = a_ents[#"af_enemy4"];
   }
 }
 
 function function_9b3565b1(a_ents) {
   level endon(#"hash_1a8ccb31e7a09c0e");
   level waittill(#"hash_4d3bb4cb42226cd8");
-  level.af_enemy2 = a_ents[# "af_enemy2"];
+  level.af_enemy2 = a_ents[#"af_enemy2"];
   thread scene::play("scene_tkd_hit3_intro_overlook_guy2", "overlook_shot_part2", [level.af_enemy2, level.var_2124e12b]);
 }
 

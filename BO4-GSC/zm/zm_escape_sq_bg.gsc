@@ -27,7 +27,7 @@ autoexec __init__system__() {
 
 __init__() {
   level flag::init(#"warden_blundergat_obtained");
-  level._effect[# "ee_skull_shot"] = # "electric/fx_elec_sparks_burst_sm_omni_blue_os";
+  level._effect[#"ee_skull_shot"] = # "electric/fx_elec_sparks_burst_sm_omni_blue_os";
 }
 
 __main__() {
@@ -95,7 +95,7 @@ sq_bg_macguffin_think() {
     s_result = self waittill(#"damage");
 
     if(isPlayer(s_result.attacker) && (s_result.weapon == getweapon(#"tomahawk_t8") || s_result.weapon == getweapon(#"tomahawk_t8_upgraded"))) {
-      playFX(level._effect[# "ee_skull_shot"], self.origin);
+      playFX(level._effect[#"ee_skull_shot"], self.origin);
       self thread wait_and_hide_sq_bg_macguffin();
     }
   }

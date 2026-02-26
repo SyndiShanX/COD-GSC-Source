@@ -97,7 +97,7 @@ function private function_aa3ed46f(localclientnum, uimodel, var_d17dd25a) {
   self endon(#"show_objectives", #"hash_3b00cabe4586a186", #"death");
 
   if(!is_true(var_d17dd25a)) {
-    while(length(self util::function_ca4b4e19(localclientnum, 0)[# "move"]) < 0.2) {
+    while(length(self util::function_ca4b4e19(localclientnum, 0)[#"move"]) < 0.2) {
       waitframe(1);
     }
   }

@@ -66,7 +66,7 @@ init() {
     level.zombie_powerups = [];
   }
 
-  level._effect[# "powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
+  level._effect[#"powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
   init_powerups();
 
   if(!level.enable_magic || !zm_custom::function_901b751c(#"zmpowerupsactive")) {
@@ -252,7 +252,7 @@ get_next_powerup() {
   if(isDefined(level.var_ab5b85bf)) {
     powerup = level.var_ab5b85bf;
     level.var_ab5b85bf = undefined;
-  } else if(level.zm_genesis_robot_pay_towardsreactswordstart == 0 && zm_custom::function_901b751c(#"zmpowerupmaxammo") && isDefined(level.zombie_powerups[# "full_ammo"].func_should_drop_with_regular_powerups) && [[level.zombie_powerups[# "full_ammo"].func_should_drop_with_regular_powerups]]()) {
+  } else if(level.zm_genesis_robot_pay_towardsreactswordstart == 0 && zm_custom::function_901b751c(#"zmpowerupmaxammo") && isDefined(level.zombie_powerups[#"full_ammo"].func_should_drop_with_regular_powerups) && [[level.zombie_powerups[#"full_ammo"].func_should_drop_with_regular_powerups]]()) {
     powerup = "full_ammo";
   } else {
     powerup = level.zombie_powerup_array[level.zombie_powerup_index];
@@ -312,7 +312,7 @@ minigun_no_drop() {
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i].zombie_vars[# "zombie_powerup_minigun_on"] == 1) {
+    if(players[i].zombie_vars[#"zombie_powerup_minigun_on"] == 1) {
       return true;
     }
   }
@@ -440,8 +440,8 @@ function_b753385f(weapon) {
       trace = groundtrace(self.origin + (0, 0, 5), self.origin + (0, 0, -300), 0, undefined);
     }
 
-    origin = trace[# "position"];
-    hit_ent = trace[# "entity"];
+    origin = trace[#"position"];
+    hit_ent = trace[#"entity"];
     var_d13d4980 = undefined;
 
     if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
@@ -587,7 +587,7 @@ add_zombie_special_drop(powerup_name) {
   level.zombie_special_drop_array[level.zombie_special_drop_array.size] = powerup_name;
 }
 
-#include_zombie_powerup(powerup_name) {
+include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups)) {
     level.zombie_include_powerups = [];
   }
@@ -833,7 +833,7 @@ specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pickup_delay 
   }
 
   s_trace = physicstrace(powerup_location + (0, 0, 10), powerup_location + (0, 0, -100), (0, 0, 0), (0, 0, 0), undefined, 2 | 16);
-  hit_ent = s_trace[# "entity"];
+  hit_ent = s_trace[#"entity"];
 
   if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
     powerup = spawn("script_model", powerup_location + (0, 0, 40));
@@ -1619,7 +1619,7 @@ tesla_powerup_active() {
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i].zombie_vars[# "zombie_powerup_tesla_on"]) {
+    if(players[i].zombie_vars[#"zombie_powerup_tesla_on"]) {
       return true;
     }
   }
@@ -1681,7 +1681,7 @@ powerup_emp() {
     waitresult = level waittill(#"emp_detonate");
 
     if(distancesquared(waitresult.position, self.origin) < waitresult.radius * waitresult.radius) {
-      playFX(level._effect[# "powerup_off"], self.origin);
+      playFX(level._effect[#"powerup_off"], self.origin);
       self thread powerup_delete_delayed();
       self notify(#"powerup_timedout");
     }

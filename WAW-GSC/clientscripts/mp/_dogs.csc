@@ -155,8 +155,7 @@ isLocalPlayerEnemyTeam(team) {
   players = getlocalplayers();
 
   if(isDefined(players)) {
-    for(i = 0; i < players.size; i++) {
-    }
+    for(i = 0; i < players.size; i++) {}
   }
   return false;
 }

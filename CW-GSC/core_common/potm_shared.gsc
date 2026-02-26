@@ -350,7 +350,7 @@ function function_f909006c(currentevent) {
             label = rank::getscoreinfolabel(var_e0aa3530.eventdata.event_info);
             score = rank::getscoreinfovalue(var_e0aa3530.eventdata.event_info);
             combatefficiencyscore = rank::function_4587103(var_e0aa3530.eventdata.event_info);
-            eventindex = level.scoreinfo[var_e0aa3530.eventdata.event_info][# "row"];
+            eventindex = level.scoreinfo[var_e0aa3530.eventdata.event_info][#"row"];
           } else {
             label = var_e0aa3530.eventdata.label;
             score = var_e0aa3530.eventdata.score;

@@ -14,27 +14,27 @@
 STRYKER_SUPPRESSION_RADIUS = 1500 * 1500;
 
 // ----------------------- // --- DOWNLOAD STUFF --- // ----------------------- so_download_objective_init(objIdx, objStr) {
-  level.downloadObjectiveStr = objStr;
-  level.downloadObjectiveIdx = objIdx;
-  level.downloadsComplete = 0;
+level.downloadObjectiveStr = objStr;
+level.downloadObjectiveIdx = objIdx;
+level.downloadsComplete = 0;
 
-  level.downloads = getStructArray("download", "targetname");
+level.downloads = getStructArray("download", "targetname");
 
-  foreach(index, download in level.downloads) {
-    download.objPos = index;
-  }
+foreach(index, download in level.downloads) {
+  download.objPos = index;
+}
 
-  // first one sets the objective
-  Objective_Add(level.downloadObjectiveIdx, "current", objStr, level.downloads[0].origin);
+// first one sets the objective
+Objective_Add(level.downloadObjectiveIdx, "current", objStr, level.downloads[0].origin);
 
-  // the rest are added as additional positions
-  for(i = 1; i < level.downloads.size; i++) {
-    download = level.downloads[i];
-    Objective_AdditionalPosition(level.downloadObjectiveIdx, download.objPos, download.origin);
-  }
+// the rest are added as additional positions
+for(i = 1; i < level.downloads.size; i++) {
+  download = level.downloads[i];
+  Objective_AdditionalPosition(level.downloadObjectiveIdx, download.objPos, download.origin);
+}
 
-  array_thread(level.players, ::ent_flag_init, "download_hint_on");
-  array_thread(level.downloads, ::download_obj_setup);
+array_thread(level.players, ::ent_flag_init, "download_hint_on");
+array_thread(level.downloads, ::download_obj_setup);
 }
 
 // sets up each DSM group and starts it thinking
@@ -691,52 +691,52 @@ ai_near_download(guy) {
 }
 
 // ---------------- // --- STRYKER --- // ---------------- stryker_think() {
-  stryker = maps\_vehicle::spawn_vehicle_from_targetname("stryker");
-  ASSERT(isDefined(stryker));
-  level.stryker = stryker;
+stryker = maps\_vehicle::spawn_vehicle_from_targetname("stryker");
+ASSERT(isDefined(stryker));
+level.stryker = stryker;
 
-  // hack so we don't get sound asserts
-  org = spawn("script_origin", stryker.origin);
-  org LinkTo(stryker);
-  org.animname = "foley";
-  level.foley = org;
+// hack so we don't get sound asserts
+org = spawn("script_origin", stryker.origin);
+org LinkTo(stryker);
+org.animname = "foley";
+level.foley = org;
 
-  CreateThreatBiasGroup("stryker");
-  CreateThreatBiasGroup("stryker_ignoreme");
-  stryker.threatBiasGroup = "stryker";
-  SetIgnoreMeGroup("stryker_ignoreme", "stryker");
+CreateThreatBiasGroup("stryker");
+CreateThreatBiasGroup("stryker_ignoreme");
+stryker.threatBiasGroup = "stryker";
+SetIgnoreMeGroup("stryker_ignoreme", "stryker");
 
-  stryker.target = "stryker_pathstart";
-  pathStart = GetVehicleNode(stryker.target, "targetname");
-  stryker AttachPath(pathStart);
+stryker.target = "stryker_pathstart";
+pathStart = GetVehicleNode(stryker.target, "targetname");
+stryker AttachPath(pathStart);
 
-  stryker.veh_pathtype = "follow";
-  stryker vehPhys_DisableCrashing();
-  stryker maps\_vehicle::godon();
-  stryker setVehicleLookAtText("Honey Badger", &"");
+stryker.veh_pathtype = "follow";
+stryker vehPhys_DisableCrashing();
+stryker maps\_vehicle::godon();
+stryker setVehicleLookAtText("Honey Badger", &"");
 
-  foreach(player in level.players) {
-    // Workaround for setting the C4 actionslot, setting player.remotemissile_actionslot swaps the actionslot
-    player.remotemissile_actionslot = 4;
-    level thread maps\arcadia_code::laser_targeting_device(player);
-  }
+foreach(player in level.players) {
+  // Workaround for setting the C4 actionslot, setting player.remotemissile_actionslot swaps the actionslot
+  player.remotemissile_actionslot = 4;
+  level thread maps\arcadia_code::laser_targeting_device(player);
+}
 
-  level.stryker.lastTarget = level.stryker;
-  stryker maps\arcadia_stryker::setup_stryker_modes();
-  stryker thread maps\arcadia_stryker::stryker_setmode_ai();
-  stryker thread stryker_so_download_arcadia_laser_reminder_dialogue();
+level.stryker.lastTarget = level.stryker;
+stryker maps\arcadia_stryker::setup_stryker_modes();
+stryker thread maps\arcadia_stryker::stryker_setmode_ai();
+stryker thread stryker_so_download_arcadia_laser_reminder_dialogue();
 
-  stryker thread stryker_greenlight_enemies_in_suppression_zone();
-  stryker thread stryker_disable_laser_reminder_thread();
+stryker thread stryker_greenlight_enemies_in_suppression_zone();
+stryker thread stryker_disable_laser_reminder_thread();
 
-  // first move: go to the end of the covered bridge when player moves out of the way
-  waittill_both_players_touch_targetname("trig_bridge_end");
-  stryker StartPath();
-  firstMoveNode = GetVehicleNode("vnode_bridge", "script_noteworthy");
-  stryker stryker_move_to_node(firstMoveNode, false);
+// first move: go to the end of the covered bridge when player moves out of the way
+waittill_both_players_touch_targetname("trig_bridge_end");
+stryker StartPath();
+firstMoveNode = GetVehicleNode("vnode_bridge", "script_noteworthy");
+stryker stryker_move_to_node(firstMoveNode, false);
 
-  stryker thread stryker_move_with_players();
-  stryker thread stryker_extraction();
+stryker thread stryker_move_with_players();
+stryker thread stryker_extraction();
 }
 
 stryker_so_download_arcadia_laser_reminder_dialogue() {
@@ -1116,33 +1116,33 @@ laser_targeting_device_remove() {
 }
 
 // ----------------- // --- AI STUFF --- // ----------------- so_download_arcadia_enemy_setup() {
-  level.enemies = [];
+level.enemies = [];
 
-  allspawners = GetSpawnerTeamArray("axis");
-  array_thread(allspawners, ::add_spawn_function, ::so_download_arcadia_enemy_spawnfunc);
+allspawners = GetSpawnerTeamArray("axis");
+array_thread(allspawners, ::add_spawn_function, ::so_download_arcadia_enemy_spawnfunc);
 
-  insideGuys = [];
-  outsideGuys = [];
+insideGuys = [];
+outsideGuys = [];
 
-  foreach(spawner in allspawners) {
-    if(!isDefined(spawner.targetname)) {
-      continue;
-    }
-
-    if(IsSubStr(spawner.targetname, "inside")) {
-      insideGuys[insideGuys.size] = spawner;
-    } else if(IsSubStr(spawner.targetname, "outside")) {
-      outsideGuys[outsideGuys.size] = spawner;
-    }
+foreach(spawner in allspawners) {
+  if(!isDefined(spawner.targetname)) {
+    continue;
   }
 
-  array_thread(outsideGuys, ::add_spawn_function, ::so_download_arcadia_outside_enemy_spawnfunc);
+  if(IsSubStr(spawner.targetname, "inside")) {
+    insideGuys[insideGuys.size] = spawner;
+  } else if(IsSubStr(spawner.targetname, "outside")) {
+    outsideGuys[outsideGuys.size] = spawner;
+  }
+}
 
-  level.enemyspawners = allspawners;
+array_thread(outsideGuys, ::add_spawn_function, ::so_download_arcadia_outside_enemy_spawnfunc);
 
-  // DEPRECATED
-  //trigs = getEntArray( "enemy_spawn", "targetname" );
-  //array_thread( trigs, ::so_download_arcadia_enemy_spawn_manager );
+level.enemyspawners = allspawners;
+
+// DEPRECATED
+//trigs = getEntArray( "enemy_spawn", "targetname" );
+//array_thread( trigs, ::so_download_arcadia_enemy_spawn_manager );
 }
 
 so_download_arcadia_enemy_spawnfunc() {
@@ -1178,19 +1178,19 @@ so_download_arcadia_outside_enemy_spawnfunc() {
 }
 
 // ------------------- // --- MISC UTILS --- // ------------------- all_players_closeto(ent, dist) {
-  foundOne = false;
-  foreach(player in level.players) {
-    if(Distance(player.origin, ent.origin) > dist) {
-      foundOne = true;
-      break;
-    }
+foundOne = false;
+foreach(player in level.players) {
+  if(Distance(player.origin, ent.origin) > dist) {
+    foundOne = true;
+    break;
   }
+}
 
-  if(foundOne) {
-    return false;
-  }
+if(foundOne) {
+  return false;
+}
 
-  return true;
+return true;
 }
 
 waittill_both_players_touch_targetname(tn) {

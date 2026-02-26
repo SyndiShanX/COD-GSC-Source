@@ -96,7 +96,7 @@ function function_5160bb1e(killstreaktype) {
   }
 
   level.chopper_gunner.usage = [];
-  level.destructible_callbacks[# "turret_destroyed"] = &function_aecfdb77;
+  level.destructible_callbacks[#"turret_destroyed"] = &function_aecfdb77;
   level.chopper_gunner.shuttingdown = 0;
   level.chopper_gunner.completely_shutdown = 0;
   level.chopper_gunner thread heatseekingmissile::playlockonsoundsthread(self, #"hash_fa62d8cec85b1a0", #"hash_1683ed70beb3f2");
@@ -200,7 +200,7 @@ function function_5160bb1e(killstreaktype) {
       }
 
       trace = bulletTrace(position + (0, 0, 10000), position - (0, 0, 10000), 0, undefined);
-      targetpoint = trace[# "fraction"] > 1 ? (position[0], position[1], 0) : trace[# "position"];
+      targetpoint = trace[#"fraction"] > 1 ? (position[0], position[1], 0) : trace[#"position"];
       var_b0490eb9 = getheliheightlockheight(position);
       groundheight = targetpoint[2];
       height = groundheight + (var_b0490eb9 - groundheight) * bundle.var_ff73e08c;
@@ -371,14 +371,14 @@ function private function_9bdafd36(var_8d7be67c = 1.5) {
 }
 
 function function_294e90d4(ents) {
-  ents[# "gunner"] hidefromplayer(level.chopper_gunner.owner);
-  ents[# "fakearms"] hide();
-  ents[# "fakearms"] showtoplayer(level.chopper_gunner.owner);
-  level.chopper_gunner.gunner = ents[# "gunner"];
+  ents[#"gunner"] hidefromplayer(level.chopper_gunner.owner);
+  ents[#"fakearms"] hide();
+  ents[#"fakearms"] showtoplayer(level.chopper_gunner.owner);
+  level.chopper_gunner.gunner = ents[#"gunner"];
 }
 
 function function_4e4267e0(ents) {
-  ents[# "gunner"] linkto(level.chopper_gunner);
+  ents[#"gunner"] linkto(level.chopper_gunner);
 }
 
 function init_shared() {
@@ -404,8 +404,8 @@ function activatemaingunner(killstreaktype) {
       return 0;
     }
 
-    if(isDefined(level.var_4cc7833a[# "chopper_gunner"])) {
-      if(!self[[level.var_4cc7833a[# "chopper_gunner"]]]()) {
+    if(isDefined(level.var_4cc7833a[#"chopper_gunner"])) {
+      if(!self[[level.var_4cc7833a[#"chopper_gunner"]]]()) {
         return 0;
       }
     }

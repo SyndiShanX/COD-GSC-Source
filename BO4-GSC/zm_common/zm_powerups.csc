@@ -14,20 +14,20 @@ init() {
   }
 
   add_zombie_powerup("insta_kill_ug", "powerup_instant_kill_ug", 1);
-  level._effect[# "powerup_on"] = # "zombie/fx_powerup_on_green_zmb";
-  level._effect[# "powerup_intro"] = # "hash_630b0bc30e08935f";
-  level._effect[# "powerup_grabbed"] = # "zombie/fx_powerup_grab_green_zmb";
-  level._effect[# "powerup_on_solo"] = # "zombie/fx_powerup_on_solo_zmb";
-  level._effect[# "hash_1bbdf961a543a8a4"] = # "hash_5c054ea9b299c2f0";
-  level._effect[# "powerup_grabbed_solo"] = # "zombie/fx_powerup_grab_solo_zmb";
-  level._effect[# "powerup_on_caution"] = # "zombie/fx_powerup_on_caution_zmb";
-  level._effect[# "hash_216d76ce6f19d51c"] = # "hash_2e09347c65fb17c1";
-  level._effect[# "powerup_grabbed_caution"] = # "zombie/fx_powerup_grab_caution_zmb";
+  level._effect[#"powerup_on"] = # "zombie/fx_powerup_on_green_zmb";
+  level._effect[#"powerup_intro"] = # "hash_630b0bc30e08935f";
+  level._effect[#"powerup_grabbed"] = # "zombie/fx_powerup_grab_green_zmb";
+  level._effect[#"powerup_on_solo"] = # "zombie/fx_powerup_on_solo_zmb";
+  level._effect[#"hash_1bbdf961a543a8a4"] = # "hash_5c054ea9b299c2f0";
+  level._effect[#"powerup_grabbed_solo"] = # "zombie/fx_powerup_grab_solo_zmb";
+  level._effect[#"powerup_on_caution"] = # "zombie/fx_powerup_on_caution_zmb";
+  level._effect[#"hash_216d76ce6f19d51c"] = # "hash_2e09347c65fb17c1";
+  level._effect[#"powerup_grabbed_caution"] = # "zombie/fx_powerup_grab_caution_zmb";
 
   if(isDefined(level.using_zombie_powerups) && level.using_zombie_powerups) {
-    level._effect[# "powerup_on_red"] = # "zombie/fx_powerup_on_red_zmb";
-    level._effect[# "hash_68ab4922f64db792"] = # "hash_62b15f4f400643ab";
-    level._effect[# "powerup_grabbed_red"] = # "zombie/fx_powerup_grab_red_zmb";
+    level._effect[#"powerup_on_red"] = # "zombie/fx_powerup_on_red_zmb";
+    level._effect[#"hash_68ab4922f64db792"] = # "hash_62b15f4f400643ab";
+    level._effect[#"powerup_grabbed_red"] = # "zombie/fx_powerup_grab_red_zmb";
   }
 
   clientfield::register("scriptmover", "powerup_fx", 1, 3, "int", &powerup_fx_callback, 0, 0);
@@ -90,7 +90,7 @@ add_zombie_powerup(powerup_name, client_field_name, clientfield_version = 1) {
   }
 }
 
-#include_zombie_powerup(powerup_name) {
+include_zombie_powerup(powerup_name) {
   if(!isDefined(level.zombie_include_powerups)) {
     level.zombie_include_powerups = [];
   }
@@ -109,16 +109,16 @@ powerup_fx_callback(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
   switch (newval) {
     case 1:
-      str_fx = level._effect[# "powerup_on"];
+      str_fx = level._effect[#"powerup_on"];
       break;
     case 2:
-      str_fx = level._effect[# "powerup_on_solo"];
+      str_fx = level._effect[#"powerup_on_solo"];
       break;
     case 3:
-      str_fx = level._effect[# "powerup_on_red"];
+      str_fx = level._effect[#"powerup_on_red"];
       break;
     case 4:
-      str_fx = level._effect[# "powerup_on_caution"];
+      str_fx = level._effect[#"powerup_on_caution"];
       break;
     default:
       return;
@@ -132,16 +132,16 @@ function_618b5680(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      str_fx = level._effect[# "powerup_intro"];
+      str_fx = level._effect[#"powerup_intro"];
       break;
     case 2:
-      str_fx = level._effect[# "hash_1bbdf961a543a8a4"];
+      str_fx = level._effect[#"hash_1bbdf961a543a8a4"];
       break;
     case 3:
-      str_fx = level._effect[# "hash_68ab4922f64db792"];
+      str_fx = level._effect[#"hash_68ab4922f64db792"];
       break;
     case 4:
-      str_fx = level._effect[# "hash_216d76ce6f19d51c"];
+      str_fx = level._effect[#"hash_216d76ce6f19d51c"];
     default:
       return;
   }
@@ -152,16 +152,16 @@ function_618b5680(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_9f7265fd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 1:
-      str_fx = level._effect[# "powerup_grabbed"];
+      str_fx = level._effect[#"powerup_grabbed"];
       break;
     case 2:
-      str_fx = level._effect[# "powerup_grabbed_solo"];
+      str_fx = level._effect[#"powerup_grabbed_solo"];
       break;
     case 3:
-      str_fx = level._effect[# "powerup_grabbed_red"];
+      str_fx = level._effect[#"powerup_grabbed_red"];
       break;
     case 4:
-      str_fx = level._effect[# "powerup_grabbed_caution"];
+      str_fx = level._effect[#"powerup_grabbed_caution"];
       break;
     default:
       return;

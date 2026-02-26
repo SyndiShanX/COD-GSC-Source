@@ -264,7 +264,7 @@ function_baec0416(v_pos, v_angles) {
   }
 
   if(isDefined(v_drop)) {
-    v_ground = groundtrace(v_drop + (0, 0, 32) + (0, 0, 8), v_drop + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
+    v_ground = groundtrace(v_drop + (0, 0, 32) + (0, 0, 8), v_drop + (0, 0, 32) + (0, 0, -100000), 0, self)[#"position"];
     v_normal = getnavmeshfacenormal(v_drop, 32);
     var_55ab02db = function_c1fa62a2(v_angles, v_normal);
     e_goo = util::spawn_model("p8_zm_whi_goop_puddle_01", v_ground, var_55ab02db);

@@ -696,16 +696,16 @@ function function_3511ecd1(entity, mocompanim, mocompanimblendouttime, mocompani
     var_65cbfb52 = distancesquared(mocompanimflag.meleeinfo.var_9bfa8497, mocompanimflag.meleeinfo.adjustedendpos);
     var_201660e6 = tracepassedonnavmesh(mocompanimflag.meleeinfo.var_9bfa8497, mocompanimflag.meleeinfo.adjustedendpos, mocompanimflag getpathfindingradius());
     traceresult = bulletTrace(mocompanimflag.origin, mocompanimflag.meleeinfo.adjustedendpos + (0, 0, 30), 0, mocompanimflag, 0, 0, mocompanimflag.enemy);
-    isvisible = traceresult[# "fraction"] == 1;
+    isvisible = traceresult[#"fraction"] == 1;
     var_535d098c = 0;
 
-    if(isDefined(traceresult[# "hitloc"]) && traceresult[# "hitloc"] == "riotshield") {
+    if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
       var_cc075bd0 = vectornormalize(mocompanimflag.origin - mocompanimflag.meleeinfo.adjustedendpos);
       mocompanimflag.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }
 
-    if(traceresult[# "fraction"] < 0.9) {
+    if(traceresult[#"fraction"] < 0.9) {
       record3dtext("<dev string:x62>", mocompanimflag.origin + (0, 0, 60), (1, 0, 0), "<dev string:x54>");
 
       mocompanimflag.meleeinfo.var_425c4c8b = 0;

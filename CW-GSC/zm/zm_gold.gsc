@@ -124,7 +124,7 @@ function event_handler[level_init] main(eventstruct) {
   level.default_game_mode = "zclassic";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
-  level.custom_spawner_entry[# "crawl"] = &zm_spawner::function_45bb11e4;
+  level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
   level.var_d0ab70a2 = # "hash_466c279241bfbf7c";
   level.player_out_of_playable_area_monitor = getdvarint(#"hash_77fd1a6fe2acd976", 0);
   level.var_e2f95698 = # "hash_10051f0481ec163a";
@@ -233,11 +233,11 @@ function function_d4738f46() {
   level endon(#"end_game");
   var_f27ded04 = getent("vol_player_in_village", "targetname");
   var_417f8343 = getent("vol_player_in_firebase", "targetname");
-  var_1d1bbd52[# "village"] = struct::get_array("initial_spawn_points", "targetname");
-  var_1d1bbd52[# "firebase"] = [];
+  var_1d1bbd52[#"village"] = struct::get_array("initial_spawn_points", "targetname");
+  var_1d1bbd52[#"firebase"] = [];
 
   for(i = 0; i < 4; i++) {
-    var_1d1bbd52[# "firebase"][i] = struct::get("firebase_end_" + i, "targetname");
+    var_1d1bbd52[#"firebase"][i] = struct::get("firebase_end_" + i, "targetname");
   }
 
   while(true) {
@@ -857,30 +857,30 @@ function sndfunctions() {
 }
 
 function setup_personality_character_exerts() {
-  level.exert_sounds[1][# "hitmed"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitmed"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitmed"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[4][# "hitmed"] = "vox_plr_4_exert_pain";
-  level.exert_sounds[1][# "hitlrg"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[4][# "hitlrg"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[1][# "drowning"] = "vox_plr_1_exert_underwater_air_low";
-  level.exert_sounds[2][# "drowning"] = "vox_plr_2_exert_underwater_air_low";
-  level.exert_sounds[3][# "drowning"] = "vox_plr_3_exert_underwater_air_low";
-  level.exert_sounds[4][# "drowning"] = "vox_plr_4_exert_underwater_air_low";
-  level.exert_sounds[1][# "cough"] = "vox_plr_1_exert_gas_cough";
-  level.exert_sounds[2][# "cough"] = "vox_plr_2_exert_gas_cough";
-  level.exert_sounds[3][# "cough"] = "vox_plr_3_exert_gas_cough";
-  level.exert_sounds[4][# "cough"] = "vox_plr_4_exert_gas_cough";
-  level.exert_sounds[1][# "underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
-  level.exert_sounds[2][# "underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
-  level.exert_sounds[3][# "underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
-  level.exert_sounds[4][# "underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
-  level.exert_sounds[1][# "underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
-  level.exert_sounds[2][# "underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
-  level.exert_sounds[3][# "underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
-  level.exert_sounds[4][# "underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
+  level.exert_sounds[1][#"hitmed"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitmed"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitmed"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[4][#"hitmed"] = "vox_plr_4_exert_pain";
+  level.exert_sounds[1][#"hitlrg"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[4][#"hitlrg"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[1][#"drowning"] = "vox_plr_1_exert_underwater_air_low";
+  level.exert_sounds[2][#"drowning"] = "vox_plr_2_exert_underwater_air_low";
+  level.exert_sounds[3][#"drowning"] = "vox_plr_3_exert_underwater_air_low";
+  level.exert_sounds[4][#"drowning"] = "vox_plr_4_exert_underwater_air_low";
+  level.exert_sounds[1][#"cough"] = "vox_plr_1_exert_gas_cough";
+  level.exert_sounds[2][#"cough"] = "vox_plr_2_exert_gas_cough";
+  level.exert_sounds[3][#"cough"] = "vox_plr_3_exert_gas_cough";
+  level.exert_sounds[4][#"cough"] = "vox_plr_4_exert_gas_cough";
+  level.exert_sounds[1][#"underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
+  level.exert_sounds[2][#"underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
+  level.exert_sounds[3][#"underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
+  level.exert_sounds[4][#"underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
+  level.exert_sounds[1][#"underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
+  level.exert_sounds[2][#"underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
+  level.exert_sounds[3][#"underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
+  level.exert_sounds[4][#"underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
 }
 
 function setupmusic() {
@@ -1061,7 +1061,7 @@ function function_25696a75() {
 function function_ddc13fd6() {
   var_88b0ae7e = [];
   var_22dbd27f = level.var_aa31c120;
-  s_spot = array::random(level.zm_loc_types[# "zombie_location"]);
+  s_spot = array::random(level.zm_loc_types[#"zombie_location"]);
   var_eafe85db = [];
   var_99fb71cc = [];
   var_da5b34aa = [];
@@ -1228,7 +1228,7 @@ function function_e0a4ccda() {
 }
 
 function private function_76c00f63(a_ents) {
-  level.mixer = a_ents[# "prop 1"];
+  level.mixer = a_ents[#"prop 1"];
   level.mixer thread function_e77d33cb();
 }
 

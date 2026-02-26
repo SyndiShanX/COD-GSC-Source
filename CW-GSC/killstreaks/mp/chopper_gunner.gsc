@@ -39,7 +39,7 @@ function private function_5160bb1e(killstreaktype) {
     player thread function_25d9a09f(level.chopper_gunner);
   }
 
-  util::function_a3f7de13(21, player.team, player getentitynumber(), level.killstreaks[# "chopper_gunner"].uiname);
+  util::function_a3f7de13(21, player.team, player getentitynumber(), level.killstreaks[#"chopper_gunner"].uiname);
   return var_d6940e18;
 }
 

@@ -215,37 +215,37 @@ calculate_finish() {
 
 //--------------------------------------------------------- // Course Init
 //--------------------------------------------------------- init_course_triggers() {
-  so_trigger = GetEnt("so_player_melee_trigger", "targetname");
-  level thread maps\_load::flag_set_trigger(so_trigger);
-  so_trigger trigger_off();
+so_trigger = GetEnt("so_player_melee_trigger", "targetname");
+level thread maps\_load::flag_set_trigger(so_trigger);
+so_trigger trigger_off();
 
-  // Remove thise stair2 trigger, and use the so version
-  trigger = get_script_flag_trigger("player_course_stairs2", so_trigger);
-  trigger Delete();
+// Remove thise stair2 trigger, and use the so version
+trigger = get_script_flag_trigger("player_course_stairs2", so_trigger);
+trigger Delete();
 
-  level.so_end_trigger = get_script_flag_trigger("so_player_course_end");
-  level.so_end_trigger trigger_off();
+level.so_end_trigger = get_script_flag_trigger("so_player_course_end");
+level.so_end_trigger trigger_off();
 
-  triggers = getEntArray("target_trigger", "targetname");
+triggers = getEntArray("target_trigger", "targetname");
 
-  foreach(trigger in triggers) {
-    trigger.script_linkto_num = int(trigger.script_linkto);
+foreach(trigger in triggers) {
+  trigger.script_linkto_num = int(trigger.script_linkto);
 
-    // Disable the trigger manually, cause trainer.gsc will use trigger_off() / trigger_on()
-    // We want to trigger these manually via script depending on how many targets are hit.
-    if(trigger.script_linkto != "1") {
-      // Don't have the trigger go back to the realOrigin from trigger_on()
-      if(isDefined(trigger.realOrigin)) {
-        trigger.realOrigin = undefined;
-      }
-
-      trigger.origin = trigger.origin + (0, 0, -10000);
+  // Disable the trigger manually, cause trainer.gsc will use trigger_off() / trigger_on()
+  // We want to trigger these manually via script depending on how many targets are hit.
+  if(trigger.script_linkto != "1") {
+    // Don't have the trigger go back to the realOrigin from trigger_on()
+    if(isDefined(trigger.realOrigin)) {
+      trigger.realOrigin = undefined;
     }
+
+    trigger.origin = trigger.origin + (0, 0, -10000);
   }
+}
 
-  triggers = course_trigger_sort(triggers);
+triggers = course_trigger_sort(triggers);
 
-  thread course_trigger_thread(triggers);
+thread course_trigger_thread(triggers);
 }
 
 course_trigger_sort(triggers) {
@@ -394,33 +394,33 @@ get_script_flag_trigger(str, exclude) {
 
 //--------------------------------------------------------- // Kill Threads
 //--------------------------------------------------------- civilian_kill_thread() {
-  level endon("mission failed");
-  level endon("special_op_terminated");
-  level endon("challenge_done");
+level endon("mission failed");
+level endon("special_op_terminated");
+level endon("challenge_done");
 
-  count = 0;
-  while(1) {
-    level waittill("civilian_killed");
+count = 0;
+while(1) {
+  level waittill("civilian_killed");
 
-    count++;
-    level notify("civilian_killed_" + count);
+  count++;
+  level notify("civilian_killed_" + count);
 
-    so_civilian_hit_hud();
+  so_civilian_hit_hud();
 
-    //		maps\_specialops::info_hud_decrement_timer( level.so_civ_deduction );
+  //		maps\_specialops::info_hud_decrement_timer( level.so_civ_deduction );
 
-    foreach(player in level.players) {
-      player.HUDcivviesKilled setValue(level.friendlies_hit);
-    }
-
-    if(level.friendlies_hit >= level.max_civilian_casualties) {
-      flag_set("kill_too_many_civs");
-
-      set_failure_quote("friendlies");
-      missionFailedWrapper();
-      return;
-    }
+  foreach(player in level.players) {
+    player.HUDcivviesKilled setValue(level.friendlies_hit);
   }
+
+  if(level.friendlies_hit >= level.max_civilian_casualties) {
+    flag_set("kill_too_many_civs");
+
+    set_failure_quote("friendlies");
+    missionFailedWrapper();
+    return;
+  }
+}
 }
 
 enemy_kill_thread() {
@@ -618,19 +618,19 @@ so_course_loop_think() {
 
 // -------------------------------------------------------- // Target Flag Management copied from Trainer without the endon
 // -------------------------------------------------------- so_target_flag_management() {
-  so_waittill_targets_killed(3, "course_initial_targets_dead");
+so_waittill_targets_killed(3, "course_initial_targets_dead");
 
-  so_waittill_targets_killed(2, "course_pre_start_targets_dead");
+so_waittill_targets_killed(2, "course_pre_start_targets_dead");
 
-  so_waittill_targets_killed(5, "course_start_targets_dead");
+so_waittill_targets_killed(5, "course_start_targets_dead");
 
-  so_waittill_targets_killed(3, "course_first_floor_targets_dead");
+so_waittill_targets_killed(3, "course_first_floor_targets_dead");
 
-  so_waittill_targets_killed(5, "course_second_floor_targets_dead");
+so_waittill_targets_killed(5, "course_second_floor_targets_dead");
 
-  so_waittill_targets_killed(4, "course_pre_end_targets_dead");
+so_waittill_targets_killed(4, "course_pre_end_targets_dead");
 
-  so_waittill_targets_killed(2, "course_end_targets_dead");
+so_waittill_targets_killed(2, "course_end_targets_dead");
 }
 
 so_waittill_targets_killed(iNumberOfTargets, sFlagToSetWhenKilled) {
@@ -868,10 +868,10 @@ delete_heli_node() {
 
 //--------------------------------------------------------- // Stars
 //--------------------------------------------------------- init_stars() {
-  level.star_count = 3;
-  self thread star_challenge_hud(0, level.race_times["normal"], 5, 0);
-  self thread star_challenge_hud(1, level.race_times["hard"], 5, 1);
-  self thread star_challenge_hud(2, level.race_times["veteran"], 1, 2);
+level.star_count = 3;
+self thread star_challenge_hud(0, level.race_times["normal"], 5, 0);
+self thread star_challenge_hud(1, level.race_times["hard"], 5, 1);
+self thread star_challenge_hud(2, level.race_times["veteran"], 1, 2);
 }
 
 star_challenge_hud(x_pos_offset, removeTimer, civ_kill_num, next_star_count) {

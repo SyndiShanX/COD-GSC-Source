@@ -57,11 +57,11 @@ widows_wine_precache() {
     return;
   }
 
-  level._effect[# "widow_light"] = "zombie/fx_perk_widows_wine_zmb";
-  level.machine_assets[# "specialty_widowswine"] = spawnStruct();
-  level.machine_assets[# "specialty_widowswine"].weapon = getweapon("zombie_perk_bottle_widows_wine");
-  level.machine_assets[# "specialty_widowswine"].off_model = "p7_zm_vending_widows_wine";
-  level.machine_assets[# "specialty_widowswine"].on_model = "p7_zm_vending_widows_wine";
+  level._effect[#"widow_light"] = "zombie/fx_perk_widows_wine_zmb";
+  level.machine_assets[#"specialty_widowswine"] = spawnStruct();
+  level.machine_assets[#"specialty_widowswine"].weapon = getweapon("zombie_perk_bottle_widows_wine");
+  level.machine_assets[#"specialty_widowswine"].off_model = "p7_zm_vending_widows_wine";
+  level.machine_assets[#"specialty_widowswine"].on_model = "p7_zm_vending_widows_wine";
 }
 
 widows_wine_register_clientfield() {

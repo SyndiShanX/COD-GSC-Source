@@ -254,7 +254,7 @@ function private function_8f181838(var_5b276012, params, targetposition) {
     v_position = targetposition + (n_radius * cos(n_angle), n_radius * sin(n_angle), 0);
     var_86f8b2c9 = (0, 0, getheliheightlockheight(v_position));
     a_trace = groundtrace(v_position + var_86f8b2c9, v_position - var_86f8b2c9, 1, undefined);
-    var_5acfe25f = a_trace[# "position"];
+    var_5acfe25f = a_trace[#"position"];
     self thread function_83e61117(var_5acfe25f, n_yaw);
   }
 

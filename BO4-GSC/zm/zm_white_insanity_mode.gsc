@@ -79,7 +79,7 @@ init_quest() {
 
       vh_wisp.origin = nd_start.origin;
       vh_wisp.angles = nd_start.angles;
-      arrayremovevalue(level.ai[# "axis"], vh_wisp);
+      arrayremovevalue(level.ai[#"axis"], vh_wisp);
       var_ef55363f.origin = nd_start.origin;
       var_ef55363f.angles = nd_start.angles;
       var_ef55363f enablelinkto();
@@ -568,14 +568,14 @@ function_7cb78bcd() {
     }
   }
 
-  enable_zone(level.zones[# "zone_culdesac_green"], 1);
-  enable_zone(level.zones[# "zone_green_house_f1"], 1);
-  enable_zone(level.zones[# "zone_green_house_f2"], 1);
-  enable_zone(level.zones[# "zone_green_backyard"], 1);
-  enable_zone(level.zones[# "zone_culdesac_yellow"], 1);
-  enable_zone(level.zones[# "zone_yellow_house_f1"], 1);
-  enable_zone(level.zones[# "zone_yellow_house_f2"], 1);
-  enable_zone(level.zones[# "zone_yellow_backyard"], 1);
+  enable_zone(level.zones[#"zone_culdesac_green"], 1);
+  enable_zone(level.zones[#"zone_green_house_f1"], 1);
+  enable_zone(level.zones[#"zone_green_house_f2"], 1);
+  enable_zone(level.zones[#"zone_green_backyard"], 1);
+  enable_zone(level.zones[#"zone_culdesac_yellow"], 1);
+  enable_zone(level.zones[#"zone_yellow_house_f1"], 1);
+  enable_zone(level.zones[#"zone_yellow_house_f2"], 1);
+  enable_zone(level.zones[#"zone_yellow_backyard"], 1);
 }
 
 enable_zone(zone, is_enabled = 1) {

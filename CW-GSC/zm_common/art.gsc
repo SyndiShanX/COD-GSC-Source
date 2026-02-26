@@ -14,15 +14,15 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   if(!isDefined(level.dofdefault)) {
-    level.dofdefault[# "nearstart"] = 0;
-    level.dofdefault[# "nearend"] = 1;
-    level.dofdefault[# "farstart"] = 8000;
-    level.dofdefault[# "farend"] = 10000;
-    level.dofdefault[# "nearblur"] = 6;
-    level.dofdefault[# "farblur"] = 0;
+    level.dofdefault[#"nearstart"] = 0;
+    level.dofdefault[#"nearend"] = 1;
+    level.dofdefault[#"farstart"] = 8000;
+    level.dofdefault[#"farend"] = 10000;
+    level.dofdefault[#"nearblur"] = 6;
+    level.dofdefault[#"farblur"] = 0;
   }
 
-  level.curdof = (level.dofdefault[# "farstart"] - level.dofdefault[# "nearend"]) / 2;
+  level.curdof = (level.dofdefault[#"farstart"] - level.dofdefault[#"nearend"]) / 2;
 
   thread tweakart();
 
@@ -96,12 +96,12 @@ function tweakart() {
   setDvar(#"scr_fog_fraction", 1);
   setDvar(#"scr_art_dump", 0);
   setDvar(#"scr_art_sun_fog_dir_set", 0);
-  setDvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
-  setDvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
-  setDvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
-  setDvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
-  setDvar(#"scr_dof_nearblur", level.dofdefault[# "nearblur"]);
-  setDvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
+  setDvar(#"scr_dof_nearstart", level.dofdefault[#"nearstart"]);
+  setDvar(#"scr_dof_nearend", level.dofdefault[#"nearend"]);
+  setDvar(#"scr_dof_farstart", level.dofdefault[#"farstart"]);
+  setDvar(#"scr_dof_farend", level.dofdefault[#"farend"]);
+  setDvar(#"scr_dof_nearblur", level.dofdefault[#"nearblur"]);
+  setDvar(#"scr_dof_farblur", level.dofdefault[#"farblur"]);
   file = undefined;
   filename = undefined;
   tweak_toggle = 1;
@@ -180,34 +180,34 @@ function tweakart() {
 }
 
 function fovslidercheck() {
-  if(level.dofdefault[# "nearstart"] >= level.dofdefault[# "nearend"]) {
-    level.dofdefault[# "nearstart"] = level.dofdefault[# "nearend"] - 1;
-    setDvar(#"scr_dof_nearstart", level.dofdefault[# "nearstart"]);
+  if(level.dofdefault[#"nearstart"] >= level.dofdefault[#"nearend"]) {
+    level.dofdefault[#"nearstart"] = level.dofdefault[#"nearend"] - 1;
+    setDvar(#"scr_dof_nearstart", level.dofdefault[#"nearstart"]);
   }
 
-  if(level.dofdefault[# "nearend"] <= level.dofdefault[# "nearstart"]) {
-    level.dofdefault[# "nearend"] = level.dofdefault[# "nearstart"] + 1;
-    setDvar(#"scr_dof_nearend", level.dofdefault[# "nearend"]);
+  if(level.dofdefault[#"nearend"] <= level.dofdefault[#"nearstart"]) {
+    level.dofdefault[#"nearend"] = level.dofdefault[#"nearstart"] + 1;
+    setDvar(#"scr_dof_nearend", level.dofdefault[#"nearend"]);
   }
 
-  if(level.dofdefault[# "farstart"] >= level.dofdefault[# "farend"]) {
-    level.dofdefault[# "farstart"] = level.dofdefault[# "farend"] - 1;
-    setDvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+  if(level.dofdefault[#"farstart"] >= level.dofdefault[#"farend"]) {
+    level.dofdefault[#"farstart"] = level.dofdefault[#"farend"] - 1;
+    setDvar(#"scr_dof_farstart", level.dofdefault[#"farstart"]);
   }
 
-  if(level.dofdefault[# "farend"] <= level.dofdefault[# "farstart"]) {
-    level.dofdefault[# "farend"] = level.dofdefault[# "farstart"] + 1;
-    setDvar(#"scr_dof_farend", level.dofdefault[# "farend"]);
+  if(level.dofdefault[#"farend"] <= level.dofdefault[#"farstart"]) {
+    level.dofdefault[#"farend"] = level.dofdefault[#"farstart"] + 1;
+    setDvar(#"scr_dof_farend", level.dofdefault[#"farend"]);
   }
 
-  if(level.dofdefault[# "farblur"] >= level.dofdefault[# "nearblur"]) {
-    level.dofdefault[# "farblur"] = level.dofdefault[# "nearblur"] - 0.1;
-    setDvar(#"scr_dof_farblur", level.dofdefault[# "farblur"]);
+  if(level.dofdefault[#"farblur"] >= level.dofdefault[#"nearblur"]) {
+    level.dofdefault[#"farblur"] = level.dofdefault[#"nearblur"] - 0.1;
+    setDvar(#"scr_dof_farblur", level.dofdefault[#"farblur"]);
   }
 
-  if(level.dofdefault[# "farstart"] <= level.dofdefault[# "nearend"]) {
-    level.dofdefault[# "farstart"] = level.dofdefault[# "nearend"] + 1;
-    setDvar(#"scr_dof_farstart", level.dofdefault[# "farstart"]);
+  if(level.dofdefault[#"farstart"] <= level.dofdefault[#"nearend"]) {
+    level.dofdefault[#"farstart"] = level.dofdefault[#"nearend"] + 1;
+    setDvar(#"scr_dof_farstart", level.dofdefault[#"farstart"]);
   }
 }
 

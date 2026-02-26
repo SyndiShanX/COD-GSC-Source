@@ -24,10 +24,10 @@ event_handler[gametype_init] main(eventstruct) {
 on_localclient_connect(localclientnum) {
   self.domflags = [];
 
-  while(!isDefined(level.domflags[# "a"])) {
-    self.domflags[# "a"] = serverobjective_getobjective(localclientnum, "dom_a");
-    self.domflags[# "b"] = serverobjective_getobjective(localclientnum, "dom_b");
-    self.domflags[# "c"] = serverobjective_getobjective(localclientnum, "dom_c");
+  while(!isDefined(level.domflags[#"a"])) {
+    self.domflags[#"a"] = serverobjective_getobjective(localclientnum, "dom_a");
+    self.domflags[#"b"] = serverobjective_getobjective(localclientnum, "dom_b");
+    self.domflags[#"c"] = serverobjective_getobjective(localclientnum, "dom_c");
     waitframe(1);
   }
 

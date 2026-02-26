@@ -221,23 +221,23 @@ function function_823fd8b5() {
 }
 
 function function_20ecf97d(a_ents) {
-  level.var_1588c3c8 = a_ents[# "hash_39b2b3e2b4b9deaa"];
+  level.var_1588c3c8 = a_ents[#"hash_39b2b3e2b4b9deaa"];
   level.var_1588c3c8 thread entname::add(#"hash_a566926dd89b47", #"axis");
-  var_7198a076 = a_ents[# "hash_713540a10ff22151"];
+  var_7198a076 = a_ents[#"hash_713540a10ff22151"];
   var_7198a076 thread entname::add(#"hash_6a1195604c394694", #"axis");
-  kravchenko = a_ents[# "kravchenko"];
+  kravchenko = a_ents[#"kravchenko"];
   kravchenko thread entname::add(#"hash_3a5989f4b42dab1e", #"axis");
-  general = a_ents[# "hash_1b438d741661c069"];
+  general = a_ents[#"hash_1b438d741661c069"];
   general thread entname::add(#"hash_5adf117d46cc06f9", #"axis");
-  general = a_ents[# "hash_1b438c741661beb6"];
+  general = a_ents[#"hash_1b438c741661beb6"];
   general thread entname::add(#"hash_5adf127d46cc08ac", #"axis");
-  general = a_ents[# "hash_1b438f741661c3cf"];
+  general = a_ents[#"hash_1b438f741661c3cf"];
   general thread entname::add(#"hash_5adf137d46cc0a5f", #"axis");
-  general = a_ents[# "hash_1b438e741661c21c"];
+  general = a_ents[#"hash_1b438e741661c21c"];
   general thread entname::add(#"hash_5adf147d46cc0c12", #"axis");
-  general = a_ents[# "hash_1b4391741661c735"];
+  general = a_ents[#"hash_1b4391741661c735"];
   general thread entname::add(#"hash_5adf157d46cc0dc5", #"axis");
-  general = a_ents[# "hash_1b4390741661c582"];
+  general = a_ents[#"hash_1b4390741661c582"];
   general thread entname::add(#"hash_5adf167d46cc0f78", #"axis");
 }
 

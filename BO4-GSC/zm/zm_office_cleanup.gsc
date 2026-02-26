@@ -103,7 +103,7 @@ function_1969a102() {
     if(self zm_office_defcon::function_cacd3270() && zm_office_defcon::is_packroom_clear()) {
       self thread zm_office_teleporters::function_9d689cc4(level.portal_pack);
     } else if(isDefined(target) && zm_office_floors::function_35babccd(self) != zm_office_floors::function_35babccd(target)) {
-      if(level flag::get(#"portals_active") && level.zones[# "war_room_zone_north"].is_enabled) {
+      if(level flag::get(#"portals_active") && level.zones[#"war_room_zone_north"].is_enabled) {
         self thread zm_office_teleporters::function_9d689cc4();
       } else {
         self.favoriteenemy = undefined;

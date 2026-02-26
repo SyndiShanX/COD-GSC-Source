@@ -134,38 +134,38 @@ function function_9f888e75(weapons_table) {
 }
 
 function function_5be71695() {
-  level.classmap[# "class_smg"] = "CLASS_SMG";
-  level.classmap[# "class_cqb"] = "CLASS_CQB";
-  level.classmap[# "class_assault"] = "CLASS_ASSAULT";
-  level.classmap[# "class_lmg"] = "CLASS_LMG";
-  level.classmap[# "class_sniper"] = "CLASS_SNIPER";
-  level.classmap[# "default_6"] = "DEFAULT_6";
-  level.classmap[# "default_7"] = "DEFAULT_7";
-  level.classmap[# "default_8"] = "DEFAULT_8";
-  level.classmap[# "default_9"] = "DEFAULT_9";
-  level.classmap[# "default_10"] = "DEFAULT_10";
-  level.classmap[# "default_11"] = "DEFAULT_11";
-  level.classmap[# "default_12"] = "DEFAULT_12";
-  level.classmap[# "default_13"] = "DEFAULT_13";
-  level.classmap[# "default_14"] = "DEFAULT_14";
-  level.classmap[# "default_15"] = "DEFAULT_15";
-  level.classmap[# "custom0"] = "CLASS_CUSTOM1";
-  level.classmap[# "custom1"] = "CLASS_CUSTOM2";
-  level.classmap[# "custom2"] = "CLASS_CUSTOM3";
-  level.classmap[# "custom3"] = "CLASS_CUSTOM4";
-  level.classmap[# "custom4"] = "CLASS_CUSTOM5";
-  level.classmap[# "custom5"] = "CLASS_CUSTOM6";
-  level.classmap[# "custom6"] = "CLASS_CUSTOM7";
-  level.classmap[# "custom7"] = "CLASS_CUSTOM8";
-  level.classmap[# "custom8"] = "CLASS_CUSTOM9";
-  level.classmap[# "custom9"] = "CLASS_CUSTOM10";
-  level.classmap[# "custom10"] = "CLASS_CUSTOM_BONUS1";
-  level.classmap[# "custom11"] = "CLASS_CUSTOM_BONUS2";
-  level.classmap[# "custom12"] = level.classmap[# "class_smg"];
-  level.classmap[# "custom13"] = level.classmap[# "class_cqb"];
-  level.classmap[# "custom14"] = level.classmap[# "class_assault"];
-  level.classmap[# "custom15"] = level.classmap[# "class_lmg"];
-  level.classmap[# "custom16"] = level.classmap[# "class_sniper"];
+  level.classmap[#"class_smg"] = "CLASS_SMG";
+  level.classmap[#"class_cqb"] = "CLASS_CQB";
+  level.classmap[#"class_assault"] = "CLASS_ASSAULT";
+  level.classmap[#"class_lmg"] = "CLASS_LMG";
+  level.classmap[#"class_sniper"] = "CLASS_SNIPER";
+  level.classmap[#"default_6"] = "DEFAULT_6";
+  level.classmap[#"default_7"] = "DEFAULT_7";
+  level.classmap[#"default_8"] = "DEFAULT_8";
+  level.classmap[#"default_9"] = "DEFAULT_9";
+  level.classmap[#"default_10"] = "DEFAULT_10";
+  level.classmap[#"default_11"] = "DEFAULT_11";
+  level.classmap[#"default_12"] = "DEFAULT_12";
+  level.classmap[#"default_13"] = "DEFAULT_13";
+  level.classmap[#"default_14"] = "DEFAULT_14";
+  level.classmap[#"default_15"] = "DEFAULT_15";
+  level.classmap[#"custom0"] = "CLASS_CUSTOM1";
+  level.classmap[#"custom1"] = "CLASS_CUSTOM2";
+  level.classmap[#"custom2"] = "CLASS_CUSTOM3";
+  level.classmap[#"custom3"] = "CLASS_CUSTOM4";
+  level.classmap[#"custom4"] = "CLASS_CUSTOM5";
+  level.classmap[#"custom5"] = "CLASS_CUSTOM6";
+  level.classmap[#"custom6"] = "CLASS_CUSTOM7";
+  level.classmap[#"custom7"] = "CLASS_CUSTOM8";
+  level.classmap[#"custom8"] = "CLASS_CUSTOM9";
+  level.classmap[#"custom9"] = "CLASS_CUSTOM10";
+  level.classmap[#"custom10"] = "CLASS_CUSTOM_BONUS1";
+  level.classmap[#"custom11"] = "CLASS_CUSTOM_BONUS2";
+  level.classmap[#"custom12"] = level.classmap[#"class_smg"];
+  level.classmap[#"custom13"] = level.classmap[#"class_cqb"];
+  level.classmap[#"custom14"] = level.classmap[#"class_assault"];
+  level.classmap[#"custom15"] = level.classmap[#"class_lmg"];
+  level.classmap[#"custom16"] = level.classmap[#"class_sniper"];
 }
 
 function function_5f206535() {
@@ -513,21 +513,21 @@ function give_killstreak(var_523d9b33, &var_58335e4f) {
 
         if(level.usingscorestreaks === 1) {
           if(weapon.iscarriedkillstreak) {
-            if(!isDefined(self.pers[# "held_killstreak_ammo_count"][weapon])) {
-              self.pers[# "held_killstreak_ammo_count"][weapon] = 0;
+            if(!isDefined(self.pers[#"held_killstreak_ammo_count"][weapon])) {
+              self.pers[#"held_killstreak_ammo_count"][weapon] = 0;
             }
 
-            if(!isDefined(self.pers[# "held_killstreak_clip_count"][weapon])) {
-              self.pers[# "held_killstreak_clip_count"][weapon] = 0;
+            if(!isDefined(self.pers[#"held_killstreak_clip_count"][weapon])) {
+              self.pers[#"held_killstreak_clip_count"][weapon] = 0;
             }
 
-            if(self.pers[# "held_killstreak_ammo_count"][weapon] > 0) {
+            if(self.pers[#"held_killstreak_ammo_count"][weapon] > 0) {
               self killstreaks::function_fa6e0467(weapon);
             } else {
               self function_3ba6ee5d(weapon, 0);
             }
           } else {
-            self setweaponammoclip(weapon, isDefined(self.pers[# "killstreak_quantity"][weapon]) ? self.pers[# "killstreak_quantity"][weapon] : 0);
+            self setweaponammoclip(weapon, isDefined(self.pers[#"killstreak_quantity"][weapon]) ? self.pers[#"killstreak_quantity"][weapon] : 0);
           }
         }
 
@@ -702,7 +702,7 @@ function function_f436358b(weaponclass) {
     pixendevent();
   } else {
     pixbeginevent(#"");
-    assert(isDefined(self.pers[# "class"]), "<dev string:xf0>");
+    assert(isDefined(self.pers[#"class"]), "<dev string:xf0>");
     self.class_num_for_global_weapons = 0;
     pixendevent();
   }
@@ -752,7 +752,7 @@ function get_class_num(weaponclass) {
 function private function_d81e599e() {
   self.spawnweapon = level.weaponbasemeleeheld;
   self giveweapon(level.weaponbasemeleeheld);
-  self.pers[# "spawnweapon"] = self.spawn_weapon;
+  self.pers[#"spawnweapon"] = self.spawn_weapon;
   switchimmediate = isDefined(self.alreadysetspawnweapononce);
   self setspawnweapon(self.spawnweapon, switchimmediate);
   self.alreadysetspawnweapononce = 1;
@@ -799,10 +799,10 @@ function private give_weapon(weapon, slot, var_a6a8156, var_bc218695) {
       self givemaxammo(weapon);
     }
 
-    changedspecialist = self.pers[# "changed_specialist"];
+    changedspecialist = self.pers[#"changed_specialist"];
 
     if(weapon.isgadget) {
-      self ability_util::gadget_reset(weapon, self.pers[# "changed_class"], !util::isoneround(), util::isfirstround(), changedspecialist);
+      self ability_util::gadget_reset(weapon, self.pers[#"changed_class"], !util::isoneround(), util::isfirstround(), changedspecialist);
     }
   }
 
@@ -973,18 +973,18 @@ function private function_f20f595a(previous_weapon, var_c41b864, var_4571c11d) {
 }
 
 function function_d98a8122(spawn_weapon) {
-  if(!isDefined(self.spawnweapon) && isDefined(self.pers[# "spawnweapon"])) {
-    self.spawnweapon = self.pers[# "spawnweapon"];
+  if(!isDefined(self.spawnweapon) && isDefined(self.pers[#"spawnweapon"])) {
+    self.spawnweapon = self.pers[#"spawnweapon"];
   }
 
-  if(isDefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawn_weapon) && !self.pers[# "changed_class"]) {
+  if(isDefined(self.spawnweapon) && doesweaponreplacespawnweapon(self.spawnweapon, spawn_weapon) && !self.pers[#"changed_class"]) {
     spawn_weapon = self.spawnweapon;
   }
 
   self thread initweaponattachments(spawn_weapon);
-  self.pers[# "changed_class"] = 0;
+  self.pers[#"changed_class"] = 0;
   self.spawnweapon = spawn_weapon;
-  self.pers[# "spawn_weapon"] = self.spawnweapon;
+  self.pers[#"spawn_weapon"] = self.spawnweapon;
 
   if(spawn_weapon != level.weaponnone) {
     switchimmediate = isDefined(self.alreadysetspawnweapononce);
@@ -1052,10 +1052,10 @@ function function_5536bd9e() {
 
 function private function_8e961216(slot, previous_weapon) {
   pixbeginevent(#"");
-  changedclass = self.pers[# "changed_class"];
+  changedclass = self.pers[#"changed_class"];
   roundbased = !util::isoneround();
   firstround = util::isfirstround();
-  changedspecialist = self.pers[# "changed_specialist"];
+  changedspecialist = self.pers[#"changed_specialist"];
   primaryoffhand = level.weaponnone;
   primaryoffhandcount = 0;
   primaryoffhandname = self function_b958b70d(self.class_num, "primarygrenade");
@@ -1068,11 +1068,11 @@ function private function_8e961216(slot, previous_weapon) {
     primaryoffhand = getweapon(primaryoffhandname);
     primaryoffhandcount = 1 + self getloadoutitem(self.class_num, "primarygrenadecount");
 
-    if(isDefined(self.pers[# "primarygrenadecount"]) && self.pers[# "primarygrenadecount"] < primaryoffhandcount && isDefined(self.pers[# "held_gadgets_power"]) && isDefined(self.pers[# "held_gadgets_power"][primaryoffhand])) {
-      self.pers[# "held_gadgets_power"][primaryoffhand] *= self.pers[# "primarygrenadecount"] / primaryoffhandcount;
+    if(isDefined(self.pers[#"primarygrenadecount"]) && self.pers[#"primarygrenadecount"] < primaryoffhandcount && isDefined(self.pers[#"held_gadgets_power"]) && isDefined(self.pers[#"held_gadgets_power"][primaryoffhand])) {
+      self.pers[#"held_gadgets_power"][primaryoffhand] *= self.pers[#"primarygrenadecount"] / primaryoffhandcount;
     }
 
-    self.pers[# "primarygrenadecount"] = primaryoffhandcount;
+    self.pers[#"primarygrenadecount"] = primaryoffhandcount;
   }
 
   if(primaryoffhand != level.weaponnull && getdvarint(#"hash_67611bd062ea07ce", 0) == 0) {
@@ -1116,10 +1116,10 @@ function private function_8e961216(slot, previous_weapon) {
 
 function function_c3448ab0(slot, previous_weapon, force_give_gadget_health_regen = 1) {
   pixbeginevent(#"");
-  changedclass = self.pers[# "changed_class"];
+  changedclass = self.pers[#"changed_class"];
   roundbased = !util::isoneround();
   firstround = util::isfirstround();
-  changedspecialist = self.pers[# "changed_specialist"];
+  changedspecialist = self.pers[#"changed_specialist"];
   secondaryoffhand = level.weaponnone;
   secondaryoffhandcount = 0;
 
@@ -1198,10 +1198,10 @@ function function_c3448ab0(slot, previous_weapon, force_give_gadget_health_regen
 
 function private give_special_offhand(slot, previous_weapon) {
   pixbeginevent(#"");
-  changedclass = self.pers[# "changed_class"];
+  changedclass = self.pers[#"changed_class"];
   roundbased = !util::isoneround();
   firstround = util::isfirstround();
-  changedspecialist = self.pers[# "changed_specialist"];
+  changedspecialist = self.pers[#"changed_specialist"];
   specialoffhand = level.weaponnone;
   var_4ee2888b = 0;
   specialoffhandcount = 0;
@@ -1212,11 +1212,11 @@ function private give_special_offhand(slot, previous_weapon) {
     var_4ee2888b = self getloadoutitem(self.class_num, "specialgrenadecount");
     specialoffhandcount = var_4ee2888b < 0 ? 1 : 2;
 
-    if(isDefined(self.pers[# "specialgrenadecount"]) && self.pers[# "specialgrenadecount"] < specialoffhandcount && isDefined(self.pers[# "held_gadgets_power"]) && isDefined(self.pers[# "held_gadgets_power"][specialoffhand])) {
-      self.pers[# "held_gadgets_power"][specialoffhand] *= self.pers[# "specialgrenadecount"] / specialoffhandcount;
+    if(isDefined(self.pers[#"specialgrenadecount"]) && self.pers[#"specialgrenadecount"] < specialoffhandcount && isDefined(self.pers[#"held_gadgets_power"]) && isDefined(self.pers[#"held_gadgets_power"][specialoffhand])) {
+      self.pers[#"held_gadgets_power"][specialoffhand] *= self.pers[#"specialgrenadecount"] / specialoffhandcount;
     }
 
-    self.pers[# "specialgrenadecount"] = specialoffhandcount;
+    self.pers[#"specialgrenadecount"] = specialoffhandcount;
   }
 
   if(isitemrestricted(specialoffhand.name) || !function_50797a7f(specialoffhand.name) || is_true(level.disablefieldupgrade)) {
@@ -1259,10 +1259,10 @@ function private give_special_offhand(slot, previous_weapon) {
 
 function private give_ultimate(slot, previous_weapon) {
   pixbeginevent(#"");
-  changedclass = self.pers[# "changed_class"];
+  changedclass = self.pers[#"changed_class"];
   roundbased = !util::isoneround();
   firstround = util::isfirstround();
-  changedspecialist = self.pers[# "changed_specialist"];
+  changedspecialist = self.pers[#"changed_specialist"];
   classnum = self.class_num_for_global_weapons;
   ultimate = level.weaponnone;
   var_36aac800 = 0;
@@ -1444,7 +1444,7 @@ function private function_43048d33(spawn_weapon, primaryweapon, var_e0f216b9 = 0
   self.switchedteamsresetgadgets = 0;
   self.var_560765bb = gettime();
 
-  if(is_true(self.pers[# "changed_specialist"])) {
+  if(is_true(self.pers[#"changed_specialist"])) {
     self notify(#"changed_specialist");
     self callback::callback(#"changed_specialist");
     self.var_228b6835 = 1;
@@ -1452,7 +1452,7 @@ function private function_43048d33(spawn_weapon, primaryweapon, var_e0f216b9 = 0
     self.var_228b6835 = 0;
   }
 
-  self.pers[# "changed_specialist"] = 0;
+  self.pers[#"changed_specialist"] = 0;
   self flag::set(#"loadout_given");
 }
 
@@ -1461,14 +1461,14 @@ function private on_player_connecting() {
     return;
   }
 
-  self.pers[# "loadoutindex"] = 0;
+  self.pers[#"loadoutindex"] = 0;
 
   if(function_87bcb1b()) {
-    if(!isDefined(self.pers[# "class"])) {
-      self.pers[# "class"] = "";
+    if(!isDefined(self.pers[#"class"])) {
+      self.pers[#"class"] = "";
     }
 
-    self.curclass = self.pers[# "class"];
+    self.curclass = self.pers[#"class"];
     self.lastclass = "";
     self function_c67222df();
     self function_d7c205b9(self.curclass);
@@ -1481,7 +1481,7 @@ function function_53b62db1(newclass) {
 
 function function_d7c205b9(newclass, calledfrom = # "unspecified") {
   loadoutindex = isDefined(newclass) ? get_class_num(newclass) : undefined;
-  self.pers[# "loadoutindex"] = loadoutindex;
+  self.pers[#"loadoutindex"] = loadoutindex;
   var_45843e9a = calledfrom == # "give_loadout";
   var_7f8c24df = 0;
 

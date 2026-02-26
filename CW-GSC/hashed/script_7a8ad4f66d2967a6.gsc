@@ -33,14 +33,14 @@ function private autoexec __init__system__() {
 function function_81b25df4() {}
 
 function preinit() {
-  level.chopper_fx[# "explode"][# "death"] = "destruct/fx8_atk_chppr_exp_lg";
-  level.chopper_fx[# "explode"][# "guard"] = "killstreaks/fx_heli_exp_md";
-  level.chopper_fx[# "explode"][# "gunner"] = "killstreaks/fx_vtol_exp";
-  level.chopper_fx[# "explode"][# "large"] = "killstreaks/fx_heli_exp_sm";
-  level.chopper_fx[# "damage"][# "light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
-  level.chopper_fx[# "damage"][# "heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
-  level.chopper_fx[# "smoke"][# "trail"] = "destruct/fx8_atk_chppr_exp_trail";
-  level.chopper_fx[# "fire"][# "trail"][# "large"] = "killstreaks/fx_heli_smk_trail_engine";
+  level.chopper_fx[#"explode"][#"death"] = "destruct/fx8_atk_chppr_exp_lg";
+  level.chopper_fx[#"explode"][#"guard"] = "killstreaks/fx_heli_exp_md";
+  level.chopper_fx[#"explode"][#"gunner"] = "killstreaks/fx_vtol_exp";
+  level.chopper_fx[#"explode"][#"large"] = "killstreaks/fx_heli_exp_sm";
+  level.chopper_fx[#"damage"][#"light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
+  level.chopper_fx[#"damage"][#"heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
+  level.chopper_fx[#"smoke"][#"trail"] = "destruct/fx8_atk_chppr_exp_trail";
+  level.chopper_fx[#"fire"][#"trail"][#"large"] = "killstreaks/fx_heli_smk_trail_engine";
   function_792e5cc5();
   level.var_e071ed64 = 1;
 

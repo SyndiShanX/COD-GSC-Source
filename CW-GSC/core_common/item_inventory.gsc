@@ -146,18 +146,18 @@ function function_fc04b237(weapon, weaponoptions) {
     return;
   }
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
     return weaponoptions;
   }
 
   camoindex = getcamoindex(weaponoptions);
   activecamoname = getactivecamo(camoindex);
 
-  if(!isDefined(activecamoname) || !isDefined(self.pers[# "activecamo"][activecamoname])) {
+  if(!isDefined(activecamoname) || !isDefined(self.pers[#"activecamo"][activecamoname])) {
     return weaponoptions;
   }
 
-  activecamo = self.pers[# "activecamo"][activecamoname];
+  activecamo = self.pers[#"activecamo"][activecamoname];
 
   if(!isDefined(activecamo) || !isDefined(activecamo.var_dd54a13b)) {
     return weaponoptions;
@@ -2618,13 +2618,13 @@ function function_1ac37022(item, ammo) {
 
     if(isDefined(ammo) && isDefined(weapon) && weapon.name != # "ultimate_turret" && weapon.name != # "sig_lmg") {
       self setweaponammostock(weapon, ammo);
-      self.pers[# "held_killstreak_ammo_count"][weapon] = ammo;
+      self.pers[#"held_killstreak_ammo_count"][weapon] = ammo;
       return;
     }
 
     if(isDefined(ammo) && isDefined(weapon) && weapon.name == # "sig_lmg") {
       self setweaponammoclip(weapon, ammo);
-      self.pers[# "held_killstreak_ammo_count"][weapon] = ammo;
+      self.pers[#"held_killstreak_ammo_count"][weapon] = ammo;
     }
   }
 }
@@ -4423,7 +4423,7 @@ function function_d019bf1d(networkid, var_dfe6c7e5 = 0, notifyclient = 1, var_8e
 
       if(isDefined(killstreakbundle)) {
         self thread killstreaks::take(killstreakbundle.kstype);
-        self.pers[# "killstreaks"] = [];
+        self.pers[#"killstreaks"] = [];
 
         if(isDefined(killstreakbundle.ksweapon)) {
           self takeweapon(killstreakbundle.ksweapon);
@@ -4648,7 +4648,7 @@ function use_killstreak(networkid, item) {
     var_f45df727 = eyepos + forward * 100;
     traceresults = {};
     traceresults.trace = bulletTrace(eyepos, var_f45df727, 1, self, 1, 1);
-    traceresults.isvalid = traceresults.trace[# "fraction"] >= 1;
+    traceresults.isvalid = traceresults.trace[#"fraction"] >= 1;
     traceresults.waterdepth = 0;
     traceresults.origin = endpos;
     traceresults.angles = eyeangle;

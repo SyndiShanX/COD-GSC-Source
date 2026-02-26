@@ -427,18 +427,18 @@ aircraft_dustkick() {
     }
 
     trace = bulletTrace(self.origin, self.origin - (0, 0, 700 * 2), 0, self, 1);
-    distsqr = distancesquared(self.origin, trace[# "position"]);
+    distsqr = distancesquared(self.origin, trace[#"position"]);
 
-    if(trace[# "fraction"] < 0.01 || distsqr < 0 * 0) {
+    if(trace[#"fraction"] < 0.01 || distsqr < 0 * 0) {
       wait 0.2;
       continue;
-    } else if(trace[# "fraction"] >= 1 || distsqr > 700 * 700) {
+    } else if(trace[#"fraction"] >= 1 || distsqr > 700 * 700) {
       wait 1;
       continue;
     }
 
     if(0 * 0 < distsqr && distsqr < 700 * 700) {
-      surfacetype = trace[# "surfacetype"];
+      surfacetype = trace[#"surfacetype"];
 
       if(!isDefined(surfacetype)) {
         surfacetype = "dirt";
@@ -446,7 +446,7 @@ aircraft_dustkick() {
 
       if(isDefined(fxarray[surfacetype])) {
         forward = anglesToForward(self.angles);
-        playFX(0, fxarray[surfacetype], trace[# "position"], (0, 0, 1), forward);
+        playFX(0, fxarray[surfacetype], trace[#"position"], (0, 0, 1), forward);
       }
 
       velocity = self getvelocity();
@@ -1316,15 +1316,15 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.fx_handles = [];
   }
 
-  if(!isDefined(self.fx_handles[# "malfunction"])) {
-    self.fx_handles[# "malfunction"] = [];
+  if(!isDefined(self.fx_handles[#"malfunction"])) {
+    self.fx_handles[#"malfunction"] = [];
   }
 
-  foreach(handle in self.fx_handles[# "malfunction"]) {
+  foreach(handle in self.fx_handles[#"malfunction"]) {
     stopfx(localclientnum, handle);
   }
 
-  self.fx_handles[# "malfunction"] = [];
+  self.fx_handles[#"malfunction"] = [];
 
   if(newval) {
     foreach(var_b5ddf091 in self.settings.malfunction_effects) {
@@ -1342,13 +1342,13 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           if(isDefined(var_b5ddf091.warning) && isDefined(var_b5ddf091.tag_warning)) {
             handle = util::playFXOnTag(localclientnum, var_b5ddf091.warning, self, var_b5ddf091.tag_warning);
 
-            if(!isDefined(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = [];
-            } else if(!isarray(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = array(self.fx_handles[# "malfunction"]);
+            if(!isDefined(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = [];
+            } else if(!isarray(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = array(self.fx_handles[#"malfunction"]);
             }
 
-            self.fx_handles[# "malfunction"][self.fx_handles[# "malfunction"].size] = handle;
+            self.fx_handles[#"malfunction"][self.fx_handles[#"malfunction"].size] = handle;
           }
 
           break;
@@ -1356,13 +1356,13 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           if(isDefined(var_b5ddf091.active) && isDefined(var_b5ddf091.var_2f451e59)) {
             handle = util::playFXOnTag(localclientnum, var_b5ddf091.active, self, var_b5ddf091.var_2f451e59);
 
-            if(!isDefined(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = [];
-            } else if(!isarray(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = array(self.fx_handles[# "malfunction"]);
+            if(!isDefined(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = [];
+            } else if(!isarray(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = array(self.fx_handles[#"malfunction"]);
             }
 
-            self.fx_handles[# "malfunction"][self.fx_handles[# "malfunction"].size] = handle;
+            self.fx_handles[#"malfunction"][self.fx_handles[#"malfunction"].size] = handle;
           }
 
           break;
@@ -1370,13 +1370,13 @@ function_7d1d0e65(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           if(isDefined(var_b5ddf091.fatal) && isDefined(var_b5ddf091.var_ceeccc7a)) {
             handle = util::playFXOnTag(localclientnum, var_b5ddf091.fatal, self, var_b5ddf091.var_ceeccc7a);
 
-            if(!isDefined(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = [];
-            } else if(!isarray(self.fx_handles[# "malfunction"])) {
-              self.fx_handles[# "malfunction"] = array(self.fx_handles[# "malfunction"]);
+            if(!isDefined(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = [];
+            } else if(!isarray(self.fx_handles[#"malfunction"])) {
+              self.fx_handles[#"malfunction"] = array(self.fx_handles[#"malfunction"]);
             }
 
-            self.fx_handles[# "malfunction"][self.fx_handles[# "malfunction"].size] = handle;
+            self.fx_handles[#"malfunction"][self.fx_handles[#"malfunction"].size] = handle;
           }
 
           break;
@@ -1454,8 +1454,8 @@ function_18758bfa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.fx_handles = [];
     }
 
-    if(!isDefined(self.fx_handles[# "smolder"])) {
-      self.fx_handles[# "smolder"] = [];
+    if(!isDefined(self.fx_handles[#"smolder"])) {
+      self.fx_handles[#"smolder"] = [];
     }
 
     if(isDefined(self.var_8a037014) && self.var_8a037014 != "") {
@@ -1467,13 +1467,13 @@ function_18758bfa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       setfxignorepause(localclientnum, handle, 1);
 
-      if(!isDefined(self.fx_handles[# "smolder"])) {
-        self.fx_handles[# "smolder"] = [];
-      } else if(!isarray(self.fx_handles[# "smolder"])) {
-        self.fx_handles[# "smolder"] = array(self.fx_handles[# "smolder"]);
+      if(!isDefined(self.fx_handles[#"smolder"])) {
+        self.fx_handles[#"smolder"] = [];
+      } else if(!isarray(self.fx_handles[#"smolder"])) {
+        self.fx_handles[#"smolder"] = array(self.fx_handles[#"smolder"]);
       }
 
-      self.fx_handles[# "smolder"][self.fx_handles[# "smolder"].size] = handle;
+      self.fx_handles[#"smolder"][self.fx_handles[#"smolder"].size] = handle;
     }
 
     if(isDefined(self.var_68f20b20) && self.var_68f20b20 != "") {
@@ -1485,19 +1485,19 @@ function_18758bfa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
       if(isfxplaying(localclientnum, handle)) {
         stopfx(localclientnum, handle);
-        arrayremovevalue(self.fx_handles[# "smolder"], handle, 0);
+        arrayremovevalue(self.fx_handles[#"smolder"], handle, 0);
       }
     }
 
     return;
   }
 
-  if(isDefined(self.fx_handles) && isDefined(self.fx_handles[# "smolder"])) {
-    foreach(handle in self.fx_handles[# "smolder"]) {
+  if(isDefined(self.fx_handles) && isDefined(self.fx_handles[#"smolder"])) {
+    foreach(handle in self.fx_handles[#"smolder"]) {
       stopfx(localclientnum, handle);
     }
 
-    self.fx_handles[# "smolder"] = [];
+    self.fx_handles[#"smolder"] = [];
   }
 }
 
@@ -1510,8 +1510,8 @@ field_do_standarddeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, 
       self.fx_handles = [];
     }
 
-    if(!isDefined(self.fx_handles[# "death"])) {
-      self.fx_handles[# "death"] = [];
+    if(!isDefined(self.fx_handles[#"death"])) {
+      self.fx_handles[#"death"] = [];
     }
 
     if(isDefined(self.deathfxname)) {
@@ -1523,13 +1523,13 @@ field_do_standarddeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
       setfxignorepause(localclientnum, handle, 1);
 
-      if(!isDefined(self.fx_handles[# "death"])) {
-        self.fx_handles[# "death"] = [];
-      } else if(!isarray(self.fx_handles[# "death"])) {
-        self.fx_handles[# "death"] = array(self.fx_handles[# "death"]);
+      if(!isDefined(self.fx_handles[#"death"])) {
+        self.fx_handles[#"death"] = [];
+      } else if(!isarray(self.fx_handles[#"death"])) {
+        self.fx_handles[#"death"] = array(self.fx_handles[#"death"]);
       }
 
-      self.fx_handles[# "death"][self.fx_handles[# "death"].size] = handle;
+      self.fx_handles[#"death"][self.fx_handles[#"death"].size] = handle;
     }
 
     self playSound(localclientnum, self.deathfxsound);
@@ -1562,8 +1562,8 @@ field_do_empdeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, field
       self.fx_handles = [];
     }
 
-    if(!isDefined(self.fx_handles[# "empdeath"])) {
-      self.fx_handles[# "empdeath"] = [];
+    if(!isDefined(self.fx_handles[#"empdeath"])) {
+      self.fx_handles[#"empdeath"] = [];
     }
 
     s = self.settings;
@@ -1577,13 +1577,13 @@ field_do_empdeathfx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
       setfxignorepause(localclientnum, handle, 1);
 
-      if(!isDefined(self.fx_handles[# "empdeath"])) {
-        self.fx_handles[# "empdeath"] = [];
-      } else if(!isarray(self.fx_handles[# "empdeath"])) {
-        self.fx_handles[# "empdeath"] = array(self.fx_handles[# "empdeath"]);
+      if(!isDefined(self.fx_handles[#"empdeath"])) {
+        self.fx_handles[#"empdeath"] = [];
+      } else if(!isarray(self.fx_handles[#"empdeath"])) {
+        self.fx_handles[#"empdeath"] = array(self.fx_handles[#"empdeath"]);
       }
 
-      self.fx_handles[# "empdeath"][self.fx_handles[# "empdeath"].size] = handle;
+      self.fx_handles[#"empdeath"][self.fx_handles[#"empdeath"].size] = handle;
     }
 
     self playSound(localclientnum, s.emp_death_sound_1);

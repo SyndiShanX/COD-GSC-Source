@@ -140,7 +140,7 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 3) {
-          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
@@ -163,7 +163,7 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 4) {
-          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
@@ -186,7 +186,7 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 1) {
-          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
@@ -209,7 +209,7 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 2) {
-          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 

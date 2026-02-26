@@ -219,7 +219,7 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
       self.var_786be2f0 = [];
     }
 
-    if(self.archetype === # "raz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[# "raz"])) {
+    if(self.archetype === # "raz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[#"raz"])) {
       foreach(weakpoint in self.var_5ace757d) {
         if(weakpoint.type === # "armor" && weakpoint.currstate === 1 && weakpoint.health > 0 && !isinarray(self.var_786be2f0, weakpoint.var_f371ebb0)) {
           if(!isDefined(self.var_786be2f0)) {
@@ -229,14 +229,14 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
           }
 
           self.var_786be2f0[self.var_786be2f0.size] = weakpoint.var_f371ebb0;
-          [[level.var_92e56a0f[# "raz"]]](self, weakpoint, boneindex, weakpoint.health, 1, surfacetype, vsurfacenormal, modelindex, psoffsettime);
+          [[level.var_92e56a0f[#"raz"]]](self, weakpoint, boneindex, weakpoint.health, 1, surfacetype, vsurfacenormal, modelindex, psoffsettime);
         }
       }
 
       return;
     }
 
-    if(self.archetype === # "mechz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[# "mechz"])) {
+    if(self.archetype === # "mechz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[#"mechz"])) {
       foreach(weakpoint in self.var_5ace757d) {
         if(weakpoint.type === # "armor" && weakpoint.currstate === 1 && weakpoint.health > 0 && !isinarray(self.var_786be2f0, weakpoint.var_f371ebb0)) {
           if(!isDefined(self.var_786be2f0)) {
@@ -246,7 +246,7 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
           }
 
           self.var_786be2f0[self.var_786be2f0.size] = weakpoint.var_f371ebb0;
-          [[level.var_92e56a0f[# "mechz"]]](self, weakpoint, boneindex, weakpoint.health, surfacetype, modelindex, psoffsettime);
+          [[level.var_92e56a0f[#"mechz"]]](self, weakpoint, boneindex, weakpoint.health, surfacetype, modelindex, psoffsettime);
         }
       }
     }

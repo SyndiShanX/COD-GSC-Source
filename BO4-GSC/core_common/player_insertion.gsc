@@ -126,8 +126,8 @@ on_finalize_initialization() {
 function_fd3c1bcc(start, end, default_val) {
   trace = worldtrace(start, end);
 
-  if(trace[# "fraction"] < 1) {
-    return trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    return trace[#"position"];
   }
 
   return default_val;
@@ -1338,10 +1338,10 @@ function_e59d879f(insertion, s_formation, var_cf46aa72) {
   function_948ac812(insertion);
   bot_insertion::function_24ca8ecf(insertion);
   vehiclespawners = [];
-  vehiclespawners[# "c130_spawner"] = getent("c130_spawner", "targetname");
-  vehiclespawners[# "chinook_spawner"] = getent("chinook_spawner", "targetname");
-  vehiclespawners[# "gunship_spawner"] = getent("gunship_spawner", "targetname");
-  vehiclespawners[# "heli_infil_spawner"] = getent("heli_infil_spawner", "targetname");
+  vehiclespawners[#"c130_spawner"] = getent("c130_spawner", "targetname");
+  vehiclespawners[#"chinook_spawner"] = getent("chinook_spawner", "targetname");
+  vehiclespawners[#"gunship_spawner"] = getent("gunship_spawner", "targetname");
+  vehiclespawners[#"heli_infil_spawner"] = getent("heli_infil_spawner", "targetname");
 
   if(vehiclespawners.size == 0) {
     return 0;
@@ -1350,9 +1350,9 @@ function_e59d879f(insertion, s_formation, var_cf46aa72) {
   spawner::global_spawn_throttle(1);
 
   if(true) {
-    var_69f4f44c = vehiclespawners[# "chinook_spawner"];
+    var_69f4f44c = vehiclespawners[#"chinook_spawner"];
   } else {
-    var_69f4f44c = vehiclespawners[# "c130_spawner"];
+    var_69f4f44c = vehiclespawners[#"c130_spawner"];
   }
 
   startpoint = insertion.start_point;
@@ -1539,8 +1539,8 @@ function_d9dfa25() {
     }
   }
 
-  var_86cb4eb8[# "left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
-  var_86cb4eb8[# "right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
+  var_86cb4eb8[#"left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
+  var_86cb4eb8[#"right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
   var_5637e595 = {
     #var_c85ebc15: 4, #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner"), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192)), #var_86255b48: array(2, 2, 2, 2)
   };
@@ -1557,7 +1557,7 @@ function_45b56b0a(insertion, startpoint, endpoint, var_872f085f, vehiclespawners
   offset = (500, -50, 600);
   goaloffset = (0, 0, -400);
   rotatedstart = startpoint + rotatepoint(offset, var_872f085f);
-  var_31e5487a = vehiclespawners[# "heli_infil_spawner"];
+  var_31e5487a = vehiclespawners[#"heli_infil_spawner"];
   insertion.var_933bdcf2 = var_31e5487a spawnfromspawner("insertion_presentation");
 
   if(!isDefined(insertion.var_933bdcf2)) {

@@ -20,20 +20,20 @@ function private preinit() {
 }
 
 function private function_39a250e3() {
-  if(isDefined(self.pers[# "fieldupgrades"])) {
+  if(isDefined(self.pers[#"fieldupgrades"])) {
     return;
   }
 
-  if(!isDefined(self.pers[# "fieldupgrades"])) {
-    self.pers[# "fieldupgrades"] = [];
+  if(!isDefined(self.pers[#"fieldupgrades"])) {
+    self.pers[#"fieldupgrades"] = [];
   }
 
-  if(!isDefined(self.pers[# "fieldupgrades"][# "ammo"])) {
-    self.pers[# "fieldupgrades"][# "ammo"] = 0;
+  if(!isDefined(self.pers[#"fieldupgrades"][#"ammo"])) {
+    self.pers[#"fieldupgrades"][#"ammo"] = 0;
   }
 
   if(isDefined(game.playabletimepassed) && game.playabletimepassed > 0) {
-    self.pers[# "fieldupgrades"][# "hash_32a0670ee5dfa2cc"] = float(game.playabletimepassed) / 1000;
+    self.pers[#"fieldupgrades"][#"hash_32a0670ee5dfa2cc"] = float(game.playabletimepassed) / 1000;
   }
 }
 
@@ -57,9 +57,9 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
         projectile clientfield::set("fieldUpgradeActive", 1);
       }
 
-      self.pers[# "fieldupgrades"][# "ammo"]--;
-      self function_1326b4ce(self.pers[# "fieldupgrades"][# "ammo"]);
-      self function_42ee343f(#"hash_1af96128a3b1b348", self.pers[# "fieldupgrades"][# "ammo"]);
+      self.pers[#"fieldupgrades"][#"ammo"]--;
+      self function_1326b4ce(self.pers[#"fieldupgrades"][#"ammo"]);
+      self function_42ee343f(#"hash_1af96128a3b1b348", self.pers[#"fieldupgrades"][#"ammo"]);
       self thread function_e7085388(weapon);
     }
   }
@@ -96,7 +96,7 @@ function private function_63ac35a3(weapon) {
     var_e3774219 = 1;
     currentclip = 0;
   } else {
-    currentclip = int(min(self.pers[# "fieldupgrades"][# "ammo"], clipsize));
+    currentclip = int(min(self.pers[#"fieldupgrades"][#"ammo"], clipsize));
   }
 
   waitframe(1);
@@ -114,7 +114,7 @@ function private function_63ac35a3(weapon) {
   if(self getweaponammoclip(weapon) >= clipsize) {
     self notify(#"hash_50ce27022d3b38c");
     self clientfield::set_player_uimodel("hudItems.ammoCooldowns.fieldUpgrade", 0);
-    self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = undefined;
+    self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = undefined;
 
     if(is_true(var_e3774219)) {
       weaponindex = getitemindexfromref(weapon.name);
@@ -132,15 +132,15 @@ function private function_63ac35a3(weapon) {
     if(!var_d6dbd305) {
       var_d6dbd305 = 1;
 
-      if(isDefined(self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"])) {
+      if(isDefined(self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"])) {
         if(self hasperk(#"hash_46e52ae259ccc1e1")) {
           var_cdd95e58 = 1;
         }
 
         cooldown = function_e7967fc8(weapon, var_cdd95e58);
         self function_f6621fe5(int(cooldown));
-        self function_cfb0d7cc(int(floor(self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"])));
-        progress = self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] / cooldown;
+        self function_cfb0d7cc(int(floor(self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"])));
+        progress = self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] / cooldown;
         self clientfield::set_player_uimodel("hudItems.ammoCooldowns.fieldUpgrade", progress);
       }
     }
@@ -154,61 +154,61 @@ function private function_63ac35a3(weapon) {
 function private function_e7085388(weapon, var_e3774219 = 0) {
   self notify(#"hash_50ce27022d3b38c");
   self endon(#"disconnect", #"hash_50ce27022d3b38c", #"round_ended", #"switched_field_upgrade");
-  var_4dcb7b2e = self.pers[# "fieldupgrades"][# "hash_1f9e227d7c859634"];
+  var_4dcb7b2e = self.pers[#"fieldupgrades"][#"hash_1f9e227d7c859634"];
 
   if(self hasperk(#"hash_46e52ae259ccc1e1")) {
     var_cdd95e58 = 1;
-    self.pers[# "fieldupgrades"][# "hash_1f9e227d7c859634"] = 1;
+    self.pers[#"fieldupgrades"][#"hash_1f9e227d7c859634"] = 1;
   } else {
-    self.pers[# "fieldupgrades"][# "hash_1f9e227d7c859634"] = undefined;
+    self.pers[#"fieldupgrades"][#"hash_1f9e227d7c859634"] = undefined;
   }
 
-  previousweapon = self.pers[# "fieldupgrades"][# "cooldownweapon"];
+  previousweapon = self.pers[#"fieldupgrades"][#"cooldownweapon"];
   weaponindex = getitemindexfromref(weapon.name);
-  self.pers[# "fieldupgrades"][# "cooldownweapon"] = weapon;
+  self.pers[#"fieldupgrades"][#"cooldownweapon"] = weapon;
   clipsize = self getweaponammoclipsize(weapon);
   self function_e7f8957a(clipsize);
   cooldown = function_e7967fc8(weapon, var_cdd95e58);
   self function_f6621fe5(int(cooldown));
 
-  if(var_e3774219 || isDefined(self.pers[# "fieldupgrades"][# "hash_32a0670ee5dfa2cc"])) {
+  if(var_e3774219 || isDefined(self.pers[#"fieldupgrades"][#"hash_32a0670ee5dfa2cc"])) {
     if(var_e3774219) {
       var_d3239b6b = function_e7967fc8(previousweapon, var_4dcb7b2e);
-      var_1b634dac = self.pers[# "fieldupgrades"][# "ammo"] * var_d3239b6b;
+      var_1b634dac = self.pers[#"fieldupgrades"][#"ammo"] * var_d3239b6b;
 
-      if(isDefined(self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"])) {
-        var_1b634dac += self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"];
+      if(isDefined(self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"])) {
+        var_1b634dac += self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"];
       }
     } else {
-      var_1b634dac = self.pers[# "fieldupgrades"][# "hash_32a0670ee5dfa2cc"];
+      var_1b634dac = self.pers[#"fieldupgrades"][#"hash_32a0670ee5dfa2cc"];
     }
 
-    self.pers[# "fieldupgrades"][# "hash_32a0670ee5dfa2cc"] = undefined;
+    self.pers[#"fieldupgrades"][#"hash_32a0670ee5dfa2cc"] = undefined;
     var_e42bf9b2 = int(min(clipsize, floor(var_1b634dac / cooldown)));
 
     if(self hasweapon(weapon)) {
       self setweaponammoclip(weapon, var_e42bf9b2);
     }
 
-    self.pers[# "fieldupgrades"][# "ammo"] = var_e42bf9b2;
-    self function_1326b4ce(self.pers[# "fieldupgrades"][# "ammo"]);
+    self.pers[#"fieldupgrades"][#"ammo"] = var_e42bf9b2;
+    self function_1326b4ce(self.pers[#"fieldupgrades"][#"ammo"]);
 
     if(var_e42bf9b2 > 0) {
       self luinotifyevent(#"hash_14ebcb39234f4126", 1, weaponindex);
     }
 
     if(var_e42bf9b2 < clipsize) {
-      self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = var_1b634dac - var_e42bf9b2 * cooldown;
-      self function_cfb0d7cc(int(floor(self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"])));
+      self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = var_1b634dac - var_e42bf9b2 * cooldown;
+      self function_cfb0d7cc(int(floor(self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"])));
     } else {
       self clientfield::set_player_uimodel("hudItems.ammoCooldowns.fieldUpgrade", 0);
-      self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = undefined;
+      self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = undefined;
       self function_cfb0d7cc(0);
       return;
     }
   }
 
-  elapsedtime = isDefined(self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"]) ? self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] : 0;
+  elapsedtime = isDefined(self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"]) ? self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] : 0;
 
   if(is_true(var_cdd95e58) && !is_true(var_4dcb7b2e)) {
     elapsedtime *= 0.75;
@@ -229,18 +229,18 @@ function private function_e7085388(weapon, var_e3774219 = 0) {
     waitframe(1);
     util::function_5355d311();
     elapsedtime += float(function_60d95f53()) / 1000;
-    self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = elapsedtime;
+    self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = elapsedtime;
   }
 
   self function_cfb0d7cc(int(floor(elapsedtime)));
-  self.pers[# "fieldupgrades"][# "ammo"]++;
-  self function_1326b4ce(self.pers[# "fieldupgrades"][# "ammo"]);
+  self.pers[#"fieldupgrades"][#"ammo"]++;
+  self function_1326b4ce(self.pers[#"fieldupgrades"][#"ammo"]);
 
   if(isalive(self) && self hasweapon(weapon)) {
-    self setweaponammoclip(weapon, self.pers[# "fieldupgrades"][# "ammo"]);
+    self setweaponammoclip(weapon, self.pers[#"fieldupgrades"][#"ammo"]);
   }
 
-  self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = undefined;
+  self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = undefined;
   self luinotifyevent(#"hash_14ebcb39234f4126", 1, weaponindex);
   self playsoundtoplayer(#"hash_55f9d99ffab775e1", self);
 
@@ -275,7 +275,7 @@ function private function_62c1bfaa(weapon) {
 }
 
 function private function_e3774219(weapon) {
-  previousweapon = self.pers[# "fieldupgrades"][# "cooldownweapon"];
+  previousweapon = self.pers[#"fieldupgrades"][#"cooldownweapon"];
   return isDefined(previousweapon) && previousweapon != weapon;
 }
 

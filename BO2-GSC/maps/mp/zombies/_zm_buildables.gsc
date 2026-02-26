@@ -171,7 +171,7 @@ clear_buildable_clientfield(slot) {
   self set_buildable_clientfield(slot, 0);
 }
 
-#include_zombie_buildable(buiildable_struct) {
+include_zombie_buildable(buiildable_struct) {
   if(!isDefined(level.zombie_include_buildables))
     level.zombie_include_buildables = [];
 

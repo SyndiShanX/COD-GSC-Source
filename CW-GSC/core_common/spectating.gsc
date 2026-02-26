@@ -366,7 +366,7 @@ function set_permissions_for_machine() {
 }
 
 function function_7d15f599() {
-  livesleft = !(level.numlives && !self.pers[# "lives"]);
+  livesleft = !(level.numlives && !self.pers[#"lives"]);
 
   if(!function_a1ef346b(self.team).size && !livesleft) {
     return false;

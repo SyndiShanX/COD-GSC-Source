@@ -1290,7 +1290,7 @@ function function_4d16b7a9(room) {
   level.doa.var_af74d0b = 1;
   level.doa.var_4425d066 = &function_f11b0e51;
   level.doa.var_d5fbd3 = &function_330ded6;
-  level.doa.var_8609e0e9 = [# "zombietron_impaler", #"zombietron_pineapplegun", #"zombietron_launcher"];
+  level.doa.var_8609e0e9 = [#"zombietron_impaler", #"zombietron_pineapplegun", #"zombietron_launcher"];
   level.var_52f56101 = &function_79b68863;
   setsaveddvar(#"hash_63212188205e8c27", 1);
   level thread function_82273c90(room);
@@ -1637,7 +1637,7 @@ function function_1d4f93c3(room) {
   level.doa.var_af74d0b = 1;
   level.doa.var_4425d066 = &function_46f8e766;
   level.doa.var_d5fbd3 = &function_330ded6;
-  level.doa.var_8609e0e9 = [# "zombietron_impaler", #"zombietron_pineapplegun", #"zombietron_launcher"];
+  level.doa.var_8609e0e9 = [#"zombietron_impaler", #"zombietron_pineapplegun", #"zombietron_launcher"];
   level.var_52f56101 = &function_85a06bf3;
   setsaveddvar(#"hash_63212188205e8c27", 1);
   room.var_5214367 = "run";

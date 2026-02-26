@@ -117,7 +117,7 @@ damage(trap) {
       self thread zm_traps::zombie_flame_watch();
       self playSound(#"hash_5183b687ad8d715a");
       self thread zombie_death::flame_death_fx();
-      playFXOnTag(level._effect[# "character_fire_death_torso"], self, "J_SpineLower");
+      playFXOnTag(level._effect[#"character_fire_death_torso"], self, "J_SpineLower");
       wait randomfloat(1.25);
     } else {
       refs[0] = "guts";

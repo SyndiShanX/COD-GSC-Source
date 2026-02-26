@@ -744,7 +744,7 @@ function_f2c2f4f9() {
   while(getdvarint(#"hash_363b1c69ef9f1237", 0)) {
     v_eye = self getEye();
     a_trace = bulletTrace(v_eye, v_eye + vectorscale(anglesToForward(self getplayerangles()), 1000000), 0, self);
-    var_af2b54d8.origin = a_trace[# "position"];
+    var_af2b54d8.origin = a_trace[#"position"];
     n_depth = getwaterheight(var_af2b54d8.origin) - var_af2b54d8.origin[2];
     var_62ce46e5 = var_af2b54d8.origin + (0, 0, n_depth);
     v_color = (1, 0, 0);
@@ -983,12 +983,12 @@ function_9cc59537() {
 
               a_trace = bulletTrace(point.origin + (0, 0, 24), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[# "dynent"])) {
+              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[#"dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[# "position"], 8, v_color);
+                  debugstar(a_trace[#"position"], 8, v_color);
                 }
               }
             }
@@ -998,12 +998,12 @@ function_9cc59537() {
             foreach(v_test in var_7cb887a8) {
               a_trace = bulletTrace(point.origin + (0, 0, 16), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[# "dynent"])) {
+              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[#"dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[# "position"], 8, v_color);
+                  debugstar(a_trace[#"position"], 8, v_color);
                 }
               }
             }
@@ -1153,12 +1153,12 @@ function_317da0a9(item_spawn_groups, group, point, var_9b62e326, var_cc2e4f94, n
   foreach(v_test in var_7cb887a8) {
     a_trace = bulletTrace(point.origin + (0, 0, n_z), v_test, 0, level.players[0]);
 
-    if(isvehicle(a_trace[# "entity"])) {
-      var_c24ea284 = a_trace[# "entity"];
+    if(isvehicle(a_trace[#"entity"])) {
+      var_c24ea284 = a_trace[#"entity"];
       a_trace = bulletTrace(point.origin + (0, 0, n_z), v_test, 0, var_c24ea284);
     }
 
-    if(distancesquared(a_trace[# "position"], point.origin + (0, 0, n_z)) < var_cc2e4f94 * var_cc2e4f94 - 2) {
+    if(distancesquared(a_trace[#"position"], point.origin + (0, 0, n_z)) < var_cc2e4f94 * var_cc2e4f94 - 2) {
       b_failed = 1;
     }
   }
@@ -1210,15 +1210,15 @@ function_e8f0335f() {
     var_7cb887a8 = [];
     var_3e832e74 = 360 / 8;
 
-    if(var_11cc451b[# "position"][2] > physicstrace[# "position"][2]) {
+    if(var_11cc451b[#"position"][2] > physicstrace[#"position"][2]) {
       var_708a2754 = var_11cc451b;
     }
 
-    origin = var_708a2754[# "position"];
+    origin = var_708a2754[#"position"];
 
-    if(var_708a2754[# "fraction"] < 1 && vectordot(var_708a2754[# "normal"], (0, 0, 1)) >= 0.707) {
-      if(var_708a2754[# "position"][2] > -10000) {
-        origin = var_708a2754[# "position"];
+    if(var_708a2754[#"fraction"] < 1 && vectordot(var_708a2754[#"normal"], (0, 0, 1)) >= 0.707) {
+      if(var_708a2754[#"position"][2] > -10000) {
+        origin = var_708a2754[#"position"];
       }
     }
 
@@ -1235,16 +1235,16 @@ function_e8f0335f() {
       foreach(v_test in var_7cb887a8) {
         a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, level.players[0]);
 
-        if(isDefined(a_trace[# "entity"])) {
-          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[# "entity"]);
+        if(isDefined(a_trace[#"entity"])) {
+          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[#"entity"]);
         }
 
-        if(distancesquared(a_trace[# "position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
+        if(distancesquared(a_trace[#"position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
           v_color = (1, 0, 0);
           b_failed = 1;
 
           if(distance2d(origin, level.players[0] getorigin()) < 512) {
-            debugstar(a_trace[# "position"], 1, v_color);
+            debugstar(a_trace[#"position"], 1, v_color);
           }
         }
       }
@@ -1395,7 +1395,7 @@ function_97714f49() {
         eye = player getEye();
         eye = (eye[0], eye[1], eye[2] + 20);
         trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, player);
-        tracepoint = trace[# "position"];
+        tracepoint = trace[#"position"];
       }
 
       setDvar(#"hash_5fd194403e0d175e", 0);

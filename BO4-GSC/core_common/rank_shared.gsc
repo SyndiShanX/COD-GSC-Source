@@ -132,39 +132,39 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
 
   if(!sessionmodeismultiplayergame()) {
     if(isDefined(xp) && xp) {
-      level.scoreinfo[type][# "xp"] = xp;
+      level.scoreinfo[type][#"xp"] = xp;
     }
   }
 
   if(isDefined(sp) && sp) {
-    level.scoreinfo[type][# "sp"] = sp;
+    level.scoreinfo[type][#"sp"] = sp;
   }
 
   if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame()) {
-    level.scoreinfo[type][# "row"] = row;
+    level.scoreinfo[type][#"row"] = row;
 
     if(isDefined(lp) && lp) {
-      level.scoreinfo[type][# "lp"] = lp;
+      level.scoreinfo[type][#"lp"] = lp;
     }
 
     if(isDefined(hs) && hs) {
-      level.scoreinfo[type][# "hs"] = hs;
+      level.scoreinfo[type][#"hs"] = hs;
     }
 
     if(isDefined(res) && res) {
-      level.scoreinfo[type][# "res"] = res;
+      level.scoreinfo[type][#"res"] = res;
     }
 
     if(isDefined(var_e775f7ed) && var_e775f7ed) {
-      level.scoreinfo[type][# "hash_4e7be147d773e419"] = var_e775f7ed;
+      level.scoreinfo[type][#"hash_4e7be147d773e419"] = var_e775f7ed;
     }
 
     if(isDefined(dp) && dp) {
-      level.scoreinfo[type][# "dp"] = dp;
+      level.scoreinfo[type][#"dp"] = dp;
     }
 
     if(isDefined(is_obj) && is_obj) {
-      level.scoreinfo[type][# "isobj"] = is_obj;
+      level.scoreinfo[type][#"isobj"] = is_obj;
     }
 
     if(isDefined(medalname)) {
@@ -172,51 +172,51 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
         multiplier = getgametypesetting(#"killeventscoremultiplier");
 
         if(multiplier > 0) {
-          if(isDefined(level.scoreinfo[type][# "sp"]) && level.scoreinfo[type][# "sp"]) {
-            level.scoreinfo[type][# "sp"] = int(multiplier * level.scoreinfo[type][# "sp"]);
+          if(isDefined(level.scoreinfo[type][#"sp"]) && level.scoreinfo[type][#"sp"]) {
+            level.scoreinfo[type][#"sp"] = int(multiplier * level.scoreinfo[type][#"sp"]);
           }
         }
       }
     }
 
     if(isDefined(label)) {
-      level.scoreinfo[type][# "label"] = label;
+      level.scoreinfo[type][#"label"] = label;
     }
 
     if(isDefined(medalname) && medalname != # "") {
-      level.scoreinfo[type][# "medalnamehash"] = medalname;
+      level.scoreinfo[type][#"medalnamehash"] = medalname;
     }
 
     if(job_type != "") {
-      level.scoreinfo[type][# "job_type"] = job_type;
+      level.scoreinfo[type][#"job_type"] = job_type;
     }
 
     if(var_b6593614 != "") {
-      level.scoreinfo[type][# "hash_401b1493e5188252"] = var_b6593614;
+      level.scoreinfo[type][#"hash_401b1493e5188252"] = var_b6593614;
     }
 
     if(var_1a39d14 != "") {
-      level.scoreinfo[type][# "hash_251eb53657a5574e"] = var_1a39d14;
+      level.scoreinfo[type][#"hash_251eb53657a5574e"] = var_1a39d14;
     }
 
     if(var_bdbfb0e != "") {
-      level.scoreinfo[type][# "hash_294ec6af2b8cb400"] = var_bdbfb0e;
+      level.scoreinfo[type][#"hash_294ec6af2b8cb400"] = var_bdbfb0e;
     }
 
     if(isDefined(var_a434fd2d) && var_a434fd2d) {
-      level.scoreinfo[type][# "hash_6f22dfa8ea741f95"] = var_a434fd2d;
+      level.scoreinfo[type][#"hash_6f22dfa8ea741f95"] = var_a434fd2d;
     }
 
     if(isDefined(is_deprecated) && is_deprecated) {
-      level.scoreinfo[type][# "is_deprecated"] = is_deprecated;
+      level.scoreinfo[type][#"is_deprecated"] = is_deprecated;
     }
 
     if(isDefined(bounty_reward) && bounty_reward) {
-      level.scoreinfo[type][# "bounty_reward"] = bounty_reward;
+      level.scoreinfo[type][#"bounty_reward"] = bounty_reward;
     }
 
     if(isDefined(var_65181181) && var_65181181) {
-      level.scoreinfo[type][# "hash_691aeaca4a1866e3"] = var_65181181;
+      level.scoreinfo[type][#"hash_691aeaca4a1866e3"] = var_65181181;
     }
 
     return;
@@ -224,7 +224,7 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
 
   if(sessionmodeiscampaigngame()) {
     if(isDefined(res) && res) {
-      level.scoreinfo[type][# "res"] = res;
+      level.scoreinfo[type][#"res"] = res;
     }
 
     return;
@@ -232,24 +232,24 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
 
   if(sessionmodeiszombiesgame()) {
     if(isDefined(res) && res) {
-      level.scoreinfo[type][# "res"] = res;
+      level.scoreinfo[type][#"res"] = res;
     }
 
     if(isDefined(label)) {
-      level.scoreinfo[type][# "label"] = label;
+      level.scoreinfo[type][#"label"] = label;
     }
   }
 }
 
 function_ca5d4a8(type) {
-  return isDefined(level.scoreinfo[type]) && isDefined(level.scoreinfo[type][# "hash_6f22dfa8ea741f95"]) && level.scoreinfo[type][# "hash_6f22dfa8ea741f95"];
+  return isDefined(level.scoreinfo[type]) && isDefined(level.scoreinfo[type][#"hash_6f22dfa8ea741f95"]) && level.scoreinfo[type][#"hash_6f22dfa8ea741f95"];
 }
 
 getscoreinfovalue(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    n_score = isDefined(level.scoreinfo[type][# "sp"]) ? level.scoreinfo[type][# "sp"] : 0;
+    n_score = isDefined(level.scoreinfo[type][#"sp"]) ? level.scoreinfo[type][#"sp"] : 0;
 
     if(isDefined(level.scoremodifiercallback) && isDefined(n_score)) {
       n_score = [[level.scoremodifiercallback]](type, n_score);
@@ -276,7 +276,7 @@ getscoreinfoposition(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    n_pos = isDefined(level.scoreinfo[type][# "hash_7c1f7c7897445706"]) ? level.scoreinfo[type][# "hash_7c1f7c7897445706"] : 0;
+    n_pos = isDefined(level.scoreinfo[type][#"hash_7c1f7c7897445706"]) ? level.scoreinfo[type][#"hash_7c1f7c7897445706"] : 0;
 
     if(isDefined(level.scoremodifiercallback) && isDefined(n_pos)) {
       n_resource = [[level.scoremodifiercallback]](type, n_pos);
@@ -292,7 +292,7 @@ getscoreinforesource(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    n_resource = isDefined(level.scoreinfo[type][# "res"]) ? level.scoreinfo[type][# "res"] : 0;
+    n_resource = isDefined(level.scoreinfo[type][#"res"]) ? level.scoreinfo[type][#"res"] : 0;
 
     if(isDefined(level.resourcemodifiercallback) && isDefined(n_resource)) {
       n_resource = [[level.resourcemodifiercallback]](type, n_resource);
@@ -308,7 +308,7 @@ getscoreinfoxp(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    n_xp = isDefined(level.scoreinfo[type][# "xp"]) ? level.scoreinfo[type][# "xp"] : 0;
+    n_xp = isDefined(level.scoreinfo[type][#"xp"]) ? level.scoreinfo[type][#"xp"] : 0;
 
     if(isDefined(level.xpmodifiercallback) && isDefined(n_xp)) {
       n_xp = [[level.xpmodifiercallback]](type, n_xp);
@@ -329,22 +329,22 @@ shouldskipmomentumdisplay(type) {
 }
 
 getscoreinfolabel(type) {
-  return level.scoreinfo[type][# "label"];
+  return level.scoreinfo[type][#"label"];
 }
 
 getcombatefficiencyevent(type) {
-  return level.scoreinfo[type][# "combat_efficiency_event"];
+  return level.scoreinfo[type][#"combat_efficiency_event"];
 }
 
 doesscoreinfocounttowardrampage(type) {
-  return isDefined(level.scoreinfo[type][# "rampage"]) && level.scoreinfo[type][# "rampage"];
+  return isDefined(level.scoreinfo[type][#"rampage"]) && level.scoreinfo[type][#"rampage"];
 }
 
 function_f7b5d9fa(type) {
   playerrole = getrole();
 
   if(isDefined(level.scoreinfo[type])) {
-    return (isDefined(level.scoreinfo[type][# "isobj"]) ? level.scoreinfo[type][# "isobj"] : 0);
+    return (isDefined(level.scoreinfo[type][#"isobj"]) ? level.scoreinfo[type][#"isobj"] : 0);
   }
 
   return 0;
@@ -370,15 +370,15 @@ shouldkickbyrank() {
     return false;
   }
 
-  if(level.rankcap > 0 && self.pers[# "rank"] > level.rankcap) {
+  if(level.rankcap > 0 && self.pers[#"rank"] > level.rankcap) {
     return true;
   }
 
-  if(level.rankcap > 0 && level.minprestige == 0 && self.pers[# "plevel"] > 0) {
+  if(level.rankcap > 0 && level.minprestige == 0 && self.pers[#"plevel"] > 0) {
     return true;
   }
 
-  if(level.minprestige > self.pers[# "plevel"]) {
+  if(level.minprestige > self.pers[#"plevel"]) {
     return true;
   }
 
@@ -408,13 +408,13 @@ getarenapointsstat() {
 }
 
 on_player_connect() {
-  self.pers[# "rankxp"] = self getrankxpstat();
+  self.pers[#"rankxp"] = self getrankxpstat();
   rankid = getrankforxp(self getrankxp());
-  self.pers[# "rank"] = rankid;
-  self.pers[# "plevel"] = self stats::get_stat_global(#"plevel", 1);
+  self.pers[#"rank"] = rankid;
+  self.pers[#"plevel"] = self stats::get_stat_global(#"plevel", 1);
 
-  if(!isDefined(self.pers[# "plevel"])) {
-    self.pers[# "plevel"] = 0;
+  if(!isDefined(self.pers[#"plevel"])) {
+    self.pers[#"plevel"] = 0;
   }
 
   if(self shouldkickbyrank()) {
@@ -422,48 +422,48 @@ on_player_connect() {
     return;
   }
 
-  if(!isDefined(self.pers[# "participation"])) {
-    self.pers[# "participation"] = 0;
+  if(!isDefined(self.pers[#"participation"])) {
+    self.pers[#"participation"] = 0;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipation"])) {
-    self.pers[# "controllerparticipation"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipation"])) {
+    self.pers[#"controllerparticipation"] = 0;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationchecks"])) {
-    self.pers[# "controllerparticipationchecks"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationchecks"])) {
+    self.pers[#"controllerparticipationchecks"] = 0;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationchecksskipped"])) {
-    self.pers[# "controllerparticipationchecksskipped"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationchecksskipped"])) {
+    self.pers[#"controllerparticipationchecksskipped"] = 0;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationconsecutivesuccessmax"])) {
-    self.pers[# "controllerparticipationconsecutivesuccessmax"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationconsecutivesuccessmax"])) {
+    self.pers[#"controllerparticipationconsecutivesuccessmax"] = 0;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationconsecutivefailuremax"])) {
-    self.pers[# "controllerparticipationconsecutivefailuremax"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationconsecutivefailuremax"])) {
+    self.pers[#"controllerparticipationconsecutivefailuremax"] = 0;
   }
 
-  if(!isDefined(self.pers[# "hash_3b7fc8c62a7d4420"])) {
-    self.pers[# "hash_3b7fc8c62a7d4420"] = 0;
+  if(!isDefined(self.pers[#"hash_3b7fc8c62a7d4420"])) {
+    self.pers[#"hash_3b7fc8c62a7d4420"] = 0;
   }
 
-  if(!isDefined(self.pers[# "hash_4a01db5796cf12b1"])) {
-    self.pers[# "hash_4a01db5796cf12b1"] = # "none";
+  if(!isDefined(self.pers[#"hash_4a01db5796cf12b1"])) {
+    self.pers[#"hash_4a01db5796cf12b1"] = # "none";
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationendgameresult"])) {
-    self.pers[# "controllerparticipationendgameresult"] = -1;
+  if(!isDefined(self.pers[#"controllerparticipationendgameresult"])) {
+    self.pers[#"controllerparticipationendgameresult"] = -1;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationinactivitywarnings"])) {
-    self.pers[# "controllerparticipationinactivitywarnings"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationinactivitywarnings"])) {
+    self.pers[#"controllerparticipationinactivitywarnings"] = 0;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationsuccessafterinactivitywarning"])) {
-    self.pers[# "controllerparticipationsuccessafterinactivitywarning"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationsuccessafterinactivitywarning"])) {
+    self.pers[#"controllerparticipationsuccessafterinactivitywarning"] = 0;
   }
 
   self.rankupdatetotal = 0;
@@ -476,7 +476,7 @@ on_player_connect() {
   }
 
   self setrank(rankid, prestige);
-  self.pers[# "prestige"] = prestige;
+  self.pers[#"prestige"] = prestige;
 
   if(sessionmodeismultiplayergame() && gamemodeisusingstats() || sessionmodeiszombiesgame() && sessionmodeisonlinegame()) {
     paragonrank = self stats::get_stat_global(#"paragon_rank", 1);
@@ -487,7 +487,7 @@ on_player_connect() {
 
     paragonrank = int(min(paragonrank, 1000));
     self setparagonrank(paragonrank);
-    self.pers[# "paragonrank"] = paragonrank;
+    self.pers[#"paragonrank"] = paragonrank;
     paragoniconid = self stats::get_stat_global(#"paragon_icon_id", 1);
 
     if(!isDefined(paragoniconid)) {
@@ -495,29 +495,29 @@ on_player_connect() {
     }
 
     self setparagoniconid(paragoniconid);
-    self.pers[# "paragoniconid"] = paragoniconid;
+    self.pers[#"paragoniconid"] = paragoniconid;
   }
 
   if(sessionmodeiswarzonegame()) {
     self setparagonrank(0);
-    self.pers[# "paragonrank"] = 0;
+    self.pers[#"paragonrank"] = 0;
     self setparagoniconid(0);
-    self.pers[# "paragoniconid"] = 0;
+    self.pers[#"paragoniconid"] = 0;
   }
 
-  if(!isDefined(self.pers[# "summary"])) {
-    self.pers[# "summary"] = [];
-    self.pers[# "summary"][# "xp"] = 0;
-    self.pers[# "summary"][# "score"] = 0;
-    self.pers[# "summary"][# "challenge"] = 0;
-    self.pers[# "summary"][# "match"] = 0;
-    self.pers[# "summary"][# "misc"] = 0;
+  if(!isDefined(self.pers[#"summary"])) {
+    self.pers[#"summary"] = [];
+    self.pers[#"summary"][#"xp"] = 0;
+    self.pers[#"summary"][#"score"] = 0;
+    self.pers[#"summary"][#"challenge"] = 0;
+    self.pers[#"summary"][#"match"] = 0;
+    self.pers[#"summary"][#"misc"] = 0;
   }
 
   if(gamemodeismode(6) && !isbot(self)) {
     arenapoints = self getarenapointsstat();
     arenapoints = int(min(arenapoints, 100));
-    self.pers[# "arenapoints"] = arenapoints;
+    self.pers[#"arenapoints"] = arenapoints;
     self setarenapoints(arenapoints);
   }
 
@@ -528,7 +528,7 @@ on_player_connect() {
       self stats::set_stat_global(#"rank", rankid, 1);
       self stats::set_stat_global(#"minxp", getrankinfominxp(rankid), 1);
       self stats::set_stat_global(#"maxxp", getrankinfomaxxp(rankid), 1);
-      self stats::set_stat_global(#"lastxp", getrankxpcapped(self.pers[# "rankxp"]), 1);
+      self stats::set_stat_global(#"lastxp", getrankxpcapped(self.pers[#"rankxp"]), 1);
     }
   }
 }
@@ -551,13 +551,13 @@ round_this_number(value) {
 updaterank() {
   newrankid = self getrank();
 
-  if(newrankid == self.pers[# "rank"]) {
+  if(newrankid == self.pers[#"rank"]) {
     return false;
   }
 
-  oldrank = self.pers[# "rank"];
-  rankid = self.pers[# "rank"];
-  self.pers[# "rank"] = newrankid;
+  oldrank = self.pers[#"rank"];
+  rankid = self.pers[#"rank"];
+  self.pers[#"rank"] = newrankid;
 
   while(rankid <= newrankid) {
     self stats::set_stat_global(#"rank", rankid, 1);
@@ -583,11 +583,11 @@ event_handler[player_rankup] codecallback_rankup(eventstruct) {
     }
   }
 
-  self.pers[# "rank"] = eventstruct.rank;
+  self.pers[#"rank"] = eventstruct.rank;
 
   if(sessionmodeiswarzonegame()) {
-    self stats::function_62b271d8(#"rank", self.pers[# "rank"]);
-    self stats::function_62b271d8(#"plevel", self.pers[# "plevel"]);
+    self stats::function_62b271d8(#"rank", self.pers[#"rank"]);
+    self stats::function_62b271d8(#"plevel", self.pers[#"plevel"]);
     return;
   }
 
@@ -610,8 +610,8 @@ endgameupdate() {
 }
 
 getrank() {
-  rankxp = getrankxpcapped(self.pers[# "rankxp"]);
-  rankid = self.pers[# "rank"];
+  rankxp = getrankxpcapped(self.pers[#"rankxp"]);
+  rankid = self.pers[#"rank"];
 
   if(rankxp < getrankinfominxp(rankid) + getrankinfoxpamt(rankid)) {
     return rankid;
@@ -631,14 +631,14 @@ getspm() {
 }
 
 getrankxp() {
-  return getrankxpcapped(self.pers[# "rankxp"]);
+  return getrankxpcapped(self.pers[#"rankxp"]);
 }
 
 function_bcb5e246(type) {
   var_920d60e7 = 0;
 
-  if(isDefined(level.scoreinfo[type][# "bounty_reward"])) {
-    var_920d60e7 = level.scoreinfo[type][# "bounty_reward"];
+  if(isDefined(level.scoreinfo[type][#"bounty_reward"])) {
+    var_920d60e7 = level.scoreinfo[type][#"bounty_reward"];
   }
 
   return var_920d60e7;

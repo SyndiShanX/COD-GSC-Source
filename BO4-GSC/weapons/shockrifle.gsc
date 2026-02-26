@@ -477,7 +477,7 @@ function_bcc47944(watcher) {
     }
 
     if(level.teambased) {
-      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }

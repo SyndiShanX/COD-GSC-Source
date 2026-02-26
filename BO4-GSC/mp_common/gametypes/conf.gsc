@@ -78,8 +78,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
 
 onuse(player) {
   tacinsertboost = 0;
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
 
   if(player.team != self.attackerteam) {
     tacinsertboost = self.tacinsert;
@@ -98,8 +98,8 @@ onuse(player) {
   assert(isDefined(player.lastkillconfirmedtime));
   assert(isDefined(player.lastkillconfirmedcount));
 
-  player.pers[# "killsconfirmed"]++;
-  player.killsconfirmed = player.pers[# "killsconfirmed"];
+  player.pers[#"killsconfirmed"]++;
+  player.killsconfirmed = player.pers[#"killsconfirmed"];
   player globallogic_score::giveteamscoreforobjective(player.team, level.teamscoreperkillconfirmed);
 
   if(!tacinsertboost) {

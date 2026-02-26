@@ -141,7 +141,7 @@ function zombie_goto_round(target_round) {
   }
 
   level.zombie_total = 0;
-  level.zombie_health = isDefined(level.var_41dd92fd[# "zombie"].health) ? level.var_41dd92fd[# "zombie"].health : 100;
+  level.zombie_health = isDefined(level.var_41dd92fd[#"zombie"].health) ? level.var_41dd92fd[#"zombie"].health : 100;
   zm_round_logic::set_round_number(target_round);
   enemies = getaiteamarray(level.zombie_team);
 
@@ -193,7 +193,7 @@ function fireworks_launch(launch_spot) {
   firework = spawn("script_model", launch_spot.origin + (randomintrange(-60, 60), randomintrange(-60, 60), 0));
   firework setModel(#"tag_origin");
   util::wait_network_frame();
-  playFXOnTag(level._effect[# "fw_trail_cheap"], firework, "tag_origin");
+  playFXOnTag(level._effect[#"fw_trail_cheap"], firework, "tag_origin");
   firework playLoopSound(#"zmb_souls_loop", 0.75);
   dest = launch_spot;
 
@@ -209,6 +209,6 @@ function fireworks_launch(launch_spot) {
   }
 
   firework playSound(#"zmb_souls_end");
-  playFX(level._effect[# "fw_pre_burst"], firework.origin);
+  playFX(level._effect[#"fw_pre_burst"], firework.origin);
   firework delete();
 }

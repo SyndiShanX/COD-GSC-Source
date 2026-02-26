@@ -478,7 +478,7 @@ function function_80335b6(prop, &prop_array, condition_func = &function_708fe162
   var_7cfc32e1 = function_9cc082d2(prop.origin, 200);
 
   if(isDefined(var_7cfc32e1)) {
-    position = var_7cfc32e1[# "point"];
+    position = var_7cfc32e1[#"point"];
 
     if(!ispointonnavmesh(position, 15.1875)) {
       position = getclosestpointonnavmesh(position, 15.1875, 15.1875);
@@ -549,7 +549,7 @@ function function_8f0687e(prop) {
     return;
   }
 
-  var_8b84b3ce = groundtrace(loc.origin + (0, 0, 32) + (0, 0, 8), loc.origin + (0, 0, 32) + (0, 0, -100000), 0, undefined)[# "position"];
+  var_8b84b3ce = groundtrace(loc.origin + (0, 0, 32) + (0, 0, 8), loc.origin + (0, 0, 32) + (0, 0, -100000), 0, undefined)[#"position"];
   var_8d3beb7f = # "p9_sur_junk_parts_rare";
   model2 = # "p9_sur_junk_parts_pile";
   var_d661f9f1 = util::spawn_model(array::random([var_8d3beb7f, model2]), var_8b84b3ce, (0, 0, 0));
@@ -616,14 +616,14 @@ function function_708fe162() {
 
       traceresult = physicstraceex(self.origin + (0, 0, 23), player.origin + (0, 0, 36), (-15, -15, -15), (15, 15, 15), [self, player]);
 
-      if(traceresult[# "fraction"] >= 1) {
+      if(traceresult[#"fraction"] >= 1) {
         self notify(#"hash_7fb506f40bcf5962");
         return player;
       }
 
       if(is_true(level.var_72a9fe4c)) {
         line(self.origin + (0, 0, 8), player.origin + (0, 0, 8), (1, 0, 0), 1, 0, 1);
-        sphere(traceresult[# "position"], 4, (1, 0, 0), 1, 0, 10, 1);
+        sphere(traceresult[#"position"], 4, (1, 0, 0), 1, 0, 10, 1);
       }
     }
   }
@@ -973,9 +973,9 @@ function function_6fe38c03(prop_struct) {
     trap_prop.var_86038c7b = 1;
     trap_prop.var_be16d31e = 1;
 
-    if(isDefined(trigger._callbacks[# "on_trigger"])) {
-      trigger.var_d5434bfe = arraycopy(trigger._callbacks[# "on_trigger"]);
-      trigger._callbacks[# "on_trigger"] = undefined;
+    if(isDefined(trigger._callbacks[#"on_trigger"])) {
+      trigger.var_d5434bfe = arraycopy(trigger._callbacks[#"on_trigger"]);
+      trigger._callbacks[#"on_trigger"] = undefined;
     }
 
     trap_prop.var_d503cbd6 = {
@@ -1065,7 +1065,7 @@ function function_f78a8a69(trigger, scriptmodel, restore_wait) {
   wait restore_wait;
   scriptmodel val::reset(#"hash_b71e2a9baaa9c62", "hide");
   scriptmodel solid();
-  trigger._callbacks[# "on_trigger"] = arraycopy(trigger.var_d5434bfe);
+  trigger._callbacks[#"on_trigger"] = arraycopy(trigger.var_d5434bfe);
   trigger.var_d5434bfe = undefined;
 }
 

@@ -31,34 +31,34 @@ class phalanx {
   function scatterphalanx() {
     if(!scattered_) {
       scattered_ = 1;
-      _releasesentients(sentienttiers_[# "phalanx_tier1"]);
-      sentienttiers_[# "phalanx_tier1"] = [];
-      _assignphalanxstance(sentienttiers_[# "phalanx_tier2"], "crouch");
+      _releasesentients(sentienttiers_[#"phalanx_tier1"]);
+      sentienttiers_[#"phalanx_tier1"] = [];
+      _assignphalanxstance(sentienttiers_[#"phalanx_tier2"], "crouch");
       wait randomfloatrange(5, 7);
-      _releasesentients(sentienttiers_[# "phalanx_tier2"]);
-      sentienttiers_[# "phalanx_tier2"] = [];
-      _assignphalanxstance(sentienttiers_[# "phalanx_tier3"], "crouch");
+      _releasesentients(sentienttiers_[#"phalanx_tier2"]);
+      sentienttiers_[#"phalanx_tier2"] = [];
+      _assignphalanxstance(sentienttiers_[#"phalanx_tier3"], "crouch");
       wait randomfloatrange(5, 7);
-      _releasesentients(sentienttiers_[# "phalanx_tier3"]);
-      sentienttiers_[# "phalanx_tier3"] = [];
+      _releasesentients(sentienttiers_[#"phalanx_tier3"]);
+      sentienttiers_[#"phalanx_tier3"] = [];
     }
   }
 
   function resumefire() {
-    _resumefiresentients(sentienttiers_[# "phalanx_tier1"]);
-    _resumefiresentients(sentienttiers_[# "phalanx_tier2"]);
-    _resumefiresentients(sentienttiers_[# "phalanx_tier3"]);
+    _resumefiresentients(sentienttiers_[#"phalanx_tier1"]);
+    _resumefiresentients(sentienttiers_[#"phalanx_tier2"]);
+    _resumefiresentients(sentienttiers_[#"phalanx_tier3"]);
   }
 
   function resumeadvance() {
     if(!scattered_) {
-      _assignphalanxstance(sentienttiers_[# "phalanx_tier1"], "stand");
+      _assignphalanxstance(sentienttiers_[#"phalanx_tier1"], "stand");
       wait 1;
       forward = vectornormalize(endposition_ - startposition_);
-      _movephalanxtier(sentienttiers_[# "phalanx_tier1"], phalanxtype_, "phalanx_tier1", endposition_, forward);
-      _movephalanxtier(sentienttiers_[# "phalanx_tier2"], phalanxtype_, "phalanx_tier2", endposition_, forward);
-      _movephalanxtier(sentienttiers_[# "phalanx_tier3"], phalanxtype_, "phalanx_tier3", endposition_, forward);
-      _assignphalanxstance(sentienttiers_[# "phalanx_tier1"], "crouch");
+      _movephalanxtier(sentienttiers_[#"phalanx_tier1"], phalanxtype_, "phalanx_tier1", endposition_, forward);
+      _movephalanxtier(sentienttiers_[#"phalanx_tier2"], phalanxtype_, "phalanx_tier2", endposition_, forward);
+      _movephalanxtier(sentienttiers_[#"phalanx_tier3"], phalanxtype_, "phalanx_tier3", endposition_, forward);
+      _assignphalanxstance(sentienttiers_[#"phalanx_tier1"], "crouch");
     }
   }
 
@@ -68,9 +68,9 @@ class phalanx {
     assert(isvec(origin));
     assert(isvec(destination));
     tierspawners = [];
-    tierspawners[# "phalanx_tier1"] = tieronespawner;
-    tierspawners[# "phalanx_tier2"] = tiertwospawner;
-    tierspawners[# "phalanx_tier3"] = tierthreespawner;
+    tierspawners[#"phalanx_tier1"] = tieronespawner;
+    tierspawners[#"phalanx_tier2"] = tiertwospawner;
+    tierspawners[#"phalanx_tier3"] = tierthreespawner;
     maxtiersize = math::clamp(maxtiersize, 1, 10);
     forward = vectornormalize(destination - origin);
 
@@ -79,7 +79,7 @@ class phalanx {
       startsentientcount_ += sentienttiers_[tiername].size;
     }
 
-    _assignphalanxstance(sentienttiers_[# "phalanx_tier1"], "crouch");
+    _assignphalanxstance(sentienttiers_[#"phalanx_tier1"], "crouch");
 
     foreach(name, tier in sentienttiers_) {
       _movephalanxtier(sentienttiers_[name], phalanxtype, name, destination, forward);

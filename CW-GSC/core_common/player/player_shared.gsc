@@ -83,8 +83,8 @@ function spawn_player() {
   self.var_4a755632 = undefined;
   self.var_e03e3ae5 = undefined;
 
-  if(self.pers[# "lives"] && !is_true(level.takelivesondeath)) {
-    self.pers[# "lives"]--;
+  if(self.pers[#"lives"] && !is_true(level.takelivesondeath)) {
+    self.pers[#"lives"]--;
   }
 
   if(isDefined(game.lives) && is_true(game.lives[self.team]) && !is_true(level.takelivesondeath)) {
@@ -220,7 +220,7 @@ function function_8fef418b() {
       }
     }
 
-    ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+    ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
 
     if(!isDefined(ground_pos)) {
       return;
@@ -434,41 +434,41 @@ function get_weapondata(weapon) {
     weapon = self getcurrentweapon();
   }
 
-  weapondata[# "weapon"] = weapon.rootweapon.name;
-  weapondata[# "attachments"] = util::function_2146bd83(weapon);
+  weapondata[#"weapon"] = weapon.rootweapon.name;
+  weapondata[#"attachments"] = util::function_2146bd83(weapon);
 
   if(weapon != level.weaponnone) {
-    weapondata[# "clip"] = self getweaponammoclip(weapon);
-    weapondata[# "stock"] = self getweaponammostock(weapon);
-    weapondata[# "fuel"] = self getweaponammofuel(weapon);
-    weapondata[# "heat"] = self isweaponoverheating(1, weapon);
-    weapondata[# "overheat"] = self isweaponoverheating(0, weapon);
-    weapondata[# "renderoptionsweapon"] = self function_ade49959(weapon);
-    weapondata[# "hash_305a93e7a368c654"] = self function_8cbd254d(weapon);
+    weapondata[#"clip"] = self getweaponammoclip(weapon);
+    weapondata[#"stock"] = self getweaponammostock(weapon);
+    weapondata[#"fuel"] = self getweaponammofuel(weapon);
+    weapondata[#"heat"] = self isweaponoverheating(1, weapon);
+    weapondata[#"overheat"] = self isweaponoverheating(0, weapon);
+    weapondata[#"renderoptionsweapon"] = self function_ade49959(weapon);
+    weapondata[#"hash_305a93e7a368c654"] = self function_8cbd254d(weapon);
 
     if(weapon.isriotshield) {
-      weapondata[# "health"] = self.weaponhealth;
+      weapondata[#"health"] = self.weaponhealth;
     }
   } else {
-    weapondata[# "clip"] = 0;
-    weapondata[# "stock"] = 0;
-    weapondata[# "fuel"] = 0;
-    weapondata[# "heat"] = 0;
-    weapondata[# "overheat"] = 0;
+    weapondata[#"clip"] = 0;
+    weapondata[#"stock"] = 0;
+    weapondata[#"fuel"] = 0;
+    weapondata[#"heat"] = 0;
+    weapondata[#"overheat"] = 0;
   }
 
   if(weapon.dualwieldweapon != level.weaponnone) {
-    weapondata[# "lh_clip"] = self getweaponammoclip(weapon.dualwieldweapon);
+    weapondata[#"lh_clip"] = self getweaponammoclip(weapon.dualwieldweapon);
   } else {
-    weapondata[# "lh_clip"] = 0;
+    weapondata[#"lh_clip"] = 0;
   }
 
   if(weapon.altweapon != level.weaponnone) {
-    weapondata[# "alt_clip"] = self getweaponammoclip(weapon.altweapon);
-    weapondata[# "alt_stock"] = self getweaponammostock(weapon.altweapon);
+    weapondata[#"alt_clip"] = self getweaponammoclip(weapon.altweapon);
+    weapondata[#"alt_stock"] = self getweaponammostock(weapon.altweapon);
   } else {
-    weapondata[# "alt_clip"] = 0;
-    weapondata[# "alt_stock"] = 0;
+    weapondata[#"alt_clip"] = 0;
+    weapondata[#"alt_stock"] = 0;
   }
 
   return weapondata;
@@ -480,33 +480,33 @@ function weapondata_give(weapondata) {
     return;
   }
 
-  weapon = util::get_weapon_by_name(weapondata[# "weapon"], weapondata[# "attachments"]);
-  self giveweapon(weapon, weapondata[# "renderoptionsweapon"], weapondata[# "hash_305a93e7a368c654"]);
+  weapon = util::get_weapon_by_name(weapondata[#"weapon"], weapondata[#"attachments"]);
+  self giveweapon(weapon, weapondata[#"renderoptionsweapon"], weapondata[#"hash_305a93e7a368c654"]);
 
   if(weapon != level.weaponnone) {
-    self setweaponammoclip(weapon, weapondata[# "clip"]);
-    self setweaponammostock(weapon, weapondata[# "stock"]);
+    self setweaponammoclip(weapon, weapondata[#"clip"]);
+    self setweaponammostock(weapon, weapondata[#"stock"]);
 
-    if(isDefined(weapondata[# "fuel"])) {
-      self setweaponammofuel(weapon, weapondata[# "fuel"]);
+    if(isDefined(weapondata[#"fuel"])) {
+      self setweaponammofuel(weapon, weapondata[#"fuel"]);
     }
 
-    if(isDefined(weapondata[# "heat"]) && isDefined(weapondata[# "overheat"])) {
-      self setweaponoverheating(weapondata[# "overheat"], weapondata[# "heat"], weapon);
+    if(isDefined(weapondata[#"heat"]) && isDefined(weapondata[#"overheat"])) {
+      self setweaponoverheating(weapondata[#"overheat"], weapondata[#"heat"], weapon);
     }
 
-    if(weapon.isriotshield && isDefined(weapondata[# "health"])) {
-      self.weaponhealth = weapondata[# "health"];
+    if(weapon.isriotshield && isDefined(weapondata[#"health"])) {
+      self.weaponhealth = weapondata[#"health"];
     }
   }
 
   if(weapon.dualwieldweapon != level.weaponnone) {
-    self setweaponammoclip(weapon.dualwieldweapon, weapondata[# "lh_clip"]);
+    self setweaponammoclip(weapon.dualwieldweapon, weapondata[#"lh_clip"]);
   }
 
   if(weapon.altweapon != level.weaponnone) {
-    self setweaponammoclip(weapon.altweapon, weapondata[# "alt_clip"]);
-    self setweaponammostock(weapon.altweapon, weapondata[# "alt_stock"]);
+    self setweaponammoclip(weapon.altweapon, weapondata[#"alt_clip"]);
+    self setweaponammostock(weapon.altweapon, weapondata[#"alt_stock"]);
   }
 }
 
@@ -608,8 +608,8 @@ function get_snapped_spot_origin(spot_position) {
   new_spot_position = (spot_position[0], spot_position[1], spot_position[2] - snap_max_height);
   trace = physicstrace(spot_position, new_spot_position, mins, maxs, self);
 
-  if(trace[# "fraction"] < 1) {
-    return trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    return trace[#"position"];
   }
 
   return spot_position;
@@ -796,7 +796,7 @@ function function_e7f18b20(player_func, ...) {
   players = getplayers();
 
   foreach(player in players) {
-    if(!isDefined(player.pers[# "team"])) {
+    if(!isDefined(player.pers[#"team"])) {
       continue;
     }
 

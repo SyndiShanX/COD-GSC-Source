@@ -39,8 +39,8 @@ __init__() {
   clientfield::register("actor", "water_tricannon_slow_fx", 1, 1, "int");
   clientfield::register("allplayers", "fire_tricannon_muzzle_fx", 1, 1, "counter");
   clientfield::register("allplayers", "water_tricannon_muzzle_fx", 1, 1, "counter");
-  level._effect[# "earth_impact"] = # "hash_4587acdb7cd704b6";
-  level._effect[# "fire_impact"] = # "hash_65320106e9ad659c";
+  level._effect[#"earth_impact"] = # "hash_4587acdb7cd704b6";
+  level._effect[#"fire_impact"] = # "hash_65320106e9ad659c";
   level.custom_magic_box_selection_logic = &function_a543db40;
   level.var_ee565b3f = &function_689d923b;
   level.var_bb2323e4 = &function_73a498c8;
@@ -257,7 +257,7 @@ function_8ef8873e(weapon) {
 }
 
 function_71233d37(params) {
-  playFX(level._effect[# "earth_impact"], params.vpoint);
+  playFX(level._effect[#"earth_impact"], params.vpoint);
 
   if(params.idamage >= self.health) {
     if(self.archetype == # "zombie") {
@@ -357,7 +357,7 @@ function_16149496() {
   do {
     waitframe(1);
   }
-  while(isDefined(self.a_n_slowdown_timeouts[# "hash_7dd6cbed104dd8bd"]) || isDefined(self.a_n_slowdown_timeouts[# "hash_64aafe3cc04860be"]) || isDefined(self.a_n_slowdown_timeouts[# "hash_7eece5e5a5f9cc4d"]) || isDefined(self.a_n_slowdown_timeouts[# "hash_f87f19d867f4e2e"]));
+  while(isDefined(self.a_n_slowdown_timeouts[#"hash_7dd6cbed104dd8bd"]) || isDefined(self.a_n_slowdown_timeouts[#"hash_64aafe3cc04860be"]) || isDefined(self.a_n_slowdown_timeouts[#"hash_7eece5e5a5f9cc4d"]) || isDefined(self.a_n_slowdown_timeouts[#"hash_f87f19d867f4e2e"]));
 
   self clientfield::set("water_tricannon_slow_fx", 0);
 }
@@ -401,7 +401,7 @@ function_3e2e539(params) {
       self ai::stun();
 
       if(isDefined(params.vpoint) && isDefined(params.vdir)) {
-        playFX(level._effect[# "fire_impact"], params.vpoint, params.vdir);
+        playFX(level._effect[#"fire_impact"], params.vpoint, params.vdir);
       }
 
       params.einflictor notify(#"death");
@@ -468,41 +468,41 @@ function_73a498c8(oldweapondata, newweapondata) {
   w_tricannon_water_upg = getweapon(#"ww_tricannon_water_t8" + "_upgraded");
   a_w_tricannon = array(w_tricannon, w_tricannon_upg, w_tricannon_earth, w_tricannon_earth_upg, w_tricannon_air, w_tricannon_air_upg, w_tricannon_fire, w_tricannon_fire_upg, w_tricannon_water, w_tricannon_water_upg);
 
-  if(isinarray(a_w_tricannon, oldweapondata[# "weapon"]) && isinarray(a_w_tricannon, newweapondata[# "weapon"])) {
+  if(isinarray(a_w_tricannon, oldweapondata[#"weapon"]) && isinarray(a_w_tricannon, newweapondata[#"weapon"])) {
     weapondata = [];
 
-    if(oldweapondata[# "weapon"] === w_tricannon_water_upg || newweapondata[# "weapon"] === w_tricannon_water_upg) {
-      weapondata[# "weapon"] = w_tricannon_earth_upg;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_air_upg || newweapondata[# "weapon"] === w_tricannon_air_upg) {
-      weapondata[# "weapon"] = w_tricannon_earth_upg;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_fire_upg || newweapondata[# "weapon"] === w_tricannon_fire_upg) {
-      weapondata[# "weapon"] = w_tricannon_fire_upg;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_earth_upg || newweapondata[# "weapon"] === w_tricannon_earth_upg) {
-      weapondata[# "weapon"] = w_tricannon_earth_upg;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_upg || newweapondata[# "weapon"] === w_tricannon_upg) {
-      weapondata[# "weapon"] = w_tricannon_upg;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_water || newweapondata[# "weapon"] === w_tricannon_water) {
-      weapondata[# "weapon"] = w_tricannon_fire;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_air || newweapondata[# "weapon"] === w_tricannon_air) {
-      weapondata[# "weapon"] = w_tricannon_earth;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_fire || newweapondata[# "weapon"] === w_tricannon_fire) {
-      weapondata[# "weapon"] = w_tricannon_fire;
-    } else if(oldweapondata[# "weapon"] === w_tricannon_earth || newweapondata[# "weapon"] === w_tricannon_earth) {
-      weapondata[# "weapon"] = w_tricannon_earth;
+    if(oldweapondata[#"weapon"] === w_tricannon_water_upg || newweapondata[#"weapon"] === w_tricannon_water_upg) {
+      weapondata[#"weapon"] = w_tricannon_earth_upg;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_air_upg || newweapondata[#"weapon"] === w_tricannon_air_upg) {
+      weapondata[#"weapon"] = w_tricannon_earth_upg;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_fire_upg || newweapondata[#"weapon"] === w_tricannon_fire_upg) {
+      weapondata[#"weapon"] = w_tricannon_fire_upg;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_earth_upg || newweapondata[#"weapon"] === w_tricannon_earth_upg) {
+      weapondata[#"weapon"] = w_tricannon_earth_upg;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_upg || newweapondata[#"weapon"] === w_tricannon_upg) {
+      weapondata[#"weapon"] = w_tricannon_upg;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_water || newweapondata[#"weapon"] === w_tricannon_water) {
+      weapondata[#"weapon"] = w_tricannon_fire;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_air || newweapondata[#"weapon"] === w_tricannon_air) {
+      weapondata[#"weapon"] = w_tricannon_earth;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_fire || newweapondata[#"weapon"] === w_tricannon_fire) {
+      weapondata[#"weapon"] = w_tricannon_fire;
+    } else if(oldweapondata[#"weapon"] === w_tricannon_earth || newweapondata[#"weapon"] === w_tricannon_earth) {
+      weapondata[#"weapon"] = w_tricannon_earth;
     } else {
-      weapondata[# "weapon"] = w_tricannon;
+      weapondata[#"weapon"] = w_tricannon;
     }
 
-    weapon = weapondata[# "weapon"];
-    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
-    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
-    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
-    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
-    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
-    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
-    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
-    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
-    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
+    weapon = weapondata[#"weapon"];
+    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
+    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
+    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
+    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
+    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
+    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
+    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
+    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
+    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
     return weapondata;
   }
 }

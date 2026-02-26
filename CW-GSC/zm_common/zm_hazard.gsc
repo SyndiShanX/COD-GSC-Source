@@ -206,7 +206,7 @@ function function_eccc5dbd() {
   v_direction = anglesToForward(v_direction) * 500;
   eye = player getEye();
   trace = bulletTrace(eye, eye + v_direction, 0, undefined);
-  var_770ed480 = positionquery_source_navigation(trace[# "position"], 64, 256, 512, 20);
+  var_770ed480 = positionquery_source_navigation(trace[#"position"], 64, 256, 512, 20);
   spot = spawn("<dev string:x16c>", player.origin);
   spot setModel("<dev string:x17c>");
 

@@ -43,17 +43,17 @@ function register(progresscallback, var_ca3086f0) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "seeker_mine_prompt"])) {
-    level.var_ae746e8f[# "seeker_mine_prompt"] = [];
+  if(!isDefined(level.var_ae746e8f[#"seeker_mine_prompt"])) {
+    level.var_ae746e8f[#"seeker_mine_prompt"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "seeker_mine_prompt"])) {
-    level.var_ae746e8f[# "seeker_mine_prompt"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "seeker_mine_prompt"])) {
-    level.var_ae746e8f[# "seeker_mine_prompt"] = array(level.var_ae746e8f[# "seeker_mine_prompt"]);
+  if(!isDefined(level.var_ae746e8f[#"seeker_mine_prompt"])) {
+    level.var_ae746e8f[#"seeker_mine_prompt"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"seeker_mine_prompt"])) {
+    level.var_ae746e8f[#"seeker_mine_prompt"] = array(level.var_ae746e8f[#"seeker_mine_prompt"]);
   }
 
-  level.var_ae746e8f[# "seeker_mine_prompt"][level.var_ae746e8f[# "seeker_mine_prompt"].size] = elem;
+  level.var_ae746e8f[#"seeker_mine_prompt"][level.var_ae746e8f[#"seeker_mine_prompt"].size] = elem;
 }
 
 function register_clientside() {

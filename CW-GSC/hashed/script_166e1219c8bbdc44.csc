@@ -77,7 +77,7 @@ function function_8964c489(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_12b59dee = undefined;
   }
 
-  var_a04a4858 = [# "hash_16d59f099e418f4f", #"hash_726534103985846c", #"hash_7417f2cd52314463"];
+  var_a04a4858 = [#"hash_16d59f099e418f4f", #"hash_726534103985846c", #"hash_7417f2cd52314463"];
 
   if(bwastimejump && bwastimejump < var_a04a4858.size + 1) {
     self.var_da783696 = var_a04a4858[bwastimejump - 1];

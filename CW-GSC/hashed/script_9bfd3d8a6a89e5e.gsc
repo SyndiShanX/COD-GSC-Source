@@ -36,7 +36,7 @@ function function_53e50b40(action) {
   self endon(action.ender);
 
   if(is_true(self actions::function_83bde308(action))) {
-    if(self.takedown.var_67582ca5.player_actions.enabled[# "body_shield"] === 0) {
+    if(self.takedown.var_67582ca5.player_actions.enabled[#"body_shield"] === 0) {
       return false;
     }
 
@@ -52,7 +52,7 @@ function function_e3e4c03c(action, body) {
   assert(isPlayer(self));
 
   if(!isDefined(action)) {
-    action = level.player_actions.actions[# "body_shield"];
+    action = level.player_actions.actions[#"body_shield"];
   }
 
   if(isalive(body)) {

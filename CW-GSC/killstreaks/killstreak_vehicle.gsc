@@ -320,7 +320,7 @@ function watch_exit() {
 function function_e99d09a3() {
   self endon(#"shutdown");
 
-  for(inwater = 0; !inwater; inwater = trace[# "fraction"] < 1) {
+  for(inwater = 0; !inwater; inwater = trace[#"fraction"] < 1) {
     wait 0.5;
     trace = physicstrace(self.origin + (0, 0, 10), self.origin + (0, 0, 6), (-2, -2, -2), (2, 2, 2), self, 4);
   }
@@ -624,12 +624,12 @@ function function_d75fbe15(origin, angles) {
     mask = 1 | 2;
     trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-    if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"]) && isPlayer(trace[#"entity"])) {
       wheelcounts[i] = 0;
       continue;
     }
 
-    startpoints[i] = trace[# "position"] + (0, 0, heightoffset);
+    startpoints[i] = trace[#"position"] + (0, 0, heightoffset);
     wheelcounts[i] = function_c82e14d2(startpoints[i], startangles[i], heightoffset);
 
     if(positionwouldtelefrag(startpoints[i])) {
@@ -688,7 +688,7 @@ function function_c82e14d2(origin, angles, heightoffset) {
     startpoint += (0, 0, height - heightoffset);
     trace = bulletTrace(startpoint, endpoint, 0, self);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       touchcount++;
     }
   }
@@ -713,7 +713,7 @@ function function_b4682bd6(origin, angles) {
   mask = 1 | 2 | 4;
   trace = physicstrace(liftedorigin, angles + (0, 0, 1), mins, maxs, self, mask);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 
@@ -723,7 +723,7 @@ function function_b4682bd6(origin, angles) {
   maxs = (size, size, height);
   sweeptrace = physicstrace(self.origin + (0, 0, startheight), liftedorigin, mins, maxs, self, mask);
 
-  if(sweeptrace[# "fraction"] < 1) {
+  if(sweeptrace[#"fraction"] < 1) {
     return false;
   }
 

@@ -90,8 +90,8 @@ function gadget_roulette_on_connect() {
 
 function roulette_init_allow_spin() {
   if(self.isroulette === 1) {
-    if(!isDefined(self.pers[# "hash_9f129a92"])) {
-      self.pers[# "hash_9f129a92"] = 1;
+    if(!isDefined(self.pers[#"hash_9f129a92"])) {
+      self.pers[#"hash_9f129a92"] = 1;
     }
   }
 }
@@ -143,7 +143,7 @@ function watchrespin(weapon) {
   self endon("hero_gadget_activated");
   self notify("watchrespin");
   self endon("watchrespin");
-  if(!isDefined(self.pers[# "hash_9f129a92"]) || self.pers[# "hash_9f129a92"] == 0) {
+  if(!isDefined(self.pers[#"hash_9f129a92"]) || self.pers[#"hash_9f129a92"] == 0) {
     return;
   }
   self thread watchrespingadgetactivated();
@@ -154,9 +154,9 @@ function watchrespin(weapon) {
       break;
     }
     if(self dpad_left_pressed()) {
-      self.pers[# "hash_65987563"] = undefined;
+      self.pers[#"hash_65987563"] = undefined;
       self giverandomweapon(weapon, 0);
-      self.pers[# "hash_9f129a92"] = 0;
+      self.pers[#"hash_9f129a92"] = 0;
       self notify("watchrespingadgetactivated");
       self notify("roulette_respin_activate");
       self clientfield::set_to_player("roulette_state", 2);
@@ -191,7 +191,7 @@ function watchgadgetactivated(weapon) {
   self notify("watchgadgetactivated");
   self endon("watchgadgetactivated");
   self waittill("hero_gadget_activated");
-  self.pers[# "hash_9f129a92"] = 1;
+  self.pers[#"hash_9f129a92"] = 1;
   if(isDefined(weapon) || weapon.name != "gadget_roulette") {
     self clientfield::set_to_player("roulette_state", 0);
   }
@@ -204,12 +204,12 @@ function giverandomweapon(weapon, isprimaryroll) {
     }
   }
   randomweapon = weapon;
-  if(isDefined(self.pers[# "hash_65987563"])) {
-    randomweapon = self.pers[# "hash_65987563"];
+  if(isDefined(self.pers[#"hash_65987563"])) {
+    randomweapon = self.pers[#"hash_65987563"];
   } else {
-    if(isDefined(self.pers[# "hash_cbcfa831"]) || isDefined(self.pers[# "hash_cbcfa832"])) {
+    if(isDefined(self.pers[#"hash_cbcfa831"]) || isDefined(self.pers[#"hash_cbcfa832"])) {
       randomweapon = getrandomgadget(isprimaryroll);
-      while(randomweapon == self.pers[# "hash_cbcfa831"] || (isDefined(self.pers[# "hash_cbcfa832"]) && randomweapon == self.pers[# "hash_cbcfa832"])) {
+      while(randomweapon == self.pers[#"hash_cbcfa831"] || (isDefined(self.pers[#"hash_cbcfa832"]) && randomweapon == self.pers[#"hash_cbcfa832"])) {
         randomweapon = getrandomgadget(isprimaryroll);
       }
     } else {
@@ -221,9 +221,9 @@ function giverandomweapon(weapon, isprimaryroll) {
   }
   self thread gadget_roulette_on_deactivate_helper(weapon);
   self giveweapon(randomweapon);
-  self.pers[# "hash_65987563"] = randomweapon;
-  self.pers[# "hash_cbcfa832"] = self.pers[# "hash_cbcfa831"];
-  self.pers[# "hash_cbcfa831"] = randomweapon;
+  self.pers[#"hash_65987563"] = randomweapon;
+  self.pers[#"hash_cbcfa832"] = self.pers[#"hash_cbcfa831"];
+  self.pers[#"hash_cbcfa831"] = randomweapon;
 }
 
 function gadget_roulette_on_deactivate(slot, weapon) {
@@ -244,7 +244,7 @@ function gadget_roulette_on_deactivate_helper(weapon) {
   }
   if(isDefined(self)) {
     self giveweapon(level.gadget_roulette);
-    self.pers[# "hash_65987563"] = undefined;
+    self.pers[#"hash_65987563"] = undefined;
   }
 }
 

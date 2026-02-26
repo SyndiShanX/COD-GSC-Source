@@ -87,32 +87,32 @@ function event_handler[gametype_init] main(eventstruct) {
   callback::on_joined_spectate(&onconnect);
 
   if(!isDefined(game.ctf_teamscore_cache)) {
-    game.ctf_teamscore_cache[# "allies"] = 0;
-    game.ctf_teamscore_cache[# "axis"] = 0;
+    game.ctf_teamscore_cache[#"allies"] = 0;
+    game.ctf_teamscore_cache[#"axis"] = 0;
   }
 
   level.var_537d7278 = [];
-  level.var_537d7278[# "allies"] = spawnStruct();
-  level.var_537d7278[# "allies"].friendly = # "hash_284308e81d362553";
-  level.var_537d7278[# "allies"].enemy = # "hash_104d7846da83e67e";
-  level.var_537d7278[# "axis"] = spawnStruct();
-  level.var_537d7278[# "axis"].friendly = # "hash_5a946f3f24347a8e";
-  level.var_537d7278[# "axis"].enemy = # "hash_34ce58df766f54dd";
+  level.var_537d7278[#"allies"] = spawnStruct();
+  level.var_537d7278[#"allies"].friendly = # "hash_284308e81d362553";
+  level.var_537d7278[#"allies"].enemy = # "hash_104d7846da83e67e";
+  level.var_537d7278[#"axis"] = spawnStruct();
+  level.var_537d7278[#"axis"].friendly = # "hash_5a946f3f24347a8e";
+  level.var_537d7278[#"axis"].enemy = # "hash_34ce58df766f54dd";
   level thread ctf_icon_hide();
-  game.flagmodels[# "allies"] = spawnStruct();
-  game.flagmodels[# "allies"].allies = # "hash_1f046ad8773b6c3";
-  game.flagmodels[# "allies"].axis = # "hash_1001e79caa6049ce";
-  game.flagmodels[# "axis"] = spawnStruct();
-  game.flagmodels[# "axis"].axis = # "hash_4409a354dd61569e";
-  game.flagmodels[# "axis"].allies = # "hash_592aa91190e3938d";
-  game.carry_flagmodels[# "allies"] = # "hash_284308e81d362553";
-  game.carry_flagmodels[# "axis"] = # "hash_5a946f3f24347a8e";
+  game.flagmodels[#"allies"] = spawnStruct();
+  game.flagmodels[#"allies"].allies = # "hash_1f046ad8773b6c3";
+  game.flagmodels[#"allies"].axis = # "hash_1001e79caa6049ce";
+  game.flagmodels[#"axis"] = spawnStruct();
+  game.flagmodels[#"axis"].axis = # "hash_4409a354dd61569e";
+  game.flagmodels[#"axis"].allies = # "hash_592aa91190e3938d";
+  game.carry_flagmodels[#"allies"] = # "hash_284308e81d362553";
+  game.carry_flagmodels[#"axis"] = # "hash_5a946f3f24347a8e";
 }
 
 function onprecachegametype() {
   game.flag_dropped_sound = "mp_war_objective_lost";
   game.flag_recovered_sound = "mp_war_objective_taken";
-  game.strings[# "score_limit_reached"] = # "hash_5218d2db23ab36aa";
+  game.strings[#"score_limit_reached"] = # "hash_5218d2db23ab36aa";
 }
 
 function function_b4530b39() {
@@ -130,12 +130,12 @@ function onstartgametype() {
   globallogic_score::resetteamscores();
 
   if(overtime::is_overtime_round()) {
-    game.ctf_teamscore_cache[# "allies"] += [[level._getteamscore]](#"allies");
-    game.ctf_teamscore_cache[# "axis"] += [[level._getteamscore]](#"axis");
+    game.ctf_teamscore_cache[#"allies"] += [[level._getteamscore]](#"allies");
+    game.ctf_teamscore_cache[#"axis"] += [[level._getteamscore]](#"axis");
 
     if(!isDefined(game.var_8f9c5645)) {
-      game.var_8f9c5645[# "allies"] = 0;
-      game.var_8f9c5645[# "axis"] = 0;
+      game.var_8f9c5645[#"allies"] = 0;
+      game.var_8f9c5645[#"axis"] = 0;
     }
 
     [[level._setteamscore]](#"allies", 0);
@@ -164,7 +164,7 @@ function function_bc074337(var_69437f64) {
   wait 2;
 
   foreach(player in level.players) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(team === # "spectator") {
       continue;
@@ -190,7 +190,7 @@ function shouldplayovertimeround() {
   }
 
   if(!level.scoreroundwinbased) {
-    if(game.stat[# "teamscores"][# "allies"] == game.stat[# "teamscores"][# "axis"] && (util::hitroundlimit() || game.stat[# "teamscores"][# "allies"] == level.scorelimit - 1)) {
+    if(game.stat[#"teamscores"][#"allies"] == game.stat[#"teamscores"][#"axis"] && (util::hitroundlimit() || game.stat[#"teamscores"][#"allies"] == level.scorelimit - 1)) {
       return true;
     }
   } else {
@@ -225,20 +225,20 @@ function onendround(var_c1e98979) {
   winning_team = round::get_winning_team();
 
   if(round::get_flag("overtime")) {
-    level clientfield::set_world_uimodel("CTFLevelInfo.bestTimeAllies", int(isDefined(game.var_8f9c5645[# "allies"]) ? game.var_8f9c5645[# "allies"] : 0));
-    level clientfield::set_world_uimodel("CTFLevelInfo.bestTimeAxis", int(isDefined(game.var_8f9c5645[# "axis"]) ? game.var_8f9c5645[# "axis"] : 0));
+    level clientfield::set_world_uimodel("CTFLevelInfo.bestTimeAllies", int(isDefined(game.var_8f9c5645[#"allies"]) ? game.var_8f9c5645[#"allies"] : 0));
+    level clientfield::set_world_uimodel("CTFLevelInfo.bestTimeAxis", int(isDefined(game.var_8f9c5645[#"axis"]) ? game.var_8f9c5645[#"axis"] : 0));
 
     if(game.overtime_round < 2 && isDefined(winning_team) && !round::get_flag("tie")) {
       game.overtime_first_winner = winning_team;
       game.ctf_overtime_time_to_beat = globallogic_utils::gettimepassed();
     }
   } else {
-    game.overtime_second_winner[# "ctf"] = winning_team;
-    game.overtime_best_time[# "ctf"] = globallogic_utils::gettimepassed();
+    game.overtime_second_winner[#"ctf"] = winning_team;
+    game.overtime_best_time[#"ctf"] = globallogic_utils::gettimepassed();
     globallogic_score::function_9779ac61();
 
     if(winning_team === # "allies" || winning_team === # "axis") {
-      [[level._setteamscore]](winning_team, game.stat[# "roundswon"][winning_team] + 1);
+      [[level._setteamscore]](winning_team, game.stat[#"roundswon"][winning_team] + 1);
     }
   }
 
@@ -557,12 +557,12 @@ function function_d45df32e() {
 function ctf_icon_hide() {
   level waittill(#"game_ended");
 
-  if(isDefined(level.teamflags[# "allies"])) {
-    level.teamflags[# "allies"] gameobjects::set_visible(#"group_none");
+  if(isDefined(level.teamflags[#"allies"])) {
+    level.teamflags[#"allies"] gameobjects::set_visible(#"group_none");
   }
 
-  if(isDefined(level.teamflags[# "axis"])) {
-    level.teamflags[# "axis"] gameobjects::set_visible(#"group_none");
+  if(isDefined(level.teamflags[#"axis"])) {
+    level.teamflags[#"axis"] gameobjects::set_visible(#"group_none");
   }
 }
 
@@ -713,13 +713,13 @@ function onpickup(player) {
   team = self gameobjects::get_owner_team();
   otherteam = util::getotherteam(team);
 
-  if(isDefined(player) && player.pers[# "team"] == team) {
+  if(isDefined(player) && player.pers[#"team"] == team) {
     self notify(#"picked_up");
     util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_obj_returned");
 
-    if(isDefined(player.pers[# "returns"])) {
-      player.pers[# "returns"]++;
-      player.returns = player.pers[# "returns"];
+    if(isDefined(player.pers[#"returns"])) {
+      player.pers[#"returns"]++;
+      player.returns = player.pers[#"returns"];
     }
 
     if(isDefined(carrierkilledby) && carrierkilledby == player) {
@@ -868,9 +868,9 @@ function returnflag() {
 function function_883c46cc(team) {
   wait 2;
 
-  if(isDefined(game.stat[# "roundswon"])) {
-    alliesroundswon = game.stat[# "roundswon"][# "allies"];
-    axisroundswon = game.stat[# "roundswon"][# "axis"];
+  if(isDefined(game.stat[#"roundswon"])) {
+    alliesroundswon = game.stat[#"roundswon"][#"allies"];
+    axisroundswon = game.stat[#"roundswon"][#"axis"];
 
     if(team == # "allies") {
       alliesroundswon--;
@@ -878,15 +878,15 @@ function function_883c46cc(team) {
       axisroundswon--;
     }
 
-    game.stat[# "roundswon"][# "allies"] = alliesroundswon;
-    game.stat[# "roundswon"][# "axis"] = axisroundswon;
+    game.stat[#"roundswon"][#"allies"] = alliesroundswon;
+    game.stat[#"roundswon"][#"axis"] = axisroundswon;
     clientfield::set_world_uimodel("hudItems.team1.roundsWon", alliesroundswon);
     clientfield::set_world_uimodel("hudItems.team2.roundsWon", axisroundswon);
   }
 }
 
 function oncapture(player) {
-  team = player.pers[# "team"];
+  team = player.pers[#"team"];
   enemyteam = util::getotherteam(team);
   time = gettime();
   playerteamsflag = level.teamflags[team];
@@ -921,11 +921,11 @@ function oncapture(player) {
 
   util::printandsoundoneveryone(team, undefined, #"", undefined, "mp_obj_captured", "mp_enemy_obj_captured");
   bb::function_95a5b5c2("ctf_flagcapture", undefined, enemyteam, player.origin);
-  game.challenge[team][# "capturedflag"] = 1;
+  game.challenge[team][#"capturedflag"] = 1;
 
-  if(isDefined(player.pers[# "captures"])) {
-    player.pers[# "captures"]++;
-    player.captures = player.pers[# "captures"];
+  if(isDefined(player.pers[#"captures"])) {
+    player.pers[#"captures"]++;
+    player.captures = player.pers[#"captures"];
   }
 
   [[level.var_37d62931]](player, 1);
@@ -1024,7 +1024,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         flagorigin = level.flags[index].carrier.origin;
         iscarried = 1;
 
-        if(isPlayer(psoffsettime) && psoffsettime.pers[# "team"] != self.pers[# "team"]) {
+        if(isPlayer(psoffsettime) && psoffsettime.pers[#"team"] != self.pers[#"team"]) {
           if(isDefined(level.flags[index].carrier.attackerdata)) {
             if(level.flags[index].carrier != psoffsettime) {
               if(isDefined(level.flags[index].carrier.attackerdata[self.clientid])) {
@@ -1043,7 +1043,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       if(dist < level.defaultoffenseradiussq) {
         inflagradius = 1;
 
-        if(level.flags[index].ctf_team == psoffsettime.pers[# "team"]) {
+        if(level.flags[index].ctf_team == psoffsettime.pers[#"team"]) {
           defendedflag = 1;
         } else {
           offendedflag = 1;
@@ -1055,17 +1055,17 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       if(dist < level.defaultoffenseradiussq) {
         inflagradius = 1;
 
-        if(level.flags[index].ctf_team == psoffsettime.pers[# "team"]) {
+        if(level.flags[index].ctf_team == psoffsettime.pers[#"team"]) {
           defendedflag = 1;
         } else {
           offendedflag = 1;
         }
       }
 
-      if(inflagradius && isPlayer(psoffsettime) && psoffsettime.pers[# "team"] != self.pers[# "team"]) {
+      if(inflagradius && isPlayer(psoffsettime) && psoffsettime.pers[#"team"] != self.pers[#"team"]) {
         psoffsettime challenges::function_82bb78f7(deathanimduration, self);
-        psoffsettime.pers[# "objectiveekia"]++;
-        psoffsettime.objectiveekia = psoffsettime.pers[# "objectiveekia"];
+        psoffsettime.pers[#"objectiveekia"]++;
+        psoffsettime.objectiveekia = psoffsettime.pers[#"objectiveekia"];
 
         if(defendedflag) {
           if(isDefined(self.isflagcarrier) && self.isflagcarrier) {
@@ -1120,7 +1120,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     return;
   }
 
-  if(isDefined(psoffsettime) && isPlayer(psoffsettime) && psoffsettime.pers[# "team"] != self.pers[# "team"]) {
+  if(isDefined(psoffsettime) && isPlayer(psoffsettime) && psoffsettime.pers[#"team"] != self.pers[#"team"]) {
     if(isDefined(self.flagcarried)) {
       for(index = 0; index < level.flags.size; index++) {
         currentflag = level.flags[index];
@@ -1159,25 +1159,25 @@ function turn_off() {
 }
 
 function update_hints() {
-  allied_flag = level.teamflags[# "allies"];
-  axis_flag = level.teamflags[# "axis"];
+  allied_flag = level.teamflags[#"allies"];
+  axis_flag = level.teamflags[#"axis"];
 
   if(!level.touchreturn) {
     return;
   }
 
   if(isDefined(allied_flag.carrier) && axis_flag gameobjects::is_object_away_from_home()) {
-    level.flaghints[# "axis"] turn_on();
+    level.flaghints[#"axis"] turn_on();
   } else {
-    level.flaghints[# "axis"] turn_off();
+    level.flaghints[#"axis"] turn_off();
   }
 
   if(isDefined(axis_flag.carrier) && allied_flag gameobjects::is_object_away_from_home()) {
-    level.flaghints[# "allies"] turn_on();
+    level.flaghints[#"allies"] turn_on();
     return;
   }
 
-  level.flaghints[# "allies"] turn_off();
+  level.flaghints[#"allies"] turn_off();
 }
 
 function claim_trigger(trigger) {
@@ -1207,12 +1207,12 @@ function private ontimelimit() {
   winner = teams::function_d85770f0("teamScores");
 
   if(util::isfirstround() && !isDefined(winner)) {
-    game.stat[# "teamscores"][# "allies"] = 1;
-    game.stat[# "teamscores"][# "axis"] = 1;
-    setteamscore(#"allies", game.stat[# "teamscores"][# "allies"]);
-    setteamscore(#"axis", game.stat[# "teamscores"][# "axis"]);
-    game.stat[# "roundswon"][# "allies"] = 1;
-    game.stat[# "roundswon"][# "axis"] = 1;
+    game.stat[#"teamscores"][#"allies"] = 1;
+    game.stat[#"teamscores"][#"axis"] = 1;
+    setteamscore(#"allies", game.stat[#"teamscores"][#"allies"]);
+    setteamscore(#"axis", game.stat[#"teamscores"][#"axis"]);
+    game.stat[#"roundswon"][#"allies"] = 1;
+    game.stat[#"roundswon"][#"axis"] = 1;
     level.var_933889c0 = 1;
     thread globallogic::end_round(2);
     return;

@@ -102,18 +102,18 @@ function_fc04b237(weapon, weaponoptions) {
     return;
   }
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
     return weaponoptions;
   }
 
   camoindex = getcamoindex(weaponoptions);
   activecamoname = getactivecamo(camoindex);
 
-  if(!isDefined(activecamoname) || !isDefined(self.pers[# "activecamo"][activecamoname])) {
+  if(!isDefined(activecamoname) || !isDefined(self.pers[#"activecamo"][activecamoname])) {
     return weaponoptions;
   }
 
-  activecamo = self.pers[# "activecamo"][activecamoname];
+  activecamo = self.pers[#"activecamo"][activecamoname];
 
   if(!isDefined(activecamo) || !isDefined(activecamo.var_dd54a13b)) {
     return weaponoptions;
@@ -3757,7 +3757,7 @@ use_killstreak(networkid, item) {
     var_f45df727 = eyepos + forward * 100;
     traceresults = {};
     traceresults.trace = bulletTrace(eyepos, var_f45df727, 1, self, 1, 1);
-    traceresults.isvalid = traceresults.trace[# "fraction"] >= 1;
+    traceresults.isvalid = traceresults.trace[#"fraction"] >= 1;
     traceresults.waterdepth = 0;
     traceresults.origin = endpos;
     traceresults.angles = eyeangle;

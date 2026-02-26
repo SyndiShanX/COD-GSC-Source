@@ -33,15 +33,15 @@ function corpse_init_level() {
 }
 
 function set_corpse_ranges_default() {
-  array[# "sight_dist"] = 600;
-  array[# "detect_dist"] = 300;
-  array[# "found_dist"] = 100;
+  array[#"sight_dist"] = 600;
+  array[#"detect_dist"] = 300;
+  array[#"found_dist"] = 100;
   set_corpse_ranges(array);
 }
 
 function set_corpse_ranges(array) {
-  if(!isDefined(array[# "shadow_dist"])) {
-    array[# "shadow_dist"] = array[# "found_dist"];
+  if(!isDefined(array[#"shadow_dist"])) {
+    array[#"shadow_dist"] = array[#"found_dist"];
   }
 
   level.stealth.corpse.dists = array;
@@ -63,8 +63,8 @@ function corpse_check_shadow(origin) {
   if(!isDefined(self.in_shadow_origin) || distancesquared(self.in_shadow_origin, origin) > 1) {
     self.in_shadow = undefined;
 
-    if(isDefined(level.var_5ca45f26) && isDefined(level.var_5ca45f26[# "stealth_in_shadow"])) {
-      foreach(trigger in level.var_5ca45f26[# "stealth_in_shadow"]) {
+    if(isDefined(level.var_5ca45f26) && isDefined(level.var_5ca45f26[#"stealth_in_shadow"])) {
+      foreach(trigger in level.var_5ca45f26[#"stealth_in_shadow"]) {
         if(isDefined(trigger) && trigger istouching(origin)) {
           self.in_shadow = 1;
           break;
@@ -105,19 +105,19 @@ function corpse_sight() {
     self.stealth.corpse_nexttime = gettime() + 1500;
   }
 
-  found_dist = level.stealth.corpse.dists[# "found_dist"];
+  found_dist = level.stealth.corpse.dists[#"found_dist"];
 
   if(isDefined(self.stealth.override_corpse_found_dist)) {
     found_dist = self.stealth.override_corpse_found_dist;
   }
 
-  sight_dist = level.stealth.corpse.dists[# "sight_dist"];
+  sight_dist = level.stealth.corpse.dists[#"sight_dist"];
 
   if(isDefined(self.stealth.override_corpse_sight_dist)) {
     sight_dist = self.stealth.override_corpse_sight_dist;
   }
 
-  detect_dist = level.stealth.corpse.dists[# "detect_dist"];
+  detect_dist = level.stealth.corpse.dists[#"detect_dist"];
 
   if(isDefined(self.stealth.override_corpse_detect_dist)) {
     detect_dist = self.stealth.override_corpse_detect_dist;
@@ -153,8 +153,8 @@ function corpse_sight() {
     distsq = distancesquared(self.origin, corpseorigin);
 
     if(corpse corpse_check_shadow(corpseorigin)) {
-      assert(level.stealth.corpse.dists[# "shadow_dist"] <= check_dist);
-      var_1adb66c8 = sqr(level.stealth.corpse.dists[# "shadow_dist"]);
+      assert(level.stealth.corpse.dists[#"shadow_dist"] <= check_dist);
+      var_1adb66c8 = sqr(level.stealth.corpse.dists[#"shadow_dist"]);
       var_3ff1021a = var_1adb66c8;
     }
 

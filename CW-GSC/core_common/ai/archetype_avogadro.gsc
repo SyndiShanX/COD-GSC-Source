@@ -445,7 +445,7 @@ function private function_f8e8c129(entity) {
         eye_pos = self getEye();
         traceresult = bulletTrace(eye_pos, var_f6a4b2f3, 0, isentity(enemy) ? enemy : undefined);
 
-        if(traceresult[# "fraction"] == 1) {
+        if(traceresult[#"fraction"] == 1) {
           return true;
         }
       }
@@ -950,7 +950,7 @@ function function_3d3ee1a4(entity, point, enemy) {
     return undefined;
   }
 
-  groundpos = groundtrace(point + (0, 0, 500) + (0, 0, 8), point + (0, 0, 500) + (0, 0, -100000), 0, entity)[# "position"];
+  groundpos = groundtrace(point + (0, 0, 500) + (0, 0, 8), point + (0, 0, 500) + (0, 0, -100000), 0, entity)[#"position"];
 
   if(groundpos[2] < point[2] - 2000) {
     recordsphere(point, 10, (1, 0, 0), "<dev string:x38>", entity);
@@ -980,7 +980,7 @@ function function_3d3ee1a4(entity, point, enemy) {
     }
   }
 
-  groundpos = groundtrace(nextpos + (0, 0, 500) + (0, 0, 8), nextpos + (0, 0, 500) + (0, 0, -100000), 0, entity)[# "position"];
+  groundpos = groundtrace(nextpos + (0, 0, 500) + (0, 0, 8), nextpos + (0, 0, 500) + (0, 0, -100000), 0, entity)[#"position"];
 
   if(abs(nextpos[2] - groundpos[2]) > 5) {
     return undefined;
@@ -1086,7 +1086,7 @@ function function_d58f8483(entity) {
     var_32eb9058 = isentity(target) ? target getcentroid() : target.origin;
     traceresult = bulletTrace(entity getEye(), var_32eb9058, 0, isentity(target) ? target : undefined);
 
-    if(traceresult[# "fraction"] == 1) {
+    if(traceresult[#"fraction"] == 1) {
       entity.var_e3b6f14a = 1;
       return 1;
     }

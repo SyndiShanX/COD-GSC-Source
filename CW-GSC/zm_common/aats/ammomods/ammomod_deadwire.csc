@@ -78,7 +78,7 @@ function function_4e26277b(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_a4b3da97(trace) {
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 

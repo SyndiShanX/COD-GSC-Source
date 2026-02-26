@@ -34,7 +34,7 @@ function private preinit() {
     level.laststands[i] = spawnStruct();
     level.laststands[i].laststand_update_clientfields = "laststand_update" + i;
     clientfield::register("world", level.laststands[i].laststand_update_clientfields, 1, 5, "float", &update_bleedout_timer, 0, 0);
-    clientfield::register_clientuimodel("WorldSpaceIndicators.bleedOutModel" + i + ".hide", #"hash_56cb8e9a65d9f9ad", [# "bleedoutmodel" + (isDefined(i) ? "" + i : ""), #"hide"], 1, 1, "int", undefined, 0, 0);
+    clientfield::register_clientuimodel("WorldSpaceIndicators.bleedOutModel" + i + ".hide", #"hash_56cb8e9a65d9f9ad", [#"bleedoutmodel" + (isDefined(i) ? "" + i : ""), #"hide"], 1, 1, "int", undefined, 0, 0);
   }
 
   callback::on_localplayer_spawned(&function_e1479c);

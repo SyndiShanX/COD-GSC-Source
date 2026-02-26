@@ -90,16 +90,16 @@ function inactivitykick() {
     return;
   }
 
-  while(level.inactivitykick > self.timeplayed[# "total"]) {
+  while(level.inactivitykick > self.timeplayed[#"total"]) {
     wait 1;
   }
 
-  if(self.pers[# "participation"] == 0 && self.time_played_moving < 1) {
+  if(self.pers[#"participation"] == 0 && self.time_played_moving < 1) {
     globallogic::gamehistoryplayerkicked();
     kick(self getentitynumber(), "GAME/DROPPEDFORINACTIVITY");
   }
 
-  if(self.pers[# "participation"] == 0 && self.timeplayed[# "total"] > 60) {
+  if(self.pers[#"participation"] == 0 && self.timeplayed[#"total"] > 60) {
     globallogic::gamehistoryplayerkicked();
     kick(self getentitynumber(), "GAME/DROPPEDFORINACTIVITY");
   }
@@ -376,7 +376,7 @@ function promoteplayer(weaponused) {
       }
     }
 
-    pointstowin = self.pers[# "pointstowin"];
+    pointstowin = self.pers[#"pointstowin"];
 
     if(pointstowin < level.scorelimit) {
       scoreevents::processscoreevent(#"kill_gun", self, undefined, weaponused);
@@ -415,8 +415,8 @@ function demoteplayer(attacker) {
   }
 
   self stats::function_bb7eedf0(#"humiliate_victim", 1);
-  self.pers[# "humiliated"]++;
-  self.humiliated = self.pers[# "humiliated"];
+  self.pers[#"humiliated"]++;
+  self.humiliated = self.pers[#"humiliated"];
   self recordgameevent("return");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
     #player: self, #eventtype: # "return"});

@@ -180,16 +180,16 @@ function blink_light(localclientnum) {
   }
 
   if(self function_4add50a7()) {
-    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[# "qrdrone_viewmodel_light"]);
+    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[#"qrdrone_viewmodel_light"]);
     return;
   }
 
   if(self function_ca024039()) {
-    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[# "qrdrone_friendly_light"]);
+    self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[#"qrdrone_friendly_light"]);
     return;
   }
 
-  self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[# "qrdrone_enemy_light"]);
+  self thread loop_local_sound(localclientnum, "wpn_qr_alert", 1, level._effect[#"qrdrone_enemy_light"]);
 }
 
 function collisionhandler(localclientnum) {

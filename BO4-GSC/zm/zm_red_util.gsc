@@ -25,7 +25,7 @@ init() {
     level thread function_a3a07623();
   }
 
-  level._effect[# "barrier_impact"] = # "hash_573f7a396c8ea0c1";
+  level._effect[#"barrier_impact"] = # "hash_573f7a396c8ea0c1";
 }
 
 barrier_impact() {
@@ -41,7 +41,7 @@ barrier_impact() {
     }
 
     if(isDefined(s_result.position) && isDefined(s_result.attacker)) {
-      playFX(level._effect[# "barrier_impact"], s_result.position, anglesToForward(s_result.attacker.angles) * -1);
+      playFX(level._effect[#"barrier_impact"], s_result.position, anglesToForward(s_result.attacker.angles) * -1);
       wait 0.25;
     }
   }
@@ -160,7 +160,7 @@ can_see(v_pos, var_7b20e52b, n_dot = 0.7) {
     if(isDefined(var_7b20e52b) && var_7b20e52b) {
       trace = bulletTrace(v_pos, self.origin + (0, 0, 40), 0, undefined);
 
-      if(trace[# "fraction"] < 1) {
+      if(trace[#"fraction"] < 1) {
         return false;
       }
     }

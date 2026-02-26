@@ -129,29 +129,29 @@ function_1998c3ac(weapon) {
 }
 
 function_912c1a28(oldweapondata, newweapondata) {
-  if((oldweapondata[# "weapon"] === level.var_f086136b || oldweapondata[# "weapon"] === level.var_6fe89212 || oldweapondata[# "weapon"] === level.var_7b9ca97a) && (newweapondata[# "weapon"] === level.var_f086136b || newweapondata[# "weapon"] === level.var_6fe89212 || newweapondata[# "weapon"] === level.var_7b9ca97a)) {
+  if((oldweapondata[#"weapon"] === level.var_f086136b || oldweapondata[#"weapon"] === level.var_6fe89212 || oldweapondata[#"weapon"] === level.var_7b9ca97a) && (newweapondata[#"weapon"] === level.var_f086136b || newweapondata[#"weapon"] === level.var_6fe89212 || newweapondata[#"weapon"] === level.var_7b9ca97a)) {
     weapondata = [];
 
-    if(oldweapondata[# "weapon"] === level.var_7b9ca97a || newweapondata[# "weapon"] === level.var_7b9ca97a) {
-      weapondata[# "weapon"] = level.var_7b9ca97a;
-    } else if(oldweapondata[# "weapon"] === level.var_f086136b) {
-      weapondata[# "weapon"] = newweapondata[# "weapon"];
-    } else if(newweapondata[# "weapon"] === level.var_f086136b) {
-      weapondata[# "weapon"] = oldweapondata[# "weapon"];
+    if(oldweapondata[#"weapon"] === level.var_7b9ca97a || newweapondata[#"weapon"] === level.var_7b9ca97a) {
+      weapondata[#"weapon"] = level.var_7b9ca97a;
+    } else if(oldweapondata[#"weapon"] === level.var_f086136b) {
+      weapondata[#"weapon"] = newweapondata[#"weapon"];
+    } else if(newweapondata[#"weapon"] === level.var_f086136b) {
+      weapondata[#"weapon"] = oldweapondata[#"weapon"];
     } else {
-      weapondata[# "weapon"] = level.var_6fe89212;
+      weapondata[#"weapon"] = level.var_6fe89212;
     }
 
-    weapon = weapondata[# "weapon"];
-    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
-    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
-    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
-    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
-    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
-    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
-    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
-    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
-    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
+    weapon = weapondata[#"weapon"];
+    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
+    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
+    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
+    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
+    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
+    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
+    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
+    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
+    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
     return weapondata;
   }
 }
@@ -200,12 +200,12 @@ function_af59b4aa(var_9345432e, s_waitresult) {
     }
 
     a_trace = groundtrace(var_9345432e.origin, var_9345432e.origin - (0, 0, 800), 0, undefined);
-    self thread function_656b149c(a_trace[# "position"], s_waitresult);
+    self thread function_656b149c(a_trace[#"position"], s_waitresult);
     return;
   }
 
   a_trace = groundtrace(var_9345432e.origin, var_9345432e.origin - (0, 0, 800), 0, undefined);
-  self thread function_656b149c(a_trace[# "position"], s_waitresult);
+  self thread function_656b149c(a_trace[#"position"], s_waitresult);
 }
 
 function_2ce99526(e_enemy) {
@@ -213,7 +213,7 @@ function_2ce99526(e_enemy) {
     var_c74d5934 = e_enemy.origin;
   } else {
     a_trace = groundtrace(e_enemy.origin, e_enemy.origin - (0, 0, 800), 0, undefined);
-    var_c74d5934 = a_trace[# "position"];
+    var_c74d5934 = a_trace[#"position"];
   }
 
   if(isDefined(var_c74d5934) && zm_utility::function_21f4ac36()) {
@@ -536,7 +536,7 @@ function_6cd38e99(var_f5716a6, var_18e8905a) {
         v_trace_start = isDefined(var_18e8905a) ? var_18e8905a : self.origin + (0, 0, 16);
         a_trace = bulletTrace(v_trace_start, e_zombie getcentroid(), 0, undefined);
 
-        if(isDefined(a_trace) && a_trace[# "fraction"] == 1) {
+        if(isDefined(a_trace) && a_trace[#"fraction"] == 1) {
           if(!isDefined(var_4bb8adfe)) {
             var_4bb8adfe = [];
           } else if(!isarray(var_4bb8adfe)) {
@@ -1263,7 +1263,7 @@ function_1beb7376(e_attacker) {
         v_trace_start = self.origin + (0, 0, 16);
         a_trace = bulletTrace(v_trace_start, var_45acb524 getcentroid(), 0, undefined);
 
-        if(isDefined(a_trace) && a_trace[# "fraction"] == 1) {
+        if(isDefined(a_trace) && a_trace[#"fraction"] == 1) {
           function_a7c67ad6(var_45acb524, 2, &function_886f2b8d, self, e_attacker);
         }
       }

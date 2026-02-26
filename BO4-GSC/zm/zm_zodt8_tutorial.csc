@@ -27,8 +27,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("worlduimodel", "hudItems.ztut.showShield", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showSpecial", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showElixirs", 1, 1, "int", undefined, 0, 0);
-  level._effect[# "hash_1b509b0ba634a25a"] = # "zombie/fx_ritual_barrier_defend_door_wide_zod_zmb";
-  level._effect[# "hash_1390e08de02cbdc7"] = # "hash_5b773dbbac0012ff";
+  level._effect[#"hash_1b509b0ba634a25a"] = # "zombie/fx_ritual_barrier_defend_door_wide_zod_zmb";
+  level._effect[#"hash_1390e08de02cbdc7"] = # "hash_5b773dbbac0012ff";
   zm_tut_hint_text::register("zm_tut_hint_text");
   callback::on_localclient_connect(&function_9fc8cc9c);
 }
@@ -112,14 +112,14 @@ function_7c8084eb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_293d9904 = util::playFXOnTag(localclientnum, level._effect[# "hash_1b509b0ba634a25a"], self, "tag_origin");
+    self.var_293d9904 = util::playFXOnTag(localclientnum, level._effect[#"hash_1b509b0ba634a25a"], self, "tag_origin");
   }
 }
 
 function_8057ebca(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     v_forward = anglesToForward(self.angles);
-    self.blocker_fx = playFX(localclientnum, level._effect[# "hash_1390e08de02cbdc7"], self.origin, v_forward);
+    self.blocker_fx = playFX(localclientnum, level._effect[#"hash_1390e08de02cbdc7"], self.origin, v_forward);
     audio::playloopat(#"hash_7c4e89429c24b4bd", self.origin);
     return;
   }

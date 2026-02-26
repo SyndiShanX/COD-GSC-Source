@@ -152,67 +152,67 @@ seconds(milliseconds) {
 }
 
 // AI Section --------------------------------------------- ai_post_spawn() {
-  self endon("death");
+self endon("death");
 
-  if(!isDefined(self.target)) {
+if(!isDefined(self.target)) {
+  return;
+}
+
+points = getStructArray(self.target, "targetname");
+while(1) {
+  if(points.size == 0) {
     return;
   }
 
-  points = getStructArray(self.target, "targetname");
-  while(1) {
-    if(points.size == 0) {
-      return;
-    }
-
-    point = points[0];
-    if(points.size > 1) {
-      point = points[RandomInt(points.size)];
-    }
-
-    if(isDefined(point.radius)) {
-      self.goalradius = point.radius;
-    }
-
-    self SetGoalPos(point.origin);
-    self waittill("goal");
-
-    if(isDefined(point.script_noteworthy)) {
-      if(point.script_noteworthy == "so_shoot_rpg") {
-        self.a.rockets = 1;
-        //				target = GetEnt( "so_rpg_target", "targetname" );
-        self SetEntityTarget(level.chopper);
-
-        self.ignoreall = false;
-        level notify("so_rpgs_shot");
-      }
-    }
-
-    if(isDefined(point.script_flag_wait)) {
-      flag_wait(point.script_flag_wait);
-
-      if(isDefined(point.script_noteworthy)) {
-        if(point.script_noteworthy == "so_shoot_rpg") {
-          self setCanDamage(true);
-        }
-      }
-    }
-
-    point script_delay();
-
-    if(isDefined(point.script_noteworthy)) {
-      if(point.script_noteworthy == "so_shoot_rpg") {
-        self ClearEntityTarget();
-      }
-    }
-
-    if(!isDefined(point.target)) {
-      break;
-    }
-
-    points = getStructArray(point.target, "targetname");
+  point = points[0];
+  if(points.size > 1) {
+    point = points[RandomInt(points.size)];
   }
 
-  self.goalradius = level.default_goalradius;
+  if(isDefined(point.radius)) {
+    self.goalradius = point.radius;
+  }
+
+  self SetGoalPos(point.origin);
+  self waittill("goal");
+
+  if(isDefined(point.script_noteworthy)) {
+    if(point.script_noteworthy == "so_shoot_rpg") {
+      self.a.rockets = 1;
+      //				target = GetEnt( "so_rpg_target", "targetname" );
+      self SetEntityTarget(level.chopper);
+
+      self.ignoreall = false;
+      level notify("so_rpgs_shot");
+    }
+  }
+
+  if(isDefined(point.script_flag_wait)) {
+    flag_wait(point.script_flag_wait);
+
+    if(isDefined(point.script_noteworthy)) {
+      if(point.script_noteworthy == "so_shoot_rpg") {
+        self setCanDamage(true);
+      }
+    }
+  }
+
+  point script_delay();
+
+  if(isDefined(point.script_noteworthy)) {
+    if(point.script_noteworthy == "so_shoot_rpg") {
+      self ClearEntityTarget();
+    }
+  }
+
+  if(!isDefined(point.target)) {
+    break;
+  }
+
+  points = getStructArray(point.target, "targetname");
+}
+
+self.goalradius = level.default_goalradius;
 }
 
 so_rpg_post_spawn() {
@@ -1053,8 +1053,8 @@ is_player_in_parking_lot() {
 }
 
 // TRUCK Section ------------------------------------------ truck_init() {
-  level.truck_spawner = GetEnt("gas_station_truck", "targetname");
-  level.truck_ai_spawners = getEntArray("so_truck_ai_spawner", "targetname");
+level.truck_spawner = GetEnt("gas_station_truck", "targetname");
+level.truck_ai_spawners = getEntArray("so_truck_ai_spawner", "targetname");
 }
 
 spawn_truck(targetname) {
@@ -1082,11 +1082,11 @@ truck_brakes() {
 }
 
 // FX ----------------------------------------------------- smoke_mover() {
-  ent = spawn("script_model", (600, -4525, 2610));
-  ent.angles = (357, 179, 177);
-  ent setModel("tag_origin");
-  playFXOnTag(level._effect["objective_smoke"], ent, "tag_origin");
-  ent thread smoke_mover_thread();
+ent = spawn("script_model", (600, -4525, 2610));
+ent.angles = (357, 179, 177);
+ent setModel("tag_origin");
+playFXOnTag(level._effect["objective_smoke"], ent, "tag_origin");
+ent thread smoke_mover_thread();
 }
 
 // Will need a new FX to finish this off.
@@ -1118,19 +1118,19 @@ vector2d(vec) {
 }
 
 // Exploders ---------------------------------------------- do_exploder_custom(current, option) {
-  while(1) {
-    exploder_stripped(current.script_prefab_exploder, option);
-    if(!isDefined(current.target)) {
-      break;
-    }
-
-    next = GetEnt(current.target, "targetname");
-
-    if(!isDefined(next)) {
-      break;
-    }
-    current = next;
+while(1) {
+  exploder_stripped(current.script_prefab_exploder, option);
+  if(!isDefined(current.target)) {
+    break;
   }
+
+  next = GetEnt(current.target, "targetname");
+
+  if(!isDefined(next)) {
+    break;
+  }
+  current = next;
+}
 }
 
 exploder_stripped(num, option) {
@@ -1177,23 +1177,23 @@ exploder_stripped(num, option) {
 }
 
 // DEBUG Section ------------------------------------------ debug_chopper_base_path() {
-  if(!debug_chopper_enabled()) {
-    return;
+if(!debug_chopper_enabled()) {
+  return;
+}
+
+while(1) {
+  wait(0.05);
+
+  if(is_player_in_parking_lot()) {
+    continue;
   }
 
-  while(1) {
-    wait(0.05);
+  closest_point = get_closest_point_on_base_path();
 
-    if(is_player_in_parking_lot()) {
-      continue;
-    }
-
-    closest_point = get_closest_point_on_base_path();
-
-    //		level thread draw_linesegment_point( closest_point );
-    Line(closest_point, closest_point + (0, 0, 1000), (1, 0.5, 0));
-    Line(closest_point, level.groundplayer.origin, (1, 1, 1));
-  }
+  //		level thread draw_linesegment_point( closest_point );
+  Line(closest_point, closest_point + (0, 0, 1000), (1, 0.5, 0));
+  Line(closest_point, level.groundplayer.origin, (1, 1, 1));
+}
 }
 
 // Draw the player's location with chopper flight path

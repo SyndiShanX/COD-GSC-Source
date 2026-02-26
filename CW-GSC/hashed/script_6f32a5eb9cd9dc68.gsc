@@ -58,8 +58,8 @@ function function_56b991c1(str_objective, var_50cc0d4f) {
   level thread function_d272f105();
   satcom_woods_node = getnode("satcom_woods_node", "targetname");
   level.ai_woods thread hms_util::function_2f50100e("stay_even", satcom_woods_node.origin, "flg_satcom_approached");
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   level flag::wait_till("flg_satcom_approach_end");
   transient = savegame::function_6440b06b(#"transient");
 
@@ -120,7 +120,7 @@ function function_de27b0eb() {
         thread function_2573cfe4();
       } else {
         level namespace_7468806b::function_9bd1eb5e();
-        level.allowbattlechatter[# "axis"] = 0;
+        level.allowbattlechatter[#"axis"] = 0;
       }
 
       level flag::clear("flg_intro_zipline_dismount");
@@ -147,7 +147,7 @@ function function_2573cfe4() {
     level namespace_7468806b::function_9bd1eb5e();
   }
 
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
 }
 
 function function_de26569a() {
@@ -208,8 +208,8 @@ function function_f56c216d(s_params) {
 
 function function_b489670b() {
   level flag::wait_till_any(array("flg_satcom_stealth_broken", "flg_satcom_exiting"));
-  level.allowbattlechatter[# "allies"] = 1;
-  level.allowbattlechatter[# "axis"] = 1;
+  level.allowbattlechatter[#"allies"] = 1;
+  level.allowbattlechatter[#"axis"] = 1;
 }
 
 function function_bd2f2746() {
@@ -248,26 +248,26 @@ function function_ef32b815() {
 
 function function_dae43999() {
   var_5d14e11e = [];
-  var_5d14e11e[# "prone"] = 2200;
-  var_5d14e11e[# "crouch"] = 2200;
-  var_5d14e11e[# "stand"] = 2200;
+  var_5d14e11e[#"prone"] = 2200;
+  var_5d14e11e[#"crouch"] = 2200;
+  var_5d14e11e[#"stand"] = 2200;
   var_8293536e = [];
-  var_8293536e[# "prone"] = 8192;
-  var_8293536e[# "crouch"] = 8192;
-  var_8293536e[# "stand"] = 8192;
+  var_8293536e[#"prone"] = 8192;
+  var_8293536e[#"crouch"] = 8192;
+  var_8293536e[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(var_5d14e11e, var_8293536e);
 }
 
 function function_118581b3() {
   level flag::wait_till("flg_satcom_stealth_broken");
   var_5d14e11e = [];
-  var_5d14e11e[# "prone"] = 8192;
-  var_5d14e11e[# "crouch"] = 8192;
-  var_5d14e11e[# "stand"] = 8192;
+  var_5d14e11e[#"prone"] = 8192;
+  var_5d14e11e[#"crouch"] = 8192;
+  var_5d14e11e[#"stand"] = 8192;
   var_8293536e = [];
-  var_8293536e[# "prone"] = 8192;
-  var_8293536e[# "crouch"] = 8192;
-  var_8293536e[# "stand"] = 8192;
+  var_8293536e[#"prone"] = 8192;
+  var_8293536e[#"crouch"] = 8192;
+  var_8293536e[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(var_5d14e11e, var_8293536e);
 }
 
@@ -544,8 +544,8 @@ function function_f6f8cdca(str_objective) {
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level thread namespace_7468806b::function_79af70ae(1);
   level thread namespace_7468806b::function_ba5a28f(1);
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   level thread namespace_8a404420::function_517fe722();
   level flag::set("flg_satcom_birds_trigger");
   level flag::set("flg_satcom_cleared");

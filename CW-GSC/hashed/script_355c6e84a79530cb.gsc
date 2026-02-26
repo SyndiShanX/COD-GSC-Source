@@ -61,7 +61,7 @@ function spawn_safehouse(destination) {
   var_85065ec2 = [];
 
   foreach(location in destination.locations) {
-    safehouse = location.instances[# "safehouse"];
+    safehouse = location.instances[#"safehouse"];
 
     if(isDefined(safehouse)) {
       var_5838bf4c = safehouse;
@@ -92,12 +92,12 @@ function spawn_safehouse(destination) {
 }
 
 function function_d0e7af66(instance) {
-  assert(isarray(instance.contentgroups[# "claim_interact"]), "<dev string:x38>");
-  assert(instance.contentgroups[# "claim_interact"].size == 1, "<dev string:x66>");
+  assert(isarray(instance.contentgroups[#"claim_interact"]), "<dev string:x38>");
+  assert(instance.contentgroups[#"claim_interact"].size == 1, "<dev string:x66>");
   namespace_ce1f29cc::function_12c2f41f(instance.origin, 2500);
   var_f86415a9 = arraysortclosest(getEntArray("ambush_trigger", "targetname"), instance.origin, undefined, undefined, 2500);
   array::delete_all(var_f86415a9);
-  var_7d0e37f8 = instance.contentgroups[# "claim_interact"][0];
+  var_7d0e37f8 = instance.contentgroups[#"claim_interact"][0];
   function_e9bd72e8(var_7d0e37f8, instance);
 
   if(!is_true(level.var_53bc31ad)) {
@@ -278,19 +278,19 @@ function function_ae44cb3d(instance, var_eece1f6a) {
         var_78a3e26a = # "p9_fxanim_zm_gp_wunderfizz_on_xmodel";
       }
 
-      namespace_82b4c2d1::function_999594fe(instance.contentgroups[# "perk_machine_choice"], #"hash_4af85251966549b8", var_78a3e26a, #"hash_3eac5ec7a888ddfb", 0);
+      namespace_82b4c2d1::function_999594fe(instance.contentgroups[#"perk_machine_choice"], #"hash_4af85251966549b8", var_78a3e26a, #"hash_3eac5ec7a888ddfb", 0);
       break;
     case # "armor_machine":
-      namespace_dd7e54e3::function_1cbc3614(instance.contentgroups[# "armor_machine"]);
+      namespace_dd7e54e3::function_1cbc3614(instance.contentgroups[#"armor_machine"]);
       break;
     case # "crafting_table":
-      namespace_1cc7b406::function_7dddb953(instance.contentgroups[# "crafting_table"]);
+      namespace_1cc7b406::function_7dddb953(instance.contentgroups[#"crafting_table"]);
       break;
     case # "weapon_machine":
-      namespace_4b9fccd8::function_cb9d309b(instance.contentgroups[# "weapon_machine"]);
+      namespace_4b9fccd8::function_cb9d309b(instance.contentgroups[#"weapon_machine"]);
       break;
     case # "beacon":
-      namespace_dbb31ff3::function_67dce9cd(instance.contentgroups[# "beacon"]);
+      namespace_dbb31ff3::function_67dce9cd(instance.contentgroups[#"beacon"]);
       break;
   }
 }
@@ -359,10 +359,10 @@ function function_67cbc98f(var_ce558baf) {
 
 function function_83b6d24a() {
   foreach(location in level.contentmanager.locations) {
-    safehouse = location.instances[# "safehouse"];
+    safehouse = location.instances[#"safehouse"];
 
-    if(isDefined(safehouse.contentgroups[# "claim_interact"][0].claimtrigger)) {
-      trigger = safehouse.contentgroups[# "claim_interact"][0].claimtrigger;
+    if(isDefined(safehouse.contentgroups[#"claim_interact"][0].claimtrigger)) {
+      trigger = safehouse.contentgroups[#"claim_interact"][0].claimtrigger;
       trigger sethintstring(#"hash_6d645426c03ab096");
     }
   }
@@ -370,10 +370,10 @@ function function_83b6d24a() {
 
 function function_2b1da4a6() {
   foreach(location in level.contentmanager.locations) {
-    safehouse = location.instances[# "safehouse"];
+    safehouse = location.instances[#"safehouse"];
 
-    if(isDefined(safehouse.contentgroups[# "claim_interact"][0].claimtrigger)) {
-      trigger = safehouse.contentgroups[# "claim_interact"][0].claimtrigger;
+    if(isDefined(safehouse.contentgroups[#"claim_interact"][0].claimtrigger)) {
+      trigger = safehouse.contentgroups[#"claim_interact"][0].claimtrigger;
       trigger sethintstring(#"hash_5ecd49cccca29d87", 0);
     }
   }
@@ -387,7 +387,7 @@ function private function_9d178321() {
   level flag::wait_till(#"hash_7ace2c0d668c5128");
 
   foreach(location in level.contentmanager.locations) {
-    safehouse = location.instances[# "safehouse"];
+    safehouse = location.instances[#"safehouse"];
 
     if(isDefined(safehouse)) {
       a_structs = struct::get_array(safehouse.targetname, "target");
@@ -406,7 +406,7 @@ function private function_9d178321() {
 
 function private function_98715738(instance) {
   foreach(location in level.contentmanager.locations) {
-    safehouse = location.instances[# "safehouse"];
+    safehouse = location.instances[#"safehouse"];
 
     if(isDefined(safehouse.var_8947b368)) {
       var_8947b368 = safehouse.var_8947b368;

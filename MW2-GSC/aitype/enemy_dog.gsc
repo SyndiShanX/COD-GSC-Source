@@ -39,11 +39,11 @@ spawner() {
 }
 
 precache() {
-  character\character_sp_german_sheperd_dog::precache();
+    character\character_sp_german_sheperd_dog::precache();
 
-  precacheItem("dog_bite");
-  precacheItem("dog_bite");
-  precacheItem("fraggrenade");
+    precacheItem("dog_bite");
+    precacheItem("dog_bite");
+    precacheItem("fraggrenade");
 
-  //---------------- animscripts\dog\dog_init::initDogAnimations();
-  //---------------- }
+    //---------------- animscripts\dog\dog_init::initDogAnimations();
+    //---------------- }

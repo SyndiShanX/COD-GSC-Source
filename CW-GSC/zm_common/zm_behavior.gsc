@@ -1959,7 +1959,7 @@ function function_547701ae(behaviortreeentity) {
 function zombieholdboardaction(behaviortreeentity, asmstatename) {
   function_f83905d5(behaviortreeentity);
   boardactionast = behaviortreeentity astsearch(asmstatename);
-  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[# "animation"]);
+  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[#"animation"]);
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -1986,7 +1986,7 @@ function function_7d0a2e12(behaviortreeentity) {
 function zombiegrabboardaction(behaviortreeentity, asmstatename) {
   function_66a8aef2(behaviortreeentity);
   boardactionast = behaviortreeentity astsearch(asmstatename);
-  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[# "animation"]);
+  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[#"animation"]);
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -2012,7 +2012,7 @@ function function_16251b30(behaviortreeentity) {
 function zombiepullboardaction(behaviortreeentity, asmstatename) {
   function_aa76355a(behaviortreeentity);
   boardactionast = behaviortreeentity astsearch(asmstatename);
-  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[# "animation"]);
+  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[#"animation"]);
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -2449,10 +2449,10 @@ function zombiekilledbyblackholebombstart(entity, asmstatename) {
 }
 
 function zombiekilledbyblackholebombend(entity, asmstatename) {
-  if(isDefined(level._effect) && isDefined(level._effect[# "black_hole_bomb_zombie_gib"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"black_hole_bomb_zombie_gib"])) {
     fxorigin = asmstatename gettagorigin("tag_origin");
     forward = anglesToForward(asmstatename.angles);
-    playFX(level._effect[# "black_hole_bomb_zombie_gib"], fxorigin, forward, (0, 0, 1));
+    playFX(level._effect[#"black_hole_bomb_zombie_gib"], fxorigin, forward, (0, 0, 1));
   }
 
   asmstatename hide();
@@ -2460,9 +2460,9 @@ function zombiekilledbyblackholebombend(entity, asmstatename) {
 }
 
 function zombiebhbburst(entity) {
-  if(isDefined(level._effect) && isDefined(level._effect[# "black_hole_bomb_zombie_destroy"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"black_hole_bomb_zombie_destroy"])) {
     fxorigin = entity gettagorigin("tag_origin");
-    playFX(level._effect[# "black_hole_bomb_zombie_destroy"], fxorigin);
+    playFX(level._effect[#"black_hole_bomb_zombie_destroy"], fxorigin);
   }
 
   if(isDefined(entity.interdimensional_gun_projectile)) {
@@ -2764,8 +2764,8 @@ function function_92dcde87(start_pos, end_pos, velocity, var_781a6f9a, enemy) {
       if(!hit_something) {
         traceresults = bulletTrace(points[i], points[i + 1], 0, self);
 
-        if(traceresults[# "fraction"] < 1) {
-          hit_point = vectorlerp(points[i], points[i + 1], traceresults[# "fraction"]);
+        if(traceresults[#"fraction"] < 1) {
+          hit_point = vectorlerp(points[i], points[i + 1], traceresults[#"fraction"]);
           recordline(points[i], hit_point, (0, 1, 0), "<dev string:x109>");
           recordline(hit_point, points[i + 1], (1, 0, 0), "<dev string:x109>");
           hit_something = 1;

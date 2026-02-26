@@ -34,7 +34,7 @@ init_shared() {
     killstreaks::function_b013c2d3("ultimate_turret", getweapon("ultimate_turret_deploy"));
     killstreaks::register_alt_weapon("ultimate_turret", getweapon(#"gun_ultimate_turret"));
     killstreaks::allow_assists("ultimate_turret", 1);
-    level.killstreaks[# "ultimate_turret"].threatonkill = 1;
+    level.killstreaks[#"ultimate_turret"].threatonkill = 1;
     clientfield::register("vehicle", "ultimate_turret_open", 1, 1, "int");
     clientfield::register("vehicle", "ultimate_turret_init", 1, 1, "int");
     clientfield::register("vehicle", "ultimate_turret_close", 1, 1, "int");
@@ -169,7 +169,7 @@ activateturret() {
     return false;
   }
 
-  bundle = level.killstreakbundle[# "ultimate_turret"];
+  bundle = level.killstreakbundle[#"ultimate_turret"];
   var_b6c61913 = 0;
 
   if(var_b6c61913) {
@@ -419,10 +419,10 @@ onplaceturret(turret) {
     turret.vehicle util::make_sentient();
     turret.vehicle function_bc7568f1();
     turret.vehicle.var_aac73d6c = 1;
-    player killstreaks::play_killstreak_start_dialog("ultimate_turret", player.pers[# "team"], turret.killstreakid);
+    player killstreaks::play_killstreak_start_dialog("ultimate_turret", player.pers[#"team"], turret.killstreakid);
     level thread popups::displaykillstreakteammessagetoall("ultimate_turret", player);
     player stats::function_e24eec31(getweapon("ultimate_turret"), #"used", 1);
-    turret.vehicle.killstreak_duration = level.killstreakbundle[# "ultimate_turret"].ksduration + 5000;
+    turret.vehicle.killstreak_duration = level.killstreakbundle[#"ultimate_turret"].ksduration + 5000;
     turret.vehicle.killstreak_end_time = gettime() + turret.vehicle.killstreak_duration;
     bundle = get_killstreak_bundle();
     turret.vehicle thread killstreaks::waitfortimeout("ultimate_turret", turret.vehicle.killstreak_duration, &function_be04d904, "delete", "death");
@@ -671,7 +671,7 @@ createturretinfluencer(name) {
     return;
   }
 
-  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[# "radius"] * 0.7);
+  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[#"radius"] * 0.7);
   return influencers::create_enemy_influencer(name, turret.origin, turret.team);
 }
 
@@ -754,7 +754,7 @@ target_death_watch(turretvehicle) {
 }
 
 get_killstreak_bundle() {
-  return level.killstreakbundle[# "ultimate_turret"];
+  return level.killstreakbundle[#"ultimate_turret"];
 }
 
 is_valid_target(potential_target, friendly_team) {
@@ -1154,7 +1154,7 @@ function_59ce22f9(attacker, callback_data) {
   fxpos = isDefined(self gettagorigin("tag_turret")) ? self gettagorigin("tag_turret") : self.origin;
   playFX(level._equipment_explode_fx_lg, fxpos);
   self playSound("mpl_turret_exp");
-  bundle = level.killstreakbundle[# "ultimate_turret"];
+  bundle = level.killstreakbundle[#"ultimate_turret"];
 
   if(isDefined(bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {
     playFX(bundle.var_bb6c29b4, self.origin);
@@ -1185,8 +1185,8 @@ function_31477582() {
 
     trace = physicstrace(self.origin + (0, 0, 15), self.origin + (0, 0, -10), (-3, -3, -1), (3, 3, 1), self.turret, 1 | 16);
 
-    if(trace[# "fraction"] > 0) {
-      new_origin = trace[# "position"];
+    if(trace[#"fraction"] > 0) {
+      new_origin = trace[#"position"];
       self.origin = (new_origin[0], new_origin[1], self.origin[2] - min(max_delta, self.origin[2] - new_origin[2]));
       max_delta += var_463c449d;
       waitframe(1);

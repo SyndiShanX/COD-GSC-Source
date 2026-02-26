@@ -683,7 +683,7 @@ function function_e42aed4c() {
 }
 
 function function_c95d2c8() {
-  level flag::wait_till_all([# "hash_447ca5049bb26ab6", #"dark_aether_active"]);
+  level flag::wait_till_all([#"hash_447ca5049bb26ab6", #"dark_aether_active"]);
   level.var_7bfbe1fc solid();
   level.var_7bfbe1fc disconnectpaths();
   level.var_5a7fab04 = util::spawn_model(#"p9_fxanim_zm_sur_machine_weapon_mod", struct::get("zm_go_mac", "script_noteworthy").origin, struct::get("zm_go_mac", "script_noteworthy").angles);

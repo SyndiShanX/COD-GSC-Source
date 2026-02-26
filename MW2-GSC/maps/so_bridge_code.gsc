@@ -10,23 +10,23 @@
 
 // --------------------------------------------------------------------------------- //	Rapelling AI
 // --------------------------------------------------------------------------------- player_seek_stages() {
-  self endon("death");
+self endon("death");
 
-  stages[0] = 2000;
-  stages[1] = 1500;
-  stages[2] = 1000;
+stages[0] = 2000;
+stages[1] = 1500;
+stages[2] = 1000;
 
-  if(isDefined(self.script_vehicleride)) {
-    self waittill("jumpedout");
-    wait 0.5;
-  }
+if(isDefined(self.script_vehicleride)) {
+  self waittill("jumpedout");
+  wait 0.5;
+}
 
-  self SetGoalEntity(level.players[0]);
+self SetGoalEntity(level.players[0]);
 
-  foreach(iRadius in stages) {
-    self.goalradius = iRadius;
-    wait 15.0;
-  }
+foreach(iRadius in stages) {
+  self.goalradius = iRadius;
+  wait 15.0;
+}
 }
 
 ai_rappel_think(playerSeek) {
@@ -165,36 +165,36 @@ ai_rappel_over_ground_death_anim(guy) {
 
 // --------------------------------------------------------------------------------- //	Scripted Destructions
 // --------------------------------------------------------------------------------- missile_taxi_moves() {
-  // Remove the script_noteworthy from the ad sign on the taxi
-  ents = getEntArray("taxi_ad_clip", "targetname");
-  foreach(ent in ents) {
-    if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "missile_taxi") {
-      ent.script_noteworthy = undefined;
-    }
+// Remove the script_noteworthy from the ad sign on the taxi
+ents = getEntArray("taxi_ad_clip", "targetname");
+foreach(ent in ents) {
+  if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "missile_taxi") {
+    ent.script_noteworthy = undefined;
   }
+}
 
-  taxi = GetEnt("missile_taxi", "script_noteworthy");
-  taxi.finalOrg = taxi.origin;
-  taxi.finalAng = taxi.angles;
+taxi = GetEnt("missile_taxi", "script_noteworthy");
+taxi.finalOrg = taxi.origin;
+taxi.finalAng = taxi.angles;
 
-  clip = GetEnt("missile_taxi_clip", "script_noteworthy");
+clip = GetEnt("missile_taxi_clip", "script_noteworthy");
 
-  taxi.origin += (80, 200, 0);
-  taxi.angles = (0, 180, 0);
+taxi.origin += (80, 200, 0);
+taxi.angles = (0, 180, 0);
 
-  wait(3);
+wait(3);
 
-  taxi thread missile_taxi_get_hit_by_hellfire();
-  taxi thread missile_taxi_get_exploded();
-  taxi waittill("taxi_moving");
+taxi thread missile_taxi_get_hit_by_hellfire();
+taxi thread missile_taxi_get_exploded();
+taxi waittill("taxi_moving");
 
-  clip ConnectPaths();
-  clip Delete();
+clip ConnectPaths();
+clip Delete();
 
-  taxi thread destructible_force_explosion();
-  moveTime = 1.0;
-  taxi MoveTo(taxi.finalOrg, moveTime, 0, moveTime / 2);
-  taxi RotateTo(taxi.finalAng, moveTime, 0, moveTime / 2);
+taxi thread destructible_force_explosion();
+moveTime = 1.0;
+taxi MoveTo(taxi.finalOrg, moveTime, 0, moveTime / 2);
+taxi RotateTo(taxi.finalAng, moveTime, 0, moveTime / 2);
 }
 
 missile_taxi_get_hit_by_hellfire() {
@@ -228,12 +228,12 @@ missile_taxi_get_exploded() {
 
 // --------------------------------------------------------------------------------- //	Attack Helicopter
 // --------------------------------------------------------------------------------- attack_heli() {
-  trigger_wait("attack_heli", "targetname");
-  attack_heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
-  thread maps\_attack_heli::begin_attack_heli_behavior(attack_heli);
-  Assert(isDefined(attack_heli));
-  wait 2;
-  radio_dialogue("so_bridge_hqr_enemy_helo");
+trigger_wait("attack_heli", "targetname");
+attack_heli = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("kill_heli");
+thread maps\_attack_heli::begin_attack_heli_behavior(attack_heli);
+Assert(isDefined(attack_heli));
+wait 2;
+radio_dialogue("so_bridge_hqr_enemy_helo");
 }
 
 // --------------------------------------------------------------------------------- //	Bridge Collapsing

@@ -436,10 +436,10 @@ function function_ef40fc60() {
   level thread function_38c50cf3();
   level thread function_704910e8(var_81c652e4);
   function_bbc799ae("attack");
-  level flag::wait_till_all_timeout(64, [# "hash_3239b4eb1e8b1e3b", #"hash_6273dc2c0d03eec6"]);
+  level flag::wait_till_all_timeout(64, [#"hash_3239b4eb1e8b1e3b", #"hash_6273dc2c0d03eec6"]);
   level notify(#"hash_7bbb97a6df558f88");
 
-  if(level flag::get_all([# "hash_3239b4eb1e8b1e3b", #"hash_6273dc2c0d03eec6"])) {
+  if(level flag::get_all([#"hash_3239b4eb1e8b1e3b", #"hash_6273dc2c0d03eec6"])) {
     level zm_utility::function_9ad5aeb1(1, 1, 0, 0);
     music::setmusicstate("bunny_outro");
     function_bbc799ae("dance");

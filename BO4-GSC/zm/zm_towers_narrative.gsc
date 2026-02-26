@@ -427,12 +427,12 @@ function_964ec142() {
   while(true) {
     self waittill(#"weapon_melee");
 
-    if(self getcurrentweapon() == level.hero_weapon[# "hammer"][2]) {
+    if(self getcurrentweapon() == level.hero_weapon[#"hammer"][2]) {
       v_origin = self getweaponmuzzlepoint();
       v_dir = self getweaponforwarddir();
       v_end = v_origin + vectorscale(v_dir, 20000);
       a_trace = beamtrace(v_origin, v_end, 0, self);
-      v_hit = a_trace[# "position"];
+      v_hit = a_trace[#"position"];
 
       if(isDefined(v_hit) && istouching(v_hit, vol_cipher)) {
         level flag::set(#"hash_3eea1302aae8fea1");
@@ -466,7 +466,7 @@ function_7c66ee1b() {
 function_f3c29d33(a_ents) {
   level scene::remove_scene_func(self.scriptbundlename, &function_f3c29d33, "init");
   self scene::stop();
-  mdl_hand = a_ents[# "prop 1"];
+  mdl_hand = a_ents[#"prop 1"];
   mdl_hand delete();
 }
 
@@ -595,7 +595,7 @@ function_ca4e26c3() {
   self endon("45c9a4f55b11e032");
   level endon(#"end_game", #"hash_aab8ed14df98649");
   self endon(#"disconnect");
-  a_w_pistols = array(level.hero_weapon[# "sword_pistol"][0].dualwieldweapon, level.hero_weapon[# "sword_pistol"][1].dualwieldweapon, level.hero_weapon[# "sword_pistol"][2].dualwieldweapon);
+  a_w_pistols = array(level.hero_weapon[#"sword_pistol"][0].dualwieldweapon, level.hero_weapon[#"sword_pistol"][1].dualwieldweapon, level.hero_weapon[#"sword_pistol"][2].dualwieldweapon);
 
   while(true) {
     s_waitresult = self waittill(#"weapon_fired");
@@ -604,10 +604,10 @@ function_ca4e26c3() {
     if(isDefined(w_weapon) && isinarray(a_w_pistols, w_weapon)) {
       v_origin = self getweaponmuzzlepoint();
       v_dir = self getweaponforwarddir();
-      n_range = level.hero_weapon_stats[# "sword_pistol"][# "hash_579056d441d637d"];
+      n_range = level.hero_weapon_stats[#"sword_pistol"][#"hash_579056d441d637d"];
       v_end = v_origin + vectorscale(v_dir, n_range);
       a_trace = beamtrace(v_origin, v_end, 0, self);
-      v_hit = a_trace[# "position"];
+      v_hit = a_trace[#"position"];
 
       if(isDefined(v_hit)) {
         a_vol_statues = getEntArray("vol_narrative_payback", "targetname");
@@ -664,7 +664,7 @@ function_89add587(a_ents) {
 
   if(s_closest == self) {
     level scene::remove_scene_func(self.scriptbundlename, &function_89add587, "play");
-    var_110cafc1 = a_ents[# "prop 1"];
+    var_110cafc1 = a_ents[#"prop 1"];
     var_8a88c4c8 linkto(var_110cafc1, var_8a88c4c8.var_ab585079);
   }
 }
@@ -866,7 +866,7 @@ function_cab1990a() {
       v_origin = self getweaponmuzzlepoint();
       v_dir = self getweaponforwarddir();
       a_trace = beamtrace(v_origin, v_origin + v_dir * 20000, 1, self);
-      v_hit = a_trace[# "position"];
+      v_hit = a_trace[#"position"];
 
       if(isDefined(v_hit) && istouching(v_hit, vol_roof)) {
         if(!b_tracking) {

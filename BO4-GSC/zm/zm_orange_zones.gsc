@@ -153,7 +153,7 @@ function_734d8b08() {
 }
 
 function_3b77181c(b_enable = 1) {
-  level.zones[# "ice_floe"].is_enabled = b_enable;
+  level.zones[#"ice_floe"].is_enabled = b_enable;
 }
 
 function_49054104() {

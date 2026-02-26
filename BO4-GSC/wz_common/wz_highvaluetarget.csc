@@ -23,8 +23,8 @@ __init__() {
   level.var_45c1873e = [];
 
   for(i = 0; i < 8; i++) {
-    level.var_45c1873e[i][# "indicator"] = spectrerisingindicator::register("SpectreRisingIndicator_" + i);
-    level.var_45c1873e[i][# "clientnum"] = -1;
+    level.var_45c1873e[i][#"indicator"] = spectrerisingindicator::register("SpectreRisingIndicator_" + i);
+    level.var_45c1873e[i][#"clientnum"] = -1;
   }
 }
 

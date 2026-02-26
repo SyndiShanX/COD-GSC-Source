@@ -2121,7 +2121,7 @@ get_zombie_hint(ref) {
   }
 
   println("<dev string:x17f>" + ref);
-  return level.zombie_hints[# "undefined"];
+  return level.zombie_hints[#"undefined"];
 }
 
 set_hint_string(ent, default_ref, cost) {
@@ -2364,7 +2364,7 @@ play_sound_2d(sound) {
   temp_ent delete();
 }
 
-#include_weapon(weapon_name, in_box) {
+include_weapon(weapon_name, in_box) {
   println("<dev string:x22f>" + function_9e72a96(weapon_name));
 
   if(!isDefined(in_box)) {
@@ -2421,7 +2421,7 @@ function_b0eeaada(location, max_drop_distance = 500) {
 }
 
 function_a1055d95(location, node) {
-  return isDefined(location) && location[# "region"] === getnoderegion(node);
+  return isDefined(location) && location[#"region"] === getnoderegion(node);
 }
 
 get_current_zone(return_zone = 0) {
@@ -2773,15 +2773,15 @@ should_watch_for_emp() {
 }
 
 groundpos(origin) {
-  return bulletTrace(origin, origin + (0, 0, -100000), 0, self)[# "position"];
+  return bulletTrace(origin, origin + (0, 0, -100000), 0, self)[#"position"];
 }
 
 groundpos_ignore_water(origin) {
-  return bulletTrace(origin, origin + (0, 0, -100000), 0, self, 1)[# "position"];
+  return bulletTrace(origin, origin + (0, 0, -100000), 0, self, 1)[#"position"];
 }
 
 groundpos_ignore_water_new(origin) {
-  return groundtrace(origin, origin + (0, 0, -100000), 0, self, 1)[# "position"];
+  return groundtrace(origin, origin + (0, 0, -100000), 0, self, 1)[#"position"];
 }
 
 self_delete() {
@@ -2923,7 +2923,7 @@ pick_up() {
 function_ab9a9770() {
   s_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(s_trace[# "entity"]) && s_trace[# "entity"] ismovingplatform()) {
+  if(isDefined(s_trace[#"entity"]) && s_trace[#"entity"] ismovingplatform()) {
     return true;
   }
 
@@ -2933,8 +2933,8 @@ function_ab9a9770() {
 function_52046128() {
   s_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(s_trace[# "entity"])) {
-    return s_trace[# "entity"];
+  if(isDefined(s_trace[#"entity"])) {
+    return s_trace[#"entity"];
   }
 
   return undefined;
@@ -3405,7 +3405,7 @@ function_e64ac3b6(type_id, var_c857a96d) {
 sndswitchannouncervox(who) {
   switch (who) {
     case # "sam":
-      game.zmbdialog[# "prefix"] = "vox_zmba_sam";
+      game.zmbdialog[#"prefix"] = "vox_zmba_sam";
       level.zmb_laugh_alias = "zmb_player_outofbounds";
       level.sndannouncerisrich = 0;
       break;
@@ -4373,7 +4373,7 @@ function_a2541519(var_da4af4df) {
 function_4a25b584(v_start_pos, var_487ba56d, n_radius = 512, b_randomize = 1, var_79ced64 = 0.2, n_half_height = 4, var_21aae2c6 = undefined) {
   level endon(#"end_game");
   var_bf08dccd = [];
-  v_start_pos = groundtrace(v_start_pos + (0, 0, 8), v_start_pos + (0, 0, -100000), 0, undefined)[# "position"];
+  v_start_pos = groundtrace(v_start_pos + (0, 0, 8), v_start_pos + (0, 0, -100000), 0, undefined)[#"position"];
 
   if(isDefined(var_21aae2c6)) {
     s_result = positionquery_source_navigation(var_21aae2c6, 32, n_radius, n_half_height, 16, 1, 32);

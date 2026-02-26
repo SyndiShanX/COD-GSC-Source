@@ -22,15 +22,15 @@ __init__() {
     return;
   }
 
-  level._effect[# "fx8_aat_opposite_exp"] = "zm_weapons/fx8_aat_opposite_exp";
-  level._effect[# "fx8_cata_cor_aura"] = "zm_ai/fx8_cata_cor_aura";
-  level._effect[# "fx8_cata_cor_aura_locked"] = "zm_ai/fx8_cata_cor_aura_locked";
-  level._effect[# "fx8_cata_water_purify"] = "zm_ai/fx8_cata_water_purify";
-  level._effect[# "fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
-  level._effect[# "fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
-  level._effect[# "fx8_cata_plasma_blast"] = "zm_ai/fx8_cata_plasma_blast";
-  level._effect[# "fx8_cata_plasma_blast_tell_head"] = "zm_ai/fx8_cata_plasma_blast_tell_head";
-  level._effect[# "fx8_cata_plasma_blast_tell_torso"] = "zm_ai/fx8_cata_plasma_blast_tell_torso";
+  level._effect[#"fx8_aat_opposite_exp"] = "zm_weapons/fx8_aat_opposite_exp";
+  level._effect[#"fx8_cata_cor_aura"] = "zm_ai/fx8_cata_cor_aura";
+  level._effect[#"fx8_cata_cor_aura_locked"] = "zm_ai/fx8_cata_cor_aura_locked";
+  level._effect[#"fx8_cata_water_purify"] = "zm_ai/fx8_cata_water_purify";
+  level._effect[#"fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
+  level._effect[#"fx8_cata_elec_blast"] = "zm_ai/fx8_cata_elec_blast";
+  level._effect[#"fx8_cata_plasma_blast"] = "zm_ai/fx8_cata_plasma_blast";
+  level._effect[#"fx8_cata_plasma_blast_tell_head"] = "zm_ai/fx8_cata_plasma_blast_tell_head";
+  level._effect[#"fx8_cata_plasma_blast_tell_torso"] = "zm_ai/fx8_cata_plasma_blast_tell_torso";
   function_b6fd8c68();
   ai::add_archetype_spawn_function(#"catalyst", &function_5608540a);
 }
@@ -72,14 +72,14 @@ function_213aaacc(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 }
 
 function_b3c2dc1c(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_aat_opposite_exp"], self, "j_spine4");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_aat_opposite_exp"], self, "j_spine4");
   playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
 }
 
 function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newval) {
-    self.var_565b4840 = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_cor_aura"], self, "j_spine4");
-    self.var_430cfa87 = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_cor_aura_locked"], self, "tag_origin");
+    self.var_565b4840 = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_cor_aura"], self, "j_spine4");
+    self.var_430cfa87 = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_cor_aura_locked"], self, "tag_origin");
 
     if(!isDefined(self.var_8c3a51be)) {
       self.var_8c3a51be = self playLoopSound("zmb_ai_catalyst_corrosive_lp");
@@ -105,7 +105,7 @@ function_8cc5be3b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_72d9d9e7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue === 1) {
-    self.var_5fe1f99b = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_water_purify"], self, "tag_eye");
+    self.var_5fe1f99b = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_water_purify"], self, "tag_eye");
 
     if(!isDefined(self.var_983b7af9)) {
       self playSound(localclientnum, #"hash_56157e961854c964");
@@ -152,13 +152,13 @@ function_8c78e227(localclientnum) {
   str_tag = "tag_eye";
   v_origin = self gettagorigin(str_tag);
   self.var_c1e13a67 = util::spawn_model(localclientnum, "tag_origin", v_origin, self.angles);
-  self.var_5e3f0a3c = util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_elec_blast"], self.var_c1e13a67, "tag_origin");
+  self.var_5e3f0a3c = util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_elec_blast"], self.var_c1e13a67, "tag_origin");
   self waittill(#"death", #"scream_attack_done");
   self.var_c1e13a67 delete();
 }
 
 function_1578a764(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_cata_plasma_blast"], self, "j_spine4");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_cata_plasma_blast"], self, "j_spine4");
   playSound(0, #"hash_7d7c027e3b78c5b6", self.origin);
   function_2a9101fe(localclientnum, #"hash_528115ad9eebc84f", self.origin);
 }

@@ -439,56 +439,56 @@ function function_1210f64b(unused1, unused2, var_26f1324c) {
 
 function function_18276de3(name = "") {
   level.doa.var_3d1f118d = [];
-  level.doa.var_3d1f118d[# "wall"] = [];
-  level.doa.var_3d1f118d[# "floor"] = [];
+  level.doa.var_3d1f118d[#"wall"] = [];
+  level.doa.var_3d1f118d[#"floor"] = [];
 
   switch (name) {
     default:
-      level.doa.var_3d1f118d[# "wall"][# "torch"][0] = {
+      level.doa.var_3d1f118d[#"wall"][#"torch"][0] = {
         #model: # "zombietron_torch_wall_no_shadow", #yaw_offset: 0, #scale: 1, #weight: 1, #fx: "fx_fire_torch_wall_lit_castle"};
-      level.doa.var_3d1f118d[# "wall"][# "hash_2ec1ad0b894eb316"][0] = {
+      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][0] = {
         #model: # "zombietron_gargoyle_sconce_1", #yaw_offset: -90, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "wall"][# "hash_2ec1ad0b894eb316"][1] = {
+      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][1] = {
         #model: # "zombietron_gargoyle_sconce_2", #yaw_offset: 180, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "wall"][# "hash_2ec1ad0b894eb316"][2] = {
+      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][2] = {
         #model: # "zombietron_gargoyle_sconce_3", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "wall"][# "hash_2ec1ad0b894eb316"][3] = {
+      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][3] = {
         #model: # "zombietron_gargoyle_sconce_4", #yaw_offset: 180, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "wall"][# "hash_2ec1ad0b894eb316"][4] = {
+      level.doa.var_3d1f118d[#"wall"][#"hash_2ec1ad0b894eb316"][4] = {
         #model: # "zombietron_treasure_mask_gold", #yaw_offset: 0, #scale: 3, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][0] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][0] = {
         #model: # "zombietron_statue_apothicon", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][1] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][1] = {
         #model: # "zombietron_templar_statue_01", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][2] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][2] = {
         #model: # "zombietron_templar_statue_02", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][3] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][3] = {
         #model: # "zombietron_templar_statue_03", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][4] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][4] = {
         #model: # "zombietron_templar_statue_04", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][5] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][5] = {
         #model: # "zombietron_arena_statue_man_wings", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][6] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][6] = {
         #model: # "zombietron_altar_roman_statue_lt", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][7] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][7] = {
         #model: # "zombietron_altar_roman_statue_rt", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][8] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][8] = {
         #model: # "zombietron_sha_statue_finial", #yaw_offset: 0, #scale: 1, #weight: 1
       };
-      level.doa.var_3d1f118d[# "floor"][# "statue"][9] = {
+      level.doa.var_3d1f118d[#"floor"][#"statue"][9] = {
         #model: # "zombietron_statue_keeper_undercroft", #yaw_offset: 90, #scale: 0.6, #weight: 1
       };
       break;

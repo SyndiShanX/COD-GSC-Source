@@ -236,11 +236,11 @@ player_stats_init() {
   self globallogic_score::initpersstat(#"rounds", 0);
 
   if(level.resetplayerscoreeveryround) {
-    self.pers[# "score"] = 0;
+    self.pers[#"score"] = 0;
   }
 
-  self.pers[# "score"] = level.player_starting_points;
-  self.score = self.pers[# "score"];
+  self.pers[#"score"] = level.player_starting_points;
+  self.score = self.pers[#"score"];
   self incrementplayerstat("score", self.score);
   self add_map_stat("score", self.score);
   self globallogic_score::initpersstat(#"zteam", 0);
@@ -319,8 +319,8 @@ update_players_stats_at_match_end(players) {
 
     distance = player get_stat_distance_traveled();
     player stats::function_dad108fa(#"distance_traveled", distance);
-    player incrementplayerstat("time_played_total", player.pers[# "time_played_total"]);
-    player add_map_stat("time_played_total", player.pers[# "time_played_total"]);
+    player incrementplayerstat("time_played_total", player.pers[#"time_played_total"]);
+    player add_map_stat("time_played_total", player.pers[#"time_played_total"]);
     recordplayermatchend(player);
     recordplayerstats(player, "present_at_end", 1);
     player zm_weapons::updateweapontimingszm(newtime);
@@ -393,25 +393,25 @@ update_players_stats_at_match_end(players) {
     if(gamemodeismode(0)) {
       player gamehistoryfinishmatch(4, 0, 0, 0, 0, 0);
 
-      if(isDefined(player.pers[# "matchesplayedstatstracked"])) {
+      if(isDefined(player.pers[#"matchesplayedstatstracked"])) {
         gamemode = util::getcurrentgamemode();
         player globallogic::incrementmatchcompletionstat(gamemode, "played", "completed");
 
-        if(isDefined(player.pers[# "matcheshostedstatstracked"])) {
+        if(isDefined(player.pers[#"matcheshostedstatstracked"])) {
           player globallogic::incrementmatchcompletionstat(gamemode, "hosted", "completed");
-          player.pers[# "matcheshostedstatstracked"] = undefined;
+          player.pers[#"matcheshostedstatstracked"] = undefined;
         }
 
-        player.pers[# "matchesplayedstatstracked"] = undefined;
+        player.pers[#"matchesplayedstatstracked"] = undefined;
       }
     }
 
-    if(!isDefined(player.pers[# "previous_distance_traveled"])) {
-      player.pers[# "previous_distance_traveled"] = 0;
+    if(!isDefined(player.pers[#"previous_distance_traveled"])) {
+      player.pers[#"previous_distance_traveled"] = 0;
     }
 
-    distancethisround = int(player.pers[# "distance_traveled"] - player.pers[# "previous_distance_traveled"]);
-    player.pers[# "previous_distance_traveled"] = player.pers[# "distance_traveled"];
+    distancethisround = int(player.pers[#"distance_traveled"] - player.pers[#"previous_distance_traveled"]);
+    player.pers[#"previous_distance_traveled"] = player.pers[#"distance_traveled"];
     player incrementplayerstat("distance_traveled", distancethisround);
   }
 }
@@ -1115,8 +1115,8 @@ track_craftables_pickedup(craftable) {
 }
 
 get_stat_distance_traveled() {
-  miles = int(self.pers[# "distance_traveled"] / 63360);
-  remainder = self.pers[# "distance_traveled"] / 63360 - miles;
+  miles = int(self.pers[#"distance_traveled"] / 63360);
+  remainder = self.pers[#"distance_traveled"] / 63360 - miles;
 
   if(miles < 1 && remainder < 0.5) {
     miles = 1;
@@ -1133,7 +1133,7 @@ get_stat_round_number() {
 
 get_stat_combined_rank_value_survival_classic() {
   rounds = get_stat_round_number();
-  kills = self.pers[# "kills"];
+  kills = self.pers[#"kills"];
 
   if(rounds > 99) {
     rounds = 99;
@@ -1272,131 +1272,131 @@ update_global_counters_on_match_end() {
   players = getplayers();
 
   foreach(player in players) {
-    deaths += player.pers[# "deaths"];
-    kills += player.pers[# "kills"];
-    wonder_weapon_kills += player.pers[# "wonder_weapon_kills"];
-    headshots += player.pers[# "headshots"];
-    suicides += player.pers[# "suicides"];
-    melee_kills += player.pers[# "melee_kills"];
-    downs += player.pers[# "downs"];
-    revives += player.pers[# "revives"];
-    perks_drank += player.pers[# "perks_drank"];
-    specialty_armorvest_drank += player.pers[# "specialty_armorvest_drank"];
-    specialty_quickrevive_drank += player.pers[# "specialty_quickrevive_drank"];
-    specialty_fastreload_drank += player.pers[# "specialty_fastreload_drank"];
-    specialty_additionalprimaryweapon_drank += player.pers[# "specialty_additionalprimaryweapon_drank"];
-    specialty_staminup_drank += player.pers[# "specialty_staminup_drank"];
-    specialty_doubletap2_drank += player.pers[# "specialty_doubletap2_drank"];
-    specialty_widowswine_drank += player.pers[# "specialty_widowswine_drank"];
-    specialty_deadshot_drank += player.pers[# "specialty_deadshot_drank"];
-    specialty_awareness_drank += player.pers[# "specialty_awareness_drank"];
-    specialty_berserker_drank += player.pers[# "specialty_berserker_drank"];
-    specialty_camper_drank += player.pers[# "specialty_camper_drank"];
-    specialty_cooldown_drank += player.pers[# "specialty_cooldown_drank"];
-    specialty_extraammo_drank += player.pers[# "specialty_extraammo_drank"];
-    specialty_mystery_drank += player.pers[# "specialty_mystery_drank"];
-    specialty_phdflopper_drank += player.pers[# "specialty_phdflopper_drank"];
-    specialty_shield_drank += player.pers[# "specialty_shield_drank"];
-    specialty_etherealrazor_drank += player.pers[# "specialty_etherealrazor_drank"];
-    specialty_mod_armorvest_drank += player.pers[# "specialty_mod_armorvest_drank"];
-    specialty_mod_quickrevive_drank += player.pers[# "specialty_mod_quickrevive_drank"];
-    specialty_mod_fastreload_drank += player.pers[# "specialty_mod_fastreload_drank"];
-    specialty_mod_doubletap2_drank += player.pers[# "specialty_mod_doubletap2_drank"];
-    specialty_mod_staminup_drank += player.pers[# "specialty_mod_staminup_drank"];
-    specialty_mod_deadshot_drank += player.pers[# "specialty_mod_deadshot_drank"];
-    specialty_mod_additionalprimaryweapon_drank += player.pers[# "specialty_mod_additionalprimaryweapon_drank"];
-    specialty_mod_electriccherry_drank += player.pers[# "specialty_mod_electriccherry_drank"];
-    specialty_mod_widowswine_drank += player.pers[# "specialty_mod_widowswine_drank"];
-    specialty_mod_cooldown_drank += player.pers[# "specialty_mod_cooldown_drank"];
-    specialty_mod_phdflopper_drank += player.pers[# "specialty_mod_phdflopper_drank"];
-    specialty_mod_camper_drank += player.pers[# "specialty_mod_camper_drank"];
-    specialty_mod_extraammo_drank += player.pers[# "specialty_mod_extraammo_drank"];
-    specialty_mod_awareness_drank += player.pers[# "specialty_mod_awareness_drank"];
-    specialty_mod_berserker_drank += player.pers[# "specialty_mod_berserker_drank"];
-    specialty_mod_shield_drank += player.pers[# "specialty_mod_shield_drank"];
-    doors_purchased += player.pers[# "doors_purchased"];
+    deaths += player.pers[#"deaths"];
+    kills += player.pers[#"kills"];
+    wonder_weapon_kills += player.pers[#"wonder_weapon_kills"];
+    headshots += player.pers[#"headshots"];
+    suicides += player.pers[#"suicides"];
+    melee_kills += player.pers[#"melee_kills"];
+    downs += player.pers[#"downs"];
+    revives += player.pers[#"revives"];
+    perks_drank += player.pers[#"perks_drank"];
+    specialty_armorvest_drank += player.pers[#"specialty_armorvest_drank"];
+    specialty_quickrevive_drank += player.pers[#"specialty_quickrevive_drank"];
+    specialty_fastreload_drank += player.pers[#"specialty_fastreload_drank"];
+    specialty_additionalprimaryweapon_drank += player.pers[#"specialty_additionalprimaryweapon_drank"];
+    specialty_staminup_drank += player.pers[#"specialty_staminup_drank"];
+    specialty_doubletap2_drank += player.pers[#"specialty_doubletap2_drank"];
+    specialty_widowswine_drank += player.pers[#"specialty_widowswine_drank"];
+    specialty_deadshot_drank += player.pers[#"specialty_deadshot_drank"];
+    specialty_awareness_drank += player.pers[#"specialty_awareness_drank"];
+    specialty_berserker_drank += player.pers[#"specialty_berserker_drank"];
+    specialty_camper_drank += player.pers[#"specialty_camper_drank"];
+    specialty_cooldown_drank += player.pers[#"specialty_cooldown_drank"];
+    specialty_extraammo_drank += player.pers[#"specialty_extraammo_drank"];
+    specialty_mystery_drank += player.pers[#"specialty_mystery_drank"];
+    specialty_phdflopper_drank += player.pers[#"specialty_phdflopper_drank"];
+    specialty_shield_drank += player.pers[#"specialty_shield_drank"];
+    specialty_etherealrazor_drank += player.pers[#"specialty_etherealrazor_drank"];
+    specialty_mod_armorvest_drank += player.pers[#"specialty_mod_armorvest_drank"];
+    specialty_mod_quickrevive_drank += player.pers[#"specialty_mod_quickrevive_drank"];
+    specialty_mod_fastreload_drank += player.pers[#"specialty_mod_fastreload_drank"];
+    specialty_mod_doubletap2_drank += player.pers[#"specialty_mod_doubletap2_drank"];
+    specialty_mod_staminup_drank += player.pers[#"specialty_mod_staminup_drank"];
+    specialty_mod_deadshot_drank += player.pers[#"specialty_mod_deadshot_drank"];
+    specialty_mod_additionalprimaryweapon_drank += player.pers[#"specialty_mod_additionalprimaryweapon_drank"];
+    specialty_mod_electriccherry_drank += player.pers[#"specialty_mod_electriccherry_drank"];
+    specialty_mod_widowswine_drank += player.pers[#"specialty_mod_widowswine_drank"];
+    specialty_mod_cooldown_drank += player.pers[#"specialty_mod_cooldown_drank"];
+    specialty_mod_phdflopper_drank += player.pers[#"specialty_mod_phdflopper_drank"];
+    specialty_mod_camper_drank += player.pers[#"specialty_mod_camper_drank"];
+    specialty_mod_extraammo_drank += player.pers[#"specialty_mod_extraammo_drank"];
+    specialty_mod_awareness_drank += player.pers[#"specialty_mod_awareness_drank"];
+    specialty_mod_berserker_drank += player.pers[#"specialty_mod_berserker_drank"];
+    specialty_mod_shield_drank += player.pers[#"specialty_mod_shield_drank"];
+    doors_purchased += player.pers[#"doors_purchased"];
     distance_traveled += player get_stat_distance_traveled();
-    boards += player.pers[# "boards"];
-    sacrifices += player.pers[# "sacrifices"];
-    drops += player.pers[# "drops"];
-    nuke_pickedup += player.pers[# "nuke_pickedup"];
-    insta_kill_pickedup += player.pers[# "insta_kill_pickedup"];
-    full_ammo_pickedup += player.pers[# "full_ammo_pickedup"];
-    double_points_pickedup += player.pers[# "double_points_pickedup"];
-    meat_stink_pickedup += player.pers[# "meat_stink_pickedup"];
-    carpenter_pickedup += player.pers[# "carpenter_pickedup"];
-    fire_sale_pickedup += player.pers[# "fire_sale_pickedup"];
-    var_d61f06ce += player.pers[# "hash_27399de28b76c5c6"];
-    minigun_pickedup += player.pers[# "minigun_pickedup"];
-    island_seed_pickedup += player.pers[# "island_seed_pickedup"];
-    hero_weapon_power_pickedup += player.pers[# "hero_weapon_power_pickedup"];
-    pack_a_punch_pickedup += player.pers[# "pack_a_punch_pickedup"];
-    extra_lives_pickedup += player.pers[# "extra_lives_pickedup"];
-    zmarcade_key_pickedup += player.pers[# "zmarcade_key_pickedup"];
-    shield_charge_pickedup += player.pers[# "shield_charge_pickedup"];
-    dung_pickedup += player.pers[# "dung_pickedup"];
-    var_614312ad += player.pers[# "hash_1b192689f4c8c402"];
-    var_be43e4a5 += player.pers[# "hash_65472fa120ebce1c"];
-    bonus_points_team_pickedup += player.pers[# "bonus_points_team_pickedup"];
-    ww_grenade_pickedup += player.pers[# "ww_grenade_pickedup"];
-    use_magicbox += player.pers[# "use_magicbox"];
-    grabbed_from_magicbox += player.pers[# "grabbed_from_magicbox"];
-    use_perk_random += player.pers[# "use_perk_random"];
-    grabbed_from_perk_random += player.pers[# "grabbed_from_perk_random"];
-    use_pap += player.pers[# "use_pap"];
-    pap_weapon_grabbed += player.pers[# "pap_weapon_grabbed"];
-    claymores_planted += player.pers[# "claymores_planted"];
-    claymores_pickedup += player.pers[# "claymores_pickedup"];
-    bouncingbetty_planted += player.pers[# "bouncingbetty_planted"];
-    ballistic_knives_pickedup += player.pers[# "ballistic_knives_pickedup"];
-    wallbuy_weapons_purchased += player.pers[# "wallbuy_weapons_purchased"];
-    power_turnedon += player.pers[# "power_turnedon"];
-    power_turnedoff += player.pers[# "power_turnedoff"];
-    planted_buildables_pickedup += player.pers[# "planted_buildables_pickedup"];
-    buildables_built += player.pers[# "buildables_built"];
-    ammo_purchased += player.pers[# "ammo_purchased"];
-    upgraded_ammo_purchased += player.pers[# "upgraded_ammo_purchased"];
-    shields_purchased += player.pers[# "shields_purchased"];
+    boards += player.pers[#"boards"];
+    sacrifices += player.pers[#"sacrifices"];
+    drops += player.pers[#"drops"];
+    nuke_pickedup += player.pers[#"nuke_pickedup"];
+    insta_kill_pickedup += player.pers[#"insta_kill_pickedup"];
+    full_ammo_pickedup += player.pers[#"full_ammo_pickedup"];
+    double_points_pickedup += player.pers[#"double_points_pickedup"];
+    meat_stink_pickedup += player.pers[#"meat_stink_pickedup"];
+    carpenter_pickedup += player.pers[#"carpenter_pickedup"];
+    fire_sale_pickedup += player.pers[#"fire_sale_pickedup"];
+    var_d61f06ce += player.pers[#"hash_27399de28b76c5c6"];
+    minigun_pickedup += player.pers[#"minigun_pickedup"];
+    island_seed_pickedup += player.pers[#"island_seed_pickedup"];
+    hero_weapon_power_pickedup += player.pers[#"hero_weapon_power_pickedup"];
+    pack_a_punch_pickedup += player.pers[#"pack_a_punch_pickedup"];
+    extra_lives_pickedup += player.pers[#"extra_lives_pickedup"];
+    zmarcade_key_pickedup += player.pers[#"zmarcade_key_pickedup"];
+    shield_charge_pickedup += player.pers[#"shield_charge_pickedup"];
+    dung_pickedup += player.pers[#"dung_pickedup"];
+    var_614312ad += player.pers[#"hash_1b192689f4c8c402"];
+    var_be43e4a5 += player.pers[#"hash_65472fa120ebce1c"];
+    bonus_points_team_pickedup += player.pers[#"bonus_points_team_pickedup"];
+    ww_grenade_pickedup += player.pers[#"ww_grenade_pickedup"];
+    use_magicbox += player.pers[#"use_magicbox"];
+    grabbed_from_magicbox += player.pers[#"grabbed_from_magicbox"];
+    use_perk_random += player.pers[#"use_perk_random"];
+    grabbed_from_perk_random += player.pers[#"grabbed_from_perk_random"];
+    use_pap += player.pers[#"use_pap"];
+    pap_weapon_grabbed += player.pers[#"pap_weapon_grabbed"];
+    claymores_planted += player.pers[#"claymores_planted"];
+    claymores_pickedup += player.pers[#"claymores_pickedup"];
+    bouncingbetty_planted += player.pers[#"bouncingbetty_planted"];
+    ballistic_knives_pickedup += player.pers[#"ballistic_knives_pickedup"];
+    wallbuy_weapons_purchased += player.pers[#"wallbuy_weapons_purchased"];
+    power_turnedon += player.pers[#"power_turnedon"];
+    power_turnedoff += player.pers[#"power_turnedoff"];
+    planted_buildables_pickedup += player.pers[#"planted_buildables_pickedup"];
+    buildables_built += player.pers[#"buildables_built"];
+    ammo_purchased += player.pers[#"ammo_purchased"];
+    upgraded_ammo_purchased += player.pers[#"upgraded_ammo_purchased"];
+    shields_purchased += player.pers[#"shields_purchased"];
 
     if(!isDefined(player.total_shots)) {
       player.total_shots = 0;
     }
 
     total_shots += player.total_shots;
-    time_played += player.pers[# "time_played_total"];
-    cheat_too_many_weapons += player.pers[# "cheat_too_many_weapons"];
-    cheat_out_of_playable_area += player.pers[# "cheat_out_of_playable"];
-    cheat_too_friendly += player.pers[# "cheat_too_friendly"];
-    cheat_total += player.pers[# "cheat_total"];
-    blightfathers_killed += player.pers[# "blightfathers_killed"];
-    killed_by_blightfather += player.pers[# "killed_by_blightfather"];
-    brutuses_killed += player.pers[# "brutuses_killed"];
-    killed_by_brutus += player.pers[# "killed_by_brutus"];
-    gladiators_killed += player.pers[# "gladiators_killed"];
-    killed_by_gladiator += player.pers[# "killed_by_gladiator"];
-    stokers_killed += player.pers[# "stokers_killed"];
-    killed_by_stoker += player.pers[# "killed_by_stoker"];
-    tigers_killed += player.pers[# "tigers_killed"];
-    killed_by_tiger += player.pers[# "killed_by_tiger"];
-    catalysts_killed += player.pers[# "catalysts_killed"];
-    killed_by_catalyst += player.pers[# "killed_by_catalyst"];
-    catalyst_electrics_killed += player.pers[# "catalyst_electrics_killed"];
-    killed_by_catalyst_electric += player.pers[# "killed_by_catalyst_electric"];
-    catalyst_waters_killed += player.pers[# "catalyst_waters_killed"];
-    killed_by_catalyst_water += player.pers[# "killed_by_catalyst_water"];
-    catalyst_plasmas_killed += player.pers[# "catalyst_plasmas_killed"];
-    killed_by_catalyst_plasma += player.pers[# "killed_by_catalyst_plasma"];
-    catalyst_corrosives_killed += player.pers[# "catalyst_corrosives_killed"];
-    killed_by_catalyst_corrosive += player.pers[# "killed_by_catalyst_corrosive"];
-    nova_crawlers_killed += player.pers[# "nova_crawlers_killed"];
-    killed_by_nova_crawler += player.pers[# "killed_by_nova_crawler"];
-    werewolves_killed += player.pers[# "werewolves_killed"];
-    killed_by_werewolf += player.pers[# "killed_by_werewolf"];
-    nosferatus_killed += player.pers[# "nosferatus_killed"];
-    killed_by_nosferatu += player.pers[# "killed_by_nosferatu"];
-    crimson_nosferatus_killed += player.pers[# "crimson_nosferatus_killed"];
-    killed_by_crimson_nosferatu += player.pers[# "killed_by_crimson_nosferatu"];
-    bats_killed += player.pers[# "bats_killed"];
+    time_played += player.pers[#"time_played_total"];
+    cheat_too_many_weapons += player.pers[#"cheat_too_many_weapons"];
+    cheat_out_of_playable_area += player.pers[#"cheat_out_of_playable"];
+    cheat_too_friendly += player.pers[#"cheat_too_friendly"];
+    cheat_total += player.pers[#"cheat_total"];
+    blightfathers_killed += player.pers[#"blightfathers_killed"];
+    killed_by_blightfather += player.pers[#"killed_by_blightfather"];
+    brutuses_killed += player.pers[#"brutuses_killed"];
+    killed_by_brutus += player.pers[#"killed_by_brutus"];
+    gladiators_killed += player.pers[#"gladiators_killed"];
+    killed_by_gladiator += player.pers[#"killed_by_gladiator"];
+    stokers_killed += player.pers[#"stokers_killed"];
+    killed_by_stoker += player.pers[#"killed_by_stoker"];
+    tigers_killed += player.pers[#"tigers_killed"];
+    killed_by_tiger += player.pers[#"killed_by_tiger"];
+    catalysts_killed += player.pers[#"catalysts_killed"];
+    killed_by_catalyst += player.pers[#"killed_by_catalyst"];
+    catalyst_electrics_killed += player.pers[#"catalyst_electrics_killed"];
+    killed_by_catalyst_electric += player.pers[#"killed_by_catalyst_electric"];
+    catalyst_waters_killed += player.pers[#"catalyst_waters_killed"];
+    killed_by_catalyst_water += player.pers[#"killed_by_catalyst_water"];
+    catalyst_plasmas_killed += player.pers[#"catalyst_plasmas_killed"];
+    killed_by_catalyst_plasma += player.pers[#"killed_by_catalyst_plasma"];
+    catalyst_corrosives_killed += player.pers[#"catalyst_corrosives_killed"];
+    killed_by_catalyst_corrosive += player.pers[#"killed_by_catalyst_corrosive"];
+    nova_crawlers_killed += player.pers[#"nova_crawlers_killed"];
+    killed_by_nova_crawler += player.pers[#"killed_by_nova_crawler"];
+    werewolves_killed += player.pers[#"werewolves_killed"];
+    killed_by_werewolf += player.pers[#"killed_by_werewolf"];
+    nosferatus_killed += player.pers[#"nosferatus_killed"];
+    killed_by_nosferatu += player.pers[#"killed_by_nosferatu"];
+    crimson_nosferatus_killed += player.pers[#"crimson_nosferatus_killed"];
+    killed_by_crimson_nosferatu += player.pers[#"killed_by_crimson_nosferatu"];
+    bats_killed += player.pers[#"bats_killed"];
   }
 
   game_mode = util::get_game_type();
@@ -1411,7 +1411,7 @@ initializematchstats() {
     return;
   }
 
-  self.pers[# "lasthighestscore"] = self stats::get_stat(#"higheststats", #"highest_score");
+  self.pers[#"lasthighestscore"] = self stats::get_stat(#"higheststats", #"highest_score");
   currgametype = level.gametype;
   self gamehistorystartmatch(getgametypeenumfromname(currgametype, 0));
 }

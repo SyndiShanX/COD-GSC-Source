@@ -24,7 +24,7 @@ init() {
   level flag::init(#"hash_26c0c05d0a3e382f");
   level flag::init(#"pyre_lit");
   level flag::init(#"hash_6205682540170b8");
-  level._effect[# "hash_3ecc995bb97331ac"] = # "hash_37631c88b85a74ec";
+  level._effect[#"hash_3ecc995bb97331ac"] = # "hash_37631c88b85a74ec";
   level.var_c1549bc8 = spawnStruct();
   level.var_c1549bc8.var_25f5a473 = struct::get_array("s_pyre");
 
@@ -448,7 +448,7 @@ function_5d0d1807() {
   a_scenes = struct::get_array("special_rounds_scene_alt", "targetname");
 
   foreach(s_scene in a_scenes) {
-    playFX(level._effect[# "hash_3ecc995bb97331ac"], s_scene.origin);
+    playFX(level._effect[#"hash_3ecc995bb97331ac"], s_scene.origin);
     s_scene scene::stop(1);
   }
 

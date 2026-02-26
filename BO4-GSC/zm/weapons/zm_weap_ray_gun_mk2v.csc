@@ -15,13 +15,13 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "hash_115fbee47e748af2"] = # "hash_26ac45625e745ea8";
-  level._effect[# "hash_1158b2e47e6e57e0"] = # "hash_26ac45625e745ea8";
-  level._effect[# "ray_gun_mk2v_stun_arc"] = # "hash_137c5ba31b8e6395";
-  level._effect[# "ray_gun_mk2v_stun_zap"] = # "zm_weapons/fx8_aat_elec_torso";
-  level._effect[# "hash_670449447f448da"] = # "zm_weapons/fx8_aat_elec_eye";
-  level._effect[# "hash_66d2b9447f1e888"] = # "zm_weapons/fx8_aat_elec_exp";
-  level._effect[# "ray_gun_mk2v_death"] = # "hash_4b0f5fb2f910fe94";
+  level._effect[#"hash_115fbee47e748af2"] = # "hash_26ac45625e745ea8";
+  level._effect[#"hash_1158b2e47e6e57e0"] = # "hash_26ac45625e745ea8";
+  level._effect[#"ray_gun_mk2v_stun_arc"] = # "hash_137c5ba31b8e6395";
+  level._effect[#"ray_gun_mk2v_stun_zap"] = # "zm_weapons/fx8_aat_elec_torso";
+  level._effect[#"hash_670449447f448da"] = # "zm_weapons/fx8_aat_elec_eye";
+  level._effect[#"hash_66d2b9447f1e888"] = # "zm_weapons/fx8_aat_elec_exp";
+  level._effect[#"ray_gun_mk2v_death"] = # "hash_4b0f5fb2f910fe94";
   clientfield::register("allplayers", "" + # "ray_gun_mk2v_beam_fire", 20000, 2, "int", &beam_fire, 0, 1);
   clientfield::register("allplayers", "" + # "ray_gun_mk2v_beam_flash", 20000, 1, "int", &flash_fx, 0, 0);
   clientfield::register("actor", "" + # "hash_784061e6c2684e58", 20000, 1, "int", &function_84a63db9, 0, 0);
@@ -94,14 +94,14 @@ flash_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwast
   if(newval > 0) {
     if(self zm_utility::function_f8796df3(localclientnum)) {
       if(viewmodelhastag(localclientnum, "tag_flash")) {
-        self.fx_muzzle_flash = playviewmodelfx(localclientnum, level._effect[# "hash_115fbee47e748af2"], "tag_flash");
+        self.fx_muzzle_flash = playviewmodelfx(localclientnum, level._effect[#"hash_115fbee47e748af2"], "tag_flash");
       }
 
       return;
     }
 
     if(isDefined(self gettagorigin("tag_flash"))) {
-      self.fx_muzzle_flash = util::playFXOnTag(localclientnum, level._effect[# "hash_1158b2e47e6e57e0"], self, "tag_flash");
+      self.fx_muzzle_flash = util::playFXOnTag(localclientnum, level._effect[#"hash_1158b2e47e6e57e0"], self, "tag_flash");
     }
   }
 }
@@ -114,8 +114,8 @@ function_84a63db9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       str_fx_tag = "tag_origin";
     }
 
-    self.var_d4f84669 = util::playFXOnTag(localclientnum, level._effect[# "ray_gun_mk2v_stun_zap"], self, str_fx_tag);
-    self.var_38e2508e = util::playFXOnTag(localclientnum, level._effect[# "hash_670449447f448da"], self, "j_eyeball_le");
+    self.var_d4f84669 = util::playFXOnTag(localclientnum, level._effect[#"ray_gun_mk2v_stun_zap"], self, str_fx_tag);
+    self.var_38e2508e = util::playFXOnTag(localclientnum, level._effect[#"hash_670449447f448da"], self, "j_eyeball_le");
 
     if(!isDefined(self.var_12941c1d)) {
       self.var_12941c1d = self playLoopSound("zmb_aat_kilowatt_stunned_lp");
@@ -145,18 +145,18 @@ function_97482bc3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       v_fx_origin = self.origin;
     }
 
-    playFX(localclientnum, level._effect[# "hash_66d2b9447f1e888"], v_fx_origin);
+    playFX(localclientnum, level._effect[#"hash_66d2b9447f1e888"], v_fx_origin);
     self playSound(localclientnum, #"zmb_aat_kilowatt_explode");
   }
 }
 
 function_4013653a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "ray_gun_mk2v_stun_arc"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"ray_gun_mk2v_stun_arc"], self, "tag_origin");
 }
 
 death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self)) {
     str_tag = self zm_utility::function_467efa7b(1);
-    util::playFXOnTag(localclientnum, level._effect[# "ray_gun_mk2v_death"], self, str_tag);
+    util::playFXOnTag(localclientnum, level._effect[#"ray_gun_mk2v_death"], self, str_tag);
   }
 }

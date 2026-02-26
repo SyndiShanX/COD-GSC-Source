@@ -52,15 +52,15 @@ function private _objective(objective) {
 
 function music(var_b12adf3) {
   level.var_825fa088 = [];
-  level.var_825fa088[# "intro"] = "1_0_intro";
-  level.var_825fa088[# "infiltrate"] = "2_0_infiltrate";
-  level.var_825fa088[# "inside"] = "3_0_inside";
-  level.var_825fa088[# "last_building"] = "4_0_last_building";
-  level.var_825fa088[# "chase"] = "5_0_chase";
-  level.var_825fa088[# "breach"] = "6_0_breach";
-  level.var_825fa088[# "kill_confirmed"] = "7_0_kill_confirmed";
-  level.var_825fa088[# "defend"] = "8_0_defend";
-  level.var_825fa088[# "exfil"] = "9_0_exfil";
+  level.var_825fa088[#"intro"] = "1_0_intro";
+  level.var_825fa088[#"infiltrate"] = "2_0_infiltrate";
+  level.var_825fa088[#"inside"] = "3_0_inside";
+  level.var_825fa088[#"last_building"] = "4_0_last_building";
+  level.var_825fa088[#"chase"] = "5_0_chase";
+  level.var_825fa088[#"breach"] = "6_0_breach";
+  level.var_825fa088[#"kill_confirmed"] = "7_0_kill_confirmed";
+  level.var_825fa088[#"defend"] = "8_0_defend";
+  level.var_825fa088[#"exfil"] = "9_0_exfil";
 
   if(var_b12adf3 == "combat" || var_b12adf3 == "search") {
     var_b12adf3 = function_95410ce0();

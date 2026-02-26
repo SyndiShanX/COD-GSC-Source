@@ -346,9 +346,9 @@ function_7206d28() {
 
 function_b93ad88d() {
   level endon(#"trials_round_end");
-  level.zones[# "ice_floe"].is_enabled = 0;
+  level.zones[#"ice_floe"].is_enabled = 0;
   wait 1;
-  level.zones[# "ice_floe"].is_enabled = 1;
+  level.zones[#"ice_floe"].is_enabled = 1;
 }
 
 function_53a1ecb9() {

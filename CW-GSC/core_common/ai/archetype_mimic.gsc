@@ -502,12 +502,12 @@ function function_4f401255(start_origin, start_angles, player_anim, mins, maxs, 
 
   trace_result = physicstraceex(var_d26e393f, var_603d4563, mins, maxs, var_d72e649c);
 
-  if(trace_result[# "fraction"] < 1) {
+  if(trace_result[#"fraction"] < 1) {
     record3dtext("<dev string:xd6>", var_f60dbcf6, (1, 0, 0), "<dev string:xcc>");
-    recordstar(var_d26e393f + (var_603d4563 - var_d26e393f) * trace_result[# "fraction"], (1, 0, 0));
+    recordstar(var_d26e393f + (var_603d4563 - var_d26e393f) * trace_result[#"fraction"], (1, 0, 0));
   }
 
-  return trace_result[# "fraction"] < 1;
+  return trace_result[#"fraction"] < 1;
 }
 
 function function_435d7c54(origin, angles) {
@@ -518,12 +518,12 @@ function function_435d7c54(origin, angles) {
 
   trace_result = physicstrace(origin, end_origin, (-4, -4, -16), (4, 4, 16), undefined, 2);
 
-  if(trace_result[# "fraction"] < 1) {
+  if(trace_result[#"fraction"] < 1) {
     record3dtext("<dev string:xef>", end_origin, (1, 0, 0), "<dev string:xcc>");
-    recordstar(origin + (end_origin - origin) * trace_result[# "fraction"], (1, 0, 0));
+    recordstar(origin + (end_origin - origin) * trace_result[#"fraction"], (1, 0, 0));
   }
 
-  return trace_result[# "fraction"] < 1;
+  return trace_result[#"fraction"] < 1;
 }
 
 function function_d291b5a9(player, var_1b024168, var_52a75904, player_anim) {
@@ -927,7 +927,7 @@ function function_a42f6839() {
   self notify("<dev string:x6f0>");
   self endon("<dev string:x6f0>");
   trace = function_ea10da3f();
-  queryresult = positionquery_source_navigation(trace[# "position"], 500, 1200, 256, 128);
+  queryresult = positionquery_source_navigation(trace[#"position"], 500, 1200, 256, 128);
 
   if(!queryresult.data.size) {
     return;
@@ -940,21 +940,21 @@ function function_d70b96a8() {
   self notify("<dev string:x703>");
   self endon("<dev string:x703>");
   trace = function_ea10da3f();
-  mimic_prop_spawn::function_51012821(trace[# "position"], undefined, undefined, 3);
+  mimic_prop_spawn::function_51012821(trace[#"position"], undefined, undefined, 3);
 }
 
 function function_5b9e63e6() {
   self notify("<dev string:x716>");
   self endon("<dev string:x716>");
   trace = function_ea10da3f();
-  mimic_prop_spawn::function_51012821(trace[# "position"], undefined, undefined, 1);
+  mimic_prop_spawn::function_51012821(trace[#"position"], undefined, undefined, 1);
 }
 
 function function_3bd29cb8() {
   self notify("<dev string:x72a>");
   self endon("<dev string:x72a>");
   trace = function_ea10da3f();
-  closest_point = arraygetclosest(trace[# "position"], level.var_6e175eb);
+  closest_point = arraygetclosest(trace[#"position"], level.var_6e175eb);
   mimic_prop_spawn::function_b309db61(array(closest_point), undefined, undefined);
 }
 
@@ -962,7 +962,7 @@ function function_d312cd2c() {
   self notify("<dev string:x73e>");
   self endon("<dev string:x73e>");
   trace = function_ea10da3f();
-  mimic = spawnactor("<dev string:x751>", trace[# "position"], vectortoangles(getplayers()[0].origin - trace[# "position"]));
+  mimic = spawnactor("<dev string:x751>", trace[#"position"], vectortoangles(getplayers()[0].origin - trace[#"position"]));
 
   if(isDefined(mimic)) {
     mimic.never_hide = 1;
@@ -1026,7 +1026,7 @@ function function_6469c221() {
     return;
   }
 
-  closest_struct = arraygetclosest(trace[# "position"], spawn_structs);
+  closest_struct = arraygetclosest(trace[#"position"], spawn_structs);
   mimic_prop_spawn::function_b309db61([closest_struct]);
 }
 
@@ -1050,8 +1050,8 @@ function function_7f6a5e14() {
     eye = player getEye();
     direction_vec = (direction_vec[0] * 8000, direction_vec[1] * 8000, direction_vec[2] * 8000);
     trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
-    debugstar(trace[# "position"], 5, (0, 1, 1));
-    spawn_points = arraysortclosest(var_d4034654, trace[# "position"], 1);
+    debugstar(trace[#"position"], 5, (0, 1, 1));
+    spawn_points = arraysortclosest(var_d4034654, trace[#"position"], 1);
 
     foreach(point in spawn_points) {
       info = function_5ef9a937(point);
@@ -1081,7 +1081,7 @@ function private function_5ef9a937(point) {
 
     new_origin = point.origin;
   } else {
-    new_origin = groundtrace(point.origin + (0, 0, 15) + (0, 0, 8), point.origin + (0, 0, 15) + (0, 0, -100000), 0, undefined)[# "position"];
+    new_origin = groundtrace(point.origin + (0, 0, 15) + (0, 0, 8), point.origin + (0, 0, 15) + (0, 0, -100000), 0, undefined)[#"position"];
   }
 
   validation_info = {
@@ -1101,7 +1101,7 @@ function private function_5ef9a937(point) {
     move_delta = getmovedelta(#"hash_5cfca059cd6fdb4c", 0, 0.5);
     move_delta = rotatepoint(move_delta, var_8fccab5b);
     var_d26e393f = var_f60dbcf6 + move_delta;
-    var_261937fc = groundtrace(var_feb3dda6.origin + (0, 0, 15) + (0, 0, 8), var_feb3dda6.origin + (0, 0, 15) + (0, 0, -100000), 0, undefined)[# "position"];
+    var_261937fc = groundtrace(var_feb3dda6.origin + (0, 0, 15) + (0, 0, 8), var_feb3dda6.origin + (0, 0, 15) + (0, 0, -100000), 0, undefined)[#"position"];
 
     if(abs(var_261937fc[2] - var_feb3dda6.origin[2]) < 15) {
       var_feb3dda6.origin = var_261937fc;

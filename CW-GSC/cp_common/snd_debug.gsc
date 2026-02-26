@@ -57,7 +57,7 @@ function private function_43c85ce2() {
   }
 
   if(isDefined(self.v) == 1) {
-    origin = self.v[# "origin"];
+    origin = self.v[#"origin"];
     self.origin = origin;
     self.var_3f03e75e = 1;
   }
@@ -78,7 +78,7 @@ function private function_cb457f5b() {
   }
 
   if(isDefined(self.v) == 1) {
-    angles = self.v[# "angles"];
+    angles = self.v[#"angles"];
     self.angles = angles;
     self.var_45dbf7c9 = 1;
   }
@@ -94,8 +94,8 @@ function private function_cb457f5b() {
 function private function_738e0260() {
   soundalias = "<dev string:x9d>";
 
-  if(isDefined(self.v) == 1 && isDefined(self.v[# "soundalias"]) == 1) {
-    soundalias = self.v[# "soundalias"];
+  if(isDefined(self.v) == 1 && isDefined(self.v[#"soundalias"]) == 1) {
+    soundalias = self.v[#"soundalias"];
   } else if(isDefined(self.soundalias) == 1) {
     soundalias = self.soundalias;
   }
@@ -549,16 +549,16 @@ function private function_94f79425(var_977d0bf3) {
   level.var_eb0e2b51 = 0;
 
   foreach(ent in level.createfxent) {
-    if(isDefined(ent.v[# "type"]) == 0) {
+    if(isDefined(ent.v[#"type"]) == 0) {
       continue;
     }
 
-    if(ent.v[# "type"] == "<dev string:x20f>") {
+    if(ent.v[#"type"] == "<dev string:x20f>") {
       level.var_c8afcee6++;
       level.var_b7d2deb[level.var_b7d2deb.size] = ent;
     }
 
-    if(ent.v[# "type"] == "<dev string:x21a>") {
+    if(ent.v[#"type"] == "<dev string:x21a>") {
       level.var_eb0e2b51++;
       level.var_b7d2deb[level.var_b7d2deb.size] = ent;
     }
@@ -748,9 +748,9 @@ function private function_fa2bfbd1() {
     traceend = eyeorigin + eyeforward * 262144;
     trace = bulletTrace(eyeorigin, traceend, 1, player);
 
-    if(isDefined(trace) == 1 && isDefined(trace[# "position"]) == 1 && trace[# "position"] != eyeorigin) {
-      pos = trace[# "position"];
-      surfacetype = trace[# "surfacetype"];
+    if(isDefined(trace) == 1 && isDefined(trace[#"position"]) == 1 && trace[#"position"] != eyeorigin) {
+      pos = trace[#"position"];
+      surfacetype = trace[#"surfacetype"];
       dist = distance(pos, eyeorigin);
       fontscale = 1.5;
       posstring = "<dev string:x40a>" + pos[0] + "<dev string:x410>" + pos[1] + "<dev string:x410>" + pos[2] + "<dev string:x416>";

@@ -1449,8 +1449,8 @@ function function_5a647d51() {
 }
 
 function function_4c29c028(a_ents) {
-  level.var_9fd1d22e = a_ents[# "adler"];
-  level.var_afaf5a6d = a_ents[# "hash_10ee8d147d84e3f6"];
+  level.var_9fd1d22e = a_ents[#"adler"];
+  level.var_afaf5a6d = a_ents[#"hash_10ee8d147d84e3f6"];
 
   if(isDefined(level.var_afaf5a6d)) {
     if(isDefined(level.var_afaf5a6d._scene_object._o_scene._e_root.scriptbundlename)) {
@@ -1724,7 +1724,7 @@ function function_c0e8eda7(number) {
 }
 
 function function_f0e80189(a_ents) {
-  level.var_a9274912 = a_ents[# "actor 2"];
+  level.var_a9274912 = a_ents[#"actor 2"];
 
   if(isDefined(level.var_a9274912)) {
     level.var_a9274912.propername = # "hash_7f6eed032db2f3ba";
@@ -1738,7 +1738,7 @@ function function_f0e80189(a_ents) {
     }
   }
 
-  adler = a_ents[# "actor 1"];
+  adler = a_ents[#"actor 1"];
 
   if(isDefined(adler)) {
     adler.propername = # "hash_7f6eed032db2f3ba";
@@ -1747,7 +1747,7 @@ function function_f0e80189(a_ents) {
 }
 
 function function_a36bacf8(a_ents) {
-  level.var_740b3f5b = a_ents[# "actor 2"];
+  level.var_740b3f5b = a_ents[#"actor 2"];
 
   if(isDefined(level.var_740b3f5b)) {
     level.var_740b3f5b.propername = # "hash_7f6eed032db2f3ba";
@@ -1777,7 +1777,7 @@ function function_a36bacf8(a_ents) {
     }
   }
 
-  adler = a_ents[# "actor 1"];
+  adler = a_ents[#"actor 1"];
 
   if(isDefined(adler) && !isDefined(adler.var_45c9d5e8)) {
     adler.propername = # "hash_7f6eed032db2f3ba";
@@ -1785,7 +1785,7 @@ function function_a36bacf8(a_ents) {
     adler.var_45c9d5e8 = 1;
   }
 
-  sims = a_ents[# "actor 3"];
+  sims = a_ents[#"actor 3"];
 
   if(isDefined(sims) && !isDefined(sims.var_45c9d5e8)) {
     sims.propername = # "hash_7f6eed032db2f3ba";
@@ -1793,14 +1793,14 @@ function function_a36bacf8(a_ents) {
     sims.var_45c9d5e8 = 1;
   }
 
-  park = a_ents[# "actor 4"];
+  park = a_ents[#"actor 4"];
 
   if(isDefined(park)) {
     park.propername = # "hash_7f6eed032db2f3ba";
     park thread function_c6a03680("window_5", #"hash_a0d642b09afc71a");
   }
 
-  lazar = a_ents[# "actor 5"];
+  lazar = a_ents[#"actor 5"];
 
   if(isDefined(lazar)) {
     lazar.propername = # "hash_7f6eed032db2f3ba";

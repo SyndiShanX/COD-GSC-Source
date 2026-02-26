@@ -58,33 +58,33 @@ __init__() {
   }
 
   level.bcsounds = [];
-  level.bcsounds[# "incoming_alert"] = [];
-  level.bcsounds[# "incoming_alert"][# "frag_grenade"] = "incomingFrag";
-  level.bcsounds[# "incoming_alert"][# "incendiary_grenade"] = "incomingIncendiary";
-  level.bcsounds[# "incoming_alert"][# "sticky_grenade"] = "incomingSemtex";
-  level.bcsounds[# "incoming_alert"][# "eq_sticky_grenade"] = "incomingSemtex";
-  level.bcsounds[# "incoming_alert"][# "launcher_standard"] = "threatRpg";
-  level.bcsounds[# "incoming_delay"] = [];
-  level.bcsounds[# "incoming_delay"][# "frag_grenade"] = "fragGrenadeDelay";
-  level.bcsounds[# "incoming_delay"][# "incendiary_grenade"] = "incendiaryGrenadeDelay";
-  level.bcsounds[# "incoming_alert"][# "sticky_grenade"] = "semtexDelay";
-  level.bcsounds[# "incoming_alert"][# "eq_sticky_grenade"] = "semtexDelay";
-  level.bcsounds[# "incoming_delay"][# "launcher_standard"] = "missileDelay";
-  level.bcsounds[# "kill_dialog"] = [];
-  level.bcsounds[# "kill_dialog"][# "battery"] = "killBattery";
-  level.bcsounds[# "kill_dialog"][# "buffassault"] = "killBuffAssault";
-  level.bcsounds[# "kill_dialog"][# "engineer"] = "killEngineer";
-  level.bcsounds[# "kill_dialog"][# "firebreak"] = "killFirebreak";
-  level.bcsounds[# "kill_dialog"][# "nomad"] = "killNomad";
-  level.bcsounds[# "kill_dialog"][# "prophet"] = "killProphet";
-  level.bcsounds[# "kill_dialog"][# "recon"] = "killRecon";
-  level.bcsounds[# "kill_dialog"][# "ruin"] = "killRuin";
-  level.bcsounds[# "kill_dialog"][# "seraph"] = "killSeraph";
-  level.bcsounds[# "kill_dialog"][# "swatpolice"] = "killSwatPolice";
-  level.bcsounds[# "kill_dialog"][# "zero"] = "killZero";
-  level.bcsounds[# "kill_dialog"][# "outrider"] = "killOutrider";
-  level.bcsounds[# "kill_dialog"][# "reaper"] = "killReaper";
-  level.bcsounds[# "kill_dialog"][# "spectre"] = "killSpectre";
+  level.bcsounds[#"incoming_alert"] = [];
+  level.bcsounds[#"incoming_alert"][#"frag_grenade"] = "incomingFrag";
+  level.bcsounds[#"incoming_alert"][#"incendiary_grenade"] = "incomingIncendiary";
+  level.bcsounds[#"incoming_alert"][#"sticky_grenade"] = "incomingSemtex";
+  level.bcsounds[#"incoming_alert"][#"eq_sticky_grenade"] = "incomingSemtex";
+  level.bcsounds[#"incoming_alert"][#"launcher_standard"] = "threatRpg";
+  level.bcsounds[#"incoming_delay"] = [];
+  level.bcsounds[#"incoming_delay"][#"frag_grenade"] = "fragGrenadeDelay";
+  level.bcsounds[#"incoming_delay"][#"incendiary_grenade"] = "incendiaryGrenadeDelay";
+  level.bcsounds[#"incoming_alert"][#"sticky_grenade"] = "semtexDelay";
+  level.bcsounds[#"incoming_alert"][#"eq_sticky_grenade"] = "semtexDelay";
+  level.bcsounds[#"incoming_delay"][#"launcher_standard"] = "missileDelay";
+  level.bcsounds[#"kill_dialog"] = [];
+  level.bcsounds[#"kill_dialog"][#"battery"] = "killBattery";
+  level.bcsounds[#"kill_dialog"][#"buffassault"] = "killBuffAssault";
+  level.bcsounds[#"kill_dialog"][#"engineer"] = "killEngineer";
+  level.bcsounds[#"kill_dialog"][#"firebreak"] = "killFirebreak";
+  level.bcsounds[#"kill_dialog"][#"nomad"] = "killNomad";
+  level.bcsounds[#"kill_dialog"][#"prophet"] = "killProphet";
+  level.bcsounds[#"kill_dialog"][#"recon"] = "killRecon";
+  level.bcsounds[#"kill_dialog"][#"ruin"] = "killRuin";
+  level.bcsounds[#"kill_dialog"][#"seraph"] = "killSeraph";
+  level.bcsounds[#"kill_dialog"][#"swatpolice"] = "killSwatPolice";
+  level.bcsounds[#"kill_dialog"][#"zero"] = "killZero";
+  level.bcsounds[#"kill_dialog"][#"outrider"] = "killOutrider";
+  level.bcsounds[#"kill_dialog"][#"reaper"] = "killReaper";
+  level.bcsounds[#"kill_dialog"][#"spectre"] = "killSpectre";
 
   if(level.teambased && !isDefined(game.boostplayerspicked)) {
     game.boostplayerspicked = [];
@@ -94,7 +94,7 @@ __init__() {
     }
   }
 
-  level.allowbattlechatter[# "bc"] = getgametypesetting(#"allowbattlechatter");
+  level.allowbattlechatter[#"bc"] = getgametypesetting(#"allowbattlechatter");
   level thread pick_boost_number();
   keycounts = [];
   playerdialogbundles = struct::get_script_bundles("mpdialog_player");
@@ -134,8 +134,8 @@ __init__() {
     mpdialog = spawnStruct();
   }
 
-  level.allowspecialistdialog = (isDefined(mpdialog.enableherodialog) ? mpdialog.enableherodialog : 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
-  level.playstartconversation = (isDefined(mpdialog.enableconversation) ? mpdialog.enableconversation : 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
+  level.allowspecialistdialog = (isDefined(mpdialog.enableherodialog) ? mpdialog.enableherodialog : 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
+  level.playstartconversation = (isDefined(mpdialog.enableconversation) ? mpdialog.enableconversation : 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
   level.var_bd715920 = &function_e44c3a3c;
 }
 
@@ -206,7 +206,7 @@ on_joined_team(params) {
 
   self globallogic_audio::flush_dialog();
 
-  if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && !(isDefined(self.pers[# "playedgamemode"]) && self.pers[# "playedgamemode"]) && isDefined(level.leaderdialog)) {
+  if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && !(isDefined(self.pers[#"playedgamemode"]) && self.pers[#"playedgamemode"]) && isDefined(level.leaderdialog)) {
     if(level.hardcoremode) {
       if(globallogic_utils::function_308e3379()) {
         self globallogic_audio::leader_dialog_on_player(level.leaderdialog.var_d04b3734, undefined, undefined, undefined, 1);
@@ -219,13 +219,13 @@ on_joined_team(params) {
       self globallogic_audio::leader_dialog_on_player(level.leaderdialog.startgamedialog, undefined, undefined, undefined, 1);
     }
 
-    self.pers[# "playedgamemode"] = 1;
+    self.pers[#"playedgamemode"] = 1;
   }
 }
 
 set_blops_dialog() {
-  self.pers[# "mptaacom"] = "blops_taacom";
-  self.pers[# "mpcommander"] = "blops_commander";
+  self.pers[#"mptaacom"] = "blops_taacom";
+  self.pers[#"mpcommander"] = "blops_commander";
 
   if(isDefined(level.var_cddcf1e3)) {
     self[[level.var_cddcf1e3]]();
@@ -233,8 +233,8 @@ set_blops_dialog() {
 }
 
 set_cdp_dialog() {
-  self.pers[# "mptaacom"] = "cdp_taacom";
-  self.pers[# "mpcommander"] = "cdp_commander";
+  self.pers[#"mptaacom"] = "cdp_taacom";
+  self.pers[#"mpcommander"] = "cdp_commander";
 
   if(isDefined(level.var_abaf1ec9)) {
     self[[level.var_abaf1ec9]]();
@@ -256,7 +256,7 @@ on_player_spawned() {
   self callback::add_callback("weapon_melee", &function_59f9cdab);
   self callback::add_callback("weapon_melee_charge", &function_59f9cdab);
 
-  if(level.splitscreen || !level.allowbattlechatter[# "bc"]) {
+  if(level.splitscreen || !level.allowbattlechatter[#"bc"]) {
     return;
   }
 
@@ -939,35 +939,35 @@ enemy_threat() {
     endpoint = eyepoint + dir;
     traceresult = bulletTrace(eyepoint, endpoint, 1, self);
 
-    if(isDefined(traceresult[# "entity"]) && util::function_fbce7263(traceresult[# "entity"].team, self.team)) {
-      if(traceresult[# "entity"].classname == "player") {
-        if(!(traceresult[# "entity"].var_9ee835dc === 1)) {
+    if(isDefined(traceresult[#"entity"]) && util::function_fbce7263(traceresult[#"entity"].team, self.team)) {
+      if(traceresult[#"entity"].classname == "player") {
+        if(!(traceresult[#"entity"].var_9ee835dc === 1)) {
           playerweapon = undefined;
 
-          if(isDefined(traceresult[# "entity"].weapon)) {
-            playerweapon = traceresult[# "entity"].weapon;
-          } else if(isDefined(traceresult[# "entity"].currentweapon)) {
-            playerweapon = traceresult[# "entity"].currentweapon;
+          if(isDefined(traceresult[#"entity"].weapon)) {
+            playerweapon = traceresult[#"entity"].weapon;
+          } else if(isDefined(traceresult[#"entity"].currentweapon)) {
+            playerweapon = traceresult[#"entity"].currentweapon;
           }
 
-          if(isDefined(traceresult[# "entity"].killstreaktype) && !isarray(traceresult[# "entity"].killstreaktype)) {
-            self play_killstreak_threat(traceresult[# "entity"].killstreaktype);
-            traceresult[# "entity"].var_9ee835dc = 1;
+          if(isDefined(traceresult[#"entity"].killstreaktype) && !isarray(traceresult[#"entity"].killstreaktype)) {
+            self play_killstreak_threat(traceresult[#"entity"].killstreaktype);
+            traceresult[#"entity"].var_9ee835dc = 1;
             self.enemythreattime = gettime();
             continue;
           }
 
-          if(isDefined(playerweapon) && (isPlayer(traceresult[# "entity"]) || isDefined(traceresult[# "entity"].owner))) {
-            var_24d3b6ca = isPlayer(traceresult[# "entity"]) ? traceresult[# "entity"] : traceresult[# "entity"].owner;
-            var_24d3b6ca function_bd715920(playerweapon, self, traceresult[# "entity"].origin, traceresult[# "entity"]);
-            traceresult[# "entity"].var_9ee835dc = 1;
+          if(isDefined(playerweapon) && (isPlayer(traceresult[#"entity"]) || isDefined(traceresult[#"entity"].owner))) {
+            var_24d3b6ca = isPlayer(traceresult[#"entity"]) ? traceresult[#"entity"] : traceresult[#"entity"].owner;
+            var_24d3b6ca function_bd715920(playerweapon, self, traceresult[#"entity"].origin, traceresult[#"entity"]);
+            traceresult[#"entity"].var_9ee835dc = 1;
             self.enemythreattime = gettime();
             continue;
           }
 
           if(dialog_chance("enemyContactChance")) {
             if(dialog_chance("enemyHeroContactChance")) {
-              self function_551980b7(traceresult[# "entity"] getmpdialogname());
+              self function_551980b7(traceresult[#"entity"] getmpdialogname());
             } else {
               self thread play_dialog("threatInfantry", 2);
             }
@@ -1468,8 +1468,8 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor, meansofdeath) {
     } else if(dialog_chance("enemyHeroKillChance")) {
       victimdialogname = victim getmpdialogname();
 
-      if(isDefined(victimdialogname) && isDefined(level.bcsounds[# "kill_dialog"][victimdialogname])) {
-        killdialog = attacker get_random_key(level.bcsounds[# "kill_dialog"][victimdialogname]);
+      if(isDefined(victimdialogname) && isDefined(level.bcsounds[#"kill_dialog"][victimdialogname])) {
+        killdialog = attacker get_random_key(level.bcsounds[#"kill_dialog"][victimdialogname]);
       } else {
         killdialog = attacker get_random_key("killGeneric");
       }
@@ -1532,10 +1532,10 @@ grenade_tracking() {
       continue;
     }
 
-    dialogkey = level.bcsounds[# "incoming_alert"][grenade.weapon.rootweapon.name];
+    dialogkey = level.bcsounds[#"incoming_alert"][grenade.weapon.rootweapon.name];
 
     if(isDefined(dialogkey)) {
-      waittime = mpdialog_value(level.bcsounds[# "incoming_delay"][grenade.weapon.rootweapon.name], float(function_60d95f53()) / 1000);
+      waittime = mpdialog_value(level.bcsounds[#"incoming_delay"][grenade.weapon.rootweapon.name], float(function_60d95f53()) / 1000);
       level thread incoming_projectile_alert(self, grenade, dialogkey, waittime);
     }
   }
@@ -1554,10 +1554,10 @@ missile_tracking() {
       continue;
     }
 
-    dialogkey = level.bcsounds[# "incoming_alert"][missile.item.rootweapon.name];
+    dialogkey = level.bcsounds[#"incoming_alert"][missile.item.rootweapon.name];
 
     if(isDefined(dialogkey)) {
-      waittime = mpdialog_value(level.bcsounds[# "incoming_delay"][missile.item.rootweapon.name], float(function_60d95f53()) / 1000);
+      waittime = mpdialog_value(level.bcsounds[#"incoming_delay"][missile.item.rootweapon.name], float(function_60d95f53()) / 1000);
       level thread incoming_projectile_alert(self, missile, dialogkey, waittime);
     }
   }
@@ -1759,7 +1759,7 @@ function_deea4cc2(meansofdeath) {
     return;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -1822,7 +1822,7 @@ get_death_vox(weapon, meansofdeath) {
     return;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -2166,7 +2166,7 @@ get_player_dialog_alias(dialogkey, meansofdeath) {
 
   bundlename = self getmpdialogname();
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -3588,7 +3588,7 @@ game_end_vox(winner) {
 
     if(match::get_flag("tie")) {
       dialogkey = playerbundle.boostdraw;
-    } else if(isDefined(winner) && level.teambased && isDefined(level.teams[winner]) && player.pers[# "team"] == winner || !level.teambased && player == winner) {
+    } else if(isDefined(winner) && level.teambased && isDefined(level.teams[winner]) && player.pers[#"team"] == winner || !level.teambased && player == winner) {
       dialogkey = playerbundle.boostwin;
     } else {
       dialogkey = playerbundle.boostloss;

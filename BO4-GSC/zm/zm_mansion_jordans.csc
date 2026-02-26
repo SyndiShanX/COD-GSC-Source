@@ -30,7 +30,7 @@ function_5869f09a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.var_5d1596c4 = playFX(localclientnum, level._effect[# "candle_light"], self.origin + (0, 0, 6), anglesToForward(self.angles), anglestoup(self.angles));
+    self.var_5d1596c4 = playFX(localclientnum, level._effect[#"candle_light"], self.origin + (0, 0, 6), anglesToForward(self.angles), anglestoup(self.angles));
     playSound(localclientnum, #"hash_6ab53d808ef366d5", self.origin);
   }
 }
@@ -46,7 +46,7 @@ function_bb6fcc6a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.var_a0a8631e = util::playFXOnTag(localclientnum, level._effect[# "pap_projectile"], self, "<dev string:x4f>");
+    self.var_a0a8631e = util::playFXOnTag(localclientnum, level._effect[#"pap_projectile"], self, "<dev string:x4f>");
   }
 }
 

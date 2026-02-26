@@ -107,7 +107,7 @@ is_weapon_included(weapon_name) {
   }
   return false;
 }
-#include_weapon(weapon, in_box, func) {
+include_weapon(weapon, in_box, func) {
   if(!isDefined(level._box_weapons)) {
     level._box_weapons = [];
   }

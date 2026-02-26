@@ -193,7 +193,7 @@ function can_select_character(characterindex) {
 
     playercharacterindex = player player_role::get();
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == self.pers[# "team"] && playercharacterindex == characterindex) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == self.pers[#"team"] && playercharacterindex == characterindex) {
       rolecount++;
 
       if(rolecount >= maxuniqueroles) {
@@ -219,7 +219,7 @@ function select_character(characterindex, forceselection, var_8a239568) {
   self player_role::set(forceselection);
 
   if(!getdvarint(#"hash_1f80dbba75375e3d", 0)) {
-    customloadoutindex = self.pers[# "loadoutindex"];
+    customloadoutindex = self.pers[#"loadoutindex"];
 
     if(isDefined(customloadoutindex)) {
       self[[level.curclass]]("custom" + customloadoutindex);
@@ -395,7 +395,7 @@ function draft_run() {
       ready = 1;
 
       foreach(player in level.players) {
-        if(player.pers[# "team"] == # "spectator" || isbot(player)) {
+        if(player.pers[#"team"] == # "spectator" || isbot(player)) {
           continue;
         }
 
@@ -422,7 +422,7 @@ function draft_run() {
       var_97286e53 = 1;
 
       foreach(player in level.players) {
-        if(player.pers[# "team"] == # "spectator") {
+        if(player.pers[#"team"] == # "spectator") {
           continue;
         }
 
@@ -520,7 +520,7 @@ function assign_remaining_players(only_assign_player) {
   }
 
   foreach(player in level.players) {
-    if(player.pers[# "team"] == # "spectator") {
+    if(player.pers[#"team"] == # "spectator") {
       continue;
     }
 
@@ -652,7 +652,7 @@ function assign_remaining_players(only_assign_player) {
       oldspecialistindex = player getspecialistindex();
 
       if(isDefined(oldspecialistindex) && oldspecialistindex != selectedcharacter) {
-        player.pers[# "class"] = undefined;
+        player.pers[#"class"] = undefined;
       }
 
       println("<dev string:x239>" + player.name + "<dev string:x256>" + selectedcharacter);
@@ -674,7 +674,7 @@ function game_start() {
 
   if(level.gametype !== "bounty") {
     foreach(player in level.players) {
-      if(player.hasspawned || player.pers[# "team"] == # "spectator") {
+      if(player.hasspawned || player.pers[#"team"] == # "spectator") {
         player globallogic_audio::set_music_on_player("spawn");
       }
     }
@@ -717,8 +717,8 @@ function draft_finalize() {
         player loadout::give_loadout(player.team, player.curclass);
       }
 
-      player.pers[# "lastcurclass"] = player.curclass;
-      player.pers[# "lastspecialistindex"] = player.curclass;
+      player.pers[#"lastcurclass"] = player.curclass;
+      player.pers[#"lastspecialistindex"] = player.curclass;
 
       if(is_true(getgametypesetting(#"hash_1b85ace023e616a1"))) {
         player val::function_4671dfff(#"spawn_player", 0);
@@ -841,7 +841,7 @@ function open() {
     player player_role::set(autoselection);
 
     if(!getdvarint(#"hash_1f80dbba75375e3d", 0)) {
-      customloadoutindex = self.pers[# "loadoutindex"];
+      customloadoutindex = self.pers[#"loadoutindex"];
 
       if(isDefined(customloadoutindex)) {
         self[[level.curclass]]("<dev string:x36c>" + customloadoutindex);

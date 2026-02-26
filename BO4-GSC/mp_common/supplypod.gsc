@@ -46,7 +46,7 @@ __init__() {
     level.killstreakbundle = [];
   }
 
-  level.killstreakbundle[# "killstreak_supplypod"] = level.var_934fb97.bundle;
+  level.killstreakbundle[#"killstreak_supplypod"] = level.var_934fb97.bundle;
   level.var_dc8edcba = &function_827486aa;
   setupcallbacks();
   setupclientfields();

@@ -70,15 +70,15 @@ function_e312ad4d(str_team, var_f8de2ad5, var_82706add) {
 
     if(var_4491b72a.size) {
       spawner = array::random(var_4491b72a);
-      spawn_point[# "angles"] = spawner.angles;
-      spawn_point[# "origin"] = spawner.origin;
-      spawn_point[# "spawner"] = spawner;
+      spawn_point[#"angles"] = spawner.angles;
+      spawn_point[#"origin"] = spawner.origin;
+      spawn_point[#"spawner"] = spawner;
       return spawn_point;
     } else if(var_4765679a.size) {
       spawner = array::random(var_4765679a);
-      spawn_point[# "angles"] = spawner.angles;
-      spawn_point[# "origin"] = spawner.origin;
-      spawn_point[# "spawner"] = spawner;
+      spawn_point[#"angles"] = spawner.angles;
+      spawn_point[#"origin"] = spawner.origin;
+      spawn_point[#"spawner"] = spawner;
       return spawn_point;
     }
 

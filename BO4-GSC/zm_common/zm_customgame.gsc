@@ -1531,8 +1531,8 @@ function_8abf3abd() {
 }
 
 function_99c0cc77() {
-  if(!function_901b751c(#"zmequipmentisenabled") && isDefined(self.slot_weapons[# "lethal_grenade"])) {
-    self takeweapon(self.slot_weapons[# "lethal_grenade"]);
+  if(!function_901b751c(#"zmequipmentisenabled") && isDefined(self.slot_weapons[#"lethal_grenade"])) {
+    self takeweapon(self.slot_weapons[#"lethal_grenade"]);
   }
 
   if(!function_901b751c(#"zmweaponspistol") && self hasweapon(getweapon(#"pistol_topbreak_t8"))) {}

@@ -313,7 +313,7 @@ function private margwashouldreset(entity) {
 function private margwareactstunaction(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
   var_e369804c = entity astsearch(asmstatename);
-  var_30358842 = animationstatenetworkutility::searchanimationmap(entity, var_e369804c[# "animation"]);
+  var_30358842 = animationstatenetworkutility::searchanimationmap(entity, var_e369804c[#"animation"]);
   closetime = int(getanimlength(var_30358842) * 1000);
   entity function_e146597a(closetime);
   margwareactstunstart(entity);
@@ -325,7 +325,7 @@ function private margwaswipeattackaction(entity, asmstatename) {
 
   if(!isDefined(entity.var_514cf595)) {
     var_d44a2fd7 = entity astsearch(asmstatename);
-    var_cb7794c3 = animationstatenetworkutility::searchanimationmap(entity, var_d44a2fd7[# "animation"]);
+    var_cb7794c3 = animationstatenetworkutility::searchanimationmap(entity, var_d44a2fd7[#"animation"]);
     entity.var_514cf595 = int(getanimlength(var_cb7794c3) * 1000);
   }
 

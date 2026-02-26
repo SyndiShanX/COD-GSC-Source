@@ -33,11 +33,11 @@ function event_handler[level_init] main(eventstruct) {
   level thread postload();
   util::waitforclient(0);
   function_27d5cafd(#"hash_bc5dbc7b5e13b6b", #"hash_433705ff0d359b2e");
-  level._effect[# "darkroom_light"] = # "hash_78e234f940b499a";
+  level._effect[#"darkroom_light"] = # "hash_78e234f940b499a";
 }
 
 function postload() {
-  level._effect[# "hash_2b8b4be2cb5925ab"] = # "hash_194e390fb626282e";
+  level._effect[#"hash_2b8b4be2cb5925ab"] = # "hash_194e390fb626282e";
   function_bdab05e9();
 }
 
@@ -212,7 +212,7 @@ function dof_enable_autofocus() {
     v_eye = self getEye();
     v_fwd = anglesToForward(self getcamangles());
     a_trace = physicstrace(v_eye, v_eye + v_fwd * 4000, (1 * -1, 1 * -1, 1 * -1), (1, 1, 1), self, 1);
-    var_a84275e3 = distance(v_eye, a_trace[# "position"] + v_fwd * 1);
+    var_a84275e3 = distance(v_eye, a_trace[#"position"] + v_fwd * 1);
 
     if(var_a84275e3 < 100) {
       self function_9e574055(2);
@@ -539,7 +539,7 @@ function render_texture_switch_window(localclientnum, oldval, newval, bnewent, b
 function function_70723e25(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     if(!isDefined(self.var_d392b4d1)) {
-      self.var_d392b4d1 = playfxoncamera(fieldname, level._effect[# "hash_2b8b4be2cb5925ab"], (4, 6, 8), (1, -0.05, -0.1), (0, 0, 1));
+      self.var_d392b4d1 = playfxoncamera(fieldname, level._effect[#"hash_2b8b4be2cb5925ab"], (4, 6, 8), (1, -0.05, -0.1), (0, 0, 1));
       waitframe(1);
       self thread cp_post::function_d9475fc(0.95, undefined, undefined, undefined);
     }
@@ -764,7 +764,7 @@ function streamer_handler(localclientnum, oldval, newval, bnewent, binitialsnap,
 
 function darkroom_light(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self.var_23de4c6c = util::playFXOnTag(fieldname, level._effect[# "darkroom_light"], self, "tag_fx");
+    self.var_23de4c6c = util::playFXOnTag(fieldname, level._effect[#"darkroom_light"], self, "tag_fx");
     return;
   }
 

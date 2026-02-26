@@ -271,7 +271,7 @@ function function_d564f5b8() {
   self waittill(#"hash_bf5bfd22f483570");
   effect = getstatuseffect("blurred");
   self status_effect::status_effect_apply(effect, getweapon(#"launcher_standard_t9"), self, undefined, 11000);
-  playFX(level._effect[# "hash_7527861319d5e820"], var_9c77c444.origin);
+  playFX(level._effect[#"hash_7527861319d5e820"], var_9c77c444.origin);
   snd::client_msg("audio_rpg_aftermath_debris_fires");
 }
 
@@ -612,7 +612,7 @@ function function_501002d8(damage_trigger, fx_struct) {
     var_7b1b5529 = damage_trigger waittill(#"damage");
 
     if(var_7b1b5529.mod === "MOD_PROJECTILE_SPLASH") {
-      playFX(level._effect[# "hash_711a6d544750ccfb"], fx_struct.origin + (0, 0, 50));
+      playFX(level._effect[#"hash_711a6d544750ccfb"], fx_struct.origin + (0, 0, 50));
       break;
     }
   }

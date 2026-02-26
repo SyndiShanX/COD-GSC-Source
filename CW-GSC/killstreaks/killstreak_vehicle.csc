@@ -12,7 +12,7 @@
 #namespace killstreak_vehicle;
 
 function init() {
-  level._effect[# "rcbomb_stunned"] = # "hash_622d3cdb93e01de5";
+  level._effect[#"rcbomb_stunned"] = # "hash_622d3cdb93e01de5";
 }
 
 function init_killstreak(bundle) {
@@ -112,7 +112,7 @@ function play_stunned_fx_handler(localclientnum) {
   self endon(#"not_stunned");
 
   while(true) {
-    util::playFXOnTag(localclientnum, level._effect[# "rcbomb_stunned"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"rcbomb_stunned"], self, "tag_origin");
     wait 0.5;
   }
 }

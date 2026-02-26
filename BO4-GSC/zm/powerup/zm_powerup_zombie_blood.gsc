@@ -42,8 +42,8 @@ __init__() {
 }
 
 init_player_zombie_blood_vars() {
-  self.zombie_vars[# "zombie_powerup_zombie_blood_on"] = 0;
-  self.zombie_vars[# "zombie_powerup_zombie_blood_time"] = 30;
+  self.zombie_vars[#"zombie_powerup_zombie_blood_on"] = 0;
+  self.zombie_vars[#"zombie_powerup_zombie_blood_time"] = 30;
 }
 
 grab_zombie_blood(e_player) {
@@ -62,12 +62,12 @@ zombie_blood_powerup(mdl_powerup, e_player) {
     var_9445281 = 30;
   }
 
-  if(!e_player.zombie_vars[# "zombie_powerup_zombie_blood_on"]) {
+  if(!e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"]) {
     e_player val::set("zombie_blood", "ignoreme", 1);
   }
 
-  e_player.zombie_vars[# "zombie_powerup_zombie_blood_time"] = var_9445281;
-  e_player.zombie_vars[# "zombie_powerup_zombie_blood_on"] = 1;
+  e_player.zombie_vars[#"zombie_powerup_zombie_blood_time"] = var_9445281;
+  e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"] = 1;
   e_player setcharacteroutfit(1);
   level notify(#"player_zombie_blood", e_player);
   e_player clientfield::set("" + # "player_zombie_blood_fx", 1);
@@ -87,9 +87,9 @@ zombie_blood_powerup(mdl_powerup, e_player) {
 
   e_player thread watch_zombie_blood_early_exit();
 
-  while(e_player.zombie_vars[# "zombie_powerup_zombie_blood_time"] >= 0) {
+  while(e_player.zombie_vars[#"zombie_powerup_zombie_blood_time"] >= 0) {
     waitframe(1);
-    e_player.zombie_vars[# "zombie_powerup_zombie_blood_time"] -= 0.05;
+    e_player.zombie_vars[#"zombie_powerup_zombie_blood_time"] -= 0.05;
   }
 
   e_player setcharacteroutfit(0);
@@ -99,8 +99,8 @@ zombie_blood_powerup(mdl_powerup, e_player) {
     e_player playSound("vox_plr_" + e_player.characterindex + "_exert_grunt_" + randomintrange(0, 3));
   }
 
-  e_player.zombie_vars[# "zombie_powerup_zombie_blood_on"] = 0;
-  e_player.zombie_vars[# "zombie_powerup_zombie_blood_time"] = 30;
+  e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"] = 0;
+  e_player.zombie_vars[#"zombie_powerup_zombie_blood_time"] = 30;
   e_player._show_solo_hud = 0;
   e_player clientfield::set("" + # "player_zombie_blood_fx", 0);
   e_player val::reset("zombie_blood", "ignoreme");
@@ -115,7 +115,7 @@ watch_zombie_blood_early_exit() {
   self notify(#"early_exit_watch");
   self endon(#"disconnect", #"early_exit_watch", #"zombie_blood_over");
   util::waittill_any_ents_two(self, "player_downed", level, "end_game");
-  self.zombie_vars[# "zombie_powerup_zombie_blood_time"] = -0.05;
+  self.zombie_vars[#"zombie_powerup_zombie_blood_time"] = -0.05;
   self.early_exit = 1;
 }
 
@@ -132,7 +132,7 @@ make_zombie_blood_entity() {
   self setinvisibletoall();
 
   foreach(e_player in getplayers()) {
-    if(e_player.zombie_vars[# "zombie_powerup_zombie_blood_on"]) {
+    if(e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"]) {
       if(isDefined(self.e_unique_player)) {
         if(self.e_unique_player == e_player) {
           self setvisibletoplayer(e_player);

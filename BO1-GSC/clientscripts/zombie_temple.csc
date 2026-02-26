@@ -543,7 +543,7 @@ temple_remove_visionset_caves(i_local_client_num) {
     self thread clientscripts\_zombiemode::zombie_vision_set_remove(level._temple_caves_eclipse_vision_set, 2.0, i_local_client_num);
   }
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
   include_weapon("m1911_zm", false);

@@ -46,13 +46,13 @@ spawner() {
 }
 
 precache() {
-  character\character_op_militia_sniper::precache();
-  character\character_opf_militia_assault_aa_wht::precache();
+    character\character_op_militia_sniper::precache();
+    character\character_opf_militia_assault_aa_wht::precache();
 
-  precacheItem("dragunov");
-  precacheItem("glock");
-  precacheItem("fraggrenade");
+    precacheItem("dragunov");
+    precacheItem("glock");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_rambo::main();
-  maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_rambo::main();
+    maps\_sniper_glint::main();
+    //---------------- }

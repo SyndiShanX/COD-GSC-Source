@@ -106,7 +106,7 @@ function_88228c58() {
 }
 
 function_c6e61ebb(a_ents) {
-  self.entity = a_ents[# "prop 1"];
+  self.entity = a_ents[#"prop 1"];
 }
 
 function_521dc79e() {}
@@ -379,16 +379,16 @@ function_ec4984c3() {
   level flag::set(#"pause_round_timeout");
   zm_bgb_anywhere_but_here::function_886fce8f(0);
   level.var_382a24b0 = 1;
-  level.a_func_score_events[# "damage_points"] = &function_ab30f95c;
-  level.a_func_score_events[# "death"] = &function_704c6738;
+  level.a_func_score_events[#"damage_points"] = &function_ab30f95c;
+  level.a_func_score_events[#"death"] = &function_704c6738;
   level thread apc_restart_retreat();
   level waittilltimeout(120, #"hash_7646638df88a3656");
   music::setmusicstate("none");
   level.musicsystemoverride = 0;
   level flag::clear(#"infinite_round_spawning");
   level flag::clear(#"pause_round_timeout");
-  level.a_func_score_events[# "damage_points"] = undefined;
-  level.a_func_score_events[# "death"] = undefined;
+  level.a_func_score_events[#"damage_points"] = undefined;
+  level.a_func_score_events[#"death"] = undefined;
   level.var_382a24b0 = undefined;
   level flag::clear(#"hash_2923f30473421396");
   level notify(#"hash_355e5e0bbf3760db");
@@ -404,7 +404,7 @@ function_80a40c1c() {
   level endon(#"end_game", #"hash_1d9afa9be4c10160");
 
   while(true) {
-    if(level.zones[# "ice_floe"].is_enabled === 0) {
+    if(level.zones[#"ice_floe"].is_enabled === 0) {
       foreach(e_player in getplayers()) {
         if(e_player istouching(level.var_f7c50c66)) {
           e_player zm_orange_fasttravel_flinger::fling_player(level.var_f7c50c66);

@@ -261,7 +261,7 @@ function_b053b486() {
 drop_to_ground(b_immediate = 0) {
   self endon(#"death");
   s_trace = groundtrace(self.origin + (0, 0, 16), self.origin + (0, 0, -1000), 0, self);
-  var_a75fe4be = s_trace[# "position"];
+  var_a75fe4be = s_trace[#"position"];
 
   if(b_immediate) {
     self.mover moveto(var_a75fe4be, 0.01);
@@ -278,11 +278,11 @@ drop_to_ground(b_immediate = 0) {
 }
 
 jump(scene_ents) {
-  scene_ents[# "homunculus"] endon(#"death");
-  scene_ents[# "homunculus"] waittill(#"jumped");
+  scene_ents[#"homunculus"] endon(#"death");
+  scene_ents[#"homunculus"] waittill(#"jumped");
 
-  if(isDefined(scene_ents[# "homunculus"].mover)) {
-    scene_ents[# "homunculus"].mover movez(40, 0.35);
+  if(isDefined(scene_ents[#"homunculus"].mover)) {
+    scene_ents[#"homunculus"].mover movez(40, 0.35);
   }
 }
 

@@ -677,8 +677,8 @@ on_player_spawned() {
     }
   }
 
-  if(isDefined(self.pers) && isDefined(self.pers[# "lives"])) {
-    self spawn::function_1390f875(self.pers[# "lives"]);
+  if(isDefined(self.pers) && isDefined(self.pers[#"lives"])) {
+    self spawn::function_1390f875(self.pers[#"lives"]);
 
     if(infection::function_74650d7() && self infection::is_infected()) {
       if(function_47851c07()) {
@@ -689,12 +689,12 @@ on_player_spawned() {
         self clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
       }
     } else {
-      if(self.pers[# "lives"] != 1 && !(isDefined(self.var_874448e8) && self.var_874448e8)) {
+      if(self.pers[#"lives"] != 1 && !(isDefined(self.var_874448e8) && self.var_874448e8)) {
         self clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 1);
         self.var_874448e8 = 1;
       }
 
-      if(self.pers[# "lives"] == 1) {
+      if(self.pers[#"lives"] == 1) {
         self clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
       }
     }
@@ -1388,7 +1388,7 @@ player_killed(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitlo
       self clientfield::set_player_uimodel("hudItems.playerOnInfectedPlatoon", 1);
 
       if(level.numlives == 0 && function_47851c07()) {
-        self.pers[# "lives"] = 1;
+        self.pers[#"lives"] = 1;
       }
     }
   }
@@ -1761,8 +1761,8 @@ function_1e150a0b(player) {
   for(index = 0; index < var_9c24b065; index++) {
     var_708a2754 = physicstrace(startpos, endpos, (0, 0, 0), (0, 0, 0), player, 32);
 
-    if(var_708a2754[# "fraction"] < 1) {
-      player setorigin(var_708a2754[# "position"]);
+    if(var_708a2754[#"fraction"] < 1) {
+      player setorigin(var_708a2754[#"position"]);
       return;
     }
 
@@ -1862,11 +1862,11 @@ function_c1471c7c(point) {
   groundtrace = groundtrace(startpoint, endpoint, 0, undefined, 0, 0);
   physicstrace = physicstraceex(startpoint, endpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), undefined, 32);
 
-  if(groundtrace[# "position"][2] > physicstrace[# "position"][2]) {
-    return groundtrace[# "position"];
+  if(groundtrace[#"position"][2] > physicstrace[#"position"][2]) {
+    return groundtrace[#"position"];
   }
 
-  return physicstrace[# "position"];
+  return physicstrace[#"position"];
 }
 
 _teleport_player(origin, angles, var_9914886a = 0) {

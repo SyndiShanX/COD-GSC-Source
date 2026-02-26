@@ -15,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_tortoise_perk_for_level();
-  level._effect[# "perk_tortoise_explosion"] = "zombie/fx8_perk_vic_tort_exp";
+  level._effect[#"perk_tortoise_explosion"] = "zombie/fx8_perk_vic_tort_exp";
   zm_perks::function_f3c80d73("zombie_perk_bottle_tortoise", "zombie_perk_totem_tortoise");
 }
 
@@ -36,6 +36,6 @@ function_cdbbd4f1() {}
 
 function_f92dce50(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[# "perk_tortoise_explosion"], self, " j_spine");
+    util::playFXOnTag(localclientnum, level._effect[#"perk_tortoise_explosion"], self, " j_spine");
   }
 }

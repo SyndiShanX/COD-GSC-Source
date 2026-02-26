@@ -2171,30 +2171,30 @@ function private function_b441e593(var_321b9d8c) {
 
     foreach(var_fdf21313 in var_1856af9d.profiles) {
       var_f3cb5eb6 = [];
-      var_f3cb5eb6[# "firstname"] = var_fdf21313.var_34d094eb;
-      var_f3cb5eb6[# "lastname"] = var_fdf21313.var_705af76d;
-      var_f3cb5eb6[# "middleInitial"] = var_fdf21313.var_24cb87ef;
-      var_f3cb5eb6[# "hash_33186aa99cabddc3"] = var_fdf21313.var_ba5fd550;
-      var_f3cb5eb6[# "dateofbirth"] = var_fdf21313.var_bd730750;
-      var_f3cb5eb6[# "placeOfBirth"] = var_fdf21313.var_d4beb13;
-      var_f3cb5eb6[# "occupation"] = var_fdf21313.occupation;
-      var_f3cb5eb6[# "militaryBackground"] = var_fdf21313.var_bc8da67d;
-      var_f3cb5eb6[# "militaryBackgroundDesc"] = var_fdf21313.var_bf761850;
+      var_f3cb5eb6[#"firstname"] = var_fdf21313.var_34d094eb;
+      var_f3cb5eb6[#"lastname"] = var_fdf21313.var_705af76d;
+      var_f3cb5eb6[#"middleInitial"] = var_fdf21313.var_24cb87ef;
+      var_f3cb5eb6[#"hash_33186aa99cabddc3"] = var_fdf21313.var_ba5fd550;
+      var_f3cb5eb6[#"dateofbirth"] = var_fdf21313.var_bd730750;
+      var_f3cb5eb6[#"placeOfBirth"] = var_fdf21313.var_d4beb13;
+      var_f3cb5eb6[#"occupation"] = var_fdf21313.occupation;
+      var_f3cb5eb6[#"militaryBackground"] = var_fdf21313.var_bc8da67d;
+      var_f3cb5eb6[#"militaryBackgroundDesc"] = var_fdf21313.var_bf761850;
       level.var_408db1a3[var_fdf21313.ref_name] = var_f3cb5eb6;
     }
   }
 
   var_f3cb5eb6 = level.var_408db1a3[var_321b9d8c];
   namespace_6f1d35e1::function_5d2e6f6a(0);
-  namespace_6f1d35e1::function_14291ddf(var_f3cb5eb6[# "hash_33186aa99cabddc3"]);
-  namespace_6f1d35e1::function_ca5c7f26("firstName", var_f3cb5eb6[# "firstname"]);
-  namespace_6f1d35e1::function_ca5c7f26("lastName", var_f3cb5eb6[# "lastname"]);
-  namespace_6f1d35e1::function_ca5c7f26("middleInitial", var_f3cb5eb6[# "middleInitial"]);
-  namespace_6f1d35e1::function_ca5c7f26("dateOfBirth", var_f3cb5eb6[# "dateofbirth"]);
-  namespace_6f1d35e1::function_ca5c7f26("placeOfBirth", var_f3cb5eb6[# "placeOfBirth"]);
-  namespace_6f1d35e1::function_ca5c7f26("occupation", var_f3cb5eb6[# "occupation"]);
-  namespace_6f1d35e1::function_ca5c7f26("militaryBackground", var_f3cb5eb6[# "militaryBackground"]);
-  namespace_6f1d35e1::function_ca5c7f26("militaryBackgroundDesc", var_f3cb5eb6[# "militaryBackgroundDesc"]);
+  namespace_6f1d35e1::function_14291ddf(var_f3cb5eb6[#"hash_33186aa99cabddc3"]);
+  namespace_6f1d35e1::function_ca5c7f26("firstName", var_f3cb5eb6[#"firstname"]);
+  namespace_6f1d35e1::function_ca5c7f26("lastName", var_f3cb5eb6[#"lastname"]);
+  namespace_6f1d35e1::function_ca5c7f26("middleInitial", var_f3cb5eb6[#"middleInitial"]);
+  namespace_6f1d35e1::function_ca5c7f26("dateOfBirth", var_f3cb5eb6[#"dateofbirth"]);
+  namespace_6f1d35e1::function_ca5c7f26("placeOfBirth", var_f3cb5eb6[#"placeOfBirth"]);
+  namespace_6f1d35e1::function_ca5c7f26("occupation", var_f3cb5eb6[#"occupation"]);
+  namespace_6f1d35e1::function_ca5c7f26("militaryBackground", var_f3cb5eb6[#"militaryBackground"]);
+  namespace_6f1d35e1::function_ca5c7f26("militaryBackgroundDesc", var_f3cb5eb6[#"militaryBackgroundDesc"]);
   namespace_6f1d35e1::function_5d2e6f6a(10);
   function_74996ba9();
 }
@@ -2650,15 +2650,15 @@ function function_a1af304b() {
 function function_58eff8e() {
   level flag::wait_till("level_is_go");
   var_e6a5b638 = [];
-  var_e6a5b638[# "hint_1"] = {
+  var_e6a5b638[#"hint_1"] = {
     #title: # "hash_6999ee32eef23c98", #desc: # "hash_3b2cc0edd97965df"};
-  var_e6a5b638[# "hint_2"] = {
+  var_e6a5b638[#"hint_2"] = {
     #title: # "hash_1f5edbea689845f5", #desc: # "hash_6022086c49a7af24"};
-  var_e6a5b638[# "hint_3"] = {
+  var_e6a5b638[#"hint_3"] = {
     #title: # "hash_662a51ae3cdc2d66", #desc: # "hash_72cbbdedfa805101"};
-  var_e6a5b638[# "hint_list"] = {
+  var_e6a5b638[#"hint_list"] = {
     #title: # "hash_308fd3e60f92b51f", #desc: # "hash_618b20752e4790a2"};
-  var_e6a5b638[# "park_paper"] = {
+  var_e6a5b638[#"park_paper"] = {
     #desc: # "hash_2a6bf1525f1590cd"};
   level.var_31c52203 = getEntArray("translate_trig", "targetname");
 

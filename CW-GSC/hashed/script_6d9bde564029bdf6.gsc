@@ -149,23 +149,23 @@ function event_handler[event_bf57d5bb] function_4540ef25(eventstruct) {
   endpoint = eyepoint + dir;
   traceresult = bulletTrace(eyepoint, endpoint, 1, self);
 
-  if(isDefined(traceresult[# "entity"]) && util::function_fbce7263(traceresult[# "entity"].team, self.team)) {
-    if(traceresult[# "entity"].classname == "player") {
-      if(!(traceresult[# "entity"].var_9ee835dc === 1)) {
+  if(isDefined(traceresult[#"entity"]) && util::function_fbce7263(traceresult[#"entity"].team, self.team)) {
+    if(traceresult[#"entity"].classname == "player") {
+      if(!(traceresult[#"entity"].var_9ee835dc === 1)) {
         playerweapon = undefined;
 
-        if(isDefined(traceresult[# "entity"].weapon)) {
-          playerweapon = traceresult[# "entity"].weapon;
-        } else if(isDefined(traceresult[# "entity"].currentweapon)) {
-          playerweapon = traceresult[# "entity"].currentweapon;
+        if(isDefined(traceresult[#"entity"].weapon)) {
+          playerweapon = traceresult[#"entity"].weapon;
+        } else if(isDefined(traceresult[#"entity"].currentweapon)) {
+          playerweapon = traceresult[#"entity"].currentweapon;
         }
 
-        if(isDefined(traceresult[# "entity"].killstreaktype) && !isarray(traceresult[# "entity"].killstreaktype)) {
-          self playkillstreakthreat(traceresult[# "entity"].killstreaktype);
-          traceresult[# "entity"].var_9ee835dc = 1;
+        if(isDefined(traceresult[#"entity"].killstreaktype) && !isarray(traceresult[#"entity"].killstreaktype)) {
+          self playkillstreakthreat(traceresult[#"entity"].killstreaktype);
+          traceresult[#"entity"].var_9ee835dc = 1;
           self.enemythreattime = gettime();
-        } else if(isDefined(playerweapon) && (isPlayer(traceresult[# "entity"]) || isDefined(traceresult[# "entity"].owner))) {
-          var_24d3b6ca = isPlayer(traceresult[# "entity"]) ? traceresult[# "entity"] : traceresult[# "entity"].owner;
+        } else if(isDefined(playerweapon) && (isPlayer(traceresult[#"entity"]) || isDefined(traceresult[#"entity"].owner))) {
+          var_24d3b6ca = isPlayer(traceresult[#"entity"]) ? traceresult[#"entity"] : traceresult[#"entity"].owner;
           var_9074cacb = function_58c93260(self);
 
           if(dialog_chance("enemyContactChance")) {
@@ -182,7 +182,7 @@ function event_handler[event_bf57d5bb] function_4540ef25(eventstruct) {
             }
 
             self thread function_a48c33ff(killdialog, 2);
-            traceresult[# "entity"].var_9ee835dc = 1;
+            traceresult[#"entity"].var_9ee835dc = 1;
             self.enemythreattime = gettime();
           }
         } else if(dialog_chance("enemyContactChance")) {
@@ -199,10 +199,10 @@ function event_handler[event_bf57d5bb] function_4540ef25(eventstruct) {
       return;
     }
 
-    if(traceresult[# "entity"].classname == "script_vehicle" && isDefined(traceresult[# "entity"].killstreaktype)) {
-      if(!(traceresult[# "entity"].var_9ee835dc === 1)) {
-        self playkillstreakthreat(traceresult[# "entity"].killstreaktype);
-        traceresult[# "entity"].var_9ee835dc = 1;
+    if(traceresult[#"entity"].classname == "script_vehicle" && isDefined(traceresult[#"entity"].killstreaktype)) {
+      if(!(traceresult[#"entity"].var_9ee835dc === 1)) {
+        self playkillstreakthreat(traceresult[#"entity"].killstreaktype);
+        traceresult[#"entity"].var_9ee835dc = 1;
         self.enemythreattime = gettime();
       }
     }

@@ -520,13 +520,13 @@ class class_7da27482 {
 
     if(is_true(params.var_90d2372c)) {
       base_model = # "hash_2b18a5af849da51b";
-      attached_models = [# "outfit_head": # "tag_origin", #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
+      attached_models = [#"outfit_head": # "tag_origin", #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
     } else if(function_bf7bce05()) {
       base_model = function_d5e754c6();
-      attached_models = [# "outfit_head": function_8c6b7af7(params), #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
+      attached_models = [#"outfit_head": function_8c6b7af7(params), #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
     } else {
       base_model = function_b06080fb();
-      attached_models = [# "outfit_head": function_8c6b7af7(params), #"outfit_headgear": function_1978bfeb(), #"outfit_legs": function_cdc02b18(), #"outfit_torso": function_d5e754c6()];
+      attached_models = [#"outfit_head": function_8c6b7af7(params), #"outfit_headgear": function_1978bfeb(), #"outfit_legs": function_cdc02b18(), #"outfit_torso": function_d5e754c6()];
     }
 
     var_9e7c4fde = array(base_model);
@@ -631,10 +631,10 @@ class class_7da27482 {
 
         if(function_bf7bce05()) {
           var_867954ad = character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, outfit_index, 0, _i_mode);
-          var_89610e9c = [# "outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, 0, _i_mode), #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
+          var_89610e9c = [#"outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, 0, _i_mode), #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
         } else {
           var_867954ad = character_customization::function_6bca50af(&function_5d23af5b, var_1d73bad9, outfit_index, var_d92aad5c, _i_mode);
-          var_89610e9c = [# "outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, var_2f1dcdbb, _i_mode), #"outfit_headgear": character_customization::function_6bca50af(&function_6b7000e, var_1d73bad9, outfit_index, var_cb9bcfe7, _i_mode), #"outfit_legs": character_customization::function_6bca50af(&function_cde23658, var_1d73bad9, outfit_index, var_173f7170, _i_mode), #"outfit_torso": character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, outfit_index, var_1f170bc0, _i_mode)];
+          var_89610e9c = [#"outfit_head": character_customization::function_6bca50af(&startquantity, var_1d73bad9, outfit_index, var_2f1dcdbb, _i_mode), #"outfit_headgear": character_customization::function_6bca50af(&function_6b7000e, var_1d73bad9, outfit_index, var_cb9bcfe7, _i_mode), #"outfit_legs": character_customization::function_6bca50af(&function_cde23658, var_1d73bad9, outfit_index, var_173f7170, _i_mode), #"outfit_torso": character_customization::function_6bca50af(&function_92ea4100, var_1d73bad9, outfit_index, var_1f170bc0, _i_mode)];
         }
 
         var_cf2f5fb7 = array(var_867954ad);
@@ -1463,7 +1463,7 @@ function function_bee62aa1(character) {
 }
 
 function private preinit() {
-  level.model_type_bones = [# "outfit_head": "", #"outfit_headgear": "", #"outfit_legs": "", #"outfit_torso": ""];
+  level.model_type_bones = [#"outfit_head": "", #"outfit_headgear": "", #"outfit_legs": "", #"outfit_torso": ""];
 
   if(!isDefined(level.custom_characters)) {
     level.custom_characters = [];
@@ -1989,11 +1989,11 @@ function private update_model_rotation_for_right_stick(localclientnum, var_d0b01
 
       if(isDefined(model)) {
         pos = getcontrollerposition(data_lcn);
-        change = pos[# "rightstick"][0];
+        change = pos[#"rightstick"][0];
 
         if(!gamepadusedlast(localclientnum)) {
           pos = getxcammousecontrol(data_lcn);
-          change -= pos[# "yaw"];
+          change -= pos[#"yaw"];
         }
 
         s_align = {

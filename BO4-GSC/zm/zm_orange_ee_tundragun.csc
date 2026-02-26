@@ -10,9 +10,9 @@
 init() {}
 
 play_dynamite_explosion_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "dynamite_explosion"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"dynamite_explosion"], self, "tag_origin");
 }
 
 function_ee32b1b8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "hash_281c546a716f0d89"], self, "j_spine4");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_281c546a716f0d89"], self, "j_spine4");
 }

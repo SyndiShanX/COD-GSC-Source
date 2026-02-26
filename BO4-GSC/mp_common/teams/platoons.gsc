@@ -172,7 +172,7 @@ function_4b016b57() {
     return;
   }
 
-  team = self.pers[# "team"];
+  team = self.pers[#"team"];
   platoon = getteamplatoon(team);
 
   if(platoon != # "invalid" && platoon != # "none") {

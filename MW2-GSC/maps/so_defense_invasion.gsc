@@ -12,69 +12,69 @@
 
 // --------------------------------------------------------------------------------- //	Init
 // --------------------------------------------------------------------------------- main() {
-  maps\invasion_precache::main();
-  maps\invasion_fx::main();
-  maps\createart\invasion_art::main();
+maps\invasion_precache::main();
+maps\invasion_fx::main();
+maps\createart\invasion_art::main();
 
-  precachestring(&"SO_DEFENSE_INVASION_OBJ_REGULAR");
-  precachestring(&"SO_DEFENSE_INVASION_OBJ_HARDENED");
-  precachestring(&"SO_DEFENSE_INVASION_OBJ_VETERAN");
-  precachestring(&"SO_DEFENSE_INVASION_WAVE_1");
-  precachestring(&"SO_DEFENSE_INVASION_WAVE_2");
-  precachestring(&"SO_DEFENSE_INVASION_WAVE_3");
-  precachestring(&"SO_DEFENSE_INVASION_WAVE_4");
-  precachestring(&"SO_DEFENSE_INVASION_WAVE_5");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_20");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_30");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_30_SKILLED");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_40");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_40_SKILLED");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_HELLFIRE");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_BTR80");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_HELI");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_HELIS");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_BLANK");
-  precachestring(&"SO_DEFENSE_INVASION_ALERT_COMING");
-  precachestring(&"SO_DEFENSE_INVASION_HUNTERS");
-  precachestring(&"SO_DEFENSE_INVASION_BTR80");
-  precachestring(&"SO_DEFENSE_INVASION_HELICOPTERS");
-  precachestring(&"SO_DEFENSE_INVASION_UAV_SPOTTED");
-  precachestring(&"SO_DEFENSE_INVASION_UAV_TARGETTING");
-  precachestring(&"SO_DEFENSE_INVASION_KILLS_TURRET");
-  precachestring(&"SO_DEFENSE_INVASION_KILLS_BTR80");
-  precachestring(&"SO_DEFENSE_INVASION_KILLS_HELI");
+precachestring(&"SO_DEFENSE_INVASION_OBJ_REGULAR");
+precachestring(&"SO_DEFENSE_INVASION_OBJ_HARDENED");
+precachestring(&"SO_DEFENSE_INVASION_OBJ_VETERAN");
+precachestring(&"SO_DEFENSE_INVASION_WAVE_1");
+precachestring(&"SO_DEFENSE_INVASION_WAVE_2");
+precachestring(&"SO_DEFENSE_INVASION_WAVE_3");
+precachestring(&"SO_DEFENSE_INVASION_WAVE_4");
+precachestring(&"SO_DEFENSE_INVASION_WAVE_5");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_20");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_30");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_30_SKILLED");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_40");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_40_SKILLED");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_HELLFIRE");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_BTR80");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_HELI");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_HELIS");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_BLANK");
+precachestring(&"SO_DEFENSE_INVASION_ALERT_COMING");
+precachestring(&"SO_DEFENSE_INVASION_HUNTERS");
+precachestring(&"SO_DEFENSE_INVASION_BTR80");
+precachestring(&"SO_DEFENSE_INVASION_HELICOPTERS");
+precachestring(&"SO_DEFENSE_INVASION_UAV_SPOTTED");
+precachestring(&"SO_DEFENSE_INVASION_UAV_TARGETTING");
+precachestring(&"SO_DEFENSE_INVASION_KILLS_TURRET");
+precachestring(&"SO_DEFENSE_INVASION_KILLS_BTR80");
+precachestring(&"SO_DEFENSE_INVASION_KILLS_HELI");
 
-  precacheItem("smoke_grenade_american");
-  precacheItem("remote_missile_not_player_invasion");
-  precacheModel("weapon_stinger_obj");
-  precacheModel("weapon_uav_control_unit_obj");
-  precacheItem("flash_grenade");
+precacheItem("smoke_grenade_american");
+precacheItem("remote_missile_not_player_invasion");
+precacheModel("weapon_stinger_obj");
+precacheModel("weapon_uav_control_unit_obj");
+precacheItem("flash_grenade");
 
-  precacheItem("zippy_rockets");
-  precacheItem("stinger_speedy");
+precacheItem("zippy_rockets");
+precacheItem("stinger_speedy");
 
-  add_start("so_defense", ::start_so_defense);
+add_start("so_defense", ::start_so_defense);
 
-  maps\_attack_heli::preLoad();
+maps\_attack_heli::preLoad();
 
-  maps\_load::main();
+maps\_load::main();
 
-  thread maps\invasion_amb::main();
-  maps\invasion_anim::main_anim();
+thread maps\invasion_amb::main();
+maps\invasion_anim::main_anim();
 
-  maps\_compass::setupMiniMap("compass_map_invasion");
+maps\_compass::setupMiniMap("compass_map_invasion");
 }
 
 // --------------------------------------------------------------------------------- //	Challenge Initializations
 // --------------------------------------------------------------------------------- start_so_defense() {
-  so_defense_init();
-  so_defense_challenge_prep();
-  so_defense_wave_1();
-  so_defense_wave_2();
-  so_defense_wave_3();
-  so_defense_wave_4(true);
-  so_defense_wave_5(true);
-  so_defense_challenge_complete();
+so_defense_init();
+so_defense_challenge_prep();
+so_defense_wave_1();
+so_defense_wave_2();
+so_defense_wave_3();
+so_defense_wave_4(true);
+so_defense_wave_5(true);
+so_defense_challenge_complete();
 }
 
 so_defense_init() {
@@ -204,14 +204,14 @@ so_defense_setup_radio_dialog() {
 
 // --------------------------------------------------------------------------------- //	Challenge Waves
 // --------------------------------------------------------------------------------- so_defense_challenge_prep() {
-  thread enable_hellfire_attack();
-  pause_hellfire_attack();
+thread enable_hellfire_attack();
+pause_hellfire_attack();
 
-  thread enable_nates_exploders();
+thread enable_nates_exploders();
 
-  thread fade_challenge_in();
+thread fade_challenge_in();
 
-  wait so_standard_wait();
+wait so_standard_wait();
 }
 
 so_defense_wave_1(force_wave) {
@@ -373,13 +373,13 @@ custom_eog_summary() {
 
 // --------------------------------------------------------------------------------- //	Enable/Disable events
 // --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_nates_exploders() {
-  thread fire_off_exploder(getent("north_side_low", "targetname"));
-  thread fire_off_exploder(getent("north_side_high", "targetname"));
-  thread fire_off_exploder(getent("west_side", "targetname"));
+thread fire_off_exploder(getent("north_side_low", "targetname"));
+thread fire_off_exploder(getent("north_side_high", "targetname"));
+thread fire_off_exploder(getent("west_side", "targetname"));
 }
 
 // --------------------------------------------------------------------------------- enable_smoke_wave_north(dialog_wait) {
-  create_smoke_wave("magic_smoke_grenade_north", dialog_wait);
+create_smoke_wave("magic_smoke_grenade_north", dialog_wait);
 }
 
 enable_smoke_wave_south(dialog_wait) {
@@ -387,7 +387,7 @@ enable_smoke_wave_south(dialog_wait) {
 }
 
 // --------------------------------------------------------------------------------- enable_hunter_truck_enemies_bank() {
-  create_hunter_truck_enemies("truck_north_right");
+create_hunter_truck_enemies("truck_north_right");
 }
 
 enable_hunter_truck_enemies_road() {
@@ -395,7 +395,7 @@ enable_hunter_truck_enemies_road() {
 }
 
 // --------------------------------------------------------------------------------- enable_btr80_circling_street() {
-  create_btr80("nate_attacker_left");
+create_btr80("nate_attacker_left");
 }
 
 enable_btr80_circling_parking_lot() {
@@ -403,7 +403,7 @@ enable_btr80_circling_parking_lot() {
 }
 
 // --------------------------------------------------------------------------------- enable_hunter_enemy_refill(refill_at, min_fill, max_fill, refill_total) {
-  hunter_enemies_refill(refill_at, min_fill, max_fill, refill_total);
+hunter_enemies_refill(refill_at, min_fill, max_fill, refill_total);
 }
 
 enable_hunter_enemy_group_bank(enemy_count) {
@@ -423,7 +423,7 @@ enable_hunter_enemy_group_burger_town(enemy_count) {
 }
 
 // --------------------------------------------------------------------------------- enable_hellfire_attack() {
-  hellfire_attack_start();
+hellfire_attack_start();
 }
 
 disable_hellfire_attack() {
@@ -439,7 +439,7 @@ unpause_hellfire_attack() {
 }
 
 // --------------------------------------------------------------------------------- enable_attack_heli_everywhere(wait_time) {
-  create_attack_heli("kill_heli", "attack_heli_circle_node", wait_time);
+create_attack_heli("kill_heli", "attack_heli_circle_node", wait_time);
 }
 
 enable_attack_heli_north(wait_time) {

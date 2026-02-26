@@ -800,57 +800,57 @@ checkForFriendlies(missileTarget, radiusSize) {
 //		Health Functions
 //
 ///------------------------------------------------------ Callback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
-  if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner)) {
-    return;
-  }
-  if(self.health <= 0) {
-    return;
-  }
-  switch (weapon) {
-    case "ac130_105mm_mp":
-    case "ac130_40mm_mp":
-    case "stinger_mp":
-    case "javelin_mp":
-    case "remotemissile_projectile_mp":
-      self.largeProjectileDamage = true;
-      damage = self.maxhealth + 1;
-      break;
-    case "rpg_mp":
-    case "at4_mp":
-      self.largeProjectileDamage = true;
-      damage = self.maxhealth - 900;
-      break;
-    default:
-      if(weapon != "none")
-        damage = Int(damage / 2);
-      self.largeProjectileDamage = false;
-      break;
-  }
+if((attacker == self || (isDefined(attacker.pers) && attacker.pers["team"] == self.team) && level.teamBased) && (attacker != self.owner)) {
+  return;
+}
+if(self.health <= 0) {
+  return;
+}
+switch (weapon) {
+  case "ac130_105mm_mp":
+  case "ac130_40mm_mp":
+  case "stinger_mp":
+  case "javelin_mp":
+  case "remotemissile_projectile_mp":
+    self.largeProjectileDamage = true;
+    damage = self.maxhealth + 1;
+    break;
+  case "rpg_mp":
+  case "at4_mp":
+    self.largeProjectileDamage = true;
+    damage = self.maxhealth - 900;
+    break;
+  default:
+    if(weapon != "none")
+      damage = Int(damage / 2);
+    self.largeProjectileDamage = false;
+    break;
+}
 
-  attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
+attacker maps\mp\gametypes\_damagefeedback::updateDamageFeedback("");
 
-  if(isPlayer(attacker) && attacker _hasPerk("specialty_armorpiercing")) {
-    damageAdd = int(damage * level.armorPiercingMod);
-    damage += damageAdd;
-  }
+if(isPlayer(attacker) && attacker _hasPerk("specialty_armorpiercing")) {
+  damageAdd = int(damage * level.armorPiercingMod);
+  damage += damageAdd;
+}
 
-  if(self.health <= damage) {
-    if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
-      thread teamPlayerCardSplash("callout_destroyed_harrier", attacker);
-      attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 300);
-      thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, meansOfDeath);
-      attacker notify("destroyed_killstreak");
-    }
-
-    self notify("death");
+if(self.health <= damage) {
+  if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
+    thread teamPlayerCardSplash("callout_destroyed_harrier", attacker);
+    attacker thread maps\mp\gametypes\_rank::giveRankXP("kill", 300);
+    thread maps\mp\gametypes\_missions::vehicleKilled(self.owner, self, undefined, attacker, damage, meansOfDeath);
+    attacker notify("destroyed_killstreak");
   }
 
-  if(self.health - damage <= 900 && (!isDefined(self.smoking) || !self.smoking)) {
-    self thread playDamageEfx();
-    self.smoking = true;
-  }
+  self notify("death");
+}
 
-  self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
+if(self.health - damage <= 900 && (!isDefined(self.smoking) || !self.smoking)) {
+  self thread playDamageEfx();
+  self.smoking = true;
+}
+
+self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
 }
 
 playDamageEfx() {

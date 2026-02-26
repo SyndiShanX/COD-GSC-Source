@@ -39,11 +39,11 @@ spawner() {
 }
 
 precache() {
-  character\character_op_arctic_sniper::precache();
+    character\character_op_arctic_sniper::precache();
 
-  precacheItem("dragunov_arctic");
-  precacheItem("usp");
-  precacheItem("fraggrenade");
+    precacheItem("dragunov_arctic");
+    precacheItem("usp");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

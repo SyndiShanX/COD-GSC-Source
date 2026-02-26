@@ -21,9 +21,9 @@ init_clientfield() {
   clientfield::register("toplayer", "" + # "pegasus_shellshock", 16000, 1, "int", &function_e83bf3a, 0, 0);
   clientfield::register("toplayer", "" + # "waterfall_passthrough", 16000, 1, "int", &function_11d62eb0, 0, 0);
   clientfield::register("world", "" + # "hash_28eb5e403f599ce2", 17000, 1, "int", &function_6c40f793, 0, 0);
-  level._effect[# "hash_38dbf4f346c0b609"] = # "hash_66e87f89740f4b2c";
-  level._effect[# "crystal_explosion"] = # "hash_6e87fbd77320ada5";
-  level._effect[# "spartoi_charged"] = # "hash_1a06427eff8dfe13";
+  level._effect[#"hash_38dbf4f346c0b609"] = # "hash_66e87f89740f4b2c";
+  level._effect[#"crystal_explosion"] = # "hash_6e87fbd77320ada5";
+  level._effect[#"spartoi_charged"] = # "hash_1a06427eff8dfe13";
 }
 
 function_56b9111c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {}
@@ -49,11 +49,11 @@ function_e83bf3a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 function_417c12e1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self util::playFXOnTag(localclientnum, level._effect[# "hash_38dbf4f346c0b609"], self, "tag_origin");
+  self util::playFXOnTag(localclientnum, level._effect[#"hash_38dbf4f346c0b609"], self, "tag_origin");
 }
 
 crystal_explosion_func(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self util::playFXOnTag(localclientnum, level._effect[# "crystal_explosion"], self, "tag_origin");
+  self util::playFXOnTag(localclientnum, level._effect[#"crystal_explosion"], self, "tag_origin");
   playSound(localclientnum, #"hash_66b733441d74cd21", self.origin);
 }
 

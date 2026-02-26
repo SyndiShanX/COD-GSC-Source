@@ -357,8 +357,8 @@ step_4_cleanup(var_a276c861, var_19e802fa) {
 function_d3351bf7(a_ents) {
   wait 5;
 
-  if(isDefined(a_ents[# "kraken_tentacle"])) {
-    a_ents[# "kraken_tentacle"] delete();
+  if(isDefined(a_ents[#"kraken_tentacle"])) {
+    a_ents[#"kraken_tentacle"] delete();
   }
 
   scene::remove_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &function_d3351bf7, "done");
@@ -390,7 +390,7 @@ function_a8fff4b0() {
 spawn_tricannon(a_ents) {
   if(self.targetname !== # "offering_scene") {
     exploder::exploder(level.var_f3abf34a.str_exploder);
-    mdl_tricannon = a_ents[# "kraken_weapon_drop"];
+    mdl_tricannon = a_ents[#"kraken_weapon_drop"];
     mdl_tricannon clientfield::set("" + # "despawn_fx", 1);
     mdl_tricannon waittill(#"kraken_dropped");
     mdl_tricannon playSound(#"hash_70efc268d0becb47");

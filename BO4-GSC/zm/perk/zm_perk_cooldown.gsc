@@ -48,11 +48,11 @@ function_14afd300() {
     return;
   }
 
-  level._effect[# "divetonuke_light"] = # "hash_2225287695ddf9c9";
-  level.machine_assets[# "specialty_cooldown"] = spawnStruct();
-  level.machine_assets[# "specialty_cooldown"].weapon = getweapon("zombie_perk_bottle_cooldown");
-  level.machine_assets[# "specialty_cooldown"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_cooldown"].on_model = "p7_zm_vending_nuke";
+  level._effect[#"divetonuke_light"] = # "hash_2225287695ddf9c9";
+  level.machine_assets[#"specialty_cooldown"] = spawnStruct();
+  level.machine_assets[#"specialty_cooldown"].weapon = getweapon("zombie_perk_bottle_cooldown");
+  level.machine_assets[#"specialty_cooldown"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_cooldown"].on_model = "p7_zm_vending_nuke";
 }
 
 function_eaa4f1a1() {}
@@ -73,7 +73,7 @@ function_cf203b00(use_trigger, perk_machine, bump_trigger, collision) {
 }
 
 function_8ba0e035() {
-  level._effect[# "divetonuke_light"] = # "hash_2225287695ddf9c9";
+  level._effect[#"divetonuke_light"] = # "hash_2225287695ddf9c9";
 }
 
 function_44cf89d3() {}

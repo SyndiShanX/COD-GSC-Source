@@ -23,13 +23,13 @@ function register_burn(str_type, n_dps, n_duration, var_f472bfc, var_5713c703) {
     level.var_981dd9cf = array(level.var_981dd9cf);
   }
 
-  if(!isDefined(level.var_981dd9cf[# "burn"])) {
-    level.var_981dd9cf[# "burn"] = [];
-  } else if(!isarray(level.var_981dd9cf[# "burn"])) {
-    level.var_981dd9cf[# "burn"] = array(level.var_981dd9cf[# "burn"]);
+  if(!isDefined(level.var_981dd9cf[#"burn"])) {
+    level.var_981dd9cf[#"burn"] = [];
+  } else if(!isarray(level.var_981dd9cf[#"burn"])) {
+    level.var_981dd9cf[#"burn"] = array(level.var_981dd9cf[#"burn"]);
   }
 
-  level.var_981dd9cf[# "burn"][str_type] = {
+  level.var_981dd9cf[#"burn"][str_type] = {
     #n_dps: n_dps, #n_duration: n_duration, #var_f472bfc: var_f472bfc, #var_5713c703: var_5713c703
   };
 }
@@ -39,7 +39,7 @@ function burn(str_type, e_attacker, weapon, var_477abb8f) {
     return;
   }
 
-  if(!isDefined(level.var_981dd9cf) || !isDefined(level.var_981dd9cf[# "burn"]) || !isDefined(level.var_981dd9cf[# "burn"][str_type])) {
+  if(!isDefined(level.var_981dd9cf) || !isDefined(level.var_981dd9cf[#"burn"]) || !isDefined(level.var_981dd9cf[#"burn"][str_type])) {
     assertmsg("<dev string:x38>" + str_type + "<dev string:x42>");
     return;
   }
@@ -56,7 +56,7 @@ function burn(str_type, e_attacker, weapon, var_477abb8f) {
     var_cfb3f538 = 1;
   }
 
-  s_burn = level.var_981dd9cf[# "burn"][str_type];
+  s_burn = level.var_981dd9cf[#"burn"][str_type];
 
   if(!isDefined(self.var_88421cc2[str_type])) {
     self.var_88421cc2[str_type] = {
@@ -122,7 +122,7 @@ function private function_8aefaae3(s_burn) {
       if(isDefined(var_39d0f0a8.var_477abb8f)) {
         n_dps = var_39d0f0a8.var_477abb8f;
       } else {
-        n_dps = level.var_981dd9cf[# "burn"][str_type].n_dps;
+        n_dps = level.var_981dd9cf[#"burn"][str_type].n_dps;
       }
 
       if(n_time_remaining > 1) {
@@ -276,13 +276,13 @@ function register_slowdown(str_type, n_rate, n_duration = -1) {
     level.var_981dd9cf = array(level.var_981dd9cf);
   }
 
-  if(!isDefined(level.var_981dd9cf[# "slow"])) {
-    level.var_981dd9cf[# "slow"] = [];
-  } else if(!isarray(level.var_981dd9cf[# "slow"])) {
-    level.var_981dd9cf[# "slow"] = array(level.var_981dd9cf[# "slow"]);
+  if(!isDefined(level.var_981dd9cf[#"slow"])) {
+    level.var_981dd9cf[#"slow"] = [];
+  } else if(!isarray(level.var_981dd9cf[#"slow"])) {
+    level.var_981dd9cf[#"slow"] = array(level.var_981dd9cf[#"slow"]);
   }
 
-  level.var_981dd9cf[# "slow"][str_type] = {
+  level.var_981dd9cf[#"slow"][str_type] = {
     #n_rate: n_rate, #n_duration: n_duration
   };
 }
@@ -300,7 +300,7 @@ function slowdown(str_type, var_a47cf2b2, callback) {
   level endon(#"end_game");
   self endoncallback(&function_fe7a7d5b, #"starting_slowdown_ai", #"death");
 
-  if(!isDefined(level.var_981dd9cf) || !isDefined(level.var_981dd9cf[# "slow"]) || !isDefined(level.var_981dd9cf[# "slow"][str_type])) {
+  if(!isDefined(level.var_981dd9cf) || !isDefined(level.var_981dd9cf[#"slow"]) || !isDefined(level.var_981dd9cf[#"slow"][str_type])) {
     assertmsg("<dev string:x76>" + str_type + "<dev string:x84>");
     return;
   }
@@ -311,7 +311,7 @@ function slowdown(str_type, var_a47cf2b2, callback) {
     self.a_n_slowdown_timeouts = array(self.a_n_slowdown_timeouts);
   }
 
-  s_slowdown = level.var_981dd9cf[# "slow"][str_type];
+  s_slowdown = level.var_981dd9cf[#"slow"][str_type];
   n_time = gettime();
   n_timeout = n_time + int(s_slowdown.n_duration * 1000);
 
@@ -330,7 +330,7 @@ function slowdown(str_type, var_a47cf2b2, callback) {
       if(str_index == str_type && isDefined(var_a47cf2b2)) {
         n_rate = var_a47cf2b2;
       } else {
-        n_rate = level.var_981dd9cf[# "slow"][str_index].n_rate;
+        n_rate = level.var_981dd9cf[#"slow"][str_index].n_rate;
       }
 
       if(n_rate < n_lowest_rate) {
@@ -340,7 +340,7 @@ function slowdown(str_type, var_a47cf2b2, callback) {
     }
 
     if(isDefined(str_lowest_type)) {
-      var_dc1625a7 = level.var_981dd9cf[# "slow"][str_lowest_type];
+      var_dc1625a7 = level.var_981dd9cf[#"slow"][str_lowest_type];
       var_e489fea = self.a_n_slowdown_timeouts[str_lowest_type].timeout;
       self asmsetanimationrate(n_lowest_rate);
 
@@ -371,8 +371,8 @@ function private function_e01e1ea1() {
   n_time = gettime();
 
   foreach(str_index, var_94aa4140 in self.a_n_slowdown_timeouts) {
-    if(isDefined(level.var_981dd9cf[# "slow"][str_index]) && isDefined(level.var_981dd9cf[# "slow"]) && isDefined(level.var_981dd9cf) && isDefined(var_94aa4140.timeout) && isDefined(level.var_981dd9cf[# "slow"][str_index].n_duration)) {
-      if(level.var_981dd9cf[# "slow"][str_index].n_duration != -1 && var_94aa4140.timeout <= n_time || var_94aa4140.timeout == -1) {
+    if(isDefined(level.var_981dd9cf[#"slow"][str_index]) && isDefined(level.var_981dd9cf[#"slow"]) && isDefined(level.var_981dd9cf) && isDefined(var_94aa4140.timeout) && isDefined(level.var_981dd9cf[#"slow"][str_index].n_duration)) {
+      if(level.var_981dd9cf[#"slow"][str_index].n_duration != -1 && var_94aa4140.timeout <= n_time || var_94aa4140.timeout == -1) {
         callback = self.a_n_slowdown_timeouts[str_index].callback;
         self.a_n_slowdown_timeouts[str_index] = undefined;
 

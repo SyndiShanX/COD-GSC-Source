@@ -85,10 +85,10 @@ function gadget_reset(gadgetweapon, changedclass, roundbased, firstround) {
     if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers["held_gadgets_power"][gadgetweapon])) {
       self gadgetpowerset(slot, self.pers["held_gadgets_power"][gadgetweapon]);
     } else {
-      if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[# "hash_c35f137f"]) && isDefined(self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]])) {
-        self gadgetpowerset(slot, self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]]);
-      } else if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[# "hash_65987563"]) && isDefined(self.pers["held_gadgets_power"][self.pers[# "hash_65987563"]])) {
-        self gadgetpowerset(slot, self.pers["held_gadgets_power"][self.pers[# "hash_65987563"]]);
+      if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[#"hash_c35f137f"]) && isDefined(self.pers["held_gadgets_power"][self.pers[#"hash_c35f137f"]])) {
+        self gadgetpowerset(slot, self.pers["held_gadgets_power"][self.pers[#"hash_c35f137f"]]);
+      } else if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[#"hash_65987563"]) && isDefined(self.pers["held_gadgets_power"][self.pers[#"hash_65987563"]])) {
+        self gadgetpowerset(slot, self.pers["held_gadgets_power"][self.pers[#"hash_65987563"]]);
       }
     }
     resetonclasschange = changedclass && gadgetweapon.gadget_power_reset_on_class_change;

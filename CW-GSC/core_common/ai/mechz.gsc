@@ -60,7 +60,7 @@ function init() {
   clientfield::register("actor", "mechz_long_jump", 1, 1, "counter");
   clientfield::register("actor", "mechz_jetpack_explosion", 1, 1, "int");
   clientfield::register("actor", "mechz_face", 1, 3, "int");
-  level.var_92e56a0f[# "mechz"] = &namespace_8681f0e2::function_669e8e27;
+  level.var_92e56a0f[#"mechz"] = &namespace_8681f0e2::function_669e8e27;
 }
 
 function finalize() {
@@ -968,7 +968,7 @@ function private function_3b8b6e80() {
   self.var_1df3d140 linkto(self, "tag_flamethrower_fx");
   self thread weaponobjects::watchweaponobjectspawn();
   self.pers = [];
-  self.pers[# "team"] = self.team;
+  self.pers[#"team"] = self.team;
   self destructserverutils::togglespawngibs(self, 1);
   self.var_28621cf4 = "j_neck";
   self.var_e5365d8a = (0, 0, 6);

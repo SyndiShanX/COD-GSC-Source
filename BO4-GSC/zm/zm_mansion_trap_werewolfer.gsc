@@ -40,7 +40,7 @@ __init__() {
     return;
   }
 
-  level._effect[# "werewolfer_impact"] = # "hash_6e44fde5d49cfc9b";
+  level._effect[#"werewolfer_impact"] = # "hash_6e44fde5d49cfc9b";
   zm_traps::register_trap_basic_info("werewolfer", &function_670dda89, &zm_trap_electric::trap_audio);
   zm_traps::register_trap_damage("werewolfer", &function_436d9a24, &ai_damage);
   level flag::init(#"hash_2287cf5d6310237e");

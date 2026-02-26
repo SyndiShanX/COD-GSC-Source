@@ -37,7 +37,7 @@ fx_think(localclientnum) {
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "grenade_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"grenade_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

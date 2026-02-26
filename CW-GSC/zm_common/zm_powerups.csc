@@ -15,14 +15,14 @@ function init() {
   }
 
   add_zombie_powerup("insta_kill_ug", "powerup_instant_kill_ug", 1);
-  level._effect[# "powerup_on_caution"] = # "zombie/fx_powerup_on_caution_zmb";
-  level._effect[# "hash_216d76ce6f19d51c"] = # "hash_2e09347c65fb17c1";
-  level._effect[# "powerup_grabbed_caution"] = # "zombie/fx_powerup_grab_caution_zmb";
+  level._effect[#"powerup_on_caution"] = # "zombie/fx_powerup_on_caution_zmb";
+  level._effect[#"hash_216d76ce6f19d51c"] = # "hash_2e09347c65fb17c1";
+  level._effect[#"powerup_grabbed_caution"] = # "zombie/fx_powerup_grab_caution_zmb";
 
   if(is_true(level.using_zombie_powerups)) {
-    level._effect[# "powerup_on_red"] = # "zombie/fx_powerup_on_red_zmb";
-    level._effect[# "hash_68ab4922f64db792"] = # "hash_62b15f4f400643ab";
-    level._effect[# "powerup_grabbed_red"] = # "zombie/fx_powerup_grab_red_zmb";
+    level._effect[#"powerup_on_red"] = # "zombie/fx_powerup_on_red_zmb";
+    level._effect[#"hash_68ab4922f64db792"] = # "hash_62b15f4f400643ab";
+    level._effect[#"powerup_grabbed_red"] = # "zombie/fx_powerup_grab_red_zmb";
   }
 
   clientfield::register("scriptmover", "powerup_fx", 1, 3, "int", &powerup_fx_callback, 0, 0);
@@ -116,10 +116,10 @@ function powerup_fx_callback(localclientnum, oldval, newval, bnewent, binitialsn
       str_fx = # "hash_159f72c30fdda87b";
       break;
     case 3:
-      str_fx = level._effect[# "powerup_on_red"];
+      str_fx = level._effect[#"powerup_on_red"];
       break;
     case 4:
-      str_fx = level._effect[# "powerup_on_caution"];
+      str_fx = level._effect[#"powerup_on_caution"];
       break;
     default:
       return;
@@ -139,10 +139,10 @@ function function_618b5680(localclientnum, oldval, newval, bnewent, binitialsnap
       str_fx = # "hash_394b4cd00458a48b";
       break;
     case 3:
-      str_fx = level._effect[# "hash_68ab4922f64db792"];
+      str_fx = level._effect[#"hash_68ab4922f64db792"];
       break;
     case 4:
-      str_fx = level._effect[# "hash_216d76ce6f19d51c"];
+      str_fx = level._effect[#"hash_216d76ce6f19d51c"];
     default:
       return;
   }
@@ -159,10 +159,10 @@ function function_9f7265fd(localclientnum, oldval, newval, bnewent, binitialsnap
       str_fx = # "hash_51d73f69b757027e";
       break;
     case 3:
-      str_fx = level._effect[# "powerup_grabbed_red"];
+      str_fx = level._effect[#"powerup_grabbed_red"];
       break;
     case 4:
-      str_fx = level._effect[# "powerup_grabbed_caution"];
+      str_fx = level._effect[#"powerup_grabbed_caution"];
       break;
     default:
       return;

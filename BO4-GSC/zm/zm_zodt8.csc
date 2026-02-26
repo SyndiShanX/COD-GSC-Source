@@ -60,13 +60,13 @@ event_handler[level_init] main(eventstruct) {
   setDvar(#"player_shallowwaterwadescale", 1);
   setDvar(#"player_waistwaterwadescale", 1);
   setDvar(#"player_deepwaterwadescale", 1);
-  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[# "animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[# "pap_projectile"] = # "hash_6009053e911b946a";
-  level._effect[# "pap_projectile_end"] = # "hash_6c0eb029adb5f6c6";
+  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[#"pap_projectile"] = # "hash_6009053e911b946a";
+  level._effect[#"pap_projectile_end"] = # "hash_6c0eb029adb5f6c6";
   level.var_24cb6ae8 = findvolumedecalindexarray("cargo_hold_water_puddles");
   level.var_ec4c3b67 = findvolumedecalindexarray("engine_room_water_puddles");
   level.var_59d3631c = # "hash_129339f4a4da8ea2";
@@ -453,7 +453,7 @@ function_f1d5b30a(str_suffix, str_notify, a_origin) {
 pap_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_4b7a5b1b)) {
-      self.var_4b7a5b1b = util::playFXOnTag(localclientnum, level._effect[# "pap_projectile"], self, "tag_origin");
+      self.var_4b7a5b1b = util::playFXOnTag(localclientnum, level._effect[#"pap_projectile"], self, "tag_origin");
     }
 
     if(!isDefined(self.var_353ff2a)) {
@@ -476,7 +476,7 @@ pap_projectile_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 pap_projectile_end_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    util::playFXOnTag(localclientnum, level._effect[# "pap_projectile_end"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"pap_projectile_end"], self, "tag_origin");
   }
 }
 
@@ -484,7 +484,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
   self endon(#"death");
 
   if(newval == 1) {
-    self.fx = util::playFXOnTag(localclientnum, level._effect[# "sentinel_aura"], self, "tag_fx_x_pos");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[#"sentinel_aura"], self, "tag_fx_x_pos");
     self playrenderoverridebundle(#"hash_1589a47f2fdc6c67");
     self.sfx_id = self playLoopSound(#"hash_66df9cab2c64f968");
     return;
@@ -503,13 +503,13 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
       self.fx = undefined;
     }
 
-    util::playFXOnTag(localclientnum, level._effect[# "sentinel_activate"], self, "tag_fx_x_pos");
+    util::playFXOnTag(localclientnum, level._effect[#"sentinel_activate"], self, "tag_fx_x_pos");
 
     while(isDefined(self) && self.model !== # "hash_2c0078538e398b4f") {
       waitframe(1);
     }
 
-    self.fx = util::playFXOnTag(localclientnum, level._effect[# "sentinel_glow"], self, "tag_fx_x_pos");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[#"sentinel_glow"], self, "tag_fx_x_pos");
     waitframe(1);
     self playrenderoverridebundle(#"hash_111d3e86bf2007e4");
     return;
@@ -534,22 +534,22 @@ sndactorunderwater(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[1][# "playerbreathinsound"] = "vox_plr_1_exert_sniper_hold";
-  level.exert_sounds[2][# "playerbreathinsound"] = "vox_plr_2_exert_sniper_hold";
-  level.exert_sounds[3][# "playerbreathinsound"] = "vox_plr_3_exert_sniper_hold";
-  level.exert_sounds[4][# "playerbreathinsound"] = "vox_plr_4_exert_sniper_hold";
-  level.exert_sounds[1][# "playerbreathoutsound"] = "vox_plr_1_exert_sniper_exhale";
-  level.exert_sounds[2][# "playerbreathoutsound"] = "vox_plr_2_exert_sniper_exhale";
-  level.exert_sounds[3][# "playerbreathoutsound"] = "vox_plr_3_exert_sniper_exhale";
-  level.exert_sounds[4][# "playerbreathoutsound"] = "vox_plr_4_exert_sniper_exhale";
-  level.exert_sounds[1][# "playerbreathgaspsound"] = "vox_plr_1_exert_sniper_gasp";
-  level.exert_sounds[2][# "playerbreathgaspsound"] = "vox_plr_2_exert_sniper_gasp";
-  level.exert_sounds[3][# "playerbreathgaspsound"] = "vox_plr_3_exert_sniper_gasp";
-  level.exert_sounds[4][# "playerbreathgaspsound"] = "vox_plr_4_exert_sniper_gasp";
-  level.exert_sounds[1][# "meleeswipesoundplayer"] = "vox_plr_1_exert_punch_give";
-  level.exert_sounds[2][# "meleeswipesoundplayer"] = "vox_plr_2_exert_punch_give";
-  level.exert_sounds[3][# "meleeswipesoundplayer"] = "vox_plr_3_exert_punch_give";
-  level.exert_sounds[4][# "meleeswipesoundplayer"] = "vox_plr_4_exert_punch_give";
+  level.exert_sounds[1][#"playerbreathinsound"] = "vox_plr_1_exert_sniper_hold";
+  level.exert_sounds[2][#"playerbreathinsound"] = "vox_plr_2_exert_sniper_hold";
+  level.exert_sounds[3][#"playerbreathinsound"] = "vox_plr_3_exert_sniper_hold";
+  level.exert_sounds[4][#"playerbreathinsound"] = "vox_plr_4_exert_sniper_hold";
+  level.exert_sounds[1][#"playerbreathoutsound"] = "vox_plr_1_exert_sniper_exhale";
+  level.exert_sounds[2][#"playerbreathoutsound"] = "vox_plr_2_exert_sniper_exhale";
+  level.exert_sounds[3][#"playerbreathoutsound"] = "vox_plr_3_exert_sniper_exhale";
+  level.exert_sounds[4][#"playerbreathoutsound"] = "vox_plr_4_exert_sniper_exhale";
+  level.exert_sounds[1][#"playerbreathgaspsound"] = "vox_plr_1_exert_sniper_gasp";
+  level.exert_sounds[2][#"playerbreathgaspsound"] = "vox_plr_2_exert_sniper_gasp";
+  level.exert_sounds[3][#"playerbreathgaspsound"] = "vox_plr_3_exert_sniper_gasp";
+  level.exert_sounds[4][#"playerbreathgaspsound"] = "vox_plr_4_exert_sniper_gasp";
+  level.exert_sounds[1][#"meleeswipesoundplayer"] = "vox_plr_1_exert_punch_give";
+  level.exert_sounds[2][#"meleeswipesoundplayer"] = "vox_plr_2_exert_punch_give";
+  level.exert_sounds[3][#"meleeswipesoundplayer"] = "vox_plr_3_exert_punch_give";
+  level.exert_sounds[4][#"meleeswipesoundplayer"] = "vox_plr_4_exert_punch_give";
 }
 
 function_b7fc06b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

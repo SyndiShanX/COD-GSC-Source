@@ -52,7 +52,7 @@ function private function_8ebf52b6(instance) {
   instance flag::clear("cleanup");
   instance callback::function_d8abfc3d(#"portal_activated", &function_1226f6af);
   level callback::add_callback(#"hash_594217387367ebb4", &function_1226f6af, instance);
-  var_2b737124 = instance.contentgroups[# "corpses"][0];
+  var_2b737124 = instance.contentgroups[#"corpses"][0];
 
   if(isDefined(var_2b737124.targetname)) {
     showmiscmodels(var_2b737124.targetname);
@@ -71,7 +71,7 @@ function private function_8ebf52b6(instance) {
     }
   }
 
-  s_start = instance.contentgroups[# "start"][0];
+  s_start = instance.contentgroups[#"start"][0];
   instance.trigger = content_manager::spawn_interact(s_start, &function_dbeb7b0f, #"hash_38e8b4d1311b4a2d", undefined, 100);
   instance.trigger.instance = instance;
   instance.var_ec694b2c = util::spawn_model(#"p9_zm_radio_pack_01_surface", s_start.origin - (0, 0, 8));
@@ -129,8 +129,8 @@ function private function_deefa538(instance) {
     n_variant = var_3d0c759f;
   }
 
-  var_eb92deab = isDefined(instance.contentgroups[# "leader_spawn"]) ? instance.contentgroups[# "leader_spawn"] : [];
-  var_ea63e380 = isDefined(instance.contentgroups[# "follower_spawn"]) ? instance.contentgroups[# "follower_spawn"] : [];
+  var_eb92deab = isDefined(instance.contentgroups[#"leader_spawn"]) ? instance.contentgroups[#"leader_spawn"] : [];
+  var_ea63e380 = isDefined(instance.contentgroups[#"follower_spawn"]) ? instance.contentgroups[#"follower_spawn"] : [];
   function_283f2fb3(var_eb92deab);
   function_283f2fb3(var_ea63e380);
   var_18d554fc = int(min(level.realm, 3));
@@ -640,7 +640,7 @@ function private function_ca912561(instance) {
 
   if(isentity(self)) {
     traceresult = physicstraceex(self getcentroid(), self getcentroid() - (0, 0, 1000), (-15, -15, 0), (15, 15, 72));
-    v_drop = traceresult[# "position"];
+    v_drop = traceresult[#"position"];
 
     if(!isDefined(v_drop)) {
       v_drop = self.origin;

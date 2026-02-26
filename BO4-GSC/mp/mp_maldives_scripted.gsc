@@ -80,7 +80,7 @@ function_8e65b1f2() {
 }
 
 function_62a2843c(a_ents) {
-  shark = a_ents[# "prop 1"];
+  shark = a_ents[#"prop 1"];
   trigger = spawn("trigger_radius_new", shark gettagorigin("head_jnt") + (0, 0, -20), 0, 34, 38);
   trigger.shark = shark;
   trigger triggerignoreteam();

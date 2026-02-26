@@ -79,10 +79,10 @@ function on_vehicle_spawned() {
         var_d8cde75b.script_side = "port";
       }
 
-      var_d487d45c = fall.scene_ents[# "prop 1"];
+      var_d487d45c = fall.scene_ents[#"prop 1"];
 
       while(!isDefined(var_d487d45c) && isalive(var_6031fb1f)) {
-        var_d487d45c = fall.scene_ents[# "prop 1"];
+        var_d487d45c = fall.scene_ents[#"prop 1"];
         waitframe(1);
       }
 
@@ -135,7 +135,7 @@ function on_vehicle_spawned() {
               offset = vectorscale(anglestoright(var_6031fb1f.angles), 8);
             }
 
-            var_6b6fec6c = var_2e4576cb[# "position"] + offset;
+            var_6b6fec6c = var_2e4576cb[#"position"] + offset;
             fall_time = abs(distance(var_6031fb1f.origin, var_6b6fec6c) / 390);
 
             if(isDefined(var_6031fb1f)) {

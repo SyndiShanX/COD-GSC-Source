@@ -85,7 +85,7 @@ function private function_b99870d0() {
     self waittill(#"evac_signal");
     trace = beamtrace(self.origin + (0, 0, 128), self.origin + (0, 0, 512), 1, self);
 
-    if(trace[# "surfacetype"] == "none") {
+    if(trace[#"surfacetype"] == "none") {
       iprintlnbold("<dev string:x81>");
 
       var_834e775 = self.origin;
@@ -250,7 +250,7 @@ function private function_f724246e(var_b4a49886, lz) {
 }
 
 function private function_f4db9f04() {
-  ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"] + (0, 0, 24);
+  ground_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"] + (0, 0, 24);
   var_c7f41a78 = self.origin;
   level flag::set("flag_evac_stop_smoke");
   self setneargoalnotifydist(5);

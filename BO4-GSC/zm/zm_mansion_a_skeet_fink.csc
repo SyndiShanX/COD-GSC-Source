@@ -29,11 +29,11 @@ init() {
   clientfield::register("vehicle", "" + # "hash_7a260c02e8c345c2", 8000, 1, "int", &function_6736abbe, 0, 0);
   clientfield::register("actor", "" + # "hash_7a260c02e8c345c2", 8000, 1, "int", &function_6736abbe, 0, 0);
   clientfield::register("world", "" + # "hash_5f0c4b68b2a6a75d", 16000, 1, "int", &function_36123d34, 0, 0);
-  zm_sq_modules::function_d8383812("ee_asf_altar", 1, #"a_skeet_fink_charge", 400, level._effect[# "pap_projectile"], level._effect[# "pap_projectile_end"], undefined, undefined, 1);
-  level._effect[# "hash_1a9940efe1d3ed25"] = # "hash_4fc9f92d9016ecad";
-  level._effect[# "hash_7cd0c2ae0222691"] = # "hash_4a2a2a8ca5ef4c74";
-  level._effect[# "hash_c2169a9806df05e"] = # "hash_34d06e6d2aa00b39";
-  level._effect[# "hash_7a260c02e8c345c2"] = # "hash_65d0a2cee07e8664";
+  zm_sq_modules::function_d8383812("ee_asf_altar", 1, #"a_skeet_fink_charge", 400, level._effect[#"pap_projectile"], level._effect[#"pap_projectile_end"], undefined, undefined, 1);
+  level._effect[#"hash_1a9940efe1d3ed25"] = # "hash_4fc9f92d9016ecad";
+  level._effect[#"hash_7cd0c2ae0222691"] = # "hash_4a2a2a8ca5ef4c74";
+  level._effect[#"hash_c2169a9806df05e"] = # "hash_34d06e6d2aa00b39";
+  level._effect[#"hash_7a260c02e8c345c2"] = # "hash_65d0a2cee07e8664";
 }
 
 function_5980b4fd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -228,10 +228,10 @@ function_860933ea(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_813aa911(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   switch (newval) {
     case 1:
-      util::playFXOnTag(localclientnum, level._effect[# "hash_1a9940efe1d3ed25"], self, "tag_origin");
+      util::playFXOnTag(localclientnum, level._effect[#"hash_1a9940efe1d3ed25"], self, "tag_origin");
       break;
     case 2:
-      util::playFXOnTag(localclientnum, level._effect[# "hash_7cd0c2ae0222691"], self, "tag_origin");
+      util::playFXOnTag(localclientnum, level._effect[#"hash_7cd0c2ae0222691"], self, "tag_origin");
       break;
     default:
       break;
@@ -245,13 +245,13 @@ function_4a77ba1b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.var_2dd2a2dd = util::playFXOnTag(localclientnum, level._effect[# "hash_c2169a9806df05e"], self, "tag_origin");
+    self.var_2dd2a2dd = util::playFXOnTag(localclientnum, level._effect[#"hash_c2169a9806df05e"], self, "tag_origin");
   }
 }
 
 function_6736abbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[# "hash_7a260c02e8c345c2"], self, "j_neck");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_7a260c02e8c345c2"], self, "j_neck");
   }
 }
 

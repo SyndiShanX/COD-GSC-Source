@@ -35,10 +35,10 @@ enable_death_perception_perk_for_level() {
 function_9b484511() {}
 
 function_f9d745da() {
-  level.machine_assets[# "specialty_awareness"] = spawnStruct();
-  level.machine_assets[# "specialty_awareness"].weapon = getweapon("zombie_perk_bottle_death_perception");
-  level.machine_assets[# "specialty_awareness"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_awareness"].on_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_awareness"] = spawnStruct();
+  level.machine_assets[#"specialty_awareness"].weapon = getweapon("zombie_perk_bottle_death_perception");
+  level.machine_assets[#"specialty_awareness"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_awareness"].on_model = "p7_zm_vending_nuke";
 }
 
 function_14ab8b5c() {

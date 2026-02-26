@@ -61,7 +61,7 @@ function_5d870c2c() {
 }
 
 function_20d38ac0(a_ents) {
-  var_955a6e11 = a_ents[# "prop 1"];
+  var_955a6e11 = a_ents[#"prop 1"];
 
   if(isDefined(var_955a6e11)) {
     var_955a6e11 function_53e45f4e();

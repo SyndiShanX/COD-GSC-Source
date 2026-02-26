@@ -102,7 +102,7 @@ fx_flesh_hit_neck_fatal(params) {
 
           if(isDefined(scoregiven)) {
             player challenges::earneduavassistscore(scoregiven);
-            killstreakindex = level.killstreakindices[# "uav"];
+            killstreakindex = level.killstreakindices[#"uav"];
             killstreaks::killstreak_assist(player, self, killstreakindex);
           }
         }
@@ -204,7 +204,7 @@ activateuav() {
   }
 
   level.spawneduavs[level.spawneduavs.size] = uav;
-  uav setModel(level.killstreakbundle[# "uav"].ksmodel);
+  uav setModel(level.killstreakbundle[#"uav"].ksmodel);
   uav.weapon = getweapon("uav");
   uav setweapon(uav.weapon);
   uav.targetname = "uav";
@@ -243,7 +243,7 @@ activateuav() {
 
 onlowhealth(attacker, weapon) {
   self.is_damaged = 1;
-  params = level.killstreakbundle[# "uav"];
+  params = level.killstreakbundle[#"uav"];
 
   if(isDefined(params.fxlowhealth)) {
     playFXOnTag(params.fxlowhealth, self, "tag_origin");
@@ -271,7 +271,7 @@ destroyuav(attacker, weapon) {
 
   self notify(#"crashing");
   self playSound(#"exp_veh_large");
-  params = level.killstreakbundle[# "uav"];
+  params = level.killstreakbundle[#"uav"];
 
   if(isDefined(params.ksexplosionfx)) {
     playFXOnTag(params.ksexplosionfx, self, "tag_origin");

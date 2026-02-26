@@ -351,13 +351,13 @@ function state_jump_enter(params) {
   if(false) {
     debugstar(goal, 60000, (0, 1, 0));
 
-    debugstar(trace[# "position"], 60000, (0, 1, 0));
+    debugstar(trace[#"position"], 60000, (0, 1, 0));
 
-    line(goal, trace[# "position"], (0, 1, 0), 1, 0, 60000);
+    line(goal, trace[#"position"], (0, 1, 0), 1, 0, 60000);
   }
 
-  if(trace[# "fraction"] < 1) {
-    goal = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    goal = trace[#"position"];
   }
 
   self.jump.goal = goal;

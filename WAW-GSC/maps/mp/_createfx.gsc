@@ -167,8 +167,7 @@ createFxLogic() {
   if(getDvar("createfx_map") == "") {
     setDvar("createfx_map", level.script);
   } else {
-    if(getDvar("createfx_map") == level.script) {
-    }
+    if(getDvar("createfx_map") == level.script) {}
   }
 
   level.createFxHudElements = [];

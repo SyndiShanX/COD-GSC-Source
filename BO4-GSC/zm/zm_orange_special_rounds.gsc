@@ -75,7 +75,7 @@ function_c6959cf1() {
 
 function_27695a82() {
   spawner = function_c6959cf1();
-  spawn_point = array::random(level.zm_loc_types[# "zombie_location"]);
+  spawn_point = array::random(level.zm_loc_types[#"zombie_location"]);
   ai = zombie_utility::spawn_zombie(spawner, spawner.targetname, spawn_point, level.round_number + level.var_1c921b2b);
 
   if(isDefined(ai)) {
@@ -114,7 +114,7 @@ function_a2f2a9a3() {
     return false;
   }
 
-  a_s_spawn_locs = level.zm_loc_types[# "zombie_location"];
+  a_s_spawn_locs = level.zm_loc_types[#"zombie_location"];
   var_91562d8c = [];
   var_f2a95155 = [];
 

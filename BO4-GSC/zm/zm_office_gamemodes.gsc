@@ -8,7 +8,7 @@
 #namespace zm_office_gamemodes;
 
 event_handler[level_finalizeinit] main(eventstruct) {
-  if(!isDefined(level.flag) || !(isDefined(level.flag[# "load_main_complete"]) && level.flag[# "load_main_complete"])) {
+  if(!isDefined(level.flag) || !(isDefined(level.flag[#"load_main_complete"]) && level.flag[#"load_main_complete"])) {
     level waittill(#"load_main_complete");
   }
 

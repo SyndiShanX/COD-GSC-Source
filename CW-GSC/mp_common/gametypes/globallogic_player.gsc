@@ -41,8 +41,8 @@ function on_player_disconnect() {
     if(getdvarint(#"hash_37dfd97d34a15e14", 0)) {
       player contracts::function_78083139();
 
-      if(isDefined(player.pers[# "hash_150795bee4d46ce4"])) {
-        var_28ee869a = gettime() - player.pers[# "hash_150795bee4d46ce4"];
+      if(isDefined(player.pers[#"hash_150795bee4d46ce4"])) {
+        var_28ee869a = gettime() - player.pers[#"hash_150795bee4d46ce4"];
         player challenges::function_659f7dc(var_28ee869a, 0);
       }
 

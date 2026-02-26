@@ -28,10 +28,10 @@ function_2eb2c17c(origin, item) {
   offsetposition = item.origin + traceoffset;
   var_b0fbfe59 = bulletTrace(origin, offsetposition, 0, self, 0);
 
-  if(var_b0fbfe59[# "fraction"] < 1 && var_b0fbfe59[# "entity"] !== item) {
+  if(var_b0fbfe59[#"fraction"] < 1 && var_b0fbfe59[#"entity"] !== item) {
     if(var_5d97fed1) {
-      var_acdfe076 = isDefined(var_b0fbfe59[# "dynent"]) && distance2dsquared(var_b0fbfe59[# "dynent"].origin, item.origin) <= 12 * 12;
-      var_45127074 = isDefined(var_b0fbfe59[# "entity"]) && distance2dsquared(var_b0fbfe59[# "entity"].origin, item.origin) <= 12 * 12;
+      var_acdfe076 = isDefined(var_b0fbfe59[#"dynent"]) && distance2dsquared(var_b0fbfe59[#"dynent"].origin, item.origin) <= 12 * 12;
+      var_45127074 = isDefined(var_b0fbfe59[#"entity"]) && distance2dsquared(var_b0fbfe59[#"entity"].origin, item.origin) <= 12 * 12;
 
       if(!var_acdfe076 && !var_45127074) {
         return false;
@@ -39,7 +39,7 @@ function_2eb2c17c(origin, item) {
     } else {
       var_5408bd2a = physicstraceex(origin, offsetposition, (0, 0, 0), (0, 0, 0), self, 1);
 
-      if(var_5408bd2a[# "fraction"] >= 1) {
+      if(var_5408bd2a[#"fraction"] >= 1) {
         return true;
       }
 

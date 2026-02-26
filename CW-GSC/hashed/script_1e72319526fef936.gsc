@@ -41,8 +41,8 @@ function private preinit() {
 }
 
 function function_ea2db6a9(instance) {
-  var_d4f4d124 = isDefined(instance.contentgroups[# "hash_1381b446e6ab7a37"]) ? instance.contentgroups[# "hash_1381b446e6ab7a37"] : [];
-  instance.var_75bfdd78 = isDefined(instance.contentgroups[# "teleport"]) ? instance.contentgroups[# "teleport"] : [];
+  var_d4f4d124 = isDefined(instance.contentgroups[#"hash_1381b446e6ab7a37"]) ? instance.contentgroups[#"hash_1381b446e6ab7a37"] : [];
+  instance.var_75bfdd78 = isDefined(instance.contentgroups[#"teleport"]) ? instance.contentgroups[#"teleport"] : [];
   instance.a_triggers = [];
   v_offset = (0, 0, -32);
   level.var_ff7bf48c = [];
@@ -269,7 +269,7 @@ function function_a41c43bd(var_2b357ce9, mdl_portal, vehicle) {
 
   self flag::set(#"hash_39816ba0141eb30c");
   mdl_portal flag::set(#"hash_5c79c9319298891a");
-  var_f49d0155 = isDefined(self.instance.contentgroups[# "hash_1381b446e6ab7a37"]) ? self.instance.contentgroups[# "hash_1381b446e6ab7a37"] : [];
+  var_f49d0155 = isDefined(self.instance.contentgroups[#"hash_1381b446e6ab7a37"]) ? self.instance.contentgroups[#"hash_1381b446e6ab7a37"] : [];
 
   foreach(var_4db48fec in var_f49d0155) {
     if(!var_4db48fec flag::get(#"hash_5c79c9319298891a")) {

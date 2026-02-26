@@ -402,9 +402,9 @@ boss_outro(n_stage) {
     case 2:
       var_45e1b44b = level.s_boss.var_dcaafc8e[3];
       var_45e1b44b thread scene::play(#"aib_t8_zm_mnsn_hallion_stage_trans_02");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+      var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+      var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+      var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
       break;
     case 3:
       level.s_boss.var_4944ec8 animation::stop(0);
@@ -484,9 +484,9 @@ boss_teleport_players(var_a88dacea) {
     level thread function_52818528();
     level notify(#"hash_4b195fabca6f5aaf");
     util::wait_network_frame();
-    var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+    var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+    var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+    var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
     wait 0.2;
     level notify(#"hash_1b248026aeb05066");
     level.var_b88cf121 = 1;
@@ -827,12 +827,12 @@ function_f433c7f5(n_stage) {
       var_6df65756 = 0;
       var_45e1b44b thread scene::play(#"hash_44e932e9dc79e15a" + var_efc198c);
       util::wait_network_frame();
-      var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+      var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+      var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
       var_45e1b44b thread scene::play(#"hash_94e18f7f5f5b927" + var_efc198c);
       util::wait_network_frame();
-      var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+      var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+      var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
       wait 1;
       e_target = e_target function_a676dbd7();
       e_target clientfield::set("pstfx_zm_man_targeted_cf", 0);
@@ -840,9 +840,9 @@ function_f433c7f5(n_stage) {
     } else {
       var_45e1b44b thread scene::play(#"hash_7650e56337eed7be" + var_efc198c);
       util::wait_network_frame();
-      var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-      var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+      var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+      var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+      var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
       e_target = e_target function_a676dbd7();
       e_target clientfield::set("pstfx_zm_man_targeted_cf", 0);
     }
@@ -912,12 +912,12 @@ function_f433c7f5(n_stage) {
     wait 0.3;
     var_45e1b44b thread scene::play(var_b3160934);
     util::wait_network_frame();
-    var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+    var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+    var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
     var_45e1b44b thread scene::play(#"hash_37e4811f1b6881d1" + var_6bbd958f);
     util::wait_network_frame();
-    var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+    var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+    var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
 
     if(i < var_e83953b7) {
       wait 0.5;
@@ -1104,7 +1104,7 @@ function_1a240284(n_stage, var_2100633b) {
   level notify(#"hash_4b8c10279da88562");
   self animation::stop(0);
   self playSound(#"hash_4aff74c5f6036730");
-  self.scene_ents[# "boss_sp_mdl"] clientfield::set("" + # "hash_1bf2c2f62ad1bf56", 0);
+  self.scene_ents[#"boss_sp_mdl"] clientfield::set("" + # "hash_1bf2c2f62ad1bf56", 0);
 
   if(var_2100633b) {
     switch (n_stage) {
@@ -1120,7 +1120,7 @@ function_1a240284(n_stage, var_2100633b) {
     self scene::play(#"aib_t8_zm_mnsn_hallion_stun", "timeout");
   }
 
-  self.scene_ents[# "boss_sp_mdl"] thread function_8d29523e(#"boss_invisible");
+  self.scene_ents[#"boss_sp_mdl"] thread function_8d29523e(#"boss_invisible");
   self animation::stop(0);
   self scene::play(#"aib_t8_zm_mnsn_hallion_stun", "Shot 2");
   self animation::stop(0);
@@ -1260,8 +1260,8 @@ function_68af48a0() {
   level endon(#"hash_38f29f9cb03586ea", #"end_game", #"intermission");
   self endon(#"death");
 
-  if(isPlayer(self) && !(isDefined(level.var_f1028094[# "hash_648770ea260c72e8"]) && level.var_f1028094[# "hash_648770ea260c72e8"])) {
-    level.var_f1028094[# "hash_648770ea260c72e8"] = 1;
+  if(isPlayer(self) && !(isDefined(level.var_f1028094[#"hash_648770ea260c72e8"]) && level.var_f1028094[#"hash_648770ea260c72e8"])) {
+    level.var_f1028094[#"hash_648770ea260c72e8"] = 1;
     n_character_index = self zm_characters::function_d35e4c92();
     str_vo = "vox_werewolf_health_25_plr_" + n_character_index + "_0";
     self zm_vo::vo_say(str_vo, 0, 1, 9999);
@@ -1348,14 +1348,14 @@ function_fdd04f47(n_stage) {
   var_efc198c = randomintrange(1, 4);
   var_45e1b44b = level.s_boss.var_dcaafc8e[var_efc198c];
   var_45e1b44b thread scene::play(#"hash_44e932e9dc79e15a" + var_efc198c);
-  var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-  var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+  var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+  var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
   var_45e1b44b thread scene::play(#"hash_3aeb4ff93f2cbf0" + var_efc198c);
-  var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+  var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
   level waittill(#"boss_start_summoning");
   level thread function_29de7388();
   var_45e1b44b thread function_677a2503();
-  var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+  var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
   level flag::clear(#"hash_f4dfa99c5e22bc6");
   level notify(#"hash_3d52ec26acedf741");
 }
@@ -1770,7 +1770,7 @@ function_de60e752() {
   level.var_9eaf1031 = 0;
   level.var_83c0592c = 0;
   level thread function_f5b2d086();
-  s_zone = level.zones[# "zone_arena"];
+  s_zone = level.zones[#"zone_arena"];
   a_s_spawnpoints = struct::get_array(s_zone.name + "_spawns");
   a_s_spawnpoints = arraycombine(a_s_spawnpoints, struct::get_array(s_zone.name + "_spawner"), 0, 0);
   var_e6217dda = getarraykeys(s_zone.adjacent_zones);
@@ -2196,9 +2196,9 @@ function_b9ca419b() {
   var_45e1b44b = level.s_boss.var_dcaafc8e[3];
   var_45e1b44b thread scene::play(#"aib_t8_zm_mnsn_hallion_intro");
   util::wait_network_frame();
-  var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-  var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-  var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+  var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+  var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+  var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
   wait 0.2;
   level.var_80d31f80 = 0;
   level zm_audio::sndvoxoverride(0);
@@ -2212,9 +2212,9 @@ function_84f320f1(n_stage) {
   if(n_stage == 2) {
     var_45e1b44b = level.s_boss.var_dcaafc8e[3];
     var_45e1b44b thread scene::play(#"aib_t8_zm_mnsn_hallion_stage_trans_02");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_visible");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] thread function_8d29523e(#"boss_invisible");
-    var_45e1b44b.scene_ents[# "fakeactor 1"] function_d84758c();
+    var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_visible");
+    var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
+    var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
     level.var_80d31f80 = 0;
 
     iprintlnbold("<dev string:x609>");

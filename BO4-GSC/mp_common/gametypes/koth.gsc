@@ -377,7 +377,7 @@ forcespawnteam(team) {
       continue;
     }
 
-    if(player.pers[# "team"] == team) {
+    if(player.pers[#"team"] == team) {
       player notify(#"force_spawn");
       wait 0.1;
     }
@@ -466,11 +466,11 @@ onbeginuse(sentient) {
   ownerteam = self gameobjects::get_owner_team();
 
   if(ownerteam == # "neutral") {
-    player thread battlechatter::gametype_specific_battle_chatter("hq_protect", player.pers[# "team"]);
+    player thread battlechatter::gametype_specific_battle_chatter("hq_protect", player.pers[#"team"]);
     return;
   }
 
-  player thread battlechatter::gametype_specific_battle_chatter("hq_attack", player.pers[# "team"]);
+  player thread battlechatter::gametype_specific_battle_chatter("hq_attack", player.pers[#"team"]);
 }
 
 onenduse(team, sentient, success) {
@@ -524,7 +524,7 @@ onzonecapture(sentient) {
         for(index = 0; index < level.players.size; index++) {
           player = level.players[index];
 
-          if(player.pers[# "team"] == team) {
+          if(player.pers[#"team"] == team) {
             if(player.lastkilltime + 500 > gettime()) {
               player challenges::killedlastcontester();
             }
@@ -583,13 +583,13 @@ give_capture_credit(touchlist, string, capturetime, capture_team, lastcapturetea
       player recordgameevent("hardpoint_captured");
       level thread popups::displayteammessagetoall(string, player);
 
-      if(isDefined(player.pers[# "captures"])) {
-        player.pers[# "captures"]++;
-        player.captures = player.pers[# "captures"];
+      if(isDefined(player.pers[#"captures"])) {
+        player.pers[#"captures"]++;
+        player.captures = player.pers[#"captures"];
       }
 
-      player.pers[# "objectives"]++;
-      player.objectives = player.pers[# "objectives"];
+      player.pers[#"objectives"]++;
+      player.objectives = player.pers[#"objectives"];
 
       if(level.kothstarttime + 500 > capturetime) {
         player challenges::immediatecapture();
@@ -713,9 +713,9 @@ awardcapturepoints(team, lastcaptureteam) {
           continue;
         }
 
-        if(isDefined(player.pers[# "objtime"])) {
-          player.pers[# "objtime"]++;
-          player.objtime = player.pers[# "objtime"];
+        if(isDefined(player.pers[#"objtime"])) {
+          player.pers[#"objtime"]++;
+          player.objtime = player.pers[#"objtime"];
         }
 
         player stats::function_bb7eedf0(#"objective_time", 1);
@@ -964,7 +964,7 @@ function_38874bf6() {
 function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
 
-  if(!isPlayer(attacker) || level.capturetime && !victim.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers[# "team"] == victim.pers[# "team"]) {
+  if(!isPlayer(attacker) || level.capturetime && !victim.touchtriggers.size && !attacker.touchtriggers.size || attacker.pers[#"team"] == victim.pers[#"team"]) {
     return;
   }
 
@@ -999,17 +999,17 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
     if(ownerteam != # "neutral") {
       attacker.lastkilltime = gettime();
-      team = attacker.pers[# "team"];
+      team = attacker.pers[#"team"];
 
       if(team == ownerteam) {
         if(!medalgiven) {
           attacker medals::offenseglobalcount();
           attacker thread challenges::killedbaseoffender(level.zone.trig, weapon, einflictor);
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[# "objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-          attacker.pers[# "objectives"]++;
-          attacker.objectives = attacker.pers[# "objectives"];
+          attacker.pers[#"objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+          attacker.pers[#"objectives"]++;
+          attacker.objectives = attacker.pers[#"objectives"];
           medalgiven = 1;
         }
 
@@ -1021,19 +1021,19 @@ function_610d3790(einflictor, victim, idamage, weapon) {
         scoreeventprocessed = 1;
       } else {
         if(!medalgiven) {
-          if(isDefined(attacker.pers[# "defends"])) {
-            attacker.pers[# "defends"]++;
-            attacker.defends = attacker.pers[# "defends"];
+          if(isDefined(attacker.pers[#"defends"])) {
+            attacker.pers[#"defends"]++;
+            attacker.defends = attacker.pers[#"defends"];
           }
 
           attacker medals::defenseglobalcount();
           medalgiven = 1;
           attacker thread challenges::killedbasedefender(level.zone.trig);
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[# "objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-          attacker.pers[# "objectives"]++;
-          attacker.objectives = attacker.pers[# "objectives"];
+          attacker.pers[#"objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+          attacker.pers[#"objectives"]++;
+          attacker.objectives = attacker.pers[#"objectives"];
           attacker recordgameevent("defending");
         }
 
@@ -1067,13 +1067,13 @@ function_610d3790(einflictor, victim, idamage, weapon) {
     }
 
     if(ownerteam != # "neutral") {
-      team = victim.pers[# "team"];
+      team = victim.pers[#"team"];
 
       if(team == ownerteam) {
         if(!medalgiven) {
-          if(isDefined(attacker.pers[# "defends"])) {
-            attacker.pers[# "defends"]++;
-            attacker.defends = attacker.pers[# "defends"];
+          if(isDefined(attacker.pers[#"defends"])) {
+            attacker.pers[#"defends"]++;
+            attacker.defends = attacker.pers[#"defends"];
           }
 
           attacker medals::defenseglobalcount();
@@ -1091,10 +1091,10 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
           victim recordkillmodifier("assaulting");
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[# "objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-          attacker.pers[# "objectives"]++;
-          attacker.objectives = attacker.pers[# "objectives"];
+          attacker.pers[#"objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+          attacker.pers[#"objectives"]++;
+          attacker.objectives = attacker.pers[#"objectives"];
         }
       } else {
         if(!medalgiven) {
@@ -1110,10 +1110,10 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
           victim recordkillmodifier("defending");
           attacker challenges::function_2f462ffd(victim, weapon, einflictor, level.zone.gameobject);
-          attacker.pers[# "objectiveekia"]++;
-          attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-          attacker.pers[# "objectives"]++;
-          attacker.objectives = attacker.pers[# "objectives"];
+          attacker.pers[#"objectiveekia"]++;
+          attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+          attacker.pers[#"objectives"]++;
+          attacker.objectives = attacker.pers[#"objectives"];
         }
       }
     }
@@ -1158,8 +1158,8 @@ updatecapsperminute(lastownerteam) {
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
-    minutespassed = self.timeplayed[# "total"] / 60;
+  if(isPlayer(self) && isDefined(self.timeplayed[#"total"])) {
+    minutespassed = self.timeplayed[#"total"] / 60;
   }
 
   if(minutespassed <= 0) {

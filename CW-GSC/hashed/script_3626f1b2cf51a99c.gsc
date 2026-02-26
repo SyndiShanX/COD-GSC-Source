@@ -149,9 +149,9 @@ function function_b1543a9d(anim_name, animset) {
         level.player_actions.blend[group.animname][entryname] = isDefined(group.blend) ? group.blend : 0;
       }
 
-      if(group.animname == "generic" && !isDefined(level.player_actions.anims[# "player"][entryname])) {
-        level.player_actions.anims[# "player"][entryname] = animentry.xanim;
-        level.player_actions.blend[# "player"][entryname] = group.blend;
+      if(group.animname == "generic" && !isDefined(level.player_actions.anims[#"player"][entryname])) {
+        level.player_actions.anims[#"player"][entryname] = animentry.xanim;
+        level.player_actions.blend[#"player"][entryname] = group.blend;
       }
     }
   }

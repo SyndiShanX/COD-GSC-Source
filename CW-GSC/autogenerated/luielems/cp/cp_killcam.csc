@@ -31,17 +31,17 @@ function register() {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "cp_killcam"])) {
-    level.var_ae746e8f[# "cp_killcam"] = [];
+  if(!isDefined(level.var_ae746e8f[#"cp_killcam"])) {
+    level.var_ae746e8f[#"cp_killcam"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "cp_killcam"])) {
-    level.var_ae746e8f[# "cp_killcam"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "cp_killcam"])) {
-    level.var_ae746e8f[# "cp_killcam"] = array(level.var_ae746e8f[# "cp_killcam"]);
+  if(!isDefined(level.var_ae746e8f[#"cp_killcam"])) {
+    level.var_ae746e8f[#"cp_killcam"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"cp_killcam"])) {
+    level.var_ae746e8f[#"cp_killcam"] = array(level.var_ae746e8f[#"cp_killcam"]);
   }
 
-  level.var_ae746e8f[# "cp_killcam"][level.var_ae746e8f[# "cp_killcam"].size] = elem;
+  level.var_ae746e8f[#"cp_killcam"][level.var_ae746e8f[#"cp_killcam"].size] = elem;
 }
 
 function register_clientside() {

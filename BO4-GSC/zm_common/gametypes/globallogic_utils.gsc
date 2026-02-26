@@ -101,15 +101,15 @@ getvalueinrange(value, minvalue, maxvalue) {
 }
 
 assertproperplacement() {
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
 
   for(i = 0; i < numplayers - 1; i++) {
-    if(isDefined(level.placement[# "all"][i]) && isDefined(level.placement[# "all"][i + 1])) {
-      if(level.placement[# "all"][i].score < level.placement[# "all"][i + 1].score) {
+    if(isDefined(level.placement[#"all"][i]) && isDefined(level.placement[#"all"][i + 1])) {
+      if(level.placement[#"all"][i].score < level.placement[#"all"][i + 1].score) {
         println("<dev string:x38>");
 
         for(i = 0; i < numplayers; i++) {
-          player = level.placement[# "all"][i];
+          player = level.placement[#"all"][i];
           println("<dev string:x4d>" + i + "<dev string:x52>" + player.name + "<dev string:x57>" + player.score);
         }
 
@@ -342,7 +342,7 @@ logteamwinstring(wintype, winner) {
   }
 
   foreach(team, str_team in level.teams) {
-    log_string = log_string + "<dev string:x90>" + str_team + "<dev string:x57>" + game.stat[# "teamscores"][team];
+    log_string = log_string + "<dev string:x90>" + str_team + "<dev string:x57>" + game.stat[#"teamscores"][team];
   }
 
   print(log_string);

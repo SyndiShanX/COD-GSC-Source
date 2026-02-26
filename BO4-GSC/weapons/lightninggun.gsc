@@ -23,7 +23,7 @@ init_shared() {
   level.lightninggun_arc_speed_sq = level.lightninggun_arc_speed * level.lightninggun_arc_speed;
   level.lightninggun_arc_fx_min_range = 1;
   level.lightninggun_arc_fx_min_range_sq = level.lightninggun_arc_fx_min_range * level.lightninggun_arc_fx_min_range;
-  level._effect[# "lightninggun_arc"] = # "weapon/fx_lightninggun_arc";
+  level._effect[#"lightninggun_arc"] = # "weapon/fx_lightninggun_arc";
   callback::add_weapon_damage(level.weaponlightninggun, &on_damage_lightninggun);
   ability_power::function_9d78823f(level.weaponlightninggun, level.weaponlightninggunarc);
 
@@ -93,7 +93,7 @@ lightninggun_arc_fx(arc_source_pos, arc_target, arc_target_pos, distancesq, orig
 
   fxorg = spawn("script_model", arc_source_pos);
   fxorg setModel(#"tag_origin");
-  fx = playFXOnTag(level._effect[# "lightninggun_arc"], fxorg, "tag_origin");
+  fx = playFXOnTag(level._effect[#"lightninggun_arc"], fxorg, "tag_origin");
   playsoundatposition(#"wpn_lightning_gun_bounce", fxorg.origin);
   fxorg moveto(arc_target_pos, waittime);
   fxorg waittill(#"movedone");

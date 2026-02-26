@@ -490,7 +490,7 @@ is_weapon_or_base_included(weapon) {
   return isDefined(level.zombie_weapons[function_386dacbc(weapon)]) || isDefined(level.zombie_weapons[get_base_weapon(weapon)]);
 }
 
-#include_zombie_weapon(weapon_name, in_box) {
+include_zombie_weapon(weapon_name, in_box) {
   if(!isDefined(level.zombie_include_weapons)) {
     level.zombie_include_weapons = [];
   }
@@ -1329,7 +1329,7 @@ ammo_give(weapon, b_purchased = 1) {
 
 get_default_weapondata(weapon) {
   weapondata = [];
-  weapondata[# "weapon"] = weapon;
+  weapondata[#"weapon"] = weapon;
   dw_weapon = weapon.dualwieldweapon;
   alt_weapon = weapon.altweapon;
   weaponnone = getweapon(#"none");
@@ -1339,25 +1339,25 @@ get_default_weapondata(weapon) {
   }
 
   if(weapon != weaponnone) {
-    weapondata[# "clip"] = weapon.clipsize;
-    weapondata[# "stock"] = weapon.maxammo;
-    weapondata[# "fuel"] = weapon.fuellife;
-    weapondata[# "heat"] = 0;
-    weapondata[# "overheat"] = 0;
+    weapondata[#"clip"] = weapon.clipsize;
+    weapondata[#"stock"] = weapon.maxammo;
+    weapondata[#"fuel"] = weapon.fuellife;
+    weapondata[#"heat"] = 0;
+    weapondata[#"overheat"] = 0;
   }
 
   if(dw_weapon != weaponnone) {
-    weapondata[# "lh_clip"] = dw_weapon.clipsize;
+    weapondata[#"lh_clip"] = dw_weapon.clipsize;
   } else {
-    weapondata[# "lh_clip"] = 0;
+    weapondata[#"lh_clip"] = 0;
   }
 
   if(alt_weapon != weaponnone) {
-    weapondata[# "alt_clip"] = alt_weapon.clipsize;
-    weapondata[# "alt_stock"] = alt_weapon.maxammo;
+    weapondata[#"alt_clip"] = alt_weapon.clipsize;
+    weapondata[#"alt_stock"] = alt_weapon.maxammo;
   } else {
-    weapondata[# "alt_clip"] = 0;
-    weapondata[# "alt_stock"] = 0;
+    weapondata[#"alt_clip"] = 0;
+    weapondata[#"alt_stock"] = 0;
   }
 
   return weapondata;
@@ -1370,55 +1370,55 @@ get_player_weapondata(weapon) {
     weapon = self getcurrentweapon();
   }
 
-  weapondata[# "weapon"] = weapon;
+  weapondata[#"weapon"] = weapon;
 
-  if(weapondata[# "weapon"] != level.weaponnone) {
-    weapondata[# "clip"] = self getweaponammoclip(weapon);
-    weapondata[# "stock"] = self getweaponammostock(weapon);
-    weapondata[# "fuel"] = self getweaponammofuel(weapon);
-    weapondata[# "heat"] = self isweaponoverheating(1, weapon);
-    weapondata[# "overheat"] = self isweaponoverheating(0, weapon);
+  if(weapondata[#"weapon"] != level.weaponnone) {
+    weapondata[#"clip"] = self getweaponammoclip(weapon);
+    weapondata[#"stock"] = self getweaponammostock(weapon);
+    weapondata[#"fuel"] = self getweaponammofuel(weapon);
+    weapondata[#"heat"] = self isweaponoverheating(1, weapon);
+    weapondata[#"overheat"] = self isweaponoverheating(0, weapon);
 
     if(weapon.isgadget) {
       slot = self gadgetgetslot(weapon);
-      weapondata[# "power"] = self gadgetpowerget(slot);
+      weapondata[#"power"] = self gadgetpowerget(slot);
     }
 
     if(weapon.isriotshield) {
-      weapondata[# "health"] = self.weaponhealth;
+      weapondata[#"health"] = self.weaponhealth;
     }
   } else {
-    weapondata[# "clip"] = 0;
-    weapondata[# "stock"] = 0;
-    weapondata[# "fuel"] = 0;
-    weapondata[# "heat"] = 0;
-    weapondata[# "overheat"] = 0;
-    weapondata[# "power"] = undefined;
+    weapondata[#"clip"] = 0;
+    weapondata[#"stock"] = 0;
+    weapondata[#"fuel"] = 0;
+    weapondata[#"heat"] = 0;
+    weapondata[#"overheat"] = 0;
+    weapondata[#"power"] = undefined;
   }
 
   dw_weapon = weapon.dualwieldweapon;
 
   if(dw_weapon != level.weaponnone) {
-    weapondata[# "lh_clip"] = self getweaponammoclip(dw_weapon);
+    weapondata[#"lh_clip"] = self getweaponammoclip(dw_weapon);
   } else {
-    weapondata[# "lh_clip"] = 0;
+    weapondata[#"lh_clip"] = 0;
   }
 
   alt_weapon = weapon.altweapon;
 
   if(alt_weapon != level.weaponnone) {
-    weapondata[# "alt_clip"] = self getweaponammoclip(alt_weapon);
-    weapondata[# "alt_stock"] = self getweaponammostock(alt_weapon);
+    weapondata[#"alt_clip"] = self getweaponammoclip(alt_weapon);
+    weapondata[#"alt_stock"] = self getweaponammostock(alt_weapon);
   } else {
-    weapondata[# "alt_clip"] = 0;
-    weapondata[# "alt_stock"] = 0;
+    weapondata[#"alt_clip"] = 0;
+    weapondata[#"alt_stock"] = 0;
   }
 
   if(self aat::has_aat(weapon)) {
-    weapondata[# "aat"] = self aat::getaatonweapon(weapon, 1);
+    weapondata[#"aat"] = self aat::getaatonweapon(weapon, 1);
   }
 
-  weapondata[# "repacks"] = self zm_pap_util::function_83c29ddb(weapon);
+  weapondata[#"repacks"] = self zm_pap_util::function_83c29ddb(weapon);
   return weapondata;
 }
 
@@ -1446,45 +1446,45 @@ merge_weapons(oldweapondata, newweapondata) {
     }
   }
 
-  if(weapon_is_better(oldweapondata[# "weapon"], newweapondata[# "weapon"])) {
-    weapondata[# "weapon"] = oldweapondata[# "weapon"];
+  if(weapon_is_better(oldweapondata[#"weapon"], newweapondata[#"weapon"])) {
+    weapondata[#"weapon"] = oldweapondata[#"weapon"];
   } else {
-    weapondata[# "weapon"] = newweapondata[# "weapon"];
+    weapondata[#"weapon"] = newweapondata[#"weapon"];
   }
 
-  weapon = weapondata[# "weapon"];
+  weapon = weapondata[#"weapon"];
   dw_weapon = weapon.dualwieldweapon;
   alt_weapon = weapon.altweapon;
 
   if(weapon != level.weaponnone) {
-    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
-    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
-    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
-    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
-    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
-    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
-    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
-    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
-    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
+    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
+    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
+    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
+    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
+    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
+    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
+    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
+    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
+    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
   }
 
   if(dw_weapon != level.weaponnone) {
-    weapondata[# "lh_clip"] = newweapondata[# "lh_clip"] + oldweapondata[# "lh_clip"];
-    weapondata[# "lh_clip"] = int(min(weapondata[# "lh_clip"], dw_weapon.clipsize));
+    weapondata[#"lh_clip"] = newweapondata[#"lh_clip"] + oldweapondata[#"lh_clip"];
+    weapondata[#"lh_clip"] = int(min(weapondata[#"lh_clip"], dw_weapon.clipsize));
   }
 
   if(alt_weapon != level.weaponnone) {
-    weapondata[# "alt_clip"] = newweapondata[# "alt_clip"] + oldweapondata[# "alt_clip"];
-    weapondata[# "alt_clip"] = int(min(weapondata[# "alt_clip"], alt_weapon.clipsize));
-    weapondata[# "alt_stock"] = newweapondata[# "alt_stock"] + oldweapondata[# "alt_stock"];
-    weapondata[# "alt_stock"] = int(min(weapondata[# "alt_stock"], alt_weapon.maxammo));
+    weapondata[#"alt_clip"] = newweapondata[#"alt_clip"] + oldweapondata[#"alt_clip"];
+    weapondata[#"alt_clip"] = int(min(weapondata[#"alt_clip"], alt_weapon.clipsize));
+    weapondata[#"alt_stock"] = newweapondata[#"alt_stock"] + oldweapondata[#"alt_stock"];
+    weapondata[#"alt_stock"] = int(min(weapondata[#"alt_stock"], alt_weapon.maxammo));
   }
 
   return weapondata;
 }
 
 weapondata_give(weapondata) {
-  current = self get_player_weapon_with_same_base(weapondata[# "weapon"]);
+  current = self get_player_weapon_with_same_base(weapondata[#"weapon"]);
 
   if(isDefined(current)) {
     curweapondata = self get_player_weapondata(current);
@@ -1492,36 +1492,36 @@ weapondata_give(weapondata) {
     weapondata = merge_weapons(curweapondata, weapondata);
   }
 
-  weapon = weapondata[# "weapon"];
+  weapon = weapondata[#"weapon"];
   weapon_give(weapon, 1);
 
   if(weapon != level.weaponnone) {
-    if(weapondata[# "clip"] + weapondata[# "stock"] <= weapon.clipsize) {
+    if(weapondata[#"clip"] + weapondata[#"stock"] <= weapon.clipsize) {
       self setweaponammoclip(weapon, weapon.clipsize);
       self setweaponammostock(weapon, 0);
     } else {
-      self setweaponammoclip(weapon, weapondata[# "clip"]);
-      self setweaponammostock(weapon, weapondata[# "stock"]);
+      self setweaponammoclip(weapon, weapondata[#"clip"]);
+      self setweaponammostock(weapon, weapondata[#"stock"]);
     }
 
-    if(isDefined(weapondata[# "fuel"])) {
-      self setweaponammofuel(weapon, weapondata[# "fuel"]);
+    if(isDefined(weapondata[#"fuel"])) {
+      self setweaponammofuel(weapon, weapondata[#"fuel"]);
     }
 
-    if(isDefined(weapondata[# "heat"]) && isDefined(weapondata[# "overheat"])) {
-      self setweaponoverheating(weapondata[# "overheat"], weapondata[# "heat"], weapon);
+    if(isDefined(weapondata[#"heat"]) && isDefined(weapondata[#"overheat"])) {
+      self setweaponoverheating(weapondata[#"overheat"], weapondata[#"heat"], weapon);
     }
 
-    if(weapon.isgadget && isDefined(weapondata[# "power"])) {
+    if(weapon.isgadget && isDefined(weapondata[#"power"])) {
       slot = self gadgetgetslot(weapon);
 
       if(slot >= 0) {
-        self gadgetpowerset(slot, weapondata[# "power"]);
+        self gadgetpowerset(slot, weapondata[#"power"]);
       }
     }
 
-    if(weapon.isriotshield && isDefined(weapondata[# "health"])) {
-      self.weaponhealth = weapondata[# "health"];
+    if(weapon.isriotshield && isDefined(weapondata[#"health"])) {
+      self.weaponhealth = weapondata[#"health"];
     }
   }
 
@@ -1532,7 +1532,7 @@ weapondata_give(weapondata) {
       self giveweapon(dw_weapon);
     }
 
-    self setweaponammoclip(dw_weapon, weapondata[# "lh_clip"]);
+    self setweaponammoclip(dw_weapon, weapondata[#"lh_clip"]);
   }
 
   alt_weapon = weapon.altweapon;
@@ -1542,23 +1542,23 @@ weapondata_give(weapondata) {
       self giveweapon(alt_weapon);
     }
 
-    self setweaponammoclip(alt_weapon, weapondata[# "alt_clip"]);
-    self setweaponammostock(alt_weapon, weapondata[# "alt_stock"]);
+    self setweaponammoclip(alt_weapon, weapondata[#"alt_clip"]);
+    self setweaponammostock(alt_weapon, weapondata[#"alt_stock"]);
   }
 
-  if(isDefined(weapondata[# "aat"])) {
-    self aat::acquire(weapon, weapondata[# "aat"]);
+  if(isDefined(weapondata[#"aat"])) {
+    self aat::acquire(weapon, weapondata[#"aat"]);
   }
 
-  if(isDefined(weapondata[# "repacks"]) && weapondata[# "repacks"] > 0) {
-    self zm_pap_util::repack_weapon(weapon, weapondata[# "repacks"]);
+  if(isDefined(weapondata[#"repacks"]) && weapondata[#"repacks"] > 0) {
+    self zm_pap_util::repack_weapon(weapon, weapondata[#"repacks"]);
   }
 
   return weapon;
 }
 
 weapondata_take(weapondata) {
-  weapon = weapondata[# "weapon"];
+  weapon = weapondata[#"weapon"];
 
   if(weapon != level.weaponnone) {
     if(self hasweapon(weapon)) {
@@ -1649,15 +1649,15 @@ player_give_loadout(loadout, replace_existing = 1, immediate_switch = 0) {
   }
 
   foreach(weapondata in loadout.weapons) {
-    if(isDefined(weapondata[# "weapon"].isheroweapon) && weapondata[# "weapon"].isheroweapon) {
+    if(isDefined(weapondata[#"weapon"].isheroweapon) && weapondata[#"weapon"].isheroweapon) {
       self zm_hero_weapon::hero_give_weapon(self.var_fd05e363, 0);
-      w_weapon = weapondata[# "weapon"];
+      w_weapon = weapondata[#"weapon"];
 
-      if(w_weapon.isgadget && isDefined(weapondata[# "power"])) {
+      if(w_weapon.isgadget && isDefined(weapondata[#"power"])) {
         slot = self gadgetgetslot(w_weapon);
 
         if(slot >= 0) {
-          self gadgetpowerset(slot, weapondata[# "power"]);
+          self gadgetpowerset(slot, weapondata[#"power"]);
         }
       }
 

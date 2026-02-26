@@ -31,7 +31,7 @@ function assign() {
 }
 
 function private function_d46cc4f5() {
-  team = isDefined(self.pers[# "team"]) ? self.pers[# "team"] : self.team;
+  team = isDefined(self.pers[#"team"]) ? self.pers[#"team"] : self.team;
   difficulty = level function_c0e2f147(team);
   self.bot.difficulty = level function_abad20c4(difficulty);
 }

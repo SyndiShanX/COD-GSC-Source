@@ -26,8 +26,8 @@ function private preinit() {
   }
 
   params = getscriptbundle(bundle);
-  level._effect[# "heli_guard_light"][# "friendly"] = params.var_667eb0de;
-  level._effect[# "heli_guard_light"][# "enemy"] = params.var_1d8c24a8;
+  level._effect[#"heli_guard_light"][#"friendly"] = params.var_667eb0de;
+  level._effect[#"heli_guard_light"][#"enemy"] = params.var_1d8c24a8;
   clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
   clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
   clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
@@ -195,7 +195,7 @@ function startfx(localclientnum) {
     }
 
     if(isDefined(light_fx)) {
-      self.lightfxid = self fx::function_3539a829(localclientnum, level._effect[light_fx][# "friendly"], level._effect[light_fx][# "enemy"], "tag_origin");
+      self.lightfxid = self fx::function_3539a829(localclientnum, level._effect[light_fx][#"friendly"], level._effect[light_fx][#"enemy"], "tag_origin");
     }
   }
 }
@@ -267,7 +267,7 @@ function updatemarkerthread(localclientnum) {
     viewangles = getlocalclientangles(localclientnum);
     forwardvector = vectorscale(anglesToForward(viewangles), killstreakcorebundle.ksmaxairdroptargetrange);
     results = bulletTrace(player getEye(), player getEye() + forwardvector, 0, player);
-    player.markerobj.origin = results[# "position"];
+    player.markerobj.origin = results[#"position"];
     waitframe(1);
   }
 }

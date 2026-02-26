@@ -85,7 +85,7 @@ function mayspawn() {
       gamehasstarted = level.maxplayercount > 1 || !util::isoneround() && !util::isfirstround();
     }
 
-    if(!is_true(self.pers[# "lives"]) && gamehasstarted) {
+    if(!is_true(self.pers[#"lives"]) && gamehasstarted) {
       return false;
     } else if(gamehasstarted) {
       if(!level.ingraceperiod && !self.hasspawned && !isbot(self)) {
@@ -99,8 +99,8 @@ function mayspawn() {
 
 function timeuntilwavespawn(minimumwait) {
   earliestspawntime = gettime() + int(minimumwait * 1000);
-  lastwavetime = level.lastwave[self.pers[# "team"]];
-  wavedelay = int(level.wavedelay[self.pers[# "team"]] * 1000);
+  lastwavetime = level.lastwave[self.pers[#"team"]];
+  wavedelay = int(level.wavedelay[self.pers[#"team"]] * 1000);
 
   if(wavedelay == 0) {
     return 0;
@@ -197,8 +197,8 @@ function spawnplayer() {
     pixbeginevent(#"");
     team = self.team;
 
-    if(isDefined(self.pers[# "music"].spawn) && self.pers[# "music"].spawn == 0) {
-      self.pers[# "music"].spawn = 1;
+    if(isDefined(self.pers[#"music"].spawn) && self.pers[#"music"].spawn == 0) {
+      self.pers[#"music"].spawn = 1;
     }
 
     if(level.splitscreen) {
@@ -222,8 +222,8 @@ function spawnplayer() {
     pixendevent();
   }
 
-  if(isDefined(self.pers[# "momentum"])) {
-    self.momentum = self.pers[# "momentum"];
+  if(isDefined(self.pers[#"momentum"])) {
+    self.momentum = self.pers[#"momentum"];
   }
 
   pixendevent();
@@ -269,7 +269,7 @@ function in_spawnspectator(origin, angles) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     self.statusicon = "";
   } else {
     self.statusicon = "hud_status_dead";
@@ -304,13 +304,13 @@ function forcespawn(time) {
     return;
   }
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     return;
   }
 
-  if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
-    self.pers[# "class"] = "CLASS_CUSTOM1";
-    self.curclass = self.pers[# "class"];
+  if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
+    self.pers[#"class"] = "CLASS_CUSTOM1";
+    self.curclass = self.pers[#"class"];
   }
 
   self thread[[level.spawnclient]]();
@@ -358,7 +358,7 @@ function kickifidontspawninternal() {
     return;
   }
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     return;
   }
 
@@ -470,7 +470,7 @@ function allteamsnearscorelimit() {
   }
 
   foreach(team, _ in level.teams) {
-    if(!(game.stat[# "teamscores"][team] >= level.scorelimit - 1)) {
+    if(!(game.stat[#"teamscores"][team] >= level.scorelimit - 1)) {
       return false;
     }
   }
@@ -499,7 +499,7 @@ function shouldshowrespawnmessage() {
 }
 
 function default_spawnmessage() {
-  hud_message::setlowermessage(game.strings[# "spawn_next_round"]);
+  hud_message::setlowermessage(game.strings[#"spawn_next_round"]);
 }
 
 function showspawnmessage() {
@@ -564,9 +564,9 @@ function waitandspawnclient(timealreadypassed) {
 
   if(timeuntilspawn > 0) {
     if(level.playerqueuedrespawn) {
-      hud_message::setlowermessage(game.strings[# "you_will_spawn"], timeuntilspawn);
+      hud_message::setlowermessage(game.strings[#"you_will_spawn"], timeuntilspawn);
     } else {
-      hud_message::setlowermessage(game.strings[# "waiting_to_spawn"], timeuntilspawn);
+      hud_message::setlowermessage(game.strings[#"waiting_to_spawn"], timeuntilspawn);
     }
 
     if(!spawnedasspectator) {
@@ -598,7 +598,7 @@ function waitandspawnclient(timealreadypassed) {
   wavebased = level.waverespawndelay > 0;
 
   if(!level.playerforcerespawn && self.hasspawned && !wavebased && !self.wantsafespawn && !level.playerqueuedrespawn) {
-    hud_message::setlowermessage(game.strings[# "press_to_spawn"]);
+    hud_message::setlowermessage(game.strings[#"press_to_spawn"]);
 
     if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + (0, 0, 60), self.angles);

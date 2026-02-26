@@ -472,8 +472,8 @@ function_8a4b7d4a(weapon) {
 }
 
 function_afbd7223(oldweapondata, newweapondata) {
-  w_current = oldweapondata[# "weapon"];
-  var_2153c223 = newweapondata[# "weapon"];
+  w_current = oldweapondata[#"weapon"];
+  var_2153c223 = newweapondata[#"weapon"];
 
   if(isinarray(level.var_65b6264d, w_current) && isinarray(level.var_65b6264d, var_2153c223)) {
     weapondata = [];
@@ -481,14 +481,14 @@ function_afbd7223(oldweapondata, newweapondata) {
 
     foreach(w_test in a_w_test) {
       if(w_current == w_test || var_2153c223 == w_test) {
-        weapondata[# "weapon"] = w_test;
+        weapondata[#"weapon"] = w_test;
         break;
       }
     }
 
-    var_a0bd414d = weapondata[# "weapon"];
-    weapondata[# "clip"] = int(min(newweapondata[# "clip"] + oldweapondata[# "clip"], var_a0bd414d.clipsize));
-    weapondata[# "stock"] = int(min(newweapondata[# "stock"] + oldweapondata[# "stock"], var_a0bd414d.maxammo));
+    var_a0bd414d = weapondata[#"weapon"];
+    weapondata[#"clip"] = int(min(newweapondata[#"clip"] + oldweapondata[#"clip"], var_a0bd414d.clipsize));
+    weapondata[#"stock"] = int(min(newweapondata[#"stock"] + oldweapondata[#"stock"], var_a0bd414d.maxammo));
     return weapondata;
   }
 }

@@ -176,7 +176,7 @@ function_13576d14() {
 
     var_d7267ad9 = "towers_boss_tower_badplace_" + var_6848389e;
     var_e220a902.badplace_name = var_d7267ad9;
-    badplace_box(var_d7267ad9, 0, groundtrace(var_e220a902.origin + (0, 0, 8), var_e220a902.origin + (0, 0, -100000), 0, var_e220a902)[# "position"], var_a406cb50, "all");
+    badplace_box(var_d7267ad9, 0, groundtrace(var_e220a902.origin + (0, 0, 8), var_e220a902.origin + (0, 0, -100000), 0, var_e220a902)[#"position"], var_a406cb50, "all");
     var_6848389e++;
     waitframe(1);
   }

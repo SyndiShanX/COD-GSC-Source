@@ -63,14 +63,14 @@ __init__() {
 
   if(!isDefined(level.var_1e18ffa0)) {
     level.var_1e18ffa0 = [];
-    level.var_1e18ffa0[# "allies"] = [];
-    level.var_1e18ffa0[# "allies"][0] = "spawner_mp_swat_buddy_team1_male";
-    level.var_1e18ffa0[# "allies"][1] = "spawner_mp_swat_buddy_team1_female";
-    level.var_1e18ffa0[# "allies"][2] = "spawner_mp_swat_buddy_team1_male";
-    level.var_1e18ffa0[# "axis"] = [];
-    level.var_1e18ffa0[# "axis"][0] = "spawner_mp_swat_buddy_team2_male";
-    level.var_1e18ffa0[# "axis"][1] = "spawner_mp_swat_buddy_team2_female";
-    level.var_1e18ffa0[# "axis"][2] = "spawner_mp_swat_buddy_team2_male";
+    level.var_1e18ffa0[#"allies"] = [];
+    level.var_1e18ffa0[#"allies"][0] = "spawner_mp_swat_buddy_team1_male";
+    level.var_1e18ffa0[#"allies"][1] = "spawner_mp_swat_buddy_team1_female";
+    level.var_1e18ffa0[#"allies"][2] = "spawner_mp_swat_buddy_team1_male";
+    level.var_1e18ffa0[#"axis"] = [];
+    level.var_1e18ffa0[#"axis"][0] = "spawner_mp_swat_buddy_team2_male";
+    level.var_1e18ffa0[#"axis"][1] = "spawner_mp_swat_buddy_team2_female";
+    level.var_1e18ffa0[#"axis"][2] = "spawner_mp_swat_buddy_team2_male";
   }
 
   loadsentienteventparameters("sentientevents_mp");
@@ -136,7 +136,7 @@ function_944f0911(hintstring) {
 function_ab9a9770(player) {
   results = groundtrace(player.origin + (0, 0, 70), player.origin + (0, 0, -100), 0, player);
 
-  if(isDefined(results) && isDefined(results[# "entity"]) && results[# "entity"] ismovingplatform()) {
+  if(isDefined(results) && isDefined(results[#"entity"]) && results[#"entity"] ismovingplatform()) {
     return true;
   }
 
@@ -179,16 +179,16 @@ function_87bf6422(killstreak) {
   player notify(#"hash_6e666a0689c3fd62");
   player thread function_6936559a(context);
   player thread spawn_swat_team(player, context, player.origin);
-  util::function_5a68c330(21, player.team, player getentitynumber(), level.killstreaks[# "swat_team"].uiname);
+  util::function_5a68c330(21, player.team, player getentitynumber(), level.killstreaks[#"swat_team"].uiname);
   return true;
 }
 
 function_6936559a(context) {
   trace = groundtrace(self.origin + (0, 0, 50), self.origin + (0, 0, -100000), 0, self);
 
-  if(isDefined(trace[# "position"]) && isDefined(trace[# "normal"])) {
-    origin = trace[# "position"];
-    angles = vectortoangles(trace[# "normal"]);
+  if(isDefined(trace[#"position"]) && isDefined(trace[#"normal"])) {
+    origin = trace[#"position"];
+    angles = vectortoangles(trace[#"normal"]);
     ir_model = util::spawn_model("wpn_t8_eqp_ir_strobe_world", origin, angles);
 
     if(isDefined(ir_model)) {
@@ -675,8 +675,8 @@ function_e69272bf() {
   if(!level.teambased) {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     enemy_teams_mask = level.spawnsystem.ispawn_teammask_free;
-  } else if(isDefined(self.script_owner.pers[# "team"])) {
-    team = self.script_owner.pers[# "team"];
+  } else if(isDefined(self.script_owner.pers[#"team"])) {
+    team = self.script_owner.pers[#"team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   } else {
@@ -1268,10 +1268,10 @@ function_7fac6670(swat_gunner) {
 function_ab667e1c(owner, helicopter) {
   assert(isDefined(owner.swat_team));
   assert(isDefined(helicopter));
-  aitypes = level.var_1e18ffa0[# "axis"];
+  aitypes = level.var_1e18ffa0[#"axis"];
 
   if(isDefined(owner.team) && owner.team == # "allies") {
-    aitypes = level.var_1e18ffa0[# "allies"];
+    aitypes = level.var_1e18ffa0[#"allies"];
   }
 
   owner.var_e60e2941 = [];
@@ -1439,7 +1439,7 @@ function_accec5c5(origin, context, verticaloffset) {
   radius = 30;
   trace = physicstrace(origin + (0, 0, verticaloffset), origin + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), mask);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     recordsphere(origin + (0, 0, 20), 2, (1, 0, 0), "<dev string:x3b>");
 
     return false;
@@ -1453,7 +1453,7 @@ function_accec5c5(origin, context, verticaloffset) {
 function_d15dd929(origin) {
   result = function_9cc082d2(origin + (0, 0, 100), 200);
 
-  if(isDefined(result[# "materialflags"]) && result[# "materialflags"] & 2) {
+  if(isDefined(result[#"materialflags"]) && result[#"materialflags"] & 2) {
     return false;
   }
 
@@ -1601,10 +1601,10 @@ function_fe13a227(helicopter, var_1c996690, destination) {
 }
 
 function_2bade425(owner, helicopter) {
-  aitypes = level.var_1e18ffa0[# "axis"];
+  aitypes = level.var_1e18ffa0[#"axis"];
 
   if(isDefined(owner.team) && owner.team == # "allies") {
-    aitypes = level.var_1e18ffa0[# "allies"];
+    aitypes = level.var_1e18ffa0[#"allies"];
   }
 
   for(i = 0; i < 2; i++) {
@@ -2182,7 +2182,7 @@ function_4c2ed78d(owner, forced = 0) {
     return;
   }
 
-  owner_origin = result[# "point"];
+  owner_origin = result[#"point"];
 
   if(!isDefined(owner_origin)) {
     return;
@@ -2217,7 +2217,7 @@ function_4c2ed78d(owner, forced = 0) {
   result = function_9cc082d2(var_56bd1bef, 1000);
 
   if(isDefined(result)) {
-    var_56bd1bef = result[# "point"];
+    var_56bd1bef = result[#"point"];
   }
 
   if(!isDefined(var_56bd1bef) && (!isDefined(potentialenemies) || !potentialenemies.size)) {
@@ -2346,17 +2346,17 @@ swat_guard() {
   eye = self getEye();
   direction_vec = (direction_vec[0] * 2000, direction_vec[1] * 2000, direction_vec[2] * 2000);
   trace = bulletTrace(eye, eye + direction_vec, 0, self);
-  position = getclosestpointonnavmesh(trace[# "position"]);
+  position = getclosestpointonnavmesh(trace[#"position"]);
 
   if(!isDefined(position)) {
-    var_2b4c258c = trace[# "position"] - eye;
+    var_2b4c258c = trace[#"position"] - eye;
 
     for(i = 0; i < 8; i++) {
       testpos = eye + vectorscale(var_2b4c258c, (8 - i) / 8);
       position = function_9cc082d2(testpos, 800);
 
       if(isDefined(position)) {
-        position = position[# "point"];
+        position = position[#"point"];
         break;
       }
     }
@@ -2653,7 +2653,7 @@ function_59f58b93(origin) {
   if(isDefined(self.var_6c0553ea.marker)) {
     self.var_6c0553ea.marker.origin = origin;
     self.var_6c0553ea.marker.team = self.team;
-    self.var_6c0553ea.marker entityheadicons::setentityheadicon(self.pers[# "team"], self, self.var_6c0553ea.objective);
+    self.var_6c0553ea.marker entityheadicons::setentityheadicon(self.pers[#"team"], self, self.var_6c0553ea.objective);
     objid = self.var_6c0553ea.marker.entityheadobjectives[self.var_6c0553ea.marker.entityheadobjectives.size - 1];
     objective_setinvisibletoall(objid);
     objective_setvisibletoplayer(objid, self);
@@ -2721,7 +2721,7 @@ function_4c0ed253(location, context) {
     radius = context.radius;
     trace = physicstrace(location + (0, 0, 5000), location + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(!(isDefined(level.var_66da9c3c) && level.var_66da9c3c)) {
         return false;
       }
@@ -2762,7 +2762,7 @@ islocationgood(location, context) {
     radius = context.radius;
     trace = physicstrace(location + (0, 0, 5000), location + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(!(isDefined(level.var_66da9c3c) && level.var_66da9c3c)) {
         return 0;
       }

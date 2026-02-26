@@ -245,7 +245,7 @@ function dev_cac_cycle_body(forward, tag) {
   }
 
   player = level.dev_cac_player;
-  keys = getarraykeys(level.cac_functions[# "set_body_model"]);
+  keys = getarraykeys(level.cac_functions[#"set_body_model"]);
 
   if(tag) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
@@ -262,7 +262,7 @@ function dev_cac_cycle_head(forward, tag) {
   }
 
   player = level.dev_cac_player;
-  keys = getarraykeys(level.cac_functions[# "set_head_model"]);
+  keys = getarraykeys(level.cac_functions[#"set_head_model"]);
 
   if(tag) {
     player.cac_head_type = next_in_list(player.cac_head_type, keys);
@@ -280,7 +280,7 @@ function dev_cac_cycle_character(forward, tag) {
   }
 
   player = level.dev_cac_player;
-  keys = getarraykeys(level.cac_functions[# "set_body_model"]);
+  keys = getarraykeys(level.cac_functions[#"set_body_model"]);
 
   if(tag) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);

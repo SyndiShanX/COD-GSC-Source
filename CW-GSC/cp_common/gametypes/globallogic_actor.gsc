@@ -309,7 +309,7 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
     }
 
     if(!is_true(self.disable_score_events)) {
-      if(!level.teambased || self.team != player.pers[# "team"]) {
+      if(!level.teambased || self.team != player.pers[#"team"]) {
         self thread challenges::actorkilled(einflictor, player, idamage, smeansofdeath, weapon, shitloc);
         self function_bb02eb15(einflictor, player, weapon, player.team);
       }

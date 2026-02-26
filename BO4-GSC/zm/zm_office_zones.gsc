@@ -45,8 +45,8 @@ zone_init() {
   zm_zonemgr::add_adjacent_zone("labs_hallway1", "labs_zone3", "lab3_level3", 0);
   zm_zonemgr::add_adjacent_zone("labs_zone1", "labs_hallway1", "lab1_level3", 1);
   zm_zonemgr::add_adjacent_zone("cage", "cage_upper", #"hash_537cc10c9deca9da", 0);
-  level.zones[# "conference_level1"].var_305d6168 = 4;
-  level.zones[# "hallway_level1"].var_305d6168 = 4;
+  level.zones[#"conference_level1"].var_305d6168 = 4;
+  level.zones[#"hallway_level1"].var_305d6168 = 4;
   level thread function_d03a6fa("conference_level1", "offices_level1", "conf1_offices1");
   level thread function_d03a6fa("hallway_level1", "file_room_level1", "hall1_file1");
 
@@ -62,8 +62,8 @@ function_d03a6fa(str_zone1, str_zone2, str_flag) {
 }
 
 function_cada51b5(b_enable = 1) {
-  level.zones[# "cage"].is_enabled = b_enable;
-  level.zones[# "cage_upper"].is_enabled = b_enable;
+  level.zones[#"cage"].is_enabled = b_enable;
+  level.zones[#"cage_upper"].is_enabled = b_enable;
 }
 
 function_29ec1ad7() {

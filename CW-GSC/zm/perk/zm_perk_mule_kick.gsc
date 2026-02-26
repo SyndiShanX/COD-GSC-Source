@@ -59,12 +59,12 @@ function function_27473e44() {
 }
 
 function precache() {
-  level._effect[# "mulekick_light"] = "zombie/fx9_perk_mulekick";
-  level.machine_assets[# "talent_mulekick"] = spawnStruct();
-  level.machine_assets[# "talent_mulekick"].weapon = getweapon("zombie_perk_bottle_mulekick");
-  level.machine_assets[# "talent_mulekick"].off_model = "p9_fxanim_zm_gp_mule_kick_mod";
-  level.machine_assets[# "talent_mulekick"].on_model = "p9_fxanim_zm_gp_mule_kick_mod";
-  level.machine_assets[# "talent_mulekick"].power_on_callback = &function_c60d9d72;
+  level._effect[#"mulekick_light"] = "zombie/fx9_perk_mulekick";
+  level.machine_assets[#"talent_mulekick"] = spawnStruct();
+  level.machine_assets[#"talent_mulekick"].weapon = getweapon("zombie_perk_bottle_mulekick");
+  level.machine_assets[#"talent_mulekick"].off_model = "p9_fxanim_zm_gp_mule_kick_mod";
+  level.machine_assets[#"talent_mulekick"].on_model = "p9_fxanim_zm_gp_mule_kick_mod";
+  level.machine_assets[#"talent_mulekick"].power_on_callback = &function_c60d9d72;
 }
 
 function register_clientfield() {

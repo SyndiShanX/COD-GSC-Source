@@ -60,7 +60,7 @@ function private function_f1707039() {
 
   for(i = 0; i < 4; i++) {
     level.var_4b42d599[i] = "killstreaks.killstreak" + i + ".inUse";
-    clientfield::register_clientuimodel(level.var_4b42d599[i], #"killstreak_rewards", [# "killstreak" + (isDefined(i) ? "" + i : ""), #"inuse"], 1, 1, "int", undefined, 0, 0);
+    clientfield::register_clientuimodel(level.var_4b42d599[i], #"killstreak_rewards", [#"killstreak" + (isDefined(i) ? "" + i : ""), #"inuse"], 1, 1, "int", undefined, 0, 0);
   }
 
   level.var_46b33f90[i] = [];
@@ -68,7 +68,7 @@ function private function_f1707039() {
 
   for(i = 0; i < level.var_173b8ed7; i++) {
     level.var_46b33f90[i] = "killstreaks.killstreak" + i + ".spaceFull";
-    clientfield::register_clientuimodel(level.var_46b33f90[i], #"killstreak_rewards", [# "killstreak" + (isDefined(i) ? "" + i : ""), #"spacefull"], 1, 1, "int", undefined, 0, 0);
+    clientfield::register_clientuimodel(level.var_46b33f90[i], #"killstreak_rewards", [#"killstreak" + (isDefined(i) ? "" + i : ""), #"spacefull"], 1, 1, "int", undefined, 0, 0);
   }
 }
 

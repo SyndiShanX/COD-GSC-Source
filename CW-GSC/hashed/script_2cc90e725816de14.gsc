@@ -162,7 +162,7 @@ function private function_f7c8ccf5(entity, point1, point2) {
   }
 
   trace = physicstraceex(point1, point2, entity getmins(), entity getmaxs(), entity);
-  return trace[# "fraction"] >= 1;
+  return trace[#"fraction"] >= 1;
 }
 
 function function_3715dbff(entity) {

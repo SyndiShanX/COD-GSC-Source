@@ -22,22 +22,22 @@ function reset_match_start(total_stages) {
 }
 
 function reset_stages(total_stages) {
-  game.stat[# "stagetickets"] = [];
+  game.stat[#"stagetickets"] = [];
 
   foreach(team, _ in level.teams) {
-    game.stat[# "stagetickets"][team] = [];
+    game.stat[#"stagetickets"][team] = [];
 
     for(stage = 0; stage < total_stages; stage++) {
-      game.stat[# "stagetickets"][team][stage] = 0;
+      game.stat[#"stagetickets"][team][stage] = 0;
     }
   }
 }
 
 function reset_tickets() {
-  game.stat[# "tickets"] = [];
+  game.stat[#"tickets"] = [];
 
   foreach(team, _ in level.teams) {
-    game.stat[# "tickets"][team] = 0;
+    game.stat[#"tickets"][team] = 0;
   }
 }
 
@@ -107,29 +107,29 @@ function on_player_killed(params) {
 }
 
 function set_tickets(team, tickets) {
-  original_total = game.stat[# "tickets"][team];
-  game.stat[# "tickets"][team] = tickets;
+  original_total = game.stat[#"tickets"][team];
+  game.stat[#"tickets"][team] = tickets;
   notify_tickets_updated(team, original_total);
 }
 
 function earn_tickets(team, tickets) {
-  original_total = game.stat[# "tickets"][team];
-  game.stat[# "tickets"][team] += tickets;
+  original_total = game.stat[#"tickets"][team];
+  game.stat[#"tickets"][team] += tickets;
   clamp_tickets(team);
   notify_tickets_updated(team, original_total);
 }
 
 function lose_tickets(team, tickets) {
-  original_total = game.stat[# "tickets"][team];
-  game.stat[# "tickets"][team] -= tickets;
+  original_total = game.stat[#"tickets"][team];
+  game.stat[#"tickets"][team] -= tickets;
   clamp_tickets(team);
   notify_tickets_updated(team, original_total);
 }
 
 function notify_tickets_updated(team, original_total) {
-  if(original_total != game.stat[# "tickets"][team]) {
+  if(original_total != game.stat[#"tickets"][team]) {
     level notify(#"tickets_updated", {
-      #team: team, #total_tickets: game.stat[# "tickets"][team]
+      #team: team, #total_tickets: game.stat[#"tickets"][team]
     });
     low_ticket_threshold = 30;
     very_low_ticket_threshold = 10;
@@ -140,17 +140,17 @@ function notify_tickets_updated(team, original_total) {
     }
 
     low_tickets_enabled = level.low_tickets_enabled === 1;
-    level.low_ticket_count = game.stat[# "tickets"][team] <= low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
-    level.very_low_ticket_count = game.stat[# "tickets"][team] <= very_low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
+    level.low_ticket_count = game.stat[#"tickets"][team] <= low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
+    level.very_low_ticket_count = game.stat[#"tickets"][team] <= very_low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
   }
 }
 
 function private clamp_tickets(team) {
-  game.stat[# "tickets"][team] = math::clamp(game.stat[# "tickets"][team], 0, 2147483647);
+  game.stat[#"tickets"][team] = math::clamp(game.stat[#"tickets"][team], 0, 2147483647);
 }
 
 function commit_tickets(team, stage) {
-  game.stat[# "stagetickets"][team][stage] = game.stat[# "tickets"][team];
+  game.stat[#"stagetickets"][team][stage] = game.stat[#"tickets"][team];
   notify_stage_tickets_updated(team, stage);
 }
 
@@ -171,7 +171,7 @@ function get_tickets(team) {
     return 0;
   }
 
-  return game.stat[# "tickets"][team];
+  return game.stat[#"tickets"][team];
 }
 
 function get_stage_tickets(team, stage) {
@@ -179,12 +179,12 @@ function get_stage_tickets(team, stage) {
     return 0;
   }
 
-  return game.stat[# "stagetickets"][team][stage];
+  return game.stat[#"stagetickets"][team][stage];
 }
 
 function notify_stage_tickets_updated(team, stage) {
   level notify(#"tickets_stage_updated", {
-    #team: team, #zone_number: stage, #total_tickets: game.stat[# "stagetickets"][team][stage]
+    #team: team, #zone_number: stage, #total_tickets: game.stat[#"stagetickets"][team][stage]
   });
 }
 

@@ -63,7 +63,7 @@ function function_70073b6b(str_objective, var_50cc0d4f, var_aa1a6455, player) {
   if(player) {
     level flag::set(#"hash_4939af0c2a6ea11d");
     var_4c5366ee = doors::get_doors("e_lockpick_door", "targetname")[0];
-    a_scene_ents[# "door"] = var_4c5366ee.c_door.m_e_door;
+    a_scene_ents[#"door"] = var_4c5366ee.c_door.m_e_door;
     level thread scene::play(#"hash_24e544fc76d24b96", "doors_loop", a_scene_ents);
   }
 
@@ -116,10 +116,10 @@ function function_b9596ad1() {
   var_d1a24548 setModel(#"c_t9_cp_rus_kgb_guard_body_officer_a");
   var_d1a24548 val::set(#"hash_70f48a440e25a27c", "magic_bullet_shield", 1);
   var_12baf921 = spawner::simple_spawn_single("lockpick_scene_enemy_desk", &function_87f353f6, #"c_t9_shg_npc_e_reshetnikov");
-  level.var_eea5b22[# "hash_65d78c2acf2a7732"] = var_d1a24548;
-  level.var_eea5b22[# "hash_3c251f2afff5ae77"] = var_12baf921;
+  level.var_eea5b22[#"hash_65d78c2acf2a7732"] = var_d1a24548;
+  level.var_eea5b22[#"hash_3c251f2afff5ae77"] = var_12baf921;
   var_4c5366ee = doors::get_doors("e_lockpick_door", "targetname")[0];
-  level.var_eea5b22[# "door"] = var_4c5366ee.c_door.m_e_door;
+  level.var_eea5b22[#"door"] = var_4c5366ee.c_door.m_e_door;
   level function_4f4f437b();
   animation::add_notetrack_func("amerika_tunnels::lockpick_takedown_player_handler", &function_6fac81f3);
   animation::add_notetrack_func("amerika_tunnels:lockpick_takedown_player_shellshock", &function_8ad67270);
@@ -155,7 +155,7 @@ function function_4f4f437b() {
   level.player.var_4d448bdb function_1fac41e4(level.player function_19124308());
   level.player.var_4d448bdb.anim_debug_name = level.player.name + " clone";
   level.player.var_4d448bdb hide();
-  level.var_eea5b22[# "player_clone"] = level.player.var_4d448bdb;
+  level.var_eea5b22[#"player_clone"] = level.player.var_4d448bdb;
 }
 
 function private function_87f353f6(mdl_head) {
@@ -190,7 +190,7 @@ function private function_bb9839d8() {
   clientfield::set("SetPBGExposureBank", 2);
   level flag::set(#"flg_side_door_scene_start");
   namespace_b61bbd82::music("3.0_caught");
-  var_2a16bfbe = level.var_eea5b22[# "hash_65d78c2acf2a7732"];
+  var_2a16bfbe = level.var_eea5b22[#"hash_65d78c2acf2a7732"];
   var_2a16bfbe notsolid();
   level.player thread function_ed97bf94();
   level scene::play(#"hash_24e544fc76d24b96", "open_door_start", level.var_eea5b22);
@@ -253,7 +253,7 @@ function private function_e5368a6a() {
   }
 
   if(var_9a528114.model != # "") {
-    level.var_eea5b22[# "weapon"] = var_9a528114;
+    level.var_eea5b22[#"weapon"] = var_9a528114;
     return;
   }
 
@@ -264,7 +264,7 @@ function private function_2ea0a58() {
   level.woods hms_util::function_cdc39aec();
   waitframe(1);
   level namespace_fc3e8cb::function_2987fd4c("s_teleport_woods_perimeter", 1, 0);
-  level.var_eea5b22[# "woods"] = level.woods;
+  level.var_eea5b22[#"woods"] = level.woods;
 }
 
 function private function_6fac81f3(params) {
@@ -365,7 +365,7 @@ function private function_9f0dc392(var_bcf157b) {
 }
 
 function private function_8ad67270(params) {
-  var_2a16bfbe = level.var_eea5b22[# "hash_65d78c2acf2a7732"];
+  var_2a16bfbe = level.var_eea5b22[#"hash_65d78c2acf2a7732"];
   effect = getstatuseffect(#"blurred");
   var_711343eb = level.player getnormalhealth() * 0.4;
   level.player setnormalhealth(var_711343eb);
@@ -395,7 +395,7 @@ function private function_29962dd8(params) {
       break;
   }
 
-  var_86514cc = level.var_eea5b22[# "hash_3c251f2afff5ae77"];
+  var_86514cc = level.var_eea5b22[#"hash_3c251f2afff5ae77"];
   var_86514cc val::reset(#"hash_70f48a440e25a27c", "magic_bullet_shield");
   var_86514cc val::reset(#"hash_70f48a440e25a27c", "takedamage");
   level.player clientfield::set_to_player("slowmo_postfx", 1);

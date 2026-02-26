@@ -56,14 +56,14 @@ spawner() {
 }
 
 precache() {
-  character\character_opforce_merc_smg_a::precache();
-  character\character_opforce_merc_smg_b::precache();
-  character\character_opforce_merc_smg_c::precache();
+    character\character_opforce_merc_smg_a::precache();
+    character\character_opforce_merc_smg_b::precache();
+    character\character_opforce_merc_smg_c::precache();
 
-  precacheItem("dragunov");
-  precacheItem("dragunov_woodland");
-  precacheItem("pp2000");
-  precacheItem("fraggrenade");
+    precacheItem("dragunov");
+    precacheItem("dragunov_woodland");
+    precacheItem("pp2000");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

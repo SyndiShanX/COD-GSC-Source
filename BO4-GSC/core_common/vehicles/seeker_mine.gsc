@@ -101,8 +101,8 @@ function_b23e4b45() {
     if(isDefined(var_921106a1)) {
       results = groundtrace(var_921106a1 + (0, 0, 70), var_921106a1 + (0, 0, -70), 0, self);
 
-      if(isDefined(results) && isDefined(results[# "position"])) {
-        var_921106a1 = results[# "position"];
+      if(isDefined(results) && isDefined(results[#"position"])) {
+        var_921106a1 = results[#"position"];
 
         if(bullettracepassed(self.origin + (0, 0, 10), var_921106a1, 0, self, self, 0, 0)) {
           recordline(self.origin + (0, 0, 10), var_921106a1, (0, 0, 1), "<dev string:x38>");
@@ -191,8 +191,8 @@ function_d3a9800e() {
 function_d39f1cf2() {
   trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(trace[# "entity"])) {
-    entity = trace[# "entity"];
+  if(isDefined(trace[#"entity"])) {
+    entity = trace[#"entity"];
 
     if(entity ismovingplatform()) {
       return true;
@@ -505,7 +505,7 @@ function_82e5be34() {
 function_d15dd929(radius, origin) {
   result = function_9cc082d2(origin + (0, 0, 100), 200);
 
-  if(isDefined(result) && isDefined(result[# "materialflags"]) && result[# "materialflags"] & 2) {
+  if(isDefined(result) && isDefined(result[#"materialflags"]) && result[#"materialflags"] & 2) {
     return false;
   }
 
@@ -629,7 +629,7 @@ function_3e16dec3(params) {
 function_ab9a9770(target) {
   results = groundtrace(target.origin + (0, 0, 70), target.origin + (0, 0, -100), 0, target);
 
-  if(isDefined(results) && isDefined(results[# "entity"]) && results[# "entity"] ismovingplatform()) {
+  if(isDefined(results) && isDefined(results[#"entity"]) && results[#"entity"] ismovingplatform()) {
     return true;
   }
 
@@ -862,8 +862,8 @@ function_d55a99f2(var_4700521d = 500, var_53050fec = 1, var_30336a7c = 0) {
   if(isDefined(newpos)) {
     trace = groundtrace(newpos + (0, 0, 70), newpos + (0, 0, -70), 0, undefined);
 
-    if(isDefined(trace[# "position"])) {
-      newpos = trace[# "position"];
+    if(isDefined(trace[#"position"])) {
+      newpos = trace[#"position"];
 
       if(var_30336a7c && !sighttracepassed(self.origin, newpos, 0, self)) {
         return false;

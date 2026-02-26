@@ -115,8 +115,8 @@ function onstartgametype() {
 }
 
 function onplayerconnect() {
-  self.pers[# "cleandeposits"] = 0;
-  self.pers[# "cleandenies"] = 0;
+  self.pers[#"cleandeposits"] = 0;
+  self.pers[#"cleandenies"] = 0;
 }
 
 function function_aafe4c74() {
@@ -678,9 +678,9 @@ function function_83e87bd5(player) {
   time = gettime();
   player.var_916cc864 = time;
 
-  if(isDefined(player.pers[# "cleandeposits"])) {
-    player.pers[# "cleandeposits"] += 1;
-    player.cleandeposits = player.pers[# "cleandeposits"];
+  if(isDefined(player.pers[#"cleandeposits"])) {
+    player.pers[#"cleandeposits"] += 1;
+    player.cleandeposits = player.pers[#"cleandeposits"];
     [[level.var_37d62931]](player, 1);
   }
 
@@ -744,9 +744,9 @@ function function_95cbd646(player) {
   if(self.victimteam == player.team) {
     player playSound("mpl_killconfirm_tags_pickup");
 
-    if(isDefined(player.pers[# "cleandenies"])) {
-      player.pers[# "cleandenies"] += 1;
-      player.cleandenies = player.pers[# "cleandenies"];
+    if(isDefined(player.pers[#"cleandenies"])) {
+      player.pers[#"cleandenies"] += 1;
+      player.cleandenies = player.pers[#"cleandenies"];
       [[level.var_37d62931]](player, 1);
     }
 

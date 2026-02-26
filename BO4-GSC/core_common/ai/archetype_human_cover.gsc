@@ -323,7 +323,7 @@ shouldvantageatcovercondition(entity) {
   aimlimitsforcover = entity getaimlimitsfromentry("cover_vantage");
   legalaim = 0;
 
-  if(yawtoenemyposition < aimlimitsforcover[# "aim_left"] && yawtoenemyposition > aimlimitsforcover[# "aim_right"] && pitchtoenemyposition < 85 && pitchtoenemyposition > 25 && entity.node.origin[2] - entity.enemy.origin[2] >= 36) {
+  if(yawtoenemyposition < aimlimitsforcover[#"aim_left"] && yawtoenemyposition > aimlimitsforcover[#"aim_right"] && pitchtoenemyposition < 85 && pitchtoenemyposition > 25 && entity.node.origin[2] - entity.enemy.origin[2] >= 36) {
     legalaim = 1;
   }
 
@@ -431,7 +431,7 @@ temp_get_arm_offset(entity, throwposition) {
       } else {
         yawtoenemyposition = angleclamp180(vectortoangles(throwposition - entity.node.origin)[1] - entity.node.angles[1]);
         aimlimitsfordirectionright = entity getaimlimitsfromentry("pillar_right_lean");
-        legalrightdirectionyaw = yawtoenemyposition >= aimlimitsfordirectionright[# "aim_right"] - 10 && yawtoenemyposition <= 0;
+        legalrightdirectionyaw = yawtoenemyposition >= aimlimitsfordirectionright[#"aim_right"] - 10 && yawtoenemyposition <= 0;
 
         if(legalrightdirectionyaw) {
           arm_offset = rightoffset;

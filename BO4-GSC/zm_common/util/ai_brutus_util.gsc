@@ -511,7 +511,7 @@ brutus_death() {
     }
   }
 
-  if(isDefined(level.crafting_components[# "zitem_spectral_shield_part_3"]) && !(isDefined(var_1982af82) && var_1982af82)) {
+  if(isDefined(level.crafting_components[#"zitem_spectral_shield_part_3"]) && !(isDefined(var_1982af82) && var_1982af82)) {
     w_component = zm_crafting::get_component(#"zitem_spectral_shield_part_3");
 
     if(!zm_items::player_has(level.players[0], w_component) && !(isDefined(self.var_eebea220) && self.var_eebea220) && !level flag::get("round_reset")) {
@@ -522,11 +522,11 @@ brutus_death() {
 
   if(!(isDefined(self.var_db8b3627) && self.var_db8b3627)) {
     if(!(isDefined(level.var_7fd2edf6) && level.var_7fd2edf6)) {
-      if(level.powerup_drop_count >= level.zombie_vars[# "zombie_powerup_drop_max_per_round"]) {
-        level.powerup_drop_count = level.zombie_vars[# "zombie_powerup_drop_max_per_round"] - 1;
+      if(level.powerup_drop_count >= level.zombie_vars[#"zombie_powerup_drop_max_per_round"]) {
+        level.powerup_drop_count = level.zombie_vars[#"zombie_powerup_drop_max_per_round"] - 1;
       }
 
-      var_1f8ae158 = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+      var_1f8ae158 = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
       level thread zm_powerups::powerup_drop(var_1f8ae158, undefined, 0);
     }
   }
@@ -559,7 +559,7 @@ brutus_death() {
         });
       }
 
-      player.pers[# "score"] = player.score;
+      player.pers[#"score"] = player.score;
       player zm_stats::increment_client_stat("prison_brutus_killed", 0);
     }
   }
@@ -568,7 +568,7 @@ brutus_death() {
 }
 
 function_4621cb04(w_component) {
-  var_70f6878b = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+  var_70f6878b = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
   mdl_key = util::spawn_model(w_component.worldmodel, var_70f6878b + (0, 0, 36), self.angles);
   mdl_key endon(#"death");
   w_item = zm_items::spawn_item(w_component, var_70f6878b + (0, 0, 12), self.angles);
@@ -824,8 +824,8 @@ brutus_lockdown_client_effects(delay) {
 function_61263ebc() {
   trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(trace[# "entity"])) {
-    entity = trace[# "entity"];
+  if(isDefined(trace[#"entity"])) {
+    entity = trace[#"entity"];
 
     if(entity ismovingplatform()) {
       return true;

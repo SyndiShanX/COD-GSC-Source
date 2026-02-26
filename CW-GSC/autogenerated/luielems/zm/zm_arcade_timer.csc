@@ -55,17 +55,17 @@ function register(var_8fd8bfaa, var_b1de907e, var_359a4d9a, var_395b3059) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_arcade_timer"])) {
-    level.var_ae746e8f[# "zm_arcade_timer"] = [];
+  if(!isDefined(level.var_ae746e8f[#"zm_arcade_timer"])) {
+    level.var_ae746e8f[#"zm_arcade_timer"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_arcade_timer"])) {
-    level.var_ae746e8f[# "zm_arcade_timer"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "zm_arcade_timer"])) {
-    level.var_ae746e8f[# "zm_arcade_timer"] = array(level.var_ae746e8f[# "zm_arcade_timer"]);
+  if(!isDefined(level.var_ae746e8f[#"zm_arcade_timer"])) {
+    level.var_ae746e8f[#"zm_arcade_timer"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"zm_arcade_timer"])) {
+    level.var_ae746e8f[#"zm_arcade_timer"] = array(level.var_ae746e8f[#"zm_arcade_timer"]);
   }
 
-  level.var_ae746e8f[# "zm_arcade_timer"][level.var_ae746e8f[# "zm_arcade_timer"].size] = elem;
+  level.var_ae746e8f[#"zm_arcade_timer"][level.var_ae746e8f[#"zm_arcade_timer"].size] = elem;
 }
 
 function register_clientside() {

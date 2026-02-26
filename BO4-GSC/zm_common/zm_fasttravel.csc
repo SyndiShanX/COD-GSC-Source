@@ -32,13 +32,13 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[# "fasttravel_start"] = # "hash_2f54a4439f3a1dbf";
-  level._effect[# "fasttravel_end"] = # "hash_4ab05aa1282b9bb7";
-  level._effect[# "fasttravel_rail_1p"] = # "hash_259bb7806d596ed3";
-  level._effect[# "fasttravel_break_1p"] = # "hash_37257517a8fd29e";
-  level._effect[# "fasttravel_rail_3p"] = # "hash_809f6b4b699e4df";
-  level._effect[# "fasttravel_break_3p"] = # "hash_13715b19c0c0e890";
-  level._effect[# "fasttravel_rail_travel"] = # "hash_3659a06ed75f940a";
+  level._effect[#"fasttravel_start"] = # "hash_2f54a4439f3a1dbf";
+  level._effect[#"fasttravel_end"] = # "hash_4ab05aa1282b9bb7";
+  level._effect[#"fasttravel_rail_1p"] = # "hash_259bb7806d596ed3";
+  level._effect[#"fasttravel_break_1p"] = # "hash_37257517a8fd29e";
+  level._effect[#"fasttravel_rail_3p"] = # "hash_809f6b4b699e4df";
+  level._effect[#"fasttravel_break_3p"] = # "hash_13715b19c0c0e890";
+  level._effect[#"fasttravel_rail_travel"] = # "hash_3659a06ed75f940a";
 }
 
 fasttravel_exploder(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -157,7 +157,7 @@ fasttravel_start_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
       v_angles = vectortoangles(var_4d611aa2.origin - self.origin);
       mdl_fx = util::spawn_model(localclientnum, "tag_origin", self.origin, v_angles);
       waitframe(1);
-      util::playFXOnTag(localclientnum, level._effect[# "fasttravel_start"], mdl_fx, "tag_origin");
+      util::playFXOnTag(localclientnum, level._effect[#"fasttravel_start"], mdl_fx, "tag_origin");
       wait 1.5;
       mdl_fx delete();
     }

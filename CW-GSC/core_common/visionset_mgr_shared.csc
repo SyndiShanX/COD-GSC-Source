@@ -41,9 +41,9 @@ function register_visionset_info(name, version, lerp_step_count, visionset_from,
     return;
   }
 
-  level.vsmgr[# "visionset"].info[name].visionset_from = visionset_from;
-  level.vsmgr[# "visionset"].info[name].visionset_to = visionset_to;
-  level.vsmgr[# "visionset"].info[name].visionset_type = visionset_type;
+  level.vsmgr[#"visionset"].info[name].visionset_from = visionset_from;
+  level.vsmgr[#"visionset"].info[name].visionset_to = visionset_to;
+  level.vsmgr[#"visionset"].info[name].visionset_type = visionset_type;
 }
 
 function register_overlay_info_style_none(name, version, lerp_step_count) {
@@ -51,7 +51,7 @@ function register_overlay_info_style_none(name, version, lerp_step_count) {
     return;
   }
 
-  level.vsmgr[# "overlay"].info[name].style = 0;
+  level.vsmgr[#"overlay"].info[name].style = 0;
 }
 
 function register_overlay_info_style_blur(name, version, lerp_step_count, transition_in, transition_out, magnitude) {}
@@ -63,15 +63,15 @@ function register_overlay_info_style_speed_blur(name, version, lerp_step_count, 
     return;
   }
 
-  level.vsmgr[# "overlay"].info[name].style = 8;
-  level.vsmgr[# "overlay"].info[name].amount = amount;
-  level.vsmgr[# "overlay"].info[name].inner_radius = inner_radius;
-  level.vsmgr[# "overlay"].info[name].outer_radius = outer_radius;
-  level.vsmgr[# "overlay"].info[name].velocity_should_scale = velocity_should_scale;
-  level.vsmgr[# "overlay"].info[name].velocity_scale = velocity_scale;
-  level.vsmgr[# "overlay"].info[name].blur_in = blur_in;
-  level.vsmgr[# "overlay"].info[name].blur_out = blur_out;
-  level.vsmgr[# "overlay"].info[name].should_offset = should_offset;
+  level.vsmgr[#"overlay"].info[name].style = 8;
+  level.vsmgr[#"overlay"].info[name].amount = amount;
+  level.vsmgr[#"overlay"].info[name].inner_radius = inner_radius;
+  level.vsmgr[#"overlay"].info[name].outer_radius = outer_radius;
+  level.vsmgr[#"overlay"].info[name].velocity_should_scale = velocity_should_scale;
+  level.vsmgr[#"overlay"].info[name].velocity_scale = velocity_scale;
+  level.vsmgr[#"overlay"].info[name].blur_in = blur_in;
+  level.vsmgr[#"overlay"].info[name].blur_out = blur_out;
+  level.vsmgr[#"overlay"].info[name].should_offset = should_offset;
 }
 
 function register_overlay_info_style_postfx_bundle(name, version, lerp_step_count, bundle, duration) {
@@ -79,9 +79,9 @@ function register_overlay_info_style_postfx_bundle(name, version, lerp_step_coun
     return;
   }
 
-  level.vsmgr[# "overlay"].info[name].style = 1;
-  level.vsmgr[# "overlay"].info[name].bundle = bundle;
-  level.vsmgr[# "overlay"].info[name].duration = duration;
+  level.vsmgr[#"overlay"].info[name].style = 1;
+  level.vsmgr[#"overlay"].info[name].bundle = bundle;
+  level.vsmgr[#"overlay"].info[name].duration = duration;
 }
 
 function is_type_currently_default(localclientnum, type) {

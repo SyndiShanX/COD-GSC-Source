@@ -706,7 +706,7 @@ function_1089714c(str_type) {
 
     level.var_37591676 += n_points;
     event = # "ekia";
-    eventindex = level.scoreinfo[event][# "row"];
+    eventindex = level.scoreinfo[event][#"row"];
     level.players[0] globallogic_score::giveplayermomentumnotification(n_points, #"hash_480234a872bd64ac", undefined, 0, level.players[0].currentweapon, 0, eventindex, event, undefined);
   } else {
     level.var_37591676 += 100;

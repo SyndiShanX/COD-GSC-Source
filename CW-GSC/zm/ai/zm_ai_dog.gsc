@@ -129,7 +129,7 @@ function private function_f70e30a9() {
     util::wait_network_frame();
   }
 
-  s_spawn_locs = level.zm_loc_types[# "dog_location"];
+  s_spawn_locs = level.zm_loc_types[#"dog_location"];
   var_69681a59 = [];
 
   if(isDefined(level.active_zone_names) && isarray(s_spawn_locs) && s_spawn_locs.size > 0) {
@@ -2064,8 +2064,8 @@ function function_5295d194(eye_pos, enemy_eye_pos) {
 
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[# "fraction"] < 1) {
-    self.hit_ent = trace[# "entity"];
+  if(trace[#"fraction"] < 1) {
+    self.hit_ent = trace[#"entity"];
   }
 
   if(isDefined(self.hit_ent)) {

@@ -408,7 +408,7 @@ function devgui_cmd(cmd) {
 
       break;
     case # "hash_138254d067e7c768":
-      if(level flag::get_any([# "hash_333ae351d01741c7", #"hash_29f75f50c70f99c5"])) {
+      if(level flag::get_any([#"hash_333ae351d01741c7", #"hash_29f75f50c70f99c5"])) {
         level flag::set(#"hash_cf267d3414df1a0");
         level thread function_4149847c();
       } else {
@@ -475,7 +475,7 @@ function function_4149847c() {
   var_356856d6 thread function_5c555bdb("sniper", level.var_d352f703, &function_5eb556a3);
   var_356856d6 thread function_db3d8ac(var_356856d6, var_17aa01a8);
   var_356856d6 thread function_9af0ace6("sniper");
-  level flag::wait_till_any([# "hash_333ae351d01741c7", #"hash_29f75f50c70f99c5"]);
+  level flag::wait_till_any([#"hash_333ae351d01741c7", #"hash_29f75f50c70f99c5"]);
   level flag::clear(#"hash_709701a349515bd7");
   waitframe(1);
 
@@ -793,7 +793,7 @@ function function_386e50d5() {
   var_356856d6 thread function_5c555bdb("smg", level.var_a76f0ecf, &function_95b8c137);
   var_356856d6 thread function_db3d8ac(var_356856d6, var_17aa01a8);
   var_356856d6 thread function_9af0ace6("smg");
-  level flag::wait_till_any([# "hash_aa416b9e4b5beaf", #"hash_52f25b6d74f50b3d"]);
+  level flag::wait_till_any([#"hash_aa416b9e4b5beaf", #"hash_52f25b6d74f50b3d"]);
   level flag::clear(#"hash_709701a349515bd7");
   level.var_a76f0ecf val::reset("shooting_gallery_ignore", "ignoreme");
   var_356856d6 notify(#"hash_79917746ae9a28ed");
@@ -1197,7 +1197,7 @@ function function_fcc5783b() {
   var_356856d6 thread function_5c555bdb("pistol", level.var_9c6cf8c, &function_af0fa53c);
   var_356856d6 thread function_db3d8ac(var_356856d6, var_17aa01a8);
   var_356856d6 thread function_9af0ace6("pistol");
-  level flag::wait_till_any([# "hash_7f73d56a614ce047", #"hash_6930683ef14e9445"]);
+  level flag::wait_till_any([#"hash_7f73d56a614ce047", #"hash_6930683ef14e9445"]);
   level flag::clear(#"hash_709701a349515bd7");
   var_356856d6 notify(#"hash_79917746ae9a28ed");
 

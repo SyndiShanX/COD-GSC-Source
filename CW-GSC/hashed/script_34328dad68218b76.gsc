@@ -44,8 +44,8 @@ function private function_6ef31de9(s_instance) {
   s_instance endon(#"cleanup");
   s_instance flag::clear("cleanup");
   level flag::wait_till(#"hash_34f9aa6f075e21c0");
-  var_c088f113 = s_instance.contentgroups[# "trigger_spawn"][0];
-  var_7af625c6 = s_instance.contentgroups[# "hash_11421144b772dcdf"][0];
+  var_c088f113 = s_instance.contentgroups[#"trigger_spawn"][0];
+  var_7af625c6 = s_instance.contentgroups[#"hash_11421144b772dcdf"][0];
   s_instance.n_obj_id = zm_utility::function_f5a222a8(#"hash_71d4dbe7c877d7ae", var_7af625c6.origin);
   level callback::add_callback(#"hash_594217387367ebb4", &function_b3a6e0bc, s_instance);
 

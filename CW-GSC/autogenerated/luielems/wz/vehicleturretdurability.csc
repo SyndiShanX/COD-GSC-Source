@@ -37,17 +37,17 @@ function register(var_661989d5) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "vehicleturretdurability"])) {
-    level.var_ae746e8f[# "vehicleturretdurability"] = [];
+  if(!isDefined(level.var_ae746e8f[#"vehicleturretdurability"])) {
+    level.var_ae746e8f[#"vehicleturretdurability"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "vehicleturretdurability"])) {
-    level.var_ae746e8f[# "vehicleturretdurability"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "vehicleturretdurability"])) {
-    level.var_ae746e8f[# "vehicleturretdurability"] = array(level.var_ae746e8f[# "vehicleturretdurability"]);
+  if(!isDefined(level.var_ae746e8f[#"vehicleturretdurability"])) {
+    level.var_ae746e8f[#"vehicleturretdurability"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"vehicleturretdurability"])) {
+    level.var_ae746e8f[#"vehicleturretdurability"] = array(level.var_ae746e8f[#"vehicleturretdurability"]);
   }
 
-  level.var_ae746e8f[# "vehicleturretdurability"][level.var_ae746e8f[# "vehicleturretdurability"].size] = elem;
+  level.var_ae746e8f[#"vehicleturretdurability"][level.var_ae746e8f[#"vehicleturretdurability"].size] = elem;
 }
 
 function register_clientside() {

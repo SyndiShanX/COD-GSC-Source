@@ -172,7 +172,7 @@ local_zone_init() {
   add_adjacent_zone("caves2_zone", "caves3_zone", "cave03_to_power");
   temple_init_zone_spawn_locations();
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false, true);
   include_weapon("spikemore_zm", false, true);
@@ -250,7 +250,7 @@ local_zone_init() {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

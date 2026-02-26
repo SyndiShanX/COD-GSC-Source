@@ -46,7 +46,7 @@ __init__() {
   killstreaks::register_alt_weapon("ac130", getweapon(#"ac130_chaingun"));
   killstreaks::set_team_kill_penalty_scale("ac130", level.teamkillreducedpenalty);
   player::function_cf3aa03d(&function_d45a1f8d, 1);
-  level.killstreaks[# "ac130"].threatonkill = 1;
+  level.killstreaks[#"ac130"].threatonkill = 1;
   callback::on_connect(&onplayerconnect);
   callback::on_finalize_initialization(&function_3675de8b);
   level thread waitforgameendthread();
@@ -211,7 +211,7 @@ spawnac130() {
   level.ac130.soundmod = "default_loud";
   level.ac130 hacker_tool::registerwithhackertool(50, 10000);
   level.ac130.usage = [];
-  level.destructible_callbacks[# "turret_destroyed"] = &vtoldestructiblecallback;
+  level.destructible_callbacks[#"turret_destroyed"] = &vtoldestructiblecallback;
   level.ac130.shuttingdown = 0;
   level.ac130.completely_shutdown = 0;
   level.ac130 thread playlockonsoundsthread(player, level.ac130);
@@ -257,7 +257,7 @@ spawnac130() {
     player thread function_3939b657(level.ac130);
   }
 
-  util::function_5a68c330(21, player.team, player getentitynumber(), level.killstreaks[# "ac130"].uiname);
+  util::function_5a68c330(21, player.team, player getentitynumber(), level.killstreaks[#"ac130"].uiname);
   return result;
 }
 
@@ -1071,7 +1071,7 @@ updateareanodes(areanodes, forcemove) {
 traveltonode(goalnode) {
   originoffets = getoriginoffsets(goalnode);
 
-  if(originoffets[# "start"] != self.origin) {
+  if(originoffets[#"start"] != self.origin) {
     if(isDefined(goalnode.script_airspeed) && isDefined(goalnode.script_accel)) {
       heli_speed = goalnode.script_airspeed;
       heli_accel = goalnode.script_accel;
@@ -1081,12 +1081,12 @@ traveltonode(goalnode) {
     }
 
     self setspeed(heli_speed, heli_accel);
-    self setgoal(originoffets[# "start"] + (0, 0, 30), 0);
+    self setgoal(originoffets[#"start"] + (0, 0, 30), 0);
     self setgoalyaw(goalnode.angles[1]);
     self waittill(#"goal");
   }
 
-  if(originoffets[# "end"] != goalnode.origin) {
+  if(originoffets[#"end"] != goalnode.origin) {
     if(isDefined(goalnode.script_airspeed) && isDefined(goalnode.script_accel)) {
       heli_speed = goalnode.script_airspeed;
       heli_accel = goalnode.script_accel;
@@ -1096,7 +1096,7 @@ traveltonode(goalnode) {
     }
 
     self setspeed(heli_speed, heli_accel);
-    self setgoal(originoffets[# "end"] + (0, 0, 30), 0);
+    self setgoal(originoffets[#"end"] + (0, 0, 30), 0);
     self setgoalyaw(goalnode.angles[1]);
     self waittill(#"goal");
   }
@@ -1109,8 +1109,8 @@ getoriginoffsets(goalnode) {
   maxtraces = 40;
   traceoffset = (0, 0, -196);
 
-  for(traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self); distancesquared(traceorigin[# "position"], endorigin + traceoffset) > 10 && numtraces < maxtraces; traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self)) {
-    println("<dev string:x6d>" + distancesquared(traceorigin[# "position"], endorigin + traceoffset));
+  for(traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self); distancesquared(traceorigin[#"position"], endorigin + traceoffset) > 10 && numtraces < maxtraces; traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self)) {
+    println("<dev string:x6d>" + distancesquared(traceorigin[#"position"], endorigin + traceoffset));
 
     if(startorigin[2] < endorigin[2]) {
       startorigin += (0, 0, 128);
@@ -1125,8 +1125,8 @@ getoriginoffsets(goalnode) {
   }
 
   offsets = [];
-  offsets[# "start"] = startorigin;
-  offsets[# "end"] = endorigin;
+  offsets[#"start"] = startorigin;
+  offsets[#"end"] = endorigin;
   return offsets;
 }
 
@@ -1242,24 +1242,24 @@ function_568f6426(isprimaryweapon) {
 
 function_d55529() {
   self endon(#"death");
-  bundle = level.killstreaks[# "ac130"].script_bundle;
+  bundle = level.killstreaks[#"ac130"].script_bundle;
   playFXOnTag(bundle.var_545fa8c2, self, "tag_fx_engine3");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   wait 0.1;
   playFXOnTag(bundle.var_545fa8c2, self, "tag_fx_engine4");
 }
 
 function_ae354bc7() {
   self endon(#"death");
-  bundle = level.killstreaks[# "ac130"].script_bundle;
+  bundle = level.killstreaks[#"ac130"].script_bundle;
   playFXOnTag(bundle.var_465c35a5, self, "tag_fx_engine1");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   wait 0.1;
   playFXOnTag(bundle.var_465c35a5, self, "tag_fx_engine6");
 }
 
 function_cd29787b() {
-  bundle = level.killstreaks[# "ac130"].script_bundle;
+  bundle = level.killstreaks[#"ac130"].script_bundle;
   playFXOnTag(bundle.ksexplosionfx, self, "tag_body_animate");
 
   if(isDefined(bundle.var_bb6c29b4) && isDefined(self.var_d02ddb8e) && self.var_d02ddb8e == getweapon(#"shock_rifle")) {

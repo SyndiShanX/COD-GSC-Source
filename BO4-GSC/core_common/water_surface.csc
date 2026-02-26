@@ -14,8 +14,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "water_player_jump_out"] = # "player/fx_plyr_water_jump_out_splash_1p";
-  level._effect[# "hash_1e7095084eda811c"] = # "hash_123c2521c68b2167";
+  level._effect[#"water_player_jump_out"] = # "player/fx_plyr_water_jump_out_splash_1p";
+  level._effect[#"hash_1e7095084eda811c"] = # "hash_123c2521c68b2167";
 
   if(isDefined(level.disablewatersurfacefx) && level.disablewatersurfacefx == 1) {
     return;
@@ -90,7 +90,7 @@ underwaterbegin() {
   stop_player_fx(self);
 
   if(islocalclientdead(localclientnum) == 0) {
-    self.var_733dd716 = playfxoncamera(localclientnum, level._effect[# "hash_1e7095084eda811c"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
+    self.var_733dd716 = playfxoncamera(localclientnum, level._effect[#"hash_1e7095084eda811c"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
 
     if(!isDefined(self.playingpostfxbundle) || self.playingpostfxbundle != "pstfx_watertransition") {
       self thread postfx::playpostfxbundle(#"pstfx_watertransition");

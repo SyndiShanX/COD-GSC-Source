@@ -47,7 +47,7 @@ __init__() {
   killstreaks::set_team_kill_penalty_scale("overwatch_helicopter", level.teamkillreducedpenalty);
   callback::on_player_killed_with_params(&on_player_killed);
   level.var_24de8afe = &function_24de8afe;
-  level.killstreaks[# "overwatch_helicopter"].threatonkill = 1;
+  level.killstreaks[#"overwatch_helicopter"].threatonkill = 1;
   level.var_93215f31 = getdvarint(#"hash_1300f6ba32e8d68c", 2500);
   level.var_bf127508 = getdvarint(#"hash_163c95340307e3aa", 1800);
   level.var_5f6d1a12 = getdvarint(#"hash_16579f34031ebc60", 2000);
@@ -57,14 +57,14 @@ __init__() {
 
   if(!isDefined(level.var_3c5cbd62)) {
     level.var_3c5cbd62 = [];
-    level.var_3c5cbd62[# "allies"] = [];
-    level.var_3c5cbd62[# "allies"][0] = "spawner_mp_swat_gunner_team1_male";
-    level.var_3c5cbd62[# "allies"][1] = "spawner_mp_swat_gunner_team1_female";
-    level.var_3c5cbd62[# "allies"][2] = "spawner_mp_swat_gunner_team1_male";
-    level.var_3c5cbd62[# "axis"] = [];
-    level.var_3c5cbd62[# "axis"][0] = "spawner_mp_swat_gunner_team2_male";
-    level.var_3c5cbd62[# "axis"][1] = "spawner_mp_swat_gunner_team2_female";
-    level.var_3c5cbd62[# "axis"][2] = "spawner_mp_swat_gunner_team2_male";
+    level.var_3c5cbd62[#"allies"] = [];
+    level.var_3c5cbd62[#"allies"][0] = "spawner_mp_swat_gunner_team1_male";
+    level.var_3c5cbd62[#"allies"][1] = "spawner_mp_swat_gunner_team1_female";
+    level.var_3c5cbd62[#"allies"][2] = "spawner_mp_swat_gunner_team1_male";
+    level.var_3c5cbd62[#"axis"] = [];
+    level.var_3c5cbd62[#"axis"][0] = "spawner_mp_swat_gunner_team2_male";
+    level.var_3c5cbd62[#"axis"][1] = "spawner_mp_swat_gunner_team2_female";
+    level.var_3c5cbd62[#"axis"][2] = "spawner_mp_swat_gunner_team2_male";
   }
 
   callback::on_finalize_initialization(&function_1c601b99);
@@ -544,10 +544,10 @@ function_ab667e1c(owner, helicopter) {
   assert(isDefined(helicopter));
   owner.var_e60e2941 = [];
   helicopter.var_e60e2941 = [];
-  aitypes = level.var_3c5cbd62[# "axis"];
+  aitypes = level.var_3c5cbd62[#"axis"];
 
   if(isDefined(owner.team) && owner.team == # "allies") {
-    aitypes = level.var_3c5cbd62[# "allies"];
+    aitypes = level.var_3c5cbd62[#"allies"];
   }
 
   for(i = 0; i < 3; i++) {

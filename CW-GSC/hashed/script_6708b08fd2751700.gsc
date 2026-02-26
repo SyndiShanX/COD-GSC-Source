@@ -229,7 +229,7 @@ function function_834d65f9(params) {
     level notify(#"timer_defend");
     objective_manager::stop_timer();
   } else {
-    foreach(s_instance in instance.contentgroups[# "console"]) {
+    foreach(s_instance in instance.contentgroups[#"console"]) {
       s_instance.mdl_console.health = 0;
       s_instance.mdl_console notify(#"damage");
     }

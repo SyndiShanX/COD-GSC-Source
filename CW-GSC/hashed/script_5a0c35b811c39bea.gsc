@@ -368,7 +368,7 @@ function function_5871bcf8(entity) {
   points = array::randomize(points);
 
   foreach(point in points) {
-    nextpos = groundtrace(point + (0, 0, 500) + (0, 0, 8), point + (0, 0, 500) + (0, 0, -100000), 0, entity)[# "position"];
+    nextpos = groundtrace(point + (0, 0, 500) + (0, 0, 8), point + (0, 0, 500) + (0, 0, -100000), 0, entity)[#"position"];
 
     if(nextpos[2] < point[2] - 2000) {
       recordsphere(point, 10, (1, 0, 0), "<dev string:x38>", entity);

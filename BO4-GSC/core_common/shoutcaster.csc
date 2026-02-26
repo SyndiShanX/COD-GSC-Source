@@ -36,8 +36,8 @@ get_team_color_fx(localclientnum, team, script_bundle) {
 
 get_color_fx(localclientnum, script_bundle) {
   effects = [];
-  effects[# "allies"] = get_team_color_fx(localclientnum, #"allies", script_bundle);
-  effects[# "axis"] = get_team_color_fx(localclientnum, #"axis", script_bundle);
+  effects[#"allies"] = get_team_color_fx(localclientnum, #"allies", script_bundle);
+  effects[#"axis"] = get_team_color_fx(localclientnum, #"axis", script_bundle);
   return effects;
 }
 

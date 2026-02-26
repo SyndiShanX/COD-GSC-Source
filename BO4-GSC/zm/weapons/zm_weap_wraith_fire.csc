@@ -32,7 +32,7 @@ function_87bfd935(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     self.var_cd4ce49e = util::playFXOnTag(localclientnum, "zm_weapons/fx8_equip_mltv_fire_human_torso_loop_zm", self, str_tag);
     self thread function_8847b8aa(localclientnum);
-    self.var_2be01485 = level._effect[# "hash_5dfe974bf370a5f4"];
+    self.var_2be01485 = level._effect[#"hash_5dfe974bf370a5f4"];
     return;
   }
 

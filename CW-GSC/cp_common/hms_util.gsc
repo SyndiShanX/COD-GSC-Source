@@ -1559,7 +1559,7 @@ function function_b5da96ca(var_a6be6a4f, var_94e307c = undefined, var_a9cef3d5 =
     var_230ef93a = self gettagangles(var_c197f9aa);
     var_f8fbe014 = anglesToForward(var_230ef93a);
     var_1c8839e = var_8035574f + var_f8fbe014 * 200;
-    playFXOnTag(level._effect[# "hash_7fa91cf654f23aa0"], self, var_c197f9aa);
+    playFXOnTag(level._effect[#"hash_7fa91cf654f23aa0"], self, var_c197f9aa);
     magicbullet(var_e3dd3903, var_1c8839e, var_a6be6a4f, self);
   }
 

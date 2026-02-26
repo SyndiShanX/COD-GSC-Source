@@ -238,13 +238,13 @@ function private function_8b0dc9ba(localclientnum) {
 
   if(self.minigame.scratch.var_8e926fa1) {
     fakeactor_node_get_cover_list = self.minigame.var_be8b922e.var_4436bd13 == "look" && self.minigame.var_be8b922e.var_f1206d0d == "left-right" || self.minigame.var_be8b922e.var_4436bd13 != "look" && self.minigame.var_be8b922e.var_d74b78fc == "tension";
-    self.minigame.scratch.input[# "look"] = util::function_63320ea1(self.minigame.scratch.input[# "look"], 0.2, fakeactor_node_get_cover_list);
+    self.minigame.scratch.input[#"look"] = util::function_63320ea1(self.minigame.scratch.input[#"look"], 0.2, fakeactor_node_get_cover_list);
     var_bef152 = self.minigame.var_be8b922e.var_4436bd13 == "move" && self.minigame.var_be8b922e.var_f1206d0d == "left-right" || self.minigame.var_be8b922e.var_4436bd13 != "move" && self.minigame.var_be8b922e.var_d74b78fc == "tension";
-    self.minigame.scratch.input[# "move"] = util::function_63320ea1(self.minigame.scratch.input[# "move"], 0.2, var_bef152);
+    self.minigame.scratch.input[#"move"] = util::function_63320ea1(self.minigame.scratch.input[#"move"], 0.2, var_bef152);
     return;
   }
 
-  self.minigame.scratch.input[# "look"] *= 10;
+  self.minigame.scratch.input[#"look"] *= 10;
 }
 
 function private function_395ef29b(input) {
@@ -294,12 +294,12 @@ function private function_fcaeb0c3(input) {
 
 function private function_7265f078(localclientnum) {
   self function_d04f90d8(localclientnum);
-  var_c7cdd0d8 = self.minigame.scratch.input[# "look"];
-  var_9e82ccf9 = self.minigame.scratch.input[# "move"];
+  var_c7cdd0d8 = self.minigame.scratch.input[#"look"];
+  var_9e82ccf9 = self.minigame.scratch.input[#"move"];
 
   if(self.minigame.var_be8b922e.var_4436bd13 == "move") {
-    var_c7cdd0d8 = self.minigame.scratch.input[# "move"];
-    var_9e82ccf9 = self.minigame.scratch.input[# "look"];
+    var_c7cdd0d8 = self.minigame.scratch.input[#"move"];
+    var_9e82ccf9 = self.minigame.scratch.input[#"look"];
   }
 
   self function_395ef29b(var_c7cdd0d8);

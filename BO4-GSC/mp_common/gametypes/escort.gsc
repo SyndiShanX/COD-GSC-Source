@@ -170,8 +170,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     scoreevents::processscoreevent(#"killed_defender", attacker, self, weapon);
     attacker challenges::function_82bb78f7(weapon);
     [[level.var_37d62931]](attacker, 1);
-    attacker.pers[# "objectiveekia"]++;
-    attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+    attacker.pers[#"objectiveekia"]++;
+    attacker.objectiveekia = attacker.pers[#"objectiveekia"];
     return;
   }
 
@@ -180,8 +180,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     scoreevents::processscoreevent(#"killed_attacker", attacker, self, weapon);
     attacker challenges::function_82bb78f7(weapon);
     [[level.var_37d62931]](attacker, 1);
-    attacker.pers[# "objectiveekia"]++;
-    attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+    attacker.pers[#"objectiveekia"]++;
+    attacker.objectiveekia = attacker.pers[#"objectiveekia"];
   }
 }
 
@@ -741,9 +741,9 @@ robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpo
 
       [[level.var_37d62931]](eattacker, 1);
 
-      if(isDefined(eattacker.pers[# "disables"])) {
-        eattacker.pers[# "disables"]++;
-        eattacker.disables = eattacker.pers[# "disables"];
+      if(isDefined(eattacker.pers[#"disables"])) {
+        eattacker.pers[#"disables"]++;
+        eattacker.disables = eattacker.pers[#"disables"];
       }
 
       eattacker stats::function_bb7eedf0(#"disables", 1);
@@ -1401,9 +1401,9 @@ track_escort_time(player) {
       break;
     }
 
-    if(isDefined(player.pers[# "escorts"])) {
-      player.pers[# "escorts"]++;
-      player.escorts = player.pers[# "escorts"];
+    if(isDefined(player.pers[#"escorts"])) {
+      player.pers[#"escorts"]++;
+      player.escorts = player.pers[#"escorts"];
     }
 
     player stats::function_bb7eedf0(#"escorts", 1);

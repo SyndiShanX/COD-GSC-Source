@@ -111,24 +111,24 @@ function function_5e3127a5(var_75e87d7f, var_6ea1719d = undefined) {
     level.var_402c5b0e = [];
   }
 
-  if(!isDefined(level.var_402c5b0e[# "arena"])) {
-    level.var_402c5b0e[# "arena"] = [];
+  if(!isDefined(level.var_402c5b0e[#"arena"])) {
+    level.var_402c5b0e[#"arena"] = [];
   }
 
-  if(!isDefined(level.var_402c5b0e[# "overworld"])) {
-    level.var_402c5b0e[# "overworld"] = [];
+  if(!isDefined(level.var_402c5b0e[#"overworld"])) {
+    level.var_402c5b0e[#"overworld"] = [];
   }
 
-  if(!isDefined(level.var_402c5b0e[# "dungeon"])) {
-    level.var_402c5b0e[# "dungeon"] = [];
+  if(!isDefined(level.var_402c5b0e[#"dungeon"])) {
+    level.var_402c5b0e[#"dungeon"] = [];
   }
 
-  if(!isDefined(level.var_402c5b0e[# "bossfight"])) {
-    level.var_402c5b0e[# "bossfight"] = [];
+  if(!isDefined(level.var_402c5b0e[#"bossfight"])) {
+    level.var_402c5b0e[#"bossfight"] = [];
   }
 
-  if(!isDefined(level.var_402c5b0e[# "bonusroom"])) {
-    level.var_402c5b0e[# "bonusroom"] = [];
+  if(!isDefined(level.var_402c5b0e[#"bonusroom"])) {
+    level.var_402c5b0e[#"bonusroom"] = [];
   }
 
   if(is_true(level.var_1c6708d0)) {

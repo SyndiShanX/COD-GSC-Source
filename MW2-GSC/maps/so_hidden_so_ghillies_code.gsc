@@ -9,35 +9,35 @@
 #include maps\_specialops;
 
 // --------------------------------------------------------------------------------- should_spawn() {
-  switch (level.gameSkill) {
-    case 0:
-    case 1:
-      return !(self.spawnflags & 256);
-    case 2:
-      return !(self.spawnflags & 512);
-    case 3:
-      return !(self.spawnflags & 1024);
-  }
+switch (level.gameSkill) {
+  case 0:
+  case 1:
+    return !(self.spawnflags & 256);
+  case 2:
+    return !(self.spawnflags & 512);
+  case 3:
+    return !(self.spawnflags & 1024);
+}
 }
 
 // --------------------------------------------------------------------------------- create_ghillie_enemies(enemy_id, wait_id, activate_id) {
-  ghillie_enemies_init();
+ghillie_enemies_init();
 
-  assertex(isDefined(enemy_id), "create_ghillie_enemies() requires a valid enemy_id");
+assertex(isDefined(enemy_id), "create_ghillie_enemies() requires a valid enemy_id");
 
-  ghillie_spawners = getEntArray(enemy_id, "targetname");
-  assertex(ghillie_spawners.size > 0, "create_ghillie_enemies() could not find any spawners with id " + enemy_id);
+ghillie_spawners = getEntArray(enemy_id, "targetname");
+assertex(ghillie_spawners.size > 0, "create_ghillie_enemies() could not find any spawners with id " + enemy_id);
 
-  if(isDefined(wait_id))
-    level waittill(wait_id);
+if(isDefined(wait_id))
+  level waittill(wait_id);
 
-  thread stealth_disable();
+thread stealth_disable();
 
-  array_thread(ghillie_spawners, ::add_spawn_function, ::ghillie_enemy_init, enemy_id, activate_id);
-  foreach(ghillie in ghillie_spawners) {
-    if(ghillie should_spawn())
-      ghillie spawn_ai(true);
-  }
+array_thread(ghillie_spawners, ::add_spawn_function, ::ghillie_enemy_init, enemy_id, activate_id);
+foreach(ghillie in ghillie_spawners) {
+  if(ghillie should_spawn())
+    ghillie spawn_ai(true);
+}
 }
 
 ghillie_enemies_init() {
@@ -547,21 +547,21 @@ ghillie_get_time(time_min, time_max) {
 }
 
 // --------------------------------------------------------------------------------- create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
-  patrol_enemies_init();
+patrol_enemies_init();
 
-  assertex(isDefined(enemy_id), "create_patrol_enemies() requires a valid enemy_id");
+assertex(isDefined(enemy_id), "create_patrol_enemies() requires a valid enemy_id");
 
-  if(isDefined(wait_id))
-    level waittill(wait_id);
+if(isDefined(wait_id))
+  level waittill(wait_id);
 
-  thread stealth_enable();
+thread stealth_enable();
 
-  patrol_spawners = getEntArray(enemy_id, "targetname");
-  assertex(patrol_spawners.size > 0, "create_patrol_enemies() could not find any spawners with id " + enemy_id);
+patrol_spawners = getEntArray(enemy_id, "targetname");
+assertex(patrol_spawners.size > 0, "create_patrol_enemies() could not find any spawners with id " + enemy_id);
 
-  array_thread(patrol_spawners, ::add_spawn_function, ::patrol_enemy_init);
-  foreach(spawner in patrol_spawners)
-  spawner patrol_enemy_spawn();
+array_thread(patrol_spawners, ::add_spawn_function, ::patrol_enemy_init);
+foreach(spawner in patrol_spawners)
+spawner patrol_enemy_spawn();
 }
 
 patrol_enemy_spawn() {
@@ -757,14 +757,14 @@ patrol_enemy_sight_test(player) {
 }
 
 // --------------------------------------------------------------------------------- death_register_unaware(attacker, force_dialog, skip_dialog) {
-  if(isDefined(attacker) && isPlayer(attacker)) {
-    level notify("kill_registered");
-    attacker.kills_stealth++;
-  }
+if(isDefined(attacker) && isPlayer(attacker)) {
+  level notify("kill_registered");
+  attacker.kills_stealth++;
+}
 
-  level.deaths_stealth++;
-  level.bonus_time_given += level.bonus_stealth;
-  death_dialog(level.dialog_kill_stealth, level.deaths_stealth, force_dialog, skip_dialog);
+level.deaths_stealth++;
+level.bonus_time_given += level.bonus_stealth;
+death_dialog(level.dialog_kill_stealth, level.deaths_stealth, force_dialog, skip_dialog);
 }
 
 death_register_nofire(attacker, force_dialog, skip_dialog) {
@@ -813,31 +813,31 @@ death_dialog(dialog, total, force_dialog, skip_dialog) {
 }
 
 // --------------------------------------------------------------------------------- turn_on_stealth() {
-  battlechatter_off("axis");
-  battlechatter_off("allies");
+battlechatter_off("axis");
+battlechatter_off("allies");
 
-  maps\_stealth::main();
+maps\_stealth::main();
 
-  foreach(player in level.players)
-  player maps\_stealth_utility::stealth_default();
+foreach(player in level.players)
+player maps\_stealth_utility::stealth_default();
 
-  init_prone_DOF();
+init_prone_DOF();
 
-  rangesHidden = [];
-  rangesHidden["prone"] = 200;
-  rangesHidden["crouch"] = 600;
-  rangesHidden["stand"] = 1500;
+rangesHidden = [];
+rangesHidden["prone"] = 200;
+rangesHidden["crouch"] = 600;
+rangesHidden["stand"] = 1500;
 
-  rangesSpotted = [];
-  rangesSpotted["prone"] = 600;
-  rangesSpotted["crouch"] = 1200;
-  rangesSpotted["stand"] = 2500;
+rangesSpotted = [];
+rangesSpotted["prone"] = 600;
+rangesSpotted["crouch"] = 1200;
+rangesSpotted["stand"] = 2500;
 
-  maps\_stealth_utility::stealth_detect_ranges_set(rangesHidden, rangesSpotted);
+maps\_stealth_utility::stealth_detect_ranges_set(rangesHidden, rangesSpotted);
 
-  thread stealth_music_loop();
-  // Decided to not chastize player ever.
-  //	thread stealth_chastize_loop();
+thread stealth_music_loop();
+// Decided to not chastize player ever.
+//	thread stealth_chastize_loop();
 }
 
 stealth_disable() {
@@ -940,49 +940,49 @@ stealth_chastize_loop() {
 }
 
 // --------------------------------------------------------------------------------- turn_on_radiation() {
-  thread maps\_radiation::main();
+thread maps\_radiation::main();
 
-  wait 4;
-  thread radio_dialogue("so_hid_ghil_rad_warning");
+wait 4;
+thread radio_dialogue("so_hid_ghil_rad_warning");
 }
 
 // --------------------------------------------------------------------------------- hud_bonuses_create() {
-  ypos = so_hud_ypos();
-  stealth_title = so_create_hud_item(3, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
-  nofire_title = so_create_hud_item(4, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
-  basic_title = so_create_hud_item(5, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_BASIC", self);
+ypos = so_hud_ypos();
+stealth_title = so_create_hud_item(3, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_STEALTH", self);
+nofire_title = so_create_hud_item(4, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_NOFIRE", self);
+basic_title = so_create_hud_item(5, ypos, &"SO_HIDDEN_SO_GHILLIES_KILL_BASIC", self);
 
-  stealth_kills = so_create_hud_item(3, ypos, undefined, self);
-  nofire_kills = so_create_hud_item(4, ypos, undefined, self);
-  basic_kills = so_create_hud_item(5, ypos, undefined, self);
+stealth_kills = so_create_hud_item(3, ypos, undefined, self);
+nofire_kills = so_create_hud_item(4, ypos, undefined, self);
+basic_kills = so_create_hud_item(5, ypos, undefined, self);
 
-  stealth_kills.alignx = "left";
-  nofire_kills.alignx = "left";
-  basic_kills.alignx = "left";
+stealth_kills.alignx = "left";
+nofire_kills.alignx = "left";
+basic_kills.alignx = "left";
 
-  stealth_kills SetValue(0);
-  nofire_kills SetValue(0);
-  basic_kills SetValue(0);
+stealth_kills SetValue(0);
+nofire_kills SetValue(0);
+basic_kills SetValue(0);
 
-  thread info_hud_handle_fade(stealth_title, "so_hidden_complete");
-  thread info_hud_handle_fade(nofire_title, "so_hidden_complete");
-  thread info_hud_handle_fade(basic_title, "so_hidden_complete");
+thread info_hud_handle_fade(stealth_title, "so_hidden_complete");
+thread info_hud_handle_fade(nofire_title, "so_hidden_complete");
+thread info_hud_handle_fade(basic_title, "so_hidden_complete");
 
-  thread info_hud_handle_fade(stealth_kills, "so_hidden_complete");
-  thread info_hud_handle_fade(nofire_kills, "so_hidden_complete");
-  thread info_hud_handle_fade(basic_kills, "so_hidden_complete");
+thread info_hud_handle_fade(stealth_kills, "so_hidden_complete");
+thread info_hud_handle_fade(nofire_kills, "so_hidden_complete");
+thread info_hud_handle_fade(basic_kills, "so_hidden_complete");
 
-  thread hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills);
+thread hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills);
 
-  flag_wait("so_hidden_complete");
+flag_wait("so_hidden_complete");
 
-  stealth_title thread so_remove_hud_item();
-  nofire_title thread so_remove_hud_item();
-  basic_title thread so_remove_hud_item();
+stealth_title thread so_remove_hud_item();
+nofire_title thread so_remove_hud_item();
+basic_title thread so_remove_hud_item();
 
-  stealth_kills thread so_remove_hud_item();
-  nofire_kills thread so_remove_hud_item();
-  basic_kills thread so_remove_hud_item();
+stealth_kills thread so_remove_hud_item();
+nofire_kills thread so_remove_hud_item();
+basic_kills thread so_remove_hud_item();
 }
 
 hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills) {
@@ -998,56 +998,56 @@ hud_bonuses_update_scores(stealth_kills, nofire_kills, basic_kills) {
 }
 
 // --------------------------------------------------------------------------------- objective_set_chopper() {
-  flag_wait("so_hidden_obj_chopper");
+flag_wait("so_hidden_obj_chopper");
 
-  obj = getstruct("so_hidden_obj_chopper", "script_noteworthy");
-  objective_position(1, obj.origin);
-  playFX(getfx("extraction_smoke"), obj.origin);
+obj = getstruct("so_hidden_obj_chopper", "script_noteworthy");
+objective_position(1, obj.origin);
+playFX(getfx("extraction_smoke"), obj.origin);
 }
 
 // --------------------------------------------------------------------------------- create_chatter_aliases_for_patrols() {
-  aliases = [];
-  aliases[aliases.size] = "scoutsniper_ru1_passcig";
-  aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
-  aliases[aliases.size] = "scoutsniper_ru1_wakeup";
-  aliases[aliases.size] = "scoutsniper_ru2_buymotorbike";
-  aliases[aliases.size] = "scoutsniper_ru1_tooexpensive";
-  aliases[aliases.size] = "scoutsniper_ru2_illtakecareofit";
-  aliases[aliases.size] = "scoutsniper_ru1_otherteam";
-  aliases[aliases.size] = "scoutsniper_ru2_notwandering";
-  aliases[aliases.size] = "scoutsniper_ru1_wandering";
-  aliases[aliases.size] = "scoutsniper_ru2_zahkaevspayinggood";
-  aliases[aliases.size] = "scoutsniper_ru1_wasteland";
-  //aliases[ aliases.size ] = "scoutsniper_ru2_imonit";//yelling
-  //aliases[ aliases.size ] = "scoutsniper_ru1_takealook";//radio and loud
-  aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
-  aliases[aliases.size] = "scoutsniper_ru1_onourway";
-  aliases[aliases.size] = "scoutsniper_ru1_passcig";
-  aliases[aliases.size] = "scoutsniper_ru2_youidiot";
-  aliases[aliases.size] = "scoutsniper_ru1_wakeup";
-  aliases[aliases.size] = "scoutsniper_ru2_call";
-  aliases[aliases.size] = "scoutsniper_ru1_tooexpensive";
-  aliases[aliases.size] = "scoutsniper_ru2_americagoingtostartwar";
-  aliases[aliases.size] = "scoutsniper_ru4_raise";
-  aliases[aliases.size] = "scoutsniper_ru2_sendsomeonetocheck";
-  aliases[aliases.size] = "scoutsniper_ru4_ifold";
-  aliases[aliases.size] = "scoutsniper_ru2_andreibringingfood";
-  aliases[aliases.size] = "scoutsniper_ru4_thisonesheavy";
-  aliases[aliases.size] = "scoutsniper_ru2_quicklyaspossible";
-  aliases[aliases.size] = "scoutsniper_ru4_didnteatbreakfast";
-  aliases[aliases.size] = "scoutsniper_ru2_yescomrade";
-  aliases[aliases.size] = "scoutsniper_ru4_takenzakhaevsoffer";
-  aliases[aliases.size] = "scoutsniper_ru2_clearrotorblades";
-  //aliases[ aliases.size ] = "scoutsniper_ru4_mayhaveproblem";//fear
-  aliases[aliases.size] = "scoutsniper_ru2_radiationdosimeters";
-  aliases[aliases.size] = "scoutsniper_ru4_canceltransactions";
-  aliases[aliases.size] = "scoutsniper_ru2_dontbelieveatall";
-  aliases[aliases.size] = "scoutsniper_ru4_cantwaitforshiftend";
-  aliases[aliases.size] = "scoutsniper_ru2_ok";
-  aliases[aliases.size] = "scoutsniper_ru4_hopeitdoesntrain";
-  aliases[aliases.size] = "scoutsniper_ru2_professionaljob";
+aliases = [];
+aliases[aliases.size] = "scoutsniper_ru1_passcig";
+aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
+aliases[aliases.size] = "scoutsniper_ru1_wakeup";
+aliases[aliases.size] = "scoutsniper_ru2_buymotorbike";
+aliases[aliases.size] = "scoutsniper_ru1_tooexpensive";
+aliases[aliases.size] = "scoutsniper_ru2_illtakecareofit";
+aliases[aliases.size] = "scoutsniper_ru1_otherteam";
+aliases[aliases.size] = "scoutsniper_ru2_notwandering";
+aliases[aliases.size] = "scoutsniper_ru1_wandering";
+aliases[aliases.size] = "scoutsniper_ru2_zahkaevspayinggood";
+aliases[aliases.size] = "scoutsniper_ru1_wasteland";
+//aliases[ aliases.size ] = "scoutsniper_ru2_imonit";//yelling
+//aliases[ aliases.size ] = "scoutsniper_ru1_takealook";//radio and loud
+aliases[aliases.size] = "scoutsniper_ru2_whoseturnisit";
+aliases[aliases.size] = "scoutsniper_ru1_onourway";
+aliases[aliases.size] = "scoutsniper_ru1_passcig";
+aliases[aliases.size] = "scoutsniper_ru2_youidiot";
+aliases[aliases.size] = "scoutsniper_ru1_wakeup";
+aliases[aliases.size] = "scoutsniper_ru2_call";
+aliases[aliases.size] = "scoutsniper_ru1_tooexpensive";
+aliases[aliases.size] = "scoutsniper_ru2_americagoingtostartwar";
+aliases[aliases.size] = "scoutsniper_ru4_raise";
+aliases[aliases.size] = "scoutsniper_ru2_sendsomeonetocheck";
+aliases[aliases.size] = "scoutsniper_ru4_ifold";
+aliases[aliases.size] = "scoutsniper_ru2_andreibringingfood";
+aliases[aliases.size] = "scoutsniper_ru4_thisonesheavy";
+aliases[aliases.size] = "scoutsniper_ru2_quicklyaspossible";
+aliases[aliases.size] = "scoutsniper_ru4_didnteatbreakfast";
+aliases[aliases.size] = "scoutsniper_ru2_yescomrade";
+aliases[aliases.size] = "scoutsniper_ru4_takenzakhaevsoffer";
+aliases[aliases.size] = "scoutsniper_ru2_clearrotorblades";
+//aliases[ aliases.size ] = "scoutsniper_ru4_mayhaveproblem";//fear
+aliases[aliases.size] = "scoutsniper_ru2_radiationdosimeters";
+aliases[aliases.size] = "scoutsniper_ru4_canceltransactions";
+aliases[aliases.size] = "scoutsniper_ru2_dontbelieveatall";
+aliases[aliases.size] = "scoutsniper_ru4_cantwaitforshiftend";
+aliases[aliases.size] = "scoutsniper_ru2_ok";
+aliases[aliases.size] = "scoutsniper_ru4_hopeitdoesntrain";
+aliases[aliases.size] = "scoutsniper_ru2_professionaljob";
 
-  level.chatter_aliases = aliases;
+level.chatter_aliases = aliases;
 }
 
 script_chatgroups() {
@@ -1179,12 +1179,12 @@ find_next_member(closest_enemies, closest, closest_chat_group) {
 }
 
 // --------------------------------------------------------------------------------- clip_nosight_wait_for_activate() {
-  self endon("death");
+self endon("death");
 
-  flag_wait(self.script_flag);
+flag_wait(self.script_flag);
 
-  self thread clip_nosight_wait_damage();
-  self thread clip_nosight_wait_stealth();
+self thread clip_nosight_wait_damage();
+self thread clip_nosight_wait_stealth();
 }
 
 clip_nosight_wait_damage() {
@@ -1208,24 +1208,24 @@ clip_nosight_wait_stealth() {
 }
 
 // --------------------------------------------------------------------------------- init_prone_DOF() {
-  foreach(player in level.players) {
-    player.dofDefault["nearStart"] = level.dofDefault["nearStart"];
-    player.dofDefault["nearEnd"] = level.dofDefault["nearEnd"];
-    player.dofDefault["nearBlur"] = level.dofDefault["nearBlur"];
-    player.dofDefault["farStart"] = level.dofDefault["farStart"];
-    player.dofDefault["farEnd"] = level.dofDefault["farEnd"];
-    player.dofDefault["farBlur"] = level.dofDefault["farBlur"];
+foreach(player in level.players) {
+  player.dofDefault["nearStart"] = level.dofDefault["nearStart"];
+  player.dofDefault["nearEnd"] = level.dofDefault["nearEnd"];
+  player.dofDefault["nearBlur"] = level.dofDefault["nearBlur"];
+  player.dofDefault["farStart"] = level.dofDefault["farStart"];
+  player.dofDefault["farEnd"] = level.dofDefault["farEnd"];
+  player.dofDefault["farBlur"] = level.dofDefault["farBlur"];
 
-    player.dofProne["nearStart"] = 10;
-    player.dofProne["nearEnd"] = 50;
-    player.dofProne["nearBlur"] = 6;
+  player.dofProne["nearStart"] = 10;
+  player.dofProne["nearEnd"] = 50;
+  player.dofProne["nearBlur"] = 6;
 
-    player.dofReg["nearStart"] = player.dofDefault["nearStart"];
-    player.dofReg["nearEnd"] = player.dofDefault["nearEnd"];
-    player.dofReg["nearBlur"] = player.dofDefault["nearBlur"];
+  player.dofReg["nearStart"] = player.dofDefault["nearStart"];
+  player.dofReg["nearEnd"] = player.dofDefault["nearEnd"];
+  player.dofReg["nearBlur"] = player.dofDefault["nearBlur"];
 
-    player thread player_prone_DOF();
-  }
+  player thread player_prone_DOF();
+}
 }
 
 player_prone_DOF() {
@@ -1269,34 +1269,34 @@ set_prone_DOF() {
 }
 
 // --------------------------------------------------------------------------------- dialog_unsilenced_weapons() {
-  self endon("death");
-  level endon("nonsilenced_weapon_pickup");
+self endon("death");
+level endon("nonsilenced_weapon_pickup");
 
-  while(true) {
-    self waittill("weapon_change");
+while(true) {
+  self waittill("weapon_change");
 
-    current_weapon = self getcurrentprimaryweapon();
-    if(!isDefined(current_weapon)) {
-      continue;
-    }
-    if(current_weapon == "none") {
-      continue;
-    }
-    if(current_weapon == "c4") {
-      continue;
-    }
-    if(current_weapon == "claymore") {
-      continue;
-    }
-    if(issubstr(current_weapon, "silence")) {
-      continue;
-    }
-    //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
-    thread radio_dialogue("so_hid_ghil_pri_attractattn");
-    break;
+  current_weapon = self getcurrentprimaryweapon();
+  if(!isDefined(current_weapon)) {
+    continue;
   }
+  if(current_weapon == "none") {
+    continue;
+  }
+  if(current_weapon == "c4") {
+    continue;
+  }
+  if(current_weapon == "claymore") {
+    continue;
+  }
+  if(issubstr(current_weapon, "silence")) {
+    continue;
+  }
+  //Be careful about picking up enemy weapons, Soap. Any un-suppressed firearms will attract a lot of attention.	
+  thread radio_dialogue("so_hid_ghil_pri_attractattn");
+  break;
+}
 
-  level notify("nonsilenced_weapon_pickup");
+level notify("nonsilenced_weapon_pickup");
 }
 
 // ---------------------------------------------------------------------------------

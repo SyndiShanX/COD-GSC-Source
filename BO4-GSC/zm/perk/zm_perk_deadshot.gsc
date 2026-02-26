@@ -43,11 +43,11 @@ deadshot_precache() {
     return;
   }
 
-  level._effect[# "deadshot_light"] = # "hash_2225287695ddf9c9";
-  level.machine_assets[# "specialty_deadshot"] = spawnStruct();
-  level.machine_assets[# "specialty_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
-  level.machine_assets[# "specialty_deadshot"].off_model = "p7_zm_vending_ads";
-  level.machine_assets[# "specialty_deadshot"].on_model = "p7_zm_vending_ads";
+  level._effect[#"deadshot_light"] = # "hash_2225287695ddf9c9";
+  level.machine_assets[#"specialty_deadshot"] = spawnStruct();
+  level.machine_assets[#"specialty_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
+  level.machine_assets[#"specialty_deadshot"].off_model = "p7_zm_vending_ads";
+  level.machine_assets[#"specialty_deadshot"].on_model = "p7_zm_vending_ads";
 }
 
 deadshot_register_clientfield() {

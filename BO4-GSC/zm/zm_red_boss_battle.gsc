@@ -84,16 +84,16 @@ init() {
   level flag::init(#"boss_battle_complete");
   zm_sq::register(#"boss_battle", #"stat_tracker", #"stat_tracker", &stat_tracker_setup, &stat_tracker_cleanup, 1);
   zm_sq::start(#"boss_battle");
-  level._effect[# "storm_radius"] = # "hash_4dd46a244305d465";
-  level._effect[# "annihilator_bolt"] = # "hash_9a8432f2e39c8af";
-  level._effect[# "hash_4311fc5f4111c023"] = # "hash_6b0875f1b8c6cf55";
-  level._effect[# "hash_4311fd5f4111c1d6"] = # "hash_6b0872f1b8c6ca3c";
-  level._effect[# "hash_4311fe5f4111c389"] = # "hash_6b0873f1b8c6cbef";
-  level._effect[# "hash_4d8d2bc22add9939"] = # "hash_7a8056b9d995fa0";
-  level._effect[# "hash_661c427afb24e5f2"] = # "hash_32b6f16bb5eaa401";
-  level._effect[# "hash_65a9f0574c7cd2db"] = # "hash_70f9f9890480fd54";
-  level._effect[# "hash_3d64776928022f66"] = # "hash_57449588f6051a0d";
-  level._effect[# "perseus_death"] = # "hash_6c3beeb5851adca4";
+  level._effect[#"storm_radius"] = # "hash_4dd46a244305d465";
+  level._effect[#"annihilator_bolt"] = # "hash_9a8432f2e39c8af";
+  level._effect[#"hash_4311fc5f4111c023"] = # "hash_6b0875f1b8c6cf55";
+  level._effect[#"hash_4311fd5f4111c1d6"] = # "hash_6b0872f1b8c6ca3c";
+  level._effect[#"hash_4311fe5f4111c389"] = # "hash_6b0873f1b8c6cbef";
+  level._effect[#"hash_4d8d2bc22add9939"] = # "hash_7a8056b9d995fa0";
+  level._effect[#"hash_661c427afb24e5f2"] = # "hash_32b6f16bb5eaa401";
+  level._effect[#"hash_65a9f0574c7cd2db"] = # "hash_70f9f9890480fd54";
+  level._effect[#"hash_3d64776928022f66"] = # "hash_57449588f6051a0d";
+  level._effect[#"perseus_death"] = # "hash_6c3beeb5851adca4";
   level.s_boss_battle = spawnStruct();
   level.s_boss_battle.var_35345d3d = getent("vol_boss_arena_1", "targetname");
   level.s_boss_battle.var_285e59dd = getent("vol_boss_arena_2", "targetname");
@@ -344,10 +344,10 @@ function_756474bf() {
   level.custom_spawnplayer = &function_9bc4f8cb;
   zm_bgb_anywhere_but_here::function_886fce8f(0);
   level.zombie_round_start_delay = 0;
-  level.zombie_powerups[# "fire_sale"].func_should_drop_with_regular_powerups = &return_false;
-  level.zombie_powerups[# "bonus_points_team"].func_should_drop_with_regular_powerups = &return_false;
-  level.zombie_powerups[# "bonus_points_player"].func_should_drop_with_regular_powerups = &return_false;
-  level.zombie_powerups[# "bonus_points_player_shared"].func_should_drop_with_regular_powerups = &return_false;
+  level.zombie_powerups[#"fire_sale"].func_should_drop_with_regular_powerups = &return_false;
+  level.zombie_powerups[#"bonus_points_team"].func_should_drop_with_regular_powerups = &return_false;
+  level.zombie_powerups[#"bonus_points_player"].func_should_drop_with_regular_powerups = &return_false;
+  level.zombie_powerups[#"bonus_points_player_shared"].func_should_drop_with_regular_powerups = &return_false;
 
   if(!isDefined(level.var_d6f059f7)) {
     level.var_d6f059f7 = max(level.round_number, 25);
@@ -486,7 +486,7 @@ function_b8510127() {
 
 function_b3df51ad(a_ents) {
   level endon(#"hash_4be6553c5ac0ec2b", #"hash_7646638df88a3656");
-  e_pegasus = self.scene_ents[# "pegasus"];
+  e_pegasus = self.scene_ents[#"pegasus"];
   e_pegasus.health = 100000;
 
   if(getdvarint(#"zm_debug_ee", 0)) {
@@ -625,10 +625,10 @@ function_20bfbc00(a_ents) {
     a_keys = getarraykeys(a_ents);
 
     if(isinarray(a_keys, #"pegasus")) {
-      e_boss = self.scene_ents[# "pegasus"];
+      e_boss = self.scene_ents[#"pegasus"];
       self thread function_ca661e4b(1);
     } else if(isinarray(a_keys, #"boss_1")) {
-      e_boss = self.scene_ents[# "boss_1"];
+      e_boss = self.scene_ents[#"boss_1"];
     }
   }
 
@@ -661,7 +661,7 @@ function_20bfbc00(a_ents) {
 }
 
 function_aa23278d(a_ents) {
-  e_perseus = self.scene_ents[# "boss_1"];
+  e_perseus = self.scene_ents[#"boss_1"];
 
   if(isDefined(e_perseus.var_e0418003)) {
     str_fx = # "hash_3a2097ef26fdafe0" + e_perseus.var_e0418003;
@@ -724,15 +724,15 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
   var_e635b6cb = 50 * n_lvl;
 
   if(str_notify === "damage") {
-    if(isinarray(level.hero_weapon[# "chakram"], w_weapon)) {
-      if(w_weapon === level.hero_weapon[# "chakram"][2] && s_waitresult.mod === "MOD_UNKNOWN") {
+    if(isinarray(level.hero_weapon[#"chakram"], w_weapon)) {
+      if(w_weapon === level.hero_weapon[#"chakram"][2] && s_waitresult.mod === "MOD_UNKNOWN") {
         var_7bf2d9c0 = 1;
       } else if(s_waitresult.mod === "MOD_PROJECTILE") {
         var_b162218f = 1;
       }
     }
 
-    if(isinarray(level.hero_weapon[# "scepter"], w_weapon) && s_waitresult.mod === "MOD_BURNED") {
+    if(isinarray(level.hero_weapon[#"scepter"], w_weapon) && s_waitresult.mod === "MOD_BURNED") {
       if(isDefined(self.var_d6fe2916) && self.var_d6fe2916) {
         var_c408ccc9 = 1;
       } else {
@@ -740,7 +740,7 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
       }
     }
 
-    if(isinarray(level.hero_weapon[# "hammer"], w_weapon)) {
+    if(isinarray(level.hero_weapon[#"hammer"], w_weapon)) {
       if(isDefined(s_waitresult.mod)) {
         switch (s_waitresult.mod) {
           case # "mod_electrocuted":
@@ -753,19 +753,19 @@ function_12f4c281(s_waitresult, w_weapon, e_boss) {
       }
     }
 
-    if(isinarray(level.hero_weapon[# "sword_pistol"], w_weapon)) {
+    if(isinarray(level.hero_weapon[#"sword_pistol"], w_weapon)) {
       if(s_waitresult.mod === "MOD_EXPLOSIVE") {
         return 0;
-      } else if(w_weapon === level.hero_weapon[# "sword_pistol"][2] && s_waitresult.mod === "MOD_PROJECTILE") {
+      } else if(w_weapon === level.hero_weapon[#"sword_pistol"][2] && s_waitresult.mod === "MOD_PROJECTILE") {
         var_b46b719c = 1;
       }
     }
   } else if(str_notify === "hero_weapon_hit" && s_waitresult.e_entity === e_boss) {
-    if(isinarray(level.hero_weapon[# "scepter"], w_weapon)) {
+    if(isinarray(level.hero_weapon[#"scepter"], w_weapon)) {
       var_5b0fafb = 1;
     }
 
-    if(isinarray(level.hero_weapon[# "sword_pistol"], w_weapon)) {
+    if(isinarray(level.hero_weapon[#"sword_pistol"], w_weapon)) {
       var_99f536ed = 1;
     }
   }
@@ -1241,14 +1241,14 @@ function_21ef9bb7(a_ents) {
     a_keys = getarraykeys(a_ents);
 
     if(isinarray(a_keys, #"pegasus")) {
-      e_boss = self.scene_ents[# "pegasus"];
+      e_boss = self.scene_ents[#"pegasus"];
       var_653b9351 = 1;
 
       str_boss = "<dev string:x5d4>";
 
       e_boss thread function_8e7ffff8();
     } else if(isinarray(a_keys, #"boss_1")) {
-      e_boss = self.scene_ents[# "boss_1"];
+      e_boss = self.scene_ents[#"boss_1"];
       var_653b9351 = 0;
 
       str_boss = "<dev string:x5de>";
@@ -1405,7 +1405,7 @@ function_3c2238ed(str_zone) {
 
 function_cb86284d(a_ents) {
   level endon(#"hash_7646638df88a3656");
-  e_pegasus = a_ents[# "pegasus"];
+  e_pegasus = a_ents[#"pegasus"];
 
   if(isDefined(e_pegasus)) {
     level waittill(#"start_thunderstorm");
@@ -1650,7 +1650,7 @@ function_caa7eeb() {
   level.var_92830991 setscale(4);
   level.var_92830991 thread zm_red_challenges_rewards::function_51fd2597(0);
   level.var_92830991 thread zm_red_challenges_rewards::function_f7cdf2f7(2);
-  playFX(level._effect[# "perseus_death"], level.var_92830991.origin - (0, 0, 16));
+  playFX(level._effect[#"perseus_death"], level.var_92830991.origin - (0, 0, 16));
   array::run_all(level.s_boss_battle.var_d82d0e73, &ghost);
   array::run_all(level.s_boss_battle.var_d82d0e73, &notsolid);
   e_vo_player = array::random(util::get_active_players(#"allies"));
@@ -1839,8 +1839,8 @@ function_79611ef0(n_island) {
 }
 
 function_a3f19534(a_ents) {
-  if(isDefined(a_ents[# "boss_1"])) {
-    a_ents[# "boss_1"] waittill(#"final_strike_here");
+  if(isDefined(a_ents[#"boss_1"])) {
+    a_ents[#"boss_1"] waittill(#"final_strike_here");
 
     foreach(player in getplayers()) {
       if(isDefined(player)) {
@@ -2025,7 +2025,7 @@ function_39dc3a09(e_target) {
 }
 
 function_766fb0b1(var_fd1c353a) {
-  a_enemies = level.ai[# "axis"];
+  a_enemies = level.ai[#"axis"];
 
   if(isDefined(a_enemies) && a_enemies.size) {
     a_potential_targets = array::get_all_closest(var_fd1c353a, a_enemies, undefined, undefined, 320);
@@ -2069,12 +2069,12 @@ perseus_teleport_fx(v_destination) {
   level waittill(#"play_teleport_tell_fx");
   var_2ff979fa = spawn("script_model", v_destination);
   var_2ff979fa playSound(#"hash_4cc85ba1ffa59d0b");
-  playFXOnTag(level._effect[# "hash_661c427afb24e5f2"], e_perseus, "tag_weapon_right");
-  playFX(level._effect[# "hash_4d8d2bc22add9939"], var_2ff979fa.origin, v_forward, (1, 0, 0));
+  playFXOnTag(level._effect[#"hash_661c427afb24e5f2"], e_perseus, "tag_weapon_right");
+  playFX(level._effect[#"hash_4d8d2bc22add9939"], var_2ff979fa.origin, v_forward, (1, 0, 0));
   level waittill(#"play_teleport_fx");
   playsoundatposition(#"hash_5e07cc4ee28c44e7", e_perseus.origin);
-  playFX(level._effect[# "hash_65a9f0574c7cd2db"], var_2ff979fa.origin, v_forward, (1, 0, 0));
-  playFX(level._effect[# "hash_3d64776928022f66"], e_perseus gettagorigin("j_spine4"), v_forward, (1, 0, 0));
+  playFX(level._effect[#"hash_65a9f0574c7cd2db"], var_2ff979fa.origin, v_forward, (1, 0, 0));
+  playFX(level._effect[#"hash_3d64776928022f66"], e_perseus gettagorigin("j_spine4"), v_forward, (1, 0, 0));
   wait 2;
   var_2ff979fa delete();
 }

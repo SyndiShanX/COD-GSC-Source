@@ -43,7 +43,7 @@ custom_joker_movement() {
   mdl_lock = util::spawn_model(level.chest_joker_model, v_origin, self.angles + (0, 180, 0));
   mdl_lock.targetname = "box_lock";
   mdl_lock setCanDamage(1);
-  level.var_c7626f2a[# "box_lock"] = &pebble::function_bdd1bac8;
+  level.var_c7626f2a[#"box_lock"] = &pebble::function_bdd1bac8;
   level notify(#"hash_219aba01ff2d6de4");
   playsoundatposition(#"hash_7c7d8771a48e8871", mdl_lock.origin);
   wait 0.5;

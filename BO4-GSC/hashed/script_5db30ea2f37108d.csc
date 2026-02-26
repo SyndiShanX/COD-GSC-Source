@@ -21,8 +21,8 @@ __init__() {
   clientfield::register("toplayer", "" + # "hash_2058d8d474a6b3e1", 1, 1, "int", &function_b42c46e3, 0, 0);
   clientfield::register("toplayer", "" + # "hash_cc5b97a575d4d6d", 1, 1, "int", &function_f4b5e072, 0, 0);
   clientfield::register("world", "" + # "hash_ef497244490a0fc", 1, 3, "int", &function_1d683667, 0, 0);
-  level._effect[# "spk_glint"] = # "zombie/fx_bmode_glint_hook_zod_zmb";
-  level._effect[# "hash_7bd7f11175082774"] = # "hash_aca33e8f743523b";
+  level._effect[#"spk_glint"] = # "zombie/fx_bmode_glint_hook_zod_zmb";
+  level._effect[#"hash_7bd7f11175082774"] = # "hash_aca33e8f743523b";
 }
 
 function_9e8baed0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -111,7 +111,7 @@ function_b42c46e3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_17825742.var_a9a3211a = self.var_17825742 gettagangles("tag_spork");
     self.mdl_spork = util::spawn_model(localclientnum, "wpn_t8_zm_spork_world", self.var_17825742.var_e88acf63, self.var_17825742.var_a9a3211a);
     var_fcec724a = struct::get("s_sp_fx_glint_loc");
-    self.var_4e35f286 = playFX(localclientnum, level._effect[# "spk_glint"], var_fcec724a.origin);
+    self.var_4e35f286 = playFX(localclientnum, level._effect[#"spk_glint"], var_fcec724a.origin);
     return;
   }
 
@@ -167,6 +167,6 @@ function_f4b5e072(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval) {
     s_origin = struct::get("s_break_large_metal");
-    self.var_d27c5165 = playFX(localclientnum, level._effect[# "hash_7bd7f11175082774"], s_origin.origin);
+    self.var_d27c5165 = playFX(localclientnum, level._effect[#"hash_7bd7f11175082774"], s_origin.origin);
   }
 }

@@ -28,8 +28,8 @@ function getplayervieworigin() {
   assert(isplayersafe(self));
   vieworigin = undefined;
 
-  if(isscriptfunctionptr(level._snd._callbacks[# "player_view"])) {
-    vieworigin = player[[level._snd._callbacks[# "player_view"]]]();
+  if(isscriptfunctionptr(level._snd._callbacks[#"player_view"])) {
+    vieworigin = player[[level._snd._callbacks[#"player_view"]]]();
   } else {
     vieworigin = player getEye();
   }
@@ -43,8 +43,8 @@ function getplayerviewangles() {
   assert(isplayersafe(self));
   viewangles = undefined;
 
-  if(isscriptfunctionptr(level._snd._callbacks[# "player_angles"])) {
-    viewangles = player[[level._snd._callbacks[# "player_angles"]]]();
+  if(isscriptfunctionptr(level._snd._callbacks[#"player_angles"])) {
+    viewangles = player[[level._snd._callbacks[#"player_angles"]]]();
   } else {
     viewangles = player getplayerangles();
   }
@@ -58,8 +58,8 @@ function getplayerfov() {
   assert(isplayersafe(self));
   fov = undefined;
 
-  if(isscriptfunctionptr(level._snd._callbacks[# "player_fov"])) {
-    fov = player[[level._snd._callbacks[# "player_fov"]]]();
+  if(isscriptfunctionptr(level._snd._callbacks[#"player_fov"])) {
+    fov = player[[level._snd._callbacks[#"player_fov"]]]();
   } else {
     fov = getdvarfloat(#"cg_fov", 65);
   }

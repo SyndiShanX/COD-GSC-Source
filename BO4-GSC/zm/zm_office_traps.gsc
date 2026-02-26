@@ -150,7 +150,7 @@ function_5bd53e9b(var_a703e7de, str_flag) {
   var_a703e7de movez(48, 1, 0.4, 0);
   var_a703e7de waittill(#"movedone");
   var_a703e7de rotateroll(360 * randomintrange(4, 10), 1.2, 0.6, 0);
-  playFXOnTag(level._effect[# "poltergeist"], var_a703e7de.fx, "tag_origin");
+  playFXOnTag(level._effect[#"poltergeist"], var_a703e7de.fx, "tag_origin");
   var_a703e7de waittill(#"rotatedone");
   var_a703e7de hide();
   var_a703e7de.fx hide();

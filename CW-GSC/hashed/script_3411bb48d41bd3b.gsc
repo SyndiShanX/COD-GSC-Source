@@ -50,7 +50,7 @@ function private preinit() {
   level.var_2510617f = 0;
   level.var_6eb6193a = 0;
   level.var_7dff87f1 = 0;
-  level.var_d0c8ad06 = [# "ambush_zombie", #"soul_capture_zombie", #"hash_7f951f9c9843eb2b"];
+  level.var_d0c8ad06 = [#"ambush_zombie", #"soul_capture_zombie", #"hash_7f951f9c9843eb2b"];
 
   if(is_true(getgametypesetting(#"hash_3109a8794543000f"))) {
     if(is_true(getgametypesetting(#"wzzombiesspawnammo"))) {
@@ -129,7 +129,7 @@ function function_b4f41a02() {
         direction_vec = (direction_vec[0] * 8000, direction_vec[1] * 8000, direction_vec[2] * 8000);
         trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
         spawner::add_ai_spawn_function(&function_df8d461e);
-        ai = spawnactor(cmd_tokens[1], trace[# "position"], (0, 0, 0), "<dev string:x1d3>", 1);
+        ai = spawnactor(cmd_tokens[1], trace[#"position"], (0, 0, 0), "<dev string:x1d3>", 1);
         spawner::function_932006d1(&function_df8d461e);
         break;
       case # "hash_deec03a3269d42":
@@ -140,7 +140,7 @@ function function_b4f41a02() {
         direction_vec = (direction_vec[0] * 8000, direction_vec[1] * 8000, direction_vec[2] * 8000);
         trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
         spawner::add_ai_spawn_function(&function_df8d461e);
-        ai = spawnactor(cmd_tokens[1], trace[# "position"], (0, 0, 0), "<dev string:x1df>", 1);
+        ai = spawnactor(cmd_tokens[1], trace[#"position"], (0, 0, 0), "<dev string:x1df>", 1);
         spawner::function_932006d1(&function_df8d461e);
         break;
     }
@@ -908,7 +908,7 @@ function function_bdb2b85b(entity, origin, angles, radius, num_spots, var_7a2632
     }
 
     var_e07c7e8 = physicstrace(pos + (0, 0, 10), pos + (0, 0, -10), mins, maxs, self, 1);
-    var_c060661b = var_e07c7e8[# "position"];
+    var_c060661b = var_e07c7e8[#"position"];
     var_3e98a413 = getclosestpointonnavmesh(var_c060661b, 64, 20);
 
     if(isDefined(var_3e98a413)) {
@@ -2662,9 +2662,9 @@ function function_caa890e2(origin, &spawn_points, var_79d43d2f, height, outer_ra
     spawn_point = array::pop(queryresult.data, randomint(queryresult.data.size), 0);
     trace_start = (spawn_point.origin[0], spawn_point.origin[1], spawn_point.origin[2] + height);
     traceresult = physicstraceex(trace_start, spawn_point.origin, (-15, -15, 0), (15, 15, 72));
-    var_d1a33279 = traceresult[# "position"];
+    var_d1a33279 = traceresult[#"position"];
 
-    if(traceresult[# "fraction"] > 0 && abs(var_d1a33279[2] - spawn_point.origin[2]) < 32) {
+    if(traceresult[#"fraction"] > 0 && abs(var_d1a33279[2] - spawn_point.origin[2]) < 32) {
       spawn_points[spawn_points.size] = var_d1a33279 - origin;
     }
   }
@@ -2678,13 +2678,13 @@ function function_6b273d22(origin, var_1faf023a, outer_radius, inner_radius, var
   point_start = (origin[0] + var_1faf023a[0], origin[1] + var_1faf023a[1], origin[2] + var_1faf023a[2]);
   point_end = (origin[0] + var_1faf023a[0], origin[1] + var_1faf023a[1], origin[2] - var_1faf023a[2]);
   traceresult = physicstraceex(point_start, point_end, (-15, -15, 0), (15, 15, 72));
-  var_d1a33279 = traceresult[# "position"];
+  var_d1a33279 = traceresult[#"position"];
 
   if(is_true(var_b28b1642)) {
     waitframe(1);
   }
 
-  if(traceresult[# "fraction"] > 0 && isDefined(var_d1a33279)) {
+  if(traceresult[#"fraction"] > 0 && isDefined(var_d1a33279)) {
     var_47efca42 = getclosestpointonnavmesh(var_d1a33279, 500, 32);
   }
 
@@ -2701,9 +2701,9 @@ function function_5f4ef4d0(origin, angles, var_1faf023a, width, length, height) 
   point_start = (origin[0] + var_1faf023a[0], origin[1] + var_1faf023a[1], origin[2] + var_1faf023a[2]);
   point_end = (origin[0] + var_1faf023a[0], origin[1] + var_1faf023a[1], origin[2] - var_1faf023a[2]);
   traceresult = physicstraceex(point_start, point_end, (-15, -15, 0), (15, 15, 72));
-  var_d1a33279 = traceresult[# "position"];
+  var_d1a33279 = traceresult[#"position"];
 
-  if(traceresult[# "fraction"] > 0 && isDefined(var_d1a33279)) {
+  if(traceresult[#"fraction"] > 0 && isDefined(var_d1a33279)) {
     var_47efca42 = var_d1a33279;
   }
 

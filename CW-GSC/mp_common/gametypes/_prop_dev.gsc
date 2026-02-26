@@ -977,8 +977,8 @@ function function_77511c75() {
     enemybot bot::function_bab12815(enemybot.origin);
   }
 
-  if(!isDefined(enemybot.pers[# "participation"])) {
-    enemybot.pers[# "participation"] = 0;
+  if(!isDefined(enemybot.pers[#"participation"])) {
+    enemybot.pers[#"participation"] = 0;
   }
 
   if(!isDefined(enemybot.hits)) {

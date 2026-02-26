@@ -47,8 +47,8 @@ function function_e963e37d() {
 }
 
 function function_dd4bf8ac(num) {
-  if(self.pers[# "pickup_health"] < level.var_99a34951) {
-    self.pers[# "pickup_health"] += num;
+  if(self.pers[#"pickup_health"] < level.var_99a34951) {
+    self.pers[#"pickup_health"] += num;
     self function_2bcfabea();
     return true;
   }
@@ -57,8 +57,8 @@ function function_dd4bf8ac(num) {
 }
 
 function private onconnect() {
-  if(!isDefined(self.pers[# "pickup_health"])) {
-    self.pers[# "pickup_health"] = 0;
+  if(!isDefined(self.pers[#"pickup_health"])) {
+    self.pers[#"pickup_health"] = 0;
   }
 }
 
@@ -72,7 +72,7 @@ function function_3fbb0e22() {
 }
 
 function private onhealthregen(slot, weapon) {
-  self.pers[# "pickup_health"]--;
+  self.pers[#"pickup_health"]--;
 }
 
 function private offhealthregen(slot, weapon) {
@@ -128,27 +128,27 @@ function private function_7a80944d(player) {
 }
 
 function private function_2bcfabea() {
-  if(!isDefined(self) || !isDefined(self.pers[# "pickup_health"])) {
+  if(!isDefined(self) || !isDefined(self.pers[#"pickup_health"])) {
     return;
   }
 
-  if(self.pers[# "pickup_health"] <= 0) {
+  if(self.pers[#"pickup_health"] <= 0) {
     self gadget_health_regen::power_off();
 
     if(isDefined(self.gadget_health_regen_slot)) {
       self function_19ed70ca(self.gadget_health_regen_slot, 1);
     }
 
-    if(self.pers[# "pickup_health"] < 0) {
-      self.pers[# "pickup_health"] = 0;
+    if(self.pers[#"pickup_health"] < 0) {
+      self.pers[#"pickup_health"] = 0;
     }
   } else {
     self gadget_health_regen::power_on();
 
-    if(self.pers[# "pickup_health"] > level.var_99a34951) {
-      self.pers[# "pickup_health"] = level.var_99a34951;
+    if(self.pers[#"pickup_health"] > level.var_99a34951) {
+      self.pers[#"pickup_health"] = level.var_99a34951;
     }
   }
 
-  self clientfield::set_player_uimodel("hudItems.numHealthPickups", self.pers[# "pickup_health"]);
+  self clientfield::set_player_uimodel("hudItems.numHealthPickups", self.pers[#"pickup_health"]);
 }

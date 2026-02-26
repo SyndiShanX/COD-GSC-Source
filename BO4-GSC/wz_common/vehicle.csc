@@ -228,15 +228,15 @@ function_8411122e(localclientnum, owner) {
   surfaces = [];
 
   if(isDefined(self.trace)) {
-    if(self.trace[# "fraction"] != 1) {
+    if(self.trace[#"fraction"] != 1) {
       if(!isDefined(surfaces)) {
         surfaces = [];
       } else if(!isarray(surfaces)) {
         surfaces = array(surfaces);
       }
 
-      if(!isinarray(surfaces, driving_fx::function_73e08cca(self.trace[# "surfacetype"]))) {
-        surfaces[surfaces.size] = driving_fx::function_73e08cca(self.trace[# "surfacetype"]);
+      if(!isinarray(surfaces, driving_fx::function_73e08cca(self.trace[#"surfacetype"]))) {
+        surfaces[surfaces.size] = driving_fx::function_73e08cca(self.trace[#"surfacetype"]);
       }
     }
   }
@@ -340,9 +340,9 @@ function_732976d8(localclientnum, vehicle) {
     }
 
     trace = bulletTrace(vehicle.origin, vehicle.origin - offsetorigin, 0, vehicle, 1);
-    distsqr = distancesquared(vehicle.origin, trace[# "position"]);
+    distsqr = distancesquared(vehicle.origin, trace[#"position"]);
 
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       self function_d1731820(localclientnum);
       wait 1;
       continue;

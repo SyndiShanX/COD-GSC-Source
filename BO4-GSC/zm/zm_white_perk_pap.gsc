@@ -34,9 +34,9 @@ init() {
 }
 
 init_fx() {
-  level._effect[# "hash_7866a63fde6b972d"] = # "hash_2edb406c045a5b80";
-  level._effect[# "perk_marker"] = # "hash_2eb17822848d1484";
-  level._effect[# "hash_498a1ea189a3ea3b"] = # "hash_4d4ecfd7d55314e9";
+  level._effect[#"hash_7866a63fde6b972d"] = # "hash_2edb406c045a5b80";
+  level._effect[#"perk_marker"] = # "hash_2eb17822848d1484";
+  level._effect[#"hash_498a1ea189a3ea3b"] = # "hash_4d4ecfd7d55314e9";
 }
 
 function_48acb6ed(position) {

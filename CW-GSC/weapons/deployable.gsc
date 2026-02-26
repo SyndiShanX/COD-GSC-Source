@@ -207,8 +207,8 @@ function private function_831707e8(player, deployable_weapon) {
 
   traceresults = bulletTrace(player.origin + (0, 0, 20), player.origin + (0, 0, -20), 0, player);
 
-  if(isDefined(traceresults[# "entity"])) {
-    entity = traceresults[# "entity"];
+  if(isDefined(traceresults[#"entity"])) {
+    entity = traceresults[#"entity"];
 
     if(!function_db9eb027(entity)) {
       return false;
@@ -419,11 +419,11 @@ function function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapo
   hitent = undefined;
   var_d22ba639 = 0;
 
-  if(trace_result[# "fraction"] < 1) {
-    hit_location = trace_result[# "position"];
-    hit_normal = trace_result[# "normal"];
+  if(trace_result[#"fraction"] < 1) {
+    hit_location = trace_result[#"position"];
+    hit_normal = trace_result[#"normal"];
     var_6165e0de = hit_normal[2] < 0.7;
-    hit_distance = trace_result[# "fraction"] * trace_distance;
+    hit_distance = trace_result[#"fraction"] * trace_distance;
 
     if(distance2dsquared(client_pos, hit_location) < sqr(previs_weapon.var_f7e67f28)) {
       var_caa96e8a = 1;
@@ -447,7 +447,7 @@ function function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapo
         var_d22ba639 = 1;
       }
 
-      hitent = trace_result[# "entity"];
+      hitent = trace_result[#"entity"];
     } else {
       if(height_offset <= previs_weapon.var_227c90e1 && height_offset >= previs_weapon.var_849af6b4) {
         var_a7bfb = 1;
@@ -460,7 +460,7 @@ function function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapo
       }
 
       if(!var_def28dc4 && var_6165e0de) {
-        hit_location = client_pos + (forward_vector[0], forward_vector[1], 0) * trace_result[# "fraction"];
+        hit_location = client_pos + (forward_vector[0], forward_vector[1], 0) * trace_result[#"fraction"];
         hit_normal = (0, 0, 1);
         var_ae7d780d = 1;
         var_d22ba639 = 0;
@@ -480,23 +480,23 @@ function function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapo
     var_1a606e14 = var_75e7a61 + forward2d * var_f7e67f28;
     var_b6085963 = bulletTrace(var_75e7a61, var_1a606e14, 0, ignore_entity);
 
-    if(var_b6085963[# "fraction"] > 0) {
-      var_f7e67f28 = previs_weapon.var_f7e67f28 * var_b6085963[# "fraction"] - var_f94d59f8;
+    if(var_b6085963[#"fraction"] > 0) {
+      var_f7e67f28 = previs_weapon.var_f7e67f28 * var_b6085963[#"fraction"] - var_f94d59f8;
       ground_trace_start = client_pos + forward2d * var_f7e67f28 + (0, 0, previs_weapon.var_227c90e1);
       ground_trace_end = ground_trace_start - (0, 0, previs_weapon.var_227c90e1 - previs_weapon.var_849af6b4);
       var_4bc118b9 = groundtrace(ground_trace_start, ground_trace_end, 0, ignore_entity);
-      hitent = var_4bc118b9[# "entity"];
+      hitent = var_4bc118b9[#"entity"];
 
-      if(var_4bc118b9[# "fraction"] > 0.01 && var_4bc118b9[# "fraction"] < 1 && var_4bc118b9[# "normal"][2] > 0.9) {
-        hit_location = var_4bc118b9[# "position"];
-        hit_normal = var_4bc118b9[# "normal"];
-        hit_distance = var_4bc118b9[# "fraction"] * var_f7e67f28;
+      if(var_4bc118b9[#"fraction"] > 0.01 && var_4bc118b9[#"fraction"] < 1 && var_4bc118b9[#"normal"][2] > 0.9) {
+        hit_location = var_4bc118b9[#"position"];
+        hit_normal = var_4bc118b9[#"normal"];
+        hit_distance = var_4bc118b9[#"fraction"] * var_f7e67f28;
         var_caa96e8a = 1;
         var_a7bfb = 1;
 
-        if(isDefined(var_4bc118b9[# "waterdepth"])) {
-          water_depth = var_4bc118b9[# "waterdepth"];
-          water_bottom = var_4bc118b9[# "waterbottom"];
+        if(isDefined(var_4bc118b9[#"waterdepth"])) {
+          water_depth = var_4bc118b9[#"waterdepth"];
+          water_bottom = var_4bc118b9[#"waterbottom"];
         }
       }
     }
@@ -528,7 +528,7 @@ function function_54d27855(client_pos, client_angles, var_36baa3f1, previs_weapo
   if(var_5130f5dd && !is_true(previs_weapon.var_33d50507)) {
     var_e3c2e9c6 = var_5adff8ce + (0, 0, 1) * 30;
     var_cc9ea9b = physicstrace(var_36baa3f1, var_e3c2e9c6, (-16, -16, -16), (16, 16, 16), ignore_entity);
-    var_5130f5dd = var_cc9ea9b[# "fraction"] == 1;
+    var_5130f5dd = var_cc9ea9b[#"fraction"] == 1;
   }
 
   results.isvalid = var_5130f5dd;

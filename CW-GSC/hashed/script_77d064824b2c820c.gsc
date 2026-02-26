@@ -263,7 +263,7 @@ function function_8cc9e7c2(var_43182387 = 0) {
   var_17b7891d = "ce44873009f8c9a" + turret::_index(0);
   self notify(var_17b7891d);
   self endon(var_17b7891d);
-  var_f487c534 = self.scene_ents[# "prop 2"];
+  var_f487c534 = self.scene_ents[#"prop 2"];
   level.vh_town_square_apc hms_util::function_c21ef1d8("scripted");
   var_afa4f4f6 = 0;
   w_weapon = turret::get_weapon(0);
@@ -987,7 +987,7 @@ function function_8d7a1baa() {
 
 function function_14fb9b43() {
   assert(isDefined(level.vh_escape_apc));
-  a_scene_ents[# "apc"] = level.vh_escape_apc;
+  a_scene_ents[#"apc"] = level.vh_escape_apc;
   level thread scene::init("scene_amk_7010_esc_apc_enter", a_scene_ents);
   var_f9b7abd8 = struct::get("s_escape_apc_player_interact");
   var_f9b7abd8 util::create_cursor_hint(undefined, undefined, #"hash_394eef05c5d5cf3b", 90, 0.5, undefined, #"use", 400, undefined, 0, 0);

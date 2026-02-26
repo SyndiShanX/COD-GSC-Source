@@ -37,17 +37,17 @@ function register(var_52c93aa0) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "sr_weapon_upgrade_menu"])) {
-    level.var_ae746e8f[# "sr_weapon_upgrade_menu"] = [];
+  if(!isDefined(level.var_ae746e8f[#"sr_weapon_upgrade_menu"])) {
+    level.var_ae746e8f[#"sr_weapon_upgrade_menu"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "sr_weapon_upgrade_menu"])) {
-    level.var_ae746e8f[# "sr_weapon_upgrade_menu"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "sr_weapon_upgrade_menu"])) {
-    level.var_ae746e8f[# "sr_weapon_upgrade_menu"] = array(level.var_ae746e8f[# "sr_weapon_upgrade_menu"]);
+  if(!isDefined(level.var_ae746e8f[#"sr_weapon_upgrade_menu"])) {
+    level.var_ae746e8f[#"sr_weapon_upgrade_menu"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"sr_weapon_upgrade_menu"])) {
+    level.var_ae746e8f[#"sr_weapon_upgrade_menu"] = array(level.var_ae746e8f[#"sr_weapon_upgrade_menu"]);
   }
 
-  level.var_ae746e8f[# "sr_weapon_upgrade_menu"][level.var_ae746e8f[# "sr_weapon_upgrade_menu"].size] = elem;
+  level.var_ae746e8f[#"sr_weapon_upgrade_menu"][level.var_ae746e8f[#"sr_weapon_upgrade_menu"].size] = elem;
 }
 
 function register_clientside() {

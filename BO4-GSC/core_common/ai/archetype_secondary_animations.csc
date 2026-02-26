@@ -56,29 +56,29 @@ on_entity_shutdown(localclientnum) {
 buildandvalidatefacialanimationlist(localclientnum) {
   assert(!isDefined(level.__facialanimationslist));
   level.__facialanimationslist = [];
-  level.__facialanimationslist[# "human"] = [];
-  level.__facialanimationslist[# "human"][# "combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
-  level.__facialanimationslist[# "human"][# "combat_aim"] = array(#"ai_t8_face_hero_aim_idle_1", #"ai_t8_face_hero_aim_idle_2", #"ai_t8_face_hero_aim_idle_3");
-  level.__facialanimationslist[# "human"][# "combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2", #"ai_t8_face_hero_aim_fire_3");
-  level.__facialanimationslist[# "human"][# "death"] = array(#"ai_t8_face_hero_dth_1", #"ai_t8_face_hero_dth_2", #"ai_t8_face_hero_dth_3");
-  level.__facialanimationslist[# "human"][# "melee"] = array(#"ai_t8_face_hero_melee_1");
-  level.__facialanimationslist[# "human"][# "pain"] = array(#"ai_t8_face_hero_pain_1");
-  level.__facialanimationslist[# "human"][# "animscripted"] = array(#"ai_t8_face_hero_generic_idle_1");
-  level.__facialanimationslist[# "zombie"] = [];
-  level.__facialanimationslist[# "zombie"][# "combat"] = array(#"ai_t8_face_zombie_generic_idle_01");
-  level.__facialanimationslist[# "zombie"][# "combat_aim"] = array(#"ai_t8_face_zombie_generic_idle_01");
-  level.__facialanimationslist[# "zombie"][# "combat_shoot"] = array(#"ai_t8_face_zombie_generic_idle_01");
-  level.__facialanimationslist[# "zombie"][# "death"] = array(#"ai_t8_face_zombie_generic_death_01");
-  level.__facialanimationslist[# "zombie"][# "melee"] = array(#"ai_t8_face_zombie_generic_attack_01", #"ai_t8_face_zombie_generic_attack_02");
-  level.__facialanimationslist[# "zombie"][# "pain"] = array(#"ai_t8_face_zombie_generic_pain_01");
-  level.__facialanimationslist[# "zombie"][# "animscripted"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"human"] = [];
+  level.__facialanimationslist[#"human"][#"combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
+  level.__facialanimationslist[#"human"][#"combat_aim"] = array(#"ai_t8_face_hero_aim_idle_1", #"ai_t8_face_hero_aim_idle_2", #"ai_t8_face_hero_aim_idle_3");
+  level.__facialanimationslist[#"human"][#"combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2", #"ai_t8_face_hero_aim_fire_3");
+  level.__facialanimationslist[#"human"][#"death"] = array(#"ai_t8_face_hero_dth_1", #"ai_t8_face_hero_dth_2", #"ai_t8_face_hero_dth_3");
+  level.__facialanimationslist[#"human"][#"melee"] = array(#"ai_t8_face_hero_melee_1");
+  level.__facialanimationslist[#"human"][#"pain"] = array(#"ai_t8_face_hero_pain_1");
+  level.__facialanimationslist[#"human"][#"animscripted"] = array(#"ai_t8_face_hero_generic_idle_1");
+  level.__facialanimationslist[#"zombie"] = [];
+  level.__facialanimationslist[#"zombie"][#"combat"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"zombie"][#"combat_aim"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"zombie"][#"combat_shoot"] = array(#"ai_t8_face_zombie_generic_idle_01");
+  level.__facialanimationslist[#"zombie"][#"death"] = array(#"ai_t8_face_zombie_generic_death_01");
+  level.__facialanimationslist[#"zombie"][#"melee"] = array(#"ai_t8_face_zombie_generic_attack_01", #"ai_t8_face_zombie_generic_attack_02");
+  level.__facialanimationslist[#"zombie"][#"pain"] = array(#"ai_t8_face_zombie_generic_pain_01");
+  level.__facialanimationslist[#"zombie"][#"animscripted"] = array(#"ai_t8_face_zombie_generic_idle_01");
   deathanims = [];
 
-  foreach(animation in level.__facialanimationslist[# "human"][# "death"]) {
+  foreach(animation in level.__facialanimationslist[#"human"][#"death"]) {
     array::add(deathanims, animation);
   }
 
-  foreach(animation in level.__facialanimationslist[# "zombie"][# "death"]) {
+  foreach(animation in level.__facialanimationslist[#"zombie"][#"death"]) {
     array::add(deathanims, animation);
   }
 
@@ -270,8 +270,8 @@ applydeathanim(localclientnum) {
   }
 
   if(self hasdobj(localclientnum) && self hasanimtree()) {
-    if(isDefined(self) && isDefined(self.archetype) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype][# "death"])) {
-      animtoplay = array::random(level.__facialanimationslist[self.archetype][# "death"]);
+    if(isDefined(self) && isDefined(self.archetype) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype][#"death"])) {
+      animtoplay = array::random(level.__facialanimationslist[self.archetype][#"death"]);
       animoverride = self getfacialanimoverride(localclientnum);
 
       if(isDefined(animoverride)) {

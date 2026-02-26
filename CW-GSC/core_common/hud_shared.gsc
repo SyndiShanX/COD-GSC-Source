@@ -1396,8 +1396,8 @@ function function_ffebf739(str_team, n_progress, b_additive = 0, var_ed465381 = 
 function function_21ad06d5(b_active, var_7dfc932e = array(#"axis", #"allies")) {
   if(!isDefined(level.var_20e69608)) {
     level.var_20e69608 = [];
-    level.var_20e69608[# "allies"] = 0;
-    level.var_20e69608[# "axis"] = 0;
+    level.var_20e69608[#"allies"] = 0;
+    level.var_20e69608[#"axis"] = 0;
   }
 
   if(!isarray(var_7dfc932e)) {

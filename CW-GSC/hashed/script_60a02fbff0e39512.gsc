@@ -167,7 +167,7 @@ function function_160e40a2() {
 
               var_dbfa3e4e = bulletTrace(player.origin, var_dea242aa, 0, player, 0);
 
-              if(!isDefined(var_dbfa3e4e[# "dynent"])) {
+              if(!isDefined(var_dbfa3e4e[#"dynent"])) {
                 continue;
               }
 

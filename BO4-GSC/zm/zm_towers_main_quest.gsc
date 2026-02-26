@@ -234,7 +234,7 @@ function_24479f38() {
 
 function_4e1d219c(a_ents) {
   if(self.targetname === "s_fertilizer_dangle") {
-    var_71cb7fcb = a_ents[# "prop 1"];
+    var_71cb7fcb = a_ents[#"prop 1"];
     mdl_wood = getent("mdl_fertilizer_component_1", "targetname");
     mdl_wood linkto(var_71cb7fcb, "shackle_attach_jnt");
   }
@@ -788,7 +788,7 @@ function_b288e20a(b_skipped) {
 }
 
 function_af1344d5(a_ents, var_4d6e64ec) {
-  a_ents[# "blight_blister"] thread function_d1499d43(var_4d6e64ec);
+  a_ents[#"blight_blister"] thread function_d1499d43(var_4d6e64ec);
   scene::remove_scene_func(#"p8_fxanim_zm_towers_chaos_pustule_bundle", &function_af1344d5, "init");
 }
 
@@ -1013,7 +1013,7 @@ function_d1499d43(var_4d6e64ec = 0) {
   }
 
   if(var_4d6e64ec) {
-    var_fc13edbc = groundtrace(var_11ecbb2b.origin + (0, 0, 8), var_11ecbb2b.origin + (0, 0, -100000), 0, var_11ecbb2b)[# "position"];
+    var_fc13edbc = groundtrace(var_11ecbb2b.origin + (0, 0, 8), var_11ecbb2b.origin + (0, 0, -100000), 0, var_11ecbb2b)[#"position"];
     level thread function_93e3f429(self.origin, var_fc13edbc);
   }
 
@@ -1121,7 +1121,7 @@ function_51c4285f(var_95f17a69) {
     s_info = self waittill(#"damage");
 
     if(namespace_52d8d460::is_shield_weapon(s_info.weapon)) {
-      playFX(level._effect[# "brazier_fire"], var_95f17a69.origin);
+      playFX(level._effect[#"brazier_fire"], var_95f17a69.origin);
       var_95f17a69 playSound(#"hash_419d268160428733");
       level.var_7ad3f55c++;
       e_player = s_info.attacker;
@@ -1295,7 +1295,7 @@ activate_bulls_cleanup(b_skipped, var_19e802fa) {
     foreach(var_95f17a69 in level.var_36116a82) {
       var_95f17a69 show();
       waitframe(1);
-      playFX(level._effect[# "brazier_fire"], var_95f17a69.origin);
+      playFX(level._effect[#"brazier_fire"], var_95f17a69.origin);
     }
 
     level flag::set(#"bull_heads_completed");
@@ -1934,8 +1934,8 @@ function_1e3536b6() {
   function_1b49964();
   level function_5904a8e1();
 
-  if(isDefined(level.zombie_powerups[# "nuke"])) {
-    level.zombie_powerups[# "nuke"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
+  if(isDefined(level.zombie_powerups[#"nuke"])) {
+    level.zombie_powerups[#"nuke"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
   }
 
   zm_transform::function_6b183c78(#"hash_58ab235fb7da37ab");
@@ -3437,10 +3437,10 @@ function_fa986cd(v_start, v_end, v_heading) {
     if(isDefined(var_bc4b78ae)) {
       var_358bb309 = bulletTrace(v_start, v_end, 0, self);
 
-      if(isDefined(var_358bb309[# "position"])) {
-        v_start = var_358bb309[# "position"] + v_heading * 1;
+      if(isDefined(var_358bb309[#"position"])) {
+        v_start = var_358bb309[#"position"] + v_heading * 1;
 
-        if(distancesquared(var_358bb309[# "position"], var_bc4b78ae.s_anchor.origin) < 1600) {
+        if(distancesquared(var_358bb309[#"position"], var_bc4b78ae.s_anchor.origin) < 1600) {
           v_heading = function_e5778b63(v_heading, var_bc4b78ae);
           v_end = v_start + v_heading * 3000;
           var_bc4b78ae = var_bc4b78ae.e_next;
@@ -4010,7 +4010,7 @@ defend_spawn(var_4bf95f4c) {
     }
 
     for(i = 0; i < var_4bf95f4c.quantity; i++) {
-      while(level.ai[# "axis"].size >= 24) {
+      while(level.ai[#"axis"].size >= 24) {
         level.var_ec9554ad -= 0.1;
         waitframe(1);
       }
@@ -4135,9 +4135,9 @@ function_915f8f46(ai) {
 function_c12ff921() {
   level endon(#"end_game");
 
-  while(level.ai[# "axis"].size) {
-    for(i = 0; i < level.ai[# "axis"].size; i++) {
-      ai_enemy = level.ai[# "axis"][i];
+  while(level.ai[#"axis"].size) {
+    for(i = 0; i < level.ai[#"axis"].size; i++) {
+      ai_enemy = level.ai[#"axis"][i];
 
       if(!ai_enemy zm_zonemgr::entity_in_zone("zone_body_pit")) {
         if(!isDefined(ai_enemy.var_77e280cb)) {
@@ -4286,10 +4286,10 @@ function_6378f02b(e_trig) {
   level thread function_9dad4c51();
 
   if(getdvarint(#"zm_debug_ee", 0)) {
-    ee = level._ee[# "main_quest"];
+    ee = level._ee[#"main_quest"];
     ee.skip_to_step = 15;
 
-    if(ee.started && level._ee[# "main_quest"].current_step != 15) {
+    if(ee.started && level._ee[#"main_quest"].current_step != 15) {
       zm_sq::function_614612f(#"main_quest");
     }
   }
@@ -4366,7 +4366,7 @@ boss_fight() {
   level zm_audio::function_6191af93(#"gladiator_destroyer", #"react", "", "");
   level zm_audio::function_6191af93(#"tiger", #"react", "", "");
   level zm_audio::function_6191af93(#"tiger", #"react", "", "");
-  level.zmannouncervox[# "hash_5f0f1e699aa7e761"] = "";
+  level.zmannouncervox[#"hash_5f0f1e699aa7e761"] = "";
 
   switch (level.players.size) {
     case 1:
@@ -4578,11 +4578,11 @@ function_81c5a136(n_points) {
 }
 
 function_ef2a451c(var_8997f0f2) {
-  var_8997f0f2[# "blight_father"] = 1;
-  var_8997f0f2[# "catalyst"] = 4;
-  var_8997f0f2[# "gladiator_destroyer"] = 2;
-  var_8997f0f2[# "gladiator_marauder"] = 6;
-  var_8997f0f2[# "tiger"] = 5;
+  var_8997f0f2[#"blight_father"] = 1;
+  var_8997f0f2[#"catalyst"] = 4;
+  var_8997f0f2[#"gladiator_destroyer"] = 2;
+  var_8997f0f2[#"gladiator_marauder"] = 6;
+  var_8997f0f2[#"tiger"] = 5;
   return var_8997f0f2;
 }
 
@@ -4646,7 +4646,7 @@ function_e9d463a0() {
   }
 
   while(true) {
-    if(level.ai[# "axis"].size < level.var_ced6f061) {
+    if(level.ai[#"axis"].size < level.var_ced6f061) {
       if(level flag::get(#"hash_353dcb95f778ad73")) {
         n_toggle = randomintrangeinclusive(0, 2);
       } else {
@@ -4693,7 +4693,7 @@ function_c84b435() {
   a_s_spawners = struct::get_array("boss_battle_spawns");
 
   for(i = 0; i < level.var_ced6f061; i++) {
-    if(level.ai[# "axis"].size < 24) {
+    if(level.ai[#"axis"].size < 24) {
       switch (math::cointoss(33)) {
         case 0:
           var_6454115e = function_30868c0b(a_s_spawners, "gladiator_location");
@@ -4768,7 +4768,7 @@ function_b3e0a008() {
 }
 
 function_427d73cb() {
-  return level.ai[# "axis"].size;
+  return level.ai[#"axis"].size;
 }
 
 function_f9da4403(s_spawn, phase) {
@@ -5315,16 +5315,16 @@ function_b540bcee(var_f69ab3f2, var_2a468a0e = array()) {
 }
 
 function_45ac4bb8(var_bd38f9ad = 1, var_8cb1f65a = 1) {
-  if(var_bd38f9ad && isDefined(level.zombie_powerups[# "nuke"])) {
-    level.zombie_powerups[# "nuke"].func_should_drop_with_regular_powerups = &function_ff89ee99;
+  if(var_bd38f9ad && isDefined(level.zombie_powerups[#"nuke"])) {
+    level.zombie_powerups[#"nuke"].func_should_drop_with_regular_powerups = &function_ff89ee99;
   }
 
-  if(var_8cb1f65a && isDefined(level.zombie_powerups[# "carpenter"])) {
-    level.zombie_powerups[# "carpenter"].func_should_drop_with_regular_powerups = &function_ff89ee99;
+  if(var_8cb1f65a && isDefined(level.zombie_powerups[#"carpenter"])) {
+    level.zombie_powerups[#"carpenter"].func_should_drop_with_regular_powerups = &function_ff89ee99;
   }
 
-  if(isDefined(level.zombie_powerups[# "fire_sale"])) {
-    level.zombie_powerups[# "fire_sale"].func_should_drop_with_regular_powerups = &function_ff89ee99;
+  if(isDefined(level.zombie_powerups[#"fire_sale"])) {
+    level.zombie_powerups[#"fire_sale"].func_should_drop_with_regular_powerups = &function_ff89ee99;
   }
 }
 
@@ -5337,16 +5337,16 @@ function_ff89ee99() {
 }
 
 function_5904a8e1() {
-  if(isDefined(level.zombie_powerups[# "nuke"])) {
-    level.zombie_powerups[# "nuke"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
+  if(isDefined(level.zombie_powerups[#"nuke"])) {
+    level.zombie_powerups[#"nuke"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
   }
 
-  if(isDefined(level.zombie_powerups[# "fire_sale"])) {
-    level.zombie_powerups[# "fire_sale"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
+  if(isDefined(level.zombie_powerups[#"fire_sale"])) {
+    level.zombie_powerups[#"fire_sale"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
   }
 
-  if(isDefined(level.zombie_powerups[# "carpenter"])) {
-    level.zombie_powerups[# "carpenter"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
+  if(isDefined(level.zombie_powerups[#"carpenter"])) {
+    level.zombie_powerups[#"carpenter"].func_should_drop_with_regular_powerups = &zm_powerups::func_should_always_drop;
   }
 }
 

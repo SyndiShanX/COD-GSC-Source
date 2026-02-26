@@ -274,7 +274,7 @@ function function_18ae0114(&structs) {
     startorigin = struct.origin + (0, 0, var_e8a4ae59);
     endorigin = startorigin - (0, 0, var_a3c01952);
     trace = physicstraceex(startorigin, endorigin, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), undefined, 1);
-    struct.origin = trace[# "position"];
+    struct.origin = trace[#"position"];
   }
 }
 
@@ -428,8 +428,8 @@ function function_20cea7a4(players, deltatime) {
         clientfield::set_world_uimodel(self.var_cfec45a8, self.var_a8aaaaa6);
         self.model playsoundontag(#"hash_1389df41a19d0c4f", "swivel_jnt");
         [[level.var_37d62931]](player, 1);
-        player.pers[# "satlink_deposits"] = (isDefined(player.pers[# "satlink_deposits"]) ? player.pers[# "satlink_deposits"] : 0) + 1;
-        player.satlink_deposits = player.pers[# "satlink_deposits"];
+        player.pers[#"satlink_deposits"] = (isDefined(player.pers[#"satlink_deposits"]) ? player.pers[#"satlink_deposits"] : 0) + 1;
+        player.satlink_deposits = player.pers[#"satlink_deposits"];
         player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
         player stats::function_bb7eedf0(#"satlink_deposits", 1);
 
@@ -598,8 +598,8 @@ function private function_f60cbb01() {
       }
 
       [[level.var_37d62931]](player, 1);
-      player.pers[# "captures"] = (isDefined(player.pers[# "captures"]) ? player.pers[# "captures"] : 0) + 1;
-      player.captures = player.pers[# "captures"];
+      player.pers[#"captures"] = (isDefined(player.pers[#"captures"]) ? player.pers[#"captures"] : 0) + 1;
+      player.captures = player.pers[#"captures"];
       player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
       player stats::function_bb7eedf0(#"captures", 1);
     }
@@ -898,8 +898,8 @@ function private function_c21d7618(activator) {
 
   self.var_b20bc5cc setinvisibletoall();
   [[level.var_37d62931]](activator, 1);
-  activator.pers[# "satlink_batteries"] = (isDefined(activator.pers[# "satlink_batteries"]) ? activator.pers[# "satlink_batteries"] : 0) + 1;
-  activator.satlink_batteries = activator.pers[# "satlink_batteries"];
+  activator.pers[#"satlink_batteries"] = (isDefined(activator.pers[#"satlink_batteries"]) ? activator.pers[#"satlink_batteries"] : 0) + 1;
+  activator.satlink_batteries = activator.pers[#"satlink_batteries"];
   activator globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
   activator stats::function_bb7eedf0(#"satlink_batteries", 1);
 }
@@ -1002,8 +1002,8 @@ function function_fe50fd48(var_4c42f7cf) {
   droporigin = self.origin + originoffset + forward * (randomfloatrange(10, 30) + 18);
   traceresults = physicstraceex(self.origin + originoffset, droporigin, (0, 0, 0), (0, 0, 0), self, 1);
 
-  if(traceresults[# "fraction"] < 1) {
-    droporigin = traceresults[# "position"] - forward * 18;
+  if(traceresults[#"fraction"] < 1) {
+    droporigin = traceresults[#"position"] - forward * 18;
   } else {
     droporigin -= forward * 18;
   }

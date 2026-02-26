@@ -693,7 +693,7 @@ function idle_init(behaviortreeentity) {
   self thread stealth_enemy::set_alert_level("reset");
   self stealth_event::event_escalation_clear();
 
-  if(isDefined(self.stealth.funcs[# "hidden"])) {
+  if(isDefined(self.stealth.funcs[#"hidden"])) {
     self namespace_b2b86d39::stealth_call_thread("hidden");
   }
 
@@ -2651,7 +2651,7 @@ function combat_init() {
 
   self forceupdategoalpos();
 
-  if(isDefined(self.stealth.funcs[# "spotted"])) {
+  if(isDefined(self.stealth.funcs[#"spotted"])) {
     self namespace_b2b86d39::stealth_call_thread("spotted");
   }
 

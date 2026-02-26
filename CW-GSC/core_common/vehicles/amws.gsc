@@ -643,12 +643,12 @@ function getnextmoveposition_evasive(client_flags) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x5c>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x5c>";
 
       point.score += -500;
     }
@@ -674,12 +674,12 @@ function getnextmoveposition_evasive(client_flags) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "evading_directness"])) {
-              point._scoredebug[# "evading_directness"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"evading_directness"])) {
+              point._scoredebug[#"evading_directness"] = spawnStruct();
             }
 
-            point._scoredebug[# "evading_directness"].score = 200;
-            point._scoredebug[# "evading_directness"].scorename = "<dev string:x71>";
+            point._scoredebug[#"evading_directness"].score = 200;
+            point._scoredebug[#"evading_directness"].scorename = "<dev string:x71>";
 
             point.score += 200;
             continue;
@@ -690,12 +690,12 @@ function getnextmoveposition_evasive(client_flags) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "evading_directness_line_of_sight"])) {
-              point._scoredebug[# "evading_directness_line_of_sight"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"evading_directness_line_of_sight"])) {
+              point._scoredebug[#"evading_directness_line_of_sight"] = spawnStruct();
             }
 
-            point._scoredebug[# "evading_directness_line_of_sight"].score = -101;
-            point._scoredebug[# "evading_directness_line_of_sight"].scorename = "<dev string:x87>";
+            point._scoredebug[#"evading_directness_line_of_sight"].score = -101;
+            point._scoredebug[#"evading_directness_line_of_sight"].scorename = "<dev string:x87>";
 
             point.score += -101;
           }
@@ -715,12 +715,12 @@ function getnextmoveposition_evasive(client_flags) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "hash_3c71f4605004afec"])) {
-        point._scoredebug[# "hash_3c71f4605004afec"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"hash_3c71f4605004afec"])) {
+        point._scoredebug[#"hash_3c71f4605004afec"] = spawnStruct();
       }
 
-      point._scoredebug[# "hash_3c71f4605004afec"].score = 105;
-      point._scoredebug[# "hash_3c71f4605004afec"].scorename = "<dev string:xab>";
+      point._scoredebug[#"hash_3c71f4605004afec"].score = 105;
+      point._scoredebug[#"hash_3c71f4605004afec"].scorename = "<dev string:xab>";
 
       point.score += 105;
     }
@@ -807,12 +807,12 @@ function getnextmoveposition_tactical(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "directnessraw"])) {
-      point._scoredebug[# "directnessraw"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"directnessraw"])) {
+      point._scoredebug[#"directnessraw"] = spawnStruct();
     }
 
-    point._scoredebug[# "directnessraw"].score = point.directness;
-    point._scoredebug[# "directnessraw"].scorename = "<dev string:xe4>";
+    point._scoredebug[#"directnessraw"].score = point.directness;
+    point._scoredebug[#"directnessraw"].scorename = "<dev string:xe4>";
 
     point.score += point.directness;
 
@@ -820,12 +820,12 @@ function getnextmoveposition_tactical(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "directness"])) {
-      point._scoredebug[# "directness"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"directness"])) {
+      point._scoredebug[#"directness"] = spawnStruct();
     }
 
-    point._scoredebug[# "directness"].score = directnessscore;
-    point._scoredebug[# "directness"].scorename = "<dev string:xf5>";
+    point._scoredebug[#"directness"].score = directnessscore;
+    point._scoredebug[#"directness"].scorename = "<dev string:xf5>";
 
     point.score += directnessscore;
 
@@ -833,12 +833,12 @@ function getnextmoveposition_tactical(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-      point._scoredebug[# "disttoorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+      point._scoredebug[#"disttoorigin"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttoorigin"].score = mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
-    point._scoredebug[# "disttoorigin"].scorename = "<dev string:x103>";
+    point._scoredebug[#"disttoorigin"].score = mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
+    point._scoredebug[#"disttoorigin"].scorename = "<dev string:x103>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, 0, 100, point.disttoorigin2d);
     targetdistscore = 0;
@@ -852,12 +852,12 @@ function getnextmoveposition_tactical(enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x5c>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x5c>";
 
       point.score += -500;
     }
@@ -866,12 +866,12 @@ function getnextmoveposition_tactical(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttotarget"])) {
-      point._scoredebug[# "disttotarget"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttotarget"])) {
+      point._scoredebug[#"disttotarget"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttotarget"].score = targetdistscore;
-    point._scoredebug[# "disttotarget"].scorename = "<dev string:x113>";
+    point._scoredebug[#"disttotarget"].score = targetdistscore;
+    point._scoredebug[#"disttotarget"].scorename = "<dev string:x113>";
 
     point.score += targetdistscore;
 
@@ -879,12 +879,12 @@ function getnextmoveposition_tactical(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = randomfloatrange(0, randomness);
-    point._scoredebug[# "random"].scorename = "<dev string:x123>";
+    point._scoredebug[#"random"].score = randomfloatrange(0, randomness);
+    point._scoredebug[#"random"].scorename = "<dev string:x123>";
 
     point.score += randomfloatrange(0, randomness);
 

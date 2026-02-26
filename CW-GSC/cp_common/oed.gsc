@@ -154,7 +154,7 @@ function function_8c3be026() {
     self.angles = (0, 0, 0);
   }
 
-  var_57f4c959 = level.scriptbundles[# "sitrep"][self.scriptbundlename];
+  var_57f4c959 = level.scriptbundles[#"sitrep"][self.scriptbundlename];
   var_7343683f = util::spawn_model(var_57f4c959.model, self.origin, self.angles);
 
   if(isDefined(var_57f4c959.var_2e0f906a)) {

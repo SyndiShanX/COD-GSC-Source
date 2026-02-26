@@ -222,8 +222,8 @@ scoreeventplayerkill(data, time) {
   victim.anglesondeath = victim getplayerangles();
 
   if(meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_EXPLOSIVE" || meansofdeath == "MOD_EXPLOSIVE_SPLASH" || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_PROJECTILE_SPLASH") {
-    if(weapon == level.weaponnone && isDefined(data.victim.explosiveinfo[# "weapon"])) {
-      weapon = data.victim.explosiveinfo[# "weapon"];
+    if(weapon == level.weaponnone && isDefined(data.victim.explosiveinfo[#"weapon"])) {
+      weapon = data.victim.explosiveinfo[#"weapon"];
     }
 
     exlosivedamage = 1;
@@ -734,8 +734,8 @@ scoreeventplayerkill(data, time) {
 
         processscoreevent(#"longshot_kill", attacker, victim, weapon);
         attacker contracts::increment_contract(#"contract_mp_longshot");
-        attacker.pers[# "longshots"]++;
-        attacker.longshots = attacker.pers[# "longshots"];
+        attacker.pers[#"longshots"]++;
+        attacker.longshots = attacker.pers[#"longshots"];
         victim recordkillmodifier("longshot");
 
         if(isDefined(attacker.var_ea1458aa)) {
@@ -752,8 +752,8 @@ scoreeventplayerkill(data, time) {
       }
 
       killdistance = distance(victim.origin, attackerorigin);
-      attacker.pers[# "kill_distances"] += killdistance;
-      attacker.pers[# "num_kill_distance_entries"]++;
+      attacker.pers[#"kill_distances"] += killdistance;
+      attacker.pers[#"num_kill_distance_entries"]++;
     }
 
     if(isalive(attacker)) {
@@ -803,8 +803,8 @@ scoreeventplayerkill(data, time) {
     }
 
     if(weapon_utils::ismeleemod(meansofdeath) && !weapon.isriotshield) {
-      attacker.pers[# "stabs"]++;
-      attacker.stabs = attacker.pers[# "stabs"];
+      attacker.pers[#"stabs"]++;
+      attacker.stabs = attacker.pers[#"stabs"];
       vangles = victim.anglesondeath[1];
       pangles = attacker.anglesonkill[1];
       anglediff = angleclamp180(vangles - pangles);
@@ -820,8 +820,8 @@ scoreeventplayerkill(data, time) {
         }
 
         attacker stats::function_eec52333(weapon, #"backstabber_kill", 1, attacker.class_num, weaponpickedup);
-        attacker.pers[# "backstabs"]++;
-        attacker.backstabs = attacker.pers[# "backstabs"];
+        attacker.pers[#"backstabs"]++;
+        attacker.backstabs = attacker.pers[#"backstabs"];
       } else if(!(isDefined(weapon.var_cfc07f04) && weapon.var_cfc07f04) && (anglediff < -30 || anglediff > 70 || isDefined(victim.laststand) && victim.laststand)) {
         if(meansofdeath == "MOD_MELEE_WEAPON_BUTT" && weapon.name != "ball") {
           processscoreevent(#"kill_enemy_with_gunbutt", attacker, victim, weapon);
@@ -891,12 +891,12 @@ scoreeventplayerkill(data, time) {
 
   switch (weapon.rootweapon.name) {
     case # "hatchet":
-      attacker.pers[# "tomahawks"]++;
-      attacker.tomahawks = attacker.pers[# "tomahawks"];
+      attacker.pers[#"tomahawks"]++;
+      attacker.tomahawks = attacker.pers[#"tomahawks"];
       processscoreevent(#"hatchet_kill", attacker, victim, weapon);
       attacker contracts::increment_contract(#"hash_172456fa969d6c82");
 
-      if(isDefined(data.victim.explosiveinfo[# "projectile_bounced"]) && data.victim.explosiveinfo[# "projectile_bounced"] == 1) {
+      if(isDefined(data.victim.explosiveinfo[#"projectile_bounced"]) && data.victim.explosiveinfo[#"projectile_bounced"] == 1) {
         level.globalbankshots++;
         processscoreevent(#"bounce_hatchet_kill", attacker, victim, weapon);
         attacker contracts::increment_contract(#"contract_mp_bankshot");
@@ -1170,12 +1170,12 @@ multikill(killcount, weapon) {
     self contracts::increment_contract(#"contract_wl_multikill_2_or_better");
   }
 
-  if(!isDefined(self.pers[# "highestmultikill"])) {
-    self.pers[# "highestmultikill"] = 0;
+  if(!isDefined(self.pers[#"highestmultikill"])) {
+    self.pers[#"highestmultikill"] = 0;
   }
 
-  if(self.pers[# "highestmultikill"] < killcount) {
-    self.pers[# "highestmultikill"] = killcount;
+  if(self.pers[#"highestmultikill"] < killcount) {
+    self.pers[#"highestmultikill"] = killcount;
   }
 
   self recordmultikill(killcount);
@@ -1481,13 +1481,13 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
   }
 
   if(self.recentlethalcount >= 2) {
-    if(!isDefined(self.pers[# "challenge_kills_double_kill_lethal"])) {
-      self.pers[# "challenge_kills_double_kill_lethal"] = 0;
+    if(!isDefined(self.pers[#"challenge_kills_double_kill_lethal"])) {
+      self.pers[#"challenge_kills_double_kill_lethal"] = 0;
     }
 
-    self.pers[# "challenge_kills_double_kill_lethal"]++;
+    self.pers[#"challenge_kills_double_kill_lethal"]++;
 
-    if(self.pers[# "challenge_kills_double_kill_lethal"] >= 3) {
+    if(self.pers[#"challenge_kills_double_kill_lethal"] >= 3) {
       self stats::function_dad108fa(#"kills_double_kill_3_lethal", 1);
     }
   }
@@ -1672,17 +1672,17 @@ ongameend(data) {
   if(isDefined(winner)) {
     if(level.teambased) {
       if(!match::get_flag("tie") && player.team == winner) {
-        player.pers[# "hash_6344af0b142ed0b6"] = 1;
+        player.pers[#"hash_6344af0b142ed0b6"] = 1;
         processscoreevent(#"won_match", player, undefined, undefined);
         return;
       }
     } else {
-      placement = level.placement[# "all"];
+      placement = level.placement[#"all"];
       topthreeplayers = min(3, placement.size);
 
       for(index = 0; index < topthreeplayers; index++) {
-        if(level.placement[# "all"][index] == player) {
-          player.pers[# "hash_6344af0b142ed0b6"] = 1;
+        if(level.placement[#"all"][index] == player) {
+          player.pers[#"hash_6344af0b142ed0b6"] = 1;
           processscoreevent(#"won_match", player, undefined, undefined);
           return;
         }
@@ -1695,13 +1695,13 @@ ongameend(data) {
 
 specialistmedalachievement() {
   if(level.rankedmatch) {
-    if(!isDefined(self.pers[# "specialistmedalachievement"])) {
-      self.pers[# "specialistmedalachievement"] = 0;
+    if(!isDefined(self.pers[#"specialistmedalachievement"])) {
+      self.pers[#"specialistmedalachievement"] = 0;
     }
 
-    self.pers[# "specialistmedalachievement"]++;
+    self.pers[#"specialistmedalachievement"]++;
 
-    if(self.pers[# "specialistmedalachievement"] == 5) {
+    if(self.pers[#"specialistmedalachievement"] == 5) {
       self giveachievement("MP_SPECIALIST_MEDALS");
     }
 
@@ -1721,21 +1721,21 @@ specialiststatabilityusage(usagesinglegame, multitrackperlife) {
 
   self challenges::processspecialistchallenge("kills_ability");
 
-  if(!isDefined(self.pers[# "specialistusagepergame"])) {
-    self.pers[# "specialistusagepergame"] = 0;
+  if(!isDefined(self.pers[#"specialistusagepergame"])) {
+    self.pers[#"specialistusagepergame"] = 0;
   }
 
-  self.pers[# "specialistusagepergame"]++;
+  self.pers[#"specialistusagepergame"]++;
 
-  if(self.pers[# "specialistusagepergame"] >= usagesinglegame) {
+  if(self.pers[#"specialistusagepergame"] >= usagesinglegame) {
     self challenges::processspecialistchallenge("kill_one_game_ability");
-    self.pers[# "specialistusagepergame"] = 0;
+    self.pers[#"specialistusagepergame"] = 0;
   }
 
   if(multitrackperlife) {
-    self.pers[# "specialiststatabilityusage"]++;
+    self.pers[#"specialiststatabilityusage"]++;
 
-    if(self.pers[# "specialiststatabilityusage"] >= 2) {
+    if(self.pers[#"specialiststatabilityusage"] >= 2) {
       self challenges::processspecialistchallenge("multikill_ability");
     }
 

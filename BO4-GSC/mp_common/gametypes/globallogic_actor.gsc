@@ -119,11 +119,11 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
 
   if(!(idflags & 8192)) {
     if(isPlayer(eattacker) && isDefined(eattacker.pers)) {
-      if(!isDefined(eattacker.pers[# "participation"])) {
-        eattacker.pers[# "participation"] = 0;
+      if(!isDefined(eattacker.pers[#"participation"])) {
+        eattacker.pers[#"participation"] = 0;
       }
 
-      eattacker.pers[# "participation"]++;
+      eattacker.pers[#"participation"]++;
     }
 
     prevhealthratio = self.health / self.maxhealth;
@@ -133,7 +133,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
       isshootingownclone = 1;
     }
 
-    if(level.teambased && isPlayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[# "team"]) && !isshootingownclone) {
+    if(level.teambased && isPlayer(eattacker) && self != eattacker && !util::function_fbce7263(self.team, eattacker.pers[#"team"]) && !isshootingownclone) {
       friendlyfire = [[level.figure_out_friendly_fire]](self, eattacker);
 
       if(friendlyfire == 0) {
@@ -227,7 +227,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
       var_c8fa9c41 = 0;
       lpattackguid = eattacker getguid();
       lpattackname = eattacker.name;
-      lpattackerteam = eattacker.pers[# "team"];
+      lpattackerteam = eattacker.pers[#"team"];
       return;
     }
 

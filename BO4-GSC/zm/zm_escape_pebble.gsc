@@ -1099,7 +1099,7 @@ function_ef5a3a9d() {
     if(isPlayer(e_attacker) && isalive(e_attacker) && e_attacker == self.e_owner && e_attacker flag::get(#"hash_120fbb364796cd32") && !e_attacker flag::get(#"hash_11ab20934759ebc3")) {
       e_attacker flag::set(#"hash_11ab20934759ebc3");
       var_fd22f9df = struct::get("tom_pil");
-      mdl_tomahawk = var_fd22f9df.scene_ents[# "prop 2"];
+      mdl_tomahawk = var_fd22f9df.scene_ents[#"prop 2"];
       mdl_tomahawk setvisibletoplayer(e_attacker);
       var_e041507a = e_attacker getentitynumber() + 1;
       mdl_tomahawk clientfield::set("" + # "hash_51657261e835ac7c", var_e041507a);
@@ -1312,7 +1312,7 @@ function_ed96eb60(e_activator) {
     }
 
     playsoundatposition(#"wpn_zmb_electrap_zap", var_3d454522.origin);
-    playFX(level._effect[# "switch_sparks"], var_3d454522.origin);
+    playFX(level._effect[#"switch_sparks"], var_3d454522.origin);
 
     if(isalive(e_activator)) {
       e_activator thread zm_audio::create_and_play_dialog(#"teleport", #"destroy");
@@ -1377,7 +1377,7 @@ function_22927328(s_params) {
     return;
   }
 
-  var_5d138a8c = array(level.hero_weapon[# "flamethrower"][1], level.hero_weapon[# "flamethrower"][2], level.hero_weapon[# "gravityspikes"][1], level.hero_weapon[# "gravityspikes"][2], level.hero_weapon[# "katana"][1], level.hero_weapon[# "katana"][2], level.hero_weapon[# "minigun"][1], level.hero_weapon[# "minigun"][2], getweapon(#"hash_492e530f9862f6cc"));
+  var_5d138a8c = array(level.hero_weapon[#"flamethrower"][1], level.hero_weapon[#"flamethrower"][2], level.hero_weapon[#"gravityspikes"][1], level.hero_weapon[#"gravityspikes"][2], level.hero_weapon[#"katana"][1], level.hero_weapon[#"katana"][2], level.hero_weapon[#"minigun"][1], level.hero_weapon[#"minigun"][2], getweapon(#"hash_492e530f9862f6cc"));
 
   if(!isinarray(var_5d138a8c, s_params.weapon)) {
     return;

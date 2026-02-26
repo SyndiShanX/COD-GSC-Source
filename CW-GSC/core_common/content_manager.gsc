@@ -557,7 +557,7 @@ function private function_b3843ca7() {
       continue;
     }
 
-    teleport = instance.contentgroups[# "start"][0];
+    teleport = instance.contentgroups[#"start"][0];
 
     if(!isDefined(teleport)) {
       teleport = instance;

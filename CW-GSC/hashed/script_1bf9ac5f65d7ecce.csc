@@ -273,45 +273,45 @@ function element_init() {
 function allies_init() {
   if(!isarray(level.var_2de628a1)) {
     level.var_2de628a1 = [];
-    level.var_2de628a1[# "adler"][# "default"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "default"] = [["attire", "casual"], ["footwear", "sneaker"]];
-    level.var_2de628a1[# "park"][# "default"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "default"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "default"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "woods"][# "default"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "mason"][# "default"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "adler"][# "post_takedown"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "post_takedown"] = [["attire", "casual"], ["footwear", "sneaker"]];
-    level.var_2de628a1[# "park"][# "post_takedown"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "post_takedown"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "post_takedown"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "adler"][# "post_armada"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "post_armada"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
-    level.var_2de628a1[# "park"][# "post_armada"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "post_armada"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "post_armada"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "adler"][# "post_yamantau"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "post_yamantau"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
-    level.var_2de628a1[# "park"][# "post_yamantau"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "post_yamantau"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "post_yamantau"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "adler"][# "post_kgb"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "post_kgb"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
-    level.var_2de628a1[# "park"][# "post_kgb"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "post_kgb"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "post_kgb"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "woods"][# "post_kgb"] = [["attire", "casual"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "mason"][# "post_kgb"] = [["attire", "casual"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "adler"][# "post_cuba"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "post_cuba"] = [["attire", "tactical"], ["footwear", "cowboy_boot"]];
-    level.var_2de628a1[# "park"][# "post_cuba"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "post_cuba"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "post_cuba"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "adler"][# "post_prisoner"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "lazar"][# "post_prisoner"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
-    level.var_2de628a1[# "park"][# "post_prisoner"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
-    level.var_2de628a1[# "sims"][# "post_prisoner"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
-    level.var_2de628a1[# "hudson"][# "post_prisoner"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"adler"][#"default"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"default"] = [["attire", "casual"], ["footwear", "sneaker"]];
+    level.var_2de628a1[#"park"][#"default"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"default"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"default"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"woods"][#"default"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"mason"][#"default"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"adler"][#"post_takedown"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"post_takedown"] = [["attire", "casual"], ["footwear", "sneaker"]];
+    level.var_2de628a1[#"park"][#"post_takedown"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"post_takedown"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"post_takedown"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"adler"][#"post_armada"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"post_armada"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
+    level.var_2de628a1[#"park"][#"post_armada"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"post_armada"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"post_armada"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"adler"][#"post_yamantau"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"post_yamantau"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
+    level.var_2de628a1[#"park"][#"post_yamantau"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"post_yamantau"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"post_yamantau"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"adler"][#"post_kgb"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"post_kgb"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
+    level.var_2de628a1[#"park"][#"post_kgb"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"post_kgb"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"post_kgb"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"woods"][#"post_kgb"] = [["attire", "casual"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"mason"][#"post_kgb"] = [["attire", "casual"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"adler"][#"post_cuba"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"post_cuba"] = [["attire", "tactical"], ["footwear", "cowboy_boot"]];
+    level.var_2de628a1[#"park"][#"post_cuba"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"post_cuba"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"post_cuba"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"adler"][#"post_prisoner"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"lazar"][#"post_prisoner"] = [["attire", "winter"], ["footwear", "cowboy_boot"]];
+    level.var_2de628a1[#"park"][#"post_prisoner"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
+    level.var_2de628a1[#"sims"][#"post_prisoner"] = [["attire", "tactical"], ["footwear", "combat_boot"]];
+    level.var_2de628a1[#"hudson"][#"post_prisoner"] = [["attire", "leather"], ["footwear", "dress_shoe"]];
   }
 
   level.var_dafd41b2 = [];
@@ -322,13 +322,13 @@ function allies_init() {
   }
 
   waittillframeend();
-  level.var_dafd41b2[# "adler"] = level.adler;
-  level.var_dafd41b2[# "lazar"] = level.lazar;
-  level.var_dafd41b2[# "park"] = level.park;
-  level.var_dafd41b2[# "sims"] = level.sims;
-  level.var_dafd41b2[# "hudson"] = level.hudson;
-  level.var_dafd41b2[# "woods"] = level.woods;
-  level.var_dafd41b2[# "mason"] = level.mason;
+  level.var_dafd41b2[#"adler"] = level.adler;
+  level.var_dafd41b2[#"lazar"] = level.lazar;
+  level.var_dafd41b2[#"park"] = level.park;
+  level.var_dafd41b2[#"sims"] = level.sims;
+  level.var_dafd41b2[#"hudson"] = level.hudson;
+  level.var_dafd41b2[#"woods"] = level.woods;
+  level.var_dafd41b2[#"mason"] = level.mason;
   arrayremovevalue(level.var_dafd41b2, undefined, 1);
 }
 
@@ -344,7 +344,7 @@ function function_952e21e3(ent, name) {
   contexts = level.var_2de628a1[name][visit];
 
   if(!isDefined(contexts)) {
-    contexts = level.var_2de628a1[name][# "default"];
+    contexts = level.var_2de628a1[name][#"default"];
   }
 
   if(snd::function_81fac19d(!isarray(contexts), "allies_context_init '" + name + "' has no default context!")) {

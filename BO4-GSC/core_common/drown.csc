@@ -23,30 +23,30 @@ __init__() {
 }
 
 setup_radius_values() {
-  level.drown_radius[# "inner"][# "begin"][1] = 0.8;
-  level.drown_radius[# "inner"][# "begin"][2] = 0.6;
-  level.drown_radius[# "inner"][# "begin"][3] = 0.6;
-  level.drown_radius[# "inner"][# "begin"][4] = 0.5;
-  level.drown_radius[# "inner"][# "end"][1] = 0.5;
-  level.drown_radius[# "inner"][# "end"][2] = 0.3;
-  level.drown_radius[# "inner"][# "end"][3] = 0.3;
-  level.drown_radius[# "inner"][# "end"][4] = 0.2;
-  level.drown_radius[# "outer"][# "begin"][1] = 1;
-  level.drown_radius[# "outer"][# "begin"][2] = 0.8;
-  level.drown_radius[# "outer"][# "begin"][3] = 0.8;
-  level.drown_radius[# "outer"][# "begin"][4] = 0.7;
-  level.drown_radius[# "outer"][# "end"][1] = 0.8;
-  level.drown_radius[# "outer"][# "end"][2] = 0.6;
-  level.drown_radius[# "outer"][# "end"][3] = 0.6;
-  level.drown_radius[# "outer"][# "end"][4] = 0.5;
-  level.opacity[# "begin"][1] = 0.4;
-  level.opacity[# "begin"][2] = 0.5;
-  level.opacity[# "begin"][3] = 0.6;
-  level.opacity[# "begin"][4] = 0.6;
-  level.opacity[# "end"][1] = 0.5;
-  level.opacity[# "end"][2] = 0.6;
-  level.opacity[# "end"][3] = 0.7;
-  level.opacity[# "end"][4] = 0.7;
+  level.drown_radius[#"inner"][#"begin"][1] = 0.8;
+  level.drown_radius[#"inner"][#"begin"][2] = 0.6;
+  level.drown_radius[#"inner"][#"begin"][3] = 0.6;
+  level.drown_radius[#"inner"][#"begin"][4] = 0.5;
+  level.drown_radius[#"inner"][#"end"][1] = 0.5;
+  level.drown_radius[#"inner"][#"end"][2] = 0.3;
+  level.drown_radius[#"inner"][#"end"][3] = 0.3;
+  level.drown_radius[#"inner"][#"end"][4] = 0.2;
+  level.drown_radius[#"outer"][#"begin"][1] = 1;
+  level.drown_radius[#"outer"][#"begin"][2] = 0.8;
+  level.drown_radius[#"outer"][#"begin"][3] = 0.8;
+  level.drown_radius[#"outer"][#"begin"][4] = 0.7;
+  level.drown_radius[#"outer"][#"end"][1] = 0.8;
+  level.drown_radius[#"outer"][#"end"][2] = 0.6;
+  level.drown_radius[#"outer"][#"end"][3] = 0.6;
+  level.drown_radius[#"outer"][#"end"][4] = 0.5;
+  level.opacity[#"begin"][1] = 0.4;
+  level.opacity[#"begin"][2] = 0.5;
+  level.opacity[#"begin"][3] = 0.6;
+  level.opacity[#"begin"][4] = 0.6;
+  level.opacity[#"end"][1] = 0.5;
+  level.opacity[#"end"][2] = 0.6;
+  level.opacity[#"end"][3] = 0.7;
+  level.opacity[#"end"][4] = 0.7;
 }
 
 player_spawned(localclientnum) {
@@ -120,9 +120,9 @@ player_drown_fx(localclientnum, stage) {
     }
 
     stage = math::clamp(stage, 1, 4);
-    self.drown_outerradius = lerpfloat(level.drown_radius[# "outer"][# "begin"][stage], level.drown_radius[# "outer"][# "end"][stage], stageratio) * 1.41421;
-    self.drown_innerradius = lerpfloat(level.drown_radius[# "inner"][# "begin"][stage], level.drown_radius[# "inner"][# "end"][stage], stageratio) * 1.41421;
-    self.drown_opacity = lerpfloat(level.opacity[# "begin"][stage], level.opacity[# "end"][stage], stageratio);
+    self.drown_outerradius = lerpfloat(level.drown_radius[#"outer"][#"begin"][stage], level.drown_radius[#"outer"][#"end"][stage], stageratio) * 1.41421;
+    self.drown_innerradius = lerpfloat(level.drown_radius[#"inner"][#"begin"][stage], level.drown_radius[#"inner"][#"end"][stage], stageratio) * 1.41421;
+    self.drown_opacity = lerpfloat(level.opacity[#"begin"][stage], level.opacity[#"end"][stage], stageratio);
     filter::set_filter_drowning_damage_inner_radius(localclientnum, 1, self.drown_innerradius);
     filter::set_filter_drowning_damage_outer_radius(localclientnum, 1, self.drown_outerradius);
     filter::set_filter_drowning_damage_opacity(localclientnum, 1, self.drown_opacity);

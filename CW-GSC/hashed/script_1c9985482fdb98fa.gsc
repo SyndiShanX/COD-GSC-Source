@@ -150,20 +150,20 @@ function function_50f19d5b() {
 }
 
 function function_d0e338f0(a_ents) {
-  if(isDefined(a_ents[# "vault_door"])) {
-    if(!isDefined(a_ents[# "vault_door"].var_89ce14f1)) {
-      a_ents[# "vault_door"].var_89ce14f1 = getent("vault_door_clip_left", "targetname");
+  if(isDefined(a_ents[#"vault_door"])) {
+    if(!isDefined(a_ents[#"vault_door"].var_89ce14f1)) {
+      a_ents[#"vault_door"].var_89ce14f1 = getent("vault_door_clip_left", "targetname");
 
-      if(isDefined(a_ents[# "vault_door"].var_89ce14f1)) {
-        a_ents[# "vault_door"].var_89ce14f1 linkto(a_ents[# "vault_door"], "j_hinge_le", (0, 0, 0), (0, 180, 0));
+      if(isDefined(a_ents[#"vault_door"].var_89ce14f1)) {
+        a_ents[#"vault_door"].var_89ce14f1 linkto(a_ents[#"vault_door"], "j_hinge_le", (0, 0, 0), (0, 180, 0));
       }
     }
 
-    if(!isDefined(a_ents[# "vault_door"].var_82cafee)) {
-      a_ents[# "vault_door"].var_82cafee = getent("vault_door_clip_right", "targetname");
+    if(!isDefined(a_ents[#"vault_door"].var_82cafee)) {
+      a_ents[#"vault_door"].var_82cafee = getent("vault_door_clip_right", "targetname");
 
-      if(isDefined(a_ents[# "vault_door"].var_82cafee)) {
-        a_ents[# "vault_door"].var_82cafee linkto(a_ents[# "vault_door"], "j_hinge_ri", (-18, 0, 0), (0, 0, 0));
+      if(isDefined(a_ents[#"vault_door"].var_82cafee)) {
+        a_ents[#"vault_door"].var_82cafee linkto(a_ents[#"vault_door"], "j_hinge_ri", (-18, 0, 0), (0, 0, 0));
       }
     }
   }

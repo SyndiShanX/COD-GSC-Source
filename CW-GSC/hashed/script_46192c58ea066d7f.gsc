@@ -121,7 +121,7 @@ function function_d5766919(var_4c42f7cf) {
           var_f8ffe143 = 1;
         }
       } else if(killstreakbundle.ksinventoryweapon.name == # "inventory_planemortar") {
-        ammo = isDefined(self.pers[# "hash_1aaccfe69e328d6e"][3]) ? self.pers[# "hash_1aaccfe69e328d6e"][3] : 3;
+        ammo = isDefined(self.pers[#"hash_1aaccfe69e328d6e"][3]) ? self.pers[#"hash_1aaccfe69e328d6e"][3] : 3;
       }
 
       if(!var_f8ffe143) {
@@ -133,7 +133,7 @@ function function_d5766919(var_4c42f7cf) {
     }
   }
 
-  self.pers[# "killstreaks"] = [];
+  self.pers[#"killstreaks"] = [];
   return var_4c42f7cf + index;
 }
 

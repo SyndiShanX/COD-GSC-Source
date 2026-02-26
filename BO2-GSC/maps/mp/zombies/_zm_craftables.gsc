@@ -170,7 +170,7 @@ add_zombie_craftable_vox_category(craftable_name, vox_id) {
   craftable_struct.vox_id = vox_id;
 }
 
-#include_zombie_craftable(craftablestub) {
+include_zombie_craftable(craftablestub) {
   if(!isDefined(level.zombie_include_craftables))
     level.zombie_include_craftables = [];
 

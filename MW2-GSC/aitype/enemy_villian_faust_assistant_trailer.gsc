@@ -39,11 +39,11 @@ spawner() {
 }
 
 precache() {
-  character\character_vip_pres::precache();
+    character\character_vip_pres::precache();
 
-  precacheItem("ak47");
-  precacheItem("deserteagle");
-  precacheItem("fraggrenade");
+    precacheItem("ak47");
+    precacheItem("deserteagle");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_rambo::main();
-  //---------------- }
+    //---------------- maps\_rambo::main();
+    //---------------- }

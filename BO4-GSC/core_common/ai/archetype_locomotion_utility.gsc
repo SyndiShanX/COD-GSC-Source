@@ -364,10 +364,10 @@ traverseactionstart(behaviortreeentity, asmstatename) {
 
   result = behaviortreeentity astsearch(asmstatename);
 
-  if(!isDefined(result[# "animation"])) {
+  if(!isDefined(result[#"animation"])) {
     record3dtext("<dev string:x6e>", self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
   } else {
-    record3dtext("<dev string:xa6>" + (ishash(result[# "animation"]) ? function_9e72a96(result[# "animation"]) : result[# "animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
+    record3dtext("<dev string:xa6>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x4d>");
   }
 
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);

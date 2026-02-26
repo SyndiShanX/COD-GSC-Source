@@ -204,7 +204,7 @@ function function_32d5e898() {
 }
 
 function function_170b90e5() {
-  if(!isDefined(level.flag) || !is_true(level.flag[# "load_main_complete"])) {
+  if(!isDefined(level.flag) || !is_true(level.flag[#"load_main_complete"])) {
     level waittill(#"load_main_complete");
   }
 

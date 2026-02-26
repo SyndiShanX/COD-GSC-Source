@@ -89,9 +89,9 @@ function private function_fd3c1bcc(start, end, default_val) {
   assert(isvec(default_val));
   trace = worldtrace(start, end);
 
-  if(trace[# "fraction"] < 1) {
-    assert(isvec(trace[# "position"]));
-    return trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    assert(isvec(trace[#"position"]));
+    return trace[#"position"];
   }
 
   return default_val;

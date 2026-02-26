@@ -19,16 +19,16 @@ init_shared() {
   if(!isDefined(level.var_164c3b65)) {
     level.var_164c3b65 = {};
     flak_drone::init_shared();
-    level.chopper_fx[# "damage"][# "light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
-    level.chopper_fx[# "damage"][# "heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
-    level._effect[# "qrdrone_prop"] = # "hash_6cd811fe548313ca";
-    level._effect[# "heli_guard_light"][# "friendly"] = # "killstreaks/fx_sc_lights_grn";
-    level._effect[# "heli_guard_light"][# "enemy"] = # "killstreaks/fx_sc_lights_red";
-    level._effect[# "heli_comlink_light"][# "common"] = # "killstreaks/fx_drone_hunter_lights";
-    level._effect[# "heli_gunner_light"][# "friendly"] = # "killstreaks/fx_vtol_lights_grn";
-    level._effect[# "heli_gunner_light"][# "enemy"] = # "killstreaks/fx_vtol_lights_red";
-    level._effect[# "heli_gunner"][# "vtol_fx"] = # "killstreaks/fx_vtol_thruster";
-    level._effect[# "heli_gunner"][# "vtol_fx_ft"] = # "killstreaks/fx_vtol_thruster";
+    level.chopper_fx[#"damage"][#"light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
+    level.chopper_fx[#"damage"][#"heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
+    level._effect[#"qrdrone_prop"] = # "hash_6cd811fe548313ca";
+    level._effect[#"heli_guard_light"][#"friendly"] = # "killstreaks/fx_sc_lights_grn";
+    level._effect[#"heli_guard_light"][#"enemy"] = # "killstreaks/fx_sc_lights_red";
+    level._effect[#"heli_comlink_light"][#"common"] = # "killstreaks/fx_drone_hunter_lights";
+    level._effect[#"heli_gunner_light"][#"friendly"] = # "killstreaks/fx_vtol_lights_grn";
+    level._effect[#"heli_gunner_light"][#"enemy"] = # "killstreaks/fx_vtol_lights_red";
+    level._effect[#"heli_gunner"][#"vtol_fx"] = # "killstreaks/fx_vtol_thruster";
+    level._effect[#"heli_gunner"][#"vtol_fx_ft"] = # "killstreaks/fx_vtol_thruster";
     clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
     clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
     clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
@@ -232,8 +232,8 @@ startfx(localclientnum) {
         light_fx = "heli_comlink_light";
         break;
       case # "heli_player_gunner_mp":
-        self.vtolleftfxid = util::playFXOnTag(localclientnum, level._effect[# "heli_gunner"][# "vtol_fx"], self, "tag_engine_left");
-        self.vtolrightfxid = util::playFXOnTag(localclientnum, level._effect[# "heli_gunner"][# "vtol_fx_ft"], self, "tag_engine_right");
+        self.vtolleftfxid = util::playFXOnTag(localclientnum, level._effect[#"heli_gunner"][#"vtol_fx"], self, "tag_engine_left");
+        self.vtolrightfxid = util::playFXOnTag(localclientnum, level._effect[#"heli_gunner"][#"vtol_fx_ft"], self, "tag_engine_right");
         light_fx = "heli_gunner_light";
         break;
       case # "heli_guard_mp":
@@ -245,7 +245,7 @@ startfx(localclientnum) {
     }
 
     if(isDefined(light_fx)) {
-      self.lightfxid = self fx::function_3539a829(localclientnum, level._effect[light_fx][# "friendly"], level._effect[light_fx][# "enemy"], "tag_origin");
+      self.lightfxid = self fx::function_3539a829(localclientnum, level._effect[light_fx][#"friendly"], level._effect[light_fx][#"enemy"], "tag_origin");
     }
 
     if(isDefined(prop_fx) && !self function_4add50a7()) {
@@ -290,10 +290,10 @@ heli_comlink_lights_on(localclientnum) {
     self.light_fx_handles_heli_comlink = [];
   }
 
-  self.light_fx_handles_heli_comlink[0] = util::playFXOnTag(localclientnum, level._effect[# "heli_comlink_light"][# "common"], self, "tag_fx_light_left");
-  self.light_fx_handles_heli_comlink[1] = util::playFXOnTag(localclientnum, level._effect[# "heli_comlink_light"][# "common"], self, "tag_fx_light_right");
-  self.light_fx_handles_heli_comlink[2] = util::playFXOnTag(localclientnum, level._effect[# "heli_comlink_light"][# "common"], self, "tag_fx_tail");
-  self.light_fx_handles_heli_comlink[3] = util::playFXOnTag(localclientnum, level._effect[# "heli_comlink_light"][# "common"], self, "tag_fx_scanner");
+  self.light_fx_handles_heli_comlink[0] = util::playFXOnTag(localclientnum, level._effect[#"heli_comlink_light"][#"common"], self, "tag_fx_light_left");
+  self.light_fx_handles_heli_comlink[1] = util::playFXOnTag(localclientnum, level._effect[#"heli_comlink_light"][#"common"], self, "tag_fx_light_right");
+  self.light_fx_handles_heli_comlink[2] = util::playFXOnTag(localclientnum, level._effect[#"heli_comlink_light"][#"common"], self, "tag_fx_tail");
+  self.light_fx_handles_heli_comlink[3] = util::playFXOnTag(localclientnum, level._effect[#"heli_comlink_light"][#"common"], self, "tag_fx_scanner");
 
   if(isDefined(self.team)) {
     for(i = 0; i < self.light_fx_handles_heli_comlink.size; i++) {

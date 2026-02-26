@@ -385,8 +385,8 @@ function private function_350ee41() {
 
   resetzombieboxweapons();
 
-  if(isDefined(level.var_ee110db8[# "zm_magicbox_named_weapons_parent"])) {
-    level.str_magicbox_named_itemspawnlist = level.var_ee110db8[# "zm_magicbox_named_weapons_parent"];
+  if(isDefined(level.var_ee110db8[#"zm_magicbox_named_weapons_parent"])) {
+    level.str_magicbox_named_itemspawnlist = level.var_ee110db8[#"zm_magicbox_named_weapons_parent"];
   }
 
   function_bd6fcf62(level.str_magicbox_weapon_itemspawnlist, "str_magicbox_weapon_itemspawnlist");

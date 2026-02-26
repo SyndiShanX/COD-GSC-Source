@@ -282,7 +282,7 @@ function dof_enable_autofocus() {
     v_eye = self getEye();
     v_fwd = anglesToForward(self getcamangles());
     a_trace = physicstrace(v_eye, v_eye + v_fwd * 1000, (1 * -1, 1 * -1, 1 * -1), (1, 1, 1), self, 1);
-    var_a84275e3 = distance(v_eye, a_trace[# "position"] + v_fwd * 1);
+    var_a84275e3 = distance(v_eye, a_trace[#"position"] + v_fwd * 1);
 
     if(var_a84275e3 < 100) {
       self function_9e574055(2);

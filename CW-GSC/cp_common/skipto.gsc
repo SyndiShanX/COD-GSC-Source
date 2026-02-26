@@ -390,7 +390,7 @@ function function_e3b9f1f5(instring) {
     return ret[outindex];
   }
 
-  ret[# "op"] = op;
+  ret[#"op"] = op;
   return ret;
 }
 
@@ -437,7 +437,7 @@ function function_4350c864(conditions, adding) {
     return 1;
   }
 
-  if(conditions[# "op"] == "|") {
+  if(conditions[#"op"] == "|") {
     for(i = 0; i < conditions.size - 1; i++) {
       if(function_4350c864(conditions[i], adding)) {
         return 1;
@@ -493,22 +493,22 @@ function function_a59cd1c9() {
             continue;
           }
 
-          if(!isDefined(level.var_c55064fd[# "_default"].next)) {
-            level.var_c55064fd[# "_default"].next = [];
-          } else if(!isarray(level.var_c55064fd[# "_default"].next)) {
-            level.var_c55064fd[# "_default"].next = array(level.var_c55064fd[# "_default"].next);
+          if(!isDefined(level.var_c55064fd[#"_default"].next)) {
+            level.var_c55064fd[#"_default"].next = [];
+          } else if(!isarray(level.var_c55064fd[#"_default"].next)) {
+            level.var_c55064fd[#"_default"].next = array(level.var_c55064fd[#"_default"].next);
           }
 
-          level.var_c55064fd[# "_default"].next[level.var_c55064fd[# "_default"].next.size] = struct.name;
+          level.var_c55064fd[#"_default"].next[level.var_c55064fd[#"_default"].next.size] = struct.name;
         }
       } else {
-        if(!isDefined(level.var_c55064fd[# "_default"].next)) {
-          level.var_c55064fd[# "_default"].next = [];
-        } else if(!isarray(level.var_c55064fd[# "_default"].next)) {
-          level.var_c55064fd[# "_default"].next = array(level.var_c55064fd[# "_default"].next);
+        if(!isDefined(level.var_c55064fd[#"_default"].next)) {
+          level.var_c55064fd[#"_default"].next = [];
+        } else if(!isarray(level.var_c55064fd[#"_default"].next)) {
+          level.var_c55064fd[#"_default"].next = array(level.var_c55064fd[#"_default"].next);
         }
 
-        level.var_c55064fd[# "_default"].next[level.var_c55064fd[# "_default"].next.size] = struct.name;
+        level.var_c55064fd[#"_default"].next[level.var_c55064fd[#"_default"].next.size] = struct.name;
       }
 
       foreach(var_89f09f8d in struct.var_89f09f8d) {
@@ -553,7 +553,7 @@ function function_375821d8(skipto_name) {
     return level.var_c55064fd[skipto_name].next;
   }
 
-  return level.var_c55064fd[# "_default"].next;
+  return level.var_c55064fd[#"_default"].next;
 }
 
 function function_694aaea7(skipto_name) {
@@ -574,7 +574,7 @@ function function_694aaea7(skipto_name) {
     return var_c23e8af7;
   }
 
-  return level.var_c55064fd[# "_default"].next;
+  return level.var_c55064fd[#"_default"].next;
 }
 
 function function_f3c37963(skipto_name) {
@@ -595,7 +595,7 @@ function function_f3c37963(skipto_name) {
     return var_c23e8af7;
   }
 
-  return level.var_c55064fd[# "_default"].next;
+  return level.var_c55064fd[#"_default"].next;
 }
 
 function function_116cfcba(skiptos) {
@@ -1115,16 +1115,16 @@ function on_player_connect() {
         self savegame::set_player_data("savegame_revives", 0);
       }
 
-      self.pers[# "score"] = self savegame::function_2ee66e93("savegame_score", 0);
-      self.pers[# "kills"] = self savegame::function_2ee66e93("savegame_kills", 0);
-      self.pers[# "assists"] = self savegame::function_2ee66e93("savegame_assists", 0);
-      self.pers[# "incaps"] = self savegame::function_2ee66e93("savegame_incaps", 0);
-      self.pers[# "revives"] = self savegame::function_2ee66e93("savegame_revives", 0);
-      self.score = self.pers[# "score"];
-      self.kills = self.pers[# "kills"];
-      self.assists = self.pers[# "assists"];
-      self.incaps = self.pers[# "incaps"];
-      self.revives = self.pers[# "revives"];
+      self.pers[#"score"] = self savegame::function_2ee66e93("savegame_score", 0);
+      self.pers[#"kills"] = self savegame::function_2ee66e93("savegame_kills", 0);
+      self.pers[#"assists"] = self savegame::function_2ee66e93("savegame_assists", 0);
+      self.pers[#"incaps"] = self savegame::function_2ee66e93("savegame_incaps", 0);
+      self.pers[#"revives"] = self savegame::function_2ee66e93("savegame_revives", 0);
+      self.score = self.pers[#"score"];
+      self.kills = self.pers[#"kills"];
+      self.assists = self.pers[#"assists"];
+      self.incaps = self.pers[#"incaps"];
+      self.revives = self.pers[#"revives"];
     }
   }
 

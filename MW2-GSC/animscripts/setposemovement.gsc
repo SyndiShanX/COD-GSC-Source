@@ -51,56 +51,56 @@ InitPoseMovementFunctions() {
 
 //-------------------------------------------------------------------------------- // Standing poses
 //-------------------------------------------------------------------------------- BeginStandStop() {
-  switch (self.a.pose) {
-    case "stand":
-      switch (self.a.movement) {
-        case "stop":
-          return false;
+switch (self.a.pose) {
+  case "stand":
+    switch (self.a.movement) {
+      case "stop":
+        return false;
 
-        case "walk":
-          StandWalkToStand();
-          break;
+      case "walk":
+        StandWalkToStand();
+        break;
 
-        default:
-          assert(self.a.movement == "run");
-          StandRunToStand();
-          break;
-      }
-      break;
+      default:
+        assert(self.a.movement == "run");
+        StandRunToStand();
+        break;
+    }
+    break;
 
-    case "crouch":
-      switch (self.a.movement) {
-        case "stop":
-          CrouchToStand();
-          break;
+  case "crouch":
+    switch (self.a.movement) {
+      case "stop":
+        CrouchToStand();
+        break;
 
-        case "walk":
-          CrouchWalkToStand();
-          break;
+      case "walk":
+        CrouchWalkToStand();
+        break;
 
-        default:
-          assert(self.a.movement == "run");
-          CrouchRunToStand();
-          break;
-      }
-      break;
+      default:
+        assert(self.a.movement == "run");
+        CrouchRunToStand();
+        break;
+    }
+    break;
 
-    default:
-      assert(self.a.pose == "prone");
-      switch (self.a.movement) {
-        case "stop":
-          ProneToStand();
-          break;
+  default:
+    assert(self.a.pose == "prone");
+    switch (self.a.movement) {
+      case "stop":
+        ProneToStand();
+        break;
 
-        default:
-          assert(self.a.movement == "walk" || self.a.movement == "run");
-          ProneToStand(); // Do I need to stop crawling first?Hope not.
-          break;
-      }
-      break;
-  }
+      default:
+        assert(self.a.movement == "walk" || self.a.movement == "run");
+        ProneToStand(); // Do I need to stop crawling first?Hope not.
+        break;
+    }
+    break;
+}
 
-  return true;
+return true;
 }
 
 BeginStandWalk() {
@@ -183,43 +183,43 @@ BeginStandRun() {
 
 //-------------------------------------------------------------------------------- // Crouching functions
 //-------------------------------------------------------------------------------- BeginCrouchStop() {
-  switch (self.a.pose) {
-    case "stand":
-      switch (self.a.movement) {
-        case "stop":
-          StandToCrouch();
-          break;
-        case "walk":
-          StandWalkToCrouch();
-          break;
-        case "run":
-          StandRunToCrouch();
-          break;
-        default:
-          assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
-      }
-      break;
-    case "crouch":
-      switch (self.a.movement) {
-        case "stop":
-          // Do nothing
-          break;
-        case "walk":
-          CrouchWalkToCrouch();
-          break;
-        case "run":
-          CrouchRunToCrouch();
-          break;
-        default:
-          assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
-      }
-      break;
-    case "prone":
-      ProneToCrouch();
-      break;
-    default:
-      assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
-  }
+switch (self.a.pose) {
+  case "stand":
+    switch (self.a.movement) {
+      case "stop":
+        StandToCrouch();
+        break;
+      case "walk":
+        StandWalkToCrouch();
+        break;
+      case "run":
+        StandRunToCrouch();
+        break;
+      default:
+        assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
+    }
+    break;
+  case "crouch":
+    switch (self.a.movement) {
+      case "stop":
+        // Do nothing
+        break;
+      case "walk":
+        CrouchWalkToCrouch();
+        break;
+      case "run":
+        CrouchRunToCrouch();
+        break;
+      default:
+        assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
+    }
+    break;
+  case "prone":
+    ProneToCrouch();
+    break;
+  default:
+    assertEX(0, "SetPoseMovement::BeginCrouchStop " + self.a.pose + " " + self.a.movement);
+}
 }
 
 BeginCrouchWalk() {
@@ -309,53 +309,53 @@ BeginCrouchRun() {
 
 //-------------------------------------------------------------------------------- // Prone Functions
 //-------------------------------------------------------------------------------- BeginProneStop() {
-  switch (self.a.pose) {
-    case "stand":
-      switch (self.a.movement) {
-        case "stop":
-          StandToProne();
-          break;
-        case "walk":
-          StandToProne();
-          break;
-        case "run":
-          CrouchRunToProne();
-          break;
-        default:
-          assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
-      }
-      break;
-    case "crouch":
-      switch (self.a.movement) {
-        case "stop":
-          CrouchToProne();
-          break;
-        case "walk":
-          CrouchToProne();
-          break;
-        case "run":
-          CrouchRunToProne();
-          break;
-        default:
-          assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
-      }
-      break;
-    case "prone":
-      switch (self.a.movement) {
-        case "stop":
-          // Do nothing
-          break;
-        case "walk":
-        case "run":
-          ProneCrawlToProne();
-          break;
-        default:
-          assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
-      }
-      break;
-    default:
-      assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
-  }
+switch (self.a.pose) {
+  case "stand":
+    switch (self.a.movement) {
+      case "stop":
+        StandToProne();
+        break;
+      case "walk":
+        StandToProne();
+        break;
+      case "run":
+        CrouchRunToProne();
+        break;
+      default:
+        assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
+    }
+    break;
+  case "crouch":
+    switch (self.a.movement) {
+      case "stop":
+        CrouchToProne();
+        break;
+      case "walk":
+        CrouchToProne();
+        break;
+      case "run":
+        CrouchRunToProne();
+        break;
+      default:
+        assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
+    }
+    break;
+  case "prone":
+    switch (self.a.movement) {
+      case "stop":
+        // Do nothing
+        break;
+      case "walk":
+      case "run":
+        ProneCrawlToProne();
+        break;
+      default:
+        assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
+    }
+    break;
+  default:
+    assertEX(0, "SetPoseMovement::BeginCrouchRun " + self.a.pose + " " + self.a.movement);
+}
 }
 
 BeginProneWalk() {
@@ -453,23 +453,23 @@ BeginProneRun() {
 
 //-------------------------------------------------------------------------------- // Standing support functions
 //-------------------------------------------------------------------------------- PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement) {
-  endTime = gettime() + crossblendTime * 1000;
+endTime = gettime() + crossblendTime * 1000;
 
-  if(isarray(transAnim))
-    transAnim = transAnim[randomint(transAnim.size)];
+if(isarray(transAnim))
+  transAnim = transAnim[randomint(transAnim.size)];
 
-  self setflaggedanimknoball("blendTransition", transAnim, %body, 1, crossblendTime, 1);
+self setflaggedanimknoball("blendTransition", transAnim, %body, 1, crossblendTime, 1);
 
-  self animscripts\shared::DoNoteTracksForTime(crossblendTime / 2, "blendTransition");
+self animscripts\shared::DoNoteTracksForTime(crossblendTime / 2, "blendTransition");
 
-  self.a.pose = endPose;
-  self.a.movement = endMovement;
+self.a.pose = endPose;
+self.a.movement = endMovement;
 
-  waittime = (endTime - gettime()) / 1000;
-  if(waittime < 0.05)
-    waittime = 0.05;
+waittime = (endTime - gettime()) / 1000;
+if(waittime < 0.05)
+  waittime = 0.05;
 
-  self animscripts\shared::DoNoteTracksForTime(waittime, "blendTransition");
+self animscripts\shared::DoNoteTracksForTime(waittime, "blendTransition");
 }
 
 PlayTransitionStandWalk(transAnim, finalAnim) {
@@ -580,10 +580,10 @@ CrouchToStand() {
 
 //-------------------------------------------------------------------------------- // Crouched Support Functions
 //-------------------------------------------------------------------------------- CrouchToCrouchWalk() {
-  assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchWalk " + self.a.pose);
-  assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchWalk " + self.a.movement);
+assertEX(self.a.pose == "crouch", "SetPoseMovement::CrouchToCrouchWalk " + self.a.pose);
+assertEX(self.a.movement == "stop", "SetPoseMovement::CrouchToCrouchWalk " + self.a.movement);
 
-  BlendIntoCrouchWalk();
+BlendIntoCrouchWalk();
 }
 
 CrouchToStandWalk() {
@@ -732,16 +732,16 @@ ProneToStandWalk() {
 
 //-------------------------------------------------------------------------------- // Prone Support Functions
 //-------------------------------------------------------------------------------- ProneToProneMove(movement) {
-  // (The parameter "movement" is just used for setting the state variable, since prone guys move the same whether
-  // "walking" or "running".
-  assertEX(self.a.pose == "prone", "SetPoseMovement::ProneToProneMove " + self.a.pose);
-  assertEX(self.a.movement == "stop", "SetPoseMovement::ProneToProneMove " + self.a.movement);
-  assertEX((movement == "walk" || movement == "run"), "SetPoseMovement::ProneToProneMove got bad parameter " + movement);
+// (The parameter "movement" is just used for setting the state variable, since prone guys move the same whether
+// "walking" or "running".
+assertEX(self.a.pose == "prone", "SetPoseMovement::ProneToProneMove " + self.a.pose);
+assertEX(self.a.movement == "stop", "SetPoseMovement::ProneToProneMove " + self.a.movement);
+assertEX((movement == "walk" || movement == "run"), "SetPoseMovement::ProneToProneMove got bad parameter " + movement);
 
-  ProneLegsStraightTree(0.1);
-  PlayTransitionAnimation(%prone_2_prone_crawl, "prone", movement, %prone_crawl);
+ProneLegsStraightTree(0.1);
+PlayTransitionAnimation(%prone_2_prone_crawl, "prone", movement, %prone_crawl);
 
-  self animscripts\cover_prone::UpdateProneWrapper(0.1);
+self animscripts\cover_prone::UpdateProneWrapper(0.1);
 }
 
 ProneToProneRun() {
@@ -877,9 +877,9 @@ CrouchRunToProneRun() {
 
 //-------------------------------------------------------------------------------- // General support functions
 //-------------------------------------------------------------------------------- PlayTransitionAnimationThread_WithoutWaitSetStates(transAnim, endPose, endMovement, finalAnim, rate) {
-  self endon("killanimscript"); // the threaded one needs this or it wont die
-  self endon("entered_pose" + endPose);
-  PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, false);
+self endon("killanimscript"); // the threaded one needs this or it wont die
+self endon("entered_pose" + endPose);
+PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, false);
 }
 
 PlayTransitionAnimation(transAnim, endPose, endMovement, finalAnim, rate) {

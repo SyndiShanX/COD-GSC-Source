@@ -474,16 +474,16 @@ function function_27675652(entity) {
   if(!isDefined(entity.ai.var_e233df10)) {
     entity.ai.var_e233df10 = [];
     bundle = getscriptbundle(entity.var_854857c6);
-    entity.ai.var_e233df10[# "min"] = bundle.var_f850cb73;
-    entity.ai.var_e233df10[# "max"] = bundle.var_f724517b;
+    entity.ai.var_e233df10[#"min"] = bundle.var_f850cb73;
+    entity.ai.var_e233df10[#"max"] = bundle.var_f724517b;
   }
 
-  if(!isDefined(entity.ai.var_e233df10[# "min"])) {
-    entity.ai.var_e233df10[# "min"] = 0.8;
+  if(!isDefined(entity.ai.var_e233df10[#"min"])) {
+    entity.ai.var_e233df10[#"min"] = 0.8;
   }
 
-  if(!isDefined(entity.ai.var_e233df10[# "max"])) {
-    entity.ai.var_e233df10[# "max"] = 1.2;
+  if(!isDefined(entity.ai.var_e233df10[#"max"])) {
+    entity.ai.var_e233df10[#"max"] = 1.2;
   }
 
   startnode = entity.traversestartnode;
@@ -503,11 +503,11 @@ function function_27675652(entity) {
 
   ratio = abs(var_b6b9b5f0 / startheight);
 
-  if(ratio < entity.ai.var_e233df10[# "min"]) {
+  if(ratio < entity.ai.var_e233df10[#"min"]) {
     return "_vault_jump_up_drop";
   }
 
-  if(ratio > entity.ai.var_e233df10[# "max"]) {
+  if(ratio > entity.ai.var_e233df10[#"max"]) {
     return "_vault_jump_down_drop";
   }
 
@@ -1097,7 +1097,7 @@ function wasatcovernode() {
 function bb_getlocomotionexityaw(blackboard, yaw) {
   if(self haspath()) {
     predictedlookaheadinfo = self predictexit();
-    status = predictedlookaheadinfo[# "path_prediction_status"];
+    status = predictedlookaheadinfo[#"path_prediction_status"];
 
     if(!isDefined(self.pathgoalpos)) {
       return -1;
@@ -1105,8 +1105,8 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
 
     if(status == 3) {
       start = self.origin;
-      end = start + vectorscale((0, predictedlookaheadinfo[# "path_prediction_travel_vector"][1], 0), 100);
-      angletoexit = vectortoangles(predictedlookaheadinfo[# "path_prediction_travel_vector"])[1];
+      end = start + vectorscale((0, predictedlookaheadinfo[#"path_prediction_travel_vector"][1], 0), 100);
+      angletoexit = vectortoangles(predictedlookaheadinfo[#"path_prediction_travel_vector"])[1];
       exityaw = absangleclamp360(angletoexit - self.prevnode.angles[1]);
 
       record3dtext("<dev string:x1a1>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x181>", undefined, 0.4);
@@ -1114,8 +1114,8 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
       return exityaw;
     } else if(status == 4) {
       start = self.origin;
-      end = start + vectorscale((0, predictedlookaheadinfo[# "path_prediction_travel_vector"][1], 0), 100);
-      angletoexit = vectortoangles(predictedlookaheadinfo[# "path_prediction_travel_vector"])[1];
+      end = start + vectorscale((0, predictedlookaheadinfo[#"path_prediction_travel_vector"][1], 0), 100);
+      angletoexit = vectortoangles(predictedlookaheadinfo[#"path_prediction_travel_vector"])[1];
       exityaw = absangleclamp360(angletoexit - self.angles[1]);
 
       record3dtext("<dev string:x1a1>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x181>", undefined, 0.4);
@@ -1132,9 +1132,9 @@ function bb_getlocomotionexityaw(blackboard, yaw) {
         return exityaw;
       }
 
-      start = predictedlookaheadinfo[# "path_prediction_start_point"];
-      end = start + predictedlookaheadinfo[# "path_prediction_travel_vector"];
-      exityaw = getangleusingdirection(predictedlookaheadinfo[# "path_prediction_travel_vector"]);
+      start = predictedlookaheadinfo[#"path_prediction_start_point"];
+      end = start + predictedlookaheadinfo[#"path_prediction_travel_vector"];
+      exityaw = getangleusingdirection(predictedlookaheadinfo[#"path_prediction_travel_vector"]);
 
       record3dtext("<dev string:x1a1>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x181>", undefined, 0.4);
 
@@ -1196,7 +1196,7 @@ function bb_getlocomotionfaceenemyquadrant() {
 function bb_getlocomotionpaintype() {
   if(self haspath()) {
     predictedlookaheadinfo = self predictpath();
-    status = predictedlookaheadinfo[# "path_prediction_status"];
+    status = predictedlookaheadinfo[#"path_prediction_status"];
     startpos = self.origin;
     furthestpointtowardsgoalclear = 1;
 

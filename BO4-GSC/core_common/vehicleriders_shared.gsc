@@ -478,8 +478,8 @@ function_114d7bd3(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("driver_occupied") && isDefined(vehicle.var_761c973.riders[# "driver"]) && isalive(vehicle.var_761c973.riders[# "driver"])) {
-    ai = vehicle.var_761c973.riders[# "driver"];
+  if(vehicle flag::get("driver_occupied") && isDefined(vehicle.var_761c973.riders[#"driver"]) && isalive(vehicle.var_761c973.riders[#"driver"])) {
+    ai = vehicle.var_761c973.riders[#"driver"];
     assert(ai flag::get("<dev string:x243>"));
     closeanim = undefined;
 
@@ -501,8 +501,8 @@ function_b56639f2(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("passenger1_occupied") && isDefined(vehicle.var_761c973.riders[# "passenger1"]) && isalive(vehicle.var_761c973.riders[# "passenger1"])) {
-    ai = vehicle.var_761c973.riders[# "passenger1"];
+  if(vehicle flag::get("passenger1_occupied") && isDefined(vehicle.var_761c973.riders[#"passenger1"]) && isalive(vehicle.var_761c973.riders[#"passenger1"])) {
+    ai = vehicle.var_761c973.riders[#"passenger1"];
     assert(ai flag::get("<dev string:x243>"));
     closeanim = undefined;
 
@@ -524,8 +524,8 @@ function_2ef91b74(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("gunner1_occupied") && isDefined(vehicle.var_761c973.riders[# "gunner1"]) && isalive(vehicle.var_761c973.riders[# "gunner1"])) {
-    ai = vehicle.var_761c973.riders[# "gunner1"];
+  if(vehicle flag::get("gunner1_occupied") && isDefined(vehicle.var_761c973.riders[#"gunner1"]) && isalive(vehicle.var_761c973.riders[#"gunner1"])) {
+    ai = vehicle.var_761c973.riders[#"gunner1"];
     assert(ai flag::get("<dev string:x243>"));
     closeanim = undefined;
 
@@ -793,9 +793,9 @@ exit_high_loop_anim(e_parent) {
 get_height(e_ignore = self) {
   trace = groundtrace(self.origin + (0, 0, 10), self.origin + (0, 0, -10000), 0, e_ignore, 0);
 
-  recordline(self.origin + (0, 0, 10), trace[# "position"], (1, 0.5, 0), "<dev string:x321>", self);
+  recordline(self.origin + (0, 0, 10), trace[#"position"], (1, 0.5, 0), "<dev string:x321>", self);
 
-  return distance(self.origin, trace[# "position"]);
+  return distance(self.origin, trace[#"position"]);
 }
 
 get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {

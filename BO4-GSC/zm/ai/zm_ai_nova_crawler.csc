@@ -24,13 +24,13 @@ __init__() {
 function_1d34f2b6(localclientnum) {
   if(!isDefined(self._effect)) {
     self._effect = [];
-    self._effect[# "hash_219e13e8868d7af4"] = "zm_ai/fx8_nova_crawler_gas_release";
+    self._effect[#"hash_219e13e8868d7af4"] = "zm_ai/fx8_nova_crawler_gas_release";
   }
 }
 
 function_d8505ab6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval == 1 && isDefined(self._effect) && isDefined(self._effect[# "hash_219e13e8868d7af4"])) {
-    playFX(localclientnum, self._effect[# "hash_219e13e8868d7af4"], self.origin);
+  if(newval == 1 && isDefined(self._effect) && isDefined(self._effect[#"hash_219e13e8868d7af4"])) {
+    playFX(localclientnum, self._effect[#"hash_219e13e8868d7af4"], self.origin);
   }
 }
 

@@ -83,8 +83,8 @@ function main(str_objective, var_50cc0d4f) {
 function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
   hms_util::print("<dev string:x53>");
 
-  actors[# "door2"] = getent("cctv_exit_door_left", "targetname");
-  actors[# "door1"] = getent("cctv_exit_door_right", "targetname");
+  actors[#"door2"] = getent("cctv_exit_door_left", "targetname");
+  actors[#"door1"] = getent("cctv_exit_door_right", "targetname");
   scene::play_from_time("scene_rev_3040_fir_cctv_lazar", "exit", actors, 1, 1, 1, 0, 0);
 }
 
@@ -462,7 +462,7 @@ function function_1bcc08b8() {
   level flag::set("c4_planted");
   namespace_a789f8ae::function_dde2e307();
   var_2b96c77c = struct::get("scene_c4_gate");
-  var_2b96c77c.scene_ents[# "bomb"] thread function_9f9e880e();
+  var_2b96c77c.scene_ents[#"bomb"] thread function_9f9e880e();
   wait 1.5;
   level notify(#"hud_icon_c4_red");
   wait 1.5;
@@ -471,12 +471,12 @@ function function_1bcc08b8() {
   level.park.allowpain = 0;
   radiusdamage(var_6becf11c.origin, 200, 50, 0);
   physicsexplosionsphere(var_6becf11c.origin, 290, 0, 2);
-  playrumbleonposition(#"hash_3caa002da3fb9904", var_2b96c77c.scene_ents[# "bomb"].origin);
+  playrumbleonposition(#"hash_3caa002da3fb9904", var_2b96c77c.scene_ents[#"bomb"].origin);
   level.lazar.allowpain = 1;
   level.park.allowpain = 1;
   level notify(#"hash_1ebf62c7b43dbd5e");
   level flag::set("flg_door_breached_to_second_floor");
-  playFX(level._effect[# "hash_70902b0842168222"], var_c6b0b733.origin);
+  playFX(level._effect[#"hash_70902b0842168222"], var_c6b0b733.origin);
   snd::client_targetname(var_bd11e136, "audio_gate_breach_explosion");
   earthquake(0.25, 0.25, var_93e9d0ab.origin, 350);
   var_93e9d0ab delete();

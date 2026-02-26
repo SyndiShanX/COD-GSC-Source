@@ -237,8 +237,8 @@ prematch_init() {
 function_5c718249(a_ents) {
   waitframe(1);
 
-  if(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] clientfield::increment("helo_spawn_flavor_rope_pulse");
+  if(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] clientfield::increment("helo_spawn_flavor_rope_pulse");
   }
 }
 

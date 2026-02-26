@@ -21,8 +21,8 @@ __init__() {
 
   clientfield::register("toplayer", "infected", 21000, 1, "int", &_infected, 0, 0);
   callback::on_localclient_connect(&on_localclient_connect);
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
 }
 
 on_localclient_connect(localclientnum) {
@@ -57,8 +57,8 @@ _infected(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   if(newval) {
     self thread function_325e85a2(localclientnum);
     playSound(0, #"zmb_zombie_spawn", self.origin);
-    burst_fx = level._effect[# "rise_burst"];
-    billow_fx = level._effect[# "rise_billow"];
+    burst_fx = level._effect[#"rise_burst"];
+    billow_fx = level._effect[#"rise_billow"];
     self thread rise_dust_fx(localclientnum, billow_fx, burst_fx);
     return;
   }

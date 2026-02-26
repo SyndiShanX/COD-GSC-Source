@@ -46,12 +46,12 @@ spawner() {
 }
 
 precache() {
-  character\character_shadow_co_smg::precache();
+    character\character_shadow_co_smg::precache();
 
-  precacheItem("wa2000_thermal");
-  precacheItem("wa2000");
-  precacheItem("glock");
-  precacheItem("fraggrenade");
+    precacheItem("wa2000_thermal");
+    precacheItem("wa2000");
+    precacheItem("glock");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

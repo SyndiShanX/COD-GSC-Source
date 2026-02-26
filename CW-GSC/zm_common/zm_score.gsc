@@ -68,8 +68,8 @@ function function_e5d6e6dd(str_archetype, n_score) {
 }
 
 function function_e5ca5733() {
-  if(isDefined(self.score_events[# "kill"]) && isDefined(level.scoreinfo[self.score_events[# "kill"]][# "sp"]) && level.scoreinfo[self.score_events[# "kill"]][# "sp"] > 0) {
-    return level.scoreinfo[self.score_events[# "kill"]][# "sp"];
+  if(isDefined(self.score_events[#"kill"]) && isDefined(level.scoreinfo[self.score_events[#"kill"]][#"sp"]) && level.scoreinfo[self.score_events[#"kill"]][#"sp"] > 0) {
+    return level.scoreinfo[self.score_events[#"kill"]][#"sp"];
   } else if(isDefined(self.archetype) && isDefined(level.var_c44113ca[self.archetype])) {
     return level.var_c44113ca[self.archetype];
   }
@@ -251,7 +251,7 @@ function player_add_points(event, mod, hit_location, e_target, zombie_team, dama
     return;
   }
 
-  self.pers[# "score"] = self.score;
+  self.pers[#"score"] = self.score;
 
   if(isDefined(level._game_module_point_adjustment)) {
     level[[level._game_module_point_adjustment]](self, zombie_team, player_points);
@@ -434,7 +434,7 @@ function add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "", va
     self.score = 4000000;
   }
 
-  self.pers[# "score"] = self.score;
+  self.pers[#"score"] = self.score;
   self incrementplayerstat("scoreEarned", n_points_to_add_to_currency);
   self zm_stats::function_301c4be2("boas_scoreEarned", n_points_to_add_to_currency);
   self zm_stats::function_c0c6ab19(#"zearned", n_points_to_add_to_currency, 1);
@@ -511,7 +511,7 @@ function minus_to_player_score(points, b_forced = 0) {
   self.score -= points;
   self zm_stats::function_7ec42fbf(#"hash_3c096a414d5b9096", points);
   self stats::function_dad108fa(#"hash_59d8674357c2b6de", points);
-  self.pers[# "score"] = self.score;
+  self.pers[#"score"] = self.score;
   self incrementplayerstat("scoreSpent", points);
   self zm_stats::function_301c4be2("boas_scoreSpent", points);
   level notify(#"spent_points", {
@@ -596,7 +596,7 @@ function on_item_pickup(s_params) {
 }
 
 function function_5f41330c() {
-  return isDefined(self.score_events[# "assist"]) && isDefined(level.scoreinfo[self.score_events[# "assist"]][# "sp"]) && level.scoreinfo[self.score_events[# "assist"]][# "sp"] > 0;
+  return isDefined(self.score_events[#"assist"]) && isDefined(level.scoreinfo[self.score_events[#"assist"]][#"sp"]) && level.scoreinfo[self.score_events[#"assist"]][#"sp"] > 0;
 }
 
 function function_82732ced() {
@@ -664,11 +664,11 @@ function function_acaab828(b_disabled = 1) {
 }
 
 function function_ffc2d0bc() {
-  return self.pers[# "score"];
+  return self.pers[#"score"];
 }
 
 function function_c1f146ff(score) {
-  self.pers[# "score"] = score;
+  self.pers[#"score"] = score;
   self.score = score;
 }
 

@@ -788,19 +788,19 @@ function function_50de5cd0(poi) {
 
   switch (poi.script_noteworthy) {
     case # "hash_18d800872b06dc78":
-      return [# "hash_bf89fcd37dbdd7e", var_a706170a];
+      return [#"hash_bf89fcd37dbdd7e", var_a706170a];
     case # "hash_69474b7b1e2c98d1":
-      return [# "hash_5ec53fb034c31e3", var_a706170a, 2];
+      return [#"hash_5ec53fb034c31e3", var_a706170a, 2];
     case # "hash_687373550dc300ce":
-      return [# "hash_3029a65b4a3023cc", var_a706170a, 2];
+      return [#"hash_3029a65b4a3023cc", var_a706170a, 2];
     case # "hash_589ccf1c22b789d9":
-      return [# "hash_1a19a8fc42fd1e5b", var_a706170a, 2];
+      return [#"hash_1a19a8fc42fd1e5b", var_a706170a, 2];
     case # "hash_37631412a3176b69":
-      return [# "hash_662c750fc4498163", var_a706170a, 2];
+      return [#"hash_662c750fc4498163", var_a706170a, 2];
     case # "hash_33d0a3692293faf5":
-      return [# "hash_14a60afd57606417", var_a706170a, 2];
+      return [#"hash_14a60afd57606417", var_a706170a, 2];
     case # "hash_6f8388bf8f055655":
-      return [# "hash_6a7f700f0af3ee03", var_a706170a, 2];
+      return [#"hash_6a7f700f0af3ee03", var_a706170a, 2];
     case # "checkpoint":
       return function_9ce18e97(#"hash_4fbba325ec087684");
     case # "checkin":
@@ -810,7 +810,7 @@ function function_50de5cd0(poi) {
     case # "prison":
       return function_9ce18e97(#"hash_359608e302c57fbd");
     case # "hash_3843b248a5c4cbd5":
-      return [# "hash_3fc4aa3e5250d4d0", #"hash_4f172ac25c442ef1", 2];
+      return [#"hash_3fc4aa3e5250d4d0", #"hash_4f172ac25c442ef1", 2];
     case # "breakroom":
       return function_9ce18e97(#"hash_70ab4a44d4c451f6");
     case # "hash_2f1f3dc2c2b06f6a":
@@ -828,7 +828,7 @@ function function_aa042bc7(model_str, tag, count, struct) {
   }
 
   door = self;
-  var_4843b044 = [# "hash_1052bba5d3331092", undefined, 3];
+  var_4843b044 = [#"hash_1052bba5d3331092", undefined, 3];
   var_a706170a = var_4843b044[0];
 
   switch (model_str) {
@@ -842,7 +842,7 @@ function function_aa042bc7(model_str, tag, count, struct) {
       var_4843b044 = function_9ce18e97(#"hash_80aa6423a7c88a1");
       break;
     case # "generals_office":
-      var_4843b044 = [# "hash_37ff45ed9912fbb9", var_a706170a, 2];
+      var_4843b044 = [#"hash_37ff45ed9912fbb9", var_a706170a, 2];
       break;
     case # "interrogation":
       var_4843b044 = function_9ce18e97(#"hash_87f830cf1e9423b");
@@ -869,7 +869,7 @@ function function_aa042bc7(model_str, tag, count, struct) {
       var_4843b044 = function_9ce18e97(#"hash_9cd6829ef3f06bd");
       break;
     case # "hash_7384a5c9db2004f6":
-      var_4843b044 = [# "hash_b6c6b6537e726cb", var_a706170a, 2];
+      var_4843b044 = [#"hash_b6c6b6537e726cb", var_a706170a, 2];
       break;
     case # "lavatory":
       var_4843b044 = function_9ce18e97(#"hash_1049106f475a8ac1");
@@ -878,7 +878,7 @@ function function_aa042bc7(model_str, tag, count, struct) {
       var_4843b044 = function_9ce18e97(#"hash_1052bba5d3331092");
       break;
     case # "war_room":
-      var_4843b044 = [# "hash_34ef3274188fa633", var_a706170a, 2];
+      var_4843b044 = [#"hash_34ef3274188fa633", var_a706170a, 2];
       break;
     case # "recruitment":
       var_4843b044 = function_9ce18e97(#"hash_453644f696c82723");
@@ -1591,7 +1591,7 @@ function function_efb66186(s_params) {
 }
 
 function function_f954feae(method) {
-  var_28f7a84d = [# "hash_1bcbed68b6504458", #"hash_11484ae12865f8c9", #"hash_165afba597307403", #"hash_7a524b2fff5dad2c", #"hash_2423208923ced64e"];
+  var_28f7a84d = [#"hash_1bcbed68b6504458", #"hash_11484ae12865f8c9", #"hash_165afba597307403", #"hash_7a524b2fff5dad2c", #"hash_2423208923ced64e"];
   var_a5ebae6c = level.player savegame::function_2ee66e93(#"hash_4a0240a3dc714e1b", []);
 
   for(i = 0; i < var_28f7a84d.size; i++) {

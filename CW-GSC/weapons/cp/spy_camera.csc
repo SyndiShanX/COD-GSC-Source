@@ -227,7 +227,7 @@ function private function_38401b6f(localclientnum) {
   self easing::function_136edb11(undefined, 3.5, var_33a13023, #"logarithmic", 1, 0);
 
   while(true) {
-    var_546112ef = self util::function_ca4b4e19(localclientnum, 0)[# "move"];
+    var_546112ef = self util::function_ca4b4e19(localclientnum, 0)[#"move"];
     zoom_frac = lerpfloat(zoom_frac, util::function_b5338ccb(var_546112ef[1], var_b4e0311b), 0.25);
 
     if(zoom_frac != 0 && (zoom_frac < 0 && var_cbcfc238 > 14.64 || zoom_frac > 0 && var_cbcfc238 < 200)) {
@@ -320,7 +320,7 @@ function private function_38401b6f(localclientnum) {
     fwd = anglesToForward(self getplayerangles());
     var_cdcfe8fe = isDefined(level.var_14094ff8.var_ae91c8dd) ? level.var_14094ff8.var_ae91c8dd : 72;
     trace = physicstrace(eye + fwd * var_cdcfe8fe, eye + fwd * var_e99a5258, var_c5e00469, var_43ac2595, self, 1, 16 | 65536 | 8192);
-    var_de79cd4c = distance(eye, trace[# "position"] + fwd * var_43ac2595[0]);
+    var_de79cd4c = distance(eye, trace[#"position"] + fwd * var_43ac2595[0]);
 
     if(var_58cb5a30 < self getclienttime() && abs(var_de79cd4c - var_e17c45e2) < 100) {
       var_e17c45e2 = lerpfloat(var_e17c45e2, var_de79cd4c, 0.5);
@@ -346,7 +346,7 @@ function private function_38401b6f(localclientnum) {
     }
 
     if(getdvarint(#"hash_43c519a373d839ab", 0)) {
-      box(trace[# "position"] + fwd * var_43ac2595[0], var_c5e00469, var_43ac2595, self getplayerangles()[1], (1, 0, 0), 0, 1);
+      box(trace[#"position"] + fwd * var_43ac2595[0], var_c5e00469, var_43ac2595, self getplayerangles()[1], (1, 0, 0), 0, 1);
     }
 
     waitframe(1);
@@ -354,7 +354,7 @@ function private function_38401b6f(localclientnum) {
 }
 
 function private function_b0af17c8(fov) {
-  return level.var_f234c5a2[# "hash_16ec799e74db6b19"] / 2 * tan(fov / 2);
+  return level.var_f234c5a2[#"hash_16ec799e74db6b19"] / 2 * tan(fov / 2);
 
   return 212.456 / 2 * tan(fov / 2);
 }
@@ -375,7 +375,7 @@ function private function_48d47618(localclientnum, ent, eye_pos, var_753686d6, v
   if(!is_true(level.var_14094ff8.var_3819321e)) {
     var_3300333c = distance(target_pos, eye_pos);
 
-    if(level.var_f234c5a2[# "hash_3e3f17ce43aad14c"] != 0) {
+    if(level.var_f234c5a2[#"hash_3e3f17ce43aad14c"] != 0) {
       print3d(target_pos + (0, 0, 12), "<dev string:x97>" + int(var_3300333c) + "<dev string:xa7>" + int(var_753686d6), (1, 1, 1), undefined, 0.25, isDefined(var_ff9d26ff) ? undefined : 500, 1);
     }
 

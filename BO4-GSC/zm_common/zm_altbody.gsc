@@ -322,11 +322,11 @@ player_restore_loadout(name, trigger) {
 
 function_d709966a(washuman) {
   if(washuman) {
-    playFX(level._effect[# "human_disappears"], self.origin);
+    playFX(level._effect[#"human_disappears"], self.origin);
     return;
   }
 
-  playFX(level._effect[# "zombie_disappears"], self.origin);
+  playFX(level._effect[#"zombie_disappears"], self.origin);
   playsoundatposition(#"zmb_player_disapparate", self.origin);
   self playlocalsound(#"zmb_player_disapparate_2d");
 }

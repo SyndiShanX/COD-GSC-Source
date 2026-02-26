@@ -591,11 +591,11 @@ function private function_e7f9bcfd(entity, point) {
   goal = undefined;
   var_9ee64b0c = function_9cc082d2(point, 200);
 
-  if(isDefined(var_9ee64b0c[# "point"])) {
-    if(ispointonnavmesh(var_9ee64b0c[# "point"], entity)) {
-      goal = var_9ee64b0c[# "point"];
+  if(isDefined(var_9ee64b0c[#"point"])) {
+    if(ispointonnavmesh(var_9ee64b0c[#"point"], entity)) {
+      goal = var_9ee64b0c[#"point"];
     } else {
-      var_47efca42 = getclosestpointonnavmesh(var_9ee64b0c[# "point"], 200, entity getpathfindingradius() * 1.2);
+      var_47efca42 = getclosestpointonnavmesh(var_9ee64b0c[#"point"], 200, entity getpathfindingradius() * 1.2);
 
       if(isDefined(var_47efca42) && ispointonnavmesh(var_47efca42, entity)) {
         goal = var_47efca42;

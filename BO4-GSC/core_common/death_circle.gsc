@@ -171,7 +171,7 @@ function_9bae34b3(var_b0b91d4, finalcircle, oobtriggers) {
 
     trace = groundtrace(origin + (0, 0, 10000), origin + (0, 0, -10000), 0, undefined);
 
-    if(trace[# "fraction"] >= 1 || trace[# "surfacetype"] == "water" || trace[# "surfacetype"] == "watershallow") {
+    if(trace[#"fraction"] >= 1 || trace[#"surfacetype"] == "water" || trace[#"surfacetype"] == "watershallow") {
       continue;
     }
 
@@ -180,7 +180,7 @@ function_9bae34b3(var_b0b91d4, finalcircle, oobtriggers) {
     }
 
     finalcircle.origin = origin;
-    finalcircle.tracepos = trace[# "position"];
+    finalcircle.tracepos = trace[#"position"];
     success = 1;
     break;
   }
@@ -973,8 +973,8 @@ debug_loop() {
           trace = groundtrace(host.origin, host.origin + (0, 0, -10000), 0, undefined);
           var_95341914 = (0, 1, 0);
 
-          if(trace[# "fraction"] < 1) {
-            switch (trace[# "surfacetype"]) {
+          if(trace[#"fraction"] < 1) {
+            switch (trace[#"surfacetype"]) {
               case # "water":
               case # "watershallow":
                 var_95341914 = (1, 0, 0);
@@ -982,7 +982,7 @@ debug_loop() {
             }
           }
 
-          sphere(trace[# "position"], 10 * var_36b41a8, var_95341914);
+          sphere(trace[#"position"], 10 * var_36b41a8, var_95341914);
 
           if(isarray(level.var_47947565)) {
             foreach(center in level.var_47947565) {
@@ -1124,7 +1124,7 @@ draw_circle(circle, index, var_36b41a8, color, groundtrace) {
 
   if(groundtrace) {
     trace = groundtrace(origin + (0, 0, 10000), origin + (0, 0, -10000), 0, undefined);
-    origin = trace[# "position"];
+    origin = trace[#"position"];
   }
 
   printoffset = (0, 0, -15 * var_36b41a8);

@@ -73,21 +73,21 @@ spawner() {
 }
 
 precache() {
-  character\character_opf_militia_assault_aa_blk::precache();
-  character\character_opf_militia_assault_aa_wht::precache();
-  character\character_opf_militia_assault_ab_blk::precache();
-  character\character_opf_militia_assault_ac_blk::precache();
-  character\character_opf_militia_lmg_aa_blk::precache();
-  character\character_opf_militia_lmg_ab_blk::precache();
-  character\character_opf_militia_lmg_ac_blk::precache();
-  character\character_opf_militia_smg_aa_blk::precache();
-  character\character_opf_militia_smg_aa_wht::precache();
-  character\character_opf_militia_smg_ab_blk::precache();
-  character\character_opf_militia_smg_ac_blk::precache();
+    character\character_opf_militia_assault_aa_blk::precache();
+    character\character_opf_militia_assault_aa_wht::precache();
+    character\character_opf_militia_assault_ab_blk::precache();
+    character\character_opf_militia_assault_ac_blk::precache();
+    character\character_opf_militia_lmg_aa_blk::precache();
+    character\character_opf_militia_lmg_ab_blk::precache();
+    character\character_opf_militia_lmg_ac_blk::precache();
+    character\character_opf_militia_smg_aa_blk::precache();
+    character\character_opf_militia_smg_aa_wht::precache();
+    character\character_opf_militia_smg_ab_blk::precache();
+    character\character_opf_militia_smg_ac_blk::precache();
 
-  precacheItem("rpd_acog");
-  precacheItem("beretta");
-  precacheItem("fraggrenade");
+    precacheItem("rpd_acog");
+    precacheItem("beretta");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_rambo::main();
-  //---------------- }
+    //---------------- maps\_rambo::main();
+    //---------------- }

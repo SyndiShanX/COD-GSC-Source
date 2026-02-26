@@ -28,39 +28,39 @@ function function_3531b9ba(scorestreak) {
     level.var_1953a530 = [];
 
     if(sessionmodeiszombiesgame()) {
-      level.var_1953a530[# "chopper_gunner"] = # "item_survival_scorestreak_chopper_gunner";
-      level.var_1953a530[# "hero_annihilator"] = # "item_survival_scorestreak_hand_cannon";
-      level.var_1953a530[# "hero_flamethrower"] = # "item_survival_scorestreak_flamethrower";
-      level.var_1953a530[# "hero_pineapplegun"] = # "item_survival_scorestreak_pineapple_gun";
-      level.var_1953a530[# "hash_183ddeea72e71f27"] = # "item_survival_scorestreak_napalm_strike";
-      level.var_1953a530[# "remote_missile_zm"] = # "item_survival_scorestreak_remote_missile";
-      level.var_1953a530[# "sig_bow_flame"] = # "item_survival_scorestreak_bow";
-      level.var_1953a530[# "sig_lmg"] = # "item_survival_scorestreak_deathmachine";
-      level.var_1953a530[# "ultimate_turret"] = # "item_survival_scorestreak_ultimate_turret";
-      level.var_1953a530[# "hash_3f33adcbed7f6c86"] = # "item_survival_scorestreak_artillery_strike";
-      level.var_1953a530[# "recon_car"] = # "item_survival_scorestreak_arcxd";
+      level.var_1953a530[#"chopper_gunner"] = # "item_survival_scorestreak_chopper_gunner";
+      level.var_1953a530[#"hero_annihilator"] = # "item_survival_scorestreak_hand_cannon";
+      level.var_1953a530[#"hero_flamethrower"] = # "item_survival_scorestreak_flamethrower";
+      level.var_1953a530[#"hero_pineapplegun"] = # "item_survival_scorestreak_pineapple_gun";
+      level.var_1953a530[#"hash_183ddeea72e71f27"] = # "item_survival_scorestreak_napalm_strike";
+      level.var_1953a530[#"remote_missile_zm"] = # "item_survival_scorestreak_remote_missile";
+      level.var_1953a530[#"sig_bow_flame"] = # "item_survival_scorestreak_bow";
+      level.var_1953a530[#"sig_lmg"] = # "item_survival_scorestreak_deathmachine";
+      level.var_1953a530[#"ultimate_turret"] = # "item_survival_scorestreak_ultimate_turret";
+      level.var_1953a530[#"hash_3f33adcbed7f6c86"] = # "item_survival_scorestreak_artillery_strike";
+      level.var_1953a530[#"recon_car"] = # "item_survival_scorestreak_arcxd";
     } else {
-      level.var_1953a530[# "inventory_ac130"] = # "hash_59372818d5a4b00";
-      level.var_1953a530[# "inventory_chopper_gunner"] = # "hash_6fa05dcae5ac1c4b";
-      level.var_1953a530[# "inventory_counteruav"] = # "hash_6eb09ea5da35e18f";
-      level.var_1953a530[# "inventory_helicopter_comlink"] = # "hash_11b95062385cd071";
-      level.var_1953a530[# "inventory_helicopter_guard"] = # "hash_52ee32e14c642494";
-      level.var_1953a530[# "inventory_hero_annihilator"] = # "hash_48c54ff5d128d347";
-      level.var_1953a530[# "inventory_hero_flamethrower"] = # "hash_5987d17c5829e656";
-      level.var_1953a530[# "inventory_hero_pineapplegun"] = # "hash_78406ffa639f4bf";
-      level.var_1953a530[# "inventory_hoverjet"] = # "hash_24f5473ce475912e";
-      level.var_1953a530[# "hash_49d514608adc6a24"] = # "hash_569b6056354984ee";
-      level.var_1953a530[# "inventory_napalm_strike"] = # "hash_bedd703cad46c40";
-      level.var_1953a530[# "inventory_planemortar"] = # "hash_6a7de03254c6a4d5";
-      level.var_1953a530[# "inventory_recon_car"] = # "hash_4980f99d633760cf";
-      level.var_1953a530[# "inventory_recon_plane"] = # "hash_348085cf61f674ad";
-      level.var_1953a530[# "inventory_remote_missile"] = # "hash_6739b1e55d16500";
-      level.var_1953a530[# "inventory_sig_bow_flame"] = # "hash_257e121804c12624";
-      level.var_1953a530[# "inventory_sig_lmg"] = # "hash_3cef4b4ca5fd8984";
-      level.var_1953a530[# "inventory_straferun"] = # "hash_2640bc24c6eb39bd";
-      level.var_1953a530[# "inventory_supply_drop"] = # "hash_e22ed3950927a02";
-      level.var_1953a530[# "inventory_uav"] = # "hash_654445f6cc7a7e1c";
-      level.var_1953a530[# "inventory_ultimate_turret"] = # "hash_5f50a43f7034eefa";
+      level.var_1953a530[#"inventory_ac130"] = # "hash_59372818d5a4b00";
+      level.var_1953a530[#"inventory_chopper_gunner"] = # "hash_6fa05dcae5ac1c4b";
+      level.var_1953a530[#"inventory_counteruav"] = # "hash_6eb09ea5da35e18f";
+      level.var_1953a530[#"inventory_helicopter_comlink"] = # "hash_11b95062385cd071";
+      level.var_1953a530[#"inventory_helicopter_guard"] = # "hash_52ee32e14c642494";
+      level.var_1953a530[#"inventory_hero_annihilator"] = # "hash_48c54ff5d128d347";
+      level.var_1953a530[#"inventory_hero_flamethrower"] = # "hash_5987d17c5829e656";
+      level.var_1953a530[#"inventory_hero_pineapplegun"] = # "hash_78406ffa639f4bf";
+      level.var_1953a530[#"inventory_hoverjet"] = # "hash_24f5473ce475912e";
+      level.var_1953a530[#"hash_49d514608adc6a24"] = # "hash_569b6056354984ee";
+      level.var_1953a530[#"inventory_napalm_strike"] = # "hash_bedd703cad46c40";
+      level.var_1953a530[#"inventory_planemortar"] = # "hash_6a7de03254c6a4d5";
+      level.var_1953a530[#"inventory_recon_car"] = # "hash_4980f99d633760cf";
+      level.var_1953a530[#"inventory_recon_plane"] = # "hash_348085cf61f674ad";
+      level.var_1953a530[#"inventory_remote_missile"] = # "hash_6739b1e55d16500";
+      level.var_1953a530[#"inventory_sig_bow_flame"] = # "hash_257e121804c12624";
+      level.var_1953a530[#"inventory_sig_lmg"] = # "hash_3cef4b4ca5fd8984";
+      level.var_1953a530[#"inventory_straferun"] = # "hash_2640bc24c6eb39bd";
+      level.var_1953a530[#"inventory_supply_drop"] = # "hash_e22ed3950927a02";
+      level.var_1953a530[#"inventory_uav"] = # "hash_654445f6cc7a7e1c";
+      level.var_1953a530[#"inventory_ultimate_turret"] = # "hash_5f50a43f7034eefa";
     }
   }
 
@@ -71,134 +71,134 @@ function function_6a0ee21a(attachmentname) {
   if(!isDefined(level.var_4d26e905)) {
     if(sessionmodeiszombiesgame()) {
       level.var_4d26e905 = [];
-      level.var_4d26e905[# "acog"] = # "acog_t9_item_sr";
-      level.var_4d26e905[# "break"] = # "hash_52158dff02a348c";
-      level.var_4d26e905[# "break2"] = # "hash_628946b7b73932f2";
-      level.var_4d26e905[# "barrel"] = # "barrel_t9_item_sr";
-      level.var_4d26e905[# "barrel2"] = # "barrel2_t9_item_sr";
-      level.var_4d26e905[# "compensator"] = # "compensator_t9_item_sr";
-      level.var_4d26e905[# "compensator2"] = # "compensator2_t9_item_sr";
-      level.var_4d26e905[# "extclip"] = # "extclip_t9_item_sr";
-      level.var_4d26e905[# "extclip2"] = # "extclip2_t9_item_sr";
-      level.var_4d26e905[# "fastreload"] = # "fastreload_t9_item_sr";
-      level.var_4d26e905[# "fastreload2"] = # "fastreload2_t9_item_sr";
-      level.var_4d26e905[# "grip"] = # "grip_t9_item_sr";
-      level.var_4d26e905[# "grip2"] = # "grip2_t9_item_sr";
-      level.var_4d26e905[# "handle"] = # "handle_t9_item_sr";
-      level.var_4d26e905[# "handle2"] = # "handle2_t9_item_sr";
-      level.var_4d26e905[# "heavy"] = # "heavy_t9_item_sr";
-      level.var_4d26e905[# "heavy2"] = # "heavy2_t9_item_sr";
-      level.var_4d26e905[# "light"] = # "light_t9_item_sr";
-      level.var_4d26e905[# "light2"] = # "light2_t9_item_sr";
-      level.var_4d26e905[# "mixclip"] = # "mixclip_t9_item_sr";
-      level.var_4d26e905[# "mixclip2"] = # "mixclip2_t9_item_sr";
-      level.var_4d26e905[# "mixbarrel"] = # "mixbarrel_t9_item_sr";
-      level.var_4d26e905[# "mixbarrel2"] = # "mixbarrel2_t9_item_sr";
-      level.var_4d26e905[# "mixbody"] = # "mixbody_t9_item_sr";
-      level.var_4d26e905[# "mixbody2"] = # "mixbody2_t9_item_sr";
-      level.var_4d26e905[# "mixhandle"] = # "mixhandle_t9_item_sr";
-      level.var_4d26e905[# "mixhandle2"] = # "mixhandle2_t9_item_sr";
-      level.var_4d26e905[# "mixmuzzle"] = # "mixmuzzle_t9_item_sr";
-      level.var_4d26e905[# "mixmuzzle2"] = # "mixmuzzle2_t9_item_sr";
-      level.var_4d26e905[# "mixstock"] = # "mixstock_t9_item_sr";
-      level.var_4d26e905[# "mixstock2"] = # "mixstock2_t9_item_sr";
-      level.var_4d26e905[# "mixunder"] = # "mixunder_t9_item_sr";
-      level.var_4d26e905[# "mixunder2"] = # "mixunder2_t9_item_sr";
-      level.var_4d26e905[# "quickdraw"] = # "quickdraw_t9_item_sr";
-      level.var_4d26e905[# "quickdraw2"] = # "quickdraw2_t9_item_sr";
-      level.var_4d26e905[# "reddot"] = # "reddot_t9_item_sr";
-      level.var_4d26e905[# "reflex"] = # "reflex_t9_item_sr";
-      level.var_4d26e905[# "reflex2"] = # "reflex2_t9_item_sr";
-      level.var_4d26e905[# "reflex3"] = # "reflex3_t9_item_sr";
-      level.var_4d26e905[# "reflex4"] = # "reflex4_t9_item_sr";
-      level.var_4d26e905[# "dualoptic"] = # "dualoptic_t9_item_sr";
-      level.var_4d26e905[# "holo"] = # "holo_t9_item_sr";
-      level.var_4d26e905[# "ir"] = # "ir_t9_item_sr";
-      level.var_4d26e905[# "elo"] = # "elo_t9_item_sr";
-      level.var_4d26e905[# "elo2"] = # "elo2_t9_item_sr";
-      level.var_4d26e905[# "elo3"] = # "elo3_t9_item_sr";
-      level.var_4d26e905[# "scope3x"] = # "scope3x_t9_item_sr";
-      level.var_4d26e905[# "scope4x"] = # "scope4x_t9_item_sr";
-      level.var_4d26e905[# "smoothzoom"] = # "smoothzoom_t9_item_sr";
-      level.var_4d26e905[# "smoothzoom2"] = # "smoothzoom2_t9_item_sr";
-      level.var_4d26e905[# "speedgrip"] = # "speedgrip_t9_item_sr";
-      level.var_4d26e905[# "speedgrip2"] = # "speedgrip2_t9_item_sr";
-      level.var_4d26e905[# "sprintout"] = # "sprintout_t9_item_sr";
-      level.var_4d26e905[# "sprintout2"] = # "sprintout2_t9_item_sr";
-      level.var_4d26e905[# "stalker"] = # "stalker_t9_item_sr";
-      level.var_4d26e905[# "stalker2"] = # "stalker2_t9_item_sr";
-      level.var_4d26e905[# "steadyaim"] = # "steadyaim_t9_item_sr";
-      level.var_4d26e905[# "steadyaim2"] = # "steadyaim2_t9_item_sr";
-      level.var_4d26e905[# "suppressed"] = # "suppressed_t9_item_sr";
-      level.var_4d26e905[# "suppressed2"] = # "suppressed2_t9_item_sr";
-      level.var_4d26e905[# "swayreduc"] = # "hash_57d83338a5296980";
-      level.var_4d26e905[# "hash_cfd82035c8077ea"] = # "hash_66b9864ca183b4ae";
-      level.var_4d26e905[# "tactical"] = # "tactical_t9_item_sr";
+      level.var_4d26e905[#"acog"] = # "acog_t9_item_sr";
+      level.var_4d26e905[#"break"] = # "hash_52158dff02a348c";
+      level.var_4d26e905[#"break2"] = # "hash_628946b7b73932f2";
+      level.var_4d26e905[#"barrel"] = # "barrel_t9_item_sr";
+      level.var_4d26e905[#"barrel2"] = # "barrel2_t9_item_sr";
+      level.var_4d26e905[#"compensator"] = # "compensator_t9_item_sr";
+      level.var_4d26e905[#"compensator2"] = # "compensator2_t9_item_sr";
+      level.var_4d26e905[#"extclip"] = # "extclip_t9_item_sr";
+      level.var_4d26e905[#"extclip2"] = # "extclip2_t9_item_sr";
+      level.var_4d26e905[#"fastreload"] = # "fastreload_t9_item_sr";
+      level.var_4d26e905[#"fastreload2"] = # "fastreload2_t9_item_sr";
+      level.var_4d26e905[#"grip"] = # "grip_t9_item_sr";
+      level.var_4d26e905[#"grip2"] = # "grip2_t9_item_sr";
+      level.var_4d26e905[#"handle"] = # "handle_t9_item_sr";
+      level.var_4d26e905[#"handle2"] = # "handle2_t9_item_sr";
+      level.var_4d26e905[#"heavy"] = # "heavy_t9_item_sr";
+      level.var_4d26e905[#"heavy2"] = # "heavy2_t9_item_sr";
+      level.var_4d26e905[#"light"] = # "light_t9_item_sr";
+      level.var_4d26e905[#"light2"] = # "light2_t9_item_sr";
+      level.var_4d26e905[#"mixclip"] = # "mixclip_t9_item_sr";
+      level.var_4d26e905[#"mixclip2"] = # "mixclip2_t9_item_sr";
+      level.var_4d26e905[#"mixbarrel"] = # "mixbarrel_t9_item_sr";
+      level.var_4d26e905[#"mixbarrel2"] = # "mixbarrel2_t9_item_sr";
+      level.var_4d26e905[#"mixbody"] = # "mixbody_t9_item_sr";
+      level.var_4d26e905[#"mixbody2"] = # "mixbody2_t9_item_sr";
+      level.var_4d26e905[#"mixhandle"] = # "mixhandle_t9_item_sr";
+      level.var_4d26e905[#"mixhandle2"] = # "mixhandle2_t9_item_sr";
+      level.var_4d26e905[#"mixmuzzle"] = # "mixmuzzle_t9_item_sr";
+      level.var_4d26e905[#"mixmuzzle2"] = # "mixmuzzle2_t9_item_sr";
+      level.var_4d26e905[#"mixstock"] = # "mixstock_t9_item_sr";
+      level.var_4d26e905[#"mixstock2"] = # "mixstock2_t9_item_sr";
+      level.var_4d26e905[#"mixunder"] = # "mixunder_t9_item_sr";
+      level.var_4d26e905[#"mixunder2"] = # "mixunder2_t9_item_sr";
+      level.var_4d26e905[#"quickdraw"] = # "quickdraw_t9_item_sr";
+      level.var_4d26e905[#"quickdraw2"] = # "quickdraw2_t9_item_sr";
+      level.var_4d26e905[#"reddot"] = # "reddot_t9_item_sr";
+      level.var_4d26e905[#"reflex"] = # "reflex_t9_item_sr";
+      level.var_4d26e905[#"reflex2"] = # "reflex2_t9_item_sr";
+      level.var_4d26e905[#"reflex3"] = # "reflex3_t9_item_sr";
+      level.var_4d26e905[#"reflex4"] = # "reflex4_t9_item_sr";
+      level.var_4d26e905[#"dualoptic"] = # "dualoptic_t9_item_sr";
+      level.var_4d26e905[#"holo"] = # "holo_t9_item_sr";
+      level.var_4d26e905[#"ir"] = # "ir_t9_item_sr";
+      level.var_4d26e905[#"elo"] = # "elo_t9_item_sr";
+      level.var_4d26e905[#"elo2"] = # "elo2_t9_item_sr";
+      level.var_4d26e905[#"elo3"] = # "elo3_t9_item_sr";
+      level.var_4d26e905[#"scope3x"] = # "scope3x_t9_item_sr";
+      level.var_4d26e905[#"scope4x"] = # "scope4x_t9_item_sr";
+      level.var_4d26e905[#"smoothzoom"] = # "smoothzoom_t9_item_sr";
+      level.var_4d26e905[#"smoothzoom2"] = # "smoothzoom2_t9_item_sr";
+      level.var_4d26e905[#"speedgrip"] = # "speedgrip_t9_item_sr";
+      level.var_4d26e905[#"speedgrip2"] = # "speedgrip2_t9_item_sr";
+      level.var_4d26e905[#"sprintout"] = # "sprintout_t9_item_sr";
+      level.var_4d26e905[#"sprintout2"] = # "sprintout2_t9_item_sr";
+      level.var_4d26e905[#"stalker"] = # "stalker_t9_item_sr";
+      level.var_4d26e905[#"stalker2"] = # "stalker2_t9_item_sr";
+      level.var_4d26e905[#"steadyaim"] = # "steadyaim_t9_item_sr";
+      level.var_4d26e905[#"steadyaim2"] = # "steadyaim2_t9_item_sr";
+      level.var_4d26e905[#"suppressed"] = # "suppressed_t9_item_sr";
+      level.var_4d26e905[#"suppressed2"] = # "suppressed2_t9_item_sr";
+      level.var_4d26e905[#"swayreduc"] = # "hash_57d83338a5296980";
+      level.var_4d26e905[#"hash_cfd82035c8077ea"] = # "hash_66b9864ca183b4ae";
+      level.var_4d26e905[#"tactical"] = # "tactical_t9_item_sr";
     } else {
       level.var_4d26e905 = [];
-      level.var_4d26e905[# "acog"] = # "hash_74efc2f0523a1b43";
-      level.var_4d26e905[# "break"] = # "hash_62fe2eebac0f72a4";
-      level.var_4d26e905[# "break2"] = # "hash_2cdf0a02b981e7ea";
-      level.var_4d26e905[# "barrel"] = # "hash_3d79e8fa4d04bbe9";
-      level.var_4d26e905[# "barrel2"] = # "hash_1bdc6102e1922ee1";
-      level.var_4d26e905[# "compensator"] = # "hash_7e68f63f8995b1e6";
-      level.var_4d26e905[# "compensator2"] = # "hash_63a257f430cb24e4";
-      level.var_4d26e905[# "extclip"] = # "hash_2551991b0ce4278e";
-      level.var_4d26e905[# "extclip2"] = # "hash_43a7c00ebad019fc";
-      level.var_4d26e905[# "fastreload"] = # "hash_13e7b5e35b27fda2";
-      level.var_4d26e905[# "fastreload2"] = # "hash_2a74aa6c21425de8";
-      level.var_4d26e905[# "grip"] = # "hash_780b6e02fd11b515";
-      level.var_4d26e905[# "grip2"] = # "hash_1e87409dae378d95";
-      level.var_4d26e905[# "handle"] = # "hash_72c4fa7a2b91b0b3";
-      level.var_4d26e905[# "handle2"] = # "hash_5e8e59ff7a020c33";
-      level.var_4d26e905[# "heavy"] = # "heavy_t9_item";
-      level.var_4d26e905[# "heavy2"] = # "hash_7a28e0acec4d71b2";
-      level.var_4d26e905[# "light"] = # "light_t9_item";
-      level.var_4d26e905[# "light2"] = # "hash_a89044fba7b2c27";
-      level.var_4d26e905[# "mixclip"] = # "hash_8337602f5a165af";
-      level.var_4d26e905[# "mixclip2"] = # "hash_7ec532c309e0eef7";
-      level.var_4d26e905[# "mixbarrel"] = # "hash_693720c039d99805";
-      level.var_4d26e905[# "mixbarrel2"] = # "hash_2beafef30af1e8c5";
-      level.var_4d26e905[# "mixbody"] = # "hash_6d0a8b21a8b8b789";
-      level.var_4d26e905[# "mixbody2"] = # "hash_63dd998473d02f01";
-      level.var_4d26e905[# "mixhandle"] = # "hash_13623c18b49d567f";
-      level.var_4d26e905[# "mixhandle2"] = # "hash_4bfc4ce4d3e99f07";
-      level.var_4d26e905[# "mixmuzzle"] = # "hash_438ee0a9ed0f3b64";
-      level.var_4d26e905[# "mixmuzzle2"] = # "hash_6cc986f0af4b142a";
-      level.var_4d26e905[# "mixstock"] = # "hash_311a6366c098f011";
-      level.var_4d26e905[# "mixstock2"] = # "hash_6db3b0a25b06fbb9";
-      level.var_4d26e905[# "mixunder"] = # "hash_64d48522d34c4f99";
-      level.var_4d26e905[# "mixunder2"] = # "hash_26a11c1d57bbb4d1";
-      level.var_4d26e905[# "quickdraw"] = # "hash_2b8002d0d1dd882a";
-      level.var_4d26e905[# "quickdraw2"] = # "hash_776efcf8d78c80";
-      level.var_4d26e905[# "reddot"] = # "hash_2ff1e718a658a883";
-      level.var_4d26e905[# "reflex"] = # "hash_28efceaacc63752f";
-      level.var_4d26e905[# "reflex2"] = # "hash_60df57f4f5a14577";
-      level.var_4d26e905[# "reflex3"] = # "hash_53ac88663aebc40";
-      level.var_4d26e905[# "reflex4"] = # "hash_7935909de8935589";
-      level.var_4d26e905[# "dualoptic"] = # "hash_66f7a79dbd87eec0";
-      level.var_4d26e905[# "holo"] = # "hash_6edd00dc752c24e1";
-      level.var_4d26e905[# "ir"] = # "hash_13101dfb0ca2d5fe";
-      level.var_4d26e905[# "elo"] = # "hash_139fe0e3be289c29";
-      level.var_4d26e905[# "elo2"] = # "hash_409656a5454ca9a1";
-      level.var_4d26e905[# "elo3"] = # "hash_1d1e0f96c57550a2";
-      level.var_4d26e905[# "scope3x"] = # "hash_6e6118f39468cb2c";
-      level.var_4d26e905[# "scope4x"] = # "hash_af064392d860f1f";
-      level.var_4d26e905[# "smoothzoom"] = # "hash_4bc121b59bfe4a2c";
-      level.var_4d26e905[# "smoothzoom2"] = # "hash_10ade3abf18cb742";
-      level.var_4d26e905[# "speedgrip"] = # "hash_114f1df6ad46f598";
-      level.var_4d26e905[# "speedgrip2"] = # "hash_3c63a8769b611006";
-      level.var_4d26e905[# "sprintout"] = # "hash_21f2c71ee52d3d5f";
-      level.var_4d26e905[# "sprintout2"] = # "hash_fddd3e0764a6167";
-      level.var_4d26e905[# "stalker"] = # "hash_12aaf0a984a5418b";
-      level.var_4d26e905[# "stalker2"] = # "hash_767e2b6d5150883b";
-      level.var_4d26e905[# "steadyaim"] = # "hash_1d25af262e371b3c";
-      level.var_4d26e905[# "steadyaim2"] = # "hash_100ffabc91f834d2";
-      level.var_4d26e905[# "suppressed"] = # "hash_bec81919557da77";
-      level.var_4d26e905[# "suppressed2"] = # "hash_7823002429b5d54f";
-      level.var_4d26e905[# "swayreduc"] = # "hash_6cd8671e4bd51c28";
-      level.var_4d26e905[# "hash_cfd82035c8077ea"] = # "hash_59f84dd254fda616";
-      level.var_4d26e905[# "tactical"] = # "hash_3bf739cbe86888f0";
+      level.var_4d26e905[#"acog"] = # "hash_74efc2f0523a1b43";
+      level.var_4d26e905[#"break"] = # "hash_62fe2eebac0f72a4";
+      level.var_4d26e905[#"break2"] = # "hash_2cdf0a02b981e7ea";
+      level.var_4d26e905[#"barrel"] = # "hash_3d79e8fa4d04bbe9";
+      level.var_4d26e905[#"barrel2"] = # "hash_1bdc6102e1922ee1";
+      level.var_4d26e905[#"compensator"] = # "hash_7e68f63f8995b1e6";
+      level.var_4d26e905[#"compensator2"] = # "hash_63a257f430cb24e4";
+      level.var_4d26e905[#"extclip"] = # "hash_2551991b0ce4278e";
+      level.var_4d26e905[#"extclip2"] = # "hash_43a7c00ebad019fc";
+      level.var_4d26e905[#"fastreload"] = # "hash_13e7b5e35b27fda2";
+      level.var_4d26e905[#"fastreload2"] = # "hash_2a74aa6c21425de8";
+      level.var_4d26e905[#"grip"] = # "hash_780b6e02fd11b515";
+      level.var_4d26e905[#"grip2"] = # "hash_1e87409dae378d95";
+      level.var_4d26e905[#"handle"] = # "hash_72c4fa7a2b91b0b3";
+      level.var_4d26e905[#"handle2"] = # "hash_5e8e59ff7a020c33";
+      level.var_4d26e905[#"heavy"] = # "heavy_t9_item";
+      level.var_4d26e905[#"heavy2"] = # "hash_7a28e0acec4d71b2";
+      level.var_4d26e905[#"light"] = # "light_t9_item";
+      level.var_4d26e905[#"light2"] = # "hash_a89044fba7b2c27";
+      level.var_4d26e905[#"mixclip"] = # "hash_8337602f5a165af";
+      level.var_4d26e905[#"mixclip2"] = # "hash_7ec532c309e0eef7";
+      level.var_4d26e905[#"mixbarrel"] = # "hash_693720c039d99805";
+      level.var_4d26e905[#"mixbarrel2"] = # "hash_2beafef30af1e8c5";
+      level.var_4d26e905[#"mixbody"] = # "hash_6d0a8b21a8b8b789";
+      level.var_4d26e905[#"mixbody2"] = # "hash_63dd998473d02f01";
+      level.var_4d26e905[#"mixhandle"] = # "hash_13623c18b49d567f";
+      level.var_4d26e905[#"mixhandle2"] = # "hash_4bfc4ce4d3e99f07";
+      level.var_4d26e905[#"mixmuzzle"] = # "hash_438ee0a9ed0f3b64";
+      level.var_4d26e905[#"mixmuzzle2"] = # "hash_6cc986f0af4b142a";
+      level.var_4d26e905[#"mixstock"] = # "hash_311a6366c098f011";
+      level.var_4d26e905[#"mixstock2"] = # "hash_6db3b0a25b06fbb9";
+      level.var_4d26e905[#"mixunder"] = # "hash_64d48522d34c4f99";
+      level.var_4d26e905[#"mixunder2"] = # "hash_26a11c1d57bbb4d1";
+      level.var_4d26e905[#"quickdraw"] = # "hash_2b8002d0d1dd882a";
+      level.var_4d26e905[#"quickdraw2"] = # "hash_776efcf8d78c80";
+      level.var_4d26e905[#"reddot"] = # "hash_2ff1e718a658a883";
+      level.var_4d26e905[#"reflex"] = # "hash_28efceaacc63752f";
+      level.var_4d26e905[#"reflex2"] = # "hash_60df57f4f5a14577";
+      level.var_4d26e905[#"reflex3"] = # "hash_53ac88663aebc40";
+      level.var_4d26e905[#"reflex4"] = # "hash_7935909de8935589";
+      level.var_4d26e905[#"dualoptic"] = # "hash_66f7a79dbd87eec0";
+      level.var_4d26e905[#"holo"] = # "hash_6edd00dc752c24e1";
+      level.var_4d26e905[#"ir"] = # "hash_13101dfb0ca2d5fe";
+      level.var_4d26e905[#"elo"] = # "hash_139fe0e3be289c29";
+      level.var_4d26e905[#"elo2"] = # "hash_409656a5454ca9a1";
+      level.var_4d26e905[#"elo3"] = # "hash_1d1e0f96c57550a2";
+      level.var_4d26e905[#"scope3x"] = # "hash_6e6118f39468cb2c";
+      level.var_4d26e905[#"scope4x"] = # "hash_af064392d860f1f";
+      level.var_4d26e905[#"smoothzoom"] = # "hash_4bc121b59bfe4a2c";
+      level.var_4d26e905[#"smoothzoom2"] = # "hash_10ade3abf18cb742";
+      level.var_4d26e905[#"speedgrip"] = # "hash_114f1df6ad46f598";
+      level.var_4d26e905[#"speedgrip2"] = # "hash_3c63a8769b611006";
+      level.var_4d26e905[#"sprintout"] = # "hash_21f2c71ee52d3d5f";
+      level.var_4d26e905[#"sprintout2"] = # "hash_fddd3e0764a6167";
+      level.var_4d26e905[#"stalker"] = # "hash_12aaf0a984a5418b";
+      level.var_4d26e905[#"stalker2"] = # "hash_767e2b6d5150883b";
+      level.var_4d26e905[#"steadyaim"] = # "hash_1d25af262e371b3c";
+      level.var_4d26e905[#"steadyaim2"] = # "hash_100ffabc91f834d2";
+      level.var_4d26e905[#"suppressed"] = # "hash_bec81919557da77";
+      level.var_4d26e905[#"suppressed2"] = # "hash_7823002429b5d54f";
+      level.var_4d26e905[#"swayreduc"] = # "hash_6cd8671e4bd51c28";
+      level.var_4d26e905[#"hash_cfd82035c8077ea"] = # "hash_59f84dd254fda616";
+      level.var_4d26e905[#"tactical"] = # "hash_3bf739cbe86888f0";
     }
   }
 
@@ -213,16 +213,16 @@ function function_5340375f(equipment) {
     if(sessionmodeiszombiesgame()) {
       return;
     } else {
-      level.var_9b0e8004[# "frag_grenade"] = # "frag_t9_item";
-      level.var_9b0e8004[# "hatchet"] = # "hatchet_t9_item";
-      level.var_9b0e8004[# "eq_molotov"] = # "molotov_t9_item";
-      level.var_9b0e8004[# "satchel_charge"] = # "satchel_charge_t9_item";
-      level.var_9b0e8004[# "eq_sticky_grenade"] = # "semtex_t9_item";
-      level.var_9b0e8004[# "eq_slow_grenade"] = # "concussion_t9_item";
-      level.var_9b0e8004[# "nightingale"] = # "hash_760687d5f47b6117";
-      level.var_9b0e8004[# "eq_flash_grenade"] = # "hash_676aa70930960427";
-      level.var_9b0e8004[# "willy_pete"] = # "smoke_t9_item";
-      level.var_9b0e8004[# "eq_stimshot"] = # "hash_51f70aff8a2ad330";
+      level.var_9b0e8004[#"frag_grenade"] = # "frag_t9_item";
+      level.var_9b0e8004[#"hatchet"] = # "hatchet_t9_item";
+      level.var_9b0e8004[#"eq_molotov"] = # "molotov_t9_item";
+      level.var_9b0e8004[#"satchel_charge"] = # "satchel_charge_t9_item";
+      level.var_9b0e8004[#"eq_sticky_grenade"] = # "semtex_t9_item";
+      level.var_9b0e8004[#"eq_slow_grenade"] = # "concussion_t9_item";
+      level.var_9b0e8004[#"nightingale"] = # "hash_760687d5f47b6117";
+      level.var_9b0e8004[#"eq_flash_grenade"] = # "hash_676aa70930960427";
+      level.var_9b0e8004[#"willy_pete"] = # "smoke_t9_item";
+      level.var_9b0e8004[#"eq_stimshot"] = # "hash_51f70aff8a2ad330";
     }
   }
 
@@ -236,14 +236,14 @@ function function_58020907(field_upgrade) {
     if(sessionmodeiszombiesgame()) {
       return;
     } else {
-      level.var_58f0d63e[# "gadget_jammer"] = # "hash_3f154f45479130ed";
-      level.var_58f0d63e[# "land_mine"] = # "hash_2c9b75b17410f2de";
-      level.var_58f0d63e[# "listening_device"] = # "hash_6364b7050271a94d";
-      level.var_58f0d63e[# "missile_turret"] = # "hash_2344c458b3acacf2";
-      level.var_58f0d63e[# "ability_smart_cover"] = # "hash_3744693ba7d32972";
-      level.var_58f0d63e[# "gadget_supplypod"] = # "hash_6f8ef4a1354850c9";
-      level.var_58f0d63e[# "tear_gas"] = # "hash_5f67f7b32b01ae53";
-      level.var_58f0d63e[# "trophy_system"] = # "hash_7c7fd45dced7f579";
+      level.var_58f0d63e[#"gadget_jammer"] = # "hash_3f154f45479130ed";
+      level.var_58f0d63e[#"land_mine"] = # "hash_2c9b75b17410f2de";
+      level.var_58f0d63e[#"listening_device"] = # "hash_6364b7050271a94d";
+      level.var_58f0d63e[#"missile_turret"] = # "hash_2344c458b3acacf2";
+      level.var_58f0d63e[#"ability_smart_cover"] = # "hash_3744693ba7d32972";
+      level.var_58f0d63e[#"gadget_supplypod"] = # "hash_6f8ef4a1354850c9";
+      level.var_58f0d63e[#"tear_gas"] = # "hash_5f67f7b32b01ae53";
+      level.var_58f0d63e[#"trophy_system"] = # "hash_7c7fd45dced7f579";
     }
   }
 
@@ -257,44 +257,44 @@ function function_86cb6f2(weapon) {
     if(sessionmodeiszombiesgame()) {
       return;
     } else {
-      level.var_d5713443[# "ar_accurate_t9"] = # "ar_accurate_t9_item";
-      level.var_d5713443[# "ar_damage_t9"] = # "ar_damage_t9_item";
-      level.var_d5713443[# "ar_fastfire_t9"] = # "ar_fastfire_t9_item";
-      level.var_d5713443[# "ar_fasthandling_t9"] = # "hash_653191badff9fdec";
-      level.var_d5713443[# "ar_mobility_t9"] = # "ar_mobility_t9_item";
-      level.var_d5713443[# "ar_slowfire_t9"] = # "hash_3c6d3af46611d446";
-      level.var_d5713443[# "ar_slowhandling_t9"] = # "hash_120ef29b22cea56b";
-      level.var_d5713443[# "ar_standard_t9"] = # "ar_standard_t9_item";
-      level.var_d5713443[# "smg_accurate_t9"] = # "hash_56894805a33c6d61";
-      level.var_d5713443[# "smg_burst_t9"] = # "smg_burst_t9_item";
-      level.var_d5713443[# "smg_capacity_t9"] = # "smg_capacity_t9_item";
-      level.var_d5713443[# "smg_cqb_t9"] = # "hash_562223d745c92f33";
-      level.var_d5713443[# "smg_fastfire_t9"] = # "hash_34b7dda2a2e4baa9";
-      level.var_d5713443[# "smg_handling_t9"] = # "smg_handling_t9_item";
-      level.var_d5713443[# "smg_heavy_t9"] = # "smg_heavy_t9_item";
-      level.var_d5713443[# "smg_spray_t9"] = # "hash_196d7e03e335500";
-      level.var_d5713443[# "smg_standard_t9"] = # "smg_standard_t9_item";
-      level.var_d5713443[# "tr_damagesemi_t9"] = # "tr_damagesemi_t9_item";
-      level.var_d5713443[# "tr_fastburst_t9"] = # "hash_6696bccc81700814";
-      level.var_d5713443[# "tr_longburst_t9"] = # "tr_longburst_t9_item";
-      level.var_d5713443[# "tr_powerburst_t9"] = # "tr_powerburst_t9_item";
-      level.var_d5713443[# "tr_precisionsemi_t9"] = # "tr_precisionsemi_t9_item";
-      level.var_d5713443[# "sniper_accurate_t9"] = # "hash_5ce806463c074d59";
-      level.var_d5713443[# "sniper_cannon_t9"] = # "hash_492a74e6df52041a";
-      level.var_d5713443[# "sniper_powersemi_t9"] = # "sniper_powersemi_t9_item";
-      level.var_d5713443[# "sniper_quickscope_t9"] = # "sniper_quickscope_t9_item";
-      level.var_d5713443[# "sniper_standard_t9"] = # "sniper_standard_t9_item";
-      level.var_d5713443[# "lmg_accurate_t9"] = # "lmg_accurate_t9_item";
-      level.var_d5713443[# "lmg_fastfire_t9"] = # "hash_4cb7e9689ec1903e";
-      level.var_d5713443[# "lmg_light_t9"] = # "lmg_light_t9_item";
-      level.var_d5713443[# "lmg_slowfire_t9"] = # "lmg_slowfire_t9_item";
-      level.var_d5713443[# "pistol_burst_t9"] = # "pistol_burst_t9_item";
-      level.var_d5713443[# "pistol_fullauto_t9"] = # "hash_391f9a2344435631";
-      level.var_d5713443[# "pistol_revolver_t9"] = # "pistol_revolver_t9_item";
-      level.var_d5713443[# "pistol_semiauto_t9"] = # "pistol_semiauto_t9_item";
-      level.var_d5713443[# "shotgun_fullauto_t9"] = # "shotgun_fullauto_t9_item";
-      level.var_d5713443[# "shotgun_pump_t9"] = # "shotgun_pump_t9_item";
-      level.var_d5713443[# "shotgun_semiauto_t9"] = # "shotgun_semiauto_t9_item";
+      level.var_d5713443[#"ar_accurate_t9"] = # "ar_accurate_t9_item";
+      level.var_d5713443[#"ar_damage_t9"] = # "ar_damage_t9_item";
+      level.var_d5713443[#"ar_fastfire_t9"] = # "ar_fastfire_t9_item";
+      level.var_d5713443[#"ar_fasthandling_t9"] = # "hash_653191badff9fdec";
+      level.var_d5713443[#"ar_mobility_t9"] = # "ar_mobility_t9_item";
+      level.var_d5713443[#"ar_slowfire_t9"] = # "hash_3c6d3af46611d446";
+      level.var_d5713443[#"ar_slowhandling_t9"] = # "hash_120ef29b22cea56b";
+      level.var_d5713443[#"ar_standard_t9"] = # "ar_standard_t9_item";
+      level.var_d5713443[#"smg_accurate_t9"] = # "hash_56894805a33c6d61";
+      level.var_d5713443[#"smg_burst_t9"] = # "smg_burst_t9_item";
+      level.var_d5713443[#"smg_capacity_t9"] = # "smg_capacity_t9_item";
+      level.var_d5713443[#"smg_cqb_t9"] = # "hash_562223d745c92f33";
+      level.var_d5713443[#"smg_fastfire_t9"] = # "hash_34b7dda2a2e4baa9";
+      level.var_d5713443[#"smg_handling_t9"] = # "smg_handling_t9_item";
+      level.var_d5713443[#"smg_heavy_t9"] = # "smg_heavy_t9_item";
+      level.var_d5713443[#"smg_spray_t9"] = # "hash_196d7e03e335500";
+      level.var_d5713443[#"smg_standard_t9"] = # "smg_standard_t9_item";
+      level.var_d5713443[#"tr_damagesemi_t9"] = # "tr_damagesemi_t9_item";
+      level.var_d5713443[#"tr_fastburst_t9"] = # "hash_6696bccc81700814";
+      level.var_d5713443[#"tr_longburst_t9"] = # "tr_longburst_t9_item";
+      level.var_d5713443[#"tr_powerburst_t9"] = # "tr_powerburst_t9_item";
+      level.var_d5713443[#"tr_precisionsemi_t9"] = # "tr_precisionsemi_t9_item";
+      level.var_d5713443[#"sniper_accurate_t9"] = # "hash_5ce806463c074d59";
+      level.var_d5713443[#"sniper_cannon_t9"] = # "hash_492a74e6df52041a";
+      level.var_d5713443[#"sniper_powersemi_t9"] = # "sniper_powersemi_t9_item";
+      level.var_d5713443[#"sniper_quickscope_t9"] = # "sniper_quickscope_t9_item";
+      level.var_d5713443[#"sniper_standard_t9"] = # "sniper_standard_t9_item";
+      level.var_d5713443[#"lmg_accurate_t9"] = # "lmg_accurate_t9_item";
+      level.var_d5713443[#"lmg_fastfire_t9"] = # "hash_4cb7e9689ec1903e";
+      level.var_d5713443[#"lmg_light_t9"] = # "lmg_light_t9_item";
+      level.var_d5713443[#"lmg_slowfire_t9"] = # "lmg_slowfire_t9_item";
+      level.var_d5713443[#"pistol_burst_t9"] = # "pistol_burst_t9_item";
+      level.var_d5713443[#"pistol_fullauto_t9"] = # "hash_391f9a2344435631";
+      level.var_d5713443[#"pistol_revolver_t9"] = # "pistol_revolver_t9_item";
+      level.var_d5713443[#"pistol_semiauto_t9"] = # "pistol_semiauto_t9_item";
+      level.var_d5713443[#"shotgun_fullauto_t9"] = # "shotgun_fullauto_t9_item";
+      level.var_d5713443[#"shotgun_pump_t9"] = # "shotgun_pump_t9_item";
+      level.var_d5713443[#"shotgun_semiauto_t9"] = # "shotgun_semiauto_t9_item";
     }
   }
 
@@ -315,15 +315,15 @@ function function_2eb2c17c(origin, item) {
   offsetposition = item.origin + traceoffset;
   var_b0fbfe59 = bulletTrace(origin, offsetposition, 0, self, 0);
 
-  if(var_b0fbfe59[# "fraction"] < 1 && var_b0fbfe59[# "entity"] !== item) {
+  if(var_b0fbfe59[#"fraction"] < 1 && var_b0fbfe59[#"entity"] !== item) {
     if(var_5d97fed1) {
-      var_acdfe076 = isDefined(var_b0fbfe59[# "dynent"]) && distance2dsquared(var_b0fbfe59[# "dynent"].origin, item.origin) <= sqr(12);
+      var_acdfe076 = isDefined(var_b0fbfe59[#"dynent"]) && distance2dsquared(var_b0fbfe59[#"dynent"].origin, item.origin) <= sqr(12);
 
-      if(var_acdfe076 && isDefined(level.var_7d3131e8) && self[[level.var_7d3131e8]](var_b0fbfe59[# "dynent"], origin, anglesToForward(self getplayerangles()))) {
+      if(var_acdfe076 && isDefined(level.var_7d3131e8) && self[[level.var_7d3131e8]](var_b0fbfe59[#"dynent"], origin, anglesToForward(self getplayerangles()))) {
         return false;
       }
 
-      var_45127074 = isDefined(var_b0fbfe59[# "entity"]) && distance2dsquared(var_b0fbfe59[# "entity"].origin, item.origin) <= sqr(12);
+      var_45127074 = isDefined(var_b0fbfe59[#"entity"]) && distance2dsquared(var_b0fbfe59[#"entity"].origin, item.origin) <= sqr(12);
 
       if(!var_acdfe076 && !var_45127074) {
         return false;
@@ -335,7 +335,7 @@ function function_2eb2c17c(origin, item) {
 
       var_5408bd2a = physicstraceex(origin, offsetposition, (0, 0, 0), (0, 0, 0), self, 1);
 
-      if(var_5408bd2a[# "fraction"] >= 1) {
+      if(var_5408bd2a[#"fraction"] >= 1) {
         return true;
       }
 

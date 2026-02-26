@@ -8,7 +8,7 @@
 function main() {
   self notify(#"killanimscript");
   self notify(#"clearsuppressionattack");
-  self.codescripted[# "root"] = "body";
+  self.codescripted[#"root"] = "body";
   self.a.script = "scripted";
 }
 

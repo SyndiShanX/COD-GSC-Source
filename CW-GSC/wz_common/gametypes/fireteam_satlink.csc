@@ -23,8 +23,8 @@ function event_handler[gametype_init] main(eventstruct) {
   satlinks = struct::get_array("fireteam_satlink", "variantname");
 
   for(i = 0; i <= satlinks.size; i++) {
-    clientfield::function_5b7d846d("hud_items_fireteam.satLinkBoosters." + i + ".activeCount", #"hud_items_fireteam", [# "hash_48fb0ae913baffee", hash(isDefined(i) ? "" + i : ""), #"activecount"], 1, 4, "int", undefined, 0, 0);
-    clientfield::function_5b7d846d("hud_items_fireteam.satLinkBoosters." + i + ".expiring", #"hud_items_fireteam", [# "hash_48fb0ae913baffee", hash(isDefined(i) ? "" + i : ""), #"expiring"], 1, 1, "int", undefined, 0, 0);
+    clientfield::function_5b7d846d("hud_items_fireteam.satLinkBoosters." + i + ".activeCount", #"hud_items_fireteam", [#"hash_48fb0ae913baffee", hash(isDefined(i) ? "" + i : ""), #"activecount"], 1, 4, "int", undefined, 0, 0);
+    clientfield::function_5b7d846d("hud_items_fireteam.satLinkBoosters." + i + ".expiring", #"hud_items_fireteam", [#"hash_48fb0ae913baffee", hash(isDefined(i) ? "" + i : ""), #"expiring"], 1, 1, "int", undefined, 0, 0);
   }
 
   dirtybomb_usebar::register();

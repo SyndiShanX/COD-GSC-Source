@@ -14,7 +14,7 @@
 #include maps\mp\zm_alcatraz_weap_quest;
 #include maps\mp\zombies\_zm_afterlife;
 
-#include_craftable(craftable_struct) {
+include_craftable(craftable_struct) {
   println("ZM >> include_craftable = " + craftable_struct.name);
 
   maps\mp\zombies\_zm_craftables::include_zombie_craftable(craftable_struct);

@@ -607,7 +607,7 @@ is_weapon_or_base_included(weapon_name) {
   return false;
 }
 
-#include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
+include_zombie_weapon(weapon_name, in_box, collector, weighting_func) {
   if(!isDefined(level.zombie_include_weapons))
     level.zombie_include_weapons = [];
 

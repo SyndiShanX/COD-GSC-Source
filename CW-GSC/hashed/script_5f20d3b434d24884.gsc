@@ -343,7 +343,7 @@ class class_a08a1bec {
 
   function private function_65ee50ba(start) {
     s_trace = groundtrace(start + (0, 0, 48), start + (0, 0, -1000), 0, self);
-    return s_trace[# "position"];
+    return s_trace[#"position"];
   }
 
   function init(itemdef, origin, angles = [[itemdef]] - > getangles(), data = [[itemdef]] - > getdata(), width = [[itemdef]] - > getwidth(), height = [[itemdef]] - > getheight(), scale = [[itemdef]] - > getscale(), clientside = 1) {
@@ -404,7 +404,7 @@ class class_a08a1bec {
 
   function private drop_to_ground() {
     s_trace = groundtrace(origin + (0, 0, 16), origin + (0, 0, -1000), 0, self);
-    origin = s_trace[# "position"] + (0, 0, 24);
+    origin = s_trace[#"position"] + (0, 0, 24);
   }
 
   function getrarity() {

@@ -56,7 +56,7 @@ init_level_vars() {
   level.var_d7853f35 = 18;
   level.var_ecdf38f = 12;
   level.var_55e562f9 = 18;
-  level.zombie_hints[# "default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
   level thread defend_areas();
   level thread function_9217567c();
   level thread init_traps();
@@ -314,7 +314,7 @@ function_a39e7a56() {
         ai = zm_orange_special_rounds::function_27695a82();
       }
     } else {
-      s_spawn_point = array::random(level.zm_loc_types[# "zombie_location"]);
+      s_spawn_point = array::random(level.zm_loc_types[#"zombie_location"]);
       ai = zombie_utility::spawn_zombie(getEntArray("zombie_spawner", "script_noteworthy")[0], undefined, s_spawn_point);
     }
 

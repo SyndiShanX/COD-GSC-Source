@@ -54,13 +54,13 @@ function init() {
   level.var_c54efd75[23] = "trv_jump_up_128";
   level.var_c54efd75[24] = "trv_jump_up_36";
   level.var_c54efd75[25] = "trv_jump_up_96";
-  level._effect[# "fx_margwa_teleport_zod_zmb"] = "zombie/fx_margwa_teleport_zod_zmb";
-  level._effect[# "fx_margwa_teleport_travel_zod_zmb"] = "zombie/fx_margwa_teleport_travel_zod_zmb";
-  level._effect[# "fx_margwa_teleport_tell_zod_zmb"] = "zombie/fx_margwa_teleport_tell_zod_zmb";
-  level._effect[# "fx_margwa_teleport_intro_zod_zmb"] = "zombie/fx_margwa_teleport_intro_zod_zmb";
-  level._effect[# "fx_margwa_head_shot_zod_zmb"] = "zombie/fx_margwa_head_shot_zod_zmb";
-  level._effect[# "fx_margwa_roar_zod_zmb"] = "zombie/fx_margwa_roar_zod_zmb";
-  level._effect[# "fx_margwa_roar_purple_zod_zmb"] = "zombie/fx_margwa_roar_purple_zod_zmb";
+  level._effect[#"fx_margwa_teleport_zod_zmb"] = "zombie/fx_margwa_teleport_zod_zmb";
+  level._effect[#"fx_margwa_teleport_travel_zod_zmb"] = "zombie/fx_margwa_teleport_travel_zod_zmb";
+  level._effect[#"fx_margwa_teleport_tell_zod_zmb"] = "zombie/fx_margwa_teleport_tell_zod_zmb";
+  level._effect[#"fx_margwa_teleport_intro_zod_zmb"] = "zombie/fx_margwa_teleport_intro_zod_zmb";
+  level._effect[#"fx_margwa_head_shot_zod_zmb"] = "zombie/fx_margwa_head_shot_zod_zmb";
+  level._effect[#"fx_margwa_roar_zod_zmb"] = "zombie/fx_margwa_roar_zod_zmb";
+  level._effect[#"fx_margwa_roar_purple_zod_zmb"] = "zombie/fx_margwa_roar_purple_zod_zmb";
   footsteps::registeraitypefootstepcb(#"margwa", &function_d96c49e7);
 }
 
@@ -113,14 +113,14 @@ function private function_7f774ede(localclientnum, oldvalue, newvalue, bnewent, 
       self.heads[1].var_90d98881 = # "ai_margwa_head_l_open_add";
       self setanim(#"ai_margwa_head_l_open_add", 1, 0.1, 1);
       self clearanim(#"ai_margwa_head_l_closed_add", 0.1);
-      var_60a180bc = level._effect[# "fx_margwa_roar_zod_zmb"];
+      var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
 
       if(isDefined(self.var_f61e3379)) {
         var_60a180bc = self.var_f61e3379;
       }
 
       if(self clientfield::get("supermargwa")) {
-        self.var_fd694760 = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
+        self.var_fd694760 = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
       } else {
         self.var_fd694760 = util::playFXOnTag(fieldname, var_60a180bc, self, "tag_head_left");
       }
@@ -137,14 +137,14 @@ function private function_7f774ede(localclientnum, oldvalue, newvalue, bnewent, 
       self clearanim(#"ai_margwa_head_l_open_add", 0.1);
       self clearanim(#"ai_margwa_head_l_closed_add", 0.1);
       self setanimrestart(#"ai_margwa_head_l_smash_attack_1", 1, 0.1, 1);
-      var_60a180bc = level._effect[# "fx_margwa_roar_zod_zmb"];
+      var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
 
       if(isDefined(self.var_f61e3379)) {
         var_60a180bc = self.var_f61e3379;
       }
 
       if(self clientfield::get("supermargwa")) {
-        self.var_fd694760 = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
+        self.var_fd694760 = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_roar_purple_zod_zmb"], self, "tag_head_left");
       } else {
         self.var_fd694760 = util::playFXOnTag(fieldname, var_60a180bc, self, "tag_head_left");
       }
@@ -169,14 +169,14 @@ function private function_a99ba434(localclientnum, oldvalue, newvalue, bnewent, 
     case 1:
       self setanim(#"ai_margwa_head_m_open_add", 1, 0.1, 1);
       self clearanim(#"ai_margwa_head_m_closed_add", 0.1);
-      var_60a180bc = level._effect[# "fx_margwa_roar_zod_zmb"];
+      var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
 
       if(isDefined(self.var_f61e3379)) {
         var_60a180bc = self.var_f61e3379;
       }
 
       if(self clientfield::get("supermargwa")) {
-        self.var_694b6f = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
+        self.var_694b6f = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
       } else {
         self.var_694b6f = util::playFXOnTag(fieldname, var_60a180bc, self, "tag_head_mid");
       }
@@ -191,14 +191,14 @@ function private function_a99ba434(localclientnum, oldvalue, newvalue, bnewent, 
       self clearanim(#"ai_margwa_head_m_open_add", 0.1);
       self clearanim(#"ai_margwa_head_m_closed_add", 0.1);
       self setanimrestart(#"ai_margwa_head_m_smash_attack_1", 1, 0.1, 1);
-      var_60a180bc = level._effect[# "fx_margwa_roar_zod_zmb"];
+      var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
 
       if(isDefined(self.var_f61e3379)) {
         var_60a180bc = self.var_f61e3379;
       }
 
       if(self clientfield::get("supermargwa")) {
-        self.var_694b6f = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
+        self.var_694b6f = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_roar_purple_zod_zmb"], self, "tag_head_mid");
       } else {
         self.var_694b6f = util::playFXOnTag(fieldname, var_60a180bc, self, "tag_head_mid");
       }
@@ -223,14 +223,14 @@ function private function_e579d5d9(localclientnum, oldvalue, newvalue, bnewent, 
     case 1:
       self setanim(#"ai_margwa_head_r_open_add", 1, 0.1, 1);
       self clearanim(#"ai_margwa_head_r_closed_add", 0.1);
-      var_60a180bc = level._effect[# "fx_margwa_roar_zod_zmb"];
+      var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
 
       if(isDefined(self.var_f61e3379)) {
         var_60a180bc = self.var_f61e3379;
       }
 
       if(self clientfield::get("supermargwa")) {
-        self.var_f254784b = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
+        self.var_f254784b = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
       } else {
         self.var_f254784b = util::playFXOnTag(fieldname, var_60a180bc, self, "tag_head_right");
       }
@@ -245,14 +245,14 @@ function private function_e579d5d9(localclientnum, oldvalue, newvalue, bnewent, 
       self clearanim(#"ai_margwa_head_r_open_add", 0.1);
       self clearanim(#"ai_margwa_head_r_closed_add", 0.1);
       self setanimrestart(#"ai_margwa_head_r_smash_attack_1", 1, 0.1, 1);
-      var_60a180bc = level._effect[# "fx_margwa_roar_zod_zmb"];
+      var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
 
       if(isDefined(self.var_f61e3379)) {
         var_60a180bc = self.var_f61e3379;
       }
 
       if(self clientfield::get("supermargwa")) {
-        self.var_f254784b = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
+        self.var_f254784b = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_roar_purple_zod_zmb"], self, "tag_head_right");
       } else {
         self.var_f254784b = util::playFXOnTag(fieldname, var_60a180bc, self, "tag_head_right");
       }
@@ -281,14 +281,14 @@ function private function_bb0ffabc(localclientnum) {
 
 function private function_39ef8b74(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
-    self.var_f2f751dd = playFX(fieldname, level._effect[# "fx_margwa_teleport_zod_zmb"], self gettagorigin("j_spine_1"));
+    self.var_f2f751dd = playFX(fieldname, level._effect[#"fx_margwa_teleport_zod_zmb"], self gettagorigin("j_spine_1"));
   }
 }
 
 function private function_9604ce8a(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
     tagpos = self gettagorigin("j_spine_1");
-    self.var_e6a4bc80 = playFX(fieldname, level._effect[# "fx_margwa_teleport_zod_zmb"], tagpos);
+    self.var_e6a4bc80 = playFX(fieldname, level._effect[#"fx_margwa_teleport_zod_zmb"], tagpos);
   }
 }
 
@@ -298,7 +298,7 @@ function private function_1b421769(localclientnum, oldvalue, newvalue, bnewent, 
       deletefx(fieldname, self.var_3e71124a);
       break;
     case 1:
-      self.var_3e71124a = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_teleport_travel_zod_zmb"], self, "tag_origin");
+      self.var_3e71124a = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_teleport_travel_zod_zmb"], self, "tag_origin");
       break;
   }
 }
@@ -310,7 +310,7 @@ function private function_4a696f55(localclientnum, oldvalue, newvalue, bnewent, 
       self notify(#"hash_3ad013815bda7968");
       break;
     case 1:
-      self.var_598f22c4 = util::playFXOnTag(fieldname, level._effect[# "fx_margwa_teleport_tell_zod_zmb"], self, "tag_origin");
+      self.var_598f22c4 = util::playFXOnTag(fieldname, level._effect[#"fx_margwa_teleport_tell_zod_zmb"], self, "tag_origin");
       self thread function_bc09ffc1(fieldname);
       break;
   }
@@ -337,7 +337,7 @@ function function_bc09ffc1(localclientnum) {
 
 function private function_3037d1ec(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
-    spawnfx = level._effect[# "fx_margwa_teleport_intro_zod_zmb"];
+    spawnfx = level._effect[#"fx_margwa_teleport_intro_zod_zmb"];
 
     if(isDefined(self.var_c525a905)) {
       spawnfx = self.var_c525a905;
@@ -411,7 +411,7 @@ function private function_a3a09c93(localclientnum, oldvalue, newvalue, bnewent, 
 
 function private function_d1df36a2(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
-    effect = level._effect[# "fx_margwa_head_shot_zod_zmb"];
+    effect = level._effect[#"fx_margwa_head_shot_zod_zmb"];
 
     if(isDefined(self.var_7526e3c3)) {
       effect = self.var_7526e3c3;
@@ -423,7 +423,7 @@ function private function_d1df36a2(localclientnum, oldvalue, newvalue, bnewent, 
 
 function private function_751de3f8(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
-    effect = level._effect[# "fx_margwa_head_shot_zod_zmb"];
+    effect = level._effect[#"fx_margwa_head_shot_zod_zmb"];
 
     if(isDefined(self.var_7526e3c3)) {
       effect = self.var_7526e3c3;
@@ -435,7 +435,7 @@ function private function_751de3f8(localclientnum, oldvalue, newvalue, bnewent, 
 
 function private function_1d106112(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(wasdemojump) {
-    effect = level._effect[# "fx_margwa_head_shot_zod_zmb"];
+    effect = level._effect[#"fx_margwa_head_shot_zod_zmb"];
 
     if(isDefined(self.var_7526e3c3)) {
       effect = self.var_7526e3c3;

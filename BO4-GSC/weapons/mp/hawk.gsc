@@ -66,22 +66,22 @@ spawn_hawk() {
   spawnpos = self.origin + (0, 0, 90) + forward;
   trace = self function_6ada73f(spawnpos);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75);
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45);
   }
 
@@ -671,9 +671,9 @@ targeting_hud_think(vehicle) {
   vehicle endon(#"death");
   level endon(#"game_ended");
   stance_offsets = [];
-  stance_offsets[# "stand"] = (0, 0, 60);
-  stance_offsets[# "crouch"] = (0, 0, 40);
-  stance_offsets[# "prone"] = (0, 0, 12);
+  stance_offsets[#"stand"] = (0, 0, 60);
+  stance_offsets[#"crouch"] = (0, 0, 40);
+  stance_offsets[#"prone"] = (0, 0, 12);
   player = self;
   targets = self getvalidtargets(vehicle, stance_offsets);
   framessincetargetscan = 0;

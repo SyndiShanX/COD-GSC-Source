@@ -92,7 +92,7 @@ function_9e9f43cd() {
       origin = points[index].origin;
       angles = points[index].angles;
       ground_pos = physicstraceex(origin + (0, 0, 24), origin - (0, 0, 96), (0, 0, 0), (0, 0, 0), undefined, 32);
-      position = ground_pos[# "position"];
+      position = ground_pos[#"position"];
       function_53a81463(position, angles, targetname, #"");
     }
 
@@ -161,11 +161,11 @@ _spawn_item(point, row, stashitem = 0) {
   if(!isDefined(item_name) || item_name == "") {
     function_43cd95f4(point.id, "");
 
-    if(!isDefined(level.var_d80c35aa[# "blank"])) {
-      level.var_d80c35aa[# "blank"] = 0;
+    if(!isDefined(level.var_d80c35aa[#"blank"])) {
+      level.var_d80c35aa[#"blank"] = 0;
     }
 
-    level.var_d80c35aa[# "blank"]++;
+    level.var_d80c35aa[#"blank"]++;
 
     return;
   }
@@ -209,8 +209,8 @@ _spawn_item(point, row, stashitem = 0) {
         offset = rotatepoint(forward, (0, level.var_cc113617[0], 0));
         origin += offset;
         ground_pos = physicstraceex(origin + (0, 0, 24), origin - (0, 0, 96), (0, 0, 0), (0, 0, 0), undefined, 32);
-        origin = ground_pos[# "position"];
-        normal = ground_pos[# "normal"];
+        origin = ground_pos[#"position"];
+        normal = ground_pos[#"normal"];
         angles = function_c1fa62a2(angles, normal);
       }
     } else if(!isDefined(itementry.wallbuyitem)) {
@@ -284,8 +284,8 @@ function_f0e5262b(item_name, point, childindex, stashitem = 0, targetname) {
     origin += offset;
     ground_pos = physicstraceex(origin + (0, 0, 24), origin - (0, 0, 96), (0, 0, 0), (0, 0, 0), undefined, 32);
     var_f05b52fe = (isDefined(itementry.positionoffsetx) ? itementry.positionoffsetx : 0, isDefined(itementry.positionoffsety) ? itementry.positionoffsety : 0, isDefined(itementry.positionoffsetz) ? itementry.positionoffsetz : 0);
-    origin = ground_pos[# "position"] + var_f05b52fe;
-    normal = ground_pos[# "normal"];
+    origin = ground_pos[#"position"] + var_f05b52fe;
+    normal = ground_pos[#"normal"];
     angles += (0, level.var_82e94a26[childindex], 0);
     angles += (0, point.angles[1], 0);
     angles = function_c1fa62a2(angles, normal);

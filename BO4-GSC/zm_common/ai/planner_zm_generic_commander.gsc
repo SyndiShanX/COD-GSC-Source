@@ -40,5 +40,5 @@ createcommander() {
   plannercommanderutility::addsquadevaluator(commander, #"commanderscoreforcegoal");
   plannercommanderutility::addsquadevaluator(commander, #"commanderscoreteam");
   plannercommanderutility::addsquadevaluator(commander, #"commanderscoreviableescort");
-  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreage", [# "maxage": 6000]);
+  plannercommanderutility::addsquadevaluator(commander, #"commanderscoreage", [#"maxage": 6000]);
 }

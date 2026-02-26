@@ -16,7 +16,7 @@ is_equipment_included(equipment_name) {
   }
   return false;
 }
-#include_equipment(equipment) {
+include_equipment(equipment) {
   if(!isDefined(level._included_equipment)) {
     level._included_equipment = [];
   }

@@ -33,47 +33,47 @@ function private preinit() {
   level.var_a968beb[1] = # "allies";
   level.var_a968beb[2] = # "axis";
   level.var_8cb8d474 = [];
-  level.var_8cb8d474[# "none"] = [];
-  level.var_8cb8d474[# "none"][0] = # "hash_6eb882c3b52cdbb3";
-  level.var_8cb8d474[# "none"][2] = # "hash_6eb881c3b52cda00";
-  level.var_8cb8d474[# "none"][1] = # "hash_6eb884c3b52cdf19";
-  level.var_8cb8d474[# "none"][3] = # "hash_6eb883c3b52cdd66";
-  level.var_8cb8d474[# "none"][4] = # "hash_6eb886c3b52ce27f";
-  level.var_8cb8d474[# "allies"] = [];
-  level.var_8cb8d474[# "allies"][0] = # "draft_player_struct_0_allies";
-  level.var_8cb8d474[# "allies"][2] = # "draft_player_struct_1_allies";
-  level.var_8cb8d474[# "allies"][1] = # "draft_player_struct_2_allies";
-  level.var_8cb8d474[# "allies"][3] = # "draft_player_struct_3_allies";
-  level.var_8cb8d474[# "allies"][4] = # "draft_player_struct_4_allies";
-  level.var_8cb8d474[# "axis"] = [];
-  level.var_8cb8d474[# "axis"][0] = # "hash_3b2607cfca030035";
-  level.var_8cb8d474[# "axis"][2] = # "hash_253fd3975ea7547c";
-  level.var_8cb8d474[# "axis"][1] = # "hash_1edd5ff5456df7f7";
-  level.var_8cb8d474[# "axis"][3] = # "hash_61f816d9a00b29c6";
-  level.var_8cb8d474[# "axis"][4] = # "hash_753a11f84aa8941";
+  level.var_8cb8d474[#"none"] = [];
+  level.var_8cb8d474[#"none"][0] = # "hash_6eb882c3b52cdbb3";
+  level.var_8cb8d474[#"none"][2] = # "hash_6eb881c3b52cda00";
+  level.var_8cb8d474[#"none"][1] = # "hash_6eb884c3b52cdf19";
+  level.var_8cb8d474[#"none"][3] = # "hash_6eb883c3b52cdd66";
+  level.var_8cb8d474[#"none"][4] = # "hash_6eb886c3b52ce27f";
+  level.var_8cb8d474[#"allies"] = [];
+  level.var_8cb8d474[#"allies"][0] = # "draft_player_struct_0_allies";
+  level.var_8cb8d474[#"allies"][2] = # "draft_player_struct_1_allies";
+  level.var_8cb8d474[#"allies"][1] = # "draft_player_struct_2_allies";
+  level.var_8cb8d474[#"allies"][3] = # "draft_player_struct_3_allies";
+  level.var_8cb8d474[#"allies"][4] = # "draft_player_struct_4_allies";
+  level.var_8cb8d474[#"axis"] = [];
+  level.var_8cb8d474[#"axis"][0] = # "hash_3b2607cfca030035";
+  level.var_8cb8d474[#"axis"][2] = # "hash_253fd3975ea7547c";
+  level.var_8cb8d474[#"axis"][1] = # "hash_1edd5ff5456df7f7";
+  level.var_8cb8d474[#"axis"][3] = # "hash_61f816d9a00b29c6";
+  level.var_8cb8d474[#"axis"][4] = # "hash_753a11f84aa8941";
   level.var_a72b250f = [];
-  level.var_a72b250f[# "none"] = # "hash_24d789c80dba10e6";
-  level.var_a72b250f[# "allies"] = # "hash_e2e52f9cab15dce";
-  level.var_a72b250f[# "axis"] = # "hash_50c9ef9e41155cf9";
-  level.var_a72b250f[# "spectator"] = # "hash_e2e52f9cab15dce";
+  level.var_a72b250f[#"none"] = # "hash_24d789c80dba10e6";
+  level.var_a72b250f[#"allies"] = # "hash_e2e52f9cab15dce";
+  level.var_a72b250f[#"axis"] = # "hash_50c9ef9e41155cf9";
+  level.var_a72b250f[#"spectator"] = # "hash_e2e52f9cab15dce";
   level.draftstructs = [];
-  level.draftstructs[# "none"] = # "draft_team_struct";
-  level.draftstructs[# "allies"] = # "draft_team_struct_allies";
-  level.draftstructs[# "axis"] = # "hash_700492f71a083a7c";
-  level.draftstructs[# "spectator"] = # "draft_team_struct_allies";
+  level.draftstructs[#"none"] = # "draft_team_struct";
+  level.draftstructs[#"allies"] = # "draft_team_struct_allies";
+  level.draftstructs[#"axis"] = # "hash_700492f71a083a7c";
+  level.draftstructs[#"spectator"] = # "draft_team_struct_allies";
   level.draftexploders = [];
-  level.draftexploders[# "allies"] = "mp_draft_lights_allies";
-  level.draftexploders[# "axis"] = "mp_draft_lights_axis";
+  level.draftexploders[#"allies"] = "mp_draft_lights_allies";
+  level.draftexploders[#"axis"] = "mp_draft_lights_axis";
   level.activeexploder = undefined;
   level.playerscriptstructs = [];
-  level.playerscriptstructs[# "none"] = [];
-  level.playerscriptstructs[# "allies"] = [];
-  level.playerscriptstructs[# "axis"] = [];
+  level.playerscriptstructs[#"none"] = [];
+  level.playerscriptstructs[#"allies"] = [];
+  level.playerscriptstructs[#"axis"] = [];
 
   for(i = 0; i < 5; i++) {
-    level.playerscriptstructs[# "none"][i] = struct::get(level.var_8cb8d474[# "none"][i]);
-    level.playerscriptstructs[# "allies"][i] = struct::get(level.var_8cb8d474[# "allies"][i]);
-    level.playerscriptstructs[# "axis"][i] = struct::get(level.var_8cb8d474[# "axis"][i]);
+    level.playerscriptstructs[#"none"][i] = struct::get(level.var_8cb8d474[#"none"][i]);
+    level.playerscriptstructs[#"allies"][i] = struct::get(level.var_8cb8d474[#"allies"][i]);
+    level.playerscriptstructs[#"axis"][i] = struct::get(level.var_8cb8d474[#"axis"][i]);
   }
 
   level thread function_ca03ab69();
@@ -97,7 +97,7 @@ function private preinit() {
   }
 
   level.var_8c099032 = getgametypesetting(#"draftenabled") && !getroundsplayed(0);
-  level.var_f35699bc = [# "melee_slaybell_t8": "melee_alt", #"melee_secretsanta_t8": "melee_alt", #"melee_coinbag_t8": "melee_alt", #"melee_demohammer_t8": "melee_alt", #"melee_club_t8": "melee_alt", #"melee_cutlass_t8": "melee_alt", #"special_ballisticknife_t8_dw": "melee_alt", #"special_ballisticknife_t8_dw_dw": "melee_alt"];
+  level.var_f35699bc = [#"melee_slaybell_t8": "melee_alt", #"melee_secretsanta_t8": "melee_alt", #"melee_coinbag_t8": "melee_alt", #"melee_demohammer_t8": "melee_alt", #"melee_club_t8": "melee_alt", #"melee_cutlass_t8": "melee_alt", #"special_ballisticknife_t8_dw": "melee_alt", #"special_ballisticknife_t8_dw_dw": "melee_alt"];
 }
 
 function function_c4dfe16e(localclientnum) {
@@ -339,32 +339,32 @@ function function_6b532f83(localclientnum, var_de58f286, sessionmode) {
 
     if(var_de58f286.var_91065a59 != var_de58f286.var_3afd181d) {
       if(var_de58f286.var_91065a59) {
-        var_ca1716fe = weapongroupanim[# "ready"][gender];
+        var_ca1716fe = weapongroupanim[#"ready"][gender];
         anim_intro_name = var_ca1716fe[posindex % var_ca1716fe.size];
-        var_177782dd = weapongroupanim[# "readyidle"][gender];
+        var_177782dd = weapongroupanim[#"readyidle"][gender];
         anim_name = var_177782dd[posindex % var_177782dd.size];
       }
 
       var_de58f286.var_3afd181d = var_de58f286.var_91065a59;
     } else if(player_role::is_valid(var_de58f286.focusedcharacterindex)) {
       if(var_de58f286.selected) {
-        anim_intro_name = weapongroupanim[# "hash_2fe61241a25ee67c"][gender];
+        anim_intro_name = weapongroupanim[#"hash_2fe61241a25ee67c"][gender];
         var_de58f286.selected = 0;
       }
 
-      anim_name = weapongroupanim[# "select"][gender];
+      anim_name = weapongroupanim[#"select"][gender];
     } else {
       if(!var_de58f286.var_91065a59) {
         if(posindex == 1 && !codcaster::function_b8fe9b52(localclientnum)) {
-          anim_intro_name = weapongroupanim[# "hash_6eaac8719751cb14"][gender];
+          anim_intro_name = weapongroupanim[#"hash_6eaac8719751cb14"][gender];
         }
 
-        var_b793aad = weapongroupanim[# "preready"][gender];
+        var_b793aad = weapongroupanim[#"preready"][gender];
         anim_name = var_b793aad[posindex % var_b793aad.size];
       } else {
-        var_ca1716fe = weapongroupanim[# "ready"][gender];
+        var_ca1716fe = weapongroupanim[#"ready"][gender];
         anim_intro_name = var_ca1716fe[posindex % var_ca1716fe.size];
-        var_177782dd = weapongroupanim[# "readyidle"][gender];
+        var_177782dd = weapongroupanim[#"readyidle"][gender];
         anim_name = var_177782dd[posindex % var_177782dd.size];
       }
 

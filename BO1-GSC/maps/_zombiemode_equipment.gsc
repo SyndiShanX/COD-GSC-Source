@@ -35,7 +35,7 @@ is_equipment_included(equipment_name) {
   }
   return isDefined(level.zombie_include_equipment[equipment_name]);
 }
-#include_zombie_equipment(equipment_name) {
+include_zombie_equipment(equipment_name) {
   if(!isDefined(level.zombie_include_equipment)) {
     level.zombie_include_equipment = [];
   }

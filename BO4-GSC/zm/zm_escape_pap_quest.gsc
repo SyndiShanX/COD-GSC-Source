@@ -33,8 +33,8 @@ autoexec __init__system__() {
 
 __init__() {
   level.pack_a_punch.custom_power_think = &function_124362b5;
-  level._effect[# "lightning_near"] = "maps/zm_escape/fx8_pap_lightning_near";
-  level._effect[# "lightning_bridge"] = "maps/zm_escape/fx8_pap_lightning_bridge";
+  level._effect[#"lightning_near"] = "maps/zm_escape/fx8_pap_lightning_near";
+  level._effect[#"lightning_bridge"] = "maps/zm_escape/fx8_pap_lightning_bridge";
   level flag::init(#"pap_quest_completed");
   scene::add_scene_func(#"aib_vign_zm_mob_pap_ghosts", &function_26cff57, "play");
   scene::add_scene_func(#"aib_vign_zm_mob_pap_ghosts_b64", &function_f7af87b9, "play");
@@ -132,13 +132,13 @@ function_3357bedc() {
 }
 
 function_26cff57(a_ents) {
-  a_ents[# "pap"] thread function_59093304("roof", 1);
+  a_ents[#"pap"] thread function_59093304("roof", 1);
 
   if(!level flag::get(#"pap_quest_completed")) {
     s_lightning_bridge = struct::get("lightning_bridge");
     level clientfield::increment("" + # "lightning_far");
     playsoundatposition(#"hash_7804a63a2ff82145", s_lightning_bridge.origin);
-    a_ents[# "pap"] waittill(#"fade_in_end");
+    a_ents[#"pap"] waittill(#"fade_in_end");
     s_lightning_near = struct::get("lightning_near");
     wait 1;
     e_player = zm_utility::get_closest_player(s_lightning_near.origin);
@@ -147,11 +147,11 @@ function_26cff57(a_ents) {
 }
 
 function_f7af87b9(a_ents) {
-  a_ents[# "pap"] thread function_59093304("building_64");
+  a_ents[#"pap"] thread function_59093304("building_64");
 }
 
 function_cf48a8f2(a_ents) {
-  a_ents[# "pap"] thread function_59093304("power_house");
+  a_ents[#"pap"] thread function_59093304("power_house");
 }
 
 function_59093304(str_zone, var_e07ad59f = 0) {
@@ -174,18 +174,18 @@ function_59093304(str_zone, var_e07ad59f = 0) {
 }
 
 function_86f1ed70(a_ents) {
-  a_ents[# "pap"] thread function_25adf2e0("roof", #"hash_79b5f8e539d36a49");
-  a_ents[# "pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  a_ents[#"pap"] thread function_25adf2e0("roof", #"hash_79b5f8e539d36a49");
+  a_ents[#"pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
 }
 
 function_8d3078dc(a_ents) {
-  a_ents[# "pap"] thread function_25adf2e0("building_64", #"hash_1fc69d74f13da62e");
-  a_ents[# "pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  a_ents[#"pap"] thread function_25adf2e0("building_64", #"hash_1fc69d74f13da62e");
+  a_ents[#"pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
 }
 
 function_a340ee90(a_ents) {
-  a_ents[# "pap"] thread function_25adf2e0("power_house", #"hash_6d668f3614ed2393");
-  a_ents[# "pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  a_ents[#"pap"] thread function_25adf2e0("power_house", #"hash_6d668f3614ed2393");
+  a_ents[#"pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
 }
 
 function_25adf2e0(str_zone, var_410775ce) {

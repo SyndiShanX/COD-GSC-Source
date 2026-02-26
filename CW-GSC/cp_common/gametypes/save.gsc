@@ -38,12 +38,12 @@ function private preinit() {
   level.var_8fe8980a = &function_9797184c;
   missionid = function_8136eb5a();
 
-  if(!isDefined(world.mapdata[missionid][# "persistent"])) {
-    world.mapdata[missionid][# "persistent"] = spawnStruct();
+  if(!isDefined(world.mapdata[missionid][#"persistent"])) {
+    world.mapdata[missionid][#"persistent"] = spawnStruct();
   }
 
-  if(!isDefined(world.mapdata[missionid][# "transient"])) {
-    world.mapdata[missionid][# "transient"] = spawnStruct();
+  if(!isDefined(world.mapdata[missionid][#"transient"])) {
+    world.mapdata[missionid][#"transient"] = spawnStruct();
   }
 
   var_316f308b = savegame_getsavedmap();
@@ -203,33 +203,33 @@ function function_9797184c() {
 
 function function_379f84b3() {
   missionid = function_8136eb5a();
-  world.mapdata[missionid][# "transient"].var_2e7c022f = [];
+  world.mapdata[missionid][#"transient"].var_2e7c022f = [];
   player = getplayers()[0];
   a_weapon_list = player getweaponslist();
   current_weapon = player getcurrentweapon();
-  world.mapdata[missionid][# "transient"].var_37017d9 = current_weapon.name;
+  world.mapdata[missionid][#"transient"].var_37017d9 = current_weapon.name;
 
   foreach(weapon in a_weapon_list) {
     if(isDefined(weapon.name)) {
-      if(!isDefined(world.mapdata[missionid][# "transient"].var_2e7c022f)) {
-        world.mapdata[missionid][# "transient"].var_2e7c022f = [];
-      } else if(!isarray(world.mapdata[missionid][# "transient"].var_2e7c022f)) {
-        world.mapdata[missionid][# "transient"].var_2e7c022f = array(world.mapdata[missionid][# "transient"].var_2e7c022f);
+      if(!isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
+        world.mapdata[missionid][#"transient"].var_2e7c022f = [];
+      } else if(!isarray(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
+        world.mapdata[missionid][#"transient"].var_2e7c022f = array(world.mapdata[missionid][#"transient"].var_2e7c022f);
       }
 
-      world.mapdata[missionid][# "transient"].var_2e7c022f[world.mapdata[missionid][# "transient"].var_2e7c022f.size] = weapon.name;
+      world.mapdata[missionid][#"transient"].var_2e7c022f[world.mapdata[missionid][#"transient"].var_2e7c022f.size] = weapon.name;
 
       if(isDefined(weapon.attachments) && weapon.attachments.size > 0) {
-        world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name] = [];
+        world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name] = [];
 
         foreach(attachment in weapon.attachments) {
-          if(!isDefined(world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name])) {
-            world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name] = [];
-          } else if(!isarray(world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name])) {
-            world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name] = array(world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name]);
+          if(!isDefined(world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name])) {
+            world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name] = [];
+          } else if(!isarray(world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name])) {
+            world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name] = array(world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name]);
           }
 
-          world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name][world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon.name].size] = attachment;
+          world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name][world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon.name].size] = attachment;
         }
       }
     }
@@ -240,13 +240,13 @@ function function_7396472d() {
   missionid = function_8136eb5a();
   player = getplayers()[0];
 
-  if(isDefined(world.mapdata[missionid][# "transient"].var_2e7c022f)) {
+  if(isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
     player takeallweapons();
 
-    foreach(weapon_name in world.mapdata[missionid][# "transient"].var_2e7c022f) {
+    foreach(weapon_name in world.mapdata[missionid][#"transient"].var_2e7c022f) {
       if(isDefined(weapon_name)) {
-        if(isDefined(world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon_name])) {
-          weapon = getweapon(weapon_name, world.mapdata[missionid][# "transient"].var_ba4d1bad[weapon_name]);
+        if(isDefined(world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon_name])) {
+          weapon = getweapon(weapon_name, world.mapdata[missionid][#"transient"].var_ba4d1bad[weapon_name]);
         } else {
           weapon = getweapon(weapon_name);
         }
@@ -257,9 +257,9 @@ function function_7396472d() {
       }
     }
 
-    if(isDefined(world.mapdata[missionid][# "transient"].var_37017d9)) {
+    if(isDefined(world.mapdata[missionid][#"transient"].var_37017d9)) {
       current_weapon = player getcurrentweapon();
-      var_fc1c4650 = getweapon(world.mapdata[missionid][# "transient"].var_37017d9);
+      var_fc1c4650 = getweapon(world.mapdata[missionid][#"transient"].var_37017d9);
 
       if(isDefined(current_weapon) && isDefined(var_fc1c4650) && current_weapon != var_fc1c4650) {
         if(player hasweapon(var_fc1c4650)) {
@@ -382,11 +382,11 @@ function private function_680b78aa(var_62a2ec8e = 1, delay = 1.5) {
     player = util::gethostplayer();
 
     if(isDefined(player)) {
-      player set_player_data("savegame_score", player.pers[# "score"]);
-      player set_player_data("savegame_kills", player.pers[# "kills"]);
-      player set_player_data("savegame_assists", player.pers[# "assists"]);
-      player set_player_data("savegame_incaps", player.pers[# "incaps"]);
-      player set_player_data("savegame_revives", player.pers[# "revives"]);
+      player set_player_data("savegame_score", player.pers[#"score"]);
+      player set_player_data("savegame_kills", player.pers[#"kills"]);
+      player set_player_data("savegame_assists", player.pers[#"assists"]);
+      player set_player_data("savegame_incaps", player.pers[#"incaps"]);
+      player set_player_data("savegame_revives", player.pers[#"revives"]);
     }
 
     save();

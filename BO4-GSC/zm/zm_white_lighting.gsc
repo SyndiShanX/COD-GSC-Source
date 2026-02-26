@@ -30,7 +30,7 @@ function_2bdf9f35() {
 }
 
 function_3d4e24ea() {
-  level._effect[# "hash_5ee980374efab771"] = # "hash_964810cc067cb78";
+  level._effect[#"hash_5ee980374efab771"] = # "hash_964810cc067cb78";
 }
 
 function_c51c8e3(var_edf4d25) {

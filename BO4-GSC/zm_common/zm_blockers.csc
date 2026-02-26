@@ -19,14 +19,14 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "doorbuy_ambient_fx"] = "zombie/fx8_doorbuy_amb";
-  level._effect[# "doorbuy_bought_fx"] = "zombie/fx8_doorbuy_death";
-  level._effect[# "debrisbuy_ambient_fx"] = "zombie/fx8_debrisbuy_amb";
-  level._effect[# "debrisbuy_bought_fx"] = "zombie/fx8_debrisbuy_death";
-  level._effect[# "powerdoor_ambient_fx"] = "zombie/fx8_power_door_amb";
-  level._effect[# "powerdoor_bought_fx"] = "zombie/fx8_power_door_death";
-  level._effect[# "power_debris_ambient_fx"] = "zombie/fx8_power_debris_amb";
-  level._effect[# "power_debris_bought_fx"] = "zombie/fx8_power_debris_death";
+  level._effect[#"doorbuy_ambient_fx"] = "zombie/fx8_doorbuy_amb";
+  level._effect[#"doorbuy_bought_fx"] = "zombie/fx8_doorbuy_death";
+  level._effect[#"debrisbuy_ambient_fx"] = "zombie/fx8_debrisbuy_amb";
+  level._effect[#"debrisbuy_bought_fx"] = "zombie/fx8_debrisbuy_death";
+  level._effect[#"powerdoor_ambient_fx"] = "zombie/fx8_power_door_amb";
+  level._effect[#"powerdoor_bought_fx"] = "zombie/fx8_power_door_death";
+  level._effect[#"power_debris_ambient_fx"] = "zombie/fx8_power_debris_amb";
+  level._effect[#"power_debris_bought_fx"] = "zombie/fx8_power_debris_death";
   clientfield::register("scriptmover", "doorbuy_ambient_fx", 1, 1, "int", &doorbuy_ambient_fx, 0, 0);
   clientfield::register("scriptmover", "doorbuy_bought_fx", 1, 1, "int", &doorbuy_bought_fx, 0, 0);
   clientfield::register("scriptmover", "debrisbuy_ambient_fx", 1, 1, "int", &debrisbuy_ambient_fx, 0, 0);
@@ -40,35 +40,35 @@ __init__() {
 __main__() {}
 
 doorbuy_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_aa07bb71(level._effect[# "doorbuy_ambient_fx"], "zmb_blocker_door_lp", localclientnum, newval);
+  self function_aa07bb71(level._effect[#"doorbuy_ambient_fx"], "zmb_blocker_door_lp", localclientnum, newval);
 }
 
 debrisbuy_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_aa07bb71(level._effect[# "debrisbuy_ambient_fx"], "zmb_blocker_debris_lp", localclientnum, newval);
+  self function_aa07bb71(level._effect[#"debrisbuy_ambient_fx"], "zmb_blocker_debris_lp", localclientnum, newval);
 }
 
 power_door_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_aa07bb71(level._effect[# "powerdoor_ambient_fx"], "zmb_blocker_powerdoor_lp", localclientnum, newval);
+  self function_aa07bb71(level._effect[#"powerdoor_ambient_fx"], "zmb_blocker_powerdoor_lp", localclientnum, newval);
 }
 
 power_debris_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_aa07bb71(level._effect[# "power_debris_ambient_fx"], "zmb_blocker_debris_lp", localclientnum, newval);
+  self function_aa07bb71(level._effect[#"power_debris_ambient_fx"], "zmb_blocker_debris_lp", localclientnum, newval);
 }
 
 doorbuy_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "doorbuy_bought_fx"], #"hash_21b4bf152e90fd76", localclientnum, newval);
+  self function_e6eed4fe(level._effect[#"doorbuy_bought_fx"], #"hash_21b4bf152e90fd76", localclientnum, newval);
 }
 
 debrisbuy_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "debrisbuy_bought_fx"], #"hash_4bddd546f43487cf", localclientnum, newval);
+  self function_e6eed4fe(level._effect[#"debrisbuy_bought_fx"], #"hash_4bddd546f43487cf", localclientnum, newval);
 }
 
 power_door_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "powerdoor_bought_fx"], #"hash_5dcb54d98c9787b1", localclientnum, newval);
+  self function_e6eed4fe(level._effect[#"powerdoor_bought_fx"], #"hash_5dcb54d98c9787b1", localclientnum, newval);
 }
 
 power_debris_bought_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self function_e6eed4fe(level._effect[# "power_debris_bought_fx"], #"hash_4bddd546f43487cf", localclientnum, newval);
+  self function_e6eed4fe(level._effect[#"power_debris_bought_fx"], #"hash_4bddd546f43487cf", localclientnum, newval);
 }
 
 function_aa07bb71(str_fx_name, var_bd367366, var_6142f944, n_new_val) {

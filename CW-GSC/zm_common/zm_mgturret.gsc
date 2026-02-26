@@ -44,34 +44,34 @@ function set_difficulty(difficulty) {
 }
 
 function init_turret_difficulty_settings() {
-  level.mgturretsettings[# "easy"][# "convergencetime"] = 2.5;
-  level.mgturretsettings[# "easy"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "easy"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "easy"][# "aispread"] = 2;
-  level.mgturretsettings[# "easy"][# "playerspread"] = 0.5;
-  level.mgturretsettings[# "medium"][# "convergencetime"] = 1.5;
-  level.mgturretsettings[# "medium"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "medium"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "medium"][# "aispread"] = 2;
-  level.mgturretsettings[# "medium"][# "playerspread"] = 0.5;
-  level.mgturretsettings[# "hard"][# "convergencetime"] = 0.8;
-  level.mgturretsettings[# "hard"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "hard"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "hard"][# "aispread"] = 2;
-  level.mgturretsettings[# "hard"][# "playerspread"] = 0.5;
-  level.mgturretsettings[# "fu"][# "convergencetime"] = 0.4;
-  level.mgturretsettings[# "fu"][# "suppressiontime"] = 3;
-  level.mgturretsettings[# "fu"][# "accuracy"] = 0.38;
-  level.mgturretsettings[# "fu"][# "aispread"] = 2;
-  level.mgturretsettings[# "fu"][# "playerspread"] = 0.5;
+  level.mgturretsettings[#"easy"][#"convergencetime"] = 2.5;
+  level.mgturretsettings[#"easy"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"easy"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"easy"][#"aispread"] = 2;
+  level.mgturretsettings[#"easy"][#"playerspread"] = 0.5;
+  level.mgturretsettings[#"medium"][#"convergencetime"] = 1.5;
+  level.mgturretsettings[#"medium"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"medium"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"medium"][#"aispread"] = 2;
+  level.mgturretsettings[#"medium"][#"playerspread"] = 0.5;
+  level.mgturretsettings[#"hard"][#"convergencetime"] = 0.8;
+  level.mgturretsettings[#"hard"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"hard"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"hard"][#"aispread"] = 2;
+  level.mgturretsettings[#"hard"][#"playerspread"] = 0.5;
+  level.mgturretsettings[#"fu"][#"convergencetime"] = 0.4;
+  level.mgturretsettings[#"fu"][#"suppressiontime"] = 3;
+  level.mgturretsettings[#"fu"][#"accuracy"] = 0.38;
+  level.mgturretsettings[#"fu"][#"aispread"] = 2;
+  level.mgturretsettings[#"fu"][#"playerspread"] = 0.5;
 }
 
 function turret_set_difficulty(turret, difficulty) {
-  turret.convergencetime = level.mgturretsettings[difficulty][# "convergencetime"];
-  turret.suppressiontime = level.mgturretsettings[difficulty][# "suppressiontime"];
-  turret.script_accuracy = level.mgturretsettings[difficulty][# "accuracy"];
-  turret.aispread = level.mgturretsettings[difficulty][# "aispread"];
-  turret.playerspread = level.mgturretsettings[difficulty][# "playerspread"];
+  turret.convergencetime = level.mgturretsettings[difficulty][#"convergencetime"];
+  turret.suppressiontime = level.mgturretsettings[difficulty][#"suppressiontime"];
+  turret.script_accuracy = level.mgturretsettings[difficulty][#"accuracy"];
+  turret.aispread = level.mgturretsettings[difficulty][#"aispread"];
+  turret.playerspread = level.mgturretsettings[difficulty][#"playerspread"];
 }
 
 function turret_suppression_fire(targets) {

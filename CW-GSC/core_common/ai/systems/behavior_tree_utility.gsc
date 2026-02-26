@@ -38,16 +38,16 @@ function registerbehaviortreeaction(actionname, startfuncptr, updatefuncptr, ter
 
   if(isDefined(startfuncptr)) {
     assert(isfunctionptr(startfuncptr), "<dev string:x1a8>");
-    level._behaviortreeactions[actionname][# "bhtn_action_start"] = startfuncptr;
+    level._behaviortreeactions[actionname][#"bhtn_action_start"] = startfuncptr;
   }
 
   if(isDefined(updatefuncptr)) {
     assert(isfunctionptr(updatefuncptr), "<dev string:x1ed>");
-    level._behaviortreeactions[actionname][# "bhtn_action_update"] = updatefuncptr;
+    level._behaviortreeactions[actionname][#"bhtn_action_update"] = updatefuncptr;
   }
 
   if(isDefined(terminatefuncptr)) {
     assert(isfunctionptr(terminatefuncptr), "<dev string:x233>");
-    level._behaviortreeactions[actionname][# "bhtn_action_terminate"] = terminatefuncptr;
+    level._behaviortreeactions[actionname][#"bhtn_action_terminate"] = terminatefuncptr;
   }
 }

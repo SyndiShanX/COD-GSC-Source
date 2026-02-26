@@ -51,7 +51,7 @@ function on_grenade_fired(params) {
   team = undefined;
 
   if(isDefined(self.pers)) {
-    team = self.pers[# "team"];
+    team = self.pers[#"team"];
   }
 
   level thread create_grenade_influencers(team, weapon, grenade);
@@ -101,7 +101,7 @@ function create_influencer_generic(str_name, origin_or_entity, str_team, is_for_
   }
 
   if(str_team === # "any") {
-    team_mask = level.spawnsystem.ispawn_teammask[# "all"];
+    team_mask = level.spawnsystem.ispawn_teammask[#"all"];
   } else if(is_for_enemy) {
     team_mask = self get_enemy_team_mask(str_team);
   } else {
@@ -168,7 +168,7 @@ function create_player_influencers() {
     return;
   }
 
-  if(!isDefined(self.pers[# "team"]) || self.pers[# "team"] == # "spectator") {
+  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == # "spectator") {
     return;
   }
 
@@ -179,8 +179,8 @@ function create_player_influencers() {
   if(!level.teambased) {
     team_mask = level.spawnsystem.var_c2989de;
     enemy_teams_mask = level.spawnsystem.var_c2989de;
-  } else if(isDefined(self.pers[# "team"])) {
-    team = self.pers[# "team"];
+  } else if(isDefined(self.pers[#"team"])) {
+    team = self.pers[#"team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   } else {
@@ -202,8 +202,8 @@ function create_player_influencers() {
 }
 
 function create_player_spawn_influencers(spawn_origin) {
-  level create_enemy_influencer("enemy_spawn", spawn_origin, self.pers[# "team"]);
-  level create_friendly_influencer("friendly_spawn", spawn_origin, self.pers[# "team"]);
+  level create_enemy_influencer("enemy_spawn", spawn_origin, self.pers[#"team"]);
+  level create_friendly_influencer("friendly_spawn", spawn_origin, self.pers[#"team"]);
 }
 
 function private remove_influencer_tracking(to_be_removed) {
@@ -326,6 +326,6 @@ function create_turret_influencer(name) {
     return;
   }
 
-  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[# "radius"] * 0.7);
+  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[#"radius"] * 0.7);
   return create_enemy_influencer(name, turret.origin, turret.team);
 }

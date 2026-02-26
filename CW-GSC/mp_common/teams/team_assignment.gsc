@@ -440,11 +440,11 @@ function function_a3e209ba(teamname, comingfrommenu) {
 }
 
 function function_567994de() {
-  if(!isDefined(level.teams[self.pers[# "team"]]) || level.var_c58668ea) {
+  if(!isDefined(level.teams[self.pers[#"team"]]) || level.var_c58668ea) {
     return # "none";
   }
 
-  return self.pers[# "team"];
+  return self.pers[#"team"];
 }
 
 function function_7d93567f() {
@@ -547,7 +547,7 @@ function private function_5e84fc28(var_68253610) {
   var_d549939e = function_c65231e2(var_68253610);
 
   foreach(player in var_d549939e) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(isDefined(level.teams[team])) {
       return team;

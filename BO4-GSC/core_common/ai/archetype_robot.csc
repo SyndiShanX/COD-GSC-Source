@@ -16,8 +16,8 @@ autoexec __init__system__() {
 }
 
 autoexec precache() {
-  level._effect[# "fx_ability_elec_surge_short_robot"] = "electric/fx8_surge_short_robot";
-  level._effect[# "fx_exp_robot_stage3_evb"] = "explosions/fx_exp_robot_stage3_evb";
+  level._effect[#"fx_ability_elec_surge_short_robot"] = "electric/fx8_surge_short_robot";
+  level._effect[#"fx_exp_robot_stage3_evb"] = "explosions/fx_exp_robot_stage3_evb";
 }
 
 __init__() {
@@ -124,7 +124,7 @@ robotemphandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, field
     case 0:
       break;
     case 1:
-      entity.empfx = util::playFXOnTag(localclientnum, level._effect[# "fx_ability_elec_surge_short_robot"], entity, "j_spine4");
+      entity.empfx = util::playFXOnTag(localclientnum, level._effect[#"fx_ability_elec_surge_short_robot"], entity, "j_spine4");
       break;
   }
 }
@@ -153,7 +153,7 @@ robotmindcontrolexplosionhandler(localclientnum, oldvalue, newvalue, bnewent, bi
 
   switch (newvalue) {
     case 1:
-      entity.explosionfx = util::playFXOnTag(localclientnum, level._effect[# "fx_exp_robot_stage3_evb"], entity, "j_spineupper");
+      entity.explosionfx = util::playFXOnTag(localclientnum, level._effect[#"fx_exp_robot_stage3_evb"], entity, "j_spineupper");
       break;
   }
 }

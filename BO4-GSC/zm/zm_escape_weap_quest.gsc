@@ -469,7 +469,7 @@ function_74c96a90(e_activator) {
 tomahawk_pickup() {
   level flag::wait_till(#"soul_catchers_charged");
   var_fd22f9df = struct::get("tom_pil");
-  mdl_tomahawk = var_fd22f9df.scene_ents[# "prop 2"];
+  mdl_tomahawk = var_fd22f9df.scene_ents[#"prop 2"];
   mdl_tomahawk waittill(#"tomahawk_ready_for_pickup");
   wait 0.5;
   mdl_tomahawk playLoopSound(#"amb_tomahawk_swirl");
@@ -524,7 +524,7 @@ function_f0ef3897(e_player) {
   e_player notify(#"obtained_tomahawk");
   e_player endon(#"obtained_tomahawk", #"disconnect");
   var_fd22f9df = struct::get("tom_pil");
-  mdl_tomahawk = var_fd22f9df.scene_ents[# "prop 2"];
+  mdl_tomahawk = var_fd22f9df.scene_ents[#"prop 2"];
   mdl_tomahawk setinvisibletoplayer(e_player);
   self setinvisibletoplayer(e_player);
   e_player zm_utility::disable_player_move_states(1);
@@ -596,7 +596,7 @@ function_6300f001() {
   self endon(#"disconnect");
   var_6668e57a = getent("rt_pickup_trigger", "script_noteworthy");
   var_fd22f9df = struct::get("tom_pil");
-  mdl_tomahawk = var_fd22f9df.scene_ents[# "prop 2"];
+  mdl_tomahawk = var_fd22f9df.scene_ents[#"prop 2"];
 
   while(isPlayer(self)) {
     if(isDefined(var_6668e57a)) {

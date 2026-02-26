@@ -5508,8 +5508,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
 
       doKillcam = true;
 
-      if(level.teamBased && self.pers["team"] == attacker.pers["team"] && sMeansOfDeath == "MOD_GRENADE" && level.friendlyfire == 0) {
-      } else if(level.teamBased && self.pers["team"] == attacker.pers["team"]) {
+      if(level.teamBased && self.pers["team"] == attacker.pers["team"] && sMeansOfDeath == "MOD_GRENADE" && level.friendlyfire == 0) {} else if(level.teamBased && self.pers["team"] == attacker.pers["team"]) {
         attacker thread[[level.onXPEvent]]("teamkill");
 
         if(!IgnoreTeamKills(sWeapon, sMeansOfDeath)) {

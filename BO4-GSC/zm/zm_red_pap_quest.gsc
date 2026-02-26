@@ -519,7 +519,7 @@ function_fd16ebb0(ai) {
     }
   }
 
-  if(isDefined(level.crafting_components[# "zitem_zhield_zpear_part_1"]) && !(isDefined(var_91a451a1) && var_91a451a1)) {
+  if(isDefined(level.crafting_components[#"zitem_zhield_zpear_part_1"]) && !(isDefined(var_91a451a1) && var_91a451a1)) {
     w_component = zm_crafting::get_component(#"zitem_zhield_zpear_part_1");
 
     if(!zm_items::player_has(level.players[0], w_component)) {
@@ -1360,11 +1360,11 @@ function_5a4d8124(var_5ea5c94d) {
 }
 
 function_c3bbdc48(a_ents) {
-  level.var_ba012aad = a_ents[# "eagle_2"];
+  level.var_ba012aad = a_ents[#"eagle_2"];
 }
 
 function_bc27738a(a_ents) {
-  mdl_door = a_ents[# "prop 2"];
+  mdl_door = a_ents[#"prop 2"];
 
   if(isDefined(mdl_door)) {
     mdl_door thread function_f41b632f();
@@ -1372,8 +1372,8 @@ function_bc27738a(a_ents) {
 }
 
 function_5a557985(a_ents) {
-  mdl_door = a_ents[# "prop 2"];
-  mdl_cage = a_ents[# "prop 1"];
+  mdl_door = a_ents[#"prop 2"];
+  mdl_cage = a_ents[#"prop 1"];
 
   if(isDefined(mdl_cage)) {
     mdl_cage thread function_bb898a46();
@@ -1537,11 +1537,11 @@ function_697a602a(mdl_cage) {
 }
 
 function_5297c54(a_ents) {
-  level.var_6aec40b = a_ents[# "eagle_1"];
+  level.var_6aec40b = a_ents[#"eagle_1"];
 }
 
 function_1dceae50(a_ents) {
-  mdl_eagle = a_ents[# "prop 1"];
+  mdl_eagle = a_ents[#"prop 1"];
 
   if(isDefined(mdl_eagle)) {
     level waittill(#"eagle_gone");
@@ -1605,8 +1605,8 @@ function_d8db57f6() {
       v_angles = var_3e9d57b3.angles;
       a_info = zm_utility::function_b0eeaada(v_origin + (0, 0, 64));
 
-      if(isDefined(a_info) && isDefined(a_info[# "point"])) {
-        v_origin = a_info[# "point"];
+      if(isDefined(a_info) && isDefined(a_info[#"point"])) {
+        v_origin = a_info[#"point"];
       }
 
       s_spawn = struct::spawn(v_origin, v_angles);

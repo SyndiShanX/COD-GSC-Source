@@ -191,12 +191,12 @@ function_789652f2(origin, owner, innerradius, outerradius, halfheight, spacing) 
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "no visibility"])) {
-        point._scoredebug[# "no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"no visibility"])) {
+        point._scoredebug[#"no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[# "no visibility"].score = -5000;
-      point._scoredebug[# "no visibility"].scorename = "<dev string:x38>";
+      point._scoredebug[#"no visibility"].score = -5000;
+      point._scoredebug[#"no visibility"].scorename = "<dev string:x38>";
 
       point.score += -5000;
     }
@@ -288,12 +288,12 @@ function_b0c75ada(leader) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "no visibility"])) {
-          point._scoredebug[# "no visibility"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"no visibility"])) {
+          point._scoredebug[#"no visibility"] = spawnStruct();
         }
 
-        point._scoredebug[# "no visibility"].score = -5000;
-        point._scoredebug[# "no visibility"].scorename = "<dev string:x38>";
+        point._scoredebug[#"no visibility"].score = -5000;
+        point._scoredebug[#"no visibility"].scorename = "<dev string:x38>";
 
         point.score += -5000;
       }

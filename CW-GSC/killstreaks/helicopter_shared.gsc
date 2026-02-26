@@ -55,10 +55,10 @@ function init_shared() {
     level.heli_paths = [];
     level.heli_startnodes = [];
     level.last_start_node_index = 0;
-    level.chopper_fx[# "smoke"][# "trail"] = "destruct/fx8_atk_chppr_exp_trail";
-    level.chopper_fx[# "fire"][# "trail"][# "large"] = "killstreaks/fx_heli_smk_trail_engine";
-    level._effect[# "heli_comlink_light"][# "friendly"] = # "hash_33eb8912b6c63ecd";
-    level._effect[# "heli_comlink_light"][# "enemy"] = # "hash_33eb8912b6c63ecd";
+    level.chopper_fx[#"smoke"][#"trail"] = "destruct/fx8_atk_chppr_exp_trail";
+    level.chopper_fx[#"fire"][#"trail"][#"large"] = "killstreaks/fx_heli_smk_trail_engine";
+    level._effect[#"heli_comlink_light"][#"friendly"] = # "hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"enemy"] = # "hash_33eb8912b6c63ecd";
 
     if(!path_start.size && !loop_start.size) {
       return;
@@ -102,13 +102,13 @@ function function_bff5c062(helicopter, attackingplayer) {
 
 function precachehelicopter(model) {
   level.vehicle_deathmodel[model] = model;
-  level.heli_sound[# "hit"] = # "evt_helicopter_hit";
-  level.heli_sound[# "hitsecondary"] = # "evt_helicopter_hit";
-  level.heli_sound[# "damaged"] = # "null";
-  level.heli_sound[# "spinloop"] = # "evt_helicopter_spin_loop";
-  level.heli_sound[# "spinstart"] = # "evt_helicopter_spin_start";
-  level.heli_sound[# "crash"] = # "evt_helicopter_midair_exp";
-  level.heli_sound[# "missilefire"] = # "wpn_hellfire_fire_npc";
+  level.heli_sound[#"hit"] = # "evt_helicopter_hit";
+  level.heli_sound[#"hitsecondary"] = # "evt_helicopter_hit";
+  level.heli_sound[#"damaged"] = # "null";
+  level.heli_sound[#"spinloop"] = # "evt_helicopter_spin_loop";
+  level.heli_sound[#"spinstart"] = # "evt_helicopter_spin_start";
+  level.heli_sound[#"crash"] = # "evt_helicopter_midair_exp";
+  level.heli_sound[#"missilefire"] = # "wpn_hellfire_fire_npc";
 }
 
 function function_7da89497() {
@@ -1653,7 +1653,7 @@ function heli_secondary_explosions() {
     playFXOnTag(self.var_78d69212, self, self checkhelicoptertag("tag_engine_left"));
   }
 
-  self playSound(level.heli_sound[# "hit"]);
+  self playSound(level.heli_sound[#"hit"]);
   self thread trail_fx(self.var_ba5009c3, self checkhelicoptertag("tail_rotor_jnt"), "stop tail smoke");
   wait 3;
 
@@ -1665,7 +1665,7 @@ function heli_secondary_explosions() {
     playFXOnTag(self.var_78d69212, self, self checkhelicoptertag("tag_engine_left"));
   }
 
-  self playSound(level.heli_sound[# "hitsecondary"]);
+  self playSound(level.heli_sound[#"hitsecondary"]);
 }
 
 function heli_spin(speed) {
@@ -1684,9 +1684,9 @@ function spinsoundshortly() {
   wait 0.25;
   self stoploopsound();
   waitframe(1);
-  self playLoopSound(level.heli_sound[# "spinloop"]);
+  self playLoopSound(level.heli_sound[#"spinloop"]);
   waitframe(1);
-  self playSound(level.heli_sound[# "spinstart"]);
+  self playSound(level.heli_sound[#"spinstart"]);
 }
 
 function trail_fx(trail_fx, trail_tag, stop_notify) {}
@@ -1769,7 +1769,7 @@ function function_e1058a3e() {
     playFXOnTag(self.explosionfx, self, var_2e15ba7a ? "tag_deathfx" : "tag_origin");
   }
 
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
 }
 
 function heli_explode() {

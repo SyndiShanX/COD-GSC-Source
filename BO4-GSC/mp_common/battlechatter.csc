@@ -18,8 +18,8 @@ autoexec __init__system__() {
 __init__() {
   level.var_2829c23d = &function_50e36ba7;
   level.var_44e74ef4 = &function_f1d27638;
-  level.allowbattlechatter[# "bc"] = isDefined(getgametypesetting(#"allowbattlechatter")) && getgametypesetting(#"allowbattlechatter");
-  level.allowspecialistdialog = dialog_shared::mpdialog_value("enableHeroDialog", 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
+  level.allowbattlechatter[#"bc"] = isDefined(getgametypesetting(#"allowbattlechatter")) && getgametypesetting(#"allowbattlechatter");
+  level.allowspecialistdialog = dialog_shared::mpdialog_value("enableHeroDialog", 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
   level thread function_4bc12499();
 }
 
@@ -102,7 +102,7 @@ get_death_vox(meansofdeath, roleindex) {
     return;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 

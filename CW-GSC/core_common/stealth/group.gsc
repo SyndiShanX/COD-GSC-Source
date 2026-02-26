@@ -903,8 +903,8 @@ function pod_hunt_delayednotify() {
     if(guy[[guy.fnisinstealthidle]]() || guy[[guy.fnisinstealthinvestigate]]()) {
       var_d6fd5eab = 1;
 
-      if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[# "should_hunt"])) {
-        var_d6fd5eab = guy[[guy.stealth.funcs[# "should_hunt"]]]();
+      if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[#"should_hunt"])) {
+        var_d6fd5eab = guy[[guy.stealth.funcs[#"should_hunt"]]]();
       }
 
       if(var_d6fd5eab) {
@@ -1229,8 +1229,8 @@ function pod_combat_update_checklosttarget() {
   self endon(#"state_change");
   wait 5;
 
-  if(!self pod_haslostenemy() && isDefined(level.stealth.funcs) && isDefined(level.stealth.funcs[# "call_backup"])) {
-    self thread[[level.stealth.funcs[# "call_backup"]]]();
+  if(!self pod_haslostenemy() && isDefined(level.stealth.funcs) && isDefined(level.stealth.funcs[#"call_backup"])) {
+    self thread[[level.stealth.funcs[#"call_backup"]]]();
   }
 
   if(!is_true(level.stealth.var_ffa24aff)) {
@@ -1250,8 +1250,8 @@ function pod_haslostenemy() {
   var_2f31a4a5 = undefined;
 
   foreach(guy in self.members) {
-    if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[# "hash_6fc6e860faaf2da5"])) {
-      return guy[[guy.stealth.funcs[# "hash_6fc6e860faaf2da5"]]]();
+    if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[#"hash_6fc6e860faaf2da5"])) {
+      return guy[[guy.stealth.funcs[#"hash_6fc6e860faaf2da5"]]]();
     }
 
     enemy = guy.enemy;
@@ -1357,8 +1357,8 @@ function private function_b921795f() {
 
     var_d6fd5eab = 1;
 
-    if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[# "should_hunt"])) {
-      var_d6fd5eab = guy[[guy.stealth.funcs[# "should_hunt"]]]();
+    if(isDefined(guy.stealth.funcs) && isDefined(guy.stealth.funcs[#"should_hunt"])) {
+      var_d6fd5eab = guy[[guy.stealth.funcs[#"should_hunt"]]]();
     }
 
     if(!var_d6fd5eab) {

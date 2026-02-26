@@ -1201,7 +1201,7 @@ zombiemoveactionstart(entity, asmstatename) {
 
   if(isDefined(entity.stumble) && !isDefined(entity.move_anim_end_time)) {
     stumbleactionresult = entity astsearch(asmstatename);
-    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[# "animation"]);
+    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[#"animation"]);
     entity.move_anim_end_time = entity.movetime + getanimlength(stumbleactionanimation);
   }
 
@@ -1452,7 +1452,7 @@ zombiegravity(entity, attribute, oldvalue, value) {
 
     if(!isDefined(self.low_gravity_variant) && isDefined(level.var_d9ffddf4)) {
       if(isDefined(self.missinglegs) && self.missinglegs) {
-        self.low_gravity_variant = randomint(level.var_d9ffddf4[# "crawl"]);
+        self.low_gravity_variant = randomint(level.var_d9ffddf4[#"crawl"]);
       } else {
         self.low_gravity_variant = randomint(level.var_d9ffddf4[self.zombie_move_speed]);
       }

@@ -57,7 +57,7 @@ function function_7ae3f138(killstreaktype) {
   self airsupport::function_9e2054b0(&function_3457a31e);
   locations = [];
 
-  if(is_true(params.var_7436c1c5) && !is_true(self.pers[# "hash_10c1dad9bcbe13a4"])) {
+  if(is_true(params.var_7436c1c5) && !is_true(self.pers[#"hash_10c1dad9bcbe13a4"])) {
     self thread airsupport::singleradarsweep();
   }
 
@@ -68,12 +68,12 @@ function function_7ae3f138(killstreaktype) {
   }
 
   if(!isDefined(location.origin) || self killstreakrules::iskillstreakallowed(killstreaktype, self.team) == 0) {
-    self.pers[# "hash_10c1dad9bcbe13a4"] = 1;
+    self.pers[#"hash_10c1dad9bcbe13a4"] = 1;
     self notify(#"cancel_selection");
     return 0;
   }
 
-  self.pers[# "hash_10c1dad9bcbe13a4"] = 0;
+  self.pers[#"hash_10c1dad9bcbe13a4"] = 0;
   return self airsupport::function_83904681(location, &function_3d070ab6, killstreaktype);
 }
 
@@ -107,7 +107,7 @@ function function_88e2e18a(killstreaktype, location, team, killstreak_id, startd
     }
 
     trace = bulletTrace(position + (0, 0, 10000), position - (0, 0, 10000), 0, undefined, 1);
-    targetpoint = trace[# "fraction"] > 1 ? (position[0], position[1], 0) : trace[# "position"];
+    targetpoint = trace[#"fraction"] > 1 ? (position[0], position[1], 0) : trace[#"position"];
 
     if(getdvarint(#"hash_2cb865fc68c3cb44", 0)) {
       sphere(targetpoint, 20, (0, 1, 0), 1, 1, 10, 400);
@@ -122,7 +122,7 @@ function function_88e2e18a(killstreaktype, location, team, killstreak_id, startd
       } else {
         height = killstreaks::function_43f4782d();
         height += 3400 + randomfloatrange(-100, 100);
-        traceheight = trace[# "position"][2];
+        traceheight = trace[#"position"][2];
         height += traceheight - level.mapcenter[2];
       }
     }
@@ -385,11 +385,11 @@ function private function_77ba1651(position, owner, normal, direction, killcamen
     var_8ae62b02 = var_36c22d1d - (0, 0, 20);
     var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), self, 1 | 4);
 
-    if(var_69d15ad0[# "fraction"] < 1) {
+    if(var_69d15ad0[#"fraction"] < 1) {
       position = var_36c22d1d;
 
-      if(var_69d15ad0[# "fraction"] > 0) {
-        normal = var_69d15ad0[# "normal"];
+      if(var_69d15ad0[#"fraction"] > 0) {
+        normal = var_69d15ad0[#"normal"];
       } else {
         normal = (0, 0, 1);
       }
@@ -401,18 +401,18 @@ function private function_77ba1651(position, owner, normal, direction, killcamen
     var_36c22d1d = originalposition + vectorscale(var_493d36f9, 8);
     var_8ae62b02 = var_36c22d1d - (0, 0, var_8a11dbc7);
     var_69d15ad0 = physicstrace(var_36c22d1d, var_8ae62b02, (-3, -3, -3), (3, 3, 3), self, 1 | 4);
-    var_693f108f = var_69d15ad0[# "fraction"] * var_8a11dbc7;
+    var_693f108f = var_69d15ad0[#"fraction"] * var_8a11dbc7;
 
     if(var_693f108f > 10) {
       var_e76400c0 = originalposition;
       wallnormal = var_493d36f9;
     }
 
-    if(var_69d15ad0[# "fraction"] < 1) {
-      position = var_69d15ad0[# "position"];
+    if(var_69d15ad0[#"fraction"] < 1) {
+      position = var_69d15ad0[#"position"];
 
-      if(var_69d15ad0[# "fraction"] > 0) {
-        normal = var_69d15ad0[# "normal"];
+      if(var_69d15ad0[#"fraction"] > 0) {
+        normal = var_69d15ad0[#"normal"];
       } else {
         normal = (0, 0, 1);
       }
@@ -430,29 +430,29 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
   colorarray[colorarray.size] = (0.2, 0.2, 0.9);
   colorarray[colorarray.size] = (0.9, 0.9, 0.9);
   locations = [];
-  locations[# "loc"] = [];
-  locations[# "normal"] = [];
-  locations[# "point"] = [];
-  locations[# "surfacetype"] = [];
+  locations[#"loc"] = [];
+  locations[#"normal"] = [];
+  locations[#"point"] = [];
+  locations[#"surfacetype"] = [];
   fxcount = killstreakbundle.var_804c11a3;
   function_f712ec5e();
   fxlength = var_57a970a6 / fxcount;
   startpos += vectorscale(direction * -1, var_57a970a6 / 2 - fxlength / 2);
 
   for(fxindex = 0; fxindex < fxcount; fxindex++) {
-    locations[# "point"][fxindex] = startpos + vectorscale(direction, fxlength * fxindex);
+    locations[#"point"][fxindex] = startpos + vectorscale(direction, fxlength * fxindex);
   }
 
   var_1cac1ca8 = normal[2] > 0.5;
 
   for(count = 0; count < fxcount; count++) {
-    tracepoint = locations[# "point"][count];
+    tracepoint = locations[#"point"][count];
     trace = bulletTrace(tracepoint + (0, 0, killstreakbundle.var_df0b598c), tracepoint - (0, 0, killstreakbundle.var_1b97cd46), 0, undefined, 1);
 
-    if(trace[# "fraction"] < 1) {
-      locations[# "loc"][count] = trace[# "position"];
-      locations[# "normal"][count] = trace[# "normal"];
-      locations[# "surfacetype"][count] = trace[# "surfacetype"];
+    if(trace[#"fraction"] < 1) {
+      locations[#"loc"][count] = trace[#"position"];
+      locations[#"normal"][count] = trace[#"normal"];
+      locations[#"surfacetype"][count] = trace[#"surfacetype"];
     }
   }
 
@@ -466,16 +466,16 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
   killcament moveto(var_ab1069fa, 4, 0, 1);
   level thread function_660d94c3(firesound, killcament, fireduration);
   damageendtime = int(gettime() + fireduration * 1000);
-  var_b1dd2ca0 = getarraykeys(locations[# "loc"]);
+  var_b1dd2ca0 = getarraykeys(locations[#"loc"]);
 
   foreach(lockey in var_b1dd2ca0) {
-    position = locations[# "loc"][lockey];
+    position = locations[#"loc"][lockey];
 
     if(isunderwater(position)) {
       continue;
     }
 
-    fxnormal = locations[# "normal"][lockey];
+    fxnormal = locations[#"normal"][lockey];
 
     if(fxnormal[2] < 0.2) {
       var_8866515 = (0, 0, 1);
@@ -493,7 +493,7 @@ function function_985141f2(owner, startpos, normal, direction, killcament, team,
       sphere(damageposition, 70, (1, 0, 0), 0.3, 1, 10, 200);
     }
 
-    weapon = locations[# "surfacetype"][lockey] == "water" ? var_b366de9c : var_54715763;
+    weapon = locations[#"surfacetype"][lockey] == "water" ? var_b366de9c : var_54715763;
     spawntimedfx(weapon, position, var_8866515, fireduration, team, 0);
     wait 0.25;
   }
@@ -557,7 +557,7 @@ function private function_e3bc95f2(killstreakbundle) {
       foreach(player in playertargets) {
         trace = bulletTrace(position, player getshootatpos(), 0, player);
 
-        if(trace[# "fraction"] == 1) {
+        if(trace[#"fraction"] == 1) {
           var_e5a58a70[player getentitynumber()] = player;
           player.var_93057333 = var_93057333;
         }
@@ -569,7 +569,7 @@ function private function_e3bc95f2(killstreakbundle) {
         foreach(target in var_9d1e202b) {
           trace = bulletTrace(position, target getshootatpos(), 0, target);
 
-          if(trace[# "fraction"] == 1) {
+          if(trace[#"fraction"] == 1) {
             var_d98685bf[var_d98685bf.size] = target;
           }
         }

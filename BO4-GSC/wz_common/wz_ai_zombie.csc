@@ -17,12 +17,12 @@ __init__() {
   clientfield::register("actor", "zombie_has_eyes_col", 13000, 2, "int", &zombie_eyes_clientfield_cb, 0, 0);
   clientfield::register("actor", "zombie_has_microwave", 1, 1, "int", &function_bee29da4, 0, 0);
   clientfield::register("toplayer", "zombie_vehicle_shake", 19000, 1, "counter", &function_3acc8ce4, 0, 0);
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
-  level._effect[# "eye_glow_blue"] = # "wz/fx8_zombie_eye_glow_blue_wz";
-  level._effect[# "eye_glow_green"] = # "wz/fx8_zombie_eye_glow_green_wz";
-  level._effect[# "microwave_attack"] = # "hash_6b67cc3e876119c1";
+  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"eye_glow_blue"] = # "wz/fx8_zombie_eye_glow_blue_wz";
+  level._effect[#"eye_glow_green"] = # "wz/fx8_zombie_eye_glow_green_wz";
+  level._effect[#"microwave_attack"] = # "hash_6b67cc3e876119c1";
 }
 
 handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -31,8 +31,8 @@ handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   if(newval) {
     localplayers = level.localplayers;
     playSound(0, #"zmb_zombie_spawn", self.origin);
-    burst_fx = level._effect[# "rise_burst"];
-    billow_fx = level._effect[# "rise_billow"];
+    burst_fx = level._effect[#"rise_burst"];
+    billow_fx = level._effect[#"rise_billow"];
 
     for(i = 0; i < localplayers.size; i++) {
       self thread rise_dust_fx(localclientnum, billow_fx, burst_fx);
@@ -90,7 +90,7 @@ function_bee29da4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.var_165c58d7 = util::playFXOnTag(localclientnum, level._effect[# "microwave_attack"], self, "j_head");
+    self.var_165c58d7 = util::playFXOnTag(localclientnum, level._effect[#"microwave_attack"], self, "j_head");
   }
 }
 

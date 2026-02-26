@@ -23,7 +23,7 @@ function private preinit() {
   clientfield::register("toplayer", "" + # "hash_4241f7b51f8c144", 8000, 1, "int");
   init_shared("killstreak_remote_missile" + "_zm", &function_ea3ce28b);
 
-  if(isDefined(level.killstreakrules[# "hero_weapons"])) {
+  if(isDefined(level.killstreakrules[#"hero_weapons"])) {
     killstreakrules::addkillstreaktorule("remote_missile", "hero_weapons", 0, 0);
   }
 

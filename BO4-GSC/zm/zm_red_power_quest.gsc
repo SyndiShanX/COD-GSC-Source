@@ -144,8 +144,8 @@ function_bda82828() {
 
   callback::on_ai_killed(&function_75c83fbf);
   level flag::wait_till("begin_spawning");
-  level.var_ffb89532 = level.zones[# "zone_amphitheater_house"].a_loc_types[# "zombie_location"];
-  level.zones[# "zone_amphitheater_house"].a_loc_types[# "zombie_location"] = [];
+  level.var_ffb89532 = level.zones[#"zone_amphitheater_house"].a_loc_types[#"zombie_location"];
+  level.zones[#"zone_amphitheater_house"].a_loc_types[#"zombie_location"] = [];
   mdl_sentinel_artifact = getent("mdl_sentinel_artifact", "targetname");
   mdl_sentinel_artifact clientfield::set("" + # "artifact_glow", 1);
   mdl_sentinel_artifact playLoopSound(#"hash_5c7e9911ac98f633");
@@ -224,8 +224,8 @@ function_bda82828() {
     vol_amphitheater delete();
   }
 
-  level.zones[# "zone_amphitheater_house"].a_loc_types[# "zombie_location"] = level.var_ffb89532;
-  level.zones[# "zone_amphitheater"].is_spawning_allowed = 1;
+  level.zones[#"zone_amphitheater_house"].a_loc_types[#"zombie_location"] = level.var_ffb89532;
+  level.zones[#"zone_amphitheater"].is_spawning_allowed = 1;
 }
 
 function_d1435bda(player, var_feed7374) {
@@ -524,7 +524,7 @@ function_e059d0e1() {
 function_95d6655b() {
   level endon(#"hash_4d8091aa6a26d815");
   var_168ccd6b = getent("vol_power_quest_kill_zone", "targetname");
-  level.zones[# "zone_amphitheater"].is_spawning_allowed = 0;
+  level.zones[#"zone_amphitheater"].is_spawning_allowed = 0;
   wait 2;
 
   while(true) {
@@ -861,7 +861,7 @@ function_aa54541d() {
 
   while(true) {
     wait 0.5;
-    a_ai_zombies = level.ai[# "axis"];
+    a_ai_zombies = level.ai[#"axis"];
 
     if(isDefined(a_ai_zombies) && isarray(a_ai_zombies) && a_ai_zombies.size > level.zombie_ai_limit) {
       foreach(ai_zombie in a_ai_zombies) {
@@ -1072,7 +1072,7 @@ pegasus_exit() {
 }
 
 function_4b198b8f(a_ents) {
-  var_10d4f67d = a_ents[# "prop 1"];
+  var_10d4f67d = a_ents[#"prop 1"];
 
   if(isDefined(var_10d4f67d)) {
     var_10d4f67d setteam(#"allies");
@@ -1473,8 +1473,8 @@ function_d8db57f6() {
     v_angles = var_3e9d57b3.angles;
     a_info = zm_utility::function_b0eeaada(v_origin + (0, 0, 64));
 
-    if(isDefined(a_info) && isDefined(a_info[# "point"])) {
-      v_origin = a_info[# "point"];
+    if(isDefined(a_info) && isDefined(a_info[#"point"])) {
+      v_origin = a_info[#"point"];
     }
 
     s_spawn = struct::spawn(v_origin, v_angles);
@@ -1611,7 +1611,7 @@ function_1f25fb54() {
 }
 
 registerpromenade_chillout_props_traversal(a_ents) {
-  var_10d4f67d = a_ents[# "prop 1"];
+  var_10d4f67d = a_ents[#"prop 1"];
 
   if(!isDefined(var_10d4f67d)) {
     return;

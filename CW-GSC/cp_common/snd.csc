@@ -22,13 +22,13 @@ function private autoexec function_4047919b() {
     level._snd.var_92f63ad0 = [];
     level._snd.var_d37e94ca = # "centity";
     level._snd.var_90903fc0 = 0;
-    level._snd._callbacks[# "pitch_get"] = &function_6f94855d;
-    level._snd._callbacks[# "pitch_set"] = &function_679011ab;
-    level._snd._callbacks[# "volume_get"] = &function_7308d4d0;
-    level._snd._callbacks[# "volume_set"] = &function_a43df3ac;
-    level._snd._callbacks[# "player_view"] = &function_959bbfdb;
-    level._snd._callbacks[# "player_angles"] = &function_2c0c5fbc;
-    level._snd._callbacks[# "player_fov"] = &function_bf76eea3;
+    level._snd._callbacks[#"pitch_get"] = &function_6f94855d;
+    level._snd._callbacks[#"pitch_set"] = &function_679011ab;
+    level._snd._callbacks[#"volume_get"] = &function_7308d4d0;
+    level._snd._callbacks[#"volume_set"] = &function_a43df3ac;
+    level._snd._callbacks[#"player_view"] = &function_959bbfdb;
+    level._snd._callbacks[#"player_angles"] = &function_2c0c5fbc;
+    level._snd._callbacks[#"player_fov"] = &function_bf76eea3;
     level._snd.var_cd3159ba = [];
   }
 
@@ -84,8 +84,8 @@ function private function_8610d024(localclientnum, _cmd) {
     }
   }
 
-  if(isscriptfunctionptr(level._snd._callbacks[# "clientsoundcommand"])) {
-    level thread[[level._snd._callbacks[# "clientsoundcommand"]]](localclientnum, _cmd);
+  if(isscriptfunctionptr(level._snd._callbacks[#"clientsoundcommand"])) {
+    level thread[[level._snd._callbacks[#"clientsoundcommand"]]](localclientnum, _cmd);
   }
 }
 
@@ -95,7 +95,7 @@ function private function_21d71e38(player, cmd, args) {
   assert(isstring(cmd) && (cmd == "<dev string:xc0>" || cmd == "<dev string:xc5>"));
   assert(isarray(args) && args.size >= 2);
 
-  if(function_81fac19d(!isscriptfunctionptr(level._snd._callbacks[# "client_msg"]), "snd: client msg without initialization")) {
+  if(function_81fac19d(!isscriptfunctionptr(level._snd._callbacks[#"client_msg"]), "snd: client msg without initialization")) {
     return;
   }
 
@@ -113,7 +113,7 @@ function private function_21d71e38(player, cmd, args) {
     return;
   }
 
-  level thread[[level._snd._callbacks[# "client_msg"]]](player, msg);
+  level thread[[level._snd._callbacks[#"client_msg"]]](player, msg);
 }
 
 function private function_6d366059(player, cmd, args) {
@@ -138,7 +138,7 @@ function private function_cc4bf5ee(player, cmd, args) {
   assert(isDefined(player.localclientnum));
   assert(isstring(cmd) && cmd == "<dev string:xcf>");
   assert(isarray(args));
-  var_e1fb96c7 = isDefined(level._snd._callbacks[# "client_voice"]) && isscriptfunctionptr(level._snd._callbacks[# "client_voice"]);
+  var_e1fb96c7 = isDefined(level._snd._callbacks[#"client_voice"]) && isscriptfunctionptr(level._snd._callbacks[#"client_voice"]);
   entitynumber = int(args[1]);
   soundalias = undefined;
 
@@ -162,7 +162,7 @@ function private function_cc4bf5ee(player, cmd, args) {
 
     if(isentity(ent)) {
       if(var_e1fb96c7) {
-        ent thread[[level._snd._callbacks[# "client_voice"]]](ent, soundalias);
+        ent thread[[level._snd._callbacks[#"client_voice"]]](ent, soundalias);
       } else {
         var_90709302 = isDefined(soundalias);
         var_2115c64c = function_a6779cbd(ent.var_6d22c36f);
@@ -220,7 +220,7 @@ function function_201a102c(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_c5463db2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(function_81fac19d(!isscriptfunctionptr(level._snd._callbacks[# "client_targetname"]), "snd: client targetname without initialization")) {
+  if(function_81fac19d(!isscriptfunctionptr(level._snd._callbacks[#"client_targetname"]), "snd: client targetname without initialization")) {
     return;
   }
 
@@ -242,7 +242,7 @@ function function_c5463db2(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(isentity(ent) && isstring(targetname)) {
       ent.targetname = targetname;
-      ent thread[[level._snd._callbacks[# "client_targetname"]]](ent, targetname);
+      ent thread[[level._snd._callbacks[#"client_targetname"]]](ent, targetname);
       level thread function_3c94cf0c(ent);
       return;
     }
@@ -274,7 +274,7 @@ function function_d4ec748e(callback) {
     return;
   }
 
-  level._snd._callbacks[# "client_msg"] = callback;
+  level._snd._callbacks[#"client_msg"] = callback;
 }
 
 function function_ce78b33b(callback) {
@@ -286,7 +286,7 @@ function function_ce78b33b(callback) {
     return;
   }
 
-  level._snd._callbacks[# "client_targetname"] = callback;
+  level._snd._callbacks[#"client_targetname"] = callback;
 }
 
 #namespace namespace_afa8e18b;

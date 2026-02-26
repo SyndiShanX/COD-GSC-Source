@@ -52,11 +52,11 @@ function private function_c1471c7c(point) {
   groundtrace = groundtrace(startpoint, endpoint, 0, undefined, 0, 0);
   physicstrace = physicstraceex(startpoint, endpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), undefined, 32);
 
-  if(groundtrace[# "position"][2] > physicstrace[# "position"][2]) {
-    return groundtrace[# "position"];
+  if(groundtrace[#"position"][2] > physicstrace[#"position"][2]) {
+    return groundtrace[#"position"];
   }
 
-  return physicstrace[# "position"];
+  return physicstrace[#"position"];
 }
 
 function private _teleport_player(origin, angles, var_9914886a) {

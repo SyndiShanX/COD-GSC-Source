@@ -1881,11 +1881,11 @@ function function_dab7edc(einflictor, eattacker, idamage, idflags, smeansofdeath
       self.var_9be3628d[eattacker.entnum] += idamage;
     }
 
-    if(!isDefined(eattacker.pers[# "damagedone"])) {
-      eattacker.pers[# "damagedone"] = 0;
+    if(!isDefined(eattacker.pers[#"damagedone"])) {
+      eattacker.pers[#"damagedone"] = 0;
     }
 
-    eattacker.pers[# "damagedone"] += idamage;
+    eattacker.pers[#"damagedone"] += idamage;
   }
 
   if(is_true(level.doa.var_598305fe)) {
@@ -2029,11 +2029,11 @@ function function_c36e5cab(einflictor, eattacker, idamage, idflags, smeansofdeat
   idamage = int(idamage);
 
   if(idamage > 0 && isPlayer(eattacker)) {
-    if(!isDefined(eattacker.pers[# "damagedone"])) {
-      eattacker.pers[# "damagedone"] = 0;
+    if(!isDefined(eattacker.pers[#"damagedone"])) {
+      eattacker.pers[#"damagedone"] = 0;
     }
 
-    eattacker.pers[# "damagedone"] += idamage;
+    eattacker.pers[#"damagedone"] += idamage;
   }
 
   self finishvehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname, 0);

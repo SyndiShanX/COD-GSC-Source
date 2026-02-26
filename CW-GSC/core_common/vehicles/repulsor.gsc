@@ -447,12 +447,12 @@ function function_649bd6d(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -5000;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x6b>";
+      point._scoredebug[#"inclaimedlocation"].score = -5000;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x6b>";
 
       point.score += -5000;
     }
@@ -463,12 +463,12 @@ function function_649bd6d(goal) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = score;
-    point._scoredebug[# "random"].scorename = "<dev string:x80>";
+    point._scoredebug[#"random"].score = score;
+    point._scoredebug[#"random"].scorename = "<dev string:x80>";
 
     point.score += score;
   }

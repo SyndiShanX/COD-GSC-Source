@@ -268,8 +268,8 @@ function function_f3170551() {
 
     if(isDefined(bundle.var_b771831a)) {
       a_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
-      str_fx = self getfxfromsurfacetable(bundle.var_b771831a, a_trace[# "surfacetype"]);
-      playFX(str_fx, a_trace[# "position"], (0, 0, 1));
+      str_fx = self getfxfromsurfacetable(bundle.var_b771831a, a_trace[#"surfacetype"]);
+      playFX(str_fx, a_trace[#"position"], (0, 0, 1));
     }
   }
 }
@@ -278,7 +278,7 @@ function function_2087b17f() {
   bundle = killstreaks::get_script_bundle("recon_car");
   arrayremovevalue(level.var_bced5d3c, self);
   trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
-  explosionfx = self getfxfromsurfacetable(bundle.var_1c30ba81, trace[# "surfacetype"]);
+  explosionfx = self getfxfromsurfacetable(bundle.var_1c30ba81, trace[#"surfacetype"]);
 
   if(isDefined(explosionfx)) {
     fxorigin = self gettagorigin("tag_body");

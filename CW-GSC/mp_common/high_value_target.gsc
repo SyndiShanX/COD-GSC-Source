@@ -29,7 +29,7 @@ function private preinit() {
 }
 
 function onplayerspawned() {
-  killstreakcount = isDefined(self.pers[# "cur_kill_streak"]) ? self.pers[# "cur_kill_streak"] : 0;
+  killstreakcount = isDefined(self.pers[#"cur_kill_streak"]) ? self.pers[#"cur_kill_streak"] : 0;
 
   if(killstreakcount < level.var_8d51c9b1) {
     if(self.ishvt !== 0) {
@@ -47,8 +47,8 @@ function onplayerspawned() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(psoffsettime) && isDefined(psoffsettime.pers[# "cur_kill_streak"])) {
-    var_f5d993e3 = isDefined(psoffsettime.pers[# "cur_kill_streak"]) ? psoffsettime.pers[# "cur_kill_streak"] : 0;
+  if(isDefined(psoffsettime) && isDefined(psoffsettime.pers[#"cur_kill_streak"])) {
+    var_f5d993e3 = isDefined(psoffsettime.pers[#"cur_kill_streak"]) ? psoffsettime.pers[#"cur_kill_streak"] : 0;
 
     if(var_f5d993e3 >= level.var_8d51c9b1 && psoffsettime clientfield::get("high_value_target") !== 1) {
       psoffsettime clientfield::set("high_value_target", 1);
@@ -58,7 +58,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
   if(isDefined(self) && self.ishvt === 1) {
     if(isDefined(psoffsettime) && isPlayer(psoffsettime) && psoffsettime hasperk(#"hash_1c40ade36b54ff8") && psoffsettime != self && psoffsettime.team != self.team) {
-      var_13f7eb29 = self.pers[# "kill_streak_before_death"];
+      var_13f7eb29 = self.pers[#"kill_streak_before_death"];
 
       if(!isDefined(var_13f7eb29) || var_13f7eb29 < level.var_8d51c9b1) {
         return;

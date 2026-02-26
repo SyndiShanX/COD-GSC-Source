@@ -29,11 +29,11 @@ autoexec __init__system__() {
 }
 
 init() {
-  level._effect[# "tesla_bolt"] = "zm_ai/fx8_elec_bolt";
-  level._effect[# "tesla_shock"] = "zm_ai/fx8_elec_shock";
-  level._effect[# "tesla_shock_secondary"] = "zm_ai/fx8_elec_bolt";
-  level._effect[# "tesla_shock_nonfatal"] = "zm_ai/fx8_elec_shock_os";
-  level._effect[# "tesla_shock_eyes"] = "zm_ai/fx8_elec_shock_eyes";
+  level._effect[#"tesla_bolt"] = "zm_ai/fx8_elec_bolt";
+  level._effect[#"tesla_shock"] = "zm_ai/fx8_elec_shock";
+  level._effect[#"tesla_shock_secondary"] = "zm_ai/fx8_elec_bolt";
+  level._effect[#"tesla_shock_nonfatal"] = "zm_ai/fx8_elec_shock_os";
+  level._effect[#"tesla_shock_eyes"] = "zm_ai/fx8_elec_shock_eyes";
   level.default_lightning_chain_params = create_lightning_chain_params();
   clientfield::register("actor", "lc_fx", 1, 2, "int");
   clientfield::register("vehicle", "lc_fx", 1, 2, "int");
@@ -406,7 +406,7 @@ lc_play_arc_fx(target, params) {
   }
 
   fxorg = util::spawn_model("tag_origin", origin);
-  fx = playFXOnTag(level._effect[# "tesla_bolt"], fxorg, "tag_origin");
+  fx = playFXOnTag(level._effect[#"tesla_bolt"], fxorg, "tag_origin");
 
   if(isDefined(params.arc_fx_sound)) {
     playsoundatposition(params.arc_fx_sound, fxorg.origin);

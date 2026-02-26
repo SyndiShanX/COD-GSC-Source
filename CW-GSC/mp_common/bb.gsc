@@ -21,11 +21,11 @@ function private preinit() {
 
 function on_player_spawned() {
   self._bbdata = [];
-  self._bbdata[# "score"] = 0;
-  self._bbdata[# "momentum"] = 0;
-  self._bbdata[# "spawntime"] = gettime();
-  self._bbdata[# "shots"] = 0;
-  self._bbdata[# "hits"] = 0;
+  self._bbdata[#"score"] = 0;
+  self._bbdata[#"momentum"] = 0;
+  self._bbdata[#"spawntime"] = gettime();
+  self._bbdata[#"shots"] = 0;
+  self._bbdata[#"hits"] = 0;
 }
 
 function function_bf5cad4e(gamemodedata) {
@@ -199,7 +199,7 @@ function commit_spawn_data() {
 
   specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
   mpplayerlives = {
-    #gametime: function_f8d53445(), #spawnid: getplayerspawnid(self), #lifescore: self._bbdata[# "score"], #lifemomentum: self._bbdata[# "momentum"], #lifetime: gettime() - self._bbdata[# "spawntime"], #name: self.name, #specialist: specialistindex
+    #gametime: function_f8d53445(), #spawnid: getplayerspawnid(self), #lifescore: self._bbdata[#"score"], #lifemomentum: self._bbdata[#"momentum"], #lifetime: gettime() - self._bbdata[#"spawntime"], #name: self.name, #specialist: specialistindex
   };
   function_92d1707f(#"hash_6fc210ad5f081ce8", mpplayerlives);
   self function_6661621a();

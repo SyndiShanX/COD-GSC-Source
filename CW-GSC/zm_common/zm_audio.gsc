@@ -141,9 +141,9 @@ function zmbvox() {
 
   announcer_ent = spawn("script_origin", (0, 0, 0));
   level.vox zmbvoxinitspeaker("announcer", "vox_zmba_", announcer_ent);
-  level.exert_sounds[0][# "burp"] = "evt_belch";
-  level.exert_sounds[0][# "hitmed"] = "null";
-  level.exert_sounds[0][# "hitlrg"] = "null";
+  level.exert_sounds[0][#"burp"] = "evt_belch";
+  level.exert_sounds[0][#"hitmed"] = "null";
+  level.exert_sounds[0][#"hitlrg"] = "null";
 
   if(isDefined(level.setupcustomcharacterexerts)) {
     [[level.setupcustomcharacterexerts]]();
@@ -1816,7 +1816,7 @@ function function_4138a262() {
     }
   }
 
-  if(isDefined(level.musicsystem.states[# "round_start_first"]) && level.round_number <= 1) {
+  if(isDefined(level.musicsystem.states[#"round_start_first"]) && level.round_number <= 1) {
     if(isDefined(level.var_f546b995)) {
       level thread sndmusicsystem_playstate("round_start_first" + "_" + level.var_f546b995);
     } else {

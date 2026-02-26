@@ -153,7 +153,7 @@ function event_handler[gametype_init] main(eventstruct) {
 
   level.var_374c2805 = 1;
   level.aat_in_use = 1;
-  level.var_ae22a03 = [# "mp_cartel", #"mp_kgb", #"mp_miami", #"mp_moscow", #"mp_satellite", #"mp_tank", #"mp_tundra", #"mp_nuketown6", #"mp_raid_rm", #"mp_mall", #"mp_apocalypse", #"mp_express_rm", #"mp_cliffhanger", #"mp_village_rm", #"mp_dune", #"mp_paintball_rm", #"mp_echelon", #"mp_drivein_rm", #"mp_firebase"];
+  level.var_ae22a03 = [#"mp_cartel", #"mp_kgb", #"mp_miami", #"mp_moscow", #"mp_satellite", #"mp_tank", #"mp_tundra", #"mp_nuketown6", #"mp_raid_rm", #"mp_mall", #"mp_apocalypse", #"mp_express_rm", #"mp_cliffhanger", #"mp_village_rm", #"mp_dune", #"mp_paintball_rm", #"mp_echelon", #"mp_drivein_rm", #"mp_firebase"];
   level.resurrect_override_spawn = &overridespawn;
   callback::on_bleedout(&on_bleedout);
   level.var_bde3d03 = &function_37d98bb7;
@@ -217,8 +217,8 @@ function function_d2211917() {
       if(isalive(ai) && ai istouching(self)) {
         var_f2174bdd = getclosestpointonnavmesh(level.var_df7b46d1.origin + (0, 0, 8), 128, 64);
         var_f2174bdd = isDefined(var_f2174bdd) ? var_f2174bdd : level.var_df7b46d1.origin + (0, 0, 8);
-        playFX(level._effect[# "boss_appear"], ai.origin);
-        playFX(level._effect[# "boss_appear"], var_f2174bdd);
+        playFX(level._effect[#"boss_appear"], ai.origin);
+        playFX(level._effect[#"boss_appear"], var_f2174bdd);
         ai forceteleport(var_f2174bdd, ai.angles);
       }
 
@@ -500,34 +500,34 @@ function overridespawn(ispredictedspawn) {
 
     switch (var_7e51d277) {
       case 0:
-        spawns = var_8fb1964e[# "war"];
+        spawns = var_8fb1964e[#"war"];
         break;
       case 1:
-        spawns = var_8fb1964e[# "war_zone_0"];
+        spawns = var_8fb1964e[#"war_zone_0"];
         break;
       case 2:
-        spawns = var_8fb1964e[# "war_zone_1"];
+        spawns = var_8fb1964e[#"war_zone_1"];
         break;
       case 3:
-        spawns = var_8fb1964e[# "war_zone_2"];
+        spawns = var_8fb1964e[#"war_zone_2"];
         break;
       case 4:
-        spawns = var_8fb1964e[# "war_zone_3"];
+        spawns = var_8fb1964e[#"war_zone_3"];
         break;
       case 5:
-        spawns = var_8fb1964e[# "war_zone_4"];
+        spawns = var_8fb1964e[#"war_zone_4"];
         break;
     }
 
     if(!isDefined(spawns)) {
-      spawns = var_8fb1964e[# "tdm"];
+      spawns = var_8fb1964e[#"tdm"];
     }
   } else {
-    spawns = var_8fb1964e[# "tdm"];
+    spawns = var_8fb1964e[#"tdm"];
   }
 
   if(!isDefined(spawns)) {
-    spawns = var_8fb1964e[# "ctf"];
+    spawns = var_8fb1964e[#"ctf"];
   }
 
   var_8e971f37 = spawns[randomint(spawns.size)];
@@ -640,33 +640,33 @@ function onstartgametype() {
   spawning::function_7a87efaa();
   zm_powerups::powerup_round_start();
 
-  if(isDefined(level.zombie_powerups[# "small_ammo"])) {
-    level.zombie_powerups[# "small_ammo"].only_affects_grabber = 0;
+  if(isDefined(level.zombie_powerups[#"small_ammo"])) {
+    level.zombie_powerups[#"small_ammo"].only_affects_grabber = 0;
   }
 
-  if(isDefined(level.zombie_powerups[# "random_weapon"])) {
-    level.zombie_powerups[# "random_weapon"].only_affects_grabber = 0;
+  if(isDefined(level.zombie_powerups[#"random_weapon"])) {
+    level.zombie_powerups[#"random_weapon"].only_affects_grabber = 0;
   }
 
-  if(isDefined(level.zombie_powerups[# "free_perk"])) {
-    level.zombie_powerups[# "free_perk"].only_affects_grabber = 0;
+  if(isDefined(level.zombie_powerups[#"free_perk"])) {
+    level.zombie_powerups[#"free_perk"].only_affects_grabber = 0;
     zm_powerups::powerup_remove_from_regular_drops("free_perk");
   }
 
-  if(isDefined(level.zombie_powerups[# "full_ammo"])) {
-    level.zombie_powerups[# "full_ammo"].only_affects_grabber = 0;
+  if(isDefined(level.zombie_powerups[#"full_ammo"])) {
+    level.zombie_powerups[#"full_ammo"].only_affects_grabber = 0;
     zm_powerups::powerup_remove_from_regular_drops("full_ammo");
   }
 
-  if(isDefined(level.zombie_powerups[# "insta_kill"])) {
-    level.zombie_powerups[# "insta_kill"].only_affects_grabber = 0;
+  if(isDefined(level.zombie_powerups[#"insta_kill"])) {
+    level.zombie_powerups[#"insta_kill"].only_affects_grabber = 0;
   }
 
-  if(isDefined(level.zombie_powerups[# "hero_weapon_power"])) {
-    level.zombie_powerups[# "hero_weapon_power"].only_affects_grabber = 0;
+  if(isDefined(level.zombie_powerups[#"hero_weapon_power"])) {
+    level.zombie_powerups[#"hero_weapon_power"].only_affects_grabber = 0;
   }
 
-  if(isDefined(level.zombie_powerups[# "bonfire_sale"])) {
+  if(isDefined(level.zombie_powerups[#"bonfire_sale"])) {
     zm_powerups::powerup_remove_from_regular_drops("bonefire_sale");
   }
 

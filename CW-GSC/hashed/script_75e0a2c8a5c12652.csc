@@ -147,17 +147,17 @@ function register(xcallback, ycallback, heightcallback, fadeovertimecallback, al
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_textelement"])) {
-    level.var_ae746e8f[# "doa_textelement"] = [];
+  if(!isDefined(level.var_ae746e8f[#"doa_textelement"])) {
+    level.var_ae746e8f[#"doa_textelement"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_textelement"])) {
-    level.var_ae746e8f[# "doa_textelement"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "doa_textelement"])) {
-    level.var_ae746e8f[# "doa_textelement"] = array(level.var_ae746e8f[# "doa_textelement"]);
+  if(!isDefined(level.var_ae746e8f[#"doa_textelement"])) {
+    level.var_ae746e8f[#"doa_textelement"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"doa_textelement"])) {
+    level.var_ae746e8f[#"doa_textelement"] = array(level.var_ae746e8f[#"doa_textelement"]);
   }
 
-  level.var_ae746e8f[# "doa_textelement"][level.var_ae746e8f[# "doa_textelement"].size] = elem;
+  level.var_ae746e8f[#"doa_textelement"][level.var_ae746e8f[#"doa_textelement"].size] = elem;
 }
 
 function register_clientside() {

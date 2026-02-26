@@ -1387,7 +1387,7 @@ zombieholdboardaction(behaviortreeentity, asmstatename) {
   behaviortreeentity setblackboardattribute("_which_board_pull", int(behaviortreeentity.chunk));
   behaviortreeentity setblackboardattribute("_board_attack_spot", float(behaviortreeentity.attacking_spot_index));
   boardactionast = behaviortreeentity astsearch(asmstatename);
-  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[# "animation"]);
+  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[#"animation"]);
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -1402,7 +1402,7 @@ zombiegrabboardaction(behaviortreeentity, asmstatename) {
   behaviortreeentity setblackboardattribute("_which_board_pull", int(behaviortreeentity.chunk));
   behaviortreeentity setblackboardattribute("_board_attack_spot", float(behaviortreeentity.attacking_spot_index));
   boardactionast = behaviortreeentity astsearch(asmstatename);
-  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[# "animation"]);
+  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[#"animation"]);
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -1417,7 +1417,7 @@ zombiepullboardaction(behaviortreeentity, asmstatename) {
   behaviortreeentity setblackboardattribute("_which_board_pull", int(behaviortreeentity.chunk));
   behaviortreeentity setblackboardattribute("_board_attack_spot", float(behaviortreeentity.attacking_spot_index));
   boardactionast = behaviortreeentity astsearch(asmstatename);
-  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[# "animation"]);
+  boardactionanimation = animationstatenetworkutility::searchanimationmap(behaviortreeentity, boardactionast[#"animation"]);
   animationstatenetworkutility::requeststate(behaviortreeentity, asmstatename);
   return 5;
 }
@@ -1796,10 +1796,10 @@ zombiekilledbyblackholebombstart(entity, asmstatename) {
 }
 
 zombiekilledbyblackholebombend(entity, asmstatename) {
-  if(isDefined(level._effect) && isDefined(level._effect[# "black_hole_bomb_zombie_gib"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"black_hole_bomb_zombie_gib"])) {
     fxorigin = entity gettagorigin("tag_origin");
     forward = anglesToForward(entity.angles);
-    playFX(level._effect[# "black_hole_bomb_zombie_gib"], fxorigin, forward, (0, 0, 1));
+    playFX(level._effect[#"black_hole_bomb_zombie_gib"], fxorigin, forward, (0, 0, 1));
   }
 
   entity hide();
@@ -1807,9 +1807,9 @@ zombiekilledbyblackholebombend(entity, asmstatename) {
 }
 
 zombiebhbburst(entity) {
-  if(isDefined(level._effect) && isDefined(level._effect[# "black_hole_bomb_zombie_destroy"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"black_hole_bomb_zombie_destroy"])) {
     fxorigin = entity gettagorigin("tag_origin");
-    playFX(level._effect[# "black_hole_bomb_zombie_destroy"], fxorigin);
+    playFX(level._effect[#"black_hole_bomb_zombie_destroy"], fxorigin);
   }
 
   if(isDefined(entity.interdimensional_gun_projectile)) {

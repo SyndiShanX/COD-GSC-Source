@@ -83,25 +83,25 @@ function function_bf4b4b7e() {
   skipto::add("apc_mall", &namespace_80316bc8::function_a668e580, &namespace_80316bc8::function_7da641f5, "APC Mall", &namespace_80316bc8::function_28117f7e);
   skipto::function_46d8992a("forest");
 
-  level.var_965c6227[# "forest"] = ["<dev string:x38>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "perimeter"] = ["<dev string:x65>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "helipad"] = ["<dev string:x72>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "side_door"] = ["<dev string:x7d>", "<dev string:x42>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "lockpick"] = ["<dev string:x93>", "<dev string:xa4>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "tunnels"] = ["<dev string:xb3>", "<dev string:x42>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "arcade"] = ["<dev string:xca>", "<dev string:xd4>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "video_store"] = ["<dev string:xe1>", "<dev string:xf0>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "main_street"] = ["<dev string:xfa>", "<dev string:xf0>", "<dev string:x109>", "<dev string:x57>"];
-  level.var_965c6227[# "elevator_fight"] = ["<dev string:x111>", "<dev string:xf0>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "elevator"] = ["<dev string:x123>", "<dev string:xf0>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "terminal"] = ["<dev string:x12f>", "<dev string:xa4>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "Observation"] = ["<dev string:x13b>", "<dev string:xd4>", "<dev string:x8a>", "<dev string:x57>"];
-  level.var_965c6227[# "Facades"] = ["<dev string:x14a>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "Rooftops"] = ["<dev string:x155>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "storage"] = ["<dev string:x161>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "motor_pool"] = ["<dev string:x16c>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "apc_turret"] = ["<dev string:x17a>", "<dev string:x188>", "<dev string:x4d>", "<dev string:x57>"];
-  level.var_965c6227[# "apc_ride"] = ["<dev string:x193>", "<dev string:x188>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"forest"] = ["<dev string:x38>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"perimeter"] = ["<dev string:x65>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"helipad"] = ["<dev string:x72>", "<dev string:x42>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"side_door"] = ["<dev string:x7d>", "<dev string:x42>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"lockpick"] = ["<dev string:x93>", "<dev string:xa4>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"tunnels"] = ["<dev string:xb3>", "<dev string:x42>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"arcade"] = ["<dev string:xca>", "<dev string:xd4>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"video_store"] = ["<dev string:xe1>", "<dev string:xf0>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"main_street"] = ["<dev string:xfa>", "<dev string:xf0>", "<dev string:x109>", "<dev string:x57>"];
+  level.var_965c6227[#"elevator_fight"] = ["<dev string:x111>", "<dev string:xf0>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"elevator"] = ["<dev string:x123>", "<dev string:xf0>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"terminal"] = ["<dev string:x12f>", "<dev string:xa4>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"Observation"] = ["<dev string:x13b>", "<dev string:xd4>", "<dev string:x8a>", "<dev string:x57>"];
+  level.var_965c6227[#"Facades"] = ["<dev string:x14a>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"Rooftops"] = ["<dev string:x155>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"storage"] = ["<dev string:x161>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"motor_pool"] = ["<dev string:x16c>", "<dev string:xf0>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"apc_turret"] = ["<dev string:x17a>", "<dev string:x188>", "<dev string:x4d>", "<dev string:x57>"];
+  level.var_965c6227[#"apc_ride"] = ["<dev string:x193>", "<dev string:x188>", "<dev string:x4d>", "<dev string:x57>"];
 }
 
 function init_clientfields() {

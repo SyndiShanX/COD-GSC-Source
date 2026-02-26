@@ -60,9 +60,9 @@ init() {
   }
 
   level flag::wait_till("all_players_spawned");
-  level._effect[# "brazier_fire"] = # "hash_387c78244f5f45e5";
-  level._effect[# "energy_soul"] = # "hash_24eb30a2d07ae5a9";
-  level._effect[# "energy_soul_target"] = # "hash_6f5f4eb9267613e3";
+  level._effect[#"brazier_fire"] = # "hash_387c78244f5f45e5";
+  level._effect[#"energy_soul"] = # "hash_24eb30a2d07ae5a9";
+  level._effect[#"energy_soul_target"] = # "hash_6f5f4eb9267613e3";
   level.var_edaf085e = array(&function_15280d13, &function_75b0f76a, &function_2cf8fe6a);
   level.var_4c2f3e2 = array(&function_ce7b3715, &function_1abdfaa6);
   level.var_171c81ae = array(&function_d9ed4d25, &function_8b70fc31, &function_45396550);

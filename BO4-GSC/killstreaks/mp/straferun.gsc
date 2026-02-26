@@ -111,7 +111,7 @@ usekillstreakstraferun(hardpointtype) {
   plane setdrawinfrared(1);
   self.straferunkills = 0;
   self.straferunbda = 0;
-  self killstreaks::play_killstreak_start_dialog("straferun", self.pers[# "team"], killstreak_id);
+  self killstreaks::play_killstreak_start_dialog("straferun", self.pers[#"team"], killstreak_id);
   self stats::function_e24eec31(getweapon(#"straferun"), #"used", 1);
   plane thread function_d4896942();
   target_set(plane, (0, 0, 0));
@@ -143,7 +143,7 @@ usekillstreakstraferun(hardpointtype) {
   plane thread watchforownerexit(self);
   plane thread targetting_delay::function_7e1a12ce(12000);
   plane thread function_c24cc26a();
-  util::function_5a68c330(21, self.team, self getentitynumber(), level.killstreaks[# "straferun"].uiname);
+  util::function_5a68c330(21, self.team, self getentitynumber(), level.killstreaks[#"straferun"].uiname);
   aiutility::addaioverridedamagecallback(plane, &function_16abaea4);
   return true;
 }
@@ -452,17 +452,17 @@ startstrafe() {
     perfectattackstartvector = gunorigin + vectorscale(forwardnoz, self.straferungunlookahead);
     attackstartvector = perfectattackstartvector + vectorscale(right, randomfloatrange(0 - self.straferungunradius, self.straferungunradius));
     trace = bulletTrace(attackstartvector, (attackstartvector[0], attackstartvector[1], -500), 0, self, 0);
-    self turretsettarget(0, trace[# "position"]);
+    self turretsettarget(0, trace[#"position"]);
     self fireweapon();
-    self shellshockplayers(trace[# "position"]);
+    self shellshockplayers(trace[#"position"]);
 
     if(getdvarint(#"scr_devstraferunbulletsdebugdraw", 0)) {
       time = 300;
-      airsupport::debug_line(attackstartvector, trace[# "position"] - (0, 0, 20), (1, 0, 0), time, 0);
+      airsupport::debug_line(attackstartvector, trace[#"position"] - (0, 0, 20), (1, 0, 0), time, 0);
 
       if(count % 30 == 0) {
         trace = bulletTrace(perfectattackstartvector, (perfectattackstartvector[0], perfectattackstartvector[1], -100000), 0, self, 0, 1);
-        airsupport::debug_line(trace[# "position"] + (0, 0, 20), trace[# "position"] - (0, 0, 20), (0, 0, 1), time, 0);
+        airsupport::debug_line(trace[#"position"] + (0, 0, 20), trace[#"position"] - (0, 0, 20), (0, 0, 1), time, 0);
       }
     }
 

@@ -1015,7 +1015,7 @@ function_9bc73093(n_stage) {
 
     wait 5;
   } else {
-    level thread scene::init_streamer(#"cin_zm_zod_outro", level.teams[# "allies"]);
+    level thread scene::init_streamer(#"cin_zm_zod_outro", level.teams[#"allies"]);
     level thread lui::screen_flash(0.33, 0.33, 0.33, 0.8, "white");
     level thread scene::stop(#"p8_fxanim_zm_zod_skybox_bundle");
     level util::delay(0.2, undefined, &scene::play, #"p8_fxanim_zm_zod_skybox_bundle", var_d503d5d9);
@@ -1871,7 +1871,7 @@ function_d07ce2a9(n_path_id, var_a3d1842b, var_6df65756) {
   var_23ee4083 = vectortoangles(v_loc - self.origin);
   v_forward = anglesToForward(var_23ee4083);
   a_trace = beamtrace(var_5b84ed9a, var_5b84ed9a + v_forward * 20000, 0, self, 1, 1);
-  var_dd6e9876 = a_trace[# "position"];
+  var_dd6e9876 = a_trace[#"position"];
   level function_3413fdf9(var_dd6e9876);
   self thread scene::play(self.str_scene, "charge", self);
   self clientfield::set("bs_att_bm_cf", 1);
@@ -1961,7 +1961,7 @@ function_9520ea39(var_a3d1842b, var_6df65756 = 0) {
     v_source = self gettagorigin("tag_fx_beam");
     v_target = level.var_90bda347.origin;
     a_beamtrace = beamtrace(v_source, v_target, 0, self, 1, 1);
-    var_f94546ed = distance(v_source, a_beamtrace[# "position"]);
+    var_f94546ed = distance(v_source, a_beamtrace[#"position"]);
     var_78d7b8bf = var_f94546ed * var_f94546ed;
     a_players = array::get_all_closest(v_source, level.players, undefined, undefined, var_f94546ed);
 
@@ -2511,7 +2511,7 @@ function_de60e752(var_533ac894) {
   }
 
   if(!isDefined(s_zone)) {
-    s_zone = level.zones[# "zone_poop_deck"];
+    s_zone = level.zones[#"zone_poop_deck"];
   }
 
   a_s_spawnpoints = struct::get_array(s_zone.name + "_spawns");
@@ -2700,7 +2700,7 @@ function_f6e1e56f(var_238eb6ec, var_b5a033fe = 0, var_533ac894) {
   }
 
   if(!isDefined(s_zone)) {
-    s_zone = level.zones[# "zone_poop_deck"];
+    s_zone = level.zones[#"zone_poop_deck"];
   }
 
   var_bb492495 = struct::get_array(s_zone.name + "_spawns");
@@ -2837,7 +2837,7 @@ function_776c95e2(var_61e1a92c, var_dbb23c7) {
       wait randomfloatrange(var_8c9010a4, var_dde52a4d);
     }
 
-    while(level.var_b175714d[# "hash_9ecf8085fb7a68f"].var_33e393a7 > 0) {
+    while(level.var_b175714d[#"hash_9ecf8085fb7a68f"].var_33e393a7 > 0) {
       util::wait_network_frame(2);
     }
 
@@ -2875,7 +2875,7 @@ function_770486e1(var_61e1a92c) {
       wait randomfloatrange(15, 20);
     }
 
-    while(level.var_b175714d[# "hash_9ecf8085fb7a68f"].var_33e393a7 > 0) {
+    while(level.var_b175714d[#"hash_9ecf8085fb7a68f"].var_33e393a7 > 0) {
       wait 0.2;
     }
 
@@ -2997,7 +2997,7 @@ function_435a7941(var_c1051599) {
   }
 
   if(isDefined(var_c1051599)) {
-    level._ee[# "boss_fight"].skip_to_step = var_c1051599;
+    level._ee[#"boss_fight"].skip_to_step = var_c1051599;
   }
 
   zm_sq::start(#"boss_fight");

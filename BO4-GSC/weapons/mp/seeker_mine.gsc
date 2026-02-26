@@ -178,15 +178,15 @@ function_d573e71(grenade, weapon) {
   if(waitresult._notify === "timeout") {
     results = groundtrace(grenade.origin + (0, 0, 400), grenade.origin + (0, 0, -400), 0, grenade);
 
-    if(isDefined(results) && isDefined(results[# "position"]) && isDefined(results[# "normal"])) {
-      origin = results[# "position"];
+    if(isDefined(results) && isDefined(results[#"position"]) && isDefined(results[#"normal"])) {
+      origin = results[#"position"];
       newpos = getclosestpointonnavmesh(origin, 2000, 20, 1);
 
       if(isDefined(newpos)) {
         origin = newpos;
       }
 
-      angles = vectortoangles(results[# "normal"]);
+      angles = vectortoangles(results[#"normal"]);
     }
   } else {
     z_offset = getDvar(#"hash_22cbaf883dcda013", 0);

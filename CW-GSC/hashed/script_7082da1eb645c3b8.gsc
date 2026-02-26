@@ -307,12 +307,12 @@ function private function_46490d4e(var_e563178a = 0) {
 
   foreach(door in var_7399a89a) {
     if(door.script_noteworthy === "left_door") {
-      a_scene_ents[# "left_door"] = door.c_door.m_e_door;
+      a_scene_ents[#"left_door"] = door.c_door.m_e_door;
       continue;
     }
 
     if(door.script_noteworthy === "right_door") {
-      a_scene_ents[# "right_door"] = door.c_door.m_e_door;
+      a_scene_ents[#"right_door"] = door.c_door.m_e_door;
     }
   }
 
@@ -575,7 +575,7 @@ function function_310fcb9() {
 
   while(true) {
     wait 15;
-    level.player util::show_hint_text(#"hash_51547940bf27c3cf", undefined, [# "terminal_hint_sticky_note", #"terminal_hint_postcard", #"terminal_hint_poster"], 3);
+    level.player util::show_hint_text(#"hash_51547940bf27c3cf", undefined, [#"terminal_hint_sticky_note", #"terminal_hint_postcard", #"terminal_hint_poster"], 3);
     wait 6;
   }
 }
@@ -659,15 +659,15 @@ function function_ea2e6360() {
       break;
   }
 
-  var_8c309123[# "note"] = getent("terminal_hint_sticky_note", "targetname");
-  var_8c309123[# "note"].offset = (0, 0, 2.5);
-  var_8c309123[# "postcard"] = getent("terminal_hint_postcard", "targetname");
-  var_8c309123[# "postcard"].offset = (0, 0, 5);
-  var_8c309123[# "poster"] = getent("terminal_hint_poster", "targetname");
-  var_8c309123[# "poster"].offset = (5, 0, 10);
-  var_8c309123[# "note"] util::create_cursor_hint("tag_origin", var_8c309123[# "note"].offset, #"hash_23c6c63a28d6b1bc", 100, undefined, &hint_use, undefined, 100, 31, 0, 0, undefined, &function_add2e8e8);
-  var_8c309123[# "postcard"] util::create_cursor_hint("tag_origin", var_8c309123[# "postcard"].offset, #"hash_2d2c88f338114b60", 100, undefined, &hint_use, undefined, 100, 40, 0, 0, undefined, &function_add2e8e8);
-  var_8c309123[# "poster"] util::create_cursor_hint("tag_origin", var_8c309123[# "poster"].offset, #"hash_4e1a9c0154d891fd", 200, undefined, &hint_use, undefined, 200, 15, 0, 0, undefined, &function_add2e8e8);
+  var_8c309123[#"note"] = getent("terminal_hint_sticky_note", "targetname");
+  var_8c309123[#"note"].offset = (0, 0, 2.5);
+  var_8c309123[#"postcard"] = getent("terminal_hint_postcard", "targetname");
+  var_8c309123[#"postcard"].offset = (0, 0, 5);
+  var_8c309123[#"poster"] = getent("terminal_hint_poster", "targetname");
+  var_8c309123[#"poster"].offset = (5, 0, 10);
+  var_8c309123[#"note"] util::create_cursor_hint("tag_origin", var_8c309123[#"note"].offset, #"hash_23c6c63a28d6b1bc", 100, undefined, &hint_use, undefined, 100, 31, 0, 0, undefined, &function_add2e8e8);
+  var_8c309123[#"postcard"] util::create_cursor_hint("tag_origin", var_8c309123[#"postcard"].offset, #"hash_2d2c88f338114b60", 100, undefined, &hint_use, undefined, 100, 40, 0, 0, undefined, &function_add2e8e8);
+  var_8c309123[#"poster"] util::create_cursor_hint("tag_origin", var_8c309123[#"poster"].offset, #"hash_4e1a9c0154d891fd", 200, undefined, &hint_use, undefined, 200, 15, 0, 0, undefined, &function_add2e8e8);
   level thread namespace_4bd68414::function_7b7422db();
 
   while(true) {
@@ -701,8 +701,8 @@ function function_ea2e6360() {
 
 function function_add2e8e8(s_info) {
   assert(isDefined(self.offset));
-  assert(isDefined(self.var_3e95b88f.prompts[# "use"].var_5e83875a));
-  var_e88b5bd1 = util::within_fov(s_info.player getplayercamerapos(), s_info.player getplayerangles(), self.origin + self.offset, cos(self.var_3e95b88f.prompts[# "use"].var_5e83875a));
+  assert(isDefined(self.var_3e95b88f.prompts[#"use"].var_5e83875a));
+  var_e88b5bd1 = util::within_fov(s_info.player getplayercamerapos(), s_info.player getplayerangles(), self.origin + self.offset, cos(self.var_3e95b88f.prompts[#"use"].var_5e83875a));
   var_bc9b323c = level flag::get("flg_terminal_block_password_input");
   return var_e88b5bd1 && !var_bc9b323c;
 }

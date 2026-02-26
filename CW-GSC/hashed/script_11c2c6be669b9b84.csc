@@ -19,17 +19,17 @@ function private preload() {
 function on_player_spawn(localclientnum) {
   self endon(#"death");
   inputs = [];
-  inputs[# "ui_confirm"] = "confirm";
-  inputs[# "ui_cancel"] = "cancel";
-  inputs[# "ui_alt1"] = "alt1";
-  inputs[# "ui_alt2"] = "alt2";
-  inputs[# "ui_navup"] = "navup";
-  inputs[# "ui_navdown"] = "navdown";
-  inputs[# "ui_navleft"] = "navleft";
-  inputs[# "ui_navright"] = "navright";
-  inputs[# "ui_prevtab"] = "prevtab";
-  inputs[# "ui_nexttab"] = "nexttab";
-  inputs[# "hash_5686e6f2a8315663"] = "backspace";
+  inputs[#"ui_confirm"] = "confirm";
+  inputs[#"ui_cancel"] = "cancel";
+  inputs[#"ui_alt1"] = "alt1";
+  inputs[#"ui_alt2"] = "alt2";
+  inputs[#"ui_navup"] = "navup";
+  inputs[#"ui_navdown"] = "navdown";
+  inputs[#"ui_navleft"] = "navleft";
+  inputs[#"ui_navright"] = "navright";
+  inputs[#"ui_prevtab"] = "prevtab";
+  inputs[#"ui_nexttab"] = "nexttab";
+  inputs[#"hash_5686e6f2a8315663"] = "backspace";
 
   foreach(key, value in inputs) {
     self flag::clear(key);

@@ -810,7 +810,7 @@ function_9b196e4f() {
 flinger_init() {
   self thread scene::play("init");
   self flagsys::wait_till(#"scene_ents_ready");
-  self.var_9d07d8dd = self.scene_ents[# "prop 1"];
+  self.var_9d07d8dd = self.scene_ents[#"prop 1"];
 
   if(self.targetname != "flinger_island") {
     self thread function_e468b4be();

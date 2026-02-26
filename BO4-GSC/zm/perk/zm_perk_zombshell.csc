@@ -28,9 +28,9 @@ __init__() {
 }
 
 function_efe56acb() {
-  level._effect[# "zombshell_aoe"] = # "hash_3d2e7548c7dfc406";
-  level._effect[# "zombshell_explosion"] = # "hash_1900ec48b2f264fe";
-  level._effect[# "zombie_blood_1st"] = # "player/fx8_plyr_pstfx_katana_rush_loop";
+  level._effect[#"zombshell_aoe"] = # "hash_3d2e7548c7dfc406";
+  level._effect[#"zombshell_explosion"] = # "hash_1900ec48b2f264fe";
+  level._effect[#"zombie_blood_1st"] = # "player/fx8_plyr_pstfx_katana_rush_loop";
 }
 
 function_9e1d9985() {}
@@ -43,7 +43,7 @@ zombshell_aoe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
       deletefx(localclientnum, self.var_a6da95e6, 1);
     }
 
-    self.var_a6da95e6 = util::playFXOnTag(localclientnum, level._effect[# "zombshell_aoe"], self, "tag_origin");
+    self.var_a6da95e6 = util::playFXOnTag(localclientnum, level._effect[#"zombshell_aoe"], self, "tag_origin");
 
     if(!isDefined(self.var_e3d27e69)) {
       self playSound(localclientnum, #"hash_6aa32cc737673479");
@@ -94,11 +94,11 @@ function_1e112e5f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 1) {
     if(self getlocalclientnumber() === localclientnum) {
       self thread postfx::playpostfxbundle(#"hash_4c9c4b6464bd9a1c");
-      self.var_5b8b57b9[localclientnum][self.var_5b8b57b9[localclientnum].size] = playfxoncamera(localclientnum, level._effect[# "zombie_blood_1st"]);
+      self.var_5b8b57b9[localclientnum][self.var_5b8b57b9[localclientnum].size] = playfxoncamera(localclientnum, level._effect[#"zombie_blood_1st"]);
     }
   }
 }
 
 zombshell_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "zombshell_explosion"], self, "j_spineupper");
+  util::playFXOnTag(localclientnum, level._effect[#"zombshell_explosion"], self, "j_spineupper");
 }

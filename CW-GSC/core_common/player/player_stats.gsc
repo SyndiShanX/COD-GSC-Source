@@ -397,20 +397,20 @@ function function_80099ca1(weapon, statname) {
     return false;
   }
 
-  if(!isDefined(self.pers[# "hash_45ad01f9212e202c"])) {
-    self.pers[# "hash_45ad01f9212e202c"] = [];
+  if(!isDefined(self.pers[#"hash_45ad01f9212e202c"])) {
+    self.pers[#"hash_45ad01f9212e202c"] = [];
   }
 
-  if(!isDefined(self.pers[# "hash_45ad01f9212e202c"][weapon])) {
-    self.pers[# "hash_45ad01f9212e202c"][weapon] = [];
+  if(!isDefined(self.pers[#"hash_45ad01f9212e202c"][weapon])) {
+    self.pers[#"hash_45ad01f9212e202c"][weapon] = [];
   }
 
-  if(!isDefined(self.pers[# "hash_45ad01f9212e202c"][weapon][statname])) {
-    self.pers[# "hash_45ad01f9212e202c"][weapon][statname] = 0;
+  if(!isDefined(self.pers[#"hash_45ad01f9212e202c"][weapon][statname])) {
+    self.pers[#"hash_45ad01f9212e202c"][weapon][statname] = 0;
   }
 
-  self.pers[# "hash_45ad01f9212e202c"][weapon][statname]++;
-  value = self.pers[# "hash_45ad01f9212e202c"][weapon][statname];
+  self.pers[#"hash_45ad01f9212e202c"][weapon][statname]++;
+  value = self.pers[#"hash_45ad01f9212e202c"][weapon][statname];
 
   if(value > self function_b2c11cc(weapon, statname)) {
     self function_53e7d4a5(weapon, statname, value);
@@ -457,20 +457,20 @@ function function_6fb0b113(equipment, statname) {
     return false;
   }
 
-  if(!isDefined(self.pers[# "hash_535ec6a0c26aaa28"])) {
-    self.pers[# "hash_535ec6a0c26aaa28"] = [];
+  if(!isDefined(self.pers[#"hash_535ec6a0c26aaa28"])) {
+    self.pers[#"hash_535ec6a0c26aaa28"] = [];
   }
 
-  if(!isDefined(self.pers[# "hash_535ec6a0c26aaa28"][equipment])) {
-    self.pers[# "hash_535ec6a0c26aaa28"][equipment] = [];
+  if(!isDefined(self.pers[#"hash_535ec6a0c26aaa28"][equipment])) {
+    self.pers[#"hash_535ec6a0c26aaa28"][equipment] = [];
   }
 
-  if(!isDefined(self.pers[# "hash_535ec6a0c26aaa28"][equipment][statname])) {
-    self.pers[# "hash_535ec6a0c26aaa28"][equipment][statname] = 0;
+  if(!isDefined(self.pers[#"hash_535ec6a0c26aaa28"][equipment][statname])) {
+    self.pers[#"hash_535ec6a0c26aaa28"][equipment][statname] = 0;
   }
 
-  self.pers[# "hash_535ec6a0c26aaa28"][equipment][statname]++;
-  value = self.pers[# "hash_535ec6a0c26aaa28"][equipment][statname];
+  self.pers[#"hash_535ec6a0c26aaa28"][equipment][statname]++;
+  value = self.pers[#"hash_535ec6a0c26aaa28"][equipment][statname];
 
   if(value > self function_97f7728e(equipment, statname)) {
     self function_c8da9a88(equipment, statname, value);
@@ -507,20 +507,20 @@ function function_b04e7184(scorestreak, statname) {
     return false;
   }
 
-  if(!isDefined(self.pers[# "hash_5720f063ea8634a8"])) {
-    self.pers[# "hash_5720f063ea8634a8"] = [];
+  if(!isDefined(self.pers[#"hash_5720f063ea8634a8"])) {
+    self.pers[#"hash_5720f063ea8634a8"] = [];
   }
 
-  if(!isDefined(self.pers[# "hash_5720f063ea8634a8"][scorestreak])) {
-    self.pers[# "hash_5720f063ea8634a8"][scorestreak] = [];
+  if(!isDefined(self.pers[#"hash_5720f063ea8634a8"][scorestreak])) {
+    self.pers[#"hash_5720f063ea8634a8"][scorestreak] = [];
   }
 
-  if(!isDefined(self.pers[# "hash_5720f063ea8634a8"][scorestreak][statname])) {
-    self.pers[# "hash_5720f063ea8634a8"][scorestreak][statname] = 0;
+  if(!isDefined(self.pers[#"hash_5720f063ea8634a8"][scorestreak][statname])) {
+    self.pers[#"hash_5720f063ea8634a8"][scorestreak][statname] = 0;
   }
 
-  self.pers[# "hash_5720f063ea8634a8"][scorestreak][statname]++;
-  value = self.pers[# "hash_5720f063ea8634a8"][scorestreak][statname];
+  self.pers[#"hash_5720f063ea8634a8"][scorestreak][statname]++;
+  value = self.pers[#"hash_5720f063ea8634a8"][scorestreak][statname];
 
   if(value > self function_9792680b(scorestreak, statname)) {
     self function_1eb9272f(scorestreak, statname, value);
@@ -735,15 +735,15 @@ function function_d0de7686(statname, value, var_4261ca42) {
       return;
     }
 
-    if(!isDefined(self.pers[# "hash_58ebc906abf2fa00"])) {
-      self.pers[# "hash_58ebc906abf2fa00"] = [];
+    if(!isDefined(self.pers[#"hash_58ebc906abf2fa00"])) {
+      self.pers[#"hash_58ebc906abf2fa00"] = [];
     }
 
-    if(!isDefined(self.pers[# "hash_58ebc906abf2fa00"][statname])) {
-      self.pers[# "hash_58ebc906abf2fa00"][statname] = 0;
+    if(!isDefined(self.pers[#"hash_58ebc906abf2fa00"][statname])) {
+      self.pers[#"hash_58ebc906abf2fa00"][statname] = 0;
     }
 
-    self.pers[# "hash_58ebc906abf2fa00"][statname]++;
+    self.pers[#"hash_58ebc906abf2fa00"][statname]++;
     return;
   }
 
@@ -768,15 +768,15 @@ function function_841e4896(statname, value, var_4261ca42, weaponnamehash) {
       return;
     }
 
-    if(!isDefined(self.pers[# "hash_58ebc906abf2fa00"])) {
-      self.pers[# "hash_58ebc906abf2fa00"] = [];
+    if(!isDefined(self.pers[#"hash_58ebc906abf2fa00"])) {
+      self.pers[#"hash_58ebc906abf2fa00"] = [];
     }
 
-    if(!isDefined(self.pers[# "hash_58ebc906abf2fa00"][statname])) {
-      self.pers[# "hash_58ebc906abf2fa00"][statname] = 0;
+    if(!isDefined(self.pers[#"hash_58ebc906abf2fa00"][statname])) {
+      self.pers[#"hash_58ebc906abf2fa00"][statname] = 0;
     }
 
-    self.pers[# "hash_58ebc906abf2fa00"][statname]++;
+    self.pers[#"hash_58ebc906abf2fa00"][statname]++;
     return;
   }
 

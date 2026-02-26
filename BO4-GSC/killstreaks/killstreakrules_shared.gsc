@@ -104,11 +104,11 @@ killstreakstart(hardpointtype, team, hacked, displayteammessage) {
   killstreak_id = level.globalkillstreakscalled;
   level.globalkillstreakscalled++;
   killstreak_data = [];
-  killstreak_data[# "caller"] = self getxuid();
-  killstreak_data[# "spawnid"] = getplayerspawnid(self);
-  killstreak_data[# "starttime"] = gettime();
-  killstreak_data[# "type"] = hardpointtype;
-  killstreak_data[# "endtime"] = 0;
+  killstreak_data[#"caller"] = self getxuid();
+  killstreak_data[#"spawnid"] = getplayerspawnid(self);
+  killstreak_data[#"starttime"] = gettime();
+  killstreak_data[#"type"] = hardpointtype;
+  killstreak_data[#"endtime"] = 0;
   level.matchrecorderkillstreakkills[killstreak_id] = 0;
   level.killstreaks_triggered[killstreak_id] = killstreak_data;
 
@@ -205,12 +205,12 @@ killstreakstop(hardpointtype, team, id) {
     return;
   }
 
-  level.killstreaks_triggered[id][# "endtime"] = gettime();
+  level.killstreaks_triggered[id][#"endtime"] = gettime();
   totalkillswiththiskillstreak = level.matchrecorderkillstreakkills[id];
 
   if(sessionmodeismultiplayergame()) {
     mpkillstreakuses = {
-      #starttime: level.killstreaks_triggered[id][# "starttime"], #endtime: level.killstreaks_triggered[id][# "endtime"], #spawnid: level.killstreaks_triggered[id][# "spawnid"], #name: hardpointtype, #team: team
+      #starttime: level.killstreaks_triggered[id][#"starttime"], #endtime: level.killstreaks_triggered[id][#"endtime"], #spawnid: level.killstreaks_triggered[id][#"spawnid"], #name: hardpointtype, #team: team
     };
     function_92d1707f(#"hash_710b205b26e46446", mpkillstreakuses);
   }

@@ -594,7 +594,7 @@ function function_2f0a2ce2() {
   }
 
   level flag::set(#"hash_2f702f46336d6832");
-  a_ents[# "hash_5e15688e554ce28e"] = var_aeb8a47d;
+  a_ents[#"hash_5e15688e554ce28e"] = var_aeb8a47d;
   level scene::play(#"hash_ef3c5bb86ea83fd", a_ents);
   level flag::clear(#"hash_2f702f46336d6832");
   level clientfield::set("" + # "hash_2509c24cd62ed5bc", 0);
@@ -675,7 +675,7 @@ function function_4980ef91() {
 
 function function_644d04d5(a_ents) {
   level endon(#"hash_264e763f3fa44810", #"game_ended");
-  var_8edd2e3a = a_ents[# "zykov"];
+  var_8edd2e3a = a_ents[#"zykov"];
 
   if(!isDefined(var_8edd2e3a)) {
     return;
@@ -693,7 +693,7 @@ function function_4b60049c(a_ents) {
 function function_49f3ccf(a_ents) {
   if(isDefined(level.var_5092bb0e) && isDefined(level.var_cc996567)) {
     a_ents = [];
-    a_ents[# "head"] = level.var_cc996567;
+    a_ents[#"head"] = level.var_cc996567;
     level.var_5092bb0e thread scene::play(#"hash_569e51cff0700fb6", "Shot 13", a_ents);
   }
 }
@@ -701,7 +701,7 @@ function function_49f3ccf(a_ents) {
 function function_1f2a6275(a_ents) {
   if(isDefined(level.var_5092bb0e) && isDefined(level.var_cc996567)) {
     a_ents = [];
-    a_ents[# "head"] = level.var_cc996567;
+    a_ents[#"head"] = level.var_cc996567;
     level.var_5092bb0e thread scene::play(#"hash_569e51cff0700fb6", "Shot 14", a_ents);
   }
 }
@@ -709,7 +709,7 @@ function function_1f2a6275(a_ents) {
 function function_938275a4(a_ents) {
   if(isDefined(level.var_5092bb0e) && isDefined(level.var_cc996567)) {
     a_ents = [];
-    a_ents[# "head"] = level.var_cc996567;
+    a_ents[#"head"] = level.var_cc996567;
     level.var_5092bb0e thread scene::play(#"hash_569e51cff0700fb6", "Shot 15", a_ents);
   }
 }
@@ -717,7 +717,7 @@ function function_938275a4(a_ents) {
 function function_b91176b1(a_ents) {
   if(isDefined(level.var_5092bb0e) && isDefined(level.var_cc996567)) {
     a_ents = [];
-    a_ents[# "head"] = level.var_cc996567;
+    a_ents[#"head"] = level.var_cc996567;
     level.var_5092bb0e thread scene::play(#"hash_569e51cff0700fb6", "Shot 19", a_ents);
   }
 }
@@ -725,13 +725,13 @@ function function_b91176b1(a_ents) {
 function function_7a47935c(a_ents) {
   if(isDefined(level.var_5092bb0e) && isDefined(level.var_cc996567)) {
     a_ents = [];
-    a_ents[# "head"] = level.var_cc996567;
+    a_ents[#"head"] = level.var_cc996567;
     level.var_5092bb0e thread scene::play(#"hash_569e51cff0700fb6", "Shot 23", a_ents);
   }
 }
 
 function function_c8622ee6(a_ents) {
-  var_2644aca3 = a_ents[# "maxis"];
+  var_2644aca3 = a_ents[#"maxis"];
 
   if(!isDefined(var_2644aca3)) {
     return;
@@ -2560,7 +2560,7 @@ function function_e255e996() {
       v_start = self.origin + (0, 0, 50);
       v_end = self.origin - (0, 0, 1000);
       a_trace = groundtrace(v_start, v_end, 0, self, 0);
-      v_ground = isDefined(a_trace[# "position"]) ? a_trace[# "position"] : self.origin;
+      v_ground = isDefined(a_trace[#"position"]) ? a_trace[#"position"] : self.origin;
       self.origin = v_ground;
       util::wait_network_frame();
       self connectpaths();
@@ -4089,7 +4089,7 @@ function function_cf3ede8a(a_ents) {
 function function_b78ba960(a_ents) {
   scene::remove_scene_func(#"hash_111ad10d96cf00ac", &function_b78ba960, "Shot 020");
   level clientfield::set("" + # "hash_7b50097ac4242bc9", 0);
-  vh_heli = a_ents[# "hash_1154b5797e3db10e"];
+  vh_heli = a_ents[#"hash_1154b5797e3db10e"];
 
   if(isDefined(vh_heli)) {
     vh_heli vehicle::toggle_tread_fx(0);
@@ -4098,7 +4098,7 @@ function function_b78ba960(a_ents) {
 
 function function_dc9b74df(a_ents) {
   scene::remove_scene_func(#"hash_111ad10d96cf00ac", &function_dc9b74df, "Shot 050");
-  var_b9f89aa6 = a_ents[# "capture_eye"];
+  var_b9f89aa6 = a_ents[#"capture_eye"];
 
   if(isDefined(var_b9f89aa6)) {
     foreach(str_tag in ["tag_eye_fx", "tag_eye_fx1", "tag_eye_fx2", "tag_eye_fx3"]) {
@@ -4131,7 +4131,7 @@ function function_3d0889e3(a_ents) {
 function function_6644db7b(a_ents) {
   scene::remove_scene_func(#"hash_111ad10d96cf00ac", &function_6644db7b, "Shot 070");
   level clientfield::set("" + # "hash_7b50097ac4242bc9", 2);
-  vh_heli = a_ents[# "hash_1154b5797e3db10e"];
+  vh_heli = a_ents[#"hash_1154b5797e3db10e"];
 
   if(isDefined(vh_heli)) {
     vh_heli vehicle::toggle_tread_fx(0);

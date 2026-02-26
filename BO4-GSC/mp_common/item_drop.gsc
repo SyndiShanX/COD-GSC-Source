@@ -314,7 +314,7 @@ function_23b6897(player, position) {
             eyepos = player getEye();
             sighttrace = physicstraceex(eyepos, checkpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), player, 1);
 
-            if(sighttrace[# "fraction"] < 1) {
+            if(sighttrace[#"fraction"] < 1) {
               debug_line(eyepos, checkpoint, (1, 0, 0));
 
               continue;
@@ -392,7 +392,7 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
   var_96a432da = origin + (0, 0, zoffset);
   var_abe21f5c = origin - (0, 0, zoffset);
   starttrace = physicstraceex(origin, var_96a432da, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), ignoreent, 1);
-  var_96a432da = starttrace[# "position"];
+  var_96a432da = starttrace[#"position"];
   var_ed97e13a = 5;
   onground = 0;
   var_5a13db05 = 0;
@@ -404,9 +404,9 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
 
     var_708a2754 = physicstraceex(var_96a432da, var_abe21f5c, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), ignoreent, 1);
 
-    if(var_708a2754[# "fraction"] < 1) {
-      if(var_708a2754[# "position"][2] > -10000) {
-        origin = var_708a2754[# "position"];
+    if(var_708a2754[#"fraction"] < 1) {
+      if(var_708a2754[#"position"][2] > -10000) {
+        origin = var_708a2754[#"position"];
       }
 
       if(isDefined(itementry)) {
@@ -414,19 +414,19 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
         origin += originoffset;
       }
 
-      normal = var_708a2754[# "normal"];
+      normal = var_708a2754[#"normal"];
       angles = function_3b2b6383(origin, angles, normal, itementry, var_ba40b4c1);
       self.origin = origin;
       self.angles = angles;
       var_5a13db05 = 1;
 
-      if(vectordot(var_708a2754[# "normal"], (0, 0, 1)) >= 0.5) {
-        parentent = var_708a2754[# "entity"];
+      if(vectordot(var_708a2754[#"normal"], (0, 0, 1)) >= 0.5) {
+        parentent = var_708a2754[#"entity"];
 
         if(isDefined(parentent) && parentent.model != "") {
           if(isPlayer(parentent)) {
             ignoreent = parentent;
-            var_96a432da = var_708a2754[# "position"];
+            var_96a432da = var_708a2754[#"position"];
             continue;
           }
 
@@ -487,7 +487,7 @@ function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0, var_ba4
     if(isPlayer(player)) {
       physicstrace = physicstraceex(self.origin, self.origin + (0, 0, -5), self.mins, self.maxs, ignoreent, 1);
 
-      if(physicstrace[# "fraction"] < 1) {
+      if(physicstrace[#"fraction"] < 1) {
         self.origin = player.origin + (0, 0, 18);
 
         debug_sphere(self.origin, 0.6, (1, 0, 0));
@@ -518,9 +518,9 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
   while(true) {
     origin = self.origin + anglestoup(self.angles) * originheightoffset;
     var_708a2754 = physicstrace(origin + (0, 0, 1), origin - (0, 0, tracedistance), min, max, self, 32);
-    parentent = var_708a2754[# "entity"];
+    parentent = var_708a2754[#"entity"];
 
-    if(var_708a2754[# "startsolid"]) {
+    if(var_708a2754[#"startsolid"]) {
       self physicslaunch();
     } else if(!isDefined(parentent)) {
       if(isDefined(self.var_7b500c20)) {

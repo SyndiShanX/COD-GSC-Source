@@ -332,8 +332,8 @@ function function_8c0c4b93(a_allies, a_enemies) {
 }
 
 function function_dca9221e(a_ents) {
-  level.var_b0924240 = a_ents[# "prop 1"];
-  level.var_780c5788 = a_ents[# "prop 2"];
+  level.var_b0924240 = a_ents[#"prop 1"];
+  level.var_780c5788 = a_ents[#"prop 2"];
 }
 
 function function_7d20c75b(a_allies) {

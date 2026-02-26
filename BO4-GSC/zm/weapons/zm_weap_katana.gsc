@@ -31,9 +31,9 @@ __init__() {
   clientfield::register("toplayer", "" + # "hero_katana_vigor_postfx", 1, 1, "counter");
   clientfield::register("allplayers", "" + # "katana_rush_postfx", 1, 1, "int");
   clientfield::register("allplayers", "" + # "katana_rush_sfx", 1, 1, "int");
-  level.hero_weapon[# "katana"][0] = getweapon(#"hero_katana_t8_lv1");
-  level.hero_weapon[# "katana"][1] = getweapon(#"hero_katana_t8_lv2");
-  level.hero_weapon[# "katana"][2] = getweapon(#"hero_katana_t8_lv3");
+  level.hero_weapon[#"katana"][0] = getweapon(#"hero_katana_t8_lv1");
+  level.hero_weapon[#"katana"][1] = getweapon(#"hero_katana_t8_lv2");
+  level.hero_weapon[#"katana"][2] = getweapon(#"hero_katana_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_katana_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_katana_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_katana_t8_lv3");
@@ -51,15 +51,15 @@ __init__() {
 }
 
 function_c740060f(weapon, var_e7c11b0c = 1) {
-  if(weapon == level.hero_weapon[# "katana"][2]) {
+  if(weapon == level.hero_weapon[#"katana"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "katana"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[#"katana"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "katana"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[#"katana"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -75,23 +75,23 @@ function_9a0f234b() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "katana"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"katana"], wpn_cur)) {
       self clientfield::increment_to_player("" + # "hero_katana_vigor_postfx");
       self function_c43691a9(1);
       self thread function_8d02f57b(wpn_cur);
-    } else if(isinarray(level.hero_weapon[# "katana"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"katana"], wpn_prev)) {
       self function_c43691a9(0);
       self notify(#"hero_katana_expired");
       self.var_5605c31e = undefined;
     }
 
-    if(wpn_cur == level.hero_weapon[# "katana"][0]) {
+    if(wpn_cur == level.hero_weapon[#"katana"][0]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_648a5b1eedae58b9");
       self thread function_9fdcf13f();
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "katana"][1]) {
+    if(wpn_cur == level.hero_weapon[#"katana"][1]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_52cddac894472d22");
       self thread function_119af40d(wpn_cur);
       self thread function_478a4910(wpn_cur);
@@ -99,7 +99,7 @@ function_9a0f234b() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "katana"][2]) {
+    if(wpn_cur == level.hero_weapon[#"katana"][2]) {
       if(!self gamepadusedlast()) {
         self zm_hero_weapon::show_hint(wpn_cur, #"hash_4bf673fe684c7bcd");
       } else {

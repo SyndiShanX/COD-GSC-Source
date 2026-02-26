@@ -189,7 +189,7 @@ function_51cbae24(params) {
   dir = vectornormalize(params.endpos - params.startpos);
   result = bulletTrace(params.startpos, params.startpos + dir * 512, 0, self);
 
-  if(result[# "surfacetype"] == "ladder") {
+  if(result[#"surfacetype"] == "ladder") {
     return true;
   }
 
@@ -212,7 +212,7 @@ ledge_traversal(endpos, ledgetop, normal) {
   }
 
   trace = bulletTrace(ledgetop, ledgetop - (0, 0, 1024), 0, self);
-  var_82c7381e = trace[# "position"];
+  var_82c7381e = trace[#"position"];
   self botsetmovepoint(endpos);
 
   for(var_ccaaa590 = vectordot(self.origin - var_82c7381e, normal); var_ccaaa590 > 20; var_ccaaa590 = vectordot(self.origin - var_82c7381e, normal)) {

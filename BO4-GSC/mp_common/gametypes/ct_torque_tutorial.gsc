@@ -1689,7 +1689,7 @@ function_78986232(params) {
     var_23efb519 = 10;
     var_595e41ee = 150;
     event = # "ekia";
-    eventindex = level.scoreinfo[event][# "row"];
+    eventindex = level.scoreinfo[event][#"row"];
     eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 

@@ -180,8 +180,8 @@ function private function_bf078d39(a_s_breadcrumbs) {
         var_6638ee82.var_665aa347 = [];
       }
 
-      if(!isDefined(var_6638ee82.var_665aa347[# "true"])) {
-        var_6638ee82.var_665aa347[# "true"] = var_5b2d2a25;
+      if(!isDefined(var_6638ee82.var_665aa347[#"true"])) {
+        var_6638ee82.var_665aa347[#"true"] = var_5b2d2a25;
       }
     }
 
@@ -192,8 +192,8 @@ function private function_bf078d39(a_s_breadcrumbs) {
         var_6638ee82.var_665aa347 = [];
       }
 
-      if(!isDefined(var_6638ee82.var_665aa347[# "false"])) {
-        var_6638ee82.var_665aa347[# "false"] = var_5b2d2a25;
+      if(!isDefined(var_6638ee82.var_665aa347[#"false"])) {
+        var_6638ee82.var_665aa347[#"false"] = var_5b2d2a25;
       }
     }
   }
@@ -261,7 +261,7 @@ function private function_17a595c8(a_s_breadcrumbs) {
       }
 
       if(isDefined(var_6638ee82.script_flag_true)) {
-        if(level flag::get_all(var_6638ee82.var_665aa347[# "true"])) {
+        if(level flag::get_all(var_6638ee82.var_665aa347[#"true"])) {
           print3d(var_6638ee82.origin + (0, 0, var_3f45ff31), "<dev string:x107>" + var_6638ee82.script_flag_true, (0, 1, 0), 1, 0.2, 10);
         } else {
           print3d(var_6638ee82.origin + (0, 0, var_3f45ff31), "<dev string:x107>" + var_6638ee82.script_flag_true, (1, 0.5, 0), 1, 0.2, 10);
@@ -271,7 +271,7 @@ function private function_17a595c8(a_s_breadcrumbs) {
       }
 
       if(isDefined(var_6638ee82.script_flag_false)) {
-        if(level flag::get_all(var_6638ee82.var_665aa347[# "false"])) {
+        if(level flag::get_all(var_6638ee82.var_665aa347[#"false"])) {
           print3d(var_6638ee82.origin + (0, 0, var_3f45ff31), "<dev string:x123>" + var_6638ee82.script_flag_false, (0, 1, 0), 1, 0.2, 10);
         } else {
           print3d(var_6638ee82.origin + (0, 0, var_3f45ff31), "<dev string:x123>" + var_6638ee82.script_flag_false, (1, 0.5, 0), 1, 0.2, 10);

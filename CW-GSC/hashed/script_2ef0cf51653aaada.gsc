@@ -34,8 +34,8 @@
 
 function starting(str_objective) {
   level flag::set("level_intro_nuke_checkpoint");
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   snd::client_msg("audio_level_begin_duck_start");
   namespace_534279a::spawn_allies();
   namespace_604e2e22::function_3b9e7104();

@@ -23,7 +23,7 @@ init_shared(friendly_rob, var_4885f19e) {
   clientfield::register("clientuimodel", "hudItems.proximityAlarm", 1, 3, "int", undefined, 0, 0);
   clientfield::register("missile", "friendlyequip", 1, 1, "int", &friendly_outline, 0, 1);
   clientfield::register("scriptmover", "friendlyequip", 1, 1, "int", &friendly_outline, 0, 0);
-  level._effect[# "powerlight"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"powerlight"] = # "weapon/fx8_equip_light_os";
 
   if(getgametypesetting(#"hash_48670d9509071424")) {
     level.var_58253868 = friendly_rob;
@@ -256,11 +256,11 @@ playflarefx(localclientnum) {
   }
 
   if(!isDefined(self.equipmentfriendfx)) {
-    self.equipmenttagfx = level._effect[# "powerlightgreen"];
+    self.equipmenttagfx = level._effect[#"powerlightgreen"];
   }
 
   if(!isDefined(self.equipmentenemyfx)) {
-    self.equipmenttagfx = level._effect[# "powerlight"];
+    self.equipmenttagfx = level._effect[#"powerlight"];
   }
 
   if(self function_83973173()) {

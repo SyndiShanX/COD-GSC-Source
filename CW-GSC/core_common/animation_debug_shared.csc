@@ -21,7 +21,7 @@ function init() {
   flag::init_dvar(#"anim_debug_pause");
 
   for(;;) {
-    level flag::wait_till_any([# "anim_debug", #"anim_debug_pause"]);
+    level flag::wait_till_any([#"anim_debug", #"anim_debug_pause"]);
     a_players = getlocalplayers();
 
     foreach(player in a_players) {
@@ -33,7 +33,7 @@ function init() {
       }
     }
 
-    level flag::wait_till_clear_all([# "anim_debug", #"anim_debug_pause"]);
+    level flag::wait_till_clear_all([#"anim_debug", #"anim_debug_pause"]);
     level notify(#"kill_anim_debug");
   }
 }

@@ -247,7 +247,7 @@ function private function_22107f87(timer) {
   if((isDefined(var_ae0703af) ? var_ae0703af : 0) > 0 && getrealtime() >= (isDefined(var_5273c86b) ? var_5273c86b : 0) && !self flag::get("no_deaths_door_warning") && !isgodmode(self)) {
     self setnoncheckpointdata("DeathsDoorWarnings", var_ae0703af - 1);
     self setnoncheckpointdata("DeathsDoorWarningTime", getrealtime() + 60000);
-    self thread warning_message::create(#"hash_1b8a733f0d461a2c", [# "hash_2b62b2990144ebf6", #"healing", "no_deaths_door_warning"], 1, ["death", "in_igc"]);
+    self thread warning_message::create(#"hash_1b8a733f0d461a2c", [#"hash_2b62b2990144ebf6", #"healing", "no_deaths_door_warning"], 1, ["death", "in_igc"]);
   }
 
   self thread function_ab69b983();

@@ -397,7 +397,7 @@ function function_19288a46() {
   level.player setplayerangles(anglesToForward(level.var_7466d419 function_90d45d34(2)));
   level.player hide();
   a_ents = [];
-  a_ents[# "fakearms"] = util::spawn_player_clone(level.player);
+  a_ents[#"fakearms"] = util::spawn_player_clone(level.player);
   wait 1;
   level util::delay(0.65, undefined, &namespace_b7cfe907::pstfx_teleport, 0, 2.5);
   level util::delay(0.65, undefined, &snd::client_msg, #"hash_4a41082a1d97f925");
@@ -456,11 +456,11 @@ function function_6cce8b8e() {
 
 function function_97a20289() {
   a_ents = [];
-  a_ents[# "player"] = level.player;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"player"] = level.player;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::init(#"hash_32b809763b13c282", a_ents);
 }
 
@@ -510,14 +510,14 @@ function function_6acbfbb1(var_50cc0d4f = 0) {
   self val::set(#"mortar_transition", "takedamage", 0);
   level scene::add_scene_func(#"hash_32b809763b13c282", &function_4ca07f70, "play");
   a_ents = [];
-  a_ents[# "player"] = self;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
-  a_ents[# "actor 1"] = level.var_35f6b1e0;
-  a_ents[# "actor 2"] = level.var_841a4e26;
-  a_ents[# "prop 1"] = self namespace_b7cfe907::function_ca2b95a();
+  a_ents[#"player"] = self;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"actor 1"] = level.var_35f6b1e0;
+  a_ents[#"actor 2"] = level.var_841a4e26;
+  a_ents[#"prop 1"] = self namespace_b7cfe907::function_ca2b95a();
   level scene::play(#"hash_32b809763b13c282", a_ents);
   level.buddy thread colors::set_force_color("g");
   level flag::set("flag_enable_mortar_courtyard_color_chain");
@@ -1329,7 +1329,7 @@ function function_c6c2c276() {
 
 function function_469dbbc4(a_ents) {
   level endon(#"hash_bf9e9b05d9f258d", #"flag_stop_ammo_cache_scene");
-  enemy = a_ents[# "actor 1"];
+  enemy = a_ents[#"actor 1"];
   enemy endon(#"death");
   enemy.a.nodeath = 1;
   enemy.skipdeath = 1;
@@ -1401,7 +1401,7 @@ function function_77ff9ff2() {
 
 function function_ecf10386(a_ents) {
   level scene::remove_scene_func(#"hash_4e497ef04688df0e", &function_ecf10386, "init");
-  enemy = a_ents[# "actor 1"];
+  enemy = a_ents[#"actor 1"];
   enemy endon(#"death");
   level flag::wait_till("flag_aib_t9_vign_cust_arm_ammo_cache_play");
   wait 0.5;
@@ -1409,7 +1409,7 @@ function function_ecf10386(a_ents) {
 }
 
 function function_b6a33802(a_ents) {
-  enemy = a_ents[# "actor 1"];
+  enemy = a_ents[#"actor 1"];
 
   if(isalive(enemy)) {
     enemy.script_objective = "armada_mortar_start";
@@ -1427,7 +1427,7 @@ function function_9a05c498() {
 }
 
 function function_a2024273(a_ents) {
-  ent = a_ents[# "actor 1"];
+  ent = a_ents[#"actor 1"];
 
   if(isalive(ent)) {
     ent thread ai::force_goal(level.player.origin);
@@ -1445,7 +1445,7 @@ function function_6b05b315() {
 }
 
 function function_32447d79(a_ents) {
-  ent = a_ents[# "actor 1"];
+  ent = a_ents[#"actor 1"];
 
   if(isalive(ent)) {
     ent.script_objective = "armada_mortar_start";
@@ -1688,7 +1688,7 @@ function function_d250e19f() {
 
 function function_28a8f735(ents) {
   level endon(#"flag_mortar_reached_red_door", #"start_vignette_react_surprise_doorway");
-  util::waittill_any_ents(ents[# "enemy02"], "damage", ents[# "enemy03"], "damage", ents[# "enemy02"], "start_context_melee", ents[# "enemy03"], "start_context_melee");
+  util::waittill_any_ents(ents[#"enemy02"], "damage", ents[#"enemy03"], "damage", ents[#"enemy02"], "start_context_melee", ents[#"enemy03"], "start_context_melee");
   level flag::set("start_vignette_react_surprise_doorway");
 }
 
@@ -1726,7 +1726,7 @@ function function_eb90b3e8() {
 }
 
 function function_6c337113(a_ents) {
-  enemy = a_ents[# "actor 1"];
+  enemy = a_ents[#"actor 1"];
   level endon(#"hash_7f77ed6cb213acc2");
   enemy endon(#"death");
   enemy thread function_566d3929();
@@ -1833,7 +1833,7 @@ function function_5e509636() {
 }
 
 function function_a3bea266(a_ents) {
-  var_a10bca5b = a_ents[# "actor"];
+  var_a10bca5b = a_ents[#"actor"];
 
   if(isalive(var_a10bca5b)) {
     var_a10bca5b val::reset(#"hash_1fb751fa6e63d1a1", "takedamage");
@@ -2143,7 +2143,7 @@ function function_3d691322() {
   level objectives::update_position("armada_obj_mortar_goto_red_door", struct::get("obj_mortar_tea_house_upper_floor_hallway").origin);
   level flag::wait_till_any(array("flag_reached_tea_house_upper_floor_hallway", "flag_mortar_reached_red_door"));
   level objectives::complete("armada_obj_mortar_goto_red_door");
-  level.buddy.allowbattlechatter[# "bc"] = 0;
+  level.buddy.allowbattlechatter[#"bc"] = 0;
   level objectives::function_4eb5c04a("armada_obj_mortar_open_red_door", var_e361d345.origin, #"hash_56b4845f8e5f7fe6");
   var_e361d345 util::create_cursor_hint(undefined, (0, 0, 3), #"hash_725b894f542049b0", 64, undefined, undefined, undefined, 128);
   var_e361d345 prompts::set_objective("armada_obj_mortar_open_red_door");
@@ -2238,8 +2238,8 @@ function function_4c8e7a76(var_7e2c51d8) {
 function function_110866d(b_init = 0) {
   level.player endon(#"death");
   a_ents = [];
-  a_ents[# "player"] = level.player;
-  a_ents[# "maindoor"] = getent("mortar_bunker_door", "targetname");
+  a_ents[#"player"] = level.player;
+  a_ents[#"maindoor"] = getent("mortar_bunker_door", "targetname");
 
   if(b_init) {
     level scene::init(#"hash_604c13090504ecb1", a_ents);
@@ -2254,7 +2254,7 @@ function function_110866d(b_init = 0) {
 
 function function_766af271() {
   a_ents = [];
-  a_ents[# "buddy"] = level.buddy;
+  a_ents[#"buddy"] = level.buddy;
   level scene::add_scene_func(#"hash_5705e398ad93ac99", &function_e8f2d444, "play");
   level scene::add_scene_func(#"hash_5705e398ad93ac99", &function_ce1faca, "stop");
   level thread scene::play(#"hash_5705e398ad93ac99", a_ents);
@@ -2273,10 +2273,10 @@ function function_4bf5cfff() {
 
 function function_a1de7ea2(b_init = 0) {
   a_ents = [];
-  a_ents[# "player"] = level.player;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "hash_43d8e88908e5b103"] = getent("mortar_door_exfil_right", "targetname");
-  a_ents[# "hash_123dc66ffa6dca8e"] = getent("mortar_door_exfil_left", "targetname");
+  a_ents[#"player"] = level.player;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"hash_43d8e88908e5b103"] = getent("mortar_door_exfil_right", "targetname");
+  a_ents[#"hash_123dc66ffa6dca8e"] = getent("mortar_door_exfil_left", "targetname");
 
   if(b_init) {
     level scene::add_scene_func(#"hash_7d15d57d22684df", &function_cd1dcfed, "sims_exit");
@@ -2293,13 +2293,13 @@ function function_a1de7ea2(b_init = 0) {
 }
 
 function function_e8f2d444(a_ents) {
-  a_ents[# "enemy2"].var_c681e4c1 = 1;
+  a_ents[#"enemy2"].var_c681e4c1 = 1;
   level scene::remove_scene_func(#"hash_5705e398ad93ac99", &function_e8f2d444, "play");
 }
 
 function function_ce1faca(a_ents) {
-  if(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] delete();
+  if(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] delete();
   }
 
   level scene::remove_scene_func(#"hash_5705e398ad93ac99", &function_ce1faca, "stop");
@@ -2307,7 +2307,7 @@ function function_ce1faca(a_ents) {
 
 function function_262e8906(var_50cc0d4f) {
   a_ents = [];
-  a_ents[# "buddy"] = level.buddy;
+  a_ents[#"buddy"] = level.buddy;
 
   if(!is_true(var_50cc0d4f)) {
     level scene::play(#"hash_7d15d57d22684df", "sims_stairs", a_ents);
@@ -2319,7 +2319,7 @@ function function_262e8906(var_50cc0d4f) {
 }
 
 function function_cd1dcfed(ents) {
-  var_fe4a8480 = ents[# "dossier"];
+  var_fe4a8480 = ents[#"dossier"];
   waitframe(10);
   level.player playgestureviewmodel("ges_body_shield_gundown");
   level.player val::set(#"hash_34ed04d5046328af", "show_crosshair", 0);
@@ -2389,7 +2389,7 @@ function function_997dda5e(var_d3440450, var_50cc0d4f) {
   level skipto::function_51726ac8([next_obj], 0, level.player);
   level.buddy ai::disable_careful();
   level.buddy thread colors::set_force_color("b");
-  level.buddy.allowbattlechatter[# "bc"] = 1;
+  level.buddy.allowbattlechatter[#"bc"] = 1;
   level.player util::delay(5, "death", &show);
 }
 
@@ -2538,13 +2538,13 @@ function function_58771ad7() {
   level.var_7466d419 thread turret::disable(2);
   s_exfil = struct::get("tag_align_mortar_exfil");
   a_ents = [];
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
-  a_ents[# "player"] = level.player;
-  a_ents[# "vip"] = level.vip;
-  a_ents[# "gunner"] = level.gunner;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"player"] = level.player;
+  a_ents[#"vip"] = level.vip;
+  a_ents[#"gunner"] = level.gunner;
   level namespace_b7cfe907::function_3af72756(level.var_7466d419, level.pilot, "driver");
   level namespace_b7cfe907::function_3af72756(level.var_7466d419, level.copilot, "passenger1");
   level namespace_b7cfe907::function_3af72756(level.var_7466d419, level.vip, "crew");
@@ -2587,8 +2587,8 @@ function function_58771ad7() {
 function function_e9339cdf() {
   if(!level flag::get(#"hash_53c7d32dc75bd3ea")) {
     a_ents = [];
-    a_ents[# "gunner"] = level.gunner;
-    a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+    a_ents[#"gunner"] = level.gunner;
+    a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
     level.var_7466d419 thread scene::play(#"hash_51fd44b722fb5b2d", a_ents);
     level flag::set(#"hash_53c7d32dc75bd3ea");
   }
@@ -2615,8 +2615,8 @@ function function_c09e7d39() {
 
 function function_9290ebb3() {
   a_ents = [];
-  a_ents[# "player"] = level.player;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"player"] = level.player;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level.var_7466d419 thread function_f89fbd1e();
   level.var_7466d419 scene::play(#"hash_4535fa2b00f13577", a_ents);
   level.player hide();

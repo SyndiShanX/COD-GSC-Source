@@ -213,7 +213,7 @@ function function_8279b9f2() {
   level.var_8dad5090 = "React_Fast";
   level.bunker_intro_phone = util::spawn_anim_model("rus_phone_wall_01_anim");
   var_6b5c13c2 = [];
-  var_6b5c13c2[# "bunker_intro_phone"] = level.bunker_intro_phone;
+  var_6b5c13c2[#"bunker_intro_phone"] = level.bunker_intro_phone;
   level thread scene::play("scene_kgb_bunker_intro_elevator", "Start");
   scene::add_scene_func("scene_kgb_bunker_intro_guard01", &function_25831409, "Loop");
   level thread scene::play("scene_kgb_bunker_intro_guard01", "Loop");
@@ -293,7 +293,7 @@ function function_c353f42a() {
 }
 
 function function_25831409(a_ents) {
-  guy = a_ents[# "bunker_intro_guard01"];
+  guy = a_ents[#"bunker_intro_guard01"];
   guy endon(#"death");
   level endon(#"hash_619863a87e777fd1");
   level waittill(#"hash_5945fb19f4765b76");
@@ -301,7 +301,7 @@ function function_25831409(a_ents) {
 }
 
 function function_97192259(a_ents) {
-  guy = a_ents[# "bunker_intro_guard01"];
+  guy = a_ents[#"bunker_intro_guard01"];
   guy endon(#"death");
   guy thread dialogue::function_47b06180();
   level waittill(#"hash_3d671f3adb08034");
@@ -309,7 +309,7 @@ function function_97192259(a_ents) {
 }
 
 function function_c44b308e(a_ents) {
-  guy = a_ents[# "bunker_intro_guard02"];
+  guy = a_ents[#"bunker_intro_guard02"];
   guy endon(#"death");
   level endon(#"hash_619863a87e777fd1");
   level waittill(#"hash_2597a9a7421731ab");
@@ -317,7 +317,7 @@ function function_c44b308e(a_ents) {
 }
 
 function function_1cb30cf6(a_ents) {
-  guy = a_ents[# "bunker_intro_guard02"];
+  guy = a_ents[#"bunker_intro_guard02"];
   guy endon(#"death");
   guy thread dialogue::function_47b06180();
   level waittill(#"hash_51e288b6c1579efd");
@@ -325,7 +325,7 @@ function function_1cb30cf6(a_ents) {
 }
 
 function function_65b9c362(a_ents) {
-  guy = a_ents[# "bunker_intro_guard03"];
+  guy = a_ents[#"bunker_intro_guard03"];
   guy endon(#"death");
   level endon(#"hash_619863a87e777fd1");
   level waittill(#"hash_772597925aee74a4");
@@ -335,7 +335,7 @@ function function_65b9c362(a_ents) {
 }
 
 function function_82cb64f1(a_ents) {
-  guy = a_ents[# "bunker_intro_guard03"];
+  guy = a_ents[#"bunker_intro_guard03"];
   guy endon(#"death");
   guy thread dialogue::function_47b06180();
 }

@@ -117,7 +117,7 @@ function event_handler[level_init] main(eventstruct) {
   level thread namespace_d9b153b9::function_c318ce4a("river_path_rob_light");
   level thread namespace_d9b153b9::function_c318ce4a("bridge_path_rob_light");
   level thread namespace_d9b153b9::function_6b921cdd();
-  level.stealth.funcs[# "event_should_ignore"] = &namespace_d9b153b9::function_b08684ac;
+  level.stealth.funcs[#"event_should_ignore"] = &namespace_d9b153b9::function_b08684ac;
 
   level namespace_d9b153b9::function_feb24b1d();
   level namespace_d9b153b9::function_d20966e6();
@@ -307,7 +307,7 @@ function function_a0bcc84e(str_objective, var_50cc0d4f) {
           level.var_731c10af.var_d8a772da = "exit";
         }
       } else {
-        next_obj = "path_end_" + level.var_731c10af.paths[# "rice_paddies"].count;
+        next_obj = "path_end_" + level.var_731c10af.paths[#"rice_paddies"].count;
         str = getsubstr(flag, 5);
         level.var_731c10af.var_d8a772da = str;
       }
@@ -660,9 +660,9 @@ function function_31b460ba() {
     persistent.var_9fd1c625.var_204d167f = [];
   }
 
-  level.var_8b6003c3 = [# "sniper_overlook", #"village", #"caves", #"rat_tunnels"];
+  level.var_8b6003c3 = [#"sniper_overlook", #"village", #"caves", #"rat_tunnels"];
   level.var_9ba0ebb2 = level.var_8b6003c3.size;
-  level.var_607cc7b3 = [# "hash_f9ee0df7af7bf0c", #"memory_2_obey", #"hash_4a1e9d19df428406", #"memory_1_disobey", #"memory_2_disobey", #"memory_3_disobey", #"memory_4"];
+  level.var_607cc7b3 = [#"hash_f9ee0df7af7bf0c", #"memory_2_obey", #"hash_4a1e9d19df428406", #"memory_1_disobey", #"memory_2_disobey", #"memory_3_disobey", #"memory_4"];
   level.var_93b4bbca = level.var_607cc7b3.size;
   level.var_9fd1c625 = persistent.var_9fd1c625;
   level.var_9fd1c625.var_e3cc02a9 = persistent.var_9fd1c625.var_e3cc02a9;
@@ -1556,8 +1556,8 @@ function function_e14708f(str_objective, var_50cc0d4f) {
 }
 
 function function_e0f175e2(a_ents) {
-  var_12ad454a = a_ents[# "hash_28ae04489b451200"];
-  var_27a03f = a_ents[# "hash_28ae07489b451719"];
+  var_12ad454a = a_ents[#"hash_28ae04489b451200"];
+  var_27a03f = a_ents[#"hash_28ae07489b451719"];
 
   if(isDefined(var_12ad454a)) {
     var_12ad454a thread namespace_d9b153b9::function_b0ea272(undefined, "<dev string:x87b>");

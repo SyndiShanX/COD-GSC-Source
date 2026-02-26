@@ -12,11 +12,11 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(!isDefined(level.teams[# "axis"])) {
+  if(!isDefined(level.teams[#"axis"])) {
     return;
   }
 
-  init(level.teams[# "axis"]);
+  init(level.teams[#"axis"]);
 }
 
 function init(team) {

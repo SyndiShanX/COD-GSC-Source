@@ -121,7 +121,7 @@ function_d63cfc37(a_ents) {
 
 function_7ea86b26(a_ents) {
   level endon(#"game_ended");
-  finger = a_ents[# "prop 1"];
+  finger = a_ents[#"prop 1"];
   t_kill = self.t_kill;
   clip = self.clip;
 

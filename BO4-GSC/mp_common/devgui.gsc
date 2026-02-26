@@ -709,7 +709,7 @@ add_vehicle_at_eye_trace(vehiclename) {
   vehicle asmrequestsubstate(#"locomotion@movement");
   waitframe(1);
   vehicle makevehicleusable();
-  vehicle.origin = trace[# "position"];
+  vehicle.origin = trace[#"position"];
   vehicle.nojumping = 1;
   vehicle thread watch_player_death();
   return vehicle;
@@ -1010,13 +1010,13 @@ function_354e12a4() {
     key = var_b917e8e0[i];
     action = level.scoreinfo[key];
 
-    if(isDefined(action) && isDefined(action[# "row"])) {
-      if(isDefined(action[# "job_type"])) {
+    if(isDefined(action) && isDefined(action[#"row"])) {
+      if(isDefined(action[#"job_type"])) {
         keystring = function_9e72a96(key);
-        util::add_devgui(path + "<dev string:x8eb>" + keystring[0] + "<dev string:x294>" + keystring, cmd + action[# "row"]);
+        util::add_devgui(path + "<dev string:x8eb>" + keystring[0] + "<dev string:x294>" + keystring, cmd + action[#"row"]);
 
-        if(isDefined(action[# "hash_401b1493e5188252"]) && action[# "hash_401b1493e5188252"] == # "ender") {
-          util::add_devgui(path + "<dev string:x8f3>" + keystring[0] + "<dev string:x294>" + keystring, var_ab79c6df + action[# "row"]);
+        if(isDefined(action[#"hash_401b1493e5188252"]) && action[#"hash_401b1493e5188252"] == # "ender") {
+          util::add_devgui(path + "<dev string:x8f3>" + keystring[0] + "<dev string:x294>" + keystring, var_ab79c6df + action[#"row"]);
         }
       }
     }

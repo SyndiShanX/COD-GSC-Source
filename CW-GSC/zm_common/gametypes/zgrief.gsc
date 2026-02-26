@@ -60,15 +60,15 @@ function onstartgametype() {
 function ontimelimit() {
   winner = globallogic::determineteamwinnerbygamestat("teamScores");
   globallogic_utils::logteamwinstring("time limit", winner);
-  setDvar(#"ui_text_endreason", game.strings[# "time_limit_reached"]);
-  thread globallogic::endgame(winner, game.strings[# "time_limit_reached"]);
+  setDvar(#"ui_text_endreason", game.strings[#"time_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"time_limit_reached"]);
 }
 
 function onscorelimit() {
   winner = globallogic::determineteamwinnerbygamestat("teamScores");
   globallogic_utils::logteamwinstring("scorelimit", winner);
-  setDvar(#"ui_text_endreason", game.strings[# "score_limit_reached"]);
-  thread globallogic::endgame(winner, game.strings[# "score_limit_reached"]);
+  setDvar(#"ui_text_endreason", game.strings[#"score_limit_reached"]);
+  thread globallogic::endgame(winner, game.strings[#"score_limit_reached"]);
 }
 
 function playerdamagecallback(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {

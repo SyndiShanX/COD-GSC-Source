@@ -29,7 +29,7 @@ function turret_microwave_sound_start(localclientnum) {
   forward = vectorscale(forward, 750);
   trace = bulletTrace(origin, origin + forward, 0, self);
   start = origin;
-  end = trace[# "position"];
+  end = trace[#"position"];
   self.microwave_audio_start = start;
   self.microwave_audio_end = end;
   self thread turret_microwave_sound_updater();
@@ -70,7 +70,7 @@ function turret_microwave_sound_updater() {
       forward = vectorscale(forward, 750);
       trace = bulletTrace(origin, origin + forward, 0, self);
       self.microwave_audio_start = origin;
-      self.microwave_audio_end = trace[# "position"];
+      self.microwave_audio_end = trace[#"position"];
       soundupdatelineemitter(#"wpn_micro_turret_loop", previousstart, previousend, self.microwave_audio_start, self.microwave_audio_end);
     }
 
@@ -101,14 +101,14 @@ function microwave_close_anim(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function debug_trace(origin, trace) {
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     color = (0.95, 0.05, 0.05);
   } else {
     color = (0.05, 0.95, 0.05);
   }
 
-  sphere(trace[# "position"], 5, color, 0.75, 1, 10, 100);
-  util::debug_line(origin, trace[# "position"], color, 100);
+  sphere(trace[#"position"], 5, color, 0.75, 1, 10, 100);
+  util::debug_line(origin, trace[#"position"], color, 100);
 }
 
 function startmicrowavefx(localclientnum) {
@@ -133,7 +133,7 @@ function startmicrowavefx(localclientnum) {
   while(true) {
     if(getdvarint(#"scr_microwave_turret_fx_debug", 0)) {
       turret.should_update_fx = 1;
-      microwavefxent.fxhashs[# "center"] = 0;
+      microwavefxent.fxhashs[#"center"] = 0;
     }
 
     if(turret.should_update_fx == 0) {
@@ -204,7 +204,7 @@ function microwavefxhash(trace, origin, name) {
   for(i = 0; i < 5; i++) {
     endofhalffxsq = sqr(i * 150 + 125);
     endoffullfxsq = sqr(i * 150 + 200);
-    tracedistsq = distancesquared(origin, trace[# "position"]);
+    tracedistsq = distancesquared(origin, trace[#"position"]);
 
     if(tracedistsq >= endofhalffxsq || i == 0) {
       if(tracedistsq < endoffullfxsq) {
@@ -283,7 +283,7 @@ function playmicrowavefx(localclientnum, trace, traceright, traceleft, origin) {
   for(i = 0; i < 5; i++) {
     endofhalffxsq = sqr(i * 150 + 125);
     endoffullfxsq = sqr(i * 150 + 200);
-    tracedistsq = distancesquared(origin, trace[# "position"]);
+    tracedistsq = distancesquared(origin, trace[#"position"]);
     startfx = tracedistsq >= endofhalffxsq || i == 0;
     fxname = tracedistsq > endoffullfxsq ? "killstreaks/fx_sg_distortion_cone_ash" : "killstreaks/fx_sg_distortion_cone_ash_sm";
 
@@ -305,7 +305,7 @@ function playmicrowavefx(localclientnum, trace, traceright, traceleft, origin) {
         break;
     }
 
-    tracedistsq = distancesquared(origin, traceleft[# "position"]);
+    tracedistsq = distancesquared(origin, traceleft[#"position"]);
     startfx = tracedistsq >= endofhalffxsq;
     fxname = tracedistsq > endoffullfxsq ? "killstreaks/fx_sg_distortion_cone_ash" : "killstreaks/fx_sg_distortion_cone_ash_sm";
 
@@ -327,7 +327,7 @@ function playmicrowavefx(localclientnum, trace, traceright, traceleft, origin) {
         break;
     }
 
-    tracedistsq = distancesquared(origin, traceright[# "position"]);
+    tracedistsq = distancesquared(origin, traceright[#"position"]);
     startfx = tracedistsq >= endofhalffxsq;
     fxname = tracedistsq > endoffullfxsq ? "killstreaks/fx_sg_distortion_cone_ash" : "killstreaks/fx_sg_distortion_cone_ash_sm";
 

@@ -121,8 +121,8 @@ function function_c81ac3e5(attacker, weapon, var_fd90b0bb, tier) {
   max_health = self.maxhealth;
 
   if(self.archetype == # "zombie_dog") {
-    if(isDefined(level.var_41dd92fd[# "zombie"])) {
-      max_health = level.var_41dd92fd[# "zombie"].health;
+    if(isDefined(level.var_41dd92fd[#"zombie"])) {
+      max_health = level.var_41dd92fd[#"zombie"].health;
     }
   }
 
@@ -193,7 +193,7 @@ function function_f7f8a2cc(attacker, weapon) {
       continue;
     }
 
-    if(is_true(level.aat[# "ammomod_brainrot"].immune_result_indirect[a_ai_zombies[i].archetype])) {
+    if(is_true(level.aat[#"ammomod_brainrot"].immune_result_indirect[a_ai_zombies[i].archetype])) {
       continue;
     }
 
@@ -241,7 +241,7 @@ function private function_eb8a62bc(var_c5ad44f1, n_damage, e_attacker, weapon) {
 }
 
 function function_6f735de0() {
-  if(is_true(level.aat[# "ammomod_brainrot"].immune_result_direct[self.archetype])) {
+  if(is_true(level.aat[#"ammomod_brainrot"].immune_result_direct[self.archetype])) {
     return false;
   }
 
@@ -350,7 +350,7 @@ function zombie_death_explosion(var_3a5b1930, e_attacker, weapon, var_fd90b0bb, 
       continue;
     }
 
-    if(is_true(level.aat[# "ammomod_brainrot"].immune_result_indirect[a_ai_zombies[i].archetype])) {
+    if(is_true(level.aat[#"ammomod_brainrot"].immune_result_indirect[a_ai_zombies[i].archetype])) {
       continue;
     }
 

@@ -92,15 +92,15 @@ function getvalueinrange(value, minvalue, maxvalue) {
 }
 
 function assertproperplacement() {
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
 
   for(i = 0; i < numplayers - 1; i++) {
-    if(isDefined(level.placement[# "all"][i]) && isDefined(level.placement[# "all"][i + 1])) {
-      if(level.placement[# "all"][i].score < level.placement[# "all"][i + 1].score) {
+    if(isDefined(level.placement[#"all"][i]) && isDefined(level.placement[#"all"][i + 1])) {
+      if(level.placement[#"all"][i].score < level.placement[#"all"][i + 1].score) {
         println("<dev string:x38>");
 
         for(i = 0; i < numplayers; i++) {
-          player = level.placement[# "all"][i];
+          player = level.placement[#"all"][i];
           println("<dev string:x4e>" + i + "<dev string:x54>" + player.name + "<dev string:x5a>" + player.score);
         }
 
@@ -304,7 +304,7 @@ function logteamwinstring(wintype, winner) {
   }
 
   foreach(team, str_team in level.teams) {
-    log_string = log_string + "<dev string:x96>" + str_team + "<dev string:x5a>" + game.stat[# "teamscores"][team];
+    log_string = log_string + "<dev string:x96>" + str_team + "<dev string:x5a>" + game.stat[#"teamscores"][team];
   }
 
   print(log_string);

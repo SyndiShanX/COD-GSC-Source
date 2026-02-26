@@ -81,7 +81,7 @@ function_93bd3e32() {
   level flagsys::wait_till("start_zombie_round_logic");
   clientfield::set("" + # "hash_3b4f11e825b1f62b", 1);
 
-  foreach(s_unitrigger_stub in level.var_4fe2f84d[# "zblueprint_mansion_a_skeet_fink"]) {
+  foreach(s_unitrigger_stub in level.var_4fe2f84d[#"zblueprint_mansion_a_skeet_fink"]) {
     s_unitrigger_stub.locked = 1;
   }
 
@@ -492,7 +492,7 @@ function_ed59d8e4() {
 
 function_2879cfed(var_a276c861) {
   if(level flag::get(#"hash_6df692c4073d421b")) {
-    foreach(s_unitrigger_stub in level.var_4fe2f84d[# "zblueprint_mansion_a_skeet_fink"]) {
+    foreach(s_unitrigger_stub in level.var_4fe2f84d[#"zblueprint_mansion_a_skeet_fink"]) {
       s_unitrigger_stub.locked = undefined;
     }
 

@@ -83,13 +83,13 @@ debug_show_exterior_goals() {
       color_blue = (0, 0, 1);
 
       foreach(zone in level.zones) {
-        foreach(location in zone.a_loc_types[# "zombie_location"]) {
+        foreach(location in zone.a_loc_types[#"zombie_location"]) {
           recordstar(location.origin, color);
         }
       }
 
       foreach(zone in level.zones) {
-        foreach(location in zone.a_loc_types[# "zombie_location"]) {
+        foreach(location in zone.a_loc_types[#"zombie_location"]) {
           foreach(goal in level.exterior_goals) {
             if(goal.script_string == location.script_string) {
               recordline(location.origin, goal.origin, color);
@@ -677,16 +677,16 @@ zombie_boardtear_offset_fx_horizontle(chunk, node) {
   if(isDefined(chunk.script_parameters) && (chunk.script_parameters == "repair_board" || chunk.script_parameters == "board")) {
     if(isDefined(chunk.unbroken) && chunk.unbroken == 1) {
       if(isDefined(chunk.material) && chunk.material == "glass") {
-        playFX(level._effect[# "glass_break"], chunk.origin, node.angles);
+        playFX(level._effect[#"glass_break"], chunk.origin, node.angles);
         chunk.unbroken = 0;
       } else if(isDefined(chunk.material) && chunk.material == "metal") {
-        playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin);
+        playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin);
         chunk.unbroken = 0;
       } else if(isDefined(chunk.material) && chunk.material == "rock") {
         if(isDefined(level.use_clientside_rock_tearin_fx) && level.use_clientside_rock_tearin_fx) {
           chunk clientfield::set("tearin_rock_fx", 1);
         } else {
-          playFX(level._effect[# "wall_break"], chunk.origin);
+          playFX(level._effect[#"wall_break"], chunk.origin);
         }
 
         chunk.unbroken = 0;
@@ -698,7 +698,7 @@ zombie_boardtear_offset_fx_horizontle(chunk, node) {
     if(isDefined(level.use_clientside_board_fx) && level.use_clientside_board_fx) {
       chunk clientfield::set("tearin_board_vertical_fx", 1);
     } else {
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin);
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin);
     }
 
     return;
@@ -724,16 +724,16 @@ zombie_boardtear_offset_fx_verticle(chunk, node) {
   if(isDefined(chunk.script_parameters) && (chunk.script_parameters == "repair_board" || chunk.script_parameters == "board")) {
     if(isDefined(chunk.unbroken) && chunk.unbroken == 1) {
       if(isDefined(chunk.material) && chunk.material == "glass") {
-        playFX(level._effect[# "glass_break"], chunk.origin, node.angles);
+        playFX(level._effect[#"glass_break"], chunk.origin, node.angles);
         chunk.unbroken = 0;
       } else if(isDefined(chunk.material) && chunk.material == "metal") {
-        playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin);
+        playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin);
         chunk.unbroken = 0;
       } else if(isDefined(chunk.material) && chunk.material == "rock") {
         if(isDefined(level.use_clientside_rock_tearin_fx) && level.use_clientside_rock_tearin_fx) {
           chunk clientfield::set("tearin_rock_fx", 1);
         } else {
-          playFX(level._effect[# "wall_break"], chunk.origin);
+          playFX(level._effect[#"wall_break"], chunk.origin);
         }
 
         chunk.unbroken = 0;
@@ -745,7 +745,7 @@ zombie_boardtear_offset_fx_verticle(chunk, node) {
     if(isDefined(level.use_clientside_board_fx)) {
       chunk clientfield::set("tearin_board_horizontal_fx", 1);
     } else {
-      playFX(level._effect[# "fx_zombie_bar_break"], chunk.origin);
+      playFX(level._effect[#"fx_zombie_bar_break"], chunk.origin);
     }
 
     return;
@@ -781,49 +781,49 @@ zombie_bartear_offset_fx_verticle(chunk) {
     possible_tag_array_2[3] = "Tag_fx_bottom";
     possible_tag_array_2 = array::randomize(possible_tag_array_2);
     random_fx = [];
-    random_fx[0] = level._effect[# "fx_zombie_bar_break"];
-    random_fx[1] = level._effect[# "fx_zombie_bar_break_lite"];
-    random_fx[2] = level._effect[# "fx_zombie_bar_break"];
-    random_fx[3] = level._effect[# "fx_zombie_bar_break_lite"];
+    random_fx[0] = level._effect[#"fx_zombie_bar_break"];
+    random_fx[1] = level._effect[#"fx_zombie_bar_break_lite"];
+    random_fx[2] = level._effect[#"fx_zombie_bar_break"];
+    random_fx[3] = level._effect[#"fx_zombie_bar_break_lite"];
     random_fx = array::randomize(random_fx);
 
     switch (randomint(9)) {
       case 0:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
         break;
       case 1:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_top");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
         break;
       case 2:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
         break;
       case 3:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_top");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
         break;
       case 4:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
         break;
       case 5:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_top");
         break;
       case 6:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_bottom");
         break;
       case 7:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_top");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_top");
         break;
       case 8:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_bottom");
         break;
     }
   }
@@ -833,41 +833,41 @@ zombie_bartear_offset_fx_horizontle(chunk) {
   if(isDefined(chunk.script_parameters) && chunk.script_parameters == "bar" || chunk.script_noteworthy == "board") {
     switch (randomint(10)) {
       case 0:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
         break;
       case 1:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_left");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_left");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
         break;
       case 2:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
         break;
       case 3:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_left");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_left");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
         break;
       case 4:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
         wait randomfloatrange(0, 0.3);
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
         break;
       case 5:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_left");
         break;
       case 6:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break_lite"], chunk, "Tag_fx_right");
         break;
       case 7:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
         break;
       case 8:
-        playFXOnTag(level._effect[# "fx_zombie_bar_break"], chunk, "Tag_fx_right");
+        playFXOnTag(level._effect[#"fx_zombie_bar_break"], chunk, "Tag_fx_right");
         break;
     }
   }
@@ -1585,7 +1585,7 @@ do_zombie_spawn() {
   }
 
   if(isDefined(level.use_multiple_spawns) && level.use_multiple_spawns && isDefined(self.script_int)) {
-    foreach(loc in level.zm_loc_types[# "zombie_location"]) {
+    foreach(loc in level.zm_loc_types[#"zombie_location"]) {
       if(!(isDefined(level.spawner_int) && level.spawner_int == self.script_int) && !(isDefined(loc.script_int) || isDefined(level.zones[loc.zone_name].script_int))) {
         continue;
       }
@@ -1599,7 +1599,7 @@ do_zombie_spawn() {
       spots[spots.size] = loc;
     }
   } else {
-    spots = level.zm_loc_types[# "zombie_location"];
+    spots = level.zm_loc_types[#"zombie_location"];
   }
 
   if(getdvarint(#"scr_zombie_spawn_in_view", 0)) {
@@ -1608,7 +1608,7 @@ do_zombie_spawn() {
     max_dot = 0;
     look_loc = undefined;
 
-    foreach(loc in level.zm_loc_types[# "zombie_location"]) {
+    foreach(loc in level.zm_loc_types[#"zombie_location"]) {
       player_vec = vectornormalize(anglesToForward(player getplayerangles()));
       player_vec_2d = (player_vec[0], player_vec[1], 0);
       player_spawn = vectornormalize(loc.origin - player.origin);
@@ -1633,7 +1633,7 @@ do_zombie_spawn() {
     }
 
     if(spots.size <= 0) {
-      spots[spots.size] = level.zm_loc_types[# "zombie_location"][0];
+      spots[spots.size] = level.zm_loc_types[#"zombie_location"][0];
       iprintln("no spawner in view");
     }
   }
@@ -1883,7 +1883,7 @@ zombie_tesla_head_gib() {
     return;
   }
 
-  zm_net::network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[# "tesla_shock_eyes"], self, "J_Eyeball_LE");
+  zm_net::network_safe_play_fx_on_tag("tesla_death_fx", 2, level._effect[#"tesla_shock_eyes"], self, "J_Eyeball_LE");
 }
 
 zombie_complete_emerging_into_playable_area() {

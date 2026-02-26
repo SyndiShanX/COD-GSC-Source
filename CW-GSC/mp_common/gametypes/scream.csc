@@ -222,7 +222,7 @@ function private canseeplayer(player) {
 
   sighttrace = bulletTrace(selfeye, playereye, 1, player);
 
-  if(!isDefined(sighttrace[# "fraction"]) || sighttrace[# "fraction"] < 1) {
+  if(!isDefined(sighttrace[#"fraction"]) || sighttrace[#"fraction"] < 1) {
     return false;
   }
 

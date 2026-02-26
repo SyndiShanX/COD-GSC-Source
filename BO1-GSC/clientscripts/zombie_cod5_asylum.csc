@@ -48,7 +48,7 @@ main() {
 register_zombie_types() {
   character\clientscripts\c_ger_honorguard_zt::register_gibs();
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
   include_weapon("g11_lps_zm");

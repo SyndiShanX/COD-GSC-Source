@@ -125,7 +125,7 @@ _assignsquadunclaimeddefendgameobjectparam(planner, squadindex) {
   defendobject = undefined;
 
   foreach(gameobject in defendobjects) {
-    if(!gameobject[# "claimed"]) {
+    if(!gameobject[#"claimed"]) {
       validobjects[validobjects.size] = gameobject;
     }
   }
@@ -172,7 +172,7 @@ _calculatebotscentroid(doppelbots) {
   centroid = (0, 0, 0);
 
   foreach(doppelbot in doppelbots) {
-    centroid += doppelbot[# "origin"];
+    centroid += doppelbot[#"origin"];
   }
 
   if(doppelbots.size > 0) {
@@ -191,10 +191,10 @@ _calculateclosestgameobject(position, gameobjects) {
   }
 
   closest = gameobjects[0];
-  distancesq = distancesquared(position, closest[# "origin"]);
+  distancesq = distancesquared(position, closest[#"origin"]);
 
   for(index = 1; index < gameobjects.size; index++) {
-    newdistancesq = distancesquared(position, gameobjects[index][# "origin"]);
+    newdistancesq = distancesquared(position, gameobjects[index][#"origin"]);
 
     if(newdistancesq < distancesq) {
       closest = gameobjects[index];
@@ -215,7 +215,7 @@ function_65b16924(doppelbots, components) {
   }
 
   for(componentindex = 0; componentindex < components.size; componentindex++) {
-    component = components[componentindex][# "__unsafe__"][# "component"];
+    component = components[componentindex][#"__unsafe__"][#"component"];
 
     if(!isDefined(component)) {
       continue;
@@ -224,7 +224,7 @@ function_65b16924(doppelbots, components) {
     chained = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot) || !isDefined(bot.var_aeb3e046)) {
         break;
@@ -249,7 +249,7 @@ function_65b16924(doppelbots, components) {
 
     if(chained) {
       var_d6d184 = array();
-      var_d6d184[# "component"] = components[componentindex];
+      var_d6d184[#"component"] = components[componentindex];
       var_1a9886d3[var_1a9886d3.size] = var_d6d184;
     }
   }
@@ -271,7 +271,7 @@ _calculateallpathablegameobjects(planner, doppelbots, gameobjects) {
   }
 
   for(gameobjectindex = 0; gameobjectindex < gameobjects.size; gameobjectindex++) {
-    gameobject = gameobjects[gameobjectindex][# "__unsafe__"][# "object"];
+    gameobject = gameobjects[gameobjectindex][#"__unsafe__"][#"object"];
 
     if(!isDefined(gameobject)) {
       continue;
@@ -281,7 +281,7 @@ _calculateallpathablegameobjects(planner, doppelbots, gameobjects) {
     longestpath = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot)) {
         pathable = 0;
@@ -302,8 +302,8 @@ _calculateallpathablegameobjects(planner, doppelbots, gameobjects) {
 
     if(pathable) {
       path = array();
-      path[# "distance"] = longestpath;
-      path[# "gameobject"] = gameobjects[gameobjectindex];
+      path[#"distance"] = longestpath;
+      path[#"gameobject"] = gameobjects[gameobjectindex];
       pathablegameobjects[pathablegameobjects.size] = path;
     }
 
@@ -342,7 +342,7 @@ function_816f4052(planner, doppelbots, bundles) {
   }
 
   for(bundleindex = 0; bundleindex < bundles.size; bundleindex++) {
-    bundle = bundles[bundleindex][# "__unsafe__"][# "bundle"];
+    bundle = bundles[bundleindex][#"__unsafe__"][#"bundle"];
 
     if(!isDefined(bundle)) {
       continue;
@@ -366,7 +366,7 @@ function_816f4052(planner, doppelbots, bundles) {
     longestpath = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot)) {
         pathable = 0;
@@ -387,8 +387,8 @@ function_816f4052(planner, doppelbots, bundles) {
 
     if(pathable) {
       path = array();
-      path[# "distance"] = longestpath;
-      path[# "bundle"] = bundles[bundleindex];
+      path[#"distance"] = longestpath;
+      path[#"bundle"] = bundles[bundleindex];
       pathablebundles[pathablebundles.size] = path;
     }
 
@@ -429,7 +429,7 @@ function_77cd4593(planner, doppelbots, components) {
   var_80e29ead = 0;
 
   for(botindex = 0; botindex < doppelbots.size; botindex++) {
-    if(doppelbots[botindex][# "type"] == "air") {
+    if(doppelbots[botindex][#"type"] == "air") {
       var_80e29ead = 1;
       break;
     }
@@ -438,14 +438,14 @@ function_77cd4593(planner, doppelbots, components) {
   var_b73a1d4b = 0;
 
   for(botindex = 0; botindex < doppelbots.size; botindex++) {
-    if(doppelbots[botindex][# "type"] == "ground") {
+    if(doppelbots[botindex][#"type"] == "ground") {
       var_b73a1d4b = 1;
       break;
     }
   }
 
   for(componentindex = 0; componentindex < components.size; componentindex++) {
-    component = components[componentindex][# "__unsafe__"][# "component"];
+    component = components[componentindex][#"__unsafe__"][#"component"];
 
     if(!isDefined(component)) {
       continue;
@@ -475,7 +475,7 @@ function_77cd4593(planner, doppelbots, components) {
     longestpath = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot)) {
         pathable = 0;
@@ -496,8 +496,8 @@ function_77cd4593(planner, doppelbots, components) {
 
     if(pathable) {
       path = array();
-      path[# "distance"] = longestpath;
-      path[# "objective"] = components[componentindex];
+      path[#"distance"] = longestpath;
+      path[#"objective"] = components[componentindex];
       pathablecomponents[pathablecomponents.size] = path;
     }
 
@@ -536,7 +536,7 @@ function_98bde2b6(doppelbots, entities) {
   }
 
   for(entityindex = 0; entityindex < entities.size; entityindex++) {
-    entity = entities[entityindex][# "__unsafe__"][# "entity"];
+    entity = entities[entityindex][#"__unsafe__"][#"entity"];
 
     if(!isDefined(entity)) {
       continue;
@@ -547,7 +547,7 @@ function_98bde2b6(doppelbots, entities) {
     longestpath = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
       position = getclosestpointonnavmesh(bot.origin, 120, bot getpathfindingradius() * 1.05);
 
       if(!isDefined(position) || !isDefined(var_cec03170)) {
@@ -578,8 +578,8 @@ function_98bde2b6(doppelbots, entities) {
 
     if(pathable) {
       path = array();
-      path[# "distance"] = longestpath;
-      path[# "entity"] = entities[entityindex];
+      path[#"distance"] = longestpath;
+      path[#"entity"] = entities[entityindex];
       var_afb9d067[var_afb9d067.size] = path;
     }
   }
@@ -601,7 +601,7 @@ _calculateallpathableobjectives(doppelbots, objectives) {
   }
 
   for(objectiveindex = 0; objectiveindex < objectives.size; objectiveindex++) {
-    trigger = objectives[objectiveindex][# "__unsafe__"][# "trigger"];
+    trigger = objectives[objectiveindex][#"__unsafe__"][#"trigger"];
 
     if(!isDefined(trigger)) {
       continue;
@@ -611,7 +611,7 @@ _calculateallpathableobjectives(doppelbots, objectives) {
     longestpath = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot)) {
         pathable = 0;
@@ -632,8 +632,8 @@ _calculateallpathableobjectives(doppelbots, objectives) {
 
     if(pathable) {
       path = array();
-      path[# "distance"] = longestpath;
-      path[# "objective"] = objectives[objectiveindex];
+      path[#"distance"] = longestpath;
+      path[#"objective"] = objectives[objectiveindex];
       pathableobjectives[pathableobjectives.size] = path;
     }
   }
@@ -655,7 +655,7 @@ _calculateallpathableclients(doppelbots, clients) {
   }
 
   for(clientindex = 0; clientindex < clients.size; clientindex++) {
-    player = clients[clientindex][# "__unsafe__"][# "player"];
+    player = clients[clientindex][#"__unsafe__"][#"player"];
 
     if(!isDefined(player) || player isinmovemode("ufo", "noclip") || player.sessionstate !== "playing") {
       continue;
@@ -667,7 +667,7 @@ _calculateallpathableclients(doppelbots, clients) {
     longestpath = 0;
 
     for(botindex = 0; botindex < doppelbots.size; botindex++) {
-      bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+      bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot)) {
         pathable = 0;
@@ -706,8 +706,8 @@ _calculateallpathableclients(doppelbots, clients) {
 
     if(pathable) {
       path = array();
-      path[# "distance"] = longestpath;
-      path[# "player"] = clients[clientindex];
+      path[#"distance"] = longestpath;
+      path[#"player"] = clients[clientindex];
       pathableclients[pathableclients.size] = path;
     }
   }
@@ -749,7 +749,7 @@ _calculateprioritygameobjects(gameobjects, prioritygameobjectidentifiers) {
   prioritygameobjects = [];
 
   foreach(gameobjectentry in gameobjects) {
-    identifier = gameobjectentry[# "identifier"];
+    identifier = gameobjectentry[#"identifier"];
 
     if(!isDefined(identifier)) {
       continue;
@@ -776,11 +776,11 @@ _updatehistoricalgameobjects(commander) {
         continue;
       }
 
-      if(assaultobjectentry[# "identifier"] === "carry_object") {
+      if(assaultobjectentry[#"identifier"] === "carry_object") {
         continue;
       }
 
-      gameobject = assaultobjectentry[# "__unsafe__"][# "object"];
+      gameobject = assaultobjectentry[#"__unsafe__"][#"object"];
 
       if(!isDefined(gameobject) || !isDefined(gameobject.trigger) || !gameobject.trigger istriggerenabled()) {
         destroyedgameobjecttotal++;
@@ -805,33 +805,33 @@ daemonupdateclients(commander) {
 
   foreach(client in clients) {
     cachedclient = array();
-    cachedclient[# "origin"] = client.origin;
-    cachedclient[# "entnum"] = client getentitynumber();
-    cachedclient[# "escortmainguard"] = array();
-    cachedclient[# "escortrearguard"] = array();
-    cachedclient[# "escortvanguard"] = array();
+    cachedclient[#"origin"] = client.origin;
+    cachedclient[#"entnum"] = client getentitynumber();
+    cachedclient[#"escortmainguard"] = array();
+    cachedclient[#"escortrearguard"] = array();
+    cachedclient[#"escortvanguard"] = array();
 
     if(strategiccommandutility::isvalidbot(client)) {
-      if(!isDefined(cachedclient[# "__unsafe__"])) {
-        cachedclient[# "__unsafe__"] = array();
+      if(!isDefined(cachedclient[#"__unsafe__"])) {
+        cachedclient[#"__unsafe__"] = array();
       }
 
-      cachedclient[# "__unsafe__"][# "bot"] = client;
+      cachedclient[#"__unsafe__"][#"bot"] = client;
 
       if(client isinvehicle()) {
         if(strategiccommandutility::function_4732f860(client)) {
           vehicle = client getvehicleoccupied();
 
-          if(!isDefined(cachedclient[# "__unsafe__"])) {
-            cachedclient[# "__unsafe__"] = array();
+          if(!isDefined(cachedclient[#"__unsafe__"])) {
+            cachedclient[#"__unsafe__"] = array();
           }
 
-          cachedclient[# "__unsafe__"][# "vehicle"] = vehicle;
-          cachedclient[# "type"] = strategiccommandutility::function_4b0c469d(vehicle);
+          cachedclient[#"__unsafe__"][#"vehicle"] = vehicle;
+          cachedclient[#"type"] = strategiccommandutility::function_4b0c469d(vehicle);
           vehicles[vehicles.size] = cachedclient;
         }
       } else {
-        cachedclient[# "type"] = "bot";
+        cachedclient[#"type"] = "bot";
         doppelbots[doppelbots.size] = cachedclient;
       }
 
@@ -839,11 +839,11 @@ daemonupdateclients(commander) {
     }
 
     if(strategiccommandutility::isvalidplayer(client)) {
-      if(!isDefined(cachedclient[# "__unsafe__"])) {
-        cachedclient[# "__unsafe__"] = array();
+      if(!isDefined(cachedclient[#"__unsafe__"])) {
+        cachedclient[#"__unsafe__"] = array();
       }
 
-      cachedclient[# "__unsafe__"][# "player"] = client;
+      cachedclient[#"__unsafe__"][#"player"] = client;
       players[players.size] = cachedclient;
     }
   }
@@ -911,26 +911,26 @@ daemonupdategameobjects(commander) {
       }
 
       cachedgameobject = array();
-      cachedgameobject[# "strategy"] = strategiccommandutility::function_423cfbc1(var_31b80437, undefined, undefined, gameobject);
+      cachedgameobject[#"strategy"] = strategiccommandutility::function_423cfbc1(var_31b80437, undefined, undefined, gameobject);
 
-      if(strategiccommandutility::function_f59ca353(cachedgameobject[# "strategy"])) {
+      if(strategiccommandutility::function_f59ca353(cachedgameobject[#"strategy"])) {
         continue;
       }
 
-      cachedgameobject[# "claimed"] = 0;
-      cachedgameobject[# "type"] = "gameobject";
+      cachedgameobject[#"claimed"] = 0;
+      cachedgameobject[#"type"] = "gameobject";
 
-      if(!isDefined(cachedgameobject[# "__unsafe__"])) {
-        cachedgameobject[# "__unsafe__"] = array();
+      if(!isDefined(cachedgameobject[#"__unsafe__"])) {
+        cachedgameobject[#"__unsafe__"] = array();
       }
 
-      cachedgameobject[# "__unsafe__"][# "object"] = gameobject;
+      cachedgameobject[#"__unsafe__"][#"object"] = gameobject;
 
-      if(!isDefined(cachedgameobject[# "__unsafe__"])) {
-        cachedgameobject[# "__unsafe__"] = array();
+      if(!isDefined(cachedgameobject[#"__unsafe__"])) {
+        cachedgameobject[#"__unsafe__"] = array();
       }
 
-      cachedgameobject[# "__unsafe__"][# "entity"] = gameobject.e_object;
+      cachedgameobject[#"__unsafe__"][#"entity"] = gameobject.e_object;
 
       if(isDefined(identifier) && (identifier == "air_vehicle" || identifier == "ground_vehicle")) {
         var_aa8d6440[var_aa8d6440.size] = cachedgameobject;
@@ -971,19 +971,19 @@ function_e6443602(commander) {
 
       switch (type) {
         case # "hash_1c67b29f3576b10d":
-          var_5f31ab8b[# "type"] = "escortbiped";
+          var_5f31ab8b[#"type"] = "escortbiped";
           break;
         default:
           continue;
       }
 
-      var_5f31ab8b[# "strategy"] = strategiccommandutility::function_423cfbc1(var_31b80437, gpbundle.m_s_bundle);
+      var_5f31ab8b[#"strategy"] = strategiccommandutility::function_423cfbc1(var_31b80437, gpbundle.m_s_bundle);
 
-      if(!isDefined(var_5f31ab8b[# "__unsafe__"])) {
-        var_5f31ab8b[# "__unsafe__"] = array();
+      if(!isDefined(var_5f31ab8b[#"__unsafe__"])) {
+        var_5f31ab8b[#"__unsafe__"] = array();
       }
 
-      var_5f31ab8b[# "__unsafe__"][# "bundle"] = gpbundle;
+      var_5f31ab8b[#"__unsafe__"][#"bundle"] = gpbundle;
       bundles[bundles.size] = var_5f31ab8b;
 
       if(getrealtime() - commander.var_22765a25 > commander.var_b9dd2f) {
@@ -1007,10 +1007,10 @@ function_7706a6fa(commander) {
     var_31b80437 = tolower(var_832340f2);
     components = array();
     var_35301d62 = array();
-    var_35301d62[# "hash_f5c6c6aa7dc0f6d"] = array();
-    var_35301d62[# "hash_6e9081699001bcd9"] = array();
-    var_35301d62[# "hash_3bf68fbcb5c53b6c"] = array();
-    var_35301d62[# "hash_4984fd4b0ba666a2"] = array();
+    var_35301d62[#"hash_f5c6c6aa7dc0f6d"] = array();
+    var_35301d62[#"hash_6e9081699001bcd9"] = array();
+    var_35301d62[#"hash_3bf68fbcb5c53b6c"] = array();
+    var_35301d62[#"hash_4984fd4b0ba666a2"] = array();
 
     foreach(missioncomponent in level.var_8239a46c) {
       if(!strategiccommandutility::function_f867cce0(missioncomponent, commanderteam)) {
@@ -1023,17 +1023,17 @@ function_7706a6fa(commander) {
 
       switch (type) {
         case # "hash_f5c6c6aa7dc0f6d":
-          var_b313868d[# "type"] = "defend";
+          var_b313868d[#"type"] = "defend";
           break;
         case # "hash_6e9081699001bcd9":
-          var_b313868d[# "type"] = "destroy";
+          var_b313868d[#"type"] = "destroy";
           break;
         case # "hash_3bf68fbcb5c53b6c":
-          var_b313868d[# "type"] = "capturearea";
+          var_b313868d[#"type"] = "capturearea";
           break;
         case # "hash_4984fd4b0ba666a2":
           if(isDefined(component.var_c68dc48c) || isDefined(component.var_b95bcdc6)) {
-            var_b313868d[# "type"] = "goto";
+            var_b313868d[#"type"] = "goto";
           } else {
             println("<dev string:x38>" + missioncomponent.origin + "<dev string:x5d>");
             continue;
@@ -1044,23 +1044,23 @@ function_7706a6fa(commander) {
           continue;
       }
 
-      var_b313868d[# "strategy"] = strategiccommandutility::function_423cfbc1(var_31b80437, undefined, missioncomponent);
+      var_b313868d[#"strategy"] = strategiccommandutility::function_423cfbc1(var_31b80437, undefined, missioncomponent);
 
-      if(strategiccommandutility::function_f59ca353(var_b313868d[# "strategy"])) {
+      if(strategiccommandutility::function_f59ca353(var_b313868d[#"strategy"])) {
         continue;
       }
 
-      if(!isDefined(var_b313868d[# "__unsafe__"])) {
-        var_b313868d[# "__unsafe__"] = array();
+      if(!isDefined(var_b313868d[#"__unsafe__"])) {
+        var_b313868d[#"__unsafe__"] = array();
       }
 
-      var_b313868d[# "__unsafe__"][# "mission_component"] = missioncomponent;
+      var_b313868d[#"__unsafe__"][#"mission_component"] = missioncomponent;
 
-      if(!isDefined(var_b313868d[# "__unsafe__"])) {
-        var_b313868d[# "__unsafe__"] = array();
+      if(!isDefined(var_b313868d[#"__unsafe__"])) {
+        var_b313868d[#"__unsafe__"] = array();
       }
 
-      var_b313868d[# "__unsafe__"][# "component"] = component;
+      var_b313868d[#"__unsafe__"][#"component"] = component;
       components[components.size] = var_b313868d;
       arraysize = var_35301d62[type].size;
       var_35301d62[type][arraysize] = var_b313868d;
@@ -1108,41 +1108,41 @@ daemonupdateobjective(commander) {
 
           if(isDefined(objectiveid) && objective_state(objectiveid) == "active") {
             cachedobjective = array();
-            cachedobjective[# "entnum"] = playerentitynumber;
-            cachedobjective[# "id"] = objectiveid;
-            cachedobjective[# "origin"] = objective_position(objectiveid);
+            cachedobjective[#"entnum"] = playerentitynumber;
+            cachedobjective[#"id"] = objectiveid;
+            cachedobjective[#"origin"] = objective_position(objectiveid);
 
-            if(!isDefined(cachedobjective[# "__unsafe__"])) {
-              cachedobjective[# "__unsafe__"] = array();
+            if(!isDefined(cachedobjective[#"__unsafe__"])) {
+              cachedobjective[#"__unsafe__"] = array();
             }
 
-            cachedobjective[# "__unsafe__"][# "trigger"] = undefined;
+            cachedobjective[#"__unsafe__"][#"trigger"] = undefined;
 
             if(isDefined(player.a_t_breadcrumbs)) {
-              cachedobjective[# "breadcrumbs"] = player.a_t_breadcrumbs.size;
+              cachedobjective[#"breadcrumbs"] = player.a_t_breadcrumbs.size;
 
               for(index = 0; index < player.a_t_breadcrumbs.size; index++) {
                 if(player.t_current_active_breadcrumb == player.a_t_breadcrumbs[index]) {
-                  cachedobjective[# "currentbreadcrumb"] = index;
-                  cachedobjective[# "triggermax"] = player.t_current_active_breadcrumb.maxs;
-                  cachedobjective[# "triggermin"] = player.t_current_active_breadcrumb.mins;
-                  cachedobjective[# "radius"] = player.t_current_active_breadcrumb.radius;
+                  cachedobjective[#"currentbreadcrumb"] = index;
+                  cachedobjective[#"triggermax"] = player.t_current_active_breadcrumb.maxs;
+                  cachedobjective[#"triggermin"] = player.t_current_active_breadcrumb.mins;
+                  cachedobjective[#"radius"] = player.t_current_active_breadcrumb.radius;
 
-                  if(!isDefined(cachedobjective[# "__unsafe__"])) {
-                    cachedobjective[# "__unsafe__"] = array();
+                  if(!isDefined(cachedobjective[#"__unsafe__"])) {
+                    cachedobjective[#"__unsafe__"] = array();
                   }
 
-                  cachedobjective[# "__unsafe__"][# "trigger"] = player.t_current_active_breadcrumb;
+                  cachedobjective[#"__unsafe__"][#"trigger"] = player.t_current_active_breadcrumb;
                   break;
                 }
               }
             } else {
-              cachedobjective[# "breadcrumbs"] = 0;
-              cachedobjective[# "currentbreadcrumb"] = 0;
+              cachedobjective[#"breadcrumbs"] = 0;
+              cachedobjective[#"currentbreadcrumb"] = 0;
             }
 
-            if(currentbreadcrumb <= cachedobjective[# "currentbreadcrumb"]) {
-              currentbreadcrumb = cachedobjective[# "currentbreadcrumb"];
+            if(currentbreadcrumb <= cachedobjective[#"currentbreadcrumb"]) {
+              currentbreadcrumb = cachedobjective[#"currentbreadcrumb"];
               furthestobjective = cachedobjective;
             }
           }
@@ -1161,14 +1161,14 @@ daemonupdateobjective(commander) {
             foreach(target in objective.m_a_targets) {
               if(isDefined(target) && (isstruct(target) || isentity(target)) && isDefined(target.origin)) {
                 cachedobjective = array();
-                cachedobjective[# "id"] = objectiveid;
-                cachedobjective[# "origin"] = target.origin;
+                cachedobjective[#"id"] = objectiveid;
+                cachedobjective[#"origin"] = target.origin;
 
-                if(!isDefined(cachedobjective[# "__unsafe__"])) {
-                  cachedobjective[# "__unsafe__"] = array();
+                if(!isDefined(cachedobjective[#"__unsafe__"])) {
+                  cachedobjective[#"__unsafe__"] = array();
                 }
 
-                cachedobjective[# "__unsafe__"][# "trigger"] = undefined;
+                cachedobjective[#"__unsafe__"][#"trigger"] = undefined;
               }
             }
           }
@@ -1181,8 +1181,8 @@ daemonupdateobjective(commander) {
 }
 
 function_790fb743(planner, constants) {
-  assert(isstring(constants[# "key"]) || ishash(constants[# "key"]), "<dev string:x7c>" + "<dev string:x8a>" + "<dev string:xca>");
-  attribute = planner::getblackboardattribute(planner, constants[# "key"]);
+  assert(isstring(constants[#"key"]) || ishash(constants[#"key"]), "<dev string:x7c>" + "<dev string:x8a>" + "<dev string:xca>");
+  attribute = planner::getblackboardattribute(planner, constants[#"key"]);
 
   if(isDefined(attribute) && isarray(attribute)) {
     return (attribute.size > 0);
@@ -1192,17 +1192,17 @@ function_790fb743(planner, constants) {
 }
 
 function_a05a08bf(planner, constants) {
-  assert(isstring(constants[# "key"]) || ishash(constants[# "key"]), "<dev string:x7c>" + "<dev string:xf0>" + "<dev string:xca>");
-  return isDefined(planner::getblackboardattribute(planner, constants[# "key"]));
+  assert(isstring(constants[#"key"]) || ishash(constants[#"key"]), "<dev string:x7c>" + "<dev string:xf0>" + "<dev string:xca>");
+  return isDefined(planner::getblackboardattribute(planner, constants[#"key"]));
 }
 
 strategyblackboardvalueistrue(planner, constants) {
-  assert(isstring(constants[# "key"]) || ishash(constants[# "key"]), "<dev string:x7c>" + "<dev string:x12c>" + "<dev string:xca>");
-  return planner::getblackboardattribute(planner, constants[# "key"]) == 1;
+  assert(isstring(constants[#"key"]) || ishash(constants[#"key"]), "<dev string:x7c>" + "<dev string:x12c>" + "<dev string:xca>");
+  return planner::getblackboardattribute(planner, constants[#"key"]) == 1;
 }
 
 function_a75b29d8(planner, constants) {
-  assert(isstring(constants[# "focus"]) || ishash(constants[# "focus"]), "<dev string:x7c>" + "<dev string:x165>" + "<dev string:xca>");
+  assert(isstring(constants[#"focus"]) || ishash(constants[#"focus"]), "<dev string:x7c>" + "<dev string:x165>" + "<dev string:xca>");
   target = planner::getblackboardattribute(planner, #"current_target");
   assert(isDefined(target));
 
@@ -1210,14 +1210,14 @@ function_a75b29d8(planner, constants) {
     return false;
   }
 
-  strategy = target[# "strategy"];
+  strategy = target[#"strategy"];
   assert(isstruct(strategy));
 
   if(!isstruct(strategy)) {
     return false;
   }
 
-  var_90b56683 = strategiccommandutility::function_f4921cb3(constants[# "focus"]);
+  var_90b56683 = strategiccommandutility::function_f4921cb3(constants[#"focus"]);
   targetfocus = strategy.("doppelbotsfocus");
 
   foreach(focus in var_90b56683) {
@@ -1263,7 +1263,7 @@ function_86270cca(planner, constant) {
       return spawnStruct();
     }
 
-    gameobject = target[# "__unsafe__"][# "object"];
+    gameobject = target[#"__unsafe__"][#"object"];
 
     if(isDefined(gameobject)) {
       foreach(squad in validsquads) {
@@ -1271,14 +1271,14 @@ function_86270cca(planner, constant) {
 
         if(pathablegameobjects.size > 0) {
           var_3703551e = array();
-          var_3703551e[# "squad"] = squad;
-          var_3703551e[# "pathablegameobjects"] = pathablegameobjects;
+          var_3703551e[#"squad"] = squad;
+          var_3703551e[#"pathablegameobjects"] = pathablegameobjects;
           var_41ecbdf4[var_41ecbdf4.size] = var_3703551e;
         }
       }
     }
 
-    component = target[# "__unsafe__"][# "component"];
+    component = target[#"__unsafe__"][#"component"];
 
     if(isDefined(component)) {
       foreach(squad in validsquads) {
@@ -1286,14 +1286,14 @@ function_86270cca(planner, constant) {
 
         if(pathablecomponents.size > 0) {
           var_3703551e = array();
-          var_3703551e[# "squad"] = squad;
-          var_3703551e[# "pathablecomponents"] = pathablecomponents;
+          var_3703551e[#"squad"] = squad;
+          var_3703551e[#"pathablecomponents"] = pathablecomponents;
           var_41ecbdf4[var_41ecbdf4.size] = var_3703551e;
         }
       }
     }
 
-    bundle = target[# "__unsafe__"][# "bundle"];
+    bundle = target[#"__unsafe__"][#"bundle"];
 
     if(isDefined(bundle)) {
       foreach(squad in validsquads) {
@@ -1301,8 +1301,8 @@ function_86270cca(planner, constant) {
 
         if(pathablebundles.size > 0) {
           var_3703551e = array();
-          var_3703551e[# "squad"] = squad;
-          var_3703551e[# "pathablebundles"] = pathablebundles;
+          var_3703551e[#"squad"] = squad;
+          var_3703551e[#"pathablebundles"] = pathablebundles;
           var_41ecbdf4[var_41ecbdf4.size] = var_3703551e;
         }
       }
@@ -1314,7 +1314,7 @@ function_86270cca(planner, constant) {
 
     foreach(squad in validsquads) {
       var_3703551e = array();
-      var_3703551e[# "squad"] = squad;
+      var_3703551e[#"squad"] = squad;
       var_41ecbdf4[var_41ecbdf4.size] = var_3703551e;
     }
 
@@ -1329,8 +1329,8 @@ function_14c766b3(planner, constant) {
   target = planner::getblackboardattribute(planner, #"current_target");
   var_3db29cab = 0;
 
-  if(target[# "type"] == "gameobject") {
-    object = target[# "__unsafe__"][# "object"];
+  if(target[#"type"] == "gameobject") {
+    object = target[#"__unsafe__"][#"object"];
 
     if(isDefined(object) && isarray(object.keyobject) && object.keyobject.size > 0) {
       var_3db29cab = 1;
@@ -1339,16 +1339,16 @@ function_14c766b3(planner, constant) {
 
   players = planner::getblackboardattribute(planner, #"players");
   hasplayers = players.size > 0;
-  var_8769837e = !hasplayers || target[# "strategy"].("doppelbotsinteractions") == # "first come first served";
-  var_f75536ec = !hasplayers || target[# "strategy"].("companionsinteractions") == # "first come first served";
-  airvehicles = strategiccommandutility::function_698a5382(target[# "strategy"]);
-  groundvehicles = strategiccommandutility::function_54032f13(target[# "strategy"]);
+  var_8769837e = !hasplayers || target[#"strategy"].("doppelbotsinteractions") == # "first come first served";
+  var_f75536ec = !hasplayers || target[#"strategy"].("companionsinteractions") == # "first come first served";
+  airvehicles = strategiccommandutility::function_698a5382(target[#"strategy"]);
+  groundvehicles = strategiccommandutility::function_54032f13(target[#"strategy"]);
   var_eda803e5 = groundvehicles;
   validsquads = [];
 
   foreach(squad in possiblesquads) {
     foreach(member in squad) {
-      bot = member[# "__unsafe__"][# "bot"];
+      bot = member[#"__unsafe__"][#"bot"];
 
       if(!isDefined(bot)) {
         break;
@@ -1362,17 +1362,17 @@ function_14c766b3(planner, constant) {
         continue;
       }
 
-      if(airvehicles && member[# "type"] == "air") {
+      if(airvehicles && member[#"type"] == "air") {
         validsquads[validsquads.size] = squad;
         break;
       }
 
-      if(groundvehicles && member[# "type"] == "ground") {
+      if(groundvehicles && member[#"type"] == "ground") {
         validsquads[validsquads.size] = squad;
         break;
       }
 
-      if(var_eda803e5 && member[# "type"] == "bot") {
+      if(var_eda803e5 && member[#"type"] == "bot") {
         validsquads[validsquads.size] = squad;
         break;
       }
@@ -1391,7 +1391,7 @@ function_52012b78(planner, constant) {
     return spawnStruct();
   }
 
-  strategy = target[# "strategy"];
+  strategy = target[#"strategy"];
   assert(isstruct(strategy));
 
   if(!isstruct(strategy)) {
@@ -1431,7 +1431,7 @@ function_34464159(planner, constant) {
   assert(squadindex >= 0, "<dev string:x19b>");
   doppelbots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
   target = planner::getblackboardattribute(planner, "target", squadindex);
-  bundle = target[# "__unsafe__"][# "bundle"];
+  bundle = target[#"__unsafe__"][#"bundle"];
 
   if(!isDefined(bundle)) {
     return spawnStruct();
@@ -1455,11 +1455,11 @@ function_34464159(planner, constant) {
 
   var_eec336d1 = [];
 
-  if(!isDefined(var_eec336d1[# "__unsafe__"])) {
-    var_eec336d1[# "__unsafe__"] = array();
+  if(!isDefined(var_eec336d1[#"__unsafe__"])) {
+    var_eec336d1[#"__unsafe__"] = array();
   }
 
-  var_eec336d1[# "__unsafe__"][# "entity"] = entity;
+  var_eec336d1[#"__unsafe__"][#"entity"] = entity;
   entities = array(var_eec336d1);
   pathableescorts = function_98bde2b6(doppelbots, entities);
   planner::setblackboardattribute(planner, "pathable_escorts", pathableescorts, squadindex);
@@ -1488,8 +1488,8 @@ strategysquadcalculatepathableplayersparam(planner, constant) {
 
 strategyincrementblackboardvalue(planner, constants) {
   assert(isarray(constants));
-  assert(isstring(constants[# "name"]) || ishash(constants[# "name"]));
-  planner::setblackboardattribute(planner, constants[# "name"], planner::getblackboardattribute(planner, constants[# "name"]) + 1);
+  assert(isstring(constants[#"name"]) || ishash(constants[#"name"]));
+  planner::setblackboardattribute(planner, constants[#"name"], planner::getblackboardattribute(planner, constants[#"name"]) + 1);
 }
 
 function_166d74b2(planner, constants) {
@@ -1505,7 +1505,7 @@ function_166d74b2(planner, constants) {
       var_5dc382b8 = 0;
 
       foreach(currentmember in currentsquad) {
-        if(possiblemember[# "entnum"] == currentmember[# "entnum"]) {
+        if(possiblemember[#"entnum"] == currentmember[#"entnum"]) {
           var_5dc382b8 = 1;
           break;
         }
@@ -1557,14 +1557,14 @@ function_f162255b(planner, constants) {
 
 strategysetblackboardvalue(planner, constants) {
   assert(isarray(constants));
-  assert(isstring(constants[# "name"]) || ishash(constants[# "name"]));
-  planner::setblackboardattribute(planner, constants[# "name"], constants[# "value"]);
+  assert(isstring(constants[#"name"]) || ishash(constants[#"name"]));
+  planner::setblackboardattribute(planner, constants[#"name"], constants[#"value"]);
 }
 
 function_20de0d52(planner, constants) {
   assert(isarray(constants));
-  assert(isstring(constants[# "name"]) || ishash(constants[# "name"]));
-  planner::setblackboardattribute(planner, constants[# "name"], array());
+  assert(isstring(constants[#"name"]) || ishash(constants[#"name"]));
+  planner::setblackboardattribute(planner, constants[#"name"], array());
 }
 
 strategyshouldrushprogress(planner, constant) {
@@ -1630,8 +1630,8 @@ strategyshouldthrottleprogress(planner, constant) {
 strategysquadorderparam(planner, constants) {
   squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:x19b>");
-  assert(isstring(constants[# "order"]) || ishash(constants[# "order"]), "<dev string:x7c>" + "<dev string:x262>" + "<dev string:x295>");
-  planner::setblackboardattribute(planner, "order", constants[# "order"], squadindex);
+  assert(isstring(constants[#"order"]) || ishash(constants[#"order"]), "<dev string:x7c>" + "<dev string:x262>" + "<dev string:x295>");
+  planner::setblackboardattribute(planner, "order", constants[#"order"], squadindex);
   return spawnStruct();
 }
 
@@ -1652,7 +1652,7 @@ strategysquadassignpathableescortparam(planner, constants) {
     return spawnStruct();
   }
 
-  shortestpath = pathableescorts[0][# "distance"];
+  shortestpath = pathableescorts[0][#"distance"];
   types = array("player", "entity");
 
   foreach(type in types) {
@@ -1662,8 +1662,8 @@ strategysquadassignpathableescortparam(planner, constants) {
       for(index = 1; index < pathableescorts.size; index++) {
         pathableescort = pathableescorts[index];
 
-        if(pathableescort[# "distance"] < shortestpath) {
-          shortestpath = pathableescort[# "distance"];
+        if(pathableescort[#"distance"] < shortestpath) {
+          shortestpath = pathableescort[#"distance"];
           escort = pathableescort[type];
         }
       }
@@ -1684,23 +1684,23 @@ strategysquadassignpathableobjectparam(planner, constant) {
 
   foreach(priorityname in prioritynames) {
     foreach(pathablegameobject in pathablegameobjects) {
-      if(pathablegameobject[# "gameobject"][# "identifier"] === priorityname) {
-        gameobject = pathablegameobject[# "gameobject"];
+      if(pathablegameobject[#"gameobject"][#"identifier"] === priorityname) {
+        gameobject = pathablegameobject[#"gameobject"];
         break;
       }
     }
   }
 
   if(!isDefined(gameobject)) {
-    shortestpath = pathablegameobjects[0][# "distance"];
-    gameobject = pathablegameobjects[0][# "gameobject"];
+    shortestpath = pathablegameobjects[0][#"distance"];
+    gameobject = pathablegameobjects[0][#"gameobject"];
 
     for(index = 1; index < pathablegameobjects.size; index++) {
       pathablegameobject = pathablegameobjects[index];
 
-      if(pathablegameobject[# "distance"] < shortestpath) {
-        shortestpath = pathablegameobject[# "distance"];
-        gameobject = pathablegameobject[# "gameobject"];
+      if(pathablegameobject[#"distance"] < shortestpath) {
+        shortestpath = pathablegameobject[#"distance"];
+        gameobject = pathablegameobject[#"gameobject"];
       }
     }
   }
@@ -1713,15 +1713,15 @@ strategysquadassignpathableobjectiveparam(planner, constant) {
   squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:x19b>");
   pathableobjectives = planner::getblackboardattribute(planner, "pathable_objectives", squadindex);
-  shortestpath = pathableobjectives[0][# "distance"];
-  objective = pathableobjectives[0][# "objective"];
+  shortestpath = pathableobjectives[0][#"distance"];
+  objective = pathableobjectives[0][#"objective"];
 
   for(index = 1; index < pathableobjectives.size; index++) {
     pathableobjective = pathableobjectives[index];
 
-    if(pathableobjective[# "distance"] < shortestpath) {
-      shortestpath = pathableobjective[# "distance"];
-      objective = pathableobjective[# "objective"];
+    if(pathableobjective[#"distance"] < shortestpath) {
+      shortestpath = pathableobjective[#"distance"];
+      objective = pathableobjective[#"objective"];
     }
   }
 
@@ -1738,8 +1738,8 @@ strategysquadassignpathableunclaimedobjectparam(planner, constant) {
 
   foreach(priorityname in prioritynames) {
     foreach(pathablegameobject in pathablegameobjects) {
-      if(!pathablegameobject[# "gameobject"][# "claimed"] && pathablegameobject[# "gameobject"][# "identifier"] === priorityname) {
-        gameobject = pathablegameobject[# "gameobject"];
+      if(!pathablegameobject[#"gameobject"][#"claimed"] && pathablegameobject[#"gameobject"][#"identifier"] === priorityname) {
+        gameobject = pathablegameobject[#"gameobject"];
         break;
       }
     }
@@ -1749,9 +1749,9 @@ strategysquadassignpathableunclaimedobjectparam(planner, constant) {
     shortestpath = undefined;
 
     foreach(pathablegameobject in pathablegameobjects) {
-      if(!pathablegameobject[# "gameobject"][# "claimed"] && (!isDefined(shortestpath) || pathablegameobject[# "distance"] < shortestpath)) {
-        shortestpath = pathablegameobject[# "distance"];
-        gameobject = pathablegameobject[# "gameobject"];
+      if(!pathablegameobject[#"gameobject"][#"claimed"] && (!isDefined(shortestpath) || pathablegameobject[#"distance"] < shortestpath)) {
+        shortestpath = pathablegameobject[#"distance"];
+        gameobject = pathablegameobject[#"gameobject"];
       }
     }
   }
@@ -1786,32 +1786,32 @@ strategysquadclaimobjectparam(planner, constants) {
   assert(gameobjects.size > 0, "<dev string:x42a>");
 
   foreach(gameobject in gameobjects) {
-    gameobject[# "claimed"] = 1;
+    gameobject[#"claimed"] = 1;
   }
 
   return spawnStruct();
 }
 
 strategysquadcopyblackboardvalue(planner, constants) {
-  assert(isstring(constants[# "from"]) || ishash(constants[# "from"]), "<dev string:x7c>" + "<dev string:x47e>" + "<dev string:x4ba>");
-  assert(isstring(constants[# "to"]) || ishash(constants[# "to"]), "<dev string:x7c>" + "<dev string:x47e>" + "<dev string:x4eb>");
+  assert(isstring(constants[#"from"]) || ishash(constants[#"from"]), "<dev string:x7c>" + "<dev string:x47e>" + "<dev string:x4ba>");
+  assert(isstring(constants[#"to"]) || ishash(constants[#"to"]), "<dev string:x7c>" + "<dev string:x47e>" + "<dev string:x4eb>");
   squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:x19b>");
-  value = planner::getblackboardattribute(planner, constants[# "from"], squadindex);
-  planner::setblackboardattribute(planner, constants[# "to"], value, squadindex);
+  value = planner::getblackboardattribute(planner, constants[#"from"], squadindex);
+  planner::setblackboardattribute(planner, constants[#"to"], value, squadindex);
 }
 
 function_86c0732e(planner, constants) {
-  assert(isstring(constants[# "from"]) || ishash(constants[# "from"]), "<dev string:x7c>" + "<dev string:x51a>" + "<dev string:x4ba>");
-  assert(isstring(constants[# "to"]) || ishash(constants[# "to"]), "<dev string:x7c>" + "<dev string:x51a>" + "<dev string:x4eb>");
-  value = planner::getblackboardattribute(planner, constants[# "from"]);
+  assert(isstring(constants[#"from"]) || ishash(constants[#"from"]), "<dev string:x7c>" + "<dev string:x51a>" + "<dev string:x4ba>");
+  assert(isstring(constants[#"to"]) || ishash(constants[#"to"]), "<dev string:x7c>" + "<dev string:x51a>" + "<dev string:x4eb>");
+  value = planner::getblackboardattribute(planner, constants[#"from"]);
   squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:x19b>");
-  planner::setblackboardattribute(planner, constants[# "to"], value, squadindex);
+  planner::setblackboardattribute(planner, constants[#"to"], value, squadindex);
 }
 
 function_d58b0781(planner, constants) {
-  return function_faa6dd57(planner, constants, constants[# "key"]);
+  return function_faa6dd57(planner, constants, constants[#"key"]);
 }
 
 function_45f841ea(planner, constants) {
@@ -1830,8 +1830,8 @@ function_faa6dd57(planner, constants, var_92812a91) {
   var_75ff48f8 = squads[0];
   var_d91b9923 = array();
 
-  foreach(botentry in var_75ff48f8[# "squad"]) {
-    bot = botentry[# "__unsafe__"][# "bot"];
+  foreach(botentry in var_75ff48f8[#"squad"]) {
+    bot = botentry[#"__unsafe__"][#"bot"];
 
     if(!isDefined(bot)) {
       continue;
@@ -1843,24 +1843,24 @@ function_faa6dd57(planner, constants, var_92812a91) {
   squadindex = planner::createsubblackboard(planner);
   assert(squadindex <= 17, "<dev string:x591>");
   planner::setblackboardattribute(planner, #"current_squad", squadindex);
-  planner::setblackboardattribute(planner, "doppelbots", var_75ff48f8[# "squad"], squadindex);
+  planner::setblackboardattribute(planner, "doppelbots", var_75ff48f8[#"squad"], squadindex);
   team = planner::getblackboardattribute(planner, #"team");
   planner::setblackboardattribute(planner, "team", team, squadindex);
   return spawnStruct();
 }
 
 strategysquadcreateofsizexparam(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x5df>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x5df>" + "<dev string:x61a>");
   doppelbots = planner::getblackboardattribute(planner, #"idle_doppelbots");
-  assert(doppelbots.size >= constants[# "amount"], "<dev string:x643>" + constants[# "amount"] + "<dev string:x66d>");
+  assert(doppelbots.size >= constants[#"amount"], "<dev string:x643>" + constants[#"amount"] + "<dev string:x66d>");
   enlisteddoppelbots = array();
   idledoppelbots = array();
 
-  for(index = 0; index < constants[# "amount"]; index++) {
+  for(index = 0; index < constants[#"amount"]; index++) {
     enlisteddoppelbots[enlisteddoppelbots.size] = doppelbots[index];
   }
 
-  for(index = constants[# "amount"]; index < doppelbots.size; index++) {
+  for(index = constants[#"amount"]; index < doppelbots.size; index++) {
     idledoppelbots[idledoppelbots.size] = doppelbots[index];
   }
 
@@ -1881,7 +1881,7 @@ strategysquadescortassignmainguardparam(planner, constants) {
   squadbots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
 
   foreach(escort in escorts) {
-    escort[# "escortmainguard"] = arraycombine(escort[# "escortmainguard"], squadbots, 1, 0);
+    escort[#"escortmainguard"] = arraycombine(escort[#"escortmainguard"], squadbots, 1, 0);
   }
 
   planner::setblackboardattribute(planner, "escorts", escorts, squadindex);
@@ -1896,7 +1896,7 @@ strategysquadescortassignrearguardparam(planner, constants) {
   squadbots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
 
   foreach(escort in escorts) {
-    escort[# "escortrearguard"] = arraycombine(escort[# "escortrearguard"], squadbots, 1, 0);
+    escort[#"escortrearguard"] = arraycombine(escort[#"escortrearguard"], squadbots, 1, 0);
   }
 
   planner::setblackboardattribute(planner, "escorts", escorts, squadindex);
@@ -1911,7 +1911,7 @@ strategysquadescortassignvanguardparam(planner, constants) {
   squadbots = planner::getblackboardattribute(planner, "doppelbots", squadindex);
 
   foreach(escort in escorts) {
-    escort[# "escortvanguard"] = arraycombine(escort[# "escortvanguard"], squadbots, 1, 0);
+    escort[#"escortvanguard"] = arraycombine(escort[#"escortvanguard"], squadbots, 1, 0);
   }
 
   planner::setblackboardattribute(planner, "escorts", escorts, squadindex);
@@ -1935,7 +1935,7 @@ strategysquadescorthasnomainguard(planner, constants) {
   escorts = planner::getblackboardattribute(planner, "escorts", squadindex);
 
   foreach(escort in escorts) {
-    if(escort[# "escortmainguard"].size > 0) {
+    if(escort[#"escortmainguard"].size > 0) {
       return true;
     }
   }
@@ -1949,7 +1949,7 @@ strategysquadescorthasnorearguard(planner, constants) {
   escorts = planner::getblackboardattribute(planner, "escorts", squadindex);
 
   foreach(escort in escorts) {
-    if(escort[# "escortrearguard"].size > 0) {
+    if(escort[#"escortrearguard"].size > 0) {
       return false;
     }
   }
@@ -1963,7 +1963,7 @@ strategysquadescorthasnovanguard(planner, constants) {
   escorts = planner::getblackboardattribute(planner, "escorts", squadindex);
 
   foreach(escort in escorts) {
-    if(escort[# "escortvanguard"].size > 0) {
+    if(escort[#"escortvanguard"].size > 0) {
       return false;
     }
   }
@@ -1981,7 +1981,7 @@ strategysquadsortescortpoi(planner, constants) {
       closestindex = index;
 
       for(innerindex = index + 1; innerindex < escortpois.size; innerindex++) {
-        if(escortpois[innerindex][# "distance"] < escortpois[closestindex][# "distance"]) {
+        if(escortpois[innerindex][#"distance"] < escortpois[closestindex][#"distance"]) {
           closestindex = innerindex;
         }
       }
@@ -1998,8 +1998,8 @@ strategysquadsortescortpoi(planner, constants) {
 bunker_exposure_scale(planner, constants) {
   squadindex = planner::getblackboardattribute(planner, #"current_squad");
   assert(squadindex >= 0, "<dev string:x19b>");
-  assert(isstring(constants[# "key"]) || ishash(constants[# "key"]), "<dev string:x7c>" + "<dev string:x6e4>" + "<dev string:xca>");
-  attribute = planner::getblackboardattribute(planner, constants[# "key"], squadindex);
+  assert(isstring(constants[#"key"]) || ishash(constants[#"key"]), "<dev string:x7c>" + "<dev string:x6e4>" + "<dev string:xca>");
+  attribute = planner::getblackboardattribute(planner, constants[#"key"], squadindex);
 
   if(isDefined(attribute) && isarray(attribute)) {
     return (attribute.size > 0);
@@ -2035,7 +2035,7 @@ strategysquadhaspathableunclaimedobject(planner, constant) {
   gameobjects = planner::getblackboardattribute(planner, "pathable_gameobjects", squadindex);
 
   for(index = 0; index < gameobjects.size; index++) {
-    if(!gameobjects[index][# "gameobject"][# "claimed"]) {
+    if(!gameobjects[index][#"gameobject"][#"claimed"]) {
       return true;
     }
   }
@@ -2044,27 +2044,27 @@ strategysquadhaspathableunclaimedobject(planner, constant) {
 }
 
 strategyhasatleastxassaultobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x729>" + "<dev string:x61a>");
-  return planner::getblackboardattribute(planner, #"gameobjects_assault").size >= constants[# "amount"];
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x729>" + "<dev string:x61a>");
+  return planner::getblackboardattribute(planner, #"gameobjects_assault").size >= constants[#"amount"];
 }
 
 strategyhasatleastxdefendobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x766>" + "<dev string:x61a>");
-  return planner::getblackboardattribute(planner, #"gameobjects_defend").size >= constants[# "amount"];
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x766>" + "<dev string:x61a>");
+  return planner::getblackboardattribute(planner, #"gameobjects_defend").size >= constants[#"amount"];
 }
 
 strategyhasatleastxobjectives(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x7a2>" + "<dev string:x61a>");
-  return planner::getblackboardattribute(planner, #"objectives").size >= constants[# "amount"];
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x7a2>" + "<dev string:x61a>");
+  return planner::getblackboardattribute(planner, #"objectives").size >= constants[#"amount"];
 }
 
 strategyhasatleastxplayers(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x7db>" + "<dev string:x61a>");
-  return planner::getblackboardattribute(planner, #"players").size >= constants[# "amount"];
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x7db>" + "<dev string:x61a>");
+  return planner::getblackboardattribute(planner, #"players").size >= constants[#"amount"];
 }
 
 strategyhasatleastxpriorityassaultobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x811>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x811>" + "<dev string:x61a>");
 
   if(strategyhasatleastxassaultobjects(planner, constants)) {
     prioritynames = planner::getblackboardattribute(planner, #"gameobjects_priority");
@@ -2078,19 +2078,19 @@ strategyhasatleastxpriorityassaultobjects(planner, constants) {
     gameobjects = planner::getblackboardattribute(planner, #"gameobjects_assault");
 
     foreach(gameobject in gameobjects) {
-      if(isDefined(gameobject[# "identifier"]) && isDefined(prioritymap[gameobject[# "identifier"]])) {
+      if(isDefined(gameobject[#"identifier"]) && isDefined(prioritymap[gameobject[#"identifier"]])) {
         priorityobjects++;
       }
     }
 
-    return (priorityobjects >= constants[# "amount"]);
+    return (priorityobjects >= constants[#"amount"]);
   }
 
   return false;
 }
 
 strategyhasatleastxprioritydefendobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x856>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x856>" + "<dev string:x61a>");
 
   if(strategyhasatleastxassaultobjects(planner, constants)) {
     prioritynames = planner::getblackboardattribute(planner, #"gameobjects_priority");
@@ -2104,52 +2104,52 @@ strategyhasatleastxprioritydefendobjects(planner, constants) {
     gameobjects = planner::getblackboardattribute(planner, #"gameobjects_defend");
 
     foreach(gameobject in gameobjects) {
-      if(isDefined(gameobject[# "identifier"]) && isDefined(prioritymap[gameobject[# "identifier"]])) {
+      if(isDefined(gameobject[#"identifier"]) && isDefined(prioritymap[gameobject[#"identifier"]])) {
         priorityobjects++;
       }
     }
 
-    return (priorityobjects >= constants[# "amount"]);
+    return (priorityobjects >= constants[#"amount"]);
   }
 
   return false;
 }
 
 strategyhasatleastxunassignedbots(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x89a>" + "<dev string:x61a>");
-  return planner::getblackboardattribute(planner, #"idle_doppelbots").size >= constants[# "amount"];
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x89a>" + "<dev string:x61a>");
+  return planner::getblackboardattribute(planner, #"idle_doppelbots").size >= constants[#"amount"];
 }
 
 strategyhasatleastxunclaimedassaultobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x8d7>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x8d7>" + "<dev string:x61a>");
   unclaimedobjects = 0;
   gameobjects = planner::getblackboardattribute(planner, #"gameobjects_assault");
 
   foreach(gameobject in gameobjects) {
-    if(!gameobject[# "claimed"]) {
+    if(!gameobject[#"claimed"]) {
       unclaimedobjects++;
     }
   }
 
-  return unclaimedobjects >= constants[# "amount"];
+  return unclaimedobjects >= constants[#"amount"];
 }
 
 strategyhasatleastxunclaimeddefendobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x91d>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x91d>" + "<dev string:x61a>");
   unclaimedobjects = 0;
   gameobjects = planner::getblackboardattribute(planner, #"gameobjects_defend");
 
   foreach(gameobject in gameobjects) {
-    if(!gameobject[# "claimed"]) {
+    if(!gameobject[#"claimed"]) {
       unclaimedobjects++;
     }
   }
 
-  return unclaimedobjects >= constants[# "amount"];
+  return unclaimedobjects >= constants[#"amount"];
 }
 
 strategyhasatleastxunclaimedpriorityassaultobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x962>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x962>" + "<dev string:x61a>");
 
   if(strategyhasatleastxassaultobjects(planner, constants)) {
     prioritynames = planner::getblackboardattribute(planner, #"gameobjects_priority");
@@ -2163,19 +2163,19 @@ strategyhasatleastxunclaimedpriorityassaultobjects(planner, constants) {
     gameobjects = planner::getblackboardattribute(planner, #"gameobjects_assault");
 
     foreach(gameobject in gameobjects) {
-      if(isDefined(gameobject[# "identifier"]) && isDefined(prioritymap[gameobject[# "identifier"]]) && !gameobject[# "claimed"]) {
+      if(isDefined(gameobject[#"identifier"]) && isDefined(prioritymap[gameobject[#"identifier"]]) && !gameobject[#"claimed"]) {
         priorityobjects++;
       }
     }
 
-    return (priorityobjects >= constants[# "amount"]);
+    return (priorityobjects >= constants[#"amount"]);
   }
 
   return false;
 }
 
 strategyhasatleastxunclaimedprioritydefendobjects(planner, constants) {
-  assert(isint(constants[# "amount"]), "<dev string:x7c>" + "<dev string:x9b0>" + "<dev string:x61a>");
+  assert(isint(constants[#"amount"]), "<dev string:x7c>" + "<dev string:x9b0>" + "<dev string:x61a>");
 
   if(strategyhasatleastxassaultobjects(planner, constants)) {
     prioritynames = planner::getblackboardattribute(planner, #"gameobjects_priority");
@@ -2189,12 +2189,12 @@ strategyhasatleastxunclaimedprioritydefendobjects(planner, constants) {
     gameobjects = planner::getblackboardattribute(planner, #"gameobjects_defend");
 
     foreach(gameobject in gameobjects) {
-      if(isDefined(gameobject[# "identifier"]) && isDefined(prioritymap[gameobject[# "identifier"]]) && !gameobject[# "claimed"]) {
+      if(isDefined(gameobject[#"identifier"]) && isDefined(prioritymap[gameobject[#"identifier"]]) && !gameobject[#"claimed"]) {
         priorityobjects++;
       }
     }
 
-    return (priorityobjects >= constants[# "amount"]);
+    return (priorityobjects >= constants[#"amount"]);
   }
 
   return false;
@@ -2301,13 +2301,13 @@ strategypathingaddsquadescortsparam(planner, constants) {
   escorts = planner::getblackboardattribute(planner, "escorts", squadindex);
 
   for(index = 0; index < escorts.size; index++) {
-    player = escorts[index][# "__unsafe__"][# "player"];
+    player = escorts[index][#"__unsafe__"][#"player"];
 
-    if(!isDefined(escorts[index][# "__unsafe__"])) {
-      escorts[index][# "__unsafe__"] = array();
+    if(!isDefined(escorts[index][#"__unsafe__"])) {
+      escorts[index][#"__unsafe__"] = array();
     }
 
-    escorts[index][# "__unsafe__"][# "bot"] = player;
+    escorts[index][#"__unsafe__"][#"bot"] = player;
   }
 
   planner::setblackboardattribute(planner, #"pathing_requested_bots", escorts);
@@ -2361,7 +2361,7 @@ strategypathingcalculatepathtorequestedpointsparam(planner, constants) {
   assert(botindex < bots.size);
 
   if(bots.size > 0 && requestedpoints.size > 0 && pointindex < requestedpoints.size && botindex < bots.size) {
-    bot = bots[botindex][# "__unsafe__"][# "bot"];
+    bot = bots[botindex][#"__unsafe__"][#"bot"];
     goalpoints = array();
     startindex = pointindex;
     index = 0;
@@ -2402,8 +2402,8 @@ strategypathingcalculategameobjectrequestpointsparam(planner, constants) {
   }
 
   requestedbot = requestedbots[0];
-  bot = requestedbot[# "__unsafe__"][# "bot"];
-  gameobject = requestedgameobjects[gameobjectindex][# "__unsafe__"][# "object"];
+  bot = requestedbot[#"__unsafe__"][#"bot"];
+  gameobject = requestedgameobjects[gameobjectindex][#"__unsafe__"][#"object"];
   requestedpoints = array();
 
   if(strategiccommandutility::isvalidbotorplayer(bot) && isDefined(gameobject)) {
@@ -2424,8 +2424,8 @@ strategypathingcalculateobjectiverequestpointsparam(planner, constants) {
   }
 
   requestedbot = requestedbots[0];
-  bot = requestedbot[# "__unsafe__"][# "bot"];
-  trigger = requestedobjectives[objectiveindex][# "__unsafe__"][# "trigger"];
+  bot = requestedbot[#"__unsafe__"][#"bot"];
+  trigger = requestedobjectives[objectiveindex][#"__unsafe__"][#"trigger"];
   requestedpoints = array();
 
   if(strategiccommandutility::isvalidbotorplayer(bot) && isDefined(trigger)) {
@@ -2452,8 +2452,8 @@ strategypathingcalculateobjectivepathabilityparam(planner, constants) {
     }
 
     objectiveentry = array();
-    objectiveentry[# "distance"] = longestpath;
-    objectiveentry[# "objective"] = requestedobjectives[objectiveindex];
+    objectiveentry[#"distance"] = longestpath;
+    objectiveentry[#"objective"] = requestedobjectives[objectiveindex];
     calculatedobjectives = planner::getblackboardattribute(planner, #"pathing_calculated_objectives");
     calculatedobjectives[calculatedobjectives.size] = objectiveentry;
     planner::setblackboardattribute(planner, #"pathing_calculated_objectives", calculatedobjectives);
@@ -2478,8 +2478,8 @@ strategypathingcalculategameobjectpathabilityparam(planner, constants) {
     }
 
     gameobjectentry = array();
-    gameobjectentry[# "distance"] = longestpath;
-    gameobjectentry[# "gameobject"] = requestedgameobjects[gameobjectindex];
+    gameobjectentry[#"distance"] = longestpath;
+    gameobjectentry[#"gameobject"] = requestedgameobjects[gameobjectindex];
     calculatedgameobjects = planner::getblackboardattribute(planner, #"pathing_calculated_gameobjects");
     calculatedgameobjects[calculatedgameobjects.size] = gameobjectentry;
     planner::setblackboardattribute(planner, #"pathing_calculated_gameobjects", calculatedgameobjects);
@@ -2494,7 +2494,7 @@ function_61d2b8ef(commander, squad, constants) {
 
   if(isDefined(doppelbots) && doppelbots.size > 0 && isDefined(order)) {
     foreach(botentry in doppelbots) {
-      bot = botentry[# "__unsafe__"][# "bot"];
+      bot = botentry[#"__unsafe__"][#"bot"];
 
       if(isDefined(bot) && order == "follow_chain" && bot isinvehicle()) {
         return false;
@@ -2512,7 +2512,7 @@ utilityscorebotpresence(commander, squad, constants) {
 
   if(isDefined(doppelbots) && doppelbots.size > 0) {
     foreach(botentry in doppelbots) {
-      bot = botentry[# "__unsafe__"][# "bot"];
+      bot = botentry[#"__unsafe__"][#"bot"];
 
       if(!strategiccommandutility::isvalidbot(bot)) {
         return false;
@@ -2530,15 +2530,15 @@ function_de2b04c0(commander, squad, constants) {
 
   if(isDefined(doppelbots) && doppelbots.size > 0) {
     foreach(botentry in doppelbots) {
-      bot = botentry[# "__unsafe__"][# "bot"];
+      bot = botentry[#"__unsafe__"][#"bot"];
 
       if(!isDefined(bot)) {
         return false;
       }
 
-      if(bot isinvehicle() && botentry[# "type"] == "bot") {
+      if(bot isinvehicle() && botentry[#"type"] == "bot") {
         return false;
-      } else if(!bot isinvehicle() && botentry[# "type"] != "bot") {
+      } else if(!bot isinvehicle() && botentry[#"type"] != "bot") {
         return false;
       }
 
@@ -2607,7 +2607,7 @@ utilityscoregameobjectpathing(commander, squad, constants) {
   }
 
   foreach(botentry in doppelbots) {
-    bot = botentry[# "__unsafe__"][# "bot"];
+    bot = botentry[#"__unsafe__"][#"bot"];
 
     if(!strategiccommandutility::isvalidbot(bot)) {
       continue;
@@ -2622,7 +2622,7 @@ utilityscoregameobjectpathing(commander, squad, constants) {
 }
 
 utilityscoregameobjectpriority(commander, squad, constants) {
-  priorityidentifiers = constants[# "priority"];
+  priorityidentifiers = constants[#"priority"];
 
   if(!isDefined(priorityidentifiers) || priorityidentifiers.size <= 0) {
     return true;
@@ -2647,7 +2647,7 @@ utilityscoregameobjectpriority(commander, squad, constants) {
     prioritygameobjects = _calculateprioritygameobjects(assaultobjects, priorityidentifiers);
 
     foreach(gameobjectentry in prioritygameobjects) {
-      activeidentifiers[gameobjectentry[# "identifier"]] = 1;
+      activeidentifiers[gameobjectentry[#"identifier"]] = 1;
     }
   }
 
@@ -2655,7 +2655,7 @@ utilityscoregameobjectpriority(commander, squad, constants) {
     prioritygameobjects = _calculateprioritygameobjects(defendobjects, priorityidentifiers);
 
     foreach(gameobjectentry in prioritygameobjects) {
-      activeidentifiers[gameobjectentry[# "identifier"]] = 1;
+      activeidentifiers[gameobjectentry[#"identifier"]] = 1;
     }
   }
 
@@ -2671,7 +2671,7 @@ utilityscoregameobjectpriority(commander, squad, constants) {
         prioritygameobjects = _calculateprioritygameobjects(squadobjects, priorityidentifiers);
 
         foreach(gameobjectentry in prioritygameobjects) {
-          activeidentifiers[gameobjectentry[# "identifier"]] = 0;
+          activeidentifiers[gameobjectentry[#"identifier"]] = 0;
         }
       }
     }
@@ -2694,7 +2694,7 @@ utilityscoregameobjectsvalidity(commander, squad, constants) {
   }
 
   foreach(gameobjectentry in gameobjects) {
-    gameobject = gameobjectentry[# "__unsafe__"][# "object"];
+    gameobject = gameobjectentry[#"__unsafe__"][#"object"];
 
     if(!isDefined(gameobject) || isDefined(gameobject.trigger) && !gameobject.trigger istriggerenabled()) {
       return false;
@@ -2759,18 +2759,18 @@ function_a65b2be5(commander, squad, constants) {
     return true;
   }
 
-  if(var_fcee18d7[# "type"] === "gameobject") {
-    gameobject = var_fcee18d7[# "__unsafe__"][# "object"];
+  if(var_fcee18d7[#"type"] === "gameobject") {
+    gameobject = var_fcee18d7[#"__unsafe__"][#"object"];
 
     if(!isDefined(gameobject) || isDefined(gameobject.trigger) && !gameobject.trigger istriggerenabled()) {
       return false;
     }
-  } else if(var_fcee18d7[# "type"] === "destroy" || var_fcee18d7[# "type"] === "defend") {
+  } else if(var_fcee18d7[#"type"] === "destroy" || var_fcee18d7[#"type"] === "defend") {
     return false;
-  } else if(var_fcee18d7[# "type"] === "capturearea") {
+  } else if(var_fcee18d7[#"type"] === "capturearea") {
     return false;
-  } else if(var_fcee18d7[# "type"] === "destroy" || var_fcee18d7[# "type"] === "goto") {
-    missioncomponent = var_fcee18d7[# "__unsafe__"][# "mission_component"];
+  } else if(var_fcee18d7[#"type"] === "destroy" || var_fcee18d7[#"type"] === "goto") {
+    missioncomponent = var_fcee18d7[#"__unsafe__"][#"mission_component"];
     commanderteam = blackboard::getstructblackboardattribute(commander, #"team");
 
     if(!strategiccommandutility::function_f867cce0(missioncomponent, commanderteam)) {
@@ -2790,7 +2790,7 @@ function_f389ef61(commander, squad, constants) {
   }
 
   for(botindex = 0; botindex < doppelbots.size; botindex++) {
-    bot = doppelbots[botindex][# "__unsafe__"][# "bot"];
+    bot = doppelbots[botindex][#"__unsafe__"][#"bot"];
 
     if(isDefined(bot) && bot.team != team) {
       return false;

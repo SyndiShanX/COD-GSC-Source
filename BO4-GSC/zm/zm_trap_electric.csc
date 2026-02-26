@@ -22,8 +22,8 @@ __init__() {
   }
 
   clientfield::register("actor", "electrocute_ai_fx", 1, 1, "int", &electrocute_ai, 0, 0);
-  level._effect[# "hash_6a97de5de4ae14a"] = # "zombie/fx_tesla_shock_zmb";
-  level._effect[# "hash_21e93d9faa37cad"] = # "zombie/fx_tesla_shock_eyes_zmb";
+  level._effect[#"hash_6a97de5de4ae14a"] = # "zombie/fx_tesla_shock_zmb";
+  level._effect[#"hash_21e93d9faa37cad"] = # "zombie/fx_tesla_shock_eyes_zmb";
 }
 
 trap_fx_monitor(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -47,13 +47,13 @@ electrocute_ai(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
       str_tag = "J_Spine1";
     }
 
-    self.n_shock_eyes_fx = util::playFXOnTag(localclientnum, level._effect[# "hash_21e93d9faa37cad"], self, "J_Eyeball_LE");
+    self.n_shock_eyes_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_21e93d9faa37cad"], self, "J_Eyeball_LE");
 
     if(isDefined(self) && isDefined(self.n_shock_eyes_fx)) {
       setfxignorepause(localclientnum, self.n_shock_eyes_fx, 1);
     }
 
-    self.n_shock_fx = util::playFXOnTag(localclientnum, level._effect[# "hash_6a97de5de4ae14a"], self, str_tag);
+    self.n_shock_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_6a97de5de4ae14a"], self, str_tag);
 
     if(isDefined(self) && isDefined(self.n_shock_eyes_fx)) {
       setfxignorepause(localclientnum, self.n_shock_fx, 1);

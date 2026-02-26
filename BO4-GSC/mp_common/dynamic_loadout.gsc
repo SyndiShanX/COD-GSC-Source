@@ -55,7 +55,7 @@ function_597cbfb8(slot, weapon, force = 0) {
     }
   }
 
-  equipdata = self.pers[# "dynamic_loadout"].weapons[2];
+  equipdata = self.pers[#"dynamic_loadout"].weapons[2];
   take = 1;
 
   if(isDefined(equipdata)) {
@@ -66,7 +66,7 @@ function_597cbfb8(slot, weapon, force = 0) {
   }
 
   if(take) {
-    self.pers[# "dynamic_loadout"].weapons[2] = undefined;
+    self.pers[#"dynamic_loadout"].weapons[2] = undefined;
     function_ff8ef46b(2, "luielement.BountyHunterLoadout.equipment", 0);
     self function_9ede386f(slot);
   }
@@ -121,33 +121,33 @@ registerclientfields() {
 }
 
 onconnect() {
-  if(!isDefined(self.pers[# "dynamic_loadout"])) {
-    self.pers[# "dynamic_loadout"] = spawnStruct();
-    self.pers[# "dynamic_loadout"].weapons = [];
-    self.pers[# "dynamic_loadout"].talents = [];
-    self.pers[# "dynamic_loadout"].armor = undefined;
-    self.pers[# "dynamic_loadout"].scorestreak = undefined;
-    self.pers[# "dynamic_loadout"].clientfields = [];
+  if(!isDefined(self.pers[#"dynamic_loadout"])) {
+    self.pers[#"dynamic_loadout"] = spawnStruct();
+    self.pers[#"dynamic_loadout"].weapons = [];
+    self.pers[#"dynamic_loadout"].talents = [];
+    self.pers[#"dynamic_loadout"].armor = undefined;
+    self.pers[#"dynamic_loadout"].scorestreak = undefined;
+    self.pers[#"dynamic_loadout"].clientfields = [];
   }
 
   self function_c6de6bdd();
 
-  foreach(var_387a4eaf in self.pers[# "dynamic_loadout"].clientfields) {
+  foreach(var_387a4eaf in self.pers[#"dynamic_loadout"].clientfields) {
     self clientfield::set_player_uimodel(var_387a4eaf.clientfield, var_387a4eaf.val);
   }
 }
 
 function_485e3421() {
-  if(isDefined(self.pers[# "dynamic_loadout"].armor)) {
-    self function_51a2c3b3(self.pers[# "dynamic_loadout"].armor);
-    self function_2b71fd3(self.pers[# "dynamic_loadout"].armor);
+  if(isDefined(self.pers[#"dynamic_loadout"].armor)) {
+    self function_51a2c3b3(self.pers[#"dynamic_loadout"].armor);
+    self function_2b71fd3(self.pers[#"dynamic_loadout"].armor);
   }
 
   self removearmor();
 }
 
 removearmor() {
-  self.pers[# "dynamic_loadout"].armor = undefined;
+  self.pers[#"dynamic_loadout"].armor = undefined;
   self function_ff8ef46b(5, "luielement.BountyHunterLoadout.armor", 0);
 }
 
@@ -287,7 +287,7 @@ function_40eb02fc(response, intpayload) {
 }
 
 function_5b8256ca(package, isammo = 0, var_e120a933 = undefined, isscorestreak = 0) {
-  money = self.pers[# "money"];
+  money = self.pers[#"money"];
   registerend_prestige_imp = isDefined(getgametypesetting(#"hash_1b34b26470f4368")) ? getgametypesetting(#"hash_1b34b26470f4368") : isscorestreak ? 1 : 1;
   cost = package.purchasecost * registerend_prestige_imp;
 
@@ -309,53 +309,53 @@ function_5b8256ca(package, isammo = 0, var_e120a933 = undefined, isscorestreak =
 
   money -= cost;
   self clientfield::set_to_player("bountyMoney", money);
-  self.pers[# "money"] = money;
+  self.pers[#"money"] = money;
   return true;
 }
 
 function_a3d739c6(slot, package) {
-  self.pers[# "dynamic_loadout"].weapons[slot] = spawnStruct();
-  self.pers[# "dynamic_loadout"].weapons[slot].name = package.packageitems[0].item;
-  self.pers[# "dynamic_loadout"].weapons[slot].attachments = [];
-  self.pers[# "dynamic_loadout"].weapons[slot].ammo = -1;
-  self.pers[# "dynamic_loadout"].weapons[slot].startammo = package.startammo;
+  self.pers[#"dynamic_loadout"].weapons[slot] = spawnStruct();
+  self.pers[#"dynamic_loadout"].weapons[slot].name = package.packageitems[0].item;
+  self.pers[#"dynamic_loadout"].weapons[slot].attachments = [];
+  self.pers[#"dynamic_loadout"].weapons[slot].ammo = -1;
+  self.pers[#"dynamic_loadout"].weapons[slot].startammo = package.startammo;
 }
 
 function_e6fa90be(package) {
-  self.pers[# "dynamic_loadout"].armor = {};
-  self.pers[# "dynamic_loadout"].armor.name = package.packageitems[0].item;
-  self.pers[# "dynamic_loadout"].armor.armor = package.armor;
-  self.pers[# "dynamic_loadout"].armor.var_782dbf79 = isDefined(package.var_782dbf79) ? package.var_782dbf79 : 0;
-  self.pers[# "dynamic_loadout"].armor.var_767b7337 = isDefined(package.var_767b7337) ? package.var_767b7337 : 0;
-  self.pers[# "dynamic_loadout"].armor.var_741010b5 = isDefined(package.var_741010b5) ? package.var_741010b5 : 0;
-  self.pers[# "dynamic_loadout"].armor.var_673a16ad = isDefined(package.var_673a16ad) ? package.var_673a16ad : 0;
+  self.pers[#"dynamic_loadout"].armor = {};
+  self.pers[#"dynamic_loadout"].armor.name = package.packageitems[0].item;
+  self.pers[#"dynamic_loadout"].armor.armor = package.armor;
+  self.pers[#"dynamic_loadout"].armor.var_782dbf79 = isDefined(package.var_782dbf79) ? package.var_782dbf79 : 0;
+  self.pers[#"dynamic_loadout"].armor.var_767b7337 = isDefined(package.var_767b7337) ? package.var_767b7337 : 0;
+  self.pers[#"dynamic_loadout"].armor.var_741010b5 = isDefined(package.var_741010b5) ? package.var_741010b5 : 0;
+  self.pers[#"dynamic_loadout"].armor.var_673a16ad = isDefined(package.var_673a16ad) ? package.var_673a16ad : 0;
 }
 
 function_14e4d700(slot, package) {
   foreach(talent in package.packageitems) {
-    if(!isDefined(self.pers[# "dynamic_loadout"].talents)) {
-      self.pers[# "dynamic_loadout"].talents = [];
-    } else if(!isarray(self.pers[# "dynamic_loadout"].talents)) {
-      self.pers[# "dynamic_loadout"].talents = array(self.pers[# "dynamic_loadout"].talents);
+    if(!isDefined(self.pers[#"dynamic_loadout"].talents)) {
+      self.pers[#"dynamic_loadout"].talents = [];
+    } else if(!isarray(self.pers[#"dynamic_loadout"].talents)) {
+      self.pers[#"dynamic_loadout"].talents = array(self.pers[#"dynamic_loadout"].talents);
     }
 
-    self.pers[# "dynamic_loadout"].talents[self.pers[# "dynamic_loadout"].talents.size] = talent.item;
+    self.pers[#"dynamic_loadout"].talents[self.pers[#"dynamic_loadout"].talents.size] = talent.item;
   }
 }
 
 function_ff8ef46b(slot, clientfield, newval) {
   self clientfield::set_player_uimodel(clientfield, newval);
 
-  if(!isDefined(self.pers[# "dynamic_loadout"].clientfields[slot])) {
-    self.pers[# "dynamic_loadout"].clientfields[slot] = spawnStruct();
-    self.pers[# "dynamic_loadout"].clientfields[slot].clientfield = clientfield;
+  if(!isDefined(self.pers[#"dynamic_loadout"].clientfields[slot])) {
+    self.pers[#"dynamic_loadout"].clientfields[slot] = spawnStruct();
+    self.pers[#"dynamic_loadout"].clientfields[slot].clientfield = clientfield;
   }
 
-  self.pers[# "dynamic_loadout"].clientfields[slot].val = newval;
+  self.pers[#"dynamic_loadout"].clientfields[slot].val = newval;
 }
 
 function_2b402d5d(package) {
-  primary = self.pers[# "dynamic_loadout"].weapons[0];
+  primary = self.pers[#"dynamic_loadout"].weapons[0];
 
   if(!isDefined(primary)) {
     return false;
@@ -374,11 +374,11 @@ function_2b402d5d(package) {
 
 addammo(slot, package) {
   if(isDefined(package.refillammo) && package.refillammo > 0) {
-    self.pers[# "dynamic_loadout"].weapons[slot].ammo = package.refillammo;
+    self.pers[#"dynamic_loadout"].weapons[slot].ammo = package.refillammo;
     return;
   }
 
-  weapdata = self.pers[# "dynamic_loadout"].weapons[slot];
+  weapdata = self.pers[#"dynamic_loadout"].weapons[slot];
   weapon = getweapon(weapdata.name, weapdata.attachments);
 
   if(!isDefined(weapon.clipsize) || weapon.clipsize <= 0) {
@@ -390,7 +390,7 @@ addammo(slot, package) {
 }
 
 function_1875e2a9(package) {
-  self.pers[# "dynamic_loadout"].scorestreak = package.packageitems[0].item;
+  self.pers[#"dynamic_loadout"].scorestreak = package.packageitems[0].item;
 }
 
 function_7a836986(slot, package, var_e120a933) {
@@ -398,14 +398,14 @@ function_7a836986(slot, package, var_e120a933) {
   attacharray = strtok(var_51cc2fc9, "+");
 
   foreach(attach in attacharray) {
-    if(!isDefined(self.pers[# "dynamic_loadout"].weapons[slot].attachments)) {
-      self.pers[# "dynamic_loadout"].weapons[slot].attachments = [];
-    } else if(!isarray(self.pers[# "dynamic_loadout"].weapons[slot].attachments)) {
-      self.pers[# "dynamic_loadout"].weapons[slot].attachments = array(self.pers[# "dynamic_loadout"].weapons[slot].attachments);
+    if(!isDefined(self.pers[#"dynamic_loadout"].weapons[slot].attachments)) {
+      self.pers[#"dynamic_loadout"].weapons[slot].attachments = [];
+    } else if(!isarray(self.pers[#"dynamic_loadout"].weapons[slot].attachments)) {
+      self.pers[#"dynamic_loadout"].weapons[slot].attachments = array(self.pers[#"dynamic_loadout"].weapons[slot].attachments);
     }
 
-    if(!isinarray(self.pers[# "dynamic_loadout"].weapons[slot].attachments, attach)) {
-      self.pers[# "dynamic_loadout"].weapons[slot].attachments[self.pers[# "dynamic_loadout"].weapons[slot].attachments.size] = attach;
+    if(!isinarray(self.pers[#"dynamic_loadout"].weapons[slot].attachments, attach)) {
+      self.pers[#"dynamic_loadout"].weapons[slot].attachments[self.pers[#"dynamic_loadout"].weapons[slot].attachments.size] = attach;
     }
   }
 }
@@ -435,9 +435,9 @@ function_738575c4(takeoldweapon, givestreak = 1) {
 }
 
 function_d2f0197a() {
-  if(isDefined(self.pers[# "dynamic_loadout"].armor)) {
+  if(isDefined(self.pers[#"dynamic_loadout"].armor)) {
     self addtalent(#"hash_6be738527a4213aa");
-    armor = self.pers[# "dynamic_loadout"].armor;
+    armor = self.pers[#"dynamic_loadout"].armor;
     self function_52630bb(armor);
     self armor::set_armor(armor.armor, armor.armor, 0, armor.var_767b7337, armor.var_782dbf79, armor.var_673a16ad, armor.var_741010b5, 1, 1, 1);
   }
@@ -481,7 +481,7 @@ function_2b71fd3(var_31e314e8) {
 }
 
 function_f14e5ee3() {
-  var_7d27f2d6 = self.pers[# "dynamic_loadout"].weapons[0];
+  var_7d27f2d6 = self.pers[#"dynamic_loadout"].weapons[0];
 
   if(isDefined(var_7d27f2d6)) {
     primary = getweapon(var_7d27f2d6.name, var_7d27f2d6.attachments);
@@ -497,7 +497,7 @@ function_f14e5ee3() {
     self loadout::function_442539("primary", nullprimary);
   }
 
-  var_23218f5e = self.pers[# "dynamic_loadout"].weapons[1];
+  var_23218f5e = self.pers[#"dynamic_loadout"].weapons[1];
 
   if(isDefined(var_23218f5e)) {
     secondary = getweapon(var_23218f5e.name, var_23218f5e.attachments);
@@ -516,7 +516,7 @@ function_f14e5ee3() {
     self loadout::function_442539("secondary", nullsecondary);
   }
 
-  equipmentdata = self.pers[# "dynamic_loadout"].weapons[2];
+  equipmentdata = self.pers[#"dynamic_loadout"].weapons[2];
 
   if(isDefined(equipmentdata)) {
     equipment = getweapon(equipmentdata.name);
@@ -534,7 +534,7 @@ function_f14e5ee3() {
 }
 
 function_898839b4() {
-  var_81b9af1a = self.pers[# "dynamic_loadout"].talents;
+  var_81b9af1a = self.pers[#"dynamic_loadout"].talents;
 
   foreach(item in var_81b9af1a) {
     if(item == # "hash_7932008294f0d876") {
@@ -572,7 +572,7 @@ function_422164cd() {
   self cleartalents();
   self clearperks();
 
-  foreach(talent in self.pers[# "dynamic_loadout"].talents) {
+  foreach(talent in self.pers[#"dynamic_loadout"].talents) {
     if(talent == # "hash_7932008294f0d876") {
       continue;
     }
@@ -594,16 +594,16 @@ function_422164cd() {
 }
 
 function_8d5ede64() {
-  if(isDefined(self.pers[# "dynamic_loadout"].scorestreak)) {
-    self killstreaks::give(self.pers[# "dynamic_loadout"].scorestreak);
+  if(isDefined(self.pers[#"dynamic_loadout"].scorestreak)) {
+    self killstreaks::give(self.pers[#"dynamic_loadout"].scorestreak);
   }
 }
 
 function_cea5cbc5() {
-  scorestreak = self.pers[# "dynamic_loadout"].scorestreak;
+  scorestreak = self.pers[#"dynamic_loadout"].scorestreak;
 
   if(isDefined(scorestreak) && (!self killstreaks::has_killstreak(scorestreak) || isDefined(self.var_a8c5fe4e) && self.var_a8c5fe4e)) {
-    self.pers[# "dynamic_loadout"].scorestreak = undefined;
+    self.pers[#"dynamic_loadout"].scorestreak = undefined;
     self function_ff8ef46b(10, "luielement.BountyHunterLoadout.scorestreak", 0);
   }
 }

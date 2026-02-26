@@ -251,8 +251,8 @@ spawn_single(b_force_spawn = 0, var_eb3a8721, var_bc66d64b) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_9e923fdb)) {
     s_spawn_loc = [[level.var_9e923fdb]]();
-  } else if(level.zm_loc_types[# "gegenees_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "gegenees_location"]);
+  } else if(level.zm_loc_types[#"gegenees_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"gegenees_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {

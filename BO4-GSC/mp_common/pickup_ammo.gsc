@@ -35,9 +35,9 @@ function_4827d817(weapon) {
   package = struct::get_script_bundle("bountyhunterpackage", level.bountypackagelist[0]);
   slot = undefined;
 
-  if(isDefined(self.pers[# "dynamic_loadout"].weapons[0]) && self.pers[# "dynamic_loadout"].weapons[0].name == weapon.name) {
+  if(isDefined(self.pers[#"dynamic_loadout"].weapons[0]) && self.pers[#"dynamic_loadout"].weapons[0].name == weapon.name) {
     slot = 0;
-  } else if(isDefined(self.pers[# "dynamic_loadout"].weapons[1]) && self.pers[# "dynamic_loadout"].weapons[1].name == weapon.name) {
+  } else if(isDefined(self.pers[#"dynamic_loadout"].weapons[1]) && self.pers[#"dynamic_loadout"].weapons[1].name == weapon.name) {
     slot = 1;
   }
 
@@ -45,7 +45,7 @@ function_4827d817(weapon) {
     return false;
   }
 
-  weapindex = self.pers[# "dynamic_loadout"].clientfields[slot].val - 1;
+  weapindex = self.pers[#"dynamic_loadout"].clientfields[slot].val - 1;
   package = struct::get_script_bundle("bountyhunterpackage", level.bountypackagelist[weapindex]);
   var_e6e3de63 = package.var_ef921c3c;
   maxammo = package.refillammo;

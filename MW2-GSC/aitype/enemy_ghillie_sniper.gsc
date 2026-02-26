@@ -39,12 +39,12 @@ spawner() {
 }
 
 precache() {
-  character\character_opforce_merc_sniper_a::precache();
+    character\character_opforce_merc_sniper_a::precache();
 
-  precacheItem("wa2000");
-  precacheItem("pp2000_silencer");
-  precacheItem("usp_silencer");
-  precacheItem("fraggrenade");
+    precacheItem("wa2000");
+    precacheItem("pp2000_silencer");
+    precacheItem("usp_silencer");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

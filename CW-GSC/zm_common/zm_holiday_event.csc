@@ -35,7 +35,7 @@ function function_675f0963(localclientnum) {
       case # "tormentor":
       case # "zombie":
       case # "avogadro":
-        self.var_6ffc5953 = array::random([# "hash_3b9bc9fd7d3450e8", #"hash_3b9bccfd7d345601", #"hash_3b9bcbfd7d34544e"]);
+        self.var_6ffc5953 = array::random([#"hash_3b9bc9fd7d3450e8", #"hash_3b9bccfd7d345601", #"hash_3b9bcbfd7d34544e"]);
         self.var_dee85a7a = "j_head";
         break;
       case # "zombie_dog":

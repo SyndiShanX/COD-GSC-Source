@@ -45,7 +45,7 @@ __init__() {
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_26ffb92552ae26be"));
   killstreaks::register_alt_weapon("drone_squadron", getweapon(#"hash_5fbda3ef4b135b49"));
   remote_weapons::registerremoteweapon("drone_squadron", #"hash_7c833954874f735d", &function_97bbef8, &function_d9733cc9, 0);
-  level.killstreaks[# "drone_squadron"].threatonkill = 1;
+  level.killstreaks[#"drone_squadron"].threatonkill = 1;
   visionset_mgr::register_info("visionset", "drone_squadron_visionset", 1, 120, 16, 1, &visionset_mgr::ramp_in_out_thread_per_player_death_shutdown, 0);
   callback::on_joined_team(&function_a9737855);
   callback::on_joined_spectate(&function_a9737855);
@@ -110,13 +110,13 @@ calcspawnorigin(origin, angles) {
       mask = 1 | 2;
       trace = physicstrace(startpoint, endpoint, mins, maxs, self, mask);
 
-      if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"])) {
+      if(isDefined(trace[#"entity"]) && isPlayer(trace[#"entity"])) {
         continue;
       }
 
-      if(trace[# "fraction"] > bestfrac) {
-        bestfrac = trace[# "fraction"];
-        bestorigin = trace[# "position"];
+      if(trace[#"fraction"] > bestfrac) {
+        bestfrac = trace[#"fraction"];
+        bestorigin = trace[#"position"];
         bestangles = (0, angles[1], 0) + testangles[i];
 
         if(bestfrac == 1) {
@@ -131,7 +131,7 @@ calcspawnorigin(origin, angles) {
       }
 
       trace = physicstrace(bestorigin, bestorigin + (0, 0, 50), mins, maxs, self, mask);
-      var_b34db008 = trace[# "position"];
+      var_b34db008 = trace[#"position"];
       var_27f435a7 = getclosestpointonnavvolume(bestorigin, "navvolume_big", 2000);
 
       if(isDefined(var_27f435a7)) {
@@ -230,7 +230,7 @@ function_d52c51c6(killstreaktype) {
   drone_squadron vehicle::add_to_target_group(drone_squadron);
   drone_squadron setrotorspeed(1);
   drone_squadron.protectent = self;
-  params = level.killstreakbundle[# "drone_squadron"];
+  params = level.killstreakbundle[#"drone_squadron"];
   immediate_use = isDefined(params.ksuseimmediately) ? params.ksuseimmediately : 0;
 
   if(!isDefined(drone_squadron.wing_drone)) {
@@ -408,7 +408,7 @@ function_d9733cc9(drone_squadron, exitrequestedbyowner) {
     }
   }
 
-  params = level.killstreakbundle[# "drone_squadron"];
+  params = level.killstreakbundle[#"drone_squadron"];
   shutdown_on_exit = isDefined(params.ksshutdownonexit) ? params.ksshutdownonexit : 0;
 
   if(exitrequestedbyowner || shutdown_on_exit) {
@@ -435,7 +435,7 @@ ontimeout() {
   drone_squadron = self;
   drone_squadron.owner globallogic_audio::play_taacom_dialog("timeout", "drone_squadron");
   function_35909ca6(drone_squadron.owner);
-  params = level.killstreakbundle[# "drone_squadron"];
+  params = level.killstreakbundle[#"drone_squadron"];
 
   if(isDefined(drone_squadron.owner)) {
     radiusdamage(drone_squadron.origin, params.ksexplosionouterradius, params.ksexplosioninnerdamage, params.ksexplosionouterdamage, drone_squadron.owner, "MOD_EXPLOSIVE", getweapon("drone_squadron"));
@@ -519,7 +519,7 @@ watchwater() {
     wait 0.1;
     trace = physicstrace(self.origin + (0, 0, 10), self.origin + (0, 0, 6), (-2, -2, -2), (2, 2, 2), self, 4);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       break;
     }
   }
@@ -666,7 +666,7 @@ function_da3b4d35() {
       eye_pos = self.owner getplayercamerapos();
       direction_vec = (direction_vec[0] * 5000, direction_vec[1] * 5000, direction_vec[2] * 5000);
       trace = bulletTrace(eye_pos, eye_pos + direction_vec, 1, self.owner, 1, 1, self);
-      var_31491620 = trace[# "position"];
+      var_31491620 = trace[#"position"];
       var_468f300e = vectornormalize(anglesToForward(direction));
       var_b7e30855 = 5000 * 5000;
 

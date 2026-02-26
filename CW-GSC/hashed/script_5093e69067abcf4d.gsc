@@ -827,18 +827,18 @@ function function_cee1a3e8() {
 
 function function_79ff25ba() {
   a_ents = [];
-  a_ents[# "player 1"] = level.player;
-  a_ents[# "sims"] = level.buddy;
-  a_ents[# "hash_6c5af6df35669df2"] = level.gunner;
-  a_ents[# "adler"] = level.vip;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"player 1"] = level.player;
+  a_ents[#"sims"] = level.buddy;
+  a_ents[#"hash_6c5af6df35669df2"] = level.gunner;
+  a_ents[#"adler"] = level.vip;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::play(#"hash_4a77e90ad29593d9", a_ents);
 }
 
 function function_b8119b75() {
   a_ents = [];
-  a_ents[# "player 1"] = level.player;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"player 1"] = level.player;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   namespace_b7cfe907::function_d777fe61(2);
   level scene::play(#"armada_bamboo_orbit", a_ents);
   level scene::play(#"hash_3e5db93dfa662175", a_ents);
@@ -846,7 +846,7 @@ function function_b8119b75() {
 
 function function_14172d3a() {
   a_ents = [];
-  a_ents[# "sims"] = level.buddy;
+  a_ents[#"sims"] = level.buddy;
   level scene::play(#"hash_748497a378473ed7", a_ents);
 }
 
@@ -858,8 +858,8 @@ function function_97582a1d() {
 function function_cf6ab51b() {
   var_27f35498 = getent("bamboo_downed_chopper", "targetname");
   a_ents = [];
-  a_ents[# "adler"] = level.vip;
-  a_ents[# "hash_3962ecd59dbbfa07"] = var_27f35498;
+  a_ents[#"adler"] = level.vip;
+  a_ents[#"hash_3962ecd59dbbfa07"] = var_27f35498;
   level thread scene::play(#"hash_16e1a05741d2f80b", a_ents);
   level flag::wait_till("flag_bamboo_adler_pickup");
   level thread scene::play(#"hash_b4e6fa87dbf2550", a_ents);

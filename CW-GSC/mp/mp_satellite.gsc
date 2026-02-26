@@ -29,7 +29,7 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_29776f58(a_ents) {
-  parachute = a_ents[# "prop 1"];
+  parachute = a_ents[#"prop 1"];
   clip = getent("parachute_clip", "targetname");
 
   if(isDefined(clip) && isDefined(parachute)) {

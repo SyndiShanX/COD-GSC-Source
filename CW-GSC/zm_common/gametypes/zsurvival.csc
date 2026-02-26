@@ -63,7 +63,7 @@ function event_handler[gametype_init] main(eventstruct) {
   callback::on_localclient_connect(&on_player_connect);
 
   if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
-    level.var_3a2ad19b = [# "item_zmquest_sr_ltm_food_banana", #"item_zmquest_sr_ltm_food_burger", #"item_zmquest_sr_ltm_food_canned_corn", #"item_zmquest_sr_ltm_food_cauliflower", #"item_zmquest_sr_ltm_food_cheese", #"item_zmquest_sr_ltm_food_chicken_soup", #"item_zmquest_sr_ltm_food_chips", #"item_zmquest_sr_ltm_food_cookie", #"item_zmquest_sr_ltm_food_croissant", #"item_zmquest_sr_ltm_food_pizza_full", #"item_zmquest_sr_ltm_food_pizza_slice", #"item_zmquest_sr_ltm_food_poutine"];
+    level.var_3a2ad19b = [#"item_zmquest_sr_ltm_food_banana", #"item_zmquest_sr_ltm_food_burger", #"item_zmquest_sr_ltm_food_canned_corn", #"item_zmquest_sr_ltm_food_cauliflower", #"item_zmquest_sr_ltm_food_cheese", #"item_zmquest_sr_ltm_food_chicken_soup", #"item_zmquest_sr_ltm_food_chips", #"item_zmquest_sr_ltm_food_cookie", #"item_zmquest_sr_ltm_food_croissant", #"item_zmquest_sr_ltm_food_pizza_full", #"item_zmquest_sr_ltm_food_pizza_slice", #"item_zmquest_sr_ltm_food_poutine"];
   }
 
   level.var_13339abf = array(#"ammo_small_caliber_item_t9_sr", #"ammo_ar_item_t9_sr", #"ammo_large_caliber_item_t9_sr", #"ammo_sniper_item_t9_sr", #"ammo_shotgun_item_t9_sr", #"ammo_special_item_t9_sr");
@@ -86,8 +86,8 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::function_5b7d846d("hudItems.warzone.collapseCount", #"warzone_global", #"collapsecount", 1, 3, "int", undefined, 0, 0);
   clientfield::function_5b7d846d("hudItems.warzone.reinsertionIndex", #"warzone_global", #"reinsertionindex", 1, 3, "int", undefined, 0, 0);
   clientfield::register("world", "set_objective_fog", 1, 2, "int", &set_objective_fog, 0, 0);
-  clientfield::function_5b7d846d("hudItems.team1.roundsWon", #"hash_410fe12a68d6e801", [# "team1", #"roundswon"], 1, 4, "int", undefined, 0, 0);
-  clientfield::function_5b7d846d("hudItems.team2.roundsWon", #"hash_410fe12a68d6e801", [# "team2", #"roundswon"], 1, 4, "int", undefined, 0, 0);
+  clientfield::function_5b7d846d("hudItems.team1.roundsWon", #"hash_410fe12a68d6e801", [#"team1", #"roundswon"], 1, 4, "int", undefined, 0, 0);
+  clientfield::function_5b7d846d("hudItems.team2.roundsWon", #"hash_410fe12a68d6e801", [#"team2", #"roundswon"], 1, 4, "int", undefined, 0, 0);
   zm_intel::function_88645994(#"zmintel_list_survival_document_drops", #"zmintel_list_survival_darkaether_computer", #"zmintel_list_survival_radio_transmissions_requiem", #"zmintel_list_survival_radio_transmissions_maxis", #"zmintel_list_survival_radio_transmissions_omega");
   setsoundcontext("ambience_swap", "zsurvival");
   setsoundcontext("dark_aether", "inactive");

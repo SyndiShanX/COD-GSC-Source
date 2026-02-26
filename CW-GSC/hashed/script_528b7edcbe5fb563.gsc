@@ -28,12 +28,12 @@ function private preinit() {
 }
 
 function private on_player_connect() {
-  if(!isbot(self) || isautocontrolledplayer(self) || is_true(self.pers[# "hash_6dcf8b0dc38e9166"])) {
+  if(!isbot(self) || isautocontrolledplayer(self) || is_true(self.pers[#"hash_6dcf8b0dc38e9166"])) {
     return;
   }
 
   self function_293c5838(0);
-  self.pers[# "hash_6dcf8b0dc38e9166"] = 1;
+  self.pers[#"hash_6dcf8b0dc38e9166"] = 1;
 }
 
 function private function_8481733a() {
@@ -452,7 +452,7 @@ function private function_ef026df8(attachments, overridedvar = undefined) {
 
 function private function_3dd3f3b6() {
   level endon(#"game_ended");
-  var_ec9c0769 = [# "talent": 6, #"bonuscard": 3, #"killstreak": 4];
+  var_ec9c0769 = [#"talent": 6, #"bonuscard": 3, #"killstreak": 4];
 
   while(true) {
     slot = getdvarstring(#"hash_601d0ce91dfa4b22", "<dev string:x41>");

@@ -339,7 +339,7 @@ function private play_single_anim(droneanim, rate = 1, mode = "server script") {
   animangles = self.angles;
 
   if(isDefined(self.node)) {
-    animorigin = self.node[# "origin"];
+    animorigin = self.node[#"origin"];
     self.origin = animorigin;
   }
 
@@ -361,8 +361,8 @@ function drone_idle(stance) {
       if(isDefined(self.idleanim)) {
         idleanim = self.idleanim;
       } else {
-        randomindex = randomintrange(0, self.drone.var_fe46433f[stance][# "idle"].size);
-        idleanim = self.drone.var_fe46433f[stance][# "idle"][randomindex];
+        randomindex = randomintrange(0, self.drone.var_fe46433f[stance][#"idle"].size);
+        idleanim = self.drone.var_fe46433f[stance][#"idle"][randomindex];
       }
 
       self thread function_98f16d76(idleanim);
@@ -377,16 +377,16 @@ function private function_eaea34d2(lastnode) {
   self.node = lastnode;
   self notify(#"hash_276eb2b6c51bf236");
 
-  if(isDefined(lastnode) && isDefined(lastnode[# "script_noteworthy"]) && lastnode[# "script_noteworthy"] != "idle") {
-    if(!self check_delete(lastnode[# "script_noteworthy"])) {
-      self thread drone_fight(lastnode[# "script_noteworthy"]);
+  if(isDefined(lastnode) && isDefined(lastnode[#"script_noteworthy"]) && lastnode[#"script_noteworthy"] != "idle") {
+    if(!self check_delete(lastnode[#"script_noteworthy"])) {
+      self thread drone_fight(lastnode[#"script_noteworthy"]);
     }
 
     return;
   }
 
-  if(isDefined(lastnode) && isDefined(lastnode[# "script_noteworthy"]) && lastnode[# "script_noteworthy"] != "idle") {
-    stance = function_4e864a71("", lastnode[# "script_noteworthy"]);
+  if(isDefined(lastnode) && isDefined(lastnode[#"script_noteworthy"]) && lastnode[#"script_noteworthy"] != "idle") {
+    stance = function_4e864a71("", lastnode[#"script_noteworthy"]);
   } else {
     stance = function_4e864a71();
   }
@@ -587,23 +587,23 @@ function private function_54f05251() {
   path_index = 0;
   var_38c05d54 = 0;
 
-  if(isDefined(path[path.size - 1][# "dist"]) && path[path.size - 1][# "dist"] > 0) {
+  if(isDefined(path[path.size - 1][#"dist"]) && path[path.size - 1][#"dist"] > 0) {
     var_38c05d54 = 1;
   }
 
   var_23273fef = 0;
-  self.drone.var_544c8017 = path[path_index][# "origin"];
+  self.drone.var_544c8017 = path[path_index][#"origin"];
 
   while(path_index < path.size) {
     assert(isDefined(path[path_index]));
-    assert(isDefined(path[path_index][# "dist"]));
-    destination = path[path_index][# "origin"];
+    assert(isDefined(path[path_index][#"dist"]));
+    destination = path[path_index][#"origin"];
 
     if(self.drone.var_6f219852 > 0) {
       var_792c52e4 = self.origin;
 
       for(var_946a08d6 = self.drone.var_6f219852; var_946a08d6 > 0 && path_index < path.size; var_946a08d6 = 0) {
-        destination = path[path_index][# "origin"];
+        destination = path[path_index][#"origin"];
         distance = distance2d(destination, var_792c52e4);
 
         if(distance <= var_946a08d6) {
@@ -644,7 +644,7 @@ function private function_54f05251() {
     self.drone.var_544c8017 = destination;
 
     if(var_23273fef) {
-      self thread function_35b3aa66((0, path[path.size - 1][# "angles"][1], 0), min(var_d7e06ec6, 0.25), var_d7e06ec6 - 0.35);
+      self thread function_35b3aa66((0, path[path.size - 1][#"angles"][1], 0), min(var_d7e06ec6, 0.25), var_d7e06ec6 - 0.35);
     } else {
       var_df8541a5 = vectortoangles(destination - self.origin);
       self rotateto((0, var_df8541a5[1], 0), min(0.5, var_d7e06ec6));
@@ -653,9 +653,9 @@ function private function_54f05251() {
     self moveto(destination, var_d7e06ec6);
     wait var_d7e06ec6;
 
-    if(isDefined(path[path_index][# "notify"])) {
-      self notify(path[path_index][# "notify"]);
-      level notify(path[path_index][# "notify"]);
+    if(isDefined(path[path_index][#"notify"])) {
+      self notify(path[path_index][#"notify"]);
+      level notify(path[path_index][#"notify"]);
     }
 
     if(is_true(self.drone.var_e1c463c8)) {
@@ -694,12 +694,12 @@ function private function_7bce6b25(var_3d70749c, var_a3375299) {
 
   while(hasnextnode) {
     hasnextnode = 0;
-    nodes[index][# "origin"] = function_a7879d43(currentnode);
-    nodes[index][# "dist"] = 0;
-    nodes[index][# "angles"] = currentnode.angles;
+    nodes[index][#"origin"] = function_a7879d43(currentnode);
+    nodes[index][#"dist"] = 0;
+    nodes[index][#"angles"] = currentnode.angles;
 
     if(isDefined(currentnode.script_notify)) {
-      nodes[index][# "notify"] = currentnode.script_notify;
+      nodes[index][#"notify"] = currentnode.script_notify;
     }
 
     var_62e82494[currentnode.targetname] = index;
@@ -708,12 +708,12 @@ function private function_7bce6b25(var_3d70749c, var_a3375299) {
       if(isDefined(var_62e82494[currentnode.target])) {
         nextnodeindex = var_62e82494[currentnode.target];
         nextnode = nodes[nextnodeindex];
-        nodes[index][# "dist"] = distance(currentnode.origin, nextnode[# "origin"]);
+        nodes[index][#"dist"] = distance(currentnode.origin, nextnode[#"origin"]);
       } else {
         nextnode = spawner::get_goal(currentnode.target);
 
         if(isDefined(nextnode)) {
-          nodes[index][# "dist"] = distance(currentnode.origin, nextnode.origin);
+          nodes[index][#"dist"] = distance(currentnode.origin, nextnode.origin);
           currentnode = nextnode;
           hasnextnode = 1;
           index++;
@@ -723,7 +723,7 @@ function private function_7bce6b25(var_3d70749c, var_a3375299) {
       continue;
     }
 
-    nodes[index][# "script_noteworthy"] = function_4e864a71(currentnode.type, currentnode.script_noteworthy);
+    nodes[index][#"script_noteworthy"] = function_4e864a71(currentnode.type, currentnode.script_noteworthy);
   }
 
   return nodes;

@@ -23,9 +23,9 @@ __init__() {
   }
 
   level flag::init("weapon_wallbuys_created");
-  level._effect[# "wallbuy_ambient_fx"] = "zombie/fx8_wallbuy_amb";
-  level._effect[# "hash_6928ec90dff78e0c"] = "zombie/fx8_wallbuy_amb_reverse";
-  level._effect[# "wallbuy_reveal_fx"] = "zombie/fx8_wallbuy_reveal";
+  level._effect[#"wallbuy_ambient_fx"] = "zombie/fx8_wallbuy_amb";
+  level._effect[#"hash_6928ec90dff78e0c"] = "zombie/fx8_wallbuy_amb_reverse";
+  level._effect[#"wallbuy_reveal_fx"] = "zombie/fx8_wallbuy_reveal";
   clientfield::register("scriptmover", "wallbuy_ambient_fx", 1, 1, "int", &function_51f5fb94, 0, 0);
   clientfield::register("scriptmover", "wallbuy_reveal_fx", 1, 1, "int", &function_5ed44212, 0, 0);
   init();
@@ -151,7 +151,7 @@ wallbuy_player_connect(localclientnum) {
 
   for(i = 0; i < keys.size; i++) {
     wallbuy = level._active_wallbuys[keys[i]];
-    fx = level._effect[# "870mcs_zm_fx"];
+    fx = level._effect[#"870mcs_zm_fx"];
 
     if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"])) {
       fx = level._effect[wallbuy.zombie_weapon_upgrade + "_fx"];
@@ -282,7 +282,7 @@ wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
         struct.fx[localclientnum] = undefined;
       }
 
-      fx = level._effect[# "870mcs_zm_fx"];
+      fx = level._effect[#"870mcs_zm_fx"];
 
       if(isDefined(level._effect[weaponname + "_fx"])) {
         fx = level._effect[weaponname + "_fx"];
@@ -302,7 +302,7 @@ function_51f5fb94(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(!isDefined(self.ambient_fx_id)) {
-      self.ambient_fx_id = util::playFXOnTag(localclientnum, level._effect[# "wallbuy_ambient_fx"], self, "tag_fx_wall_buy");
+      self.ambient_fx_id = util::playFXOnTag(localclientnum, level._effect[#"wallbuy_ambient_fx"], self, "tag_fx_wall_buy");
     }
 
     return;
@@ -314,12 +314,12 @@ function_51f5fb94(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(!isDefined(self.var_e51fbce7)) {
-    self.var_e51fbce7 = util::playFXOnTag(localclientnum, level._effect[# "hash_6928ec90dff78e0c"], self, "tag_fx_wall_buy");
+    self.var_e51fbce7 = util::playFXOnTag(localclientnum, level._effect[#"hash_6928ec90dff78e0c"], self, "tag_fx_wall_buy");
   }
 }
 
 function_5ed44212(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[# "wallbuy_reveal_fx"], self, "tag_fx_wall_buy");
+    util::playFXOnTag(localclientnum, level._effect[#"wallbuy_reveal_fx"], self, "tag_fx_wall_buy");
   }
 }

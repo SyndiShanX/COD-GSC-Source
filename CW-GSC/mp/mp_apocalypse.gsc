@@ -14,10 +14,10 @@ function event_handler[level_init] main(eventstruct) {
   level.levelkothdisable[level.levelkothdisable.size] = spawn("trigger_radius", (299, -687, -10), 0, 35, 150);
   load::main();
   compass::setupminimap("");
-  level.var_3944682[# "allies"] = {
+  level.var_3944682[#"allies"] = {
     #origin: (4000, -10000, 0), #angles: (0, -147, 0)
   };
-  level.var_3944682[# "axis"] = {
+  level.var_3944682[#"axis"] = {
     #origin: (4000, -10000, 0), #angles: (0, 33, 0)
   };
   level thread function_29584e41();

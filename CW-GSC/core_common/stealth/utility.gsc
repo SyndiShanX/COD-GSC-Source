@@ -220,20 +220,20 @@ function check_stealth() {
 
 function alertlevel_init_map() {
   level.stealth.alert_levels_exe = [];
-  level.stealth.alert_levels_exe[# "normal"] = "noncombat";
-  level.stealth.alert_levels_exe[# "reset"] = "noncombat";
-  level.stealth.alert_levels_exe[# "warning1"] = "low_alert";
-  level.stealth.alert_levels_exe[# "warning2"] = "high_alert";
-  level.stealth.alert_levels_exe[# "combat_hunt"] = "high_alert";
-  level.stealth.alert_levels_exe[# "attack"] = "combat";
+  level.stealth.alert_levels_exe[#"normal"] = "noncombat";
+  level.stealth.alert_levels_exe[#"reset"] = "noncombat";
+  level.stealth.alert_levels_exe[#"warning1"] = "low_alert";
+  level.stealth.alert_levels_exe[#"warning2"] = "high_alert";
+  level.stealth.alert_levels_exe[#"combat_hunt"] = "high_alert";
+  level.stealth.alert_levels_exe[#"attack"] = "combat";
   level.stealth.alert_levels_int = [];
-  level.stealth.alert_levels_int[# "normal"] = 0;
-  level.stealth.alert_levels_int[# "reset"] = 0;
-  level.stealth.alert_levels_int[# "warning1"] = 2;
-  level.stealth.alert_levels_int[# "warning2"] = 3;
-  level.stealth.alert_levels_int[# "combat_hunt"] = 3;
-  level.stealth.alert_levels_int[# "attack"] = 4;
-  level.stealth.alert_levels_exe[# "combat"] = 4;
+  level.stealth.alert_levels_int[#"normal"] = 0;
+  level.stealth.alert_levels_int[#"reset"] = 0;
+  level.stealth.alert_levels_int[#"warning1"] = 2;
+  level.stealth.alert_levels_int[#"warning2"] = 3;
+  level.stealth.alert_levels_int[#"combat_hunt"] = 3;
+  level.stealth.alert_levels_int[#"attack"] = 4;
+  level.stealth.alert_levels_exe[#"combat"] = 4;
 }
 
 function alertlevel_script_to_exe(alertlevel) {
@@ -266,15 +266,15 @@ function set_min_detect_range_darkness(hidden, spotted) {
   }
 
   if(isDefined(hidden)) {
-    level.stealth.detect.minrangedarkness[# "hidden"][# "prone"] = hidden[# "prone"];
-    level.stealth.detect.minrangedarkness[# "hidden"][# "crouch"] = hidden[# "crouch"];
-    level.stealth.detect.minrangedarkness[# "hidden"][# "stand"] = hidden[# "stand"];
+    level.stealth.detect.minrangedarkness[#"hidden"][#"prone"] = hidden[#"prone"];
+    level.stealth.detect.minrangedarkness[#"hidden"][#"crouch"] = hidden[#"crouch"];
+    level.stealth.detect.minrangedarkness[#"hidden"][#"stand"] = hidden[#"stand"];
   }
 
   if(isDefined(spotted)) {
-    level.stealth.detect.minrangedarkness[# "spotted"][# "prone"] = spotted[# "prone"];
-    level.stealth.detect.minrangedarkness[# "spotted"][# "crouch"] = spotted[# "crouch"];
-    level.stealth.detect.minrangedarkness[# "spotted"][# "stand"] = spotted[# "stand"];
+    level.stealth.detect.minrangedarkness[#"spotted"][#"prone"] = spotted[#"prone"];
+    level.stealth.detect.minrangedarkness[#"spotted"][#"crouch"] = spotted[#"crouch"];
+    level.stealth.detect.minrangedarkness[#"spotted"][#"stand"] = spotted[#"stand"];
   }
 }
 
@@ -851,12 +851,12 @@ function enable_stealth_for_ai(enabled, var_6f52290c = 0) {
 function custom_state_functions(array) {
   assert(!isDefined(self.stealth), "<dev string:x189>");
 
-  if(isDefined(array[# "spotted"])) {
-    self.stealth_state_func[# "spotted"] = array[# "spotted"];
+  if(isDefined(array[#"spotted"])) {
+    self.stealth_state_func[#"spotted"] = array[#"spotted"];
   }
 
-  if(isDefined(array[# "hidden"])) {
-    self.stealth_state_func[# "hidden"] = array[# "hidden"];
+  if(isDefined(array[#"hidden"])) {
+    self.stealth_state_func[#"hidden"] = array[#"hidden"];
   }
 }
 

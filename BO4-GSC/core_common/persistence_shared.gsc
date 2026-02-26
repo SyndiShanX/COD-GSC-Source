@@ -83,7 +83,7 @@ function_acac764e() {
   }
 
   newindex = (index + 1) % 10;
-  self.pers[# "hash_76fbbcf94dab5536"] = newindex;
+  self.pers[#"hash_76fbbcf94dab5536"] = newindex;
   self stats::set_stat(#"playerstatsbygametype", level.var_12323003, #"prevscoreindex", newindex);
 }
 
@@ -191,7 +191,7 @@ initialize_match_stats() {
     self stats::set_stat_global(#"rank", rankid);
     self stats::set_stat_global(#"minxp", rank::getrankinfominxp(rankid));
     self stats::set_stat_global(#"maxxp", rank::getrankinfomaxxp(rankid));
-    self stats::set_stat_global(#"lastxp", rank::getrankxpcapped(self.pers[# "rankxp"]));
+    self stats::set_stat_global(#"lastxp", rank::getrankxpcapped(self.pers[#"rankxp"]));
   }
 
   if(sessionmodeiswarzonegame() || sessionmodeismultiplayergame()) {

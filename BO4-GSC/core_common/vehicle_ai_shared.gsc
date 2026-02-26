@@ -1462,12 +1462,12 @@ positionquery_filter_random(queryresult, min, max) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = score;
-    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
+    point._scoredebug[#"random"].score = score;
+    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }
@@ -1488,12 +1488,12 @@ positionquery_filter_outofgoalanchor(queryresult, tolerance = 1) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
-        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
+        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[# "outofgoalanchor"].score = score;
-      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:xc1>";
+      point._scoredebug[#"outofgoalanchor"].score = score;
+      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:xc1>";
 
       point.score += score;
     }
@@ -1574,12 +1574,12 @@ positionquery_filter_distawayfromtarget(queryresult, targetarray, distance, tooc
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "tooclosetoothers"])) {
-        point._scoredebug[# "tooclosetoothers"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"tooclosetoothers"])) {
+        point._scoredebug[#"tooclosetoothers"] = spawnStruct();
       }
 
-      point._scoredebug[# "tooclosetoothers"].score = tooclosepenalty;
-      point._scoredebug[# "tooclosetoothers"].scorename = "<dev string:xd3>";
+      point._scoredebug[#"tooclosetoothers"].score = tooclosepenalty;
+      point._scoredebug[#"tooclosetoothers"].scorename = "<dev string:xd3>";
 
       point.score += tooclosepenalty;
     }
@@ -1780,12 +1780,12 @@ function_4ab1a63a(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -5000;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x13e>";
+      point._scoredebug[#"inclaimedlocation"].score = -5000;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x13e>";
 
       point.score += -5000;
     }
@@ -1796,12 +1796,12 @@ function_4ab1a63a(goal) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = score;
-    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
+    point._scoredebug[#"random"].score = score;
+    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }
@@ -1861,12 +1861,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
-        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
+        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[# "outofgoalanchor"].score = score;
-      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:xc1>";
+      point._scoredebug[#"outofgoalanchor"].score = score;
+      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:xc1>";
 
       point.score += score;
     }
@@ -1876,12 +1876,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "no visibility"])) {
-        point._scoredebug[# "no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"no visibility"])) {
+        point._scoredebug[#"no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[# "no visibility"].score = -5000;
-      point._scoredebug[# "no visibility"].scorename = "<dev string:x152>";
+      point._scoredebug[#"no visibility"].score = -5000;
+      point._scoredebug[#"no visibility"].scorename = "<dev string:x152>";
 
       point.score += -5000;
     }
@@ -1890,12 +1890,12 @@ function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "engagementdist"])) {
-      point._scoredebug[# "engagementdist"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"engagementdist"])) {
+      point._scoredebug[#"engagementdist"] = spawnStruct();
     }
 
-    point._scoredebug[# "engagementdist"].score = point.distawayfromengagementarea * -1;
-    point._scoredebug[# "engagementdist"].scorename = "<dev string:x162>";
+    point._scoredebug[#"engagementdist"].score = point.distawayfromengagementarea * -1;
+    point._scoredebug[#"engagementdist"].scorename = "<dev string:x162>";
 
     point.score += point.distawayfromengagementarea * -1;
 
@@ -1903,12 +1903,12 @@ function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "distfromorigin"])) {
-      point._scoredebug[# "distfromorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"distfromorigin"])) {
+      point._scoredebug[#"distfromorigin"] = spawnStruct();
     }
 
-    point._scoredebug[# "distfromorigin"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
-    point._scoredebug[# "distfromorigin"].scorename = "<dev string:x173>";
+    point._scoredebug[#"distfromorigin"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
+    point._scoredebug[#"distfromorigin"].scorename = "<dev string:x173>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
 
@@ -1917,12 +1917,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -5000;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x13e>";
+      point._scoredebug[#"inclaimedlocation"].score = -5000;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x13e>";
 
       point.score += -5000;
     }
@@ -1936,12 +1936,12 @@ function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "height"])) {
-        point._scoredebug[# "height"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"height"])) {
+        point._scoredebug[#"height"] = spawnStruct();
       }
 
-      point._scoredebug[# "height"].score = heightscore;
-      point._scoredebug[# "height"].scorename = "<dev string:x184>";
+      point._scoredebug[#"height"].score = heightscore;
+      point._scoredebug[#"height"].scorename = "<dev string:x184>";
 
       point.score += heightscore;
     }
@@ -1952,12 +1952,12 @@ function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = score;
-    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
+    point._scoredebug[#"random"].score = score;
+    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }
@@ -1991,12 +1991,12 @@ function_4646fb11(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
-        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
+        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[# "outofgoalanchor"].score = score;
-      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:xc1>";
+      point._scoredebug[#"outofgoalanchor"].score = score;
+      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:xc1>";
 
       point.score += score;
     }
@@ -2006,12 +2006,12 @@ function_4646fb11(goal) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -5000;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x13e>";
+      point._scoredebug[#"inclaimedlocation"].score = -5000;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x13e>";
 
       point.score += -5000;
     }
@@ -2022,12 +2022,12 @@ function_4646fb11(goal) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = score;
-    point._scoredebug[# "random"].scorename = "<dev string:xb8>";
+    point._scoredebug[#"random"].score = score;
+    point._scoredebug[#"random"].scorename = "<dev string:xb8>";
 
     point.score += score;
   }

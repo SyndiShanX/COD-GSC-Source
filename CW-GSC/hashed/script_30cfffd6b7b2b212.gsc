@@ -238,7 +238,7 @@ function function_3cebcd1b() {
   self notify("4d8893cd1e0887cc");
   self endon("4d8893cd1e0887cc");
   level endon(#"tkdn_heli_exfil");
-  var_979d3fe0 = [# "hit1_truck_rear", #"hit1_truck_house", #"hit1_truck_mid", #"hit1_truck_front", #"heli_focus_door_breach", #"heli_focus_gas_garage"];
+  var_979d3fe0 = [#"hit1_truck_rear", #"hit1_truck_house", #"hit1_truck_mid", #"hit1_truck_front", #"heli_focus_door_breach", #"heli_focus_gas_garage"];
   var_f01b798 = ["hit1_truck_rear", "hit1_truck_house", "hit1_truck_mid", "hit1_truck_front", "heli_focus_door_breach", "heli_focus_gas_garage"];
 
   while(true) {

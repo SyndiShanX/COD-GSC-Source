@@ -163,11 +163,11 @@ function quick_revive_precache() {
     return;
   }
 
-  level._effect[# "revive_light"] = # "zombie/fx_perk_quickrevive_ndu";
-  level.machine_assets[# "talent_quickrevive"] = spawnStruct();
-  level.machine_assets[# "talent_quickrevive"].weapon = getweapon("zombie_perk_bottle_revive");
-  level.machine_assets[# "talent_quickrevive"].off_model = "p9_sur_machine_quick_revive_off";
-  level.machine_assets[# "talent_quickrevive"].on_model = "p9_sur_machine_quick_revive";
+  level._effect[#"revive_light"] = # "zombie/fx_perk_quickrevive_ndu";
+  level.machine_assets[#"talent_quickrevive"] = spawnStruct();
+  level.machine_assets[#"talent_quickrevive"].weapon = getweapon("zombie_perk_bottle_revive");
+  level.machine_assets[#"talent_quickrevive"].off_model = "p9_sur_machine_quick_revive_off";
+  level.machine_assets[#"talent_quickrevive"].on_model = "p9_sur_machine_quick_revive";
 }
 
 function quick_revive_register_clientfield() {}
@@ -196,7 +196,7 @@ function turn_revive_on() {
     machine_triggers = getEntArray("vending_revive", "target");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setModel(level.machine_assets[# "talent_quickrevive"].off_model);
+      machine[i] setModel(level.machine_assets[#"talent_quickrevive"].off_model);
       zm_utility::function_ca960904(machine[i]);
 
       if(isDefined(level.quick_revive_final_pos)) {
@@ -220,7 +220,7 @@ function turn_revive_on() {
           continue;
         }
 
-        machine[i] setModel(level.machine_assets[# "talent_quickrevive"].on_model);
+        machine[i] setModel(level.machine_assets[#"talent_quickrevive"].on_model);
         machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
 
         if(!isDefined(machine[i].n_obj_id)) {
@@ -245,8 +245,8 @@ function turn_revive_on() {
     util::wait_network_frame();
     array::thread_all(machine, &zm_perks::set_power_on, 1);
 
-    if(isDefined(level.machine_assets[# "talent_quickrevive"].power_on_callback)) {
-      array::thread_all(machine, level.machine_assets[# "talent_quickrevive"].power_on_callback);
+    if(isDefined(level.machine_assets[#"talent_quickrevive"].power_on_callback)) {
+      array::thread_all(machine, level.machine_assets[#"talent_quickrevive"].power_on_callback);
     }
 
     level notify(#"specialty_quickrevive_power_on");
@@ -262,8 +262,8 @@ function turn_revive_on() {
       should_hide = 1;
     }
 
-    if(isDefined(level.machine_assets[# "talent_quickrevive"].power_off_callback)) {
-      array::thread_all(machine, level.machine_assets[# "talent_quickrevive"].power_off_callback);
+    if(isDefined(level.machine_assets[#"talent_quickrevive"].power_off_callback)) {
+      array::thread_all(machine, level.machine_assets[#"talent_quickrevive"].power_off_callback);
     }
 
     for(i = 0; i < machine.size; i++) {
@@ -288,7 +288,7 @@ function unhide_quickrevive() {
     level.quick_revive_machine.origin = level.quick_revive_final_pos;
   }
 
-  playFX(level._effect[# "poltergeist"], level.quick_revive_machine.origin);
+  playFX(level._effect[#"poltergeist"], level.quick_revive_machine.origin);
 
   if(isDefined(level.quick_revive_trigger) && isDefined(level.quick_revive_trigger.blocker_model)) {
     level.quick_revive_trigger.blocker_model hide();

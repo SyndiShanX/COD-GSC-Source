@@ -18,7 +18,7 @@ init() {
 }
 
 init_fx() {
-  level._effect[# "hash_5cd079f7090da957"] = # "hash_468f18455c9e9e0f";
+  level._effect[#"hash_5cd079f7090da957"] = # "hash_468f18455c9e9e0f";
 }
 
 init_clientfields() {
@@ -27,7 +27,7 @@ init_clientfields() {
 
 function_c95aa114(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.blinking_fx = util::playFXOnTag(localclientnum, level._effect[# "hash_5cd079f7090da957"], self, "tag_light");
+    self.blinking_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_5cd079f7090da957"], self, "tag_light");
     return;
   }
 

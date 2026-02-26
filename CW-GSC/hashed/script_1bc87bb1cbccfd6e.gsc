@@ -83,7 +83,7 @@ function function_d7c9c129() {
       v_origin = self getplayercamerapos();
       v_angles = anglesToForward(self getplayerangles());
       a_trace = bulletTrace(v_origin, v_origin + vectorscale(v_angles, 30000), 1, level.var_7466d419, 1, 0, self);
-      var_fd92bc1 = a_trace[# "entity"];
+      var_fd92bc1 = a_trace[#"entity"];
       str_name = # "";
       var_dfc4aab4 = 0;
 
@@ -103,7 +103,7 @@ function function_d7c9c129() {
           }
         }
       } else {
-        v_hit = a_trace[# "position"];
+        v_hit = a_trace[#"position"];
 
         if(isDefined(v_hit) && istouching(v_hit, var_e583559a)) {
           var_2f37fbd = 1;

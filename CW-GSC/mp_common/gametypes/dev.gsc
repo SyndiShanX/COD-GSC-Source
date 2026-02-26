@@ -115,8 +115,8 @@ function updatehardpoints() {
         }
 
         if(isbot(player)) {
-          player.bot[# "killstreaks"] = [];
-          player.bot[# "killstreaks"][0] = killstreaks::get_menu_name(key);
+          player.bot[#"killstreaks"] = [];
+          player.bot[#"killstreaks"][0] = killstreaks::get_menu_name(key);
           killstreakweapon = killstreaks::get_killstreak_weapon(key);
           player killstreaks::give_weapon(killstreakweapon, 1);
           globallogic_score::_setplayermomentum(player, 2000);
@@ -358,7 +358,7 @@ function updatedevsettings() {
       }
 
       player = util::gethostplayer();
-      spawns = level.spawn_start[player.pers[# "team"]];
+      spawns = level.spawn_start[player.pers[#"team"]];
 
       if(!isDefined(spawns) || spawns.size <= 0) {
         return;
@@ -383,7 +383,7 @@ function updatedevsettings() {
       }
 
       player = util::gethostplayer();
-      spawns = level.spawn_start[player.pers[# "team"]];
+      spawns = level.spawn_start[player.pers[#"team"]];
 
       if(!isDefined(spawns) || spawns.size <= 0) {
         return;
@@ -1145,8 +1145,8 @@ function addenemyheli() {
   team = "<dev string:xc9>";
   player = util::gethostplayer();
 
-  if(isDefined(player.pers[# "team"])) {
-    team = util::getotherteam(player.pers[# "team"]);
+  if(isDefined(player.pers[#"team"])) {
+    team = util::getotherteam(player.pers[#"team"]);
   }
 
   ent = getormakebot(team);
@@ -1444,8 +1444,8 @@ function debug_realtime_engage_dist() {
     eye = player getEye();
     eye = (eye[0], eye[1], eye[2] + 20);
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, player);
-    tracepoint = trace[# "position"];
-    tracenormal = trace[# "normal"];
+    tracepoint = trace[#"position"];
+    tracenormal = trace[#"normal"];
     tracedist = int(distance(eye, tracepoint));
 
     if(tracepoint != lasttracepos) {
@@ -1575,7 +1575,7 @@ function larry_init(larry) {
     direction_vec = anglesToForward(direction);
     eye = self getEye();
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, 8000), 0, undefined);
-    dist = distance(eye, trace[# "position"]);
+    dist = distance(eye, trace[#"position"]);
     position = eye + vectorscale(direction_vec, dist - 64);
     larry.model.origin = position;
     larry.model.angles = self.angles + (0, 180, 0);

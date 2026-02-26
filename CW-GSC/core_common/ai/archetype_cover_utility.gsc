@@ -675,16 +675,16 @@ function private function_1587e509(entity, aimlimits, var_b0b60311, var_ec53bfd8
     var_dce16ce3 = var_ec53bfd8;
   }
 
-  var_5aeb5aa8 = aimlimits[# "aim_left"] + var_8c878d2c;
-  var_e43acc7e = aimlimits[# "aim_right"] - var_dce16ce3;
+  var_5aeb5aa8 = aimlimits[#"aim_left"] + var_8c878d2c;
+  var_e43acc7e = aimlimits[#"aim_right"] - var_dce16ce3;
   legalaimyaw = yawtoenemyposition >= var_e43acc7e && yawtoenemyposition <= var_5aeb5aa8;
   return legalaimyaw;
 }
 
 function private function_db059f5c(entity, aimlimits) {
   pitchtoenemyposition = getaimpitchtoenemyfromnode(entity, entity.node, entity.enemy);
-  var_d50d64a8 = aimlimits[# "aim_up"] - 10;
-  var_fb118db8 = aimlimits[# "aim_down"] + 10;
+  var_d50d64a8 = aimlimits[#"aim_up"] - 10;
+  var_fb118db8 = aimlimits[#"aim_down"] + 10;
   legalaimpitch = pitchtoenemyposition >= var_d50d64a8 && pitchtoenemyposition <= var_fb118db8;
   return legalaimpitch;
 }

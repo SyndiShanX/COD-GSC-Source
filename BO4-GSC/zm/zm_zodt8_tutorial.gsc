@@ -87,7 +87,7 @@ init_level_vars() {
   level._supress_survived_screen = 1;
   level.disablescoreevents = 1;
   level.zm_disable_recording_stats = 1;
-  level._effect[# "spawn_fx"] = # "maps/zm_office/fx8_teleporter_destination";
+  level._effect[#"spawn_fx"] = # "maps/zm_office/fx8_teleporter_destination";
   zm_transform::function_cfca77a7(getEntArray("zombie_spawner_catalyst_plasma", "targetname")[0], "catalyst_plasma_tutorial", undefined, 5, undefined, undefined, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split_tutorial", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split_tutorial");
 }
 
@@ -378,7 +378,7 @@ function_cf5f5964(spawnerstr, ignore = 0, bot = undefined, b_play_fx = 0) {
 
   if(b_play_fx) {
     v_forward = anglesToForward(s_spawn_pos.angles);
-    playFX(level._effect[# "spawn_fx"], s_spawn_pos.origin, v_forward);
+    playFX(level._effect[#"spawn_fx"], s_spawn_pos.origin, v_forward);
     playsoundatposition(#"hash_5c3c35d4b961c962", s_spawn_pos.origin);
   }
 

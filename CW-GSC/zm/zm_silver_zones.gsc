@@ -144,16 +144,16 @@ function function_64c67df3(zone_path) {
     if(zone_path.cost == 2) {
       if(self.cached_zone.name === # "zone_tunnel_interior") {
         if(self.favoriteenemy.cached_zone.name === # "zone_proto_exterior_rear2") {
-          if(is_true(level.flag[# "connect_proto_exterior_rear_to_tunnel"])) {
-            return level.zones[# "zone_proto_exterior_rear2"];
+          if(is_true(level.flag[#"connect_proto_exterior_rear_to_tunnel"])) {
+            return level.zones[#"zone_proto_exterior_rear2"];
           }
 
           return;
         }
 
         if(self.favoriteenemy.cached_zone.name === # "zone_proto_exterior_rear") {
-          if(is_true(level.flag[# "connect_proto_exterior_rear_to_tunnel"])) {
-            return level.zones[# "zone_proto_exterior_rear2"];
+          if(is_true(level.flag[#"connect_proto_exterior_rear_to_tunnel"])) {
+            return level.zones[#"zone_proto_exterior_rear2"];
           }
         }
       }

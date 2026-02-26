@@ -67,21 +67,21 @@ function spawn_callback(s_instance) {
   s_instance.a_ai_zombies = [];
   s_instance.var_be8ed486 = [];
   s_instance.var_c9df36f = "takeoff level 0";
-  s_capture_point = s_instance.contentgroups[# "capture_point"][0];
+  s_capture_point = s_instance.contentgroups[#"capture_point"][0];
   s_instance.var_934133c0 = {
     #origin: s_capture_point.origin, #angles: s_capture_point.angles
   };
   s_instance.var_ed23159a = "front";
   s_instance.var_934133c0 scene::init("aib_t9_zm_dragonhead");
-  s_instance.var_f9cc146 = s_instance.var_934133c0.scene_ents[# "dragon_head"];
+  s_instance.var_f9cc146 = s_instance.var_934133c0.scene_ents[#"dragon_head"];
   s_instance.var_f9cc146 hide();
   s_instance.var_f9cc146 notsolid();
-  var_3bb47a83 = s_instance.contentgroups[# "hash_4d27846c8a4b01a1"][0];
+  var_3bb47a83 = s_instance.contentgroups[#"hash_4d27846c8a4b01a1"][0];
   s_instance.var_5ea363c = content_manager::spawn_script_model(var_3bb47a83, #"p9_fxanim_sv_dragon_console_mod", 1);
   s_instance.var_5ea363c disconnectpaths();
   s_instance.var_5ea363c clientfield::set("soul_capture_timer", 1);
   s_instance.var_5ea363c.mdl_screen = util::spawn_model(#"hash_69c0563efeddad47", s_instance.var_5ea363c.origin, s_instance.var_5ea363c.angles);
-  s_fx = s_instance.contentgroups[# "eyes"][0];
+  s_fx = s_instance.contentgroups[#"eyes"][0];
   s_instance.var_ff3e0c53 = content_manager::spawn_script_model(s_fx, "tag_origin");
   s_instance.var_ff3e0c53 linkto(s_instance.var_5ea363c);
   playFXOnTag(#"hash_56b5ae0fe9c0a0b3", s_instance.var_ff3e0c53, "tag_origin");
@@ -89,11 +89,11 @@ function spawn_callback(s_instance) {
   s_instance.var_31309e7a linkto(s_instance.var_5ea363c);
   playFXOnTag(#"hash_1e6eecfa05dea663", s_instance.var_31309e7a, "tag_origin");
   s_instance.var_5ea363c thread scene::play("p9_fxanim_sv_dragon_console_bundle", "fuel init", s_instance.var_5ea363c);
-  v_origin = getclosestpointonnavmesh(s_instance.contentgroups[# "boundary"][0].origin, 256);
+  v_origin = getclosestpointonnavmesh(s_instance.contentgroups[#"boundary"][0].origin, 256);
   s_instance.spawn_points = namespace_85745671::function_e4791424(v_origin, 20, 64, 1000, 600);
-  s_chest = s_instance.contentgroups[# "chest_spawn"][0];
+  s_chest = s_instance.contentgroups[#"chest_spawn"][0];
   s_chest.var_e234ef47 = zm_utility::function_f5a222a8(#"hash_3e50c9d06850fdcb", s_chest.origin);
-  s_instance.trigger = content_manager::spawn_interact(s_instance.contentgroups[# "start_interact"][0], &function_3f808d3d, #"hash_78f3d8add33d8cc7", 500);
+  s_instance.trigger = content_manager::spawn_interact(s_instance.contentgroups[#"start_interact"][0], &function_3f808d3d, #"hash_78f3d8add33d8cc7", 500);
   s_instance.trigger.instance = s_instance;
   level thread function_f6ed3b36(s_instance);
   s_instance.trigger thread zm_utility::function_2256923f(500);
@@ -140,7 +140,7 @@ function function_3f808d3d(eventstruct) {
     player zm_score::minus_to_player_score(n_cost);
     instance thread function_3104e1a8();
     instance thread function_98382cc9();
-    var_c309b891 = instance.contentgroups[# "boundary"][0];
+    var_c309b891 = instance.contentgroups[#"boundary"][0];
     var_9899bfae = var_c309b891.origin;
 
     if(isDefined(instance.var_5ea363c.mdl_screen)) {
@@ -240,13 +240,13 @@ function function_3f808d3d(eventstruct) {
 function function_98382cc9() {
   self endon(#"cleanup");
   self flag::set("eater_spawning");
-  s_fx = self.contentgroups[# "eyes"][0];
+  s_fx = self.contentgroups[#"eyes"][0];
   playFX(#"hash_2a096914a9161bb8", s_fx.origin, anglesToForward(s_fx.angles), anglestoup(s_fx.angles));
   earthquake(0.2, 6, self.var_f9cc146.origin, 512);
   playsoundatposition(#"hash_39088d45201c4160", self.var_f9cc146.origin);
   self.var_f9cc146 playrumblelooponentity(#"hash_7d1934b3d40a60c2");
   wait 1;
-  var_c309b891 = self.contentgroups[# "boundary"][0];
+  var_c309b891 = self.contentgroups[#"boundary"][0];
 
   if(isDefined(var_c309b891)) {
     self.var_48ab101 = content_manager::spawn_script_model(var_c309b891, "tag_origin");
@@ -339,7 +339,7 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
         var_ee56c5b = array(var_ee56c5b);
       }
 
-      var_ee56c5b[var_ee56c5b.size] = var_ab4a6bb5.contentgroups[# "capture_point"][0];
+      var_ee56c5b[var_ee56c5b.size] = var_ab4a6bb5.contentgroups[#"capture_point"][0];
     }
 
     var_8580c8fc = arraysortclosest(var_ee56c5b, self.origin);
@@ -465,7 +465,7 @@ function function_3104e1a8() {
     self function_b8691499();
   }
 
-  var_c309b891 = self.contentgroups[# "boundary"][0];
+  var_c309b891 = self.contentgroups[#"boundary"][0];
 
   while(true) {
     self thread function_acf692e();
@@ -676,7 +676,7 @@ function function_39280c7a() {
     self.var_ff3e0c53 delete();
   }
 
-  s_chest = self.contentgroups[# "chest_spawn"][0];
+  s_chest = self.contentgroups[#"chest_spawn"][0];
 
   if(isDefined(s_chest) && isDefined(self.var_2348a8fb)) {
     s_chest.mdl_chest = self.mdl_chest;
@@ -714,7 +714,7 @@ function function_29db9d5f(ai_zombie, e_killer, var_f3a93cf1 = 0) {
   }
 
   self flag::set("looking_at_zombie");
-  s_capture_point = self.contentgroups[# "capture_point"][0];
+  s_capture_point = self.contentgroups[#"capture_point"][0];
   var_7caa77 = vectordot(anglesToForward(self.var_934133c0.angles), vectornormalize(v_death - s_capture_point.origin));
 
   if(var_7caa77 > 0.85) {
@@ -913,7 +913,7 @@ function function_a221b3a(var_273eefec) {
     self.var_ff3e0c53 delete();
   }
 
-  self.var_ff3e0c53 = content_manager::spawn_script_model(self.contentgroups[# "eyes"][0], #"tag_origin");
+  self.var_ff3e0c53 = content_manager::spawn_script_model(self.contentgroups[#"eyes"][0], #"tag_origin");
   self.var_ff3e0c53 linkto(var_5ea363c);
   playFXOnTag(#"hash_7e801405f1644de5", self.var_ff3e0c53, "tag_origin");
 
@@ -930,7 +930,7 @@ function function_a221b3a(var_273eefec) {
     self.var_31309e7a delete();
   }
 
-  self.var_31309e7a = content_manager::spawn_script_model(self.contentgroups[# "eyes"][0], #"tag_origin");
+  self.var_31309e7a = content_manager::spawn_script_model(self.contentgroups[#"eyes"][0], #"tag_origin");
   self.var_31309e7a linkto(var_5ea363c);
   playFXOnTag(#"hash_75b8555ea6711aff", self.var_31309e7a, "tag_origin");
   var_5ea363c clientfield::set("soul_capture_leave", 1);
@@ -940,7 +940,7 @@ function function_a221b3a(var_273eefec) {
   playFXOnTag(#"hash_6041f3e753cd772e", self.var_31309e7a, "tag_origin");
   var_5ea363c connectpaths();
   self thread function_1ed83293(var_5ea363c.origin);
-  s_chest = self.contentgroups[# "chest_spawn"][0];
+  s_chest = self.contentgroups[#"chest_spawn"][0];
 
   if(isDefined(s_chest.var_e234ef47) && !isDefined(self.mdl_chest)) {
     zm_utility::function_bc5a54a8(s_chest.var_e234ef47);
@@ -1007,7 +1007,7 @@ function function_149da5dd() {
   self callback::function_52ac9652(#"portal_activated", &function_149da5dd);
   self notify(#"cleanup");
   self flag::clear("active");
-  s_chest = self.contentgroups[# "chest_spawn"][0];
+  s_chest = self.contentgroups[#"chest_spawn"][0];
 
   if(isDefined(s_chest.var_e234ef47)) {
     zm_utility::function_bc5a54a8(s_chest.var_e234ef47);
@@ -1035,7 +1035,7 @@ function function_149da5dd() {
 }
 
 function function_f6ed3b36(instance) {
-  var_c0a0c72d = instance.contentgroups[# "hole"][0];
+  var_c0a0c72d = instance.contentgroups[#"hole"][0];
   level.var_2606686d = content_manager::spawn_script_model(var_c0a0c72d, #"hash_6e1380f2de74e0e6", 0, 0);
   level.var_2606686d hide();
   callback::on_spawned(&on_player_spawned);

@@ -37,7 +37,7 @@ function function_9e94a567() {
     winning_teams = [];
 
     foreach(team, _ in level.teams) {
-      team_score = game.stat[# "teamscores"][team];
+      team_score = game.stat[#"teamscores"][team];
 
       if(team_score > score) {
         score = team_score;

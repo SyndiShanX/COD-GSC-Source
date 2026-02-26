@@ -457,7 +457,7 @@ function_7d93567f() {
   distribution = [];
 
   foreach(player in level.players) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(!isDefined(level.teams[team])) {
       continue;

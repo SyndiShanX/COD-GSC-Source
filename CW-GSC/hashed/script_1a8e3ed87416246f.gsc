@@ -65,6 +65,6 @@ function play_smoke_fx(str_targetname) {
   var_1fa85f59 = struct::get_array(str_targetname);
 
   foreach(var_d83df459 in var_1fa85f59) {
-    playFX(level._effect[# "hash_b63f0232a3d5f82"], var_d83df459.origin);
+    playFX(level._effect[#"hash_b63f0232a3d5f82"], var_d83df459.origin);
   }
 }

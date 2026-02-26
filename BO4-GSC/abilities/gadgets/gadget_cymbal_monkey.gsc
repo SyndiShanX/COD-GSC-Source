@@ -29,7 +29,7 @@ function_1c601b99() {
 }
 
 __main__() {
-  level._effect[# "monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[#"monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
 }
 
 function_a23699fe() {
@@ -127,7 +127,7 @@ function_b9934c1d() {
 
   self.fuse_lit = 1;
   self playSound(#"hash_4509539f9e7954e2");
-  playFXOnTag(level._effect[# "monkey_glow"], self, "tag_weapon");
+  playFXOnTag(level._effect[#"monkey_glow"], self, "tag_weapon");
   self thread scene::play(#"cin_t8_monkeybomb_dance", self);
   self thread util::delay(6.5, "death", &function_4e61e1d);
   var_de3026af = gettime() + int(8 * 1000);

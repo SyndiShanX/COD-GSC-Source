@@ -135,7 +135,7 @@ function function_bb36c113() {
 }
 
 function function_78a49053(a_ents) {
-  level.var_7f69cef1 = a_ents[# "hash_475ee55621b83ca0"];
+  level.var_7f69cef1 = a_ents[#"hash_475ee55621b83ca0"];
   ghost_station_exit_sewer_cover = getent("ghost_station_exit_sewer_cover", "targetname");
   ghost_station_exit_sewer_cover linkto(level.var_7f69cef1, "j_prop_1", (0, 0, 0), (0, 0, 0));
   level.var_7f69cef1 ghost();
@@ -144,15 +144,15 @@ function function_78a49053(a_ents) {
 function function_ffe1ec0d(a_ents) {
   level.var_85b94361 = util::spawn_model(#"weapon_wm_m1911_composite", level.adler.origin);
   level.var_85b94361 hidepart("j_mag2", "weapon_wm_m1911_composite");
-  level.var_85b94361 linkto(a_ents[# "hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
-  level.var_657b5876 = a_ents[# "hash_7e7c435b4c0eec16"];
+  level.var_85b94361 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+  level.var_657b5876 = a_ents[#"hash_7e7c435b4c0eec16"];
   level.var_4c0e9fb8 = util::spawn_model(#"com_flashlight_on_xforward", level.adler.origin);
-  level.var_4c0e9fb8 linkto(a_ents[# "hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-  level.var_4c0e9fb8 thread function_c439c1a(a_ents[# "hash_7e7c435b4c0eec16"]);
+  level.var_4c0e9fb8 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  level.var_4c0e9fb8 thread function_c439c1a(a_ents[#"hash_7e7c435b4c0eec16"]);
   level.var_527ee575 = util::spawn_model(#"weapon_vm_ar_akilo47_brprop", level.adler.origin);
-  level.var_527ee575 linkto(a_ents[# "hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
-  level.var_8d300d6a = a_ents[# "enemy1"];
-  level.var_aff752f8 = a_ents[# "enemy2"];
+  level.var_527ee575 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+  level.var_8d300d6a = a_ents[#"enemy1"];
+  level.var_aff752f8 = a_ents[#"enemy2"];
   level.var_8d300d6a battlechatter::function_2ab9360b(0);
   level.var_8d300d6a.var_5b22d53 = 0;
   level.var_8d300d6a.var_c681e4c1 = 1;
@@ -182,13 +182,13 @@ function function_d438a0a5() {
 function function_5010c6ad(a_ents) {
   waitframe(1);
 
-  if(isDefined(a_ents[# "hash_7e7c435b4c0eec16"])) {
+  if(isDefined(a_ents[#"hash_7e7c435b4c0eec16"])) {
     if(isDefined(level.var_85b94361)) {
-      level.var_85b94361 linkto(a_ents[# "hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
+      level.var_85b94361 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_2", (0, 0, 0), (0, 0, 0));
     }
 
-    level.var_4c0e9fb8 linkto(a_ents[# "hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
-    level.var_527ee575 linkto(a_ents[# "hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
+    level.var_4c0e9fb8 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+    level.var_527ee575 linkto(a_ents[#"hash_7e7c435b4c0eec16"], "j_prop_3", (0, 0, 0), (0, 0, 0));
   }
 }
 

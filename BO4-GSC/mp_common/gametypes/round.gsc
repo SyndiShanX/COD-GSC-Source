@@ -33,17 +33,17 @@ round_stats_init() {
     game.lastroundscore = [];
   }
 
-  if(!isDefined(game.stat[# "roundswon"])) {
-    game.stat[# "roundswon"] = [];
+  if(!isDefined(game.stat[#"roundswon"])) {
+    game.stat[#"roundswon"] = [];
   }
 
-  if(!isDefined(game.stat[# "roundswon"][# "tie"])) {
-    game.stat[# "roundswon"][# "tie"] = 0;
+  if(!isDefined(game.stat[#"roundswon"][#"tie"])) {
+    game.stat[#"roundswon"][#"tie"] = 0;
   }
 
   foreach(team, _ in level.teams) {
-    if(!isDefined(game.stat[# "roundswon"][team])) {
-      game.stat[# "roundswon"][team] = 0;
+    if(!isDefined(game.stat[#"roundswon"][team])) {
+      game.stat[#"roundswon"][team] = 0;
     }
 
     level.teamspawnpoints[team] = [];

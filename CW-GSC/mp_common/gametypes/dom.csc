@@ -19,23 +19,23 @@ function event_handler[gametype_init] main(eventstruct) {
   }
 
   clientfield::register("scriptmover", "scriptid", 1, 5, "int", &function_e116df6c, 0, 0);
-  level._effect[# "zoneedgemarker"] = [];
-  level._effect[# "zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[# "zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[# "zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[# "zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
-  level._effect[# "zoneedgemarkerwndw"] = [];
-  level._effect[# "zoneedgemarkerwndw"][0] = # "ui/fx8_infil_marker_neutral_window";
-  level._effect[# "zoneedgemarkerwndw"][1] = # "hash_5565c3fc2c7742fe";
-  level._effect[# "zoneedgemarkerwndw"][2] = # "hash_3283b765fe480df7";
-  level._effect[# "zoneedgemarkerwndw"][3] = # "hash_6a512c225256a2e9";
+  level._effect[#"zoneedgemarker"] = [];
+  level._effect[#"zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarkerwndw"] = [];
+  level._effect[#"zoneedgemarkerwndw"][0] = # "ui/fx8_infil_marker_neutral_window";
+  level._effect[#"zoneedgemarkerwndw"][1] = # "hash_5565c3fc2c7742fe";
+  level._effect[#"zoneedgemarkerwndw"][2] = # "hash_3283b765fe480df7";
+  level._effect[#"zoneedgemarkerwndw"][3] = # "hash_6a512c225256a2e9";
   level.zonemarkers = [];
-  level.zonemarkers[# "a"] = struct::get_array("doma", "targetname");
-  level.zonemarkers[# "b"] = struct::get_array("domb", "targetname");
-  level.zonemarkers[# "c"] = struct::get_array("domc", "targetname");
-  level.zonemarkers[# "d"] = struct::get_array("domd", "targetname");
-  level.zonemarkers[# "e"] = struct::get_array("dome", "targetname");
-  level.zonemarkers[# "f"] = struct::get_array("domf", "targetname");
+  level.zonemarkers[#"a"] = struct::get_array("doma", "targetname");
+  level.zonemarkers[#"b"] = struct::get_array("domb", "targetname");
+  level.zonemarkers[#"c"] = struct::get_array("domc", "targetname");
+  level.zonemarkers[#"d"] = struct::get_array("domd", "targetname");
+  level.zonemarkers[#"e"] = struct::get_array("dome", "targetname");
+  level.zonemarkers[#"f"] = struct::get_array("domf", "targetname");
   level.othervisuals = [];
   fields = getmapfields();
   level.var_117b4a3a = [];
@@ -59,18 +59,18 @@ function function_3022f6ba(eventstruct) {
 
 function function_64ffa588(local_client_num) {
   effects = [];
-  effects[# "zoneedgemarker"] = level._effect[# "zoneedgemarker"];
-  effects[# "zoneedgemarkerwndw"] = level._effect[# "zoneedgemarkerwndw"];
-  effects[# "zoneedgemarker"][1] = # "hash_682365220f952226";
-  effects[# "zoneedgemarker"][2] = # "hash_5c0d472966d09d41";
-  effects[# "zoneedgemarker"][3] = [];
-  effects[# "zoneedgemarker"][3][1] = # "hash_3d943e08d321081c";
-  effects[# "zoneedgemarker"][3][2] = # "hash_6328e922e5ef809f";
-  effects[# "zoneedgemarkerwndw"][1] = # "hash_6bfa43a02f3672e3";
-  effects[# "zoneedgemarkerwndw"][2] = # "hash_7e0524ef3f409d16";
-  effects[# "zoneedgemarkerwndw"][3] = [];
-  effects[# "zoneedgemarkerwndw"][3][1] = # "hash_252ee62d9ea8dcc9";
-  effects[# "zoneedgemarkerwndw"][3][2] = # "hash_7495c7dec3ebf9dc";
+  effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
+  effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
+  effects[#"zoneedgemarker"][1] = # "hash_682365220f952226";
+  effects[#"zoneedgemarker"][2] = # "hash_5c0d472966d09d41";
+  effects[#"zoneedgemarker"][3] = [];
+  effects[#"zoneedgemarker"][3][1] = # "hash_3d943e08d321081c";
+  effects[#"zoneedgemarker"][3][2] = # "hash_6328e922e5ef809f";
+  effects[#"zoneedgemarkerwndw"][1] = # "hash_6bfa43a02f3672e3";
+  effects[#"zoneedgemarkerwndw"][2] = # "hash_7e0524ef3f409d16";
+  effects[#"zoneedgemarkerwndw"][3] = [];
+  effects[#"zoneedgemarkerwndw"][3][1] = # "hash_252ee62d9ea8dcc9";
+  effects[#"zoneedgemarkerwndw"][3][2] = # "hash_7495c7dec3ebf9dc";
   return effects;
 }
 
@@ -78,38 +78,38 @@ function on_localclient_connect(localclientnum) {
   level.domflags = [];
   level.var_4c3d5929 = [];
 
-  while(!isDefined(level.domflags[# "a"])) {
-    level.domflags[# "a"] = serverobjective_getobjective(localclientnum, "dom_a");
-    level.domflags[# "b"] = serverobjective_getobjective(localclientnum, "dom_b");
-    level.domflags[# "c"] = serverobjective_getobjective(localclientnum, "dom_c");
-    level.domflags[# "d"] = serverobjective_getobjective(localclientnum, "dom_d");
-    level.domflags[# "e"] = serverobjective_getobjective(localclientnum, "dom_e");
-    level.domflags[# "f"] = serverobjective_getobjective(localclientnum, "dom_f");
+  while(!isDefined(level.domflags[#"a"])) {
+    level.domflags[#"a"] = serverobjective_getobjective(localclientnum, "dom_a");
+    level.domflags[#"b"] = serverobjective_getobjective(localclientnum, "dom_b");
+    level.domflags[#"c"] = serverobjective_getobjective(localclientnum, "dom_c");
+    level.domflags[#"d"] = serverobjective_getobjective(localclientnum, "dom_d");
+    level.domflags[#"e"] = serverobjective_getobjective(localclientnum, "dom_e");
+    level.domflags[#"f"] = serverobjective_getobjective(localclientnum, "dom_f");
     waitframe(1);
   }
 
-  if(isDefined(level.domflags[# "a"])) {
-    level.var_882f7b6a[level.domflags[# "a"]] = 1;
+  if(isDefined(level.domflags[#"a"])) {
+    level.var_882f7b6a[level.domflags[#"a"]] = 1;
   }
 
-  if(isDefined(level.domflags[# "b"])) {
-    level.var_882f7b6a[level.domflags[# "b"]] = 2;
+  if(isDefined(level.domflags[#"b"])) {
+    level.var_882f7b6a[level.domflags[#"b"]] = 2;
   }
 
-  if(isDefined(level.domflags[# "c"])) {
-    level.var_882f7b6a[level.domflags[# "c"]] = 3;
+  if(isDefined(level.domflags[#"c"])) {
+    level.var_882f7b6a[level.domflags[#"c"]] = 3;
   }
 
-  if(isDefined(level.domflags[# "d"])) {
-    level.var_882f7b6a[level.domflags[# "d"]] = 4;
+  if(isDefined(level.domflags[#"d"])) {
+    level.var_882f7b6a[level.domflags[#"d"]] = 4;
   }
 
-  if(isDefined(level.domflags[# "e"])) {
-    level.var_882f7b6a[level.domflags[# "e"]] = 5;
+  if(isDefined(level.domflags[#"e"])) {
+    level.var_882f7b6a[level.domflags[#"e"]] = 5;
   }
 
-  if(isDefined(level.domflags[# "f"])) {
-    level.var_882f7b6a[level.domflags[# "f"]] = 6;
+  if(isDefined(level.domflags[#"f"])) {
+    level.var_882f7b6a[level.domflags[#"f"]] = 6;
   }
 
   var_f06ec6c3 = getEntArray(localclientnum, "flag_descriptor", "targetname");
@@ -319,8 +319,8 @@ function function_7f6bca11(local_client_num, zone, state) {
   effects = [];
 
   if(codcaster::function_39bce377(local_client_num)) {} else {
-    effects[# "zoneedgemarker"] = level._effect[# "zoneedgemarker"];
-    effects[# "zoneedgemarkerwndw"] = level._effect[# "zoneedgemarkerwndw"];
+    effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
+    effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
   }
 
   if(isDefined(level.var_4c3d5929[local_client_num]) && isDefined(level.var_4c3d5929[local_client_num][zone])) {
@@ -361,7 +361,7 @@ function function_7f6bca11(local_client_num, zone, state) {
 function function_df78674f(localclientnum) {
   self endon(#"death", #"disconnect");
 
-  while(!isDefined(level.domflags[# "a"]) || !isDefined(level.var_882f7b6a[level.domflags[# "a"]])) {
+  while(!isDefined(level.domflags[#"a"]) || !isDefined(level.var_882f7b6a[level.domflags[#"a"]])) {
     waitframe(1);
   }
 

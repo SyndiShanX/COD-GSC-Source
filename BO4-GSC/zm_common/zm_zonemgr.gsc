@@ -422,7 +422,7 @@ zone_init(zone_name, zone_tag) {
   zone.round_spawn_count = 0;
 
   zone.a_loc_types = [];
-  zone.a_loc_types[# "zombie_location"] = [];
+  zone.a_loc_types[#"zombie_location"] = [];
   zone.zbarriers = [];
   zone.magic_boxes = [];
 
@@ -456,13 +456,13 @@ zone_init(zone_name, zone_tag) {
           case # "faller_location":
             spot.spawned_timestamp = gettime();
 
-            if(!isDefined(zone.a_loc_types[# "zombie_location"])) {
-              zone.a_loc_types[# "zombie_location"] = [];
-            } else if(!isarray(zone.a_loc_types[# "zombie_location"])) {
-              zone.a_loc_types[# "zombie_location"] = array(zone.a_loc_types[# "zombie_location"]);
+            if(!isDefined(zone.a_loc_types[#"zombie_location"])) {
+              zone.a_loc_types[#"zombie_location"] = [];
+            } else if(!isarray(zone.a_loc_types[#"zombie_location"])) {
+              zone.a_loc_types[#"zombie_location"] = array(zone.a_loc_types[#"zombie_location"]);
             }
 
-            zone.a_loc_types[# "zombie_location"][zone.a_loc_types[# "zombie_location"].size] = spot;
+            zone.a_loc_types[#"zombie_location"][zone.a_loc_types[#"zombie_location"].size] = spot;
             break;
           default:
             if(!isDefined(zone.a_loc_types[token])) {
@@ -535,7 +535,7 @@ reinit_zone_spawners() {
   for(i = 0; i < level.zones.size; i++) {
     zone = level.zones[zkeys[i]];
     zone.a_loc_types = [];
-    zone.a_loc_types[# "zombie_location"] = [];
+    zone.a_loc_types[#"zombie_location"] = [];
 
     if(zm_utility::function_21f4ac36() && zone.nodes.size > 0) {
       zone_target = zone.nodes[0].target;
@@ -564,13 +564,13 @@ reinit_zone_spawners() {
             case # "riser_location":
             case # "spawner_location":
             case # "faller_location":
-              if(!isDefined(zone.a_loc_types[# "zombie_location"])) {
-                zone.a_loc_types[# "zombie_location"] = [];
-              } else if(!isarray(zone.a_loc_types[# "zombie_location"])) {
-                zone.a_loc_types[# "zombie_location"] = array(zone.a_loc_types[# "zombie_location"]);
+              if(!isDefined(zone.a_loc_types[#"zombie_location"])) {
+                zone.a_loc_types[#"zombie_location"] = [];
+              } else if(!isarray(zone.a_loc_types[#"zombie_location"])) {
+                zone.a_loc_types[#"zombie_location"] = array(zone.a_loc_types[#"zombie_location"]);
               }
 
-              zone.a_loc_types[# "zombie_location"][zone.a_loc_types[# "zombie_location"].size] = spot;
+              zone.a_loc_types[#"zombie_location"][zone.a_loc_types[#"zombie_location"].size] = spot;
               break;
             default:
               if(!isDefined(zone.a_loc_types[token])) {
@@ -1029,7 +1029,7 @@ debug_show_spawn_locations() {
   if(isDefined(level.toggle_show_spawn_locations) && level.toggle_show_spawn_locations) {
     host_player = util::gethostplayer();
 
-    foreach(location in level.zm_loc_types[# "zombie_location"]) {
+    foreach(location in level.zm_loc_types[#"zombie_location"]) {
       distance = distance(location.origin, host_player.origin);
       color = (0, 1, 1);
 
@@ -1067,14 +1067,14 @@ function create_spawner_list(zkeys) {
               case # "spawn_location":
               case # "riser_location":
               case # "faller_location":
-                if(!isDefined(level.zm_loc_types[# "zombie_location"])) {
-                  level.zm_loc_types[# "zombie_location"] = [];
-                } else if(!isarray(level.zm_loc_types[# "zombie_location"])) {
-                  level.zm_loc_types[# "zombie_location"] = array(level.zm_loc_types[# "zombie_location"]);
+                if(!isDefined(level.zm_loc_types[#"zombie_location"])) {
+                  level.zm_loc_types[#"zombie_location"] = [];
+                } else if(!isarray(level.zm_loc_types[#"zombie_location"])) {
+                  level.zm_loc_types[#"zombie_location"] = array(level.zm_loc_types[#"zombie_location"]);
                 }
 
-                if(!isinarray(level.zm_loc_types[# "zombie_location"], loc)) {
-                  level.zm_loc_types[# "zombie_location"][level.zm_loc_types[# "zombie_location"].size] = loc;
+                if(!isinarray(level.zm_loc_types[#"zombie_location"], loc)) {
+                  level.zm_loc_types[#"zombie_location"][level.zm_loc_types[#"zombie_location"].size] = loc;
                 }
 
                 break;
@@ -1204,7 +1204,7 @@ _debug_zones() {
           var_28686bb1 += "| ";
         }
 
-        var_28686bb1 += zone.a_loc_types[# "zombie_location"].size + "<dev string:x2fc>" + zone.total_spawn_count + "<dev string:x2fc>" + zone.round_spawn_count;
+        var_28686bb1 += zone.a_loc_types[#"zombie_location"].size + "<dev string:x2fc>" + zone.total_spawn_count + "<dev string:x2fc>" + zone.round_spawn_count;
         v_pos = 100 + 18 * n;
         debug2dtext((400, v_pos, 0), var_28686bb1, (1, 1, 0), undefined, (0, 0, 0), 0.75, 0.85, 2);
 

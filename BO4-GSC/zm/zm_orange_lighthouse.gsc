@@ -538,8 +538,8 @@ electrocute_player() {
 trap_switch_init() {
   self.var_223285b1 = getvehiclenode(self.var_40d27c6d, "targetname");
   a_pieces = zm_hms_util::function_bffcedde(self.target, "targetname", "script_noteworthy");
-  self.mdl_switch = a_pieces[# "switch"];
-  self.mdl_light = a_pieces[# "light"];
+  self.mdl_switch = a_pieces[#"switch"];
+  self.mdl_light = a_pieces[#"light"];
   self.s_panel = struct::get(self.target);
   self zm_unitrigger::create(&function_85d3d607, 64);
   self thread function_72d528e6();

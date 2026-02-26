@@ -538,7 +538,7 @@ function private planhumanturnanimations(entity, animations) {
 function private function_fe8e7e36(point) {
   if(abs(self.pathgoalpos[2] - self.origin[2]) > 0.5) {
     trace = groundtrace(point + (0, 0, 72), point + (0, 0, -72), 0, 0, 0);
-    point = (point[0], point[1], trace[# "position"][2] + 6);
+    point = (point[0], point[1], trace[#"position"][2] + 6);
   }
 
   return point;

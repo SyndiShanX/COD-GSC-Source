@@ -158,7 +158,7 @@ function_52ca9649(event) {
     return;
   }
 
-  eventindex = level.scoreinfo[event][# "row"];
+  eventindex = level.scoreinfo[event][#"row"];
   self luinotifyevent(#"end_sustaining_action", 1, eventindex);
   self.var_19f577f[event]--;
 }
@@ -531,13 +531,13 @@ function_d68ae402(inflictor, meansofdeath, victim, attacker, scoreevents, weapon
 
   if(var_ac4c1 == # "frag_grenade" || var_ac4c1 == # "eq_molotov" || var_ac4c1 == # "hatchet") {
     if(attacker.multikills[var_ac4c1].kills >= 2) {
-      if(!isDefined(attacker.pers[# "hash_52e978325c91fe24"])) {
-        attacker.pers[# "hash_52e978325c91fe24"] = 0;
+      if(!isDefined(attacker.pers[#"hash_52e978325c91fe24"])) {
+        attacker.pers[#"hash_52e978325c91fe24"] = 0;
       }
 
-      attacker.pers[# "hash_52e978325c91fe24"]++;
+      attacker.pers[#"hash_52e978325c91fe24"]++;
 
-      if(attacker.pers[# "hash_52e978325c91fe24"] % 2 == 0) {
+      if(attacker.pers[#"hash_52e978325c91fe24"] % 2 == 0) {
         attacker stats::function_dad108fa(#"hash_52e978325c91fe24", 1);
       }
     }
@@ -854,7 +854,7 @@ function_d3ca3608(eventname) {
     level.var_10cd7193[level.var_10cd7193.size] = eventstr;
   }
 
-  eventindex = level.scoreinfo[eventname][# "row"];
+  eventindex = level.scoreinfo[eventname][#"row"];
 }
 
 function_61254438(weapon) {

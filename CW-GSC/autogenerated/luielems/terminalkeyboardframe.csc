@@ -31,17 +31,17 @@ function register() {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "TerminalKeyboardFrame"])) {
-    level.var_ae746e8f[# "TerminalKeyboardFrame"] = [];
+  if(!isDefined(level.var_ae746e8f[#"TerminalKeyboardFrame"])) {
+    level.var_ae746e8f[#"TerminalKeyboardFrame"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "TerminalKeyboardFrame"])) {
-    level.var_ae746e8f[# "TerminalKeyboardFrame"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "TerminalKeyboardFrame"])) {
-    level.var_ae746e8f[# "TerminalKeyboardFrame"] = array(level.var_ae746e8f[# "TerminalKeyboardFrame"]);
+  if(!isDefined(level.var_ae746e8f[#"TerminalKeyboardFrame"])) {
+    level.var_ae746e8f[#"TerminalKeyboardFrame"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"TerminalKeyboardFrame"])) {
+    level.var_ae746e8f[#"TerminalKeyboardFrame"] = array(level.var_ae746e8f[#"TerminalKeyboardFrame"]);
   }
 
-  level.var_ae746e8f[# "TerminalKeyboardFrame"][level.var_ae746e8f[# "TerminalKeyboardFrame"].size] = elem;
+  level.var_ae746e8f[#"TerminalKeyboardFrame"][level.var_ae746e8f[#"TerminalKeyboardFrame"].size] = elem;
 }
 
 function register_clientside() {

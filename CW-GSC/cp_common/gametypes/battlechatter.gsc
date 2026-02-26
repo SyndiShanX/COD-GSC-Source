@@ -24,20 +24,20 @@ function private preinit() {
 
   function_5ac4dc99("<dev string:x38>", 0);
 
-  battlechatter_table::function_c5dda35e("combat", [# "hash_2a1fada6b78bcec4"]);
+  battlechatter_table::function_c5dda35e("combat", [#"hash_2a1fada6b78bcec4"]);
 }
 
 function init() {
   callback::on_spawned(&on_player_spawned);
   level.battlechatter_init = 1;
   level.allowbattlechatter = [];
-  level.allowbattlechatter[# "bc"] = 1;
-  level.allowbattlechatter[# "allies"] = 1;
-  level.allowbattlechatter[# "axis"] = 1;
-  level.allowbattlechatter[# "team3"] = 1;
+  level.allowbattlechatter[#"bc"] = 1;
+  level.allowbattlechatter[#"allies"] = 1;
+  level.allowbattlechatter[#"axis"] = 1;
+  level.allowbattlechatter[#"team3"] = 1;
   level.var_69427377 = [];
-  level.var_69427377[# "cover_exit"] = "cover_break";
-  level.var_69427377[# "moving_up"] = "moving_up_other";
+  level.var_69427377[#"cover_exit"] = "cover_break";
+  level.var_69427377[#"moving_up"] = "moving_up_other";
 }
 
 function is_hero(ai) {

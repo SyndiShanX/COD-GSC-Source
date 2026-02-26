@@ -216,12 +216,12 @@ function function_5b3aabe6() {
 }
 
 function private function_f63d1381(a_ents) {
-  e_door = a_ents[# "zipline_door"];
+  e_door = a_ents[#"zipline_door"];
   e_door function_619a5c20();
 }
 
 function private function_88c5fdab(a_ents) {
-  e_door = a_ents[# "zipline_door"];
+  e_door = a_ents[#"zipline_door"];
   e_door function_23a29590();
 }
 
@@ -336,7 +336,7 @@ function function_89bc492d() {
 }
 
 function private function_d8b4a70b(a_ents) {
-  var_4e7f8723 = a_ents[# "rappel_cable"];
+  var_4e7f8723 = a_ents[#"rappel_cable"];
   var_4e7f8723 function_619a5c20();
 }
 

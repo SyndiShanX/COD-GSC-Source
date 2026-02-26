@@ -319,7 +319,7 @@ function private function_500a6615(itemspawnlist = # "t9_supply_drop_stash_paren
     travelspeed = is_true(supplydrop.var_abd32694) ? 400 : 200;
     groundoffset = is_true(supplydrop.var_abd32694) ? 200 : 60;
     groundtrace = physicstraceex(startpoint, endpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), supplydrop, 32);
-    groundpoint = groundtrace[# "position"] + (0, 0, groundoffset);
+    groundpoint = groundtrace[#"position"] + (0, 0, groundoffset);
     traveldistance = startpoint - groundpoint;
     movetime = traveldistance[2] / travelspeed;
 
@@ -646,7 +646,7 @@ function function_186f5ca3() {
     if(!oob::chr_party(droppoint)) {
       result = function_9cc082d2(droppoint, 15000);
 
-      if(isDefined(result) && isDefined(result[# "materialflags"]) && ~(result[# "materialflags"] & 2)) {
+      if(isDefined(result) && isDefined(result[#"materialflags"]) && ~(result[#"materialflags"] & 2)) {
         return droppoint;
       }
     }
@@ -725,13 +725,13 @@ function private trace_point(point, var_5fd22b95 = 1, maxheight = 20000, minheig
   trace = groundtrace(startpoint, endpoint, 0, undefined, var_5fd22b95);
 
   if(!var_5fd22b95) {
-    if(trace[# "surfacetype"] == "water" || trace[# "surfacetype"] == "watershallow") {
+    if(trace[#"surfacetype"] == "water" || trace[#"surfacetype"] == "watershallow") {
       return;
     }
   }
 
-  if(isDefined(trace[# "position"])) {
-    return (trace[# "position"] + (0, 0, 2000));
+  if(isDefined(trace[#"position"])) {
+    return (trace[#"position"] + (0, 0, 2000));
   }
 
   return startpoint;

@@ -34,7 +34,7 @@ function function_7eb604b9() {
   level scene::init("scene_yam_1010_hel_intro");
   level flag::wait_till("all_players_spawned");
   level.ai_woods sethighdetail(1);
-  s_scene.scene_ents[# "belikov"] sethighdetail(1);
+  s_scene.scene_ents[#"belikov"] sethighdetail(1);
   level thread function_50989881(s_scene);
   level scene::play("scene_yam_1010_hel_intro", "play");
   level thread function_fbb0d73f();
@@ -44,7 +44,7 @@ function function_7eb604b9() {
 function function_50989881(s_scene) {
   var_257cdc92 = getent("hms_cap", "targetname");
   var_257cdc92 setscale(1.25);
-  var_257cdc92 linkto(s_scene.scene_ents[# "belikov"], "j_helmet", (2, 1, 0), (-140, -90, 0));
+  var_257cdc92 linkto(s_scene.scene_ents[#"belikov"], "j_helmet", (2, 1, 0), (-140, -90, 0));
   var_257cdc92 hide();
   level waittill(#"hash_661c404db1017413");
   var_257cdc92 show();
@@ -116,7 +116,7 @@ function function_23320f08(b_condition, var_6c91f8cd) {
 }
 
 function function_63264d28(a_ents) {
-  belikov = a_ents[# "belikov"];
+  belikov = a_ents[#"belikov"];
   belikov.propername = # "hash_59ecd456f45762d4";
   belikov ai::gun_remove();
   level waittill(#"intro_dialog_done");
@@ -124,8 +124,8 @@ function function_63264d28(a_ents) {
 }
 
 function function_485aed5c(a_ents) {
-  var_3793dd70 = a_ents[# "belikov"];
-  var_3f59f311 = a_ents[# "heli"];
+  var_3793dd70 = a_ents[#"belikov"];
+  var_3f59f311 = a_ents[#"heli"];
   var_3793dd70 linkto(var_3f59f311);
 }
 

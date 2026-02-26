@@ -67,8 +67,7 @@ monitorFlash() {
     if(level.teamBased && isDefined(attacker) && isDefined(attacker.pers["team"]) && attacker.pers["team"] == self.pers["team"] && attacker != self) {
       if(level.friendlyfire == 0) {
         continue;
-      } else if(level.friendlyfire == 1) {
-      } else if(level.friendlyfire == 2) {
+      } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         duration = duration * .5;
         rumbleduration = rumbleduration * .5;
         hurtvictim = false;

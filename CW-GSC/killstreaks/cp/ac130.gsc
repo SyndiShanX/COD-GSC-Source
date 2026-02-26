@@ -50,7 +50,7 @@ function private function_a4b36d9a() {
   self notify("485efef24bc199cf");
   self endon("485efef24bc199cf");
   player thread util::function_658a8750(1);
-  namespace_61e6d095::function_28027c42(#"ac130", [# "hash_72cc4740fa4d3da3"]);
+  namespace_61e6d095::function_28027c42(#"ac130", [#"hash_72cc4740fa4d3da3"]);
   namespace_c8e236da::removelist();
   namespace_c8e236da::function_ebf737f8(#"hash_c7d583ff53f896");
   namespace_c8e236da::function_ebf737f8(#"hash_6fca5ea0f3afc2a7");
@@ -68,7 +68,7 @@ function private function_a4b36d9a() {
 function function_1c110d7a(var_c3fb6cc9, var_d836f7aa, var_a6a9d503 = undefined) {
   var_14db8d05 = (var_c3fb6cc9[0], var_c3fb6cc9[1], var_d836f7aa);
   traceresult = groundtrace(var_14db8d05, var_14db8d05 + (0, 0, var_d836f7aa * -1), 0, undefined);
-  var_dd58c5bb = traceresult[# "position"];
+  var_dd58c5bb = traceresult[#"position"];
   ac130_shared::function_672f2acd(var_14db8d05, var_dd58c5bb, var_a6a9d503);
 }
 

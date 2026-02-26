@@ -72,7 +72,7 @@ main() {
   zm_round_spawning::function_306ce518(#"werewolf", &function_124d3657);
   zm_utility::function_2959a3cb(#"nosferatu", &function_c22d1f6a);
   zm_utility::function_2959a3cb(#"werewolf", &function_9ab66ae8);
-  level.zombie_hints[# "default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
   level thread defend_areas();
   var_4ce6fa3d = getent("connect_forest_entrance_to_forest", "script_flag");
   var_4ce6fa3d.script_noteworthy = "";
@@ -369,6 +369,6 @@ function_fe69176c() {
   array::delete_all(var_7f952cba);
   zm_crafting::function_ca244624(#"zblueprint_mansion_silver_bullet");
   zm_crafting::function_ca244624(#"zblueprint_mansion_silver_molten");
-  level.var_4fe2f84d[# "zblueprint_mansion_silver_molten"][0].var_95f72816 = 1;
-  level.var_4fe2f84d[# "zblueprint_mansion_silver_bullet"][0].var_95f72816 = 1;
+  level.var_4fe2f84d[#"zblueprint_mansion_silver_molten"][0].var_95f72816 = 1;
+  level.var_4fe2f84d[#"zblueprint_mansion_silver_bullet"][0].var_95f72816 = 1;
 }

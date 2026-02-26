@@ -18,9 +18,9 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("allplayers", "being_robot_revived", 1, 1, "int", &play_revival_fx, 0, 0);
   ai::add_archetype_spawn_function(#"zod_companion", &zodcompanionspawnsetup);
-  level._effect[# "fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
-  level._effect[# "fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
-  level._effect[# "companion_revive_effect"] = "zombie/fx_robot_helper_revive_player_zod_zmb";
+  level._effect[#"fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
+  level._effect[#"fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
+  level._effect[#"companion_revive_effect"] = "zombie/fx_robot_helper_revive_player_zod_zmb";
   ai::add_archetype_spawn_function(#"robot", &zodcompanionspawnsetup);
 }
 
@@ -45,7 +45,7 @@ zodcompanionheadgibfx(localclientnum, entity, gibflag) {
     entity.mindcontrolheadfx = undefined;
   }
 
-  entity.headgibfx = util::playFXOnTag(localclientnum, level._effect[# "fx_dest_robot_head_sparks"], entity, "j_neck");
+  entity.headgibfx = util::playFXOnTag(localclientnum, level._effect[#"fx_dest_robot_head_sparks"], entity, "j_neck");
   playSound(0, #"prj_bullet_impact_robot_headshot", entity.origin);
 }
 
@@ -54,7 +54,7 @@ zodcompaniondamagedfx(localclientnum, entity) {
     return;
   }
 
-  entity.damagedfx = util::playFXOnTag(localclientnum, level._effect[# "fx_dest_robot_body_sparks"], entity, "j_spine4");
+  entity.damagedfx = util::playFXOnTag(localclientnum, level._effect[#"fx_dest_robot_body_sparks"], entity, "j_spine4");
 }
 
 zodcompanionclearfx(localclientnum, entity) {
@@ -89,6 +89,6 @@ play_revival_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
   if(newval === 1) {
     self playSound(0, #"evt_civil_protector_revive_plr");
-    self.robot_revival_fx = util::playFXOnTag(localclientnum, level._effect[# "companion_revive_effect"], self, "j_spineupper");
+    self.robot_revival_fx = util::playFXOnTag(localclientnum, level._effect[#"companion_revive_effect"], self, "j_spineupper");
   }
 }

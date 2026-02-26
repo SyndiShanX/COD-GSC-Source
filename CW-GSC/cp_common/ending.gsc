@@ -38,7 +38,7 @@ function private function_db698ba5(dvar) {
 }
 
 function function_103cd64c() {
-  if(level.var_3cf0e895[# "hash_244a98ad9954177e"] >= 1) {
+  if(level.var_3cf0e895[#"hash_244a98ad9954177e"] >= 1) {
     return;
   }
 
@@ -51,7 +51,7 @@ function function_103cd64c() {
 
   level.var_ae3bb477 = 1;
 
-  if(level.var_3cf0e895[# "hash_cb74cb1ec96ff41"] >= 1) {
+  if(level.var_3cf0e895[#"hash_cb74cb1ec96ff41"] >= 1) {
     level.var_ae3bb477 = 1;
   }
 
@@ -80,7 +80,7 @@ function function_103cd64c() {
 }
 
 function function_b029aa08() {
-  if(level.var_3cf0e895[# "hash_9f87e8c9152584a"] >= 1 || level.var_3cf0e895[# "hash_1ec1b7c6632fb450"] >= 1 || level.var_3cf0e895[# "hash_378064960a84d05b"] >= 1 || level.var_3cf0e895[# "hash_5fb1dc41b5d1876e"] >= 1) {
+  if(level.var_3cf0e895[#"hash_9f87e8c9152584a"] >= 1 || level.var_3cf0e895[#"hash_1ec1b7c6632fb450"] >= 1 || level.var_3cf0e895[#"hash_378064960a84d05b"] >= 1 || level.var_3cf0e895[#"hash_5fb1dc41b5d1876e"] >= 1) {
     return;
   }
 
@@ -162,7 +162,7 @@ function function_1a7218fb() {
 }
 
 function function_a3694b1c() {
-  if(level.var_3cf0e895[# "hash_1ec1b7c6632fb450"] >= 1 || level.var_3cf0e895[# "hash_378064960a84d05b"] >= 1 || level.var_3cf0e895[# "hash_5fb1dc41b5d1876e"] >= 1) {
+  if(level.var_3cf0e895[#"hash_1ec1b7c6632fb450"] >= 1 || level.var_3cf0e895[#"hash_378064960a84d05b"] >= 1 || level.var_3cf0e895[#"hash_5fb1dc41b5d1876e"] >= 1) {
     return;
   }
 
@@ -249,7 +249,7 @@ function function_f23deb5() {
 }
 
 function function_eeb15395() {
-  if(level.var_3cf0e895[# "hash_378064960a84d05b"] >= 1 || level.var_3cf0e895[# "hash_5fb1dc41b5d1876e"] >= 1) {
+  if(level.var_3cf0e895[#"hash_378064960a84d05b"] >= 1 || level.var_3cf0e895[#"hash_5fb1dc41b5d1876e"] >= 1) {
     return;
   }
 
@@ -382,7 +382,7 @@ function function_f057699(var_1584d516) {
 }
 
 function function_52e90476() {
-  if(level.var_3cf0e895[# "hash_5fb1dc41b5d1876e"] >= 1) {
+  if(level.var_3cf0e895[#"hash_5fb1dc41b5d1876e"] >= 1) {
     return;
   }
 

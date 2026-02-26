@@ -103,14 +103,14 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
 
   attacker = self;
 
-  if(!isPlayer(attacker) || !isPlayer(idamage) || attacker.pers[# "team"] === idamage.pers[# "team"]) {
+  if(!isPlayer(attacker) || !isPlayer(idamage) || attacker.pers[#"team"] === idamage.pers[#"team"]) {
     return;
   }
 
   if(attacker === level.var_1d402358 || idamage === level.var_1d402358) {
     attacker challenges::function_2f462ffd(idamage, weapon, victim, level.var_bb695b91);
-    attacker.pers[# "objectiveekia"]++;
-    attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+    attacker.pers[#"objectiveekia"]++;
+    attacker.objectiveekia = attacker.pers[#"objectiveekia"];
   }
 }
 
@@ -121,7 +121,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
   victim = self;
 
-  if(!isPlayer(shitloc) || !isPlayer(victim) || shitloc.pers[# "team"] === victim.pers[# "team"]) {
+  if(!isPlayer(shitloc) || !isPlayer(victim) || shitloc.pers[#"team"] === victim.pers[#"team"]) {
     return;
   }
 
@@ -205,13 +205,13 @@ function forcespawnplayer() {
     return;
   }
 
-  if(isalive(self) || self.pers[# "team"] === # "spectator") {
+  if(isalive(self) || self.pers[#"team"] === # "spectator") {
     return;
   }
 
-  if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
-    self.pers[# "class"] = "CLASS_CUSTOM1";
-    self.curclass = self.pers[# "class"];
+  if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
+    self.pers[#"class"] = "CLASS_CUSTOM1";
+    self.curclass = self.pers[#"class"];
   }
 
   if(!self function_8b1a219a()) {
@@ -461,9 +461,9 @@ function function_a7574777() {
     player = self.carrier;
 
     if(isDefined(player)) {
-      if(isDefined(player.pers[# "objtime"])) {
-        player.pers[# "objtime"]++;
-        player.objtime = player.pers[# "objtime"];
+      if(isDefined(player.pers[#"objtime"])) {
+        player.pers[#"objtime"]++;
+        player.objtime = player.pers[#"objtime"];
       }
 
       player stats::function_bb7eedf0(#"objective_time", 1);

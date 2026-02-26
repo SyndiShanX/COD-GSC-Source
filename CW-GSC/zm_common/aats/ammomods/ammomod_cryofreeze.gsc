@@ -116,9 +116,9 @@ function private function_3be79107(e_attacker) {
   n_current_time = float(gettime()) / 1000;
 
   if(isPlayer(e_attacker)) {
-    if(!isDefined(e_attacker.aat_cooldown_start[# "hash_6c45efdfc5561fe0"])) {
+    if(!isDefined(e_attacker.aat_cooldown_start[#"hash_6c45efdfc5561fe0"])) {
       return true;
-    } else if(isDefined(e_attacker.aat_cooldown_start[# "hash_6c45efdfc5561fe0"]) && n_current_time >= e_attacker.aat_cooldown_start[# "hash_6c45efdfc5561fe0"] + 30) {
+    } else if(isDefined(e_attacker.aat_cooldown_start[#"hash_6c45efdfc5561fe0"]) && n_current_time >= e_attacker.aat_cooldown_start[#"hash_6c45efdfc5561fe0"] + 30) {
       return true;
     }
   }
@@ -251,7 +251,7 @@ function function_9366890d(var_4589e270, var_23255fc5, attacker, mod, weapon) {
   var_4589e270 clientfield::increment("zm_ammomod_cryofreeze_explosion_clientfield");
 
   if(isPlayer(attacker)) {
-    attacker.aat_cooldown_start[# "hash_6c45efdfc5561fe0"] = float(gettime()) / 1000;
+    attacker.aat_cooldown_start[#"hash_6c45efdfc5561fe0"] = float(gettime()) / 1000;
   }
 
   a_potential_targets = getentitiesinradius(var_23255fc5, 144, 15);

@@ -27,7 +27,7 @@ function function_a8fdd433() {
 
 function function_7d2154f5() {
   if(is_true(level.enable_magic)) {
-    level._effect[# "sleight_light"] = "zombie/fx_perk_speedcola_ndu";
+    level._effect[#"sleight_light"] = "zombie/fx_perk_speedcola_ndu";
   }
 }
 

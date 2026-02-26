@@ -75,11 +75,11 @@ function init_shared() {
 function function_a385666(slot) {
   assert(slot != 3);
 
-  if(!isDefined(self.pers[# "hash_55c15f9af76e4e68"][slot])) {
+  if(!isDefined(self.pers[#"hash_55c15f9af76e4e68"][slot])) {
     return false;
   }
 
-  used_time = self.pers[# "hash_55c15f9af76e4e68"][slot];
+  used_time = self.pers[#"hash_55c15f9af76e4e68"][slot];
 
   if(used_time == 0) {
     return false;
@@ -366,13 +366,13 @@ function function_3be2d17f(watcher, player) {
   player onplaceturret(self);
   killstreakslot = self.vehicle.killstreakslot;
   self.killstreakslot = killstreakslot;
-  usedtime = player.pers[# "hash_55c15f9af76e4e68"][killstreakslot];
+  usedtime = player.pers[#"hash_55c15f9af76e4e68"][killstreakslot];
 
   if(!isDefined(usedtime) || usedtime <= 0) {
     player stats::function_e24eec31(getweapon("ultimate_turret"), #"used", 1);
   }
 
-  player.pers[# "hash_55c15f9af76e4e68"][killstreakslot] = 0;
+  player.pers[#"hash_55c15f9af76e4e68"][killstreakslot] = 0;
   player stats::function_e24eec31(self.weapon, #"used", 1);
   player notify(#"ultimate_turret_deployed", {
     #turret: self
@@ -515,11 +515,11 @@ function onplaceturret(turret) {
       turret.vehicle.killstreakslot = 3;
     }
 
-    var_42f0dc61 = player.pers[# "hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot];
+    var_42f0dc61 = player.pers[#"hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot];
 
     if(isDefined(var_42f0dc61) && var_42f0dc61 > 0) {
       turret.vehicle dodamage(var_42f0dc61, self.origin);
-      player.pers[# "hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot] = 0;
+      player.pers[#"hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot] = 0;
     }
 
     turret.vehicle thread turret_watch_owner_events();
@@ -535,9 +535,9 @@ function onplaceturret(turret) {
     turret.vehicle util::make_sentient();
     turret.vehicle function_bc7568f1();
     turret.vehicle.var_aac73d6c = 1;
-    player killstreak_dialog::play_killstreak_start_dialog("ultimate_turret", player.pers[# "team"], turret.killstreakid);
+    player killstreak_dialog::play_killstreak_start_dialog("ultimate_turret", player.pers[#"team"], turret.killstreakid);
     level thread popups::displaykillstreakteammessagetoall("ultimate_turret", player);
-    usedtime = isDefined(player.pers[# "hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot]) ? player.pers[# "hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot] : 0;
+    usedtime = isDefined(player.pers[#"hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot]) ? player.pers[#"hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot] : 0;
 
     if(usedtime <= 0) {
       player stats::function_e24eec31(getweapon("ultimate_turret"), #"used", 1);
@@ -657,8 +657,8 @@ function function_ff9ee951(player) {
     }
   }
 
-  player.pers[# "hash_55c15f9af76e4e68"][slot] = elapsedtime;
-  player.pers[# "hash_38fcd8992f6cb9dc"][slot] = vehicle.damagetaken;
+  player.pers[#"hash_55c15f9af76e4e68"][slot] = elapsedtime;
+  player.pers[#"hash_38fcd8992f6cb9dc"][slot] = vehicle.damagetaken;
   vehicle playSound(#"hash_9587de6d97f0f90");
   vehicle stoploopsound(0.5);
   vehicle function_3a9dddac();
@@ -906,7 +906,7 @@ function createturretinfluencer(name) {
     return;
   }
 
-  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[# "radius"] * 0.7);
+  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[#"radius"] * 0.7);
   return influencers::create_enemy_influencer(name, turret.origin, turret.team);
 }
 
@@ -1370,7 +1370,7 @@ function turretshutdown(killstreakid, team, killstreaktype) {
     slot = self.killstreakslot;
     self.owner function_d5d8e662(slot, 0);
     self.owner killstreaks::function_b3185041(slot, 0);
-    var_2fd00bf4 = isDefined(self.owner.pers[# "hash_55c15f9af76e4e68"][slot]) ? self.owner.pers[# "hash_55c15f9af76e4e68"][slot] : 0;
+    var_2fd00bf4 = isDefined(self.owner.pers[#"hash_55c15f9af76e4e68"][slot]) ? self.owner.pers[#"hash_55c15f9af76e4e68"][slot] : 0;
 
     if(var_2fd00bf4 > 0) {
       self.owner.var_9e10e827 = 1;
@@ -1493,8 +1493,8 @@ function function_31477582() {
 
     trace = physicstrace(self.origin + (0, 0, 15), self.origin + (0, 0, -10), (-3, -3, -1), (3, 3, 1), self.turret, 1 | 16);
 
-    if(trace[# "fraction"] > 0) {
-      new_origin = trace[# "position"];
+    if(trace[#"fraction"] > 0) {
+      new_origin = trace[#"position"];
       self.origin = (new_origin[0], new_origin[1], self.origin[2] - min(max_delta, self.origin[2] - new_origin[2]));
       max_delta += var_463c449d;
       waitframe(1);

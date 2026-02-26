@@ -208,9 +208,9 @@ function function_b686c867(e_attacker) {
   n_current_time = float(gettime()) / 1000;
 
   if(isPlayer(e_attacker)) {
-    if(!isDefined(e_attacker.aat_cooldown_start[# "zm_ammomod_deadwire_explosion"])) {
+    if(!isDefined(e_attacker.aat_cooldown_start[#"zm_ammomod_deadwire_explosion"])) {
       return true;
-    } else if(isDefined(e_attacker.aat_cooldown_start[# "zm_ammomod_deadwire_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[# "zm_ammomod_deadwire_explosion"] + 30) {
+    } else if(isDefined(e_attacker.aat_cooldown_start[#"zm_ammomod_deadwire_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[#"zm_ammomod_deadwire_explosion"] + 30) {
       return true;
     }
   }
@@ -269,11 +269,11 @@ function function_de99f2ad(player, var_fb0999c0, s_params, tier, var_ebf63dce = 
     return;
   }
 
-  if(is_true(level.aat[# "ammomod_deadwire"].immune_result_indirect[self.archetype])) {
+  if(is_true(level.aat[#"ammomod_deadwire"].immune_result_indirect[self.archetype])) {
     return;
   }
 
-  if(self == var_fb0999c0 && is_true(level.aat[# "ammomod_deadwire"].immune_result_direct[self.archetype])) {
+  if(self == var_fb0999c0 && is_true(level.aat[#"ammomod_deadwire"].immune_result_direct[self.archetype])) {
     return;
   }
 

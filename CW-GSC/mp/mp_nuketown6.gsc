@@ -213,7 +213,7 @@ function function_dc41f225(player) {
 }
 
 function function_bea256c(a_ents) {
-  level.var_578f8cf3 = a_ents[# "zombie_bite"];
+  level.var_578f8cf3 = a_ents[#"zombie_bite"];
 }
 
 function function_93a73f43() {

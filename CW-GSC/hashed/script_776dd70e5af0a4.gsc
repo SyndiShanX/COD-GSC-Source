@@ -263,7 +263,7 @@ function function_8669752c() {
   self endon(#"death");
   self thread function_cc1f8e0c();
   self namespace_979752dc::function_2324f175(0);
-  self.stealth.funcs[# "event_combat"] = &function_2113900e;
+  self.stealth.funcs[#"event_combat"] = &function_2113900e;
   self val::set(#"video_store", "ignoreall", 1);
   level flag::wait_till("flg_video_store_alert");
   self val::reset(#"video_store", "ignoreall");
@@ -274,7 +274,7 @@ function function_8669752c() {
 
 function function_2113900e(event) {
   level flag::set("flg_video_store_alert");
-  self.stealth.funcs[# "event_combat"] = undefined;
+  self.stealth.funcs[#"event_combat"] = undefined;
   return false;
 }
 
@@ -1328,7 +1328,7 @@ function function_8a32e8b0() {
 
     if(n_counter > 2 && level flag::get("flg_main_street_bubby_gave_prize") == 0) {
       s_bubby = struct::get("s_bubby_prize", "targetname");
-      playFX(level._effect[# "hash_3dc2bb118ce21336"], s_bubby.origin, anglesToForward(s_bubby.angles));
+      playFX(level._effect[#"hash_3dc2bb118ce21336"], s_bubby.origin, anglesToForward(s_bubby.angles));
       level.player playrumbleonentity("anim_med");
       snd::play("exp_facade_debris_mannequin", s_bubby.origin);
       var_b0a915d9 = spawnweapon(getweapon(#"special_grenadelauncher_t9"), s_bubby.origin, s_bubby.angles, 0);

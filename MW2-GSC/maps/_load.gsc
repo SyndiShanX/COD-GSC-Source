@@ -331,200 +331,200 @@ main() {
   thread setup_simple_primary_lights();
 
   // -------------------------------------------------------------------------------- // ---- PAST THIS POINT THE SCRIPTS DONT RUN WHEN GENERATING REFLECTION PROBES ---- // -------------------------------------------------------------------------------- if(getDvar("r_reflectionProbeGenerate") == "1") {
-    level.stop_load = true;
-    maps\_global_fx::main();
-    level waittill("eternity");
-  }
-
-  if(string_starts_with(level.script, "so_") && !is_specialop())
-    AssertMsg("Attempted to run a Special Op, but not in Special Ops mode. Probably need to add +set specialops 1 to Launcher Custom Command Line Options.");
-
-  maps\_names::setup_names();
-
-  thread handle_starts();
-  thread handle_getviewpos();
-  thread handle_getviewangle();
-
-  thread maps\_debug::mainDebug();
-
-  if(!isDefined(level.trigger_flags)) {
-    // may have been defined by AI spawning
-    init_trigger_flags();
-  }
-
-  level.killspawn_groups = [];
-  init_script_triggers();
-
-  SetSavedDvar("ufoHitsTriggers", "0");
-
-  //don't go past here on no_game start
-  if(level.start_point == "no_game") {
-    // we want ufo/noclip to hit triggers in no_game
-    SetSavedDvar("ufoHitsTriggers", "1");
-
-    level.stop_load = true;
-    // SRS 11/25/08: LDs can run a custom setup function for their levels to get back some
-    //selected script calls (loadout, vision, etc).be careful, this function is not threaded!
-    if(isDefined(level.custom_no_game_setupFunc)) {
-      level[[level.custom_no_game_setupFunc]]();
-    }
-    maps\_loadout::init_loadout();
-    maps\_ambient::init();
-    level waittill("eternity");
-  }
-
-  thread maps\_vehicle::init_vehicles();
-
-  if(getDvar("g_connectpaths") == "2") {
-    PrintLn("g_connectpaths == 2; halting script execution");
-    level waittill("eternity");
-  }
-
-  PrintLn("level.script: ", level.script);
-
-  maps\_autosave::main();
-  if(!isDefined(level.animSounds))
-    thread maps\_debug::init_animSounds();
-  maps\_anim::init();
-  maps\_ambient::init();
-
-  // lagacy... necessary?
-  anim.useFacialAnims = false;
-
-  if(!isDefined(level.MissionFailed))
-    level.MissionFailed = false;
-
-  maps\_loadout::init_loadout();
-
-  common_scripts\_destructible::init();
-  thread common_scripts\_elevator::init();
-  thread common_scripts\_pipes::main();
-
-  SetObjectiveTextColors();
-
-  // global effects for objects
+  level.stop_load = true;
   maps\_global_fx::main();
-  common_scripts\_dynamic_world::init();
+  level waittill("eternity");
+}
 
-  //thread devhelp();// disabled due to localization errors
+if(string_starts_with(level.script, "so_") && !is_specialop())
+  AssertMsg("Attempted to run a Special Op, but not in Special Ops mode. Probably need to add +set specialops 1 to Launcher Custom Command Line Options.");
 
-  SetSavedDvar("ui_campaign", level.campaign); // level.campaign is set in maps\_loadout::init_loadout
+maps\_names::setup_names();
 
-  thread maps\_introscreen::main();
-  thread maps\_quotes::main();
-  //	thread maps\_minefields::main();
-  thread maps\_shutter::main();
-  // 	thread maps\_breach::main();
-  //	thread maps\_inventory::main();
-  // 	thread maps\_photosource::main();
-  thread maps\_endmission::main();
-  thread maps\_damagefeedback::init();
-  thread maps\_escalator::init();
-  maps\_friendlyfire::main();
+thread handle_starts();
+thread handle_getviewpos();
+thread handle_getviewangle();
 
-  // For _anim to track what animations have been used. Uncomment this locally if you need it.
-  // 	thread usedAnimations();
+thread maps\_debug::mainDebug();
 
-  array_levelthread(getEntArray("badplace", "targetname"), ::badplace_think);
-  array_levelthread(getEntArray("delete_on_load", "targetname"), ::deleteEnt);
-  array_thread(GetNodeArray("traverse", "targetname"), ::traverseThink);
-  array_thread(GetNodeArray("deprecated_traverse", "targetname"), ::deprecatedTraverseThink);
-  array_thread(getEntArray("piano_key", "targetname"), ::pianoThink);
-  array_thread(getEntArray("piano_damage", "targetname"), ::pianoDamageThink);
-  array_thread(getEntArray("water", "targetname"), ::waterThink);
-  array_thread(getEntArray("kill_all_players", "targetname"), ::kill_all_players_trigger);
+if(!isDefined(level.trigger_flags)) {
+  // may have been defined by AI spawning
+  init_trigger_flags();
+}
 
-  flag_init("allow_ammo_pickups");
-  flag_set("allow_ammo_pickups");
+level.killspawn_groups = [];
+init_script_triggers();
 
-  array_thread(getEntArray("ammo_pickup_grenade_launcher", "targetname"), ::ammo_pickup, "grenade_launcher");
-  array_thread(getEntArray("ammo_pickup_rpg", "targetname"), ::ammo_pickup, "rpg");
-  array_thread(getEntArray("ammo_pickup_c4", "targetname"), ::ammo_pickup, "c4");
-  array_thread(getEntArray("ammo_pickup_claymore", "targetname"), ::ammo_pickup, "claymore");
-  array_thread(getEntArray("ammo_pickup_556", "targetname"), ::ammo_pickup, "556");
-  array_thread(getEntArray("ammo_pickup_762", "targetname"), ::ammo_pickup, "762");
-  array_thread(getEntArray("ammo_pickup_45", "targetname"), ::ammo_pickup, "45");
-  array_thread(getEntArray("ammo_pickup_pistol", "targetname"), ::ammo_pickup, "pistol");
+SetSavedDvar("ufoHitsTriggers", "0");
 
-  thread maps\_interactive_objects::main();
-  thread maps\_intelligence::main();
+//don't go past here on no_game start
+if(level.start_point == "no_game") {
+  // we want ufo/noclip to hit triggers in no_game
+  SetSavedDvar("ufoHitsTriggers", "1");
 
-  thread maps\_gameskill::playerHealthRegenInit();
-
-  for(i = 0; i < level.players.size; i++) {
-    player = level.players[i];
-    player thread maps\_gameskill::playerHealthRegen();
-    player thread playerDamageRumble();
+  level.stop_load = true;
+  // SRS 11/25/08: LDs can run a custom setup function for their levels to get back some
+  //selected script calls (loadout, vision, etc).be careful, this function is not threaded!
+  if(isDefined(level.custom_no_game_setupFunc)) {
+    level[[level.custom_no_game_setupFunc]]();
   }
+  maps\_loadout::init_loadout();
+  maps\_ambient::init();
+  level waittill("eternity");
+}
 
-  thread player_special_death_hint();
+thread maps\_vehicle::init_vehicles();
 
-  // this has to come before _spawner moves the turrets around
-  thread massNodeInitFunctions();
+if(getDvar("g_connectpaths") == "2") {
+  PrintLn("g_connectpaths == 2; halting script execution");
+  level waittill("eternity");
+}
 
-  // Various newvillers globalized scripts
-  flag_init("spawning_friendlies");
-  flag_init("friendly_wave_spawn_enabled");
-  flag_clear("spawning_friendlies");
+PrintLn("level.script: ", level.script);
 
-  level.friendly_spawner["rifleguy"] = getEntArray("rifle_spawner", "script_noteworthy");
-  level.friendly_spawner["smgguy"] = getEntArray("smg_spawner", "script_noteworthy");
-  level.spawn_funcs = [];
-  level.spawn_funcs["allies"] = [];
-  level.spawn_funcs["axis"] = [];
-  level.spawn_funcs["team3"] = [];
-  level.spawn_funcs["neutral"] = [];
-  thread maps\_spawner::goalVolumes();
-  thread maps\_spawner::friendlyChains();
-  thread maps\_spawner::friendlychain_onDeath();
+maps\_autosave::main();
+if(!isDefined(level.animSounds))
+  thread maps\_debug::init_animSounds();
+maps\_anim::init();
+maps\_ambient::init();
 
-  // 	array_thread( getEntArray( "ally_spawn", "targetname" ), maps\_spawner::squadThink );
-  array_thread(getEntArray("friendly_spawn", "targetname"), maps\_spawner::friendlySpawnWave);
-  array_thread(getEntArray("flood_and_secure", "targetname"), maps\_spawner::flood_and_secure);
+// lagacy... necessary?
+anim.useFacialAnims = false;
 
-  // Do various things on triggers
-  array_thread(getEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
+if(!isDefined(level.MissionFailed))
+  level.MissionFailed = false;
 
-  array_thread(getEntArray("window_poster", "targetname"), ::window_destroy);
+maps\_loadout::init_loadout();
 
-  if(!isDefined(level.trigger_hint_string)) {
-    level.trigger_hint_string = [];
-    level.trigger_hint_func = [];
-  }
+common_scripts\_destructible::init();
+thread common_scripts\_elevator::init();
+thread common_scripts\_pipes::main();
 
-  level.shared_portable_turrets = [];
-  level.spawn_groups = [];
-  maps\_spawner::main();
+SetObjectiveTextColors();
 
-  // for cobrapilot extended visible distance and potentially others, stretch that horizon! - nate
-  // origin of prefab is copied manually by LD to brushmodel contained in the prefab, no real way to automate this AFAIK
-  array_thread(getEntArray("background_block", "targetname"), ::background_block);
+// global effects for objects
+maps\_global_fx::main();
+common_scripts\_dynamic_world::init();
 
-  maps\_hud::init();
-  // maps\_hud_weapons::init();
+//thread devhelp();// disabled due to localization errors
 
-  thread load_friendlies();
+SetSavedDvar("ui_campaign", level.campaign); // level.campaign is set in maps\_loadout::init_loadout
 
-  // 	level.player thread stun_test();
+thread maps\_introscreen::main();
+thread maps\_quotes::main();
+//	thread maps\_minefields::main();
+thread maps\_shutter::main();
+// 	thread maps\_breach::main();
+//	thread maps\_inventory::main();
+// 	thread maps\_photosource::main();
+thread maps\_endmission::main();
+thread maps\_damagefeedback::init();
+thread maps\_escalator::init();
+maps\_friendlyfire::main();
 
-  thread maps\_animatedmodels::main();
-  thread maps\_cagedchickens::initChickens();
-  if(is_coop())
-    thread maps\_loadout::coop_gamesetup_menu();
-  thread weapon_ammo();
-  thread filmy();
+// For _anim to track what animations have been used. Uncomment this locally if you need it.
+// 	thread usedAnimations();
 
-  if(is_specialop())
-    maps\_specialops::specialops_init();
+array_levelthread(getEntArray("badplace", "targetname"), ::badplace_think);
+array_levelthread(getEntArray("delete_on_load", "targetname"), ::deleteEnt);
+array_thread(GetNodeArray("traverse", "targetname"), ::traverseThink);
+array_thread(GetNodeArray("deprecated_traverse", "targetname"), ::deprecatedTraverseThink);
+array_thread(getEntArray("piano_key", "targetname"), ::pianoThink);
+array_thread(getEntArray("piano_damage", "targetname"), ::pianoDamageThink);
+array_thread(getEntArray("water", "targetname"), ::waterThink);
+array_thread(getEntArray("kill_all_players", "targetname"), ::kill_all_players_trigger);
 
-  // set has-played-SP when player plays the frist level in the game for the first time.
-  assert(isDefined(level.missionsettings) && isDefined(level.missionsettings.levels));
-  assert(isDefined(level.script));
+flag_init("allow_ammo_pickups");
+flag_set("allow_ammo_pickups");
 
-  if(level.script == level.missionsettings.levels[0].name && !(level.player getLocalPlayerProfileData("hasEverPlayed_SP"))) {
-    level.player SetLocalPlayerProfileData("hasEverPlayed_SP", true);
-    UpdateGamerProfile();
-  }
+array_thread(getEntArray("ammo_pickup_grenade_launcher", "targetname"), ::ammo_pickup, "grenade_launcher");
+array_thread(getEntArray("ammo_pickup_rpg", "targetname"), ::ammo_pickup, "rpg");
+array_thread(getEntArray("ammo_pickup_c4", "targetname"), ::ammo_pickup, "c4");
+array_thread(getEntArray("ammo_pickup_claymore", "targetname"), ::ammo_pickup, "claymore");
+array_thread(getEntArray("ammo_pickup_556", "targetname"), ::ammo_pickup, "556");
+array_thread(getEntArray("ammo_pickup_762", "targetname"), ::ammo_pickup, "762");
+array_thread(getEntArray("ammo_pickup_45", "targetname"), ::ammo_pickup, "45");
+array_thread(getEntArray("ammo_pickup_pistol", "targetname"), ::ammo_pickup, "pistol");
+
+thread maps\_interactive_objects::main();
+thread maps\_intelligence::main();
+
+thread maps\_gameskill::playerHealthRegenInit();
+
+for(i = 0; i < level.players.size; i++) {
+  player = level.players[i];
+  player thread maps\_gameskill::playerHealthRegen();
+  player thread playerDamageRumble();
+}
+
+thread player_special_death_hint();
+
+// this has to come before _spawner moves the turrets around
+thread massNodeInitFunctions();
+
+// Various newvillers globalized scripts
+flag_init("spawning_friendlies");
+flag_init("friendly_wave_spawn_enabled");
+flag_clear("spawning_friendlies");
+
+level.friendly_spawner["rifleguy"] = getEntArray("rifle_spawner", "script_noteworthy");
+level.friendly_spawner["smgguy"] = getEntArray("smg_spawner", "script_noteworthy");
+level.spawn_funcs = [];
+level.spawn_funcs["allies"] = [];
+level.spawn_funcs["axis"] = [];
+level.spawn_funcs["team3"] = [];
+level.spawn_funcs["neutral"] = [];
+thread maps\_spawner::goalVolumes();
+thread maps\_spawner::friendlyChains();
+thread maps\_spawner::friendlychain_onDeath();
+
+// 	array_thread( getEntArray( "ally_spawn", "targetname" ), maps\_spawner::squadThink );
+array_thread(getEntArray("friendly_spawn", "targetname"), maps\_spawner::friendlySpawnWave);
+array_thread(getEntArray("flood_and_secure", "targetname"), maps\_spawner::flood_and_secure);
+
+// Do various things on triggers
+array_thread(getEntArray("ambient_volume", "targetname"), maps\_ambient::ambientVolume);
+
+array_thread(getEntArray("window_poster", "targetname"), ::window_destroy);
+
+if(!isDefined(level.trigger_hint_string)) {
+  level.trigger_hint_string = [];
+  level.trigger_hint_func = [];
+}
+
+level.shared_portable_turrets = [];
+level.spawn_groups = [];
+maps\_spawner::main();
+
+// for cobrapilot extended visible distance and potentially others, stretch that horizon! - nate
+// origin of prefab is copied manually by LD to brushmodel contained in the prefab, no real way to automate this AFAIK
+array_thread(getEntArray("background_block", "targetname"), ::background_block);
+
+maps\_hud::init();
+// maps\_hud_weapons::init();
+
+thread load_friendlies();
+
+// 	level.player thread stun_test();
+
+thread maps\_animatedmodels::main();
+thread maps\_cagedchickens::initChickens();
+if(is_coop())
+  thread maps\_loadout::coop_gamesetup_menu();
+thread weapon_ammo();
+thread filmy();
+
+if(is_specialop())
+  maps\_specialops::specialops_init();
+
+// set has-played-SP when player plays the frist level in the game for the first time.
+assert(isDefined(level.missionsettings) && isDefined(level.missionsettings.levels));
+assert(isDefined(level.script));
+
+if(level.script == level.missionsettings.levels[0].name && !(level.player getLocalPlayerProfileData("hasEverPlayed_SP"))) {
+  level.player SetLocalPlayerProfileData("hasEverPlayed_SP", true);
+  UpdateGamerProfile();
+}
 }
 
 /*QUAKED trigger_multiple_spawn (1.0 0.5 0.0) ? AI_AXIS AI_ALLIES AI_NEUTRAL NOTPLAYER VEHICLE TRIGGER_SPAWN TOUCH_ONCE

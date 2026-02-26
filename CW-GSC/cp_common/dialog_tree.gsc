@@ -33,14 +33,14 @@ function private preinit() {
   clientfield::register("toplayer", "dt_set_dof", 1, 3, "int");
   clientfield::register("toplayer", "dt_set_hide_reticle_dot", 1, 1, "int");
   level.var_fb0a6829 = [];
-  level.var_fb0a6829[# "default"] = 1;
-  level.var_fb0a6829[# "hash_2e64a3fb2ff83fc4"] = 2;
-  level.var_fb0a6829[# "zoom"] = 3;
-  level.var_fb0a6829[# "more_zoom"] = 4;
-  level.var_fb0a6829[# "extreme_zoom"] = 5;
-  level.var_22817c8a[# "none"] = 1;
-  level.var_22817c8a[# "close"] = 2;
-  level.var_22817c8a[# "medium"] = 3;
+  level.var_fb0a6829[#"default"] = 1;
+  level.var_fb0a6829[#"hash_2e64a3fb2ff83fc4"] = 2;
+  level.var_fb0a6829[#"zoom"] = 3;
+  level.var_fb0a6829[#"more_zoom"] = 4;
+  level.var_fb0a6829[#"extreme_zoom"] = 5;
+  level.var_22817c8a[#"none"] = 1;
+  level.var_22817c8a[#"close"] = 2;
+  level.var_22817c8a[#"medium"] = 3;
 }
 
 function new_tree(enter_func = undefined, exit_func = undefined, allow_movement = 0, allow_weapon = 0, script_bundle, var_4d84ed71 = 1, timeout = 0, skippable = 1) {
@@ -491,7 +491,7 @@ function run(ai_actor, anim_struct, timer, activator, var_5bab29d8 = 0, var_cf6d
   if(ai_actor.var_b905c47b <= 1) {
     level flag::set("dialog_tree_active");
     level flag::set("prompts_disabled");
-    namespace_61e6d095::function_28027c42(#"dialog_tree", [# "dialog_tree", #"hint_tutorial"]);
+    namespace_61e6d095::function_28027c42(#"dialog_tree", [#"dialog_tree", #"hint_tutorial"]);
     objectives::function_9dfb43fc();
     self.var_bc62b3ce = getdvarfloat(#"hash_6b57212fd4fcdd3a");
     setDvar(#"hash_6b57212fd4fcdd3a", 0);
@@ -1238,6 +1238,6 @@ function private function_43bca3cb(position, state_index) {
   namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "kbmIndexSelected", -1);
   namespace_61e6d095::function_9ade1d9b(#"dialog_tree", "isActive", 0);
   namespace_61e6d095::function_73c9a490(#"dialog_tree", 1);
-  namespace_61e6d095::function_24e5fa63(#"dialog_tree", [# "ui_confirm", #"ui_cancel"], 1);
+  namespace_61e6d095::function_24e5fa63(#"dialog_tree", [#"ui_confirm", #"ui_cancel"], 1);
   self.activator clientfield::set_to_player("dt_set_hide_reticle_dot", 1);
 }

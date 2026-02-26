@@ -301,8 +301,8 @@ function stingerirtloop(weapon) {
     }
 
     result = self getbeststingertarget(weapon);
-    besttarget = result[# "target"];
-    bestsubtarget = result[# "subtarget"];
+    besttarget = result[#"target"];
+    bestsubtarget = result[#"subtarget"];
 
     if(!isDefined(besttarget) || isDefined(self.stingertarget) && self.stingertarget != besttarget) {
       self destroylockoncanceledmessage();
@@ -537,8 +537,8 @@ function getbeststingertarget(weapon) {
     }
   }
 
-  result[# "target"] = besttarget;
-  result[# "subtarget"] = bestsubtarget;
+  result[#"target"] = besttarget;
+  result[#"subtarget"] = bestsubtarget;
   return result;
 }
 

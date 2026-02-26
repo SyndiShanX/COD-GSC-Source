@@ -84,7 +84,7 @@ function_8e97a3a4(attacker, weapon) {
       continue;
     }
 
-    if(isDefined(level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
+    if(isDefined(level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
       continue;
     }
 
@@ -127,7 +127,7 @@ function_fef86dd4(var_c5ad44f1, n_damage, e_attacker, weapon) {
 }
 
 function_682e5375() {
-  if(isDefined(level.aat[# "zm_aat_brain_decay"].immune_result_direct[self.archetype]) && level.aat[# "zm_aat_brain_decay"].immune_result_direct[self.archetype]) {
+  if(isDefined(level.aat[#"zm_aat_brain_decay"].immune_result_direct[self.archetype]) && level.aat[#"zm_aat_brain_decay"].immune_result_direct[self.archetype]) {
     return false;
   }
 
@@ -209,7 +209,7 @@ zombie_death_explosion(var_58928a4b, e_attacker, weapon) {
       continue;
     }
 
-    if(isDefined(level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
+    if(isDefined(level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
       continue;
     }
 

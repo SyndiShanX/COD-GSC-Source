@@ -69,7 +69,7 @@ function state_hidden() {
   self.dontevershoot = 1;
   self.dontattackme = 1;
 
-  if(isDefined(self.stealth.funcs[# "hidden"])) {
+  if(isDefined(self.stealth.funcs[#"hidden"])) {
     self namespace_b2b86d39::stealth_call_thread("hidden");
   }
 }
@@ -88,7 +88,7 @@ function state_spotted() {
   self.dontattackme = 0;
   self pushplayer(0);
 
-  if(isDefined(self.stealth.funcs[# "spotted"])) {
+  if(isDefined(self.stealth.funcs[#"spotted"])) {
     self namespace_b2b86d39::stealth_call_thread("spotted");
   }
 }
@@ -128,7 +128,7 @@ function get_detect_range() {
   range = level.stealth.detect.range[detection][stance];
 
   if(self flag::get("stealth_in_shadow")) {
-    range = max(level.stealth.detect.range[# "hidden"][# "prone"], range * 0.5);
+    range = max(level.stealth.detect.range[#"hidden"][#"prone"], range * 0.5);
   }
 
   return range;

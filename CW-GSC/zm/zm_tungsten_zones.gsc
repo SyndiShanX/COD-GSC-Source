@@ -698,13 +698,13 @@ function function_49779a9c() {
 }
 
 function private function_8d8f7e79(a_ents) {
-  e_door = a_ents[# "zipline_door"];
+  e_door = a_ents[#"zipline_door"];
   e_door function_619a5c20();
   e_door.var_72910c52 = zm_utility::function_4a4cf79a(#"hash_1b7c3d825c8b5c1a", e_door.origin);
 }
 
 function private function_2a1cfabb(a_ents) {
-  e_door = a_ents[# "zipline_door"];
+  e_door = a_ents[#"zipline_door"];
   e_door function_23a29590();
 
   if(isDefined(e_door.var_72910c52)) {
@@ -713,12 +713,12 @@ function private function_2a1cfabb(a_ents) {
 }
 
 function private function_f63d1381(a_ents) {
-  e_door = a_ents[# "zipline_door"];
+  e_door = a_ents[#"zipline_door"];
   e_door function_619a5c20();
 }
 
 function private function_88c5fdab(a_ents) {
-  e_door = a_ents[# "zipline_door"];
+  e_door = a_ents[#"zipline_door"];
   e_door function_23a29590();
 }
 

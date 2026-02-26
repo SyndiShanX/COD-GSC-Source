@@ -164,8 +164,8 @@ function function_74cad77c(player) {
   shotshit = 0;
 
   if(isDefined(player._bbdata)) {
-    totalshots = isDefined(player._bbdata[# "shots"]) ? player._bbdata[# "shots"] : 0;
-    shotshit = isDefined(player._bbdata[# "hits"]) ? player._bbdata[# "hits"] : 0;
+    totalshots = isDefined(player._bbdata[#"shots"]) ? player._bbdata[#"shots"] : 0;
+    shotshit = isDefined(player._bbdata[#"hits"]) ? player._bbdata[#"hits"] : 0;
   }
 
   accuracy = 0;
@@ -188,12 +188,12 @@ function function_74cad77c(player) {
   rank = 0;
 
   if(isDefined(player.pers)) {
-    if(isDefined(player.pers[# "rank"])) {
-      rank = player.pers[# "rank"];
+    if(isDefined(player.pers[#"rank"])) {
+      rank = player.pers[#"rank"];
     }
 
-    if(isDefined(player.pers[# "rankxp"])) {
-      rankxp = player.pers[# "rankxp"];
+    if(isDefined(player.pers[#"rankxp"])) {
+      rankxp = player.pers[#"rankxp"];
     }
   }
 
@@ -228,7 +228,7 @@ function function_74cad77c(player) {
   }
 
   playerid = getplayerspawnid(player);
-  bestkillstreak = isDefined(player.pers[# "best_kill_streak"]) ? player.pers[# "best_kill_streak"] : 0;
+  bestkillstreak = isDefined(player.pers[#"best_kill_streak"]) ? player.pers[#"best_kill_streak"] : 0;
   meleekills = isDefined(player.meleekills) ? player.meleekills : 0;
   headshots = isDefined(player.headshots) ? player.headshots : 0;
   var_f71b6142 = isDefined(player.primaryloadoutweapon) ? player.primaryloadoutweapon.name : "undefined";
@@ -237,7 +237,7 @@ function function_74cad77c(player) {
   playername = isDefined(player.name) ? player.name : "undefined";
   kills = isDefined(player.kills) ? player.kills : 0;
   deaths = isDefined(player.deaths) ? player.deaths : 0;
-  incaps = isDefined(player.pers[# "incaps"]) ? player.pers[# "incaps"] : 0;
+  incaps = isDefined(player.pers[#"incaps"]) ? player.pers[#"incaps"] : 0;
   assists = isDefined(player.assists) ? player.assists : 0;
   score = isDefined(player.score) ? player.score : 0;
   var_2084f739 = function_bb412e85();

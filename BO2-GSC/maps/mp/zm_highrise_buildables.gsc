@@ -21,7 +21,7 @@ init_buildables() {
   add_zombie_buildable("sq_common", &"ZOMBIE_BUILD_SQ_COMMON", &"ZOMBIE_BUILDING_SQ_COMMON");
 }
 
-#include_buildables() {
+include_buildables() {
   springpad_door = generate_zombie_buildable_piece("springpad_zm", "p6_zm_buildable_tramplesteam_door", 32, 64, 0, "zom_hud_trample_steam_screen", ::onpickup_common, ::ondrop_common, undefined, "Tag_part_02", undefined, 1);
   springpad_flag = generate_zombie_buildable_piece("springpad_zm", "p6_zm_buildable_tramplesteam_bellows", 48, 15, 0, "zom_hud_trample_steam_bellow", ::onpickup_common, ::ondrop_common, undefined, "Tag_part_04", undefined, 2);
   springpad_motor = generate_zombie_buildable_piece("springpad_zm", "p6_zm_buildable_tramplesteam_compressor", 48, 15, 0, "zom_hud_trample_steam_compressor", ::onpickup_common, ::ondrop_common, undefined, "Tag_part_01", undefined, 3);

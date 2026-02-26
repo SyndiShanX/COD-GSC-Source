@@ -40,13 +40,13 @@ function init_shared() {
     }
 
     level.var_6964d56c.var_d67ec774 = [];
-    level.var_6964d56c.var_d67ec774[# "hash_2546ffc22904360b"] = 1;
-    level.var_6964d56c.var_d67ec774[# "jetfighter"] = 1;
-    level.var_6964d56c.var_d67ec774[# "napalm_strike"] = 1;
-    level.var_6964d56c.var_d67ec774[# "remote_missile"] = 1;
-    level.var_6964d56c.var_d67ec774[# "straferun"] = 1;
+    level.var_6964d56c.var_d67ec774[#"hash_2546ffc22904360b"] = 1;
+    level.var_6964d56c.var_d67ec774[#"jetfighter"] = 1;
+    level.var_6964d56c.var_d67ec774[#"napalm_strike"] = 1;
+    level.var_6964d56c.var_d67ec774[#"remote_missile"] = 1;
+    level.var_6964d56c.var_d67ec774[#"straferun"] = 1;
     level.var_6964d56c.var_1543185c = array("ac130", "inventory_ac130", "helicopter_guard", "inventory_helicopter_guard", "chopper_gunner", "inventory_chopper_gunner", "hoverjet", "inventory_hoverjet", "helicopter_comlink", "inventory_helicopter_comlink", "recon_plane", "inventory_recon_plane", "uav", "inventory_uav", "counteruav", "inventory_counteruav");
-    level.var_6964d56c.var_512625a1 = [# "ac130": "gunship", #"inventory_ac130": "gunship", #"chopper_gunner": "chop_gun", #"inventory_chopper_gunner": "chop_gun", #"counteruav": "cuav", #"inventory_counteruav": "cuav", #"helicopter_guard": "lgt_chop", #"inventory_helicopter_guard": "lgt_chop", #"helicopter_comlink": "lgt_chop", #"inventory_helicopter_comlink": "lgt_chop", #"hoverjet": "hover_jet", #"inventory_hoverjet": "hover_jet", #"recon_plane": "spy_plane_alt", #"inventory_recon_plane": "spy_plane_alt", #"uav": "uav", #"inventory_uav": "uav"];
+    level.var_6964d56c.var_512625a1 = [#"ac130": "gunship", #"inventory_ac130": "gunship", #"chopper_gunner": "chop_gun", #"inventory_chopper_gunner": "chop_gun", #"counteruav": "cuav", #"inventory_counteruav": "cuav", #"helicopter_guard": "lgt_chop", #"inventory_helicopter_guard": "lgt_chop", #"helicopter_comlink": "lgt_chop", #"inventory_helicopter_comlink": "lgt_chop", #"hoverjet": "hover_jet", #"inventory_hoverjet": "hover_jet", #"recon_plane": "spy_plane_alt", #"inventory_recon_plane": "spy_plane_alt", #"uav": "uav", #"inventory_uav": "uav"];
     level.var_6964d56c.var_e321cb16 = [];
 
     if(!isDefined(level.var_2d90c17e)) {
@@ -226,13 +226,13 @@ function function_3be2d17f(watcher, player) {
   self.origin += (0, 0, 2);
   player onplaceturret(self);
   killstreakslot = self.vehicle.killstreakslot;
-  usedtime = player.pers[# "hash_55c15f9af76e4e68"][killstreakslot];
+  usedtime = player.pers[#"hash_55c15f9af76e4e68"][killstreakslot];
 
   if(!isDefined(usedtime) || usedtime <= 0) {
     player stats::function_e24eec31(getweapon("missile_turret"), #"used", 1);
   }
 
-  player.pers[# "hash_55c15f9af76e4e68"][killstreakslot] = 0;
+  player.pers[#"hash_55c15f9af76e4e68"][killstreakslot] = 0;
   player stats::function_e24eec31(self.weapon, #"used", 1);
   player notify(#"hash_6a3b9d0c6cd28c99", {
     #turret: self
@@ -362,11 +362,11 @@ function onplaceturret(turret) {
       turret.vehicle.killstreakslot = 3;
     }
 
-    var_42f0dc61 = player.pers[# "hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot];
+    var_42f0dc61 = player.pers[#"hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot];
 
     if(isDefined(var_42f0dc61) && var_42f0dc61 > 0) {
       turret.vehicle dodamage(var_42f0dc61, self.origin);
-      player.pers[# "hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot] = 0;
+      player.pers[#"hash_38fcd8992f6cb9dc"][turret.vehicle.killstreakslot] = 0;
     }
 
     turret.vehicle thread turret_watch_owner_events();
@@ -380,7 +380,7 @@ function onplaceturret(turret) {
     turret.vehicle util::make_sentient();
     turret.vehicle function_bc7568f1();
     turret.vehicle.var_aac73d6c = 1;
-    usedtime = player.pers[# "hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot];
+    usedtime = player.pers[#"hash_55c15f9af76e4e68"][turret.vehicle.killstreakslot];
 
     if(!isDefined(usedtime) || usedtime <= 0) {
       player stats::function_e24eec31(weapon, #"used", 1);
@@ -436,7 +436,7 @@ function function_ff9ee951(player) {
     vehicle.killstreakslot = slot;
   }
 
-  player.pers[# "hash_38fcd8992f6cb9dc"][slot] = vehicle.damagetaken;
+  player.pers[#"hash_38fcd8992f6cb9dc"][slot] = vehicle.damagetaken;
   vehicle thread function_450ab98d(level.var_6964d56c.var_6eecd3fe.var_8095b472);
 }
 
@@ -533,7 +533,7 @@ function createturretinfluencer(name) {
     return;
   }
 
-  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[# "radius"] * 0.7);
+  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[#"radius"] * 0.7);
   return influencers::create_enemy_influencer(name, turret.origin, turret.team);
 }
 
@@ -728,7 +728,7 @@ function function_4359e9e(e_target) {
   if(isDefined(self.turret.var_ddf7efa7) && distance2dsquared(self.origin, v_target_position) <= self.turret.var_ddf7efa7) {
     a_trace = bulletTrace(self.origin, v_target_position, 0, self);
 
-    if(a_trace[# "entity"] === e_target) {
+    if(a_trace[#"entity"] === e_target) {
       return true;
     } else {
       function_600ab97b("<dev string:x1ac>" + e_target getentitynumber(), 3);
@@ -973,8 +973,8 @@ function function_71eb999() {
   if(isDefined(level.var_69f91847)) {
     level function_d464ecf7();
 
-    if(isDefined(level.var_6964d56c.var_e321cb16[# "counteruav"])) {
-      foreach(var_d5ef711 in level.var_6964d56c.var_e321cb16[# "counteruav"]) {
+    if(isDefined(level.var_6964d56c.var_e321cb16[#"counteruav"])) {
+      foreach(var_d5ef711 in level.var_6964d56c.var_e321cb16[#"counteruav"]) {
         if(util::function_fbce7263(self.team, var_d5ef711.team)) {
           if(var_d5ef711[[level.var_69f91847]](self)) {
             if(!self flag::get("is_jammed_by_cuav")) {
@@ -1083,8 +1083,8 @@ function function_31477582() {
 
     trace = physicstrace(self.origin + (0, 0, 15), self.origin + (0, 0, -10), (-3, -3, -1), (3, 3, 1), self.turret, 1 | 16);
 
-    if(trace[# "fraction"] > 0) {
-      new_origin = trace[# "position"];
+    if(trace[#"fraction"] > 0) {
+      new_origin = trace[#"position"];
       self.origin = (new_origin[0], new_origin[1], self.origin[2] - min(max_delta, self.origin[2] - new_origin[2]));
       max_delta += var_463c449d;
       waitframe(1);

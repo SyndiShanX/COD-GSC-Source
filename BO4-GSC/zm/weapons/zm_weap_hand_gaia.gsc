@@ -535,11 +535,11 @@ function_39e8ed04() {
 
   if(isDefined(level.var_1e60b889)) {
     level notify(#"ww_gaia_hit", {
-      #player: self, #e_entity: a_trace[# "entity"], #v_position: a_trace[# "position"]
+      #player: self, #e_entity: a_trace[#"entity"], #v_position: a_trace[#"position"]
     });
   }
 
-  return a_trace[# "position"];
+  return a_trace[#"position"];
 }
 
 function_dd7bc108(weapon) {
@@ -587,12 +587,12 @@ function_dd7bc108(weapon) {
     v_ground = undefined;
 
     while(!isDefined(v_ground)) {
-      v_trace = groundtrace(v_target + (0, 0, 200), v_target + (0, 0, -2000), 0, self, 1)[# "position"];
+      v_trace = groundtrace(v_target + (0, 0, 200), v_target + (0, 0, -2000), 0, self, 1)[#"position"];
       v_trace += (randomintrange(-10, 10), randomintrange(-10, 10), 0);
       v_on_navmesh = zm_utility::function_b0eeaada(v_trace);
 
       if(isDefined(v_on_navmesh)) {
-        v_ground = v_on_navmesh[# "point"];
+        v_ground = v_on_navmesh[#"point"];
       }
 
       waitframe(1);

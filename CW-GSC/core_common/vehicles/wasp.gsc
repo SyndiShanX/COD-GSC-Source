@@ -1095,12 +1095,12 @@ function getnextmoveposition_wander() {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-      point._scoredebug[# "disttoorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+      point._scoredebug[#"disttoorigin"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttoorigin"].score = disttooriginscore;
-    point._scoredebug[# "disttoorigin"].scorename = "<dev string:x8d>";
+    point._scoredebug[#"disttoorigin"].score = disttooriginscore;
+    point._scoredebug[#"disttoorigin"].scorename = "<dev string:x8d>";
 
     point.score += disttooriginscore;
 
@@ -1153,12 +1153,12 @@ function getnextmoveposition_tactical() {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "visowner"])) {
-              point._scoredebug[# "visowner"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"visowner"])) {
+              point._scoredebug[#"visowner"] = spawnStruct();
             }
 
-            point._scoredebug[# "visowner"].score = 300;
-            point._scoredebug[# "visowner"].scorename = "<dev string:x9d>";
+            point._scoredebug[#"visowner"].score = 300;
+            point._scoredebug[#"visowner"].scorename = "<dev string:x9d>";
 
             point.score += 300;
           }
@@ -1168,12 +1168,12 @@ function getnextmoveposition_tactical() {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "visenemy"])) {
-              point._scoredebug[# "visenemy"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"visenemy"])) {
+              point._scoredebug[#"visenemy"] = spawnStruct();
             }
 
-            point._scoredebug[# "visenemy"].score = 300;
-            point._scoredebug[# "visenemy"].scorename = "<dev string:xa9>";
+            point._scoredebug[#"visenemy"].score = 300;
+            point._scoredebug[#"visenemy"].scorename = "<dev string:xa9>";
 
             point.score += 300;
           }
@@ -1213,12 +1213,12 @@ function getnextmoveposition_tactical() {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = randomfloatrange(0, randomness);
-    point._scoredebug[# "random"].scorename = "<dev string:xb5>";
+    point._scoredebug[#"random"].score = randomfloatrange(0, randomness);
+    point._scoredebug[#"random"].scorename = "<dev string:xb5>";
 
     point.score += randomfloatrange(0, randomness);
 
@@ -1226,12 +1226,12 @@ function getnextmoveposition_tactical() {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "engagementdist"])) {
-      point._scoredebug[# "engagementdist"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"engagementdist"])) {
+      point._scoredebug[#"engagementdist"] = spawnStruct();
     }
 
-    point._scoredebug[# "engagementdist"].score = point.distawayfromengagementarea * -1;
-    point._scoredebug[# "engagementdist"].scorename = "<dev string:xbf>";
+    point._scoredebug[#"engagementdist"].score = point.distawayfromengagementarea * -1;
+    point._scoredebug[#"engagementdist"].scorename = "<dev string:xbf>";
 
     point.score += point.distawayfromengagementarea * -1;
 
@@ -1239,12 +1239,12 @@ function getnextmoveposition_tactical() {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "height"])) {
-      point._scoredebug[# "height"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"height"])) {
+      point._scoredebug[#"height"] = spawnStruct();
     }
 
-    point._scoredebug[# "height"].score = point.distengagementheight * -1 * 1.4;
-    point._scoredebug[# "height"].scorename = "<dev string:xd1>";
+    point._scoredebug[#"height"].score = point.distengagementheight * -1 * 1.4;
+    point._scoredebug[#"height"].scorename = "<dev string:xd1>";
 
     point.score += point.distengagementheight * -1 * 1.4;
 
@@ -1253,12 +1253,12 @@ function getnextmoveposition_tactical() {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "tooclosetoself"])) {
-        point._scoredebug[# "tooclosetoself"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"tooclosetoself"])) {
+        point._scoredebug[#"tooclosetoself"] = spawnStruct();
       }
 
-      point._scoredebug[# "tooclosetoself"].score = (120 - point.disttoorigin2d) * -1.5;
-      point._scoredebug[# "tooclosetoself"].scorename = "<dev string:xdb>";
+      point._scoredebug[#"tooclosetoself"].score = (120 - point.disttoorigin2d) * -1.5;
+      point._scoredebug[#"tooclosetoself"].scorename = "<dev string:xdb>";
 
       point.score += (120 - point.disttoorigin2d) * -1.5;
     }
@@ -1269,12 +1269,12 @@ function getnextmoveposition_tactical() {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "tooclosetoothers"])) {
-          point._scoredebug[# "tooclosetoothers"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"tooclosetoothers"])) {
+          point._scoredebug[#"tooclosetoothers"] = spawnStruct();
         }
 
-        point._scoredebug[# "tooclosetoothers"].score = avoid_radius * -1;
-        point._scoredebug[# "tooclosetoothers"].scorename = "<dev string:xed>";
+        point._scoredebug[#"tooclosetoothers"].score = avoid_radius * -1;
+        point._scoredebug[#"tooclosetoothers"].scorename = "<dev string:xed>";
 
         point.score += avoid_radius * -1;
       }
@@ -1285,12 +1285,12 @@ function getnextmoveposition_tactical() {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x101>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x101>";
 
       point.score += -500;
     }
@@ -1350,7 +1350,7 @@ function wasp_manage_camera_swaps() {
 }
 
 function wasp_towers_on_load() {
-  if(!isDefined(level.flag) || !is_true(level.flag[# "load_main_complete"])) {
+  if(!isDefined(level.flag) || !is_true(level.flag[#"load_main_complete"])) {
     level waittill(#"load_main_complete");
   }
 

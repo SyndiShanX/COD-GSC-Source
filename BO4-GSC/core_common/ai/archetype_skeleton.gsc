@@ -26,7 +26,7 @@ autoexec init() {
   registerbehaviorscriptfunctions();
   spawner::add_archetype_spawn_function(#"skeleton", &function_f31535d8);
   spawner::add_archetype_spawn_function(#"skeleton", &function_a1acece9);
-  level.var_cc1828c = [# "walk": 4];
+  level.var_cc1828c = [#"walk": 4];
 }
 
 function_f31535d8() {

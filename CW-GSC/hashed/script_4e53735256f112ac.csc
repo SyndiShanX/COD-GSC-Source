@@ -33,7 +33,7 @@ function private preinit() {
   }
 
   level.var_1b527536 = array(#"frost_blast", #"frost_blast_1", #"frost_blast_2", #"frost_blast_3", #"frost_blast_4", #"frost_blast_5", #"heal_aoe", #"heal_aoe_1", #"heal_aoe_2", #"heal_aoe_3", #"heal_aoe_4", #"heal_aoe_5", #"energy_mine", #"energy_mine_1", #"energy_mine_2", #"energy_mine_3", #"energy_mine_4", #"energy_mine_5", #"aether_shroud", #"aether_shroud_1", #"aether_shroud_2", #"aether_shroud_3", #"aether_shroud_4", #"aether_shroud_5", #"ring_of_fire", #"ring_of_fire_1", #"ring_of_fire_2", #"ring_of_fire_3", #"ring_of_fire_4", #"ring_of_fire_5", #"hash_55569355da0f0f68", #"hash_43e326396554e18c", #"hash_43e329396554e6a5", #"hash_43e328396554e4f2", #"hash_43e323396554dc73", #"hash_43e322396554dac0", #"toxic_growth", #"toxic_growth_1", #"toxic_growth_2", #"toxic_growth_3", #"toxic_growth_4", #"toxic_growth_5", #"lightning_links", #"lightning_links_1", #"lightning_links_2", #"lightning_links_3", #"lightning_links_4", #"lightning_links_5");
-  clientfield::register_clientuimodel("hud_items.ammoCooldowns.fieldUpgrade", #"hud_items", [# "hash_2f126bd99a74de8b", #"fieldupgrade"], 1, 5, "float", undefined, 0, 0);
+  clientfield::register_clientuimodel("hud_items.ammoCooldowns.fieldUpgrade", #"hud_items", [#"hash_2f126bd99a74de8b", #"fieldupgrade"], 1, 5, "float", undefined, 0, 0);
   clientfield::register("toplayer", "field_upgrade_selected", 1, 6, "int", &function_473fedfd, 0, 0);
   clientfield::register("allplayers", "field_upgrade_fired", 1, 4, "counter", &function_1079747f, 0, 0);
   clientfield::function_91cd7763("material", "zm_field_upgrade_loadout.overrideImage", #"zm_field_upgrade_loadout", #"overrideimage", 16000, undefined, 0, 0);

@@ -129,8 +129,8 @@ onuse(player) {
     }
 
     if(!tacinsertboost) {
-      player.pers[# "killsdenied"]++;
-      player.killsdenied = player.pers[# "killsdenied"];
+      player.pers[#"killsdenied"]++;
+      player.killsdenied = player.pers[#"killsdenied"];
     }
   } else {
     event = "kill_confirmed";
@@ -290,9 +290,9 @@ should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, s
 }
 
 onusedogtag(player) {
-  if(player.pers[# "team"] == self.victimteam) {
-    player.pers[# "rescues"]++;
-    player.rescues = player.pers[# "rescues"];
+  if(player.pers[#"team"] == self.victimteam) {
+    player.pers[#"rescues"]++;
+    player.rescues = player.pers[#"rescues"];
 
     if(isDefined(self.victim)) {
       if(!level.gameended) {
@@ -311,7 +311,7 @@ waittillcanspawnclient() {
     wait 0.05;
 
     if(isDefined(self) && (self.sessionstate == "spectator" || !isalive(self))) {
-      self.pers[# "lives"] = 1;
+      self.pers[#"lives"] = 1;
       self thread[[level.spawnclient]]();
       continue;
     }

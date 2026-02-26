@@ -1095,7 +1095,7 @@ function_e17f2b8a() {
           level notify(#"stop_score_nag");
         } else {
           level flag::set("scorestreak_fail");
-          level.players[0].pers[# "mortarradarused"] = 0;
+          level.players[0].pers[#"mortarradarused"] = 0;
         }
 
         ct_utils::function_9aca2fa0("ct_endgame");

@@ -23,9 +23,9 @@ function preload() {
 }
 
 function postload() {
-  level._effect[# "hash_38deef315d53cb25"] = # "hash_6e1d732b61ae9026";
-  level._effect[# "hash_10164f9d7f646dfc"] = # "hash_3428f097d0ad7f33";
-  level._effect[# "hash_66333bf9362fbf33"] = # "hash_779fdcf65019d708";
+  level._effect[#"hash_38deef315d53cb25"] = # "hash_6e1d732b61ae9026";
+  level._effect[#"hash_10164f9d7f646dfc"] = # "hash_3428f097d0ad7f33";
+  level._effect[#"hash_66333bf9362fbf33"] = # "hash_779fdcf65019d708";
 }
 
 function set_dof(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -98,17 +98,17 @@ function private ice_slide_looping_fx(localclientnum, oldval, newval, bnewent, b
   }
 
   if(bwastimejump === 1) {
-    self.var_8c5e3c54 = util::playFXOnTag(fieldname, level._effect[# "hash_38deef315d53cb25"], self, "tag_origin");
+    self.var_8c5e3c54 = util::playFXOnTag(fieldname, level._effect[#"hash_38deef315d53cb25"], self, "tag_origin");
     return;
   }
 
   if(bwastimejump === 2) {
-    self.var_8c5e3c54 = util::playFXOnTag(fieldname, level._effect[# "hash_66333bf9362fbf33"], self, "tag_origin");
+    self.var_8c5e3c54 = util::playFXOnTag(fieldname, level._effect[#"hash_66333bf9362fbf33"], self, "tag_origin");
   }
 }
 
 function private ice_slide_landing_fx_dirt(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_656a30d2 = util::playFXOnTag(fieldname, level._effect[# "hash_10164f9d7f646dfc"], self, "tag_origin");
+    self.var_656a30d2 = util::playFXOnTag(fieldname, level._effect[#"hash_10164f9d7f646dfc"], self, "tag_origin");
   }
 }

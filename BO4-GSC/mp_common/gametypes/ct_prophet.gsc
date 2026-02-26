@@ -59,9 +59,9 @@ function_7c4ef26b(predictedspawn) {
   }
 
   setDvar(#"custom_killstreak_mode", 2);
-  setDvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
-  setDvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
-  setDvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
+  setDvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
+  setDvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
+  setDvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
@@ -122,18 +122,18 @@ function_ba542258(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[# "mp_frenetic"][1] = 240000;
-  var_e7cc5e43[# "mp_frenetic"][2] = 180000;
-  var_e7cc5e43[# "mp_frenetic"][3] = 120000;
-  var_e7cc5e43[# "mp_offshore"][1] = 240000;
-  var_e7cc5e43[# "mp_offshore"][2] = 180000;
-  var_e7cc5e43[# "mp_offshore"][3] = 120000;
-  var_e7cc5e43[# "mp_seaside"][1] = 240000;
-  var_e7cc5e43[# "mp_seaside"][2] = 180000;
-  var_e7cc5e43[# "mp_seaside"][3] = 120000;
-  var_e7cc5e43[# "mp_silo"][1] = 240000;
-  var_e7cc5e43[# "mp_silo"][2] = 180000;
-  var_e7cc5e43[# "mp_silo"][3] = 120000;
+  var_e7cc5e43[#"mp_frenetic"][1] = 240000;
+  var_e7cc5e43[#"mp_frenetic"][2] = 180000;
+  var_e7cc5e43[#"mp_frenetic"][3] = 120000;
+  var_e7cc5e43[#"mp_offshore"][1] = 240000;
+  var_e7cc5e43[#"mp_offshore"][2] = 180000;
+  var_e7cc5e43[#"mp_offshore"][3] = 120000;
+  var_e7cc5e43[#"mp_seaside"][1] = 240000;
+  var_e7cc5e43[#"mp_seaside"][2] = 180000;
+  var_e7cc5e43[#"mp_seaside"][3] = 120000;
+  var_e7cc5e43[#"mp_silo"][1] = 240000;
+  var_e7cc5e43[#"mp_silo"][2] = 180000;
+  var_e7cc5e43[#"mp_silo"][3] = 120000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(var_db89c655, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }

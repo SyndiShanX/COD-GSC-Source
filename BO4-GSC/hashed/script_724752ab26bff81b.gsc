@@ -85,7 +85,7 @@ function_dd535733() {
   level.var_d9d721fd = struct::get("ww_printer_compartment", "targetname");
   level.var_d9d721fd scene::play("init");
   level.var_d9d721fd flagsys::wait_till(#"scene_ents_ready");
-  level.var_d9d721fd.entity = level.var_d9d721fd.scene_ents[# "prop 1"];
+  level.var_d9d721fd.entity = level.var_d9d721fd.scene_ents[#"prop 1"];
 
   for(i = 0; i < 4; i++) {
     level.var_d9d721fd.entity hidepart("tag_gun_full_" + i);

@@ -44,8 +44,8 @@ __main__() {
     level.cymbal_monkey_model = "wpn_t7_zmb_monkey_bomb_world";
   }
 
-  level._effect[# "monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
-  level._effect[# "grenade_samantha_steal"] = # "hash_7965ec9e0938553f";
+  level._effect[#"monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[#"grenade_samantha_steal"] = # "hash_7965ec9e0938553f";
   level.cymbal_monkeys = [];
   level.var_2f2478f2 = 1;
 
@@ -238,8 +238,8 @@ hide_owner(owner) {
   owner setvisibletoallexceptteam(level.zombie_team);
   owner.hide_owner = 1;
 
-  if(isDefined(level._effect[# "human_disappears"])) {
-    playFX(level._effect[# "human_disappears"], owner.origin);
+  if(isDefined(level._effect[#"human_disappears"])) {
+    playFX(level._effect[#"human_disappears"], owner.origin);
   }
 
   self thread show_owner_on_attack(owner);
@@ -248,8 +248,8 @@ hide_owner(owner) {
   owner notify(#"show_owner");
   owner unsetperk("specialty_immunemms");
 
-  if(isDefined(level._effect[# "human_disappears"])) {
-    playFX(level._effect[# "human_disappears"], owner.origin);
+  if(isDefined(level._effect[#"human_disappears"])) {
+    playFX(level._effect[#"human_disappears"], owner.origin);
   }
 
   owner.no_burning_sfx = undefined;
@@ -357,7 +357,7 @@ player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_
       }
 
       e_grenade resetmissiledetonationtime();
-      playFXOnTag(level._effect[# "monkey_glow"], e_grenade.mdl_monkey, "tag_weapon");
+      playFXOnTag(level._effect[#"monkey_glow"], e_grenade.mdl_monkey, "tag_weapon");
       valid_poi = e_grenade is_on_navmesh(self);
 
       if(valid_poi && isDefined(e_grenade.var_45eaa114) && e_grenade.var_45eaa114) {
@@ -390,8 +390,8 @@ player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_
 function_ab9a9770() {
   s_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(s_trace[# "entity"])) {
-    entity = s_trace[# "entity"];
+  if(isDefined(s_trace[#"entity"])) {
+    entity = s_trace[#"entity"];
 
     if(entity ismovingplatform()) {
       return true;
@@ -445,7 +445,7 @@ grenade_stolen_by_sam(e_grenade, e_actor) {
     }
   }
 
-  playFXOnTag(level._effect[# "grenade_samantha_steal"], e_grenade.mdl_monkey, "tag_origin");
+  playFXOnTag(level._effect[#"grenade_samantha_steal"], e_grenade.mdl_monkey, "tag_origin");
   e_grenade.mdl_monkey unlink();
   e_grenade.mdl_monkey movez(60, 1, 0.25, 0.25);
   e_grenade.mdl_monkey vibrate(direction, 1.5, 2.5, 1);

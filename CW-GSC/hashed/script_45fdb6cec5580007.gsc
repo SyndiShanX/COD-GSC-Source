@@ -250,9 +250,9 @@ function function_c70b26ea(squad = self function_4c9d66b1()) {
 }
 
 function function_ff3321ee(squad_name) {
-  self.pers[# "squad"] = squad_name;
+  self.pers[#"squad"] = squad_name;
   self.squad = squad_name;
-  self.pers[# "teammateindex"] = 0;
+  self.pers[#"teammateindex"] = 0;
   self.teammateindex = 0;
   self function_a4c9eb05();
 
@@ -316,5 +316,5 @@ function function_a4c9eb05() {
   }
 
   self.teammateindex = self function_80d5f55(squadmates, self getparty());
-  self.pers[# "teammateindex"] = self.teammateindex;
+  self.pers[#"teammateindex"] = self.teammateindex;
 }

@@ -74,7 +74,7 @@ function function_c6de5d3d(b_skipped) {
 
   callback::on_ai_killed(&function_c24ab28e);
   level thread function_defedffe();
-  level flag::wait_till_all([# "hash_3b34b6b1b8c07116", #"hash_377409bcba0102a7", #"hash_6eaa2d1db393bd70"]);
+  level flag::wait_till_all([#"hash_3b34b6b1b8c07116", #"hash_377409bcba0102a7", #"hash_6eaa2d1db393bd70"]);
 }
 
 function function_863fc0f1(b_skipped, var_19e802fa) {
@@ -466,21 +466,21 @@ function on_item_pickup(params) {
 }
 
 function function_f9447d48(e_player) {
-  var_821062d8 = array::random([# "hash_47179111bb9d8055", #"hash_47178e11bb9d7b3c", #"hash_47178f11bb9d7cef"]);
-  var_6eb9bbff = array::random([# "hash_47250911bba8d699", #"hash_47250611bba8d180", #"hash_47250711bba8d333"]);
+  var_821062d8 = array::random([#"hash_47179111bb9d8055", #"hash_47178e11bb9d7b3c", #"hash_47178f11bb9d7cef"]);
+  var_6eb9bbff = array::random([#"hash_47250911bba8d699", #"hash_47250611bba8d180", #"hash_47250711bba8d333"]);
   e_player zm_tungsten_vo::function_d137d6a0(#"hash_787c36ae3d0c3d16", var_821062d8, var_6eb9bbff);
 }
 
 function function_75bec488(e_player) {
-  var_2e53b027 = array::random([# "hash_482d93184a860794", #"hash_482d96184a860cad", #"hash_482d95184a860afa"]);
-  var_35703e80 = array::random([# "hash_47f713184a579ea4", #"hash_47f716184a57a3bd", #"hash_47f715184a57a20a"]);
-  var_daf58964 = array::random([# "hash_47e97b184a4c1200", #"hash_47e97e184a4c1719", #"hash_47e97d184a4c1566"]);
+  var_2e53b027 = array::random([#"hash_482d93184a860794", #"hash_482d96184a860cad", #"hash_482d95184a860afa"]);
+  var_35703e80 = array::random([#"hash_47f713184a579ea4", #"hash_47f716184a57a3bd", #"hash_47f715184a57a20a"]);
+  var_daf58964 = array::random([#"hash_47e97b184a4c1200", #"hash_47e97e184a4c1719", #"hash_47e97d184a4c1566"]);
   e_player zm_tungsten_vo::function_d137d6a0(var_2e53b027, var_35703e80, var_daf58964);
 }
 
 function function_da57dd7c(e_player) {
-  var_991f2885 = array::random([# "hash_57a2842b7e534a6d", #"hash_57a2812b7e534554", #"hash_57a2822b7e534707"]);
-  var_fe5272ea = array::random([# "hash_5779fc2b7e311141", #"hash_5779f92b7e310c28", #"hash_5779fa2b7e310ddb"]);
+  var_991f2885 = array::random([#"hash_57a2842b7e534a6d", #"hash_57a2812b7e534554", #"hash_57a2822b7e534707"]);
+  var_fe5272ea = array::random([#"hash_5779fc2b7e311141", #"hash_5779f92b7e310c28", #"hash_5779fa2b7e310ddb"]);
   e_player zm_tungsten_vo::function_d137d6a0(var_991f2885, #"hash_369770613414183e", var_fe5272ea);
 }
 
@@ -630,7 +630,7 @@ function function_cf6cdaa5(s_params) {
 }
 
 function function_1512480e() {
-  var_5aa94770 = array::random([# "hash_26446cb367cecf30", #"hash_26446db367ced0e3", #"hash_26446eb367ced296"]);
+  var_5aa94770 = array::random([#"hash_26446cb367cecf30", #"hash_26446db367ced0e3", #"hash_26446eb367ced296"]);
   level zm_vo::function_d6f8bbd9(var_5aa94770, 1.5, getplayers());
 }
 
@@ -744,8 +744,8 @@ function ww_pickup_vo(item, e_player) {
   wait 2;
 
   if(isalive(e_player)) {
-    var_5e0eaa1f = array::random([# "hash_7ad1feed766524b6", #"hash_7ad1fded76652303", #"hash_7ad1fced76652150"]);
-    var_b3f1d5e4 = array::random([# "hash_7adf96ed7670b15a", #"hash_7adf95ed7670afa7", #"hash_7adf94ed7670adf4"]);
+    var_5e0eaa1f = array::random([#"hash_7ad1feed766524b6", #"hash_7ad1fded76652303", #"hash_7ad1fced76652150"]);
+    var_b3f1d5e4 = array::random([#"hash_7adf96ed7670b15a", #"hash_7adf95ed7670afa7", #"hash_7adf94ed7670adf4"]);
     e_player thread zm_tungsten_vo::function_d137d6a0(#"hash_56e0e52471da7613", var_5e0eaa1f, var_b3f1d5e4);
   }
 

@@ -270,11 +270,11 @@ function function_f59868de() {
 
 function function_7f604b6c(a_ents) {
   level.player endon(#"death");
-  var_6c8e469b = a_ents[# "guard1"];
+  var_6c8e469b = a_ents[#"guard1"];
   var_6c8e469b endon(#"entitydeleted");
   var_6c8e469b.ignoreme = 1;
   var_6c8e469b.ignoreall = 1;
-  var_56c10933 = a_ents[# "guard2"];
+  var_56c10933 = a_ents[#"guard2"];
   var_56c10933 endon(#"entitydeleted");
   var_56c10933.ignoreme = 1;
   var_56c10933.ignoreall = 1;
@@ -629,14 +629,14 @@ function function_ce801c8b(skipto, var_50cc0d4f) {
 }
 
 function function_7a89c7d8(a_ents) {
-  a_ents[# "hash_25c349eb26f191d7"] thread function_c1e43496();
-  a_ents[# "hash_25c34aeb26f1938a"] thread function_c1e43496();
+  a_ents[#"hash_25c349eb26f191d7"] thread function_c1e43496();
+  a_ents[#"hash_25c34aeb26f1938a"] thread function_c1e43496();
 }
 
 function function_32e58509(a_ents) {
-  a_ents[# "warden"] thread function_c1e43496();
-  a_ents[# "guard01"] thread function_c1e43496();
-  a_ents[# "guard02"] thread function_c1e43496();
+  a_ents[#"warden"] thread function_c1e43496();
+  a_ents[#"guard01"] thread function_c1e43496();
+  a_ents[#"guard02"] thread function_c1e43496();
 }
 
 function function_c1e43496() {
@@ -648,7 +648,7 @@ function function_c1e43496() {
 }
 
 function function_ec6bb2ec(a_ents) {
-  var_8a3834d = a_ents[# "hash_22e4f0609e73cccc"];
+  var_8a3834d = a_ents[#"hash_22e4f0609e73cccc"];
   var_8a3834d thread entname::add(#"hash_50d58662d307f9c7", #"axis");
 }
 

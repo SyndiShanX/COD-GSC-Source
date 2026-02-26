@@ -490,38 +490,38 @@ function spawn_funcs() {
 }
 
 function function_9ea2e3bb(ents) {
-  if(isDefined(ents[# "enemy01"])) {
-    ents[# "enemy01"] setteam(#"allies");
+  if(isDefined(ents[#"enemy01"])) {
+    ents[#"enemy01"] setteam(#"allies");
   }
 
-  if(isDefined(ents[# "enemy02"])) {
-    util::magic_bullet_shield(ents[# "enemy02"]);
-    ents[# "enemy02"] setteam(#"allies");
-    ents[# "enemy02"] colors::set_force_color("o");
-    ents[# "enemy02"] thread function_f77073a0("enemy2_goal");
+  if(isDefined(ents[#"enemy02"])) {
+    util::magic_bullet_shield(ents[#"enemy02"]);
+    ents[#"enemy02"] setteam(#"allies");
+    ents[#"enemy02"] colors::set_force_color("o");
+    ents[#"enemy02"] thread function_f77073a0("enemy2_goal");
   }
 
-  if(isDefined(ents[# "enemy03"])) {
-    util::magic_bullet_shield(ents[# "enemy03"]);
-    ents[# "enemy03"] setteam(#"allies");
-    ents[# "enemy03"] colors::set_force_color("y");
+  if(isDefined(ents[#"enemy03"])) {
+    util::magic_bullet_shield(ents[#"enemy03"]);
+    ents[#"enemy03"] setteam(#"allies");
+    ents[#"enemy03"] colors::set_force_color("y");
   }
 
-  if(isDefined(ents[# "enemy04"])) {
-    util::magic_bullet_shield(ents[# "enemy04"]);
-    ents[# "enemy04"] setteam(#"allies");
-    ents[# "enemy04"] colors::set_force_color("o");
+  if(isDefined(ents[#"enemy04"])) {
+    util::magic_bullet_shield(ents[#"enemy04"]);
+    ents[#"enemy04"] setteam(#"allies");
+    ents[#"enemy04"] colors::set_force_color("o");
   }
 
-  if(isDefined(ents[# "hash_7dff85d726898e5c"])) {
-    util::magic_bullet_shield(ents[# "hash_7dff85d726898e5c"]);
-    ents[# "hash_7dff85d726898e5c"] setteam(#"allies");
-    ents[# "hash_7dff85d726898e5c"] colors::set_force_color("y");
+  if(isDefined(ents[#"hash_7dff85d726898e5c"])) {
+    util::magic_bullet_shield(ents[#"hash_7dff85d726898e5c"]);
+    ents[#"hash_7dff85d726898e5c"] setteam(#"allies");
+    ents[#"hash_7dff85d726898e5c"] colors::set_force_color("y");
   }
 
-  if(isDefined(ents[# "perseus"])) {
-    ents[# "perseus"] setteam(#"allies");
-    ents[# "perseus"] colors::set_force_color("y");
+  if(isDefined(ents[#"perseus"])) {
+    ents[#"perseus"] setteam(#"allies");
+    ents[#"perseus"] colors::set_force_color("y");
   }
 }
 
@@ -650,14 +650,14 @@ function function_8eb5cf53(parms) {
 
 function function_e8412d98(a_ents) {
   w = getweapon(#"ar_damage_t9", array("scope4x", "stalker", "fastreload", "speedgrip"));
-  var_1b36c4d5 = spawnweapon(w, a_ents[# "hash_4165e2ff74a48a3d"].origin, a_ents[# "hash_4165e2ff74a48a3d"].angles, 0);
-  a_ents[# "hash_4165e2ff74a48a3d"] hide();
-  a_ents[# "hash_4165e2ff74a48a3d"] setcontents(0);
-  var_1b36c4d5 linkto(a_ents[# "hash_4165e2ff74a48a3d"]);
+  var_1b36c4d5 = spawnweapon(w, a_ents[#"hash_4165e2ff74a48a3d"].origin, a_ents[#"hash_4165e2ff74a48a3d"].angles, 0);
+  a_ents[#"hash_4165e2ff74a48a3d"] hide();
+  a_ents[#"hash_4165e2ff74a48a3d"] setcontents(0);
+  var_1b36c4d5 linkto(a_ents[#"hash_4165e2ff74a48a3d"]);
 }
 
 function function_3524b1f1(a_ents) {
-  level.perseus = a_ents[# "perseus"];
+  level.perseus = a_ents[#"perseus"];
   level.perseus util::magic_bullet_shield();
   level.perseus thread namespace_ac5221d7::function_f42f6f14();
 }

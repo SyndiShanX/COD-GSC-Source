@@ -62,7 +62,7 @@ function function_751146f8() {
 function function_9310b9ca() {
   self endon(#"death");
 
-  if(level.zm_loc_types[# "zombie_location"].size <= 0) {
+  if(level.zm_loc_types[#"zombie_location"].size <= 0) {
     return false;
   }
 
@@ -379,7 +379,7 @@ function function_4a3e695a(entity, player) {
         if(isDefined(var_fd1e4845) && isDefined(var_c6bd50df) && var_c6bd50df === var_fd1e4845) {
           target_zone = level.zones[var_fd1e4845];
 
-          if(isDefined(target_zone.a_loc_types[# "zombie_location"]) && isDefined(target_zone.a_loc_types[# "zombie_location"].size <= 0)) {
+          if(isDefined(target_zone.a_loc_types[#"zombie_location"]) && isDefined(target_zone.a_loc_types[#"zombie_location"].size <= 0)) {
             return undefined;
           }
 
@@ -506,11 +506,11 @@ function function_e803632f(b_force_spawn, var_eb3a8721 = 0, var_bc66d64b) {
 }
 
 function function_41a4961d(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "hash_160b6f445abd3a60"]) && level.zm_loc_types[# "hash_160b6f445abd3a60"].size) {
+  if(isDefined(level.zm_loc_types[#"hash_160b6f445abd3a60"]) && level.zm_loc_types[#"hash_160b6f445abd3a60"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "hash_160b6f445abd3a60"];
+      s_spawn_loc = level.zm_loc_types[#"hash_160b6f445abd3a60"];
     } else {
-      locs = level.zm_loc_types[# "hash_160b6f445abd3a60"];
+      locs = level.zm_loc_types[#"hash_160b6f445abd3a60"];
 
       if(getplayers().size > 1) {
         var_a6c95035 = [];

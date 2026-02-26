@@ -11,6 +11,6 @@ preload() {}
 
 campfire_flames(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    self.fx_fire = util::playFXOnTag(localclientnum, level._effect[# "campfire_flames"], self, "tag_origin");
+    self.fx_fire = util::playFXOnTag(localclientnum, level._effect[#"campfire_flames"], self, "tag_origin");
   }
 }

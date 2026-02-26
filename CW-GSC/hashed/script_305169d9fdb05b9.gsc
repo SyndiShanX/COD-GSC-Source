@@ -461,7 +461,7 @@ function function_3babb313() {
 }
 
 function function_cc592b59(a_ents) {
-  level.var_3b2b8e1f = a_ents[# "lighter"];
+  level.var_3b2b8e1f = a_ents[#"lighter"];
 }
 
 function function_a444d829() {
@@ -581,7 +581,7 @@ function function_96bef5d0(params) {
 }
 
 function function_e0799719(a_ents) {
-  level.var_20c5b092 = a_ents[# "radio"];
+  level.var_20c5b092 = a_ents[#"radio"];
 }
 
 function function_69d490da() {

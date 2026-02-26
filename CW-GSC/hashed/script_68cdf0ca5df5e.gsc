@@ -260,24 +260,24 @@ class class_f4bf8a8 {
 
     assert(var_b198ac5a.size == 4, "<dev string:x38>");
     var_63f7cb8f = [];
-    var_63f7cb8f[# "bottom"] = struct::get_array(m_name + "_enemy_spawn_bottom", "targetname");
-    var_63f7cb8f[# "left"] = struct::get_array(m_name + "_enemy_spawn_left", "targetname");
-    var_63f7cb8f[# "top"] = struct::get_array(m_name + "_enemy_spawn_top", "targetname");
-    var_63f7cb8f[# "right"] = struct::get_array(m_name + "_enemy_spawn_right", "targetname");
+    var_63f7cb8f[#"bottom"] = struct::get_array(m_name + "_enemy_spawn_bottom", "targetname");
+    var_63f7cb8f[#"left"] = struct::get_array(m_name + "_enemy_spawn_left", "targetname");
+    var_63f7cb8f[#"top"] = struct::get_array(m_name + "_enemy_spawn_top", "targetname");
+    var_63f7cb8f[#"right"] = struct::get_array(m_name + "_enemy_spawn_right", "targetname");
 
-    foreach(spot in var_63f7cb8f[# "bottom"]) {
+    foreach(spot in var_63f7cb8f[#"bottom"]) {
       spot.origin = namespace_ec06fe4a::function_65ee50ba(spot.origin);
     }
 
-    foreach(spot in var_63f7cb8f[# "left"]) {
+    foreach(spot in var_63f7cb8f[#"left"]) {
       spot.origin = namespace_ec06fe4a::function_65ee50ba(spot.origin);
     }
 
-    foreach(spot in var_63f7cb8f[# "top"]) {
+    foreach(spot in var_63f7cb8f[#"top"]) {
       spot.origin = namespace_ec06fe4a::function_65ee50ba(spot.origin);
     }
 
-    foreach(spot in var_63f7cb8f[# "right"]) {
+    foreach(spot in var_63f7cb8f[#"right"]) {
       spot.origin = namespace_ec06fe4a::function_65ee50ba(spot.origin);
     }
 
@@ -301,27 +301,27 @@ class class_f4bf8a8 {
     }
 
     var_73c16a24 = [];
-    var_73c16a24[# "bottom"] = struct::get_array(m_name + "_exit_start_bottom", "targetname");
-    var_73c16a24[# "left"] = struct::get_array(m_name + "_exit_start_left", "targetname");
-    var_73c16a24[# "top"] = struct::get_array(m_name + "_exit_start_top", "targetname");
-    var_73c16a24[# "right"] = struct::get_array(m_name + "_exit_start_right", "targetname");
+    var_73c16a24[#"bottom"] = struct::get_array(m_name + "_exit_start_bottom", "targetname");
+    var_73c16a24[#"left"] = struct::get_array(m_name + "_exit_start_left", "targetname");
+    var_73c16a24[#"top"] = struct::get_array(m_name + "_exit_start_top", "targetname");
+    var_73c16a24[#"right"] = struct::get_array(m_name + "_exit_start_right", "targetname");
     var_36f9408 = [];
-    var_36f9408[# "bottom"] = getent(m_name + "_blocker_bottom", "targetname");
-    var_36f9408[# "left"] = getent(m_name + "_blocker_left", "targetname");
-    var_36f9408[# "top"] = getent(m_name + "_blocker_top", "targetname");
-    var_36f9408[# "right"] = getent(m_name + "_blocker_right", "targetname");
-    var_36f9408[# "bottom"].var_e603ff2c = var_36f9408[# "bottom"].origin;
-    var_36f9408[# "left"].var_e603ff2c = var_36f9408[# "left"].origin;
-    var_36f9408[# "top"].var_e603ff2c = var_36f9408[# "top"].origin;
-    var_36f9408[# "right"].var_e603ff2c = var_36f9408[# "right"].origin;
-    var_36f9408[# "bottom"].side = "bottom";
-    var_36f9408[# "left"].side = "left";
-    var_36f9408[# "top"].side = "top";
-    var_36f9408[# "right"].side = "right";
-    var_5d3a1[# "top"] = [];
-    var_5d3a1[# "bottom"] = [];
-    var_5d3a1[# "left"] = [];
-    var_5d3a1[# "right"] = [];
+    var_36f9408[#"bottom"] = getent(m_name + "_blocker_bottom", "targetname");
+    var_36f9408[#"left"] = getent(m_name + "_blocker_left", "targetname");
+    var_36f9408[#"top"] = getent(m_name + "_blocker_top", "targetname");
+    var_36f9408[#"right"] = getent(m_name + "_blocker_right", "targetname");
+    var_36f9408[#"bottom"].var_e603ff2c = var_36f9408[#"bottom"].origin;
+    var_36f9408[#"left"].var_e603ff2c = var_36f9408[#"left"].origin;
+    var_36f9408[#"top"].var_e603ff2c = var_36f9408[#"top"].origin;
+    var_36f9408[#"right"].var_e603ff2c = var_36f9408[#"right"].origin;
+    var_36f9408[#"bottom"].side = "bottom";
+    var_36f9408[#"left"].side = "left";
+    var_36f9408[#"top"].side = "top";
+    var_36f9408[#"right"].side = "right";
+    var_5d3a1[#"top"] = [];
+    var_5d3a1[#"bottom"] = [];
+    var_5d3a1[#"left"] = [];
+    var_5d3a1[#"right"] = [];
     var_694b395b = getent(m_name + "_safezone", "targetname");
     var_d7b6f39c = getEntArray(m_name + "_unsafezone", "targetname");
     var_cb3e8eba = getEntArray(m_name + "_doa_exit", "targetname");
@@ -569,10 +569,10 @@ class class_f4bf8a8 {
       }
     }
 
-    var_5d3a1[# "top"] = [];
-    var_5d3a1[# "bottom"] = [];
-    var_5d3a1[# "left"] = [];
-    var_5d3a1[# "right"] = [];
+    var_5d3a1[#"top"] = [];
+    var_5d3a1[#"bottom"] = [];
+    var_5d3a1[#"left"] = [];
+    var_5d3a1[#"right"] = [];
     var_ac834eea = function_14b480d1();
 
     if(isDefined(var_ac834eea)) {
@@ -617,10 +617,10 @@ class class_f4bf8a8 {
       waitframe(1);
     }
 
-    var_5d3a1[# "top"] = [];
-    var_5d3a1[# "bottom"] = [];
-    var_5d3a1[# "left"] = [];
-    var_5d3a1[# "right"] = [];
+    var_5d3a1[#"top"] = [];
+    var_5d3a1[#"bottom"] = [];
+    var_5d3a1[#"left"] = [];
+    var_5d3a1[#"right"] = [];
     var_2f0b512f = [[level.doa.var_39e3fa99]] - > function_3bf5b85d();
 
     if(isDefined(var_2f0b512f)) {
@@ -2200,28 +2200,28 @@ function function_9e0d71e5() {
     var_68280a24 = [[level.doa.var_39e3fa99]] - > function_cc773c53();
     var_fe3c2d16 = [[level.doa.var_39e3fa99]] - > function_786b9d39();
     waves = [];
-    waves[# "top"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("top");
+    waves[#"top"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("top");
 
-    if(isDefined(waves[# "top"])) {
-      waves[# "top"] thread function_67a3bb43();
+    if(isDefined(waves[#"top"])) {
+      waves[#"top"] thread function_67a3bb43();
     }
 
-    waves[# "bottom"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("bottom");
+    waves[#"bottom"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("bottom");
 
-    if(isDefined(waves[# "bottom"])) {
-      waves[# "bottom"] thread function_67a3bb43();
+    if(isDefined(waves[#"bottom"])) {
+      waves[#"bottom"] thread function_67a3bb43();
     }
 
-    waves[# "left"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("left");
+    waves[#"left"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("left");
 
-    if(isDefined(waves[# "left"])) {
-      waves[# "left"] thread function_67a3bb43();
+    if(isDefined(waves[#"left"])) {
+      waves[#"left"] thread function_67a3bb43();
     }
 
-    waves[# "right"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("right");
+    waves[#"right"] = [[level.doa.var_39e3fa99]] - > function_ee30f092("right");
 
-    if(isDefined(waves[# "right"])) {
-      waves[# "right"] thread function_67a3bb43();
+    if(isDefined(waves[#"right"])) {
+      waves[#"right"] thread function_67a3bb43();
     }
 
     done = 0;

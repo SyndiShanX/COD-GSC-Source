@@ -64,8 +64,8 @@ function_bebe535() {
     }
   }
 
-  if(isDefined(level.var_2e96a450[# "paint_can_items"])) {
-    var_9243cc66 -= level.var_2e96a450[# "paint_can_items"];
+  if(isDefined(level.var_2e96a450[#"paint_can_items"])) {
+    var_9243cc66 -= level.var_2e96a450[#"paint_can_items"];
   }
 
   println("<dev string:xd7>" + n_total);
@@ -474,8 +474,8 @@ function_cdd9b388() {
       }
 
       tab = "<dev string:x4e>";
-      level.var_f0d0335b settext("<dev string:x8fc>" + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0) + "<dev string:x6d>" + int((isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0) / int(max(level.var_136445c0, 1) + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0)) * 100) + "<dev string:x72>");
-      level.var_7f7d26cc settext("<dev string:x90d>" + level.var_136445c0 + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0));
+      level.var_f0d0335b settext("<dev string:x8fc>" + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0) + "<dev string:x6d>" + int((isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0) / int(max(level.var_136445c0, 1) + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0)) * 100) + "<dev string:x72>");
+      level.var_7f7d26cc settext("<dev string:x90d>" + level.var_136445c0 + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0));
       level.var_6deb23ed settext("<dev string:x921>" + level.var_66e56764 + tab + tab + "<dev string:x7b>" + level.var_136445c0 + tab + tab + "<dev string:x8c>" + level.var_5720c09a + tab + tab + "<dev string:x932>" + level.var_2850ef5);
       level.var_5c6c77b3 settext(function_11421106("<dev string:x94a>", "<dev string:x5e7>"));
       level.var_5471e557 settext(function_11421106("<dev string:x953>", "<dev string:x5f9>"));

@@ -50,11 +50,11 @@ function_e03779ee() {
     return;
   }
 
-  level._effect[# "divetonuke_light"] = # "hash_2225287695ddf9c9";
-  level.machine_assets[# "specialty_camper"] = spawnStruct();
-  level.machine_assets[# "specialty_camper"].weapon = getweapon("zombie_perk_bottle_stronghold");
-  level.machine_assets[# "specialty_camper"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_camper"].on_model = "p7_zm_vending_nuke";
+  level._effect[#"divetonuke_light"] = # "hash_2225287695ddf9c9";
+  level.machine_assets[#"specialty_camper"] = spawnStruct();
+  level.machine_assets[#"specialty_camper"].weapon = getweapon("zombie_perk_bottle_stronghold");
+  level.machine_assets[#"specialty_camper"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_camper"].on_model = "p7_zm_vending_nuke";
 }
 
 function_356a31cb() {

@@ -31,7 +31,7 @@ function private preinit() {
 }
 
 function private postinit() {
-  level.__ai_interface[# "civilian"][# "_civ_mode"][# "callback"] = &function_e2953db0;
+  level.__ai_interface[#"civilian"][#"_civ_mode"][#"callback"] = &function_e2953db0;
 }
 
 function private function_478f2963() {

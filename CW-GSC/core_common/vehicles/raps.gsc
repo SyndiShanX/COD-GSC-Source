@@ -83,41 +83,41 @@ function slow_raps(trigger) {
 
 function initsounds() {
   self.sndalias = [];
-  self.sndalias[# "inair"] = # "veh_raps_in_air";
-  self.sndalias[# "land"] = # "veh_raps_land";
-  self.sndalias[# "spawn"] = # "veh_raps_spawn";
-  self.sndalias[# "direction"] = # "veh_raps_direction";
-  self.sndalias[# "jump_up"] = # "veh_raps_jump_up";
-  self.sndalias[# "vehclose250"] = # "veh_raps_close_250";
-  self.sndalias[# "vehclose1500"] = # "veh_raps_close_1500";
-  self.sndalias[# "vehtargeting"] = # "veh_raps_targeting";
-  self.sndalias[# "vehalarm"] = # "evt_raps_alarm";
-  self.sndalias[# "vehcollision"] = # "veh_wasp_wall_imp";
+  self.sndalias[#"inair"] = # "veh_raps_in_air";
+  self.sndalias[#"land"] = # "veh_raps_land";
+  self.sndalias[#"spawn"] = # "veh_raps_spawn";
+  self.sndalias[#"direction"] = # "veh_raps_direction";
+  self.sndalias[#"jump_up"] = # "veh_raps_jump_up";
+  self.sndalias[#"vehclose250"] = # "veh_raps_close_250";
+  self.sndalias[#"vehclose1500"] = # "veh_raps_close_1500";
+  self.sndalias[#"vehtargeting"] = # "veh_raps_targeting";
+  self.sndalias[#"vehalarm"] = # "evt_raps_alarm";
+  self.sndalias[#"vehcollision"] = # "veh_wasp_wall_imp";
 
   if(isDefined(self.vehicletype) && (self.vehicletype == # "spawner_enemy_zombie_vehicle_raps_suicide" || self.vehicletype == # "spawner_zombietron_veh_meatball" || self.vehicletype == # "spawner_zombietron_veh_meatball_med" || self.vehicletype == # "spawner_zombietron_veh_meatball_small")) {
-    self.sndalias[# "inair"] = undefined;
-    self.sndalias[# "land"] = # "hash_7cbf89ceaf15bb25";
-    self.sndalias[# "spawn"] = undefined;
-    self.sndalias[# "direction"] = undefined;
-    self.sndalias[# "jump_up"] = undefined;
-    self.sndalias[# "vehclose250"] = undefined;
-    self.sndalias[# "vehclose1500"] = undefined;
-    self.sndalias[# "vehtargeting"] = undefined;
-    self.sndalias[# "vehalarm"] = undefined;
-    self.sndalias[# "vehcollision"] = # "hash_33eb98c2a2669c78";
+    self.sndalias[#"inair"] = undefined;
+    self.sndalias[#"land"] = # "hash_7cbf89ceaf15bb25";
+    self.sndalias[#"spawn"] = undefined;
+    self.sndalias[#"direction"] = undefined;
+    self.sndalias[#"jump_up"] = undefined;
+    self.sndalias[#"vehclose250"] = undefined;
+    self.sndalias[#"vehclose1500"] = undefined;
+    self.sndalias[#"vehtargeting"] = undefined;
+    self.sndalias[#"vehalarm"] = undefined;
+    self.sndalias[#"vehcollision"] = # "hash_33eb98c2a2669c78";
   }
 
   if(isDefined(self.vehicletype) && self.vehicletype == # "hash_22f2770b0b570f88") {
-    self.sndalias[# "inair"] = # "hash_b4c1fb7fb7b70be";
-    self.sndalias[# "land"] = # "hash_56707e87f5b058df";
-    self.sndalias[# "spawn"] = # "hash_220536a567c22f9d";
-    self.sndalias[# "direction"] = undefined;
-    self.sndalias[# "jump_up"] = # "hash_1182d9ecfe86442e";
-    self.sndalias[# "vehclose250"] = # "hash_4d4a13f08b063112";
-    self.sndalias[# "vehclose1500"] = undefined;
-    self.sndalias[# "vehtargeting"] = # "hash_57d3d8cf8a3cb109";
-    self.sndalias[# "vehalarm"] = # "hash_28033d94de922793";
-    self.sndalias[# "vehcollision"] = # "hash_481f37c2ab12bdfe";
+    self.sndalias[#"inair"] = # "hash_b4c1fb7fb7b70be";
+    self.sndalias[#"land"] = # "hash_56707e87f5b058df";
+    self.sndalias[#"spawn"] = # "hash_220536a567c22f9d";
+    self.sndalias[#"direction"] = undefined;
+    self.sndalias[#"jump_up"] = # "hash_1182d9ecfe86442e";
+    self.sndalias[#"vehclose250"] = # "hash_4d4a13f08b063112";
+    self.sndalias[#"vehclose1500"] = undefined;
+    self.sndalias[#"vehtargeting"] = # "hash_57d3d8cf8a3cb109";
+    self.sndalias[#"vehalarm"] = # "hash_28033d94de922793";
+    self.sndalias[#"vehcollision"] = # "hash_481f37c2ab12bdfe";
   }
 }
 

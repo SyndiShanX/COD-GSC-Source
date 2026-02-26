@@ -36,9 +36,9 @@ flame_death_fx() {
   self.is_on_fire = 1;
   self thread on_fire_timeout();
 
-  if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
     fire_tag = "j_spinelower";
-    fire_death_torso_fx = level._effect[# "character_fire_death_torso"];
+    fire_death_torso_fx = level._effect[#"character_fire_death_torso"];
 
     if(isDefined(self.weapon_specific_fire_death_torso_fx)) {
       fire_death_torso_fx = self.weapon_specific_fire_death_torso_fx;
@@ -57,9 +57,9 @@ flame_death_fx() {
     println("<dev string:x38>");
   }
 
-  if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_sm"])) {
+  if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_sm"])) {
     if(!isvehicle(self) && self.archetype !== "raps" && self.archetype !== "spider") {
-      fire_death_sm_fx = level._effect[# "character_fire_death_sm"];
+      fire_death_sm_fx = level._effect[#"character_fire_death_sm"];
 
       if(isDefined(self.weapon_specific_fire_death_sm_fx)) {
         fire_death_sm_fx = self.weapon_specific_fire_death_sm_fx;

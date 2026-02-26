@@ -177,13 +177,13 @@ giveperks() {
 onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
   if(weapon == level.weapon_sas_primary_weapon && smeansofdeath == "MOD_IMPACT") {
     if(isDefined(eattacker) && isPlayer(eattacker)) {
-      if(!isDefined(eattacker.pers[# "sticks"])) {
-        eattacker.pers[# "sticks"] = 1;
+      if(!isDefined(eattacker.pers[#"sticks"])) {
+        eattacker.pers[#"sticks"] = 1;
       } else {
-        eattacker.pers[# "sticks"]++;
+        eattacker.pers[#"sticks"]++;
       }
 
-      eattacker.sticks = eattacker.pers[# "sticks"];
+      eattacker.sticks = eattacker.pers[#"sticks"];
     }
   }
 
@@ -220,8 +220,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     }
 
     if(isDefined(level.setbackweapon) && weapon == level.setbackweapon) {
-      self.pers[# "humiliated"]++;
-      self.humiliated = self.pers[# "humiliated"];
+      self.pers[#"humiliated"]++;
+      self.humiliated = self.pers[#"humiliated"];
 
       if(globallogic_score::gethighestscoringplayer() === self) {
         scoreevents::processscoreevent(#"humiliation_sas", attacker, self, weapon);
@@ -242,8 +242,8 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
     return;
   }
 
-  self.pers[# "humiliated"]++;
-  self.humiliated = self.pers[# "humiliated"];
+  self.pers[#"humiliated"]++;
+  self.humiliated = self.pers[#"humiliated"];
 
   if(level.setbacks == 0) {
     self globallogic_score::setpointstowin(0);

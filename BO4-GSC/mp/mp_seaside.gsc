@@ -35,12 +35,12 @@ event_handler[level_init] main(eventstruct) {
   tank_scene = struct::get("spawn_flavor_tanks", "targetname");
 
   if(isDefined(tank_scene) && isDefined(tank_scene.scene_ents)) {
-    tank_scene.scene_ents[# "vehicle 1"] clientfield::set("hide_tank_rob", 1);
-    tank_scene.scene_ents[# "vehicle 2"] clientfield::set("hide_tank_rob", 1);
-    tank_scene.scene_ents[# "vehicle 3"] clientfield::set("hide_tank_rob", 1);
-    tank_scene.scene_ents[# "vehicle 1"] notsolid();
-    tank_scene.scene_ents[# "vehicle 2"] notsolid();
-    tank_scene.scene_ents[# "vehicle 3"] notsolid();
+    tank_scene.scene_ents[#"vehicle 1"] clientfield::set("hide_tank_rob", 1);
+    tank_scene.scene_ents[#"vehicle 2"] clientfield::set("hide_tank_rob", 1);
+    tank_scene.scene_ents[#"vehicle 3"] clientfield::set("hide_tank_rob", 1);
+    tank_scene.scene_ents[#"vehicle 1"] notsolid();
+    tank_scene.scene_ents[#"vehicle 2"] notsolid();
+    tank_scene.scene_ents[#"vehicle 3"] notsolid();
   }
 }
 

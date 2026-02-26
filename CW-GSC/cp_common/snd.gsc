@@ -22,9 +22,9 @@ function private autoexec function_4047919b() {
     level._snd.var_92f63ad0 = [];
     level._snd.var_d37e94ca = # "gentity";
     level._snd.var_90903fc0 = 0;
-    level._snd._callbacks[# "player_view"] = &function_9d361345;
-    level._snd._callbacks[# "player_angles"] = &function_d33afb70;
-    level._snd._callbacks[# "player_fov"] = &function_51436f04;
+    level._snd._callbacks[#"player_view"] = &function_9d361345;
+    level._snd._callbacks[#"player_angles"] = &function_d33afb70;
+    level._snd._callbacks[#"player_fov"] = &function_51436f04;
   }
 
   util::registerclientsys("clientSoundCommand");

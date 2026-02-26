@@ -47,9 +47,9 @@ __init__() {
   clientfield::register("toplayer", "" + # "hero_scepter_vigor_postfx", 1, 1, "counter");
   clientfield::register("allplayers", "" + # "zombie_scepter_revive", 1, 1, "int");
   clientfield::register("toplayer", "" + # "scepter_rumble", 1, 3, "counter");
-  level.hero_weapon[# "scepter"][0] = getweapon(#"hero_scepter_lv1");
-  level.hero_weapon[# "scepter"][1] = getweapon(#"hero_scepter_lv2");
-  level.hero_weapon[# "scepter"][2] = getweapon(#"hero_scepter_lv3");
+  level.hero_weapon[#"scepter"][0] = getweapon(#"hero_scepter_lv1");
+  level.hero_weapon[#"scepter"][1] = getweapon(#"hero_scepter_lv2");
+  level.hero_weapon[#"scepter"][2] = getweapon(#"hero_scepter_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_scepter_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_scepter_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_scepter_lv3");
@@ -87,21 +87,21 @@ function_63e57124() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(wpn_prev == level.hero_weapon[# "scepter"][0] || wpn_prev == level.hero_weapon[# "scepter"][1] || wpn_prev == level.hero_weapon[# "scepter"][2]) {
+    if(wpn_prev == level.hero_weapon[#"scepter"][0] || wpn_prev == level.hero_weapon[#"scepter"][1] || wpn_prev == level.hero_weapon[#"scepter"][2]) {
       self thread scepter_rumble(1);
       self clientfield::set("" + # "skull_turret_beam_fire", 0);
       self clientfield::set("" + # "scepter_beam_flash", 0);
       self notify(#"stop_damage");
 
-      if(wpn_prev == level.hero_weapon[# "scepter"][1]) {
+      if(wpn_prev == level.hero_weapon[#"scepter"][1]) {
         self thread function_89fc5431();
-      } else if(wpn_prev == level.hero_weapon[# "scepter"][2]) {
+      } else if(wpn_prev == level.hero_weapon[#"scepter"][2]) {
         self thread function_89fc5431();
         level scene::function_f81475ae(#"p8_fxanim_zm_zod_staff_ra_bundle");
       }
     }
 
-    if(wpn_cur == level.hero_weapon[# "scepter"][0]) {
+    if(wpn_cur == level.hero_weapon[#"scepter"][0]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_7ebea2becf0c1aee");
       self thread function_4521ac7e(wpn_cur, 1);
       self thread function_4493c71b(wpn_cur, 1);
@@ -109,7 +109,7 @@ function_63e57124() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "scepter"][1]) {
+    if(wpn_cur == level.hero_weapon[#"scepter"][1]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_7ebea2becf0c1aee");
       self thread function_4521ac7e(wpn_cur, 2);
       self thread function_4493c71b(wpn_cur, 2);
@@ -118,7 +118,7 @@ function_63e57124() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "scepter"][2]) {
+    if(wpn_cur == level.hero_weapon[#"scepter"][2]) {
       if(!self gamepadusedlast()) {
         self zm_hero_weapon::show_hint(wpn_cur, #"hash_5ba4f6bd62a74330");
       } else {
@@ -406,14 +406,14 @@ function_be8ae52f(w_curr) {
       a_trace = beamtrace(v_position, v_position + v_forward * 20000, 1, self);
     }
 
-    var_1c218ece = a_trace[# "position"];
+    var_1c218ece = a_trace[#"position"];
 
     function_7067b673(v_position, var_1c218ece, (1, 1, 0));
     render_debug_sphere(v_position, (1, 1, 0));
     render_debug_sphere(var_1c218ece, (1, 0, 0));
 
-    if(isDefined(a_trace[# "entity"])) {
-      e_last_target = a_trace[# "entity"];
+    if(isDefined(a_trace[#"entity"])) {
+      e_last_target = a_trace[#"entity"];
 
       if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== # "allies") {
         if(zm_trial_restrict_loadout::is_active(1)) {
@@ -464,7 +464,7 @@ function_be8ae52f(w_curr) {
     } else {
       var_24bae834 = 0;
 
-      switch (a_trace[# "surfacetype"]) {
+      switch (a_trace[#"surfacetype"]) {
         case # "glasscar":
         case # "rock":
         case # "metal":
@@ -485,7 +485,7 @@ function_be8ae52f(w_curr) {
 
     if(isDefined(level.var_2e32e0bb)) {
       level notify(#"hero_weapon_hit", {
-        #player: self, #e_entity: a_trace[# "entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[# "position"]
+        #player: self, #e_entity: a_trace[#"entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[#"position"]
       });
     }
   }
@@ -869,7 +869,7 @@ reset_after_bleeding_out() {
       self.var_3d89e839 = undefined;
     }
 
-    self.var_4831c9c9[# "hero_scepter_lv3"] = self getweaponammoclip(w_beacon);
+    self.var_4831c9c9[#"hero_scepter_lv3"] = self getweaponammoclip(w_beacon);
   }
 
   if(isDefined(self.var_b4e3db6c)) {
@@ -907,7 +907,7 @@ function_b603ab34(w_beacon) {
     v_forward = anglesToForward(self.angles);
     v_spawn_pos = self.origin + (0, 0, 32);
     a_trace = physicstraceex(v_spawn_pos, v_spawn_pos + v_forward * 24, (-16, -16, -16), (16, 16, 16), self);
-    v_spawn_pos += v_forward * a_trace[# "fraction"] * 24;
+    v_spawn_pos += v_forward * a_trace[#"fraction"] * 24;
     var_4eaa1f4c = util::ground_position(v_spawn_pos, 1000, 12);
   } else {
     var_4eaa1f4c = self.origin + (0, 0, 12);
@@ -1005,7 +1005,7 @@ beacon_smash(player) {
         case # "popcorn":
         case # "basic":
         case # "enhanced":
-          player thread function_b67b2aff(zombie, zombie.health, self.origin, level.hero_weapon[# "scepter"][2], launch);
+          player thread function_b67b2aff(zombie, zombie.health, self.origin, level.hero_weapon[#"scepter"][2], launch);
           break;
         case # "heavy":
         case # "miniboss":
@@ -1150,7 +1150,7 @@ beacon_check(e_player, var_a7e57ef9, n_loop_time) {
     }
 
     if(!isDefined(self.var_1b6dab30) || self.var_1b6dab30 == e_player) {
-      e_player thread function_b67b2aff(self, n_damage, var_a7e57ef9, level.hero_weapon[# "scepter"][2]);
+      e_player thread function_b67b2aff(self, n_damage, var_a7e57ef9, level.hero_weapon[#"scepter"][2]);
     }
 
     if((self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") && isalive(self) && isactor(self) && !(isDefined(self.var_25cb9682) && self.var_25cb9682) && !self function_dd070839()) {

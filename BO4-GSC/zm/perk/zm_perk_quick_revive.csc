@@ -28,7 +28,7 @@ enable_quick_revive_perk_for_level() {
 
 init_quick_revive() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[# "revive_light"] = # "zombie/fx_perk_quick_revive_zmb";
+    level._effect[#"revive_light"] = # "zombie/fx_perk_quick_revive_zmb";
   }
 }
 

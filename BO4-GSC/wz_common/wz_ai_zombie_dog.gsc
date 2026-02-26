@@ -104,7 +104,7 @@ function_b9d56970() {
 
 function_8e13b81e() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[# "hellhound_base_itemlist_all"] = 1;
+  self.var_2cee3556[#"hellhound_base_itemlist_all"] = 1;
 }
 
 function_8f5f431c(entity) {}

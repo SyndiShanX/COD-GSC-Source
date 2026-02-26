@@ -288,25 +288,25 @@ function function_16e85ca5() {
 function function_337cace2(location) {
   switch (location) {
     case # "office":
-      if(level.quest_objectives[# "poison_tea"].tracked) {
+      if(level.quest_objectives[#"poison_tea"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
       break;
     case # "data":
-      if(level.quest_objectives[# "key_reprogram"].tracked) {
+      if(level.quest_objectives[#"key_reprogram"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
       break;
     case # "checkpoint":
-      if(level.quest_objectives[# "making_a_mole"].tracked) {
+      if(level.quest_objectives[#"making_a_mole"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
       break;
     case # "interrogation":
-      if(level.quest_objectives[# "prisoner_persuasion"].tracked) {
+      if(level.quest_objectives[#"prisoner_persuasion"].tracked) {
         level.player thread objectives_ui::show_objectives();
       }
 
@@ -317,22 +317,22 @@ function function_337cace2(location) {
 }
 
 function function_dfb343c2(location) {
-  if(level.quest_objectives[# "poison_tea"].tracked) {
+  if(level.quest_objectives[#"poison_tea"].tracked) {
     interactive_map::function_50121b9(function_7f102a89("charkov_office"));
     return;
   }
 
-  if(level.quest_objectives[# "making_a_mole"].tracked) {
+  if(level.quest_objectives[#"making_a_mole"].tracked) {
     interactive_map::function_50121b9(function_7f102a89("checkpoint"));
     return;
   }
 
-  if(level.quest_objectives[# "prisoner_persuasion"].tracked) {
+  if(level.quest_objectives[#"prisoner_persuasion"].tracked) {
     interactive_map::function_50121b9(function_7f102a89("interrogation"));
     return;
   }
 
-  if(level.quest_objectives[# "key_reprogram"].tracked) {
+  if(level.quest_objectives[#"key_reprogram"].tracked) {
     interactive_map::function_50121b9(function_7f102a89("data"));
     return;
   }
@@ -1485,8 +1485,8 @@ function function_52f0fcb3(var_d3440450) {
 
   level.player endon(#"death");
   level.stealth.fnsetdisguised = &function_d2e50cd;
-  level.player.player_actions.enabled[# "hash_4ee54ef61a0301b2"] = 0;
-  level.player.player_actions.enabled[# "body_shield_grenade"] = 0;
+  level.player.player_actions.enabled[#"hash_4ee54ef61a0301b2"] = 0;
+  level.player.player_actions.enabled[#"body_shield_grenade"] = 0;
   spawner::simple_spawn("kgb_hq_guard", &function_862e8bf9);
   namespace_979752dc::set_disguised(1);
   level.armory_guard = spawner::simple_spawn_single("armory_guard", &function_f632133);
@@ -1509,7 +1509,7 @@ function function_9adc9ad7() {
 }
 
 function function_c3120e0e(a_ents) {
-  guy = a_ents[# "actor 1"];
+  guy = a_ents[#"actor 1"];
   iprintlnbold("Takedown");
   guy.var_1f1bd6ed = (level.player.origin + guy.origin) / 2;
   guy.var_598a8a9 = vectortoangles(guy.origin - level.player.origin);
@@ -1763,9 +1763,9 @@ function function_d2e50cd(disguised = 0) {
 }
 
 function function_dc6c4b5e() {
-  array[# "sight_dist"] = 2500;
-  array[# "detect_dist"] = 600;
-  array[# "found_dist"] = 32;
+  array[#"sight_dist"] = 2500;
+  array[#"detect_dist"] = 600;
+  array[#"found_dist"] = 32;
   namespace_cc4354b9::set_corpse_ranges(array);
 }
 
@@ -1813,7 +1813,7 @@ function function_252c0591() {
   self thread function_12c4b338();
   waitframe(1);
 
-  if(!isDefined(self.stealth) && !isDefined(self.flag[# "stealth_enabled"])) {
+  if(!isDefined(self.stealth) && !isDefined(self.flag[#"stealth_enabled"])) {
     self namespace_979752dc::do_stealth();
   }
 
@@ -1934,16 +1934,16 @@ function function_6c654d7e() {
 
 function function_9c6821fd(a_ents) {
   if(!level flag::get_any(level.var_dae73e42)) {
-    if(isDefined(a_ents[# "book"])) {
-      a_ents[# "book"] delete();
+    if(isDefined(a_ents[#"book"])) {
+      a_ents[#"book"] delete();
     }
 
-    if(isDefined(a_ents[# "hash_ef2f86f22813190"])) {
-      a_ents[# "hash_ef2f86f22813190"] delete();
+    if(isDefined(a_ents[#"hash_ef2f86f22813190"])) {
+      a_ents[#"hash_ef2f86f22813190"] delete();
     }
 
-    if(isDefined(a_ents[# "hash_7dc6af6674ff92ee"])) {
-      a_ents[# "hash_7dc6af6674ff92ee"] delete();
+    if(isDefined(a_ents[#"hash_7dc6af6674ff92ee"])) {
+      a_ents[#"hash_7dc6af6674ff92ee"] delete();
     }
   }
 }
@@ -2387,7 +2387,7 @@ function function_56284cd4(prompt) {
 
 function function_9e511069(a_ents) {
   level flag::wait_till("flag_start_finding_ways");
-  door = a_ents[# "prop 1"];
+  door = a_ents[#"prop 1"];
   door attach("p9_rus_door_placard_plastic_01", "door_plate_a");
   waitframe(1);
   door attach("p9_rus_door_placard_text_01_" + "interrogation", "door_plate_a");
@@ -2680,11 +2680,11 @@ function function_c7708dcf() {
 }
 
 function function_b0e70405(a_ents) {
-  chair = a_ents[# "chair"];
-  guard = a_ents[# "armory_guard"];
+  chair = a_ents[#"chair"];
+  guard = a_ents[#"armory_guard"];
   level.var_51b002e1 = [guard, chair];
-  paper = a_ents[# "hash_7485e6928c5fcb31"];
-  pen = a_ents[# "pen"];
+  paper = a_ents[#"hash_7485e6928c5fcb31"];
+  pen = a_ents[#"pen"];
   level.var_2336c4f4 = a_ents;
 }
 
@@ -2899,32 +2899,32 @@ function function_69897605(a_ents) {
   level.player endon(#"death");
   level flag::wait_till("flag_player_swap");
 
-  if(isDefined(a_ents[# "checkpoint"])) {
-    a_ents[# "checkpoint"] delete();
+  if(isDefined(a_ents[#"checkpoint"])) {
+    a_ents[#"checkpoint"] delete();
   }
 
-  if(isDefined(a_ents[# "general"])) {
-    a_ents[# "general"] delete();
+  if(isDefined(a_ents[#"general"])) {
+    a_ents[#"general"] delete();
   }
 
-  if(isDefined(a_ents[# "krav_goon"])) {
-    a_ents[# "krav_goon"] delete();
+  if(isDefined(a_ents[#"krav_goon"])) {
+    a_ents[#"krav_goon"] delete();
   }
 
-  if(isDefined(a_ents[# "lighter"])) {
-    a_ents[# "lighter"] delete();
+  if(isDefined(a_ents[#"lighter"])) {
+    a_ents[#"lighter"] delete();
   }
 
-  if(isDefined(a_ents[# "cigar"])) {
-    a_ents[# "cigar"] delete();
+  if(isDefined(a_ents[#"cigar"])) {
+    a_ents[#"cigar"] delete();
   }
 
-  if(isDefined(a_ents[# "hash_2199ca8e0dd77eeb"])) {
-    a_ents[# "hash_2199ca8e0dd77eeb"] delete();
+  if(isDefined(a_ents[#"hash_2199ca8e0dd77eeb"])) {
+    a_ents[#"hash_2199ca8e0dd77eeb"] delete();
   }
 
-  if(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] delete();
+  if(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] delete();
   }
 }
 
@@ -4032,8 +4032,8 @@ function function_1c20e038() {
 }
 
 function function_5da2f302(a_ents) {
-  a_ents[# "guard01"] thread entname::add(#"hash_5adf107d46cc0546", #"axis");
-  level.var_1c20e038 = a_ents[# "guard01"];
+  a_ents[#"guard01"] thread entname::add(#"hash_5adf107d46cc0546", #"axis");
+  level.var_1c20e038 = a_ents[#"guard01"];
 }
 
 function function_6ed43003() {
@@ -4987,25 +4987,25 @@ function function_3a103505() {
 
     switch (hotspots[i].script_noteworthy) {
       case # "charkov_office":
-        if(!level.quest_objectives[# "poison_tea"].tracked) {
+        if(!level.quest_objectives[#"poison_tea"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
       case # "checkpoint":
-        if(!level.quest_objectives[# "making_a_mole"].tracked) {
+        if(!level.quest_objectives[#"making_a_mole"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
       case # "interrogation":
-        if(!level.quest_objectives[# "prisoner_persuasion"].tracked) {
+        if(!level.quest_objectives[#"prisoner_persuasion"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
         break;
       case # "data":
-        if(!level.quest_objectives[# "key_reprogram"].tracked) {
+        if(!level.quest_objectives[#"key_reprogram"].tracked) {
           hotspots[i] interactive_map::function_b5c2702b(#"confirm", level.var_a7c109a9);
         }
 
@@ -5473,11 +5473,11 @@ function function_5b0a20a7() {
 }
 
 function function_68dd1c91(a_ents) {
-  if(!isDefined(a_ents[# "tutorial_guy"])) {
+  if(!isDefined(a_ents[#"tutorial_guy"])) {
     return;
   }
 
-  guy = a_ents[# "tutorial_guy"];
+  guy = a_ents[#"tutorial_guy"];
   guy.var_1f1bd6ed = guy.origin;
   guy.var_598a8a9 = guy.angles;
   guy.var_caa295ea = 0;
@@ -5564,7 +5564,7 @@ function function_da84b47c() {
   doors::function_f5dd4f8f("camera_room", "targetname");
   level.player val::set(#"hash_2463ab97c65a943c", "freezecontrols", 1);
   hint_tutorial::function_4c2d4fc4(#"hash_5e8c24c2263361fc", #"hash_25fcf94c023c66fd", 2, #"hash_70f26bb1ab701ef8");
-  namespace_61e6d095::function_24e5fa63(#"hint_tutorial", [# "ui_confirm", #"ui_cancel"], 1);
+  namespace_61e6d095::function_24e5fa63(#"hint_tutorial", [#"ui_confirm", #"ui_cancel"], 1);
   hint_tutorial::function_df08d48(10);
   level flag::wait_till("flag_show_itinerary");
   level thread dialogue::function_96171f6d("vox_cp_rkgb_01570_blkv_nowthatcharkovh_cd");
@@ -5575,7 +5575,7 @@ function function_da84b47c() {
 }
 
 function function_4a1580b6(a_ents) {
-  radio = a_ents[# "prop 1"];
+  radio = a_ents[#"prop 1"];
 
   if(!isDefined(radio)) {
     return;

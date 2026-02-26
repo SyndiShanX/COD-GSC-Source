@@ -73,8 +73,8 @@ function function_802a0aed(str_objective, var_50cc0d4f) {
 
   if(!var_50cc0d4f) {
     level waittill(#"hash_465d6bb5960c37f8");
-    level.allowbattlechatter[# "allies"] = 1;
-    level.allowbattlechatter[# "axis"] = 1;
+    level.allowbattlechatter[#"allies"] = 1;
+    level.allowbattlechatter[#"axis"] = 1;
     var_3e3877e9 = spawner::get_ai_group_ai("initial_ally_group");
   } else {
     level flag::set("flg_courtyard_start");
@@ -297,9 +297,9 @@ function function_1ede49cc() {
   var_643a73f4 = getent("chapel_door_left", "targetname");
   var_a0d4ecdf = getent("chapel_door_right", "targetname");
   a_actors = [];
-  a_actors[# "actor 1"] = var_7bacf73f[0];
+  a_actors[#"actor 1"] = var_7bacf73f[0];
   level thread scene::play("scene_rev_0000_door_entry_single_soldier_kick_02_siege", "Shot 1", a_actors);
-  a_actors[# "actor 1"] waittill(#"hash_553184e6c2383c0d");
+  a_actors[#"actor 1"] waittill(#"hash_553184e6c2383c0d");
   var_643a73f4 rotateyaw(-95, 0.3);
   var_a0d4ecdf rotateyaw(85, 0.3);
   snd::client_msg("audio_church_doors_kick_open");
@@ -933,7 +933,7 @@ function private function_c9d72e76() {
 }
 
 function function_7c927add(var_ec670c03) {
-  if(level.var_3cf0e895[# "hash_23478d403d62c627"] >= 1) {
+  if(level.var_3cf0e895[#"hash_23478d403d62c627"] >= 1) {
     return;
   }
 

@@ -86,8 +86,8 @@ function updatehardpoints() {
         }
 
         if(isbot(player)) {
-          player.bot[# "killstreaks"] = [];
-          player.bot[# "killstreaks"][0] = killstreaks::get_menu_name(key);
+          player.bot[#"killstreaks"] = [];
+          player.bot[#"killstreaks"][0] = killstreaks::get_menu_name(key);
           killstreakweapon = killstreaks::get_killstreak_weapon(key);
           player killstreaks::give_weapon(killstreakweapon, 1);
           globallogic_score::_setplayermomentum(player, 2000);
@@ -859,14 +859,14 @@ function showstartspawnpoints() {
   }
 
   team_colors = [];
-  team_colors[# "axis"] = (1, 0, 1);
-  team_colors[# "allies"] = (0, 1, 1);
-  team_colors[# "team3"] = (1, 1, 0);
-  team_colors[# "team4"] = (0, 1, 0);
-  team_colors[# "team5"] = (0, 0, 1);
-  team_colors[# "team6"] = (1, 0.7, 0);
-  team_colors[# "team7"] = (0.25, 0.25, 1);
-  team_colors[# "team8"] = (0.88, 0, 1);
+  team_colors[#"axis"] = (1, 0, 1);
+  team_colors[#"allies"] = (0, 1, 1);
+  team_colors[#"team3"] = (1, 1, 0);
+  team_colors[#"team4"] = (0, 1, 0);
+  team_colors[#"team5"] = (0, 0, 1);
+  team_colors[#"team6"] = (1, 0.7, 0);
+  team_colors[#"team7"] = (0.25, 0.25, 1);
+  team_colors[#"team8"] = (0.88, 0, 1);
 
   foreach(team, _ in level.teams) {
     color = team_colors[team];

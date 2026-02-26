@@ -249,23 +249,23 @@ function setup_heli_sounds(bone_location, type, tag, run, dmg1, dmg2, dmg3) {
 
 function init_terrain_sounds() {
   self.surface_type = [];
-  self.surface_type[# "default"] = "dirt";
-  self.surface_type[# "metal"] = "dirt";
-  self.surface_type[# "concrete"] = "dirt";
-  self.surface_type[# "wood"] = "dirt";
-  self.surface_type[# "dirt"] = "dirt";
-  self.surface_type[# "gravel"] = "dirt";
-  self.surface_type[# "grass"] = "dirt";
-  self.surface_type[# "mud"] = "dirt";
-  self.surface_type[# "snow"] = "dirt";
-  self.surface_type[# "asphalt"] = "dirt";
-  self.surface_type[# "brick"] = "dirt";
-  self.surface_type[# "glass"] = "dirt";
-  self.surface_type[# "plaster"] = "dirt";
-  self.surface_type[# "sand"] = "dirt";
-  self.surface_type[# "rock"] = "dirt";
-  self.surface_type[# "water"] = "water";
-  self.surface_type[# "foliage"] = "dirt";
+  self.surface_type[#"default"] = "dirt";
+  self.surface_type[#"metal"] = "dirt";
+  self.surface_type[#"concrete"] = "dirt";
+  self.surface_type[#"wood"] = "dirt";
+  self.surface_type[#"dirt"] = "dirt";
+  self.surface_type[#"gravel"] = "dirt";
+  self.surface_type[#"grass"] = "dirt";
+  self.surface_type[#"mud"] = "dirt";
+  self.surface_type[#"snow"] = "dirt";
+  self.surface_type[#"asphalt"] = "dirt";
+  self.surface_type[#"brick"] = "dirt";
+  self.surface_type[#"glass"] = "dirt";
+  self.surface_type[#"plaster"] = "dirt";
+  self.surface_type[#"sand"] = "dirt";
+  self.surface_type[#"rock"] = "dirt";
+  self.surface_type[#"water"] = "water";
+  self.surface_type[#"foliage"] = "dirt";
   self setup_terrain_sounds("dirt", "veh_chopper_prop_wash_dirt");
   self setup_terrain_sounds("water", "veh_chopper_prop_wash_water");
 }
@@ -348,14 +348,14 @@ function heli_sound_play(heli_bone) {
 }
 
 function play_player_controlled_sounds() {
-  self heli_sound_play(self.heli[# "lfe"]);
+  self heli_sound_play(self.heli[#"lfe"]);
   self thread heli_idle_run_transition("cobra", "turbine");
   self thread heli_idle_run_transition("cobra", "top_rotor");
   self thread heli_idle_run_transition("cobra", "tail_rotor");
 }
 
 function play_attack_ai_sounds() {
-  self heli_sound_play(self.heli[# "lfe"]);
+  self heli_sound_play(self.heli[#"lfe"]);
   self thread heli_idle_run_transition("hind", "turbine");
   self thread heli_idle_run_transition("hind", "top_rotor");
   self thread heli_idle_run_transition("hind", "tail_rotor");
@@ -364,12 +364,12 @@ function play_attack_ai_sounds() {
 function play_supply_sounds() {
   self thread heli_idle_run_transition("supply", "turbine");
   self thread heli_idle_run_transition("supply", "top_rotor");
-  self heli_sound_play(self.heli[# "lfe"]);
+  self heli_sound_play(self.heli[#"lfe"]);
 }
 
 function play_gunner_sounds() {
-  self heli_sound_play(self.heli[# "lfe"]);
-  self heli_sound_play(self.heli[# "radio"]);
+  self heli_sound_play(self.heli[#"lfe"]);
+  self heli_sound_play(self.heli[#"radio"]);
   self thread heli_idle_run_transition("huey", "turbine");
   self thread heli_idle_run_transition("huey", "top_rotor");
   self thread heli_idle_run_transition("huey", "tail_rotor");
@@ -379,7 +379,7 @@ function play_gunner_sounds() {
 function play_player_drone_sounds() {}
 
 function play_heli_guard_sounds() {
-  self heli_sound_play(self.heli[# "lfe"]);
+  self heli_sound_play(self.heli[#"lfe"]);
   self thread heli_idle_run_transition("heli_guard", "turbine");
   self thread heli_idle_run_transition("heli_guard", "rotor");
   self thread terrain_trace_brass();
@@ -457,7 +457,7 @@ function terrain_trace_brass() {
 
     pre_origin = trace_ent.origin;
     trace = tracepoint(trace_ent.origin, trace_ent.origin - (0, 0, 100000));
-    trace_surface_type = trace[# "surfacetype"];
+    trace_surface_type = trace[#"surfacetype"];
 
     if(!isDefined(trace)) {
       continue;
@@ -479,7 +479,7 @@ function terrain_trace_brass() {
     pre_surf_type = self.surface_type[pre_terrain];
     pre_trace_real_ent = self.terrain_brass_ent_array[pre_surf_type];
 
-    if(!isDefined(trace[# "position"])) {
+    if(!isDefined(trace[#"position"])) {
       if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stopallloopsounds(0.5);
       }
@@ -491,8 +491,8 @@ function terrain_trace_brass() {
       pre_trace_real_ent stopallloopsounds(0.5);
     }
 
-    trace_real_ent.origin = trace[# "position"];
-    pre_trace_real_ent.origin = trace[# "position"];
+    trace_real_ent.origin = trace[#"position"];
+    pre_trace_real_ent.origin = trace[#"position"];
 
     if(isDefined(surf_type) && self.isfiring) {
       if(surf_type == pre_surf_type && pre_trace_real_ent isplayingloopsound()) {
@@ -524,7 +524,7 @@ function terrain_trace() {
 
     pre_origin = trace_ent.origin;
     trace = tracepoint(trace_ent.origin, trace_ent.origin - (0, 0, 100000));
-    trace_surface_type = trace[# "surfacetype"];
+    trace_surface_type = trace[#"surfacetype"];
 
     if(!isDefined(trace)) {
       continue;
@@ -546,7 +546,7 @@ function terrain_trace() {
     pre_surf_type = self.surface_type[pre_terrain];
     pre_trace_real_ent = self.terrain_ent_array[pre_surf_type];
 
-    if(!isDefined(trace[# "position"])) {
+    if(!isDefined(trace[#"position"])) {
       if(isDefined(pre_trace_real_ent)) {
         pre_trace_real_ent stopallloopsounds(0.5);
       }
@@ -554,8 +554,8 @@ function terrain_trace() {
       continue;
     }
 
-    trace_real_ent.origin = trace[# "position"];
-    pre_trace_real_ent.origin = trace[# "position"];
+    trace_real_ent.origin = trace[#"position"];
+    pre_trace_real_ent.origin = trace[#"position"];
 
     if(isDefined(surf_type)) {
       if(surf_type == pre_surf_type && pre_trace_real_ent isplayingloopsound()) {
@@ -607,7 +607,7 @@ function aircraft_dustkick(localclientnum) {
     if(dotracethisframe <= 0) {
       dotracethisframe = numframespertrace;
       trace = bulletTrace(trace_ent.origin, trace_ent.origin - (0, 0, 100000), 0, trace_ent, 1);
-      d = distance(trace_ent.origin, trace[# "position"]);
+      d = distance(trace_ent.origin, trace[#"position"]);
       repeatrate = (d - minheight) / (maxheight - minheight) * (slowestrepeatwait - fastestrepeatwait) + fastestrepeatwait;
     }
 
@@ -622,33 +622,33 @@ function aircraft_dustkick(localclientnum) {
       continue;
     }
 
-    if(isDefined(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"])) {
       repeatrate = defaultrepeatrate;
       continue;
     }
 
-    if(!isDefined(trace[# "position"])) {
+    if(!isDefined(trace[#"position"])) {
       repeatrate = defaultrepeatrate;
       continue;
     }
 
-    if(!isDefined(trace[# "surfacetype"])) {
-      trace[# "surfacetype"] = "dirt";
+    if(!isDefined(trace[#"surfacetype"])) {
+      trace[#"surfacetype"] = "dirt";
     }
 
-    if(!isDefined(self.treadfxnamearray) || !isDefined(self.treadfxnamearray[trace[# "surfacetype"]])) {
+    if(!isDefined(self.treadfxnamearray) || !isDefined(self.treadfxnamearray[trace[#"surfacetype"]])) {
       if(isDefined(self.vehicletype)) {
-        println("<dev string:x583>" + trace[# "surfacetype"] + "<dev string:x5aa>" + self.vehicletype);
+        println("<dev string:x583>" + trace[#"surfacetype"] + "<dev string:x5aa>" + self.vehicletype);
         return;
       }
 
-      println("<dev string:x583>" + trace[# "surfacetype"] + "<dev string:x5c0>");
+      println("<dev string:x583>" + trace[#"surfacetype"] + "<dev string:x5c0>");
 
       return;
     }
 
-    if(isDefined(self.treadfxnamearray[trace[# "surfacetype"]])) {
-      playFX(localclientnum, self.treadfxnamearray[trace[# "surfacetype"]], trace[# "position"]);
+    if(isDefined(self.treadfxnamearray[trace[#"surfacetype"]])) {
+      playFX(localclientnum, self.treadfxnamearray[trace[#"surfacetype"]], trace[#"position"]);
     }
   }
 }

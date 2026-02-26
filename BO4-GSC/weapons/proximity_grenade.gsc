@@ -15,12 +15,12 @@
 #namespace proximity_grenade;
 
 init_shared() {
-  level._effect[# "prox_grenade_friendly_default"] = # "weapon/fx_prox_grenade_scan_blue";
-  level._effect[# "prox_grenade_friendly_warning"] = # "weapon/fx_prox_grenade_wrn_grn";
-  level._effect[# "prox_grenade_enemy_default"] = # "weapon/fx_prox_grenade_scan_orng";
-  level._effect[# "prox_grenade_enemy_warning"] = # "weapon/fx_prox_grenade_wrn_red";
-  level._effect[# "prox_grenade_player_shock"] = # "weapon/fx_prox_grenade_impact_player_spwner";
-  level._effect[# "prox_grenade_chain_bolt"] = # "weapon/fx_prox_grenade_elec_jump";
+  level._effect[#"prox_grenade_friendly_default"] = # "weapon/fx_prox_grenade_scan_blue";
+  level._effect[#"prox_grenade_friendly_warning"] = # "weapon/fx_prox_grenade_wrn_grn";
+  level._effect[#"prox_grenade_enemy_default"] = # "weapon/fx_prox_grenade_scan_orng";
+  level._effect[#"prox_grenade_enemy_warning"] = # "weapon/fx_prox_grenade_wrn_red";
+  level._effect[#"prox_grenade_player_shock"] = # "weapon/fx_prox_grenade_impact_player_spwner";
+  level._effect[#"prox_grenade_chain_bolt"] = # "weapon/fx_prox_grenade_elec_jump";
   level.proximitygrenadedetectionradius = getdvarint(#"scr_proximitygrenadedetectionradius", 180);
   level.proximitygrenadeduration = getdvarfloat(#"scr_proximitygrenadeduration", 1.2);
   level.proximitygrenadegraceperiod = getdvarfloat(#"scr_proximitygrenadegraceperiod", 0.05);
@@ -356,7 +356,7 @@ tesla_play_arc_fx(target, waittime) {
 
   fxorg = spawn("script_model", origin);
   fxorg setModel(#"tag_origin");
-  fx = playFXOnTag(level._effect[# "prox_grenade_chain_bolt"], fxorg, "tag_origin");
+  fx = playFXOnTag(level._effect[#"prox_grenade_chain_bolt"], fxorg, "tag_origin");
   playsoundatposition(#"wpn_tesla_bounce", fxorg.origin);
   fxorg moveto(target_origin, waittime);
   fxorg waittill(#"movedone");
@@ -402,7 +402,7 @@ damageplayerinradius(position, eattacker, killcament) {
   self notify(#"proximitygrenadedamagestart");
   self endon(#"proximitygrenadedamagestart", #"disconnect", #"death");
   eattacker endon(#"disconnect");
-  playFXOnTag(level._effect[# "prox_grenade_player_shock"], self, "J_SpineUpper");
+  playFXOnTag(level._effect[#"prox_grenade_player_shock"], self, "J_SpineUpper");
   g_time = gettime();
 
   if(self util::mayapplyscreeneffect()) {

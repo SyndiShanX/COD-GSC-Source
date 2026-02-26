@@ -49,7 +49,7 @@ function_d58bf295(params) {
   entity = self;
 
   if(!isDefined(entity.localheal) || (isDefined(entity.localheal.var_21de13e3) ? entity.localheal.var_21de13e3 : 0) == 0) {
-    self.var_894f7879[# "cleanse_buff"] = 0;
+    self.var_894f7879[#"cleanse_buff"] = 0;
     return;
   }
 

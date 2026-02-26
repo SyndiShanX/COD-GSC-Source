@@ -69,14 +69,14 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function init_fx() {
-  level._effect[# "hash_b63f0232a3d5f82"] = # "hash_3b2dcab0e76aeb7c";
-  level._effect[# "hash_6137c6e5c6df6502"] = # "hash_65be3ccb65aba68f";
-  level._effect[# "hash_70902b0842168222"] = # "hash_72c752412f511f36";
-  level._effect[# "hash_5b324a25a646d3be"] = # "hash_48ba62945045cb4e";
-  level._effect[# "hash_5334c84fbd555272"] = # "hash_7e60569db9c36606";
-  level._effect[# "hash_2da85b06a03a2ba"] = # "hash_26689c1b99e901a";
-  level._effect[# "hash_7527861319d5e820"] = # "hash_48ce1b00618cebdd";
-  level._effect[# "hash_711a6d544750ccfb"] = # "hash_735d87613c054cac";
+  level._effect[#"hash_b63f0232a3d5f82"] = # "hash_3b2dcab0e76aeb7c";
+  level._effect[#"hash_6137c6e5c6df6502"] = # "hash_65be3ccb65aba68f";
+  level._effect[#"hash_70902b0842168222"] = # "hash_72c752412f511f36";
+  level._effect[#"hash_5b324a25a646d3be"] = # "hash_48ba62945045cb4e";
+  level._effect[#"hash_5334c84fbd555272"] = # "hash_7e60569db9c36606";
+  level._effect[#"hash_2da85b06a03a2ba"] = # "hash_26689c1b99e901a";
+  level._effect[#"hash_7527861319d5e820"] = # "hash_48ce1b00618cebdd";
+  level._effect[#"hash_711a6d544750ccfb"] = # "hash_735d87613c054cac";
 }
 
 function function_47b8b88() {

@@ -78,7 +78,7 @@ function function_9d8b22d8(entity, throwifpossible = 0, var_f06df42 = 1) {
     throwifpossible = 1;
   }
 
-  if(is_true(level.var_6324e9e5[# "hash_555b62c2fb0fbb4e"])) {
+  if(is_true(level.var_6324e9e5[#"hash_555b62c2fb0fbb4e"])) {
     throwifpossible = 1;
 
     if(isDefined(entity.grenadeammo) && entity.grenadeammo <= 0) {

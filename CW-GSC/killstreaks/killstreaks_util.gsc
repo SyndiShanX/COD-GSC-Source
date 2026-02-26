@@ -130,13 +130,13 @@ function is_weapon_associated_with_killstreak(weapon) {
 function function_4a1fb0f() {
   onkillstreak = 0;
 
-  if(!isDefined(self.pers[# "kill_streak_before_death"])) {
-    self.pers[# "kill_streak_before_death"] = 0;
+  if(!isDefined(self.pers[#"kill_streak_before_death"])) {
+    self.pers[#"kill_streak_before_death"] = 0;
   }
 
-  streakplusone = self.pers[# "kill_streak_before_death"] + 1;
+  streakplusone = self.pers[#"kill_streak_before_death"] + 1;
 
-  if(self.pers[# "kill_streak_before_death"] >= 5) {
+  if(self.pers[#"kill_streak_before_death"] >= 5) {
     onkillstreak = 1;
   }
 
@@ -218,12 +218,12 @@ function function_fde227c6(weapon, stat_weapon) {
 
 function function_fa6e0467(weapon) {
   if(weapon.iscliponly) {
-    self setweaponammoclip(weapon, self.pers[# "held_killstreak_ammo_count"][weapon]);
+    self setweaponammoclip(weapon, self.pers[#"held_killstreak_ammo_count"][weapon]);
     return;
   }
 
-  self setweaponammoclip(weapon, self.pers[# "held_killstreak_clip_count"][weapon]);
-  self setweaponammostock(weapon, self.pers[# "held_killstreak_ammo_count"][weapon] - self.pers[# "held_killstreak_clip_count"][weapon]);
+  self setweaponammoclip(weapon, self.pers[#"held_killstreak_clip_count"][weapon]);
+  self setweaponammostock(weapon, self.pers[#"held_killstreak_ammo_count"][weapon] - self.pers[#"held_killstreak_clip_count"][weapon]);
 }
 
 function function_43f4782d() {

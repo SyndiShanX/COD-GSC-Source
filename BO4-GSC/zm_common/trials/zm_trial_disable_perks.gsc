@@ -123,7 +123,7 @@ function_f0b698a7() {
 function_85611c27() {
   if(isDefined(self.var_7864a0f6.additional_primary_weapon)) {
     foreach(weapondata in self.var_4a17c2cb) {
-      weapon = weapondata[# "weapon"];
+      weapon = weapondata[#"weapon"];
 
       if(weapon === self.var_7864a0f6.additional_primary_weapon) {
         self.var_7864a0f6.var_dd9bd473 = weapondata;

@@ -55,12 +55,12 @@ function enable_slider_perk_for_level() {
 function init_slider() {}
 
 function function_1781c013() {
-  level._effect[# "slider_light"] = "zombie/fx9_perk_phd_slider";
-  level.machine_assets[# "talent_phdslider"] = spawnStruct();
-  level.machine_assets[# "talent_phdslider"].weapon = getweapon("zombie_perk_bottle_slider");
-  level.machine_assets[# "talent_phdslider"].off_model = "p9_sur_machine_phd_slider";
-  level.machine_assets[# "talent_phdslider"].on_model = "p9_sur_machine_phd_slider";
-  level.machine_assets[# "talent_phdslider"].power_on_callback = &function_c60d9d72;
+  level._effect[#"slider_light"] = "zombie/fx9_perk_phd_slider";
+  level.machine_assets[#"talent_phdslider"] = spawnStruct();
+  level.machine_assets[#"talent_phdslider"].weapon = getweapon("zombie_perk_bottle_slider");
+  level.machine_assets[#"talent_phdslider"].off_model = "p9_sur_machine_phd_slider";
+  level.machine_assets[#"talent_phdslider"].on_model = "p9_sur_machine_phd_slider";
+  level.machine_assets[#"talent_phdslider"].power_on_callback = &function_c60d9d72;
 }
 
 function function_5ba17a72() {
@@ -203,8 +203,8 @@ function function_4d806c6a(var_a25d1f0 = 25, explosion_radius = 64, var_8b77e4de
     trace = groundtrace(self.origin + (0, 0, var_b498a002), self.origin - (0, 0, var_b498a002), 0, self, 1, 1);
   }
 
-  if(isDefined(trace[# "position"])) {
-    explosion_pos = trace[# "position"];
+  if(isDefined(trace[#"position"])) {
+    explosion_pos = trace[#"position"];
   } else {
     explosion_pos = (self.origin[0], self.origin[1], self.origin[2] + 16);
   }

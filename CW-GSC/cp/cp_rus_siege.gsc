@@ -72,12 +72,12 @@ function function_37dfd679() {
   skipto::function_eb91535d("outro", &namespace_9e5ef376::outro_main, &namespace_9e5ef376::function_4b8cec86, "Outro", &namespace_9e5ef376::outro_cleanup, ["ending_geo", "graveyard", "graveyard_extra_structures", "radar_towers"]);
   skipto::function_eb91535d("looseends", &namespace_ef60e103::function_2435d3e, &namespace_ef60e103::function_7ab616c1, "Loose Ends", &namespace_ef60e103::function_8f77588);
 
-  level.var_965c6227[# "infil"] = ["<dev string:x38>", "<dev string:x41>", "<dev string:x4c>", "<dev string:x56>"];
-  level.var_965c6227[# "emp_flash"] = ["<dev string:x62>", "<dev string:x41>", "<dev string:x69>", "<dev string:x56>"];
-  level.var_965c6227[# "Courtyard"] = ["<dev string:x72>", "<dev string:x7f>", "<dev string:x4c>", "<dev string:x56>"];
-  level.var_965c6227[# "hash_290c103dfab4ef4f"] = ["<dev string:x89>", "<dev string:x7f>", "<dev string:x97>", "<dev string:x56>"];
-  level.var_965c6227[# "outro"] = ["<dev string:x9f>", "<dev string:x7f>", "<dev string:x69>", "<dev string:x56>"];
-  level.var_965c6227[# "hash_9ed59b801f5827f"] = ["<dev string:xa8>", "<dev string:x7f>", "<dev string:x69>", "<dev string:x56>"];
+  level.var_965c6227[#"infil"] = ["<dev string:x38>", "<dev string:x41>", "<dev string:x4c>", "<dev string:x56>"];
+  level.var_965c6227[#"emp_flash"] = ["<dev string:x62>", "<dev string:x41>", "<dev string:x69>", "<dev string:x56>"];
+  level.var_965c6227[#"Courtyard"] = ["<dev string:x72>", "<dev string:x7f>", "<dev string:x4c>", "<dev string:x56>"];
+  level.var_965c6227[#"hash_290c103dfab4ef4f"] = ["<dev string:x89>", "<dev string:x7f>", "<dev string:x97>", "<dev string:x56>"];
+  level.var_965c6227[#"outro"] = ["<dev string:x9f>", "<dev string:x7f>", "<dev string:x69>", "<dev string:x56>"];
+  level.var_965c6227[#"hash_9ed59b801f5827f"] = ["<dev string:xa8>", "<dev string:x7f>", "<dev string:x69>", "<dev string:x56>"];
 }
 
 function function_689c12cc() {

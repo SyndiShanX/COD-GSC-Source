@@ -32,8 +32,8 @@ function private preinit() {
   callback::on_player_killed(&on_player_killed);
   callback::on_connect(&on_player_connect);
   level.var_c1e49fd1 = [];
-  level.var_c1e49fd1[# "huditems.hess1"] = "hudItems.hess1";
-  level.var_c1e49fd1[# "huditems.hess2"] = "hudItems.hess2";
+  level.var_c1e49fd1[#"huditems.hess1"] = "hudItems.hess1";
+  level.var_c1e49fd1[#"huditems.hess2"] = "hudItems.hess2";
 }
 
 function function_1df189ec(str_name, var_43c0c72, n_regen_rate, n_type, var_c7b7ca32) {
@@ -152,8 +152,8 @@ function reset(var_f9b16c16) {
   }
 
   self.var_afb10e8b = [];
-  self.var_afb10e8b[# "huditems.hess1"] = 0;
-  self.var_afb10e8b[# "huditems.hess2"] = 0;
+  self.var_afb10e8b[#"huditems.hess1"] = 0;
+  self.var_afb10e8b[#"huditems.hess2"] = 0;
 
   if(var_f9b16c16) {}
 }
@@ -222,17 +222,17 @@ function function_ec94d4eb() {
   self notify(#"hash_440299874a982aae");
   self endon(#"hash_440299874a982aae", #"death");
   level endon(#"hash_440299874a982aae");
-  self.var_e3ab1888[# "gas"] = 0;
+  self.var_e3ab1888[#"gas"] = 0;
 
   while(true) {
     if(is_true(level.var_a51b5712)) {
       if(is_true(self.var_59d09950)) {
         if(self function_838a3ba4("gas") >= 0.75) {
-          self.var_e3ab1888[# "gas"] = level.var_f9c9c0[# "gas"].var_43c0c72 * 0.75;
+          self.var_e3ab1888[#"gas"] = level.var_f9c9c0[#"gas"].var_43c0c72 * 0.75;
           self thread function_7a5f3e98("gas", undefined, 0);
         }
       } else if(self function_838a3ba4("gas") < 0.25) {
-        self.var_e3ab1888[# "gas"] = level.var_f9c9c0[# "gas"].var_43c0c72 * 0.25;
+        self.var_e3ab1888[#"gas"] = level.var_f9c9c0[#"gas"].var_43c0c72 * 0.25;
         self thread function_7a5f3e98("gas", undefined, 0);
       }
     }
@@ -295,11 +295,11 @@ function do_damage(str_name, n_damage, e_ent, disable_ui) {
 
   if(str_name == "gas") {
     if(is_true(self.var_59d09950)) {
-      if(self.var_e3ab1888[# "gas"] >= var_4db43f60.var_43c0c72 * 0.75) {
-        self.var_e3ab1888[# "gas"] = var_4db43f60.var_43c0c72 * 0.75;
+      if(self.var_e3ab1888[#"gas"] >= var_4db43f60.var_43c0c72 * 0.75) {
+        self.var_e3ab1888[#"gas"] = var_4db43f60.var_43c0c72 * 0.75;
       }
     } else {
-      self.var_e3ab1888[# "gas"] *= 1.1;
+      self.var_e3ab1888[#"gas"] *= 1.1;
     }
   }
 

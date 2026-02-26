@@ -201,8 +201,8 @@ function private trace() {
   level.parabolic_mic.trace = beamtrace(eye + fwd * min_dist, eye + fwd * max_dist, 1, self, 1, 1);
 
   if(getdvarint(#"hash_1a81e6400daa0c60")) {
-    print3d(level.parabolic_mic.trace[# "position"], "<dev string:x66>" + level.parabolic_mic.trace[# "position"][0] + "<dev string:x6a>" + level.parabolic_mic.trace[# "position"][1] + "<dev string:x6a>" + level.parabolic_mic.trace[# "position"][2], (1, 1, 1), 1, 0.35);
-    sphere(level.parabolic_mic.trace[# "position"]);
+    print3d(level.parabolic_mic.trace[#"position"], "<dev string:x66>" + level.parabolic_mic.trace[#"position"][0] + "<dev string:x6a>" + level.parabolic_mic.trace[#"position"][1] + "<dev string:x6a>" + level.parabolic_mic.trace[#"position"][2], (1, 1, 1), 1, 0.35);
+    sphere(level.parabolic_mic.trace[#"position"]);
   }
 
   arrayremovevalue(level.parabolic_mic.volumes, undefined);
@@ -216,12 +216,12 @@ function private trace() {
       continue;
     }
 
-    if(istouching(level.parabolic_mic.trace[# "position"], volume)) {
+    if(istouching(level.parabolic_mic.trace[#"position"], volume)) {
       if(getdvarint(#"hash_1a81e6400daa0c60")) {
-        print3d(level.parabolic_mic.trace[# "position"] + (0, 0, 6), "<dev string:x70>" + volume.script_noteworthy + "<dev string:x78>", (1, 1, 1), 1, 0.35, 2);
+        print3d(level.parabolic_mic.trace[#"position"] + (0, 0, 6), "<dev string:x70>" + volume.script_noteworthy + "<dev string:x78>", (1, 1, 1), 1, 0.35, 2);
       }
 
-      level.parabolic_mic.var_55e793a5 = level.parabolic_mic.trace[# "position"];
+      level.parabolic_mic.var_55e793a5 = level.parabolic_mic.trace[#"position"];
       level.parabolic_mic.viewents[level.parabolic_mic.viewents.size] = volume;
       self function_4383ffd(volume);
       break;

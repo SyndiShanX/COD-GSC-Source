@@ -1407,8 +1407,8 @@ function_ce8fe2b0(entity, splitorigin) {
   if(isDefined(closestpointonnavmesh)) {
     trace = groundtrace(closestpointonnavmesh + (0, 0, 200), closestpointonnavmesh + (0, 0, -200), 0, undefined);
 
-    if(isDefined(trace[# "position"])) {
-      newpos = trace[# "position"];
+    if(isDefined(trace[#"position"])) {
+      newpos = trace[#"position"];
     }
 
     recordsphere(newpos, 15, (1, 0.5, 0), "<dev string:x41>");
@@ -1867,7 +1867,7 @@ spawn_elephant(phase) {
 
   if(isDefined(elephant)) {
     wait 0.5;
-    elephant forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+    elephant forceteleport(trace[#"position"], player.angles + (0, 180, 0));
   }
 }
 

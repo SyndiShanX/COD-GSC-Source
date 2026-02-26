@@ -21,8 +21,8 @@ __init__() {
 
   level.aat_initializing = 1;
   level.aat = [];
-  level.aat[# "none"] = spawnStruct();
-  level.aat[# "none"].name = "none";
+  level.aat[#"none"] = spawnStruct();
+  level.aat[#"none"].name = "none";
   level.aat_reroll = [];
   level.var_bdba6ee8 = [];
   callback::on_connect(&on_player_connect);

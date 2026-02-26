@@ -546,7 +546,7 @@ function private function_93211521(entity, var_856465ed) {
   var_c43ad98d = entity.origin + vectorscale(vectoenemy, 0.5);
   results = physicstraceex(var_c43ad98d, var_c43ad98d + (0, 0, 120), (-15, -15, -5), (15, 15, 5), self);
 
-  if(results[# "fraction"] == 1) {
+  if(results[#"fraction"] == 1) {
     return true;
   }
 
@@ -716,10 +716,10 @@ function function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompani
     var_65cbfb52 = distancesquared(mocompanimflag.meleeinfo.var_9bfa8497, mocompanimflag.meleeinfo.adjustedendpos);
     var_201660e6 = tracepassedonnavmesh(mocompanimflag.meleeinfo.var_9bfa8497, mocompanimflag.meleeinfo.adjustedendpos, mocompanimflag getpathfindingradius());
     traceresult = bulletTrace(mocompanimflag.origin, mocompanimflag.meleeinfo.adjustedendpos + (0, 0, 30), 0, mocompanimflag);
-    isvisible = traceresult[# "fraction"] == 1;
+    isvisible = traceresult[#"fraction"] == 1;
     var_535d098c = 0;
 
-    if(isDefined(traceresult[# "hitloc"]) && traceresult[# "hitloc"] == "riotshield") {
+    if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
       mocompanimflag.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }

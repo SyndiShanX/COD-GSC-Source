@@ -240,21 +240,21 @@ function aileapgoalservice(entity) {
 
       if(getdvarint(#"hash_1d3e8e41a505eb61", 0)) {
         line(prev_origin, pos, (1, 0, 0), 1, 0, 300);
-        sphere(traceresult[# "position"], 5, (1, 1, 0), 1, 1, 8, 300);
-        line(traceresult[# "position"], traceresult[# "position"] + traceresult[# "normal"] * 20, (1, 1, 0), 1, 0, 300);
+        sphere(traceresult[#"position"], 5, (1, 1, 0), 1, 1, 8, 300);
+        line(traceresult[#"position"], traceresult[#"position"] + traceresult[#"normal"] * 20, (1, 1, 0), 1, 0, 300);
       }
 
-      if(traceresult[# "fraction"] != 1) {
-        if(traceresult[# "normal"][2] < sin(10)) {
+      if(traceresult[#"fraction"] != 1) {
+        if(traceresult[#"normal"][2] < sin(10)) {
           recordline(prev_origin, pos, (1, 0, 0), "<dev string:x61>", entity);
-          recordsphere(traceresult[# "position"], 5, (1, 1, 0), "<dev string:x61>", entity);
-          recordline(traceresult[# "position"], traceresult[# "position"] + traceresult[# "normal"] * 20, (1, 1, 0), "<dev string:x61>", entity);
+          recordsphere(traceresult[#"position"], 5, (1, 1, 0), "<dev string:x61>", entity);
+          recordline(traceresult[#"position"], traceresult[#"position"] + traceresult[#"normal"] * 20, (1, 1, 0), "<dev string:x61>", entity);
 
           passed = 0;
           break;
         }
 
-        pointonnavmesh = function_9cc082d2(traceresult[# "position"], 2 * 39.3701);
+        pointonnavmesh = function_9cc082d2(traceresult[#"position"], 2 * 39.3701);
 
         if(!isDefined(pointonnavmesh)) {
           recordline(prev_origin, pos, (1, 0, 0), "<dev string:x61>", entity);
@@ -263,7 +263,7 @@ function aileapgoalservice(entity) {
           break;
         }
 
-        if(isDefined(entity.var_e9a867e0) && !entity[[entity.var_e9a867e0]](pointonnavmesh[# "point"])) {
+        if(isDefined(entity.var_e9a867e0) && !entity[[entity.var_e9a867e0]](pointonnavmesh[#"point"])) {
           recordline(prev_origin, pos, (1, 0, 0), "<dev string:x61>", entity);
 
           passed = 0;
@@ -346,11 +346,11 @@ function function_b12119f0(entity, asmstatename) {
   if(!is_true(entity.var_862cb24b.var_af225c86)) {
     traceresult = physicstraceex(entity.origin, entity.var_862cb24b.nextpos, entity getmins(), entity getmaxs(), entity);
 
-    if(traceresult[# "fraction"] != 1) {
-      recordsphere(traceresult[# "position"], 10, (0, 1, 0), "<dev string:x61>", entity);
-      recordline(entity.origin, traceresult[# "position"], (0, 1, 0), "<dev string:x61>", entity);
+    if(traceresult[#"fraction"] != 1) {
+      recordsphere(traceresult[#"position"], 10, (0, 1, 0), "<dev string:x61>", entity);
+      recordline(entity.origin, traceresult[#"position"], (0, 1, 0), "<dev string:x61>", entity);
 
-      entity.var_862cb24b.endpos = traceresult[# "position"];
+      entity.var_862cb24b.endpos = traceresult[#"position"];
       return 4;
     }
   }
@@ -807,7 +807,7 @@ function private function_1c7692a4(var_441e6fcc, var_22043f8e) {
   var_380469b1 = self function_ca7b4071(var_22043f8e);
 
   if(isDefined(var_7c2880c0) && isDefined(var_380469b1)) {
-    v_ground = groundtrace(var_7c2880c0 + (0, 0, 8), var_7c2880c0 + (0, 0, -100000), 0, self)[# "position"];
+    v_ground = groundtrace(var_7c2880c0 + (0, 0, 8), var_7c2880c0 + (0, 0, -100000), 0, self)[#"position"];
 
     if(isDefined(v_ground)) {
       self.var_bfd4c4c4 = var_380469b1;
@@ -902,7 +902,7 @@ function private function_236cda12() {
 }
 
 function private function_18867744(navmeshpoint, var_7d6b86d8) {
-  v_ground = groundtrace(navmeshpoint + (0, 0, 8), navmeshpoint + (0, 0, -100000), 0, self)[# "position"];
+  v_ground = groundtrace(navmeshpoint + (0, 0, 8), navmeshpoint + (0, 0, -100000), 0, self)[#"position"];
 
   if(isDefined(v_ground)) {
     if(getdvarint(#"hash_6a18a97ccb2ee1d8", 0)) {

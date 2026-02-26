@@ -128,6 +128,6 @@ function gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdel
 }
 
 function grenadeexplosionfx(pos) {
-  playFX(level._effect[# "hash_38faf2be38a9b539"], pos);
+  playFX(level._effect[#"hash_38faf2be38a9b539"], pos);
   earthquake(0.15, 0.5, pos, 250);
 }

@@ -54,8 +54,8 @@ callback_playerdisconnect() {
     setDvar(#"splitscreen_playernum", players.size);
   }
 
-  if(isDefined(self.score) && isDefined(self.pers) && isDefined(self.pers[# "team"])) {
-    print("<dev string:x38>" + self.pers[# "team"] + "<dev string:x47>" + self.score);
+  if(isDefined(self.score) && isDefined(self.pers) && isDefined(self.pers[#"team"])) {
+    print("<dev string:x38>" + self.pers[#"team"] + "<dev string:x47>" + self.score);
 
     level.dropteam += 1;
   }
@@ -80,27 +80,27 @@ callback_playerdisconnect() {
   }
 
   for(entry = 0; entry < level.players.size; entry++) {
-    if(isDefined(level.players[entry].pers[# "killed_players"][self.name])) {
-      level.players[entry].pers[# "killed_players"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[#"killed_players"][self.name])) {
+      level.players[entry].pers[#"killed_players"][self.name] = undefined;
     }
 
-    if(isDefined(level.players[entry].pers[# "killed_players_with_specialist"][self.name])) {
-      level.players[entry].pers[# "killed_players_with_specialist"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[#"killed_players_with_specialist"][self.name])) {
+      level.players[entry].pers[#"killed_players_with_specialist"][self.name] = undefined;
     }
 
     if(isDefined(level.players[entry].killedplayerscurrent[self.name])) {
       level.players[entry].killedplayerscurrent[self.name] = undefined;
     }
 
-    if(isDefined(level.players[entry].pers[# "killed_by"][self.name])) {
-      level.players[entry].pers[# "killed_by"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[#"killed_by"][self.name])) {
+      level.players[entry].pers[#"killed_by"][self.name] = undefined;
     }
 
-    if(isDefined(level.players[entry].pers[# "nemesis_tracking"][self.name])) {
-      level.players[entry].pers[# "nemesis_tracking"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[#"nemesis_tracking"][self.name])) {
+      level.players[entry].pers[#"nemesis_tracking"][self.name] = undefined;
     }
 
-    if(level.players[entry].pers[# "nemesis_name"] == self.name) {
+    if(level.players[entry].pers[#"nemesis_name"] == self.name) {
       level.players[entry] function_79915d44();
     }
   }
@@ -115,7 +115,7 @@ callback_playerdisconnect() {
 }
 
 function_79915d44() {
-  nemesisarray = self.pers[# "nemesis_tracking"];
+  nemesisarray = self.pers[#"nemesis_tracking"];
   nemesisamount = 0;
   nemesisname = "";
 
@@ -128,16 +128,16 @@ function_79915d44() {
 
   assert(isDefined(nemesisname), "<dev string:x4b>" + self.name);
   assert(isstring(nemesisname), "<dev string:x6e>" + nemesisname + "<dev string:x79>" + self.name);
-  self.pers[# "nemesis_name"] = nemesisname;
+  self.pers[#"nemesis_name"] = nemesisname;
 
   if(nemesisname != "") {
     for(playerindex = 0; playerindex < level.players.size; playerindex++) {
       if(level.players[playerindex].name == nemesisname) {
         nemesisplayer = level.players[playerindex];
-        self.pers[# "nemesis_rank"] = nemesisplayer.pers[# "rank"];
-        self.pers[# "nemesis_rankicon"] = nemesisplayer.pers[# "rankxp"];
-        self.pers[# "nemesis_xp"] = nemesisplayer.pers[# "prestige"];
-        self.pers[# "nemesis_xuid"] = nemesisplayer getxuid();
+        self.pers[#"nemesis_rank"] = nemesisplayer.pers[#"rank"];
+        self.pers[#"nemesis_rankicon"] = nemesisplayer.pers[#"rankxp"];
+        self.pers[#"nemesis_xp"] = nemesisplayer.pers[#"prestige"];
+        self.pers[#"nemesis_xuid"] = nemesisplayer getxuid();
         break;
       }
     }
@@ -145,5 +145,5 @@ function_79915d44() {
     return;
   }
 
-  self.pers[# "nemesis_xuid"] = "";
+  self.pers[#"nemesis_xuid"] = "";
 }

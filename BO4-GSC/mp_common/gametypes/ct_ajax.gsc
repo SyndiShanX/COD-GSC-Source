@@ -57,9 +57,9 @@ function_7c4ef26b(predictedspawn) {
   }
 
   setDvar(#"custom_killstreak_mode", 2);
-  setDvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
-  setDvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
-  setDvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
+  setDvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
+  setDvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
+  setDvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 

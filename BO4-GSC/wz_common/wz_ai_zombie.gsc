@@ -56,20 +56,20 @@ __init__() {
   level.var_3ee83e3f[4] = # "rock";
   level.var_3ee83e3f[5] = # "asphalt";
   level.var_9ee73630 = [];
-  level.var_9ee73630[# "walk"] = [];
-  level.var_9ee73630[# "run"] = [];
-  level.var_9ee73630[# "sprint"] = [];
-  level.var_9ee73630[# "super_sprint"] = [];
-  level.var_9ee73630[# "walk"][# "down"] = 14;
-  level.var_9ee73630[# "walk"][# "up"] = 16;
-  level.var_9ee73630[# "run"][# "down"] = 13;
-  level.var_9ee73630[# "run"][# "up"] = 12;
-  level.var_9ee73630[# "sprint"][# "down"] = 9;
-  level.var_9ee73630[# "sprint"][# "up"] = 8;
-  level.var_9ee73630[# "super_sprint"][# "down"] = 1;
-  level.var_9ee73630[# "super_sprint"][# "up"] = 1;
-  level.var_9ee73630[# "super_super_sprint"][# "down"] = 1;
-  level.var_9ee73630[# "super_super_sprint"][# "up"] = 1;
+  level.var_9ee73630[#"walk"] = [];
+  level.var_9ee73630[#"run"] = [];
+  level.var_9ee73630[#"sprint"] = [];
+  level.var_9ee73630[#"super_sprint"] = [];
+  level.var_9ee73630[#"walk"][#"down"] = 14;
+  level.var_9ee73630[#"walk"][#"up"] = 16;
+  level.var_9ee73630[#"run"][#"down"] = 13;
+  level.var_9ee73630[#"run"][#"up"] = 12;
+  level.var_9ee73630[#"sprint"][#"down"] = 9;
+  level.var_9ee73630[#"sprint"][#"up"] = 8;
+  level.var_9ee73630[#"super_sprint"][#"down"] = 1;
+  level.var_9ee73630[#"super_sprint"][#"up"] = 1;
+  level.var_9ee73630[#"super_super_sprint"][#"down"] = 1;
+  level.var_9ee73630[#"super_super_sprint"][#"up"] = 1;
   spawner::add_archetype_spawn_function(#"zombie", &function_cf051788);
 
   if(getdvarint(#"survival_prototype", 0) || getdvarint(#"cluster_awareness", 0)) {
@@ -1740,9 +1740,9 @@ function function_6397251f() {
 
   trace = bulletTrace(self.origin, self.origin + (0, 0, level.var_12956b7c * -1), 0, self, 0);
 
-  if(isDefined(trace[# "position"]) && trace[# "surfacetype"] != # "none") {
-    pos = trace[# "position"];
-    self.surfacetype = trace[# "surfacetype"];
+  if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != # "none") {
+    pos = trace[#"position"];
+    self.surfacetype = trace[#"surfacetype"];
 
     if(function_21b44b70(self.surfacetype)) {
       drawdebugcross(pos, 5, (0, 1, 0), 1);
@@ -1752,14 +1752,14 @@ function function_6397251f() {
 
     trace2 = bulletTrace(self.origin + (0, 0, level.var_12956b7c * -1), self.origin + (0, 0, level.var_6838a92d * -1), 0, self, 0);
 
-    if(isDefined(trace2[# "position"]) && trace2[# "surfacetype"] != # "none") {
-      if(trace2[# "surfacetype"] != # "default") {
+    if(isDefined(trace2[#"position"]) && trace2[#"surfacetype"] != # "none") {
+      if(trace2[#"surfacetype"] != # "default") {
         drawdebugcross(pos, 5, (1, 0, 0), 1);
 
         return 0;
       }
 
-      var_a4e5b05b = trace2[# "surfacetype"];
+      var_a4e5b05b = trace2[#"surfacetype"];
 
       if(function_21b44b70(var_a4e5b05b)) {
         drawdebugcross(pos, 5, (0, 1, 0), 1);
@@ -1767,18 +1767,18 @@ function function_6397251f() {
         return 1;
       }
 
-      var_1a1b6b0e = trace2[# "normal"];
+      var_1a1b6b0e = trace2[#"normal"];
 
       if(lengthsquared(var_1a1b6b0e) > 0) {
-        pos2 = trace2[# "position"];
+        pos2 = trace2[#"position"];
 
         drawdebugcross(pos2, 5, (1, 0, 1), 1);
 
         trace3 = bulletTrace(pos2 + (0, 0, level.var_6838a92d * -1), pos2 + (0, 0, level.var_b8ce09f3 * -1), 0, self, 0);
 
-        if(isDefined(trace3[# "position"]) && trace3[# "surfacetype"] != # "none") {
-          pos3 = trace3[# "position"];
-          var_bc50df31 = trace3[# "surfacetype"];
+        if(isDefined(trace3[#"position"]) && trace3[#"surfacetype"] != # "none") {
+          pos3 = trace3[#"position"];
+          var_bc50df31 = trace3[#"surfacetype"];
 
           drawdebugcross(pos3, 5, (1, 1, 0), 1);
 
@@ -2034,7 +2034,7 @@ function_b184324d(origin, radius, var_5e8ea34a = 0, dist_from_boundary = 15) {
   x = var_5e8ea34a + cos(theta) * (radius - var_5e8ea34a) * randomfloatrange(0, 1);
   y = var_5e8ea34a + sin(theta) * (radius - var_5e8ea34a) * randomfloatrange(0, 1);
   point = (origin[0] + x, origin[1] + y, origin[2]);
-  var_d1a33279 = groundtrace(point + (0, 0, 8), point + (0, 0, -100000), 0, undefined)[# "position"];
+  var_d1a33279 = groundtrace(point + (0, 0, 8), point + (0, 0, -100000), 0, undefined)[#"position"];
 
   if(isDefined(var_d1a33279)) {
     return getclosestpointonnavmesh(var_d1a33279, 50, dist_from_boundary);

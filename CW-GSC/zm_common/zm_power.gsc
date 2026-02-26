@@ -206,7 +206,7 @@ function elec_switch_on(master_switch, fx_pos) {
   master_switch playSound(#"zmb_turn_on");
 
   if(isDefined(fx_pos)) {
-    playFX(level._effect[# "switch_sparks"], fx_pos.origin);
+    playFX(level._effect[#"switch_sparks"], fx_pos.origin);
   }
 }
 
@@ -837,12 +837,12 @@ function function_da4a8c05(hintstring, n_zone = 0) {
 
   level flag::wait_till(str_flag);
 
-  if(!isDefined(level.var_cef2e607[# "hash_1d6a2292435f5d0a"])) {
-    level.var_cef2e607[# "hash_1d6a2292435f5d0a"] = -1;
+  if(!isDefined(level.var_cef2e607[#"hash_1d6a2292435f5d0a"])) {
+    level.var_cef2e607[#"hash_1d6a2292435f5d0a"] = -1;
   }
 
-  level.var_cef2e607[# "hash_1d6a2292435f5d0a"]++;
-  wait float(function_60d95f53()) / 1000 * (level.var_cef2e607[# "hash_1d6a2292435f5d0a"] % int(0.5 / float(function_60d95f53()) / 1000) + 1);
+  level.var_cef2e607[#"hash_1d6a2292435f5d0a"]++;
+  wait float(function_60d95f53()) / 1000 * (level.var_cef2e607[#"hash_1d6a2292435f5d0a"] % int(0.5 / float(function_60d95f53()) / 1000) + 1);
   self.script_noteworthy = undefined;
   self.trigger sethintstring(hintstring);
 

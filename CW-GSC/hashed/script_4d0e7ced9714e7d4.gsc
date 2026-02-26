@@ -75,22 +75,22 @@ function function_6f94ced5(a_ents, str_shot) {
   if(isDefined(level.var_deda09e)) {
     switch (level.var_deda09e) {
       case # "lazar":
-        if(isDefined(str_shot[# "park"]) && isalive(str_shot[# "park"])) {
-          str_shot[# "park"] delete();
+        if(isDefined(str_shot[#"park"]) && isalive(str_shot[#"park"])) {
+          str_shot[#"park"] delete();
         }
 
-        if(isDefined(str_shot[# "lazarshotty"])) {
-          str_shot[# "lazarshotty"].targetname = "lazarshotty";
+        if(isDefined(str_shot[#"lazarshotty"])) {
+          str_shot[#"lazarshotty"].targetname = "lazarshotty";
         }
 
         break;
       case # "park":
-        if(isDefined(str_shot[# "lazar"]) && isalive(str_shot[# "lazar"])) {
-          str_shot[# "lazar"] delete();
+        if(isDefined(str_shot[#"lazar"]) && isalive(str_shot[#"lazar"])) {
+          str_shot[#"lazar"] delete();
         }
 
-        if(isDefined(str_shot[# "lazarshotty"])) {
-          str_shot[# "lazarshotty"] delete();
+        if(isDefined(str_shot[#"lazarshotty"])) {
+          str_shot[#"lazarshotty"] delete();
         }
 
         break;
@@ -99,16 +99,16 @@ function function_6f94ced5(a_ents, str_shot) {
     return;
   }
 
-  if(isDefined(str_shot[# "lazar"]) && isalive(str_shot[# "lazar"])) {
-    str_shot[# "lazar"] delete();
+  if(isDefined(str_shot[#"lazar"]) && isalive(str_shot[#"lazar"])) {
+    str_shot[#"lazar"] delete();
   }
 
-  if(isDefined(str_shot[# "park"]) && isalive(str_shot[# "park"])) {
-    str_shot[# "park"] delete();
+  if(isDefined(str_shot[#"park"]) && isalive(str_shot[#"park"])) {
+    str_shot[#"park"] delete();
   }
 
-  if(isDefined(str_shot[# "lazarshotty"])) {
-    str_shot[# "lazarshotty"] delete();
+  if(isDefined(str_shot[#"lazarshotty"])) {
+    str_shot[#"lazarshotty"] delete();
   }
 }
 
@@ -240,7 +240,7 @@ function function_ae1eba32() {
 }
 
 function function_7c927add(var_ec670c03) {
-  if(level.var_3cf0e895[# "hash_23478d403d62c627"] >= 1) {
+  if(level.var_3cf0e895[#"hash_23478d403d62c627"] >= 1) {
     return;
   }
 

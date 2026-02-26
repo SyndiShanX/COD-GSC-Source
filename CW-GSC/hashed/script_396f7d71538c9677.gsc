@@ -69,7 +69,7 @@ function function_58c93260(player, meansofdeath) {
     return undefined;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && isDefined(self.pers) && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -307,7 +307,7 @@ function get_player_dialog_alias(dialogkey, meansofdeath) {
 
   bundlename = self getmpdialogname();
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 

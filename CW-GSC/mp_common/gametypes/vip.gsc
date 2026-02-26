@@ -100,8 +100,8 @@ function onstartgametype() {
   level thread set_ui_team();
 
   if(level.scoreroundwinbased) {
-    [[level._setteamscore]](#"allies", game.stat[# "roundswon"][# "allies"]);
-    [[level._setteamscore]](#"axis", game.stat[# "roundswon"][# "axis"]);
+    [[level._setteamscore]](#"allies", game.stat[#"roundswon"][#"allies"]);
+    [[level._setteamscore]](#"axis", game.stat[#"roundswon"][#"axis"]);
   }
 
   function_5bc7928d();
@@ -150,7 +150,7 @@ function onroundswitch() {
     var_35ee5a5a function_3e035a80();
     var_35ee5a5a function_ba08018d();
     var_35ee5a5a.var_6b4e7428 = 0;
-    var_35ee5a5a draft::select_character(var_35ee5a5a.pers[# "original_role"], 1);
+    var_35ee5a5a draft::select_character(var_35ee5a5a.pers[#"original_role"], 1);
     var_35ee5a5a.var_e8c7d324 = undefined;
 
     if(true) {
@@ -166,18 +166,18 @@ function onspawnplayer(predictedspawn) {
 }
 
 function onspawned() {
-  original_role = self.pers[# "original_role"];
+  original_role = self.pers[#"original_role"];
   current_role = self getspecialistindex();
 
   if(!isDefined(original_role) || current_role != level.var_a9bb8bf) {
-    self.pers[# "original_role"] = current_role;
+    self.pers[#"original_role"] = current_role;
     self.var_89eab96d = 1;
   }
 }
 
 function onconnect() {
-  if(!isDefined(self.pers[# "vip_count"])) {
-    self.pers[# "vip_count"] = 0;
+  if(!isDefined(self.pers[#"vip_count"])) {
+    self.pers[#"vip_count"] = 0;
   }
 }
 
@@ -229,11 +229,11 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     if(self === level.vip) {
       scoreevents::processscoreevent(#"vip_killed", psoffsettime, self, deathanimduration);
       psoffsettime stats::function_cc215323(#"hash_8bdbd052bdb213", 1);
-      psoffsettime.pers[# "objectives"]++;
-      psoffsettime.objectives = psoffsettime.pers[# "objectives"];
+      psoffsettime.pers[#"objectives"]++;
+      psoffsettime.objectives = psoffsettime.pers[#"objectives"];
       psoffsettime globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
-      psoffsettime.pers[# "objectiveekia"]++;
-      psoffsettime.objectiveekia = psoffsettime.pers[# "objectiveekia"];
+      psoffsettime.pers[#"objectiveekia"]++;
+      psoffsettime.objectiveekia = psoffsettime.pers[#"objectiveekia"];
     } else {
       scoreevents::processscoreevent(#"eliminated_enemy", psoffsettime, self, deathanimduration);
       id = self getentitynumber();
@@ -253,7 +253,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
   if(isDefined(level.vip) && level.vip == self) {
     assert(self.team == game.attackers);
 
-    if(game.stat[# "teamscores"][game.defenders] != level.roundwinlimit - 1) {
+    if(game.stat[#"teamscores"][game.defenders] != level.roundwinlimit - 1) {
       thread globallogic_audio::function_b4319f8e("vipAttackersVIPKilled", self.team, self, "vipAttackersVIPKilled");
       thread globallogic_audio::leader_dialog("vipDefendersKilledVIP", util::getotherteam(self.team), "vipDefendersKilledVIP");
     }
@@ -457,11 +457,11 @@ function function_bf315481(player) {
 
   var_8e875f24 = self;
   scoreevents::processscoreevent(#"hash_4c886461e6f6d07", player);
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
   player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
-  player.pers[# "captures"]++;
-  player.captures = player.pers[# "captures"];
+  player.pers[#"captures"]++;
+  player.captures = player.pers[#"captures"];
   level thread popups::displayteammessagetoall(#"hash_27440000eb57819f", player);
   team = player getteam();
 
@@ -573,30 +573,30 @@ function private function_83eb584e() {
     var_e52acd04 = 2147483647;
 
     foreach(player in var_6a44aacb) {
-      if(player.pers[# "vip_count"] < var_e52acd04) {
-        var_e52acd04 = player.pers[# "vip_count"];
+      if(player.pers[#"vip_count"] < var_e52acd04) {
+        var_e52acd04 = player.pers[#"vip_count"];
       }
     }
 
     max_score = 0;
 
     foreach(player in var_6a44aacb) {
-      if(player.pers[# "vip_count"] == var_e52acd04 && player.pers[# "score"] > max_score) {
-        max_score = player.pers[# "score"];
+      if(player.pers[#"vip_count"] == var_e52acd04 && player.pers[#"score"] > max_score) {
+        max_score = player.pers[#"score"];
       }
     }
 
     var_6329e8ff = [];
 
     foreach(player in var_6a44aacb) {
-      if(player.pers[# "vip_count"] == var_e52acd04 && player.pers[# "score"] == max_score) {
+      if(player.pers[#"vip_count"] == var_e52acd04 && player.pers[#"score"] == max_score) {
         var_6329e8ff[var_6329e8ff.size] = player;
       }
     }
 
     var_daecd5d7 = randomintrange(0, var_6329e8ff.size);
     vip = var_6329e8ff[var_daecd5d7];
-    vip.pers[# "vip_count"]++;
+    vip.pers[#"vip_count"]++;
     vip draft::select_character(level.var_a9bb8bf, 1);
     vip.var_6b4e7428 = 1;
     vip.var_db459f8d = 1;
@@ -780,9 +780,9 @@ function function_95ab03ff(primary, primaryattachments, secondary, secondaryatta
 }
 
 function function_fa62642c(var_8b0bfce9, var_5c25da5) {
-  self.var_cefe369d = self.pers[# "fieldupgrades"][# "ammo"];
-  self.var_bb8ead86 = self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"];
-  self.var_67db95b2 = self.pers[# "fieldupgrades"][# "cooldownweapon"];
+  self.var_cefe369d = self.pers[#"fieldupgrades"][#"ammo"];
+  self.var_bb8ead86 = self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"];
+  self.var_67db95b2 = self.pers[#"fieldupgrades"][#"cooldownweapon"];
   self function_1025145d();
   self giveweapon(var_8b0bfce9);
   self setblockweaponpickup(var_8b0bfce9, 1);
@@ -790,29 +790,29 @@ function function_fa62642c(var_8b0bfce9, var_5c25da5) {
   waitframe(1);
 
   if(game.state == # "playing" && isalive(self) && self hasweapon(var_8b0bfce9)) {
-    self.pers[# "fieldupgrades"][# "ammo"] = var_5c25da5;
+    self.pers[#"fieldupgrades"][#"ammo"] = var_5c25da5;
     self setweaponammoclip(var_8b0bfce9, var_5c25da5);
   }
 }
 
 function function_1025145d() {
-  self.pers[# "fieldupgrades"][# "ammo"] = 0;
-  self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = 0;
-  self.pers[# "fieldupgrades"][# "cooldownweapon"] = undefined;
+  self.pers[#"fieldupgrades"][#"ammo"] = 0;
+  self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = 0;
+  self.pers[#"fieldupgrades"][#"cooldownweapon"] = undefined;
   self notify(#"hash_50ce27022d3b38c");
 }
 
 function function_ba08018d() {
-  self.pers[# "fieldupgrades"][# "ammo"] = self.var_cefe369d;
-  self.pers[# "fieldupgrades"][# "hash_67e7b008344d0e5e"] = self.var_bb8ead86;
-  self.pers[# "fieldupgrades"][# "cooldownweapon"] = self.var_67db95b2;
+  self.pers[#"fieldupgrades"][#"ammo"] = self.var_cefe369d;
+  self.pers[#"fieldupgrades"][#"hash_67e7b008344d0e5e"] = self.var_bb8ead86;
+  self.pers[#"fieldupgrades"][#"cooldownweapon"] = self.var_67db95b2;
 }
 
 function function_a9e5d783() {
   var_6a9f86b9 = level.var_34f3236a - self.health;
   self.maxhealth = level.var_34f3236a;
   self.health = level.var_34f3236a;
-  self.var_894f7879[# "vip"] = var_6a9f86b9;
+  self.var_894f7879[#"vip"] = var_6a9f86b9;
   self player::function_9080887a();
 }
 
@@ -874,8 +874,8 @@ function private function_95002a59(attacker, victim, inflictor, weapon, meansofd
   }
 
   if(isDefined(weapon)) {
-    weapon.pers[# "downs"] = (isDefined(weapon.pers[# "downs"]) ? weapon.pers[# "downs"] : 0) + 1;
-    weapon.downs = weapon.pers[# "downs"];
+    weapon.pers[#"downs"] = (isDefined(weapon.pers[#"downs"]) ? weapon.pers[#"downs"] : 0) + 1;
+    weapon.downs = weapon.pers[#"downs"];
 
     if(isPlayer(weapon) && util::function_fbce7263(weapon.team, self.team) && !weapon laststand_mp::is_cheating()) {
       if(self === level.vip) {
@@ -902,8 +902,8 @@ function private function_45a85e5b(revivee) {
 }
 
 function private onplayerrevived(revivee, reviver) {
-  reviver.pers[# "revives"] = (isDefined(reviver.pers[# "revives"]) ? reviver.pers[# "revives"] : 0) + 1;
-  reviver.revives = reviver.pers[# "revives"];
+  reviver.pers[#"revives"] = (isDefined(reviver.pers[#"revives"]) ? reviver.pers[#"revives"] : 0) + 1;
+  reviver.revives = reviver.pers[#"revives"];
 
   if(!reviver laststand_mp::is_cheating()) {
     if(revivee === level.vip) {
@@ -952,7 +952,7 @@ function ononeleftevent(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         break;
       }
@@ -1650,7 +1650,7 @@ function function_c22381ff() {
     end = rope gettagorigin("<dev string:xa2>");
     color = (0, 1, 0);
     trace = groundtrace(start, end + (0, 0, -2048), 0, self, 1, 1);
-    origin = trace[# "position"];
+    origin = trace[#"position"];
 
     if(!isDefined(level.var_f5f2d350)) {
       continue;

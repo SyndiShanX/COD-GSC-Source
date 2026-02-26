@@ -35,8 +35,8 @@
 #namespace namespace_b11c1856;
 
 function starting(str_objective) {
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   exploder::exploder("lgt_exp_pre_nuke_ext_lights");
   namespace_534279a::spawn_allies();
   namespace_604e2e22::function_3b9e7104();

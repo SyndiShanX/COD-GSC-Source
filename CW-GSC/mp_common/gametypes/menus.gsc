@@ -27,20 +27,20 @@ function private preinit() {
 
 function init() {
   game.menu = [];
-  game.menu[# "menu_start_menu"] = "StartMenu_Main";
-  game.menu[# "menu_team"] = "ChangeTeam";
-  game.menu[# "menu_class"] = "class";
-  game.menu[# "menu_changeclass"] = "PositionDraft";
-  game.menu[# "menu_changeclass_offline"] = "PositionDraft";
+  game.menu[#"menu_start_menu"] = "StartMenu_Main";
+  game.menu[#"menu_team"] = "ChangeTeam";
+  game.menu[#"menu_class"] = "class";
+  game.menu[#"menu_changeclass"] = "PositionDraft";
+  game.menu[#"menu_changeclass_offline"] = "PositionDraft";
 
   foreach(str_team in level.teams) {
     game.menu["menu_changeclass_" + str_team] = "PositionDraft";
   }
 
-  game.menu[# "menu_controls"] = "ingame_controls";
-  game.menu[# "menu_options"] = "ingame_options";
-  game.menu[# "menu_leavegame"] = "popup_leavegame";
-  game.menu[# "hash_1e441031ee146364"] = "WeaponCacheChangeLoadout";
+  game.menu[#"menu_controls"] = "ingame_controls";
+  game.menu[#"menu_options"] = "ingame_options";
+  game.menu[#"menu_leavegame"] = "popup_leavegame";
+  game.menu[#"hash_1e441031ee146364"] = "WeaponCacheChangeLoadout";
 }
 
 function on_player_connect() {
@@ -61,9 +61,9 @@ function on_menu_response(params) {
     self closeingamemenu();
 
     if(level.console) {
-      if(menu == game.menu[# "menu_changeclass"] || menu == game.menu[# "menu_changeclass_offline"] || menu == game.menu[# "menu_team"] || menu == game.menu[# "menu_controls"]) {
-        if(isDefined(level.teams[self.pers[# "team"]])) {
-          self openmenu(game.menu[# "menu_start_menu"]);
+      if(menu == game.menu[#"menu_changeclass"] || menu == game.menu[#"menu_changeclass_offline"] || menu == game.menu[#"menu_team"] || menu == game.menu[#"menu_controls"]) {
+        if(isDefined(level.teams[self.pers[#"team"]])) {
+          self openmenu(game.menu[#"menu_start_menu"]);
         }
       }
     }
@@ -73,7 +73,7 @@ function on_menu_response(params) {
 
   if(menu == "changeteam" && level.allow_teamchange) {
     self closeingamemenu();
-    self openmenu(game.menu[# "menu_team"]);
+    self openmenu(game.menu[#"menu_team"]);
   }
 
   var_c4acc417 = getDvar(#"hash_72dfadc84e809197", 0) == 1;
@@ -136,7 +136,7 @@ function on_menu_response(params) {
     return;
   }
 
-  if(menu == game.menu[# "menu_team"] && level.allow_teamchange) {
+  if(menu == game.menu[#"menu_team"] && level.allow_teamchange) {
     if(is_true(level.var_fb99ff98)) {
       self.var_77d6602a = response;
     } else {
@@ -156,12 +156,12 @@ function on_menu_response(params) {
     return;
   }
 
-  if(menu == game.menu[# "menu_changeclass"] || menu == game.menu[# "menu_changeclass_offline"] || menu == game.menu[# "hash_1e441031ee146364"]) {
+  if(menu == game.menu[#"menu_changeclass"] || menu == game.menu[#"menu_changeclass_offline"] || menu == game.menu[#"hash_1e441031ee146364"]) {
     if(response == "changecharacter" || response == "randomcharacter" || response == "ready" || response == "opendraft" || response == "closedraft") {
       self[[level.draftmenu]](response, intpayload);
     } else if(response == "weapon_updated") {
       if(self.dead !== 1 && self.health != 0) {
-        self iprintlnbold(game.strings[# "hash_b71875e85956ea"]);
+        self iprintlnbold(game.strings[#"hash_b71875e85956ea"]);
       }
     } else if(response != "cancel") {
       if(response == "draft") {
@@ -170,7 +170,7 @@ function on_menu_response(params) {
         return;
       }
 
-      self[[level.curclass]](response, undefined, 1, menu == game.menu[# "hash_1e441031ee146364"]);
+      self[[level.curclass]](response, undefined, 1, menu == game.menu[#"hash_1e441031ee146364"]);
     }
 
     return;
@@ -266,7 +266,7 @@ function function_2d1eb0ec(intpayload) {
       }
     }
 
-    team = self.pers[# "team"];
+    team = self.pers[#"team"];
     self thread battlechatter::function_e3ebbf87(callout, var_e7a0076b != callout.title);
     self.lastcallouttime = time + int(battlechatter::mpdialog_value("calloutSpamTimeWindow", 0) * 1000);
   }

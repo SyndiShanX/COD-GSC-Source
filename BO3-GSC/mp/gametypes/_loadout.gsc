@@ -831,9 +831,9 @@ function givespecialoffhand() {
       specialoffhand = getweapon(herogagdetname);
     }
   }
-  if(isDefined(self.pers[# "hash_65987563"])) {
+  if(isDefined(self.pers[#"hash_65987563"])) {
     assert(specialoffhand.name == "");
-    specialoffhand = self.pers[# "hash_65987563"];
+    specialoffhand = self.pers[#"hash_65987563"];
     roulette::gadget_roulette_give_earned_specialist(specialoffhand, 0);
   }
   if(isleagueitemrestricted(specialoffhand.name) || !isequipmentallowed(specialoffhand.name)) {

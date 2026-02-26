@@ -166,7 +166,7 @@ function function_60a583d8(str_objective, var_50cc0d4f) {
   level waittill(#"hash_459a515290c970dc");
   level thread scene::play("scene_duga_intro_adler", "dt_idle", [level.adler]);
   level.var_1bf038f6 dialog_tree::run(level.adler);
-  s_result = level flag::wait_till_any([# "flag_ambush_signaled", #"hash_49d647c310f93e45"]);
+  s_result = level flag::wait_till_any([#"flag_ambush_signaled", #"hash_49d647c310f93e45"]);
   clientfield::set("stream_intro_truck", 0);
 
   if(s_result._notify === "flag_ambush_signaled") {

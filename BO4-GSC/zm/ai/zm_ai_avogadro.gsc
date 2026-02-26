@@ -150,9 +150,9 @@ function_f34df3c() {
 
   if(!isDefined(self._effect)) {
     self._effect = [];
-    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
-    self._effect[# "hash_571a3bab8b805854"] = "zm_ai/fx8_avo_elec_teleport_flash";
-    self._effect[# "nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_avo_elec_teleport_appear";
+    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
+    self._effect[#"hash_571a3bab8b805854"] = "zm_ai/fx8_avo_elec_teleport_flash";
+    self._effect[#"nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_avo_elec_teleport_appear";
   }
 
   if(isDefined(level.avogadro_intro_location)) {
@@ -656,9 +656,9 @@ function_315c9db0(entity, asmstatename) {
   if(isDefined(entity.var_885c1824)) {
     var_45be44a6 = function_28df3aca(entity);
     fx_origin = entity gettagorigin("j_spine4");
-    playFX(entity._effect[# "hash_571a3bab8b805854"], fx_origin);
+    playFX(entity._effect[#"hash_571a3bab8b805854"], fx_origin);
     entity forceteleport(var_45be44a6.origin, var_45be44a6.angles);
-    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, entity._effect[# "nova_crawler_phase_teleport_end_fx"], entity, "j_spine4");
+    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, entity._effect[#"nova_crawler_phase_teleport_end_fx"], entity, "j_spine4");
   }
 
   animationstatenetworkutility::requeststate(entity, asmstatename);
@@ -808,7 +808,7 @@ function_a9be3eba(entity) {
         entity setblackboardattribute("_phase_direction", direction);
         entity setblackboardattribute("_phase_distance", distance);
         result = entity astsearch("phase@avogadro");
-        animation = animationstatenetworkutility::searchanimationmap(entity, result[# "animation"]);
+        animation = animationstatenetworkutility::searchanimationmap(entity, result[#"animation"]);
 
         if(isDefined(animation)) {
           localdeltavector = getmovedelta(animation, 0, 1, entity);

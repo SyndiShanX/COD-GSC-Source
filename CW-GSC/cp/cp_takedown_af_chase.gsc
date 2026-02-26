@@ -235,7 +235,7 @@ function function_2ccc781e(var_d3440450, var_50cc0d4f) {
   level thread dialogue::radio("vox_cp_tdwn_07400_masn_ontheground_ee", undefined, 1);
   player ghost();
   level.player val::reset(#"chase", "allow_prone");
-  hint_data = [hint_tutorial::function_f0104b5([# "hash_7aca54ffec0ead0c", #"hash_2b29cb97f3659ab5", #"hash_4b6208b00403f13f"], undefined, [# "hash_7aca54ffec0ead0c", #"hash_2477ad1395a6639e", #"hash_4b6208b00403f13f"], "alt_controls_activated")];
+  hint_data = [hint_tutorial::function_f0104b5([#"hash_7aca54ffec0ead0c", #"hash_2b29cb97f3659ab5", #"hash_4b6208b00403f13f"], undefined, [#"hash_7aca54ffec0ead0c", #"hash_2477ad1395a6639e", #"hash_4b6208b00403f13f"], "alt_controls_activated")];
   level.player function_95f6d250("alt_controls_activated");
   wait 1;
   level.player val::reset(#"rc_launch", "freezecontrols");
@@ -835,7 +835,7 @@ function function_b90ebd9a() {
 }
 
 function function_192e7a1(a_ents) {
-  var_9af87fb8 = a_ents[# "hash_11cd06b03a240cf3"];
+  var_9af87fb8 = a_ents[#"hash_11cd06b03a240cf3"];
   var_9af87fb8 notsolid();
   level flag::wait_till("af_start_rc_car");
   var_9af87fb8 hide();
@@ -955,8 +955,8 @@ function function_d3cdf2a7() {
 
 function function_142791a7() {
   level.var_d18d2af9 = [];
-  level.var_d18d2af9[# "af_enemy_chase_veh_r"] = 0;
-  level.var_d18d2af9[# "af_enemy_chase_veh_l"] = 0;
+  level.var_d18d2af9[#"af_enemy_chase_veh_r"] = 0;
+  level.var_d18d2af9[#"af_enemy_chase_veh_l"] = 0;
   sides = ["af_enemy_chase_veh_l", "af_enemy_chase_veh_r"];
 
   foreach(side in sides) {
@@ -1050,12 +1050,12 @@ function function_40c45b6() {
   thread function_3683d2e8(self);
   self.takedamage = 1;
 
-  while(!isDefined(self.var_761c973.riders[# "driver"])) {
+  while(!isDefined(self.var_761c973.riders[#"driver"])) {
     wait 0.1;
   }
 
   self thread monitor_death();
-  driver = self.var_761c973.riders[# "driver"];
+  driver = self.var_761c973.riders[#"driver"];
   self thread function_b5d668a4(driver);
   player = getplayers()[0];
   self thread function_367b3229(player);
@@ -1732,7 +1732,7 @@ function function_149a7584(var_ba735fae) {
       a_trace = physicstraceex(v_goal + (0, 0, 200), v_goal - (0, 0, 1000));
       n_set_speed = n_current_speed * 3;
       self setspeed(n_set_speed, n_set_speed / 2);
-      self function_a57c34b7(a_trace[# "position"], 0);
+      self function_a57c34b7(a_trace[#"position"], 0);
       self waittilltimeout(15, #"near_goal");
       self vehicle_ai::clearallmovement(1);
       self vehicle_ai::clearalllookingandtargeting();
@@ -1839,7 +1839,7 @@ function function_b9613eb(right = 1, speed_pct = 1, var_4c7dbda9 = 10, var_6466f
   a_trace = physicstraceex(v_goal + (0, 0, 200), v_goal - (0, 0, 200));
   self setspeed(n_current_speed * speed_pct);
 
-  self function_a57c34b7(a_trace[# "position"], 0);
+  self function_a57c34b7(a_trace[#"position"], 0);
   self waittilltimeout(3, #"near_goal");
   var_56b3db36 = math::get_dot_forward(next_node.origin, 1, 1);
   var_26b9354a = cos(var_4c7dbda9);

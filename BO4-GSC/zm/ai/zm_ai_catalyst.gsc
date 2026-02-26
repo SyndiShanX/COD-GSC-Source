@@ -98,8 +98,8 @@ __init__() {
 }
 
 function_52ce9654() {
-  if(isarray(level.zm_loc_types) && level.zm_loc_types[# "zombie_location"].size > 0) {
-    a_s_spawn_locs = level.zm_loc_types[# "zombie_location"];
+  if(isarray(level.zm_loc_types) && level.zm_loc_types[#"zombie_location"].size > 0) {
+    a_s_spawn_locs = level.zm_loc_types[#"zombie_location"];
     var_31b16a0 = [];
 
     foreach(s_spawn_loc in a_s_spawn_locs) {
@@ -116,8 +116,8 @@ function_52ce9654() {
       var_31b16a0[var_31b16a0.size] = s_spawn_loc;
     }
 
-    if(isarray(level.zm_loc_types[# "blight_father_location"]) && level.zm_loc_types[# "blight_father_location"].size > 0) {
-      var_31b16a0 = arraycombine(var_31b16a0, level.zm_loc_types[# "blight_father_location"], 0, 0);
+    if(isarray(level.zm_loc_types[#"blight_father_location"]) && level.zm_loc_types[#"blight_father_location"].size > 0) {
+      var_31b16a0 = arraycombine(var_31b16a0, level.zm_loc_types[#"blight_father_location"], 0, 0);
     }
 
     ai_catalyst = zombie_utility::spawn_zombie(array::random(level.a_sp_catalyst), undefined, array::random(var_31b16a0));
@@ -322,7 +322,7 @@ function_f4e7fd8f(behaviortreeentity) {
 }
 
 function_3eaa8337() {
-  a_s_spawn_locs = level.zm_loc_types[# "zombie_location"];
+  a_s_spawn_locs = level.zm_loc_types[#"zombie_location"];
   var_91562d8c = [];
   var_f2a95155 = [];
 
@@ -351,8 +351,8 @@ function_3eaa8337() {
     var_f2a95155[var_f2a95155.size] = s_spawn_loc;
   }
 
-  if(isDefined(level.zm_loc_types[# "blight_father_location"]) && level.zm_loc_types[# "blight_father_location"].size > 0) {
-    var_91562d8c = arraycombine(var_91562d8c, level.zm_loc_types[# "blight_father_location"], 0, 0);
+  if(isDefined(level.zm_loc_types[#"blight_father_location"]) && level.zm_loc_types[#"blight_father_location"].size > 0) {
+    var_91562d8c = arraycombine(var_91562d8c, level.zm_loc_types[#"blight_father_location"], 0, 0);
   }
 
   if(isDefined(level.var_78a428fe)) {
@@ -1333,7 +1333,7 @@ function_fa69f8d2(type) {
   if(isDefined(catalyst_zombie)) {
     wait 0.5;
     catalyst_zombie zm_transform::function_bbaec2fd();
-    catalyst_zombie forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+    catalyst_zombie forceteleport(trace[#"position"], player.angles + (0, 180, 0));
 
     if(catalyst_zombie.catalyst_type == 1) {
       level thread function_4329a51b(catalyst_zombie);

@@ -76,11 +76,11 @@ function function_2cdcf5c3() {
 function function_69a9563e(a_ents) {
   self endon(#"scenes_done", #"death", #"hash_694043bb3252702");
 
-  while(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] waittill(#"napalm_rumble");
+  while(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] waittill(#"napalm_rumble");
 
-    if(isDefined(a_ents[# "prop 1"])) {
-      a_ents[# "prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");
+    if(isDefined(a_ents[#"prop 1"])) {
+      a_ents[#"prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");
     }
   }
 }

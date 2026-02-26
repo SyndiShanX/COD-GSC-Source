@@ -28,11 +28,11 @@ function event_handler[level_init] main(eventstruct) {
   load::main();
   util::waitforclient(0);
   level flashlight::function_69258685(undefined, "maps/cp_stakeout/fx9_flashlight");
-  level._effect[# "guard_room_light"] = # "hash_d2a2dd55181f074";
-  level._effect[# "darkroom_light"] = # "hash_78e234f940b499a";
-  level._effect[# "rooftop_spotlight"] = # "hash_3a149841990ac7b1";
-  level._effect[# "hash_27d555878676deb1"] = # "hash_7c3a90be6566a844";
-  level._effect[# "player_blacklight"] = # "hash_2a8bc9be6587131c";
+  level._effect[#"guard_room_light"] = # "hash_d2a2dd55181f074";
+  level._effect[#"darkroom_light"] = # "hash_78e234f940b499a";
+  level._effect[#"rooftop_spotlight"] = # "hash_3a149841990ac7b1";
+  level._effect[#"hash_27d555878676deb1"] = # "hash_7c3a90be6566a844";
+  level._effect[#"player_blacklight"] = # "hash_2a8bc9be6587131c";
 }
 
 function init_clientfields() {
@@ -343,7 +343,7 @@ function dof_enable_autofocus() {
     v_eye = self getEye();
     v_fwd = anglesToForward(self getcamangles());
     a_trace = physicstrace(v_eye, v_eye + v_fwd * 1000, (1 * -1, 1 * -1, 1 * -1), (1, 1, 1), self, 1);
-    var_a84275e3 = distance(v_eye, a_trace[# "position"] + v_fwd * 1);
+    var_a84275e3 = distance(v_eye, a_trace[#"position"] + v_fwd * 1);
 
     if(var_a84275e3 < 100) {
       self function_9e574055(2);
@@ -428,7 +428,7 @@ function function_cd8c0e74() {
 
 function function_e80b775e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self.var_9028faf2 = util::playFXOnTag(fieldname, level._effect[# "guard_room_light"], self, "tag_fx");
+    self.var_9028faf2 = util::playFXOnTag(fieldname, level._effect[#"guard_room_light"], self, "tag_fx");
     return;
   }
 
@@ -440,7 +440,7 @@ function function_e80b775e(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function sewer_exit_flashlight_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self.var_103f6c4c = util::playFXOnTag(fieldname, level._effect[# "hash_27d555878676deb1"], self, "tag_light");
+    self.var_103f6c4c = util::playFXOnTag(fieldname, level._effect[#"hash_27d555878676deb1"], self, "tag_light");
     return;
   }
 
@@ -452,7 +452,7 @@ function sewer_exit_flashlight_fx(localclientnum, oldval, newval, bnewent, binit
 
 function darkroom_light(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self.var_23de4c6c = util::playFXOnTag(fieldname, level._effect[# "darkroom_light"], self, "tag_fx");
+    self.var_23de4c6c = util::playFXOnTag(fieldname, level._effect[#"darkroom_light"], self, "tag_fx");
     return;
   }
 
@@ -464,7 +464,7 @@ function darkroom_light(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
 function rooftop_spotlight(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self.var_7a1ac572 = util::playFXOnTag(fieldname, level._effect[# "rooftop_spotlight"], self, "fx_tag_spotlight_script");
+    self.var_7a1ac572 = util::playFXOnTag(fieldname, level._effect[#"rooftop_spotlight"], self, "fx_tag_spotlight_script");
     return;
   }
 
@@ -476,7 +476,7 @@ function rooftop_spotlight(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_c20ade4a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump) {
-    self.var_5da1ad93 = playfxoncamera(fieldname, level._effect[# "player_blacklight"], (0, 0, 0), (1, 0, -0.1), (0, 0, 1));
+    self.var_5da1ad93 = playfxoncamera(fieldname, level._effect[#"player_blacklight"], (0, 0, 0), (1, 0, -0.1), (0, 0, 1));
     return;
   }
 

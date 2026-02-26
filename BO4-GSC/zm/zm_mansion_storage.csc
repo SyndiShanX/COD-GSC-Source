@@ -26,22 +26,22 @@ init() {
   clientfield::register("world", "" + # "hash_2c115514da4cee51", 17000, 1, "int", &function_2dbadedf, 0, 0);
   clientfield::register("scriptmover", "" + # "barrel_drip", 8000, 1, "counter", &function_3e37bb63, 0, 0);
   clientfield::register("scriptmover", "" + # "barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
-  level._effect[# "barrel_drip"] = # "hash_657c3b5d3d9bfdfa";
-  level._effect[# "barrel_splash"] = # "hash_42bcb312df258591";
-  level._effect[# "hash_6a63e8eb86cc88e2"] = # "hash_5934158bcfb9c884";
-  level._effect[# "hash_345c6b60fb9b8682"] = # "hash_782ae54493a94c4a";
+  level._effect[#"barrel_drip"] = # "hash_657c3b5d3d9bfdfa";
+  level._effect[#"barrel_splash"] = # "hash_42bcb312df258591";
+  level._effect[#"hash_6a63e8eb86cc88e2"] = # "hash_5934158bcfb9c884";
+  level._effect[#"hash_345c6b60fb9b8682"] = # "hash_782ae54493a94c4a";
 }
 
 function_438d8674(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "hash_1789fef86cd8b57e"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_1789fef86cd8b57e"], self, "tag_origin");
 }
 
 function_3e37bb63(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "barrel_drip"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"barrel_drip"], self, "tag_origin");
 }
 
 function_5e130882(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "hash_6a63e8eb86cc88e2"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_6a63e8eb86cc88e2"], self, "tag_origin");
   wait 3;
 
   if(isDefined(self) && isDefined(self.fx)) {
@@ -152,7 +152,7 @@ function_954a27a2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(isDefined(var_4fe0b0ee)) {
       if(var_4fe0b0ee.origin[2] >= 27) {
-        playfxondynent(level._effect[# "hash_345c6b60fb9b8682"], var_4fe0b0ee);
+        playfxondynent(level._effect[#"hash_345c6b60fb9b8682"], var_4fe0b0ee);
       }
 
       setdynentenabled(var_4fe0b0ee, 0);

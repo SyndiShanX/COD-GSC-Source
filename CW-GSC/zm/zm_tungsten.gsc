@@ -160,7 +160,7 @@ function event_handler[level_init] main(eventstruct) {
   level.var_88672174 = 119;
   level.var_5b8c6c9b = 120;
   level.var_f1662fe9 = 121;
-  level.custom_spawner_entry[# "crawl"] = &zm_spawner::function_45bb11e4;
+  level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
   level.var_d0ab70a2 = # "hash_415d2f1314ea548a";
   level.player_out_of_playable_area_monitor = 1;
   level.var_6f6cc58 = &function_6f6cc58;
@@ -418,30 +418,30 @@ function sndfunctions() {
 }
 
 function setup_personality_character_exerts() {
-  level.exert_sounds[1][# "hitmed"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitmed"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitmed"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[4][# "hitmed"] = "vox_plr_4_exert_pain";
-  level.exert_sounds[1][# "hitlrg"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[4][# "hitlrg"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[1][# "drowning"] = "vox_plr_1_exert_underwater_air_low";
-  level.exert_sounds[2][# "drowning"] = "vox_plr_2_exert_underwater_air_low";
-  level.exert_sounds[3][# "drowning"] = "vox_plr_3_exert_underwater_air_low";
-  level.exert_sounds[4][# "drowning"] = "vox_plr_4_exert_underwater_air_low";
-  level.exert_sounds[1][# "cough"] = "vox_plr_1_exert_gas_cough";
-  level.exert_sounds[2][# "cough"] = "vox_plr_2_exert_gas_cough";
-  level.exert_sounds[3][# "cough"] = "vox_plr_3_exert_gas_cough";
-  level.exert_sounds[4][# "cough"] = "vox_plr_4_exert_gas_cough";
-  level.exert_sounds[1][# "underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
-  level.exert_sounds[2][# "underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
-  level.exert_sounds[3][# "underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
-  level.exert_sounds[4][# "underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
-  level.exert_sounds[1][# "underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
-  level.exert_sounds[2][# "underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
-  level.exert_sounds[3][# "underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
-  level.exert_sounds[4][# "underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
+  level.exert_sounds[1][#"hitmed"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitmed"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitmed"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[4][#"hitmed"] = "vox_plr_4_exert_pain";
+  level.exert_sounds[1][#"hitlrg"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[4][#"hitlrg"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[1][#"drowning"] = "vox_plr_1_exert_underwater_air_low";
+  level.exert_sounds[2][#"drowning"] = "vox_plr_2_exert_underwater_air_low";
+  level.exert_sounds[3][#"drowning"] = "vox_plr_3_exert_underwater_air_low";
+  level.exert_sounds[4][#"drowning"] = "vox_plr_4_exert_underwater_air_low";
+  level.exert_sounds[1][#"cough"] = "vox_plr_1_exert_gas_cough";
+  level.exert_sounds[2][#"cough"] = "vox_plr_2_exert_gas_cough";
+  level.exert_sounds[3][#"cough"] = "vox_plr_3_exert_gas_cough";
+  level.exert_sounds[4][#"cough"] = "vox_plr_4_exert_gas_cough";
+  level.exert_sounds[1][#"underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
+  level.exert_sounds[2][#"underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
+  level.exert_sounds[3][#"underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
+  level.exert_sounds[4][#"underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
+  level.exert_sounds[1][#"underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
+  level.exert_sounds[2][#"underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
+  level.exert_sounds[3][#"underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
+  level.exert_sounds[4][#"underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
 }
 
 function setupmusic() {
@@ -495,7 +495,7 @@ function function_6f6cc58(e_player) {
       }
     }
 
-    if(isDefined(self.archetype) && isinarray([# "zombie", #"tormentor", #"raz", #"mimic", #"avogadro", #"abom", #"zombie_dog"], self.archetype)) {
+    if(isDefined(self.archetype) && isinarray([#"zombie", #"tormentor", #"raz", #"mimic", #"avogadro", #"abom", #"zombie_dog"], self.archetype)) {
       if(isPlayer(e_player)) {
         if(isDefined(self.v_zombie_custom_goal_pos) && isDefined(self.var_29656770)) {
           return true;
@@ -554,7 +554,7 @@ function private function_24e89a46() {
 }
 
 function function_ddc13fd6() {
-  s_loc = array::random(level.zm_loc_types[# "zombie_location"]);
+  s_loc = array::random(level.zm_loc_types[#"zombie_location"]);
   var_87e4f82c = randomintrange(0, 100);
   var_b62ee10a = [0, 1];
 
@@ -651,11 +651,11 @@ function private function_9e6f187d(n_round) {
 }
 
 function function_218424b3(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "raz_location"]) && level.zm_loc_types[# "raz_location"].size) {
+  if(isDefined(level.zm_loc_types[#"raz_location"]) && level.zm_loc_types[#"raz_location"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "raz_location"];
+      s_spawn_loc = level.zm_loc_types[#"raz_location"];
     } else {
-      s_spawn_loc = array::random(level.zm_loc_types[# "raz_location"]);
+      s_spawn_loc = array::random(level.zm_loc_types[#"raz_location"]);
     }
   }
 
@@ -663,11 +663,11 @@ function function_218424b3(get_all = 0) {
 }
 
 function function_30815e9d(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "hash_b7c88561b5e9b2c"]) && level.zm_loc_types[# "hash_b7c88561b5e9b2c"].size) {
+  if(isDefined(level.zm_loc_types[#"hash_b7c88561b5e9b2c"]) && level.zm_loc_types[#"hash_b7c88561b5e9b2c"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "hash_b7c88561b5e9b2c"];
+      s_spawn_loc = level.zm_loc_types[#"hash_b7c88561b5e9b2c"];
     } else {
-      s_spawn_loc = array::random(level.zm_loc_types[# "hash_b7c88561b5e9b2c"]);
+      s_spawn_loc = array::random(level.zm_loc_types[#"hash_b7c88561b5e9b2c"]);
     }
   }
 
@@ -675,11 +675,11 @@ function function_30815e9d(get_all = 0) {
 }
 
 function function_d9f5ec34(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "hash_2fe3f22c14b70850"]) && level.zm_loc_types[# "hash_2fe3f22c14b70850"].size) {
+  if(isDefined(level.zm_loc_types[#"hash_2fe3f22c14b70850"]) && level.zm_loc_types[#"hash_2fe3f22c14b70850"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "hash_2fe3f22c14b70850"];
+      s_spawn_loc = level.zm_loc_types[#"hash_2fe3f22c14b70850"];
     } else {
-      s_spawn_loc = array::random(level.zm_loc_types[# "hash_2fe3f22c14b70850"]);
+      s_spawn_loc = array::random(level.zm_loc_types[#"hash_2fe3f22c14b70850"]);
     }
   }
 
@@ -687,11 +687,11 @@ function function_d9f5ec34(get_all = 0) {
 }
 
 function function_41a4961d(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "hash_2fe3f22c14b70850"]) && level.zm_loc_types[# "hash_2fe3f22c14b70850"].size) {
+  if(isDefined(level.zm_loc_types[#"hash_2fe3f22c14b70850"]) && level.zm_loc_types[#"hash_2fe3f22c14b70850"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "hash_2fe3f22c14b70850"];
+      s_spawn_loc = level.zm_loc_types[#"hash_2fe3f22c14b70850"];
     } else {
-      locs = level.zm_loc_types[# "hash_2fe3f22c14b70850"];
+      locs = level.zm_loc_types[#"hash_2fe3f22c14b70850"];
 
       if(getplayers().size > 1) {
         var_a6c95035 = [];
@@ -1103,7 +1103,7 @@ function function_1d787beb() {
   if(isDefined(level.var_eb59a95c)) {
     var_d7eff26a = [[level.var_eb59a95c]]();
   } else {
-    var_91562d8c = level.zm_loc_types[# "hash_b7c88561b5e9b2c"];
+    var_91562d8c = level.zm_loc_types[#"hash_b7c88561b5e9b2c"];
 
     if(isDefined(var_91562d8c.size)) {
       var_d7eff26a = zm_spawner::function_20e7d186(var_91562d8c);
@@ -1177,7 +1177,7 @@ function function_54993e2() {
   if(isDefined(level.var_2e33420c)) {
     var_d7eff26a = [[level.var_2e33420c]]();
   } else {
-    var_91562d8c = level.zm_loc_types[# "raz_location"];
+    var_91562d8c = level.zm_loc_types[#"raz_location"];
 
     if(var_91562d8c.size) {
       var_d7eff26a = zm_spawner::function_20e7d186(var_91562d8c);
@@ -1807,7 +1807,7 @@ function function_bf14bffe() {
   self endon("63eba66124d8c2e");
   level endon(#"end_game");
   self endon(#"death", #"disconnect", #"hash_7f3f3b496fcd3707");
-  level flag::wait_till_all([# "load_main_complete", #"intro_scene_done"]);
+  level flag::wait_till_all([#"load_main_complete", #"intro_scene_done"]);
 
   while(true) {
     var_1e8cb595 = undefined;
@@ -1948,7 +1948,7 @@ function function_96aabf2f() {
   util::add_devgui("<dev string:xe0>", "<dev string:x102>");
   util::add_devgui("<dev string:x127>", "<dev string:x149>");
   util::add_devgui("<dev string:x171>", "<dev string:x197>");
-  level flag::wait_till_all([# "intro_scene_done", "<dev string:x1c3>", "<dev string:x1da>"]);
+  level flag::wait_till_all([#"intro_scene_done", "<dev string:x1c3>", "<dev string:x1da>"]);
   wait 2;
   level thread function_9b92c023();
 }
@@ -2062,7 +2062,7 @@ function zombie_devgui_goto_round(target_round) {
 
   level.devcheater = 1;
   level.zombie_total = 0;
-  level.zombie_health = isDefined(level.var_41dd92fd[# "zombie"].health) ? level.var_41dd92fd[# "zombie"].health : 100;
+  level.zombie_health = isDefined(level.var_41dd92fd[#"zombie"].health) ? level.var_41dd92fd[#"zombie"].health : 100;
   zm_round_logic::set_round_number(target_round - 1);
 
   if(isDefined(level.var_e63636af)) {
@@ -2154,7 +2154,7 @@ function function_42f2b8ac() {
 
 function function_81acf2cf() {
   level flag::wait_till("<dev string:x1da>");
-  ee = level._ee[# "pap_quest"];
+  ee = level._ee[#"pap_quest"];
 
   while(!is_true(ee.started)) {
     waitframe(1);
@@ -2618,14 +2618,14 @@ function function_d4738f46() {
   array::add(var_18e0dde5, getent("vol_player_in_intermission_space", "targetname"));
   array::add(var_18e0dde5, getent("vol_player_on_ground", "targetname"));
   array::add(var_18e0dde5, getent("vol_player_in_bunker", "targetname"));
-  var_1d1bbd52[# "main_street_to_helipads"] = function_4c324227("main_street_to_helipads_end");
-  var_1d1bbd52[# "anytown_usa_to_main_street"] = function_4c324227("anytown_usa_to_main_street_end");
-  var_1d1bbd52[# "main_street_to_anytown_usa"] = function_4c324227("main_street_to_anytown_usa_end");
-  var_1d1bbd52[# "anytown_usa_to_bunker"] = function_4c324227("anytown_usa_to_bunker_end");
-  var_1d1bbd52[# "helipads_to_main_street"] = function_4c324227("helipads_to_main_street_end");
-  var_1d1bbd52[# "bunker_to_observation"] = function_4c324227("bunker_to_observation_end");
-  var_1d1bbd52[# "helipads_to_observation"] = function_4c324227("helipads_to_observation_end");
-  var_1d1bbd52[# "observation_to_helipads"] = function_4c324227("observation_to_helipads_end");
+  var_1d1bbd52[#"main_street_to_helipads"] = function_4c324227("main_street_to_helipads_end");
+  var_1d1bbd52[#"anytown_usa_to_main_street"] = function_4c324227("anytown_usa_to_main_street_end");
+  var_1d1bbd52[#"main_street_to_anytown_usa"] = function_4c324227("main_street_to_anytown_usa_end");
+  var_1d1bbd52[#"anytown_usa_to_bunker"] = function_4c324227("anytown_usa_to_bunker_end");
+  var_1d1bbd52[#"helipads_to_main_street"] = function_4c324227("helipads_to_main_street_end");
+  var_1d1bbd52[#"bunker_to_observation"] = function_4c324227("bunker_to_observation_end");
+  var_1d1bbd52[#"helipads_to_observation"] = function_4c324227("helipads_to_observation_end");
+  var_1d1bbd52[#"observation_to_helipads"] = function_4c324227("observation_to_helipads_end");
 
   while(true) {
     players = getplayers();

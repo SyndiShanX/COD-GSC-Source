@@ -282,14 +282,14 @@ function_5a8becdc(localclientnum, player, buildinfo, var_4b1c8937) {
 }
 
 debug_trace(origin, trace) {
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     color = (0.95, 0.05, 0.05);
   } else {
     color = (0.05, 0.95, 0.05);
   }
 
-  sphere(trace[# "position"], 5, color, 0.75, 1, 10, 100);
-  util::debug_line(origin, trace[# "position"], color, 100);
+  sphere(trace[#"position"], 5, color, 0.75, 1, 10, 100);
+  util::debug_line(origin, trace[#"position"], color, 100);
 }
 
 startmicrowavefx(localclientnum) {
@@ -311,7 +311,7 @@ startmicrowavefx(localclientnum) {
   while(true) {
     if(getdvarint(#"scr_microwave_turret_fx_debug", 0)) {
       turret.should_update_fx = 1;
-      microwavefxent.fxhashs[# "center"] = 0;
+      microwavefxent.fxhashs[#"center"] = 0;
     }
 
     if(turret.should_update_fx == 0) {
@@ -364,7 +364,7 @@ microwavefxhash(trace, origin, name) {
   for(i = 0; i < 5; i++) {
     endofhalffxsq = (i * 150 + 125) * (i * 150 + 125);
     endoffullfxsq = (i * 150 + 200) * (i * 150 + 200);
-    tracedistsq = distancesquared(origin, trace[# "position"]);
+    tracedistsq = distancesquared(origin, trace[#"position"]);
 
     if(tracedistsq >= endofhalffxsq || i == 0) {
       if(tracedistsq < endoffullfxsq) {
@@ -444,7 +444,7 @@ playmicrowavefx(localclientnum, trace, traceright, traceleft, origin, team) {
   for(i = 0; i < 5; i++) {
     endofhalffxsq = (i * 150 + 125) * (i * 150 + 125);
     endoffullfxsq = (i * 150 + 200) * (i * 150 + 200);
-    tracedistsq = distancesquared(origin, trace[# "position"]);
+    tracedistsq = distancesquared(origin, trace[#"position"]);
     startfx = tracedistsq >= endofhalffxsq || i == 0;
     fxname = tracedistsq > endoffullfxsq ? "weapon/fx8_equip_smart_cover_microwave" : "weapon/fx8_equip_smart_cover_microwave_sm";
 
@@ -466,7 +466,7 @@ playmicrowavefx(localclientnum, trace, traceright, traceleft, origin, team) {
         break;
     }
 
-    tracedistsq = distancesquared(origin, traceleft[# "position"]);
+    tracedistsq = distancesquared(origin, traceleft[#"position"]);
     startfx = tracedistsq >= endofhalffxsq;
     fxname = tracedistsq > endoffullfxsq ? "weapon/fx8_equip_smart_cover_microwave" : "weapon/fx8_equip_smart_cover_microwave_sm";
 
@@ -488,7 +488,7 @@ playmicrowavefx(localclientnum, trace, traceright, traceleft, origin, team) {
         break;
     }
 
-    tracedistsq = distancesquared(origin, traceright[# "position"]);
+    tracedistsq = distancesquared(origin, traceright[#"position"]);
     startfx = tracedistsq >= endofhalffxsq;
     fxname = tracedistsq > endoffullfxsq ? "weapon/fx8_equip_smart_cover_microwave" : "weapon/fx8_equip_smart_cover_microwave_sm";
 

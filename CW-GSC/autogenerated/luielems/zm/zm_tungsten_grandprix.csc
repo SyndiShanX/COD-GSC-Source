@@ -55,17 +55,17 @@ function register(var_20264c25, var_bbda5b4d, var_19161bc0, var_b6adcd73) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_tungsten_grandprix"])) {
-    level.var_ae746e8f[# "zm_tungsten_grandprix"] = [];
+  if(!isDefined(level.var_ae746e8f[#"zm_tungsten_grandprix"])) {
+    level.var_ae746e8f[#"zm_tungsten_grandprix"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_tungsten_grandprix"])) {
-    level.var_ae746e8f[# "zm_tungsten_grandprix"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "zm_tungsten_grandprix"])) {
-    level.var_ae746e8f[# "zm_tungsten_grandprix"] = array(level.var_ae746e8f[# "zm_tungsten_grandprix"]);
+  if(!isDefined(level.var_ae746e8f[#"zm_tungsten_grandprix"])) {
+    level.var_ae746e8f[#"zm_tungsten_grandprix"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"zm_tungsten_grandprix"])) {
+    level.var_ae746e8f[#"zm_tungsten_grandprix"] = array(level.var_ae746e8f[#"zm_tungsten_grandprix"]);
   }
 
-  level.var_ae746e8f[# "zm_tungsten_grandprix"][level.var_ae746e8f[# "zm_tungsten_grandprix"].size] = elem;
+  level.var_ae746e8f[#"zm_tungsten_grandprix"][level.var_ae746e8f[#"zm_tungsten_grandprix"].size] = elem;
 }
 
 function register_clientside() {

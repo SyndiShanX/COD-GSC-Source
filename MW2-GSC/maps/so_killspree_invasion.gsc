@@ -12,69 +12,69 @@
 
 // --------------------------------------------------------------------------------- //	Init
 // --------------------------------------------------------------------------------- main() {
-  maps\invasion_precache::main();
-  maps\invasion_fx::main();
-  maps\createart\invasion_art::main();
+maps\invasion_precache::main();
+maps\invasion_fx::main();
+maps\createart\invasion_art::main();
 
-  precacheItem("smoke_grenade_american");
-  precacheItem("remote_missile_not_player_invasion");
-  precacheModel("weapon_stinger_obj");
-  precacheModel("weapon_uav_control_unit_obj");
-  precacheItem("flash_grenade");
+precacheItem("smoke_grenade_american");
+precacheItem("remote_missile_not_player_invasion");
+precacheModel("weapon_stinger_obj");
+precacheModel("weapon_uav_control_unit_obj");
+precacheItem("flash_grenade");
 
-  precacheItem("zippy_rockets");
-  precacheItem("stinger_speedy");
+precacheItem("zippy_rockets");
+precacheItem("stinger_speedy");
 
-  precachestring(&"SO_KILLSPREE_INVASION_OBJ_REGULAR");
-  precachestring(&"SO_KILLSPREE_INVASION_OBJ_HARDENED");
-  precachestring(&"SO_KILLSPREE_INVASION_OBJ_VETERAN");
-  precachestring(&"SO_KILLSPREE_INVASION_SCORE_ASSIST");
-  precachestring(&"SO_KILLSPREE_INVASION_SCORE_KILL");
-  precachestring(&"SO_KILLSPREE_INVASION_SCORE_BTR80");
-  precachestring(&"SO_KILLSPREE_INVASION_SPLASH_COMBO");
-  precachestring(&"SO_KILLSPREE_INVASION_SPLASH_BONUS");
-  precachestring(&"SO_KILLSPREE_INVASION_HUD_REMAINING");
-  precachestring(&"SO_KILLSPREE_INVASION_SCORE_BRUTAL");
-  precachestring(&"SO_KILLSPREE_INVASION_SCORE_DOWNED");
-  precachestring(&"SO_KILLSPREE_INVASION_SCORE_FINISHED");
-  precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT1");
-  precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT2");
-  precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT3");
-  precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT4");
-  precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT5");
-  precachestring(&"SO_KILLSPREE_INVASION_EOG_SOLID");
-  precachestring(&"SO_KILLSPREE_INVASION_EOG_HEARTLESS");
-  precachestring(&"SO_KILLSPREE_INVASION_EOG_COMBOS");
-  precachestring(&"SO_KILLSPREE_INVASION_EOG_SCORE");
-  precachestring(&"SO_KILLSPREE_INVASION_EOG_COMBOS_X");
+precachestring(&"SO_KILLSPREE_INVASION_OBJ_REGULAR");
+precachestring(&"SO_KILLSPREE_INVASION_OBJ_HARDENED");
+precachestring(&"SO_KILLSPREE_INVASION_OBJ_VETERAN");
+precachestring(&"SO_KILLSPREE_INVASION_SCORE_ASSIST");
+precachestring(&"SO_KILLSPREE_INVASION_SCORE_KILL");
+precachestring(&"SO_KILLSPREE_INVASION_SCORE_BTR80");
+precachestring(&"SO_KILLSPREE_INVASION_SPLASH_COMBO");
+precachestring(&"SO_KILLSPREE_INVASION_SPLASH_BONUS");
+precachestring(&"SO_KILLSPREE_INVASION_HUD_REMAINING");
+precachestring(&"SO_KILLSPREE_INVASION_SCORE_BRUTAL");
+precachestring(&"SO_KILLSPREE_INVASION_SCORE_DOWNED");
+precachestring(&"SO_KILLSPREE_INVASION_SCORE_FINISHED");
+precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT1");
+precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT2");
+precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT3");
+precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT4");
+precachestring(&"SO_KILLSPREE_INVASION_DEADQUOTE_HINT5");
+precachestring(&"SO_KILLSPREE_INVASION_EOG_SOLID");
+precachestring(&"SO_KILLSPREE_INVASION_EOG_HEARTLESS");
+precachestring(&"SO_KILLSPREE_INVASION_EOG_COMBOS");
+precachestring(&"SO_KILLSPREE_INVASION_EOG_SCORE");
+precachestring(&"SO_KILLSPREE_INVASION_EOG_COMBOS_X");
 
-  add_start("so_killspree", ::start_so_killspree);
+add_start("so_killspree", ::start_so_killspree);
 
-  maps\_load::main();
+maps\_load::main();
 
-  thread maps\invasion_amb::main();
-  maps\invasion_anim::main_anim();
+thread maps\invasion_amb::main();
+maps\invasion_anim::main_anim();
 
-  maps\_compass::setupMiniMap("compass_map_invasion");
+maps\_compass::setupMiniMap("compass_map_invasion");
 }
 
 // --------------------------------------------------------------------------------- //	Challenge Initializations
 // --------------------------------------------------------------------------------- start_so_killspree() {
-  so_killspree_init();
+so_killspree_init();
 
-  thread music_loop("so_killspree_invasion_music", 124);
-  thread enable_nates_exploders();
-  thread fade_challenge_in();
-  thread fade_challenge_out("challenge_success");
-  thread enable_challenge_timer("challenge_start", "challenge_success");
-  thread enable_kill_counter_hud();
-  flag_wait("challenge_start");
+thread music_loop("so_killspree_invasion_music", 124);
+thread enable_nates_exploders();
+thread fade_challenge_in();
+thread fade_challenge_out("challenge_success");
+thread enable_challenge_timer("challenge_start", "challenge_success");
+thread enable_kill_counter_hud();
+flag_wait("challenge_start");
 
-  thread enable_hunter_enemy_group_gas_station(10);
-  thread enable_btr80_circling_street();
-  thread enable_btr80_circling_parking_lot();
-  thread enable_hunter_truck_enemies_bank();
-  thread enable_hunter_enemy_refill(10, 4, 8);
+thread enable_hunter_enemy_group_gas_station(10);
+thread enable_btr80_circling_street();
+thread enable_btr80_circling_parking_lot();
+thread enable_hunter_truck_enemies_bank();
+thread enable_hunter_enemy_refill(10, 4, 8);
 }
 
 so_killspree_init() {
@@ -227,32 +227,32 @@ so_killspree_setup_radio_dialog() {
 
 // --------------------------------------------------------------------------------- //	Enable/Disable events
 // --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- custom_eog_summary() {
-  foreach(player in level.players) {
-    player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_SOLID", player.solid_kills);
-    player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_HEARTLESS", player.heartless_kills);
-    player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_COMBOS", player.highest_combo);
-    player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_SCORE", hud_convert_to_points(player.total_score));
-  }
+foreach(player in level.players) {
+  player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_SOLID", player.solid_kills);
+  player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_HEARTLESS", player.heartless_kills);
+  player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_COMBOS", player.highest_combo);
+  player add_custom_eog_summary_line("@SO_KILLSPREE_INVASION_EOG_SCORE", hud_convert_to_points(player.total_score));
+}
 }
 
 // --------------------------------------------------------------------------------- enable_kill_counter_hud() {
-  level.pulse_requests = [];
-  level.pulse_requests_p1 = [];
-  level.pulse_requests_p2 = [];
-  foreach(player in level.players)
-  player thread hud_splash_destroy();
+level.pulse_requests = [];
+level.pulse_requests_p1 = [];
+level.pulse_requests_p2 = [];
+foreach(player in level.players)
+player thread hud_splash_destroy();
 
-  array_thread(level.players, ::hud_create_kill_counter);
+array_thread(level.players, ::hud_create_kill_counter);
 }
 
 // --------------------------------------------------------------------------------- enable_nates_exploders() {
-  thread fire_off_exploder(getent("north_side_low", "targetname"));
-  thread fire_off_exploder(getent("north_side_high", "targetname"));
-  thread fire_off_exploder(getent("west_side", "targetname"));
+thread fire_off_exploder(getent("north_side_low", "targetname"));
+thread fire_off_exploder(getent("north_side_high", "targetname"));
+thread fire_off_exploder(getent("west_side", "targetname"));
 }
 
 // --------------------------------------------------------------------------------- enable_smoke_wave_north(dialog_wait, flag_start) {
-  create_smoke_wave("magic_smoke_grenade_north", flag_start, dialog_wait);
+create_smoke_wave("magic_smoke_grenade_north", flag_start, dialog_wait);
 }
 
 enable_smoke_wave_south(dialog_wait, flag_start) {
@@ -260,7 +260,7 @@ enable_smoke_wave_south(dialog_wait, flag_start) {
 }
 
 // --------------------------------------------------------------------------------- enable_hunter_truck_enemies_bank(flag_start) {
-  create_hunter_truck_enemies("truck_north_right", flag_start);
+create_hunter_truck_enemies("truck_north_right", flag_start);
 }
 
 enable_hunter_truck_enemies_road(flag_start) {
@@ -268,7 +268,7 @@ enable_hunter_truck_enemies_road(flag_start) {
 }
 
 // --------------------------------------------------------------------------------- enable_btr80_circling_street(flag_start) {
-  create_btr80("nate_attacker_left", flag_start);
+create_btr80("nate_attacker_left", flag_start);
 }
 
 enable_btr80_circling_parking_lot(flag_start) {
@@ -276,7 +276,7 @@ enable_btr80_circling_parking_lot(flag_start) {
 }
 
 // --------------------------------------------------------------------------------- enable_hunter_enemy_refill(refill_at, min_fill, max_fill) {
-  hunter_enemies_refill(refill_at, min_fill, max_fill);
+hunter_enemies_refill(refill_at, min_fill, max_fill);
 }
 
 enable_hunter_enemy_group_bank(enemy_count, flag_start) {

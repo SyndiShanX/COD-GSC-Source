@@ -12,15 +12,15 @@
 
 autoexec init() {
   level.zm_variant_type_max = [];
-  level.zm_variant_type_max[# "walk"] = [];
-  level.zm_variant_type_max[# "run"] = [];
-  level.zm_variant_type_max[# "sprint"] = [];
-  level.zm_variant_type_max[# "walk"][# "down"] = 14;
-  level.zm_variant_type_max[# "walk"][# "up"] = 16;
-  level.zm_variant_type_max[# "run"][# "down"] = 13;
-  level.zm_variant_type_max[# "run"][# "up"] = 12;
-  level.zm_variant_type_max[# "sprint"][# "down"] = 7;
-  level.zm_variant_type_max[# "sprint"][# "up"] = 6;
+  level.zm_variant_type_max[#"walk"] = [];
+  level.zm_variant_type_max[#"run"] = [];
+  level.zm_variant_type_max[#"sprint"] = [];
+  level.zm_variant_type_max[#"walk"][#"down"] = 14;
+  level.zm_variant_type_max[#"walk"][#"up"] = 16;
+  level.zm_variant_type_max[#"run"][#"down"] = 13;
+  level.zm_variant_type_max[#"run"][#"up"] = 12;
+  level.zm_variant_type_max[#"sprint"][#"down"] = 7;
+  level.zm_variant_type_max[#"sprint"][#"up"] = 6;
   spawner::add_archetype_spawn_function(#"mannequin", &zombiebehavior::archetypezombieblackboardinit);
   spawner::add_archetype_spawn_function(#"mannequin", &zombiebehavior::archetypezombiedeathoverrideinit);
   spawner::add_archetype_spawn_function(#"mannequin", &zombie_utility::zombiespawnsetup);

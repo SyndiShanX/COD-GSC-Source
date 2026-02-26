@@ -36,7 +36,7 @@ function function_5fd995a8() {
   killstreak_used = result === 1;
 
   if(killstreak_used && isDefined(self)) {
-    bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+    bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
     var_fa9aff9a = self gadgetgetslot(bundle.ksweapon);
     self gadgetpowerset(var_fa9aff9a, 0);
   }
@@ -53,7 +53,7 @@ function function_6f7927c() {
   self airsupport::function_9e2054b0(&function_aa4be620);
   locations = [];
 
-  if(is_true(params.var_7436c1c5) && !is_true(self.pers[# "hash_3b8a938c10ba768b"])) {
+  if(is_true(params.var_7436c1c5) && !is_true(self.pers[#"hash_3b8a938c10ba768b"])) {
     self thread airsupport::singleradarsweep();
   }
 
@@ -64,18 +64,18 @@ function function_6f7927c() {
   }
 
   if(!isDefined(location.origin)) {
-    self.pers[# "hash_3b8a938c10ba768b"] = 1;
+    self.pers[#"hash_3b8a938c10ba768b"] = 1;
     self notify(#"cancel_selection");
     return 0;
   }
 
   if(self killstreakrules::iskillstreakallowed("artillery_barrage", self.team) == 0) {
-    self.pers[# "hash_3b8a938c10ba768b"] = 1;
+    self.pers[#"hash_3b8a938c10ba768b"] = 1;
     self notify(#"cancel_selection");
     return 0;
   }
 
-  self.pers[# "hash_3b8a938c10ba768b"] = 0;
+  self.pers[#"hash_3b8a938c10ba768b"] = 0;
   return self airsupport::function_83904681(location, &function_d7cf7d18, "artillery_barrage");
 }
 
@@ -100,7 +100,7 @@ function getplaneflyheight(bundle) {
 function function_496d0824(sweep_start, var_e8456387, team, killstreak_id) {
   owner = self;
   owner endon(#"emp_jammed", #"joined_team", #"joined_spectators", #"disconnect");
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   var_6c36c4dd = bundle.var_e077ecb;
   var_9bed4193 = bundle.var_32e69cad;
   var_66e0652a = 26000;
@@ -155,7 +155,7 @@ function function_6fb32e6d() {
   wait 0.5;
 
   if(function_1f3792ee(plane)) {
-    bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+    bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
     playFXOnTag(bundle.var_61feee4, plane, "tag_fx_engine2");
     playFXOnTag(bundle.var_61feee4, plane, "tag_fx_engine5");
   }
@@ -212,7 +212,7 @@ function function_a9ef6d5d(plane, var_675219e7, var_aff95821, var_d1769adf) {
   owner = self;
   owner endon(#"hash_6a70219902316c7e");
   plane endon(#"death");
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
 
   if(isDefined(bundle.var_c28c2429)) {
     plane setplanebarrelroll(bundle.var_c28c2429 / 360, 25, 1);
@@ -387,14 +387,14 @@ function function_8c164ce0(path) {
 function function_598dc586(plane, position, yaw, team, killstreak_id, fly_height) {
   owner = self;
   owner endon(#"emp_jammed", #"joined_team", #"joined_spectators", #"disconnect");
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   var_37bb8781 = (0, team, 0);
   var_c6aa53c = anglesToForward(var_37bb8781);
   var_dc88ed1e = (yaw[0], yaw[1], fly_height);
   tracestartpos = (yaw[0], yaw[1], fly_height);
   traceendpos = (yaw[0], yaw[1], fly_height * -1);
   trace = bulletTrace(tracestartpos, traceendpos, 0, undefined);
-  targetpoint = trace[# "fraction"] > 1 ? (yaw[0], yaw[1], 0) : trace[# "position"];
+  targetpoint = trace[#"fraction"] > 1 ? (yaw[0], yaw[1], 0) : trace[#"position"];
 
   if(getdvarint(#"hash_bbfcab5c3429103", 0) > 0) {
     for(i = 0; i < 10; i++) {
@@ -639,7 +639,7 @@ function function_cc147a03(attacker, weapon) {
 }
 
 function function_c0f8c056(attacker, weapon) {
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   playFXOnTag(bundle.var_328ce6e4, self, "tag_fx_engine3");
 }
 
@@ -688,30 +688,30 @@ function function_6cd200d2() {
 }
 
 function function_62b8d1d7() {
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   playFXOnTag(bundle.var_545fa8c2, self, "tag_fx_engine4");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
 }
 
 function function_ab90e44c() {
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   playFXOnTag(bundle.var_328ce6e4, self, "tag_fx_engine1");
 }
 
 function function_b27d956d() {
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   wait randomfloatrange(0.2, 0.4);
   playFXOnTag(bundle.var_328ce6e4, self, "tag_fx_engine5");
   playFXOnTag(bundle.var_545fa8c2, self, "tag_fx_engine4");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   wait randomfloatrange(0.2, 0.4);
   playFXOnTag(bundle.var_328ce6e4, self, "tag_fx_engine3");
 }
 
 function function_f6f579e3() {
-  bundle = level.killstreaks[# "artillery_barrage"].script_bundle;
+  bundle = level.killstreaks[#"artillery_barrage"].script_bundle;
   playFXOnTag(bundle.ksexplosionfx, self, "tag_body_animate");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
 }
 
 function configurechopperteampost(owner, ishacked) {

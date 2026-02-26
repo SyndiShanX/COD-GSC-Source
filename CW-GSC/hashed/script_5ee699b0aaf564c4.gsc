@@ -100,9 +100,9 @@ function function_403f2d91() {
 }
 
 function function_46fcf917(player) {
-  point_team = player.pers[# "team"];
-  influencer_team = player.pers[# "team"];
-  vis_team_mask = util::getotherteamsmask(player.pers[# "team"]);
+  point_team = player.pers[#"team"];
+  influencer_team = player.pers[#"team"];
+  vis_team_mask = util::getotherteamsmask(player.pers[#"team"]);
   var_5f9a6e72 = ["start_spawn"];
 
   if(level.var_5e74f048[player.squad].lasttime + 6000 < gettime()) {
@@ -122,7 +122,7 @@ function function_46fcf917(player) {
     };
   }
 
-  return function_e624cfcf(player, var_5a752f59[# "origin"], var_5a752f59[# "angles"]);
+  return function_e624cfcf(player, var_5a752f59[#"origin"], var_5a752f59[#"angles"]);
 }
 
 function function_e624cfcf(player, origin, angles) {
@@ -132,10 +132,10 @@ function function_e624cfcf(player, origin, angles) {
   playerorigin = origin;
   trace = groundtrace(playerorigin + (0, 0, 100), playerorigin - (0, 0, 10100), 0, playerorigin, 0, 0);
 
-  if(trace[# "surfacetype"] == # "none" || trace[# "surfacetype"] == # "default") {
+  if(trace[#"surfacetype"] == # "none" || trace[#"surfacetype"] == # "default") {
     playerorigin = (playerorigin[0], playerorigin[1], level.mapcenter[2]);
   } else {
-    playerorigin = trace[# "position"];
+    playerorigin = trace[#"position"];
   }
 
   offset_origin = playerorigin + anglesToForward(angles) * var_4cf012f7.forwardoffset;
@@ -378,17 +378,17 @@ function function_1e077098() {
 
       trace = groundtrace(var_ab9478c7.origin, var_ab9478c7.origin - (0, 0, 5000), 0, var_ab9478c7, 0, 0);
 
-      if(trace[# "surfacetype"] == # "none") {
+      if(trace[#"surfacetype"] == # "none") {
         var_dbcced97[var_dbcced97.size] = var_ab9478c7;
         continue;
       }
 
-      if(distancesquared(var_ab9478c7.origin, trace[# "position"]) < var_e11beb90) {
+      if(distancesquared(var_ab9478c7.origin, trace[#"position"]) < var_e11beb90) {
         level.var_a349ea8[var_ab9478c7 getentitynumber()] = undefined;
         continue;
       }
 
-      var_7ec01616 = getplayers(undefined, trace[# "position"], 3000);
+      var_7ec01616 = getplayers(undefined, trace[#"position"], 3000);
       var_c3d4dc49 = isDefined(level.var_a349ea8[var_ab9478c7 getentitynumber()]) ? level.var_a349ea8[var_ab9478c7 getentitynumber()] : [];
 
       foreach(var_ba607277 in var_7ec01616) {

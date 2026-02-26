@@ -173,18 +173,18 @@ function_872c9404(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[# "mp_frenetic"][1] = 55000;
-  var_e7cc5e43[# "mp_frenetic"][2] = 48000;
-  var_e7cc5e43[# "mp_frenetic"][3] = 42000;
-  var_e7cc5e43[# "mp_offshore"][1] = 55000;
-  var_e7cc5e43[# "mp_offshore"][2] = 48000;
-  var_e7cc5e43[# "mp_offshore"][3] = 42000;
-  var_e7cc5e43[# "mp_seaside"][1] = 52000;
-  var_e7cc5e43[# "mp_seaside"][2] = 46000;
-  var_e7cc5e43[# "mp_seaside"][3] = 40000;
-  var_e7cc5e43[# "mp_silo"][1] = 55000;
-  var_e7cc5e43[# "mp_silo"][2] = 48000;
-  var_e7cc5e43[# "mp_silo"][3] = 42000;
+  var_e7cc5e43[#"mp_frenetic"][1] = 55000;
+  var_e7cc5e43[#"mp_frenetic"][2] = 48000;
+  var_e7cc5e43[#"mp_frenetic"][3] = 42000;
+  var_e7cc5e43[#"mp_offshore"][1] = 55000;
+  var_e7cc5e43[#"mp_offshore"][2] = 48000;
+  var_e7cc5e43[#"mp_offshore"][3] = 42000;
+  var_e7cc5e43[#"mp_seaside"][1] = 52000;
+  var_e7cc5e43[#"mp_seaside"][2] = 46000;
+  var_e7cc5e43[#"mp_seaside"][3] = 40000;
+  var_e7cc5e43[#"mp_silo"][1] = 55000;
+  var_e7cc5e43[#"mp_silo"][2] = 48000;
+  var_e7cc5e43[#"mp_silo"][3] = 42000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(0, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }

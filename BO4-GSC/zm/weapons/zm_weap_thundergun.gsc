@@ -27,8 +27,8 @@ __init__() {
 }
 
 __main__() {
-  level._effect[# "thundergun_knockdown_ground"] = "tools/fx_null";
-  level._effect[# "thundergun_smoke_cloud"] = "tools/fx_null";
+  level._effect[#"thundergun_knockdown_ground"] = "tools/fx_null";
+  level._effect[#"thundergun_smoke_cloud"] = "tools/fx_null";
   zombie_utility::set_zombie_var(#"thundergun_cylinder_radius", 180);
   zombie_utility::set_zombie_var(#"thundergun_fling_range", 480);
   zombie_utility::set_zombie_var(#"thundergun_gib_range", 900);
@@ -85,7 +85,7 @@ wait_for_thundergun_fired() {
       self thread thundergun_fired();
       view_pos = self gettagorigin("tag_flash") - self getplayerviewheight();
       view_angles = self gettagangles("tag_flash");
-      playFX(level._effect[# "thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
+      playFX(level._effect[#"thundergun_smoke_cloud"], view_pos, anglesToForward(view_angles), anglestoup(view_angles));
     }
   }
 }
@@ -367,7 +367,7 @@ thundergun_knockdown_zombie(player, gib) {
 
 handle_thundergun_pain_notetracks(note) {
   if(note == "zombie_knockdown_ground_impact") {
-    playFX(level._effect[# "thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
+    playFX(level._effect[#"thundergun_knockdown_ground"], self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     self playSound(#"fly_thundergun_forcehit");
   }
 }

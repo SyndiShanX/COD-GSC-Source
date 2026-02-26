@@ -45,10 +45,10 @@ enable_slider_perk_for_level() {
 init_slider() {}
 
 function_1781c013() {
-  level.machine_assets[# "specialty_phdflopper"] = spawnStruct();
-  level.machine_assets[# "specialty_phdflopper"].weapon = getweapon("zombie_perk_bottle_slider");
-  level.machine_assets[# "specialty_phdflopper"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_phdflopper"].on_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_phdflopper"] = spawnStruct();
+  level.machine_assets[#"specialty_phdflopper"].weapon = getweapon("zombie_perk_bottle_slider");
+  level.machine_assets[#"specialty_phdflopper"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_phdflopper"].on_model = "p7_zm_vending_nuke";
 }
 
 function_5ba17a72() {

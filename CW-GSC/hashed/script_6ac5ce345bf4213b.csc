@@ -62,17 +62,17 @@ function register(var_5a7b4b38, var_c05c67e2, var_5957697a, var_90efc226, var_b7
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_textbubble_playername"])) {
-    level.var_ae746e8f[# "doa_textbubble_playername"] = [];
+  if(!isDefined(level.var_ae746e8f[#"doa_textbubble_playername"])) {
+    level.var_ae746e8f[#"doa_textbubble_playername"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_textbubble_playername"])) {
-    level.var_ae746e8f[# "doa_textbubble_playername"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "doa_textbubble_playername"])) {
-    level.var_ae746e8f[# "doa_textbubble_playername"] = array(level.var_ae746e8f[# "doa_textbubble_playername"]);
+  if(!isDefined(level.var_ae746e8f[#"doa_textbubble_playername"])) {
+    level.var_ae746e8f[#"doa_textbubble_playername"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"doa_textbubble_playername"])) {
+    level.var_ae746e8f[#"doa_textbubble_playername"] = array(level.var_ae746e8f[#"doa_textbubble_playername"]);
   }
 
-  level.var_ae746e8f[# "doa_textbubble_playername"][level.var_ae746e8f[# "doa_textbubble_playername"].size] = elem;
+  level.var_ae746e8f[#"doa_textbubble_playername"][level.var_ae746e8f[#"doa_textbubble_playername"].size] = elem;
 }
 
 function register_clientside() {

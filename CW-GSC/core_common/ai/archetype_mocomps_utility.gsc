@@ -431,7 +431,7 @@ function calculatepivotoriginfromedge(entity, mantlenode, traversalstart) {
       }
     }
   } else {
-    mantleorigin = physicstraceex(mantleoriginproj + (0, 0, mantlenode.aabb_extents[2]), mantleoriginproj - (0, 0, mantlenode.aabb_extents[2]), (0, 0, 0), (0, 0, 0), entity)[# "position"];
+    mantleorigin = physicstraceex(mantleoriginproj + (0, 0, mantlenode.aabb_extents[2]), mantleoriginproj - (0, 0, mantlenode.aabb_extents[2]), (0, 0, 0), (0, 0, 0), entity)[#"position"];
   }
 
   recordline(mantleoriginproj, mantleendproj, (0, 0, 1), "<dev string:x38>", entity);
@@ -470,7 +470,7 @@ function mocomptraversalproceduralinit(entity, mocompanim, mocompanimblendouttim
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[# "position"];
+      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[#"position"];
     }
   }
 
@@ -522,7 +522,7 @@ function mocomptraversalproceduralpivotinit(entity, mocompanim, mocompanimblendo
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = entity setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[# "position"];
+      traversal.adjustedendposition = physicstraceex(entity.traversalendpos + (0, 0, 24), entity.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), entity)[#"position"];
     }
   }
 
@@ -718,7 +718,7 @@ function function_f8a10630(entity, mocompanim, mocompanimblendouttime, mocompani
     if(isDefined(traversal.endnodeparent)) {
       traversal.origincontents = mocompanim setcontents(8192);
       traversal.lastendnodeparentorigin = traversal.endnodeparent.origin;
-      traversal.adjustedendposition = physicstraceex(mocompanim.traversalendpos + (0, 0, 24), mocompanim.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), mocompanim)[# "position"];
+      traversal.adjustedendposition = physicstraceex(mocompanim.traversalendpos + (0, 0, 24), mocompanim.traversalendpos - (0, 0, 24), (0, 0, 0), (0, 0, 0), mocompanim)[#"position"];
     }
   }
 
@@ -1264,7 +1264,7 @@ function private function_c0c49b7f(entity) {
       traced = 1;
       trace = physicstraceex(entity.origin, entity.origin + (0, 0, var_64a2a5c * -1), (-15, -15, 0), (15, 15, 72), entity);
 
-      if(trace[# "fraction"] !== 1) {
+      if(trace[#"fraction"] !== 1) {
         entity.var_d667c9b7 = 0;
       }
     }
@@ -1285,7 +1285,7 @@ function private function_c0c49b7f(entity) {
       z_offset = (0, 0, 30);
       trace = physicstrace(entity.origin + z_offset, entity.origin + z_offset + velocity_norm * sqrt(var_cb67bd59), (0, 0, 0), (0, 0, 0), entity);
 
-      if(trace[# "fraction"] !== 1) {
+      if(trace[#"fraction"] !== 1) {
         velocity_norm = (0, 0, 0);
       }
     }

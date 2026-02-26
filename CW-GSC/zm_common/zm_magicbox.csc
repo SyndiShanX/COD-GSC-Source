@@ -16,17 +16,17 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[# "hash_63f729c169af0c3e"] = # "hash_43a26488c9e5ce57";
-  level._effect[# "chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[# "hash_19f4dd97cbb87594"] = # "hash_5f376e9395e16666";
-  level._effect[# "fire_runner"] = # "hash_409439bf8b3dd862";
-  level._effect[# "hash_6778cbcf34bfebef"] = # "hash_43a26488c9e5ce57";
-  level._effect[# "hash_5f2da0ff081c1699"] = # "hash_43a26488c9e5ce57";
-  level._effect[# "hash_63697be07cc11490"] = # "hash_4924963a116d71bd";
-  level._effect[# "hash_360e9275d6096589"] = # "hash_1bc8b1078984dbda";
-  level._effect[# "hash_66be32f919d8b4a4"] = # "hash_53280ae47e5295e0";
-  level._effect[# "hash_638a4ec653717ef6"] = # "hash_1a1142d2a6711364";
-  level._effect[# "hash_1fa861cbe30adda9"] = # "hash_344ba1202db8c50a";
+  level._effect[#"hash_63f729c169af0c3e"] = # "hash_43a26488c9e5ce57";
+  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"hash_19f4dd97cbb87594"] = # "hash_5f376e9395e16666";
+  level._effect[#"fire_runner"] = # "hash_409439bf8b3dd862";
+  level._effect[#"hash_6778cbcf34bfebef"] = # "hash_43a26488c9e5ce57";
+  level._effect[#"hash_5f2da0ff081c1699"] = # "hash_43a26488c9e5ce57";
+  level._effect[#"hash_63697be07cc11490"] = # "hash_4924963a116d71bd";
+  level._effect[#"hash_360e9275d6096589"] = # "hash_1bc8b1078984dbda";
+  level._effect[#"hash_66be32f919d8b4a4"] = # "hash_53280ae47e5295e0";
+  level._effect[#"hash_638a4ec653717ef6"] = # "hash_1a1142d2a6711364";
+  level._effect[#"hash_1fa861cbe30adda9"] = # "hash_344ba1202db8c50a";
   level.var_1d1c6c28 = [];
   clientfield::register("zbarrier", "magicbox_open_fx", 1, 1, "int", &function_8f69e904, 0, 0);
   clientfield::register("zbarrier", "magicbox_closed_fx", 1, 1, "int", &function_9253a233, 0, 0);
@@ -163,13 +163,13 @@ function function_b4b9937(localclientnum, newval, str_state) {
       if(newval) {
         switch (str_state) {
           case # "opened":
-            str_fx = level._effect[# "hash_63f729c169af0c3e"];
+            str_fx = level._effect[#"hash_63f729c169af0c3e"];
             var_4c5fde13 = self.var_7e616d59[localclientnum];
             str_tag = "tag_origin";
             audio::playloopat(#"hash_1b59c1bfb1aa5d37", self.origin);
             break;
           case # "closed":
-            str_fx = level._effect[# "chest_light_closed"];
+            str_fx = level._effect[#"chest_light_closed"];
             var_4c5fde13 = self.var_93e0dfa9[localclientnum];
             str_tag = "tag_origin";
             audio::stoploopat(#"hash_1b59c1bfb1aa5d37", self.origin);
@@ -222,7 +222,7 @@ function function_b5807489(localclientnum, oldval, newval, bnewent, binitialsnap
     if(bwastimejump) {
       mdl_piece = self zbarriergetpiece(1);
       mdl_piece.tag_origin = mdl_piece gettagorigin("tag_origin");
-      self.var_788272f2 = util::playFXOnTag(fieldname, level._effect[# "fire_runner"], mdl_piece, "tag_origin");
+      self.var_788272f2 = util::playFXOnTag(fieldname, level._effect[#"fire_runner"], mdl_piece, "tag_origin");
       return;
     }
 
@@ -237,29 +237,29 @@ function function_abe84c14(localclientnum, oldval, newval, bnewent, binitialsnap
 
   switch (bwastimejump) {
     case 1:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_6778cbcf34bfebef"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_6778cbcf34bfebef"], mdl_piece, "tag_origin");
       break;
     case 2:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_5f2da0ff081c1699"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_5f2da0ff081c1699"], mdl_piece, "tag_origin");
       break;
     case 3:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_63697be07cc11490"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_63697be07cc11490"], mdl_piece, "tag_origin");
       playSound(fieldname, #"hash_604498b9077301d9", self.origin);
       break;
     case 4:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_360e9275d6096589"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_360e9275d6096589"], mdl_piece, "tag_origin");
       playSound(fieldname, #"hash_6c870d0f85573f60", self.origin);
       break;
     case 5:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_66be32f919d8b4a4"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_66be32f919d8b4a4"], mdl_piece, "tag_origin");
       playSound(fieldname, #"hash_65ae6ba40cb558cd", self.origin);
       break;
     case 6:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_638a4ec653717ef6"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_638a4ec653717ef6"], mdl_piece, "tag_origin");
       playSound(fieldname, #"hash_66f3cff29be77acd", self.origin);
       break;
     case 7:
-      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[# "hash_1fa861cbe30adda9"], mdl_piece, "tag_origin");
+      self.var_5ad9ac45 = util::playFXOnTag(fieldname, level._effect[#"hash_1fa861cbe30adda9"], mdl_piece, "tag_origin");
       playSound(fieldname, #"hash_30dce35bee22371a", self.origin);
       break;
     case 0:

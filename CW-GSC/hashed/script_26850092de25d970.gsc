@@ -119,12 +119,12 @@ function main(var_d3440450, var_50cc0d4f) {
 }
 
 function function_3f65ad3b(a_ents) {
-  if(isDefined(a_ents[# "civ_1"])) {
-    a_ents[# "civ_1"] thread function_5424b11();
+  if(isDefined(a_ents[#"civ_1"])) {
+    a_ents[#"civ_1"] thread function_5424b11();
   }
 
-  if(isDefined(a_ents[# "civ_2"])) {
-    a_ents[# "civ_2"] thread function_5424b11();
+  if(isDefined(a_ents[#"civ_2"])) {
+    a_ents[#"civ_2"] thread function_5424b11();
   }
 }
 
@@ -175,7 +175,7 @@ function function_d5cc022() {
 }
 
 function function_37ddf68b(a_ents) {
-  door = a_ents[# "yard_gate"];
+  door = a_ents[#"yard_gate"];
   var_b7ec8c4b = getent("yard_gate_clip", "targetname");
   org = getent("yard_gate_org", "targetname");
   var_b7ec8c4b linkto(org);

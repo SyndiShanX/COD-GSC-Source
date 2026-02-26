@@ -49,7 +49,7 @@ function autoexec init() {
 }
 
 function private function_b98fe2d6() {
-  if(!isDefined(level.flag) || !is_true(level.flag[# "load_main_complete"])) {
+  if(!isDefined(level.flag) || !is_true(level.flag[#"load_main_complete"])) {
     level waittill(#"load_main_complete");
   }
 

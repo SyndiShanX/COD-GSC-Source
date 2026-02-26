@@ -115,10 +115,10 @@ function main() {
   }
 
   gametype = util::get_game_type();
-  game.dialog[# "gametype"] = gametype + "_start";
-  game.dialog[# "gametype_hardcore"] = gametype + "_start";
-  game.dialog[# "offense_obj"] = "generic_boost";
-  game.dialog[# "defense_obj"] = "generic_boost";
+  game.dialog[#"gametype"] = gametype + "_start";
+  game.dialog[#"gametype_hardcore"] = gametype + "_start";
+  game.dialog[#"offense_obj"] = "generic_boost";
+  game.dialog[#"defense_obj"] = "generic_boost";
   zm_utility::set_gamemode_var("pre_init_zombie_spawn_func", undefined);
   zm_utility::set_gamemode_var("post_init_zombie_spawn_func", undefined);
   zm_utility::set_gamemode_var("match_end_notify", undefined);
@@ -236,7 +236,7 @@ function mayspawn() {
     return self[[level.custommayspawnlogic]]();
   }
 
-  if(self.pers[# "lives"] === 0) {
+  if(self.pers[#"lives"] === 0) {
     level notify(#"player_eliminated");
     self notify(#"player_eliminated");
     return 0;
@@ -349,7 +349,7 @@ function onspawnplayer(predictedspawn = 0) {
   self val::set(#"onspawnplayer", "disablegadgets");
   self.spectator_respawn = spawnpoint;
   self.score = self globallogic_score::getpersstat(#"score");
-  self.pers[# "participation"] = 0;
+  self.pers[#"participation"] = 0;
 
   if(getdvarint(#"zombie_cheat", 0) >= 1) {
     self.score = 100000;
@@ -414,9 +414,9 @@ function get_player_spawns_for_gametype() {
 function onendgame(winningteam) {}
 
 function onroundendgame(roundwinner) {
-  if(game.stat[# "roundswon"][# "allies"] == game.stat[# "roundswon"][# "axis"]) {
+  if(game.stat[#"roundswon"][#"allies"] == game.stat[#"roundswon"][#"axis"]) {
     winner = "tie";
-  } else if(game.stat[# "roundswon"][# "axis"] > game.stat[# "roundswon"][# "allies"]) {
+  } else if(game.stat[#"roundswon"][#"axis"] > game.stat[#"roundswon"][#"allies"]) {
     winner = # "axis";
   } else {
     winner = # "allies";
@@ -427,21 +427,21 @@ function onroundendgame(roundwinner) {
 
 function menu_init() {
   game.menu = [];
-  game.menu[# "menu_team"] = "ChangeTeam";
-  game.menu[# "menu_changeclass_allies"] = "ChooseClass_InGame";
-  game.menu[# "menu_initteam_allies"] = "initteam_marines";
-  game.menu[# "menu_changeclass_axis"] = "ChooseClass_InGame";
-  game.menu[# "menu_initteam_axis"] = "initteam_opfor";
-  game.menu[# "menu_class"] = "class";
-  game.menu[# "menu_start_menu"] = "StartMenu_Main";
-  game.menu[# "menu_changeclass"] = "PositionDraft";
-  game.menu[# "menu_changeclass_offline"] = "PositionDraft";
-  game.menu[# "menu_changeclass_custom"] = "PositionDraft";
-  game.menu[# "menu_draft"] = "PositionDraft";
-  game.menu[# "menu_controls"] = "ingame_controls";
-  game.menu[# "menu_options"] = "ingame_options";
-  game.menu[# "menu_leavegame"] = "popup_leavegame";
-  game.menu[# "menu_restartgamepopup"] = "T7Hud_zm_factory";
+  game.menu[#"menu_team"] = "ChangeTeam";
+  game.menu[#"menu_changeclass_allies"] = "ChooseClass_InGame";
+  game.menu[#"menu_initteam_allies"] = "initteam_marines";
+  game.menu[#"menu_changeclass_axis"] = "ChooseClass_InGame";
+  game.menu[#"menu_initteam_axis"] = "initteam_opfor";
+  game.menu[#"menu_class"] = "class";
+  game.menu[#"menu_start_menu"] = "StartMenu_Main";
+  game.menu[#"menu_changeclass"] = "PositionDraft";
+  game.menu[#"menu_changeclass_offline"] = "PositionDraft";
+  game.menu[#"menu_changeclass_custom"] = "PositionDraft";
+  game.menu[#"menu_draft"] = "PositionDraft";
+  game.menu[#"menu_controls"] = "ingame_controls";
+  game.menu[#"menu_options"] = "ingame_options";
+  game.menu[#"menu_leavegame"] = "popup_leavegame";
+  game.menu[#"menu_restartgamepopup"] = "T7Hud_zm_factory";
 }
 
 function menu_onplayerconnect() {
@@ -471,13 +471,13 @@ function menu_onmenuresponse() {
       self closeingamemenu();
 
       if(level.console) {
-        if(menu == game.menu[# "menu_changeclass"] || menu == game.menu_changeclass_offline || menu == game.menu[# "menu_team"] || menu == game.menu[# "menu_controls"]) {
-          if(self.pers[# "team"] == # "allies") {
-            self openmenu(game.menu[# "menu_start_menu"]);
+        if(menu == game.menu[#"menu_changeclass"] || menu == game.menu_changeclass_offline || menu == game.menu[#"menu_team"] || menu == game.menu[#"menu_controls"]) {
+          if(self.pers[#"team"] == # "allies") {
+            self openmenu(game.menu[#"menu_start_menu"]);
           }
 
-          if(self.pers[# "team"] == # "axis") {
-            self openmenu(game.menu[# "menu_start_menu"]);
+          if(self.pers[#"team"] == # "axis") {
+            self openmenu(game.menu[#"menu_start_menu"]);
           }
         }
       }
@@ -487,24 +487,24 @@ function menu_onmenuresponse() {
 
     if(response == "changeteam" && level.allow_teamchange) {
       self closeingamemenu();
-      self openmenu(game.menu[# "menu_team"]);
+      self openmenu(game.menu[#"menu_team"]);
     }
 
     if(response == "changeclass_marines") {
       self closeingamemenu();
-      self openmenu(game.menu[# "menu_changeclass_allies"]);
+      self openmenu(game.menu[#"menu_changeclass_allies"]);
       continue;
     }
 
     if(response == "changeclass_opfor") {
       self closeingamemenu();
-      self openmenu(game.menu[# "menu_changeclass_axis"]);
+      self openmenu(game.menu[#"menu_changeclass_axis"]);
       continue;
     }
 
     if(response == "changeclass_custom") {
       self closeingamemenu();
-      self openmenu(game.menu[# "menu_changeclass_custom"]);
+      self openmenu(game.menu[#"menu_changeclass_custom"]);
       continue;
     }
 
@@ -567,7 +567,7 @@ function menu_onmenuresponse() {
       self notify(#"show_class_select_slideout");
     }
 
-    if(menu == game.menu[# "menu_team"] && level.allow_teamchange) {
+    if(menu == game.menu[#"menu_team"] && level.allow_teamchange) {
       switch (response) {
         case # "allies":
           self[[level.allies]]();
@@ -586,7 +586,7 @@ function menu_onmenuresponse() {
       continue;
     }
 
-    if(menu == game.menu[# "menu_changeclass"] || menu == game.menu[# "menu_changeclass_offline"] || menu == game.menu[# "menu_changeclass_custom"]) {
+    if(menu == game.menu[#"menu_changeclass"] || menu == game.menu[#"menu_changeclass_offline"] || menu == game.menu[#"menu_changeclass_custom"]) {
       self closeingamemenu();
       self.selectedclass = 1;
       self[[level.curclass]](response);
@@ -599,7 +599,7 @@ function menuallieszombies() {
     return;
   }
 
-  if(self.pers[# "team"] != # "allies") {
+  if(self.pers[#"team"] != # "allies") {
     if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
@@ -607,16 +607,16 @@ function menuallieszombies() {
     if(self.sessionstate == "playing") {
       self.switching_teams = 1;
       self.joining_team = # "allies";
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[# "team"] = # "allies";
+    self.pers[#"team"] = # "allies";
     self.team = # "allies";
-    self.pers[# "class"] = undefined;
+    self.pers[#"class"] = undefined;
     self.curclass = undefined;
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
     self.sessionteam = # "allies";
     self player::function_466d8a4b(0);
     self notify(#"end_respawn");

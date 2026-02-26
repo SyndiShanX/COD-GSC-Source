@@ -25,7 +25,7 @@ function event_handler[level_init] main(eventstruct) {
   setsaveddvar(#"wind_global_hi_altitude", 10000);
   setsaveddvar(#"wind_global_low_strength_percent", 100);
   init_clientfields();
-  level._effect[# "hash_12368454c367c6fc"] = # "hash_41db1a73a41027b";
+  level._effect[#"hash_12368454c367c6fc"] = # "hash_41db1a73a41027b";
   load::main();
   level thread namespace_72b0499b::init_audio();
   util::waitforclient(0);
@@ -89,7 +89,7 @@ function dof_enable_autofocus() {
     v_eye = self getEye();
     v_fwd = anglesToForward(self getcamangles());
     a_trace = physicstrace(v_eye, v_eye + v_fwd * 1000, (1 * -1, 1 * -1, 1 * -1), (1, 1, 1), self, 1);
-    var_a84275e3 = distance(v_eye, a_trace[# "position"] + v_fwd * 1);
+    var_a84275e3 = distance(v_eye, a_trace[#"position"] + v_fwd * 1);
 
     if(var_a84275e3 < 100) {
       self function_9e574055(2);
@@ -126,7 +126,7 @@ function ease_to_dialog_dof(localclientnum, oldval, newval, bnewent, binitialsna
 
 function bamboo_heli_landing_rain_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_40e9c967 = self util::playFXOnTag(fieldname, level._effect[# "hash_12368454c367c6fc"], self, "tag_origin");
+    self.var_40e9c967 = self util::playFXOnTag(fieldname, level._effect[#"hash_12368454c367c6fc"], self, "tag_origin");
     return;
   }
 

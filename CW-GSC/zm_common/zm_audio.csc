@@ -24,13 +24,13 @@ function private preinit() {
     level.exert_sounds = [];
   }
 
-  level.exert_sounds[0][# "playerbreathinsound"] = "vox_exert_generic_inhale";
-  level.exert_sounds[0][# "playerbreathoutsound"] = "vox_exert_generic_exhale";
-  level.exert_sounds[0][# "playerbreathgaspsound"] = "vox_exert_generic_exhale";
-  level.exert_sounds[0][# "falldamage"] = "vox_exert_generic_pain";
-  level.exert_sounds[0][# "mantlesoundplayer"] = "vox_exert_generic_mantle";
-  level.exert_sounds[0][# "meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
-  level.exert_sounds[0][# "dtplandsoundplayer"] = "vox_exert_generic_pain";
+  level.exert_sounds[0][#"playerbreathinsound"] = "vox_exert_generic_inhale";
+  level.exert_sounds[0][#"playerbreathoutsound"] = "vox_exert_generic_exhale";
+  level.exert_sounds[0][#"playerbreathgaspsound"] = "vox_exert_generic_exhale";
+  level.exert_sounds[0][#"falldamage"] = "vox_exert_generic_pain";
+  level.exert_sounds[0][#"mantlesoundplayer"] = "vox_exert_generic_mantle";
+  level.exert_sounds[0][#"meleeswipesoundplayer"] = "vox_exert_generic_knifeswipe";
+  level.exert_sounds[0][#"dtplandsoundplayer"] = "vox_exert_generic_pain";
   callback::on_spawned(&on_player_spawned);
 }
 

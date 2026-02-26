@@ -54,7 +54,7 @@ selectplanemortarlocation(hardpointtype) {
   self airsupport::function_9e2054b0(&function_a3cb6b44);
   locations = [];
 
-  if(!isDefined(self.pers[# "mortarradarused"]) || !self.pers[# "mortarradarused"]) {
+  if(!isDefined(self.pers[#"mortarradarused"]) || !self.pers[#"mortarradarused"]) {
     self thread singleradarsweep();
   }
 
@@ -70,7 +70,7 @@ selectplanemortarlocation(hardpointtype) {
     }
 
     if(!isDefined(location.origin)) {
-      self.pers[# "mortarradarused"] = 1;
+      self.pers[#"mortarradarused"] = 1;
       self notify(#"cancel_selection");
       return 0;
     }
@@ -79,12 +79,12 @@ selectplanemortarlocation(hardpointtype) {
   }
 
   if(self killstreakrules::iskillstreakallowed(hardpointtype, self.team) == 0) {
-    self.pers[# "mortarradarused"] = 1;
+    self.pers[#"mortarradarused"] = 1;
     self notify(#"cancel_selection");
     return 0;
   }
 
-  self.pers[# "mortarradarused"] = 0;
+  self.pers[#"mortarradarused"] = 0;
   return self airsupport::function_83904681(locations, &useplanemortar, "planemortar");
 }
 
@@ -218,7 +218,7 @@ followbomb(plane, position, direction, impact, player) {
   player endon(#"emp_jammed");
   wait 2 * 5 / 12;
   plane.killcament unlink();
-  plane.killcament moveto(impact[# "position"] + (0, 0, 1000) + vectorscale(direction, -600), 0.8, 0, 0.2);
+  plane.killcament moveto(impact[#"position"] + (0, 0, 1000) + vectorscale(direction, -600), 0.8, 0, 0.2);
 }
 
 lookatexplosion(bomb) {

@@ -167,7 +167,7 @@ function private archetypezombieonanimscriptedcallback(entity) {
 }
 
 function function_eb55349f() {
-  var_1690db4a = [# "c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"hash_ef041655f01ad34", #"hash_502c60e0a94ba04b"];
+  var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"hash_ef041655f01ad34", #"hash_502c60e0a94ba04b"];
 
   if(self.model === # "c_t9_zmb_zombie_light_body2" || isDefined(self.model) && isinarray(var_1690db4a, self.model)) {
     self clientfield::set("pustule_pulse_cf", 1);
@@ -1377,7 +1377,7 @@ function zombiemoveactionstart(entity, asmstatename) {
 
   if(is_true(entity.stumble) && !isDefined(entity.move_anim_end_time)) {
     stumbleactionresult = entity astsearch(asmstatename);
-    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[# "animation"]);
+    stumbleactionanimation = animationstatenetworkutility::searchanimationmap(entity, stumbleactionresult[#"animation"]);
     entity.move_anim_end_time = entity.movetime + getanimlength(stumbleactionanimation);
   }
 
@@ -1677,7 +1677,7 @@ function zombiegravity(entity, attribute, oldvalue, value) {
 
     if(!isDefined(self.low_gravity_variant) && isDefined(level.var_d9ffddf4)) {
       if(is_true(self.missinglegs)) {
-        self.low_gravity_variant = randomint(level.var_d9ffddf4[# "crawl"]);
+        self.low_gravity_variant = randomint(level.var_d9ffddf4[#"crawl"]);
       } else {
         self.low_gravity_variant = randomint(level.var_d9ffddf4[self.zombie_move_speed]);
       }

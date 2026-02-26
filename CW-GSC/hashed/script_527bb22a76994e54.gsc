@@ -302,7 +302,7 @@ function function_6f86dee1(var_f587343a) {
 function function_c23b1611() {
   level endon(#"evidence_board_closed");
   evidence = level.var_3cb3ede5[level.var_8d26dee2];
-  namespace_61e6d095::function_df0d7a85(#"hash_3ccc1702bc979da8", [# "interactive_map"]);
+  namespace_61e6d095::function_df0d7a85(#"hash_3ccc1702bc979da8", [#"interactive_map"]);
 
   if(!namespace_61e6d095::exists(#"hash_3ccc1702bc979da8")) {
     namespace_61e6d095::create(#"hash_3ccc1702bc979da8", #"hash_4130605c2e66825d");

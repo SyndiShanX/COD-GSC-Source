@@ -21,9 +21,9 @@ __init__() {
   }
 
   clientfield::register("scriptmover", "" + # "zm_trial_door_lockdown", 16000, 1, "int", &zm_trial_door_lockdown, 0, 0);
-  level._effect[# "hash_351debe7af1f588b"] = "maps/zm_escape/fx8_flame_wall_64x64";
-  level._effect[# "hash_257bf4ae70b5a852"] = "maps/zm_escape/fx8_flame_wall_128x128";
-  level._effect[# "hash_3ea271ae7eb7fdce"] = "maps/zm_escape/fx8_flame_wall_256x256";
+  level._effect[#"hash_351debe7af1f588b"] = "maps/zm_escape/fx8_flame_wall_64x64";
+  level._effect[#"hash_257bf4ae70b5a852"] = "maps/zm_escape/fx8_flame_wall_128x128";
+  level._effect[#"hash_3ea271ae7eb7fdce"] = "maps/zm_escape/fx8_flame_wall_256x256";
   zm_trial::register_challenge(#"door_lockdown", &on_begin, &on_end);
 }
 
@@ -37,16 +37,16 @@ zm_trial_door_lockdown(localclientnum, oldval, newval, bnewent, binitialsnap, fi
 
     switch (self.model) {
       case # "collision_player_wall_64x64x10":
-        var_b1e1a2db = level._effect[# "hash_351debe7af1f588b"];
+        var_b1e1a2db = level._effect[#"hash_351debe7af1f588b"];
         break;
       case # "collision_player_wall_128x128x10":
-        var_b1e1a2db = level._effect[# "hash_257bf4ae70b5a852"];
+        var_b1e1a2db = level._effect[#"hash_257bf4ae70b5a852"];
         break;
       case # "collision_player_wall_256x256x10":
-        var_b1e1a2db = level._effect[# "hash_3ea271ae7eb7fdce"];
+        var_b1e1a2db = level._effect[#"hash_3ea271ae7eb7fdce"];
         break;
       default:
-        var_b1e1a2db = level._effect[# "hash_257bf4ae70b5a852"];
+        var_b1e1a2db = level._effect[#"hash_257bf4ae70b5a852"];
         break;
     }
 

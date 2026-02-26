@@ -551,8 +551,8 @@ function function_ce8fe2b0(entity, splitorigin) {
   if(isDefined(closestpointonnavmesh)) {
     trace = groundtrace(closestpointonnavmesh + (0, 0, 200), closestpointonnavmesh + (0, 0, -200), 0, undefined);
 
-    if(isDefined(trace[# "position"])) {
-      newpos = trace[# "position"];
+    if(isDefined(trace[#"position"])) {
+      newpos = trace[#"position"];
     }
 
     recordsphere(newpos, 15, (1, 0.5, 0), "<dev string:x38>");

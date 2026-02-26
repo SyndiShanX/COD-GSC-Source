@@ -205,7 +205,7 @@ function function_3d66ebcc(tname, var_5283a254, skipto_end = 0) {
     actors = [];
     actors[player_heli.targetname] = player_heli;
     actors[level.var_9a3944f4.targetname] = level.var_9a3944f4;
-    actors[# "fakeplayer"] = level.fake_player;
+    actors[#"fakeplayer"] = level.fake_player;
 
     if(!skipto_end) {
       thread function_a01817ae();
@@ -322,7 +322,7 @@ function flyin() {
 function function_3cebcd1b() {
   self endon(#"death");
   level endon(#"bustout_start_shooting_house");
-  var_979d3fe0 = [# "hit1_truck_rear", #"hit1_truck_house", #"hit1_truck_mid", #"hit1_truck_front", #"heli_focus_mid_house", #"heli_focus_rear_house"];
+  var_979d3fe0 = [#"hit1_truck_rear", #"hit1_truck_house", #"hit1_truck_mid", #"hit1_truck_front", #"heli_focus_mid_house", #"heli_focus_rear_house"];
   var_f01b798 = ["hit1_truck_rear", "hit1_truck_house", "hit1_truck_mid", "hit1_truck_front", "heli_focus_mid_house", "heli_focus_rear_house"];
 
   while(true) {

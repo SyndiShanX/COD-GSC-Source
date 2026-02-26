@@ -69,7 +69,7 @@ fx_flesh_hit_neck_fatal(params) {
 
       if(isDefined(scoregiven)) {
         player challenges::earnedcuavassistscore(scoregiven);
-        killstreakindex = level.killstreakindices[# "counteruav"];
+        killstreakindex = level.killstreakindices[#"counteruav"];
         killstreaks::killstreak_assist(player, self, killstreakindex);
       }
     }
@@ -412,7 +412,7 @@ playFX(name) {
 
 onlowhealth(attacker, weapon) {
   self.is_damaged = 1;
-  params = level.killstreakbundle[# "counteruav"];
+  params = level.killstreakbundle[#"counteruav"];
 
   if(isDefined(params.fxlowhealth)) {
     playFXOnTag(params.fxlowhealth, self, "tag_origin");
@@ -482,7 +482,7 @@ destroycounteruav(attacker, weapon) {
 
 deletecounteruav() {
   self notify(#"crashing");
-  params = level.killstreakbundle[# "counteruav"];
+  params = level.killstreakbundle[#"counteruav"];
 
   if(isDefined(params.ksexplosionfx)) {
     self thread playFX(params.ksexplosionfx);

@@ -116,7 +116,7 @@ function takedown_tutorial() {
   player playgestureviewmodel(#"hash_320d152af1fadd63", undefined, 1, 1, 0, 1, 1);
   wait 1.25;
   player stopanimscripted();
-  hint_data = [hint_tutorial::function_f0104b5([# "hash_5f8c7ca0a178e810", #"hash_46b1d4bb698b8298"])];
+  hint_data = [hint_tutorial::function_f0104b5([#"hash_5f8c7ca0a178e810", #"hash_46b1d4bb698b8298"])];
   hint_tutorial::function_4c2d4fc4(#"hash_e67c810a4c45083", #"hash_4f8907e75463e084", undefined, undefined, undefined, undefined, undefined, 1, hint_data);
   hint_tutorial::pause("+melee_zoom;+melee", #"hash_2b84cc72687b168a");
   player val::reset_all(#"takedown_tutorial");
@@ -125,10 +125,10 @@ function takedown_tutorial() {
   if(isDefined(victim)) {
     victim.takedamage = 1;
     victim.var_ab101371 = # "hash_10e2d6b9f9bef6a3";
-    player.takedown.victim[# "takedown"] = victim;
-    player.takedown.scene[# "takedown"] = victim.var_ab101371;
-    player.takedown.victim[# "body_shield"] = victim;
-    action = level.player_actions.actions[# "takedown"];
+    player.takedown.victim[#"takedown"] = victim;
+    player.takedown.scene[#"takedown"] = victim.var_ab101371;
+    player.takedown.victim[#"body_shield"] = victim;
+    action = level.player_actions.actions[#"takedown"];
     player namespace_9c83b58d::function_7a061b23(0, "takedown");
     player actions::function_8488e359("melee");
   }

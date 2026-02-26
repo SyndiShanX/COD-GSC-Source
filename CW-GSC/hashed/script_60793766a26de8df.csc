@@ -226,22 +226,22 @@ function private function_371c2ab4(startpos, normal) {
     }
 
     trace = bulletTrace(startpos + normal * 20, point, 0, undefined);
-    traceposition = trace[# "position"];
+    traceposition = trace[#"position"];
     hitsomething = 0;
 
-    if(trace[# "fraction"] < 0.7) {
+    if(trace[#"fraction"] < 0.7) {
       locations[count].position = traceposition;
-      locations[count].normal = trace[# "normal"];
-      locations[count].fx = trace[# "fraction"] > 0.2 ? "zm_ai/fx9_steiner_rad_bomb_spot_md_loop" : "zm_ai/fx9_steiner_rad_bomb_spot_lg_loop";
+      locations[count].normal = trace[#"normal"];
+      locations[count].fx = trace[#"fraction"] > 0.2 ? "zm_ai/fx9_steiner_rad_bomb_spot_md_loop" : "zm_ai/fx9_steiner_rad_bomb_spot_lg_loop";
       hitsomething = 1;
     }
 
     if(!hitsomething) {
       tracedown = bulletTrace(traceposition, traceposition - normal * 100, 0, undefined);
 
-      if(tracedown[# "fraction"] != 1) {
-        locations[count].position = tracedown[# "position"];
-        locations[count].normal = tracedown[# "normal"];
+      if(tracedown[#"fraction"] != 1) {
+        locations[count].position = tracedown[#"position"];
+        locations[count].normal = tracedown[#"normal"];
         locations[count].fx = "zm_ai/fx9_steiner_rad_bomb_spot_sm_loop";
       }
     }
@@ -249,17 +249,17 @@ function private function_371c2ab4(startpos, normal) {
     randangle = randomint(360);
     var_c4b09917 = randomfloatrange(-25, 25);
     var_7ee25402 = rotatepointaroundaxis(var_4997e17c, normal, randangle);
-    var_995eb37a = int(min(2 * trace[# "fraction"] + 1, 2));
+    var_995eb37a = int(min(2 * trace[#"fraction"] + 1, 2));
 
     for(var_ecef2fde = 0; var_ecef2fde < var_995eb37a && count % 2 == 0; var_ecef2fde++) {
       fraction = (var_ecef2fde + 1) / (var_995eb37a + 1);
       offsetpoint = startpos + (traceposition - startpos) * fraction + var_7ee25402 * var_c4b09917;
       var_9417df90 = bulletTrace(offsetpoint, offsetpoint - normal * 90, 0, undefined);
 
-      if(var_9417df90[# "fraction"] != 1) {
+      if(var_9417df90[#"fraction"] != 1) {
         locindex = count + 12 * (var_ecef2fde + 1);
         locations[locindex] = {
-          #position: var_9417df90[# "position"], #normal: var_9417df90[# "normal"], #fx: "zm_ai/fx9_steiner_rad_bomb_spot_lg_loop"};
+          #position: var_9417df90[#"position"], #normal: var_9417df90[#"normal"], #fx: "zm_ai/fx9_steiner_rad_bomb_spot_lg_loop"};
       }
     }
   }

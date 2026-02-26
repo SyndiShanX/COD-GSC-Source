@@ -73,10 +73,10 @@ function event_handler[gametype_init] main(eventstruct) {
   level.ontimelimit = &globallogic::blank;
   level.onscorelimit = &globallogic::blank;
   gameobjects::register_allowed_gameobject(level.gametype);
-  game.dialog[# "gametype"] = "coop_start";
-  game.dialog[# "gametype_hardcore"] = "hccoop_start";
-  game.dialog[# "offense_obj"] = "generic_boost";
-  game.dialog[# "defense_obj"] = "generic_boost";
+  game.dialog[#"gametype"] = "coop_start";
+  game.dialog[#"gametype_hardcore"] = "hccoop_start";
+  game.dialog[#"offense_obj"] = "generic_boost";
+  game.dialog[#"defense_obj"] = "generic_boost";
   setDvar(#"hash_c9bd2003951a4a8", 1);
 }
 
@@ -130,7 +130,7 @@ function function_7f1305bc() {
     matchrecorderincrementheaderstat("checkpointRestoreCount", 1);
 
     foreach(player in level.players) {
-      player closemenu(game.menu[# "menu_start_menu"]);
+      player closemenu(game.menu[#"menu_start_menu"]);
 
       if(player flag::get(#"mobile_armory_in_use")) {
         player notify(#"menuresponse", {
@@ -138,8 +138,8 @@ function function_7f1305bc() {
         });
       }
 
-      player closemenu(game.menu[# "menu_changeclass"]);
-      player closemenu(game.menu[# "menu_changeclass_offline"]);
+      player closemenu(game.menu[#"menu_changeclass"]);
+      player closemenu(game.menu[#"menu_changeclass_offline"]);
 
       if(player.sessionstate == "spectator") {
         if(!isDefined(player.curclass)) {
@@ -268,7 +268,7 @@ function onscoreclosemusic() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  self closemenu(game.menu[# "menu_changeclass"]);
+  self closemenu(game.menu[#"menu_changeclass"]);
   primaries = self getweaponslistprimaries();
 
   if(isDefined(primaries)) {
@@ -529,7 +529,7 @@ function wait_to_spawn() {
     return true;
   }
 
-  hud_message::setlowermessage(game.strings[# "waiting_to_spawn"], 15);
+  hud_message::setlowermessage(game.strings[#"waiting_to_spawn"], 15);
   level waittilltimeout(15, #"objective_changed");
   return true;
 }

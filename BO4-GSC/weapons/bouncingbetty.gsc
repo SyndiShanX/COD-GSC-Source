@@ -13,8 +13,8 @@
 
 init_shared() {
   level.bettydestroyedfx = # "weapon/fx_betty_exp_destroyed";
-  level._effect[# "fx_betty_friendly_light"] = # "hash_5f76ecd582d98e38";
-  level._effect[# "fx_betty_enemy_light"] = # "hash_330682ff4f12f646";
+  level._effect[#"fx_betty_friendly_light"] = # "hash_5f76ecd582d98e38";
+  level._effect[#"fx_betty_enemy_light"] = # "hash_330682ff4f12f646";
   level.bettymindist = 20;
   level.bettystuntime = 1;
   bettyexplodeanim = "o_spider_mine_detonate";

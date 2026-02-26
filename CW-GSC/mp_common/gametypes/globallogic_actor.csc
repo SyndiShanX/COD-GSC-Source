@@ -16,5 +16,5 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[# "rcbombexplosion"] = # "killstreaks/fx_rcxd_exp";
+  level._effect[#"rcbombexplosion"] = # "killstreaks/fx_rcxd_exp";
 }

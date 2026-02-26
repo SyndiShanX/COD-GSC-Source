@@ -218,7 +218,7 @@ init_step_2(var_a276c861) {
 function_97dd9a16() {
   level endon(#"end_game");
 
-  if(!(isDefined(level.var_f1028094[# "hash_4768e5d68ac1bb63"]) && level.var_f1028094[# "hash_4768e5d68ac1bb63"])) {
+  if(!(isDefined(level.var_f1028094[#"hash_4768e5d68ac1bb63"]) && level.var_f1028094[#"hash_4768e5d68ac1bb63"])) {
     if(zm_utility::is_player_valid(level.var_5beab970)) {
       e_speaker = level.var_5beab970;
     } else {
@@ -232,7 +232,7 @@ function_97dd9a16() {
     }
 
     if(zm_utility::is_player_valid(e_speaker)) {
-      level.var_f1028094[# "hash_4768e5d68ac1bb63"] = 1;
+      level.var_f1028094[#"hash_4768e5d68ac1bb63"] = 1;
       e_speaker zm_vo::function_a2bd5a0c("vox_generic_responses_positive", 0, 1);
     }
   }
@@ -481,7 +481,7 @@ function_55b79f54() {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
 
-    if(!zm_utility::can_use(player) || isDefined(player.b_gazing) && player.b_gazing || isDefined(player.var_d049df11) && player.var_d049df11 || distancesquared(groundtrace(player.origin, player.origin + (0, 0, -128), 0, player)[# "position"], player.origin) > 16) {
+    if(!zm_utility::can_use(player) || isDefined(player.b_gazing) && player.b_gazing || isDefined(player.var_d049df11) && player.var_d049df11 || distancesquared(groundtrace(player.origin, player.origin + (0, 0, -128), 0, player)[#"position"], player.origin) > 16) {
       continue;
     }
 
@@ -596,8 +596,8 @@ function_2aa04f9f() {
         }
 
         if(self.script_int == 3) {
-          if(isalive(e_player) && !(isDefined(e_player.var_aed1893c[# "hash_7a226c41930a49a3"]) && e_player.var_aed1893c[# "hash_7a226c41930a49a3"])) {
-            e_player.var_aed1893c[# "hash_7a226c41930a49a3"] = 1;
+          if(isalive(e_player) && !(isDefined(e_player.var_aed1893c[#"hash_7a226c41930a49a3"]) && e_player.var_aed1893c[#"hash_7a226c41930a49a3"])) {
+            e_player.var_aed1893c[#"hash_7a226c41930a49a3"] = 1;
             var_6a01d8dc = e_player.characterindex;
             str_vo = "vox_fireplace_change_react_plr_" + var_6a01d8dc + "_0";
             e_player thread zm_vo::vo_say(str_vo, 0, 1, 9999);

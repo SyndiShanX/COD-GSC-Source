@@ -576,17 +576,17 @@ function_3f079da() {
 
   if(isDefined(level.var_137b8e71)) {
     level notify(#"ww_hemera_hit", {
-      #player: self, #e_entity: a_trace[# "entity"], #v_position: a_trace[# "position"]
+      #player: self, #e_entity: a_trace[#"entity"], #v_position: a_trace[#"position"]
     });
   }
 
-  return a_trace[# "position"];
+  return a_trace[#"position"];
 }
 
 player_charged_shot(weapon) {
   self endoncallback(&function_8a56ed15, #"death", #"disconnect", #"weapon_change", #"weapon_fired", #"stop_beaming");
   v_trace = self function_3f079da();
-  v_ground = groundtrace(v_trace + (0, 0, 200), v_trace + (0, 0, -1000), 0, self)[# "position"];
+  v_ground = groundtrace(v_trace + (0, 0, 200), v_trace + (0, 0, -1000), 0, self)[#"position"];
 
   if(!isDefined(self.mdl_beam)) {
     self.mdl_beam = util::spawn_model("tag_origin", v_ground);
@@ -614,7 +614,7 @@ player_charged_shot(weapon) {
     v_trace = self function_3f079da();
 
     if(isDefined(v_trace)) {
-      v_ground = groundtrace(v_trace + (0, 0, 100), v_trace + (0, 0, -1000), 0, self)[# "position"];
+      v_ground = groundtrace(v_trace + (0, 0, 100), v_trace + (0, 0, -1000), 0, self)[#"position"];
     }
 
     if(isDefined(v_ground) && isDefined(self.mdl_beam)) {

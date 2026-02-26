@@ -37,11 +37,11 @@ function function_2ae165ac() {
     return;
   }
 
-  level._effect[# "sleight_light"] = "zombie/fx_perk_speedcola_ndu";
-  level.machine_assets[# "talent_speedcola"] = spawnStruct();
-  level.machine_assets[# "talent_speedcola"].weapon = getweapon("zombie_perk_bottle_sleight");
-  level.machine_assets[# "talent_speedcola"].off_model = "p9_sur_machine_speed_cola_off";
-  level.machine_assets[# "talent_speedcola"].on_model = "p9_sur_machine_speed_cola";
+  level._effect[#"sleight_light"] = "zombie/fx_perk_speedcola_ndu";
+  level.machine_assets[#"talent_speedcola"] = spawnStruct();
+  level.machine_assets[#"talent_speedcola"].weapon = getweapon("zombie_perk_bottle_sleight");
+  level.machine_assets[#"talent_speedcola"].off_model = "p9_sur_machine_speed_cola_off";
+  level.machine_assets[#"talent_speedcola"].on_model = "p9_sur_machine_speed_cola";
 }
 
 function function_dbaed146() {}

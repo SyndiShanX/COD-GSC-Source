@@ -107,7 +107,7 @@ __init__() {
   level array::thread_all_ents(level.vehicle_processtriggers, &trigger_process);
   level.vehicle_processtriggers = undefined;
   level.vehicle_enemy_tanks = [];
-  level.vehicle_enemy_tanks[# "vehicle_ger_tracked_king_tiger"] = 1;
+  level.vehicle_enemy_tanks[#"vehicle_ger_tracked_king_tiger"] = 1;
   level thread _watch_for_hijacked_vehicles();
   level.var_16e6c35e = &function_16e6c35e;
 }
@@ -1756,7 +1756,7 @@ land() {
   self sethoverparams(0, 0, 10);
   self cleargoalyaw();
   self settargetyaw((0, self.angles[1], 0)[1]);
-  self set_goal_pos(groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"], 1);
+  self set_goal_pos(groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"], 1);
   self waittill(#"goal");
 }
 
@@ -1834,8 +1834,8 @@ unload_node_helicopter(node) {
   end = start - (0, 0, 10000);
   trace = bulletTrace(start, end, 0, undefined);
 
-  if(trace[# "fraction"] <= 1) {
-    goal = (trace[# "position"][0], trace[# "position"][1], trace[# "position"][2] + self.fastropeoffset);
+  if(trace[#"fraction"] <= 1) {
+    goal = (trace[#"position"][0], trace[#"position"][1], trace[#"position"][2] + self.fastropeoffset);
   }
 
   drop_offset_tag = "tag_fastrope_ri";
@@ -1947,9 +1947,9 @@ impact_fx(fxname, surfacetypes) {
 
     trace = bulletTrace(body, body - (0, 0, 2 * self.radius), 0, self);
 
-    if(trace[# "fraction"] < 1 && !isDefined(trace[# "entity"]) && (!isDefined(surfacetypes) || array::contains(surfacetypes, trace[# "surfacetype"]))) {
-      pos = 0.5 * (self.origin + trace[# "position"]);
-      up = 0.5 * (trace[# "normal"] + anglestoup(self.angles));
+    if(trace[#"fraction"] < 1 && !isDefined(trace[#"entity"]) && (!isDefined(surfacetypes) || array::contains(surfacetypes, trace[#"surfacetype"]))) {
+      pos = 0.5 * (self.origin + trace[#"position"]);
+      up = 0.5 * (trace[#"normal"] + anglestoup(self.angles));
       forward = anglesToForward(self.angles);
       playFX(fxname, pos, up, forward);
     }
@@ -2576,11 +2576,11 @@ add_spawn_function(veh_targetname, spawn_func, param1, param2, param3, param4) {
 
 add_spawn_function_group(str_value, str_key, spawn_func, param1, param2, param3, param4) {
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "param1"] = param1;
-  func[# "param2"] = param2;
-  func[# "param3"] = param3;
-  func[# "param4"] = param4;
+  func[#"function"] = spawn_func;
+  func[#"param1"] = param1;
+  func[#"param2"] = param2;
+  func[#"param3"] = param3;
+  func[#"param4"] = param4;
 
   if(!isDefined(level.a_str_vehicle_spawn_custom_keys)) {
     level.a_str_vehicle_spawn_custom_keys = [];
@@ -2617,11 +2617,11 @@ add_spawn_function_by_type(veh_type, spawn_func, param1, param2, param3, param4)
 
 add_hijack_function(veh_targetname, spawn_func, param1, param2, param3, param4) {
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "param1"] = param1;
-  func[# "param2"] = param2;
-  func[# "param3"] = param3;
-  func[# "param4"] = param4;
+  func[#"function"] = spawn_func;
+  func[#"param1"] = param1;
+  func[#"param2"] = param2;
+  func[#"param3"] = param3;
+  func[#"param4"] = param4;
 
   if(!isDefined(level.a_vehicle_hijack_targetnames)) {
     level.a_vehicle_hijack_targetnames = [];
@@ -2644,7 +2644,7 @@ _watch_for_hijacked_vehicles() {
 
     if(isDefined(str_targetname) && isDefined(level.a_vehicle_hijack_targetnames) && isDefined(level.a_vehicle_hijack_targetnames[str_targetname])) {
       foreach(func in level.a_vehicle_hijack_targetnames[str_targetname]) {
-        util::single_thread(waitresult.clone, func[# "function"], func[# "param1"], func[# "param2"], func[# "param3"], func[# "param4"]);
+        util::single_thread(waitresult.clone, func[#"function"], func[#"param1"], func[#"param2"], func[#"param3"], func[#"param4"]);
       }
     }
   }
@@ -3599,10 +3599,10 @@ move_flare(owner, gravity, var_2434a7ac, var_2d0d8b66, max_time, flare_tag = und
     movetopos = self.origin + newvelocity * var_2d0d8b66;
     traceresult = bulletTrace(self.origin, movetopos, 0, owner, 0, 0, self);
 
-    if(traceresult[# "fraction"] < 1) {
-      if(traceresult[# "fraction"] > 0) {
-        movetopos = traceresult[# "position"] + traceresult[# "normal"] * 0.1;
-        var_2d0d8b66 *= traceresult[# "fraction"];
+    if(traceresult[#"fraction"] < 1) {
+      if(traceresult[#"fraction"] > 0) {
+        movetopos = traceresult[#"position"] + traceresult[#"normal"] * 0.1;
+        var_2d0d8b66 *= traceresult[#"fraction"];
         self moveto(movetopos, var_2d0d8b66);
         self waittill(#"movedone");
       }

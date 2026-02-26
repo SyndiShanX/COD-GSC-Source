@@ -136,8 +136,7 @@ transitionOut(previous, next) {
       if(waittilldone) {
         wait(fadeout);
       }
-    } else {
-    }
+    } else {}
   } else {
     if(waittilldone) {
       while(SoundPlaying(id)) {

@@ -63,17 +63,17 @@ function register(var_c21a7363, var_acffa825, var_32c73fea, var_d239de43) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "scavenger_icon"])) {
-    level.var_ae746e8f[# "scavenger_icon"] = [];
+  if(!isDefined(level.var_ae746e8f[#"scavenger_icon"])) {
+    level.var_ae746e8f[#"scavenger_icon"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "scavenger_icon"])) {
-    level.var_ae746e8f[# "scavenger_icon"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "scavenger_icon"])) {
-    level.var_ae746e8f[# "scavenger_icon"] = array(level.var_ae746e8f[# "scavenger_icon"]);
+  if(!isDefined(level.var_ae746e8f[#"scavenger_icon"])) {
+    level.var_ae746e8f[#"scavenger_icon"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"scavenger_icon"])) {
+    level.var_ae746e8f[#"scavenger_icon"] = array(level.var_ae746e8f[#"scavenger_icon"]);
   }
 
-  level.var_ae746e8f[# "scavenger_icon"][level.var_ae746e8f[# "scavenger_icon"].size] = elem;
+  level.var_ae746e8f[#"scavenger_icon"][level.var_ae746e8f[#"scavenger_icon"].size] = elem;
 }
 
 function register_clientside() {

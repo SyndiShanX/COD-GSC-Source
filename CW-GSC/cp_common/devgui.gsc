@@ -369,7 +369,7 @@ function function_c60fba82(teamname) {
   assert(isPlayer(self));
   self.team = teamname;
   self.sessionteam = teamname;
-  self.pers[# "team"] = teamname;
+  self.pers[#"team"] = teamname;
 }
 
 function devgui_kill() {

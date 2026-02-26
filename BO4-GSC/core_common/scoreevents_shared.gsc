@@ -27,7 +27,7 @@ function_6f51d1e9(event, players, victim, weapon) {
 processscoreevent(event, player, victim, weapon, playersaffected) {
   scoregiven = 0;
 
-  if(isDefined(level.scoreinfo[event]) && isDefined(level.scoreinfo[event][# "is_deprecated"]) && level.scoreinfo[event][# "is_deprecated"]) {
+  if(isDefined(level.scoreinfo[event]) && isDefined(level.scoreinfo[event][#"is_deprecated"]) && level.scoreinfo[event][#"is_deprecated"]) {
     return scoregiven;
   }
 
@@ -97,7 +97,7 @@ processscoreevent(event, player, victim, weapon, playersaffected) {
     player addrankxp(event, weapon, player.class_num, pickedup, isscoreevent, xp_difficulty_multiplier);
 
     if(isDefined(event) && isDefined(weapon) && isDefined(level.scoreinfo[event])) {
-      var_6d1793bb = level.scoreinfo[event][# "medalnamehash"];
+      var_6d1793bb = level.scoreinfo[event][#"medalnamehash"];
 
       if(isDefined(var_6d1793bb)) {
         specialistindex = player getspecialistindex();
@@ -156,7 +156,7 @@ shouldaddrankxp(player) {
     return true;
   }
 
-  if(player.pers[# "plevel"] > 0 || player.pers[# "rank"] > level.rankcap) {
+  if(player.pers[#"plevel"] > 0 || player.pers[#"rank"] > level.rankcap) {
     return false;
   }
 

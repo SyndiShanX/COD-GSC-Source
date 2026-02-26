@@ -127,17 +127,17 @@ triggered_hostile_burst(org) {
 }
 
 // ------------- // --- MUSIC --- // ------------- favesc_combat_music() {
-  thread favesc_combat_music_stop();
+thread favesc_combat_music_stop();
 
-  alias = "favelaescape_combat";
-  tracktime = MusicLength(alias);
+alias = "favelaescape_combat";
+tracktime = MusicLength(alias);
 
-  while(!flag("market_evac_insidepath_start")) {
-    MusicPlayWrapper(alias);
-    wait(tracktime);
-    music_stop(1);
-    wait(3);
-  }
+while(!flag("market_evac_insidepath_start")) {
+  MusicPlayWrapper(alias);
+  wait(tracktime);
+  music_stop(1);
+  wait(3);
+}
 }
 
 favesc_combat_music_stop() {
@@ -170,7 +170,8 @@ favesc_pgm_wellfindyou
 favesc_pgm_nohonor
 favesc_pgm_huntthem
 favesc_pgm_blockexits
-*/
+  *
+  /
 radiotower_crowd_walla() {
   org = (3712, 576, 1211);
   delaythread(5, ::play_sound_in_space, "favesc_pgm_wellfindyou", org);
@@ -214,33 +215,33 @@ bigjump_recovery_leftside_walla() {
 }
 
 // ------------------ // --- RADIOTOWER --- // ------------------ radiotower_runpath_dialogue() {
-  waitflag = "runpath_dialogue_continue";
-  flag_init(waitflag);
-  thread radiotower_runpath_dialogue_triggerwait(waitflag);
+waitflag = "runpath_dialogue_continue";
+flag_init(waitflag);
+thread radiotower_runpath_dialogue_triggerwait(waitflag);
 
-  flag_wait("introscreen_start_dialogue");
+flag_wait("introscreen_start_dialogue");
 
-  // "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"level.hero1 dialogue("favesc_gst_closingin");
+// "Sir, the militia's closin' in! Almost two hundred of 'em, front and back!"level.hero1 dialogue("favesc_gst_closingin");
 
-  // "We're gonna have to fight our way to the LZ! Let's go!"level.sarge dialogue("favesc_cmt_fightourway");
+// "We're gonna have to fight our way to the LZ! Let's go!"level.sarge dialogue("favesc_cmt_fightourway");
 
-  // "What about Rojas?"level.hero1 dialogue("favesc_gst_whataboutrojas");
+// "What about Rojas?"level.hero1 dialogue("favesc_gst_whataboutrojas");
 
-  // "Victim of a hostile takeover?"level.sarge dialogue("favesc_cmt_takeover");
+// "Victim of a hostile takeover?"level.sarge dialogue("favesc_cmt_takeover");
 
-  // "Works for me."level.hero1 dialogue("favesc_gst_worksforme");
+// "Works for me."level.hero1 dialogue("favesc_gst_worksforme");
 
-  flag_wait(waitflag);
+flag_wait(waitflag);
 
-  // "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"level.sarge dialogue("favesc_cmt_surrounded");
+// "Nikolai! We're at the top of the favela surrounded by militia! Bring the chopper to the market, do you copy, over!"level.sarge dialogue("favesc_cmt_surrounded");
 
-  // "Ok my friend, I am on the way!"radio_dialogue("favesc_nkl_ontheway");
+// "Ok my friend, I am on the way!"radio_dialogue("favesc_nkl_ontheway");
 
-  // "Everyone get ready! Lock and load! "level.sarge dialogue("favesc_cmt_lockandload");
+// "Everyone get ready! Lock and load! "level.sarge dialogue("favesc_cmt_lockandload");
 
-  // "Let's do this!!"level.hero1 dialogue("favesc_gst_letsdothis");
+// "Let's do this!!"level.hero1 dialogue("favesc_gst_letsdothis");
 
-  flag_set("radiotower_runpath_dialogue_done");
+flag_set("radiotower_runpath_dialogue_done");
 }
 
 radiotower_runpath_dialogue_triggerwait(flagname) {
@@ -796,20 +797,20 @@ radiotower_enemies_retreat() {
 }
 
 // --------------- // --- STREETS --- // --------------- street_dialogue() {
-  thread street_dialogue_playerabove();
-  thread street_dialogue_leftalley();
+thread street_dialogue_playerabove();
+thread street_dialogue_leftalley();
 
-  flag_wait("vista1_dialogue_start");
+flag_wait("vista1_dialogue_start");
 
-  // "Let's go, let's go!We've gotta push through these streets to the market!"level.sarge dialogue("favesc_cmt_pushthrustreets");
+// "Let's go, let's go!We've gotta push through these streets to the market!"level.sarge dialogue("favesc_cmt_pushthrustreets");
 
-  flag_wait("multipath_dialogue_start");
+flag_wait("multipath_dialogue_start");
 
-  // "Watch for flanking routes!"level.sarge dialogue("favesc_cmt_flankingroutes");
+// "Watch for flanking routes!"level.sarge dialogue("favesc_cmt_flankingroutes");
 
-  flag_wait("almostatmarket_dialogue_start");
+flag_wait("almostatmarket_dialogue_start");
 
-  // "Keep moving!! We're almost at the market!"level.sarge dialogue("favesc_cmt_almostatmarket");
+// "Keep moving!! We're almost at the market!"level.sarge dialogue("favesc_cmt_almostatmarket");
 }
 
 street_dialogue_playerabove() {
@@ -1083,16 +1084,16 @@ vista2_leftbalcony_enemies_magicgrenade() {
 }
 
 // -------------- // --- MARKET --- // -------------- market_dialogue() {
-  thread market_dialogue_chaoticaboves();
-  thread market_dialogue_rightshack();
+thread market_dialogue_chaoticaboves();
+thread market_dialogue_rightshack();
 
-  flag_wait("market_dialogue_start");
+flag_wait("market_dialogue_start");
 
-  wait(2);
+wait(2);
 
-  // "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"level.sarge dialogue("favesc_cmt_splitup");
+// "Squad! Split up and clear the market! Watch your sectors - these guys are everywhere!"level.sarge dialogue("favesc_cmt_splitup");
 
-  flag_set("market_introdialogue_done");
+flag_set("market_introdialogue_done");
 }
 
 market_dialogue_chaoticaboves() {
@@ -1162,24 +1163,24 @@ market_door1() {
 }
 
 // ------------------ // --- MARKET EVAC--- // ------------------ market_evac_dialogue() {
-  flag_wait("market_evac_insidepath_start");
+flag_wait("market_evac_insidepath_start");
 
-  battlechatter_off("allies");
+battlechatter_off("allies");
 
-  // "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"level.sarge dialogue("favesc_cmt_immediatedustoff");
+// "Nikolai! ETA 20 seconds! Be ready for immediate dustoff!"level.sarge dialogue("favesc_cmt_immediatedustoff");
 
-  // "That may not be fast enough! I see more militia closing in on the market!"radio_dialogue("favesc_nkl_notfastenough");
+// "That may not be fast enough! I see more militia closing in on the market!"radio_dialogue("favesc_nkl_notfastenough");
 
-  // "Pick up the pace! Let's go!"level.sarge dialogue("favesc_cmt_pickuppace");
+// "Pick up the pace! Let's go!"level.sarge dialogue("favesc_cmt_pickuppace");
 
-  flag_wait("market_evac_chopper_incoming");
+flag_wait("market_evac_chopper_incoming");
 
-  // "It's too hot! We will not survive this landing!"radio_dialogue("favesc_nkl_toohot");
+// "It's too hot! We will not survive this landing!"radio_dialogue("favesc_nkl_toohot");
 
-  delaythread(2, ::favesc_waveoff_music);
-  // "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"level.sarge dialogue("favesc_cmt_waveoff");
+delaythread(2, ::favesc_waveoff_music);
+// "Nikolai, wave off, wave off! We'll meet you at the secondary LZ instead! Go!"level.sarge dialogue("favesc_cmt_waveoff");
 
-  // "Very well, I will meet you there! Good luck!"radio_dialogue("favesc_nkl_meetyouthere");
+// "Very well, I will meet you there! Good luck!"radio_dialogue("favesc_nkl_meetyouthere");
 }
 
 spawn_chopper(spawngroup, followPath) {
@@ -1651,25 +1652,25 @@ player_left_trigger_notify(trig) {
 }
 
 // ---------------- // --- ROOF RUN --- // ---------------- roofrun_dialogue() {
-  // "Let's go, let's go!!"level.sarge dialogue("favesc_cmt_letsgoletsgo");
+// "Let's go, let's go!!"level.sarge dialogue("favesc_cmt_letsgoletsgo");
 
-  // "My friend, from up here, it looks like the whole village is trying to kill you!"radio_dialogue("favesc_nkl_wholevillage");
+// "My friend, from up here, it looks like the whole village is trying to kill you!"radio_dialogue("favesc_nkl_wholevillage");
 
-  // "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"level.sarge dialogue("favesc_cmt_pickusup");
+// "Tell me something I don't know! Just get ready to pick us up at the secondary RV!"level.sarge dialogue("favesc_cmt_pickusup");
 
-  // DEPRECATED - not enough time to use this one
-  // "Ok, I will pick you up soon, keep going!"//radio_dialogue( "favesc_nkl_keepgoing" );
+// DEPRECATED - not enough time to use this one
+// "Ok, I will pick you up soon, keep going!"//radio_dialogue( "favesc_nkl_keepgoing" );
 
-  // "We're running out of rooftop!!!"level.hero1 dialogue("favesc_gst_runoutofroof");
-  // (add after this line so the scr_sound doesn't stomp on the scripted dialogue if the timing works out that way)
-  // "Unghh!"level.scr_sound["freerunner"]["favela_escape_bigjump_ghost"] = "favesc_gst_jumpsfx";
+// "We're running out of rooftop!!!"level.hero1 dialogue("favesc_gst_runoutofroof");
+// (add after this line so the scr_sound doesn't stomp on the scripted dialogue if the timing works out that way)
+// "Unghh!"level.scr_sound["freerunner"]["favela_escape_bigjump_ghost"] = "favesc_gst_jumpsfx";
 
-  // "We can make it! Go go go!"level.sarge dialogue("favesc_cmt_makeitgogo");
-  // "Uraaa!"level.scr_sound["freerunner"]["favela_escape_bigjump_soap"] = "favesc_cmt_jumpsfx";
+// "We can make it! Go go go!"level.sarge dialogue("favesc_cmt_makeitgogo");
+// "Uraaa!"level.scr_sound["freerunner"]["favela_escape_bigjump_soap"] = "favesc_cmt_jumpsfx";
 
-  if(!flag("player_jump_watcher_stop") && !flag("player_fell_normally")) {
-    thread roofrun_nag_dialogue();
-  }
+if(!flag("player_jump_watcher_stop") && !flag("player_fell_normally")) {
+  thread roofrun_nag_dialogue();
+}
 }
 
 roofrun_nag_dialogue() {
@@ -2673,11 +2674,11 @@ angrymob_animdone_think(anime, animref) {
 }
 
 // ---------------- // --- SOLO RUN --- // ---------------- solorun_chaser_spawnfunc() {
-  if(!isDefined(level.chasers)) {
-    level.chasers = [];
-  }
+if(!isDefined(level.chasers)) {
+  level.chasers = [];
+}
 
-  level.chasers[level.chasers.size] = self;
+level.chasers[level.chasers.size] = self;
 }
 
 solorun_chasers_remove() {
@@ -2789,7 +2790,7 @@ solorun_timer(iSeconds, sLabel, bUseTick) {
   level.start_time = gettime();
 
   // -- timer expired -- if(bUseTick == true)
-    thread timer_tick();
+  thread timer_tick();
   wait(iSeconds);
 
   flag_set("timer_expired");
@@ -3850,10 +3851,10 @@ chopperjump_dialogue() {
 }
 
 // ----------------- // -- AI STUFF -- // ----------------- get_single_redshirt() {
-  guys = get_nonhero_friends();
-  ASSERT(guys.size == 1);
-  redshirt = guys[0];
-  return redshirt;
+guys = get_nonhero_friends();
+ASSERT(guys.size == 1);
+redshirt = guys[0];
+return redshirt;
 }
 
 setup_color_friendly_spawners() {
@@ -4075,34 +4076,34 @@ door_kick_housespawn(spawners, door, animRef, physicsRef) {
 }
 
 // ---- chaotic above shooter guys ---- chaotic_above_shooter() {
-  self endon("death");
+self endon("death");
 
-  animref = GetStruct(self.target, "targetname");
+animref = GetStruct(self.target, "targetname");
 
-  // favela_chaotic_above_through, favela_chaotic_above_through_uzi, favela_chaotic_above_through_back
-  anime = "favela_chaotic_above_through";
-  if(isDefined(animref.script_noteworthy)) {
-    anime = animref.script_noteworthy;
-  }
+// favela_chaotic_above_through, favela_chaotic_above_through_uzi, favela_chaotic_above_through_back
+anime = "favela_chaotic_above_through";
+if(isDefined(animref.script_noteworthy)) {
+  anime = animref.script_noteworthy;
+}
 
-  animref anim_generic_reach(self, anime);
+animref anim_generic_reach(self, anime);
 
-  self.allowdeath = true;
-  animref anim_generic(self, anime);
+self.allowdeath = true;
+animref anim_generic(self, anime);
 }
 
 // ---- window smash guys ---- window_smash_stop_inside() {
-  self endon("death");
+self endon("death");
 
-  self window_smash("window_smash_stop_inside");
+self window_smash("window_smash_stop_inside");
 
-  node = GetNode(self.target, "targetname");
+node = GetNode(self.target, "targetname");
 
-  if(isDefined(self.script_playerseek) && self.script_playerseek) {
-    self playerseek();
-  } else if(isDefined(node)) {
-    self SetGoalNode(node);
-  }
+if(isDefined(self.script_playerseek) && self.script_playerseek) {
+  self playerseek();
+} else if(isDefined(node)) {
+  self SetGoalNode(node);
+}
 }
 
 window_smash(smashAnime) {
@@ -4118,52 +4119,52 @@ window_smash(smashAnime) {
 }
 
 // ---- curtain pulldown guys ---- curtain_pulldown(bWaitForPlayer, specialWaitFunc) {
-  if(!isDefined(bWaitForPlayer))
-    bWaitForPlayer = false;
+if(!isDefined(bWaitForPlayer))
+  bWaitForPlayer = false;
 
-  assert(isDefined(self.target));
-  node = self curtain_pulldown_getnode();
-  assert(isDefined(node));
+assert(isDefined(self.target));
+node = self curtain_pulldown_getnode();
+assert(isDefined(node));
 
-  curtain = curtain_pulldown_spawnmodel(node);
+curtain = curtain_pulldown_spawnmodel(node);
 
-  self waittill("spawned", guy);
-  if(spawn_failed(guy)) {
-    return;
+self waittill("spawned", guy);
+if(spawn_failed(guy)) {
+  return;
+}
+guy endon("death");
+
+guy.animname = "curtain_pull";
+
+guy set_ignoreme(true);
+guy.usechokepoints = false;
+
+wait 0.05;
+
+guy_and_curtain[0] = guy;
+guy_and_curtain[1] = curtain;
+
+node anim_reach_solo(guy, "pulldown");
+
+if(bWaitForPlayer) {
+  node anim_first_frame_solo(guy, "pulldown");
+
+  if(isDefined(specialWaitFunc)) {
+    [[specialWaitFunc]](guy, node);
+  } else {
+    waittill_player_lookat(0.9, undefined, true, 5.0);
   }
-  guy endon("death");
+}
 
-  guy.animname = "curtain_pull";
+guy.allowdeath = true;
+node anim_single(guy_and_curtain, "pulldown");
 
-  guy set_ignoreme(true);
-  guy.usechokepoints = false;
+guy endon("death");
 
-  wait 0.05;
-
-  guy_and_curtain[0] = guy;
-  guy_and_curtain[1] = curtain;
-
-  node anim_reach_solo(guy, "pulldown");
-
-  if(bWaitForPlayer) {
-    node anim_first_frame_solo(guy, "pulldown");
-
-    if(isDefined(specialWaitFunc)) {
-      [[specialWaitFunc]](guy, node);
-    } else {
-      waittill_player_lookat(0.9, undefined, true, 5.0);
-    }
-  }
-
-  guy.allowdeath = true;
-  node anim_single(guy_and_curtain, "pulldown");
-
-  guy endon("death");
-
-  guy set_ignoreme(false);
-  guy.goalradius = 1000;
-  guy setGoalPos(guy.origin);
-  guy.usechokepoints = true;
+guy set_ignoreme(false);
+guy.goalradius = 1000;
+guy setGoalPos(guy.origin);
+guy.usechokepoints = true;
 }
 
 // broke out into a separate function so we can spawn the model early
@@ -4816,14 +4817,14 @@ color_flags_dupe_info(infos, colorCode) {
 }
 
 // ---------------------- // --- AIRLINER STUFF --- // ---------------------- airliner_flyby_trigs() {
-  ASSERT(isDefined(level.airliner));
-  airliner_hide();
+ASSERT(isDefined(level.airliner));
+airliner_hide();
 
-  lockflag = "airliner_flyby";
-  flag_init(lockflag);
+lockflag = "airliner_flyby";
+flag_init(lockflag);
 
-  trigs = getEntArray("trig_airliner_flyby", "targetname");
-  array_thread(trigs, ::airliner_flyby, lockflag);
+trigs = getEntArray("trig_airliner_flyby", "targetname");
+array_thread(trigs, ::airliner_flyby, lockflag);
 }
 
 airliner_setup() {
@@ -5012,34 +5013,34 @@ stop_sound(alias) {
 }
 
 // ----------------- // -- UTIL STUFF -- // ----------------- sbmodel_rotate(rotateTime, makeNotSolid) {
-  if(!isDefined(makeNotSolid)) {
-    makeNotSolid = false;
-  }
+if(!isDefined(makeNotSolid)) {
+  makeNotSolid = false;
+}
 
-  linker = GetEnt(self.target, "targetname");
-  ASSERTEX(isDefined(linker), "sbmodel_rotate(): sbmodel at origin " + self.origin + " doesn't have a linker entity targeted. Did you make it a script_struct instead of a script_origin by mistake?");
+linker = GetEnt(self.target, "targetname");
+ASSERTEX(isDefined(linker), "sbmodel_rotate(): sbmodel at origin " + self.origin + " doesn't have a linker entity targeted. Did you make it a script_struct instead of a script_origin by mistake?");
 
-  self LinkTo(linker);
+self LinkTo(linker);
 
-  self ConnectPaths();
+self ConnectPaths();
 
-  ASSERTEX(isDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
+ASSERTEX(isDefined(linker.script_angles), "sbmodel rotate linker script_origin at origin " + linker.origin + " needs script_angles set.");
 
-  linker.og_angles = linker.angles;
+linker.og_angles = linker.angles;
 
-  linker RotateTo(linker.script_angles, rotateTime);
-  linker waittill("rotatedone");
+linker RotateTo(linker.script_angles, rotateTime);
+linker waittill("rotatedone");
 
-  self DisconnectPaths();
+self DisconnectPaths();
 
-  self Unlink();
+self Unlink();
 
-  if(makeNotSolid) {
-    self NotSolid();
-    self thread make_solid_again_when_player_isnt_touching();
-  }
+if(makeNotSolid) {
+  self NotSolid();
+  self thread make_solid_again_when_player_isnt_touching();
+}
 
-  self notify("sbmodel_rotatedone");
+self notify("sbmodel_rotatedone");
 }
 
 make_solid_again_when_player_isnt_touching() {

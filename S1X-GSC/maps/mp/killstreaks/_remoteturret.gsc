@@ -974,8 +974,7 @@ watchEnterAndExit() {
 
 player_shouldDisableRemoteEnter(turret) {
   currentWeapon = self GetCurrentWeapon();
-  return (turret turret_isStunned() || self player_isUsingKillstreak(turret) || (isDefined(self.underWater) && self.underWater) || self.using_remote_turret || currentWeapon == "none" || self IsTouching(turret.ownerTrigger) || (self IsLinked() && !self.using_remote_turret) || (isDefined(self.empGrenaded) && self.empGrenaded)
-  );
+  return (turret turret_isStunned() || self player_isUsingKillstreak(turret) || (isDefined(self.underWater) && self.underWater) || self.using_remote_turret || currentWeapon == "none" || self IsTouching(turret.ownerTrigger) || (self IsLinked() && !self.using_remote_turret) || (isDefined(self.empGrenaded) && self.empGrenaded));
 }
 
 watchEnterAndExitInput() {
@@ -1088,15 +1087,14 @@ playerCanUseTurret(turret) {
 player_isUsingKillstreak(turret) {
   currentWeapon = self GetCurrentWeapon();
   return (self isJuggernaut() || self isUsingRemote() || self isInRemoteTransition() || (isKillstreakWeapon(currentWeapon) &&
-      currentWeapon != "killstreak_remote_turret_mp" &&
-      currentWeapon != CONST_REMOTE_TURRET_MG_WEAPINFO &&
-      currentWeapon != CONST_REMOTE_TURRET_BEAM_WEAPINFO &&
-      currentWeapon != level.turretSettings[turret.turretType].laptopInfo &&
-      currentWeapon != "none" &&
-      currentWeapon != "turretheadmg_mp" &&
-      currentWeapon != "turretheadenergy_mp" &&
-      currentWeapon != "turretheadrocket_mp")
-  );
+    currentWeapon != "killstreak_remote_turret_mp" &&
+    currentWeapon != CONST_REMOTE_TURRET_MG_WEAPINFO &&
+    currentWeapon != CONST_REMOTE_TURRET_BEAM_WEAPINFO &&
+    currentWeapon != level.turretSettings[turret.turretType].laptopInfo &&
+    currentWeapon != "none" &&
+    currentWeapon != "turretheadmg_mp" &&
+    currentWeapon != "turretheadenergy_mp" &&
+    currentWeapon != "turretheadrocket_mp"));
 }
 
 player_handleTurretHints(turret) {
@@ -1133,8 +1131,7 @@ player_handleTurretHints(turret) {
 
 player_shouldClearTurretPickupHints(turret) {
   currentWeapon = self GetCurrentWeapon();
-  return (turret turret_isStunned() || self player_isUsingKillstreak(turret) || (isDefined(self.underWater) && self.underWater) || self.using_remote_turret || currentWeapon == "none" || !self IsTouching(turret.ownerTrigger) || !isReallyAlive(self) || !self IsOnGround() || isDefined(turret.carriedBy)
-  );
+  return (turret turret_isStunned() || self player_isUsingKillstreak(turret) || (isDefined(self.underWater) && self.underWater) || self.using_remote_turret || currentWeapon == "none" || !self IsTouching(turret.ownerTrigger) || !isReallyAlive(self) || !self IsOnGround() || isDefined(turret.carriedBy));
 }
 
 player_handleTurretPickup(turret) {

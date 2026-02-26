@@ -74,11 +74,11 @@ function_2cdcf5c3() {
 }
 
 function_69a9563e(a_ents) {
-  while(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] waittill(#"napalm_rumble", #"death");
+  while(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] waittill(#"napalm_rumble", #"death");
 
-    if(isDefined(a_ents[# "prop 1"])) {
-      a_ents[# "prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");
+    if(isDefined(a_ents[#"prop 1"])) {
+      a_ents[#"prop 1"] clientfield::increment("spawn_flavor_napalm_rumble");
     }
   }
 }

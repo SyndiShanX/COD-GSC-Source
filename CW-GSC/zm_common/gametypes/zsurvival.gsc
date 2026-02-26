@@ -148,7 +148,7 @@ function event_handler[gametype_init] main(eventstruct) {
     setgametypesetting(#"hash_a564dde6ee3c657", 0);
     setgametypesetting(#"hash_241e17e13da23de2", 0);
     setgametypesetting(#"disablecompass", 1);
-    level.var_3a2ad19b = [# "item_zmquest_sr_ltm_food_banana", #"item_zmquest_sr_ltm_food_burger", #"item_zmquest_sr_ltm_food_canned_corn", #"item_zmquest_sr_ltm_food_cauliflower", #"item_zmquest_sr_ltm_food_cheese", #"item_zmquest_sr_ltm_food_chicken_soup", #"item_zmquest_sr_ltm_food_chips", #"item_zmquest_sr_ltm_food_cookie", #"item_zmquest_sr_ltm_food_croissant", #"item_zmquest_sr_ltm_food_pizza_full", #"item_zmquest_sr_ltm_food_pizza_slice", #"item_zmquest_sr_ltm_food_poutine"];
+    level.var_3a2ad19b = [#"item_zmquest_sr_ltm_food_banana", #"item_zmquest_sr_ltm_food_burger", #"item_zmquest_sr_ltm_food_canned_corn", #"item_zmquest_sr_ltm_food_cauliflower", #"item_zmquest_sr_ltm_food_cheese", #"item_zmquest_sr_ltm_food_chicken_soup", #"item_zmquest_sr_ltm_food_chips", #"item_zmquest_sr_ltm_food_cookie", #"item_zmquest_sr_ltm_food_croissant", #"item_zmquest_sr_ltm_food_pizza_full", #"item_zmquest_sr_ltm_food_pizza_slice", #"item_zmquest_sr_ltm_food_poutine"];
   }
 
   level.is_survival = 1;
@@ -969,8 +969,8 @@ function private function_33cac8e7() {
     triggers = [];
 
     foreach(destination in destinations) {
-      if(isDefined(destination.contentgroups[# "hash_3460aae6bb799a99"])) {
-        foreach(struct in destination.contentgroups[# "hash_3460aae6bb799a99"]) {
+      if(isDefined(destination.contentgroups[#"hash_3460aae6bb799a99"])) {
+        foreach(struct in destination.contentgroups[#"hash_3460aae6bb799a99"]) {
           triggers[triggers.size] = getent(struct.targetname, "target");
         }
       }
@@ -1089,7 +1089,7 @@ function give_match_bonus() {
     var_900d44db = zm::function_d3113f01(level.var_b48509f9);
     var_191f8e5e = var_900d44db.var_c6f2635d;
     var_7c032359 = var_900d44db.var_b93abbed[getplayers().size - 1];
-    var_f65fd621 = function_7a2da789()[# "hash_31b5b9e273560fa9"];
+    var_f65fd621 = function_7a2da789()[#"hash_31b5b9e273560fa9"];
 
     if(!isDefined(player.var_3b4f6b37)) {
       player.var_3b4f6b37 = 0;
@@ -1323,10 +1323,10 @@ function function_452e5ad6(player, var_f1c949d7 = 0) {
     if(ispointonnavmesh(spot.origin, 15) && !function_8dd547b3(spot.origin)) {
       v_dest = function_9cc082d2(spot.origin, 128);
 
-      if(isDefined(v_dest) && namespace_d0ab5955::function_3824d2dc(v_dest[# "point"]) && function_18fb55bd(v_dest[# "point"])) {
+      if(isDefined(v_dest) && namespace_d0ab5955::function_3824d2dc(v_dest[#"point"]) && function_18fb55bd(v_dest[#"point"])) {
         b_found = 1;
         v_teleport = {
-          #origin: v_dest[# "point"]
+          #origin: v_dest[#"point"]
         };
         break;
       }
@@ -1375,7 +1375,7 @@ function private function_18fb55bd(var_ab528fee) {
   v_trace_start = var_ab528fee + (0, 0, 70);
   trace = physicstraceex(v_trace_start, var_ab528fee);
 
-  if(trace[# "fraction"] < 0.99) {
+  if(trace[#"fraction"] < 0.99) {
     return false;
   }
 
@@ -1393,8 +1393,8 @@ function private function_938991d2() {
   var_cc6e64ae = getdvarint(#"hash_7255c78e5d6bfa33", 1);
   var_cc6e64ae = int(max(var_cc6e64ae, 1));
   var_c6b6dcea = (var_cc6e64ae - 1) * 70000;
-  self.pers[# "score"] = var_c6b6dcea;
-  self.score = self.pers[# "score"];
+  self.pers[#"score"] = var_c6b6dcea;
+  self.score = self.pers[#"score"];
   self.score_total = self.score;
   self.objscore = self.score_total;
   var_ef5aac55 = (var_cc6e64ae - 1) * 4000;

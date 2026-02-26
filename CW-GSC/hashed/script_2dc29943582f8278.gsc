@@ -118,8 +118,8 @@ function calculatespawnorigin(origin, angles, clonedistance) {
           startpoint = closestnavmeshpoint;
           trace = groundtrace(startpoint + (0, 0, 24), startpoint - (0, 0, 24), 0, 0, 0);
 
-          if(isDefined(trace[# "position"])) {
-            startpoint = trace[# "position"];
+          if(isDefined(trace[#"position"])) {
+            startpoint = trace[#"position"];
           }
         }
 

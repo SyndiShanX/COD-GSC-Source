@@ -174,13 +174,13 @@ function private function_9132ad8e() {
   v_end = v_start + v_forward * 1200;
   a_trace = bulletTrace(v_start, v_end, 0, self.var_310a3632.mdl_target, 1, 0);
 
-  if(a_trace[# "fraction"] == 1) {
+  if(a_trace[#"fraction"] == 1) {
     a_trace = bulletTrace(v_end, v_end - (0, 0, 40), 0, self.var_310a3632.mdl_target, 1, 0);
   }
 
-  v_hit = a_trace[# "position"] + (0, 0, 8);
+  v_hit = a_trace[#"position"] + (0, 0, 8);
 
-  if(a_trace[# "fraction"] < 1) {
+  if(a_trace[#"fraction"] < 1) {
     var_5c65b47a = self getpathfindingradius();
     var_20fe4148 = getclosestpointonnavmesh(v_hit, 32, var_5c65b47a);
   }

@@ -251,12 +251,12 @@ getcovernodeyawtoenemy() {
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
   } else {
-    forward = anglesToForward(self.covernode.angles + self.animarray[# "angle_step_out"][self.a.cornermode]);
+    forward = anglesToForward(self.covernode.angles + self.animarray[#"angle_step_out"][self.a.cornermode]);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
   }
 
-  yaw = self.covernode.angles[1] + self.animarray[# "angle_step_out"][self.a.cornermode] - getyaw(pos);
+  yaw = self.covernode.angles[1] + self.animarray[#"angle_step_out"][self.a.cornermode] - getyaw(pos);
   yaw = angleclamp180(yaw);
   return yaw;
 }
@@ -364,7 +364,7 @@ geteyeyawtoorigin(org) {
 }
 
 getcovernodeyawtoorigin(org) {
-  yaw = self.covernode.angles[1] + self.animarray[# "angle_step_out"][self.a.cornermode] - getyaw(org);
+  yaw = self.covernode.angles[1] + self.animarray[#"angle_step_out"][self.a.cornermode] - getyaw(org);
   yaw = angleclamp180(yaw);
   return yaw;
 }
@@ -442,44 +442,44 @@ angleclamp(angle) {
 quadrantanimweights(yaw) {
   forwardweight = (90 - abs(yaw)) / 90;
   leftweight = (90 - absangleclamp180(abs(yaw - 90))) / 90;
-  result[# "front"] = 0;
-  result[# "right"] = 0;
-  result[# "back"] = 0;
-  result[# "left"] = 0;
+  result[#"front"] = 0;
+  result[#"right"] = 0;
+  result[#"back"] = 0;
+  result[#"left"] = 0;
 
   if(isDefined(self.alwaysrunforward)) {
     assert(self.alwaysrunforward);
-    result[# "front"] = 1;
+    result[#"front"] = 1;
     return result;
   }
 
   useleans = getdvarint(#"ai_useleanrunanimations", 0);
 
   if(forwardweight > 0) {
-    result[# "front"] = forwardweight;
+    result[#"front"] = forwardweight;
 
     if(leftweight > 0) {
-      result[# "left"] = leftweight;
+      result[#"left"] = leftweight;
     } else {
-      result[# "right"] = -1 * leftweight;
+      result[#"right"] = -1 * leftweight;
     }
   } else if(useleans) {
-    result[# "back"] = -1 * forwardweight;
+    result[#"back"] = -1 * forwardweight;
 
     if(leftweight > 0) {
-      result[# "left"] = leftweight;
+      result[#"left"] = leftweight;
     } else {
-      result[# "right"] = -1 * leftweight;
+      result[#"right"] = -1 * leftweight;
     }
   } else {
     backweight = -1 * forwardweight;
 
     if(leftweight > backweight) {
-      result[# "left"] = 1;
+      result[#"left"] = 1;
     } else if(leftweight < forwardweight) {
-      result[# "right"] = 1;
+      result[#"right"] = 1;
     } else {
-      result[# "back"] = 1;
+      result[#"back"] = 1;
     }
   }
 

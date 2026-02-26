@@ -145,7 +145,7 @@ function function_ce530cda(b_skipped, var_19e802fa) {
 }
 
 function function_2b26d68b() {
-  level.var_1aca2bc0 = array::random([# "mission_control"]);
+  level.var_1aca2bc0 = array::random([#"mission_control"]);
   level flag::wait_till(#"hash_722723ce1e3aa7d2");
 
   while(true) {

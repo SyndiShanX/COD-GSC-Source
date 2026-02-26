@@ -374,10 +374,10 @@ function private function_1df85442(&destinations, category) {
 }
 
 function private function_4e8b29ac(instance) {
-  assert(isarray(instance.contentgroups[# "start_interact"]));
-  assert(instance.contentgroups[# "start_interact"].size == 1);
+  assert(isarray(instance.contentgroups[#"start_interact"]));
+  assert(instance.contentgroups[#"start_interact"].size == 1);
   function_9d4e6125(instance.content_script_name);
-  var_7d0e37f8 = instance.contentgroups[# "start_interact"][0];
+  var_7d0e37f8 = instance.contentgroups[#"start_interact"][0];
   script = content_manager::get_script(instance.content_script_name);
   trigger = function_8239a941(var_7d0e37f8, instance, script.var_9ddbb7c);
   function_9751c453(script.var_331b7cc3, trigger.origin, instance);
@@ -391,7 +391,7 @@ function private function_4e8b29ac(instance) {
 
 function private function_8239a941(struct, instance, hintstring) {
   a_s_models = [];
-  a_s_models = instance.contentgroups[# "hash_310e58f653ae315d"];
+  a_s_models = instance.contentgroups[#"hash_310e58f653ae315d"];
 
   if(isDefined(a_s_models) && a_s_models.size > 0) {
     foreach(var_528a3a32 in a_s_models) {
@@ -427,7 +427,7 @@ function start_objective(instance, activator = undefined) {
   level flag::set("objective_locked");
 
   if(isDefined(instance.var_e55c8b4e)) {
-    var_7d0e37f8 = instance.contentgroups[# "start_interact"][0];
+    var_7d0e37f8 = instance.contentgroups[#"start_interact"][0];
 
     if(isDefined(var_7d0e37f8)) {
       var_7d0e37f8 zm_utility::function_48d9a9c9();

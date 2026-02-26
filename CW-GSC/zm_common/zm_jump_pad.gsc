@@ -250,7 +250,7 @@ function jump_pad_start(ent_player, endon_condition) {
       if(isDefined(level.var_8c6636af)) {
         self[[level.var_8c6636af]]();
       } else {
-        playFX(level._effect[# "jump_pad_jump"], self.origin);
+        playFX(level._effect[#"jump_pad_jump"], self.origin);
       }
 
       ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);
@@ -267,7 +267,7 @@ function jump_pad_start(ent_player, endon_condition) {
     if(isDefined(level.var_8c6636af)) {
       self[[level.var_8c6636af]]();
     } else {
-      playFX(level._effect[# "jump_pad_jump"], self.origin);
+      playFX(level._effect[#"jump_pad_jump"], self.origin);
     }
 
     ent_player thread jump_pad_move(fling_this_way, jump_time, poi_spot, self);

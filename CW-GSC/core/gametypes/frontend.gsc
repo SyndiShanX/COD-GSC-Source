@@ -32,7 +32,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.teambased = 0;
   gamestate::set_state(#"pregame");
   level.var_26be8a4f = 1;
-  level.var_850ff7e2 = [# "zm_silver_upgrade", #"zm_silver_six"];
+  level.var_850ff7e2 = [#"zm_silver_upgrade", #"zm_silver_six"];
   callback::add_callback(#"menu_response", &on_menu_response);
 
   level function_83f052f2();

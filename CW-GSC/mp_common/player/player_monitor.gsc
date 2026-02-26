@@ -193,7 +193,7 @@ function private breadcrumbs() {
 
   while(true) {
     if(isalive(self)) {
-      lifeindex = isDefined(self.pers[# "telemetry"].life.life_index) ? self.pers[# "telemetry"].life.life_index : -1;
+      lifeindex = isDefined(self.pers[#"telemetry"].life.life_index) ? self.pers[#"telemetry"].life.life_index : -1;
       recordbreadcrumbdataforplayer(self, lifeindex);
     }
 
@@ -204,10 +204,10 @@ function private breadcrumbs() {
 function private travel_dist() {
   self notify("46c3d76bfbd558e8");
   self endon("46c3d76bfbd558e8");
-  self.time_played_moving = self.pers[# "time_played_moving"];
+  self.time_played_moving = self.pers[#"time_played_moving"];
 
-  if(!isDefined(self.pers[# "movement_update_count"])) {
-    self.pers[# "movement_update_count"] = 0;
+  if(!isDefined(self.pers[#"movement_update_count"])) {
+    self.pers[#"movement_update_count"] = 0;
   }
 
   prevpos = self.origin;
@@ -285,10 +285,10 @@ function private travel_dist() {
       self stats::function_d40764f3(#"distance_traveled_foot", int(var_7e8e90a4));
       self stats::function_d40764f3(#"hash_630fffa7f053a2b7", int(var_87a9b1b1));
       self match_record::function_34800eec(#"hash_630fffa7f053a2b7", int(var_87a9b1b1));
-      self.pers[# "total_distance_travelled"] += var_365f7ec5;
-      self.pers[# "movement_update_count"] += var_601d5ffc;
-      self.pers[# "hash_20464b40eeb9b465"] += var_ec704eef;
-      self.pers[# "time_played_moving"] = self.time_played_moving;
+      self.pers[#"total_distance_travelled"] += var_365f7ec5;
+      self.pers[#"movement_update_count"] += var_601d5ffc;
+      self.pers[#"hash_20464b40eeb9b465"] += var_ec704eef;
+      self.pers[#"time_played_moving"] = self.time_played_moving;
       return;
     }
 

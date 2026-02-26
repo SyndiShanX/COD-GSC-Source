@@ -84,7 +84,7 @@ function function_acac764e() {
   }
 
   newindex = (index + 1) % 10;
-  self.pers[# "hash_76fbbcf94dab5536"] = newindex;
+  self.pers[#"hash_76fbbcf94dab5536"] = newindex;
   self stats::set_stat(#"playerstatsbygametype", stats::function_8921af36(), #"prevscoreindex", newindex);
 }
 

@@ -49,8 +49,8 @@ function function_4317fa79(destination) {
   }
 
   foreach(s_location in destination.locations) {
-    if(isDefined(s_location.instances[# "hash_77bdab265fe2ca2c"])) {
-      content_manager::spawn_instance(s_location.instances[# "hash_77bdab265fe2ca2c"]);
+    if(isDefined(s_location.instances[#"hash_77bdab265fe2ca2c"])) {
+      content_manager::spawn_instance(s_location.instances[#"hash_77bdab265fe2ca2c"]);
       break;
     }
   }
@@ -73,7 +73,7 @@ function private function_e7e5c90d(s_instance) {
   s_instance endon(#"cleanup");
   s_instance flag::clear("cleanup");
   s_instance callback::function_d8abfc3d(#"portal_activated", &function_1b543d55);
-  var_193b9763 = array::randomize(isDefined(s_instance.contentgroups[# "hash_217548aa85422a7e"]) ? s_instance.contentgroups[# "hash_217548aa85422a7e"] : []);
+  var_193b9763 = array::randomize(isDefined(s_instance.contentgroups[#"hash_217548aa85422a7e"]) ? s_instance.contentgroups[#"hash_217548aa85422a7e"] : []);
   var_cc2b6592 = randomintrangeinclusive(3, 5);
   var_3cdf505d = 0;
 
@@ -398,7 +398,7 @@ function function_90c8355(eventstruct) {
 function private function_1b543d55() {
   self flag::set("cleanup");
 
-  foreach(var_5207017 in isDefined(self.contentgroups[# "hash_217548aa85422a7e"]) ? self.contentgroups[# "hash_217548aa85422a7e"] : []) {
+  foreach(var_5207017 in isDefined(self.contentgroups[#"hash_217548aa85422a7e"]) ? self.contentgroups[#"hash_217548aa85422a7e"] : []) {
     if(isDefined(var_5207017.n_obj_id)) {
       zm_utility::function_bc5a54a8(var_5207017.n_obj_id);
       var_5207017.n_obj_id = undefined;

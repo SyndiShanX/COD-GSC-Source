@@ -15,225 +15,225 @@
 
 // --------------------------------------------------------------------------------- //	NEED TO PURGE AND CLEAN MAIN
 // --------------------------------------------------------------------------------- main() {
-  level.so_compass_zoom = "close";
+level.so_compass_zoom = "close";
 
-  //	breakpoint;
-  gulag_destructible_volumes = getEntArray("gulag_destructible_volume", "targetname");
-  mask_destructibles_in_volumes(gulag_destructible_volumes);
-  mask_interactives_in_volumes(gulag_destructible_volumes);
+//	breakpoint;
+gulag_destructible_volumes = getEntArray("gulag_destructible_volume", "targetname");
+mask_destructibles_in_volumes(gulag_destructible_volumes);
+mask_interactives_in_volumes(gulag_destructible_volumes);
 
-  level.default_goalheight = 128;
-  create_dvar("f15", 1);
-  SetSavedDvar("g_friendlyNameDist", 0);
+level.default_goalheight = 128;
+create_dvar("f15", 1);
+SetSavedDvar("g_friendlyNameDist", 0);
 
-  maps\createfx\gulag_audio::main();
-  //VisionSetNight( "gulag_nvg", 1.5 );
+maps\createfx\gulag_audio::main();
+//VisionSetNight( "gulag_nvg", 1.5 );
 
-  // The Gulag
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_1" );
-  // Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_2" );
-  // P03 'Roach' Silvers
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_3" );
-  // SEAL Team Six, U.S.N.
-  //	PreCacheString(&"GULAG_INTROSCREEN_LINE_4" );
+// The Gulag
+//	PreCacheString(&"GULAG_INTROSCREEN_LINE_1" );
+// Northern Russia - 09:20:[{FAKE_INTRO_SECONDS:02}] hrs
+//	PreCacheString(&"GULAG_INTROSCREEN_LINE_2" );
+// P03 'Roach' Silvers
+//	PreCacheString(&"GULAG_INTROSCREEN_LINE_3" );
+// SEAL Team Six, U.S.N.
+//	PreCacheString(&"GULAG_INTROSCREEN_LINE_4" );
 
-  //	level.start_point = "unload";
-  set_default_start("so_showers");
-  add_start("so_showers", ::start_so_showers_timed, "Special Op: Showers");
+//	level.start_point = "unload";
+set_default_start("so_showers");
+add_start("so_showers", ::start_so_showers_timed, "Special Op: Showers");
 
-  falling_rib_chunks = getEntArray("falling_rib_chunk", "targetname");
-  array_thread(falling_rib_chunks, ::self_delete);
-  top_hall_exploders = getEntArray("top_hall_exploder", "targetname");
-  array_thread(top_hall_exploders, ::self_delete);
-  top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
-  array_thread(top_hall_chunks, ::self_delete);
-  top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
-  array_thread(top_hall_chunks, ::self_delete);
+falling_rib_chunks = getEntArray("falling_rib_chunk", "targetname");
+array_thread(falling_rib_chunks, ::self_delete);
+top_hall_exploders = getEntArray("top_hall_exploder", "targetname");
+array_thread(top_hall_exploders, ::self_delete);
+top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
+array_thread(top_hall_chunks, ::self_delete);
+top_hall_chunks = getEntArray("top_hall_chunk", "targetname");
+array_thread(top_hall_chunks, ::self_delete);
 
-  level.disable_interactive_tv_use_triggers = true;
+level.disable_interactive_tv_use_triggers = true;
 
-  /*
-  start = create_start( "intro" );
-  start.main = ::gulag_flyin;
-  start.text = "Intro";
-  	
-  start = create_start( "approach" );
-  start.main = ::gulag_approach;
-  start.text = "Approach";
-  */
+/*
+start = create_start( "intro" );
+start.main = ::gulag_flyin;
+start.text = "Intro";
+	
+start = create_start( "approach" );
+start.main = ::gulag_approach;
+start.text = "Approach";
+*/
 
-  level.custom_no_game_setupFunc = ::gulag_no_game_start_setupFunc;
-  level.slowmo_viewhands = "viewhands_player_udt";
+level.custom_no_game_setupFunc = ::gulag_no_game_start_setupFunc;
+level.slowmo_viewhands = "viewhands_player_udt";
 
-  maps\_drone_ai::init();
-  maps\gulag_precache::main();
-  maps\createart\gulag_fog::main();
-  maps\gulag_fx::main();
+maps\_drone_ai::init();
+maps\gulag_precache::main();
+maps\createart\gulag_fog::main();
+maps\gulag_fx::main();
 
-  maps\_load::main();
-  maps\_compass::setupMiniMap("compass_map_gulag_2");
-  setsaveddvar("compassmaxrange", "1350");
+maps\_load::main();
+maps\_compass::setupMiniMap("compass_map_gulag_2");
+setsaveddvar("compassmaxrange", "1350");
 
-  maps\_slowmo_breach::slowmo_breach_init();
-  level._effect["breach_door"] = LoadFX("explosions/breach_wall_concrete");
+maps\_slowmo_breach::slowmo_breach_init();
+level._effect["breach_door"] = LoadFX("explosions/breach_wall_concrete");
 
-  maps\gulag_anim::gulag_anim();
-  maps\_nightvision::main(level.players);
+maps\gulag_anim::gulag_anim();
+maps\_nightvision::main(level.players);
 
-  level.rioter_threat = 1000;
-  level._pipe_fx_time = 2.5;
+level.rioter_threat = 1000;
+level._pipe_fx_time = 2.5;
 
-  flag_init("intro_helis_go");
-  flag_init("stop_tv_loop");
-  flag_init("f15s_spawn");
-  flag_init("anti_air_missiles_fire");
-  flag_init("aa_hit");
-  flag_init("f15s_attack");
-  flag_init("player_heli_uses_modified_yaw");
-  flag_init("intro_helis_spawned");
-  flag_init("player_lands");
-  flag_init("overlook_cleared_with_safe_time");
-  //flag_init( "cell_door1" );
-  flag_init("cell_door2");
-  flag_init("cell_door3");
-  flag_init("cell_door4");
-  flag_init("cell_door_weapons");
-  flag_init("access_control_room");
-  flag_init("going_in_hot");
-  flag_init("gulag_cell_doors_enabled");
-  flag_init("player_exited_bathroom");
-  flag_init("player_rappels_from_bathroom");
-  flag_init("rope_drops_now");
-  flag_init("cell_duty");
-  flag_init("cellblock_player_starts_rappel");
-  flag_init("bathroom_second_wave_trigger");
-  flag_init("soap_snipes_tower");
-  flag_init("slamraam_gets_players_attention");
-  flag_init("slamraam_killed_2");
-  flag_init("stop_rotating_around_gulag");
-  flag_init("player_goes_in_for_landing");
-  flag_init("enable_endlog_fx");
-  flag_init("escape_the_gulag");
-  //	flag_set( "player_goes_in_for_landing" );
-  flag_init("gulag_perimeter");
-  flag_init("pre_boats_attack");
-  flag_init("clear_dof");
-  flag_init("player_heli_backs_up");
-  flag_init("stop_shooting_right_side");
-  flag_set("player_can_rappel"); // didnt need
+flag_init("intro_helis_go");
+flag_init("stop_tv_loop");
+flag_init("f15s_spawn");
+flag_init("anti_air_missiles_fire");
+flag_init("aa_hit");
+flag_init("f15s_attack");
+flag_init("player_heli_uses_modified_yaw");
+flag_init("intro_helis_spawned");
+flag_init("player_lands");
+flag_init("overlook_cleared_with_safe_time");
+//flag_init( "cell_door1" );
+flag_init("cell_door2");
+flag_init("cell_door3");
+flag_init("cell_door4");
+flag_init("cell_door_weapons");
+flag_init("access_control_room");
+flag_init("going_in_hot");
+flag_init("gulag_cell_doors_enabled");
+flag_init("player_exited_bathroom");
+flag_init("player_rappels_from_bathroom");
+flag_init("rope_drops_now");
+flag_init("cell_duty");
+flag_init("cellblock_player_starts_rappel");
+flag_init("bathroom_second_wave_trigger");
+flag_init("soap_snipes_tower");
+flag_init("slamraam_gets_players_attention");
+flag_init("slamraam_killed_2");
+flag_init("stop_rotating_around_gulag");
+flag_init("player_goes_in_for_landing");
+flag_init("enable_endlog_fx");
+flag_init("escape_the_gulag");
+//	flag_set( "player_goes_in_for_landing" );
+flag_init("gulag_perimeter");
+flag_init("pre_boats_attack");
+flag_init("clear_dof");
+flag_init("player_heli_backs_up");
+flag_init("stop_shooting_right_side");
+flag_set("player_can_rappel"); // didnt need
 
-  flag_init("gulag_shower_music_done");
+flag_init("gulag_shower_music_done");
 
-  PreCacheItem("smoke_grenade_american");
-  PreCacheItem("armory_grenade");
-  PreCacheItem("m4m203_reflex_arctic");
-  PreCacheItem("f15_sam");
-  PreCacheItem("sam");
-  PreCacheItem("slamraam_missile");
-  PreCacheItem("slamraam_missile_guided");
-  PreCacheItem("stinger");
-  PreCacheItem("cobra_seeker");
-  PreCacheItem("rpg_straight");
-  PreCacheItem("cobra_Sidewinder");
-  PreCacheItem("m14_scoped");
-  PreCacheItem("claymore");
-  PreCacheItem("mp5_silencer_reflex");
-  PreCacheTurret("heli_spotlight");
-  PreCacheTurret("player_view_controller");
+PreCacheItem("smoke_grenade_american");
+PreCacheItem("armory_grenade");
+PreCacheItem("m4m203_reflex_arctic");
+PreCacheItem("f15_sam");
+PreCacheItem("sam");
+PreCacheItem("slamraam_missile");
+PreCacheItem("slamraam_missile_guided");
+PreCacheItem("stinger");
+PreCacheItem("cobra_seeker");
+PreCacheItem("rpg_straight");
+PreCacheItem("cobra_Sidewinder");
+PreCacheItem("m14_scoped");
+PreCacheItem("claymore");
+PreCacheItem("mp5_silencer_reflex");
+PreCacheTurret("heli_spotlight");
+PreCacheTurret("player_view_controller");
 
-  PreCacheItem("fraggrenade");
-  PreCacheItem("flash_grenade");
-  PreCacheItem("claymore");
+PreCacheItem("fraggrenade");
+PreCacheItem("flash_grenade");
+PreCacheItem("claymore");
 
-  precachemodel("viewhands_player_udt");
-  precachemodel("viewhands_udt");
+precachemodel("viewhands_player_udt");
+precachemodel("viewhands_udt");
 
-  PreCacheModel("com_emergencylightcase_blue");
-  PreCacheModel("gulag_price_ak47");
-  PreCacheModel("com_emergencylightcase_orange");
-  PreCacheModel("com_emergencylightcase_blue_off");
-  //	PreCacheModel( "rappelrope100_le_obj" );
-  PreCacheModel("com_drop_rope_obj");
-  PreCacheModel("com_blackhawk_spotlight_on_mg_setup");
-  PreCacheModel("com_blackhawk_spotlight_on_mg_setup_3x");
-  PreCacheModel("vehicle_slamraam_launcher_no_spike");
-  PreCacheModel("vehicle_slamraam_missiles");
-  PreCacheModel("projectile_slamraam_missile");
-  PreCacheModel("tag_turret");
-  PreCacheModel("me_lightfluohang_double_destroyed");
-  PreCacheModel("me_lightfluohang_single_destroyed");
-  PreCacheModel("ma_flatscreen_tv_wallmount_broken_01");
-  PreCacheModel("ma_flatscreen_tv_wallmount_broken_02");
-  PreCacheModel("com_tv2_d");
-  PreCacheModel("com_tv1");
-  PreCacheModel("com_tv2");
-  PreCacheModel("com_tv1_testpattern");
-  PreCacheModel("com_tv2_testpattern");
-  PreCacheModel("com_locker_double_destroyed");
-  PreCacheModel("ch_street_wall_light_01_off");
-  PreCacheModel("dt_mirror_dam");
-  PreCacheModel("dt_mirror_des");
+PreCacheModel("com_emergencylightcase_blue");
+PreCacheModel("gulag_price_ak47");
+PreCacheModel("com_emergencylightcase_orange");
+PreCacheModel("com_emergencylightcase_blue_off");
+//	PreCacheModel( "rappelrope100_le_obj" );
+PreCacheModel("com_drop_rope_obj");
+PreCacheModel("com_blackhawk_spotlight_on_mg_setup");
+PreCacheModel("com_blackhawk_spotlight_on_mg_setup_3x");
+PreCacheModel("vehicle_slamraam_launcher_no_spike");
+PreCacheModel("vehicle_slamraam_missiles");
+PreCacheModel("projectile_slamraam_missile");
+PreCacheModel("tag_turret");
+PreCacheModel("me_lightfluohang_double_destroyed");
+PreCacheModel("me_lightfluohang_single_destroyed");
+PreCacheModel("ma_flatscreen_tv_wallmount_broken_01");
+PreCacheModel("ma_flatscreen_tv_wallmount_broken_02");
+PreCacheModel("com_tv2_d");
+PreCacheModel("com_tv1");
+PreCacheModel("com_tv2");
+PreCacheModel("com_tv1_testpattern");
+PreCacheModel("com_tv2_testpattern");
+PreCacheModel("com_locker_double_destroyed");
+PreCacheModel("ch_street_wall_light_01_off");
+PreCacheModel("dt_mirror_dam");
+PreCacheModel("dt_mirror_des");
 
-  loadfx("explosions/tv_flatscreen_explosion");
-  loadfx("misc/light_fluorescent_single_blowout_runner");
-  loadfx("misc/light_fluorescent_blowout_runner");
-  loadfx("props/locker_double_des_01_left");
-  loadfx("props/locker_double_des_02_right");
-  loadfx("props/locker_double_des_03_both");
-  loadfx("misc/no_effect");
-  loadfx("misc/light_blowout_swinging_runner");
-  loadfx("props/mirror_dt_panel_broken");
-  loadfx("props/mirror_shatter");
-  precacheshellshock("gulag_attack");
-  precacheshellshock("nosound");
+loadfx("explosions/tv_flatscreen_explosion");
+loadfx("misc/light_fluorescent_single_blowout_runner");
+loadfx("misc/light_fluorescent_blowout_runner");
+loadfx("props/locker_double_des_01_left");
+loadfx("props/locker_double_des_02_right");
+loadfx("props/locker_double_des_03_both");
+loadfx("misc/no_effect");
+loadfx("misc/light_blowout_swinging_runner");
+loadfx("props/mirror_dt_panel_broken");
+loadfx("props/mirror_shatter");
+precacheshellshock("gulag_attack");
+precacheshellshock("nosound");
 
-  level.breakables_fx["tv_explode"] = LoadFX("explosions/tv_explosion");
+level.breakables_fx["tv_explode"] = LoadFX("explosions/tv_explosion");
 
-  thread so_handle_exterior_fx();
-  thread handle_gulag_world_fx();
+thread so_handle_exterior_fx();
+thread handle_gulag_world_fx();
 
-  level thread maps\gulag_amb::main();
+level thread maps\gulag_amb::main();
 
-  flag_set("run_from_armory");
-  thread player_riotshield_threatbias();
+flag_set("run_from_armory");
+thread player_riotshield_threatbias();
 
-  SetIgnoreMeGroup("team3", "axis");
-  SetIgnoreMeGroup("axis", "team3");
+SetIgnoreMeGroup("team3", "axis");
+SetIgnoreMeGroup("axis", "team3");
 
-  array_spawn_function_noteworthy("overlook_spawner", ::overlook_spawner_think);
-  //array_spawn_function_noteworthy( "hallway_runner_spawner", ::hallway_runner_spawner_think );
-  array_spawn_function_targetname("bhd_spawner", ::bhd_heli_think);
-  array_spawn_function_noteworthy("breach_death_spawner", ::die_on_ragdoll);
-  array_spawn_function_noteworthy("riot_shield_spawner", ::riot_shield_guy);
-  array_spawn_function_noteworthy("flee_armory_spawner", ::flee_armory_think);
-  array_spawn_function_noteworthy("tarp_spawner", ::tarp_spawner_think);
-  //	array_spawn_function_noteworthy( "doomed_just_doomed", ::doomed_just_doomed_think );
-  array_spawn_function_noteworthy("close_fighter_spawner", ::close_fighter_think);
-  array_spawn_function_noteworthy("bathroom_balcony_spawner", ::bathroom_balcony_spawner);
-  array_spawn_function_noteworthy("riot_escort_spawner", ::riot_escort_spawner);
-  array_spawn_function_noteworthy("catwalk_spawner", ::catwalk_spawner);
+array_spawn_function_noteworthy("overlook_spawner", ::overlook_spawner_think);
+//array_spawn_function_noteworthy( "hallway_runner_spawner", ::hallway_runner_spawner_think );
+array_spawn_function_targetname("bhd_spawner", ::bhd_heli_think);
+array_spawn_function_noteworthy("breach_death_spawner", ::die_on_ragdoll);
+array_spawn_function_noteworthy("riot_shield_spawner", ::riot_shield_guy);
+array_spawn_function_noteworthy("flee_armory_spawner", ::flee_armory_think);
+array_spawn_function_noteworthy("tarp_spawner", ::tarp_spawner_think);
+//	array_spawn_function_noteworthy( "doomed_just_doomed", ::doomed_just_doomed_think );
+array_spawn_function_noteworthy("close_fighter_spawner", ::close_fighter_think);
+array_spawn_function_noteworthy("bathroom_balcony_spawner", ::bathroom_balcony_spawner);
+array_spawn_function_noteworthy("riot_escort_spawner", ::riot_escort_spawner);
+array_spawn_function_noteworthy("catwalk_spawner", ::catwalk_spawner);
 
-  challenge_onlys = getEntArray("challenge_only", "targetname");
-  array_thread(challenge_onlys, ::challenge_only_think);
+challenge_onlys = getEntArray("challenge_only", "targetname");
+array_thread(challenge_onlys, ::challenge_only_think);
 
-  damage_targ_triggers = getEntArray("damage_targ_trigger", "targetname");
-  array_thread(damage_targ_triggers, ::damage_targ_trigger_think);
+damage_targ_triggers = getEntArray("damage_targ_trigger", "targetname");
+array_thread(damage_targ_triggers, ::damage_targ_trigger_think);
 
-  add_wait(::flag_wait, "player_moves_into_gulag");
-  add_func(::flag_set, "gulag_cell_doors_enabled");
-  thread do_wait();
+add_wait(::flag_wait, "player_moves_into_gulag");
+add_func(::flag_set, "gulag_cell_doors_enabled");
+thread do_wait();
 
-  thread landing_blocker_think();
+thread landing_blocker_think();
 
-  level.ending_flee_guys = 0;
-  level.ending_flee_max = 0;
-  level.slamraam_missile = "slamraam_missile_guided";
+level.ending_flee_guys = 0;
+level.ending_flee_max = 0;
+level.slamraam_missile = "slamraam_missile_guided";
 
-  // makes the friendlies go the right way
-  ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
-  ai_field_blocker ConnectPaths();
-  ai_field_blocker NotSolid();
+// makes the friendlies go the right way
+ai_field_blocker = GetEnt("ai_field_blocker", "targetname");
+ai_field_blocker ConnectPaths();
+ai_field_blocker NotSolid();
 }
 
 fill_weapon_pickups() {
@@ -258,68 +258,68 @@ fill_weapon_pickups() {
 
 // --------------------------------------------------------------------------------- //	SPECIAL OPS SPECIFIC
 // --------------------------------------------------------------------------------- start_so_showers_timed() {
-  //	if( !isDefined( anim.bcs_locations ) )
-  //		anim.bcs_locations = [];
+//	if( !isDefined( anim.bcs_locations ) )
+//		anim.bcs_locations = [];
 
-  fill_weapon_pickups();
-  level thread breach_hint_model();
+fill_weapon_pickups();
+level thread breach_hint_model();
 
-  flag_set("enable_interior_fx");
-  //	flag_set( "disable_exterior_fx" );
+flag_set("enable_interior_fx");
+//	flag_set( "disable_exterior_fx" );
 
-  thread maps\_utility::set_ambient("gulag_hall_int0");
+thread maps\_utility::set_ambient("gulag_hall_int0");
 
-  switch (level.gameSkill) {
-    case 0: // Easy
-    case 1:
-      so_showers_timed_setup_Regular();
-      break; // Regular
-    case 2:
-      so_showers_timed_setup_hardened();
-      break; // Hardened
-    case 3:
-      so_showers_timed_setup_veteran();
-      break; // Veteran
-  }
+switch (level.gameSkill) {
+  case 0: // Easy
+  case 1:
+    so_showers_timed_setup_Regular();
+    break; // Regular
+  case 2:
+    so_showers_timed_setup_hardened();
+    break; // Hardened
+  case 3:
+    so_showers_timed_setup_veteran();
+    break; // Veteran
+}
 
-  // Prevent player from leaving the valid play space.
-  thread enable_escape_warning();
-  thread enable_escape_failure();
+// Prevent player from leaving the valid play space.
+thread enable_escape_warning();
+thread enable_escape_failure();
 
-  breach_marker = GetEnt("pipe_breach_org", "targetname");
-  Objective_Add(1, "current", level.challenge_objective, breach_marker.origin);
-  maps\_slowmo_breach::objective_breach(1, 2);
-  thread so_showers_update_objective();
+breach_marker = GetEnt("pipe_breach_org", "targetname");
+Objective_Add(1, "current", level.challenge_objective, breach_marker.origin);
+maps\_slowmo_breach::objective_breach(1, 2);
+thread so_showers_update_objective();
 
-  volume = GetEnt("gulag_shower_destructibles", "script_noteworthy");
-  volume activate_destructibles_in_volume();
-  volume activate_interactives_in_volume();
+volume = GetEnt("gulag_shower_destructibles", "script_noteworthy");
+volume activate_destructibles_in_volume();
+volume activate_interactives_in_volume();
 
-  thread fade_challenge_in();
-  thread fade_challenge_out("player_exited_bathroom");
-  thread enable_challenge_timer("player_enters_bathroom", "player_exited_bathroom");
-  thread enable_triggered_complete("player_rappels_from_bathroom", "player_exited_bathroom");
-  thread gulag_shower_challenge_music();
+thread fade_challenge_in();
+thread fade_challenge_out("player_exited_bathroom");
+thread enable_challenge_timer("player_enters_bathroom", "player_exited_bathroom");
+thread enable_triggered_complete("player_rappels_from_bathroom", "player_exited_bathroom");
+thread gulag_shower_challenge_music();
 
-  foreach(player in level.players) {
-    player SetActionSlot(1, "");
-  }
+foreach(player in level.players) {
+  player SetActionSlot(1, "");
+}
 
-  flag_wait("player_enters_bathroom");
+flag_wait("player_enters_bathroom");
 
-  thread maps\_ambient::activateAmbient("gulag_shower_int0");
+thread maps\_ambient::activateAmbient("gulag_shower_int0");
 
-  level.player.attackeraccuracy = 0;
-  level.player delayThread(6, maps\_gameskill::update_player_attacker_accuracy);
+level.player.attackeraccuracy = 0;
+level.player delayThread(6, maps\_gameskill::update_player_attacker_accuracy);
 
-  activate_trigger_with_targetname("bathroom_initial_enemies");
+activate_trigger_with_targetname("bathroom_initial_enemies");
 
-  delayThread(10, ::activate_trigger_with_targetname, "bathroom_balcony_room1_trigger");
+delayThread(10, ::activate_trigger_with_targetname, "bathroom_balcony_room1_trigger");
 
-  flag_wait("bathroom_start_second_wave");
+flag_wait("bathroom_start_second_wave");
 
-  delaythread(1, ::activate_trigger_with_targetname, "bathroom_balcony_room2_trigger");
-  activate_trigger_with_targetname("bathroom_second_wave_trigger");
+delaythread(1, ::activate_trigger_with_targetname, "bathroom_balcony_room2_trigger");
+activate_trigger_with_targetname("bathroom_second_wave_trigger");
 }
 
 breach_hint_model() {

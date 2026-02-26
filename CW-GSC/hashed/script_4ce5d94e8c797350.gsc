@@ -186,7 +186,7 @@ function function_2b436554(destination) {
   var_e2599f45 = [];
 
   foreach(location in destination.locations) {
-    instance = location.instances[# "dac_trial_computer"];
+    instance = location.instances[#"dac_trial_computer"];
 
     if(isDefined(instance)) {
       if(!isDefined(level.var_5de83c5b)) {
@@ -230,8 +230,8 @@ function function_2b436554(destination) {
 }
 
 function function_1296cf27(instance) {
-  var_f1646bb = instance.contentgroups[# "dac_trial_computer"][0];
-  var_d690f2be = isDefined(instance.contentgroups[# "hash_3b68487ef7d135d7"]) ? instance.contentgroups[# "hash_3b68487ef7d135d7"] : [];
+  var_f1646bb = instance.contentgroups[#"dac_trial_computer"][0];
+  var_d690f2be = isDefined(instance.contentgroups[#"hash_3b68487ef7d135d7"]) ? instance.contentgroups[#"hash_3b68487ef7d135d7"] : [];
 
   if(!isDefined(var_f1646bb)) {
     assertmsg("<dev string:x38>" + instance.targetname);
@@ -1200,7 +1200,7 @@ function function_9c1479ad() {
   level endon(#"hash_53f7c8af221e6090");
 
   foreach(player in getplayers()) {
-    player thread function_9ffc76ea([# "glass_smash", #"hash_34928429a0070510"]);
+    player thread function_9ffc76ea([#"glass_smash", #"hash_34928429a0070510"]);
   }
 
   while(true) {

@@ -75,7 +75,7 @@ function private function_7825ee37(var_31d7501a) {
   var_2ce7727b = 0;
   var_b4ce0d8c = 0;
   var_16aebd94 = 250;
-  player childthread namespace_61e6d095::block_kbm_pause_menu([# "exit", #"combination_correct"]);
+  player childthread namespace_61e6d095::block_kbm_pause_menu([#"exit", #"combination_correct"]);
 
   while(true) {
     if(player namespace_61e6d095::function_70217795()) {

@@ -52,21 +52,21 @@ function_250232f4(localclientnum) {
   level.var_49f26c00.var_c6761aa2 setModel(#"hash_147375b2a9795cd1");
   level.var_49f26c00.var_dcbe4732 setModel(#"hash_789fccb680d65004");
   level.var_49f26c00.var_f48ac46 setModel(#"hash_46ef488f583997fb");
-  level._effect[# "hash_6d42ec7a48079d27"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_bubbles_base";
-  level._effect[# "hash_7834e8ed496978a7"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_classic";
-  level._effect[# "hash_6b40c7a7d0833180"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_common";
-  level._effect[# "hash_102b72b6190bf34"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_epic";
-  level._effect[# "hash_78f0379f9bdc006"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_legendary";
-  level._effect[# "hash_38d4f59cb78344b9"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_rare";
-  level._effect[# "hash_256e8ac9ea9c8ad9"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_ultra";
-  level._effect[# "hash_56e6aeec2f0f9d1c"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_whimsical";
-  level._effect[# "hash_3a65d1b462add54a"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_wipe";
-  level._effect[# "hash_43b44402af23c93c"] = "maps/core_frontend/fx8_frontend_zombie_lab_stills_surface";
-  level._effect[# "hash_f4b99c36c8b7232"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_common";
-  level._effect[# "hash_8a44ebbb924768a"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_epic";
-  level._effect[# "hash_78125560468f4188"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_legend";
-  level._effect[# "hash_2be8010ec8776feb"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_rare";
-  level._effect[# "hash_4dd3ac60cbb0f8ab"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_ultra";
+  level._effect[#"hash_6d42ec7a48079d27"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_bubbles_base";
+  level._effect[#"hash_7834e8ed496978a7"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_classic";
+  level._effect[#"hash_6b40c7a7d0833180"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_common";
+  level._effect[#"hash_102b72b6190bf34"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_epic";
+  level._effect[#"hash_78f0379f9bdc006"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_legendary";
+  level._effect[#"hash_38d4f59cb78344b9"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_rare";
+  level._effect[#"hash_256e8ac9ea9c8ad9"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_ultra";
+  level._effect[#"hash_56e6aeec2f0f9d1c"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_whimsical";
+  level._effect[#"hash_3a65d1b462add54a"] = "maps/core_frontend/fx8_frontend_zombie_lab_elixir_wipe";
+  level._effect[#"hash_43b44402af23c93c"] = "maps/core_frontend/fx8_frontend_zombie_lab_stills_surface";
+  level._effect[#"hash_f4b99c36c8b7232"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_common";
+  level._effect[#"hash_8a44ebbb924768a"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_epic";
+  level._effect[#"hash_78125560468f4188"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_legend";
+  level._effect[#"hash_2be8010ec8776feb"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_rare";
+  level._effect[#"hash_4dd3ac60cbb0f8ab"] = "maps/core_frontend/fx8_frontend_zombie_lab_stl_surface_ultra";
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_bottles_bundle", &function_de0d6843, "play");
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_bottles_bundle", &function_7c1ef1e1, "done");
   scene::add_scene_func(#"p8_fxanim_core_frontend_zm_lab_bottles_bundle", &function_7c1ef1e1, "stop");
@@ -570,19 +570,19 @@ function_c7117688(localclientnum) {
 function_523d7d8b(localclientnum, str_tag, var_4deff3fa) {
   switch (var_4deff3fa) {
     case 0:
-      str_fx = level._effect[# "hash_f4b99c36c8b7232"];
+      str_fx = level._effect[#"hash_f4b99c36c8b7232"];
       break;
     case 3:
-      str_fx = level._effect[# "hash_8a44ebbb924768a"];
+      str_fx = level._effect[#"hash_8a44ebbb924768a"];
       break;
     case 2:
-      str_fx = level._effect[# "hash_78125560468f4188"];
+      str_fx = level._effect[#"hash_78125560468f4188"];
       break;
     case 1:
-      str_fx = level._effect[# "hash_2be8010ec8776feb"];
+      str_fx = level._effect[#"hash_2be8010ec8776feb"];
       break;
     case 4:
-      str_fx = level._effect[# "hash_4dd3ac60cbb0f8ab"];
+      str_fx = level._effect[#"hash_4dd3ac60cbb0f8ab"];
       break;
   }
 
@@ -1521,11 +1521,11 @@ function_f76d78f5(localclientnum, b_reverse = 0, var_74431a2d = 1, var_5248b6df 
 }
 
 function_f8d486f8(localclientnum, a_ents) {
-  if(!isDefined(a_ents[# "talisman"].var_850f1956)) {
-    a_ents[# "talisman"].var_850f1956 = util::spawn_model(localclientnum, #"p8_zm_lab_talisman_press_mould_lid_common", a_ents[# "talisman"] gettagorigin("mould_jnt"), a_ents[# "talisman"] gettagangles("mould_jnt"));
+  if(!isDefined(a_ents[#"talisman"].var_850f1956)) {
+    a_ents[#"talisman"].var_850f1956 = util::spawn_model(localclientnum, #"p8_zm_lab_talisman_press_mould_lid_common", a_ents[#"talisman"] gettagorigin("mould_jnt"), a_ents[#"talisman"] gettagangles("mould_jnt"));
 
-    if(isDefined(a_ents[# "talisman"].var_850f1956)) {
-      a_ents[# "talisman"].var_850f1956 linkto(a_ents[# "talisman"], "mould_jnt");
+    if(isDefined(a_ents[#"talisman"].var_850f1956)) {
+      a_ents[#"talisman"].var_850f1956 linkto(a_ents[#"talisman"], "mould_jnt");
     }
   }
 }
@@ -1533,41 +1533,41 @@ function_f8d486f8(localclientnum, a_ents) {
 function_d4f9b895(localclientnum, a_ents) {
   level endon(#"laboratory_closed");
 
-  if(isDefined(a_ents[# "talisman"].var_a27a4e60)) {
-    a_ents[# "talisman"].var_a27a4e60 unlink();
-    a_ents[# "talisman"].var_a27a4e60 delete();
-    a_ents[# "talisman"].var_a27a4e60 = undefined;
+  if(isDefined(a_ents[#"talisman"].var_a27a4e60)) {
+    a_ents[#"talisman"].var_a27a4e60 unlink();
+    a_ents[#"talisman"].var_a27a4e60 delete();
+    a_ents[#"talisman"].var_a27a4e60 = undefined;
   }
 
-  if(isDefined(a_ents[# "talisman"].var_26cb3da7)) {
-    a_ents[# "talisman"].var_26cb3da7 unlink();
-    a_ents[# "talisman"].var_26cb3da7 delete();
-    a_ents[# "talisman"].var_26cb3da7 = undefined;
+  if(isDefined(a_ents[#"talisman"].var_26cb3da7)) {
+    a_ents[#"talisman"].var_26cb3da7 unlink();
+    a_ents[#"talisman"].var_26cb3da7 delete();
+    a_ents[#"talisman"].var_26cb3da7 = undefined;
   }
 
-  a_ents[# "talisman"].var_a27a4e60 = util::spawn_model(localclientnum, "tag_origin", a_ents[# "talisman"] gettagorigin("link_talisman_ui_large_jnt"), a_ents[# "talisman"] gettagangles("link_talisman_ui_large_jnt"));
-  a_ents[# "talisman"].var_26cb3da7 = util::spawn_model(localclientnum, "tag_origin", a_ents[# "talisman"] gettagorigin("link_talisman_ui_small_jnt"), a_ents[# "talisman"] gettagangles("link_talisman_ui_small_jnt"));
+  a_ents[#"talisman"].var_a27a4e60 = util::spawn_model(localclientnum, "tag_origin", a_ents[#"talisman"] gettagorigin("link_talisman_ui_large_jnt"), a_ents[#"talisman"] gettagangles("link_talisman_ui_large_jnt"));
+  a_ents[#"talisman"].var_26cb3da7 = util::spawn_model(localclientnum, "tag_origin", a_ents[#"talisman"] gettagorigin("link_talisman_ui_small_jnt"), a_ents[#"talisman"] gettagangles("link_talisman_ui_small_jnt"));
 
-  if(isDefined(a_ents[# "talisman"].var_a27a4e60)) {
-    a_ents[# "talisman"].var_a27a4e60 setscale(0.8);
-    a_ents[# "talisman"].var_a27a4e60 linkto(a_ents[# "talisman"], "link_talisman_ui_large_jnt");
+  if(isDefined(a_ents[#"talisman"].var_a27a4e60)) {
+    a_ents[#"talisman"].var_a27a4e60 setscale(0.8);
+    a_ents[#"talisman"].var_a27a4e60 linkto(a_ents[#"talisman"], "link_talisman_ui_large_jnt");
   }
 
-  if(isDefined(a_ents[# "talisman"].var_26cb3da7)) {
-    a_ents[# "talisman"].var_26cb3da7 setscale(0.5);
-    a_ents[# "talisman"].var_26cb3da7 linkto(a_ents[# "talisman"], "link_talisman_ui_small_jnt");
+  if(isDefined(a_ents[#"talisman"].var_26cb3da7)) {
+    a_ents[#"talisman"].var_26cb3da7 setscale(0.5);
+    a_ents[#"talisman"].var_26cb3da7 linkto(a_ents[#"talisman"], "link_talisman_ui_small_jnt");
   }
 
   if(isDefined(level.var_49f26c00.var_f6e518bb)) {
-    if(isDefined(a_ents[# "talisman"].var_a27a4e60)) {
-      a_ents[# "talisman"].var_a27a4e60 setModel(level.var_49f26c00.var_f6e518bb);
+    if(isDefined(a_ents[#"talisman"].var_a27a4e60)) {
+      a_ents[#"talisman"].var_a27a4e60 setModel(level.var_49f26c00.var_f6e518bb);
     }
 
-    if(isDefined(a_ents[# "talisman"].var_26cb3da7)) {
-      a_ents[# "talisman"].var_26cb3da7 setModel(level.var_49f26c00.var_f6e518bb);
+    if(isDefined(a_ents[#"talisman"].var_26cb3da7)) {
+      a_ents[#"talisman"].var_26cb3da7 setModel(level.var_49f26c00.var_f6e518bb);
     }
 
-    level.var_49f26c00.var_ae9da777 = a_ents[# "talisman"].var_a27a4e60;
+    level.var_49f26c00.var_ae9da777 = a_ents[#"talisman"].var_a27a4e60;
     var_4deff3fa = function_18d7cd9b(localclientnum, 4);
 
     if(!isDefined(var_4deff3fa)) {
@@ -1601,14 +1601,14 @@ function_d4f9b895(localclientnum, a_ents) {
         break;
     }
 
-    if(isDefined(a_ents[# "talisman"].var_850f1956)) {
-      a_ents[# "talisman"].var_850f1956 setModel(var_bdf17b70);
+    if(isDefined(a_ents[#"talisman"].var_850f1956)) {
+      a_ents[#"talisman"].var_850f1956 setModel(var_bdf17b70);
     }
 
     level waittill(#"talisman_stamped");
 
-    if(isDefined(a_ents[# "talisman"].var_850f1956)) {
-      a_ents[# "talisman"].var_850f1956 setModel(var_177f9b93);
+    if(isDefined(a_ents[#"talisman"].var_850f1956)) {
+      a_ents[#"talisman"].var_850f1956 setModel(var_177f9b93);
     }
 
     level util::delay(1, #"laboratory_closed", &function_b760318d, 2);
@@ -1631,46 +1631,46 @@ function_feeedd3d(var_7194cc97) {
 }
 
 function_43d0e81a(localclientnum, a_ents) {
-  if(isDefined(a_ents[# "talisman"].var_a27a4e60)) {
-    a_ents[# "talisman"].var_a27a4e60 delete();
+  if(isDefined(a_ents[#"talisman"].var_a27a4e60)) {
+    a_ents[#"talisman"].var_a27a4e60 delete();
   }
 
-  if(isDefined(a_ents[# "talisman"].var_26cb3da7)) {
-    a_ents[# "talisman"].var_26cb3da7 delete();
+  if(isDefined(a_ents[#"talisman"].var_26cb3da7)) {
+    a_ents[#"talisman"].var_26cb3da7 delete();
   }
 }
 
 function_24222bb4(localclientnum, a_ents) {
   if(self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_bottles_bundle") {
     level scene::stop(#"hash_4aaa115910b7d3ec");
-    function_4df2b792(localclientnum, a_ents[# "bottle1"], a_ents[# "bottle2"], a_ents[# "bottle3"]);
+    function_4df2b792(localclientnum, a_ents[#"bottle1"], a_ents[#"bottle2"], a_ents[#"bottle3"]);
     var_ed6f73d2 = function_6127ea37(localclientnum, 1);
     var_df3fd74f = function_6127ea37(localclientnum, 2);
     var_ed7a73c4 = function_6127ea37(localclientnum, 3);
-    util::playFXOnTag(localclientnum, var_ed6f73d2, a_ents[# "bottle1"].mdl_bottle, isDefined(a_ents[# "bottle1"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world")) ? a_ents[# "bottle1"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world") : "tag_origin");
-    util::playFXOnTag(localclientnum, var_df3fd74f, a_ents[# "bottle2"].mdl_bottle, isDefined(a_ents[# "bottle2"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world")) ? a_ents[# "bottle2"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world") : "tag_origin");
-    util::playFXOnTag(localclientnum, var_ed7a73c4, a_ents[# "bottle3"].mdl_bottle, isDefined(a_ents[# "bottle3"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world")) ? a_ents[# "bottle3"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world") : "tag_origin");
-    a_ents[# "bottle1"].mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, 1);
-    a_ents[# "bottle2"].mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, 2);
-    a_ents[# "bottle3"].mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, 3);
+    util::playFXOnTag(localclientnum, var_ed6f73d2, a_ents[#"bottle1"].mdl_bottle, isDefined(a_ents[#"bottle1"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world")) ? a_ents[#"bottle1"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world") : "tag_origin");
+    util::playFXOnTag(localclientnum, var_df3fd74f, a_ents[#"bottle2"].mdl_bottle, isDefined(a_ents[#"bottle2"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world")) ? a_ents[#"bottle2"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world") : "tag_origin");
+    util::playFXOnTag(localclientnum, var_ed7a73c4, a_ents[#"bottle3"].mdl_bottle, isDefined(a_ents[#"bottle3"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world")) ? a_ents[#"bottle3"].mdl_bottle gettagorigin("wpn_t8_zm_elixir_bottle_world") : "tag_origin");
+    a_ents[#"bottle1"].mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, 1);
+    a_ents[#"bottle2"].mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, 2);
+    a_ents[#"bottle3"].mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, 3);
     return;
   }
 
   if(self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_bottle_fluids_bundle") {
     level scene::stop(#"p8_fxanim_core_frontend_zm_lab_bottle_fluids_bundle");
-    function_8cd01001(localclientnum, a_ents[# "bottle_fluid_01"], a_ents[# "bottle_fluid_02"], a_ents[# "bottle_fluid_03"]);
-    util::playFXOnTag(localclientnum, level._effect[# "hash_6d42ec7a48079d27"], a_ents[# "bottle_fluid_01"], "bottle_fluid_base_jnt");
-    util::playFXOnTag(localclientnum, level._effect[# "hash_6d42ec7a48079d27"], a_ents[# "bottle_fluid_02"], "bottle_fluid_base_jnt");
-    util::playFXOnTag(localclientnum, level._effect[# "hash_6d42ec7a48079d27"], a_ents[# "bottle_fluid_03"], "bottle_fluid_base_jnt");
+    function_8cd01001(localclientnum, a_ents[#"bottle_fluid_01"], a_ents[#"bottle_fluid_02"], a_ents[#"bottle_fluid_03"]);
+    util::playFXOnTag(localclientnum, level._effect[#"hash_6d42ec7a48079d27"], a_ents[#"bottle_fluid_01"], "bottle_fluid_base_jnt");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_6d42ec7a48079d27"], a_ents[#"bottle_fluid_02"], "bottle_fluid_base_jnt");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_6d42ec7a48079d27"], a_ents[#"bottle_fluid_03"], "bottle_fluid_base_jnt");
   }
 }
 
 function_de0d6843(localclientnum, a_ents) {
   self endon(#"hash_200ae59dc85ae6f");
-  function_4df2b792(localclientnum, a_ents[# "bottle1"], a_ents[# "bottle2"], a_ents[# "bottle3"]);
-  a_ents[# "bottle1"] thread fill_bottle(localclientnum, #"bottle1_dropped", #"bottle1_start_fill", 0.5, 1);
-  a_ents[# "bottle2"] thread fill_bottle(localclientnum, #"bottle2_dropped", #"bottle2_start_fill", 0.6, 2);
-  a_ents[# "bottle3"] thread fill_bottle(localclientnum, #"bottle3_dropped", #"bottle3_start_fill", 0.7, 3);
+  function_4df2b792(localclientnum, a_ents[#"bottle1"], a_ents[#"bottle2"], a_ents[#"bottle3"]);
+  a_ents[#"bottle1"] thread fill_bottle(localclientnum, #"bottle1_dropped", #"bottle1_start_fill", 0.5, 1);
+  a_ents[#"bottle2"] thread fill_bottle(localclientnum, #"bottle2_dropped", #"bottle2_start_fill", 0.6, 2);
+  a_ents[#"bottle3"] thread fill_bottle(localclientnum, #"bottle3_dropped", #"bottle3_start_fill", 0.7, 3);
 }
 
 function_4df2b792(localclientnum, var_56448842, var_cf59fa73, var_bb17d1ef) {
@@ -1723,7 +1723,7 @@ fill_bottle(localclientnum, var_1a44a9d9, var_6d1c3912, var_7046a27c, var_6cf175
     wait var_7046a27c;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "hash_3a65d1b462add54a"], self.mdl_bottle, var_92ecfb94);
+  util::playFXOnTag(localclientnum, level._effect[#"hash_3a65d1b462add54a"], self.mdl_bottle, var_92ecfb94);
   wait 0.5;
   self.mdl_bottle thread function_b05ea28d(#"hash_772e420e766fbc4e", 0, 0.5, undefined, undefined, &function_bf3a0fbe, var_6cf17519);
   level thread function_6605d119(localclientnum, var_d5db956e);
@@ -1748,45 +1748,45 @@ function_5e0db3e7(param1, param2) {
 function_7c1ef1e1(localclientnum, a_ents) {
   self notify(#"hash_200ae59dc85ae6f");
 
-  if(isDefined(a_ents[# "bottle1"].mdl_bottle)) {
-    a_ents[# "bottle1"].mdl_bottle delete();
+  if(isDefined(a_ents[#"bottle1"].mdl_bottle)) {
+    a_ents[#"bottle1"].mdl_bottle delete();
   }
 
-  if(isDefined(a_ents[# "bottle2"].mdl_bottle)) {
-    a_ents[# "bottle2"].mdl_bottle delete();
+  if(isDefined(a_ents[#"bottle2"].mdl_bottle)) {
+    a_ents[#"bottle2"].mdl_bottle delete();
   }
 
-  if(isDefined(a_ents[# "bottle3"].mdl_bottle)) {
-    a_ents[# "bottle3"].mdl_bottle delete();
+  if(isDefined(a_ents[#"bottle3"].mdl_bottle)) {
+    a_ents[#"bottle3"].mdl_bottle delete();
   }
 
-  if(isDefined(a_ents[# "bottle1"].mdl_tube)) {
-    a_ents[# "bottle1"].mdl_tube delete();
+  if(isDefined(a_ents[#"bottle1"].mdl_tube)) {
+    a_ents[#"bottle1"].mdl_tube delete();
   }
 
-  if(isDefined(a_ents[# "bottle2"].mdl_tube)) {
-    a_ents[# "bottle2"].mdl_tube delete();
+  if(isDefined(a_ents[#"bottle2"].mdl_tube)) {
+    a_ents[#"bottle2"].mdl_tube delete();
   }
 
-  if(isDefined(a_ents[# "bottle3"].mdl_tube)) {
-    a_ents[# "bottle3"].mdl_tube delete();
+  if(isDefined(a_ents[#"bottle3"].mdl_tube)) {
+    a_ents[#"bottle3"].mdl_tube delete();
   }
 
-  if(isDefined(a_ents[# "bottle1"].var_7b57e2cc)) {
-    a_ents[# "bottle1"].var_7b57e2cc delete();
+  if(isDefined(a_ents[#"bottle1"].var_7b57e2cc)) {
+    a_ents[#"bottle1"].var_7b57e2cc delete();
   }
 
-  if(isDefined(a_ents[# "bottle2"].var_7b57e2cc)) {
-    a_ents[# "bottle2"].var_7b57e2cc delete();
+  if(isDefined(a_ents[#"bottle2"].var_7b57e2cc)) {
+    a_ents[#"bottle2"].var_7b57e2cc delete();
   }
 
-  if(isDefined(a_ents[# "bottle3"].var_7b57e2cc)) {
-    a_ents[# "bottle3"].var_7b57e2cc delete();
+  if(isDefined(a_ents[#"bottle3"].var_7b57e2cc)) {
+    a_ents[#"bottle3"].var_7b57e2cc delete();
   }
 }
 
 function_7af39f9a(localclientnum, a_ents) {
-  function_8cd01001(localclientnum, a_ents[# "bottle_fluid_01"], a_ents[# "bottle_fluid_02"], a_ents[# "bottle_fluid_03"]);
+  function_8cd01001(localclientnum, a_ents[#"bottle_fluid_01"], a_ents[#"bottle_fluid_02"], a_ents[#"bottle_fluid_03"]);
 }
 
 function_8cd01001(localclientnum, var_77a22652, var_bd6d31e7, var_db346d75) {
@@ -1815,42 +1815,42 @@ function_cdd906ed(localclientnum, a_ents) {
   self notify("18138586312830ef");
   self endon("18138586312830ef");
   level endon(#"laboratory_closed");
-  a_ents[# "centrifuge_fluid"] thread function_7492cbc7(0.1, #"hash_277fc24714d9ad5b", 1);
+  a_ents[#"centrifuge_fluid"] thread function_7492cbc7(0.1, #"hash_277fc24714d9ad5b", 1);
   level waittill(#"centrifuge_fluid_drained", #"hash_1d604ddf352ddcca");
 
-  if(isDefined(a_ents[# "centrifuge_fluid"])) {
-    a_ents[# "centrifuge_fluid"] notify(#"hash_333aed9939c9fe17");
+  if(isDefined(a_ents[#"centrifuge_fluid"])) {
+    a_ents[#"centrifuge_fluid"] notify(#"hash_333aed9939c9fe17");
   }
 }
 
 function_94c307e0(localclientnum, a_ents, str_shot) {
   if(!isDefined(level.var_49f26c00.var_53ec42bc) && self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_mixer_fluid_01_bundle") {
-    level.var_49f26c00.var_53ec42bc = a_ents[# "mixer_fluid"];
+    level.var_49f26c00.var_53ec42bc = a_ents[#"mixer_fluid"];
   }
 
   if(self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_mixer_fluid_01_bundle" && str_shot == "mixer_activate") {
-    level.var_49f26c00.var_53ec42bc.var_9270c414 = util::playFXOnTag(localclientnum, level._effect[# "hash_43b44402af23c93c"], level.var_49f26c00.var_53ec42bc, "mixer_01_bath_fluid_fx_jnt");
+    level.var_49f26c00.var_53ec42bc.var_9270c414 = util::playFXOnTag(localclientnum, level._effect[#"hash_43b44402af23c93c"], level.var_49f26c00.var_53ec42bc, "mixer_01_bath_fluid_fx_jnt");
   }
 
   if(!isDefined(level.var_49f26c00.var_1266bfca) && self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_mixer_fluid_02_bundle") {
-    level.var_49f26c00.var_1266bfca = a_ents[# "mixer_fluid"];
+    level.var_49f26c00.var_1266bfca = a_ents[#"mixer_fluid"];
   }
 
   if(self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_mixer_fluid_02_bundle" && str_shot == "mixer_activate") {
-    level.var_49f26c00.var_1266bfca.var_9270c414 = util::playFXOnTag(localclientnum, level._effect[# "hash_43b44402af23c93c"], level.var_49f26c00.var_1266bfca, "mixer_02_bath_fluid_fx_jnt");
+    level.var_49f26c00.var_1266bfca.var_9270c414 = util::playFXOnTag(localclientnum, level._effect[#"hash_43b44402af23c93c"], level.var_49f26c00.var_1266bfca, "mixer_02_bath_fluid_fx_jnt");
   }
 
   if(!isDefined(level.var_49f26c00.var_ffa61a49) && self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_mixer_fluid_03_bundle") {
-    level.var_49f26c00.var_ffa61a49 = a_ents[# "mixer_fluid"];
+    level.var_49f26c00.var_ffa61a49 = a_ents[#"mixer_fluid"];
   }
 
   if(self.scriptbundlename === # "p8_fxanim_core_frontend_zm_lab_mixer_fluid_03_bundle" && str_shot == "mixer_activate") {
-    level.var_49f26c00.var_ffa61a49.var_9270c414 = util::playFXOnTag(localclientnum, level._effect[# "hash_43b44402af23c93c"], level.var_49f26c00.var_ffa61a49, "mixer_03_bath_fluid_fx_jnt");
+    level.var_49f26c00.var_ffa61a49.var_9270c414 = util::playFXOnTag(localclientnum, level._effect[#"hash_43b44402af23c93c"], level.var_49f26c00.var_ffa61a49, "mixer_03_bath_fluid_fx_jnt");
   }
 
   if(str_shot == "mixer_activate") {
-    if(isDefined(a_ents[# "mixer_fluid"])) {
-      a_ents[# "mixer_fluid"] thread function_7492cbc7(0.1, undefined, 1);
+    if(isDefined(a_ents[#"mixer_fluid"])) {
+      a_ents[#"mixer_fluid"] thread function_7492cbc7(0.1, undefined, 1);
     }
 
     return;

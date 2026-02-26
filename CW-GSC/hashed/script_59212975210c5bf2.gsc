@@ -57,9 +57,9 @@ function private function_cc775529(s_instance) {
   s_instance callback::function_d8abfc3d(#"portal_activated", &function_eda98f63);
   level callback::add_callback(#"hash_594217387367ebb4", &function_eda98f63, s_instance);
   level callback::add_callback(#"on_host_migration_begin", &function_b95aa184);
-  s_start = s_instance.contentgroups[# "hash_1c8503ea56f80cf7"][0];
-  var_8969e152 = s_instance.contentgroups[# "hash_1c8504ea56f80eaa"][0];
-  s_end = s_instance.contentgroups[# "hash_1c8505ea56f8105d"][0];
+  s_start = s_instance.contentgroups[#"hash_1c8503ea56f80cf7"][0];
+  var_8969e152 = s_instance.contentgroups[#"hash_1c8504ea56f80eaa"][0];
+  s_end = s_instance.contentgroups[#"hash_1c8505ea56f8105d"][0];
   mdl_orb = content_manager::spawn_script_model(s_start, #"p7_zm_ctl_deathray_sphere");
   mdl_orb setscale(0.5);
   mdl_orb playSound(#"hash_55b5e35f7d261fee");

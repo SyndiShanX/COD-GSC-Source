@@ -1659,7 +1659,7 @@ function spawnpointupdate(spawnpoint) {
     }
   } else {
     spawnpoint.enemysights = 0;
-    spawnpoint.nearbyplayers[# "all"] = [];
+    spawnpoint.nearbyplayers[#"all"] = [];
   }
 
   spawnpointdir = spawnpoint.forward;
@@ -1671,7 +1671,7 @@ function spawnpointupdate(spawnpoint) {
   distsum = [];
 
   if(!level.teambased) {
-    mindist[# "all"] = 9999999;
+    mindist[#"all"] = 9999999;
   }
 
   foreach(team, _ in level.teams) {
@@ -1742,9 +1742,9 @@ function spawnpointupdate(spawnpoint) {
     return;
   }
 
-  spawnpoint.distsum[# "all"] = distsum[# "all"];
-  spawnpoint.enemydistsum[# "all"] = distsum[# "all"];
-  spawnpoint.minenemydist[# "all"] = mindist[# "all"];
+  spawnpoint.distsum[#"all"] = distsum[#"all"];
+  spawnpoint.enemydistsum[#"all"] = distsum[#"all"];
+  spawnpoint.minenemydist[#"all"] = mindist[#"all"];
 }
 
 function getlospenalty() {

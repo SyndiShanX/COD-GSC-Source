@@ -28,12 +28,12 @@ __init__() {
   clientfield::register("scriptmover", "" + # "hash_51657261e835ac7c", 1, n_bits, "int", &function_724af26a, 0, 0);
   clientfield::register("toplayer", "" + # "tomahawk_pickup_fx", 13000, 1, "int", &function_1302ffdd, 0, 0);
   clientfield::register("toplayer", "" + # "hash_51657261e835ac7c", 13000, 1, "int", &function_c17bd665, 0, 0);
-  level._effect[# "hell_portal"] = "maps/zm_escape/fx8_wolf_portal_hell";
-  level._effect[# "hell_portal_close"] = "maps/zm_escape/fx8_wolf_portal_hell_close";
-  level._effect[# "soul_charged"] = "maps/zm_escape/fx8_wolf_soul_charged";
-  level._effect[# "soul_charge_start"] = "maps/zm_escape/fx8_wolf_soul_charge_start";
-  level._effect[# "soul_charge_impact"] = "maps/zm_escape/fx8_wolf_soul_charge_impact_sm";
-  level._effect[# "wolf_bite_blood"] = "maps/zm_escape/fx8_wolf_soul_charge_impact";
+  level._effect[#"hell_portal"] = "maps/zm_escape/fx8_wolf_portal_hell";
+  level._effect[#"hell_portal_close"] = "maps/zm_escape/fx8_wolf_portal_hell_close";
+  level._effect[#"soul_charged"] = "maps/zm_escape/fx8_wolf_soul_charged";
+  level._effect[#"soul_charge_start"] = "maps/zm_escape/fx8_wolf_soul_charge_start";
+  level._effect[#"soul_charge_impact"] = "maps/zm_escape/fx8_wolf_soul_charge_impact_sm";
+  level._effect[#"wolf_bite_blood"] = "maps/zm_escape/fx8_wolf_soul_charge_impact";
 }
 
 function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -42,7 +42,7 @@ function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       stopfx(localclientnum, self.var_8eb4e749);
     }
 
-    self.var_8eb4e749 = util::playFXOnTag(localclientnum, level._effect[# "hell_portal"], self, "tag_origin");
+    self.var_8eb4e749 = util::playFXOnTag(localclientnum, level._effect[#"hell_portal"], self, "tag_origin");
     self playSound(localclientnum, #"hash_6e048d37333004da");
 
     if(!isDefined(self.var_dd081ca4)) {
@@ -63,7 +63,7 @@ function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self stoploopsound(self.var_dd081ca4);
   }
 
-  self.var_8eb4e749 = util::playFXOnTag(localclientnum, level._effect[# "hell_portal_close"], self, "tag_origin");
+  self.var_8eb4e749 = util::playFXOnTag(localclientnum, level._effect[#"hell_portal_close"], self, "tag_origin");
   wait 0.5;
 
   if(isDefined(self)) {
@@ -71,7 +71,7 @@ function_e4a48a64(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       stopfx(localclientnum, self.var_78ef40db);
     }
 
-    self.var_78ef40db = util::playFXOnTag(localclientnum, level._effect[# "soul_charged"], self, "tag_origin");
+    self.var_78ef40db = util::playFXOnTag(localclientnum, level._effect[#"soul_charged"], self, "tag_origin");
   }
 }
 
@@ -81,7 +81,7 @@ function_b543a4ed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       stopfx(localclientnum, self.var_f74c7894);
     }
 
-    self.var_f74c7894 = util::playFXOnTag(localclientnum, level._effect[# "soul_charge_start"], self, "tag_origin");
+    self.var_f74c7894 = util::playFXOnTag(localclientnum, level._effect[#"soul_charge_start"], self, "tag_origin");
     return;
   }
 
@@ -96,7 +96,7 @@ function_1f632068(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     stopfx(localclientnum, self.var_d634930c);
   }
 
-  self.var_d634930c = util::playFXOnTag(localclientnum, level._effect[# "soul_charge_impact"], self, "TAG_MOUTH_FX");
+  self.var_d634930c = util::playFXOnTag(localclientnum, level._effect[#"soul_charge_impact"], self, "TAG_MOUTH_FX");
 }
 
 function_63eff42e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -104,7 +104,7 @@ function_63eff42e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     stopfx(localclientnum, self.var_d634930c);
   }
 
-  self.var_d634930c = util::playFXOnTag(localclientnum, level._effect[# "wolf_bite_blood"], self, "TAG_MOUTH_FX");
+  self.var_d634930c = util::playFXOnTag(localclientnum, level._effect[#"wolf_bite_blood"], self, "TAG_MOUTH_FX");
 }
 
 function_dfe17a5d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -122,7 +122,7 @@ function_dfe17a5d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     a_e_players = getlocalplayers();
 
     if(array::contains(a_e_players, e_player)) {
-      self.n_fx_id = playFX(localclientnum, level._effect[# "tomahawk_pickup"], self.origin - (0, 0, 24));
+      self.n_fx_id = playFX(localclientnum, level._effect[#"tomahawk_pickup"], self.origin - (0, 0, 24));
     }
   }
 }
@@ -141,7 +141,7 @@ function_724af26a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   a_e_players = getlocalplayers();
 
   if(array::contains(a_e_players, e_player)) {
-    self.var_e7b65a20 = util::playFXOnTag(localclientnum, level._effect[# "tomahawk_pickup_upgrade"], self, "tag_origin");
+    self.var_e7b65a20 = util::playFXOnTag(localclientnum, level._effect[#"tomahawk_pickup_upgrade"], self, "tag_origin");
   }
 }
 
@@ -154,7 +154,7 @@ function_1302ffdd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.n_tomahawk_pickup_fx = playFX(localclientnum, level._effect[# "tomahawk_pickup"], var_4488630f.origin - (0, 0, 24));
+    self.n_tomahawk_pickup_fx = playFX(localclientnum, level._effect[#"tomahawk_pickup"], var_4488630f.origin - (0, 0, 24));
   }
 }
 
@@ -167,6 +167,6 @@ function_c17bd665(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.n_tomahawk_pickup_fx = playFX(localclientnum, level._effect[# "tomahawk_pickup_upgrade"], var_4488630f.origin - (0, 0, 24));
+    self.n_tomahawk_pickup_fx = playFX(localclientnum, level._effect[#"tomahawk_pickup_upgrade"], var_4488630f.origin - (0, 0, 24));
   }
 }

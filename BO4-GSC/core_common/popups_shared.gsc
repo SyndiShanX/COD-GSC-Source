@@ -107,10 +107,10 @@ devgui_create_weapon_levels_table() {
         reference_s = iteminfo.namehash;
 
         if(reference_s != "<dev string:x50>") {
-          level.tbl_weaponids[i][# "reference"] = reference_s;
-          level.tbl_weaponids[i][# "group"] = group_s;
-          level.tbl_weaponids[i][# "count"] = iteminfo.count;
-          level.tbl_weaponids[i][# "attachment"] = iteminfo.attachments;
+          level.tbl_weaponids[i][#"reference"] = reference_s;
+          level.tbl_weaponids[i][#"group"] = group_s;
+          level.tbl_weaponids[i][#"count"] = iteminfo.count;
+          level.tbl_weaponids[i][#"attachment"] = iteminfo.attachments;
         }
       }
     }
@@ -215,63 +215,63 @@ notif_devgui_gun_rank() {
   }
 
   a_weapons = [];
-  a_weapons[# "assault"] = [];
-  a_weapons[# "tactical"] = [];
-  a_weapons[# "smg"] = [];
-  a_weapons[# "lmg"] = [];
-  a_weapons[# "shotgun"] = [];
-  a_weapons[# "sniper"] = [];
-  a_weapons[# "pistol"] = [];
-  a_weapons[# "launcher"] = [];
-  a_weapons[# "knife"] = [];
+  a_weapons[#"assault"] = [];
+  a_weapons[#"tactical"] = [];
+  a_weapons[#"smg"] = [];
+  a_weapons[#"lmg"] = [];
+  a_weapons[#"shotgun"] = [];
+  a_weapons[#"sniper"] = [];
+  a_weapons[#"pistol"] = [];
+  a_weapons[#"launcher"] = [];
+  a_weapons[#"knife"] = [];
   gun_levels_table = devgui_notif_getgunleveltablename();
 
   foreach(weapon in level.tbl_weaponids) {
     gun = [];
-    gun[# "ref"] = weapon[# "reference"];
-    gun[# "itemindex"] = getitemindexfromref(weapon[# "reference"]);
-    gun[# "attachments"] = [];
-    gun_weapon_attachments = weapon[# "attachment"];
+    gun[#"ref"] = weapon[#"reference"];
+    gun[#"itemindex"] = getitemindexfromref(weapon[#"reference"]);
+    gun[#"attachments"] = [];
+    gun_weapon_attachments = weapon[#"attachment"];
 
     if(isDefined(gun_weapon_attachments) && isarray(gun_weapon_attachments)) {
       foreach(attachment in gun_weapon_attachments) {
-        gun[# "attachments"][attachment] = [];
-        gun[# "attachments"][attachment][# "itemindex"] = getattachmenttableindex(attachment);
-        gun[# "attachments"][attachment][# "rankid"] = tablelookup(gun_levels_table, gunlevel_gunref_col, gun[# "ref"], gunlevel_attachment_unlock_col, attachment, gunlevel_rankid_col);
-        gun[# "attachments"][attachment][# "xp"] = tablelookup(gun_levels_table, gunlevel_gunref_col, gun[# "ref"], gunlevel_attachment_unlock_col, attachment, gunlevel_xpgained_col);
+        gun[#"attachments"][attachment] = [];
+        gun[#"attachments"][attachment][#"itemindex"] = getattachmenttableindex(attachment);
+        gun[#"attachments"][attachment][#"rankid"] = tablelookup(gun_levels_table, gunlevel_gunref_col, gun[#"ref"], gunlevel_attachment_unlock_col, attachment, gunlevel_rankid_col);
+        gun[#"attachments"][attachment][#"xp"] = tablelookup(gun_levels_table, gunlevel_gunref_col, gun[#"ref"], gunlevel_attachment_unlock_col, attachment, gunlevel_xpgained_col);
       }
     }
 
-    switch (weapon[# "group"]) {
+    switch (weapon[#"group"]) {
       case # "weapon_pistol":
-        if(weapon[# "reference"] != "<dev string:x134>") {
-          arrayinsert(a_weapons[# "pistol"], gun, 0);
+        if(weapon[#"reference"] != "<dev string:x134>") {
+          arrayinsert(a_weapons[#"pistol"], gun, 0);
         }
 
         break;
       case # "weapon_launcher":
-        arrayinsert(a_weapons[# "launcher"], gun, 0);
+        arrayinsert(a_weapons[#"launcher"], gun, 0);
         break;
       case # "weapon_assault":
-        arrayinsert(a_weapons[# "assault"], gun, 0);
+        arrayinsert(a_weapons[#"assault"], gun, 0);
         break;
       case # "weapon_tactical":
-        arrayinsert(a_weapons[# "tactical"], gun, 0);
+        arrayinsert(a_weapons[#"tactical"], gun, 0);
         break;
       case # "weapon_smg":
-        arrayinsert(a_weapons[# "smg"], gun, 0);
+        arrayinsert(a_weapons[#"smg"], gun, 0);
         break;
       case # "weapon_lmg":
-        arrayinsert(a_weapons[# "lmg"], gun, 0);
+        arrayinsert(a_weapons[#"lmg"], gun, 0);
         break;
       case # "weapon_cqb":
-        arrayinsert(a_weapons[# "shotgun"], gun, 0);
+        arrayinsert(a_weapons[#"shotgun"], gun, 0);
         break;
       case # "weapon_sniper":
-        arrayinsert(a_weapons[# "sniper"], gun, 0);
+        arrayinsert(a_weapons[#"sniper"], gun, 0);
         break;
       case # "weapon_knife":
-        arrayinsert(a_weapons[# "knife"], gun, 0);
+        arrayinsert(a_weapons[#"knife"], gun, 0);
         break;
       default:
         break;
@@ -280,10 +280,10 @@ notif_devgui_gun_rank() {
 
   foreach(group_name, gun_group in a_weapons) {
     foreach(gun, attachment_group in gun_group) {
-      foreach(attachment, attachment_data in attachment_group[# "attachments"]) {
-        devgui_cmd_gun_path = notif_gun_rank_devgui_base + function_9e72a96(group_name) + "<dev string:x142>" + function_9e72a96(gun_group[gun][# "ref"]) + "<dev string:x142>" + function_9e72a96(attachment);
+      foreach(attachment, attachment_data in attachment_group[#"attachments"]) {
+        devgui_cmd_gun_path = notif_gun_rank_devgui_base + function_9e72a96(group_name) + "<dev string:x142>" + function_9e72a96(gun_group[gun][#"ref"]) + "<dev string:x142>" + function_9e72a96(attachment);
         util::waittill_can_add_debug_command();
-        adddebugcommand(devgui_cmd_gun_path + "<dev string:xc9>" + "<dev string:xce>" + "<dev string:x146>" + "<dev string:x14e>" + "<dev string:xea>" + attachment_data[# "xp"] + "<dev string:x146>" + "<dev string:x16c>" + "<dev string:xea>" + attachment_data[# "itemindex"] + "<dev string:x146>" + "<dev string:x198>" + "<dev string:xea>" + gun_group[gun][# "itemindex"] + "<dev string:x146>" + "<dev string:x1be>" + "<dev string:xea>" + attachment_data[# "rankid"] + "<dev string:xee>");
+        adddebugcommand(devgui_cmd_gun_path + "<dev string:xc9>" + "<dev string:xce>" + "<dev string:x146>" + "<dev string:x14e>" + "<dev string:xea>" + attachment_data[#"xp"] + "<dev string:x146>" + "<dev string:x16c>" + "<dev string:xea>" + attachment_data[#"itemindex"] + "<dev string:x146>" + "<dev string:x198>" + "<dev string:xea>" + gun_group[gun][#"itemindex"] + "<dev string:x146>" + "<dev string:x1be>" + "<dev string:xea>" + attachment_data[#"rankid"] + "<dev string:xee>");
       }
     }
 

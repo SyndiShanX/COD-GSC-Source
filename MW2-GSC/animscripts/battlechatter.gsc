@@ -3736,57 +3736,57 @@ battleChatter_printDump(aliases, descriptor) {
   level.lastDumpTime = GetTime(); // reset
 
   // -- CSV dumps help the audio dept optimize where they spend their time -- if(dumpType == "csv") {
-    // only 1 write at a time
-    if(!flag_exist("bcs_csv_dumpFileWriting")) {
-      flag_init("bcs_csv_dumpFileWriting");
-    }
-
-    // open the file, if it's not already open
-    if(!isDefined(level.bcs_csv_dumpFile)) {
-      filePath = "scriptgen/battlechatter/bcsDump_" + level.script + ".csv";
-      level.bcs_csv_dumpFile = OpenFile(filePath, "write");
-    }
-
-    // dump a new line for each sound
-    // format: levelname,countryID,npcID,aliasType
-    foreach(alias in aliases) {
-      aliasType = getAliasTypeFromSoundalias(alias);
-
-      dumpString = level.script + "," + self.countryID + "," + self.npcID + "," + aliasType;
-
-      battleChatter_printDumpLine(level.bcs_csv_dumpFile, dumpString, "bcs_csv_dumpFileWriting");
-    }
+  // only 1 write at a time
+  if(!flag_exist("bcs_csv_dumpFileWriting")) {
+    flag_init("bcs_csv_dumpFileWriting");
   }
 
-  // -- TXT dumps help the design dept tweak distributions and timing -- else if(dumpType == "txt") {
-    AssertEx(isDefined(descriptor), "battlechatter print dumps of type 'txt' require a descriptor!");
-
-    if(!flag_exist("bcs_txt_dumpFileWriting")) {
-      flag_init("bcs_txt_dumpFileWriting");
-    }
-
-    if(!isDefined(level.bcs_txt_dumpFile)) {
-      filePath = "scriptgen/battlechatter/bcsDump_" + level.script + ".txt";
-      level.bcs_txt_dumpFile = OpenFile(filePath, "write");
-    }
-
-    name = self.name;
-    if(enemy_team_name()) {
-      name = self.ainame;
-    }
-
-    // format: (2.3 secs) US_1 order_move_follow: US_1_threat_rpg_generic, US_1_landmark_near_cargocontainer, US_1_direction_relative_north
-    dumpString = "(" + secsSinceLastDump + " secs) ";
-    dumpString += name + " " + descriptor + ": ";
-    foreach(i, alias in aliases) {
-      dumpString += alias;
-      if(i != (aliases.size - 1)) {
-        dumpString += ", ";
-      }
-    }
-
-    battleChatter_printDumpLine(level.bcs_txt_dumpFile, dumpString, "bcs_txt_dumpFileWriting");
+  // open the file, if it's not already open
+  if(!isDefined(level.bcs_csv_dumpFile)) {
+    filePath = "scriptgen/battlechatter/bcsDump_" + level.script + ".csv";
+    level.bcs_csv_dumpFile = OpenFile(filePath, "write");
   }
+
+  // dump a new line for each sound
+  // format: levelname,countryID,npcID,aliasType
+  foreach(alias in aliases) {
+    aliasType = getAliasTypeFromSoundalias(alias);
+
+    dumpString = level.script + "," + self.countryID + "," + self.npcID + "," + aliasType;
+
+    battleChatter_printDumpLine(level.bcs_csv_dumpFile, dumpString, "bcs_csv_dumpFileWriting");
+  }
+}
+
+// -- TXT dumps help the design dept tweak distributions and timing -- else if(dumpType == "txt") {
+AssertEx(isDefined(descriptor), "battlechatter print dumps of type 'txt' require a descriptor!");
+
+if(!flag_exist("bcs_txt_dumpFileWriting")) {
+  flag_init("bcs_txt_dumpFileWriting");
+}
+
+if(!isDefined(level.bcs_txt_dumpFile)) {
+  filePath = "scriptgen/battlechatter/bcsDump_" + level.script + ".txt";
+  level.bcs_txt_dumpFile = OpenFile(filePath, "write");
+}
+
+name = self.name;
+if(enemy_team_name()) {
+  name = self.ainame;
+}
+
+// format: (2.3 secs) US_1 order_move_follow: US_1_threat_rpg_generic, US_1_landmark_near_cargocontainer, US_1_direction_relative_north
+dumpString = "(" + secsSinceLastDump + " secs) ";
+dumpString += name + " " + descriptor + ": ";
+foreach(i, alias in aliases) {
+  dumpString += alias;
+  if(i != (aliases.size - 1)) {
+    dumpString += ", ";
+  }
+}
+
+battleChatter_printDumpLine(level.bcs_txt_dumpFile, dumpString, "bcs_txt_dumpFileWriting");
+}
 }
 
 getAliasTypeFromSoundalias(alias) {

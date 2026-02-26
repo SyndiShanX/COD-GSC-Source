@@ -35,36 +35,36 @@ __init__() {
   clientfield::register("vehicle", "" + # "chakram_whirlwind_shred_fx", 1, 1, "counter");
   clientfield::register("toplayer", "" + # "chakram_speed_buff_postfx", 1, 1, "counter");
   clientfield::register("toplayer", "" + # "chakram_rumble", 1, 3, "counter");
-  level.hero_weapon[# "chakram"][0] = getweapon(#"hero_chakram_lv1");
-  level.hero_weapon[# "chakram"][1] = getweapon(#"hero_chakram_lv2");
-  level.hero_weapon[# "chakram"][2] = getweapon(#"hero_chakram_lv3");
+  level.hero_weapon[#"chakram"][0] = getweapon(#"hero_chakram_lv1");
+  level.hero_weapon[#"chakram"][1] = getweapon(#"hero_chakram_lv2");
+  level.hero_weapon[#"chakram"][2] = getweapon(#"hero_chakram_lv3");
 
   if(!isDefined(level.hero_weapon_stats)) {
     level.hero_weapon_stats = [];
   }
 
-  level.hero_weapon_stats[# "chakram"] = [];
-  level.hero_weapon_stats[# "chakram"][# "delay_start"][0] = 0.25;
-  level.hero_weapon_stats[# "chakram"][# "delay_start"][1] = 0.15;
-  level.hero_weapon_stats[# "chakram"][# "delay_start"][2] = 0.1;
-  level.hero_weapon_stats[# "chakram"][# "delay_end"][0] = 0.4;
-  level.hero_weapon_stats[# "chakram"][# "delay_end"][1] = 0.25;
-  level.hero_weapon_stats[# "chakram"][# "delay_end"][2] = 0.12;
-  level.hero_weapon_stats[# "chakram"][# "kill_limit"][0] = 4;
-  level.hero_weapon_stats[# "chakram"][# "kill_limit"][1] = 4;
-  level.hero_weapon_stats[# "chakram"][# "kill_limit"][2] = 4;
-  level.hero_weapon_stats[# "chakram"][# "max_range"][0] = 512;
-  level.hero_weapon_stats[# "chakram"][# "max_range"][1] = 756;
-  level.hero_weapon_stats[# "chakram"][# "max_range"][2] = 1024;
-  level.hero_weapon_stats[# "chakram"][# "seek_range"][0] = 256;
-  level.hero_weapon_stats[# "chakram"][# "seek_range"][1] = 384;
-  level.hero_weapon_stats[# "chakram"][# "seek_range"][2] = 512;
-  level.hero_weapon_stats[# "chakram"][# "travel_time"][0] = 0.4;
-  level.hero_weapon_stats[# "chakram"][# "travel_time"][1] = 0.5;
-  level.hero_weapon_stats[# "chakram"][# "travel_time"][2] = 0.7;
-  level.hero_weapon_stats[# "chakram"][# "throw_model"][0] = "wpn_t8_zm_melee_chakram_lvl1_dw_projectile";
-  level.hero_weapon_stats[# "chakram"][# "throw_model"][1] = "wpn_t8_zm_melee_chakram_lvl2_dw_projectile";
-  level.hero_weapon_stats[# "chakram"][# "throw_model"][2] = "wpn_t8_zm_melee_chakram_lvl3_dw_projectile";
+  level.hero_weapon_stats[#"chakram"] = [];
+  level.hero_weapon_stats[#"chakram"][#"delay_start"][0] = 0.25;
+  level.hero_weapon_stats[#"chakram"][#"delay_start"][1] = 0.15;
+  level.hero_weapon_stats[#"chakram"][#"delay_start"][2] = 0.1;
+  level.hero_weapon_stats[#"chakram"][#"delay_end"][0] = 0.4;
+  level.hero_weapon_stats[#"chakram"][#"delay_end"][1] = 0.25;
+  level.hero_weapon_stats[#"chakram"][#"delay_end"][2] = 0.12;
+  level.hero_weapon_stats[#"chakram"][#"kill_limit"][0] = 4;
+  level.hero_weapon_stats[#"chakram"][#"kill_limit"][1] = 4;
+  level.hero_weapon_stats[#"chakram"][#"kill_limit"][2] = 4;
+  level.hero_weapon_stats[#"chakram"][#"max_range"][0] = 512;
+  level.hero_weapon_stats[#"chakram"][#"max_range"][1] = 756;
+  level.hero_weapon_stats[#"chakram"][#"max_range"][2] = 1024;
+  level.hero_weapon_stats[#"chakram"][#"seek_range"][0] = 256;
+  level.hero_weapon_stats[#"chakram"][#"seek_range"][1] = 384;
+  level.hero_weapon_stats[#"chakram"][#"seek_range"][2] = 512;
+  level.hero_weapon_stats[#"chakram"][#"travel_time"][0] = 0.4;
+  level.hero_weapon_stats[#"chakram"][#"travel_time"][1] = 0.5;
+  level.hero_weapon_stats[#"chakram"][#"travel_time"][2] = 0.7;
+  level.hero_weapon_stats[#"chakram"][#"throw_model"][0] = "wpn_t8_zm_melee_chakram_lvl1_dw_projectile";
+  level.hero_weapon_stats[#"chakram"][#"throw_model"][1] = "wpn_t8_zm_melee_chakram_lvl2_dw_projectile";
+  level.hero_weapon_stats[#"chakram"][#"throw_model"][2] = "wpn_t8_zm_melee_chakram_lvl3_dw_projectile";
   zm_loadout::register_hero_weapon_for_level("hero_chakram_lv1");
   zm_loadout::register_hero_weapon_for_level("hero_chakram_lv2");
   zm_loadout::register_hero_weapon_for_level("hero_chakram_lv3");
@@ -85,9 +85,9 @@ __init__() {
 
   callback::on_connect(&function_1d807685);
   callback::on_disconnect(&on_player_disconnect);
-  callback::add_weapon_fired(level.hero_weapon[# "chakram"][0].dualwieldweapon, &function_cec4ebbd);
-  callback::add_weapon_fired(level.hero_weapon[# "chakram"][1].dualwieldweapon, &function_cec4ebbd);
-  callback::add_weapon_fired(level.hero_weapon[# "chakram"][2].dualwieldweapon, &function_cec4ebbd);
+  callback::add_weapon_fired(level.hero_weapon[#"chakram"][0].dualwieldweapon, &function_cec4ebbd);
+  callback::add_weapon_fired(level.hero_weapon[#"chakram"][1].dualwieldweapon, &function_cec4ebbd);
+  callback::add_weapon_fired(level.hero_weapon[#"chakram"][2].dualwieldweapon, &function_cec4ebbd);
 }
 
 function_1d807685() {
@@ -102,15 +102,15 @@ function_1d807685() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "chakram"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"chakram"], wpn_cur)) {
       self notify(#"hero_chakram_activated");
       self thread function_c965a5a9(wpn_cur);
       self thread queue_setrotors(wpn_cur);
-    } else if(isinarray(level.hero_weapon[# "chakram"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"chakram"], wpn_prev)) {
       self thread function_7bef3ea0(wpn_prev);
     }
 
-    if(wpn_cur == level.hero_weapon[# "chakram"][0]) {
+    if(wpn_cur == level.hero_weapon[#"chakram"][0]) {
       self thread chakram_rumble(1);
 
       if(!self gamepadusedlast()) {
@@ -122,7 +122,7 @@ function_1d807685() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "chakram"][1]) {
+    if(wpn_cur == level.hero_weapon[#"chakram"][1]) {
       self thread chakram_rumble(1);
 
       if(!self gamepadusedlast()) {
@@ -135,7 +135,7 @@ function_1d807685() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "chakram"][2]) {
+    if(wpn_cur == level.hero_weapon[#"chakram"][2]) {
       self thread chakram_rumble(1);
 
       if(!self gamepadusedlast()) {
@@ -170,7 +170,7 @@ function_c965a5a9(weapon) {
   self endon(#"weapon_change", #"disconnect", #"bled_out");
 
   while(true) {
-    if(weapon == level.hero_weapon[# "chakram"][2]) {
+    if(weapon == level.hero_weapon[#"chakram"][2]) {
       self waittill(#"weapon_melee_power");
     } else {
       self waittill(#"weapon_melee_power", #"weapon_melee");
@@ -324,16 +324,16 @@ queue_setrotors(weapon) {
 function_dc7f8e67(player) {
   player endon(#"death", #"seeker_done");
   player.var_30cbff55 = 1;
-  var_e9ada947 = level.hero_weapon_stats[# "chakram"][# "delay_start"][player.var_72d6f15d];
-  var_9884ff29 = level.hero_weapon_stats[# "chakram"][# "delay_end"][player.var_72d6f15d];
-  var_fc51fa3d = level.hero_weapon_stats[# "chakram"][# "kill_limit"][player.var_72d6f15d];
-  var_e68de849 = level.hero_weapon_stats[# "chakram"][# "max_range"][player.var_72d6f15d];
-  var_931acaa7 = level.hero_weapon_stats[# "chakram"][# "seek_range"][player.var_72d6f15d];
+  var_e9ada947 = level.hero_weapon_stats[#"chakram"][#"delay_start"][player.var_72d6f15d];
+  var_9884ff29 = level.hero_weapon_stats[#"chakram"][#"delay_end"][player.var_72d6f15d];
+  var_fc51fa3d = level.hero_weapon_stats[#"chakram"][#"kill_limit"][player.var_72d6f15d];
+  var_e68de849 = level.hero_weapon_stats[#"chakram"][#"max_range"][player.var_72d6f15d];
+  var_931acaa7 = level.hero_weapon_stats[#"chakram"][#"seek_range"][player.var_72d6f15d];
   wait var_e9ada947;
   n_kills = 0;
 
   if(!isDefined(player.e_seeker)) {
-    e_seeker = util::spawn_model(level.hero_weapon_stats[# "chakram"][# "throw_model"][player.var_72d6f15d], player gettagorigin("tag_weapon_left"));
+    e_seeker = util::spawn_model(level.hero_weapon_stats[#"chakram"][#"throw_model"][player.var_72d6f15d], player gettagorigin("tag_weapon_left"));
     player.e_seeker = e_seeker;
     e_seeker.var_fee68611 = [];
     e_seeker.var_8d8b7454 = [];
@@ -342,7 +342,7 @@ function_dc7f8e67(player) {
     e_seeker.var_fee68611 = [];
     e_seeker.var_8d8b7454 = [];
     e_seeker.origin = player gettagorigin("tag_weapon_left");
-    e_seeker setModel(level.hero_weapon_stats[# "chakram"][# "throw_model"][player.var_72d6f15d]);
+    e_seeker setModel(level.hero_weapon_stats[#"chakram"][#"throw_model"][player.var_72d6f15d]);
     e_seeker show();
   }
 
@@ -381,7 +381,7 @@ function_dc7f8e67(player) {
   wait var_9884ff29;
 
   if(isalive(player)) {
-    player setweaponammoclip(player.slot_weapons[# "hero_weapon"], 1);
+    player setweaponammoclip(player.slot_weapons[#"hero_weapon"], 1);
   }
 
   player.var_fbe120be = 0;
@@ -392,16 +392,16 @@ function_dc7f8e67(player) {
 function_e3ad524a() {
   self endon(#"death", #"seeker_done");
   self.e_seeker endon(#"death");
-  var_e68de849 = level.hero_weapon_stats[# "chakram"][# "max_range"][self.var_72d6f15d];
-  var_931acaa7 = level.hero_weapon_stats[# "chakram"][# "seek_range"][self.var_72d6f15d] / 1.5;
-  var_afbf7a56 = level.hero_weapon_stats[# "chakram"][# "travel_time"][self.var_72d6f15d];
+  var_e68de849 = level.hero_weapon_stats[#"chakram"][#"max_range"][self.var_72d6f15d];
+  var_931acaa7 = level.hero_weapon_stats[#"chakram"][#"seek_range"][self.var_72d6f15d] / 1.5;
+  var_afbf7a56 = level.hero_weapon_stats[#"chakram"][#"travel_time"][self.var_72d6f15d];
   v_start = self getEye();
   v_forward = self getweaponforwarddir();
   v_end = v_start + v_forward * var_e68de849;
   a_trace = bulletTrace(v_start, v_end, 0, self);
 
-  if(distancesquared(v_start, v_end) > distancesquared(v_start, a_trace[# "position"])) {
-    v_end = a_trace[# "position"];
+  if(distancesquared(v_start, v_end) > distancesquared(v_start, a_trace[#"position"])) {
+    v_end = a_trace[#"position"];
     n_dist = distance(v_start, v_end);
     var_c5eb6fda = n_dist * var_afbf7a56 / var_e68de849;
 
@@ -449,22 +449,22 @@ function_e3ad524a() {
       var_9cdda9f7 = n_time_current - var_5b08cfa;
 
       if(var_9cdda9f7 >= var_c5eb6fda) {
-        level thread function_8d4b8171(v_end, a_trace[# "normal"]);
+        level thread function_8d4b8171(v_end, a_trace[#"normal"]);
 
         if(isDefined(level.var_2e32e0bb)) {
           level notify(#"hero_weapon_hit", {
-            #player: self, #e_entity: a_trace[# "entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[# "position"]
+            #player: self, #e_entity: a_trace[#"entity"], #var_80e17549: self.currentweapon, #v_position: a_trace[#"position"]
           });
         }
 
         v_start = v_end;
-        v_forward -= 2 * a_trace[# "normal"] * vectordot(v_forward, a_trace[# "normal"]);
+        v_forward -= 2 * a_trace[#"normal"] * vectordot(v_forward, a_trace[#"normal"]);
         n_dist = var_e68de849 - n_dist;
         v_end = v_start + v_forward * n_dist;
         a_trace = bulletTrace(v_start, v_end, 0, self);
 
-        if(distancesquared(v_start, v_end) != distancesquared(v_start, a_trace[# "position"])) {
-          v_end = a_trace[# "position"];
+        if(distancesquared(v_start, v_end) != distancesquared(v_start, a_trace[#"position"])) {
+          v_end = a_trace[#"position"];
           n_dist = distance(v_start, v_end);
           var_5b08cfa = gettime() / 1000;
         } else {
@@ -566,12 +566,12 @@ function_46f125d(v_start, var_4d1ea1ad, v_forward) {
 function_3adb0798(e_target, n_kills) {
   self endon(#"death", #"seeker_done");
   self.e_seeker endon(#"death");
-  var_ece935b3 = level.hero_weapon_stats[# "chakram"][# "travel_time"][self.var_72d6f15d];
-  var_e68de849 = level.hero_weapon_stats[# "chakram"][# "max_range"][self.var_72d6f15d];
+  var_ece935b3 = level.hero_weapon_stats[#"chakram"][#"travel_time"][self.var_72d6f15d];
+  var_e68de849 = level.hero_weapon_stats[#"chakram"][#"max_range"][self.var_72d6f15d];
 
   if(!isDefined(e_target)) {
     e_target = self;
-    var_fc51fa3d = level.hero_weapon_stats[# "chakram"][# "kill_limit"][self.var_72d6f15d];
+    var_fc51fa3d = level.hero_weapon_stats[#"chakram"][#"kill_limit"][self.var_72d6f15d];
     var_ece935b3 /= 2;
   }
 
@@ -592,8 +592,8 @@ function_3adb0798(e_target, n_kills) {
       while(isDefined(n_kills) && n_kills < var_fc51fa3d) {
         s_trace = bulletTrace(self.e_seeker.origin, v_target, 1, self.e_seeker);
 
-        if(isDefined(s_trace[# "entity"]) && isinarray(getaiteamarray(level.zombie_team), s_trace[# "entity"])) {
-          self thread function_545dcea4(s_trace[# "entity"]);
+        if(isDefined(s_trace[#"entity"]) && isinarray(getaiteamarray(level.zombie_team), s_trace[#"entity"])) {
+          self thread function_545dcea4(s_trace[#"entity"]);
           n_kills++;
           continue;
         }
@@ -704,7 +704,7 @@ function_96835348(e_target) {
     weapon = undefined;
 
     if(isDefined(self)) {
-      weapon = self.slot_weapons[# "hero_weapon"];
+      weapon = self.slot_weapons[#"hero_weapon"];
     }
 
     e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_PROJECTILE", 0, weapon);

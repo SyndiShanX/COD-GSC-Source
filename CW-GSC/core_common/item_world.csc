@@ -1423,39 +1423,39 @@ function private function_43d3ebe1(&items) {
 
   waitframe(1);
 
-  if(isDefined(itemtypes[# "dogtag"])) {
-    foreach(entry in itemtypes[# "dogtag"]) {
+  if(isDefined(itemtypes[#"dogtag"])) {
+    foreach(entry in itemtypes[#"dogtag"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "quest"])) {
-    foreach(entry in itemtypes[# "quest"]) {
+  if(isDefined(itemtypes[#"quest"])) {
+    foreach(entry in itemtypes[#"quest"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "cash"])) {
-    foreach(entry in itemtypes[# "cash"]) {
+  if(isDefined(itemtypes[#"cash"])) {
+    foreach(entry in itemtypes[#"cash"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "armor"])) {
-    function_5cbe24ea(sorted, itemtypes[# "armor"], level.var_69ee9282);
+  if(isDefined(itemtypes[#"armor"])) {
+    function_5cbe24ea(sorted, itemtypes[#"armor"], level.var_69ee9282);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[# "armor_shard"])) {
-    foreach(entry in itemtypes[# "armor_shard"]) {
+  if(isDefined(itemtypes[#"armor_shard"])) {
+    foreach(entry in itemtypes[#"armor_shard"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "weapon"])) {
+  if(isDefined(itemtypes[#"weapon"])) {
     var_610b8743 = [];
 
-    foreach(item in itemtypes[# "weapon"]) {
+    foreach(item in itemtypes[#"weapon"]) {
       if(!isDefined(item)) {
         continue;
       }
@@ -1471,10 +1471,10 @@ function private function_43d3ebe1(&items) {
     }
   }
 
-  if(isDefined(itemtypes[# "weapon"])) {
+  if(isDefined(itemtypes[#"weapon"])) {
     weapons = [];
 
-    foreach(item in itemtypes[# "weapon"]) {
+    foreach(item in itemtypes[#"weapon"]) {
       if(!isDefined(item)) {
         continue;
       }
@@ -1490,117 +1490,117 @@ function private function_43d3ebe1(&items) {
     }
   }
 
-  if(isDefined(itemtypes[# "health"])) {
-    function_5cbe24ea(sorted, itemtypes[# "health"], level.var_9bc8c1bc);
+  if(isDefined(itemtypes[#"health"])) {
+    function_5cbe24ea(sorted, itemtypes[#"health"], level.var_9bc8c1bc);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[# "backpack"])) {
-    foreach(entry in itemtypes[# "backpack"]) {
+  if(isDefined(itemtypes[#"backpack"])) {
+    foreach(entry in itemtypes[#"backpack"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "attachment"])) {
-    function_5cbe24ea(sorted, itemtypes[# "attachment"], level.var_6cb314b1);
+  if(isDefined(itemtypes[#"attachment"])) {
+    function_5cbe24ea(sorted, itemtypes[#"attachment"], level.var_6cb314b1);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[# "killstreak"])) {
-    foreach(entry in itemtypes[# "killstreak"]) {
+  if(isDefined(itemtypes[#"killstreak"])) {
+    foreach(entry in itemtypes[#"killstreak"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "field_upgrade"])) {
-    foreach(entry in itemtypes[# "field_upgrade"]) {
+  if(isDefined(itemtypes[#"field_upgrade"])) {
+    foreach(entry in itemtypes[#"field_upgrade"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "equipment"])) {
-    function_5cbe24ea(sorted, itemtypes[# "equipment"], level.var_3fd5d8f0);
+  if(isDefined(itemtypes[#"equipment"])) {
+    function_5cbe24ea(sorted, itemtypes[#"equipment"], level.var_3fd5d8f0);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[# "tactical"])) {
-    foreach(entry in itemtypes[# "tactical"]) {
+  if(isDefined(itemtypes[#"tactical"])) {
+    foreach(entry in itemtypes[#"tactical"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "generic"])) {
-    function_5cbe24ea(sorted, itemtypes[# "generic"], level.var_683c7e30);
+  if(isDefined(itemtypes[#"generic"])) {
+    function_5cbe24ea(sorted, itemtypes[#"generic"], level.var_683c7e30);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[# "perk_tier_1"])) {
-    foreach(entry in itemtypes[# "perk_tier_1"]) {
+  if(isDefined(itemtypes[#"perk_tier_1"])) {
+    foreach(entry in itemtypes[#"perk_tier_1"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "perk_tier_2"])) {
-    foreach(entry in itemtypes[# "perk_tier_2"]) {
+  if(isDefined(itemtypes[#"perk_tier_2"])) {
+    foreach(entry in itemtypes[#"perk_tier_2"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "perk_tier_3"])) {
-    foreach(entry in itemtypes[# "perk_tier_3"]) {
+  if(isDefined(itemtypes[#"perk_tier_3"])) {
+    foreach(entry in itemtypes[#"perk_tier_3"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "scorestreak"])) {
-    foreach(entry in itemtypes[# "scorestreak"]) {
+  if(isDefined(itemtypes[#"scorestreak"])) {
+    foreach(entry in itemtypes[#"scorestreak"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "survival_armor_shard"])) {
-    foreach(entry in itemtypes[# "survival_armor_shard"]) {
+  if(isDefined(itemtypes[#"survival_armor_shard"])) {
+    foreach(entry in itemtypes[#"survival_armor_shard"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "ammo"])) {
-    function_5cbe24ea(sorted, itemtypes[# "ammo"], level.var_418d51ad);
+  if(isDefined(itemtypes[#"ammo"])) {
+    function_5cbe24ea(sorted, itemtypes[#"ammo"], level.var_418d51ad);
     waitframe(1);
   }
 
-  if(isDefined(itemtypes[# "resource"])) {
-    foreach(entry in itemtypes[# "resource"]) {
+  if(isDefined(itemtypes[#"resource"])) {
+    foreach(entry in itemtypes[#"resource"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "survival_essence"])) {
-    foreach(entry in itemtypes[# "survival_essence"]) {
+  if(isDefined(itemtypes[#"survival_essence"])) {
+    foreach(entry in itemtypes[#"survival_essence"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "survival_armor_shard"])) {
-    foreach(entry in itemtypes[# "survival_armor_shard"]) {
+  if(isDefined(itemtypes[#"survival_armor_shard"])) {
+    foreach(entry in itemtypes[#"survival_armor_shard"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "survival_ammo"])) {
-    foreach(entry in itemtypes[# "survival_ammo"]) {
+  if(isDefined(itemtypes[#"survival_ammo"])) {
+    foreach(entry in itemtypes[#"survival_ammo"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "survival_perk"])) {
-    foreach(entry in itemtypes[# "survival_perk"]) {
+  if(isDefined(itemtypes[#"survival_perk"])) {
+    foreach(entry in itemtypes[#"survival_perk"]) {
       sorted[sorted.size] = entry;
     }
   }
 
-  if(isDefined(itemtypes[# "survival_scorestreak"])) {
-    foreach(entry in itemtypes[# "survival_scorestreak"]) {
+  if(isDefined(itemtypes[#"survival_scorestreak"])) {
+    foreach(entry in itemtypes[#"survival_scorestreak"]) {
       sorted[sorted.size] = entry;
     }
   }

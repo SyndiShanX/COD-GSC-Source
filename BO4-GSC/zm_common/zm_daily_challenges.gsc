@@ -469,7 +469,7 @@ on_challenge_complete(params) {
     }
 
     a_challenges = table::load(#"gamedata/stats/zm/statsmilestones4.csv", "a0");
-    str_current_challenge = a_challenges[n_challenge_index][# "e4"];
+    str_current_challenge = a_challenges[n_challenge_index][#"e4"];
     n_players = level.players.size;
     n_time_played = game.timepassed / 1000;
     n_challenge_start_time = self zm_stats::get_global_stat("zm_daily_challenge_start_time");

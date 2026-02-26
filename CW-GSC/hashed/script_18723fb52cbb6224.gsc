@@ -55,8 +55,8 @@ function function_602f1c7e(instance) {
   instance flag::clear("cleanup");
   instance callback::function_d8abfc3d(#"portal_activated", &function_a3780cd3);
   level callback::add_callback(#"hash_594217387367ebb4", &function_a3780cd3, instance);
-  var_927876a9 = instance.contentgroups[# "radio"][0];
-  var_364b8f56 = isDefined(instance.contentgroups[# "hash_2a62eb308e140655"]) ? instance.contentgroups[# "hash_2a62eb308e140655"] : [];
+  var_927876a9 = instance.contentgroups[#"radio"][0];
+  var_364b8f56 = isDefined(instance.contentgroups[#"hash_2a62eb308e140655"]) ? instance.contentgroups[#"hash_2a62eb308e140655"] : [];
 
   if(!is_true(instance.var_600aeeb9)) {
     instance.var_74554a28 = zm_utility::function_f5a222a8(#"hash_496b373a4a051d25", var_927876a9.origin, &function_f128aae9);
@@ -70,7 +70,7 @@ function function_602f1c7e(instance) {
     var_c42af4d6.var_e43750de = content_manager::spawn_script_model(var_c42af4d6, #"rus_radio_backpack_01_b");
   }
 
-  s_start = instance.contentgroups[# "start"][0];
+  s_start = instance.contentgroups[#"start"][0];
   s_start.scriptmodel = instance.mdl_radio;
   instance.s_start = s_start;
   instance.trigger = content_manager::spawn_interact(s_start, &function_1d6f6f32, #"hash_4f14ba599385295e", undefined, 64);
@@ -163,7 +163,7 @@ function function_ba971eed(instance) {
   instance.var_3875a0bb = randomintrangeinclusive(1, 8);
   instance.mdl_radio playLoopSound(#"hash_15bd285132a5e267" + instance.var_3875a0bb);
   instance.mdl_radio thread function_35bafcde(instance, instance.var_3875a0bb, "radio");
-  var_364b8f56 = isDefined(instance.contentgroups[# "hash_2a62eb308e140655"]) ? instance.contentgroups[# "hash_2a62eb308e140655"] : [];
+  var_364b8f56 = isDefined(instance.contentgroups[#"hash_2a62eb308e140655"]) ? instance.contentgroups[#"hash_2a62eb308e140655"] : [];
 
   foreach(var_c42af4d6 in var_364b8f56) {
     var_c42af4d6.var_e43750de thread function_42d1d544(instance);

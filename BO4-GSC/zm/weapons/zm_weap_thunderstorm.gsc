@@ -49,12 +49,12 @@ __main__() {
     return;
   }
 
-  level._effect[# "grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
   scene::add_scene_func("p8_fxanim_zm_zod_staff_ra_bundle", &function_f2cc0ca9, "play");
 }
 
 function_f2cc0ca9(entities) {
-  level.var_bc5fecf1 = entities[# "prop 1"];
+  level.var_bc5fecf1 = entities[#"prop 1"];
 }
 
 function_72e5d54f(watcher) {
@@ -124,7 +124,7 @@ function_3b0168a9(v_origin, v_angles, player) {
   var_78e5d9d1 = (v_origin[0], v_origin[1], v_origin[2] + 40);
   trace = bulletTrace(var_78e5d9d1, var_78e5d9d1 + (0, 0, 300 - 40), 0, player);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 
@@ -217,11 +217,11 @@ function_5f724c2e(e_grenade) {
 
   if(isDefined(var_dd83e2c2)) {
     v_ground = undefined;
-    v_trace = groundtrace(var_dd83e2c2 + (0, 0, 200), var_dd83e2c2 + (0, 0, -2000), 0, self, 1)[# "position"];
+    v_trace = groundtrace(var_dd83e2c2 + (0, 0, 200), var_dd83e2c2 + (0, 0, -2000), 0, self, 1)[#"position"];
     v_on_navmesh = zm_utility::function_b0eeaada(v_trace);
 
     if(isDefined(v_on_navmesh)) {
-      v_ground = v_on_navmesh[# "point"];
+      v_ground = v_on_navmesh[#"point"];
     }
 
     if(isDefined(v_ground)) {
@@ -327,7 +327,7 @@ pegasus_think() {
 }
 
 function_4b198b8f(a_ents) {
-  var_10d4f67d = a_ents[# "prop 1"];
+  var_10d4f67d = a_ents[#"prop 1"];
 
   if(isDefined(var_10d4f67d)) {
     var_10d4f67d thread scene::play("aib_zm_red_vign_peg_inair_flapattack_01", "loop", var_10d4f67d);

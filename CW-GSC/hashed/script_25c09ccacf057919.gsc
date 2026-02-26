@@ -402,7 +402,7 @@ function function_d6a44f15(str_instance) {
   var_5927a215 = (10, 10, 10);
   v_eye = host getplayercamerapos();
   var_abd03397 = physicstrace(v_eye, v_eye + v_forward, -1 * var_5927a215, var_5927a215, getplayers()[0], 64 | 2);
-  v_origin = var_abd03397[# "position"];
+  v_origin = var_abd03397[#"position"];
 
   if(isDefined(s_instance.var_ef831719)) {
     s_instance.var_ef831719 delete();
@@ -1032,7 +1032,7 @@ function function_c88700() {
 }
 
 function function_5fcc703c() {
-  v_ground = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+  v_ground = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
   var_b8c346f = self getpointinbounds(0, 0, -1);
   n_z_diff = var_b8c346f[2] - v_ground[2];
   self.origin = (self.origin[0], self.origin[1], self.origin[2] - n_z_diff);

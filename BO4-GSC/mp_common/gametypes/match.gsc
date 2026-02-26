@@ -94,11 +94,11 @@ is_winning_team(team) {
 }
 
 function_a2b53e17(player) {
-  if(game.outcome.platoon !== # "none" && getteamplatoon(player.pers[# "team"]) === game.outcome.platoon) {
+  if(game.outcome.platoon !== # "none" && getteamplatoon(player.pers[#"team"]) === game.outcome.platoon) {
     return true;
   }
 
-  if(game.outcome.team !== # "free" && player.pers[# "team"] === game.outcome.team) {
+  if(game.outcome.team !== # "free" && player.pers[#"team"] === game.outcome.team) {
     return true;
   }
 

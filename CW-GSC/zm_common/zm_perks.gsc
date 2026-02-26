@@ -2281,7 +2281,7 @@ function taking_cover_tanks_(player, perk, n_slot, var_3468124) {
   }
 
   if(player.var_47654123[n_slot]) {
-    player function_81bc6765(n_slot, level._custom_perks[# "specialty_mystery"].alias);
+    player function_81bc6765(n_slot, level._custom_perks[#"specialty_mystery"].alias);
     player function_2ac7579(n_slot, 0);
   }
 
@@ -2574,7 +2574,7 @@ function function_329ae65e(perk, n_slot) {
 
     if(self.var_47654123[n_slot]) {
       if(var_ac32c1b8) {
-        self function_81bc6765(n_slot, level._custom_perks[# "specialty_mystery"].alias);
+        self function_81bc6765(n_slot, level._custom_perks[#"specialty_mystery"].alias);
       }
     } else {
       self function_fb633f9d(n_slot, 0);
@@ -2862,7 +2862,7 @@ function function_8b413937(var_3468124) {
 }
 
 function function_72c30be7(var_dd74d130, var_3468124) {
-  var_3468124.mdl_altar = var_dd74d130[# "prop 1"];
+  var_3468124.mdl_altar = var_dd74d130[#"prop 1"];
 }
 
 function function_a30c73b9(str_state) {
@@ -3197,7 +3197,7 @@ function function_28ac0614(var_bbb2c705, var_613b7621) {
 }
 
 function function_50691178() {
-  var_750eac69 = [# "hash_38c08136902fd553", #"hash_59dbecf72baaa96f", #"hash_59dbedf72baaab22", #"hash_59dbeef72baaacd5", #"hash_59dbe7f72baaa0f0", #"hash_59dbe8f72baaa2a3"];
+  var_750eac69 = [#"hash_38c08136902fd553", #"hash_59dbecf72baaa96f", #"hash_59dbedf72baaab22", #"hash_59dbeef72baaacd5", #"hash_59dbe7f72baaa0f0", #"hash_59dbe8f72baaa2a3"];
 
   foreach(talent in self.var_7341f980) {
     if(isinarray(var_750eac69, talent)) {

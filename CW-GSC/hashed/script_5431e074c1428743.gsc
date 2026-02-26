@@ -443,7 +443,7 @@ function function_e3bc3dc9(action) {
 function private function_3cadc363(prompt_struct) {
   assert(isPlayer(prompt_struct.player));
 
-  if(self.player_actions.enabled[# "body_shield"] === 0) {
+  if(self.player_actions.enabled[#"body_shield"] === 0) {
     return 0;
   }
 
@@ -510,7 +510,7 @@ function function_5ca78f5a(action) {
         continue;
       }
 
-      if(enemy.player_actions.enabled[# "takedown"] === 0) {
+      if(enemy.player_actions.enabled[#"takedown"] === 0) {
         continue;
       }
 
@@ -556,7 +556,7 @@ function function_5ca78f5a(action) {
               }
             }
 
-            if(isDefined(enemy.var_3e95b88f.prompts) && isstruct(enemy.var_3e95b88f.prompts[# "melee"])) {
+            if(isDefined(enemy.var_3e95b88f.prompts) && isstruct(enemy.var_3e95b88f.prompts[#"melee"])) {
               enemy prompts::function_263320e2(#"melee", useprompt);
             }
           }
@@ -732,7 +732,7 @@ function function_c943b729(action, takedown, player) {
     radius = 0;
     trace = physicstrace(start, end, (radius * -1, radius * -1, radius * -1), (radius, radius, radius), self.var_a08ba405, 32 | 1, 32768 | 8388608);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(is_true(player.takedown.debug.debug_actions)) {
         line(start, end, (0.8, 0.25, 0.25), 1, 1, 1);
       }
@@ -1275,12 +1275,12 @@ function private function_ac7d52ad(show) {
 
           dist = distancesquared(corpseorigin, guy.origin);
 
-          if(dist < sqr(level.stealth.corpse.dists[# "detect_dist"])) {
+          if(dist < sqr(level.stealth.corpse.dists[#"detect_dist"])) {
             line(guy.origin, corpseorigin, found_color);
             continue;
           }
 
-          if(dist < sqr(level.stealth.corpse.dists[# "sight_dist"])) {
+          if(dist < sqr(level.stealth.corpse.dists[#"sight_dist"])) {
             line(guy.origin, corpseorigin, color);
           }
         }

@@ -588,7 +588,7 @@ anim_override_func() {
   level.scr_anim["zombie"]["walk3"] = % ai_zombie_walk_v2;
   level.scr_anim["zombie"]["run6"] = % ai_zombie_run_v2;
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("sticky_grenade_zm", false);
   include_weapon("claymore_zm", false);
@@ -833,7 +833,7 @@ offhand_weapon_give_override(str_weapon) {
   }
   return false;
 }
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -850,7 +850,7 @@ offhand_weapon_give_override(str_weapon) {
   include_powerup("lose_perk");
   include_powerup("empty_clip");
 }
-#include_equipment_for_level() {
+include_equipment_for_level() {
   include_equipment("equip_gasmask_zm");
   include_equipment("equip_hacker_zm");
 }

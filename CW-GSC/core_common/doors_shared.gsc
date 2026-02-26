@@ -1153,7 +1153,7 @@ class cdoor {
 
       update_use_message();
 
-      if(is_true(flag[# "locked"]) && is_true(var_79579129)) {
+      if(is_true(flag[#"locked"]) && is_true(var_79579129)) {
         var_318cd8de = m_e_door.var_645eee83;
 
         if(isDefined(var_318cd8de)) {
@@ -1387,7 +1387,7 @@ function private postinit() {
   }
 
   var_1cde154f = int(var_1cde154f);
-  var_5a23774b = int(level.var_1def7d37[# "disabledoors"]);
+  var_5a23774b = int(level.var_1def7d37[#"disabledoors"]);
 
   if(!is_true(var_1cde154f) || is_true(var_5a23774b)) {
     return;
@@ -1744,7 +1744,7 @@ function debug_draw() {
     ent_num = self.m_e_door getentitynumber();
 
     while(true) {
-      var_9599e270 = level.var_1def7d37[# "hash_5171254138328d84"];
+      var_9599e270 = level.var_1def7d37[#"hash_5171254138328d84"];
 
       if(var_9599e270 <= 0) {
         level waittill(#"hash_5171254138328d84");
@@ -1869,11 +1869,11 @@ function function_75697b7d(ent_num) {
   }
 
   if(ent_num === level.var_8e7ad5cb) {
-    before = level.var_1def7d37[# "hash_5171254138328d84"];
-    level.var_1def7d37[# "hash_5171254138328d84"] = 2;
+    before = level.var_1def7d37[#"hash_5171254138328d84"];
+    level.var_1def7d37[#"hash_5171254138328d84"] = 2;
     self namespace_64f6ea7a::init_max_yaws();
     level.var_8e7ad5cb = undefined;
-    level.var_1def7d37[# "hash_5171254138328d84"] = before;
+    level.var_1def7d37[#"hash_5171254138328d84"] = before;
   }
 }
 
@@ -2856,7 +2856,7 @@ function private function_b391c0a0(gesture, target) {
   self.var_99ce8ae = 1;
   self val::set("player_door_gesture", "allow_melee", 0);
 
-  if(level.var_1def7d37[# "scr_door_player_gestures"]) {
+  if(level.var_1def7d37[#"scr_door_player_gestures"]) {
     self playgestureviewmodel(gesture, target, 1);
   }
 
@@ -3090,7 +3090,7 @@ function private should_bash_open(player) {
       return false;
     }
 
-    if(level.var_1def7d37[# "scr_door_bash_requires_use"]) {
+    if(level.var_1def7d37[#"scr_door_bash_requires_use"]) {
       if(!player useButtonPressed()) {
         return false;
       }
@@ -3119,7 +3119,7 @@ function private should_bash_open(player) {
 }
 
 function private bash_debug(duration) {
-  if(level.var_1def7d37[# "hash_5171254138328d84"]) {
+  if(level.var_1def7d37[#"hash_5171254138328d84"]) {
     var_1a23fa7 = [];
     var_c03beac5 = [];
     var_1a23fa7[0] = self get_door_bottom_center();
@@ -3308,7 +3308,7 @@ function private function_8d016934(prompt_struct) {
 }
 
 function private should_do_gesture() {
-  if(level.var_1def7d37[# "scr_door_player_gestures"] == 0) {
+  if(level.var_1def7d37[#"scr_door_player_gestures"] == 0) {
     return false;
   }
 
@@ -3500,7 +3500,7 @@ function function_656c898c() {
   if(isDefined(self.m_e_door)) {
     self.m_e_door thread[[level.var_3626dfc]](#"use");
 
-    if(isDefined(self.m_e_door.var_3e95b88f.var_294a441e[# "melee"])) {
+    if(isDefined(self.m_e_door.var_3e95b88f.var_294a441e[#"melee"])) {
       self.m_e_door thread[[level.var_3626dfc]](#"melee");
     }
   }

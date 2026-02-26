@@ -81,40 +81,40 @@ function private on_entity_shutdown(localclientnum) {
 function buildandvalidatefacialanimationlist(localclientnum) {
   assert(!isDefined(level.__facialanimationslist));
   level.__facialanimationslist = [];
-  level.__facialanimationslist[# "human"] = [];
-  level.__facialanimationslist[# "human"][# "combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
-  level.__facialanimationslist[# "human"][# "combat_aim"] = array(#"ai_t8_face_hero_aim_idle_1", #"ai_t8_face_hero_aim_idle_2", #"ai_t8_face_hero_aim_idle_3");
-  level.__facialanimationslist[# "human"][# "combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2", #"ai_t8_face_hero_aim_fire_3");
-  level.__facialanimationslist[# "human"][# "death"] = array(#"hash_6475991c6b5d94bb", #"hash_64759a1c6b5d966e", #"hash_64759b1c6b5d9821", #"hash_64759c1c6b5d99d4", #"hash_64759d1c6b5d9b87");
-  level.__facialanimationslist[# "human"][# "melee"] = array(#"ai_t8_face_hero_melee_1");
-  level.__facialanimationslist[# "human"][# "pain"] = array(#"hash_ee9591a50acc77b", #"hash_ee95a1a50acc92e", #"hash_ee95b1a50accae1");
-  level.__facialanimationslist[# "human"][# "animscripted"] = array(#"ai_t8_face_hero_generic_idle_1");
-  level.__facialanimationslist[# "zombie"] = [];
-  level.__facialanimationslist[# "zombie"][# "combat"] = array(#"hash_f64275707b76883");
-  level.__facialanimationslist[# "zombie"][# "combat_aim"] = array(#"hash_f64275707b76883");
-  level.__facialanimationslist[# "zombie"][# "combat_shoot"] = array(#"hash_f64275707b76883");
-  level.__facialanimationslist[# "zombie"][# "death"] = array(#"hash_7a6d64b8e60f262d");
-  level.__facialanimationslist[# "zombie"][# "melee"] = array(#"hash_3181a3ee96a8d5d", #"hash_318173ee96a8844");
-  level.__facialanimationslist[# "zombie"][# "pain"] = array(#"hash_711aa10330a50fd");
-  level.__facialanimationslist[# "zombie"][# "animscripted"] = array(#"hash_f64275707b76883");
+  level.__facialanimationslist[#"human"] = [];
+  level.__facialanimationslist[#"human"][#"combat"] = array(#"ai_t8_face_hero_generic_idle_1", #"ai_t8_face_hero_generic_idle_2", #"ai_t8_face_hero_generic_idle_3");
+  level.__facialanimationslist[#"human"][#"combat_aim"] = array(#"ai_t8_face_hero_aim_idle_1", #"ai_t8_face_hero_aim_idle_2", #"ai_t8_face_hero_aim_idle_3");
+  level.__facialanimationslist[#"human"][#"combat_shoot"] = array(#"ai_t8_face_hero_aim_fire_1", #"ai_t8_face_hero_aim_fire_2", #"ai_t8_face_hero_aim_fire_3");
+  level.__facialanimationslist[#"human"][#"death"] = array(#"hash_6475991c6b5d94bb", #"hash_64759a1c6b5d966e", #"hash_64759b1c6b5d9821", #"hash_64759c1c6b5d99d4", #"hash_64759d1c6b5d9b87");
+  level.__facialanimationslist[#"human"][#"melee"] = array(#"ai_t8_face_hero_melee_1");
+  level.__facialanimationslist[#"human"][#"pain"] = array(#"hash_ee9591a50acc77b", #"hash_ee95a1a50acc92e", #"hash_ee95b1a50accae1");
+  level.__facialanimationslist[#"human"][#"animscripted"] = array(#"ai_t8_face_hero_generic_idle_1");
+  level.__facialanimationslist[#"zombie"] = [];
+  level.__facialanimationslist[#"zombie"][#"combat"] = array(#"hash_f64275707b76883");
+  level.__facialanimationslist[#"zombie"][#"combat_aim"] = array(#"hash_f64275707b76883");
+  level.__facialanimationslist[#"zombie"][#"combat_shoot"] = array(#"hash_f64275707b76883");
+  level.__facialanimationslist[#"zombie"][#"death"] = array(#"hash_7a6d64b8e60f262d");
+  level.__facialanimationslist[#"zombie"][#"melee"] = array(#"hash_3181a3ee96a8d5d", #"hash_318173ee96a8844");
+  level.__facialanimationslist[#"zombie"][#"pain"] = array(#"hash_711aa10330a50fd");
+  level.__facialanimationslist[#"zombie"][#"animscripted"] = array(#"hash_f64275707b76883");
   level.var_e776187e[0] = array(#"hash_3c8c7be61c0c54bf", #"hash_3c8c7ce61c0c5672");
   level.var_e776187e[1] = array(#"hash_1be71f9083c3a62b", #"hash_1be7209083c3a7de");
   level.var_e776187e[2] = array(#"hash_284df1f0899aeec2");
   level.var_e776187e[3] = array(#"hash_11dfb67db7575849");
   var_72e0db27 = [];
 
-  foreach(key, value in level.__facialanimationslist[# "human"]) {
+  foreach(key, value in level.__facialanimationslist[#"human"]) {
     var_72e0db27[key] = value;
   }
 
-  level.__facialanimationslist[# "civilian"] = var_72e0db27;
+  level.__facialanimationslist[#"civilian"] = var_72e0db27;
   deathanims = [];
 
-  foreach(animation in level.__facialanimationslist[# "human"][# "death"]) {
+  foreach(animation in level.__facialanimationslist[#"human"][#"death"]) {
     array::add(deathanims, animation);
   }
 
-  foreach(animation in level.__facialanimationslist[# "zombie"][# "death"]) {
+  foreach(animation in level.__facialanimationslist[#"zombie"][#"death"]) {
     array::add(deathanims, animation);
   }
 
@@ -456,8 +456,8 @@ function private applydeathanim(localclientnum) {
   }
 
   if(self hasdobj(localclientnum) && self hasanimtree()) {
-    if(isDefined(self) && isDefined(self.archetype) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype][# "death"])) {
-      animtoplay = array::random(level.__facialanimationslist[self.archetype][# "death"]);
+    if(isDefined(self) && isDefined(self.archetype) && isDefined(level.__facialanimationslist) && isDefined(level.__facialanimationslist[self.archetype]) && isDefined(level.__facialanimationslist[self.archetype][#"death"])) {
+      animtoplay = array::random(level.__facialanimationslist[self.archetype][#"death"]);
       animoverride = self getfacialanimoverride(localclientnum);
 
       if(isDefined(animoverride)) {

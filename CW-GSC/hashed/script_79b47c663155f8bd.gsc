@@ -57,7 +57,7 @@ function private function_8958c312() {
     return;
   }
 
-  level.var_f5c1fb9d[# "allies"] = is_true(level.var_8a530af5[# "allies"]) ? getplayers().size : function_b16926ea().size;
+  level.var_f5c1fb9d[#"allies"] = is_true(level.var_8a530af5[#"allies"]) ? getplayers().size : function_b16926ea().size;
 }
 
 function private function_ba1ef25b(maxplayers) {
@@ -73,8 +73,8 @@ function private function_ba1ef25b(maxplayers) {
     return;
   }
 
-  level.var_f5c1fb9d[# "allies"] = maxplayers;
-  level.var_8a530af5[# "allies"] = 1;
+  level.var_f5c1fb9d[#"allies"] = maxplayers;
+  level.var_8a530af5[#"allies"] = 1;
 }
 
 function private function_31a989f7(waitforplayers = 1) {
@@ -112,7 +112,7 @@ function private function_31a989f7(waitforplayers = 1) {
     return;
   }
 
-  var_8a291590 = isDefined(level.var_f5c1fb9d[# "allies"]) ? level.var_f5c1fb9d[# "allies"] : 0;
+  var_8a291590 = isDefined(level.var_f5c1fb9d[#"allies"]) ? level.var_f5c1fb9d[#"allies"] : 0;
 
   if(var_8a291590 > 0) {
     level thread function_9bead880(var_8a291590, maxplayers);

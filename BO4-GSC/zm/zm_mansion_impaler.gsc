@@ -1053,7 +1053,7 @@ function_a9bfed2d() {
 
   var_219a33e2 = [];
   var_f1c4ec4f = self zm_utility::get_current_zone(1);
-  a_spawn_locs = var_f1c4ec4f.a_loc_types[# "nosferatu_location"];
+  a_spawn_locs = var_f1c4ec4f.a_loc_types[#"nosferatu_location"];
 
   for(i = 0; i < n_enemy_count; i++) {
     if(randomint(100) > 90) {

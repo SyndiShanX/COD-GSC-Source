@@ -201,7 +201,7 @@ function function_400f93ba() {
     ai ai::set_behavior_attribute(#"demeanor", "cqb");
   }
 
-  a_scene_ents[# "soldier"] = var_408c4a10;
+  a_scene_ents[#"soldier"] = var_408c4a10;
   var_408c4a10 val::set(#"ai_forcegoal", "ignoreall", 1);
   var_7820eb66 = struct::get("scene_soldier_slide", "targetname");
   thread function_cda1622();

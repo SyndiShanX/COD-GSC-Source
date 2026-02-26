@@ -8,7 +8,7 @@
 #namespace explosive_bolt;
 
 function main() {
-  level._effect[# "crossbow_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"crossbow_light"] = # "weapon/fx8_equip_light_os";
 }
 
 function spawned(localclientnum) {
@@ -35,7 +35,7 @@ function fx_think(localclientnum) {
 }
 
 function start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "crossbow_light"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"crossbow_light"], self, "tag_origin");
 }
 
 function stop_light_fx(localclientnum) {

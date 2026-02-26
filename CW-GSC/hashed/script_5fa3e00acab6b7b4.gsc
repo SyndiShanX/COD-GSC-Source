@@ -100,7 +100,7 @@ function function_d519e318() {
     matchend.playlist_name = hash(function_970f37d1());
     matchend.var_65dcfd4a = getdvarint(#"hash_4c63a0806012e032", 0);
     matchend.var_a14949d8 = getdvarstring(#"hash_164a9a28628343ef", "");
-    matchend.team_scores = isDefined(game.stat[# "teamscores"]) ? game.stat[# "teamscores"] : [];
+    matchend.team_scores = isDefined(game.stat[#"teamscores"]) ? game.stat[#"teamscores"] : [];
     matchend.var_ffa674c = gamemodeisarena();
     teams = [];
 
@@ -154,7 +154,7 @@ function function_d519e318() {
       roundend = {};
       roundend.var_29d0de09 = game.telemetry.var_29d0de09;
       roundend.var_b0ab3472 = function_f8d53445();
-      roundend.team_scores = isDefined(game.stat[# "teamscores"]) ? game.stat[# "teamscores"] : [];
+      roundend.team_scores = isDefined(game.stat[#"teamscores"]) ? game.stat[#"teamscores"] : [];
       roundend.var_e394d7c0 = util::getroundsplayed();
       roundend.overtime_round = overtime::is_overtime_round();
       function_92d1707f(#"hash_4aeb25514c599057", roundend);
@@ -163,30 +163,30 @@ function function_d519e318() {
 }
 
 function on_player_connect() {
-  if(!is_true(self.pers[# "telemetry"].connected)) {
+  if(!is_true(self.pers[#"telemetry"].connected)) {
     println("<dev string:x38c>" + gettime());
     println("<dev string:x3bf>" + getutc());
     println("<dev string:x3f5>" + self.name);
 
-    self.pers[# "weaponstats"] = [];
+    self.pers[#"weaponstats"] = [];
 
-    if(!isDefined(self.pers[# "telemetry"])) {
-      self.pers[# "telemetry"] = {};
+    if(!isDefined(self.pers[#"telemetry"])) {
+      self.pers[#"telemetry"] = {};
     }
 
-    self.pers[# "telemetry"].utc_connect_time_s = getutc();
-    self.pers[# "telemetry"].connected = 1;
-    self.pers[# "telemetry"].xp_at_start = self rank::getrankxp();
-    self.pers[# "telemetry"].var_a1938c60 = self rank::function_5b197def(0);
-    self.pers[# "telemetry"].var_970f034c = self rank::function_5b197def(1);
-    self.pers[# "telemetry"].var_43ab3c14 = self rank::function_5b197def(2);
-    self.pers[# "telemetry"].var_9c4d3f78 = self rank::function_5b197def(3);
-    self.pers[# "telemetry"].var_12173831 = self rank::function_5b197def(5);
-    self.pers[# "telemetry"].var_9f177532 = self rank::getrank();
-    self.pers[# "telemetry"].var_af870172 = self rank::getprestige();
+    self.pers[#"telemetry"].utc_connect_time_s = getutc();
+    self.pers[#"telemetry"].connected = 1;
+    self.pers[#"telemetry"].xp_at_start = self rank::getrankxp();
+    self.pers[#"telemetry"].var_a1938c60 = self rank::function_5b197def(0);
+    self.pers[#"telemetry"].var_970f034c = self rank::function_5b197def(1);
+    self.pers[#"telemetry"].var_43ab3c14 = self rank::function_5b197def(2);
+    self.pers[#"telemetry"].var_9c4d3f78 = self rank::function_5b197def(3);
+    self.pers[#"telemetry"].var_12173831 = self rank::function_5b197def(5);
+    self.pers[#"telemetry"].var_9f177532 = self rank::getrank();
+    self.pers[#"telemetry"].var_af870172 = self rank::getprestige();
 
     if(isDefined(game.telemetry.player_count)) {
-      self.pers[# "telemetry"].var_6ba64843 = game.telemetry.player_count;
+      self.pers[#"telemetry"].var_6ba64843 = game.telemetry.player_count;
       game.telemetry.player_count++;
       println("<dev string:x425>" + game.telemetry.player_count);
     } else {
@@ -196,8 +196,8 @@ function on_player_connect() {
 
     println("<dev string:x4bb>");
     playerdata = {};
-    playerdata.utc_connect_time_s = self.pers[# "telemetry"].utc_connect_time_s;
-    playerdata.var_6ba64843 = isDefined(self.pers[# "telemetry"].var_6ba64843) ? self.pers[# "telemetry"].var_6ba64843 : 0;
+    playerdata.utc_connect_time_s = self.pers[#"telemetry"].utc_connect_time_s;
+    playerdata.var_6ba64843 = isDefined(self.pers[#"telemetry"].var_6ba64843) ? self.pers[#"telemetry"].var_6ba64843 : 0;
     playerdata.var_524ab934 = self function_d40f1a0e();
     playerdata.var_504e19f4 = self function_21f71ac8();
     playerdata.var_68441d6f = self function_325dc923();
@@ -206,11 +206,11 @@ function on_player_connect() {
 }
 
 function on_player_disconnect() {
-  if(!is_true(self.pers[# "telemetry"].connected)) {
+  if(!is_true(self.pers[#"telemetry"].connected)) {
     return;
   }
 
-  self.pers[# "telemetry"].connected = 0;
+  self.pers[#"telemetry"].connected = 0;
   playerdata = {};
 
   println("<dev string:x500>" + self.name);
@@ -221,32 +221,32 @@ function on_player_disconnect() {
   playerdata.var_37b8e421 = 0;
   utc = getutc();
 
-  if(isDefined(self.pers[# "telemetry"].utc_connect_time_s)) {
-    playerdata.utc_connect_time_s = self.pers[# "telemetry"].utc_connect_time_s;
+  if(isDefined(self.pers[#"telemetry"].utc_connect_time_s)) {
+    playerdata.utc_connect_time_s = self.pers[#"telemetry"].utc_connect_time_s;
     playerdata.utc_disconnect_time_s = utc;
     playerdata.var_37b8e421 = utc - playerdata.utc_connect_time_s;
   }
 
-  playerdata.var_6ba64843 = isDefined(self.pers[# "telemetry"].var_6ba64843) ? self.pers[# "telemetry"].var_6ba64843 : 0;
+  playerdata.var_6ba64843 = isDefined(self.pers[#"telemetry"].var_6ba64843) ? self.pers[#"telemetry"].var_6ba64843 : 0;
 
   if(isDefined(self.pers)) {
-    playerdata.score = isDefined(self.pers[# "score"]) ? self.pers[# "score"] : 0;
-    playerdata.kills = isDefined(self.pers[# "kills"]) ? self.pers[# "kills"] : 0;
-    playerdata.deaths = isDefined(self.pers[# "deaths"]) ? self.pers[# "deaths"] : 0;
-    playerdata.headshots = isDefined(self.pers[# "headshots"]) ? self.pers[# "headshots"] : 0;
-    playerdata.assists = isDefined(self.pers[# "assists"]) ? self.pers[# "assists"] : 0;
-    playerdata.damage_dealt = isDefined(self.pers[# "damagedone"]) ? self.pers[# "damagedone"] : 0;
-    playerdata.suicides = isDefined(self.pers[# "suicides"]) ? self.pers[# "suicides"] : 0;
-    playerdata.shots = isDefined(self.pers[# "shotsfired"]) ? self.pers[# "shotsfired"] : 0;
-    playerdata.hits = isDefined(self.pers[# "shotshit"]) ? self.pers[# "shotshit"] : 0;
-    playerdata.time_played_alive = isDefined(self.pers[# "time_played_alive"]) ? self.pers[# "time_played_alive"] : 0;
-    playerdata.var_ef5017c7 = isDefined(self.pers[# "best_kill_streak"]) ? self.pers[# "best_kill_streak"] : 0;
-    playerdata.multikills = isDefined(self.pers[# "hash_104ec9727c3d4ef7"]) ? self.pers[# "hash_104ec9727c3d4ef7"] : 0;
-    playerdata.var_fc1e4ef3 = isDefined(self.pers[# "highestmultikill"]) ? self.pers[# "highestmultikill"] : 0;
-    playerdata.ekia = isDefined(self.pers[# "ekia"]) ? self.pers[# "ekia"] : 0;
-    playerdata.team = hash(isDefined(self.pers[# "team"]) ? self.pers[# "team"] : "");
-    playerdata.var_b0689e83 = isDefined(self.pers[# "hash_766a818213440d53"]) ? self.pers[# "hash_766a818213440d53"] : 0;
-    timeplayed = isDefined(self.timeplayed[# "total"]) ? self.timeplayed[# "total"] : 0;
+    playerdata.score = isDefined(self.pers[#"score"]) ? self.pers[#"score"] : 0;
+    playerdata.kills = isDefined(self.pers[#"kills"]) ? self.pers[#"kills"] : 0;
+    playerdata.deaths = isDefined(self.pers[#"deaths"]) ? self.pers[#"deaths"] : 0;
+    playerdata.headshots = isDefined(self.pers[#"headshots"]) ? self.pers[#"headshots"] : 0;
+    playerdata.assists = isDefined(self.pers[#"assists"]) ? self.pers[#"assists"] : 0;
+    playerdata.damage_dealt = isDefined(self.pers[#"damagedone"]) ? self.pers[#"damagedone"] : 0;
+    playerdata.suicides = isDefined(self.pers[#"suicides"]) ? self.pers[#"suicides"] : 0;
+    playerdata.shots = isDefined(self.pers[#"shotsfired"]) ? self.pers[#"shotsfired"] : 0;
+    playerdata.hits = isDefined(self.pers[#"shotshit"]) ? self.pers[#"shotshit"] : 0;
+    playerdata.time_played_alive = isDefined(self.pers[#"time_played_alive"]) ? self.pers[#"time_played_alive"] : 0;
+    playerdata.var_ef5017c7 = isDefined(self.pers[#"best_kill_streak"]) ? self.pers[#"best_kill_streak"] : 0;
+    playerdata.multikills = isDefined(self.pers[#"hash_104ec9727c3d4ef7"]) ? self.pers[#"hash_104ec9727c3d4ef7"] : 0;
+    playerdata.var_fc1e4ef3 = isDefined(self.pers[#"highestmultikill"]) ? self.pers[#"highestmultikill"] : 0;
+    playerdata.ekia = isDefined(self.pers[#"ekia"]) ? self.pers[#"ekia"] : 0;
+    playerdata.team = hash(isDefined(self.pers[#"team"]) ? self.pers[#"team"] : "");
+    playerdata.var_b0689e83 = isDefined(self.pers[#"hash_766a818213440d53"]) ? self.pers[#"hash_766a818213440d53"] : 0;
+    timeplayed = isDefined(self.timeplayed[#"total"]) ? self.timeplayed[#"total"] : 0;
 
     if(timeplayed >= 120) {
       playerdata.var_4f85ae57 = int(float(1000) * float(playerdata.var_b0689e83 - playerdata.deaths - playerdata.suicides) / float(timeplayed) / float(60));
@@ -258,25 +258,25 @@ function on_player_disconnect() {
       playerdata.var_664364c7 = 0;
     }
 
-    playerdata.var_62eb1d70 = isDefined(self.pers[# "hash_26948141ff5e29a3"]) ? self.pers[# "hash_26948141ff5e29a3"] : 0;
+    playerdata.var_62eb1d70 = isDefined(self.pers[#"hash_26948141ff5e29a3"]) ? self.pers[#"hash_26948141ff5e29a3"] : 0;
     println("<dev string:x569>" + playerdata.var_b0689e83);
   }
 
-  playerdata.xp_at_start = isDefined(self.pers[# "telemetry"].xp_at_start) ? self.pers[# "telemetry"].xp_at_start : 0;
+  playerdata.xp_at_start = isDefined(self.pers[#"telemetry"].xp_at_start) ? self.pers[#"telemetry"].xp_at_start : 0;
   playerdata.xp_at_end = self rank::getrankxp();
-  playerdata.var_a1938c60 = isDefined(self.pers[# "telemetry"].var_a1938c60) ? self.pers[# "telemetry"].var_a1938c60 : 0;
+  playerdata.var_a1938c60 = isDefined(self.pers[#"telemetry"].var_a1938c60) ? self.pers[#"telemetry"].var_a1938c60 : 0;
   playerdata.var_7ddf8420 = self rank::function_5b197def(0);
-  playerdata.var_970f034c = isDefined(self.pers[# "telemetry"].var_970f034c) ? self.pers[# "telemetry"].var_970f034c : 0;
+  playerdata.var_970f034c = isDefined(self.pers[#"telemetry"].var_970f034c) ? self.pers[#"telemetry"].var_970f034c : 0;
   playerdata.var_b7d93a80 = self rank::function_5b197def(1);
-  playerdata.var_43ab3c14 = isDefined(self.pers[# "telemetry"].var_43ab3c14) ? self.pers[# "telemetry"].var_43ab3c14 : 0;
+  playerdata.var_43ab3c14 = isDefined(self.pers[#"telemetry"].var_43ab3c14) ? self.pers[#"telemetry"].var_43ab3c14 : 0;
   playerdata.var_460c9ce = self rank::function_5b197def(2);
-  playerdata.var_9c4d3f78 = isDefined(self.pers[# "telemetry"].var_9c4d3f78) ? self.pers[# "telemetry"].var_9c4d3f78 : 0;
+  playerdata.var_9c4d3f78 = isDefined(self.pers[#"telemetry"].var_9c4d3f78) ? self.pers[#"telemetry"].var_9c4d3f78 : 0;
   playerdata.var_5f67b464 = self rank::function_5b197def(3);
-  playerdata.var_12173831 = isDefined(self.pers[# "telemetry"].var_12173831) ? self.pers[# "telemetry"].var_12173831 : 0;
+  playerdata.var_12173831 = isDefined(self.pers[#"telemetry"].var_12173831) ? self.pers[#"telemetry"].var_12173831 : 0;
   playerdata.var_c4d676ee = self rank::function_5b197def(5);
-  playerdata.var_9f177532 = isDefined(self.pers[# "telemetry"].var_9f177532) ? self.pers[# "telemetry"].var_9f177532 : 0;
+  playerdata.var_9f177532 = isDefined(self.pers[#"telemetry"].var_9f177532) ? self.pers[#"telemetry"].var_9f177532 : 0;
   playerdata.var_735f5996 = self rank::getrank();
-  playerdata.var_af870172 = isDefined(self.pers[# "telemetry"].var_af870172) ? self.pers[# "telemetry"].var_af870172 : 0;
+  playerdata.var_af870172 = isDefined(self.pers[#"telemetry"].var_af870172) ? self.pers[#"telemetry"].var_af870172 : 0;
   playerdata.var_7d032a98 = self rank::getprestige();
   playerdata.objectives = isDefined(self.objectives) ? self.objectives : 0;
 
@@ -312,8 +312,8 @@ function on_player_disconnect() {
     }
   }
 
-  var_a38b89a4 = isDefined(self.pers[# "telemetry"].life.var_4f7ff485) ? self.pers[# "telemetry"].life.var_4f7ff485 : -1;
-  lifeindex = isDefined(self.pers[# "telemetry"].life.life_index) ? self.pers[# "telemetry"].life.life_index : -1;
+  var_a38b89a4 = isDefined(self.pers[#"telemetry"].life.var_4f7ff485) ? self.pers[#"telemetry"].life.var_4f7ff485 : -1;
+  lifeindex = isDefined(self.pers[#"telemetry"].life.life_index) ? self.pers[#"telemetry"].life.life_index : -1;
 
   if(var_a38b89a4 != lifeindex) {
     data = {};
@@ -330,8 +330,8 @@ function on_player_disconnect() {
       data.died = 1;
     }
 
-    if(isDefined(self.pers[# "telemetry"].life)) {
-      self.pers[# "telemetry"].life.var_75cd3884 = function_f8d53445();
+    if(isDefined(self.pers[#"telemetry"].life)) {
+      self.pers[#"telemetry"].life.var_75cd3884 = function_f8d53445();
     }
 
     function_607901f4(data);
@@ -343,20 +343,20 @@ function on_player_disconnect() {
 }
 
 function on_player_spawned() {
-  if(!isDefined(self.pers[# "telemetry"])) {
-    self.pers[# "telemetry"] = {};
+  if(!isDefined(self.pers[#"telemetry"])) {
+    self.pers[#"telemetry"] = {};
   }
 
-  self.pers[# "telemetry"].life = {};
-  self.pers[# "telemetry"].life.var_62c7b24e = function_f8d53445();
-  self.pers[# "telemetry"].life.spawn_origin = self.origin;
-  self.pers[# "telemetry"].life.var_cc189f4f = isDefined(self.pers[# "score"]) ? self.pers[# "score"] : 0;
-  self.pers[# "telemetry"].life.var_a04d3223 = isDefined(self.pers[# "assists"]) ? self.pers[# "assists"] : 0;
-  self.pers[# "telemetry"].life.var_75f84f99 = isDefined(self.pers[# "kills"]) ? self.pers[# "kills"] : 0;
-  self.pers[# "telemetry"].life.deathmodifiers = [];
+  self.pers[#"telemetry"].life = {};
+  self.pers[#"telemetry"].life.var_62c7b24e = function_f8d53445();
+  self.pers[#"telemetry"].life.spawn_origin = self.origin;
+  self.pers[#"telemetry"].life.var_cc189f4f = isDefined(self.pers[#"score"]) ? self.pers[#"score"] : 0;
+  self.pers[#"telemetry"].life.var_a04d3223 = isDefined(self.pers[#"assists"]) ? self.pers[#"assists"] : 0;
+  self.pers[#"telemetry"].life.var_75f84f99 = isDefined(self.pers[#"kills"]) ? self.pers[#"kills"] : 0;
+  self.pers[#"telemetry"].life.deathmodifiers = [];
 
   if(isDefined(game.telemetry.life_count)) {
-    self.pers[# "telemetry"].life.life_index = game.telemetry.life_count;
+    self.pers[#"telemetry"].life.life_index = game.telemetry.life_count;
     game.telemetry.life_count++;
 
     println("<dev string:x5aa>" + self.name);
@@ -365,7 +365,7 @@ function on_player_spawned() {
 
   println("<dev string:x610>");
 
-  if(!isDefined(self.pers[# "telemetry"].var_9c9223d5)) {
+  if(!isDefined(self.pers[#"telemetry"].var_9c9223d5)) {
     var_234012ff = {
       #operator: "", #operator_skin: ""};
     var_8efad2ca = self player_role::get();
@@ -377,7 +377,7 @@ function on_player_spawned() {
     }
 
     self function_678f57c8(#"hash_2858113be21419d2", var_234012ff);
-    self.pers[# "telemetry"].var_9c9223d5 = 1;
+    self.pers[#"telemetry"].var_9c9223d5 = 1;
   }
 }
 
@@ -389,8 +389,8 @@ function function_f0ffff28() {
   telemetry::function_f397069a();
 
   if(var_a7dd086f && isDefined(self)) {
-    var_a38b89a4 = isDefined(self.pers[# "telemetry"].life.var_4f7ff485) ? self.pers[# "telemetry"].life.var_4f7ff485 : -1;
-    lifeindex = isDefined(self.pers[# "telemetry"].life.life_index) ? self.pers[# "telemetry"].life.life_index : -1;
+    var_a38b89a4 = isDefined(self.pers[#"telemetry"].life.var_4f7ff485) ? self.pers[#"telemetry"].life.var_4f7ff485 : -1;
+    lifeindex = isDefined(self.pers[#"telemetry"].life.life_index) ? self.pers[#"telemetry"].life.life_index : -1;
 
     if(var_a38b89a4 != lifeindex) {
       data = {};
@@ -400,8 +400,8 @@ function function_f0ffff28() {
       data.victimweapon = self.currentweapon;
       data.died = 0;
 
-      if(isDefined(self.pers[# "telemetry"].life)) {
-        self.pers[# "telemetry"].life.var_75cd3884 = var_87e50fa8;
+      if(isDefined(self.pers[#"telemetry"].life)) {
+        self.pers[#"telemetry"].life.var_75cd3884 = var_87e50fa8;
       }
 
       function_607901f4(data);
@@ -418,8 +418,8 @@ function function_55a7ded6(data) {
     return;
   }
 
-  if(isDefined(data.victim.pers[# "telemetry"].life)) {
-    data.victim.pers[# "telemetry"].life.var_75cd3884 = function_f8d53445();
+  if(isDefined(data.victim.pers[#"telemetry"].life)) {
+    data.victim.pers[#"telemetry"].life.var_75cd3884 = function_f8d53445();
   }
 
   if(isDefined(data.victim.var_c8836f02)) {
@@ -451,11 +451,11 @@ function function_607901f4(data) {
   deathdata.var_75cd3884 = 0;
   deathdata.var_39872854 = 0;
 
-  if(isDefined(data.victim.pers[# "telemetry"].life.var_62c7b24e)) {
-    deathdata.var_62c7b24e = data.victim.pers[# "telemetry"].life.var_62c7b24e;
+  if(isDefined(data.victim.pers[#"telemetry"].life.var_62c7b24e)) {
+    deathdata.var_62c7b24e = data.victim.pers[#"telemetry"].life.var_62c7b24e;
 
-    if(isDefined(data.victim.pers[# "telemetry"].life.var_75cd3884)) {
-      deathdata.var_75cd3884 = data.victim.pers[# "telemetry"].life.var_75cd3884;
+    if(isDefined(data.victim.pers[#"telemetry"].life.var_75cd3884)) {
+      deathdata.var_75cd3884 = data.victim.pers[#"telemetry"].life.var_75cd3884;
       deathdata.var_39872854 = deathdata.var_75cd3884 - deathdata.var_62c7b24e;
     }
   }
@@ -473,14 +473,14 @@ function function_607901f4(data) {
   deathdata.team = data.victim.team;
   deathdata.life_index = -1;
 
-  if(isDefined(data.victim.pers[# "telemetry"].life.life_index)) {
-    deathdata.life_index = data.victim.pers[# "telemetry"].life.life_index;
+  if(isDefined(data.victim.pers[#"telemetry"].life.life_index)) {
+    deathdata.life_index = data.victim.pers[#"telemetry"].life.life_index;
   }
 
-  if(isDefined(data.victim.pers[# "telemetry"].life.spawn_origin)) {
-    deathdata.var_8b82b087 = data.victim.pers[# "telemetry"].life.spawn_origin[0];
-    deathdata.var_9d3f5400 = data.victim.pers[# "telemetry"].life.spawn_origin[1];
-    deathdata.var_ab1e6fbe = data.victim.pers[# "telemetry"].life.spawn_origin[2];
+  if(isDefined(data.victim.pers[#"telemetry"].life.spawn_origin)) {
+    deathdata.var_8b82b087 = data.victim.pers[#"telemetry"].life.spawn_origin[0];
+    deathdata.var_9d3f5400 = data.victim.pers[#"telemetry"].life.spawn_origin[1];
+    deathdata.var_ab1e6fbe = data.victim.pers[#"telemetry"].life.spawn_origin[2];
   }
 
   deathdata.var_e399fbd4 = !data.victim gamepadusedlast();
@@ -519,8 +519,8 @@ function function_607901f4(data) {
       deathdata.var_11737fc2 = util::within_fov(attackerpos, attackerangles, data.victimorigin, 0.5);
       deathdata.var_cc3e142b = util::within_fov(data.victimorigin, victimangles, attackerpos, 0.5);
       deathdata.var_67fadda6 = !data.attacker gamepadusedlast();
-      deathdata.var_915c82d0 = isDefined(data.attacker.pers[# "telemetry"].life.life_index) ? data.attacker.pers[# "telemetry"].life.life_index : -1;
-      deathdata.var_8e368e7c = isDefined(data.attacker.pers[# "telemetry"].var_ee8d3324) ? data.attacker.pers[# "telemetry"].var_ee8d3324 : 0;
+      deathdata.var_915c82d0 = isDefined(data.attacker.pers[#"telemetry"].life.life_index) ? data.attacker.pers[#"telemetry"].life.life_index : -1;
+      deathdata.var_8e368e7c = isDefined(data.attacker.pers[#"telemetry"].var_ee8d3324) ? data.attacker.pers[#"telemetry"].var_ee8d3324 : 0;
     }
 
     if(isDefined(data.weapon)) {
@@ -542,14 +542,14 @@ function function_607901f4(data) {
   deathdata.var_5bf208a0 = 0;
 
   if(isDefined(data.victim.class_num)) {
-    if(!isDefined(data.victim.pers[# "telemetry"].var_728f5d7d)) {
-      data.victim.pers[# "telemetry"].var_728f5d7d = [];
+    if(!isDefined(data.victim.pers[#"telemetry"].var_728f5d7d)) {
+      data.victim.pers[#"telemetry"].var_728f5d7d = [];
     }
 
-    var_6165a2d8 = data.victim.pers[# "telemetry"].var_ee8d3324;
+    var_6165a2d8 = data.victim.pers[#"telemetry"].var_ee8d3324;
 
     if(isDefined(var_6165a2d8)) {
-      var_75000956 = data.victim.pers[# "telemetry"].var_728f5d7d;
+      var_75000956 = data.victim.pers[#"telemetry"].var_728f5d7d;
       sent = 0;
 
       for(i = 0; i < var_75000956.size; i++) {
@@ -572,24 +572,24 @@ function function_607901f4(data) {
   deathdata.var_123cae71 = isDefined(data.victim.pickedupweapons[data.victimweapon]);
   deathdata.var_8c6afa1f = isDefined(data.attacker.pickedupweapons[data.weapon]);
 
-  if(!isDefined(data.victim.pers[# "score"])) {
-    data.victim.pers[# "score"] = 0;
+  if(!isDefined(data.victim.pers[#"score"])) {
+    data.victim.pers[#"score"] = 0;
   }
 
-  deathdata.score_earned = data.victim.pers[# "score"] - data.victim.pers[# "telemetry"].life.var_cc189f4f;
+  deathdata.score_earned = data.victim.pers[#"score"] - data.victim.pers[#"telemetry"].life.var_cc189f4f;
 
-  if(!isDefined(data.victim.pers[# "assists"])) {
-    data.victim.pers[# "assists"] = 0;
+  if(!isDefined(data.victim.pers[#"assists"])) {
+    data.victim.pers[#"assists"] = 0;
   }
 
-  deathdata.assists = data.victim.pers[# "assists"] - data.victim.pers[# "telemetry"].life.var_a04d3223;
+  deathdata.assists = data.victim.pers[#"assists"] - data.victim.pers[#"telemetry"].life.var_a04d3223;
 
-  if(!isDefined(data.victim.pers[# "kills"])) {
-    data.victim.pers[# "kills"] = 0;
+  if(!isDefined(data.victim.pers[#"kills"])) {
+    data.victim.pers[#"kills"] = 0;
   }
 
-  deathdata.kills = data.victim.pers[# "kills"] - data.victim.pers[# "telemetry"].life.var_75f84f99;
-  deathdata.var_1af2a81e = data.victim.pers[# "telemetry"].life.deathmodifiers;
+  deathdata.kills = data.victim.pers[#"kills"] - data.victim.pers[#"telemetry"].life.var_75f84f99;
+  deathdata.var_1af2a81e = data.victim.pers[#"telemetry"].life.deathmodifiers;
   println("<dev string:x737>" + deathdata.life_index);
 
   if(isDefined(data.attacker) && isPlayer(data.attacker)) {
@@ -598,7 +598,7 @@ function function_607901f4(data) {
     data.victim function_678f57c8(#"hash_56b3bb4a34717783", deathdata);
   }
 
-  data.victim.pers[# "telemetry"].life.var_4f7ff485 = deathdata.life_index;
+  data.victim.pers[#"telemetry"].life.var_4f7ff485 = deathdata.life_index;
 }
 
 function function_6d57b52a(player, var_6165a2d8, var_cc4bc1dd) {
@@ -717,24 +717,24 @@ function update_weapon_stats(data) {
   }
 
   if(!data.weaponpickedup) {
-    if(!isDefined(data.player.pers[# "telemetry"].var_68ef7250)) {
+    if(!isDefined(data.player.pers[#"telemetry"].var_68ef7250)) {
       return;
     }
 
-    key = data.weapon.name + data.player.pers[# "telemetry"].var_68ef7250;
+    key = data.weapon.name + data.player.pers[#"telemetry"].var_68ef7250;
 
-    if(!isDefined(data.player.pers[# "weaponstats"][key])) {
-      if(data.player.pers[# "weaponstats"].size >= 5) {
+    if(!isDefined(data.player.pers[#"weaponstats"][key])) {
+      if(data.player.pers[#"weaponstats"].size >= 5) {
         data.player function_792e6d18();
-        data.player.pers[# "weaponstats"] = [];
+        data.player.pers[#"weaponstats"] = [];
       }
 
-      data.player.pers[# "weaponstats"][key] = {
-        #stats: [], #weapon: data.weapon, #var_6165a2d8: data.player.pers[# "telemetry"].var_ee8d3324
+      data.player.pers[#"weaponstats"][key] = {
+        #stats: [], #weapon: data.weapon, #var_6165a2d8: data.player.pers[#"telemetry"].var_ee8d3324
       };
     }
 
-    statscache = data.player.pers[# "weaponstats"][key].stats;
+    statscache = data.player.pers[#"weaponstats"][key].stats;
 
     if(!isDefined(statscache[data.statname])) {
       statscache[data.statname] = 0;
@@ -745,10 +745,10 @@ function update_weapon_stats(data) {
 }
 
 function function_792e6d18() {
-  foreach(weaponinfo in self.pers[# "weaponstats"]) {
+  foreach(weaponinfo in self.pers[#"weaponstats"]) {
     weaponitemindex = getbaseweaponitemindex(weaponinfo.weapon);
     weaponstats = {
-      #weapon_name: weaponinfo.weapon.name, #var_5bf208a0: weaponinfo.var_6165a2d8, #shots: isDefined(weaponinfo.stats[# "shots"]) ? weaponinfo.stats[# "shots"] : 0, #hits: isDefined(weaponinfo.stats[# "hits"]) ? weaponinfo.stats[# "hits"] : 0, #kills: isDefined(weaponinfo.stats[# "kills"]) ? weaponinfo.stats[# "kills"] : 0, #headshots: isDefined(weaponinfo.stats[# "headshots"]) ? weaponinfo.stats[# "headshots"] : 0, #var_7e2968cc: isDefined(weaponinfo.stats[# "deathsduringuse"]) ? weaponinfo.stats[# "deathsduringuse"] : 0, #time_used_s: isDefined(weaponinfo.stats[# "timeused"]) ? weaponinfo.stats[# "timeused"] : 0, #xp_earned: isDefined(weaponinfo.stats[# "xpearned"]) ? weaponinfo.stats[# "xpearned"] : 0, #end_level: (isDefined(self getcurrentgunrank(weaponitemindex)) ? self getcurrentgunrank(weaponitemindex) : 0) + 1, #flourish_count: isDefined(weaponinfo.stats[# "flourish_count"]) ? weaponinfo.stats[# "flourish_count"] : 0
+      #weapon_name: weaponinfo.weapon.name, #var_5bf208a0: weaponinfo.var_6165a2d8, #shots: isDefined(weaponinfo.stats[#"shots"]) ? weaponinfo.stats[#"shots"] : 0, #hits: isDefined(weaponinfo.stats[#"hits"]) ? weaponinfo.stats[#"hits"] : 0, #kills: isDefined(weaponinfo.stats[#"kills"]) ? weaponinfo.stats[#"kills"] : 0, #headshots: isDefined(weaponinfo.stats[#"headshots"]) ? weaponinfo.stats[#"headshots"] : 0, #var_7e2968cc: isDefined(weaponinfo.stats[#"deathsduringuse"]) ? weaponinfo.stats[#"deathsduringuse"] : 0, #time_used_s: isDefined(weaponinfo.stats[#"timeused"]) ? weaponinfo.stats[#"timeused"] : 0, #xp_earned: isDefined(weaponinfo.stats[#"xpearned"]) ? weaponinfo.stats[#"xpearned"] : 0, #end_level: (isDefined(self getcurrentgunrank(weaponitemindex)) ? self getcurrentgunrank(weaponitemindex) : 0) + 1, #flourish_count: isDefined(weaponinfo.stats[#"flourish_count"]) ? weaponinfo.stats[#"flourish_count"] : 0
     };
     self function_678f57c8(#"hash_71e24083d5b3f555", weaponstats);
   }
@@ -756,14 +756,14 @@ function function_792e6d18() {
 
 function function_e2162733() {
   var_ee8d3324 = self function_13f24803(self.class_num);
-  self.pers[# "telemetry"].var_ee8d3324 = var_ee8d3324;
+  self.pers[#"telemetry"].var_ee8d3324 = var_ee8d3324;
 
   if(isDefined(var_ee8d3324)) {
-    self.pers[# "telemetry"].var_68ef7250 = "+loadoutChecksum" + string(var_ee8d3324);
+    self.pers[#"telemetry"].var_68ef7250 = "+loadoutChecksum" + string(var_ee8d3324);
     return;
   }
 
-  self.pers[# "telemetry"].var_68ef7250 = undefined;
+  self.pers[#"telemetry"].var_68ef7250 = undefined;
 }
 
 function on_game_event(data) {
@@ -787,7 +787,7 @@ function on_game_event(data) {
 
 function function_6c95006e(data) {
   if(isDefined(data.var_bdc4bbd2)) {
-    deathmodifiers = data.player.pers[# "telemetry"].life.deathmodifiers;
+    deathmodifiers = data.player.pers[#"telemetry"].life.deathmodifiers;
     deathmodifiers[deathmodifiers.size] = data.var_bdc4bbd2;
   }
 }

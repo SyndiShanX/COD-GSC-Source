@@ -292,7 +292,7 @@ function private function_2020d6b0() {
       return true;
     }
 
-    if(oob::chr_party(pointinfo[# "point"])) {
+    if(oob::chr_party(pointinfo[#"point"])) {
       return true;
     }
   }
@@ -426,16 +426,16 @@ function private function_b4c74561(origin) {
   uptrace = bulletTrace(origin + var_9912c765, origin, 0, self);
   downtrace = bulletTrace(origin, origin - var_9912c765, 0, self);
 
-  while(downtrace[# "fraction"] == 1 && uptrace[# "fraction"] == 1 && attempts < 10) {
+  while(downtrace[#"fraction"] == 1 && uptrace[#"fraction"] == 1 && attempts < 10) {
     uptrace = bulletTrace(origin + var_9912c765 * (attempts + 1), origin + var_9912c765 * attempts, 0, self);
     downtrace = bulletTrace(origin - var_9912c765 * attempts, origin - var_9912c765 * (attempts + 1), 0, self);
     attempts++;
   }
 
-  if(downtrace[# "fraction"] <= uptrace[# "fraction"]) {
-    origin = downtrace[# "position"];
+  if(downtrace[#"fraction"] <= uptrace[#"fraction"]) {
+    origin = downtrace[#"position"];
   } else {
-    origin = uptrace[# "position"];
+    origin = uptrace[#"position"];
   }
 
   return origin;

@@ -17,11 +17,11 @@ function init() {}
 
 function function_ff257265() {
   self._bbdata = [];
-  self._bbdata[# "score"] = 0;
-  self._bbdata[# "momentum"] = 0;
-  self._bbdata[# "spawntime"] = gettime();
-  self._bbdata[# "shots"] = 0;
-  self._bbdata[# "hits"] = 0;
+  self._bbdata[#"score"] = 0;
+  self._bbdata[#"momentum"] = 0;
+  self._bbdata[#"spawntime"] = gettime();
+  self._bbdata[#"shots"] = 0;
+  self._bbdata[#"hits"] = 0;
 }
 
 function on_player_connect() {
@@ -59,11 +59,11 @@ function commit_weapon_data(spawnid, currentweapon, time0) {
   }
 
   event_data = {
-    #spawnid: spawnid, #name: currentweapon.name, #duration: time1 - time0, #shots: self._bbdata[# "shots"], #hits: self._bbdata[# "hits"]
+    #spawnid: spawnid, #name: currentweapon.name, #duration: time1 - time0, #shots: self._bbdata[#"shots"], #hits: self._bbdata[#"hits"]
   };
   function_92d1707f(eventname, blackboxeventname, event_data);
-  self._bbdata[# "shots"] = 0;
-  self._bbdata[# "hits"] = 0;
+  self._bbdata[#"shots"] = 0;
+  self._bbdata[#"hits"] = 0;
 }
 
 function add_to_stat(statname, delta) {

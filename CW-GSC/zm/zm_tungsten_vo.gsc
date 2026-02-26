@@ -40,7 +40,7 @@ function function_9469a0c4() {
   level function_d137d6a0(#"hash_1b7c7a29a85242f0", #"hash_1b7c6a29a85227c0", #"hash_1b7c6e29a8522e8c");
   level flag::wait_till(#"intro_scene_done");
   wait 1;
-  level zm_vo::function_7622cb70(array::random([# "hash_6de372c3b844dd1", #"hash_6de342c3b8448b8", #"hash_6de352c3b844a6b", #"hash_6de3a2c3b8452ea"]));
+  level zm_vo::function_7622cb70(array::random([#"hash_6de372c3b844dd1", #"hash_6de342c3b8448b8", #"hash_6de352c3b844a6b", #"hash_6de3a2c3b8452ea"]));
   level flag::set(#"match_start_vo_done");
 }
 
@@ -252,9 +252,9 @@ function function_17b8d833(entity, index) {
 function function_1402bc5a() {
   level endon(#"end_game");
   function_752b5c36(#"hash_303746a439521b44", undefined);
-  var_e0c6386f = array::random([# "hash_2703b45b8783e4ef", #"hash_2703b55b8783e6a2", #"hash_2703b65b8783e855"]);
-  var_40feefce = array::random([# "hash_33bb445bd7d1ff9f", #"hash_33bb455bd7d20152", #"hash_33bb465bd7d20305"]);
-  var_c4ad7aa9 = array::random([# "hash_545c605be9baad33", #"hash_545c615be9baaee6", #"hash_545c625be9bab099"]);
+  var_e0c6386f = array::random([#"hash_2703b45b8783e4ef", #"hash_2703b55b8783e6a2", #"hash_2703b65b8783e855"]);
+  var_40feefce = array::random([#"hash_33bb445bd7d1ff9f", #"hash_33bb455bd7d20152", #"hash_33bb465bd7d20305"]);
+  var_c4ad7aa9 = array::random([#"hash_545c605be9baad33", #"hash_545c615be9baaee6", #"hash_545c625be9bab099"]);
   function_d137d6a0(var_e0c6386f, var_40feefce, var_c4ad7aa9);
   level waittill(#"hash_18e0d0074c789872");
   level thread function_752b5c36(#"hash_55b6f2f810169225", undefined);
@@ -264,17 +264,17 @@ function function_dc17412a() {
   level endon(#"end_game");
   self endon(#"death", #"disconnect");
   self function_b5b0518b(#"hash_6f657fca3d525107", undefined);
-  str_vo = array::random([# "hash_17e5c43193f49382", #"hash_17e5c33193f491cf", #"hash_17e5c23193f4901c", #"hash_17e5c13193f48e69"]);
+  str_vo = array::random([#"hash_17e5c43193f49382", #"hash_17e5c33193f491cf", #"hash_17e5c23193f4901c", #"hash_17e5c13193f48e69"]);
   self zm_vo::function_7622cb70(str_vo);
 }
 
 function function_23e9435d() {
   level endon(#"end_game");
   self endon(#"death", #"disconnect");
-  var_88e4eea = array::random([# "hash_690f542043db0704", #"hash_690f572043db0c1d", #"hash_690f562043db0a6a", #"hash_690f512043db01eb"]);
+  var_88e4eea = array::random([#"hash_690f542043db0704", #"hash_690f572043db0c1d", #"hash_690f562043db0a6a", #"hash_690f512043db01eb"]);
   self zm_vo::function_7622cb70(var_88e4eea);
   wait 1;
-  var_426a22ac = array::random([# "hash_7a39a2204d8894ce", #"hash_7a39a1204d88931b", #"hash_7a39a0204d889168", #"hash_7a39a7204d889d4d"]);
+  var_426a22ac = array::random([#"hash_7a39a2204d8894ce", #"hash_7a39a1204d88931b", #"hash_7a39a0204d889168", #"hash_7a39a7204d889d4d"]);
   self zm_vo::function_7622cb70(var_426a22ac);
 }
 

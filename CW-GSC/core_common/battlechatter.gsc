@@ -37,7 +37,7 @@ function private preinit() {
     }
   }
 
-  level.allowbattlechatter[# "bc"] = currentsessionmode() != 4 && (isDefined(getgametypesetting(#"allowbattlechatter")) ? getgametypesetting(#"allowbattlechatter") : 0);
+  level.allowbattlechatter[#"bc"] = currentsessionmode() != 4 && (isDefined(getgametypesetting(#"allowbattlechatter")) ? getgametypesetting(#"allowbattlechatter") : 0);
   mpdialog = getscriptbundle("mpdialog_default");
 
   if(!isDefined(mpdialog)) {
@@ -45,9 +45,9 @@ function private preinit() {
   }
 
   level.var_3602c1be = &playkillbattlechatter;
-  level.allowspecialistdialog = (isDefined(mpdialog.enableherodialog) ? mpdialog.enableherodialog : 0) && is_true(level.allowbattlechatter[# "bc"]);
-  level.playstartconversation = (isDefined(mpdialog.enableconversation) ? mpdialog.enableconversation : 0) && is_true(level.allowbattlechatter[# "bc"]);
-  level.var_add8e0f2 = [# "frag_grenade", #"eq_sticky_grenade", #"eq_flash_grenade", #"eq_slow_grenade", #"willy_pete", #"nightingale", #"eq_molotov", #"satchel_charge", #"hatchet", #"land_mine", #"trophy_system"];
+  level.allowspecialistdialog = (isDefined(mpdialog.enableherodialog) ? mpdialog.enableherodialog : 0) && is_true(level.allowbattlechatter[#"bc"]);
+  level.playstartconversation = (isDefined(mpdialog.enableconversation) ? mpdialog.enableconversation : 0) && is_true(level.allowbattlechatter[#"bc"]);
+  level.var_add8e0f2 = [#"frag_grenade", #"eq_sticky_grenade", #"eq_flash_grenade", #"eq_slow_grenade", #"willy_pete", #"nightingale", #"eq_molotov", #"satchel_charge", #"hatchet", #"land_mine", #"trophy_system"];
   level.var_648e79b7 = [];
   level.var_75aa0434 = [];
   level.var_e444d44 = 1;
@@ -1319,7 +1319,7 @@ function game_end_vox(winner) {
       return;
     }
 
-    if(isDefined(winner) && level.teambased && isDefined(level.teams[winner]) && player.pers[# "team"] == winner || !level.teambased && player == winner) {
+    if(isDefined(winner) && level.teambased && isDefined(level.teams[winner]) && player.pers[#"team"] == winner || !level.teambased && player == winner) {
       dialogkey = playerbundle.boostwin;
     } else {
       dialogkey = playerbundle.boostloss;

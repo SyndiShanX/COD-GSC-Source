@@ -53,28 +53,28 @@ function private preinit() {
   callback::on_connect(&on_player_connect);
   callback::on_spawned(&on_player_spawned);
   level.defaultclass = "CLASS_CUSTOM1";
-  level.classmap[# "class_smg"] = "CLASS_SMG";
-  level.classmap[# "class_cqb"] = "CLASS_CQB";
-  level.classmap[# "class_assault"] = "CLASS_ASSAULT";
-  level.classmap[# "class_lmg"] = "CLASS_LMG";
-  level.classmap[# "class_sniper"] = "CLASS_SNIPER";
-  level.classmap[# "custom0"] = "CLASS_CUSTOM1";
-  level.classmap[# "custom1"] = "CLASS_CUSTOM2";
-  level.classmap[# "custom2"] = "CLASS_CUSTOM3";
-  level.classmap[# "custom3"] = "CLASS_CUSTOM4";
-  level.classmap[# "custom4"] = "CLASS_CUSTOM5";
-  level.classmap[# "custom5"] = "CLASS_CUSTOM6";
-  level.classmap[# "custom6"] = "CLASS_CUSTOM7";
-  level.classmap[# "custom7"] = "CLASS_CUSTOM8";
-  level.classmap[# "custom8"] = "CLASS_CUSTOM9";
-  level.classmap[# "custom9"] = "CLASS_CUSTOM10";
-  level.classmap[# "custom10"] = "CLASS_CUSTOM_BONUS1";
-  level.classmap[# "custom11"] = "CLASS_CUSTOM_BONUS2";
-  level.classmap[# "custom12"] = level.classmap[# "class_smg"];
-  level.classmap[# "custom13"] = level.classmap[# "class_cqb"];
-  level.classmap[# "custom14"] = level.classmap[# "class_assault"];
-  level.classmap[# "custom15"] = level.classmap[# "class_lmg"];
-  level.classmap[# "custom16"] = level.classmap[# "class_sniper"];
+  level.classmap[#"class_smg"] = "CLASS_SMG";
+  level.classmap[#"class_cqb"] = "CLASS_CQB";
+  level.classmap[#"class_assault"] = "CLASS_ASSAULT";
+  level.classmap[#"class_lmg"] = "CLASS_LMG";
+  level.classmap[#"class_sniper"] = "CLASS_SNIPER";
+  level.classmap[#"custom0"] = "CLASS_CUSTOM1";
+  level.classmap[#"custom1"] = "CLASS_CUSTOM2";
+  level.classmap[#"custom2"] = "CLASS_CUSTOM3";
+  level.classmap[#"custom3"] = "CLASS_CUSTOM4";
+  level.classmap[#"custom4"] = "CLASS_CUSTOM5";
+  level.classmap[#"custom5"] = "CLASS_CUSTOM6";
+  level.classmap[#"custom6"] = "CLASS_CUSTOM7";
+  level.classmap[#"custom7"] = "CLASS_CUSTOM8";
+  level.classmap[#"custom8"] = "CLASS_CUSTOM9";
+  level.classmap[#"custom9"] = "CLASS_CUSTOM10";
+  level.classmap[#"custom10"] = "CLASS_CUSTOM_BONUS1";
+  level.classmap[#"custom11"] = "CLASS_CUSTOM_BONUS2";
+  level.classmap[#"custom12"] = level.classmap[#"class_smg"];
+  level.classmap[#"custom13"] = level.classmap[#"class_cqb"];
+  level.classmap[#"custom14"] = level.classmap[#"class_assault"];
+  level.classmap[#"custom15"] = level.classmap[#"class_lmg"];
+  level.classmap[#"custom16"] = level.classmap[#"class_sniper"];
   function_445ac5cc("CLASS_CUSTOM_BONUS1", 10);
   function_445ac5cc("CLASS_CUSTOM_BONUS2", 11);
   load_default_loadout("CLASS_SMG", 12);
@@ -94,14 +94,14 @@ function on_player_connect() {
     self.var_57c1d146 = [];
   }
 
-  self.pers[# "loadoutindex"] = 0;
+  self.pers[#"loadoutindex"] = 0;
 
   if(loadout::function_87bcb1b()) {
-    if(!isDefined(self.pers[# "class"])) {
-      self.pers[# "class"] = "";
+    if(!isDefined(self.pers[#"class"])) {
+      self.pers[#"class"] = "";
     }
 
-    self.curclass = self.pers[# "class"];
+    self.curclass = self.pers[#"class"];
     self.lastclass = "";
     self loadout::function_c67222df();
     self function_d7c205b9(self.curclass);
@@ -767,7 +767,7 @@ function get_class_num(weaponclass) {
 
 function function_d7c205b9(newclass, calledfrom = # "unspecified") {
   loadoutindex = isDefined(newclass) ? get_class_num(newclass) : undefined;
-  self.pers[# "loadoutindex"] = loadoutindex;
+  self.pers[#"loadoutindex"] = loadoutindex;
   var_45843e9a = calledfrom == # "give_loadout";
   var_7f8c24df = 0;
 
@@ -799,7 +799,7 @@ function function_97d216fa(response) {
 function function_a7079aac(attachments) {}
 
 function menuclass(response, forcedclass, updatecharacterindex, var_632376a3) {
-  if(!isDefined(self.pers[# "team"]) || !isDefined(level.teams[self.pers[# "team"]])) {
+  if(!isDefined(self.pers[#"team"]) || !isDefined(level.teams[self.pers[#"team"]])) {
     return 0;
   }
 
@@ -825,7 +825,7 @@ function menuclass(response, forcedclass, updatecharacterindex, var_632376a3) {
   self function_d7c205b9(playerclass);
   var_96b1ace = 0;
 
-  if(isDefined(self.pers[# "class"]) && self.pers[# "class"] == playerclass) {
+  if(isDefined(self.pers[#"class"]) && self.pers[#"class"] == playerclass) {
     primary_weapon = self function_439b009a("primary");
     current_weapon = self getcurrentweapon();
 
@@ -860,12 +860,12 @@ function menuclass(response, forcedclass, updatecharacterindex, var_632376a3) {
     }
   }
 
-  self.pers[# "changed_class"] = !isDefined(self.curclass) || self.curclass != playerclass || var_96b1ace;
+  self.pers[#"changed_class"] = !isDefined(self.curclass) || self.curclass != playerclass || var_96b1ace;
   var_8d7a946 = !isDefined(self.curclass) || self.curclass == "";
-  self.pers[# "class"] = playerclass;
+  self.pers[#"class"] = playerclass;
   self.curclass = playerclass;
   self function_d7c205b9(playerclass);
-  self.pers[# "weapon"] = undefined;
+  self.pers[#"weapon"] = undefined;
 
   if(namespace_cf6efd05::function_85b812c9() && namespace_cf6efd05::function_99df13e0(self)) {
     return;
@@ -898,13 +898,13 @@ function menuclass(response, forcedclass, updatecharacterindex, var_632376a3) {
     self.usingsupplystation = 0;
 
     if(is_true(self.var_12d4c9e8) || is_true(level.ingraceperiod) && !is_true(self.hasdonecombat) && !is_true(level.var_54cacb7e) || is_true(supplystationclasschange) || var_632376a3 === 1) {
-      self.curclass = self.pers[# "class"];
+      self.curclass = self.pers[#"class"];
       self.tag_stowed_back = undefined;
       self.tag_stowed_hip = undefined;
       self give_loadout();
       loadoutindex = self get_class_num(playerclass);
       self namespace_1b527536::function_1067f94c(loadoutindex);
-    } else if(!var_8d7a946 && self.pers[# "changed_class"] && !is_true(level.var_f46d16f0)) {
+    } else if(!var_8d7a946 && self.pers[#"changed_class"] && !is_true(level.var_f46d16f0)) {
       loadoutindex = self get_class_num(playerclass);
       self namespace_1b527536::function_1067f94c(loadoutindex);
       self luinotifyevent(#"hash_6b67aa04e378d681", 2, 6, loadoutindex);
@@ -939,7 +939,7 @@ function give_loadout() {
     return;
   }
 
-  if(self.var_1fa95cc === gettime() && isDefined(self.curclass) && get_class_num(self.curclass) === self.pers[# "loadoutindex"]) {
+  if(self.var_1fa95cc === gettime() && isDefined(self.curclass) && get_class_num(self.curclass) === self.pers[#"loadoutindex"]) {
     return;
   }
 
@@ -987,7 +987,7 @@ function function_f436358b(weaponclass) {
     pixendevent();
   } else {
     pixbeginevent(#"");
-    assert(isDefined(self.pers[# "class"]), "<dev string:x38>");
+    assert(isDefined(self.pers[#"class"]), "<dev string:x38>");
     self.class_num_for_global_weapons = 0;
     pixendevent();
   }

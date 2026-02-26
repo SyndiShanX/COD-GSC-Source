@@ -1632,7 +1632,7 @@ stop_magic_bullet_shield(ent = self) {
 
 get_rounds_won(team) {
   team = get_team_mapping(team);
-  return game.stat[# "roundswon"][team];
+  return game.stat[#"roundswon"][team];
 }
 
 within_fov(start_origin, start_angles, end_origin, fov) {
@@ -2717,7 +2717,7 @@ anyteamhitroundwinlimit() {
 }
 
 anyteamhitroundlimitwithdraws() {
-  tie_wins = game.stat[# "roundswon"][# "tie"];
+  tie_wins = game.stat[#"roundswon"][#"tie"];
 
   foreach(team, _ in level.teams) {
     if(getroundswon(team) + tie_wins >= level.roundwinlimit) {
@@ -2767,7 +2767,7 @@ hitroundwinlimit() {
 
 any_team_hit_score_limit() {
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= level.scorelimit) {
+    if(game.stat[#"teamscores"][team] >= level.scorelimit) {
       return true;
     }
   }
@@ -2809,7 +2809,7 @@ any_team_hit_round_score_limit() {
   round_score_limit = get_current_round_score_limit();
 
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= round_score_limit) {
+    if(game.stat[#"teamscores"][team] >= round_score_limit) {
       return true;
     }
   }
@@ -2843,7 +2843,7 @@ hitroundscorelimit() {
 
 getroundswon(team) {
   team = get_team_mapping(team);
-  return game.stat[# "roundswon"][team];
+  return game.stat[#"roundswon"][team];
 }
 
 getotherteamsroundswon(str_skip_team) {
@@ -2859,7 +2859,7 @@ getotherteamsroundswon(str_skip_team) {
       continue;
     }
 
-    roundswon += game.stat[# "roundswon"][team];
+    roundswon += game.stat[#"roundswon"][team];
   }
 
   return roundswon;
@@ -2890,14 +2890,14 @@ function_97cf7eb0(v_start, n_max_dist = 5000, n_ground_offset = 0, e_ignore, b_i
   v_trace_end = v_trace_start + (0, 0, (n_max_dist + 5) * -1);
   a_trace = groundtrace(v_trace_start, v_trace_end, 0, e_ignore, b_ignore_water, b_ignore_glass);
 
-  if(a_trace[# "surfacetype"] != "none") {
+  if(a_trace[#"surfacetype"] != "none") {
     return {
-      #position: a_trace[# "position"] + (0, 0, n_ground_offset), #entity: a_trace[# "entity"]
+      #position: a_trace[#"position"] + (0, 0, n_ground_offset), #entity: a_trace[#"entity"]
     };
   }
 
   return {
-    #position: v_start, #entity: a_trace[# "entity"]
+    #position: v_start, #entity: a_trace[#"entity"]
   };
 }
 
@@ -3503,9 +3503,9 @@ function_310d70e2(team) {
   assert(isDefined(level.var_af68e94e));
 
   if(isDefined(team)) {
-    if(team === level.team_mapping[level.var_af68e94e[# "sidea"]]) {
+    if(team === level.team_mapping[level.var_af68e94e[#"sidea"]]) {
       return "sidea";
-    } else if(team === level.team_mapping[level.var_af68e94e[# "sideb"]]) {
+    } else if(team === level.team_mapping[level.var_af68e94e[#"sideb"]]) {
       return "sideb";
     }
   }

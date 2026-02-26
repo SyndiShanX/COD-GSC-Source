@@ -202,9 +202,9 @@ function function_d62ceccf() {
 }
 
 function function_c0a7c66() {
-  array[# "sight_dist"] = 2500;
-  array[# "detect_dist"] = 800;
-  array[# "found_dist"] = 800;
+  array[#"sight_dist"] = 2500;
+  array[#"detect_dist"] = 800;
+  array[#"found_dist"] = 800;
   namespace_cc4354b9::set_corpse_ranges(array);
 }
 
@@ -230,7 +230,7 @@ function function_1610ce5e() {
 }
 
 function function_a6a7797f(a_ents) {
-  level.var_7d6bf2d4 = a_ents[# "hash_475ee55621b83ca0"];
+  level.var_7d6bf2d4 = a_ents[#"hash_475ee55621b83ca0"];
   level.var_6a64a507 = util::spawn_model("weapon_wm_m1911_composite");
   level.var_6a64a507 hidepart("j_mag2", "weapon_wm_m1911_composite");
   level.var_6a64a507 linkto(level.var_7d6bf2d4, "j_prop_1", (0, 0, 0), (0, 0, 270));
@@ -323,7 +323,7 @@ function function_7fc4cb95() {
 }
 
 function function_7adcc91a(a_ents) {
-  victim = a_ents[# "victim"];
+  victim = a_ents[#"victim"];
   victim endon(#"death");
   level flag::wait_till("apartment_2_done");
 
@@ -1838,11 +1838,11 @@ function function_8fd5f0ca() {
 }
 
 function function_d92bcbb5(a_ents) {
-  level.var_dca3174b = a_ents[# "greta"];
+  level.var_dca3174b = a_ents[#"greta"];
 }
 
 function function_c0a03fad(a_ents) {
-  level.var_4f36147a = a_ents[# "hash_230024232d90e377"];
+  level.var_4f36147a = a_ents[#"hash_230024232d90e377"];
 }
 
 function function_c8ac96b3() {

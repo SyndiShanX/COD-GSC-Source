@@ -40,8 +40,8 @@ rscaddenemy(params) {
   player = [[level.rat.common.gethostplayer]]();
   team = # "axis";
 
-  if(isDefined(player.pers[# "team"])) {
-    team = util::getotherteam(player.pers[# "team"]);
+  if(isDefined(player.pers[#"team"])) {
+    team = util::getotherteam(player.pers[#"team"]);
   }
 
   bot = dev::getormakebot(team);
@@ -69,13 +69,13 @@ rscaddenemy(params) {
 testenemy(team) {
   self endon(#"disconnect");
 
-  while(!isDefined(self.pers[# "team"])) {
+  while(!isDefined(self.pers[#"team"])) {
     waitframe(1);
   }
 
   if(level.teambased) {
     params = {
-      #menu: game.menu[# "menu_team"], #response: level.teams[team], #intpayload: 0
+      #menu: game.menu[#"menu_team"], #response: level.teams[team], #intpayload: 0
     };
     self notify(#"menuresponse", params);
     self callback::callback(#"menu_response", params);

@@ -274,12 +274,12 @@ function private player_splatter(localclientnum) {
       opacity = 0;
 
       for(i = 0; i < 4; i++) {
-        if(splatters[i][# "blur amount"] > blur) {
-          blur = splatters[i][# "blur amount"];
+        if(splatters[i][#"blur amount"] > blur) {
+          blur = splatters[i][#"blur amount"];
         }
 
-        if(splatters[i][# "opacity"] > opacity) {
-          opacity = splatters[i][# "opacity"];
+        if(splatters[i][#"opacity"] > opacity) {
+          opacity = splatters[i][#"opacity"];
         }
       }
 
@@ -416,8 +416,8 @@ function function_23901270(localclientnum, ramptime, var_cd141ca2, var_9f153e5b,
 
     var_a2f77259 = 1 - percent;
     var_3a331087 = var_a3c5be40 * percent + var_9f153e5b * var_a2f77259;
-    send_notify = var_484d4e48 && var_3a331087 > 0 && var_9cdbd967[# "opacity"] == 0;
-    var_9cdbd967[# "opacity"] = var_3a331087;
+    send_notify = var_484d4e48 && var_3a331087 > 0 && var_9cdbd967[#"opacity"] == 0;
+    var_9cdbd967[#"opacity"] = var_3a331087;
 
     if(send_notify) {
       level notify(#"splatters_active");
@@ -441,7 +441,7 @@ function function_23901270(localclientnum, ramptime, var_cd141ca2, var_9f153e5b,
     elapsedtime = currenttime - starttime;
   }
 
-  var_9cdbd967[# "opacity"] = var_a3c5be40;
+  var_9cdbd967[#"opacity"] = var_a3c5be40;
 
   if(var_484d4e48 && !var_e04a3690) {
     level notify(#"splatters_active");
@@ -477,9 +477,9 @@ function function_90064049(localclientnum, ramptime, var_cd141ca2, var_9f153e5b,
     var_a2f77259 = 1 - percent;
     var_3a331087 = var_a3c5be40 * percent + var_9f153e5b * var_a2f77259;
     var_85322688 = var_b19159d7 * percent + var_1f06be44 * var_a2f77259;
-    send_notify = var_484d4e48 && (var_3a331087 > 0 && var_9cdbd967[# "opacity"] == 0 || var_85322688 > 0 && var_9cdbd967[# "blur amount"] == 0);
-    var_9cdbd967[# "opacity"] = var_3a331087;
-    var_9cdbd967[# "blur amount"] = var_85322688;
+    send_notify = var_484d4e48 && (var_3a331087 > 0 && var_9cdbd967[#"opacity"] == 0 || var_85322688 > 0 && var_9cdbd967[#"blur amount"] == 0);
+    var_9cdbd967[#"opacity"] = var_3a331087;
+    var_9cdbd967[#"blur amount"] = var_85322688;
 
     if(send_notify) {
       level notify(#"splatters_active");
@@ -503,8 +503,8 @@ function function_90064049(localclientnum, ramptime, var_cd141ca2, var_9f153e5b,
     elapsedtime = currenttime - starttime;
   }
 
-  var_9cdbd967[# "opacity"] = var_a3c5be40;
-  var_9cdbd967[# "blur amount"] = var_b19159d7;
+  var_9cdbd967[#"opacity"] = var_a3c5be40;
+  var_9cdbd967[#"blur amount"] = var_b19159d7;
 
   if(var_484d4e48 && !var_e04a3690) {
     level notify(#"splatters_active");
@@ -1251,8 +1251,8 @@ function private function_162fe6ec(localclientnum) {
       splatter.splatters[j] = [];
     }
 
-    splatter.splatters[j][# "blur amount"] = 0;
-    splatter.splatters[j][# "opacity"] = 0;
+    splatter.splatters[j][#"blur amount"] = 0;
+    splatter.splatters[j][#"opacity"] = 0;
   }
 
   splatter.var_120a7b2c = 0;

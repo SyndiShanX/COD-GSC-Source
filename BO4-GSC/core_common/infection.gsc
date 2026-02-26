@@ -232,14 +232,14 @@ function_d3da95cf() {
     self.switching_teams = 1;
     self.switchedteamsresetgadgets = 1;
     self.joining_team = team;
-    self.leaving_team = self.pers[# "team"];
+    self.leaving_team = self.pers[#"team"];
   }
 
   self teams::function_dc7eaabd(team);
-  self.pers[# "weapon"] = undefined;
-  self.pers[# "spawnweapon"] = undefined;
-  self.pers[# "savedmodel"] = undefined;
-  self.pers[# "teamtime"] = undefined;
+  self.pers[#"weapon"] = undefined;
+  self.pers[#"spawnweapon"] = undefined;
+  self.pers[#"savedmodel"] = undefined;
+  self.pers[#"teamtime"] = undefined;
   self.infected = 1;
   self spectating::set_permissions();
 }

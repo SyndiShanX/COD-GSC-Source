@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __main__() {
-  level._effect[# "grenade_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"grenade_light"] = # "weapon/fx8_equip_light_os";
 }
 
 spawned(localclientnum) {
@@ -41,7 +41,7 @@ fx_think(localclientnum) {
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "grenade_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"grenade_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

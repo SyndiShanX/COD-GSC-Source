@@ -1479,7 +1479,7 @@ function_abf40e98(actionparams) {
   traceend = eye + forwarddir * actionparams.weapon.var_bfbec33f;
   trace = bulletTrace(eye, traceend, 0, self);
 
-  if(trace[# "fraction"] >= 1) {
+  if(trace[#"fraction"] >= 1) {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {
@@ -1491,7 +1491,7 @@ function_abf40e98(actionparams) {
     return undefined;
   }
 
-  if(!isDefined(trace[# "surfacetype"]) || trace[# "surfacetype"] != "glass") {
+  if(!isDefined(trace[#"surfacetype"]) || trace[#"surfacetype"] != "glass") {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {
@@ -2650,9 +2650,9 @@ function_43505382(actionparams) {
   }
 
   if(isentity(target)) {
-    return (target === bullettrace[# "entity"]);
+    return (target === bullettrace[#"entity"]);
   } else if(isvec(target)) {
-    return (bullettrace[# "fraction"] >= 1);
+    return (bullettrace[#"fraction"] >= 1);
   }
 
   return false;
@@ -2667,9 +2667,9 @@ function_ade341c(actionparams) {
   }
 
   if(isentity(target)) {
-    return (target === projectiletrace[# "entity"]);
+    return (target === projectiletrace[#"entity"]);
   } else if(isvec(target)) {
-    return (distancesquared(projectiletrace[# "position"], target) < 100);
+    return (distancesquared(projectiletrace[#"position"], target) < 100);
   }
 
   return false;

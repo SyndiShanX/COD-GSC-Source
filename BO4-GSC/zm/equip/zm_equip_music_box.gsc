@@ -236,7 +236,7 @@ function_9a83be2b() {
     }
   }
 
-  playFXOnTag(level._effect[# "grenade_samantha_steal"], self.var_1a61db89, "tag_origin");
+  playFXOnTag(level._effect[#"grenade_samantha_steal"], self.var_1a61db89, "tag_origin");
   self.var_1a61db89 unlink();
   self.var_1a61db89 movez(60, 1, 0.25, 0.25);
   self.var_1a61db89 vibrate((0, 0, 0), 1.5, 2.5, 1);

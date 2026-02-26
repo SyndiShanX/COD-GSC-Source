@@ -46,22 +46,22 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_36718adf(instance) {
-  instance.var_c8c31c6e = instance.contentgroups[# "hash_6163649ad4621f8d"][0];
-  instance.var_32686fb7 = instance.contentgroups[# "hash_6163619ad4621a74"][0];
-  instance.var_c88cb786 = instance.contentgroups[# "spawnpt_1"];
-  instance.var_b64812fd = instance.contentgroups[# "spawnpt_2"];
-  instance.var_c30ec716 = instance.contentgroups[# "hash_3873fe8f95c20cd1"];
-  instance.var_f9d4b491 = instance.contentgroups[# "hash_3873fb8f95c207b8"];
-  instance.var_c7f8f5a6 = instance.contentgroups[# "spawnpt_final"];
-  instance.var_d8633066 = instance.contentgroups[# "harvester"];
-  instance.var_ba46398 = instance.contentgroups[# "hash_3b6657037c39a33"];
-  instance.var_37ea0cc = instance.contentgroups[# "hash_32f62e13bc497cb0"];
-  instance.var_5ed8d9e6 = instance.contentgroups[# "truck"][0];
-  instance.var_4f021309 = instance.contentgroups[# "platform"][0];
-  instance.var_25ad512b = instance.contentgroups[# "deposit"][0];
-  instance.var_9ec9bab = instance.contentgroups[# "collision_truck"][0];
-  instance.var_36f78af6 = instance.contentgroups[# "rocket_truck"][0];
-  instance.var_3bb47a83 = instance.contentgroups[# "rocket"][0];
+  instance.var_c8c31c6e = instance.contentgroups[#"hash_6163649ad4621f8d"][0];
+  instance.var_32686fb7 = instance.contentgroups[#"hash_6163619ad4621a74"][0];
+  instance.var_c88cb786 = instance.contentgroups[#"spawnpt_1"];
+  instance.var_b64812fd = instance.contentgroups[#"spawnpt_2"];
+  instance.var_c30ec716 = instance.contentgroups[#"hash_3873fe8f95c20cd1"];
+  instance.var_f9d4b491 = instance.contentgroups[#"hash_3873fb8f95c207b8"];
+  instance.var_c7f8f5a6 = instance.contentgroups[#"spawnpt_final"];
+  instance.var_d8633066 = instance.contentgroups[#"harvester"];
+  instance.var_ba46398 = instance.contentgroups[#"hash_3b6657037c39a33"];
+  instance.var_37ea0cc = instance.contentgroups[#"hash_32f62e13bc497cb0"];
+  instance.var_5ed8d9e6 = instance.contentgroups[#"truck"][0];
+  instance.var_4f021309 = instance.contentgroups[#"platform"][0];
+  instance.var_25ad512b = instance.contentgroups[#"deposit"][0];
+  instance.var_9ec9bab = instance.contentgroups[#"collision_truck"][0];
+  instance.var_36f78af6 = instance.contentgroups[#"rocket_truck"][0];
+  instance.var_3bb47a83 = instance.contentgroups[#"rocket"][0];
   instance.var_da3c0f01 = [];
   instance.var_bc70cd17 = [];
   instance.var_6dced364 = [];
@@ -699,7 +699,7 @@ function function_6d122cef() {
   v_forward = vectornormalize(anglesToForward(self.angles)) * 3000 + self.origin;
 
   if(isDefined(v_forward)) {
-    v_ground = groundtrace(v_forward + (0, 0, 1000), v_forward + (0, 0, -1000), 0, self)[# "position"];
+    v_ground = groundtrace(v_forward + (0, 0, 1000), v_forward + (0, 0, -1000), 0, self)[#"position"];
   }
 
   if(isDefined(v_ground)) {
@@ -1145,7 +1145,7 @@ function function_55904a22(instance, var_617b7cef) {
 }
 
 function function_3ef1d58a(instance, n_path) {
-  var_cdce8e6f = instance.contentgroups[# "hash_3e7c0b4f211e4717" + n_path][0];
+  var_cdce8e6f = instance.contentgroups[#"hash_3e7c0b4f211e4717" + n_path][0];
 
   if(isDefined(var_cdce8e6f.script_noteworthy)) {
     instance flag::set(#"hash_12988a5a3e6a65d6");
@@ -2419,12 +2419,12 @@ function canister_drop() {
   v_point = getclosestpointonnavmesh(v_org, 120, 16);
 
   if(isDefined(v_point)) {
-    v_ground = groundtrace(v_point + (0, 0, 50), v_point + (0, 0, -15000), 1, self.e_owner)[# "position"];
+    v_ground = groundtrace(v_point + (0, 0, 50), v_point + (0, 0, -15000), 1, self.e_owner)[#"position"];
   }
 
   if(!isDefined(v_ground)) {
     v_pos = self.e_owner.origin;
-    v_ground = groundtrace(v_pos + (0, 0, 50), v_pos + (0, 0, -15000), 1, self.e_owner)[# "position"];
+    v_ground = groundtrace(v_pos + (0, 0, 50), v_pos + (0, 0, -15000), 1, self.e_owner)[#"position"];
   }
 
   self.e_owner = undefined;

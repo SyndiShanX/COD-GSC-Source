@@ -355,7 +355,7 @@ function function_cc83a141(eattacker, eplayer, idamage) {
   var_32419617 = level.var_277e6832[eattacker.aitype];
 
   if(!isDefined(var_32419617)) {
-    var_32419617 = level.var_277e6832[# "default"];
+    var_32419617 = level.var_277e6832[#"default"];
   }
 
   damage_scale = 1;

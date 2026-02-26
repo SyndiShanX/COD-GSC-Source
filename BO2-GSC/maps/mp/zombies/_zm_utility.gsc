@@ -2368,7 +2368,7 @@ play_sound_2d(sound) {
   level thread really_play_2d_sound(sound);
 }
 
-#include_weapon(weapon_name, in_box, collector, weighting_func) {
+include_weapon(weapon_name, in_box, collector, weighting_func) {
   println("ZM >> include_weapon = " + weapon_name);
 
   if(!isDefined(in_box))
@@ -2380,7 +2380,7 @@ play_sound_2d(sound) {
   maps\mp\zombies\_zm_weapons::include_zombie_weapon(weapon_name, in_box, collector, weighting_func);
 }
 
-#include_buildable(buildable_struct) {
+include_buildable(buildable_struct) {
   println("ZM >> include_buildable = " + buildable_struct.name);
 
   maps\mp\zombies\_zm_buildables::include_zombie_buildable(buildable_struct);
@@ -2408,15 +2408,15 @@ wait_for_buildable(buildable_name) {
   return player;
 }
 
-#include_powered_item(power_on_func, power_off_func, range_func, cost_func, power_sources, start_power, target) {
+include_powered_item(power_on_func, power_off_func, range_func, cost_func, power_sources, start_power, target) {
   return maps\mp\zombies\_zm_power::add_powered_item(power_on_func, power_off_func, range_func, cost_func, power_sources, start_power, target);
 }
 
-#include_powerup(powerup_name) {
+include_powerup(powerup_name) {
   maps\mp\zombies\_zm_powerups::include_zombie_powerup(powerup_name);
 }
 
-#include_equipment(equipment_name) {
+include_equipment(equipment_name) {
   maps\mp\zombies\_zm_equipment::include_zombie_equipment(equipment_name);
 }
 

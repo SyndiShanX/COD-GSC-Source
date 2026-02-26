@@ -46,12 +46,12 @@ spawner() {
 }
 
 precache() {
-  character\character_opforce_merc_sniper_a::precache();
+    character\character_opforce_merc_sniper_a::precache();
 
-  precacheItem("dragunov");
-  precacheItem("dragunov_woodland");
-  precacheItem("pp2000");
-  precacheItem("fraggrenade");
+    precacheItem("dragunov");
+    precacheItem("dragunov_woodland");
+    precacheItem("pp2000");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

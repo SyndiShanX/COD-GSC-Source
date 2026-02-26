@@ -786,7 +786,7 @@ function_62d37304(weapon) {
     v_end = v_start + self getweaponforwarddir() * 1000;
     s_trace = bulletTrace(v_start, v_end, 0, self);
     level notify(#"xbow_hit", {
-      #player: self, #position: s_trace[# "position"]
+      #player: self, #position: s_trace[#"position"]
     });
   }
 

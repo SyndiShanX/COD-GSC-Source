@@ -29,7 +29,7 @@ enable_additional_primary_weapon_perk_for_level() {
 
 init_additional_primary_weapon() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[# "additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
+    level._effect[#"additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
   }
 }
 

@@ -17,7 +17,7 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[# "fx8_blightfather_vomit_object"] = "zm_ai/fx8_blightfather_vomit_object";
+  level._effect[#"fx8_blightfather_vomit_object"] = "zm_ai/fx8_blightfather_vomit_object";
 }
 
 vomit(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -27,6 +27,6 @@ vomit(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastime
   }
 
   if(newval) {
-    self.var_39c21153 = util::playFXOnTag(localclientnum, level._effect[# "fx8_blightfather_vomit_object"], self, "tag_origin");
+    self.var_39c21153 = util::playFXOnTag(localclientnum, level._effect[#"fx8_blightfather_vomit_object"], self, "tag_origin");
   }
 }

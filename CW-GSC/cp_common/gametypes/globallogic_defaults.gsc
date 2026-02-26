@@ -27,19 +27,19 @@ function default_onforfeit(team) {
   level notify(#"forfeit in progress");
   level endon(#"forfeit in progress", #"abort forfeit");
   forfeit_delay = 20;
-  announcement(game.strings[# "opponent_forfeiting_in"], forfeit_delay, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
   wait 10;
-  announcement(game.strings[# "opponent_forfeiting_in"], 10, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], 10, 0);
   wait 10;
   endreason = # "";
 
   if(level.multiteam) {
-    setDvar(#"ui_text_endreason", game.strings[# "other_teams_forfeited"]);
-    endreason = game.strings[# "other_teams_forfeited"];
+    setDvar(#"ui_text_endreason", game.strings[#"other_teams_forfeited"]);
+    endreason = game.strings[#"other_teams_forfeited"];
     winner = team;
   } else if(!isDefined(team)) {
-    setDvar(#"ui_text_endreason", game.strings[# "players_forfeited"]);
-    endreason = game.strings[# "players_forfeited"];
+    setDvar(#"ui_text_endreason", game.strings[#"players_forfeited"]);
+    endreason = game.strings[#"players_forfeited"];
     winner = level.players[0];
   } else if(isDefined(level.teams[team])) {
     endreason = game.strings[team + "_forfeited"];
@@ -77,7 +77,7 @@ function default_ondeadevent(team) {
 
 function function_9fd1cc80(team) {
   if(isDefined(level.teams[team])) {
-    eliminatedstring = game.strings[# "enemies_eliminated"];
+    eliminatedstring = game.strings[#"enemies_eliminated"];
     iprintln(eliminatedstring);
     setDvar(#"ui_text_endreason", eliminatedstring);
     winner = globallogic::determineteamwinnerbygamestat("teamScores");
@@ -86,7 +86,7 @@ function function_9fd1cc80(team) {
     return;
   }
 
-  setDvar(#"ui_text_endreason", game.strings[# "tie"]);
+  setDvar(#"ui_text_endreason", game.strings[#"tie"]);
   globallogic_utils::logteamwinstring("tie");
 
   if(level.teambased) {
@@ -152,7 +152,7 @@ function default_ontimelimit() {
     }
   }
 
-  setDvar(#"ui_text_endreason", game.strings[# "time_limit_reached"]);
+  setDvar(#"ui_text_endreason", game.strings[#"time_limit_reached"]);
   thread globallogic::endgame();
 }
 
@@ -174,7 +174,7 @@ function default_onscorelimit() {
     }
   }
 
-  setDvar(#"ui_text_endreason", game.strings[# "score_limit_reached"]);
+  setDvar(#"ui_text_endreason", game.strings[#"score_limit_reached"]);
   thread globallogic::endgame();
   return true;
 }

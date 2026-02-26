@@ -368,7 +368,7 @@ function function_7d380ea9(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_12b59dee = undefined;
   }
 
-  var_a04a4858 = [# "hash_726534103985846c"];
+  var_a04a4858 = [#"hash_726534103985846c"];
 
   if(bwastimejump && bwastimejump < var_a04a4858.size + 1) {
     self.var_da783696 = var_a04a4858[bwastimejump - 1];

@@ -87,9 +87,9 @@ on_game_playing() {
 }
 
 function_dd64960c(a_ents) {
-  if(isDefined(a_ents[# "prop 1"])) {
-    var_7425591a = a_ents[# "prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
-    a_ents[# "prop 1"] waittill(#"physics_pulse", #"death");
+  if(isDefined(a_ents[#"prop 1"])) {
+    var_7425591a = a_ents[#"prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
+    a_ents[#"prop 1"] waittill(#"physics_pulse", #"death");
     physicsexplosionsphere(var_7425591a, 1024, 1, 1);
   }
 }

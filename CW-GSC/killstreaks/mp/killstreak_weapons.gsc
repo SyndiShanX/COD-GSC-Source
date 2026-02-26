@@ -103,11 +103,11 @@ function function_82ea8e15(hardpointtype) {
     self killstreak_dialog::play_killstreak_start_dialog(hardpointtype, self.team, 1);
     self stats::function_e24eec31(killstreakweapon, #"used", 1);
     level thread popups::displayteammessagetoall(level.killstreaks[hardpointtype].script_bundle.var_667c638e, self);
-    self.pers[# "held_killstreak_clip_count"][killstreakweapon] = killstreakweapon.clipsize < currentammo ? killstreakweapon.clipsize : currentammo;
+    self.pers[#"held_killstreak_clip_count"][killstreakweapon] = killstreakweapon.clipsize < currentammo ? killstreakweapon.clipsize : currentammo;
 
     if(isfrominventory == 0) {
-      if(self.pers[# "killstreak_quantity"][killstreakweapon] > 0) {
-        self.pers[# "held_killstreak_ammo_count"][killstreakweapon] = killstreakweapon.maxammo;
+      if(self.pers[#"killstreak_quantity"][killstreakweapon] > 0) {
+        self.pers[#"held_killstreak_ammo_count"][killstreakweapon] = killstreakweapon.maxammo;
       }
 
       self killstreaks::function_fa6e0467(killstreakweapon);
@@ -119,7 +119,7 @@ function function_82ea8e15(hardpointtype) {
       killstreak_id = self killstreakrules::killstreakstart(hardpointtype, self.team, 0, 0);
 
       if(hardpointtype == "inventory_minigun") {
-        killstreak_id = self.pers[# "killstreak_unique_id"][self.pers[# "killstreak_unique_id"].size - 1];
+        killstreak_id = self.pers[#"killstreak_unique_id"][self.pers[#"killstreak_unique_id"].size - 1];
       }
 
       self.minigunid = killstreak_id;
@@ -131,7 +131,7 @@ function function_82ea8e15(hardpointtype) {
     killstreak_id = self killstreakrules::killstreakstart(hardpointtype, self.team, 0, 0);
 
     if(hardpointtype == "inventory_m32") {
-      killstreak_id = self.pers[# "killstreak_unique_id"][self.pers[# "killstreak_unique_id"].size - 1];
+      killstreak_id = self.pers[#"killstreak_unique_id"][self.pers[#"killstreak_unique_id"].size - 1];
     }
 
     self.m32id = killstreak_id;
@@ -145,8 +145,8 @@ function function_82ea8e15(hardpointtype) {
   self setblockweaponpickup(killstreakweapon, 1);
 
   if(isfrominventory) {
-    self setweaponammoclip(killstreakweapon, self.pers[# "held_killstreak_clip_count"][killstreakweapon]);
-    self setweaponammostock(killstreakweapon, self.pers[# "killstreak_ammo_count"][self.pers[# "killstreak_ammo_count"].size - 1] - self.pers[# "held_killstreak_clip_count"][killstreakweapon]);
+    self setweaponammoclip(killstreakweapon, self.pers[#"held_killstreak_clip_count"][killstreakweapon]);
+    self setweaponammostock(killstreakweapon, self.pers[#"killstreak_ammo_count"][self.pers[#"killstreak_ammo_count"].size - 1] - self.pers[#"held_killstreak_clip_count"][killstreakweapon]);
   }
 
   notifystring = "killstreakWeapon_" + killstreakweapon.name;
@@ -223,8 +223,8 @@ function watchkillstreakweaponswitch(killstreakweapon, killstreak_id, isfrominve
       killstreakindex = self killstreaks::get_killstreak_index_by_id(killstreak_id);
 
       if(isDefined(killstreakindex)) {
-        self.pers[# "killstreak_ammo_count"][killstreakindex] = currentammo;
-        self.pers[# "held_killstreak_clip_count"][killstreakweapon] = currentammoinclip;
+        self.pers[#"killstreak_ammo_count"][killstreakindex] = currentammo;
+        self.pers[#"held_killstreak_clip_count"][killstreakweapon] = currentammoinclip;
       }
     }
 
@@ -241,8 +241,8 @@ function watchkillstreakweaponswitch(killstreakweapon, killstreak_id, isfrominve
     }
 
     killstreakid = killstreaks::get_top_killstreak_unique_id();
-    self.pers[# "held_killstreak_ammo_count"][killstreakweapon] = currentammo;
-    self.pers[# "held_killstreak_clip_count"][killstreakweapon] = currentammoinclip;
+    self.pers[#"held_killstreak_ammo_count"][killstreakweapon] = currentammo;
+    self.pers[#"held_killstreak_clip_count"][killstreakweapon] = currentammoinclip;
 
     if(killstreak_id != -1) {
       self notify(#"killstreak_weapon_switch");
@@ -252,7 +252,7 @@ function watchkillstreakweaponswitch(killstreakweapon, killstreak_id, isfrominve
     self.usingkillstreakheldweapon = undefined;
     waittillframeend();
 
-    if(currentammo == 0 || self.pers[# "killstreak_quantity"][killstreakweapon] > 0 || isfrominventory && isDefined(killstreakid) && killstreakid != killstreak_id) {
+    if(currentammo == 0 || self.pers[#"killstreak_quantity"][killstreakweapon] > 0 || isfrominventory && isDefined(killstreakid) && killstreakid != killstreak_id) {
       killstreakrules::killstreakstop(killstreaks::get_killstreak_for_weapon(killstreakweapon), self.team, killstreak_id);
 
       if(killstreakweapon == miniguninventoryweapon || killstreakweapon == minigunweapon) {
@@ -263,10 +263,10 @@ function watchkillstreakweaponswitch(killstreakweapon, killstreak_id, isfrominve
         self.m32active = 0;
       }
 
-      if(self.pers[# "killstreak_quantity"][killstreakweapon] > 0) {
-        self.pers[# "held_killstreak_ammo_count"][killstreakweapon] = killstreakweapon.maxammo;
-        self loadout::function_3ba6ee5d(killstreakweapon, self.pers[# "held_killstreak_ammo_count"][killstreakweapon]);
-        self.pers[# "killstreak_quantity"][killstreakweapon]--;
+      if(self.pers[#"killstreak_quantity"][killstreakweapon] > 0) {
+        self.pers[#"held_killstreak_ammo_count"][killstreakweapon] = killstreakweapon.maxammo;
+        self loadout::function_3ba6ee5d(killstreakweapon, self.pers[#"held_killstreak_ammo_count"][killstreakweapon]);
+        self.pers[#"killstreak_quantity"][killstreakweapon]--;
       }
     }
 
@@ -294,7 +294,7 @@ function watchkillstreakweapondeath(killstreakweapon, killstreak_id, isfrominven
   currentammo = self getammocount(killstreakweapon);
   currentammoinclip = self getweaponammoclip(killstreakweapon);
 
-  if(self.pers[# "killstreak_quantity"].size == 0) {
+  if(self.pers[#"killstreak_quantity"].size == 0) {
     currentammo = 0;
     currentammoinclip = 0;
   }
@@ -305,18 +305,18 @@ function watchkillstreakweapondeath(killstreakweapon, killstreak_id, isfrominven
 
   if(self.lastnonkillstreakweapon == killstreakweapon) {
     if(newammo < 0) {
-      self.pers[# "held_killstreak_ammo_count"][killstreakweapon] = 0;
-      self.pers[# "held_killstreak_clip_count"][killstreakweapon] = 0;
+      self.pers[#"held_killstreak_ammo_count"][killstreakweapon] = 0;
+      self.pers[#"held_killstreak_clip_count"][killstreakweapon] = 0;
     } else {
-      self.pers[# "held_killstreak_ammo_count"][killstreakweapon] = newammo;
-      self.pers[# "held_killstreak_clip_count"][killstreakweapon] = maxclipsize <= newammo ? maxclipsize : newammo;
+      self.pers[#"held_killstreak_ammo_count"][killstreakweapon] = newammo;
+      self.pers[#"held_killstreak_clip_count"][killstreakweapon] = maxclipsize <= newammo ? maxclipsize : newammo;
     }
   }
 
   self.usingkillstreakheldweapon = 0;
   killstreaktype = killstreaks::get_killstreak_for_weapon(killstreakweapon);
 
-  if(newammo <= 0 || self.pers[# "killstreak_quantity"][killstreakweapon] > 0 || isfrominventory && isDefined(killstreakid) && killstreakid != killstreak_id) {
+  if(newammo <= 0 || self.pers[#"killstreak_quantity"][killstreakweapon] > 0 || isfrominventory && isDefined(killstreakid) && killstreakid != killstreak_id) {
     killstreakrules::killstreakstop(killstreaktype, oldteam, killstreak_id);
 
     if(killstreaktype == "minigun" || killstreaktype == "inventory_minigun") {
@@ -327,11 +327,11 @@ function watchkillstreakweapondeath(killstreakweapon, killstreak_id, isfrominven
       self.m32active = 0;
     }
 
-    if(isDefined(self.pers[# "killstreak_quantity"][killstreakweapon]) && self.pers[# "killstreak_quantity"][killstreakweapon] > 0) {
-      self.pers[# "held_killstreak_ammo_count"][killstreakweapon] = maxammo;
-      self.pers[# "held_killstreak_clip_count"][killstreakweapon] = maxclipsize;
+    if(isDefined(self.pers[#"killstreak_quantity"][killstreakweapon]) && self.pers[#"killstreak_quantity"][killstreakweapon] > 0) {
+      self.pers[#"held_killstreak_ammo_count"][killstreakweapon] = maxammo;
+      self.pers[#"held_killstreak_clip_count"][killstreakweapon] = maxclipsize;
       self killstreaks::function_fa6e0467(killstreakweapon);
-      self.pers[# "killstreak_quantity"][killstreakweapon]--;
+      self.pers[#"killstreak_quantity"][killstreakweapon]--;
     }
   }
 
@@ -346,7 +346,7 @@ function watchkillstreakweapondeath(killstreakweapon, killstreak_id, isfrominven
     killstreakindex = self killstreaks::get_killstreak_index_by_id(killstreak_id);
 
     if(isDefined(killstreakindex)) {
-      self.pers[# "killstreak_ammo_count"][killstreakindex] = self.pers[# "held_killstreak_ammo_count"][killstreakweapon];
+      self.pers[#"killstreak_ammo_count"][killstreakindex] = self.pers[#"held_killstreak_ammo_count"][killstreakweapon];
     }
   }
 }
@@ -357,7 +357,7 @@ function watchplayerdeath(killstreakweapon) {
   self endon(endonweaponstring);
   self waittill(#"death");
   currentammo = self getammocount(killstreakweapon);
-  self.pers[# "held_killstreak_clip_count"][killstreakweapon] = killstreakweapon.clipsize <= currentammo ? killstreakweapon.clipsize : currentammo;
+  self.pers[#"held_killstreak_clip_count"][killstreakweapon] = killstreakweapon.clipsize <= currentammo ? killstreakweapon.clipsize : currentammo;
 }
 
 function watchkillstreakremoval(killstreaktype, killstreak_id) {
@@ -396,15 +396,15 @@ function watchkillstreakroundchange(isfrominventory, killstreak_id) {
     killstreakindex = self killstreaks::get_killstreak_index_by_id(killstreak_id);
 
     if(isDefined(killstreakindex)) {
-      self.pers[# "killstreak_ammo_count"][killstreakindex] = currentammo;
-      self.pers[# "held_killstreak_clip_count"][currentweapon] = maxclipsize <= currentammo ? maxclipsize : currentammo;
+      self.pers[#"killstreak_ammo_count"][killstreakindex] = currentammo;
+      self.pers[#"held_killstreak_clip_count"][currentweapon] = maxclipsize <= currentammo ? maxclipsize : currentammo;
     }
 
     return;
   }
 
-  self.pers[# "held_killstreak_ammo_count"][currentweapon] = currentammo;
-  self.pers[# "held_killstreak_clip_count"][currentweapon] = maxclipsize <= currentammo ? maxclipsize : currentammo;
+  self.pers[#"held_killstreak_ammo_count"][currentweapon] = currentammo;
+  self.pers[#"held_killstreak_clip_count"][currentweapon] = maxclipsize <= currentammo ? maxclipsize : currentammo;
 }
 
 function checkifswitchableweapon(currentweapon, newweapon, killstreakweapon, currentkillstreakid) {
@@ -442,18 +442,18 @@ function checkifswitchableweapon(currentweapon, newweapon, killstreakweapon, cur
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(!isDefined(self.pers[# "held_killstreak_ammo_count"])) {
+  if(!isDefined(self.pers[#"held_killstreak_ammo_count"])) {
     return;
   }
 
-  var_e3daecef = getarraykeys(self.pers[# "held_killstreak_ammo_count"]);
+  var_e3daecef = getarraykeys(self.pers[#"held_killstreak_ammo_count"]);
 
   foreach(deathanimduration in var_e3daecef) {
     if(!isDefined(deathanimduration)) {
       continue;
     }
 
-    ammocount = self.pers[# "held_killstreak_ammo_count"][deathanimduration];
+    ammocount = self.pers[#"held_killstreak_ammo_count"][deathanimduration];
     killstreaktype = killstreaks::get_killstreak_for_weapon(deathanimduration);
     bundle = level.killstreaks[killstreaktype].script_bundle;
 
@@ -477,7 +477,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       ammocount = 0;
     }
 
-    self.pers[# "held_killstreak_ammo_count"][deathanimduration] = ammocount;
+    self.pers[#"held_killstreak_ammo_count"][deathanimduration] = ammocount;
 
     if(ammoondeath > 0 && ammocount == 0) {
       if(deathanimduration.var_6f41c2a9) {

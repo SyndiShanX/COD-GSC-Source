@@ -20,11 +20,11 @@ init() {
   clientfield::register("scriptmover", "" + # "lightning_arc_fx", 16000, 1, "int", &function_37d1ee2e, 0, 0);
   clientfield::register("scriptmover", "" + # "viper_bite_bitten_fx", 16000, 1, "int", &function_5091797, 0, 0);
   clientfield::register("scriptmover", "" + # "viper_bite_projectile_impact", 16000, 1, "counter", &function_e2680ff3, 0, 0);
-  level._effect[# "hash_52f038f656770d3f"] = # "hash_433034414b39f1ef";
-  level._effect[# "chaos_bolt_2"] = # "hash_433035414b39f3a2";
-  level._effect[# "hash_52f03af6567710a5"] = # "hash_7a9a94bbcf902878";
-  level._effect[# "pegasus_emerge"] = # "hash_9c7935d1106ec1d";
-  level._effect[# "storm_radius"] = # "hash_4dd46a244305d465";
+  level._effect[#"hash_52f038f656770d3f"] = # "hash_433034414b39f1ef";
+  level._effect[#"chaos_bolt_2"] = # "hash_433035414b39f3a2";
+  level._effect[#"hash_52f03af6567710a5"] = # "hash_7a9a94bbcf902878";
+  level._effect[#"pegasus_emerge"] = # "hash_9c7935d1106ec1d";
+  level._effect[#"storm_radius"] = # "hash_4dd46a244305d465";
   level.s_boss_battle = spawnStruct();
 }
 
@@ -42,13 +42,13 @@ function_6e3ecc82(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     case 2:
     case 3:
       self util::waittill_dobj(localclientnum);
-      self.fx = util::playFXOnTag(localclientnum, level._effect[# "chaos_bolt_" + newval], self, "tag_origin");
+      self.fx = util::playFXOnTag(localclientnum, level._effect[#"chaos_bolt_" + newval], self, "tag_origin");
       break;
   }
 }
 
 pegasus_emerge(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "pegasus_emerge"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"pegasus_emerge"], self, "tag_origin");
 }
 
 function_272aa016(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -56,7 +56,7 @@ function_272aa016(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   self endon("1eb9df21273269b8");
 
   if(newval) {
-    self.fx_id = util::playFXOnTag(localclientnum, level._effect[# "storm_radius"], self, "tag_origin");
+    self.fx_id = util::playFXOnTag(localclientnum, level._effect[#"storm_radius"], self, "tag_origin");
 
     if(!isDefined(self.sfx_id)) {
       self.sfx_id = self playLoopSound(#"hash_5760b615b9b749d2");
@@ -100,7 +100,7 @@ function_ed1d0231(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[# "lightning_impact"], self, str_fx_tag);
+    self.var_89d8285 = util::playFXOnTag(localclientnum, level._effect[#"lightning_impact"], self, str_fx_tag);
     self playSound(localclientnum, #"hash_63d588d1f28ecdc1");
   }
 }
@@ -131,7 +131,7 @@ function_e9aa9e80(localclientnum) {
   }
 
   self.e_fx = util::spawn_model(localclientnum, #"tag_origin", e_ball.origin);
-  self.fx_arc = util::playFXOnTag(localclientnum, level._effect[# "lightning_arc"], self.e_fx, "tag_origin");
+  self.fx_arc = util::playFXOnTag(localclientnum, level._effect[#"lightning_arc"], self.e_fx, "tag_origin");
 
   while(true) {
     str_fx_tag = isDefined(self gettagorigin("j_mainroot")) ? "j_mainroot" : "tag_driver";
@@ -172,7 +172,7 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   str_fx_tag = isDefined(self gettagorigin("j_mainroot")) ? "j_mainroot" : "tag_driver";
 
   if(newval == 1) {
-    self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[# "hash_206a58239ffb5e0f"], self, str_fx_tag);
+    self.var_cc9c5baa = util::playFXOnTag(localclientnum, level._effect[#"hash_206a58239ffb5e0f"], self, str_fx_tag);
 
     if(!isDefined(self.var_6450813b)) {
       self playSound(localclientnum, #"hash_76feff9b8f93c3d9");
@@ -192,11 +192,11 @@ function_5091797(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self.var_6450813b = undefined;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "hash_b784dd4d224f7e"], self, str_fx_tag);
+  util::playFXOnTag(localclientnum, level._effect[#"hash_b784dd4d224f7e"], self, str_fx_tag);
 }
 
 function_e2680ff3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   str_fx_tag = isDefined(self gettagorigin("j_mainroot")) ? "j_mainroot" : "tag_driver";
-  util::playFXOnTag(localclientnum, level._effect[# "viper_bite_projectile_impact"], self, str_fx_tag);
+  util::playFXOnTag(localclientnum, level._effect[#"viper_bite_projectile_impact"], self, str_fx_tag);
   self playSound(0, #"hash_3098cba1f74bb5d1");
 }

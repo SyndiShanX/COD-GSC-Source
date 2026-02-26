@@ -118,8 +118,8 @@ function init_teams() {
   spawnsystem.ispawn_teammask = [];
   spawnsystem.var_c2989de = 1;
   spawnsystem.var_146943ea = 1;
-  spawnsystem.ispawn_teammask[# "none"] = spawnsystem.var_c2989de;
-  spawnsystem.ispawn_teammask[# "neutral"] = spawnsystem.var_146943ea;
+  spawnsystem.ispawn_teammask[#"none"] = spawnsystem.var_c2989de;
+  spawnsystem.ispawn_teammask[#"neutral"] = spawnsystem.var_146943ea;
   all = spawnsystem.var_c2989de;
   count = 1;
 
@@ -133,7 +133,7 @@ function init_teams() {
     count++;
   }
 
-  spawnsystem.ispawn_teammask[# "all"] = all;
+  spawnsystem.ispawn_teammask[#"all"] = all;
 }
 
 function onspawnplayer(predictedspawn = 0) {
@@ -270,25 +270,25 @@ function private function_594e5666() {
   point = level.mapcenter;
   s_trace = groundtrace(point + (0, 0, 10000), point + (0, 0, -10000), 0, self);
 
-  if(s_trace[# "fraction"] < 1) {
-    point = s_trace[# "position"];
+  if(s_trace[#"fraction"] < 1) {
+    point = s_trace[#"position"];
   }
 
   level.var_963c3f1b = [];
-  level.var_963c3f1b[# "origin"] = point;
-  level.var_963c3f1b[# "angles"] = (0, 0, 0);
+  level.var_963c3f1b[#"origin"] = point;
+  level.var_963c3f1b[#"angles"] = (0, 0, 0);
   return level.var_963c3f1b;
 }
 
 function private function_99ca1277(player, predictedspawn) {
   if(level.teambased) {
-    point_team = player.pers[# "team"];
-    influencer_team = player.pers[# "team"];
-    vis_team_mask = util::getotherteamsmask(player.pers[# "team"]);
+    point_team = player.pers[#"team"];
+    influencer_team = player.pers[#"team"];
+    vis_team_mask = util::getotherteamsmask(player.pers[#"team"]);
   } else {
     point_team = # "none";
     influencer_team = # "none";
-    vis_team_mask = level.spawnsystem.ispawn_teammask[# "all"];
+    vis_team_mask = level.spawnsystem.ispawn_teammask[#"all"];
   }
 
   if(level.teambased && isDefined(game.switchedsides) && game.switchedsides && level.spawnsystem.var_3709dc53) {
@@ -306,14 +306,14 @@ function private function_99ca1277(player, predictedspawn) {
 
   if(!predictedspawn && sessionmodeismultiplayergame()) {
     mpspawnpointsused = {
-      #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[# "origin"][0], #y: spawn_point[# "origin"][1], #z: spawn_point[# "origin"][2], #var_50641dd5: 0
+      #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[#"origin"][0], #y: spawn_point[#"origin"][1], #z: spawn_point[#"origin"][2], #var_50641dd5: 0
     };
     function_92d1707f(#"hash_608dde355fff78f5", mpspawnpointsused);
   }
 
   spawn = spawnStruct();
-  spawn.origin = spawn_point[# "origin"];
-  spawn.angles = spawn_point[# "angles"];
+  spawn.origin = spawn_point[#"origin"];
+  spawn.angles = spawn_point[#"angles"];
   return spawn;
 }
 

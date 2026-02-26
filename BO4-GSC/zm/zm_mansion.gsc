@@ -164,15 +164,15 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + # "hash_458d10e70473adfd", 8000, 1, "int");
   zm_sq::register(#"zm_mansion_pap_quest", #"hash_12a37f2c621d1245", #"capture_souls", &mansion_pap::init, &mansion_pap::cleanup);
   zm_sq::register(#"zm_mansion_silver_bullet", #"collect_silver", #"silver_bullet", &mansion_silver_bullet::init, &mansion_silver_bullet::cleanup);
-  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[# "animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[# "switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
-  level._effect[# "zombie_jump_in_glass_burst"] = # "hash_336284821ea3902e";
-  level._effect[# "power_on_impact"] = # "hash_6e44fde5d49cfc9b";
-  level._effect[# "zmb_marker"] = # "hash_6714ad8af406b4ee";
+  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
+  level._effect[#"zombie_jump_in_glass_burst"] = # "hash_336284821ea3902e";
+  level._effect[#"power_on_impact"] = # "hash_6e44fde5d49cfc9b";
+  level._effect[#"zmb_marker"] = # "hash_6714ad8af406b4ee";
   level._no_vending_machine_auto_collision = 1;
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
@@ -187,9 +187,9 @@ event_handler[level_init] main(eventstruct) {
   level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_mansion_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
-  level.custom_spawner_entry[# "crawl"] = &zm_spawner::function_45bb11e4;
-  level.custom_spawner_entry[# "zombie_jump_in"] = &function_4b4b59ed;
-  level.custom_spawner_entry[# "zombie_wallcrack"] = &function_d05b12f;
+  level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
+  level.custom_spawner_entry[#"zombie_jump_in"] = &function_4b4b59ed;
+  level.custom_spawner_entry[#"zombie_wallcrack"] = &function_d05b12f;
   level thread function_fc9d7a1f();
   callback::on_spawned(&on_player_spawned);
   callback::on_ai_killed(&mansion_util::function_9e147e0c);
@@ -321,32 +321,32 @@ function_d7bc28f1() {
 }
 
 function_4db79562(a_ents) {
-  if(isPlayer(a_ents[# "player 1"])) {
-    a_ents[# "player 1"] waittill(#"fade_out", #"disconnect");
+  if(isPlayer(a_ents[#"player 1"])) {
+    a_ents[#"player 1"] waittill(#"fade_out", #"disconnect");
 
-    if(isPlayer(a_ents[# "player 1"])) {
-      a_ents[# "player 1"] thread lui::screen_fade_out(0.5, "black");
+    if(isPlayer(a_ents[#"player 1"])) {
+      a_ents[#"player 1"] thread lui::screen_fade_out(0.5, "black");
     }
   }
 }
 
 function_78276077(a_ents) {
-  if(isPlayer(a_ents[# "player 1"])) {
-    a_ents[# "player 1"] thread lui::screen_fade_in(0.1, "black");
-    a_ents[# "player 1"] waittill(#"hash_30795d8b5cd79089", #"hide_equipment_hint_text", #"disconnect");
+  if(isPlayer(a_ents[#"player 1"])) {
+    a_ents[#"player 1"] thread lui::screen_fade_in(0.1, "black");
+    a_ents[#"player 1"] waittill(#"hash_30795d8b5cd79089", #"hide_equipment_hint_text", #"disconnect");
 
-    if(isPlayer(a_ents[# "player 1"])) {
-      a_ents[# "player 1"] thread lui::screen_fade_out(0, "black");
+    if(isPlayer(a_ents[#"player 1"])) {
+      a_ents[#"player 1"] thread lui::screen_fade_out(0, "black");
     }
   }
 }
 
 function_48276a5e(a_ents) {
-  if(isPlayer(a_ents[# "player 1"])) {
-    a_ents[# "player 1"] waittill(#"fade_in", #"disconnect");
+  if(isPlayer(a_ents[#"player 1"])) {
+    a_ents[#"player 1"] waittill(#"fade_in", #"disconnect");
 
-    if(isPlayer(a_ents[# "player 1"])) {
-      a_ents[# "player 1"] thread lui::screen_fade_in(0.3, "black");
+    if(isPlayer(a_ents[#"player 1"])) {
+      a_ents[#"player 1"] thread lui::screen_fade_in(0.3, "black");
     }
   }
 }
@@ -1718,8 +1718,8 @@ function_3f147b12(cmd) {
       bat::function_2e37549f(1, undefined);
       break;
     case # "hash_627749f1d7a46328":
-      if(isDefined(level.zm_loc_types[# "werewolf_location"]) && level.zm_loc_types[# "werewolf_location"].size > 0) {
-        s_spawn = array::random(level.zm_loc_types[# "werewolf_location"]);
+      if(isDefined(level.zm_loc_types[#"werewolf_location"]) && level.zm_loc_types[#"werewolf_location"].size > 0) {
+        s_spawn = array::random(level.zm_loc_types[#"werewolf_location"]);
         zombie_werewolf_util::function_47a88a0c(1, undefined, 1, s_spawn);
       }
 

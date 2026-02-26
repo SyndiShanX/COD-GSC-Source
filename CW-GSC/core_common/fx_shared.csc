@@ -48,25 +48,25 @@ function player_init(clientnum) {
       }
     }
 
-    if(ent.v[# "type"] == "loopfx") {
+    if(ent.v[#"type"] == "loopfx") {
       ent thread loop_thread(clientnum);
     }
 
-    if(ent.v[# "type"] == "oneshotfx") {
+    if(ent.v[#"type"] == "oneshotfx") {
       ent thread oneshot_thread(clientnum);
     }
 
-    if(ent.v[# "type"] == "soundfx") {
+    if(ent.v[#"type"] == "soundfx") {
       ent thread loop_sound(clientnum);
     }
 
-    if(creatingexploderarray && ent.v[# "type"] == "exploder") {
-      if(!isDefined(level.createfxexploders[ent.v[# "exploder"]])) {
-        level.createfxexploders[ent.v[# "exploder"]] = [];
+    if(creatingexploderarray && ent.v[#"type"] == "exploder") {
+      if(!isDefined(level.createfxexploders[ent.v[#"exploder"]])) {
+        level.createfxexploders[ent.v[#"exploder"]] = [];
       }
 
-      ent.v[# "exploder_id"] = exploder::getexploderid(ent);
-      level.createfxexploders[ent.v[# "exploder"]][level.createfxexploders[ent.v[# "exploder"]].size] = ent;
+      ent.v[#"exploder_id"] = exploder::getexploderid(ent);
+      level.createfxexploders[ent.v[#"exploder"]][level.createfxexploders[ent.v[#"exploder"]].size] = ent;
     }
   }
 
@@ -88,11 +88,11 @@ function create_loop_sound() {
 
   level.createfxent[level.createfxent.size] = ent;
   ent.v = [];
-  ent.v[# "type"] = "soundfx";
-  ent.v[# "fxid"] = "No FX";
-  ent.v[# "soundalias"] = "nil";
-  ent.v[# "angles"] = (0, 0, 0);
-  ent.v[# "origin"] = (0, 0, 0);
+  ent.v[#"type"] = "soundfx";
+  ent.v[#"fxid"] = "No FX";
+  ent.v[#"soundalias"] = "nil";
+  ent.v[#"angles"] = (0, 0, 0);
+  ent.v[#"origin"] = (0, 0, 0);
   ent.drawn = 1;
   return ent;
 }
@@ -106,34 +106,34 @@ function create_effect(type, fxid) {
 
   level.createfxent[level.createfxent.size] = ent;
   ent.v = [];
-  ent.v[# "type"] = type;
-  ent.v[# "fxid"] = fxid;
-  ent.v[# "angles"] = (0, 0, 0);
-  ent.v[# "origin"] = (0, 0, 0);
+  ent.v[#"type"] = type;
+  ent.v[#"fxid"] = fxid;
+  ent.v[#"angles"] = (0, 0, 0);
+  ent.v[#"origin"] = (0, 0, 0);
   ent.drawn = 1;
   return ent;
 }
 
 function create_oneshot_effect(fxid) {
   ent = create_effect("oneshotfx", fxid);
-  ent.v[# "delay"] = -15;
+  ent.v[#"delay"] = -15;
   return ent;
 }
 
 function create_loop_effect(fxid) {
   ent = create_effect("loopfx", fxid);
-  ent.v[# "delay"] = 0.5;
+  ent.v[#"delay"] = 0.5;
   return ent;
 }
 
 function set_forward_and_up_vectors() {
-  self.v[# "up"] = anglestoup(self.v[# "angles"]);
-  self.v[# "forward"] = anglesToForward(self.v[# "angles"]);
+  self.v[#"up"] = anglestoup(self.v[#"angles"]);
+  self.v[#"forward"] = anglesToForward(self.v[#"angles"]);
 }
 
 function oneshot_thread(clientnum) {
-  if(self.v[# "delay"] > 0) {
-    wait self.v[# "delay"];
+  if(self.v[#"delay"] > 0) {
+    wait self.v[#"delay"];
   }
 
   create_trigger(clientnum);
@@ -148,13 +148,13 @@ function loop_sound(clientnum) {
 
   self notify(#"stop_loop");
 
-  if(isDefined(self.v[# "soundalias"]) && self.v[# "soundalias"] != "nil") {
-    if(isDefined(self.v[# "stopable"]) && self.v[# "stopable"]) {
-      thread sound::loop_fx_sound(clientnum, self.v[# "soundalias"], self.v[# "origin"], "stop_loop");
+  if(isDefined(self.v[#"soundalias"]) && self.v[#"soundalias"] != "nil") {
+    if(isDefined(self.v[#"stopable"]) && self.v[#"stopable"]) {
+      thread sound::loop_fx_sound(clientnum, self.v[#"soundalias"], self.v[#"origin"], "stop_loop");
       return;
     }
 
-    thread sound::loop_fx_sound(clientnum, self.v[# "soundalias"], self.v[# "origin"]);
+    thread sound::loop_fx_sound(clientnum, self.v[#"soundalias"], self.v[#"origin"]);
   }
 }
 
@@ -210,30 +210,30 @@ function create_looper(clientnum) {
 }
 
 function loop(clientnum) {
-  validate(self.v[# "fxid"], self.v[# "origin"]);
-  self.looperfx = playFX(clientnum, level._effect[self.v[# "fxid"]], self.v[# "origin"], self.v[# "forward"], self.v[# "up"], self.v[# "delay"], self.v[# "primlightfrac"], self.v[# "lightoriginoffs"]);
+  validate(self.v[#"fxid"], self.v[#"origin"]);
+  self.looperfx = playFX(clientnum, level._effect[self.v[#"fxid"]], self.v[#"origin"], self.v[#"forward"], self.v[#"up"], self.v[#"delay"], self.v[#"primlightfrac"], self.v[#"lightoriginoffs"]);
 
   while(true) {
-    if(isDefined(self.v[# "delay"])) {
-      wait self.v[# "delay"];
+    if(isDefined(self.v[#"delay"])) {
+      wait self.v[#"delay"];
     }
 
     while(isfxplaying(clientnum, self.looperfx)) {
       wait 0.25;
     }
 
-    self.looperfx = playFX(clientnum, level._effect[self.v[# "fxid"]], self.v[# "origin"], self.v[# "forward"], self.v[# "up"], 0, self.v[# "primlightfrac"], self.v[# "lightoriginoffs"]);
+    self.looperfx = playFX(clientnum, level._effect[self.v[#"fxid"]], self.v[#"origin"], self.v[#"forward"], self.v[#"up"], 0, self.v[#"primlightfrac"], self.v[#"lightoriginoffs"]);
   }
 }
 
 function create_trigger(clientnum) {
-  validate(self.v[# "fxid"], self.v[# "origin"]);
+  validate(self.v[#"fxid"], self.v[#"origin"]);
 
   if(getdvarint(#"debug_fx", 0) > 0) {
-    println("<dev string:x59>" + self.v[# "fxid"]);
+    println("<dev string:x59>" + self.v[#"fxid"]);
   }
 
-  self.looperfx = playFX(clientnum, level._effect[self.v[# "fxid"]], self.v[# "origin"], self.v[# "forward"], self.v[# "up"], self.v[# "delay"], self.v[# "primlightfrac"], self.v[# "lightoriginoffs"]);
+  self.looperfx = playFX(clientnum, level._effect[self.v[#"fxid"]], self.v[#"origin"], self.v[#"forward"], self.v[#"up"], self.v[#"delay"], self.v[#"primlightfrac"], self.v[#"lightoriginoffs"]);
   loop_sound(clientnum);
 }
 
@@ -496,12 +496,12 @@ function trace_distance() {
 
   playerforward = vectornormalize(anglesToForward(playerangles));
   trace = bulletTrace(playereye, playereye + playerforward * tracedist, 1, self);
-  dist = distance(playereye, trace[# "position"]);
+  dist = distance(playereye, trace[#"position"]);
 
   if(getdvarint(#"_internal_debug_dof", 0) == 1) {
     var_cba8e949 = 1;
-    debugstar(trace[# "position"], var_cba8e949, (0, 1, 0));
-    print3d(trace[# "position"], "<dev string:x6c>" + dist, (0, 1, 0), 1, 0.2, var_cba8e949);
+    debugstar(trace[#"position"], var_cba8e949, (0, 1, 0));
+    print3d(trace[#"position"], "<dev string:x6c>" + dist, (0, 1, 0), 1, 0.2, var_cba8e949);
   }
 
   return dist;

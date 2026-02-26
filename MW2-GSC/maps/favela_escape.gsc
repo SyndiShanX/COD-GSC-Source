@@ -436,22 +436,22 @@ solorun_roof_obj_update_pos(objID) {
 }
 
 // -------------------------- // -- STARTS -- // -------------------------- build_starts() {
-  default_start(::start_radiotower);
+default_start(::start_radiotower);
 
-  add_start("intro", ::start_radiotower, "map start");
-  add_start("street", ::start_street, "street after radiotower");
-  add_start("street_mid", ::start_street_mid, "street after first chopper reveal");
-  add_start("street_vista2", ::start_street_vista2, "street second vista area");
-  add_start("market", ::start_market, "market start");
-  add_start("market_evac", ::start_market_evac, "market evac goes wrong");
-  add_start("market_evac_escape", ::start_market_evac_escape, "friendlies climb up to rooftops");
-  add_start("roofrun", ::start_roofrun, "roofrun start");
-  add_start("roofrun_bigjump", ::start_roofrun_player_jump, "roofrun player jump");
-  add_start("solorun", ::start_solorun, "player solo run");
-  add_start("solorun_rooftops", ::start_solorun_rooftops, "player solo run rooftops");
-  add_start("solorun_chopper", ::start_solorun_chopper, "player jump to chopper");
+add_start("intro", ::start_radiotower, "map start");
+add_start("street", ::start_street, "street after radiotower");
+add_start("street_mid", ::start_street_mid, "street after first chopper reveal");
+add_start("street_vista2", ::start_street_vista2, "street second vista area");
+add_start("market", ::start_market, "market start");
+add_start("market_evac", ::start_market_evac, "market evac goes wrong");
+add_start("market_evac_escape", ::start_market_evac_escape, "friendlies climb up to rooftops");
+add_start("roofrun", ::start_roofrun, "roofrun start");
+add_start("roofrun_bigjump", ::start_roofrun_player_jump, "roofrun player jump");
+add_start("solorun", ::start_solorun, "player solo run");
+add_start("solorun_rooftops", ::start_solorun_rooftops, "player solo run rooftops");
+add_start("solorun_chopper", ::start_solorun_chopper, "player jump to chopper");
 
-  add_start("test", ::start_favela_escape_test, "[dev test]");
+add_start("test", ::start_favela_escape_test, "[dev test]");
 }
 
 start_favela_escape_test() {
@@ -730,62 +730,62 @@ start_solorun_chopper() {
 }
 
 // ------------------ // --- RADIOTOWER --- // ------------------ radiotower() {
-  thread intro_rojas_crucified();
-  thread favesc_combat_music();
-  thread radiotower_crowd_walla();
-  thread radiotower_runup_scout();
-  thread radiotower_runup_friendlies_ignore();
-  thread radiotower_friendly_colors();
-  thread radiotower_doorkick_1();
-  thread radiotower_curtainpull_1();
-  thread radiotower_hiding_door_guy_cleanup();
+thread intro_rojas_crucified();
+thread favesc_combat_music();
+thread radiotower_crowd_walla();
+thread radiotower_runup_scout();
+thread radiotower_runup_friendlies_ignore();
+thread radiotower_friendly_colors();
+thread radiotower_doorkick_1();
+thread radiotower_curtainpull_1();
+thread radiotower_hiding_door_guy_cleanup();
 
-  thread radiotower_stop_roof_respawners();
+thread radiotower_stop_roof_respawners();
 
-  flag_set("radiotower_start");
+flag_set("radiotower_start");
 
-  battlechatter_off("allies");
+battlechatter_off("allies");
 
-  // make all redshirts invincible for a while
-  array_thread(get_nonhero_friends(), ::magic_bullet_shield);
+// make all redshirts invincible for a while
+array_thread(get_nonhero_friends(), ::magic_bullet_shield);
 
-  thread radiotower_runpath_dialogue();
+thread radiotower_runpath_dialogue();
 
-  if(getDvar("introscreen") != "0") {
-    level waittill("introscreen_complete");
-  } else {
-    flag_set("introscreen_start_dialogue");
-  }
+if(getDvar("introscreen") != "0") {
+  level waittill("introscreen_complete");
+} else {
+  flag_set("introscreen_start_dialogue");
+}
 
-  sarge_postintro_walkspot = GetNode("node_sarge_post_intro_goal", "targetname");
-  level.sarge SetGoalNode(sarge_postintro_walkspot);
+sarge_postintro_walkspot = GetNode("node_sarge_post_intro_goal", "targetname");
+level.sarge SetGoalNode(sarge_postintro_walkspot);
 
-  hero1_postintro_walkspot = GetNode("node_hero1_post_intro_goal", "targetname");
-  level.hero1 SetGoalNode(hero1_postintro_walkspot);
+hero1_postintro_walkspot = GetNode("node_hero1_post_intro_goal", "targetname");
+level.hero1 SetGoalNode(hero1_postintro_walkspot);
 
-  // after player moves forward, trigger color chain
-  trigger_wait_targetname("trig_intro_playerturnedcorner");
-  trigger_activate_targetname("trig_script_color_allies_b0");
+// after player moves forward, trigger color chain
+trigger_wait_targetname("trig_intro_playerturnedcorner");
+trigger_activate_targetname("trig_script_color_allies_b0");
 
-  // player gets to end of little path
-  trigger_wait_targetname("trig_radiotower_brushpath_end");
+// player gets to end of little path
+trigger_wait_targetname("trig_radiotower_brushpath_end");
 
-  // nonheroes are mortal again
-  array_thread(get_nonhero_friends(), ::stop_magic_bullet_shield_safe);
+// nonheroes are mortal again
+array_thread(get_nonhero_friends(), ::stop_magic_bullet_shield_safe);
 
-  thread radiotower_enemy_vehicles_prethink();
-  delaythread(0.75, ::radiotower_escape_dialogue);
+thread radiotower_enemy_vehicles_prethink();
+delaythread(0.75, ::radiotower_escape_dialogue);
 
-  thread radiotower_enemies_retreat();
+thread radiotower_enemies_retreat();
 
-  // level progression
-  trigger_wait_targetname("trig_radiotower_exit");
-  flag_set("radiotower_exit");
-  thread autosave_by_name("street_start");
+// level progression
+trigger_wait_targetname("trig_radiotower_exit");
+flag_set("radiotower_exit");
+thread autosave_by_name("street_start");
 
-  thread vista1_walla();
+thread vista1_walla();
 
-  thread street();
+thread street();
 }
 
 intro_rojas_crucified() {
@@ -876,25 +876,25 @@ intro_rojas_crucified_cleanup(rojas, animref, restraints) {
 }
 
 // --------------- // --- STREETS --- // --------------- street(startPoint) {
-  thread friendly_colors(startPoint);
+thread friendly_colors(startPoint);
 
-  thread street_dialogue();
+thread street_dialogue();
 
-  thread vista1_door1_kick();
-  thread vista1_wavingguy();
+thread vista1_door1_kick();
+thread vista1_wavingguy();
 
-  thread street_roof1_doorkick();
-  thread street_mid_intersection_clearout();
+thread street_roof1_doorkick();
+thread street_mid_intersection_clearout();
 
-  thread vista2_walla();
+thread vista2_walla();
 
-  thread vista2_technical_prethink();
-  thread vista2_endhouse_jumpthru();
-  thread vista2_firsthalf_enemies_retreat();
-  thread vista2_leftbalcony_enemies_magicgrenade();
+thread vista2_technical_prethink();
+thread vista2_endhouse_jumpthru();
+thread vista2_firsthalf_enemies_retreat();
+thread vista2_leftbalcony_enemies_magicgrenade();
 
-  // level progression
-  thread market();
+// level progression
+thread market();
 }
 
 friendly_colors(startPoint) {
@@ -939,20 +939,20 @@ friendly_colors(startPoint) {
 }
 
 // -------------- // --- MARKET --- // -------------- market() {
-  thread market_dialogue();
-  thread market_fake_choppers();
+thread market_dialogue();
+thread market_fake_choppers();
 
-  // allies using chokepoints in the market causes bad behavior
-  array_thread(level.friends, ::scr_usechokepoints, false);
-  remove_global_spawn_function("allies", ::scr_usechokepoints);
+// allies using chokepoints in the market causes bad behavior
+array_thread(level.friends, ::scr_usechokepoints, false);
+remove_global_spawn_function("allies", ::scr_usechokepoints);
 
-  thread market_hero1_change_color();
-  thread market_kill_extra_redshirts();
+thread market_hero1_change_color();
+thread market_kill_extra_redshirts();
 
-  thread market_door1();
+thread market_door1();
 
-  // level progression
-  thread market_evac();
+// level progression
+thread market_evac();
 }
 
 market_fake_choppers() {
@@ -1269,46 +1269,46 @@ market_evac_sarge_should_idle() {
 }
 
 // ---------------- // --- ROOF RUN --- // ---------------- roofrun() {
-  autosave_by_name("roofrun_start");
+autosave_by_name("roofrun_start");
 
-  level.runnersDone = 0;
-  thread roofrun_waitfor_finish();
+level.runnersDone = 0;
+thread roofrun_waitfor_finish();
 
-  battlechatter_off("allies");
+battlechatter_off("allies");
 
-  flag_wait("roofrun_player_at_start_loc");
+flag_wait("roofrun_player_at_start_loc");
 
-  thread roofrun_chopper_cargodoor_open();
-  delaythread(3, ::roofrun_walla);
+thread roofrun_chopper_cargodoor_open();
+delaythread(3, ::roofrun_walla);
 
-  // TODO I think this stuff needs adjustment based on distance
-  player_speed_percent(90, 1);
-  setSavedDvar("player_sprintUnlimited", "1");
-  array_thread(level.friends, ::scr_animplaybackrate, 1.135);
+// TODO I think this stuff needs adjustment based on distance
+player_speed_percent(90, 1);
+setSavedDvar("player_sprintUnlimited", "1");
+array_thread(level.friends, ::scr_animplaybackrate, 1.135);
 
-  foreach(index, guy in level.friends) {
-    guy.animname = "freerunner";
-    guy thread roofrun_friendly_generic();
+foreach(index, guy in level.friends) {
+  guy.animname = "freerunner";
+  guy thread roofrun_friendly_generic();
 
-    if(guy == level.sarge) {
-      guy thread roofrun_sarge();
-    } else if(guy == level.hero1) {
-      guy thread roofrun_hero1();
-    } else {
-      guy thread roofrun_redshirt();
-    }
+  if(guy == level.sarge) {
+    guy thread roofrun_sarge();
+  } else if(guy == level.hero1) {
+    guy thread roofrun_hero1();
+  } else {
+    guy thread roofrun_redshirt();
   }
+}
 
-  thread roofrun_dialogue();
+thread roofrun_dialogue();
 
-  //thread roofrun_modulate_playerspeed( level.sarge );
+//thread roofrun_modulate_playerspeed( level.sarge );
 
-  thread roofrun_player_bigjump();
+thread roofrun_player_bigjump();
 
-  flag_wait("player_recovery_done");
+flag_wait("player_recovery_done");
 
-  // level progression
-  thread solorun();
+// level progression
+thread solorun();
 }
 
 roofrun_chopper_cargodoor_open() {
@@ -1332,94 +1332,94 @@ roofrun_chopper_cargodoor_open() {
 }
 
 // ---------------- // --- SOLO RUN --- // ---------------- solorun(start) {
-  flag_set("solorun_start");
+flag_set("solorun_start");
 
-  waitBeforeJump = undefined;
+waitBeforeJump = undefined;
 
-  if(!isDefined(start)) {
-    start = "normal";
-  }
+if(!isDefined(start)) {
+  start = "normal";
+}
 
-  player_speed_percent(100, 0.1);
-  player_sprint_multiplier_blend(1.5, 0.1);
-  setSavedDvar("player_sprintUnlimited", "1");
+player_speed_percent(100, 0.1);
+player_sprint_multiplier_blend(1.5, 0.1);
+setSavedDvar("player_sprintUnlimited", "1");
 
-  // sprinty hands
-  level.player GiveWeapon("freerunner");
-  level.player SwitchToWeapon("freerunner");
+// sprinty hands
+level.player GiveWeapon("freerunner");
+level.player SwitchToWeapon("freerunner");
 
-  if(start == "chopperjump") {
-    thread rooftop_slide_exploder();
-    thread rooftop_slide_glassbreak();
+if(start == "chopperjump") {
+  thread rooftop_slide_exploder();
+  thread rooftop_slide_glassbreak();
 
-    waitBeforeJump = false;
-    thread solorun_chopperjump(waitBeforeJump);
-  } else if(start == "rooftops") {
-    thread solorun_balcony_save();
+  waitBeforeJump = false;
+  thread solorun_chopperjump(waitBeforeJump);
+} else if(start == "rooftops") {
+  thread solorun_balcony_save();
 
-    thread solorun_player_difficulty_adjustment();
-    thread solorun_sprint_tracker();
-    thread solorun_playerhurt_replacehint();
-    thread solorun_player_progression_tracker();
+  thread solorun_player_difficulty_adjustment();
+  thread solorun_sprint_tracker();
+  thread solorun_playerhurt_replacehint();
+  thread solorun_player_progression_tracker();
 
-    thread player_bullet_whizbys();
-    thread solorun_dialogue(false);
+  thread player_bullet_whizbys();
+  thread solorun_dialogue(false);
 
-    thread solorun_rooftop_squibs();
-    thread solorun_timer_prethink();
-    thread solorun_chasers_remove();
-    thread solorun_rooftop_chopper_fakefire();
-    thread solorun_chopper_audio();
+  thread solorun_rooftop_squibs();
+  thread solorun_timer_prethink();
+  thread solorun_chasers_remove();
+  thread solorun_rooftop_chopper_fakefire();
+  thread solorun_chopper_audio();
 
-    thread rooftop_slide_exploder();
-    thread rooftop_slide_glassbreak();
-    thread rooftop_slide_deleteaxis();
+  thread rooftop_slide_exploder();
+  thread rooftop_slide_glassbreak();
+  thread rooftop_slide_deleteaxis();
 
-    thread solorun_chopperjump(waitBeforeJump);
-  } else {
-    thread solorun_start_playerfail(0.75);
-    thread solorun_civilian_doorshut();
+  thread solorun_chopperjump(waitBeforeJump);
+} else {
+  thread solorun_start_playerfail(0.75);
+  thread solorun_civilian_doorshut();
 
-    thread solorun_balcony_save();
+  thread solorun_balcony_save();
 
-    thread solorun_player_difficulty_adjustment();
-    thread solorun_sprint_tracker();
-    thread solorun_playerhurt_replacehint();
-    thread solorun_player_progression_tracker();
+  thread solorun_player_difficulty_adjustment();
+  thread solorun_sprint_tracker();
+  thread solorun_playerhurt_replacehint();
+  thread solorun_player_progression_tracker();
 
-    thread player_bullet_whizbys();
-    thread solorun_dialogue();
+  thread player_bullet_whizbys();
+  thread solorun_dialogue();
 
-    thread solorun_rooftop_squibs();
-    thread solorun_timer_prethink();
-    thread solorun_chasers_remove();
-    thread solorun_rooftop_chopper_fakefire();
-    thread solorun_chopper_audio();
+  thread solorun_rooftop_squibs();
+  thread solorun_timer_prethink();
+  thread solorun_chasers_remove();
+  thread solorun_rooftop_chopper_fakefire();
+  thread solorun_chopper_audio();
 
-    thread rooftop_slide_exploder();
-    thread rooftop_slide_glassbreak();
-    thread rooftop_slide_deleteaxis();
+  thread rooftop_slide_exploder();
+  thread rooftop_slide_glassbreak();
+  thread rooftop_slide_deleteaxis();
 
-    thread solorun_chopperjump(waitBeforeJump);
-  }
+  thread solorun_chopperjump(waitBeforeJump);
+}
 
-  flag_wait("solorun_player_boarded_chopper");
+flag_wait("solorun_player_boarded_chopper");
 
-  wait(8);
+wait(8);
 
-  fadeTime = 4;
-  blackTime = 4;
+fadeTime = 4;
+blackTime = 4;
 
-  // fade to black
-  black_overlay = create_client_overlay("black", 0, level.player);
-  black_overlay FadeOverTime(fadeTime);
-  black_overlay.alpha = 1;
-  wait(fadeTime);
+// fade to black
+black_overlay = create_client_overlay("black", 0, level.player);
+black_overlay FadeOverTime(fadeTime);
+black_overlay.alpha = 1;
+wait(fadeTime);
 
-  flag_set("level_faded_to_black");
+flag_set("level_faded_to_black");
 
-  wait(blackTime);
-  nextmission();
+wait(blackTime);
+nextmission();
 }
 
 solorun_balcony_save() {

@@ -199,7 +199,7 @@ init() {
     level.placement[team] = [];
   }
 
-  level.placement[# "all"] = [];
+  level.placement[#"all"] = [];
   level.defaultoffenseradius = 560;
   level.defaultoffenseradiussq = level.defaultoffenseradius * level.defaultoffenseradius;
   level.dropteam = getdvarint(#"sv_maxclients", 0);
@@ -284,15 +284,15 @@ function private init_teams() {
 
   if(level.teamcount == 1) {
     teamcount = getdvarint(#"com_maxclients", 17) + 1;
-    level.teams[# "free"] = "free";
+    level.teams[#"free"] = "free";
   }
 
-  level.teams[# "allies"] = "allies";
-  level.teams[# "axis"] = "axis";
-  level.teamindex[# "world"] = "world";
-  level.teamindex[# "neutral"] = 0;
-  level.teamindex[# "allies"] = 1;
-  level.teamindex[# "axis"] = 2;
+  level.teams[#"allies"] = "allies";
+  level.teams[#"axis"] = "axis";
+  level.teamindex[#"world"] = "world";
+  level.teamindex[#"neutral"] = 0;
+  level.teamindex[#"allies"] = 1;
+  level.teamindex[#"axis"] = 2;
 
   for(teamindex = 3; teamindex < teamcount + 1; teamindex++) {
     level.teams[hash("team" + teamindex)] = "team" + teamindex;
@@ -337,9 +337,9 @@ setroundswonuimodels() {
   alliesroundswon = 0;
   axisroundswon = 0;
 
-  if(isDefined(game.stat[# "roundswon"])) {
-    alliesroundswon = game.stat[# "roundswon"][# "allies"];
-    axisroundswon = game.stat[# "roundswon"][# "axis"];
+  if(isDefined(game.stat[#"roundswon"])) {
+    alliesroundswon = game.stat[#"roundswon"][#"allies"];
+    axisroundswon = game.stat[#"roundswon"][#"axis"];
   }
 
   clientfield::set_world_uimodel("hudItems.team1.roundsWon", alliesroundswon);
@@ -1021,7 +1021,7 @@ showobjectivenotificationuiforallplayers(missiontype, delay) {
   wait delay;
 
   foreach(player in level.players) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(team === # "spectator") {
       continue;
@@ -1054,7 +1054,7 @@ matchstarttimer() {
         level thread sndsetmatchsnapshot(0);
 
         foreach(player in level.players) {
-          if(player.hasspawned || player.pers[# "team"] == # "spectator") {
+          if(player.hasspawned || player.pers[#"team"] == # "spectator") {
             player globallogic_audio::set_music_on_player("spawnPreRise");
           }
         }
@@ -1175,7 +1175,7 @@ setmatchcompletionstat(gamemode, playedorhosted, stat) {
 }
 
 getteamscoreratio() {
-  playerteam = self.pers[# "team"];
+  playerteam = self.pers[#"team"];
   score = getteamscore(playerteam);
   otherteamscore = 0;
 
@@ -1238,14 +1238,14 @@ recordplaystyleinformation() {
   avgkilldistance = 0;
   percenttimemoving = 0;
   avgspeedofplayerwhenmoving = 0;
-  totalkilldistances = float(self.pers[# "kill_distances"]);
-  numkilldistanceentries = float(self.pers[# "num_kill_distance_entries"]);
-  timeplayedmoving = float(self.pers[# "time_played_moving"]);
-  timeplayedalive = float(self.pers[# "time_played_alive"]);
-  totalspeedswhenmoving = float(self.pers[# "total_speeds_when_moving"]);
-  numspeedswhenmovingentries = float(self.pers[# "num_speeds_when_moving_entries"]);
-  totaldistancetravelled = float(self.pers[# "total_distance_travelled"]);
-  movementupdatecount = float(self.pers[# "movement_update_count"]);
+  totalkilldistances = float(self.pers[#"kill_distances"]);
+  numkilldistanceentries = float(self.pers[#"num_kill_distance_entries"]);
+  timeplayedmoving = float(self.pers[#"time_played_moving"]);
+  timeplayedalive = float(self.pers[#"time_played_alive"]);
+  totalspeedswhenmoving = float(self.pers[#"total_speeds_when_moving"]);
+  numspeedswhenmovingentries = float(self.pers[#"num_speeds_when_moving_entries"]);
+  totaldistancetravelled = float(self.pers[#"total_distance_travelled"]);
+  movementupdatecount = float(self.pers[#"movement_update_count"]);
 
   if(numkilldistanceentries > 0) {
     avgkilldistance = totalkilldistances / numkilldistanceentries;
@@ -1291,20 +1291,20 @@ updateandfinalizematchrecord() {
     }
 
     player player_record::record_global_mp_stats_for_player_at_match_end();
-    nemesis = player.pers[# "nemesis_name"];
+    nemesis = player.pers[#"nemesis_name"];
 
-    if(!isDefined(player.pers[# "killed_players"][nemesis])) {
-      player.pers[# "killed_players"][nemesis] = 0;
+    if(!isDefined(player.pers[#"killed_players"][nemesis])) {
+      player.pers[#"killed_players"][nemesis] = 0;
     }
 
-    if(!isDefined(player.pers[# "killed_by"][nemesis])) {
-      player.pers[# "killed_by"][nemesis] = 0;
+    if(!isDefined(player.pers[#"killed_by"][nemesis])) {
+      player.pers[#"killed_by"][nemesis] = 0;
     }
 
     spread = player.kills - player.deaths;
 
-    if(player.pers[# "cur_kill_streak"] > player.pers[# "best_kill_streak"]) {
-      player.pers[# "best_kill_streak"] = player.pers[# "cur_kill_streak"];
+    if(player.pers[#"cur_kill_streak"] > player.pers[#"best_kill_streak"]) {
+      player.pers[#"best_kill_streak"] = player.pers[#"cur_kill_streak"];
     }
 
     if(level.onlinegame) {
@@ -1316,60 +1316,60 @@ updateandfinalizematchrecord() {
       }
 
       player gamehistoryfinishmatch(4, player.kills, player.deaths, player.score, scoreboardposition, teamscoreratio);
-      placement = level.placement[# "all"];
+      placement = level.placement[#"all"];
 
       for(otherplayerindex = 0; otherplayerindex < placement.size; otherplayerindex++) {
-        if(level.placement[# "all"][otherplayerindex] == player) {
+        if(level.placement[#"all"][otherplayerindex] == player) {
           recordplayerstats(player, "position", otherplayerindex);
         }
       }
 
-      if(isDefined(player.pers[# "matchesplayedstatstracked"])) {
+      if(isDefined(player.pers[#"matchesplayedstatstracked"])) {
         gamemode = util::getcurrentgamemode();
         player incrementmatchcompletionstat(gamemode, "played", "completed");
 
-        if(isDefined(player.pers[# "matcheshostedstatstracked"])) {
+        if(isDefined(player.pers[#"matcheshostedstatstracked"])) {
           player incrementmatchcompletionstat(gamemode, "hosted", "completed");
-          player.pers[# "matcheshostedstatstracked"] = undefined;
+          player.pers[#"matcheshostedstatstracked"] = undefined;
         }
 
-        player.pers[# "matchesplayedstatstracked"] = undefined;
+        player.pers[#"matchesplayedstatstracked"] = undefined;
       }
 
-      recordplayerstats(player, "highestKillStreak", player.pers[# "best_kill_streak"]);
+      recordplayerstats(player, "highestKillStreak", player.pers[#"best_kill_streak"]);
       recordplayerstats(player, "numUavCalled", player killstreaks::get_killstreak_usage("uav_used"));
       recordplayerstats(player, "numDogsCalleD", player killstreaks::get_killstreak_usage("dogs_used"));
-      recordplayerstats(player, "numDogsKills", player.pers[# "dog_kills"]);
-      recordplayerstats(player, "participation", player.pers[# "participation"]);
-      recordplayerstats(player, "controllerParticipation", player.pers[# "controllerparticipation"]);
-      recordplayerstats(player, "controllerParticipationChecks", player.pers[# "controllerparticipationchecks"]);
-      recordplayerstats(player, "controllerParticipationChecksSkipped", player.pers[# "controllerparticipationchecksskipped"]);
-      recordplayerstats(player, "controllerParticipationConsecutiveSuccessMax", player.pers[# "controllerparticipationconsecutivesuccessmax"]);
-      recordplayerstats(player, "controllerParticipationConsecutiveFailureMax", player.pers[# "controllerparticipationconsecutivefailuremax"]);
-      recordplayerstats(player, "controllerParticipationEndGameResult", player.pers[# "controllerparticipationendgameresult"]);
-      recordplayerstats(player, "controllerParticipationInactivityWarnings", player.pers[# "controllerparticipationinactivitywarnings"]);
-      recordplayerstats(player, "controllerParticipationSuccessAfterInactivityWarning", player.pers[# "controllerparticipationsuccessafterinactivitywarning"]);
+      recordplayerstats(player, "numDogsKills", player.pers[#"dog_kills"]);
+      recordplayerstats(player, "participation", player.pers[#"participation"]);
+      recordplayerstats(player, "controllerParticipation", player.pers[#"controllerparticipation"]);
+      recordplayerstats(player, "controllerParticipationChecks", player.pers[#"controllerparticipationchecks"]);
+      recordplayerstats(player, "controllerParticipationChecksSkipped", player.pers[#"controllerparticipationchecksskipped"]);
+      recordplayerstats(player, "controllerParticipationConsecutiveSuccessMax", player.pers[#"controllerparticipationconsecutivesuccessmax"]);
+      recordplayerstats(player, "controllerParticipationConsecutiveFailureMax", player.pers[#"controllerparticipationconsecutivefailuremax"]);
+      recordplayerstats(player, "controllerParticipationEndGameResult", player.pers[#"controllerparticipationendgameresult"]);
+      recordplayerstats(player, "controllerParticipationInactivityWarnings", player.pers[#"controllerparticipationinactivitywarnings"]);
+      recordplayerstats(player, "controllerParticipationSuccessAfterInactivityWarning", player.pers[#"controllerparticipationsuccessafterinactivitywarning"]);
       player recordplaystyleinformation();
       recordplayermatchend(player);
       function_c5906527(player);
       recordplayerstats(player, "present_at_end", 1);
 
-      if(isDefined(player.pers) && isDefined(player.pers[# "totalmatchbonus"])) {
-        recordplayerstats(player, "match_xp", player.pers[# "totalmatchbonus"]);
+      if(isDefined(player.pers) && isDefined(player.pers[#"totalmatchbonus"])) {
+        recordplayerstats(player, "match_xp", player.pers[#"totalmatchbonus"]);
       } else if(isDefined(player.matchbonus)) {
         recordplayerstats(player, "match_xp", player.matchbonus);
       }
     }
 
-    recordplayerstats(player, "damage_dealt", player.pers[# "damagedone"]);
+    recordplayerstats(player, "damage_dealt", player.pers[#"damagedone"]);
   }
 
   finalizematchrecord();
 }
 
 function_c5906527(player) {
-  if(isDefined(player.pers[# "scoreeventcache"])) {
-    foreach(event, count in player.pers[# "scoreeventcache"]) {
+  if(isDefined(player.pers[#"scoreeventcache"])) {
+    foreach(event, count in player.pers[#"scoreeventcache"]) {
       function_2c666d56(player, event, count);
     }
   }
@@ -1391,10 +1391,10 @@ gamehistoryplayerkicked() {
 
   self gamehistoryfinishmatch(2, self.kills, self.deaths, self.score, scoreboardposition, teamscoreratio);
 
-  if(isDefined(self.pers[# "matchesplayedstatstracked"])) {
+  if(isDefined(self.pers[#"matchesplayedstatstracked"])) {
     gamemode = util::getcurrentgamemode();
     self incrementmatchcompletionstat(gamemode, "played", "kicked");
-    self.pers[# "matchesplayedstatstracked"] = undefined;
+    self.pers[#"matchesplayedstatstracked"] = undefined;
   }
 
   uploadstats(self);
@@ -1411,16 +1411,16 @@ gamehistoryplayerquit() {
 
   self gamehistoryfinishmatch(3, self.kills, self.deaths, self.score, scoreboardposition, teamscoreratio);
 
-  if(isDefined(self.pers[# "matchesplayedstatstracked"])) {
+  if(isDefined(self.pers[#"matchesplayedstatstracked"])) {
     gamemode = util::getcurrentgamemode();
     self incrementmatchcompletionstat(gamemode, "played", "quit");
 
-    if(isDefined(self.pers[# "matcheshostedstatstracked"])) {
+    if(isDefined(self.pers[#"matcheshostedstatstracked"])) {
       self incrementmatchcompletionstat(gamemode, "hosted", "quit");
-      self.pers[# "matcheshostedstatstracked"] = undefined;
+      self.pers[#"matcheshostedstatstracked"] = undefined;
     }
 
-    self.pers[# "matchesplayedstatstracked"] = undefined;
+    self.pers[#"matchesplayedstatstracked"] = undefined;
   }
 
   uploadstats(self);
@@ -1433,11 +1433,11 @@ gamehistoryplayerquit() {
 function_a50a4f61(outcome) {
   if(level.teambased) {
     if(outcome::get_flag(outcome, "tie") || !isDefined(outcome::get_winning_team(outcome))) {
-      demo::function_c6ae5fd6(#"game_result", level.teamindex[# "neutral"], level.teamindex[# "neutral"]);
+      demo::function_c6ae5fd6(#"game_result", level.teamindex[#"neutral"], level.teamindex[#"neutral"]);
       return;
     }
 
-    demo::function_c6ae5fd6(#"game_result", level.teamindex[outcome::get_winning_team(outcome)], level.teamindex[# "neutral"]);
+    demo::function_c6ae5fd6(#"game_result", level.teamindex[outcome::get_winning_team(outcome)], level.teamindex[#"neutral"]);
   }
 }
 
@@ -1583,10 +1583,10 @@ function_6c9e78d5(var_c1e98979) {
   foreach(player in players) {
     player globallogic_ui::freegameplayhudelems();
 
-    player.pers[# "lastroundscore"] = player.pointstowin;
+    player.pers[#"lastroundscore"] = player.pointstowin;
     player weapons::update_timings(current_time);
     player bbplayermatchend(roundlength, var_c1e98979, game_over);
-    player.pers[# "totaltimeplayed"] += player.timeplayed[# "total"];
+    player.pers[#"totaltimeplayed"] += player.timeplayed[#"total"];
 
     if(sessionmodeisonlinegame()) {
       player stats::function_7a850245(#"demofileid", getdemofileid());
@@ -1642,8 +1642,8 @@ function_9113e843() {
   overtime_round = round::get_flag("overtime");
 
   if(overtime_round) {
-    if(isDefined(game.stat[# "overtimeroundswon"][winning_team])) {
-      game.stat[# "overtimeroundswon"][winning_team]++;
+    if(isDefined(game.stat[#"overtimeroundswon"][winning_team])) {
+      game.stat[#"overtimeroundswon"][winning_team]++;
     }
   }
 
@@ -1651,8 +1651,8 @@ function_9113e843() {
     game.roundsplayed++;
     game.roundwinner[game.roundsplayed] = round::get_winner();
 
-    if(isDefined(game.stat[# "roundswon"][winning_team])) {
-      game.stat[# "roundswon"][winning_team]++;
+    if(isDefined(game.stat[#"roundswon"][winning_team])) {
+      game.stat[#"roundswon"][winning_team]++;
     }
   }
 }
@@ -1802,7 +1802,7 @@ function_543ac649() {
 function_692f2157() {
   if(isalive(self)) {
     self.deathtime = 0;
-    self.pers[# "deathtime"] = 0;
+    self.pers[#"deathtime"] = 0;
   }
 }
 
@@ -2121,8 +2121,8 @@ function_9c14ee08() {
 
       if(util::function_fbce7263(player.team, notplayer.team)) {
         var_13947986 = notplayer getentitynumber();
-        killed = notplayer.pers[# "killed_by"][player.name];
-        killedby = notplayer.pers[# "killed_players"][player.name];
+        killed = notplayer.pers[#"killed_by"][player.name];
+        killedby = notplayer.pers[#"killed_players"][player.name];
 
         if(!isDefined(killed)) {
           killed = 0;
@@ -2145,22 +2145,22 @@ function_4636deca(player) {
   }
 
   player player_record::function_7569c0fb();
-  nemesis = player.pers[# "nemesis_name"];
+  nemesis = player.pers[#"nemesis_name"];
   assert(isDefined(nemesis), "<dev string:x3e>" + player.name);
   assert(isstring(nemesis), "<dev string:x61>" + nemesis + "<dev string:x6c>" + player.name);
 
-  if(!isDefined(player.pers[# "killed_players"][nemesis])) {
-    player.pers[# "killed_players"][nemesis] = 0;
+  if(!isDefined(player.pers[#"killed_players"][nemesis])) {
+    player.pers[#"killed_players"][nemesis] = 0;
   }
 
-  if(!isDefined(player.pers[# "killed_by"][nemesis])) {
-    player.pers[# "killed_by"][nemesis] = 0;
+  if(!isDefined(player.pers[#"killed_by"][nemesis])) {
+    player.pers[#"killed_by"][nemesis] = 0;
   }
 
   spread = player.kills - player.deaths;
 
-  if(player.pers[# "cur_kill_streak"] > player.pers[# "best_kill_streak"]) {
-    player.pers[# "best_kill_streak"] = player.pers[# "cur_kill_streak"];
+  if(player.pers[#"cur_kill_streak"] > player.pers[#"best_kill_streak"]) {
+    player.pers[#"best_kill_streak"] = player.pers[#"cur_kill_streak"];
   }
 
   if(level.rankedmatch || level.leaguematch) {
@@ -2169,13 +2169,13 @@ function_4636deca(player) {
     player stats::function_7a850245(#"privatematch", 1);
   }
 
-  player setnemesisxuid(player.pers[# "nemesis_xuid"]);
+  player setnemesisxuid(player.pers[#"nemesis_xuid"]);
   player stats::function_7a850245(#"valid", 1);
   player stats::function_7a850245(#"nemesisname", nemesis);
-  player stats::function_7a850245(#"nemesisrank", player.pers[# "nemesis_rank"]);
-  player stats::function_7a850245(#"nemesisrankicon", player.pers[# "nemesis_rankicon"]);
-  player stats::function_7a850245(#"nemesiskills", player.pers[# "killed_players"][nemesis]);
-  player stats::function_7a850245(#"nemesiskilledby", player.pers[# "killed_by"][nemesis]);
+  player stats::function_7a850245(#"nemesisrank", player.pers[#"nemesis_rank"]);
+  player stats::function_7a850245(#"nemesisrankicon", player.pers[#"nemesis_rankicon"]);
+  player stats::function_7a850245(#"nemesiskills", player.pers[#"killed_players"][nemesis]);
+  player stats::function_7a850245(#"nemesiskilledby", player.pers[#"killed_by"][nemesis]);
   nemesisplayerent = getplayerbyname(nemesis);
 
   if(isDefined(nemesisplayerent)) {
@@ -2314,8 +2314,8 @@ exit_level() {
 gettotaltimeplayed(maxlength) {
   totaltimeplayed = 0;
 
-  if(isDefined(self.pers[# "totaltimeplayed"])) {
-    totaltimeplayed = self.pers[# "totaltimeplayed"];
+  if(isDefined(self.pers[#"totaltimeplayed"])) {
+    totaltimeplayed = self.pers[#"totaltimeplayed"];
 
     if(totaltimeplayed > maxlength) {
       totaltimeplayed = maxlength;
@@ -2328,8 +2328,8 @@ gettotaltimeplayed(maxlength) {
 getroundtimeplayed(roundlength) {
   totaltimeplayed = 0;
 
-  if(isDefined(self.timeplayed) && isDefined(self.timeplayed[# "total"])) {
-    totaltimeplayed = self.timeplayed[# "total"];
+  if(isDefined(self.timeplayed) && isDefined(self.timeplayed[#"total"])) {
+    totaltimeplayed = self.timeplayed[#"total"];
 
     if(totaltimeplayed > roundlength) {
       totaltimeplayed = roundlength;
@@ -2348,7 +2348,7 @@ bbplayermatchend(gamelength, var_c1e98979, gameover) {
   totaltimeplayed = self getroundtimeplayed(gamelength);
   xuid = int(self getxuid(1));
   mpplayermatchfacts = {
-    #score: self.pers[# "score"], #momentum: self.pers[# "momentum"], #endreason: var_c1e98979, #sessionrank: playerrank, #playtime: int(totaltimeplayed), #xuid: xuid, #gameover: gameover, #team: self.team, #specialist: self getspecialistindex()
+    #score: self.pers[#"score"], #momentum: self.pers[#"momentum"], #endreason: var_c1e98979, #sessionrank: playerrank, #playtime: int(totaltimeplayed), #xuid: xuid, #gameover: gameover, #team: self.team, #specialist: self getspecialistindex()
   };
   function_92d1707f(#"hash_7c173cd9201d5271", mpplayermatchfacts);
 }
@@ -2520,16 +2520,16 @@ removedisconnectedplayerfromplacement() {
   }
 
   offset = 0;
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
   found = 0;
 
   for(i = 0; i < numplayers; i++) {
-    if(level.placement[# "all"][i] == self) {
+    if(level.placement[#"all"][i] == self) {
       found = 1;
     }
 
     if(found) {
-      level.placement[# "all"][i] = level.placement[# "all"][i + 1];
+      level.placement[#"all"][i] = level.placement[#"all"][i + 1];
     }
   }
 
@@ -2537,8 +2537,8 @@ removedisconnectedplayerfromplacement() {
     return;
   }
 
-  level.placement[# "all"][numplayers - 1] = undefined;
-  assert(level.placement[# "all"].size == numplayers - 1);
+  level.placement[#"all"][numplayers - 1] = undefined;
+  assert(level.placement[#"all"].size == numplayers - 1);
 
   globallogic_utils::assertproperplacement();
 
@@ -2548,10 +2548,10 @@ removedisconnectedplayerfromplacement() {
     return;
   }
 
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
 
   for(i = 0; i < numplayers; i++) {
-    player = level.placement[# "all"][i];
+    player = level.placement[#"all"][i];
     player notify(#"update_outcome");
   }
 }
@@ -2561,15 +2561,15 @@ updateplacement() {
     return;
   }
 
-  level.placement[# "all"] = [];
+  level.placement[#"all"] = [];
 
   foreach(player in level.players) {
     if(!level.teambased || isDefined(level.teams[player.team])) {
-      level.placement[# "all"][level.placement[# "all"].size] = player;
+      level.placement[#"all"][level.placement[#"all"].size] = player;
     }
   }
 
-  placementall = level.placement[# "all"];
+  placementall = level.placement[#"all"];
 
   if(level.teambased) {
     for(i = 1; i < placementall.size; i++) {
@@ -2595,7 +2595,7 @@ updateplacement() {
     }
   }
 
-  level.placement[# "all"] = placementall;
+  level.placement[#"all"] = placementall;
 
   globallogic_utils::assertproperplacement();
 
@@ -2607,7 +2607,7 @@ updateteamplacement() {
     return;
   }
 
-  if(!isDefined(level.placement[# "all"])) {
+  if(!isDefined(level.placement[#"all"])) {
     return;
   }
 
@@ -2615,8 +2615,8 @@ updateteamplacement() {
     placement[team] = [];
   }
 
-  placement[# "spectator"] = [];
-  placementall = level.placement[# "all"];
+  placement[#"spectator"] = [];
+  placementall = level.placement[#"all"];
   placementallsize = placementall.size;
 
   for(i = 0; i < placementallsize; i++) {
@@ -2626,7 +2626,7 @@ updateteamplacement() {
       continue;
     }
 
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
     placement[team][placement[team].size] = player;
   }
 
@@ -2638,10 +2638,10 @@ updateteamplacement() {
 getplacementforplayer(player) {
   updateplacement();
   playerrank = -1;
-  placement = level.placement[# "all"];
+  placement = level.placement[#"all"];
 
   for(placementindex = 0; placementindex < placement.size; placementindex++) {
-    if(level.placement[# "all"][placementindex] == player) {
+    if(level.placement[#"all"][placementindex] == player) {
       playerrank = placementindex + 1;
       break;
     }
@@ -2653,16 +2653,16 @@ getplacementforplayer(player) {
 istopscoringplayer(player) {
   topscoringplayer = 0;
   updateplacement();
-  assert(level.placement[# "all"].size > 0);
+  assert(level.placement[#"all"].size > 0);
 
-  if(level.placement[# "all"].size == 0) {
+  if(level.placement[#"all"].size == 0) {
     return 0;
   }
 
   if(level.teambased) {
-    topscore = level.placement[# "all"][0].score;
+    topscore = level.placement[#"all"][0].score;
 
-    foreach(place in level.placement[# "all"]) {
+    foreach(place in level.placement[#"all"]) {
       if(place.score == 0) {
         break;
       }
@@ -2677,9 +2677,9 @@ istopscoringplayer(player) {
       }
     }
   } else {
-    topscore = level.placement[# "all"][0].pointstowin;
+    topscore = level.placement[#"all"][0].pointstowin;
 
-    foreach(place in level.placement[# "all"]) {
+    foreach(place in level.placement[#"all"]) {
       if(place.pointstowin == 0) {
         break;
       }
@@ -2985,7 +2985,7 @@ updatealivetimes(team) {
   level.alivetimesaverage[team] = average_player_spawn_time / total_player_count;
 
   if(getdvarint(#"hash_7d48f244ba0d0b2d", 0)) {
-    iprintln("<dev string:x8b>" + level.alivetimesaverage[# "allies"] + "<dev string:xa3>" + level.alivetimesaverage[# "axis"]);
+    iprintln("<dev string:x8b>" + level.alivetimesaverage[#"allies"] + "<dev string:xa3>" + level.alivetimesaverage[#"axis"]);
   }
 }
 
@@ -3254,7 +3254,7 @@ isprematchrequirementconditionmet(activeteamcount) {
         return false;
       }
     }
-  } else if(activeteamcount[# "free"] != level.prematchrequirement) {
+  } else if(activeteamcount[#"free"] != level.prematchrequirement) {
     return false;
   }
 
@@ -3278,7 +3278,7 @@ waitforplayers() {
         activeteamcount[team] = 0;
       }
     } else {
-      activeteamcount[# "free"] = 0;
+      activeteamcount[#"free"] = 0;
     }
 
     temp_player_ready = [];
@@ -3302,7 +3302,7 @@ waitforplayers() {
           if(level.teambased) {
             activeteamcount[player.team]++;
           } else {
-            activeteamcount[# "free"]++;
+            activeteamcount[#"free"]++;
           }
         }
       }
@@ -3492,34 +3492,34 @@ function_b9b7618() {
     }
 
     gamestate::set_state(game.state);
-    game.strings[# "press_to_spawn"] = # "hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = # "hash_203ff65a4ee460e6";
 
     if(level.teambased) {
-      game.strings[# "waiting_for_teams"] = # "mp/waiting_for_teams";
-      game.strings[# "opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_teams";
+      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
     } else {
-      game.strings[# "waiting_for_teams"] = # "mp/waiting_for_players";
-      game.strings[# "opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_players";
+      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
     }
 
-    game.strings[# "match_starting_in"] = # "hash_18e58cc95db34427";
-    game.strings[# "spawn_next_round"] = # "mp/spawn_next_round";
-    game.strings[# "waiting_to_spawn"] = # "mp/waiting_to_spawn";
-    game.strings[# "waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
-    game.strings[# "you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
-    game.strings[# "match_starting"] = # "mp/match_starting";
-    game.strings[# "change_class"] = # "mp/change_class_next_spawn";
-    game.strings[# "item_on_respawn"] = # "hash_220160808c99fe71";
-    game.strings[# "hash_b71875e85956ea"] = # "hash_61f8bf2959b7bd5a";
-    game.strings[# "last_stand"] = # "hash_5732d212e4511a00";
-    game.strings[# "cowards_way"] = # "hash_268e464278a2f8ff";
+    game.strings[#"match_starting_in"] = # "hash_18e58cc95db34427";
+    game.strings[#"spawn_next_round"] = # "mp/spawn_next_round";
+    game.strings[#"waiting_to_spawn"] = # "mp/waiting_to_spawn";
+    game.strings[#"waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
+    game.strings[#"you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
+    game.strings[#"match_starting"] = # "mp/match_starting";
+    game.strings[#"change_class"] = # "mp/change_class_next_spawn";
+    game.strings[#"item_on_respawn"] = # "hash_220160808c99fe71";
+    game.strings[#"hash_b71875e85956ea"] = # "hash_61f8bf2959b7bd5a";
+    game.strings[#"last_stand"] = # "hash_5732d212e4511a00";
+    game.strings[#"cowards_way"] = # "hash_268e464278a2f8ff";
     [[level.onprecachegametype]]();
     game.gamestarted = 1;
     game.totalkills = 0;
 
     foreach(team, _ in level.teams) {
       if(!isDefined(game.migratedhost)) {
-        game.stat[# "teamscores"][team] = 0;
+        game.stat[#"teamscores"][team] = 0;
       }
 
       game.teamsuddendeath[team] = 0;

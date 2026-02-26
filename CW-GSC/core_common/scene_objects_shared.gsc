@@ -1183,14 +1183,14 @@ class csceneobject {
   function function_8536906e(var_2d86d11f) {
     if(!isDefined(level.var_66c9b8dc)) {
       level.var_66c9b8dc = [];
-      level.var_66c9b8dc[# "moving"][# "patrol"] = "move@patrol";
-      level.var_66c9b8dc[# "moving"][# "alert"] = "move@alert";
-      level.var_66c9b8dc[# "moving"][# "cqb"] = "move@cqb_locomotion";
-      level.var_66c9b8dc[# "moving"][# "combat"] = "move@locomotion";
-      level.var_66c9b8dc[# "idle"][# "patrol"] = "idle@patrol";
-      level.var_66c9b8dc[# "idle"][# "alert"] = "idle@alert";
-      level.var_66c9b8dc[# "idle"][# "cqb"] = "idle@exposed";
-      level.var_66c9b8dc[# "idle"][# "combat"] = "idle@exposed";
+      level.var_66c9b8dc[#"moving"][#"patrol"] = "move@patrol";
+      level.var_66c9b8dc[#"moving"][#"alert"] = "move@alert";
+      level.var_66c9b8dc[#"moving"][#"cqb"] = "move@cqb_locomotion";
+      level.var_66c9b8dc[#"moving"][#"combat"] = "move@locomotion";
+      level.var_66c9b8dc[#"idle"][#"patrol"] = "idle@patrol";
+      level.var_66c9b8dc[#"idle"][#"alert"] = "idle@alert";
+      level.var_66c9b8dc[#"idle"][#"cqb"] = "idle@exposed";
+      level.var_66c9b8dc[#"idle"][#"combat"] = "idle@exposed";
     }
 
     if(ai::has_behavior_attribute("demeanor")) {

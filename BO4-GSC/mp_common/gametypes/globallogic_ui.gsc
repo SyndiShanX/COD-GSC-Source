@@ -106,13 +106,13 @@ function private function_34a60b2f(original_team, new_team) {
 }
 
 menuautoassign(comingfrommenu, var_4c542e39) {
-  original_team = self.pers[# "team"];
+  original_team = self.pers[#"team"];
   self luinotifyevent(#"clear_notification_queue");
 
   if(level.teambased) {
     assignment = teams::function_d22a4fbb(comingfrommenu, var_4c542e39);
 
-    if(assignment === self.pers[# "team"] && (self.sessionstate === "playing" || self.sessionstate === "dead")) {
+    if(assignment === self.pers[#"team"] && (self.sessionstate === "playing" || self.sessionstate === "dead")) {
       self beginclasschoice(0);
       return;
     }
@@ -141,18 +141,18 @@ menuautoassign(comingfrommenu, var_4c542e39) {
     return;
   }
 
-  if(assignment !== self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+  if(assignment !== self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
     self.switching_teams = 1;
     self.switchedteamsresetgadgets = 1;
     self.joining_team = assignment;
-    self.leaving_team = self.pers[# "team"];
+    self.leaving_team = self.pers[#"team"];
     self suicide();
   }
 
-  self.pers[# "class"] = "";
+  self.pers[#"class"] = "";
   self.curclass = "";
-  self.pers[# "weapon"] = undefined;
-  self.pers[# "savedmodel"] = undefined;
+  self.pers[#"weapon"] = undefined;
+  self.pers[#"savedmodel"] = undefined;
   self teams::function_dc7eaabd(assignment);
   self platoons::function_4b016b57();
   distribution = teams::function_7d93567f();
@@ -176,17 +176,17 @@ menuautoassign(comingfrommenu, var_4c542e39) {
 }
 
 updateobjectivetext() {
-  if(self.pers[# "team"] == # "spectator") {
+  if(self.pers[#"team"] == # "spectator") {
     self setclientcgobjectivetext("");
     return;
   }
 
   if(level.scorelimit > 0 || level.roundscorelimit > 0) {
-    self setclientcgobjectivetext(util::getobjectivescoretext(self.pers[# "team"]));
+    self setclientcgobjectivetext(util::getobjectivescoretext(self.pers[#"team"]));
     return;
   }
 
-  self setclientcgobjectivetext(util::getobjectivetext(self.pers[# "team"]));
+  self setclientcgobjectivetext(util::getobjectivetext(self.pers[#"team"]));
 }
 
 closemenus() {
@@ -198,8 +198,8 @@ beginclasschoice(comingfrommenu) {
     return;
   }
 
-  assert(isDefined(level.teams[self.pers[# "team"]]));
-  team = self.pers[# "team"];
+  assert(isDefined(level.teams[self.pers[#"team"]]));
+  team = self.pers[#"team"];
 
   if(level.disableclassselection == 1 || getdvarint(#"migration_soak", 0) == 1) {
     self player_role::set(getdvarint(#"auto_select_character", 1));
@@ -209,7 +209,7 @@ beginclasschoice(comingfrommenu) {
       waitframe(1);
     }
 
-    self.pers[# "class"] = level.defaultclass;
+    self.pers[#"class"] = level.defaultclass;
     self.curclass = level.defaultclass;
 
     if(self.sessionstate != "playing" && (game.state == "playing" || game.state == "pregame")) {
@@ -236,8 +236,8 @@ beginclasschoice(comingfrommenu) {
 }
 
 showmainmenuforteam() {
-  assert(isDefined(level.teams[self.pers[# "team"]]));
-  team = self.pers[# "team"];
+  assert(isDefined(level.teams[self.pers[#"team"]]));
+  team = self.pers[#"team"];
   [[level.spawnspectator]]();
   self draft::open();
 }
@@ -247,8 +247,8 @@ menuteam(team) {
     return;
   }
 
-  if(self.pers[# "team"] != team) {
-    function_34a60b2f(self.pers[# "team"], team);
+  if(self.pers[#"team"] != team) {
+    function_34a60b2f(self.pers[#"team"], team);
 
     if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
@@ -257,7 +257,7 @@ menuteam(team) {
     if(self.sessionstate == "playing") {
       self.switchedteamsresetgadgets = 1;
       self.joining_team = team;
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
@@ -265,12 +265,12 @@ menuteam(team) {
     self userspawnselection::clearcacheforplayer();
     self luinotifyevent(#"clear_notification_queue");
     self.switching_teams = 1;
-    self.pers[# "team"] = team;
+    self.pers[#"team"] = team;
     self.team = team;
-    self.pers[# "class"] = "";
+    self.pers[#"class"] = "";
     self.curclass = "";
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
     self updateobjectivetext();
 
     if(!level.rankedmatch && !level.leaguematch) {
@@ -288,21 +288,21 @@ menuteam(team) {
 menuspectator() {
   self closemenus();
 
-  if(self.pers[# "team"] != # "spectator") {
+  if(self.pers[#"team"] != # "spectator") {
     if(isalive(self)) {
       self.switching_teams = 1;
       self.switchedteamsresetgadgets = 1;
       self.joining_team = # "spectator";
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[# "team"] = # "spectator";
+    self.pers[#"team"] = # "spectator";
     self.team = # "spectator";
-    self.pers[# "class"] = "";
+    self.pers[#"class"] = "";
     self.curclass = "";
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = # "spectator";
     [[level.spawnspectator]]();
@@ -312,7 +312,7 @@ menuspectator() {
 }
 
 menuclass(response, forcedclass, updatecharacterindex, closemenus) {
-  if(!isDefined(self.pers[# "team"]) || !isDefined(level.teams[self.pers[# "team"]])) {
+  if(!isDefined(self.pers[#"team"]) || !isDefined(level.teams[self.pers[#"team"]])) {
     return 0;
   }
 
@@ -341,22 +341,22 @@ menuclass(response, forcedclass, updatecharacterindex, closemenus) {
     return 0;
   }
 
-  if(isDefined(self.pers[# "class"]) && self.pers[# "class"] == playerclass) {
+  if(isDefined(self.pers[#"class"]) && self.pers[#"class"] == playerclass) {
     return 1;
   }
 
-  self.pers[# "changed_class"] = 1;
+  self.pers[#"changed_class"] = 1;
   self notify(#"changed_class");
 
   if(isDefined(self.curclass) && self.curclass == playerclass) {
-    self.pers[# "changed_class"] = 0;
+    self.pers[#"changed_class"] = 0;
   }
 
   var_8d7a946 = !isDefined(self.curclass) || self.curclass == "";
-  self.pers[# "class"] = playerclass;
+  self.pers[#"class"] = playerclass;
   self.curclass = playerclass;
   self loadout::function_d7c205b9(playerclass);
-  self.pers[# "weapon"] = undefined;
+  self.pers[#"weapon"] = undefined;
 
   if(gamestate::is_game_over()) {
     return 0;
@@ -393,14 +393,14 @@ menuclass(response, forcedclass, updatecharacterindex, closemenus) {
     supplystationclasschange = isDefined(self.usingsupplystation) && self.usingsupplystation;
     self.usingsupplystation = 0;
 
-    if(isDefined(level.ingraceperiod) && level.ingraceperiod && !(isDefined(self.hasdonecombat) && self.hasdonecombat) || isDefined(supplystationclasschange) && supplystationclasschange || self.pers[# "latejoin"] === 1 && self.pers[# "time_played_alive"] < level.graceperiod && !(isDefined(self.hasdonecombat) && self.hasdonecombat)) {
-      self loadout::function_53b62db1(self.pers[# "class"]);
+    if(isDefined(level.ingraceperiod) && level.ingraceperiod && !(isDefined(self.hasdonecombat) && self.hasdonecombat) || isDefined(supplystationclasschange) && supplystationclasschange || self.pers[#"latejoin"] === 1 && self.pers[#"time_played_alive"] < level.graceperiod && !(isDefined(self.hasdonecombat) && self.hasdonecombat)) {
+      self loadout::function_53b62db1(self.pers[#"class"]);
       self.tag_stowed_back = undefined;
       self.tag_stowed_hip = undefined;
       self ability_player::gadgets_save_power(0);
-      self loadout::give_loadout(self.pers[# "team"], self.pers[# "class"]);
+      self loadout::give_loadout(self.pers[#"team"], self.pers[#"class"]);
       self killstreaks::give_owned();
-    } else if(!var_8d7a946 && self.pers[# "changed_class"] && !(isDefined(level.var_f46d16f0) && level.var_f46d16f0)) {
+    } else if(!var_8d7a946 && self.pers[#"changed_class"] && !(isDefined(level.var_f46d16f0) && level.var_f46d16f0)) {
       self luinotifyevent(#"hash_6b67aa04e378d681", 1, 6);
     }
   }
@@ -423,19 +423,19 @@ menuspecialist(characterindex) {
   }
 
   if(player_role::get() != characterindex) {
-    self.pers[# "changed_specialist"] = 1;
+    self.pers[#"changed_specialist"] = 1;
     self.var_89c4a60f = self getmpdialogname();
-    self.pers[# "hash_1b145cf9f0673e9"] = function_b14806c6(self player_role::get(), currentsessionmode());
+    self.pers[#"hash_1b145cf9f0673e9"] = function_b14806c6(self player_role::get(), currentsessionmode());
   } else {
-    self.pers[# "changed_specialist"] = 0;
+    self.pers[#"changed_specialist"] = 0;
   }
 
-  spawns = self.pers[# "spawns"];
+  spawns = self.pers[#"spawns"];
   self draft::select_character(characterindex, 0);
   specialist_name = getcharacterdisplayname(characterindex, currentsessionmode());
   iprintln(#"hash_52f20b5836b29e3", self, specialist_name);
 
-  if(isDefined(self.pers[# "changed_specialist"]) && self.pers[# "changed_specialist"]) {
+  if(isDefined(self.pers[#"changed_specialist"]) && self.pers[#"changed_specialist"]) {
     self notify(#"changed_specialist_death");
   }
 
@@ -454,7 +454,7 @@ menuspecialist(characterindex) {
 menuautocontrolplayer() {
   self closemenus();
 
-  if(self.pers[# "team"] != # "spectator") {
+  if(self.pers[#"team"] != # "spectator") {
     toggleplayercontrol(self);
   }
 }

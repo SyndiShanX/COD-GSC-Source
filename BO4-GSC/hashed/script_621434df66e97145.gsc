@@ -447,7 +447,7 @@ function_11e5b2ee(e_activator, e_volume) {
       self thread zm_traps::zombie_flame_watch();
       self playSound(#"zmb_ignite");
       self thread zombie_death::flame_death_fx();
-      playFXOnTag(level._effect[# "character_fire_death_torso"], self, "J_SpineLower");
+      playFXOnTag(level._effect[#"character_fire_death_torso"], self, "J_SpineLower");
       wait randomfloat(1.25);
     } else {
       refs[0] = "guts";
@@ -692,7 +692,7 @@ function_7bd8cfde(e_activator, s_trap) {
   }
 
   self playSound(#"hash_42c6cc2204b7fbbd");
-  v_hook = s_trap.e_trap.scene_ents[# "prop 1"] gettagorigin("tag_fan_blade_A_2");
+  v_hook = s_trap.e_trap.scene_ents[#"prop 1"] gettagorigin("tag_fan_blade_A_2");
   n_dist = distance2d(self.origin, v_hook);
 
   if(!(isDefined(s_trap.var_705682df) && s_trap.var_705682df) && self.zm_ai_category === # "basic" && n_dist <= 128 && self.team != # "allies") {
@@ -729,8 +729,8 @@ function_bcfd9acb(s_trap) {
   s_trap.var_705682df = 1;
   self.var_bd4627e1 = 1;
   self clientfield::set("spinning_trap_eye_fx", 1);
-  var_e72c9959 = util::spawn_model("tag_origin", s_trap.e_trap.scene_ents[# "prop 1"] gettagorigin("tag_fan_blade_A_2"), s_trap.e_trap.scene_ents[# "prop 1"] gettagangles("tag_fan_blade_A_2"));
-  var_e72c9959 linkto(s_trap.e_trap.scene_ents[# "prop 1"], "tag_fan_blade_A_2");
+  var_e72c9959 = util::spawn_model("tag_origin", s_trap.e_trap.scene_ents[#"prop 1"] gettagorigin("tag_fan_blade_A_2"), s_trap.e_trap.scene_ents[#"prop 1"] gettagangles("tag_fan_blade_A_2"));
+  var_e72c9959 linkto(s_trap.e_trap.scene_ents[#"prop 1"], "tag_fan_blade_A_2");
   self val::set("spinning_trap", "ignoreall", 1);
   self val::set("spinning_trap", "allowdeath", 0);
   self.b_ignore_cleanup = 1;

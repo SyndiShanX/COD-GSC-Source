@@ -94,16 +94,16 @@ function function_1c5219e4(var_6874207, var_d001b56c) {
 function function_d4dec4e8(destination, str_targetname) {
   level.var_973f0101 = 1;
 
-  if(isDefined(destination.contentgroups[# "hash_3460aae6bb799a99"])) {
+  if(isDefined(destination.contentgroups[#"hash_3460aae6bb799a99"])) {
     if(isDefined(str_targetname)) {
-      foreach(var_87e97a7a in destination.contentgroups[# "hash_3460aae6bb799a99"]) {
+      foreach(var_87e97a7a in destination.contentgroups[#"hash_3460aae6bb799a99"]) {
         if(var_87e97a7a.targetname === str_targetname) {
           var_6c486d1a = var_87e97a7a;
           break;
         }
       }
     } else {
-      var_6c486d1a = destination.contentgroups[# "hash_3460aae6bb799a99"][0];
+      var_6c486d1a = destination.contentgroups[#"hash_3460aae6bb799a99"][0];
     }
 
     if(isDefined(var_6c486d1a)) {
@@ -138,16 +138,16 @@ function function_d4dec4e8(destination, str_targetname) {
 }
 
 function function_f1ad7968(destination, str_targetname) {
-  if(isDefined(destination.contentgroups[# "hash_3460aae6bb799a99"])) {
+  if(isDefined(destination.contentgroups[#"hash_3460aae6bb799a99"])) {
     if(isDefined(str_targetname)) {
-      foreach(var_87e97a7a in destination.contentgroups[# "hash_3460aae6bb799a99"]) {
+      foreach(var_87e97a7a in destination.contentgroups[#"hash_3460aae6bb799a99"]) {
         if(var_87e97a7a.targetname === str_targetname) {
           var_6c486d1a = var_87e97a7a;
           break;
         }
       }
     } else {
-      var_6c486d1a = destination.contentgroups[# "hash_3460aae6bb799a99"][0];
+      var_6c486d1a = destination.contentgroups[#"hash_3460aae6bb799a99"][0];
     }
 
     if(isDefined(var_6c486d1a)) {

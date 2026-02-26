@@ -72,10 +72,10 @@ function init() {
   level.stealth.funcs = [];
   level.stealth.detect.state = "hidden";
   level.stealth.detect.range = [];
-  level.stealth.detect.range[# "hidden"] = [];
-  level.stealth.detect.range[# "spotted"] = [];
-  level.stealth.detect.minrangedarkness[# "hidden"] = [];
-  level.stealth.detect.minrangedarkness[# "spotted"] = [];
+  level.stealth.detect.range[#"hidden"] = [];
+  level.stealth.detect.range[#"spotted"] = [];
+  level.stealth.detect.minrangedarkness[#"hidden"] = [];
+  level.stealth.detect.minrangedarkness[#"spotted"] = [];
   level.stealth.detect.timeout = 5;
   namespace_cc4354b9::corpse_init_level();
   stealth_event::event_init_level();
@@ -114,28 +114,28 @@ function set_default_settings(isnight) {
   stealth_hidden = [];
 
   if(is_true(isnight)) {
-    stealth_hidden[# "prone"] = 150;
-    stealth_hidden[# "crouch"] = 350;
-    stealth_hidden[# "stand"] = 600;
+    stealth_hidden[#"prone"] = 150;
+    stealth_hidden[#"crouch"] = 350;
+    stealth_hidden[#"stand"] = 600;
   } else {
-    stealth_hidden[# "prone"] = 400;
-    stealth_hidden[# "crouch"] = 800;
-    stealth_hidden[# "stand"] = 1500;
+    stealth_hidden[#"prone"] = 400;
+    stealth_hidden[#"crouch"] = 800;
+    stealth_hidden[#"stand"] = 1500;
   }
 
   stealth_spotted = [];
-  stealth_spotted[# "prone"] = 8192;
-  stealth_spotted[# "crouch"] = 8192;
-  stealth_spotted[# "stand"] = 8192;
+  stealth_spotted[#"prone"] = 8192;
+  stealth_spotted[#"crouch"] = 8192;
+  stealth_spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(stealth_hidden, stealth_spotted);
   var_90bb9561 = [];
-  var_90bb9561[# "prone"] = 130;
-  var_90bb9561[# "crouch"] = 215;
-  var_90bb9561[# "stand"] = 300;
+  var_90bb9561[#"prone"] = 130;
+  var_90bb9561[#"crouch"] = 215;
+  var_90bb9561[#"stand"] = 300;
   var_a8964800 = [];
-  var_a8964800[# "prone"] = 300;
-  var_a8964800[# "crouch"] = 375;
-  var_a8964800[# "stand"] = 450;
+  var_a8964800[#"prone"] = 300;
+  var_a8964800[#"crouch"] = 375;
+  var_a8964800[#"stand"] = 450;
   namespace_979752dc::set_min_detect_range_darkness(var_90bb9561, var_a8964800);
   namespace_cc4354b9::set_corpse_ranges_default();
   namespace_979752dc::set_disguised(0);
@@ -146,27 +146,27 @@ function set_detect_ranges_internal(hidden, spotted) {
   var_250a510c = 0.25;
 
   if(isDefined(hidden)) {
-    level.stealth.detect.range[# "hidden"][# "prone"] = hidden[# "prone"];
-    level.stealth.detect.range[# "hidden"][# "crouch"] = hidden[# "crouch"];
-    level.stealth.detect.range[# "hidden"][# "stand"] = hidden[# "stand"];
+    level.stealth.detect.range[#"hidden"][#"prone"] = hidden[#"prone"];
+    level.stealth.detect.range[#"hidden"][#"crouch"] = hidden[#"crouch"];
+    level.stealth.detect.range[#"hidden"][#"stand"] = hidden[#"stand"];
 
-    if(!isDefined(hidden[# "shadow"])) {
-      hidden[# "shadow"] = var_250a510c;
+    if(!isDefined(hidden[#"shadow"])) {
+      hidden[#"shadow"] = var_250a510c;
     }
 
-    level.stealth.detect.range[# "hidden"][# "shadow"] = hidden[# "shadow"];
+    level.stealth.detect.range[#"hidden"][#"shadow"] = hidden[#"shadow"];
   }
 
   if(isDefined(spotted)) {
-    level.stealth.detect.range[# "spotted"][# "prone"] = spotted[# "prone"];
-    level.stealth.detect.range[# "spotted"][# "crouch"] = spotted[# "crouch"];
-    level.stealth.detect.range[# "spotted"][# "stand"] = spotted[# "stand"];
+    level.stealth.detect.range[#"spotted"][#"prone"] = spotted[#"prone"];
+    level.stealth.detect.range[#"spotted"][#"crouch"] = spotted[#"crouch"];
+    level.stealth.detect.range[#"spotted"][#"stand"] = spotted[#"stand"];
 
-    if(!isDefined(spotted[# "shadow"])) {
-      spotted[# "shadow"] = var_250a510c;
+    if(!isDefined(spotted[#"shadow"])) {
+      spotted[#"shadow"] = var_250a510c;
     }
 
-    level.stealth.detect.range[# "spotted"][# "shadow"] = spotted[# "shadow"];
+    level.stealth.detect.range[#"spotted"][#"shadow"] = spotted[#"shadow"];
   }
 }
 
@@ -255,13 +255,13 @@ function update_stealth_spotted_thread() {
 }
 
 function teams_thread() {
-  level.stealth.enemies[# "axis"] = [];
-  level.stealth.enemies[# "allies"] = [];
+  level.stealth.enemies[#"axis"] = [];
+  level.stealth.enemies[#"allies"] = [];
 
   while(true) {
     level flag::wait_till("stealth_enabled");
-    level.stealth.enemies[# "axis"] = getplayers();
-    level.stealth.enemies[# "allies"] = getactorteamarray("axis");
+    level.stealth.enemies[#"axis"] = getplayers();
+    level.stealth.enemies[#"allies"] = getactorteamarray("axis");
     wait 0.05;
   }
 }

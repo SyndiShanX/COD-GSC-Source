@@ -28,7 +28,7 @@ function enable_deadshot_perk_for_level() {
 
 function init_deadshot() {
   if(is_true(level.enable_magic)) {
-    level._effect[# "deadshot_light"] = "zombie/fx_perk_deadshot_ndu";
+    level._effect[#"deadshot_light"] = "zombie/fx_perk_deadshot_ndu";
   }
 }
 

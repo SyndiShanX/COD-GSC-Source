@@ -15,7 +15,7 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("world", "flip_skybox", 8000, 1, "int", &flip_skybox, 0, 0);
   clientfield::register("scriptmover", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 0);
-  level._effect[# "hash_61fce653578d7f82"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"hash_61fce653578d7f82"] = # "zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 flip_skybox(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -38,6 +38,6 @@ zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap
     self.eye_rob = "rob_zm_eyes_red";
     var_d40cd873 = "eye_glow";
     self playrenderoverridebundle(self.eye_rob, "j_head");
-    self.var_3231a850 = util::playFXOnTag(localclientnum, level._effect[# "hash_61fce653578d7f82"], self, "j_eyeball_le");
+    self.var_3231a850 = util::playFXOnTag(localclientnum, level._effect[#"hash_61fce653578d7f82"], self, "j_eyeball_le");
   }
 }

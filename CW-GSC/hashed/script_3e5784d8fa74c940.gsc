@@ -54,30 +54,30 @@ function private preinit() {
   level.var_c09dd754 = 0;
 
   if(zm_utility::is_survival()) {
-    level.var_1a4cc228[# "hash_7cba8a05511ceedf"] = [# "hash_49adea61f71924bf", #"hash_1798ecca7f98873d", #"hash_26f6708ef92a0eae", #"hash_1c8805fec5806efe", #"hash_4d95f42b33499eba", #"hash_6799427e5e6c417c", #"hash_11e4908180a964c", #"hash_1340313347e93335"];
-    level.var_1a4cc228[# "hash_29771ab26cb78d9b"] = [# "hash_69143c727337ba1a", #"hash_299e8cfa6d75ffd4", #"hash_7d223eb036f4a31b", #"hash_11d7f39f088f3822", #"hash_5e074c09a3a31d97", #"hash_1c437f787033a2e5", #"hash_34d9e63476111b5d", #"hash_779daa809936d578"];
-    level.var_1a4cc228[# "hash_46c917a1b5ed91e7"] = [# "hash_4729aed4cfa43476"];
-    level.var_1a4cc228[# "hash_338eb4103e0ed797"] = [# "hash_59e40ffcdcfbffa6"];
-    level.var_1a4cc228[# "hash_124b582ce08d78c0"] = [# "hash_149fa86a9c5d858c", #"hash_63e9d6f275dc720", #"hash_94674cb554826a9", #"hash_6b9e4c8e8e955c71", #"hash_75cfd69ce1d6f3dd", #"hash_33c0e923173d2b48", #"hash_53dbc62471a61f88", #"hash_4ece13caf46c00c7"];
-    level.var_1a4cc228[# "hash_30e4941b102093c4"] = [# "hash_5c0dcc3f9d9e1ea5", #"hash_e8b647bb58521c1", #"hash_23492308d6911444", #"hash_5616978b668f07dc", #"hash_31713e12a88def10", #"hash_3e647996c0a4d6b9", #"hash_b35b3dcb7417075", #"hash_53dbc62471a61f88"];
-    level.var_1a4cc228[# "hash_78215fa79f5557dc"] = [# "hash_4814b7b3c67568e3"];
-    level.var_1a4cc228[# "hash_12a17ab3df5889eb"] = level.var_1a4cc228[# "hash_78215fa79f5557dc"];
-    level.var_1a4cc228[# "hash_7a8b592728eec95d"] = [# "hash_2cb37314243526ec"];
-    level.var_1a4cc228[# "spawner_zm_steiner_split_radiation_bomb"] = [# "hash_614e3d7d0b75a944"];
-    level.var_1a4cc228[# "spawner_zm_steiner_split_radiation_blast"] = [# "hash_53c08317d48a0e49"];
-    level.var_1a4cc228[# "hash_6904f5c7bef64405"] = [# "hash_5eafd160d077670d"];
-    level.var_1a4cc228[# "hash_7f957e36b4f6160f"] = [# "hash_61df3be05096e9e2"];
-    level.var_1a4cc228[# "hash_729b116cf9d044"] = [# "hash_78238b400ae08c28"];
+    level.var_1a4cc228[#"hash_7cba8a05511ceedf"] = [#"hash_49adea61f71924bf", #"hash_1798ecca7f98873d", #"hash_26f6708ef92a0eae", #"hash_1c8805fec5806efe", #"hash_4d95f42b33499eba", #"hash_6799427e5e6c417c", #"hash_11e4908180a964c", #"hash_1340313347e93335"];
+    level.var_1a4cc228[#"hash_29771ab26cb78d9b"] = [#"hash_69143c727337ba1a", #"hash_299e8cfa6d75ffd4", #"hash_7d223eb036f4a31b", #"hash_11d7f39f088f3822", #"hash_5e074c09a3a31d97", #"hash_1c437f787033a2e5", #"hash_34d9e63476111b5d", #"hash_779daa809936d578"];
+    level.var_1a4cc228[#"hash_46c917a1b5ed91e7"] = [#"hash_4729aed4cfa43476"];
+    level.var_1a4cc228[#"hash_338eb4103e0ed797"] = [#"hash_59e40ffcdcfbffa6"];
+    level.var_1a4cc228[#"hash_124b582ce08d78c0"] = [#"hash_149fa86a9c5d858c", #"hash_63e9d6f275dc720", #"hash_94674cb554826a9", #"hash_6b9e4c8e8e955c71", #"hash_75cfd69ce1d6f3dd", #"hash_33c0e923173d2b48", #"hash_53dbc62471a61f88", #"hash_4ece13caf46c00c7"];
+    level.var_1a4cc228[#"hash_30e4941b102093c4"] = [#"hash_5c0dcc3f9d9e1ea5", #"hash_e8b647bb58521c1", #"hash_23492308d6911444", #"hash_5616978b668f07dc", #"hash_31713e12a88def10", #"hash_3e647996c0a4d6b9", #"hash_b35b3dcb7417075", #"hash_53dbc62471a61f88"];
+    level.var_1a4cc228[#"hash_78215fa79f5557dc"] = [#"hash_4814b7b3c67568e3"];
+    level.var_1a4cc228[#"hash_12a17ab3df5889eb"] = level.var_1a4cc228[#"hash_78215fa79f5557dc"];
+    level.var_1a4cc228[#"hash_7a8b592728eec95d"] = [#"hash_2cb37314243526ec"];
+    level.var_1a4cc228[#"spawner_zm_steiner_split_radiation_bomb"] = [#"hash_614e3d7d0b75a944"];
+    level.var_1a4cc228[#"spawner_zm_steiner_split_radiation_blast"] = [#"hash_53c08317d48a0e49"];
+    level.var_1a4cc228[#"hash_6904f5c7bef64405"] = [#"hash_5eafd160d077670d"];
+    level.var_1a4cc228[#"hash_7f957e36b4f6160f"] = [#"hash_61df3be05096e9e2"];
+    level.var_1a4cc228[#"hash_729b116cf9d044"] = [#"hash_78238b400ae08c28"];
     return;
   }
 
   if(util::get_map_name() == "zm_gold") {
-    level.var_1a4cc228[# "spawner_bo5_zombie_zm_gold"] = [# "hash_a80d8840eaa4e7e", #"hash_36991df55c87dbcb", #"hash_3b5927d61466dc58", #"hash_735b3e8785d43fdb", #"hash_e3b20622eb68c2b", #"hash_1b6585308f85be40", #"hash_15e17500f1c8d0e9", #"hash_63d74789d0b11dbc"];
-    level.var_1a4cc228[# "spawner_bo5_zombie_zm_gold_armor_heavy"] = [# "hash_4729aed4cfa43476"];
-    level.var_1a4cc228[# "spawner_bo5_zombie_zm_gold_armor_medium"] = [# "hash_59e40ffcdcfbffa6"];
-    level.var_1a4cc228[# "hash_5765ccddce11dc6c"] = [# "hash_1c89bc2d12106779", #"hash_78a973a6fb604cf", #"hash_1c8805fec5806efe", #"hash_7b3bac29e8e3bf13", #"hash_7151a0027b3ff314", #"hash_35d84238103deb46", #"hash_5c0dcc3f9d9e1ea5", #"hash_2d07ee0d2dca46d9"];
-    level.var_1a4cc228[# "hash_78215fa79f5557dc"] = [# "hash_2cb37314243526ec"];
-    level.var_1a4cc228[# "hash_7a8b592728eec95d"] = level.var_1a4cc228[# "hash_78215fa79f5557dc"];
+    level.var_1a4cc228[#"spawner_bo5_zombie_zm_gold"] = [#"hash_a80d8840eaa4e7e", #"hash_36991df55c87dbcb", #"hash_3b5927d61466dc58", #"hash_735b3e8785d43fdb", #"hash_e3b20622eb68c2b", #"hash_1b6585308f85be40", #"hash_15e17500f1c8d0e9", #"hash_63d74789d0b11dbc"];
+    level.var_1a4cc228[#"spawner_bo5_zombie_zm_gold_armor_heavy"] = [#"hash_4729aed4cfa43476"];
+    level.var_1a4cc228[#"spawner_bo5_zombie_zm_gold_armor_medium"] = [#"hash_59e40ffcdcfbffa6"];
+    level.var_1a4cc228[#"hash_5765ccddce11dc6c"] = [#"hash_1c89bc2d12106779", #"hash_78a973a6fb604cf", #"hash_1c8805fec5806efe", #"hash_7b3bac29e8e3bf13", #"hash_7151a0027b3ff314", #"hash_35d84238103deb46", #"hash_5c0dcc3f9d9e1ea5", #"hash_2d07ee0d2dca46d9"];
+    level.var_1a4cc228[#"hash_78215fa79f5557dc"] = [#"hash_2cb37314243526ec"];
+    level.var_1a4cc228[#"hash_7a8b592728eec95d"] = level.var_1a4cc228[#"hash_78215fa79f5557dc"];
   }
 }
 

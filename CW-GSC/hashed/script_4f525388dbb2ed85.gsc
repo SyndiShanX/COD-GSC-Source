@@ -345,14 +345,14 @@ function private function_137a0af2() {
   end = start + anglesToForward(level._fx.player getplayerangles()) * 1000;
   trace = bulletTrace(start, end, 1, level._fx.player);
 
-  if(isDefined(trace[# "position"])) {
+  if(isDefined(trace[#"position"])) {
     if(isDefined(level._fx.var_7b96a5ce.epicenter)) {
-      level._fx.var_7b96a5ce.epicenter.origin = trace[# "position"];
-      level._fx.var_7b96a5ce.epicenter.angles = trace[# "normal"];
+      level._fx.var_7b96a5ce.epicenter.origin = trace[#"position"];
+      level._fx.var_7b96a5ce.epicenter.angles = trace[#"normal"];
       return;
     }
 
-    level._fx.var_7b96a5ce.epicenter = util::spawn_model("<dev string:x28a>", trace[# "position"], trace[# "normal"]);
+    level._fx.var_7b96a5ce.epicenter = util::spawn_model("<dev string:x28a>", trace[#"position"], trace[#"normal"]);
   }
 }
 

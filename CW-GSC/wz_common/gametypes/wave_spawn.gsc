@@ -50,13 +50,13 @@ function function_ca1398a7() {
 
   self endon(#"disconnect");
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[# "lives"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[#"lives"])) {
     return;
   }
 
   weapon = getweapon(#"bare_hands");
   count = 0;
-  lives = self.pers[# "lives"] - 1;
+  lives = self.pers[#"lives"] - 1;
 
   while(count < lives && isDefined(self)) {
     count++;

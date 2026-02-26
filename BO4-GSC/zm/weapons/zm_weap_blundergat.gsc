@@ -338,7 +338,7 @@ function_d82e684c(is_not_upgraded = 1) {
   vec = anglesToForward(var_d571151f);
   trace_end = var_d0407533 + vec * 20000;
   trace = bulletTrace(var_d0407533, trace_end, 1, self);
-  var_7a29db08 = trace[# "position"] + function_40e83b36(55);
+  var_7a29db08 = trace[#"position"] + function_40e83b36(55);
   e_dart = magicbullet(getweapon(#"hash_3de0926b89369160"), var_d0407533, var_7a29db08, self);
   e_dart thread function_49cfb951(n_fuse_timer);
 }
@@ -423,7 +423,7 @@ function_482c54d5(watcher, owner) {
   waitframe(1);
 
   if(isPlayer(s_result.target)) {
-    v_pos = groundtrace(self.origin + (0, 0, 32) + (0, 0, 8), self.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
+    v_pos = groundtrace(self.origin + (0, 0, 32) + (0, 0, 8), self.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[#"position"];
 
     if(isDefined(v_pos)) {
       self ghost();
@@ -496,7 +496,7 @@ function_7b25328b(e_player) {
     w_current = e_player getcurrentweapon();
   }
 
-  v_ground_pos = groundtrace(self.origin, self.origin + (0, 0, -1000), 0, self)[# "position"];
+  v_ground_pos = groundtrace(self.origin, self.origin + (0, 0, -1000), 0, self)[#"position"];
 
   if(!isDefined(v_ground_pos) || distance(v_ground_pos, self.origin) > 64) {
     return;
@@ -664,37 +664,37 @@ function_bd27d397(oldweapondata, newweapondata) {
   w_blundergat_fire = getweapon(#"ww_blundergat_fire_t8");
   w_blundergat_fire_upg = getweapon(#"ww_blundergat_fire_t8_upgraded");
 
-  if((oldweapondata[# "weapon"] === var_e97d8c2c || oldweapondata[# "weapon"] === w_blundergat || oldweapondata[# "weapon"] === w_blundergat_upg || oldweapondata[# "weapon"] === w_blundergat_acid || oldweapondata[# "weapon"] === w_blundergat_acid_upg || oldweapondata[# "weapon"] === w_blundergat_fire || oldweapondata[# "weapon"] === w_blundergat_fire_upg) && (newweapondata[# "weapon"] === var_e97d8c2c || newweapondata[# "weapon"] === w_blundergat || newweapondata[# "weapon"] === w_blundergat_upg || newweapondata[# "weapon"] === w_blundergat_acid || newweapondata[# "weapon"] === w_blundergat_acid_upg || newweapondata[# "weapon"] === w_blundergat_fire || newweapondata[# "weapon"] === w_blundergat_fire_upg)) {
+  if((oldweapondata[#"weapon"] === var_e97d8c2c || oldweapondata[#"weapon"] === w_blundergat || oldweapondata[#"weapon"] === w_blundergat_upg || oldweapondata[#"weapon"] === w_blundergat_acid || oldweapondata[#"weapon"] === w_blundergat_acid_upg || oldweapondata[#"weapon"] === w_blundergat_fire || oldweapondata[#"weapon"] === w_blundergat_fire_upg) && (newweapondata[#"weapon"] === var_e97d8c2c || newweapondata[#"weapon"] === w_blundergat || newweapondata[#"weapon"] === w_blundergat_upg || newweapondata[#"weapon"] === w_blundergat_acid || newweapondata[#"weapon"] === w_blundergat_acid_upg || newweapondata[#"weapon"] === w_blundergat_fire || newweapondata[#"weapon"] === w_blundergat_fire_upg)) {
     weapondata = [];
 
-    if(oldweapondata[# "weapon"] === w_blundergat_fire_upg || newweapondata[# "weapon"] === w_blundergat_fire_upg) {
-      weapondata[# "weapon"] = w_blundergat_fire_upg;
-    } else if(oldweapondata[# "weapon"] === w_blundergat_acid_upg || newweapondata[# "weapon"] === w_blundergat_acid_upg) {
-      weapondata[# "weapon"] = w_blundergat_acid_upg;
-    } else if(oldweapondata[# "weapon"] === w_blundergat_fire || newweapondata[# "weapon"] === w_blundergat_fire) {
-      weapondata[# "weapon"] = w_blundergat_fire;
-    } else if(oldweapondata[# "weapon"] === w_blundergat_acid || newweapondata[# "weapon"] === w_blundergat_acid) {
-      weapondata[# "weapon"] = w_blundergat_acid;
-    } else if(oldweapondata[# "weapon"] === w_blundergat_upg || newweapondata[# "weapon"] === w_blundergat_upg) {
-      weapondata[# "weapon"] = w_blundergat_upg;
-    } else if(oldweapondata[# "weapon"] === var_e97d8c2c) {
-      weapondata[# "weapon"] = newweapondata[# "weapon"];
-    } else if(newweapondata[# "weapon"] === var_e97d8c2c) {
-      weapondata[# "weapon"] = oldweapondata[# "weapon"];
+    if(oldweapondata[#"weapon"] === w_blundergat_fire_upg || newweapondata[#"weapon"] === w_blundergat_fire_upg) {
+      weapondata[#"weapon"] = w_blundergat_fire_upg;
+    } else if(oldweapondata[#"weapon"] === w_blundergat_acid_upg || newweapondata[#"weapon"] === w_blundergat_acid_upg) {
+      weapondata[#"weapon"] = w_blundergat_acid_upg;
+    } else if(oldweapondata[#"weapon"] === w_blundergat_fire || newweapondata[#"weapon"] === w_blundergat_fire) {
+      weapondata[#"weapon"] = w_blundergat_fire;
+    } else if(oldweapondata[#"weapon"] === w_blundergat_acid || newweapondata[#"weapon"] === w_blundergat_acid) {
+      weapondata[#"weapon"] = w_blundergat_acid;
+    } else if(oldweapondata[#"weapon"] === w_blundergat_upg || newweapondata[#"weapon"] === w_blundergat_upg) {
+      weapondata[#"weapon"] = w_blundergat_upg;
+    } else if(oldweapondata[#"weapon"] === var_e97d8c2c) {
+      weapondata[#"weapon"] = newweapondata[#"weapon"];
+    } else if(newweapondata[#"weapon"] === var_e97d8c2c) {
+      weapondata[#"weapon"] = oldweapondata[#"weapon"];
     } else {
-      weapondata[# "weapon"] = w_blundergat;
+      weapondata[#"weapon"] = w_blundergat;
     }
 
-    weapon = weapondata[# "weapon"];
-    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
-    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
-    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
-    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
-    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
-    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
-    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
-    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
-    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
+    weapon = weapondata[#"weapon"];
+    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
+    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
+    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
+    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
+    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
+    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
+    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
+    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
+    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
     return weapondata;
   }
 }

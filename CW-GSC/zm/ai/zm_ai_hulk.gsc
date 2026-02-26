@@ -1715,8 +1715,8 @@ function private function_7d162bd0(projectile, entity) {
     if(isDefined(var_2cadffe7)) {
       var_ee020b9f = projectile.origin;
       var_53b2da60 = function_9cc082d2(var_ee020b9f, 120);
-      var_ee020b9f = isDefined(var_53b2da60[# "point"]) ? var_53b2da60[# "point"] : var_ee020b9f;
-      var_2cadffe7 thread function_7b5805b4(entity, var_ee020b9f, projectile.target_ent, isDefined(var_53b2da60[# "point"]));
+      var_ee020b9f = isDefined(var_53b2da60[#"point"]) ? var_53b2da60[#"point"] : var_ee020b9f;
+      var_2cadffe7 thread function_7b5805b4(entity, var_ee020b9f, projectile.target_ent, isDefined(var_53b2da60[#"point"]));
     }
   }
 }
@@ -2066,7 +2066,7 @@ function private function_d321dcc8(var_af0000ca, to_target) {
   var_dc77dd5c = vectorcross(to_target, (0, 0, var_817b26d2));
   var_d01d9a4b = to_target * 100 + var_dc77dd5c * 100 + self.origin;
   bullet_trace = bulletTrace(self.origin, var_d01d9a4b, 0, self);
-  fraction = bullet_trace[# "fraction"];
+  fraction = bullet_trace[#"fraction"];
   result = (0, 0, 0);
 
   if(fraction > 0 && fraction < 1) {
@@ -2092,8 +2092,8 @@ function private function_4e15ba87(var_2f769fb1, b_do_trace = 0) {
   if(b_do_trace) {
     trace = bulletTrace(self.origin, self.origin + push_vector, 0, self);
 
-    if(trace[# "fraction"] < 1) {
-      position = trace[# "position"] + (0, 0, 50);
+    if(trace[#"fraction"] < 1) {
+      position = trace[#"position"] + (0, 0, 50);
       push_vector = position - self.origin;
     }
   }
@@ -2348,7 +2348,7 @@ function function_5daee27d(position, delay_s = 0, radius = 1, var_f2c9c996) {
   delay_s = int(delay_s);
   radius = int(radius);
   dropped = function_9cc082d2(position, 200);
-  navmesh_pos = isDefined(dropped[# "point"]) ? dropped[# "point"] : undefined;
+  navmesh_pos = isDefined(dropped[#"point"]) ? dropped[#"point"] : undefined;
 
   if(!isDefined(navmesh_pos)) {
     println("<dev string:x127>" + position);
@@ -3228,8 +3228,8 @@ function function_36bbd77f() {
   node_radius = getdvarfloat(#"hash_316ed098dd9efb4c", 500);
   trace = bulletTrace(player_eye, player_eye + player_vec * 1000, 0, player);
 
-  if(trace[# "fraction"] < 1) {
-    pos = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    pos = trace[#"position"];
     node = function_5daee27d(pos, 0, node_radius);
     node.var_ec6eb3b4 = -2;
 

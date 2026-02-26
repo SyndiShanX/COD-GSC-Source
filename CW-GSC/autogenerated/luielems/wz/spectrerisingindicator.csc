@@ -43,17 +43,17 @@ function register(var_c05c67e2, var_f25b9f45) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "spectrerisingindicator"])) {
-    level.var_ae746e8f[# "spectrerisingindicator"] = [];
+  if(!isDefined(level.var_ae746e8f[#"spectrerisingindicator"])) {
+    level.var_ae746e8f[#"spectrerisingindicator"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "spectrerisingindicator"])) {
-    level.var_ae746e8f[# "spectrerisingindicator"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "spectrerisingindicator"])) {
-    level.var_ae746e8f[# "spectrerisingindicator"] = array(level.var_ae746e8f[# "spectrerisingindicator"]);
+  if(!isDefined(level.var_ae746e8f[#"spectrerisingindicator"])) {
+    level.var_ae746e8f[#"spectrerisingindicator"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"spectrerisingindicator"])) {
+    level.var_ae746e8f[#"spectrerisingindicator"] = array(level.var_ae746e8f[#"spectrerisingindicator"]);
   }
 
-  level.var_ae746e8f[# "spectrerisingindicator"][level.var_ae746e8f[# "spectrerisingindicator"].size] = elem;
+  level.var_ae746e8f[#"spectrerisingindicator"][level.var_ae746e8f[#"spectrerisingindicator"].size] = elem;
 }
 
 function register_clientside() {

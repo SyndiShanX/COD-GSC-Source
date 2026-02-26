@@ -114,11 +114,11 @@ function init() {
   level.teams = [];
   level.teamindex = [];
   teamcount = level.teamcount;
-  level.teams[# "allies"] = "allies";
-  level.teams[# "axis"] = "axis";
-  level.teamindex[# "neutral"] = 0;
-  level.teamindex[# "allies"] = 1;
-  level.teamindex[# "axis"] = 2;
+  level.teams[#"allies"] = "allies";
+  level.teams[#"axis"] = "axis";
+  level.teamindex[#"neutral"] = 0;
+  level.teamindex[#"allies"] = 1;
+  level.teamindex[#"axis"] = 2;
 
   for(teamindex = 3; teamindex <= teamcount; teamindex++) {
     level.teams[hash("team" + teamindex)] = "team" + teamindex;
@@ -146,7 +146,7 @@ function init() {
     level.placement[team] = [];
   }
 
-  level.placement[# "all"] = [];
+  level.placement[#"all"] = [];
   level.postroundtime = 7;
   level.inovertime = 0;
   level.defaultoffenseradius = 560;
@@ -683,9 +683,9 @@ function setmatchcompletionstat(gamemode, playedorhosted, stat) {
 
 function getendreasontext() {
   if(util::hitroundlimit() || util::hitroundwinlimit()) {
-    return game.strings[# "round_limit_reached"];
+    return game.strings[#"round_limit_reached"];
   } else if(util::hitscorelimit()) {
-    return game.strings[# "score_limit_reached"];
+    return game.strings[#"score_limit_reached"];
   }
 
   if(level.forcedend) {
@@ -696,7 +696,7 @@ function getendreasontext() {
     }
   }
 
-  return game.strings[# "time_limit_reached"];
+  return game.strings[#"time_limit_reached"];
 }
 
 function resetoutcomeforallplayers() {
@@ -730,16 +730,16 @@ function gamehistoryplayerquit() {
   teamscoreratio = 0;
   self gamehistoryfinishmatch(3, 0, 0, 0, 0, teamscoreratio);
 
-  if(isDefined(self.pers[# "matchesplayedstatstracked"])) {
+  if(isDefined(self.pers[#"matchesplayedstatstracked"])) {
     gamemode = util::getcurrentgamemode();
     self incrementmatchcompletionstat(gamemode, "played", "quit");
 
-    if(isDefined(self.pers[# "matcheshostedstatstracked"])) {
+    if(isDefined(self.pers[#"matcheshostedstatstracked"])) {
       self incrementmatchcompletionstat(gamemode, "hosted", "quit");
-      self.pers[# "matcheshostedstatstracked"] = undefined;
+      self.pers[#"matcheshostedstatstracked"] = undefined;
     }
 
-    self.pers[# "matchesplayedstatstracked"] = undefined;
+    self.pers[#"matchesplayedstatstracked"] = undefined;
   }
 
   uploadstats(self);
@@ -764,7 +764,7 @@ function endgame(winner, endreasontext) {
   players = getplayers();
 
   foreach(player in players) {
-    player.pers[# "outcome"] = outcome;
+    player.pers[#"outcome"] = outcome;
   }
 
   thread challenges::roundend(endreasontext);
@@ -776,8 +776,8 @@ function bbplayermatchend(gamelength, endreasonstring, gameover) {
   playerrank = getplacementforplayer(self);
   totaltimeplayed = 0;
 
-  if(isDefined(self.timeplayed) && isDefined(self.timeplayed[# "total"])) {
-    totaltimeplayed = self.timeplayed[# "total"];
+  if(isDefined(self.timeplayed) && isDefined(self.timeplayed[#"total"])) {
+    totaltimeplayed = self.timeplayed[#"total"];
 
     if(totaltimeplayed > gameover) {
       totaltimeplayed = gameover;
@@ -845,7 +845,7 @@ function checktimelimit() {
 
 function allteamsunderscorelimit() {
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= level.scorelimit) {
+    if(game.stat[#"teamscores"][team] >= level.scorelimit) {
       return false;
     }
   }
@@ -928,16 +928,16 @@ function removedisconnectedplayerfromplacement() {
   }
 
   offset = 0;
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
   found = 0;
 
   for(i = 0; i < numplayers; i++) {
-    if(level.placement[# "all"][i] === self) {
+    if(level.placement[#"all"][i] === self) {
       found = 1;
     }
 
     if(found) {
-      level.placement[# "all"][i] = level.placement[# "all"][i + 1];
+      level.placement[#"all"][i] = level.placement[#"all"][i + 1];
     }
   }
 
@@ -945,8 +945,8 @@ function removedisconnectedplayerfromplacement() {
     return;
   }
 
-  level.placement[# "all"][numplayers - 1] = undefined;
-  assert(level.placement[# "all"].size == numplayers - 1);
+  level.placement[#"all"][numplayers - 1] = undefined;
+  assert(level.placement[#"all"].size == numplayers - 1);
 
   globallogic_utils::assertproperplacement();
 
@@ -956,10 +956,10 @@ function removedisconnectedplayerfromplacement() {
     return;
   }
 
-  numplayers = level.placement[# "all"].size;
+  numplayers = level.placement[#"all"].size;
 
   for(i = 0; i < numplayers; i++) {
-    player = level.placement[# "all"][i];
+    player = level.placement[#"all"][i];
 
     if(isDefined(player)) {
       player notify(#"update_outcome");
@@ -972,15 +972,15 @@ function updateplacement() {
     return;
   }
 
-  level.placement[# "all"] = [];
+  level.placement[#"all"] = [];
 
   foreach(player in level.players) {
     if(!level.teambased || isDefined(level.teams[player.team])) {
-      level.placement[# "all"][level.placement[# "all"].size] = player;
+      level.placement[#"all"][level.placement[#"all"].size] = player;
     }
   }
 
-  placementall = level.placement[# "all"];
+  placementall = level.placement[#"all"];
 
   for(i = 1; i < placementall.size; i++) {
     player = placementall[i];
@@ -993,7 +993,7 @@ function updateplacement() {
     placementall[j + 1] = player;
   }
 
-  level.placement[# "all"] = placementall;
+  level.placement[#"all"] = placementall;
 
   globallogic_utils::assertproperplacement();
 
@@ -1005,20 +1005,20 @@ function updateteamplacement() {
     placement[team] = [];
   }
 
-  placement[# "spectator"] = [];
+  placement[#"spectator"] = [];
 
   if(!level.teambased) {
     return;
   }
 
-  placementall = level.placement[# "all"];
+  placementall = level.placement[#"all"];
   placementallsize = placementall.size;
 
   for(i = 0; i < placementallsize; i++) {
     player = placementall[i];
 
     if(isDefined(player)) {
-      team = player.pers[# "team"];
+      team = player.pers[#"team"];
       placement[team][placement[team].size] = player;
     }
   }
@@ -1031,10 +1031,10 @@ function updateteamplacement() {
 function getplacementforplayer(player) {
   updateplacement();
   playerrank = -1;
-  placement = level.placement[# "all"];
+  placement = level.placement[#"all"];
 
   for(placementindex = 0; placementindex < placement.size; placementindex++) {
-    if(level.placement[# "all"][placementindex] == player) {
+    if(level.placement[#"all"][placementindex] == player) {
       playerrank = placementindex + 1;
       break;
     }
@@ -1359,32 +1359,32 @@ function callback_startgametype() {
 
     gamestate::set_state(#"playing");
     setDvar(#"cg_thirdpersonangle", 354);
-    game.strings[# "press_to_spawn"] = # "hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = # "hash_203ff65a4ee460e6";
 
     if(level.teambased) {
-      game.strings[# "waiting_for_teams"] = # "mp/waiting_for_teams";
-      game.strings[# "opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_teams";
+      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
     } else {
-      game.strings[# "waiting_for_teams"] = # "mp/waiting_for_players";
-      game.strings[# "opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_players";
+      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
     }
 
-    game.strings[# "match_starting_in"] = # "hash_18e58cc95db34427";
-    game.strings[# "spawn_next_round"] = # "mp/spawn_next_round";
-    game.strings[# "waiting_to_spawn"] = # "mp/waiting_to_spawn";
-    game.strings[# "waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
-    game.strings[# "you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
-    game.strings[# "match_starting"] = # "mp/match_starting";
-    game.strings[# "change_class"] = # "mp/change_class_next_spawn";
-    game.strings[# "last_stand"] = # "hash_5732d212e4511a00";
-    game.strings[# "cowards_way"] = # "hash_268e464278a2f8ff";
-    game.strings[# "tie"] = # "mp/match_tie";
-    game.strings[# "round_draw"] = # "mp/round_draw";
-    game.strings[# "enemies_eliminated"] = # "mp_enemies_eliminated";
-    game.strings[# "score_limit_reached"] = # "mp/score_limit_reached";
-    game.strings[# "round_limit_reached"] = # "mp/round_limit_reached";
-    game.strings[# "time_limit_reached"] = # "mp/time_limit_reached";
-    game.strings[# "players_forfeited"] = # "mp/players_forfeited";
+    game.strings[#"match_starting_in"] = # "hash_18e58cc95db34427";
+    game.strings[#"spawn_next_round"] = # "mp/spawn_next_round";
+    game.strings[#"waiting_to_spawn"] = # "mp/waiting_to_spawn";
+    game.strings[#"waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
+    game.strings[#"you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
+    game.strings[#"match_starting"] = # "mp/match_starting";
+    game.strings[#"change_class"] = # "mp/change_class_next_spawn";
+    game.strings[#"last_stand"] = # "hash_5732d212e4511a00";
+    game.strings[#"cowards_way"] = # "hash_268e464278a2f8ff";
+    game.strings[#"tie"] = # "mp/match_tie";
+    game.strings[#"round_draw"] = # "mp/round_draw";
+    game.strings[#"enemies_eliminated"] = # "mp_enemies_eliminated";
+    game.strings[#"score_limit_reached"] = # "mp/score_limit_reached";
+    game.strings[#"round_limit_reached"] = # "mp/round_limit_reached";
+    game.strings[#"time_limit_reached"] = # "mp/time_limit_reached";
+    game.strings[#"players_forfeited"] = # "mp/players_forfeited";
     assertteamvariables();
 
     if(isDefined(level.onprecachegametype)) {
@@ -1395,7 +1395,7 @@ function callback_startgametype() {
     game.totalkills = 0;
 
     foreach(team, _ in level.teams) {
-      game.stat[# "teamscores"][team] = 0;
+      game.stat[#"teamscores"][team] = 0;
       game.totalkillsteam[team] = 0;
     }
 
@@ -1416,17 +1416,17 @@ function callback_startgametype() {
     game.roundwinner = [];
   }
 
-  if(!isDefined(game.stat[# "roundswon"])) {
-    game.stat[# "roundswon"] = [];
+  if(!isDefined(game.stat[#"roundswon"])) {
+    game.stat[#"roundswon"] = [];
   }
 
-  if(!isDefined(game.stat[# "roundswon"][# "tie"])) {
-    game.stat[# "roundswon"][# "tie"] = 0;
+  if(!isDefined(game.stat[#"roundswon"][#"tie"])) {
+    game.stat[#"roundswon"][#"tie"] = 0;
   }
 
   foreach(team, _ in level.teams) {
-    if(!isDefined(game.stat[# "roundswon"][team])) {
-      game.stat[# "roundswon"][team] = 0;
+    if(!isDefined(game.stat[#"roundswon"][team])) {
+      game.stat[#"roundswon"][team] = 0;
     }
 
     level.teamspawnpoints[team] = [];

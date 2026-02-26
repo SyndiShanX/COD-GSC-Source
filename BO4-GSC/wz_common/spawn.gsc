@@ -220,7 +220,7 @@ on_spawn_player(predictedspawn) {
     self clientfield::set("StreamerSetSpawnHintIndex", self.var_25fe2d03);
   }
 
-  if(self.pers[# "spawns"] == 1) {
+  if(self.pers[#"spawns"] == 1) {
     if(isDefined(self.var_7070a94c) && self.var_7070a94c && !player_insertion::function_e5d4df1c()) {
       self thread function_c263fd97();
     } else {
@@ -359,7 +359,7 @@ function_178abfd(struct) {
 }
 
 function_1390f875(num_lives) {
-  var_c6328f73 = self.pers[# "lives"] - 1;
+  var_c6328f73 = self.pers[#"lives"] - 1;
 
   if(var_c6328f73 < 0) {
     var_c6328f73 = 0;

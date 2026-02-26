@@ -28,7 +28,7 @@ function init_postload() {
     #weapon: getweapon(#"land_mine")
   };
   level.var_577c9750.var_f46e77d2 = getscriptbundle(level.var_577c9750.weapon.customsettings);
-  level.var_577c9750.var_8431008d = [# "hash_1e89bd63e2bcf606", #"hash_1e89bc63e2bcf453", #"hash_1e89bb63e2bcf2a0"];
+  level.var_577c9750.var_8431008d = [#"hash_1e89bd63e2bcf606", #"hash_1e89bc63e2bcf453", #"hash_1e89bb63e2bcf2a0"];
   level.var_577c9750.var_554a6e45 = 0;
   callback::add_weapon_damage(level.var_577c9750.weapon, &function_72be8a4f);
   callback::function_c046382d(&function_c046382d);
@@ -121,7 +121,7 @@ function function_dc857fe9(s_notify) {
 
 function function_9a72f627(var_7a91115e) {
   a_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
-  str_fx = self getfxfromsurfacetable(var_7a91115e, a_trace[# "surfacetype"]);
+  str_fx = self getfxfromsurfacetable(var_7a91115e, a_trace[#"surfacetype"]);
   playFX(str_fx, self.origin);
 }
 

@@ -70,7 +70,7 @@ __init__() {
     }
   }
 
-  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
+  level.var_c2981ce9 = [#"tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
 }
 
 on_player_spawned() {
@@ -633,7 +633,7 @@ function_afce1cf(inflictor, attacker, damage, flags, meansofdamage, weapon, poin
 
 function_f9d9f198(entity) {
   var_bee929e7 = entity astsearch("grapple_attack_vomit@blight_father");
-  animname = animationstatenetworkutility::searchanimationmap(entity, var_bee929e7[# "animation"]);
+  animname = animationstatenetworkutility::searchanimationmap(entity, var_bee929e7[#"animation"]);
   tag_pos = getanimtagorigin(animname, 0, "tag_tongue");
   var_2db07c66 = rotatepoint(tag_pos, entity gettagangles("tag_origin"));
   var_2db07c66 += entity.origin;
@@ -979,8 +979,8 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   move_to_point = self.origin + move_vector;
   trace = bulletTrace(self.origin, move_to_point, 0, self);
 
-  if(trace[# "surfacetype"] !== "none") {
-    detonate_point = trace[# "position"];
+  if(trace[#"surfacetype"] !== "none") {
+    detonate_point = trace[#"position"];
     dist_sq = distancesquared(detonate_point, self.origin);
     move_dist_sq = move_distance * move_distance;
     ratio = dist_sq / move_dist_sq;

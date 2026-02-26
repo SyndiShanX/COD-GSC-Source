@@ -1424,7 +1424,7 @@ transit_zone_init() {
   add_adjacent_zone("zone_tbu", "zone_tow", "vault_opened", 1);
 }
 
-#include_powerups() {
+include_powerups() {
   gametype = getDvar(#"ui_gametype");
   include_powerup("nuke");
   include_powerup("insta_kill");
@@ -1445,7 +1445,7 @@ add_transit_powerups() {
   maps\mp\zombies\_zm_powerups::add_zombie_powerup("teller_withdrawl", "zombie_z_money_icon", &"ZOMBIE_TELLER_PICKUP_DEPOSIT", maps\mp\zombies\_zm_powerups::func_should_never_drop, 1, 0, 0);
 }
 
-#include_equipment_for_level() {
+include_equipment_for_level() {
   level.equipment_turret_needs_power = 1;
   level.equipment_etrap_needs_power = 1;
   include_equipment("jetgun_zm");
@@ -1653,7 +1653,7 @@ offhand_weapon_overrride() {
   level.zombie_equipment_player_init = undefined;
 }
 
-#include_weapons() {
+include_weapons() {
   gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
@@ -1816,7 +1816,7 @@ custom_add_weapons() {
     add_zombie_weapon("raygun_mark2_zm", "raygun_mark2_upgraded_zm", &"ZOMBIE_WEAPON_RAYGUN_MARK2", 10000, "raygun_mark2", "", undefined);
 }
 
-#include_game_modules() {}
+include_game_modules() {}
 
 initial_round_wait_func() {
   flag_wait("initial_blackscreen_passed");
@@ -2041,7 +2041,7 @@ register_screecher_lights() {
   }
 }
 
-#include_powered_items() {
+include_powered_items() {
   if(is_classic()) {
     include_powered_item(::bus_power_on, ::bus_power_off, ::bus_range, maps\mp\zombies\_zm_power::cost_negligible, 1, 1, undefined);
 

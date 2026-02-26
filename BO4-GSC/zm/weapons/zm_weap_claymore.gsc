@@ -163,7 +163,7 @@ claymore_detonation(e_planter) {
       continue;
     }
 
-    if(isDefined(ent.pers) && isDefined(ent.pers[# "team"]) && ent.pers[# "team"] == self.team) {
+    if(isDefined(ent.pers) && isDefined(ent.pers[#"team"]) && ent.pers[#"team"] == self.team) {
       continue;
     }
 

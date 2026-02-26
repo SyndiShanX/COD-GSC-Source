@@ -31,17 +31,17 @@ function register() {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "pitch_and_yaw_meters"])) {
-    level.var_ae746e8f[# "pitch_and_yaw_meters"] = [];
+  if(!isDefined(level.var_ae746e8f[#"pitch_and_yaw_meters"])) {
+    level.var_ae746e8f[#"pitch_and_yaw_meters"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "pitch_and_yaw_meters"])) {
-    level.var_ae746e8f[# "pitch_and_yaw_meters"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "pitch_and_yaw_meters"])) {
-    level.var_ae746e8f[# "pitch_and_yaw_meters"] = array(level.var_ae746e8f[# "pitch_and_yaw_meters"]);
+  if(!isDefined(level.var_ae746e8f[#"pitch_and_yaw_meters"])) {
+    level.var_ae746e8f[#"pitch_and_yaw_meters"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"pitch_and_yaw_meters"])) {
+    level.var_ae746e8f[#"pitch_and_yaw_meters"] = array(level.var_ae746e8f[#"pitch_and_yaw_meters"]);
   }
 
-  level.var_ae746e8f[# "pitch_and_yaw_meters"][level.var_ae746e8f[# "pitch_and_yaw_meters"].size] = elem;
+  level.var_ae746e8f[#"pitch_and_yaw_meters"][level.var_ae746e8f[#"pitch_and_yaw_meters"].size] = elem;
 }
 
 function register_clientside() {

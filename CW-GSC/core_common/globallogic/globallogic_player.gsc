@@ -437,7 +437,7 @@ function figureoutattacker(eattacker) {
 
 function function_38527849() {
   if(level.numlives || level.numteamlives) {
-    if(level.numlives && !self.pers[# "lives"]) {
+    if(level.numlives && !self.pers[#"lives"]) {
       return false;
     } else if(!level.numlives && level.numteamlives && game.lives[self.team] <= 0) {
       return false;

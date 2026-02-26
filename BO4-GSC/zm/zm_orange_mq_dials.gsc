@@ -24,10 +24,10 @@ main() {
   level flag::init(#"dials_done");
   level.var_62bfa1a6 = [];
   level.var_4cf6900e = [];
-  level.var_4cf6900e[# "orange"] = struct::get("orange", "script_noteworthy");
-  level.var_4cf6900e[# "blue"] = struct::get("blue", "script_noteworthy");
-  level.var_4cf6900e[# "yellow"] = struct::get("yellow", "script_noteworthy");
-  level.var_4cf6900e[# "violet"] = struct::get("violet", "script_noteworthy");
+  level.var_4cf6900e[#"orange"] = struct::get("orange", "script_noteworthy");
+  level.var_4cf6900e[#"blue"] = struct::get("blue", "script_noteworthy");
+  level.var_4cf6900e[#"yellow"] = struct::get("yellow", "script_noteworthy");
+  level.var_4cf6900e[#"violet"] = struct::get("violet", "script_noteworthy");
 
   foreach(s_dial in level.var_4cf6900e) {
     s_dial.var_e5f66b29 = 0;
@@ -223,10 +223,10 @@ function_5f228e90() {
   level function_a02dfba();
 
   if(zm_utility::is_ee_enabled()) {
-    function_ca3efcd8(level.var_c205c941, "orange_code", level.var_4cf6900e[# "orange"].var_7bb4ff56);
-    function_ca3efcd8(level.var_c205c941, "blue_code", level.var_4cf6900e[# "blue"].var_7bb4ff56);
-    function_ca3efcd8(level.var_c205c941, "yellow_code", level.var_4cf6900e[# "yellow"].var_7bb4ff56);
-    function_ca3efcd8(level.var_c205c941, "violet_code", level.var_4cf6900e[# "violet"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "orange_code", level.var_4cf6900e[#"orange"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "blue_code", level.var_4cf6900e[#"blue"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "yellow_code", level.var_4cf6900e[#"yellow"].var_7bb4ff56);
+    function_ca3efcd8(level.var_c205c941, "violet_code", level.var_4cf6900e[#"violet"].var_7bb4ff56);
   }
 }
 

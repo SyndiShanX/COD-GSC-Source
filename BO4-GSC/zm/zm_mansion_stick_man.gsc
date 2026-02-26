@@ -148,7 +148,7 @@ function_55b79f54() {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
 
-    if(!isalive(player) || !zm_utility::can_use(player) || isDefined(player.var_d049df11) && player.var_d049df11 || distancesquared(groundtrace(player.origin, player.origin + (0, 0, -128), 0, player)[# "position"], player.origin) > 16) {
+    if(!isalive(player) || !zm_utility::can_use(player) || isDefined(player.var_d049df11) && player.var_d049df11 || distancesquared(groundtrace(player.origin, player.origin + (0, 0, -128), 0, player)[#"position"], player.origin) > 16) {
       continue;
     }
 
@@ -240,8 +240,8 @@ function_4b15ba35(a_ents) {
   level endon(#"hash_7ffc33bb45377f5e");
   level waittill(#"hash_68c10418963ac1fc", #"skip_step_1");
 
-  if(isDefined(a_ents[# "prop 1"])) {
-    a_ents[# "prop 1"] delete();
+  if(isDefined(a_ents[#"prop 1"])) {
+    a_ents[#"prop 1"] delete();
   }
 }
 
@@ -980,8 +980,8 @@ function_50955e48() {
 }
 
 function_599edfb8(a_ents) {
-  level.var_e34d55ef = a_ents[# "prop 1"];
-  level.var_e34d55ef.var_71c444c7 = a_ents[# "prop 1"].model;
+  level.var_e34d55ef = a_ents[#"prop 1"];
+  level.var_e34d55ef.var_71c444c7 = a_ents[#"prop 1"].model;
   wait 0.2;
   level notify(#"hash_68c10418963ac1fc");
 }
@@ -1108,13 +1108,13 @@ function_1e60e7d2() {
   level endon(#"end_game", #"intermission");
   self endon(#"death");
 
-  if(!(isDefined(level.var_f1028094[# "hash_21903abfb2fb71dd"]) && level.var_f1028094[# "hash_21903abfb2fb71dd"]) && isalive(self)) {
-    level.var_f1028094[# "hash_21903abfb2fb71dd"] = 1;
+  if(!(isDefined(level.var_f1028094[#"hash_21903abfb2fb71dd"]) && level.var_f1028094[#"hash_21903abfb2fb71dd"]) && isalive(self)) {
+    level.var_f1028094[#"hash_21903abfb2fb71dd"] = 1;
     var_e04d003f = zm_characters::function_d35e4c92();
     str_vo = "vox_generic_responses_negative_plr_" + var_e04d003f + "_" + randomint(9);
     self zm_vo::vo_say(str_vo, 0, 1, 1000);
     wait randomintrange(30, 30 * 3);
-    level.var_f1028094[# "hash_21903abfb2fb71dd"] = 0;
+    level.var_f1028094[#"hash_21903abfb2fb71dd"] = 0;
   }
 }
 

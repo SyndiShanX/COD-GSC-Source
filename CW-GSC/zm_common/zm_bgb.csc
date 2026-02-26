@@ -32,7 +32,7 @@ function private preinit() {
   clientfield::register_clientuimodel("zmhud.bgb_invalid_use", #"zm_hud", #"bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register_clientuimodel("zmhud.bgb_one_shot_use", #"zm_hud", #"bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", &bgb_blow_bubble, 0, 0);
-  level._effect[# "bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
+  level._effect[#"bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
 }
 
 function private postinit() {
@@ -171,6 +171,6 @@ function private function_f4763ffe(localclientnum, fx) {
 }
 
 function private bgb_blow_bubble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  function_f4763ffe(bwastimejump, level._effect[# "bgb_blow_bubble"]);
+  function_f4763ffe(bwastimejump, level._effect[#"bgb_blow_bubble"]);
   self thread function_5e7b3f16(bwastimejump, 0.5);
 }

@@ -95,7 +95,7 @@ function is_winning_team(team) {
 }
 
 function function_a2b53e17(player) {
-  if(game.outcome.team !== # "none" && player.pers[# "team"] === game.outcome.team) {
+  if(game.outcome.team !== # "none" && player.pers[#"team"] === game.outcome.team) {
     return true;
   }
 
@@ -177,8 +177,8 @@ function function_10cd0ad() {
     totaldeaths[team] = 0;
 
     foreach(player in getplayers(team)) {
-      totalkills[team] += player.pers[# "kills"];
-      totaldeaths[team] += player.pers[# "deaths"];
+      totalkills[team] += player.pers[#"kills"];
+      totaldeaths[team] += player.pers[#"deaths"];
     }
   }
 

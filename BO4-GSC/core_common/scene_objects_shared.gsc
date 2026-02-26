@@ -3552,8 +3552,8 @@ class cscene {
     _str_name = str_scenedef;
     _b_testing = b_test_run;
     _str_team = util::get_team_mapping(_s.team);
-    _a_streamer_hint[# "allies"] = isDefined(_s.var_a6da2039) ? _s.var_a6da2039 : _s.streamerhintteama;
-    _a_streamer_hint[# "axis"] = isDefined(_s.var_991a84ba) ? _s.var_991a84ba : _s.streamerhintteamb;
+    _a_streamer_hint[#"allies"] = isDefined(_s.var_a6da2039) ? _s.var_a6da2039 : _s.streamerhintteama;
+    _a_streamer_hint[#"axis"] = isDefined(_s.var_991a84ba) ? _s.var_991a84ba : _s.streamerhintteamb;
     _str_notify_name = isstring(_s.malebundle) || ishash(_s.malebundle) ? _s.malebundle : _str_name;
 
     if(!isDefined(a_ents)) {

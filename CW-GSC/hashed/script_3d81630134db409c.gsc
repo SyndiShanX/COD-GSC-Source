@@ -394,13 +394,13 @@ function function_c54b46bc() {
 function function_931a2938() {
   level flag::set("flg_bunker_stealth_overrides");
   var_5d14e11e = [];
-  var_5d14e11e[# "prone"] = 300;
-  var_5d14e11e[# "crouch"] = 600;
-  var_5d14e11e[# "stand"] = 1155;
+  var_5d14e11e[#"prone"] = 300;
+  var_5d14e11e[#"crouch"] = 600;
+  var_5d14e11e[#"stand"] = 1155;
   var_8293536e = [];
-  var_8293536e[# "prone"] = 8192;
-  var_8293536e[# "crouch"] = 8192;
-  var_8293536e[# "stand"] = 8192;
+  var_8293536e[#"prone"] = 8192;
+  var_8293536e[#"crouch"] = 8192;
+  var_8293536e[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(var_5d14e11e, var_8293536e);
 }
 

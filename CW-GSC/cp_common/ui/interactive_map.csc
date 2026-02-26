@@ -53,13 +53,13 @@ function private function_f4804ac(localclientnum) {
     if(!is_true(function_125940c8())) {
       if(var_52665581) {
         input = self function_b8e6d95c();
-        input[# "look"] = util::function_63320ea1(input[# "look"]);
-        input[# "move"] = util::function_63320ea1(input[# "move"]);
+        input[#"look"] = util::function_63320ea1(input[#"look"]);
+        input[#"move"] = util::function_63320ea1(input[#"move"]);
 
-        if(length2dsquared(input[# "look"]) > length2dsquared(input[# "move"]) * 0.5) {
-          cursor_delta = input[# "look"];
+        if(length2dsquared(input[#"look"]) > length2dsquared(input[#"move"]) * 0.5) {
+          cursor_delta = input[#"look"];
         } else {
-          cursor_delta = input[# "move"];
+          cursor_delta = input[#"move"];
         }
 
         cursor_delta = (cursor_delta[0], cursor_delta[1] * -1, 0) * var_8ab7eec6 * 1024 * (cur_time - last_time);

@@ -410,12 +410,12 @@ spawn_functions() {
 }
 
 // AI ----------------------------------------------------- so_rooftop_ai_postspawn() {
-  level.hostile_count++;
+level.hostile_count++;
 
-  self thread hostile_nerf();
-  self thread set_wave_id();
-  self thread maps\contingency::setup_remote_missile_target_guy();
-  self thread death_think();
+self thread hostile_nerf();
+self thread set_wave_id();
+self thread maps\contingency::setup_remote_missile_target_guy();
+self thread death_think();
 }
 
 death_think() {
@@ -556,44 +556,44 @@ so_intro_dialogue() {
 }
 
 // Waves -------------------------------------------------- wave_wiped_out() {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  flag_wait("waves_start");
-  while(1) {
-    flag_wait("wave_spawned");
+flag_wait("waves_start");
+while(1) {
+  flag_wait("wave_spawned");
 
-    population = 0;
-    ai_wave = GetAIArray("axis");
-    foreach(guy in ai_wave) {
-      if(IsAlive(guy)) {
-        population++;
-      }
+  population = 0;
+  ai_wave = GetAIArray("axis");
+  foreach(guy in ai_wave) {
+    if(IsAlive(guy)) {
+      population++;
     }
-
-    if(population <= level.wiped_out_requirement) {
-      // send the remaining guys back to med attack line
-      array_thread(ai_wave, ::wave_closing_in, "attack_line_med");
-      //foreach ( guy in ai_wave ) { guy ignore_all_till_goal(); }
-
-      // Wait for everyone to be dead before starting next wave.
-      //			enemies = GetAIArray( "bad_guys" );
-      while(level.hostile_count > 0) {
-        wait(0.5);
-        //				enemies = GetAIArray( "bad_guys" );
-      }
-
-      //level.wave_spawn_structs[level.current_wave].wave_members = undefined;
-      so_debug_print("wave [" + level.current_wave + "] wiped out");
-
-      flag_clear("wave_spawned");
-      flag_set("wave_wiped_out");
-
-      // sounds
-      level.player playSound("arcademode_kill_streak_won");
-    }
-
-    wait(1);
   }
+
+  if(population <= level.wiped_out_requirement) {
+    // send the remaining guys back to med attack line
+    array_thread(ai_wave, ::wave_closing_in, "attack_line_med");
+    //foreach ( guy in ai_wave ) { guy ignore_all_till_goal(); }
+
+    // Wait for everyone to be dead before starting next wave.
+    //			enemies = GetAIArray( "bad_guys" );
+    while(level.hostile_count > 0) {
+      wait(0.5);
+      //				enemies = GetAIArray( "bad_guys" );
+    }
+
+    //level.wave_spawn_structs[level.current_wave].wave_members = undefined;
+    so_debug_print("wave [" + level.current_wave + "] wiped out");
+
+    flag_clear("wave_spawned");
+    flag_set("wave_wiped_out");
+
+    // sounds
+    level.player playSound("arcademode_kill_streak_won");
+  }
+
+  wait(1);
+}
 }
 
 ignore_all_till_goal() {

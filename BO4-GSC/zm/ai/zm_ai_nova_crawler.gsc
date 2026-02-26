@@ -75,7 +75,7 @@ function_1d34f2b6() {
 
   if(!isDefined(self._effect)) {
     self._effect = [];
-    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_gas_trail";
+    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_gas_trail";
   }
 }
 
@@ -180,7 +180,7 @@ function_99ac548f(entity) {
 function_488c1ac2() {
   self endon(#"death");
   self waittilltimeout(1, #"spawn_complete");
-  zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[# "nova_crawler_aura_fx"], self, "j_spine4");
+  zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[#"nova_crawler_aura_fx"], self, "j_spine4");
 }
 
 function_d79b3357(entity, origin) {

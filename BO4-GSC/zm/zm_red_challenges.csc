@@ -26,25 +26,25 @@ init() {
   clientfield::register("allplayers", "" + # "hash_47490b879090eb55", 16000, 3, "int", &function_840d5e0b, 0, 0);
   clientfield::register("allplayers", "" + # "hash_7b1dd5c08e2585c", 16000, 3, "int", &function_c63a4f32, 0, 0);
   clientfield::register("scriptmover", "" + # "rob_coals", 16000, 1, "int", &rob_coals, 0, 0);
-  level._effect[# "hash_379eadfebd945316"] = # "hash_556b5a8aa255768d";
-  level._effect[# "hash_3229d3874a037840"] = # "hash_48053ee21dfed9c9";
-  level._effect[# "hash_31c3f08749acf655"] = # "hash_482741e21e1bc548";
-  level._effect[# "hash_31c0cd8749aa8505"] = # "hash_482b24e21e1f7cd8";
-  level._effect[# "hash_5f92f2e28c7ef455"] = # "hash_13cf1738cd97717e";
-  level._effect[# "brazier_fire_blue"] = # "hash_487863cb3f012833";
-  level._effect[# "brazier_fire_green"] = # "hash_276c55785b205f4e";
-  level._effect[# "hash_533608bb3b3407b6"] = # "hash_4eff7803b81cd67d";
-  level._effect[# "brazier_fire_purple"] = # "hash_2a46ebc323110b3d";
-  level._effect[# "hash_64a625f8e26e3699"] = # "hash_79207c9d697f9e30";
-  level._effect[# "hash_fa374812e6016c9"][1] = # "hash_676d05725a4ffab9";
-  level._effect[# "hash_eafc8632695ccef"][1] = # "hash_511e23c849ed0926";
-  level._effect[# "hash_fa374812e6016c9"][2] = # "hash_5199aa40f704fb10";
-  level._effect[# "hash_eafc8632695ccef"][2] = # "hash_1dfbcfd9b38812ed";
-  level._effect[# "hash_fa374812e6016c9"][3] = # "hash_6bfc5d7fce6b2a4e";
-  level._effect[# "hash_eafc8632695ccef"][3] = # "maps/zm_red/fx8_soul_charge_purple";
-  level._effect[# "hash_fa374812e6016c9"][4] = # "hash_6cfbd6f08cfc2656";
-  level._effect[# "hash_eafc8632695ccef"][4] = # "hash_17bb97645fa8148b";
-  level._effect[# "pickup_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[#"hash_379eadfebd945316"] = # "hash_556b5a8aa255768d";
+  level._effect[#"hash_3229d3874a037840"] = # "hash_48053ee21dfed9c9";
+  level._effect[#"hash_31c3f08749acf655"] = # "hash_482741e21e1bc548";
+  level._effect[#"hash_31c0cd8749aa8505"] = # "hash_482b24e21e1f7cd8";
+  level._effect[#"hash_5f92f2e28c7ef455"] = # "hash_13cf1738cd97717e";
+  level._effect[#"brazier_fire_blue"] = # "hash_487863cb3f012833";
+  level._effect[#"brazier_fire_green"] = # "hash_276c55785b205f4e";
+  level._effect[#"hash_533608bb3b3407b6"] = # "hash_4eff7803b81cd67d";
+  level._effect[#"brazier_fire_purple"] = # "hash_2a46ebc323110b3d";
+  level._effect[#"hash_64a625f8e26e3699"] = # "hash_79207c9d697f9e30";
+  level._effect[#"hash_fa374812e6016c9"][1] = # "hash_676d05725a4ffab9";
+  level._effect[#"hash_eafc8632695ccef"][1] = # "hash_511e23c849ed0926";
+  level._effect[#"hash_fa374812e6016c9"][2] = # "hash_5199aa40f704fb10";
+  level._effect[#"hash_eafc8632695ccef"][2] = # "hash_1dfbcfd9b38812ed";
+  level._effect[#"hash_fa374812e6016c9"][3] = # "hash_6bfc5d7fce6b2a4e";
+  level._effect[#"hash_eafc8632695ccef"][3] = # "maps/zm_red/fx8_soul_charge_purple";
+  level._effect[#"hash_fa374812e6016c9"][4] = # "hash_6cfbd6f08cfc2656";
+  level._effect[#"hash_eafc8632695ccef"][4] = # "hash_17bb97645fa8148b";
+  level._effect[#"pickup_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
   zm_red_challenges_rewards::init();
   level.var_7987392b = undefined;
 }
@@ -64,23 +64,23 @@ function_de1bffd6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       return;
     case 1:
       level.var_6437d5e7 = 0.002;
-      self.var_36f175fc = playFX(localclientnum, level._effect[# "hash_379eadfebd945316"], v_pos, v_up, v_forward);
+      self.var_36f175fc = playFX(localclientnum, level._effect[#"hash_379eadfebd945316"], v_pos, v_up, v_forward);
       break;
     case 2:
       level.var_6437d5e7 = 0.01;
-      self.var_36f175fc = playFX(localclientnum, level._effect[# "hash_3229d3874a037840"], v_pos, v_up, v_forward);
+      self.var_36f175fc = playFX(localclientnum, level._effect[#"hash_3229d3874a037840"], v_pos, v_up, v_forward);
       break;
     case 3:
       level.var_6437d5e7 = 0.015;
-      self.var_36f175fc = playFX(localclientnum, level._effect[# "hash_31c3f08749acf655"], v_pos, v_up, v_forward);
+      self.var_36f175fc = playFX(localclientnum, level._effect[#"hash_31c3f08749acf655"], v_pos, v_up, v_forward);
       break;
     case 4:
       level.var_6437d5e7 = 0.02;
-      self.var_36f175fc = playFX(localclientnum, level._effect[# "hash_31c0cd8749aa8505"], v_pos, v_up, v_forward);
+      self.var_36f175fc = playFX(localclientnum, level._effect[#"hash_31c0cd8749aa8505"], v_pos, v_up, v_forward);
       break;
     case 5:
       level.var_6437d5e7 = 0.025;
-      self.var_36f175fc = playFX(localclientnum, level._effect[# "hash_5f92f2e28c7ef455"], v_pos, v_up, v_forward);
+      self.var_36f175fc = playFX(localclientnum, level._effect[#"hash_5f92f2e28c7ef455"], v_pos, v_up, v_forward);
       break;
   }
 
@@ -115,16 +115,16 @@ function_9ed71eeb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     case 0:
       break;
     case 1:
-      self.var_9c32107c = playFX(localclientnum, level._effect[# "hash_64a625f8e26e3699"], v_pos, v_up, v_forward);
+      self.var_9c32107c = playFX(localclientnum, level._effect[#"hash_64a625f8e26e3699"], v_pos, v_up, v_forward);
       break;
     case 2:
-      self.var_9c32107c = playFX(localclientnum, level._effect[# "brazier_fire_blue"], v_pos, v_up, v_forward);
+      self.var_9c32107c = playFX(localclientnum, level._effect[#"brazier_fire_blue"], v_pos, v_up, v_forward);
       break;
     case 3:
-      self.var_9c32107c = playFX(localclientnum, level._effect[# "brazier_fire_purple"], v_pos, v_up, v_forward);
+      self.var_9c32107c = playFX(localclientnum, level._effect[#"brazier_fire_purple"], v_pos, v_up, v_forward);
       break;
     case 4:
-      self.var_9c32107c = playFX(localclientnum, level._effect[# "hash_533608bb3b3407b6"], v_pos, v_up, v_forward);
+      self.var_9c32107c = playFX(localclientnum, level._effect[#"hash_533608bb3b3407b6"], v_pos, v_up, v_forward);
       break;
   }
 
@@ -158,7 +158,7 @@ keyline_model(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 }
 
 pickup_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "pickup_glow"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"pickup_glow"], self, "tag_origin");
 }
 
 function_75ac8f21(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -231,7 +231,7 @@ function_c63a4f32(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     e_fx setModel(#"tag_origin");
     e_fx playSound(localclientnum, "zmb_sq_souls_release");
     e_fx.sfx_id = e_fx playLoopSound(#"zmb_sq_souls_lp");
-    util::playFXOnTag(localclientnum, level._effect[# "hash_fa374812e6016c9"][n_index], e_fx, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_fa374812e6016c9"][n_index], e_fx, "tag_origin");
     wait 0.3;
     s_target = struct::get("s_apollo_challenge_fx_loc", "targetname");
     power = distance(e_fx.origin, s_target.origin);
@@ -239,7 +239,7 @@ function_c63a4f32(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     wait n_time;
     e_fx playSound(localclientnum, "zmb_sq_souls_impact");
     e_fx stoploopsound(e_fx.sfx_id);
-    util::playFXOnTag(localclientnum, level._effect[# "hash_eafc8632695ccef"][n_index], e_fx, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_eafc8632695ccef"][n_index], e_fx, "tag_origin");
     wait 0.3;
     e_fx delete();
   }

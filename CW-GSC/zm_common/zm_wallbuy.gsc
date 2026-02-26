@@ -85,8 +85,8 @@ function on_round_end() {
   if(level.round_number % 5 == 0) {
     round_number = level.round_number;
 
-    foreach(instance in level.contentmanager.spawnedinstances[# "wallbuy"]) {
-      foreach(chalk in instance.contentgroups[# "wallbuy_chalk"]) {
+    foreach(instance in level.contentmanager.spawnedinstances[#"wallbuy"]) {
+      foreach(chalk in instance.contentgroups[#"wallbuy_chalk"]) {
         if(isDefined(chalk.trigger.weapon.name) && isDefined(chalk.trigger.rarity) && isDefined(chalk.trigger) && isDefined(chalk.trigger.weapon.displayname) && is_true(chalk.trigger.var_9f32a5f4)) {
           if(chalk.trigger.rarity != "orange") {
             n_chance = 0;
@@ -203,7 +203,7 @@ function on_round_end() {
 function function_26b21477(chalk, new_rarity) {
   if(isDefined(chalk.trigger.chalk_model)) {
     chalk.trigger.chalk_model delete();
-    var_a2a22fe0 = chalk.contentgroups[# "wallbuy_gun"][0];
+    var_a2a22fe0 = chalk.contentgroups[#"wallbuy_gun"][0];
     var_324ad795 = function_d26435e4(var_a2a22fe0, new_rarity, chalk.trigger.weapon.name);
     chalk_model = self content_manager::spawn_script_model(chalk, var_324ad795, 0, 0);
     chalk_model clientfield::set("set_compass_icon", 1);
@@ -417,7 +417,7 @@ function function_d77fb9ee(s_instance) {
     return;
   }
 
-  wallbuys = s_instance.contentgroups[# "wallbuy_chalk"];
+  wallbuys = s_instance.contentgroups[#"wallbuy_chalk"];
   count = 0;
 
   foreach(wallbuy in wallbuys) {
@@ -428,7 +428,7 @@ function function_d77fb9ee(s_instance) {
       weapon_name = level.var_8e3edeb9[index];
     }
 
-    var_e9040287 = wallbuy.contentgroups[# "wallbuy_gun"][0];
+    var_e9040287 = wallbuy.contentgroups[#"wallbuy_gun"][0];
     rarity = function_8183be86();
 
     if(zm_utility::is_classic() && isDefined(level.round_number) && level.round_number <= 1) {
@@ -676,7 +676,7 @@ function init_spawnable_weapon_upgrade(s_destination) {
         continue;
       }
 
-      wallbuy = s_location.instances[# "wallbuy"];
+      wallbuy = s_location.instances[#"wallbuy"];
 
       if(isDefined(wallbuy)) {
         content_manager::spawn_instance(wallbuy);

@@ -39,11 +39,11 @@ spawner() {
 }
 
 precache() {
-  character\character_op_airborne_sniper::precache();
+    character\character_op_airborne_sniper::precache();
 
-  precacheItem("dragunov");
-  precacheItem("pp2000");
-  precacheItem("fraggrenade");
+    precacheItem("dragunov");
+    precacheItem("pp2000");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

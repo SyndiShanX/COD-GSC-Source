@@ -498,13 +498,13 @@ function function_706caaf3(meansofdeath, var_38e70910, victim, weapon) {
     if(isDefined(weapon) && weapon != level.weaponnone) {
       var_38e70910 stats::function_e24eec31(weapon, #"hash_21b62e7a039a069f", 1);
 
-      if(!isDefined(var_38e70910.pers[# "hash_33dcd1468cbdb9c2"])) {
-        var_38e70910.pers[# "hash_33dcd1468cbdb9c2"] = 0;
+      if(!isDefined(var_38e70910.pers[#"hash_33dcd1468cbdb9c2"])) {
+        var_38e70910.pers[#"hash_33dcd1468cbdb9c2"] = 0;
       }
 
-      var_38e70910.pers[# "hash_33dcd1468cbdb9c2"]++;
+      var_38e70910.pers[#"hash_33dcd1468cbdb9c2"]++;
 
-      if(var_38e70910.pers[# "hash_33dcd1468cbdb9c2"] == 2) {
+      if(var_38e70910.pers[#"hash_33dcd1468cbdb9c2"] == 2) {
         var_38e70910 stats::function_d0de7686(#"hash_2dc09a051d45038d", 1, #"hash_653135ec012bf674");
       }
     }
@@ -552,13 +552,13 @@ function private function_d68ae402(inflictor, meansofdeath, victim, attacker, sc
 
   if(attacker.multikills[var_ac4c1].kills >= 2) {
     if(var_ac4c1 == # "frag_grenade" || var_ac4c1 == # "eq_molotov" || var_ac4c1 == # "hatchet") {
-      if(!isDefined(attacker.pers[# "hash_52e978325c91fe24"])) {
-        attacker.pers[# "hash_52e978325c91fe24"] = 0;
+      if(!isDefined(attacker.pers[#"hash_52e978325c91fe24"])) {
+        attacker.pers[#"hash_52e978325c91fe24"] = 0;
       }
 
-      attacker.pers[# "hash_52e978325c91fe24"]++;
+      attacker.pers[#"hash_52e978325c91fe24"]++;
 
-      if(attacker.pers[# "hash_52e978325c91fe24"] % 2 == 0) {
+      if(attacker.pers[#"hash_52e978325c91fe24"] % 2 == 0) {
         attacker stats::function_dad108fa(#"hash_52e978325c91fe24", 1);
       }
     } else if(var_ac4c1 == # "nightingale") {
@@ -893,7 +893,7 @@ function function_d3ca3608(eventname) {
     level.var_10cd7193[level.var_10cd7193.size] = eventstr;
   }
 
-  eventindex = level.scoreinfo[eventname][# "row"];
+  eventindex = level.scoreinfo[eventname][#"row"];
 }
 
 function function_61254438(weapon) {

@@ -41,7 +41,7 @@ function postinit() {
 
 function function_9ed7339b(struct) {
   assert(isstruct(struct), "<dev string:x38>");
-  spawn_points = struct.contentgroups[# "hash_6873efb1dfa0ebea"];
+  spawn_points = struct.contentgroups[#"hash_6873efb1dfa0ebea"];
 
   foreach(point in spawn_points) {
     spawn_struct = point;
@@ -502,7 +502,7 @@ function function_b99f518f(destination) {
 
 function function_7b19802a(destination) {
   foreach(location in destination.locations) {
-    ammo_cache = location.instances[# "ammo_cache"];
+    ammo_cache = location.instances[#"ammo_cache"];
 
     if(isDefined(ammo_cache)) {
       content_manager::spawn_instance(ammo_cache);

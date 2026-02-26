@@ -244,7 +244,7 @@ function_fe82c566() {
     var_bc569584 = level.var_23674b8f.var_80284ca5[level.var_23674b8f.var_c8a6d360].origin;
     self moveto(var_bc569584, 0.3);
     self waittill(#"movedone");
-    playFX(level._effect[# "portal_origin"], var_bc569584, (1, 0, 0), (0, 0, 1));
+    playFX(level._effect[#"portal_origin"], var_bc569584, (1, 0, 0), (0, 0, 1));
     playsoundatposition(#"evt_teleporter_out", var_bc569584);
     self clientfield::set("" + # "hash_b0298e980bd8da0", 0);
     level flag::set(#"hash_11513646e875455c");
@@ -261,7 +261,7 @@ function_fe82c566() {
     self.origin = var_838db546 - (0, 0, 64);
     self moveto(var_838db546 + (0, 0, 64), 1);
     wait 0.5;
-    playFX(level._effect[# "portal_dest"], var_838db546, (1, 0, 0), (0, 0, 1));
+    playFX(level._effect[#"portal_dest"], var_838db546, (1, 0, 0), (0, 0, 1));
     playsoundatposition(#"evt_teleporter_go", var_838db546);
     self waittill(#"movedone");
 

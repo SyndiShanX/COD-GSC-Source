@@ -189,7 +189,7 @@ _fire(lifeid, player, team, killstreak_id) {
 
   recordent(veh);
 
-  self killstreaks::play_killstreak_start_dialog("remote_missile", self.pers[# "team"], killstreak_id);
+  self killstreaks::play_killstreak_start_dialog("remote_missile", self.pers[#"team"], killstreak_id);
   veh setModel(weapon.var_22082a57);
   veh setenemymodel(weapon.stowedmodel);
   veh playLoopSound("veh_hellstorm_dropship_base");
@@ -1045,7 +1045,7 @@ missile_deploy_watch(rocket) {
   self endon(#"disconnect", #"remotemissile_done");
   rocket endon(#"remotemissile_bomblets_launched", #"death");
   level endon(#"game_ended");
-  params = level.killstreakbundle[# "remote_missile"];
+  params = level.killstreakbundle[#"remote_missile"];
   var_dc54c0bd = isDefined(params.var_538e1d5) ? params.var_538e1d5 : 3000;
   wait 0.25;
 

@@ -228,8 +228,8 @@ function_a8176b98(v_pos, n_radius) {
 
   v_drop_point = zm_utility::function_b0eeaada(v_pos, 1500);
 
-  if(isDefined(v_drop_point) && zm_zonemgr::function_66bf6a43(v_drop_point[# "point"])) {
-    return v_drop_point[# "point"];
+  if(isDefined(v_drop_point) && zm_zonemgr::function_66bf6a43(v_drop_point[#"point"])) {
+    return v_drop_point[#"point"];
   }
 
   if(!isDefined(v_drop_point) && isDefined(n_radius)) {
@@ -348,7 +348,7 @@ function_9e147e0c(s_params) {
 
         if(isDefined(v_drop)) {
           s_loc = spawnStruct();
-          s_loc.origin = groundtrace(v_drop + (0, 0, 32) + (0, 0, 8), v_drop + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
+          s_loc.origin = groundtrace(v_drop + (0, 0, 32) + (0, 0, 8), v_drop + (0, 0, 32) + (0, 0, -100000), 0, self)[#"position"];
           v_normal = getnavmeshfacenormal(v_drop, 32);
           s_loc.angles = function_c1fa62a2(var_9cb648a3, v_normal);
           wait 0.5;
@@ -360,7 +360,7 @@ function_9e147e0c(s_params) {
     return;
   }
 
-  if(self.archetype === # "nosferatu" && isPlayer(s_params.eattacker) && !(isDefined(level.var_f1028094[# "hash_2464612c580fec24"]) && level.var_f1028094[# "hash_2464612c580fec24"])) {
+  if(self.archetype === # "nosferatu" && isPlayer(s_params.eattacker) && !(isDefined(level.var_f1028094[#"hash_2464612c580fec24"]) && level.var_f1028094[#"hash_2464612c580fec24"])) {
     s_params.eattacker thread function_9e4c5bfb();
   }
 }
@@ -370,12 +370,12 @@ function_9e4c5bfb() {
     self.var_aed1893c = [];
   }
 
-  if((!(isDefined(self.var_aed1893c[# "hash_2464612c580fec24"]) && self.var_aed1893c[# "hash_2464612c580fec24"]) || math::cointoss(20)) && !(isDefined(level.var_f1028094[# "hash_2464612c580fec24"]) && level.var_f1028094[# "hash_2464612c580fec24"]) && zm_utility::is_player_valid(self)) {
-    self.var_aed1893c[# "hash_2464612c580fec24"] = 1;
-    level.var_f1028094[# "hash_2464612c580fec24"] = 1;
+  if((!(isDefined(self.var_aed1893c[#"hash_2464612c580fec24"]) && self.var_aed1893c[#"hash_2464612c580fec24"]) || math::cointoss(20)) && !(isDefined(level.var_f1028094[#"hash_2464612c580fec24"]) && level.var_f1028094[#"hash_2464612c580fec24"]) && zm_utility::is_player_valid(self)) {
+    self.var_aed1893c[#"hash_2464612c580fec24"] = 1;
+    level.var_f1028094[#"hash_2464612c580fec24"] = 1;
     self zm_audio::create_and_play_dialog(#"nosferatu", #"kill", undefined, 1);
     wait randomintrange(30, 3 * 30);
-    level.var_f1028094[# "hash_2464612c580fec24"] = 0;
+    level.var_f1028094[#"hash_2464612c580fec24"] = 0;
   }
 }
 

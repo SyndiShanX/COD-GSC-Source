@@ -51,10 +51,10 @@ function finalize() {}
 
 function function_1532e0b6() {
   foreach(location in level.contentmanager.locations) {
-    function_999594fe(location.contentgroups[# "hash_158cc8ce18ad2dbc"], #"hash_5c11dcd882aa848a", #"hash_2cbb9211afce9b04", #"hash_47d7a8105237c88", function_cce40d6d(#"hash_47d7a8105237c88"));
-    function_999594fe(location.contentgroups[# "hash_7ee78beca217d7fe"], #"hash_249eb4d334db41f4", #"p7_zm_vending_revive", #"talent_quickrevive", function_cce40d6d(#"talent_quickrevive"));
-    function_999594fe(location.contentgroups[# "hash_560082c9da5ef68e"], #"hash_5a2711fd4875c104", #"p7_zm_vending_sleight", #"talent_speedcola", function_cce40d6d(#"talent_speedcola"));
-    function_999594fe(location.contentgroups[# "hash_6e55d13f9423215a"], #"hash_56e1ed93d9ce235c", #"hash_43372808f8cd00cb", #"talent_doubletap", function_cce40d6d(#"talent_doubletap"));
+    function_999594fe(location.contentgroups[#"hash_158cc8ce18ad2dbc"], #"hash_5c11dcd882aa848a", #"hash_2cbb9211afce9b04", #"hash_47d7a8105237c88", function_cce40d6d(#"hash_47d7a8105237c88"));
+    function_999594fe(location.contentgroups[#"hash_7ee78beca217d7fe"], #"hash_249eb4d334db41f4", #"p7_zm_vending_revive", #"talent_quickrevive", function_cce40d6d(#"talent_quickrevive"));
+    function_999594fe(location.contentgroups[#"hash_560082c9da5ef68e"], #"hash_5a2711fd4875c104", #"p7_zm_vending_sleight", #"talent_speedcola", function_cce40d6d(#"talent_speedcola"));
+    function_999594fe(location.contentgroups[#"hash_6e55d13f9423215a"], #"hash_56e1ed93d9ce235c", #"hash_43372808f8cd00cb", #"talent_doubletap", function_cce40d6d(#"talent_doubletap"));
 
     if(zm_utility::is_survival() || is_true(level.var_dfe80386)) {
       model = # "hash_6e47d6576612543c";
@@ -62,7 +62,7 @@ function function_1532e0b6() {
       model = # "p9_fxanim_zm_gp_wunderfizz_on_xmodel";
     }
 
-    function_999594fe(location.contentgroups[# "perk_machine_choice"], #"hash_4af85251966549b8", model, #"hash_3eac5ec7a888ddfb", 0);
+    function_999594fe(location.contentgroups[#"perk_machine_choice"], #"hash_4af85251966549b8", model, #"hash_3eac5ec7a888ddfb", 0);
   }
 }
 
@@ -383,7 +383,7 @@ function function_8605eb86(destination) {
 
 function function_d9cdb025(destination) {
   foreach(location in destination.locations) {
-    var_4064e964 = location.instances[# "perk_machine_choice"];
+    var_4064e964 = location.instances[#"perk_machine_choice"];
 
     if(isDefined(var_4064e964)) {
       if(zm_utility::is_survival() || is_true(level.var_dfe80386)) {

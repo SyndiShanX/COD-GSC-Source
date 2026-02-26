@@ -726,35 +726,35 @@ function function_69303ed3() {
 function function_53ca9662(item_name) {
   foreach(i, value in level.var_5b46d961) {
     if(value == item_name) {
-      if(isinarray(level.var_d98fc25e[# "aether_shroud"], i)) {
+      if(isinarray(level.var_d98fc25e[#"aether_shroud"], i)) {
         return # "aether_shroud";
       }
 
-      if(isinarray(level.var_d98fc25e[# "frost_blast"], i)) {
+      if(isinarray(level.var_d98fc25e[#"frost_blast"], i)) {
         return # "frost_blast";
       }
 
-      if(isinarray(level.var_d98fc25e[# "energy_mine"], i)) {
+      if(isinarray(level.var_d98fc25e[#"energy_mine"], i)) {
         return # "energy_mine";
       }
 
-      if(isinarray(level.var_d98fc25e[# "heal_aoe"], i)) {
+      if(isinarray(level.var_d98fc25e[#"heal_aoe"], i)) {
         return # "heal_aoe";
       }
 
-      if(isinarray(level.var_d98fc25e[# "ring_of_fire"], i)) {
+      if(isinarray(level.var_d98fc25e[#"ring_of_fire"], i)) {
         return # "ring_of_fire";
       }
 
-      if(isinarray(level.var_d98fc25e[# "hash_55569355da0f0f68"], i)) {
+      if(isinarray(level.var_d98fc25e[#"hash_55569355da0f0f68"], i)) {
         return # "hash_55569355da0f0f68";
       }
 
-      if(isinarray(level.var_d98fc25e[# "toxic_growth"], i)) {
+      if(isinarray(level.var_d98fc25e[#"toxic_growth"], i)) {
         return # "toxic_growth";
       }
 
-      if(isinarray(level.var_d98fc25e[# "lightning_links"], i)) {
+      if(isinarray(level.var_d98fc25e[#"lightning_links"], i)) {
         return # "lightning_links";
       }
     }

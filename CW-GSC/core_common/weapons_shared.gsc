@@ -73,7 +73,7 @@ function function_c0101095(weapon, forward, var_62e5b78) {
   var_4f64fb6b = 3;
   trace = physicstrace(trace_start, trace_end, (var_4f64fb6b * -1, var_4f64fb6b * -1, 0), (var_4f64fb6b, var_4f64fb6b, 1), player, 1);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     var_79ed7809 = 30;
   }
 
@@ -553,7 +553,7 @@ function stow_on_hip() {
 
 function weapondamagetracepassed(from, to, startradius, ignore) {
   trace = weapondamagetrace(from, to, startradius, ignore);
-  return trace[# "fraction"] == 1;
+  return trace[#"fraction"] == 1;
 }
 
 function weapondamagetrace(from, to, startradius, ignore) {
@@ -569,11 +569,11 @@ function weapondamagetrace(from, to, startradius, ignore) {
   trace = bulletTrace(midpos, to, 0, ignore);
 
   if(getdvarint(#"scr_damage_debug", 0) != 0) {
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       thread debug::drawdebugline(midpos, to, (1, 1, 1), 600);
     } else {
-      thread debug::drawdebugline(midpos, trace[# "position"], (1, 0.9, 0.8), 600);
-      thread debug::drawdebugline(trace[# "position"], to, (1, 0.4, 0.3), 600);
+      thread debug::drawdebugline(midpos, trace[#"position"], (1, 0.9, 0.8), 600);
+      thread debug::drawdebugline(trace[#"position"], to, (1, 0.4, 0.3), 600);
     }
   }
 

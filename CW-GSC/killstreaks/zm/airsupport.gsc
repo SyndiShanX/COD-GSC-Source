@@ -163,7 +163,7 @@ function private function_b66d4fac(killstreaktype, maxrange, var_f6825ff2, var_c
     v_forward = self getweaponforwarddir();
     v_end = v_start + v_forward * maxrange;
     a_trace = bulletTrace(v_start, v_end, 0, self.mdl_target[killstreaktype], 1, 0);
-    self.var_5acfe25f = a_trace[# "position"];
+    self.var_5acfe25f = a_trace[#"position"];
     self.mdl_target[killstreaktype] moveto(self.var_5acfe25f + var_4ad3bc13, 0.05);
 
     if(var_d89073fc) {

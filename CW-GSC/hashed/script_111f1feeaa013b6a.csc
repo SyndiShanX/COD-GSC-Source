@@ -31,17 +31,17 @@ function register() {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "bountyhunterbuy"])) {
-    level.var_ae746e8f[# "bountyhunterbuy"] = [];
+  if(!isDefined(level.var_ae746e8f[#"bountyhunterbuy"])) {
+    level.var_ae746e8f[#"bountyhunterbuy"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "bountyhunterbuy"])) {
-    level.var_ae746e8f[# "bountyhunterbuy"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "bountyhunterbuy"])) {
-    level.var_ae746e8f[# "bountyhunterbuy"] = array(level.var_ae746e8f[# "bountyhunterbuy"]);
+  if(!isDefined(level.var_ae746e8f[#"bountyhunterbuy"])) {
+    level.var_ae746e8f[#"bountyhunterbuy"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"bountyhunterbuy"])) {
+    level.var_ae746e8f[#"bountyhunterbuy"] = array(level.var_ae746e8f[#"bountyhunterbuy"]);
   }
 
-  level.var_ae746e8f[# "bountyhunterbuy"][level.var_ae746e8f[# "bountyhunterbuy"].size] = elem;
+  level.var_ae746e8f[#"bountyhunterbuy"][level.var_ae746e8f[#"bountyhunterbuy"].size] = elem;
 }
 
 function register_clientside() {

@@ -53,7 +53,7 @@ function init_shared() {
     level.var_8c5a071d = 1;
   }
 
-  level._effect[# "flashninebang"] = # "_t6/misc/fx_equip_tac_insert_exp";
+  level._effect[#"flashninebang"] = # "_t6/misc/fx_equip_tac_insert_exp";
   callback::on_start_gametype(&init);
   callback::on_player_killed(&on_death);
   level.detach_all_weapons = &detach_all_weapons;
@@ -92,15 +92,15 @@ function function_4fddf732() {
   self.hasdonecombat = 0;
   self.shielddamageblocked = 0;
   self.usedkillstreakweapon = [];
-  self.usedkillstreakweapon[# "minigun"] = 0;
-  self.usedkillstreakweapon[# "m32"] = 0;
-  self.usedkillstreakweapon[# "m220_tow"] = 0;
-  self.usedkillstreakweapon[# "mp40_blinged"] = 0;
+  self.usedkillstreakweapon[#"minigun"] = 0;
+  self.usedkillstreakweapon[#"m32"] = 0;
+  self.usedkillstreakweapon[#"m220_tow"] = 0;
+  self.usedkillstreakweapon[#"mp40_blinged"] = 0;
   self.killstreaktype = [];
-  self.killstreaktype[# "minigun"] = "minigun";
-  self.killstreaktype[# "m32"] = "m32";
-  self.killstreaktype[# "m220_tow"] = "m220_tow";
-  self.killstreaktype[# "mp40_blinged"] = "mp40_blinged_drop";
+  self.killstreaktype[#"minigun"] = "minigun";
+  self.killstreaktype[#"m32"] = "m32";
+  self.killstreaktype[#"m220_tow"] = "m220_tow";
+  self.killstreaktype[#"mp40_blinged"] = "mp40_blinged_drop";
   self.throwinggrenade = 0;
   self.gotpullbacknotify = 0;
   self.lastdroppableweapon = level.weaponnone;
@@ -159,7 +159,7 @@ function event_handler[weapon_change] function_edc4ebe8(eventstruct) {
 
   if(doesweaponreplacespawnweapon(self.spawnweapon, newweapon)) {
     self.spawnweapon = newweapon;
-    self.pers[# "spawnweapon"] = newweapon;
+    self.pers[#"spawnweapon"] = newweapon;
   }
 
   if(!isDefined(self.lastnonkillstreakweapon) && isDefined(newweapon)) {
@@ -837,8 +837,8 @@ function function_f2c53bb2(curweapon) {
   if(statweapon.iscarriedkillstreak) {
     var_607dffd9 = killstreaks::function_fde227c6(curweapon, statweapon);
 
-    if(isDefined(self.pers[# "held_killstreak_ammo_count"][var_607dffd9])) {
-      self.pers[# "held_killstreak_ammo_count"][var_607dffd9]--;
+    if(isDefined(self.pers[#"held_killstreak_ammo_count"][var_607dffd9])) {
+      self.pers[#"held_killstreak_ammo_count"][var_607dffd9]--;
     }
 
     self.usedkillstreakweapon[statweapon.name] = 1;
@@ -901,14 +901,14 @@ function track_fire(curweapon) {
   self bb::add_to_stat("hits", self.hits);
 
   if(level.mpcustommatch === 1 || is_true(level.var_674e8051)) {
-    self.pers[# "shotsfired"]++;
-    shotsmissed = self.pers[# "shotsfired"] - self.pers[# "shotshit"];
+    self.pers[#"shotsfired"]++;
+    shotsmissed = self.pers[#"shotsfired"] - self.pers[#"shotshit"];
 
     if(shotsmissed < 0) {
       shotsmissed = 0;
     }
 
-    self.pers[# "shotsmissed"] = shotsmissed;
+    self.pers[#"shotsmissed"] = shotsmissed;
   }
 
   self.hits = 0;
@@ -988,7 +988,7 @@ function drop_all_to_ground(origin, radius) {
   for(i = 0; i < weapons.size; i++) {
     if(distancesquared(origin, weapons[i].origin) < radius * radius) {
       trace = bulletTrace(weapons[i].origin, weapons[i].origin + (0, 0, -2000), 0, weapons[i]);
-      weapons[i].origin = trace[# "position"];
+      weapons[i].origin = trace[#"position"];
     }
   }
 }
@@ -1149,7 +1149,7 @@ function begin_grenade_tracking() {
       level.globalfraggrenadesfired++;
     case # "sticky_grenade":
       self stats::function_e24eec31(weapon, #"used", 1);
-      grenade setteam(self.pers[# "team"]);
+      grenade setteam(self.pers[#"team"]);
       grenade setowner(self);
     case # "explosive_bolt":
       grenade.originalowner = self;
@@ -1324,12 +1324,12 @@ function check_hatchet_bounce() {
 function stuck_to_player_team_change(player) {
   self endon(#"death");
   player endon(#"disconnect");
-  originalteam = player.pers[# "team"];
+  originalteam = player.pers[#"team"];
 
   while(true) {
     player waittill(#"joined_team");
 
-    if(player.pers[# "team"] != originalteam) {
+    if(player.pers[#"team"] != originalteam) {
       self detonate();
       return;
     }
@@ -1500,7 +1500,7 @@ function get_damageable_ents(pos, radius, dolos, startradius) {
 
 function damage_trace_passed(from, to, startradius, ignore) {
   trace = damage_trace(from, to, startradius, ignore);
-  return trace[# "fraction"] == 1;
+  return trace[#"fraction"] == 1;
 }
 
 function damage_trace(from, to, startradius, ignore) {
@@ -1516,11 +1516,11 @@ function damage_trace(from, to, startradius, ignore) {
   trace = bulletTrace(midpos, to, 0, ignore);
 
   if(getdvarint(#"scr_damage_debug", 0) != 0) {
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       thread debug::drawdebugline(midpos, to, (1, 1, 1), 600);
     } else {
-      thread debug::drawdebugline(midpos, trace[# "position"], (1, 0.9, 0.8), 600);
-      thread debug::drawdebugline(trace[# "position"], to, (1, 0.4, 0.3), 600);
+      thread debug::drawdebugline(midpos, trace[#"position"], (1, 0.9, 0.8), 600);
+      thread debug::drawdebugline(trace[#"position"], to, (1, 0.4, 0.3), 600);
     }
   }
 
@@ -1651,8 +1651,8 @@ function on_weapon_change(params) {
     }
   }
 
-  team = self.pers[# "team"];
-  playerclass = self.pers[# "class"];
+  team = self.pers[#"team"];
+  playerclass = self.pers[#"class"];
 
   if(self ismantling()) {
     return;

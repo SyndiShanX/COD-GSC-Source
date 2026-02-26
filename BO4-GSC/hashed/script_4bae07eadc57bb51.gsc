@@ -697,7 +697,7 @@ dog_ambush() {
     var_c6bd50df = self zm_zonemgr::get_player_zone();
     var_4974e492 = [];
 
-    foreach(loc in level.zm_loc_types[# "dog_location"]) {
+    foreach(loc in level.zm_loc_types[#"dog_location"]) {
       if(!isDefined(var_c6bd50df)) {
         util::wait_network_frame();
         continue;

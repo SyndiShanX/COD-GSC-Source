@@ -43,11 +43,11 @@ function on_player_death(params) {
 }
 
 function function_27779784() {
-  if(!isDefined(self) || !isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
+  if(!isDefined(self) || !isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
     return;
   }
 
-  foreach(activecamo in self.pers[# "activecamo"]) {
+  foreach(activecamo in self.pers[#"activecamo"]) {
     foreach(var_dd54a13b in activecamo.var_dd54a13b) {
       activecamo.weapon = var_dd54a13b.weapon;
       activecamo.baseweapon = function_c14cb514(activecamo.weapon);
@@ -76,15 +76,15 @@ function function_8d3b94ea(weapon, owned, b_has_weapon) {
 
 function init_activecamo(weapon, var_f4eb4a50, owned) {
   if(isDefined(var_f4eb4a50.name)) {
-    if(!isDefined(self.pers[# "activecamo"])) {
-      self.pers[# "activecamo"] = [];
+    if(!isDefined(self.pers[#"activecamo"])) {
+      self.pers[#"activecamo"] = [];
     }
 
-    if(!isDefined(self.pers[# "activecamo"][var_f4eb4a50.name])) {
-      self.pers[# "activecamo"][var_f4eb4a50.name] = {};
+    if(!isDefined(self.pers[#"activecamo"][var_f4eb4a50.name])) {
+      self.pers[#"activecamo"][var_f4eb4a50.name] = {};
     }
 
-    activecamo = self.pers[# "activecamo"][var_f4eb4a50.name];
+    activecamo = self.pers[#"activecamo"][var_f4eb4a50.name];
     activecamo.var_13949c61 = function_8a6ced15(var_f4eb4a50);
     assert(isDefined(activecamo.var_13949c61));
     activecamo.weapon = weapon;
@@ -380,7 +380,7 @@ function function_896ac347(oweapon, statname, value) {
     return;
   }
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
     return;
   }
 
@@ -399,7 +399,7 @@ function function_896ac347(oweapon, statname, value) {
   activecamoname = self function_b004e227(weapon);
 
   if(isDefined(activecamoname)) {
-    activecamo = self.pers[# "activecamo"][activecamoname];
+    activecamo = self.pers[#"activecamo"][activecamoname];
 
     if(isDefined(activecamo)) {
       if(isDefined(activecamo.var_13949c61.var_5f38b34e)) {
@@ -1039,7 +1039,7 @@ function function_779a9561(stagenum) {
   activecamoname = self function_b004e227(weapon);
 
   if(isDefined(activecamoname)) {
-    activecamo = self.pers[# "activecamo"][activecamoname];
+    activecamo = self.pers[#"activecamo"][activecamoname];
 
     if(isDefined(activecamo) && isDefined(activecamo.stages) && stagenum < activecamo.stages.size) {
       activecamo.weapon = weapon;
@@ -1123,7 +1123,7 @@ function function_633fbf17(weapon, back) {
     activecamoname = self function_b004e227(weapon);
 
     if(isDefined(activecamoname)) {
-      activecamo = self.pers[# "activecamo"][activecamoname];
+      activecamo = self.pers[#"activecamo"][activecamoname];
 
       if(isDefined(activecamo)) {
         if(isDefined(activecamo.stages)) {
@@ -1161,7 +1161,7 @@ function function_3d928fb4(weapon) {
     activecamoname = self function_b004e227(weapon);
 
     if(isDefined(activecamoname)) {
-      activecamo = self.pers[# "activecamo"][activecamoname];
+      activecamo = self.pers[#"activecamo"][activecamoname];
 
       if(isDefined(activecamo)) {
         activecamo.weapon = weapon;
@@ -1231,11 +1231,11 @@ function function_12e53b2d() {
           continue;
         }
 
-        if(!isDefined(player.pers[# "activecamo"][var_f4eb4a50.name])) {
+        if(!isDefined(player.pers[#"activecamo"][var_f4eb4a50.name])) {
           continue;
         }
 
-        activecamo = player.pers[# "activecamo"][var_f4eb4a50.name];
+        activecamo = player.pers[#"activecamo"][var_f4eb4a50.name];
 
         if(isDefined(activecamo.weapon)) {
           player init_activecamo(activecamo.weapon, var_f4eb4a50, 1);

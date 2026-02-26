@@ -13,8 +13,8 @@
 
 init() {
   level.draftexploders = [];
-  level.draftexploders[# "allies"] = "mp_draft_lights_allies";
-  level.draftexploders[# "axis"] = "mp_draft_lights_axis";
+  level.draftexploders[#"allies"] = "mp_draft_lights_allies";
+  level.draftexploders[#"axis"] = "mp_draft_lights_axis";
   level.activeexploder = undefined;
   level thread function_ca03ab69();
   level thread function_91858511();

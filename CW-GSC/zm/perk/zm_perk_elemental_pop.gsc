@@ -52,11 +52,11 @@ function precache() {
     return;
   }
 
-  level._effect[# "elemental_pop_light"] = # "hash_17afc35bb449d1c2";
-  level.machine_assets[# "talent_elemental_pop"] = spawnStruct();
-  level.machine_assets[# "talent_elemental_pop"].weapon = getweapon("zombie_perk_bottle_elemental_pop");
-  level.machine_assets[# "talent_elemental_pop"].off_model = "p9_sur_elemental_pop_off";
-  level.machine_assets[# "talent_elemental_pop"].on_model = "p9_sur_elemental_pop";
+  level._effect[#"elemental_pop_light"] = # "hash_17afc35bb449d1c2";
+  level.machine_assets[#"talent_elemental_pop"] = spawnStruct();
+  level.machine_assets[#"talent_elemental_pop"].weapon = getweapon("zombie_perk_bottle_elemental_pop");
+  level.machine_assets[#"talent_elemental_pop"].off_model = "p9_sur_elemental_pop_off";
+  level.machine_assets[#"talent_elemental_pop"].on_model = "p9_sur_elemental_pop";
 }
 
 function register_clientfield() {

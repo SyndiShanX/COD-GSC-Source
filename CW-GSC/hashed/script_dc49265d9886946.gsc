@@ -51,7 +51,7 @@ function function_a5ef96da(params) {
   a_locations = params.destination.locations;
 
   foreach(location in a_locations) {
-    instance = location.instances[# "hash_3e85505b26ebde95"];
+    instance = location.instances[#"hash_3e85505b26ebde95"];
 
     if(isDefined(instance)) {
       content_manager::spawn_instance(instance);
@@ -60,7 +60,7 @@ function function_a5ef96da(params) {
   }
 
   foreach(location in a_locations) {
-    var_8f82cb55 = location.instances[# "hash_522307876efbeba4"];
+    var_8f82cb55 = location.instances[#"hash_522307876efbeba4"];
 
     if(isDefined(var_8f82cb55)) {
       content_manager::spawn_instance(var_8f82cb55);
@@ -82,7 +82,7 @@ function function_a5ef96da(params) {
 }
 
 function private function_1cf80b5e(instance) {
-  s_interact = instance.contentgroups[# "mask"][0];
+  s_interact = instance.contentgroups[#"mask"][0];
   trigger = content_manager::spawn_interact(s_interact, &function_376d2d76, #"hash_86b1b2e8c4d179a");
   trigger.var_eff718da = content_manager::spawn_script_model(s_interact, #"hash_2954df4c5aed1a55", 0, 0);
 }
@@ -152,7 +152,7 @@ function function_483192e9() {
   }
 
   if(isDefined(player)) {
-    var_f7b289b6 = level.var_f1f2207c.contentgroups[# "hash_48b2537e8e62dfd6"][0];
+    var_f7b289b6 = level.var_f1f2207c.contentgroups[#"hash_48b2537e8e62dfd6"][0];
     player.var_213dd9cc = player function_5f80f13f();
     var_2b13c8ad = player stats::get_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade");
 
@@ -273,7 +273,7 @@ function function_b6b75a5c(params) {
     }
   }
 
-  s_teleport = level.var_f1f2207c.contentgroups[# "hash_380337e1166e8506"][0];
+  s_teleport = level.var_f1f2207c.contentgroups[#"hash_380337e1166e8506"][0];
   self setinvisibletoplayer(player, 1);
 
   if(player getstance() == "prone") {
@@ -378,7 +378,7 @@ function function_b6b75a5c(params) {
 function private function_c5d02bee() {
   self endon(#"death");
   wait 5;
-  var_f7b289b6 = level.var_f1f2207c.contentgroups[# "hash_48b2537e8e62dfd6"][0];
+  var_f7b289b6 = level.var_f1f2207c.contentgroups[#"hash_48b2537e8e62dfd6"][0];
   self.var_586fcf0e = content_manager::spawn_interact(var_f7b289b6, &function_a00c368c, #"hash_3f0fe9393b2f5ba8");
 
   if(isDefined(self.var_586fcf0e)) {

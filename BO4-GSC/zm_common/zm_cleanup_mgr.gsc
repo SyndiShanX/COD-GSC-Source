@@ -310,8 +310,8 @@ get_wait_locations_in_zones(a_zones) {
   a_wait_locations = [];
 
   foreach(zone in a_zones) {
-    if(isDefined(level.zones[zone].a_loc_types) && isDefined(level.zones[zone].a_loc_types[# "wait_location"])) {
-      a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[# "wait_location"], 0, 0);
+    if(isDefined(level.zones[zone].a_loc_types) && isDefined(level.zones[zone].a_loc_types[#"wait_location"])) {
+      a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[#"wait_location"], 0, 0);
       continue;
     }
 
@@ -333,9 +333,9 @@ get_farthest_wait_location(a_wait_locations) {
 }
 
 get_wait_locations_in_zone(zone) {
-  if(isDefined(level.zones[zone].a_loc_types[# "wait_location"])) {
+  if(isDefined(level.zones[zone].a_loc_types[#"wait_location"])) {
     a_wait_locations = [];
-    a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[# "wait_location"], 0, 0);
+    a_wait_locations = arraycombine(a_wait_locations, level.zones[zone].a_loc_types[#"wait_location"], 0, 0);
     return a_wait_locations;
   }
 

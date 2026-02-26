@@ -442,7 +442,7 @@ function menuautoassign(comingfrommenu) {
   }
 
   if(level.teambased) {
-    if(assignment == self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+    if(assignment == self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
       self beginclasschoice();
       return;
     }
@@ -458,20 +458,20 @@ function menuautoassign(comingfrommenu) {
     }
   }
 
-  if(assignment != self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+  if(assignment != self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
     self.switching_teams = 1;
     self.switchedteamsresetgadgets = 1;
     self.joining_team = assignment;
-    self.leaving_team = self.pers[# "team"];
+    self.leaving_team = self.pers[#"team"];
     self suicide();
   }
 
-  self.pers[# "team"] = assignment;
+  self.pers[#"team"] = assignment;
   self.team = assignment;
-  self.pers[# "class"] = undefined;
+  self.pers[#"class"] = undefined;
   self.curclass = undefined;
-  self.pers[# "weapon"] = undefined;
-  self.pers[# "savedmodel"] = undefined;
+  self.pers[#"weapon"] = undefined;
+  self.pers[#"savedmodel"] = undefined;
   self updateobjectivetext();
   self.sessionteam = assignment;
 
@@ -551,17 +551,17 @@ function get_splitscreen_team() {
 }
 
 function updateobjectivetext() {
-  if(sessionmodeiszombiesgame() || self.pers[# "team"] == "spectator") {
+  if(sessionmodeiszombiesgame() || self.pers[#"team"] == "spectator") {
     self setclientcgobjectivetext("");
     return;
   }
 
   if(level.scorelimit > 0) {
-    self setclientcgobjectivetext(util::getobjectivescoretext(self.pers[# "team"]));
+    self setclientcgobjectivetext(util::getobjectivescoretext(self.pers[#"team"]));
     return;
   }
 
-  self setclientcgobjectivetext(util::getobjectivetext(self.pers[# "team"]));
+  self setclientcgobjectivetext(util::getobjectivetext(self.pers[#"team"]));
 }
 
 function closemenus() {
@@ -569,12 +569,12 @@ function closemenus() {
 }
 
 function beginclasschoice() {
-  assert(isDefined(level.teams[self.pers[# "team"]]));
-  team = self.pers[# "team"];
-  self closemenu(game.menu[# "menu_start_menu"]);
+  assert(isDefined(level.teams[self.pers[#"team"]]));
+  team = self.pers[#"team"];
+  self closemenu(game.menu[#"menu_start_menu"]);
 
   if(isbot(self)) {
-    self closemenu(game.menu[# "menu_changeclass"]);
+    self closemenu(game.menu[#"menu_changeclass"]);
     self openmenu(game.menu["menu_changeclass_" + level.teams[team]]);
     return;
   }
@@ -610,7 +610,7 @@ function beginclasschoice() {
     }
   }
 
-  self closemenu(game.menu[# "menu_changeclass"]);
+  self closemenu(game.menu[#"menu_changeclass"]);
   self openmenu(game.menu["menu_changeclass_" + level.teams[team]]);
 }
 
@@ -627,7 +627,7 @@ function spawn_player(prevclass) {
   }
 
   self.curclass = "default";
-  self.pers[# "class"] = self.curclass;
+  self.pers[#"class"] = self.curclass;
   waitframe(1);
 
   if(self.sessionstate != "playing" && game.state == "playing") {
@@ -761,15 +761,15 @@ function function_894987d3() {
 }
 
 function showmainmenuforteam() {
-  assert(isDefined(level.teams[self.pers[# "team"]]));
-  team = self.pers[# "team"];
+  assert(isDefined(level.teams[self.pers[#"team"]]));
+  team = self.pers[#"team"];
   self openmenu(game.menu["menu_changeclass_" + level.teams[team]]);
 }
 
 function menuautocontrolplayer() {
   self closemenus();
 
-  if(self.pers[# "team"] != "spectator") {
+  if(self.pers[#"team"] != "spectator") {
     toggleplayercontrol(self);
   }
 }
@@ -781,7 +781,7 @@ function menuteam(team) {
     return;
   }
 
-  if(self.pers[# "team"] != team) {
+  if(self.pers[#"team"] != team) {
     if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
@@ -790,16 +790,16 @@ function menuteam(team) {
       self.switching_teams = 1;
       self.switchedteamsresetgadgets = 1;
       self.joining_team = team;
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[# "team"] = team;
+    self.pers[#"team"] = team;
     self.team = team;
-    self.pers[# "class"] = undefined;
+    self.pers[#"class"] = undefined;
     self.curclass = undefined;
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
     self updateobjectivetext();
 
     if(!level.rankedmatch && !level.leaguematch) {

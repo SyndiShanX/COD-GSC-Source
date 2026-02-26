@@ -13,7 +13,7 @@ function preload() {
 }
 
 function postload() {
-  level._effect[# "hash_2b8b4be2cb5925ab"] = # "hash_670a56e843776b6f";
+  level._effect[#"hash_2b8b4be2cb5925ab"] = # "hash_670a56e843776b6f";
 }
 
 function function_70723e25(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -29,7 +29,7 @@ function function_70723e25(localclientnum, oldval, newval, bnewent, binitialsnap
       n_offset = 0;
     }
 
-    level.var_d392b4d1 = playfxoncamera(fieldname, level._effect[# "hash_2b8b4be2cb5925ab"], (0, n_offset, 1.5), (1, 0, -0.1), (0, 0, 1));
+    level.var_d392b4d1 = playfxoncamera(fieldname, level._effect[#"hash_2b8b4be2cb5925ab"], (0, n_offset, 1.5), (1, 0, -0.1), (0, 0, 1));
     return;
   }
 

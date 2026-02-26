@@ -146,7 +146,7 @@ function private dom_start() {
     level function_8f96464(team, undefined, #"chase_enemy", #"patrol", undefined);
   }
 
-  var_654bc2bc = [# "capture": &function_19d221fa, #"defend": &function_d5bf23f5];
+  var_654bc2bc = [#"capture": &function_19d221fa, #"defend": &function_d5bf23f5];
 
   while(!isDefined(level.domflags) || level.domflags.size <= 0) {
     waitframe(1);

@@ -65,8 +65,8 @@ __init__() {
   callback::on_player_killed_with_params(&on_player_killed);
   callback::on_disconnect(&on_player_disconnect);
   level.var_701f2ed4 = [];
-  level.var_701f2ed4[# "axis"] = 0;
-  level.var_701f2ed4[# "allies"] = 0;
+  level.var_701f2ed4[#"axis"] = 0;
+  level.var_701f2ed4[#"allies"] = 0;
 
   level thread force_last_stand();
 
@@ -296,7 +296,7 @@ force_last_stand() {
       eye = host getEye();
       dir *= 500;
       trace = bulletTrace(eye, eye + dir, 1, host);
-      target = trace[# "entity"];
+      target = trace[#"entity"];
 
       if(!isDefined(target) || !isPlayer(target)) {
         target = host;

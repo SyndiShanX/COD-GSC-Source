@@ -79,7 +79,7 @@ function function_63d13ea3(characterindex) {
 
     playercharacterindex = player get();
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == self.pers[# "team"] && playercharacterindex == characterindex) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == self.pers[#"team"] && playercharacterindex == characterindex) {
       rolecount++;
 
       if(rolecount >= maxuniqueroles) {
@@ -120,7 +120,7 @@ function set(index, force) {
   player = self;
   assert(isPlayer(player));
   assert(is_valid(index));
-  player.pers[# "characterindex"] = index;
+  player.pers[#"characterindex"] = index;
   player setspecialistindex(index);
 
   if(isbot(self) && getdvarint(#"hash_542c037530526acb", 0) && !is_true(force)) {
@@ -136,7 +136,7 @@ function set(index, force) {
     } else if(currentsessionmode() == 3 && !loadout::function_87bcb1b()) {
       customloadoutindex = 0;
     } else {
-      customloadoutindex = self.pers[# "loadoutindex"];
+      customloadoutindex = self.pers[#"loadoutindex"];
     }
 
     if(isDefined(customloadoutindex)) {
@@ -149,7 +149,7 @@ function clear() {
   player = self;
   assert(isPlayer(player));
   player setspecialistindex(0);
-  player.pers[# "characterindex"] = undefined;
+  player.pers[#"characterindex"] = undefined;
   player.playerrole = undefined;
 }
 
@@ -174,7 +174,7 @@ function function_97d19493(name) {
 
 function function_2a911680() {
   if(level.var_d1455682.var_67bfde2a === 1) {
-    faction = teams::function_20cfd8b5(self.pers[# "team"]);
+    faction = teams::function_20cfd8b5(self.pers[#"team"]);
     var_cdee2d01 = faction.superfaction;
   }
 

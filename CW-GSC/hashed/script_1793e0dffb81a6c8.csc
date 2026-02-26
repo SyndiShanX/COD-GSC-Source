@@ -25,8 +25,8 @@ function private preinit() {
   }
 
   clientfield::register("zbarrier", "" + # "hash_100f180bf5d2a517", 14000, 1, "int", &function_b245db69, 0, 0);
-  level._effect[# "hash_1d15a2dad558ac8c"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
-  level._effect[# "hash_1d15a5dad558b1a5"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
+  level._effect[#"hash_1d15a2dad558ac8c"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
+  level._effect[#"hash_1d15a5dad558b1a5"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
   zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
 }
 
@@ -52,10 +52,10 @@ function private function_b245db69(localclientnum, oldval, newval, bnewent, bini
 
     if(zm_utility::get_story() == 1) {
       self.var_18f8b30b = util::spawn_model(fieldname, "tag_origin", self.origin, self.angles);
-      self.var_3b071bba = util::playFXOnTag(fieldname, level._effect[# "hash_1d15a2dad558ac8c"], self.var_18f8b30b, "tag_origin");
+      self.var_3b071bba = util::playFXOnTag(fieldname, level._effect[#"hash_1d15a2dad558ac8c"], self.var_18f8b30b, "tag_origin");
     } else {
       self.var_18f8b30b = util::spawn_model(fieldname, "tag_origin", self.origin, self.angles);
-      self.var_3b071bba = util::playFXOnTag(fieldname, level._effect[# "hash_1d15a5dad558b1a5"], self.var_18f8b30b, "tag_origin");
+      self.var_3b071bba = util::playFXOnTag(fieldname, level._effect[#"hash_1d15a5dad558b1a5"], self.var_18f8b30b, "tag_origin");
     }
 
     return;

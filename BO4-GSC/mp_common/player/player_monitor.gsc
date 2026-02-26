@@ -189,8 +189,8 @@ travel_dist() {
   minimummovedistance = 16;
   wait 4;
 
-  if(!isDefined(self.pers[# "movement_update_count"])) {
-    self.pers[# "movement_update_count"] = 0;
+  if(!isDefined(self.pers[#"movement_update_count"])) {
+    self.pers[#"movement_update_count"] = 0;
   }
 
   prevpos = self.origin;
@@ -207,7 +207,7 @@ travel_dist() {
     }
 
     distance = distance(self.origin, prevpos);
-    self.pers[# "total_distance_travelled"] += distance;
+    self.pers[#"total_distance_travelled"] += distance;
 
     if(gamestate::is_state("playing") && distance > 0) {
       if(!self isinvehicle()) {
@@ -224,17 +224,17 @@ travel_dist() {
       }
     }
 
-    self.pers[# "movement_update_count"]++;
+    self.pers[#"movement_update_count"]++;
     prevpos = self.origin;
 
-    if(self.pers[# "movement_update_count"] % 5 == 0) {
+    if(self.pers[#"movement_update_count"] % 5 == 0) {
       distancemoving = distance(self.origin, positionptm);
       positionptm = self.origin;
 
       if(distancemoving > minimummovedistance) {
-        self.pers[# "num_speeds_when_moving_entries"]++;
-        self.pers[# "total_speeds_when_moving"] += distancemoving / waittime;
-        self.pers[# "time_played_moving"] += waittime;
+        self.pers[#"num_speeds_when_moving_entries"]++;
+        self.pers[#"total_speeds_when_moving"] += distancemoving / waittime;
+        self.pers[#"time_played_moving"] += waittime;
       }
     }
   }

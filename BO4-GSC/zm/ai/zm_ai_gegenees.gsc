@@ -199,7 +199,7 @@ function_4b8e0aab(entity) {
   can_see = 0;
   trace = physicstrace(entity.origin + (0, 0, 48), entity.favoriteenemy.origin + (0, 0, 36), (-16, -16, -12), (16, 16, 12), entity);
 
-  if(trace[# "fraction"] == 1 || trace[# "entity"] === entity.favoriteenemy) {
+  if(trace[#"fraction"] == 1 || trace[#"entity"] === entity.favoriteenemy) {
     can_see = 1;
   }
 
@@ -249,8 +249,8 @@ function_7fe60e9e(entity) {
   var_872c6826 = vectortoangles(targetpos - launchpos);
   angles = function_cc68801f(launchpos, targetpos, 1110, getdvarfloat(#"bg_lowgravity", 0));
 
-  if(isDefined(angles) && angles[# "lowangle"] > 0) {
-    dir = anglesToForward((-1 * angles[# "lowangle"], var_872c6826[1], var_872c6826[2]));
+  if(isDefined(angles) && angles[#"lowangle"] > 0) {
+    dir = anglesToForward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
   } else {
     dir = anglesToForward(var_872c6826);
   }
@@ -580,7 +580,7 @@ gegeneestargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return zm_utility::function_64259898(wait_locations[0].origin);

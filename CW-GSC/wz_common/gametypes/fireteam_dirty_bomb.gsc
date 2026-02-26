@@ -370,7 +370,7 @@ function onplayerspawned() {
   self.var_6dc4d968 = 0;
   self.var_c83d0859 = undefined;
   self.var_1eaa0d81 = undefined;
-  self.pers[# "killstreaks"] = [];
+  self.pers[#"killstreaks"] = [];
   self namespace_234f0efc::function_b0000c15();
   self clientfield::set_player_uimodel("hudItems.uraniumCarryCount", 0);
   self clientfield::set_player_uimodel("hudItems.uraniumMaxCarry", 5);
@@ -455,8 +455,8 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       weapon.var_1318544a.var_60cb0c39 = 1;
     }
 
-    self.pers[# "objectiveekia"]++;
-    self.objectiveekia = self.pers[# "objectiveekia"];
+    self.pers[#"objectiveekia"]++;
+    self.objectiveekia = self.pers[#"objectiveekia"];
     [[level.var_37d62931]](self, 1);
     self globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
   }
@@ -484,8 +484,8 @@ function private function_95002a59(attacker, victim, inflictor, weapon, meansofd
   }
 
   if(isDefined(meansofdeath)) {
-    meansofdeath.pers[# "downs"] = (isDefined(meansofdeath.pers[# "downs"]) ? meansofdeath.pers[# "downs"] : 0) + 1;
-    meansofdeath.downs = meansofdeath.pers[# "downs"];
+    meansofdeath.pers[#"downs"] = (isDefined(meansofdeath.pers[#"downs"]) ? meansofdeath.pers[#"downs"] : 0) + 1;
+    meansofdeath.downs = meansofdeath.pers[#"downs"];
   }
 }
 
@@ -655,8 +655,8 @@ function function_f917644c() {
   droporigin = self.origin + originoffset + forward * (randomfloatrange(10, 30) + 18);
   traceresults = physicstraceex(self.origin + originoffset, droporigin, (0, 0, 0), (0, 0, 0), self, 1);
 
-  if(traceresults[# "fraction"] < 1) {
-    droporigin = traceresults[# "position"] - forward * 18;
+  if(traceresults[#"fraction"] < 1) {
+    droporigin = traceresults[#"position"] - forward * 18;
   } else {
     droporigin -= forward * 18;
   }
@@ -782,7 +782,7 @@ function function_87b2107c(&structs) {
     startorigin = struct.origin + (0, 0, var_e8a4ae59);
     endorigin = startorigin - (0, 0, var_a3c01952);
     trace = physicstraceex(startorigin, endorigin, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), undefined, 1);
-    struct.origin = trace[# "position"];
+    struct.origin = trace[#"position"];
   }
 }
 
@@ -1206,7 +1206,7 @@ function function_ad9de896(player, bomb) {
   camerapos = player getplayercamerapos();
   traceresult = bulletTrace(camerapos, bomb.origin + var_14448f85, 0, player, 0, 0);
 
-  if(traceresult[# "entity"] !== bomb.model) {
+  if(traceresult[#"entity"] !== bomb.model) {
     return false;
   }
 
@@ -1294,8 +1294,8 @@ function function_3b72c4b2(player) {
   player contracts::increment_contract(#"hash_6339095ae9a767d6");
   player clientfield::set_player_uimodel("hudItems.uraniumCarryCount", var_cc03b04e - 1);
   [[level.var_37d62931]](player, 1);
-  player.pers[# "dirty_bomb_deposits"] = (isDefined(player.pers[# "dirty_bomb_deposits"]) ? player.pers[# "dirty_bomb_deposits"] : 0) + 1;
-  player.dirty_bomb_deposits = player.pers[# "dirty_bomb_deposits"];
+  player.pers[#"dirty_bomb_deposits"] = (isDefined(player.pers[#"dirty_bomb_deposits"]) ? player.pers[#"dirty_bomb_deposits"] : 0) + 1;
+  player.dirty_bomb_deposits = player.pers[#"dirty_bomb_deposits"];
   player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
   player stats::function_bb7eedf0(#"dirty_bomb_deposits", 1);
 
@@ -1882,8 +1882,8 @@ function function_5c0f763b(player) {
 
   self function_ad44b97e(player);
   [[level.var_37d62931]](player, 1);
-  player.pers[# "dirty_bomb_detonates"] = (isDefined(player.pers[# "dirty_bomb_detonates"]) ? player.pers[# "dirty_bomb_detonates"] : 0) + 1;
-  player.dirty_bomb_detonates = player.pers[# "dirty_bomb_detonates"];
+  player.pers[#"dirty_bomb_detonates"] = (isDefined(player.pers[#"dirty_bomb_detonates"]) ? player.pers[#"dirty_bomb_detonates"] : 0) + 1;
+  player.dirty_bomb_detonates = player.pers[#"dirty_bomb_detonates"];
   player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
   player stats::function_bb7eedf0(#"dirty_bomb_detonates", 1);
   player function_80d6d39b();
@@ -2249,7 +2249,7 @@ function function_b7821ed9(var_b77770ba) {
     if(!oob::chr_party(droppoint)) {
       result = function_9cc082d2(droppoint, 15000);
 
-      if(isDefined(result) && isDefined(result[# "materialflags"]) && ~(result[# "materialflags"] & 2)) {
+      if(isDefined(result) && isDefined(result[#"materialflags"]) && ~(result[#"materialflags"] & 2)) {
         return droppoint;
       }
     }

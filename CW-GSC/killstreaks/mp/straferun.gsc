@@ -102,7 +102,7 @@ function usekillstreakstraferun(hardpointtype) {
 
   self airsupport::function_9e2054b0(&beginlocationselection);
 
-  if(is_true(bundle.var_7436c1c5) && !is_true(self.pers[# "hash_7b70f0ba82b19814"])) {
+  if(is_true(bundle.var_7436c1c5) && !is_true(self.pers[#"hash_7b70f0ba82b19814"])) {
     self thread airsupport::singleradarsweep();
   }
 
@@ -113,11 +113,11 @@ function usekillstreakstraferun(hardpointtype) {
   }
 
   if(!isDefined(location.origin)) {
-    self.pers[# "hash_7b70f0ba82b19814"] = 1;
+    self.pers[#"hash_7b70f0ba82b19814"] = 1;
     return 0;
   }
 
-  self.pers[# "hash_7b70f0ba82b19814"] = 0;
+  self.pers[#"hash_7b70f0ba82b19814"] = 0;
   return self airsupport::function_83904681(location, &function_3d070ab6, hardpointtype);
 }
 
@@ -142,9 +142,9 @@ function function_db619336(hardpointtype, killstreak_id, location) {
   if(sessionmodeiswarzonegame()) {
     position = location.origin;
     trace = bulletTrace(position + (0, 0, 10000), position - (0, 0, 10000), 0, undefined);
-    targetpoint = trace[# "fraction"] > 1 ? (position[0], position[1], 0) : trace[# "position"];
+    targetpoint = trace[#"fraction"] > 1 ? (position[0], position[1], 0) : trace[#"position"];
     var_b0490eb9 = getheliheightlockheight(position);
-    groundheight = trace[# "position"][2];
+    groundheight = trace[#"position"][2];
     bundle = killstreaks::get_script_bundle("straferun");
     heightoverride = groundheight + (var_b0490eb9 - groundheight) * bundle.var_ff73e08c;
   }
@@ -277,8 +277,8 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
   var_b818f98a.origin += var_49d19de7;
   plane vehicle::function_bb9b43a9(startnode, var_1c847d0f, var_dda93e6c, var_b818f98a, var_e4c839a6);
   plane.killbox = [];
-  plane.killbox[# "origin"] = var_b818f98a.origin;
-  plane.killbox[# "angles"] = (0, var_b818f98a.yaw, 0);
+  plane.killbox[#"origin"] = var_b818f98a.origin;
+  plane.killbox[#"angles"] = (0, var_b818f98a.yaw, 0);
   plane thread vehicle::get_on_and_go_path(startnode);
   plane thread heatseekingmissile::missiletarget_proximitydetonateincomingmissile(bundle, "death");
   plane thread watchforownerexit(self);
@@ -288,7 +288,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
     plane killstreakrules::function_2e6ff61a(hardpointtype, killstreak_id, {
       #origin: var_b818f98a.origin, #team: plane.team
     });
-    util::function_a3f7de13(21, self.team, self getentitynumber(), level.killstreaks[# "straferun"].uiname);
+    util::function_a3f7de13(21, self.team, self getentitynumber(), level.killstreaks[#"straferun"].uiname);
   }
 
   aiutility::addaioverridedamagecallback(plane, &function_16abaea4);
@@ -589,17 +589,17 @@ function startstrafe() {
     perfectattackstartvector = gunorigin + vectorscale(forwardnoz, self.straferungunlookahead);
     attackstartvector = perfectattackstartvector + vectorscale(right, randomfloatrange(0 - self.straferungunradius, self.straferungunradius));
     trace = bulletTrace(attackstartvector, (attackstartvector[0], attackstartvector[1], -500), 0, self, 0);
-    self turretsettarget(0, trace[# "position"]);
+    self turretsettarget(0, trace[#"position"]);
     self fireweapon();
-    self shellshockplayers(trace[# "position"]);
+    self shellshockplayers(trace[#"position"]);
 
     if(getdvarint(#"scr_devstraferunbulletsdebugdraw", 0)) {
       time = 300;
-      airsupport::debug_line(attackstartvector, trace[# "position"] - (0, 0, 20), (1, 0, 0), time, 0);
+      airsupport::debug_line(attackstartvector, trace[#"position"] - (0, 0, 20), (1, 0, 0), time, 0);
 
       if(count % 30 == 0) {
         trace = bulletTrace(perfectattackstartvector, (perfectattackstartvector[0], perfectattackstartvector[1], -100000), 0, self, 0, 1);
-        airsupport::debug_line(trace[# "position"] + (0, 0, 20), trace[# "position"] - (0, 0, 20), (0, 0, 1), time, 0);
+        airsupport::debug_line(trace[#"position"] + (0, 0, 20), trace[#"position"] - (0, 0, 20), (0, 0, 1), time, 0);
       }
     }
 
@@ -618,9 +618,9 @@ function function_ec6320ce(bundle, var_a6b1bda0) {
 
   self.strafing = 1;
   self.var_23493b54++;
-  var_6a6f2e87 = self.killbox[# "origin"];
+  var_6a6f2e87 = self.killbox[#"origin"];
   trace_results = bulletTrace((var_6a6f2e87[0], var_6a6f2e87[1], 5000), (var_6a6f2e87[0], var_6a6f2e87[1], -5000), 0, undefined, 0, 1);
-  var_6a6f2e87 = (var_6a6f2e87[0], var_6a6f2e87[1], trace_results[# "position"][2]);
+  var_6a6f2e87 = (var_6a6f2e87[0], var_6a6f2e87[1], trace_results[#"position"][2]);
   var_5455cb95 = anglesToForward((0, self.angles[1], 0));
   var_f6fe02b9 = vectorcross(var_5455cb95, (0, 0, 1));
   var_b01435f6 = vectorscale(var_5455cb95, isDefined(bundle.var_a2daa406) ? bundle.var_a2daa406 : 1000);
@@ -994,7 +994,7 @@ function function_f7055dec() {
         continue;
       }
 
-      if(distance2dsquared(self.killbox[# "origin"], possible_target.origin) > var_6a3a9bb1) {
+      if(distance2dsquared(self.killbox[#"origin"], possible_target.origin) > var_6a3a9bb1) {
         continue;
       }
 
@@ -1048,14 +1048,14 @@ function straferunshellshock(straferun) {
 function createkillcams(numkillcams, numrockets) {
   if(!isDefined(level.straferunkillcams)) {
     level.straferunkillcams = [];
-    level.straferunkillcams[# "plane_a"] = spawnStruct();
-    level.straferunkillcams[# "plane_b"] = spawnStruct();
-    level.straferunkillcams[# "plane_a"].rockets = [];
-    level.straferunkillcams[# "plane_b"].rockets = [];
+    level.straferunkillcams[#"plane_a"] = spawnStruct();
+    level.straferunkillcams[#"plane_b"] = spawnStruct();
+    level.straferunkillcams[#"plane_a"].rockets = [];
+    level.straferunkillcams[#"plane_b"].rockets = [];
 
     for(i = 0; i < numrockets; i++) {
-      level.straferunkillcams[# "plane_a"].rockets[level.straferunkillcams[# "plane_a"].rockets.size] = createkillcament();
-      level.straferunkillcams[# "plane_b"].rockets[level.straferunkillcams[# "plane_b"].rockets.size] = createkillcament();
+      level.straferunkillcams[#"plane_a"].rockets[level.straferunkillcams[#"plane_a"].rockets.size] = createkillcament();
+      level.straferunkillcams[#"plane_b"].rockets[level.straferunkillcams[#"plane_b"].rockets.size] = createkillcament();
     }
   }
 }
@@ -1074,12 +1074,12 @@ function resetkillcams(time) {
 }
 
 function unlinkkillcams() {
-  numrockets = level.straferunkillcams[# "plane_a"].rockets.size;
-  assert(level.straferunkillcams[# "plane_a"].rockets.size == level.straferunkillcams[# "plane_b"].rockets.size);
+  numrockets = level.straferunkillcams[#"plane_a"].rockets.size;
+  assert(level.straferunkillcams[#"plane_a"].rockets.size == level.straferunkillcams[#"plane_b"].rockets.size);
 
   for(i = 0; i < numrockets; i++) {
-    level.straferunkillcams[# "plane_a"].rockets[i] unlink();
-    level.straferunkillcams[# "plane_b"].rockets[i] unlink();
+    level.straferunkillcams[#"plane_a"].rockets[i] unlink();
+    level.straferunkillcams[#"plane_b"].rockets[i] unlink();
   }
 }
 

@@ -129,8 +129,8 @@ function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreen
       function_7289b47(index, "<dev string:x38>", tracestart, traceend, traceresults);
     }
 
-    if(traceresults[# "fraction"] < 1) {
-      origin = traceresults[# "position"];
+    if(traceresults[#"fraction"] < 1) {
+      origin = traceresults[#"position"];
       origin += dir * var_3512e170;
     } else {
       origin = traceend - var_ef1cacd6;
@@ -144,8 +144,8 @@ function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreen
       function_7289b47(index, "<dev string:x3e>", tracestart + (0, 1, 0), traceend + (0, 1, 0), traceresults);
     }
 
-    if(traceresults[# "fraction"] < 1) {
-      origin = traceresults[# "position"] + (0, 0, var_f3e8e50d);
+    if(traceresults[#"fraction"] < 1) {
+      origin = traceresults[#"position"] + (0, 0, var_f3e8e50d);
     } else {
       origin = traceend;
     }
@@ -159,8 +159,8 @@ function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreen
       function_7289b47(index, "<dev string:x44>", tracestart, traceend, traceresults);
     }
 
-    if(traceresults[# "fraction"] < 1) {
-      origin = traceresults[# "position"] + (0, 0, var_7def9f0);
+    if(traceresults[#"fraction"] < 1) {
+      origin = traceresults[#"position"] + (0, 0, var_7def9f0);
       zdiff = tracestart[2] - origin[2];
 
       if(zdiff > 150) {
@@ -187,8 +187,8 @@ function function_9345a4f7(var_98c867cd, index, baseorigin, baseangles, ignoreen
       traceoffset = (0, 0, 60);
       traceresults = physicstraceex(var_d69d1a6d + traceoffset, var_d69d1a6d - traceoffset, (0, 0, 0), (0, 0, 0), ignoreents, 1);
 
-      if(traceresults[# "fraction"] < 1) {
-        origin = traceresults[# "position"] + (0, 0, var_7def9f0);
+      if(traceresults[#"fraction"] < 1) {
+        origin = traceresults[#"position"] + (0, 0, var_7def9f0);
       } else {
         origin = var_d69d1a6d + (0, 0, var_7def9f0);
       }
@@ -244,8 +244,8 @@ function function_fb72164f(var_98c867cd, index, baseorigin, baseangles, ignoreen
       function_7289b47(index, "<dev string:x44>", baseorigin, traceend, traceresults);
     }
 
-    if(traceresults[# "fraction"] < 1) {
-      origin = traceresults[# "position"] + (0, 0, var_7def9f0);
+    if(traceresults[#"fraction"] < 1) {
+      origin = traceresults[#"position"] + (0, 0, var_7def9f0);
     } else {
       origin = (0, 0, 0);
       noground = 1;
@@ -261,16 +261,16 @@ function function_fb72164f(var_98c867cd, index, baseorigin, baseangles, ignoreen
 function function_7289b47(index, name, start, end, traceresults) {
   var_e011538a = 2000;
 
-  if(traceresults[# "fraction"] < 1) {
-    line(start, traceresults[# "position"], (1, 0, 0), 1, 0, var_e011538a);
-    debugaxis(traceresults[# "position"], (0, 0, 0), 10, 1, 1, var_e011538a);
-    println("<dev string:x4a>" + start + "<dev string:x66>" + traceresults[# "position"]);
+  if(traceresults[#"fraction"] < 1) {
+    line(start, traceresults[#"position"], (1, 0, 0), 1, 0, var_e011538a);
+    debugaxis(traceresults[#"position"], (0, 0, 0), 10, 1, 1, var_e011538a);
+    println("<dev string:x4a>" + start + "<dev string:x66>" + traceresults[#"position"]);
 
-    if(isDefined(traceresults[# "entity"])) {
-      selectedentity = traceresults[# "entity"];
-      println("<dev string:x73>" + index + "<dev string:x85>" + name + "<dev string:x8b>" + traceresults[# "fraction"] + "<dev string:x94>" + selectedentity.name);
+    if(isDefined(traceresults[#"entity"])) {
+      selectedentity = traceresults[#"entity"];
+      println("<dev string:x73>" + index + "<dev string:x85>" + name + "<dev string:x8b>" + traceresults[#"fraction"] + "<dev string:x94>" + selectedentity.name);
     } else {
-      println("<dev string:x73>" + index + "<dev string:x85>" + name + "<dev string:x8b>" + traceresults[# "fraction"]);
+      println("<dev string:x73>" + index + "<dev string:x85>" + name + "<dev string:x8b>" + traceresults[#"fraction"]);
     }
 
     return;

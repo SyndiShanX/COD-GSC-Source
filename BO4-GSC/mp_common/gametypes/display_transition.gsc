@@ -206,7 +206,7 @@ function_1caf5c87(team) {
 }
 
 function_3f65d5d3() {
-  if(!isDefined(self.pers[# "team"])) {
+  if(!isDefined(self.pers[#"team"])) {
     self[[level.spawnintermission]](1);
     return true;
   }
@@ -219,8 +219,8 @@ function_3cfb29e1() {
     self playlocalsound(#"hash_7353399f9153966f");
     self thread globallogic_audio::set_music_on_player("none");
 
-    if(isDefined(self.pers[# "music"].spawn)) {
-      self.pers[# "music"].spawn = 0;
+    if(isDefined(self.pers[#"music"].spawn)) {
+      self.pers[#"music"].spawn = 0;
     }
   }
 }
@@ -392,16 +392,16 @@ function_b3214a0a(transition, outcome, next_transition) {
 }
 
 function_7e74281() {
-  level.var_3a309902[# "blank"] = &function_26bbb839;
-  level.var_3a309902[# "outcome"] = &function_26bbb839;
-  level.var_3a309902[# "outcome_with_score"] = &function_26bbb839;
-  level.var_3a309902[# "outcome_with_time"] = &function_26bbb839;
-  level.var_3a309902[# "switch_sides"] = &function_e3855f6d;
-  level.var_3a309902[# "final_killcam"] = &function_a2d39e40;
-  level.var_3a309902[# "play_of_the_match"] = &function_e3442abc;
-  level.var_3a309902[# "team_pose"] = &function_e17d407e;
-  level.var_3a309902[# "high_value_operatives"] = &function_26bbb839;
-  level.var_5d720398[# "team_pose"] = &function_b3214a0a;
+  level.var_3a309902[#"blank"] = &function_26bbb839;
+  level.var_3a309902[#"outcome"] = &function_26bbb839;
+  level.var_3a309902[#"outcome_with_score"] = &function_26bbb839;
+  level.var_3a309902[#"outcome_with_time"] = &function_26bbb839;
+  level.var_3a309902[#"switch_sides"] = &function_e3855f6d;
+  level.var_3a309902[#"final_killcam"] = &function_a2d39e40;
+  level.var_3a309902[#"play_of_the_match"] = &function_e3442abc;
+  level.var_3a309902[#"team_pose"] = &function_e17d407e;
+  level.var_3a309902[#"high_value_operatives"] = &function_26bbb839;
+  level.var_5d720398[#"team_pose"] = &function_b3214a0a;
 }
 
 function_b797319e(transition_type, transition_index) {
@@ -413,8 +413,8 @@ function_752a920f() {
 }
 
 function_d7b5082e() {
-  if(isDefined(self.pers[# "totalmatchbonus"])) {
-    self luinotifyevent(#"hash_9dfc8d44ea4547e", 1, self.pers[# "totalmatchbonus"]);
+  if(isDefined(self.pers[#"totalmatchbonus"])) {
+    self luinotifyevent(#"hash_9dfc8d44ea4547e", 1, self.pers[#"totalmatchbonus"]);
   }
 }
 

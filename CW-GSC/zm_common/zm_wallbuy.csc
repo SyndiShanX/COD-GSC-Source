@@ -25,9 +25,9 @@ function private preinit() {
   level flag::init("weapon_wallbuys_created");
 
   if(zm_utility::get_story() != 1 && !zm_utility::is_survival()) {
-    level._effect[# "wallbuy_ambient_fx"] = "zombie/fx8_wallbuy_amb";
-    level._effect[# "hash_6928ec90dff78e0c"] = "zombie/fx8_wallbuy_amb_reverse";
-    level._effect[# "wallbuy_reveal_fx"] = "zombie/fx8_wallbuy_reveal";
+    level._effect[#"wallbuy_ambient_fx"] = "zombie/fx8_wallbuy_amb";
+    level._effect[#"hash_6928ec90dff78e0c"] = "zombie/fx8_wallbuy_amb_reverse";
+    level._effect[#"wallbuy_reveal_fx"] = "zombie/fx8_wallbuy_reveal";
     clientfield::register("scriptmover", "wallbuy_ambient_fx", 1, 3, "int", &function_51f5fb94, 0, 0);
     clientfield::register("scriptmover", "wallbuy_reveal_fx", 1, 1, "int", &function_5ed44212, 0, 0);
   }
@@ -161,7 +161,7 @@ function wallbuy_player_connect(localclientnum) {
       continue;
     }
 
-    fx = level._effect[# "870mcs_zm_fx"];
+    fx = level._effect[#"870mcs_zm_fx"];
 
     if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"])) {
       fx = level._effect[wallbuy.zombie_weapon_upgrade + "_fx"];
@@ -667,7 +667,7 @@ function wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitials
         struct.fx[binitialsnap] = undefined;
       }
 
-      fx = level._effect[# "870mcs_zm_fx"];
+      fx = level._effect[#"870mcs_zm_fx"];
 
       if(isDefined(level._effect[weaponname + "_fx"])) {
         fx = level._effect[weaponname + "_fx"];
@@ -712,6 +712,6 @@ function function_51f5fb94(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_5ed44212(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    util::playFXOnTag(fieldname, level._effect[# "wallbuy_reveal_fx"], self, "tag_fx_wall_buy");
+    util::playFXOnTag(fieldname, level._effect[#"wallbuy_reveal_fx"], self, "tag_fx_wall_buy");
   }
 }

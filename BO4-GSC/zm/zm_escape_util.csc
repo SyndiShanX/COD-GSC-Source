@@ -12,7 +12,7 @@ init_clientfields() {
   clientfield::register("item", "" + # "hash_76662556681a502c", 1, 1, "int", &function_e2c78db9, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_59be891b288663cc", 1, 1, "int", &function_41f46060, 0, 0);
   clientfield::register("toplayer", "" + # "hash_257c215ab25a21c5", 1, 1, "counter", &function_b334fc71, 0, 0);
-  level._effect[# "hash_7e0daf8faf89bbcf"] = # "hash_1f101b4b415639bb";
+  level._effect[#"hash_7e0daf8faf89bbcf"] = # "hash_1f101b4b415639bb";
 }
 
 function_6799fbc4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -60,7 +60,7 @@ function_e2c78db9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_4d2e5c87bde94856"], self, "tag_origin");
+    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"hash_4d2e5c87bde94856"], self, "tag_origin");
     self.var_b3673abf = self playLoopSound(#"hash_2f017f6ef4550155");
   }
 }
@@ -72,7 +72,7 @@ function_41f46060(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_aa4114ee = util::playFXOnTag(localclientnum, level._effect[# "hash_7e0daf8faf89bbcf"], self, "tag_origin");
+    self.var_aa4114ee = util::playFXOnTag(localclientnum, level._effect[#"hash_7e0daf8faf89bbcf"], self, "tag_origin");
   }
 }
 

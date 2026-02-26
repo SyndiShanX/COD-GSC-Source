@@ -49,12 +49,12 @@ function spawnpoint_debug() {
           continue;
         }
 
-        point_team = selectedplayer.pers[# "team"];
-        influencer_team = selectedplayer.pers[# "team"];
-        vis_team_mask = util::getotherteamsmask(selectedplayer.pers[# "team"]);
+        point_team = selectedplayer.pers[#"team"];
+        influencer_team = selectedplayer.pers[#"team"];
+        vis_team_mask = util::getotherteamsmask(selectedplayer.pers[#"team"]);
         nextbestspawnpoint = getbestspawnpoint(point_team, influencer_team, vis_team_mask, selectedplayer, 0);
-        selectedplayer setorigin(nextbestspawnpoint[# "origin"]);
-        selectedplayer setplayerangles(nextbestspawnpoint[# "angles"]);
+        selectedplayer setorigin(nextbestspawnpoint[#"origin"]);
+        selectedplayer setplayerangles(nextbestspawnpoint[#"angles"]);
         break;
       case # "refresh":
         level flag::set(#"spawnpoints_dirty");

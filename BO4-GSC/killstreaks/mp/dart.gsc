@@ -137,7 +137,7 @@ watchthrow(missileweapon) {
 
   trace = player check_launch_space(grenade.origin);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     player iprintlnbold(#"hash_150caa190a45d9eb");
     grenade cleanup_grenade();
     player notify(#"dart_throw_failed");
@@ -156,7 +156,7 @@ watchthrow(missileweapon) {
   player.resurrect_not_allowed_by = "dart";
   player stats::function_e24eec31(getweapon(#"dart"), #"used", 1);
   level thread popups::displaykillstreakteammessagetoall("dart", player);
-  dart = player spawndart(grenade, killstreak_id, trace[# "position"]);
+  dart = player spawndart(grenade, killstreak_id, trace[#"position"]);
   player thread function_6fe329bb(missileweapon);
 }
 
@@ -236,7 +236,7 @@ spawndart(grenade, killstreak_id, spawn_origin) {
   playerentnum = player.entnum;
   player_angles = player getplayerangles();
   grenade cleanup_grenade();
-  params = level.killstreakbundle[# "dart"];
+  params = level.killstreakbundle[#"dart"];
 
   if(!isDefined(params.ksvehicle)) {
     params.ksvehicle = "veh_dart_mp";
@@ -470,7 +470,7 @@ watchammo() {
   player = dart.owner;
   player endon(#"disconnect");
   shotcount = 0;
-  params = level.killstreakbundle[# "dart"];
+  params = level.killstreakbundle[#"dart"];
 
   if(!isDefined(params.ksdartshotcount)) {
     params.ksdartshotcount = 0;
@@ -526,7 +526,7 @@ leave_dart() {
     dart notify(#"death");
   }
 
-  params = level.killstreakbundle[# "dart"];
+  params = level.killstreakbundle[#"dart"];
 
   if(!isDefined(params.ksdartexplosionouterradius)) {
     params.ksdartexplosionouterradius = 200;
@@ -577,7 +577,7 @@ leave_dart() {
       moveamount = vectorscale(forward, params.ksdartcamerawatchdistance * -1);
       size = 4;
       trace = physicstrace(dart.origin, dart.origin + moveamount, (size * -1, size * -1, size * -1), (size, size, size), undefined, 1);
-      cam = spawn("script_model", trace[# "position"]);
+      cam = spawn("script_model", trace[#"position"]);
       cam setModel(#"tag_origin");
       cam linkto(dart);
       dart setspeedimmediate(0);

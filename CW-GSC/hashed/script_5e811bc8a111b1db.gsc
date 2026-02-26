@@ -37,7 +37,7 @@ function private autoexec __init__system__() {
 
 function init() {
   if((is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) || getdvarint(#"hash_40bd34b35079cf2e", 0) > 0) && (zm_utility::function_c200446c() || util::get_game_type() === # "hash_321225a5ce1eb35")) {
-    level.var_70b6f044 = [# "hash_5f22ecce894282fa": # "hash_796dff2ea842c1ac", #"hash_12a17ab3df5889eb": # "hash_2792674ef4fce09f", #"spawner_zm_steiner": # "hash_43b8d4f24851653e", #"spawner_zm_steiner_split_radiation_blast": # "hash_2c0da7720a1c2f90", #"spawner_zm_steiner_split_radiation_bomb": # "hash_16d309f1ce9e015a"];
+    level.var_70b6f044 = [#"hash_5f22ecce894282fa": # "hash_796dff2ea842c1ac", #"hash_12a17ab3df5889eb": # "hash_2792674ef4fce09f", #"spawner_zm_steiner": # "hash_43b8d4f24851653e", #"spawner_zm_steiner_split_radiation_blast": # "hash_2c0da7720a1c2f90", #"spawner_zm_steiner_split_radiation_bomb": # "hash_16d309f1ce9e015a"];
     level.var_9d098364 = # "hash_43b8d4f24851653e";
     level.var_c42bdd1b = # "hash_2c0da7720a1c2f90";
     level.var_dc38daf = # "hash_16d309f1ce9e015a";

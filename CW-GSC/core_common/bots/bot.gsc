@@ -84,7 +84,7 @@ function add_bot(team, name = undefined, clanabbrev = undefined) {
   bot init_bot();
 
   if(is_true(level.disableclassselection)) {
-    bot.pers[# "class"] = level.defaultclass;
+    bot.pers[#"class"] = level.defaultclass;
     bot.curclass = level.defaultclass;
   }
 
@@ -172,12 +172,12 @@ function private on_player_connect() {
   if(isDefined(self.var_29b433bd) && player_role::is_valid(self.var_29b433bd)) {
     player_role::set(self.var_29b433bd);
     self.var_29b433bd = undefined;
-  } else if(isDefined(self.pers[# "characterindex"])) {
-    self player_role::set(self.pers[# "characterindex"]);
+  } else if(isDefined(self.pers[#"characterindex"])) {
+    self player_role::set(self.pers[#"characterindex"]);
   }
 
   if(!getdvarint(#"hash_1f80dbba75375e3d", 0)) {
-    customloadoutindex = self.pers[# "loadoutindex"];
+    customloadoutindex = self.pers[#"loadoutindex"];
 
     if(isDefined(customloadoutindex)) {
       self[[level.curclass]]("custom" + customloadoutindex);
@@ -660,11 +660,11 @@ function private check_stuck() {
   self.bot.var_8e60176d = (self.bot.var_8e60176d + 36) % 360;
   end = eye + var_c40ef0b0 * 20;
   trace = bulletTrace(eye, end, 0, self);
-  surfacetype = trace[# "surfacetype"];
+  surfacetype = trace[#"surfacetype"];
 
-  if(isDefined(surfacetype) && surfacetype == # "glass" && !isDefined(trace[# "entity"])) {
+  if(isDefined(surfacetype) && surfacetype == # "glass" && !isDefined(trace[#"entity"])) {
     self notify(#"glass", {
-      #position: trace[# "position"]
+      #position: trace[#"position"]
     });
     pixendevent();
     return;
@@ -829,8 +829,8 @@ function function_bab12815(origin, yaw) {
     return;
   }
 
-  self.pers[# "hash_63201776738fc052"] = origin;
-  self.pers[# "hash_777e40938cf10f50"] = (0, yaw, 0);
+  self.pers[#"hash_63201776738fc052"] = origin;
+  self.pers[#"hash_777e40938cf10f50"] = (0, yaw, 0);
   self.bot.var_6af67fd1 = 1;
 }
 
@@ -859,8 +859,8 @@ function private fixed_spawn_override() {
     return;
   }
 
-  origin = self.pers[# "hash_63201776738fc052"];
-  angles = self.pers[# "hash_777e40938cf10f50"];
+  origin = self.pers[#"hash_63201776738fc052"];
+  angles = self.pers[#"hash_777e40938cf10f50"];
   forcegoal = isDefined(self.bot.var_7280cc1b) ? self.bot.var_7280cc1b : 1;
 
   if(isDefined(origin)) {

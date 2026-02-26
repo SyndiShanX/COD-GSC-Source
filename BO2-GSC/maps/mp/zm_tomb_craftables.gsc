@@ -168,7 +168,7 @@ run_craftables_devgui() {
   }
 }
 
-#include_craftables() {
+include_craftables() {
   level thread run_craftables_devgui();
   craftable_name = "equip_dieseldrone_zm";
   quadrotor_body = generate_zombie_craftable_piece(craftable_name, "body", "veh_t6_dlc_zm_quad_piece_body", 32, 64, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_quadrotor_zm_body", 1, "build_dd");

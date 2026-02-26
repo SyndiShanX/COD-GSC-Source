@@ -42,12 +42,12 @@ on_player_connect() {
     self.var_aec4af05 = [];
   }
 
-  if(!isDefined(self.pers[# "herogadgetnotified"])) {
-    self.pers[# "herogadgetnotified"] = [];
+  if(!isDefined(self.pers[#"herogadgetnotified"])) {
+    self.pers[#"herogadgetnotified"] = [];
   }
 
   for(slot = 0; slot < 3; slot++) {
-    self.pers[# "herogadgetnotified"][slot] = 0;
+    self.pers[#"herogadgetnotified"][slot] = 0;
   }
 
   self callback::on_death(&function_32e782df);
@@ -84,10 +84,10 @@ on_player_spawned() {
     self.var_36546d49 = 0;
   }
 
-  if(!(isDefined(self.pers[# "changed_class"]) && self.pers[# "changed_class"])) {
-    self.pers[# "held_gadgets_power"] = [];
-    self.pers[# "hash_7a954c017d693f69"] = [];
-    self.pers[# "hash_68cdf8807cfaabff"] = [];
+  if(!(isDefined(self.pers[#"changed_class"]) && self.pers[#"changed_class"])) {
+    self.pers[#"held_gadgets_power"] = [];
+    self.pers[#"hash_7a954c017d693f69"] = [];
+    self.pers[#"hash_68cdf8807cfaabff"] = [];
   }
 
   self.heroabilityactivatetime = undefined;
@@ -135,9 +135,9 @@ gadgets_save_power(game_ended) {
       }
     }
 
-    self.pers[# "held_gadgets_power"][gadgetweapon] = powerleft;
-    self.pers[# "hash_7a954c017d693f69"][gadgetweapon] = var_51ec1787;
-    self.pers[# "hash_68cdf8807cfaabff"][gadgetweapon] = deployed;
+    self.pers[#"held_gadgets_power"][gadgetweapon] = powerleft;
+    self.pers[#"hash_7a954c017d693f69"][gadgetweapon] = var_51ec1787;
+    self.pers[#"hash_68cdf8807cfaabff"][gadgetweapon] = deployed;
   }
 }
 
@@ -235,7 +235,7 @@ function_95218c27(slot, var_4dd90b81 = 0) {
     return;
   }
 
-  self.pers[# "hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
+  self.pers[#"hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
   self function_48e08b4(slot, self._gadgets_player[slot], var_4dd90b81);
 }
 
@@ -501,7 +501,7 @@ give_gadget(slot, weapon) {
 
   if(isDefined(self._gadgets_player[slot])) {
     if(self._gadgets_player[slot] != weapon) {
-      self.pers[# "hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
+      self.pers[#"hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
     }
 
     self take_gadget(slot, self._gadgets_player[slot]);
@@ -619,7 +619,7 @@ turn_gadget_on(slot, weapon) {
     self thread[[level.cybercom._ability_turn_on]](slot, weapon);
   }
 
-  self.pers[# "herogadgetnotified"][slot] = 0;
+  self.pers[#"herogadgetnotified"][slot] = 0;
   xuid = int(self getxuid(1));
 
   if(sessionmodeismultiplayergame()) {
@@ -861,8 +861,8 @@ gadget_ready(slot, weapon) {
   }
 
   if(!isDefined(level.gameended) || !level.gameended) {
-    if(!self.pers[# "herogadgetnotified"][slot]) {
-      self.pers[# "herogadgetnotified"][slot] = 1;
+    if(!self.pers[#"herogadgetnotified"][slot]) {
+      self.pers[#"herogadgetnotified"][slot] = 1;
 
       if(isDefined(level.playgadgetready)) {
         self thread[[level.playgadgetready]](weapon);
@@ -925,19 +925,19 @@ tutorial_timer(weapon, var_8be5aa55, var_de825ec6) {
 
   if(isDefined(var_de825ec6)) {
     tutorial_init(weapon);
-    self.pers[# "ability_tutorial"][weapon].(var_8be5aa55) = gettime() + var_de825ec6 * 1000;
+    self.pers[#"ability_tutorial"][weapon].(var_8be5aa55) = gettime() + var_de825ec6 * 1000;
   }
 
-  return isDefined(self.pers[# "ability_tutorial"][weapon].(var_8be5aa55)) && self.pers[# "ability_tutorial"][weapon].(var_8be5aa55) > gettime();
+  return isDefined(self.pers[#"ability_tutorial"][weapon].(var_8be5aa55)) && self.pers[#"ability_tutorial"][weapon].(var_8be5aa55) > gettime();
 }
 
 tutorial_init(weapon) {
-  if(!isDefined(self.pers[# "ability_tutorial"])) {
-    self.pers[# "ability_tutorial"] = [];
+  if(!isDefined(self.pers[#"ability_tutorial"])) {
+    self.pers[#"ability_tutorial"] = [];
   }
 
-  if(!isDefined(self.pers[# "ability_tutorial"][weapon])) {
-    self.pers[# "ability_tutorial"][weapon] = spawnStruct();
+  if(!isDefined(self.pers[#"ability_tutorial"][weapon])) {
+    self.pers[#"ability_tutorial"][weapon] = spawnStruct();
   }
 }
 
@@ -1694,7 +1694,7 @@ function_b4f43681(var_a5c8eb94) {
     level.spawnselectenabled = 0;
 
     if(level.numlives) {
-      self.pers[# "lives"]++;
+      self.pers[#"lives"]++;
     }
 
     self suicide("<dev string:x312>");

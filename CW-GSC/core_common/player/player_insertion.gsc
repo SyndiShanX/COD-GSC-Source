@@ -682,7 +682,7 @@ function private function_e59d879f(insertion, var_cf46aa72) {
 
   function_948ac812(insertion, 0);
   bot_insertion::function_24ca8ecf(insertion);
-  vehiclespawns = [# "vehicle_t9_mil_air_transport_hpc_intro": "vehicle_t9_mil_air_transport_hpc_intro", #"vehicle_t9_mil_helicopter_care_package": "vehicle_t9_mil_helicopter_care_package", #"vehicle_t8_mil_helicopter_gunship_wz_infiltration": "vehicle_t8_mil_helicopter_gunship_wz_infiltration", #"vehicle_t8_mil_helicopter_light_transport_wz_infil": "vehicle_t8_mil_helicopter_light_transport_wz_infil"];
+  vehiclespawns = [#"vehicle_t9_mil_air_transport_hpc_intro": "vehicle_t9_mil_air_transport_hpc_intro", #"vehicle_t9_mil_helicopter_care_package": "vehicle_t9_mil_helicopter_care_package", #"vehicle_t8_mil_helicopter_gunship_wz_infiltration": "vehicle_t8_mil_helicopter_gunship_wz_infiltration", #"vehicle_t8_mil_helicopter_light_transport_wz_infil": "vehicle_t8_mil_helicopter_light_transport_wz_infil"];
 
   if(vehiclespawns.size == 0) {
     return 0;
@@ -930,8 +930,8 @@ function function_d9dfa25() {
     }
   }
 
-  var_86cb4eb8[# "left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
-  var_86cb4eb8[# "right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
+  var_86cb4eb8[#"left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
+  var_86cb4eb8[#"right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
   var_5637e595 = {
     #var_c85ebc15: 4, #var_f5cff63: array("vehicle_t8_mil_helicopter_gunship_wz_infiltration", "vehicle_t8_mil_helicopter_gunship_wz_infiltration", "vehicle_t8_mil_helicopter_gunship_wz_infiltration", "vehicle_t8_mil_helicopter_gunship_wz_infiltration"), #hoverparams: array((192, 192, 192), (192, 192, 192), (192, 192, 192), (192, 192, 192)), #var_86255b48: array(2, 2, 2, 2)
   };
@@ -948,7 +948,7 @@ function function_45b56b0a(insertion, startpoint, endpoint, var_872f085f, vehicl
   offset = (500, -50, 600);
   goaloffset = (0, 0, -400);
   rotatedstart = startpoint + rotatepoint(offset, var_872f085f);
-  var_31e5487a = vehiclespawns[# "vehicle_t8_mil_helicopter_light_transport_wz_infil"];
+  var_31e5487a = vehiclespawns[#"vehicle_t8_mil_helicopter_light_transport_wz_infil"];
   insertion.var_933bdcf2 = spawnvehicle(var_31e5487a, rotatedstart, var_872f085f, "insertion_presentation");
 
   if(!isDefined(insertion.var_933bdcf2)) {

@@ -666,7 +666,7 @@ function zombie_trap_death(e_trap, param) {
           self thread zombie_flame_watch();
           self playSound(#"zmb_ignite");
           self thread zombie_death::flame_death_fx();
-          playFXOnTag(level._effect[# "character_fire_death_torso"], self, "J_SpineLower");
+          playFXOnTag(level._effect[#"character_fire_death_torso"], self, "J_SpineLower");
           wait randomfloat(1.25);
         } else {
           refs[0] = "guts";
@@ -753,8 +753,8 @@ function electroctute_death_fx() {
     level.bconfireorg = self.origin;
   }
 
-  if(isDefined(level._effect[# "elec_torso"])) {
-    playFXOnTag(level._effect[# "elec_torso"], self, "J_SpineLower");
+  if(isDefined(level._effect[#"elec_torso"])) {
+    playFXOnTag(level._effect[#"elec_torso"], self, "J_SpineLower");
   }
 
   self playSound(#"zmb_elec_jib_zombie");
@@ -766,8 +766,8 @@ function electroctute_death_fx() {
   tagarray[3] = "J_Knee_LE";
   tagarray = array::randomize(tagarray);
 
-  if(isDefined(level._effect[# "elec_md"])) {
-    playFXOnTag(level._effect[# "elec_md"], self, tagarray[0]);
+  if(isDefined(level._effect[#"elec_md"])) {
+    playFXOnTag(level._effect[#"elec_md"], self, tagarray[0]);
   }
 
   self playSound(#"zmb_elec_jib_zombie");
@@ -783,9 +783,9 @@ function electroctute_death_fx() {
 
   tagarray = array::randomize(tagarray);
 
-  if(isDefined(level._effect[# "elec_sm"])) {
-    playFXOnTag(level._effect[# "elec_sm"], self, tagarray[0]);
-    playFXOnTag(level._effect[# "elec_sm"], self, tagarray[1]);
+  if(isDefined(level._effect[#"elec_sm"])) {
+    playFXOnTag(level._effect[#"elec_sm"], self, tagarray[0]);
+    playFXOnTag(level._effect[#"elec_sm"], self, tagarray[1]);
   }
 }
 

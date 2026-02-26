@@ -107,7 +107,7 @@ function function_f72d912(destination) {
 
 function function_399aa551(destination) {
   foreach(location in destination.locations) {
-    var_ac97a756 = location.instances[# "hash_5aa51584db09513"];
+    var_ac97a756 = location.instances[#"hash_5aa51584db09513"];
 
     if(isDefined(var_ac97a756)) {
       children = content_manager::get_children(var_ac97a756);

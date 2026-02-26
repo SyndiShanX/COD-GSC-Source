@@ -528,7 +528,7 @@ setup_models() {
     s_info.var_7b63dcba = (0, 0, 0);
     v_dir = anglesToForward(s_info.angles);
     v_pos = s_info.var_1a34d8e + v_dir * 85;
-    s_info.var_8f683ef8 = groundtrace(v_pos, v_pos + (0, 0, -400), 0, s_info.mdl_bowl)[# "position"];
+    s_info.var_8f683ef8 = groundtrace(v_pos, v_pos + (0, 0, -400), 0, s_info.mdl_bowl)[#"position"];
   }
 
   waitframe(1);

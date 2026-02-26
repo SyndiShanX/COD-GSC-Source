@@ -15,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_slider_perk_for_level();
-  level._effect[# "hash_7b8ad0ed3ef67813"] = "zombie/fx8_perk_phd_exp";
+  level._effect[#"hash_7b8ad0ed3ef67813"] = "zombie/fx8_perk_phd_exp";
   zm_perks::function_f3c80d73("zombie_perk_bottle_slider", "zombie_perk_totem_slider");
 }
 
@@ -36,7 +36,7 @@ function_90b5e96c() {}
 
 function_4feff2f7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[# "hash_7b8ad0ed3ef67813"], self, "j_spine");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_7b8ad0ed3ef67813"], self, "j_spine");
     self playSound(localclientnum, #"hash_25343ce78e1c9c6c");
   }
 }

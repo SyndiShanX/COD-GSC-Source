@@ -214,7 +214,7 @@ elec_switch_on(master_switch, fx_pos) {
   master_switch playSound(#"zmb_turn_on");
 
   if(isDefined(fx_pos)) {
-    playFX(level._effect[# "switch_sparks"], fx_pos.origin);
+    playFX(level._effect[#"switch_sparks"], fx_pos.origin);
   }
 }
 

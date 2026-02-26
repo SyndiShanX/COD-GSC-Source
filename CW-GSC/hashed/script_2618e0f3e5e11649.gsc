@@ -581,17 +581,17 @@ function function_ffbebde3(&hotzones) {
 
     proximity = function_3e21a60b(hotzone, var_1414fb7f);
 
-    hotzone.instance.var_19b23216[# "proximity"] = proximity;
+    hotzone.instance.var_19b23216[#"proximity"] = proximity;
 
     hotzone.instance.var_8fa06b8e += proximity;
     facing = function_b6a93fcd(hotzone, var_1414fb7f);
 
-    hotzone.instance.var_19b23216[# "facing"] = facing;
+    hotzone.instance.var_19b23216[#"facing"] = facing;
 
     hotzone.instance.var_8fa06b8e += facing;
     state = function_df47d6e7(hotzone);
 
-    hotzone.instance.var_19b23216[# "state"] = state;
+    hotzone.instance.var_19b23216[#"state"] = state;
 
     hotzone.instance.var_8fa06b8e += state;
     waitframe(1);
@@ -655,7 +655,7 @@ function function_b6a93fcd(hotzone, &player_array) {
 
 function function_df47d6e7(hotzone) {
   if(hotzone.instance.current_state == 2) {
-    if(!isDefined(hotzone.instance.var_ac7b2365[# "chase"])) {
+    if(!isDefined(hotzone.instance.var_ac7b2365[#"chase"])) {
       return 50;
     }
 
@@ -1081,7 +1081,7 @@ function function_527d149a(params) {
 }
 
 function function_e923faaf(hotzone) {
-  var_be320827 = [# "wander", #"idle"];
+  var_be320827 = [#"wander", #"idle"];
 
   foreach(key, __ in hotzone.instance.var_ac7b2365) {
     if(!isinarray(var_be320827, key)) {
@@ -1377,9 +1377,9 @@ function function_bf876de8() {
   eye = player getEye();
   direction_vec = (direction_vec[0] * 20000, direction_vec[1] * 20000, direction_vec[2] * 20000);
   trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
-  circle(trace[# "position"], 16, (1, 0.5, 0), 1, 1, 1);
-  debugstar(trace[# "position"], 1, (1, 0.5, 0));
-  return trace[# "position"];
+  circle(trace[#"position"], 16, (1, 0.5, 0), 1, 1, 1);
+  debugstar(trace[#"position"], 1, (1, 0.5, 0));
+  return trace[#"position"];
 }
 
 function function_3de1c8ac(var_2da12984) {

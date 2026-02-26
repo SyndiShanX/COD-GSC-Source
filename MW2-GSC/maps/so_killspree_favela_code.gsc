@@ -225,31 +225,31 @@ hud_clean_up() {
 }
 
 // --------------------------------------------------------------------------------- enemy_type_monitor() {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  flag_wait("enemy_population_info_available");
+flag_wait("enemy_population_info_available");
 
-  while(1) {
-    enemies = getaiarray("axis");
+while(1) {
+  enemies = getaiarray("axis");
 
-    level.ambush_to_seeker = 0;
-    level.enemy_seekers = 0;
-    level.enemy_ambushers = 0;
+  level.ambush_to_seeker = 0;
+  level.enemy_seekers = 0;
+  level.enemy_ambushers = 0;
 
-    foreach(ai in enemies) {
-      if(isDefined(ai.ambush_to_seeker))
-        level.ambush_to_seeker++;
+  foreach(ai in enemies) {
+    if(isDefined(ai.ambush_to_seeker))
+      level.ambush_to_seeker++;
 
-      if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "seek_player")
-        level.enemy_seekers++;
+    if(isDefined(ai.script_noteworthy) && ai.script_noteworthy == "seek_player")
+      level.enemy_seekers++;
 
-      if(isDefined(ai.combatmode) && ai.combatmode == "ambush")
-        level.enemy_ambushers++;
-    }
-
-    flag_set("detailed_enemy_population_info_available");
-    wait 1;
+    if(isDefined(ai.combatmode) && ai.combatmode == "ambush")
+      level.enemy_ambushers++;
   }
+
+  flag_set("detailed_enemy_population_info_available");
+  wait 1;
+}
 }
 
 hunter_enemies_level_init() {

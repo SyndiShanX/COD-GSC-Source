@@ -122,20 +122,20 @@ function_ff726bbb(var_2afee46 = 1) {
   level.var_969e8ac2.a_e_books = [];
   var_61243b5c = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_01_bundle");
   var_b0db8553 = var_61243b5c[0];
-  var_1d305e7f = var_b0db8553.scene_ents[# "prop 1"];
+  var_1d305e7f = var_b0db8553.scene_ents[#"prop 1"];
   var_19d968b8 = getent("e_secret_clip_left", "targetname");
   var_19d968b8 linkto(var_1d305e7f, "tag_origin");
-  var_bad218e = var_b0db8553.scene_ents[# "prop 2"];
+  var_bad218e = var_b0db8553.scene_ents[#"prop 2"];
   var_d16a9f7c = getent("e_secret_clip_right", "targetname");
   var_d16a9f7c linkto(var_bad218e, "tag_origin");
   var_19d968b8 disconnectpaths();
   var_d16a9f7c disconnectpaths();
   var_befaf308 = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_02_bundle");
   var_f6281a0 = var_befaf308[0];
-  var_d3f97071 = var_f6281a0.scene_ents[# "prop 1"];
+  var_d3f97071 = var_f6281a0.scene_ents[#"prop 1"];
   var_84d63a77 = getent("w_secret_clip_left", "targetname");
   var_84d63a77 linkto(var_d3f97071, "tag_origin");
-  var_db4a4ab3 = var_f6281a0.scene_ents[# "prop 2"];
+  var_db4a4ab3 = var_f6281a0.scene_ents[#"prop 2"];
   var_7b9ecc98 = getent("w_secret_clip_right", "targetname");
   var_7b9ecc98 linkto(var_db4a4ab3, "tag_origin");
   var_84d63a77 disconnectpaths();
@@ -342,7 +342,7 @@ function_6c1be65c(var_a276c861) {
     mdl_clip disconnectpaths();
     var_9890436b = scene::get_active_scenes(#"p8_fxanim_zm_man_wine_rack_bundle");
     var_7195997b = var_9890436b[0];
-    var_c65c37fc = var_7195997b.scene_ents[# "prop 1"];
+    var_c65c37fc = var_7195997b.scene_ents[#"prop 1"];
     mdl_clip enablelinkto();
     mdl_clip linkto(var_c65c37fc, "tag_animate");
     level.var_4918f183 = util::spawn_model("tag_origin", mdl_clip.origin);
@@ -557,11 +557,11 @@ function_68e49445() {
 
   while(true) {
     if(var_f103be47) {
-      if(!(isDefined(level.zones[# "zone_library_hallway_upper"].is_occupied) && level.zones[# "zone_library_hallway_upper"].is_occupied) && !(isDefined(level.zones[# "zone_library_upper"].is_occupied) && level.zones[# "zone_library_upper"].is_occupied) && !(isDefined(level.zones[# "zone_foyer_westend"].is_occupied) && level.zones[# "zone_foyer_westend"].is_occupied)) {
+      if(!(isDefined(level.zones[#"zone_library_hallway_upper"].is_occupied) && level.zones[#"zone_library_hallway_upper"].is_occupied) && !(isDefined(level.zones[#"zone_library_upper"].is_occupied) && level.zones[#"zone_library_upper"].is_occupied) && !(isDefined(level.zones[#"zone_foyer_westend"].is_occupied) && level.zones[#"zone_foyer_westend"].is_occupied)) {
         level clientfield::set("" + # "hash_75594bca6b54706e", 0);
         var_f103be47 = 0;
       }
-    } else if(isDefined(level.zones[# "zone_library_hallway_upper"].is_occupied) && level.zones[# "zone_library_hallway_upper"].is_occupied || isDefined(level.zones[# "zone_library_upper"].is_occupied) && level.zones[# "zone_library_upper"].is_occupied || isDefined(level.zones[# "zone_foyer_westend"].is_occupied) && level.zones[# "zone_foyer_westend"].is_occupied) {
+    } else if(isDefined(level.zones[#"zone_library_hallway_upper"].is_occupied) && level.zones[#"zone_library_hallway_upper"].is_occupied || isDefined(level.zones[#"zone_library_upper"].is_occupied) && level.zones[#"zone_library_upper"].is_occupied || isDefined(level.zones[#"zone_foyer_westend"].is_occupied) && level.zones[#"zone_foyer_westend"].is_occupied) {
       level clientfield::set("" + # "hash_75594bca6b54706e", 1);
       var_f103be47 = 1;
     }
@@ -682,7 +682,7 @@ function_fd9b3e16(n_reward) {
   mdl_clip = getent("secret_furniture_clip", "targetname");
   var_cef195d9 = scene::get_active_scenes(#"p8_fxanim_zm_man_bookcase_03_bundle");
   var_edd21e7e = var_cef195d9[0];
-  var_89bf536b = var_edd21e7e.scene_ents[# "prop 1"];
+  var_89bf536b = var_edd21e7e.scene_ents[#"prop 1"];
   mdl_clip enablelinkto();
   mdl_clip linkto(var_89bf536b, "tag_animate");
   level.var_c218e707 = util::spawn_model("tag_origin", mdl_clip.origin);

@@ -223,7 +223,7 @@ function function_3f99d722() {
 function function_bd064da5(a_ents) {
   level.rooftop_to_street_anim_org = struct::get("rooftop_to_street_anim_org", "targetname");
   assert(isDefined(level.rooftop_to_street_anim_org), "<dev string:x38>");
-  level.var_47fb3484 = a_ents[# "hash_77e429d3dc04d06"];
+  level.var_47fb3484 = a_ents[#"hash_77e429d3dc04d06"];
   level.var_47fb3484 attach("stk_door_metal_painted_rusted_01_orange", "j_prop_1");
   level.rooftop_descend_door_01_clip = getent("rooftop_descend_door_01_clip", "targetname");
 
@@ -231,7 +231,7 @@ function function_bd064da5(a_ents) {
     level.rooftop_descend_door_01_clip linkto(level.var_47fb3484, "j_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
-  level.var_a23ce906 = a_ents[# "hash_77e419d3dc04b53"];
+  level.var_a23ce906 = a_ents[#"hash_77e419d3dc04b53"];
   level.var_a23ce906 attach("stk_door_metal_painted_rusted_01_orange", "j_prop_1");
   level.rooftop_descend_door_02_clip = getent("rooftop_descend_door_02_clip", "targetname");
 
@@ -549,60 +549,60 @@ function function_8cb46516(modelname, var_b92254fd, var_8964d1a4, spawnfunc = un
 }
 
 function function_93407046(a_ents) {
-  level.bar_contact = a_ents[# "bar_contact"];
-  level.var_fb6f2b39 = a_ents[# "hash_9ed8929ecade2d1"];
-  level.var_1922a1f3 = a_ents[# "hash_138ab38d70041928"];
+  level.bar_contact = a_ents[#"bar_contact"];
+  level.var_fb6f2b39 = a_ents[#"hash_9ed8929ecade2d1"];
+  level.var_1922a1f3 = a_ents[#"hash_138ab38d70041928"];
   level.var_1922a1f3 thread function_8cb46516("aac_kitchen_chair_01", "j_prop_1", "bar_bathroom_door_locked");
   level.var_1922a1f3 thread function_8cb46516("par_glassware_03", "j_prop_2", "bar_bathroom_door_locked");
   level.var_1922a1f3 thread function_8cb46516("cob_cigarette_pack_01", "j_prop_4", "bar_bathroom_door_locked");
   level.var_1922a1f3 thread function_8cb46516("ndy_cigarette_static_01_lit_long", "j_prop_5", "bar_bathroom_door_locked", &cp_ger_stakeout_fx::function_943c286e);
   level.var_1922a1f3 thread function_8cb46516("decor_ashtray_cigarette_01_drk", "j_prop_6", "bar_bathroom_door_locked");
   level.var_1922a1f3 thread function_8cb46516("ndy_cigarette_static_01_lit_long", "j_prop_7", "bar_bathroom_door_locked");
-  level.var_ee1e1434 = a_ents[# "hash_4261c3b16eb03ccd"];
+  level.var_ee1e1434 = a_ents[#"hash_4261c3b16eb03ccd"];
   level.var_ee1e1434 hide();
-  level.var_bff9a427 = a_ents[# "hash_23b3016798978dbf"];
+  level.var_bff9a427 = a_ents[#"hash_23b3016798978dbf"];
   level.var_bff9a427 hide();
-  level.var_d3081b95 = a_ents[# "hash_14b186511fdb3df7"];
+  level.var_d3081b95 = a_ents[#"hash_14b186511fdb3df7"];
   level.var_d3081b95 attach("aac_kitchen_chair_01", "j_prop_1", 1);
   level.var_d3081b95 attach("cob_cigarette_pack_01", "j_prop_2", 1);
 }
 
 function function_e9963fec(a_ents) {
-  level.var_dd43ea07 = a_ents[# "hash_2ea9c8cdee3cd84a"];
-  a_ents[# "hash_2ea9c8cdee3cd84a"] setModel(#"hash_322f0af6c1be1b88");
-  level.var_90258347 = a_ents[# "hash_7c416f8b69782e94"];
-  a_ents[# "hash_7c416f8b69782e94"] setModel(#"hash_1d1f55abc907ac00");
+  level.var_dd43ea07 = a_ents[#"hash_2ea9c8cdee3cd84a"];
+  a_ents[#"hash_2ea9c8cdee3cd84a"] setModel(#"hash_322f0af6c1be1b88");
+  level.var_90258347 = a_ents[#"hash_7c416f8b69782e94"];
+  a_ents[#"hash_7c416f8b69782e94"] setModel(#"hash_1d1f55abc907ac00");
   level.var_90258347 thread function_37d7e316();
-  level.var_9de42dec = a_ents[# "hash_82d37dad8ad0efd"];
-  a_ents[# "hash_82d37dad8ad0efd"] setModel(#"hash_322f0bf6c1be1d3b");
-  level.var_f4b6db4c = a_ents[# "hash_82d34dad8ad09e4"];
-  a_ents[# "hash_82d34dad8ad09e4"] setModel(#"hash_322f0df6c1be20a1");
-  level.var_77534a72 = a_ents[# "hash_179a86c5a48ab1fc"];
-  a_ents[# "hash_179a86c5a48ab1fc"] setModel(#"hash_1d1f5cabc907b7e5");
-  level.var_899eef09 = a_ents[# "hash_179a89c5a48ab715"];
-  a_ents[# "hash_179a89c5a48ab715"] setModel(#"hash_1d1f56abc907adb3");
+  level.var_9de42dec = a_ents[#"hash_82d37dad8ad0efd"];
+  a_ents[#"hash_82d37dad8ad0efd"] setModel(#"hash_322f0bf6c1be1d3b");
+  level.var_f4b6db4c = a_ents[#"hash_82d34dad8ad09e4"];
+  a_ents[#"hash_82d34dad8ad09e4"] setModel(#"hash_322f0df6c1be20a1");
+  level.var_77534a72 = a_ents[#"hash_179a86c5a48ab1fc"];
+  a_ents[#"hash_179a86c5a48ab1fc"] setModel(#"hash_1d1f5cabc907b7e5");
+  level.var_899eef09 = a_ents[#"hash_179a89c5a48ab715"];
+  a_ents[#"hash_179a89c5a48ab715"] setModel(#"hash_1d1f56abc907adb3");
   waitframe(1);
-  level.var_b20c744c = a_ents[# "hash_321592f79988a4a3"];
+  level.var_b20c744c = a_ents[#"hash_321592f79988a4a3"];
   level.var_b20c744c attach("par_glassware_01", "j_prop_1", 1);
-  level.var_9add4841 = a_ents[# "hash_7157295a64f1fad"];
+  level.var_9add4841 = a_ents[#"hash_7157295a64f1fad"];
   level.var_9add4841 attach("stk_serving_tray_01", "j_prop_1", 1);
   level.var_9add4841 attach("par_glassware_03", "j_prop_2", 1);
-  level.var_5f8afdc7 = a_ents[# "hash_24bc4280065483dd"];
+  level.var_5f8afdc7 = a_ents[#"hash_24bc4280065483dd"];
   level.var_5f8afdc7 attach("par_glassware_01", "j_prop_2", 1);
-  level.var_ae6a9219 = a_ents[# "hash_154bfafb62cd0af3"];
-  level.var_6bd49be4 = a_ents[# "hash_3c56139fe8f88d4"];
+  level.var_ae6a9219 = a_ents[#"hash_154bfafb62cd0af3"];
+  level.var_6bd49be4 = a_ents[#"hash_3c56139fe8f88d4"];
   level.var_6bd49be4 attach("aac_kitchen_chair_01", "j_prop_1", 1);
   level.var_6bd49be4 attach("par_glassware_01", "j_prop_2", 1);
   waitframe(1);
-  level.var_7bd40b4f = a_ents[# "hash_51a76c887b70705e"];
+  level.var_7bd40b4f = a_ents[#"hash_51a76c887b70705e"];
   level.var_7bd40b4f attach("aac_kitchen_chair_01", "j_prop_1", 1);
   level.var_7bd40b4f attach("aac_kitchen_chair_01", "j_prop_2", 1);
   level.var_7bd40b4f attach("stk_glass_beer_bottle_01_open", "j_prop_3", 1);
   level.var_7bd40b4f attach("par_glassware_03", "j_prop_4", 1);
-  var_cdec639c = a_ents[# "hash_2ea9c8cdee3cd84a"];
-  var_906b811d = a_ents[# "hash_82d34dad8ad09e4"];
-  level.var_f249468f = a_ents[# "hash_82d37dad8ad0efd"];
-  level.var_5b216319 = a_ents[# "hash_179a86c5a48ab1fc"];
+  var_cdec639c = a_ents[#"hash_2ea9c8cdee3cd84a"];
+  var_906b811d = a_ents[#"hash_82d34dad8ad09e4"];
+  level.var_f249468f = a_ents[#"hash_82d37dad8ad0efd"];
+  level.var_5b216319 = a_ents[#"hash_179a86c5a48ab1fc"];
   level thread function_4742334a(var_cdec639c, var_906b811d);
   level thread function_464221cf();
 }
@@ -635,19 +635,19 @@ function function_4742334a(var_cdec639c, var_906b811d) {
 }
 
 function function_75b7378e(a_ents) {
-  level.var_b946e46d = a_ents[# "hash_82d32dad8ad067e"];
-  a_ents[# "hash_82d32dad8ad067e"] setModel(#"hash_322f0ef6c1be2254");
+  level.var_b946e46d = a_ents[#"hash_82d32dad8ad067e"];
+  a_ents[#"hash_82d32dad8ad067e"] setModel(#"hash_322f0ef6c1be2254");
   level.var_b946e46d val::set("bar_patrons", "ignoreall", 1);
   level.var_b946e46d val::set("bar_patrons", "ignoreme", 1);
-  level.var_ab91c903 = a_ents[# "hash_82d33dad8ad0831"];
-  a_ents[# "hash_82d33dad8ad0831"] setModel(#"hash_322f0ff6c1be2407");
+  level.var_ab91c903 = a_ents[#"hash_82d33dad8ad0831"];
+  a_ents[#"hash_82d33dad8ad0831"] setModel(#"hash_322f0ff6c1be2407");
   level.var_ab91c903 val::set("bar_patrons", "ignoreall", 1);
   level.var_ab91c903 val::set("bar_patrons", "ignoreme", 1);
-  level.var_425c76da = a_ents[# "hash_82d30dad8ad0318"];
-  a_ents[# "hash_82d30dad8ad0318"] setModel(#"hash_322f0cf6c1be1eee");
+  level.var_425c76da = a_ents[#"hash_82d30dad8ad0318"];
+  a_ents[#"hash_82d30dad8ad0318"] setModel(#"hash_322f0cf6c1be1eee");
   level.var_425c76da val::set("bar_patrons", "ignoreall", 1);
   level.var_425c76da val::set("bar_patrons", "ignoreme", 1);
-  level.var_a36cb321 = a_ents[# "hash_44d03776a8eca114"];
+  level.var_a36cb321 = a_ents[#"hash_44d03776a8eca114"];
   level.var_a36cb321 thread function_8cb46516("aac_kitchen_chair_01", "j_prop_1", "bar_bathroom_door_locked");
   level.var_a36cb321 thread function_8cb46516("par_glassware_03", "j_prop_2", "bar_bathroom_door_locked");
   level.var_a36cb321 thread function_8cb46516("stk_glass_beer_bottle_01_open", "j_prop_3", "bar_bathroom_door_locked");
@@ -665,23 +665,23 @@ function function_75b7378e(a_ents) {
 }
 
 function function_c532243b(a_ents) {
-  level.var_a31721f9 = a_ents[# "hash_179a88c5a48ab562"];
-  a_ents[# "hash_179a88c5a48ab562"] setModel(#"hash_1d1f57abc907af66");
-  level.var_5f04560a = a_ents[# "hash_2973a0047eb6753b"];
+  level.var_a31721f9 = a_ents[#"hash_179a88c5a48ab562"];
+  a_ents[#"hash_179a88c5a48ab562"] setModel(#"hash_1d1f57abc907af66");
+  level.var_5f04560a = a_ents[#"hash_2973a0047eb6753b"];
   level.var_5f04560a attach("par_glassware_03", "j_prop_1", 1);
 }
 
 function function_a8b581af(a_ents) {
-  a_ents[# "bar_guy07"] setModel(#"hash_322f11f6c1be276d");
-  level.var_5abddee0 = a_ents[# "hash_6c70e733ac26ab82"];
+  a_ents[#"bar_guy07"] setModel(#"hash_322f11f6c1be276d");
+  level.var_5abddee0 = a_ents[#"hash_6c70e733ac26ab82"];
   level.var_5abddee0 attach("par_glassware_03", "j_prop_1", 1);
   level.var_5abddee0 attach("ndy_cigarette_static_01_lit_long", "j_prop_2", 1);
 }
 
 function function_ca4c9d7c(a_ents) {
-  level.var_221cd219 = a_ents[# "hash_523c40dd793e9ddf"];
-  a_ents[# "hash_523c40dd793e9ddf"] setModel(#"hash_322f08f6c1be1822");
-  level.var_305cee99 = a_ents[# "hash_523c3fdd793e9c2c"];
+  level.var_221cd219 = a_ents[#"hash_523c40dd793e9ddf"];
+  a_ents[#"hash_523c40dd793e9ddf"] setModel(#"hash_322f08f6c1be1822");
+  level.var_305cee99 = a_ents[#"hash_523c3fdd793e9c2c"];
 }
 
 function bar_guy07() {
@@ -989,7 +989,7 @@ function function_3df63143(params) {
 }
 
 function function_3d51da22(a_ents) {
-  e_car = a_ents[# "car1"];
+  e_car = a_ents[#"car1"];
   e_car clientfield::set("constraint_toggle_field", 1);
   e_car thread cp_ger_stakeout_fx::function_93e3e68a(1);
   e_car thread cp_ger_stakeout_fx::function_ad03f35b(1);

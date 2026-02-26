@@ -527,7 +527,7 @@ get_lookat_origin(player) {
   dir = vectorscale(forward, 8000);
   eye = player getEye();
   trace = bulletTrace(eye, eye + dir, 0, undefined);
-  return trace[# "position"];
+  return trace[#"position"];
 }
 
 draw_pathnode(node, color) {

@@ -80,7 +80,7 @@ function private function_727338d1(triggerstruct) {
 
   trace = bulletTrace(var_38c235fa, victim_origin, 0, vehicle, 1, 1);
 
-  if(trace[# "fraction"] == 1) {
+  if(trace[#"fraction"] == 1) {
     killer = isDefined(vehicle getseatoccupant(0)) ? vehicle getseatoccupant(0) : vehicle;
     victim.var_f5dc0dbf = 1;
     victim dodamage(victim.health, var_38c235fa, killer, vehicle, "", "MOD_CRUSH", 0, vehicle.settings.var_81a2bc21);
@@ -868,13 +868,13 @@ function private function_479389f3() {
   assert(isDefined(self.radius));
   assert(isDefined(self.height));
   var_33a206d0 = [];
-  var_33a206d0[# "leftrear"] = self gettagorigin("tag_ground_contact_left_rear");
-  var_33a206d0[# "leftmiddle"] = self gettagorigin("tag_ground_contact_left_middle");
-  var_33a206d0[# "leftfront"] = self gettagorigin("tag_ground_contact_left_front");
+  var_33a206d0[#"leftrear"] = self gettagorigin("tag_ground_contact_left_rear");
+  var_33a206d0[#"leftmiddle"] = self gettagorigin("tag_ground_contact_left_middle");
+  var_33a206d0[#"leftfront"] = self gettagorigin("tag_ground_contact_left_front");
   var_8fc02d3b = [];
-  var_8fc02d3b[# "rightrear"] = self gettagorigin("tag_ground_contact_right_rear");
-  var_8fc02d3b[# "rightmiddle"] = self gettagorigin("tag_ground_contact_right_middle");
-  var_8fc02d3b[# "rightfront"] = self gettagorigin("tag_ground_contact_right_front");
+  var_8fc02d3b[#"rightrear"] = self gettagorigin("tag_ground_contact_right_rear");
+  var_8fc02d3b[#"rightmiddle"] = self gettagorigin("tag_ground_contact_right_middle");
+  var_8fc02d3b[#"rightfront"] = self gettagorigin("tag_ground_contact_right_front");
   var_df47b913 = [];
 
   foreach(tag, origin in var_33a206d0) {
@@ -902,15 +902,15 @@ function private function_479389f3() {
   var_4c962569 = 0;
 
   foreach(tag, trace in var_df47b913) {
-    if(isDefined(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"])) {
       var_d643c4fc = 1;
       continue;
     }
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       var_b0e8278f += var_33a206d0[tag];
-      var_4c962569 += trace[# "position"][2] - var_33a206d0[tag][2];
-      avgnormal += trace[# "normal"];
+      var_4c962569 += trace[#"position"][2] - var_33a206d0[tag][2];
+      avgnormal += trace[#"normal"];
       var_e10b67f7[tag] = trace;
     }
   }
@@ -918,15 +918,15 @@ function private function_479389f3() {
   var_d3532cfe = [];
 
   foreach(tag, trace in var_dc8469e2) {
-    if(isDefined(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"])) {
       var_d643c4fc = 1;
       continue;
     }
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       var_b0e8278f += var_8fc02d3b[tag];
-      var_4c962569 += trace[# "position"][2] - var_8fc02d3b[tag][2];
-      avgnormal += trace[# "normal"];
+      var_4c962569 += trace[#"position"][2] - var_8fc02d3b[tag][2];
+      avgnormal += trace[#"normal"];
       var_d3532cfe[tag] = trace;
     }
   }

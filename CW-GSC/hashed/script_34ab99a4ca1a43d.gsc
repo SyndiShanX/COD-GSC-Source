@@ -629,7 +629,7 @@ function function_61f1a62e(instance) {
 }
 
 function function_34c59c2c(instance, var_c6e3f0a, var_cc1fb2d0, var_3a053962, str_scene, var_dae71351, str_dvar) {
-  var_842cdacd = instance.contentgroups[# "chest_spawn"];
+  var_842cdacd = instance.contentgroups[#"chest_spawn"];
   var_842cdacd = array::randomize(var_842cdacd);
   var_8634611a = [];
 
@@ -1046,7 +1046,7 @@ function function_3e953077(instance) {
   var_168390c = 0;
   var_e472e403 = 15;
   var_5b7bb632 = 0;
-  var_cb77f56c = instance.contentgroups[# "pod_group"];
+  var_cb77f56c = instance.contentgroups[#"pod_group"];
 
   if(isDefined(var_cb77f56c)) {
     level.var_50e94447 = var_cb77f56c;
@@ -1055,7 +1055,7 @@ function function_3e953077(instance) {
 
     foreach(s_group in var_cb77f56c) {
       var_3471a9bf = 0;
-      var_842cdacd = array::randomize(s_group.contentgroups[# "pod_spawn"]);
+      var_842cdacd = array::randomize(s_group.contentgroups[#"pod_spawn"]);
 
       foreach(spawn in var_842cdacd) {
         if(var_168390c) {

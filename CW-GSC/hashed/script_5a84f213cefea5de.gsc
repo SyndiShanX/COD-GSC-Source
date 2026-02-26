@@ -101,7 +101,7 @@ function private function_898628ef(item, player, networkid, itemid, itemcount, v
         var_390fc2d8 = getscriptbundle(itempoint.itementry.killstreak);
 
         if(var_390fc2d8.ksinventoryweapon.name == # "inventory_planemortar") {
-          ammo = isDefined(itemcount.pers[# "hash_1aaccfe69e328d6e"][3]) ? itemcount.pers[# "hash_1aaccfe69e328d6e"][3] : 3;
+          ammo = isDefined(itemcount.pers[#"hash_1aaccfe69e328d6e"][3]) ? itemcount.pers[#"hash_1aaccfe69e328d6e"][3] : 3;
         }
 
         level thread item_drop::drop_item(0, undefined, 1, ammo, itempoint.id, itemcount.origin + anglesToForward(itemcount.angles) * randomfloatrange(10, 30), itemcount.angles, 2);
@@ -111,19 +111,19 @@ function private function_898628ef(item, player, networkid, itemid, itemcount, v
       itemcount takeweapon(weapon);
     }
 
-    itemcount.pers[# "killstreaks"] = [];
-    itemcount.pers[# "hash_1aaccfe69e328d6e"] = [];
+    itemcount.pers[#"killstreaks"] = [];
+    itemcount.pers[#"hash_1aaccfe69e328d6e"] = [];
     result = killstreaks::give(killstreakname, undefined, undefined, undefined, undefined);
 
     if(isDefined(slotid) && slotid > 0 && isDefined(killstreakbundle.ksinventoryweapon)) {
       if(killstreakbundle.ksinventoryweapon.name == # "inventory_planemortar") {
-        itemcount.pers[# "hash_1aaccfe69e328d6e"][3] = slotid;
+        itemcount.pers[#"hash_1aaccfe69e328d6e"][3] = slotid;
         clientfield::set_player_uimodel("hudItems.planeMortarShotsRemaining", slotid);
         itemcount loadout::function_3ba6ee5d(killstreakbundle.ksinventoryweapon, 1);
-        itemcount.pers[# "held_killstreak_ammo_count"][killstreakbundle.ksinventoryweapon] = 1;
+        itemcount.pers[#"held_killstreak_ammo_count"][killstreakbundle.ksinventoryweapon] = 1;
       } else {
         itemcount loadout::function_3ba6ee5d(killstreakbundle.ksinventoryweapon, slotid);
-        itemcount.pers[# "held_killstreak_ammo_count"][killstreakbundle.ksinventoryweapon] = slotid;
+        itemcount.pers[#"held_killstreak_ammo_count"][killstreakbundle.ksinventoryweapon] = slotid;
       }
     }
 

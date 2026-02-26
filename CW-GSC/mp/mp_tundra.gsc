@@ -170,7 +170,7 @@ function function_95ec9598(var_3a72e7b7) {
   if(isDefined(self) && isalive(player) && !is_true(self.activated) && player function_64fefea()) {
     level endon(#"game_ended");
     scene = struct::get(#"hash_2467352290a052f7", "scriptbundlename");
-    bridge = scene.scene_ents[# "prop 1"];
+    bridge = scene.scene_ents[#"prop 1"];
     self.activated = 1;
     level thread scene::play(#"hash_2467352290a052f7", "Shot 2");
 

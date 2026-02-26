@@ -43,17 +43,17 @@ function register(var_43c7e6f7, var_6fb92716) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "mp_prop_timer"])) {
-    level.var_ae746e8f[# "mp_prop_timer"] = [];
+  if(!isDefined(level.var_ae746e8f[#"mp_prop_timer"])) {
+    level.var_ae746e8f[#"mp_prop_timer"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "mp_prop_timer"])) {
-    level.var_ae746e8f[# "mp_prop_timer"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "mp_prop_timer"])) {
-    level.var_ae746e8f[# "mp_prop_timer"] = array(level.var_ae746e8f[# "mp_prop_timer"]);
+  if(!isDefined(level.var_ae746e8f[#"mp_prop_timer"])) {
+    level.var_ae746e8f[#"mp_prop_timer"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"mp_prop_timer"])) {
+    level.var_ae746e8f[#"mp_prop_timer"] = array(level.var_ae746e8f[#"mp_prop_timer"]);
   }
 
-  level.var_ae746e8f[# "mp_prop_timer"][level.var_ae746e8f[# "mp_prop_timer"].size] = elem;
+  level.var_ae746e8f[#"mp_prop_timer"][level.var_ae746e8f[#"mp_prop_timer"].size] = elem;
 }
 
 function register_clientside() {

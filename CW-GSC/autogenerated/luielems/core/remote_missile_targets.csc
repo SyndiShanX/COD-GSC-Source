@@ -55,17 +55,17 @@ function register(var_9318c80d, var_82a5247c, var_afbc846a, var_4c87c083) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "remote_missile_targets"])) {
-    level.var_ae746e8f[# "remote_missile_targets"] = [];
+  if(!isDefined(level.var_ae746e8f[#"remote_missile_targets"])) {
+    level.var_ae746e8f[#"remote_missile_targets"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "remote_missile_targets"])) {
-    level.var_ae746e8f[# "remote_missile_targets"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "remote_missile_targets"])) {
-    level.var_ae746e8f[# "remote_missile_targets"] = array(level.var_ae746e8f[# "remote_missile_targets"]);
+  if(!isDefined(level.var_ae746e8f[#"remote_missile_targets"])) {
+    level.var_ae746e8f[#"remote_missile_targets"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"remote_missile_targets"])) {
+    level.var_ae746e8f[#"remote_missile_targets"] = array(level.var_ae746e8f[#"remote_missile_targets"]);
   }
 
-  level.var_ae746e8f[# "remote_missile_targets"][level.var_ae746e8f[# "remote_missile_targets"].size] = elem;
+  level.var_ae746e8f[#"remote_missile_targets"][level.var_ae746e8f[#"remote_missile_targets"].size] = elem;
 }
 
 function register_clientside() {

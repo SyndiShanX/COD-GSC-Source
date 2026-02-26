@@ -744,7 +744,7 @@ function geteyeyawtoorigin(org) {
 }
 
 function getcovernodeyawtoorigin(org) {
-  yaw = self.covernode.angles[1] + self.animarray[# "angle_step_out"][self.a.cornermode] - getyaw(org);
+  yaw = self.covernode.angles[1] + self.animarray[#"angle_step_out"][self.a.cornermode] - getyaw(org);
   yaw = angleclamp180(yaw);
   return yaw;
 }
@@ -755,7 +755,7 @@ function rotatevec(vector, angle) {
 
 function function_65ee50ba(start, updelta = 48, var_51a8354e = -1024) {
   s_trace = groundtrace(start + (0, 0, updelta), start + (0, 0, var_51a8354e), 0, self);
-  return s_trace[# "position"];
+  return s_trace[#"position"];
 }
 
 function function_1a117d29(location, timesec = 1) {
@@ -869,11 +869,11 @@ function function_2f4b0f9(health, eattacker, var_799e18e5, idamage, var_5f32808d
   if(isDefined(eattacker) && idamage > 0) {
     hud::function_c9800094(eattacker, var_799e18e5, int(idamage / 10), var_5f32808d);
 
-    if(!isDefined(eattacker.pers[# "damagedone"])) {
-      eattacker.pers[# "damagedone"] = 0;
+    if(!isDefined(eattacker.pers[#"damagedone"])) {
+      eattacker.pers[#"damagedone"] = 0;
     }
 
-    eattacker.pers[# "damagedone"] += idamage;
+    eattacker.pers[#"damagedone"] += idamage;
   }
 }
 

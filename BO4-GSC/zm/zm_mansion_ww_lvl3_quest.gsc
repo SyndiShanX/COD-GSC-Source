@@ -434,9 +434,9 @@ wander_reporter(var_9427f9e7, var_2bab3af1) {
   self endon(#"death", #"near_goal");
 
   while(true) {
-    var_b2bd87c7 = groundtrace(var_9427f9e7.origin + (0, 0, 8), var_9427f9e7.origin + (0, 0, -100000), 0, undefined)[# "position"];
-    var_e9683beb = groundtrace(var_2bab3af1.origin + (0, 0, 8), var_2bab3af1.origin + (0, 0, -100000), 0, undefined)[# "position"];
-    sphere(groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"], 4, (1, 0, 0), 1, 1, 4, 12);
+    var_b2bd87c7 = groundtrace(var_9427f9e7.origin + (0, 0, 8), var_9427f9e7.origin + (0, 0, -100000), 0, undefined)[#"position"];
+    var_e9683beb = groundtrace(var_2bab3af1.origin + (0, 0, 8), var_2bab3af1.origin + (0, 0, -100000), 0, undefined)[#"position"];
+    sphere(groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"], 4, (1, 0, 0), 1, 1, 4, 12);
     sphere(var_b2bd87c7, 4, (1, 1, 0), 1, 1, 8, 12);
     sphere(var_e9683beb, 8, (0, 1, 0), 1, 1, 8, 12);
     line(var_b2bd87c7, var_e9683beb, (1, 1, 1), 1, 1, 12);
@@ -488,7 +488,7 @@ function_44a776ee() {
     level.var_b434e769 delete();
   }
 
-  level.var_5f2726dc = groundtrace(level.var_5f2726dc + (0, 0, 8), level.var_5f2726dc + (0, 0, -100000), 0, undefined)[# "position"];
+  level.var_5f2726dc = groundtrace(level.var_5f2726dc + (0, 0, 8), level.var_5f2726dc + (0, 0, -100000), 0, undefined)[#"position"];
   var_b434e769 = util::spawn_model(#"hash_6f97a0d9c769da03", level.var_5f2726dc);
   util::wait_network_frame();
   s_loc = spawnStruct();
@@ -538,13 +538,13 @@ function_68a875b(v_pos) {
   v_drop_point = zm_utility::function_b0eeaada(v_pos, 3200);
 
   if(isDefined(v_drop_point)) {
-    if(zm_zonemgr::function_66bf6a43(v_drop_point[# "point"])) {
+    if(zm_zonemgr::function_66bf6a43(v_drop_point[#"point"])) {
       iprintln("<dev string:x73>");
 
-      return v_drop_point[# "point"];
+      return v_drop_point[#"point"];
     }
 
-    var_f6193a60 = getclosestpointonnavmesh(v_drop_point[# "point"], 256);
+    var_f6193a60 = getclosestpointonnavmesh(v_drop_point[#"point"], 256);
 
     if(isDefined(var_f6193a60)) {
       if(zm_zonemgr::function_66bf6a43(var_f6193a60)) {
@@ -559,40 +559,40 @@ function_68a875b(v_pos) {
     var_48dba99e = zm_utility::function_b0eeaada(v_pos + (64 * i * -1, 0, 0), 3200);
 
     if(isDefined(var_48dba99e)) {
-      if(zm_zonemgr::function_66bf6a43(var_48dba99e[# "point"])) {
+      if(zm_zonemgr::function_66bf6a43(var_48dba99e[#"point"])) {
         iprintln("<dev string:xaa>" + 64 * i);
 
-        return var_48dba99e[# "point"];
+        return var_48dba99e[#"point"];
       }
     }
 
     var_dc4239c1 = zm_utility::function_b0eeaada(v_pos + (64 * i, 0, 0), 3200);
 
     if(isDefined(var_dc4239c1)) {
-      if(zm_zonemgr::function_66bf6a43(var_dc4239c1[# "point"])) {
+      if(zm_zonemgr::function_66bf6a43(var_dc4239c1[#"point"])) {
         iprintln("<dev string:xd3>" + 64 * i);
 
-        return var_dc4239c1[# "point"];
+        return var_dc4239c1[#"point"];
       }
     }
 
     var_f21e9d9b = zm_utility::function_b0eeaada(v_pos + (0, 64 * i, 0), 3200);
 
     if(isDefined(var_f21e9d9b)) {
-      if(zm_zonemgr::function_66bf6a43(var_f21e9d9b[# "point"])) {
+      if(zm_zonemgr::function_66bf6a43(var_f21e9d9b[#"point"])) {
         iprintln("<dev string:xfd>" + 64 * i);
 
-        return var_f21e9d9b[# "point"];
+        return var_f21e9d9b[#"point"];
       }
     }
 
     var_23fdc586 = zm_utility::function_b0eeaada(v_pos + (0, 64 * i * -1, 0), 3200);
 
     if(isDefined(var_23fdc586)) {
-      if(zm_zonemgr::function_66bf6a43(var_23fdc586[# "point"])) {
+      if(zm_zonemgr::function_66bf6a43(var_23fdc586[#"point"])) {
         iprintln("<dev string:x124>" + 64 * i);
 
-        return var_23fdc586[# "point"];
+        return var_23fdc586[#"point"];
       }
     }
   }
@@ -616,7 +616,7 @@ function_cfffc455() {
     return;
   }
 
-  v_loc = groundtrace(v_loc + (0, 0, 32) + (0, 0, 8), v_loc + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
+  v_loc = groundtrace(v_loc + (0, 0, 32) + (0, 0, 8), v_loc + (0, 0, 32) + (0, 0, -100000), 0, self)[#"position"];
 
   if(!isDefined(v_loc)) {
     return;
@@ -808,18 +808,18 @@ function_42c889b7(e_player) {
 }
 
 function_79b81681(a_ents) {
-  if(isactor(a_ents[# "actor 1"])) {
-    a_ents[# "actor 1"].var_7b0667d9 = 1;
-    a_ents[# "actor 1"].blockingpain = 1;
+  if(isactor(a_ents[#"actor 1"])) {
+    a_ents[#"actor 1"].var_7b0667d9 = 1;
+    a_ents[#"actor 1"].blockingpain = 1;
   }
 }
 
 function_2c0edc3d(a_ents) {
   waitframe(1);
 
-  if(isalive(a_ents[# "actor 1"])) {
-    a_ents[# "actor 1"].var_7b0667d9 = undefined;
-    a_ents[# "actor 1"].blockingpain = 0;
+  if(isalive(a_ents[#"actor 1"])) {
+    a_ents[#"actor 1"].var_7b0667d9 = undefined;
+    a_ents[#"actor 1"].blockingpain = 0;
   }
 }
 
@@ -888,7 +888,7 @@ function_be3fbc6f(s_params) {
       s_loc.origin = getclosestpointonnavmesh(struct::get("nosferatu_pos").origin, 256, 32);
     }
 
-    s_loc.origin = groundtrace(s_loc.origin + (0, 0, 32) + (0, 0, 8), s_loc.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[# "position"];
+    s_loc.origin = groundtrace(s_loc.origin + (0, 0, 32) + (0, 0, 8), s_loc.origin + (0, 0, 32) + (0, 0, -100000), 0, self)[#"position"];
     level thread function_6f3f4e18(s_loc);
   }
 }
@@ -966,11 +966,11 @@ function_c1c2fc5b(n_to_spawn) {
     return;
   }
 
-  var_8deb2034 = var_f1c4ec4f.a_loc_types[# "bat_location"];
+  var_8deb2034 = var_f1c4ec4f.a_loc_types[#"bat_location"];
 
   foreach(var_c92978fa in getarraykeys(var_f1c4ec4f.adjacent_zones)) {
     var_c714ccfe = level.zones[var_c92978fa];
-    var_9387e4ab = var_c714ccfe.a_loc_types[# "bat_location"];
+    var_9387e4ab = var_c714ccfe.a_loc_types[#"bat_location"];
 
     if(isDefined(var_9387e4ab)) {
       foreach(s_spawner in var_9387e4ab) {
@@ -1157,7 +1157,7 @@ function_1b4df249() {
 function_25058256() {
   level flagsys::wait_till(#"load_main_complete");
 
-  foreach(s_stub in level.var_4fe2f84d[# "zblueprint_chaos_lvl3"]) {
+  foreach(s_stub in level.var_4fe2f84d[#"zblueprint_chaos_lvl3"]) {
     s_stub.var_c060d2c8 = 0;
   }
 }

@@ -8,7 +8,7 @@
 #namespace zm_escape_catwalk_event;
 
 init_fx() {
-  level._effect[# "hash_46085f7d2bcd82c5"] = # "hash_404575a78667befd";
+  level._effect[#"hash_46085f7d2bcd82c5"] = # "hash_404575a78667befd";
 }
 
 init_clientfields() {
@@ -22,7 +22,7 @@ function_a3874ae0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "hash_46085f7d2bcd82c5"], self, "tag_origin");
+    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"hash_46085f7d2bcd82c5"], self, "tag_origin");
   }
 }
 

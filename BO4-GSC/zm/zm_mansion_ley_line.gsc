@@ -280,7 +280,7 @@ function_55b79f54() {
     waitresult = self waittill(#"trigger");
     player = waitresult.activator;
 
-    if(!zm_utility::can_use(player) || isDefined(player.b_gazing) && player.b_gazing || isDefined(player.var_d049df11) && player.var_d049df11 || distancesquared(groundtrace(player.origin, player.origin + (0, 0, -128), 0, player)[# "position"], player.origin) > 16) {
+    if(!zm_utility::can_use(player) || isDefined(player.b_gazing) && player.b_gazing || isDefined(player.var_d049df11) && player.var_d049df11 || distancesquared(groundtrace(player.origin, player.origin + (0, 0, -128), 0, player)[#"position"], player.origin) > 16) {
       continue;
     }
 
@@ -610,9 +610,9 @@ function_71d1b235() {
 }
 
 function_ea49787e(a_ents) {
-  level.mdl_crystal = a_ents[# "crystal"];
-  level.mdl_atlas = a_ents[# "atlas"];
-  level.mdl_rings = a_ents[# "atlas_rings"];
+  level.mdl_crystal = a_ents[#"crystal"];
+  level.mdl_atlas = a_ents[#"atlas"];
+  level.mdl_rings = a_ents[#"atlas_rings"];
   util::wait_network_frame(5);
   level.mdl_crystal clientfield::set("" + # "hash_34c5ab29531f15f0", 1);
   level.mdl_rings hidepart("link_ring1_jnt", "p8_fxanim_zm_man_atlas_rings_mod", 1);

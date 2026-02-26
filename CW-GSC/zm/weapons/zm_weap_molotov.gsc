@@ -124,7 +124,7 @@ function trytoapplyfiredamage(target, owner, position, fireeffectarea, var_289a7
   } else if(molotov::candofiredamage(killcament, target, customsettings.var_4bf1fc1f) && (!isDefined(target.sessionstate) || target.sessionstate == "playing")) {
     trace = bulletTrace(position, target getshootatpos(), 0, target);
 
-    if(trace[# "fraction"] == 1) {
+    if(trace[#"fraction"] == 1) {
       target thread function_8422dabd(sourcepos, killcament, trace, position, weapon, customsettings, owner, start_time);
     } else {
       var_be45d685 = 1;

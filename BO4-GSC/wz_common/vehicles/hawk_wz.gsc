@@ -76,22 +76,22 @@ spawn_hawk(itemid) {
   spawnpos = self.origin + (0, 0, 90) + forward;
   trace = self function_6ada73f(spawnpos);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75);
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45);
   }
 

@@ -776,7 +776,7 @@ function_946fc2d6() {
   level endon(#"end_game");
   self endon(#"death");
   self waittill(#"fasttravel_over");
-  a_enemies = level.ai[# "axis"];
+  a_enemies = level.ai[#"axis"];
 
   if(isDefined(a_enemies) && a_enemies.size) {
     a_potential_targets = array::get_all_closest(self.origin, a_enemies, undefined, undefined, 640);

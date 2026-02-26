@@ -148,7 +148,7 @@ function function_3ebfec3e(entity) {
 }
 
 function function_bc29cf28() {
-  var_6be77126 = [# "ammo_cache", #"explore_chests", #"explore_chests_large", #"explore_chests_small", #"safehouse"];
+  var_6be77126 = [#"ammo_cache", #"explore_chests", #"explore_chests_large", #"explore_chests_small", #"safehouse"];
   spawn_structs = zm_destination_manager::function_506afb9e(level.contentmanager.currentdestination, var_6be77126);
 
   for(i = 0; i < spawn_structs.size; i++) {

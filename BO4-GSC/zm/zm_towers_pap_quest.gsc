@@ -26,8 +26,8 @@
 #namespace zm_towers_pap_quest;
 
 init() {
-  level._effect[# "fx_challenge_head_blood_burst"] = "maps/zm_towers/fx8_challenge_head_blood_burst";
-  level._effect[# "fx_challenge_head_blood_drips"] = "maps/zm_towers/fx8_challenge_head_blood_drips";
+  level._effect[#"fx_challenge_head_blood_burst"] = "maps/zm_towers/fx8_challenge_head_blood_burst";
+  level._effect[#"fx_challenge_head_blood_drips"] = "maps/zm_towers/fx8_challenge_head_blood_drips";
   function_90a833e2();
   level thread function_5ad3e281();
   scene::add_scene_func("p8_fxanim_zm_towers_pap_sarcophagus_spikes_bundle", &function_64f2d6de, "init");
@@ -268,7 +268,7 @@ pap_quest_restart() {
 }
 
 function_64f2d6de(a_ents) {
-  var_f99f1421 = a_ents[# "prop 1"];
+  var_f99f1421 = a_ents[#"prop 1"];
   a_mdl_heads = getEntArray("mdl_pap_quest_head", "targetname");
 
   foreach(mdl_head in a_mdl_heads) {

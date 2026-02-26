@@ -388,7 +388,7 @@ function_84eca8f8() {
         v_forward = v_position + var_774bf522 getweaponforwarddir() * 1600;
         var_b2171ef7 = pointonsegmentnearesttopoint(v_position, v_forward, var_4acd2b1);
 
-        if(distancesquared(var_b2171ef7, var_4acd2b1) < 10 && beamtrace(v_position, var_4acd2b1, 1, var_774bf522, 0, 0, self.mdl_candle)[# "fraction"] == 1) {
+        if(distancesquared(var_b2171ef7, var_4acd2b1) < 10 && beamtrace(v_position, var_4acd2b1, 1, var_774bf522, 0, 0, self.mdl_candle)[#"fraction"] == 1) {
           self function_b094be90();
         }
       }
@@ -1068,7 +1068,7 @@ function_623b460a() {
   level flag::set(#"hash_11cbce4fcf9f3aec");
   var_97b7cff3 = scene::get_active_scenes(#"p8_fxanim_zm_man_pjs_bundle");
   var_70c77e28 = var_97b7cff3[0];
-  var_35694f3f = var_70c77e28.scene_ents[# "prop 1"];
+  var_35694f3f = var_70c77e28.scene_ents[#"prop 1"];
   assert(isDefined(var_35694f3f), "<dev string:x12d>");
 
   if(isDefined(var_35694f3f)) {

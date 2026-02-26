@@ -52,8 +52,8 @@ function_2cdcf5c3() {
 }
 
 function_33022f5b(a_ents) {
-  if(isDefined(a_ents[# "prop 1"])) {
-    physicsexplosionsphere(a_ents[# "prop 1"].origin, 512, 1, 1);
+  if(isDefined(a_ents[#"prop 1"])) {
+    physicsexplosionsphere(a_ents[#"prop 1"].origin, 512, 1, 1);
   }
 }
 

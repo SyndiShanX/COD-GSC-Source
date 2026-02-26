@@ -40,7 +40,7 @@ init_clientfields() {
 }
 
 function_3d4e24ea() {
-  level._effect[# "hash_723a7c4a495d1008"] = # "hash_17207501ee73a374";
+  level._effect[#"hash_723a7c4a495d1008"] = # "hash_17207501ee73a374";
 }
 
 ship_lights_control() {
@@ -77,7 +77,7 @@ function_e9f6e0f7() {
   s_lgt_spawner = struct::get("s_lgt_spawner", "targetname");
   e_sam.tag = util::spawn_model("tag_origin", s_lgt_spawner.origin);
   e_sam.tag.angles = s_lgt_spawner.angles;
-  level.registerglass_railing_kickedleader = level._effect[# "hash_723a7c4a495d1008"];
+  level.registerglass_railing_kickedleader = level._effect[#"hash_723a7c4a495d1008"];
   e_sam.var_82acd734 = playFXOnTag(level.registerglass_railing_kickedleader, e_sam.tag, "tag_origin");
   e_sam.var_82acd734 linkto(e_sam);
 }

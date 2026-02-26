@@ -726,16 +726,16 @@ get_ground_normal(traceignore, debug) {
 
   foreach(point in tracepoints) {
     trace = bulletTrace(point + (0, 0, 4), point + (0, 0, -16), 0, ignore);
-    tracehit = trace[# "fraction"] > 0 && trace[# "fraction"] < 1;
+    tracehit = trace[#"fraction"] > 0 && trace[#"fraction"] < 1;
 
     if(tracehit) {
-      avgnormal += trace[# "normal"];
+      avgnormal += trace[#"normal"];
       tracehitcount++;
     }
 
     if(debug) {
       if(tracehit) {
-        line(point, point + trace[# "normal"] * 30, (0, 1, 0));
+        line(point, point + trace[#"normal"] * 30, (0, 1, 0));
         continue;
       }
 
@@ -933,8 +933,8 @@ function canlock() {
 
   if(!self isonground() || self iswallrunning()) {
     trace1 = self function_97f02d5c();
-    frac = trace1[# "fraction"];
-    org1 = trace1[# "position"];
+    frac = trace1[#"fraction"];
+    org1 = trace1[#"position"];
 
     if(frac == 1) {
       function_6de7bc19(0, "<dev string:x47>", self, org1, "<dev string:x50>");

@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "gravity_spike_dust"] = # "weapon/fx_hero_grvity_spk_grnd_hit_dust";
+  level._effect[#"gravity_spike_dust"] = # "weapon/fx_hero_grvity_spk_grnd_hit_dust";
   level.gravity_spike_table = "surface_explosion_gravityspikes";
   level thread watchforgravityspikeexplosion();
   level.dirt_enable_gravity_spikes = getdvarint(#"scr_dirt_enable_gravity_spikes", 0);
@@ -105,14 +105,14 @@ do_gravity_spike_fx_circle(localclientnum, owner, center, radius, count) {
     fx_position = randomizelocation(fx_position, randomization, randomization);
     trace = ground_trace(fx_position, owner);
 
-    if(trace[# "fraction"] < 1) {
-      fx = getfxfromsurfacetable(level.gravity_spike_table, trace[# "surfacetype"]);
+    if(trace[#"fraction"] < 1) {
+      fx = getfxfromsurfacetable(level.gravity_spike_table, trace[#"surfacetype"]);
 
       if(isDefined(fx)) {
         random_yaw = randomintrange(0, 359);
         angles = (0, random_yaw, 0);
         forward = anglesToForward(angles);
-        normal = trace[# "normal"];
+        normal = trace[#"normal"];
 
         if(lengthsquared(normal) == 0) {
           normal = (1, 0, 0);
@@ -123,8 +123,8 @@ do_gravity_spike_fx_circle(localclientnum, owner, center, radius, count) {
           forward = anglesToForward(angles);
         }
 
-        playFX(localclientnum, fx, trace[# "position"], normal, forward);
-        playSound(0, "wpn_gravity_spikes_earth_crack", trace[# "position"]);
+        playFX(localclientnum, fx, trace[#"position"], normal, forward);
+        playSound(0, "wpn_gravity_spikes_earth_crack", trace[#"position"]);
       }
     } else {}
 

@@ -46,7 +46,7 @@ function init() {
     namespace_679a22ba::function_3ba2f5dd(#"hash_539facc2c096b82", #"silver_ai_zombie_heavy_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_208e2483f559ccd2", #"silver_ai_dog_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_47bae14a2b1b4511", #"silver_ai_zombie_mega_xmas");
-    level.var_8f576c00 = [# "hash_5214ebcccbd95a36": # "hash_796dff2ea842c1ac", #"hash_19ef16d1ba01a5": # "hash_7725a0435b44b1e5", #"hash_12a17ab3df5889eb": # "hash_2792674ef4fce09f", #"hash_53f4e0daa341a161": # "hash_156c697af81feaf9", #"spawner_zm_steiner": # "hash_43b8d4f24851653e", #"hash_7f957e36b4f6160f": # "hash_5e24e4aa952bb1bb", #"spawner_zm_steiner_split_radiation_blast": # "hash_2c0da7720a1c2f90", #"hash_6904f5c7bef64405": # "hash_1d599c94a087ca05", #"spawner_zm_steiner_split_radiation_bomb": # "hash_16d309f1ce9e015a"];
+    level.var_8f576c00 = [#"hash_5214ebcccbd95a36": # "hash_796dff2ea842c1ac", #"hash_19ef16d1ba01a5": # "hash_7725a0435b44b1e5", #"hash_12a17ab3df5889eb": # "hash_2792674ef4fce09f", #"hash_53f4e0daa341a161": # "hash_156c697af81feaf9", #"spawner_zm_steiner": # "hash_43b8d4f24851653e", #"hash_7f957e36b4f6160f": # "hash_5e24e4aa952bb1bb", #"spawner_zm_steiner_split_radiation_blast": # "hash_2c0da7720a1c2f90", #"hash_6904f5c7bef64405": # "hash_1d599c94a087ca05", #"spawner_zm_steiner_split_radiation_bomb": # "hash_16d309f1ce9e015a"];
     level.overridezombiespawn = &function_767a6a84;
     level.var_9d098364 = # "hash_43b8d4f24851653e";
     level.var_c42bdd1b = # "hash_2c0da7720a1c2f90";
@@ -56,11 +56,11 @@ function init() {
     level.var_887c5017 = # "hash_16d309f1ce9e015a";
     level.var_9e513533 = # "c_t9_zmb_zombie_heavy_helmet_xmas";
     level.var_eea9f85a = # "c_t9_zmb_zombie_heavy_torso_armor_xmas";
-    level.var_1a4cc228[# "hash_796dff2ea842c1ac"] = [# "hash_7f5ab1dc6cfb5e8b", #"hash_7d3fe2134df8b974", #"hash_7808152e8467362f", #"hash_50645fbb1e049528", #"hash_4cc6bea1049efc55", #"hash_9c9737cf22069a5", #"hash_55cd178e8d6db2aa"];
-    level.var_1a4cc228[# "hash_2792674ef4fce09f"] = [# "hash_7247a6e723dbd7ab"];
-    level.var_1a4cc228[# "hash_2c0da7720a1c2f90"] = [# "hash_78bcaad275fa3c26"];
-    level.var_1a4cc228[# "hash_16d309f1ce9e015a"] = [# "hash_5392a8401b0e3133"];
-    level.var_1a4cc228[# "hash_7725a0435b44b1e5"] = [# "hash_4062a2032d2c9a34"];
+    level.var_1a4cc228[#"hash_796dff2ea842c1ac"] = [#"hash_7f5ab1dc6cfb5e8b", #"hash_7d3fe2134df8b974", #"hash_7808152e8467362f", #"hash_50645fbb1e049528", #"hash_4cc6bea1049efc55", #"hash_9c9737cf22069a5", #"hash_55cd178e8d6db2aa"];
+    level.var_1a4cc228[#"hash_2792674ef4fce09f"] = [#"hash_7247a6e723dbd7ab"];
+    level.var_1a4cc228[#"hash_2c0da7720a1c2f90"] = [#"hash_78bcaad275fa3c26"];
+    level.var_1a4cc228[#"hash_16d309f1ce9e015a"] = [#"hash_5392a8401b0e3133"];
+    level.var_1a4cc228[#"hash_7725a0435b44b1e5"] = [#"hash_4062a2032d2c9a34"];
     level.var_f546b995 = "winter";
     level thread function_3a268da9();
     callback::on_ai_damage(&on_ai_damaged);

@@ -731,8 +731,7 @@ vehicle_abandoned_by_occupants_t() {
 }
 
 play_start_stop_sound(sound_alias, modulation) {
-  if(isDefined(self.start_stop_sfxid)) {
-  }
+  if(isDefined(self.start_stop_sfxid)) {}
 
   self.start_stop_sfxid = self playSound(sound_alias);
 }

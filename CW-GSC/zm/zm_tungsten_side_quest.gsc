@@ -664,8 +664,8 @@ function private function_7e0ee279() {
     v_location = var_76f90141.origin;
     s_trace = groundtrace(v_location + (0, 0, 50), v_location - (0, 0, 50), 0, self);
 
-    if(isDefined(s_trace[# "position"])) {
-      v_location = s_trace[# "position"];
+    if(isDefined(s_trace[#"position"])) {
+      v_location = s_trace[#"position"];
     }
 
     self setbrake(1);
@@ -836,7 +836,7 @@ function function_c07c7ebc(state) {
 function function_a7e59618(var_a276c861) {
   level endon(#"end_game");
   zm_tungsten::function_994637d8(#"hash_1695615ee9fcfe29");
-  level flag::wait_till_all([# "start_zombie_round_logic", #"connect_anytown_usa_rooftops", #"connect_video_store", #"connect_tv_repair"]);
+  level flag::wait_till_all([#"start_zombie_round_logic", #"connect_anytown_usa_rooftops", #"connect_video_store", #"connect_tv_repair"]);
 
   if(!isDefined(level.var_51d15368)) {
     var_2551a4be = struct::get("side_quest_gp_machine_screen");
@@ -1422,7 +1422,7 @@ function function_619fdf5f() {
 
   level.var_3a2ad19b[level.var_3a2ad19b.size] = # "item_zmquest_sr_ltm_food_burger";
   level flag::wait_till(#"start_zombie_round_logic");
-  level.var_91f71aa[# "item_zmquest_sr_ltm_food_burger"] = &function_b087107d;
+  level.var_91f71aa[#"item_zmquest_sr_ltm_food_burger"] = &function_b087107d;
   callback::on_item_pickup(&item_pickup);
   var_4db66606 = struct::get_array("s_hamburger", "targetname");
 
@@ -1681,7 +1681,7 @@ function function_68a91082(target_entity) {
   foreach(player in function_a1ef346b()) {
     dis = distance2dsquared(target_entity.origin, player.origin);
 
-    if(isDefined(dis) && dis > sqr(870 + 500) && !player laststand::player_is_in_laststand() && !player flag::get_any([# "hash_686d5709e1566aa6", #"hash_1b361b950317ecb5"])) {
+    if(isDefined(dis) && dis > sqr(870 + 500) && !player laststand::player_is_in_laststand() && !player flag::get_any([#"hash_686d5709e1566aa6", #"hash_1b361b950317ecb5"])) {
       n_index = zm_fasttravel::get_player_index(player);
       var_3193e2d9 = var_a2ff5983[n_index];
       player thread zm_fasttravel::function_66d020b0(undefined, undefined, undefined, undefined, var_3193e2d9, undefined, undefined, 1, 0);
@@ -1871,8 +1871,8 @@ function function_aa9da0e() {
     var_b449a058 = array::random(var_3927b8fb);
     traceresult = groundtrace(var_b449a058.origin + (0, 0, 50), var_b449a058.origin + (0, 0, -100), 0, 0);
 
-    if(isDefined(traceresult[# "position"])) {
-      var_9917b0be = traceresult[# "position"];
+    if(isDefined(traceresult[#"position"])) {
+      var_9917b0be = traceresult[#"position"];
       var_9917b0be = getrandomnavpoint(var_9917b0be, 50, 15);
     } else {
       waitframe(1);
@@ -2088,7 +2088,7 @@ function function_e86d6eef(var_a276c861) {
 
 function function_2244edb0(e_player) {
   if(isPlayer(e_player)) {
-    if(!level flag::get_any([# "hash_25fe180b96ddb969", #"hash_514ccaae7a18d0fa"])) {
+    if(!level flag::get_any([#"hash_25fe180b96ddb969", #"hash_514ccaae7a18d0fa"])) {
       self sethintstring(#"hash_58431bdb2fd8fb05");
       return true;
     } else {
@@ -2118,11 +2118,11 @@ function function_920c7b4b() {
   level.var_d6c3dbb4 = [];
 
   if(isarray(level.var_ca0aefec)) {
-    level.var_d6c3dbb4[# "sequence1"] = array::randomize(level.var_ca0aefec);
+    level.var_d6c3dbb4[#"sequence1"] = array::randomize(level.var_ca0aefec);
     var_6fe4d37f = array::randomize(level.var_ca0aefec);
-    level.var_d6c3dbb4[# "sequence2"] = arraycombine(level.var_d6c3dbb4[# "sequence1"], var_6fe4d37f, 1);
+    level.var_d6c3dbb4[#"sequence2"] = arraycombine(level.var_d6c3dbb4[#"sequence1"], var_6fe4d37f, 1);
     var_6fe4d37f = array::randomize(level.var_ca0aefec);
-    level.var_d6c3dbb4[# "sequence3"] = arraycombine(level.var_d6c3dbb4[# "sequence2"], var_6fe4d37f, 1);
+    level.var_d6c3dbb4[#"sequence3"] = arraycombine(level.var_d6c3dbb4[#"sequence2"], var_6fe4d37f, 1);
   }
 
   function_a73a327a(2);
@@ -2130,9 +2130,9 @@ function function_920c7b4b() {
 
   for(i = 1; i <= 3; i++) {
     level.var_1e36d56 = 0;
-    function_33cf6f75(level.var_d6c3dbb4[# "sequence" + i], 0);
+    function_33cf6f75(level.var_d6c3dbb4[#"sequence" + i], 0);
     wait 1;
-    function_33cf6f75(level.var_d6c3dbb4[# "sequence" + i], undefined, 1);
+    function_33cf6f75(level.var_d6c3dbb4[#"sequence" + i], undefined, 1);
     array::thread_all(level.var_ca0aefec, &function_7d36e498);
     level thread function_7921db45(i);
     level waittill(#"hash_70d8384a35c119f4");
@@ -2254,7 +2254,7 @@ function function_7921db45(index) {
     waitresult = level waittill(#"hash_452cf48337ae8aff");
     entity = waitresult.entity;
 
-    if(entity === level.var_d6c3dbb4[# "sequence" + index][level.var_1e36d56]) {
+    if(entity === level.var_d6c3dbb4[#"sequence" + index][level.var_1e36d56]) {
       s_screen = struct::get(entity.target, "targetname");
 
       if(!isDefined(s_screen.mdl)) {
@@ -2262,8 +2262,8 @@ function function_7921db45(index) {
         level thread function_c690f49d(s_screen);
       }
 
-      if(level.var_1e36d56 > 0 && entity != level.var_d6c3dbb4[# "sequence" + index][level.var_1e36d56 - 1]) {
-        var_75afea3b = level.var_d6c3dbb4[# "sequence" + index][level.var_1e36d56 - 1];
+      if(level.var_1e36d56 > 0 && entity != level.var_d6c3dbb4[#"sequence" + index][level.var_1e36d56 - 1]) {
+        var_75afea3b = level.var_d6c3dbb4[#"sequence" + index][level.var_1e36d56 - 1];
         var_26be52fa = struct::get(var_75afea3b.target, "targetname");
 
         if(isDefined(var_26be52fa.mdl)) {
@@ -2276,7 +2276,7 @@ function function_7921db45(index) {
         }
       }
 
-      if(level.var_d6c3dbb4[# "sequence" + index].size - 1 === level.var_1e36d56) {
+      if(level.var_d6c3dbb4[#"sequence" + index].size - 1 === level.var_1e36d56) {
         level notify(#"hash_70d8384a35c119f4");
         break;
       }
@@ -2342,7 +2342,7 @@ function function_4d5c7397(var_a276c861) {
 
   level thread function_2a0666fe(level.var_72e30665);
   level thread function_dd67f40a();
-  level flag::wait_till_any([# "hash_2272df43583cd34a", #"hash_2e2d9dcbebc02d13"]);
+  level flag::wait_till_any([#"hash_2272df43583cd34a", #"hash_2e2d9dcbebc02d13"]);
 
   iprintlnbold("<dev string:x213>");
 
@@ -2758,8 +2758,8 @@ function function_6d122cef(v_origin) {
     new_vector = (var_e9104764, var_a3b7bcb0, v_origin[2]);
     traceresult = groundtrace(new_vector, new_vector + (0, 0, -100), 0, 0);
 
-    if(isDefined(traceresult[# "position"])) {
-      var_bf1cc8e2 = traceresult[# "position"];
+    if(isDefined(traceresult[#"position"])) {
+      var_bf1cc8e2 = traceresult[#"position"];
     }
 
     spawn_loc = getclosestpointonnavmesh(var_bf1cc8e2, 100, 15);

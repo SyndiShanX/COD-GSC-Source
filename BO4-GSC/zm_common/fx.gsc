@@ -128,6 +128,6 @@ gunfireloopfxvecthread(fxid, fxpos, fxpos2, shotsmin, shotsmax, shotdelaymin, sh
 }
 
 grenadeexplosionfx(pos) {
-  playFX(level._effect[# "mechanical explosion"], pos);
+  playFX(level._effect[#"mechanical explosion"], pos);
   earthquake(0.15, 0.5, pos, 250);
 }

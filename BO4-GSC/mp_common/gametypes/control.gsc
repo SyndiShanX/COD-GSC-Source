@@ -94,9 +94,9 @@ event_handler[gametype_init] main(eventstruct) {
   level.audiocues = [];
   level.mission_bundle = getscriptbundle("mission_settings_control");
   globallogic_spawn::addsupportedspawnpointtype("control");
-  game.strings[# "hash_bab7f2001813aa7"] = # "hash_15294f07ee519376";
-  game.strings[# "hash_5db475ae2d5164e1"] = # "hash_3a9b595d0bf81f13";
-  hud_message::function_36419c2(1, game.strings[# "hash_bab7f2001813aa7"], game.strings[# "hash_5db475ae2d5164e1"]);
+  game.strings[#"hash_bab7f2001813aa7"] = # "hash_15294f07ee519376";
+  game.strings[#"hash_5db475ae2d5164e1"] = # "hash_3a9b595d0bf81f13";
+  hud_message::function_36419c2(1, game.strings[#"hash_bab7f2001813aa7"], game.strings[#"hash_5db475ae2d5164e1"]);
   level.audioplaybackthrottle = int(level.mission_bundle.msaudioplaybackthrottle);
 
   if(!isDefined(level.audioplaybackthrottle)) {
@@ -239,7 +239,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
   var_1cfdf798 = isDefined(victim.lastattacker) ? victim.lastattacker === attacker : 0;
 
-  if(!isPlayer(attacker) || level.capturetime && victim function_d126ce1b() && attacker function_d126ce1b() || attacker.pers[# "team"] == victim.pers[# "team"]) {
+  if(!isPlayer(attacker) || level.capturetime && victim function_d126ce1b() && attacker function_d126ce1b() || attacker.pers[#"team"] == victim.pers[#"team"]) {
     if(var_376742ed) {
       victim function_580fd2d5(attacker, weapon);
     }
@@ -274,10 +274,10 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
   if(!victim function_d126ce1b() || level.capturetime == 0 && victim istouching(zone.trigger)) {
     attacker challenges::function_2f462ffd(victim, weapon, einflictor, zone.gameobject);
-    attacker.pers[# "objectiveekia"]++;
-    attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-    attacker.pers[# "objectives"]++;
-    attacker.objectives = attacker.pers[# "objectives"];
+    attacker.pers[#"objectiveekia"]++;
+    attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+    attacker.pers[#"objectives"]++;
+    attacker.objectives = attacker.pers[#"objectives"];
 
     if(victim.team == game.attackers && attacker.team == game.defenders) {
       attacker thread challenges::killedbaseoffender(zone.gameobject, weapon, einflictor);
@@ -323,7 +323,7 @@ on_player_killed(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shi
     return;
   }
 
-  if(attacker != self && isDefined(self.pers) && self.pers[# "lives"] == 0 && attacker.team != self.team) {
+  if(attacker != self && isDefined(self.pers) && self.pers[#"lives"] == 0 && attacker.team != self.team) {
     scoreevents::processscoreevent(#"eliminated_enemy", attacker, self, weapon);
 
     if(!isDefined(level.var_c473f6ca)) {
@@ -343,15 +343,15 @@ on_player_killed(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shi
 }
 
 function_a800815(victim, attacker) {
-  if(!isDefined(victim.pers) || !isDefined(victim.pers[# "team"])) {
+  if(!isDefined(victim.pers) || !isDefined(victim.pers[#"team"])) {
     return false;
   }
 
-  if(!isDefined(attacker.pers) || !isDefined(attacker.pers[# "team"])) {
+  if(!isDefined(attacker.pers) || !isDefined(attacker.pers[#"team"])) {
     return false;
   }
 
-  if(isDefined(victim.touchtriggers) && victim.touchtriggers.size && attacker.pers[# "team"] != victim.pers[# "team"] && victim.pers[# "team"] == game.attackers) {
+  if(isDefined(victim.touchtriggers) && victim.touchtriggers.size && attacker.pers[#"team"] != victim.pers[#"team"] && victim.pers[#"team"] == game.attackers) {
     triggerids = getarraykeys(victim.touchtriggers);
     zone = victim.touchtriggers[triggerids[0]].useobj;
 
@@ -1043,7 +1043,7 @@ on_zone_capture(sentient) {
       for(index = 0; index < level.players.size; index++) {
         player = level.players[index];
 
-        if(player.pers[# "team"] == team) {
+        if(player.pers[#"team"] == team) {
           if(player.lastkilltime + 500 > gettime()) {
             player challenges::killedlastcontester();
           }
@@ -1131,7 +1131,7 @@ on_zone_capture_neutral(sentient) {
       for(index = 0; index < level.players.size; index++) {
         player = level.players[index];
 
-        if(player.pers[# "team"] == team) {
+        if(player.pers[#"team"] == team) {
           if(player.lastkilltime + 500 > gettime()) {
             player challenges::killedlastcontester();
           }
@@ -1230,13 +1230,13 @@ credit_player(player, string, capturetime, capture_team, lastcaptureteam, var_a8
       level thread popups::displayteammessagetoall(string, player);
     }
 
-    if(isDefined(player.pers[# "captures"])) {
-      player.pers[# "captures"]++;
-      player.captures = player.pers[# "captures"];
+    if(isDefined(player.pers[#"captures"])) {
+      player.pers[#"captures"]++;
+      player.captures = player.pers[#"captures"];
     }
 
-    player.pers[# "objectives"]++;
-    player.objectives = player.pers[# "objectives"];
+    player.pers[#"objectives"]++;
+    player.objectives = player.pers[#"objectives"];
 
     if(level.warstarttime + 500 > capturetime) {
       player challenges::immediatecapture();
@@ -1318,9 +1318,9 @@ award_capture_points(team) {
           continue;
         }
 
-        if(isDefined(player.pers[# "objtime"])) {
-          player.pers[# "objtime"]++;
-          player.objtime = player.pers[# "objtime"];
+        if(isDefined(player.pers[#"objtime"])) {
+          player.pers[#"objtime"]++;
+          player.objtime = player.pers[#"objtime"];
         }
 
         player stats::function_bb7eedf0(#"objective_time", 1);
@@ -1434,7 +1434,7 @@ player_use_loop(gameobject) {
     }
 
     if(isDefined(gameobject.userate) && gameobject.userate != 0 && gameobject.claimteam != "none") {
-      if(any_capture_progress && player.pers[# "team"] == game.attackers && attacker_capture_multiplier > fast_capture_threshold) {
+      if(any_capture_progress && player.pers[#"team"] == game.attackers && attacker_capture_multiplier > fast_capture_threshold) {
         scoreevents::processscoreevent(#"fast_capture_progress", player, undefined, undefined);
         continue;
       }
@@ -1451,9 +1451,9 @@ on_begin_use(sentient) {
     ownerteam = self gameobjects::get_owner_team();
 
     if(ownerteam == # "neutral") {
-      sentient thread battlechatter::gametype_specific_battle_chatter("hq_protect", sentient.pers[# "team"]);
+      sentient thread battlechatter::gametype_specific_battle_chatter("hq_protect", sentient.pers[#"team"]);
     } else {
-      sentient thread battlechatter::gametype_specific_battle_chatter("hq_attack", sentient.pers[# "team"]);
+      sentient thread battlechatter::gametype_specific_battle_chatter("hq_attack", sentient.pers[#"team"]);
     }
   }
 
@@ -1567,8 +1567,8 @@ update_caps_per_minute(lastownerteam) {
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
-    minutespassed = self.timeplayed[# "total"] / 60;
+  if(isPlayer(self) && isDefined(self.timeplayed[#"total"])) {
+    minutespassed = self.timeplayed[#"total"] / 60;
   }
 
   self.capsperminute = self.numcaps / minutespassed;
@@ -1845,8 +1845,8 @@ function_caff2d60() {
 
 function_68387604(var_c1e98979) {
   gamemodedata = spawnStruct();
-  gamemodedata.var_20de6a02 = game.lives[# "allies"];
-  gamemodedata.var_be1de2ab = game.lives[# "axis"];
+  gamemodedata.var_20de6a02 = game.lives[#"allies"];
+  gamemodedata.var_be1de2ab = game.lives[#"axis"];
 
   switch (var_c1e98979) {
     case 2:

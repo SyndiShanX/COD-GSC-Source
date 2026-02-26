@@ -52,11 +52,11 @@ additional_primary_weapon_precache() {
     return;
   }
 
-  level._effect[# "additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
-  level.machine_assets[# "specialty_additionalprimaryweapon"] = spawnStruct();
-  level.machine_assets[# "specialty_additionalprimaryweapon"].weapon = getweapon("zombie_perk_bottle_additionalprimaryweapon");
-  level.machine_assets[# "specialty_additionalprimaryweapon"].off_model = "p7_zm_vending_three_gun";
-  level.machine_assets[# "specialty_additionalprimaryweapon"].on_model = "p7_zm_vending_three_gun";
+  level._effect[#"additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
+  level.machine_assets[#"specialty_additionalprimaryweapon"] = spawnStruct();
+  level.machine_assets[#"specialty_additionalprimaryweapon"].weapon = getweapon("zombie_perk_bottle_additionalprimaryweapon");
+  level.machine_assets[#"specialty_additionalprimaryweapon"].off_model = "p7_zm_vending_three_gun";
+  level.machine_assets[#"specialty_additionalprimaryweapon"].on_model = "p7_zm_vending_three_gun";
 }
 
 additional_primary_weapon_register_clientfield() {

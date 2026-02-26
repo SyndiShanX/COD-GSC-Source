@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "spike_charge_siegebot_light"] = # "light/fx_light_red_spike_charge_os";
+  level._effect[#"spike_charge_siegebot_light"] = # "light/fx_light_red_spike_charge_os";
   callback::add_weapon_type(#"spike_charge_siegebot", &spawned);
   callback::add_weapon_type(#"spike_charge_siegebot_theia", &spawned);
   callback::add_weapon_type(#"siegebot_launcher_turret", &spawned);
@@ -42,7 +42,7 @@ fx_think(localclientnum) {
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "spike_charge_siegebot_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"spike_charge_siegebot_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

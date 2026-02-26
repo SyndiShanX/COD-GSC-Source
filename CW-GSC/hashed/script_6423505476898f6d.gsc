@@ -139,7 +139,7 @@ function private yaw_collision_check(yaw, var_b6cc4c20, content_override) {
   mins = (-6, -6, 0);
   maxs = (6, 6, 40);
   var_84a65cf6 = physicstrace(start, end, mins, maxs, self.m_e_door, 1 | 8);
-  var_fe34498d = distance2d(start, var_84a65cf6[# "position"]);
+  var_fe34498d = distance2d(start, var_84a65cf6[#"position"]);
 
   if(getdvarint(#"hash_5171254138328d84") == 2) {
     var_816ef68c = 200;
@@ -163,10 +163,10 @@ function private yaw_collision_check(yaw, var_b6cc4c20, content_override) {
     var_5bdd16d1 = basestart + self doors::function_eea7cdb4(trace_angles) * self.var_e9da41b9;
     line(basestart, var_5bdd16d1, (1, 1, 1), 1, 0, var_816ef68c);
     print3d(var_5bdd16d1, var_b6cc4c20 + "<dev string:xdf>", color, 1, 0.05, var_816ef68c);
-    line(start, var_84a65cf6[# "position"], color, 0.5, 0, var_816ef68c);
+    line(start, var_84a65cf6[#"position"], color, 0.5, 0, var_816ef68c);
 
-    if(var_84a65cf6[# "fraction"] < 1) {
-      line(var_84a65cf6[# "position"], end, color * 0.3, 0.5, 0, var_816ef68c);
+    if(var_84a65cf6[#"fraction"] < 1) {
+      line(var_84a65cf6[#"position"], end, color * 0.3, 0.5, 0, var_816ef68c);
     }
 
     print3d(start, "<dev string:xe7>" + self.traces, color, 1, 0.05, var_816ef68c);
@@ -175,7 +175,7 @@ function private yaw_collision_check(yaw, var_b6cc4c20, content_override) {
   if(var_fe34498d > 3) {
     start = basestart + self doors::function_eea7cdb4(trace_angles) * self.var_e9da41b9 * 0.9;
     var_5124c314 = physicstrace(start, end, mins, maxs, self.m_e_door, 1 | 8);
-    var_17a48baf = distance2d(start, var_5124c314[# "position"]);
+    var_17a48baf = distance2d(start, var_5124c314[#"position"]);
 
     if(getdvarint(#"hash_5171254138328d84") == 2) {
       self.traces++;
@@ -189,10 +189,10 @@ function private yaw_collision_check(yaw, var_b6cc4c20, content_override) {
         color = (1, 1, 0);
       }
 
-      line(start, var_5124c314[# "position"], color, 0.5, 0, var_816ef68c);
+      line(start, var_5124c314[#"position"], color, 0.5, 0, var_816ef68c);
 
-      if(var_5124c314[# "fraction"] < 1) {
-        line(var_5124c314[# "position"], end, color * 0.3, 0.5, 0, var_816ef68c);
+      if(var_5124c314[#"fraction"] < 1) {
+        line(var_5124c314[#"position"], end, color * 0.3, 0.5, 0, var_816ef68c);
       }
 
       print3d(start, "<dev string:xe7>" + self.traces, color, 1, 0.05, var_816ef68c);

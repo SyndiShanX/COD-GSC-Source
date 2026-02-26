@@ -410,8 +410,8 @@ function_6d41bab8(v_pos, n_radius) {
   if(isDefined(v_pos)) {
     v_drop_point = function_9cc082d2(v_pos, 64);
 
-    if(isDefined(v_drop_point) && zm_utility::check_point_in_playable_area(v_drop_point[# "point"])) {
-      return v_drop_point[# "point"];
+    if(isDefined(v_drop_point) && zm_utility::check_point_in_playable_area(v_drop_point[#"point"])) {
+      return v_drop_point[#"point"];
     }
 
     if(!isDefined(v_drop_point) && isDefined(n_radius)) {

@@ -83,7 +83,7 @@ function get_detect_range() {
   range = level.stealth.detect.range[detection][stance];
 
   if(self flag::get("stealth_in_shadow")) {
-    range *= level.stealth.detect.range[detection][# "shadow"];
+    range *= level.stealth.detect.range[detection][#"shadow"];
     range = max(range, level.stealth.detect.minrangedarkness[detection][stance]);
   }
 
@@ -262,10 +262,10 @@ function stealthhints_thread() {
   self.stealth.hints = spawnStruct();
   self.stealth.hints.causeofdeath = undefined;
   self.stealth.hints.investigators = [];
-  self.stealth.hints.deathhints[# "footstep_sprint"] = 6;
-  self.stealth.hints.deathhints[# "gunshot"] = 8;
-  self.stealth.hints.deathhints[# "proximity_speed"] = 16;
-  self.stealth.hints.deathhints[# "sight_standing"] = 19;
+  self.stealth.hints.deathhints[#"footstep_sprint"] = 6;
+  self.stealth.hints.deathhints[#"gunshot"] = 8;
+  self.stealth.hints.deathhints[#"proximity_speed"] = 16;
+  self.stealth.hints.deathhints[#"sight_standing"] = 19;
   self childthread stealthhints_eventmonitor();
   self childthread stealthhints_deathmonitor();
   self childthread stealthhints_combatmonitor();

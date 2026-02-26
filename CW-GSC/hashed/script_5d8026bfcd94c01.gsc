@@ -79,8 +79,8 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 function onuse(player) {
   tacinsertboost = 0;
   var_5f50a7ed = 0;
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
 
   if(!util::function_fbce7263(player.team, self.victimteam)) {
     tacinsertboost = self.tacinsert;
@@ -103,8 +103,8 @@ function onuse(player) {
     self.attacker luinotifyevent(#"player_callout", 2, #"hash_75462478f6a06755", player.entnum);
   }
 
-  player.pers[# "killsconfirmed"]++;
-  player.killsconfirmed = player.pers[# "killsconfirmed"];
+  player.pers[#"killsconfirmed"]++;
+  player.killsconfirmed = player.pers[#"killsconfirmed"];
   player globallogic_score::giveteamscoreforobjective(player.team, level.teamscoreperkillconfirmed);
 
   if(!tacinsertboost) {

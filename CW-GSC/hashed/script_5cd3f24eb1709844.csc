@@ -51,7 +51,7 @@ function function_63dce83f(localclientnum, oldval, newval, bnewent, binitialsnap
     while(true) {
       var_abdb3f07 = anglesToForward(self.angles);
       trace_result = bulletTrace(self.origin, self.origin + var_abdb3f07 * 1000, 0, self);
-      var_1328f706 = trace_result[# "position"];
+      var_1328f706 = trace_result[#"position"];
       self.var_dffa7aba.origin = var_1328f706;
       waitframe(5);
     }

@@ -88,7 +88,7 @@ function_10687511(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return entity zm_utility::function_64259898(wait_locations[0].origin, 128);

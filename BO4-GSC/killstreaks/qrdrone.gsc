@@ -31,36 +31,36 @@ init_shared() {
     level.qrdrone_vehicle = "qrdrone_mp";
     level.ai_tank_stun_fx = "killstreaks/fx_agr_emp_stun";
     level.qrdrone_minigun_flash = "weapon/fx_muz_md_rifle_3p";
-    level.qrdrone_fx[# "explode"] = "_t7/killstreaks/fx_drgnfire_explosion";
-    level._effect[# "quadrotor_nudge"] = # "hash_10f127a62acd37ee";
-    level._effect[# "quadrotor_damage"] = # "hash_2cf01c21155d889a";
-    level.qrdrone_dialog[# "launch"][0] = # "ac130_plt_yeahcleared";
-    level.qrdrone_dialog[# "launch"][1] = # "ac130_plt_rollinin";
-    level.qrdrone_dialog[# "launch"][2] = # "ac130_plt_scanrange";
-    level.qrdrone_dialog[# "out_of_range"][0] = # "ac130_plt_cleanup";
-    level.qrdrone_dialog[# "out_of_range"][1] = # "ac130_plt_targetreset";
-    level.qrdrone_dialog[# "track"][0] = # "ac130_fco_moreenemy";
-    level.qrdrone_dialog[# "track"][1] = # "ac130_fco_getthatguy";
-    level.qrdrone_dialog[# "track"][2] = # "ac130_fco_guymovin";
-    level.qrdrone_dialog[# "track"][3] = # "ac130_fco_getperson";
-    level.qrdrone_dialog[# "track"][4] = # "ac130_fco_guyrunnin";
-    level.qrdrone_dialog[# "track"][5] = # "ac130_fco_gotarunner";
-    level.qrdrone_dialog[# "track"][6] = # "ac130_fco_backonthose";
-    level.qrdrone_dialog[# "track"][7] = # "ac130_fco_gonnagethim";
-    level.qrdrone_dialog[# "track"][8] = # "ac130_fco_personnelthere";
-    level.qrdrone_dialog[# "track"][9] = # "ac130_fco_rightthere";
-    level.qrdrone_dialog[# "track"][10] = # "ac130_fco_tracking";
-    level.qrdrone_dialog[# "tag"][0] = # "ac130_fco_nice";
-    level.qrdrone_dialog[# "tag"][1] = # "ac130_fco_yougothim";
-    level.qrdrone_dialog[# "tag"][2] = # "ac130_fco_yougothim2";
-    level.qrdrone_dialog[# "tag"][3] = # "ac130_fco_okyougothim";
-    level.qrdrone_dialog[# "assist"][0] = # "ac130_fco_goodkill";
-    level.qrdrone_dialog[# "assist"][1] = # "ac130_fco_thatsahit";
-    level.qrdrone_dialog[# "assist"][2] = # "ac130_fco_directhit";
-    level.qrdrone_dialog[# "assist"][3] = # "ac130_fco_rightontarget";
+    level.qrdrone_fx[#"explode"] = "_t7/killstreaks/fx_drgnfire_explosion";
+    level._effect[#"quadrotor_nudge"] = # "hash_10f127a62acd37ee";
+    level._effect[#"quadrotor_damage"] = # "hash_2cf01c21155d889a";
+    level.qrdrone_dialog[#"launch"][0] = # "ac130_plt_yeahcleared";
+    level.qrdrone_dialog[#"launch"][1] = # "ac130_plt_rollinin";
+    level.qrdrone_dialog[#"launch"][2] = # "ac130_plt_scanrange";
+    level.qrdrone_dialog[#"out_of_range"][0] = # "ac130_plt_cleanup";
+    level.qrdrone_dialog[#"out_of_range"][1] = # "ac130_plt_targetreset";
+    level.qrdrone_dialog[#"track"][0] = # "ac130_fco_moreenemy";
+    level.qrdrone_dialog[#"track"][1] = # "ac130_fco_getthatguy";
+    level.qrdrone_dialog[#"track"][2] = # "ac130_fco_guymovin";
+    level.qrdrone_dialog[#"track"][3] = # "ac130_fco_getperson";
+    level.qrdrone_dialog[#"track"][4] = # "ac130_fco_guyrunnin";
+    level.qrdrone_dialog[#"track"][5] = # "ac130_fco_gotarunner";
+    level.qrdrone_dialog[#"track"][6] = # "ac130_fco_backonthose";
+    level.qrdrone_dialog[#"track"][7] = # "ac130_fco_gonnagethim";
+    level.qrdrone_dialog[#"track"][8] = # "ac130_fco_personnelthere";
+    level.qrdrone_dialog[#"track"][9] = # "ac130_fco_rightthere";
+    level.qrdrone_dialog[#"track"][10] = # "ac130_fco_tracking";
+    level.qrdrone_dialog[#"tag"][0] = # "ac130_fco_nice";
+    level.qrdrone_dialog[#"tag"][1] = # "ac130_fco_yougothim";
+    level.qrdrone_dialog[#"tag"][2] = # "ac130_fco_yougothim2";
+    level.qrdrone_dialog[#"tag"][3] = # "ac130_fco_okyougothim";
+    level.qrdrone_dialog[#"assist"][0] = # "ac130_fco_goodkill";
+    level.qrdrone_dialog[#"assist"][1] = # "ac130_fco_thatsahit";
+    level.qrdrone_dialog[#"assist"][2] = # "ac130_fco_directhit";
+    level.qrdrone_dialog[#"assist"][3] = # "ac130_fco_rightontarget";
     level.qrdrone_lastdialogtime = 0;
     level.qrdrone_nodeployzones = getEntArray("no_vehicles", "targetname");
-    level._effect[# "qrdrone_prop"] = # "hash_5af1c94d2e2bf9f";
+    level._effect[#"qrdrone_prop"] = # "hash_5af1c94d2e2bf9f";
 
     util::set_dvar_if_unset("<dev string:x38>", 60);
 
@@ -213,9 +213,9 @@ updatecarryqrdroneplacement(carryqrdrone) {
     }
 
     placement = self canplayerplacevehicle(22, 22, 50, heightoffset, 0, 0);
-    carryqrdrone.origin = placement[# "origin"] + anglestoup(self.angles) * 27;
-    carryqrdrone.angles = placement[# "angles"];
-    carryqrdrone.canbeplaced = self isonground() && placement[# "result"] && carryqrdrone qrdrone_in_range() && !carryqrdrone isinremotenodeploy();
+    carryqrdrone.origin = placement[#"origin"] + anglestoup(self.angles) * 27;
+    carryqrdrone.angles = placement[#"angles"];
+    carryqrdrone.canbeplaced = self isonground() && placement[#"result"] && carryqrdrone qrdrone_in_range() && !carryqrdrone isinremotenodeploy();
 
     if(carryqrdrone.canbeplaced != lastcanplacecarryqrdrone) {
       if(carryqrdrone.canbeplaced) {
@@ -353,7 +353,7 @@ qrdrone_ride(lifeid, qrdrone, streakname) {
   self.restoreangles = self.angles;
   qrdrone usevehicle(self, 0);
   self util::clientnotify("qrfutz");
-  self killstreaks::play_killstreak_start_dialog("qrdrone", self.pers[# "team"]);
+  self killstreaks::play_killstreak_start_dialog("qrdrone", self.pers[#"team"]);
   self stats::function_e24eec31(getweapon(#"killstreak_qrdrone"), #"used", 1);
   self.qrdrone_ridelifeid = lifeid;
   self.qrdrone = qrdrone;
@@ -552,7 +552,7 @@ qrdrone_force_destroy() {
 
 qrdrone_get_damage_effect(health_pct) {
   if(health_pct > 0.5) {
-    return level._effect[# "quadrotor_damage"];
+    return level._effect[#"quadrotor_damage"];
   }
 
   return undefined;
@@ -795,7 +795,7 @@ qrdrone_collision() {
     if(normal[2] < 0.7) {
       self setvehvelocity(velocity + normal * 70);
       self playSound(#"veh_qrdrone_wall");
-      playFX(level._effect[# "quadrotor_nudge"], self.origin);
+      playFX(level._effect[#"quadrotor_nudge"], self.origin);
       continue;
     }
 
@@ -1048,9 +1048,9 @@ qrdrone_cleanup() {
 }
 
 qrdrone_light_fx() {
-  playFXOnTag(level.chopper_fx[# "light"][# "belly"], self, "tag_light_nose");
+  playFXOnTag(level.chopper_fx[#"light"][#"belly"], self, "tag_light_nose");
   waitframe(1);
-  playFXOnTag(level.chopper_fx[# "light"][# "tail"], self, "tag_light_tail1");
+  playFXOnTag(level.chopper_fx[#"light"][#"tail"], self, "tag_light_tail1");
 }
 
 qrdrone_dialog(dialoggroup) {
@@ -1150,7 +1150,7 @@ qrdrone_blowup(attacker, weapon) {
   physicsexplosionsphere(origin, radius, radius, 1, max_damage, min_damage);
   function_2f95a020(origin);
   playsoundatposition(#"veh_qrdrone_explo", self.origin);
-  playFX(level.qrdrone_fx[# "explode"], explosionorigin, (0, 0, 1));
+  playFX(level.qrdrone_fx[#"explode"], explosionorigin, (0, 0, 1));
   self hide();
 
   if(isDefined(self.owner)) {

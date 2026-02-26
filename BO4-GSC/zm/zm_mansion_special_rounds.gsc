@@ -154,8 +154,8 @@ function_ffa01525() {
 }
 
 function_e1c262fb(entity) {
-  if(isDefined(level.zm_loc_types[# "dog_location"]) && level.zm_loc_types[# "dog_location"].size >= 1) {
-    a_locs = array::randomize(level.zm_loc_types[# "dog_location"]);
+  if(isDefined(level.zm_loc_types[#"dog_location"]) && level.zm_loc_types[#"dog_location"].size >= 1) {
+    a_locs = array::randomize(level.zm_loc_types[#"dog_location"]);
   } else {
     a_locs = struct::get_array("dog_location", "script_noteworthy");
     a_locs = array::randomize(a_locs);
@@ -211,8 +211,8 @@ function_c79d744e(s_spawn_loc) {
 
 function_d075d6e9() {
   if(!getdvarint(#"hash_331b448d3ef91baf", 0)) {
-    if(isDefined(level.zm_loc_types[# "bat_location"]) && level.zm_loc_types[# "bat_location"].size > 0) {
-      a_locs = array::randomize(level.zm_loc_types[# "bat_location"]);
+    if(isDefined(level.zm_loc_types[#"bat_location"]) && level.zm_loc_types[#"bat_location"].size > 0) {
+      a_locs = array::randomize(level.zm_loc_types[#"bat_location"]);
       s_loc = function_5618c56d(a_locs);
       return s_loc;
     }

@@ -59,16 +59,16 @@ function zombie_override_burn_fx(localclientnum) {
       self._effect = [];
     }
 
-    level._effect[# "fire_zombie_j_elbow_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
-    level._effect[# "fire_zombie_j_elbow_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
-    level._effect[# "fire_zombie_j_shoulder_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
-    level._effect[# "fire_zombie_j_shoulder_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
-    level._effect[# "fire_zombie_j_spine4_loop"] = # "fire/fx_fire_ai_human_torso_loop";
-    level._effect[# "fire_zombie_j_hip_le_loop"] = # "fire/fx_fire_ai_human_hip_left_loop";
-    level._effect[# "fire_zombie_j_hip_ri_loop"] = # "fire/fx_fire_ai_human_hip_right_loop";
-    level._effect[# "fire_zombie_j_knee_le_loop"] = # "fire/fx_fire_ai_human_leg_left_loop";
-    level._effect[# "fire_zombie_j_knee_ri_loop"] = # "fire/fx_fire_ai_human_leg_right_loop";
-    level._effect[# "fire_zombie_j_head_loop"] = # "fire/fx_fire_ai_human_head_loop";
+    level._effect[#"fire_zombie_j_elbow_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
+    level._effect[#"fire_zombie_j_elbow_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
+    level._effect[#"fire_zombie_j_shoulder_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
+    level._effect[#"fire_zombie_j_shoulder_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
+    level._effect[#"fire_zombie_j_spine4_loop"] = # "fire/fx_fire_ai_human_torso_loop";
+    level._effect[#"fire_zombie_j_hip_le_loop"] = # "fire/fx_fire_ai_human_hip_left_loop";
+    level._effect[#"fire_zombie_j_hip_ri_loop"] = # "fire/fx_fire_ai_human_hip_right_loop";
+    level._effect[#"fire_zombie_j_knee_le_loop"] = # "fire/fx_fire_ai_human_leg_left_loop";
+    level._effect[#"fire_zombie_j_knee_ri_loop"] = # "fire/fx_fire_ai_human_leg_right_loop";
+    level._effect[#"fire_zombie_j_head_loop"] = # "fire/fx_fire_ai_human_head_loop";
   }
 }
 
@@ -193,7 +193,7 @@ function function_a17af3df(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump === 1) {
-    var_1690db4a = [# "c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"hash_ef041655f01ad34", #"hash_502c60e0a94ba04b"];
+    var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"hash_ef041655f01ad34", #"hash_502c60e0a94ba04b"];
     self stoprenderoverridebundle(#"hash_61ce0b7cea532e77");
 
     if(self.model === # "c_t9_zmb_zombie_light_body2") {

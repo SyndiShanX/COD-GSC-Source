@@ -68,7 +68,7 @@ function teamscorelimitcheck(rulescorepercent, debug_count) {
     minscorepercentageleft = 100;
 
     foreach(team, _ in level.teams) {
-      scorepercentageleft = 100 - game.stat[# "teamscores"][team] / scorelimit * 100;
+      scorepercentageleft = 100 - game.stat[#"teamscores"][team] / scorelimit * 100;
 
       if(minscorepercentageleft > scorepercentageleft) {
         minscorepercentageleft = scorepercentageleft;
@@ -159,7 +159,7 @@ function default_rules() {
     maxroundswon = 0;
 
     foreach(team, _ in level.teams) {
-      roundswon = game.stat[# "teamscores"][team];
+      roundswon = game.stat[#"teamscores"][team];
 
       if(maxroundswon < roundswon) {
         maxroundswon = roundswon;

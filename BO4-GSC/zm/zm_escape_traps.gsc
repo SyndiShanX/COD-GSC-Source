@@ -143,7 +143,7 @@ function_ea490292() {
 }
 
 activate_zm_fan_trap() {
-  level.trapped_track[# "fan"] = 1;
+  level.trapped_track[#"fan"] = 1;
   self.in_use = 1;
   self thread zm_traps::trap_damage();
   self.mdl_fan thread scene::init(#"p8_fxanim_zm_esc_trap_fan_play", self.mdl_fan);
@@ -479,7 +479,7 @@ function_39f2d90f() {
 }
 
 activate_zm_acid_trap() {
-  level.trapped_track[# "acid"] = 1;
+  level.trapped_track[#"acid"] = 1;
 
   for(i = 0; i < self.var_28ea1870.size; i++) {
     self.var_28ea1870[i] thread acid_trap_fx(self);
@@ -712,7 +712,7 @@ function_dcd775a() {
 }
 
 activate_zm_spinning_trap() {
-  level.trapped_track[# "fan"] = 1;
+  level.trapped_track[#"fan"] = 1;
   self.in_use = 1;
   self.mdl_trap thread scene::init(#"p8_fxanim_zm_esc_trap_spinning_bundle", self.mdl_trap);
   var_a5fa009d = struct::get("spinning_trap_poi", "targetname");

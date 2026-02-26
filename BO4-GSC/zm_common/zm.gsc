@@ -660,31 +660,31 @@ init_levelvars() {
   level.var_9427911d = 0;
   level.total_zombies_killed = 0;
   level.zm_loc_types = [];
-  level.zm_loc_types[# "zombie_location"] = [];
+  level.zm_loc_types[#"zombie_location"] = [];
   level.var_9b91564e = 8;
   level.zm_variant_type_max = [];
-  level.zm_variant_type_max[# "walk"] = [];
-  level.zm_variant_type_max[# "run"] = [];
-  level.zm_variant_type_max[# "sprint"] = [];
-  level.zm_variant_type_max[# "super_sprint"] = [];
-  level.zm_variant_type_max[# "walk"][# "down"] = 14;
-  level.zm_variant_type_max[# "walk"][# "up"] = 16;
-  level.zm_variant_type_max[# "run"][# "down"] = 13;
-  level.zm_variant_type_max[# "run"][# "up"] = 12;
-  level.zm_variant_type_max[# "sprint"][# "down"] = 9;
-  level.zm_variant_type_max[# "sprint"][# "up"] = 8;
-  level.zm_variant_type_max[# "super_sprint"][# "down"] = 1;
-  level.zm_variant_type_max[# "super_sprint"][# "up"] = 1;
-  level.zm_variant_type_max[# "burned"][# "down"] = 1;
-  level.zm_variant_type_max[# "burned"][# "up"] = 1;
-  level.zm_variant_type_max[# "jump_pad_super_sprint"][# "down"] = 1;
-  level.zm_variant_type_max[# "jump_pad_super_sprint"][# "up"] = 1;
+  level.zm_variant_type_max[#"walk"] = [];
+  level.zm_variant_type_max[#"run"] = [];
+  level.zm_variant_type_max[#"sprint"] = [];
+  level.zm_variant_type_max[#"super_sprint"] = [];
+  level.zm_variant_type_max[#"walk"][#"down"] = 14;
+  level.zm_variant_type_max[#"walk"][#"up"] = 16;
+  level.zm_variant_type_max[#"run"][#"down"] = 13;
+  level.zm_variant_type_max[#"run"][#"up"] = 12;
+  level.zm_variant_type_max[#"sprint"][#"down"] = 9;
+  level.zm_variant_type_max[#"sprint"][#"up"] = 8;
+  level.zm_variant_type_max[#"super_sprint"][#"down"] = 1;
+  level.zm_variant_type_max[#"super_sprint"][#"up"] = 1;
+  level.zm_variant_type_max[#"burned"][#"down"] = 1;
+  level.zm_variant_type_max[#"burned"][#"up"] = 1;
+  level.zm_variant_type_max[#"jump_pad_super_sprint"][#"down"] = 1;
+  level.zm_variant_type_max[#"jump_pad_super_sprint"][#"up"] = 1;
   level.var_d9ffddf4 = [];
-  level.var_d9ffddf4[# "walk"] = 4;
-  level.var_d9ffddf4[# "run"] = 4;
-  level.var_d9ffddf4[# "sprint"] = 4;
-  level.var_d9ffddf4[# "super_sprint"] = 4;
-  level.var_d9ffddf4[# "crawl"] = 3;
+  level.var_d9ffddf4[#"walk"] = 4;
+  level.var_d9ffddf4[#"run"] = 4;
+  level.var_d9ffddf4[#"sprint"] = 4;
+  level.var_d9ffddf4[#"super_sprint"] = 4;
+  level.var_d9ffddf4[#"crawl"] = 3;
   level.current_zombie_array = [];
   level.current_zombie_count = 0;
   level.zombie_total_subtract = 0;
@@ -733,37 +733,37 @@ function_b10f6843() {
 
 function_1442d44f() {
   var_c6ceb446 = function_268ef952();
-  zombie_utility::set_zombie_var(#"zombie_health_increase", var_c6ceb446[# "zomhealthincrease"], 0);
-  zombie_utility::set_zombie_var(#"zombie_health_increase_multiplier", var_c6ceb446[# "zomhealthincreasemult"], 1);
-  zombie_utility::set_zombie_var(#"zombie_health_start", var_c6ceb446[# "zombasehealth"], 0);
-  zombie_utility::set_zombie_var(#"hash_7d5a25e2463f7fc5", var_c6ceb446[# "zomspawndelay"], 0);
-  zombie_utility::set_zombie_var(#"zombie_new_runner_interval", var_c6ceb446[# "zomnewrunnerint"], 0);
-  zombie_utility::set_zombie_var(#"zombie_max_ai", var_c6ceb446[# "zommaxcount"], 0);
-  zombie_utility::set_zombie_var(#"zombie_ai_per_player", var_c6ceb446[# "zommaxcountperplayer"], 0);
-  zombie_utility::set_zombie_var(#"zombie_move_speed_multiplier", var_c6ceb446[# "zommovespeedmult"], 0);
-  zombie_utility::set_zombie_var(#"hash_607bc50072c2a386", var_c6ceb446[# "zomcountscalar"], 1);
-  zombie_utility::set_zombie_var(#"hash_67b3cbf79292e047", var_c6ceb446[# "zomcountsolomult"], 1);
-  zombie_utility::set_zombie_var(#"player_base_health", var_c6ceb446[# "plybasehealth"], 0);
-  zombie_utility::set_zombie_var(#"player_health_regen_rate", var_c6ceb446[# "plyhealthregenrate"], 0);
-  zombie_utility::set_zombie_var(#"player_health_regen_delay", var_c6ceb446[# "plyhealthregendelay"], 0);
-  zombie_utility::set_zombie_var(#"penalty_no_revive", var_c6ceb446[# "plypenaltynorevive"], 1);
-  zombie_utility::set_zombie_var(#"penalty_died", var_c6ceb446[# "plypenaltydeath"], 1);
-  zombie_utility::set_zombie_var(#"penalty_downed", var_c6ceb446[# "plypenaltydowned"], 1);
-  zombie_utility::set_zombie_var(#"hash_3037a1f286b662e6", var_c6ceb446[# "plypenaltydownedpointstep"], 1);
-  zombie_utility::set_zombie_var(#"hash_3098c53bba6402d3", var_c6ceb446[# "plyselfrevivecountcoop"], 0);
-  zombie_utility::set_zombie_var(#"hash_67ae1b8cbb7c985", var_c6ceb446[# "plyselfrevivecountsolo"], 0);
-  zombie_utility::set_zombie_var(#"hash_cc85b961f25c2ff", var_c6ceb446[# "plyshielddamagemult"], 1);
-  zombie_utility::set_zombie_var(#"retain_weapons", var_c6ceb446[# "plyretainweapons"], 0);
-  zombie_utility::set_zombie_var(#"perks_decay", var_c6ceb446[# "plyperksdecay"], 0);
-  zombie_utility::set_zombie_var(#"hash_1ab42b4d7db4cb3c", var_c6ceb446[# "plyxpmodfier"], 1);
-  zombie_utility::set_zombie_var(#"highlight_craftables", var_c6ceb446[# "plyhighlightcraftables"], 0);
-  zombie_utility::set_zombie_var(#"zombie_point_scalar", var_c6ceb446[# "zompointscalar"], undefined, undefined, 1);
-  zombie_utility::set_zombie_var(#"hash_3a4a041c1d674898", var_c6ceb446[# "zommixedstart"], 0);
-  zombie_utility::set_zombie_var(#"hash_762b7db4166c70aa", var_c6ceb446[# "zommixedstartsolo"], 0);
-  zombie_utility::set_zombie_var(#"hash_6eb9b2d60babd5aa", var_c6ceb446[# "zomcatalyststart"], 0);
-  zombie_utility::set_zombie_var(#"hash_376905ad360fc2e8", var_c6ceb446[# "zomcatalyststartsolo"], 0);
-  zombie_utility::set_zombie_var(#"hash_3b4ad7449c039d1b", var_c6ceb446[# "zomstokerstart"], 0);
-  zombie_utility::set_zombie_var(#"hash_2374f3ef775ac2c3", var_c6ceb446[# "zomstokerstartsolo"], 0);
+  zombie_utility::set_zombie_var(#"zombie_health_increase", var_c6ceb446[#"zomhealthincrease"], 0);
+  zombie_utility::set_zombie_var(#"zombie_health_increase_multiplier", var_c6ceb446[#"zomhealthincreasemult"], 1);
+  zombie_utility::set_zombie_var(#"zombie_health_start", var_c6ceb446[#"zombasehealth"], 0);
+  zombie_utility::set_zombie_var(#"hash_7d5a25e2463f7fc5", var_c6ceb446[#"zomspawndelay"], 0);
+  zombie_utility::set_zombie_var(#"zombie_new_runner_interval", var_c6ceb446[#"zomnewrunnerint"], 0);
+  zombie_utility::set_zombie_var(#"zombie_max_ai", var_c6ceb446[#"zommaxcount"], 0);
+  zombie_utility::set_zombie_var(#"zombie_ai_per_player", var_c6ceb446[#"zommaxcountperplayer"], 0);
+  zombie_utility::set_zombie_var(#"zombie_move_speed_multiplier", var_c6ceb446[#"zommovespeedmult"], 0);
+  zombie_utility::set_zombie_var(#"hash_607bc50072c2a386", var_c6ceb446[#"zomcountscalar"], 1);
+  zombie_utility::set_zombie_var(#"hash_67b3cbf79292e047", var_c6ceb446[#"zomcountsolomult"], 1);
+  zombie_utility::set_zombie_var(#"player_base_health", var_c6ceb446[#"plybasehealth"], 0);
+  zombie_utility::set_zombie_var(#"player_health_regen_rate", var_c6ceb446[#"plyhealthregenrate"], 0);
+  zombie_utility::set_zombie_var(#"player_health_regen_delay", var_c6ceb446[#"plyhealthregendelay"], 0);
+  zombie_utility::set_zombie_var(#"penalty_no_revive", var_c6ceb446[#"plypenaltynorevive"], 1);
+  zombie_utility::set_zombie_var(#"penalty_died", var_c6ceb446[#"plypenaltydeath"], 1);
+  zombie_utility::set_zombie_var(#"penalty_downed", var_c6ceb446[#"plypenaltydowned"], 1);
+  zombie_utility::set_zombie_var(#"hash_3037a1f286b662e6", var_c6ceb446[#"plypenaltydownedpointstep"], 1);
+  zombie_utility::set_zombie_var(#"hash_3098c53bba6402d3", var_c6ceb446[#"plyselfrevivecountcoop"], 0);
+  zombie_utility::set_zombie_var(#"hash_67ae1b8cbb7c985", var_c6ceb446[#"plyselfrevivecountsolo"], 0);
+  zombie_utility::set_zombie_var(#"hash_cc85b961f25c2ff", var_c6ceb446[#"plyshielddamagemult"], 1);
+  zombie_utility::set_zombie_var(#"retain_weapons", var_c6ceb446[#"plyretainweapons"], 0);
+  zombie_utility::set_zombie_var(#"perks_decay", var_c6ceb446[#"plyperksdecay"], 0);
+  zombie_utility::set_zombie_var(#"hash_1ab42b4d7db4cb3c", var_c6ceb446[#"plyxpmodfier"], 1);
+  zombie_utility::set_zombie_var(#"highlight_craftables", var_c6ceb446[#"plyhighlightcraftables"], 0);
+  zombie_utility::set_zombie_var(#"zombie_point_scalar", var_c6ceb446[#"zompointscalar"], undefined, undefined, 1);
+  zombie_utility::set_zombie_var(#"hash_3a4a041c1d674898", var_c6ceb446[#"zommixedstart"], 0);
+  zombie_utility::set_zombie_var(#"hash_762b7db4166c70aa", var_c6ceb446[#"zommixedstartsolo"], 0);
+  zombie_utility::set_zombie_var(#"hash_6eb9b2d60babd5aa", var_c6ceb446[#"zomcatalyststart"], 0);
+  zombie_utility::set_zombie_var(#"hash_376905ad360fc2e8", var_c6ceb446[#"zomcatalyststartsolo"], 0);
+  zombie_utility::set_zombie_var(#"hash_3b4ad7449c039d1b", var_c6ceb446[#"zomstokerstart"], 0);
+  zombie_utility::set_zombie_var(#"hash_2374f3ef775ac2c3", var_c6ceb446[#"zomstokerstartsolo"], 0);
   level flagsys::set(#"zombie_vars_init");
 }
 
@@ -910,46 +910,46 @@ init_client_field_callback_funcs() {
 
 init_fx() {
   level.createfx_callback_thread = &delete_in_createfx;
-  level._effect[# "animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[# "switch_sparks"] = # "hash_26f37488feec03c3";
-  level._effect[# "hash_4159f23a18f644a7"] = # "hash_71ed4f412b17e19e";
-  level._effect[# "fx_zombie_bar_break"] = # "hash_718a24841c1e00c9";
-  level._effect[# "fx_zombie_bar_break_lite"] = # "hash_35ee6425adf16fb6";
+  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = # "hash_26f37488feec03c3";
+  level._effect[#"hash_4159f23a18f644a7"] = # "hash_71ed4f412b17e19e";
+  level._effect[#"fx_zombie_bar_break"] = # "hash_718a24841c1e00c9";
+  level._effect[#"fx_zombie_bar_break_lite"] = # "hash_35ee6425adf16fb6";
 
   if(!(isDefined(level.fx_exclude_edge_fog) && level.fx_exclude_edge_fog)) {
-    level._effect[# "edge_fog"] = # "_t6/maps/zombie/fx_fog_zombie_amb";
+    level._effect[#"edge_fog"] = # "_t6/maps/zombie/fx_fog_zombie_amb";
   }
 
-  level._effect[# "chest_light"] = # "zombie/fx_weapon_box_open_glow_zmb";
-  level._effect[# "chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"chest_light"] = # "zombie/fx_weapon_box_open_glow_zmb";
+  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
 
   if(!(isDefined(level.fx_exclude_tesla_head_light) && level.fx_exclude_tesla_head_light)) {
-    level._effect[# "tesla_head_light"] = # "hash_757d002378ec934c";
+    level._effect[#"tesla_head_light"] = # "hash_757d002378ec934c";
   }
 
-  level._effect[# "zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
-  level._effect[# "rise_burst_water"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow_water"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "rise_dust_water"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[# "fall_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "fall_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "fall_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[# "character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
-  level._effect[# "character_fire_death_torso"] = # "hash_5686def5b4c85661";
+  level._effect[#"zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"rise_burst_water"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow_water"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust_water"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"fall_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"fall_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"fall_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
+  level._effect[#"character_fire_death_torso"] = # "hash_5686def5b4c85661";
 
   if(!(isDefined(level.fx_exclude_default_explosion) && level.fx_exclude_default_explosion)) {
-    level._effect[# "def_explosion"] = # "_t6/explosions/fx_default_explosion";
+    level._effect[#"def_explosion"] = # "_t6/explosions/fx_default_explosion";
   }
 
   if(!(isDefined(level.disable_fx_upgrade_aquired) && level.disable_fx_upgrade_aquired)) {
-    level._effect[# "upgrade_aquired"] = # "hash_359f0993cf4ebe66";
+    level._effect[#"upgrade_aquired"] = # "hash_359f0993cf4ebe66";
   }
 }
 
@@ -1955,8 +1955,8 @@ default_find_exit_point() {
   endpos = self.origin + vectorscale(away, 600);
   locs = [];
 
-  if(isDefined(level.zm_loc_types[# "wait_location"]) && level.zm_loc_types[# "wait_location"].size > 0) {
-    locs = array::randomize(level.zm_loc_types[# "wait_location"]);
+  if(isDefined(level.zm_loc_types[#"wait_location"]) && level.zm_loc_types[#"wait_location"].size > 0) {
+    locs = array::randomize(level.zm_loc_types[#"wait_location"]);
   }
 
   for(i = 0; i < locs.size; i++) {

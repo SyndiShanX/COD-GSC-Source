@@ -392,7 +392,7 @@ function set_alert_level(type, event) {
   self namespace_979752dc::set_stealth_state(type);
   self notify(#"hash_1969930500784d9a", type);
   self.alertlevel = namespace_979752dc::alertlevel_script_to_exe(type);
-  iscombat = self.alertlevelint >= level.stealth.alert_levels_exe[# "combat"];
+  iscombat = self.alertlevelint >= level.stealth.alert_levels_exe[#"combat"];
   self stealth_event::event_entity_core_set_enabled(!iscombat);
   self.ignoreexplosionevents = !iscombat;
 

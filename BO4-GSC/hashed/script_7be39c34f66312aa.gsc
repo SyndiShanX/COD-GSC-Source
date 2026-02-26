@@ -41,9 +41,9 @@ magic_box_update() {
   box_mode = "no_power";
 
   while(true) {
-    if((!level flag::get("power_on") || level flag::get("moving_chest_now")) && level.zombie_vars[# "zombie_powerup_fire_sale_on"] === 0) {
+    if((!level flag::get("power_on") || level flag::get("moving_chest_now")) && level.zombie_vars[#"zombie_powerup_fire_sale_on"] === 0) {
       box_mode = "no_power";
-    } else if(level.zombie_vars[# "zombie_powerup_fire_sale_on"] === 1) {
+    } else if(level.zombie_vars[#"zombie_powerup_fire_sale_on"] === 1) {
       box_mode = "fire_sale";
     } else {
       box_mode = "box_available";
@@ -53,7 +53,7 @@ magic_box_update() {
       case # "no_power":
         util::setclientsysstate("box_indicator", level.var_ce7f71ea);
 
-        while(!level flag::get("power_on") && level.zombie_vars[# "zombie_powerup_fire_sale_on"] == 0) {
+        while(!level flag::get("power_on") && level.zombie_vars[#"zombie_powerup_fire_sale_on"] == 0) {
           wait 0.1;
         }
 
@@ -61,7 +61,7 @@ magic_box_update() {
       case # "fire_sale":
         util::setclientsysstate("box_indicator", level.var_f6d11e0b);
 
-        while(level.zombie_vars[# "zombie_powerup_fire_sale_on"] == 1) {
+        while(level.zombie_vars[#"zombie_powerup_fire_sale_on"] == 1) {
           wait 0.1;
         }
 
@@ -73,7 +73,7 @@ magic_box_update() {
           util::setclientsysstate("box_indicator", var_7aa396b9);
         }
 
-        while(!flag::get("moving_chest_now") && level.zombie_vars[# "zombie_powerup_fire_sale_on"] == 0) {
+        while(!flag::get("moving_chest_now") && level.zombie_vars[#"zombie_powerup_fire_sale_on"] == 0) {
           wait 0.1;
         }
 

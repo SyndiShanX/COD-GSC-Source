@@ -200,7 +200,7 @@ function play_on_players(sound, team) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
 
-      if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+      if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
         player playlocalsound(sound);
       }
     }

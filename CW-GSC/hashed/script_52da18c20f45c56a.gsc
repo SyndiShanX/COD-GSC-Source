@@ -224,7 +224,7 @@ function function_2795d678(encumbered, var_165b239b, var_37e68004, allow_ads, va
         }
       }
 
-      self prompts::function_e79f51ec([# "actions", #"doors", #"body_carry"]);
+      self prompts::function_e79f51ec([#"actions", #"doors", #"body_carry"]);
       self flag::set("encumbered");
     }
 
@@ -494,7 +494,7 @@ function function_aee5f6a6(var_b56433f8) {
     pain_anim = var_b56433f8 + "_ads_pain_" + index;
   }
 
-  if(isDefined(level.player_actions.anims[# "generic"][pain_anim])) {
+  if(isDefined(level.player_actions.anims[#"generic"][pain_anim])) {
     self.takedown.body thread function_3f4de57b(pain_anim, 0);
     self.var_6639d45b function_3f4de57b(pain_anim, 0);
     loop_anim = self function_47ffa6b8(var_b56433f8);
@@ -635,19 +635,19 @@ function function_4cbb6ca7(anim_name, var_f09f326c) {
   if(!isarray(var_f09f326c)) {
     var_d89d1589 = [];
 
-    if(isDefined(level.player_actions.blend[# "generic"])) {
-      var_d89d1589[# "generic"] = level.player_actions.blend[# "generic"][anim_name];
+    if(isDefined(level.player_actions.blend[#"generic"])) {
+      var_d89d1589[#"generic"] = level.player_actions.blend[#"generic"][anim_name];
     }
 
     if(isDefined(level.player_actions.blend[player_arms.animname])) {
       var_d89d1589[player_arms.animname] = level.player_actions.blend[player_arms.animname][anim_name];
     }
 
-    level.player_actions.blend[# "generic"][anim_name] = var_f09f326c;
+    level.player_actions.blend[#"generic"][anim_name] = var_f09f326c;
     level.player_actions.blend[player_arms.animname][anim_name] = var_f09f326c;
     return var_d89d1589;
   } else {
-    level.player_actions.blend[# "generic"][anim_name] = var_f09f326c[# "generic"];
+    level.player_actions.blend[#"generic"][anim_name] = var_f09f326c[#"generic"];
     level.player_actions.blend[player_arms.animname][anim_name] = var_f09f326c[player_arms.animname];
   }
 
@@ -926,8 +926,8 @@ function gesture_stop(gesture, outtime, canceltrans) {
 
 function scene_play(scene, player, victim) {
   a_ents = [];
-  a_ents[# "player"] = player;
-  a_ents[# "victim"] = victim;
+  a_ents[#"player"] = player;
+  a_ents[#"victim"] = victim;
 
   if(isDefined(level.takedowns)) {
     level.takedowns.scene = scene;
@@ -1213,7 +1213,7 @@ function function_fdff1cf3(forwarddist = 30) {
   radius = 15;
   trace = physicstrace(start, end, (radius * -1, radius * -1, 0), (radius, radius, 70), undefined, 32 | 1, 32768 | 8388608);
 
-  if(trace[# "fraction"] == 1) {
+  if(trace[#"fraction"] == 1) {
     self.takedown.var_b187389a[forwarddist] = 1;
   }
 

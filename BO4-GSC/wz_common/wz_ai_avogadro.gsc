@@ -88,7 +88,7 @@ function_c41e67c() {
 
 function_5ff730c7() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[# "avogadro_base_itemlist_all"] = 15;
+  self.var_2cee3556[#"avogadro_base_itemlist_all"] = 15;
 }
 
 function_745e91e8(entity) {

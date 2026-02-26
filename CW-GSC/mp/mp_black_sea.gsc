@@ -110,7 +110,7 @@ function function_7f639bc1() {
 function function_c628239e(a_ents) {
   self notify("17f7b6813feb7577");
   self endon("17f7b6813feb7577");
-  var_a6eece5c = a_ents[# "raft"];
+  var_a6eece5c = a_ents[#"raft"];
   var_a6eece5c endon(#"death");
   var_a6eece5c waittill(#"hash_c29a94baff41fde");
   var_a6eece5c clientfield::set("" + # "hash_51d1d2a4c63ed960", 1);

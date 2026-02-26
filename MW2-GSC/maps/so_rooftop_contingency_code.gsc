@@ -178,22 +178,22 @@ uav_rig_aiming() {
 }
 
 // Vehicles ----------------------------------------------- setup_base_vehicles() {
-  self endon("death");
+self endon("death");
 
-  self thread maps\_remotemissile::setup_remote_missile_target();
+self thread maps\_remotemissile::setup_remote_missile_target();
 
-  //	self thread update_badplace();
-  self thread unload_when_stuck();
-  //	self thread custom_connectpaths_ondeath();
-  self thread vehicle_death_paths();
-  self waittill("unloaded");
+//	self thread update_badplace();
+self thread unload_when_stuck();
+//	self thread custom_connectpaths_ondeath();
+self thread vehicle_death_paths();
+self waittill("unloaded");
 
-  if(isDefined(self.has_target_shader)) {
-    self.has_target_shader = undefined;
-    Target_Remove(self);
-  }
+if(isDefined(self.has_target_shader)) {
+  self.has_target_shader = undefined;
+  Target_Remove(self);
+}
 
-  level.remote_missile_targets = array_remove(level.remote_missile_targets, self);
+level.remote_missile_targets = array_remove(level.remote_missile_targets, self);
 }
 
 vehicle_death_paths() {
@@ -333,36 +333,36 @@ spawn_vehicle_and_go(struct) {
 //}
 
 // HUD ---------------------------------------------------- hud_wave_num() {
-  while(1) {
-    level waittill("new_wave_started");
+while(1) {
+  level waittill("new_wave_started");
 
-    // Little delay so the "Wave Starting in..." can be removed
-    wait(1);
+  // Little delay so the "Wave Starting in..." can be removed
+  wait(1);
 
-    hud_count = undefined;
-    if(level.current_wave < get_wave_count()) {
-      hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", self);
-      hud_count = so_create_hud_item(0, so_hud_ypos(), undefined, self);
-      hud_count.alignx = "left";
+  hud_count = undefined;
+  if(level.current_wave < get_wave_count()) {
+    hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", self);
+    hud_count = so_create_hud_item(0, so_hud_ypos(), undefined, self);
+    hud_count.alignx = "left";
 
-      hud_count SetValue(level.current_wave);
-    } else {
-      hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", self);
-      hud.alignx = "center";
-    }
-
-    music_loop("so_rooftop_contingency_music", 291);
-
-    flag_wait("wave_wiped_out");
-
-    music_stop(1);
-
-    hud thread so_remove_hud_item(true);
-
-    if(isDefined(hud_count)) {
-      hud_count thread so_remove_hud_item(true);
-    }
+    hud_count SetValue(level.current_wave);
+  } else {
+    hud = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", self);
+    hud.alignx = "center";
   }
+
+  music_loop("so_rooftop_contingency_music", 291);
+
+  flag_wait("wave_wiped_out");
+
+  music_stop(1);
+
+  hud thread so_remove_hud_item(true);
+
+  if(isDefined(hud_count)) {
+    hud_count thread so_remove_hud_item(true);
+  }
+}
 }
 
 hud_hostile_count() {
@@ -589,17 +589,17 @@ hud_wave_splash(wave_num, timer) {
 }
 
 // DEBUG --------------------------------------------------- so_debug_print(msg, delay) {
-  message = "> " + msg;
+message = "> " + msg;
 
-  if(isDefined(delay)) {
-    wait delay;
-    message = "+>" + message;
-  } else {
-    message = ">>" + message;
-  }
+if(isDefined(delay)) {
+  wait delay;
+  message = "+>" + message;
+} else {
+  message = ">>" + message;
+}
 
-  if(getDvar("specialops_debug") == "1")
-    IPrintLn(message);
+if(getDvar("specialops_debug") == "1")
+  IPrintLn(message);
 }
 
 distance2d_squared(pos1, pos2) {

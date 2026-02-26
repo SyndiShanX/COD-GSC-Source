@@ -212,7 +212,7 @@ function function_3633608() {
   level endon(#"end_game", #"game_ended");
   level waittill(#"end_of_round");
   wait 2;
-  level.var_4d16d15f = array::random([# "strauss", #"carver", #"grey"]);
+  level.var_4d16d15f = array::random([#"strauss", #"carver", #"grey"]);
   level.random_vo = randomintrangeinclusive(1, 3);
 
   switch (level.var_4d16d15f) {

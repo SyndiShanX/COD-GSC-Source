@@ -981,8 +981,8 @@ function_e672cf9(e_player, var_fc074136) {
 }
 
 function_6672db20(a_ents) {
-  var_36fa84e8 = a_ents[# "fakeactor 1"];
-  var_48c0a804 = a_ents[# "fakeactor 2"];
+  var_36fa84e8 = a_ents[#"fakeactor 1"];
+  var_48c0a804 = a_ents[#"fakeactor 2"];
   var_36fa84e8 clientfield::set("" + # "hash_7692067c56d8b6cc", 1);
   var_48c0a804 clientfield::set("" + # "hash_7692067c56d8b6cc", 1);
   var_48c0a804 waittill(#"start_alpha");

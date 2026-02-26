@@ -14,6 +14,6 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   if(is_true(getgametypesetting(#"hash_cd096e90260a26b"))) {
-    level._effect[# "orb_nuke"] = "zombie/fx9_onslaught_orb_unstable_collapse";
+    level._effect[#"orb_nuke"] = "zombie/fx9_onslaught_orb_unstable_collapse";
   }
 }

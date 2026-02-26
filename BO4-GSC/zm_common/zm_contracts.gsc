@@ -201,8 +201,8 @@ function_902ef0de(var_38280f2f, delta) {
     return;
   }
 
-  target_value = self.pers[# "contracts"][var_38280f2f].target_value;
-  old_progress = isDefined(self.pers[# "contracts"][var_38280f2f].current_value) ? self.pers[# "contracts"][var_38280f2f].current_value : self.pers[# "contracts"][var_38280f2f].var_59cb904f;
+  target_value = self.pers[#"contracts"][var_38280f2f].target_value;
+  old_progress = isDefined(self.pers[#"contracts"][var_38280f2f].current_value) ? self.pers[#"contracts"][var_38280f2f].current_value : self.pers[#"contracts"][var_38280f2f].var_59cb904f;
 
   if(old_progress == target_value) {
     return;
@@ -215,7 +215,7 @@ function_902ef0de(var_38280f2f, delta) {
   }
 
   if(new_progress != old_progress) {
-    self.pers[# "contracts"][var_38280f2f].current_value = new_progress;
+    self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
@@ -223,7 +223,7 @@ function_902ef0de(var_38280f2f, delta) {
   }
 
   if(old_progress < target_value && target_value <= new_progress) {
-    self.pers[# "contracts"][var_38280f2f].var_be5bf249 = self.pers[# "time_played_total"];
+    self.pers[#"contracts"][var_38280f2f].var_be5bf249 = self.pers[#"time_played_total"];
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       zm_stats::function_ea5b4947(0);

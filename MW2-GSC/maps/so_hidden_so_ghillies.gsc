@@ -11,41 +11,41 @@
 
 // --------------------------------------------------------------------------------- //	Init
 // --------------------------------------------------------------------------------- main() {
-  level.so_compass_zoom = "far";
+level.so_compass_zoom = "far";
 
-  default_start(::start_so_hidden);
-  add_start("so_hidden", ::start_so_hidden, "SO Hidden");
-  add_start("so_hidden_ghillie_crates", ::start_so_hidden_ghillie_crates, "Ghillie - Crates");
-  add_start("so_hidden_ghillie_valley", ::start_so_hidden_ghillie_valley, "Ghillie - Valley");
-  add_start("so_hidden_patrol_church", ::start_so_hidden_patrol_church, "Patrol - Church");
-  add_start("so_hidden_patrol_houses", ::start_so_hidden_patrol_houses, "Patrol - Houses");
-  add_start("so_hidden_patrol_barn", ::start_so_hidden_patrol_barn, "Patrol - Barn");
-  add_start("so_hidden_ghillie_houses", ::start_so_hidden_ghillie_houses, "Ghillie - Houses");
+default_start(::start_so_hidden);
+add_start("so_hidden", ::start_so_hidden, "SO Hidden");
+add_start("so_hidden_ghillie_crates", ::start_so_hidden_ghillie_crates, "Ghillie - Crates");
+add_start("so_hidden_ghillie_valley", ::start_so_hidden_ghillie_valley, "Ghillie - Valley");
+add_start("so_hidden_patrol_church", ::start_so_hidden_patrol_church, "Patrol - Church");
+add_start("so_hidden_patrol_houses", ::start_so_hidden_patrol_houses, "Patrol - Houses");
+add_start("so_hidden_patrol_barn", ::start_so_hidden_patrol_barn, "Patrol - Barn");
+add_start("so_hidden_ghillie_houses", ::start_so_hidden_ghillie_houses, "Ghillie - Houses");
 
-  setsaveddvar("sm_sunShadowScale", "0.7"); // optimization
-  setsaveddvar("ui_hidemap", "1");
+setsaveddvar("sm_sunShadowScale", "0.7"); // optimization
+setsaveddvar("ui_hidemap", "1");
 
-  maps\so_hidden_so_ghillies_anim::main();
-  maps\so_ghillies_precache::main();
-  maps\createart\so_ghillies_art::main();
-  maps\so_ghillies_fx::main();
+maps\so_hidden_so_ghillies_anim::main();
+maps\so_ghillies_precache::main();
+maps\createart\so_ghillies_art::main();
+maps\so_ghillies_fx::main();
 
-  maps\_load::main();
+maps\_load::main();
 
-  thread maps\so_ghillies_amb::main();
+thread maps\so_ghillies_amb::main();
 }
 
 // --------------------------------------------------------------------------------- //	Challenge Initializations
 // --------------------------------------------------------------------------------- start_so_hidden() {
-  start_so_hidden_basics();
+start_so_hidden_basics();
 
-  thread enable_patrol_enemies_crates();
-  thread enable_ghillie_enemies_crates();
-  thread enable_ghillie_enemies_valley();
-  thread enable_patrol_enemies_church();
-  thread enable_patrol_enemies_houses();
-  thread enable_patrol_enemies_barn();
-  thread enable_ghillie_enemies_houses();
+thread enable_patrol_enemies_crates();
+thread enable_ghillie_enemies_crates();
+thread enable_ghillie_enemies_valley();
+thread enable_patrol_enemies_church();
+thread enable_patrol_enemies_houses();
+thread enable_patrol_enemies_barn();
+thread enable_ghillie_enemies_houses();
 }
 
 start_so_hidden_ghillie_crates() {
@@ -303,7 +303,7 @@ so_hidden_setup_veteran() {
 
 // --------------------------------------------------------------------------------- //	Enable/Disable events
 // --------------------------------------------------------------------------------- // --------------------------------------------------------------------------------- enable_patrol_enemies_crates() {
-  thread create_patrol_enemies("patrol_enemy_crates", "patrol_enemies_spawn_crates");
+thread create_patrol_enemies("patrol_enemy_crates", "patrol_enemies_spawn_crates");
 }
 
 enable_patrol_enemies_church() {
@@ -323,7 +323,7 @@ enable_patrol_enemies_barn() {
 }
 
 // --------------------------------------------------------------------------------- enable_ghillie_enemies_crates() {
-  thread create_ghillie_enemies("ghillie_enemy_crates", "ghillie_enemies_spawn_crates");
+thread create_ghillie_enemies("ghillie_enemy_crates", "ghillie_enemies_spawn_crates");
 }
 
 enable_ghillie_enemies_valley() {
@@ -335,7 +335,7 @@ enable_ghillie_enemies_houses() {
 }
 
 // --------------------------------------------------------------------------------- enable_stealth() {
-  thread turn_on_stealth();
+thread turn_on_stealth();
 }
 
 enable_radiation() {
@@ -343,33 +343,33 @@ enable_radiation() {
 }
 
 // --------------------------------------------------------------------------------- custom_eog_summary() {
-  enemies_left = level.enemies_spawned;
-  foreach(player in level.players) {
-    enemies_left -= player.kills_stealth;
-    enemies_left -= player.kills_nofire;
-    enemies_left -= player.kills_basic;
-  }
+enemies_left = level.enemies_spawned;
+foreach(player in level.players) {
+  enemies_left -= player.kills_stealth;
+  enemies_left -= player.kills_nofire;
+  enemies_left -= player.kills_basic;
+}
 
-  foreach(player in level.players) {
-    player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_STEALTH", player.kills_stealth);
-    player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_NOFIRE", player.kills_nofire);
-    player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_BASIC", player.kills_basic);
-    if(flag("so_hidden_complete"))
-      player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_SKIPPED", enemies_left);
-  }
+foreach(player in level.players) {
+  player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_STEALTH", player.kills_stealth);
+  player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_NOFIRE", player.kills_nofire);
+  player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_BASIC", player.kills_basic);
+  if(flag("so_hidden_complete"))
+    player add_custom_eog_summary_line("@SO_HIDDEN_SO_GHILLIES_STAT_SKIPPED", enemies_left);
+}
 }
 
 // --------------------------------------------------------------------------------- stealth_achievement() {
-  flag_wait("so_hidden_complete");
+flag_wait("so_hidden_complete");
 
-  if(!stealth_achieved()) {
-    return;
-  }
-  foreach(player in level.players) {
-    // No achievement for individual players unless they made at least one perfect kill.
-    if(player.kills_stealth > 0)
-      player maps\_utility::player_giveachievement_wrapper("WRAITH");
-  }
+if(!stealth_achieved()) {
+  return;
+}
+foreach(player in level.players) {
+  // No achievement for individual players unless they made at least one perfect kill.
+  if(player.kills_stealth > 0)
+    player maps\_utility::player_giveachievement_wrapper("WRAITH");
+}
 }
 
 stealth_achieved() {

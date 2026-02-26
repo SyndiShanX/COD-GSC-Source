@@ -135,13 +135,13 @@ function init_clientfields() {
 }
 
 function function_619f168c(a_ents) {
-  a_ents[# "hash_32bf1e4d7ae150d1"].script_friendname = "";
-  a_ents[# "hash_32bf1b4d7ae14bb8"].script_friendname = "";
-  a_ents[# "hash_32bf1c4d7ae14d6b"].script_friendname = "";
-  a_ents[# "hash_32bf214d7ae155ea"].script_friendname = "";
-  a_ents[# "ally_1"].script_friendname = "";
-  a_ents[# "ally_2"].script_friendname = "";
-  level.var_5b74d56b = [a_ents[# "hash_32bf1c4d7ae14d6b"], a_ents[# "hash_32bf214d7ae155ea"], a_ents[# "ally_1"], a_ents[# "ally_2"]];
+  a_ents[#"hash_32bf1e4d7ae150d1"].script_friendname = "";
+  a_ents[#"hash_32bf1b4d7ae14bb8"].script_friendname = "";
+  a_ents[#"hash_32bf1c4d7ae14d6b"].script_friendname = "";
+  a_ents[#"hash_32bf214d7ae155ea"].script_friendname = "";
+  a_ents[#"ally_1"].script_friendname = "";
+  a_ents[#"ally_2"].script_friendname = "";
+  level.var_5b74d56b = [a_ents[#"hash_32bf1c4d7ae14d6b"], a_ents[#"hash_32bf214d7ae155ea"], a_ents[#"ally_1"], a_ents[#"ally_2"]];
 }
 
 function function_a3927872(heli, pos) {
@@ -218,7 +218,7 @@ function function_6577ae08(skipto_end = 0) {
   actors = [];
   actors[level.player_heli.targetname] = level.player_heli;
   actors[level.var_9a3944f4.targetname] = level.var_9a3944f4;
-  actors[# "fakeplayer"] = level.fake_player;
+  actors[#"fakeplayer"] = level.fake_player;
   var_841e373 = getspawnerarray("intro_heli_crew", "script_noteworthy");
   crew = [];
 
@@ -231,7 +231,7 @@ function function_6577ae08(skipto_end = 0) {
   level.woods sethighdetail(1);
 
   foreach(a in actors) {
-    a.allowbattlechatter[# "bc"] = 0;
+    a.allowbattlechatter[#"bc"] = 0;
     a setnosunshadow();
   }
 
@@ -546,8 +546,8 @@ function function_30c1067c() {
     waitframe(1);
   }
 
-  if(isDefined(self.var_68f755af[# "loaner"])) {
-    self.var_68f755af[# "loaner"] setlightintensity(0);
+  if(isDefined(self.var_68f755af[#"loaner"])) {
+    self.var_68f755af[#"loaner"] setlightintensity(0);
   }
 }
 
@@ -556,16 +556,16 @@ function function_b7a8db11(var_6e20f48) {
 
   switch (var_6e20f48) {
     case # "tag_headlight_left_d0":
-      e_light = self.var_68f755af[# "front_left"];
+      e_light = self.var_68f755af[#"front_left"];
       break;
     case # "tag_headlight_right_d0":
-      e_light = self.var_68f755af[# "front_right"];
+      e_light = self.var_68f755af[#"front_right"];
       break;
     case # "tag_fx_tail_light_left":
-      e_light = self.var_68f755af[# "back_left"];
+      e_light = self.var_68f755af[#"back_left"];
       break;
     case # "tag_fx_tail_light_right":
-      e_light = self.var_68f755af[# "back_right"];
+      e_light = self.var_68f755af[#"back_right"];
       break;
   }
 

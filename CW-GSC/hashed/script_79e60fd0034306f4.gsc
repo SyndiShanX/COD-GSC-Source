@@ -922,7 +922,7 @@ function function_6aa51edd() {
 }
 
 function function_e5745445(a_ents) {
-  var_1257242b = a_ents[# "hash_760f1b010a2507d9"];
+  var_1257242b = a_ents[#"hash_760f1b010a2507d9"];
   level flag::wait_till("flag_warehouse_outro_volkov_killed");
   var_1257242b physicslaunch(var_1257242b.origin, (0.2, 0.2, 1));
 }

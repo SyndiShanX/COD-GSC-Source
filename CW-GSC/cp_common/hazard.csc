@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   clientfield::register("toplayer", "hazard_gas", 1, 1, "int", &hazard_gas, 0, 0);
   clientfield::register("toplayer", "hazard_gas_with_mask", 1, 1, "int", &hazard_gas_with_mask, 0, 0);
-  level._effect[# "hash_667f50f096a9a290"] = "fire/fx_fire_ai_human_head_loop";
+  level._effect[#"hash_667f50f096a9a290"] = "fire/fx_fire_ai_human_head_loop";
 }
 
 function hazard_gas(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

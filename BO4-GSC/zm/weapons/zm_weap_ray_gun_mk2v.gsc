@@ -83,14 +83,14 @@ function_8d93c592(w_curr) {
     v_position = self getweaponmuzzlepoint();
     v_forward = self getweaponforwarddir();
     a_trace = beamtrace(v_position, v_position + v_forward * 20000, 1, self);
-    var_1c218ece = a_trace[# "position"];
+    var_1c218ece = a_trace[#"position"];
 
     function_7067b673(v_position, var_1c218ece, (1, 1, 0));
     render_debug_sphere(v_position, (1, 1, 0));
     render_debug_sphere(var_1c218ece, (1, 0, 0));
 
-    if(isDefined(a_trace[# "entity"])) {
-      e_last_target = a_trace[# "entity"];
+    if(isDefined(a_trace[#"entity"])) {
+      e_last_target = a_trace[#"entity"];
 
       if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== # "allies" || isDefined(e_last_target.male_head)) {
         self thread function_5c035588(e_last_target, var_1c218ece, w_curr);

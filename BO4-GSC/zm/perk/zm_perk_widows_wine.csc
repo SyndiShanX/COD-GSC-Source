@@ -24,10 +24,10 @@ __init__() {
 
 init_widows_wine() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[# "widow_light"] = "zombie/fx_perk_widows_wine_zmb";
-    level._effect[# "winters_wail_freeze"] = "zombie/fx8_perk_winters_wail_freeze";
-    level._effect[# "winters_wail_explosion"] = "zombie/fx8_perk_winters_wail_exp";
-    level._effect[# "winters_wail_slow_field"] = "zombie/fx8_perk_winters_wail_aoe";
+    level._effect[#"widow_light"] = "zombie/fx_perk_widows_wine_zmb";
+    level._effect[#"winters_wail_freeze"] = "zombie/fx8_perk_winters_wail_freeze";
+    level._effect[#"winters_wail_explosion"] = "zombie/fx8_perk_winters_wail_exp";
+    level._effect[#"winters_wail_slow_field"] = "zombie/fx8_perk_winters_wail_aoe";
   }
 }
 
@@ -50,7 +50,7 @@ function_fd02d096(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
           str_tag = "j_spine4";
         }
 
-        self.var_ba239a31 = util::playFXOnTag(localclientnum, level._effect[# "winters_wail_freeze"], self, str_tag);
+        self.var_ba239a31 = util::playFXOnTag(localclientnum, level._effect[#"winters_wail_freeze"], self, str_tag);
       }
 
       if(!isDefined(self.sndwidowswine)) {
@@ -73,14 +73,14 @@ function_fd02d096(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 widows_wine_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(newval && isDefined(self) && isDefined(level._effect[# "winters_wail_explosion"])) {
+  if(newval && isDefined(self) && isDefined(level._effect[#"winters_wail_explosion"])) {
     origin = self gettagorigin("j_spine4");
 
     if(!isDefined(origin)) {
       origin = self.origin;
     }
 
-    playFX(localclientnum, level._effect[# "winters_wail_explosion"], origin, anglesToForward(self.angles));
+    playFX(localclientnum, level._effect[#"winters_wail_explosion"], origin, anglesToForward(self.angles));
     self playSound(localclientnum, #"hash_3b59d3c99bac4071");
   }
 }
@@ -104,7 +104,7 @@ function_c6366dbe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.var_e7addfc4[localclientnum] = util::playFXOnTag(localclientnum, level._effect[# "winters_wail_slow_field"], self, "j_spine");
+    self.var_e7addfc4[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"winters_wail_slow_field"], self, "j_spine");
     self playSound(localclientnum, #"hash_2d956dd01a5a8800");
     a_e_players = getlocalplayers();
 

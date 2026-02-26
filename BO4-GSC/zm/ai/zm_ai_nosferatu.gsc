@@ -352,8 +352,8 @@ function_74f25f8a(b_force_spawn = 0, var_eb3a8721, b_crimson = 0, round_number) 
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.nosferatu_spawn_func)) {
     s_spawn_loc = [[level.nosferatu_spawn_func]]();
-  } else if(level.zm_loc_types[# "nosferatu_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "nosferatu_location"]);
+  } else if(level.zm_loc_types[#"nosferatu_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"nosferatu_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -426,8 +426,8 @@ function_853b43e8() {
 }
 
 function_6502a84d(entity) {
-  if(isDefined(level.zm_loc_types[# "nosferatu_location"]) && level.zm_loc_types[# "nosferatu_location"].size >= 1) {
-    a_locs = array::randomize(level.zm_loc_types[# "nosferatu_location"]);
+  if(isDefined(level.zm_loc_types[#"nosferatu_location"]) && level.zm_loc_types[#"nosferatu_location"].size >= 1) {
+    a_locs = array::randomize(level.zm_loc_types[#"nosferatu_location"]);
   }
 
   if(!isDefined(a_locs) || a_locs.size == 0) {
@@ -494,7 +494,7 @@ get_favorite_enemy() {
 
 function_4c71848e() {
   self endon(#"death");
-  a_s_spawn_locs = level.zm_loc_types[# "nosferatu_location"];
+  a_s_spawn_locs = level.zm_loc_types[#"nosferatu_location"];
 
   if(isarray(a_s_spawn_locs)) {
     for(i = 0; i < a_s_spawn_locs.size; i++) {
@@ -615,8 +615,8 @@ function_7fef620b(entity) {
 }
 
 function_76d6482e(entity) {
-  if(isDefined(level.zm_loc_types[# "nosferatu_location"]) && level.zm_loc_types[# "nosferatu_location"].size >= 1) {
-    a_locs = array::randomize(level.zm_loc_types[# "nosferatu_location"]);
+  if(isDefined(level.zm_loc_types[#"nosferatu_location"]) && level.zm_loc_types[#"nosferatu_location"].size >= 1) {
+    a_locs = array::randomize(level.zm_loc_types[#"nosferatu_location"]);
   }
 
   if(!isDefined(a_locs)) {

@@ -124,7 +124,7 @@ function function_243c9d46(player) {
   actors = level.var_515a88e0;
   level.fake_player = util::spawn_player_clone(level.player);
   level.fake_player.targetname = "FakePlayer";
-  actors[# "fakeplayer"] = level.fake_player;
+  actors[#"fakeplayer"] = level.fake_player;
   level.fake_player hide();
   level thread scene::play_from_time("scene_tkd_hit3_planecrash_intro", "crash_fakeplayer", actors, 0.8, 0, 1);
   waitframe(1);

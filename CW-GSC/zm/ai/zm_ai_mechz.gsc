@@ -79,7 +79,7 @@ function function_5d873f78() {
 function private function_7f405e5e(entity) {
   e_enemy = entity.favoriteenemy;
 
-  if(isPlayer(e_enemy) && e_enemy flag::get_any([# "hash_686d5709e1566aa6", #"hash_1b361b950317ecb5"])) {
+  if(isPlayer(e_enemy) && e_enemy flag::get_any([#"hash_686d5709e1566aa6", #"hash_1b361b950317ecb5"])) {
     return;
   }
 
@@ -189,8 +189,8 @@ function spawn_single(b_force_spawn, var_eb3a8721 = 0, var_bc66d64b) {
     s_spawn_loc = var_bc66d64b;
   } else if(isDefined(level.var_e333bf92)) {
     s_spawn_loc = [[level.var_e333bf92]]();
-  } else if(level.zm_loc_types[# "zombie_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "zombie_location"]);
+  } else if(level.zm_loc_types[#"zombie_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"zombie_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -257,11 +257,11 @@ function function_33485c02() {
 }
 
 function function_65c98960(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "mechz_location"]) && level.zm_loc_types[# "mechz_location"].size) {
+  if(isDefined(level.zm_loc_types[#"mechz_location"]) && level.zm_loc_types[#"mechz_location"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "mechz_location"];
+      s_spawn_loc = level.zm_loc_types[#"mechz_location"];
     } else {
-      s_spawn_loc = array::random(level.zm_loc_types[# "mechz_location"]);
+      s_spawn_loc = array::random(level.zm_loc_types[#"mechz_location"]);
     }
   }
 

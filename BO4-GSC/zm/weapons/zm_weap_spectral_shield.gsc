@@ -812,21 +812,21 @@ function_d1a7390b(w_curr) {
     v_forward = self getweaponforwarddir();
     a_trace = beamtrace(v_position, v_position + v_forward * 416, 1, self);
 
-    if(isDefined(a_trace[# "position"])) {
-      n_dist_sq = distancesquared(self.origin, a_trace[# "position"]);
+    if(isDefined(a_trace[#"position"])) {
+      n_dist_sq = distancesquared(self.origin, a_trace[#"position"]);
 
       if(n_dist_sq > n_dist_sq_max) {
-        a_trace[# "entity"] = undefined;
+        a_trace[#"entity"] = undefined;
       }
     }
 
     ai_zombie_target = self function_f0b16c98(w_curr, n_dist_sq_max);
 
-    if(isDefined(a_trace[# "entity"]) || isDefined(ai_zombie_target)) {
+    if(isDefined(a_trace[#"entity"]) || isDefined(ai_zombie_target)) {
       if(isDefined(ai_zombie_target)) {
         self.var_f1b20bef = ai_zombie_target;
-      } else if(isDefined(a_trace[# "entity"])) {
-        self.var_f1b20bef = a_trace[# "entity"];
+      } else if(isDefined(a_trace[#"entity"])) {
+        self.var_f1b20bef = a_trace[#"entity"];
       }
 
       e_last_target = self.var_f1b20bef;
@@ -914,7 +914,7 @@ function_d1a7390b(w_curr) {
       self.var_f1b20bef = undefined;
       var_24bae834 = 0;
 
-      switch (a_trace[# "surfacetype"]) {
+      switch (a_trace[#"surfacetype"]) {
         case # "glasscar":
         case # "rock":
         case # "metal":

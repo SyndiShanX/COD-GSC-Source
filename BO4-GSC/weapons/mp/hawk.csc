@@ -249,9 +249,9 @@ function_5a1bf101(localclientnum) {
   var_8736e321 = 1;
   var_6c8b920a = [];
   stance_offsets = [];
-  stance_offsets[# "stand"] = (0, 0, 60);
-  stance_offsets[# "crouch"] = (0, 0, 40);
-  stance_offsets[# "prone"] = (0, 0, 12);
+  stance_offsets[#"stand"] = (0, 0, 60);
+  stance_offsets[#"crouch"] = (0, 0, 40);
+  stance_offsets[#"prone"] = (0, 0, 12);
 
   while(isDefined(hawk_owner) && isPlayer(hawk_owner) && hawk_owner function_21c0fa55()) {
     if(hawk_owner isremotecontrolling(localclientnum)) {
@@ -318,7 +318,7 @@ function_5a1bf101(localclientnum) {
           trace = bulletTrace(var_1d7ce7ba, target_player.origin + stance_offsets[target_player getstance()], 0, hawk_owner);
 
           if(isDefined(trace)) {
-            var_d7caaee9 = trace[# "fraction"] < 1;
+            var_d7caaee9 = trace[#"fraction"] < 1;
             setuimodelvalue(var_78e27c6d[ti], var_d7caaee9);
           }
         }

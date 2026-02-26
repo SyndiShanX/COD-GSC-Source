@@ -17,7 +17,7 @@ function function_ebf737f8(var_e11b5b56) {
   if(!namespace_61e6d095::exists(#"hash_72cc4740fa4d3da3")) {
     namespace_61e6d095::create(#"hash_72cc4740fa4d3da3", #"hash_33da613c2715b7bb");
     namespace_61e6d095::function_46df0bc7(#"hash_72cc4740fa4d3da3", 999);
-    namespace_61e6d095::function_d3c3e5c3(#"hash_72cc4740fa4d3da3", [# "interactive_map", #"dialog_tree", #"computer"]);
+    namespace_61e6d095::function_d3c3e5c3(#"hash_72cc4740fa4d3da3", [#"interactive_map", #"dialog_tree", #"computer"]);
   }
 
   namespace_61e6d095::function_9ade1d9b(#"hash_72cc4740fa4d3da3", #"hash_732287e2565c2a79", 1, 1);

@@ -10,10 +10,10 @@
 #namespace outcome;
 
 function autoexec main() {
-  level.var_9b671c3c[# "tie"] = {
+  level.var_9b671c3c[#"tie"] = {
     #flag: "tie", #code_flag: 1
   };
-  level.var_9b671c3c[# "overtime"] = {
+  level.var_9b671c3c[#"overtime"] = {
     #flag: "overtime", #code_flag: 2
   };
 }

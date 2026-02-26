@@ -26,7 +26,7 @@ enable_cooldown_perk_for_level() {
 
 init_cooldown() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[# "divetonuke_light"] = # "hash_2225287695ddf9c9";
+    level._effect[#"divetonuke_light"] = # "hash_2225287695ddf9c9";
   }
 }
 

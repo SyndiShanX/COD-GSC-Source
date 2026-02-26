@@ -206,7 +206,7 @@ function_f5c01f5() {
 }
 
 round_spawning() {
-  if(level.zm_loc_types[# "zombie_location"].size < 1) {
+  if(level.zm_loc_types[#"zombie_location"].size < 1) {
     assertmsg("<dev string:x38>");
     return;
   }
@@ -282,7 +282,7 @@ round_spawning() {
 
     level flag::wait_till("spawn_zombies");
 
-    while(level.zm_loc_types[# "zombie_location"].size <= 0) {
+    while(level.zm_loc_types[#"zombie_location"].size <= 0) {
       wait 0.1;
     }
 
@@ -462,7 +462,7 @@ run_custom_ai_spawn_checks() {
 
       if(isDefined(s.func_get_locations)) {
         a_locations = [[s.func_get_locations]]();
-        level.zm_loc_types[# "zombie_location"] = arraycombine(level.zm_loc_types[# "zombie_location"], a_locations, 0, 0);
+        level.zm_loc_types[#"zombie_location"] = arraycombine(level.zm_loc_types[#"zombie_location"], a_locations, 0, 0);
       }
 
       continue;
@@ -486,7 +486,7 @@ run_custom_ai_spawn_checks() {
       a_locations = [[s.func_get_locations]]();
 
       foreach(s_loc in a_locations) {
-        arrayremovevalue(level.zm_loc_types[# "zombie_location"], s_loc);
+        arrayremovevalue(level.zm_loc_types[#"zombie_location"], s_loc);
       }
     }
   }
@@ -504,7 +504,7 @@ register_custom_ai_spawn_check(str_id, func_check, func_get_spawners, func_get_l
 
 round_spawning_test() {
   while(true) {
-    spawn_point = array::random(level.zm_loc_types[# "zombie_location"]);
+    spawn_point = array::random(level.zm_loc_types[#"zombie_location"]);
     spawner = array::random(level.zombie_spawners);
     ai = zombie_utility::spawn_zombie(spawner, spawner.targetname, spawn_point);
     ai waittill(#"death");
@@ -641,15 +641,15 @@ round_over() {
   players = getplayers();
 
   for(player_index = 0; player_index < players.size; player_index++) {
-    if(!isDefined(players[player_index].pers[# "previous_distance_traveled"])) {
-      players[player_index].pers[# "previous_distance_traveled"] = 0;
+    if(!isDefined(players[player_index].pers[#"previous_distance_traveled"])) {
+      players[player_index].pers[#"previous_distance_traveled"] = 0;
     }
 
-    distancethisround = int(players[player_index].pers[# "distance_traveled"] - players[player_index].pers[# "previous_distance_traveled"]);
-    players[player_index].pers[# "previous_distance_traveled"] = players[player_index].pers[# "distance_traveled"];
+    distancethisround = int(players[player_index].pers[#"distance_traveled"] - players[player_index].pers[#"previous_distance_traveled"]);
+    players[player_index].pers[#"previous_distance_traveled"] = players[player_index].pers[#"distance_traveled"];
     players[player_index] incrementplayerstat("distance_traveled", distancethisround);
 
-    if(players[player_index].pers[# "team"] != "spectator") {
+    if(players[player_index].pers[#"team"] != "spectator") {
       players[player_index] recordroundendstats();
     }
   }
@@ -771,7 +771,7 @@ round_think(restart = 0) {
     println("<dev string:x106>" + level.round_number + "<dev string:x122>" + level.players.size);
     level.round_start_time = gettime();
 
-    while(level.zm_loc_types[# "zombie_location"].size <= 0) {
+    while(level.zm_loc_types[#"zombie_location"].size <= 0) {
       wait 0.1;
     }
 

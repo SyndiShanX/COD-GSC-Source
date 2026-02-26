@@ -424,7 +424,7 @@ machine_selector() {
   }
 }
 
-#include_perk_in_random_rotation(perk) {
+include_perk_in_random_rotation(perk) {
   if(!isDefined(level._random_perk_machine_perk_list))
     level._random_perk_machine_perk_list = [];
 

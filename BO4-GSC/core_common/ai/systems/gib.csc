@@ -310,7 +310,7 @@ _gibentity(localclientnum, gibflags, shouldspawngibs) {
       if(currentgibflag == 2) {
         if(isPlayer(entity) || entity isplayercorpse()) {
           var_c0c9eae3 = entity function_4976d5ee();
-          _playgibfx(localclientnum, entity, var_c0c9eae3[# "fx"], var_c0c9eae3[# "tag"]);
+          _playgibfx(localclientnum, entity, var_c0c9eae3[#"fx"], var_c0c9eae3[#"tag"]);
         } else {
           gibpiece = function_69db754(entity, currentgibflag);
 

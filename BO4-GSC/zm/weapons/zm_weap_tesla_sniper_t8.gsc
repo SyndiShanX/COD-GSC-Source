@@ -164,11 +164,11 @@ function_bd5b7309(player, var_fb0999c0) {
     return;
   }
 
-  if(isDefined(level.aat[# "zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) && level.aat[# "zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) {
+  if(isDefined(level.aat[#"zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) && level.aat[#"zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) {
     return;
   }
 
-  if(self == var_fb0999c0 && isDefined(level.aat[# "zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) && level.aat[# "zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) {
+  if(self == var_fb0999c0 && isDefined(level.aat[#"zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) && level.aat[#"zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) {
     return;
   }
 

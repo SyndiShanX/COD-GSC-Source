@@ -42,7 +42,7 @@ function private preinit() {
   namespace_1b527536::function_dbd391bf(#"aether_shroud_3", &function_84c43da8);
   namespace_1b527536::function_dbd391bf(#"aether_shroud_4", &function_84c43da8);
   namespace_1b527536::function_dbd391bf(#"aether_shroud_5", &function_84c43da8);
-  level.var_e163165b = [# "ww_ieu_electric_t9"];
+  level.var_e163165b = [#"ww_ieu_electric_t9"];
 
   level thread function_e41cc86b();
 }
@@ -277,7 +277,7 @@ function function_c5e5e928(var_e14b4254) {
   for(i = 1; i <= 10; i++) {
     var_92848b84 = i / 10 * var_e14b4254;
     v_point = self getplayercamerapos() + anglesToForward(v_angles) * var_92848b84;
-    v_point = groundtrace(v_point + (0, 0, 8), v_point + (0, 0, -100000), 0, self)[# "position"];
+    v_point = groundtrace(v_point + (0, 0, 8), v_point + (0, 0, -100000), 0, self)[#"position"];
 
     if(!isDefined(a_v_points)) {
       a_v_points = [];
@@ -295,8 +295,8 @@ function function_c5e5e928(var_e14b4254) {
       if(ispointonnavmesh(v_dest, 15) && self util::is_player_looking_at(v_dest, 0.8, 0, self) && !function_83407b23(v_dest)) {
         v_dest = function_9cc082d2(v_dest, 128);
 
-        if(isDefined(v_dest) && namespace_d0ab5955::function_3824d2dc(v_dest[# "point"]) && function_2e44fb9a(v_dest[# "point"])) {
-          v_teleport = v_dest[# "point"];
+        if(isDefined(v_dest) && namespace_d0ab5955::function_3824d2dc(v_dest[#"point"]) && function_2e44fb9a(v_dest[#"point"])) {
+          v_teleport = v_dest[#"point"];
           break;
         }
       }
@@ -308,8 +308,8 @@ function function_c5e5e928(var_e14b4254) {
       if(ispointonnavmesh(v_dest, 15) && self util::is_player_looking_at(v_dest, 0.8, 0, self) && death_circle::function_a086017a(v_dest) && !function_83407b23(v_dest)) {
         v_dest = function_9cc082d2(v_dest, 128);
 
-        if(isDefined(v_dest) && function_2e44fb9a(v_dest[# "point"])) {
-          v_teleport = v_dest[# "point"];
+        if(isDefined(v_dest) && function_2e44fb9a(v_dest[#"point"])) {
+          v_teleport = v_dest[#"point"];
           break;
         }
       }
@@ -321,8 +321,8 @@ function function_c5e5e928(var_e14b4254) {
       if(zm_utility::check_point_in_playable_area(v_dest) && zm_utility::check_point_in_enabled_zone(v_dest) && ispointonnavmesh(v_dest, 15) && self util::is_player_looking_at(v_dest, 0.8, 0, self) && !function_83407b23(v_dest)) {
         v_dest = function_9cc082d2(v_dest, 128);
 
-        if(isDefined(v_dest) && function_2e44fb9a(v_dest[# "point"])) {
-          v_teleport = v_dest[# "point"];
+        if(isDefined(v_dest) && function_2e44fb9a(v_dest[#"point"])) {
+          v_teleport = v_dest[#"point"];
           break;
         }
       }
@@ -347,7 +347,7 @@ function private function_2e44fb9a(var_ab528fee) {
   v_trace_start = var_ab528fee + (0, 0, 70);
   trace = physicstraceex(v_trace_start, var_ab528fee);
 
-  if(trace[# "fraction"] < 0.99) {
+  if(trace[#"fraction"] < 0.99) {
     return false;
   }
 

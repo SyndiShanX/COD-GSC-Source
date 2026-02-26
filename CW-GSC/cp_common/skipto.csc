@@ -241,22 +241,22 @@ function function_a59cd1c9() {
             continue;
           }
 
-          if(!isDefined(level.var_c55064fd[# "_default"].next)) {
-            level.var_c55064fd[# "_default"].next = [];
-          } else if(!isarray(level.var_c55064fd[# "_default"].next)) {
-            level.var_c55064fd[# "_default"].next = array(level.var_c55064fd[# "_default"].next);
+          if(!isDefined(level.var_c55064fd[#"_default"].next)) {
+            level.var_c55064fd[#"_default"].next = [];
+          } else if(!isarray(level.var_c55064fd[#"_default"].next)) {
+            level.var_c55064fd[#"_default"].next = array(level.var_c55064fd[#"_default"].next);
           }
 
-          level.var_c55064fd[# "_default"].next[level.var_c55064fd[# "_default"].next.size] = struct.name;
+          level.var_c55064fd[#"_default"].next[level.var_c55064fd[#"_default"].next.size] = struct.name;
         }
       } else {
-        if(!isDefined(level.var_c55064fd[# "_default"].next)) {
-          level.var_c55064fd[# "_default"].next = [];
-        } else if(!isarray(level.var_c55064fd[# "_default"].next)) {
-          level.var_c55064fd[# "_default"].next = array(level.var_c55064fd[# "_default"].next);
+        if(!isDefined(level.var_c55064fd[#"_default"].next)) {
+          level.var_c55064fd[#"_default"].next = [];
+        } else if(!isarray(level.var_c55064fd[#"_default"].next)) {
+          level.var_c55064fd[#"_default"].next = array(level.var_c55064fd[#"_default"].next);
         }
 
-        level.var_c55064fd[# "_default"].next[level.var_c55064fd[# "_default"].next.size] = struct.name;
+        level.var_c55064fd[#"_default"].next[level.var_c55064fd[#"_default"].next.size] = struct.name;
       }
 
       foreach(var_89f09f8d in struct.var_89f09f8d) {

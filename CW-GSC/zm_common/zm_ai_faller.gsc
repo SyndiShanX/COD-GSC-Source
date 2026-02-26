@@ -361,7 +361,7 @@ function zombie_fall_get_vicitims(spot) {
 }
 
 function get_fall_anim(spot) {
-  return level._zombie_fall_anims[self.animname][# "fall"];
+  return level._zombie_fall_anims[self.animname][#"fall"];
 }
 
 function zombie_faller_enable_location() {
@@ -431,9 +431,9 @@ function zombie_fall_fx(spot) {
 
 function zombie_fall_burst_fx() {
   self endon(#"stop_zombie_fall_fx", #"fall_anim_finished");
-  playFX(level._effect[# "rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
+  playFX(level._effect[#"rise_burst"], self.origin + (0, 0, randomintrange(5, 10)));
   wait 0.25;
-  playFX(level._effect[# "rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
+  playFX(level._effect[#"rise_billow"], self.origin + (randomintrange(-10, 10), randomintrange(-10, 10), randomintrange(5, 10)));
 }
 
 function zombie_fall_dust_fx(zombie) {
@@ -445,7 +445,7 @@ function zombie_fall_dust_fx(zombie) {
   t = 0;
 
   while(t < dust_time) {
-    playFXOnTag(level._effect[# "rise_dust"], zombie, dust_tag);
+    playFXOnTag(level._effect[#"rise_dust"], zombie, dust_tag);
     wait dust_interval;
     t += dust_interval;
   }
@@ -574,7 +574,7 @@ function zombie_emerge_dust_fx(zombie) {
   t = 0;
 
   while(t < dust_time) {
-    playFXOnTag(level._effect[# "rise_dust"], zombie, dust_tag);
+    playFXOnTag(level._effect[#"rise_dust"], zombie, dust_tag);
     wait dust_interval;
     t += dust_interval;
   }

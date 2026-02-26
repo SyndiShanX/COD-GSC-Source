@@ -140,11 +140,11 @@ function function_7cdcb903(instance) {
   }
 
   level.var_ff7bf48c = [];
-  var_2b357ce9 = instance.contentgroups[# "hash_5a4e996db5182fe"][0];
+  var_2b357ce9 = instance.contentgroups[#"hash_5a4e996db5182fe"][0];
   var_2b357ce9.s_teleport = struct::get(var_2b357ce9.targetname, "target");
   var_edf7d1ed = 1;
   function_6b9a56f7(var_2b357ce9, var_edf7d1ed, 0, 80);
-  var_2b357ce9 = instance.contentgroups[# "hash_5a4e896db51814b"][0];
+  var_2b357ce9 = instance.contentgroups[#"hash_5a4e896db51814b"][0];
   var_2b357ce9.s_teleport = struct::get(var_2b357ce9.targetname, "target");
   var_edf7d1ed = 2;
   function_6b9a56f7(var_2b357ce9, var_edf7d1ed);
@@ -153,7 +153,7 @@ function function_7cdcb903(instance) {
     return;
   }
 
-  var_2b357ce9 = instance.contentgroups[# "hash_5a4e796db517f98"][0];
+  var_2b357ce9 = instance.contentgroups[#"hash_5a4e796db517f98"][0];
   var_2b357ce9.s_teleport = struct::get(var_2b357ce9.targetname, "target");
   var_edf7d1ed = 3;
   function_6b9a56f7(var_2b357ce9, var_edf7d1ed);
@@ -162,7 +162,7 @@ function function_7cdcb903(instance) {
     return;
   }
 
-  var_2b357ce9 = instance.contentgroups[# "hash_5a4ee96db518b7d"][0];
+  var_2b357ce9 = instance.contentgroups[#"hash_5a4ee96db518b7d"][0];
   var_2b357ce9.s_teleport = struct::get(var_2b357ce9.targetname, "target");
   level thread function_ada90340(var_2b357ce9);
   function_6b9a56f7(var_2b357ce9);
@@ -373,7 +373,7 @@ function function_ba2ed0f6(instance) {
     return;
   }
 
-  var_28bf3706 = instance.contentgroups[# "heli_crash"][0];
+  var_28bf3706 = instance.contentgroups[#"heli_crash"][0];
   content_manager::spawn_script_model(var_28bf3706, #"hash_6f4bd8715d49e317", 0, 0);
   var_33c42924 = content_manager::spawn_script_model(var_28bf3706, #"hash_45d5f1151627a0d2", 0, 0);
   var_33c42924 disconnectpaths(2, 0);
@@ -390,7 +390,7 @@ function function_ba2ed0f6(instance) {
   trigger = spawn("trigger_radius", var_28bf3706.origin + v_offset, 0, 800, 800);
   trigger.instance = instance;
   trigger callback::on_trigger(&function_f8b96957);
-  instance.var_1c61fe4b = instance.contentgroups[# "heli_audio"][0];
+  instance.var_1c61fe4b = instance.contentgroups[#"heli_audio"][0];
   instance.var_a9ef21d = content_manager::spawn_script_model(instance.var_1c61fe4b, #"p9_zm_ndu_reel_to_reel_audio_recorder_01");
   level thread namespace_e69881c5::function_206ee608();
 }
@@ -404,7 +404,7 @@ function private function_f8b96957(eventstruct) {
 
   self.b_triggered = 1;
   self callback::remove_on_trigger(&function_f8b96957);
-  self function_b1f268c1(self.instance.contentgroups[# "heli_crash"][0].origin, self.instance);
+  self function_b1f268c1(self.instance.contentgroups[#"heli_crash"][0].origin, self.instance);
   self deletedelay();
 }
 
@@ -416,7 +416,7 @@ function private function_b1f268c1(v_loc, instance) {
   trigger usetriggerrequirelookat(0);
   level zm_vo::function_7622cb70(#"hash_c41aee239ce8b26");
   level zm_vo::function_7622cb70(#"hash_6587f9c1e0ab3a1f", 1);
-  a_spawns = array::randomize(isDefined(instance.contentgroups[# "hash_39aeaa4632e834e2"]) ? instance.contentgroups[# "hash_39aeaa4632e834e2"] : []);
+  a_spawns = array::randomize(isDefined(instance.contentgroups[#"hash_39aeaa4632e834e2"]) ? instance.contentgroups[#"hash_39aeaa4632e834e2"] : []);
   self callback::on_trigger(&namespace_2c949ef8::function_39ee3b21, undefined, a_spawns);
   namespace_2c949ef8::function_8b6ae460(v_loc, undefined, 512, 2048, undefined, undefined, undefined, undefined, 512);
   function_701ee731(v_loc);
@@ -661,7 +661,7 @@ function function_f37669b6(eventstruct) {
 }
 
 function function_ea2f5d05(a_ents) {
-  ent = a_ents[# "bunny"];
+  ent = a_ents[#"bunny"];
   var_41dec230 = util::spawn_model("tag_origin", ent.origin, ent.angles);
   ent linkto(var_41dec230);
   ent.var_41dec230 = var_41dec230;
@@ -748,7 +748,7 @@ function private function_6fcaf33e(var_af44ab5f) {
 }
 
 function private unstable_orb(instance) {
-  s_orb = array::random(isDefined(instance.contentgroups[# "orb_spawn"]) ? instance.contentgroups[# "orb_spawn"] : []);
+  s_orb = array::random(isDefined(instance.contentgroups[#"orb_spawn"]) ? instance.contentgroups[#"orb_spawn"] : []);
   mdl_orb = content_manager::spawn_script_model(s_orb, #"p7_zm_ctl_deathray_sphere");
   mdl_orb setscale(0.5);
   mdl_orb playSound(#"hash_55b5e35f7d261fee");
@@ -819,7 +819,7 @@ function private unstable_orb(instance) {
     v_average = var_d297efab / max(var_6ba3d26a.size, 1);
     v_average = (0, absangleclamp360(v_average[1]), 0);
     var_853a6020 = 0;
-    var_5848577a = arraycopy(isDefined(instance.contentgroups[# "hash_1d34895d7e866b6f"]) ? instance.contentgroups[# "hash_1d34895d7e866b6f"] : []);
+    var_5848577a = arraycopy(isDefined(instance.contentgroups[#"hash_1d34895d7e866b6f"]) ? instance.contentgroups[#"hash_1d34895d7e866b6f"] : []);
     var_d22c2d89 = arraycopy(var_5848577a);
 
     while(var_5848577a.size) {
@@ -1065,10 +1065,10 @@ function function_9ad91439(instance) {
 
   instance.var_4272a188 triggerenable(0);
   objective_setinvisibletoall(instance.var_e55c8b4e);
-  var_1c4dd56d = instance.contentgroups[# "phase_rover"][0];
+  var_1c4dd56d = instance.contentgroups[#"phase_rover"][0];
   level.var_c39a4b8f = spawnvehicle(#"hash_d069dee6a0076c8", var_1c4dd56d.origin, var_1c4dd56d.angles, "vehicle_phase_rover", 0, undefined, "sensor");
   level thread function_b62b94e6(var_1c4dd56d);
-  var_b8c8ab67 = instance.contentgroups[# "hash_2af8aec02162621a"][0];
+  var_b8c8ab67 = instance.contentgroups[#"hash_2af8aec02162621a"][0];
   instance.var_fb224b3b = content_manager::spawn_script_model(var_b8c8ab67, #"p9_zm_ndu_reel_to_reel_audio_recorder_01");
   waitframe(1);
   level.var_c39a4b8f thread namespace_e69881c5::function_4f8b33df(instance);
@@ -1102,7 +1102,7 @@ function private function_b62b94e6(var_1c4dd56d) {
 }
 
 function private function_8693ce36(instance) {
-  var_9f3b9a91 = instance.contentgroups[# "hash_492bf57238a8ab72"][0];
+  var_9f3b9a91 = instance.contentgroups[#"hash_492bf57238a8ab72"][0];
   instance.var_fb224b3b notsolid();
   n_wait = instance.var_fb224b3b zm_utility::fake_physicslaunch(var_9f3b9a91.origin, 99);
   wait n_wait;
@@ -1145,7 +1145,7 @@ function private function_1554ed60(eventstruct) {
 
   if(!level flag::get(#"hash_68879aa426e6559a")) {
     level flag::set(#"hash_68879aa426e6559a");
-    var_8485244b = self.instance.contentgroups[# "start_interact"][0];
+    var_8485244b = self.instance.contentgroups[#"start_interact"][0];
     objective_setposition(self.instance.var_e55c8b4e, var_8485244b.origin);
     objective_setvisibletoall(self.instance.var_e55c8b4e);
     self.instance.var_4272a188 triggerenable(1);

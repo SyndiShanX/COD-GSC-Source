@@ -45,7 +45,7 @@ __init__() {
   clientfield::register("toplayer", "" + # "hash_2cd1bb15f71aedb8", 1, 1, "counter");
   clientfield::register("toplayer", "" + # "hash_1769e95fdb10dfae", 1, 1, "counter");
   clientfield::register("scriptmover", "" + # "hash_333e3741e6552db3", 1, 1, "int");
-  level._effect[# "hash_3ecc995bb97331ac"] = # "hash_266633b36a852fd5";
+  level._effect[#"hash_3ecc995bb97331ac"] = # "hash_266633b36a852fd5";
   level.var_c9d375dc = spawnStruct();
   level.var_c9d375dc.firestorm_weapon = getweapon(#"zhield_zword_turret");
   level.var_c9d375dc.melee_weapon = getweapon(#"zhield_zword_dw");

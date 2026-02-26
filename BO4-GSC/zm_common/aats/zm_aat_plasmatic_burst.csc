@@ -24,7 +24,7 @@ __init__() {
   clientfield::register("vehicle", "zm_aat_plasmatic_burst" + "_explosion", 1, 1, "counter", &zm_aat_plasmatic_burst_explosion, 0, 0);
   clientfield::register("actor", "zm_aat_plasmatic_burst" + "_burn", 1, 1, "int", &function_7abfa551, 0, 0);
   clientfield::register("vehicle", "zm_aat_plasmatic_burst" + "_burn", 1, 1, "int", &function_a98c42a3, 0, 0);
-  level._effect[# "zm_aat_plasmatic_burst"] = "zm_weapons/fx8_aat_plasmatic_burst_torso";
+  level._effect[#"zm_aat_plasmatic_burst"] = "zm_weapons/fx8_aat_plasmatic_burst_torso";
 }
 
 zm_aat_plasmatic_burst_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -36,7 +36,7 @@ zm_aat_plasmatic_burst_explosion(localclientnum, oldval, newval, bnewent, biniti
     }
 
     self playSound(localclientnum, #"hash_6990e5a39e894c04");
-    util::playFXOnTag(localclientnum, level._effect[# "zm_aat_plasmatic_burst"], self, str_fx_tag);
+    util::playFXOnTag(localclientnum, level._effect[#"zm_aat_plasmatic_burst"], self, str_fx_tag);
   }
 }
 

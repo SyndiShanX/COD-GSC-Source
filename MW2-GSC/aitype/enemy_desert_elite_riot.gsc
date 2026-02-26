@@ -39,12 +39,12 @@ spawner() {
 }
 
 precache() {
-  character\character_shadow_co_riot::precache();
+    character\character_shadow_co_riot::precache();
 
-  precacheItem("mp5");
-  precacheItem("riotshield");
-  precacheItem("usp");
-  precacheItem("fraggrenade");
+    precacheItem("mp5");
+    precacheItem("riotshield");
+    precacheItem("usp");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_riotshield::init_riotshield();
-  //---------------- }
+    //---------------- maps\_riotshield::init_riotshield();
+    //---------------- }

@@ -821,7 +821,7 @@ robotcrawlercanshootenemy(entity) {
   aimlimits = entity getaimlimitsfromentry("robot_crawler");
   yawtoenemy = angleclamp180(vectortoangles(entity lastknownpos(entity.enemy) - entity.origin)[1] - entity.angles[1]);
   angleepsilon = 10;
-  return yawtoenemy <= aimlimits[# "aim_left"] + angleepsilon && yawtoenemy >= aimlimits[# "aim_right"] + angleepsilon;
+  return yawtoenemy <= aimlimits[#"aim_left"] + angleepsilon && yawtoenemy >= aimlimits[#"aim_right"] + angleepsilon;
 }
 
 archetyperobotonanimscriptedcallback(entity) {

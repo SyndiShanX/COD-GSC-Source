@@ -164,7 +164,7 @@ function function_a8bd0b05() {
 }
 
 function function_ff614b0d() {
-  self.player_actions.enabled[# "body_shield_grenade"] = 1;
+  self.player_actions.enabled[#"body_shield_grenade"] = 1;
   self cp_rus_kgb::function_c235774c();
   self val::reset_all(#"hash_5fa17b60e571053a");
   self val::reset_all(#"hash_bc68371784a550b");
@@ -186,7 +186,7 @@ function function_6df467f6() {
 }
 
 function function_9165ed13(a_ents) {
-  level.vip = a_ents[# "boris"];
+  level.vip = a_ents[#"boris"];
   level.vip thread entname::add(#"hash_6a1195604c394694", #"axis");
 }
 

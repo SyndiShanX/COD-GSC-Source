@@ -238,7 +238,7 @@ function function_1caf5c87(team) {
 }
 
 function function_3f65d5d3() {
-  if(!isDefined(self.pers[# "team"])) {
+  if(!isDefined(self.pers[#"team"])) {
     self[[level.spawnintermission]](1);
     return true;
   }
@@ -438,19 +438,19 @@ function private function_e794b637(transition, outcome) {
 }
 
 function function_7e74281() {
-  level.var_3a309902[# "blank"] = &function_26bbb839;
-  level.var_3a309902[# "outcome"] = &function_87a832a5;
-  level.var_3a309902[# "outcome_with_score"] = &function_26bbb839;
-  level.var_3a309902[# "outcome_with_time"] = &function_26bbb839;
-  level.var_3a309902[# "switch_sides"] = &function_e3855f6d;
-  level.var_3a309902[# "final_killcam"] = &function_a2d39e40;
-  level.var_3a309902[# "play_of_the_match"] = &function_e3442abc;
-  level.var_3a309902[# "hash_7367d8ab0bb7068b"] = &function_4029edc0;
-  level.var_3a309902[# "high_value_operatives"] = &function_26bbb839;
-  level.var_3a309902[# "top_squad"] = &function_721d8d6e;
-  level.var_3a309902[# "hero_pose"] = &function_e794b637;
-  level.var_3a309902[# "exit_cinematic"] = &function_51bb7ed5;
-  level.var_7e74281[# "exit_cinematic"] = &function_8d0112e9;
+  level.var_3a309902[#"blank"] = &function_26bbb839;
+  level.var_3a309902[#"outcome"] = &function_87a832a5;
+  level.var_3a309902[#"outcome_with_score"] = &function_26bbb839;
+  level.var_3a309902[#"outcome_with_time"] = &function_26bbb839;
+  level.var_3a309902[#"switch_sides"] = &function_e3855f6d;
+  level.var_3a309902[#"final_killcam"] = &function_a2d39e40;
+  level.var_3a309902[#"play_of_the_match"] = &function_e3442abc;
+  level.var_3a309902[#"hash_7367d8ab0bb7068b"] = &function_4029edc0;
+  level.var_3a309902[#"high_value_operatives"] = &function_26bbb839;
+  level.var_3a309902[#"top_squad"] = &function_721d8d6e;
+  level.var_3a309902[#"hero_pose"] = &function_e794b637;
+  level.var_3a309902[#"exit_cinematic"] = &function_51bb7ed5;
+  level.var_7e74281[#"exit_cinematic"] = &function_8d0112e9;
 }
 
 function function_b797319e(transition_type, transition_index) {
@@ -462,8 +462,8 @@ function function_752a920f() {
 }
 
 function function_d7b5082e() {
-  if(isDefined(self.pers[# "totalmatchbonus"])) {
-    self luinotifyevent(#"hash_9dfc8d44ea4547e", 1, self.pers[# "totalmatchbonus"]);
+  if(isDefined(self.pers[#"totalmatchbonus"])) {
+    self luinotifyevent(#"hash_9dfc8d44ea4547e", 1, self.pers[#"totalmatchbonus"]);
   }
 }
 

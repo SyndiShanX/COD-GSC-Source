@@ -14,7 +14,7 @@
 
 init_shared() {
   level.weapontacticalinsertion = getweapon(#"tactical_insertion");
-  level._effect[# "tacticalinsertionfizzle"] = # "_t6/misc/fx_equip_tac_insert_exp";
+  level._effect[#"tacticalinsertionfizzle"] = # "_t6/misc/fx_equip_tac_insert_exp";
   clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int");
 }
 
@@ -132,9 +132,9 @@ destroy_tactical_insertion(attacker) {
   self.friendlytrigger delete();
   self.enemytrigger delete();
 
-  if(isDefined(attacker) && isDefined(attacker.pers[# "team"]) && isDefined(self.owner) && isDefined(self.owner.pers[# "team"])) {
+  if(isDefined(attacker) && isDefined(attacker.pers[#"team"]) && isDefined(self.owner) && isDefined(self.owner.pers[#"team"])) {
     if(level.teambased) {
-      if(attacker.pers[# "team"] != self.owner.pers[# "team"]) {
+      if(attacker.pers[#"team"] != self.owner.pers[#"team"]) {
         attacker notify(#"destroyed_explosive");
         attacker challenges::destroyedequipment();
         attacker challenges::destroyedtacticalinsert();
@@ -157,7 +157,7 @@ fizzle(attacker) {
   }
 
   self.fizzle = 1;
-  playFX(level._effect[# "tacticalinsertionfizzle"], self.origin);
+  playFX(level._effect[#"tacticalinsertionfizzle"], self.origin);
   self playSound(#"dst_tac_insert_break");
 
   if(isDefined(attacker) && attacker != self.owner) {

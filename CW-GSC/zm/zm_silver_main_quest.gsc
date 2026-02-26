@@ -1156,7 +1156,7 @@ function recover_container() {
 }
 
 function function_a1dbe3ea(a_ents) {
-  mdl_tree = a_ents[# "snow_tree"];
+  mdl_tree = a_ents[#"snow_tree"];
   wait 2;
   level.var_6f1da2d5 = mdl_tree gettagorigin("j_container_bone");
   level.var_6afe3ef2 = mdl_tree gettagangles("j_container_bone");
@@ -1165,7 +1165,7 @@ function function_a1dbe3ea(a_ents) {
 }
 
 function function_c491aefd(a_ents) {
-  var_37779828 = a_ents[# "hash_580b6a4e3095fe19"];
+  var_37779828 = a_ents[#"hash_580b6a4e3095fe19"];
   var_37779828.var_e8920729 = 1;
   var_37779828 val::set("tank_zombie", "allowdeath", 0);
   var_37779828 waittill(#"damage", #"death");
@@ -1451,7 +1451,7 @@ function function_714e14de() {
   v_start = self.origin + (0, 0, 32);
   v_end = self.origin - (0, 0, 1000);
   a_trace = groundtrace(v_start, v_end, 0, self, 1);
-  v_ground_pos = isDefined(a_trace[# "position"]) ? a_trace[# "position"] : self.origin;
+  v_ground_pos = isDefined(a_trace[#"position"]) ? a_trace[#"position"] : self.origin;
   self playSound(#"hash_118722f1108139ea");
   point = function_4ba8fde("item_zmintel_silver_requiem_artifact_5");
   level.e_container = item_drop::drop_item(0, undefined, 1, 0, point.id, v_ground_pos, undefined, 0);
@@ -1956,12 +1956,12 @@ function function_1c0daa38() {
 
 function function_1226c0a6() {
   level flag::wait_till(#"hash_322c7f92525e008e");
-  level.zones[# "zone_trans_north"].is_enabled = 0;
-  level.zones[# "zone_trans_north_pap_room"].is_enabled = 0;
-  level.zones[# "zone_trans_south"].is_enabled = 0;
-  level.zones[# "zone_trans_south_pap_room"].is_enabled = 0;
-  level.zones[# "zone_trans_south_tunnel"].is_enabled = 0;
-  level.zones[# "zone_power_tunnel"].is_enabled = 0;
+  level.zones[#"zone_trans_north"].is_enabled = 0;
+  level.zones[#"zone_trans_north_pap_room"].is_enabled = 0;
+  level.zones[#"zone_trans_south"].is_enabled = 0;
+  level.zones[#"zone_trans_south_pap_room"].is_enabled = 0;
+  level.zones[#"zone_trans_south_tunnel"].is_enabled = 0;
+  level.zones[#"zone_power_tunnel"].is_enabled = 0;
   level.var_ccf1f0ee = 1;
   function_8f85d169();
   var_ccd37052 = struct::get("steiner_photo_loc", "script_noteworthy");
@@ -2174,12 +2174,12 @@ function function_39f889a2() {
   music::setmusicstate("silver_mq_exfil");
   level thread exfil_aether_trigger();
   function_b86587a6();
-  level.zones[# "zone_trans_north"].is_enabled = 1;
-  level.zones[# "zone_trans_north_pap_room"].is_enabled = 1;
-  level.zones[# "zone_trans_south"].is_enabled = 1;
-  level.zones[# "zone_trans_south_pap_room"].is_enabled = 1;
-  level.zones[# "zone_trans_south_tunnel"].is_enabled = 1;
-  level.zones[# "zone_power_tunnel"].is_enabled = 1;
+  level.zones[#"zone_trans_north"].is_enabled = 1;
+  level.zones[#"zone_trans_north_pap_room"].is_enabled = 1;
+  level.zones[#"zone_trans_south"].is_enabled = 1;
+  level.zones[#"zone_trans_south_pap_room"].is_enabled = 1;
+  level.zones[#"zone_trans_south_tunnel"].is_enabled = 1;
+  level.zones[#"zone_power_tunnel"].is_enabled = 1;
   level.var_ccf1f0ee = undefined;
   level clientfield::set("" + # "hash_718b0f4fd6db0bb4", 0);
 
@@ -2222,15 +2222,15 @@ function function_3b4a24e2() {
   level.no_powerups = 1;
   level flag::wait_till(#"gameplay_started");
   script = content_manager::get_script(instance.content_script_name);
-  objective_manager::function_9751c453(script.var_331b7cc3, instance.contentgroups[# "exfil_loc"][0].origin, instance);
+  objective_manager::function_9751c453(script.var_331b7cc3, instance.contentgroups[#"exfil_loc"][0].origin, instance);
 
   if(level clientfield::get("dog_round_fog_bank")) {
     level thread clientfield::set("dog_round_fog_bank", 0);
   }
 
   level callback::callback(#"hash_594217387367ebb4");
-  var_28bf3706 = instance.contentgroups[# "heli_spawn"][0];
-  var_3ec7083c = instance.contentgroups[# "exfil_loc"][0];
+  var_28bf3706 = instance.contentgroups[#"heli_spawn"][0];
+  var_3ec7083c = instance.contentgroups[#"exfil_loc"][0];
 
   if(!isDefined(var_3ec7083c.radius)) {
     var_3ec7083c.radius = 2000;
@@ -2415,7 +2415,7 @@ function function_31125f54(var_8bb7479c) {
     }
 
     foreach(player in getplayers()) {
-      player.pers[# "outcome"] = # "win";
+      player.pers[#"outcome"] = # "win";
     }
 
     level thread namespace_591b4396::function_a7394b94(1);
@@ -3253,7 +3253,7 @@ function function_34a1157d(var_3b3f5ecb, var_7965c97b, str_zone_name, var_712035
     level.var_b59d1162[level.var_b59d1162.size] = trigger;
     var_cbd423bc clientfield::set("" + # "hash_8358a32177aa60e", 0);
     zm_unitrigger::unitrigger_force_per_player_triggers(trigger, 1);
-    wait_locations = level.zones[str_zone_name].a_loc_types[# "wait_location"];
+    wait_locations = level.zones[str_zone_name].a_loc_types[#"wait_location"];
     var_cbd423bc thread function_eedc944b(trigger, var_3b3f5ecb, str_zone_name, var_d51151ec);
     level flag::wait_till_clear(#"dark_aether_active");
     level scene::delete_scene_spawned_ents(var_3b3f5ecb);
@@ -3262,7 +3262,7 @@ function function_34a1157d(var_3b3f5ecb, var_7965c97b, str_zone_name, var_712035
     level callback::remove_on_actor_damage(&function_e1e6ef8d);
 
     if(isDefined(wait_locations)) {
-      level.zones[str_zone_name].a_loc_types[# "wait_location"] = wait_locations;
+      level.zones[str_zone_name].a_loc_types[#"wait_location"] = wait_locations;
     }
   }
 }
@@ -3318,7 +3318,7 @@ function function_eedc944b(var_b2419dd, var_3b3f5ecb, str_zone_name, var_7928fb3
 
   while(true) {
     waitresult = self waittill(#"trigger_activated");
-    level.zones[str_zone_name].a_loc_types[# "wait_location"] = [];
+    level.zones[str_zone_name].a_loc_types[#"wait_location"] = [];
     self playSound(#"hash_7c5c78e1489169ba");
     waitresult.e_who thread flag::set_for_time(2, #"hash_7ef7aab6a305d0b0");
     function_cd1efeed(str_zone_name, 0);
@@ -3498,15 +3498,15 @@ function function_4afbb1fa(ents) {
 }
 
 function function_b8e662e5(var_c76bbbcc) {
-  level.zones[# "zone_trans_north"].is_spawning_allowed = var_c76bbbcc;
-  level.zones[# "zone_trans_south_tunnel"].is_spawning_allowed = var_c76bbbcc;
-  level.zones[# "zone_power_tunnel"].is_spawning_allowed = var_c76bbbcc;
+  level.zones[#"zone_trans_north"].is_spawning_allowed = var_c76bbbcc;
+  level.zones[#"zone_trans_south_tunnel"].is_spawning_allowed = var_c76bbbcc;
+  level.zones[#"zone_power_tunnel"].is_spawning_allowed = var_c76bbbcc;
 }
 
 function function_b86587a6() {
-  level.zones[# "zone_trans_north"].is_spawning_allowed = 1;
-  level.zones[# "zone_trans_south_tunnel"].is_spawning_allowed = 1;
-  level.zones[# "zone_power_tunnel"].is_spawning_allowed = 1;
+  level.zones[#"zone_trans_north"].is_spawning_allowed = 1;
+  level.zones[#"zone_trans_south_tunnel"].is_spawning_allowed = 1;
+  level.zones[#"zone_power_tunnel"].is_spawning_allowed = 1;
 }
 
 function private set_zombie(e_zombie) {

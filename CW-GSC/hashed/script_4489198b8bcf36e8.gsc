@@ -413,8 +413,8 @@ function private function_eec699a0(position) {
   startposition = newposition + (0, 0, verticaloffset - var_db87855d);
   droppedpos = function_9cc082d2(startposition, var_db87855d);
 
-  if(isDefined(droppedpos[# "point"])) {
-    newposition = droppedpos[# "point"];
+  if(isDefined(droppedpos[#"point"])) {
+    newposition = droppedpos[#"point"];
   }
 
   return newposition;
@@ -1378,8 +1378,8 @@ function private function_23828655(entity) {
     trace_pos = self.origin + anglesToForward(self.angles) * 100;
     result = bulletTrace(trace_pos + (0, 0, 50), trace_pos + (0, 0, -300), 0, self);
 
-    if(!is_true(result[# "startsolid"]) && result[# "fraction"] < 1) {
-      throw_pos = result[# "position"];
+    if(!is_true(result[#"startsolid"]) && result[#"fraction"] < 1) {
+      throw_pos = result[#"position"];
     } else {
       return false;
     }
@@ -1515,7 +1515,7 @@ function private function_688012ea(entity) {
 }
 
 function autoexec function_998cd770() {
-  level.var_89f8a37b = [# "hash_6856ae089c2dc339", #"hash_6856ab089c2dbe20", #"hash_6856ac089c2dbfd3", #"hash_6856b1089c2dc852", #"hash_6856b2089c2dca05", #"hash_6856af089c2dc4ec"];
+  level.var_89f8a37b = [#"hash_6856ae089c2dc339", #"hash_6856ab089c2dbe20", #"hash_6856ac089c2dbfd3", #"hash_6856b1089c2dc852", #"hash_6856b2089c2dca05", #"hash_6856af089c2dc4ec"];
   callback::function_c046382d(&function_45ab28c7);
 }
 

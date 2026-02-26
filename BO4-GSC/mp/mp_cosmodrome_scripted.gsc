@@ -164,7 +164,7 @@ function_efa3251f() {
   }
 
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= int(round_score_limit / 2)) {
+    if(game.stat[#"teamscores"][team] >= int(round_score_limit / 2)) {
       return true;
     }
   }
@@ -180,7 +180,7 @@ rocket_init() {
 }
 
 function_84d0eb82(a_ents) {
-  cradle = a_ents[# "prop 2"];
+  cradle = a_ents[#"prop 2"];
   waitframe(2);
 
   if(isDefined(cradle)) {
@@ -215,16 +215,16 @@ function_e3ec98e4(a_ents) {
 
   array::run_all(rumbles, &playrumblelooponentity, "mp_cosdmodrome_gantry_prep_rumble");
   function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_3");
-  a_ents[# "prop 2"] waittill(#"stop_rumble", #"death");
+  a_ents[#"prop 2"] waittill(#"stop_rumble", #"death");
   array::run_all(rumbles, &stoprumble, "mp_cosdmodrome_rocket_ready_rumble");
 
-  if(isDefined(a_ents[# "prop 2"])) {
-    a_ents[# "prop 2"] playrumbleonentity("mp_cosdmodrome_rocket_ready_rumble");
+  if(isDefined(a_ents[#"prop 2"])) {
+    a_ents[#"prop 2"] playrumbleonentity("mp_cosdmodrome_rocket_ready_rumble");
   }
 
   array::run_all(rumbles, &playrumblelooponentity, "mp_cosdmodrome_rocket_ready_gantry_rumble");
   array::delete_all(rumbles);
-  a_ents[# "prop 2"] waittill(#"rocket_on_pad");
+  a_ents[#"prop 2"] waittill(#"rocket_on_pad");
   function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_7");
 }
 
@@ -233,25 +233,25 @@ function_269c793(a_ents) {
 
   if(isDefined(self.rocket_kill_trig)) {
     level endon(#"game_ended");
-    a_ents[# "prop 3"] endon(#"death");
+    a_ents[#"prop 3"] endon(#"death");
     rumble_ent = util::spawn_model(#"tag_origin", self.rocket_kill_trig.origin);
-    rumble_ent linkto(a_ents[# "prop 3"]);
-    a_ents[# "prop 3"] waittill(#"start_damage");
-    a_ents[# "prop 3"] util::delay("line_23", undefined, &function_aa8af5cd, level.var_40263d6, "vox_rupa_pa_rocket_sequence_23");
+    rumble_ent linkto(a_ents[#"prop 3"]);
+    a_ents[#"prop 3"] waittill(#"start_damage");
+    a_ents[#"prop 3"] util::delay("line_23", undefined, &function_aa8af5cd, level.var_40263d6, "vox_rupa_pa_rocket_sequence_23");
     level.var_578a0ca4 thread function_7be405f8();
     self.rocket_kill_trig triggerenable(1);
     self.rocket_kill_trig callback::on_trigger(&function_971b8aa2);
-    self thread function_6edeb4c2(a_ents[# "prop 3"]);
+    self thread function_6edeb4c2(a_ents[#"prop 3"]);
     rumble_ent playrumblelooponentity("mp_cosdmodrome_rocket_rumble");
-    a_ents[# "prop 3"] waittill(#"stop_damage");
+    a_ents[#"prop 3"] waittill(#"stop_damage");
     level thread function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_19");
 
     if(isDefined(self) && isDefined(self.rocket_kill_trig)) {
       self.rocket_kill_trig triggerenable(0);
     }
 
-    a_ents[# "prop 3"] thread util::delete_on_death(rumble_ent);
-    a_ents[# "prop 3"] waittill(#"cleared_tower");
+    a_ents[#"prop 3"] thread util::delete_on_death(rumble_ent);
+    a_ents[#"prop 3"] waittill(#"cleared_tower");
     level thread function_aa8af5cd(level.var_40263d6, "vox_rupa_pa_rocket_sequence_20");
   }
 }

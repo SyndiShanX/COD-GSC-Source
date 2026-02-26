@@ -449,13 +449,13 @@ function private function_479389f3() {
   assert(isDefined(self.radius));
   assert(isDefined(self.height));
   var_33a206d0 = [];
-  var_33a206d0[# "leftrear"] = self gettagorigin("tag_ground_contact_left_rear");
-  var_33a206d0[# "leftmiddle"] = self gettagorigin("tag_ground_contact_left_middle");
-  var_33a206d0[# "leftfront"] = self gettagorigin("tag_ground_contact_left_front");
+  var_33a206d0[#"leftrear"] = self gettagorigin("tag_ground_contact_left_rear");
+  var_33a206d0[#"leftmiddle"] = self gettagorigin("tag_ground_contact_left_middle");
+  var_33a206d0[#"leftfront"] = self gettagorigin("tag_ground_contact_left_front");
   var_8fc02d3b = [];
-  var_8fc02d3b[# "rightrear"] = self gettagorigin("tag_ground_contact_right_rear");
-  var_8fc02d3b[# "rightmiddle"] = self gettagorigin("tag_ground_contact_right_middle");
-  var_8fc02d3b[# "rightfront"] = self gettagorigin("tag_ground_contact_right_front");
+  var_8fc02d3b[#"rightrear"] = self gettagorigin("tag_ground_contact_right_rear");
+  var_8fc02d3b[#"rightmiddle"] = self gettagorigin("tag_ground_contact_right_middle");
+  var_8fc02d3b[#"rightfront"] = self gettagorigin("tag_ground_contact_right_front");
   var_df47b913 = [];
 
   foreach(tag, origin in var_33a206d0) {
@@ -483,15 +483,15 @@ function private function_479389f3() {
   var_4c962569 = 0;
 
   foreach(tag, trace in var_df47b913) {
-    if(isDefined(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"])) {
       var_d643c4fc = 1;
       continue;
     }
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       var_b0e8278f += var_33a206d0[tag];
-      var_4c962569 += trace[# "position"][2] - var_33a206d0[tag][2];
-      avgnormal += trace[# "normal"];
+      var_4c962569 += trace[#"position"][2] - var_33a206d0[tag][2];
+      avgnormal += trace[#"normal"];
       var_e10b67f7[tag] = trace;
     }
   }
@@ -499,15 +499,15 @@ function private function_479389f3() {
   var_d3532cfe = [];
 
   foreach(tag, trace in var_dc8469e2) {
-    if(isDefined(trace[# "entity"])) {
+    if(isDefined(trace[#"entity"])) {
       var_d643c4fc = 1;
       continue;
     }
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       var_b0e8278f += var_8fc02d3b[tag];
-      var_4c962569 += trace[# "position"][2] - var_8fc02d3b[tag][2];
-      avgnormal += trace[# "normal"];
+      var_4c962569 += trace[#"position"][2] - var_8fc02d3b[tag][2];
+      avgnormal += trace[#"normal"];
       var_d3532cfe[tag] = trace;
     }
   }
@@ -694,7 +694,7 @@ function private function_d929b41() {
   speed = self getspeedmph();
   heighttrace = physicstrace(self.origin, self.origin - (0, 0, 1536), (0, 0, 0), (0, 0, 0), self, 2);
 
-  if(speed < 15 && heighttrace[# "fraction"] < 0.260417) {
+  if(speed < 15 && heighttrace[#"fraction"] < 0.260417) {
     self.var_4dab0a63 = 1;
     self.var_c1764af8 = 1;
     self vehicle_ai::set_state("landing");

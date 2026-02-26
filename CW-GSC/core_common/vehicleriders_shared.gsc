@@ -611,8 +611,8 @@ function private function_114d7bd3(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("driver_occupied") && isDefined(vehicle.var_761c973.riders[# "driver"]) && isalive(vehicle.var_761c973.riders[# "driver"])) {
-    ai = vehicle.var_761c973.riders[# "driver"];
+  if(vehicle flag::get("driver_occupied") && isDefined(vehicle.var_761c973.riders[#"driver"]) && isalive(vehicle.var_761c973.riders[#"driver"])) {
+    ai = vehicle.var_761c973.riders[#"driver"];
 
     if(ai flag::get("dead_in_vehicle")) {
       return;
@@ -634,8 +634,8 @@ function private function_b56639f2(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("passenger1_occupied") && isDefined(vehicle.var_761c973.riders[# "passenger1"]) && isalive(vehicle.var_761c973.riders[# "passenger1"])) {
-    ai = vehicle.var_761c973.riders[# "passenger1"];
+  if(vehicle flag::get("passenger1_occupied") && isDefined(vehicle.var_761c973.riders[#"passenger1"]) && isalive(vehicle.var_761c973.riders[#"passenger1"])) {
+    ai = vehicle.var_761c973.riders[#"passenger1"];
 
     if(ai flag::get("dead_in_vehicle")) {
       return;
@@ -657,8 +657,8 @@ function private function_2ef91b74(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("gunner1_occupied") && isDefined(vehicle.var_761c973.riders[# "gunner1"]) && isalive(vehicle.var_761c973.riders[# "gunner1"])) {
-    ai = vehicle.var_761c973.riders[# "gunner1"];
+  if(vehicle flag::get("gunner1_occupied") && isDefined(vehicle.var_761c973.riders[#"gunner1"]) && isalive(vehicle.var_761c973.riders[#"gunner1"])) {
+    ai = vehicle.var_761c973.riders[#"gunner1"];
 
     if(ai flag::get("dead_in_vehicle")) {
       return;
@@ -680,8 +680,8 @@ function private function_da0917a4(vehicle) {
     return;
   }
 
-  if(vehicle flag::get("gunner2_occupied") && isDefined(vehicle.var_761c973.riders[# "gunner2"]) && isalive(vehicle.var_761c973.riders[# "gunner2"])) {
-    ai = vehicle.var_761c973.riders[# "gunner2"];
+  if(vehicle flag::get("gunner2_occupied") && isDefined(vehicle.var_761c973.riders[#"gunner2"]) && isalive(vehicle.var_761c973.riders[#"gunner2"])) {
+    ai = vehicle.var_761c973.riders[#"gunner2"];
 
     if(ai flag::get("dead_in_vehicle")) {
       return;
@@ -888,15 +888,15 @@ function exit_ground(ai, incombat) {
     targetangles = (startangles[0], absangleclamp360(startangles[1] + anglesdelta), startangles[2]);
     result = groundtrace(targetorigin + (0, 0, 100), targetorigin + (0, 0, -100), 0, ai.vehicle);
 
-    if(result[# "fraction"] > 0 && result[# "fraction"] < 1) {
+    if(result[#"fraction"] > 0 && result[#"fraction"] < 1) {
       radius = ai getpathfindingradius() + 15;
-      var_8f9272fc = getclosestpointonnavmesh(result[# "position"], 100, radius);
+      var_8f9272fc = getclosestpointonnavmesh(result[#"position"], 100, radius);
 
       if(isDefined(var_8f9272fc)) {
         result = groundtrace(var_8f9272fc + (0, 0, 100), var_8f9272fc + (0, 0, -100), 0, ai.vehicle);
 
-        if(result[# "fraction"] > 0 && result[# "fraction"] < 1) {
-          startorigin += result[# "position"] - targetorigin;
+        if(result[#"fraction"] > 0 && result[#"fraction"] < 1) {
+          startorigin += result[#"position"] - targetorigin;
         }
       }
     }
@@ -1147,9 +1147,9 @@ function exit_high_loop_anim(e_parent, incombat) {
 function get_height(e_ignore = self) {
   trace = groundtrace(self.origin + (0, 0, 10), self.origin + (0, 0, -10000), 0, e_ignore, 0);
 
-  recordline(self.origin + (0, 0, 10), trace[# "position"], (1, 0.5, 0), "<dev string:x39a>", self);
+  recordline(self.origin + (0, 0, 10), trace[#"position"], (1, 0.5, 0), "<dev string:x39a>", self);
 
-  return distance(self.origin, trace[# "position"]);
+  return distance(self.origin, trace[#"position"]);
 }
 
 function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {

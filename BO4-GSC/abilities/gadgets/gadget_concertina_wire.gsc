@@ -236,7 +236,7 @@ function_5ea6e77d(point, upangles) {
   mins = (-10, -10, -10);
   maxs = (10, 10, 10);
   var_e07c7e8 = physicstrace(var_71fcd06b, var_2fa728ff, mins, maxs, self, 1);
-  return var_e07c7e8[# "fraction"] < 1;
+  return var_e07c7e8[#"fraction"] < 1;
 }
 
 function_2562ba62(var_637dcf3d, startlocation, var_a4e8554b) {

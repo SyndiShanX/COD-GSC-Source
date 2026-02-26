@@ -18,9 +18,9 @@ function private autoexec __init__system__() {
 function private preinit() {
   clientfield::register("allplayers", "" + # "being_robot_revived", 24000, 1, "int", &play_revival_fx, 0, 0);
   ai::add_archetype_spawn_function(#"zod_companion", &zodcompanionspawnsetup);
-  level._effect[# "fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
-  level._effect[# "fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
-  level._effect[# "companion_revive_effect"] = # "hash_3adc423957988632";
+  level._effect[#"fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
+  level._effect[#"fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
+  level._effect[#"companion_revive_effect"] = # "hash_3adc423957988632";
   ai::add_archetype_spawn_function(#"robot", &zodcompanionspawnsetup);
 }
 
@@ -45,7 +45,7 @@ function zodcompanionheadgibfx(localclientnum, entity, gibflag) {
     gibflag.mindcontrolheadfx = undefined;
   }
 
-  gibflag.headgibfx = util::playFXOnTag(entity, level._effect[# "fx_dest_robot_head_sparks"], gibflag, "j_neck");
+  gibflag.headgibfx = util::playFXOnTag(entity, level._effect[#"fx_dest_robot_head_sparks"], gibflag, "j_neck");
   playSound(0, #"prj_bullet_impact_robot_headshot", gibflag.origin);
 }
 
@@ -54,7 +54,7 @@ function zodcompaniondamagedfx(localclientnum, entity) {
     return;
   }
 
-  entity.damagedfx = util::playFXOnTag(localclientnum, level._effect[# "fx_dest_robot_body_sparks"], entity, "j_spine4");
+  entity.damagedfx = util::playFXOnTag(localclientnum, level._effect[#"fx_dest_robot_body_sparks"], entity, "j_spine4");
 }
 
 function zodcompanionclearfx(localclientnum, entity) {
@@ -89,6 +89,6 @@ function play_revival_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
   if(bwastimejump === 1) {
     self playSound(0, #"evt_civil_protector_revive_plr");
-    self.robot_revival_fx = util::playFXOnTag(binitialsnap, level._effect[# "companion_revive_effect"], self, "j_spine4");
+    self.robot_revival_fx = util::playFXOnTag(binitialsnap, level._effect[#"companion_revive_effect"], self, "j_spine4");
   }
 }

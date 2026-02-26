@@ -46,16 +46,16 @@ init_clientfields() {
 }
 
 function_1bfc7178() {
-  level._effect[# "hash_7c49a746639d8fb9"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
-  level._effect[# "hash_7c49a646639d8e06"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
-  level._effect[# "hash_7c49a546639d8c53"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";
-  level._effect[# "hash_7c49a446639d8aa0"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_3";
-  level._effect[# "hash_7c49ab46639d9685"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_4";
-  level._effect[# "hash_7c49aa46639d94d2"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_5";
-  level._effect[# "hash_7c49a946639d931f"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_6";
-  level._effect[# "hash_7c49a846639d916c"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
-  level._effect[# "hash_7c49af46639d9d51"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
-  level._effect[# "hash_7c49ae46639d9b9e"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
+  level._effect[#"hash_7c49a746639d8fb9"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
+  level._effect[#"hash_7c49a646639d8e06"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
+  level._effect[#"hash_7c49a546639d8c53"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";
+  level._effect[#"hash_7c49a446639d8aa0"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_3";
+  level._effect[#"hash_7c49ab46639d9685"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_4";
+  level._effect[#"hash_7c49aa46639d94d2"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_5";
+  level._effect[#"hash_7c49a946639d931f"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_6";
+  level._effect[#"hash_7c49a846639d916c"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
+  level._effect[#"hash_7c49af46639d9d51"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
+  level._effect[#"hash_7c49ae46639d9b9e"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
 }
 
 function_65337201(n_set, n_value, n_id) {
@@ -495,8 +495,8 @@ function_63572ef0() {
 }
 
 function_4c07537f() {
-  level._effect[# "hash_609938034ce1dc5a"] = # "hash_1d6e6d988a3f243c";
-  var_998a2c39 = level._effect[# "hash_609938034ce1dc5a"];
+  level._effect[#"hash_609938034ce1dc5a"] = # "hash_1d6e6d988a3f243c";
+  var_998a2c39 = level._effect[#"hash_609938034ce1dc5a"];
   self.e_photo.fx_ent = util::spawn_model("tag_origin", self.e_photo.origin);
   self.e_photo.fx_ent.angles = self.e_photo.angles;
   self.e_photo.fx = playFXOnTag(var_998a2c39, self.e_photo.fx_ent, "tag_origin");
@@ -561,8 +561,8 @@ function_c056a0ad() {
 }
 
 function_81ed41a8() {
-  level._effect[# "panic_room_monitor_light"] = # "hash_10d93d34c24f01bd";
-  level.var_c2f35c64 = level._effect[# "panic_room_monitor_light"];
+  level._effect[#"panic_room_monitor_light"] = # "hash_10d93d34c24f01bd";
+  level.var_c2f35c64 = level._effect[#"panic_room_monitor_light"];
   level.var_497a573d = getent("sadako_mover", "targetname");
   level.panic_room_monitor_light = getent("panic_room_monitor_light_origin", "targetname");
   level.panic_room_monitor_light.fx_ent = util::spawn_model("tag_origin", level.panic_room_monitor_light.origin);

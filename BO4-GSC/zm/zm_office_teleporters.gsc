@@ -244,14 +244,14 @@ teleport_player(user) {
       var_298e4578 = self find_portal_destination();
       break;
     case 1:
-      var_298e4578 = level.a_s_portals[# "portal_panic_room"];
+      var_298e4578 = level.a_s_portals[#"portal_panic_room"];
       break;
     case 2:
       var_298e4578 = level.var_3f3c65c7;
       level notify(#"hash_15a9f7117b9637b");
       break;
     case 3:
-      var_298e4578 = level.a_s_portals[# "portal_war_room_map"];
+      var_298e4578 = level.a_s_portals[#"portal_war_room_map"];
       break;
     case 4:
       var_298e4578 = self find_portal_destination(1);
@@ -265,8 +265,8 @@ teleport_player(user) {
   }
 
   destination = var_298e4578.var_52a6f692;
-  playFX(level._effect[# "teleport_depart"], user.origin);
-  playFX(level._effect[# "portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_depart"], user.origin);
+  playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", self.origin);
   level thread function_fe50866d(user, self, var_298e4578);
   user.var_298e4578 = var_298e4578;
@@ -280,8 +280,8 @@ teleport_player(user) {
   user clientfield::increment_to_player("teleporter_transition", 1);
   var_298e4578 thread cooldown_portal_timer(user);
   user thread function_c234a5ce();
-  playFX(level._effect[# "teleport_arrive"], user.origin);
-  playFX(level._effect[# "portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_arrive"], user.origin);
+  playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
   user playsoundtoplayer(#"hash_39876bf613387fef", user);
   wait 0.5;
@@ -614,8 +614,8 @@ function_2ef25d40(str_notify) {
 function_71be28e1(zombie, start_portal, end_portal) {
   zombie endon(#"death");
   zombie disableaimassist();
-  playFX(level._effect[# "teleport_depart"], zombie.origin);
-  playFX(level._effect[# "portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_depart"], zombie.origin);
+  playFX(level._effect[#"portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", zombie.origin);
   zombie function_1f034d46(end_portal.origin);
   zombie.b_ignore_cleanup = 1;
@@ -626,8 +626,8 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie setentitypaused(0);
   zombie forceteleport(end_portal.origin + anglesToForward(end_portal.angles) * randomfloatrange(0, 32), end_target.angles);
   zombie function_1f034d46();
-  playFX(level._effect[# "teleport_arrive"], zombie.origin);
-  playFX(level._effect[# "portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_arrive"], zombie.origin);
+  playFX(level._effect[#"portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", zombie.origin);
   zombie.b_ignore_cleanup = zombie.var_693b80bb;
   zombie enableaimassist();
@@ -651,8 +651,8 @@ function_1f034d46(destination) {
 }
 
 function_bb3f9afd() {
-  s_portal = level.a_s_portals[# "portal_war_room"];
-  playFX(level._effect[# "portal_despawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
+  s_portal = level.a_s_portals[#"portal_war_room"];
+  playFX(level._effect[#"portal_despawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
   s_portal.var_a1cf77d2 clientfield::set("portal_dest_fx", 0);
   level clientfield::increment("delete_war_room_portal_fx", 1);
   zm_unitrigger::unregister_unitrigger(s_portal.s_unitrigger);
@@ -667,7 +667,7 @@ function_bb3f9afd() {
 
   level.a_s_portals[s_portal.script_noteworthy] = s_portal;
   s_portal zm_unitrigger::create("", 32, &portal_think, 0, 0);
-  playFX(level._effect[# "portal_spawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"portal_spawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
 
   if(level flag::get("defcon_active") || util::get_game_type() == # "zstandard") {
     s_portal function_79e8b4c6(2);
@@ -995,7 +995,7 @@ function_2143dc13() {
   a_e_players = getplayers();
 
   foreach(e_player in a_e_players) {
-    if(e_player.var_298e4578 === level.a_s_portals[# "portal_panic_room"]) {
+    if(e_player.var_298e4578 === level.a_s_portals[#"portal_panic_room"]) {
       return true;
     }
   }

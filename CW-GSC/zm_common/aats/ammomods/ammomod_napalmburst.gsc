@@ -114,9 +114,9 @@ function private function_4f7f29ab(e_attacker) {
   n_current_time = float(gettime()) / 1000;
 
   if(isPlayer(e_attacker)) {
-    if(!isDefined(e_attacker.aat_cooldown_start[# "zm_ammomod_napalmburst_explosion"])) {
+    if(!isDefined(e_attacker.aat_cooldown_start[#"zm_ammomod_napalmburst_explosion"])) {
       return true;
-    } else if(isDefined(e_attacker.aat_cooldown_start[# "zm_ammomod_napalmburst_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[# "zm_ammomod_napalmburst_explosion"] + 30) {
+    } else if(isDefined(e_attacker.aat_cooldown_start[#"zm_ammomod_napalmburst_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[#"zm_ammomod_napalmburst_explosion"] + 30) {
       return true;
     }
   }
@@ -136,7 +136,7 @@ function function_c8e3a0dc(var_4589e270, var_23255fc5, e_attacker, mod, w_weapon
   n_range = 144;
 
   if(isPlayer(mod)) {
-    mod.aat_cooldown_start[# "zm_ammomod_napalmburst_explosion"] = float(gettime()) / 1000;
+    mod.aat_cooldown_start[#"zm_ammomod_napalmburst_explosion"] = float(gettime()) / 1000;
   }
 
   a_potential_targets = getentitiesinradius(e_attacker, 144, 15);

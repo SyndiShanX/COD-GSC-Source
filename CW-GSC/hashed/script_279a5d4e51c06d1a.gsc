@@ -133,11 +133,11 @@ function function_4f2cda6a(str_objective, var_50cc0d4f, var_aa1a6455, player) {
 }
 
 function function_897a03dd(a_ents) {
-  level.var_d171f280 = a_ents[# "hash_2be22c6d5eea9d0c"];
-  level.var_c338560d = a_ents[# "hash_2be22f6d5eeaa225"];
-  level.var_469d2832 = a_ents[# "civ1"];
-  level.var_346203bc = a_ents[# "civ2"];
-  level.var_dcd38aa1 = a_ents[# "flashlight"];
+  level.var_d171f280 = a_ents[#"hash_2be22c6d5eea9d0c"];
+  level.var_c338560d = a_ents[#"hash_2be22f6d5eeaa225"];
+  level.var_469d2832 = a_ents[#"civ1"];
+  level.var_346203bc = a_ents[#"civ2"];
+  level.var_dcd38aa1 = a_ents[#"flashlight"];
   level.var_d171f280 thread function_a1c3157d("alley_1_stasi_1_node");
   level.var_c338560d thread function_a1c3157d("alley_1_stasi_2_node");
   level.var_469d2832 thread namespace_11998b8f::function_df4cd546();
@@ -354,7 +354,7 @@ function function_86fa401d() {
 }
 
 function function_b160d694(a_ents) {
-  level.var_518a1ea7 = a_ents[# "guy1"];
+  level.var_518a1ea7 = a_ents[#"guy1"];
 }
 
 function function_effdd8b5() {
@@ -1238,31 +1238,31 @@ function function_f1d4ab4b() {
 function function_83c96fe5(a_ents) {
   level flag::wait_till("alley_2_done");
 
-  if(isDefined(a_ents[# "civ"])) {
+  if(isDefined(a_ents[#"civ"])) {
     level scene::stop("scene_z_stk_amb_curtain_close");
-    a_ents[# "civ"] delete();
+    a_ents[#"civ"] delete();
   }
 
-  if(isDefined(a_ents[# "curtains"])) {
-    a_ents[# "curtains"] delete();
+  if(isDefined(a_ents[#"curtains"])) {
+    a_ents[#"curtains"] delete();
   }
 }
 
 function function_65090e11(a_ents) {
-  a_ents[# "civ1"] thread namespace_11998b8f::function_a6affb6a();
-  a_ents[# "civ2"] thread namespace_11998b8f::function_a6affb6a();
+  a_ents[#"civ1"] thread namespace_11998b8f::function_a6affb6a();
+  a_ents[#"civ2"] thread namespace_11998b8f::function_a6affb6a();
   level flag::wait_till("alley_2_done");
 
   if(level scene::is_active("scene_z_stk_amb_window_peek")) {
     level scene::stop("scene_z_stk_amb_window_peek");
   }
 
-  if(isDefined(a_ents[# "civ1"])) {
-    a_ents[# "civ1"] delete();
+  if(isDefined(a_ents[#"civ1"])) {
+    a_ents[#"civ1"] delete();
   }
 
-  if(isDefined(a_ents[# "civ2"])) {
-    a_ents[# "civ2"] delete();
+  if(isDefined(a_ents[#"civ2"])) {
+    a_ents[#"civ2"] delete();
   }
 }
 
@@ -1846,8 +1846,8 @@ function function_750fe887() {
 }
 
 function function_66196fef(a_ents) {
-  level.var_3c0c4db = a_ents[# "hash_396147c0fe01eab9"];
-  level.var_94a0e669 = a_ents[# "hash_396161c0fe0216e7"];
+  level.var_3c0c4db = a_ents[#"hash_396147c0fe01eab9"];
+  level.var_94a0e669 = a_ents[#"hash_396161c0fe0216e7"];
 }
 
 function function_b76115bc() {

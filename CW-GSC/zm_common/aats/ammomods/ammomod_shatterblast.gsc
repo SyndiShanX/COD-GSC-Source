@@ -101,7 +101,7 @@ function function_eb81be7e(attacker, weapon, shitloc, vpoint) {
   level endon(#"game_ended");
 
   if(isPlayer(attacker)) {
-    attacker.aat_cooldown_start[# "hash_79b39f3766407263"] = float(gettime()) / 1000;
+    attacker.aat_cooldown_start[#"hash_79b39f3766407263"] = float(gettime()) / 1000;
   }
 
   attacker endon(#"disconnected");
@@ -269,9 +269,9 @@ function private function_9465e5f8(attacker) {
   n_current_time = float(gettime()) / 1000;
 
   if(isPlayer(attacker)) {
-    if(!isDefined(attacker.aat_cooldown_start[# "hash_79b39f3766407263"])) {
+    if(!isDefined(attacker.aat_cooldown_start[#"hash_79b39f3766407263"])) {
       return true;
-    } else if(isDefined(attacker.aat_cooldown_start[# "hash_79b39f3766407263"]) && n_current_time >= attacker.aat_cooldown_start[# "hash_79b39f3766407263"] + 30) {
+    } else if(isDefined(attacker.aat_cooldown_start[#"hash_79b39f3766407263"]) && n_current_time >= attacker.aat_cooldown_start[#"hash_79b39f3766407263"] + 30) {
       return true;
     }
   }

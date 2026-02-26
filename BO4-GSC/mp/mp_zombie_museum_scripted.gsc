@@ -167,7 +167,7 @@ function_4967eb5a(activator) {
 }
 
 function_35fa13e8(a_ents) {
-  fakeactor = a_ents[# "fakeactor 1"];
+  fakeactor = a_ents[#"fakeactor 1"];
 
   if(isDefined(fakeactor)) {
     level endon(#"game_ended");

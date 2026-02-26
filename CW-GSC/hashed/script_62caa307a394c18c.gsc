@@ -194,7 +194,7 @@ function function_793d38f() {
   level endon(#"game_ended", #"hash_7417360c17579602");
   level.var_cc43c151 = [];
   level.var_536f1a3 = 0;
-  var_92abc4e4 = [# "fire": "<dev string:x353>", #"explosive": "<dev string:x359>", #"toxic": "<dev string:x35f>", #"electrical": "<dev string:x365>", #"cold": "<dev string:x36b>"];
+  var_92abc4e4 = [#"fire": "<dev string:x353>", #"explosive": "<dev string:x359>", #"toxic": "<dev string:x35f>", #"electrical": "<dev string:x365>", #"cold": "<dev string:x36b>"];
 
   while(true) {
     waitframe(1);

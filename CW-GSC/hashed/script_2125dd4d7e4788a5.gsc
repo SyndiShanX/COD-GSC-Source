@@ -49,18 +49,18 @@ function init(instance) {
   instance.var_53ba65b = [];
   instance.a_models = [];
 
-  foreach(s_instance in instance.contentgroups[# "retrieval"]) {
-    s_instance.s_start = s_instance.contentgroups[# "retrieval_start"][0];
+  foreach(s_instance in instance.contentgroups[#"retrieval"]) {
+    s_instance.s_start = s_instance.contentgroups[#"retrieval_start"][0];
     s_instance.var_5ea363c = content_manager::spawn_script_model(s_instance, #"veh_t9_sv_truck_hemtt_payload_rocket");
-    s_instance.var_5ea363c.var_809a5ab9[0] = s_instance.contentgroups[# "component_a"];
-    s_instance.var_5ea363c.var_809a5ab9[1] = s_instance.contentgroups[# "component_b"];
+    s_instance.var_5ea363c.var_809a5ab9[0] = s_instance.contentgroups[#"component_a"];
+    s_instance.var_5ea363c.var_809a5ab9[1] = s_instance.contentgroups[#"component_b"];
 
-    if(isDefined(s_instance.contentgroups[# "hash_7e2234980528a279"])) {
-      s_instance.var_1ac40948 = content_manager::spawn_script_model(s_instance.contentgroups[# "hash_7e2234980528a279"][0], #"hash_2dc80625b5b6627a", 1);
+    if(isDefined(s_instance.contentgroups[#"hash_7e2234980528a279"])) {
+      s_instance.var_1ac40948 = content_manager::spawn_script_model(s_instance.contentgroups[#"hash_7e2234980528a279"][0], #"hash_2dc80625b5b6627a", 1);
     }
 
-    if(isDefined(s_instance.contentgroups[# "pump"])) {
-      s_instance.var_5ea363c.var_7be19157 = content_manager::spawn_script_model(s_instance.contentgroups[# "pump"][0], #"tag_origin", 1);
+    if(isDefined(s_instance.contentgroups[#"pump"])) {
+      s_instance.var_5ea363c.var_7be19157 = content_manager::spawn_script_model(s_instance.contentgroups[#"pump"][0], #"tag_origin", 1);
     }
 
     for(i = 0; i < 2; i++) {
@@ -78,12 +78,12 @@ function init(instance) {
   }
 
   instance.var_1ac40948 = s_instance.var_1ac40948;
-  instance.mdl_reward = s_instance.contentgroups[# "reward_drop"][0];
+  instance.mdl_reward = s_instance.contentgroups[#"reward_drop"][0];
   instance.var_5ea363c = s_instance.var_5ea363c;
-  instance.var_734a26a4 = s_instance.contentgroups[# "component_pos"][0];
-  instance.var_9a67455 = s_instance.contentgroups[# "guard_pt"];
-  instance.var_b69e83ca = s_instance.contentgroups[# "component_attack"];
-  instance.var_ba44fadd = s_instance.contentgroups[# "component_defend"];
+  instance.var_734a26a4 = s_instance.contentgroups[#"component_pos"][0];
+  instance.var_9a67455 = s_instance.contentgroups[#"guard_pt"];
+  instance.var_b69e83ca = s_instance.contentgroups[#"component_attack"];
+  instance.var_ba44fadd = s_instance.contentgroups[#"component_defend"];
   instance.a_s_pts = arraycombine(instance.var_9a67455, instance.var_b69e83ca);
   instance.var_559503f1 = arraycombine(instance.a_s_pts, instance.var_ba44fadd);
   instance thread function_eae9567f();
@@ -1531,7 +1531,7 @@ function function_40285fbe(instance) {
   self endon(#"disconnect", #"player_downed", #"drop_comp");
 
   while(true) {
-    if(distance2dsquared(instance.contentgroups[# "retrieval"][0].var_5ea363c.origin, self.origin) < sqr(100) && is_true(self.var_28107825)) {
+    if(distance2dsquared(instance.contentgroups[#"retrieval"][0].var_5ea363c.origin, self.origin) < sqr(100) && is_true(self.var_28107825)) {
       if(isDefined(self.var_67aa3392.var_3aee78d5)) {
         self.var_67aa3392.var_3aee78d5 setinvisibletoplayer(self);
       }
@@ -1894,12 +1894,12 @@ function canister_drop() {
   v_point = getclosestpointonnavmesh(v_org, 120, 16);
 
   if(isDefined(v_point)) {
-    v_ground = groundtrace(v_point + (0, 0, 50), v_point + (0, 0, -15000), 1, self.e_owner)[# "position"];
+    v_ground = groundtrace(v_point + (0, 0, 50), v_point + (0, 0, -15000), 1, self.e_owner)[#"position"];
   }
 
   if(!isDefined(v_ground)) {
     v_pos = self.e_owner.origin;
-    v_ground = groundtrace(v_pos + (10, 10, 50), v_pos + (0, 0, -15000), 1, self.e_owner)[# "position"];
+    v_ground = groundtrace(v_pos + (10, 10, 50), v_pos + (0, 0, -15000), 1, self.e_owner)[#"position"];
   }
 
   var_ce819c69 = self.e_owner depthofplayerinwater();
@@ -2016,7 +2016,7 @@ function retrieval_start(instance, activator) {
     }
 
     if(instance.targetname === # "hash_17f3ee07ca053ac8" || instance.targetname === # "hash_3b93357ae8f9a4e5" || instance.targetname === # "hash_c03d28393d74ee5" || instance.targetname === # "hash_1f8de1a22943c599" || instance.targetname === # "hash_20b26d60b0dab3a5" || instance.targetname === # "objective_zoo_retrieval" || instance.targetname === # "hash_b422045138dab00") {
-      var_cdce8e6f = instance.contentgroups[# "hash_5819d8571ea7c838"][0];
+      var_cdce8e6f = instance.contentgroups[#"hash_5819d8571ea7c838"][0];
 
       if(isDefined(var_cdce8e6f.script_noteworthy)) {
         instance flag::set(#"hash_12988a5a3e6a65d6");

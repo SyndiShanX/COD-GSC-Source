@@ -21,7 +21,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[# "zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
+  level._effect[#"zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
   clientfield::register_clientuimodel("hudItems.armorType", #"hud_items", #"armortype", 1, 2, "int", undefined, 0, 0);
   clientfield::register_clientuimodel("hudItems.armorPercent", #"hud_items", #"armorpercent", 1, 7, "float", undefined, 0, 0);
   clientfield::register_clientuimodel("hudItems.scrap", #"hud_items", #"scrap", 1, 16, "int", undefined, 0, 0);
@@ -368,8 +368,8 @@ function flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
       str_tag = "tag_origin";
     }
 
-    if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
-      self.var_71a7fc1c = util::playFXOnTag(fieldname, level._effect[# "character_fire_death_torso"], self, str_tag);
+    if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
+      self.var_71a7fc1c = util::playFXOnTag(fieldname, level._effect[#"character_fire_death_torso"], self, str_tag);
     }
 
     return;
@@ -470,12 +470,12 @@ function function_a1290dca(localclientnum, str_objective, n_range = 1500) {
   self endon("7a62b33c6cdca143");
   self endoncallback(&function_2b04855, #"death", #"hash_1c25e0d8228a5516");
 
-  if(!isDefined(level.var_cef2e607[# "hash_2aeea3ff25adc082"])) {
-    level.var_cef2e607[# "hash_2aeea3ff25adc082"] = -1;
+  if(!isDefined(level.var_cef2e607[#"hash_2aeea3ff25adc082"])) {
+    level.var_cef2e607[#"hash_2aeea3ff25adc082"] = -1;
   }
 
-  level.var_cef2e607[# "hash_2aeea3ff25adc082"]++;
-  wait 0.016 * (level.var_cef2e607[# "hash_2aeea3ff25adc082"] % int(0.5 / 0.016) + 1);
+  level.var_cef2e607[#"hash_2aeea3ff25adc082"]++;
+  wait 0.016 * (level.var_cef2e607[#"hash_2aeea3ff25adc082"] % int(0.5 / 0.016) + 1);
 
   while(true) {
     var_30300360 = 0;

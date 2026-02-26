@@ -66,10 +66,10 @@ __init__() {
   registerbehaviorscriptfunctions();
   spawner::add_archetype_spawn_function(#"brutus", &function_debbd9da);
   spawner::function_89a2cd87(#"brutus", &function_6090f71a);
-  level._effect[# "brutus"] = [];
-  level._effect[# "brutus"][# "lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
-  level._effect[# "brutus"][# "lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
-  level._effect[# "brutus"][# "lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
+  level._effect[#"brutus"] = [];
+  level._effect[#"brutus"][#"lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
+  level._effect[#"brutus"][#"lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
+  level._effect[#"brutus"][#"lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
   level thread aat::register_immunity("zm_aat_brain_decay", #"brutus", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_frostbite", #"brutus", 1, 1, 1);
   level thread aat::register_immunity("zm_aat_kill_o_watt", #"brutus", 1, 1, 1);
@@ -272,7 +272,7 @@ brutustargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         entity zm_utility::function_64259898(wait_locations[0].origin, 200);
@@ -380,11 +380,11 @@ function_3c3e6f4a(entity) {
 
     if(!isDefined(var_7162cf15)) {
       var_7162cf15 = [];
-      var_7162cf15[# "point"] = stub.origin;
+      var_7162cf15[#"point"] = stub.origin;
       halfheight = (stub.origin - zm_utility::groundpos(stub.origin))[2] + 1;
     }
 
-    queryresults = positionquery_source_navigation(var_7162cf15[# "point"], 0, 256, halfheight, 20, 1);
+    queryresults = positionquery_source_navigation(var_7162cf15[#"point"], 0, 256, halfheight, 20, 1);
 
     if(queryresults.data.size == 0) {
       return 0;
@@ -857,7 +857,7 @@ function_88efcb() {
 
   if(isDefined(level.var_f47ae5da)) {
     s_spawn_loc = [[level.var_f47ae5da]]();
-  } else if(level.zm_loc_types[# "brutus_location"].size > 0) {
+  } else if(level.zm_loc_types[#"brutus_location"].size > 0) {
     s_spawn_loc = zombie_brutus_util::get_best_brutus_spawn_pos();
   }
 

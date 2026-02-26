@@ -77,7 +77,7 @@ function function_b4530b39() {
   globallogic_audio::leader_dialog("roundOvertime");
 
   foreach(player in level.players) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(team === # "spectator") {
       continue;
@@ -96,7 +96,7 @@ function function_17ae20ae(einflictor, attacker, smeansofdeath, weapon) {
 }
 
 function onroundswitch() {
-  if(game.stat[# "teamscores"][# "allies"] == level.scorelimit - 1 && game.stat[# "teamscores"][# "axis"] == level.scorelimit - 1) {
+  if(game.stat[#"teamscores"][#"allies"] == level.scorelimit - 1 && game.stat[#"teamscores"][#"axis"] == level.scorelimit - 1) {
     aheadteam = getbetterteam();
 
     if(aheadteam != game.defenders) {
@@ -116,14 +116,14 @@ function onroundswitch() {
 }
 
 function getbetterteam() {
-  kills[# "allies"] = 0;
-  kills[# "axis"] = 0;
-  deaths[# "allies"] = 0;
-  deaths[# "axis"] = 0;
+  kills[#"allies"] = 0;
+  kills[#"axis"] = 0;
+  deaths[#"allies"] = 0;
+  deaths[#"axis"] = 0;
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(isDefined(team) && (team == # "allies" || team == # "axis")) {
       kills[team] += player.kills;
@@ -131,15 +131,15 @@ function getbetterteam() {
     }
   }
 
-  if(kills[# "allies"] > kills[# "axis"]) {
+  if(kills[#"allies"] > kills[#"axis"]) {
     return # "allies";
-  } else if(kills[# "axis"] > kills[# "allies"]) {
+  } else if(kills[#"axis"] > kills[#"allies"]) {
     return # "axis";
   }
 
-  if(deaths[# "allies"] < deaths[# "axis"]) {
+  if(deaths[#"allies"] < deaths[#"axis"]) {
     return # "allies";
-  } else if(deaths[# "axis"] < deaths[# "allies"]) {
+  } else if(deaths[#"axis"] < deaths[#"allies"]) {
     return # "axis";
   }
 
@@ -156,12 +156,12 @@ function onstartgametype() {
   setbombtimer("B", 0);
   setmatchflag("bomb_timer_b", 0);
   level.usingextratime = 0;
-  hud_message::function_36419c2(1, game.strings[# "target_destroyed"], game.strings[# "target_destroyed"]);
+  hud_message::function_36419c2(1, game.strings[#"target_destroyed"], game.strings[#"target_destroyed"]);
   setclientnamemode("manual_change");
-  game.strings[# "target_destroyed"] = # "mp/target_destroyed";
-  game.strings[# "bomb_defused"] = # "mp/bomb_defused";
-  level._effect[# "bombexplosion"] = # "hash_1811460fd925f1f8";
-  level._effect[# "hash_568509fa2561a75d"] = # "hash_4d29da75039cfce";
+  game.strings[#"target_destroyed"] = # "mp/target_destroyed";
+  game.strings[#"bomb_defused"] = # "mp/bomb_defused";
+  level._effect[#"bombexplosion"] = # "hash_1811460fd925f1f8";
+  level._effect[#"hash_568509fa2561a75d"] = # "hash_4d29da75039cfce";
   bombzones = getEntArray(level.var_cbdf9ba4, "targetname");
 
   if(bombzones.size == 0) {
@@ -239,7 +239,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     }
   }
 
-  if(isDefined(bombzone) && isPlayer(attacker) && attacker.pers[# "team"] != self.pers[# "team"]) {
+  if(isDefined(bombzone) && isPlayer(attacker) && attacker.pers[#"team"] != self.pers[#"team"]) {
     if(bombzone gameobjects::get_owner_team() != attacker.team) {
       if(!isDefined(attacker.var_28c6734a)) {
         attacker.var_28c6734a = 0;
@@ -254,10 +254,10 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
           #player: self, #var_bdc4bbd2: # "defending"});
         attacker challenges::function_2f462ffd(self, weapon, einflictor, bombzone.trigger);
-        attacker.pers[# "objectiveekia"]++;
-        attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-        attacker.pers[# "objectives"]++;
-        attacker.objectives = attacker.pers[# "objectives"];
+        attacker.pers[#"objectiveekia"]++;
+        attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+        attacker.pers[#"objectives"]++;
+        attacker.objectives = attacker.pers[#"objectives"];
       } else {
         attacker iprintlnbold("<dev string:x38>");
       }
@@ -269,9 +269,9 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       attacker.var_b9f51a5d++;
 
       if(level.playerdefensivemax >= attacker.var_b9f51a5d) {
-        if(isDefined(attacker.pers[# "defends"])) {
-          attacker.pers[# "defends"]++;
-          attacker.defends = attacker.pers[# "defends"];
+        if(isDefined(attacker.pers[#"defends"])) {
+          attacker.pers[#"defends"]++;
+          attacker.defends = attacker.pers[#"defends"];
         }
 
         attacker medals::defenseglobalcount();
@@ -280,10 +280,10 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
           #player: self, #var_bdc4bbd2: # "assaulting"});
         attacker challenges::function_2f462ffd(self, weapon, einflictor, bombzone.trigger);
-        attacker.pers[# "objectiveekia"]++;
-        attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-        attacker.pers[# "objectives"]++;
-        attacker.objectives = attacker.pers[# "objectives"];
+        attacker.pers[#"objectiveekia"]++;
+        attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+        attacker.pers[#"objectives"]++;
+        attacker.objectives = attacker.pers[#"objectives"];
       } else {
         attacker iprintlnbold("<dev string:x82>");
       }
@@ -305,7 +305,7 @@ function checkallowspectating() {
   self endon(#"disconnect");
   waitframe(1);
   update = 0;
-  livesleft = !(level.numlives && !self.pers[# "lives"]);
+  livesleft = !(level.numlives && !self.pers[#"lives"]);
 
   if(!function_a1ef346b(game.attackers).size && !livesleft) {
     level.spectateoverride[game.attackers].allowenemyspectate = # "all";
@@ -418,7 +418,7 @@ function warnlastplayer(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         break;
       }
@@ -631,7 +631,7 @@ function onbeginuse(player) {
     level.timerpaused = 1;
   }
 
-  if(self function_208ed5d5(player.pers[# "team"])) {
+  if(self function_208ed5d5(player.pers[#"team"])) {
     player playSound(#"mpl_sd_bomb_defuse");
     player.isdefusing = 1;
     player thread setbomboverheatingafterweaponchange(self, 0, 0);
@@ -687,7 +687,7 @@ function onenduse(team, player, result) {
   player.isplanting = 0;
   player notify(#"event_ended");
 
-  if(self function_208ed5d5(player.pers[# "team"])) {
+  if(self function_208ed5d5(player.pers[#"team"])) {
     if(isDefined(player.defusing) && !result) {
       player.defusing show();
     }
@@ -713,13 +713,13 @@ function onuseobject(player) {
     bb::function_95a5b5c2("dem_bombplant", self.label, team, player.origin);
     player notify(#"bomb_planted");
 
-    if(isDefined(player.pers[# "plants"])) {
-      player.pers[# "plants"]++;
-      player.plants = player.pers[# "plants"];
+    if(isDefined(player.pers[#"plants"])) {
+      player.pers[#"plants"]++;
+      player.plants = player.pers[#"plants"];
     }
 
-    player.pers[# "objectives"]++;
-    player.objectives = player.pers[# "objectives"];
+    player.pers[#"objectives"]++;
+    player.objectives = player.pers[#"objectives"];
 
     if(!isscoreboosting(player, self)) {
       demo::bookmark(#"event", gettime(), player);
@@ -748,13 +748,13 @@ function onuseobject(player) {
   self resetbombzone();
   bb::function_95a5b5c2("dem_bombdefused", self.label, team, player.origin);
 
-  if(isDefined(player.pers[# "defuses"])) {
-    player.pers[# "defuses"]++;
-    player.defuses = player.pers[# "defuses"];
+  if(isDefined(player.pers[#"defuses"])) {
+    player.pers[#"defuses"]++;
+    player.defuses = player.pers[#"defuses"];
   }
 
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
 
   if(!isscoreboosting(player, self)) {
     demo::bookmark(#"event", gettime(), player);
@@ -774,7 +774,7 @@ function onuseobject(player) {
 
 function ondrop(player) {
   if(!level.bombplanted) {
-    globallogic_audio::leader_dialog("bombFriendlyDropped", player.pers[# "team"]);
+    globallogic_audio::leader_dialog("bombFriendlyDropped", player.pers[#"team"]);
 
     if(isDefined(player)) {
       print("<dev string:x17d>");
@@ -792,8 +792,8 @@ function onpickup(player) {
   player thread function_1e8f61d1();
 
   if(!level.bombdefused) {
-    thread sound::play_on_players("mus_sd_pickup" + "_" + level.teampostfix[player.pers[# "team"]], player.pers[# "team"]);
-    globallogic_audio::leader_dialog("bombFriendlyTaken", player.pers[# "team"]);
+    thread sound::play_on_players("mus_sd_pickup" + "_" + level.teampostfix[player.pers[#"team"]], player.pers[#"team"]);
+    globallogic_audio::leader_dialog("bombFriendlyTaken", player.pers[#"team"]);
 
     print("<dev string:x18d>");
   }
@@ -832,19 +832,19 @@ function dropbombmodel(player, site) {
   trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
   tempangle = randomfloat(360);
   forward = (cos(tempangle), sin(tempangle), 0);
-  forward = vectornormalize(forward - vectorscale(trace[# "normal"], vectordot(forward, trace[# "normal"])));
+  forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
   dropangles = vectortoangles(forward);
   offset = (0, 0, 3);
 
-  if(isDefined(trace[# "surfacetype"]) && trace[# "surfacetype"] == "water") {
+  if(isDefined(trace[#"surfacetype"]) && trace[#"surfacetype"] == "water") {
     phystrace = playerphysicstrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000));
 
     if(isDefined(phystrace)) {
-      trace[# "position"] = phystrace;
+      trace[#"position"] = phystrace;
     }
   }
 
-  level.ddbombmodel[site] = spawn("script_model", trace[# "position"] + offset);
+  level.ddbombmodel[site] = spawn("script_model", trace[#"position"] + offset);
   level.ddbombmodel[site].angles = dropangles;
   level.ddbombmodel[site] setModel(#"wpn_t9_eqp_c4_bomb_world");
 }
@@ -891,7 +891,7 @@ function bombplanted(destroyedobj, player) {
   level endon(#"game_ended");
   destroyedobj endon(#"bomb_defused");
   team = player.team;
-  game.challenge[team][# "plantedbomb"] = 1;
+  game.challenge[team][#"plantedbomb"] = 1;
   globallogic_utils::pausetimer();
   level.timerpaused = 1;
   destroyedobj.bombplanted = 1;
@@ -914,7 +914,7 @@ function bombplanted(destroyedobj, player) {
   }
 
   destroyedobj setupfordefusing();
-  game.challenge[team][# "plantedbomb"] = 1;
+  game.challenge[team][#"plantedbomb"] = 1;
   destroyedobj function_473a1738(label, level.bombtimer);
   destroyedobj function_c15fc31f(label, "bomb_exploded");
 
@@ -930,7 +930,7 @@ function bombplanted(destroyedobj, player) {
 
   bb::function_95a5b5c2("dem_bombexplode", label, team, origin);
   destroyedobj.bombexploded = 1;
-  game.challenge[team][# "destroyedbombsite"] = 1;
+  game.challenge[team][#"destroyedbombsite"] = 1;
   explosionorigin = destroyedobj.curorigin;
   level.ddbombmodel[destroyedobj.label] delete();
 
@@ -964,7 +964,7 @@ function bombplanted(destroyedobj, player) {
   level.var_21479330 = currenttime;
   level.var_3b2307bb = team;
   rot = randomfloat(360);
-  explosioneffect = spawnfx(level._effect[# "bombexplosion"], explosionorigin + (0, 0, 50), (0, 0, 1), (cos(rot), sin(rot), 0));
+  explosioneffect = spawnfx(level._effect[#"bombexplosion"], explosionorigin + (0, 0, 50), (0, 0, 1), (cos(rot), sin(rot), 0));
   triggerfx(explosioneffect);
   destroyedobj thread function_98274264();
   thread sound::play_in_space("mpl_sd_exp_suitcase_bomb_main", explosionorigin);
@@ -999,7 +999,7 @@ function bombplanted(destroyedobj, player) {
   }
 
   foreach(player in level.players) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(team === # "spectator") {
       continue;
@@ -1022,7 +1022,7 @@ function function_98274264() {
   var_e6397375 = anglesToForward(self.visuals[0].angles);
   var_213527e2 = anglestoup(self.visuals[0].angles);
   wait 0.1;
-  var_238e7468 = spawnfx(level._effect[# "hash_568509fa2561a75d"], var_d46e7070, var_e6397375, var_213527e2);
+  var_238e7468 = spawnfx(level._effect[#"hash_568509fa2561a75d"], var_d46e7070, var_e6397375, var_213527e2);
   triggerfx(var_238e7468);
 }
 
@@ -1045,7 +1045,7 @@ function shouldplayovertimeround() {
     return false;
   }
 
-  if(game.stat[# "teamscores"][# "allies"] == level.roundwinlimit - 1 && game.stat[# "teamscores"][# "axis"] == level.roundwinlimit - 1) {
+  if(game.stat[#"teamscores"][#"allies"] == level.roundwinlimit - 1 && game.stat[#"teamscores"][#"axis"] == level.roundwinlimit - 1) {
     return true;
   }
 
@@ -1126,8 +1126,8 @@ function function_1e4847e() {
   self.var_57260b12++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
-    minutespassed = self.timeplayed[# "total"] / 60;
+  if(isPlayer(self) && isDefined(self.timeplayed[#"total"])) {
+    minutespassed = self.timeplayed[#"total"] / 60;
   }
 
   self.var_a6766873 = self.var_57260b12 / minutespassed;

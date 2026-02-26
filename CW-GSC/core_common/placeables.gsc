@@ -309,9 +309,9 @@ function watchplacement(placeable) {
 
   while(true) {
     placement = player canplayerplaceturret();
-    placeable.origin = placement[# "origin"];
-    placeable.angles = placement[# "angles"];
-    placeable.canbeplaced = placement[# "result"] && !placeable innoplacementtrigger();
+    placeable.origin = placement[#"origin"];
+    placeable.angles = placement[#"angles"];
+    placeable.canbeplaced = placement[#"result"] && !placeable innoplacementtrigger();
     laststand = player laststand::player_is_in_laststand();
     in_igc = player scene::is_igc_active();
 
@@ -320,8 +320,8 @@ function watchplacement(placeable) {
     }
 
     if(isDefined(placeable.othermodel)) {
-      placeable.othermodel.origin = placement[# "origin"];
-      placeable.othermodel.angles = placement[# "angles"];
+      placeable.othermodel.origin = placement[#"origin"];
+      placeable.othermodel.angles = placement[#"angles"];
     }
 
     if(placeable.canbeplaced != lastattempt) {
@@ -353,13 +353,13 @@ function watchplacement(placeable) {
         }
       }
 
-      if(placement[# "result"] && buildallowed && isDefined(placeable.var_d944a140)) {
-        buildallowed = placeable[[placeable.var_d944a140]](placement[# "origin"], player);
+      if(placement[#"result"] && buildallowed && isDefined(placeable.var_d944a140)) {
+        buildallowed = placeable[[placeable.var_d944a140]](placement[#"origin"], player);
       }
 
-      if(placement[# "result"] && buildallowed) {
-        placeable.origin = placement[# "origin"];
-        placeable.angles = placement[# "angles"];
+      if(placement[#"result"] && buildallowed) {
+        placeable.origin = placement[#"origin"];
+        placeable.angles = placement[#"angles"];
         player sethintstring("");
         player stopcarryturret(placeable);
         player val::reset(#"placeable", "disable_weapons");

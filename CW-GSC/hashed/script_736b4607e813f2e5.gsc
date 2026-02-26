@@ -59,7 +59,7 @@ function init() {
   clientfield::register("scriptmover", "blight_father_gib_explosion", 1, 1, "int");
   namespace_250e9486::function_252dff4d("blight_father", 1, &function_22de5bc1);
   registerbehaviorscriptfunctions();
-  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
+  level.var_c2981ce9 = [#"tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
 
   if(true) {
     level.var_445e24c8 = [];
@@ -650,7 +650,7 @@ function private function_19249d10(entity) {
 
   test_trace = function_5d7f8057(entity, entity.favoriteenemy);
 
-  if(test_trace[# "fraction"] < 1 && test_trace[# "entity"] !== entity.favoriteenemy) {
+  if(test_trace[#"fraction"] < 1 && test_trace[#"entity"] !== entity.favoriteenemy) {
     return false;
   }
 
@@ -906,8 +906,8 @@ function private function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   move_to_point = self.origin + move_vector;
   trace = bulletTrace(self.origin, move_to_point, 0, self);
 
-  if(trace[# "surfacetype"] !== "none") {
-    detonate_point = trace[# "position"];
+  if(trace[#"surfacetype"] !== "none") {
+    detonate_point = trace[#"position"];
     dist_sq = distancesquared(detonate_point, self.origin);
     move_dist_sq = move_distance * move_distance;
     ratio = dist_sq / move_dist_sq;

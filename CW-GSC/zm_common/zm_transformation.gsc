@@ -733,7 +733,7 @@ function function_3f433f41() {
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
   trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
 
-  if(trace[# "fraction"] >= 1) {
+  if(trace[#"fraction"] >= 1) {
     return;
   }
 
@@ -746,7 +746,7 @@ function function_3f433f41() {
     return;
   }
 
-  zombie forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+  zombie forceteleport(trace[#"position"], player.angles + (0, 180, 0));
   return zombie;
 }
 

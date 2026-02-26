@@ -45,7 +45,7 @@ function private reset_points(var_899c6d17) {
   }
 
   self.score = var_899c6d17;
-  self.pers[# "score"] = var_899c6d17;
+  self.pers[#"score"] = var_899c6d17;
 }
 
 function private on_end(round_reset) {}

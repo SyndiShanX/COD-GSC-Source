@@ -143,7 +143,7 @@ watchforexplosion(localclientnum) {
       if(vectordot(forwardvec, explosionvec) > 0) {
         trace = bulletTrace(getlocalclienteyepos(localclientnum), position, 0, self);
 
-        if(trace[# "fraction"] >= 0.9) {
+        if(trace[#"fraction"] >= 0.9) {
           udot = -1 * vectordot(explosionvec, upvec);
           rdot = vectordot(explosionvec, rightvec);
           udotabs = abs(udot);

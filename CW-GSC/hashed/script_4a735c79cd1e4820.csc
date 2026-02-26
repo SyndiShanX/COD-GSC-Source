@@ -105,8 +105,8 @@ function function_80d28d77(localclientnum, impactfx, var_4b30f907, var_9cb23c3, 
 
         var_9207bc91 = (1, 0, 0);
 
-        if(trace[# "entity"] === self) {
-          dot = vectordot(tracenormal, trace[# "normal"]) * -1;
+        if(trace[#"entity"] === self) {
+          dot = vectordot(tracenormal, trace[#"normal"]) * -1;
 
           if(dot >= var_b6a0baae) {
             if(isarray(impactfx)) {
@@ -115,14 +115,14 @@ function function_80d28d77(localclientnum, impactfx, var_4b30f907, var_9cb23c3, 
               fx = impactfx;
             }
 
-            self thread function_7355defa(localclientnum, fx, var_9cb23c3, trace[# "position"], trace[# "normal"], var_1d1675b);
+            self thread function_7355defa(localclientnum, fx, var_9cb23c3, trace[#"position"], trace[#"normal"], var_1d1675b);
 
             var_9207bc91 = (0, 1, 1);
           }
         }
 
         if(getdvarint(#"hash_8d6bf09ce80eeff", 0)) {
-          line(start, trace[# "position"], var_9207bc91, 1, 1, 60);
+          line(start, trace[#"position"], var_9207bc91, 1, 1, 60);
         }
       }
     }

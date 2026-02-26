@@ -82,24 +82,24 @@ function function_6afceef5() {
 
 function function_aebeccea() {
   var_5d14e11e = [];
-  var_5d14e11e[# "prone"] = 400;
-  var_5d14e11e[# "crouch"] = 800;
-  var_5d14e11e[# "stand"] = 1500;
+  var_5d14e11e[#"prone"] = 400;
+  var_5d14e11e[#"crouch"] = 800;
+  var_5d14e11e[#"stand"] = 1500;
   var_8293536e = [];
-  var_8293536e[# "prone"] = 8192;
-  var_8293536e[# "crouch"] = 8192;
-  var_8293536e[# "stand"] = 8192;
+  var_8293536e[#"prone"] = 8192;
+  var_8293536e[#"crouch"] = 8192;
+  var_8293536e[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(var_5d14e11e, var_8293536e);
 }
 
 function function_ad08c00b() {
   var_5d14e11e = [];
-  var_5d14e11e[# "prone"] = 200;
-  var_5d14e11e[# "crouch"] = 400;
-  var_5d14e11e[# "stand"] = 600;
+  var_5d14e11e[#"prone"] = 200;
+  var_5d14e11e[#"crouch"] = 400;
+  var_5d14e11e[#"stand"] = 600;
   var_8293536e = [];
-  var_8293536e[# "prone"] = 300;
-  var_8293536e[# "crouch"] = 600;
-  var_8293536e[# "stand"] = 1200;
+  var_8293536e[#"prone"] = 300;
+  var_8293536e[#"crouch"] = 600;
+  var_8293536e[#"stand"] = 1200;
   namespace_979752dc::set_detect_ranges(var_5d14e11e, var_8293536e);
 }

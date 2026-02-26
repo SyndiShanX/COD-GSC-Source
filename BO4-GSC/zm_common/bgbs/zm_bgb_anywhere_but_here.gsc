@@ -24,9 +24,9 @@ __init__() {
     return;
   }
 
-  level._effect[# "teleport_splash"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
-  level._effect[# "teleport_aoe"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
-  level._effect[# "teleport_aoe_kill"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
+  level._effect[#"teleport_splash"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
+  level._effect[#"teleport_aoe"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
+  level._effect[#"teleport_aoe_kill"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
   bgb::register(#"zm_bgb_anywhere_but_here", "activated", 1, undefined, undefined, &validation, &activation);
   bgb::function_72469efe(#"zm_bgb_anywhere_but_here", 1);
   bgb::function_8a5d8cfb(#"zm_bgb_anywhere_but_here", 1);
@@ -113,17 +113,17 @@ activation(var_fad9ed02 = 1) {
   }
 
   self show();
-  playFX(level._effect[# "teleport_splash"], self.origin);
-  playFX(level._effect[# "teleport_aoe"], self.origin);
+  playFX(level._effect[#"teleport_splash"], self.origin);
+  playFX(level._effect[#"teleport_aoe"], self.origin);
   a_ai = getaiarray();
   a_aoe_ai = arraysortclosest(a_ai, self.origin, a_ai.size, 0, 200);
 
   foreach(ai in a_aoe_ai) {
     if(isactor(ai)) {
       if(ai.archetype === # "zombie") {
-        playFX(level._effect[# "teleport_aoe_kill"], ai gettagorigin("j_spineupper"));
+        playFX(level._effect[#"teleport_aoe_kill"], ai gettagorigin("j_spineupper"));
       } else {
-        playFX(level._effect[# "teleport_aoe_kill"], ai.origin);
+        playFX(level._effect[#"teleport_aoe_kill"], ai.origin);
       }
 
       ai playSound(#"hash_22ff6701cf652785");

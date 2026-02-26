@@ -69,11 +69,11 @@ init() {
 }
 
 init_fx() {
-  level._effect[# "hash_41a5c5168ffb2a97"] = # "hash_7b0d80c48289dd0b";
-  level._effect[# "hash_400a481490a4e390"] = # "hash_29138c752c86a486";
-  level._effect[# "hash_5562e324d230f057"] = # "hash_495fc19edc59bb4e";
-  level._effect[# "hash_41fae186552f1259"] = # "hash_22decafaaa11e437";
-  level._effect[# "freezing_mist"] = # "hash_7379a044e62d65f";
+  level._effect[#"hash_41a5c5168ffb2a97"] = # "hash_7b0d80c48289dd0b";
+  level._effect[#"hash_400a481490a4e390"] = # "hash_29138c752c86a486";
+  level._effect[#"hash_5562e324d230f057"] = # "hash_495fc19edc59bb4e";
+  level._effect[#"hash_41fae186552f1259"] = # "hash_22decafaaa11e437";
+  level._effect[#"freezing_mist"] = # "hash_7379a044e62d65f";
 }
 
 init_clientfields() {
@@ -637,7 +637,7 @@ function_bc253abc() {
   zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   var_ec2a4d18 = scene::get_active_scenes(#"p8_fxanim_zm_zod_sentinel_chaos_bundle");
   var_e0c609e3 = var_ec2a4d18[0];
-  var_b62e2cca = var_e0c609e3.scene_ents[# "prop 3"];
+  var_b62e2cca = var_e0c609e3.scene_ents[#"prop 3"];
   var_7349be2e = self.script_noteworthy === # "hash_5db5a7e2cb1cab66" ? "chaos_tops_left_jnt" : "chaos_tops_right_jnt";
   self.var_3501cf51.var_9090fb06 = self.var_3501cf51.angles;
   self.var_9fb69ce.var_9090fb06 = self.var_9fb69ce.angles;
@@ -2667,7 +2667,7 @@ function_53a78cbd() {
   self endon("27434ec2d49bebb3");
   self endon(#"death");
   var_d9ebae63 = gettime();
-  var_82f4c12b = level.hero_weapon[# "chakram"];
+  var_82f4c12b = level.hero_weapon[#"chakram"];
 
   while(!level flag::get(#"hash_1a742576c41a0ab9")) {
     s_result = self waittill(#"weapon_fired");
@@ -2712,7 +2712,7 @@ function_53a78cbd() {
         v_trace_end = v_start + v_forward * 10000;
         a_trace = bulletTrace(v_start, v_trace_end, 1, self);
 
-        if(isDefined(a_trace[# "entity"]) || a_trace[# "surfacetype"] !== "default" && a_trace[# "surfacetype"] !== "none") {
+        if(isDefined(a_trace[#"entity"]) || a_trace[#"surfacetype"] !== "default" && a_trace[#"surfacetype"] !== "none") {
           break;
         }
 

@@ -350,7 +350,7 @@ function_55de888f(watcher) {
     profilestop();
 
     if(level.teambased && !sessionmodeiswarzonegame()) {
-      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(attackerisplayer && !(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }

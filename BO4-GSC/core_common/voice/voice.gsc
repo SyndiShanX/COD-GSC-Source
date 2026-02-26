@@ -454,11 +454,11 @@ function_5f8e1b94(scriptkey) {
 }
 
 function_e2a07e55() {
-  return isDefined(level.handlers) && isDefined(level.handlers[# "allies"]) && isDefined(level.handlers[# "axis"]);
+  return isDefined(level.handlers) && isDefined(level.handlers[#"allies"]) && isDefined(level.handlers[#"axis"]);
 }
 
 function_42a109b9() {
-  return isDefined(level.commanders) && isDefined(level.commanders[# "allies"]) && isDefined(level.commanders[# "axis"]);
+  return isDefined(level.commanders) && isDefined(level.commanders[#"allies"]) && isDefined(level.commanders[#"axis"]);
 }
 
 function_a36ee9b7() {

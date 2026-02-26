@@ -44,11 +44,11 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function init(instance) {
-  instance.var_42dcbe3d = instance.contentgroups[# "hash_38e22f5ceb9065c"];
-  instance.var_559503f1 = instance.contentgroups[# "spawn_pt"];
+  instance.var_42dcbe3d = instance.contentgroups[#"hash_38e22f5ceb9065c"];
+  instance.var_559503f1 = instance.contentgroups[#"spawn_pt"];
 
-  if(isDefined(instance.contentgroups[# "base"][0])) {
-    instance.mdl_base = content_manager::spawn_script_model(instance.contentgroups[# "base"][0], instance.contentgroups[# "base"][0].model, 1);
+  if(isDefined(instance.contentgroups[#"base"][0])) {
+    instance.mdl_base = content_manager::spawn_script_model(instance.contentgroups[#"base"][0], instance.contentgroups[#"base"][0].model, 1);
 
     if(isDefined(instance.mdl_base)) {
       instance.mdl_base setscale(1.55);
@@ -676,7 +676,7 @@ function function_ddb668e6() {
   self flag::wait_till(#"final_spawn");
   n_spawns = self function_4fbba5c();
   var_1fabc58c = [];
-  var_559503f1 = self.contentgroups[# "final_pt"];
+  var_559503f1 = self.contentgroups[#"final_pt"];
 
   foreach(s_pt in var_559503f1) {
     if(s_pt.script_int === self.var_237b170c) {
@@ -1574,7 +1574,7 @@ function function_fb9dff2f(instance, activator) {
 }
 
 function function_782f0d1f() {
-  var_cdce8e6f = self.contentgroups[# "hash_5819d8571ea7c838"][0];
+  var_cdce8e6f = self.contentgroups[#"hash_5819d8571ea7c838"][0];
 
   if(isDefined(var_cdce8e6f.script_noteworthy)) {
     self flag::set(#"hash_12988a5a3e6a65d6");

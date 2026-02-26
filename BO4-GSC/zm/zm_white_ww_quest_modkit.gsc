@@ -83,7 +83,7 @@ modkit_crafted(e_player) {
 
 function_1665b086() {
   function_456e91dd();
-  level.var_4fe2f84d[# "ztable_white_ww_modkit"][0] zm_crafting::function_a187b293(getplayers()[0]);
+  level.var_4fe2f84d[#"ztable_white_ww_modkit"][0] zm_crafting::function_a187b293(getplayers()[0]);
   zm_crafting::function_ca244624(#"ztable_white_ww_modkit");
 }
 
@@ -175,7 +175,7 @@ function_584d6092(e_user) {
 
 function_9dc2db01(var_4bef01e6, str_color) {
   self scene::play("init");
-  e_model = self.scene_ents[# "fluid"];
+  e_model = self.scene_ents[#"fluid"];
 
   switch (str_color) {
     case # "green":

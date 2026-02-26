@@ -381,15 +381,15 @@ function give_killstreaks(var_67fe8973) {
 
             if(is_true(level.usingscorestreaks)) {
               if(weapon.iscarriedkillstreak) {
-                if(!isDefined(self.pers[# "held_killstreak_ammo_count"][weapon])) {
-                  self.pers[# "held_killstreak_ammo_count"][weapon] = 0;
+                if(!isDefined(self.pers[#"held_killstreak_ammo_count"][weapon])) {
+                  self.pers[#"held_killstreak_ammo_count"][weapon] = 0;
                 }
 
-                if(!isDefined(self.pers[# "held_killstreak_clip_count"][weapon])) {
-                  self.pers[# "held_killstreak_clip_count"][weapon] = 0;
+                if(!isDefined(self.pers[#"held_killstreak_clip_count"][weapon])) {
+                  self.pers[#"held_killstreak_clip_count"][weapon] = 0;
                 }
 
-                if(self.pers[# "held_killstreak_ammo_count"][weapon] > 0) {
+                if(self.pers[#"held_killstreak_ammo_count"][weapon] > 0) {
                   self killstreaks::function_fa6e0467(weapon);
                 } else {
                   self loadout::function_3ba6ee5d(weapon, 0);
@@ -397,8 +397,8 @@ function give_killstreaks(var_67fe8973) {
               } else {
                 quantity = 0;
 
-                if(isDefined(self.pers[# "killstreak_quantity"]) && isDefined(self.pers[# "killstreak_quantity"][weapon])) {
-                  quantity = self.pers[# "killstreak_quantity"][weapon];
+                if(isDefined(self.pers[#"killstreak_quantity"]) && isDefined(self.pers[#"killstreak_quantity"][weapon])) {
+                  quantity = self.pers[#"killstreak_quantity"][weapon];
                 }
 
                 self setweaponammoclip(weapon, quantity);
@@ -530,7 +530,7 @@ function function_11fa5782(vehicletype, droppoint) {
 
   ground_pos = bulletTrace(droppoint.origin + (0, 0, 128), droppoint.origin - (0, 0, 128), 0, undefined, 1);
   level.var_1059a6b4 = (level.var_1059a6b4 + 1) % level.var_5a6cc4da.size;
-  var_d5552131 = spawnvehicle(vehicletype, ground_pos[# "position"] + (0, 0, 120), droppoint.angles);
+  var_d5552131 = spawnvehicle(vehicletype, ground_pos[#"position"] + (0, 0, 120), droppoint.angles);
 
   if(!isDefined(var_d5552131)) {
     return;
@@ -662,8 +662,8 @@ function function_1f93e91f(params) {
     offset = (0, 0, 10000);
     trace = groundtrace(params.droppoint + offset, params.droppoint - offset, 0, undefined, 0);
 
-    if(isDefined(trace[# "position"])) {
-      droppoint = trace[# "position"];
+    if(isDefined(trace[#"position"])) {
+      droppoint = trace[#"position"];
     }
 
     globallogic_audio::function_61e17de0("fireteamVehDrop", getplayers(undefined, droppoint, 6000));

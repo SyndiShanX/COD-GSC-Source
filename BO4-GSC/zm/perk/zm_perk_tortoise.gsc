@@ -39,10 +39,10 @@ enable_tortoise_perk_for_level() {
 function_3cc019d7() {}
 
 function_1441654f() {
-  level.machine_assets[# "specialty_shield"] = spawnStruct();
-  level.machine_assets[# "specialty_shield"].weapon = getweapon("zombie_perk_bottle_tortoise");
-  level.machine_assets[# "specialty_shield"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[# "specialty_shield"].on_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_shield"] = spawnStruct();
+  level.machine_assets[#"specialty_shield"].weapon = getweapon("zombie_perk_bottle_tortoise");
+  level.machine_assets[#"specialty_shield"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[#"specialty_shield"].on_model = "p7_zm_vending_nuke";
 }
 
 function_2ebeec84() {

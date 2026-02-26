@@ -347,25 +347,25 @@ give_killstreaks(a_str_killstreaks) {
 
             if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
               if(weapon.iscarriedkillstreak) {
-                if(!isDefined(self.pers[# "held_killstreak_ammo_count"][weapon])) {
-                  self.pers[# "held_killstreak_ammo_count"][weapon] = 0;
+                if(!isDefined(self.pers[#"held_killstreak_ammo_count"][weapon])) {
+                  self.pers[#"held_killstreak_ammo_count"][weapon] = 0;
                 }
 
-                if(!isDefined(self.pers[# "held_killstreak_clip_count"][weapon])) {
-                  self.pers[# "held_killstreak_clip_count"][weapon] = 0;
+                if(!isDefined(self.pers[#"held_killstreak_clip_count"][weapon])) {
+                  self.pers[#"held_killstreak_clip_count"][weapon] = 0;
                 }
 
-                if(self.pers[# "held_killstreak_ammo_count"][weapon] > 0) {
-                  self setweaponammoclip(weapon, self.pers[# "held_killstreak_clip_count"][weapon]);
-                  self setweaponammostock(weapon, self.pers[# "held_killstreak_ammo_count"][weapon] - self.pers[# "held_killstreak_clip_count"][weapon]);
+                if(self.pers[#"held_killstreak_ammo_count"][weapon] > 0) {
+                  self setweaponammoclip(weapon, self.pers[#"held_killstreak_clip_count"][weapon]);
+                  self setweaponammostock(weapon, self.pers[#"held_killstreak_ammo_count"][weapon] - self.pers[#"held_killstreak_clip_count"][weapon]);
                 } else {
                   self function_3ba6ee5d(weapon, 0);
                 }
               } else {
                 quantity = 0;
 
-                if(isDefined(self.pers[# "killstreak_quantity"]) && isDefined(self.pers[# "killstreak_quantity"][weapon])) {
-                  quantity = self.pers[# "killstreak_quantity"][weapon];
+                if(isDefined(self.pers[#"killstreak_quantity"]) && isDefined(self.pers[#"killstreak_quantity"][weapon])) {
+                  quantity = self.pers[#"killstreak_quantity"][weapon];
                 }
 
                 self setweaponammoclip(weapon, quantity);

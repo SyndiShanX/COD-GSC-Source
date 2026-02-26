@@ -109,8 +109,8 @@ function private function_637778cf() {
     target_set(self, (0, 0, 48));
   }
 
-  self.score_events[# "kill"] = settingsbundle.scoreevent;
-  self.score_events[# "assist"] = settingsbundle.var_dc706c6c;
+  self.score_events[#"kill"] = settingsbundle.scoreevent;
+  self.score_events[#"assist"] = settingsbundle.var_dc706c6c;
   self.var_7b22b800 = settingsbundle.var_7b22b800;
   self.var_19f5037 = namespace_42457a0::function_9caeb2f3(settingsbundle.var_349be1e8);
 

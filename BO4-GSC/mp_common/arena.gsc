@@ -25,7 +25,7 @@ __init__() {
 }
 
 on_connect() {
-  if(isDefined(self.pers[# "arenainit"]) && self.pers[# "arenainit"] == 1) {
+  if(isDefined(self.pers[#"arenainit"]) && self.pers[#"arenainit"] == 1) {
     return;
   }
 
@@ -36,11 +36,11 @@ on_connect() {
     self arenabeginmatch();
 
     if(function_945560bf() == 1) {
-      self.pers[# "hash_1b5251cc167039c8"] = self function_a200171d();
+      self.pers[#"hash_1b5251cc167039c8"] = self function_a200171d();
     }
   }
 
-  self.pers[# "arenainit"] = 1;
+  self.pers[#"arenainit"] = 1;
 }
 
 function_b856a952(team) {
@@ -50,12 +50,12 @@ function_b856a952(team) {
     for(index = 0; index < level.players.size; index++) {
       player = level.players[index];
 
-      if(isDefined(player.team) && player.team == team && !isDefined(player.pers[# "hash_6dbbb195b62e0dd3"])) {
-        if(isDefined(player.pers[# "arenainit"]) && player.pers[# "arenainit"] == 1) {
-          if(isDefined(player.pers[# "hash_1b5251cc167039c8"])) {
+      if(isDefined(player.team) && player.team == team && !isDefined(player.pers[#"hash_6dbbb195b62e0dd3"])) {
+        if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
+          if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
             player function_ca53535e(penalty);
-            player function_46445a75(player.pers[# "hash_1b5251cc167039c8"]);
-            player.pers[# "hash_6dbbb195b62e0dd3"] = 1;
+            player function_46445a75(player.pers[#"hash_1b5251cc167039c8"]);
+            player.pers[#"hash_6dbbb195b62e0dd3"] = 1;
           }
         }
       }
@@ -115,7 +115,7 @@ match_end() {
   for(index = 0; index < level.players.size; index++) {
     player = level.players[index];
 
-    if(isDefined(player.pers[# "arenainit"]) && player.pers[# "arenainit"] == 1) {
+    if(isDefined(player.pers[#"arenainit"]) && player.pers[#"arenainit"] == 1) {
       if(match::get_flag("tie")) {
         player arenaendmatch(0);
       } else if(match::function_a2b53e17(player)) {
@@ -124,8 +124,8 @@ match_end() {
         player arenaendmatch(-1);
       }
 
-      if(isDefined(player.pers[# "hash_1b5251cc167039c8"])) {
-        player function_46445a75(player.pers[# "hash_1b5251cc167039c8"]);
+      if(isDefined(player.pers[#"hash_1b5251cc167039c8"])) {
+        player function_46445a75(player.pers[#"hash_1b5251cc167039c8"]);
       }
     }
   }

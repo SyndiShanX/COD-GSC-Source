@@ -119,7 +119,7 @@ __init__() {
     }
   }
 
-  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
+  level.var_c2981ce9 = [#"tag_mouth_weakspot": &function_fa7c080, #"tag_elbow_weakspot_le": &function_9bbe631c, #"tag_elbow_weakspot_ri": &function_5a1a4ad, #"tag_eggsack_weakspot_le": &function_40034805, #"tag_eggsack_weakspot_ri": &function_33b2c99e];
   zm_ai_utility::function_2ad308c4(#"blight_father", &function_744be31d);
   zm_trial_special_enemy::function_95c1dd81(#"blight_father", &function_2315440d);
   namespace_9ff9f642::register_slowdown(#"hash_2fd5f5f16583a427", 0.8);
@@ -975,7 +975,7 @@ function_afce1cf(inflictor, attacker, damage, flags, meansofdamage, weapon, poin
 
 function_f9d9f198(entity) {
   var_bee929e7 = entity astsearch("grapple_attack_vomit@blight_father");
-  animname = animationstatenetworkutility::searchanimationmap(entity, var_bee929e7[# "animation"]);
+  animname = animationstatenetworkutility::searchanimationmap(entity, var_bee929e7[#"animation"]);
   tag_pos = getanimtagorigin(animname, 0, "tag_tongue");
   var_2db07c66 = rotatepoint(tag_pos, entity gettagangles("tag_origin"));
   var_2db07c66 += entity.origin;
@@ -1094,7 +1094,7 @@ function_2784f3ff(entity) {
 
     test_trace = function_5d7f8057(entity, player);
 
-    if(test_trace[# "fraction"] == 1 || test_trace[# "entity"] === player) {
+    if(test_trace[#"fraction"] == 1 || test_trace[#"entity"] === player) {
       entity.var_bef7624d = player;
       return true;
     }
@@ -1196,8 +1196,8 @@ function_28dddd64(entity) {
     var_4c0587b = entity zm_grappler::function_f21c3519() + dir_norm * entity ai::function_9139c839().var_b30a945;
     test_trace = worldtrace(entity zm_grappler::function_f21c3519(), var_4c0587b);
 
-    if(test_trace[# "fraction"] < 1) {
-      var_4c0587b = test_trace[# "position"];
+    if(test_trace[#"fraction"] < 1) {
+      var_4c0587b = test_trace[#"position"];
     }
 
     thread function_96f5d05a(entity, var_4c0587b);
@@ -1402,7 +1402,7 @@ function_c526065b(entity, var_e0ef3075) {
   droppoint = getclosestpointonnavmesh(grapplee.origin, 64, 24);
 
   if(isDefined(droppoint)) {
-    v_ground_pos = groundtrace(droppoint + (0, 0, 50), droppoint, 0, entity)[# "position"];
+    v_ground_pos = groundtrace(droppoint + (0, 0, 50), droppoint, 0, entity)[#"position"];
 
     if(isDefined(v_ground_pos)) {
       droppoint = v_ground_pos;
@@ -1869,11 +1869,11 @@ function_7055b26(entity) {
 
     if(!isDefined(var_7162cf15)) {
       var_7162cf15 = [];
-      var_7162cf15[# "point"] = stub.origin;
+      var_7162cf15[#"point"] = stub.origin;
       halfheight = (stub.origin - zm_utility::groundpos(stub.origin))[2] + 1;
     }
 
-    queryresults = positionquery_source_navigation(var_7162cf15[# "point"], 0, 256, halfheight, 20, 1);
+    queryresults = positionquery_source_navigation(var_7162cf15[#"point"], 0, 256, halfheight, 20, 1);
 
     if(queryresults.data.size == 0) {
       return;
@@ -1882,7 +1882,7 @@ function_7055b26(entity) {
     start_origin = queryresults.data[0].origin;
   } else {
     var_adac1439 = entity astsearch("purchase_lockdown_vomit@blight_father");
-    animname = animationstatenetworkutility::searchanimationmap(entity, var_adac1439[# "animation"]);
+    animname = animationstatenetworkutility::searchanimationmap(entity, var_adac1439[#"animation"]);
     start_origin = getstartorigin(var_4afb24b6.origin, var_4afb24b6.angles, animname);
   }
 
@@ -2140,7 +2140,7 @@ function_19249d10(entity) {
 
   test_trace = function_5d7f8057(entity, entity.favoriteenemy);
 
-  if(test_trace[# "fraction"] < 1 && test_trace[# "entity"] !== entity.favoriteenemy) {
+  if(test_trace[#"fraction"] < 1 && test_trace[#"entity"] !== entity.favoriteenemy) {
     return false;
   }
 
@@ -2393,8 +2393,8 @@ function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   move_to_point = self.origin + move_vector;
   trace = bulletTrace(self.origin, move_to_point, 0, self);
 
-  if(trace[# "surfacetype"] !== "none") {
-    detonate_point = trace[# "position"];
+  if(trace[#"surfacetype"] !== "none") {
+    detonate_point = trace[#"position"];
     dist_sq = distancesquared(detonate_point, self.origin);
     move_dist_sq = move_distance * move_distance;
     ratio = dist_sq / move_dist_sq;
@@ -2679,8 +2679,8 @@ function_a24ee603() {
   a_ai_blight_father = array::remove_dead(a_ai_blight_father);
   var_8e350fd9 = a_ai_blight_father.size;
 
-  if(isarray(level.var_b175714d) && isDefined(level.var_b175714d[# "blight_father"]) && isDefined(level.var_b175714d[# "blight_father"].var_33e393a7)) {
-    var_8e350fd9 += level.var_b175714d[# "blight_father"].var_33e393a7;
+  if(isarray(level.var_b175714d) && isDefined(level.var_b175714d[#"blight_father"]) && isDefined(level.var_b175714d[#"blight_father"].var_33e393a7)) {
+    var_8e350fd9 += level.var_b175714d[#"blight_father"].var_33e393a7;
   }
 
   return var_8e350fd9;

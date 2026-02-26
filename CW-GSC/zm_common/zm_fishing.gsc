@@ -51,7 +51,7 @@ function function_a225198d(destination) {
 
 function function_43eaec20(destination) {
   foreach(location in destination.locations) {
-    var_2a4db591 = location.instances[# "fishing"];
+    var_2a4db591 = location.instances[#"fishing"];
 
     if(isDefined(var_2a4db591)) {
       content_manager::spawn_instance(var_2a4db591);
@@ -61,7 +61,7 @@ function function_43eaec20(destination) {
 
 function function_29307fae(struct) {
   assert(isstruct(struct), "<dev string:x38>");
-  spawn_points = struct.contentgroups[# "fishing_spawn"];
+  spawn_points = struct.contentgroups[#"fishing_spawn"];
 
   foreach(point in spawn_points) {
     spawn_struct = point;
@@ -69,11 +69,11 @@ function function_29307fae(struct) {
     var_16129dba clientfield::set("set_compass_icon", 1);
     var_1dfa9e6 = content_manager::spawn_script_model(spawn_struct, undefined);
     var_1dfa9e6 playLoopSound(#"hash_30a2fa81c37f5aff");
-    assert(isDefined(spawn_struct.contentgroups[# "hash_a8d2c2c21149a79"]), "<dev string:x56>");
-    var_c4b6fa2d = spawn_struct.contentgroups[# "hash_a8d2c2c21149a79"];
+    assert(isDefined(spawn_struct.contentgroups[#"hash_a8d2c2c21149a79"]), "<dev string:x56>");
+    var_c4b6fa2d = spawn_struct.contentgroups[#"hash_a8d2c2c21149a79"];
     var_cf8192ca = content_manager::spawn_script_model(var_c4b6fa2d[0], #"p9_zm_out_fishing_01_bobber", 0);
-    assert(isDefined(spawn_struct.contentgroups[# "hash_61b2fec1f617bb75"]), "<dev string:x87>");
-    var_df283c09 = spawn_struct.contentgroups[# "hash_61b2fec1f617bb75"];
+    assert(isDefined(spawn_struct.contentgroups[#"hash_61b2fec1f617bb75"]), "<dev string:x87>");
+    var_df283c09 = spawn_struct.contentgroups[#"hash_61b2fec1f617bb75"];
     var_9fadc93c = var_df283c09[0];
     forward = anglesToForward(var_16129dba.angles);
     forward = vectornormalize(forward);
@@ -490,8 +490,8 @@ function function_eaa298d9() {
   wait 1;
   pointinfo = function_9cc082d2(self.origin, 32);
 
-  if(isDefined(pointinfo) && isDefined(pointinfo[# "point"])) {
-    navmeshposition = pointinfo[# "point"];
+  if(isDefined(pointinfo) && isDefined(pointinfo[#"point"])) {
+    navmeshposition = pointinfo[#"point"];
     var_9905e63e = spawnStruct();
     var_9905e63e.origin = navmeshposition;
     boot = mimic_prop_spawn::spawn_prop(var_9905e63e, undefined, #"hash_6290596be2341e21", 1);

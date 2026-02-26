@@ -156,7 +156,7 @@ start_zombie_stuff() {
   clientscripts\mp\_visionset_mgr::vsmgr_register_overlay_info_style_burn("zm_transit_burn", 14000, 15, 2);
 }
 
-#include_equipment_for_level() {
+include_equipment_for_level() {
   clientscripts\mp\zombies\_zm_equipment::include_equipment("equip_dieseldrone_zm");
   clientscripts\mp\zombies\_zm_equipment::include_equipment("tomb_shield_zm");
 }
@@ -309,7 +309,7 @@ init_clientflag_variables() {}
 
 register_clientflag_callbacks() {}
 
-#include_weapons() {
+include_weapons() {
   include_weapon("hamr_zm");
   include_weapon("hamr_upgraded_zm", 0);
   include_weapon("mg08_zm");
@@ -394,7 +394,7 @@ register_clientflag_callbacks() {}
   }
 }
 
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

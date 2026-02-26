@@ -285,7 +285,7 @@ function function_56700eee(a_ents) {
 }
 
 function function_2996c15f(a_ents) {
-  var_a6e592f0 = a_ents[# "hash_5caebe2b8de202c6"];
+  var_a6e592f0 = a_ents[#"hash_5caebe2b8de202c6"];
 
   if(isDefined(var_a6e592f0)) {
     var_a6e592f0 clientfield::set("" + # "orda_dissolve", 1);
@@ -304,7 +304,7 @@ function function_318f5bad(a_ents) {
   level thread hide_scene_models();
   level thread function_db84b4f4();
   level thread function_1d66a215();
-  var_a6e592f0 = a_ents[# "hash_5caebe2b8de202c6"];
+  var_a6e592f0 = a_ents[#"hash_5caebe2b8de202c6"];
 
   if(isDefined(var_a6e592f0)) {
     var_a6e592f0 clientfield::set("" + # "orda_dissolve", 1);
@@ -370,7 +370,7 @@ function function_79ae7b73() {
   level zm_utility::function_9ad5aeb1(0, 0, 1, 0);
   level.var_923e8cb4 = struct::get_array("end_fight_spawn_points");
   level teleport_players(level.var_923e8cb4);
-  level.zones[# "zone_radio_room"].is_enabled = 0;
+  level.zones[#"zone_radio_room"].is_enabled = 0;
   level.var_d6f059f7 = max(level.round_number, 20);
   level thread function_995832fb();
   level thread zm_vo::function_7622cb70(#"hash_49d2f2169f86e320");
@@ -389,7 +389,7 @@ function teleport_players(var_a347ab1) {
 }
 
 function function_32d60e81(ents) {
-  level.var_d99f785b = ents[# "hash_5caebe2b8de202c6"];
+  level.var_d99f785b = ents[#"hash_5caebe2b8de202c6"];
   level.var_d99f785b function_619a5c20();
   level.var_d99f785b setCanDamage(1);
   level.var_d99f785b clientfield::set("" + # "orda_dissolve", 1);
@@ -451,7 +451,7 @@ function function_dc466f4e() {
     level.var_9a81036b delete();
   }
 
-  a_ents[# "hash_5caebe2b8de202c6"] = level.var_d99f785b;
+  a_ents[#"hash_5caebe2b8de202c6"] = level.var_d99f785b;
   level scene::stop(#"hash_3c473c110c8c0ff6");
   level scene::init_streamer(#"hash_74463db12dcd6b5e", getplayers(), 0, 0);
   music::setmusicstate("outro_igc_1");
@@ -1150,7 +1150,7 @@ function function_de60e752(var_533ac894, a_s_spawnpoints) {
   level.var_83c0592c = 0;
 
   if(!isarray(a_s_spawnpoints)) {
-    s_zone = level.zones[# "zone_village"];
+    s_zone = level.zones[#"zone_village"];
     a_s_spawnpoints = struct::get_array(s_zone.name + "_spawns");
     a_s_spawnpoints = arraycombine(a_s_spawnpoints, struct::get_array(s_zone.name + "_spawner"), 0, 0);
     var_e6217dda = getarraykeys(s_zone.adjacent_zones);
@@ -1369,7 +1369,7 @@ function function_e4db583b(var_238eb6ec, var_bce45f4a = 0, var_533ac894, var_cb5
   ai_mimic = undefined;
 
   if(!isarray(var_cb579f71)) {
-    s_zone = level.zones[# "zone_village"];
+    s_zone = level.zones[#"zone_village"];
     var_cb579f71 = struct::get_array(s_zone.name + "_spawns");
     var_cb579f71 = arraycombine(var_cb579f71, struct::get_array(s_zone.name + "_spawner"), 0, 0);
     var_e6217dda = getarraykeys(s_zone.adjacent_zones);
@@ -1494,7 +1494,7 @@ function function_c7f8bea5(var_238eb6ec, var_9919554c = 0, var_533ac894, var_291
   var_7e46a1cf = undefined;
 
   if(!isarray(var_29173f01)) {
-    s_zone = level.zones[# "zone_village"];
+    s_zone = level.zones[#"zone_village"];
     var_29173f01 = struct::get_array(s_zone.name + "_spawns");
     var_29173f01 = arraycombine(var_29173f01, struct::get_array(s_zone.name + "_spawner"), 0, 0);
     var_e6217dda = getarraykeys(s_zone.adjacent_zones);

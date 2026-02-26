@@ -186,7 +186,7 @@ function private function_fa4f5603(statemachine, var_9e3df858) {
   var_ab72a295 = struct::get("hint_evidence_board", "targetname");
   var_63754fbc = util::spawn_model("tag_origin", var_ab72a295.origin);
   blackboard.var_63754fbc = var_63754fbc;
-  blackboard.var_7117f05e = [# "menu/recruit", #"menu/regular", #"hash_5eb0fe85b0c234b0", #"menu/veteran", #"menu/heroic"];
+  blackboard.var_7117f05e = [#"menu/recruit", #"menu/regular", #"hash_5eb0fe85b0c234b0", #"menu/veteran", #"menu/heroic"];
   statemachine.blackboard = blackboard;
 }
 
@@ -504,8 +504,8 @@ function private function_1bb19090() {
   player = self;
   assert(isPlayer(player));
   assert(isDefined(player.state_machines));
-  assert(isDefined(player.state_machines[# "eboard_state_machine"]));
-  return player.state_machines[# "eboard_state_machine"];
+  assert(isDefined(player.state_machines[#"eboard_state_machine"]));
+  return player.state_machines[#"eboard_state_machine"];
 }
 
 function private function_361f6bd8(params) {
@@ -552,7 +552,7 @@ function private function_5501ae88() {
     player hint_tutorial::function_4c2d4fc4(#"hash_12271ba90c5284d8", #"hash_6de0c50ffde2d869", 4);
     player hint_tutorial::function_df08d48(5);
     namespace_61e6d095::function_46df0bc7(#"hint_tutorial", 999);
-    namespace_61e6d095::function_d3c3e5c3(#"hint_tutorial", [# "dialog_tree", #"computer"]);
+    namespace_61e6d095::function_d3c3e5c3(#"hint_tutorial", [#"dialog_tree", #"computer"]);
     savegame::set_player_data("ExamineEvidenceHintShown", 1);
     waitframe(1);
     player hint_tutorial::pause(undefined, undefined, 2, undefined, undefined, 1);
@@ -584,7 +584,7 @@ function private function_587e1291(blackboard) {
     player hint_tutorial::function_4c2d4fc4(#"hash_3012969fa356381", #"hash_39bac5818104980f");
     player hint_tutorial::function_df08d48(5);
     namespace_61e6d095::function_46df0bc7(#"hint_tutorial", 999);
-    namespace_61e6d095::function_d3c3e5c3(#"hint_tutorial", [# "dialog_tree", #"computer"]);
+    namespace_61e6d095::function_d3c3e5c3(#"hint_tutorial", [#"dialog_tree", #"computer"]);
     savegame::set_player_data("SideMissionUnlockedHintShown", 1);
     waitframe(1);
     player hint_tutorial::pause(undefined, undefined, 2, undefined, undefined, 1);
@@ -925,7 +925,7 @@ function private function_5b9bb291(params) {
 
   if(player function_305352b5()) {
     level thread namespace_4ed3ce47::function_6fe99ae0();
-    namespace_61e6d095::function_df0d7a85(#"hash_3ccc1702bc979da8", [# "interactive_map"]);
+    namespace_61e6d095::function_df0d7a85(#"hash_3ccc1702bc979da8", [#"interactive_map"]);
     player clientfield::set_to_player("set_player_pbg_bank", 1);
 
     if(isDefined(evidence.var_89616eaa)) {
@@ -1156,7 +1156,7 @@ function private function_de709256(params) {
   blackboard = statemachine.blackboard;
   assert(isDefined(blackboard.var_c5bde695));
   evidence = blackboard.var_3cb3ede5[blackboard.var_c5bde695];
-  namespace_61e6d095::function_df0d7a85(#"hash_34f10865afcf9af7", [# "interactive_map"]);
+  namespace_61e6d095::function_df0d7a85(#"hash_34f10865afcf9af7", [#"interactive_map"]);
   var_fc34020f = savegame::function_ac15668a(blackboard.var_c5bde695);
   namespace_46c3c08e::function_eadf5d0b(var_fc34020f);
   waitframe(1);

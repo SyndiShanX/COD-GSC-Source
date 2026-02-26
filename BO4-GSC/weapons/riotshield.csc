@@ -9,8 +9,8 @@
 
 init_shared() {
   clientfield::register("scriptmover", "riotshield_state", 1, 2, "int", &shield_state_change, 0, 0);
-  level._effect[# "riotshield_light"] = # "_t6/weapon/riotshield/fx_riotshield_depoly_lights";
-  level._effect[# "riotshield_dust"] = # "_t6/weapon/riotshield/fx_riotshield_depoly_dust";
+  level._effect[#"riotshield_light"] = # "_t6/weapon/riotshield/fx_riotshield_depoly_lights";
+  level._effect[#"riotshield_dust"] = # "_t6/weapon/riotshield/fx_riotshield_depoly_dust";
 }
 
 shield_state_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -37,14 +37,14 @@ riotshield_deploy_anim(localclientnum, instant) {
     self setanimtime(#"o_riot_stand_deploy", 1);
   } else {
     self setanim(#"o_riot_stand_deploy", 1, 0, 1);
-    util::playFXOnTag(localclientnum, level._effect[# "riotshield_dust"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"riotshield_dust"], self, "tag_origin");
   }
 
   if(!instant) {
     wait 0.8;
   }
 
-  self.shieldlightfx = util::playFXOnTag(localclientnum, level._effect[# "riotshield_light"], self, "tag_fx");
+  self.shieldlightfx = util::playFXOnTag(localclientnum, level._effect[#"riotshield_light"], self, "tag_fx");
 }
 
 watch_riotshield_damage() {

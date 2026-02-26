@@ -211,48 +211,48 @@ function function_880857eb(var_932dabe2) {
     level._snd.fnplaysoundonentity = level.fnplaysoundonentity;
     level._snd.fnplaysoundontag = level.fnplaysoundontag;
     level._snd.fnnotetrackprefixhandler = level.fnnotetrackprefixhandler;
-    level._snd.var_2861a322 = level.animation.callbacks[# "playsoundatviewheight"];
+    level._snd.var_2861a322 = level.animation.callbacks[#"playsoundatviewheight"];
   }
 
   if(var_932dabe2) {
     level.fnplaysoundonentity = &function_b7609ab;
     level.fnplaysoundontag = &function_e94a63b7;
     level.fnnotetrackprefixhandler = &function_95d9f208;
-    level.animation.callbacks[# "playsoundatviewheight"] = &function_e9b666c7;
+    level.animation.callbacks[#"playsoundatviewheight"] = &function_e9b666c7;
     return;
   }
 
   level.fnplaysoundonentity = level._snd.fnplaysoundonentity;
   level.fnplaysoundontag = level._snd.fnplaysoundontag;
   level.fnnotetrackprefixhandler = level._snd.fnnotetrackprefixhandler;
-  level.animation.callbacks[# "playsoundatviewheight"] = level._snd.var_2861a322;
+  level.animation.callbacks[#"playsoundatviewheight"] = level._snd.var_2861a322;
 }
 
 function get_volume(soundobject) {
-  if(isDefined(level._snd._callbacks[# "volume_get"])) {
-    return [[level._snd._callbacks[# "volume_get"]]](soundobject);
+  if(isDefined(level._snd._callbacks[#"volume_get"])) {
+    return [[level._snd._callbacks[#"volume_get"]]](soundobject);
   }
 
   return 1;
 }
 
 function set_volume(soundobject, volume, timeinseconds, curve, callbackfunc) {
-  if(isDefined(level._snd._callbacks[# "volume_set"])) {
-    [[level._snd._callbacks[# "volume_set"]]](soundobject, volume, timeinseconds, curve, callbackfunc);
+  if(isDefined(level._snd._callbacks[#"volume_set"])) {
+    [[level._snd._callbacks[#"volume_set"]]](soundobject, volume, timeinseconds, curve, callbackfunc);
   }
 }
 
 function get_pitch(soundobject) {
-  if(isDefined(level._snd._callbacks[# "pitch_get"])) {
-    return [[level._snd._callbacks[# "pitch_get"]]](soundobject);
+  if(isDefined(level._snd._callbacks[#"pitch_get"])) {
+    return [[level._snd._callbacks[#"pitch_get"]]](soundobject);
   }
 
   return 1;
 }
 
 function set_pitch(soundobject, pitch, timeinseconds, curve, callbackfunc) {
-  if(isDefined(level._snd._callbacks[# "pitch_set"])) {
-    [[level._snd._callbacks[# "pitch_set"]]](soundobject, pitch, timeinseconds, curve, callbackfunc);
+  if(isDefined(level._snd._callbacks[#"pitch_set"])) {
+    [[level._snd._callbacks[#"pitch_set"]]](soundobject, pitch, timeinseconds, curve, callbackfunc);
   }
 }
 
@@ -452,7 +452,7 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
     return undefined;
   }
 
-  level._snd._callbacks[# "stop"] = &stop;
+  level._snd._callbacks[#"stop"] = &stop;
   assert(isDefined(level._snd.var_d37e94ca), "<dev string:x90>");
   soundtype = function_ea2f17d1(soundtype, level._snd.var_d37e94ca);
   soundobjects = [];
@@ -1071,16 +1071,16 @@ function function_13b51154(curve, size) {
 function function_3ffa0089(size) {
   size = function_ea2f17d1(size, 11);
   level.var_c386bd24 = [];
-  level.var_c386bd24[# "linear"] = function_13b51154("linear", size);
-  level.var_c386bd24[# "sine"] = function_13b51154("sine", size);
-  level.var_c386bd24[# "easein"] = function_13b51154("easein", size);
-  level.var_c386bd24[# "easeout"] = function_13b51154("easeout", size);
-  level.var_c386bd24[# "easeinout"] = function_13b51154("easeinout", size);
-  level.var_c386bd24[# "circularin"] = function_13b51154("circularin", size);
-  level.var_c386bd24[# "circularout"] = function_13b51154("circularout", size);
-  level.var_c386bd24[# "exponential_40db"] = function_13b51154("exponential_40db", size);
-  level.var_c386bd24[# "exponential_60db"] = function_13b51154("exponential_60db", size);
-  level.var_c386bd24[# "default_vfcurve"] = function_13b51154("default_vfcurve", size);
+  level.var_c386bd24[#"linear"] = function_13b51154("linear", size);
+  level.var_c386bd24[#"sine"] = function_13b51154("sine", size);
+  level.var_c386bd24[#"easein"] = function_13b51154("easein", size);
+  level.var_c386bd24[#"easeout"] = function_13b51154("easeout", size);
+  level.var_c386bd24[#"easeinout"] = function_13b51154("easeinout", size);
+  level.var_c386bd24[#"circularin"] = function_13b51154("circularin", size);
+  level.var_c386bd24[#"circularout"] = function_13b51154("circularout", size);
+  level.var_c386bd24[#"exponential_40db"] = function_13b51154("exponential_40db", size);
+  level.var_c386bd24[#"exponential_60db"] = function_13b51154("exponential_60db", size);
+  level.var_c386bd24[#"default_vfcurve"] = function_13b51154("default_vfcurve", size);
 }
 
 function private function_d3f407d6(alias) {
@@ -1484,16 +1484,16 @@ function private function_a04fdd(inputvalue, userdata) {
     speed = 0;
   }
 
-  var_53970876 = v.var_4da05e4e[# "speed"][0];
-  var_56df0922 = v.var_4da05e4e[# "speed"][1];
-  var_29305831 = v.var_4da05e4e[# "scale"][0];
-  var_2b905459 = v.var_4da05e4e[# "scale"][1];
-  volumecurve = v.var_4da05e4e[# "curve"][0];
-  var_96fa4b31 = v.var_5c76982f[# "speed"][0];
-  var_8d892f33 = v.var_5c76982f[# "speed"][1];
-  var_f670290f = v.var_5c76982f[# "scale"][0];
-  var_2f163596 = v.var_5c76982f[# "scale"][1];
-  pitchcurve = v.var_5c76982f[# "curve"][0];
+  var_53970876 = v.var_4da05e4e[#"speed"][0];
+  var_56df0922 = v.var_4da05e4e[#"speed"][1];
+  var_29305831 = v.var_4da05e4e[#"scale"][0];
+  var_2b905459 = v.var_4da05e4e[#"scale"][1];
+  volumecurve = v.var_4da05e4e[#"curve"][0];
+  var_96fa4b31 = v.var_5c76982f[#"speed"][0];
+  var_8d892f33 = v.var_5c76982f[#"speed"][1];
+  var_f670290f = v.var_5c76982f[#"scale"][0];
+  var_2f163596 = v.var_5c76982f[#"scale"][1];
+  pitchcurve = v.var_5c76982f[#"curve"][0];
   volume = scalerp(speed, var_53970876, var_56df0922, var_29305831, var_2b905459);
   pitch = scalerp(speed, var_96fa4b31, var_8d892f33, var_f670290f, var_2f163596);
 
@@ -1568,8 +1568,8 @@ function private function_ebe7010d(target, soundalias, var_5c76982f, var_4da05e4
   var_67f427c4.target = target;
   var_67f427c4.var_5c76982f = var_5c76982f;
   var_67f427c4.var_4da05e4e = var_4da05e4e;
-  var_67f427c4.var_5c76982f[# "curve"] = function_ea2f17d1(var_67f427c4.var_5c76982f[# "curve"], ["linear"]);
-  var_67f427c4.var_4da05e4e[# "curve"] = function_ea2f17d1(var_67f427c4.var_4da05e4e[# "curve"], ["xfade"]);
+  var_67f427c4.var_5c76982f[#"curve"] = function_ea2f17d1(var_67f427c4.var_5c76982f[#"curve"], ["linear"]);
+  var_67f427c4.var_4da05e4e[#"curve"] = function_ea2f17d1(var_67f427c4.var_4da05e4e[#"curve"], ["xfade"]);
   ent.var_1ab997d2 = function_ea2f17d1(ent.var_1ab997d2, array());
   ent.var_1ab997d2[ent.var_1ab997d2.size] = var_67f427c4;
   ent snd_param("speed", undefined, &function_8764d0b2, &function_a04fdd, &function_caa62515, var_67f427c4);

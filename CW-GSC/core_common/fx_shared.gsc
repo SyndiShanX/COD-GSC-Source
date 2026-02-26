@@ -8,8 +8,8 @@
 #namespace fx;
 
 function set_forward_and_up_vectors() {
-  self.v[# "up"] = anglestoup(self.v[# "angles"]);
-  self.v[# "forward"] = anglesToForward(self.v[# "angles"]);
+  self.v[#"up"] = anglestoup(self.v[#"angles"]);
+  self.v[#"forward"] = anglesToForward(self.v[#"angles"]);
 }
 
 function get(fx) {
@@ -39,23 +39,23 @@ function create_effect(type, fxid) {
 
   level.createfxent[level.createfxent.size] = ent;
   ent.v = [];
-  ent.v[# "type"] = type;
-  ent.v[# "fxid"] = fxid;
-  ent.v[# "angles"] = (0, 0, 0);
-  ent.v[# "origin"] = (0, 0, 0);
+  ent.v[#"type"] = type;
+  ent.v[#"fxid"] = fxid;
+  ent.v[#"angles"] = (0, 0, 0);
+  ent.v[#"origin"] = (0, 0, 0);
   ent.drawn = 1;
   return ent;
 }
 
 function create_loop_effect(fxid) {
   ent = create_effect("loopfx", fxid);
-  ent.v[# "delay"] = 0.5;
+  ent.v[#"delay"] = 0.5;
   return ent;
 }
 
 function create_oneshot_effect(fxid) {
   ent = create_effect("oneshotfx", fxid);
-  ent.v[# "delay"] = -15;
+  ent.v[#"delay"] = -15;
   return ent;
 }
 

@@ -1685,7 +1685,7 @@ function function_ca2b95a() {
 function function_34163738() {
   missionid = savegame::function_8136eb5a();
 
-  if(isDefined(world.mapdata[missionid][# "transient"].var_2e7c022f)) {
+  if(isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
     savegame::function_7396472d();
     return true;
   }

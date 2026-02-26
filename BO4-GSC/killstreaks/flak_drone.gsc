@@ -82,12 +82,12 @@ state_off_update(params) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-          point._scoredebug[# "disttoorigin"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+          point._scoredebug[#"disttoorigin"] = spawnStruct();
         }
 
-        point._scoredebug[# "disttoorigin"].score = disttooriginscore;
-        point._scoredebug[# "disttoorigin"].scorename = "<dev string:x38>";
+        point._scoredebug[#"disttoorigin"].score = disttooriginscore;
+        point._scoredebug[#"disttoorigin"].scorename = "<dev string:x38>";
 
         point.score += disttooriginscore;
 

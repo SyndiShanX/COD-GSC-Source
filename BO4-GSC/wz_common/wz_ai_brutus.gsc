@@ -115,7 +115,7 @@ function_6a482c74(params) {
 
 function_bad305c7() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[# "brutus_base_itemlist_all"] = 15;
+  self.var_2cee3556[#"brutus_base_itemlist_all"] = 15;
 }
 
 function_6090f71a() {

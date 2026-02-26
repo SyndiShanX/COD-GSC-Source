@@ -24,7 +24,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "tesla_bolt"] = "zm_ai/fx8_avo_elec_projectile";
+  level._effect[#"tesla_bolt"] = "zm_ai/fx8_avo_elec_projectile";
 }
 
 __main__() {
@@ -205,7 +205,7 @@ apd_trap_activate(e_player) {
 function_25ede6c7(s_trap) {
   self endoncallback(&function_171226f4, #"death");
   self.var_410faa5f = util::spawn_model("tag_origin", s_trap.origin);
-  fx = playFXOnTag(level._effect[# "tesla_bolt"], self.var_410faa5f, "tag_origin");
+  fx = playFXOnTag(level._effect[#"tesla_bolt"], self.var_410faa5f, "tag_origin");
   playsoundatposition(#"hash_286b88c1d2e99649", s_trap.origin);
   self.var_410faa5f moveto(self gettagorigin("J_Spine4"), 0.6);
   self.var_410faa5f waittill(#"movedone");

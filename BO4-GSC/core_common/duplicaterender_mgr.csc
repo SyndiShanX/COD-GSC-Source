@@ -256,7 +256,7 @@ update_dr_filters(localclientnum) {
   self thread _update_dr_filters(localclientnum);
 }
 
-find_dr_filter(filterset = level.drfilters[# "framebuffer"]) {
+find_dr_filter(filterset = level.drfilters[#"framebuffer"]) {
   best = undefined;
 
   foreach(filter in filterset) {

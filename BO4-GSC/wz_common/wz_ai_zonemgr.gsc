@@ -562,9 +562,9 @@ move_box(n_duration, n_dist) {
   end_point = self.origin + (0, 0, n_dist);
   trace = bulletTrace(self.origin, end_point, 0, self);
 
-  if(isDefined(trace[# "position"]) && trace[# "surfacetype"] != # "none") {
-    end_point = trace[# "position"] - (0, 0, 50);
-    n_duration *= trace[# "fraction"];
+  if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != # "none") {
+    end_point = trace[#"position"] - (0, 0, 50);
+    n_duration *= trace[#"fraction"];
   }
 
   self clientfield::set("magicboxflag", 2);
@@ -592,9 +592,9 @@ function_9e142fa2(n_duration, n_dist) {
   end_point = self.origin + (0, 0, n_dist);
   trace = bulletTrace(self.origin, end_point, 0, self);
 
-  if(isDefined(trace[# "position"]) && trace[# "surfacetype"] != # "none") {
-    end_point = trace[# "position"] - (0, 0, 50);
-    n_duration *= trace[# "fraction"];
+  if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != # "none") {
+    end_point = trace[#"position"] - (0, 0, 50);
+    n_duration *= trace[#"fraction"];
   }
 
   self clientfield::set("magicboxflag", 4);

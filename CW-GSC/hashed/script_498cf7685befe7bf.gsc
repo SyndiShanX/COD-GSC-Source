@@ -41,61 +41,61 @@ function function_4a3de7f5(var_57ef78ed) {
     drone notify(#"stop_idle");
   }
 
-  level.var_91a2890b[# "player"] = level.player;
-  level.var_91a2890b[# "hash_748bfe70c4a0c4b2"] = level.var_f5b3bac1[0];
-  level.var_91a2890b[# "hash_31b597795f9f6dff"] = level.var_f5b3bac1[1];
-  level.var_91a2890b[# "hash_782f409d2a0c38c1"] = level.var_f5b3bac1[2];
-  level.var_91a2890b[# "hash_706cbac6505d2d50"] = level.var_f5b3bac1[4];
-  level.var_91a2890b[# "hash_25b2d1b5b7e1bf44"] = level.var_f5b3bac1[5];
-  level.var_91a2890b[# "hash_543f2d25272c0e01"] = level.var_f5b3bac1[6];
-  level.var_91a2890b[# "hash_2bd5a7f563267a53"] = level.var_f5b3bac1[3];
-  level.var_91a2890b[# "hash_6da15ea1787a56c2"] = level.var_2b626b67[1];
-  level.var_91a2890b[# "hash_7c0d320838b152e6"] = level.var_2b626b67[2];
-  level.var_91a2890b[# "hash_4482460af363269"] = level.var_2b626b67[3];
-  level.var_91a2890b[# "hash_22ca791ab82377ca"] = level.var_2b626b67[4];
-  level.var_91a2890b[# "hash_20cf7811e421e8dd"] = level.var_2b626b67[5];
-  level.var_91a2890b[# "hash_3b8b6435841b1ffb"] = level.var_2b626b67[6];
-  level.var_91a2890b[# "hash_64ab7061a3602064"] = level.var_2b626b67[7];
-  level.var_91a2890b[# "hash_606ad42c20b03b94"] = level.var_2b626b67[8];
-  level.var_91a2890b[# "hash_77cd4eb342584c21"] = level.var_2b626b67[9];
-  level.var_91a2890b[# "hash_4e09da8eb5048ced"] = level.var_2b626b67[10];
-  level.var_91a2890b[# "hash_56e9b99ffd6af7ce"] = level.var_2b626b67[11];
-  level.var_91a2890b[# "hash_a83ce3ba2456ee"] = level.var_2b626b67[12];
-  level.var_91a2890b[# "hash_3f60cf3cb13073e3"] = level.var_2b626b67[13];
-  level.var_91a2890b[# "hash_648cdaf490d4356e"] = level.var_2b626b67[14];
-  level.var_91a2890b[# "hash_3e1df2e0b1313b17"] = level.var_2b626b67[15];
-  level.var_91a2890b[# "hash_7efecfcbc0b03931"] = level.var_2b626b67[16];
-  level.var_91a2890b[# "hash_31a0bd626d18c692"] = level.var_2b626b67[17];
-  level.var_91a2890b[# "hash_6c6bd4a552d8cf1b"] = level.var_2b626b67[18];
-  level.var_91a2890b[# "hash_4e99287abf02e81a"] = level.var_2b626b67[21];
-  level.var_91a2890b[# "hash_4601c9bc91ea2e03"] = level.var_2b626b67[22];
-  level.var_91a2890b[# "hash_5c87eb394b4ff8e5"] = level.var_2b626b67[23];
-  level.var_91a2890b[# "hash_45e202e27bb36afe"] = level.var_2b626b67[24];
-  level.var_91a2890b[# "hash_2ab62c8fb0f15779"] = level.var_2b626b67[25];
-  level.var_91a2890b[# "hash_79ca1452f187829a"] = level.var_2b626b67[26];
-  level.var_91a2890b[# "hash_2bb2c212c16b1042"] = level.var_2b626b67[27];
-  level.var_91a2890b[# "hash_1f414a3f2637564f"] = level.var_2b626b67[28];
-  level.var_91a2890b[# "hash_3269d7e37c08286c"] = level.var_2b626b67[0];
-  level.var_91a2890b[# "hash_28917c37bf68a96b"] = level.var_2b626b67[19];
-  level.var_91a2890b[# "hash_1c1e95ab77a5953e"] = level.var_2b626b67[20];
+  level.var_91a2890b[#"player"] = level.player;
+  level.var_91a2890b[#"hash_748bfe70c4a0c4b2"] = level.var_f5b3bac1[0];
+  level.var_91a2890b[#"hash_31b597795f9f6dff"] = level.var_f5b3bac1[1];
+  level.var_91a2890b[#"hash_782f409d2a0c38c1"] = level.var_f5b3bac1[2];
+  level.var_91a2890b[#"hash_706cbac6505d2d50"] = level.var_f5b3bac1[4];
+  level.var_91a2890b[#"hash_25b2d1b5b7e1bf44"] = level.var_f5b3bac1[5];
+  level.var_91a2890b[#"hash_543f2d25272c0e01"] = level.var_f5b3bac1[6];
+  level.var_91a2890b[#"hash_2bd5a7f563267a53"] = level.var_f5b3bac1[3];
+  level.var_91a2890b[#"hash_6da15ea1787a56c2"] = level.var_2b626b67[1];
+  level.var_91a2890b[#"hash_7c0d320838b152e6"] = level.var_2b626b67[2];
+  level.var_91a2890b[#"hash_4482460af363269"] = level.var_2b626b67[3];
+  level.var_91a2890b[#"hash_22ca791ab82377ca"] = level.var_2b626b67[4];
+  level.var_91a2890b[#"hash_20cf7811e421e8dd"] = level.var_2b626b67[5];
+  level.var_91a2890b[#"hash_3b8b6435841b1ffb"] = level.var_2b626b67[6];
+  level.var_91a2890b[#"hash_64ab7061a3602064"] = level.var_2b626b67[7];
+  level.var_91a2890b[#"hash_606ad42c20b03b94"] = level.var_2b626b67[8];
+  level.var_91a2890b[#"hash_77cd4eb342584c21"] = level.var_2b626b67[9];
+  level.var_91a2890b[#"hash_4e09da8eb5048ced"] = level.var_2b626b67[10];
+  level.var_91a2890b[#"hash_56e9b99ffd6af7ce"] = level.var_2b626b67[11];
+  level.var_91a2890b[#"hash_a83ce3ba2456ee"] = level.var_2b626b67[12];
+  level.var_91a2890b[#"hash_3f60cf3cb13073e3"] = level.var_2b626b67[13];
+  level.var_91a2890b[#"hash_648cdaf490d4356e"] = level.var_2b626b67[14];
+  level.var_91a2890b[#"hash_3e1df2e0b1313b17"] = level.var_2b626b67[15];
+  level.var_91a2890b[#"hash_7efecfcbc0b03931"] = level.var_2b626b67[16];
+  level.var_91a2890b[#"hash_31a0bd626d18c692"] = level.var_2b626b67[17];
+  level.var_91a2890b[#"hash_6c6bd4a552d8cf1b"] = level.var_2b626b67[18];
+  level.var_91a2890b[#"hash_4e99287abf02e81a"] = level.var_2b626b67[21];
+  level.var_91a2890b[#"hash_4601c9bc91ea2e03"] = level.var_2b626b67[22];
+  level.var_91a2890b[#"hash_5c87eb394b4ff8e5"] = level.var_2b626b67[23];
+  level.var_91a2890b[#"hash_45e202e27bb36afe"] = level.var_2b626b67[24];
+  level.var_91a2890b[#"hash_2ab62c8fb0f15779"] = level.var_2b626b67[25];
+  level.var_91a2890b[#"hash_79ca1452f187829a"] = level.var_2b626b67[26];
+  level.var_91a2890b[#"hash_2bb2c212c16b1042"] = level.var_2b626b67[27];
+  level.var_91a2890b[#"hash_1f414a3f2637564f"] = level.var_2b626b67[28];
+  level.var_91a2890b[#"hash_3269d7e37c08286c"] = level.var_2b626b67[0];
+  level.var_91a2890b[#"hash_28917c37bf68a96b"] = level.var_2b626b67[19];
+  level.var_91a2890b[#"hash_1c1e95ab77a5953e"] = level.var_2b626b67[20];
   level.var_a1030c4e = vehicle::simple_spawn("background_fav");
   level.var_a1030c4e[level.var_a1030c4e.size] = vehicle::simple_spawn_single("background_fav_l3");
   level.var_a1030c4e[level.var_a1030c4e.size] = vehicle::simple_spawn_single("background_fav_r3");
   level.var_a1030c4e[level.var_a1030c4e.size] = vehicle::simple_spawn_single("background_fav_r4");
   level.var_a1030c4e[level.var_a1030c4e.size] = vehicle::simple_spawn_single("background_fav_r5");
   level notify(#"hash_29db583983db73c");
-  level.var_91a2890b[# "hash_1c1e95ab77a5953e"] setModel("c_t9_usa_cia_sadsoc_loadout_a");
-  level.var_91a2890b[# "hash_28917c37bf68a96b"] setModel("c_t9_usa_cia_sadsoc_loadout_b");
-  level.var_91a2890b[# "hash_3269d7e37c08286c"] setModel("c_t9_usa_cia_sadsoc_loadout_c");
-  level.var_91a2890b[# "hash_2ab62c8fb0f15779"] setModel("c_t9_usa_cia_sadsoc_loadout_d");
-  level.var_91a2890b[# "hash_4e99287abf02e81a"] setModel("c_t9_usa_cia_sadsoc_loadout_a");
-  level.var_91a2890b[# "hash_6c6bd4a552d8cf1b"] setModel("c_t9_usa_cia_sadsoc_loadout_b");
-  level.var_91a2890b[# "hash_648cdaf490d4356e"] setModel("c_t9_usa_cia_sadsoc_loadout_c");
-  level.var_91a2890b[# "hash_4e09da8eb5048ced"] setModel("c_t9_usa_cia_sadsoc_loadout_d");
-  level.var_91a2890b[# "hash_20cf7811e421e8dd"] setModel("c_t9_usa_cia_sadsoc_loadout_a");
-  level.var_91a2890b[# "hash_3b8b6435841b1ffb"] setModel("c_t9_usa_cia_sadsoc_loadout_b");
-  level.var_91a2890b[# "hash_4482460af363269"] setModel("c_t9_usa_cia_sadsoc_loadout_c");
-  level.var_91a2890b[# "hash_6da15ea1787a56c2"] setModel("c_t9_usa_cia_sadsoc_loadout_d");
+  level.var_91a2890b[#"hash_1c1e95ab77a5953e"] setModel("c_t9_usa_cia_sadsoc_loadout_a");
+  level.var_91a2890b[#"hash_28917c37bf68a96b"] setModel("c_t9_usa_cia_sadsoc_loadout_b");
+  level.var_91a2890b[#"hash_3269d7e37c08286c"] setModel("c_t9_usa_cia_sadsoc_loadout_c");
+  level.var_91a2890b[#"hash_2ab62c8fb0f15779"] setModel("c_t9_usa_cia_sadsoc_loadout_d");
+  level.var_91a2890b[#"hash_4e99287abf02e81a"] setModel("c_t9_usa_cia_sadsoc_loadout_a");
+  level.var_91a2890b[#"hash_6c6bd4a552d8cf1b"] setModel("c_t9_usa_cia_sadsoc_loadout_b");
+  level.var_91a2890b[#"hash_648cdaf490d4356e"] setModel("c_t9_usa_cia_sadsoc_loadout_c");
+  level.var_91a2890b[#"hash_4e09da8eb5048ced"] setModel("c_t9_usa_cia_sadsoc_loadout_d");
+  level.var_91a2890b[#"hash_20cf7811e421e8dd"] setModel("c_t9_usa_cia_sadsoc_loadout_a");
+  level.var_91a2890b[#"hash_3b8b6435841b1ffb"] setModel("c_t9_usa_cia_sadsoc_loadout_b");
+  level.var_91a2890b[#"hash_4482460af363269"] setModel("c_t9_usa_cia_sadsoc_loadout_c");
+  level.var_91a2890b[#"hash_6da15ea1787a56c2"] setModel("c_t9_usa_cia_sadsoc_loadout_d");
 
   foreach(fav in level.var_a1030c4e) {
     fav thread vehicle::lights_on();
@@ -111,15 +111,15 @@ function function_4a3de7f5(var_57ef78ed) {
     level.var_82e50b77.overridevehicledamage = &fav::damage_override;
   }
 
-  level.var_91a2890b[# "redshirt_fav"] = level.var_82e50b77;
-  level.var_91a2890b[# "hash_bc983862f6122d0"] = level.var_a1030c4e[0];
-  level.var_91a2890b[# "hash_bc986862f6127e9"] = level.var_a1030c4e[1];
-  level.var_91a2890b[# "hash_bc985862f612636"] = level.var_a1030c4e[4];
-  level.var_91a2890b[# "hash_7bbe1d304b8239a1"] = level.var_a1030c4e[3];
-  level.var_91a2890b[# "hash_7bbe1a304b823488"] = level.var_a1030c4e[2];
-  level.var_91a2890b[# "hash_7bbe1b304b82363b"] = level.var_a1030c4e[5];
-  level.var_91a2890b[# "hash_7bbe20304b823eba"] = level.var_a1030c4e[6];
-  level.var_91a2890b[# "hash_7bbe21304b82406d"] = level.var_a1030c4e[7];
+  level.var_91a2890b[#"redshirt_fav"] = level.var_82e50b77;
+  level.var_91a2890b[#"hash_bc983862f6122d0"] = level.var_a1030c4e[0];
+  level.var_91a2890b[#"hash_bc986862f6127e9"] = level.var_a1030c4e[1];
+  level.var_91a2890b[#"hash_bc985862f612636"] = level.var_a1030c4e[4];
+  level.var_91a2890b[#"hash_7bbe1d304b8239a1"] = level.var_a1030c4e[3];
+  level.var_91a2890b[#"hash_7bbe1a304b823488"] = level.var_a1030c4e[2];
+  level.var_91a2890b[#"hash_7bbe1b304b82363b"] = level.var_a1030c4e[5];
+  level.var_91a2890b[#"hash_7bbe20304b823eba"] = level.var_a1030c4e[6];
+  level.var_91a2890b[#"hash_7bbe21304b82406d"] = level.var_a1030c4e[7];
 
   if(isDefined(level.var_82e50b77)) {
     level.var_82e50b77 thread function_d36722fc("fire_turret");
@@ -337,7 +337,7 @@ function scene_sge_4020_per_bomb_plant(s_location) {
   s_scene = struct::get("scene_sge_4020_per_bomb_plant", "targetname");
   level thread hms_util::function_78c3826c("scene_sge_4020_per_bomb_plant");
   wait 1;
-  var_27aad476 = s_scene.scene_ents[# "bomb"];
+  var_27aad476 = s_scene.scene_ents[#"bomb"];
   level waittill(#"hash_523968c9e8e5864");
   var_27aad476 hide();
 }
@@ -362,7 +362,7 @@ function function_a9282699() {
 
 function scene_sge_6010_int_juggernaut_intro(enemy01) {
   a_actors = [];
-  a_actors[# "enemy01"] = enemy01;
+  a_actors[#"enemy01"] = enemy01;
   level thread scene::play("scene_sge_6010_int_juggernaut_intro", "intro", a_actors);
 }
 
@@ -445,8 +445,8 @@ function function_e969ae51(var_c31a6f62, ai_enemy, var_fa359e06) {
   level endon(#"game_ended");
   ai_enemy endon(#"hash_4b077f7b75104dbb", #"entitydeleted");
   a_actors = [];
-  a_actors[# "hash_2c76c3576b102f5"] = var_c31a6f62;
-  a_actors[# "actor 1"] = ai_enemy;
+  a_actors[#"hash_2c76c3576b102f5"] = var_c31a6f62;
+  a_actors[#"actor 1"] = ai_enemy;
 
   while(ai_enemy.health === 100) {
     waitframe(1);
@@ -467,15 +467,15 @@ function function_ab89d5ef(var_c31a6f62, ai_enemy, var_fa359e06) {
   ai_enemy endon(#"death");
   ai_enemy endon(#"deathanim");
   a_actors = [];
-  a_actors[# "hash_2c76c3576b102f5"] = var_c31a6f62;
-  a_actors[# "actor 1"] = ai_enemy;
+  a_actors[#"hash_2c76c3576b102f5"] = var_c31a6f62;
+  a_actors[#"actor 1"] = ai_enemy;
   level scene::play(var_fa359e06, "idle", a_actors);
 }
 
 function function_beb5d779(var_c31a6f62, ai_enemy, var_fa359e06) {
   a_actors = [];
-  a_actors[# "hash_2c76c3576b102f5"] = var_c31a6f62;
-  a_actors[# "actor 1"] = ai_enemy;
+  a_actors[#"hash_2c76c3576b102f5"] = var_c31a6f62;
+  a_actors[#"actor 1"] = ai_enemy;
   var_c31a6f62 thread function_e01fd728();
 
   if(distance2dsquared(level.player.origin, ai_enemy.origin) < sqr(1100)) {
@@ -496,8 +496,8 @@ function function_c09d041f(var_c31a6f62, ai_enemy, var_fa359e06) {
   ai_enemy endon(#"death");
   ai_enemy endon(#"deathanim");
   a_actors = [];
-  a_actors[# "hash_2c76c3576b102f5"] = var_c31a6f62;
-  a_actors[# "actor 1"] = ai_enemy;
+  a_actors[#"hash_2c76c3576b102f5"] = var_c31a6f62;
+  a_actors[#"actor 1"] = ai_enemy;
   level scene::play(var_fa359e06, "exit", a_actors);
   level notify(#"hash_4b077f7b75104dbb");
 }

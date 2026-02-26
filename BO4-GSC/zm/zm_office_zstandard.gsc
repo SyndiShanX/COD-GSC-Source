@@ -41,7 +41,7 @@ init_level_vars() {
   level.var_d7853f35 = 20;
   level.var_ecdf38f = 13;
   level.var_55e562f9 = 15;
-  level.zombie_hints[# "default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
   level thread zm_blockers::function_6f01c3cf("conference1_clocks_tear_in_barricade", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("conference1_clocks_left_barricade", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("conference1_clocks_right_barricade", "script_string", 0);

@@ -1114,7 +1114,7 @@ function function_da71e09a(entity) {
 }
 
 function function_708afe1d(entity, state) {
-  assert(isinarray([# "hash_6192d8af630c6c07", #"chase", #"command_spot", #"hash_685254f9ed0ce346", #"procedural_traversal", #"circle"], state), "<dev string:x52>");
+  assert(isinarray([#"hash_6192d8af630c6c07", #"chase", #"command_spot", #"hash_685254f9ed0ce346", #"procedural_traversal", #"circle"], state), "<dev string:x52>");
 
   if(isDefined(entity.var_75b76562) && isDefined(entity.var_826cce6d[entity.var_75b76562])) {
     [[entity.var_826cce6d[entity.var_75b76562]]](entity);
@@ -1354,10 +1354,10 @@ function function_f10f6b15(entity) {
   if(var_493731bd > 15 && gettime() > entity.var_c9738c9a) {
     var_b18b5d80 = entity getEye() - (0, 0, entity.var_5a0d79a4) + (0, 0, var_493731bd) + (0, 0, 5);
     trace = bulletTrace(var_f990c5ac, var_b18b5d80 + (0, 0, 70), 0, entity);
-    hit_nothing = trace[# "fraction"] >= 1;
+    hit_nothing = trace[#"fraction"] >= 1;
 
     if(!hit_nothing) {
-      var_b4d6bef6 = trace[# "position"][2] - var_f990c5ac[2];
+      var_b4d6bef6 = trace[#"position"][2] - var_f990c5ac[2];
       var_493731bd = max(var_493731bd - max(60 - var_b4d6bef6, 0), 15);
       entity.var_c9738c9a = gettime() + int(0.5 * 1000);
       entity flag::set(#"hash_551edc835a4a0c30");
@@ -1636,7 +1636,7 @@ function private function_82f2b2fd(entity) {
 
   while(true) {
     var_30b7a63c = entity predictpath();
-    status = var_30b7a63c[# "path_prediction_status"];
+    status = var_30b7a63c[#"path_prediction_status"];
 
     if(status === 2) {
       entity flag::set(#"hash_5c35337a4e15867");
@@ -2881,7 +2881,7 @@ function function_4b5c56a5(entity) {
     var_be9a0d55 = entity.team !== entity.favoriteenemy.team;
     var_d91ee5f6 = !isPlayer(entity.favoriteenemy) || !entity.favoriteenemy flag::get(#"hash_60491982ef9b417f") && !entity.favoriteenemy flag::get(#"hash_a580869eb595fc4");
     trace = beamtrace(entity getcentroid(), entity.favoriteenemy getcentroid(), 0, entity, 0, 0, entity.favoriteenemy);
-    var_4f24df4b = trace[# "fraction"] >= 1 || isPlayer(entity.favoriteenemy) && entity.favoriteenemy isinvehicle();
+    var_4f24df4b = trace[#"fraction"] >= 1 || isPlayer(entity.favoriteenemy) && entity.favoriteenemy isinvehicle();
   }
 
   target = isDefined(entity.attackable) ? entity.attackable : entity.favoriteenemy;
@@ -3360,12 +3360,12 @@ function function_6cf38b2c() {
   player_eye = player.origin + (0, 0, player getplayerviewheight());
   trace = bulletTrace(player_eye, player_eye + player_vec * 1000, 0, player);
 
-  if(trace[# "fraction"] < 1) {
-    pos = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    pos = trace[#"position"];
     dropped = function_9cc082d2(pos, 100);
 
-    if(isDefined(dropped[# "point"])) {
-      level.var_48137965 = dropped[# "point"];
+    if(isDefined(dropped[#"point"])) {
+      level.var_48137965 = dropped[#"point"];
     }
   }
 }
@@ -3478,7 +3478,7 @@ function function_2e7ab4e5() {
       }
 
       var_30b7a63c = soa predictpath();
-      status = var_30b7a63c[# "path_prediction_status"];
+      status = var_30b7a63c[#"path_prediction_status"];
 
       if(status == 2) {
         flag_str = soa flag::get(#"hash_5c35337a4e15867") ? "<dev string:x68a>" : "<dev string:x68f>";

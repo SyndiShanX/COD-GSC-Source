@@ -73,17 +73,17 @@ function register(var_5a7b4b38, var_ce679737, var_21c9fb3e, var_370e913b, var_46
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "evidence_board_mission_preview"])) {
-    level.var_ae746e8f[# "evidence_board_mission_preview"] = [];
+  if(!isDefined(level.var_ae746e8f[#"evidence_board_mission_preview"])) {
+    level.var_ae746e8f[#"evidence_board_mission_preview"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "evidence_board_mission_preview"])) {
-    level.var_ae746e8f[# "evidence_board_mission_preview"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "evidence_board_mission_preview"])) {
-    level.var_ae746e8f[# "evidence_board_mission_preview"] = array(level.var_ae746e8f[# "evidence_board_mission_preview"]);
+  if(!isDefined(level.var_ae746e8f[#"evidence_board_mission_preview"])) {
+    level.var_ae746e8f[#"evidence_board_mission_preview"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"evidence_board_mission_preview"])) {
+    level.var_ae746e8f[#"evidence_board_mission_preview"] = array(level.var_ae746e8f[#"evidence_board_mission_preview"]);
   }
 
-  level.var_ae746e8f[# "evidence_board_mission_preview"][level.var_ae746e8f[# "evidence_board_mission_preview"].size] = elem;
+  level.var_ae746e8f[#"evidence_board_mission_preview"][level.var_ae746e8f[#"evidence_board_mission_preview"].size] = elem;
 }
 
 function register_clientside() {

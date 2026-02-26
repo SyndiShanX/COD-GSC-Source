@@ -28,7 +28,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.select_character = ct_utils::get_roleindex(#"prt_mp_trapper");
   level.var_820c5561 = "NOMAD";
   ct_utils::function_be3a76b7(level.var_820c5561);
-  level.var_f4bbd9a8[# "fail_timeover"] = # "hash_43308bd441c5527f";
+  level.var_f4bbd9a8[#"fail_timeover"] = # "hash_43308bd441c5527f";
   ct_core::function_fa03fc55();
   clientfield::register("actor", "warlord_radar_enable", 1, 1, "int");
   level.var_4c2ecc6f = &function_29b562bd;
@@ -186,18 +186,18 @@ function_e800c473(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[# "mp_frenetic"][1] = 360000;
-  var_e7cc5e43[# "mp_frenetic"][2] = 270000;
-  var_e7cc5e43[# "mp_frenetic"][3] = 180000;
-  var_e7cc5e43[# "mp_offshore"][1] = 360000;
-  var_e7cc5e43[# "mp_offshore"][2] = 270000;
-  var_e7cc5e43[# "mp_offshore"][3] = 180000;
-  var_e7cc5e43[# "mp_seaside"][1] = 360000;
-  var_e7cc5e43[# "mp_seaside"][2] = 270000;
-  var_e7cc5e43[# "mp_seaside"][3] = 180000;
-  var_e7cc5e43[# "mp_silo"][1] = 360000;
-  var_e7cc5e43[# "mp_silo"][2] = 270000;
-  var_e7cc5e43[# "mp_silo"][3] = 180000;
+  var_e7cc5e43[#"mp_frenetic"][1] = 360000;
+  var_e7cc5e43[#"mp_frenetic"][2] = 270000;
+  var_e7cc5e43[#"mp_frenetic"][3] = 180000;
+  var_e7cc5e43[#"mp_offshore"][1] = 360000;
+  var_e7cc5e43[#"mp_offshore"][2] = 270000;
+  var_e7cc5e43[#"mp_offshore"][3] = 180000;
+  var_e7cc5e43[#"mp_seaside"][1] = 360000;
+  var_e7cc5e43[#"mp_seaside"][2] = 270000;
+  var_e7cc5e43[#"mp_seaside"][3] = 180000;
+  var_e7cc5e43[#"mp_silo"][1] = 360000;
+  var_e7cc5e43[#"mp_silo"][2] = 270000;
+  var_e7cc5e43[#"mp_silo"][3] = 180000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(var_db89c655, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -719,9 +719,9 @@ function_a6b6f492() {
 }
 
 function_dd64960c(a_ents) {
-  if(isDefined(a_ents[# "prop 1"])) {
-    var_7425591a = a_ents[# "prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
-    a_ents[# "prop 1"] waittill(#"physics_pulse", #"death");
+  if(isDefined(a_ents[#"prop 1"])) {
+    var_7425591a = a_ents[#"prop 1"] gettagorigin("tarp_06_jnt") + (0, 0, -8);
+    a_ents[#"prop 1"] waittill(#"physics_pulse", #"death");
     physicsexplosionsphere(var_7425591a, 1024, 1, 1);
   }
 }

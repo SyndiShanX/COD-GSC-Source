@@ -52,11 +52,11 @@ function private function_4ba28b7e(s_instance) {
   s_instance flag::clear("cleanup");
   s_instance callback::function_d8abfc3d(#"portal_activated", &function_7ee520f8);
 
-  while(!isDefined(level.var_41dd92fd[# "hash_7cba8a05511ceedf"])) {
+  while(!isDefined(level.var_41dd92fd[#"hash_7cba8a05511ceedf"])) {
     wait 1;
   }
 
-  s_spawn = s_instance.contentgroups[# "hash_3aaf33985d01ab9c"][0];
+  s_spawn = s_instance.contentgroups[#"hash_3aaf33985d01ab9c"][0];
   s_instance.var_85c920d0 = content_manager::spawn_script_model(s_spawn, #"hash_7c38d5db2819b6f8");
   var_85c920d0 = s_instance.var_85c920d0;
   var_85c920d0.targetname = "sr_demented_echo";
@@ -64,7 +64,7 @@ function private function_4ba28b7e(s_instance) {
   var_85c920d0 playLoopSound(#"hash_6e9b8f3f3b006d28");
   var_85c920d0 thread scene::play(#"ai_t9_vign_cust_demented_echo", "idle", var_85c920d0);
   var_85c920d0 clientfield::set("sr_demented_echo_fx", 1);
-  var_3d014474 = level.var_41dd92fd[# "hash_7cba8a05511ceedf"].health;
+  var_3d014474 = level.var_41dd92fd[#"hash_7cba8a05511ceedf"].health;
   var_85c920d0.health = int(min(2000, var_3d014474 * 1.5));
   var_85c920d0.instance = s_instance;
   var_85c920d0 val::set(#"demented_echo", "takedamage", 1);
@@ -169,7 +169,7 @@ function private function_6003bca8(var_55e11aa9, v_player) {
   self endon(#"death", #"hash_1a42ae1b66d06a7d");
   self thread scene::play(#"ai_t9_vign_cust_demented_echo", "react", self);
   self linkto(var_55e11aa9);
-  var_1c408bb3 = self.instance.contentgroups[# "hash_4e469ee1df801af0"][0];
+  var_1c408bb3 = self.instance.contentgroups[#"hash_4e469ee1df801af0"][0];
 
   if(isDefined(var_1c408bb3)) {
     var_55e11aa9 moveto(var_1c408bb3.origin, 0.333);

@@ -163,8 +163,7 @@ tweakart() {
     if(dump) {
       iprintlnbold("Art settings dumped success!");
       addstring = "maps\\createart\\" + level.script + "_art::main(); ";
-      if(level.bScriptgened) {
-      }
+      if(level.bScriptgened) {}
       setDvar("scr_art_dump", "0");
     }
     wait .1;

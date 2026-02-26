@@ -98,11 +98,11 @@ function private on_menu_response(eventstruct) {
 
     if(isDefined(killstreakslot)) {
       if(killstreakslot == 3) {
-        if(isDefined(self.pers[# "killstreaks"])) {
-          var_2a5574a6 = self.pers[# "killstreaks"].size - 1;
+        if(isDefined(self.pers[#"killstreaks"])) {
+          var_2a5574a6 = self.pers[#"killstreaks"].size - 1;
 
           if(var_2a5574a6 >= 0) {
-            killstreakweapon = get_killstreak_weapon(self.pers[# "killstreaks"][var_2a5574a6]);
+            killstreakweapon = get_killstreak_weapon(self.pers[#"killstreaks"][var_2a5574a6]);
             self switchtoweapon(killstreakweapon);
           }
         }
@@ -215,9 +215,9 @@ function private function_d3106952() {
         player clientfield::set_player_uimodel(level.var_46b33f90[key], !var_63fd3e67);
       }
 
-      if(isDefined(player.pers[# "killstreaks"]) && player.pers[# "killstreaks"].size > 0) {
+      if(isDefined(player.pers[#"killstreaks"]) && player.pers[#"killstreaks"].size > 0) {
         player clientfield::set_player_uimodel(level.var_ce69c3cb[3], 0);
-        var_8c992ad8 = player.pers[# "killstreaks"][player.pers[# "killstreaks"].size - 1];
+        var_8c992ad8 = player.pers[#"killstreaks"][player.pers[#"killstreaks"].size - 1];
         var_e4276bf9 = 1;
 
         if(isDefined(level.var_dcc3befb[var_8c992ad8])) {

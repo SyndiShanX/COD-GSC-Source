@@ -82,11 +82,11 @@ function function_166eeafc() {
     return;
   }
 
-  level._effect[# "jugger_light"] = "zombie/fx_perk_juggernaut_ndu";
-  level.machine_assets[# "hash_47d7a8105237c88"] = spawnStruct();
-  level.machine_assets[# "hash_47d7a8105237c88"].weapon = getweapon("zombie_perk_bottle_jugg");
-  level.machine_assets[# "hash_47d7a8105237c88"].off_model = "p9_sur_machine_juggernog_off";
-  level.machine_assets[# "hash_47d7a8105237c88"].on_model = "p9_sur_machine_juggernog";
+  level._effect[#"jugger_light"] = "zombie/fx_perk_juggernaut_ndu";
+  level.machine_assets[#"hash_47d7a8105237c88"] = spawnStruct();
+  level.machine_assets[#"hash_47d7a8105237c88"].weapon = getweapon("zombie_perk_bottle_jugg");
+  level.machine_assets[#"hash_47d7a8105237c88"].off_model = "p9_sur_machine_juggernog_off";
+  level.machine_assets[#"hash_47d7a8105237c88"].on_model = "p9_sur_machine_juggernog";
 }
 
 function function_370cba1f() {}

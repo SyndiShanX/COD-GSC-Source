@@ -396,7 +396,7 @@ strategybotgoalparam(planner, constants) {
   bots = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
@@ -410,22 +410,22 @@ strategybotobjectparam(planner, constants) {
   bots = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
   params.order = planner::getblackboardattribute(planner, "order");
 
   if(isDefined(objects) && isarray(objects)) {
-    params.object = objects[0][# "__unsafe__"][# "object"];
+    params.object = objects[0][#"__unsafe__"][#"object"];
   }
 
   target = planner::getblackboardattribute(planner, "target");
 
   if(isDefined(target)) {
-    params.bundle = target[# "__unsafe__"][# "bundle"];
-    params.component = target[# "__unsafe__"][# "component"];
-    params.object = target[# "__unsafe__"][# "object"];
+    params.bundle = target[#"__unsafe__"][#"bundle"];
+    params.component = target[#"__unsafe__"][#"component"];
+    params.object = target[#"__unsafe__"][#"object"];
   }
 
   if(isDefined(params.object)) {
@@ -466,7 +466,7 @@ strategybotparam(planner, constants) {
   bots = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
@@ -521,22 +521,22 @@ strategyclearareatogoldenpathparam(planner, constants) {
   bots = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.escort = escorts[0][# "__unsafe__"][constants[# "escortkey"]];
+  params.escort = escorts[0][#"__unsafe__"][constants[#"escortkey"]];
 
   if(isDefined(target)) {
-    params.var_263ac6c8 = target[# "__unsafe__"][# "bundle"];
-    params.var_d7403996 = target[# "__unsafe__"][# "component"];
+    params.var_263ac6c8 = target[#"__unsafe__"][#"bundle"];
+    params.var_d7403996 = target[#"__unsafe__"][#"component"];
     params.goldengameobject = target;
   }
 
   if(isDefined(escortpoi)) {
-    params.goldenpathdistance = escortpoi[0][# "distance"];
-    params.goldengameobject = escortpoi[0][# "gameobject"];
-    params.goldenobjective = escortpoi[0][# "objective"];
+    params.goldenpathdistance = escortpoi[0][#"distance"];
+    params.goldengameobject = escortpoi[0][#"gameobject"];
+    params.goldenobjective = escortpoi[0][#"objective"];
   }
 
   if(isDefined(params.var_263ac6c8)) {
@@ -552,7 +552,7 @@ strategyclearareatogoldenpathparam(planner, constants) {
   }
 
   if(isDefined(params.goldengameobject)) {
-    gameobject = params.goldengameobject[# "__unsafe__"][# "object"];
+    gameobject = params.goldengameobject[#"__unsafe__"][#"object"];
 
     if(isDefined(params.escort) && isDefined(gameobject)) {
       params.path = strategiccommandutility::calculatepathtogameobject(params.escort, gameobject);
@@ -560,7 +560,7 @@ strategyclearareatogoldenpathparam(planner, constants) {
   }
 
   if(isDefined(params.goldenobjective)) {
-    trigger = params.goldenobjective[# "__unsafe__"][# "trigger"];
+    trigger = params.goldenobjective[#"__unsafe__"][#"trigger"];
 
     if(isDefined(params.escort) && isDefined(trigger)) {
       params.path = strategiccommandutility::calculatepathtoobjective(params.escort, trigger);
@@ -859,17 +859,17 @@ strategyclearareatoobjectiveupdate(planner, params) {
       _cleargameobject(bot);
 
       if(currentpathsegment >= params.adjustedpath.size - 2) {
-        trigger = params.objective[# "__unsafe__"][# "trigger"];
+        trigger = params.objective[#"__unsafe__"][#"trigger"];
 
         if(isDefined(trigger)) {
           function_a1574a8d(bot, trigger);
         } else {
-          _setgoalpoint(bot, params.objective[# "origin"]);
+          _setgoalpoint(bot, params.objective[#"origin"]);
           bot.goalradius = 512;
         }
 
-        if(isDefined(params.objective[# "radius"])) {
-          bot.goalradius = params.objective[# "radius"];
+        if(isDefined(params.objective[#"radius"])) {
+          bot.goalradius = params.objective[#"radius"];
         }
 
         continue;
@@ -880,7 +880,7 @@ strategyclearareatoobjectiveupdate(planner, params) {
     }
   }
 
-  if(isDefined(params.objective) && objective_state(params.objective[# "id"]) == "active") {
+  if(isDefined(params.objective) && objective_state(params.objective[#"id"]) == "active") {
     return 3;
   }
 
@@ -893,7 +893,7 @@ strategyhasattackobject(planner, constants) {
 
   if(isDefined(objects)) {
     foreach(object in objects) {
-      if(object[# "team"] == team || object[# "team"] == # "any" || object[# "team"] == "free") {
+      if(object[#"team"] == team || object[#"team"] == # "any" || object[#"team"] == "free") {
         return true;
       }
     }
@@ -909,14 +909,14 @@ strategyhasescort(planner, constants) {
     return false;
   }
 
-  escortkey = constants[# "key"];
+  escortkey = constants[#"key"];
 
   if(!isstring(escortkey) && !ishash(escortkey) || escortkey == "") {
     return true;
   }
 
   for(i = 0; i < escorts.size; i++) {
-    escort = escorts[i][# "__unsafe__"][escortkey];
+    escort = escorts[i][#"__unsafe__"][escortkey];
 
     if(isDefined(escort)) {
       return true;
@@ -936,8 +936,8 @@ strategyhasforcegoal(planner, constants) {
 }
 
 function_790fb743(planner, constants) {
-  assert(isstring(constants[# "key"]) || ishash(constants[# "key"]), "<dev string:x57>" + "<dev string:x65>" + "<dev string:xa1>");
-  attribute = planner::getblackboardattribute(planner, constants[# "key"]);
+  assert(isstring(constants[#"key"]) || ishash(constants[#"key"]), "<dev string:x57>" + "<dev string:x65>" + "<dev string:xa1>");
+  attribute = planner::getblackboardattribute(planner, constants[#"key"]);
 
   if(isDefined(attribute) && isarray(attribute)) {
     return (attribute.size > 0);
@@ -947,10 +947,10 @@ function_790fb743(planner, constants) {
 }
 
 function_f6ec02a4(planner, constants) {
-  assert(isfloat(constants[# "percent"]), "<dev string:x57>" + "<dev string:xc7>" + "<dev string:xfd>");
+  assert(isfloat(constants[#"percent"]), "<dev string:x57>" + "<dev string:xc7>" + "<dev string:xfd>");
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bot = botinfo[# "__unsafe__"][# "bot"];
+    bot = botinfo[#"__unsafe__"][#"bot"];
 
     if(!strategiccommandutility::isvalidbot(bot)) {
       continue;
@@ -966,7 +966,7 @@ function_f6ec02a4(planner, constants) {
         if(isDefined(maxammo) && maxammo > 0) {
           ammofraction = currentammo / maxammo;
 
-          if(ammofraction >= constants[# "percent"]) {
+          if(ammofraction >= constants[#"percent"]) {
             return false;
           }
         }
@@ -980,10 +980,10 @@ function_f6ec02a4(planner, constants) {
 }
 
 strategyhasbelowxammounsafe(planner, constants) {
-  assert(isfloat(constants[# "percent"]), "<dev string:x57>" + "<dev string:x127>" + "<dev string:xfd>");
+  assert(isfloat(constants[#"percent"]), "<dev string:x57>" + "<dev string:x127>" + "<dev string:xfd>");
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bot = botinfo[# "__unsafe__"][# "bot"];
+    bot = botinfo[#"__unsafe__"][#"bot"];
 
     if(!strategiccommandutility::isvalidbot(bot)) {
       continue;
@@ -999,7 +999,7 @@ strategyhasbelowxammounsafe(planner, constants) {
         if(isDefined(maxammo) && maxammo > 0) {
           ammofraction = currentammo / maxammo;
 
-          if(ammofraction < constants[# "percent"]) {
+          if(ammofraction < constants[#"percent"]) {
             return true;
           }
         }
@@ -1012,9 +1012,9 @@ strategyhasbelowxammounsafe(planner, constants) {
 
 strategyhasblackboardvalue(planner, constants) {
   assert(isarray(constants));
-  assert(isstring(constants[# "name"]) || ishash(constants[# "name"]));
-  value = planner::getblackboardattribute(planner, constants[# "name"]);
-  return value == constants[# "value"];
+  assert(isstring(constants[#"name"]) || ishash(constants[#"name"]));
+  value = planner::getblackboardattribute(planner, constants[#"name"]);
+  return value == constants[#"value"];
 }
 
 strategyhasdefendobject(planner, constants) {
@@ -1023,7 +1023,7 @@ strategyhasdefendobject(planner, constants) {
 
   if(isDefined(objects)) {
     foreach(object in objects) {
-      if(object[# "team"] != team && object[# "team"] != # "any" && object[# "team"] != "free") {
+      if(object[#"team"] != team && object[#"team"] != # "any" && object[#"team"] != "free") {
         return true;
       }
     }
@@ -1038,7 +1038,7 @@ strategyhasobjective(planner, constants) {
 
   if(isDefined(objects)) {
     foreach(object in objects) {
-      if(objective_state(object[# "id"]) == "active") {
+      if(objective_state(object[#"id"]) == "active") {
         return true;
       }
     }
@@ -1049,7 +1049,7 @@ strategyhasobjective(planner, constants) {
 
 function_b384b9b6(planner, constants) {
   order = planner::getblackboardattribute(planner, "order");
-  return order === constants[# "order"];
+  return order === constants[#"order"];
 }
 
 function_2083115a(planner, constants) {
@@ -1057,7 +1057,7 @@ function_2083115a(planner, constants) {
   target = planner::getblackboardattribute(planner, "target");
 
   if(isDefined(target)) {
-    switch (target[# "type"]) {
+    switch (target[#"type"]) {
       case # "gameobject":
         return true;
       case # "goto":
@@ -1098,10 +1098,10 @@ strategyrushammocacheinit(planner, params) {
 }
 
 function_a0f209b7(planner, constants) {
-  assert(isfloat(constants[# "percent"]), "<dev string:x57>" + "<dev string:x15a>" + "<dev string:xfd>");
+  assert(isfloat(constants[#"percent"]), "<dev string:x57>" + "<dev string:x15a>" + "<dev string:xfd>");
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bot = botinfo[# "__unsafe__"][# "bot"];
+    bot = botinfo[#"__unsafe__"][#"bot"];
 
     if(!strategiccommandutility::isvalidbot(bot)) {
       continue;
@@ -1116,7 +1116,7 @@ function_a0f209b7(planner, constants) {
       if(isDefined(maxammo) && maxammo > 0) {
         ammofraction = currentammo / maxammo;
 
-        if(ammofraction < constants[# "percent"]) {
+        if(ammofraction < constants[#"percent"]) {
           return true;
         }
       }
@@ -1229,16 +1229,16 @@ function_4c91e90d(planner, params) {
 }
 
 strategyrushammocacheparam(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x57>" + "<dev string:x194>" + "<dev string:x1c6>");
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x57>" + "<dev string:x194>" + "<dev string:x1c6>");
   params = spawnStruct();
   params.bots = [];
   botpositions = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bot = botinfo[# "__unsafe__"][# "bot"];
+    bot = botinfo[#"__unsafe__"][#"bot"];
 
     if(strategiccommandutility::isvalidbot(bot)) {
-      botposition = getclosestpointonnavmesh(botinfo[# "origin"], 200);
+      botposition = getclosestpointonnavmesh(botinfo[#"origin"], 200);
 
       if(isDefined(botposition)) {
         botpositions[botpositions.size] = botposition;
@@ -1249,7 +1249,7 @@ strategyrushammocacheparam(planner, constants) {
   }
 
   possiblecaches = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
 
   foreach(gameobject in level.a_gameobjects) {
     if(isDefined(gameobject) && gameobject gameobjects::get_identifier() === "ammo_cache") {
@@ -1279,7 +1279,7 @@ strategyrushammocacheparam(planner, constants) {
       pathsegment = generatenavmeshpath(ammocachepos, botpositions);
 
       if(isDefined(pathsegment) && pathsegment.status === "succeeded") {
-        if(pathsegment.pathdistance > constants[# "distance"]) {
+        if(pathsegment.pathdistance > constants[#"distance"]) {
           continue;
         }
 
@@ -1383,11 +1383,11 @@ strategyrushescortparam(planner, constants) {
   bots = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
-  params.escort = escorts[0][# "__unsafe__"][# "player"];
+  params.escort = escorts[0][#"__unsafe__"][#"player"];
 
   if(isDefined(params.escort)) {
     foreach(bot in bots) {
@@ -1496,11 +1496,11 @@ strategyrushobjectiveinit(planner, params) {
   foreach(bot in params.bots) {
     if(strategiccommandutility::isvalidbot(bot)) {
       _cleargameobject(bot);
-      _setgoalpoint(bot, params.objective[# "origin"]);
+      _setgoalpoint(bot, params.objective[#"origin"]);
       bot.goalradius = 512;
 
-      if(isDefined(params.objective[# "radius"])) {
-        bot.goalradius = params.objective[# "radius"];
+      if(isDefined(params.objective[#"radius"])) {
+        bot.goalradius = params.objective[#"radius"];
       }
     }
   }
@@ -1514,14 +1514,14 @@ strategyrushobjectiveparam(planner, constants) {
   bots = [];
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bots[bots.size] = botinfo[# "__unsafe__"][# "bot"];
+    bots[bots.size] = botinfo[#"__unsafe__"][#"bot"];
   }
 
   params.bots = bots;
   params.objective = objectives[0];
 
   if(isDefined(params.objective)) {
-    trigger = params.objective[# "__unsafe__"][# "trigger"];
+    trigger = params.objective[#"__unsafe__"][#"trigger"];
 
     if(isDefined(trigger)) {
       foreach(bot in bots) {
@@ -1536,7 +1536,7 @@ strategyrushobjectiveparam(planner, constants) {
     } else {
       foreach(bot in bots) {
         if(strategiccommandutility::isvalidbot(bot)) {
-          params.path = strategiccommandutility::calculatepathtoposition(bot, objective_position(params.objective[# "id"]));
+          params.path = strategiccommandutility::calculatepathtoposition(bot, objective_position(params.objective[#"id"]));
 
           if(isDefined(params.path)) {
             break;
@@ -1554,7 +1554,7 @@ strategyrushobjectiveupdate(planner, params) {
     return 2;
   }
 
-  if(isDefined(params.objective) && objective_state(params.objective[# "id"]) == "active") {
+  if(isDefined(params.objective) && objective_state(params.objective[#"id"]) == "active") {
     return 3;
   }
 
@@ -1563,17 +1563,17 @@ strategyrushobjectiveupdate(planner, params) {
 
 function_e96dd96b(planner, constants) {
   assert(isarray(constants));
-  assert(isstring(constants[# "focus"]) || ishash(constants[# "focus"]));
+  assert(isstring(constants[#"focus"]) || ishash(constants[#"focus"]));
   target = planner::getblackboardattribute(planner, "target");
 
   if(isDefined(target)) {
-    var_3d879b56 = target[# "strategy"];
-    var_f8ffdb19 = strategiccommandutility::function_f4921cb3(constants[# "focus"]);
+    var_3d879b56 = target[#"strategy"];
+    var_f8ffdb19 = strategiccommandutility::function_f4921cb3(constants[#"focus"]);
     squadbots = planner::getblackboardattribute(planner, "doppelbots");
 
     if(isstruct(var_3d879b56)) {
       foreach(botinfo in squadbots) {
-        bot = botinfo[# "__unsafe__"][# "bot"];
+        bot = botinfo[#"__unsafe__"][#"bot"];
         var_681a8d61 = "doppelbotsfocus";
 
         foreach(focus in var_f8ffdb19) {
@@ -1590,12 +1590,12 @@ function_e96dd96b(planner, constants) {
 
 function_50c7bd5a(planner, constants) {
   assert(isarray(constants));
-  assert(isstring(constants[# "tactics"]) || ishash(constants[# "tactics"]));
-  var_e67e6f95 = constants[# "tactics"];
+  assert(isstring(constants[#"tactics"]) || ishash(constants[#"tactics"]));
+  var_e67e6f95 = constants[#"tactics"];
   target = planner::getblackboardattribute(planner, "target");
 
   if(isDefined(target)) {
-    var_3d879b56 = target[# "strategy"];
+    var_3d879b56 = target[#"strategy"];
 
     if(isstruct(var_3d879b56)) {
       return (var_3d879b56.("doppelbotstactics") == var_e67e6f95);

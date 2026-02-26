@@ -304,9 +304,9 @@ function private function_9bae34b3(var_b0b91d4, finalcircle) {
     }
 
     trace = groundtrace(origin + (0, 0, 20000), origin + (0, 0, -10000), 0, undefined);
-    tracepos = trace[# "position"];
+    tracepos = trace[#"position"];
 
-    if(trace[# "fraction"] >= 1 || trace[# "surfacetype"] == # "water" || trace[# "surfacetype"] == # "watershallow" || !_second_compass_map_mp_ruins(origin)) {
+    if(trace[#"fraction"] >= 1 || trace[#"surfacetype"] == # "water" || trace[#"surfacetype"] == # "watershallow" || !_second_compass_map_mp_ruins(origin)) {
       level.var_475c53d7[level.var_475c53d7.size] = tracepos;
 
       continue;
@@ -386,7 +386,7 @@ function private function_a84cfbd0(var_b0b91d4, circle, nextcircle) {
     circle.origin = origin;
 
     trace = groundtrace(origin + (0, 0, 20000), origin + (0, 0, -10000), 0, undefined);
-    circle.tracepos = trace[# "position"];
+    circle.tracepos = trace[#"position"];
 
     return true;
   }
@@ -1252,9 +1252,9 @@ function private debug_loop() {
       end = eye + fwd * 10000;
       trace = groundtrace(eye, end, 0, host);
 
-      if(trace[# "fraction"] < 1) {
+      if(trace[#"fraction"] < 1) {
         var_95341914 = (0, 1, 0);
-        label = trace[# "surfacetype"];
+        label = trace[#"surfacetype"];
 
         switch (label) {
           case # "water":
@@ -1263,7 +1263,7 @@ function private debug_loop() {
             break;
         }
 
-        pos = trace[# "position"];
+        pos = trace[#"position"];
         textscale = function_507ec82a(host, pos, 750);
         line(pos, pos + (0, 0, 5000), var_95341914);
         print3d(pos + (0, 0, 8), label, (1, 1, 1), 1, textscale, 1, 1);

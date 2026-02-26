@@ -13,7 +13,7 @@
 #using_animtree("generic_human");
 
 // ----------------------- // --- PLAYER/AI STUFF --- // ----------------------- teleport_to_node(node) {
-  self teleport_to_origin(node.origin, node.angles);
+self teleport_to_origin(node.origin, node.angles);
 }
 
 teleport_to_origin(origin, angles) {
@@ -500,25 +500,25 @@ scripted_covercrouch_earlyout_notify(killNotify, ent) {
 }
 
 // ---------------------------------- // --- STEALTH NOSIGHT CLIP LOGIC --- // ---------------------------------- clip_nosight_logic() {
-  if(isDefined(self.script_parameters)) {
-    if(IsSubStr(self.script_parameters, "difficultymedium")) {
-      if(level.gameskill > 1) {
-        self Delete();
-        return;
-      }
+if(isDefined(self.script_parameters)) {
+  if(IsSubStr(self.script_parameters, "difficultymedium")) {
+    if(level.gameskill > 1) {
+      self Delete();
+      return;
     }
   }
+}
 
-  self endon("death");
+self endon("death");
 
-  flag_wait(self.script_flag);
+flag_wait(self.script_flag);
 
-  self thread clip_nosight_logic2();
-  self setCanDamage(true);
+self thread clip_nosight_logic2();
+self setCanDamage(true);
 
-  self clip_nosight_wait();
+self clip_nosight_wait();
 
-  self Delete();
+self Delete();
 }
 
 clip_nosight_wait() {
@@ -538,8 +538,8 @@ clip_nosight_logic2() {
 }
 
 // --------------------- // --- PLAYER RAPPEL --- // --------------------- delay_lerpViewAngleClamp() {
-  wait(0.2);
-  level.player LerpViewAngleClamp(1, 0.5, 0.5, 45, 45, 45, 45);
+wait(0.2);
+level.player LerpViewAngleClamp(1, 0.5, 0.5, 45, 45, 45, 45);
 }
 
 should_stop_descend_hint() {
@@ -1076,22 +1076,22 @@ liner() {
 }
 
 // ----------------- // --- STEAMROOM --- // ----------------- steamroom_door_crack_open() {
-  door = level.steamroom_door;
+door = level.steamroom_door;
 
-  yawopen = -50;
-  yawclose = yawopen * -1;
+yawopen = -50;
+yawclose = yawopen * -1;
 
-  rotateTime = 0.25;
+rotateTime = 0.25;
 
-  door playSound("door_cargo_container_push_open");
-  door RotateTo(door.angles + (0, yawopen, 0), rotateTime);
-  door waittill("rotatedone");
+door playSound("door_cargo_container_push_open");
+door RotateTo(door.angles + (0, yawopen, 0), rotateTime);
+door waittill("rotatedone");
 
-  flag_wait("steamroom_flash_out");
-  wait(1);
+flag_wait("steamroom_flash_out");
+wait(1);
 
-  door RotateTo(door.angles + (0, yawclose, 0), rotateTime);
-  door waittill("rotatedone");
+door RotateTo(door.angles + (0, yawclose, 0), rotateTime);
+door waittill("rotatedone");
 }
 
 steamroom_door_full_open() {
@@ -1110,9 +1110,9 @@ steamroom_door_full_open() {
 }
 
 // ----------------------------- // --- EXPLOSION EARTHQUAKES --- // ----------------------------- setup_barrel_earthquake() {
-  array_thread(getEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
+array_thread(getEntArray("explodable_barrel", "targetname"), ::barrel_earthquake_notify);
 
-  level thread explosion_earthquake();
+level thread explosion_earthquake();
 }
 
 barrel_earthquake_notify() {
@@ -1193,14 +1193,14 @@ explosion_earthquake() {
 }
 
 // ---------------------------------- // --- CONTROL ROOM SWINGING LAMP --- // ---------------------------------- hunted_hanging_light() {
-  fx = getfx("gulag_cafe_spotlight");
-  tag_origin = spawn_tag_origin();
+fx = getfx("gulag_cafe_spotlight");
+tag_origin = spawn_tag_origin();
 
-  tag_origin LinkTo(self.lamp, "j_hanging_light_04", (0, 0, -64), (0, 0, 0));
-  playFXOnTag(fx, tag_origin, "tag_origin");
+tag_origin LinkTo(self.lamp, "j_hanging_light_04", (0, 0, -64), (0, 0, 0));
+playFXOnTag(fx, tag_origin, "tag_origin");
 
-  flag_wait("sheppard_southwest");
-  stopFXOnTag(fx, tag_origin, "tag_origin");
+flag_wait("sheppard_southwest");
+stopFXOnTag(fx, tag_origin, "tag_origin");
 }
 
 swing_light_org_think() {
@@ -1249,20 +1249,20 @@ lamp_rotates_yaw() {
 }
 
 // -------------- // --- MUSIC --- // -------------- intro_music() {
-  ender = "player_hooking_up";
-  level endon(ender);
+ender = "player_hooking_up";
+level endon(ender);
 
-  thread kill_intro_music(ender);
+thread kill_intro_music(ender);
 
-  alias = "af_caves_desertdrone";
-  tracktime = MusicLength(alias);
+alias = "af_caves_desertdrone";
+tracktime = MusicLength(alias);
 
-  while(!flag(ender)) {
-    MusicPlayWrapper(alias);
-    wait(tracktime);
-    music_stop(1);
-    wait(1);
-  }
+while(!flag(ender)) {
+  MusicPlayWrapper(alias);
+  wait(tracktime);
+  music_stop(1);
+  wait(1);
+}
 }
 
 kill_intro_music(ender) {
@@ -1305,17 +1305,17 @@ stealth_music() {
 }
 
 // ---------------- // --- TV STUFF --- // ---------------- tv_cinematic_think() {
-  // play cinematics on the TVs
-  SetSavedDvar("cg_cinematicFullScreen", "0");
+// play cinematics on the TVs
+SetSavedDvar("cg_cinematicFullScreen", "0");
 
-  while(1) {
-    flag_wait("backdoor_barracks_tv");
-    thread tv_movie();
+while(1) {
+  flag_wait("backdoor_barracks_tv");
+  thread tv_movie();
 
-    flag_waitopen("backdoor_barracks_tv");
-    level notify("stop_cinematic");
-    StopCinematicInGame();
-  }
+  flag_waitopen("backdoor_barracks_tv");
+  level notify("stop_cinematic");
+  StopCinematicInGame();
+}
 }
 
 tv_movie() {
@@ -1353,12 +1353,12 @@ barracks_destroy_tv() // destroy it when stealth is broken or if the player pass
 }
 
 // --------------------- // --- CANYON CONVOY --- // --------------------- convoy_loop(vehicleTN, sFlagToStop, minWait, maxWait) {
-  canyon_convoy = getEntArray(vehicleTN, "targetname");
-  thread drone_vehicle_flood_start(canyon_convoy, "canyon_convoy", minWait, maxWait);
+canyon_convoy = getEntArray(vehicleTN, "targetname");
+thread drone_vehicle_flood_start(canyon_convoy, "canyon_convoy", minWait, maxWait);
 
-  flag_wait(sFlagToStop);
+flag_wait(sFlagToStop);
 
-  drone_vehicle_flood_stop("canyon_convoy");
+drone_vehicle_flood_stop("canyon_convoy");
 }
 
 drone_vehicle_flood_start(aSpawners, groupName, minWait, maxWait, noSound) {
@@ -1384,8 +1384,8 @@ drone_vehicle_flood_stop(groupName) {
 }
 
 // ------------ // --- MISC --- // ------------ get_global_fx(name) {
-  fxName = level.global_fx[name];
-  return level._effect[fxName];
+fxName = level.global_fx[name];
+return level._effect[fxName];
 }
 
 delete_corpse_in_volume(volume) {

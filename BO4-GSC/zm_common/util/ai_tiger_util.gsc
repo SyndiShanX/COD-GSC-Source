@@ -61,8 +61,8 @@ spawn_single(b_force_spawn = 0, var_eb3a8721) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_fcde6b4)) {
     s_spawn_loc = [[level.var_fcde6b4]]();
-  } else if(level.zm_loc_types[# "tiger_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "tiger_location"]);
+  } else if(level.zm_loc_types[#"tiger_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"tiger_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {

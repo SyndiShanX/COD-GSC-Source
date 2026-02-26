@@ -64,7 +64,7 @@ function function_d68e0c71() {
 }
 
 function function_8707f5e6(a_ents) {
-  var_385ce850 = a_ents[# "klaus"];
+  var_385ce850 = a_ents[#"klaus"];
   var_385ce850 hidepart("J_Helm");
 }
 
@@ -380,7 +380,7 @@ function function_cefdd0d2() {
   level flag::wait_till(#"hash_2fea433a677a8531");
 
   if(level flag::get(#"hash_5503fb2f49e6a242")) {
-    vo_string = zm_platinum_vo::function_c5fed573([# "hash_30f9f5fd3af0134a", #"hash_2baee4267b0056b1", #"hash_73d5094f57c50194"], [# "hash_6f9876f2c7047631", #"hash_21cafd0f13677a7a", #"hash_3cd3a276d7493ccb"], [# "hash_5bd603446f578b68", #"hash_38f141943f84ad97", #"hash_4e0da8bc8fe2f61a"]);
+    vo_string = zm_platinum_vo::function_c5fed573([#"hash_30f9f5fd3af0134a", #"hash_2baee4267b0056b1", #"hash_73d5094f57c50194"], [#"hash_6f9876f2c7047631", #"hash_21cafd0f13677a7a", #"hash_3cd3a276d7493ccb"], [#"hash_5bd603446f578b68", #"hash_38f141943f84ad97", #"hash_4e0da8bc8fe2f61a"]);
     level zm_vo::function_7622cb70(vo_string);
   }
 }
@@ -1100,7 +1100,7 @@ function function_9d903a8e(index) {
         level.klaus clientfield::increment("" + # "hash_3d52751d686c4865", 1);
       }
 
-      var_5fca83f = array::random([# "hash_5f245235b254cb19", #"hash_5f245135b254c966", #"hash_5f245035b254c7b3"]);
+      var_5fca83f = array::random([#"hash_5f245235b254cb19", #"hash_5f245135b254c966", #"hash_5f245035b254c7b3"]);
       level thread zm_platinum_vo::function_e250a72f(var_5fca83f);
       var_6c7ad44a = zm_vo::function_f577c17d(var_5fca83f);
       wait var_6c7ad44a;
@@ -1111,7 +1111,7 @@ function function_9d903a8e(index) {
         level.klaus clientfield::increment("" + # "hash_3d52751d686c4865", 1);
       }
 
-      var_5fca83f = array::random([# "hash_2f069932ad0794ff", #"hash_2f069832ad07934c", #"hash_2f069b32ad079865"]);
+      var_5fca83f = array::random([#"hash_2f069932ad0794ff", #"hash_2f069832ad07934c", #"hash_2f069b32ad079865"]);
       level thread zm_platinum_vo::function_e250a72f(var_5fca83f);
       var_6c7ad44a = zm_vo::function_f577c17d(var_5fca83f);
       wait var_6c7ad44a;

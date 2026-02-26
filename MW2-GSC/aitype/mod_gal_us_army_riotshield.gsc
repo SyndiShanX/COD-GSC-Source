@@ -46,13 +46,13 @@ spawner() {
 }
 
 precache() {
-  character\character_us_army_riot::precache();
+    character\character_us_army_riot::precache();
 
-  precacheItem("mp5");
-  precacheItem("mp5_reflex");
-  precacheItem("riotshield");
-  precacheItem("usp");
-  precacheItem("fraggrenade");
+    precacheItem("mp5");
+    precacheItem("mp5_reflex");
+    precacheItem("riotshield");
+    precacheItem("usp");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_riotshield::init_riotshield();
-  //---------------- }
+    //---------------- maps\_riotshield::init_riotshield();
+    //---------------- }

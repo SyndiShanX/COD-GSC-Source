@@ -480,7 +480,7 @@ function function_76a94f6f(e_player) {
 
 function function_4ed637bf(ents) {
   snd::play("evt_yam_zipline_attach", level.player);
-  strap = ents[# "strap"];
+  strap = ents[#"strap"];
   strap clientfield::set("zipline_strap_visibility", 0);
   strap waittill(#"hash_6452723c1568c7bd");
   strap clientfield::set("zipline_strap_visibility", 1);

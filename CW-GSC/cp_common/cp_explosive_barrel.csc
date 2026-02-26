@@ -23,9 +23,9 @@ function init_clientfields() {
 }
 
 function init_fx() {
-  level._effect[# "hash_6eed38de2452398a"] = "maps/cp_rus_siege/fx9_fire_gas_leak_impact_sm_runner";
-  level._effect[# "hash_2713fd7d423c75c5"] = "maps/cp_rus_siege/fx9_exp_fuel_barrel_runner";
-  level._effect[# "hash_254b2ba7e3542938"] = "destruct/fx8_red_barrel_fire";
+  level._effect[#"hash_6eed38de2452398a"] = "maps/cp_rus_siege/fx9_fire_gas_leak_impact_sm_runner";
+  level._effect[#"hash_2713fd7d423c75c5"] = "maps/cp_rus_siege/fx9_exp_fuel_barrel_runner";
+  level._effect[#"hash_254b2ba7e3542938"] = "destruct/fx8_red_barrel_fire";
 }
 
 function function_c4e043ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -43,7 +43,7 @@ function function_c4e043ee(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(bwastimejump == 2) {
     waitframe(1);
-    n_fx = playFX(fieldname, level._effect[# "hash_2713fd7d423c75c5"], self.origin);
+    n_fx = playFX(fieldname, level._effect[#"hash_2713fd7d423c75c5"], self.origin);
     snd::play("exp_incindiary_large", self.origin);
     self thread function_c1e7f821(fieldname, n_fx);
     self notify(#"exploded");
@@ -72,7 +72,7 @@ function function_f1bf9643(localclientnum) {
 
   while(self.var_59419da4.size < 7) {
     var_e5818e0c = self waittill(#"damage");
-    self function_e14eea31(localclientnum, var_e5818e0c, level._effect[# "hash_6eed38de2452398a"]);
+    self function_e14eea31(localclientnum, var_e5818e0c, level._effect[#"hash_6eed38de2452398a"]);
   }
 }
 
@@ -98,7 +98,7 @@ function function_e14eea31(localclientnum, var_26fce16e, fx) {
 
 function function_fa9bea36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump && !is_true(self.destroyed)) {
-    self function_ad8beac(fieldname, level._effect[# "hash_254b2ba7e3542938"]);
+    self function_ad8beac(fieldname, level._effect[#"hash_254b2ba7e3542938"]);
   }
 }
 

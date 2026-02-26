@@ -186,8 +186,8 @@ function_47a88a0c(n_to_spawn = 1, var_1fafa3fc, b_force_spawn = 0, var_eb3a8721,
       s_spawn_loc = var_eb3a8721;
     } else if(isDefined(level.var_b106cd7a)) {
       s_spawn_loc = [[level.var_b106cd7a]]();
-    } else if(level.zm_loc_types[# "werewolf_location"].size > 0) {
-      s_spawn_loc = array::random(level.zm_loc_types[# "werewolf_location"]);
+    } else if(level.zm_loc_types[#"werewolf_location"].size > 0) {
+      s_spawn_loc = array::random(level.zm_loc_types[#"werewolf_location"]);
     }
 
     if(!isDefined(s_spawn_loc)) {

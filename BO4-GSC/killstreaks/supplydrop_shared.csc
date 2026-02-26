@@ -14,16 +14,16 @@ init_shared() {
   if(!isDefined(level.var_ba8d5308)) {
     level.var_ba8d5308 = {};
     ir_strobe::init_shared();
-    level.chopper_fx[# "damage"][# "light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
-    level.chopper_fx[# "damage"][# "heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
-    level._effect[# "qrdrone_prop"] = # "hash_6cd811fe548313ca";
-    level._effect[# "heli_guard_light"][# "friendly"] = # "killstreaks/fx_sc_lights_grn";
-    level._effect[# "heli_guard_light"][# "enemy"] = # "killstreaks/fx_sc_lights_red";
-    level._effect[# "heli_comlink_light"][# "common"] = # "killstreaks/fx_drone_hunter_lights";
-    level._effect[# "heli_gunner_light"][# "friendly"] = # "killstreaks/fx_vtol_lights_grn";
-    level._effect[# "heli_gunner_light"][# "enemy"] = # "killstreaks/fx_vtol_lights_red";
-    level._effect[# "heli_gunner"][# "vtol_fx"] = # "killstreaks/fx_vtol_thruster";
-    level._effect[# "heli_gunner"][# "vtol_fx_ft"] = # "killstreaks/fx_vtol_thruster";
+    level.chopper_fx[#"damage"][#"light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
+    level.chopper_fx[#"damage"][#"heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
+    level._effect[#"qrdrone_prop"] = # "hash_6cd811fe548313ca";
+    level._effect[#"heli_guard_light"][#"friendly"] = # "killstreaks/fx_sc_lights_grn";
+    level._effect[#"heli_guard_light"][#"enemy"] = # "killstreaks/fx_sc_lights_red";
+    level._effect[#"heli_comlink_light"][#"common"] = # "killstreaks/fx_drone_hunter_lights";
+    level._effect[#"heli_gunner_light"][#"friendly"] = # "killstreaks/fx_vtol_lights_grn";
+    level._effect[#"heli_gunner_light"][#"enemy"] = # "killstreaks/fx_vtol_lights_red";
+    level._effect[#"heli_gunner"][#"vtol_fx"] = # "killstreaks/fx_vtol_thruster";
+    level._effect[#"heli_gunner"][#"vtol_fx_ft"] = # "killstreaks/fx_vtol_thruster";
     clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
     clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
     clientfield::register("scriptmover", "supplydrop_thrusters_state", 1, 1, "int", &setsupplydropthrustersstate, 0, 0);
@@ -79,7 +79,7 @@ updatemarkerthread(localclientnum) {
     viewangles = getlocalclientangles(localclientnum);
     forwardvector = vectorscale(anglesToForward(viewangles), killstreakcorebundle.ksmaxairdroptargetrange);
     results = bulletTrace(player getEye(), player getEye() + forwardvector, 0, player);
-    player.markerobj.origin = results[# "position"];
+    player.markerobj.origin = results[#"position"];
     waitframe(1);
   }
 }

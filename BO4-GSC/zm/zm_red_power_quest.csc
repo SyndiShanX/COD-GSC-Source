@@ -33,29 +33,29 @@ init() {
   clientfield::register("vehicle", "" + # "hash_463ff879b8d656bb", 16000, 1, "int", &function_c96c5397, 0, 0);
   clientfield::register("vehicle", "" + # "perseus_energy", 16000, 1, "int", &function_192be936, 0, 0);
   clientfield::register("world", "" + # "amphi_blood", 16000, 1, "int", &function_5f8c1946, 0, 0);
-  level._effect[# "hash_6d5686b05e69fcb0"] = # "zombie/fx_spawn_body_cp_zmb";
-  level._effect[# "hash_440ca00839d907a8"] = # "hash_4c14004cd89a0d66";
-  level._effect[# "hash_2a586a321116326c"] = # "hash_7770e29dfcabc1cb";
-  level._effect[# "hash_3ec0452110ea5621"] = # "hash_28e306b2b1b0a110";
-  level._effect[# "hash_5da65e20d966c63f"] = # "hash_54b810af1fb36d6d";
-  level._effect[# "hash_463ff879b8d656bb"] = # "hash_57817f8de95527cd";
-  level._effect[# "artifact_glow"] = # "hash_4c14004cd89a0d66";
-  level._effect[# "zombie_delete"] = # "maps/zm_office/fx8_teleporter_destination";
-  level._effect[# "chaos_breakout"] = # "hash_7e6fa9ad6b551a7d";
-  level._effect[# "perseus_teleport"] = # "hash_230a59dd0d0f7361";
-  level._effect[# "perseus_energy"] = # "hash_6009053e911b946a";
-  level._effect[# "zombie_shock"] = # "zm_ai/fx8_elec_shock_eyes";
-  level._effect[# "pegasus_teleport"] = # "hash_5f7d8c231fbcf09e";
-  level._effect[# "hash_672766c8e292cfbf"] = # "hash_1615f2a383a626ca";
-  level._effect[# "hash_67277cc8e292f521"] = # "hash_16460aa383cf7354";
-  level._effect[# "hash_33d5355e9824552e"] = # "hash_4368d718964d6faf";
-  level._effect[# "hash_33d51f5e98242fcc"] = # "hash_4362bf189648db39";
-  level._effect[# "shield_gegenees"] = # "hash_1807ad62ba867a20";
+  level._effect[#"hash_6d5686b05e69fcb0"] = # "zombie/fx_spawn_body_cp_zmb";
+  level._effect[#"hash_440ca00839d907a8"] = # "hash_4c14004cd89a0d66";
+  level._effect[#"hash_2a586a321116326c"] = # "hash_7770e29dfcabc1cb";
+  level._effect[#"hash_3ec0452110ea5621"] = # "hash_28e306b2b1b0a110";
+  level._effect[#"hash_5da65e20d966c63f"] = # "hash_54b810af1fb36d6d";
+  level._effect[#"hash_463ff879b8d656bb"] = # "hash_57817f8de95527cd";
+  level._effect[#"artifact_glow"] = # "hash_4c14004cd89a0d66";
+  level._effect[#"zombie_delete"] = # "maps/zm_office/fx8_teleporter_destination";
+  level._effect[#"chaos_breakout"] = # "hash_7e6fa9ad6b551a7d";
+  level._effect[#"perseus_teleport"] = # "hash_230a59dd0d0f7361";
+  level._effect[#"perseus_energy"] = # "hash_6009053e911b946a";
+  level._effect[#"zombie_shock"] = # "zm_ai/fx8_elec_shock_eyes";
+  level._effect[#"pegasus_teleport"] = # "hash_5f7d8c231fbcf09e";
+  level._effect[#"hash_672766c8e292cfbf"] = # "hash_1615f2a383a626ca";
+  level._effect[#"hash_67277cc8e292f521"] = # "hash_16460aa383cf7354";
+  level._effect[#"hash_33d5355e9824552e"] = # "hash_4368d718964d6faf";
+  level._effect[#"hash_33d51f5e98242fcc"] = # "hash_4362bf189648db39";
+  level._effect[#"shield_gegenees"] = # "hash_1807ad62ba867a20";
 }
 
 pegasus_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    util::playFXOnTag(localclientnum, level._effect[# "shield_gegenees"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"shield_gegenees"], self, "tag_origin");
   }
 }
 
@@ -86,7 +86,7 @@ function_5f8c1946(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 perseus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(self gettagorigin("j_spine4"))) {
-    playFX(localclientnum, level._effect[# "perseus_teleport"], self gettagorigin("j_spine4"), anglestoup(self.angles));
+    playFX(localclientnum, level._effect[#"perseus_teleport"], self gettagorigin("j_spine4"), anglestoup(self.angles));
     playSound(localclientnum, #"hash_20e6275c6513eb95", self gettagorigin("j_spine4"));
   }
 }
@@ -94,13 +94,13 @@ perseus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 pegasus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.var_f252bba1)) {
-      self.var_f252bba1 = playFX(localclientnum, level._effect[# "pegasus_teleport"], self gettagorigin("j_h_chest"), self gettagangles("j_h_chest"));
+      self.var_f252bba1 = playFX(localclientnum, level._effect[#"pegasus_teleport"], self gettagorigin("j_h_chest"), self gettagangles("j_h_chest"));
     }
 
-    util::playFXOnTag(localclientnum, level._effect[# "hash_672766c8e292cfbf"], self, "j_winghumerus_le");
-    util::playFXOnTag(localclientnum, level._effect[# "hash_67277cc8e292f521"], self, "j_winghumerus_ri");
-    util::playFXOnTag(localclientnum, level._effect[# "hash_33d5355e9824552e"], self, "j_wingulna_le");
-    util::playFXOnTag(localclientnum, level._effect[# "hash_33d51f5e98242fcc"], self, "j_wingulna_ri");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_672766c8e292cfbf"], self, "j_winghumerus_le");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_67277cc8e292f521"], self, "j_winghumerus_ri");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_33d5355e9824552e"], self, "j_wingulna_le");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_33d51f5e98242fcc"], self, "j_wingulna_ri");
     forcestreamxmodel(#"c_t8_zmb_dlc2_pegasus_fb");
     return;
   }
@@ -112,7 +112,7 @@ pegasus_teleport_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 }
 
 zombie_breakout_func(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "chaos_breakout"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"chaos_breakout"], self, "tag_origin");
   playSound(localclientnum, #"hash_496f85c0590828ba", self.origin + (0, 0, 25));
 }
 
@@ -150,12 +150,12 @@ pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 chaos_explosion(localclientnum) {
   s_chaos = array::random(struct::get_array("chaos_exp"));
   wait randomfloatrange(0.2, 1);
-  playFX(localclientnum, level._effect[# "chaos_breakout"], s_chaos.origin);
+  playFX(localclientnum, level._effect[#"chaos_breakout"], s_chaos.origin);
 }
 
 artifact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.n_fx = util::playFXOnTag(localclientnum, level._effect[# "artifact_glow"], self, "tag_origin");
+    self.n_fx = util::playFXOnTag(localclientnum, level._effect[#"artifact_glow"], self, "tag_origin");
     return;
   }
 
@@ -166,16 +166,16 @@ artifact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 }
 
 function_638482f6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "zombie_delete"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"zombie_delete"], self, "tag_origin");
 }
 
 function_988637e5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  playFX(localclientnum, level._effect[# "hash_6d5686b05e69fcb0"], self.origin);
+  playFX(localclientnum, level._effect[#"hash_6d5686b05e69fcb0"], self.origin);
 }
 
 function_785a67c5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_bf45a811 = util::playFXOnTag(localclientnum, level._effect[# "hash_440ca00839d907a8"], self, "tag_origin");
+    self.var_bf45a811 = util::playFXOnTag(localclientnum, level._effect[#"hash_440ca00839d907a8"], self, "tag_origin");
     return;
   }
 
@@ -187,7 +187,7 @@ function_785a67c5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_8d9ce264(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_7697647a = util::playFXOnTag(localclientnum, level._effect[# "hash_3ec0452110ea5621"], self, "tag_origin");
+    self.var_7697647a = util::playFXOnTag(localclientnum, level._effect[#"hash_3ec0452110ea5621"], self, "tag_origin");
     return;
   }
 
@@ -199,10 +199,10 @@ function_8d9ce264(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_cca9b50e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    self.var_bf45a811 = util::playFXOnTag(localclientnum, level._effect[# "hash_440ca00839d907a8"], self, "tag_origin");
+    self.var_bf45a811 = util::playFXOnTag(localclientnum, level._effect[#"hash_440ca00839d907a8"], self, "tag_origin");
     mdl_fx = util::spawn_model(localclientnum, #"tag_origin", self.origin);
     self.var_6ec79371 = mdl_fx;
-    self.staff_fallen = util::playFXOnTag(localclientnum, level._effect[# "hash_2a586a321116326c"], mdl_fx, "tag_origin");
+    self.staff_fallen = util::playFXOnTag(localclientnum, level._effect[#"hash_2a586a321116326c"], mdl_fx, "tag_origin");
     mdl_fx thread function_7152ba7c(self);
     mdl_fx thread function_1bad7fac(localclientnum);
     return;
@@ -251,13 +251,13 @@ function_1bad7fac(localclientnum) {
 }
 
 function_cb64dcb1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "hash_5da65e20d966c63f"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_5da65e20d966c63f"], self, "tag_origin");
 }
 
 function_c96c5397(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!isDefined(self.n_fx)) {
-      self.n_fx = util::playFXOnTag(localclientnum, level._effect[# "hash_463ff879b8d656bb"], self, "tag_origin");
+      self.n_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_463ff879b8d656bb"], self, "tag_origin");
     }
 
     if(!isDefined(self.n_sfx)) {
@@ -280,7 +280,7 @@ function_c96c5397(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_192be936(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(!isDefined(self.var_576a8cab)) {
-      self.var_576a8cab = util::playFXOnTag(localclientnum, level._effect[# "perseus_energy"], self, "tag_origin");
+      self.var_576a8cab = util::playFXOnTag(localclientnum, level._effect[#"perseus_energy"], self, "tag_origin");
     }
 
     if(!isDefined(self.var_fc40818b)) {

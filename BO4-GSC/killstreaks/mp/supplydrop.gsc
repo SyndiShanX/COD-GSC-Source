@@ -434,10 +434,10 @@ function_4c0ed253(location, context) {
       sphere(location, 8, (1, 1, 0), 1, 1, 10, 1);
     }
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(!(isDefined(level.var_66da9c3c) && level.var_66da9c3c)) {
         if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
-          util::drawcylinder(trace[# "position"], context.radius, 8000, 0.0166667, undefined, (1, 0, 0), 0.7);
+          util::drawcylinder(trace[#"position"], context.radius, 8000, 0.0166667, undefined, (1, 0, 0), 0.7);
         }
 
         return false;
@@ -446,7 +446,7 @@ function_4c0ed253(location, context) {
   }
 
   if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
-    util::drawcylinder(trace[# "position"], context.radius, 8000, 0.0166667, undefined, (0, 1, 0), 0.7);
+    util::drawcylinder(trace[#"position"], context.radius, 8000, 0.0166667, undefined, (0, 1, 0), 0.7);
   }
 
   return true;
@@ -473,7 +473,7 @@ islocationgood(location, context) {
     radius = context.radius;
     trace = physicstrace(location + (0, 0, 5000), location + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
         sphere(location, radius, (1, 0, 0), 1, 1, 10, 1);
       }
@@ -642,10 +642,10 @@ markerupdatethread(context) {
 
     radius = 2;
     results = physicstrace(player getEye(), player getEye() + forwardvector, (radius * -1, radius * -1, 0), (radius, radius, 0), player, mask);
-    markermodel.origin = results[# "position"];
+    markermodel.origin = results[#"position"];
     tooclose = distancesquared(markermodel.origin, player.origin) < minrange * minrange;
 
-    if(results[# "normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
+    if(results[#"normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
       player.markerposition = markermodel.origin;
       player clientfield::set_to_player("marker_state", 1);
     } else {
@@ -1041,25 +1041,25 @@ cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_angle, _crat
 
   switch (killstreak) {
     case # "turret_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "autoturret"];
+      crate.cratetype = level.cratetypes[killstreak][#"autoturret"];
       break;
     case # "tow_turret_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "auto_tow"];
+      crate.cratetype = level.cratetypes[killstreak][#"auto_tow"];
       break;
     case # "m220_tow_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "m220_tow"];
+      crate.cratetype = level.cratetypes[killstreak][#"m220_tow"];
       break;
     case # "tank_robot":
     case # "inventory_tank_robot":
-      crate.cratetype = level.cratetypes[killstreak][# "tank_robot"];
+      crate.cratetype = level.cratetypes[killstreak][#"tank_robot"];
       break;
     case # "inventory_minigun_drop":
     case # "minigun_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "minigun"];
+      crate.cratetype = level.cratetypes[killstreak][#"minigun"];
       break;
     case # "m32_drop":
     case # "inventory_m32_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "m32"];
+      crate.cratetype = level.cratetypes[killstreak][#"m32"];
       break;
     default:
       crate.cratetype = getrandomcratetype("supplydrop");
@@ -1167,9 +1167,9 @@ cratecontrolleddrop(killstreak, v_target_location) {
   }
 
   if(supplydrop) {
-    params = level.killstreakbundle[# "supply_drop"];
+    params = level.killstreakbundle[#"supply_drop"];
   } else {
-    params = level.killstreakbundle[# "tank_robot"];
+    params = level.killstreakbundle[#"tank_robot"];
   }
 
   var_ae4c0bf9 = 0;
@@ -1276,10 +1276,10 @@ waitanddelete(time) {
 }
 
 function_703ed715(trace) {
-  if(isDefined(trace[# "entity"]) && isvehicle(trace[# "entity"]) && trace[# "entity"].vehicleclass === "helicopter") {
+  if(isDefined(trace[#"entity"]) && isvehicle(trace[#"entity"]) && trace[#"entity"].vehicleclass === "helicopter") {
     mask = 1;
     radius = 30;
-    origin = trace[# "position"];
+    origin = trace[#"position"];
     trace = physicstrace(origin + (0, 0, -100), origin + (0, 0, -10000), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
     return trace;
   }
@@ -1323,7 +1323,7 @@ dropcrate(origin, angle, killstreak, owner, team, killcament, killstreak_id, pac
   radius = 30;
   trace = physicstrace(crate.origin + (0, 0, -100), crate.origin + (0, 0, -10000), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
   trace = function_703ed715(trace);
-  v_target_location = trace[# "position"];
+  v_target_location = trace[#"position"];
 
   if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
     util::drawcylinder(v_target_location, context.radius, 8000, 99999999, "<dev string:x90>", (0, 0, 0.9), 0.8);
@@ -1627,8 +1627,8 @@ cratedroptogroundtrace(start) {
   end = start + (0, 0, -8000);
   trace = bulletTrace(start, end, 1, self, 0, 1);
 
-  if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"]) && isalive(trace[# "entity"])) {
-    player = trace[# "entity"];
+  if(isDefined(trace[#"entity"]) && isPlayer(trace[#"entity"]) && isalive(trace[#"entity"])) {
+    player = trace[#"entity"];
 
     if(player.sessionstate != "playing") {
       return;
@@ -1638,7 +1638,7 @@ cratedroptogroundtrace(start) {
       return;
     }
 
-    if(distancesquared(start, trace[# "position"]) < 144 || self istouching(player)) {
+    if(distancesquared(start, trace[#"position"]) < 144 || self istouching(player)) {
       player dodamage(player.health + 1, player.origin, self.owner, self, "none", "MOD_HIT_BY_OBJECT", 0, getweapon(#"supplydrop"));
       player playSound(#"mpl_supply_crush");
       player playSound(#"phy_impact_supply");
@@ -2267,31 +2267,31 @@ inccratekillstreakusagestat(weapon, killstreak_id) {
 
   switch (weapon.name) {
     case # "turret_drop":
-      self killstreaks::play_killstreak_start_dialog("turret_drop", self.pers[# "team"], killstreak_id);
+      self killstreaks::play_killstreak_start_dialog("turret_drop", self.pers[#"team"], killstreak_id);
       break;
     case # "tow_turret_drop":
-      self killstreaks::play_killstreak_start_dialog("tow_turret_drop", self.pers[# "team"], killstreak_id);
+      self killstreaks::play_killstreak_start_dialog("tow_turret_drop", self.pers[#"team"], killstreak_id);
       break;
     case # "supplydrop_marker":
     case # "inventory_supplydrop_marker":
-      self killstreaks::play_killstreak_start_dialog("supply_drop", self.pers[# "team"], killstreak_id);
+      self killstreaks::play_killstreak_start_dialog("supply_drop", self.pers[#"team"], killstreak_id);
       level thread popups::displaykillstreakteammessagetoall("supply_drop", self);
       self challenges::calledincarepackage();
       self stats::function_e24eec31(getweapon(#"supplydrop"), #"used", 1);
       break;
     case # "tank_robot":
     case # "inventory_tank_robot":
-      self killstreaks::play_killstreak_start_dialog("tank_robot", self.pers[# "team"], killstreak_id);
+      self killstreaks::play_killstreak_start_dialog("tank_robot", self.pers[#"team"], killstreak_id);
       level thread popups::displaykillstreakteammessagetoall("tank_robot", self);
       self stats::function_e24eec31(getweapon(#"tank_robot"), #"used", 1);
       break;
     case # "inventory_minigun_drop":
     case # "minigun_drop":
-      self killstreaks::play_killstreak_start_dialog("minigun", self.pers[# "team"], killstreak_id);
+      self killstreaks::play_killstreak_start_dialog("minigun", self.pers[#"team"], killstreak_id);
       break;
     case # "m32_drop":
     case # "inventory_m32_drop":
-      self killstreaks::play_killstreak_start_dialog("m32", self.pers[# "team"], killstreak_id);
+      self killstreaks::play_killstreak_start_dialog("m32", self.pers[#"team"], killstreak_id);
       break;
     case # "combat_robot_drop":
       level thread popups::displaykillstreakteammessagetoall("combat_robot", self);
@@ -2359,7 +2359,7 @@ function_accec5c5(drop_origin, context, drop_height) {
   heli_drop_goal = (drop_origin[0], drop_origin[1], drop_origin[2] + drop_height);
   trace = physicstrace(heli_drop_goal, drop_origin + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     recordsphere(drop_origin + (0, 0, 20), 2, (1, 0, 0), "<dev string:xc1>");
 
     return false;
@@ -2493,7 +2493,7 @@ helidelivercrate(origin, weapon, owner, team, killstreak_id, package_contents_id
   if(isDefined(context.marker)) {
     context.marker.team = owner.team;
     context.marker entityheadicons::destroyentityheadicons();
-    context.marker entityheadicons::setentityheadicon(owner.pers[# "team"], owner, context.objective);
+    context.marker entityheadicons::setentityheadicon(owner.pers[#"team"], owner, context.objective);
   }
 
   if(isDefined(weapon)) {
@@ -2671,7 +2671,7 @@ helidelivercrate(origin, weapon, owner, team, killstreak_id, package_contents_id
     }
 
     trace = groundtrace(chopper_drop_point + (0, 0, -100), chopper_drop_point + (0, 0, -10000), 0, undefined, 0);
-    debug_drop_location = trace[# "position"];
+    debug_drop_location = trace[#"position"];
     util::drawcylinder(debug_drop_location, context.radius, 8000, 99999999, "<dev string:x114>", (1, 0.6, 0), 0.9);
     iprintln("<dev string:x14d>" + distance2d(chopper_drop_point, heli_drop_goal));
   }
@@ -2857,7 +2857,7 @@ lbexplode() {
   }
 
   playFX("destruct/fx8_trans_heli_exp_lg", fxpos, forward);
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   self notify(#"explode");
 
   if(isDefined(self.delete_after_destruction_wait_time)) {
@@ -2871,8 +2871,8 @@ lbexplode() {
 
 lbspin(speed) {
   self endon(#"explode");
-  playFXOnTag(level.chopper_fx[# "explode"][# "large"], self, "tail_rotor_jnt");
-  playFXOnTag(level.chopper_fx[# "fire"][# "trail"][# "large"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx[#"explode"][#"large"], self, "tail_rotor_jnt");
+  playFXOnTag(level.chopper_fx[#"fire"][#"trail"][#"large"], self, "tail_rotor_jnt");
   self setyawspeed(speed, speed, speed);
 
   while(isDefined(self)) {

@@ -196,7 +196,7 @@ setup_tomahawk_quest() {
   level thread clientscripts\mp\zm_prison_weap_quest::tomahawk_rune_init();
 }
 
-#include_weapons() {
+include_weapons() {
   include_weapon("knife_zm", 0);
   include_weapon("knife_zm_alcatraz", 0);
   include_weapon("spoon_zm_alcatraz", 0);
@@ -270,7 +270,7 @@ setup_tomahawk_quest() {
   }
 }
 
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -278,7 +278,7 @@ setup_tomahawk_quest() {
   include_powerup("fire_sale");
 }
 
-#include_equipment_for_level() {
+include_equipment_for_level() {
   clientscripts\mp\zombies\_zm_equipment::include_equipment("alcatraz_shield_zm");
 }
 

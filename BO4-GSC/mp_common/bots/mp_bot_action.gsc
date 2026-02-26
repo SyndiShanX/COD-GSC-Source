@@ -646,7 +646,7 @@ function_554a6177(actionparams) {
   traceend = eye + vectotarget * 2000;
   trace = bulletTrace(eye, traceend, 0, self);
 
-  if(trace[# "fraction"] >= 1) {
+  if(trace[#"fraction"] >= 1) {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {
@@ -658,7 +658,7 @@ function_554a6177(actionparams) {
     return undefined;
   }
 
-  target = trace[# "position"];
+  target = trace[#"position"];
   actionparams.target = target;
   return 100;
 }
@@ -924,7 +924,7 @@ function_17a8721f(actionparams) {
   traceend = eye + forwarddir * 1000;
   trace = bulletTrace(eye, traceend, 0, self);
 
-  if(trace[# "fraction"] >= 1) {
+  if(trace[#"fraction"] >= 1) {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {
@@ -936,7 +936,7 @@ function_17a8721f(actionparams) {
     return undefined;
   }
 
-  target = trace[# "position"];
+  target = trace[#"position"];
   navmeshpoint = getclosestpointonnavmesh(target, 150);
 
   if(!isDefined(navmeshpoint)) {
@@ -1138,7 +1138,7 @@ function_d18123f8(actionparams) {
   target = vectorlerp(var_2b3b4fb.var_2cfdc66d, var_2b3b4fb.var_c78b4464, 0.5) + (0, 0, 50);
   eye = self getEye();
   trace = bulletTrace(eye, target, 0, self);
-  target = trace[# "position"];
+  target = trace[#"position"];
 
   if(distance2dsquared(target, self.origin) > 10000) {
     if(!isDefined(actionparams.debug)) {
@@ -1424,7 +1424,7 @@ function_d2107b(actionparams) {
   to = var_c375900c.origin + (0, 0, 2000);
   trace = physicstrace(from, to, (-50, -50, 0), (50, 50, 100), undefined, mask);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {

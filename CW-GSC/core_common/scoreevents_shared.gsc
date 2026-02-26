@@ -81,7 +81,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
     return scoregiven;
   }
 
-  if(isDefined(level.scoreinfo[event]) && is_true(level.scoreinfo[event][# "is_deprecated"])) {
+  if(isDefined(level.scoreinfo[event]) && is_true(level.scoreinfo[event][#"is_deprecated"])) {
     return scoregiven;
   }
 
@@ -191,7 +191,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
     }
 
     if(isDefined(weapon) && isDefined(level.scoreinfo[event])) {
-      var_6d1793bb = level.scoreinfo[event][# "medalnamehash"];
+      var_6d1793bb = level.scoreinfo[event][#"medalnamehash"];
 
       if(isDefined(var_6d1793bb)) {
         specialistindex = player getspecialistindex();
@@ -288,7 +288,7 @@ function shouldaddrankxp(player) {
     return true;
   }
 
-  if(player.pers[# "plevel"] > 0 || player.pers[# "rank"] >= level.rankcap) {
+  if(player.pers[#"plevel"] > 0 || player.pers[#"rank"] >= level.rankcap) {
     return false;
   }
 

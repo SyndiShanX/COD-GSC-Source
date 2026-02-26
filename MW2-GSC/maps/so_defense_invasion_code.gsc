@@ -11,38 +11,38 @@
 #include maps\_hud_util;
 
 // --------------------------------------------------------------------------------- fire_off_exploder(current) {
-  while(1) {
-    exploder(current.script_prefab_exploder);
-    if(!isDefined(current.target)) {
-      break;
-    }
-    next = getent(current.target, "targetname");
-    if(!isDefined(next)) {
-      break;
-    }
-    current = next;
+while(1) {
+  exploder(current.script_prefab_exploder);
+  if(!isDefined(current.target)) {
+    break;
   }
+  next = getent(current.target, "targetname");
+  if(!isDefined(next)) {
+    break;
+  }
+  current = next;
+}
 }
 
 // --------------------------------------------------------------------------------- create_smoke_wave(smoke_tag, dialog_wait) {
-  // Prevent smoke from happening too frequently
-  if(isDefined(level.smoke_throttle)) {
-    if(!isDefined(level.smoke_wave_time))
-      level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
+// Prevent smoke from happening too frequently
+if(isDefined(level.smoke_throttle)) {
+  if(!isDefined(level.smoke_wave_time))
+    level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
 
-    time_since = gettime() - level.smoke_wave_time;
-    if(time_since <= level.smoke_throttle) {
-      return;
-    }
-    level.smoke_wave_time = gettime();
+  time_since = gettime() - level.smoke_wave_time;
+  if(time_since <= level.smoke_throttle) {
+    return;
   }
+  level.smoke_wave_time = gettime();
+}
 
-  magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
-  array_thread(magic_smoke_grenades, ::smoke_wave_play);
+magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
+array_thread(magic_smoke_grenades, ::smoke_wave_play);
 
-  // Undefined dialog_wait assumes we don't want any. Use 0 for no wait.
-  if(isDefined(dialog_wait))
-    thread dialog_smoke_wave_alert(dialog_wait);
+// Undefined dialog_wait assumes we don't want any. Use 0 for no wait.
+if(isDefined(dialog_wait))
+  thread dialog_smoke_wave_alert(dialog_wait);
 }
 
 smoke_wave_play() {
@@ -63,45 +63,45 @@ dialog_smoke_wave_alert(dialog_wait) {
 }
 
 // --------------------------------------------------------------------------------- btr80_level_init() {
-  if(isDefined(level.btr80_init)) {
-    return;
+if(isDefined(level.btr80_init)) {
+  return;
+}
+level.btr80_init = true;
+level.btr80_count = 0;
+level.btr80_death_time = gettime();
+
+if(!isDefined(level.btr_kill_value))
+  level.btr_kill_value = 400;
+
+if(!isDefined(level.btr_min_fighting_range))
+  level.btr_min_fighting_range = 400;
+
+if(!isDefined(level.btr_max_fighting_range))
+  level.btr_max_fighting_range = 2400;
+
+if(!isDefined(level.btr_target_fov))
+  level.btr_target_fov = cos(50);
+
+level.btr80_building_checks = getEntArray("trigger_multiple_flag_set_touching", "classname");
+
+for(i = level.btr80_building_checks.size - 1; i >= 0; i--) {
+  building = level.btr80_building_checks[i];
+  if(!isDefined(building.script_flag)) {
+    level.btr80_building_checks[i] = undefined;
+    continue;
   }
-  level.btr80_init = true;
-  level.btr80_count = 0;
-  level.btr80_death_time = gettime();
 
-  if(!isDefined(level.btr_kill_value))
-    level.btr_kill_value = 400;
-
-  if(!isDefined(level.btr_min_fighting_range))
-    level.btr_min_fighting_range = 400;
-
-  if(!isDefined(level.btr_max_fighting_range))
-    level.btr_max_fighting_range = 2400;
-
-  if(!isDefined(level.btr_target_fov))
-    level.btr_target_fov = cos(50);
-
-  level.btr80_building_checks = getEntArray("trigger_multiple_flag_set_touching", "classname");
-
-  for(i = level.btr80_building_checks.size - 1; i >= 0; i--) {
-    building = level.btr80_building_checks[i];
-    if(!isDefined(building.script_flag)) {
+  switch (building.script_flag) {
+    case "player_inside_nates":
+    case "player_in_burgertown":
+    case "player_in_diner":
+      // Do nothing, keep in the list.
+      break;
+    default:
       level.btr80_building_checks[i] = undefined;
-      continue;
-    }
-
-    switch (building.script_flag) {
-      case "player_inside_nates":
-      case "player_in_burgertown":
-      case "player_in_diner":
-        // Do nothing, keep in the list.
-        break;
-      default:
-        level.btr80_building_checks[i] = undefined;
-        break;
-    }
+      break;
   }
+}
 }
 
 create_btr80(btr80_tag) {
@@ -376,24 +376,24 @@ dialog_btr80_spotted_you_action() {
 }
 
 // --------------------------------------------------------------------------------- hunter_enemies_level_init() {
-  // Always re-init this as it can get overwritten at the end of a wave.
-  set_group_advance_to_enemy_parameters(30000, 2);
+// Always re-init this as it can get overwritten at the end of a wave.
+set_group_advance_to_enemy_parameters(30000, 2);
 
-  if(isDefined(level.hunters_init)) {
-    return;
-  }
-  level.hunters_init = true;
+if(isDefined(level.hunters_init)) {
+  return;
+}
+level.hunters_init = true;
 
-  level.hunters_active = 0;
-  if(!isDefined(level.hunters_all_in))
-    level.hunters_all_in = 5;
-  dialog_hunter_enemies_setup();
+level.hunters_active = 0;
+if(!isDefined(level.hunters_all_in))
+  level.hunters_all_in = 5;
+dialog_hunter_enemies_setup();
 
-  level.difficultySettings["accuracyDistScale"]["easy"] = 0.8;
-  level.difficultySettings["accuracyDistScale"]["normal"] = 0.8;
-  level.difficultySettings["accuracyDistScale"]["hardened"] = 0.7;
-  level.difficultySettings["accuracyDistScale"]["veteran"] = 0.6;
-  maps\_gameskill::updateAllDifficulty();
+level.difficultySettings["accuracyDistScale"]["easy"] = 0.8;
+level.difficultySettings["accuracyDistScale"]["normal"] = 0.8;
+level.difficultySettings["accuracyDistScale"]["hardened"] = 0.7;
+level.difficultySettings["accuracyDistScale"]["veteran"] = 0.6;
+maps\_gameskill::updateAllDifficulty();
 }
 
 create_hunter_enemy_group(enemy_tag, enemy_count) {
@@ -838,17 +838,17 @@ dialog_hunter_enemies_setup(enemy_tag, wait_time) {
 }
 
 // --------------------------------------------------------------------------------- attack_heli_init() {
-  if(isDefined(level.attack_heli_init)) {
-    return;
-  }
-  level.attackheliRange = 7000;
-  level.attack_heli_count = 0;
+if(isDefined(level.attack_heli_init)) {
+  return;
+}
+level.attackheliRange = 7000;
+level.attack_heli_count = 0;
 
-  level.attack_heli_init = true;
-  level.attack_heli_death_time = gettime();
+level.attack_heli_init = true;
+level.attack_heli_death_time = gettime();
 
-  dialog_fill_nates_stinger();
-  dialog_fill_diner_stinger();
+dialog_fill_nates_stinger();
+dialog_fill_diner_stinger();
 }
 
 create_attack_heli(heli_id, heli_points_id, wait_time) {
@@ -1027,53 +1027,53 @@ dialog_fill_nates_stinger() {
 }
 
 // --------------------------------------------------------------------------------- stinger_maintain_spawn(stinger_id) {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  level.stingers[stinger_id] = getent(stinger_id, "script_noteworthy");
-  stinger = level.stingers[stinger_id];
+level.stingers[stinger_id] = getent(stinger_id, "script_noteworthy");
+stinger = level.stingers[stinger_id];
 
-  assertex(isDefined(stinger), "stinger_keep_available() was unable to find a stinger of script_noteworthy " + stinger_id);
+assertex(isDefined(stinger), "stinger_keep_available() was unable to find a stinger of script_noteworthy " + stinger_id);
 
-  stinger_origin = stinger.origin;
-  stinger_angles = stinger.angles;
+stinger_origin = stinger.origin;
+stinger_angles = stinger.angles;
 
-  garbage_dump = getstruct("stinger_garbage_dump", "script_noteworthy");
+garbage_dump = getstruct("stinger_garbage_dump", "script_noteworthy");
 
-  // Remove the existing stinger and turn it into an AT4.
-  stinger Delete();
-  stinger = stinger_respawn(stinger_id, stinger_origin, stinger_angles);
-  level.stingers[stinger_id] = stinger;
+// Remove the existing stinger and turn it into an AT4.
+stinger Delete();
+stinger = stinger_respawn(stinger_id, stinger_origin, stinger_angles);
+level.stingers[stinger_id] = stinger;
 
-  /*	while( 1 )
-  	{
-  		stinger waittill( "trigger", player, old_weapon );
-  		
-  		// If players are grabbing them, never need to remind them.
-  		stringer_dialog_throttle_reset();
-  		
-  		stinger = undefined;
-  		level.stingers[ stinger_id ] = undefined;
-  		
-  		while( !isDefined( stinger ) )
-  		{
-  			wait 5;
-  			close_players = get_within_range( stinger_origin, level.players, 256 );
-  			if( close_players.size > 0 )
-  				continue;
+/*	while( 1 )
+	{
+		stinger waittill( "trigger", player, old_weapon );
+		
+		// If players are grabbing them, never need to remind them.
+		stringer_dialog_throttle_reset();
+		
+		stinger = undefined;
+		level.stingers[ stinger_id ] = undefined;
+		
+		while( !isDefined( stinger ) )
+		{
+			wait 5;
+			close_players = get_within_range( stinger_origin, level.players, 256 );
+			if( close_players.size > 0 )
+				continue;
 
-  			close_players = get_within_range( stinger_origin, level.players, 1024 );
-  			if( close_players.size > 0 )
-  			{
-  				if( stinger_player_can_see( stinger_origin ) )
-  					continue;
-  			}
+			close_players = get_within_range( stinger_origin, level.players, 1024 );
+			if( close_players.size > 0 )
+			{
+				if( stinger_player_can_see( stinger_origin ) )
+					continue;
+			}
 
-  			stinger = stinger_respawn( stinger_id, stinger_origin, stinger_angles );
-  			level.stingers[ stinger_id ] = stinger;
-  			if( isDefined( old_weapon ) )
-  				old_weapon.origin = garbage_dump.origin;
-  		}
-  	}*/
+			stinger = stinger_respawn( stinger_id, stinger_origin, stinger_angles );
+			level.stingers[ stinger_id ] = stinger;
+			if( isDefined( old_weapon ) )
+				old_weapon.origin = garbage_dump.origin;
+		}
+	}*/
 }
 
 stinger_player_can_see(stinger_origin) {
@@ -1095,8 +1095,8 @@ stinger_respawn(stinger_id, origin, angles) {
 }
 
 // --------------------------------------------------------------------------------- semtex_maintain_availability() {
-  semtex = getEntArray("weapon_semtex_grenade", "classname");
-  array_thread(semtex, ::semtex_maintain_self);
+semtex = getEntArray("weapon_semtex_grenade", "classname");
+array_thread(semtex, ::semtex_maintain_self);
 }
 
 semtex_maintain_self() {
@@ -1125,20 +1125,20 @@ semtex_player_is_close(semtex_origin) {
 }
 
 // --------------------------------------------------------------------------------- hellfire_attack_start() {
-  if(isDefined(level.hellfire_active)) {
-    return;
-  }
-  level.hellfire_active = true;
-  level.hellfire_paused = false;
+if(isDefined(level.hellfire_active)) {
+  return;
+}
+level.hellfire_active = true;
+level.hellfire_paused = false;
 
-  if(!isDefined(level.hellfire_time_search))
-    hellfire_set_time_search(20, 40);
+if(!isDefined(level.hellfire_time_search))
+  hellfire_set_time_search(20, 40);
 
-  if(!isDefined(level.hellfire_time_breather))
-    hellfire_set_time_breather(5, 8);
+if(!isDefined(level.hellfire_time_breather))
+  hellfire_set_time_breather(5, 8);
 
-  thread hellfire_spawn_player1_uav();
-  thread hellfire_spawn_player2_uav();
+thread hellfire_spawn_player1_uav();
+thread hellfire_spawn_player2_uav();
 }
 
 hellfire_spawn_player1_uav() {
@@ -1357,21 +1357,21 @@ hellfire_set_time_breather(time_min, time_max) {
 }
 
 // --------------------------------------------------------------------------------- hud_display_wavecount(wave_num) {
-  // Little delay so the "Wave Starting in..." can be removed
-  wait(1);
+// Little delay so the "Wave Starting in..." can be removed
+wait(1);
 
-  foreach(player in level.players) {
-    // For now, it looks like there are waves on all difficulties.
-    if(wave_num < 5) {
-      player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", player);
-      player.hud_wave_count = so_create_hud_item(0, so_hud_ypos(), undefined, player);
-      player.hud_wave_count.alignx = "left";
-      player.hud_wave_count SetValue(wave_num);
-    } else {
-      player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", player);
-      player.hud_wave_title.alignx = "center";
-    }
+foreach(player in level.players) {
+  // For now, it looks like there are waves on all difficulties.
+  if(wave_num < 5) {
+    player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVENUM", player);
+    player.hud_wave_count = so_create_hud_item(0, so_hud_ypos(), undefined, player);
+    player.hud_wave_count.alignx = "left";
+    player.hud_wave_count SetValue(wave_num);
+  } else {
+    player.hud_wave_title = so_create_hud_item(0, so_hud_ypos(), &"SPECIAL_OPS_WAVEFINAL", player);
+    player.hud_wave_title.alignx = "center";
   }
+}
 }
 
 hud_display_wavecount_remove() {
@@ -1504,10 +1504,10 @@ hud_display_enemies_pulse_vehicle(hudelem_title, hudelem_count, enemy_total) {
 }
 
 // --------------------------------------------------------------------------------- door_diner_open() {
-  diner_back_door = getent("diner_back_door", "targetname");
-  diner_back_door rotateyaw(85, .3); //counter clockwise
-  diner_back_door playSound("diner_backdoor_slams_open");
-  diner_back_door connectpaths();
+diner_back_door = getent("diner_back_door", "targetname");
+diner_back_door rotateyaw(85, .3); //counter clockwise
+diner_back_door playSound("diner_backdoor_slams_open");
+diner_back_door connectpaths();
 }
 
 door_nates_locker_open() {
@@ -1525,25 +1525,25 @@ door_bt_locker_open() {
 }
 
 // --------------------------------------------------------------------------------- so_defense_convert_enemies() {
-  // Convert some additional enemies over to available Gas Station enemies
-  convert_enemies = getEntArray("diner_enemy_defenders", "targetname");
-  convert_enemies = array_merge(convert_enemies, getEntArray("diner_enemy_counter_attack", "targetname"));
-  for(i = 0; i < convert_enemies.size; i++)
-    convert_enemies[i].targetname = "gas_station_enemies";
+// Convert some additional enemies over to available Gas Station enemies
+convert_enemies = getEntArray("diner_enemy_defenders", "targetname");
+convert_enemies = array_merge(convert_enemies, getEntArray("diner_enemy_counter_attack", "targetname"));
+for(i = 0; i < convert_enemies.size; i++)
+  convert_enemies[i].targetname = "gas_station_enemies";
 
-  // Convert some additional enemies over to available Burger Town enemies
-  convert_enemies = getEntArray("burger_town_nates_attackers", "targetname");
-  convert_enemies = array_merge(convert_enemies, getEntArray("burger_town_enemy_defenders", "targetname"));
-  for(i = 0; i < convert_enemies.size; i++)
-    convert_enemies[i].targetname = "burger_town_enemies";
+// Convert some additional enemies over to available Burger Town enemies
+convert_enemies = getEntArray("burger_town_nates_attackers", "targetname");
+convert_enemies = array_merge(convert_enemies, getEntArray("burger_town_enemy_defenders", "targetname"));
+for(i = 0; i < convert_enemies.size; i++)
+  convert_enemies[i].targetname = "burger_town_enemies";
 
-  // Make sure we only have the guys inside the burger joint.	
-  convert_enemies = getEntArray("burger_town_enemies", "targetname");
-  burger_town_include = getent("so_burger_town_enemy_include", "script_noteworthy");
-  for(i = convert_enemies.size - 1; i >= 0; i--) {
-    if(!(convert_enemies[i] istouching(burger_town_include)))
-      convert_enemies[i].targetname = "ignoreme";
-  }
+// Make sure we only have the guys inside the burger joint.	
+convert_enemies = getEntArray("burger_town_enemies", "targetname");
+burger_town_include = getent("so_burger_town_enemy_include", "script_noteworthy");
+for(i = convert_enemies.size - 1; i >= 0; i--) {
+  if(!(convert_enemies[i] istouching(burger_town_include)))
+    convert_enemies[i].targetname = "ignoreme";
+}
 }
 
 so_defense_set_enemy_spawner_flags() {

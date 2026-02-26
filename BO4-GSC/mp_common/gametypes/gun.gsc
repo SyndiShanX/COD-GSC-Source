@@ -176,16 +176,16 @@ inactivitykick() {
     return;
   }
 
-  while(level.inactivitykick > self.timeplayed[# "total"]) {
+  while(level.inactivitykick > self.timeplayed[#"total"]) {
     wait 1;
   }
 
-  if(self.pers[# "participation"] == 0 && self.pers[# "time_played_moving"] < 1) {
+  if(self.pers[#"participation"] == 0 && self.pers[#"time_played_moving"] < 1) {
     globallogic::gamehistoryplayerkicked();
     kick(self getentitynumber(), "GAME/DROPPEDFORINACTIVITY");
   }
 
-  if(self.pers[# "participation"] == 0 && self.timeplayed[# "total"] > 60) {
+  if(self.pers[#"participation"] == 0 && self.timeplayed[#"total"] > 60) {
     globallogic::gamehistoryplayerkicked();
     kick(self getentitynumber(), "GAME/DROPPEDFORINACTIVITY");
   }
@@ -357,7 +357,7 @@ promoteplayer(weaponused) {
       }
     }
 
-    pointstowin = self.pers[# "pointstowin"];
+    pointstowin = self.pers[#"pointstowin"];
 
     if(pointstowin < level.scorelimit) {
       scoreevents::processscoreevent(#"kill_gun", self, undefined, weaponused);
@@ -393,8 +393,8 @@ demoteplayer(attacker) {
   }
 
   self stats::function_bb7eedf0(#"humiliate_victim", 1);
-  self.pers[# "humiliated"]++;
-  self.humiliated = self.pers[# "humiliated"];
+  self.pers[#"humiliated"]++;
+  self.humiliated = self.pers[#"humiliated"];
   self recordgameevent("return");
   self playlocalsound(#"mpl_wager_humiliate");
   self globallogic_audio::leader_dialog_on_player("humiliated");

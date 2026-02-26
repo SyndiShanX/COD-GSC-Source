@@ -34,9 +34,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.hero_weapon[# "flamethrower"][0] = getweapon(#"hero_flamethrower_t8_lv1");
-  level.hero_weapon[# "flamethrower"][1] = getweapon(#"hero_flamethrower_t8_lv2");
-  level.hero_weapon[# "flamethrower"][2] = getweapon(#"hero_flamethrower_t8_lv3");
+  level.hero_weapon[#"flamethrower"][0] = getweapon(#"hero_flamethrower_t8_lv1");
+  level.hero_weapon[#"flamethrower"][1] = getweapon(#"hero_flamethrower_t8_lv2");
+  level.hero_weapon[#"flamethrower"][2] = getweapon(#"hero_flamethrower_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_flamethrower_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_flamethrower_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_flamethrower_t8_lv3");
@@ -67,15 +67,15 @@ is_flamethrower_weapon(weapon, var_e7c11b0c = 1) {
     return false;
   }
 
-  if(weapon == level.hero_weapon[# "flamethrower"][2]) {
+  if(weapon == level.hero_weapon[#"flamethrower"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "flamethrower"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[#"flamethrower"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "flamethrower"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[#"flamethrower"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -91,30 +91,30 @@ function_f5430720() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "flamethrower"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"flamethrower"], wpn_cur)) {
       self clientfield::increment_to_player("hero_flamethrower_vigor_postfx");
       self function_8cbc7c8f(1);
       self thread function_58bc825e(wpn_cur);
       level callback::on_ai_killed(&on_armor_kill);
-    } else if(isinarray(level.hero_weapon[# "flamethrower"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"flamethrower"], wpn_prev)) {
       self function_8cbc7c8f(0);
       self notify(#"hero_flamethrower_expired");
       level callback::remove_on_ai_killed(&on_armor_kill);
     }
 
-    if(wpn_cur == level.hero_weapon[# "flamethrower"][0]) {
+    if(wpn_cur == level.hero_weapon[#"flamethrower"][0]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_258f60f733c7a181");
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "flamethrower"][1]) {
+    if(wpn_cur == level.hero_weapon[#"flamethrower"][1]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_4c83bb6fd69bf1ea");
       self thread function_16f31337(wpn_cur);
       self thread function_478a4910(wpn_cur);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "flamethrower"][2]) {
+    if(wpn_cur == level.hero_weapon[#"flamethrower"][2]) {
       if(!self gamepadusedlast()) {
         self zm_hero_weapon::show_hint(wpn_cur, #"hash_1a1e29920a655055");
       } else {
@@ -474,7 +474,7 @@ function_3be93b07(w_flamethrower) {
     util::wait_network_frame();
   }
 
-  self.var_be72e7c2.origin = s_trace[# "position"];
+  self.var_be72e7c2.origin = s_trace[#"position"];
   self.var_be72e7c2.angles = self.angles;
   self.var_be72e7c2.v_start = self.var_be72e7c2.origin;
 
@@ -558,7 +558,7 @@ function_6c891578(v_forward_angles, var_a85d39a2) {
       } else if(isDefined(bullettracepassed(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)) && bullettracepassed(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)) {
         v_target_pos = var_2ddb51af + v_forward_angles * var_94a175c3;
       } else {
-        v_target_pos = bulletTrace(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)[# "position"];
+        v_target_pos = bulletTrace(var_2ddb51af, var_2ddb51af + v_forward_angles * var_94a175c3, 0, self)[#"position"];
       }
     } else if(var_a85d39a2.size) {
       ai_zombie = array::random(var_a85d39a2);
@@ -574,7 +574,7 @@ function_6c891578(v_forward_angles, var_a85d39a2) {
       v_target_pos = var_6fba13f1;
     }
 
-    var_6fba13f1 = groundtrace(v_target_pos + (0, 0, 100), v_target_pos + (0, 0, -1000), 0, undefined, 0)[# "position"];
+    var_6fba13f1 = groundtrace(v_target_pos + (0, 0, 100), v_target_pos + (0, 0, -1000), 0, undefined, 0)[#"position"];
 
     if(isDefined(var_6fba13f1)) {
       v_target_pos = var_6fba13f1;
@@ -639,9 +639,9 @@ function_5adaf171(var_2ddb51af) {
     v_target_pos = (var_2ddb51af[0] + randomfloat(400), var_2ddb51af[1] + randomfloat(400), var_2ddb51af[2]);
     s_trace = bulletTrace(self.origin + (0, 0, 16), v_target_pos, 0, self);
 
-    if(isDefined(s_trace[# "position"])) {
-      if(sighttracepassed(s_trace[# "position"], v_target_pos, 0, self)) {
-        return s_trace[# "position"];
+    if(isDefined(s_trace[#"position"])) {
+      if(sighttracepassed(s_trace[#"position"], v_target_pos, 0, self)) {
+        return s_trace[#"position"];
       }
 
       continue;
@@ -708,7 +708,7 @@ function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_lift_spe
       self dodamage(self.maxhealth * 0.18, v_origin, e_player, e_player, "none", "MOD_BURNED", 0, w_flamethrower);
       self.var_42d5176d = 1;
       self val::set(#"trap_ignore", "ignoreall", 1);
-      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[# "position"];
+      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[#"position"];
 
       if(!isDefined(v_pos)) {
         v_pos = self.origin;

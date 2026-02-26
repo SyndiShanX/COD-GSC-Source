@@ -436,7 +436,7 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
           v_end = (n_node.origin[0], n_node.origin[1], n_node.origin[2] - 30);
           trace = bulletTrace(v_start, v_end, 0, undefined);
 
-          if(trace[# "fraction"] < 1) {
+          if(trace[#"fraction"] < 1) {
             override_abort = 0;
 
             if(isDefined(level._whoswho_reject_node_override_func)) {

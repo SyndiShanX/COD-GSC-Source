@@ -46,7 +46,7 @@ function main(str_objective, var_50cc0d4f) {
   if(var_50cc0d4f) {
     level flag::wait_till("level_intro_complete");
 
-    if(level.var_731c10af.paths[# "rice_paddies"].count != 0) {
+    if(level.var_731c10af.paths[#"rice_paddies"].count != 0) {
       level.player val::set("teleport_controls", "freezecontrols", 1);
       level.player val::set("teleport_weapons", "disable_weapons", 1);
       namespace_82bfe441::fade(1, "FadeImmediate");
@@ -178,15 +178,15 @@ function function_61c7a808(str_objective) {
   scene::add_scene_func("scene_pri_intro_short_fastforward", &function_cc5291ff);
   scene::add_scene_func("scene_pri_intro_short", &function_cc5291ff);
 
-  if(isDefined(level.var_731c10af.paths[# "rice_paddies"]) && isDefined(level.var_731c10af.paths) && isDefined(level.var_731c10af) && isDefined(level.var_28c22d88) && (array::contains(level.var_28c22d88, "rice_paddies_1") || array::contains(level.var_28c22d88, "dev_rice_paddies_1_all_districts"))) {
-    if(level.var_731c10af.paths[# "rice_paddies"].count == 0) {
+  if(isDefined(level.var_731c10af.paths[#"rice_paddies"]) && isDefined(level.var_731c10af.paths) && isDefined(level.var_731c10af) && isDefined(level.var_28c22d88) && (array::contains(level.var_28c22d88, "rice_paddies_1") || array::contains(level.var_28c22d88, "dev_rice_paddies_1_all_districts"))) {
+    if(level.var_731c10af.paths[#"rice_paddies"].count == 0) {
       level flag::set("player_intro_anim_done");
       level flag::set("rice_paddies_v1_initial_wave");
       level thread scene::play("scene_pri_intro_loop", array(level.rice_paddies_intro_heli));
       level thread scene::skipto_end("scene_pri_paddies_heli_crash_dead", "Shot 1", undefined, 1, 0);
       return;
     }
-  } else if(level.var_731c10af.paths[# "rice_paddies"].count != 0) {
+  } else if(level.var_731c10af.paths[#"rice_paddies"].count != 0) {
     namespace_82bfe441::fade(1, "FadeImmediate");
   }
 
@@ -271,7 +271,7 @@ function function_61c7a808(str_objective) {
   if(animation != "scene_pri_intro_short_fastforward") {
     level.player waittillmatch({
       #notetrack: "end"}, player_anim);
-    namespace_d9b153b9::force_weapon_loadout("rice_paddies", level.var_731c10af.paths[# "rice_paddies"].count);
+    namespace_d9b153b9::force_weapon_loadout("rice_paddies", level.var_731c10af.paths[#"rice_paddies"].count);
   } else {
     wait 3;
     level flag::set("rice_paddies_v1_initial_wave");
@@ -292,7 +292,7 @@ function function_61c7a808(str_objective) {
       waitframe(1);
     }
 
-    namespace_d9b153b9::force_weapon_loadout("rice_paddies", level.var_731c10af.paths[# "rice_paddies"].count);
+    namespace_d9b153b9::force_weapon_loadout("rice_paddies", level.var_731c10af.paths[#"rice_paddies"].count);
     level flag::set("flag_rice_paddies_cleanup");
     level flag::set("rice_paddies_enemies_dead");
     level.player clientfield::set_to_player("zipline_postfx", 0);
@@ -412,14 +412,14 @@ function function_96e425c7(struct_targetname) {
 }
 
 function function_cc5291ff(a_ents) {
-  level.var_c90d21e1 = a_ents[# "rice_paddies_intro_heli"];
-  level.var_6c3ab26f = a_ents[# "hash_49b1db5963fdcbf5"];
-  level.var_b517b599 = a_ents[# "hash_32bf1e4d7ae150d1"];
-  level.var_ebf4a352 = a_ents[# "hash_32bf1b4d7ae14bb8"];
-  level.var_b918d422 = a_ents[# "hash_68b1bc1b32394e13"];
-  level.var_2d5aba86 = a_ents[# "hash_3a4fbd4603e2ae1d"];
-  level.var_80c622e = a_ents[# "hash_3be12fabbc392116"];
-  level.var_e2e84654 = a_ents[# "dguy"];
+  level.var_c90d21e1 = a_ents[#"rice_paddies_intro_heli"];
+  level.var_6c3ab26f = a_ents[#"hash_49b1db5963fdcbf5"];
+  level.var_b517b599 = a_ents[#"hash_32bf1e4d7ae150d1"];
+  level.var_ebf4a352 = a_ents[#"hash_32bf1b4d7ae14bb8"];
+  level.var_b918d422 = a_ents[#"hash_68b1bc1b32394e13"];
+  level.var_2d5aba86 = a_ents[#"hash_3a4fbd4603e2ae1d"];
+  level.var_80c622e = a_ents[#"hash_3be12fabbc392116"];
+  level.var_e2e84654 = a_ents[#"dguy"];
 
   if(isDefined(level.var_80c622e)) {
     if(isDefined(level.var_80c622e._scene_object._o_scene._e_root.scriptbundlename) && level.var_80c622e._scene_object._o_scene._e_root.scriptbundlename == hash(#"scene_pri_intro_long")) {
@@ -437,9 +437,9 @@ function function_cc5291ff(a_ents) {
 }
 
 function function_f2d852cc(a_ents) {
-  level.var_f6c7fc3f = a_ents[# "hash_7a46e96b3d1fd65c"];
-  level.var_e0f9d0a3 = a_ents[# "hash_7a46ec6b3d1fdb75"];
-  level.var_d3383520 = a_ents[# "hash_7a46eb6b3d1fd9c2"];
+  level.var_f6c7fc3f = a_ents[#"hash_7a46e96b3d1fd65c"];
+  level.var_e0f9d0a3 = a_ents[#"hash_7a46ec6b3d1fdb75"];
+  level.var_d3383520 = a_ents[#"hash_7a46eb6b3d1fd9c2"];
 
   if(isDefined(level.var_f6c7fc3f)) {
     node = getnode("vc_running_enemy1_node", "targetname");
@@ -1255,11 +1255,11 @@ function function_e041c214(smart_bundle) {
   var_75422d3c = getent("rice_paddies_hut_vol", "targetname");
   var_bc0aa3b8 = getent("rice_paddies_hut1_vol", "targetname");
 
-  if(level.var_731c10af.paths[# "rice_paddies"].count == 3) {
+  if(level.var_731c10af.paths[#"rice_paddies"].count == 3) {
     var_61bbe946 = getent("rice_paddies_v3_front_vol", "targetname");
     var_2af845e = getent("rice_paddies_v3_mid_vol", "targetname");
     var_6cc537cb = getent("rice_paddies_v3_back_vol", "targetname");
-  } else if(level.var_731c10af.paths[# "rice_paddies"].count == 0) {
+  } else if(level.var_731c10af.paths[#"rice_paddies"].count == 0) {
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_1", &function_95246a18, smart_bundle, var_a4c09f1, var_61bbe946, "flag_rice_paddies_enemies_retreat_1");
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_2", &function_95246a18, smart_bundle, var_61bbe946, var_2af845e, "flag_rice_paddies_enemies_retreat_2");
     level thread util::delay(6, "flag_rice_paddies_enemies_retreat_3", &function_95246a18, smart_bundle, var_2af845e, var_6cc537cb, "flag_rice_paddies_enemies_retreat_3");
@@ -1519,13 +1519,13 @@ function function_9997e80e(volume, ai_array) {
 function function_9ade6ddd() {
   level endon(#"visit_restart");
   level endon(#"start_outro");
-  hidden[# "prone"] = 300;
-  hidden[# "crouch"] = 600;
-  hidden[# "stand"] = 700;
+  hidden[#"prone"] = 300;
+  hidden[#"crouch"] = 600;
+  hidden[#"stand"] = 700;
   spotted = [];
-  spotted[# "prone"] = 8192;
-  spotted[# "crouch"] = 8192;
-  spotted[# "stand"] = 8192;
+  spotted[#"prone"] = 8192;
+  spotted[#"crouch"] = 8192;
+  spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
   spawner::add_spawn_function_group("rice_paddies_v2_enemies_1", "targetname", &function_385cd8e0);
   level flag::set("rice_paddies_v2_sb1_flag_true");

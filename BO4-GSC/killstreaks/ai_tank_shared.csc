@@ -25,10 +25,10 @@ init_shared(bundlename) {
     bundle = struct::get_script_bundle("killstreak", bundlename);
     level.var_400ded61.aitankkillstreakbundle = bundle;
     level.var_400ded61._ai_tank_fx = [];
-    level.var_400ded61._ai_tank_fx[# "light_green"] = "killstreaks/fx_agr_vlight_eye_grn";
-    level.var_400ded61._ai_tank_fx[# "light_red"] = "killstreaks/fx_agr_vlight_eye_red";
-    level.var_400ded61._ai_tank_fx[# "immobile"] = "killstreaks/fx8_drone_tank_stun";
-    level.var_400ded61._ai_tank_fx[# "stun"] = "killstreaks/fx_agr_emp_stun";
+    level.var_400ded61._ai_tank_fx[#"light_green"] = "killstreaks/fx_agr_vlight_eye_grn";
+    level.var_400ded61._ai_tank_fx[#"light_red"] = "killstreaks/fx_agr_vlight_eye_red";
+    level.var_400ded61._ai_tank_fx[#"immobile"] = "killstreaks/fx8_drone_tank_stun";
+    level.var_400ded61._ai_tank_fx[#"stun"] = "killstreaks/fx_agr_emp_stun";
     clientfield::register("vehicle", "ai_tank_death", 1, 1, "int", &death, 0, 0);
     clientfield::register("vehicle", "ai_tank_immobile", 1, 1, "int", &tank_immobile, 0, 0);
     clientfield::register("vehicle", "ai_tank_change_control", 1, 1, "int", &tank_change_control, 0, 0);
@@ -158,7 +158,7 @@ death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastime
 }
 
 function_407a7b51(localclientnum) {
-  self.immobile_fx = util::playFXOnTag(localclientnum, level.var_400ded61._ai_tank_fx[# "immobile"], self, "tag_body");
+  self.immobile_fx = util::playFXOnTag(localclientnum, level.var_400ded61._ai_tank_fx[#"immobile"], self, "tag_body");
   playSound(localclientnum, #"veh_talon_shutdown", self.origin);
 }
 

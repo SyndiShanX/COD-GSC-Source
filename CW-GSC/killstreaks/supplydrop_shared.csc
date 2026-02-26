@@ -15,8 +15,8 @@ function init_shared() {
     level.var_ba8d5308 = {};
     ir_strobe::init_shared();
     params = getscriptbundle("killstreak_helicopter_guard");
-    level._effect[# "heli_guard_light"][# "friendly"] = params.var_667eb0de;
-    level._effect[# "heli_guard_light"][# "enemy"] = params.var_1d8c24a8;
+    level._effect[#"heli_guard_light"][#"friendly"] = params.var_667eb0de;
+    level._effect[#"heli_guard_light"][#"enemy"] = params.var_1d8c24a8;
     clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
     clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
     clientfield::register("vehicle", "" + # "hash_e4eb5c0853abab8", 6000, 1, "int", &function_feeeb71b, 0, 0);
@@ -89,7 +89,7 @@ function updatemarkerthread(localclientnum) {
     viewangles = getlocalclientangles(localclientnum);
     forwardvector = vectorscale(anglesToForward(viewangles), killstreakcorebundle.ksmaxairdroptargetrange);
     results = bulletTrace(player getEye(), player getEye() + forwardvector, 0, player);
-    player.markerobj.origin = results[# "position"];
+    player.markerobj.origin = results[#"position"];
     waitframe(1);
   }
 }

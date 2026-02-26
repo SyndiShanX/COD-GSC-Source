@@ -119,12 +119,12 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + # "postfx_play", 16000, 2, "int");
   clientfield::register("world", "" + # "hash_71f9fcfb2cd84a9c", 16000, 1, "int");
   clientfield::register("toplayer", "" + # "eye_vignette", 16000, 1, "int");
-  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[# "animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[# "switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
+  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
   level.default_start_location = "zone_temple_of_apollo";
   level.default_game_mode = "zclassic";
   level.var_22fda912 = &function_9f50079d;
@@ -141,7 +141,7 @@ event_handler[level_init] main(eventstruct) {
   level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_red_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
-  level.custom_spawner_entry[# "crawl"] = &zm_spawner::function_45bb11e4;
+  level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
   level.move_spawn_func = &function_a5f3cb45;
   level.var_6f6cc58 = &function_6f6cc58;
   level.var_4e4950d1 = &function_4e4950d1;
@@ -1020,30 +1020,30 @@ setupmusic() {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[1][# "hitmed"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitmed"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitmed"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[4][# "hitmed"] = "vox_plr_4_exert_pain";
-  level.exert_sounds[1][# "hitlrg"] = "vox_plr_1_exert_pain";
-  level.exert_sounds[2][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[3][# "hitlrg"] = "vox_plr_2_exert_pain";
-  level.exert_sounds[4][# "hitlrg"] = "vox_plr_3_exert_pain";
-  level.exert_sounds[1][# "drowning"] = "vox_plr_1_exert_underwater_air_low";
-  level.exert_sounds[2][# "drowning"] = "vox_plr_2_exert_underwater_air_low";
-  level.exert_sounds[3][# "drowning"] = "vox_plr_3_exert_underwater_air_low";
-  level.exert_sounds[4][# "drowning"] = "vox_plr_4_exert_underwater_air_low";
-  level.exert_sounds[1][# "cough"] = "vox_plr_1_exert_gas_cough";
-  level.exert_sounds[2][# "cough"] = "vox_plr_2_exert_gas_cough";
-  level.exert_sounds[3][# "cough"] = "vox_plr_3_exert_gas_cough";
-  level.exert_sounds[4][# "cough"] = "vox_plr_4_exert_gas_cough";
-  level.exert_sounds[1][# "underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
-  level.exert_sounds[2][# "underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
-  level.exert_sounds[3][# "underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
-  level.exert_sounds[4][# "underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
-  level.exert_sounds[1][# "underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
-  level.exert_sounds[2][# "underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
-  level.exert_sounds[3][# "underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
-  level.exert_sounds[4][# "underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
+  level.exert_sounds[1][#"hitmed"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitmed"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitmed"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[4][#"hitmed"] = "vox_plr_4_exert_pain";
+  level.exert_sounds[1][#"hitlrg"] = "vox_plr_1_exert_pain";
+  level.exert_sounds[2][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[3][#"hitlrg"] = "vox_plr_2_exert_pain";
+  level.exert_sounds[4][#"hitlrg"] = "vox_plr_3_exert_pain";
+  level.exert_sounds[1][#"drowning"] = "vox_plr_1_exert_underwater_air_low";
+  level.exert_sounds[2][#"drowning"] = "vox_plr_2_exert_underwater_air_low";
+  level.exert_sounds[3][#"drowning"] = "vox_plr_3_exert_underwater_air_low";
+  level.exert_sounds[4][#"drowning"] = "vox_plr_4_exert_underwater_air_low";
+  level.exert_sounds[1][#"cough"] = "vox_plr_1_exert_gas_cough";
+  level.exert_sounds[2][#"cough"] = "vox_plr_2_exert_gas_cough";
+  level.exert_sounds[3][#"cough"] = "vox_plr_3_exert_gas_cough";
+  level.exert_sounds[4][#"cough"] = "vox_plr_4_exert_gas_cough";
+  level.exert_sounds[1][#"underwater_emerge"] = "vox_plr_1_exert_underwater_emerge_breath";
+  level.exert_sounds[2][#"underwater_emerge"] = "vox_plr_2_exert_underwater_emerge_breath";
+  level.exert_sounds[3][#"underwater_emerge"] = "vox_plr_3_exert_underwater_emerge_breath";
+  level.exert_sounds[4][#"underwater_emerge"] = "vox_plr_4_exert_underwater_emerge_breath";
+  level.exert_sounds[1][#"underwater_gasp"] = "vox_plr_1_exert_underwater_emerge_gasp";
+  level.exert_sounds[2][#"underwater_gasp"] = "vox_plr_2_exert_underwater_emerge_gasp";
+  level.exert_sounds[3][#"underwater_gasp"] = "vox_plr_3_exert_underwater_emerge_gasp";
+  level.exert_sounds[4][#"underwater_gasp"] = "vox_plr_4_exert_underwater_emerge_gasp";
 }
 
 play_outro() {
@@ -1103,16 +1103,16 @@ function_eeb6a1e7() {
 }
 
 function_bff9977d(a_ents) {
-  if(isDefined(a_ents[# "scarlett_eyes"])) {
-    scarlett_eyes = a_ents[# "scarlett_eyes"];
+  if(isDefined(a_ents[#"scarlett_eyes"])) {
+    scarlett_eyes = a_ents[#"scarlett_eyes"];
     level waittill(#"eyes_start");
     scarlett_eyes clientfield::set("" + # "medusa_eyes", 1);
   }
 }
 
 function_b5670bb7(a_ents) {
-  if(isDefined(a_ents[# "scarlett_eyes"])) {
-    scarlett_eyes = a_ents[# "scarlett_eyes"];
+  if(isDefined(a_ents[#"scarlett_eyes"])) {
+    scarlett_eyes = a_ents[#"scarlett_eyes"];
     scarlett_eyes clientfield::set("" + # "medusa_eyes", 1);
     level waittill(#"eyes_done");
     scarlett_eyes clientfield::set("" + # "medusa_eyes", 0);
@@ -1124,8 +1124,8 @@ function_924ba3d(a_ents) {
     player clientfield::set_to_player("" + # "eye_vignette", 1);
   }
 
-  if(isDefined(a_ents[# "medusa_eyes"])) {
-    medusa_eyes = a_ents[# "medusa_eyes"];
+  if(isDefined(a_ents[#"medusa_eyes"])) {
+    medusa_eyes = a_ents[#"medusa_eyes"];
     level waittill(#"eyes_start");
     medusa_eyes clientfield::set("" + # "medusa_eyes", 1);
     level waittill(#"eyes_done");
@@ -1134,8 +1134,8 @@ function_924ba3d(a_ents) {
 }
 
 function_b648a6d9(a_ents) {
-  if(isDefined(a_ents[# "medusa_eyes"])) {
-    medusa_eyes = a_ents[# "medusa_eyes"];
+  if(isDefined(a_ents[#"medusa_eyes"])) {
+    medusa_eyes = a_ents[#"medusa_eyes"];
     medusa_eyes clientfield::set("" + # "medusa_eyes", 1);
     level waittill(#"eyes_done");
     medusa_eyes clientfield::set("" + # "medusa_eyes", 0);
@@ -2088,9 +2088,9 @@ function_80b73b4() {
   }
 
   while(getdvarint(#"hash_49d01fe7f6492094", 0)) {
-    function_e8760afa(level.zm_loc_types[# "zombie_location"]);
-    function_e8760afa(level.zm_loc_types[# "gegenees_location"]);
-    function_e8760afa(level.zm_loc_types[# "blight_father_location"]);
+    function_e8760afa(level.zm_loc_types[#"zombie_location"]);
+    function_e8760afa(level.zm_loc_types[#"gegenees_location"]);
+    function_e8760afa(level.zm_loc_types[#"blight_father_location"]);
     waitframe(1);
   }
 }

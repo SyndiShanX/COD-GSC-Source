@@ -651,7 +651,7 @@ wasatcovernode() {
 bb_getlocomotionexityaw(blackboard, yaw) {
   if(self haspath()) {
     predictedlookaheadinfo = self predictexit();
-    status = predictedlookaheadinfo[# "path_prediction_status"];
+    status = predictedlookaheadinfo[#"path_prediction_status"];
 
     if(!isDefined(self.pathgoalpos)) {
       return -1;
@@ -659,8 +659,8 @@ bb_getlocomotionexityaw(blackboard, yaw) {
 
     if(status == 3) {
       start = self.origin;
-      end = start + vectorscale((0, predictedlookaheadinfo[# "path_prediction_travel_vector"][1], 0), 100);
-      angletoexit = vectortoangles(predictedlookaheadinfo[# "path_prediction_travel_vector"])[1];
+      end = start + vectorscale((0, predictedlookaheadinfo[#"path_prediction_travel_vector"][1], 0), 100);
+      angletoexit = vectortoangles(predictedlookaheadinfo[#"path_prediction_travel_vector"])[1];
       exityaw = absangleclamp360(angletoexit - self.prevnode.angles[1]);
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
@@ -668,8 +668,8 @@ bb_getlocomotionexityaw(blackboard, yaw) {
       return exityaw;
     } else if(status == 4) {
       start = self.origin;
-      end = start + vectorscale((0, predictedlookaheadinfo[# "path_prediction_travel_vector"][1], 0), 100);
-      angletoexit = vectortoangles(predictedlookaheadinfo[# "path_prediction_travel_vector"])[1];
+      end = start + vectorscale((0, predictedlookaheadinfo[#"path_prediction_travel_vector"][1], 0), 100);
+      angletoexit = vectortoangles(predictedlookaheadinfo[#"path_prediction_travel_vector"])[1];
       exityaw = absangleclamp360(angletoexit - self.angles[1]);
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
@@ -686,9 +686,9 @@ bb_getlocomotionexityaw(blackboard, yaw) {
         return exityaw;
       }
 
-      start = predictedlookaheadinfo[# "path_prediction_start_point"];
-      end = start + predictedlookaheadinfo[# "path_prediction_travel_vector"];
-      exityaw = getangleusingdirection(predictedlookaheadinfo[# "path_prediction_travel_vector"]);
+      start = predictedlookaheadinfo[#"path_prediction_start_point"];
+      end = start + predictedlookaheadinfo[#"path_prediction_travel_vector"];
+      exityaw = getangleusingdirection(predictedlookaheadinfo[#"path_prediction_travel_vector"]);
 
       record3dtext("<dev string:x82>" + int(exityaw), self.origin - (0, 0, 5), (1, 0, 0), "<dev string:x75>", undefined, 0.4);
 
@@ -750,7 +750,7 @@ bb_getlocomotionfaceenemyquadrant() {
 bb_getlocomotionpaintype() {
   if(self haspath()) {
     predictedlookaheadinfo = self predictpath();
-    status = predictedlookaheadinfo[# "path_prediction_status"];
+    status = predictedlookaheadinfo[#"path_prediction_status"];
     startpos = self.origin;
     furthestpointtowardsgoalclear = 1;
 

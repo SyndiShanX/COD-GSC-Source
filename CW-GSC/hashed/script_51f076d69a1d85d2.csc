@@ -22,8 +22,8 @@ function preload() {
 }
 
 function postload() {
-  level._effect[# "zipline_ai_landing_fx"] = # "hash_62e38c7e6420e59d";
-  level._effect[# "zipline_player_landing_fx"] = # "hash_62e38c7e6420e59d";
+  level._effect[#"zipline_ai_landing_fx"] = # "hash_62e38c7e6420e59d";
+  level._effect[#"zipline_player_landing_fx"] = # "hash_62e38c7e6420e59d";
 }
 
 function zipline_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -53,23 +53,23 @@ function function_17e2302() {
 
 function zipline_player_landing_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump === 1) {
-    util::playFXOnTag(fieldname, level._effect[# "zipline_player_landing_fx"], self, "tag_origin");
+    util::playFXOnTag(fieldname, level._effect[#"zipline_player_landing_fx"], self, "tag_origin");
     return;
   }
 
   if(bwastimejump === 2) {
-    util::playFXOnTag(fieldname, level._effect[# "zipline_player_landing_fx"], self, "tag_origin");
+    util::playFXOnTag(fieldname, level._effect[#"zipline_player_landing_fx"], self, "tag_origin");
   }
 }
 
 function zipline_ai_landing_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump === 1) {
-    util::playFXOnTag(fieldname, level._effect[# "zipline_ai_landing_fx"], self, "tag_origin");
+    util::playFXOnTag(fieldname, level._effect[#"zipline_ai_landing_fx"], self, "tag_origin");
     return;
   }
 
   if(bwastimejump === 2) {
-    util::playFXOnTag(fieldname, level._effect[# "zipline_ai_landing_fx"], self, "tag_origin");
+    util::playFXOnTag(fieldname, level._effect[#"zipline_ai_landing_fx"], self, "tag_origin");
   }
 }
 

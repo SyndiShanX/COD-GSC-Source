@@ -189,19 +189,19 @@ function_580b77a2() {
   self attach("c_t8_zmb_titanic_stoker_head_cap1");
   self attach("c_t8_zmb_titanic_stoker_shovel1", "tag_weapon_right");
   self.armorinfo = [];
-  self.armorinfo[# "left_arm_upper"] = new class_264486ac();
-  self.armorinfo[# "left_arm_upper"].shadervector = 4;
-  self.armorinfo[# "left_arm_upper"].fxindex = 3;
-  self.armorinfo[# "right_arm_upper"] = new class_264486ac();
-  self.armorinfo[# "right_arm_upper"].shadervector = 1;
-  self.armorinfo[# "right_arm_upper"].fxindex = 4;
-  self.armorinfo[# "head"] = new class_264486ac();
-  self.armorinfo[# "head"].shadervector = 3;
-  self.armorinfo[# "head"].fxindex = 5;
-  self.armorinfo[# "left_arm_lower"] = new class_264486ac();
-  self.armorinfo[# "left_arm_lower"].var_6d7b8c32 = 1;
-  self.armorinfo[# "left_arm_lower"].var_a222368f = "j_wrist_le";
-  self.armorinfo[# "left_arm_lower"].fxindex = 6;
+  self.armorinfo[#"left_arm_upper"] = new class_264486ac();
+  self.armorinfo[#"left_arm_upper"].shadervector = 4;
+  self.armorinfo[#"left_arm_upper"].fxindex = 3;
+  self.armorinfo[#"right_arm_upper"] = new class_264486ac();
+  self.armorinfo[#"right_arm_upper"].shadervector = 1;
+  self.armorinfo[#"right_arm_upper"].fxindex = 4;
+  self.armorinfo[#"head"] = new class_264486ac();
+  self.armorinfo[#"head"].shadervector = 3;
+  self.armorinfo[#"head"].fxindex = 5;
+  self.armorinfo[#"left_arm_lower"] = new class_264486ac();
+  self.armorinfo[#"left_arm_lower"].var_6d7b8c32 = 1;
+  self.armorinfo[#"left_arm_lower"].var_a222368f = "j_wrist_le";
+  self.armorinfo[#"left_arm_lower"].fxindex = 6;
   self.var_19f48bbe = [];
   self.var_19f48bbe[0] = "left_arm_upper";
   self.var_19f48bbe[1] = "right_arm_upper";
@@ -256,8 +256,8 @@ function_3049b317() {
 
   if(isDefined(level.var_370b1a3d)) {
     s_spawn_loc = [[level.var_370b1a3d]]();
-  } else if(level.zm_loc_types[# "stoker_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "stoker_location"]);
+  } else if(level.zm_loc_types[#"stoker_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"stoker_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -741,8 +741,8 @@ function_b2602782(entity) {
   var_872c6826 = vectortoangles(targetpos - launchpos);
   angles = function_cc68801f(launchpos, targetpos, entity ai::function_9139c839().var_81da787, getdvarfloat(#"bg_lowgravity", 0));
 
-  if(isDefined(angles) && angles[# "lowangle"] > 0) {
-    dir = anglesToForward((-1 * angles[# "lowangle"], var_872c6826[1], var_872c6826[2]));
+  if(isDefined(angles) && angles[#"lowangle"] > 0) {
+    dir = anglesToForward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
   } else {
     dir = anglesToForward(var_872c6826);
   }
@@ -859,8 +859,8 @@ spawn_single(b_force_spawn = 0, var_eb3a8721, var_bc66d64b) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_370b1a3d)) {
     s_spawn_loc = [[level.var_370b1a3d]]();
-  } else if(level.zm_loc_types[# "stoker_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "stoker_location"]);
+  } else if(level.zm_loc_types[#"stoker_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"stoker_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -1023,7 +1023,7 @@ function_963e8ce(cmd) {
     v_direction = anglesToForward(v_direction) * 8000;
     eye = player getEye();
     trace = bulletTrace(eye, eye + v_direction, 0, undefined);
-    var_380c580a = positionquery_source_navigation(trace[# "position"], 128, 256, 128, 20);
+    var_380c580a = positionquery_source_navigation(trace[#"position"], 128, 256, 128, 20);
     s_spot = spawnStruct();
 
     if(isDefined(var_380c580a) && var_380c580a.data.size > 0) {

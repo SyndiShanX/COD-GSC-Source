@@ -273,8 +273,8 @@ function onendround(var_c1e98979) {
   globallogic_score::function_9779ac61();
 
   if(level.tournamentmatch === 1) {
-    alliesscore = isDefined(game.stat[# "teamscores"][# "allies"]) ? game.stat[# "teamscores"][# "allies"] : 0;
-    axisscore = isDefined(game.stat[# "teamscores"][# "axis"]) ? game.stat[# "teamscores"][# "axis"] : 0;
+    alliesscore = isDefined(game.stat[#"teamscores"][#"allies"]) ? game.stat[#"teamscores"][#"allies"] : 0;
+    axisscore = isDefined(game.stat[#"teamscores"][#"axis"]) ? game.stat[#"teamscores"][#"axis"] : 0;
     function_b091e7c0(0, alliesscore);
     function_b091e7c0(1, axisscore);
     function_d33c99f8();
@@ -292,7 +292,7 @@ function onendround(var_c1e98979) {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isPlayer(deathanimduration) && deathanimduration.pers[# "team"] != self.pers[# "team"]) {
+  if(isPlayer(deathanimduration) && deathanimduration.pers[#"team"] != self.pers[#"team"]) {
     deathanimduration.var_9b890e79 = (isDefined(deathanimduration.var_9b890e79) ? deathanimduration.var_9b890e79 : 0) + 1;
   }
 
@@ -335,7 +335,7 @@ function ononeleftevent(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         break;
       }
@@ -830,8 +830,8 @@ function function_c4915ac() {
   if(level.var_3778003e === 1) {
     globallogic_score::giveteamscoreforobjective(#"allies", 1);
     globallogic_score::giveteamscoreforobjective(#"axis", 1);
-    game.stat[# "roundswon"][# "allies"]++;
-    game.stat[# "roundswon"][# "axis"]++;
+    game.stat[#"roundswon"][#"allies"]++;
+    game.stat[#"roundswon"][#"axis"]++;
   }
 
   thread globallogic::end_round(2);

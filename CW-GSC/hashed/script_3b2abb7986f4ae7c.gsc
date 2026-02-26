@@ -78,7 +78,7 @@ function function_95c09591(destination) {
   var_4a91da6d = [];
 
   foreach(location in destination.locations) {
-    instance = location.instances[# "helicopter_escape"];
+    instance = location.instances[#"helicopter_escape"];
 
     if(isDefined(instance)) {
       if(!isDefined(level.var_fcb2823)) {
@@ -138,7 +138,7 @@ function function_95c09591(destination) {
 function function_685a8288(instance) {
   level endon(#"end_game");
   instance.var_422ae63e = # "p9_fxanim_mp_care_package_bundle";
-  var_28bf3706 = instance.contentgroups[# "heli_spawn"][0];
+  var_28bf3706 = instance.contentgroups[#"heli_spawn"][0];
   assert(isDefined(var_28bf3706.target), "<dev string:x38>");
   nd_start = getvehiclenode(var_28bf3706.target, "targetname");
 
@@ -434,7 +434,7 @@ function drop_crate(instance, var_f9972216, var_f16f4b37) {
   mask = 1 | 4;
   radius = 30;
   trace = physicstrace(self.e_crate.origin + (0, 0, -100), self.e_crate.origin + (0, 0, -10000), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
-  v_target_location = trace[# "position"];
+  v_target_location = trace[#"position"];
   var_3a68f655 = distance(self.e_crate.origin, v_target_location);
   n_drop_time = mapfloat(0, 1000, 1, 10, var_3a68f655);
 
@@ -503,16 +503,16 @@ function cratecontrolleddrop(instance, v_target_location, n_drop_time = 10, var_
 
   if(isDefined(params.var_827e3209)) {
     trace = groundtrace(crate.origin + (0, 0, 70), crate.origin + (0, 0, -100), 0, crate);
-    var_2122d2eb = crate getfxfromsurfacetable(params.var_827e3209, trace[# "surfacetype"]);
+    var_2122d2eb = crate getfxfromsurfacetable(params.var_827e3209, trace[#"surfacetype"]);
 
     if(isDefined(var_2122d2eb)) {
-      fxforward = trace[# "normal"];
+      fxforward = trace[#"normal"];
 
       if(fxforward == (0, 0, 0)) {
         fxforward = (0, 0, 1);
       }
 
-      playFX(var_2122d2eb, trace[# "position"], fxforward);
+      playFX(var_2122d2eb, trace[#"position"], fxforward);
       self playSound(#"phy_impact_supply");
     }
   }
@@ -579,7 +579,7 @@ function function_345ada65(attacker) {
 
   if(isDefined(bundle.var_b768b86b)) {
     trace = groundtrace(self.origin + (0, 0, 10), self.origin + (0, 0, -10), 0, self);
-    explosionfx = self getfxfromsurfacetable(bundle.var_b768b86b, trace[# "surfacetype"]);
+    explosionfx = self getfxfromsurfacetable(bundle.var_b768b86b, trace[#"surfacetype"]);
 
     if(isDefined(explosionfx)) {
       playFX(explosionfx, self.origin, anglestoup(self.angles), anglestoright(self.angles));
@@ -675,7 +675,7 @@ function private function_9813d292() {
 
 function function_4bf116ab(ents) {
   if(isDefined(self.e_crate)) {
-    self.e_crate linkto(ents[# "harness"], "tag_care_package", (0, 0, 0), (0, 0, 0));
+    self.e_crate linkto(ents[#"harness"], "tag_care_package", (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -686,8 +686,8 @@ function function_2842c984(ents) {
 }
 
 function function_76b49bd8(ents) {
-  ents[# "parachute"] clientfield::set("supply_drop_parachute_rob", 1);
-  self.parachute = ents[# "parachute"];
+  ents[#"parachute"] clientfield::set("supply_drop_parachute_rob", 1);
+  self.parachute = ents[#"parachute"];
 }
 
 function function_2defd397() {

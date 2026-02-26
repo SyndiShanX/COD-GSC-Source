@@ -183,7 +183,7 @@ function function_e1c4e1c2(v_org, eattacker, einflictor) {
 function vehicle_spawn(s_instance) {
   s_instance.var_2bb61e5b = 0;
   level flag::wait_till_clear(#"hash_6559e11da1f3a7cf");
-  var_f6b6b97e = isDefined(s_instance.contentgroups[# "hash_402487319cc06a4c"]) ? s_instance.contentgroups[# "hash_402487319cc06a4c"] : [];
+  var_f6b6b97e = isDefined(s_instance.contentgroups[#"hash_402487319cc06a4c"]) ? s_instance.contentgroups[#"hash_402487319cc06a4c"] : [];
 
   foreach(var_50b7449f in var_f6b6b97e) {
     if(!getdvarint(#"hash_26ddff5fa2581ab4", 0) && var_50b7449f.vehicletype === "vehicle_motorcycle_mil_us_offroad") {
@@ -378,7 +378,7 @@ function vehicle_spawn(s_instance) {
 
 function spawn_vehicles(destination) {
   foreach(s_location in destination.locations) {
-    s_instance = s_location.instances[# "vehicle_spawns"];
+    s_instance = s_location.instances[#"vehicle_spawns"];
 
     if(isDefined(s_instance)) {
       content_manager::spawn_instance(s_instance);
@@ -512,13 +512,13 @@ function function_724dafb1(destination) {
 function function_6465d1fa(destination) {
   triggers = [];
 
-  if(!isDefined(destination.contentgroups[# "hash_3460aae6bb799a99"])) {
+  if(!isDefined(destination.contentgroups[#"hash_3460aae6bb799a99"])) {
     return [];
   }
 
   var_a91694c7 = function_de75fe06();
 
-  foreach(struct in destination.contentgroups[# "hash_3460aae6bb799a99"]) {
+  foreach(struct in destination.contentgroups[#"hash_3460aae6bb799a99"]) {
     triggers[triggers.size] = getent(struct.targetname, "target");
   }
 
@@ -634,10 +634,10 @@ function on_vehicle_spawned() {
         bundle.script_side = "port";
       }
 
-      var_d487d45c = bundle.scene_ents[# "prop 1"];
+      var_d487d45c = bundle.scene_ents[#"prop 1"];
 
       while(!isDefined(var_d487d45c) && isalive(var_6031fb1f)) {
-        var_d487d45c = bundle.scene_ents[# "prop 1"];
+        var_d487d45c = bundle.scene_ents[#"prop 1"];
         waitframe(1);
       }
 
@@ -688,7 +688,7 @@ function on_vehicle_spawned() {
               offset = vectorscale(anglestoright(var_6031fb1f.angles), 8);
             }
 
-            var_6b6fec6c = var_2e4576cb[# "position"] + offset;
+            var_6b6fec6c = var_2e4576cb[#"position"] + offset;
             fall_time = abs(distance(var_6031fb1f.origin, var_6b6fec6c) / 390);
 
             if(isDefined(var_6031fb1f)) {

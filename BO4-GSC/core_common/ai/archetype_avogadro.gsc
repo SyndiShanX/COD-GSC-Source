@@ -329,7 +329,7 @@ function_a495d71f(entity) {
       entity setblackboardattribute("_phase_direction", direction);
       entity setblackboardattribute("_phase_distance", distance);
       result = entity astsearch("phase@avogadro");
-      animation = animationstatenetworkutility::searchanimationmap(entity, result[# "animation"]);
+      animation = animationstatenetworkutility::searchanimationmap(entity, result[#"animation"]);
 
       if(isDefined(animation)) {
         localdeltavector = getmovedelta(animation, 0, 1, entity);

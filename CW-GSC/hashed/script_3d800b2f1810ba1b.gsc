@@ -304,9 +304,9 @@ function private function_2138c62(augmented_impact_fx, damage_data, var_b33be77)
       dir = vectornormalize(var_e5cdf905 - damage_data.position);
       trace_result = bulletTrace(damage_data.position + dir, var_e5cdf905 + dir * 12, 0, undefined);
 
-      if(!isDefined(trace_result[# "entity"]) || trace_result[# "entity"] != self) {
+      if(!isDefined(trace_result[#"entity"]) || trace_result[#"entity"] != self) {
         if(getdvarfloat(#"hash_4e3253d6c90615ea", 0) > 0) {
-          line(damage_data.position + dir, trace_result[# "position"], (1, 0, 0), 1, 0, int(getdvarfloat(#"hash_4e3253d6c90615ea", 0) / float(function_60d95f53()) / 1000));
+          line(damage_data.position + dir, trace_result[#"position"], (1, 0, 0), 1, 0, int(getdvarfloat(#"hash_4e3253d6c90615ea", 0) / float(function_60d95f53()) / 1000));
         }
 
         if(getdvarint(#"hash_312f96d76ca3d249", 0)) {
@@ -317,10 +317,10 @@ function private function_2138c62(augmented_impact_fx, damage_data, var_b33be77)
       }
 
       if(getdvarfloat(#"hash_4e3253d6c90615ea", 0) > 0) {
-        line(damage_data.position + dir, trace_result[# "position"], (1, 1, 1), 1, 0, int(getdvarfloat(#"hash_4e3253d6c90615ea", 0) / float(function_60d95f53()) / 1000));
+        line(damage_data.position + dir, trace_result[#"position"], (1, 1, 1), 1, 0, int(getdvarfloat(#"hash_4e3253d6c90615ea", 0) / float(function_60d95f53()) / 1000));
       }
 
-      damage_data.position = trace_result[# "position"];
+      damage_data.position = trace_result[#"position"];
     } else {
       trace_result = bulletTrace(damage_data.position - damage_data.direction, damage_data.position + damage_data.direction * 6, 0, undefined);
     }
@@ -336,7 +336,7 @@ function private function_2138c62(augmented_impact_fx, damage_data, var_b33be77)
     }
 
     if(var_2cc6e886.min_angle > 0 || var_2cc6e886.max_angle < 180) {
-      angle = acos(vectordot(trace_result[# "normal"], (0, 0, 1)));
+      angle = acos(vectordot(trace_result[#"normal"], (0, 0, 1)));
       var_7670388f = angle >= var_2cc6e886.min_angle && angle <= var_2cc6e886.max_angle;
     }
 
@@ -385,15 +385,15 @@ function private function_2138c62(augmented_impact_fx, damage_data, var_b33be77)
       level.var_8a1c2b55.var_6a01400c++;
       level.var_8a1c2b55.var_f782e821[augmented_impact_fx][level.var_8a1c2b55.var_f782e821[augmented_impact_fx].size] = damage_data;
       data.var_33c88c75[data.var_33c88c75.size] = damage_data.var_7c5043e3;
-      forward = function_f80632da(isDefined(var_2cc6e886.var_39f04272) ? var_2cc6e886.var_39f04272 : 0, cos(isDefined(var_2cc6e886.var_ef1ee44c) ? var_2cc6e886.var_ef1ee44c : 0), damage_data.attacker, damage_data.position, trace_result[# "normal"]);
+      forward = function_f80632da(isDefined(var_2cc6e886.var_39f04272) ? var_2cc6e886.var_39f04272 : 0, cos(isDefined(var_2cc6e886.var_ef1ee44c) ? var_2cc6e886.var_ef1ee44c : 0), damage_data.attacker, damage_data.position, trace_result[#"normal"]);
 
-      if((isDefined(var_2cc6e886.var_f9ac1f46) ? var_2cc6e886.var_f9ac1f46 : 0) > 0 && forward == trace_result[# "normal"]) {
+      if((isDefined(var_2cc6e886.var_f9ac1f46) ? var_2cc6e886.var_f9ac1f46 : 0) > 0 && forward == trace_result[#"normal"]) {
         offset = forward + perpendicularvector(forward) * tan(var_2cc6e886.var_f9ac1f46) * randomfloat(1);
         offset = rotatepointaroundaxis(offset, forward, randomfloatrange(0, 360));
         forward = vectornormalize(offset);
 
         if(getdvarint(#"hash_168747d9fbaa6a48", 0)) {
-          iprintlnbold(acos(vectordot(trace_result[# "normal"], forward)));
+          iprintlnbold(acos(vectordot(trace_result[#"normal"], forward)));
         }
       }
 

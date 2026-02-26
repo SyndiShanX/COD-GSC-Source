@@ -64,11 +64,11 @@ function precache() {
     return;
   }
 
-  level._effect[# "tombstone_light"] = "maps/zm_gold/fx9_sur_machine_tombstone_eye_smk";
-  level.machine_assets[# "hash_38c08136902fd553"] = spawnStruct();
-  level.machine_assets[# "hash_38c08136902fd553"].weapon = getweapon("zombie_perk_bottle_tombstone");
-  level.machine_assets[# "hash_38c08136902fd553"].off_model = "p9_sur_machine_tombstone_off";
-  level.machine_assets[# "hash_38c08136902fd553"].on_model = "p9_sur_machine_tombstone";
+  level._effect[#"tombstone_light"] = "maps/zm_gold/fx9_sur_machine_tombstone_eye_smk";
+  level.machine_assets[#"hash_38c08136902fd553"] = spawnStruct();
+  level.machine_assets[#"hash_38c08136902fd553"].weapon = getweapon("zombie_perk_bottle_tombstone");
+  level.machine_assets[#"hash_38c08136902fd553"].off_model = "p9_sur_machine_tombstone_off";
+  level.machine_assets[#"hash_38c08136902fd553"].on_model = "p9_sur_machine_tombstone";
 }
 
 function register_clientfield() {
@@ -799,7 +799,7 @@ function function_8fddd50e() {
   trace_start = var_a97ca678;
   trace_end = var_a97ca678 + (0, 0, -100);
   var_dfa8eaa5 = playerphysicstrace(trace_start, trace_end);
-  a_str_models = [# "hash_4bee36a9434de051", #"hash_4bee33a9434ddb38", #"hash_4bee34a9434ddceb", #"hash_4bee39a9434de56a"];
+  a_str_models = [#"hash_4bee36a9434de051", #"hash_4bee33a9434ddb38", #"hash_4bee34a9434ddceb", #"hash_4bee39a9434de56a"];
   stash = util::spawn_model(a_str_models[self.entity_num], var_dfa8eaa5 + (0, 0, 15));
   stash function_619a5c20();
   stash clientfield::set("" + # "hash_2897f04212a28873", 1);

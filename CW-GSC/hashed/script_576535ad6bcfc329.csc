@@ -25,7 +25,7 @@ function init() {
 }
 
 function skel_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(bwasdemojump, level._effect[# "lightning_dog_spawn"], self, "j_spine2");
+  util::playFXOnTag(bwasdemojump, level._effect[#"lightning_dog_spawn"], self, "j_spine2");
 }
 
 function private skeletonspawnsetup(localclientnum) {

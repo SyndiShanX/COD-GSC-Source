@@ -54,13 +54,13 @@ function private _objective(objective) {
 
 function music(var_b12adf3) {
   level.var_825fa088 = [];
-  level.var_825fa088[# "intro"] = "1_0_intro";
-  level.var_825fa088[# "combat"] = "2_1_combat";
-  level.var_825fa088[# "breach"] = "3_0_breach";
-  level.var_825fa088[# "kill_confirmed"] = "4_0_kill_confirmed";
-  level.var_825fa088[# "chopper_down"] = "5_0_chopper_down";
-  level.var_825fa088[# "escape"] = "6_1_escape";
-  level.var_825fa088[# "exfil"] = "7_0_exfil";
+  level.var_825fa088[#"intro"] = "1_0_intro";
+  level.var_825fa088[#"combat"] = "2_1_combat";
+  level.var_825fa088[#"breach"] = "3_0_breach";
+  level.var_825fa088[#"kill_confirmed"] = "4_0_kill_confirmed";
+  level.var_825fa088[#"chopper_down"] = "5_0_chopper_down";
+  level.var_825fa088[#"escape"] = "6_1_escape";
+  level.var_825fa088[#"exfil"] = "7_0_exfil";
   state = level.var_825fa088[var_b12adf3];
 
   if(!isDefined(var_b12adf3) || !isDefined(state)) {

@@ -27,7 +27,7 @@ function enable_staminup_perk_for_level() {
 
 function init_staminup() {
   if(is_true(level.enable_magic)) {
-    level._effect[# "marathon_light"] = "zombie/fx_perk_staminup_ndu";
+    level._effect[#"marathon_light"] = "zombie/fx_perk_staminup_ndu";
   }
 }
 

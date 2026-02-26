@@ -369,7 +369,7 @@ function function_a6e974cb() {
 
 function function_9ff740ab(a_ents) {
   mdl_door = level.guard_station_door_left doors::function_73f09315();
-  mdl_door linkto(a_ents[# "door_prop"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  mdl_door linkto(a_ents[#"door_prop"], "j_prop_1", (0, 0, 0), (0, 0, 0));
 }
 
 function function_b1f03033(var_2a7f2052) {
@@ -795,9 +795,9 @@ function function_48695888() {
   level namespace_b4dbc583::function_26c67eeb(struct::get("train_car_03_caboose"), struct::get("train_car_03_start_org"), struct::get("train_car_03_audio_org"));
   var_116e3c5f = namespace_b4dbc583::function_d02dc0ba();
   waitframe(1);
-  var_116e3c5f[# "vehicle 2"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_116e3c5f[# "hash_5c059914188784d8"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_116e3c5f[# "hash_5c05961418877fbf"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_116e3c5f[#"vehicle 2"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_116e3c5f[#"hash_5c059914188784d8"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_116e3c5f[#"hash_5c05961418877fbf"] playrumbleonentity(#"hash_2df4857520a49abc");
   level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_01_bundle", var_116e3c5f);
   level flag::wait_till("start_ghost_station_left_platform_enemies_anims");
   wait 14;
@@ -805,9 +805,9 @@ function function_48695888() {
   level flag::set("start_second_trains");
   var_44fda395 = namespace_b4dbc583::function_9e2e1f19();
   waitframe(1);
-  var_44fda395[# "vehicle 2"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_44fda395[# "hash_5c059914188784d8"] playrumbleonentity(#"hash_2df4857520a49abc");
-  var_44fda395[# "hash_5c05961418877fbf"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_44fda395[#"vehicle 2"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_44fda395[#"hash_5c059914188784d8"] playrumbleonentity(#"hash_2df4857520a49abc");
+  var_44fda395[#"hash_5c05961418877fbf"] playrumbleonentity(#"hash_2df4857520a49abc");
   level thread scene::play("p9_fxanim_cp_stakeout_subway_train_passing_02_bundle", var_44fda395);
   wait 2;
   var_116e3c5f namespace_b4dbc583::function_61fc8e84(1);

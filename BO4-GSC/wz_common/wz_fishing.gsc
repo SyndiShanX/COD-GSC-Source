@@ -119,8 +119,8 @@ function_e1cd5954(v_origin) {
   self endon("58ed1cc25dba79a1");
   trace = bulletTrace(v_origin + (0, 0, 40), v_origin + (0, 0, -150), 0, undefined);
 
-  if(trace[# "fraction"] < 1) {
-    v_origin = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    v_origin = trace[#"position"];
   }
 
   return v_origin + (0, 0, 3);

@@ -31,20 +31,20 @@ function private preinit() {
 
 function init() {
   game.menu = [];
-  game.menu[# "menu_team"] = "ChangeTeam";
-  game.menu[# "menu_start_menu"] = "StartMenu_Main";
-  game.menu[# "menu_class"] = "class";
-  game.menu[# "menu_changeclass"] = "mobile_armory_loadout";
-  game.menu[# "menu_changeclass_offline"] = "mobile_armory_loadout";
-  game.menu[# "menu_draft"] = "PositionDraft";
+  game.menu[#"menu_team"] = "ChangeTeam";
+  game.menu[#"menu_start_menu"] = "StartMenu_Main";
+  game.menu[#"menu_class"] = "class";
+  game.menu[#"menu_changeclass"] = "mobile_armory_loadout";
+  game.menu[#"menu_changeclass_offline"] = "mobile_armory_loadout";
+  game.menu[#"menu_draft"] = "PositionDraft";
 
   foreach(str_team in level.teams) {
     game.menu["menu_changeclass_" + str_team] = "mobile_armory_loadout";
   }
 
-  game.menu[# "menu_controls"] = "ingame_controls";
-  game.menu[# "menu_options"] = "ingame_options";
-  game.menu[# "menu_leavegame"] = "popup_leavegame";
+  game.menu[#"menu_controls"] = "ingame_controls";
+  game.menu[#"menu_options"] = "ingame_options";
+  game.menu[#"menu_leavegame"] = "popup_leavegame";
 }
 
 function on_player_connect() {
@@ -70,8 +70,8 @@ function on_menu_response() {
       self closeingamemenu();
 
       if(level.console) {
-        if(menu == game.menu[# "menu_changeclass"] || menu == game.menu[# "menu_changeclass_offline"] || menu == game.menu[# "menu_team"] || menu == game.menu[# "menu_controls"]) {
-          if(isDefined(level.teams[self.pers[# "team"]])) {
+        if(menu == game.menu[#"menu_changeclass"] || menu == game.menu[#"menu_changeclass_offline"] || menu == game.menu[#"menu_team"] || menu == game.menu[#"menu_controls"]) {
+          if(isDefined(level.teams[self.pers[#"team"]])) {
             self openmenu(game.menu_start_menu);
           }
         }
@@ -82,7 +82,7 @@ function on_menu_response() {
 
     if(response == "changeteam" && level.allow_teamchange) {
       self closeingamemenu();
-      self openmenu(game.menu[# "menu_team"]);
+      self openmenu(game.menu[#"menu_team"]);
     }
 
     if(response == "endgame") {
@@ -210,7 +210,7 @@ function on_menu_response() {
       continue;
     }
 
-    if(menu == game.menu[# "menu_team"] && level.allow_teamchange) {
+    if(menu == game.menu[#"menu_team"] && level.allow_teamchange) {
       switch (response) {
         case # "autoassign":
           self[[level.autoassign]](1);
@@ -226,12 +226,12 @@ function on_menu_response() {
       continue;
     }
 
-    if(menu == game.menu[# "menu_draft"]) {
+    if(menu == game.menu[#"menu_draft"]) {
       self[[level.draftmenu]](response, intpayload);
       continue;
     }
 
-    if(menu == game.menu[# "menu_changeclass"] || menu == game.menu[# "menu_changeclass_offline"]) {
+    if(menu == game.menu[#"menu_changeclass"] || menu == game.menu[#"menu_changeclass_offline"]) {
       if(response != "back" && response != "cancel" && (!isDefined(self.var_efc9bc54) || !self.var_efc9bc54)) {
         self closeingamemenu();
         self.selectedclass = 1;

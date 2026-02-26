@@ -981,7 +981,7 @@ zombie_death_watcher() {
       ct_utils::function_b3b2c91e();
     }
 
-    e_player thread ct_utils::function_80bf685b(e_player.pers[# "momentum"]);
+    e_player thread ct_utils::function_80bf685b(e_player.pers[#"momentum"]);
   } else {
     level.var_6f71c916 += 1;
   }

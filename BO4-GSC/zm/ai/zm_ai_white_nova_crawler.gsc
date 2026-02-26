@@ -143,7 +143,7 @@ function_582a3075() {
     self.can_shoot = 0;
     self.var_349e111e = 0;
     self.var_f1f44412 = 1;
-    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_aura";
+    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_aura";
   }
 
   self thread function_536a70c5();
@@ -165,7 +165,7 @@ function_605e733f() {
   self.b_ignore_cleanup = 1;
   self.ignore_nuke = 1;
   self.ignoreme = 1;
-  self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_mq_aura";
+  self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_mq_aura";
 }
 
 function_ee3e7dc8() {
@@ -174,9 +174,9 @@ function_ee3e7dc8() {
   self.can_phase = 1;
   self.var_349e111e = 0;
   self.var_f1f44412 = 0;
-  self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
-  self._effect[# "hash_571a3bab8b805854"] = "zm_ai/fx8_nova_crawler_elec_teleport_flash";
-  self._effect[# "nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_nova_crawler_elec_teleport_appear";
+  self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
+  self._effect[#"hash_571a3bab8b805854"] = "zm_ai/fx8_nova_crawler_elec_teleport_flash";
+  self._effect[#"nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_nova_crawler_elec_teleport_appear";
   self playSound(#"hash_27b6a39054ad63ec");
 }
 
@@ -457,7 +457,7 @@ function_3bd2bba5(entity) {
 function_46660930() {
   self endon(#"death");
   origin = self gettagorigin("j_spine4");
-  playFX(self._effect[# "hash_571a3bab8b805854"], origin);
+  playFX(self._effect[#"hash_571a3bab8b805854"], origin);
   self hide();
   self collidewithactors(0);
   self waittilltimeout(1, #"phase_end");
@@ -465,8 +465,8 @@ function_46660930() {
   self collidewithactors(1);
 
   if(self.health > 0) {
-    zm_net::network_safe_play_fx_on_tag("nova_crawler_aura", 2, self._effect[# "nova_crawler_aura_fx"], self, "j_spine4");
-    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, self._effect[# "nova_crawler_phase_teleport_end_fx"], self, "j_spine4");
+    zm_net::network_safe_play_fx_on_tag("nova_crawler_aura", 2, self._effect[#"nova_crawler_aura_fx"], self, "j_spine4");
+    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, self._effect[#"nova_crawler_phase_teleport_end_fx"], self, "j_spine4");
     playrumbleonposition("zm_nova_phase_exit_rumble", self.origin);
   }
 }
@@ -597,7 +597,7 @@ function_c708afa4(entity) {
   var_96820b80 = function_51e81aba(level.white_nova_crawler_sniper_escape_locations);
 
   if(isDefined(var_96820b80)) {
-    playFX(self._effect[# "hash_571a3bab8b805854"], entity.origin);
+    playFX(self._effect[#"hash_571a3bab8b805854"], entity.origin);
     entity forceteleport(var_96820b80.origin, var_96820b80.angles);
     function_c33d4387();
     entity.var_b421bafe = 0;

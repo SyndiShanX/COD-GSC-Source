@@ -37,17 +37,17 @@ function register(var_fbcc4763) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "insertion_passenger_count"])) {
-    level.var_ae746e8f[# "insertion_passenger_count"] = [];
+  if(!isDefined(level.var_ae746e8f[#"insertion_passenger_count"])) {
+    level.var_ae746e8f[#"insertion_passenger_count"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "insertion_passenger_count"])) {
-    level.var_ae746e8f[# "insertion_passenger_count"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "insertion_passenger_count"])) {
-    level.var_ae746e8f[# "insertion_passenger_count"] = array(level.var_ae746e8f[# "insertion_passenger_count"]);
+  if(!isDefined(level.var_ae746e8f[#"insertion_passenger_count"])) {
+    level.var_ae746e8f[#"insertion_passenger_count"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"insertion_passenger_count"])) {
+    level.var_ae746e8f[#"insertion_passenger_count"] = array(level.var_ae746e8f[#"insertion_passenger_count"]);
   }
 
-  level.var_ae746e8f[# "insertion_passenger_count"][level.var_ae746e8f[# "insertion_passenger_count"].size] = elem;
+  level.var_ae746e8f[#"insertion_passenger_count"][level.var_ae746e8f[#"insertion_passenger_count"].size] = elem;
 }
 
 function register_clientside() {

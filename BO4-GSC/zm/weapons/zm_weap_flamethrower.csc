@@ -22,10 +22,10 @@ __init__() {
   clientfield::register("toplayer", "flamethrower_wind_blast_flash", -1, 1, "counter", &flamethrower_wind_blast_flash, 0, 0);
   clientfield::register("allplayers", "flamethrower_wind_blast_tu16", 16000, 1, "counter", &flamethrower_wind_blast_flash, 0, 0);
   clientfield::register("toplayer", "flamethrower_tornado_blast_flash", 1, 1, "counter", &flamethrower_tornado_blast_flash, 0, 0);
-  level._effect[# "flamethrower_tornado"] = # "hash_2f45879d2658065c";
-  level._effect[# "wind_blast_flash"] = # "hash_312fc9707e06f6f4";
-  level._effect[# "hash_34db403668f7f353"] = # "hash_52e3de5257e268c2";
-  level._effect[# "tornado_blast_flash"] = # "hash_5c5ffb835c39dce3";
+  level._effect[#"flamethrower_tornado"] = # "hash_2f45879d2658065c";
+  level._effect[#"wind_blast_flash"] = # "hash_312fc9707e06f6f4";
+  level._effect[#"hash_34db403668f7f353"] = # "hash_52e3de5257e268c2";
+  level._effect[#"tornado_blast_flash"] = # "hash_5c5ffb835c39dce3";
 }
 
 flamethrower_tornado_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -34,7 +34,7 @@ flamethrower_tornado_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
       stopfx(localclientnum, self.n_tornado_fx);
     }
 
-    self.n_tornado_fx = util::playFXOnTag(localclientnum, level._effect[# "flamethrower_tornado"], self, "tag_origin");
+    self.n_tornado_fx = util::playFXOnTag(localclientnum, level._effect[#"flamethrower_tornado"], self, "tag_origin");
 
     if(!isDefined(self.var_180064c2)) {
       self thread function_ea05550b(localclientnum);
@@ -93,18 +93,18 @@ function_d05553c6(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 
 flamethrower_wind_blast_flash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self zm_utility::function_f8796df3(localclientnum)) {
-    playviewmodelfx(localclientnum, level._effect[# "wind_blast_flash"], "tag_flash");
+    playviewmodelfx(localclientnum, level._effect[#"wind_blast_flash"], "tag_flash");
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "hash_34db403668f7f353"], self, "tag_flash");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_34db403668f7f353"], self, "tag_flash");
 }
 
 flamethrower_tornado_blast_flash(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self zm_utility::function_f8796df3(localclientnum)) {
-    playviewmodelfx(localclientnum, level._effect[# "tornado_blast_flash"], "tag_flash");
+    playviewmodelfx(localclientnum, level._effect[#"tornado_blast_flash"], "tag_flash");
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "tornado_blast_flash"], self, "tag_flash");
+  util::playFXOnTag(localclientnum, level._effect[#"tornado_blast_flash"], self, "tag_flash");
 }

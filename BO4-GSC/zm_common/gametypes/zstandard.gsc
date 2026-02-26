@@ -1201,21 +1201,21 @@ init_powerups() {
   zm_powerups::powerup_remove_from_regular_drops("fire_sale");
   level thread function_9876ea1b();
 
-  if(isDefined(level.zombie_powerups[# "insta_kill"])) {
-    level.zombie_powerups[# "insta_kill"].func_should_drop_with_regular_powerups = &function_ca407bef;
+  if(isDefined(level.zombie_powerups[#"insta_kill"])) {
+    level.zombie_powerups[#"insta_kill"].func_should_drop_with_regular_powerups = &function_ca407bef;
   }
 
-  if(isDefined(level.zombie_powerups[# "nuke"])) {
-    level.zombie_powerups[# "nuke"].func_should_drop_with_regular_powerups = &function_ca407bef;
+  if(isDefined(level.zombie_powerups[#"nuke"])) {
+    level.zombie_powerups[#"nuke"].func_should_drop_with_regular_powerups = &function_ca407bef;
   }
 
-  if(isDefined(level.zombie_powerups[# "double_points"])) {
-    level.zombie_powerups[# "double_points"].func_should_drop_with_regular_powerups = &function_ca407bef;
+  if(isDefined(level.zombie_powerups[#"double_points"])) {
+    level.zombie_powerups[#"double_points"].func_should_drop_with_regular_powerups = &function_ca407bef;
   }
 
-  level._custom_powerups[# "bonus_points_player"].setup_powerup = &function_705c5a95;
-  level._custom_powerups[# "bonus_points_player_shared"].setup_powerup = &function_705c5a95;
-  level._custom_powerups[# "bonus_points_team"].setup_powerup = &function_705c5a95;
+  level._custom_powerups[#"bonus_points_player"].setup_powerup = &function_705c5a95;
+  level._custom_powerups[#"bonus_points_player_shared"].setup_powerup = &function_705c5a95;
+  level._custom_powerups[#"bonus_points_team"].setup_powerup = &function_705c5a95;
 }
 
 function_705c5a95() {
@@ -1225,28 +1225,28 @@ function_705c5a95() {
 function_9876ea1b() {
   level flag::wait_till("start_zombie_round_logic");
 
-  if(isDefined(level.zombie_powerups[# "double_points"])) {
-    level.zombie_powerups[# "double_points"].only_affects_grabber = 1;
+  if(isDefined(level.zombie_powerups[#"double_points"])) {
+    level.zombie_powerups[#"double_points"].only_affects_grabber = 1;
   }
 
-  if(isDefined(level.zombie_powerups[# "insta_kill"])) {
-    level.zombie_powerups[# "insta_kill"].only_affects_grabber = 1;
+  if(isDefined(level.zombie_powerups[#"insta_kill"])) {
+    level.zombie_powerups[#"insta_kill"].only_affects_grabber = 1;
   }
 
-  if(isDefined(level.zombie_powerups[# "nuke"])) {
-    level.zombie_powerups[# "nuke"].only_affects_grabber = 1;
+  if(isDefined(level.zombie_powerups[#"nuke"])) {
+    level.zombie_powerups[#"nuke"].only_affects_grabber = 1;
   }
 
-  if(isDefined(level.zombie_powerups[# "carpenter"])) {
-    level.zombie_powerups[# "carpenter"].only_affects_grabber = 1;
+  if(isDefined(level.zombie_powerups[#"carpenter"])) {
+    level.zombie_powerups[#"carpenter"].only_affects_grabber = 1;
   }
 
-  if(isDefined(level.zombie_powerups[# "fire_sale"])) {
-    level.zombie_powerups[# "fire_sale"].only_affects_grabber = 1;
+  if(isDefined(level.zombie_powerups[#"fire_sale"])) {
+    level.zombie_powerups[#"fire_sale"].only_affects_grabber = 1;
   }
 
-  if(isDefined(level.zombie_powerups[# "full_ammo"])) {
-    level.zombie_powerups[# "full_ammo"].only_affects_grabber = 1;
+  if(isDefined(level.zombie_powerups[#"full_ammo"])) {
+    level.zombie_powerups[#"full_ammo"].only_affects_grabber = 1;
   }
 
   level.powerup_fx_func = &function_2778c01b;
@@ -1579,8 +1579,8 @@ onstartgametype() {
 
   level.mapcenter = math::find_box_center(level.spawnmins, level.spawnmaxs);
   setmapcenter(level.mapcenter);
-  level.bgb[# "zm_bgb_near_death_experience"] = undefined;
-  level.bgb[# "zm_bgb_phoenix_up"] = undefined;
+  level.bgb[#"zm_bgb_near_death_experience"] = undefined;
+  level.bgb[#"zm_bgb_phoenix_up"] = undefined;
   init_powerups();
   changeadvertisedstatus(0);
 }
@@ -1852,7 +1852,7 @@ function function_21669ebc(restart = 0) {
     println("<dev string:x30b>" + level.round_number + "<dev string:x327>" + players.size);
     level.round_start_time = gettime();
 
-    while(level.zm_loc_types[# "zombie_location"].size <= 0) {
+    while(level.zm_loc_types[#"zombie_location"].size <= 0) {
       wait 0.1;
     }
 

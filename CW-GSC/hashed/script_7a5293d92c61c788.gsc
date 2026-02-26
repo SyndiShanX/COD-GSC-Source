@@ -574,7 +574,7 @@ function function_68649d54(destination) {
 
 function function_85834b2c(destination) {
   foreach(location in destination.locations) {
-    armor_machine = location.instances[# "armor_machine"];
+    armor_machine = location.instances[#"armor_machine"];
 
     if(isDefined(armor_machine)) {
       children = content_manager::get_children(armor_machine);

@@ -67,11 +67,11 @@ function function_dc5b7ee6() {
 
 function function_97c413ba() {
   level.var_1845db12 = [];
-  level.var_1845db12[# "neutral"] = {
+  level.var_1845db12[#"neutral"] = {
     #losing: "warLosingNeutral", #var_c8bc87ae: "warTakingNeutral", #lost: "warLostNeutral", #captured: "objSecured"};
-  level.var_1845db12[# "friendly"] = {
+  level.var_1845db12[#"friendly"] = {
     #losing: "warLosingFriendly", #var_c8bc87ae: "warTakingFriendly", #lost: "warLostFriendly", #captured: "objSecured"};
-  level.var_1845db12[# "enemy"] = {
+  level.var_1845db12[#"enemy"] = {
     #losing: "warLosingEnemey", #var_c8bc87ae: "warTakingEnemey", #lost: "warLostEnemey", #captured: "objSecured"};
 }
 
@@ -99,7 +99,7 @@ function shouldplayovertimeround() {
     return false;
   }
 
-  return game.stat[# "teamscores"][# "allies"] == game.stat[# "teamscores"][# "axis"];
+  return game.stat[#"teamscores"][#"allies"] == game.stat[#"teamscores"][#"axis"];
 }
 
 function function_b4530b39() {
@@ -197,10 +197,10 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       }
 
       attacker challenges::function_2f462ffd(idamage, weapon, victim, zone);
-      attacker.pers[# "objectiveekia"]++;
-      attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-      attacker.pers[# "objectives"]++;
-      attacker.objectives = attacker.pers[# "objectives"];
+      attacker.pers[#"objectiveekia"]++;
+      attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+      attacker.pers[#"objectives"]++;
+      attacker.objectives = attacker.pers[#"objectives"];
       attacker globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
       var_1cfdf798 = isDefined(idamage.lastattacker) ? idamage.lastattacker === attacker : 0;
 
@@ -336,14 +336,14 @@ function onzonecapture(sentient) {
   otherteam = util::getotherteam(sentient.team);
 
   if(self.var_48550e00 == # "neutral") {
-    function_7aa95c76(self, level.var_1845db12[# "neutral"].captured, sentient.team);
-    function_7aa95c76(self, level.var_1845db12[# "neutral"].lost, otherteam);
+    function_7aa95c76(self, level.var_1845db12[#"neutral"].captured, sentient.team);
+    function_7aa95c76(self, level.var_1845db12[#"neutral"].lost, otherteam);
   } else if(self.var_48550e00 == sentient.team) {
-    function_7aa95c76(self, level.var_1845db12[# "enemy"].captured, sentient.team);
-    function_7aa95c76(self, level.var_1845db12[# "enemy"].lost, otherteam);
+    function_7aa95c76(self, level.var_1845db12[#"enemy"].captured, sentient.team);
+    function_7aa95c76(self, level.var_1845db12[#"enemy"].lost, otherteam);
   } else {
-    function_7aa95c76(self, level.var_1845db12[# "friendly"].captured, sentient.team);
-    function_7aa95c76(self, level.var_1845db12[# "friendly"].lost, otherteam);
+    function_7aa95c76(self, level.var_1845db12[#"friendly"].captured, sentient.team);
+    function_7aa95c76(self, level.var_1845db12[#"friendly"].lost, otherteam);
   }
 
   var_e6d916f3 = function_a1ef346b(sentient.team);
@@ -625,8 +625,8 @@ function private function_a8049ffd(zoneindex, spawndelay) {
   level clientfield::set("war_zone", zoneindex);
   objective_setgamemodeflags(var_6b67c295.objectiveid, 3);
   var_6b67c295.var_8ef53682 = [];
-  var_6b67c295.var_8ef53682[# "allies"] = [];
-  var_6b67c295.var_8ef53682[# "axis"] = [];
+  var_6b67c295.var_8ef53682[#"allies"] = [];
+  var_6b67c295.var_8ef53682[#"axis"] = [];
   var_6b67c295.var_42388c6f = [];
   function_98b8ad44(zoneindex, spawndelay);
 }
@@ -769,13 +769,13 @@ function function_ef09febd(var_1dbb2b2b, var_6d7ae157, string, var_24672ed6, var
 }
 
 function credit_player(player, string, var_24672ed6, var_81b74b24, neutralizing, time, var_a84f97bf, var_af8f6146) {
-  if(isDefined(time.pers[# "captures"])) {
-    time.pers[# "captures"]++;
-    time.captures = time.pers[# "captures"];
+  if(isDefined(time.pers[#"captures"])) {
+    time.pers[#"captures"]++;
+    time.captures = time.pers[#"captures"];
   }
 
-  time.pers[# "objectives"]++;
-  time.objectives = time.pers[# "objectives"];
+  time.pers[#"objectives"]++;
+  time.objectives = time.pers[#"objectives"];
   time recordgameevent("capture");
   level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
     #player: time, #eventtype: # "capture"});

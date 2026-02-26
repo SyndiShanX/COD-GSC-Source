@@ -238,9 +238,9 @@ function_7d162bd0(projectile, var_e15d8b1f, var_c3f91959) {
 
       if(isDefined(function_9cc082d2(result.position, 30))) {
         if(isDefined(var_c3f91959)) {
-          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[# "position"], var_c3f91959);
+          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[#"position"], var_c3f91959);
         } else {
-          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[# "position"]);
+          aoe = zm_aoe::function_371b4147(id, var_f34f8a95, groundtrace(result.position + (0, 0, 8), result.position + (0, 0, -100000), 0, projectile)[#"position"]);
         }
       }
 

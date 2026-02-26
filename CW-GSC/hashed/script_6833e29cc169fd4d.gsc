@@ -171,7 +171,7 @@ function private function_c0251c1e(target, var_4f358117 = 1) {
 
     if(isDefined(lastseen) && lastseen + getdvarint(#"hash_592433ab4ddff207", 3000) > gettime()) {
       trace = bulletTrace(eyepos, pos, 0, target);
-      distsq = distancesquared(pos, trace[# "position"]);
+      distsq = distancesquared(pos, trace[#"position"]);
 
       if(distsq <= getdvarint(#"hash_1fd2e213720ddfb3", sqr(315))) {
         return 2;

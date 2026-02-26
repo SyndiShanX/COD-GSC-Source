@@ -1101,7 +1101,7 @@ ground_vehicle_crash() {
       a_trace = physicstraceex(v_goal + (0, 0, 200), v_goal - (0, 0, 1000));
       n_set_speed = n_current_speed * 3;
       self setspeed(n_set_speed, n_set_speed / 2);
-      self function_a57c34b7(a_trace[# "position"], 0);
+      self function_a57c34b7(a_trace[#"position"], 0);
       self waittilltimeout(15, #"near_goal");
       self vehicle_ai::clearallmovement(1);
       self vehicle_ai::clearalllookingandtargeting();

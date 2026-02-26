@@ -41,7 +41,7 @@ function private preinit() {
 
   level.var_1acb0192 = &function_7d26a389;
   level.var_4bcd94b = [];
-  level.var_42648a02 = [# "hash_3e68a28d3c2e0479": [0, 0.15, #"hash_1561254978f7d1ed", 750, undefined], #"hash_25f082a4f62ed553": [0, 0.15, #"hash_d6e9cf445a840a", 750, undefined], #"hash_46c54199043c3149": [1000, 0.15, #"se_vehiclekill", 1000, undefined], #"hash_4efbe7fdd1c5873d": [2000, 0.35, #"hash_4d97a2cf6c712d4e", 1000, 2], #"hash_2bdba8dd04a772a9": [3000, 0.85, #"hash_7e2f32f691207aca", 1000, 2], #"hash_7d61681b4a86f9c1": [4000, 1, #"hash_56bc9b3d6947b8b6", 1000, 1], #"satchel_charge_multikill_zm": [2000, 0.85, "SE_SatchelChargeMultikill", 1500, 2], #"nightengale_multikill_zm": [2000, 0.85, "SE_NightingaleMultikill", 1500, 2], #"frag_multikill_zm": [2000, 0.85, "SE_FragMultikill", 1500, 2], #"molotov_multikill_zm": [2000, 0.85, "SE_MolotovCocktailMultikill", 1500, 2], #"semtex_multikill_zm": [2000, 0.85, "SE_SemtexMultikill", 1500, 2], #"concussion_grenade_multikill_zm": [2000, 0.85, "SE_ConcussionGrenadeMultikill", 1500, 2], #"monkey_bomb_multikill_zm": [2000, 0.85, #"hash_28808125fce8c8e7", 1500, 1], #"multikillstreak_5_zm": [1800, 0.6, #"hash_4bd8ffae8d5281c9", 1500, 2], #"multikillstreak_10_zm": [1900, 0.6, #"hash_3449e69a233e305f", 1500, 2], #"multikillstreak_15_zm": [2500, 0.6, #"hash_3449e19a233e27e0", 1500, 1], #"multikillstreak_20_zm": [3100, 0.65, #"hash_343f749a23351a24", 2000, 1], #"multikillstreak_25_zm": [3200, 0.75, #"hash_343f719a2335150b", 2000, 1], #"crit_finisher_multikill_zm": [1850, 0.85, #"hash_406609dcd40a348e", 1000, 2], #"oneshot_multikill_zm": [1950, 0.85, #"hash_31d075ffaf2c230a", 1000, 2], #"oneshot_explosive_multikill_zm": [1950, 0.85, #"hash_68d4ef9c937aa223", 1000, 2], #"melee_weapon_multikill_zm": [2000, 0.85, #"hash_6b704db2e152d216", 1000, 2], #"aether_shroud_multikill_zm": [2000, 0.85, #"hash_3e454dbd28a162b0", 1500, 2], #"energy_mine_multikill_zm": [2000, 0.85, #"hash_2af4d13403d833e5", 1250, 2], #"frost_blast_multikill_zm": [2000, 0.85, #"hash_2d45724fc1a86740", 1500, 2], #"healing_aura_multikill_zm": [2000, 0.85, #"hash_684963f03f8a86a5", 1500, 2], #"ring_of_fire_multikill_zm": [2000, 0.85, #"hash_5dc5c0d8c259c02d", 1500, 2], #"frenzied_guard_multikill_zm": [2000, 0.85, #"hash_62579373c5d67ce0", 1500, 2], #"toxic_growth_multikill_zm": [2000, 0.85, #"hash_541ae7332eba41be", 1500, 2], #"tesla_storm_multikill_zm": [2000, 0.85, #"hash_6e779060a26706e1", 1500, 2], #"ieu_multikill_zm": [2000, 0.58, #"hash_394f4a59df1d0c17", 1250, 1], #"hash_18e3e5b441fb51b0": [2000, 0.58, #"hash_394f4a59df1d0c17", 1250, 1], #"ray_rifle_multikill_zm": [2000, 0.9, #"hash_394f4a59df1d0c17", 1250, 1], #"crystal_axe_blade_multikill_zm": [2000, 0.9, #"hash_35b4f1037b7d4ed1", 1250, 1], #"crystal_axe_shardshooter_multikill_zm": [2000, 0.9, #"hash_35b4f1037b7d4ed1", 1250, 1]];
+  level.var_42648a02 = [#"hash_3e68a28d3c2e0479": [0, 0.15, #"hash_1561254978f7d1ed", 750, undefined], #"hash_25f082a4f62ed553": [0, 0.15, #"hash_d6e9cf445a840a", 750, undefined], #"hash_46c54199043c3149": [1000, 0.15, #"se_vehiclekill", 1000, undefined], #"hash_4efbe7fdd1c5873d": [2000, 0.35, #"hash_4d97a2cf6c712d4e", 1000, 2], #"hash_2bdba8dd04a772a9": [3000, 0.85, #"hash_7e2f32f691207aca", 1000, 2], #"hash_7d61681b4a86f9c1": [4000, 1, #"hash_56bc9b3d6947b8b6", 1000, 1], #"satchel_charge_multikill_zm": [2000, 0.85, "SE_SatchelChargeMultikill", 1500, 2], #"nightengale_multikill_zm": [2000, 0.85, "SE_NightingaleMultikill", 1500, 2], #"frag_multikill_zm": [2000, 0.85, "SE_FragMultikill", 1500, 2], #"molotov_multikill_zm": [2000, 0.85, "SE_MolotovCocktailMultikill", 1500, 2], #"semtex_multikill_zm": [2000, 0.85, "SE_SemtexMultikill", 1500, 2], #"concussion_grenade_multikill_zm": [2000, 0.85, "SE_ConcussionGrenadeMultikill", 1500, 2], #"monkey_bomb_multikill_zm": [2000, 0.85, #"hash_28808125fce8c8e7", 1500, 1], #"multikillstreak_5_zm": [1800, 0.6, #"hash_4bd8ffae8d5281c9", 1500, 2], #"multikillstreak_10_zm": [1900, 0.6, #"hash_3449e69a233e305f", 1500, 2], #"multikillstreak_15_zm": [2500, 0.6, #"hash_3449e19a233e27e0", 1500, 1], #"multikillstreak_20_zm": [3100, 0.65, #"hash_343f749a23351a24", 2000, 1], #"multikillstreak_25_zm": [3200, 0.75, #"hash_343f719a2335150b", 2000, 1], #"crit_finisher_multikill_zm": [1850, 0.85, #"hash_406609dcd40a348e", 1000, 2], #"oneshot_multikill_zm": [1950, 0.85, #"hash_31d075ffaf2c230a", 1000, 2], #"oneshot_explosive_multikill_zm": [1950, 0.85, #"hash_68d4ef9c937aa223", 1000, 2], #"melee_weapon_multikill_zm": [2000, 0.85, #"hash_6b704db2e152d216", 1000, 2], #"aether_shroud_multikill_zm": [2000, 0.85, #"hash_3e454dbd28a162b0", 1500, 2], #"energy_mine_multikill_zm": [2000, 0.85, #"hash_2af4d13403d833e5", 1250, 2], #"frost_blast_multikill_zm": [2000, 0.85, #"hash_2d45724fc1a86740", 1500, 2], #"healing_aura_multikill_zm": [2000, 0.85, #"hash_684963f03f8a86a5", 1500, 2], #"ring_of_fire_multikill_zm": [2000, 0.85, #"hash_5dc5c0d8c259c02d", 1500, 2], #"frenzied_guard_multikill_zm": [2000, 0.85, #"hash_62579373c5d67ce0", 1500, 2], #"toxic_growth_multikill_zm": [2000, 0.85, #"hash_541ae7332eba41be", 1500, 2], #"tesla_storm_multikill_zm": [2000, 0.85, #"hash_6e779060a26706e1", 1500, 2], #"ieu_multikill_zm": [2000, 0.58, #"hash_394f4a59df1d0c17", 1250, 1], #"hash_18e3e5b441fb51b0": [2000, 0.58, #"hash_394f4a59df1d0c17", 1250, 1], #"ray_rifle_multikill_zm": [2000, 0.9, #"hash_394f4a59df1d0c17", 1250, 1], #"crystal_axe_blade_multikill_zm": [2000, 0.9, #"hash_35b4f1037b7d4ed1", 1250, 1], #"crystal_axe_shardshooter_multikill_zm": [2000, 0.9, #"hash_35b4f1037b7d4ed1", 1250, 1]];
 }
 
 function function_7d26a389(var_42648a02) {
@@ -738,8 +738,8 @@ function function_970a97b2(params) {
     }
   }
 
-  if(isDefined(var_a0345f37.score_events[# "kill"]) && (!isDefined(var_a0345f37.var_e293f8ac) || isDefined(var_a0345f37.var_e293f8ac) && (!is_true(params.eattacker.var_9c448324) || var_a0345f37.var_e293f8ac.size === 0))) {
-    processscoreevent(var_a0345f37.score_events[# "kill"], params.eattacker, var_a0345f37, params.weapon, undefined, params);
+  if(isDefined(var_a0345f37.score_events[#"kill"]) && (!isDefined(var_a0345f37.var_e293f8ac) || isDefined(var_a0345f37.var_e293f8ac) && (!is_true(params.eattacker.var_9c448324) || var_a0345f37.var_e293f8ac.size === 0))) {
+    processscoreevent(var_a0345f37.score_events[#"kill"], params.eattacker, var_a0345f37, params.weapon, undefined, params);
   }
 
   if(isPlayer(params.eattacker) && params.eattacker isinvehicle()) {
@@ -831,7 +831,7 @@ function function_513fa6e4(zombie, player) {
 }
 
 function function_f2ce8b86(params) {
-  if(isDefined(params.enemy.score_events[# "assist"]) && isDefined(params.enemy.var_c2dcab66)) {
+  if(isDefined(params.enemy.score_events[#"assist"]) && isDefined(params.enemy.var_c2dcab66)) {
     foreach(var_c2dcab66 in params.enemy.var_c2dcab66) {
       if(zm_utility::is_player_valid(var_c2dcab66.player, 0, 0) && var_c2dcab66.time > gettime() - 10000 && (is_true(params.enemy.var_7b22b800) || var_c2dcab66.player != params.eattacker)) {
         if(var_c2dcab66.player !== params.eattacker) {
@@ -1011,7 +1011,7 @@ function function_f2ce8b86(params) {
           function_1eaaceab(params.enemy.var_e293f8ac);
 
           if(params.enemy.var_e293f8ac.size === 1) {
-            if(params.enemy.score_events[# "assist"] === "steiner_kia_zm") {
+            if(params.enemy.score_events[#"assist"] === "steiner_kia_zm") {
               params.enemy.var_e293f8ac[0].var_8221e855 = gettime();
             }
           }
@@ -1036,7 +1036,7 @@ function function_f2ce8b86(params) {
               processscoreevent("steiner_kia_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
             }
           } else {
-            processscoreevent(params.enemy.score_events[# "assist"], var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
+            processscoreevent(params.enemy.score_events[#"assist"], var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
           }
         } else if(isDefined(params.enemy.var_e293f8ac)) {
           function_1eaaceab(params.enemy.var_e293f8ac);
@@ -1176,26 +1176,26 @@ function updatemultikill(params) {
     if(zm_utility::is_player_valid(params.enemy.enemy_override.owner, 0, 0)) {
       switch (params.enemy.enemy_override.item.name) {
         case # "nightingale_zm":
-          if(isDefined(params.eattacker.var_4927d3d[# "nightengale"])) {
-            if(params.eattacker.var_4927d3d[# "nightengale"].time > gettime() - 2000 && params.eattacker.var_4927d3d[# "nightengale"].on_cooldown === 0) {
-              params.eattacker.var_4927d3d[# "nightengale"].multikills++;
+          if(isDefined(params.eattacker.var_4927d3d[#"nightengale"])) {
+            if(params.eattacker.var_4927d3d[#"nightengale"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"nightengale"].on_cooldown === 0) {
+              params.eattacker.var_4927d3d[#"nightengale"].multikills++;
               params.eattacker contracts::increment_zm_contract(#"hash_a8b4dbd0271141f");
-              params.eattacker.var_4927d3d[# "nightengale"].time = gettime() + 2000;
+              params.eattacker.var_4927d3d[#"nightengale"].time = gettime() + 2000;
 
-              if(params.eattacker.var_4927d3d[# "nightengale"].multikills === 3) {
+              if(params.eattacker.var_4927d3d[#"nightengale"].multikills === 3) {
                 params.eattacker stats::function_622feb0d(#"nightingale", #"hash_7bf29fa438d54aad", 1);
                 processscoreevent("nightengale_multikill_zm", params.eattacker, undefined, params.weapon);
                 params.eattacker contracts::increment_zm_contract(#"hash_3de460c73d2f29e3");
               }
-            } else if(params.eattacker.var_4927d3d[# "nightengale"].time < gettime()) {
+            } else if(params.eattacker.var_4927d3d[#"nightengale"].time < gettime()) {
               params.eattacker contracts::increment_zm_contract(#"hash_a8b4dbd0271141f");
-              params.eattacker.var_4927d3d[# "nightengale"] = {
+              params.eattacker.var_4927d3d[#"nightengale"] = {
                 #player: params.eattacker, #time: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0
               };
             }
           } else {
             params.eattacker contracts::increment_zm_contract(#"hash_a8b4dbd0271141f");
-            params.eattacker.var_4927d3d[# "nightengale"] = {
+            params.eattacker.var_4927d3d[#"nightengale"] = {
               #player: params.eattacker, #time: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0
             };
           }
@@ -1213,25 +1213,25 @@ function updatemultikill(params) {
     }
 
     if(params.enemy.var_958cf9c5 === 1 && zm_utility::is_player_valid(params.enemy.var_991315b5, 0, 0)) {
-      if(isDefined(params.eattacker.var_4927d3d[# "frost_blast"])) {
-        if(params.eattacker.var_4927d3d[# "frost_blast"].time > gettime() - 2000 && params.eattacker.var_4927d3d[# "frost_blast"].on_cooldown === 0) {
-          params.eattacker.var_4927d3d[# "frost_blast"].multikills++;
-          params.eattacker.var_4927d3d[# "frost_blast"].time = gettime() + 2000;
+      if(isDefined(params.eattacker.var_4927d3d[#"frost_blast"])) {
+        if(params.eattacker.var_4927d3d[#"frost_blast"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"frost_blast"].on_cooldown === 0) {
+          params.eattacker.var_4927d3d[#"frost_blast"].multikills++;
+          params.eattacker.var_4927d3d[#"frost_blast"].time = gettime() + 2000;
 
-          if(params.eattacker.var_4927d3d[# "frost_blast"].multikills === 3) {
+          if(params.eattacker.var_4927d3d[#"frost_blast"].multikills === 3) {
             processscoreevent("frost_blast_multikill_zm", params.eattacker, undefined, params.weapon);
             params.eattacker stats::function_622feb0d(#"frost_blast", #"hash_7bf29fa438d54aad", 1);
             params.eattacker contracts::increment_zm_contract(#"hash_4a72dbfac556f4ad");
             params.eattacker function_deb933ff();
             var_d4907104 = 1;
           }
-        } else if(params.eattacker.var_4927d3d[# "frost_blast"].time < gettime()) {
-          params.eattacker.var_4927d3d[# "frost_blast"] = {
+        } else if(params.eattacker.var_4927d3d[#"frost_blast"].time < gettime()) {
+          params.eattacker.var_4927d3d[#"frost_blast"] = {
             #player: params.eattacker, #time: gettime(), #var_81be4996: gettime(), #var_9ccfda84: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_1c91bc3c: undefined, #var_510ca9f9: undefined, #oneshotmultikills: 1, #var_e1ebf0a8: undefined
           };
         }
       } else {
-        params.eattacker.var_4927d3d[# "frost_blast"] = {
+        params.eattacker.var_4927d3d[#"frost_blast"] = {
           #player: params.eattacker, #time: gettime(), #var_81be4996: gettime(), #var_9ccfda84: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_1c91bc3c: undefined, #var_510ca9f9: undefined, #oneshotmultikills: 1, #var_e1ebf0a8: undefined
         };
       }
@@ -1552,25 +1552,25 @@ function updatemultikill(params) {
             case # "frost_blast_2":
             case # "frost_blast_5":
             case # "frost_blast_4":
-              if(isDefined(params.eattacker.var_4927d3d[# "frost_blast"])) {
-                if(params.eattacker.var_4927d3d[# "frost_blast"].time > gettime() - 2000 && params.eattacker.var_4927d3d[# "frost_blast"].on_cooldown === 0) {
-                  params.eattacker.var_4927d3d[# "frost_blast"].multikills++;
-                  params.eattacker.var_4927d3d[# "frost_blast"].time = gettime() + 2000;
+              if(isDefined(params.eattacker.var_4927d3d[#"frost_blast"])) {
+                if(params.eattacker.var_4927d3d[#"frost_blast"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"frost_blast"].on_cooldown === 0) {
+                  params.eattacker.var_4927d3d[#"frost_blast"].multikills++;
+                  params.eattacker.var_4927d3d[#"frost_blast"].time = gettime() + 2000;
 
-                  if(params.eattacker.var_4927d3d[# "frost_blast"].multikills === 3) {
+                  if(params.eattacker.var_4927d3d[#"frost_blast"].multikills === 3) {
                     params.eattacker stats::function_622feb0d(#"frost_blast", #"hash_7bf29fa438d54aad", 1);
                     processscoreevent("frost_blast_multikill_zm", params.eattacker, undefined, params.weapon);
                     params.eattacker contracts::increment_zm_contract(#"hash_4a72dbfac556f4ad");
                     params.eattacker function_deb933ff();
                     var_d4907104 = 1;
                   }
-                } else if(params.eattacker.var_4927d3d[# "frost_blast"].time < gettime()) {
-                  params.eattacker.var_4927d3d[# "frost_blast"] = {
+                } else if(params.eattacker.var_4927d3d[#"frost_blast"].time < gettime()) {
+                  params.eattacker.var_4927d3d[#"frost_blast"] = {
                     #player: params.eattacker, #time: gettime(), #var_81be4996: gettime(), #var_9ccfda84: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_1c91bc3c: undefined, #var_510ca9f9: undefined, #oneshotmultikills: 1, #var_e1ebf0a8: undefined
                   };
                 }
               } else {
-                params.eattacker.var_4927d3d[# "frost_blast"] = {
+                params.eattacker.var_4927d3d[#"frost_blast"] = {
                   #player: params.eattacker, #time: gettime(), #var_81be4996: gettime(), #var_9ccfda84: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_1c91bc3c: undefined, #var_510ca9f9: undefined, #oneshotmultikills: 1, #var_e1ebf0a8: undefined
                 };
               }
@@ -1880,9 +1880,9 @@ function updatemultikill(params) {
           params.eattacker.var_4927d3d[params.weapon.name].player = params.eattacker;
           params.eattacker.var_4927d3d[params.weapon.name].time = gettime();
           params.eattacker.var_4927d3d[params.weapon.name].weapon = params.weapon;
-          params.eattacker.var_4927d3d[# "frost_blast"].player = params.eattacker;
-          params.eattacker.var_4927d3d[# "frost_blast"].time = gettime();
-          params.eattacker.var_4927d3d[# "frost_blast"].weapon = params.weapon;
+          params.eattacker.var_4927d3d[#"frost_blast"].player = params.eattacker;
+          params.eattacker.var_4927d3d[#"frost_blast"].time = gettime();
+          params.eattacker.var_4927d3d[#"frost_blast"].weapon = params.weapon;
         }
       } else if(params.eattacker.var_4927d3d[params.weapon.name].time < gettime()) {
         if(is_true(var_1c91bc3c)) {
@@ -1921,8 +1921,8 @@ function updatemultikill(params) {
   }
 
   if(isDefined(params.eattacker.var_d93ab65) && params.eattacker.var_d93ab65.size > 0) {
-    if(isDefined(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"])) {
-      if(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].time > gettime() - 2000 && params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].on_cooldown === 0) {
+    if(isDefined(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"])) {
+      if(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].on_cooldown === 0) {
         arrayremovevalue(params.eattacker.var_d93ab65, undefined);
 
         foreach(var_23662c1b in params.eattacker.var_d93ab65) {
@@ -1932,14 +1932,14 @@ function updatemultikill(params) {
 
           if(zm_utility::is_player_valid(var_23662c1b.owner, 0, 0)) {
             if(var_23662c1b.owner === params.eattacker) {
-              if(!isDefined(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].multikills)) {
-                params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].multikills = 0;
+              if(!isDefined(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].multikills)) {
+                params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].multikills = 0;
               }
 
-              params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].multikills++;
-              params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].time = gettime() + 2000;
+              params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].multikills++;
+              params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].time = gettime() + 2000;
 
-              if(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].multikills >= 10 && !isDefined(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].var_d7f6715a) && isDefined(var_23662c1b) && !is_true(var_23662c1b.var_6ef480ca)) {
+              if(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].multikills >= 10 && !isDefined(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].var_d7f6715a) && isDefined(var_23662c1b) && !is_true(var_23662c1b.var_6ef480ca)) {
                 if(isDefined(var_23662c1b)) {
                   var_23662c1b.var_6ef480ca = 1;
                 }
@@ -1951,25 +1951,25 @@ function updatemultikill(params) {
                 params.eattacker contracts::increment_zm_contract(#"hash_aac5702f5f9c94d");
                 params.eattacker zm_stats::function_17ee4529(#"hash_513bc9963a91d4b5", 1, #"hash_735ace6b22542a65");
                 params.eattacker function_deb933ff();
-                params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"] = {
+                params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"] = {
                   #player: params.eattacker, #time: gettime() + 2000, #weapon: params.weapon, #multikills: 0, #var_d7f6715a: var_23662c1b
                 };
               }
             }
           }
         }
-      } else if(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].time < gettime()) {
-        params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"] = {
-          #player: params.eattacker, #time: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_d7f6715a: params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].var_d7f6715a
+      } else if(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].time < gettime()) {
+        params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"] = {
+          #player: params.eattacker, #time: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_d7f6715a: params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].var_d7f6715a
         };
       }
     } else {
-      params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"] = {
-        #player: params.eattacker, #time: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_d7f6715a: params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"].var_d7f6715a
+      params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"] = {
+        #player: params.eattacker, #time: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_d7f6715a: params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"].var_d7f6715a
       };
     }
-  } else if(isDefined(params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"])) {
-    params.eattacker.var_4927d3d[# "hash_7ed9a65979594954"] = undefined;
+  } else if(isDefined(params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"])) {
+    params.eattacker.var_4927d3d[#"hash_7ed9a65979594954"] = undefined;
   }
 
   var_5f6e2918 = params.enemy.var_95d94ac4;
@@ -1978,7 +1978,7 @@ function updatemultikill(params) {
     var_5f6e2918 = 5;
   }
 
-  if(params.enemy ai::is_stunned() && isDefined(params.enemy.var_31cadcc9[# "eq_slow_grenade"]) && isDefined(params.enemy.var_31cadcc9[# "eq_slow_grenade"].time) && params.enemy.var_31cadcc9[# "eq_slow_grenade"].time > gettime() - var_5f6e2918 * 1000) {
+  if(params.enemy ai::is_stunned() && isDefined(params.enemy.var_31cadcc9[#"eq_slow_grenade"]) && isDefined(params.enemy.var_31cadcc9[#"eq_slow_grenade"].time) && params.enemy.var_31cadcc9[#"eq_slow_grenade"].time > gettime() - var_5f6e2918 * 1000) {
     if(zm_utility::is_player_valid(params.eattacker, 0, 0)) {
       if(params.enemy.damagemod === "MOD_MELEE") {
         params.eattacker zm_challenges::function_d6b32ad3(params.weapon, #"hash_1f451bc4d664e2ad", 1);
@@ -1993,11 +1993,11 @@ function updatemultikill(params) {
 
     params.eattacker stats::function_6fb0b113(#"eq_slow_grenade", #"hash_6b0fbad1bb3b10f1");
 
-    if(params.enemy.var_31cadcc9[# "eq_slow_grenade"].player === params.eattacker) {
+    if(params.enemy.var_31cadcc9[#"eq_slow_grenade"].player === params.eattacker) {
       params.eattacker stats::function_6fb0b113(#"eq_slow_grenade", #"kills");
       params.eattacker contracts::increment_zm_contract(#"hash_4936408b808baff1");
-    } else if(zm_utility::is_player_valid(params.enemy.var_31cadcc9[# "eq_slow_grenade"].player)) {
-      params.enemy.var_31cadcc9[# "eq_slow_grenade"].player stats::function_6fb0b113(#"eq_slow_grenade", #"assists");
+    } else if(zm_utility::is_player_valid(params.enemy.var_31cadcc9[#"eq_slow_grenade"].player)) {
+      params.enemy.var_31cadcc9[#"eq_slow_grenade"].player stats::function_6fb0b113(#"eq_slow_grenade", #"assists");
     }
 
     if(params.enemy.zm_ai_category === # "elite") {
@@ -2008,28 +2008,28 @@ function updatemultikill(params) {
       processscoreevent("concussion_grenade_killingblow_zm", params.eattacker, params.enemy, undefined, undefined, params);
     }
 
-    if(params.enemy.var_31cadcc9[# "eq_slow_grenade"].player === params.eattacker) {
-      if(isDefined(params.eattacker.var_4927d3d[# "concussed_kills"])) {
-        if(params.eattacker.var_4927d3d[# "concussed_kills"].time > gettime() - 2000 && params.eattacker.var_4927d3d[# "concussed_kills"].on_cooldown === 0) {
-          params.eattacker.var_4927d3d[# "concussed_kills"].var_ae122a53++;
-          params.eattacker.var_4927d3d[# "concussed_kills"].time = gettime() + 2000;
+    if(params.enemy.var_31cadcc9[#"eq_slow_grenade"].player === params.eattacker) {
+      if(isDefined(params.eattacker.var_4927d3d[#"concussed_kills"])) {
+        if(params.eattacker.var_4927d3d[#"concussed_kills"].time > gettime() - 2000 && params.eattacker.var_4927d3d[#"concussed_kills"].on_cooldown === 0) {
+          params.eattacker.var_4927d3d[#"concussed_kills"].var_ae122a53++;
+          params.eattacker.var_4927d3d[#"concussed_kills"].time = gettime() + 2000;
 
-          if(params.eattacker.var_4927d3d[# "concussed_kills"].var_ae122a53 >= 3) {
+          if(params.eattacker.var_4927d3d[#"concussed_kills"].var_ae122a53 >= 3) {
             params.eattacker zm_stats::increment_challenge_stat(#"hash_2ad38b3cd161c0e8");
             processscoreevent("concussion_grenade_multikill_zm", params.eattacker, undefined, params.weapon);
             params.eattacker stats::function_622feb0d(#"eq_slow_grenade", #"hash_7bf29fa438d54aad", 1);
             params.eattacker contracts::increment_zm_contract(#"hash_3b1aea9829803ac1");
-            params.eattacker.var_4927d3d[# "concussed_kills"] = {
+            params.eattacker.var_4927d3d[#"concussed_kills"] = {
               #player: params.eattacker, #time: gettime() + 2000, #weapon: params.weapon, #var_ae122a53: 0
             };
           }
-        } else if(params.eattacker.var_4927d3d[# "concussed_kills"].time < gettime()) {
-          params.eattacker.var_4927d3d[# "concussed_kills"] = {
+        } else if(params.eattacker.var_4927d3d[#"concussed_kills"].time < gettime()) {
+          params.eattacker.var_4927d3d[#"concussed_kills"] = {
             #player: params.eattacker, #time: gettime() + 2000, #weapon: params.weapon, #var_ae122a53: 1, #on_cooldown: 0
           };
         }
       } else {
-        params.eattacker.var_4927d3d[# "concussed_kills"] = {
+        params.eattacker.var_4927d3d[#"concussed_kills"] = {
           #player: params.eattacker, #time: gettime() + 2000, #weapon: params.weapon, #var_ae122a53: 1, #on_cooldown: 0
         };
       }
@@ -2057,11 +2057,11 @@ function updatemultikill(params) {
       }
 
       if(var_947d01ee === "ar" || var_947d01ee === "smg" || var_947d01ee === "lmg") {
-        if(!isDefined(params.eattacker.var_4927d3d[# "hash_77171abf81b62dfd"].var_4e54d7b2)) {
+        if(!isDefined(params.eattacker.var_4927d3d[#"hash_77171abf81b62dfd"].var_4e54d7b2)) {
           function_2bf1d1bb("soa_multikill_without_reloading_auto_zm", params.eattacker, #"hash_77171abf81b62dfd", params.weapon, 2000, 10);
-          params.eattacker.var_4927d3d[# "hash_77171abf81b62dfd"].var_4e54d7b2 = gettime();
+          params.eattacker.var_4927d3d[#"hash_77171abf81b62dfd"].var_4e54d7b2 = gettime();
         } else {
-          var_b8e3bdf5 = !isDefined(params.eattacker.var_b6cd4a03) || params.eattacker.var_b6cd4a03 < params.eattacker.var_4927d3d[# "hash_77171abf81b62dfd"].var_4e54d7b2;
+          var_b8e3bdf5 = !isDefined(params.eattacker.var_b6cd4a03) || params.eattacker.var_b6cd4a03 < params.eattacker.var_4927d3d[#"hash_77171abf81b62dfd"].var_4e54d7b2;
 
           if(var_b8e3bdf5) {
             var_e6309676 = function_2bf1d1bb("soa_multikill_without_reloading_auto_zm", params.eattacker, #"hash_77171abf81b62dfd", params.weapon, 2000, 10);
@@ -2070,7 +2070,7 @@ function updatemultikill(params) {
               params.eattacker zm_stats::function_17ee4529(#"hash_6c9bd8c5ae1a5496", 1, #"hash_5c49df97f4f82e12");
             }
           } else {
-            params.eattacker.var_4927d3d[# "hash_77171abf81b62dfd"] = {
+            params.eattacker.var_4927d3d[#"hash_77171abf81b62dfd"] = {
               #player: params.eattacker, #time: gettime(), #var_81be4996: gettime(), #var_9ccfda84: gettime(), #weapon: params.weapon, #multikills: 1, #on_cooldown: 0, #var_1c91bc3c: undefined, #var_510ca9f9: undefined, #oneshotmultikills: 1, #var_e1ebf0a8: undefined
             };
           }
@@ -2140,7 +2140,7 @@ function updatemultikill(params) {
     }
   }
 
-  if(isDefined(params.enemy.a_n_slowdown_timeouts[# "hash_10d83afaeb265fde"].timeout) && params.enemy.a_n_slowdown_timeouts[# "hash_10d83afaeb265fde"].timeout > gettime()) {
+  if(isDefined(params.enemy.a_n_slowdown_timeouts[#"hash_10d83afaeb265fde"].timeout) && params.enemy.a_n_slowdown_timeouts[#"hash_10d83afaeb265fde"].timeout > gettime()) {
     params.eattacker zm_stats::increment_challenge_stat(#"hash_1fb0f883567707e2");
   }
 

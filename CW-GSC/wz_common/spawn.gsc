@@ -109,7 +109,7 @@ function on_spawn_player(predictedspawn) {
     self.startspawn = spawnstruct;
   }
 
-  if(self.pers[# "spawns"] == 1) {
+  if(self.pers[#"spawns"] == 1) {
     if(level.var_f2814a96 === 0) {
       self thread function_c263fd97();
     } else {
@@ -224,7 +224,7 @@ function function_3b1d0553(dest) {
 }
 
 function function_1390f875(num_lives) {
-  var_c6328f73 = self.pers[# "lives"] - 1;
+  var_c6328f73 = self.pers[#"lives"] - 1;
 
   if(var_c6328f73 < 0) {
     var_c6328f73 = 0;

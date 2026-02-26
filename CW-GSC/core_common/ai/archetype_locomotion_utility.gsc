@@ -647,7 +647,7 @@ function traversesetup(behaviortreeentity, asmstatename) {
       result = behaviortreeentity astsearch(asmname);
     }
 
-    if(!isDefined(result[# "animation"])) {
+    if(!isDefined(result[#"animation"])) {
       record3dtext("<dev string:x2bc>", self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
 
       self finishtraversal();
@@ -668,7 +668,7 @@ function traversesetup(behaviortreeentity, asmstatename) {
         var_8d9b91de = function_9cc082d2(self.traversalendpos, 100);
 
         if(isDefined(var_8d9b91de)) {
-          var_8d9b91de = var_8d9b91de[# "point"];
+          var_8d9b91de = var_8d9b91de[#"point"];
 
           recordstar(var_8d9b91de, (1, 0.5, 0), "<dev string:x242>", self);
         }
@@ -683,7 +683,7 @@ function traversesetup(behaviortreeentity, asmstatename) {
 
       self.var_2136d4d3 = gettime();
     } else {
-      record3dtext("<dev string:x2f5>" + (ishash(result[# "animation"]) ? function_9e72a96(result[# "animation"]) : result[# "animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
+      record3dtext("<dev string:x2f5>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
     }
   }
 
@@ -709,10 +709,10 @@ function traverseactionstart(behaviortreeentity, asmstatename) {
   if(!sessionmodeiszombiesgame()) {
     result = behaviortreeentity astsearch(asmstatename);
 
-    if(!isDefined(result[# "animation"])) {
+    if(!isDefined(result[#"animation"])) {
       record3dtext("<dev string:x2bc>", self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
     } else {
-      record3dtext("<dev string:x2f5>" + (ishash(result[# "animation"]) ? function_9e72a96(result[# "animation"]) : result[# "animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
+      record3dtext("<dev string:x2f5>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
     }
   }
 

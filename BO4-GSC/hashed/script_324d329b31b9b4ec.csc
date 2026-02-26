@@ -33,7 +33,7 @@ updatemarkerthread(localclientnum) {
     viewangles = getlocalclientangles(localclientnum);
     forwardvector = vectorscale(anglesToForward(viewangles), killstreakcorebundle.ksmaxairdroptargetrange);
     results = bulletTrace(player getEye(), player getEye() + forwardvector, 0, player);
-    player.markerobj.origin = results[# "position"];
+    player.markerobj.origin = results[#"position"];
     waitframe(1);
   }
 }
@@ -102,16 +102,16 @@ update_previs(localclientnum, invalid) {
     radius = 10;
     trace1 = bulletTrace(eye_pos, eye_pos + vectorscale(forward, 300), 0, player, 1);
 
-    if(trace1[# "fraction"] >= 1) {
-      trace1 = bulletTrace(trace1[# "position"], trace1[# "position"] + (0, 0, -1000), 0, player, 1);
+    if(trace1[#"fraction"] >= 1) {
+      trace1 = bulletTrace(trace1[#"position"], trace1[#"position"] + (0, 0, -1000), 0, player, 1);
     }
   } else {
     trace1 = projectiletrace(eye_pos, velocity, 0, weapon);
   }
 
-  level.var_9c4cdb79[localclientnum].origin = trace1[# "position"] + vectorscale(trace1[# "normal"], 7);
+  level.var_9c4cdb79[localclientnum].origin = trace1[#"position"] + vectorscale(trace1[#"normal"], 7);
   level.var_9c4cdb79[localclientnum].angles = (0, vectortoangles(forward)[1] + 90, 0);
-  level.var_9c4cdb79[localclientnum].hitent = trace1[# "entity"];
+  level.var_9c4cdb79[localclientnum].hitent = trace1[#"entity"];
 
   if(invalid) {
     player function_bf191832(0, (0, 0, 0), (0, 0, 0));

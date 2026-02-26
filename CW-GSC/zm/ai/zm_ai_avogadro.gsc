@@ -252,11 +252,11 @@ function function_c9791011() {
 }
 
 function function_d9f5ec34(get_all = 0) {
-  if(isDefined(level.zm_loc_types[# "avogadro_location"]) && level.zm_loc_types[# "avogadro_location"].size) {
+  if(isDefined(level.zm_loc_types[#"avogadro_location"]) && level.zm_loc_types[#"avogadro_location"].size) {
     if(get_all) {
-      s_spawn_loc = level.zm_loc_types[# "avogadro_location"];
+      s_spawn_loc = level.zm_loc_types[#"avogadro_location"];
     } else {
-      s_spawn_loc = array::random(level.zm_loc_types[# "avogadro_location"]);
+      s_spawn_loc = array::random(level.zm_loc_types[#"avogadro_location"]);
     }
   }
 

@@ -1196,21 +1196,21 @@ is_dvar_character_switcher(dvar) {
 
 // --------------------------------------------------------------------------------- //	Special Ops common dialog.
 // --------------------------------------------------------------------------------- has_been_played() {
-  best_time_name = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
-  if(best_time_name == "")
-    return false;
-
-  foreach(player in level.players) {
-    current_best_time = player GetLocalPlayerProfileData(best_time_name);
-
-    if(!isDefined(current_best_time))
-      continue; // non local player
-
-    if(current_best_time != 0)
-      return true;
-  }
-
+best_time_name = tablelookup("sp/specOpsTable.csv", 1, level.script, 9);
+if(best_time_name == "")
   return false;
+
+foreach(player in level.players) {
+  current_best_time = player GetLocalPlayerProfileData(best_time_name);
+
+  if(!isDefined(current_best_time))
+    continue; // non local player
+
+  if(current_best_time != 0)
+    return true;
+}
+
+return false;
 }
 
 is_best_time(time_start, time_current, time_frac) {
@@ -1460,20 +1460,20 @@ so_dialog_counter_update(current_count, current_goal, countdown_divide) {
 }
 
 // --------------------------------------------------------------------------------- so_crush_player(player, mod) {
-  assert(isDefined(self));
-  assert(isDefined(player));
+assert(isDefined(self));
+assert(isDefined(player));
 
-  if(!isDefined(player.coop_death_reason)) {
-    player.coop_death_reason = [];
-  }
+if(!isDefined(player.coop_death_reason)) {
+  player.coop_death_reason = [];
+}
 
-  if(!isDefined(mod)) {
-    mod = "MOD_EXPLOSIVE";
-  }
+if(!isDefined(mod)) {
+  mod = "MOD_EXPLOSIVE";
+}
 
-  player.coop_death_reason["attacker"] = self;
-  player.coop_death_reason["cause"] = mod;
-  player.coop_death_reason["weapon_name"] = "none";
+player.coop_death_reason["attacker"] = self;
+player.coop_death_reason["cause"] = mod;
+player.coop_death_reason["weapon_name"] = "none";
 
-  player kill_wrapper();
+player kill_wrapper();
 }

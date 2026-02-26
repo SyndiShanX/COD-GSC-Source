@@ -1347,17 +1347,17 @@ set_team_mapping(str_team_for_sidea, str_team_for_sideb) {
   }
 
   assert(str_team_for_sidea != str_team_for_sideb, "<dev string:x302>");
-  level.team_mapping[# "sidea"] = str_team_for_sidea;
-  level.team_mapping[# "sideb"] = str_team_for_sideb;
-  level.team_mapping[# "attacker"] = str_team_for_sidea;
-  level.team_mapping[# "defender"] = str_team_for_sideb;
-  level.team_mapping[# "attackers"] = str_team_for_sidea;
-  level.team_mapping[# "defenders"] = str_team_for_sideb;
-  level.team_mapping[# "wun"] = # "allies";
-  level.team_mapping[# "fpa"] = # "axis";
-  level.team_mapping[# "teama"] = level.team_mapping[# "sidea"];
-  level.team_mapping[# "teamb"] = level.team_mapping[# "sideb"];
-  level.team_mapping[# "side3"] = # "team3";
+  level.team_mapping[#"sidea"] = str_team_for_sidea;
+  level.team_mapping[#"sideb"] = str_team_for_sideb;
+  level.team_mapping[#"attacker"] = str_team_for_sidea;
+  level.team_mapping[#"defender"] = str_team_for_sideb;
+  level.team_mapping[#"attackers"] = str_team_for_sidea;
+  level.team_mapping[#"defenders"] = str_team_for_sideb;
+  level.team_mapping[#"wun"] = # "allies";
+  level.team_mapping[#"fpa"] = # "axis";
+  level.team_mapping[#"teama"] = level.team_mapping[#"sidea"];
+  level.team_mapping[#"teamb"] = level.team_mapping[#"sideb"];
+  level.team_mapping[#"side3"] = # "team3";
 }
 
 get_team_mapping(str_team) {

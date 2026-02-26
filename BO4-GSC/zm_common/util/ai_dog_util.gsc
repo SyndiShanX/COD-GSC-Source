@@ -179,7 +179,7 @@ dog_spawn_fx(ai, ent) {
 }
 
 dog_spawn_factory_logic(favorite_enemy) {
-  dog_locs = array::randomize(level.zm_loc_types[# "dog_location"]);
+  dog_locs = array::randomize(level.zm_loc_types[#"dog_location"]);
 
   for(i = 0; i < dog_locs.size; i++) {
     if(isDefined(level.old_dog_spawn) && level.old_dog_spawn == dog_locs[i]) {
@@ -486,8 +486,8 @@ dog_death() {
   if(self.subarchetype != # "zombie_wolf" && !(isDefined(self.a.nodeath) && self.a.nodeath)) {
     trace = groundtrace(self.origin + (0, 0, 10), self.origin - (0, 0, 30), 0, self);
 
-    if(trace[# "fraction"] < 1) {
-      pitch = acos(vectordot(trace[# "normal"], (0, 0, 1)));
+    if(trace[#"fraction"] < 1) {
+      pitch = acos(vectordot(trace[#"normal"], (0, 0, 1)));
 
       if(pitch > 10) {
         self.a.nodeath = 1;
@@ -702,7 +702,7 @@ function_62db7b1c(b_force_spawn = 0, var_eb3a8721) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.dog_spawn_func)) {
     s_spawn_loc = [[level.dog_spawn_func]]();
-  } else if(level.zm_loc_types[# "dog_location"].size > 0) {
+  } else if(level.zm_loc_types[#"dog_location"].size > 0) {
     str_target_zone = e_target zm_zonemgr::get_player_zone();
 
     if(!isDefined(str_target_zone)) {
@@ -808,8 +808,8 @@ function_62db7b1c(b_force_spawn = 0, var_eb3a8721) {
       }
     }
 
-    if(var_e99dec8e.size < 1 && level.zm_loc_types[# "dog_location"].size > 0) {
-      var_e99dec8e = arraycopy(level.zm_loc_types[# "dog_location"]);
+    if(var_e99dec8e.size < 1 && level.zm_loc_types[#"dog_location"].size > 0) {
+      var_e99dec8e = arraycopy(level.zm_loc_types[#"dog_location"]);
     }
 
     s_spawn_loc = array::random(var_e99dec8e);

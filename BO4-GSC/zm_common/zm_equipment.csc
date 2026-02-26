@@ -104,10 +104,10 @@ is_included(equipment) {
 }
 
 #include(equipment_name) {
-  if(!isDefined(level._included_equipment)) {
-    level._included_equipment = [];
-  }
+if(!isDefined(level._included_equipment)) {
+  level._included_equipment = [];
+}
 
-  equipment = getweapon(equipment_name);
-  level._included_equipment[equipment] = equipment;
+equipment = getweapon(equipment_name);
+level._included_equipment[equipment] = equipment;
 }

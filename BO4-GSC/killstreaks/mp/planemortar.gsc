@@ -30,7 +30,7 @@ __init__() {
 }
 
 function_269fec2() {
-  if(!isDefined(self.pers[# "mortarradarused"]) || !self.pers[# "mortarradarused"]) {
+  if(!isDefined(self.pers[#"mortarradarused"]) || !self.pers[#"mortarradarused"]) {
     otherteam = util::getotherteam(self.team);
     globallogic_audio::leader_dialog("enemyPlaneMortarUsed", otherteam);
   }

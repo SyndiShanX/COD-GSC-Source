@@ -20,7 +20,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
+  level._effect[#"zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
   clientfield::register("scriptmover", "zm_zone_edge_marker_count", 1, getminbitcountfornum(15), "int", &zm_zone_edge_marker_count, 0, 0);
   clientfield::register("toplayer", "zm_zone_out_of_bounds", 1, 1, "int", &zm_zone_out_of_bounds, 0, 0);
   clientfield::register("actor", "flame_corpse_fx", 1, 1, "int", &flame_corpse_fx, 0, 0);
@@ -358,7 +358,7 @@ zm_zone_edge_marker_count(localclientnum, oldval, newval, bnewent, binitialsnap,
     self.origin += v_right * 6;
 
     for(i = 1; i <= newval; i++) {
-      var_a05a609b = playFX(localclientnum, level._effect[# "zm_zone_edge_marker"], self.origin + v_spacing, v_forward);
+      var_a05a609b = playFX(localclientnum, level._effect[#"zm_zone_edge_marker"], self.origin + v_spacing, v_forward);
 
       if(!isDefined(self.var_dd1709dd)) {
         self.var_dd1709dd = [];
@@ -411,8 +411,8 @@ flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
       str_tag = "tag_origin";
     }
 
-    if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
-      self.var_71a7fc1c = util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_torso"], self, str_tag);
+    if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
+      self.var_71a7fc1c = util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_torso"], self, str_tag);
     }
 
     return;
@@ -427,12 +427,12 @@ flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 function_c599ed65() {
   if(get_story() == 1) {
     level.var_12b59dee = "rob_zm_eyes_yellow";
-    level._effect[# "eye_glow"] = # "hash_760112479afe6e2";
+    level._effect[#"eye_glow"] = # "hash_760112479afe6e2";
     return;
   }
 
   level.var_12b59dee = "rob_zm_eyes_orange";
-  level._effect[# "eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 function_beed5764(var_ee6bcd51, str_fx) {
@@ -441,7 +441,7 @@ function_beed5764(var_ee6bcd51, str_fx) {
   }
 
   if(isDefined(str_fx)) {
-    level._effect[# "eye_glow"] = str_fx;
+    level._effect[#"eye_glow"] = str_fx;
   }
 }
 
@@ -457,7 +457,7 @@ function_704f7c0e(localclientnum) {
   if(isDefined(self.var_3ec34470)) {
     str_fx = self.var_3ec34470;
   } else {
-    str_fx = level._effect[# "eye_glow"];
+    str_fx = level._effect[#"eye_glow"];
   }
 
   self function_fe127aaf(localclientnum, var_ee6bcd51, str_fx);

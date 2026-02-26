@@ -35,5 +35,5 @@ init(team) {
   game.voice[team] = "vox_st6_";
   game.flagmodels[team] = "p8_mp_flag_pole_1_blackops";
   game.carry_flagmodels[team] = "p8_mp_flag_carry_1_blackops";
-  game.flagmodels[# "neutral"] = "p8_mp_flag_pole_1";
+  game.flagmodels[#"neutral"] = "p8_mp_flag_pole_1";
 }

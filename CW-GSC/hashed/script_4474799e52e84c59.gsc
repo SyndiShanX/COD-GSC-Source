@@ -46,7 +46,7 @@ function function_858d9401(destination) {
 
 function function_f5ccdd88(destination) {
   foreach(location in destination.locations) {
-    var_602cb577 = location.instances[# "die_container"];
+    var_602cb577 = location.instances[#"die_container"];
 
     if(isDefined(var_602cb577)) {
       content_manager::spawn_instance(var_602cb577);
@@ -97,7 +97,7 @@ function function_546a7089(index) {
 
 function function_3b0cb5a4(struct) {
   assert(isstruct(struct), "<dev string:xa5>");
-  spawn_points = struct.contentgroups[# "hash_2535c42129449bb9"];
+  spawn_points = struct.contentgroups[#"hash_2535c42129449bb9"];
 
   foreach(point in spawn_points) {
     var_e57cfd4a = point.script_noteworthy;
@@ -310,8 +310,8 @@ function function_217a625a(a_ents) {
     return;
   }
 
-  var_bf71a40b = a_ents[# "weapon_crate"];
-  var_e57cfd4a = a_ents[# "weapon_crate"].var_e57cfd4a;
+  var_bf71a40b = a_ents[#"weapon_crate"];
+  var_e57cfd4a = a_ents[#"weapon_crate"].var_e57cfd4a;
 
   if(!isDefined(var_e57cfd4a)) {
     return;

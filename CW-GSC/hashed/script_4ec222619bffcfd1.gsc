@@ -221,8 +221,8 @@ function function_8677372c() {
   level.var_995bf8d7 = 1;
   level.var_293e0ccc = "english";
   level.var_9634044d = [];
-  level.var_9634044d[# "english"] = ["vox_cp_rkgb_09800_rupa_alikpavlovtoroo_df", "vox_cp_rkgb_09800_rupa_attentionplease_de", "vox_cp_rkgb_09800_rupa_sevastiankisele_0f", "vox_cp_rkgb_09800_rupa_yaroslavgusevre_fe", "vox_cp_rkgb_09800_rupa_natalyapetrovap_69", "vox_cp_rkgb_09800_rupa_olgasokolovarep_6d", "vox_cp_rkgb_09800_rupa_yourattentionpl_10", "vox_cp_rkgb_09800_rupa_attentionwarran_de", "vox_cp_rkgb_09800_rupa_sergeantnovikov_3e", "vox_cp_rkgb_09800_rupa_assistantsecret_e9"];
-  level.var_9634044d[# "russian"] = ["vox_cp_rkgb_09800_rupa_nooneistoleavet_23", "vox_cp_rkgb_09800_rupa_noonewillbeadmi_7b", "vox_cp_rkgb_09800_rupa_pleasecooperate_04", "vox_cp_rkgb_09800_rupa_thebuildingisno_8a", "vox_cp_rkgb_09800_rupa_buildingsecurit_74"];
+  level.var_9634044d[#"english"] = ["vox_cp_rkgb_09800_rupa_alikpavlovtoroo_df", "vox_cp_rkgb_09800_rupa_attentionplease_de", "vox_cp_rkgb_09800_rupa_sevastiankisele_0f", "vox_cp_rkgb_09800_rupa_yaroslavgusevre_fe", "vox_cp_rkgb_09800_rupa_natalyapetrovap_69", "vox_cp_rkgb_09800_rupa_olgasokolovarep_6d", "vox_cp_rkgb_09800_rupa_yourattentionpl_10", "vox_cp_rkgb_09800_rupa_attentionwarran_de", "vox_cp_rkgb_09800_rupa_sergeantnovikov_3e", "vox_cp_rkgb_09800_rupa_assistantsecret_e9"];
+  level.var_9634044d[#"russian"] = ["vox_cp_rkgb_09800_rupa_nooneistoleavet_23", "vox_cp_rkgb_09800_rupa_noonewillbeadmi_7b", "vox_cp_rkgb_09800_rupa_pleasecooperate_04", "vox_cp_rkgb_09800_rupa_thebuildingisno_8a", "vox_cp_rkgb_09800_rupa_buildingsecurit_74"];
   wait 5;
   thread function_f94ed931();
 }
@@ -256,8 +256,8 @@ function function_3390e801() {
   level.var_97af7d2a = 1;
   level.var_293e0ccc = "russian";
   level.var_9634044d = [];
-  level.var_9634044d[# "english"] = ["vox_cp_rkgb_09800_rupa_alikpavlovtoroo_df", "vox_cp_rkgb_09800_rupa_attentionplease_de", "vox_cp_rkgb_09800_rupa_sevastiankisele_0f", "vox_cp_rkgb_09800_rupa_yaroslavgusevre_fe", "vox_cp_rkgb_09800_rupa_natalyapetrovap_69", "vox_cp_rkgb_09800_rupa_olgasokolovarep_6d", "vox_cp_rkgb_09800_rupa_yourattentionpl_10", "vox_cp_rkgb_09800_rupa_attentionwarran_de", "vox_cp_rkgb_09800_rupa_sergeantnovikov_3e", "vox_cp_rkgb_09800_rupa_assistantsecret_e9"];
-  level.var_9634044d[# "russian"] = ["vox_cp_rkgb_09800_rupa_nooneistoleavet_23", "vox_cp_rkgb_09800_rupa_noonewillbeadmi_7b", "vox_cp_rkgb_09800_rupa_pleasecooperate_04", "vox_cp_rkgb_09800_rupa_thebuildingisno_8a", "vox_cp_rkgb_09800_rupa_buildingsecurit_74"];
+  level.var_9634044d[#"english"] = ["vox_cp_rkgb_09800_rupa_alikpavlovtoroo_df", "vox_cp_rkgb_09800_rupa_attentionplease_de", "vox_cp_rkgb_09800_rupa_sevastiankisele_0f", "vox_cp_rkgb_09800_rupa_yaroslavgusevre_fe", "vox_cp_rkgb_09800_rupa_natalyapetrovap_69", "vox_cp_rkgb_09800_rupa_olgasokolovarep_6d", "vox_cp_rkgb_09800_rupa_yourattentionpl_10", "vox_cp_rkgb_09800_rupa_attentionwarran_de", "vox_cp_rkgb_09800_rupa_sergeantnovikov_3e", "vox_cp_rkgb_09800_rupa_assistantsecret_e9"];
+  level.var_9634044d[#"russian"] = ["vox_cp_rkgb_09800_rupa_nooneistoleavet_23", "vox_cp_rkgb_09800_rupa_noonewillbeadmi_7b", "vox_cp_rkgb_09800_rupa_pleasecooperate_04", "vox_cp_rkgb_09800_rupa_thebuildingisno_8a", "vox_cp_rkgb_09800_rupa_buildingsecurit_74"];
   thread function_d8f1ce1b();
 }
 
@@ -367,7 +367,7 @@ function function_c26120ff(ent) {
   type = array::random(["cough", "sniff", "throat"]);
   prefix = "male";
   head = ent.head;
-  var_6c1ff08a = [# "c_t9_cp_net_civ_police_chief_head"];
+  var_6c1ff08a = [#"c_t9_cp_net_civ_police_chief_head"];
   var_8243bb50 = isinarray(var_6c1ff08a, head);
 
   if(var_8243bb50) {
@@ -375,7 +375,7 @@ function function_c26120ff(ent) {
     return undefined;
   }
 
-  female_heads = [# "c_t9_ger_civ_female_head01", #"c_t9_ger_civ_female_head02", #"c_t9_ger_civ_female_head03", #"c_t9_ger_civ_female_head04", #"c_t9_ger_civ_female_head05", #"c_t9_ger_civ_female_head06", #"hash_6cfa8a1eb7667b19", #"hash_6cfa931eb7668a64", #"hash_6cfa941eb7668c17", #"hash_6cfe111eb7699655", #"hash_10907c2b90e2ab7e"];
+  female_heads = [#"c_t9_ger_civ_female_head01", #"c_t9_ger_civ_female_head02", #"c_t9_ger_civ_female_head03", #"c_t9_ger_civ_female_head04", #"c_t9_ger_civ_female_head05", #"c_t9_ger_civ_female_head06", #"hash_6cfa8a1eb7667b19", #"hash_6cfa931eb7668a64", #"hash_6cfa941eb7668c17", #"hash_6cfe111eb7699655", #"hash_10907c2b90e2ab7e"];
   isfemale = isinarray(female_heads, head);
 
   if(isfemale) {

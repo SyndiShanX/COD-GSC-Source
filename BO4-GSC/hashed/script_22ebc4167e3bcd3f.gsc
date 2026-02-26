@@ -84,7 +84,7 @@ function_6b107487() {
   level flag::set(#"hash_ed90925c898d1b0");
   self thread scene::play("Shot 1");
   wait 1;
-  var_e690c4cd = self.scene_ents[# "prop 1"];
+  var_e690c4cd = self.scene_ents[#"prop 1"];
   var_e690c4cd thread function_5ae9d41e();
   level thread zm_escape_vo_hooks::function_c179111e();
   self thread scene::play("Shot 2");
@@ -158,9 +158,9 @@ setup_docks_crane() {
   level flag::wait_till("start_zombie_round_logic");
   var_217fca51 = struct::get("docks_crane");
   scene::add_scene_func(var_217fca51.scriptbundlename, &function_32fbad12, "Shot 2");
-  var_4e8f9a1c = var_217fca51.scene_ents[# "skeleton_arm"];
+  var_4e8f9a1c = var_217fca51.scene_ents[#"skeleton_arm"];
   var_4e8f9a1c ghost();
-  var_965869c9 = var_217fca51.scene_ents[# "crane"];
+  var_965869c9 = var_217fca51.scene_ents[#"crane"];
   var_965869c9 hidepart("jnt_skeleton", "p8_fxanim_zm_esc_crane_mod", 1);
   var_965869c9.targetname = "docks_crane_link";
   level.var_965869c9 = var_965869c9;
@@ -242,7 +242,7 @@ function_6ff33a91(var_217fca51) {
   var_217fca51 thread scene::play("Shot 3");
   n_anim_length = getanimlength(#"hash_2bf732b76b5383ba");
   wait n_anim_length;
-  mdl_spoon = var_217fca51.scene_ents[# "skeleton_arm"];
+  mdl_spoon = var_217fca51.scene_ents[#"skeleton_arm"];
   mdl_spoon hide();
   function_ac52c6f1();
 }
@@ -285,7 +285,7 @@ function_c5e0a9a4() {
 
     if(!e_player hasweapon(getweapon(#"spoon_alcatraz")) && !e_player hasweapon(getweapon(#"spork_alcatraz"))) {
       if(!isDefined(e_player.var_1c4683c4)) {
-        e_player.var_1c4683c4 = e_player.slot_weapons[# "melee_weapon"];
+        e_player.var_1c4683c4 = e_player.slot_weapons[#"melee_weapon"];
       }
 
       e_player clientfield::set_to_player("sp_ar_pi", 0);
@@ -316,7 +316,7 @@ function_32fbad12(a_ents) {
     return;
   }
 
-  var_965869c9 = a_ents[# "crane"];
+  var_965869c9 = a_ents[#"crane"];
   level.var_965869c9 hidepart("jnt_skeleton", "p8_fxanim_zm_esc_crane_mod", 1);
 
   if(isDefined(level.var_a29d2d8) && level.var_a29d2d8 hasweapon(getweapon(#"tomahawk_t8_upgraded")) && level.var_a29d2d8 flag::get(#"hash_d41f651bb868608") && !level.var_a29d2d8 flag::get(#"hash_465b23ced2029d95")) {
@@ -393,7 +393,7 @@ function_4afd150e(a_ents) {
   }
 
   var_ef78f209 = randomint(100);
-  var_965869c9 = a_ents[# "crane"];
+  var_965869c9 = a_ents[#"crane"];
 
   if(var_ef78f209 < 34) {
     var_d147b93a = # "p7_tire_rubber_worn_wet";

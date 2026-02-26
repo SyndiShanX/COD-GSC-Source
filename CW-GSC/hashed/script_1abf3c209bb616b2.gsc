@@ -11,8 +11,8 @@
 function init() {
   level.var_9a798a88 = spawnStruct();
   level.var_9a798a88.alarms = struct::get_array("stealth_alarm", "script_noteworthy");
-  level.g_effect[# "alarm_red"] = "vfx/iw7/levels/europa/vfx_eu_bfg_light_redblink.vfx";
-  level.g_effect[# "alarm_idle"] = "vfx/core/vehicles/aircraft_light_white_blink.vfx";
+  level.g_effect[#"alarm_red"] = "vfx/iw7/levels/europa/vfx_eu_bfg_light_redblink.vfx";
+  level.g_effect[#"alarm_idle"] = "vfx/core/vehicles/aircraft_light_white_blink.vfx";
   array::thread_all(level.var_9a798a88.alarms, &function_a8f7fa5b);
 }
 
@@ -38,17 +38,17 @@ function function_a8f7fa5b() {
 
     switch (ent.script_noteworthy) {
       case # "trigger_disable":
-        self.trigs[# "hack"] = ent;
+        self.trigs[#"hack"] = ent;
         self thread function_2dc6261d();
         break;
       case # "trigger_damage":
-        self.trigs[# "dmg"] = ent;
+        self.trigs[#"dmg"] = ent;
         self thread function_47de2d14();
         break;
       case # "light":
         self.lights[self.lights.size] = ent;
         self.var_bb4a3b9 = ent.model;
-        ent.idle_fx = spawnfx(level.g_effect[# "alarm_idle"], ent.origin);
+        ent.idle_fx = spawnfx(level.g_effect[#"alarm_idle"], ent.origin);
         triggerfx(ent.idle_fx);
 
         if(isDefined(ent.script_wtf)) {
@@ -66,8 +66,8 @@ function function_a8f7fa5b() {
 
 function function_2dc6261d() {
   self endon(#"death");
-  self.trigs[# "hack"] endon(#"death");
-  waitresult = self.trigs[# "hack"] waittill(#"trigger");
+  self.trigs[#"hack"] endon(#"death");
+  waitresult = self.trigs[#"hack"] waittill(#"trigger");
   whom = waitresult.activator;
   self notify(#"state_change", {
     #state: "disabled"});
@@ -79,8 +79,8 @@ function function_2dc6261d() {
 
 function function_47de2d14() {
   self endon(#"death");
-  self.trigs[# "dmg"] endon(#"death");
-  waitresult = self.trigs[# "dmg"] waittill(#"trigger");
+  self.trigs[#"dmg"] endon(#"death");
+  waitresult = self.trigs[#"dmg"] waittill(#"trigger");
   whom = waitresult.activator;
   self notify(#"state_change", {
     #state: "destroyed"});
@@ -103,7 +103,7 @@ function function_7e4779a4() {
         function_bb67aeb1();
         self.state = state;
         self.active = 0;
-        self.trigs[# "hack"] delete();
+        self.trigs[#"hack"] delete();
         break;
       case # "destroyed":
         if(self.state == "alarm_on") {
@@ -113,7 +113,7 @@ function function_7e4779a4() {
         function_bb67aeb1();
         self.state = state;
         self.active = 0;
-        self.trigs[# "hack"] delete();
+        self.trigs[#"hack"] delete();
         break;
       case # "alarm_on":
         if(self.state == "alarm_on") {
@@ -160,7 +160,7 @@ function alarm_on() {
       light setModel(self.var_c0effb5a);
     }
 
-    light.var_5131ddae = spawnfx(level.g_effect[# "alarm_red"], light.origin);
+    light.var_5131ddae = spawnfx(level.g_effect[#"alarm_red"], light.origin);
     triggerfx(light.var_5131ddae);
   }
 

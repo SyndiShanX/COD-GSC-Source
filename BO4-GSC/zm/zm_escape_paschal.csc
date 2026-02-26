@@ -40,31 +40,31 @@ init() {
   clientfield::register("scriptmover", "" + # "hash_624198b41791933f", 1, 1, "int", &function_8fe4f2a7, 0, 0);
   clientfield::register("toplayer", "" + # "hash_5cab8aa95fc9ea84", 1, 1, "counter", &function_d663c13e, 0, 0);
   clientfield::register("toplayer", "" + # "hash_506164c22c4c7ca8", 1, 1, "counter", &function_42693309, 0, 0);
-  level._effect[# "brutus_energy"] = # "hash_aced2664257a0ca";
-  level._effect[# "energy_blue"] = # "hash_5a51f6c91ceb37a5";
-  level._effect[# "energy_green"] = # "hash_24e8d0b53e783e64";
-  level._effect[# "energy_orange"] = # "hash_5740c7d662846db3";
-  level._effect[# "energy_red"] = # "hash_7909599a5d17a4b4";
-  level._effect[# "energy_white"] = # "hash_1c2a3285932c7a7e";
-  level._effect[# "energy_glow"] = # "hash_390f28af5955af1f";
-  level._effect[# "kr_glow"] = # "hash_10198f7ef5535f3a";
-  level._effect[# "ritual_gobo"] = # "hash_140f0bd65e4d70d2";
-  level._effect[# "hash_180f832f742958d6"] = # "hash_66bb6697a9882bd6";
-  level._effect[# "door_explosion"] = # "hash_4fba451426ea3bb7";
-  level._effect[# "hash_1a454ca256b757e6"] = # "hash_5028a74e717df332";
-  level._effect[# "hash_7d5a495febe292e4"] = # "hash_321ad275226af072";
-  level._effect[# "hash_592c96b2803d9fd5"] = # "hash_2a63b961f5ed2417";
-  level._effect[# "hash_6d3840ae2ba64bdd"] = # "hash_362eac491136c198";
-  level._effect[# "hash_289e42e25063ac26"] = # "hash_e714752caf5a93d";
-  level._effect[# "hash_287c57e25046e96f"] = # "hash_e416a52caccc0f4";
-  level._effect[# "hash_287868e250431d7b"] = # "hash_e454d52cad07884";
-  level._effect[# "hash_3959cfb0404cb74a"] = # "hash_5affa48c16d2c319";
-  level._effect[# "hash_2928b6d60aaacda6"] = # "hash_271838b9716f9931";
-  level._effect[# "brutus_stun"] = # "hash_2241c093176b5a63";
-  level._effect[# "hash_86cc6dd23ec4ddb"] = # "hash_152749b3d661b4cd";
-  level._effect[# "hash_6b3f19f4c90a1b75"] = # "hash_6f69cced7e86cb70";
-  level._effect[# "hash_508055920f327121"] = # "hash_8c3d3c756b91f54";
-  level._effect[# "hash_201ef69f0a0a5dce"] = # "hash_1f06be75e7efc6a2";
+  level._effect[#"brutus_energy"] = # "hash_aced2664257a0ca";
+  level._effect[#"energy_blue"] = # "hash_5a51f6c91ceb37a5";
+  level._effect[#"energy_green"] = # "hash_24e8d0b53e783e64";
+  level._effect[#"energy_orange"] = # "hash_5740c7d662846db3";
+  level._effect[#"energy_red"] = # "hash_7909599a5d17a4b4";
+  level._effect[#"energy_white"] = # "hash_1c2a3285932c7a7e";
+  level._effect[#"energy_glow"] = # "hash_390f28af5955af1f";
+  level._effect[#"kr_glow"] = # "hash_10198f7ef5535f3a";
+  level._effect[#"ritual_gobo"] = # "hash_140f0bd65e4d70d2";
+  level._effect[#"hash_180f832f742958d6"] = # "hash_66bb6697a9882bd6";
+  level._effect[#"door_explosion"] = # "hash_4fba451426ea3bb7";
+  level._effect[#"hash_1a454ca256b757e6"] = # "hash_5028a74e717df332";
+  level._effect[#"hash_7d5a495febe292e4"] = # "hash_321ad275226af072";
+  level._effect[#"hash_592c96b2803d9fd5"] = # "hash_2a63b961f5ed2417";
+  level._effect[#"hash_6d3840ae2ba64bdd"] = # "hash_362eac491136c198";
+  level._effect[#"hash_289e42e25063ac26"] = # "hash_e714752caf5a93d";
+  level._effect[#"hash_287c57e25046e96f"] = # "hash_e416a52caccc0f4";
+  level._effect[#"hash_287868e250431d7b"] = # "hash_e454d52cad07884";
+  level._effect[#"hash_3959cfb0404cb74a"] = # "hash_5affa48c16d2c319";
+  level._effect[#"hash_2928b6d60aaacda6"] = # "hash_271838b9716f9931";
+  level._effect[#"brutus_stun"] = # "hash_2241c093176b5a63";
+  level._effect[#"hash_86cc6dd23ec4ddb"] = # "hash_152749b3d661b4cd";
+  level._effect[#"hash_6b3f19f4c90a1b75"] = # "hash_6f69cced7e86cb70";
+  level._effect[#"hash_508055920f327121"] = # "hash_8c3d3c756b91f54";
+  level._effect[#"hash_201ef69f0a0a5dce"] = # "hash_1f06be75e7efc6a2";
   level._effect["" + # "hash_3fafd72f00908d53"] = # "hash_992fe8f8e8dfb1";
   scene::add_scene_func(#"p8_fxanim_zm_esc_blast_afterlife_seagull_ghost_bundle", &function_bbf4268e, "shot_1");
 }
@@ -79,19 +79,19 @@ function_d36b21ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[# "energy_blue"], self, "tag_origin");
+      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[#"energy_blue"], self, "tag_origin");
       break;
     case 2:
-      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[# "energy_green"], self, "tag_origin");
+      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[#"energy_green"], self, "tag_origin");
       break;
     case 3:
-      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[# "energy_white"], self, "tag_origin");
+      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[#"energy_white"], self, "tag_origin");
       break;
     case 4:
-      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[# "energy_orange"], self, "tag_origin");
+      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[#"energy_orange"], self, "tag_origin");
       break;
     case 5:
-      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[# "energy_red"], self, "tag_origin");
+      self.var_9a53cfaa = util::playFXOnTag(localclientnum, level._effect[#"energy_red"], self, "tag_origin");
       break;
     case 0:
       break;
@@ -113,7 +113,7 @@ function_c8043066(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 orb_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "energy_glow"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"energy_glow"], self, "tag_origin");
 }
 
 function_e5437696(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -127,7 +127,7 @@ function_e5437696(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[# "kr_glow"], self, "tag_cover");
+    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[#"kr_glow"], self, "tag_cover");
 
     if(!isDefined(self.var_a863bc25)) {
       self.var_a863bc25 = self playLoopSound(#"hash_59f1ff45d390f7f1");
@@ -137,9 +137,9 @@ function_e5437696(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_d598fd7e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[# "ritual_gobo"], self, "tag_origin");
+    self.n_fx_id = util::playFXOnTag(localclientnum, level._effect[#"ritual_gobo"], self, "tag_origin");
     wait 1.6;
-    util::playFXOnTag(localclientnum, level._effect[# "hash_180f832f742958d6"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[#"hash_180f832f742958d6"], self, "tag_origin");
     return;
   }
 
@@ -163,9 +163,9 @@ seagull_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
   }
 
   if(newval) {
-    self.var_d1a51444 = util::playFXOnTag(localclientnum, level._effect[# "hash_1a454ca256b757e6"], self, "j_wrist_ri");
-    self.var_7b2dcfc6 = util::playFXOnTag(localclientnum, level._effect[# "hash_1a454ca256b757e6"], self, "j_wrist_le");
-    self.n_trail_fx = util::playFXOnTag(localclientnum, level._effect[# "hash_7d5a495febe292e4"], self, "j_spine1");
+    self.var_d1a51444 = util::playFXOnTag(localclientnum, level._effect[#"hash_1a454ca256b757e6"], self, "j_wrist_ri");
+    self.var_7b2dcfc6 = util::playFXOnTag(localclientnum, level._effect[#"hash_1a454ca256b757e6"], self, "j_wrist_le");
+    self.n_trail_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_7d5a495febe292e4"], self, "j_spine1");
     self function_78233d29(#"hash_24cdaac09819f0e", "", "Alpha", 1);
   }
 }
@@ -178,8 +178,8 @@ function_89a37ae2() {
 }
 
 function_bbf4268e(clientnum, a_ents) {
-  if(isDefined(a_ents[# "seagull_ghost"])) {
-    a_ents[# "seagull_ghost"] function_89a37ae2();
+  if(isDefined(a_ents[#"seagull_ghost"])) {
+    a_ents[#"seagull_ghost"] function_89a37ae2();
   }
 }
 
@@ -195,21 +195,21 @@ function_430edc4e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    if(isDefined(level._effect[# "air_blast"])) {
-      self.var_8eef2f82 = util::playFXOnTag(localclientnum, level._effect[# "air_blast"], self, "tag_origin");
+    if(isDefined(level._effect[#"air_blast"])) {
+      self.var_8eef2f82 = util::playFXOnTag(localclientnum, level._effect[#"air_blast"], self, "tag_origin");
       mdl_ghost = util::spawn_model(localclientnum, "tag_origin", self.origin + (0, 0, 20), self.angles);
       mdl_ghost scene::play(#"p8_fxanim_zm_esc_blast_afterlife_seagull_ghost_bundle", "shot_1");
       mdl_ghost delete();
     }
 
-    if(isDefined(level._effect[# "hash_1839aae8f96148af"])) {
-      self.var_99f0142a = util::playFXOnTag(localclientnum, level._effect[# "hash_1839aae8f96148af"], self, "tag_origin");
+    if(isDefined(level._effect[#"hash_1839aae8f96148af"])) {
+      self.var_99f0142a = util::playFXOnTag(localclientnum, level._effect[#"hash_1839aae8f96148af"], self, "tag_origin");
     }
   }
 }
 
 function_a4c0dc8a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.var_a5b517e5 = util::playFXOnTag(localclientnum, level._effect[# "hash_592c96b2803d9fd5"], self, "tag_origin");
+  self.var_a5b517e5 = util::playFXOnTag(localclientnum, level._effect[#"hash_592c96b2803d9fd5"], self, "tag_origin");
 }
 
 function_a596ea8d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -282,22 +282,22 @@ function_49b054dd(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   exploder::stop_exploder("lgtexp_wardenhouse_red");
 
   if(newval == 1) {
-    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[# "hash_6d3840ae2ba64bdd"], self, "tag_origin");
+    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[#"hash_6d3840ae2ba64bdd"], self, "tag_origin");
     return;
   }
 
   if(newval == 2) {
-    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[# "hash_289e42e25063ac26"], self, "tag_origin");
+    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[#"hash_289e42e25063ac26"], self, "tag_origin");
     return;
   }
 
   if(newval == 3) {
-    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[# "hash_287c57e25046e96f"], self, "tag_origin");
+    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[#"hash_287c57e25046e96f"], self, "tag_origin");
     return;
   }
 
   if(newval == 4) {
-    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[# "hash_287868e250431d7b"], self, "tag_origin");
+    self.var_29749873 = util::playFXOnTag(localclientnum, level._effect[#"hash_287868e250431d7b"], self, "tag_origin");
     return;
   }
 
@@ -312,7 +312,7 @@ summoning_key_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
   }
 
   if(newval) {
-    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[# "hash_3959cfb0404cb74a"], self, "tag_origin");
+    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[#"hash_3959cfb0404cb74a"], self, "tag_origin");
   }
 }
 
@@ -321,7 +321,7 @@ function_de16ce8a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_9c59bce1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect[# "hash_86cc6dd23ec4ddb"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"hash_86cc6dd23ec4ddb"], self, "tag_origin");
 }
 
 function_6357e884(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -358,7 +358,7 @@ function_6357e884(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         break;
     }
 
-    self.var_2185511c[localclientnum][self.var_2185511c[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_2928b6d60aaacda6"], self, str_tag);
+    self.var_2185511c[localclientnum][self.var_2185511c[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_2928b6d60aaacda6"], self, str_tag);
     var_18407835 = self gettagorigin(str_tag);
     playSound(localclientnum, #"hash_6d26aa0fd4a98020", var_18407835);
     return;
@@ -380,7 +380,7 @@ function_e482b6b8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_5924ce94 = util::playFXOnTag(localclientnum, level._effect[# "brutus_energy"], self, "tag_origin");
+    self.var_5924ce94 = util::playFXOnTag(localclientnum, level._effect[#"brutus_energy"], self, "tag_origin");
   }
 }
 
@@ -391,7 +391,7 @@ function_d326587e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[# "spk_glint"], self, "tag_origin");
+    self.var_4e35f286 = util::playFXOnTag(localclientnum, level._effect[#"spk_glint"], self, "tag_origin");
   }
 }
 
@@ -406,7 +406,7 @@ function_e83bf3a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
 function_e33e10b9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    self.var_91f82333 = util::playFXOnTag(localclientnum, level._effect[# "brutus_stun"], self, "tag_origin");
+    self.var_91f82333 = util::playFXOnTag(localclientnum, level._effect[#"brutus_stun"], self, "tag_origin");
 
     if(!isDefined(self.var_6ca7b3dd)) {
       self playSound(localclientnum, #"hash_713bf699d03aa7c1");
@@ -434,12 +434,12 @@ function_3537ad19(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_23647e90 = util::playFXOnTag(localclientnum, level._effect[# "hash_508055920f327121"], self, "tag_fx_light_02");
+    self.var_23647e90 = util::playFXOnTag(localclientnum, level._effect[#"hash_508055920f327121"], self, "tag_fx_light_02");
     return;
   }
 
   if(newval == 2) {
-    self.var_23647e90 = util::playFXOnTag(localclientnum, level._effect[# "hash_6b3f19f4c90a1b75"], self, "tag_fx_light_01");
+    self.var_23647e90 = util::playFXOnTag(localclientnum, level._effect[#"hash_6b3f19f4c90a1b75"], self, "tag_fx_light_01");
   }
 }
 
@@ -455,7 +455,7 @@ group_bot_mp(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   }
 
   if(newval == 1) {
-    self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[# "hash_201ef69f0a0a5dce"], self, "tag_origin");
+    self.var_f756621f = util::playFXOnTag(localclientnum, level._effect[#"hash_201ef69f0a0a5dce"], self, "tag_origin");
 
     if(!isDefined(self.var_dae2b711)) {
       self.var_dae2b711 = self playLoopSound(#"hash_56a667536b4a0ffc");

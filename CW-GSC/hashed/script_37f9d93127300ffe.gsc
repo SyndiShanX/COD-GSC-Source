@@ -732,11 +732,11 @@ function function_6f77f823() {
     var_9cd4bce5 = vectornormalize(var_46c257b5.origin - trace_start);
     trace_end = var_46c257b5.origin + var_9cd4bce5 * 500;
     trace = bulletTrace(trace_start, trace_end, 0, self);
-    var_70413e45 = (var_9cd4bce5 * -1 + trace[# "normal"]) * 0.5;
+    var_70413e45 = (var_9cd4bce5 * -1 + trace[#"normal"]) * 0.5;
     var_6b0e4003 = vectortoangles(var_70413e45);
     trace_angles = vectortoangles(var_9cd4bce5 * -1);
-    playFX("maps/cp_prisoner/fx9_bul_tracer_jet_strafe_rnr", trace[# "position"], anglesToForward(trace_angles), anglestoup(trace_angles));
-    playFX("maps/cp_prisoner/fx9_bul_impact_dirt_strafe_rnr", trace[# "position"], anglesToForward(var_6b0e4003), anglestoup(var_6b0e4003));
+    playFX("maps/cp_prisoner/fx9_bul_tracer_jet_strafe_rnr", trace[#"position"], anglesToForward(trace_angles), anglestoup(trace_angles));
+    playFX("maps/cp_prisoner/fx9_bul_impact_dirt_strafe_rnr", trace[#"position"], anglesToForward(var_6b0e4003), anglestoup(var_6b0e4003));
     waitframe(1);
     var_46c257b5 = struct::get(var_46c257b5.target, "targetname");
 

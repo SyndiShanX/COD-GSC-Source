@@ -117,7 +117,7 @@ function_fa0d912f(var_7b4ae7d1) {
       bot.var_29b433bd = role_index;
     }
 
-    bot.pers[# "class"] = level.defaultclass;
+    bot.pers[#"class"] = level.defaultclass;
     bot.curclass = level.defaultclass;
     bot.var_71a70093 = level.var_eea9be19;
     waitframe(1);
@@ -503,7 +503,7 @@ debug_bots(var_841324bd) {
 
 function function_3895c193(team = "axis", str_targetname) {
   self.team = team;
-  self.pers[# "team"] = team;
+  self.pers[#"team"] = team;
   self.sessionteam = team;
   self.disablespawning = 0;
   self.isinuse = 1;
@@ -513,10 +513,10 @@ function function_3895c193(team = "axis", str_targetname) {
   self setmovespeedscale(1);
 
   if(isarray(self.values)) {
-    if(isarray(self.values[# "ignoreall"])) {
-      while(isDefined(self.values[# "ignoreall"]) && self.values[# "ignoreall"].size > 0) {
-        for(i = 0; i < self.values[# "ignoreall"].size; i++) {
-          v = self.values[# "ignoreall"][i];
+    if(isarray(self.values[#"ignoreall"])) {
+      while(isDefined(self.values[#"ignoreall"]) && self.values[#"ignoreall"].size > 0) {
+        for(i = 0; i < self.values[#"ignoreall"].size; i++) {
+          v = self.values[#"ignoreall"][i];
           self val::reset(v.str_id, "ignoreall");
           break;
         }
@@ -525,10 +525,10 @@ function function_3895c193(team = "axis", str_targetname) {
   }
 
   if(isarray(self.values)) {
-    if(isarray(self.values[# "ignoreme"])) {
-      while(isDefined(self.values[# "ignoreme"]) && self.values[# "ignoreme"].size > 0) {
-        for(i = 0; i < self.values[# "ignoreme"].size; i++) {
-          v = self.values[# "ignoreme"][i];
+    if(isarray(self.values[#"ignoreme"])) {
+      while(isDefined(self.values[#"ignoreme"]) && self.values[#"ignoreme"].size > 0) {
+        for(i = 0; i < self.values[#"ignoreme"].size; i++) {
+          v = self.values[#"ignoreme"][i];
           self val::reset(v.str_id, "ignoreme");
           break;
         }

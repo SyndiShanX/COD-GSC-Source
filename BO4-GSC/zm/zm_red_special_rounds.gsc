@@ -192,8 +192,8 @@ function_a0488ba8() {
     }
   }
 
-  if(isarray(level.var_b175714d) && isDefined(level.var_b175714d[# "blight_father"]) && isDefined(level.var_b175714d[# "blight_father"].var_33e393a7)) {
-    var_a128313 += level.var_b175714d[# "blight_father"].var_33e393a7;
+  if(isarray(level.var_b175714d) && isDefined(level.var_b175714d[#"blight_father"]) && isDefined(level.var_b175714d[#"blight_father"].var_33e393a7)) {
+    var_a128313 += level.var_b175714d[#"blight_father"].var_33e393a7;
   }
 
   return var_a128313;

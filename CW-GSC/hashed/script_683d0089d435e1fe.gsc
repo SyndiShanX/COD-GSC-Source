@@ -181,7 +181,7 @@ function function_3170191d(a_ents) {
     ent setnosunshadow();
   }
 
-  var_9fc6bf6f = a_ents[# "ally2"];
+  var_9fc6bf6f = a_ents[#"ally2"];
 
   if(isDefined(var_9fc6bf6f)) {
     if(var_9fc6bf6f.model != "c_t9_usa_redshirt_02") {
@@ -189,19 +189,19 @@ function function_3170191d(a_ents) {
     }
   }
 
-  var_34348dcd = a_ents[# "hash_690ae0194ed71cc4"];
+  var_34348dcd = a_ents[#"hash_690ae0194ed71cc4"];
 
   if(isDefined(var_34348dcd)) {
     var_34348dcd thread namespace_d9b153b9::function_e361b981(#"ar_damage_t9");
   }
 
-  var_41ef2942 = a_ents[# "hash_690ae1194ed71e77"];
+  var_41ef2942 = a_ents[#"hash_690ae1194ed71e77"];
 
   if(isDefined(var_41ef2942)) {
     var_41ef2942 thread namespace_d9b153b9::function_e361b981(#"ar_damage_t9");
   }
 
-  var_a6aef2c0 = a_ents[# "hash_690ade194ed7195e"];
+  var_a6aef2c0 = a_ents[#"hash_690ade194ed7195e"];
 
   if(isDefined(var_a6aef2c0)) {
     var_a6aef2c0 thread namespace_d9b153b9::function_e361b981(#"ar_damage_t9");
@@ -343,7 +343,7 @@ function function_22390791() {
 function function_b9c10ace() {
   level flag::wait_till("flag_bridge_crossed");
 
-  if(level.var_731c10af.paths[# "village"].count == 0) {
+  if(level.var_731c10af.paths[#"village"].count == 0) {
     level flag::wait_till_any(array("flag_village", "flag_sniper_overlook"));
   }
 }

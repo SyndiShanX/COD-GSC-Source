@@ -149,7 +149,7 @@ function fx_flesh_hit_neck_fatal(params) {
           player challenges::earneduavassistscore(scoregiven);
           player stats::function_8fb23f94("uav", #"assists", 1);
           player stats::function_b04e7184("uav", #"best_assists");
-          killstreakindex = level.killstreakindices[# "uav"];
+          killstreakindex = level.killstreakindices[#"uav"];
           killstreaks::killstreak_assist(player, self, killstreakindex);
 
           if(isDefined(level.var_b7bc3c75.var_e2298731)) {
@@ -235,7 +235,7 @@ function activateuav(killstreaktype) {
     if(sessionmodeiswarzonegame()) {
       var_b0490eb9 = getheliheightlockheight(self.origin);
       trace = groundtrace((self.origin[0], self.origin[1], var_b0490eb9), self.origin - (0, 0, 5000), 0, uav);
-      groundheight = trace[# "position"][2];
+      groundheight = trace[#"position"][2];
       var_5f8c899e = groundheight + (var_b0490eb9 - groundheight) * bundle.var_ff73e08c;
       var_5f8c899e -= killstreaks::function_43f4782d();
     } else {

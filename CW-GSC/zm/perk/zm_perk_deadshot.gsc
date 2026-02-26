@@ -44,11 +44,11 @@ function deadshot_precache() {
     return;
   }
 
-  level._effect[# "deadshot_light"] = "zombie/fx_perk_deadshot_ndu";
-  level.machine_assets[# "talent_deadshot"] = spawnStruct();
-  level.machine_assets[# "talent_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
-  level.machine_assets[# "talent_deadshot"].off_model = "p9_sur_vending_ads_off";
-  level.machine_assets[# "talent_deadshot"].on_model = "p9_sur_vending_ads";
+  level._effect[#"deadshot_light"] = "zombie/fx_perk_deadshot_ndu";
+  level.machine_assets[#"talent_deadshot"] = spawnStruct();
+  level.machine_assets[#"talent_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
+  level.machine_assets[#"talent_deadshot"].off_model = "p9_sur_vending_ads_off";
+  level.machine_assets[#"talent_deadshot"].on_model = "p9_sur_vending_ads";
 }
 
 function deadshot_register_clientfield() {

@@ -19,8 +19,8 @@ function private autoexec __init__system__() {
 function private preinit() {
   level.var_2829c23d = &function_50e36ba7;
   level.var_44e74ef4 = &function_f1d27638;
-  level.allowbattlechatter[# "bc"] = is_true(getgametypesetting(#"allowbattlechatter"));
-  level.allowspecialistdialog = mpdialog_value("enableHeroDialog", 0) && is_true(level.allowbattlechatter[# "bc"]);
+  level.allowbattlechatter[#"bc"] = is_true(getgametypesetting(#"allowbattlechatter"));
+  level.allowspecialistdialog = mpdialog_value("enableHeroDialog", 0) && is_true(level.allowbattlechatter[#"bc"]);
   level.var_e444d44 = 1;
   level thread function_4bc12499();
 }

@@ -97,13 +97,13 @@ function get_trace(old_position, new_position) {
 
 function function_26d91402(old_position, new_position) {
   trace = get_trace(old_position, new_position);
-  return trace[# "position"];
+  return trace[#"position"];
 }
 
 function function_b7f367ed(old_position, new_position) {
   trace = get_trace(old_position, new_position);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 

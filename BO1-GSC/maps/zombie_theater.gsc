@@ -91,7 +91,7 @@ theater_playanim(animname) {
   self UseAnimTree(#animtree);
   self animscripted(animname + "_done", self.origin, self.angles, level.scr_anim[animname], "normal", undefined, 2.0);
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("frag_grenade_zm", false, true);
   include_weapon("claymore_zm", false, true);
   include_weapon("m1911_zm", false);
@@ -170,7 +170,7 @@ theater_playanim(animname) {
   precacheItem("explosive_bolt_upgraded_zm");
   level.collector_achievement_weapons = array_add(level.collector_achievement_weapons, "bowie_knife_zm");
 }
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

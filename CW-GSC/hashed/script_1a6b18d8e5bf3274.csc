@@ -138,7 +138,7 @@ function function_219213be(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_12b59dee = undefined;
   }
 
-  var_2ddbe94 = [# "hash_1f5f24e8240c291a", #"hash_16d59f099e418f4f"];
+  var_2ddbe94 = [#"hash_1f5f24e8240c291a", #"hash_16d59f099e418f4f"];
 
   if(bwastimejump && bwastimejump < var_2ddbe94.size + 1) {
     self.var_b159952f = var_2ddbe94[bwastimejump - 1];

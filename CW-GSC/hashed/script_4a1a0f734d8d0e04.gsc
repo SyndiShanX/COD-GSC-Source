@@ -425,17 +425,17 @@ function function_82b2bc5e() {
 
   var_7bacf73f = level spawner::simple_spawn("cctv_guards");
   a_actors = [];
-  a_actors[# "actor 1"] = var_7bacf73f[0];
-  a_actors[# "actor 2"] = var_7bacf73f[1];
-  a_actors[# "actor 1"] thread function_c4edad62();
-  a_actors[# "actor 2"] thread function_34c5b067();
-  a_actors[# "actor 1"] val::set(#"door_kick", "takedamage", 0);
-  a_actors[# "actor 2"] val::set(#"door_kick", "takedamage", 0);
+  a_actors[#"actor 1"] = var_7bacf73f[0];
+  a_actors[#"actor 2"] = var_7bacf73f[1];
+  a_actors[#"actor 1"] thread function_c4edad62();
+  a_actors[#"actor 2"] thread function_34c5b067();
+  a_actors[#"actor 1"] val::set(#"door_kick", "takedamage", 0);
+  a_actors[#"actor 2"] val::set(#"door_kick", "takedamage", 0);
   level thread scene::play("cctv_door_kick_scene", "targetname", a_actors);
-  a_actors[# "actor 1"] waittill(#"hash_553184e6c2383c0d");
-  doors::open("cctv_entrance_door_01", "targetname", a_actors[# "actor 1"]);
-  a_actors[# "actor 1"] val::reset(#"door_kick", "takedamage");
-  a_actors[# "actor 2"] val::reset(#"door_kick", "takedamage");
+  a_actors[#"actor 1"] waittill(#"hash_553184e6c2383c0d");
+  doors::open("cctv_entrance_door_01", "targetname", a_actors[#"actor 1"]);
+  a_actors[#"actor 1"] val::reset(#"door_kick", "takedamage");
+  a_actors[#"actor 2"] val::reset(#"door_kick", "takedamage");
   doors::function_f35467ac("cctv_entrance_door_01", "targetname");
   thread function_40626d6c();
   ai::waittill_dead_or_dying(var_7bacf73f, var_7bacf73f.size);

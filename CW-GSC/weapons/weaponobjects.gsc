@@ -357,9 +357,9 @@ function waitanddetonate(object, delay, attacker, weapon) {
     wait delay;
   }
 
-  if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.pers[# "team"]) && isDefined(object.owner) && isDefined(object.owner.pers) && isDefined(object.owner.pers[# "team"])) {
+  if(isDefined(attacker) && isPlayer(attacker) && isDefined(attacker.pers[#"team"]) && isDefined(object.owner) && isDefined(object.owner.pers) && isDefined(object.owner.pers[#"team"])) {
     if(level.teambased) {
-      if(util::function_fbce7263(attacker.pers[# "team"], object.owner.pers[# "team"])) {
+      if(util::function_fbce7263(attacker.pers[#"team"], object.owner.pers[#"team"])) {
         attacker notify(#"destroyed_explosive");
       }
     } else if(attacker != object.owner) {
@@ -637,7 +637,7 @@ function weaponobjectdamage(watcher) {
     }
 
     if(!level.weaponobjectdebug && level.teambased && isPlayer(attacker) && isDefined(self.owner)) {
-      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
+      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
         continue;
       }
     }
@@ -1454,7 +1454,7 @@ function weaponobjectdetectiontrigger(ownerteam) {
 function hackertriggersetvisibility(owner) {
   self endon(#"death");
   assert(isPlayer(owner));
-  ownerteam = owner.pers[# "team"];
+  ownerteam = owner.pers[#"team"];
 
   for(;;) {
     if(level.teambased) {
@@ -1546,7 +1546,7 @@ function itemhacked(watcher, player) {
 
   self.hacked = 1;
   self setmissileowner(player);
-  self setteam(player.pers[# "team"]);
+  self setteam(player.pers[#"team"]);
   self.owner = player;
   self clientfield::set("retrievable", 0);
 
@@ -2388,7 +2388,7 @@ function private function_d5e8c3d0(origin, radius, height) {
 function function_23b0aea9(watcher, player) {
   self endon(#"death");
   self setowner(player);
-  self setteam(player.pers[# "team"]);
+  self setteam(player.pers[#"team"]);
   self.owner = player;
   self.oldangles = self.angles;
   self util::waittillnotmoving();
@@ -2398,7 +2398,7 @@ function function_23b0aea9(watcher, player) {
     return;
   }
 
-  if(player.pers[# "team"] == # "spectator") {
+  if(player.pers[#"team"] == # "spectator") {
     return;
   }
 
@@ -2464,7 +2464,7 @@ function function_ac27aef5(watcher, player, origin) {
   self.pickuptrigger = function_c7cdf243(origin, watcher.var_7ce4e9ab, watcher.var_a889e2cb, watcher.var_2fd8b883);
   self.pickuptrigger setinvisibletoall();
   self.pickuptrigger setvisibletoplayer(player);
-  self.pickuptrigger setteamfortrigger(player.pers[# "team"]);
+  self.pickuptrigger setteamfortrigger(player.pers[#"team"]);
 
   if(watcher.var_296e14ab === 1) {
     self.pickuptrigger function_4bf6de9a(0);
@@ -2608,7 +2608,7 @@ function function_d9219ce2(player, weapon) {
 }
 
 function ondestroyed(attacker, data) {
-  playFX(level._effect[# "tacticalinsertionfizzle"], self.origin);
+  playFX(level._effect[#"tacticalinsertionfizzle"], self.origin);
   self playSound(#"dst_tac_insert_break");
 
   if(isDefined(self.owner) && isDefined(level.playequipmentdestroyedonplayer)) {
@@ -2664,7 +2664,7 @@ function watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse, cal
       continue;
     }
 
-    if(isDefined(trigger.triggerteam) && player.pers[# "team"] != trigger.triggerteam) {
+    if(isDefined(trigger.triggerteam) && player.pers[#"team"] != trigger.triggerteam) {
       continue;
     }
 

@@ -82,7 +82,7 @@ add_tesla_gun() {
     }
   }
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("zombie_colt");
   include_weapon("sw_357");
 
@@ -129,18 +129,18 @@ add_tesla_gun() {
   maps\_zombiemode_weapons::add_limited_weapon("zombie_m1garand", 0);
 }
 
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
   include_powerup("full_ammo");
 }
 
-#include_weapon(weapon_name) {
+include_weapon(weapon_name) {
   maps\_zombiemode_weapons::include_zombie_weapon(weapon_name);
 }
 
-#include_powerup(powerup_name) {
+include_powerup(powerup_name) {
   maps\_zombiemode_powerups::include_zombie_powerup(powerup_name);
 }
 

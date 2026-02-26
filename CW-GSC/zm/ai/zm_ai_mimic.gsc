@@ -282,8 +282,8 @@ function function_5394f283() {
 function mimic_cleanup_teleport() {
   self endon(#"death");
 
-  if(level.zm_loc_types[# "mimic_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "mimic_location"]);
+  if(level.zm_loc_types[#"mimic_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"mimic_location"]);
     self zm_ai_utility::function_a8dc3363(s_spawn_loc);
     self function_c0b09ab0();
   } else {
@@ -374,8 +374,8 @@ function spawn_single(var_eb3a8721) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_7ad32862)) {
     s_spawn_loc = [[level.var_7ad32862]]();
-  } else if(level.zm_loc_types[# "mimic_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "mimic_location"]);
+  } else if(level.zm_loc_types[#"mimic_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"mimic_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -567,10 +567,10 @@ function function_218c4ce8() {
   }
 
   if(isDefined(mapdestinations) && mapdestinations.size > 0) {
-    location = mapdestinations[0].locations[# "loot_pods"];
+    location = mapdestinations[0].locations[#"loot_pods"];
 
-    if(isDefined(location.instances[# "loot_pods"])) {
-      instance = location.instances[# "loot_pods"];
+    if(isDefined(location.instances[#"loot_pods"])) {
+      instance = location.instances[#"loot_pods"];
 
       if(isDefined(instance.a_models) && isarray(instance.a_models)) {
         foreach(var_37180a9f in instance.a_models) {

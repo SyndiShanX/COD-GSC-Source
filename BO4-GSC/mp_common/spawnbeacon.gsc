@@ -86,8 +86,8 @@ function_5bfd1343(attacker, var_f231d134, killtime, capturedobjective, spawnbeac
 }
 
 function_1f5ed165() {
-  if((isDefined(level.spawnbeaconsettings.settingsbundle.var_b4403828) ? level.spawnbeaconsettings.settingsbundle.var_b4403828 : 0) && isDefined(self.var_d7cf6658) && isarray(self.var_d7cf6658) && isDefined(self.var_d7cf6658[# "friendly"].trigger)) {
-    self.var_d7cf6658[# "friendly"].trigger triggerenable(0);
+  if((isDefined(level.spawnbeaconsettings.settingsbundle.var_b4403828) ? level.spawnbeaconsettings.settingsbundle.var_b4403828 : 0) && isDefined(self.var_d7cf6658) && isarray(self.var_d7cf6658) && isDefined(self.var_d7cf6658[#"friendly"].trigger)) {
+    self.var_d7cf6658[#"friendly"].trigger triggerenable(0);
   }
 }
 
@@ -271,13 +271,13 @@ function_4ddddf03(placedspawnbeacon) {
 
   if(isDefined(level.spawnbeaconsettings.settingsbundle.var_6ee7f72) ? level.spawnbeaconsettings.settingsbundle.var_6ee7f72 : 0) {
     function_6c529d0b(placedspawnbeacon, level.spawnbeaconsettings.settingsbundle.var_ac0a9508, player getteam(), #"enemy", #"hash_10169ccdcca54ccf", &function_741d9675, &function_70ca26fc, &function_d77d0cbb);
-    placedspawnbeacon.var_d7cf6658[# "enemy"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.deactivatetime) ? level.spawnbeaconsettings.settingsbundle.deactivatetime : 0);
+    placedspawnbeacon.var_d7cf6658[#"enemy"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.deactivatetime) ? level.spawnbeaconsettings.settingsbundle.deactivatetime : 0);
   }
 
   if(isDefined(level.spawnbeaconsettings.settingsbundle.var_b4403828) ? level.spawnbeaconsettings.settingsbundle.var_b4403828 : 0) {
     function_6c529d0b(placedspawnbeacon, level.spawnbeaconsettings.settingsbundle.var_69fd6325, player getteam(), #"friendly", #"hash_f91a28adadc5409", &function_e67b6bd, &function_4f5f518a, &function_d77d0cbb);
-    player clientclaimtrigger(placedspawnbeacon.var_d7cf6658[# "friendly"].trigger);
-    placedspawnbeacon.var_d7cf6658[# "friendly"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.pickuptime) ? level.spawnbeaconsettings.settingsbundle.pickuptime : 0);
+    player clientclaimtrigger(placedspawnbeacon.var_d7cf6658[#"friendly"].trigger);
+    placedspawnbeacon.var_d7cf6658[#"friendly"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.pickuptime) ? level.spawnbeaconsettings.settingsbundle.pickuptime : 0);
   }
 
   placedspawnbeacon.var_a08c7e4 = placedspawnbeacon influencers::create_influencer("activeSpawnBeacon", placedspawnbeacon.origin, util::getteammask(player getteam()));

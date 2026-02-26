@@ -110,7 +110,7 @@ function onendround() {
   function_4c593022();
   function_7996e36d();
 
-  if(game.stat[# "teamscores"][# "allies"] == level.roundwinlimit - 1 && game.stat[# "teamscores"][# "axis"] == level.roundwinlimit - 1) {
+  if(game.stat[#"teamscores"][#"allies"] == level.roundwinlimit - 1 && game.stat[#"teamscores"][#"axis"] == level.roundwinlimit - 1) {
     aheadteam = getbetterteam();
 
     if(aheadteam === game.defenders) {
@@ -124,14 +124,14 @@ function on_player_connect() {
 }
 
 function getbetterteam() {
-  kills[# "allies"] = 0;
-  kills[# "axis"] = 0;
-  deaths[# "allies"] = 0;
-  deaths[# "axis"] = 0;
+  kills[#"allies"] = 0;
+  kills[#"axis"] = 0;
+  deaths[#"allies"] = 0;
+  deaths[#"axis"] = 0;
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(isDefined(team) && (team == # "allies" || team == # "axis")) {
       kills[team] += player.kills;
@@ -139,15 +139,15 @@ function getbetterteam() {
     }
   }
 
-  if(kills[# "allies"] > kills[# "axis"]) {
+  if(kills[#"allies"] > kills[#"axis"]) {
     return # "allies";
-  } else if(kills[# "axis"] > kills[# "allies"]) {
+  } else if(kills[#"axis"] > kills[#"allies"]) {
     return # "axis";
   }
 
-  if(deaths[# "allies"] < deaths[# "axis"]) {
+  if(deaths[#"allies"] < deaths[#"axis"]) {
     return # "allies";
-  } else if(deaths[# "axis"] < deaths[# "allies"]) {
+  } else if(deaths[#"axis"] < deaths[#"allies"]) {
     return # "axis";
   }
 
@@ -169,8 +169,8 @@ function onstartgametype() {
   setbombtimer("B", 0);
   setmatchflag("bomb_timer_b", 0);
   setclientnamemode("manual_change");
-  level._effect[# "bombexplosion"] = # "hash_1811460fd925f1f8";
-  level._effect[# "hash_568509fa2561a75d"] = # "hash_4d29da75039cfce";
+  level._effect[#"bombexplosion"] = # "hash_1811460fd925f1f8";
+  level._effect[#"hash_568509fa2561a75d"] = # "hash_4d29da75039cfce";
   level.alwaysusestartspawns = 1;
 
   foreach(team, _ in level.teams) {
@@ -208,7 +208,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
   attacker = self;
   var_1cfdf798 = isDefined(idamage.lastattacker) ? idamage.lastattacker === attacker : 0;
 
-  if(isPlayer(attacker) && attacker.pers[# "team"] != idamage.pers[# "team"]) {
+  if(isPlayer(attacker) && attacker.pers[#"team"] != idamage.pers[#"team"]) {
     if(var_1cfdf798) {
       attacker.var_badeb470 = (isDefined(attacker.var_badeb470) ? attacker.var_badeb470 : 0) + 1;
       scoreevents::processscoreevent(#"kill_sd", attacker, idamage, weapon);
@@ -227,24 +227,24 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
     }
   }
 
-  if(inbombzone && isPlayer(attacker) && attacker.pers[# "team"] != idamage.pers[# "team"]) {
+  if(inbombzone && isPlayer(attacker) && attacker.pers[#"team"] != idamage.pers[#"team"]) {
     attacker challenges::function_2f462ffd(idamage, weapon, victim, currentobjective);
-    attacker.pers[# "objectiveekia"]++;
-    attacker.objectiveekia = attacker.pers[# "objectiveekia"];
-    attacker.pers[# "objectives"]++;
-    attacker.objectives = attacker.pers[# "objectives"];
+    attacker.pers[#"objectiveekia"]++;
+    attacker.objectiveekia = attacker.pers[#"objectiveekia"];
+    attacker.pers[#"objectives"]++;
+    attacker.objectives = attacker.pers[#"objectives"];
 
     if(var_1cfdf798) {
-      if(game.defenders == idamage.pers[# "team"]) {
+      if(game.defenders == idamage.pers[#"team"]) {
         attacker medals::offenseglobalcount();
         attacker thread challenges::killedbasedefender(currentobjective);
         scoreevents::function_2a2e1723(#"killed_defender", attacker, idamage, weapon);
         level thread telemetry::function_18135b72(#"hash_37f96a1d3c57a089", {
           #player: idamage, #var_bdc4bbd2: # "defending"});
       } else {
-        if(isDefined(attacker.pers[# "defends"])) {
-          attacker.pers[# "defends"]++;
-          attacker.defends = attacker.pers[# "defends"];
+        if(isDefined(attacker.pers[#"defends"])) {
+          attacker.pers[#"defends"]++;
+          attacker.defends = attacker.pers[#"defends"];
         }
 
         attacker medals::defenseglobalcount();
@@ -256,7 +256,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
     }
   }
 
-  if(isPlayer(attacker) && attacker.pers[# "team"] != idamage.pers[# "team"] && isDefined(idamage.isbombcarrier) && idamage.isbombcarrier == 1) {
+  if(isPlayer(attacker) && attacker.pers[#"team"] != idamage.pers[#"team"] && isDefined(idamage.isbombcarrier) && idamage.isbombcarrier == 1) {
     attacker recordgameevent("kill_carrier");
     level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
       #player: attacker, #eventtype: # "kill_carrier"});
@@ -397,7 +397,7 @@ function warnlastplayer(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         break;
       }
@@ -773,13 +773,13 @@ function onuseplantobject(player) {
   player notify(#"bomb_planted");
   level thread popups::displayteammessagetoall(#"hash_12473d7e6ed6e752", player);
 
-  if(isDefined(player.pers[# "plants"])) {
-    player.pers[# "plants"]++;
-    player.plants = player.pers[# "plants"];
+  if(isDefined(player.pers[#"plants"])) {
+    player.pers[#"plants"]++;
+    player.plants = player.pers[#"plants"];
   }
 
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
 
   if(self.label == "_a") {
     var_2989dcef = 1;
@@ -809,8 +809,8 @@ function onusedefuseobject(player) {
 
   print("<dev string:xa3>" + self.label);
 
-  bb::function_95a5b5c2("sd_bombdefuse", self.label, player.pers[# "team"], player.origin);
-  self gameobjects::set_owner_team(player.pers[# "team"]);
+  bb::function_95a5b5c2("sd_bombdefuse", self.label, player.pers[#"team"], player.origin);
+  self gameobjects::set_owner_team(player.pers[#"team"]);
   level thread bombdefused(self, player);
   self gameobjects::disable_object();
   self.waypoint gameobjects::disable_object();
@@ -821,13 +821,13 @@ function onusedefuseobject(player) {
 
   level thread popups::displayteammessagetoall(#"mp/explosives_defused_by", player);
 
-  if(isDefined(player.pers[# "defuses"])) {
-    player.pers[# "defuses"]++;
-    player.defuses = player.pers[# "defuses"];
+  if(isDefined(player.pers[#"defuses"])) {
+    player.pers[#"defuses"]++;
+    player.defuses = player.pers[#"defuses"];
   }
 
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
   player stats::function_bb7eedf0(#"defuses", 1);
   player stats::function_dad108fa(#"plants_defuses", 1);
   player contracts::increment_contract(#"hash_7fb3342ea8ac7e7c");
@@ -910,7 +910,7 @@ function bombplanted(destroyedobj, player) {
   globallogic_utils::pausetimer();
   level.bombplanted = 1;
   player setweaponoverheating(1, 100, destroyedobj.useweapon);
-  team = player.pers[# "team"];
+  team = player.pers[#"team"];
   destroyedobj.visuals[0] thread globallogic_utils::playtickingsound("mpl_sab_ui_suitcasebomb_timer");
   var_a2509eb6 = 0;
 
@@ -956,9 +956,9 @@ function bombplanted(destroyedobj, player) {
     trace = bulletTrace(player.origin + (0, 0, 20), player.origin - (0, 0, 2000), 0, player);
     tempangle = randomfloat(360);
     forward = (cos(tempangle), sin(tempangle), 0);
-    forward = vectornormalize(forward - vectorscale(trace[# "normal"], vectordot(forward, trace[# "normal"])));
+    forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
     dropangles = vectortoangles(forward);
-    level.sdbombmodel = spawn("script_model", trace[# "position"] + (0, 0, 3));
+    level.sdbombmodel = spawn("script_model", trace[#"position"] + (0, 0, 3));
     level.sdbombmodel.angles = dropangles;
     level.sdbombmodel setModel(#"wpn_t9_eqp_c4_bomb_world");
   }
@@ -1004,7 +1004,7 @@ function bombplanted(destroyedobj, player) {
   player.isbombcarrier = 0;
   player playbombplant();
   globallogic::function_3305e557(player, "bombPlanted", 0);
-  player function_ef823e71(5, player.pers[# "bombplanted"]);
+  player function_ef823e71(5, player.pers[#"bombplanted"]);
   bombtimerwait();
   setbombtimer("A", 0);
   setbombtimer("B", 0);
@@ -1046,7 +1046,7 @@ function bombplanted(destroyedobj, player) {
   }
 
   rot = randomfloat(360);
-  explosioneffect = spawnfx(level._effect[# "bombexplosion"], explosionorigin + (0, 0, 0), (0, 0, 1), (cos(rot), sin(rot), 0));
+  explosioneffect = spawnfx(level._effect[#"bombexplosion"], explosionorigin + (0, 0, 0), (0, 0, 1), (cos(rot), sin(rot), 0));
   triggerfx(explosioneffect);
   thread sound::play_in_space("mpl_sd_exp_suitcase_bomb_main", explosionorigin);
 
@@ -1055,7 +1055,7 @@ function bombplanted(destroyedobj, player) {
     var_e6397375 = anglesToForward(destroyedobj.visuals[0].angles);
     var_213527e2 = anglestoup(destroyedobj.visuals[0].angles);
     wait 0.1;
-    var_238e7468 = spawnfx(level._effect[# "hash_568509fa2561a75d"], var_d46e7070, var_e6397375, var_213527e2);
+    var_238e7468 = spawnfx(level._effect[#"hash_568509fa2561a75d"], var_d46e7070, var_e6397375, var_213527e2);
     triggerfx(var_238e7468);
   }
 
@@ -1100,7 +1100,7 @@ function bombdefused(defusedobject, player) {
   setmatchflag("bomb_timer_b", 0);
   player playbombdefuse();
   globallogic::function_3305e557(player, "bombDefused", 0);
-  player function_ef823e71(4, player.pers[# "bombdefused"]);
+  player function_ef823e71(4, player.pers[#"bombdefused"]);
   level notify(#"bomb_defused");
   thread globallogic_audio::set_music_on_team("silent");
 
@@ -1165,8 +1165,8 @@ function private function_4c593022() {
 
   foreach(player in level.players) {
     if(player.team != # "spectator") {
-      player function_ef823e71(7, player.pers[# "kills"], roundsplayed);
-      player function_ef823e71(8, player.pers[# "damagedone"], roundsplayed);
+      player function_ef823e71(7, player.pers[#"kills"], roundsplayed);
+      player function_ef823e71(8, player.pers[#"damagedone"], roundsplayed);
     }
   }
 }
@@ -1178,50 +1178,50 @@ function private function_7996e36d() {
         game.var_629fe99f[player.playername] = [];
       }
 
-      game.var_629fe99f[player.playername][# "shotsfired"] = player.pers[# "shotsfired"];
-      game.var_629fe99f[player.playername][# "shotshit"] = player.pers[# "shotshit"];
-      game.var_629fe99f[player.playername][# "bombdefused"] = player.pers[# "bombdefused"];
-      game.var_629fe99f[player.playername][# "bombplanted"] = player.pers[# "bombplanted"];
-      game.var_629fe99f[player.playername][# "firstdeath"] = player.pers[# "firstdeath"];
-      game.var_629fe99f[player.playername][# "cur_total_kill_streak"] = player.pers[# "cur_total_kill_streak"];
-      game.var_629fe99f[player.playername][# "best_kill_streak"] = player.pers[# "best_kill_streak"];
+      game.var_629fe99f[player.playername][#"shotsfired"] = player.pers[#"shotsfired"];
+      game.var_629fe99f[player.playername][#"shotshit"] = player.pers[#"shotshit"];
+      game.var_629fe99f[player.playername][#"bombdefused"] = player.pers[#"bombdefused"];
+      game.var_629fe99f[player.playername][#"bombplanted"] = player.pers[#"bombplanted"];
+      game.var_629fe99f[player.playername][#"firstdeath"] = player.pers[#"firstdeath"];
+      game.var_629fe99f[player.playername][#"cur_total_kill_streak"] = player.pers[#"cur_total_kill_streak"];
+      game.var_629fe99f[player.playername][#"best_kill_streak"] = player.pers[#"best_kill_streak"];
     }
   }
 }
 
 function private function_f9bfc5ca(player) {
   if(game.var_629fe99f.size == 0 || !isDefined(game.var_629fe99f[player.playername])) {
-    if(!isDefined(player.pers[# "shotsfired"])) {
-      player.pers[# "shotsfired"] = 0;
+    if(!isDefined(player.pers[#"shotsfired"])) {
+      player.pers[#"shotsfired"] = 0;
     }
 
-    if(!isDefined(player.pers[# "shotshit"])) {
-      player.pers[# "shotshit"] = 0;
+    if(!isDefined(player.pers[#"shotshit"])) {
+      player.pers[#"shotshit"] = 0;
     }
 
-    if(!isDefined(player.pers[# "bombdefused"])) {
-      player.pers[# "bombdefused"] = 0;
+    if(!isDefined(player.pers[#"bombdefused"])) {
+      player.pers[#"bombdefused"] = 0;
     }
 
-    if(!isDefined(player.pers[# "bombplanted"])) {
-      player.pers[# "bombplanted"] = 0;
+    if(!isDefined(player.pers[#"bombplanted"])) {
+      player.pers[#"bombplanted"] = 0;
     }
 
-    if(!isDefined(player.pers[# "firstdeath"])) {
-      player.pers[# "firstdeath"] = 0;
+    if(!isDefined(player.pers[#"firstdeath"])) {
+      player.pers[#"firstdeath"] = 0;
     }
 
     return;
   }
 
-  player.pers[# "shotsfired"] = game.var_629fe99f[player.playername][# "shotsfired"];
-  player.pers[# "shotshit"] = game.var_629fe99f[player.playername][# "shotshit"];
-  player.pers[# "bombdefused"] = game.var_629fe99f[player.playername][# "bombdefused"];
-  player.pers[# "bombplanted"] = game.var_629fe99f[player.playername][# "bombplanted"];
-  player.pers[# "firstdeath"] = game.var_629fe99f[player.playername][# "firstdeath"];
-  player.pers[# "cur_total_kill_streak"] = game.var_629fe99f[player.playername][# "cur_total_kill_streak"];
-  player.pers[# "best_kill_streak"] = game.var_629fe99f[player.playername][# "best_kill_streak"];
-  player setplayercurrentstreak(player.pers[# "cur_total_kill_streak"]);
+  player.pers[#"shotsfired"] = game.var_629fe99f[player.playername][#"shotsfired"];
+  player.pers[#"shotshit"] = game.var_629fe99f[player.playername][#"shotshit"];
+  player.pers[#"bombdefused"] = game.var_629fe99f[player.playername][#"bombdefused"];
+  player.pers[#"bombplanted"] = game.var_629fe99f[player.playername][#"bombplanted"];
+  player.pers[#"firstdeath"] = game.var_629fe99f[player.playername][#"firstdeath"];
+  player.pers[#"cur_total_kill_streak"] = game.var_629fe99f[player.playername][#"cur_total_kill_streak"];
+  player.pers[#"best_kill_streak"] = game.var_629fe99f[player.playername][#"best_kill_streak"];
+  player setplayercurrentstreak(player.pers[#"cur_total_kill_streak"]);
 }
 
 function private function_1567ba56(player) {

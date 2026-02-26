@@ -259,8 +259,7 @@ ch_hardpoints(data) {
     if(player.pers[data.hardpointType] >= 2) {
       player processChallenge("ch_rabid");
     }
-  } else if(data.hardpointType == "kamikaze_mp") {
-  }
+  } else if(data.hardpointType == "kamikaze_mp") {}
 }
 
 ch_vehicle_kills(data) {

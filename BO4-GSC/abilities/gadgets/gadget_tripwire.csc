@@ -116,7 +116,7 @@ function_6230a8a5(localclientnum) {
 }
 
 function_a4b3da97(trace) {
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 
@@ -290,9 +290,9 @@ update_previs(localclientnum) {
   velocity = function_711c258(forward, up, level.tripwireweapon);
   eye_pos = getlocalclienteyepos(localclientnum);
   trace1 = projectiletrace(eye_pos, velocity, 0, level.tripwireweapon, level.var_41427f32);
-  level.tripwire.localclients[localclientnum].model.origin = trace1[# "position"];
-  level.tripwire.localclients[localclientnum].model.angles = (angleclamp180(vectortoangles(trace1[# "normal"])[0] + 90), vectortoangles(trace1[# "normal"])[1], 0);
-  level.tripwire.localclients[localclientnum].model.hitent = trace1[# "entity"];
+  level.tripwire.localclients[localclientnum].model.origin = trace1[#"position"];
+  level.tripwire.localclients[localclientnum].model.angles = (angleclamp180(vectortoangles(trace1[#"normal"])[0] + 90), vectortoangles(trace1[#"normal"])[1], 0);
+  level.tripwire.localclients[localclientnum].model.hitent = trace1[#"entity"];
 
   if(isDefined(level.tripwire.localclients[localclientnum].model.hitent) && level.tripwire.localclients[localclientnum].model.hitent.weapon == level.tripwireweapon) {
     level.var_41427f32 = level.tripwire.localclients[localclientnum].model.hitent;
@@ -313,7 +313,7 @@ update_previs(localclientnum) {
     obj_id = player.var_61df85ff;
 
     if(function_a8cb5322(localclientnum) && !shoutcaster::is_shoutcaster(localclientnum)) {
-      objective_add(localclientnum, obj_id, "active", #"tripwire_placement", trace1[# "position"]);
+      objective_add(localclientnum, obj_id, "active", #"tripwire_placement", trace1[#"position"]);
       objective_setgamemodeflags(localclientnum, obj_id, 0);
     } else if(objective_state(localclientnum, obj_id) != "invisible") {
       objective_setstate(localclientnum, obj_id, "invisible");

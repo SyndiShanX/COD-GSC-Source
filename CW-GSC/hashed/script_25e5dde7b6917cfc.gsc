@@ -90,10 +90,10 @@ function function_fba221f2() {
   level flag::wait_till_all(["flag_armada_player_chopper_spawned", "flag_armada_buddy_spawned", "flag_armada_copilot_spawned", "flag_armada_pilot_spawned"]);
   level.var_7466d419 setrotorspeed(0.2);
   a_ents = [];
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level thread scene::play(#"hash_69b8e06afe12b8f9", "idle", a_ents);
 }
 
@@ -123,7 +123,7 @@ function function_42f61091() {
 
   if(isDefined(level.gunner)) {
     level.gunner ai::gun_remove();
-    a_ents[# "hash_2082d5270bdcf457"] = level.gunner;
+    a_ents[#"hash_2082d5270bdcf457"] = level.gunner;
   }
 
   level scene::init(#"hash_4c4df82bd76b4a33", a_ents);
@@ -179,9 +179,9 @@ function function_efd3381d(var_a3ad3414, var_646aad9f = 1) {
 function function_d697a743() {
   level endon(#"flag_intro_player_boarded_chopper");
   a_ents = [];
-  a_ents[# "vip"] = level.vip;
+  a_ents[#"vip"] = level.vip;
   var_c5e9076a = [];
-  var_c5e9076a[# "prop 1"] = level.player namespace_b7cfe907::function_ca2b95a();
+  var_c5e9076a[#"prop 1"] = level.player namespace_b7cfe907::function_ca2b95a();
   level.vip.var_5b22d53 = 0;
   level.player dialogue::queue("vox_cp_armd_00009_sims_fracturejawthat_44");
   wait 0.5;
@@ -361,8 +361,8 @@ function function_b34d0584(a_ents) {
     return;
   }
 
-  guy1 = a_ents[# "guy01"];
-  guy2 = a_ents[# "guy02"];
+  guy1 = a_ents[#"guy01"];
+  guy2 = a_ents[#"guy02"];
   level flag::wait_till("flag_intro_player_vm_done");
   wait 2;
   guy2 dialogue::queue("vox_cp_armd_00001_ars1_likeisaidsometi_3d");
@@ -373,8 +373,8 @@ function function_b34d0584(a_ents) {
 
 function function_1b50aed2(a_ents) {
   level endon(#"flag_intro_player_boarded_chopper");
-  guy1 = a_ents[# "actor 1"];
-  guy2 = a_ents[# "actor 2"];
+  guy1 = a_ents[#"actor 1"];
+  guy2 = a_ents[#"actor 2"];
   level flag::wait_till_all(["flag_intro_base_tent_leave", "flag_tent_guys_vo_done"]);
   wait 1;
   guy2 dialogue::queue("vox_cp_armd_00002_ars3_charliestillhol_bb");
@@ -385,7 +385,7 @@ function function_1b50aed2(a_ents) {
 }
 
 function function_c9f69e1b(a_ents) {
-  guy = a_ents[# "actor 2"];
+  guy = a_ents[#"actor 2"];
   guy.propername = # "hash_2a35e27eee2368d";
   level waittill(#"hash_15656e74128aee0e");
   guy dialogue::queue("vox_cp_armd_00002_butc_stillhurtslikeh_3d");
@@ -535,20 +535,20 @@ function function_7675bb9d(var_e8e79806, var_4a5a95d5, var_e3b80211, var_87b6343
 
   switch (var_e8e79806) {
     case 1:
-      a_scene_ents[# "vehicle 2"] = a_ents[0];
-      a_scene_ents[# "vehicle 3"] = a_ents[1];
-      a_scene_ents[# "hash_5c059a141887868b"] = a_ents[2];
+      a_scene_ents[#"vehicle 2"] = a_ents[0];
+      a_scene_ents[#"vehicle 3"] = a_ents[1];
+      a_scene_ents[#"hash_5c059a141887868b"] = a_ents[2];
       break;
     case 2:
-      a_scene_ents[# "vehicle 1"] = a_ents[0];
-      a_scene_ents[# "vehicle 3"] = a_ents[1];
-      a_scene_ents[# "hash_5c059a141887868b"] = a_ents[2];
-      a_scene_ents[# "hash_5c059914188784d8"] = a_ents[3];
+      a_scene_ents[#"vehicle 1"] = a_ents[0];
+      a_scene_ents[#"vehicle 3"] = a_ents[1];
+      a_scene_ents[#"hash_5c059a141887868b"] = a_ents[2];
+      a_scene_ents[#"hash_5c059914188784d8"] = a_ents[3];
       break;
     case 3:
-      a_scene_ents[# "hash_5c059a141887868b"] = a_ents[0];
-      a_scene_ents[# "hash_5c059914188784d8"] = a_ents[1];
-      a_scene_ents[# "hash_5c059c14188789f1"] = a_ents[2];
+      a_scene_ents[#"hash_5c059a141887868b"] = a_ents[0];
+      a_scene_ents[#"hash_5c059914188784d8"] = a_ents[1];
+      a_scene_ents[#"hash_5c059c14188789f1"] = a_ents[2];
       break;
   }
 
@@ -721,7 +721,7 @@ function function_70c35833(a_ents) {
 }
 
 function function_50941fc1(a_ents) {
-  thread function_9222bf72(a_ents[# "actor 1"], a_ents[# "actor 2"]);
+  thread function_9222bf72(a_ents[#"actor 1"], a_ents[#"actor 2"]);
 }
 
 function function_9222bf72(guy1, guy2) {
@@ -887,17 +887,17 @@ function function_e0c430cb(var_90a59057) {
 function function_7429a059(a_ents) {
   level flag::wait_till("flag_play_gear_up_pt02");
 
-  if(isDefined(a_ents[# "hash_243517ef16a6bf3a"])) {
-    a_ents[# "hash_243517ef16a6bf3a"] delete();
+  if(isDefined(a_ents[#"hash_243517ef16a6bf3a"])) {
+    a_ents[#"hash_243517ef16a6bf3a"] delete();
   }
 
-  if(isDefined(a_ents[# "hash_243516ef16a6bd87"])) {
-    a_ents[# "hash_243516ef16a6bd87"] delete();
+  if(isDefined(a_ents[#"hash_243516ef16a6bd87"])) {
+    a_ents[#"hash_243516ef16a6bd87"] delete();
   }
 }
 
 function function_88216172(a_ents) {
-  ent = a_ents[# "prop 1"];
+  ent = a_ents[#"prop 1"];
 
   if(isDefined(ent)) {
     level.var_4af7ba12 = ent;
@@ -905,8 +905,8 @@ function function_88216172(a_ents) {
 
   level flag::wait_till("flag_intro_base_cleanup");
 
-  if(isDefined(a_ents[# "vehicle 1"])) {
-    a_ents[# "vehicle 1"] delete();
+  if(isDefined(a_ents[#"vehicle 1"])) {
+    a_ents[#"vehicle 1"] delete();
   }
 }
 
@@ -979,13 +979,13 @@ function function_50d6beb5(var_d3440450, var_50cc0d4f) {
   level thread function_24cba40();
   level.player thread function_7e91061f();
   a_ents = [];
-  a_ents[# "vip"] = level.vip;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "player"] = level.player;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
-  a_ents[# "prop 1"] = level.var_4af7ba12;
+  a_ents[#"vip"] = level.vip;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"player"] = level.player;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"prop 1"] = level.var_4af7ba12;
   level scene::stop(#"armada_intro");
   level scene::stop(#"hash_69b8e06afe12b8f9");
   level scene::play(#"hash_45e2dd5c24266fcf", "precheck", a_ents);
@@ -993,17 +993,17 @@ function function_50d6beb5(var_d3440450, var_50cc0d4f) {
   var_5010a8d6 = [];
 
   if(isDefined(level.var_52874eb2)) {
-    var_5010a8d6[# "hash_4441cc1284fe31e6"] = level.var_52874eb2;
+    var_5010a8d6[#"hash_4441cc1284fe31e6"] = level.var_52874eb2;
   }
 
   if(isDefined(level.var_da19489d)) {
-    var_5010a8d6[# "hash_505d54dd2b523ca3"] = level.var_da19489d;
+    var_5010a8d6[#"hash_505d54dd2b523ca3"] = level.var_da19489d;
   }
 
   level namespace_b7cfe907::function_166083c9(0, struct::get("spawn_vip_intro"));
 
   if(isDefined(level.gunner)) {
-    var_d0e0aa50[# "hash_2082d5270bdcf457"] = level.gunner;
+    var_d0e0aa50[#"hash_2082d5270bdcf457"] = level.gunner;
   }
 
   level scene::stop(#"hash_65c743e9446696f6");
@@ -1013,11 +1013,11 @@ function function_50d6beb5(var_d3440450, var_50cc0d4f) {
   snd::client_msg(#"hash_2b94ea847ae2b667");
   level thread function_b1b08de();
   a_ents = [];
-  a_ents[# "vip"] = level.vip;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"vip"] = level.vip;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   snd::client_msg(#"hash_391dd8e0fb7ccb35");
   level flag::set("flag_play_gear_up_pt02");
   level.var_7466d419 thread scene::play(#"hash_65f973650bb861a3", "Shot 2");
@@ -1064,7 +1064,7 @@ function function_7e91061f() {
 
 function function_6b21ec6d() {
   a_ents = [];
-  a_ents[# "vip"] = level.vip;
+  a_ents[#"vip"] = level.vip;
   level thread scene::play(#"armada_intro", "idle_at_huey", a_ents);
   level.vip thread function_13a39590();
 }
@@ -1250,11 +1250,11 @@ function function_c81e0f3f(var_d3440450, var_50cc0d4f) {
   a_ents = [];
 
   if(isDefined(level.var_52874eb2)) {
-    a_ents[# "hash_4441cc1284fe31e6"] = level.var_52874eb2;
+    a_ents[#"hash_4441cc1284fe31e6"] = level.var_52874eb2;
   }
 
   if(isDefined(level.var_da19489d)) {
-    a_ents[# "hash_505d54dd2b523ca3"] = level.var_da19489d;
+    a_ents[#"hash_505d54dd2b523ca3"] = level.var_da19489d;
   }
 
   level thread scene::play(#"hash_3dd341991cbe55b0", "approaching_firebase", a_ents);
@@ -1262,11 +1262,11 @@ function function_c81e0f3f(var_d3440450, var_50cc0d4f) {
   var_a129a5ee triggerenable(0);
   level flag::set("flag_intro_base_cleanup");
   a_ents = [];
-  a_ents[# "vip"] = level.vip;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "pilot"] = level.pilot;
-  a_ents[# "copilot"] = level.copilot;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"vip"] = level.vip;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"pilot"] = level.pilot;
+  a_ents[#"copilot"] = level.copilot;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level.player util::delay(5, undefined, &camerasetlookat, level.var_52874eb2);
   level scene::play(#"hash_45e2dd5c24266fcf", "approaching_firebase", a_ents);
   namespace_b7cfe907::function_1c2abcda();
@@ -1299,18 +1299,18 @@ function function_67f53057(var_d3440450, var_50cc0d4f) {
   a_ents = [];
 
   if(isDefined(level.var_52874eb2)) {
-    a_ents[# "hash_4441cc1284fe31e6"] = level.var_52874eb2;
+    a_ents[#"hash_4441cc1284fe31e6"] = level.var_52874eb2;
   }
 
   if(isDefined(level.var_da19489d)) {
-    a_ents[# "hash_505d54dd2b523ca3"] = level.var_da19489d;
+    a_ents[#"hash_505d54dd2b523ca3"] = level.var_da19489d;
   }
 
   level thread scene::play(#"hash_3dd341991cbe55b0", "approaching_firebase_pt2");
   a_ents = [];
-  a_ents[# "vip"] = level.vip;
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"vip"] = level.vip;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::play(#"hash_45e2dd5c24266fcf", "approaching_firebase_pt2", a_ents);
   namespace_b7cfe907::function_1c2abcda();
   level notify(#"hash_5785c9d099726172");
@@ -1673,17 +1673,17 @@ function function_90b53888(var_d3440450, var_50cc0d4f) {
   a_ents = [];
 
   if(isDefined(level.var_52874eb2)) {
-    a_ents[# "hash_4441cc1284fe31e6"] = level.var_52874eb2;
+    a_ents[#"hash_4441cc1284fe31e6"] = level.var_52874eb2;
   }
 
   if(isDefined(level.var_da19489d)) {
-    a_ents[# "hash_505d54dd2b523ca3"] = level.var_da19489d;
+    a_ents[#"hash_505d54dd2b523ca3"] = level.var_da19489d;
   }
 
   level thread scene::play(#"hash_685d9366db60f4e6", a_ents);
   a_ents = [];
-  a_ents[# "buddy"] = level.buddy;
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"buddy"] = level.buddy;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::play(#"hash_2b12d20bc56156e9", a_ents);
   level scene::play(#"hash_7eda5092580dbf92", a_ents);
   org = struct::get("heli_spawn_fly_to_branch", "script_noteworthy");

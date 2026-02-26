@@ -370,7 +370,7 @@ function private function_15677aa0(cmd) {
       v_direction = anglesToForward(v_direction) * 8000;
       eye = player getEye();
       trace = bulletTrace(eye, eye + v_direction, 0, undefined);
-      var_380c580a = positionquery_source_navigation(trace[# "position"], 128, 256, 128, 20);
+      var_380c580a = positionquery_source_navigation(trace[#"position"], 128, 256, 128, 20);
       s_spot = spawnStruct();
 
       if(isDefined(var_380c580a) && var_380c580a.data.size > 0) {
@@ -548,8 +548,8 @@ function function_f0811059() {
   while(count < 10) {
     if(isDefined(level.var_2a8acd42)) {
       s_spawn_loc = [[level.var_2a8acd42]]();
-    } else if(level.zm_loc_types[# "steiner_location"].size > 0) {
-      s_spawn_loc = array::random(level.zm_loc_types[# "steiner_location"]);
+    } else if(level.zm_loc_types[#"steiner_location"].size > 0) {
+      s_spawn_loc = array::random(level.zm_loc_types[#"steiner_location"]);
     }
 
     if(isDefined(s_spawn_loc)) {
@@ -599,8 +599,8 @@ function function_99c14949() {
     } else {
       array::add(s_spawn_locs, spawn_locs);
     }
-  } else if(level.zm_loc_types[# "steiner_location"].size > 0) {
-    s_spawn_locs = level.zm_loc_types[# "steiner_location"];
+  } else if(level.zm_loc_types[#"steiner_location"].size > 0) {
+    s_spawn_locs = level.zm_loc_types[#"steiner_location"];
   }
 
   var_69681a59 = [];
@@ -861,7 +861,7 @@ function function_4e005f8f(inflictor, attacker, damage, dflags, mod, weapon, var
       var_5f6e2918 = 5;
     }
 
-    if(self ai::is_stunned() && isDefined(self.var_31cadcc9[# "eq_slow_grenade"]) && isDefined(self.var_31cadcc9[# "eq_slow_grenade"].time) && self.var_31cadcc9[# "eq_slow_grenade"].time > gettime() - var_5f6e2918 * 1000) {
+    if(self ai::is_stunned() && isDefined(self.var_31cadcc9[#"eq_slow_grenade"]) && isDefined(self.var_31cadcc9[#"eq_slow_grenade"].time) && self.var_31cadcc9[#"eq_slow_grenade"].time > gettime() - var_5f6e2918 * 1000) {
       self.var_136c407 = 1;
     }
   }
@@ -897,7 +897,7 @@ function private function_208c255d(entity) {
 }
 
 function function_82654cab(enemy) {
-  enemypos = groundtrace(enemy.origin + (0, 0, 8), enemy.origin + (0, 0, -100000), 0, enemy)[# "position"];
+  enemypos = groundtrace(enemy.origin + (0, 0, 8), enemy.origin + (0, 0, -100000), 0, enemy)[#"position"];
   return !ispointonnavmesh(enemypos, self getpathfindingradius());
 }
 
@@ -1472,7 +1472,7 @@ function private function_bf8080c1(entity) {
     var_6e3ad56b += velocity * var_b6897326;
   }
 
-  target_pos = groundtrace(enemy.origin + (0, 0, 64), enemy.origin + (0, 0, -100000), 0, enemy)[# "position"];
+  target_pos = groundtrace(enemy.origin + (0, 0, 64), enemy.origin + (0, 0, -100000), 0, enemy)[#"position"];
   angles = vectortoangles(target_pos - entity.origin);
   dir = anglesToForward(angles);
   dist = distance(var_8598bad6, target_pos);
@@ -1982,12 +1982,12 @@ function private function_3108de07(var_fde10e1d) {
   var_f62bfdc0 = anglestoright(self.angles);
   var_8e6411bf = var_f62bfdc0 * var_fde10e1d;
   startposition = function_9cc082d2(self.origin, 30);
-  startposition = isDefined(startposition[# "point"]) ? startposition[# "point"] : self.origin;
+  startposition = isDefined(startposition[#"point"]) ? startposition[#"point"] : self.origin;
   rightposition = function_9cc082d2(startposition + var_8e6411bf, var_fde10e1d);
-  rightposition = isDefined(rightposition[# "point"]) ? rightposition[# "point"] : undefined;
+  rightposition = isDefined(rightposition[#"point"]) ? rightposition[#"point"] : undefined;
   var_d9ca447f = isDefined(rightposition) && distancesquared(startposition, rightposition) + 1 >= sqr(var_fde10e1d) && bullettracepassed(startposition + (0, 0, 30), rightposition + (0, 0, 30) + var_f62bfdc0 * self getpathfindingradius(), 0, self);
   leftposition = function_9cc082d2(startposition - var_8e6411bf, var_fde10e1d);
-  leftposition = isDefined(leftposition[# "point"]) ? leftposition[# "point"] : undefined;
+  leftposition = isDefined(leftposition[#"point"]) ? leftposition[#"point"] : undefined;
   var_290edef9 = isDefined(leftposition) && distancesquared(startposition, leftposition) + 1 >= sqr(var_fde10e1d) && bullettracepassed(startposition + (0, 0, 30), leftposition + (0, 0, 30) - var_f62bfdc0 * self getpathfindingradius(), 0, self);
 
   if(var_d9ca447f && var_290edef9) {
@@ -2794,7 +2794,7 @@ function function_bbb547de(dist) {
     fwd = vectorscale(vectornormalize(anglesToForward(steiner.angles)), dist);
     eye = steiner.origin + (0, 0, 80);
     trace = bulletTrace(eye, eye + fwd, 0, undefined);
-    var_380c580a = positionquery_source_navigation(trace[# "position"], 128, 256, 128, 20);
+    var_380c580a = positionquery_source_navigation(trace[#"position"], 128, 256, 128, 20);
     point = steiner.origin;
 
     if(isDefined(var_380c580a) && var_380c580a.data.size > 0) {

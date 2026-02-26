@@ -23,7 +23,7 @@ function private preinit() {
 }
 
 function on_connect() {
-  self.pers[# "loadout"] = spawnStruct();
+  self.pers[#"loadout"] = spawnStruct();
   self function_c67222df();
 }
 

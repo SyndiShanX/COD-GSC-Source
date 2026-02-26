@@ -582,8 +582,8 @@ move_gondola(b_suppress_doors_close = 0) {
     }
   }
 
-  if(isDefined(level.ai[# "axis"])) {
-    foreach(e_enemy in level.ai[# "axis"]) {
+  if(isDefined(level.ai[#"axis"])) {
+    foreach(e_enemy in level.ai[#"axis"]) {
       if(e_enemy function_9a8ab327()) {
         e_enemy.no_powerups = 1;
       }

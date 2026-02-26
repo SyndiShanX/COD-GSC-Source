@@ -54,19 +54,19 @@ function on_player_disconnect() {
 }
 
 function function_143fa1b9() {
-  if(!is_true(self.pers[# "telemetry"].connected)) {
+  if(!is_true(self.pers[#"telemetry"].connected)) {
     return;
   }
 
-  self.pers[# "telemetry"].connected = 0;
+  self.pers[#"telemetry"].connected = 0;
   playerdata = {};
   playerdata.utc_connect_time_s = 0;
   playerdata.utc_disconnect_time_s = 0;
   playerdata.var_37b8e421 = 0;
   utc = getutc();
 
-  if(isDefined(self.pers[# "telemetry"].utc_connect_time_s)) {
-    playerdata.utc_connect_time_s = self.pers[# "telemetry"].utc_connect_time_s;
+  if(isDefined(self.pers[#"telemetry"].utc_connect_time_s)) {
+    playerdata.utc_connect_time_s = self.pers[#"telemetry"].utc_connect_time_s;
     playerdata.utc_disconnect_time_s = utc;
     playerdata.var_37b8e421 = utc - playerdata.utc_connect_time_s;
   }
@@ -78,9 +78,9 @@ function function_143fa1b9() {
   playerdata.headshots = self.headshots;
   playerdata.revives = self.revives;
   playerdata.downs = self.downs;
-  playerdata.xp_at_start = isDefined(self.pers[# "telemetry"].xp_at_start) ? self.pers[# "telemetry"].xp_at_start : 0;
+  playerdata.xp_at_start = isDefined(self.pers[#"telemetry"].xp_at_start) ? self.pers[#"telemetry"].xp_at_start : 0;
   playerdata.xp_at_end = self rank::getrankxp();
-  playerdata.var_9f177532 = isDefined(self.pers[# "telemetry"].var_9f177532) ? self.pers[# "telemetry"].var_9f177532 : 0;
+  playerdata.var_9f177532 = isDefined(self.pers[#"telemetry"].var_9f177532) ? self.pers[#"telemetry"].var_9f177532 : 0;
   playerdata.var_735f5996 = self rank::getrank();
   playerdata.var_161a9fc9 = 0;
 
@@ -212,17 +212,17 @@ function initplayer() {
     self.doa.var_fe639705 = &function_ae14e580;
   }
 
-  if(!is_true(self.pers[# "telemetry"].connected)) {
-    if(!isDefined(self.pers[# "telemetry"])) {
-      self.pers[# "telemetry"] = {};
+  if(!is_true(self.pers[#"telemetry"].connected)) {
+    if(!isDefined(self.pers[#"telemetry"])) {
+      self.pers[#"telemetry"] = {};
     }
 
-    self.pers[# "telemetry"].utc_connect_time_s = getutc();
-    self.pers[# "telemetry"].connected = 1;
-    self.pers[# "telemetry"].xp_at_start = self rank::getrankxp();
-    self.pers[# "telemetry"].var_9f177532 = self rank::getrank();
+    self.pers[#"telemetry"].utc_connect_time_s = getutc();
+    self.pers[#"telemetry"].connected = 1;
+    self.pers[#"telemetry"].xp_at_start = self rank::getrankxp();
+    self.pers[#"telemetry"].var_9f177532 = self rank::getrank();
     playerdata = {};
-    playerdata.utc_connect_time_s = self.pers[# "telemetry"].utc_connect_time_s;
+    playerdata.utc_connect_time_s = self.pers[#"telemetry"].utc_connect_time_s;
     playerdata.var_6ba64843 = isDefined(self.doa.entnum) ? self.doa.entnum : 0;
     playerdata.var_524ab934 = self function_d40f1a0e();
     playerdata.var_504e19f4 = self function_21f71ac8();
@@ -796,17 +796,17 @@ function commitstats(gameover) {
   gamelength = int(gettime() - level.doa.gamestarttime);
   self function_9daadcaa(#"gamelength", gamelength);
 
-  if(!isDefined(self.pers[# "damagedone"])) {
-    self.pers[# "damagedone"] = 0;
+  if(!isDefined(self.pers[#"damagedone"])) {
+    self.pers[#"damagedone"] = 0;
   }
 
-  self persistence::set_recent_stat(0, 0, #"damage", int(self.pers[# "damagedone"] / 10));
+  self persistence::set_recent_stat(0, 0, #"damage", int(self.pers[#"damagedone"] / 10));
 
-  if(!isDefined(self.pers[# "outcome"])) {
-    self.pers[# "outcome"] = # "loss";
+  if(!isDefined(self.pers[#"outcome"])) {
+    self.pers[#"outcome"] = # "loss";
   }
 
-  self persistence::set_recent_stat(0, 0, #"outcome", self.pers[# "outcome"]);
+  self persistence::set_recent_stat(0, 0, #"outcome", self.pers[#"outcome"]);
   self.objscore = self.doa.score.points;
 
   if(is_true(level.doa.advancedstart)) {
@@ -843,7 +843,7 @@ function commitstats(gameover) {
       }
     }
 
-    self.pers[# "deaths"] = self.doa.score.var_267d0586;
+    self.pers[#"deaths"] = self.doa.score.var_267d0586;
     self stats::set_stat(#"doaglobalstats", #"hintmask", self.doa.hintmask);
     self stats::set_stat(#"doaglobalstats", #"hash_72018b7229672430", self.doa.var_f240d1a5);
     var_c35ec960 = self stats::get_stat(#"doaglobalstats", #"hash_38521164875979cf");
@@ -954,11 +954,11 @@ function commitstats(gameover) {
         currxp = self rank::getrankxp();
         xpearned = 0;
 
-        if(isDefined(self.pers[# "hash_43ad5d1b08145b1f"])) {
-          xpearned = currxp - self.pers[# "hash_43ad5d1b08145b1f"];
+        if(isDefined(self.pers[#"hash_43ad5d1b08145b1f"])) {
+          xpearned = currxp - self.pers[#"hash_43ad5d1b08145b1f"];
         }
 
-        self.pers[# "hash_43ad5d1b08145b1f"] = currxp;
+        self.pers[#"hash_43ad5d1b08145b1f"] = currxp;
         var_90f98f51 = int(self function_c52bcf79() * 100);
         var_d0a27bc3 = int(self getxpscale() * 100);
         var_524ab934 = self function_d40f1a0e();

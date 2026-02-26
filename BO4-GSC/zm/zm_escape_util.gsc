@@ -190,17 +190,17 @@ catwalk_arm_scene_init() {
 }
 
 function_817220a9(a_ents) {
-  a_ents[# "arm_grasp"] setCanDamage(1);
-  a_ents[# "arm_grasp"].health = 10000;
+  a_ents[#"arm_grasp"] setCanDamage(1);
+  a_ents[#"arm_grasp"].health = 10000;
   var_44ec6b44 = getent(self.target, "targetname");
-  a_ents[# "arm_grasp"].var_ead5d884 = 1;
+  a_ents[#"arm_grasp"].var_ead5d884 = 1;
 
   if(!zm_utility::is_standard()) {
-    var_44ec6b44 thread function_1abf5396(a_ents[# "arm_grasp"]);
+    var_44ec6b44 thread function_1abf5396(a_ents[#"arm_grasp"]);
   }
 
   while(true) {
-    s_result = a_ents[# "arm_grasp"] waittill(#"damage");
+    s_result = a_ents[#"arm_grasp"] waittill(#"damage");
 
     if(isPlayer(s_result.attacker) && isalive(s_result.attacker)) {
       if(isDefined(s_result.attacker.var_7e008e0c) && s_result.attacker.var_7e008e0c > 0) {
@@ -213,7 +213,7 @@ function_817220a9(a_ents) {
     }
 
     self thread scene::play("Shot 1");
-    a_ents[# "arm_grasp"].var_ead5d884 = 0;
+    a_ents[#"arm_grasp"].var_ead5d884 = 0;
     var_44ec6b44 notify(#"hash_4a3551167bd870c2");
     break;
   }
@@ -515,7 +515,7 @@ dog_spawn_func() {
     return undefined;
   }
 
-  if(level.zm_loc_types[# "dog_location"].size > 0) {
+  if(level.zm_loc_types[#"dog_location"].size > 0) {
     zone_tag = target zm_zonemgr::get_player_zone();
 
     if(!isDefined(zone_tag)) {
@@ -542,7 +542,7 @@ dog_spawn_func() {
     var_51fb0ec7 = [];
     players = getplayers();
 
-    foreach(loc in level.zm_loc_types[# "dog_location"]) {
+    foreach(loc in level.zm_loc_types[#"dog_location"]) {
       if(array::contains(var_2057a8c1, loc.zone_name)) {
         spawn_list = 0;
 

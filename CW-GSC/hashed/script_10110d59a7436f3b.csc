@@ -73,7 +73,7 @@ function private function_38401b6f(localclientnum) {
       continue;
     }
 
-    var_546112ef = self util::function_ca4b4e19(localclientnum, 0)[# "move"];
+    var_546112ef = self util::function_ca4b4e19(localclientnum, 0)[#"move"];
     zoom_frac = lerpfloat(zoom_frac, util::function_b5338ccb(var_546112ef[1], var_b4e0311b), 0.5);
 
     if(zoom_frac != 0 && (zoom_frac < 0 && var_cbcfc238 > var_11f00a95 || zoom_frac > 0 && var_cbcfc238 < var_8dd70933)) {
@@ -94,7 +94,7 @@ function private function_38401b6f(localclientnum) {
     eye = self getEye();
     fwd = anglesToForward(self getplayerangles());
     trace = physicstrace(eye, eye + fwd * var_e99a5258, var_c5e00469, var_43ac2595, self, 1);
-    var_de79cd4c = distance(eye, trace[# "position"] + fwd * var_43ac2595[0]);
+    var_de79cd4c = distance(eye, trace[#"position"] + fwd * var_43ac2595[0]);
 
     if(var_58cb5a30 < self getclienttime() && abs(var_de79cd4c - var_e17c45e2) < 100) {
       var_e17c45e2 = lerpfloat(var_e17c45e2, var_de79cd4c, 0.5);

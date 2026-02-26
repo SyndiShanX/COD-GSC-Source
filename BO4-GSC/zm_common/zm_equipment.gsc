@@ -173,11 +173,11 @@ is_included(equipment) {
 }
 
 #include(equipment_name) {
-  if(!isDefined(level.zombie_include_equipment)) {
-    level.zombie_include_equipment = [];
-  }
+if(!isDefined(level.zombie_include_equipment)) {
+  level.zombie_include_equipment = [];
+}
 
-  level.zombie_include_equipment[getweapon(equipment_name)] = 1;
+level.zombie_include_equipment[getweapon(equipment_name)] = 1;
 }
 
 set_ammo_driven(equipment_name, start, refill_max_ammo = 0) {

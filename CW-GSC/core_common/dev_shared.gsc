@@ -647,7 +647,7 @@ function get_lookat_origin(player) {
   dir = vectorscale(forward, 8000);
   eye = player getEye();
   trace = bulletTrace(eye, eye + dir, 0, undefined);
-  return trace[# "position"];
+  return trace[#"position"];
 }
 
 function draw_pathnode(node, color) {
@@ -819,7 +819,7 @@ function function_7de15c85(spiral) {
 function function_98c05766(spiral) {
   spawn_point = function_7de15c85(spiral);
   trace = bulletTrace(spawn_point + (0, 0, 100), spawn_point, 0, self);
-  return trace[# "position"];
+  return trace[#"position"];
 }
 
 function function_4783f10c(spiral) {

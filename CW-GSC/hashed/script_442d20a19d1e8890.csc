@@ -113,17 +113,17 @@ function register(var_f1385203) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "incursion_infiltrationtitlecards"])) {
-    level.var_ae746e8f[# "incursion_infiltrationtitlecards"] = [];
+  if(!isDefined(level.var_ae746e8f[#"incursion_infiltrationtitlecards"])) {
+    level.var_ae746e8f[#"incursion_infiltrationtitlecards"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "incursion_infiltrationtitlecards"])) {
-    level.var_ae746e8f[# "incursion_infiltrationtitlecards"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "incursion_infiltrationtitlecards"])) {
-    level.var_ae746e8f[# "incursion_infiltrationtitlecards"] = array(level.var_ae746e8f[# "incursion_infiltrationtitlecards"]);
+  if(!isDefined(level.var_ae746e8f[#"incursion_infiltrationtitlecards"])) {
+    level.var_ae746e8f[#"incursion_infiltrationtitlecards"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"incursion_infiltrationtitlecards"])) {
+    level.var_ae746e8f[#"incursion_infiltrationtitlecards"] = array(level.var_ae746e8f[#"incursion_infiltrationtitlecards"]);
   }
 
-  level.var_ae746e8f[# "incursion_infiltrationtitlecards"][level.var_ae746e8f[# "incursion_infiltrationtitlecards"].size] = elem;
+  level.var_ae746e8f[#"incursion_infiltrationtitlecards"][level.var_ae746e8f[#"incursion_infiltrationtitlecards"].size] = elem;
 }
 
 function register_clientside() {

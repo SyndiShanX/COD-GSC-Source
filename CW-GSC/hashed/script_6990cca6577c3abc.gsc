@@ -45,8 +45,8 @@ function private preinit() {
     level.var_91f71aa = array(level.var_91f71aa);
   }
 
-  level.var_91f71aa[# "axe_gun_energetic_shard_item_t9"] = &function_d243e3bc;
-  level.var_91f71aa[# "axe_gun_volatile_crystal_item_t9"] = &function_6492d995;
+  level.var_91f71aa[#"axe_gun_energetic_shard_item_t9"] = &function_d243e3bc;
+  level.var_91f71aa[#"axe_gun_volatile_crystal_item_t9"] = &function_6492d995;
 
   if(!isDefined(level.var_6e197241)) {
     level.var_6e197241 = [];
@@ -54,8 +54,8 @@ function private preinit() {
     level.var_6e197241 = array(level.var_6e197241);
   }
 
-  level.var_6e197241[# "ww_axe_gun_melee_t9"] = 1;
-  level.var_6e197241[# "ww_axe_gun_melee_t9_upgraded"] = 1;
+  level.var_6e197241[#"ww_axe_gun_melee_t9"] = 1;
+  level.var_6e197241[#"ww_axe_gun_melee_t9_upgraded"] = 1;
 
   if(!isDefined(level.var_299abeff)) {
     level.var_299abeff = [];
@@ -63,10 +63,10 @@ function private preinit() {
     level.var_299abeff = array(level.var_299abeff);
   }
 
-  level.var_299abeff[# "ww_axe_gun_melee_t9"] = &function_5a35d482;
-  level.var_299abeff[# "ww_axe_gun_melee_t9_upgraded"] = &function_5a35d482;
-  level.var_299abeff[# "hash_18696150427f2efb"] = &function_5a35d482;
-  level.var_299abeff[# "hash_7eab88123b09e2c"] = &function_5a35d482;
+  level.var_299abeff[#"ww_axe_gun_melee_t9"] = &function_5a35d482;
+  level.var_299abeff[#"ww_axe_gun_melee_t9_upgraded"] = &function_5a35d482;
+  level.var_299abeff[#"hash_18696150427f2efb"] = &function_5a35d482;
+  level.var_299abeff[#"hash_7eab88123b09e2c"] = &function_5a35d482;
 
   if(!isDefined(level.var_3216bc47)) {
     level.var_3216bc47 = [];
@@ -74,10 +74,10 @@ function private preinit() {
     level.var_3216bc47 = array(level.var_3216bc47);
   }
 
-  level.var_3216bc47[# "ww_axe_gun_melee_t9"] = &function_f53bdacf;
-  level.var_3216bc47[# "ww_axe_gun_melee_t9_upgraded"] = &function_f53bdacf;
-  level.var_3216bc47[# "hash_18696150427f2efb"] = &function_f53bdacf;
-  level.var_3216bc47[# "hash_7eab88123b09e2c"] = &function_f53bdacf;
+  level.var_3216bc47[#"ww_axe_gun_melee_t9"] = &function_f53bdacf;
+  level.var_3216bc47[#"ww_axe_gun_melee_t9_upgraded"] = &function_f53bdacf;
+  level.var_3216bc47[#"hash_18696150427f2efb"] = &function_f53bdacf;
+  level.var_3216bc47[#"hash_7eab88123b09e2c"] = &function_f53bdacf;
 
   if(!isDefined(level.var_faabb06f)) {
     level.var_faabb06f = [];
@@ -603,11 +603,11 @@ function private axe_throw_start(weapon, start_origin) {
   end_position = start_position + forward_direction * 750;
   var_87916932 = bulletTrace(start_position, end_position, 0, self);
 
-  if(var_87916932[# "fraction"] < 1) {
-    end_position = var_87916932[# "position"];
+  if(var_87916932[#"fraction"] < 1) {
+    end_position = var_87916932[#"position"];
   }
 
-  var_2b94b479 = 1 * var_87916932[# "fraction"];
+  var_2b94b479 = 1 * var_87916932[#"fraction"];
 
   if(var_2b94b479 < 0.01) {
     var_2b94b479 = 0.01;
@@ -714,8 +714,8 @@ function function_c3a6cbeb() {
   end = start + forward * 750;
   trace = bulletTrace(start, end, 1, self);
 
-  if(trace[# "fraction"] < 1) {
-    end = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    end = trace[#"position"];
   }
 
   return end;
@@ -791,8 +791,8 @@ function function_24e9dbc2(position, array, var_e7b59cda) {
   var_7914206d = position - (0, 0, 50);
   ground_trace = groundtrace(position, var_7914206d, 0, self);
 
-  if(ground_trace[# "fraction"] > 0.01 && ground_trace[# "fraction"] < 1) {
-    var_7914206d = ground_trace[# "position"];
+  if(ground_trace[#"fraction"] > 0.01 && ground_trace[#"fraction"] < 1) {
+    var_7914206d = ground_trace[#"position"];
   }
 
   return array::get_all_closest(var_7914206d, array, undefined, undefined, var_e7b59cda);
@@ -1084,7 +1084,7 @@ function function_4e036cff(item_name) {
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
   trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
   drop_item = function_4ba8fde(item_name);
-  item = item_drop::drop_item(0, undefined, 1, 0, drop_item.id, trace[# "position"]);
+  item = item_drop::drop_item(0, undefined, 1, 0, drop_item.id, trace[#"position"]);
 }
 
 function function_c1fdd154(item_name) {

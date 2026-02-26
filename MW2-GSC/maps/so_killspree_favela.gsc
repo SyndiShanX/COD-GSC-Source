@@ -166,47 +166,47 @@ so_favela_init() {
 
 // --------------------------------------------------------------------------------- //	Challenge Initializations
 // --------------------------------------------------------------------------------- start_so_favela() {
-  so_favela_init();
+so_favela_init();
 
-  thread enable_escape_warning();
-  thread enable_escape_failure();
-  enable_challenge_timer("start_so_killspree_favela", "challenge_success");
+thread enable_escape_warning();
+thread enable_escape_failure();
+enable_challenge_timer("start_so_killspree_favela", "challenge_success");
 
-  array_thread(level.players, ::hud_create_kill_counter);
-  array_thread(level.players, ::hud_create_civ_counter);
-  thread fade_challenge_in();
-  thread fade_challenge_out("challenge_success");
+array_thread(level.players, ::hud_create_kill_counter);
+array_thread(level.players, ::hud_create_civ_counter);
+thread fade_challenge_in();
+thread fade_challenge_out("challenge_success");
 
-  flag_wait("start_so_killspree_favela");
-  wait 1;
-  flag_set("favela_enemies_spawned");
+flag_wait("start_so_killspree_favela");
+wait 1;
+flag_set("favela_enemies_spawned");
 
-  // set off favela enemy AIs
-  original_roof_spawn_trig = getent("favela_spawn_trigger", "script_noteworthy");
-  seeker_spawn_trig = getent("so_favela_spawn_trigger", "script_noteworthy");
+// set off favela enemy AIs
+original_roof_spawn_trig = getent("favela_spawn_trigger", "script_noteworthy");
+seeker_spawn_trig = getent("so_favela_spawn_trigger", "script_noteworthy");
 
-  first_wave_trigs = [];
-  first_wave_trigs[0] = seeker_spawn_trig;
+first_wave_trigs = [];
+first_wave_trigs[0] = seeker_spawn_trig;
 
-  if(randomint(100) > 66)
-    first_wave_trigs[1] = original_roof_spawn_trig;
+if(randomint(100) > 66)
+  first_wave_trigs[1] = original_roof_spawn_trig;
 
-  favela_spawn_ambush_trigger = getent("so_favela_ambush_spawn_trigger", "script_noteworthy");
+favela_spawn_ambush_trigger = getent("so_favela_ambush_spawn_trigger", "script_noteworthy");
 
-  spawn_enemy_secondary_wave(favela_spawn_ambush_trigger, int(level.enemy_ambush_wave_size));
-  spawn_enemy_secondary_wave(first_wave_trigs, int(level.enemy_seek_wave_size));
+spawn_enemy_secondary_wave(favela_spawn_ambush_trigger, int(level.enemy_ambush_wave_size));
+spawn_enemy_secondary_wave(first_wave_trigs, int(level.enemy_seek_wave_size));
 
-  wait 2;
+wait 2;
 
-  //thread enemy_population_watch( 0.5, 5 );	// ( delay, sampling interval in seconds, sampling buffer duration in seconds )
+//thread enemy_population_watch( 0.5, 5 );	// ( delay, sampling interval in seconds, sampling buffer duration in seconds )
 
-  thread enemy_type_monitor();
+thread enemy_type_monitor();
 
-  thread release_doggy();
-  thread doggy_attack();
-  thread enemy_refill(10, seeker_spawn_trig, favela_spawn_ambush_trigger);
-  thread enemy_remove_when_max(10);
-  thread battlechatter_on("axis");
+thread release_doggy();
+thread doggy_attack();
+thread enemy_refill(10, seeker_spawn_trig, favela_spawn_ambush_trigger);
+thread enemy_remove_when_max(10);
+thread battlechatter_on("axis");
 }
 
 // takes both array of triggers or just one

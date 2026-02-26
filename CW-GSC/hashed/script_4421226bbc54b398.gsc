@@ -122,8 +122,8 @@ function function_e439076f(var_5937b8ee) {
   level scoreevents::doscoreeventcallback("scoreEventZM", {
     #attacker: self, #scoreevent: var_5937b8ee
   });
-  assert(isDefined(level.scoreinfo[var_5937b8ee][# "xp"]), "<dev string:x38>");
-  var_370ac26d = level.scoreinfo[var_5937b8ee][# "xp"];
+  assert(isDefined(level.scoreinfo[var_5937b8ee][#"xp"]), "<dev string:x38>");
+  var_370ac26d = level.scoreinfo[var_5937b8ee][#"xp"];
   self luinotifyevent(#"hash_6743fb07d8c3b4b0", 1, var_370ac26d);
   namespace_8d0ae0b4::function_b9cd2b6c(var_370ac26d);
 }
@@ -1057,7 +1057,7 @@ function function_868c9a6e() {
         arr = strtok(str, "<dev string:xe9>");
         var_a4a3ca3a = arr[0];
         amount = arr[1];
-        var_e1f0e492 = [# "hash_65febbdf3f1ab4d7", hash(var_a4a3ca3a)];
+        var_e1f0e492 = [#"hash_65febbdf3f1ab4d7", hash(var_a4a3ca3a)];
         players = getplayers();
 
         foreach(player in players) {

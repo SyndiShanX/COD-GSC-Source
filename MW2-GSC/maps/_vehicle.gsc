@@ -1771,7 +1771,7 @@ vehicle_kill() {
 
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // some tank and turret cleanup
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - if(isDefined(self.rumbletrigger))
-      self.rumbletrigger Delete();
+    self.rumbletrigger Delete();
 
     if(isDefined(self.mgturret)) {
       array_levelthread(self.mgturret, ::turret_deleteme);
@@ -1779,11 +1779,11 @@ vehicle_kill() {
     }
 
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - if(isDefined(self.script_team))
-      level.vehicles[self.script_team] = array_remove(level.vehicles[self.script_team], self);
+    level.vehicles[self.script_team] = array_remove(level.vehicles[self.script_team], self);
 
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // previously unstuff
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - if(isDefined(self.script_linkName))
-      level.vehicle_link[self.script_linkName] = array_remove(level.vehicle_link[self.script_linkName], self);
+    level.vehicle_link[self.script_linkName] = array_remove(level.vehicle_link[self.script_linkName], self);
 
     // dis - associate with targets
 
@@ -1810,7 +1810,7 @@ vehicle_kill() {
     }
 
     // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - if(isDefined(level.vehicle_rumble[type]))
-      self StopRumble(level.vehicle_rumble[type].rumble);
+    self StopRumble(level.vehicle_rumble[type].rumble);
 
     if(isDefined(level.vehicle_death_thread[type]))
       thread[[level.vehicle_death_thread[type]]]();
@@ -4411,106 +4411,106 @@ tank_crush(crushedVehicle, endNode, tankAnim, truckAnim, animTree, soundAlias) {
 
   // -- -- -- -- -- -- -- -- -- -- - // Debug Lines
   // -- -- -- -- -- -- -- -- -- -- - if(getDvar("debug_tankcrush") == "1") {
-    // line to where tank1 is
-    thread draw_line_from_ent_for_time(level.player, animatedTank.origin, 1, 0, 0, animLength / 2);
+  // line to where tank1 is
+  thread draw_line_from_ent_for_time(level.player, animatedTank.origin, 1, 0, 0, animLength / 2);
 
-    // line to where tank1 SHOULD be
-    thread draw_line_from_ent_for_time(level.player, anim_start_org, 0, 1, 0, animLength / 2);
+  // line to where tank1 SHOULD be
+  thread draw_line_from_ent_for_time(level.player, anim_start_org, 0, 1, 0, animLength / 2);
 
-    // line to the dummy
-    thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
-  }
+  // line to the dummy
+  thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
+}
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // Animate the animatable tank and self correct into the crushed vehicle
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- if(isDefined(soundAlias))
-    level thread play_sound_in_space(soundAlias, node_origin);
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // Animate the animatable tank and self correct into the crushed vehicle
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- if(isDefined(soundAlias))
+level thread play_sound_in_space(soundAlias, node_origin);
 
-  animatedTank LinkTo(dummy);
-  crushedVehicle UseAnimTree(animTree);
-  animatedTank UseAnimTree(animTree);
+animatedTank LinkTo(dummy);
+crushedVehicle UseAnimTree(animTree);
+animatedTank UseAnimTree(animTree);
 
-  Assert(isDefined(level._vehicle_effect["tankcrush"]["window_med"]));
-  Assert(isDefined(level._vehicle_effect["tankcrush"]["window_large"]));
+Assert(isDefined(level._vehicle_effect["tankcrush"]["window_med"]));
+Assert(isDefined(level._vehicle_effect["tankcrush"]["window_large"]));
 
-  crushedVehicle thread tank_crush_fx_on_tag("tag_window_left_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.2);
-  crushedVehicle thread tank_crush_fx_on_tag("tag_window_right_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.4);
-  crushedVehicle thread tank_crush_fx_on_tag("tag_windshield_back_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 0.7);
-  crushedVehicle thread tank_crush_fx_on_tag("tag_windshield_front_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 1.5);
+crushedVehicle thread tank_crush_fx_on_tag("tag_window_left_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.2);
+crushedVehicle thread tank_crush_fx_on_tag("tag_window_right_glass_fx", level._vehicle_effect["tankcrush"]["window_med"], "veh_glass_break_small", 0.4);
+crushedVehicle thread tank_crush_fx_on_tag("tag_windshield_back_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 0.7);
+crushedVehicle thread tank_crush_fx_on_tag("tag_windshield_front_glass_fx", level._vehicle_effect["tankcrush"]["window_large"], "veh_glass_break_large", 1.5);
 
-  crushedVehicle AnimScripted("tank_crush_anim", node_origin, node_angles, truckAnim);
-  animatedTank AnimScripted("tank_crush_anim", dummy.origin, dummy.angles, tankAnim);
+crushedVehicle AnimScripted("tank_crush_anim", node_origin, node_angles, truckAnim);
+animatedTank AnimScripted("tank_crush_anim", dummy.origin, dummy.angles, tankAnim);
 
-  dummy MoveTo(node_origin, move_to_time, (move_to_time / 2), (move_to_time / 2));
-  dummy RotateTo(node_angles, move_to_time, (move_to_time / 2), (move_to_time / 2));
-  wait move_to_time;
+dummy MoveTo(node_origin, move_to_time, (move_to_time / 2), (move_to_time / 2));
+dummy RotateTo(node_angles, move_to_time, (move_to_time / 2), (move_to_time / 2));
+wait move_to_time;
 
-  animLength -= move_to_time;
-  animLength -= move_from_time;
+animLength -= move_to_time;
+animLength -= move_from_time;
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // Tank plays animation in the exact correct location for a while
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - wait animLength;
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // Tank plays animation in the exact correct location for a while
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - wait animLength;
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // Calculate Ending Point for the animation from crushedVehicle
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // get anim ending point origin and angle
-  // anim_end_org = anim_start_org + GetMoveDelta( tankAnim, 0, 1 );
-  temp = spawn("script_model", (anim_start_org));
-  temp.angles = anim_start_ang;
-  anim_end_org = temp LocalToWorldCoords(GetMoveDelta(tankAnim, 0, 1));
-  anim_end_ang = anim_start_ang + (0, GetAngleDelta(tankAnim, 0, 1), 0);
-  temp Delete();
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // Calculate Ending Point for the animation from crushedVehicle
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // get anim ending point origin and angle
+// anim_end_org = anim_start_org + GetMoveDelta( tankAnim, 0, 1 );
+temp = spawn("script_model", (anim_start_org));
+temp.angles = anim_start_ang;
+anim_end_org = temp LocalToWorldCoords(GetMoveDelta(tankAnim, 0, 1));
+anim_end_ang = anim_start_ang + (0, GetAngleDelta(tankAnim, 0, 1), 0);
+temp Delete();
 
-  // get anim ending point vecs
-  animEndingVec_Forward = anglesToForward(anim_end_ang);
-  animEndingVec_Up = AnglesToUp(anim_end_ang);
-  animEndingVec_Right = AnglesToRight(anim_end_ang);
+// get anim ending point vecs
+animEndingVec_Forward = anglesToForward(anim_end_ang);
+animEndingVec_Up = AnglesToUp(anim_end_ang);
+animEndingVec_Right = AnglesToRight(anim_end_ang);
 
-  // get ending tank pos vecs
-  attachPos = self GetAttachPos(endNode);
-  tank_Forward = anglesToForward(attachPos[1]);
-  tank_Up = AnglesToUp(attachPos[1]);
-  tank_Right = AnglesToRight(attachPos[1]);
+// get ending tank pos vecs
+attachPos = self GetAttachPos(endNode);
+tank_Forward = anglesToForward(attachPos[1]);
+tank_Up = AnglesToUp(attachPos[1]);
+tank_Right = AnglesToRight(attachPos[1]);
 
-  // see what the dummy's final origin will be
-  offset_Vec = (node_origin - anim_end_org);
-  offset_Forward = VectorDot(offset_Vec, animEndingVec_Forward);
-  offset_Up = VectorDot(offset_Vec, animEndingVec_Up);
-  offset_Right = VectorDot(offset_Vec, animEndingVec_Right);
-  dummy.final_origin = attachPos[0];
-  dummy.final_origin += vector_multiply(tank_Forward, offset_Forward);
-  dummy.final_origin += vector_multiply(tank_Up, offset_Up);
-  dummy.final_origin += vector_multiply(tank_Right, offset_Right);
+// see what the dummy's final origin will be
+offset_Vec = (node_origin - anim_end_org);
+offset_Forward = VectorDot(offset_Vec, animEndingVec_Forward);
+offset_Up = VectorDot(offset_Vec, animEndingVec_Up);
+offset_Right = VectorDot(offset_Vec, animEndingVec_Right);
+dummy.final_origin = attachPos[0];
+dummy.final_origin += vector_multiply(tank_Forward, offset_Forward);
+dummy.final_origin += vector_multiply(tank_Up, offset_Up);
+dummy.final_origin += vector_multiply(tank_Right, offset_Right);
 
-  // set dummy angles to reflect the different in animation starting angles and the tanks actual angles
-  offset_Vec = anglesToForward(node_angles);
-  offset_Forward = VectorDot(offset_Vec, animEndingVec_Forward);
-  offset_Up = VectorDot(offset_Vec, animEndingVec_Up);
-  offset_Right = VectorDot(offset_Vec, animEndingVec_Right);
-  dummyVec = vector_multiply(tank_Forward, offset_Forward);
-  dummyVec += vector_multiply(tank_Up, offset_Up);
-  dummyVec += vector_multiply(tank_Right, offset_Right);
-  dummy.final_angles = VectorToAngles(dummyVec);
+// set dummy angles to reflect the different in animation starting angles and the tanks actual angles
+offset_Vec = anglesToForward(node_angles);
+offset_Forward = VectorDot(offset_Vec, animEndingVec_Forward);
+offset_Up = VectorDot(offset_Vec, animEndingVec_Up);
+offset_Right = VectorDot(offset_Vec, animEndingVec_Right);
+dummyVec = vector_multiply(tank_Forward, offset_Forward);
+dummyVec += vector_multiply(tank_Up, offset_Up);
+dummyVec += vector_multiply(tank_Right, offset_Right);
+dummy.final_angles = VectorToAngles(dummyVec);
 
-  // -- -- -- -- -- -- -- -- -- -- - // Debug Lines
-  // -- -- -- -- -- -- -- -- -- -- - if(getDvar("debug_tankcrush") == "1") {
-    // line to where tank2 is
-    thread draw_line_from_ent_for_time(level.player, self.origin, 1, 0, 0, animLength / 2);
+// -- -- -- -- -- -- -- -- -- -- - // Debug Lines
+// -- -- -- -- -- -- -- -- -- -- - if(getDvar("debug_tankcrush") == "1") {
+// line to where tank2 is
+thread draw_line_from_ent_for_time(level.player, self.origin, 1, 0, 0, animLength / 2);
 
-    // line to where tank2 SHOULD be
-    thread draw_line_from_ent_for_time(level.player, anim_end_org, 0, 1, 0, animLength / 2);
+// line to where tank2 SHOULD be
+thread draw_line_from_ent_for_time(level.player, anim_end_org, 0, 1, 0, animLength / 2);
 
-    // line to the dummy
-    thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
-  }
+// line to the dummy
+thread draw_line_from_ent_to_ent_for_time(level.player, dummy, 0, 0, 1, animLength / 2);
+}
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // Tank uncorrects to the real location of the tank on the spline
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - dummy MoveTo(dummy.final_origin, move_from_time, (move_from_time / 2), (move_from_time / 2));
-  dummy RotateTo(dummy.final_angles, move_from_time, (move_from_time / 2), (move_from_time / 2));
-  wait move_from_time;
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - // Tank uncorrects to the real location of the tank on the spline
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- - dummy MoveTo(dummy.final_origin, move_from_time, (move_from_time / 2), (move_from_time / 2));
+dummy RotateTo(dummy.final_angles, move_from_time, (move_from_time / 2), (move_from_time / 2));
+wait move_from_time;
 
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // Tank is done animating now, remove the animatable tank and show the real one( they should be perfectly aligned now )
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- self DontInterpolate();
-  self AttachPath(endNode);
-  dummy_to_vehicle();
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- // Tank is done animating now, remove the animatable tank and show the real one( they should be perfectly aligned now )
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- self DontInterpolate();
+self AttachPath(endNode);
+dummy_to_vehicle();
 }
 
 tank_crush_fx_on_tag(tagName, fxName, soundAlias, startDelay) {

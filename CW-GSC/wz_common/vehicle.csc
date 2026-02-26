@@ -13,8 +13,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[# "plane_ambient"] = # "hash_3cb3a6fc9eb00337";
-  level._effect[# "plane_ambient_high_alt"] = # "hash_3919b64dc762cab2";
+  level._effect[#"plane_ambient"] = # "hash_3cb3a6fc9eb00337";
+  level._effect[#"plane_ambient_high_alt"] = # "hash_3919b64dc762cab2";
   vehicle::function_2f97bc52("vehicle_t9_plane_flyable_prototype", &function_58e95b55);
   vehicle::function_cd2ede5("vehicle_t9_plane_flyable_prototype", &function_84f28fd9);
 }

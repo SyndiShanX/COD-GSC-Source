@@ -474,8 +474,7 @@ onPickup(player) {
 }
 
 onDrop(player) {
-  if(level.bombPlanted) {
-  } else {
+  if(level.bombPlanted) {} else {
     if(isDefined(player)) {
       printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", self maps\mp\gametypes\_gameobjects::getOwnerTeam(), player);
     }

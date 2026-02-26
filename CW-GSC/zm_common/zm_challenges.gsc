@@ -73,7 +73,7 @@ function private preinit() {
     level.var_417f4274[level.var_417f4274.size] = new_throttle;
   }
 
-  level.var_faccd7d4 = [# "hash_2138b9a62ba26ce3": &function_8c48d8ff, #"hash_749cd3eb9a2fe063": &function_8c48d8ff, #"hash_1f8a926447abe886": &function_8c48d8ff, #"hash_116e94a600e48352": &function_486d4ce3];
+  level.var_faccd7d4 = [#"hash_2138b9a62ba26ce3": &function_8c48d8ff, #"hash_749cd3eb9a2fe063": &function_8c48d8ff, #"hash_1f8a926447abe886": &function_8c48d8ff, #"hash_116e94a600e48352": &function_486d4ce3];
 }
 
 function private function_74872db6() {
@@ -1741,7 +1741,7 @@ function function_5bec2304() {
       case # "hash_504b40f717f89167":
       case # "hash_504b3ff717f88fb4":
       case # "hash_504b3ef717f88e01":
-        self.var_bd0352a9[# "talent_quickrevive"] = 1;
+        self.var_bd0352a9[#"talent_quickrevive"] = 1;
         self stats::function_dad108fa("talent_quickrevive_drank", 1);
         break;
       case # "hash_520b59b0216b70be":
@@ -1750,7 +1750,7 @@ function function_5bec2304() {
       case # "hash_520b5ab0216b7271":
       case # "hash_520b5bb0216b7424":
       case # "hash_520b5cb0216b75d7":
-        self.var_bd0352a9[# "talent_speedcola"] = 1;
+        self.var_bd0352a9[#"talent_speedcola"] = 1;
         self stats::function_dad108fa("talent_speedcola_drank", 1);
         break;
       case # "hash_1f95b18e4a49da31":
@@ -1759,7 +1759,7 @@ function function_5bec2304() {
       case # "hash_1f95b38e4a49dd97":
       case # "hash_1f95b48e4a49df4a":
       case # "hash_1f95b08e4a49d87e":
-        self.var_bd0352a9[# "talent_deadshot"] = 1;
+        self.var_bd0352a9[#"talent_deadshot"] = 1;
         self stats::function_dad108fa("talent_deadshot_drank", 1);
         break;
       case # "talent_doubletap":
@@ -1768,7 +1768,7 @@ function function_5bec2304() {
       case # "talent_doubletap":
       case # "talent_doubletap":
       case # "talent_doubletap":
-        self.var_bd0352a9[# "talent_doubletap"] = 1;
+        self.var_bd0352a9[#"talent_doubletap"] = 1;
         self stats::function_dad108fa("talent_doubletap_drank", 1);
         break;
       case # "hash_afdc57f440fb620":
@@ -1777,7 +1777,7 @@ function function_5bec2304() {
       case # "hash_afdcb7f440fc052":
       case # "hash_afdcc7f440fc205":
       case # "hash_47d7a8105237c88":
-        self.var_bd0352a9[# "hash_47d7a8105237c88"] = 1;
+        self.var_bd0352a9[#"hash_47d7a8105237c88"] = 1;
         self stats::function_dad108fa("talent_juggernog_drank", 1);
         break;
       case # "hash_17ccbbee64daa20e":
@@ -1786,7 +1786,7 @@ function function_5bec2304() {
       case # "hash_17ccbeee64daa727":
       case # "hash_17ccbaee64daa05b":
       case # "talent_staminup":
-        self.var_bd0352a9[# "talent_staminup"] = 1;
+        self.var_bd0352a9[#"talent_staminup"] = 1;
         self stats::function_dad108fa("talent_staminup_drank", 1);
         break;
       case # "talent_elemental_pop":
@@ -1795,7 +1795,7 @@ function function_5bec2304() {
       case # "talent_elemental_pop_1":
       case # "talent_elemental_pop_4":
       case # "talent_elemental_pop_5":
-        self.var_bd0352a9[# "talent_elemental_pop"] = 1;
+        self.var_bd0352a9[#"talent_elemental_pop"] = 1;
         self stats::function_dad108fa("talent_elemental_pop_drank", 1);
         break;
       case # "hash_38c08136902fd553":
@@ -1804,7 +1804,7 @@ function function_5bec2304() {
       case # "hash_59dbecf72baaa96f":
       case # "hash_59dbedf72baaab22":
       case # "hash_59dbeef72baaacd5":
-        self.var_bd0352a9[# "hash_38c08136902fd553"] = 1;
+        self.var_bd0352a9[#"hash_38c08136902fd553"] = 1;
         self stats::function_dad108fa("talent_tombstone_drank", 1);
         break;
     }
@@ -1818,7 +1818,7 @@ function function_5bec2304() {
     var_1a8aaae7 = self stats::get_stat_global("talent_speedcola_drank");
     var_169c7afa = self stats::get_stat_global("talent_tombstone_drank");
 
-    if(var_fff94a73 === 1 && self.var_bd0352a9[# "talent_elemental_pop"] === 1 || var_317c380d === 1 && self.var_bd0352a9[# "talent_staminup"] === 1 || var_a47cc4dd === 1 && self.var_bd0352a9[# "hash_47d7a8105237c88"] === 1 || var_325628d7 === 1 && self.var_bd0352a9[# "talent_doubletap"] === 1 || var_32feae61 === 1 && self.var_bd0352a9[# "talent_deadshot"] === 1 || var_6d1d99a3 === 1 && self.var_bd0352a9[# "talent_quickrevive"] === 1 || var_1a8aaae7 === 1 && self.var_bd0352a9[# "talent_speedcola"] === 1 || var_169c7afa === 1 && self.var_bd0352a9[# "hash_38c08136902fd553"] === 1) {
+    if(var_fff94a73 === 1 && self.var_bd0352a9[#"talent_elemental_pop"] === 1 || var_317c380d === 1 && self.var_bd0352a9[#"talent_staminup"] === 1 || var_a47cc4dd === 1 && self.var_bd0352a9[#"hash_47d7a8105237c88"] === 1 || var_325628d7 === 1 && self.var_bd0352a9[#"talent_doubletap"] === 1 || var_32feae61 === 1 && self.var_bd0352a9[#"talent_deadshot"] === 1 || var_6d1d99a3 === 1 && self.var_bd0352a9[#"talent_quickrevive"] === 1 || var_1a8aaae7 === 1 && self.var_bd0352a9[#"talent_speedcola"] === 1 || var_169c7afa === 1 && self.var_bd0352a9[#"hash_38c08136902fd553"] === 1) {
       self zm_stats::increment_challenge_stat(#"hash_39fd6dba5e5b592f");
     }
 
@@ -1909,7 +1909,7 @@ function function_b3862180() {
 
     if(is_true(level.var_ce7af4fa)) {
       if(waitresult.zone_name === "zone_bunny_room_1" || waitresult.zone_name === "zone_bunny_room_2") {
-        level.var_d7ca0fe[# "hash_d002a29a2fe6e72"] = 1;
+        level.var_d7ca0fe[#"hash_d002a29a2fe6e72"] = 1;
       } else {
         zone_name = [[level.var_27028b8e]](self zm_zonemgr::get_player_zone());
 
@@ -1999,7 +1999,7 @@ function function_5bce3615() {
   foreach(zone in level.zones) {
     if(isDefined(level.var_27028b8e)) {
       if(zone.name === "zone_bunny_room_1" || zone.name === "zone_bunny_room_2") {
-        level.var_d7ca0fe[# "hash_d002a29a2fe6e72"] = 0;
+        level.var_d7ca0fe[#"hash_d002a29a2fe6e72"] = 0;
         continue;
       }
 
@@ -2635,10 +2635,10 @@ function function_1dd9fc03() {
   if(var_845ac04e != 1) {
     self stats::set_stat_global("t9_tu5_zm_dark_matter_fixedup", 1);
     weapon_names = [];
-    weapon_names[# "weapon_tactical"] = [# "tr_damagesemi_t9", #"tr_longburst_t9", #"tr_powerburst_t9", #"tr_precisionsemi_t9"];
-    weapon_names[# "weapon_smg"] = [# "smg_standard_t9", #"smg_heavy_t9", #"smg_handling_t9", #"smg_fastfire_t9", #"smg_capacity_t9", #"smg_burst_t9"];
+    weapon_names[#"weapon_tactical"] = [#"tr_damagesemi_t9", #"tr_longburst_t9", #"tr_powerburst_t9", #"tr_precisionsemi_t9"];
+    weapon_names[#"weapon_smg"] = [#"smg_standard_t9", #"smg_heavy_t9", #"smg_handling_t9", #"smg_fastfire_t9", #"smg_capacity_t9", #"smg_burst_t9"];
 
-    foreach(weapon in weapon_names[# "weapon_tactical"]) {
+    foreach(weapon in weapon_names[#"weapon_tactical"]) {
       var_79aea5cb = 0;
       var_d33334c3 = 0;
       var_782a947 = 0;
@@ -2716,8 +2716,8 @@ function function_1dd9fc03() {
       }
     }
 
-    if(isDefined(weapon_names[# "weapon_smg"])) {
-      foreach(weapon in weapon_names[# "weapon_smg"]) {
+    if(isDefined(weapon_names[#"weapon_smg"])) {
+      foreach(weapon in weapon_names[#"weapon_smg"]) {
         var_d4bdcb67 = self stats::get_stat(#"item_stats", weapon, #"challenges", #"challengevalue");
 
         if(!isDefined(var_d4bdcb67)) {

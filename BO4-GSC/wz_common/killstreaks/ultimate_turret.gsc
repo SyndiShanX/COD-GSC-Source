@@ -63,7 +63,7 @@ function_6c288c45(spawnorigin, spawnangles) {
   }
 
   if(isDefined(turretvehicle.killstreaksettings)) {
-    level.killstreakbundle[# "ultimate_turret"] = struct::get_script_bundle("killstreak", turretvehicle.killstreaksettings);
+    level.killstreakbundle[#"ultimate_turret"] = struct::get_script_bundle("killstreak", turretvehicle.killstreaksettings);
   }
 
   bundle = get_killstreak_bundle();
@@ -236,7 +236,7 @@ function_9101e29a() {
 }
 
 get_killstreak_bundle() {
-  return level.killstreakbundle[# "ultimate_turret"];
+  return level.killstreakbundle[#"ultimate_turret"];
 }
 
 is_valid_target(potential_target, friendly_team) {

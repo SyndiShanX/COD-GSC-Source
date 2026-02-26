@@ -37,7 +37,7 @@ function printonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player iprintln(text);
     }
   }
@@ -49,7 +49,7 @@ function printboldonteam(text, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player iprintlnbold(text);
     }
   }
@@ -61,7 +61,7 @@ function printboldonteamarg(text, team, arg) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -74,7 +74,7 @@ function printonplayers(text, team) {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(team)) {
-      if(isDefined(players[i].pers[# "team"]) && players[i].pers[# "team"] == team) {
+      if(isDefined(players[i].pers[#"team"]) && players[i].pers[#"team"] == team) {
         players[i] iprintln(text);
       }
 
@@ -116,7 +116,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
   if(level.splitscreen || !shoulddosounds) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      playerteam = player.pers[# "team"];
+      playerteam = player.pers[#"team"];
 
       if(isDefined(playerteam)) {
         if(playerteam == team && isDefined(printfriendly) && printfriendly != # "") {
@@ -150,7 +150,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
   if(shoulddoenemysounds) {
     for(i = 0; i < level.players.size; i++) {
       player = level.players[i];
-      playerteam = player.pers[# "team"];
+      playerteam = player.pers[#"team"];
 
       if(isDefined(playerteam)) {
         if(playerteam == team) {
@@ -177,7 +177,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
 
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
-    playerteam = player.pers[# "team"];
+    playerteam = player.pers[#"team"];
 
     if(isDefined(playerteam)) {
       if(playerteam == team) {
@@ -670,7 +670,7 @@ function isprophuntgametype() {
 }
 
 function isprop() {
-  return isDefined(self.pers[# "team"]) && self.pers[# "team"] == game.defenders;
+  return isDefined(self.pers[#"team"]) && self.pers[#"team"] == game.defenders;
 }
 
 function function_6f4ff113(team) {
@@ -695,7 +695,7 @@ function function_ff74bf7(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         return i;
       }

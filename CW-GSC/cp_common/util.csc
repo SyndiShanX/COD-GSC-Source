@@ -137,8 +137,8 @@ function force_stream_weapons(localclientnum, weaponarray) {
 
 function function_d96391ba() {
   level.var_dd9e1cd5 = [];
-  level._effect[# "player_cold_breath"] = # "hash_3276d891dff1f743";
-  level._effect[# "ai_cold_breath"] = # "hash_326fec91dfebfa91";
+  level._effect[#"player_cold_breath"] = # "hash_3276d891dff1f743";
+  level._effect[#"ai_cold_breath"] = # "hash_326fec91dfebfa91";
   clientfield::register("toplayer", "player_cold_breath", 1, 1, "int", &function_73d83dae, 0, 0);
   clientfield::register("actor", "ai_cold_breath", 1, 1, "counter", &function_f39fc31d, 0, 0);
 }
@@ -163,7 +163,7 @@ function function_9340eb56(localclientnum) {
 
   while(is_true(level.var_dd9e1cd5[localclientnum])) {
     wait randomintrange(5, 7);
-    playfxoncamera(localclientnum, level._effect[# "player_cold_breath"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
+    playfxoncamera(localclientnum, level._effect[#"player_cold_breath"], (0, 0, 0), (1, 0, 0), (0, 0, 1));
   }
 }
 
@@ -172,7 +172,7 @@ function function_f39fc31d(localclientnum, oldval, newval, bnewent, binitialsnap
 
   while(isalive(self)) {
     wait randomintrange(6, 8);
-    playFXOnTag(bwastimejump, level._effect[# "ai_cold_breath"], self, "j_head");
+    playFXOnTag(bwastimejump, level._effect[#"ai_cold_breath"], self, "j_head");
   }
 }
 
@@ -258,7 +258,7 @@ function function_8e4d84eb(localclientnum, bundlename) {
   var_c846ce25 = 0;
 
   while(true) {
-    var_a23c6f11 = player function_ca4b4e19(localclientnum, 0)[# "move"][1];
+    var_a23c6f11 = player function_ca4b4e19(localclientnum, 0)[#"move"][1];
     zoom_frac = lerpfloat(zoom_frac, function_b5338ccb(var_a23c6f11, var_2c46fc48.var_b4e0311b), 0.25);
     var_e8be0c0e = abs(var_a23c6f11) != 0 && (zoom_frac < 0 && var_cbcfc238 > var_2c46fc48.var_11f00a95 || zoom_frac > 0 && var_cbcfc238 < var_2c46fc48.var_8dd70933);
 
@@ -302,7 +302,7 @@ function function_8e4d84eb(localclientnum, bundlename) {
     eye = player getEye();
     fwd = anglesToForward(player getcamangles());
     trace = physicstrace(eye, eye + fwd * var_2c46fc48.var_e99a5258, var_c5e00469, var_43ac2595, player, 1);
-    var_de79cd4c = distance(eye, trace[# "position"] + fwd * var_43ac2595[0]);
+    var_de79cd4c = distance(eye, trace[#"position"] + fwd * var_43ac2595[0]);
 
     if(var_58cb5a30 < player getclienttime() && abs(var_de79cd4c - var_e17c45e2) < var_2c46fc48.var_b5adab9c) {
       var_e17c45e2 = lerpfloat(var_e17c45e2, var_de79cd4c, 0.5);
@@ -317,7 +317,7 @@ function function_8e4d84eb(localclientnum, bundlename) {
 
     if(getdvarint(#"hash_2e5a9052a4b09249", 0)) {
       var_31a761bf = absangleclamp360(player getcamangles()[1]);
-      box(trace[# "position"] + fwd * var_43ac2595[0], var_c5e00469, var_43ac2595, var_31a761bf, (1, 0, 0), 1, 0, 1);
+      box(trace[#"position"] + fwd * var_43ac2595[0], var_c5e00469, var_43ac2595, var_31a761bf, (1, 0, 0), 1, 0, 1);
     }
 
     waitframe(1);

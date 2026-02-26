@@ -40,7 +40,7 @@ function_fbcc1e50() {
 
   level flagsys::wait_till(#"all_players_spawned");
 
-  if(self.slot_weapons[# "lethal_grenade"] === getweapon(#"eq_frag_grenade")) {
+  if(self.slot_weapons[#"lethal_grenade"] === getweapon(#"eq_frag_grenade")) {
     self takeweapon(getweapon(#"eq_frag_grenade"));
     self giveweapon(getweapon(#"eq_frag_grenade_extra"));
     self zm_loadout::set_player_lethal_grenade(getweapon(#"eq_frag_grenade_extra"));

@@ -570,15 +570,15 @@ function on_player_spawned() {
     }
   }
 
-  if(isDefined(self.pers) && isDefined(self.pers[# "lives"])) {
+  if(isDefined(self.pers) && isDefined(self.pers[#"lives"])) {
     self spawn::function_1390f875();
 
-    if(self.pers[# "lives"] != 1 && !is_true(self.var_874448e8)) {
+    if(self.pers[#"lives"] != 1 && !is_true(self.var_874448e8)) {
       self clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 1);
       self.var_874448e8 = 1;
     }
 
-    if(self.pers[# "lives"] == 1) {
+    if(self.pers[#"lives"] == 1) {
       self clientfield::set_player_uimodel("hudItems.playerCanRedeploy", 0);
     }
   }
@@ -921,8 +921,8 @@ function private function_1e150a0b(player) {
   for(index = 0; index < var_9c24b065; index++) {
     var_708a2754 = physicstrace(startpos, endpos, (0, 0, 0), (0, 0, 0), player, 32);
 
-    if(var_708a2754[# "fraction"] < 1) {
-      player setorigin(var_708a2754[# "position"]);
+    if(var_708a2754[#"fraction"] < 1) {
+      player setorigin(var_708a2754[#"position"]);
       return;
     }
 

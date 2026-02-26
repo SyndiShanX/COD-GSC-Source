@@ -23,7 +23,7 @@ function private preinit() {
 
 function init_juggernaut() {
   if(is_true(level.enable_magic)) {
-    level._effect[# "jugger_light"] = "zombie/fx_perk_juggernaut_ndu";
+    level._effect[#"jugger_light"] = "zombie/fx_perk_juggernaut_ndu";
   }
 }
 

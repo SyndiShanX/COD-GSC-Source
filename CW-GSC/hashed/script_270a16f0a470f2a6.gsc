@@ -234,7 +234,7 @@ function function_667bc5b7() {
 
 function function_a7cf8b16(a_ents) {
   level endon(#"end_game", #"hash_bd7f36c4031280d");
-  var_e82701bb = a_ents[# "hash_4b65a37172a01802"];
+  var_e82701bb = a_ents[#"hash_4b65a37172a01802"];
   var_e82701bb clientfield::set("" + # "hash_5808d23568bc787", 1);
   var_e82701bb setCanDamage(1);
   var_e82701bb.health = 1000;

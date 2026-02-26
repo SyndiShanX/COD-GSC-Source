@@ -133,18 +133,18 @@ function_264bcab7(weapon) {
 function_e5ed6edb(weapon) {
   weaponoptions = self getbuildkitweaponoptions(weapon);
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[# "activecamo"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[#"activecamo"])) {
     return;
   }
 
   var_3ded6a21 = getcamoindex(weaponoptions);
   var_a99ac61d = getactivecamo(var_3ded6a21);
 
-  if(!isDefined(var_a99ac61d) || !isDefined(self.pers[# "activecamo"][var_a99ac61d])) {
+  if(!isDefined(var_a99ac61d) || !isDefined(self.pers[#"activecamo"][var_a99ac61d])) {
     return;
   }
 
-  return self.pers[# "activecamo"][var_a99ac61d];
+  return self.pers[#"activecamo"][var_a99ac61d];
 }
 
 function_d0ae71bb(weapon) {

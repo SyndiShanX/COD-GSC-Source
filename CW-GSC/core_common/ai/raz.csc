@@ -20,14 +20,14 @@ function autoexec main() {
 }
 
 function autoexec precache() {
-  level._effect[# "fx_mech_foot_step"] = "dlc1/castle/fx_mech_foot_step";
-  level._effect[# "hash_c824652e58b5fdf"] = "zm_ai/fx9_raz_mc_shockwave_projectile_impact";
-  level._effect[# "fx_bul_impact_concrete_xtreme"] = "impacts/fx_bul_impact_concrete_xtreme";
-  level._effect[# "hash_7d199c49ab77b780"] = "zm_ai/fx9_raz_mc_shockwave_projectile";
-  level._effect[# "hash_494b459d33f13b6"] = "zm_ai/fx9_raz_dest_weak_point_exp";
-  level._effect[# "hash_656c73c7e4336a47"] = "zm_ai/fx9_raz_dest_weak_point_sparking_loop";
-  level._effect[# "hash_7badd093aab9e236"] = "zm_ai/fx9_raz_dmg_weak_point";
-  level._effect[# "hash_4faeb86b1620aac4"] = "zm_ai/fx9_raz_dest_weak_point_exp_generic";
+  level._effect[#"fx_mech_foot_step"] = "dlc1/castle/fx_mech_foot_step";
+  level._effect[#"hash_c824652e58b5fdf"] = "zm_ai/fx9_raz_mc_shockwave_projectile_impact";
+  level._effect[#"fx_bul_impact_concrete_xtreme"] = "impacts/fx_bul_impact_concrete_xtreme";
+  level._effect[#"hash_7d199c49ab77b780"] = "zm_ai/fx9_raz_mc_shockwave_projectile";
+  level._effect[#"hash_494b459d33f13b6"] = "zm_ai/fx9_raz_dest_weak_point_exp";
+  level._effect[#"hash_656c73c7e4336a47"] = "zm_ai/fx9_raz_dest_weak_point_sparking_loop";
+  level._effect[#"hash_7badd093aab9e236"] = "zm_ai/fx9_raz_dmg_weak_point";
+  level._effect[#"hash_4faeb86b1620aac4"] = "zm_ai/fx9_raz_dest_weak_point_exp_generic";
   level.var_b8d03316 = [];
 
   if(!isDefined(level.var_b8d03316)) {
@@ -216,15 +216,15 @@ function function_525f8122(localclientnum, pos, surface, notetrack, bone) {
     e_player playrumbleonentity(surface, "reload_small");
   }
 
-  fx = util::playFXOnTag(surface, level._effect[# "fx_mech_foot_step"], self, bone);
+  fx = util::playFXOnTag(surface, level._effect[#"fx_mech_foot_step"], self, bone);
 }
 
 function private function_e7290ec2(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = playFX(wasdemojump, level._effect[# "hash_c824652e58b5fdf"], self.origin);
+  fx = playFX(wasdemojump, level._effect[#"hash_c824652e58b5fdf"], self.origin);
 }
 
 function private function_868b328b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = playFX(wasdemojump, level._effect[# "fx_bul_impact_concrete_xtreme"], self.origin);
+  fx = playFX(wasdemojump, level._effect[#"fx_bul_impact_concrete_xtreme"], self.origin);
 }
 
 function private function_dc17c6d6(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -234,7 +234,7 @@ function private function_dc17c6d6(localclientnum, oldvalue, newvalue, bnewent, 
   }
 
   if(wasdemojump == 1 && !isDefined(self.var_475864c)) {
-    self.var_475864c = util::playFXOnTag(fieldname, level._effect[# "hash_7d199c49ab77b780"], self, "tag_origin");
+    self.var_475864c = util::playFXOnTag(fieldname, level._effect[#"hash_7d199c49ab77b780"], self, "tag_origin");
   }
 }
 
@@ -265,7 +265,7 @@ function private function_16686fd4(localclientnum, model, pos, angles, hitpos, v
 }
 
 function private function_27830d87(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = util::playFXOnTag(wasdemojump, level._effect[# "hash_494b459d33f13b6"], self, "TAG_FX_Shoulder_RI_GIB");
+  fx = util::playFXOnTag(wasdemojump, level._effect[#"hash_494b459d33f13b6"], self, "TAG_FX_Shoulder_RI_GIB");
   var_96f5534c = self gettagorigin("j_elbow_ri");
   var_bcffa218 = self gettagangles("j_elbow_ri");
   var_2c37b16f = self gettagorigin("j_shouldertwist_ri_attach");
@@ -275,7 +275,7 @@ function private function_27830d87(localclientnum, oldvalue, newvalue, bnewent, 
 }
 
 function private function_250b46c7(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  fx = util::playFXOnTag(wasdemojump, level._effect[# "hash_7badd093aab9e236"], self, "j_shoulder_ri");
+  fx = util::playFXOnTag(wasdemojump, level._effect[#"hash_7badd093aab9e236"], self, "j_shoulder_ri");
 }
 
 function private applynewfaceanim(localclientnum, animation) {

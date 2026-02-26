@@ -31,7 +31,7 @@ init_craftables() {
   in_game_checklist_setup();
 }
 
-#include_key_craftable(craftable_name, model_name) {
+include_key_craftable(craftable_name, model_name) {
   part_key = generate_zombie_craftable_piece(craftable_name, undefined, model_name, 32, 15, 0, undefined, ::onpickup_key, undefined, undefined, undefined, undefined, undefined, undefined, 1);
   part = spawnStruct();
   part.name = craftable_name;
@@ -40,7 +40,7 @@ init_craftables() {
   include_craftable(part);
 }
 
-#include_craftables() {
+include_craftables() {
   level.zombie_include_craftables["open_table"].custom_craftablestub_update_prompt = ::prison_open_craftablestub_update_prompt;
   craftable_name = "alcatraz_shield_zm";
   riotshield_dolly = generate_zombie_craftable_piece(craftable_name, "dolly", "t6_wpn_zmb_shield_dlc2_dolly", 32, 64, 0, undefined, ::onpickup_common, ::ondrop_common, undefined, undefined, undefined, undefined, "piece_riotshield_dolly", 1, "build_zs");

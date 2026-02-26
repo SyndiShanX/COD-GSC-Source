@@ -139,7 +139,7 @@ function mayspawn() {
       gamehasstarted = level.maxplayercount > 1 || !util::isoneround() && !util::isfirstround();
     }
 
-    if(!self.pers[# "lives"]) {
+    if(!self.pers[#"lives"]) {
       return false;
     } else if(gamehasstarted) {
       if(!level.ingraceperiod && !self.hasspawned) {
@@ -153,8 +153,8 @@ function mayspawn() {
 
 function timeuntilwavespawn(minimumwait) {
   earliestspawntime = gettime() + int(minimumwait * 1000);
-  lastwavetime = level.lastwave[self.pers[# "team"]];
-  wavedelay = int(level.wavedelay[self.pers[# "team"]] * 1000);
+  lastwavetime = level.lastwave[self.pers[#"team"]];
+  wavedelay = int(level.wavedelay[self.pers[#"team"]] * 1000);
 
   if(wavedelay == 0) {
     return 0;
@@ -258,7 +258,7 @@ function spawnplayer() {
 
   if(level.inprematchperiod) {
     self val::set(#"prematch", "ignoreme", 1);
-    team = self.pers[# "team"];
+    team = self.pers[#"team"];
   } else {
     self val::reset(#"prematch", "freezecontrols");
     self enableweapons();
@@ -289,8 +289,8 @@ function spawnplayer() {
     pixendevent();
   }
 
-  if(isDefined(self.pers[# "momentum"])) {
-    self.momentum = self.pers[# "momentum"];
+  if(isDefined(self.pers[#"momentum"])) {
+    self.momentum = self.pers[#"momentum"];
   }
 
   pixendevent();
@@ -360,7 +360,7 @@ function in_spawnspectator(origin, angles) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     self.statusicon = "";
   } else {
     self.statusicon = "hud_status_dead";
@@ -396,13 +396,13 @@ function forcespawn(time) {
     return;
   }
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     return;
   }
 
-  if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
-    self.pers[# "class"] = "CLASS_CUSTOM1";
-    self.curclass = self.pers[# "class"];
+  if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
+    self.pers[#"class"] = "CLASS_CUSTOM1";
+    self.curclass = self.pers[#"class"];
   }
 
   self globallogic_ui::closemenus();
@@ -451,7 +451,7 @@ function kickifidontspawninternal() {
     return;
   }
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     return;
   }
 
@@ -561,7 +561,7 @@ function allteamsnearscorelimit() {
   }
 
   foreach(team, _ in level.teams) {
-    if(!(game.stat[# "teamscores"][team] >= level.scorelimit - 1)) {
+    if(!(game.stat[#"teamscores"][team] >= level.scorelimit - 1)) {
       return false;
     }
   }
@@ -590,7 +590,7 @@ function shouldshowrespawnmessage() {
 }
 
 function default_spawnmessage() {
-  hud_message::setlowermessage(game.strings[# "spawn_next_round"]);
+  hud_message::setlowermessage(game.strings[#"spawn_next_round"]);
   self thread globallogic_ui::removespawnmessageshortly(3);
 }
 
@@ -679,9 +679,9 @@ function waitandspawnclient(timealreadypassed) {
 
   if(timeuntilspawn > 0) {
     if(level.playerqueuedrespawn) {
-      hud_message::setlowermessage(game.strings[# "you_will_spawn"], timeuntilspawn);
+      hud_message::setlowermessage(game.strings[#"you_will_spawn"], timeuntilspawn);
     } else {
-      hud_message::setlowermessage(game.strings[# "waiting_to_spawn"], timeuntilspawn);
+      hud_message::setlowermessage(game.strings[#"waiting_to_spawn"], timeuntilspawn);
     }
 
     if(!spawnedasspectator) {
@@ -748,7 +748,7 @@ function waitandspawnclient(timealreadypassed) {
   wavebased = level.waverespawndelay > 0;
 
   if(!level.playerforcerespawn && self.hasspawned && !wavebased && !self.wantsafespawn && !level.playerqueuedrespawn && !spawnedasspectator) {
-    hud_message::setlowermessage(game.strings[# "press_to_spawn"]);
+    hud_message::setlowermessage(game.strings[#"press_to_spawn"]);
 
     if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + (0, 0, 60), self.angles);
@@ -813,8 +813,8 @@ function function_bb88905b(var_4dff964a) {
     lui::screen_fade_out(0, (1, 1, 1), "spectate_spawn");
   }
 
-  [[level.var_ad332481[# "fullscreenblack"]]] - > close(self);
-  [[level.var_ad332481[# "fullscreenblack"]]] - > open(self, 1);
+  [[level.var_ad332481[#"fullscreenblack"]]] - > close(self);
+  [[level.var_ad332481[#"fullscreenblack"]]] - > open(self, 1);
 
   if(s_notify._notify == "timeout") {
     while(self.sessionstate !== "playing") {
@@ -825,7 +825,7 @@ function function_bb88905b(var_4dff964a) {
   }
 
   util::wait_network_frame(2);
-  [[level.var_ad332481[# "fullscreenblack"]]] - > close(self);
+  [[level.var_ad332481[#"fullscreenblack"]]] - > close(self);
   util::wait_network_frame(2);
   lui::screen_fade_in(0.3, (1, 1, 1), "spectate_spawn");
   self.var_bb88905b = 0;

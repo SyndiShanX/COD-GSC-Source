@@ -273,7 +273,7 @@ function_6aaeff92(n_quest) {
 pablo_lift_init() {
   level.var_f45a0bfd = struct::get("pablo_lift", "targetname");
   level.var_f45a0bfd flagsys::wait_till(#"scene_ents_ready");
-  level.var_f45a0bfd.var_e205fbb = level.var_f45a0bfd.scene_ents[# "prop 1"];
+  level.var_f45a0bfd.var_e205fbb = level.var_f45a0bfd.scene_ents[#"prop 1"];
   level.var_f45a0bfd.is_moving = 0;
 
   for(i = 0; i < 12; i++) {

@@ -68,27 +68,27 @@ growling() {
 }
 
 registernotetracks() {
-  anim.notetracks[# "anim_pose = "stand ""] = &notetrackposestand;
-  anim.notetracks[# "anim_pose = "crouch ""] = &notetrackposecrouch;
-  anim.notetracks[# "anim_movement = "stop ""] = &notetrackmovementstop;
-  anim.notetracks[# "anim_movement = "walk ""] = &notetrackmovementwalk;
-  anim.notetracks[# "anim_movement = "run ""] = &notetrackmovementrun;
-  anim.notetracks[# "anim_alertness = causal"] = &notetrackalertnesscasual;
-  anim.notetracks[# "anim_alertness = alert"] = &notetrackalertnessalert;
-  anim.notetracks[# "gravity on"] = &notetrackgravity;
-  anim.notetracks[# "gravity off"] = &notetrackgravity;
-  anim.notetracks[# "hash_3a65333187809d2e"] = &notetrackgravity;
-  anim.notetracks[# "bodyfall large"] = &notetrackbodyfall;
-  anim.notetracks[# "bodyfall small"] = &notetrackbodyfall;
-  anim.notetracks[# "footstep"] = &notetrackfootstep;
-  anim.notetracks[# "step"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_right_large"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_right_small"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_left_large"] = &notetrackfootstep;
-  anim.notetracks[# "footstep_left_small"] = &notetrackfootstep;
-  anim.notetracks[# "footscrape"] = &notetrackfootscrape;
-  anim.notetracks[# "land"] = &notetrackland;
-  anim.notetracks[# "start_ragdoll"] = &notetrackstartragdoll;
+  anim.notetracks[#"anim_pose = "stand ""] = &notetrackposestand;
+  anim.notetracks[#"anim_pose = "crouch ""] = &notetrackposecrouch;
+  anim.notetracks[#"anim_movement = "stop ""] = &notetrackmovementstop;
+  anim.notetracks[#"anim_movement = "walk ""] = &notetrackmovementwalk;
+  anim.notetracks[#"anim_movement = "run ""] = &notetrackmovementrun;
+  anim.notetracks[#"anim_alertness = causal"] = &notetrackalertnesscasual;
+  anim.notetracks[#"anim_alertness = alert"] = &notetrackalertnessalert;
+  anim.notetracks[#"gravity on"] = &notetrackgravity;
+  anim.notetracks[#"gravity off"] = &notetrackgravity;
+  anim.notetracks[#"hash_3a65333187809d2e"] = &notetrackgravity;
+  anim.notetracks[#"bodyfall large"] = &notetrackbodyfall;
+  anim.notetracks[#"bodyfall small"] = &notetrackbodyfall;
+  anim.notetracks[#"footstep"] = &notetrackfootstep;
+  anim.notetracks[#"step"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_right_large"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_right_small"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_left_large"] = &notetrackfootstep;
+  anim.notetracks[#"footstep_left_small"] = &notetrackfootstep;
+  anim.notetracks[#"footscrape"] = &notetrackfootscrape;
+  anim.notetracks[#"land"] = &notetrackland;
+  anim.notetracks[#"start_ragdoll"] = &notetrackstartragdoll;
 }
 
 notetrackstopanim(note, flagname) {}

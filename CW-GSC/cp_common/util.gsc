@@ -167,7 +167,7 @@ function printonteam(text, str_team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == str_team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == str_team) {
       player iprintln(text);
     }
   }
@@ -180,7 +180,7 @@ function printboldonteam(text, str_team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == str_team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == str_team) {
       player iprintlnbold(text);
     }
   }
@@ -193,7 +193,7 @@ function printboldonteamarg(text, str_team, arg) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == str_team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == str_team) {
       player iprintlnbold(text, arg);
     }
   }
@@ -207,7 +207,7 @@ function printonplayers(text, str_team) {
 
   for(i = 0; i < players.size; i++) {
     if(isDefined(str_team)) {
-      if(isDefined(players[i].pers[# "team"]) && players[i].pers[# "team"] == str_team) {
+      if(isDefined(players[i].pers[#"team"]) && players[i].pers[#"team"] == str_team) {
         players[i] iprintln(text);
       }
 
@@ -1131,7 +1131,7 @@ function function_502198f3(var_67df10fb = 4) {
 
   if(!namespace_61e6d095::exists(#"checkpoint_reached")) {
     namespace_61e6d095::create(#"checkpoint_reached", #"hash_bca0ed0cade1b34");
-    namespace_61e6d095::function_d3c3e5c3(#"checkpoint_reached", [# "interactive_map", #"dialog_tree", #"computer"]);
+    namespace_61e6d095::function_d3c3e5c3(#"checkpoint_reached", [#"interactive_map", #"dialog_tree", #"computer"]);
     namespace_61e6d095::function_46df0bc7(#"checkpoint_reached", 1000);
   }
 
@@ -1154,7 +1154,7 @@ function function_b9dfcfb7(var_67df10fb = 4) {
 
   if(!namespace_61e6d095::exists(#"hash_4362296ac2fe0d63")) {
     namespace_61e6d095::create(#"hash_4362296ac2fe0d63", #"hash_35889974967db979");
-    namespace_61e6d095::function_d3c3e5c3(#"hash_4362296ac2fe0d63", [# "interactive_map", #"dialog_tree", #"computer"]);
+    namespace_61e6d095::function_d3c3e5c3(#"hash_4362296ac2fe0d63", [#"interactive_map", #"dialog_tree", #"computer"]);
     namespace_61e6d095::function_46df0bc7(#"hash_4362296ac2fe0d63", 1000);
   }
 
@@ -1733,7 +1733,7 @@ function function_a5318821(var_79a934ad = 1, var_6fa12df4 = 0, var_64b54706 = un
     var_f82db92c = var_64b54706;
   }
 
-  var_1afba46e = [# "cp_rus_amerika", #"cp_nam_armada", #"cp_rus_duga", #"cp_rus_kgb", #"cp_nam_prisoner", #"cp_nic_revolucion", #"cp_ger_hub", #"cp_rus_siege", #"cp_ger_stakeout", #"cp_hub_infil_combat"];
+  var_1afba46e = [#"cp_rus_amerika", #"cp_nam_armada", #"cp_rus_duga", #"cp_rus_kgb", #"cp_nam_prisoner", #"cp_nic_revolucion", #"cp_ger_hub", #"cp_rus_siege", #"cp_ger_stakeout", #"cp_hub_infil_combat"];
 
   for(lookup = 0; lookup < var_1afba46e.size; lookup++) {
     if(var_1afba46e[lookup] == var_f82db92c) {

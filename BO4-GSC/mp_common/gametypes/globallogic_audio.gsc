@@ -32,54 +32,54 @@ __init__() {
 }
 
 init() {
-  game.music[# "defeat"] = "mus_defeat";
-  game.music[# "victory_spectator"] = "mus_defeat";
-  game.music[# "winning"] = "mus_time_running_out_winning";
-  game.music[# "losing"] = "mus_time_running_out_losing";
-  game.music[# "match_end"] = "mus_match_end";
-  game.music[# "victory_tie"] = "mus_defeat";
-  game.music[# "spawn_short"] = "SPAWN_SHORT";
-  game.music[# "suspense"] = [];
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_01";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_02";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_03";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_04";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_05";
-  game.music[# "suspense"][game.music[# "suspense"].size] = "mus_suspense_06";
+  game.music[#"defeat"] = "mus_defeat";
+  game.music[#"victory_spectator"] = "mus_defeat";
+  game.music[#"winning"] = "mus_time_running_out_winning";
+  game.music[#"losing"] = "mus_time_running_out_losing";
+  game.music[#"match_end"] = "mus_match_end";
+  game.music[#"victory_tie"] = "mus_defeat";
+  game.music[#"spawn_short"] = "SPAWN_SHORT";
+  game.music[#"suspense"] = [];
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_01";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_02";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_03";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_04";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_05";
+  game.music[#"suspense"][game.music[#"suspense"].size] = "mus_suspense_06";
   level callback::function_d8abfc3d(#"on_end_game", &on_end_game);
   level.multipledialogkeys = [];
-  level.multipledialogkeys[# "enemyaitank"] = "enemyAiTankMultiple";
-  level.multipledialogkeys[# "enemysupplydrop"] = "enemySupplyDropMultiple";
-  level.multipledialogkeys[# "enemycombatrobot"] = "enemyCombatRobotMultiple";
-  level.multipledialogkeys[# "enemycounteruav"] = "enemyCounterUavMultiple";
-  level.multipledialogkeys[# "enemydart"] = "enemyDartMultiple";
-  level.multipledialogkeys[# "enemyemp"] = "enemyEmpMultiple";
-  level.multipledialogkeys[# "enemymicrowaveturret"] = "enemyMicrowaveTurretMultiple";
-  level.multipledialogkeys[# "enemyrcbomb"] = "enemyRcBombMultiple";
-  level.multipledialogkeys[# "enemyplanemortar"] = "enemyPlaneMortarMultiple";
-  level.multipledialogkeys[# "enemyhelicoptergunner"] = "enemyHelicopterGunnerMultiple";
-  level.multipledialogkeys[# "enemyraps"] = "enemyRapsMultiple";
-  level.multipledialogkeys[# "enemydronestrike"] = "enemyDroneStrikeMultiple";
-  level.multipledialogkeys[# "enemyturret"] = "enemyTurretMultiple";
-  level.multipledialogkeys[# "enemyhelicopter"] = "enemyHelicopterMultiple";
-  level.multipledialogkeys[# "enemyuav"] = "enemyUavMultiple";
-  level.multipledialogkeys[# "enemysatellite"] = "enemySatelliteMultiple";
-  level.multipledialogkeys[# "friendlyaitank"] = "";
-  level.multipledialogkeys[# "friendlysupplydrop"] = "";
-  level.multipledialogkeys[# "friendlycombatrobot"] = "";
-  level.multipledialogkeys[# "friendlycounteruav"] = "";
-  level.multipledialogkeys[# "friendlydart"] = "";
-  level.multipledialogkeys[# "friendlyemp"] = "";
-  level.multipledialogkeys[# "friendlymicrowaveturret"] = "";
-  level.multipledialogkeys[# "friendlyrcbomb"] = "";
-  level.multipledialogkeys[# "friendlyplanemortar"] = "";
-  level.multipledialogkeys[# "friendlyhelicoptergunner"] = "";
-  level.multipledialogkeys[# "friendlyraps"] = "";
-  level.multipledialogkeys[# "friendlydronestrike"] = "";
-  level.multipledialogkeys[# "friendlyturret"] = "";
-  level.multipledialogkeys[# "friendlyhelicopter"] = "";
-  level.multipledialogkeys[# "friendlyuav"] = "";
-  level.multipledialogkeys[# "friendlysatellite"] = "";
+  level.multipledialogkeys[#"enemyaitank"] = "enemyAiTankMultiple";
+  level.multipledialogkeys[#"enemysupplydrop"] = "enemySupplyDropMultiple";
+  level.multipledialogkeys[#"enemycombatrobot"] = "enemyCombatRobotMultiple";
+  level.multipledialogkeys[#"enemycounteruav"] = "enemyCounterUavMultiple";
+  level.multipledialogkeys[#"enemydart"] = "enemyDartMultiple";
+  level.multipledialogkeys[#"enemyemp"] = "enemyEmpMultiple";
+  level.multipledialogkeys[#"enemymicrowaveturret"] = "enemyMicrowaveTurretMultiple";
+  level.multipledialogkeys[#"enemyrcbomb"] = "enemyRcBombMultiple";
+  level.multipledialogkeys[#"enemyplanemortar"] = "enemyPlaneMortarMultiple";
+  level.multipledialogkeys[#"enemyhelicoptergunner"] = "enemyHelicopterGunnerMultiple";
+  level.multipledialogkeys[#"enemyraps"] = "enemyRapsMultiple";
+  level.multipledialogkeys[#"enemydronestrike"] = "enemyDroneStrikeMultiple";
+  level.multipledialogkeys[#"enemyturret"] = "enemyTurretMultiple";
+  level.multipledialogkeys[#"enemyhelicopter"] = "enemyHelicopterMultiple";
+  level.multipledialogkeys[#"enemyuav"] = "enemyUavMultiple";
+  level.multipledialogkeys[#"enemysatellite"] = "enemySatelliteMultiple";
+  level.multipledialogkeys[#"friendlyaitank"] = "";
+  level.multipledialogkeys[#"friendlysupplydrop"] = "";
+  level.multipledialogkeys[#"friendlycombatrobot"] = "";
+  level.multipledialogkeys[#"friendlycounteruav"] = "";
+  level.multipledialogkeys[#"friendlydart"] = "";
+  level.multipledialogkeys[#"friendlyemp"] = "";
+  level.multipledialogkeys[#"friendlymicrowaveturret"] = "";
+  level.multipledialogkeys[#"friendlyrcbomb"] = "";
+  level.multipledialogkeys[#"friendlyplanemortar"] = "";
+  level.multipledialogkeys[#"friendlyhelicoptergunner"] = "";
+  level.multipledialogkeys[#"friendlyraps"] = "";
+  level.multipledialogkeys[#"friendlydronestrike"] = "";
+  level.multipledialogkeys[#"friendlyturret"] = "";
+  level.multipledialogkeys[#"friendlyhelicopter"] = "";
+  level.multipledialogkeys[#"friendlyuav"] = "";
+  level.multipledialogkeys[#"friendlysatellite"] = "";
 }
 
 function_6e084fd3(var_37ecca7, taacombundle) {
@@ -388,8 +388,8 @@ play_next_killstreak_dialog() {
     return;
   }
 
-  if(isDefined(self.pers[# "mptaacom"])) {
-    taacombundle = struct::get_script_bundle("mpdialog_taacom", self.pers[# "mptaacom"]);
+  if(isDefined(self.pers[#"mptaacom"])) {
+    taacombundle = struct::get_script_bundle("mpdialog_taacom", self.pers[#"mptaacom"]);
   } else {
     self.killstreakdialogqueue = [];
     self.currentkillstreakdialog = undefined;
@@ -469,11 +469,11 @@ leader_dialog(dialogkey, team, excludelist, objectivekey, killstreakid, dialogbu
   assert(isDefined(level.players));
 
   foreach(player in level.players) {
-    if(!isDefined(player.pers[# "team"])) {
+    if(!isDefined(player.pers[#"team"])) {
       continue;
     }
 
-    if(isDefined(team) && team != player.pers[# "team"]) {
+    if(isDefined(team) && team != player.pers[#"team"]) {
       continue;
     }
 
@@ -743,11 +743,11 @@ play_equipment_hacked_on_player() {
 }
 
 get_commander_dialog_alias(dialogkey) {
-  if(!isDefined(self.pers[# "mpcommander"])) {
+  if(!isDefined(self.pers[#"mpcommander"])) {
     return undefined;
   }
 
-  commanderbundle = struct::get_script_bundle("mpdialog_commander", self.pers[# "mpcommander"]);
+  commanderbundle = struct::get_script_bundle("mpdialog_commander", self.pers[#"mpcommander"]);
   return get_dialog_bundle_alias(commanderbundle, dialogkey);
 }
 
@@ -772,11 +772,11 @@ get_dialog_bundle_alias(dialogbundle, dialogkey) {
 }
 
 is_team_winning(checkteam) {
-  score = game.stat[# "teamscores"][checkteam];
+  score = game.stat[#"teamscores"][checkteam];
 
   foreach(team, _ in level.teams) {
     if(team != checkteam) {
-      if(game.stat[# "teamscores"][team] >= score) {
+      if(game.stat[#"teamscores"][team] >= score) {
         return false;
       }
     }
@@ -803,7 +803,7 @@ play_2d_on_team(alias, team) {
   for(i = 0; i < level.players.size; i++) {
     player = level.players[i];
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player playlocalsound(alias);
     }
   }
@@ -949,7 +949,7 @@ set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, return_st
       continue;
     }
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player thread set_music_on_player(state, wait_time, save_state, return_state);
     }
   }
@@ -1009,11 +1009,11 @@ function_85818e24(var_9c1ed9ea, team) {
 
   if(isDefined(team)) {
     foreach(player in level.players) {
-      if(!isDefined(player.pers[# "team"])) {
+      if(!isDefined(player.pers[#"team"])) {
         continue;
       }
 
-      if(isDefined(team) && team != player.pers[# "team"]) {
+      if(isDefined(team) && team != player.pers[#"team"]) {
         continue;
       }
 

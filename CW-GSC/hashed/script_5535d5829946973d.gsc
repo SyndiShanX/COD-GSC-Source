@@ -169,7 +169,7 @@ function function_b5b112b() {
 
   while(true) {
     if(isDefined(s_scene_forest_intro.scene_ents)) {
-      var_9ac68214 = s_scene_forest_intro.scene_ents[# "heli"];
+      var_9ac68214 = s_scene_forest_intro.scene_ents[#"heli"];
       break;
     }
 
@@ -1203,9 +1203,9 @@ function function_e25ef0de() {
   println("<dev string:x76>");
   var_78d6f873 = spawner::simple_spawn("ai_enemy_helipad", &namespace_fc3e8cb::function_e57eea9a);
   var_595b3c05 = spawner::simple_spawn("ai_enemy_helipad_trio_scene", &namespace_fc3e8cb::function_e57eea9a);
-  var_175962cd[# "hash_73d1f08772b74de5"] = var_595b3c05[0];
-  var_175962cd[# "hash_73d1ed8772b748cc"] = var_595b3c05[1];
-  var_175962cd[# "hash_73d1ee8772b74a7f"] = var_595b3c05[2];
+  var_175962cd[#"hash_73d1f08772b74de5"] = var_595b3c05[0];
+  var_175962cd[#"hash_73d1ed8772b748cc"] = var_595b3c05[1];
+  var_175962cd[#"hash_73d1ee8772b74a7f"] = var_595b3c05[2];
   s_scene = struct::get("s_scene_helipad_talking_trio", "targetname");
   s_scene thread scene::play("scene_amk_0000_ambient_talking_trio_standing_armed_a", var_175962cd);
   var_78d6f873 = arraycombine(var_78d6f873, var_595b3c05);
@@ -1371,7 +1371,7 @@ function function_4ce0578d() {
     if(b_passed == 1) {
       level.woods aimatentityik(ai_enemy_helipad);
       ai_enemy_helipad.diequietly = 1;
-      playFXOnTag(level._effect[# "hash_6d7d7fc52e3d089c"], level.woods, "tag_flash");
+      playFXOnTag(level._effect[#"hash_6d7d7fc52e3d089c"], level.woods, "tag_flash");
       magicbullet(getweapon(#"sniper_quickscope_t9", "suppressed"), s_helipad_woods_mb_start.origin, ai_enemy_helipad getEye(), level.woods);
       snd::play("evt_prj_whizby_sniper", ai_enemy_helipad);
       snd::play("evt_prj_bullet_impact_sniper_flesh", ai_enemy_helipad);
@@ -1986,7 +1986,7 @@ function private function_b49d9d8a(var_ed03deed = 1) {
   b_trace = sighttracepassed(var_ec67a181, v_player_pos, 0, self);
 
   if(b_trace == 1) {
-    playFXOnTag(level._effect[# "hash_7fa91cf654f23aa0"], self, var_c197f9aa);
+    playFXOnTag(level._effect[#"hash_7fa91cf654f23aa0"], self, var_c197f9aa);
     var_1c8839e = v_player_pos + (0, 0, 16);
     magicbullet(var_e3dd3903, var_1c8839e, v_player_pos);
   } else {

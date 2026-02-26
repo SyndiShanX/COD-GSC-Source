@@ -254,7 +254,7 @@ function function_6c66b650() {
 }
 
 function function_a4b3da97(trace) {
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 
@@ -447,23 +447,23 @@ function function_15de8daf() {
             tripwire.var_d33355ff[tripwire.var_d33355ff.size] = self;
             trace = beamtrace(tripwire.var_db7f2def, self.var_db7f2def, 1, self, 0, 0, tripwire, 1);
 
-            if(trace[# "fraction"] < 0.99) {
-              if(function_430b5b99(trace[# "entity"], self)) {
+            if(trace[#"fraction"] < 0.99) {
+              if(function_430b5b99(trace[#"entity"], self)) {
                 level notify(#"tripwire_detonation", {
-                  #entity: trace[# "entity"]
+                  #entity: trace[#"entity"]
                 });
-                self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[# "entity"]);
+                self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[#"entity"]);
               }
 
-              if(function_55e95173(trace[# "entity"])) {
+              if(function_55e95173(trace[#"entity"])) {
                 trace = beamtrace(self.var_db7f2def, tripwire.var_db7f2def, 1, self, 0, 0, tripwire, 1);
 
-                if(trace[# "fraction"] < 0.99) {
-                  if(function_430b5b99(trace[# "entity"], self)) {
+                if(trace[#"fraction"] < 0.99) {
+                  if(function_430b5b99(trace[#"entity"], self)) {
                     level notify(#"tripwire_detonation", {
-                      #entity: trace[# "entity"]
+                      #entity: trace[#"entity"]
                     });
-                    self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[# "entity"]);
+                    self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[#"entity"]);
                   }
                 }
               }
@@ -486,8 +486,8 @@ function function_15de8daf() {
       if(dotrace) {
         trace = beamtrace(self.var_db7f2def - self.hitnormal * 5, endpos, 1, self);
 
-        if(trace[# "fraction"] < 0.95) {
-          if(function_430b5b99(trace[# "entity"], self)) {
+        if(trace[#"fraction"] < 0.95) {
+          if(function_430b5b99(trace[#"entity"], self)) {
             self thread function_9e546fb3(undefined, self.weapon, undefined, undefined);
           }
         }
@@ -749,7 +749,7 @@ function function_7a905654(watcher) {
     }
 
     if(level.teambased && isPlayer(attacker)) {
-      if(!is_true(level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner !== attacker) {
+      if(!is_true(level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner !== attacker) {
         continue;
       }
     }

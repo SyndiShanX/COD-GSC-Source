@@ -110,8 +110,8 @@ function function_2be12d47() {
 }
 
 function function_5a6cc369(a_ents) {
-  level.ravenov = a_ents[# "ravenov"];
-  level.ravenov_chair = a_ents[# "ravenov_chair"];
+  level.ravenov = a_ents[#"ravenov"];
+  level.ravenov_chair = a_ents[#"ravenov_chair"];
   level.var_3ebc9062 = array(level.ravenov, level.ravenov_chair);
   level.ravenov.targetname = "ravenov";
   level.ravenov_chair.targetname = "ravenov_chair";
@@ -132,7 +132,7 @@ function function_31abb662() {
 
   if(!level flag::get("enable_firebase_zone")) {
     if(s_waitresult._notify === # "hash_5cdcf4e238ae5f1f") {
-      zm_utility::function_d729de6a(1, [# "zone_atrium"]);
+      zm_utility::function_d729de6a(1, [#"zone_atrium"]);
     }
 
     level flag::set(#"hash_7b872eebd26623c5");
@@ -141,7 +141,7 @@ function function_31abb662() {
     level scene::play("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + var_dbe98535, level.var_3ebc9062);
     level scene::stop("aib_t9_zm_vign_cust_frbz_rav_vignette_01_alt_0" + var_dbe98535);
     level.ravenov_chair animation::stop();
-    zm_utility::function_d729de6a(0, [# "zone_atrium"]);
+    zm_utility::function_d729de6a(0, [#"zone_atrium"]);
   }
 
   level thread scene::play("aib_t9_zm_vign_rav_seated_01", "seated_loop_1", level.var_3ebc9062);
@@ -379,9 +379,9 @@ function function_9d367ce1() {
   level endon(#"end_game");
 
   while(true) {
-    level flag::wait_till_clear_any([# "power_on1", #"power_on2", #"power_on3"]);
+    level flag::wait_till_clear_any([#"power_on1", #"power_on2", #"power_on3"]);
     level flag::set(#"disable_weapon_machine");
-    level flag::wait_till_all([# "power_on1", #"power_on2", #"power_on3"]);
+    level flag::wait_till_all([#"power_on1", #"power_on2", #"power_on3"]);
     level flag::clear(#"disable_weapon_machine");
   }
 }

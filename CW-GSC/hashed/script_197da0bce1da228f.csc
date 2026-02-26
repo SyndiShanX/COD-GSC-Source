@@ -61,7 +61,7 @@ function private function_62708cfa(localclientnum, oldval, newval, bnewent, bini
   var_a194b407 = 1;
 
   if(isDefined(self.model)) {
-    var_e2a65b72 = [# "sr_ee_hulk_wild_thing", #"hash_7b7cbb4eb2fd70e3", #"p9_fxanim_zm_gold_essence_trap_mod", #"p9_sur_console_launch_key_01"];
+    var_e2a65b72 = [#"sr_ee_hulk_wild_thing", #"hash_7b7cbb4eb2fd70e3", #"p9_fxanim_zm_gold_essence_trap_mod", #"p9_sur_console_launch_key_01"];
 
     if(isinarray(var_e2a65b72, self.model)) {
       var_a194b407 = 0;
@@ -99,7 +99,7 @@ function function_81c73263(localclientnum, rob) {
 
 function function_f0e03255(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   trace_result = physicstrace(self.origin + (0, 0, 64), self.origin + (0, 0, -64), (0, 0, 0), (0, 0, 0), self);
-  var_ab1d2284 = trace_result[# "position"];
+  var_ab1d2284 = trace_result[#"position"];
   playFX(bwastimejump, "zm_ai/fx9_mimic_prop_shake", var_ab1d2284);
   playSound(bwastimejump, #"hash_76bf07d326e705c0", var_ab1d2284 + (0, 0, 20));
 }

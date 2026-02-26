@@ -88,9 +88,9 @@ function function_dc699ae6(name) {
 function init() {
   level.doa.var_e57e1d34 = [];
   level.doa.var_d7e090f7 = [];
-  level.doa.var_d7e090f7[# "zombietron_impaler"] = &function_ed0da451;
-  level.doa.var_d7e090f7[# "zombietron_impaler_1"] = &function_3d40d138;
-  level.doa.var_d7e090f7[# "zombietron_impaler_2"] = &function_bcd45061;
+  level.doa.var_d7e090f7[#"zombietron_impaler"] = &function_ed0da451;
+  level.doa.var_d7e090f7[#"zombietron_impaler_1"] = &function_3d40d138;
+  level.doa.var_d7e090f7[#"zombietron_impaler_2"] = &function_bcd45061;
   level.doa.var_5b088fde = getweapon("zombietron_launcher_secondary");
   level.doa.default_weapon = getweapon("zombietron_lmg");
   impaler = getweapon("zombietron_impaler");

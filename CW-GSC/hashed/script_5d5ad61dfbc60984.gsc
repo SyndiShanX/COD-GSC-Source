@@ -300,7 +300,7 @@ function function_706c8105(vehicle, var_d282b6f0) {
 
   var_e07c7e8 = physicstrace(vehicle.origin, vehicle.origin + (0, 0, 10000), (0, 0, 0), (0, 0, 0), vehicle, 1);
 
-  if(var_e07c7e8[# "fraction"] < 1) {
+  if(var_e07c7e8[#"fraction"] < 1) {
     return;
   }
 

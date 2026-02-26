@@ -161,7 +161,7 @@ function _register_undefined_perk(str_perk) {
 
 function perk_meteor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.meteor_fx = util::playFXOnTag(fieldname, level._effect[# "perk_meteor"], self, "tag_origin");
+    self.meteor_fx = util::playFXOnTag(fieldname, level._effect[#"perk_meteor"], self, "tag_origin");
     return;
   }
 
@@ -299,7 +299,7 @@ function function_9b4bc8e7(localclientnum, oldval, newval, bnewent, binitialsnap
       level.var_aaf8da70 = getent(fieldname, "zeus_bird_head", "targetname");
     }
 
-    util::playFXOnTag(fieldname, level._effect[# "hash_46334db9e3c76275"], level.var_aaf8da70, "bird_follow_jnt");
+    util::playFXOnTag(fieldname, level._effect[#"hash_46334db9e3c76275"], level.var_aaf8da70, "bird_follow_jnt");
     level.var_aaf8da70 thread function_6a0a572d(fieldname);
   }
 }

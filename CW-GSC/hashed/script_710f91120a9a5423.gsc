@@ -12,7 +12,7 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  if(isDefined(level.killstreakrules[# "hero_weapons"])) {
+  if(isDefined(level.killstreakrules[#"hero_weapons"])) {
     killstreakrules::addkillstreaktorule("napalm_strike_zm", "hero_weapons", 0, 0);
   }
 }

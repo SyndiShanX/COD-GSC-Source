@@ -32,10 +32,10 @@ perk_precache() {
     return;
   }
 
-  level.machine_assets[# "specialty_extraammo"] = spawnStruct();
-  level.machine_assets[# "specialty_extraammo"].weapon = getweapon("zombie_perk_bottle_bandolier");
-  level.machine_assets[# "specialty_extraammo"].off_model = "p7_zm_vending_sleight";
-  level.machine_assets[# "specialty_extraammo"].on_model = "p7_zm_vending_sleight";
+  level.machine_assets[#"specialty_extraammo"] = spawnStruct();
+  level.machine_assets[#"specialty_extraammo"].weapon = getweapon("zombie_perk_bottle_bandolier");
+  level.machine_assets[#"specialty_extraammo"].off_model = "p7_zm_vending_sleight";
+  level.machine_assets[#"specialty_extraammo"].on_model = "p7_zm_vending_sleight";
 }
 
 perk_register_clientfield() {}

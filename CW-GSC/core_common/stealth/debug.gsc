@@ -67,7 +67,7 @@ function debug_player() {
       function_84811192("<dev string:x185>", "<dev string:x19b>" + self.script_stealthgroup);
       function_84811192("<dev string:x185>", tab + "<dev string:x1ae>");
       keys = getarraykeys(self.stealth.spotted_list);
-      ais = level.stealth.enemies[# "allies"];
+      ais = level.stealth.enemies[#"allies"];
 
       foreach(ai in ais) {
         if(!isalive(ai)) {

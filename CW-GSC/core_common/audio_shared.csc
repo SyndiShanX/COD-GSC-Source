@@ -129,8 +129,8 @@ function snddoublejump_watcher() {
   while(true) {
     self waittill(#"doublejump_start");
     trace = tracepoint(self.origin, self.origin - (0, 0, 100000));
-    trace_surface_type = trace[# "surfacetype"];
-    trace_origin = trace[# "position"];
+    trace_surface_type = trace[#"surfacetype"];
+    trace_origin = trace[#"position"];
 
     if(!isDefined(trace) || !isDefined(trace_origin)) {
       continue;

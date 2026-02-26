@@ -183,16 +183,16 @@ function private function_50676d1(uid) {
 }
 
 function private function_73b1e949(data, trace, eye_dir) {
-  return eye_dir[# "entity"] === trace.ent;
+  return eye_dir[#"entity"] === trace.ent;
 }
 
 function private function_fc5ed81d(data, trace, eye_dir) {
-  return istouching(eye_dir[# "position"], trace.trigger);
+  return istouching(eye_dir[#"position"], trace.trigger);
 }
 
 function private function_f08e8278(data, trace, eye_dir) {
   function_975e779f(data);
-  to_focus = trace[# "position"] - data.center;
+  to_focus = trace[#"position"] - data.center;
 
   if(abs(vectordot(to_focus, data.axis.forward)) > 6 || vectordot(eye_dir, data.axis.forward) > -0.17) {
     return false;
@@ -211,7 +211,7 @@ function private function_f08e8278(data, trace, eye_dir) {
 
 function private function_d0acce99(data, trace, eye_dir) {
   function_975e779f(data);
-  to_focus = trace[# "position"] - data.center;
+  to_focus = trace[#"position"] - data.center;
 
   if(abs(vectordot(to_focus, data.axis.forward)) > 6 || vectordot(eye_dir, data.axis.forward) > -0.17) {
     return false;
@@ -263,11 +263,11 @@ function private _think() {
       end = eye + eye_dir * level.object_descriptions.trace_dist;
       trace = bulletTrace(eye, end, 1, self, 1, 0);
 
-      if(trace[# "fraction"] < 1) {
-        distance = level.object_descriptions.trace_dist * trace[# "fraction"];
+      if(trace[#"fraction"] < 1) {
+        distance = level.object_descriptions.trace_dist * trace[#"fraction"];
         start_index = 0;
 
-        if(!isDefined(trace[# "entity"])) {
+        if(!isDefined(trace[#"entity"])) {
           start_index = level.object_descriptions.ents.size;
         }
 

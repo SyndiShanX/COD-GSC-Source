@@ -1027,12 +1027,12 @@ function private function_3b8907b9(s_params) {
   arrayremovevalue(level.doa.var_48af1fc9, self);
   self val::set(#"gladiator_death", "takedamage", 0);
 
-  if(isDefined(self.var_9a9a0311[# "tag_weapon_left"])) {
-    self.var_9a9a0311[# "tag_weapon_left"] delete();
+  if(isDefined(self.var_9a9a0311[#"tag_weapon_left"])) {
+    self.var_9a9a0311[#"tag_weapon_left"] delete();
   }
 
-  if(isDefined(self.var_9a9a0311[# "tag_weapon_right"])) {
-    self.var_9a9a0311[# "tag_weapon_right"] delete();
+  if(isDefined(self.var_9a9a0311[#"tag_weapon_right"])) {
+    self.var_9a9a0311[#"tag_weapon_right"] delete();
   }
 
   impulse = anglesToForward(self.angles) + (0, 0, 5);
@@ -1146,8 +1146,8 @@ function private function_fbc2806e(var_a4388d06, spin_dir) {
 function private function_88d65504(axe, var_7900b267, move_pos) {
   trace = physicstrace(var_7900b267.origin, move_pos, (-16, -16, -12), (16, 16, 12), self);
 
-  if(trace[# "fraction"] < 1) {
-    hit_ent = trace[# "entity"];
+  if(trace[#"fraction"] < 1) {
+    hit_ent = trace[#"entity"];
     level notify(#"hash_435816ec8f13c19b", {
       #var_f1445bd6: trace, #ai_gladiator: self, #mdl_axe: var_7900b267, #hit_ent: hit_ent
     });

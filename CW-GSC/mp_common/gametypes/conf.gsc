@@ -59,8 +59,8 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 
 function onuse(player) {
   tacinsertboost = 0;
-  player.pers[# "objectives"]++;
-  player.objectives = player.pers[# "objectives"];
+  player.pers[#"objectives"]++;
+  player.objectives = player.pers[#"objectives"];
 
   if(level.var_ac25d260 === 1) {
     player cranked::function_cf725f10();
@@ -84,8 +84,8 @@ function onuse(player) {
   assert(isDefined(player.lastkillconfirmedtime));
   assert(isDefined(player.lastkillconfirmedcount));
 
-  player.pers[# "killsconfirmed"]++;
-  player.killsconfirmed = player.pers[# "killsconfirmed"];
+  player.pers[#"killsconfirmed"]++;
+  player.killsconfirmed = player.pers[#"killsconfirmed"];
   player globallogic_score::giveteamscoreforobjective(player.team, level.teamscoreperkillconfirmed);
   player contracts::increment_contract(#"hash_27de6edf9043b26f", 1);
 

@@ -65,35 +65,35 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_50a0c288(instance) {
-  instance.s_start = instance.contentgroups[# "start_interact"][0];
-  instance.var_2fc49a65 = instance.contentgroups[# "barrier_player"];
-  instance.a_s_barriers = instance.contentgroups[# "barrier"];
-  instance.var_75bfdd78 = instance.contentgroups[# "teleport_pt"];
-  instance.var_d0682dc2 = instance.contentgroups[# "teleport_return"];
-  instance.mdl_reward = instance.contentgroups[# "reward_drop"][0];
-  instance.var_7b2422b6 = instance.contentgroups[# "start_collision"][0];
-  instance.var_1c417c7e = instance.contentgroups[# "hash_51bc33e4360f4d65"][0];
-  instance.var_fc1420f = instance.contentgroups[# "charge"];
-  instance.var_48e204a7 = instance.contentgroups[# "jellyfish_small"];
-  instance.var_53409bd8 = instance.contentgroups[# "monkey"];
-  instance.var_cbd80ad6 = instance.contentgroups[# "dog"];
+  instance.s_start = instance.contentgroups[#"start_interact"][0];
+  instance.var_2fc49a65 = instance.contentgroups[#"barrier_player"];
+  instance.a_s_barriers = instance.contentgroups[#"barrier"];
+  instance.var_75bfdd78 = instance.contentgroups[#"teleport_pt"];
+  instance.var_d0682dc2 = instance.contentgroups[#"teleport_return"];
+  instance.mdl_reward = instance.contentgroups[#"reward_drop"][0];
+  instance.var_7b2422b6 = instance.contentgroups[#"start_collision"][0];
+  instance.var_1c417c7e = instance.contentgroups[#"hash_51bc33e4360f4d65"][0];
+  instance.var_fc1420f = instance.contentgroups[#"charge"];
+  instance.var_48e204a7 = instance.contentgroups[#"jellyfish_small"];
+  instance.var_53409bd8 = instance.contentgroups[#"monkey"];
+  instance.var_cbd80ad6 = instance.contentgroups[#"dog"];
   instance.var_cf24b789 = content_manager::spawn_script_model(instance.var_1c417c7e, instance.var_1c417c7e.model, 1);
   instance.var_e3532743 = content_manager::spawn_script_model(instance.var_7b2422b6, instance.var_7b2422b6.model, 1);
   instance.var_e3532743 ghost();
   instance.mdl_beam = content_manager::spawn_script_model(instance.var_1c417c7e, "tag_origin", 0);
 
-  if(isDefined(instance.contentgroups[# "hash_6873efb1dfa0ebea"])) {
-    instance.s_ammo = instance.contentgroups[# "hash_6873efb1dfa0ebea"][0];
+  if(isDefined(instance.contentgroups[#"hash_6873efb1dfa0ebea"])) {
+    instance.s_ammo = instance.contentgroups[#"hash_6873efb1dfa0ebea"][0];
     namespace_c09ae6c3::function_9ed7339b(instance);
   }
 
-  if(isDefined(instance.contentgroups[# "door_blocker"])) {
-    instance.var_6bc2eac8 = content_manager::spawn_script_model(instance.contentgroups[# "door_blocker"][0], instance.contentgroups[# "door_blocker"][0].model, 1);
+  if(isDefined(instance.contentgroups[#"door_blocker"])) {
+    instance.var_6bc2eac8 = content_manager::spawn_script_model(instance.contentgroups[#"door_blocker"][0], instance.contentgroups[#"door_blocker"][0].model, 1);
   }
 
-  instance.var_220bb810 = arraycombine(instance.contentgroups[# "front_1"], instance.contentgroups[# "front_2"]);
-  instance.var_10cc9592 = arraycombine(instance.contentgroups[# "front_3"], instance.var_220bb810);
-  instance.var_2250b89e = arraycombine(instance.contentgroups[# "front_4"], instance.var_10cc9592);
+  instance.var_220bb810 = arraycombine(instance.contentgroups[#"front_1"], instance.contentgroups[#"front_2"]);
+  instance.var_10cc9592 = arraycombine(instance.contentgroups[#"front_3"], instance.var_220bb810);
+  instance.var_2250b89e = arraycombine(instance.contentgroups[#"front_4"], instance.var_10cc9592);
   instance.var_10019400 = instance.var_2250b89e;
   instance.var_37fa3d92 = array(instance.var_220bb810, instance.var_10cc9592, instance.var_2250b89e);
   instance.var_543569ce = &function_4f7c9f11;
@@ -655,14 +655,14 @@ function function_521d95ab() {
 function function_b8df700f(s_loot) {
   if(isDefined(s_loot)) {
     self.var_55b8433b = [];
-    var_5504b0b = s_loot.contentgroups[# "hash_702f75ad56e88d1c"];
+    var_5504b0b = s_loot.contentgroups[#"hash_702f75ad56e88d1c"];
 
     if(!isDefined(var_5504b0b)) {
       return;
     }
 
     foreach(s_group in var_5504b0b) {
-      var_842cdacd = s_group.contentgroups[# "pod_spawn"];
+      var_842cdacd = s_group.contentgroups[#"pod_spawn"];
 
       foreach(spawn in var_842cdacd) {
         if(math::cointoss(50)) {
@@ -1242,10 +1242,10 @@ function function_354e27f9() {
 }
 
 function function_582f2cb() {
-  if(isDefined(self.contentgroups[# "zombie_blocker"])) {
+  if(isDefined(self.contentgroups[#"zombie_blocker"])) {
     self.a_mdl_blockers = [];
 
-    foreach(s_blocker in self.contentgroups[# "zombie_blocker"]) {
+    foreach(s_blocker in self.contentgroups[#"zombie_blocker"]) {
       if(self.targetname === "objective_golova_holdout" && s_blocker.origin == (-9937, 8419, 176)) {
         s_blocker.origin += (9, 31, 0);
         self.a_mdl_blockers[self.a_mdl_blockers.size] = content_manager::spawn_script_model(s_blocker, s_blocker.model, 1);
@@ -1574,7 +1574,7 @@ function player_teleport(s_pos, b_state) {
 
 function function_ca5f0c9() {
   zm_barricade::function_fdc4ca3c();
-  self.var_13ba88d2 = self.contentgroups[# "barricade_window"];
+  self.var_13ba88d2 = self.contentgroups[#"barricade_window"];
 
   if(!isarray(self.var_13ba88d2)) {
     return;

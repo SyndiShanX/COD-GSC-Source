@@ -223,13 +223,13 @@ function function_f81c3cc9(player) {
 
   victim = self.victim;
 
-  if(player.pers[# "team"] == self.victimteam) {
-    player.pers[# "rescues"]++;
-    player.rescues = player.pers[# "rescues"];
+  if(player.pers[#"team"] == self.victimteam) {
+    player.pers[#"rescues"]++;
+    player.rescues = player.pers[#"rescues"];
 
     if(isDefined(victim)) {
       if(!level.gameended) {
-        victim.pers[# "lives"] = 1;
+        victim.pers[#"lives"] = 1;
         victim.var_b7cc4567 = {
           #origin: player.origin + (0, 0, 10000), #angles: player.angles
         };

@@ -39,7 +39,7 @@ function private spawnac130(killstreaktype) {
     level.ac130 thread ac130_shared::function_a514a080(player);
   }
 
-  util::function_a3f7de13(21, player.team, player getentitynumber(), level.killstreaks[# "ac130"].uiname);
+  util::function_a3f7de13(21, player.team, player getentitynumber(), level.killstreaks[#"ac130"].uiname);
   return var_b0b764aa;
 }
 

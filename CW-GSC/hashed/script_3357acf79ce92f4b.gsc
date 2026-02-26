@@ -757,7 +757,7 @@ function function_2eab2251(entity, awareness_event) {
     if(awareness_event.type === 4) {
       var_7a601c40 = (0, 0, 70);
       trace = groundtrace(var_2e7ba82c, var_2e7ba82c - var_7a601c40, 0, entity);
-      var_2e7ba82c -= var_7a601c40 * trace[# "fraction"];
+      var_2e7ba82c -= var_7a601c40 * trace[#"fraction"];
     }
 
     investigate_point = function_496e0dbc(entity, var_2e7ba82c, 256, 0, entity getpathfindingradius(), 200);
@@ -1055,8 +1055,8 @@ function function_5c40e824(entity) {
     start_point = entity.origin;
     var_b3e12265 = function_9cc082d2(entity.origin, 2 * 39.3701);
 
-    if(isDefined(var_b3e12265[# "point"])) {
-      start_point = var_b3e12265[# "point"];
+    if(isDefined(var_b3e12265[#"point"])) {
+      start_point = var_b3e12265[#"point"];
     }
 
     if(var_7c12fa23) {
@@ -1068,8 +1068,8 @@ function function_5c40e824(entity) {
       target_position = var_8d6705e8[i];
       var_b3e12265 = function_9cc082d2(target_position, 2 * 39.3701);
 
-      if(isDefined(var_b3e12265[# "point"])) {
-        var_8d6705e8[i] = var_b3e12265[# "point"];
+      if(isDefined(var_b3e12265[#"point"])) {
+        var_8d6705e8[i] = var_b3e12265[#"point"];
       }
     }
 

@@ -15,8 +15,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[# "satchel_charge_enemy_light"] = # "weapon/fx_c4_light_orng";
-  level._effect[# "satchel_charge_friendly_light"] = # "weapon/fx_c4_light_blue";
+  level._effect[#"satchel_charge_enemy_light"] = # "weapon/fx_c4_light_orng";
+  level._effect[#"satchel_charge_friendly_light"] = # "weapon/fx_c4_light_blue";
   weaponobjects::function_e6400478(#"sprint_boost_grenade", &create_grenade_watcher, 1);
 }
 

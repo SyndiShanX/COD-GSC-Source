@@ -847,11 +847,11 @@ player_monitor_travel_dist() {
 
     if(self.var_16735873 !== 1) {
       n_distance = distance(self.origin, prevpos);
-      self.pers[# "distance_traveled"] += n_distance;
+      self.pers[#"distance_traveled"] += n_distance;
 
-      if(n_distance > 1 && int(self.pers[# "distance_traveled"]) > n_current_distance) {
+      if(n_distance > 1 && int(self.pers[#"distance_traveled"]) > n_current_distance) {
         self zm_stats::function_301c4be2("boas_distanceSprinted", int(n_distance));
-        n_current_distance = self.pers[# "distance_traveled"];
+        n_current_distance = self.pers[#"distance_traveled"];
       }
     }
   }

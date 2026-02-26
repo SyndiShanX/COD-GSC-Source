@@ -13,7 +13,7 @@ function init_shared() {
 
 function setupclientfields() {
   clientfield::register("scriptmover", "spawnbeacon_placed", 1, 1, "int", &spawnbeacon_placed, 0, 0);
-  clientfield::register_clientuimodel("hudItems.spawnbeacon.active", #"hud_items", [# "spawnbeacon", #"active"], 1, 1, "int", undefined, 0, 0);
+  clientfield::register_clientuimodel("hudItems.spawnbeacon.active", #"hud_items", [#"spawnbeacon", #"active"], 1, 1, "int", undefined, 0, 0);
 }
 
 function private spawnbeacon_placed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

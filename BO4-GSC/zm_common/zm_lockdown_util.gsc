@@ -64,7 +64,7 @@ autoexec __init__system__() {
 __init__() {
   level thread function_b595044c();
   level thread function_ccf7ac87();
-  level.var_492142a5 = [# "lockdown_stub_type_boards": &function_8850974b, #"lockdown_stub_type_crafting_tables": &function_d0e1d38c, #"lockdown_stub_type_magic_box": &function_e6761711, #"lockdown_stub_type_pap": &function_165e2bd6, #"lockdown_stub_type_perks": &function_db989a2a, #"lockdown_stub_type_traps": &function_d2ce5ac1, #"lockdown_stub_type_wallbuys": &function_9c7d5271];
+  level.var_492142a5 = [#"lockdown_stub_type_boards": &function_8850974b, #"lockdown_stub_type_crafting_tables": &function_d0e1d38c, #"lockdown_stub_type_magic_box": &function_e6761711, #"lockdown_stub_type_pap": &function_165e2bd6, #"lockdown_stub_type_perks": &function_db989a2a, #"lockdown_stub_type_traps": &function_d2ce5ac1, #"lockdown_stub_type_wallbuys": &function_9c7d5271];
   level.var_85c076ab = [];
 
   level function_946bb116();
@@ -247,7 +247,7 @@ function_2bdb235d() {
 }
 
 function_2bdff7e1(entity, stub, node) {
-  var_5bd89846 = groundtrace(node.origin + (0, 0, 8), node.origin + (0, 0, -100000), 0, entity)[# "position"];
+  var_5bd89846 = groundtrace(node.origin + (0, 0, 8), node.origin + (0, 0, -100000), 0, entity)[#"position"];
   var_66694b96 = {
     #origin: var_5bd89846, #angles: node.angles
   };

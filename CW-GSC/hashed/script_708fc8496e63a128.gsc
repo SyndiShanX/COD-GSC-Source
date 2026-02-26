@@ -333,7 +333,7 @@ function function_34770465() {
 }
 
 function function_d5cab286(a_ents) {
-  mailbox = a_ents[# "hash_475ee55621b83ca0"];
+  mailbox = a_ents[#"hash_475ee55621b83ca0"];
   var_e864861d = getent("apt_mailbox_door", "targetname");
   var_e864861d linkto(mailbox, "j_prop_1", (0, 0, 0), (0, 0, 0));
 }

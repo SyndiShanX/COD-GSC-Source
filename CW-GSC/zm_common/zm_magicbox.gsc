@@ -48,11 +48,11 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   level.start_chest_name = "start_chest";
-  level._effect[# "hash_2ff87d61167ea531"] = # "hash_d66a9f5776f1fba";
-  level._effect[# "hash_4048cb4967032c4a"] = # "hash_1e43d43c6586fcb5";
-  level._effect[# "lght_marker"] = # "zombie/fx_weapon_box_marker_zmb";
-  level._effect[# "lght_marker_flare"] = # "zombie/fx_weapon_box_marker_fl_zmb";
-  level._effect[# "poltergeist"] = # "zombie/fx_barrier_buy_zmb";
+  level._effect[#"hash_2ff87d61167ea531"] = # "hash_d66a9f5776f1fba";
+  level._effect[#"hash_4048cb4967032c4a"] = # "hash_1e43d43c6586fcb5";
+  level._effect[#"lght_marker"] = # "zombie/fx_weapon_box_marker_zmb";
+  level._effect[#"lght_marker_flare"] = # "zombie/fx_weapon_box_marker_fl_zmb";
+  level._effect[#"poltergeist"] = # "zombie/fx_barrier_buy_zmb";
   clientfield::register("zbarrier", "magicbox_open_fx", 1, 1, "int");
   clientfield::register("zbarrier", "magicbox_closed_fx", 1, 1, "int");
   clientfield::register("zbarrier", "magicbox_leave_fx", 1, 1, "counter");
@@ -147,7 +147,7 @@ function treasure_chest_init(start_chest_name, s_destination) {
         continue;
       }
 
-      s_magicbox = s_location.instances[# "magicbox"];
+      s_magicbox = s_location.instances[#"magicbox"];
 
       if(isDefined(s_magicbox)) {
         content_manager::spawn_instance(s_magicbox);
@@ -155,7 +155,7 @@ function treasure_chest_init(start_chest_name, s_destination) {
     }
   } else {
     foreach(location in level.contentmanager.locations) {
-      s_magicbox = location.instances[# "magicbox"];
+      s_magicbox = location.instances[#"magicbox"];
 
       if(isDefined(s_magicbox)) {
         content_manager::spawn_instance(s_magicbox);
@@ -282,7 +282,7 @@ function set_treasure_chest_cost(cost) {
 }
 
 function function_165d2388(s_instance) {
-  a_s_chests = s_instance.contentgroups[# "magicbox_zbarrier"];
+  a_s_chests = s_instance.contentgroups[#"magicbox_zbarrier"];
 
   foreach(s_chest in a_s_chests) {
     if(isDefined(s_chest.zbarrier) && !isstring(s_chest.zbarrier) && !ishash(s_chest.zbarrier) && (isentity(s_chest.zbarrier) || s_chest.zbarrier iszbarrier())) {
@@ -657,8 +657,8 @@ function show_chest() {
   self function_76830bc7();
   self.hidden = 0;
 
-  if(isDefined(self.box_hacks[# "summon_box"])) {
-    self[[self.box_hacks[# "summon_box"]]](0);
+  if(isDefined(self.box_hacks[#"summon_box"])) {
+    self[[self.box_hacks[#"summon_box"]]](0);
   }
 
   self.zbarrier clientfield::set("force_stream_magicbox", 0);
@@ -693,8 +693,8 @@ function hide_chest(doboxleave) {
   self.unbearable_respin = undefined;
   self.chest_user = undefined;
 
-  if(isDefined(self.box_hacks) && isDefined(self.box_hacks[# "summon_box"])) {
-    self[[self.box_hacks[# "summon_box"]]](1);
+  if(isDefined(self.box_hacks) && isDefined(self.box_hacks[#"summon_box"])) {
+    self[[self.box_hacks[#"summon_box"]]](1);
   }
 
   if(isDefined(self.zbarrier)) {
@@ -718,7 +718,7 @@ function hide_chest(doboxleave) {
       if(isDefined(level.var_678333a6)) {
         str_fx = level.var_678333a6;
       } else {
-        str_fx = level._effect[# "poltergeist"];
+        str_fx = level._effect[#"poltergeist"];
       }
 
       playFX(str_fx, self.zbarrier.origin, anglestoup(self.zbarrier.angles), anglesToForward(self.zbarrier.angles));
@@ -752,7 +752,7 @@ function default_pandora_fx_func() {
   wait 1;
 
   if(isDefined(self) && isDefined(self.pandora_light)) {
-    playFXOnTag(level._effect[# "lght_marker"], self.pandora_light, "tag_origin");
+    playFXOnTag(level._effect[#"lght_marker"], self.pandora_light, "tag_origin");
   }
 }
 
@@ -765,7 +765,7 @@ function default_pandora_show_func(anchor, anchortarget, pieces) {
     self thread[[level.pandora_fx_func]]();
   }
 
-  playFX(level._effect[# "lght_marker_flare"], self.pandora_light.origin);
+  playFX(level._effect[#"lght_marker_flare"], self.pandora_light.origin);
 }
 
 function function_ecf6901d() {
@@ -1324,8 +1324,8 @@ function treasure_chest_move(player_vox) {
 
   level.verify_chest = 0;
 
-  if(isDefined(level.chests[level.chest_index].box_hacks[# "summon_box"])) {
-    level.chests[level.chest_index][[level.chests[level.chest_index].box_hacks[# "summon_box"]]](0);
+  if(isDefined(level.chests[level.chest_index].box_hacks[#"summon_box"])) {
+    level.chests[level.chest_index][[level.chests[level.chest_index].box_hacks[#"summon_box"]]](0);
   }
 
   wait post_selection_wait_duration;
@@ -1333,7 +1333,7 @@ function treasure_chest_move(player_vox) {
   if(isDefined(level.var_678333a6)) {
     str_fx = level.var_678333a6;
   } else {
-    str_fx = level._effect[# "poltergeist"];
+    str_fx = level._effect[#"poltergeist"];
   }
 
   playFX(str_fx, level.chests[level.chest_index].zbarrier.origin, anglestoup(level.chests[level.chest_index].zbarrier.angles), anglesToForward(level.chests[level.chest_index].zbarrier.angles));
@@ -2366,11 +2366,11 @@ function treasure_chest_weapon_spawn(chest, player, respin) {
     }
   } else {
     if(!isDefined(respin)) {
-      if(isDefined(chest.box_hacks[# "respin"])) {
-        self[[chest.box_hacks[# "respin"]]](chest, player);
+      if(isDefined(chest.box_hacks[#"respin"])) {
+        self[[chest.box_hacks[#"respin"]]](chest, player);
       }
-    } else if(isDefined(chest.box_hacks[# "respin_respin"])) {
-      self[[chest.box_hacks[# "respin_respin"]]](chest, player);
+    } else if(isDefined(chest.box_hacks[#"respin_respin"])) {
+      self[[chest.box_hacks[#"respin_respin"]]](chest, player);
     }
 
     if(isDefined(level.custom_magic_box_timer_til_despawn)) {
@@ -2790,7 +2790,7 @@ function magicbox_host_migration() {
     foreach(chest in level.chests) {
       if(!is_true(chest.hidden)) {
         if(isDefined(chest) && isDefined(chest.pandora_light)) {
-          playFXOnTag(level._effect[# "lght_marker"], chest.pandora_light, "tag_origin");
+          playFXOnTag(level._effect[#"lght_marker"], chest.pandora_light, "tag_origin");
         }
       }
 

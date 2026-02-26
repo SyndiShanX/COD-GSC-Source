@@ -30,17 +30,17 @@ function round_stats_init() {
     setmatchflag("overtime", 0);
   }
 
-  if(!isDefined(game.stat[# "overtimeroundswon"])) {
-    game.stat[# "overtimeroundswon"] = [];
+  if(!isDefined(game.stat[#"overtimeroundswon"])) {
+    game.stat[#"overtimeroundswon"] = [];
   }
 
-  if(!isDefined(game.stat[# "overtimeroundswon"][# "tie"])) {
-    game.stat[# "overtimeroundswon"][# "tie"] = 0;
+  if(!isDefined(game.stat[#"overtimeroundswon"][#"tie"])) {
+    game.stat[#"overtimeroundswon"][#"tie"] = 0;
   }
 
   foreach(team, _ in level.teams) {
-    if(!isDefined(game.stat[# "overtimeroundswon"][team])) {
-      game.stat[# "overtimeroundswon"][team] = 0;
+    if(!isDefined(game.stat[#"overtimeroundswon"][team])) {
+      game.stat[#"overtimeroundswon"][team] = 0;
     }
   }
 }

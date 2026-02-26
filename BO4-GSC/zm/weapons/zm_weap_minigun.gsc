@@ -35,15 +35,15 @@ __init__() {
   clientfield::register("allplayers", "minigun_launcher_muzzle_fx", 1, 1, "counter");
   clientfield::register("missile", "minigun_nuke_rob", 1, 1, "int");
   clientfield::register("toplayer", "minigun_nuke_rumble", 1, 1, "counter");
-  level.hero_weapon[# "minigun"][0] = getweapon(#"hero_minigun_t8_lv1");
-  level.hero_weapon[# "minigun"][1] = getweapon(#"hero_minigun_t8_lv2");
-  level.hero_weapon[# "minigun"][2] = getweapon(#"hero_minigun_t8_lv3");
+  level.hero_weapon[#"minigun"][0] = getweapon(#"hero_minigun_t8_lv1");
+  level.hero_weapon[#"minigun"][1] = getweapon(#"hero_minigun_t8_lv2");
+  level.hero_weapon[#"minigun"][2] = getweapon(#"hero_minigun_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv3");
   zm_hero_weapon::function_7eabd65d(getweapon(#"hash_492e530f9862f6cc"));
   zm_hero_weapon::function_7eabd65d(getweapon(#"hash_628d99860c78650f"));
-  level._effect[# "launcher_flash"] = # "hash_65b54823a8e8631e";
+  level._effect[#"launcher_flash"] = # "hash_65b54823a8e8631e";
 
   if(!isDefined(level.var_90e0e2a0)) {
     level.var_90e0e2a0 = new throttle();
@@ -59,15 +59,15 @@ __init__() {
 }
 
 function_83c8b26e(weapon, var_e7c11b0c = 1) {
-  if(weapon == level.hero_weapon[# "minigun"][2]) {
+  if(weapon == level.hero_weapon[#"minigun"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "minigun"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[#"minigun"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "minigun"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[#"minigun"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -83,28 +83,28 @@ function_9592c5c1() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "minigun"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"minigun"], wpn_cur)) {
       self clientfield::increment_to_player("hero_minigun_vigor_postfx");
       self function_768a7fab(1);
       self thread function_335a27d1();
       self thread function_6fa9af0e(wpn_cur);
-    } else if(isinarray(level.hero_weapon[# "minigun"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"minigun"], wpn_prev)) {
       self thread function_5ef1fdde(wpn_prev);
     }
 
-    if(wpn_cur == level.hero_weapon[# "minigun"][0]) {
+    if(wpn_cur == level.hero_weapon[#"minigun"][0]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_6933501bf415a72c");
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "minigun"][1]) {
+    if(wpn_cur == level.hero_weapon[#"minigun"][1]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_30df02915fdc6a67");
       self thread function_ebaedcdd(wpn_cur);
       self thread function_478a4910(wpn_cur);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "minigun"][2]) {
+    if(wpn_cur == level.hero_weapon[#"minigun"][2]) {
       if(!self gamepadusedlast()) {
         self zm_hero_weapon::show_hint(wpn_cur, #"hash_53f4514d440c7816");
       } else {
@@ -326,7 +326,7 @@ function_9d166ae8(w_minigun) {
 
         if(isDefined(e_grenade)) {
           if(s_result._notify == "stationary") {
-            v_ground_pos = groundtrace(e_grenade.origin + (0, 0, 50), e_grenade.origin + (0, 0, -500), 0, e_grenade, 0, 0)[# "position"];
+            v_ground_pos = groundtrace(e_grenade.origin + (0, 0, 50), e_grenade.origin + (0, 0, -500), 0, e_grenade, 0, 0)[#"position"];
 
             if(isDefined(v_ground_pos)) {
               v_end_pos = getclosestpointonnavmesh(v_ground_pos, 128, 24);

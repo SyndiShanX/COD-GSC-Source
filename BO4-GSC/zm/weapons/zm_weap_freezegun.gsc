@@ -203,8 +203,8 @@ function_4aa98d7d(is_upgraded) {
   end_pos = view_pos + vectorscale(var_6beec13a, var_61101445);
   var_6a748e6b = beamtrace(view_pos, end_pos, 0, self);
 
-  if(isDefined(var_6a748e6b[# "position"])) {
-    glassradiusdamage(var_6a748e6b[# "position"], 40, n_max_damage, n_min_damage);
+  if(isDefined(var_6a748e6b[#"position"])) {
+    glassradiusdamage(var_6a748e6b[#"position"], 40, n_max_damage, n_min_damage);
   }
 }
 

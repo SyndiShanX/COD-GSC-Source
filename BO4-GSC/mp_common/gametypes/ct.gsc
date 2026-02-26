@@ -41,16 +41,16 @@ function_7c4ef26b(predictedspawn) {
   setDvar(#"custom_killstreak_mode", 2);
 
   if(isDefined(level.killstreakindices)) {
-    if(isDefined(level.killstreakindices[# "uav"])) {
-      setDvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
+    if(isDefined(level.killstreakindices[#"uav"])) {
+      setDvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
     }
 
-    if(isDefined(level.killstreakindices[# "satellite"])) {
-      setDvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
+    if(isDefined(level.killstreakindices[#"satellite"])) {
+      setDvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
     }
 
-    if(isDefined(level.killstreakindices[# "remote_missile"])) {
-      setDvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
+    if(isDefined(level.killstreakindices[#"remote_missile"])) {
+      setDvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
     }
   }
 

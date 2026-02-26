@@ -185,7 +185,7 @@ function function_c22381ff() {
     end = rope gettagorigin("<dev string:x48>");
     color = (0, 1, 0);
     trace = groundtrace(start, end + (0, 0, -2048), 0, self, 1, 1);
-    origin = trace[# "position"];
+    origin = trace[#"position"];
 
     if(!isDefined(level.var_f5f2d350)) {
       continue;

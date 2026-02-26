@@ -22,7 +22,7 @@ register_bundle(type, bundle) {
 
 get_bundle(killstreak) {
   if(killstreak.archetype === "raps") {
-    return level.killstreakbundle[# "raps_drone"];
+    return level.killstreakbundle[#"raps_drone"];
   }
 
   if(killstreak.killstreaktype === "drone_squadron" && sessionmodeiscampaigngame()) {

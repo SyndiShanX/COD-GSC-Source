@@ -52,15 +52,15 @@ spawner() {
 }
 
 precache() {
-  character\character_opf_militia_assault_aa_blk::precache();
+    character\character_opf_militia_assault_aa_blk::precache();
 
-  precacheItem("ak47");
-  precacheItem("ak47_reflex");
-  precacheItem("ak47_grenadier");
-  precacheItem("gl_ak47");
-  precacheItem("ak47_acog");
-  precacheItem("beretta");
-  precacheItem("fraggrenade");
+    precacheItem("ak47");
+    precacheItem("ak47_reflex");
+    precacheItem("ak47_grenadier");
+    precacheItem("gl_ak47");
+    precacheItem("ak47_acog");
+    precacheItem("beretta");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_rambo::main();
-  //---------------- }
+    //---------------- maps\_rambo::main();
+    //---------------- }

@@ -31,17 +31,17 @@ function register() {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "success_screen"])) {
-    level.var_ae746e8f[# "success_screen"] = [];
+  if(!isDefined(level.var_ae746e8f[#"success_screen"])) {
+    level.var_ae746e8f[#"success_screen"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "success_screen"])) {
-    level.var_ae746e8f[# "success_screen"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "success_screen"])) {
-    level.var_ae746e8f[# "success_screen"] = array(level.var_ae746e8f[# "success_screen"]);
+  if(!isDefined(level.var_ae746e8f[#"success_screen"])) {
+    level.var_ae746e8f[#"success_screen"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"success_screen"])) {
+    level.var_ae746e8f[#"success_screen"] = array(level.var_ae746e8f[#"success_screen"]);
   }
 
-  level.var_ae746e8f[# "success_screen"][level.var_ae746e8f[# "success_screen"].size] = elem;
+  level.var_ae746e8f[#"success_screen"][level.var_ae746e8f[#"success_screen"].size] = elem;
 }
 
 function register_clientside() {

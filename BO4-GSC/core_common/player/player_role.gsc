@@ -79,7 +79,7 @@ set(index, force) {
   player = self;
   assert(isPlayer(player));
   assert(is_valid(index));
-  player.pers[# "characterindex"] = index;
+  player.pers[#"characterindex"] = index;
   player setspecialistindex(index);
 
   if(isbot(self) && getdvarint(#"hash_542c037530526acb", 0) && !(isDefined(force) && force)) {
@@ -96,7 +96,7 @@ set(index, force) {
   } else if(currentsessionmode() == 3) {
     customloadoutindex = 0;
   } else {
-    customloadoutindex = self.pers[# "loadoutindex"];
+    customloadoutindex = self.pers[#"loadoutindex"];
   }
 
   if(isDefined(customloadoutindex)) {
@@ -116,7 +116,7 @@ clear() {
   player = self;
   assert(isPlayer(player));
   player setspecialistindex(0);
-  player.pers[# "characterindex"] = undefined;
+  player.pers[#"characterindex"] = undefined;
   player.playerrole = undefined;
 }
 

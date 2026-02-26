@@ -90,7 +90,7 @@ function dog_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
     util::playFXOnTag(bwasdemojump, #"hash_44214bf58f0e6d87", self, "j_spine2");
     playSound(bwasdemojump, #"hash_6a7f1f4ef6078e4", self.origin + (0, 0, 36));
   } else {
-    util::playFXOnTag(bwasdemojump, level._effect[# "lightning_dog_spawn"], self, "j_spine2");
+    util::playFXOnTag(bwasdemojump, level._effect[#"lightning_dog_spawn"], self, "j_spine2");
     playSound(bwasdemojump, #"hash_342202bccfe632e3", self.origin + (0, 0, 36));
   }
 

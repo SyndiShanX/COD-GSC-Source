@@ -430,8 +430,8 @@ function village_heli() {
   level.var_88166dcc = util::spawn_model("tag_origin", var_d8bef009 gettagorigin("j_prop_1"), var_d8bef009 gettagangles("j_prop_1"));
   level.var_88166dcc linkto(var_d8bef009, "j_prop_1");
   a_ents = [];
-  a_ents[# "village_heli"] = level.var_a1414070;
-  a_ents[# "hash_26400e73546a78c8"] = var_d8bef009;
+  a_ents[#"village_heli"] = level.var_a1414070;
+  a_ents[#"hash_26400e73546a78c8"] = var_d8bef009;
   level thread scene::add_scene_func("scene_pri_village_destruction_heli", &function_94850755, "play");
   level thread scene::init("scene_pri_village_destruction_heli", a_ents);
   waitframe(1);

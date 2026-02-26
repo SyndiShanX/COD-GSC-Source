@@ -46,7 +46,7 @@ on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64) {
   callback::on_ai_killed(&on_ai_killed);
   level flag::set(#"hash_25d9ccebd2bdecd9");
   n_obj_id = gameobjects::get_next_obj_id();
-  level.a_n_objective_ids[# "minutemen"] = n_obj_id;
+  level.a_n_objective_ids[#"minutemen"] = n_obj_id;
   objective_add(n_obj_id, "active", level.s_weapons_locker.origin, #"hash_423a75e2700a53ab");
   function_da7940a3(n_obj_id, 1);
 
@@ -81,8 +81,8 @@ on_end(round_reset) {
     }
   }
 
-  objective_delete(level.a_n_objective_ids[# "minutemen"]);
-  gameobjects::release_obj_id(level.a_n_objective_ids[# "minutemen"]);
+  objective_delete(level.a_n_objective_ids[#"minutemen"]);
+  gameobjects::release_obj_id(level.a_n_objective_ids[#"minutemen"]);
 
   foreach(player in getplayers()) {
     player zm_trial_util::function_f3aacffb();

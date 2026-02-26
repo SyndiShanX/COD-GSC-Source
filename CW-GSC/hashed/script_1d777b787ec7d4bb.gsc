@@ -115,7 +115,7 @@ function function_e199d168() {
 
 function function_60f09fb9() {
   self scene::init(#"hash_e47497b4ff880f5");
-  self.mdl = self.scene_ents[# "prop 1"];
+  self.mdl = self.scene_ents[#"prop 1"];
   self.mdl function_619a5c20();
   self.mdl clientfield::set("set_compass_icon", 1);
   self.mdl.control_point = self;
@@ -1096,7 +1096,7 @@ function function_bdb2b85b(origin, angles, radius, num_spots, zone_name, max_hei
     y = radius * sin(t + angles[1]);
     pos = (x, y, 0) + origin;
     var_e07c7e8 = physicstrace(pos + (0, 0, 10), pos + (0, 0, -10), mins, maxs, self, 1);
-    var_c060661b = var_e07c7e8[# "position"];
+    var_c060661b = var_e07c7e8[#"position"];
     var_3e98a413 = getclosestpointonnavmesh(var_c060661b, 64, 15);
 
     if(isDefined(var_3e98a413)) {

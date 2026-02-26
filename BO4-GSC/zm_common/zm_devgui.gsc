@@ -201,12 +201,12 @@ function_2f5772bf(cmd) {
       wait 0.5;
 
       if(isvehicle(ai)) {
-        ai.origin = trace[# "position"];
-        ai function_a57c34b7(trace[# "position"]);
+        ai.origin = trace[#"position"];
+        ai function_a57c34b7(trace[#"position"]);
         return;
       }
 
-      ai forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+      ai forceteleport(trace[#"position"], player.angles + (0, 180, 0));
     }
   }
 }
@@ -408,7 +408,7 @@ function_6758ede4(zone) {
 }
 
 function_995340b7(zone, var_87f65b00) {
-  if(!isDefined(zone.a_loc_types[# "wait_location"]) || zone.a_loc_types[# "wait_location"].size <= 0) {
+  if(!isDefined(zone.a_loc_types[#"wait_location"]) || zone.a_loc_types[#"wait_location"].size <= 0) {
     if(isDefined(var_87f65b00) && var_87f65b00) {
       level.validation_errors_count++;
 
@@ -566,7 +566,7 @@ validate_to_board(spawn_point, spawn_point_origin_backup) {
 }
 
 validate_to_wait_point(zone, new_spawn_point_origin, spawn_point) {
-  foreach(loc in zone.a_loc_types[# "wait_location"]) {
+  foreach(loc in zone.a_loc_types[#"wait_location"]) {
     if(isDefined(loc)) {
       wait_point = loc.origin;
 
@@ -2095,7 +2095,7 @@ devgui_zombie_spawn() {
   if(isDefined(guy)) {
     guy.script_string = "<dev string:x6e8>";
     wait 0.5;
-    guy forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+    guy forceteleport(trace[#"position"], player.angles + (0, 180, 0));
   }
 
   return guy;
@@ -2914,7 +2914,7 @@ zombie_devgui_give_powerup(powerup_name, now, origin) {
     return;
   }
 
-  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[# "position"], undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[#"position"], undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
 }
 
 zombie_devgui_give_powerup_player(powerup_name, now) {
@@ -2947,7 +2947,7 @@ zombie_devgui_give_powerup_player(powerup_name, now) {
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
   trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
-  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[# "position"], undefined, undefined, player);
+  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[#"position"], undefined, undefined, player);
 }
 
 zombie_devgui_goto_round(target_round) {
@@ -3260,15 +3260,15 @@ function_c83c6fa() {
 }
 
 function_cbdab30d(xp) {
-  if(self.pers[# "rankxp"] > xp) {
-    self.pers[# "rank"] = 0;
+  if(self.pers[#"rankxp"] > xp) {
+    self.pers[#"rank"] = 0;
     self setrank(0);
     self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", 0);
   }
 
-  self.pers[# "rankxp"] = xp;
+  self.pers[#"rankxp"] = xp;
   self rank::updaterank();
-  self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", self.pers[# "rank"]);
+  self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", self.pers[#"rank"]);
 }
 
 function_5c26ad27(var_56c1b8d) {
@@ -3617,7 +3617,7 @@ wait_for_zombie(crawler) {
 
             anim_results = zombie astsearch(table);
 
-            if(!isDefined(anim_results[# "animation"])) {
+            if(!isDefined(anim_results[#"animation"])) {
               if(isDefined(crawler) && crawler) {
                 node.bad_crawler_traverse = 1;
               } else {
@@ -3627,7 +3627,7 @@ wait_for_zombie(crawler) {
               continue;
             }
 
-            if(anim_results[# "animation"] == "<dev string:xe4c>") {
+            if(anim_results[#"animation"] == "<dev string:xe4c>") {
               teleport = 1;
             }
           }
@@ -4025,7 +4025,7 @@ function_b4dcb9ce() {
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
   trace = bulletTrace(eye, eye + direction_vec, 0, player);
   return {
-    #origin: trace[# "position"]
+    #origin: trace[#"position"]
   };
 }
 

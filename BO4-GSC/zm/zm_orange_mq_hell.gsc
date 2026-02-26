@@ -460,9 +460,9 @@ function_5e3a92e() {
       v_drop = s_drop.origin;
     }
 
-    v_ground = groundtrace(v_drop + (32, 0, 0) + (0, 0, 8), v_drop + (32, 0, 0) + (0, 0, -100000), 0, self)[# "position"];
+    v_ground = groundtrace(v_drop + (32, 0, 0) + (0, 0, 8), v_drop + (32, 0, 0) + (0, 0, -100000), 0, self)[#"position"];
     level thread zm_powerups::specific_powerup_drop("full_ammo", v_ground, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
-    v_ground = groundtrace(v_drop - (32, 0, 0) + (0, 0, 8), v_drop - (32, 0, 0) + (0, 0, -100000), 0, self)[# "position"];
+    v_ground = groundtrace(v_drop - (32, 0, 0) + (0, 0, 8), v_drop - (32, 0, 0) + (0, 0, -100000), 0, self)[#"position"];
     level thread zm_powerups::specific_powerup_drop("carpenter", v_ground, undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
   }
 

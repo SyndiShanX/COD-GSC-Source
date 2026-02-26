@@ -39,17 +39,17 @@ function register(var_18c795d0) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_trial_weapon_locked"])) {
-    level.var_ae746e8f[# "zm_trial_weapon_locked"] = [];
+  if(!isDefined(level.var_ae746e8f[#"zm_trial_weapon_locked"])) {
+    level.var_ae746e8f[#"zm_trial_weapon_locked"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "zm_trial_weapon_locked"])) {
-    level.var_ae746e8f[# "zm_trial_weapon_locked"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "zm_trial_weapon_locked"])) {
-    level.var_ae746e8f[# "zm_trial_weapon_locked"] = array(level.var_ae746e8f[# "zm_trial_weapon_locked"]);
+  if(!isDefined(level.var_ae746e8f[#"zm_trial_weapon_locked"])) {
+    level.var_ae746e8f[#"zm_trial_weapon_locked"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"zm_trial_weapon_locked"])) {
+    level.var_ae746e8f[#"zm_trial_weapon_locked"] = array(level.var_ae746e8f[#"zm_trial_weapon_locked"]);
   }
 
-  level.var_ae746e8f[# "zm_trial_weapon_locked"][level.var_ae746e8f[# "zm_trial_weapon_locked"].size] = elem;
+  level.var_ae746e8f[#"zm_trial_weapon_locked"][level.var_ae746e8f[#"zm_trial_weapon_locked"].size] = elem;
 }
 
 function register_clientside() {

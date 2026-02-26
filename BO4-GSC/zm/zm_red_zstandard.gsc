@@ -82,7 +82,7 @@ main() {
   zm_round_spawning::function_306ce518(#"blight_father", &function_d0835d29);
   zm_utility::function_2959a3cb(#"gegenees", &i_zmb_robo_eye_head_lp);
   zm_utility::function_2959a3cb(#"skeleton", &function_a1f61594);
-  level.zombie_hints[# "default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
   level thread zm_crafting::function_ca244624(#"zblueprint_red_strike");
   level thread defend_areas();
 }

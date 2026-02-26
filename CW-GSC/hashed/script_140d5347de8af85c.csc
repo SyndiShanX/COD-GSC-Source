@@ -14,18 +14,18 @@ function private autoexec __init__system__() {
 
 function ease_init() {
   level.ease_funcs = [];
-  level.ease_funcs[# "linear"] = &ease_linear;
-  level.ease_funcs[# "power"] = &ease_power;
-  level.ease_funcs[# "quadratic"] = &function_db98dad1;
-  level.ease_funcs[# "cubic"] = &ease_cubic;
-  level.ease_funcs[# "hash_7fcb2d60a826eca8"] = &function_79315b1d;
-  level.ease_funcs[# "hash_2080bcb1cad7945c"] = &function_858ecd2d;
-  level.ease_funcs[# "exponential"] = &function_95a842a;
-  level.ease_funcs[# "logarithmic"] = &function_eec2a804;
-  level.ease_funcs[# "sine"] = &ease_sine;
-  level.ease_funcs[# "back"] = &ease_back;
-  level.ease_funcs[# "elastic"] = &function_d912ff48;
-  level.ease_funcs[# "bounce"] = &ease_bounce;
+  level.ease_funcs[#"linear"] = &ease_linear;
+  level.ease_funcs[#"power"] = &ease_power;
+  level.ease_funcs[#"quadratic"] = &function_db98dad1;
+  level.ease_funcs[#"cubic"] = &ease_cubic;
+  level.ease_funcs[#"hash_7fcb2d60a826eca8"] = &function_79315b1d;
+  level.ease_funcs[#"hash_2080bcb1cad7945c"] = &function_858ecd2d;
+  level.ease_funcs[#"exponential"] = &function_95a842a;
+  level.ease_funcs[#"logarithmic"] = &function_eec2a804;
+  level.ease_funcs[#"sine"] = &ease_sine;
+  level.ease_funcs[#"back"] = &ease_back;
+  level.ease_funcs[#"elastic"] = &function_d912ff48;
+  level.ease_funcs[#"bounce"] = &ease_bounce;
 }
 
 function ease_linear(start, end, pct, ease_in, ease_out) {

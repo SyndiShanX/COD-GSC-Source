@@ -28,14 +28,14 @@ function private preinit() {
   level.go_to_node_arrays = [];
   level.global_spawn_timer = 0;
   level.global_spawn_count = 0;
-  level.var_aa384fe2[# "origin"] = &get_target_ents;
-  level.var_aa384fe2[# "ent"] = &get_target_ents;
-  level.var_aa384fe2[# "node"] = &get_target_nodes;
-  level.var_aa384fe2[# "struct"] = &get_target_structs;
-  level.var_c4e6faf2[# "origin"] = &go_to_node_set_goal_pos;
-  level.var_c4e6faf2[# "ent"] = &go_to_node_set_goal_ent;
-  level.var_c4e6faf2[# "struct"] = &function_890856aa;
-  level.var_c4e6faf2[# "node"] = &go_to_node_set_goal_node;
+  level.var_aa384fe2[#"origin"] = &get_target_ents;
+  level.var_aa384fe2[#"ent"] = &get_target_ents;
+  level.var_aa384fe2[#"node"] = &get_target_nodes;
+  level.var_aa384fe2[#"struct"] = &get_target_structs;
+  level.var_c4e6faf2[#"origin"] = &go_to_node_set_goal_pos;
+  level.var_c4e6faf2[#"ent"] = &go_to_node_set_goal_ent;
+  level.var_c4e6faf2[#"struct"] = &function_890856aa;
+  level.var_c4e6faf2[#"node"] = &go_to_node_set_goal_node;
   spawners = getspawnerarray();
 
   for(i = 0; i < spawners.size; i++) {
@@ -201,17 +201,17 @@ function run_spawn_functions() {
     return;
   }
 
-  if(isDefined(level.spawn_funcs[# "all"])) {
-    for(i = 0; i < level.spawn_funcs[# "all"].size; i++) {
-      func = level.spawn_funcs[# "all"][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+  if(isDefined(level.spawn_funcs[#"all"])) {
+    for(i = 0; i < level.spawn_funcs[#"all"].size; i++) {
+      func = level.spawn_funcs[#"all"][i];
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
   if(isDefined(self.archetype) && isDefined(level.spawn_funcs[self.archetype])) {
     for(i = 0; i < level.spawn_funcs[self.archetype].size; i++) {
       func = level.spawn_funcs[self.archetype][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
@@ -221,14 +221,14 @@ function run_spawn_functions() {
   if(isDefined(level.spawn_funcs[self.team])) {
     for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
       func = level.spawn_funcs[self.team][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
   if(isDefined(self.spawn_funcs)) {
     for(i = 0; i < self.spawn_funcs.size; i++) {
       func = self.spawn_funcs[i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
 
     var_f9bfb16c = self.spawn_funcs;
@@ -241,7 +241,7 @@ function run_spawn_functions() {
   if(isDefined(self.archetype) && isDefined(level.spawn_funcs[self.archetype + "_post"])) {
     for(i = 0; i < level.spawn_funcs[self.archetype + "_post"].size; i++) {
       func = level.spawn_funcs[self.archetype + "_post"][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
@@ -259,8 +259,8 @@ function crawl_through_targets_to_init_flags() {
   array = get_node_funcs_based_on_target();
 
   if(isDefined(array)) {
-    targets = array[# "node"];
-    get_func = array[# "get_target_func"];
+    targets = array[#"node"];
+    get_func = array[#"get_target_func"];
 
     for(i = 0; i < targets.size; i++) {
       crawl_target_and_init_flags(targets[i], get_func);
@@ -419,7 +419,7 @@ function go_to_node(node, goal_type, optional_arrived_at_node_func) {
     optional_arrived_at_node_func = &util::void;
   }
 
-  go_to_node_using_funcs(array[# "node"], optional_arrived_at_node_func);
+  go_to_node_using_funcs(array[#"node"], optional_arrived_at_node_func);
 }
 
 function function_461ce3e9() {
@@ -528,8 +528,8 @@ function private go_to_node_using_funcs(node, optional_arrived_at_node_func, req
     }
 
     array = get_node_funcs_based_on_target(node);
-    get_target_func = array[# "get_target_func"];
-    set_goal_func_quits = array[# "set_goal_func_quits"];
+    get_target_func = array[#"get_target_func"];
+    set_goal_func_quits = array[#"set_goal_func_quits"];
     self.goalradius = 16;
 
     if(isDefined(node) && isDefined(node.target)) {
@@ -875,7 +875,7 @@ function get_node_funcs_based_on_target(node, goal_type) {
   array = [];
 
   if(isDefined(node)) {
-    array[# "node"][0] = node;
+    array[#"node"][0] = node;
   } else {
     if(!isDefined(self.target)) {
       assertmsg("<dev string:x146>");
@@ -907,11 +907,11 @@ function get_node_funcs_based_on_target(node, goal_type) {
       }
     }
 
-    array[# "node"] = node;
+    array[#"node"] = node;
   }
 
-  array[# "get_target_func"] = level.var_aa384fe2[goal_type];
-  array[# "set_goal_func_quits"] = level.var_c4e6faf2[goal_type];
+  array[#"get_target_func"] = level.var_aa384fe2[goal_type];
+  array[#"set_goal_func_quits"] = level.var_c4e6faf2[goal_type];
   return array;
 }
 
@@ -1256,7 +1256,7 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
         bot setteam(self.team);
 
         if(isDefined(bot.pers)) {
-          bot.pers[# "team"] = self.team;
+          bot.pers[#"team"] = self.team;
         }
 
         bot.target = self.target;
@@ -1517,8 +1517,8 @@ function add_global_spawn_function(team, spawn_func, ...) {
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(level.spawn_funcs[team])) {
     level.spawn_funcs[team] = [];
@@ -1534,34 +1534,34 @@ function add_ai_spawn_function(spawn_func, ...) {
     level.spawn_funcs = [];
   }
 
-  if(!isDefined(level.spawn_funcs[# "all"])) {
-    level.spawn_funcs[# "all"] = [];
+  if(!isDefined(level.spawn_funcs[#"all"])) {
+    level.spawn_funcs[#"all"] = [];
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
-  if(!isDefined(level.spawn_funcs[# "all"])) {
-    level.spawn_funcs[# "all"] = [];
-  } else if(!isarray(level.spawn_funcs[# "all"])) {
-    level.spawn_funcs[# "all"] = array(level.spawn_funcs[# "all"]);
+  if(!isDefined(level.spawn_funcs[#"all"])) {
+    level.spawn_funcs[#"all"] = [];
+  } else if(!isarray(level.spawn_funcs[#"all"])) {
+    level.spawn_funcs[#"all"] = array(level.spawn_funcs[#"all"]);
   }
 
-  level.spawn_funcs[# "all"][level.spawn_funcs[# "all"].size] = func;
+  level.spawn_funcs[#"all"][level.spawn_funcs[#"all"].size] = func;
 }
 
 function function_932006d1(func) {
-  if(isDefined(level.spawn_funcs) && isDefined(level.spawn_funcs[# "all"])) {
+  if(isDefined(level.spawn_funcs) && isDefined(level.spawn_funcs[#"all"])) {
     array = [];
 
-    for(i = 0; i < level.spawn_funcs[# "all"].size; i++) {
-      if(level.spawn_funcs[# "all"][i][# "function"] != func) {
-        array[array.size] = level.spawn_funcs[# "all"][i];
+    for(i = 0; i < level.spawn_funcs[#"all"].size; i++) {
+      if(level.spawn_funcs[#"all"][i][#"function"] != func) {
+        array[array.size] = level.spawn_funcs[#"all"][i];
       }
     }
 
-    level.spawn_funcs[# "all"] = array;
+    level.spawn_funcs[#"all"] = array;
   }
 }
 
@@ -1575,8 +1575,8 @@ function add_archetype_spawn_function(archetype, spawn_func, ...) {
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(level.spawn_funcs[archetype])) {
     level.spawn_funcs[archetype] = [];
@@ -1597,8 +1597,8 @@ function function_89a2cd87(archetype, spawn_func, ...) {
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(level.spawn_funcs[archetype + "_post"])) {
     level.spawn_funcs[archetype + "_post"] = [];
@@ -1614,7 +1614,7 @@ function remove_global_spawn_function(team, func) {
     array = [];
 
     for(i = 0; i < level.spawn_funcs[team].size; i++) {
-      if(level.spawn_funcs[team][i][# "function"] != func) {
+      if(level.spawn_funcs[team][i][#"function"] != func) {
         array[array.size] = level.spawn_funcs[team][i];
       }
     }
@@ -1626,8 +1626,8 @@ function remove_global_spawn_function(team, func) {
 function add_spawn_function(spawn_func, ...) {
   assert(!isDefined(level._loadstarted) || !isalive(self), "<dev string:x3df>");
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(self.spawn_funcs)) {
     self.spawn_funcs = [];
@@ -1643,7 +1643,7 @@ function remove_spawn_function(func) {
     array = [];
 
     for(i = 0; i < self.spawn_funcs.size; i++) {
-      if(self.spawn_funcs[i][# "function"] != func) {
+      if(self.spawn_funcs[i][#"function"] != func) {
         array[array.size] = self.spawn_funcs[i];
       }
     }

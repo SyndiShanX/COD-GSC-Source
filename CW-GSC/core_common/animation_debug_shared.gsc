@@ -22,7 +22,7 @@ function init() {
   flag::init_dvar(#"anim_debug_pause");
 
   for(;;) {
-    level flag::wait_till_any([# "anim_debug", #"anim_debug_pause"]);
+    level flag::wait_till_any([#"anim_debug", #"anim_debug_pause"]);
     waitframe(1);
     a_ents = getEntArray("<dev string:x38>", "<dev string:x42>", 1);
 
@@ -30,7 +30,7 @@ function init() {
       ent thread anim_info_render_thread();
     }
 
-    level flag::wait_till_clear_all([# "anim_debug", #"anim_debug_pause"]);
+    level flag::wait_till_clear_all([#"anim_debug", #"anim_debug_pause"]);
     level notify(#"kill_anim_debug");
   }
 }

@@ -553,7 +553,7 @@ function function_c436fc75() {
 }
 
 function function_ad61157(a_ents) {
-  var_bf71a40b = a_ents[# "weapon_crate"];
+  var_bf71a40b = a_ents[#"weapon_crate"];
   level waittill(#"hash_1fd19e3d2e214e5");
   var_bf71a40b clientfield::set("" + # "hash_5020565243fa510a", 1);
 }
@@ -1055,7 +1055,7 @@ function function_95913408(e_player) {
 }
 
 function function_59642e27(a_ents) {
-  var_fcb6d06e = a_ents[# "fuse_box"];
+  var_fcb6d06e = a_ents[#"fuse_box"];
   var_11a6696e = spawn("trigger_damage", var_fcb6d06e.origin, 0, 96, 96);
 
   while(true) {
@@ -1178,7 +1178,7 @@ function function_d9046ad7(crate, num) {
   var_db089991.var_4ffc53f = &function_e0e08fa2;
 
   while(true) {
-    level flag::wait_till_all([# "dark_aether_active", "ww_beam_dark_aether_active"]);
+    level flag::wait_till_all([#"dark_aether_active", "ww_beam_dark_aether_active"]);
     self show();
     self function_619a5c20();
 
@@ -1347,7 +1347,7 @@ function function_ef55bb22(var_53f12789, num) {
 }
 
 function function_b39ee43f(a_ents) {
-  var_bf71a40b = a_ents[# "weapon_crate"];
+  var_bf71a40b = a_ents[#"weapon_crate"];
 
   while(true) {
     flag_return = level waittill(#"receptacle_1_powered", #"receptacle_2_powered", #"receptacle_3_powered");
@@ -1595,7 +1595,7 @@ function function_6d4e1f71(var_d5c2e187, var_e7772c37, var_b0e35c50) {
 }
 
 function function_217a625a(a_ents) {
-  var_bf71a40b = a_ents[# "weapon_crate"];
+  var_bf71a40b = a_ents[#"weapon_crate"];
 
   switch (var_bf71a40b.model) {
     case # "p9_fxanim_zm_contain_crate_cryo_mod":

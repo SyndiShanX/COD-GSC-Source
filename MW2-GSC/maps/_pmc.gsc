@@ -260,16 +260,16 @@ start_pmc_gametype() {
 
   //---------------------------------------- // Debug threads for testing
   //---------------------------------------- if(getDvar("pmc_debug") == "1") {
-    thread debug_show_enemy_spawners_count();
-    thread debug_show_enemies_alive_count();
-    thread debug_show_vehicles_alive_count();
-  }
+  thread debug_show_enemy_spawners_count();
+  thread debug_show_enemies_alive_count();
+  thread debug_show_vehicles_alive_count();
+}
 
-  if(!is_specialop()) {
-    // Wait till frame end so that the flags can get initialized in other scripts before getting set below
-    wait 0.05;
-    flag_set("disable_autosaves");
-  }
+if(!is_specialop()) {
+  // Wait till frame end so that the flags can get initialized in other scripts before getting set below
+  wait 0.05;
+  flag_set("disable_autosaves");
+}
 }
 
 set_gametype_vars() {
@@ -513,7 +513,7 @@ populate_enemies() {
 
   //--------------------------------------------------------------------- // Spawns all of the best located AI until the max alive AI count is reached
   //--------------------------------------------------------------------- if(level.pmc._populating_enemies)
-    return;
+  return;
   level.pmc._populating_enemies = true;
 
   if(isDefendMatch())

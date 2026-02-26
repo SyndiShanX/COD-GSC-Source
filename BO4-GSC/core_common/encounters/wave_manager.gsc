@@ -976,7 +976,7 @@ function_8f5ed189(var_dcd6c23, var_c21b798e) {
 
       spawner::global_spawn_throttle();
 
-      if(!isDefined(var_549391b8) || !isDefined(var_549391b8[# "spawner"]) || var_549391b8[# "spawner"].count < 1 && !(isDefined(var_549391b8[# "spawner"].spawnflags) && (var_549391b8[# "spawner"].spawnflags & 64) == 64)) {
+      if(!isDefined(var_549391b8) || !isDefined(var_549391b8[#"spawner"]) || var_549391b8[#"spawner"].count < 1 && !(isDefined(var_549391b8[#"spawner"].spawnflags) && (var_549391b8[#"spawner"].spawnflags & 64) == 64)) {
         s_spawn_point = aispawningutility::function_e312ad4d(var_dcd6c23.m_str_team, var_dcd6c23.var_27eacb34, var_82706add);
 
         if(!isDefined(s_spawn_point)) {
@@ -993,9 +993,9 @@ function_8f5ed189(var_dcd6c23, var_c21b798e) {
         }
       }
 
-      v_origin = isDefined(s_spawn_point) ? s_spawn_point[# "origin"] : (0, 0, 0);
-      v_angles = isDefined(s_spawn_point) ? s_spawn_point[# "angles"] : (0, 0, 0);
-      var_c8fa21da = isDefined(s_spawn_point) ? s_spawn_point[# "spawner"] : undefined;
+      v_origin = isDefined(s_spawn_point) ? s_spawn_point[#"origin"] : (0, 0, 0);
+      v_angles = isDefined(s_spawn_point) ? s_spawn_point[#"angles"] : (0, 0, 0);
+      var_c8fa21da = isDefined(s_spawn_point) ? s_spawn_point[#"spawner"] : undefined;
 
       if(n_group_size > 1) {
         var_549391b8 = s_spawn_point;
@@ -1010,7 +1010,7 @@ function_8f5ed189(var_dcd6c23, var_c21b798e) {
 
       if(var_ae2df0a1) {
         if(isDefined(var_c8fa21da)) {
-          ai = var_c8fa21da spawnfromspawner(s_spawn_point[# "spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
+          ai = var_c8fa21da spawnfromspawner(s_spawn_point[#"spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
 
           if(!isDefined(var_dcd6c23.var_246fb97f)) {
             var_dcd6c23.var_246fb97f = [];
@@ -1023,7 +1023,7 @@ function_8f5ed189(var_dcd6c23, var_c21b798e) {
           }
         }
       } else if(isDefined(var_c8fa21da)) {
-        ai = var_c8fa21da spawnfromspawner(s_spawn_point[# "spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
+        ai = var_c8fa21da spawnfromspawner(s_spawn_point[#"spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
 
         if(!isDefined(var_dcd6c23.var_246fb97f)) {
           var_dcd6c23.var_246fb97f = [];

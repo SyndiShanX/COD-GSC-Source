@@ -208,7 +208,7 @@ function function_a4f7d6e() {
     }
   }
 
-  level.allowbattlechatter[# "axis"] = 1;
+  level.allowbattlechatter[#"axis"] = 1;
 }
 
 function function_478cabb9() {

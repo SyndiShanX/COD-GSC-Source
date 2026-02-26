@@ -13,13 +13,13 @@ play_animation(var_f6550bae) {
 
   astresult = self astsearch(var_f6550bae);
 
-  if(!isDefined(astresult[# "animation"])) {
+  if(!isDefined(astresult[#"animation"])) {
     return;
   }
 
-  animation = self animmappingsearch(astresult[# "animation"]);
-  self animscripted("bot_play_animation", self.origin, self.angles, animation, "server script", undefined, undefined, astresult[# "blend_in_time"], undefined, undefined, 1);
-  self thread function_33f98f4(animation, astresult[# "animation_mocomp"], astresult[# "blend_out_time"]);
+  animation = self animmappingsearch(astresult[#"animation"]);
+  self animscripted("bot_play_animation", self.origin, self.angles, animation, "server script", undefined, undefined, astresult[#"blend_in_time"], undefined, undefined, 1);
+  self thread function_33f98f4(animation, astresult[#"animation_mocomp"], astresult[#"blend_out_time"]);
 }
 
 function_33f98f4(animation, mocomp, blendout) {

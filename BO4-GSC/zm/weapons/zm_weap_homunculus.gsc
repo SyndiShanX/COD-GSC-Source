@@ -45,7 +45,7 @@ __main__() {
     return;
   }
 
-  level._effect[# "grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
 
   if(!isDefined(level.var_fe96a4c4)) {
     level.var_fe96a4c4 = [];
@@ -369,9 +369,9 @@ function_bfb923d5(ai_zombie) {
 }
 
 function_c6551b38(var_dd74d130) {
-  var_dd74d130[# "homunculus"] endon(#"death");
-  var_dd74d130[# "homunculus"] waittill(#"jumped");
-  var_69e642c7 = var_dd74d130[# "homunculus"] getlinkedent();
+  var_dd74d130[#"homunculus"] endon(#"death");
+  var_dd74d130[#"homunculus"] waittill(#"jumped");
+  var_69e642c7 = var_dd74d130[#"homunculus"] getlinkedent();
   var_69e642c7 movez(40, 0.35);
 }
 
@@ -575,7 +575,7 @@ grenade_stolen_by_sam(e_grenade) {
     }
   }
 
-  playFXOnTag(level._effect[# "grenade_samantha_steal"], e_grenade, "tag_origin");
+  playFXOnTag(level._effect[#"grenade_samantha_steal"], e_grenade, "tag_origin");
   e_grenade scene::stop();
   e_grenade.mdl_anchor scene::stop();
   e_grenade.mdl_anchor unlink();
@@ -621,10 +621,10 @@ function_e383ca2f() {
 function_f33bde5c(b_immediate = 0) {
   self endon(#"death", #"explode");
   s_trace = groundtrace(self.mdl_anchor.origin + (0, 0, 16), self.mdl_anchor.origin + (0, 0, -1000), 0, self.mdl_anchor);
-  var_a75fe4be = s_trace[# "position"];
+  var_a75fe4be = s_trace[#"position"];
 
-  if(isDefined(s_trace[# "entity"])) {
-    var_a75fe4be = (var_a75fe4be[0], var_a75fe4be[1], s_trace[# "entity"].origin[2]);
+  if(isDefined(s_trace[#"entity"])) {
+    var_a75fe4be = (var_a75fe4be[0], var_a75fe4be[1], s_trace[#"entity"].origin[2]);
   }
 
   if(b_immediate) {

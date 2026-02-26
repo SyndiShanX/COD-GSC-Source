@@ -230,7 +230,7 @@ function updatedevsettings() {
       }
 
       player = util::gethostplayer();
-      spawns = level.spawn_start[player.pers[# "team"]];
+      spawns = level.spawn_start[player.pers[#"team"]];
 
       if(!isDefined(spawns) || spawns.size <= 0) {
         return;
@@ -255,7 +255,7 @@ function updatedevsettings() {
       }
 
       player = util::gethostplayer();
-      spawns = level.spawn_start[player.pers[# "team"]];
+      spawns = level.spawn_start[player.pers[#"team"]];
 
       if(!isDefined(spawns) || spawns.size <= 0) {
         return;

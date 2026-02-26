@@ -76,7 +76,7 @@ function on_game_playing() {
 }
 
 function function_c8fb4513(var_63c85287 = 600, var_1f7b3936 = int(600 / 5)) {
-  level flag::wait_till_all([# "intro_scene_done", #"start_zombie_round_logic"]);
+  level flag::wait_till_all([#"intro_scene_done", #"start_zombie_round_logic"]);
   var_9c1ed9ea = "collapse_underscore";
 
   if(isDefined(level.var_f546b995)) {
@@ -93,7 +93,7 @@ function function_c8fb4513(var_63c85287 = 600, var_1f7b3936 = int(600 / 5)) {
     content_manager::spawn_instance(var_495727a3);
   }
 
-  level.var_20c6962b = array::random([# "strauss", #"grey", #"carver"]);
+  level.var_20c6962b = array::random([#"strauss", #"grey", #"carver"]);
   function_877c8d9c("objectiveBoostStartCollapseStrauss", "objectiveBoostStartCollapseGrey", "objectiveBoostStartCollapseCarver", 2);
   level thread zm_vo::function_7622cb70("objectiveBoostStartCollapseResponse", 2);
   level thread objective_manager::start_timer(var_63c85287, "collapse");
@@ -225,15 +225,15 @@ function function_8c6ab347() {
 }
 
 function function_ec609754(n_difficulty) {
-  if(!isarray(level.contentmanager.spawnedinstances[# "wallbuy"])) {
+  if(!isarray(level.contentmanager.spawnedinstances[#"wallbuy"])) {
     return;
   }
 
   self notify("4ab74cc0629a2b86");
   self endon("4ab74cc0629a2b86");
 
-  foreach(instance in level.contentmanager.spawnedinstances[# "wallbuy"]) {
-    foreach(chalk in instance.contentgroups[# "wallbuy_chalk"]) {
+  foreach(instance in level.contentmanager.spawnedinstances[#"wallbuy"]) {
+    foreach(chalk in instance.contentgroups[#"wallbuy_chalk"]) {
       if(isDefined(chalk.trigger.weapon.name) && isDefined(chalk.trigger.rarity) && isDefined(chalk.trigger) && isDefined(chalk.trigger.weapon.displayname) && is_true(chalk.trigger.var_9f32a5f4) && chalk.trigger.rarity != "orange") {
         n_chance = 0;
 

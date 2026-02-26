@@ -21,9 +21,9 @@ function private preinit() {
     return;
   }
 
-  clientfield::register_clientuimodel("hudItems.incursion.radiationDamage", #"hash_4f154d6820b7e836", [# "radiationdamage"], 1, 5, "float", undefined, 0, 0);
-  clientfield::register_clientuimodel("hudItems.incursion.radiationProtection", #"hash_4f154d6820b7e836", [# "radiationprotection"], 1, 5, "float", undefined, 0, 0);
-  clientfield::register_clientuimodel("hudItems.incursion.radiationHealth", #"hash_4f154d6820b7e836", [# "radiationhealth"], 1, 5, "float", undefined, 0, 0);
+  clientfield::register_clientuimodel("hudItems.incursion.radiationDamage", #"hash_4f154d6820b7e836", [#"radiationdamage"], 1, 5, "float", undefined, 0, 0);
+  clientfield::register_clientuimodel("hudItems.incursion.radiationProtection", #"hash_4f154d6820b7e836", [#"radiationprotection"], 1, 5, "float", undefined, 0, 0);
+  clientfield::register_clientuimodel("hudItems.incursion.radiationHealth", #"hash_4f154d6820b7e836", [#"radiationhealth"], 1, 5, "float", undefined, 0, 0);
   clientfield::register("toplayer", "radiation", 1, 10, "int", &radiation, 0, 1);
   callback::on_localclient_connect(&function_5cb7f849);
   level.var_6d29a25e = [];

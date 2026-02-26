@@ -121,11 +121,11 @@ function killstreakstart(hardpointtype, team, hacked, displayteammessage) {
 
   level.globalkillstreakscalled++;
   var_5c07b36e = [];
-  var_5c07b36e[# "caller"] = self getxuid();
-  var_5c07b36e[# "spawnid"] = getplayerspawnid(self);
-  var_5c07b36e[# "starttime"] = gettime();
-  var_5c07b36e[# "type"] = hardpointtype;
-  var_5c07b36e[# "endtime"] = 0;
+  var_5c07b36e[#"caller"] = self getxuid();
+  var_5c07b36e[#"spawnid"] = getplayerspawnid(self);
+  var_5c07b36e[#"starttime"] = gettime();
+  var_5c07b36e[#"type"] = hardpointtype;
+  var_5c07b36e[#"endtime"] = 0;
   level.matchrecorderkillstreakkills[killstreak_id] = 0;
   level.scorestreak_kills[killstreak_id] = 0;
   level.killstreaks_triggered[killstreak_id] = var_5c07b36e;
@@ -277,12 +277,12 @@ function killstreakstop(hardpointtype, team, id, var_2921b547 = 1) {
     return;
   }
 
-  level.killstreaks_triggered[id][# "endtime"] = gettime();
+  level.killstreaks_triggered[id][#"endtime"] = gettime();
   totalkillswiththiskillstreak = level.matchrecorderkillstreakkills[id];
 
   if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame() || sessionmodeiszombiesgame()) {
     mpkillstreakuses = {
-      #starttime: level.killstreaks_triggered[id][# "starttime"], #endtime: level.killstreaks_triggered[id][# "endtime"], #spawnid: level.killstreaks_triggered[id][# "spawnid"], #name: hardpointtype, #team: team
+      #starttime: level.killstreaks_triggered[id][#"starttime"], #endtime: level.killstreaks_triggered[id][#"endtime"], #spawnid: level.killstreaks_triggered[id][#"spawnid"], #name: hardpointtype, #team: team
     };
     var_8756d70f = killstreaks::function_cb0594d5();
     function_92d1707f(var_8756d70f, mpkillstreakuses);
@@ -393,9 +393,9 @@ function function_9f635a5(cooldowntime = 0, killstreaktype) {
   if(level.var_5b544215 === 1) {
     if(self function_40451ab0(killstreaktype)) {
       self killstreaks::add_to_notification_queue(level.killstreaks[killstreaktype].menuname, undefined, killstreaktype, 0, 0);
-      self.pers[# "hash_b05d8e95066f3ce"][killstreaktype] = 1;
-    } else if(self.pers[# "hash_b05d8e95066f3ce"][killstreaktype] === 1) {
-      self.pers[# "hash_b05d8e95066f3ce"][killstreaktype] = 0;
+      self.pers[#"hash_b05d8e95066f3ce"][killstreaktype] = 1;
+    } else if(self.pers[#"hash_b05d8e95066f3ce"][killstreaktype] === 1) {
+      self.pers[#"hash_b05d8e95066f3ce"][killstreaktype] = 0;
     }
 
     return;
@@ -404,7 +404,7 @@ function function_9f635a5(cooldowntime = 0, killstreaktype) {
   if(level.var_5b544215 === 2) {
     weapon = killstreaks::get_killstreak_weapon(killstreaktype);
 
-    if((isDefined(self.pers[# "killstreak_quantity"][weapon]) ? self.pers[# "killstreak_quantity"][weapon] : 0) >= level.scorestreaksmaxstacking) {
+    if((isDefined(self.pers[#"killstreak_quantity"][weapon]) ? self.pers[#"killstreak_quantity"][weapon] : 0) >= level.scorestreaksmaxstacking) {
       self killstreaks::add_to_notification_queue(level.killstreaks[killstreaktype].menuname, undefined, killstreaktype, 0, 0);
     }
   }
@@ -412,7 +412,7 @@ function function_9f635a5(cooldowntime = 0, killstreaktype) {
 
 function function_40451ab0(killstreaktype) {
   if(isDefined(killstreaktype)) {
-    momentum = self.pers[# "momentum"];
+    momentum = self.pers[#"momentum"];
     streakcost = self function_dceb5542(level.killstreaks[killstreaktype].itemindex);
 
     if(isDefined(momentum) && isDefined(streakcost) && momentum >= streakcost) {

@@ -230,7 +230,7 @@ function onroundswitch() {
 
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [[level._setteamscore]](team, game.stat[# "roundswon"][team]);
+      [[level._setteamscore]](team, game.stat[#"roundswon"][team]);
     }
   }
 }
@@ -267,21 +267,21 @@ function function_cdcbe19(roundwinner, var_2cd61e6c) {
   var_41886d38 = "roundswon";
   level.proptiebreaker = "none";
 
-  if(game.stat[var_41886d38][# "allies"] == game.stat[var_41886d38][# "axis"]) {
+  if(game.stat[var_41886d38][#"allies"] == game.stat[var_41886d38][#"axis"]) {
     level.proptiebreaker = "kills";
 
-    if(game.propscore[# "axis"] == game.propscore[# "allies"]) {
+    if(game.propscore[#"axis"] == game.propscore[#"allies"]) {
       level.proptiebreaker = "time";
 
-      if(game.hunterkilltime[# "axis"] == game.hunterkilltime[# "allies"]) {
+      if(game.hunterkilltime[#"axis"] == game.hunterkilltime[#"allies"]) {
         level.proptiebreaker = "tie";
         gamewinner = "tie";
-      } else if(game.hunterkilltime[# "axis"] < game.hunterkilltime[# "allies"]) {
+      } else if(game.hunterkilltime[#"axis"] < game.hunterkilltime[#"allies"]) {
         gamewinner = "axis";
       } else {
         gamewinner = "allies";
       }
-    } else if(game.propscore[# "axis"] > game.propscore[# "allies"]) {
+    } else if(game.propscore[#"axis"] > game.propscore[#"allies"]) {
       gamewinner = "axis";
     } else {
       gamewinner = "allies";
@@ -290,7 +290,7 @@ function function_cdcbe19(roundwinner, var_2cd61e6c) {
     if(gamewinner != "tie" && var_2cd61e6c) {
       globallogic_score::giveteamscoreforobjective_delaypostprocessing(gamewinner, 1);
     }
-  } else if(game.stat[var_41886d38][# "axis"] > game.stat[var_41886d38][# "allies"]) {
+  } else if(game.stat[var_41886d38][#"axis"] > game.stat[var_41886d38][#"allies"]) {
     gamewinner = "axis";
   } else {
     gamewinner = "allies";
@@ -342,8 +342,8 @@ function onplayerconnect() {
     self.hasdonecombat = 1;
   }
 
-  if(!isDefined(self.pers[# "objtime"])) {
-    self.pers[# "objtime"] = 0;
+  if(!isDefined(self.pers[#"objtime"])) {
+    self.pers[#"objtime"] = 0;
   }
 }
 
@@ -376,10 +376,10 @@ function update_objective_hint_message(attackersmsg, defendersmsg) {
 }
 
 function function_751eb311() {
-  level._effect[# "propdeathfx"] = "destruct/fx9_dest_prop_md";
-  level._effect[# "propdeathfx_s"] = "destruct/fx9_dest_prop_sm";
-  level._effect[# "propdeathfx_m"] = "destruct/fx9_dest_prop_md";
-  level._effect[# "propdeathfx_l"] = "destruct/fx9_dest_prop_lg";
+  level._effect[#"propdeathfx"] = "destruct/fx9_dest_prop_md";
+  level._effect[#"propdeathfx_s"] = "destruct/fx9_dest_prop_sm";
+  level._effect[#"propdeathfx_m"] = "destruct/fx9_dest_prop_md";
+  level._effect[#"propdeathfx_l"] = "destruct/fx9_dest_prop_lg";
 }
 
 function onstartgametype() {
@@ -420,25 +420,25 @@ function onstartgametype() {
     level.numlives = 1;
   }
 
-  level._effect[# "propflash"] = "destruct/fx9_dest_prop_md";
+  level._effect[#"propflash"] = "destruct/fx9_dest_prop_md";
   function_751eb311();
 
   if(!isDefined(game.propscore)) {
     game.propscore = [];
-    game.propscore[# "allies"] = 0;
-    game.propscore[# "axis"] = 0;
+    game.propscore[#"allies"] = 0;
+    game.propscore[#"axis"] = 0;
   }
 
   if(!isDefined(game.propsurvivaltime)) {
     game.propsurvivaltime = [];
-    game.propsurvivaltime[# "allies"] = 0;
-    game.propsurvivaltime[# "axis"] = 0;
+    game.propsurvivaltime[#"allies"] = 0;
+    game.propsurvivaltime[#"axis"] = 0;
   }
 
   if(!isDefined(game.hunterkilltime)) {
     game.hunterkilltime = [];
-    game.hunterkilltime[# "allies"] = 0;
-    game.hunterkilltime[# "axis"] = 0;
+    game.hunterkilltime[#"allies"] = 0;
+    game.hunterkilltime[#"axis"] = 0;
   }
 
   level flag::init("props_hide_over", 0);
@@ -763,11 +763,11 @@ function onspawnplayer(predictedspawn) {
       self.clonesleft = 0;
     }
 
-    if(!isDefined(self.pers[# "ability"])) {
-      self.pers[# "ability"] = 0;
+    if(!isDefined(self.pers[#"ability"])) {
+      self.pers[#"ability"] = 0;
     }
 
-    self.currentability = level.abilities[self.pers[# "ability"]];
+    self.currentability = level.abilities[self.pers[#"ability"]];
 
     if(useprophudserver()) {
       self thread prop_controls::propcontrolshud();
@@ -1126,7 +1126,7 @@ function damagewatch(damage, attacker, direction_vec, point, meansofdeath, model
   }
 
   if(isPlayer(modelname)) {
-    if(modelname.pers[# "team"] == self.owner.pers[# "team"]) {
+    if(modelname.pers[#"team"] == self.owner.pers[#"team"]) {
       return;
     }
 
@@ -1598,7 +1598,7 @@ function getprophealth(propinfo) {
 function function_239d2233(health) {
   self.var_66cb03ad = health;
   self.maxhealth = health;
-  self.var_894f7879[# "prop"] = health - (isDefined(level.var_90bb9821) ? level.var_90bb9821 : 0) - self.spawnhealth;
+  self.var_894f7879[#"prop"] = health - (isDefined(level.var_90bb9821) ? level.var_90bb9821 : 0) - self.spawnhealth;
 }
 
 function getpropsize(propsizetext) {
@@ -1699,9 +1699,9 @@ function setphteamscores() {
   var_492090b6 = 0;
   var_4e6d94ea = 0;
 
-  if(isDefined(game.stat[# "roundswon"])) {
-    var_4e6d94ea = game.stat[# "roundswon"][game.defenders];
-    var_492090b6 = game.stat[# "roundswon"][game.attackers];
+  if(isDefined(game.stat[#"roundswon"])) {
+    var_4e6d94ea = game.stat[#"roundswon"][game.defenders];
+    var_492090b6 = game.stat[#"roundswon"][game.attackers];
   }
 
   setteamscore(game.defenders, var_4e6d94ea);
@@ -1984,7 +1984,7 @@ function function_58c3eef7() {
 
 function stillalivexp() {
   level endon(#"game_ended");
-  level.var_b06adc58[# "kill"][# "value"] = 300;
+  level.var_b06adc58[#"kill"][#"value"] = 300;
   level waittill(#"props_hide_over");
 
   while(true) {
@@ -2048,8 +2048,8 @@ function tracktimealive() {
         continue;
       }
 
-      player.pers[# "objtime"]++;
-      player.objtime = player.pers[# "objtime"];
+      player.pers[#"objtime"]++;
+      player.objtime = player.pers[#"objtime"];
       player stats::function_bb7eedf0(#"objective_time", 1);
       player globallogic_score::incpersstat(#"objectivetime", 1, 0, 1);
     }
@@ -2228,15 +2228,15 @@ function freeze_player_controls(b_frozen = 1) {
 }
 
 function function_9c2f28fb() {
-  if(self.pers[# "team"] == game.attackers) {
+  if(self.pers[#"team"] == game.attackers) {
     self freeze_player_controls(1);
   } else {
     self thread function_a2d7a59c();
   }
 
-  team = self.pers[# "team"];
+  team = self.pers[#"team"];
 
-  if(isDefined(self.pers[# "music"].spawn) && self.pers[# "music"].spawn == 0) {
+  if(isDefined(self.pers[#"music"].spawn) && self.pers[#"music"].spawn == 0) {
     if(level.wagermatch) {
       music = "SPAWN_WAGER";
     } else {
@@ -2245,7 +2245,7 @@ function function_9c2f28fb() {
 
     if(game.roundsplayed == 0) {}
 
-    self.pers[# "music"].spawn = 1;
+    self.pers[#"music"].spawn = 1;
   }
 
   if(level.splitscreen) {
@@ -2301,8 +2301,8 @@ function checkkillrespawn() {
   level endon(#"game_ended");
   hostmigration::waitlongdurationwithhostmigrationpause(0.1);
 
-  if(self.pers[# "lives"] == 1) {
-    self.pers[# "lives"]--;
+  if(self.pers[#"lives"] == 1) {
+    self.pers[#"lives"]--;
     level.livescount[self.team]--;
     callback::callback(#"hash_6b7d26d34885b425", {});
     level notify(#"propcountchanged");
@@ -2374,9 +2374,9 @@ function function_dcc71445(attacker, smeansofdeath, weapon) {
 
   if(isDefined(bestplayer)) {
     result = [];
-    result[# "bestplayer"] = bestplayer;
-    result[# "bestplayerweapon"] = bestplayerweapon;
-    result[# "bestmeansofdeath"] = bestplayermeansofdeath;
+    result[#"bestplayer"] = bestplayer;
+    result[#"bestplayerweapon"] = bestplayerweapon;
+    result[#"bestmeansofdeath"] = bestplayermeansofdeath;
   }
 
   return result;
@@ -2463,12 +2463,12 @@ function waittillcanspawnclient() {
     }
 
     if(isDefined(self) && isDefined(self.curclass) && (self.sessionstate == "spectator" || !isalive(self))) {
-      if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
-        self.pers[# "class"] = "CLASS_CUSTOM1";
-        self.curclass = self.pers[# "class"];
+      if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
+        self.pers[#"class"] = "CLASS_CUSTOM1";
+        self.curclass = self.pers[#"class"];
       }
 
-      self.pers[# "lives"] = 1;
+      self.pers[#"lives"] = 1;
       self globallogic_spawn::spawnclient();
       continue;
     }
@@ -2557,9 +2557,9 @@ function function_ef516d85(winner, endtype, endreasontext, outcometext, team, wi
 
   if(endreasontext == "gameend" && isDefined(level.proptiebreaker)) {
     if(!isDefined(team) || team == "spectator") {
-      if(isDefined(self.team) && self.team != "spectator" && isDefined(game.stat[# "propscore"][self.team])) {
+      if(isDefined(self.team) && self.team != "spectator" && isDefined(game.stat[#"propscore"][self.team])) {
         team = self.team;
-      } else if(isDefined(self.sessionteam) && self.sessionteam != "spectator" && isDefined(game.stat[# "propscore"][self.sessionteam])) {
+      } else if(isDefined(self.sessionteam) && self.sessionteam != "spectator" && isDefined(game.stat[#"propscore"][self.sessionteam])) {
         team = self.sessionteam;
       }
 
@@ -2571,21 +2571,21 @@ function function_ef516d85(winner, endtype, endreasontext, outcometext, team, wi
     otherteam = util::getotherteam(team);
 
     if(level.proptiebreaker == "kills") {
-      winnerscore = game.stat[# "propscore"][team];
-      loserscore = game.stat[# "propscore"][otherteam];
+      winnerscore = game.stat[#"propscore"][team];
+      loserscore = game.stat[#"propscore"][otherteam];
 
       if(winnerscore < loserscore) {
-        winnerscore = game.stat[# "propscore"][otherteam];
-        loserscore = game.stat[# "propscore"][team];
+        winnerscore = game.stat[#"propscore"][otherteam];
+        loserscore = game.stat[#"propscore"][team];
       }
 
       var_28d2c341 = (winnerscore << 8) + loserscore;
       self luinotifyevent(#"show_outcome", 6, outcometext, #"mp_ph_tiebreaker_kill", int(matchbonus), winnerenum, notifyroundendtoui, var_28d2c341);
       return true;
     } else if(level.proptiebreaker == "time") {
-      var_2d0f00cc = game.stat[# "hunterkilltime"][team] / 1000;
+      var_2d0f00cc = game.stat[#"hunterkilltime"][team] / 1000;
       otherteam = util::getotherteam(team);
-      var_68c24bdc = game.stat[# "hunterkilltime"][otherteam] / 1000;
+      var_68c24bdc = game.stat[#"hunterkilltime"][otherteam] / 1000;
       var_4d33707d = round(var_2d0f00cc);
       var_b33664c9 = round(var_68c24bdc);
 
@@ -2643,7 +2643,7 @@ function function_d24f3562() {
   if(level.numlives || level.numteamlives) {
     gamehasstarted = gamehasstarted();
 
-    if(gamehasstarted && level.numlives && !self.pers[# "lives"] || level.numteamlives && !game.stat[self.team + "_lives"]) {
+    if(gamehasstarted && level.numlives && !self.pers[#"lives"] || level.numteamlives && !game.stat[self.team + "_lives"]) {
       return false;
     } else if(gamehasstarted) {
       if(!level.ingraceperiod && !self.hasspawned && !level.wagermatch) {
@@ -2823,13 +2823,13 @@ function function_a3f4820(time) {
   level.var_1103f74e.active = 0;
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[# "team"])) {
-      if(player.pers[# "team"] == game.defenders) {
+    if(isDefined(player.pers[#"team"])) {
+      if(player.pers[#"team"] == game.defenders) {
         player function_ad2b0245();
         continue;
       }
 
-      if(player.pers[# "team"] == game.attackers) {
+      if(player.pers[#"team"] == game.attackers) {
         player function_c2958208();
       }
     }
@@ -2935,7 +2935,7 @@ function function_19f7e795(player) {
     }
 
     clone notsolid();
-    clone hidefromteam(player.pers[# "team"]);
+    clone hidefromteam(player.pers[#"team"]);
     player.var_a920bfdd = clone;
     player thread function_63123cb(player, player.var_a920bfdd);
   }
@@ -3009,7 +3009,7 @@ function function_5099a828() {
   }
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == game.attackers) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == game.attackers) {
       player thread function_4725415b(#"mp_ph_empty");
     }
   }

@@ -27,7 +27,7 @@ register_zombie_types() {
   character\clientscripts\c_ger_honorguard_zt::register_gibs();
   character\clientscripts\c_zom_quad::register_gibs();
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("frag_grenade_zm", false);
   include_weapon("claymore_zm", false);
   include_weapon("m1911_zm", false);

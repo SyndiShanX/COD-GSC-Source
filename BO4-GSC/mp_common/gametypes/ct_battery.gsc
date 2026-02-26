@@ -67,9 +67,9 @@ function_7c4ef26b(predictedspawn) {
   }
 
   setDvar(#"custom_killstreak_mode", 2);
-  setDvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
-  setDvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
-  setDvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
+  setDvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
+  setDvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
+  setDvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
@@ -138,24 +138,24 @@ function_ba542258(mode) {
   var_27875ecd = 180000;
   self thread function_9270ab93(0, var_27875ecd);
   level.var_9468071 = [];
-  level.var_9468071[# "hash_4d612f606300433a"] = 0;
+  level.var_9468071[#"hash_4d612f606300433a"] = 0;
   level.var_902e7351 = 1;
 }
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[# "mp_frenetic"][1] = 60000;
-  var_e7cc5e43[# "mp_frenetic"][2] = 52000;
-  var_e7cc5e43[# "mp_frenetic"][3] = 45000;
-  var_e7cc5e43[# "mp_offshore"][1] = 60000;
-  var_e7cc5e43[# "mp_offshore"][2] = 52000;
-  var_e7cc5e43[# "mp_offshore"][3] = 45000;
-  var_e7cc5e43[# "mp_seaside"][1] = 60000;
-  var_e7cc5e43[# "mp_seaside"][2] = 52000;
-  var_e7cc5e43[# "mp_seaside"][3] = 45000;
-  var_e7cc5e43[# "mp_silo"][1] = 60000;
-  var_e7cc5e43[# "mp_silo"][2] = 52000;
-  var_e7cc5e43[# "mp_silo"][3] = 45000;
+  var_e7cc5e43[#"mp_frenetic"][1] = 60000;
+  var_e7cc5e43[#"mp_frenetic"][2] = 52000;
+  var_e7cc5e43[#"mp_frenetic"][3] = 45000;
+  var_e7cc5e43[#"mp_offshore"][1] = 60000;
+  var_e7cc5e43[#"mp_offshore"][2] = 52000;
+  var_e7cc5e43[#"mp_offshore"][3] = 45000;
+  var_e7cc5e43[#"mp_seaside"][1] = 60000;
+  var_e7cc5e43[#"mp_seaside"][2] = 52000;
+  var_e7cc5e43[#"mp_seaside"][3] = 45000;
+  var_e7cc5e43[#"mp_silo"][1] = 60000;
+  var_e7cc5e43[#"mp_silo"][2] = 52000;
+  var_e7cc5e43[#"mp_silo"][3] = 45000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(0, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -248,36 +248,36 @@ spawn_attack_helicopter(str_targetname, str_team, b_guns = 1, b_missiles = 1, a_
     a_parms = [];
   }
 
-  if(!isDefined(a_parms[# "hash_340f1ead2b66b1e5"])) {
-    a_parms[# "hash_340f1ead2b66b1e5"] = 1200;
+  if(!isDefined(a_parms[#"hash_340f1ead2b66b1e5"])) {
+    a_parms[#"hash_340f1ead2b66b1e5"] = 1200;
   }
 
-  if(!isDefined(a_parms[# "attack_time"])) {
-    a_parms[# "attack_time"] = 5;
+  if(!isDefined(a_parms[#"attack_time"])) {
+    a_parms[#"attack_time"] = 5;
   }
 
-  if(!isDefined(a_parms[# "attack_rest"])) {
-    a_parms[# "attack_rest"] = 3;
+  if(!isDefined(a_parms[#"attack_rest"])) {
+    a_parms[#"attack_rest"] = 3;
   }
 
-  if(!isDefined(a_parms[# "shoot_spread"])) {
-    a_parms[# "shoot_spread"] = 25;
+  if(!isDefined(a_parms[#"shoot_spread"])) {
+    a_parms[#"shoot_spread"] = 25;
   }
 
-  if(!isDefined(a_parms[# "speed"])) {
-    a_parms[# "speed"] = 30;
+  if(!isDefined(a_parms[#"speed"])) {
+    a_parms[#"speed"] = 30;
   }
 
-  if(!isDefined(a_parms[# "ACCEL"])) {
-    a_parms[# "ACCEL"] = 10;
+  if(!isDefined(a_parms[#"ACCEL"])) {
+    a_parms[#"ACCEL"] = 10;
   }
 
-  chopper.var_6982e1d6 = a_parms[# "hash_340f1ead2b66b1e5"];
-  chopper.var_9d8645cf = a_parms[# "attack_time"];
-  chopper.var_847fac28 = a_parms[# "attack_rest"];
-  chopper.n_shoot_spread = a_parms[# "shoot_spread"];
-  chopper.n_speed = a_parms[# "speed"];
-  chopper.n_accel = a_parms[# "ACCEL"];
+  chopper.var_6982e1d6 = a_parms[#"hash_340f1ead2b66b1e5"];
+  chopper.var_9d8645cf = a_parms[#"attack_time"];
+  chopper.var_847fac28 = a_parms[#"attack_rest"];
+  chopper.n_shoot_spread = a_parms[#"shoot_spread"];
+  chopper.n_speed = a_parms[#"speed"];
+  chopper.n_accel = a_parms[#"ACCEL"];
   chopper setteam(str_team);
   chopper.originalteam = str_team;
   chopper.attackers = [];
@@ -673,8 +673,8 @@ function_4e049216(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   }
 
   if(smeansofdeath === "MOD_PISTOL_BULLET" || smeansofdeath === "MOD_RIFLE_BULLET") {
-    if(!(isDefined(level.var_9468071[# "hash_4d612f606300433a"]) && level.var_9468071[# "hash_4d612f606300433a"])) {
-      level.var_9468071[# "hash_4d612f606300433a"] = 1;
+    if(!(isDefined(level.var_9468071[#"hash_4d612f606300433a"]) && level.var_9468071[#"hash_4d612f606300433a"])) {
+      level.var_9468071[#"hash_4d612f606300433a"] = 1;
       ct_utils::get_player() thread ct_utils::function_329f9ba6(#"hash_70f2d94bae3edef5", 2, "red");
     }
   } else if(smeansofdeath === "MOD_IMPACT" && weapon === getweapon(#"hero_pineapplegun")) {
@@ -934,11 +934,11 @@ function_52d196f2(n_difficulty = 2) {
 
   e_player thread function_9be2d75f();
   a_parms = [];
-  a_parms[# "hash_72de0eaa7f3c7619"] = var_a7b6c024[n_difficulty];
-  a_parms[# "attack_rest"] = var_89d9697a[n_difficulty];
-  a_parms[# "shoot_spread"] = var_ed621a12[n_difficulty];
-  a_parms[# "speed"] = var_c52588b6[n_difficulty];
-  a_parms[# "ACCEL"] = var_c005d40b[n_difficulty];
+  a_parms[#"hash_72de0eaa7f3c7619"] = var_a7b6c024[n_difficulty];
+  a_parms[#"attack_rest"] = var_89d9697a[n_difficulty];
+  a_parms[#"shoot_spread"] = var_ed621a12[n_difficulty];
+  a_parms[#"speed"] = var_c52588b6[n_difficulty];
+  a_parms[#"ACCEL"] = var_c005d40b[n_difficulty];
   level.a_vh_choppers = e_player spawn_attack_wave(var_88e49d60[n_difficulty], 0, a_parms, 2);
 
   foreach(vh_chopper in level.a_vh_choppers) {

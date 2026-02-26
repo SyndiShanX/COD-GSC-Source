@@ -160,8 +160,8 @@ markerupdatethread(context) {
       forwardvector = vectorscale(anglesToForward(angles), 300);
       results = bulletTrace(eyepos, eyepos + forwardvector, 0, player, 1);
 
-      if(results[# "fraction"] >= 1) {
-        results = bulletTrace(results[# "position"], results[# "position"] + (0, 0, -1000), 0, player, 1);
+      if(results[#"fraction"] >= 1) {
+        results = bulletTrace(results[#"position"], results[#"position"] + (0, 0, -1000), 0, player, 1);
       }
     } else {
       weapon = getweapon("ir_strobe");
@@ -169,7 +169,7 @@ markerupdatethread(context) {
       results = projectiletrace(weapon, eye, angles, player);
     }
 
-    markermodel.origin = results[# "position"] + (0, 0, 6);
+    markermodel.origin = results[#"position"] + (0, 0, 6);
     node = helicopter::getvalidrandomstartnode(markermodel.origin);
     var_6aa266d6 = undefined;
 

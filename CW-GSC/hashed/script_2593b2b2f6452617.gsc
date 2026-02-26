@@ -46,26 +46,26 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function init(instance) {
-  foreach(s_instance in instance.contentgroups[# "console"]) {
-    s_instance.mdl_platform = content_manager::spawn_script_model(s_instance.contentgroups[# "platform"][0], #"p9_sur_computer_console_01_platform", 1);
+  foreach(s_instance in instance.contentgroups[#"console"]) {
+    s_instance.mdl_platform = content_manager::spawn_script_model(s_instance.contentgroups[#"platform"][0], #"p9_sur_computer_console_01_platform", 1);
     s_instance.mdl_console = content_manager::spawn_script_model(s_instance, #"p9_sur_computer_console_01", 1);
     s_instance.mdl_console.targetname = "defend_object";
 
-    if(isDefined(s_instance.contentgroups[# "base"][0])) {
-      instance.mdl_base = content_manager::spawn_script_model(s_instance.contentgroups[# "base"][0], s_instance.contentgroups[# "base"][0].model, 1);
+    if(isDefined(s_instance.contentgroups[#"base"][0])) {
+      instance.mdl_base = content_manager::spawn_script_model(s_instance.contentgroups[#"base"][0], s_instance.contentgroups[#"base"][0].model, 1);
     }
 
-    s_instance.mdl_console.mdl_reward = s_instance.contentgroups[# "reward_drop"][0];
-    s_instance.mdl_console.var_559503f1 = s_instance.contentgroups[# "spawn_pt"];
-    s_instance.mdl_console.var_a74eba1b = s_instance.contentgroups[# "spawn_dog"];
-    s_instance.var_b416cb87 = s_instance.contentgroups[# "specimen"];
+    s_instance.mdl_console.mdl_reward = s_instance.contentgroups[#"reward_drop"][0];
+    s_instance.mdl_console.var_559503f1 = s_instance.contentgroups[#"spawn_pt"];
+    s_instance.mdl_console.var_a74eba1b = s_instance.contentgroups[#"spawn_dog"];
+    s_instance.var_b416cb87 = s_instance.contentgroups[#"specimen"];
 
-    if(isDefined(s_instance.contentgroups[# "attack_spot"])) {
-      s_instance.mdl_console.var_b69e83ca = s_instance.contentgroups[# "attack_spot"];
+    if(isDefined(s_instance.contentgroups[#"attack_spot"])) {
+      s_instance.mdl_console.var_b69e83ca = s_instance.contentgroups[#"attack_spot"];
     }
 
-    if(isDefined(s_instance.contentgroups[# "door_blocker"])) {
-      s_instance.a_s_blockers = s_instance.contentgroups[# "door_blocker"];
+    if(isDefined(s_instance.contentgroups[#"door_blocker"])) {
+      s_instance.a_s_blockers = s_instance.contentgroups[#"door_blocker"];
     }
   }
 
@@ -73,12 +73,12 @@ function init(instance) {
     instance.mdl_blocker = content_manager::spawn_script_model(s_instance.a_s_blockers[0], s_instance.a_s_blockers[0].model, 1);
   }
 
-  if(isDefined(instance.contentgroups[# "blocker"])) {
+  if(isDefined(instance.contentgroups[#"blocker"])) {
     instance thread function_3a6b15fd();
   }
 
   instance.var_7a9e6505 = 1;
-  instance.var_586c917d = array::random(s_instance.contentgroups[# "specimen"]);
+  instance.var_586c917d = array::random(s_instance.contentgroups[#"specimen"]);
   instance.var_43123efe = function_1f14f16f(instance.var_586c917d.origin, instance.var_586c917d.angles, 1);
   instance.var_43123efe ghost();
   level.var_2026156b = instance.var_586c917d.origin;
@@ -347,7 +347,7 @@ function function_98957f5b() {
   v_start = self.origin + (0, 0, 32);
   v_end = self.origin - (0, 0, 1000);
   a_trace = groundtrace(v_start, v_end, 0, self, 1);
-  v_ground = isDefined(a_trace[# "position"]) ? a_trace[# "position"] : self.origin;
+  v_ground = isDefined(a_trace[#"position"]) ? a_trace[#"position"] : self.origin;
   self playSound(#"evt_sr_obj_def_head_drop");
   level.e_head = level function_1f14f16f(v_ground + (0, 0, 8));
 
@@ -457,10 +457,10 @@ function function_15f3c92() {
 }
 
 function function_3a6b15fd() {
-  if(isDefined(self.contentgroups[# "blocker"])) {
+  if(isDefined(self.contentgroups[#"blocker"])) {
     self.a_mdl_blockers = [];
 
-    foreach(s_blocker in self.contentgroups[# "blocker"]) {
+    foreach(s_blocker in self.contentgroups[#"blocker"]) {
       self.a_mdl_blockers[self.a_mdl_blockers.size] = content_manager::spawn_script_model(s_blocker, s_blocker.model, 1);
     }
 
@@ -530,7 +530,7 @@ function defend_start(instance, activator) {
     instance.mdl_console thread function_e132cdc7(instance);
     instance notify(#"defend_go");
     level notify(#"defend_start");
-    var_cdce8e6f = instance.contentgroups[# "hash_5819d8571ea7c838"][0];
+    var_cdce8e6f = instance.contentgroups[#"hash_5819d8571ea7c838"][0];
 
     if(isDefined(var_cdce8e6f.script_noteworthy)) {
       instance flag::set(#"hash_12988a5a3e6a65d6");

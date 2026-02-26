@@ -179,9 +179,9 @@ function function_732dcb56(killstreaktype) {
 
   bundle = killstreaks::get_script_bundle("recon_plane");
   adjustedpath = function_98e60435(self.origin, bundle);
-  startposition = adjustedpath[# "startposition"];
-  endposition = adjustedpath[# "endposition"];
-  angles = adjustedpath[# "angles"];
+  startposition = adjustedpath[#"startposition"];
+  endposition = adjustedpath[#"endposition"];
+  angles = adjustedpath[#"angles"];
   recon_plane = spawn("script_model", startposition);
 
   if(!isDefined(level.var_d952ba86)) {
@@ -288,22 +288,22 @@ function function_98e60435(var_d44b8c3e, bundle) {
         maxheight = var_59a518e1[var_59a518e1.size - 1];
         var_35637e22 = maxheight - var_59a518e1[0];
         trace = groundtrace((var_d44b8c3e[0], var_d44b8c3e[1], maxheight), var_d44b8c3e - (0, 0, 5000), 0, undefined);
-        groundheight = trace[# "position"][2];
+        groundheight = trace[#"position"][2];
         var_6b1fb8d9 = groundheight + (maxheight - groundheight) * bundle.var_ff73e08c;
         endposition = var_90aa61b + vectorscale(forward, travelradius * 2);
 
         if(var_35637e22 < 2000) {
-          adjustedpath[# "startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
-          adjustedpath[# "endposition"] = (endposition[0], endposition[1], var_6b1fb8d9);
-          adjustedpath[# "angles"] = angles;
+          adjustedpath[#"startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
+          adjustedpath[#"endposition"] = (endposition[0], endposition[1], var_6b1fb8d9);
+          adjustedpath[#"angles"] = angles;
           return adjustedpath;
         }
 
         if(!isDefined(var_c8e01926) || var_35637e22 < var_c8e01926) {
           var_c8e01926 = var_35637e22;
-          var_af2fe365[# "startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
-          var_af2fe365[# "endposition"] = (endposition[0], endposition[1], var_6b1fb8d9);
-          var_af2fe365[# "angles"] = angles;
+          var_af2fe365[#"startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
+          var_af2fe365[#"endposition"] = (endposition[0], endposition[1], var_6b1fb8d9);
+          var_af2fe365[#"angles"] = angles;
         }
       }
 
@@ -318,9 +318,9 @@ function function_98e60435(var_d44b8c3e, bundle) {
     }
   }
 
-  adjustedpath[# "startposition"] = var_d44b8c3e + vectorscale(startforward, -1 * travelradius) + (0, 0, zoffset);
-  adjustedpath[# "endposition"] = var_d44b8c3e + vectorscale(startforward, travelradius) + (0, 0, zoffset);
-  adjustedpath[# "angles"] = startangles;
+  adjustedpath[#"startposition"] = var_d44b8c3e + vectorscale(startforward, -1 * travelradius) + (0, 0, zoffset);
+  adjustedpath[#"endposition"] = var_d44b8c3e + vectorscale(startforward, travelradius) + (0, 0, zoffset);
+  adjustedpath[#"angles"] = startangles;
   return adjustedpath;
 }
 

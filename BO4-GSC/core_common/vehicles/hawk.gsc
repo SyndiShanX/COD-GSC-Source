@@ -183,7 +183,7 @@ hawk_destroy(var_bb2c398b = 0) {
       forward = anglesToForward(hawk.angles);
       moveamount = vectorscale(forward, 350 * -1);
       trace = physicstrace(hawk.origin, hawk.origin + moveamount, (-4, -4, -4), (4, 4, 4), undefined, 1);
-      cam = spawn("script_model", trace[# "position"]);
+      cam = spawn("script_model", trace[#"position"]);
       cam setModel(#"tag_origin");
       cam linkto(hawk);
       hawk setspeedimmediate(0);

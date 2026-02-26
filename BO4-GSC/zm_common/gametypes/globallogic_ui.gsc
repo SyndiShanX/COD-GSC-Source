@@ -164,7 +164,7 @@ menuautoassign(comingfrommenu) {
       assignment = # "allies";
     }
 
-    if(assignment == self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+    if(assignment == self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
       self beginclasschoice();
       return;
     }
@@ -184,19 +184,19 @@ menuautoassign(comingfrommenu) {
     assignment = self.botteam;
   }
 
-  if(assignment != self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+  if(assignment != self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
     self.switching_teams = 1;
     self.joining_team = assignment;
-    self.leaving_team = self.pers[# "team"];
+    self.leaving_team = self.pers[#"team"];
     self suicide();
   }
 
-  self.pers[# "team"] = assignment;
+  self.pers[#"team"] = assignment;
   self.team = assignment;
-  self.pers[# "class"] = undefined;
+  self.pers[#"class"] = undefined;
   self.curclass = undefined;
-  self.pers[# "weapon"] = undefined;
-  self.pers[# "savedmodel"] = undefined;
+  self.pers[#"weapon"] = undefined;
+  self.pers[#"savedmodel"] = undefined;
   self updateobjectivetext();
   self.sessionteam = assignment;
 
@@ -284,11 +284,11 @@ closemenus() {
 }
 
 beginclasschoice(forcenewchoice) {
-  assert(isDefined(level.teams[self.pers[# "team"]]));
-  team = self.pers[# "team"];
+  assert(isDefined(level.teams[self.pers[#"team"]]));
+  team = self.pers[#"team"];
 
   if(level.disablecac == 1) {
-    self.pers[# "class"] = level.defaultclass;
+    self.pers[#"class"] = level.defaultclass;
     self.curclass = level.defaultclass;
 
     if(self.sessionstate != "playing" && game.state == "playing") {
@@ -303,15 +303,15 @@ beginclasschoice(forcenewchoice) {
 }
 
 showmainmenuforteam() {
-  assert(isDefined(level.teams[self.pers[# "team"]]));
-  team = self.pers[# "team"];
+  assert(isDefined(level.teams[self.pers[#"team"]]));
+  team = self.pers[#"team"];
   self openmenu(game.menu["menu_changeclass_" + level.teams[team]]);
 }
 
 menuautocontrolplayer() {
   self closemenus();
 
-  if(self.pers[# "team"] != "spectator") {
+  if(self.pers[#"team"] != "spectator") {
     toggleplayercontrol(self);
   }
 }
@@ -323,7 +323,7 @@ menuteam(team) {
     return;
   }
 
-  if(self.pers[# "team"] != team) {
+  if(self.pers[#"team"] != team) {
     if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
@@ -331,16 +331,16 @@ menuteam(team) {
     if(self.sessionstate == "playing") {
       self.switching_teams = 1;
       self.joining_team = team;
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[# "team"] = team;
+    self.pers[#"team"] = team;
     self.team = team;
-    self.pers[# "class"] = undefined;
+    self.pers[#"class"] = undefined;
     self.curclass = undefined;
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = team;
     self player::function_466d8a4b(1);
@@ -353,20 +353,20 @@ menuteam(team) {
 menuspectator() {
   self closemenus();
 
-  if(self.pers[# "team"] != "spectator") {
+  if(self.pers[#"team"] != "spectator") {
     if(isalive(self)) {
       self.switching_teams = 1;
       self.joining_team = "spectator";
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[# "team"] = "spectator";
+    self.pers[#"team"] = "spectator";
     self.team = "spectator";
-    self.pers[# "class"] = undefined;
+    self.pers[#"class"] = undefined;
     self.curclass = undefined;
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = "spectator";
     [[level.spawnspectator]]();

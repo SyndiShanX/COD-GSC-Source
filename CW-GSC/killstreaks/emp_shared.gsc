@@ -43,7 +43,7 @@ function fx_flesh_hit_neck_fatal(params) {
 
       if(isDefined(scoregiven)) {
         player challenges::earnedempassistscore(scoregiven);
-        killstreakindex = level.killstreakindices[# "emp"];
+        killstreakindex = level.killstreakindices[#"emp"];
         killstreaks::killstreak_assist(player, self, killstreakindex);
       }
     }

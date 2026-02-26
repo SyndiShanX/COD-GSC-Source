@@ -12,7 +12,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  init(level.teams[# "axis"]);
+  init(level.teams[#"axis"]);
   teamset::customteam_init();
 }
 
@@ -26,5 +26,5 @@ init(team) {
   game.voice[team] = "vox_pmc_";
   game.flagmodels[team] = "p8_mp_flag_pole_1_mercs";
   game.carry_flagmodels[team] = "p8_mp_flag_carry_1_mercs";
-  game.flagmodels[# "neutral"] = "p8_mp_flag_pole_1";
+  game.flagmodels[#"neutral"] = "p8_mp_flag_pole_1";
 }

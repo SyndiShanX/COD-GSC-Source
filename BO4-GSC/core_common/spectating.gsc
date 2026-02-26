@@ -243,7 +243,7 @@ set_permissions_for_machine() {
 }
 
 function_7d15f599() {
-  livesleft = !(level.numlives && !self.pers[# "lives"]);
+  livesleft = !(level.numlives && !self.pers[#"lives"]);
 
   if(!level.alivecount[self.team] && !livesleft) {
     return false;

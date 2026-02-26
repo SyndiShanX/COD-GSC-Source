@@ -601,26 +601,26 @@ function_68dfeba9() {
 }
 
 function_8fff2dd() {
-  level._effect[# "hash_7c49a746639d8fb9"] = "maps/zm_white/fx8_zm_white_code_type_0";
-  level._effect[# "hash_7c49a646639d8e06"] = "maps/zm_white/fx8_zm_white_code_type_1";
-  level._effect[# "hash_7c49a546639d8c53"] = "maps/zm_white/fx8_zm_white_code_type_2";
-  level._effect[# "hash_7c49a446639d8aa0"] = "maps/zm_white/fx8_zm_white_code_type_3";
-  level._effect[# "hash_7c49ab46639d9685"] = "maps/zm_white/fx8_zm_white_code_type_4";
-  level._effect[# "hash_7c49aa46639d94d2"] = "maps/zm_white/fx8_zm_white_code_type_5";
-  level._effect[# "hash_7c49a946639d931f"] = "maps/zm_white/fx8_zm_white_code_type_6";
-  level._effect[# "hash_7c49a846639d916c"] = "maps/zm_white/fx8_zm_white_code_type_7";
-  level._effect[# "hash_7c49af46639d9d51"] = "maps/zm_white/fx8_zm_white_code_type_8";
-  level._effect[# "hash_7c49ae46639d9b9e"] = "maps/zm_white/fx8_zm_white_code_type_9";
-  level._effect[# "hash_440d5b73d8a98ff4"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
-  level._effect[# "hash_440d5c73d8a991a7"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
-  level._effect[# "hash_440d5d73d8a9935a"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";
-  level._effect[# "hash_440d5e73d8a9950d"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_3";
-  level._effect[# "hash_440d5773d8a98928"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_4";
-  level._effect[# "hash_440d5873d8a98adb"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_5";
-  level._effect[# "hash_440d5973d8a98c8e"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_6";
-  level._effect[# "hash_440d5a73d8a98e41"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
-  level._effect[# "hash_440d5373d8a9825c"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
-  level._effect[# "hash_440d5473d8a9840f"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
+  level._effect[#"hash_7c49a746639d8fb9"] = "maps/zm_white/fx8_zm_white_code_type_0";
+  level._effect[#"hash_7c49a646639d8e06"] = "maps/zm_white/fx8_zm_white_code_type_1";
+  level._effect[#"hash_7c49a546639d8c53"] = "maps/zm_white/fx8_zm_white_code_type_2";
+  level._effect[#"hash_7c49a446639d8aa0"] = "maps/zm_white/fx8_zm_white_code_type_3";
+  level._effect[#"hash_7c49ab46639d9685"] = "maps/zm_white/fx8_zm_white_code_type_4";
+  level._effect[#"hash_7c49aa46639d94d2"] = "maps/zm_white/fx8_zm_white_code_type_5";
+  level._effect[#"hash_7c49a946639d931f"] = "maps/zm_white/fx8_zm_white_code_type_6";
+  level._effect[#"hash_7c49a846639d916c"] = "maps/zm_white/fx8_zm_white_code_type_7";
+  level._effect[#"hash_7c49af46639d9d51"] = "maps/zm_white/fx8_zm_white_code_type_8";
+  level._effect[#"hash_7c49ae46639d9b9e"] = "maps/zm_white/fx8_zm_white_code_type_9";
+  level._effect[#"hash_440d5b73d8a98ff4"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_0";
+  level._effect[#"hash_440d5c73d8a991a7"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_1";
+  level._effect[#"hash_440d5d73d8a9935a"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_2";
+  level._effect[#"hash_440d5e73d8a9950d"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_3";
+  level._effect[#"hash_440d5773d8a98928"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_4";
+  level._effect[#"hash_440d5873d8a98adb"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_5";
+  level._effect[#"hash_440d5973d8a98c8e"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_6";
+  level._effect[#"hash_440d5a73d8a98e41"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_7";
+  level._effect[#"hash_440d5373d8a9825c"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_8";
+  level._effect[#"hash_440d5473d8a9840f"] = "maps/zm_office/fx8_fxanim_zm_office_code_paint_9";
   level.var_f3c560b6[0] = getent("code_display_digit0", "script_noteworthy");
 
   for(i = 0; i < 4; i++) {
@@ -1151,11 +1151,11 @@ function_5fbede7a() {
 
 function_60f15ca8() {
   var_a94d1ca3 = getent("code_printer_paper", "targetname");
-  level._effect[# "hash_ae7ff67227046f2"] = # "hash_731cff4f6f2d012d";
+  level._effect[#"hash_ae7ff67227046f2"] = # "hash_731cff4f6f2d012d";
   var_73a8928d = var_a94d1ca3.origin;
   level.var_5d577798 stoploopsound();
   level.var_5d577798 playSound(#"hash_42924f60b7b4c07a");
-  playFXOnTag(level._effect[# "hash_ae7ff67227046f2"], level.var_5d577798, "tag_fx");
+  playFXOnTag(level._effect[#"hash_ae7ff67227046f2"], level.var_5d577798, "tag_fx");
   level.var_5d577798 hidepart("tag_screen_static");
   level.var_5d577798 showpart("tag_screen_broken");
   level.var_5d577798 hidepart("tag_screen_unbroken");

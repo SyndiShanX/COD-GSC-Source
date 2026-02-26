@@ -179,11 +179,11 @@ function function_2dcf7a5f(var_8cf55682, context) {
 
   trace = groundtrace(point + (0, 0, 20000), point + (0, 0, -10000), 0, undefined);
 
-  if(trace[# "fraction"] >= 1) {
+  if(trace[#"fraction"] >= 1) {
     return undefined;
   }
 
-  point = trace[# "position"];
+  point = trace[#"position"];
 
   foreach(trigger in var_8cf55682.hurttriggers) {
     if(istouching(point, trigger)) {
@@ -613,10 +613,10 @@ function function_4c0ed253(location, context) {
       sphere(location, 8, (1, 1, 0), 1, 1, 10, 1);
     }
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(!is_true(level.var_66da9c3c)) {
         if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
-          util::drawcylinder(trace[# "position"], context.radius, 8000, 0.0166667, undefined, (1, 0, 0), 0.7);
+          util::drawcylinder(trace[#"position"], context.radius, 8000, 0.0166667, undefined, (1, 0, 0), 0.7);
         }
 
         return false;
@@ -625,7 +625,7 @@ function function_4c0ed253(location, context) {
   }
 
   if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
-    util::drawcylinder(trace[# "position"], context.radius, 8000, 0.0166667, undefined, (0, 1, 0), 0.7);
+    util::drawcylinder(trace[#"position"], context.radius, 8000, 0.0166667, undefined, (0, 1, 0), 0.7);
   }
 
   return true;
@@ -652,7 +652,7 @@ function islocationgood(location, context) {
     radius = context.radius;
     trace = physicstrace(location + (0, 0, 5000), location + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
         sphere(location, radius, (1, 0, 0), 1, 1, 10, 1);
       }
@@ -828,10 +828,10 @@ function markerupdatethread(context) {
 
     radius = 2;
     results = physicstrace(player getEye(), player getEye() + forwardvector, (radius * -1, radius * -1, 0), (radius, radius, 0), player, mask);
-    markermodel.origin = results[# "position"];
+    markermodel.origin = results[#"position"];
     tooclose = distancesquared(markermodel.origin, player.origin) < minrange * minrange;
 
-    if(results[# "normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
+    if(results[#"normal"][2] > 0.7 && !tooclose && isDefined(context.islocationgood) && [[context.islocationgood]](markermodel.origin, context)) {
       player.markerposition = markermodel.origin;
       player clientfield::set_to_player("marker_state", 1);
     } else {
@@ -1170,8 +1170,8 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
       crate setenemymodel(#"hash_5c54841918c40b74");
       crate.var_e8a59c52 = 1;
 
-      if(isDefined(level.cratetypes[# "supplydrop"][# "remote_missile"].weight)) {
-        crate.var_f10af921 = level.cratetypes[# "supplydrop"][# "remote_missile"].weight + 1;
+      if(isDefined(level.cratetypes[#"supplydrop"][#"remote_missile"].weight)) {
+        crate.var_f10af921 = level.cratetypes[#"supplydrop"][#"remote_missile"].weight + 1;
       }
     } else {
       crate setModel(level.cratemodelfriendly);
@@ -1181,25 +1181,25 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
 
   switch (killstreak) {
     case # "turret_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "autoturret"];
+      crate.cratetype = level.cratetypes[killstreak][#"autoturret"];
       break;
     case # "tow_turret_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "auto_tow"];
+      crate.cratetype = level.cratetypes[killstreak][#"auto_tow"];
       break;
     case # "m220_tow_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "m220_tow"];
+      crate.cratetype = level.cratetypes[killstreak][#"m220_tow"];
       break;
     case # "tank_robot":
     case # "inventory_tank_robot":
-      crate.cratetype = level.cratetypes[killstreak][# "tank_robot"];
+      crate.cratetype = level.cratetypes[killstreak][#"tank_robot"];
       break;
     case # "inventory_minigun_drop":
     case # "minigun_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "minigun"];
+      crate.cratetype = level.cratetypes[killstreak][#"minigun"];
       break;
     case # "m32_drop":
     case # "inventory_m32_drop":
-      crate.cratetype = level.cratetypes[killstreak][# "m32"];
+      crate.cratetype = level.cratetypes[killstreak][#"m32"];
       break;
     default:
       crate.cratetype = crate getrandomcratetype("supplydrop");
@@ -1354,16 +1354,16 @@ function cratecontrolleddrop(killstreak, v_target_location, var_72886e11) {
 
   if(isDefined(params.var_827e3209)) {
     trace = groundtrace(crate.origin + (0, 0, 70), crate.origin + (0, 0, -100), 0, crate);
-    var_2122d2eb = crate getfxfromsurfacetable(params.var_827e3209, trace[# "surfacetype"]);
+    var_2122d2eb = crate getfxfromsurfacetable(params.var_827e3209, trace[#"surfacetype"]);
 
     if(isDefined(var_2122d2eb)) {
-      fxforward = trace[# "normal"];
+      fxforward = trace[#"normal"];
 
       if(fxforward == (0, 0, 0)) {
         fxforward = (0, 0, 1);
       }
 
-      playFX(var_2122d2eb, trace[# "position"], fxforward);
+      playFX(var_2122d2eb, trace[#"position"], fxforward);
       self playSound(#"phy_impact_supply");
     }
   }
@@ -1459,10 +1459,10 @@ function waitanddelete(time) {
 }
 
 function function_703ed715(trace) {
-  if(isDefined(trace[# "entity"]) && isvehicle(trace[# "entity"]) && trace[# "entity"].vehicleclass === "helicopter") {
+  if(isDefined(trace[#"entity"]) && isvehicle(trace[#"entity"]) && trace[#"entity"].vehicleclass === "helicopter") {
     mask = 1;
     radius = 30;
-    origin = trace[# "position"];
+    origin = trace[#"position"];
     trace = physicstrace(origin + (0, 0, -100), origin + (0, 0, -10000), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
     return trace;
   }
@@ -1500,7 +1500,7 @@ function dropcrate(origin, angle, killstreak, owner, team, killcament, killstrea
   radius = 30;
   trace = physicstrace(crate.origin + (0, 0, -100), crate.origin + (0, 0, -10000), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
   trace = function_703ed715(trace);
-  v_target_location = trace[# "position"];
+  v_target_location = trace[#"position"];
 
   if(getdvarint(#"scr_supply_drop_valid_location_debug", 0)) {
     util::drawcylinder(v_target_location, context.radius, 8000, 99999999, "<dev string:x94>", (0, 0, 0.9), 0.8);
@@ -1711,7 +1711,7 @@ function function_345ada65(attacker) {
 
   if(isDefined(bundle.var_b768b86b)) {
     trace = groundtrace(self.origin + (0, 0, 10), self.origin + (0, 0, -10), 0, self);
-    explosionfx = self getfxfromsurfacetable(bundle.var_b768b86b, trace[# "surfacetype"]);
+    explosionfx = self getfxfromsurfacetable(bundle.var_b768b86b, trace[#"surfacetype"]);
 
     if(isDefined(explosionfx)) {
       playFX(explosionfx, self.origin, anglestoup(self.angles), anglestoright(self.angles));
@@ -1895,8 +1895,8 @@ function cratedroptogroundtrace(start) {
   end = start + (0, 0, -8000);
   trace = bulletTrace(start, end, 1, self, 0, 1);
 
-  if(isDefined(trace[# "entity"]) && isPlayer(trace[# "entity"]) && isalive(trace[# "entity"])) {
-    player = trace[# "entity"];
+  if(isDefined(trace[#"entity"]) && isPlayer(trace[#"entity"]) && isalive(trace[#"entity"])) {
+    player = trace[#"entity"];
 
     if(player.sessionstate != "playing") {
       return;
@@ -1906,7 +1906,7 @@ function cratedroptogroundtrace(start) {
       return;
     }
 
-    if(distancesquared(start, trace[# "position"]) < 144 || self istouching(player)) {
+    if(distancesquared(start, trace[#"position"]) < 144 || self istouching(player)) {
       player dodamage(player.health + 1, player.origin, self.owner, self, "none", "MOD_HIT_BY_OBJECT", 0, getweapon(#"supplydrop"));
       player playSound(#"mpl_supply_crush");
       player playSound(#"phy_impact_supply");
@@ -2586,31 +2586,31 @@ function inccratekillstreakusagestat(weapon, killstreak_id) {
 
   switch (weapon.name) {
     case # "turret_drop":
-      self killstreak_dialog::play_killstreak_start_dialog("turret_drop", self.pers[# "team"], killstreak_id);
+      self killstreak_dialog::play_killstreak_start_dialog("turret_drop", self.pers[#"team"], killstreak_id);
       break;
     case # "tow_turret_drop":
-      self killstreak_dialog::play_killstreak_start_dialog("tow_turret_drop", self.pers[# "team"], killstreak_id);
+      self killstreak_dialog::play_killstreak_start_dialog("tow_turret_drop", self.pers[#"team"], killstreak_id);
       break;
     case # "supplydrop_marker":
     case # "inventory_supplydrop_marker":
-      self killstreak_dialog::play_killstreak_start_dialog("supply_drop", self.pers[# "team"], killstreak_id);
+      self killstreak_dialog::play_killstreak_start_dialog("supply_drop", self.pers[#"team"], killstreak_id);
       level thread popups::displaykillstreakteammessagetoall("supply_drop", self);
       self challenges::calledincarepackage();
       self stats::function_e24eec31(getweapon(#"supplydrop"), #"used", 1);
       break;
     case # "tank_robot":
     case # "inventory_tank_robot":
-      self killstreak_dialog::play_killstreak_start_dialog("tank_robot", self.pers[# "team"], killstreak_id);
+      self killstreak_dialog::play_killstreak_start_dialog("tank_robot", self.pers[#"team"], killstreak_id);
       level thread popups::displaykillstreakteammessagetoall("tank_robot", self);
       self stats::function_e24eec31(getweapon(#"tank_robot"), #"used", 1);
       break;
     case # "inventory_minigun_drop":
     case # "minigun_drop":
-      self killstreak_dialog::play_killstreak_start_dialog("minigun", self.pers[# "team"], killstreak_id);
+      self killstreak_dialog::play_killstreak_start_dialog("minigun", self.pers[#"team"], killstreak_id);
       break;
     case # "m32_drop":
     case # "inventory_m32_drop":
-      self killstreak_dialog::play_killstreak_start_dialog("m32", self.pers[# "team"], killstreak_id);
+      self killstreak_dialog::play_killstreak_start_dialog("m32", self.pers[#"team"], killstreak_id);
       break;
     case # "combat_robot_drop":
       level thread popups::displaykillstreakteammessagetoall("combat_robot", self);
@@ -2678,7 +2678,7 @@ function private function_accec5c5(drop_origin, context, drop_height) {
   heli_drop_goal = (context[0], context[1], context[2] + drop_height);
   trace = physicstrace(heli_drop_goal, context + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     recordsphere(context + (0, 0, 20), 2, (1, 0, 0), "<dev string:xc6>");
 
     return false;
@@ -2819,7 +2819,7 @@ function helidelivercrate(origin, weapon, owner, team, killstreak_id, package_co
   if(isDefined(context.marker)) {
     context.marker.team = owner.team;
     context.marker entityheadicons::destroyentityheadicons();
-    context.marker entityheadicons::setentityheadicon(owner.pers[# "team"], owner, context.objective);
+    context.marker entityheadicons::setentityheadicon(owner.pers[#"team"], owner, context.objective);
   }
 
   if(isPlayer(self) && isDefined(weapon)) {
@@ -3009,7 +3009,7 @@ function helidelivercrate(origin, weapon, owner, team, killstreak_id, package_co
     }
 
     trace = groundtrace(chopper_drop_point + (0, 0, -100), chopper_drop_point + (0, 0, -10000), 0, undefined, 0);
-    debug_drop_location = trace[# "position"];
+    debug_drop_location = trace[#"position"];
     util::drawcylinder(debug_drop_location, context.radius, 8000, 99999999, "<dev string:x11c>", (1, 0.6, 0), 0.9);
     iprintln("<dev string:x156>" + distance2d(chopper_drop_point, heli_drop_goal));
   }
@@ -3179,7 +3179,7 @@ function lbexplode() {
     self clientfield::set("" + # "hash_e4eb5c0853abab8", 0);
   }
 
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   self notify(#"explode");
 
   if(isDefined(self.delete_after_destruction_wait_time)) {
@@ -3210,7 +3210,7 @@ function refcountdecchopper(team, killstreak_id, killstreaktype, var_9e10e827) {
 }
 
 function function_4bf116ab(ents) {
-  self.crate linkto(ents[# "harness"], "tag_care_package", (0, 0, 0), (0, 0, 0));
+  self.crate linkto(ents[#"harness"], "tag_care_package", (0, 0, 0), (0, 0, 0));
 }
 
 function function_2842c984(ents) {
@@ -3220,8 +3220,8 @@ function function_2842c984(ents) {
 }
 
 function function_76b49bd8(ents) {
-  ents[# "parachute"] clientfield::set("supply_drop_parachute_rob", 1);
-  self.parachute = ents[# "parachute"];
+  ents[#"parachute"] clientfield::set("supply_drop_parachute_rob", 1);
+  self.parachute = ents[#"parachute"];
 }
 
 function function_2defd397() {

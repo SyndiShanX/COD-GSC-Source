@@ -171,8 +171,8 @@ function markerupdatethread(context) {
       forwardvector = vectorscale(anglesToForward(angles), 300);
       results = bulletTrace(eyepos, eyepos + forwardvector, 0, player, 1);
 
-      if(results[# "fraction"] >= 1) {
-        results = bulletTrace(results[# "position"], results[# "position"] + (0, 0, -1000), 0, player, 1);
+      if(results[#"fraction"] >= 1) {
+        results = bulletTrace(results[#"position"], results[#"position"] + (0, 0, -1000), 0, player, 1);
       }
     } else {
       weapon = getweapon("ir_strobe");
@@ -180,7 +180,7 @@ function markerupdatethread(context) {
       results = projectiletrace(weapon, eye, angles, player);
     }
 
-    markermodel.origin = results[# "position"] + (0, 0, 6);
+    markermodel.origin = results[#"position"] + (0, 0, 6);
     node = helicopter::getvalidrandomstartnode(markermodel.origin);
     var_6aa266d6 = undefined;
 
@@ -190,7 +190,7 @@ function markerupdatethread(context) {
 
     tooclose = distancesquared(markermodel.origin, player.origin) < minrange * minrange;
     waterheight = getwaterheight(markermodel.origin);
-    inwater = markermodel.origin[2] < waterheight || results[# "surfacetype"] === "water";
+    inwater = markermodel.origin[2] < waterheight || results[#"surfacetype"] === "water";
 
     if(inwater) {
       markermodel.origin = (markermodel.origin[0], markermodel.origin[1], waterheight + 20);

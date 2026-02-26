@@ -20,16 +20,16 @@ function function_c44464c8() {
 
 function init_fx() {
   thread function_d54bb61();
-  level._effect[# "hash_75a6e0287f64b467"] = # "hash_b6ab7aa2e4af0ce";
-  level._effect[# "hash_1d9204870892bf9c"] = # "hash_3d58577d8964749b";
-  level._effect[# "hash_7e6d961e2c87c2c9"] = # "hash_1195c44b2991b9e";
-  level._effect[# "hash_430013754d2d4603"] = # "hash_5cad1a1b9fdc43ee";
+  level._effect[#"hash_75a6e0287f64b467"] = # "hash_b6ab7aa2e4af0ce";
+  level._effect[#"hash_1d9204870892bf9c"] = # "hash_3d58577d8964749b";
+  level._effect[#"hash_7e6d961e2c87c2c9"] = # "hash_1195c44b2991b9e";
+  level._effect[#"hash_430013754d2d4603"] = # "hash_5cad1a1b9fdc43ee";
   thread exploder::kill_exploder("fx_firebase_nukeretrieve");
   thread exploder::kill_exploder("fx_firebase_nukeretrieve_downdraft");
 }
 
 function function_82a143d2() {
-  playFX(level._effect[# "hash_7e6d961e2c87c2c9"], self.origin + (0, 0, -150));
+  playFX(level._effect[#"hash_7e6d961e2c87c2c9"], self.origin + (0, 0, -150));
 }
 
 function function_d54bb61() {
@@ -54,7 +54,7 @@ function function_62dae110() {
   level.player endon(#"death");
   level.var_7466d419 endon(#"death");
   level waittill(#"hash_7a85fc4b002ec719");
-  playFXOnTag(level._effect[# "hash_75a6e0287f64b467"], level.var_7466d419, "tag_attach");
+  playFXOnTag(level._effect[#"hash_75a6e0287f64b467"], level.var_7466d419, "tag_attach");
   level.player clientfield::set_to_player("pstfx_sprite_rain_loop", 1);
   level waittill(#"hash_2d8371713a24b057");
   level.player clientfield::set_to_player("pstfx_sprite_rain_loop", 0);

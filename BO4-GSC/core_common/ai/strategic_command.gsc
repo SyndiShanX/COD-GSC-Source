@@ -195,18 +195,18 @@ function_741d9796(member, vehicle, commander, var_78caba27) {
       foreach(squad in commander.squads) {
         bots = plannersquadutility::getblackboardattribute(squad, "<dev string:xa6>");
 
-        if(bots.size > 0 && bots[0][# "entnum"] == member getentitynumber()) {
+        if(bots.size > 0 && bots[0][#"entnum"] == member getentitynumber()) {
           target = plannersquadutility::getblackboardattribute(squad, "<dev string:xb3>");
 
           if(isDefined(target)) {
-            bundle = target[# "__unsafe__"][# "bundle"];
-            missioncomponent = target[# "__unsafe__"][# "mission_component"];
+            bundle = target[#"__unsafe__"][#"bundle"];
+            missioncomponent = target[#"__unsafe__"][#"mission_component"];
 
             if(isDefined(missioncomponent)) {
               return missioncomponent.scriptbundlename;
             }
 
-            object = target[# "__unsafe__"][# "object"];
+            object = target[#"__unsafe__"][#"object"];
 
             if(isDefined(object) && isDefined(object.e_object) && isDefined(object.e_object.scriptbundlename)) {
               return object.e_object.scriptbundlename;

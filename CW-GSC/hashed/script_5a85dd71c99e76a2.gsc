@@ -40,8 +40,8 @@ function function_37c8a043(str_objective, var_50cc0d4f) {
   level thread globallogic_ui::function_7bc0e4b9();
   snd::client_msg("audio_level_begin_duck_start");
   level waittill(#"chyron_menu_closed");
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   namespace_b73b9191::function_15426f9d("cull_inside_satcom");
   namespace_b73b9191::function_15426f9d("cull_inside_finale");
   namespace_b73b9191::function_15426f9d("cull_inside_bunkerext");
@@ -146,8 +146,8 @@ function function_d3655e70(str_objective) {
   level thread function_e16fed8b();
   level thread function_fe3defb0();
   level flag::set("flg_intro_dialog_done");
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   level thread namespace_8a404420::function_fbb0d73f();
   s_mountain_woods_teleport = struct::get("s_mountain_woods_teleport", "targetname");
   level.ai_woods forceteleport(s_mountain_woods_teleport.origin, s_mountain_woods_teleport.angles);
@@ -363,8 +363,8 @@ function function_bb34c64(str_objective) {
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level flag::set("flg_mountain_woods_slide_ready");
   level thread namespace_7468806b::function_79af70ae(1);
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   level thread function_ed43d759(1);
 }
 
@@ -586,8 +586,8 @@ function function_fa84444c(ai, flag) {
 function function_4fa3dab1() {
   level endon(#"flg_mountains_zipline_end");
   level flag::wait_till_any(array("flg_zipline_intro_stealth_broken", "flg_stealth_spotted"));
-  level.allowbattlechatter[# "allies"] = 1;
-  level.allowbattlechatter[# "axis"] = 1;
+  level.allowbattlechatter[#"allies"] = 1;
+  level.allowbattlechatter[#"axis"] = 1;
 }
 
 function function_94354bd7() {
@@ -1043,8 +1043,8 @@ function function_b205e5be(str_objective) {
   var_b4bb921 = struct::get("woods_zipline_teleport", "targetname");
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
   level thread namespace_7468806b::function_79af70ae(1);
-  level.allowbattlechatter[# "allies"] = 0;
-  level.allowbattlechatter[# "axis"] = 0;
+  level.allowbattlechatter[#"allies"] = 0;
+  level.allowbattlechatter[#"axis"] = 0;
   level flag::set("flg_mountain_spotter_dead");
 }
 

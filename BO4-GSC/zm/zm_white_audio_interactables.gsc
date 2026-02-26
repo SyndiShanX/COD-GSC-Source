@@ -131,7 +131,7 @@ function_9e497c58() {
     var_f711229a.var_808cd5ad = var_f711229a.var_8ace5ace;
     var_f711229a.scene scene::play("idle_off_" + var_f711229a.var_8ace5ace);
     var_f711229a.scene flagsys::wait_till(#"scene_ents_ready");
-    var_f711229a.scene_entity = var_f711229a.scene.scene_ents[# "prop 1"];
+    var_f711229a.scene_entity = var_f711229a.scene.scene_ents[#"prop 1"];
     var_f711229a.scene.var_eb397f67 = var_f711229a.scene_entity gettagorigin("tag_tuner_knob");
     level.var_96fdae0e[var_f711229a.script_int] = var_f711229a;
   }

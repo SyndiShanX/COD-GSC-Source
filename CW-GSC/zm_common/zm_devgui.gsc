@@ -116,7 +116,7 @@ function function_a4eebdf3() {
 
     if(isDefined(self.spawn_funcs)) {
       foreach(pair in self.spawn_funcs) {
-        if(pair[# "function"] === &zm_behavior::function_d63f6426) {
+        if(pair[#"function"] === &zm_behavior::function_d63f6426) {
           var_c5de9c31 = 1;
           break;
         }
@@ -249,12 +249,12 @@ function private function_2f5772bf(cmd) {
       wait 0.5;
 
       if(isvehicle(ai)) {
-        ai.origin = trace[# "position"];
-        ai function_a57c34b7(trace[# "position"]);
+        ai.origin = trace[#"position"];
+        ai function_a57c34b7(trace[#"position"]);
         return;
       }
 
-      ai forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+      ai forceteleport(trace[#"position"], player.angles + (0, 180, 0));
     }
   }
 }
@@ -506,7 +506,7 @@ function function_6758ede4(zone) {
 }
 
 function function_995340b7(zone, var_87f65b00) {
-  if(!isDefined(zone.a_loc_types[# "wait_location"]) || zone.a_loc_types[# "wait_location"].size <= 0) {
+  if(!isDefined(zone.a_loc_types[#"wait_location"]) || zone.a_loc_types[#"wait_location"].size <= 0) {
     if(is_true(var_87f65b00)) {
       level.validation_errors_count++;
 
@@ -664,7 +664,7 @@ function validate_to_board(spawn_point, spawn_point_origin_backup) {
 }
 
 function validate_to_wait_point(zone, new_spawn_point_origin, spawn_point) {
-  foreach(loc in zone.a_loc_types[# "wait_location"]) {
+  foreach(loc in zone.a_loc_types[#"wait_location"]) {
     if(isDefined(loc)) {
       wait_point = loc.origin;
 
@@ -2250,7 +2250,7 @@ function devgui_zombie_spawn() {
   if(isDefined(guy)) {
     guy.script_string = "<dev string:x77e>";
     guy dontinterpolate();
-    guy forceteleport(trace[# "position"], player.angles + (0, 180, 0));
+    guy forceteleport(trace[#"position"], player.angles + (0, 180, 0));
   }
 
   return guy;
@@ -3088,7 +3088,7 @@ function zombie_devgui_give_powerup(powerup_name, now, origin) {
     return;
   }
 
-  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[# "position"], undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
+  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[#"position"], undefined, undefined, undefined, undefined, undefined, undefined, undefined, 1);
 }
 
 function zombie_devgui_give_powerup_player(powerup_name, now) {
@@ -3121,7 +3121,7 @@ function zombie_devgui_give_powerup_player(powerup_name, now) {
   scale = 8000;
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
   trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
-  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[# "position"], undefined, undefined, player);
+  level thread zm_powerups::specific_powerup_drop(powerup_name, trace[#"position"], undefined, undefined, player);
 }
 
 function zombie_devgui_goto_round(target_round) {
@@ -3133,7 +3133,7 @@ function zombie_devgui_goto_round(target_round) {
 
   level.devcheater = 1;
   level.zombie_total = 0;
-  level.zombie_health = isDefined(level.var_41dd92fd[# "zombie"].health) ? level.var_41dd92fd[# "zombie"].health : 100;
+  level.zombie_health = isDefined(level.var_41dd92fd[#"zombie"].health) ? level.var_41dd92fd[#"zombie"].health : 100;
   zm_round_logic::set_round_number(target_round - 1);
 
   if(isDefined(level.var_e63636af)) {
@@ -3367,15 +3367,15 @@ function function_c8ee84ba() {}
 function function_c83c6fa() {}
 
 function function_cbdab30d(xp) {
-  if(self.pers[# "rankxp"] > xp) {
-    self.pers[# "rank"] = 0;
+  if(self.pers[#"rankxp"] > xp) {
+    self.pers[#"rank"] = 0;
     self setrank(0);
     self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", 0);
   }
 
-  self.pers[# "rankxp"] = xp;
+  self.pers[#"rankxp"] = xp;
   self rank::updaterank();
-  self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", self.pers[# "rank"]);
+  self stats::set_stat(#"playerstatslist", #"rank", #"statvalue", self.pers[#"rank"]);
 }
 
 function function_5c26ad27(var_56c1b8d) {
@@ -3728,7 +3728,7 @@ function wait_for_zombie(crawler) {
 
             anim_results = zombie astsearch(table);
 
-            if(!isDefined(anim_results[# "animation"])) {
+            if(!isDefined(anim_results[#"animation"])) {
               if(is_true(crawler)) {
                 node.bad_crawler_traverse = 1;
               } else {
@@ -3738,7 +3738,7 @@ function wait_for_zombie(crawler) {
               continue;
             }
 
-            if(anim_results[# "animation"] == "<dev string:xf9f>") {
+            if(anim_results[#"animation"] == "<dev string:xf9f>") {
               teleport = 1;
             }
           }
@@ -4160,7 +4160,7 @@ function private function_b4dcb9ce() {
   direction_vec = (direction_vec[0] * scale, direction_vec[1] * scale, direction_vec[2] * scale);
   trace = bulletTrace(eye, eye + direction_vec, 0, player);
   return {
-    #origin: trace[# "position"]
+    #origin: trace[#"position"]
   };
 }
 
@@ -4336,9 +4336,9 @@ function function_1a4752d0() {
   }
 
   foreach(location in level.contentmanager.locations) {
-    if(isDefined(location.instances[# "wallbuy"])) {
-      if(isarray(location.instances[# "wallbuy"].contentgroups[# "wallbuy_chalk"])) {
-        var_d82a99e8 = location.instances[# "wallbuy"].contentgroups[# "wallbuy_chalk"][level.var_d13a2c74];
+    if(isDefined(location.instances[#"wallbuy"])) {
+      if(isarray(location.instances[#"wallbuy"].contentgroups[#"wallbuy_chalk"])) {
+        var_d82a99e8 = location.instances[#"wallbuy"].contentgroups[#"wallbuy_chalk"][level.var_d13a2c74];
         player = getplayers()[0];
         forward = anglestoright(var_d82a99e8.angles);
         forward = vectornormalize(forward);
@@ -4347,8 +4347,8 @@ function function_1a4752d0() {
         player setorigin(var_92f819ac);
         level.var_d13a2c74++;
 
-        if(level.var_d13a2c74 >= location.instances[# "wallbuy"].contentgroups[# "wallbuy_chalk"].size) {
-          level.var_d13a2c74 = level.var_d13a2c74 >= location.instances[# "wallbuy"].contentgroups[# "wallbuy_chalk"].size - 1;
+        if(level.var_d13a2c74 >= location.instances[#"wallbuy"].contentgroups[#"wallbuy_chalk"].size) {
+          level.var_d13a2c74 = level.var_d13a2c74 >= location.instances[#"wallbuy"].contentgroups[#"wallbuy_chalk"].size - 1;
         }
       }
     }
@@ -4360,9 +4360,9 @@ function function_5ec967f7() {
 
   while(true) {
     foreach(location in level.contentmanager.locations) {
-      if(isDefined(location.instances[# "wallbuy"])) {
-        if(isarray(location.instances[# "wallbuy"].contentgroups[# "wallbuy_chalk"])) {
-          foreach(wallbuy in location.instances[# "wallbuy"].contentgroups[# "wallbuy_chalk"]) {
+      if(isDefined(location.instances[#"wallbuy"])) {
+        if(isarray(location.instances[#"wallbuy"].contentgroups[#"wallbuy_chalk"])) {
+          foreach(wallbuy in location.instances[#"wallbuy"].contentgroups[#"wallbuy_chalk"]) {
             player = getplayers()[0];
 
             if(player util::is_looking_at(wallbuy.origin)) {

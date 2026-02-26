@@ -40,11 +40,11 @@ function staminup_precache() {
     return;
   }
 
-  level._effect[# "marathon_light"] = "zombie/fx_perk_staminup_ndu";
-  level.machine_assets[# "talent_staminup"] = spawnStruct();
-  level.machine_assets[# "talent_staminup"].weapon = getweapon("zombie_perk_bottle_marathon");
-  level.machine_assets[# "talent_staminup"].off_model = "p9_sur_machine_staminup_off";
-  level.machine_assets[# "talent_staminup"].on_model = "p9_sur_machine_staminup";
+  level._effect[#"marathon_light"] = "zombie/fx_perk_staminup_ndu";
+  level.machine_assets[#"talent_staminup"] = spawnStruct();
+  level.machine_assets[#"talent_staminup"].weapon = getweapon("zombie_perk_bottle_marathon");
+  level.machine_assets[#"talent_staminup"].off_model = "p9_sur_machine_staminup_off";
+  level.machine_assets[#"talent_staminup"].on_model = "p9_sur_machine_staminup";
 }
 
 function staminup_register_clientfield() {}

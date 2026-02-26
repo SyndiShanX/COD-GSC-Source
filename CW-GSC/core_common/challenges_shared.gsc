@@ -97,27 +97,27 @@ function destroyedequipment(weapon) {
 }
 
 function destroyedtacticalinsert() {
-  if(!isDefined(self.pers[# "tacticalinsertsdestroyed"])) {
-    self.pers[# "tacticalinsertsdestroyed"] = 0;
+  if(!isDefined(self.pers[#"tacticalinsertsdestroyed"])) {
+    self.pers[#"tacticalinsertsdestroyed"] = 0;
   }
 
-  self.pers[# "tacticalinsertsdestroyed"]++;
+  self.pers[#"tacticalinsertsdestroyed"]++;
 
-  if(self.pers[# "tacticalinsertsdestroyed"] >= 5) {
-    self.pers[# "tacticalinsertsdestroyed"] = 0;
+  if(self.pers[#"tacticalinsertsdestroyed"] >= 5) {
+    self.pers[#"tacticalinsertsdestroyed"] = 0;
     self stats::function_dad108fa(#"destroy_5_tactical_inserts", 1);
   }
 }
 
 function addflyswatterstat(weapon, aircraft) {
-  if(!isDefined(self.pers[# "flyswattercount"])) {
-    self.pers[# "flyswattercount"] = 0;
+  if(!isDefined(self.pers[#"flyswattercount"])) {
+    self.pers[#"flyswattercount"] = 0;
   }
 
   self stats::function_e24eec31(weapon, #"destroyed_aircraft", 1);
-  self.pers[# "flyswattercount"]++;
+  self.pers[#"flyswattercount"]++;
 
-  if(self.pers[# "flyswattercount"] == 5) {
+  if(self.pers[#"flyswattercount"] == 5) {
     self stats::function_e24eec31(weapon, #"destroyed_5_aircraft", 1);
   }
 
@@ -163,12 +163,12 @@ function initteamchallenges(team) {
 
   if(!isDefined(game.challenge[team])) {
     game.challenge[team] = [];
-    game.challenge[team][# "plantedbomb"] = 0;
-    game.challenge[team][# "destroyedbombsite"] = 0;
-    game.challenge[team][# "capturedflag"] = 0;
+    game.challenge[team][#"plantedbomb"] = 0;
+    game.challenge[team][#"destroyedbombsite"] = 0;
+    game.challenge[team][#"capturedflag"] = 0;
   }
 
-  game.challenge[team][# "allalive"] = 1;
+  game.challenge[team][#"allalive"] = 1;
 }
 
 function registerchallengescallback(callback, func) {
@@ -209,8 +209,8 @@ function on_player_connect() {
 }
 
 function initchallengedata() {
-  self.pers[# "stickexplosivekill"] = 0;
-  self.pers[# "carepackagescalled"] = 0;
+  self.pers[#"stickexplosivekill"] = 0;
+  self.pers[#"carepackagescalled"] = 0;
   self.explosiveinfo = [];
 }
 
@@ -385,7 +385,7 @@ function ishighestscoringplayer(player) {
   players = level.players;
 
   if(level.teambased) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
   } else {
     team = "all";
   }
@@ -405,7 +405,7 @@ function ishighestscoringplayer(player) {
       continue;
     }
 
-    if(team != "all" && players[i].pers[# "team"] != team) {
+    if(team != "all" && players[i].pers[#"team"] != team) {
       continue;
     }
 
@@ -419,14 +419,14 @@ function ishighestscoringplayer(player) {
 
 function spawnwatcher() {
   self endon(#"disconnect", #"killspawnmonitor");
-  self.pers[# "stickexplosivekill"] = 0;
-  self.pers[# "pistolheadshot"] = 0;
-  self.pers[# "assaultrifleheadshot"] = 0;
-  self.pers[# "killnemesis"] = 0;
+  self.pers[#"stickexplosivekill"] = 0;
+  self.pers[#"pistolheadshot"] = 0;
+  self.pers[#"assaultrifleheadshot"] = 0;
+  self.pers[#"killnemesis"] = 0;
 
   while(true) {
     self waittill(#"spawned_player");
-    self.pers[# "longshotsperlife"] = 0;
+    self.pers[#"longshotsperlife"] = 0;
     self.weaponkills = [];
     self.attachmentkills = [];
     self.retreivedblades = 0;
@@ -471,14 +471,14 @@ function destroyed_car() {
 }
 
 function killednemesis() {
-  if(!isDefined(self.pers[# "killnemesis"])) {
-    self.pers[# "killnemesis"] = 0;
+  if(!isDefined(self.pers[#"killnemesis"])) {
+    self.pers[#"killnemesis"] = 0;
   }
 
-  self.pers[# "killnemesis"]++;
+  self.pers[#"killnemesis"]++;
 
-  if(self.pers[# "killnemesis"] >= 5) {
-    self.pers[# "killnemesis"] = 0;
+  if(self.pers[#"killnemesis"] >= 5) {
+    self.pers[#"killnemesis"] = 0;
     self stats::function_dad108fa(#"kill_nemesis", 1);
   }
 }
@@ -496,10 +496,10 @@ function blockedsatellite() {
 }
 
 function longdistancekill() {
-  self.pers[# "longshotsperlife"]++;
+  self.pers[#"longshotsperlife"]++;
 
-  if(self.pers[# "longshotsperlife"] >= 3) {
-    self.pers[# "longshotsperlife"] = 0;
+  if(self.pers[#"longshotsperlife"] >= 3) {
+    self.pers[#"longshotsperlife"] = 0;
     self stats::function_dad108fa(#"longshot_3_onelife", 1);
   }
 }
@@ -513,14 +513,14 @@ function challengeroundend(data) {
   }
 
   if(level.teambased) {
-    winnerscore = game.stat[# "teamscores"][winner];
+    winnerscore = game.stat[#"teamscores"][winner];
     loserscore = getlosersteamscores(winner);
   }
 
   switch (level.gametype) {
     case # "sd":
       if(player.team == winner) {
-        if(game.challenge[winner][# "allalive"]) {
+        if(game.challenge[winner][#"allalive"]) {
           player stats::function_d40764f3(#"round_win_no_deaths", 1);
         }
 
@@ -558,8 +558,8 @@ function roundend(winner) {
     data.winner = winner;
   }
 
-  for(index = 0; index < level.placement[# "all"].size; index++) {
-    data.player = level.placement[# "all"][index];
+  for(index = 0; index < level.placement[#"all"].size; index++) {
+    data.player = level.placement[#"all"][index];
 
     if(isDefined(data.player)) {
       data.place = index;
@@ -586,20 +586,20 @@ function function_90185171(totaltimeplayed, iswinner) {
 
   println("<dev string:x38>" + player.name);
   println("<dev string:x51>" + (isDefined(totaltimeplayed) ? totaltimeplayed : "<dev string:x6f>"));
-  println("<dev string:x74>" + (isDefined(player.pers[# "participation"]) ? player.pers[# "participation"] : "<dev string:x6f>"));
+  println("<dev string:x74>" + (isDefined(player.pers[#"participation"]) ? player.pers[#"participation"] : "<dev string:x6f>"));
   var_e521cb78 = 0;
 
   if(!isDefined(totaltimeplayed) || totaltimeplayed <= 0) {
     return;
   } else {
     var_e521cb78 = totaltimeplayed;
-    var_e521cb78 = int(var_e521cb78 * (isDefined(level.var_b4320b5b[# "hash_2873049796893c2"]) ? level.var_b4320b5b[# "hash_2873049796893c2"] : 1));
+    var_e521cb78 = int(var_e521cb78 * (isDefined(level.var_b4320b5b[#"hash_2873049796893c2"]) ? level.var_b4320b5b[#"hash_2873049796893c2"] : 1));
 
     if(!isdedicated()) {
       if(ispc()) {
-        var_e521cb78 = int(var_e521cb78 * (isDefined(level.var_b4320b5b[# "hash_164e590374876a39"]) ? level.var_b4320b5b[# "hash_164e590374876a39"] : 1));
+        var_e521cb78 = int(var_e521cb78 * (isDefined(level.var_b4320b5b[#"hash_164e590374876a39"]) ? level.var_b4320b5b[#"hash_164e590374876a39"] : 1));
       } else {
-        var_e521cb78 = int(var_e521cb78 * (isDefined(level.var_b4320b5b[# "hash_5873106a43bbf0a9"]) ? level.var_b4320b5b[# "hash_5873106a43bbf0a9"] : 1));
+        var_e521cb78 = int(var_e521cb78 * (isDefined(level.var_b4320b5b[#"hash_5873106a43bbf0a9"]) ? level.var_b4320b5b[#"hash_5873106a43bbf0a9"] : 1));
       }
     }
   }
@@ -608,28 +608,28 @@ function function_90185171(totaltimeplayed, iswinner) {
 
   if(var_8cfed04 > 0) {
     var_e521cb78 = var_8cfed04;
-    player.timeplayed[# "total"]++;
-    player.pers[# "participation"]++;
+    player.timeplayed[#"total"]++;
+    player.pers[#"participation"]++;
   }
 
-  if(!isDefined(player.pers[# "participation"]) || player.pers[# "participation"] < 1) {
+  if(!isDefined(player.pers[#"participation"]) || player.pers[#"participation"] < 1) {
     if(!sessionmodeiswarzonegame()) {
       println(player.name + "<dev string:x8c>");
       return;
     }
   }
 
-  if(!sessionmodeiswarzonegame() && isDefined(player.pers[# "controllerparticipation"])) {
-    if(is_true(player.pers[# "controllerparticipationchecks"])) {
-      if(player.pers[# "controllerparticipationchecks"] >= level.var_42dca1dd) {
-        var_7be1e671 = player.pers[# "controllerparticipation"] / player.pers[# "controllerparticipationchecks"];
+  if(!sessionmodeiswarzonegame() && isDefined(player.pers[#"controllerparticipation"])) {
+    if(is_true(player.pers[#"controllerparticipationchecks"])) {
+      if(player.pers[#"controllerparticipationchecks"] >= level.var_42dca1dd) {
+        var_7be1e671 = player.pers[#"controllerparticipation"] / player.pers[#"controllerparticipationchecks"];
 
         if(var_7be1e671 < level.var_8e1c2aa1) {
-          self.pers[# "controllerparticipationendgameresult"] = 0;
+          self.pers[#"controllerparticipationendgameresult"] = 0;
           println(player.name + "<dev string:xba>" + var_7be1e671 + "<dev string:xf6>" + level.var_8e1c2aa1 + "<dev string:xfe>");
           return;
         } else {
-          self.pers[# "controllerparticipationendgameresult"] = 1;
+          self.pers[#"controllerparticipationendgameresult"] = 1;
         }
       }
     }
@@ -645,11 +645,11 @@ function function_90185171(totaltimeplayed, iswinner) {
         currxp = player rank::getrankxp();
         xpearned = 0;
 
-        if(isDefined(player.pers[# "hash_43ad5d1b08145b1f"])) {
-          xpearned = currxp - player.pers[# "hash_43ad5d1b08145b1f"];
+        if(isDefined(player.pers[#"hash_43ad5d1b08145b1f"])) {
+          xpearned = currxp - player.pers[#"hash_43ad5d1b08145b1f"];
         }
 
-        player.pers[# "hash_43ad5d1b08145b1f"] = currxp;
+        player.pers[#"hash_43ad5d1b08145b1f"] = currxp;
         var_90f98f51 = int(player function_c52bcf79() * 100);
         var_d0a27bc3 = int(player getxpscale() * 100);
         var_524ab934 = player function_d40f1a0e();
@@ -678,8 +678,8 @@ function private function_d6f929d6(winner) {
   level.var_4f654f3a = 1;
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[# "hash_150795bee4d46ce4"])) {
-      var_28ee869a = gettime() - player.pers[# "hash_150795bee4d46ce4"];
+    if(isDefined(player.pers[#"hash_150795bee4d46ce4"])) {
+      var_28ee869a = gettime() - player.pers[#"hash_150795bee4d46ce4"];
       iswinner = player iswinner(winner);
       player function_659f7dc(var_28ee869a, iswinner);
     }
@@ -715,8 +715,8 @@ function gameend(winner, var_c1e98979) {
     data.winner = var_c1e98979;
   }
 
-  for(index = 0; index < level.placement[# "all"].size; index++) {
-    data.player = level.placement[# "all"][index];
+  for(index = 0; index < level.placement[#"all"].size; index++) {
+    data.player = level.placement[#"all"][index];
     data.place = index;
 
     if(isDefined(data.player)) {
@@ -736,15 +736,15 @@ function gameend(winner, var_c1e98979) {
 }
 
 function function_1e064861(type, var_a7674114) {
-  if(type == self.pers[# "hash_4a01db5796cf12b1"]) {
-    self.pers[# "hash_3b7fc8c62a7d4420"]++;
+  if(type == self.pers[#"hash_4a01db5796cf12b1"]) {
+    self.pers[#"hash_3b7fc8c62a7d4420"]++;
   } else {
-    self.pers[# "hash_3b7fc8c62a7d4420"] = 1;
-    self.pers[# "hash_4a01db5796cf12b1"] = type;
+    self.pers[#"hash_3b7fc8c62a7d4420"] = 1;
+    self.pers[#"hash_4a01db5796cf12b1"] = type;
   }
 
-  if(self.pers[# "hash_3b7fc8c62a7d4420"] > self.pers[var_a7674114]) {
-    self.pers[var_a7674114] = self.pers[# "hash_3b7fc8c62a7d4420"];
+  if(self.pers[#"hash_3b7fc8c62a7d4420"] > self.pers[var_a7674114]) {
+    self.pers[var_a7674114] = self.pers[#"hash_3b7fc8c62a7d4420"];
   }
 }
 
@@ -767,7 +767,7 @@ function function_fd112605() {
 }
 
 function function_ca7c50ce() {
-  return self.pers[# "controllerparticipation"] / self.pers[# "controllerparticipationchecks"] + self.pers[# "hash_2013e34fb3c104e9"];
+  return self.pers[#"controllerparticipation"] / self.pers[#"controllerparticipationchecks"] + self.pers[#"hash_2013e34fb3c104e9"];
 }
 
 function controllerparticipationcheck() {
@@ -775,8 +775,8 @@ function controllerparticipationcheck() {
     return false;
   }
 
-  if(!isDefined(self.pers[# "controllerparticipationchecksskipped"])) {
-    self.pers[# "controllerparticipationchecksskipped"] = 0;
+  if(!isDefined(self.pers[#"controllerparticipationchecksskipped"])) {
+    self.pers[#"controllerparticipationchecksskipped"] = 0;
   }
 
   if(isdedicated() && getdvarint(#"hash_2167ce61af5dc0b0", 1) == 0) {
@@ -784,30 +784,30 @@ function controllerparticipationcheck() {
   }
 
   if(function_fd112605()) {
-    self.pers[# "controllerparticipationchecksskipped"]++;
+    self.pers[#"controllerparticipationchecksskipped"]++;
     return false;
   }
 
-  self.pers[# "controllerparticipationchecks"]++;
+  self.pers[#"controllerparticipationchecks"]++;
   var_51ba979b = # "failure";
   var_a7674114 = "controllerParticipationConsecutiveFailureMax";
   var_fb144707 = self function_1bc04df9();
 
   if(var_fb144707 >= level.var_5b7e9056) {
-    self.pers[# "controllerparticipation"]++;
+    self.pers[#"controllerparticipation"]++;
     var_51ba979b = # "success";
     var_a7674114 = "controllerParticipationConsecutiveSuccessMax";
 
-    if(self.pers[# "controllerparticipationinactivitywarnings"]) {
+    if(self.pers[#"controllerparticipationinactivitywarnings"]) {
       current_percent = function_ca7c50ce();
       difference = level.var_b6752258 - current_percent;
 
       if(difference > 0) {
         difference += 0.02;
-        self.pers[# "hash_2013e34fb3c104e9"] = difference;
+        self.pers[#"hash_2013e34fb3c104e9"] = difference;
       }
 
-      self.pers[# "controllerparticipationsuccessafterinactivitywarning"] = 1;
+      self.pers[#"controllerparticipationsuccessafterinactivitywarning"] = 1;
     }
   }
 
@@ -815,15 +815,15 @@ function controllerparticipationcheck() {
 
   if(isDefined(level.var_7db94180)) {
     self[[level.var_7db94180]]();
-  } else if(self.pers[# "controllerparticipationchecks"] >= level.var_5d96cc20) {
+  } else if(self.pers[#"controllerparticipationchecks"] >= level.var_5d96cc20) {
     var_b06a954d = function_ca7c50ce();
 
     if(var_b06a954d < level.var_b6752258) {
-      if(!self.pers[# "controllerparticipationinactivitywarnings"]) {
-        self.pers[# "controllerparticipationinactivitywarnings"]++;
+      if(!self.pers[#"controllerparticipationinactivitywarnings"]) {
+        self.pers[#"controllerparticipationinactivitywarnings"]++;
         self iprintlnbold(#"hash_59bd89e170a924ac");
       } else {
-        self.pers[# "controllerparticipationendgameresult"] = -2;
+        self.pers[#"controllerparticipationendgameresult"] = -2;
 
         if(isDefined(level.gamehistoryplayerkicked)) {
           self thread[[level.gamehistoryplayerkicked]]();
@@ -967,14 +967,14 @@ function destroyscorestreak(weapon, playercontrolled, groundbased, countaskillst
     self stats::function_dad108fa(#"destroy_ai_scorestreak_coldblooded", 1);
   }
 
-  if(!isDefined(self.pers[# "challenge_destroyed_killstreak"])) {
-    self.pers[# "challenge_destroyed_killstreak"] = 0;
+  if(!isDefined(self.pers[#"challenge_destroyed_killstreak"])) {
+    self.pers[#"challenge_destroyed_killstreak"] = 0;
   }
 
-  self.pers[# "challenge_destroyed_killstreak"]++;
+  self.pers[#"challenge_destroyed_killstreak"]++;
 
-  if(self.pers[# "challenge_destroyed_killstreak"] >= 5) {
-    self.pers[# "challenge_destroyed_killstreak"] = 0;
+  if(self.pers[#"challenge_destroyed_killstreak"] >= 5) {
+    self.pers[#"challenge_destroyed_killstreak"] = 0;
     self stats::function_e24eec31(weapon, #"destroy_5_killstreak", 1);
     self stats::function_e24eec31(weapon, #"destroy_5_killstreak_vehicle", 1);
   }
@@ -1221,14 +1221,14 @@ function hackedordestroyedequipment() {
 }
 
 function bladekill() {
-  if(!isDefined(self.pers[# "bladekills"])) {
-    self.pers[# "bladekills"] = 0;
+  if(!isDefined(self.pers[#"bladekills"])) {
+    self.pers[#"bladekills"] = 0;
   }
 
-  self.pers[# "bladekills"]++;
+  self.pers[#"bladekills"]++;
 
-  if(self.pers[# "bladekills"] >= 15) {
-    self.pers[# "bladekills"] = 0;
+  if(self.pers[#"bladekills"] >= 15) {
+    self.pers[#"bladekills"] = 0;
     self stats::function_dad108fa(#"kill_15_with_blade", 1);
   }
 }
@@ -1318,7 +1318,7 @@ function getlosersteamscores(winner) {
       continue;
     }
 
-    teamscores += game.stat[# "teamscores"][team];
+    teamscores += game.stat[#"teamscores"][team];
   }
 
   return teamscores;
@@ -1347,7 +1347,7 @@ function challengegameend(data) {
   }
 
   if(level.teambased) {
-    winnerscore = game.stat[# "teamscores"][winner];
+    winnerscore = game.stat[#"teamscores"][winner];
     loserscore = getlosersteamscores(winner);
   }
 }
@@ -1539,11 +1539,11 @@ function bothbombsdetonatewithintime() {
 }
 
 function calledincarepackage() {
-  self.pers[# "carepackagescalled"]++;
+  self.pers[#"carepackagescalled"]++;
 
-  if(self.pers[# "carepackagescalled"] >= 3) {
+  if(self.pers[#"carepackagescalled"] >= 3) {
     self stats::function_dad108fa(#"call_in_3_care_packages", 1);
-    self.pers[# "carepackagescalled"] = 0;
+    self.pers[#"carepackagescalled"] = 0;
   }
 
   self stats::function_dad108fa(#"hash_5ca3004cfbc713c4", 1);
@@ -2560,14 +2560,14 @@ function function_7f86a7b8(attacker, attackerweapon, meansofdeath) {
     weaponclass = util::getweaponclass(attackerweapon);
     weaponclass = isstring(weaponclass) ? hash(weaponclass) : weaponclass;
 
-    if(weaponclass === # "weapon_knife" && !isDefined(attacker.pers[# "hash_23898018c4f3a260"])) {
+    if(weaponclass === # "weapon_knife" && !isDefined(attacker.pers[#"hash_23898018c4f3a260"])) {
       attacker stats::function_d0de7686(#"hash_6a34be0ae51df16d", 1, #"hash_34a28edc5d90a87");
-      attacker.pers[# "hash_23898018c4f3a260"] = 1;
+      attacker.pers[#"hash_23898018c4f3a260"] = 1;
     }
 
-    if(weaponclass === # "weapon_smg" && !isDefined(attacker.pers[# "hash_5cd5482ab60ed275"])) {
+    if(weaponclass === # "weapon_smg" && !isDefined(attacker.pers[#"hash_5cd5482ab60ed275"])) {
       attacker stats::function_d0de7686(#"hash_4425e8a9deb73e9a", 1, #"hash_2b4649f1d1493b64");
-      attacker.pers[# "hash_5cd5482ab60ed275"] = 1;
+      attacker.pers[#"hash_5cd5482ab60ed275"] = 1;
     }
   }
 }
@@ -2581,15 +2581,15 @@ function function_a66bed3e() {
     return;
   }
 
-  if(!isarray(self.pers[# "hash_58ebc906abf2fa00"])) {
+  if(!isarray(self.pers[#"hash_58ebc906abf2fa00"])) {
     return;
   }
 
-  foreach(var_9ef04ef9, value in self.pers[# "hash_58ebc906abf2fa00"]) {
+  foreach(var_9ef04ef9, value in self.pers[#"hash_58ebc906abf2fa00"]) {
     self stats::function_dad108fa(var_9ef04ef9, value);
   }
 
-  self.pers[# "hash_58ebc906abf2fa00"] = undefined;
+  self.pers[#"hash_58ebc906abf2fa00"] = undefined;
 }
 
 function function_c9e4f73f(target_value, var_55b913da, var_6ccd331f) {

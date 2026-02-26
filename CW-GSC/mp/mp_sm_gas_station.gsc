@@ -15,10 +15,10 @@ function event_handler[level_init] main(eventstruct) {
   load::main();
   compass::setupminimap("");
   setDvar(#"hash_7b06b8037c26b99b", 70);
-  level.var_3944682[# "allies"] = {
+  level.var_3944682[#"allies"] = {
     #origin: (0, 1500, 1200), #angles: (0, -65, 0)
   };
-  level.var_3944682[# "axis"] = {
+  level.var_3944682[#"axis"] = {
     #origin: (0, 1500, 1200), #angles: (0, 115, 0)
   };
 }

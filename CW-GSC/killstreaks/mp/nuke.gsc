@@ -272,7 +272,7 @@ function forcespawnplayer() {
     return;
   }
 
-  if(self.pers[# "team"] === # "spectator") {
+  if(self.pers[#"team"] === # "spectator") {
     return;
   }
 
@@ -280,9 +280,9 @@ function forcespawnplayer() {
     return;
   }
 
-  if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
-    self.pers[# "class"] = "CLASS_CUSTOM1";
-    self.curclass = self.pers[# "class"];
+  if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
+    self.pers[#"class"] = "CLASS_CUSTOM1";
+    self.curclass = self.pers[#"class"];
   }
 
   if(!self function_8b1a219a()) {

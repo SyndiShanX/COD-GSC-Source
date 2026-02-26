@@ -91,7 +91,7 @@ add_bcs_location_mapping(classname, alias) {
 // here's where we set up each kind of trigger and map them to their (partial) soundaliases
 bcs_location_trigs_do_mappings() {
   //----------------- // -- GENERICS -- //----------------- // ----------- BUILDINGS ----------- /*QUAKED trigger_multiple_bcs_us_building_1stfloor_window (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_1stfloor_window", "blg_1f_wndw callout_loc_wndw_1st_report");
 
   /*QUAKED trigger_multiple_bcs_taskforce_building_1stfloor_window (0 0.25 0.5) ?
@@ -427,7 +427,7 @@ bcs_location_trigs_do_mappings() {
   add_bcs_location_mapping("trigger_multiple_bcs_tfstealth_building_roof", "blg_roof");
 
   // ----------- LANDMARKS ----------- /*QUAKED trigger_multiple_bcs_us_landmark_desk_large (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_landmark_desk_large", "lm_dsk_lg");
 
   /*QUAKED trigger_multiple_bcs_taskforce_landmark_desk_large (0 0.25 0.5) ?
@@ -643,7 +643,7 @@ bcs_location_trigs_do_mappings() {
   add_bcs_location_mapping("trigger_multiple_bcs_tfstealth_landmark_hescobarrier", "lm_hescobarr");
 
   // ----------- VEHICLES ----------- /*QUAKED trigger_multiple_bcs_us_vehicle_humvee_parked (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_vehicle_humvee_parked", "vh_hmv_pkd");
 
   /*QUAKED trigger_multiple_bcs_taskforce_vehicle_humvee_parked (0 0.25 0.5) ?
@@ -908,7 +908,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // OILRIG (tfstealth)
   //------------------------- /*QUAKED trigger_multiple_bcs_tfstealth_building_2ndfloor_windows (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_tfstealth_building_2ndfloor_windows", "blg_2f_wndws");
 
   /*QUAKED trigger_multiple_bcs_tfstealth_landmark_rappelling_leftside (0 0.25 0.5) ?
@@ -953,7 +953,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // GULAG (tfstealth)
   //------------------------- /*QUAKED trigger_multiple_bcs_tfstealth_landmark_lowwall_underbarbedwire (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_tfstealth_landmark_lowwall_underbarbedwire", "lm_lowwall_bwire");
 
   /*QUAKED trigger_multiple_bcs_tfstealth_landmark_celldoor_endofhall (0 0.25 0.5) ?
@@ -1002,7 +1002,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // FAVELA ESCAPE (taskforce)
   //------------------------- /*QUAKED trigger_multiple_bcs_taskforce_building_shack_left (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_taskforce_building_shack_left", "blg_shack_left");
 
   /*QUAKED trigger_multiple_bcs_taskforce_building_icecreamstore_balcony (0 0.25 0.5) ?
@@ -1051,7 +1051,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // ESTATE (taskforce)
   //------------------------- /*QUAKED trigger_multiple_bcs_taskforce_landmark_haybale (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_taskforce_landmark_haybale", "lm_haybale");
 
   /*QUAKED trigger_multiple_bcs_taskforce_landmark_logstack (0 0.25 0.5) ?
@@ -1064,7 +1064,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // CONTINGENCY (taskforce)
   //------------------------- /*QUAKED trigger_multiple_bcs_taskforce_landmark_wall_barbwire (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_taskforce_landmark_wall_barbwire", "lm_wall_barbwire");
 
   /*QUAKED trigger_multiple_bcs_taskforce_landmark_stairs_behindstairs (0 0.25 0.5) ?
@@ -1141,7 +1141,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // AFGHAN CAVES (taskforce)
   //------------------------- /*QUAKED trigger_multiple_bcs_tfstealth_building_guardtower (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_tfstealth_building_guardtower", "blg_grdtwr");
 
   /*QUAKED trigger_multiple_bcs_tfstealth_landmark_cave_center (0 0.25 0.5) ?
@@ -1210,7 +1210,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // INVASION (US)
   //------------------------- /*QUAKED trigger_multiple_bcs_us_building_diner_inside (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_diner_inside", "blg_diner_ins");
 
   /*QUAKED trigger_multiple_bcs_us_building_diner_behindcounter (0 0.25 0.5) ?
@@ -1299,7 +1299,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // ARCADIA (US)
   //------------------------- /*QUAKED trigger_multiple_bcs_us_building_apartments_office (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_apartments_office", "blg_apt_office");
 
   /*QUAKED trigger_multiple_bcs_us_building_apartments_3rdfloor (0 0.25 0.5) ?
@@ -1416,7 +1416,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // DCBURNING (US)
   //------------------------- /*QUAKED trigger_multiple_bcs_us_building_inside_balcony_south (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_inside_balcony_south", "blg_ins_bal_s");
 
   /*QUAKED trigger_multiple_bcs_us_building_inside_balcony_farside (0 0.25 0.5) ?
@@ -1429,7 +1429,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // DCEMP (US)
   //------------------------- /*QUAKED trigger_multiple_bcs_us_building_inside_windows_rightside (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_inside_windows_rightside", "blg_ins_wndws_rside");
 
   /*QUAKED trigger_multiple_bcs_us_building_inside_office_glass_right (0 0.25 0.5) ?
@@ -1474,7 +1474,7 @@ bcs_location_trigs_do_mappings() {
 
   //------------------------- // AIRPORT (US)
   //------------------------- /*QUAKED trigger_multiple_bcs_us_building_airport_terminal_2ndfloor (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_airport_terminal_2ndfloor", "blg_airport_term_2f");
 
   /*QUAKED trigger_multiple_bcs_us_landmark_supportbeams_orange (0 0.25 0.5) ?
@@ -1487,7 +1487,7 @@ bcs_location_trigs_do_mappings() {
 
   // ------------------------ // -- OLDSTYLE GENERICS -- // - we've got the assets, let's put them to work
   // ------------------------ /*QUAKED trigger_multiple_bcs_us_building_door (0 0.25 0.5) ?
-  defaulttexture="bcs"*/
+  defaulttexture = "bcs" * /
   add_bcs_location_mapping("trigger_multiple_bcs_us_building_door", "callout_loc_door_report");
 
   /*QUAKED trigger_multiple_bcs_taskforce_building_door (0 0.25 0.5) ?

@@ -45,7 +45,7 @@ function autoexec init() {
   clientfield::register("scriptmover", "raz_torpedo_play_fx_on_self", 1, 1, "int");
   clientfield::register("scriptmover", "raz_torpedo_play_trail", 1, 1, "counter");
   clientfield::register("actor", "raz_gun_weakpoint_hit", 1, 1, "counter");
-  level.var_92e56a0f[# "raz"] = &namespace_eb2895::function_4c13b4e7;
+  level.var_92e56a0f[#"raz"] = &namespace_eb2895::function_4c13b4e7;
 }
 
 function private function_c7bb75d5() {
@@ -390,7 +390,7 @@ function private function_bb9de4d7(enemy) {
 
   trace = bulletTrace(origin_point, target_point, 0, enemy);
 
-  if(trace[# "fraction"] === 1) {
+  if(trace[#"fraction"] === 1) {
     return true;
   }
 
@@ -643,8 +643,8 @@ function private function_edb8ac3f(var_ad2d46ff) {
   move_to_point = self.origin + move_vector;
   trace = bulletTrace(self.origin, move_to_point, 0, self);
 
-  if(trace[# "surfacetype"] !== "none") {
-    detonate_point = trace[# "position"];
+  if(trace[#"surfacetype"] !== "none") {
+    detonate_point = trace[#"position"];
     dist_sq = distancesquared(detonate_point, self.origin);
     move_dist_sq = move_distance * move_distance;
     ratio = dist_sq / move_dist_sq;
@@ -668,7 +668,7 @@ function private function_fc00dc60() {
   if(self.var_90d59738 >= 1) {
     trace = bulletTrace(self.origin + (0, 0, 10), self.origin - (0, 0, var_5bac442e), 0, self);
 
-    if(trace[# "surfacetype"] !== "none") {
+    if(trace[#"surfacetype"] !== "none") {
       self clientfield::increment("raz_torpedo_play_trail", 1);
     }
   }

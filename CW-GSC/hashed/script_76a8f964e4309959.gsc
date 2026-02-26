@@ -66,8 +66,8 @@ function spawn_single(b_force_spawn, var_eb3a8721 = 0, var_bc66d64b) {
   s_spawn_loc = var_bc66d64b;
 
   if(!isDefined(s_spawn_loc)) {
-    if(level.zm_loc_types[# "zombie_location"].size > 0) {
-      s_spawn_loc = array::random(level.zm_loc_types[# "zombie_location"]);
+    if(level.zm_loc_types[#"zombie_location"].size > 0) {
+      s_spawn_loc = array::random(level.zm_loc_types[#"zombie_location"]);
     } else {
       if(getdvarint(#"hash_1f8efa579fee787c", 0)) {
         iprintlnbold("<dev string:x38>");
@@ -256,8 +256,8 @@ function function_a58fe5b7(var_199d73cc = undefined) {
         var_bf1cc8e2 += var_9d7713d9 / 4 * array::random([-1, 1]) * anglestoright((0, var_199d73cc.angles[1], 0));
         traceresult = groundtrace(var_bf1cc8e2, var_bf1cc8e2 + (0, 0, -100), 0, 0);
 
-        if(isDefined(traceresult[# "position"])) {
-          var_bf1cc8e2 = traceresult[# "position"];
+        if(isDefined(traceresult[#"position"])) {
+          var_bf1cc8e2 = traceresult[#"position"];
         }
       } else {
         if(isvec(var_9769213d.origin)) {
@@ -271,8 +271,8 @@ function function_a58fe5b7(var_199d73cc = undefined) {
 
         traceresult = groundtrace(var_bf1cc8e2, var_bf1cc8e2 + (0, 0, -100), 0, 0);
 
-        if(isDefined(traceresult[# "position"])) {
-          var_bf1cc8e2 = traceresult[# "position"];
+        if(isDefined(traceresult[#"position"])) {
+          var_bf1cc8e2 = traceresult[#"position"];
         }
       }
 

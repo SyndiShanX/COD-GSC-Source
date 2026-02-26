@@ -639,7 +639,7 @@ function_2c41e66e(params) {
 
 function_293e9585() {
   spawner = function_fd846a91();
-  spawn_point = array::random(level.zm_loc_types[# "zombie_location"]);
+  spawn_point = array::random(level.zm_loc_types[#"zombie_location"]);
   ai = zombie_utility::spawn_zombie(spawner, spawner.targetname, spawn_point, level.round_number + level.var_d2fac739);
 
   if(isDefined(ai)) {}

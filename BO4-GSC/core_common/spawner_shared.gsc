@@ -181,17 +181,17 @@ run_spawn_functions() {
     return;
   }
 
-  if(isDefined(level.spawn_funcs[# "all"])) {
-    for(i = 0; i < level.spawn_funcs[# "all"].size; i++) {
-      func = level.spawn_funcs[# "all"][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+  if(isDefined(level.spawn_funcs[#"all"])) {
+    for(i = 0; i < level.spawn_funcs[#"all"].size; i++) {
+      func = level.spawn_funcs[#"all"][i];
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
   if(isDefined(self.archetype) && isDefined(level.spawn_funcs[self.archetype])) {
     for(i = 0; i < level.spawn_funcs[self.archetype].size; i++) {
       func = level.spawn_funcs[self.archetype][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
@@ -201,14 +201,14 @@ run_spawn_functions() {
   if(isDefined(level.spawn_funcs[self.team])) {
     for(i = 0; i < level.spawn_funcs[self.team].size; i++) {
       func = level.spawn_funcs[self.team][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 
   if(isDefined(self.spawn_funcs)) {
     for(i = 0; i < self.spawn_funcs.size; i++) {
       func = self.spawn_funcs[i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
 
     var_f9bfb16c = self.spawn_funcs;
@@ -221,7 +221,7 @@ run_spawn_functions() {
   if(isDefined(self.archetype) && isDefined(level.spawn_funcs[self.archetype + "_post"])) {
     for(i = 0; i < level.spawn_funcs[self.archetype + "_post"].size; i++) {
       func = level.spawn_funcs[self.archetype + "_post"][i];
-      util::single_thread_argarray(self, func[# "function"], func[# "params"]);
+      util::single_thread_argarray(self, func[#"function"], func[#"params"]);
     }
   }
 }
@@ -236,8 +236,8 @@ crawl_through_targets_to_init_flags() {
   array = get_node_funcs_based_on_target();
 
   if(isDefined(array)) {
-    targets = array[# "node"];
-    get_func = array[# "get_target_func"];
+    targets = array[#"node"];
+    get_func = array[#"get_target_func"];
 
     for(i = 0; i < targets.size; i++) {
       crawl_target_and_init_flags(targets[i], get_func);
@@ -378,7 +378,7 @@ go_to_node(node, goal_type, optional_arrived_at_node_func) {
     optional_arrived_at_node_func = &util::empty;
   }
 
-  go_to_node_using_funcs(array[# "node"], array[# "get_target_func"], array[# "set_goal_func_quits"], optional_arrived_at_node_func);
+  go_to_node_using_funcs(array[#"node"], array[#"get_target_func"], array[#"set_goal_func_quits"], optional_arrived_at_node_func);
 }
 
 get_least_used_from_array(array) {
@@ -620,12 +620,12 @@ crawl_target_and_init_flags(ent, get_func) {
 }
 
 get_node_funcs_based_on_target(node, goal_type) {
-  get_target_func[# "origin"] = &get_target_ents;
-  get_target_func[# "node"] = &get_target_nodes;
-  get_target_func[# "struct"] = &get_target_structs;
-  set_goal_func_quits[# "origin"] = &go_to_node_set_goal_pos;
-  set_goal_func_quits[# "struct"] = &go_to_node_set_goal_pos;
-  set_goal_func_quits[# "node"] = &go_to_node_set_goal_node;
+  get_target_func[#"origin"] = &get_target_ents;
+  get_target_func[#"node"] = &get_target_nodes;
+  get_target_func[#"struct"] = &get_target_structs;
+  set_goal_func_quits[#"origin"] = &go_to_node_set_goal_pos;
+  set_goal_func_quits[#"struct"] = &go_to_node_set_goal_pos;
+  set_goal_func_quits[#"node"] = &go_to_node_set_goal_node;
 
   if(!isDefined(goal_type)) {
     goal_type = "node";
@@ -634,7 +634,7 @@ get_node_funcs_based_on_target(node, goal_type) {
   array = [];
 
   if(isDefined(node)) {
-    array[# "node"][0] = node;
+    array[#"node"][0] = node;
   } else {
     node = getEntArray(self.target, "targetname");
 
@@ -656,11 +656,11 @@ get_node_funcs_based_on_target(node, goal_type) {
       }
     }
 
-    array[# "node"] = node;
+    array[#"node"] = node;
   }
 
-  array[# "get_target_func"] = get_target_func[goal_type];
-  array[# "set_goal_func_quits"] = set_goal_func_quits[goal_type];
+  array[#"get_target_func"] = get_target_func[goal_type];
+  array[#"set_goal_func_quits"] = set_goal_func_quits[goal_type];
   return array;
 }
 
@@ -990,7 +990,7 @@ spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawninglimit) {
         bot setteam(self.team);
 
         if(isDefined(bot.pers)) {
-          bot.pers[# "team"] = self.team;
+          bot.pers[#"team"] = self.team;
         }
 
         bot.target = self.target;
@@ -1217,8 +1217,8 @@ add_global_spawn_function(team, spawn_func, ...) {
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(level.spawn_funcs[team])) {
     level.spawn_funcs[team] = [];
@@ -1234,21 +1234,21 @@ add_ai_spawn_function(spawn_func, ...) {
     level.spawn_funcs = [];
   }
 
-  if(!isDefined(level.spawn_funcs[# "all"])) {
-    level.spawn_funcs[# "all"] = [];
+  if(!isDefined(level.spawn_funcs[#"all"])) {
+    level.spawn_funcs[#"all"] = [];
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
-  if(!isDefined(level.spawn_funcs[# "all"])) {
-    level.spawn_funcs[# "all"] = [];
-  } else if(!isarray(level.spawn_funcs[# "all"])) {
-    level.spawn_funcs[# "all"] = array(level.spawn_funcs[# "all"]);
+  if(!isDefined(level.spawn_funcs[#"all"])) {
+    level.spawn_funcs[#"all"] = [];
+  } else if(!isarray(level.spawn_funcs[#"all"])) {
+    level.spawn_funcs[#"all"] = array(level.spawn_funcs[#"all"]);
   }
 
-  level.spawn_funcs[# "all"][level.spawn_funcs[# "all"].size] = func;
+  level.spawn_funcs[#"all"][level.spawn_funcs[#"all"].size] = func;
 }
 
 add_archetype_spawn_function(archetype, spawn_func, ...) {
@@ -1261,8 +1261,8 @@ add_archetype_spawn_function(archetype, spawn_func, ...) {
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(level.spawn_funcs[archetype])) {
     level.spawn_funcs[archetype] = [];
@@ -1283,8 +1283,8 @@ function_89a2cd87(archetype, spawn_func, ...) {
   }
 
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(level.spawn_funcs[archetype + "_post"])) {
     level.spawn_funcs[archetype + "_post"] = [];
@@ -1300,7 +1300,7 @@ remove_global_spawn_function(team, func) {
     array = [];
 
     for(i = 0; i < level.spawn_funcs[team].size; i++) {
-      if(level.spawn_funcs[team][i][# "function"] != func) {
+      if(level.spawn_funcs[team][i][#"function"] != func) {
         array[array.size] = level.spawn_funcs[team][i];
       }
     }
@@ -1312,8 +1312,8 @@ remove_global_spawn_function(team, func) {
 add_spawn_function(spawn_func, ...) {
   assert(!isDefined(level._loadstarted) || !isalive(self), "<dev string:x281>");
   func = [];
-  func[# "function"] = spawn_func;
-  func[# "params"] = vararg;
+  func[#"function"] = spawn_func;
+  func[#"params"] = vararg;
 
   if(!isDefined(self.spawn_funcs)) {
     self.spawn_funcs = [];
@@ -1329,7 +1329,7 @@ remove_spawn_function(func) {
     array = [];
 
     for(i = 0; i < self.spawn_funcs.size; i++) {
-      if(self.spawn_funcs[i][# "function"] != func) {
+      if(self.spawn_funcs[i][#"function"] != func) {
         array[array.size] = self.spawn_funcs[i];
       }
     }

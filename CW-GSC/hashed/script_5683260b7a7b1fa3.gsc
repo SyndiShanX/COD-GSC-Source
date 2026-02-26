@@ -172,27 +172,27 @@ function function_e3871553(var_4d2ad93e) {
     case 0:
     case 1:
     case 2:
-      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][# "green"]) ? level.var_29d88fe5[str_weapon_name][# "green"] : level.var_ec04a8a4[str_weapon_name][# "green"];
+      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"green"]) ? level.var_29d88fe5[str_weapon_name][#"green"] : level.var_ec04a8a4[str_weapon_name][#"green"];
       n_rarity = 0;
       var_27751b99 = 0;
       break;
     case 3:
     case 4:
-      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][# "blue"]) ? level.var_29d88fe5[str_weapon_name][# "blue"] : level.var_ec04a8a4[str_weapon_name][# "blue"];
+      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"blue"]) ? level.var_29d88fe5[str_weapon_name][#"blue"] : level.var_ec04a8a4[str_weapon_name][#"blue"];
       n_rarity = 1;
       var_27751b99 = 1;
       break;
     case 5:
     case 6:
     case 7:
-      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][# "purple"]) ? level.var_29d88fe5[str_weapon_name][# "purple"] : level.var_ec04a8a4[str_weapon_name][# "purple"];
+      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"purple"]) ? level.var_29d88fe5[str_weapon_name][#"purple"] : level.var_ec04a8a4[str_weapon_name][#"purple"];
       n_rarity = 2;
       var_27751b99 = 2;
       str_aat = array::random(["ammomod_brainrot", "ammomod_cryofreeze", "ammomod_deadwire", "ammomod_napalmburst", "ammomod_shatterblast"]);
       break;
     case 8:
     default:
-      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][# "orange"]) ? level.var_29d88fe5[str_weapon_name][# "orange"] : level.var_ec04a8a4[str_weapon_name][# "orange"];
+      str_item_name = isDefined(level.var_29d88fe5[str_weapon_name][#"orange"]) ? level.var_29d88fe5[str_weapon_name][#"orange"] : level.var_ec04a8a4[str_weapon_name][#"orange"];
       n_rarity = 3;
       var_27751b99 = 3;
       str_aat = array::random(["ammomod_brainrot", "ammomod_cryofreeze", "ammomod_deadwire", "ammomod_napalmburst", "ammomod_shatterblast"]);

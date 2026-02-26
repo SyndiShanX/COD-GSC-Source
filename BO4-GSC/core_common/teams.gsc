@@ -7,7 +7,7 @@
 
 function_dc7eaabd(assignment) {
   assert(isDefined(assignment));
-  self.pers[# "team"] = assignment;
+  self.pers[#"team"] = assignment;
   self.team = assignment;
   self.sessionteam = assignment;
 

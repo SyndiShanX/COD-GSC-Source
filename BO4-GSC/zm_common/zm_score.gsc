@@ -247,7 +247,7 @@ player_add_points(event, mod, hit_location, e_target, zombie_team, damage_weapon
     return;
   }
 
-  self.pers[# "score"] = self.score;
+  self.pers[#"score"] = self.score;
 
   if(isDefined(level._game_module_point_adjustment)) {
     level[[level._game_module_point_adjustment]](self, zombie_team, player_points);
@@ -427,7 +427,7 @@ add_to_player_score(points, b_add_to_total = 1, str_awarded_by = "", var_e6e6150
     self.score = 4000000;
   }
 
-  self.pers[# "score"] = self.score;
+  self.pers[#"score"] = self.score;
   self incrementplayerstat("scoreEarned", n_points_to_add_to_currency);
   self zm_stats::function_301c4be2("boas_scoreEarned", n_points_to_add_to_currency);
   self zm_stats::function_c0c6ab19(#"zearned", n_points_to_add_to_currency, 1);
@@ -472,7 +472,7 @@ minus_to_player_score(points, b_forced = 0) {
   }
 
   self.score -= points;
-  self.pers[# "score"] = self.score;
+  self.pers[#"score"] = self.score;
   self incrementplayerstat("scoreSpent", points);
   self zm_stats::function_301c4be2("boas_scoreSpent", points);
   level notify(#"spent_points", {
@@ -590,11 +590,11 @@ function_acaab828(b_disabled = 1) {
 }
 
 function_ffc2d0bc() {
-  return self.pers[# "score"];
+  return self.pers[#"score"];
 }
 
 function_c1f146ff(score) {
-  self.pers[# "score"] = score;
+  self.pers[#"score"] = score;
   self.score = score;
 }
 

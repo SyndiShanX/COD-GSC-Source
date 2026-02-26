@@ -734,7 +734,7 @@ fishy_offering_step_2_cleanup(var_5ea5c94d, ended_early) {}
 function_a343f892(a_ents) {
   if(self.targetname === # "offering_scene") {
     scene::remove_scene_func(#"p8_fxanim_zm_zod_tentacle_bundle", &function_a343f892);
-    mdl_kraken = a_ents[# "kraken_weapon_drop"];
+    mdl_kraken = a_ents[#"kraken_weapon_drop"];
     mdl_kraken hide();
     wait 1.5;
     zm_powerups::specific_powerup_drop(#"free_perk", struct::get(#"hash_693bda099c0710af").origin + (0, 0, 16), undefined, undefined, undefined, 1, 1);
@@ -1220,7 +1220,7 @@ function_e9104d6d(var_a276c861) {
   }
 
   if(!var_a276c861) {
-    while(!isDefined(level.var_5df2581a[# "zblueprint_shield_dual_wield"]) || level.var_5df2581a[# "zblueprint_shield_dual_wield"].completed !== 1) {
+    while(!isDefined(level.var_5df2581a[#"zblueprint_shield_dual_wield"]) || level.var_5df2581a[#"zblueprint_shield_dual_wield"].completed !== 1) {
       if(getdvarint(#"zm_debug_ee", 0)) {
         break;
       }
@@ -1485,8 +1485,8 @@ function_73bdaf30() {
     mdl_shield clientfield::set("" + # "hash_2ec182fecae80e80", 1);
     earthquake(0.5, 1.25, mdl_shield.origin, 512);
 
-    if(isDefined(level.ai[# "axis"])) {
-      var_dce7716b = array::get_all_closest(mdl_shield.origin, level.ai[# "axis"], undefined, undefined, 200);
+    if(isDefined(level.ai[#"axis"])) {
+      var_dce7716b = array::get_all_closest(mdl_shield.origin, level.ai[#"axis"], undefined, undefined, 200);
       var_cd02461b = array::filter(var_dce7716b, 0, &zm_fasttravel::function_6c856fde);
 
       foreach(e_zombie in var_cd02461b) {
@@ -1495,7 +1495,7 @@ function_73bdaf30() {
     }
   }
 
-  var_425fb862 = level.var_4fe2f84d[# "zblueprint_shield_dual_wield"];
+  var_425fb862 = level.var_4fe2f84d[#"zblueprint_shield_dual_wield"];
 
   foreach(struct in var_425fb862) {
     if(struct.script_noteworthy === # "shield_table") {

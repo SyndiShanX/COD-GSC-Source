@@ -76,9 +76,9 @@ function private _planexpandaction(planner, action) {
   actioninfo = spawnStruct();
   actioninfo.name = action.api;
 
-  if(isDefined(actionfuncs[# "parameterize"])) {
+  if(isDefined(actionfuncs[#"parameterize"])) {
     _blackboardsreadwritemode(planner);
-    actioninfo.params = [[actionfuncs[# "parameterize"]]](planner, action.constants);
+    actioninfo.params = [[actionfuncs[#"parameterize"]]](planner, action.constants);
     assert(isstruct(actioninfo.params), "<dev string:x42>" + action.api + "<dev string:x6b>");
     _blackboardsreadmode(planner);
   } else {
@@ -598,43 +598,43 @@ function createplannerfromasset(assetname) {
 
 function getplannerapifunction(functionname) {
   assert(ishash(functionname) && functionname != "<dev string:x149>", "<dev string:x160>");
-  assert(isDefined(level._plannerscriptfunctions[# "api"][functionname]), "<dev string:x19b>" + function_9e72a96(functionname) + "<dev string:x1bb>");
-  return level._plannerscriptfunctions[# "api"][functionname];
+  assert(isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x19b>" + function_9e72a96(functionname) + "<dev string:x1bb>");
+  return level._plannerscriptfunctions[#"api"][functionname];
 }
 
 function getplanneractionfunctions(actionname) {
   assert(ishash(actionname) && actionname != "<dev string:x149>", "<dev string:x1d4>");
-  assert(isDefined(level._plannerscriptfunctions[# "action"][actionname]), "<dev string:x20d>" + function_9e72a96(actionname) + "<dev string:x1bb>");
-  return level._plannerscriptfunctions[# "action"][actionname];
+  assert(isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x20d>" + function_9e72a96(actionname) + "<dev string:x1bb>");
+  return level._plannerscriptfunctions[#"action"][actionname];
 }
 
 function registerplannerapi(functionname, functionptr) {
   assert(ishash(functionname) && functionname != "<dev string:x149>", "<dev string:x22b>");
   assert(isfunctionptr(functionptr), "<dev string:x26b>" + function_9e72a96(functionname) + "<dev string:x29b>");
   planner::_initializeplannerfunctions(#"api");
-  assert(!isDefined(level._plannerscriptfunctions[# "api"][functionname]), "<dev string:x19b>" + functionname + "<dev string:x2bd>");
-  level._plannerscriptfunctions[# "api"][functionname] = functionptr;
+  assert(!isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x19b>" + functionname + "<dev string:x2bd>");
+  level._plannerscriptfunctions[#"api"][functionname] = functionptr;
 }
 
 function registerplanneraction(actionname, paramfuncptr, initializefuncptr, updatefuncptr, terminatefuncptr) {
   assert(ishash(actionname) && actionname != "<dev string:x149>", "<dev string:x2d4>");
   planner::_initializeplannerfunctions("Action");
-  assert(!isDefined(level._plannerscriptfunctions[# "action"][actionname]), "<dev string:x20d>" + function_9e72a96(actionname) + "<dev string:x2bd>");
-  level._plannerscriptfunctions[# "action"][actionname] = [];
+  assert(!isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x20d>" + function_9e72a96(actionname) + "<dev string:x2bd>");
+  level._plannerscriptfunctions[#"action"][actionname] = [];
 
   if(isfunctionptr(paramfuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "parameterize"] = paramfuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"parameterize"] = paramfuncptr;
   }
 
   if(isfunctionptr(initializefuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "initialize"] = initializefuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"initialize"] = initializefuncptr;
   }
 
   if(isfunctionptr(updatefuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "update"] = updatefuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"update"] = updatefuncptr;
   }
 
   if(isfunctionptr(terminatefuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "terminate"] = terminatefuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"terminate"] = terminatefuncptr;
   }
 }

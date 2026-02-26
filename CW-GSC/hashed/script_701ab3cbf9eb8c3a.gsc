@@ -53,23 +53,23 @@ function function_945def6e(var_d3440450, var_50cc0d4f) {
   a_ents = [];
 
   if(isDefined(level.pilot)) {
-    a_ents[# "pilot"] = level.pilot;
+    a_ents[#"pilot"] = level.pilot;
   }
 
   if(isDefined(level.copilot)) {
-    a_ents[# "copilot"] = level.copilot;
+    a_ents[#"copilot"] = level.copilot;
   }
 
   if(isDefined(level.buddy)) {
-    a_ents[# "buddy"] = level.buddy;
+    a_ents[#"buddy"] = level.buddy;
   }
 
   if(isDefined(level.vip)) {
-    a_ents[# "vip"] = level.vip;
+    a_ents[#"vip"] = level.vip;
   }
 
   if(isDefined(level.gunner)) {
-    a_ents[# "gunner"] = level.gunner;
+    a_ents[#"gunner"] = level.gunner;
   }
 
   objectives::scripted(#"nuke_return", undefined, #"hash_ac851f5cde226a9");
@@ -78,7 +78,7 @@ function function_945def6e(var_d3440450, var_50cc0d4f) {
     level thread namespace_722cc932::function_dda1c23b(1);
   }
 
-  a_ents[# "hash_4972abe0166bbc73"] = level.var_7466d419;
+  a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::play(#"armada_crash_start", a_ents);
   objectives::complete(#"nuke_return");
   skipto::function_4e3ab877(var_d3440450);
@@ -89,11 +89,11 @@ function function_7b315e60() {
 }
 
 function function_b8cf916c(a_ents) {
-  if(isDefined(a_ents[# "vehicle 1"]) && isDefined(a_ents[# "vehicle 2"])) {
-    streamermodelhint(a_ents[# "vehicle 1"].model, 30);
-    streamermodelhint(a_ents[# "vehicle 2"].model, 30);
-    a_ents[# "vehicle 1"] sethighdetail(1);
-    a_ents[# "vehicle 2"] sethighdetail(1);
+  if(isDefined(a_ents[#"vehicle 1"]) && isDefined(a_ents[#"vehicle 2"])) {
+    streamermodelhint(a_ents[#"vehicle 1"].model, 30);
+    streamermodelhint(a_ents[#"vehicle 2"].model, 30);
+    a_ents[#"vehicle 1"] sethighdetail(1);
+    a_ents[#"vehicle 2"] sethighdetail(1);
   }
 }
 
@@ -308,14 +308,14 @@ function function_c1b1ec5e() {
 }
 
 function smoke_signal(a_ents) {
-  a_ents[# "smoke_signal"] waittill(#"death");
-  v_org = a_ents[# "smoke_signal"].origin;
+  a_ents[#"smoke_signal"] waittill(#"death");
+  v_org = a_ents[#"smoke_signal"].origin;
   level fx::play(#"hash_4aeb2425485e527", v_org, (0, 0, 0), "last_stand_beat_1");
   level util::delay("last_stand_beat_1", undefined, &fx::play, #"hash_66372422472364c", v_org);
 }
 
 function m16(a_ents) {
-  a_ents[# "m16"] useweaponmodel(getweapon("lmg_slowfire_t9"));
+  a_ents[#"m16"] useweaponmodel(getweapon("lmg_slowfire_t9"));
 }
 
 function function_cd3c6f53(str_objective, var_50cc0d4f) {
@@ -413,7 +413,7 @@ function function_be831785() {
 }
 
 function function_151b3bc9(a_ents) {
-  var_1280faf3 = a_ents[# "spawner_player_chopper_crashed"];
+  var_1280faf3 = a_ents[#"spawner_player_chopper_crashed"];
 
   if(isDefined(var_1280faf3)) {
     var_1280faf3 val::set(#"last_stand", "takedamage", 0);
@@ -600,8 +600,8 @@ function function_7322d11e(a_ents) {
     }
   }
 
-  a_ents[# "spawner_hero_vip"] setdedicatedshadow(1);
-  a_ents[# "spawner_hero_buddy"] setdedicatedshadow(1);
+  a_ents[#"spawner_hero_vip"] setdedicatedshadow(1);
+  a_ents[#"spawner_hero_buddy"] setdedicatedshadow(1);
 }
 
 function autoexec crash_fade_to_white() {

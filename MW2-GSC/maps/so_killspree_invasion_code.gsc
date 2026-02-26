@@ -11,43 +11,43 @@
 #include maps\_hud_util;
 
 // --------------------------------------------------------------------------------- fire_off_exploder(current) {
-  while(1) {
-    exploder(current.script_prefab_exploder);
-    if(!isDefined(current.target)) {
-      break;
-    }
-    next = getent(current.target, "targetname");
-    if(!isDefined(next)) {
-      break;
-    }
-    current = next;
+while(1) {
+  exploder(current.script_prefab_exploder);
+  if(!isDefined(current.target)) {
+    break;
   }
+  next = getent(current.target, "targetname");
+  if(!isDefined(next)) {
+    break;
+  }
+  current = next;
+}
 }
 
 // --------------------------------------------------------------------------------- create_smoke_wave(smoke_tag, flag_start, dialog_wait) {
-  if(isDefined(flag_start)) {
-    flag_init(flag_start);
-    flag_wait(flag_start);
+if(isDefined(flag_start)) {
+  flag_init(flag_start);
+  flag_wait(flag_start);
+}
+
+// Prevent smoke from happening too frequently
+if(isDefined(level.smoke_throttle)) {
+  if(!isDefined(level.smoke_wave_time))
+    level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
+
+  time_since = gettime() - level.smoke_wave_time;
+  if(time_since <= level.smoke_throttle) {
+    return;
   }
+  level.smoke_wave_time = gettime();
+}
 
-  // Prevent smoke from happening too frequently
-  if(isDefined(level.smoke_throttle)) {
-    if(!isDefined(level.smoke_wave_time))
-      level.smoke_wave_time = gettime() - level.smoke_throttle - 1;
+magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
+array_thread(magic_smoke_grenades, ::smoke_wave_play);
 
-    time_since = gettime() - level.smoke_wave_time;
-    if(time_since <= level.smoke_throttle) {
-      return;
-    }
-    level.smoke_wave_time = gettime();
-  }
-
-  magic_smoke_grenades = getEntArray(smoke_tag, "targetname");
-  array_thread(magic_smoke_grenades, ::smoke_wave_play);
-
-  // Undefined dialog_wait assumes we don't want any. Use 0 for no wait.
-  if(isDefined(dialog_wait))
-    thread dialog_smoke_wave_alert(dialog_wait);
+// Undefined dialog_wait assumes we don't want any. Use 0 for no wait.
+if(isDefined(dialog_wait))
+  thread dialog_smoke_wave_alert(dialog_wait);
 }
 
 smoke_wave_play() {
@@ -65,41 +65,41 @@ dialog_smoke_wave_alert(dialog_wait) {
 }
 
 // --------------------------------------------------------------------------------- btr80_level_init() {
-  if(isDefined(level.btr_init)) {
-    return;
+if(isDefined(level.btr_init)) {
+  return;
+}
+level.btr_init = true;
+level.btr80_count = 0;
+
+if(!isDefined(level.btr_min_fighting_range))
+  level.btr_min_fighting_range = 400;
+
+if(!isDefined(level.btr_max_fighting_range))
+  level.btr_max_fighting_range = 2400;
+
+if(!isDefined(level.btr_target_fov))
+  level.btr_target_fov = cos(50);
+
+level.btr80_building_checks = getEntArray("trigger_multiple_flag_set_touching", "classname");
+
+for(i = level.btr80_building_checks.size - 1; i >= 0; i--) {
+  building = level.btr80_building_checks[i];
+  if(!isDefined(building.script_flag)) {
+    level.btr80_building_checks[i] = undefined;
+    continue;
   }
-  level.btr_init = true;
-  level.btr80_count = 0;
 
-  if(!isDefined(level.btr_min_fighting_range))
-    level.btr_min_fighting_range = 400;
-
-  if(!isDefined(level.btr_max_fighting_range))
-    level.btr_max_fighting_range = 2400;
-
-  if(!isDefined(level.btr_target_fov))
-    level.btr_target_fov = cos(50);
-
-  level.btr80_building_checks = getEntArray("trigger_multiple_flag_set_touching", "classname");
-
-  for(i = level.btr80_building_checks.size - 1; i >= 0; i--) {
-    building = level.btr80_building_checks[i];
-    if(!isDefined(building.script_flag)) {
+  switch (building.script_flag) {
+    case "player_inside_nates":
+    case "player_in_burgertown":
+    case "player_in_diner":
+      // Do nothing, keep in the list.
+      break;
+    default:
       level.btr80_building_checks[i] = undefined;
-      continue;
-    }
-
-    switch (building.script_flag) {
-      case "player_inside_nates":
-      case "player_in_burgertown":
-      case "player_in_diner":
-        // Do nothing, keep in the list.
-        break;
-      default:
-        level.btr80_building_checks[i] = undefined;
-        break;
-    }
+      break;
   }
+}
 }
 
 create_btr80(btr80_tag, flag_start) {
@@ -390,24 +390,24 @@ dialog_btr80_spotted_you_action() {
 }
 
 // --------------------------------------------------------------------------------- hunter_enemies_level_init() {
-  if(isDefined(level.hunters_init)) {
-    return;
-  }
-  level.hunters_init = true;
+if(isDefined(level.hunters_init)) {
+  return;
+}
+level.hunters_init = true;
 
-  level.hunters_active = 0;
-  level.hunter_enemies = [];
-  level.hunter_damage_p1 = [];
-  level.hunter_damage_p2 = [];
-  dialog_hunter_enemies_setup();
+level.hunters_active = 0;
+level.hunter_enemies = [];
+level.hunter_damage_p1 = [];
+level.hunter_damage_p2 = [];
+dialog_hunter_enemies_setup();
 
-  set_group_advance_to_enemy_parameters(60000, 1);
+set_group_advance_to_enemy_parameters(60000, 1);
 
-  level.difficultySettings["accuracyDistScale"]["easy"] = 0.65;
-  level.difficultySettings["accuracyDistScale"]["normal"] = 0.65;
-  level.difficultySettings["accuracyDistScale"]["hardened"] = 0.5;
-  level.difficultySettings["accuracyDistScale"]["veteran"] = 0.4;
-  maps\_gameskill::updateAllDifficulty();
+level.difficultySettings["accuracyDistScale"]["easy"] = 0.65;
+level.difficultySettings["accuracyDistScale"]["normal"] = 0.65;
+level.difficultySettings["accuracyDistScale"]["hardened"] = 0.5;
+level.difficultySettings["accuracyDistScale"]["veteran"] = 0.4;
+maps\_gameskill::updateAllDifficulty();
 }
 
 create_hunter_enemy_group(enemy_tag, flag_start, enemy_count) {
@@ -742,52 +742,52 @@ dialog_hunter_enemies_setup(enemy_tag, wait_time) {
 }
 
 // --------------------------------------------------------------------------------- hud_create_kill_counter() {
-  level endon("special_op_failed");
+level endon("special_op_failed");
 
-  yline = 2;
-  if(is_coop()) {
-    yline = 3;
-    thread hud_create_p1_counter();
-    thread hud_create_p2_counter();
-  } else {
-    thread hud_create_p1_counter_nodraw();
+yline = 2;
+if(is_coop()) {
+  yline = 3;
+  thread hud_create_p1_counter();
+  thread hud_create_p2_counter();
+} else {
+  thread hud_create_p1_counter_nodraw();
+}
+
+hudelem = so_create_hud_item(yline, so_hud_ypos(), &"SO_KILLSPREE_INVASION_HUD_REMAINING", self);
+hudelem_score = so_create_hud_item(yline, so_hud_ypos(), undefined, self);
+hudelem_score.alignx = "left";
+
+self.kill_counter_hud = hudelem_score;
+
+old_score = level.points_counter_display;
+while(1) {
+  hudelem_score SetValue(level.points_counter_display);
+
+  if(level.points_counter_display <= 0) {
+    hudelem thread so_hud_pulse_success();
+    hudelem_score thread so_hud_pulse_success();
+  } else if(level.points_counter_display < old_score) {
+    if(level.points_counter_display <= 5000) {
+      hudelem thread so_hud_pulse_close();
+      hudelem_score thread so_hud_pulse_close();
+    } else {
+      hudelem thread so_hud_pulse_default();
+      hudelem_score thread so_hud_pulse_default();
+    }
+    old_score = level.points_counter_display;
   }
 
-  hudelem = so_create_hud_item(yline, so_hud_ypos(), &"SO_KILLSPREE_INVASION_HUD_REMAINING", self);
-  hudelem_score = so_create_hud_item(yline, so_hud_ypos(), undefined, self);
-  hudelem_score.alignx = "left";
-
-  self.kill_counter_hud = hudelem_score;
-
-  old_score = level.points_counter_display;
-  while(1) {
-    hudelem_score SetValue(level.points_counter_display);
-
-    if(level.points_counter_display <= 0) {
-      hudelem thread so_hud_pulse_success();
-      hudelem_score thread so_hud_pulse_success();
-    } else if(level.points_counter_display < old_score) {
-      if(level.points_counter_display <= 5000) {
-        hudelem thread so_hud_pulse_close();
-        hudelem_score thread so_hud_pulse_close();
-      } else {
-        hudelem thread so_hud_pulse_default();
-        hudelem_score thread so_hud_pulse_default();
-      }
-      old_score = level.points_counter_display;
-    }
-
-    if(flag("challenge_success")) {
-      break;
-    }
-
-    level waittill("score_updated");
+  if(flag("challenge_success")) {
+    break;
   }
 
-  hudelem_score SetValue(0);
+  level waittill("score_updated");
+}
 
-  hudelem thread so_remove_hud_item();
-  hudelem_score thread so_remove_hud_item();
+hudelem_score SetValue(0);
+
+hudelem thread so_remove_hud_item();
+hudelem_score thread so_remove_hud_item();
 }
 
 hud_create_p1_counter() {
@@ -1137,10 +1137,10 @@ hud_create_kill_splash_default(player, message) {
 }
 
 // --------------------------------------------------------------------------------- door_diner_open() {
-  diner_back_door = getent("diner_back_door", "targetname");
-  diner_back_door rotateyaw(85, .3); //counter clockwise
-  diner_back_door playSound("diner_backdoor_slams_open");
-  diner_back_door connectpaths();
+diner_back_door = getent("diner_back_door", "targetname");
+diner_back_door rotateyaw(85, .3); //counter clockwise
+diner_back_door playSound("diner_backdoor_slams_open");
+diner_back_door connectpaths();
 }
 
 door_nates_locker_open() {

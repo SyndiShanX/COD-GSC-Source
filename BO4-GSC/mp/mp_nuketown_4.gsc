@@ -26,7 +26,7 @@ event_handler[level_init] main(eventstruct) {
   lui::add_luimenu("full_screen_movie", &full_screen_movie::register, "full_screen_movie");
   level.mannequin_mode = 0;
   level.var_ecb7b947 = 0;
-  level.destructible_callbacks[# "headless"] = &function_e0136874;
+  level.destructible_callbacks[#"headless"] = &function_e0136874;
   level.nuketown_population = 0;
   clientfield::register("world", "nuketown_population", 8000, 7, "int");
   clientfield::register("world", "nuketown_missile_scene", 8000, 1, "int");
@@ -224,13 +224,13 @@ function_25cf04b2(a_ents) {
   blue_train = getent("blue_train", "targetname");
   orange_train = getent("orange_train", "targetname");
 
-  if(isDefined(a_ents[# "prop 1"]) && isDefined(blue_train)) {
-    hatch_left = a_ents[# "prop 1"];
+  if(isDefined(a_ents[#"prop 1"]) && isDefined(blue_train)) {
+    hatch_left = a_ents[#"prop 1"];
     blue_train linkto(hatch_left, "tag_link_train_engine", (0, 0, 0));
   }
 
-  if(isDefined(a_ents[# "prop 2"]) && isDefined(orange_train)) {
-    hatch_right = a_ents[# "prop 2"];
+  if(isDefined(a_ents[#"prop 2"]) && isDefined(orange_train)) {
+    hatch_right = a_ents[#"prop 2"];
     orange_train linkto(hatch_right, "tag_link_train_carriage", (0, 0, 0));
   }
 
@@ -513,8 +513,8 @@ function_f062b7d9(bhide) {
 function_c2bd6a1f(a_ents) {
   truck = getent("truck_destructible", "targetname");
 
-  if(isDefined(a_ents[# "prop 1"]) && isDefined(truck)) {
-    truck linkto(a_ents[# "prop 1"], "tag_link_uaz", (0, 0, 0));
+  if(isDefined(a_ents[#"prop 1"]) && isDefined(truck)) {
+    truck linkto(a_ents[#"prop 1"], "tag_link_uaz", (0, 0, 0));
   }
 }
 

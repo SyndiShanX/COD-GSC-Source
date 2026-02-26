@@ -77,7 +77,7 @@ function_3761a1bc(a_ents) {
 
 function_f55fb854(a_ents) {
   if(isDefined(self.t_hurt)) {
-    self.t_hurt linkto(a_ents[# "prop 1"]);
+    self.t_hurt linkto(a_ents[#"prop 1"]);
   }
 }
 

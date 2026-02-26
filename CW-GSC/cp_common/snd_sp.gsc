@@ -575,14 +575,14 @@ function private function_ec6efa64(alias, position, range, view) {
 function function_518f6be7() {
   if(!isDefined(level.var_9c638f25)) {
     level.var_9c638f25 = [];
-    level.var_9c638f25[# "linear_up"] = [0, 0.02, 0.045, 0.065, 0.09, 0.11, 0.135, 0.155, 0.18, 0.2];
-    level.var_9c638f25[# "linear_down"] = [0.2, 0.18, 0.155, 0.135, 0.11, 0.09, 0.065, 0.045, 0.02, 0];
-    level.var_9c638f25[# "hash_4e2d52f3f0be7ff0"] = [0, 0.01, 0.019, 0.03, 0.049, 0.068, 0.102, 0.15, 0.229, 0.343];
-    level.var_9c638f25[# "hash_4f72d4357814b6ec"] = [0.343, 0.229, 0.15, 0.102, 0.068, 0.049, 0.03, 0.019, 0.01, 0];
-    level.var_9c638f25[# "hash_60fcd0938f1c15ad"] = [0, 0.051, 0.077, 0.094, 0.108, 0.118, 0.127, 0.135, 0.142, 0.148];
-    level.var_9c638f25[# "hash_515cc0964c4d5f65"] = [0.148, 0.142, 0.135, 0.127, 0.118, 0.108, 0.094, 0.077, 0.051, 0];
-    level.var_9c638f25[# "bell"] = [0.003, 0.017, 0.057, 0.14, 0.283, 0.283, 0.14, 0.057, 0.017, 0.003];
-    level.var_9c638f25[# "hash_3a962d646a55e818"] = [0.283, 0.14, 0.057, 0.017, 0.003, 0.003, 0.017, 0.057, 0.14, 0.283];
+    level.var_9c638f25[#"linear_up"] = [0, 0.02, 0.045, 0.065, 0.09, 0.11, 0.135, 0.155, 0.18, 0.2];
+    level.var_9c638f25[#"linear_down"] = [0.2, 0.18, 0.155, 0.135, 0.11, 0.09, 0.065, 0.045, 0.02, 0];
+    level.var_9c638f25[#"hash_4e2d52f3f0be7ff0"] = [0, 0.01, 0.019, 0.03, 0.049, 0.068, 0.102, 0.15, 0.229, 0.343];
+    level.var_9c638f25[#"hash_4f72d4357814b6ec"] = [0.343, 0.229, 0.15, 0.102, 0.068, 0.049, 0.03, 0.019, 0.01, 0];
+    level.var_9c638f25[#"hash_60fcd0938f1c15ad"] = [0, 0.051, 0.077, 0.094, 0.108, 0.118, 0.127, 0.135, 0.142, 0.148];
+    level.var_9c638f25[#"hash_515cc0964c4d5f65"] = [0.148, 0.142, 0.135, 0.127, 0.118, 0.108, 0.094, 0.077, 0.051, 0];
+    level.var_9c638f25[#"bell"] = [0.003, 0.017, 0.057, 0.14, 0.283, 0.283, 0.14, 0.057, 0.017, 0.003];
+    level.var_9c638f25[#"hash_3a962d646a55e818"] = [0.283, 0.14, 0.057, 0.017, 0.003, 0.003, 0.017, 0.057, 0.14, 0.283];
   }
 }
 
@@ -924,8 +924,8 @@ function private function_56a60177(var_793802a, frame_rate) {
 
 function function_c9ebfa2(xanim, notetrack, var_596cbb65) {
   info = function_643b5581(var_596cbb65);
-  animname = info[# "animname"];
-  anime = info[# "anime"];
+  animname = info[#"animname"];
+  anime = info[#"anime"];
   assert(isDefined(anime), "<dev string:x25e>");
 }
 
@@ -936,8 +936,8 @@ function private function_643b5581(xanim) {
         if(isstring(var_ba93f88) && !isarray(var_42203061)) {
           if(xanim == var_42203061) {
             result = [];
-            result[# "anime"] = var_ba93f88;
-            result[# "animname"] = var_7cd1f30b;
+            result[#"anime"] = var_ba93f88;
+            result[#"animname"] = var_7cd1f30b;
             return result;
           }
         }

@@ -192,7 +192,7 @@ remove_temp_chest(chest_index) {
     util::wait_network_frame();
   }
 
-  playFX(level._effect[# "poltergeist"], level.chests[chest_index].orig_origin);
+  playFX(level._effect[#"poltergeist"], level.chests[chest_index].orig_origin);
   util::wait_network_frame();
 
   if(isDefined(level.custom_firesale_box_leave) && level.custom_firesale_box_leave) {

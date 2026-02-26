@@ -65,7 +65,7 @@ function function_a4f516ef() {
   }
 
   if(!self flag::get(#"hash_287397edba8966f9")) {
-    var_f9664338 = [# "hash_287397edba8966f9", #"hash_224cb97b8f682317"];
+    var_f9664338 = [#"hash_287397edba8966f9", #"hash_224cb97b8f682317"];
     self flag::wait_till_any(var_f9664338);
   }
 

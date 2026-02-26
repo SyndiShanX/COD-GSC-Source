@@ -185,7 +185,7 @@ function private function_4b8e0aab(entity) {
   can_see = 0;
   trace = physicstrace(entity.origin + (0, 0, 48), entity.favoriteenemy.origin + (0, 0, 36), (-16, -16, -12), (16, 16, 12), entity);
 
-  if(trace[# "fraction"] == 1 || trace[# "entity"] === entity.favoriteenemy) {
+  if(trace[#"fraction"] == 1 || trace[#"entity"] === entity.favoriteenemy) {
     can_see = 1;
   }
 
@@ -251,8 +251,8 @@ function function_7fe60e9e(entity) {
   var_872c6826 = vectortoangles(targetpos - launchpos);
   angles = function_cc68801f(launchpos, targetpos, 600, getdvarfloat(#"bg_lowgravity", 0));
 
-  if(isDefined(angles) && angles[# "lowangle"] > 0) {
-    dir = anglesToForward((-1 * angles[# "lowangle"], var_872c6826[1], var_872c6826[2]));
+  if(isDefined(angles) && angles[#"lowangle"] > 0) {
+    dir = anglesToForward((-1 * angles[#"lowangle"], var_872c6826[1], var_872c6826[2]));
   } else {
     dir = anglesToForward(var_872c6826);
   }

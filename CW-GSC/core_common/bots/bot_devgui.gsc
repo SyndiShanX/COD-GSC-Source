@@ -462,15 +462,15 @@ function private devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
 
   roleindex = int(var_b27e53da);
   trace = self eye_trace(0, 1);
-  spawndir = self.origin - trace[# "position"];
+  spawndir = self.origin - trace[#"position"];
   spawnangles = vectortoangles(spawndir);
   offset = (0, 0, 5);
-  origin = trace[# "position"] + offset;
+  origin = trace[#"position"] + offset;
   bots = function_bd48ef10(team, count, origin, spawnangles[1], roleindex);
-  vehicle = trace[# "entity"];
+  vehicle = trace[#"entity"];
 
   if(isvehicle(vehicle)) {
-    pos = trace[# "position"];
+    pos = trace[#"position"];
     seatindex = vehicle function_eee09f16(pos);
 
     if(isDefined(seatindex)) {
@@ -660,7 +660,7 @@ function private devgui_goal(botarg, cmdarg) {
 
 function private set_goal(botarg, force = 0) {
   trace = self eye_trace(1);
-  pos = trace[# "position"];
+  pos = trace[#"position"];
 
   if(force) {
     pos = getclosestpointonnavmesh(pos, 16, 16);
@@ -671,7 +671,7 @@ function private set_goal(botarg, force = 0) {
   }
 
   bots = function_9a819607(self, botarg);
-  vehicle = isvehicle(trace[# "entity"]) ? trace[# "entity"] : undefined;
+  vehicle = isvehicle(trace[#"entity"]) ? trace[#"entity"] : undefined;
 
   foreach(bot in bots) {
     bot notify(#"hash_7597caa242064632");
@@ -709,7 +709,7 @@ function private set_goal(botarg, force = 0) {
 function private function_417ef9e7(botarg) {
   trace = self eye_trace(1);
   bots = function_9a819607(self, botarg);
-  pos = trace[# "position"];
+  pos = trace[#"position"];
   point = getclosesttacpoint(pos);
 
   if(!isDefined(point)) {
@@ -751,7 +751,7 @@ function private function_be8f790e(botarg) {
 
 function private function_93996ae6(botarg) {
   trace = self eye_trace(1);
-  pos = trace[# "position"];
+  pos = trace[#"position"];
   pos = getclosestpointonnavmesh(pos, 16, 16);
 
   if(!isDefined(pos)) {
@@ -893,7 +893,7 @@ function private function_fbdf36c1(botarg) {
   yaw = absangleclamp360(self.angles[1] + 180);
   angle = (0, yaw, 0);
   trace = self eye_trace(1, 1);
-  pos = trace[# "position"];
+  pos = trace[#"position"];
 
   foreach(bot in bots) {
     bot dontinterpolate();
@@ -1040,7 +1040,7 @@ function private eye_trace(hitents = 0, var_18daeece = 0) {
 
 function private function_59842621() {
   trace = self eye_trace(1);
-  targetentity = trace[# "entity"];
+  targetentity = trace[#"entity"];
   return targetentity;
 }
 

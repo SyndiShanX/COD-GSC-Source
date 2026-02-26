@@ -170,7 +170,7 @@ function function_4f7317ce() {
 }
 
 function function_9df174aa(a_ents) {
-  level.park = a_ents[# "park"];
+  level.park = a_ents[#"park"];
 }
 
 function function_8d76ed51() {

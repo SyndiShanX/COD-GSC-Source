@@ -326,7 +326,7 @@ function private _gibentity(localclientnum, gibflags, shouldspawngibs, var_c3317
           var_c0c9eae3 = entity function_4976d5ee();
 
           if(isDefined(var_c0c9eae3)) {
-            _playgibfx(localclientnum, entity, var_c0c9eae3[# "fx"], var_c0c9eae3[# "tag"]);
+            _playgibfx(localclientnum, entity, var_c0c9eae3[#"fx"], var_c0c9eae3[#"tag"]);
           }
         } else {
           gibpiece = function_69db754(entity, currentgibflag, var_c3317960);

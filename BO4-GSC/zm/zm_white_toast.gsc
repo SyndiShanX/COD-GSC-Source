@@ -974,14 +974,14 @@ function_8149ceff() {
 function_1fba7fc2() {
   level endon(#"game_ended", #"avog_captured");
   a_taunts = [];
-  a_taunts[# "niko"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "demp"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "rich"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "take"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "unik"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "udem"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "uric"] = array::randomize(array(0, 1, 2, 3));
-  a_taunts[# "utak"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"niko"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"demp"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"rich"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"take"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"unik"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"udem"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"uric"] = array::randomize(array(0, 1, 2, 3));
+  a_taunts[#"utak"] = array::randomize(array(0, 1, 2, 3));
   base_alias = "vox_boss_taunt_";
 
   while(true) {
@@ -1116,7 +1116,7 @@ function_61dc1b0(n_round) {
 
 function_3d06f24e() {
   level waittill(#"zombie_total_set");
-  level.zombie_health = zombie_utility::ai_calculate_health(level.zombie_vars[# "zombie_health_start"], max(level.round_number, 20));
+  level.zombie_health = zombie_utility::ai_calculate_health(level.zombie_vars[#"zombie_health_start"], max(level.round_number, 20));
 }
 
 function_be93a2bf() {
@@ -1129,7 +1129,7 @@ function_be93a2bf() {
     }
   }
 
-  s_spawn_point = array::random(level.zm_loc_types[# "zombie_location"]);
+  s_spawn_point = array::random(level.zm_loc_types[#"zombie_location"]);
   ai = zombie_utility::spawn_zombie(getEntArray("mannequin_zombie_spawner", "script_noteworthy")[0], undefined, s_spawn_point);
 
   if(isDefined(ai)) {

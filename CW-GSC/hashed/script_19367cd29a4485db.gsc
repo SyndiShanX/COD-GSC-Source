@@ -659,7 +659,7 @@ function function_7ae85497(dist) {
   var_5927a215 = (10, 10, 10);
   v_eye = self getplayercamerapos();
   var_abd03397 = physicstrace(v_eye, v_eye + v_forward, -1 * var_5927a215, var_5927a215, getplayers()[0], 64 | 2);
-  return var_abd03397[# "position"];
+  return var_abd03397[#"position"];
 }
 
 function spawn_aitype(aitype) {
@@ -878,14 +878,14 @@ function function_afb25532(str_type, b_enable) {
       }
 
       foreach(var_97aab885 in var_e5880035) {
-        if(isDefined(var_97aab885.contentgroups[# "capture_point"][0])) {
-          v_loc = var_97aab885.contentgroups[# "capture_point"][0].origin;
+        if(isDefined(var_97aab885.contentgroups[#"capture_point"][0])) {
+          v_loc = var_97aab885.contentgroups[#"capture_point"][0].origin;
           v_color = (0, 1, 0);
-        } else if(isDefined(var_97aab885.contentgroups[# "chest_spawn"][0])) {
-          v_loc = var_97aab885.contentgroups[# "chest_spawn"][0].origin;
+        } else if(isDefined(var_97aab885.contentgroups[#"chest_spawn"][0])) {
+          v_loc = var_97aab885.contentgroups[#"chest_spawn"][0].origin;
           v_color = (0, 1, 0);
-        } else if(isDefined(var_97aab885.contentgroups[# "trigger_spawn"][0])) {
-          v_loc = var_97aab885.contentgroups[# "trigger_spawn"][0].origin;
+        } else if(isDefined(var_97aab885.contentgroups[#"trigger_spawn"][0])) {
+          v_loc = var_97aab885.contentgroups[#"trigger_spawn"][0].origin;
           v_color = (0, 1, 0);
         } else {
           v_loc = var_97aab885.origin;
@@ -1247,9 +1247,9 @@ function private function_df5be8b2() {
     trace = physicstraceex(view_pos, end_pos, (0, 0, 0), (0, 0, 0), self);
 
     if(getdvarint(#"recorder_enablerec", 0)) {
-      recordline(view_pos, view_pos + dir * trace[# "fraction"], (0, 1, 0), "<dev string:x76b>");
+      recordline(view_pos, view_pos + dir * trace[#"fraction"], (0, 1, 0), "<dev string:x76b>");
     } else {
-      line(view_pos, view_pos + dir * trace[# "fraction"], (0, 1, 0));
+      line(view_pos, view_pos + dir * trace[#"fraction"], (0, 1, 0));
     }
 
     if(getdvarint(#"recorder_enablerec", 0)) {
@@ -1259,9 +1259,9 @@ function private function_df5be8b2() {
     }
 
     if(getdvarint(#"recorder_enablerec", 0)) {
-      recordstar(view_pos + dir * trace[# "fraction"], (1, 0, 0), "<dev string:x76b>");
+      recordstar(view_pos + dir * trace[#"fraction"], (1, 0, 0), "<dev string:x76b>");
     } else {
-      debugstar(view_pos + dir * trace[# "fraction"], (1, 0, 0));
+      debugstar(view_pos + dir * trace[#"fraction"], (1, 0, 0));
     }
 
     waitframe(1);

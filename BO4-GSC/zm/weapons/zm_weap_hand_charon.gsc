@@ -517,7 +517,7 @@ function_247597a(b_charged) {
 
   if(isDefined(level.var_4822b326)) {
     level notify(#"ww_charon_hit", {
-      #player: self, #e_entity: a_trace[# "entity"]
+      #player: self, #e_entity: a_trace[#"entity"]
     });
   }
 
@@ -525,7 +525,7 @@ function_247597a(b_charged) {
     return a_trace;
   }
 
-  return a_trace[# "position"];
+  return a_trace[#"position"];
 }
 
 function_dd7bc108(weapon) {
@@ -559,30 +559,30 @@ function_dd7bc108(weapon) {
 
   a_trace = function_247597a(1);
 
-  if(!isDefined(a_trace[# "position"]) && !isDefined(a_trace[# "entity"])) {
+  if(!isDefined(a_trace[#"position"]) && !isDefined(a_trace[#"entity"])) {
     return;
   }
 
-  if(isDefined(a_trace[# "entity"])) {
-    v_on_nav = a_trace[# "entity"].origin;
+  if(isDefined(a_trace[#"entity"])) {
+    v_on_nav = a_trace[#"entity"].origin;
 
-    if(isDefined(a_trace[# "position"])) {
-      v_hit = a_trace[# "position"];
+    if(isDefined(a_trace[#"position"])) {
+      v_hit = a_trace[#"position"];
     }
   } else {
-    v_on_nav = getclosestpointonnavmesh(a_trace[# "position"], 128, 32);
+    v_on_nav = getclosestpointonnavmesh(a_trace[#"position"], 128, 32);
 
     if(isDefined(v_on_nav)) {
       v_hit = v_on_nav;
     } else {
-      v_hit = a_trace[# "position"];
+      v_hit = a_trace[#"position"];
     }
   }
 
   e_projectile = util::spawn_model("tag_origin", self gettagorigin("tag_flash"), self gettagangles("tag_flash"));
 
   if(isDefined(e_projectile)) {
-    e_projectile function_39e6dc29(a_trace[# "position"]);
+    e_projectile function_39e6dc29(a_trace[#"position"]);
     wait 0.1;
   }
 

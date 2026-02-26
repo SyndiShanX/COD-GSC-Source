@@ -315,12 +315,12 @@ function_9cc59537() {
 
               a_trace = bulletTrace(point.origin + (0, 0, 24), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[# "dynent"])) {
+              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[#"dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[# "position"], 8, v_color);
+                  debugstar(a_trace[#"position"], 8, v_color);
                 }
               }
             }
@@ -330,12 +330,12 @@ function_9cc59537() {
             foreach(v_test in var_7cb887a8) {
               a_trace = bulletTrace(point.origin + (0, 0, 16), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[# "dynent"])) {
+              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[#"dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[# "position"], 8, v_color);
+                  debugstar(a_trace[#"position"], 8, v_color);
                 }
               }
             }
@@ -458,15 +458,15 @@ function_e8f0335f() {
     var_7cb887a8 = [];
     var_3e832e74 = 360 / 8;
 
-    if(var_11cc451b[# "position"][2] > physicstrace[# "position"][2]) {
+    if(var_11cc451b[#"position"][2] > physicstrace[#"position"][2]) {
       var_708a2754 = var_11cc451b;
     }
 
-    origin = var_708a2754[# "position"];
+    origin = var_708a2754[#"position"];
 
-    if(var_708a2754[# "fraction"] < 1 && vectordot(var_708a2754[# "normal"], (0, 0, 1)) >= 0.707) {
-      if(var_708a2754[# "position"][2] > -10000) {
-        origin = var_708a2754[# "position"];
+    if(var_708a2754[#"fraction"] < 1 && vectordot(var_708a2754[#"normal"], (0, 0, 1)) >= 0.707) {
+      if(var_708a2754[#"position"][2] > -10000) {
+        origin = var_708a2754[#"position"];
       }
     }
 
@@ -483,16 +483,16 @@ function_e8f0335f() {
       foreach(v_test in var_7cb887a8) {
         a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, level.players[0]);
 
-        if(isDefined(a_trace[# "entity"])) {
-          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[# "entity"]);
+        if(isDefined(a_trace[#"entity"])) {
+          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[#"entity"]);
         }
 
-        if(distancesquared(a_trace[# "position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
+        if(distancesquared(a_trace[#"position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
           v_color = (1, 0, 0);
           b_failed = 1;
 
           if(distance2d(origin, level.players[0] getorigin()) < 512) {
-            debugstar(a_trace[# "position"], 1, v_color);
+            debugstar(a_trace[#"position"], 1, v_color);
           }
         }
       }

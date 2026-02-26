@@ -255,7 +255,7 @@ function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
     travelspeed = isDefined(supplydrop.var_abd32694) && supplydrop.var_abd32694 ? 400 : 200;
     groundoffset = isDefined(supplydrop.var_abd32694) && supplydrop.var_abd32694 ? 200 : 120;
     groundtrace = physicstraceex(startpoint, endpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), supplydrop, 32);
-    groundpoint = groundtrace[# "position"] + (0, 0, groundoffset);
+    groundpoint = groundtrace[#"position"] + (0, 0, groundoffset);
     traveldistance = startpoint - groundpoint;
     movetime = traveldistance[2] / travelspeed;
 
@@ -562,13 +562,13 @@ trace_point(point, var_5fd22b95 = 1, maxheight = 10000, minheight = 5000) {
   trace = groundtrace(startpoint, endpoint, 0, undefined, var_5fd22b95);
 
   if(!var_5fd22b95) {
-    if(trace[# "surfacetype"] == "water" || trace[# "surfacetype"] == "watershallow") {
+    if(trace[#"surfacetype"] == "water" || trace[#"surfacetype"] == "watershallow") {
       return;
     }
   }
 
-  if(isDefined(trace[# "position"])) {
-    return (trace[# "position"] + (0, 0, 2000));
+  if(isDefined(trace[#"position"])) {
+    return (trace[#"position"] + (0, 0, 2000));
   }
 
   return startpoint;

@@ -69,7 +69,7 @@ function init() {
     level.zombie_powerups = [];
   }
 
-  level._effect[# "powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
+  level._effect[#"powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
   init_powerups();
 
   if(!level.enable_magic || !is_true(zm_custom::function_901b751c(#"zmpowerupsactive"))) {
@@ -324,7 +324,7 @@ function minigun_no_drop() {
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i].zombie_vars[# "zombie_powerup_minigun_on"] == 1) {
+    if(players[i].zombie_vars[#"zombie_powerup_minigun_on"] == 1) {
       return true;
     }
   }
@@ -453,8 +453,8 @@ function function_b753385f(weapon) {
       trace = groundtrace(self.origin + (0, 0, 5), self.origin + (0, 0, -300), 0, undefined);
     }
 
-    origin = trace[# "position"];
-    hit_ent = trace[# "entity"];
+    origin = trace[#"position"];
+    hit_ent = trace[#"entity"];
     var_d13d4980 = undefined;
 
     if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
@@ -872,7 +872,7 @@ function specific_powerup_drop(var_5a63971, powerup_location, powerup_team, pick
   }
 
   s_trace = physicstrace(powerup_location + (0, 0, 10), powerup_location + (0, 0, -100), (0, 0, 0), (0, 0, 0), undefined, 2 | 16);
-  hit_ent = s_trace[# "entity"];
+  hit_ent = s_trace[#"entity"];
 
   if(isDefined(hit_ent) && hit_ent ismovingplatform()) {
     powerup = spawn("script_model", powerup_location + (0, 0, 40));
@@ -1695,7 +1695,7 @@ function tesla_powerup_active() {
   players = getplayers();
 
   for(i = 0; i < players.size; i++) {
-    if(players[i].zombie_vars[# "zombie_powerup_tesla_on"]) {
+    if(players[i].zombie_vars[#"zombie_powerup_tesla_on"]) {
       return true;
     }
   }
@@ -1757,7 +1757,7 @@ function powerup_emp() {
     waitresult = level waittill(#"emp_detonate");
 
     if(distancesquared(waitresult.position, self.origin) < waitresult.radius * waitresult.radius) {
-      playFX(level._effect[# "powerup_off"], self.origin);
+      playFX(level._effect[#"powerup_off"], self.origin);
       self thread powerup_delete_delayed();
       self notify(#"powerup_timedout");
     }

@@ -212,10 +212,10 @@ watchriotshielddeploy() {
   if(deploy_attempt) {
     placement = self canplaceriotshield("deploy_riotshield");
 
-    if(placement[# "result"]) {
+    if(placement[#"result"]) {
       self.hasdonecombat = 1;
       zoffset = level.riotshield_placement_zoffset;
-      shield_ent = self spawnriotshieldcover(placement[# "origin"] + (0, 0, zoffset), placement[# "angles"]);
+      shield_ent = self spawnriotshieldcover(placement[#"origin"] + (0, 0, zoffset), placement[#"angles"]);
       item_ent = deployriotshield(self, shield_ent);
       primaries = self getweaponslistprimaries();
 

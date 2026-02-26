@@ -309,9 +309,9 @@ function function_2ec1bf5c(origin) {
   }
 
   trace = groundtrace(point + (0, 0, 20000), point + (0, 0, -10000), 0, undefined);
-  groundpoint = trace[# "position"];
+  groundpoint = trace[#"position"];
   trace = groundtrace(var_d9100e0 + (0, 0, 20000), var_d9100e0 + (0, 0, -10000), 0, undefined);
-  var_6b4313e9 = trace[# "position"];
+  var_6b4313e9 = trace[#"position"];
   self function_b74c009d(groundpoint, var_6b4313e9);
 }
 

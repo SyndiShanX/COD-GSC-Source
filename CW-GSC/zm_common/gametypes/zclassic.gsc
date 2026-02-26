@@ -118,7 +118,7 @@ function function_38499d79() {
   if(is_true(self.cached_zone_volume.var_8e4005b6)) {
     result = function_9cc082d2(self.origin, 16);
 
-    if(isDefined(result) && isDefined(result[# "region"])) {
+    if(isDefined(result) && isDefined(result[#"region"])) {
       return 1;
     }
 
@@ -187,8 +187,8 @@ function on_player_spawn() {
 
   if(is_true(self.is_hotjoin)) {
     var_c6b6dcea = level.round_number * 1000;
-    self.pers[# "score"] = var_c6b6dcea;
-    self.score = self.pers[# "score"];
+    self.pers[#"score"] = var_c6b6dcea;
+    self.score = self.pers[#"score"];
     self.score_total = self.score;
     self.objscore = self.score_total;
 

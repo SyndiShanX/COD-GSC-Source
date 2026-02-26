@@ -129,17 +129,17 @@ function register(xcallback, ycallback, heightcallback, fadeovertimecallback, al
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_bannerelement"])) {
-    level.var_ae746e8f[# "doa_bannerelement"] = [];
+  if(!isDefined(level.var_ae746e8f[#"doa_bannerelement"])) {
+    level.var_ae746e8f[#"doa_bannerelement"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_bannerelement"])) {
-    level.var_ae746e8f[# "doa_bannerelement"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "doa_bannerelement"])) {
-    level.var_ae746e8f[# "doa_bannerelement"] = array(level.var_ae746e8f[# "doa_bannerelement"]);
+  if(!isDefined(level.var_ae746e8f[#"doa_bannerelement"])) {
+    level.var_ae746e8f[#"doa_bannerelement"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"doa_bannerelement"])) {
+    level.var_ae746e8f[#"doa_bannerelement"] = array(level.var_ae746e8f[#"doa_bannerelement"]);
   }
 
-  level.var_ae746e8f[# "doa_bannerelement"][level.var_ae746e8f[# "doa_bannerelement"].size] = elem;
+  level.var_ae746e8f[#"doa_bannerelement"][level.var_ae746e8f[#"doa_bannerelement"].size] = elem;
 }
 
 function register_clientside() {

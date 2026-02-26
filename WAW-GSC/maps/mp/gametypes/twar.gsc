@@ -1036,8 +1036,7 @@ updateHudMomentum() {
 
   team = self.pers["team"];
 
-  if(team != "axis" && team != "allies") {
-  } else {
+  if(team != "axis" && team != "allies") {} else {
     momentumMax = getDvarInt("twar_momentumMax");
     momentumMaxMultiplier = getDvarInt("twar_momentumMaxMultiplier");
     hud_momentum_progress = 1.0;

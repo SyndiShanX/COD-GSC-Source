@@ -85,7 +85,7 @@ function_24167ed8() {
 }
 
 function_ab07399f() {
-  foreach(t_crafting in level.var_4fe2f84d[# "ztable_white_open"]) {
+  foreach(t_crafting in level.var_4fe2f84d[#"ztable_white_open"]) {
     if(isDefined(t_crafting.var_4f749ffe)) {
       t_crafting.var_ae360c37 = getent(t_crafting.var_4f749ffe.target, "targetname");
       t_crafting.var_ae360c37 ghost();
@@ -279,7 +279,7 @@ teleport_player(user) {
 
   destination = var_298e4578.var_52a6f692;
   user clientfield::increment_to_player("teleporter_depart", 1);
-  playFX(level._effect[# "portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", self.origin);
   level thread function_fe50866d(user, self, var_298e4578);
   self function_134670b9(1);
@@ -288,7 +288,7 @@ teleport_player(user) {
   var_298e4578 thread cooldown_portal_timer(user);
   user thread function_c234a5ce();
   user clientfield::increment_to_player("teleporter_arrive", 1);
-  playFX(level._effect[# "portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
   user playsoundtoplayer(#"hash_39876bf613387fef", user);
   wait 0.5;
@@ -528,8 +528,8 @@ function_2ef25d40(str_notify) {
 
 function_71be28e1(zombie, start_portal, end_portal) {
   self endon(#"death");
-  playFX(level._effect[# "teleport_depart"], zombie.origin);
-  playFX(level._effect[# "portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_depart"], zombie.origin);
+  playFX(level._effect[#"portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", zombie.origin);
   zombie function_1f034d46(end_portal.origin);
   zombie.b_ignore_cleanup = 1;
@@ -545,8 +545,8 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie setentitypaused(0);
   zombie forceteleport(end_portal.origin + anglesToForward(end_portal.angles) * randomfloatrange(0, 32), end_target.angles);
   zombie function_1f034d46();
-  playFX(level._effect[# "teleport_arrive"], zombie.origin);
-  playFX(level._effect[# "portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"teleport_arrive"], zombie.origin);
+  playFX(level._effect[#"portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", zombie.origin);
   self.b_ignore_cleanup = self.var_693b80bb;
 }

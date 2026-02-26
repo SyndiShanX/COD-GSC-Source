@@ -951,9 +951,9 @@ function_235b259b() {
   a_str_spawns = array("s_tut_fin1_wave1_enemy_a", "s_tut_fin1_wave1_enemy_b");
   str_spawns = array::random(a_str_spawns);
   var_31879d4d = [];
-  var_31879d4d[# "s_tut_fin1_wave1_enemy_a"] = "s_tut_fin1_respawn_a";
-  var_31879d4d[# "s_tut_fin1_wave1_enemy_b"] = "s_tut_fin1_respawn_b";
-  var_31879d4d[# "s_tut_fin1_wave2_enemy"] = "s_tut_fin1_respawn_wave_2";
+  var_31879d4d[#"s_tut_fin1_wave1_enemy_a"] = "s_tut_fin1_respawn_a";
+  var_31879d4d[#"s_tut_fin1_wave1_enemy_b"] = "s_tut_fin1_respawn_b";
+  var_31879d4d[#"s_tut_fin1_wave2_enemy"] = "s_tut_fin1_respawn_wave_2";
   str_respawn = var_31879d4d[str_spawns];
   level.var_3f7591c4 = 0;
   level.var_72c3ea74 = struct::get_array(str_spawns, "targetname");
@@ -1849,7 +1849,7 @@ function_980638c8(params) {
     var_23efb519 = level.var_dd8875fe;
     level.var_595e41ee = 50;
     event = # "ekia";
-    eventindex = level.scoreinfo[event][# "row"];
+    eventindex = level.scoreinfo[event][#"row"];
     eattacker globallogic_score::giveplayermomentumnotification(level.var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 

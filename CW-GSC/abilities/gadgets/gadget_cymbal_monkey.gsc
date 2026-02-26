@@ -23,7 +23,7 @@ function private preinit() {
 }
 
 function private postinit() {
-  level._effect[# "monkey_glow"] = # "hash_5d0dd3293cfdb3dd";
+  level._effect[#"monkey_glow"] = # "hash_5d0dd3293cfdb3dd";
 }
 
 function private finalize() {
@@ -154,7 +154,7 @@ function function_b9934c1d() {
     self playSound(#"hash_4509539f9e7954e2");
   }
 
-  playFXOnTag(level._effect[# "monkey_glow"], self, "tag_weapon");
+  playFXOnTag(level._effect[#"monkey_glow"], self, "tag_weapon");
   self thread scene::play(#"cin_t8_monkeybomb_dance", self);
   self thread util::delay(6.5, "death", &function_4e61e1d);
   var_de3026af = gettime() + int(8 * 1000);
@@ -262,7 +262,7 @@ function function_948b1eea(zombie) {
   target_pos = undefined;
 
   if(!isDefined(self.var_acdc8d71)) {
-    target_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[# "position"];
+    target_pos = groundtrace(self.origin + (0, 0, 8), self.origin + (0, 0, -100000), 0, self)[#"position"];
   } else {
     target_pos = self.var_acdc8d71;
   }

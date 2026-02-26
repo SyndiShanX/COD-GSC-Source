@@ -26,7 +26,7 @@ __init__() {
     level.var_1f020f16 = [];
   }
 
-  level.var_1f020f16[# "vehicle_t8_drone_recon_wz"] = &function_3711499d;
+  level.var_1f020f16[#"vehicle_t8_drone_recon_wz"] = &function_3711499d;
 }
 
 function_294117a0() {

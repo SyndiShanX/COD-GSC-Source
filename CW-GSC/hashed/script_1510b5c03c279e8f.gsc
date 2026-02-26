@@ -153,12 +153,12 @@ function function_be5ba736(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-      point._scoredebug[# "disttoorigin"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+      point._scoredebug[#"disttoorigin"] = spawnStruct();
     }
 
-    point._scoredebug[# "disttoorigin"].score = mapfloat(0, prefereddistawayfromorigin, 0, 300, point.disttoorigin2d);
-    point._scoredebug[# "disttoorigin"].scorename = "<dev string:x38>";
+    point._scoredebug[#"disttoorigin"].score = mapfloat(0, prefereddistawayfromorigin, 0, 300, point.disttoorigin2d);
+    point._scoredebug[#"disttoorigin"].scorename = "<dev string:x38>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, 0, 300, point.disttoorigin2d);
 
@@ -167,12 +167,12 @@ function function_be5ba736(enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -500;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x48>";
+      point._scoredebug[#"inclaimedlocation"].score = -500;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x48>";
 
       point.score += -500;
     }
@@ -181,12 +181,12 @@ function function_be5ba736(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = randomfloatrange(0, randomness);
-    point._scoredebug[# "random"].scorename = "<dev string:x5d>";
+    point._scoredebug[#"random"].score = randomfloatrange(0, randomness);
+    point._scoredebug[#"random"].scorename = "<dev string:x5d>";
 
     point.score += randomfloatrange(0, randomness);
 
@@ -194,12 +194,12 @@ function function_be5ba736(enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "engagementdist"])) {
-      point._scoredebug[# "engagementdist"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"engagementdist"])) {
+      point._scoredebug[#"engagementdist"] = spawnStruct();
     }
 
-    point._scoredebug[# "engagementdist"].score = point.distawayfromengagementarea * -1;
-    point._scoredebug[# "engagementdist"].scorename = "<dev string:x67>";
+    point._scoredebug[#"engagementdist"].score = point.distawayfromengagementarea * -1;
+    point._scoredebug[#"engagementdist"].scorename = "<dev string:x67>";
 
     point.score += point.distawayfromengagementarea * -1;
 
@@ -443,12 +443,12 @@ function function_aebf9e0f(params) {
             point._scoredebug = [];
           }
 
-          if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-            point._scoredebug[# "disttoorigin"] = spawnStruct();
+          if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+            point._scoredebug[#"disttoorigin"] = spawnStruct();
           }
 
-          point._scoredebug[# "disttoorigin"].score = mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
-          point._scoredebug[# "disttoorigin"].scorename = "<dev string:x38>";
+          point._scoredebug[#"disttoorigin"].score = mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
+          point._scoredebug[#"disttoorigin"].scorename = "<dev string:x38>";
 
           point.score += mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
 
@@ -456,12 +456,12 @@ function function_aebf9e0f(params) {
             point._scoredebug = [];
           }
 
-          if(!isDefined(point._scoredebug[# "heighttoorigin"])) {
-            point._scoredebug[# "heighttoorigin"] = spawnStruct();
+          if(!isDefined(point._scoredebug[#"heighttoorigin"])) {
+            point._scoredebug[#"heighttoorigin"] = spawnStruct();
           }
 
-          point._scoredebug[# "heighttoorigin"].score = mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
-          point._scoredebug[# "heighttoorigin"].scorename = "<dev string:x79>";
+          point._scoredebug[#"heighttoorigin"].score = mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
+          point._scoredebug[#"heighttoorigin"].scorename = "<dev string:x79>";
 
           point.score += mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
 
@@ -470,12 +470,12 @@ function function_aebf9e0f(params) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-              point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+              point._scoredebug[#"inclaimedlocation"] = spawnStruct();
             }
 
-            point._scoredebug[# "inclaimedlocation"].score = -500;
-            point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x48>";
+            point._scoredebug[#"inclaimedlocation"].score = -500;
+            point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x48>";
 
             point.score += -500;
           }

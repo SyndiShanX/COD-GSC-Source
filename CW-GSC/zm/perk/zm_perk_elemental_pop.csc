@@ -32,7 +32,7 @@ function function_27473e44() {
 
 function init_perk() {
   if(is_true(level.enable_magic)) {
-    level._effect[# "elemental_pop_light"] = # "hash_17afc35bb449d1c2";
+    level._effect[#"elemental_pop_light"] = # "hash_17afc35bb449d1c2";
   }
 }
 

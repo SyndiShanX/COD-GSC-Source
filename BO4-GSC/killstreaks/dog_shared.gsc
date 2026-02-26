@@ -48,8 +48,8 @@ function_8d543b98() {
 deployed_off(slot, weapon) {
   self gadgetpowerset(slot, 0);
 
-  if(isDefined(self.pers[# "held_gadgets_power"]) && isDefined(self._gadgets_player[slot]) && isDefined(self.pers[# "held_gadgets_power"][self._gadgets_player[slot]])) {
-    self.pers[# "held_gadgets_power"][self._gadgets_player[slot]] = 0;
+  if(isDefined(self.pers[#"held_gadgets_power"]) && isDefined(self._gadgets_player[slot]) && isDefined(self.pers[#"held_gadgets_power"][self._gadgets_player[slot]])) {
+    self.pers[#"held_gadgets_power"][self._gadgets_player[slot]] = 0;
   }
 }
 

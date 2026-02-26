@@ -1073,7 +1073,7 @@ less_than_normal() {
   return 0.5;
 }
 
-#include_weapons() {
+include_weapons() {
   gametype = getDvar(#"ui_gametype");
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
@@ -1179,7 +1179,7 @@ less_than_normal() {
   add_weapon_locker_mapping("rpd_upgraded_zm", "galil_upgraded_zm");
 }
 
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -1202,7 +1202,7 @@ zombie_init_done() {
   self thread maps\mp\zm_buried_distance_tracking::escaped_zombies_cleanup_init();
 }
 
-#include_equipment_for_level() {
+include_equipment_for_level() {
   level.equipment_subwoofer_needs_power = 1;
   include_equipment("equip_turbine_zm");
   include_equipment("equip_springpad_zm");

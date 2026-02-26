@@ -31,22 +31,22 @@ function registeranimationmocomp(mocompname, startfuncptr, updatefuncptr, termin
   assert(!isDefined(level._animationmocomps[mocompname]), "<dev string:xf5>" + mocompname + "<dev string:x10a>");
   level._animationmocomps[mocompname] = array();
   assert(isDefined(startfuncptr) && isfunctionptr(startfuncptr), "<dev string:x125>");
-  level._animationmocomps[mocompname][# "asm_mocomp_start"] = startfuncptr;
+  level._animationmocomps[mocompname][#"asm_mocomp_start"] = startfuncptr;
 
   if(isDefined(updatefuncptr)) {
     assert(isfunctionptr(updatefuncptr), "<dev string:x185>");
-    level._animationmocomps[mocompname][# "asm_mocomp_update"] = updatefuncptr;
+    level._animationmocomps[mocompname][#"asm_mocomp_update"] = updatefuncptr;
   } else {
-    level._animationmocomps[mocompname][# "asm_mocomp_update"] = &animationmocompemptyfunc;
+    level._animationmocomps[mocompname][#"asm_mocomp_update"] = &animationmocompemptyfunc;
   }
 
   if(isDefined(terminatefuncptr)) {
     assert(isfunctionptr(terminatefuncptr), "<dev string:x1e2>");
-    level._animationmocomps[mocompname][# "asm_mocomp_terminate"] = terminatefuncptr;
+    level._animationmocomps[mocompname][#"asm_mocomp_terminate"] = terminatefuncptr;
     return;
   }
 
-  level._animationmocomps[mocompname][# "asm_mocomp_terminate"] = &animationmocompemptyfunc;
+  level._animationmocomps[mocompname][#"asm_mocomp_terminate"] = &animationmocompemptyfunc;
 }
 
 function animationmocompemptyfunc(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {}

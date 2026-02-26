@@ -980,7 +980,7 @@ function function_667c40a() {
     v_offset = var_c154039f * var_3421afd1;
     level.var_7b665d77.origin = level.var_602cf102 - v_offset;
     a_trace = bulletTrace(self gettagorigin("tag_flash"), level.var_7b665d77.origin, 1, self, 0, 1);
-    level.var_7b665d77.origin = a_trace[# "position"];
+    level.var_7b665d77.origin = a_trace[#"position"];
     self turret::fire(0);
     wait 0.15;
     i += 0.15;

@@ -87,7 +87,7 @@ function spawnac130(killstreaktype) {
   level.ac130.soundmod = "default_loud";
   level.ac130 hacker_tool::registerwithhackertool(50, 10000);
   level.ac130.usage = [];
-  level.destructible_callbacks[# "turret_destroyed"] = &vtoldestructiblecallback;
+  level.destructible_callbacks[#"turret_destroyed"] = &vtoldestructiblecallback;
   level.ac130.shuttingdown = 0;
   level.ac130.completely_shutdown = 0;
   level.ac130 thread heatseekingmissile::playlockonsoundsthread(self, #"hash_fa62d8cec85b1a0", #"hash_1683ed70beb3f2");
@@ -129,7 +129,7 @@ function spawnac130(killstreaktype) {
   if(sessionmodeiswarzonegame()) {
     var_b0490eb9 = getheliheightlockheight(player.origin);
     trace = groundtrace((player.origin[0], player.origin[1], var_b0490eb9), player.origin - (0, 0, 5000), 0, level.ac130);
-    groundheight = trace[# "position"][2];
+    groundheight = trace[#"position"][2];
     var_b7d4ae34 = groundheight + (var_b0490eb9 - groundheight) * bundle.var_ff73e08c;
     level.var_89350618.origin = (player.origin[0], player.origin[1], var_b7d4ae34);
     level.var_e2a77deb = player.origin;
@@ -1045,7 +1045,7 @@ function updateareanodes(areanodes, forcemove) {
 function traveltonode(goalnode) {
   originoffets = getoriginoffsets(goalnode);
 
-  if(originoffets[# "start"] != self.origin) {
+  if(originoffets[#"start"] != self.origin) {
     if(isDefined(goalnode.script_airspeed) && isDefined(goalnode.script_accel)) {
       heli_speed = goalnode.script_airspeed;
       heli_accel = goalnode.script_accel;
@@ -1055,12 +1055,12 @@ function traveltonode(goalnode) {
     }
 
     self setspeed(heli_speed, heli_accel);
-    self setgoal(originoffets[# "start"] + (0, 0, 30), 0);
+    self setgoal(originoffets[#"start"] + (0, 0, 30), 0);
     self setgoalyaw(goalnode.angles[1]);
     self waittill(#"goal");
   }
 
-  if(originoffets[# "end"] != goalnode.origin) {
+  if(originoffets[#"end"] != goalnode.origin) {
     if(isDefined(goalnode.script_airspeed) && isDefined(goalnode.script_accel)) {
       heli_speed = goalnode.script_airspeed;
       heli_accel = goalnode.script_accel;
@@ -1070,7 +1070,7 @@ function traveltonode(goalnode) {
     }
 
     self setspeed(heli_speed, heli_accel);
-    self setgoal(originoffets[# "end"] + (0, 0, 30), 0);
+    self setgoal(originoffets[#"end"] + (0, 0, 30), 0);
     self setgoalyaw(goalnode.angles[1]);
     self waittill(#"goal");
   }
@@ -1083,8 +1083,8 @@ function getoriginoffsets(goalnode) {
   maxtraces = 40;
   traceoffset = (0, 0, -196);
 
-  for(traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self); distancesquared(traceorigin[# "position"], endorigin + traceoffset) > 10 && numtraces < maxtraces; traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self)) {
-    println("<dev string:x6e>" + distancesquared(traceorigin[# "position"], endorigin + traceoffset));
+  for(traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self); distancesquared(traceorigin[#"position"], endorigin + traceoffset) > 10 && numtraces < maxtraces; traceorigin = bulletTrace(startorigin + traceoffset, endorigin + traceoffset, 0, self)) {
+    println("<dev string:x6e>" + distancesquared(traceorigin[#"position"], endorigin + traceoffset));
 
     if(startorigin[2] < endorigin[2]) {
       startorigin += (0, 0, 128);
@@ -1099,8 +1099,8 @@ function getoriginoffsets(goalnode) {
   }
 
   offsets = [];
-  offsets[# "start"] = startorigin;
-  offsets[# "end"] = endorigin;
+  offsets[#"start"] = startorigin;
+  offsets[#"end"] = endorigin;
   return offsets;
 }
 
@@ -1154,7 +1154,7 @@ function function_d55529() {
   self endon(#"death");
   bundle = killstreaks::get_script_bundle("ac130");
   playFXOnTag(bundle.var_545fa8c2, self, "tag_fx_engine3");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   wait 0.1;
   playFXOnTag(bundle.var_545fa8c2, self, "tag_fx_engine4");
 }
@@ -1163,7 +1163,7 @@ function function_ae354bc7() {
   self endon(#"death");
   bundle = killstreaks::get_script_bundle("ac130");
   playFXOnTag(bundle.var_465c35a5, self, "tag_fx_engine1");
-  self playSound(level.heli_sound[# "crash"]);
+  self playSound(level.heli_sound[#"crash"]);
   wait 0.1;
   playFXOnTag(bundle.var_465c35a5, self, "tag_fx_engine6");
 }

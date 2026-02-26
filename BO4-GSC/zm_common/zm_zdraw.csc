@@ -32,49 +32,49 @@ __main__() {}
 
 function_c9f70832() {
   level.zdraw.colors = [];
-  level.zdraw.colors[# "red"] = (1, 0, 0);
-  level.zdraw.colors[# "green"] = (0, 1, 0);
-  level.zdraw.colors[# "blue"] = (0, 0, 1);
-  level.zdraw.colors[# "yellow"] = (1, 1, 0);
-  level.zdraw.colors[# "orange"] = (1, 0.5, 0);
-  level.zdraw.colors[# "cyan"] = (0, 1, 1);
-  level.zdraw.colors[# "purple"] = (1, 0, 1);
-  level.zdraw.colors[# "black"] = (0, 0, 0);
-  level.zdraw.colors[# "white"] = (1, 1, 1);
-  level.zdraw.colors[# "grey"] = (0.75, 0.75, 0.75);
-  level.zdraw.colors[# "gray1"] = (0.1, 0.1, 0.1);
-  level.zdraw.colors[# "gray2"] = (0.2, 0.2, 0.2);
-  level.zdraw.colors[# "gray3"] = (0.3, 0.3, 0.3);
-  level.zdraw.colors[# "gray4"] = (0.4, 0.4, 0.4);
-  level.zdraw.colors[# "gray5"] = (0.5, 0.5, 0.5);
-  level.zdraw.colors[# "gray6"] = (0.6, 0.6, 0.6);
-  level.zdraw.colors[# "gray7"] = (0.7, 0.7, 0.7);
-  level.zdraw.colors[# "gray8"] = (0.8, 0.8, 0.8);
-  level.zdraw.colors[# "gray9"] = (0.9, 0.9, 0.9);
-  level.zdraw.colors[# "slate"] = (0.439216, 0.501961, 0.564706);
-  level.zdraw.colors[# "pink"] = (1, 0.752941, 0.796078);
-  level.zdraw.colors[# "olive"] = (0.501961, 0.501961, 0);
-  level.zdraw.colors[# "brown"] = (0.545098, 0.270588, 0.0745098);
-  level.zdraw.colors[# "default"] = (1, 1, 1);
+  level.zdraw.colors[#"red"] = (1, 0, 0);
+  level.zdraw.colors[#"green"] = (0, 1, 0);
+  level.zdraw.colors[#"blue"] = (0, 0, 1);
+  level.zdraw.colors[#"yellow"] = (1, 1, 0);
+  level.zdraw.colors[#"orange"] = (1, 0.5, 0);
+  level.zdraw.colors[#"cyan"] = (0, 1, 1);
+  level.zdraw.colors[#"purple"] = (1, 0, 1);
+  level.zdraw.colors[#"black"] = (0, 0, 0);
+  level.zdraw.colors[#"white"] = (1, 1, 1);
+  level.zdraw.colors[#"grey"] = (0.75, 0.75, 0.75);
+  level.zdraw.colors[#"gray1"] = (0.1, 0.1, 0.1);
+  level.zdraw.colors[#"gray2"] = (0.2, 0.2, 0.2);
+  level.zdraw.colors[#"gray3"] = (0.3, 0.3, 0.3);
+  level.zdraw.colors[#"gray4"] = (0.4, 0.4, 0.4);
+  level.zdraw.colors[#"gray5"] = (0.5, 0.5, 0.5);
+  level.zdraw.colors[#"gray6"] = (0.6, 0.6, 0.6);
+  level.zdraw.colors[#"gray7"] = (0.7, 0.7, 0.7);
+  level.zdraw.colors[#"gray8"] = (0.8, 0.8, 0.8);
+  level.zdraw.colors[#"gray9"] = (0.9, 0.9, 0.9);
+  level.zdraw.colors[#"slate"] = (0.439216, 0.501961, 0.564706);
+  level.zdraw.colors[#"pink"] = (1, 0.752941, 0.796078);
+  level.zdraw.colors[#"olive"] = (0.501961, 0.501961, 0);
+  level.zdraw.colors[#"brown"] = (0.545098, 0.270588, 0.0745098);
+  level.zdraw.colors[#"default"] = (1, 1, 1);
 }
 
 function_99bd35ec() {
   level.zdraw.commands = [];
-  level.zdraw.commands[# "color"] = &function_54389019;
-  level.zdraw.commands[# "alpha"] = &function_82f2d020;
-  level.zdraw.commands[# "duration"] = &function_cb18c560;
-  level.zdraw.commands[# "seconds"] = &function_82201799;
-  level.zdraw.commands[# "scale"] = &function_f7176625;
-  level.zdraw.commands[# "radius"] = &function_a026f442;
-  level.zdraw.commands[# "sides"] = &function_912c8db9;
-  level.zdraw.commands[# "text"] = &function_b5cdeec6;
-  level.zdraw.commands[# "star"] = &function_da7503f4;
-  level.zdraw.commands[# "sphere"] = &function_3a2c5c6b;
-  level.zdraw.commands[# "line"] = &function_25fd7d2a;
+  level.zdraw.commands[#"color"] = &function_54389019;
+  level.zdraw.commands[#"alpha"] = &function_82f2d020;
+  level.zdraw.commands[#"duration"] = &function_cb18c560;
+  level.zdraw.commands[#"seconds"] = &function_82201799;
+  level.zdraw.commands[#"scale"] = &function_f7176625;
+  level.zdraw.commands[#"radius"] = &function_a026f442;
+  level.zdraw.commands[#"sides"] = &function_912c8db9;
+  level.zdraw.commands[#"text"] = &function_b5cdeec6;
+  level.zdraw.commands[#"star"] = &function_da7503f4;
+  level.zdraw.commands[#"sphere"] = &function_3a2c5c6b;
+  level.zdraw.commands[#"line"] = &function_25fd7d2a;
 }
 
 function_b36498d3() {
-  level.zdraw.color = level.zdraw.colors[# "default"];
+  level.zdraw.color = level.zdraw.colors[#"default"];
   level.zdraw.alpha = 1;
   level.zdraw.scale = 1;
   level.zdraw.duration = int(1 * 62.5);

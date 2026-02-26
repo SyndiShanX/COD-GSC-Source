@@ -29,7 +29,7 @@ enable_deadshot_perk_for_level() {
 
 init_deadshot() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[# "deadshot_light"] = # "hash_2225287695ddf9c9";
+    level._effect[#"deadshot_light"] = # "hash_2225287695ddf9c9";
   }
 }
 

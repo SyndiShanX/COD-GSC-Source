@@ -52,15 +52,15 @@ spawner() {
 }
 
 precache() {
-  character\character_sp_juggernaut_arab::precache();
+    character\character_sp_juggernaut_arab::precache();
 
-  precacheItem("m240");
-  precacheItem("m240_eotech");
-  precacheItem("m240_acog");
-  precacheItem("m240_reflex");
-  precacheItem("beretta");
-  precacheItem("beretta");
-  precacheItem("fraggrenade");
+    precacheItem("m240");
+    precacheItem("m240_eotech");
+    precacheItem("m240_acog");
+    precacheItem("m240_reflex");
+    precacheItem("beretta");
+    precacheItem("beretta");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_juggernaut::main();
-  //---------------- }
+    //---------------- maps\_juggernaut::main();
+    //---------------- }

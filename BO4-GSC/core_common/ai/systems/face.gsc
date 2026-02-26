@@ -160,8 +160,8 @@ playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot
   uniquenotify = notifystring + " " + level.talknotifyseed;
   level.talknotifyseed += 1;
 
-  if(isDefined(level.scr_sound) && isDefined(level.scr_sound[# "generic"])) {
-    str_vox_file = level.scr_sound[# "generic"][str_script_alias];
+  if(isDefined(level.scr_sound) && isDefined(level.scr_sound[#"generic"])) {
+    str_vox_file = level.scr_sound[#"generic"][str_script_alias];
   }
 
   if(!isDefined(str_vox_file) && soundexists(str_script_alias)) {

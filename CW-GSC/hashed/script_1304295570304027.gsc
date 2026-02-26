@@ -285,51 +285,51 @@ function function_669e3110() {
 }
 
 function function_daaeaa95() {
-  game.dialog[# "securing_a"] = "domFriendlySecuringA";
-  game.dialog[# "securing_b"] = "domFriendlySecuringB";
-  game.dialog[# "securing_c"] = "domFriendlySecuringC";
-  game.dialog[# "securing_d"] = "domFriendlySecuringD";
-  game.dialog[# "securing_e"] = "domFriendlySecuringE";
-  game.dialog[# "securing_f"] = "domFriendlySecuringF";
-  game.dialog[# "secured_a"] = "domFriendlySecuredA";
-  game.dialog[# "secured_b"] = "domFriendlySecuredB";
-  game.dialog[# "secured_c"] = "domFriendlySecuredC";
-  game.dialog[# "secured_d"] = "domFriendlySecuredD";
-  game.dialog[# "secured_e"] = "domFriendlySecuredE";
-  game.dialog[# "secured_f"] = "domFriendlySecuredF";
-  game.dialog[# "secured_all"] = "domFriendlySecuredAll";
-  game.dialog[# "losing_a"] = "domEnemySecuringA";
-  game.dialog[# "losing_b"] = "domEnemySecuringB";
-  game.dialog[# "losing_c"] = "domEnemySecuringC";
-  game.dialog[# "losing_d"] = "domEnemySecuringD";
-  game.dialog[# "losing_e"] = "domEnemySecuringE";
-  game.dialog[# "losing_f"] = "domEnemySecuringF";
-  game.dialog[# "lost_a"] = "domEnemySecuredA";
-  game.dialog[# "lost_b"] = "domEnemySecuredB";
-  game.dialog[# "lost_c"] = "domEnemySecuredC";
-  game.dialog[# "lost_d"] = "domEnemySecuredD";
-  game.dialog[# "lost_e"] = "domEnemySecuredE";
-  game.dialog[# "lost_f"] = "domEnemySecuredF";
-  game.dialog[# "lost_all"] = "domEnemySecuredAll";
-  game.dialog[# "enemy_a"] = "domEnemyHasA";
-  game.dialog[# "enemy_b"] = "domEnemyHasB";
-  game.dialog[# "enemy_c"] = "domEnemyHasC";
-  game.dialog[# "enemy_d"] = "domEnemyHasD";
-  game.dialog[# "enemy_e"] = "domEnemyHasE";
-  game.dialog[# "enemy_f"] = "domEnemyHasF";
+  game.dialog[#"securing_a"] = "domFriendlySecuringA";
+  game.dialog[#"securing_b"] = "domFriendlySecuringB";
+  game.dialog[#"securing_c"] = "domFriendlySecuringC";
+  game.dialog[#"securing_d"] = "domFriendlySecuringD";
+  game.dialog[#"securing_e"] = "domFriendlySecuringE";
+  game.dialog[#"securing_f"] = "domFriendlySecuringF";
+  game.dialog[#"secured_a"] = "domFriendlySecuredA";
+  game.dialog[#"secured_b"] = "domFriendlySecuredB";
+  game.dialog[#"secured_c"] = "domFriendlySecuredC";
+  game.dialog[#"secured_d"] = "domFriendlySecuredD";
+  game.dialog[#"secured_e"] = "domFriendlySecuredE";
+  game.dialog[#"secured_f"] = "domFriendlySecuredF";
+  game.dialog[#"secured_all"] = "domFriendlySecuredAll";
+  game.dialog[#"losing_a"] = "domEnemySecuringA";
+  game.dialog[#"losing_b"] = "domEnemySecuringB";
+  game.dialog[#"losing_c"] = "domEnemySecuringC";
+  game.dialog[#"losing_d"] = "domEnemySecuringD";
+  game.dialog[#"losing_e"] = "domEnemySecuringE";
+  game.dialog[#"losing_f"] = "domEnemySecuringF";
+  game.dialog[#"lost_a"] = "domEnemySecuredA";
+  game.dialog[#"lost_b"] = "domEnemySecuredB";
+  game.dialog[#"lost_c"] = "domEnemySecuredC";
+  game.dialog[#"lost_d"] = "domEnemySecuredD";
+  game.dialog[#"lost_e"] = "domEnemySecuredE";
+  game.dialog[#"lost_f"] = "domEnemySecuredF";
+  game.dialog[#"lost_all"] = "domEnemySecuredAll";
+  game.dialog[#"enemy_a"] = "domEnemyHasA";
+  game.dialog[#"enemy_b"] = "domEnemyHasB";
+  game.dialog[#"enemy_c"] = "domEnemyHasC";
+  game.dialog[#"enemy_d"] = "domEnemyHasD";
+  game.dialog[#"enemy_e"] = "domEnemyHasE";
+  game.dialog[#"enemy_f"] = "domEnemyHasF";
   game.dialogtime = [];
-  game.dialogtime[# "securing_a"] = 0;
-  game.dialogtime[# "securing_b"] = 0;
-  game.dialogtime[# "securing_c"] = 0;
-  game.dialogtime[# "securing_d"] = 0;
-  game.dialogtime[# "securing_e"] = 0;
-  game.dialogtime[# "securing_f"] = 0;
-  game.dialogtime[# "losing_a"] = 0;
-  game.dialogtime[# "losing_b"] = 0;
-  game.dialogtime[# "losing_c"] = 0;
-  game.dialogtime[# "losing_d"] = 0;
-  game.dialogtime[# "losing_e"] = 0;
-  game.dialogtime[# "losing_f"] = 0;
+  game.dialogtime[#"securing_a"] = 0;
+  game.dialogtime[#"securing_b"] = 0;
+  game.dialogtime[#"securing_c"] = 0;
+  game.dialogtime[#"securing_d"] = 0;
+  game.dialogtime[#"securing_e"] = 0;
+  game.dialogtime[#"securing_f"] = 0;
+  game.dialogtime[#"losing_a"] = 0;
+  game.dialogtime[#"losing_b"] = 0;
+  game.dialogtime[#"losing_c"] = 0;
+  game.dialogtime[#"losing_d"] = 0;
+  game.dialogtime[#"losing_e"] = 0;
+  game.dialogtime[#"losing_f"] = 0;
 }
 
 function private function_fa8f5fda(var_bd4d0f54) {
@@ -751,8 +751,8 @@ function update_caps_per_minute(var_24672ed6) {
   self.numcaps++;
   minutespassed = float(globallogic_utils::gettimepassed()) / 60000;
 
-  if(isPlayer(self) && isDefined(self.timeplayed[# "total"])) {
-    minutespassed = self.timeplayed[# "total"] / 60;
+  if(isPlayer(self) && isDefined(self.timeplayed[#"total"])) {
+    minutespassed = self.timeplayed[#"total"] / 60;
   }
 
   if((isDefined(minutespassed) ? minutespassed : 0) > 0) {
@@ -786,9 +786,9 @@ function give_neutralized_credit(touchlist, string, var_24672ed6) {
       level thread telemetry::function_18135b72(#"hash_540cddd637f71a5e", {
         #player: player_from_touchlist, #eventtype: # "neutralized"});
 
-      if(isDefined(player_from_touchlist.pers[# "neutralizes"])) {
-        player_from_touchlist.pers[# "neutralizes"]++;
-        player_from_touchlist.captures = player_from_touchlist.pers[# "neutralizes"];
+      if(isDefined(player_from_touchlist.pers[#"neutralizes"])) {
+        player_from_touchlist.pers[#"neutralizes"]++;
+        player_from_touchlist.captures = player_from_touchlist.pers[#"neutralizes"];
       }
 
       demo::bookmark(#"event", gettime(), player_from_touchlist);
@@ -849,13 +849,13 @@ function credit_player(player, string, var_24672ed6, var_81b74b24, neutralizing,
       });
     }
 
-    if(isDefined(player.pers[# "captures"])) {
-      player.pers[# "captures"]++;
-      player.captures = player.pers[# "captures"];
+    if(isDefined(player.pers[#"captures"])) {
+      player.pers[#"captures"]++;
+      player.captures = player.pers[#"captures"];
     }
 
-    player.pers[# "objectives"]++;
-    player.objectives = player.pers[# "objectives"];
+    player.pers[#"objectives"]++;
+    player.objectives = player.pers[#"objectives"];
     demo::bookmark(#"event", gettime(), player);
     potm::bookmark(#"event", gettime(), player);
     player stats::function_bb7eedf0(#"captures", 1);
@@ -1230,34 +1230,34 @@ function function_de560341() {
   }
 
   if(isDefined(flagspawns)) {
-    if(isDefined(flagspawns[# "dom_flag_a"])) {
-      addspawnpoints(#"allies", flagspawns[# "dom_flag_a"], "spl1");
-      addspawnpoints(#"axis", flagspawns[# "dom_flag_a"], "spl1");
+    if(isDefined(flagspawns[#"dom_flag_a"])) {
+      addspawnpoints(#"allies", flagspawns[#"dom_flag_a"], "spl1");
+      addspawnpoints(#"axis", flagspawns[#"dom_flag_a"], "spl1");
     }
 
-    if(isDefined(flagspawns[# "dom_flag_b"])) {
-      addspawnpoints(#"allies", flagspawns[# "dom_flag_b"], "spl2");
-      addspawnpoints(#"axis", flagspawns[# "dom_flag_b"], "spl2");
+    if(isDefined(flagspawns[#"dom_flag_b"])) {
+      addspawnpoints(#"allies", flagspawns[#"dom_flag_b"], "spl2");
+      addspawnpoints(#"axis", flagspawns[#"dom_flag_b"], "spl2");
     }
 
-    if(isDefined(flagspawns[# "dom_flag_c"])) {
-      addspawnpoints(#"allies", flagspawns[# "dom_flag_c"], "spl3");
-      addspawnpoints(#"axis", flagspawns[# "dom_flag_c"], "spl3");
+    if(isDefined(flagspawns[#"dom_flag_c"])) {
+      addspawnpoints(#"allies", flagspawns[#"dom_flag_c"], "spl3");
+      addspawnpoints(#"axis", flagspawns[#"dom_flag_c"], "spl3");
     }
 
-    if(isDefined(flagspawns[# "dom_flag_d"])) {
-      addspawnpoints(#"allies", flagspawns[# "dom_flag_d"], "spl4");
-      addspawnpoints(#"axis", flagspawns[# "dom_flag_d"], "spl4");
+    if(isDefined(flagspawns[#"dom_flag_d"])) {
+      addspawnpoints(#"allies", flagspawns[#"dom_flag_d"], "spl4");
+      addspawnpoints(#"axis", flagspawns[#"dom_flag_d"], "spl4");
     }
 
-    if(isDefined(flagspawns[# "dom_flag_e"])) {
-      addspawnpoints(#"allies", flagspawns[# "dom_flag_e"], "spl5");
-      addspawnpoints(#"axis", flagspawns[# "dom_flag_e"], "spl5");
+    if(isDefined(flagspawns[#"dom_flag_e"])) {
+      addspawnpoints(#"allies", flagspawns[#"dom_flag_e"], "spl5");
+      addspawnpoints(#"axis", flagspawns[#"dom_flag_e"], "spl5");
     }
 
-    if(isDefined(flagspawns[# "dom_flag_f"])) {
-      addspawnpoints(#"allies", flagspawns[# "dom_flag_f"], "spl6");
-      addspawnpoints(#"axis", flagspawns[# "dom_flag_f"], "spl6");
+    if(isDefined(flagspawns[#"dom_flag_f"])) {
+      addspawnpoints(#"allies", flagspawns[#"dom_flag_f"], "spl6");
+      addspawnpoints(#"axis", flagspawns[#"dom_flag_f"], "spl6");
     }
   }
 

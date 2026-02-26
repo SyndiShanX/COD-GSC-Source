@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "crossbow_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"crossbow_light"] = # "weapon/fx8_equip_light_os";
   callback::add_weapon_type(#"explosive_bolt", &spawned);
 }
 
@@ -42,7 +42,7 @@ fx_think(localclientnum) {
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[# "crossbow_light"], self, "tag_origin");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[#"crossbow_light"], self, "tag_origin");
 }
 
 stop_light_fx(localclientnum) {

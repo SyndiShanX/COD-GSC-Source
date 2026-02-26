@@ -17,7 +17,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_stronghold_perk_for_level();
-  level._effect[# "hash_24e322568c9492c5"] = # "hash_497cb15bcf6c05b1";
+  level._effect[#"hash_24e322568c9492c5"] = # "hash_497cb15bcf6c05b1";
   callback::on_localclient_connect(&on_localclient_connect);
 }
 
@@ -47,7 +47,7 @@ function_2400dd1d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       deletefx(localclientnum, self.var_f9c892e3[localclientnum], 1);
     }
 
-    self.var_f9c892e3[localclientnum] = util::playFXOnTag(localclientnum, level._effect[# "hash_24e322568c9492c5"], self, "j_spine");
+    self.var_f9c892e3[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_24e322568c9492c5"], self, "j_spine");
 
     if(!isDefined(self.var_2ec16150)) {
       self playSound(localclientnum, #"hash_5e1e162af8490f1d");

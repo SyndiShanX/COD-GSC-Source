@@ -47,8 +47,8 @@ function private function_8ba92985(s_instance) {
   level flag::wait_till(#"gameplay_started");
   s_instance flag::clear("cleanup");
   s_instance callback::function_d8abfc3d(#"portal_activated", &function_db97f0ee);
-  s_chest = s_instance.contentgroups[# "chest_spawn"][0];
-  var_3ba64fe9 = s_instance.contentgroups[# "trigger_spawn"][0];
+  s_chest = s_instance.contentgroups[#"chest_spawn"][0];
+  var_3ba64fe9 = s_instance.contentgroups[#"trigger_spawn"][0];
   s_instance.var_e234ef47 = zm_utility::function_f5a222a8(#"hash_3475619554ec3ac2", s_chest.origin, &function_a1ca0279);
   wait 10;
 

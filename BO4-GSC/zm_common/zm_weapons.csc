@@ -103,7 +103,7 @@ compute_player_weapon_ammo_cost(weapon, cost, upgraded, n_base_non_wallbuy_cost 
   return n_ammo_cost;
 }
 
-#include_weapon(weapon_name, display_in_box, cost, ammo_cost, upgraded = 0, is_wonder_weapon = 0) {
+include_weapon(weapon_name, display_in_box, cost, ammo_cost, upgraded = 0, is_wonder_weapon = 0) {
   if(!isDefined(level._included_weapons)) {
     level._included_weapons = [];
   }
@@ -149,7 +149,7 @@ compute_player_weapon_ammo_cost(weapon, cost, upgraded, n_base_non_wallbuy_cost 
   addzombieboxweapon(weapon, weapon.worldmodel, weapon.isdualwield);
 }
 
-#include_upgraded_weapon(weapon_name, upgrade_name, display_in_box, cost, ammo_cost, is_wonder_weapon = 0) {
+include_upgraded_weapon(weapon_name, upgrade_name, display_in_box, cost, ammo_cost, is_wonder_weapon = 0) {
   include_weapon(upgrade_name, display_in_box, cost, ammo_cost, 1, is_wonder_weapon);
 
   if(!isDefined(level.zombie_weapons_upgraded)) {

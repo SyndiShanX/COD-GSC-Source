@@ -360,10 +360,10 @@ function init() {
 }
 
 function function_bdf9485e() {
-  var_34451a50 = self.pers[# "hash_4a01db5796cf12b1"] === # "failure";
+  var_34451a50 = self.pers[#"hash_4a01db5796cf12b1"] === # "failure";
 
   if(var_34451a50) {
-    var_c069e1cd = self.pers[# "hash_3b7fc8c62a7d4420"] * level.var_df437ed2;
+    var_c069e1cd = self.pers[#"hash_3b7fc8c62a7d4420"] * level.var_df437ed2;
     self.var_c069e1cd = var_c069e1cd;
 
     if(!self ishost()) {
@@ -379,14 +379,14 @@ function function_bdf9485e() {
       warning_time = getDvar(#"warningtime", 30);
 
       if(var_c069e1cd >= var_dccfc12 - warning_time) {
-        if(!self.pers[# "controllerparticipationinactivitywarnings"]) {
-          self.pers[# "controllerparticipationinactivitywarnings"]++;
+        if(!self.pers[#"controllerparticipationinactivitywarnings"]) {
+          self.pers[#"controllerparticipationinactivitywarnings"]++;
           self iprintlnbold(#"hash_59bd89e170a924ac");
         }
       }
 
       if(var_c069e1cd >= var_dccfc12) {
-        self.pers[# "controllerparticipationendgameresult"] = -2;
+        self.pers[#"controllerparticipationendgameresult"] = -2;
 
         if(isDefined(level.gamehistoryplayerkicked)) {
           self thread[[level.gamehistoryplayerkicked]]();
@@ -438,8 +438,8 @@ function function_21e4b1c2() {
 function function_f986fb53() {
   self.var_c069e1cd = 0;
 
-  if(self.pers[# "hash_4a01db5796cf12b1"] === # "failure") {
-    self.pers[# "hash_3b7fc8c62a7d4420"] = 0;
+  if(self.pers[#"hash_4a01db5796cf12b1"] === # "failure") {
+    self.pers[#"hash_3b7fc8c62a7d4420"] = 0;
   }
 }
 
@@ -919,31 +919,31 @@ function init_levelvars() {
   level.var_9427911d = 0;
   level.total_zombies_killed = 0;
   level.zm_loc_types = [];
-  level.zm_loc_types[# "zombie_location"] = [];
+  level.zm_loc_types[#"zombie_location"] = [];
   level.var_9b91564e = 8;
   level.zm_variant_type_max = [];
-  level.zm_variant_type_max[# "walk"] = [];
-  level.zm_variant_type_max[# "run"] = [];
-  level.zm_variant_type_max[# "sprint"] = [];
-  level.zm_variant_type_max[# "super_sprint"] = [];
-  level.zm_variant_type_max[# "walk"][# "down"] = 14;
-  level.zm_variant_type_max[# "walk"][# "up"] = 16;
-  level.zm_variant_type_max[# "run"][# "down"] = 13;
-  level.zm_variant_type_max[# "run"][# "up"] = 12;
-  level.zm_variant_type_max[# "sprint"][# "down"] = 9;
-  level.zm_variant_type_max[# "sprint"][# "up"] = 8;
-  level.zm_variant_type_max[# "super_sprint"][# "down"] = 1;
-  level.zm_variant_type_max[# "super_sprint"][# "up"] = 1;
-  level.zm_variant_type_max[# "burned"][# "down"] = 1;
-  level.zm_variant_type_max[# "burned"][# "up"] = 1;
-  level.zm_variant_type_max[# "jump_pad_super_sprint"][# "down"] = 1;
-  level.zm_variant_type_max[# "jump_pad_super_sprint"][# "up"] = 1;
+  level.zm_variant_type_max[#"walk"] = [];
+  level.zm_variant_type_max[#"run"] = [];
+  level.zm_variant_type_max[#"sprint"] = [];
+  level.zm_variant_type_max[#"super_sprint"] = [];
+  level.zm_variant_type_max[#"walk"][#"down"] = 14;
+  level.zm_variant_type_max[#"walk"][#"up"] = 16;
+  level.zm_variant_type_max[#"run"][#"down"] = 13;
+  level.zm_variant_type_max[#"run"][#"up"] = 12;
+  level.zm_variant_type_max[#"sprint"][#"down"] = 9;
+  level.zm_variant_type_max[#"sprint"][#"up"] = 8;
+  level.zm_variant_type_max[#"super_sprint"][#"down"] = 1;
+  level.zm_variant_type_max[#"super_sprint"][#"up"] = 1;
+  level.zm_variant_type_max[#"burned"][#"down"] = 1;
+  level.zm_variant_type_max[#"burned"][#"up"] = 1;
+  level.zm_variant_type_max[#"jump_pad_super_sprint"][#"down"] = 1;
+  level.zm_variant_type_max[#"jump_pad_super_sprint"][#"up"] = 1;
   level.var_d9ffddf4 = [];
-  level.var_d9ffddf4[# "walk"] = 4;
-  level.var_d9ffddf4[# "run"] = 4;
-  level.var_d9ffddf4[# "sprint"] = 4;
-  level.var_d9ffddf4[# "super_sprint"] = 4;
-  level.var_d9ffddf4[# "crawl"] = 3;
+  level.var_d9ffddf4[#"walk"] = 4;
+  level.var_d9ffddf4[#"run"] = 4;
+  level.var_d9ffddf4[#"sprint"] = 4;
+  level.var_d9ffddf4[#"super_sprint"] = 4;
+  level.var_d9ffddf4[#"crawl"] = 3;
   level.current_zombie_array = [];
   level.current_zombie_count = 0;
   level.zombie_total_subtract = 0;
@@ -1149,46 +1149,46 @@ function init_client_field_callback_funcs() {
 
 function init_fx() {
   level.createfx_callback_thread = &delete_in_createfx;
-  level._effect[# "animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[# "switch_sparks"] = # "hash_26f37488feec03c3";
-  level._effect[# "hash_4159f23a18f644a7"] = # "hash_71ed4f412b17e19e";
-  level._effect[# "fx_zombie_bar_break"] = # "hash_718a24841c1e00c9";
-  level._effect[# "fx_zombie_bar_break_lite"] = # "hash_35ee6425adf16fb6";
+  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = # "hash_26f37488feec03c3";
+  level._effect[#"hash_4159f23a18f644a7"] = # "hash_71ed4f412b17e19e";
+  level._effect[#"fx_zombie_bar_break"] = # "hash_718a24841c1e00c9";
+  level._effect[#"fx_zombie_bar_break_lite"] = # "hash_35ee6425adf16fb6";
 
   if(!is_true(level.fx_exclude_edge_fog)) {
-    level._effect[# "edge_fog"] = # "_t6/maps/zombie/fx_fog_zombie_amb";
+    level._effect[#"edge_fog"] = # "_t6/maps/zombie/fx_fog_zombie_amb";
   }
 
-  level._effect[# "chest_light"] = # "zombie/fx_weapon_box_open_glow_zmb";
-  level._effect[# "chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[# "headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[# "headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[# "bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"chest_light"] = # "zombie/fx_weapon_box_open_glow_zmb";
+  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
 
   if(!is_true(level.fx_exclude_tesla_head_light)) {
-    level._effect[# "tesla_head_light"] = # "hash_757d002378ec934c";
+    level._effect[#"tesla_head_light"] = # "hash_757d002378ec934c";
   }
 
-  level._effect[# "zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
-  level._effect[# "rise_burst_water"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow_water"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "rise_dust_water"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[# "rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[# "fall_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[# "fall_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[# "fall_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[# "character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
-  level._effect[# "character_fire_death_torso"] = # "hash_5686def5b4c85661";
+  level._effect[#"zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"rise_burst_water"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow_water"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust_water"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"fall_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"fall_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"fall_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
+  level._effect[#"character_fire_death_torso"] = # "hash_5686def5b4c85661";
 
   if(!is_true(level.fx_exclude_default_explosion)) {
-    level._effect[# "def_explosion"] = # "_t6/explosions/fx_default_explosion";
+    level._effect[#"def_explosion"] = # "_t6/explosions/fx_default_explosion";
   }
 
   if(!is_true(level.disable_fx_upgrade_aquired)) {
-    level._effect[# "upgrade_aquired"] = # "hash_359f0993cf4ebe66";
+    level._effect[#"upgrade_aquired"] = # "hash_359f0993cf4ebe66";
   }
 }
 
@@ -1484,11 +1484,11 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
   final_damage = self function_7bdb1f9f(attacker, final_damage, meansofdeath, weapon, shitloc);
 
   if(isPlayer(attacker)) {
-    if(!isDefined(attacker.pers[# "damagedone"])) {
-      attacker.pers[# "damagedone"] = 0;
+    if(!isDefined(attacker.pers[#"damagedone"])) {
+      attacker.pers[#"damagedone"] = 0;
     }
 
-    attacker.pers[# "damagedone"] += final_damage;
+    attacker.pers[#"damagedone"] += final_damage;
   }
 
   return int(final_damage);
@@ -2122,11 +2122,11 @@ function function_6c369691() {
 
 function function_2a49523d(winner) {
   outcome = {
-    #var_c1e98979: 0, #var_68c25772: 1, #var_7d5c2c5f: 0, #var_277c7d47: 1, #var_14f94126: game.strings[# "defeat"], #team: # "axis", #players: []
+    #var_c1e98979: 0, #var_68c25772: 1, #var_7d5c2c5f: 0, #var_277c7d47: 1, #var_14f94126: game.strings[#"defeat"], #team: # "axis", #players: []
   };
 
   if(isDefined(winner) && winner == # "allies") {
-    outcome.var_14f94126 = game.strings[# "victory"];
+    outcome.var_14f94126 = game.strings[#"victory"];
     outcome.team = # "allies";
   }
 
@@ -2230,16 +2230,16 @@ function end_game() {
     player closeingamemenu();
     player closemenu("StartMenu_Main");
 
-    if(!isDefined(player.pers[# "hash_76fbbcf94dab5536"])) {
+    if(!isDefined(player.pers[#"hash_76fbbcf94dab5536"])) {
       player persistence::function_acac764e();
     }
 
-    player persistence::set_recent_stat(0, 0, #"outcome", player.pers[# "outcome"]);
+    player persistence::set_recent_stat(0, 0, #"outcome", player.pers[#"outcome"]);
     player persistence::set_recent_stat(0, 0, #"valid", 1);
     player persistence::set_recent_stat(0, 0, #"deaths", player.deaths);
     player persistence::set_recent_stat(0, 0, #"kills", player.kills);
-    player persistence::set_recent_stat(0, 0, #"score", player.pers[# "score"]);
-    player persistence::set_recent_stat(0, 0, #"damage", int(isDefined(player.pers[# "damagedone"]) ? player.pers[# "damagedone"] : 0));
+    player persistence::set_recent_stat(0, 0, #"score", player.pers[#"score"]);
+    player persistence::set_recent_stat(0, 0, #"damage", int(isDefined(player.pers[#"damagedone"]) ? player.pers[#"damagedone"] : 0));
     clientnum = player getentitynumber();
     clientnums[clientnum] = clientnum;
     player zm_stats::function_9daadcaa(#"clientnum", clientnum);
@@ -2684,8 +2684,8 @@ function default_find_exit_point() {
   endpos = self.origin + vectorscale(away, 600);
   locs = [];
 
-  if(isDefined(level.zm_loc_types[# "wait_location"]) && level.zm_loc_types[# "wait_location"].size > 0) {
-    locs = array::randomize(level.zm_loc_types[# "wait_location"]);
+  if(isDefined(level.zm_loc_types[#"wait_location"]) && level.zm_loc_types[#"wait_location"].size > 0) {
+    locs = array::randomize(level.zm_loc_types[#"wait_location"]);
   }
 
   for(i = 0; i < locs.size; i++) {
@@ -2866,8 +2866,8 @@ function function_a2b54d42(event) {
 }
 
 function private function_70ce74eb(event) {
-  var_326a8ea4 = isDefined(level.scoreinfo[event][# "medalnamehash"]) && level.scoreinfo[event][# "medalnamehash"] != # "";
-  var_b6cc2245 = is_true(level.scoreinfo[event][# "hash_2ecf46b14fe1efc9"]);
+  var_326a8ea4 = isDefined(level.scoreinfo[event][#"medalnamehash"]) && level.scoreinfo[event][#"medalnamehash"] != # "";
+  var_b6cc2245 = is_true(level.scoreinfo[event][#"hash_2ecf46b14fe1efc9"]);
   return var_326a8ea4 || var_b6cc2245;
 }
 
@@ -2886,7 +2886,7 @@ function function_be95f56d(event) {
     var_b0620785 = var_900d44db.var_b5ce9d6d[n_players - 1];
   }
 
-  var_652c6235 = function_7a2da789()[# "hash_16a3b3072a1b1e64"];
+  var_652c6235 = function_7a2da789()[#"hash_16a3b3072a1b1e64"];
   var_debc856d = getdvarfloat(#"scr_xpscalezm", 1);
   var_1c6aa4bd = 1;
 
@@ -2986,7 +2986,7 @@ function function_d3113f01(var_bfe774a8) {
 
 function function_78e7b549(xp) {
   if(scoreevents::shouldaddrankxp(self)) {
-    self.pers[# "totalmatchbonus"] = xp;
+    self.pers[#"totalmatchbonus"] = xp;
     self addrankxpvalue("match_end_xp", xp, 3);
     self.matchbonus = xp;
   }

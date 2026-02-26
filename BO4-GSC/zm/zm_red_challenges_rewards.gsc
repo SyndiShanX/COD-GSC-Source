@@ -810,17 +810,17 @@ function_a8243f37() {
 
   level.var_de18c954 = 0;
   level.var_592fbce6 = [];
-  level.var_592fbce6[# "bowie_knife"] = 0;
-  level.var_592fbce6[# "pistol_standard_t8_upgraded"] = 5;
-  level.var_592fbce6[# "pistol_burst_t8_upgraded"] = 5;
-  level.var_592fbce6[# "smg_drum_pistol_t8_upgraded"] = 5;
-  level.var_592fbce6[# "ar_galil_t8_upgraded"] = -1;
-  level.var_592fbce6[# "shotgun_fullauto_t8_upgraded"] = -1;
-  level.var_592fbce6[# "smg_folding_t8_upgraded"] = 9;
-  level.var_592fbce6[# "smg_fastburst_t8_upgraded"] = 4;
-  level.var_592fbce6[# "ar_standard_t8_upgraded"] = 0;
-  level.var_592fbce6[# "thunderstorm"] = 8;
-  level.var_592fbce6[# "sniper_powersemi_t8"] = 0;
+  level.var_592fbce6[#"bowie_knife"] = 0;
+  level.var_592fbce6[#"pistol_standard_t8_upgraded"] = 5;
+  level.var_592fbce6[#"pistol_burst_t8_upgraded"] = 5;
+  level.var_592fbce6[#"smg_drum_pistol_t8_upgraded"] = 5;
+  level.var_592fbce6[#"ar_galil_t8_upgraded"] = -1;
+  level.var_592fbce6[#"shotgun_fullauto_t8_upgraded"] = -1;
+  level.var_592fbce6[#"smg_folding_t8_upgraded"] = 9;
+  level.var_592fbce6[#"smg_fastburst_t8_upgraded"] = 4;
+  level.var_592fbce6[#"ar_standard_t8_upgraded"] = 0;
+  level.var_592fbce6[#"thunderstorm"] = 8;
+  level.var_592fbce6[#"sniper_powersemi_t8"] = 0;
 }
 
 get_weapon(var_7ed75e97) {

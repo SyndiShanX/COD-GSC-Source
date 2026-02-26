@@ -157,12 +157,12 @@ function ongameplaying() {
 }
 
 function onconnect() {
-  if(!isDefined(self.pers[# "hash_6942b8fcd2d53275"])) {
-    self.pers[# "hash_6942b8fcd2d53275"] = 0;
+  if(!isDefined(self.pers[#"hash_6942b8fcd2d53275"])) {
+    self.pers[#"hash_6942b8fcd2d53275"] = 0;
   }
 
-  if(!isDefined(self.pers[# "objtime"])) {
-    self.pers[# "objtime"] = 0;
+  if(!isDefined(self.pers[#"objtime"])) {
+    self.pers[#"objtime"] = 0;
   }
 
   function_1ccf32e3();
@@ -214,11 +214,11 @@ function onspawned() {
     self clientfield::set_player_uimodel("hudItems.screamSlasherClientNum1", 64);
   }
 
-  original_role = self.pers[# "original_role"];
+  original_role = self.pers[#"original_role"];
 
   if(!isDefined(original_role)) {
     current_role = self getspecialistindex();
-    self.pers[# "original_role"] = current_role;
+    self.pers[#"original_role"] = current_role;
   }
 
   self.var_d2ede313 = 1;
@@ -230,7 +230,7 @@ function function_34d76906() {
     return;
   }
 
-  self draft::select_character(self.pers[# "original_role"], 1);
+  self draft::select_character(self.pers[#"original_role"], 1);
   self clientfield::set_to_player("scream_slasher_postfx", 0);
 }
 
@@ -253,7 +253,7 @@ function function_2415840b(activeteamcount) {
     return true;
   }
 
-  if(activeteamcount[# "any"] < getnumexpectedplayers()) {
+  if(activeteamcount[#"any"] < getnumexpectedplayers()) {
     return false;
   }
 
@@ -266,7 +266,7 @@ function onroundswitch() {
       continue;
     }
 
-    var_24153654 draft::select_character(var_24153654.pers[# "original_role"], 1);
+    var_24153654 draft::select_character(var_24153654.pers[#"original_role"], 1);
     var_24153654 clientfield::set_to_player("scream_slasher_postfx", 0);
   }
 
@@ -282,7 +282,7 @@ function onendround(var_c1e98979) {
 }
 
 function onendgame(var_c1e98979) {
-  placement = level.placement[# "all"];
+  placement = level.placement[#"all"];
   var_96974d12 = min(globallogic_score::function_d68cdc5d(), placement.size);
 
   for(i = 0; i < var_96974d12; i++) {
@@ -300,7 +300,7 @@ function ontimelimit() {
 }
 
 function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isDefined(self.pers[# "lives"]) && self.pers[# "lives"] <= 0) {
+  if(isDefined(self.pers[#"lives"]) && self.pers[#"lives"] <= 0) {
     self.var_ab02ca61 = 1;
   }
 
@@ -387,8 +387,8 @@ function private function_26934983(attacker) {
     }
 
     givescore(#"hash_5e89244faccebdb", attacker);
-    attacker.pers[# "objectiveekia"]++;
-    attacker.objectiveekia = attacker.pers[# "objectiveekia"];
+    attacker.pers[#"objectiveekia"]++;
+    attacker.objectiveekia = attacker.pers[#"objectiveekia"];
   }
 
   foreach(survivor in survivors) {
@@ -636,15 +636,15 @@ function private function_6ebe14e9() {
     var_1bba912a = 2147483647;
 
     foreach(player in validplayers) {
-      if(player.pers[# "hash_6942b8fcd2d53275"] < var_1bba912a) {
-        var_1bba912a = player.pers[# "hash_6942b8fcd2d53275"];
+      if(player.pers[#"hash_6942b8fcd2d53275"] < var_1bba912a) {
+        var_1bba912a = player.pers[#"hash_6942b8fcd2d53275"];
       }
     }
 
     var_7066482d = [];
 
     foreach(player in validplayers) {
-      if(player.pers[# "hash_6942b8fcd2d53275"] === var_1bba912a) {
+      if(player.pers[#"hash_6942b8fcd2d53275"] === var_1bba912a) {
         var_7066482d[var_7066482d.size] = player;
       }
     }
@@ -677,7 +677,7 @@ function private function_6ebe14e9() {
 
     foreach(var_24153654 in var_85efa2fd) {
       if(isDefined(var_24153654)) {
-        var_24153654.pers[# "hash_6942b8fcd2d53275"]++;
+        var_24153654.pers[#"hash_6942b8fcd2d53275"]++;
         var_24153654.var_4adf3a85 = 1;
         var_58365861++;
         continue;
@@ -863,7 +863,7 @@ function function_fa62642c(var_8b0bfce9, var_5c25da5) {
   }
 
   if(game.state == # "playing" && isalive(self) && self hasweapon(var_8b0bfce9)) {
-    self.pers[# "fieldupgrades"][# "ammo"] = var_5c25da5;
+    self.pers[#"fieldupgrades"][#"ammo"] = var_5c25da5;
     self setweaponammoclip(var_8b0bfce9, var_5c25da5);
   }
 }
@@ -1095,8 +1095,8 @@ function function_d4adecf() {
     survivors = function_eb6cbb5(level.var_826250a4);
 
     foreach(survivor in survivors) {
-      survivor.pers[# "objtime"]++;
-      survivor.objtime = survivor.pers[# "objtime"];
+      survivor.pers[#"objtime"]++;
+      survivor.objtime = survivor.pers[#"objtime"];
       survivor stats::function_bb7eedf0(#"objective_time", 1);
     }
 

@@ -52,7 +52,7 @@ function callback_vehiclespawned(spawner) {
 
       if(isDefined(str_value) && isDefined(a_key_spawn_funcs[str_value])) {
         foreach(func in a_key_spawn_funcs[str_value]) {
-          util::single_thread(self, func[# "function"], func[# "param1"], func[# "param2"], func[# "param3"], func[# "param4"]);
+          util::single_thread(self, func[#"function"], func[#"param1"], func[#"param2"], func[#"param3"], func[#"param4"]);
         }
       }
     }
@@ -250,12 +250,12 @@ function callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeanso
   idamage = int(idamage);
 
   if(isDefined(eattacker) && isPlayer(eattacker) && isDefined(eattacker.pers)) {
-    if(!isDefined(eattacker.pers[# "participation"])) {
-      eattacker.pers[# "participation"] = 0;
+    if(!isDefined(eattacker.pers[#"participation"])) {
+      eattacker.pers[#"participation"] = 0;
     }
 
     if(gamestate::is_state(#"playing")) {
-      eattacker.pers[# "participation"]++;
+      eattacker.pers[#"participation"]++;
     }
   }
 
@@ -467,7 +467,7 @@ function callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, w
     }
 
     if(isDefined(player) && isPlayer(player) && !is_true(self.disable_score_events)) {
-      if(!level.teambased || util::function_fbce7263(self.team, player.pers[# "team"])) {
+      if(!level.teambased || util::function_fbce7263(self.team, player.pers[#"team"])) {
         if(smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE") {
           scoreevents::processscoreevent(#"melee_kill" + self.scoretype, player, self, weapon);
         } else {
@@ -511,7 +511,7 @@ function callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, w
         }
       }
 
-      if(isDefined(vehicleteam) && util::function_fbce7263(vehicleteam, player.pers[# "team"])) {
+      if(isDefined(vehicleteam) && util::function_fbce7263(vehicleteam, player.pers[#"team"])) {
         if(self.weapon.var_62c1bfaa !== 1) {
           player stats::function_a431be09(weapon);
 
@@ -573,8 +573,8 @@ function function_621234f9(eattacker, einflictor) {
 function vehiclecrush(eattacker, einflictor) {
   self endon(#"disconnect");
 
-  if(isDefined(level._effect) && isDefined(level._effect[# "tanksquish"])) {
-    playFX(level._effect[# "tanksquish"], self.origin + (0, 0, 30));
+  if(isDefined(level._effect) && isDefined(level._effect[#"tanksquish"])) {
+    playFX(level._effect[#"tanksquish"], self.origin + (0, 0, 30));
   }
 
   self playSound(#"chr_crunch");

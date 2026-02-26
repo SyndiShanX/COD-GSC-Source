@@ -35,10 +35,10 @@ __init__() {
   clientfield::register("zbarrier", "lightning_bolt_FX_toggle", 1, 1, "int");
   clientfield::register("scriptmover", "turn_active_perk_ball_light", 1, 1, "int");
   clientfield::register("scriptmover", "zone_captured", 1, 1, "int");
-  level._effect[# "perk_machine_light_yellow"] = # "hash_63cff764b54ceca2";
-  level._effect[# "perk_machine_light_red"] = # "hash_5b7d2edb8392ef21";
-  level._effect[# "perk_machine_light_green"] = # "hash_130f1aaf8384975";
-  level._effect[# "perk_machine_location"] = # "hash_130f1aaf8384975";
+  level._effect[#"perk_machine_light_yellow"] = # "hash_63cff764b54ceca2";
+  level._effect[#"perk_machine_light_red"] = # "hash_5b7d2edb8392ef21";
+  level._effect[#"perk_machine_light_green"] = # "hash_130f1aaf8384975";
+  level._effect[#"perk_machine_location"] = # "hash_130f1aaf8384975";
   level flag::init("machine_can_reset");
 }
 
@@ -438,7 +438,7 @@ machine_selector() {
   new_machine thread machine_think();
 }
 
-#include_perk_in_random_rotation(perk) {
+include_perk_in_random_rotation(perk) {
   if(!isDefined(level._random_perk_machine_perk_list)) {
     level._random_perk_machine_perk_list = [];
   }

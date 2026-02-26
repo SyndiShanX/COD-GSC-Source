@@ -11,8 +11,8 @@
 #namespace zm_orange_mq_soapstone;
 
 preload() {
-  level._effect[# "soapstone_cold"] = # "hash_75215ea3c21f31d3";
-  level._effect[# "soapstone_hot"] = # "hash_7cdf08df557a9b3f";
+  level._effect[#"soapstone_cold"] = # "hash_75215ea3c21f31d3";
+  level._effect[#"soapstone_hot"] = # "hash_7cdf08df557a9b3f";
   init_clientfields();
 }
 
@@ -29,11 +29,11 @@ soapstone_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   }
 
   if(newval == 1) {
-    self.fx_glow = util::playFXOnTag(localclientnum, level._effect[# "soapstone_cold"], self, "tag_origin");
+    self.fx_glow = util::playFXOnTag(localclientnum, level._effect[#"soapstone_cold"], self, "tag_origin");
     return;
   }
 
   if(newval == 2) {
-    self.fx_glow = util::playFXOnTag(localclientnum, level._effect[# "soapstone_hot"], self, "tag_origin");
+    self.fx_glow = util::playFXOnTag(localclientnum, level._effect[#"soapstone_hot"], self, "tag_origin");
   }
 }

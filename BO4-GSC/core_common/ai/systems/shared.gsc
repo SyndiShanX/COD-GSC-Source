@@ -93,7 +93,7 @@ placeweaponon(weapon, position) {
   }
 
   self updateattachedweaponmodels();
-  assert(self.a.weaponpos[# "left"] == level.weaponnone || self.a.weaponpos[# "right"] == level.weaponnone);
+  assert(self.a.weaponpos[#"left"] == level.weaponnone || self.a.weaponpos[#"right"] == level.weaponnone);
 }
 
 detachweapon(weapon) {

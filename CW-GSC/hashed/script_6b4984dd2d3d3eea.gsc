@@ -877,7 +877,7 @@ function function_87b2107c(&structs) {
     startorigin = struct.origin + (0, 0, var_e8a4ae59);
     endorigin = startorigin - (0, 0, var_a3c01952);
     trace = physicstraceex(startorigin, endorigin, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), undefined, 1);
-    struct.origin = trace[# "position"];
+    struct.origin = trace[#"position"];
   }
 }
 
@@ -1448,7 +1448,7 @@ function function_91c39737(player, team) {
 
   if(team.spyRole === 1) {
     scoreevents::processscoreevent(#"hash_5686e3b1c43a8c5d", team);
-    team.pers[# "detonations"] = isDefined(team.pers[# "detonations"]) ? team.pers[# "detonations"] + 1 : 1;
+    team.pers[#"detonations"] = isDefined(team.pers[#"detonations"]) ? team.pers[#"detonations"] + 1 : 1;
   }
 
   level.var_bdad494e++;
@@ -1867,11 +1867,11 @@ function function_70b57ee6() {
   s_portal = array::random(var_17bf7640);
   trace = groundtrace(s_portal.origin, s_portal.origin + (0, 0, -20000), 0, self, 0);
 
-  if(!isDefined(trace[# "position"]) || trace[# "surfacetype"] == "none") {
+  if(!isDefined(trace[#"position"]) || trace[#"surfacetype"] == "none") {
     return;
   }
 
-  drop_origin = trace[# "position"];
+  drop_origin = trace[#"position"];
   heli_drop_goal = (drop_origin[0], drop_origin[1], drop_origin[2] + 800);
   rear_hatch_offset_local = getdvarint(#"scr_supplydropoffset", 0);
   goalpath = supplydrop::supplydrophelistartpath_v2_setup(heli_drop_goal, (rear_hatch_offset_local, 0, 0), 0);

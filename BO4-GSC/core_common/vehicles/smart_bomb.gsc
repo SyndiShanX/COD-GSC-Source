@@ -124,12 +124,12 @@ state_combat_update(params) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-          point._scoredebug[# "disttoorigin"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+          point._scoredebug[#"disttoorigin"] = spawnStruct();
         }
 
-        point._scoredebug[# "disttoorigin"].score = mapfloat(0, 200, 0, 100, point.disttoorigin2d);
-        point._scoredebug[# "disttoorigin"].scorename = "<dev string:x38>";
+        point._scoredebug[#"disttoorigin"].score = mapfloat(0, 200, 0, 100, point.disttoorigin2d);
+        point._scoredebug[#"disttoorigin"].scorename = "<dev string:x38>";
 
         point.score += mapfloat(0, 200, 0, 100, point.disttoorigin2d);
 
@@ -138,12 +138,12 @@ state_combat_update(params) {
             point._scoredebug = [];
           }
 
-          if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-            point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+          if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+            point._scoredebug[#"inclaimedlocation"] = spawnStruct();
           }
 
-          point._scoredebug[# "inclaimedlocation"].score = -500;
-          point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x47>";
+          point._scoredebug[#"inclaimedlocation"].score = -500;
+          point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x47>";
 
           point.score += -500;
         }
@@ -152,12 +152,12 @@ state_combat_update(params) {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "random"])) {
-          point._scoredebug[# "random"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"random"])) {
+          point._scoredebug[#"random"] = spawnStruct();
         }
 
-        point._scoredebug[# "random"].score = randomfloatrange(0, 50);
-        point._scoredebug[# "random"].scorename = "<dev string:x5b>";
+        point._scoredebug[#"random"].score = randomfloatrange(0, 50);
+        point._scoredebug[#"random"].scorename = "<dev string:x5b>";
 
         point.score += randomfloatrange(0, 50);
 
@@ -169,12 +169,12 @@ state_combat_update(params) {
               point._scoredebug = [];
             }
 
-            if(!isDefined(point._scoredebug[# "currentmovedir"])) {
-              point._scoredebug[# "currentmovedir"] = spawnStruct();
+            if(!isDefined(point._scoredebug[#"currentmovedir"])) {
+              point._scoredebug[#"currentmovedir"] = spawnStruct();
             }
 
-            point._scoredebug[# "currentmovedir"].score = randomfloatrange(50, 150);
-            point._scoredebug[# "currentmovedir"].scorename = "<dev string:x64>";
+            point._scoredebug[#"currentmovedir"].score = randomfloatrange(50, 150);
+            point._scoredebug[#"currentmovedir"].scorename = "<dev string:x64>";
 
             point.score += randomfloatrange(50, 150);
           }
@@ -266,12 +266,12 @@ hunt_enemy() {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "disttoorigin"])) {
-          point._scoredebug[# "disttoorigin"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"disttoorigin"])) {
+          point._scoredebug[#"disttoorigin"] = spawnStruct();
         }
 
-        point._scoredebug[# "disttoorigin"].score = mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
-        point._scoredebug[# "disttoorigin"].scorename = "<dev string:x38>";
+        point._scoredebug[#"disttoorigin"].score = mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
+        point._scoredebug[#"disttoorigin"].scorename = "<dev string:x38>";
 
         point.score += mapfloat(0, 200, 0, -200, distance(point.origin, queryresult.origin));
 
@@ -279,12 +279,12 @@ hunt_enemy() {
           point._scoredebug = [];
         }
 
-        if(!isDefined(point._scoredebug[# "heighttoorigin"])) {
-          point._scoredebug[# "heighttoorigin"] = spawnStruct();
+        if(!isDefined(point._scoredebug[#"heighttoorigin"])) {
+          point._scoredebug[#"heighttoorigin"] = spawnStruct();
         }
 
-        point._scoredebug[# "heighttoorigin"].score = mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
-        point._scoredebug[# "heighttoorigin"].scorename = "<dev string:x75>";
+        point._scoredebug[#"heighttoorigin"].score = mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
+        point._scoredebug[#"heighttoorigin"].scorename = "<dev string:x75>";
 
         point.score += mapfloat(50, 200, 0, -200, abs(point.origin[2] - queryresult.origin[2]));
 
@@ -293,12 +293,12 @@ hunt_enemy() {
             point._scoredebug = [];
           }
 
-          if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-            point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+          if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+            point._scoredebug[#"inclaimedlocation"] = spawnStruct();
           }
 
-          point._scoredebug[# "inclaimedlocation"].score = -500;
-          point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:x47>";
+          point._scoredebug[#"inclaimedlocation"].score = -500;
+          point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:x47>";
 
           point.score += -500;
         }
@@ -373,8 +373,8 @@ check_detonation_dist(origin, enemy) {
 }
 
 jump_detonate() {
-  if(isDefined(self.sndalias[# "jump_up"])) {
-    self playSound(self.sndalias[# "jump_up"]);
+  if(isDefined(self.sndalias[#"jump_up"])) {
+    self playSound(self.sndalias[#"jump_up"]);
   }
 
   self launchvehicle((0, 0, 1) * self.jumpforce, (0, 0, 0), 1);
@@ -396,8 +396,8 @@ jump_detonate() {
     trace = physicstrace(self.origin + (0, 0, self.radius * 2), self.origin - (0, 0, 1000), (-10, -10, -10), (10, 10, 10), self, 2);
     willfall = 1;
 
-    if(trace[# "fraction"] < 1) {
-      pos = trace[# "position"];
+    if(trace[#"fraction"] < 1) {
+      pos = trace[#"position"];
       pos_on_navmesh = getclosestpointonnavmesh(pos, 100, self.radius, 4194287);
 
       if(isDefined(pos_on_navmesh)) {
@@ -446,12 +446,12 @@ function_ded83def(lastenemy) {
     }
 
     if(!isDefined(self.looping_targeting_sound)) {
-      if(isDefined(self.sndalias[# "vehalarm"])) {
+      if(isDefined(self.sndalias[#"vehalarm"])) {
         self.looping_targeting_sound = spawn("script_origin", self.origin);
         self.looping_targeting_sound linkto(self);
         self.looping_targeting_sound setinvisibletoall();
         self.looping_targeting_sound setvisibletoplayer(self.enemy);
-        self.looping_targeting_sound playLoopSound(self.sndalias[# "vehalarm"]);
+        self.looping_targeting_sound playLoopSound(self.sndalias[#"vehalarm"]);
         self.looping_targeting_sound thread function_47dbd72(self);
       }
     }
@@ -470,16 +470,16 @@ function_ded83def(lastenemy) {
     disttoenemysquared = distancesquared(self.origin, enemy_origin);
 
     if(disttoenemysquared < 250 * 250) {
-      if(lastdisttoenemysquared > 250 * 250 && !(isDefined(self.servershortout) && self.servershortout) && isDefined(self.sndalias[# "vehclose250"])) {
-        self playsoundtoplayer(self.sndalias[# "vehclose250"], self.enemy);
+      if(lastdisttoenemysquared > 250 * 250 && !(isDefined(self.servershortout) && self.servershortout) && isDefined(self.sndalias[#"vehclose250"])) {
+        self playsoundtoplayer(self.sndalias[#"vehclose250"], self.enemy);
       }
     } else if(disttoenemysquared < 750 * 750) {
-      if(lastdisttoenemysquared > 750 * 750 && !(isDefined(self.servershortout) && self.servershortout) && isDefined(self.sndalias[# "vehtargeting"])) {
-        self playsoundtoplayer(self.sndalias[# "vehtargeting"], self.enemy);
+      if(lastdisttoenemysquared > 750 * 750 && !(isDefined(self.servershortout) && self.servershortout) && isDefined(self.sndalias[#"vehtargeting"])) {
+        self playsoundtoplayer(self.sndalias[#"vehtargeting"], self.enemy);
       }
     } else if(disttoenemysquared < 1500 * 1500) {
-      if(lastdisttoenemysquared > 1500 * 1500 && !(isDefined(self.servershortout) && self.servershortout) && isDefined(self.sndalias[# "vehclose1500"])) {
-        self playsoundtoplayer(self.sndalias[# "vehclose1500"], self.enemy);
+      if(lastdisttoenemysquared > 1500 * 1500 && !(isDefined(self.servershortout) && self.servershortout) && isDefined(self.sndalias[#"vehclose1500"])) {
+        self playsoundtoplayer(self.sndalias[#"vehclose1500"], self.enemy);
       }
     }
 
@@ -538,7 +538,7 @@ try_detonate() {
     if(isDefined(var_8abb9239) && check_detonation_dist(var_8abb9239, self.enemy)) {
       trace = bulletTrace(var_8abb9239 + (0, 0, self.radius), self.enemy.origin + (0, 0, self.radius), 1, self);
 
-      if(trace[# "fraction"] === 1 || isDefined(trace[# "entity"])) {
+      if(trace[#"fraction"] === 1 || isDefined(trace[#"entity"])) {
         if(isDefined(jump) && jump) {
           self jump_detonate();
         } else {
@@ -569,7 +569,7 @@ try_detonate() {
 
         trace = bulletTrace(self.origin + (0, 0, self.radius), player.origin + (0, 0, self.radius), 1, self);
 
-        if(trace[# "fraction"] === 1 || isDefined(trace[# "entity"])) {
+        if(trace[#"fraction"] === 1 || isDefined(trace[#"entity"])) {
           self detonate();
         }
       }
@@ -661,8 +661,8 @@ path_update_interrupt() {
         }
 
         if(distance2dsquared(self.current_pathto_pos, targetpos) > repath_range * repath_range) {
-          if(isDefined(self.sndalias) && isDefined(self.sndalias[# "direction"])) {
-            self playSound(self.sndalias[# "direction"]);
+          if(isDefined(self.sndalias) && isDefined(self.sndalias[#"direction"])) {
+            self playSound(self.sndalias[#"direction"]);
           }
 
           self notify(#"near_goal");
@@ -770,8 +770,8 @@ function_dd7a181d() {
   while(true) {
     self waittill(#"veh_landed");
 
-    if(isDefined(self.sndalias[# "land"])) {
-      self playSound(self.sndalias[# "land"]);
+    if(isDefined(self.sndalias[#"land"])) {
+      self playSound(self.sndalias[#"land"]);
     }
   }
 }
@@ -786,14 +786,14 @@ function_2a91d5ee() {
   while(true) {
     self waittill(#"veh_inair");
 
-    if(isDefined(self.sndalias[# "inair"])) {
-      self playSound(self.sndalias[# "inair"]);
+    if(isDefined(self.sndalias[#"inair"])) {
+      self playSound(self.sndalias[#"inair"]);
     }
 
     self waittill(#"veh_landed");
 
-    if(isDefined(self.sndalias[# "land"])) {
-      self playSound(self.sndalias[# "land"]);
+    if(isDefined(self.sndalias[#"land"])) {
+      self playSound(self.sndalias[#"land"]);
     }
   }
 }
@@ -802,18 +802,18 @@ function_12857be3() {
   self endon(#"death");
   wait randomfloatrange(0.25, 1.5);
 
-  if(isDefined(self.sndalias[# "spawn"])) {
+  if(isDefined(self.sndalias[#"spawn"])) {
     if(isDefined(self.enemy) && isDefined(self.enemy.team)) {
       foreach(player in level.players) {
         if(player.team == self.enemy.team) {
-          self playsoundtoplayer(self.sndalias[# "spawn"], player);
+          self playsoundtoplayer(self.sndalias[#"spawn"], player);
         }
       }
 
       return;
     }
 
-    self playSound(self.sndalias[# "spawn"]);
+    self playSound(self.sndalias[#"spawn"]);
   }
 }
 

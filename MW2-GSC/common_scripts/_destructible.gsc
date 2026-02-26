@@ -159,60 +159,60 @@ setup_destructibles(cached) {
 
   //--------------------------------------------------------------------- // Attach all parts to the entity
   //--------------------------------------------------------------------- if(isDefined(level.destructible_type[self.destuctableInfo].parts)) {
-    self.destructible_parts = [];
-    for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
-      // create the struct where the info for each entity will be held
-      self.destructible_parts[i] = spawnStruct();
+  self.destructible_parts = [];
+  for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
+    // create the struct where the info for each entity will be held
+    self.destructible_parts[i] = spawnStruct();
 
-      // set it's current state to 0 since it has never taken damage yet and will be on it's first state
-      self.destructible_parts[i].v["currentState"] = 0;
+    // set it's current state to 0 since it has never taken damage yet and will be on it's first state
+    self.destructible_parts[i].v["currentState"] = 0;
 
-      // if it has a health value then store it's value
-      if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][0].v["health"]))
-        self.destructible_parts[i].v["health"] = level.destructible_type[self.destuctableInfo].parts[i][0].v["health"];
+    // if it has a health value then store it's value
+    if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][0].v["health"]))
+      self.destructible_parts[i].v["health"] = level.destructible_type[self.destuctableInfo].parts[i][0].v["health"];
 
-      // find random attachements such as random advertisements on taxi cabs and attach them now
-      if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_1"])) {
-        randAttachmentIndex = RandomInt(level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_1"].size);
-        attachTag = level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_tag"][randAttachmentIndex];
-        attach_model_1 = level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_1"][randAttachmentIndex];
-        attach_model_2 = level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_2"][randAttachmentIndex];
-        clipToRemove = level.destructible_type[self.destuctableInfo].parts[i][0].v["clipToRemove"][randAttachmentIndex];
-        self thread do_random_dynamic_attachment(attachTag, attach_model_1, attach_model_2, clipToRemove);
+    // find random attachements such as random advertisements on taxi cabs and attach them now
+    if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_1"])) {
+      randAttachmentIndex = RandomInt(level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_1"].size);
+      attachTag = level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_tag"][randAttachmentIndex];
+      attach_model_1 = level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_1"][randAttachmentIndex];
+      attach_model_2 = level.destructible_type[self.destuctableInfo].parts[i][0].v["random_dynamic_attachment_2"][randAttachmentIndex];
+      clipToRemove = level.destructible_type[self.destuctableInfo].parts[i][0].v["clipToRemove"][randAttachmentIndex];
+      self thread do_random_dynamic_attachment(attachTag, attach_model_1, attach_model_2, clipToRemove);
+    }
+
+    // continue if it's the base model since its not an attached part
+    if(i == 0) {
+      continue;
+    }
+    // attach the part now
+    modelName = level.destructible_type[self.destuctableInfo].parts[i][0].v["modelName"];
+    tagName = level.destructible_type[self.destuctableInfo].parts[i][0].v["tagName"];
+
+    stateIndex = 1;
+    while(isDefined(level.destructible_type[self.destuctableInfo].parts[i][stateIndex])) {
+      stateTagName = level.destructible_type[self.destuctableInfo].parts[i][stateIndex].v["tagName"];
+      stateModelName = level.destructible_type[self.destuctableInfo].parts[i][stateIndex].v["modelName"];
+      if(isDefined(stateTagName) && stateTagName != tagName) {
+        self hideapart(stateTagName);
+        if(self.modeldummyon)
+          self.modeldummy hideapart(stateTagName);
       }
-
-      // continue if it's the base model since its not an attached part
-      if(i == 0) {
-        continue;
-      }
-      // attach the part now
-      modelName = level.destructible_type[self.destuctableInfo].parts[i][0].v["modelName"];
-      tagName = level.destructible_type[self.destuctableInfo].parts[i][0].v["tagName"];
-
-      stateIndex = 1;
-      while(isDefined(level.destructible_type[self.destuctableInfo].parts[i][stateIndex])) {
-        stateTagName = level.destructible_type[self.destuctableInfo].parts[i][stateIndex].v["tagName"];
-        stateModelName = level.destructible_type[self.destuctableInfo].parts[i][stateIndex].v["modelName"];
-        if(isDefined(stateTagName) && stateTagName != tagName) {
-          self hideapart(stateTagName);
-          if(self.modeldummyon)
-            self.modeldummy hideapart(stateTagName);
-        }
-        stateIndex++;
-      }
+      stateIndex++;
     }
   }
+}
 
-  // some destructibles have collision that needs to change due to the large change in the destructible when it blows pu
-  if(isDefined(self.target))
-    thread destructible_handles_collision_brushes();
+// some destructibles have collision that needs to change due to the large change in the destructible when it blows pu
+if(isDefined(self.target))
+  thread destructible_handles_collision_brushes();
 
-  //--------------------------------------------------------------------- // Make this entity take damage and wait for events
-  //--------------------------------------------------------------------- if(self.code_classname != "script_vehicle")
-    self setCanDamage(true);
-  if(isSP())
-    self thread connectTraverses();
-  self thread destructible_think();
+//--------------------------------------------------------------------- // Make this entity take damage and wait for events
+//--------------------------------------------------------------------- if(self.code_classname != "script_vehicle")
+self setCanDamage(true);
+if(isSP())
+  self thread connectTraverses();
+self thread destructible_think();
 }
 
 destructible_create(type, tagName, health, validAttackers, validDamageZone, validDamageCause) {
@@ -668,134 +668,134 @@ precache_destructibles() {
   // I needed this to be seperate for vehicle scripts.
   //--------------------------------------------------------------------- // Precache referenced models and load referenced effects
   //--------------------------------------------------------------------- if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
-    return;
-  }
-  //if( !isDefined( level.precachedModels ) )
-  //	level.precachedModels = [];
+  return;
+}
+//if( !isDefined( level.precachedModels ) )
+//	level.precachedModels = [];
 
-  for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
-    for(j = 0; j < level.destructible_type[self.destuctableInfo].parts[i].size; j++) {
-      if(level.destructible_type[self.destuctableInfo].parts[i].size <= j) {
-        continue;
-      }
-      if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][j].v["modelName"])) {
-        //model = level.destructible_type[ self.destuctableInfo ].parts[ i ][ j ].v[ "modelName" ];
-        //if( !isDefined( level.precachedModels[ model ] ) )
-        //{
-        //	level.precachedModels[ model ] = true;
-        //	println( "precachemodel( " + model + " )" );
-        //}
-        PreCacheModel(level.destructible_type[self.destuctableInfo].parts[i][j].v["modelName"]);
-      }
+for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
+  for(j = 0; j < level.destructible_type[self.destuctableInfo].parts[i].size; j++) {
+    if(level.destructible_type[self.destuctableInfo].parts[i].size <= j) {
+      continue;
+    }
+    if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][j].v["modelName"])) {
+      //model = level.destructible_type[ self.destuctableInfo ].parts[ i ][ j ].v[ "modelName" ];
+      //if( !isDefined( level.precachedModels[ model ] ) )
+      //{
+      //	level.precachedModels[ model ] = true;
+      //	println( "precachemodel( " + model + " )" );
+      //}
+      PreCacheModel(level.destructible_type[self.destuctableInfo].parts[i][j].v["modelName"]);
+    }
 
-      // in MP we have to precache animations that will be used
-      if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][j].v["animation"])) {
-        animGroups = level.destructible_type[self.destuctableInfo].parts[i][j].v["animation"];
-        foreach(group in animGroups) {
-          if(isDefined(group["mpAnim"]))
-            noself_func("precacheMpAnim", group["mpAnim"]);
+    // in MP we have to precache animations that will be used
+    if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][j].v["animation"])) {
+      animGroups = level.destructible_type[self.destuctableInfo].parts[i][j].v["animation"];
+      foreach(group in animGroups) {
+        if(isDefined(group["mpAnim"]))
+          noself_func("precacheMpAnim", group["mpAnim"]);
+      }
+    }
+
+    // find random attachements such as random advertisements on taxi cabs and precache them now
+    if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][j].v["random_dynamic_attachment_1"])) {
+      foreach(model in level.destructible_type[self.destuctableInfo].parts[i][j].v["random_dynamic_attachment_1"]) {
+        if(isDefined(model) && model != "") {
+          PreCacheModel(model);
+          PreCacheModel(model + DESTROYED_ATTACHMENT_SUFFIX);
+
+          //if( !isDefined( level.precachedModels[ model ] ) )
+          //{
+          //	level.precachedModels[ model ] = true;
+          //	println( "precachemodel( " + model + " )" );
+          //}
+
+          //if( !isDefined( level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] ) )
+          //{
+          //	level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] = true;
+          //	println( "precachemodel( " + model + DESTROYED_ATTACHMENT_SUFFIX + " )" );
+          //}
         }
       }
+      foreach(model in level.destructible_type[self.destuctableInfo].parts[i][j].v["random_dynamic_attachment_2"]) {
+        if(isDefined(model) && model != "") {
+          PreCacheModel(model);
+          PreCacheModel(model + DESTROYED_ATTACHMENT_SUFFIX);
 
-      // find random attachements such as random advertisements on taxi cabs and precache them now
-      if(isDefined(level.destructible_type[self.destuctableInfo].parts[i][j].v["random_dynamic_attachment_1"])) {
-        foreach(model in level.destructible_type[self.destuctableInfo].parts[i][j].v["random_dynamic_attachment_1"]) {
-          if(isDefined(model) && model != "") {
-            PreCacheModel(model);
-            PreCacheModel(model + DESTROYED_ATTACHMENT_SUFFIX);
+          //if( !isDefined( level.precachedModels[ model ] ) )
+          //{
+          //	level.precachedModels[ model ] = true;
+          //	println( "precachemodel( " + model + " )" );
+          //}
 
-            //if( !isDefined( level.precachedModels[ model ] ) )
-            //{
-            //	level.precachedModels[ model ] = true;
-            //	println( "precachemodel( " + model + " )" );
-            //}
-
-            //if( !isDefined( level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] ) )
-            //{
-            //	level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] = true;
-            //	println( "precachemodel( " + model + DESTROYED_ATTACHMENT_SUFFIX + " )" );
-            //}
-          }
-        }
-        foreach(model in level.destructible_type[self.destuctableInfo].parts[i][j].v["random_dynamic_attachment_2"]) {
-          if(isDefined(model) && model != "") {
-            PreCacheModel(model);
-            PreCacheModel(model + DESTROYED_ATTACHMENT_SUFFIX);
-
-            //if( !isDefined( level.precachedModels[ model ] ) )
-            //{
-            //	level.precachedModels[ model ] = true;
-            //	println( "precachemodel( " + model + " )" );
-            //}
-
-            //if( !isDefined( level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] ) )
-            //{
-            //	level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] = true;
-            //	println( "precachemodel( " + model + DESTROYED_ATTACHMENT_SUFFIX + " )" );
-            //}
-          }
+          //if( !isDefined( level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] ) )
+          //{
+          //	level.precachedModels[ model + DESTROYED_ATTACHMENT_SUFFIX ] = true;
+          //	println( "precachemodel( " + model + DESTROYED_ATTACHMENT_SUFFIX + " )" );
+          //}
         }
       }
     }
   }
+}
 }
 
 add_destructible_fx() {
   // I needed this to be seperate for vehicle scripts.
   //--------------------------------------------------------------------- // Precache referenced models and load referenced effects
   //--------------------------------------------------------------------- if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
-    return;
-  }
-  //if( !isDefined( level.precachedFX ) )
-  //	level.precachedFX = [];
+  return;
+}
+//if( !isDefined( level.precachedFX ) )
+//	level.precachedFX = [];
 
-  for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
-    for(j = 0; j < level.destructible_type[self.destuctableInfo].parts[i].size; j++) {
-      if(level.destructible_type[self.destuctableInfo].parts[i].size <= j) {
-        continue;
-      }
-      part = level.destructible_type[self.destuctableInfo].parts[i][j];
+for(i = 0; i < level.destructible_type[self.destuctableInfo].parts.size; i++) {
+  for(j = 0; j < level.destructible_type[self.destuctableInfo].parts[i].size; j++) {
+    if(level.destructible_type[self.destuctableInfo].parts[i].size <= j) {
+      continue;
+    }
+    part = level.destructible_type[self.destuctableInfo].parts[i][j];
 
-      if(isDefined(part.v["fx_filename"])) {
-        for(g = 0; g < part.v["fx_filename"].size; g++) {
-          // for multiple checks on fx when doing conditional fx playing
-          fx_filenames = part.v["fx_filename"][g];
-          if(isDefined(fx_filenames)) {
-            // has we already set this up?
-            if(isDefined(part.v["fx"]) && isDefined(part.v["fx"][g]) && part.v["fx"][g].size == fx_filenames.size) {
-              continue;
-            }
-            foreach(idx, fx_filename in fx_filenames) {
-              level.destructible_type[self.destuctableInfo].parts[i][j].v["fx"][g][idx] = _loadfx(fx_filename);
+    if(isDefined(part.v["fx_filename"])) {
+      for(g = 0; g < part.v["fx_filename"].size; g++) {
+        // for multiple checks on fx when doing conditional fx playing
+        fx_filenames = part.v["fx_filename"][g];
+        if(isDefined(fx_filenames)) {
+          // has we already set this up?
+          if(isDefined(part.v["fx"]) && isDefined(part.v["fx"][g]) && part.v["fx"][g].size == fx_filenames.size) {
+            continue;
+          }
+          foreach(idx, fx_filename in fx_filenames) {
+            level.destructible_type[self.destuctableInfo].parts[i][j].v["fx"][g][idx] = _loadfx(fx_filename);
 
-              //if( !isDefined( level.precachedFX[ fx_filename ] ) )
-              //{
-              //	level.precachedFX[ fx_filename ] = true;
-              //	println( "loadfx( " + fx_filename + " )" );
-              //}
-            }
+            //if( !isDefined( level.precachedFX[ fx_filename ] ) )
+            //{
+            //	level.precachedFX[ fx_filename ] = true;
+            //	println( "loadfx( " + fx_filename + " )" );
+            //}
           }
         }
       }
+    }
 
-      loopfx_filenames = level.destructible_type[self.destuctableInfo].parts[i][j].v["loopfx_filename"];
-      if(isDefined(loopfx_filenames)) {
-        // has we already set this up?
-        if(isDefined(part.v["loopfx"]) && part.v["loopfx"].size == loopfx_filenames.size) {
-          continue;
-        }
-        foreach(idx, loopfx_filename in loopfx_filenames) {
-          level.destructible_type[self.destuctableInfo].parts[i][j].v["loopfx"][idx] = _loadfx(loopfx_filename);
+    loopfx_filenames = level.destructible_type[self.destuctableInfo].parts[i][j].v["loopfx_filename"];
+    if(isDefined(loopfx_filenames)) {
+      // has we already set this up?
+      if(isDefined(part.v["loopfx"]) && part.v["loopfx"].size == loopfx_filenames.size) {
+        continue;
+      }
+      foreach(idx, loopfx_filename in loopfx_filenames) {
+        level.destructible_type[self.destuctableInfo].parts[i][j].v["loopfx"][idx] = _loadfx(loopfx_filename);
 
-          //if( !isDefined( level.precachedFX[ loopfx_filename ] ) )
-          //{
-          //	level.precachedFX[ loopfx_filename ] = true;
-          //	println( "loadfx( " + loopfx_filename + " )" );
-          //}
-        }
+        //if( !isDefined( level.precachedFX[ loopfx_filename ] ) )
+        //{
+        //	level.precachedFX[ loopfx_filename ] = true;
+        //	println( "loadfx( " + loopfx_filename + " )" );
+        //}
       }
     }
   }
+}
 }
 
 canDamageDestructible(testDestructible) {
@@ -982,7 +982,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
   //--------------------------------------------------------------------- // Find what part this is, or is a child of. If the base model was
   // the entity that was damaged the part index will be -1
   //--------------------------------------------------------------------- if(!isDefined(self.destructible_parts))
-    return;
+  return;
   if(self.destructible_parts.size == 0) {
     return;
   }
@@ -1418,41 +1418,41 @@ destructible_splash_damage(damage, point, direction_vec, attacker, damageType) {
   }
   //------------------------------------------------------------------------ // Fill an array of all possible parts that might have been splash damaged
   //------------------------------------------------------------------------ if(!isDefined(level.destructible_type[self.destuctableInfo].parts)) {
-    return;
+  return;
+}
+damagedParts = self getAllActiveParts(direction_vec);
+
+if(damagedParts.size <= 0) {
+  return;
+}
+damagedParts = self setDistanceOnParts(damagedParts, point);
+
+closestPartDist = getLowestPartDistance(damagedParts);
+Assert(isDefined(closestPartDist));
+
+//-------------------------------------------------------------------------- // Damage each part depending on how close it was to the splash damage point
+//-------------------------------------------------------------------------- prof_begin("_destructible");
+
+foreach(part in damagedParts) {
+  distanceMod = (part.v["distance"] * 1.4);
+  damageAmount = (damage - (distanceMod - closestPartDist));
+
+  if(damageAmount <= 0) {
+    continue;
   }
-  damagedParts = self getAllActiveParts(direction_vec);
-
-  if(damagedParts.size <= 0) {
-    return;
-  }
-  damagedParts = self setDistanceOnParts(damagedParts, point);
-
-  closestPartDist = getLowestPartDistance(damagedParts);
-  Assert(isDefined(closestPartDist));
-
-  //-------------------------------------------------------------------------- // Damage each part depending on how close it was to the splash damage point
-  //-------------------------------------------------------------------------- prof_begin("_destructible");
-
-  foreach(part in damagedParts) {
-    distanceMod = (part.v["distance"] * 1.4);
-    damageAmount = (damage - (distanceMod - closestPartDist));
-
-    if(damageAmount <= 0) {
-      continue;
-    }
-    if(isDefined(self.exploded)) {
-      continue;
-    }
-
-    if(GetDvarInt("debug_destructibles", 0) == 1) {
-      if(isDefined(part.v["tagName"]))
-        Print3d(self GetTagOrigin(part.v["tagName"]), damageAmount, (1, 1, 1), 1.0, 0.5, 200);
-    }
-
-    self thread destructible_update_part(damageAmount, part.v["modelName"], part.v["tagName"], point, direction_vec, attacker, damageType, part);
+  if(isDefined(self.exploded)) {
+    continue;
   }
 
-  prof_end("_destructible");
+  if(GetDvarInt("debug_destructibles", 0) == 1) {
+    if(isDefined(part.v["tagName"]))
+      Print3d(self GetTagOrigin(part.v["tagName"]), damageAmount, (1, 1, 1), 1.0, 0.5, 200);
+  }
+
+  self thread destructible_update_part(damageAmount, part.v["modelName"], part.v["tagName"], point, direction_vec, attacker, damageType, part);
+}
+
+prof_end("_destructible");
 }
 
 getAllActiveParts(direction_vec) {

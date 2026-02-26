@@ -140,12 +140,12 @@ function function_c75159ad(localclientnum, oldval, newval, bnewent, binitialsnap
   playSound(0, "evt_doa_powerup_nuke_activate", self.origin);
   bomb waittill(#"movedone");
   playSound(fieldname, "evt_doa_powerup_nuke_impact", var_7def0a05);
-  playFX(fieldname, level._effect[# "bomb"], var_7def0a05);
+  playFX(fieldname, level._effect[#"bomb"], var_7def0a05);
   earthquake(fieldname, 1, 0.8, var_7def0a05, 1000);
   physicsexplosionsphere(fieldname, var_7def0a05, 1024, 0, 100);
   bomb delete();
   wait 0.2;
-  playFX(fieldname, level._effect[# "nuke_dust"], var_7def0a05);
+  playFX(fieldname, level._effect[#"nuke_dust"], var_7def0a05);
 }
 
 function function_43ae94e0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -247,7 +247,7 @@ function function_f32984d0(localclientnum, oldval, newval, bnewent, binitialsnap
   wait 0.2;
 
   if(isDefined(self)) {
-    playFX(localclientnum, level._effect[# "explode_lg"], origin);
+    playFX(localclientnum, level._effect[#"explode_lg"], origin);
     earthquake(localclientnum, 1, 0.8, origin, 1000);
     playrumbleonposition(localclientnum, "damage_heavy", self.origin);
   }

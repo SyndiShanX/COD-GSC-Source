@@ -64,7 +64,7 @@ function function_5837bf72() {
   }
 
   if(zm_utility::is_survival()) {
-    level flag::wait_till_all([# "hash_5aca8d24a1f56ee1", "start_zombie_round_logic", "intro_scene_done"]);
+    level flag::wait_till_all([#"hash_5aca8d24a1f56ee1", "start_zombie_round_logic", "intro_scene_done"]);
     util::wait_network_frame();
     var_f79418e = [];
 
@@ -88,7 +88,7 @@ function function_5837bf72() {
       }
 
       foreach(instance in var_f79418e) {
-        var_842cdacd = instance.contentgroups[# "chest_spawn"];
+        var_842cdacd = instance.contentgroups[#"chest_spawn"];
 
         if(isarray(var_842cdacd)) {
           level.var_e0b4bcdf = arraycombine(level.var_e0b4bcdf, var_842cdacd);
@@ -136,7 +136,7 @@ function function_5837bf72() {
 
       foreach(var_6f531d9b in a_s_player_spawns) {
         var_49089e5b = {
-          #origin: groundtrace(var_6f531d9b.origin + (0, 0, 8), var_6f531d9b.origin + (0, 0, -100000), 0, undefined)[# "position"], #angles: var_6f531d9b.angles, #str_zone: var_6f531d9b.script_noteworthy
+          #origin: groundtrace(var_6f531d9b.origin + (0, 0, 8), var_6f531d9b.origin + (0, 0, -100000), 0, undefined)[#"position"], #angles: var_6f531d9b.angles, #str_zone: var_6f531d9b.script_noteworthy
         };
 
         if(ispointonnavmesh(var_49089e5b.origin, 50)) {

@@ -400,7 +400,7 @@ function function_2d527091(var_a4084657) {
       break;
     case # "flag_rat_tunnels_backtrack_blocker":
       a_ents = [];
-      a_ents[# "hatch"] = getent("rat_tunnel_hatch", "targetname");
+      a_ents[#"hatch"] = getent("rat_tunnel_hatch", "targetname");
       level thread scene::play("scene_pri_rat_tunnel_hatch_close", a_ents);
       break;
   }
@@ -906,7 +906,7 @@ function function_82e5e0c2() {
 }
 
 function function_4ad393d5(a_ents) {
-  level.red_light = a_ents[# "red_light"];
+  level.red_light = a_ents[#"red_light"];
 
   if(isDefined(level.red_light)) {
     if(isDefined(level.red_light._scene_object._o_scene._e_root.targetname)) {
@@ -1223,52 +1223,52 @@ function function_dcd92707() {
   while(true) {
     foreach(var_86275d63 in level.var_86275d63) {
       if(issubstr(tolower(var_86275d63.str), "<dev string:x28c>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "rice_paddies"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"rice_paddies"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x294>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "jungle_path"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"jungle_path"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x29e>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "hash_37049c08cb142cc7"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"hash_37049c08cb142cc7"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2a7>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "hash_40947083f371555e"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"hash_40947083f371555e"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2b1>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "waterfall_path"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"waterfall_path"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2be>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "hash_5a141a81a5112819"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"hash_5a141a81a5112819"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2c7>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "sniper_overlook"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"sniper_overlook"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2d1>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "village"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"village"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2dc>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "caves"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"caves"].count);
         continue;
       }
 
       if(issubstr(tolower(var_86275d63.str), "<dev string:x2e5>")) {
-        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[# "rat_tunnels"].count);
+        var_86275d63 settext(var_86275d63.str + level.var_731c10af.paths[#"rat_tunnels"].count);
         continue;
       }
 
@@ -1648,7 +1648,7 @@ function force_weapon_loadout(area, visit) {
     case # "jungle_path_3":
     case # "jungle_path_2":
     case # "jungle_path_1":
-      if(isDefined(world.mapdata[level.missionid][# "transient"].var_2e7c022f) && !function_9e730655()) {
+      if(isDefined(world.mapdata[level.missionid][#"transient"].var_2e7c022f) && !function_9e730655()) {
         savegame::function_7396472d();
         weapons = level.player getweaponslist();
 
@@ -1797,12 +1797,12 @@ function function_36b02bca() {
 }
 
 function function_9e730655() {
-  if(isDefined(world.mapdata[level.missionid][# "transient"].var_2e7c022f)) {
-    if(world.mapdata[level.missionid][# "transient"].var_2e7c022f.size == 1 && array::contains(world.mapdata[level.missionid][# "transient"].var_2e7c022f, #"hash_32454fc6213eedd6")) {
+  if(isDefined(world.mapdata[level.missionid][#"transient"].var_2e7c022f)) {
+    if(world.mapdata[level.missionid][#"transient"].var_2e7c022f.size == 1 && array::contains(world.mapdata[level.missionid][#"transient"].var_2e7c022f, #"hash_32454fc6213eedd6")) {
       return 1;
     }
 
-    if(world.mapdata[level.missionid][# "transient"].var_2e7c022f.size == 2 && array::contains(world.mapdata[level.missionid][# "transient"].var_2e7c022f, #"hash_32454fc6213eedd6") && array::contains(world.mapdata[level.missionid][# "transient"].var_2e7c022f, #"frag_grenade")) {
+    if(world.mapdata[level.missionid][#"transient"].var_2e7c022f.size == 2 && array::contains(world.mapdata[level.missionid][#"transient"].var_2e7c022f, #"hash_32454fc6213eedd6") && array::contains(world.mapdata[level.missionid][#"transient"].var_2e7c022f, #"frag_grenade")) {
       return 1;
     }
 

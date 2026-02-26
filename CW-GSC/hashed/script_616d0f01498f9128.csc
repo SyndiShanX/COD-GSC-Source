@@ -13,7 +13,7 @@ function preload() {
 }
 
 function postload() {
-  level._effect[# "hash_57ee68985468f554"] = # "wz/fx8_plyr_pstfx_numbers";
+  level._effect[#"hash_57ee68985468f554"] = # "wz/fx8_plyr_pstfx_numbers";
 }
 
 function optional_objective_camera_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -23,7 +23,7 @@ function optional_objective_camera_fx(localclientnum, oldval, newval, bnewent, b
   }
 
   if(bwastimejump) {
-    self.var_dcb8af99 = playfxoncamera(fieldname, level._effect[# "hash_57ee68985468f554"], undefined, (1, 0, 0), (0, 0, 1));
+    self.var_dcb8af99 = playfxoncamera(fieldname, level._effect[#"hash_57ee68985468f554"], undefined, (1, 0, 0), (0, 0, 1));
   }
 }
 

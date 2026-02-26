@@ -884,12 +884,12 @@ function function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "outofgoalanchor"])) {
-        point._scoredebug[# "outofgoalanchor"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"outofgoalanchor"])) {
+        point._scoredebug[#"outofgoalanchor"] = spawnStruct();
       }
 
-      point._scoredebug[# "outofgoalanchor"].score = score;
-      point._scoredebug[# "outofgoalanchor"].scorename = "<dev string:x85>";
+      point._scoredebug[#"outofgoalanchor"].score = score;
+      point._scoredebug[#"outofgoalanchor"].scorename = "<dev string:x85>";
 
       point.score += score;
     }
@@ -899,12 +899,12 @@ function function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "no visibility"])) {
-        point._scoredebug[# "no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"no visibility"])) {
+        point._scoredebug[#"no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[# "no visibility"].score = -5000;
-      point._scoredebug[# "no visibility"].scorename = "<dev string:x98>";
+      point._scoredebug[#"no visibility"].score = -5000;
+      point._scoredebug[#"no visibility"].scorename = "<dev string:x98>";
 
       point.score += -5000;
     }
@@ -913,12 +913,12 @@ function function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "engagementdist"])) {
-      point._scoredebug[# "engagementdist"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"engagementdist"])) {
+      point._scoredebug[#"engagementdist"] = spawnStruct();
     }
 
-    point._scoredebug[# "engagementdist"].score = point.distawayfromengagementarea * -1;
-    point._scoredebug[# "engagementdist"].scorename = "<dev string:xa9>";
+    point._scoredebug[#"engagementdist"].score = point.distawayfromengagementarea * -1;
+    point._scoredebug[#"engagementdist"].scorename = "<dev string:xa9>";
 
     point.score += point.distawayfromengagementarea * -1;
 
@@ -926,12 +926,12 @@ function function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "hash_6c444b535ec20313"])) {
-      point._scoredebug[# "hash_6c444b535ec20313"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"hash_6c444b535ec20313"])) {
+      point._scoredebug[#"hash_6c444b535ec20313"] = spawnStruct();
     }
 
-    point._scoredebug[# "hash_6c444b535ec20313"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
-    point._scoredebug[# "hash_6c444b535ec20313"].scorename = "<dev string:xbb>";
+    point._scoredebug[#"hash_6c444b535ec20313"].score = mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
+    point._scoredebug[#"hash_6c444b535ec20313"].scorename = "<dev string:xbb>";
 
     point.score += mapfloat(0, prefereddistawayfromorigin, -5000, 0, point.disttoorigin2d);
 
@@ -940,12 +940,12 @@ function function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "inclaimedlocation"])) {
-        point._scoredebug[# "inclaimedlocation"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"inclaimedlocation"])) {
+        point._scoredebug[#"inclaimedlocation"] = spawnStruct();
       }
 
-      point._scoredebug[# "inclaimedlocation"].score = -5000;
-      point._scoredebug[# "inclaimedlocation"].scorename = "<dev string:xcd>";
+      point._scoredebug[#"inclaimedlocation"].score = -5000;
+      point._scoredebug[#"inclaimedlocation"].scorename = "<dev string:xcd>";
 
       point.score += -5000;
     }
@@ -959,12 +959,12 @@ function function_1e0d693b(goal, enemy) {
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "height"])) {
-        point._scoredebug[# "height"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"height"])) {
+        point._scoredebug[#"height"] = spawnStruct();
       }
 
-      point._scoredebug[# "height"].score = heightscore;
-      point._scoredebug[# "height"].scorename = "<dev string:xe2>";
+      point._scoredebug[#"height"].score = heightscore;
+      point._scoredebug[#"height"].scorename = "<dev string:xe2>";
 
       point.score += heightscore;
     }
@@ -975,12 +975,12 @@ function function_1e0d693b(goal, enemy) {
       point._scoredebug = [];
     }
 
-    if(!isDefined(point._scoredebug[# "random"])) {
-      point._scoredebug[# "random"] = spawnStruct();
+    if(!isDefined(point._scoredebug[#"random"])) {
+      point._scoredebug[#"random"] = spawnStruct();
     }
 
-    point._scoredebug[# "random"].score = score;
-    point._scoredebug[# "random"].scorename = "<dev string:xec>";
+    point._scoredebug[#"random"].score = score;
+    point._scoredebug[#"random"].scorename = "<dev string:xec>";
 
     point.score += score;
   }

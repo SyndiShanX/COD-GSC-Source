@@ -27,12 +27,12 @@ function calculate_map_center() {
   }
 
   var_7465f696 = function_92f03095("auto_normal");
-  level.spawnmins = var_7465f696[# "mins"];
-  level.spawnmaxs = var_7465f696[# "maxs"];
-  level.mapbounds.var_1d694d71 = var_7465f696[# "mins"];
-  level.mapbounds.var_a13a9915 = var_7465f696[# "maxs"];
-  level.mapbounds.center = var_7465f696[# "center"];
-  level.mapcenter = var_7465f696[# "center"];
+  level.spawnmins = var_7465f696[#"mins"];
+  level.spawnmaxs = var_7465f696[#"maxs"];
+  level.mapbounds.var_1d694d71 = var_7465f696[#"mins"];
+  level.mapbounds.var_a13a9915 = var_7465f696[#"maxs"];
+  level.mapbounds.center = var_7465f696[#"center"];
+  level.mapcenter = var_7465f696[#"center"];
   setmapcenter(level.mapcenter);
 }
 

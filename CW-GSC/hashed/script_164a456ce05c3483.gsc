@@ -60,7 +60,7 @@ function function_c17e1c0e() {
       }
     }
 
-    self.pers[# "characterindex"] = self.doa.characterindex;
+    self.pers[#"characterindex"] = self.doa.characterindex;
     self player_role::set(self.doa.characterindex);
 
     if(isbot(self)) {
@@ -125,7 +125,7 @@ function function_5b373dae() {
   }
 
   outcome = is_true(self.doa.var_5598fe58) ? # "win" : # "loss";
-  self.pers[# "outcome"] = outcome;
+  self.pers[#"outcome"] = outcome;
 }
 
 function function_c5f9ea85() {
@@ -1747,7 +1747,7 @@ function function_8fef418b() {
       }
     }
 
-    ground_pos = groundtrace(origin + (0, 0, 8), origin + (0, 0, -100000), 0, self)[# "position"];
+    ground_pos = groundtrace(origin + (0, 0, 8), origin + (0, 0, -100000), 0, self)[#"position"];
 
     if(!isDefined(ground_pos)) {
       return;

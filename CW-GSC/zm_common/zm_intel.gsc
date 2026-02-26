@@ -156,16 +156,16 @@ function private on_connect() {
     self.var_e2d764da = 0;
   }
 
-  if(!isDefined(self.var_b21b857[# "requiem"])) {
-    self.var_b21b857[# "requiem"] = 0;
+  if(!isDefined(self.var_b21b857[#"requiem"])) {
+    self.var_b21b857[#"requiem"] = 0;
   }
 
-  if(!isDefined(self.var_b21b857[# "maxis"])) {
-    self.var_b21b857[# "maxis"] = 0;
+  if(!isDefined(self.var_b21b857[#"maxis"])) {
+    self.var_b21b857[#"maxis"] = 0;
   }
 
-  if(!isDefined(self.var_b21b857[# "omega"])) {
-    self.var_b21b857[# "omega"] = 0;
+  if(!isDefined(self.var_b21b857[#"omega"])) {
+    self.var_b21b857[#"omega"] = 0;
   }
 }
 
@@ -1394,7 +1394,7 @@ function private function_44fcc093(v_pos) {
     if(ispointonnavmesh(v_pos, 15)) {
       var_b65c6fdd = function_9cc082d2(v_pos, 128);
 
-      if(isDefined(var_b65c6fdd[# "point"]) && namespace_d0ab5955::function_3824d2dc(var_b65c6fdd[# "point"]) && function_39c955d5(var_b65c6fdd[# "point"])) {
+      if(isDefined(var_b65c6fdd[#"point"]) && namespace_d0ab5955::function_3824d2dc(var_b65c6fdd[#"point"]) && function_39c955d5(var_b65c6fdd[#"point"])) {
         return true;
       }
     }
@@ -1409,7 +1409,7 @@ function private function_39c955d5(var_ab528fee) {
   v_trace_start = var_ab528fee + (0, 0, 70);
   trace = physicstraceex(v_trace_start, var_ab528fee);
 
-  if(trace[# "fraction"] < 0.99) {
+  if(trace[#"fraction"] < 0.99) {
     return false;
   }
 

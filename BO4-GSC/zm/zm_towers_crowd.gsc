@@ -33,8 +33,8 @@ init() {
   level.var_cbb3dff5 = spawnStruct();
   level.var_cbb3dff5.a_players = [];
   level flag::init("any_round_has_started");
-  level._effect[# "hash_7bd75ae600e0a590"] = "maps/zm_towers/fx8_crowd_reward_flower_exp";
-  level._effect[# "hash_4c4f96aa02c32a2a"] = "maps/zm_towers/fx8_crowd_reward_flower_trail";
+  level._effect[#"hash_7bd75ae600e0a590"] = "maps/zm_towers/fx8_crowd_reward_flower_exp";
+  level._effect[#"hash_4c4f96aa02c32a2a"] = "maps/zm_towers/fx8_crowd_reward_flower_trail";
   level thread function_8e83be5d();
   callback::on_connect(&function_74fc278);
   callback::on_actor_killed(&function_2d074f7d);
@@ -632,7 +632,7 @@ crowd_throw_item(var_2bd26cff) {
 
       if(isDefined(e_powerup)) {
         if(str_powerup === "dung") {
-          e_powerup moveto(groundtrace(e_powerup.origin + (0, 0, 8), e_powerup.origin + (0, 0, -100000), 0, e_powerup)[# "position"] + (0, 0, 0), 0.25);
+          e_powerup moveto(groundtrace(e_powerup.origin + (0, 0, 8), e_powerup.origin + (0, 0, -100000), 0, e_powerup)[#"position"] + (0, 0, 0), 0.25);
           e_powerup setscale(3);
           e_powerup playLoopSound("zmb_dung_lp");
         }

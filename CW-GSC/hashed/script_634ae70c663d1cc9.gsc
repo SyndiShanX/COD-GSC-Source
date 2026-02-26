@@ -35,24 +35,24 @@
 
 function init() {
   level.doa.var_90dc2431 = [];
-  level.doa.var_90dc2431[# "hash_1febea34ca0f1f7b"] = [];
-  level.doa.var_90dc2431[# "pole_active"] = [];
-  level.doa.var_90dc2431[# "hash_3219530007dfba14"] = [];
-  level.doa.var_90dc2431[# "hash_521b73633b084f93"] = [];
-  level.doa.var_90dc2431[# "hash_2dbc8a7e6dcda43a"] = [];
-  level.doa.var_90dc2431[# "hash_4beb1c2307658a11"] = [];
-  level.doa.var_90dc2431[# "hash_4b482415d7c17889"] = [];
-  level.doa.var_90dc2431[# "hash_e5ec53ae5bb293c"] = [];
-  level.doa.var_90dc2431[# "hash_6ce506892f031410"] = [];
-  level.doa.var_90dc2431[# "hash_3392f8c24dcea4ef"] = [];
-  level.doa.var_90dc2431[# "hash_1761c31f44e7b8d0"] = [];
-  level.doa.var_90dc2431[# "hash_4f7fa3734b952caf"] = [];
-  level.doa.var_90dc2431[# "hash_becfd114c1ec38e"] = [];
-  level.doa.var_90dc2431[# "hash_2442260ffeb5bf65"] = [];
-  level.doa.var_90dc2431[# "hash_72917f3d48e23fdb"] = [];
-  level.doa.var_90dc2431[# "hash_57d182822c6b17c6"] = [];
-  level.doa.var_90dc2431[# "hash_4191d615ef0d015f"] = [];
-  level.doa.var_90dc2431[# "hash_21763febab4e12ca"] = [];
+  level.doa.var_90dc2431[#"hash_1febea34ca0f1f7b"] = [];
+  level.doa.var_90dc2431[#"pole_active"] = [];
+  level.doa.var_90dc2431[#"hash_3219530007dfba14"] = [];
+  level.doa.var_90dc2431[#"hash_521b73633b084f93"] = [];
+  level.doa.var_90dc2431[#"hash_2dbc8a7e6dcda43a"] = [];
+  level.doa.var_90dc2431[#"hash_4beb1c2307658a11"] = [];
+  level.doa.var_90dc2431[#"hash_4b482415d7c17889"] = [];
+  level.doa.var_90dc2431[#"hash_e5ec53ae5bb293c"] = [];
+  level.doa.var_90dc2431[#"hash_6ce506892f031410"] = [];
+  level.doa.var_90dc2431[#"hash_3392f8c24dcea4ef"] = [];
+  level.doa.var_90dc2431[#"hash_1761c31f44e7b8d0"] = [];
+  level.doa.var_90dc2431[#"hash_4f7fa3734b952caf"] = [];
+  level.doa.var_90dc2431[#"hash_becfd114c1ec38e"] = [];
+  level.doa.var_90dc2431[#"hash_2442260ffeb5bf65"] = [];
+  level.doa.var_90dc2431[#"hash_72917f3d48e23fdb"] = [];
+  level.doa.var_90dc2431[#"hash_57d182822c6b17c6"] = [];
+  level.doa.var_90dc2431[#"hash_4191d615ef0d015f"] = [];
+  level.doa.var_90dc2431[#"hash_21763febab4e12ca"] = [];
 
   for(i = 0; i < 16; i++) {
     function_3111b4b2("pole", "trigger_radius", 35, 64);
@@ -106,56 +106,56 @@ function init() {
 
 function main() {
   for(i = 0; i < 16; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "pole_active"][i])) {
-      level.doa.var_90dc2431[# "pole_active"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"pole_active"][i])) {
+      level.doa.var_90dc2431[#"pole_active"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 16; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_521b73633b084f93"][i])) {
-      level.doa.var_90dc2431[# "hash_521b73633b084f93"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_521b73633b084f93"][i])) {
+      level.doa.var_90dc2431[#"hash_521b73633b084f93"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 16; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_e5ec53ae5bb293c"][i])) {
-      level.doa.var_90dc2431[# "hash_e5ec53ae5bb293c"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_e5ec53ae5bb293c"][i])) {
+      level.doa.var_90dc2431[#"hash_e5ec53ae5bb293c"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 8; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_3392f8c24dcea4ef"][i])) {
-      level.doa.var_90dc2431[# "hash_3392f8c24dcea4ef"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_3392f8c24dcea4ef"][i])) {
+      level.doa.var_90dc2431[#"hash_3392f8c24dcea4ef"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 8; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_4f7fa3734b952caf"][i])) {
-      level.doa.var_90dc2431[# "hash_4f7fa3734b952caf"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_4f7fa3734b952caf"][i])) {
+      level.doa.var_90dc2431[#"hash_4f7fa3734b952caf"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 4; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_2442260ffeb5bf65"][i])) {
-      level.doa.var_90dc2431[# "hash_2442260ffeb5bf65"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_2442260ffeb5bf65"][i])) {
+      level.doa.var_90dc2431[#"hash_2442260ffeb5bf65"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 4; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_57d182822c6b17c6"][i])) {
-      level.doa.var_90dc2431[# "hash_57d182822c6b17c6"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_57d182822c6b17c6"][i])) {
+      level.doa.var_90dc2431[#"hash_57d182822c6b17c6"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 4; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_4beb1c2307658a11"][i])) {
-      level.doa.var_90dc2431[# "hash_4beb1c2307658a11"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_4beb1c2307658a11"][i])) {
+      level.doa.var_90dc2431[#"hash_4beb1c2307658a11"][i] function_54f185a();
     }
   }
 
   for(i = 0; i < 8; i++) {
-    if(isDefined(level.doa.var_90dc2431[# "hash_21763febab4e12ca"][i])) {
-      level.doa.var_90dc2431[# "hash_21763febab4e12ca"][i] function_54f185a();
+    if(isDefined(level.doa.var_90dc2431[#"hash_21763febab4e12ca"][i])) {
+      level.doa.var_90dc2431[#"hash_21763febab4e12ca"][i] function_54f185a();
     }
   }
 

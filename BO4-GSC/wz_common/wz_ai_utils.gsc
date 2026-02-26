@@ -97,8 +97,8 @@ function_b4f41a02() {
         eye = player getEye();
         direction_vec = (direction_vec[0] * 8000, direction_vec[1] * 8000, direction_vec[2] * 8000);
         trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
-        ai = spawnactor(cmd_tokens[1], trace[# "position"], (0, 0, 0), undefined, 1);
-        closest_zone = arraygetclosest(trace[# "position"], level.var_5b357434);
+        ai = spawnactor(cmd_tokens[1], trace[#"position"], (0, 0, 0), undefined, 1);
+        closest_zone = arraygetclosest(trace[#"position"], level.var_5b357434);
         ai thread function_7adc1e46(closest_zone, 0);
         break;
     }
@@ -748,8 +748,8 @@ function_e1cd5954(v_origin, min_radius, max_radius) {
 
   trace = bulletTrace(var_9bd6c1ae + (0, 0, 40), var_9bd6c1ae + (0, 0, -150), 0, undefined);
 
-  if(trace[# "fraction"] < 1) {
-    var_9bd6c1ae = trace[# "position"];
+  if(trace[#"fraction"] < 1) {
+    var_9bd6c1ae = trace[#"position"];
   }
 
   return var_9bd6c1ae + (0, 0, 3);
@@ -1123,7 +1123,7 @@ function_bdb2b85b(entity, origin, angles, radius, num_spots, var_7a2632b5) {
     }
 
     var_e07c7e8 = physicstrace(pos + (0, 0, 10), pos + (0, 0, -10), mins, maxs, self, 1);
-    var_c060661b = var_e07c7e8[# "position"];
+    var_c060661b = var_e07c7e8[#"position"];
     var_3e98a413 = getclosestpointonnavmesh(var_c060661b, 64, 15);
 
     if(isDefined(var_3e98a413)) {

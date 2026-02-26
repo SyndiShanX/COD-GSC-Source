@@ -36,33 +36,33 @@ function init() {
 }
 
 function precache() {
-  level._effect[# "fx9_mech_wpn_flamethrower"] = "zm_ai/fx9_mech_wpn_flamethrower";
-  level._effect[# "fx9_mech_dmg_armor_face"] = "zm_ai/fx9_mech_dmg_armor_face";
-  level._effect[# "fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
-  level._effect[# "fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
-  level._effect[# "fx9_mech_wpn_mltv_muz"] = "zm_ai/fx9_mech_wpn_mltv_muz";
-  level._effect[# "fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
-  level._effect[# "fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
-  level._effect[# "fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
-  level._effect[# "fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
-  level._effect[# "fx9_mech_head_light"] = "zm_ai/fx9_mech_head_light";
-  level._effect[# "fx9_mech_dmg_sparks"] = "zm_ai/fx9_mech_dmg_sparks";
-  level._effect[# "fx9_mech_dmg_knee_sparks"] = "zm_ai/fx9_mech_dmg_knee_sparks";
-  level._effect[# "fx9_mech_dmg_sparks"] = "zm_ai/fx9_mech_dmg_sparks";
-  level._effect[# "fx9_mech_foot_step"] = "zm_ai/fx9_mech_foot_step";
-  level._effect[# "fx9_mech_light_dmg"] = "zm_ai/fx9_mech_light_dmg";
-  level._effect[# "fx9_mech_foot_step_steam"] = "zm_ai/fx9_mech_foot_step_steam";
-  level._effect[# "fx9_mech_dmg_body_light"] = "zm_ai/fx9_mech_dmg_body_light";
-  level._effect[# "fx9_mech_jetpack_dest"] = "zm_ai/fx9_mech_jetpack_dest";
-  level._effect[# "fx9_mech_power_core_exposed_destroy"] = "zm_ai/fx9_mech_power_core_exposed_destroy";
-  level._effect[# "fx9_mech_power_core_exposed"] = "zm_ai/fx9_mech_power_core_exposed";
+  level._effect[#"fx9_mech_wpn_flamethrower"] = "zm_ai/fx9_mech_wpn_flamethrower";
+  level._effect[#"fx9_mech_dmg_armor_face"] = "zm_ai/fx9_mech_dmg_armor_face";
+  level._effect[#"fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
+  level._effect[#"fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
+  level._effect[#"fx9_mech_wpn_mltv_muz"] = "zm_ai/fx9_mech_wpn_mltv_muz";
+  level._effect[#"fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
+  level._effect[#"fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
+  level._effect[#"fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
+  level._effect[#"fx9_mech_dmg_armor"] = "zm_ai/fx9_mech_dmg_armor";
+  level._effect[#"fx9_mech_head_light"] = "zm_ai/fx9_mech_head_light";
+  level._effect[#"fx9_mech_dmg_sparks"] = "zm_ai/fx9_mech_dmg_sparks";
+  level._effect[#"fx9_mech_dmg_knee_sparks"] = "zm_ai/fx9_mech_dmg_knee_sparks";
+  level._effect[#"fx9_mech_dmg_sparks"] = "zm_ai/fx9_mech_dmg_sparks";
+  level._effect[#"fx9_mech_foot_step"] = "zm_ai/fx9_mech_foot_step";
+  level._effect[#"fx9_mech_light_dmg"] = "zm_ai/fx9_mech_light_dmg";
+  level._effect[#"fx9_mech_foot_step_steam"] = "zm_ai/fx9_mech_foot_step_steam";
+  level._effect[#"fx9_mech_dmg_body_light"] = "zm_ai/fx9_mech_dmg_body_light";
+  level._effect[#"fx9_mech_jetpack_dest"] = "zm_ai/fx9_mech_jetpack_dest";
+  level._effect[#"fx9_mech_power_core_exposed_destroy"] = "zm_ai/fx9_mech_power_core_exposed_destroy";
+  level._effect[#"fx9_mech_power_core_exposed"] = "zm_ai/fx9_mech_power_core_exposed";
 }
 
 #namespace namespace_e0c51a8c;
 
 function private function_b8b1efcd(localclientnum) {
   level._footstepcbfuncs[self.archetype] = &function_e7aefb0;
-  self.var_a0bf769b = util::playFXOnTag(localclientnum, level._effect[# "fx9_mech_head_light"], self, "tag_headlamp_FX");
+  self.var_a0bf769b = util::playFXOnTag(localclientnum, level._effect[#"fx9_mech_head_light"], self, "tag_headlamp_FX");
   self.var_44ac8cdd = 1;
   fxclientutils::playfxbundle(localclientnum, self, self.fxdef);
 }
@@ -96,7 +96,7 @@ function function_e7aefb0(localclientnum, pos, surface, notetrack, bone) {
     e_player playrumbleonentity(surface, "mechz_footstep_light");
   }
 
-  fx = util::playFXOnTag(surface, level._effect[# "fx9_mech_foot_step"], self, bone);
+  fx = util::playFXOnTag(surface, level._effect[#"fx9_mech_foot_step"], self, bone);
 
   if(bone == "j_ball_le") {
     var_cdc96555 = "tag_foot_steam_le";
@@ -104,7 +104,7 @@ function function_e7aefb0(localclientnum, pos, surface, notetrack, bone) {
     var_cdc96555 = "tag_foot_steam_ri";
   }
 
-  var_c04ea775 = util::playFXOnTag(surface, level._effect[# "fx9_mech_foot_step_steam"], self, var_cdc96555);
+  var_c04ea775 = util::playFXOnTag(surface, level._effect[#"fx9_mech_foot_step_steam"], self, var_cdc96555);
 }
 
 function private function_3fb58860(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -128,15 +128,15 @@ function private function_3fb58860(localclientnum, oldvalue, newvalue, bnewent, 
 }
 
 function function_e7cbec57(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(wasdemojump, level._effect[# "fx9_mech_dmg_armor_face"], self, "j_spine4");
+  util::playFXOnTag(wasdemojump, level._effect[#"fx9_mech_dmg_armor_face"], self, "j_spine4");
   self playSound(0, "zmb_ai_mechz_faceplate");
 }
 
 function function_e364c573(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(wasdemojump, level._effect[# "fx9_mech_dmg_armor"], self, "tag_powersupply");
+  util::playFXOnTag(wasdemojump, level._effect[#"fx9_mech_dmg_armor"], self, "tag_powersupply");
   self playSound(0, "zmb_ai_mechz_destruction");
-  self.var_34528362 = util::playFXOnTag(wasdemojump, level._effect[# "fx9_mech_dmg_body_light"], self, "tag_powersupply");
-  self.var_7280af02 = util::playFXOnTag(wasdemojump, level._effect[# "fx9_mech_power_core_exposed"], self, "j_spine4");
+  self.var_34528362 = util::playFXOnTag(wasdemojump, level._effect[#"fx9_mech_dmg_body_light"], self, "tag_powersupply");
+  self.var_7280af02 = util::playFXOnTag(wasdemojump, level._effect[#"fx9_mech_power_core_exposed"], self, "j_spine4");
 }
 
 function function_fbdc5222(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
@@ -145,9 +145,9 @@ function function_fbdc5222(localclientnum, oldvalue, newvalue, bnewent, binitial
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "fx9_mech_dmg_armor"], self, "tag_gun_spin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx9_mech_dmg_armor"], self, "tag_gun_spin");
   self playSound(0, "zmb_ai_mechz_destruction");
-  util::playFXOnTag(localclientnum, level._effect[# "fx9_mech_dmg_sparks"], self, "tag_gun_spin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx9_mech_dmg_sparks"], self, "tag_gun_spin");
 
   if(isDefined(self.var_34528362)) {
     stopfx(localclientnum, self.var_34528362);
@@ -157,15 +157,15 @@ function function_fbdc5222(localclientnum, oldvalue, newvalue, bnewent, binitial
     stopfx(localclientnum, self.var_7280af02);
   }
 
-  util::playFXOnTag(localclientnum, level._effect[# "fx9_mech_power_core_exposed_destroy"], self, "j_spine4");
+  util::playFXOnTag(localclientnum, level._effect[#"fx9_mech_power_core_exposed_destroy"], self, "j_spine4");
 }
 
 function function_b17ecff3(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(wasdemojump, level._effect[# "fx9_mech_wpn_mltv_muz"], self, "tag_gun_barrel2");
+  util::playFXOnTag(wasdemojump, level._effect[#"fx9_mech_wpn_mltv_muz"], self, "tag_gun_barrel2");
 }
 
 function mechz_jetpack_explosion(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
-  util::playFXOnTag(wasdemojump, level._effect[# "fx9_mech_jetpack_dest"], self, "j_spine4");
+  util::playFXOnTag(wasdemojump, level._effect[#"fx9_mech_jetpack_dest"], self, "j_spine4");
   self playSound(0, "zmb_ai_mechz_destroy_jetpack");
 }
 
@@ -175,7 +175,7 @@ function mechz_headlamp_off(localclientnum, oldvalue, newvalue, bnewent, binitia
     self.var_44ac8cdd = 0;
 
     if(wasdemojump == 2) {
-      util::playFXOnTag(fieldname, level._effect[# "fx9_mech_foot_step"], self, "tag_headlamp_fx");
+      util::playFXOnTag(fieldname, level._effect[#"fx9_mech_foot_step"], self, "tag_headlamp_fx");
     }
   }
 }

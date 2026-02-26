@@ -168,7 +168,7 @@ spawn_trace() {
   var_f45df727 = eyepos + forward * 200;
   traceresults = {};
   traceresults.trace = bulletTrace(eyepos, var_f45df727, 1, self, 1, 1);
-  traceresults.isvalid = traceresults.trace[# "fraction"] >= 1;
+  traceresults.isvalid = traceresults.trace[#"fraction"] >= 1;
   traceresults.waterdepth = 0;
   traceresults.origin = endpos;
   traceresults.angles = eyeangle;
@@ -182,14 +182,14 @@ function_f35d7cf3(playereyepos, vehicle) {
   endpos = vehicle.origin;
   trace = bulletTrace(eyepos, endpos, 1, self, 1, 1);
 
-  if(trace[# "fraction"] < 1) {
+  if(trace[#"fraction"] < 1) {
     return false;
   }
 
   mins = (vehicle.radius * -1, vehicle.radius * -1, vehicle.radius * -1);
   maxs = (vehicle.radius, vehicle.radius, vehicle.radius);
   trace = physicstraceex(eyepos, endpos, mins, maxs, self, 1);
-  return trace[# "fraction"] >= 1;
+  return trace[#"fraction"] >= 1;
 }
 
 on_vehicle_damage(params) {
@@ -361,7 +361,7 @@ function_3a595d3c() {
   results = bulletTrace(camera_pos, camera_pos + dir * 96, 1, self, 1, 1);
 
   if(isDefined(results)) {
-    if(isDefined(results[# "fraction"]) && results[# "fraction"] > 0.99) {
+    if(isDefined(results[#"fraction"]) && results[#"fraction"] > 0.99) {
       return true;
     }
   }
@@ -486,7 +486,7 @@ function_ea9fe221(dart, collision) {
       forward = anglesToForward(dart.angles);
       moveamount = vectorscale(forward, 300 * -1);
       trace = physicstrace(dart.origin, dart.origin + moveamount, (4 * -1, 4 * -1, 4 * -1), (4, 4, 4), undefined, 1);
-      cam = spawn("script_model", trace[# "position"]);
+      cam = spawn("script_model", trace[#"position"]);
       cam setModel(#"tag_origin");
       cam linkto(dart);
       cam util::deleteaftertime(5);

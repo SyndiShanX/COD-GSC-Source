@@ -20,7 +20,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_mod_deadshot_perk_for_level();
-  level._effect[# "hash_950ebbfb250b43e"] = # "hash_1695e8ac20dd5629";
+  level._effect[#"hash_950ebbfb250b43e"] = # "hash_1695e8ac20dd5629";
 }
 
 enable_mod_deadshot_perk_for_level() {
@@ -69,7 +69,7 @@ reset_counter() {
 
 function_36228265(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(isDefined(attacker.var_957a1762) && attacker.var_957a1762 >= 5 && attacker zm_weapons::function_f5a0899d(weapon)) {
-    playFX(level._effect[# "hash_950ebbfb250b43e"], vpoint);
+    playFX(level._effect[#"hash_950ebbfb250b43e"], vpoint);
     var_e99e314 = int(damage * 1.25);
 
     if(var_e99e314 >= self.health) {

@@ -165,8 +165,8 @@ function private function_96ef8382() {
       foreach(node in var_d6702980) {
         dropped = function_9cc082d2(node.origin, 100);
 
-        if(isDefined(dropped[# "point"])) {
-          node.origin = dropped[# "point"];
+        if(isDefined(dropped[#"point"])) {
+          node.origin = dropped[#"point"];
         }
 
         node.origin = getclosestpointonnavmesh(node.origin, 200, 50);
@@ -929,17 +929,17 @@ function zombieupdategoal(goalpos) {
         point = var_188c33e9[point_i];
         var_b3e12265 = function_9cc082d2(point, var_f7a5acc7);
 
-        if(isDefined(var_b3e12265[# "point"])) {
-          if(ispointonnavmesh(var_b3e12265[# "point"], self)) {
+        if(isDefined(var_b3e12265[#"point"])) {
+          if(ispointonnavmesh(var_b3e12265[#"point"], self)) {
             if(getdvarint(#"hash_8379681233f9701", 0) > 0) {
-              recordline(point, var_b3e12265[# "point"], (1, 0, 1));
+              recordline(point, var_b3e12265[#"point"], (1, 0, 1));
             }
 
-            z_dist = abs(var_b3e12265[# "point"][2] - point[2]);
+            z_dist = abs(var_b3e12265[#"point"][2] - point[2]);
 
             if(!isDefined(var_a2dcc3fb) || var_a2dcc3fb > z_dist) {
               var_a2dcc3fb = z_dist;
-              best_point = var_b3e12265[# "point"];
+              best_point = var_b3e12265[#"point"];
             }
 
             var_dd9d0d3b++;

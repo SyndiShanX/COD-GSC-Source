@@ -83,8 +83,8 @@ function private function_bebe535() {
     }
   }
 
-  if(isDefined(level.var_2e96a450[# "paint_can_items"])) {
-    var_9243cc66 -= level.var_2e96a450[# "paint_can_items"];
+  if(isDefined(level.var_2e96a450[#"paint_can_items"])) {
+    var_9243cc66 -= level.var_2e96a450[#"paint_can_items"];
   }
 
   println("<dev string:xe4>" + n_total);
@@ -797,8 +797,8 @@ function private function_cdd9b388() {
       }
 
       tab = "<dev string:x50>";
-      level.var_f0d0335b settext("<dev string:x749>" + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0) + "<dev string:x71>" + int((isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0) / int(max(level.var_136445c0, 1) + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0)) * 100) + "<dev string:x77>");
-      level.var_7f7d26cc settext("<dev string:x75b>" + level.var_136445c0 + (isDefined(level.var_d80c35aa[# "blank"]) ? level.var_d80c35aa[# "blank"] : 0));
+      level.var_f0d0335b settext("<dev string:x749>" + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0) + "<dev string:x71>" + int((isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0) / int(max(level.var_136445c0, 1) + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0)) * 100) + "<dev string:x77>");
+      level.var_7f7d26cc settext("<dev string:x75b>" + level.var_136445c0 + (isDefined(level.var_d80c35aa[#"blank"]) ? level.var_d80c35aa[#"blank"] : 0));
       level.var_6deb23ed settext("<dev string:x770>" + level.var_66e56764 + tab + tab + "<dev string:x81>" + level.var_136445c0 + tab + tab + "<dev string:x93>" + level.var_5720c09a + tab + tab + "<dev string:x782>" + level.var_2850ef5);
       level.var_5c6c77b3 settext(function_11421106("<dev string:x79b>", "<dev string:x440>"));
       level.var_5471e557 settext(function_11421106("<dev string:x7a5>", "<dev string:x317>"));
@@ -1729,12 +1729,12 @@ function function_9cc59537() {
 
                 a_trace = bulletTrace(point.origin + (0, 0, 12), v_test, 0, level.players[0]);
 
-                if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 20 && !isDefined(a_trace[# "dynent"]) || point.angles[0] > 30 || point.angles[0] < -30 || point.angles[2] < -30 || point.angles[2] > 30) {
+                if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 20 && !isDefined(a_trace[#"dynent"]) || point.angles[0] > 30 || point.angles[0] < -30 || point.angles[2] < -30 || point.angles[2] > 30) {
                   v_color = (1, 0, 0);
                   b_failed = 1;
 
                   if(var_4b82457c < 256) {
-                    debugstar(a_trace[# "position"], 8, v_color);
+                    debugstar(a_trace[#"position"], 8, v_color);
                   }
                 }
               }
@@ -1744,12 +1744,12 @@ function function_9cc59537() {
               foreach(v_test in var_7cb887a8) {
                 a_trace = bulletTrace(up, v_test, 0, level.players[0]);
 
-                if(distancesquared(a_trace[# "position"], up) < var_47748885 * var_47748885 - 6 && !isDefined(a_trace[# "dynent"])) {
+                if(distancesquared(a_trace[#"position"], up) < var_47748885 * var_47748885 - 6 && !isDefined(a_trace[#"dynent"])) {
                   v_color = (1, 0, 0);
                   b_failed = 1;
 
                   if(var_4b82457c < 256) {
-                    debugstar(a_trace[# "position"], 8, v_color);
+                    debugstar(a_trace[#"position"], 8, v_color);
                   }
                 }
               }

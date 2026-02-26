@@ -354,7 +354,7 @@ function_7e94450c() {
   e_brick clientfield::set("" + # "hash_23ba81a7c071845d", 0);
   t_damage delete();
   self notify(#"hash_6858bc0ef6a5b4b1", {
-    #e_player: e_player, #var_2db8b01a: e_brick.scene_ents[# "prop 1"]
+    #e_player: e_player, #var_2db8b01a: e_brick.scene_ents[#"prop 1"]
   });
 }
 
@@ -1312,27 +1312,27 @@ function_6e84f472() {
 }
 
 function_a7e94e36(a_ents) {
-  if(!isDefined(a_ents[# "prop 1"])) {
+  if(!isDefined(a_ents[#"prop 1"])) {
     return;
   }
 
   if(self.targetname === # "mdl_ww_uncharged_hand_air") {
-    a_ents[# "prop 1"] clientfield::set(level.var_d225ea18[# "air"].var_ea3032ca, 1);
+    a_ents[#"prop 1"] clientfield::set(level.var_d225ea18[#"air"].var_ea3032ca, 1);
     return;
   }
 
   if(self.targetname === # "mdl_ww_uncharged_hand_death") {
-    a_ents[# "prop 1"] clientfield::set(level.var_d225ea18[# "death"].var_ea3032ca, 1);
+    a_ents[#"prop 1"] clientfield::set(level.var_d225ea18[#"death"].var_ea3032ca, 1);
     return;
   }
 
   if(self.targetname === # "mdl_ww_uncharged_hand_light") {
-    a_ents[# "prop 1"] clientfield::set(level.var_d225ea18[# "light"].var_ea3032ca, 1);
+    a_ents[#"prop 1"] clientfield::set(level.var_d225ea18[#"light"].var_ea3032ca, 1);
     return;
   }
 
   if(self.targetname === # "mdl_ww_uncharged_hand_earth") {
-    a_ents[# "prop 1"] clientfield::set(level.var_d225ea18[# "earth"].var_ea3032ca, 1);
+    a_ents[#"prop 1"] clientfield::set(level.var_d225ea18[#"earth"].var_ea3032ca, 1);
   }
 }
 
@@ -1831,7 +1831,7 @@ function_3c79dc29(e_player) {
 }
 
 function_425a6ec6() {
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
 
   if(isDefined(s_quest.var_b0338f1d)) {
     s_quest.var_b0338f1d delete();
@@ -1910,7 +1910,7 @@ function_e9127e33() {
 }
 
 function_e6e126b4(e_target, w_weapon) {
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
   s_quest endon(#"river_styx_filled");
   vol_river = getent("vol_ww_death_dust_river", "targetname");
 
@@ -1978,7 +1978,7 @@ function_5d783702(n_stop) {
 
 function_adc2d252(e_player) {
   var_b37a7d1e = e_player function_996fee51();
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
 
   if(zm_utility::is_player_valid(e_player, 0, 0) && s_quest flag::get("river_styx_filled") && !e_player flag::get(#"hash_8cdde8e6a8607f1") && var_b37a7d1e === getweapon(#"ww_hand_c_uncharged")) {
     str_prompt = zm_utility::function_d6046228(#"hash_2e883abcdf8bdb77", #"hash_84f311770e142e5");
@@ -2019,7 +2019,7 @@ function_92aa1a80(e_player) {
 
 function_41234931(b_downed = 0) {
   self notify(#"hash_408d46cc81bef3fc");
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
 
   if(isDefined(self.a_b_coins)) {
     for(i = 0; i < 3; i++) {
@@ -2205,7 +2205,7 @@ function_2a290bb7(var_542837e6, v_position, e_player) {
   v_forward = anglesToForward(v_tag_angles);
   v_end = v_tag_origin + v_forward * 5000;
   a_trace = bulletTrace(v_tag_origin, v_end, 1, self);
-  v_end = a_trace[# "position"];
+  v_end = a_trace[#"position"];
   n_dist = distance(e_projectile.origin, v_end);
   n_time = n_dist / 1500;
   e_projectile moveto(v_end, n_time);
@@ -2672,7 +2672,7 @@ spawn_feather(e_player) {
 function_6d466962(var_8290a028, s_original, mdl_feather, e_player = undefined) {
   var_8290a028 endon(#"hash_d7ca523241e8359");
   n_max_height = var_8290a028.origin[2];
-  s_quest = level.var_d225ea18[# "air"];
+  s_quest = level.var_d225ea18[#"air"];
   var_8290a028 thread scene::play(#"p8_fxanim_zm_red_ouranos_feather_01_bundle", "feather01_float", mdl_feather);
   var_40bb500f = struct::get(self.target, "targetname");
   n_dist = distance(var_8290a028.origin, var_40bb500f.origin);
@@ -2815,7 +2815,7 @@ function_759736f(var_8290a028, mdl_feather) {
 function_35c395f1(e_player) {}
 
 function_dd1c5ae6() {
-  level.var_d225ea18[# "earth"].var_8baa00ae = 0;
+  level.var_d225ea18[#"earth"].var_8baa00ae = 0;
   self.mdl_portal = getent("mdl_gaia_portal", "targetname");
   self.mdl_return_portal = getent("mdl_gaia_return_portal", "targetname");
   self.var_285af63c = getent("mdl_gaia_p_portal", "targetname");
@@ -2947,7 +2947,7 @@ function_1775f520() {
 }
 
 function_ab1bce1d(a_ents) {
-  level.var_643e7b15 = a_ents[# "prop 1"];
+  level.var_643e7b15 = a_ents[#"prop 1"];
   level.var_643e7b15 hidepart("sprout_lt_root", "", 1);
   level.var_643e7b15 hidepart("sprout_rt_root", "", 1);
   level.var_643e7b15 hidepart("sprout_mid_root", "", 1);
@@ -2989,7 +2989,7 @@ function_ac211843(b_failed) {
 
 function_41cb93cc(e_player) {
   e_player endon(#"seedling_dropped", #"disconnect");
-  s_quest = level.var_d225ea18[# "earth"];
+  s_quest = level.var_d225ea18[#"earth"];
   e_player.var_7e19c3db = 1;
   e_player disableweaponcycling();
   var_b37a7d1e = e_player function_996fee51();
@@ -3071,7 +3071,7 @@ function_54da9fac() {
 
 function_1c5aedd8(e_player) {
   e_player endon(#"disconnect");
-  s_quest = level.var_d225ea18[# "earth"];
+  s_quest = level.var_d225ea18[#"earth"];
   s_result = e_player waittill(#"seedling_dropped", #"fake_death");
   callback::remove_on_weapon_change(&function_3462981);
   callback::function_824d206(&function_3b0917e6);
@@ -3125,8 +3125,8 @@ function_fd3d477c() {
   a_trace = groundtrace(v_pos, v_pos_end, 0, self, 1);
   n_scale = 1.5;
 
-  if(isDefined(a_trace[# "position"])) {
-    v_spawn_pos = a_trace[# "position"];
+  if(isDefined(a_trace[#"position"])) {
+    v_spawn_pos = a_trace[#"position"];
     v_spawn_pos = (v_spawn_pos[0], v_spawn_pos[1], v_spawn_pos[2] - 4);
     mdl_plant = util::spawn_model("p8_zm_red_gaia_bush_01_sprout_01", v_spawn_pos, (0, 0, 0));
     mdl_plant setscale(n_scale);
@@ -3742,7 +3742,7 @@ function_aeaedb3c() {
   level endon(#"end_game", #"hash_66460bd94d177b8a");
   self endon(#"disconnect");
   a_flags = [];
-  a_flags = array(level.var_d225ea18[# "earth"].var_c2f7f323, level.var_d225ea18[# "death"].var_c2f7f323, level.var_d225ea18[# "light"].var_c2f7f323, level.var_d225ea18[# "air"].var_c2f7f323);
+  a_flags = array(level.var_d225ea18[#"earth"].var_c2f7f323, level.var_d225ea18[#"death"].var_c2f7f323, level.var_d225ea18[#"light"].var_c2f7f323, level.var_d225ea18[#"air"].var_c2f7f323);
   level.var_b40a2558 = 0;
   level.var_50a078bd = 0;
   level.var_626adbe3 = 0;
@@ -3841,7 +3841,7 @@ soul_captured(var_f0e6c7a2, ent) {
       if(level.var_50a078bd >= 10) {
         level.var_b40a2558++;
         zm_sq_modules::function_2a94055d(#"ww_sc_earth");
-        s_quest = level.var_d225ea18[# "earth"];
+        s_quest = level.var_d225ea18[#"earth"];
         var_d02a32e2 = getent(s_quest.var_52584ae6, "targetname");
         var_d02a32e2 clientfield::set("" + # "hash_7f97409952dd051b", 0);
         var_d02a32e2 clientfield::set("" + # "hash_4ff047c7bc266fd7", 1);
@@ -3855,7 +3855,7 @@ soul_captured(var_f0e6c7a2, ent) {
       if(level.var_626adbe3 >= 10) {
         level.var_b40a2558++;
         zm_sq_modules::function_2a94055d(#"ww_sc_death");
-        s_quest = level.var_d225ea18[# "death"];
+        s_quest = level.var_d225ea18[#"death"];
         var_d02a32e2 = getent(s_quest.var_52584ae6, "targetname");
         var_d02a32e2 clientfield::set("" + # "hash_7f97409952dd051b", 0);
         var_d02a32e2 clientfield::set("" + # "hash_4ff047c7bc266fd7", 1);
@@ -3869,7 +3869,7 @@ soul_captured(var_f0e6c7a2, ent) {
       if(level.var_2eadf8bc >= 10) {
         level.var_b40a2558++;
         zm_sq_modules::function_2a94055d(#"ww_sc_light");
-        s_quest = level.var_d225ea18[# "light"];
+        s_quest = level.var_d225ea18[#"light"];
         var_d02a32e2 = getent(s_quest.var_52584ae6, "targetname");
         var_d02a32e2 clientfield::set("" + # "hash_7f97409952dd051b", 0);
         var_d02a32e2 clientfield::set("" + # "hash_4ff047c7bc266fd7", 1);
@@ -3883,7 +3883,7 @@ soul_captured(var_f0e6c7a2, ent) {
       if(level.var_a08be993 >= 10) {
         level.var_b40a2558++;
         zm_sq_modules::function_2a94055d(#"ww_sc_air");
-        s_quest = level.var_d225ea18[# "air"];
+        s_quest = level.var_d225ea18[#"air"];
         var_d02a32e2 = getent(s_quest.var_52584ae6, "targetname");
         var_d02a32e2 clientfield::set("" + # "hash_7f97409952dd051b", 0);
         var_d02a32e2 clientfield::set("" + # "hash_4ff047c7bc266fd7", 1);
@@ -3911,7 +3911,7 @@ function_34e4438c() {
 function_59382270(e_player) {
   w_current = e_player getcurrentweapon();
 
-  if(w_current != level.var_d225ea18[# "earth"].w_charged_hand && w_current != level.var_d225ea18[# "death"].w_charged_hand && w_current != level.var_d225ea18[# "light"].w_charged_hand && w_current != level.var_d225ea18[# "air"].w_charged_hand) {
+  if(w_current != level.var_d225ea18[#"earth"].w_charged_hand && w_current != level.var_d225ea18[#"death"].w_charged_hand && w_current != level.var_d225ea18[#"light"].w_charged_hand && w_current != level.var_d225ea18[#"air"].w_charged_hand) {
     return false;
   }
 
@@ -3921,7 +3921,7 @@ function_59382270(e_player) {
   if(zm_utility::can_use(e_player, 1) && var_5e879929 flag::get("pap_waiting_for_user") && isDefined(level.var_dd4b2858) && !s_pap flag::get(#"hash_485aa689b0560341")) {
     switch (level.var_dd4b2858) {
       case 1:
-        s_quest = level.var_d225ea18[# "earth"];
+        s_quest = level.var_d225ea18[#"earth"];
 
         foreach(e_active_player in util::get_active_players()) {
           if(e_active_player zm_zonemgr::get_player_zone() === s_quest.var_e6a4592d) {
@@ -3933,7 +3933,7 @@ function_59382270(e_player) {
         self sethintstringforplayer(e_player, str_prompt);
         return true;
       case 2:
-        s_quest = level.var_d225ea18[# "air"];
+        s_quest = level.var_d225ea18[#"air"];
 
         foreach(e_active_player in util::get_active_players()) {
           if(e_active_player zm_zonemgr::get_player_zone() === s_quest.var_e6a4592d) {
@@ -3945,7 +3945,7 @@ function_59382270(e_player) {
         self sethintstringforplayer(e_player, str_prompt);
         return true;
       case 3:
-        s_quest = level.var_d225ea18[# "light"];
+        s_quest = level.var_d225ea18[#"light"];
 
         foreach(e_active_player in util::get_active_players()) {
           if(e_active_player zm_zonemgr::get_player_zone() === s_quest.var_e6a4592d) {
@@ -3957,7 +3957,7 @@ function_59382270(e_player) {
         self sethintstringforplayer(e_player, str_prompt);
         return true;
       case 4:
-        s_quest = level.var_d225ea18[# "death"];
+        s_quest = level.var_d225ea18[#"death"];
 
         foreach(e_active_player in util::get_active_players()) {
           if(e_active_player zm_zonemgr::get_player_zone() === s_quest.var_e6a4592d) {
@@ -4024,16 +4024,16 @@ function_d62ba10e() {
 
       switch (level.var_dd4b2858) {
         case 1:
-          s_quest = level.var_d225ea18[# "earth"];
+          s_quest = level.var_d225ea18[#"earth"];
           break;
         case 2:
-          s_quest = level.var_d225ea18[# "air"];
+          s_quest = level.var_d225ea18[#"air"];
           break;
         case 3:
-          s_quest = level.var_d225ea18[# "light"];
+          s_quest = level.var_d225ea18[#"light"];
           break;
         case 4:
-          s_quest = level.var_d225ea18[# "death"];
+          s_quest = level.var_d225ea18[#"death"];
           break;
       }
 
@@ -4545,18 +4545,18 @@ function_a3e12f96() {
     level.var_142dc1b8 = array();
   }
 
-  level.var_142dc1b8[# "ww_hand_h_uncharged"] = 5;
-  level.var_142dc1b8[# "ww_hand_h"] = 5;
-  level.var_142dc1b8[# "ww_hand_h_upgraded"] = 5;
-  level.var_142dc1b8[# "ww_hand_c_uncharged"] = 5;
-  level.var_142dc1b8[# "ww_hand_c"] = 5;
-  level.var_142dc1b8[# "ww_hand_c_upgraded"] = 5;
-  level.var_142dc1b8[# "ww_hand_o_uncharged"] = 5;
-  level.var_142dc1b8[# "ww_hand_o"] = 5;
-  level.var_142dc1b8[# "ww_hand_o_upgraded"] = 5;
-  level.var_142dc1b8[# "ww_hand_g_uncharged"] = 5;
-  level.var_142dc1b8[# "ww_hand_g"] = 5;
-  level.var_142dc1b8[# "ww_hand_g_upgraded"] = 5;
+  level.var_142dc1b8[#"ww_hand_h_uncharged"] = 5;
+  level.var_142dc1b8[#"ww_hand_h"] = 5;
+  level.var_142dc1b8[#"ww_hand_h_upgraded"] = 5;
+  level.var_142dc1b8[#"ww_hand_c_uncharged"] = 5;
+  level.var_142dc1b8[#"ww_hand_c"] = 5;
+  level.var_142dc1b8[#"ww_hand_c_upgraded"] = 5;
+  level.var_142dc1b8[#"ww_hand_o_uncharged"] = 5;
+  level.var_142dc1b8[#"ww_hand_o"] = 5;
+  level.var_142dc1b8[#"ww_hand_o_upgraded"] = 5;
+  level.var_142dc1b8[#"ww_hand_g_uncharged"] = 5;
+  level.var_142dc1b8[#"ww_hand_g"] = 5;
+  level.var_142dc1b8[#"ww_hand_g_upgraded"] = 5;
 }
 
 function_8d47bf8(e_player) {
@@ -4634,7 +4634,7 @@ function_34c06bf9() {
 
 function_f241b684() {
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
   level function_51a8e408(#"death");
   wait 1;
   exploder::exploder("<dev string:x44>");
@@ -4657,7 +4657,7 @@ function_6bf10cf9() {
     #e_who: a_players[0]
   });
   wait 1;
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
 
   if(isDefined(s_quest.var_18fd25ab[0])) {
     s_quest.var_18fd25ab[0] notify(#"trigger_activated", {
@@ -4676,7 +4676,7 @@ function_6bf10cf9() {
 function_11a0f6f8() {
   level function_6bf10cf9();
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "death"];
+  s_quest = level.var_d225ea18[#"death"];
 
   if(isDefined(s_quest.var_18fd25ab)) {
     s_quest.var_18fd25ab[1] notify(#"trigger_activated", {
@@ -4692,7 +4692,7 @@ function_c5d7d69b() {
   level function_51a8e408(#"earth");
   wait 1;
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "earth"];
+  s_quest = level.var_d225ea18[#"earth"];
   s_quest.var_a1327d58 notify(#"trigger_activated", {
     #e_who: a_players[0]
   });
@@ -4705,7 +4705,7 @@ function_681ce100() {
   level function_51a8e408(#"earth");
   wait 1;
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "earth"];
+  s_quest = level.var_d225ea18[#"earth"];
   s_quest.var_a1327d58 notify(#"trigger_activated", {
     #e_who: a_players[0]
   });
@@ -4754,14 +4754,14 @@ function_681ce100() {
 function_9fe8bfeb() {
   level function_681ce100();
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "earth"];
+  s_quest = level.var_d225ea18[#"earth"];
   s_quest.var_8baa00ae = 2;
   a_players[0] notify(#"seedling_dropped", {
     #str_result: "<dev string:x10f>"});
 }
 
 function_dcfed198() {
-  s_quest = level.var_d225ea18[# "light"];
+  s_quest = level.var_d225ea18[#"light"];
   a_players = util::get_active_players();
   s_destination = struct::get("<dev string:x119>", "<dev string:x9b>");
   level function_51a8e408(#"light");
@@ -4809,7 +4809,7 @@ function_ec9bf2a() {
 function_30ecec0c() {
   level function_ec9bf2a();
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "light"];
+  s_quest = level.var_d225ea18[#"light"];
   s_teleport = s_quest.var_ed424981;
 
   if(isDefined(s_teleport)) {
@@ -4830,7 +4830,7 @@ function_30ecec0c() {
 function_a5efeb8d() {
   level function_ec9bf2a();
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "light"];
+  s_quest = level.var_d225ea18[#"light"];
   s_teleport = s_quest.var_ed424981;
 
   if(isDefined(s_teleport)) {
@@ -4859,7 +4859,7 @@ function_4594e669() {
   level function_51a8e408(#"air");
   wait 1;
   a_players = util::get_active_players();
-  s_quest = level.var_d225ea18[# "air"];
+  s_quest = level.var_d225ea18[#"air"];
   s_quest.var_a1327d58 notify(#"trigger_activated", {
     #e_who: a_players[0]
   });
@@ -4877,13 +4877,13 @@ function_4594e669() {
 }
 
 function_b8b8845() {
-  s_quest = level.var_d225ea18[# "air"];
+  s_quest = level.var_d225ea18[#"air"];
   s_quest.var_267d1e6 = 3;
   level thread function_4594e669();
 }
 
 function_318c3039() {
-  s_quest = level.var_d225ea18[# "air"];
+  s_quest = level.var_d225ea18[#"air"];
   level function_51a8e408(#"air");
   wait 0.5;
 
@@ -4917,7 +4917,7 @@ function_37deb555() {
 
 function_d8765f3d() {
   level zm_red::function_71a6c3ea();
-  level notify(level.var_d225ea18[# "earth"].var_c2f7f323);
+  level notify(level.var_d225ea18[#"earth"].var_c2f7f323);
   waitframe(1);
   level.var_29e62693 = 1;
   waitframe(1);
@@ -4950,19 +4950,19 @@ function_c4614158() {
 
   foreach(var_6adc8de1 in var_8e174718) {
     if(var_6adc8de1 == "<dev string:x2d6>") {
-      s_quest = level.var_d225ea18[# "earth"];
+      s_quest = level.var_d225ea18[#"earth"];
     }
 
     if(var_6adc8de1 == "<dev string:x2e0>") {
-      s_quest = level.var_d225ea18[# "death"];
+      s_quest = level.var_d225ea18[#"death"];
     }
 
     if(var_6adc8de1 == "<dev string:x2ea>") {
-      s_quest = level.var_d225ea18[# "light"];
+      s_quest = level.var_d225ea18[#"light"];
     }
 
     if(var_6adc8de1 == "<dev string:x2f4>") {
-      s_quest = level.var_d225ea18[# "air"];
+      s_quest = level.var_d225ea18[#"air"];
     }
 
     s_capture_point = struct::get(var_6adc8de1, "<dev string:xb9>");
@@ -4993,7 +4993,7 @@ function_405e6a83() {
   s_pap_interact = struct::get("<dev string:x2fe>", "<dev string:x9b>");
   level function_c4614158();
   level.var_dd4b2858 = 4;
-  s_quest = level.var_d225ea18[# "earth"];
+  s_quest = level.var_d225ea18[#"earth"];
   s_quest thread function_f53f86f8(level.players[0], s_pap_interact);
   wait 7;
   level.players[0] notify(#"hash_2026d806e71dfad5", {

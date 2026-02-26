@@ -152,7 +152,7 @@ function_8d346fd8(winningteam) {
   players = level.players;
 
   for(i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].pers[# "team"])) {
+    if(!isDefined(players[i].pers[#"team"])) {
       continue;
     }
 
@@ -165,12 +165,12 @@ function_8d346fd8(winningteam) {
       continue;
     }
 
-    if(players[i].pers[# "team"] == winningteam) {
+    if(players[i].pers[#"team"] == winningteam) {
       globallogic_score::updatewinstats(players[i]);
       continue;
     }
 
-    if(level.rankedmatch && !level.leaguematch && players[i].pers[# "latejoin"] === 1) {
+    if(level.rankedmatch && !level.leaguematch && players[i].pers[#"latejoin"] === 1) {
       globallogic_score::updatelosslatejoinstats(players[i]);
     }
 
@@ -198,7 +198,7 @@ onplayerconnect() {
   self.var_fc81f69c = level.inprematchperiod;
 
   if(self.sessionteam != "spectator") {
-    self.pers[# "needteam"] = 1;
+    self.pers[#"needteam"] = 1;
   }
 
   if(self infection::function_687661ea()) {
@@ -275,7 +275,7 @@ onroundswitch() {
 onroundendgame(roundwinner) {
   if(level.scoreroundwinbased) {
     foreach(team in level.teams) {
-      [[level._setteamscore]](team, game.stat[# "roundswon"][team]);
+      [[level._setteamscore]](team, game.stat[#"roundswon"][team]);
     }
   }
 
@@ -283,7 +283,7 @@ onroundendgame(roundwinner) {
 }
 
 function_f86ae9e5() {
-  return self.pers[# "time_played_moving"] > 0;
+  return self.pers[#"time_played_moving"] > 0;
 }
 
 function_24ca3437(team, var_efb758a8, calloutplayer) {
@@ -326,9 +326,9 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
       scoreevents::processscoreevent("infected_infect_3_enemies", attacker, self, weapon);
     }
 
-    if(isDefined(attacker.pers[# "infects"])) {
-      attacker.pers[# "infects"] += 1;
-      attacker.infects = attacker.pers[# "infects"];
+    if(isDefined(attacker.pers[#"infects"])) {
+      attacker.pers[#"infects"] += 1;
+      attacker.infects = attacker.pers[#"infects"];
     }
 
     [[level.var_37d62931]](attacker, 1);
@@ -815,12 +815,12 @@ playerforcespawn() {
     return;
   }
 
-  if(self.pers[# "team"] == "spectator") {
+  if(self.pers[#"team"] == "spectator") {
     return;
   }
 
   self function_219eee6b();
-  self.pers[# "class"] = level.defaultclass;
+  self.pers[#"class"] = level.defaultclass;
   self.curclass = level.defaultclass;
   self globallogic_ui::closemenus();
   self closemenu("ChooseClass_InGame");
@@ -852,14 +852,14 @@ changeteam(team) {
       self.switching_teams = 1;
       self.switchedteamsresetgadgets = 1;
       self.joining_team = team;
-      self.leaving_team = self.pers[# "team"];
+      self.leaving_team = self.pers[#"team"];
     }
 
     self teams::function_dc7eaabd(team);
-    self.pers[# "weapon"] = undefined;
-    self.pers[# "spawnweapon"] = undefined;
-    self.pers[# "savedmodel"] = undefined;
-    self.pers[# "teamtime"] = undefined;
+    self.pers[#"weapon"] = undefined;
+    self.pers[#"spawnweapon"] = undefined;
+    self.pers[#"savedmodel"] = undefined;
+    self.pers[#"teamtime"] = undefined;
   }
 
   self clientfield::set("Infected.player_infected", team === # "axis");
@@ -874,7 +874,7 @@ function_4d9c9e8e(team) {
 
 updateteamscore(team) {
   score = function_4d9c9e8e(team);
-  game.stat[# "teamscores"][team] = score;
+  game.stat[#"teamscores"][team] = score;
   globallogic_score::updateteamscores(team);
 }
 
@@ -954,15 +954,15 @@ gettimelimit(var_abfac690 = 0) {
 function_ef516d85(winner, endtype, endreasontext, outcometext, team, winnerenum, notifyroundendtoui, matchbonus) {
   if(endtype == "roundend") {
     if(winner == "tie") {
-      outcometext = game.strings[# "draw"];
-    } else if(isDefined(self.pers[# "team"]) && winner == team) {
-      outcometext = game.strings[# "victory"];
+      outcometext = game.strings[#"draw"];
+    } else if(isDefined(self.pers[#"team"]) && winner == team) {
+      outcometext = game.strings[#"victory"];
       overridespectator = 1;
     } else {
-      outcometext = game.strings[# "defeat"];
+      outcometext = game.strings[#"defeat"];
 
-      if((level.rankedmatch || level.leaguematch) && self.pers[# "latejoin"] === 1) {
-        endreasontext = game.strings[# "join_in_progress_loss"];
+      if((level.rankedmatch || level.leaguematch) && self.pers[#"latejoin"] === 1) {
+        endreasontext = game.strings[#"join_in_progress_loss"];
       }
 
       overridespectator = 1;
@@ -973,12 +973,12 @@ function_ef516d85(winner, endtype, endreasontext, outcometext, team, winnerenum,
     if(team == "spectator" && overridespectator) {
       foreach(team in level.teams) {
         if(endreasontext == game.strings[team + "_eliminated"]) {
-          endreasontext = game.strings[# "cod_caster_team_eliminated"];
+          endreasontext = game.strings[#"cod_caster_team_eliminated"];
           break;
         }
       }
 
-      outcometext = game.strings[# "cod_caster_team_wins"];
+      outcometext = game.strings[#"cod_caster_team_wins"];
     }
 
     self luinotifyevent(#"show_outcome", 5, outcometext, endreasontext, int(matchbonus), winnerenum, notifyroundendtoui);

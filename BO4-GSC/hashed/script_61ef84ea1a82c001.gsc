@@ -380,7 +380,7 @@ function_45d8a460() {
 
     if(!player hasweapon(getweapon(#"spoon_alcatraz"))) {
       while(!isDefined(player.var_1c4683c4)) {
-        player.var_1c4683c4 = player.slot_weapons[# "melee_weapon"];
+        player.var_1c4683c4 = player.slot_weapons[#"melee_weapon"];
         wait 0.1;
       }
 

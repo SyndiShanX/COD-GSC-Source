@@ -30,7 +30,7 @@ function function_53a680b8(var_deac51dd, var_5301f4f1, var_13c55557, var_4737bdd
   params.var_2b18af9d = 0.76;
   params.var_8dfc1be0 = int(3000);
   params.var_69681160 = getweapon(#"zombie_builder");
-  params.fx_name = level._effect[# "building_dust"];
+  params.fx_name = level._effect[#"building_dust"];
   params.fx_loop = 0.5;
   params.var_deac51dd = var_deac51dd;
   params.var_5301f4f1 = var_5301f4f1;

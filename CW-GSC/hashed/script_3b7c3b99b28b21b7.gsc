@@ -199,11 +199,11 @@ function function_4e2b941a() {
 }
 
 function function_a23963d2(a_ents) {
-  namespace_3aaa42f7::function_d1bc79a0("adler_alley_door", a_ents[# "hash_475ee55621b83ca0"]);
+  namespace_3aaa42f7::function_d1bc79a0("adler_alley_door", a_ents[#"hash_475ee55621b83ca0"]);
 }
 
 function function_ba702467(a_ents) {
-  namespace_3aaa42f7::function_d1bc79a0("adler_roof_door1", a_ents[# "hash_475ee55621b83ca0"]);
+  namespace_3aaa42f7::function_d1bc79a0("adler_roof_door1", a_ents[#"hash_475ee55621b83ca0"]);
 }
 
 function wall_adler() {
@@ -615,7 +615,7 @@ function function_becd1d99(a_ents) {
 
 function function_9862307b(a_ents) {
   if(!isDefined(level.var_fef3d782)) {
-    level.var_fef3d782 = a_ents[# "prop 1"];
+    level.var_fef3d782 = a_ents[#"prop 1"];
     level.var_fef3d782 clientfield::set("rooftop_spotlight", 1);
   }
 }
@@ -677,7 +677,7 @@ function function_13778421(skipto) {
 }
 
 function function_30b688c0(a_ents) {
-  var_cafbbb40 = a_ents[# "prop 1"];
+  var_cafbbb40 = a_ents[#"prop 1"];
   thread namespace_5ceacc03::function_11e5f1bd(var_cafbbb40);
 }
 
@@ -809,7 +809,7 @@ function checkpoint_scene(skipto) {
 }
 
 function function_3f30a6be(a_ents) {
-  level.var_1bacfdea = a_ents[# "hash_6f5c91c5822ca56b"];
+  level.var_1bacfdea = a_ents[#"hash_6f5c91c5822ca56b"];
 }
 
 function identify_kraus(skipto) {
@@ -911,11 +911,11 @@ function function_9c72e558() {
 
 function function_e0855d12(a_ents) {
   if(!isDefined(level.var_74647f74)) {
-    level.var_74647f74 = a_ents[# "hash_5aa24d6a1d003dc2"];
+    level.var_74647f74 = a_ents[#"hash_5aa24d6a1d003dc2"];
   }
 
   if(!isDefined(level.var_c49f9f4d)) {
-    level.var_c49f9f4d = a_ents[# "hash_3b179fbfb1dea828"];
+    level.var_c49f9f4d = a_ents[#"hash_3b179fbfb1dea828"];
     level.var_c49f9f4d attach("aac_kitchen_chair_01", "j_prop_1");
     level.var_c49f9f4d attach("stk_glass_beer_bottle_01_open", "j_prop_2");
   }
@@ -928,7 +928,7 @@ function function_ba06bd3a(a_ents) {
 
   level.var_c0e9c7c4.old_origin = level.var_c0e9c7c4.origin;
   level.var_c0e9c7c4.old_angles = level.var_c0e9c7c4.angles;
-  level.var_c0e9c7c4 linkto(a_ents[# "hash_5aa24d6a1d003dc2"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+  level.var_c0e9c7c4 linkto(a_ents[#"hash_5aa24d6a1d003dc2"], "j_prop_1", (0, 0, 0), (0, 0, 0));
 }
 
 function function_bfd89ef1() {

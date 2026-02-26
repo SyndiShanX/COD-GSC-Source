@@ -1967,7 +1967,7 @@ function private function_9dfd5e88(trace) {
     return false;
   }
 
-  var_d6e7a23f = trace[# "entity"];
+  var_d6e7a23f = trace[#"entity"];
   return isDefined(var_d6e7a23f) && var_d6e7a23f == self.enemy;
 }
 
@@ -1976,7 +1976,7 @@ function private function_e5a76b54(trace, origin) {
     return false;
   }
 
-  distsq = distancesquared(trace[# "position"], origin);
+  distsq = distancesquared(trace[#"position"], origin);
   return distsq <= 100;
 }
 
@@ -1985,7 +1985,7 @@ function private function_e63ee3e8(trace, distance) {
     return false;
   }
 
-  return distance2d(self.origin, trace[# "position"]) >= distance;
+  return distance2d(self.origin, trace[#"position"]) >= distance;
 }
 
 function private function_185a3c39(weapon) {

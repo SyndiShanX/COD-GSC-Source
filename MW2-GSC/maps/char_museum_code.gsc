@@ -424,11 +424,11 @@ do_anim(name) {
 }
 
 //--------------------------------------------------------------------------------------------------- delete_civ_on_goal() {
-  self endon("death");
+self endon("death");
 
-  self waittill("reached_path_end");
+self waittill("reached_path_end");
 
-  self delete();
+self delete();
 }
 
 civ_talkers() {

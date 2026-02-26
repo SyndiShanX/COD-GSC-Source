@@ -986,7 +986,7 @@ trace_test(e_target, v_offset = (0, 0, 0), n_index) {
       v_start_org += vectornormalize(v_target - v_start_org) * 50;
       a_trace = bulletTrace(v_start_org, v_target, 1, s_turret.e_trace_ignore, 0, 1);
 
-      if(a_trace[# "fraction"] > 0.6) {
+      if(a_trace[#"fraction"] > 0.6) {
         return true;
       }
     }

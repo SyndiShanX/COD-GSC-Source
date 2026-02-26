@@ -16,5 +16,5 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "rcbombexplosion"] = # "killstreaks/fx_rcxd_exp";
+  level._effect[#"rcbombexplosion"] = # "killstreaks/fx_rcxd_exp";
 }

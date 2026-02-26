@@ -198,9 +198,9 @@ function private function_bc29dab9(var_2503a21f) {
 
 function scene_amk_3010_arc_enter() {
   assert(isDefined(level.woods));
-  a_scene_ents[# "woods"] = level.woods;
-  a_scene_ents[# "arc_door"] = getent("arc_door", "targetname");
-  e_door = a_scene_ents[# "arc_door"];
+  a_scene_ents[#"woods"] = level.woods;
+  a_scene_ents[#"arc_door"] = getent("arc_door", "targetname");
+  e_door = a_scene_ents[#"arc_door"];
   level thread function_6fe3f44f(e_door);
   level.woods flag::set("flg_pause_photo_react");
   level thread scene::init("scene_amk_3010_arc_enter");
@@ -308,12 +308,12 @@ function scene_amk_6010_tml_computer() {
 
   foreach(door in var_da03c083) {
     if(door.script_noteworthy === "left_door") {
-      a_scene_ents[# "left_door"] = door.c_door.m_e_door;
+      a_scene_ents[#"left_door"] = door.c_door.m_e_door;
       continue;
     }
 
     if(door.script_noteworthy === "right_door") {
-      a_scene_ents[# "right_door"] = door.c_door.m_e_door;
+      a_scene_ents[#"right_door"] = door.c_door.m_e_door;
     }
   }
 

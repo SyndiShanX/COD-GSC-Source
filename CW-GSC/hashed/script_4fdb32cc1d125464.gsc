@@ -83,8 +83,8 @@ function main(var_d3440450, var_50cc0d4f) {
 
   if(!isDefined(level.var_4638dea7)) {
     level.var_4638dea7 = [];
-    level.var_4638dea7[# "hash_673ccd49cfca8feb"] = level.var_bde873f5;
-    level.var_4638dea7[# "hash_5e05ae2085249930"] = level.var_3d559f37;
+    level.var_4638dea7[#"hash_673ccd49cfca8feb"] = level.var_bde873f5;
+    level.var_4638dea7[#"hash_5e05ae2085249930"] = level.var_3d559f37;
   }
 
   level flag::wait_till("aslt_exfil_escape_complete");
@@ -306,8 +306,8 @@ function function_e6fcee54() {
   level.lazar battlechatter::function_2ab9360b(0);
   level.escape_vehicle = getent("escape_vehicle", "targetname");
   level.var_fb380007 = [];
-  level.var_fb380007[# "lazar"] = level.lazar;
-  level.var_fb380007[# "escape_vehicle"] = level.escape_vehicle;
+  level.var_fb380007[#"lazar"] = level.lazar;
+  level.var_fb380007[#"escape_vehicle"] = level.escape_vehicle;
   scene::init("scene_kgb_exfil_drive_in", level.var_fb380007);
   level thread function_f8c9f021();
   msg = level flag::wait_till_any(["escape_vehicle_enter", "exfil_escape_russians_cleared"]);

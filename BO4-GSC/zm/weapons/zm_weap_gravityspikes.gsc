@@ -36,9 +36,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.hero_weapon[# "gravityspikes"][0] = getweapon(#"hero_gravityspikes_t8_lv1");
-  level.hero_weapon[# "gravityspikes"][1] = getweapon(#"hero_gravityspikes_t8_lv2");
-  level.hero_weapon[# "gravityspikes"][2] = getweapon(#"hero_gravityspikes_t8_lv3");
+  level.hero_weapon[#"gravityspikes"][0] = getweapon(#"hero_gravityspikes_t8_lv1");
+  level.hero_weapon[#"gravityspikes"][1] = getweapon(#"hero_gravityspikes_t8_lv2");
+  level.hero_weapon[#"gravityspikes"][2] = getweapon(#"hero_gravityspikes_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_gravityspikes_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_gravityspikes_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_gravityspikes_t8_lv3");
@@ -80,15 +80,15 @@ register_clientfields() {
 }
 
 function_4d17107b(weapon, var_e7c11b0c = 1) {
-  if(weapon == level.hero_weapon[# "gravityspikes"][2]) {
+  if(weapon == level.hero_weapon[#"gravityspikes"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "gravityspikes"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[#"gravityspikes"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[# "gravityspikes"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[#"gravityspikes"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -104,23 +104,23 @@ function_326aec56() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[# "gravityspikes"], wpn_cur)) {
+    if(isinarray(level.hero_weapon[#"gravityspikes"], wpn_cur)) {
       self clientfield::increment_to_player("hero_gravityspikes_vigor_postfx");
       self update_gravityspikes_state(1);
       self.b_gravity_trap_fx_on = 0;
       self.var_de01b5c2 = undefined;
       self thread gravityspikes_stuck_above_zombie_watcher();
-    } else if(isinarray(level.hero_weapon[# "gravityspikes"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[#"gravityspikes"], wpn_prev)) {
       self thread function_e0537f19(wpn_prev);
     }
 
-    if(wpn_cur == level.hero_weapon[# "gravityspikes"][0]) {
+    if(wpn_cur == level.hero_weapon[#"gravityspikes"][0]) {
       zm_hero_weapon::show_hint(wpn_cur, #"hash_2ed06d351658eadf");
       self thread gravityspikes_attack_watcher(wpn_cur, 1);
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "gravityspikes"][1]) {
+    if(wpn_cur == level.hero_weapon[#"gravityspikes"][1]) {
       if(!self gamepadusedlast()) {
         self zm_hero_weapon::show_hint(wpn_cur, #"hash_6b4f0b375a21c020");
       } else {
@@ -133,7 +133,7 @@ function_326aec56() {
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[# "gravityspikes"][2]) {
+    if(wpn_cur == level.hero_weapon[#"gravityspikes"][2]) {
       if(!self gamepadusedlast()) {
         self zm_hero_weapon::show_hint(wpn_cur, #"hash_22403f43ff20f2db");
       } else {
@@ -295,8 +295,8 @@ gravityspikes_stuck_above_zombie_watcher() {
         recordline(start_point, var_a024434f[i], (1, 1, 1), "<dev string:x38>", self);
       }
 
-      if(trace[# "fraction"] < 1) {
-        if(isactor(trace[# "entity"]) && trace[# "entity"].health > 0 && (trace[# "entity"].archetype == # "zombie" || trace[# "entity"].archetype == # "zombie_dog")) {
+      if(trace[#"fraction"] < 1) {
+        if(isactor(trace[#"entity"]) && trace[#"entity"].health > 0 && (trace[#"entity"].archetype == # "zombie" || trace[#"entity"].archetype == # "zombie_dog")) {
           self thread knockdown_zombies_slam();
           self thread no_damage_gravityspikes_slam();
           wait 1;
@@ -677,9 +677,9 @@ plant_gravity_trap(w_gravityspikes) {
   v_spawn_pos_right = self.origin + (0, 0, 32);
   v_spawn_pos_left = v_spawn_pos_right;
   a_trace = physicstraceex(v_spawn_pos_right, v_spawn_pos_right + v_right * 24, (-16, -16, -16), (16, 16, 16), self);
-  v_spawn_pos_right += v_right * a_trace[# "fraction"] * 24;
+  v_spawn_pos_right += v_right * a_trace[#"fraction"] * 24;
   a_trace = physicstraceex(v_spawn_pos_left, v_spawn_pos_left + v_right * -24, (-16, -16, -16), (16, 16, 16), self);
-  v_spawn_pos_left += v_right * a_trace[# "fraction"] * -24;
+  v_spawn_pos_left += v_right * a_trace[#"fraction"] * -24;
   var_f4daeb3f = util::function_97cf7eb0(v_spawn_pos_right, 1000, 24);
   var_d7061a0d = util::function_97cf7eb0(v_spawn_pos_left, 1000, 24);
   a_s_spawn_pos = array(var_f4daeb3f, var_d7061a0d);
@@ -937,7 +937,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
       self thread track_lifted_for_ragdoll_count();
       self.var_42d5176d = 1;
       self val::set(#"trap_ignore", "ignoreall", 1);
-      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[# "position"];
+      v_pos = groundtrace(self.origin + (0, 0, 100), self.origin + (0, 0, -1000), 0, self)[#"position"];
 
       if(!isDefined(v_pos)) {
         v_pos = self.origin;
@@ -1005,11 +1005,11 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
     v_away_from_source *= n_push_away;
     v_away_from_source = (v_away_from_source[0], v_away_from_source[1], n_lift_height);
     a_trace = physicstraceex(v_centroid + (0, 0, 32), v_centroid + v_away_from_source, (-16, -16, -16), (16, 16, 16), self);
-    v_lift = a_trace[# "fraction"] * v_away_from_source;
+    v_lift = a_trace[#"fraction"] * v_away_from_source;
     v_lift += v_lift_offset;
 
     if(!(isDefined(bullettracepassed(v_centroid, v_centroid + v_lift, 0, self)) && bullettracepassed(v_centroid, v_centroid + v_lift, 0, self))) {
-      v_trace_pos = bulletTrace(v_centroid, v_centroid + v_lift, 0, self)[# "position"];
+      v_trace_pos = bulletTrace(v_centroid, v_centroid + v_lift, 0, self)[#"position"];
 
       if(isDefined(v_trace_pos)) {
         v_lift = v_trace_pos + v_lift_offset;

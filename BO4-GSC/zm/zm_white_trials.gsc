@@ -149,7 +149,7 @@ head_hunter() {
 }
 
 function_1bc491ab() {
-  s_spawn_point = array::random(level.zm_loc_types[# "zombie_location"]);
+  s_spawn_point = array::random(level.zm_loc_types[#"zombie_location"]);
   ai = zombie_utility::spawn_zombie(getEntArray("mannequin_zombie_spawner", "script_noteworthy")[0], undefined, s_spawn_point);
 
   if(isDefined(ai)) {

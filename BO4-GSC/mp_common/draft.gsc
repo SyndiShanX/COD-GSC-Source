@@ -197,7 +197,7 @@ can_select_character(characterindex) {
 
     playercharacterindex = player player_role::get();
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == self.pers[# "team"] && playercharacterindex == characterindex) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == self.pers[#"team"] && playercharacterindex == characterindex) {
       rolecount++;
 
       if(rolecount >= maxuniqueroles) {
@@ -407,7 +407,7 @@ draft_run() {
       ready = 1;
 
       foreach(player in level.players) {
-        if(player.pers[# "team"] == # "spectator" || isbot(player)) {
+        if(player.pers[#"team"] == # "spectator" || isbot(player)) {
           continue;
         }
 
@@ -434,7 +434,7 @@ draft_run() {
       var_97286e53 = 1;
 
       foreach(player in level.players) {
-        if(player.pers[# "team"] == # "spectator") {
+        if(player.pers[#"team"] == # "spectator") {
           continue;
         }
 
@@ -532,7 +532,7 @@ assign_remaining_players(only_assign_player) {
   }
 
   foreach(player in level.players) {
-    if(player.pers[# "team"] == # "spectator") {
+    if(player.pers[#"team"] == # "spectator") {
       continue;
     }
 
@@ -657,7 +657,7 @@ assign_remaining_players(only_assign_player) {
       oldspecialistindex = player getspecialistindex();
 
       if(isDefined(oldspecialistindex) && oldspecialistindex != selectedcharacter) {
-        player.pers[# "class"] = undefined;
+        player.pers[#"class"] = undefined;
       }
 
       println("<dev string:x227>" + player.name + "<dev string:x243>" + selectedcharacter);
@@ -679,7 +679,7 @@ game_start() {
 
   if(level.gametype !== "bounty") {
     foreach(player in level.players) {
-      if(player.hasspawned || player.pers[# "team"] == # "spectator") {
+      if(player.hasspawned || player.pers[#"team"] == # "spectator") {
         player globallogic_audio::set_music_on_player("spawnPreRise");
       }
     }
@@ -721,8 +721,8 @@ draft_finalize() {
     if(player.sessionstate == "playing") {
       println("<dev string:x24b>" + player.name + "<dev string:x266>" + player.curclass + "<dev string:x271>" + player getspecialistindex());
       player loadout::give_loadout(player.team, player.curclass);
-      player.pers[# "lastcurclass"] = player.curclass;
-      player.pers[# "lastspecialistindex"] = player.curclass;
+      player.pers[#"lastcurclass"] = player.curclass;
+      player.pers[#"lastspecialistindex"] = player.curclass;
       player enableweapons();
       player val::reset(#"spawn_player", "freezecontrols");
       player val::reset(#"spawn_player", "disablegadgets");

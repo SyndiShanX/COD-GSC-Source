@@ -238,7 +238,7 @@ function_aeda9580(var_8e317f6c) {
 
 function_d5fc01cc() {
   s_trace = groundtrace(self.origin, self.origin + (0, 0, -96), 0, self);
-  v_pos = s_trace[# "position"];
+  v_pos = s_trace[#"position"];
   n_dist = self.origin[2] - v_pos[2];
 
   if(n_dist >= 48) {

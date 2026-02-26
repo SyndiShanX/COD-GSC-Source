@@ -42,10 +42,10 @@ function function_b26dad22(level_notify) {
   while(true) {
     trace_result = physicstrace(level.var_7466d419.origin + (0, 0, 50), level.var_7466d419.origin + (0, 0, 5000), (0, 0, 0), (0, 0, 0), level.var_7466d419, 16);
 
-    if(isDefined(trace_result) && isDefined(trace_result[# "position"])) {
-      var_b4d6bef6 = distance(level.var_7466d419.origin, trace_result[# "position"]);
+    if(isDefined(trace_result) && isDefined(trace_result[#"position"])) {
+      var_b4d6bef6 = distance(level.var_7466d419.origin, trace_result[#"position"]);
 
-      if(trace_result[# "fraction"] < 1) {
+      if(trace_result[#"fraction"] < 1) {
         setDvar(#"current_distance", var_b4d6bef6);
       }
 

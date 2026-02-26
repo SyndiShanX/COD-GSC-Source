@@ -69,7 +69,7 @@ function function_4c2d4fc4(message, title = # "", var_9696a2d = 0, var_db331a85 
     namespace_82bfe441::fade(1, "FadeImmediate");
   }
 
-  namespace_61e6d095::function_d3c3e5c3(#"hint_tutorial", [# "interactive_map", #"dialog_tree", #"computer"]);
+  namespace_61e6d095::function_d3c3e5c3(#"hint_tutorial", [#"interactive_map", #"dialog_tree", #"computer"]);
   level.var_940e0c3e = type;
   level.var_5f632232 = message;
 

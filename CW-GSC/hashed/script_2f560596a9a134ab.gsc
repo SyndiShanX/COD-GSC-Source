@@ -481,79 +481,79 @@ function function_a8243f37() {
   level.var_24b50714[level.var_24b50714.size] = # "sniper_standard_t9";
   level.var_de18c954 = 0;
   level.var_592fbce6 = [];
-  level.var_592fbce6[# "knife_loadout"] = {
+  level.var_592fbce6[#"knife_loadout"] = {
     #x: 3
   };
-  level.var_592fbce6[# "shotgun_semiauto_t9"] = {
+  level.var_592fbce6[#"shotgun_semiauto_t9"] = {
     #x: -9
   };
-  level.var_592fbce6[# "smg_standard_t9"] = {
+  level.var_592fbce6[#"smg_standard_t9"] = {
     #x: 0
   };
-  level.var_592fbce6[# "tr_longburst_t9"] = {
+  level.var_592fbce6[#"tr_longburst_t9"] = {
     #x: -6
   };
-  level.var_592fbce6[# "tr_damagesemi_t9"] = {
+  level.var_592fbce6[#"tr_damagesemi_t9"] = {
     #x: -7
   };
-  level.var_592fbce6[# "smg_heavy_t9"] = {
+  level.var_592fbce6[#"smg_heavy_t9"] = {
     #x: -2
   };
-  level.var_592fbce6[# "ar_accurate_t9"] = {
+  level.var_592fbce6[#"ar_accurate_t9"] = {
     #x: -5
   };
-  level.var_592fbce6[# "sniper_quickscope_t9"] = {
+  level.var_592fbce6[#"sniper_quickscope_t9"] = {
     #x: -9
   };
-  level.var_592fbce6[# "launcher_standard_t9"] = {
+  level.var_592fbce6[#"launcher_standard_t9"] = {
     #x: 5
   };
-  level.var_592fbce6[# "ar_standard_t9"] = {
+  level.var_592fbce6[#"ar_standard_t9"] = {
     #x: -9
   };
-  level.var_592fbce6[# "sniper_standard_t9"] = {
+  level.var_592fbce6[#"sniper_standard_t9"] = {
     #x: -6
   };
-  level.var_592fbce6[# "ww_ieu_shockwave_t9"] = {
+  level.var_592fbce6[#"ww_ieu_shockwave_t9"] = {
     #x: 0
   };
-  level.var_592fbce6[# "satchel_charge_t9_item_sr"] = {
+  level.var_592fbce6[#"satchel_charge_t9_item_sr"] = {
     #z: -1, #angles: (-90, 0, 0)
   };
-  level.var_592fbce6[# "molotov_t9_item_sr"] = {
+  level.var_592fbce6[#"molotov_t9_item_sr"] = {
     #z: -6
   };
-  level.var_592fbce6[# "cymbal_monkey_t9_item_sr"] = {
+  level.var_592fbce6[#"cymbal_monkey_t9_item_sr"] = {
     #z: -9
   };
-  level.var_592fbce6[# "decoy_t9_item_sr"] = {
+  level.var_592fbce6[#"decoy_t9_item_sr"] = {
     #z: -6
   };
-  level.var_592fbce6[# "frag_t9_item_sr"] = {
+  level.var_592fbce6[#"frag_t9_item_sr"] = {
     #z: -6
   };
-  level.var_592fbce6[# "hatchet_t9_item_sr"] = {
+  level.var_592fbce6[#"hatchet_t9_item_sr"] = {
     #z: -8
   };
-  level.var_592fbce6[# "concussion_t9_item_sr"] = {
+  level.var_592fbce6[#"concussion_t9_item_sr"] = {
     #z: -6
   };
-  level.var_592fbce6[# "semtex_t9_item_sr"] = {
+  level.var_592fbce6[#"semtex_t9_item_sr"] = {
     #z: -6
   };
-  level.var_592fbce6[# "stimshot_t9_item_sr"] = {
+  level.var_592fbce6[#"stimshot_t9_item_sr"] = {
     #z: -6
   };
-  level.var_592fbce6[# "item_survival_scorestreak_bow"] = {
+  level.var_592fbce6[#"item_survival_scorestreak_bow"] = {
     #x: -5, #n_scale: 0.5
   };
-  level.var_592fbce6[# "item_survival_scorestreak_ultimate_turret"] = {
+  level.var_592fbce6[#"item_survival_scorestreak_ultimate_turret"] = {
     #z: -12, #n_scale: 0.8
   };
-  level.var_592fbce6[# "item_survival_scorestreak_chopper_gunner"] = {
+  level.var_592fbce6[#"item_survival_scorestreak_chopper_gunner"] = {
     #b_rotate: 0
   };
-  level.var_592fbce6[# "item_survival_scorestreak_remote_missile"] = {
+  level.var_592fbce6[#"item_survival_scorestreak_remote_missile"] = {
     #x: 13, #b_rotate: 0
   };
 }
@@ -697,16 +697,16 @@ function get_weapon(var_7ed75e97) {
 
     switch (var_7ed75e97) {
       case 1:
-        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][# "green"]) ? level.var_29d88fe5[str_weapon_name][# "green"] : level.var_ec04a8a4[str_weapon_name][# "green"];
+        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][#"green"]) ? level.var_29d88fe5[str_weapon_name][#"green"] : level.var_ec04a8a4[str_weapon_name][#"green"];
         break;
       case 2:
-        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][# "blue"]) ? level.var_29d88fe5[str_weapon_name][# "blue"] : level.var_ec04a8a4[str_weapon_name][# "blue"];
+        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][#"blue"]) ? level.var_29d88fe5[str_weapon_name][#"blue"] : level.var_ec04a8a4[str_weapon_name][#"blue"];
         break;
       case 3:
-        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][# "purple"]) ? level.var_29d88fe5[str_weapon_name][# "purple"] : level.var_ec04a8a4[str_weapon_name][# "purple"];
+        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][#"purple"]) ? level.var_29d88fe5[str_weapon_name][#"purple"] : level.var_ec04a8a4[str_weapon_name][#"purple"];
         break;
       case 4:
-        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][# "purple"]) ? level.var_29d88fe5[str_weapon_name][# "purple"] : level.var_ec04a8a4[str_weapon_name][# "purple"];
+        str_weapon = isDefined(level.var_29d88fe5[str_weapon_name][#"purple"]) ? level.var_29d88fe5[str_weapon_name][#"purple"] : level.var_ec04a8a4[str_weapon_name][#"purple"];
         break;
     }
   } else {

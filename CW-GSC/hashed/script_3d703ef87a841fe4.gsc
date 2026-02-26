@@ -8,12 +8,12 @@
 #namespace teams;
 
 function function_7f8faff9(team) {
-  return game.stat[# "teamscores"][team];
+  return game.stat[#"teamscores"][team];
 }
 
 function function_dc7eaabd(assignment) {
   assert(isDefined(assignment));
-  self.pers[# "team"] = assignment;
+  self.pers[#"team"] = assignment;
   self.team = assignment;
   self.sessionteam = assignment;
 
@@ -58,7 +58,7 @@ function function_959bac94() {
 
 function function_712e3ba6(score) {
   foreach(team, _ in level.teams) {
-    if(game.stat[# "teamscores"][team] >= score) {
+    if(game.stat[#"teamscores"][team] >= score) {
       return true;
     }
   }

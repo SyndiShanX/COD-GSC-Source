@@ -49,7 +49,7 @@ function preinit() {
 }
 
 function function_4d243036(instance) {
-  s_chest = instance.contentgroups[# "chest"][0];
+  s_chest = instance.contentgroups[#"chest"][0];
   instance.mdl_chest = content_manager::spawn_script_model(s_chest, #"p9_fxanim_zm_gp_chest_01_lrg_black_xmodel");
   s_chest.scriptmodel = instance.mdl_chest;
   instance.mdl_chest clientfield::set("sr_black_chest_fx", 1);
@@ -92,7 +92,7 @@ function private function_b0c8ef74(eventstruct) {
   if(is_true(self.b_complete) && isDefined(self.instance.mdl_chest)) {
     self.b_complete = undefined;
     self triggerenable(0);
-    s_chest = self.instance.contentgroups[# "chest"][0];
+    s_chest = self.instance.contentgroups[#"chest"][0];
     self.instance.mdl_chest thread scene::play(#"p9_fxanim_zm_gp_chest_01_lrg_black_bundle", self.instance.mdl_chest);
     self.instance.var_85c920d0 = content_manager::spawn_script_model(s_chest, #"hash_2641cfb5c2cdcc85");
     self.instance.var_85c920d0 clientfield::set("sr_demented_echo_fx", 1);
@@ -188,7 +188,7 @@ function private function_5338581(instance) {
   playsoundatposition(#"hash_2cc0c33bfc0f9373", instance.mdl_chest.origin + (0, 0, 20));
   instance.mdl_chest thread zm_vo::function_d6f8bbd9(#"hash_15b09a217e61af64", 2.5);
   instance.var_fc398f5e = 0;
-  s_chest = instance.contentgroups[# "chest"][0];
+  s_chest = instance.contentgroups[#"chest"][0];
   var_5d7b56a9 = anglestoup(s_chest.angles) * 58;
   var_5086009e = anglestoright(s_chest.angles) * 12;
   var_42cc652b = anglestoup(s_chest.angles) * -8;
@@ -199,9 +199,9 @@ function private function_5338581(instance) {
   var_6ef72e62.origin = s_chest.origin + var_5d7b56a9 + var_5086009e;
   var_5a4d050e.origin = s_chest.origin + var_5d7b56a9 + var_42cc652b;
   var_440ed88e.origin = s_chest.origin + var_5d7b56a9 + var_2d0a39a7;
-  var_21a5c532 = instance.contentgroups[# "hash_5e01f407a95da14a"][0];
-  var_306462af = instance.contentgroups[# "hash_5e01f307a95d9f97"][0];
-  var_b02fe248 = instance.contentgroups[# "hash_5e01f207a95d9de4"][0];
+  var_21a5c532 = instance.contentgroups[#"hash_5e01f407a95da14a"][0];
+  var_306462af = instance.contentgroups[#"hash_5e01f307a95d9f97"][0];
+  var_b02fe248 = instance.contentgroups[#"hash_5e01f207a95d9de4"][0];
   function_ed1e62c9(instance, var_21a5c532, var_6ef72e62);
   function_ed1e62c9(instance, var_306462af, var_5a4d050e);
   function_ed1e62c9(instance, var_b02fe248, var_440ed88e);

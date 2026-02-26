@@ -421,8 +421,8 @@ function private function_28c69db4(entity, asmstatename) {
     asmstatename.var_b30ec151 = velocity;
     a_trace = bulletTrace(asmstatename.origin, position, 0, asmstatename, 0, 1);
 
-    if(a_trace[# "fraction"] < 1) {
-      asmstatename forceteleport(a_trace[# "position"], asmstatename.angles, 0, 0);
+    if(a_trace[#"fraction"] < 1) {
+      asmstatename forceteleport(a_trace[#"position"], asmstatename.angles, 0, 0);
     } else {
       asmstatename forceteleport(position, asmstatename.angles, 0, 0);
     }

@@ -26,7 +26,7 @@ createcommander(team) {
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreForceGoal");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreTeam");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreDomFlags");
-  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [# "maxage": 15000]);
+  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [#"maxage": 15000]);
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreAlive");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreStopWanderingDom");
   return commander;

@@ -1448,23 +1448,23 @@ function set_dropped(var_e329a2fa) {
 
   if(isDefined(trace)) {
     tempangle = randomfloat(360);
-    droporigin = trace[# "position"] + (0, 0, self.dropoffset);
+    droporigin = trace[#"position"] + (0, 0, self.dropoffset);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       forward = (cos(tempangle), sin(tempangle), 0);
-      forward = vectornormalize(forward - vectorscale(trace[# "normal"], vectordot(forward, trace[# "normal"])));
+      forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
 
-      if(isDefined(trace[# "walkable"])) {
-        if(trace[# "walkable"] == 0) {
-          end_reflect = forward * 1000 + trace[# "position"];
-          reflect_trace = physicstrace(trace[# "position"], end_reflect, (trace_size * -1, trace_size * -1, trace_size * -1), (trace_size, trace_size, trace_size), self, 32);
+      if(isDefined(trace[#"walkable"])) {
+        if(trace[#"walkable"] == 0) {
+          end_reflect = forward * 1000 + trace[#"position"];
+          reflect_trace = physicstrace(trace[#"position"], end_reflect, (trace_size * -1, trace_size * -1, trace_size * -1), (trace_size, trace_size, trace_size), self, 32);
 
           if(isDefined(reflect_trace)) {
-            droporigin = reflect_trace[# "position"] + (0, 0, self.dropoffset);
+            droporigin = reflect_trace[#"position"] + (0, 0, self.dropoffset);
 
-            if(reflect_trace[# "fraction"] < 1) {
+            if(reflect_trace[#"fraction"] < 1) {
               forward = (cos(tempangle), sin(tempangle), 0);
-              forward = vectornormalize(forward - vectorscale(reflect_trace[# "normal"], vectordot(forward, reflect_trace[# "normal"])));
+              forward = vectornormalize(forward - vectorscale(reflect_trace[#"normal"], vectordot(forward, reflect_trace[#"normal"])));
             }
           }
         }
@@ -1491,7 +1491,7 @@ function set_dropped(var_e329a2fa) {
       self.e_object.angles = dropangles;
     }
 
-    self thread pickup_timeout(trace[# "position"][2], startorigin[2]);
+    self thread pickup_timeout(trace[#"position"][2], startorigin[2]);
   } else {
     self move_visuals_to_base();
     self.trigger.origin = self.trigger.baseorigin;
@@ -1786,8 +1786,8 @@ function track_carrier(object) {
     if(self isonground()) {
       trace = bulletTrace(self.origin + (0, 0, 20), self.origin - (0, 0, 20), 0, undefined);
 
-      if(trace[# "fraction"] < 1) {
-        object.safeorigin = trace[# "position"];
+      if(trace[#"fraction"] < 1) {
+        object.safeorigin = trace[#"position"];
       }
     }
 
@@ -2262,7 +2262,7 @@ function use_object_use_think(disableinitialholddelay, disableweaponcyclingdurin
         }
       }
 
-      team = player.pers[# "team"];
+      team = player.pers[#"team"];
       result = self use_hold_think(player, disableweaponcyclingduringhold);
       self remove_player_use_modifiers(player);
 
@@ -3819,11 +3819,11 @@ function gameobject_is_player_looking_at(origin, dot, do_trace, ignore_ent, igno
     if(do_trace) {
       trace = bulletTrace(eye, origin, 0, ignore_ent);
 
-      if(trace[# "position"] == origin) {
+      if(trace[#"position"] == origin) {
         return true;
       } else if(isDefined(ignore_trace_distance)) {
         n_mag = distance(origin, eye);
-        n_dist = distance(trace[# "position"], eye);
+        n_dist = distance(trace[#"position"], eye);
         n_delta = abs(n_dist - n_mag);
 
         if(n_delta <= ignore_trace_distance) {
@@ -3855,13 +3855,13 @@ function hide_icons(team) {
   self.hidden_worldicon = [];
 
   if(hide_friendly == 1) {
-    self.hidden_compassicon[# "group_friendly"] = self.compassicons[# "group_friendly"];
-    self.hidden_worldicon[# "group_friendly"] = self.worldicons[# "group_friendly"];
+    self.hidden_compassicon[#"group_friendly"] = self.compassicons[#"group_friendly"];
+    self.hidden_worldicon[#"group_friendly"] = self.worldicons[#"group_friendly"];
   }
 
   if(hide_enemy == 1) {
-    self.hidden_compassicon[# "group_enemy"] = self.compassicons[# "enemyy"];
-    self.hidden_worldicon[# "group_enemy"] = self.worldicons[# "group_enemy"];
+    self.hidden_compassicon[#"group_enemy"] = self.compassicons[#"enemyy"];
+    self.hidden_worldicon[#"group_enemy"] = self.worldicons[#"group_enemy"];
   }
 
   self set_2d_icon(team, undefined);

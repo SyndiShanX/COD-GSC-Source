@@ -240,7 +240,7 @@ function function_1409b164() {
 }
 
 function function_f4c60360() {
-  return isDefined(level.flag_count[# "doorbuy_key_active"]) ? level.flag_count[# "doorbuy_key_active"] : 0;
+  return isDefined(level.flag_count[#"doorbuy_key_active"]) ? level.flag_count[#"doorbuy_key_active"] : 0;
 }
 
 function function_6df718d(var_d147b93a, var_5cd8902e = 0, var_70516a9d = &function_9dc9326c) {
@@ -854,15 +854,15 @@ function function_3b09971f(var_ed1db1a7, var_de0f1997, a_str_zones) {
 }
 
 function function_1f9d70f7(var_57465a1b) {
-  if(!isDefined(level.zombie_powerups[# "nuke"])) {
+  if(!isDefined(level.zombie_powerups[#"nuke"])) {
     return;
   }
 
-  var_f67c3dcd = level.zombie_powerups[# "nuke"].func_should_drop_with_regular_powerups;
+  var_f67c3dcd = level.zombie_powerups[#"nuke"].func_should_drop_with_regular_powerups;
   zm_powerups::powerup_remove_from_regular_drops(#"nuke");
   n_wait = var_57465a1b * 0.9;
   wait n_wait;
-  level.zombie_powerups[# "nuke"].func_should_drop_with_regular_powerups = var_f67c3dcd;
+  level.zombie_powerups[#"nuke"].func_should_drop_with_regular_powerups = var_f67c3dcd;
 }
 
 function function_a5f4503c(str_notify) {

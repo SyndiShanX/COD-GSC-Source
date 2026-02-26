@@ -55,7 +55,7 @@ add_bot(team, name = undefined, clanabbrev = undefined) {
   bot.goalradius = 512;
 
   if(isDefined(level.disableclassselection) && level.disableclassselection) {
-    bot.pers[# "class"] = level.defaultclass;
+    bot.pers[#"class"] = level.defaultclass;
     bot.curclass = level.defaultclass;
   }
 
@@ -612,7 +612,7 @@ update_swim() {
   }
 
   bottomtrace = groundtrace(self.origin, self.origin + (0, 0, -1000), 0, self, 1);
-  swimheight = self.origin[2] - bottomtrace[# "position"][2];
+  swimheight = self.origin[2] - bottomtrace[#"position"][2];
 
   if(swimheight < 25) {
     self bottapbutton(67);
@@ -1194,13 +1194,13 @@ function_2d5436be(origin, spiral) {
   var_17e94d83 = rotatepointaroundaxis((spiral.radius, 0, 0), (0, 0, 1), spiral.angle + spiral.var_2b9d3922);
   spawn_point = var_17e94d83 + origin;
   trace = bulletTrace(spawn_point + (0, 0, 100), spawn_point, 0, self);
-  return trace[# "position"];
+  return trace[#"position"];
 }
 
 devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
   team = devgui_relative_team(self, botarg);
   trace = self eye_trace();
-  spawndir = self.origin - trace[# "position"];
+  spawndir = self.origin - trace[#"position"];
   spawnangles = vectortoangles(spawndir);
 
   if(!isDefined(countarg)) {
@@ -1210,7 +1210,7 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
   count = max(int(countarg), 1);
   bots = [];
   offset = (0, 0, 5);
-  origin = trace[# "position"] + offset;
+  origin = trace[#"position"] + offset;
 
   if(!isDefined(bots)) {
     bots = [];
@@ -1226,7 +1226,7 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
   spiral.radius = getdvarint(#"hash_64cb6c7e56b66cab", 0);
 
   for(i = 0; i < count - 1; i++) {
-    origin = function_2d5436be(trace[# "position"] + offset, spiral);
+    origin = function_2d5436be(trace[#"position"] + offset, spiral);
 
     if(!isDefined(bots)) {
       bots = [];
@@ -1237,11 +1237,11 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
     bots[bots.size] = self add_fixed_spawn_bot(team, origin, spiral.angle + spiral.var_2b9d3922, var_b27e53da);
   }
 
-  if(isvehicle(trace[# "entity"])) {
+  if(isvehicle(trace[#"entity"])) {
     foreach(bot in bots) {
       if(isDefined(bot)) {
-        vehicle = trace[# "entity"];
-        pos = trace[# "position"];
+        vehicle = trace[#"entity"];
+        pos = trace[#"position"];
         seatindex = undefined;
         seatdist = undefined;
 
@@ -1414,7 +1414,7 @@ devgui_goal(botarg, cmdarg) {
 function_bbc3f17e(botarg, force = 0) {
   trace = self eye_trace(1);
   bots = devgui_get_bots(self, botarg);
-  pos = trace[# "position"];
+  pos = trace[#"position"];
   node = self get_nearest_node(pos);
 
   if(isDefined(node)) {
@@ -1504,7 +1504,7 @@ function_7090aa98() {
 
   if(!isDefined(targetentity)) {
     trace = self eye_trace(1);
-    targetentity = trace[# "entity"];
+    targetentity = trace[#"entity"];
   }
 
   if(isDefined(targetentity) && !isalive(targetentity)) {

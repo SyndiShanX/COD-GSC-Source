@@ -142,10 +142,10 @@ function callstrike(flightplan) {
   assert(flightplan.distance != 0, "<dev string:x155>");
   planehalfdistance = flightplan.distance / 2;
   path = getstrikepath(flightplan.target, flightplan.height, planehalfdistance);
-  startpoint = path[# "start"];
-  endpoint = path[# "end"];
-  flightplan.height = path[# "height"];
-  direction = path[# "direction"];
+  startpoint = path[#"start"];
+  endpoint = path[#"end"];
+  flightplan.height = path[#"height"];
+  direction = path[#"direction"];
   d = length(startpoint - endpoint);
   flytime = d / flightplan.speed;
   bombtime = calculatereleasetime(flytime, flightplan.height, flightplan.speed, flightplan.bombspeedscale);
@@ -193,7 +193,7 @@ function planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, fl
 function determinegroundpoint(player, position) {
   ground = (position[0], position[1], player.origin[2]);
   trace = bulletTrace(ground + (0, 0, 10000), ground, 0, undefined);
-  return trace[# "position"];
+  return trace[#"position"];
 }
 
 function determinetargetpoint(player, position) {
@@ -620,16 +620,16 @@ function _getstrikepathstartandend(goal, yaw, halfdistance) {
   path = [];
 
   if(isDefined(noflyzone)) {
-    path[# "noflyzone"] = noflyzone;
+    path[#"noflyzone"] = noflyzone;
     startpoint = (startpoint[0], startpoint[1], level.noflyzones[noflyzone].origin[2] + level.noflyzones[noflyzone].height);
     endpoint = (endpoint[0], endpoint[1], startpoint[2]);
   } else {
-    path[# "noflyzone"] = undefined;
+    path[#"noflyzone"] = undefined;
   }
 
-  path[# "start"] = startpoint;
-  path[# "end"] = endpoint;
-  path[# "direction"] = direction;
+  path[#"start"] = startpoint;
+  path[#"end"] = endpoint;
+  path[#"direction"] = direction;
   return path;
 }
 
@@ -648,7 +648,7 @@ function getstrikepath(target, height, halfdistance, yaw) {
     for(i = 0; i < 3; i++) {
       path = _getstrikepathstartandend(goal, randomint(360), halfdistance);
 
-      if(!isDefined(path[# "noflyzone"])) {
+      if(!isDefined(path[#"noflyzone"])) {
         break;
       }
     }
@@ -656,7 +656,7 @@ function getstrikepath(target, height, halfdistance, yaw) {
     path = _getstrikepathstartandend(goal, yaw, halfdistance);
   }
 
-  path[# "height"] = worldheight - target[2];
+  path[#"height"] = worldheight - target[2];
   return path;
 }
 
@@ -674,15 +674,15 @@ function entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
     head_height = eye_position[2];
     debug_display_time = 4000;
     trace = weapons::damage_trace(ent.entity.origin, ent.entity.origin + (0, 0, assumed_ceiling_height), 0, undefined);
-    indoors = trace[# "fraction"] != 1;
+    indoors = trace[#"fraction"] != 1;
 
     if(indoors) {
-      test_point = trace[# "position"];
+      test_point = trace[#"position"];
 
       debug_star(test_point, (0, 1, 0), debug_display_time);
 
       trace = weapons::damage_trace((test_point[0], test_point[1], head_height), (pos[0], pos[1], head_height), 0, undefined);
-      indoors = trace[# "fraction"] != 1;
+      indoors = trace[#"fraction"] != 1;
 
       if(indoors) {
         debug_star((pos[0], pos[1], head_height), (0, 1, 0), debug_display_time);
@@ -696,7 +696,7 @@ function entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
         debug_star((pos[0], pos[1], head_height), (1, 0, 0), debug_display_time);
 
         trace = weapons::damage_trace((pos[0], pos[1], head_height), pos, 0, undefined);
-        indoors = trace[# "fraction"] != 1;
+        indoors = trace[#"fraction"] != 1;
 
         if(indoors) {
           debug_star(pos, (0, 1, 0), debug_display_time);

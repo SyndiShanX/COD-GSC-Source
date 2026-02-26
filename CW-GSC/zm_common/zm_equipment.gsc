@@ -850,8 +850,8 @@ function function_379f6b5d(n_base_damage, weapon, aicategory = # "normal", maxhe
 
   if(isDefined(level.var_df2ed8a5[weapon.name])) {
     damagestruct = level.var_df2ed8a5[weapon.name];
-  } else if(isDefined(level.var_df2ed8a5[# "default"])) {
-    damagestruct = level.var_df2ed8a5[# "default"];
+  } else if(isDefined(level.var_df2ed8a5[#"default"])) {
+    damagestruct = level.var_df2ed8a5[#"default"];
   }
 
   if(is_true(damagestruct.var_909a6c96)) {

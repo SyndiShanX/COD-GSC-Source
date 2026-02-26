@@ -22,29 +22,29 @@ __init__() {
 
 bestweapon_init(weapon, options) {
   weapon_data = [];
-  weapon_data[# "weapon"] = weapon;
-  weapon_data[# "options"] = options;
-  weapon_data[# "kill_count"] = 0;
-  weapon_data[# "spawned_with"] = 0;
-  key = self.pers[# "bestweapon"][weapon.name].size;
-  self.pers[# "bestweapon"][weapon.name][key] = weapon_data;
+  weapon_data[#"weapon"] = weapon;
+  weapon_data[#"options"] = options;
+  weapon_data[#"kill_count"] = 0;
+  weapon_data[#"spawned_with"] = 0;
+  key = self.pers[#"bestweapon"][weapon.name].size;
+  self.pers[#"bestweapon"][weapon.name][key] = weapon_data;
   return key;
 }
 
 bestweapon_find(weapon, options) {
-  if(!isDefined(self.pers[# "bestweapon"])) {
-    self.pers[# "bestweapon"] = [];
+  if(!isDefined(self.pers[#"bestweapon"])) {
+    self.pers[#"bestweapon"] = [];
   }
 
-  if(!isDefined(self.pers[# "bestweapon"][weapon.name])) {
-    self.pers[# "bestweapon"][weapon.name] = [];
+  if(!isDefined(self.pers[#"bestweapon"][weapon.name])) {
+    self.pers[#"bestweapon"][weapon.name] = [];
   }
 
   name = weapon.name;
-  size = self.pers[# "bestweapon"][name].size;
+  size = self.pers[#"bestweapon"][name].size;
 
   for(index = 0; index < size; index++) {
-    if(self.pers[# "bestweapon"][name][index][# "weapon"] == weapon && self.pers[# "bestweapon"][name][index][# "options"] == options) {
+    if(self.pers[#"bestweapon"][name][index][#"weapon"] == weapon && self.pers[#"bestweapon"][name][index][#"options"] == options) {
       return index;
     }
   }
@@ -56,21 +56,21 @@ bestweapon_get() {
   most_kills = 0;
   most_spawns = 0;
 
-  if(!isDefined(self.pers[# "bestweapon"])) {
+  if(!isDefined(self.pers[#"bestweapon"])) {
     return;
   }
 
   best_key = 0;
   best_index = 0;
-  weapon_keys = getarraykeys(self.pers[# "bestweapon"]);
+  weapon_keys = getarraykeys(self.pers[#"bestweapon"]);
 
   for(key_index = 0; key_index < weapon_keys.size; key_index++) {
     key = weapon_keys[key_index];
-    size = self.pers[# "bestweapon"][key].size;
+    size = self.pers[#"bestweapon"][key].size;
 
     for(index = 0; index < size; index++) {
-      kill_count = self.pers[# "bestweapon"][key][index][# "kill_count"];
-      spawned_with = self.pers[# "bestweapon"][key][index][# "spawned_with"];
+      kill_count = self.pers[#"bestweapon"][key][index][#"kill_count"];
+      spawned_with = self.pers[#"bestweapon"][key][index][#"spawned_with"];
 
       if(kill_count > most_kills) {
         best_index = index;
@@ -89,7 +89,7 @@ bestweapon_get() {
     }
   }
 
-  return self.pers[# "bestweapon"][best_key][best_index];
+  return self.pers[#"bestweapon"][best_key][best_index];
 }
 
 showcaseweapon_get() {
@@ -100,7 +100,7 @@ showcaseweapon_get() {
   }
 
   showcase_weapon = [];
-  showcase_weapon[# "weapon"] = showcaseweapondata.weapon;
+  showcase_weapon[#"weapon"] = showcaseweapondata.weapon;
   attachmentnames = [];
 
   for(index = 0; index < 7; index++) {
@@ -124,6 +124,6 @@ showcaseweapon_get() {
     showpaintshop = paintjobslot != 15;
   }
 
-  showcase_weapon[# "options"] = self calcweaponoptions(camoindex, 0, 0, 0, 0, showpaintshop, 1);
+  showcase_weapon[#"options"] = self calcweaponoptions(camoindex, 0, 0, 0, 0, showpaintshop, 1);
   return showcase_weapon;
 }

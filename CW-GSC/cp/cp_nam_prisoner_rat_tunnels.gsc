@@ -114,7 +114,7 @@ function function_4b429874(var_c79d614f) {
     return;
   }
 
-  if(isDefined(level.var_731c10af.paths[# "rat_tunnels"].count) && level.var_731c10af.paths[# "rat_tunnels"].count != 0) {
+  if(isDefined(level.var_731c10af.paths[#"rat_tunnels"].count) && level.var_731c10af.paths[#"rat_tunnels"].count != 0) {
     return;
   }
 

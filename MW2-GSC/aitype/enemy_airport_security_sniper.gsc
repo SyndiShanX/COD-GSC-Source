@@ -39,11 +39,11 @@ spawner() {
 }
 
 precache() {
-  character\character_secret_service_assault_a::precache();
+    character\character_secret_service_assault_a::precache();
 
-  precacheItem("m14_scoped");
-  precacheItem("beretta");
-  precacheItem("fraggrenade");
+    precacheItem("m14_scoped");
+    precacheItem("beretta");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_sniper_glint::main();
-  //---------------- }
+    //---------------- maps\_sniper_glint::main();
+    //---------------- }

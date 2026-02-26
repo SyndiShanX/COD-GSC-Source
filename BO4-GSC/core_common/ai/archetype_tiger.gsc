@@ -578,8 +578,8 @@ p8_usa_farm_tools_hoe_lod2_s1_geo_rigid_bs_7cqeqf2k2nw2binsrm67nqzdzf(entity, as
 
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[# "fraction"] < 1) {
-    hit_ent = trace[# "entity"];
+  if(trace[#"fraction"] < 1) {
+    hit_ent = trace[#"entity"];
   }
 
   entity.hit_ent = isDefined(hit_ent);
@@ -928,8 +928,8 @@ function_5ee65256(entity) {
   enemy_eye_pos = entity util::get_eye();
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[# "fraction"] < 1) {
-    hit_ent = trace[# "entity"];
+  if(trace[#"fraction"] < 1) {
+    hit_ent = trace[#"entity"];
   }
 
   hit = isDefined(hit_ent);

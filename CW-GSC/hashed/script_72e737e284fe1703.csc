@@ -17,11 +17,11 @@
 
 function init() {
   function_cae618b4("spawner_zombietron_gegenees");
-  level._effect[# "fx8_gegenees_shield_blast"] = "zm_ai/fx8_gegenees_shield_blast";
-  level._effect[# "fx8_gegenees_shield_guard"] = "zm_ai/fx8_gegenees_shield_guard";
-  level._effect[# "fx8_gegenees_spear_tip_flame"] = "zm_ai/fx8_gegenees_spear_tip_flame";
-  level._effect[# "fx8_gegenees_spear_tip_tell"] = "zm_ai/fx8_gegenees_spear_tip_tell";
-  level._effect[# "fx8_stoker_dest_weak_point_exp_generic"] = "zm_ai/fx8_stoker_dest_weak_point_exp_generic";
+  level._effect[#"fx8_gegenees_shield_blast"] = "zm_ai/fx8_gegenees_shield_blast";
+  level._effect[#"fx8_gegenees_shield_guard"] = "zm_ai/fx8_gegenees_shield_guard";
+  level._effect[#"fx8_gegenees_spear_tip_flame"] = "zm_ai/fx8_gegenees_spear_tip_flame";
+  level._effect[#"fx8_gegenees_spear_tip_tell"] = "zm_ai/fx8_gegenees_spear_tip_tell";
+  level._effect[#"fx8_stoker_dest_weak_point_exp_generic"] = "zm_ai/fx8_stoker_dest_weak_point_exp_generic";
   footsteps::registeraitypefootstepcb(#"gegenees", &function_d00809d8);
   clientfield::register("actor", "gegenees_shield_blast_effect", 16000, 1, "counter", &function_8745f9df, 0, 0);
   clientfield::register("actor", "gegenees_shield_guard_effect", 16000, 1, "int", &function_ae96bf9a, 0, 0);
@@ -89,13 +89,13 @@ function private function_d00809d8(localclientnum, pos, surface, notetrack, bone
 }
 
 function private function_8745f9df(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self.var_cafcaa0a = util::playFXOnTag(bwastimejump, level._effect[# "fx8_gegenees_shield_blast"], self, "tag_shield_fx");
+  self.var_cafcaa0a = util::playFXOnTag(bwastimejump, level._effect[#"fx8_gegenees_shield_blast"], self, "tag_shield_fx");
   self playSound(bwastimejump, #"hash_1f62dff95ae6f9c6");
 }
 
 function private function_ae96bf9a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_7c984f = util::playFXOnTag(fieldname, level._effect[# "fx8_gegenees_shield_guard"], self, "tag_shield_fx");
+    self.var_7c984f = util::playFXOnTag(fieldname, level._effect[#"fx8_gegenees_shield_guard"], self, "tag_shield_fx");
     return;
   }
 
@@ -107,7 +107,7 @@ function private function_ae96bf9a(localclientnum, oldval, newval, bnewent, bini
 
 function private function_33dedae1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_645626ad = util::playFXOnTag(fieldname, level._effect[# "fx8_gegenees_spear_tip_flame"], self, "tag_spear_tip_fx");
+    self.var_645626ad = util::playFXOnTag(fieldname, level._effect[#"fx8_gegenees_spear_tip_flame"], self, "tag_spear_tip_fx");
     return;
   }
 
@@ -119,7 +119,7 @@ function private function_33dedae1(localclientnum, oldval, newval, bnewent, bini
 
 function private function_421757ab(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.var_55203ff4 = util::playFXOnTag(fieldname, level._effect[# "fx8_gegenees_spear_tip_tell"], self, "tag_spear_tip_fx");
+    self.var_55203ff4 = util::playFXOnTag(fieldname, level._effect[#"fx8_gegenees_spear_tip_tell"], self, "tag_spear_tip_fx");
     return;
   }
 
@@ -176,6 +176,6 @@ function private function_ce49549a(localclientnum, oldval, newval, bnewent, bini
 
 function private function_d54aae3e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    self.fx_helmet = util::playFXOnTag(fieldname, level._effect[# "fx8_stoker_dest_weak_point_exp_generic"], self, "j_head");
+    self.fx_helmet = util::playFXOnTag(fieldname, level._effect[#"fx8_stoker_dest_weak_point_exp_generic"], self, "j_head");
   }
 }

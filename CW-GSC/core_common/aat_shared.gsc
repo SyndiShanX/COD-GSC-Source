@@ -31,8 +31,8 @@ function private preinit() {
 
   clientfield::register("toplayer", "rob_ammo_mod_ready", 1, 1, "int");
   clientfield::register_clientuimodel("hud_items.gibDismembermentType", 16000, 5, "int", 0);
-  level.aat[# "none"] = spawnStruct();
-  level.aat[# "none"].name = "none";
+  level.aat[#"none"] = spawnStruct();
+  level.aat[#"none"].name = "none";
   level.aat_reroll = [];
   level.var_bdba6ee8 = [];
   callback::on_connect(&on_player_connect);

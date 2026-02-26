@@ -559,16 +559,16 @@ objective_regroup_on_price() {
 }
 
 // ------------- // --- INTRO --- // ------------- intro_setup() {
-  thread half_particles_setup();
+thread half_particles_setup();
 
-  thread intro_player();
-  thread intro_catch_player_running_ahead();
-  thread intro_music();
-  thread intro_dialogue();
-  thread intro_price_rise_out_of_sand();
+thread intro_player();
+thread intro_catch_player_running_ahead();
+thread intro_music();
+thread intro_dialogue();
+thread intro_price_rise_out_of_sand();
 
-  // level progression
-  thread road_setup();
+// level progression
+thread road_setup();
 }
 
 intro_catch_player_running_ahead() {
@@ -680,39 +680,39 @@ intro_price_rise_out_of_sand() {
 }
 
 // ------------------- // --- ROAD PATROL --- // ------------------- road_setup() {
-  level.price PushPlayer(true);
-  price_be_stealthy();
+level.price PushPlayer(true);
+price_be_stealthy();
 
-  road_stealth_settings();
+road_stealth_settings();
 
-  // deactivate trigger at bottom of hill so price doesn't prematurely move up to its corresponding color node when stealth is broken
-  colortrig = GetEnt("trig_script_color_allies_r5", "targetname");
-  colortrig trigger_off();
+// deactivate trigger at bottom of hill so price doesn't prematurely move up to its corresponding color node when stealth is broken
+colortrig = GetEnt("trig_script_color_allies_r5", "targetname");
+colortrig trigger_off();
 
-  thread road_price_to_hillside();
+thread road_price_to_hillside();
 
-  thread road_ambient_action();
-  thread road_autosave();
+thread road_ambient_action();
+thread road_autosave();
 
-  //thread road_price_hillside_nag();
-  thread road_price_hillside_dialogue();
-  thread road_enemy_wiretap_dialogue();
+//thread road_price_hillside_nag();
+thread road_price_hillside_dialogue();
+thread road_enemy_wiretap_dialogue();
 
-  thread road_humans_cleared_tracker();
-  thread road_stealthbreak_tracker();
-  thread road_playerslide_stealthbreak();
-  thread road_stealthbreak_price_dialogue();
+thread road_humans_cleared_tracker();
+thread road_stealthbreak_tracker();
+thread road_playerslide_stealthbreak();
+thread road_stealthbreak_price_dialogue();
 
-  thread road_price_stealthbreak_think();
+thread road_price_stealthbreak_think();
 
-  thread road_group2_moveout();
+thread road_group2_moveout();
 
-  thread road_group1_countdown_kill();
+thread road_group1_countdown_kill();
 
-  thread road_moveup_to_kill_group2();
+thread road_moveup_to_kill_group2();
 
-  // level progression
-  thread road_clear();
+// level progression
+thread road_clear();
 }
 
 road_stealth_settings() {
@@ -1796,20 +1796,20 @@ road_price_sees_thermalspike() {
 }
 
 // --------------------- // --- AUSSIE RAPPEL --- // --------------------- rappel_setup() {
-  flag_wait("rappel_threads");
+flag_wait("rappel_threads");
 
-  thread rappel_guard_weapons();
-  thread rappel_effects();
-  thread rappel_kill_enemy_hint();
-  thread rappel_price_hookup_nag();
-  thread rappel_prices_rappel_start();
-  thread rappel_show_objective_railing();
-  thread rappel_player_rappel_setup();
-  thread rappel_zodiacs();
-  thread rappel_dialogue();
-  thread rappel_ropes();
-  thread rappel_price_setup_at_cave();
-  thread stealth_music();
+thread rappel_guard_weapons();
+thread rappel_effects();
+thread rappel_kill_enemy_hint();
+thread rappel_price_hookup_nag();
+thread rappel_prices_rappel_start();
+thread rappel_show_objective_railing();
+thread rappel_player_rappel_setup();
+thread rappel_zodiacs();
+thread rappel_dialogue();
+thread rappel_ropes();
+thread rappel_price_setup_at_cave();
+thread stealth_music();
 }
 
 rappel_zodiacs() {
@@ -2139,60 +2139,60 @@ rappel_price_setup_at_cave() {
 }
 
 // ------------------------- // --- CAVE 1 (BARRACKS) --- // ------------------------- barracks_setup() {
-  // SPAWNFUNCS
-  first_patroller = GetEnt("backdoor_barracks_patroller_guy1", "targetname");
-  first_patroller thread add_spawn_function(::barracks_firstpatroller_spawnfunc);
-  first_patroller thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
+// SPAWNFUNCS
+first_patroller = GetEnt("backdoor_barracks_patroller_guy1", "targetname");
+first_patroller thread add_spawn_function(::barracks_firstpatroller_spawnfunc);
+first_patroller thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
 
-  biggroup = getEntArray("barracks_biggroup", "targetname");
-  array_thread(biggroup, ::add_spawn_function, ::barracks_biggroup_spawnfunc);
-  array_thread(biggroup, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
+biggroup = getEntArray("barracks_biggroup", "targetname");
+array_thread(biggroup, ::add_spawn_function, ::barracks_biggroup_spawnfunc);
+array_thread(biggroup, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  centerstanders = getEntArray("barracks_center_stander", "targetname");
-  array_thread(centerstanders, ::add_spawn_function, ::restrict_fov_until_stealth_broken);
-  array_thread(centerstanders, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
+centerstanders = getEntArray("barracks_center_stander", "targetname");
+array_thread(centerstanders, ::add_spawn_function, ::restrict_fov_until_stealth_broken);
+array_thread(centerstanders, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  chessplayers = getEntArray("backdoor_barracks_chess_player", "targetname");
-  array_thread(chessplayers, ::add_spawn_function, ::restrict_fov_until_stealth_broken);
-  array_thread(chessplayers, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
+chessplayers = getEntArray("backdoor_barracks_chess_player", "targetname");
+array_thread(chessplayers, ::add_spawn_function, ::restrict_fov_until_stealth_broken);
+array_thread(chessplayers, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  pacingguy = GetEnt("barracks_center_pacing_guy", "script_noteworthy");
-  pacingguy thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
+pacingguy = GetEnt("barracks_center_pacing_guy", "script_noteworthy");
+pacingguy thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
 
-  fridgeguy = GetEnt("barracks_center_standing_fridge", "targetname");
-  fridgeguy thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
+fridgeguy = GetEnt("barracks_center_standing_fridge", "targetname");
+fridgeguy thread add_spawn_function(::barracks_stealthsettings_spawnfunc);
 
-  nearleftguys = getEntArray("barracks_nearleft_guy", "targetname");
-  array_thread(nearleftguys, ::add_spawn_function, ::barracks_nearleftguy_spawnfunc);
-  array_thread(nearleftguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
+nearleftguys = getEntArray("barracks_nearleft_guy", "targetname");
+array_thread(nearleftguys, ::add_spawn_function, ::barracks_nearleftguy_spawnfunc);
+array_thread(nearleftguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc);
 
-  stairguys = getEntArray("barracks_stairguys", "targetname");
-  array_thread(stairguys, ::add_spawn_function, ::barracks_stairguys_spawnfunc);
-  //array_thread( stairguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc );
-  // END SPAWNFUNCS
+stairguys = getEntArray("barracks_stairguys", "targetname");
+array_thread(stairguys, ::add_spawn_function, ::barracks_stairguys_spawnfunc);
+//array_thread( stairguys, ::add_spawn_function, ::barracks_stealthsettings_spawnfunc );
+// END SPAWNFUNCS
 
-  // wait for rappel to end before starting these threads
-  flag_wait("end_of_rappel_scene");
+// wait for rappel to end before starting these threads
+flag_wait("end_of_rappel_scene");
 
-  flavorbursts_on("axis");
+flavorbursts_on("axis");
 
-  level.corpse_behavior_doesnt_require_player_sight = undefined;
+level.corpse_behavior_doesnt_require_player_sight = undefined;
 
-  thread barracks_player_and_price_setup();
-  thread player_unsuppressed_weapon_warning();
-  thread objective_follow_price_again();
+thread barracks_player_and_price_setup();
+thread player_unsuppressed_weapon_warning();
+thread objective_follow_price_again();
 
-  thread barracks_action();
-  thread barracks_stealthbreak_action();
-  thread barracks_stealthbreak_dialogue();
-  thread barracks_center_group();
-  thread barracks_chess_players();
-  thread barracks_fridge_guy();
-  thread barracks_enemy_cleanup_prethink();
+thread barracks_action();
+thread barracks_stealthbreak_action();
+thread barracks_stealthbreak_dialogue();
+thread barracks_center_group();
+thread barracks_chess_players();
+thread barracks_fridge_guy();
+thread barracks_enemy_cleanup_prethink();
 
-  thread barracks_backdoor_radio();
-  thread barracks_tv_light();
-  thread barracks_destroy_tv();
+thread barracks_backdoor_radio();
+thread barracks_tv_light();
+thread barracks_destroy_tv();
 }
 
 barracks_stealthsettings_spawnfunc() {
@@ -3221,18 +3221,18 @@ barracks_enemy_cleanup() {
 }
 
 // ----------------- // --- STEAMROOM --- // ----------------- steamroom_setup() {
-  thread steamroom_before_player_gets_there_setup();
+thread steamroom_before_player_gets_there_setup();
 
-  // wait for level progression
-  flag_wait("steamroom_start");
+// wait for level progression
+flag_wait("steamroom_start");
 
-  if(!flag("barracks_stealth_broken") && !flag("player_pre_steamroom_stairs")) {
-    thread steamroom_knifekill_setup();
-    thread steamroom_price_knifekill();
-  }
+if(!flag("barracks_stealth_broken") && !flag("player_pre_steamroom_stairs")) {
+  thread steamroom_knifekill_setup();
+  thread steamroom_price_knifekill();
+}
 
-  thread steamroom_price_setup();
-  thread steamroom_action();
+thread steamroom_price_setup();
+thread steamroom_action();
 }
 
 steamroom_before_player_gets_there_setup() {
@@ -3491,24 +3491,24 @@ steamroom_price_teleport() {
 }
 
 // --- KNIFE KILL SEQUENCE -- steamroom_knifekill_setup() {
-  animref = GetEnt("steamroom_price_stealthkill_animref", "targetname");
+animref = GetEnt("steamroom_price_stealthkill_animref", "targetname");
 
-  spawner = GetEnt(animref.target, "targetname");
-  guy = spawner spawn_ai(true);
-  ASSERT(isDefined(guy));
+spawner = GetEnt(animref.target, "targetname");
+guy = spawner spawn_ai(true);
+ASSERT(isDefined(guy));
 
-  guy.ignoreme = false;
-  guy.ignoreall = true;
-  guy.allowDeath = false;
-  guy.grenadeAmmo = 0;
+guy.ignoreme = false;
+guy.ignoreall = true;
+guy.allowDeath = false;
+guy.grenadeAmmo = 0;
 
-  guy AnimMode("gravity");
-  guy SetGoalPos(guy.origin);
+guy AnimMode("gravity");
+guy SetGoalPos(guy.origin);
 
-  level.knifekill_animref = animref;
-  level.knifekill_guard = guy;
+level.knifekill_animref = animref;
+level.knifekill_guard = guy;
 
-  flag_set("steamroom_knifekill_setup_done");
+flag_set("steamroom_knifekill_setup_done");
 }
 
 steamroom_price_knifekill() {
@@ -3849,29 +3849,29 @@ steamroom_price_knifekill_bloodfx(stabWaitTime) {
   playFX(bloodfx, level.price GetTagOrigin(fxTag));
 }
 // --- END KNIFE KILL SEQUENCE -- steamroom_dialogue() {
-  // "Disciple Six, we've lost all contact with Disciple Five. Check it out over."radio_dialogue("afcaves_schq_lostcontact");
+// "Disciple Six, we've lost all contact with Disciple Five. Check it out over."radio_dialogue("afcaves_schq_lostcontact");
 
-  if(!flag("steamroom_entrance")) {
-    // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."radio_dialogue("afcaves_sc3_oncatwalk");
-  }
+if(!flag("steamroom_entrance")) {
+  // "Roger that Oxide, we're on the catwalk, heading to the steam room. Standby."radio_dialogue("afcaves_sc3_oncatwalk");
+}
 
-  flag_wait("steamroom_entrance");
+flag_wait("steamroom_entrance");
 
-  // "Oxide, Disciple Six at the steam room. No sign of Five, over."//radio_dialogue( "afcaves_sc3_atsteamroom" );
+// "Oxide, Disciple Six at the steam room. No sign of Five, over."//radio_dialogue( "afcaves_sc3_atsteamroom" );
 
-  // "Sounds like we're gonna meet 'em head on, Soap."//radio_dialogue( "afcaves_pri_meetemheadon" );
+// "Sounds like we're gonna meet 'em head on, Soap."//radio_dialogue( "afcaves_pri_meetemheadon" );
 
-  if(!flag("steamroom_price_moveup_1")) {
-    // "Disciple Six, go dark, breach and clear."radio_dialogue("afcaves_schq_godark");
+if(!flag("steamroom_price_moveup_1")) {
+  // "Disciple Six, go dark, breach and clear."radio_dialogue("afcaves_schq_godark");
 
-    // "Here we go - get ready."thread radio_dialogue("afcaves_pri_getready");
-  }
+  // "Here we go - get ready."thread radio_dialogue("afcaves_pri_getready");
+}
 
-  flag_set("steamroom_going_dark");
+flag_set("steamroom_going_dark");
 
-  if(!flag("steamroom_price_moveup_2")) {
-    // "Door charge planted. Ready to breach."radio_dialogue("afcaves_sc3_chargeplanted");
-  }
+if(!flag("steamroom_price_moveup_2")) {
+  // "Door charge planted. Ready to breach."radio_dialogue("afcaves_sc3_chargeplanted");
+}
 }
 
 steamroom_blow_door() {

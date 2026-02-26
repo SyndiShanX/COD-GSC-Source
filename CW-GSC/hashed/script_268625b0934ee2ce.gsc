@@ -114,11 +114,11 @@ function private stealth_noteworthy_init() {
   level.stealth.noteworthy.stealth_noteworthy_min_delay = 0.25;
   level.stealth.noteworthy.stealth_noteworthy_max_delay = 0.5;
   level.stealth.noteworthy.callout_enabled = [];
-  level.stealth.noteworthy.callout_enabled[# "left"] = 1;
-  level.stealth.noteworthy.callout_enabled[# "right"] = 1;
-  level.stealth.noteworthy.callout_enabled[# "ahead"] = 0;
-  level.stealth.noteworthy.callout_enabled[# "behind"] = 1;
-  level.stealth.noteworthy.callout_enabled[# "below"] = 1;
+  level.stealth.noteworthy.callout_enabled[#"left"] = 1;
+  level.stealth.noteworthy.callout_enabled[#"right"] = 1;
+  level.stealth.noteworthy.callout_enabled[#"ahead"] = 0;
+  level.stealth.noteworthy.callout_enabled[#"behind"] = 1;
+  level.stealth.noteworthy.callout_enabled[#"below"] = 1;
   level.stealth.noteworthy.fakeactors_aim = 1;
   level.stealth.noteworthy.fakeactors_callout = 0;
   level.stealth.noteworthy.civilians_aim = 1;
@@ -139,7 +139,7 @@ function private stealth_noteworthy_kill_monitor() {
   kills = undefined;
 
   while(true) {
-    kills = self.stats[# "kills"];
+    kills = self.stats[#"kills"];
 
     if(!isDefined(kills)) {
       kills = 0;
@@ -167,7 +167,7 @@ function private stealth_noteworthy_kill_monitor() {
       self thread stealth_noteworthy_delayed("civilian_kill", victim);
     }
 
-    kills = self.stats[# "kills"];
+    kills = self.stats[#"kills"];
 
     if(!isDefined(kills)) {
       kills = 1;
@@ -424,7 +424,7 @@ function stealth_noteworthy_callouts(enabled) {
         entnum = ent getentitynumber();
 
         if(is_true(level.stealth.noteworthy.callout_civilians)) {
-          foreach(existing_ent in callouts.results[# "all"]) {
+          foreach(existing_ent in callouts.results[#"all"]) {
             if(existing_ent.team != ent.team && existing_ent.team == "neutral") {
               callouts = stealth_noteworthy_callouts_init();
             }
@@ -433,7 +433,7 @@ function stealth_noteworthy_callouts(enabled) {
           }
         }
 
-        callouts.results[# "all"][entnum] = ent;
+        callouts.results[#"all"][entnum] = ent;
         dist_sq = distancesquared(self.origin, ent.origin);
 
         if(dist_sq < callouts.closest_dist_sq) {
@@ -475,12 +475,12 @@ function stealth_noteworthy_callouts(enabled) {
 
 function private stealth_noteworthy_callouts_init() {
   callouts = spawnStruct();
-  callouts.results[# "left"] = [];
-  callouts.results[# "right"] = [];
-  callouts.results[# "ahead"] = [];
-  callouts.results[# "behind"] = [];
-  callouts.results[# "below"] = [];
-  callouts.results[# "all"] = [];
+  callouts.results[#"left"] = [];
+  callouts.results[#"right"] = [];
+  callouts.results[#"ahead"] = [];
+  callouts.results[#"behind"] = [];
+  callouts.results[#"below"] = [];
+  callouts.results[#"all"] = [];
   callouts.closest_type = undefined;
   callouts.closest_dist_sq = sqr(20000);
   return callouts;

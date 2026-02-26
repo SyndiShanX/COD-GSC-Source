@@ -464,7 +464,7 @@ function_7ab912f2(s_loc) {
   self setfreecameralockonallowed(0);
   self forceteleport(s_loc.origin, s_loc.angles);
   self hide();
-  playFX(level._effect[# "lightning_dog_spawn"], s_loc.origin);
+  playFX(level._effect[#"lightning_dog_spawn"], s_loc.origin);
   playsoundatposition(#"zmb_hellhound_prespawn", s_loc.origin);
   wait 1.5;
   playsoundatposition(#"zmb_hellhound_bolt", s_loc.origin);
@@ -500,7 +500,7 @@ function_da824de8() {
 }
 
 function_bbc07822(a_ents) {
-  e_brutus = a_ents[# "brutus"];
+  e_brutus = a_ents[#"brutus"];
 
   if(level.brutus_count > 0) {
     var_f1404f73 = getaiarchetypearray(#"brutus")[0];
@@ -514,18 +514,18 @@ function_bbc07822(a_ents) {
   e_brutus.ignore_nuke = 1;
   e_brutus.b_ignore_cleanup = 1;
 
-  if(isDefined(a_ents[# "brutus"].var_972a4b46)) {
-    a_ents[# "brutus"].var_972a4b46 delete();
+  if(isDefined(a_ents[#"brutus"].var_972a4b46)) {
+    a_ents[#"brutus"].var_972a4b46 delete();
   }
 
   e_brutus thread function_d0392daf();
 }
 
 function_e7c9f15b(a_ents) {
-  e_brutus = a_ents[# "brutus"];
+  e_brutus = a_ents[#"brutus"];
   var_4bdae8cd = struct::get("p8_fxanim_zm_esc_recreationyard_rocks_a_bundle", "scriptbundlename");
   var_4bdae8cd thread scene::play("Main&Idle Loop Out");
-  e_brutus = a_ents[# "brutus"];
+  e_brutus = a_ents[#"brutus"];
   playsoundatposition(#"hash_66ef8de59c96e8d1", e_brutus gettagorigin("tag_eye"));
   e_brutus waittill(#"start_teleport");
   level thread function_21ccdb36();
@@ -541,9 +541,9 @@ play_brutus_scene_done(a_ents) {
   level.brutus_count = a_enemy.size;
 
   if(isDefined(level.var_43bca751) && level.var_43bca751 && !zm_utility::is_standard()) {
-    if(level.zones[# "zone_catwalk_04"].is_active) {
+    if(level.zones[#"zone_catwalk_04"].is_active) {
       zombie_brutus_util::attempt_brutus_spawn(1, "zone_catwalk_04");
-    } else if(level.zones[# "zone_catwalk_03"].is_active) {
+    } else if(level.zones[#"zone_catwalk_03"].is_active) {
       zombie_brutus_util::attempt_brutus_spawn(1, "zone_catwalk_03");
     } else {
       zombie_brutus_util::attempt_brutus_spawn(1);

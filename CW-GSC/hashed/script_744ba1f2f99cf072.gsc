@@ -286,7 +286,7 @@ function function_504f208d(a_ents) {
 }
 
 function function_8fad2177(a_ents) {
-  guy = a_ents[# "actor 1"];
+  guy = a_ents[#"actor 1"];
 
   if(isDefined(guy)) {
     guy setModel("c_t9_cp_rus_kgb_hq_officer_body2");
@@ -298,7 +298,7 @@ function function_8fad2177(a_ents) {
 
 function function_6b348535(a_ents) {
   level flag::wait_till("level_is_go");
-  door = a_ents[# "prop 2"];
+  door = a_ents[#"prop 2"];
   door attach("p9_rus_door_placard_gold_01", "door_plate_a");
   door attach("p9_rus_door_placard_text_01_security", "door_plate_a");
   door namespace_e77bf565::function_aa042bc7("belikov", "door_plate_a", 73);

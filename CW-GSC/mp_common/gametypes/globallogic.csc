@@ -36,13 +36,13 @@ function private preinit() {
   registerclientfield("playercorpse", "pineapplegun_effect", 1, 1, "int", &pineapplegun_effect_cb, 0);
   registerclientfield("actor", "annihilate_effect", 1, 1, "int", &annihilate_effect_cb, 0);
   registerclientfield("actor", "pineapplegun_effect", 1, 1, "int", &pineapplegun_effect_cb, 0);
-  clientfield::function_5b7d846d("hudItems.team1.roundsWon", #"hash_410fe12a68d6e801", [# "team1", #"roundswon"], 1, 4, "int", undefined, 0, 0);
-  clientfield::function_5b7d846d("hudItems.team2.roundsWon", #"hash_410fe12a68d6e801", [# "team2", #"roundswon"], 1, 4, "int", undefined, 0, 0);
+  clientfield::function_5b7d846d("hudItems.team1.roundsWon", #"hash_410fe12a68d6e801", [#"team1", #"roundswon"], 1, 4, "int", undefined, 0, 0);
+  clientfield::function_5b7d846d("hudItems.team2.roundsWon", #"hash_410fe12a68d6e801", [#"team2", #"roundswon"], 1, 4, "int", undefined, 0, 0);
   teamcount = getgametypesetting(#"teamcount");
 
   for(i = 1; i <= teamcount; i++) {
-    clientfield::function_5b7d846d("hudItems.team" + i + ".livesCount", #"hash_410fe12a68d6e801", [# "team" + i, #"livescount"], 1, 8, "int", undefined, 0, 0);
-    clientfield::function_5b7d846d("hudItems.team" + i + ".noRespawnsLeft", #"hash_410fe12a68d6e801", [# "team" + i, #"norespawnsleft"], 1, 1, "int", undefined, 0, 0);
+    clientfield::function_5b7d846d("hudItems.team" + i + ".livesCount", #"hash_410fe12a68d6e801", [#"team" + i, #"livescount"], 1, 8, "int", undefined, 0, 0);
+    clientfield::function_5b7d846d("hudItems.team" + i + ".noRespawnsLeft", #"hash_410fe12a68d6e801", [#"team" + i, #"norespawnsleft"], 1, 1, "int", undefined, 0, 0);
   }
 
   clientfield::register_clientuimodel("hudItems.armorIsOnCooldown", #"hud_items", #"armorisoncooldown", 1, 1, "int", undefined, 0, 0);
@@ -67,7 +67,7 @@ function private preinit() {
   clientfield::register_clientuimodel("huditems.killedByMasteryBadgeExpert", #"hud_items", #"killedbymasterybadgeexpert", 12000, 1, "int", undefined, 0, 0);
   clientfield::register_clientuimodel("huditems.killedByMasteryBadgeMaster", #"hud_items", #"killedbymasterybadgemaster", 12000, 1, "int", undefined, 0, 0);
   clientfield::register_clientuimodel("huditems.killedByClassMasteryBadge", #"hud_items", #"killedbyclassmasterybadge", 12000, 2, "int", undefined, 0, 0);
-  level._effect[# "pineapplegun_explosion"] = undefined;
+  level._effect[#"pineapplegun_explosion"] = undefined;
   level.gamestarted = 0;
   level.gameended = 0;
   level.postgame = 0;
@@ -145,7 +145,7 @@ function annihilate_effect_cb(localclientnum, oldval, newval, bnewent, binitials
 
 function pineapplegun_effect_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump && !fieldname) {
-    if(isDefined(level._effect[# "pineapplegun_explosion"])) {
+    if(isDefined(level._effect[#"pineapplegun_explosion"])) {
       where = self gettagorigin("J_SpineLower");
 
       if(!isDefined(where)) {
@@ -153,7 +153,7 @@ function pineapplegun_effect_cb(localclientnum, oldval, newval, bnewent, binitia
         where += (0, 0, 40);
       }
 
-      playFX(binitialsnap, level._effect[# "pineapplegun_explosion"], where);
+      playFX(binitialsnap, level._effect[#"pineapplegun_explosion"], where);
     }
   }
 }

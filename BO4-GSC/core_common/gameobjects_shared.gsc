@@ -1465,23 +1465,23 @@ set_dropped(var_e329a2fa) {
 
   if(isDefined(trace)) {
     tempangle = randomfloat(360);
-    droporigin = trace[# "position"] + (0, 0, self.dropoffset);
+    droporigin = trace[#"position"] + (0, 0, self.dropoffset);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       forward = (cos(tempangle), sin(tempangle), 0);
-      forward = vectornormalize(forward - vectorscale(trace[# "normal"], vectordot(forward, trace[# "normal"])));
+      forward = vectornormalize(forward - vectorscale(trace[#"normal"], vectordot(forward, trace[#"normal"])));
 
-      if(isDefined(trace[# "walkable"])) {
-        if(trace[# "walkable"] == 0) {
-          end_reflect = forward * 1000 + trace[# "position"];
-          reflect_trace = physicstrace(trace[# "position"], end_reflect, (trace_size * -1, trace_size * -1, trace_size * -1), (trace_size, trace_size, trace_size), self, 32);
+      if(isDefined(trace[#"walkable"])) {
+        if(trace[#"walkable"] == 0) {
+          end_reflect = forward * 1000 + trace[#"position"];
+          reflect_trace = physicstrace(trace[#"position"], end_reflect, (trace_size * -1, trace_size * -1, trace_size * -1), (trace_size, trace_size, trace_size), self, 32);
 
           if(isDefined(reflect_trace)) {
-            droporigin = reflect_trace[# "position"] + (0, 0, self.dropoffset);
+            droporigin = reflect_trace[#"position"] + (0, 0, self.dropoffset);
 
-            if(reflect_trace[# "fraction"] < 1) {
+            if(reflect_trace[#"fraction"] < 1) {
               forward = (cos(tempangle), sin(tempangle), 0);
-              forward = vectornormalize(forward - vectorscale(reflect_trace[# "normal"], vectordot(forward, reflect_trace[# "normal"])));
+              forward = vectornormalize(forward - vectorscale(reflect_trace[#"normal"], vectordot(forward, reflect_trace[#"normal"])));
             }
           }
         }
@@ -1508,7 +1508,7 @@ set_dropped(var_e329a2fa) {
       self.e_object.angles = dropangles;
     }
 
-    self thread pickup_timeout(trace[# "position"][2], startorigin[2]);
+    self thread pickup_timeout(trace[#"position"][2], startorigin[2]);
   } else {
     self move_visuals_to_base();
     self.trigger.origin = self.trigger.baseorigin;
@@ -1798,8 +1798,8 @@ track_carrier(object) {
     if(self isonground()) {
       trace = bulletTrace(self.origin + (0, 0, 20), self.origin - (0, 0, 20), 0, undefined);
 
-      if(trace[# "fraction"] < 1) {
-        object.safeorigin = trace[# "position"];
+      if(trace[#"fraction"] < 1) {
+        object.safeorigin = trace[#"position"];
       }
     }
 
@@ -1977,12 +1977,12 @@ function_bee2a129() {
 
 setup_touching() {
   self.var_a0ff5eb8 = 0;
-  self.touchinguserate[# "neutral"] = 0;
-  self.touchinguserate[# "none"] = 0;
-  self.numtouching[# "neutral"] = 0;
-  self.numtouching[# "none"] = 0;
-  self.touchlist[# "neutral"] = [];
-  self.touchlist[# "none"] = [];
+  self.touchinguserate[#"neutral"] = 0;
+  self.touchinguserate[#"none"] = 0;
+  self.numtouching[#"neutral"] = 0;
+  self.numtouching[#"none"] = 0;
+  self.touchlist[#"neutral"] = [];
+  self.touchlist[#"none"] = [];
 
   foreach(team, _ in level.teams) {
     self.touchinguserate[team] = 0;
@@ -1996,8 +1996,8 @@ setup_touching() {
 }
 
 function_2d29e9a4() {
-  self.var_1dbb2b2b[# "neutral"] = [];
-  self.var_1dbb2b2b[# "none"] = [];
+  self.var_1dbb2b2b[#"neutral"] = [];
+  self.var_1dbb2b2b[#"none"] = [];
 
   foreach(team, _ in level.teams) {
     self.var_1dbb2b2b[team] = [];
@@ -2306,7 +2306,7 @@ use_object_use_think(disableinitialholddelay, disableweaponcyclingduringhold) {
         }
       }
 
-      team = player.pers[# "team"];
+      team = player.pers[#"team"];
       result = self use_hold_think(player, disableweaponcyclingduringhold);
       self remove_player_use_modifiers(player);
 
@@ -2751,7 +2751,7 @@ can_claim(sentient) {
 }
 
 function_dfec159b(player) {
-  if(!isalive(player) || self use_object_locked_for_team(player.pers[# "team"])) {
+  if(!isalive(player) || self use_object_locked_for_team(player.pers[#"team"])) {
     return false;
   }
 
@@ -3878,11 +3878,11 @@ gameobject_is_player_looking_at(origin, dot, do_trace, ignore_ent, ignore_trace_
     if(do_trace) {
       trace = bulletTrace(eye, origin, 0, ignore_ent);
 
-      if(trace[# "position"] == origin) {
+      if(trace[#"position"] == origin) {
         return true;
       } else if(isDefined(ignore_trace_distance)) {
         n_mag = distance(origin, eye);
-        n_dist = distance(trace[# "position"], eye);
+        n_dist = distance(trace[#"position"], eye);
         n_delta = abs(n_dist - n_mag);
 
         if(n_delta <= ignore_trace_distance) {
@@ -3914,13 +3914,13 @@ hide_icons(team) {
   self.hidden_worldicon = [];
 
   if(hide_friendly == 1) {
-    self.hidden_compassicon[# "friendly"] = self.compassicons[# "friendly"];
-    self.hidden_worldicon[# "friendly"] = self.worldicons[# "friendly"];
+    self.hidden_compassicon[#"friendly"] = self.compassicons[#"friendly"];
+    self.hidden_worldicon[#"friendly"] = self.worldicons[#"friendly"];
   }
 
   if(hide_enemy == 1) {
-    self.hidden_compassicon[# "enemy"] = self.compassicons[# "enemyy"];
-    self.hidden_worldicon[# "enemy"] = self.worldicons[# "enemy"];
+    self.hidden_compassicon[#"enemy"] = self.compassicons[#"enemyy"];
+    self.hidden_worldicon[#"enemy"] = self.worldicons[#"enemy"];
   }
 
   self set_2d_icon(team, undefined);

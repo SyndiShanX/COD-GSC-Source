@@ -76,9 +76,9 @@ _planexpandaction(planner, action) {
   actioninfo = spawnStruct();
   actioninfo.name = action.api;
 
-  if(isDefined(actionfuncs[# "parameterize"])) {
+  if(isDefined(actionfuncs[#"parameterize"])) {
     _blackboardsreadwritemode(planner);
-    actioninfo.params = [[actionfuncs[# "parameterize"]]](planner, action.constants);
+    actioninfo.params = [[actionfuncs[#"parameterize"]]](planner, action.constants);
     assert(isstruct(actioninfo.params), "<dev string:x41>" + action.api + "<dev string:x69>");
     _blackboardsreadmode(planner);
   } else {
@@ -598,43 +598,43 @@ createplannerfromasset(assetname) {
 
 getplannerapifunction(functionname) {
   assert(ishash(functionname) && functionname != "<dev string:x138>", "<dev string:x14c>");
-  assert(isDefined(level._plannerscriptfunctions[# "api"][functionname]), "<dev string:x186>" + function_9e72a96(functionname) + "<dev string:x1a5>");
-  return level._plannerscriptfunctions[# "api"][functionname];
+  assert(isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x186>" + function_9e72a96(functionname) + "<dev string:x1a5>");
+  return level._plannerscriptfunctions[#"api"][functionname];
 }
 
 getplanneractionfunctions(actionname) {
   assert(ishash(actionname) && actionname != "<dev string:x138>", "<dev string:x1bd>");
-  assert(isDefined(level._plannerscriptfunctions[# "action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x1a5>");
-  return level._plannerscriptfunctions[# "action"][actionname];
+  assert(isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x1a5>");
+  return level._plannerscriptfunctions[#"action"][actionname];
 }
 
 registerplannerapi(functionname, functionptr) {
   assert(ishash(functionname) && functionname != "<dev string:x138>", "<dev string:x212>");
   assert(isfunctionptr(functionptr), "<dev string:x251>" + function_9e72a96(functionname) + "<dev string:x280>");
   planner::_initializeplannerfunctions(#"api");
-  assert(!isDefined(level._plannerscriptfunctions[# "api"][functionname]), "<dev string:x186>" + functionname + "<dev string:x2a1>");
-  level._plannerscriptfunctions[# "api"][functionname] = functionptr;
+  assert(!isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x186>" + functionname + "<dev string:x2a1>");
+  level._plannerscriptfunctions[#"api"][functionname] = functionptr;
 }
 
 registerplanneraction(actionname, paramfuncptr, initializefuncptr, updatefuncptr, terminatefuncptr) {
   assert(ishash(actionname) && actionname != "<dev string:x138>", "<dev string:x2b7>");
   planner::_initializeplannerfunctions("Action");
-  assert(!isDefined(level._plannerscriptfunctions[# "action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x2a1>");
-  level._plannerscriptfunctions[# "action"][actionname] = [];
+  assert(!isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x1f5>" + function_9e72a96(actionname) + "<dev string:x2a1>");
+  level._plannerscriptfunctions[#"action"][actionname] = [];
 
   if(isfunctionptr(paramfuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "parameterize"] = paramfuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"parameterize"] = paramfuncptr;
   }
 
   if(isfunctionptr(initializefuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "initialize"] = initializefuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"initialize"] = initializefuncptr;
   }
 
   if(isfunctionptr(updatefuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "update"] = updatefuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"update"] = updatefuncptr;
   }
 
   if(isfunctionptr(terminatefuncptr)) {
-    level._plannerscriptfunctions[# "action"][actionname][# "terminate"] = terminatefuncptr;
+    level._plannerscriptfunctions[#"action"][actionname][#"terminate"] = terminatefuncptr;
   }
 }

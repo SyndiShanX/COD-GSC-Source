@@ -25,8 +25,8 @@ function function_f4515ba8(localclientnum, oldval, newval, bnewent, binitialsnap
       str_tag = "tag_origin";
     }
 
-    if(isDefined(level._effect) && isDefined(level._effect[# "character_fire_death_torso"])) {
-      self.var_62f2a054 = util::playFXOnTag(fieldname, level._effect[# "character_fire_death_torso"], self, str_tag);
+    if(isDefined(level._effect) && isDefined(level._effect[#"character_fire_death_torso"])) {
+      self.var_62f2a054 = util::playFXOnTag(fieldname, level._effect[#"character_fire_death_torso"], self, str_tag);
     }
 
     self thread function_8847b8aa(fieldname);
@@ -60,7 +60,7 @@ function private function_8847b8aa(localclientnum) {
   a_str_tags[3] = "j_knee_le";
   a_str_tags = array::randomize(a_str_tags);
   self.var_803e161e = [];
-  self.var_803e161e[0] = util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_sm"], self, a_str_tags[0]);
+  self.var_803e161e[0] = util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_sm"], self, a_str_tags[0]);
   wait 1;
   a_str_tags[0] = "j_wrist_ri";
   a_str_tags[1] = "j_wrist_le";
@@ -71,6 +71,6 @@ function private function_8847b8aa(localclientnum) {
   }
 
   a_str_tags = array::randomize(a_str_tags);
-  self.var_803e161e[1] = util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_sm"], self, a_str_tags[0]);
-  self.var_803e161e[2] = util::playFXOnTag(localclientnum, level._effect[# "character_fire_death_sm"], self, a_str_tags[1]);
+  self.var_803e161e[1] = util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_sm"], self, a_str_tags[0]);
+  self.var_803e161e[2] = util::playFXOnTag(localclientnum, level._effect[#"character_fire_death_sm"], self, a_str_tags[1]);
 }

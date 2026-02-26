@@ -648,47 +648,47 @@ function function_a23603cf(var_1e4a820e = 1) {
     switch (level.gameskill) {
       case 0:
         hidden = [];
-        hidden[# "prone"] = 150;
-        hidden[# "crouch"] = 550;
-        hidden[# "stand"] = 800;
+        hidden[#"prone"] = 150;
+        hidden[#"crouch"] = 550;
+        hidden[#"stand"] = 800;
         break;
       case 1:
         hidden = [];
-        hidden[# "prone"] = 250;
-        hidden[# "crouch"] = 650;
-        hidden[# "stand"] = 900;
+        hidden[#"prone"] = 250;
+        hidden[#"crouch"] = 650;
+        hidden[#"stand"] = 900;
         break;
       case 2:
         hidden = [];
-        hidden[# "prone"] = 300;
-        hidden[# "crouch"] = 700;
-        hidden[# "stand"] = 950;
+        hidden[#"prone"] = 300;
+        hidden[#"crouch"] = 700;
+        hidden[#"stand"] = 950;
         break;
       case 3:
         hidden = [];
-        hidden[# "prone"] = 350;
-        hidden[# "crouch"] = 750;
-        hidden[# "stand"] = 1000;
+        hidden[#"prone"] = 350;
+        hidden[#"crouch"] = 750;
+        hidden[#"stand"] = 1000;
         break;
       default:
         hidden = [];
-        hidden[# "prone"] = 250;
-        hidden[# "crouch"] = 600;
-        hidden[# "stand"] = 800;
+        hidden[#"prone"] = 250;
+        hidden[#"crouch"] = 600;
+        hidden[#"stand"] = 800;
         break;
     }
   } else {
     hidden = [];
-    hidden[# "prone"] = 350;
-    hidden[# "crouch"] = 750;
-    hidden[# "stand"] = 1000;
+    hidden[#"prone"] = 350;
+    hidden[#"crouch"] = 750;
+    hidden[#"stand"] = 1000;
   }
 
-  hidden[# "shadow"] = 0.75;
+  hidden[#"shadow"] = 0.75;
   spotted = [];
-  spotted[# "prone"] = 8192;
-  spotted[# "crouch"] = 8192;
-  spotted[# "stand"] = 8192;
+  spotted[#"prone"] = 8192;
+  spotted[#"crouch"] = 8192;
+  spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
 }
 
@@ -987,7 +987,7 @@ function function_fa5905d0(var_11019c24) {
   s_origin = struct::get(var_11019c24, "targetname");
   v_fwd = anglesToForward(s_origin.angles);
   v_up = anglestoup(s_origin.angles);
-  playFX(level._effect[# "hash_a767caa536ae153"], s_origin.origin, v_fwd, v_up);
+  playFX(level._effect[#"hash_a767caa536ae153"], s_origin.origin, v_fwd, v_up);
   snd::client_msg("flg_heli_rappel_alarm");
   level namespace_4bd68414::function_cab80a31();
 }
@@ -1299,7 +1299,7 @@ function private function_a8c8444c(var_a6be6a4f) {
   if(self function_bec6c171(var_a6be6a4f)) {
     var_9012c9b0 = getweapon(#"hash_161ca1bfb05ce95c");
     var_1c8839e = self gettagorigin("tag_gunner_flash1");
-    playFXOnTag(level._effect[# "hash_7fa91cf654f23aa0"], self, "tag_gunner_flash1");
+    playFXOnTag(level._effect[#"hash_7fa91cf654f23aa0"], self, "tag_gunner_flash1");
     magicbullet(var_9012c9b0, var_1c8839e, var_a6be6a4f);
     wait 0.05;
     magicbullet(var_9012c9b0, var_1c8839e, var_a6be6a4f);
@@ -1328,7 +1328,7 @@ function private function_c6dc514e() {
     level lui::screen_fade_out(0.5, "black");
     util::missionfailedwrapper(level.var_85b00b2b, level.var_30eb363);
   } else {
-    playFXOnTag(level._effect[# "hash_7fa91cf654f23aa0"], self, "tag_searchlight_fx");
+    playFXOnTag(level._effect[#"hash_7fa91cf654f23aa0"], self, "tag_searchlight_fx");
     magicbullet(var_9012c9b0, var_1c8839e, v_player_pos);
   }
 
@@ -2263,8 +2263,8 @@ function function_869f213d() {
   s_scene_command_window_01 thread scene::play("scene_amk_0000_command_window_01", "react");
   s_scene_command_window_02 thread scene::play("scene_amk_0000_command_window_02", "react");
   waitframe(1);
-  var_fbf05a7d = s_scene_command_window_01.scene_ents[# "actor 1"];
-  var_23b6713 = s_scene_command_window_02.scene_ents[# "actor 2"];
+  var_fbf05a7d = s_scene_command_window_01.scene_ents[#"actor 1"];
+  var_23b6713 = s_scene_command_window_02.scene_ents[#"actor 2"];
   var_7e5397d0 = [var_fbf05a7d, var_23b6713];
   array::thread_all(var_7e5397d0, &function_b79d77ed);
 }

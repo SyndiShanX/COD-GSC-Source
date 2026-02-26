@@ -26,10 +26,10 @@ function private autoexec __init__system__() {
 function private preinit() {
   level.animsound_hudlimit = 14;
   level.var_99e12d63 = [];
-  level.var_99e12d63[# "axis"] = (1, 0, 0);
-  level.var_99e12d63[# "allies"] = (0, 1, 0);
-  level.var_99e12d63[# "team3"] = (1, 1, 0);
-  level.var_99e12d63[# "neutral"] = (1, 1, 1);
+  level.var_99e12d63[#"axis"] = (1, 0, 0);
+  level.var_99e12d63[#"allies"] = (0, 1, 0);
+  level.var_99e12d63[#"team3"] = (1, 1, 0);
+  level.var_99e12d63[#"neutral"] = (1, 1, 1);
   thread debugdvars();
   thread engagement_distance_debug_toggle();
 }
@@ -551,7 +551,7 @@ function showdebugtrace() {
     }
 
     trace = bulletTrace(start, end, 0, undefined);
-    line(start, trace[# "position"], (0.9, 0.5, 0.8), 0.5);
+    line(start, trace[#"position"], (0.9, 0.5, 0.8), 0.5);
   }
 }
 
@@ -840,18 +840,18 @@ function init_animsounds() {
 
 function init_notetracks_for_animname(animname) {
   foreach(v in level.scr_notetrack[animname]) {
-    soundalias = v[# "sound"];
+    soundalias = v[#"sound"];
 
     if(!isDefined(soundalias)) {
       continue;
     }
 
-    anime = v[# "anime"];
-    notetrack = v[# "notetrack"];
-    level.animsound_aliases[animname][anime][notetrack][# "soundalias"] = soundalias;
+    anime = v[#"anime"];
+    notetrack = v[#"notetrack"];
+    level.animsound_aliases[animname][anime][notetrack][#"soundalias"] = soundalias;
 
-    if(isDefined(v[# "hash_3bcdf8e8541b5d4a"])) {
-      level.animsound_aliases[animname][anime][notetrack][# "hash_3bcdf8e8541b5d4a"] = 1;
+    if(isDefined(v[#"hash_3bcdf8e8541b5d4a"])) {
+      level.animsound_aliases[animname][anime][notetrack][#"hash_3bcdf8e8541b5d4a"] = 1;
     }
   }
 }
@@ -862,8 +862,8 @@ function init_animsounds_for_animname(animname) {
   for(i = 0; i < animes.size; i++) {
     anime = animes[i];
     soundalias = level.scr_animsound[animname][anime];
-    level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][# "soundalias"] = soundalias;
-    level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][# "hash_3bcdf8e8541b5d4a"] = 1;
+    level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][#"soundalias"] = soundalias;
+    level.animsound_aliases[animname][anime]["<dev string:x1f8>" + anime][#"hash_3bcdf8e8541b5d4a"] = 1;
   }
 }
 
@@ -1161,11 +1161,11 @@ function get_alias_from_stored(animsound) {
     return;
   }
 
-  return level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][# "soundalias"];
+  return level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][#"soundalias"];
 }
 
 function is_from_animsound(animname, anime, notetrack) {
-  return isDefined(level.animsound_aliases[animname][anime][notetrack][# "hash_3bcdf8e8541b5d4a"]);
+  return isDefined(level.animsound_aliases[animname][anime][notetrack][#"hash_3bcdf8e8541b5d4a"]);
 }
 
 function function_e5ad4202() {
@@ -1215,8 +1215,8 @@ function tag_sound(tag, tagnum) {
   soundalias = get_alias_from_stored(animsound);
 
   if(!isDefined(soundalias) || is_from_animsound(animsound.animname, animsound.anime, animsound.notetrack)) {
-    level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][# "soundalias"] = tag;
-    level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][# "hash_3bcdf8e8541b5d4a"] = 1;
+    level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][#"soundalias"] = tag;
+    level.animsound_aliases[animsound.animname][animsound.anime][animsound.notetrack][#"hash_3bcdf8e8541b5d4a"] = 1;
     function_119a2b9f();
   }
 }
@@ -1264,7 +1264,7 @@ function function_eaaa729a(file) {
           continue;
         }
 
-        alias = level.animsound_aliases[animnames[i]][anime][notetrack][# "soundalias"];
+        alias = level.animsound_aliases[animnames[i]][anime][notetrack][#"soundalias"];
 
         if(notetrack == "<dev string:x1f8>" + anime) {
           fprintln(file, tab + "<dev string:x4e8>" + tostr(animnames[i]) + "<dev string:x502>" + tostr(anime) + "<dev string:x502>" + tostr(alias) + "<dev string:x508>");
@@ -1600,8 +1600,8 @@ function debug_realtime_engage_dist() {
     direction_vec = anglesToForward(direction);
     eye = player getEye();
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, 10000), 1, player);
-    tracepoint = trace[# "position"];
-    tracenormal = trace[# "normal"];
+    tracepoint = trace[#"position"];
+    tracenormal = trace[#"normal"];
     tracedist = int(distance(eye, tracepoint));
 
     if(tracepoint != lasttracepos) {
@@ -1804,7 +1804,7 @@ function function_90edec37() {
     eye = self getEye();
     trace_dist = 4000;
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, trace_dist), 0, level.dynamic_spawn_dummy_model);
-    dist = distance(eye, trace[# "position"]);
+    dist = distance(eye, trace[#"position"]);
     position = eye + vectorscale(direction_vec, dist - level.aitypes[level.var_9f54edf5].radius);
     origin = position;
     angles = self.angles + (0, 180, 0);
@@ -1913,7 +1913,7 @@ function debug_health() {
   }
 
   if(isDefined(level.player)) {
-    recordenttext(isDefined(level.player.health) ? "<dev string:x38>" + level.player.health : "<dev string:x38>", level.player, level.var_99e12d63[# "allies"], "<dev string:x957>");
+    recordenttext(isDefined(level.player.health) ? "<dev string:x38>" + level.player.health : "<dev string:x38>", level.player, level.var_99e12d63[#"allies"], "<dev string:x957>");
   }
 }
 

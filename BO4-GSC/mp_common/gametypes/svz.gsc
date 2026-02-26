@@ -165,14 +165,14 @@ onspawnplayer(predictedspawn) {
   if(self.team == game.attackers) {
     self.var_ec2d285c = 0;
 
-    if(!isDefined(self.pers[# "cachedrole"])) {
-      self.pers[# "cachedrole"] = self player_role::get();
+    if(!isDefined(self.pers[#"cachedrole"])) {
+      self.pers[#"cachedrole"] = self player_role::get();
     }
 
     self thread function_fe170e7();
-  } else if(isDefined(self.pers[# "cachedrole"])) {
-    self player_role::set(self.pers[# "cachedrole"], 1);
-    self.pers[# "cachedrole"] = undefined;
+  } else if(isDefined(self.pers[#"cachedrole"])) {
+    self player_role::set(self.pers[#"cachedrole"], 1);
+    self.pers[#"cachedrole"] = undefined;
   }
 
   spawning::onspawnplayer(predictedspawn);
@@ -358,7 +358,7 @@ function_8d346fd8(winningteam) {
   players = level.players;
 
   for(i = 0; i < players.size; i++) {
-    if(!isDefined(players[i].pers[# "team"])) {
+    if(!isDefined(players[i].pers[#"team"])) {
       continue;
     }
 
@@ -371,12 +371,12 @@ function_8d346fd8(winningteam) {
       continue;
     }
 
-    if(players[i].pers[# "team"] == winningteam) {
+    if(players[i].pers[#"team"] == winningteam) {
       globallogic_score::updatewinstats(players[i]);
       continue;
     }
 
-    if(level.rankedmatch && !level.leaguematch && players[i].pers[# "latejoin"] === 1) {
+    if(level.rankedmatch && !level.leaguematch && players[i].pers[#"latejoin"] === 1) {
       globallogic_score::updatelosslatejoinstats(players[i]);
     }
 

@@ -37,17 +37,17 @@ function register(var_8c9ddf96) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "blackseajetskideployprompt"])) {
-    level.var_ae746e8f[# "blackseajetskideployprompt"] = [];
+  if(!isDefined(level.var_ae746e8f[#"blackseajetskideployprompt"])) {
+    level.var_ae746e8f[#"blackseajetskideployprompt"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "blackseajetskideployprompt"])) {
-    level.var_ae746e8f[# "blackseajetskideployprompt"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "blackseajetskideployprompt"])) {
-    level.var_ae746e8f[# "blackseajetskideployprompt"] = array(level.var_ae746e8f[# "blackseajetskideployprompt"]);
+  if(!isDefined(level.var_ae746e8f[#"blackseajetskideployprompt"])) {
+    level.var_ae746e8f[#"blackseajetskideployprompt"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"blackseajetskideployprompt"])) {
+    level.var_ae746e8f[#"blackseajetskideployprompt"] = array(level.var_ae746e8f[#"blackseajetskideployprompt"]);
   }
 
-  level.var_ae746e8f[# "blackseajetskideployprompt"][level.var_ae746e8f[# "blackseajetskideployprompt"].size] = elem;
+  level.var_ae746e8f[#"blackseajetskideployprompt"][level.var_ae746e8f[#"blackseajetskideployprompt"].size] = elem;
 }
 
 function register_clientside() {

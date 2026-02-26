@@ -494,18 +494,18 @@ function function_29b49cb5() {
     return;
   }
 
-  if(isDefined(world.mapdata[missionid][# "transient"].var_2e7c022f)) {
-    world.mapdata[missionid][# "transient"].var_2e7c022f = undefined;
-    world.mapdata[missionid][# "transient"].var_37017d9 = undefined;
-    world.mapdata[missionid][# "transient"].var_ba4d1bad = undefined;
+  if(isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
+    world.mapdata[missionid][#"transient"].var_2e7c022f = undefined;
+    world.mapdata[missionid][#"transient"].var_37017d9 = undefined;
+    world.mapdata[missionid][#"transient"].var_ba4d1bad = undefined;
   }
 }
 
 function function_34163738() {
   missionid = savegame::function_8136eb5a();
 
-  if(isDefined(world.mapdata[missionid][# "transient"].var_2e7c022f)) {
-    level.var_7334dc42 = world.mapdata[missionid][# "transient"].var_2e7c022f;
+  if(isDefined(world.mapdata[missionid][#"transient"].var_2e7c022f)) {
+    level.var_7334dc42 = world.mapdata[missionid][#"transient"].var_2e7c022f;
     return true;
   }
 

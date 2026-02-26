@@ -154,13 +154,13 @@ function private heli() {
 function private truck() {
   truck = self;
   var_4c5ca2df = [];
-  var_4c5ca2df[# "speed"] = [0, 18];
-  var_4c5ca2df[# "scale"] = [snd::function_d8b24901(-12), snd::function_d8b24901(12)];
-  var_4c5ca2df[# "curve"] = ["linear"];
+  var_4c5ca2df[#"speed"] = [0, 18];
+  var_4c5ca2df[#"scale"] = [snd::function_d8b24901(-12), snd::function_d8b24901(12)];
+  var_4c5ca2df[#"curve"] = ["linear"];
   var_9fd84ef1 = [];
-  var_9fd84ef1[# "speed"] = [0, 6];
-  var_9fd84ef1[# "scale"] = [0.1, 1];
-  var_9fd84ef1[# "curve"] = ["xfade"];
+  var_9fd84ef1[#"speed"] = [0, 6];
+  var_9fd84ef1[#"scale"] = [0.1, 1];
+  var_9fd84ef1[#"curve"] = ["xfade"];
   var_de483b4c = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
   snd::function_f4f3a2a(var_de483b4c, truck);
 }
@@ -168,13 +168,13 @@ function private truck() {
 function private ai_truck() {
   truck = self;
   var_4c5ca2df = [];
-  var_4c5ca2df[# "speed"] = [0, 18];
-  var_4c5ca2df[# "scale"] = [snd::function_d8b24901(-12), snd::function_d8b24901(12)];
-  var_4c5ca2df[# "curve"] = ["linear"];
+  var_4c5ca2df[#"speed"] = [0, 18];
+  var_4c5ca2df[#"scale"] = [snd::function_d8b24901(-12), snd::function_d8b24901(12)];
+  var_4c5ca2df[#"curve"] = ["linear"];
   var_9fd84ef1 = [];
-  var_9fd84ef1[# "speed"] = [0, 6];
-  var_9fd84ef1[# "scale"] = [0.1, 1];
-  var_9fd84ef1[# "curve"] = ["xfade"];
+  var_9fd84ef1[#"speed"] = [0, 6];
+  var_9fd84ef1[#"scale"] = [0.1, 1];
+  var_9fd84ef1[#"curve"] = ["xfade"];
   var_de483b4c = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
   snd::function_f4f3a2a(var_de483b4c, truck);
 }
@@ -182,13 +182,13 @@ function private ai_truck() {
 function private function_4ada6bd4() {
   truck = self;
   var_4c5ca2df = [];
-  var_4c5ca2df[# "speed"] = [0, 18];
-  var_4c5ca2df[# "scale"] = [snd::function_d8b24901(-12), snd::function_d8b24901(12)];
-  var_4c5ca2df[# "curve"] = ["linear"];
+  var_4c5ca2df[#"speed"] = [0, 18];
+  var_4c5ca2df[#"scale"] = [snd::function_d8b24901(-12), snd::function_d8b24901(12)];
+  var_4c5ca2df[#"curve"] = ["linear"];
   var_9fd84ef1 = [];
-  var_9fd84ef1[# "speed"] = [0, 6];
-  var_9fd84ef1[# "scale"] = [0.1, 1];
-  var_9fd84ef1[# "curve"] = ["xfade"];
+  var_9fd84ef1[#"speed"] = [0, 6];
+  var_9fd84ef1[#"scale"] = [0.1, 1];
+  var_9fd84ef1[#"curve"] = ["xfade"];
   var_de483b4c = snd::speed(truck, "veh_jeep_engine_lp", var_4c5ca2df, var_9fd84ef1);
   snd::function_f4f3a2a(var_de483b4c, truck);
 }

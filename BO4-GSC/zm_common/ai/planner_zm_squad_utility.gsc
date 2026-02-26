@@ -154,7 +154,7 @@ function_98118579(planner) {
   params.var_3ff64dd6 = undefined;
 
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bot = botinfo[# "__unsafe__"][# "bot"];
+    bot = botinfo[#"__unsafe__"][#"bot"];
 
     if(strategiccommandutility::isvalidbot(bot)) {
       botposition = getclosestpointonnavmesh(bot.origin, 200);
@@ -206,8 +206,8 @@ function_66cc90a(planner, params) {
 
   foreach(bot in params.bots) {
     if(strategiccommandutility::isvalidbot(bot)) {
-      altar = params.altar[# "__unsafe__"][# "altar"];
-      var_8d32cef2 = getclosestpointonnavmesh(params.altar[# "origin"], 200, bot getpathfindingradius());
+      altar = params.altar[#"__unsafe__"][#"altar"];
+      var_8d32cef2 = getclosestpointonnavmesh(params.altar[#"origin"], 200, bot getpathfindingradius());
       bot bot::set_interact(altar);
       bot setgoal(var_8d32cef2);
       bot.goalradius = 512;
@@ -222,7 +222,7 @@ function_e0bf989(planner, params) {
     return 2;
   }
 
-  altar = params.altar[# "__unsafe__"][# "altar"];
+  altar = params.altar[#"__unsafe__"][#"altar"];
 
   if(!isDefined(altar) || altar.var_3468124.var_2977c27 != "on" || function_d6d5e252(params.bots[0], altar)) {
     params.bots[0] bot::clear_interact();
@@ -233,8 +233,8 @@ function_e0bf989(planner, params) {
 }
 
 function_14c67eb3(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x38>" + "<dev string:x46>" + "<dev string:x76>");
-  assert(isint(constants[# "affordability"]) || isfloat(constants[# "affordability"]), "<dev string:x38>" + "<dev string:x46>" + "<dev string:xa0>");
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x38>" + "<dev string:x46>" + "<dev string:x76>");
+  assert(isint(constants[#"affordability"]) || isfloat(constants[#"affordability"]), "<dev string:x38>" + "<dev string:x46>" + "<dev string:xa0>");
   params = function_98118579(planner);
 
   if(params.bots.size <= 0) {
@@ -242,7 +242,7 @@ function_14c67eb3(planner, constants) {
   }
 
   var_5f1842bf = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
   altars = planner::getblackboardattribute(planner, #"zm_altars");
 
   if(!isDefined(altars)) {
@@ -251,7 +251,7 @@ function_14c67eb3(planner, constants) {
 
   foreach(var_509f4558 in altars) {
     if(isDefined(var_509f4558)) {
-      altar = var_509f4558[# "__unsafe__"][# "altar"];
+      altar = var_509f4558[#"__unsafe__"][#"altar"];
 
       if(altar.var_3468124.var_2977c27 != "on") {
         continue;
@@ -274,14 +274,14 @@ function_14c67eb3(planner, constants) {
         cost = [[level._custom_perks[perk].cost]]();
       }
 
-      if(cost > params.var_3ff64dd6 || cost / params.var_3ff64dd6 > constants[# "affordability"]) {
+      if(cost > params.var_3ff64dd6 || cost / params.var_3ff64dd6 > constants[#"affordability"]) {
         continue;
       }
 
       closeenough = 1;
 
       foreach(botposition in params.botpositions) {
-        if(distance2dsquared(var_509f4558[# "origin"], botposition) > distancesq) {
+        if(distance2dsquared(var_509f4558[#"origin"], botposition) > distancesq) {
           closeenough = 0;
           break;
         }
@@ -298,11 +298,11 @@ function_14c67eb3(planner, constants) {
   var_c4302000 = undefined;
 
   foreach(var_509f4558 in var_5f1842bf) {
-    altar = var_509f4558[# "__unsafe__"][# "altar"];
+    altar = var_509f4558[#"__unsafe__"][#"altar"];
     pathsegment = strategiccommandutility::function_e696ce55(params.bots[0], altar);
 
     if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
-      if(pathsegment.pathdistance > constants[# "distance"] * 2) {
+      if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
 
@@ -331,8 +331,8 @@ function_e442b780(planner, params) {
 
   foreach(bot in params.bots) {
     if(strategiccommandutility::isvalidbot(bot)) {
-      blocker = params.blocker[# "__unsafe__"][# "blocker"];
-      var_9b096a0b = getclosestpointonnavmesh(params.blocker[# "origin"], 200, bot getpathfindingradius());
+      blocker = params.blocker[#"__unsafe__"][#"blocker"];
+      var_9b096a0b = getclosestpointonnavmesh(params.blocker[#"origin"], 200, bot getpathfindingradius());
       bot bot::set_interact(blocker);
       bot setgoal(var_9b096a0b);
       bot.goalradius = 512;
@@ -343,8 +343,8 @@ function_e442b780(planner, params) {
 }
 
 function_2af9b775(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x38>" + "<dev string:xcf>" + "<dev string:x76>");
-  assert(isint(constants[# "affordability"]) || isfloat(constants[# "affordability"]), "<dev string:x38>" + "<dev string:xcf>" + "<dev string:xa0>");
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x38>" + "<dev string:xcf>" + "<dev string:x76>");
+  assert(isint(constants[#"affordability"]) || isfloat(constants[#"affordability"]), "<dev string:x38>" + "<dev string:xcf>" + "<dev string:xa0>");
   params = function_98118579(planner);
 
   if(params.bots.size <= 0) {
@@ -352,7 +352,7 @@ function_2af9b775(planner, constants) {
   }
 
   var_270c0711 = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
   blockers = planner::getblackboardattribute(planner, #"zm_blockers");
 
   if(!isDefined(blockers)) {
@@ -361,15 +361,15 @@ function_2af9b775(planner, constants) {
 
   foreach(var_a1cd9f8e in blockers) {
     if(isDefined(var_a1cd9f8e) && getdvarint(#"hash_76cdb24d903cc201", 0)) {
-      recordline(getplayers()[0].origin, var_a1cd9f8e[# "origin"], (1, 0.5, 0), "<dev string:x101>");
-      recordsphere(var_a1cd9f8e[# "origin"], 4, (1, 0.5, 0), "<dev string:x10a>");
+      recordline(getplayers()[0].origin, var_a1cd9f8e[#"origin"], (1, 0.5, 0), "<dev string:x101>");
+      recordsphere(var_a1cd9f8e[#"origin"], 4, (1, 0.5, 0), "<dev string:x10a>");
     }
 
-    if(isDefined(var_a1cd9f8e) && var_a1cd9f8e[# "cost"] <= params.var_3ff64dd6 && var_a1cd9f8e[# "cost"] / params.var_3ff64dd6 <= constants[# "affordability"]) {
+    if(isDefined(var_a1cd9f8e) && var_a1cd9f8e[#"cost"] <= params.var_3ff64dd6 && var_a1cd9f8e[#"cost"] / params.var_3ff64dd6 <= constants[#"affordability"]) {
       closeenough = 1;
 
       foreach(botposition in params.botpositions) {
-        if(distance2dsquared(var_a1cd9f8e[# "origin"], botposition) > distancesq) {
+        if(distance2dsquared(var_a1cd9f8e[#"origin"], botposition) > distancesq) {
           closeenough = 0;
           break;
         }
@@ -377,7 +377,7 @@ function_2af9b775(planner, constants) {
 
       if(closeenough) {
         if(isDefined(var_a1cd9f8e) && getdvarint(#"hash_76cdb24d903cc201", 0)) {
-          recordsphere(var_a1cd9f8e[# "origin"] + (0, 0, 10), 4, (0, 1, 0), "<dev string:x10a>");
+          recordsphere(var_a1cd9f8e[#"origin"] + (0, 0, 10), 4, (0, 1, 0), "<dev string:x10a>");
         }
 
         var_270c0711[var_270c0711.size] = var_a1cd9f8e;
@@ -390,7 +390,7 @@ function_2af9b775(planner, constants) {
   var_2fcdec8b = undefined;
 
   foreach(var_a1cd9f8e in var_270c0711) {
-    blocker = var_a1cd9f8e[# "__unsafe__"][# "blocker"];
+    blocker = var_a1cd9f8e[#"__unsafe__"][#"blocker"];
 
     if(!isDefined(blocker) || blocker._door_open === 1 || blocker.has_been_opened === 1) {
       continue;
@@ -399,7 +399,7 @@ function_2af9b775(planner, constants) {
     pathsegment = strategiccommandutility::calculatepathtotrigger(params.bots[0], blocker);
 
     if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
-      if(pathsegment.pathdistance > constants[# "distance"] * 2) {
+      if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
 
@@ -417,7 +417,7 @@ function_2af9b775(planner, constants) {
     planner::setblackboardattribute(planner, #"zm_pathable_blockers", array(var_2fcdec8b));
 
     if(isDefined(var_2fcdec8b) && getdvarint(#"hash_76cdb24d903cc201", 0)) {
-      recordsphere(var_2fcdec8b[# "origin"] + (0, 0, 30), 8, (1, 0.752941, 0.796078), "<dev string:x10a>");
+      recordsphere(var_2fcdec8b[#"origin"] + (0, 0, 30), 8, (1, 0.752941, 0.796078), "<dev string:x10a>");
     }
 
     params.blocker = var_2fcdec8b;
@@ -431,7 +431,7 @@ function_8015e63c(planner, params) {
     return 2;
   }
 
-  blocker = params.blocker[# "__unsafe__"][# "blocker"];
+  blocker = params.blocker[#"__unsafe__"][#"blocker"];
 
   if(!isDefined(blocker) || blocker._door_open === 1 || blocker.has_been_opened === 1) {
     return 2;
@@ -447,8 +447,8 @@ function_73f656f5(planner, params) {
 
   foreach(bot in params.bots) {
     if(strategiccommandutility::isvalidbot(bot)) {
-      chest = params.chest[# "__unsafe__"][# "chest"];
-      chestpos = getclosestpointonnavmesh(params.chest[# "origin"], 200, bot getpathfindingradius());
+      chest = params.chest[#"__unsafe__"][#"chest"];
+      chestpos = getclosestpointonnavmesh(params.chest[#"origin"], 200, bot getpathfindingradius());
       bot bot::set_interact(chest);
       bot setgoal(chestpos);
       bot.goalradius = 512;
@@ -459,8 +459,8 @@ function_73f656f5(planner, params) {
 }
 
 function_e057582f(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x38>" + "<dev string:x113>" + "<dev string:x76>");
-  assert(isint(constants[# "affordability"]) || isfloat(constants[# "affordability"]), "<dev string:x38>" + "<dev string:x113>" + "<dev string:xa0>");
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x38>" + "<dev string:x113>" + "<dev string:x76>");
+  assert(isint(constants[#"affordability"]) || isfloat(constants[#"affordability"]), "<dev string:x38>" + "<dev string:x113>" + "<dev string:xa0>");
   params = function_98118579(planner);
 
   if(params.bots.size <= 0) {
@@ -468,7 +468,7 @@ function_e057582f(planner, constants) {
   }
 
   var_6a7f5461 = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
   chests = planner::getblackboardattribute(planner, #"zm_chests");
 
   if(!isDefined(chests)) {
@@ -476,11 +476,11 @@ function_e057582f(planner, constants) {
   }
 
   foreach(var_a0633d6d in chests) {
-    if(isDefined(var_a0633d6d) && var_a0633d6d[# "cost"] <= params.var_3ff64dd6 && var_a0633d6d[# "cost"] / params.var_3ff64dd6 <= constants[# "affordability"]) {
+    if(isDefined(var_a0633d6d) && var_a0633d6d[#"cost"] <= params.var_3ff64dd6 && var_a0633d6d[#"cost"] / params.var_3ff64dd6 <= constants[#"affordability"]) {
       closeenough = 1;
 
       foreach(botposition in params.botpositions) {
-        if(distance2dsquared(var_a0633d6d[# "origin"], botposition) > distancesq) {
+        if(distance2dsquared(var_a0633d6d[#"origin"], botposition) > distancesq) {
           closeenough = 0;
           break;
         }
@@ -497,7 +497,7 @@ function_e057582f(planner, constants) {
   var_58fadc5d = undefined;
 
   foreach(var_a0633d6d in var_6a7f5461) {
-    chest = var_a0633d6d[# "__unsafe__"][# "chest"];
+    chest = var_a0633d6d[#"__unsafe__"][#"chest"];
 
     if(!isDefined(chest) || chest.hidden || isDefined(chest._box_open) && chest._box_open) {
       continue;
@@ -506,7 +506,7 @@ function_e057582f(planner, constants) {
     pathsegment = strategiccommandutility::function_e696ce55(params.bots[0], chest.unitrigger_stub);
 
     if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
-      if(pathsegment.pathdistance > constants[# "distance"] * 2) {
+      if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
 
@@ -544,7 +544,7 @@ function_ac1b59c(planner, constants) {
 
   foreach(var_a0633d6d in chests) {
     if(isDefined(var_a0633d6d)) {
-      chest = var_a0633d6d[# "__unsafe__"][# "chest"];
+      chest = var_a0633d6d[#"__unsafe__"][#"chest"];
 
       if(isDefined(chest.chest_user) && chest.chest_user === params.bots[0] && isDefined(chest._box_open) && chest._box_open && isDefined(chest.grab_weapon) && chest.grab_weapon.firetype !== "Single Shot") {
         var_6a7f5461[var_6a7f5461.size] = var_a0633d6d;
@@ -557,7 +557,7 @@ function_ac1b59c(planner, constants) {
   var_58fadc5d = undefined;
 
   foreach(var_a0633d6d in var_6a7f5461) {
-    chest = var_a0633d6d[# "__unsafe__"][# "chest"];
+    chest = var_a0633d6d[#"__unsafe__"][#"chest"];
 
     if(!isDefined(chest) || chest.hidden) {
       continue;
@@ -589,7 +589,7 @@ function_29e16403(planner, params) {
     return 2;
   }
 
-  chest = params.chest[# "__unsafe__"][# "chest"];
+  chest = params.chest[#"__unsafe__"][#"chest"];
 
   if(!isDefined(chest) || chest.hidden) {
     return 2;
@@ -599,7 +599,7 @@ function_29e16403(planner, params) {
 }
 
 function_4f6a626d(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x38>" + "<dev string:x143>" + "<dev string:x76>");
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x38>" + "<dev string:x143>" + "<dev string:x76>");
   params = function_98118579(planner);
 
   if(params.bots.size <= 0) {
@@ -607,7 +607,7 @@ function_4f6a626d(planner, constants) {
   }
 
   var_a9cd6db9 = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
   powerups = planner::getblackboardattribute(planner, #"zm_powerups");
 
   if(!isDefined(powerups)) {
@@ -616,7 +616,7 @@ function_4f6a626d(planner, constants) {
 
   foreach(powerupinfo in powerups) {
     closeenough = 1;
-    powerup = powerupinfo[# "__unsafe__"][# "powerup"];
+    powerup = powerupinfo[#"__unsafe__"][#"powerup"];
 
     if(!isDefined(powerup)) {
       continue;
@@ -640,7 +640,7 @@ function_4f6a626d(planner, constants) {
   var_ce95e926 = 64;
 
   foreach(powerupinfo in var_a9cd6db9) {
-    powerup = powerupinfo[# "__unsafe__"][# "powerup"];
+    powerup = powerupinfo[#"__unsafe__"][#"powerup"];
     poweruporigin = getclosestpointonnavmesh(powerup.origin, 200, params.bots[0] getpathfindingradius());
 
     if(!isDefined(poweruporigin)) {
@@ -652,7 +652,7 @@ function_4f6a626d(planner, constants) {
     pathsegment = strategiccommandutility::calculatepathtopoints(params.bots[0], array(pointstruct));
 
     if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
-      if(pathsegment.pathdistance > constants[# "distance"] * 2) {
+      if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
 
@@ -679,7 +679,7 @@ function_58d72c81(planner, params) {
     return 2;
   }
 
-  powerup = params.powerup[# "__unsafe__"][# "powerup"];
+  powerup = params.powerup[#"__unsafe__"][#"powerup"];
 
   if(!isDefined(powerup)) {
     return 2;
@@ -704,7 +704,7 @@ function_6e8fe489(planner, params) {
     return 2;
   }
 
-  powerup = params.powerup[# "__unsafe__"][# "powerup"];
+  powerup = params.powerup[#"__unsafe__"][#"powerup"];
 
   if(!isDefined(powerup)) {
     function_a023ae49(planner, params);
@@ -715,7 +715,7 @@ function_6e8fe489(planner, params) {
 }
 
 function_557051df(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x38>" + "<dev string:x175>" + "<dev string:x76>");
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x38>" + "<dev string:x175>" + "<dev string:x76>");
   params = function_98118579(planner);
 
   if(params.bots.size <= 0) {
@@ -723,7 +723,7 @@ function_557051df(planner, constants) {
   }
 
   var_8498b0f1 = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
   switches = planner::getblackboardattribute(planner, #"zm_switches");
 
   if(!isDefined(switches)) {
@@ -735,7 +735,7 @@ function_557051df(planner, constants) {
   var_a0301374 = undefined;
 
   foreach(var_c42f08a2 in switches) {
-    switchent = var_c42f08a2[# "__unsafe__"][# "switch"];
+    switchent = var_c42f08a2[#"__unsafe__"][#"switch"];
 
     if(!isDefined(switchent)) {
       continue;
@@ -744,7 +744,7 @@ function_557051df(planner, constants) {
     pathsegment = strategiccommandutility::calculatepathtotrigger(params.bots[0], switchent);
 
     if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
-      if(pathsegment.pathdistance > constants[# "distance"] * 2) {
+      if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
 
@@ -771,7 +771,7 @@ function_967b74c1(planner, params) {
     return 2;
   }
 
-  switchent = params.var_ed8f7cef[# "__unsafe__"][# "switch"];
+  switchent = params.var_ed8f7cef[#"__unsafe__"][#"switch"];
 
   if(!isDefined(switchent)) {
     return 2;
@@ -794,7 +794,7 @@ function_20f747ae(planner, params) {
     return 2;
   }
 
-  switchent = params.var_ed8f7cef[# "__unsafe__"][# "switch"];
+  switchent = params.var_ed8f7cef[#"__unsafe__"][#"switch"];
 
   if(!isDefined(switchent)) {
     return 2;
@@ -810,8 +810,8 @@ function_6fe73720(planner, params) {
 
   foreach(bot in params.bots) {
     if(strategiccommandutility::isvalidbot(bot)) {
-      wallbuy = params.wallbuy[# "__unsafe__"][# "wallbuy"];
-      var_141550e2 = getclosestpointonnavmesh(params.wallbuy[# "origin"], 200, bot getpathfindingradius());
+      wallbuy = params.wallbuy[#"__unsafe__"][#"wallbuy"];
+      var_141550e2 = getclosestpointonnavmesh(params.wallbuy[#"origin"], 200, bot getpathfindingradius());
       bot bot::set_interact(wallbuy);
       bot setgoal(var_141550e2);
       bot.goalradius = 512;
@@ -822,11 +822,11 @@ function_6fe73720(planner, params) {
 }
 
 function_393b9c76(planner, constants) {
-  assert(isint(constants[# "distance"]) || isfloat(constants[# "distance"]), "<dev string:x38>" + "<dev string:x1a6>" + "<dev string:x76>");
-  assert(isint(constants[# "affordability"]) || isfloat(constants[# "affordability"]), "<dev string:x38>" + "<dev string:x1a6>" + "<dev string:xa0>");
-  assert(isint(constants[# "hash_357612272d0dca05"]) || isfloat(constants[# "hash_357612272d0dca05"]), "<dev string:x38>" + "<dev string:x1a6>" + "<dev string:x1d8>");
-  var_66c1c955 = isDefined(constants[# "highcost"]) && constants[# "highcost"];
-  var_45bdcccb = isDefined(constants[# "highrank"]) && constants[# "highrank"];
+  assert(isint(constants[#"distance"]) || isfloat(constants[#"distance"]), "<dev string:x38>" + "<dev string:x1a6>" + "<dev string:x76>");
+  assert(isint(constants[#"affordability"]) || isfloat(constants[#"affordability"]), "<dev string:x38>" + "<dev string:x1a6>" + "<dev string:xa0>");
+  assert(isint(constants[#"hash_357612272d0dca05"]) || isfloat(constants[#"hash_357612272d0dca05"]), "<dev string:x38>" + "<dev string:x1a6>" + "<dev string:x1d8>");
+  var_66c1c955 = isDefined(constants[#"highcost"]) && constants[#"highcost"];
+  var_45bdcccb = isDefined(constants[#"highrank"]) && constants[#"highrank"];
 
   if(var_45bdcccb) {
     var_66c1c955 = 0;
@@ -839,7 +839,7 @@ function_393b9c76(planner, constants) {
   }
 
   var_8c60fdb3 = [];
-  distancesq = constants[# "distance"] * constants[# "distance"];
+  distancesq = constants[#"distance"] * constants[#"distance"];
   wallbuys = planner::getblackboardattribute(planner, #"zm_wallbuys");
 
   if(!isDefined(wallbuys)) {
@@ -847,11 +847,11 @@ function_393b9c76(planner, constants) {
   }
 
   foreach(var_df2f03d1 in wallbuys) {
-    if(isDefined(var_df2f03d1) && var_df2f03d1[# "cost"] <= params.var_3ff64dd6 && var_df2f03d1[# "cost"] / params.var_3ff64dd6 <= constants[# "affordability"]) {
+    if(isDefined(var_df2f03d1) && var_df2f03d1[#"cost"] <= params.var_3ff64dd6 && var_df2f03d1[#"cost"] / params.var_3ff64dd6 <= constants[#"affordability"]) {
       closeenough = 1;
 
       foreach(botposition in params.botpositions) {
-        if(distance2dsquared(var_df2f03d1[# "origin"], botposition) > distancesq) {
+        if(distance2dsquared(var_df2f03d1[#"origin"], botposition) > distancesq) {
           closeenough = 0;
           break;
         }
@@ -871,38 +871,38 @@ function_393b9c76(planner, constants) {
   currentweaponrank = function_1b0a9309(params.bots[0]);
 
   foreach(var_df2f03d1 in var_8c60fdb3) {
-    weapon = var_df2f03d1[# "weapon"];
+    weapon = var_df2f03d1[#"weapon"];
 
     if(params.bots[0] getammocount(weapon) >= weapon.startammo * 0.5) {
       continue;
     }
 
-    wallbuy = var_df2f03d1[# "__unsafe__"][# "wallbuy"];
+    wallbuy = var_df2f03d1[#"__unsafe__"][#"wallbuy"];
     weaponrank = function_8cfcffa3(params.bots[0], wallbuy.weapon);
 
-    if(weaponrank - currentweaponrank < constants[# "hash_357612272d0dca05"]) {
+    if(weaponrank - currentweaponrank < constants[#"hash_357612272d0dca05"]) {
       continue;
     }
 
     var_e61f062b = params.bots[0] getpathfindingradius();
-    var_141550e2 = getclosestpointonnavmesh(var_df2f03d1[# "origin"], 200, var_e61f062b);
+    var_141550e2 = getclosestpointonnavmesh(var_df2f03d1[#"origin"], 200, var_e61f062b);
 
     if(isDefined(var_141550e2) && isDefined(params.botpositions[0])) {
       pathsegment = generatenavmeshpath(params.botpositions[0], var_141550e2, params.bots[0]);
 
       if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
-        if(pathsegment.pathdistance > constants[# "distance"] * 2) {
+        if(pathsegment.pathdistance > constants[#"distance"] * 2) {
           continue;
         }
 
         var_5b74c1ee = !isDefined(path) || pathsegment.pathdistance < shortestpath;
-        var_b60f07ee = var_df2f03d1[# "cost"] > cost;
+        var_b60f07ee = var_df2f03d1[#"cost"] > cost;
         var_ebf859b2 = weaponrank > rank;
 
         if(!isDefined(path) || var_66c1c955 && var_b60f07ee || var_45bdcccb && var_ebf859b2) {
           if(function_37d90686(params.bots[0], pathsegment) <= 4.5) {
             rank = weaponrank;
-            cost = var_df2f03d1[# "cost"];
+            cost = var_df2f03d1[#"cost"];
             path = pathsegment;
             shortestpath = pathsegment.pathdistance;
             var_c5e003e1 = var_df2f03d1;
@@ -930,7 +930,7 @@ function_ec7dcff9(planner, params) {
 
 function_e5a77501(planner, constants) {
   foreach(botinfo in planner::getblackboardattribute(planner, "doppelbots")) {
-    bot = botinfo[# "__unsafe__"][# "bot"];
+    bot = botinfo[#"__unsafe__"][#"bot"];
 
     if(!strategiccommandutility::isvalidbot(bot)) {
       continue;

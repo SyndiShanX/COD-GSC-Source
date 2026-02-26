@@ -118,17 +118,17 @@ record_settings(spectatorclient, targetentityindex, killcam_entity_info, weapon,
     level.finalkillcamsettings[team].attacker = attacker;
   }
 
-  level.finalkillcamsettings[# "none"].spectatorclient = spectatorclient;
-  level.finalkillcamsettings[# "none"].weapon = weapon;
-  level.finalkillcamsettings[# "none"].meansofdeath = meansofdeath;
-  level.finalkillcamsettings[# "none"].deathtime = deathtime;
-  level.finalkillcamsettings[# "none"].deathtimeoffset = deathtimeoffset;
-  level.finalkillcamsettings[# "none"].offsettime = offsettime;
-  level.finalkillcamsettings[# "none"].killcam_entity_info = killcam_entity_info;
-  level.finalkillcamsettings[# "none"].targetentityindex = targetentityindex;
-  level.finalkillcamsettings[# "none"].perks = perks;
-  level.finalkillcamsettings[# "none"].killstreaks = killstreaks;
-  level.finalkillcamsettings[# "none"].attacker = attacker;
+  level.finalkillcamsettings[#"none"].spectatorclient = spectatorclient;
+  level.finalkillcamsettings[#"none"].weapon = weapon;
+  level.finalkillcamsettings[#"none"].meansofdeath = meansofdeath;
+  level.finalkillcamsettings[#"none"].deathtime = deathtime;
+  level.finalkillcamsettings[#"none"].deathtimeoffset = deathtimeoffset;
+  level.finalkillcamsettings[#"none"].offsettime = offsettime;
+  level.finalkillcamsettings[#"none"].killcam_entity_info = killcam_entity_info;
+  level.finalkillcamsettings[#"none"].targetentityindex = targetentityindex;
+  level.finalkillcamsettings[#"none"].perks = perks;
+  level.finalkillcamsettings[#"none"].killstreaks = killstreaks;
+  level.finalkillcamsettings[#"none"].attacker = attacker;
 }
 
 function_eb3deeec(spectatorclient, targetentityindex, killcam_entity_info, weapon, meansofdeath, deathtime, deathtimeoffset, offsettime, perks, killstreaks, attacker) {

@@ -306,14 +306,14 @@ function function_b0731097(var_59e58a96, maxcheckdist) {
     nextpos = path_array[i];
     results = physicstrace(prevpos, nextpos, (-5, -5, 0), (5, 5, 0), self, mask);
 
-    if(isDefined(results[# "entity"])) {
-      hitent = results[# "entity"];
+    if(isDefined(results[#"entity"])) {
+      hitent = results[#"entity"];
 
       if(isDefined(hitent.c_door)) {
         var_fe505a43 = hitent function_808e656();
 
         if(var_fe505a43 &var_59e58a96) {
-          hitpos = results[# "position"];
+          hitpos = results[#"position"];
           distance += distance(prevpos, hitpos);
 
           if(isDefined(maxcheckdist) && distance > maxcheckdist) {

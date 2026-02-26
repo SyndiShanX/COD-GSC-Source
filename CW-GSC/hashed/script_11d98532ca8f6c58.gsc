@@ -18,50 +18,50 @@ function init_flags() {
 }
 
 function function_d02dc0ba() {
-  a_ents[# "vehicle 1"] = function_433aff96("ghost_station_car_engine");
-  a_ents[# "vehicle 2"] = function_433aff96("ghost_station_car_02");
-  a_ents[# "vehicle 3"] = function_433aff96("ghost_station_car_03");
-  a_ents[# "hash_5c059a141887868b"] = function_433aff96("ghost_station_car_04");
-  a_ents[# "hash_5c059914188784d8"] = function_433aff96("ghost_station_car_05");
-  a_ents[# "hash_5c059c14188789f1"] = function_433aff96("ghost_station_car_06");
-  a_ents[# "hash_5c059b141887883e"] = function_433aff96("ghost_station_car_07");
-  a_ents[# "hash_5c05961418877fbf"] = function_433aff96("ghost_station_car_08");
-  a_ents[# "hash_5c05951418877e0c"] = function_433aff96("ghost_station_car_09");
-  a_ents[# "hash_65157d25ae522c7c"] = function_433aff96("ghost_station_car_caboose");
+  a_ents[#"vehicle 1"] = function_433aff96("ghost_station_car_engine");
+  a_ents[#"vehicle 2"] = function_433aff96("ghost_station_car_02");
+  a_ents[#"vehicle 3"] = function_433aff96("ghost_station_car_03");
+  a_ents[#"hash_5c059a141887868b"] = function_433aff96("ghost_station_car_04");
+  a_ents[#"hash_5c059914188784d8"] = function_433aff96("ghost_station_car_05");
+  a_ents[#"hash_5c059c14188789f1"] = function_433aff96("ghost_station_car_06");
+  a_ents[#"hash_5c059b141887883e"] = function_433aff96("ghost_station_car_07");
+  a_ents[#"hash_5c05961418877fbf"] = function_433aff96("ghost_station_car_08");
+  a_ents[#"hash_5c05951418877e0c"] = function_433aff96("ghost_station_car_09");
+  a_ents[#"hash_65157d25ae522c7c"] = function_433aff96("ghost_station_car_caboose");
   return a_ents;
 }
 
 function function_9e2e1f19() {
-  a_ents[# "vehicle 1"] = function_433aff96("ghost_station_2_car_engine");
-  a_ents[# "vehicle 2"] = function_433aff96("ghost_station_2_car_02");
-  a_ents[# "vehicle 3"] = function_433aff96("ghost_station_2_car_03");
-  a_ents[# "hash_5c059a141887868b"] = function_433aff96("ghost_station_2_car_04");
-  a_ents[# "hash_5c059914188784d8"] = function_433aff96("ghost_station_2_car_05");
-  a_ents[# "hash_5c059c14188789f1"] = function_433aff96("ghost_station_2_car_06");
-  a_ents[# "hash_5c059b141887883e"] = function_433aff96("ghost_station_2_car_07");
-  a_ents[# "hash_5c05961418877fbf"] = function_433aff96("ghost_station_2_car_caboose");
+  a_ents[#"vehicle 1"] = function_433aff96("ghost_station_2_car_engine");
+  a_ents[#"vehicle 2"] = function_433aff96("ghost_station_2_car_02");
+  a_ents[#"vehicle 3"] = function_433aff96("ghost_station_2_car_03");
+  a_ents[#"hash_5c059a141887868b"] = function_433aff96("ghost_station_2_car_04");
+  a_ents[#"hash_5c059914188784d8"] = function_433aff96("ghost_station_2_car_05");
+  a_ents[#"hash_5c059c14188789f1"] = function_433aff96("ghost_station_2_car_06");
+  a_ents[#"hash_5c059b141887883e"] = function_433aff96("ghost_station_2_car_07");
+  a_ents[#"hash_5c05961418877fbf"] = function_433aff96("ghost_station_2_car_caboose");
   return a_ents;
 }
 
 function function_61fc8e84(var_e24a3c09 = 0) {
   min = 1;
   max = 4;
-  self[# "vehicle 1"] function_4df0bafb(self[# "vehicle 1"].animnode, randomintrange(min, max));
-  self[# "vehicle 2"] function_4df0bafb(self[# "vehicle 2"].animnode, randomintrange(min, max));
-  self[# "vehicle 3"] function_4df0bafb(self[# "vehicle 3"].animnode, randomintrange(min, max));
-  self[# "hash_5c059a141887868b"] function_4df0bafb(self[# "hash_5c059a141887868b"].animnode, randomintrange(min, max));
-  self[# "hash_5c059914188784d8"] function_4df0bafb(self[# "hash_5c059914188784d8"].animnode, randomintrange(min, max));
-  self[# "hash_5c059c14188789f1"] function_4df0bafb(self[# "hash_5c059c14188789f1"].animnode, randomintrange(min, max));
-  self[# "hash_5c059b141887883e"] function_4df0bafb(self[# "hash_5c059b141887883e"].animnode, randomintrange(min, max));
+  self[#"vehicle 1"] function_4df0bafb(self[#"vehicle 1"].animnode, randomintrange(min, max));
+  self[#"vehicle 2"] function_4df0bafb(self[#"vehicle 2"].animnode, randomintrange(min, max));
+  self[#"vehicle 3"] function_4df0bafb(self[#"vehicle 3"].animnode, randomintrange(min, max));
+  self[#"hash_5c059a141887868b"] function_4df0bafb(self[#"hash_5c059a141887868b"].animnode, randomintrange(min, max));
+  self[#"hash_5c059914188784d8"] function_4df0bafb(self[#"hash_5c059914188784d8"].animnode, randomintrange(min, max));
+  self[#"hash_5c059c14188789f1"] function_4df0bafb(self[#"hash_5c059c14188789f1"].animnode, randomintrange(min, max));
+  self[#"hash_5c059b141887883e"] function_4df0bafb(self[#"hash_5c059b141887883e"].animnode, randomintrange(min, max));
 
   if(is_true(var_e24a3c09)) {
-    self[# "hash_5c05961418877fbf"] function_4df0bafb(self[# "hash_5c05961418877fbf"].animnode, randomintrange(min, max));
-    self[# "hash_5c05951418877e0c"] function_4df0bafb(self[# "hash_5c05951418877e0c"].animnode, randomintrange(min, max));
-    self[# "hash_65157d25ae522c7c"] function_4df0bafb(self[# "hash_65157d25ae522c7c"].animnode, randomintrange(min, max));
+    self[#"hash_5c05961418877fbf"] function_4df0bafb(self[#"hash_5c05961418877fbf"].animnode, randomintrange(min, max));
+    self[#"hash_5c05951418877e0c"] function_4df0bafb(self[#"hash_5c05951418877e0c"].animnode, randomintrange(min, max));
+    self[#"hash_65157d25ae522c7c"] function_4df0bafb(self[#"hash_65157d25ae522c7c"].animnode, randomintrange(min, max));
     return;
   }
 
-  self[# "hash_5c05961418877fbf"] function_4df0bafb(self[# "hash_5c05961418877fbf"].animnode, randomintrange(min, max));
+  self[#"hash_5c05961418877fbf"] function_4df0bafb(self[#"hash_5c05961418877fbf"].animnode, randomintrange(min, max));
 }
 
 function function_433aff96(targetname) {

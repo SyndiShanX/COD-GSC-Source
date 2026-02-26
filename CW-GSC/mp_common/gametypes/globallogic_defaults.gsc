@@ -39,9 +39,9 @@ function default_onforfeit(params) {
   level notify(#"forfeit in progress");
   level endon(#"forfeit in progress", #"abort forfeit");
   forfeit_delay = 20;
-  announcement(game.strings[# "opponent_forfeiting_in"], forfeit_delay, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
   wait 10;
-  announcement(game.strings[# "opponent_forfeiting_in"], 10, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], 10, 0);
   wait 10;
 
   if(!isDefined(params)) {
@@ -122,7 +122,7 @@ function default_ononeleftevent(team) {
       continue;
     }
 
-    if(!isDefined(player.pers[# "team"]) || player.pers[# "team"] != team) {
+    if(!isDefined(player.pers[#"team"]) || player.pers[#"team"] != team) {
       continue;
     }
 
@@ -155,7 +155,7 @@ function default_onroundscorelimit() {
 function private function_85d45b4b(origin, angles) {
   self spawn(origin, angles);
 
-  if(self.pers[# "team"] != # "spectator" && level.var_1ba484ad === 2) {
+  if(self.pers[#"team"] != # "spectator" && level.var_1ba484ad === 2) {
     self spectate_view::function_86df9236();
   }
 }

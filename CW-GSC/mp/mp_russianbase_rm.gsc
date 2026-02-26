@@ -38,22 +38,22 @@ function init_train() {
 }
 
 function function_bfe6ca0b(a_ents) {
-  a_ents[# "prop 1"] hide();
+  a_ents[#"prop 1"] hide();
   self.t_hurt = getent("train_hurt_trig", "targetname");
   self.t_hurt.start_pos = self.t_hurt.origin;
   self.t_hurt enablelinkto();
 }
 
 function function_43561aca(a_ents) {
-  a_ents[# "prop 1"] show();
+  a_ents[#"prop 1"] show();
 
   if(isDefined(self.t_hurt)) {
-    self.t_hurt linkto(a_ents[# "prop 1"]);
+    self.t_hurt linkto(a_ents[#"prop 1"]);
   }
 }
 
 function function_963b1a99(a_ents) {
-  a_ents[# "prop 1"] hide();
+  a_ents[#"prop 1"] hide();
 
   if(isDefined(self.t_hurt)) {
     self.t_hurt unlink();

@@ -226,9 +226,9 @@ function_51855e65(round_number) {
   }
 
   if(round_number >= 8) {
-    assert(isDefined(level.var_4fe2f84d[# "zblueprint_shield_dual_wield"]));
+    assert(isDefined(level.var_4fe2f84d[#"zblueprint_shield_dual_wield"]));
 
-    foreach(trigger in level.var_4fe2f84d[# "zblueprint_shield_dual_wield"]) {
+    foreach(trigger in level.var_4fe2f84d[#"zblueprint_shield_dual_wield"]) {
       trigger.crafted = 1;
       trigger.blueprint = trigger.craftfoundry;
 

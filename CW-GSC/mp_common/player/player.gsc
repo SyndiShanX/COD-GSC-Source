@@ -30,7 +30,7 @@ function spectate_player_watcher() {
     }
   }
 
-  if(self.pers[# "team"] == # "spectator") {
+  if(self.pers[#"team"] == # "spectator") {
     spawnorigin = self.origin + (0, 0, 60);
     spawnangles = self.angles;
     spawnpoint = spawning::get_random_intermission_point();
@@ -46,7 +46,7 @@ function spectate_player_watcher() {
   self.watchingactiveclient = 1;
 
   while(true) {
-    if(self.pers[# "team"] != # "spectator" || level.gameended) {
+    if(self.pers[#"team"] != # "spectator" || level.gameended) {
       if(!is_true(level.inprematchperiod)) {
         self val::reset(#"spectate", "freezecontrols");
         self val::reset(#"spectate", "disablegadgets");

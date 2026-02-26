@@ -984,8 +984,8 @@ function_77511c75() {
     enemybot = bot::add_bot(util::getotherteam(player.team));
   }
 
-  if(!isDefined(enemybot.pers[# "participation"])) {
-    enemybot.pers[# "participation"] = 0;
+  if(!isDefined(enemybot.pers[#"participation"])) {
+    enemybot.pers[#"participation"] = 0;
   }
 
   if(!isDefined(enemybot.hits)) {

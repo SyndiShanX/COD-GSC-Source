@@ -91,9 +91,9 @@ function private function_c81ef836() {
         var_bfd46ccc = 30000;
         var_cfa5f67b = -2147483647;
         trace = bulletTrace((x, y, var_bfd46ccc), (x, y, var_cfa5f67b), 0, self, 1);
-        position = trace[# "position"];
+        position = trace[#"position"];
 
-        if(trace[# "fraction"] == 1) {
+        if(trace[#"fraction"] == 1) {
           position = (position[0], position[1], 0);
         }
 
@@ -1195,7 +1195,7 @@ function private function_49109f3(local_client_num, ent, var_56bcf423) {
 function private function_43569f3b(ent) {
   var_52c78c2c = ent.weapon.var_e9898330;
 
-  if(isDefined(var_52c78c2c) && var_52c78c2c != "" && ent.flag[# "enemy"] === 1) {
+  if(isDefined(var_52c78c2c) && var_52c78c2c != "" && ent.flag[#"enemy"] === 1) {
     if(issubstr(var_52c78c2c, "Lethal")) {
       if(var_52c78c2c != "pingGearLethalLandmine") {
         var_52c78c2c = "pingGearLethalGeneric";

@@ -415,14 +415,14 @@ warp() {
 
 warp_player() {
   self clientfield::increment_to_player("teleporter_depart", 1);
-  playFX(level._effect[# "portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", self.origin);
   s_destination = self zm_bgb_anywhere_but_here::function_91a62549();
   self zm_fasttravel::function_66d020b0(undefined, undefined, undefined, undefined, s_destination, undefined, "warp");
   self clientfield::increment_to_player("teleporter_transition", 1);
   self thread zm_white_portals::function_c234a5ce();
   self clientfield::increment_to_player("teleporter_arrive", 1);
-  playFX(level._effect[# "portal_dest"], self.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[#"portal_dest"], self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", self.origin);
   self playsoundtoplayer(#"hash_39876bf613387fef", self);
   wait 0.5;

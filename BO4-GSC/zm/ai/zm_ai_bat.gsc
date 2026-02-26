@@ -259,7 +259,7 @@ function_607df9c6(ai) {
   ai.var_e21c1964 = 1;
   var_cd1cfeed = ai animmappingsearch(#"hash_605e435c80f0d33b");
   pos = physicstrace(ai.origin, ai.origin + (0, 0, -10000), (-2, -2, -2), (2, 2, 2), ai, 1);
-  pos = pos[# "position"];
+  pos = pos[#"position"];
 
   if(isDefined(level.var_84b2907f)) {
     level thread[[level.var_84b2907f]](ai);
@@ -292,8 +292,8 @@ function_1b029905() {
 function_1fff2d() {
   pos = physicstrace(self.origin, self.origin + (0, 0, -10000), (-2, -2, -2), (2, 2, 2), self, 1);
 
-  if(isDefined(pos) && isDefined(pos[# "position"]) && !isDefined(pos[# "entity"])) {
-    pos = pos[# "position"];
+  if(isDefined(pos) && isDefined(pos[#"position"]) && !isDefined(pos[#"entity"])) {
+    pos = pos[#"position"];
 
     recordline(self.origin, pos, (0, 1, 1), "<dev string:x3e>");
     recordsphere(pos, 8, (0, 1, 1), "<dev string:x3e>");
@@ -302,7 +302,7 @@ function_1fff2d() {
 
     if(isDefined(posonnavmesh)) {
       pos = physicstrace(posonnavmesh + (0, 0, 70), posonnavmesh + (0, 0, -70), (-2, -2, -2), (2, 2, 2), self, 1);
-      pos = pos[# "position"];
+      pos = pos[#"position"];
 
       recordline(pos, posonnavmesh, (0, 0, 1), "<dev string:x3e>");
       recordsphere(posonnavmesh, 8, (0, 0, 1), "<dev string:x3e>");
@@ -457,12 +457,12 @@ function_1c4cd527(origin, owner, innerradius, outerradius, halfheight, spacing) 
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[# "no visibility"])) {
-        point._scoredebug[# "no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[#"no visibility"])) {
+        point._scoredebug[#"no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[# "no visibility"].score = -5000;
-      point._scoredebug[# "no visibility"].scorename = "<dev string:x47>";
+      point._scoredebug[#"no visibility"].score = -5000;
+      point._scoredebug[#"no visibility"].scorename = "<dev string:x47>";
 
       point.score += -5000;
     }
@@ -593,8 +593,8 @@ function_2e37549f(b_force_spawn = 0, var_eb3a8721, n_round_number) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_29a8e07)) {
     s_spawn_loc = [[level.var_29a8e07]]();
-  } else if(isDefined(level.zm_loc_types[# "bat_location"]) && level.zm_loc_types[# "bat_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[# "bat_location"]);
+  } else if(isDefined(level.zm_loc_types[#"bat_location"]) && level.zm_loc_types[#"bat_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[#"bat_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {

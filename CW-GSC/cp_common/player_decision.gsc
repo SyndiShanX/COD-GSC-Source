@@ -86,8 +86,8 @@ function function_ff7e19cb(var_6aeabb95) {
 function function_1c4fb6d4() {
   var_313a5853 = int(function_9240114e(#"living_ally", 0));
 
-  if(level.var_cc2922d[# "hash_3c471eb0b4890d28"] >= 0) {
-    var_313a5853 = level.var_cc2922d[# "hash_3c471eb0b4890d28"];
+  if(level.var_cc2922d[#"hash_3c471eb0b4890d28"] >= 0) {
+    var_313a5853 = level.var_cc2922d[#"hash_3c471eb0b4890d28"];
   }
 
   var_2c1ecd1d = [0, 1, 2];
@@ -112,8 +112,8 @@ function function_cde4f4e9(var_fda79bf3) {
 function function_d9f060cc() {
   var_fda79bf3 = int(function_9240114e(#"duga_ambush", 0));
 
-  if(level.var_cc2922d[# "hash_1d0ba9436c1b8160"] >= 0) {
-    var_fda79bf3 = level.var_cc2922d[# "hash_1d0ba9436c1b8160"];
+  if(level.var_cc2922d[#"hash_1d0ba9436c1b8160"] >= 0) {
+    var_fda79bf3 = level.var_cc2922d[#"hash_1d0ba9436c1b8160"];
   }
 
   var_2c1ecd1d = [0, 1];
@@ -130,8 +130,8 @@ function function_83bb4d9c(iskilled) {
 }
 
 function function_2da4c32c() {
-  if(level.var_cc2922d[# "hash_4ba5f5e5135a166e"] >= 0) {
-    return level.var_cc2922d[# "hash_4ba5f5e5135a166e"];
+  if(level.var_cc2922d[#"hash_4ba5f5e5135a166e"] >= 0) {
+    return level.var_cc2922d[#"hash_4ba5f5e5135a166e"];
   }
 
   return function_9240114e(#"informant_killed", 0);
@@ -146,8 +146,8 @@ function function_a029a114(iskilled) {
 }
 
 function function_251a57bb() {
-  if(level.var_cc2922d[# "hash_3ac48e6f15883c17"] >= 0) {
-    return level.var_cc2922d[# "hash_3ac48e6f15883c17"];
+  if(level.var_cc2922d[#"hash_3ac48e6f15883c17"] >= 0) {
+    return level.var_cc2922d[#"hash_3ac48e6f15883c17"];
   }
 
   return function_9240114e(#"hash_2209b7d4d5e867da", 0);
@@ -165,8 +165,8 @@ function function_5d2eb7fa(iskilled) {
 }
 
 function function_5584c739() {
-  if(level.var_cc2922d[# "hash_653b4358e2685205"] >= 0) {
-    return level.var_cc2922d[# "hash_653b4358e2685205"];
+  if(level.var_cc2922d[#"hash_653b4358e2685205"] >= 0) {
+    return level.var_cc2922d[#"hash_653b4358e2685205"];
   }
 
   return function_9240114e(#"volkov_killed", 0);
@@ -177,16 +177,16 @@ function function_b95efbcd(iskilled) {
 }
 
 function function_733a5c27() {
-  if(level.var_cc2922d[# "hash_5050d4ae63037c35"] >= 0) {
-    return level.var_cc2922d[# "hash_5050d4ae63037c35"];
+  if(level.var_cc2922d[#"hash_5050d4ae63037c35"] >= 0) {
+    return level.var_cc2922d[#"hash_5050d4ae63037c35"];
   }
 
   return function_9240114e(#"hash_2c88ea06da308fcc", 0);
 }
 
 function function_fc8e281d() {
-  if(level.var_cc2922d[# "hash_709460f14c72da1d"] >= 0) {
-    return level.var_cc2922d[# "hash_709460f14c72da1d"];
+  if(level.var_cc2922d[#"hash_709460f14c72da1d"] >= 0) {
+    return level.var_cc2922d[#"hash_709460f14c72da1d"];
   }
 
   return savegame::function_ac15668a(#"cp_sidemission_tundra");
@@ -198,8 +198,8 @@ function function_e0bd7f7a(var_b8291d8f) {
 }
 
 function function_e40c7d56() {
-  if(level.var_cc2922d[# "hash_395dca7924a7661c"] >= 0) {
-    return level.var_cc2922d[# "hash_395dca7924a7661c"];
+  if(level.var_cc2922d[#"hash_395dca7924a7661c"] >= 0) {
+    return level.var_cc2922d[#"hash_395dca7924a7661c"];
   }
 
   if(!function_fc8e281d()) {
@@ -215,16 +215,16 @@ function function_557c31b1() {
 }
 
 function function_ee124ba3() {
-  if(level.var_cc2922d[# "hash_9b807de107e21ef"] >= 0) {
-    return level.var_cc2922d[# "hash_9b807de107e21ef"];
+  if(level.var_cc2922d[#"hash_9b807de107e21ef"] >= 0) {
+    return level.var_cc2922d[#"hash_9b807de107e21ef"];
   }
 
   return savegame::function_2ee66e93(#"hash_1353a738ffed49d7", 0);
 }
 
 function function_c8718964() {
-  if(level.var_cc2922d[# "hash_2576aa389eb6fa86"] >= 0) {
-    return level.var_cc2922d[# "hash_2576aa389eb6fa86"];
+  if(level.var_cc2922d[#"hash_2576aa389eb6fa86"] >= 0) {
+    return level.var_cc2922d[#"hash_2576aa389eb6fa86"];
   }
 
   return savegame::function_ac15668a(#"cp_sidemission_takedown");

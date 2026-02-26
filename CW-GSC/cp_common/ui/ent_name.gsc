@@ -82,7 +82,7 @@ function private _think() {
     new_name = # "";
     new_team = 0;
 
-    if(isDefined(player.lookatent) && distancesquared(player.origin, player.lookatent.origin) <= level.var_435c3a22[# "cg_maxActorNameDist"]) {
+    if(isDefined(player.lookatent) && distancesquared(player.origin, player.lookatent.origin) <= level.var_435c3a22[#"cg_maxActorNameDist"]) {
       ent_num = player.lookatent getentitynumber();
       ent_name = level.var_479cdca1[ent_num];
 

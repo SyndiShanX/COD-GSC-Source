@@ -39,10 +39,10 @@ function init() {
   level.doa.var_f4a69294 = [];
   level.doa.var_b8ef1466 = [];
   level.doa.var_c793b1bb = [];
-  level.doa.var_f4a69294[# "green"] = function_f143eef7();
-  level.doa.var_f4a69294[# "blue"] = function_f143eef7();
-  level.doa.var_f4a69294[# "red"] = function_f143eef7();
-  level.doa.var_f4a69294[# "yellow"] = function_f143eef7();
+  level.doa.var_f4a69294[#"green"] = function_f143eef7();
+  level.doa.var_f4a69294[#"blue"] = function_f143eef7();
+  level.doa.var_f4a69294[#"red"] = function_f143eef7();
+  level.doa.var_f4a69294[#"yellow"] = function_f143eef7();
   main();
 }
 

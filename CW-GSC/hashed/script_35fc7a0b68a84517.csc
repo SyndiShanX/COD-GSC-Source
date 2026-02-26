@@ -15,7 +15,7 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   if(util::get_game_type() === # "hash_1aecd78b7244ff81") {
-    clientfield::register_clientuimodel("hudItems.onslaught.lottoloadouts_rarity", #"hud_items", [# "onslaught", #"lottoloadouts_rarity"], 1, 2, "int", undefined, 0, 0);
-    clientfield::register_clientuimodel("hudItems.onslaught.lottoloadouts_atttype", #"hud_items", [# "onslaught", #"lottoloadouts_atttype"], 1, 4, "int", undefined, 0, 0);
+    clientfield::register_clientuimodel("hudItems.onslaught.lottoloadouts_rarity", #"hud_items", [#"onslaught", #"lottoloadouts_rarity"], 1, 2, "int", undefined, 0, 0);
+    clientfield::register_clientuimodel("hudItems.onslaught.lottoloadouts_atttype", #"hud_items", [#"onslaught", #"lottoloadouts_atttype"], 1, 4, "int", undefined, 0, 0);
   }
 }

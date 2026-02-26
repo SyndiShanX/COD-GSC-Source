@@ -387,7 +387,7 @@ function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       }
 
       eattacker.damagedone += damagedone;
-      eattacker.pers[# "damagedone"] = eattacker.damagedone;
+      eattacker.pers[#"damagedone"] = eattacker.damagedone;
       eattacker weapons::function_b1d41bd5(weapon, damagedone);
       eattacker contracts::player_contract_event(#"damagedone", damagedone);
       eattacker stats::function_bb7eedf0(#"total_damage", int(damagedone));
@@ -1051,12 +1051,12 @@ update_attacker(einflictor, eattacker, smeansofdeath) {
         }
 
         if(isDefined(eattacker.pers)) {
-          if(!isDefined(eattacker.pers[# "shotshit"])) {
-            eattacker.pers[# "shotshit"] = 0;
+          if(!isDefined(eattacker.pers[#"shotshit"])) {
+            eattacker.pers[#"shotshit"] = 0;
           }
 
-          eattacker.pers[# "shotshit"]++;
-          eattacker.shotshit = eattacker.pers[# "shotshit"];
+          eattacker.pers[#"shotshit"]++;
+          eattacker.shotshit = eattacker.pers[#"shotshit"];
         }
 
         eattacker.hits++;
@@ -1074,17 +1074,17 @@ update_attacker(einflictor, eattacker, smeansofdeath) {
         eattacker.shotsmissed = shotsmissed;
 
         if(isDefined(eattacker.pers)) {
-          eattacker.pers[# "shotsmissed"] = shotsmissed;
+          eattacker.pers[#"shotsmissed"] = shotsmissed;
         }
       }
     }
 
     if(isDefined(eattacker.pers)) {
-      if(!isDefined(eattacker.pers[# "participation"])) {
-        eattacker.pers[# "participation"] = 0;
+      if(!isDefined(eattacker.pers[#"participation"])) {
+        eattacker.pers[#"participation"] = 0;
       }
 
-      eattacker.pers[# "participation"]++;
+      eattacker.pers[#"participation"]++;
     }
   }
 }
@@ -1140,30 +1140,30 @@ function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 
   if(isDefined(einflictor) && (smeansofdeath == "MOD_GAS" || is_explosive_damage)) {
     self.explosiveinfo = [];
-    self.explosiveinfo[# "damagetime"] = gettime();
-    self.explosiveinfo[# "damageid"] = einflictor getentitynumber();
-    self.explosiveinfo[# "originalownerkill"] = 0;
-    self.explosiveinfo[# "bulletpenetrationkill"] = 0;
-    self.explosiveinfo[# "chainkill"] = 0;
-    self.explosiveinfo[# "damageexplosivekill"] = 0;
-    self.explosiveinfo[# "chainkill"] = 0;
-    self.explosiveinfo[# "cookedkill"] = 0;
-    self.explosiveinfo[# "weapon"] = weapon;
-    self.explosiveinfo[# "originalowner"] = einflictor.originalowner;
+    self.explosiveinfo[#"damagetime"] = gettime();
+    self.explosiveinfo[#"damageid"] = einflictor getentitynumber();
+    self.explosiveinfo[#"originalownerkill"] = 0;
+    self.explosiveinfo[#"bulletpenetrationkill"] = 0;
+    self.explosiveinfo[#"chainkill"] = 0;
+    self.explosiveinfo[#"damageexplosivekill"] = 0;
+    self.explosiveinfo[#"chainkill"] = 0;
+    self.explosiveinfo[#"cookedkill"] = 0;
+    self.explosiveinfo[#"weapon"] = weapon;
+    self.explosiveinfo[#"originalowner"] = einflictor.originalowner;
     isfrag = weapon.rootweapon.name == "frag_grenade";
 
     if(isDefined(eattacker) && eattacker != self) {
       if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == # "satchel_charge" || weapon.name == # "claymore" || weapon.name == # "bouncingbetty")) {
-        self.explosiveinfo[# "originalownerkill"] = einflictor.owner == self;
-        self.explosiveinfo[# "damageexplosivekill"] = isDefined(einflictor.wasdamaged);
-        self.explosiveinfo[# "chainkill"] = isDefined(einflictor.waschained);
-        self.explosiveinfo[# "wasjustplanted"] = isDefined(einflictor.wasjustplanted);
-        self.explosiveinfo[# "bulletpenetrationkill"] = isDefined(einflictor.wasdamagedfrombulletpenetration);
-        self.explosiveinfo[# "cookedkill"] = 0;
+        self.explosiveinfo[#"originalownerkill"] = einflictor.owner == self;
+        self.explosiveinfo[#"damageexplosivekill"] = isDefined(einflictor.wasdamaged);
+        self.explosiveinfo[#"chainkill"] = isDefined(einflictor.waschained);
+        self.explosiveinfo[#"wasjustplanted"] = isDefined(einflictor.wasjustplanted);
+        self.explosiveinfo[#"bulletpenetrationkill"] = isDefined(einflictor.wasdamagedfrombulletpenetration);
+        self.explosiveinfo[#"cookedkill"] = 0;
       }
 
       if(isDefined(einflictor) && isDefined(einflictor.stucktoplayer) && weapon.projexplosiontype == "grenade") {
-        self.explosiveinfo[# "stucktoplayer"] = einflictor.stucktoplayer;
+        self.explosiveinfo[#"stucktoplayer"] = einflictor.stucktoplayer;
       }
 
       if(weapon.dostun) {
@@ -1172,15 +1172,15 @@ function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
       }
 
       if(isDefined(eattacker.lastgrenadesuicidetime) && eattacker.lastgrenadesuicidetime >= gettime() - 50 && isfrag) {
-        self.explosiveinfo[# "suicidegrenadekill"] = 1;
+        self.explosiveinfo[#"suicidegrenadekill"] = 1;
       } else {
-        self.explosiveinfo[# "suicidegrenadekill"] = 0;
+        self.explosiveinfo[#"suicidegrenadekill"] = 0;
       }
     }
 
     if(isfrag) {
-      self.explosiveinfo[# "cookedkill"] = isDefined(einflictor.iscooked);
-      self.explosiveinfo[# "throwbackkill"] = isDefined(einflictor.threwback);
+      self.explosiveinfo[#"cookedkill"] = isDefined(einflictor.iscooked);
+      self.explosiveinfo[#"throwbackkill"] = isDefined(einflictor.threwback);
     }
 
     if(isDefined(eattacker) && isPlayer(eattacker) && eattacker != self) {
@@ -1194,7 +1194,7 @@ function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     }
 
     if(weapon.rootweapon.name == "hatchet" && isDefined(einflictor)) {
-      self.explosiveinfo[# "projectile_bounced"] = isDefined(einflictor.bounced);
+      self.explosiveinfo[#"projectile_bounced"] = isDefined(einflictor.bounced);
     }
   }
 

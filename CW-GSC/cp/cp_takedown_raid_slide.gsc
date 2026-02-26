@@ -181,7 +181,7 @@ function function_b8018dce() {
 }
 
 function function_c5d4fec8(a_ents) {
-  level.var_30fc6630 = a_ents[# "prop 11"];
+  level.var_30fc6630 = a_ents[#"prop 11"];
 }
 
 function function_58b2cc80() {

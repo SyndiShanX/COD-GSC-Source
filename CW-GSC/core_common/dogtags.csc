@@ -20,7 +20,7 @@ function function_3e0d8ba2() {
   }
 
   if(level.var_70e5d775 === 1) {
-    var_c2ad857a = [# "hash_214a2287c621274a", #"hash_214a2187c6212597", #"hash_214a2087c62123e4", #"hash_214a1f87c6212231"];
+    var_c2ad857a = [#"hash_214a2287c621274a", #"hash_214a2187c6212597", #"hash_214a2087c62123e4", #"hash_214a1f87c6212231"];
     return var_c2ad857a[randomint(var_c2ad857a.size)];
   }
 }

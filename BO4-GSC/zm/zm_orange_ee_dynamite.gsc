@@ -123,7 +123,7 @@ function_e93a8e82(v_pos, v_angles) {
     v_drop = zm_hms_util::function_6d41bab8(v_pos, 360);
 
     if(isDefined(v_drop)) {
-      v_ground = groundtrace(v_drop + (0, 0, 64) + (0, 0, 8), v_drop + (0, 0, 64) + (0, 0, -100000), 0, self)[# "position"];
+      v_ground = groundtrace(v_drop + (0, 0, 64) + (0, 0, 8), v_drop + (0, 0, 64) + (0, 0, -100000), 0, self)[#"position"];
       v_ground += (0, 0, 36);
       w_part = level.var_1f17f9bb[0];
 
@@ -416,14 +416,14 @@ function_6ecfea46() {
   if(level.var_37078af7 < 4) {
     function_e55e2a5e();
 
-    if(isarray(level.var_4fe2f84d[# "ztable_orange_dynamite_bomb"])) {
-      foreach(s_crafting in level.var_4fe2f84d[# "ztable_orange_dynamite_bomb"]) {
+    if(isarray(level.var_4fe2f84d[#"ztable_orange_dynamite_bomb"])) {
+      foreach(s_crafting in level.var_4fe2f84d[#"ztable_orange_dynamite_bomb"]) {
         if(isDefined(s_crafting.blueprint) && s_crafting.blueprint.name === "zblueprint_orange_dynamite_bomb" && !(isDefined(s_crafting.registered) && s_crafting.registered)) {
           s_crafting zm_crafting::reset_table();
         }
       }
     } else {
-      foreach(s_crafting in level.var_4fe2f84d[# "ztable_orange_open"]) {
+      foreach(s_crafting in level.var_4fe2f84d[#"ztable_orange_open"]) {
         if(isDefined(s_crafting.blueprint) && s_crafting.blueprint.name === "zblueprint_orange_dynamite_bomb" && !(isDefined(s_crafting.registered) && s_crafting.registered)) {
           s_crafting zm_crafting::reset_table();
         }

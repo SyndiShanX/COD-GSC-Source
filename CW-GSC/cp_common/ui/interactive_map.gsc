@@ -32,8 +32,8 @@ function open(var_738a6265, top_left, bottom_right, var_879505e1 = 1, var_ff0f97
     player thread namespace_61e6d095::block_kbm_pause_menu("close_interactive_map");
     player val::set(#"hash_46ef83540c23a2f7", "freezecontrols", 1);
     namespace_61e6d095::create(#"interactive_map", var_738a6265);
-    namespace_61e6d095::function_28027c42(#"interactive_map", [# "interactive_map", #"hint_tutorial", #"hash_72cc4740fa4d3da3"]);
-    namespace_61e6d095::function_24e5fa63(#"interactive_map", [# "ui_confirm", #"ui_cancel"], 1);
+    namespace_61e6d095::function_28027c42(#"interactive_map", [#"interactive_map", #"hint_tutorial", #"hash_72cc4740fa4d3da3"]);
+    namespace_61e6d095::function_24e5fa63(#"interactive_map", [#"ui_confirm", #"ui_cancel"], 1);
 
     if(!isDefined(top_left)) {
       top_left = getent("interactive_map_top_left", "targetname");
@@ -562,7 +562,7 @@ function function_fabe437a(prompt_struct) {
 
   objectives::remove(#"map_waypoint");
 
-  if(level.interactive_map.objects[# "map_waypoint"] === waypoint) {
+  if(level.interactive_map.objects[#"map_waypoint"] === waypoint) {
     remove_object(#"map_waypoint");
     return;
   }
@@ -573,9 +573,9 @@ function function_fabe437a(prompt_struct) {
     thread objectives_ui::function_49dec5b(#"map_waypoint", undefined, self.var_d9b5c896);
   }
 
-  if(isDefined(level.interactive_map.objects[# "map_waypoint"])) {
-    level.interactive_map.objects[# "map_waypoint"] notify(#"hash_7c1f9e1214f47b4e");
-    level.interactive_map.objects[# "map_waypoint"] = waypoint;
+  if(isDefined(level.interactive_map.objects[#"map_waypoint"])) {
+    level.interactive_map.objects[#"map_waypoint"] notify(#"hash_7c1f9e1214f47b4e");
+    level.interactive_map.objects[#"map_waypoint"] = waypoint;
     waypoint thread function_9dfe141f(#"map_waypoint");
     function_d0243e5b(#"map_waypoint", "image", isDefined(waypoint.interactive_map.image) ? waypoint.interactive_map.image : # "uie_map_lubyanka_marker_waypoint");
   } else {
@@ -727,13 +727,13 @@ function private cursor_on(object) {
     object thread[[object.var_f90e2591]]();
   }
 
-  if(isDefined(object.var_62d718e2[# "cursor_on"])) {
-    object.var_62d718e2[# "cursor_on"].cur_value = object.var_62d718e2[# "cursor_on"].value;
+  if(isDefined(object.var_62d718e2[#"cursor_on"])) {
+    object.var_62d718e2[#"cursor_on"].cur_value = object.var_62d718e2[#"cursor_on"].value;
 
     if(isDefined(object.interactive_map.uid)) {
-      function_d0243e5b(object.interactive_map.uid, object.var_62d718e2[# "cursor_on"].name, object.var_62d718e2[# "cursor_on"].cur_value);
+      function_d0243e5b(object.interactive_map.uid, object.var_62d718e2[#"cursor_on"].name, object.var_62d718e2[#"cursor_on"].cur_value);
     } else {
-      function_e0cc3b71(object.var_62d718e2[# "cursor_on"].name, object.var_62d718e2[# "cursor_on"].cur_value);
+      function_e0cc3b71(object.var_62d718e2[#"cursor_on"].name, object.var_62d718e2[#"cursor_on"].cur_value);
     }
   }
 
@@ -752,13 +752,13 @@ function private cursor_off(object) {
     object thread[[object.var_938b0e9b]]();
   }
 
-  if(isDefined(object.var_62d718e2[# "cursor_off"])) {
-    object.var_62d718e2[# "cursor_off"].cur_value = object.var_62d718e2[# "cursor_off"].value;
+  if(isDefined(object.var_62d718e2[#"cursor_off"])) {
+    object.var_62d718e2[#"cursor_off"].cur_value = object.var_62d718e2[#"cursor_off"].value;
 
     if(isDefined(object.interactive_map.uid)) {
-      function_d0243e5b(object.interactive_map.uid, object.var_62d718e2[# "cursor_off"].name, object.var_62d718e2[# "cursor_off"].cur_value);
+      function_d0243e5b(object.interactive_map.uid, object.var_62d718e2[#"cursor_off"].name, object.var_62d718e2[#"cursor_off"].cur_value);
     } else {
-      function_e0cc3b71(object.var_62d718e2[# "cursor_off"].name, object.var_62d718e2[# "cursor_off"].cur_value);
+      function_e0cc3b71(object.var_62d718e2[#"cursor_off"].name, object.var_62d718e2[#"cursor_off"].cur_value);
     }
   }
 

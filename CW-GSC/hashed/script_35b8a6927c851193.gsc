@@ -43,20 +43,20 @@ function private preinit() {
 
   if(gametype == # "zsurvival") {
     level.var_9ee73630 = [];
-    level.var_9ee73630[# "walk"] = [];
-    level.var_9ee73630[# "run"] = [];
-    level.var_9ee73630[# "sprint"] = [];
-    level.var_9ee73630[# "super_sprint"] = [];
-    level.var_9ee73630[# "walk"][# "down"] = 14;
-    level.var_9ee73630[# "walk"][# "up"] = 16;
-    level.var_9ee73630[# "run"][# "down"] = 13;
-    level.var_9ee73630[# "run"][# "up"] = 12;
-    level.var_9ee73630[# "sprint"][# "down"] = 9;
-    level.var_9ee73630[# "sprint"][# "up"] = 8;
-    level.var_9ee73630[# "super_sprint"][# "down"] = 1;
-    level.var_9ee73630[# "super_sprint"][# "up"] = 1;
-    level.var_9ee73630[# "super_super_sprint"][# "down"] = 8;
-    level.var_9ee73630[# "super_super_sprint"][# "up"] = 8;
+    level.var_9ee73630[#"walk"] = [];
+    level.var_9ee73630[#"run"] = [];
+    level.var_9ee73630[#"sprint"] = [];
+    level.var_9ee73630[#"super_sprint"] = [];
+    level.var_9ee73630[#"walk"][#"down"] = 14;
+    level.var_9ee73630[#"walk"][#"up"] = 16;
+    level.var_9ee73630[#"run"][#"down"] = 13;
+    level.var_9ee73630[#"run"][#"up"] = 12;
+    level.var_9ee73630[#"sprint"][#"down"] = 9;
+    level.var_9ee73630[#"sprint"][#"up"] = 8;
+    level.var_9ee73630[#"super_sprint"][#"down"] = 1;
+    level.var_9ee73630[#"super_sprint"][#"up"] = 1;
+    level.var_9ee73630[#"super_super_sprint"][#"down"] = 8;
+    level.var_9ee73630[#"super_super_sprint"][#"up"] = 8;
     spawner::add_archetype_spawn_function(#"zombie", &function_42151b1b);
     spawner::add_archetype_spawn_function(#"zombie", &function_1bc8ecf1);
     spawner::function_89a2cd87(#"zombie", &function_95d1bec9);

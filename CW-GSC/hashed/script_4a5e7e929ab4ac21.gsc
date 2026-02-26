@@ -580,7 +580,7 @@ function function_adf2ea57() {
   start_angles = self gettagangles("tag_fastrope_ri");
   var_f7317c23 = start_origin;
   var_c0ec2d07 = groundtrace(var_f7317c23, start_origin + (0, 0, -10000), 0, self);
-  var_7eee2432 = var_c0ec2d07[# "position"];
+  var_7eee2432 = var_c0ec2d07[#"position"];
   var_6402a3dd = util::spawn_model("tag_origin", var_f7317c23, start_angles);
   level.players[0] playerlinktodelta(var_6402a3dd, "tag_origin", 1, 45, 45, 45, 45);
   time = 3;
@@ -592,7 +592,7 @@ function function_adf2ea57() {
 function function_4db7a747() {
   var_da00db64 = self.origin;
   var_22043f8e = groundtrace(self.origin + (0, 0, -8), self.origin + (0, 0, -100000), 0, self);
-  goal_pos = var_22043f8e[# "position"] + (0, 0, 90);
+  goal_pos = var_22043f8e[#"position"] + (0, 0, 90);
   self cleargoalyaw();
   self function_d4c687c9();
   self.var_cb55c804 = 10;

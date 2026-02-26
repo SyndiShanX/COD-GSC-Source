@@ -80,7 +80,7 @@ function function_a5ed2da0() {
       parentweapon = point.weapon.name;
 
       if(isDefined(item.var_23a1d10f) && isDefined(item.childitementry_3) && isDefined(item.childitementry_2) && isDefined(item.childitementry_2) && isDefined(var_a559259f[parentweapon]) && isDefined(parentweapon) && isDefined(item.var_168e36e8)) {
-        level.var_dcd62c45[parentweapon] = [# "loadout": var_a559259f[parentweapon], #"resource": item.childitementry_1, #"uncommon": item.childitementry_2, #"rare": item.childitementry_3, #"epic": item.var_23a1d10f, #"legendary": item.var_168e36e8];
+        level.var_dcd62c45[parentweapon] = [#"loadout": var_a559259f[parentweapon], #"resource": item.childitementry_1, #"uncommon": item.childitementry_2, #"rare": item.childitementry_3, #"epic": item.var_23a1d10f, #"legendary": item.var_168e36e8];
       }
     }
   }
@@ -642,7 +642,7 @@ function function_ff03fdfb(destination) {
   }
 
   foreach(location in destination.locations) {
-    weapon_machine = location.instances[# "weapon_machine"];
+    weapon_machine = location.instances[#"weapon_machine"];
 
     if(isDefined(weapon_machine)) {
       children = content_manager::get_children(weapon_machine);

@@ -32,7 +32,7 @@ function private preinit() {
 
   if(zm_powerups::function_cc33adc8()) {
     zm_powerups::add_zombie_powerup("minigun", "zombie_pickup_minigun", #"zombie/powerup_minigun", &func_should_drop_minigun, 1, 0, 0, undefined, "powerup_mini_gun", "zombie_powerup_minigun_time", "zombie_powerup_minigun_on");
-    level.zombie_powerup_weapon[# "minigun"] = getweapon(#"minigun");
+    level.zombie_powerup_weapon[#"minigun"] = getweapon(#"minigun");
   }
 
   callback::on_connect(&init_player_zombie_vars);
@@ -49,8 +49,8 @@ function grab_minigun(player) {
 }
 
 function init_player_zombie_vars() {
-  self.zombie_vars[# "zombie_powerup_minigun_on"] = 0;
-  self.zombie_vars[# "zombie_powerup_minigun_time"] = 0;
+  self.zombie_vars[#"zombie_powerup_minigun_on"] = 0;
+  self.zombie_vars[#"zombie_powerup_minigun_time"] = 0;
 }
 
 function func_should_drop_minigun() {
@@ -72,9 +72,9 @@ function minigun_weapon_powerup(ent_player, time) {
     time = level._minigun_time_override;
   }
 
-  if(ent_player.zombie_vars[# "zombie_powerup_minigun_on"] && (level.zombie_powerup_weapon[# "minigun"] == ent_player getcurrentweapon() || isDefined(ent_player.has_powerup_weapon[# "minigun"]) && ent_player.has_powerup_weapon[# "minigun"])) {
-    if(ent_player.zombie_vars[# "zombie_powerup_minigun_time"] < time) {
-      ent_player.zombie_vars[# "zombie_powerup_minigun_time"] = time;
+  if(ent_player.zombie_vars[#"zombie_powerup_minigun_on"] && (level.zombie_powerup_weapon[#"minigun"] == ent_player getcurrentweapon() || isDefined(ent_player.has_powerup_weapon[#"minigun"]) && ent_player.has_powerup_weapon[#"minigun"])) {
+    if(ent_player.zombie_vars[#"zombie_powerup_minigun_time"] < time) {
+      ent_player.zombie_vars[#"zombie_powerup_minigun_time"] = time;
     }
 
     return;
@@ -113,7 +113,7 @@ function minigun_countdown(ent_player, str_weapon_time) {
 }
 
 function minigun_weapon_powerup_off() {
-  self.zombie_vars[# "zombie_powerup_minigun_time"] = 0;
+  self.zombie_vars[#"zombie_powerup_minigun_time"] = 0;
 }
 
 function minigun_damage_adjust(inflictor, attacker, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {

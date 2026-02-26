@@ -748,7 +748,7 @@ function_a88a6e6a() {
 function_ca9bfe21(a_ents, e_player) {
   self notify("79b726cd6d4f2032");
   self endon("79b726cd6d4f2032");
-  e_nugget = a_ents[# "prop 1"];
+  e_nugget = a_ents[#"prop 1"];
   e_nugget setinvisibletoall();
   e_nugget setvisibletoplayer(e_player);
   self waittill(#"scene_done");
@@ -1035,13 +1035,13 @@ function_efd25c9() {
   level flag::set(#"spoon_quest_completed");
   level flag::set(#"hash_29dc018e9551ecf");
   var_217fca51 = struct::get("<dev string:x2b6>");
-  mdl_spoon = var_217fca51.scene_ents[# "skeleton_arm"];
+  mdl_spoon = var_217fca51.scene_ents[#"skeleton_arm"];
   mdl_spoon hide();
 
   foreach(player in level.players) {
     if(!player hasweapon(getweapon(#"spork_alcatraz"))) {
       while(!isDefined(player.var_1c4683c4)) {
-        player.var_1c4683c4 = player.slot_weapons[# "melee_weapon"];
+        player.var_1c4683c4 = player.slot_weapons[#"melee_weapon"];
         wait 0.1;
       }
 

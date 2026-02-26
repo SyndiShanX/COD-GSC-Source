@@ -47,38 +47,38 @@ function private preinit() {
 
 function init() {
   level.multipledialogkeys = [];
-  level.multipledialogkeys[# "enemyaitank"] = "enemyAiTankMultiple";
-  level.multipledialogkeys[# "enemysupplydrop"] = "enemySupplyDropMultiple";
-  level.multipledialogkeys[# "enemycombatrobot"] = "enemyCombatRobotMultiple";
-  level.multipledialogkeys[# "enemycounteruav"] = "enemyCounterUavMultiple";
-  level.multipledialogkeys[# "enemydart"] = "enemyDartMultiple";
-  level.multipledialogkeys[# "enemyemp"] = "enemyEmpMultiple";
-  level.multipledialogkeys[# "enemymicrowaveturret"] = "enemyMicrowaveTurretMultiple";
-  level.multipledialogkeys[# "enemyrcbomb"] = "enemyRcBombMultiple";
-  level.multipledialogkeys[# "enemyplanemortar"] = "enemyPlaneMortarMultiple";
-  level.multipledialogkeys[# "enemyhelicoptergunner"] = "enemyHelicopterGunnerMultiple";
-  level.multipledialogkeys[# "enemyraps"] = "enemyRapsMultiple";
-  level.multipledialogkeys[# "enemydronestrike"] = "enemyDroneStrikeMultiple";
-  level.multipledialogkeys[# "enemyturret"] = "enemyTurretMultiple";
-  level.multipledialogkeys[# "enemyhelicopter"] = "enemyHelicopterMultiple";
-  level.multipledialogkeys[# "enemyuav"] = "enemyUavMultiple";
-  level.multipledialogkeys[# "enemysatellite"] = "enemySatelliteMultiple";
-  level.multipledialogkeys[# "friendlyaitank"] = "";
-  level.multipledialogkeys[# "friendlysupplydrop"] = "";
-  level.multipledialogkeys[# "friendlycombatrobot"] = "";
-  level.multipledialogkeys[# "friendlycounteruav"] = "";
-  level.multipledialogkeys[# "friendlydart"] = "";
-  level.multipledialogkeys[# "friendlyemp"] = "";
-  level.multipledialogkeys[# "friendlymicrowaveturret"] = "";
-  level.multipledialogkeys[# "friendlyrcbomb"] = "";
-  level.multipledialogkeys[# "friendlyplanemortar"] = "";
-  level.multipledialogkeys[# "friendlyhelicoptergunner"] = "";
-  level.multipledialogkeys[# "friendlyraps"] = "";
-  level.multipledialogkeys[# "friendlydronestrike"] = "";
-  level.multipledialogkeys[# "friendlyturret"] = "";
-  level.multipledialogkeys[# "friendlyhelicopter"] = "";
-  level.multipledialogkeys[# "friendlyuav"] = "";
-  level.multipledialogkeys[# "friendlysatellite"] = "";
+  level.multipledialogkeys[#"enemyaitank"] = "enemyAiTankMultiple";
+  level.multipledialogkeys[#"enemysupplydrop"] = "enemySupplyDropMultiple";
+  level.multipledialogkeys[#"enemycombatrobot"] = "enemyCombatRobotMultiple";
+  level.multipledialogkeys[#"enemycounteruav"] = "enemyCounterUavMultiple";
+  level.multipledialogkeys[#"enemydart"] = "enemyDartMultiple";
+  level.multipledialogkeys[#"enemyemp"] = "enemyEmpMultiple";
+  level.multipledialogkeys[#"enemymicrowaveturret"] = "enemyMicrowaveTurretMultiple";
+  level.multipledialogkeys[#"enemyrcbomb"] = "enemyRcBombMultiple";
+  level.multipledialogkeys[#"enemyplanemortar"] = "enemyPlaneMortarMultiple";
+  level.multipledialogkeys[#"enemyhelicoptergunner"] = "enemyHelicopterGunnerMultiple";
+  level.multipledialogkeys[#"enemyraps"] = "enemyRapsMultiple";
+  level.multipledialogkeys[#"enemydronestrike"] = "enemyDroneStrikeMultiple";
+  level.multipledialogkeys[#"enemyturret"] = "enemyTurretMultiple";
+  level.multipledialogkeys[#"enemyhelicopter"] = "enemyHelicopterMultiple";
+  level.multipledialogkeys[#"enemyuav"] = "enemyUavMultiple";
+  level.multipledialogkeys[#"enemysatellite"] = "enemySatelliteMultiple";
+  level.multipledialogkeys[#"friendlyaitank"] = "";
+  level.multipledialogkeys[#"friendlysupplydrop"] = "";
+  level.multipledialogkeys[#"friendlycombatrobot"] = "";
+  level.multipledialogkeys[#"friendlycounteruav"] = "";
+  level.multipledialogkeys[#"friendlydart"] = "";
+  level.multipledialogkeys[#"friendlyemp"] = "";
+  level.multipledialogkeys[#"friendlymicrowaveturret"] = "";
+  level.multipledialogkeys[#"friendlyrcbomb"] = "";
+  level.multipledialogkeys[#"friendlyplanemortar"] = "";
+  level.multipledialogkeys[#"friendlyhelicoptergunner"] = "";
+  level.multipledialogkeys[#"friendlyraps"] = "";
+  level.multipledialogkeys[#"friendlydronestrike"] = "";
+  level.multipledialogkeys[#"friendlyturret"] = "";
+  level.multipledialogkeys[#"friendlyhelicopter"] = "";
+  level.multipledialogkeys[#"friendlyuav"] = "";
+  level.multipledialogkeys[#"friendlysatellite"] = "";
 }
 
 function set_blops_dialog(teamindex) {
@@ -136,7 +136,7 @@ function on_joined_team(params) {
 
   self flush_dialog();
 
-  if(!is_true(level.inprematchperiod) && !is_true(self.pers[# "playedgamemode"]) && isDefined(level.leaderdialog)) {
+  if(!is_true(level.inprematchperiod) && !is_true(self.pers[#"playedgamemode"]) && isDefined(level.leaderdialog)) {
     if(level.hardcoremode) {
       if(globallogic_utils::function_308e3379()) {
         self leader_dialog_on_player(level.leaderdialog.var_d04b3734, undefined, undefined, undefined, 1);
@@ -149,7 +149,7 @@ function on_joined_team(params) {
       self leader_dialog_on_player(level.leaderdialog.startgamedialog, undefined, undefined, undefined, 1);
     }
 
-    self.pers[# "playedgamemode"] = 1;
+    self.pers[#"playedgamemode"] = 1;
   }
 }
 
@@ -260,7 +260,7 @@ function announce_round_winner(delay) {
   }
 
   if(isDefined(level.teams[winner])) {
-    var_e1fb96c7 = isDefined(level._callbacks[# "hash_20dca48305feccf5"]);
+    var_e1fb96c7 = isDefined(level._callbacks[#"hash_20dca48305feccf5"]);
 
     if(var_e1fb96c7) {
       level callback::callback(#"hash_20dca48305feccf5", winner);

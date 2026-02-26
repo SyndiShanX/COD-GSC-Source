@@ -932,7 +932,7 @@ function function_ea44a840(skill) {
     self giveweapon(weapon);
 
     if(!weapon.iscarriedkillstreak) {
-      self.pers[# "killstreak_quantity"][weapon] = 1;
+      self.pers[#"killstreak_quantity"][weapon] = 1;
     }
 
     self setweaponammoclip(weapon, weapon.clipsize);

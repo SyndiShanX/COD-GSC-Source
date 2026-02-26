@@ -193,7 +193,7 @@ function get_player_dialog_alias(dialogkey, meansofdeath = undefined) {
 
   bundlename = self getmpdialogname();
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 

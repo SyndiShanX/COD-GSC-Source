@@ -20,8 +20,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[# "hash_2d7e36f50e763c4a"] = # "hash_3cb3a6fc9eb00337";
-  level._effect[# "hash_71f4fac26bef1997"] = # "hash_3919b64dc762cab2";
+  level._effect[#"hash_2d7e36f50e763c4a"] = # "hash_3cb3a6fc9eb00337";
+  level._effect[#"hash_71f4fac26bef1997"] = # "hash_3919b64dc762cab2";
   callback::add_callback(#"freefall", &function_c9a18304);
   callback::add_callback(#"parachute", &function_26d46af3);
   animation::add_notetrack_func("player_free_fall::parachute_detach", &parachute_detach);
@@ -347,12 +347,12 @@ function_ba7365ff(localclientnum, height, fxid) {
 
 function_3a56fe1b(localclientnum) {
   if(!isDefined(self.var_1c0f821e)) {
-    self.var_1c0f821e = play_fx_on_tag(localclientnum, level._effect[# "hash_2d7e36f50e763c4a"], "tag_origin");
+    self.var_1c0f821e = play_fx_on_tag(localclientnum, level._effect[#"hash_2d7e36f50e763c4a"], "tag_origin");
     self thread function_ba7365ff(localclientnum, 6000, self.var_1c0f821e);
   }
 
   if(!isDefined(self.var_3e64d3fb)) {
-    self.var_3e64d3fb = play_fx_on_tag(localclientnum, level._effect[# "hash_71f4fac26bef1997"], "tag_origin");
+    self.var_3e64d3fb = play_fx_on_tag(localclientnum, level._effect[#"hash_71f4fac26bef1997"], "tag_origin");
     self thread function_ba7365ff(localclientnum, 25000, self.var_3e64d3fb);
   }
 }

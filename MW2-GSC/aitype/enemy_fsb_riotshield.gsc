@@ -56,15 +56,15 @@ spawner() {
 }
 
 precache() {
-  character\character_opforce_fsb_assault_a::precache();
-  character\character_opforce_fsb_shotgun::precache();
-  character\character_opforce_fsb_smg::precache();
+    character\character_opforce_fsb_assault_a::precache();
+    character\character_opforce_fsb_shotgun::precache();
+    character\character_opforce_fsb_smg::precache();
 
-  precacheItem("mp5");
-  precacheItem("mp5_reflex");
-  precacheItem("riotshield");
-  precacheItem("usp");
-  precacheItem("fraggrenade");
+    precacheItem("mp5");
+    precacheItem("mp5_reflex");
+    precacheItem("riotshield");
+    precacheItem("usp");
+    precacheItem("fraggrenade");
 
-  //---------------- maps\_riotshield::init_riotshield();
-  //---------------- }
+    //---------------- maps\_riotshield::init_riotshield();
+    //---------------- }

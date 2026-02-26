@@ -57,7 +57,7 @@ init_level_vars() {
   level thread zm_blockers::function_6f01c3cf("model_industries_b", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("model_industries_d", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("model_industries_e", "script_string", 0);
-  level.zombie_hints[# "default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
   level thread defend_areas();
   level thread function_9217567c();
 }

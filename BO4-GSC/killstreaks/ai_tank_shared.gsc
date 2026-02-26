@@ -67,7 +67,7 @@ init_shared(bundlename) {
     killstreaks::register_remote_override_weapon("tank_robot", "killstreak_ai_tank");
     killstreaks::function_e37b061("tank_robot", getweapon(#"tank_robot_launcher_turret"));
     ir_strobe::function_8806675d(#"ai_tank_marker", &spawn_tank_robot);
-    level.killstreaks[# "tank_robot"].threatonkill = 1;
+    level.killstreaks[#"tank_robot"].threatonkill = 1;
 
     if(function_8b1a219a()) {
       remote_weapons::registerremoteweapon("killstreak_ai_tank", #"hash_3abd55f34c1661ac", &starttankremotecontrol, &endtankremotecontrol, 1);
@@ -293,7 +293,7 @@ function_4c0ed253(location, context) {
     radius = context.radius;
     trace = physicstrace(location + (0, 0, 5000), location + (0, 0, 30), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(!(isDefined(level.var_66da9c3c) && level.var_66da9c3c)) {
         return false;
       }
@@ -338,7 +338,7 @@ islocationgood(location, context) {
     radius = context.radius;
     trace = physicstrace(location + (0, 0, 5000), location + (0, 0, 10), (radius * -1, radius * -1, 0), (radius, radius, 2 * radius), undefined, mask);
 
-    if(trace[# "fraction"] < 1) {
+    if(trace[#"fraction"] < 1) {
       if(!(isDefined(level.var_66da9c3c) && level.var_66da9c3c)) {
         return 0;
       }
@@ -505,7 +505,7 @@ crateland(crate, category, owner, team, context) {
   }
 
   if(isDefined(cratebottom)) {
-    origin = cratebottom[# "position"] + (0, 0, 1);
+    origin = cratebottom[#"position"] + (0, 0, 1);
   }
 
   playFX(level.ai_tank_crate_explode_fx, origin, (1, 0, 0), (0, 0, 1));
@@ -600,7 +600,7 @@ function_9b13ebf(drone) {
     drone vehicle_ai::startinitialstate("combat");
   }
 
-  drone thread targetting_delay::function_7e1a12ce(level.killstreakbundle[# "tank_robot"].var_2aeadfa0);
+  drone thread targetting_delay::function_7e1a12ce(level.killstreakbundle[#"tank_robot"].var_2aeadfa0);
 }
 
 drone_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
@@ -644,7 +644,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
     drone = spawnvehicle(tankarchetype, origin + (0, 0, 40), (0, 0, 0), "talon", undefined, 1, owner);
   }
 
-  drone killstreak_bundles::spawned(level.killstreakbundle[# "tank_robot"]);
+  drone killstreak_bundles::spawned(level.killstreakbundle[#"tank_robot"]);
 
   if(!isDefined(drone)) {
     killstreak_stop_and_assert(category, team, killstreak_id, "Failed to spawn ai tank vehicle.");
@@ -694,7 +694,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
   drone setneargoalnotifydist(35);
   drone setup_gameplay_think(category);
   drone.killstreak_end_time = gettime() + 90000;
-  params = level.killstreakbundle[# "tank_robot"];
+  params = level.killstreakbundle[#"tank_robot"];
   immediate_use = isDefined(params.ksuseimmediately) ? params.ksuseimmediately : 0;
   waitframe(1);
   owner remote_weapons::useremoteweapon(drone, "killstreak_ai_tank", immediate_use);
@@ -1402,7 +1402,7 @@ function_37cc249f() {
 function_d15dd929(radius, origin) {
   result = function_9cc082d2(origin + (0, 0, 100), 200);
 
-  if(isDefined(result) && isDefined(result[# "materialflags"]) && result[# "materialflags"] & 2) {
+  if(isDefined(result) && isDefined(result[#"materialflags"]) && result[#"materialflags"] & 2) {
     return false;
   }
 
@@ -2276,7 +2276,7 @@ endtankremotecontrol(drone, exitrequestedbyowner) {
   }
 
   drone clientfield::set("vehicletransition", 0);
-  params = level.killstreakbundle[# "tank_robot"];
+  params = level.killstreakbundle[#"tank_robot"];
   shutdown_on_exit = isDefined(params.ksshutdownonexit) ? params.ksshutdownonexit : 0;
 
   if(shutdown_on_exit) {
@@ -2295,7 +2295,7 @@ endtankremotecontrol(drone, exitrequestedbyowner) {
 }
 
 perform_recoil_missile_turret(player) {
-  bundle = level.killstreakbundle[# "tank_robot"];
+  bundle = level.killstreakbundle[#"tank_robot"];
   earthquake(0.4, 0.5, self.origin, 200);
   self perform_recoil("tag_barrel", isDefined(self.controlled) && self.controlled ? bundle.ksmainturretrecoilforcecontrolled : bundle.ksmainturretrecoilforce, bundle.ksmainturretrecoilforcezoffset);
 
@@ -2421,7 +2421,7 @@ tank_rocket_watch_ai() {
 }
 
 reload_rockets(player) {
-  bundle = level.killstreakbundle[# "tank_robot"];
+  bundle = level.killstreakbundle[#"tank_robot"];
   self disabledriverfiring(1);
   weapon_wait_duration_ms = int(bundle.ksweaponreloadtime * 1000);
   player setvehicleweaponwaitduration(weapon_wait_duration_ms);

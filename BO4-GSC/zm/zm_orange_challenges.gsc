@@ -1548,7 +1548,7 @@ function_b0d64cce(v_pos, v_angles) {
       v_drop = v_pos;
     }
 
-    v_ground = groundtrace(v_drop + (0, 0, 64) + (0, 0, 8), v_drop + (0, 0, 64) + (0, 0, -100000), 0, self)[# "position"];
+    v_ground = groundtrace(v_drop + (0, 0, 64) + (0, 0, 8), v_drop + (0, 0, 64) + (0, 0, -100000), 0, self)[#"position"];
     v_ground += (0, 0, 36);
     e_brain = util::spawn_model("p8_zm_esc_warden_organs_brain", v_ground);
     waitframe(1);

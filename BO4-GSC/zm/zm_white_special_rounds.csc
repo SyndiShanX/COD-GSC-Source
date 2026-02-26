@@ -14,10 +14,10 @@
 #namespace zm_white_special_rounds;
 
 init() {
-  level._effect[# "fx8_toxic_gas_lg"] = "maps/zm_white/fx8_toxic_gas_lg";
-  level._effect[# "fx8_toxic_gas_venting_lg"] = "maps/zm_white/fx8_toxic_gas_venting_lg";
-  level._effect[# "fx8_special_round_green_gas_md"] = "maps/zm_towers/fx8_special_round_green_gas_md";
-  level._effect[# "hash_670acb2528e7f014"] = # "hash_67f59250cb33cc07";
+  level._effect[#"fx8_toxic_gas_lg"] = "maps/zm_white/fx8_toxic_gas_lg";
+  level._effect[#"fx8_toxic_gas_venting_lg"] = "maps/zm_white/fx8_toxic_gas_venting_lg";
+  level._effect[#"fx8_special_round_green_gas_md"] = "maps/zm_towers/fx8_special_round_green_gas_md";
+  level._effect[#"hash_670acb2528e7f014"] = # "hash_67f59250cb33cc07";
   function_aa1e486e();
 }
 
@@ -39,15 +39,15 @@ register_clientfields() {
 }
 
 function_e54e60de(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_toxic_gas_lg"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_toxic_gas_lg"], self, "tag_origin");
 }
 
 function_a9b5240b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_toxic_gas_venting_lg"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_toxic_gas_venting_lg"], self, "tag_origin");
 }
 
 function_32acf82a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[# "fx8_special_round_green_gas_md"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[#"fx8_special_round_green_gas_md"], self, "tag_origin");
 }
 
 vent_interact_feedback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

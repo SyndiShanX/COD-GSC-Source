@@ -87,8 +87,8 @@ function gadget_thief_on_give(slot, weapon) {
   self clientfield::set_to_player("thief_state", 0);
   currentpower = (isDefined(self gadgetpowerget(slot)) ? self gadgetpowerget(slot) : 0);
   savedpower = 0;
-  if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[# "hash_c35f137f"]) && isDefined(self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]])) {
-    savedpower = self.pers["held_gadgets_power"][self.pers[# "hash_c35f137f"]];
+  if(isDefined(self.pers["held_gadgets_power"]) && isDefined(self.pers[#"hash_c35f137f"]) && isDefined(self.pers["held_gadgets_power"][self.pers[#"hash_c35f137f"]])) {
+    savedpower = self.pers["held_gadgets_power"][self.pers[#"hash_c35f137f"]];
   }
   if(currentpower >= 100 || savedpower >= 100) {
     self.givestolenweapononspawn = 1;
@@ -108,7 +108,7 @@ function gadget_thief_on_take(slot, weapon) {
 }
 
 function gadget_thief_on_connect() {
-  self.pers[# "hash_c5c4a13f"] = 1;
+  self.pers[#"hash_c5c4a13f"] = 1;
   level.gadgetthieftforcebeam = getdvarint("", 0);
   if(level.gadgetthieftforcebeam) {
     self thread watchforallkillsdebug();
@@ -135,8 +135,8 @@ function gadget_thief_is_ready(slot, weapon) {}
 
 function gadget_thief_active(slot, weapon) {
   waittillframeend();
-  if(isDefined(self.pers[# "hash_c35f137f"]) && weapon.name != "gadget_thief") {
-    self thread gadget_give_random_gadget(slot, weapon, self.pers[# "hash_476984c8"]);
+  if(isDefined(self.pers[#"hash_c35f137f"]) && weapon.name != "gadget_thief") {
+    self thread gadget_give_random_gadget(slot, weapon, self.pers[#"hash_476984c8"]);
   }
   self thread watchforherokill(slot);
 }
@@ -235,7 +235,7 @@ function handlethiefkill(slot, weapon, victim) {
       self clientfield::set_player_uimodel("playerAbilities.playerGadget3.flashEnd", int(currentpower / gadgetthiefkillpowergainwithoutmultiplier));
       self thread resetflashstartandendafterdelay(3);
       self gadgetpowerset(slot, currentpower);
-    } else if(isPlayer(victim) && self.pers[# "hash_476984c8"] === victim.entnum && weapon.isheroweapon) {
+    } else if(isPlayer(victim) && self.pers[#"hash_476984c8"] === victim.entnum && weapon.isheroweapon) {
       scoreevents::processscoreevent("kill_enemy_with_their_hero_weapon", self);
     }
   }
@@ -250,8 +250,8 @@ function earnedspecialistweapon(victim, slot, wasfullycharged, stolenheroweapon)
   if(victimisblackjack) {
     if(isDefined(stolenheroweapon)) {
       heroweapon = stolenheroweapon;
-    } else if(isDefined(victim.pers[# "hash_c35f137f"]) && victim.pers[# "hash_c35f137f"].isheroweapon === 1) {
-      heroweapon = victim.pers[# "hash_c35f137f"];
+    } else if(isDefined(victim.pers[#"hash_c35f137f"]) && victim.pers[#"hash_c35f137f"].isheroweapon === 1) {
+      heroweapon = victim.pers[#"hash_c35f137f"];
     }
   }
   if(!isDefined(heroweapon)) {
@@ -259,17 +259,17 @@ function earnedspecialistweapon(victim, slot, wasfullycharged, stolenheroweapon)
     heroweapon = getstolenheroweapon(victimgadget);
   }
   if(wasfullycharged) {
-    if(isDefined(heroweapon) && isDefined(self.pers[# "hash_c35f137f"]) && heroweapon != self.pers[# "hash_c35f137f"] && (!isDefined(self.pers[# "hash_5c5e3658"]) || heroweapon != self.pers[# "hash_5c5e3658"]) && self.pers[# "hash_c5c4a13f"]) {
+    if(isDefined(heroweapon) && isDefined(self.pers[#"hash_c35f137f"]) && heroweapon != self.pers[#"hash_c35f137f"] && (!isDefined(self.pers[#"hash_5c5e3658"]) || heroweapon != self.pers[#"hash_5c5e3658"]) && self.pers[#"hash_c5c4a13f"]) {
       self thread giveflipweapon(slot, victim, heroweapon);
     }
   } else {
     self clientfield::set_to_player("thief_state", 1);
     self clientfield::set_to_player("thief_weapon_option", 0);
     self thread gadget_give_random_gadget(slot, heroweapon, victim.entnum);
-    self.pers[# "hash_5c5e3658"] = undefined;
+    self.pers[#"hash_5c5e3658"] = undefined;
     self.thief_new_gadget_time = gettime();
-    if(isDefined(self.pers[# "hash_c35f137f"]) && self.pers[# "hash_c35f137f"].isheroweapon === 1) {
-      self handlestolenscoreevent(self.pers[# "hash_c35f137f"]);
+    if(isDefined(self.pers[#"hash_c35f137f"]) && self.pers[#"hash_c35f137f"].isheroweapon === 1) {
+      self handlestolenscoreevent(self.pers[#"hash_c35f137f"]);
     }
     self playsoundtoplayer("mpl_bm_specialist_bar_filled", self);
   }
@@ -281,7 +281,7 @@ function giveflipweapon(slot, victim, heroweapon) {
   previousgivefliptime = (isDefined(self.last_thief_give_flip_time) ? self.last_thief_give_flip_time : 0);
   self.last_thief_give_flip_time = gettime();
   alreadygivenflipthisframe = previousgivefliptime == self.last_thief_give_flip_time;
-  self.pers[# "hash_5c5e3658"] = heroweapon;
+  self.pers[#"hash_5c5e3658"] = heroweapon;
   victimbodyindex = getvictimbodyindex(victim, heroweapon);
   self handlestolenscoreevent(heroweapon);
   self notify("thief_flip_activated");
@@ -297,10 +297,10 @@ function giveflipweapon(slot, victim, heroweapon) {
 }
 
 function givepreviouslyearnedspecialistweapon(slot, justspawned) {
-  if(isDefined(self.pers[# "hash_c35f137f"])) {
-    self thread gadget_give_random_gadget(slot, self.pers[# "hash_c35f137f"], self.pers[# "hash_476984c8"], justspawned);
-    if(isDefined(self.pers[# "hash_5c5e3658"])) {
-      self thread watchforoptionuse(slot, self.pers[# "hash_6de3aefa"], justspawned);
+  if(isDefined(self.pers[#"hash_c35f137f"])) {
+    self thread gadget_give_random_gadget(slot, self.pers[#"hash_c35f137f"], self.pers[#"hash_476984c8"], justspawned);
+    if(isDefined(self.pers[#"hash_5c5e3658"])) {
+      self thread watchforoptionuse(slot, self.pers[#"hash_6de3aefa"], justspawned);
     }
   }
 }
@@ -450,8 +450,8 @@ function gadget_give_random_gadget(slot, weapon, weaponstolenfromentnum, justspa
   self giveweapon(selectedweapon);
   self gadgetcharging(slot, level.gadgetthieftimecharge);
   self.gadgetthiefchargingslot = slot;
-  self.pers[# "hash_c35f137f"] = selectedweapon;
-  self.pers[# "hash_476984c8"] = weaponstolenfromentnum;
+  self.pers[#"hash_c35f137f"] = selectedweapon;
+  self.pers[#"hash_476984c8"] = weaponstolenfromentnum;
   if(!isDefined(previousgadget) || previousgadget != selectedweapon) {
     self notify("thief_hero_weapon_changed", justspawned, selectedweapon);
   }
@@ -463,11 +463,11 @@ function watchforoptionuse(slot, victimbodyindex, justspawned) {
   self endon("hero_gadget_activated");
   self notify("watchforoptionuse_thief_singleton");
   self endon("watchforoptionuse_thief_singleton");
-  if(self.pers[# "hash_c5c4a13f"] == 0) {
+  if(self.pers[#"hash_c5c4a13f"] == 0) {
     return;
   }
   self clientfield::set_to_player("thief_weapon_option", victimbodyindex + 1);
-  self.pers[# "hash_6de3aefa"] = victimbodyindex;
+  self.pers[#"hash_6de3aefa"] = victimbodyindex;
   if(!justspawned) {
     wait(0.85);
     self enableoffhandspecial();
@@ -477,12 +477,12 @@ function watchforoptionuse(slot, victimbodyindex, justspawned) {
     if(self dpad_left_pressed()) {
       self clientfield::set_to_player("thief_state", 1);
       self clientfield::set_to_player("thief_weapon_option", 0);
-      self.pers[# "hash_c35f137f"] = self.pers[# "hash_5c5e3658"];
-      self.pers[# "hash_5c5e3658"] = undefined;
-      self.pers[# "hash_c5c4a13f"] = 0;
-      self thread gadget_give_random_gadget(slot, self.pers[# "hash_c35f137f"], self.pers[# "hash_476984c8"]);
+      self.pers[#"hash_c35f137f"] = self.pers[#"hash_5c5e3658"];
+      self.pers[#"hash_5c5e3658"] = undefined;
+      self.pers[#"hash_c5c4a13f"] = 0;
+      self thread gadget_give_random_gadget(slot, self.pers[#"hash_c35f137f"], self.pers[#"hash_476984c8"]);
       if(isDefined(level.playgadgetready)) {
-        self thread[[level.playgadgetready]](self.pers[# "hash_c35f137f"], 1);
+        self thread[[level.playgadgetready]](self.pers[#"hash_c35f137f"], 1);
       }
       return;
     }
@@ -516,9 +516,9 @@ function watchgadgetactivated(slot) {
   self endon("watchgadgetactivated_singleton");
   self waittill("hero_gadget_activated");
   self clientfield::set_to_player("thief_weapon_option", 0);
-  self.pers[# "hash_c35f137f"] = undefined;
-  self.pers[# "hash_5c5e3658"] = undefined;
-  self.pers[# "hash_c5c4a13f"] = 1;
+  self.pers[#"hash_c35f137f"] = undefined;
+  self.pers[#"hash_5c5e3658"] = undefined;
+  self.pers[#"hash_c5c4a13f"] = 1;
   self waittill("heroability_off");
   power = self gadgetpowerget(slot);
   power = (int(power / getthiefpowergain())) * getthiefpowergain();

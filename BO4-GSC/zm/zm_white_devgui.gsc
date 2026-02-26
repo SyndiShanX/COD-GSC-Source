@@ -35,8 +35,8 @@ function_3db5079() {
   }
 
   foreach(var_ab611263 in level.var_d4a0b9f4) {
-    if(var_ab611263[# "goo_state"] == # "active") {
-      var_ab611263[# "gas_cloud"] zm_white_special_rounds::function_27a8604b(var_ab611263[# "group"]);
+    if(var_ab611263[#"goo_state"] == # "active") {
+      var_ab611263[#"gas_cloud"] zm_white_special_rounds::function_27a8604b(var_ab611263[#"group"]);
     }
   }
 }

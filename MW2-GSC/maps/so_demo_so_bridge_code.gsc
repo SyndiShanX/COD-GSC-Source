@@ -11,67 +11,67 @@
 #include maps\_hud_util;
 
 // --------------------------------------------------------------------------------- track_infinite_ammo_time() {
-  level.normal_time = 0;
-  level.infinite_time = 0;
+level.normal_time = 0;
+level.infinite_time = 0;
 
-  flag_wait("so_demoman_start");
+flag_wait("so_demoman_start");
 
-  while(!flag("special_op_terminated")) {
-    wait 0.05;
-    if(!isDefined(level.infinite_ammo) || !level.infinite_ammo)
-      level.normal_time += 0.05;
-    else
-      level.infinite_time += 0.05;
-  }
+while(!flag("special_op_terminated")) {
+  wait 0.05;
+  if(!isDefined(level.infinite_ammo) || !level.infinite_ammo)
+    level.normal_time += 0.05;
+  else
+    level.infinite_time += 0.05;
+}
 }
 
 // --------------------------------------------------------------------------------- register_bridge_enemy() {
-  if(!isDefined(level.bridge_enemies)) {
-    level.bridge_enemies = 0;
-    level.enemy_list = [];
-  }
+if(!isDefined(level.bridge_enemies)) {
+  level.bridge_enemies = 0;
+  level.enemy_list = [];
+}
 
-  level.bridge_enemies++;
-  level.enemy_list = array_add(level.enemy_list, self);
+level.bridge_enemies++;
+level.enemy_list = array_add(level.enemy_list, self);
 
-  if(!flag("so_demoman_start"))
-    flag_set("so_demoman_start");
+if(!flag("so_demoman_start"))
+  flag_set("so_demoman_start");
 
-  self waittill("death");
+self waittill("death");
 
-  level.bridge_enemies--;
-  level.enemy_list = array_remove(level.enemy_list, self);
-  foreach(player in level.players)
-  player.target_reminder_time = gettime();
+level.bridge_enemies--;
+level.enemy_list = array_remove(level.enemy_list, self);
+foreach(player in level.players)
+player.target_reminder_time = gettime();
 }
 
 // --------------------------------------------------------------------------------- player_refill_ammo() {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  while(true) {
-    wait 0.05;
-    if(!player_can_refill()) {
-      if(isDefined(self.maintain_stock))
-        self.maintain_stock = [];
+while(true) {
+  wait 0.05;
+  if(!player_can_refill()) {
+    if(isDefined(self.maintain_stock))
+      self.maintain_stock = [];
+    continue;
+  }
+
+  if(!isDefined(self.maintain_stock))
+    self.maintain_stock = [];
+
+  weapons = self getweaponslistall();
+  foreach(weapon in weapons) {
+    if(weapon == "claymore")
+      continue;
+    if(weapon == "c4") {
       continue;
     }
+    if(!isDefined(self.maintain_stock[weapon]))
+      self.maintain_stock[weapon] = self getweaponammostock(weapon);
 
-    if(!isDefined(self.maintain_stock))
-      self.maintain_stock = [];
-
-    weapons = self getweaponslistall();
-    foreach(weapon in weapons) {
-      if(weapon == "claymore")
-        continue;
-      if(weapon == "c4") {
-        continue;
-      }
-      if(!isDefined(self.maintain_stock[weapon]))
-        self.maintain_stock[weapon] = self getweaponammostock(weapon);
-
-      self setweaponammostock(weapon, self.maintain_stock[weapon]);
-    }
+    self setweaponammostock(weapon, self.maintain_stock[weapon]);
   }
+}
 }
 
 player_can_refill() {
@@ -118,34 +118,34 @@ player_wait_for_fire() {
 }
 
 // --------------------------------------------------------------------------------- vehicle_alive_think() {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  if(!isDefined(level.vehicles_alive))
-    level.vehicles_alive = 0;
+if(!isDefined(level.vehicles_alive))
+  level.vehicles_alive = 0;
 
-  level.vehicles_alive++;
-  self thread vehicle_track_damage();
+level.vehicles_alive++;
+self thread vehicle_track_damage();
 
-  self waittill("exploded", attacker);
+self waittill("exploded", attacker);
 
-  // In case pesky players find a way to explode a car before doing anything else the normal script catches.
-  if(!flag("so_demoman_start"))
-    flag_set("so_demoman_start");
+// In case pesky players find a way to explode a car before doing anything else the normal script catches.
+if(!flag("so_demoman_start"))
+  flag_set("so_demoman_start");
 
-  level.vehicles_alive--;
-  level.vehicle_list = array_remove(level.vehicle_list, self);
+level.vehicles_alive--;
+level.vehicle_list = array_remove(level.vehicle_list, self);
 
-  if(isDefined(attacker) && isPlayer(attacker)) {
-    attacker.target_reminder_time = gettime();
-  } else {
-    foreach(player in level.players)
-    player.target_reminder_time = gettime();
-  }
+if(isDefined(attacker) && isPlayer(attacker)) {
+  attacker.target_reminder_time = gettime();
+} else {
+  foreach(player in level.players)
+  player.target_reminder_time = gettime();
+}
 
-  level notify("vehicle_destroyed");
-  thread so_dialog_counter_update(level.vehicles_alive, level.vehicles_max);
-  if(level.vehicles_alive <= 0)
-    flag_set("so_demoman_complete");
+level notify("vehicle_destroyed");
+thread so_dialog_counter_update(level.vehicles_alive, level.vehicles_max);
+if(level.vehicles_alive <= 0)
+  flag_set("so_demoman_complete");
 }
 
 vehicle_track_damage() {
@@ -240,15 +240,15 @@ hud_disable_cars_hint() {
 }
 
 // --------------------------------------------------------------------------------- hud_display_car_locations() {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  while(!flag("so_demoman_complete")) {
-    self waittill("show_vehicle_locs");
+while(!flag("so_demoman_complete")) {
+  self waittill("show_vehicle_locs");
 
-    thread hud_refresh_car_locations();
+  thread hud_refresh_car_locations();
 
-    self waittill("hide_vehicle_locs");
-  }
+  self waittill("hide_vehicle_locs");
+}
 }
 
 hud_refresh_car_locations() {
@@ -285,19 +285,19 @@ hud_show_target_icon(vehicle) {
 }
 
 // --------------------------------------------------------------------------------- hud_display_car_objectives() {
-  level endon("special_op_terminated");
+level endon("special_op_terminated");
 
-  Objective_SetPointerTextOverride(1, &"SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
+Objective_SetPointerTextOverride(1, &"SO_DEMO_SO_BRIDGE_OBJ_DESTROY");
 
-  while(!flag("so_demoman_complete")) {
-    self waittill("show_vehicle_locs");
+while(!flag("so_demoman_complete")) {
+  self waittill("show_vehicle_locs");
 
-    thread hud_refresh_car_objectives();
+  thread hud_refresh_car_objectives();
 
-    self waittill("hide_vehicle_locs");
+  self waittill("hide_vehicle_locs");
 
-    thread hud_hide_car_objectives();
-  }
+  thread hud_hide_car_objectives();
+}
 }
 
 hud_refresh_car_objectives() {
@@ -334,34 +334,34 @@ hud_hide_car_objectives() {
 }
 
 // --------------------------------------------------------------------------------- hud_display_cars_remaining() {
-  self.car_title = so_create_hud_item(3, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_VEHICLES", self);
-  self.car_count = so_create_hud_item(3, so_hud_ypos(), undefined, self);
-  self.car_count.alignx = "left";
-  self.car_count SetValue(level.vehicles_alive);
-  level.vehicles_max = level.vehicles_alive;
+self.car_title = so_create_hud_item(3, so_hud_ypos(), &"SO_DEMO_SO_BRIDGE_VEHICLES", self);
+self.car_count = so_create_hud_item(3, so_hud_ypos(), undefined, self);
+self.car_count.alignx = "left";
+self.car_count SetValue(level.vehicles_alive);
+level.vehicles_max = level.vehicles_alive;
 
-  while(true) {
-    level waittill("vehicle_destroyed");
-    if(level.vehicles_alive <= 0) {
-      break;
-    }
-
-    self.car_count SetValue(level.vehicles_alive);
-    if(level.vehicles_alive <= 5) {
-      self.car_title thread so_hud_pulse_close();
-      self.car_count thread so_hud_pulse_close();
-    }
+while(true) {
+  level waittill("vehicle_destroyed");
+  if(level.vehicles_alive <= 0) {
+    break;
   }
 
-  self.car_count so_remove_hud_item(true);
-  self.car_count = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
-  self.car_count.alignx = "left";
+  self.car_count SetValue(level.vehicles_alive);
+  if(level.vehicles_alive <= 5) {
+    self.car_title thread so_hud_pulse_close();
+    self.car_count thread so_hud_pulse_close();
+  }
+}
 
-  self.car_title thread so_hud_pulse_success();
-  self.car_count thread so_hud_pulse_success();
+self.car_count so_remove_hud_item(true);
+self.car_count = so_create_hud_item(3, so_hud_ypos(), &"SPECIAL_OPS_DASHDASH", self);
+self.car_count.alignx = "left";
 
-  self.car_title thread so_remove_hud_item();
-  self.car_count thread so_remove_hud_item();
+self.car_title thread so_hud_pulse_success();
+self.car_count thread so_hud_pulse_success();
+
+self.car_title thread so_remove_hud_item();
+self.car_count thread so_remove_hud_item();
 }
 
 hud_display_wreckage_count() {

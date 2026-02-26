@@ -352,7 +352,7 @@ force_last_stand() {
       eye = host getEye();
       dir *= 500;
       trace = bulletTrace(eye, eye + dir, 1, host);
-      target = trace[# "entity"];
+      target = trace[#"entity"];
 
       if(!isDefined(target) || !isPlayer(target)) {
         target = host;
@@ -423,7 +423,7 @@ function_b1158c52(var_90c1e72d) {
   } else if(isDefined(self.var_156bf46e) && isvehicle(self.var_156bf46e) && !self.var_156bf46e isremotecontrol() && isairborne(self.var_156bf46e)) {
     trace = groundtrace(self.origin, self.origin - (0, 0, 300), 0, self.var_156bf46e);
 
-    if(trace[# "fraction"] >= 1) {
+    if(trace[#"fraction"] >= 1) {
       return true;
     }
   } else {
@@ -1500,11 +1500,11 @@ revive_success(reviver, b_track_stats = 1) {
   self val::reset(#"last_stand", "show_weapon_hud");
   self function_1e8018b0();
 
-  if(!isDefined(self.pers[# "timesrevived"])) {
-    self.pers[# "timesrevived"] = 0;
+  if(!isDefined(self.pers[#"timesrevived"])) {
+    self.pers[#"timesrevived"] = 0;
   }
 
-  self.pers[# "timesrevived"]++;
+  self.pers[#"timesrevived"]++;
   voiceevent("player_revived", self, {
     #reviver: reviver
   });

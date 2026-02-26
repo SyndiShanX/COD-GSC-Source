@@ -419,7 +419,7 @@ init_sounds() {
   maps\_zombiemode_utility::add_sound("break_stone", "break_stone");
   maps\_zombiemode_utility::add_sound("couch_slam", "couch_slam");
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("sw_357");
 
   include_weapon("m1carbine");
@@ -462,18 +462,18 @@ init_sounds() {
   include_weapon("mine_bouncing_betty");
 }
 
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
   include_powerup("full_ammo");
 }
 
-#include_weapon(weapon_name) {
+include_weapon(weapon_name) {
   maps\_zombiemode_weapons::include_zombie_weapon(weapon_name);
 }
 
-#include_powerup(powerup_name) {
+include_powerup(powerup_name) {
   maps\_zombiemode_powerups::include_zombie_powerup(powerup_name);
 }
 

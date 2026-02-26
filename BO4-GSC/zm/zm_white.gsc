@@ -86,7 +86,7 @@ event_handler[level_init] main(eventstruct) {
   setclearanceceiling(17);
   level thread lui::add_luimenu("full_screen_movie", &full_screen_movie::register, "full_screen_movie");
   level thread function_d0f18ffe();
-  level.custom_spawner_entry[# "crawl"] = &zm_white_special_rounds::function_45bb11e4;
+  level.custom_spawner_entry[#"crawl"] = &zm_white_special_rounds::function_45bb11e4;
   level.var_ddcd74c6 = &zm_white_special_rounds::function_f79e10f9;
   level.var_c02e63 = &zm_white_util::function_5d7d0c85;
   level._no_vending_machine_auto_collision = 1;
@@ -115,12 +115,12 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "power_pbg_control", 1, 1, "int");
   zm::init_fx();
   clientfield::register("clientuimodel", "player_lives", 1, 2, "int");
-  level._effect[# "headshot"] = "_t6/impacts/fx_flesh_hit";
-  level._effect[# "headshot_nochunks"] = "_t6/misc/fx_zombie_bloodsplat";
-  level._effect[# "bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
-  level._effect[# "animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
-  level._effect[# "animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
-  level._effect[# "switch_sparks"] = "_t6/env/electrical/fx_elec_wire_spark_burst";
+  level._effect[#"headshot"] = "_t6/impacts/fx_flesh_hit";
+  level._effect[#"headshot_nochunks"] = "_t6/misc/fx_zombie_bloodsplat";
+  level._effect[#"bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
+  level._effect[#"animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
+  level._effect[#"switch_sparks"] = "_t6/env/electrical/fx_elec_wire_spark_burst";
   level.default_game_mode = "zclassic";
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
@@ -625,7 +625,7 @@ function_1f712bb1() {
   wait 3;
   level.var_af3a53b2 = util::spawn_model("tag_origin", level.chests[level.chest_index].origin + (0, 0, -75));
   level.var_af3a53b2.angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-  playFXOnTag(level._effect[# "hash_572a14944ad27060"], level.var_af3a53b2, "tag_origin");
+  playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_af3a53b2, "tag_origin");
 }
 
 function_2336a7c8() {
@@ -652,7 +652,7 @@ function_da0655c7() {
     wait 0.1;
     level.var_3caf613d[i] = util::spawn_model("tag_origin", level.chests[i].origin + (0, 0, -75));
     level.var_3caf613d[i].angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-    playFXOnTag(level._effect[# "hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
+    playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
   }
 
   level waittill(#"fire_sale_off");
@@ -687,7 +687,7 @@ function_cf95fbb7() {
     wait 0.1;
     level.var_3caf613d[i] = util::spawn_model("tag_origin", level.chests[i].origin + (0, 0, -75));
     level.var_3caf613d[i].angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-    playFXOnTag(level._effect[# "hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
+    playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
   }
 }
 
@@ -705,14 +705,14 @@ function_e5c88b7b() {
 
 function_785cadc4() {
   level.var_678333a6 = # "hash_11347f5077a17dcb";
-  level._effect[# "chest_light"] = # "hash_1e8cb303d3103833";
-  level._effect[# "chest_light_closed"] = # "hash_602f075818a2fb2e";
-  level._effect[# "hash_2ff87d61167ea531"] = # "hash_1eb426cfbfef7486";
-  level._effect[# "hash_4048cb4967032c4a"] = # "hash_7e272f1a9f143051";
-  level._effect[# "lght_marker"] = # "hash_7dec2fde8393c0f4";
-  level._effect[# "lght_marker_flare"] = # "hash_11347f5077a17dcb";
-  level._effect[# "poltergeist_magicbox"] = # "hash_11347f5077a17dcb";
-  level._effect[# "hash_572a14944ad27060"] = # "zombie/fx_weapon_box_marker_zmb";
+  level._effect[#"chest_light"] = # "hash_1e8cb303d3103833";
+  level._effect[#"chest_light_closed"] = # "hash_602f075818a2fb2e";
+  level._effect[#"hash_2ff87d61167ea531"] = # "hash_1eb426cfbfef7486";
+  level._effect[#"hash_4048cb4967032c4a"] = # "hash_7e272f1a9f143051";
+  level._effect[#"lght_marker"] = # "hash_7dec2fde8393c0f4";
+  level._effect[#"lght_marker_flare"] = # "hash_11347f5077a17dcb";
+  level._effect[#"poltergeist_magicbox"] = # "hash_11347f5077a17dcb";
+  level._effect[#"hash_572a14944ad27060"] = # "zombie/fx_weapon_box_marker_zmb";
 }
 
 function_d574cfc6() {
@@ -802,30 +802,30 @@ setupmusic() {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[5][# "hitmed"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[6][# "hitmed"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[7][# "hitmed"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[8][# "hitmed"] = "vox_plr_8_exert_pain";
-  level.exert_sounds[13][# "hitmed"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[14][# "hitmed"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[15][# "hitmed"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[16][# "hitmed"] = "vox_plr_8_exert_pain";
-  level.exert_sounds[5][# "hitlrg"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[6][# "hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[7][# "hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[8][# "hitlrg"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[13][# "hitlrg"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[14][# "hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[15][# "hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[16][# "hitlrg"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[5][# "cough"] = "vox_plr_5_exert_gas_cough";
-  level.exert_sounds[6][# "cough"] = "vox_plr_6_exert_gas_cough";
-  level.exert_sounds[7][# "cough"] = "vox_plr_7_exert_gas_cough";
-  level.exert_sounds[8][# "cough"] = "vox_plr_8_exert_gas_cough";
-  level.exert_sounds[13][# "cough"] = "vox_plr_5_exert_gas_cough";
-  level.exert_sounds[14][# "cough"] = "vox_plr_6_exert_gas_cough";
-  level.exert_sounds[15][# "cough"] = "vox_plr_7_exert_gas_cough";
-  level.exert_sounds[16][# "cough"] = "vox_plr_8_exert_gas_cough";
+  level.exert_sounds[5][#"hitmed"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[6][#"hitmed"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[7][#"hitmed"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[8][#"hitmed"] = "vox_plr_8_exert_pain";
+  level.exert_sounds[13][#"hitmed"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[14][#"hitmed"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[15][#"hitmed"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[16][#"hitmed"] = "vox_plr_8_exert_pain";
+  level.exert_sounds[5][#"hitlrg"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[6][#"hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[7][#"hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[8][#"hitlrg"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[13][#"hitlrg"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[14][#"hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[15][#"hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[16][#"hitlrg"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[5][#"cough"] = "vox_plr_5_exert_gas_cough";
+  level.exert_sounds[6][#"cough"] = "vox_plr_6_exert_gas_cough";
+  level.exert_sounds[7][#"cough"] = "vox_plr_7_exert_gas_cough";
+  level.exert_sounds[8][#"cough"] = "vox_plr_8_exert_gas_cough";
+  level.exert_sounds[13][#"cough"] = "vox_plr_5_exert_gas_cough";
+  level.exert_sounds[14][#"cough"] = "vox_plr_6_exert_gas_cough";
+  level.exert_sounds[15][#"cough"] = "vox_plr_7_exert_gas_cough";
+  level.exert_sounds[16][#"cough"] = "vox_plr_8_exert_gas_cough";
 }
 
 function_e120ae98(a_s_respawn_points) {

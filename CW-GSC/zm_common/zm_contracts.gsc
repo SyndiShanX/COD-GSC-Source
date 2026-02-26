@@ -183,8 +183,8 @@ function private function_902ef0de(var_38280f2f, delta) {
     return;
   }
 
-  target_value = self.pers[# "contracts"][var_38280f2f].target_value;
-  old_progress = isDefined(self.pers[# "contracts"][var_38280f2f].current_value) ? self.pers[# "contracts"][var_38280f2f].current_value : self.pers[# "contracts"][var_38280f2f].var_59cb904f;
+  target_value = self.pers[#"contracts"][var_38280f2f].target_value;
+  old_progress = isDefined(self.pers[#"contracts"][var_38280f2f].current_value) ? self.pers[#"contracts"][var_38280f2f].current_value : self.pers[#"contracts"][var_38280f2f].var_59cb904f;
 
   if(old_progress == target_value) {
     return;
@@ -197,7 +197,7 @@ function private function_902ef0de(var_38280f2f, delta) {
   }
 
   if(new_progress != old_progress) {
-    self.pers[# "contracts"][var_38280f2f].current_value = new_progress;
+    self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
@@ -205,7 +205,7 @@ function private function_902ef0de(var_38280f2f, delta) {
   }
 
   if(old_progress < target_value && target_value <= new_progress) {
-    self.pers[# "contracts"][var_38280f2f].var_be5bf249 = self.pers[# "time_played_total"];
+    self.pers[#"contracts"][var_38280f2f].var_be5bf249 = self.pers[#"time_played_total"];
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self zm_stats::function_fbce465a(#"hash_777766b99c35007f");
@@ -235,8 +235,8 @@ function private function_df42ef94() {
       n_progress = namespace_cf6efd05::function_48b5c403(self, #"hash_47c5fe6b4bbd9f0f", slot);
 
       if(isDefined(n_progress) && n_progress > 0) {
-        self.pers[# "contracts"][var_b973083d.var_38280f2f].var_59cb904f = n_progress;
-        self.pers[# "contracts"][var_b973083d.var_38280f2f].current_value = n_progress;
+        self.pers[#"contracts"][var_b973083d.var_38280f2f].var_59cb904f = n_progress;
+        self.pers[#"contracts"][var_b973083d.var_38280f2f].current_value = n_progress;
       }
     }
   }
@@ -246,7 +246,7 @@ function private function_feafa020() {
   foreach(player in getplayers()) {
     for(slot = 0; slot < 3; slot++) {
       var_b973083d = player registerpower_grid_displaycontrolrobotmelee(slot);
-      n_progress = isDefined(player.pers[# "contracts"][var_b973083d.var_38280f2f].current_value) ? player.pers[# "contracts"][var_b973083d.var_38280f2f].current_value : player.pers[# "contracts"][var_b973083d.var_38280f2f].var_59cb904f;
+      n_progress = isDefined(player.pers[#"contracts"][var_b973083d.var_38280f2f].current_value) ? player.pers[#"contracts"][var_b973083d.var_38280f2f].current_value : player.pers[#"contracts"][var_b973083d.var_38280f2f].var_59cb904f;
       namespace_cf6efd05::function_53721fc4(player, #"hash_47c5fe6b4bbd9f0f", slot, n_progress);
     }
   }

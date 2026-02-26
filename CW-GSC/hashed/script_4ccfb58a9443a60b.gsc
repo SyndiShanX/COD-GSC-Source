@@ -637,7 +637,7 @@ function function_3aa5909e(destination) {
 
 function function_18dfa93a(destination) {
   foreach(location in destination.locations) {
-    crafting_table = location.instances[# "crafting_table"];
+    crafting_table = location.instances[#"crafting_table"];
 
     if(isDefined(crafting_table)) {
       children = content_manager::get_children(crafting_table);

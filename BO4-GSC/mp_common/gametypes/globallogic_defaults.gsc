@@ -36,9 +36,9 @@ default_onforfeit(params) {
   level notify(#"forfeit in progress");
   level endon(#"forfeit in progress", #"abort forfeit");
   forfeit_delay = 20;
-  announcement(game.strings[# "opponent_forfeiting_in"], forfeit_delay, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], forfeit_delay, 0);
   wait 10;
-  announcement(game.strings[# "opponent_forfeiting_in"], 10, 0);
+  announcement(game.strings[#"opponent_forfeiting_in"], 10, 0);
   wait 10;
 
   if(!isDefined(params)) {
@@ -119,7 +119,7 @@ default_ononeleftevent(team) {
       continue;
     }
 
-    if(!isDefined(player.pers[# "team"]) || player.pers[# "team"] != team) {
+    if(!isDefined(player.pers[#"team"]) || player.pers[#"team"] != team) {
       continue;
     }
 

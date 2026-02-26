@@ -21,17 +21,17 @@ function private preload() {
   level.var_61e6d095.hidden = [];
   level.var_61e6d095.var_db65bf2f = [];
   level.var_61e6d095.inputs = [];
-  level.var_61e6d095.inputs[# "ui_confirm"] = "confirm";
-  level.var_61e6d095.inputs[# "ui_cancel"] = "cancel";
-  level.var_61e6d095.inputs[# "ui_alt1"] = "alt1";
-  level.var_61e6d095.inputs[# "ui_alt2"] = "alt2";
-  level.var_61e6d095.inputs[# "ui_navup"] = "navup";
-  level.var_61e6d095.inputs[# "ui_navdown"] = "navdown";
-  level.var_61e6d095.inputs[# "ui_navleft"] = "navleft";
-  level.var_61e6d095.inputs[# "ui_navright"] = "navright";
-  level.var_61e6d095.inputs[# "ui_prevtab"] = "prevtab";
-  level.var_61e6d095.inputs[# "ui_nexttab"] = "nexttab";
-  level.var_61e6d095.inputs[# "hash_5686e6f2a8315663"] = "backspace";
+  level.var_61e6d095.inputs[#"ui_confirm"] = "confirm";
+  level.var_61e6d095.inputs[#"ui_cancel"] = "cancel";
+  level.var_61e6d095.inputs[#"ui_alt1"] = "alt1";
+  level.var_61e6d095.inputs[#"ui_alt2"] = "alt2";
+  level.var_61e6d095.inputs[#"ui_navup"] = "navup";
+  level.var_61e6d095.inputs[#"ui_navdown"] = "navdown";
+  level.var_61e6d095.inputs[#"ui_navleft"] = "navleft";
+  level.var_61e6d095.inputs[#"ui_navright"] = "navright";
+  level.var_61e6d095.inputs[#"ui_prevtab"] = "prevtab";
+  level.var_61e6d095.inputs[#"ui_nexttab"] = "nexttab";
+  level.var_61e6d095.inputs[#"hash_5686e6f2a8315663"] = "backspace";
   level.var_61e6d095.var_ebb98e0b = [];
 
   foreach(key, value in level.var_61e6d095.inputs) {

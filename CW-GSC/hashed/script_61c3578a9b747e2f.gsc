@@ -282,7 +282,7 @@ function function_6c7755f9(player, var_347c484e = 0, var_6f40c449 = 1) {
   var_38e2a777 = self gettagorigin("j_spineupper");
   var_4985c8bd = player gettagorigin("j_spineupper");
 
-  if(!self isinvehicle() && !player isinvehicle() && (!var_6f40c449 || !is_true(player.var_23fa23a9)) && !self scene::is_igc_active() && !player scene::is_igc_active() && !self laststand::player_is_in_laststand() && !player laststand::player_is_in_laststand() && isDefined(var_38e2a777) && isDefined(var_4985c8bd) && beamtrace(var_38e2a777, var_4985c8bd, 0, self, 1, 1, player)[# "fraction"] === 1 && !is_true(self.var_16735873) && !is_true(player.var_16735873)) {
+  if(!self isinvehicle() && !player isinvehicle() && (!var_6f40c449 || !is_true(player.var_23fa23a9)) && !self scene::is_igc_active() && !player scene::is_igc_active() && !self laststand::player_is_in_laststand() && !player laststand::player_is_in_laststand() && isDefined(var_38e2a777) && isDefined(var_4985c8bd) && beamtrace(var_38e2a777, var_4985c8bd, 0, self, 1, 1, player)[#"fraction"] === 1 && !is_true(self.var_16735873) && !is_true(player.var_16735873)) {
     if(var_347c484e) {
       return true;
     } else if(!is_true(player.var_60b31640)) {
@@ -343,12 +343,12 @@ function function_c79f4bd7(weapon, player_source, var_15625d6b) {
 
     self flag::set(#"hash_6ab8e3db32b20d33");
 
-    if(!isDefined(level.var_cef2e607[# "hash_13c4587dc27db042"])) {
-      level.var_cef2e607[# "hash_13c4587dc27db042"] = -1;
+    if(!isDefined(level.var_cef2e607[#"hash_13c4587dc27db042"])) {
+      level.var_cef2e607[#"hash_13c4587dc27db042"] = -1;
     }
 
-    level.var_cef2e607[# "hash_13c4587dc27db042"]++;
-    wait float(function_60d95f53()) / 1000 * (level.var_cef2e607[# "hash_13c4587dc27db042"] % int(float(function_60d95f53()) / 1000 / float(function_60d95f53()) / 1000) + 1);
+    level.var_cef2e607[#"hash_13c4587dc27db042"]++;
+    wait float(function_60d95f53()) / 1000 * (level.var_cef2e607[#"hash_13c4587dc27db042"] % int(float(function_60d95f53()) / 1000 / float(function_60d95f53()) / 1000) + 1);
 
     if(isDefined(var_70ab6bc) && isDefined(n_clientfield) && isalive(player_source) && isalive(var_15625d6b)) {
       self.var_5f6261a5 = var_15625d6b;

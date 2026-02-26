@@ -26,7 +26,7 @@ function private preinit() {
 }
 
 function init() {
-  game.strings[# "autobalance"] = # "mp/autobalance_now";
+  game.strings[#"autobalance"] = # "mp/autobalance_now";
   level.teambalance = getdvarint(#"scr_teambalance", 0);
   level.teambalancetimer = 0;
   level.timeplayedcap = getdvarint(#"scr_timeplayedcap", 1800);
@@ -63,13 +63,13 @@ function on_joined_team(params) {
 }
 
 function on_joined_spectators(params) {
-  self.pers[# "teamtime"] = undefined;
+  self.pers[#"teamtime"] = undefined;
 }
 
 function function_45721cef() {
   foreach(team, _ in level.teams) {
     if(!isDefined(game.migratedhost)) {
-      game.stat[# "teamscores"][team] = 0;
+      game.stat[#"teamscores"][team] = 0;
     }
 
     game.teamsuddendeath[team] = 0;
@@ -78,15 +78,15 @@ function function_45721cef() {
 }
 
 function init_played_time() {
-  if(!isDefined(self.pers[# "totaltimeplayed"])) {
-    self.pers[# "totaltimeplayed"] = 0;
+  if(!isDefined(self.pers[#"totaltimeplayed"])) {
+    self.pers[#"totaltimeplayed"] = 0;
   }
 
-  self.timeplayed[# "other"] = 0;
-  self.timeplayed[# "alive"] = 0;
+  self.timeplayed[#"other"] = 0;
+  self.timeplayed[#"alive"] = 0;
 
-  if(!isDefined(self.timeplayed[# "total"]) || !(level.gametype == "twar" && 0 < game.roundsplayed && 0 < self.timeplayed[# "total"])) {
-    self.timeplayed[# "total"] = 0;
+  if(!isDefined(self.timeplayed[#"total"]) || !(level.gametype == "twar" && 0 < game.roundsplayed && 0 < self.timeplayed[#"total"])) {
+    self.timeplayed[#"total"] = 0;
   }
 }
 
@@ -146,19 +146,19 @@ function update_played_time() {
     }
   }
 
-  if(self.timeplayed[# "other"]) {
-    time = int(min(self.timeplayed[# "other"], level.timeplayedcap));
+  if(self.timeplayed[#"other"]) {
+    time = int(min(self.timeplayed[#"other"], level.timeplayedcap));
     self stats::function_dad108fa(#"time_played_other", time);
     self stats::function_bb7eedf0(#"time_played_other", time);
   }
 
-  if(self.timeplayed[# "alive"]) {
-    timealive = int(min(self.timeplayed[# "alive"], level.timeplayedcap));
+  if(self.timeplayed[#"alive"]) {
+    timealive = int(min(self.timeplayed[#"alive"], level.timeplayedcap));
     self stats::function_dad108fa(#"time_played_alive", timealive);
   }
 
-  timealive = int(min(self.timeplayed[# "alive"], level.timeplayedcap));
-  self.pers[# "time_played_alive"] += timealive;
+  timealive = int(min(self.timeplayed[#"alive"], level.timeplayedcap));
+  self.pers[#"time_played_alive"] += timealive;
   pixendevent();
 
   foreach(team, _ in level.teams) {
@@ -167,8 +167,8 @@ function update_played_time() {
     }
   }
 
-  self.timeplayed[# "other"] = 0;
-  self.timeplayed[# "alive"] = 0;
+  self.timeplayed[#"other"] = 0;
+  self.timeplayed[#"alive"] = 0;
 }
 
 function update_time() {
@@ -176,7 +176,7 @@ function update_time() {
     return;
   }
 
-  self.pers[# "teamtime"] = gettime();
+  self.pers[#"teamtime"] = gettime();
 }
 
 function update_balance_dvar() {
@@ -192,19 +192,19 @@ function change(team) {
     self.switching_teams = 1;
     self.switchedteamsresetgadgets = 1;
     self.joining_team = team;
-    self.leaving_team = self.pers[# "team"];
+    self.leaving_team = self.pers[#"team"];
     self suicide();
   }
 
-  self.pers[# "team"] = team;
+  self.pers[#"team"] = team;
   self.team = team;
-  self.pers[# "spawnweapon"] = undefined;
-  self.pers[# "savedmodel"] = undefined;
-  self.pers[# "teamtime"] = undefined;
-  self.sessionteam = self.pers[# "team"];
+  self.pers[#"spawnweapon"] = undefined;
+  self.pers[#"savedmodel"] = undefined;
+  self.pers[#"teamtime"] = undefined;
+  self.sessionteam = self.pers[#"team"];
   self globallogic_ui::updateobjectivetext();
   self spectating::set_permissions();
-  self openmenu(game.menu[# "menu_start_menu"]);
+  self openmenu(game.menu[#"menu_start_menu"]);
   self notify(#"end_respawn");
 }
 
@@ -221,7 +221,7 @@ function count_players() {
       continue;
     }
 
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
 
     if(isDefined(team) && isDefined(level.teams[team])) {
       playercounts[team]++;
@@ -244,13 +244,13 @@ function track_free_played_time() {
     }
   }
 
-  self.timeplayed[# "other"] = 0;
-  self.timeplayed[# "total"] = 0;
-  self.timeplayed[# "alive"] = 0;
+  self.timeplayed[#"other"] = 0;
+  self.timeplayed[#"total"] = 0;
+  self.timeplayed[#"alive"] = 0;
 
   for(;;) {
     if(game.state == # "playing") {
-      team = self.pers[# "team"];
+      team = self.pers[#"team"];
 
       if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != # "spectator") {
         if(!isDefined(self.timeplayed[team])) {
@@ -258,13 +258,13 @@ function track_free_played_time() {
         }
 
         self.timeplayed[team]++;
-        self.timeplayed[# "total"]++;
+        self.timeplayed[#"total"]++;
 
         if(isalive(self)) {
-          self.timeplayed[# "alive"]++;
+          self.timeplayed[#"alive"]++;
         }
       } else {
-        self.timeplayed[# "other"]++;
+        self.timeplayed[#"other"]++;
       }
     }
 

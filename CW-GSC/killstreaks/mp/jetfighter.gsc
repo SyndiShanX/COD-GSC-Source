@@ -89,9 +89,9 @@ function private function_4b3b25af(killstreak_id) {
     return;
   }
 
-  startposition = adjustedpath[# "startposition"];
-  forward = adjustedpath[# "forward"];
-  angles = adjustedpath[# "angles"];
+  startposition = adjustedpath[#"startposition"];
+  forward = adjustedpath[#"forward"];
+  angles = adjustedpath[#"angles"];
   var_ce2c18d3 = util::spawn_model("tag_origin", (var_d44b8c3e[0], var_d44b8c3e[1], startposition[2]), angles);
   var_ce2c18d3.team = team;
   var_ce2c18d3.killstreak_id = killstreak_id;
@@ -222,22 +222,22 @@ function private function_8f304847(var_d44b8c3e, startangles) {
         maxheight = var_59a518e1[var_59a518e1.size - 1];
         var_35637e22 = maxheight - var_59a518e1[0];
         trace = groundtrace((var_d44b8c3e[0], var_d44b8c3e[1], maxheight), var_d44b8c3e - (0, 0, 5000), 0, undefined);
-        groundheight = trace[# "position"][2];
+        groundheight = trace[#"position"][2];
         bundle = killstreaks::get_script_bundle("jetfighter");
         var_6b1fb8d9 = groundheight + (maxheight - groundheight) * bundle.var_ff73e08c;
 
         if(var_35637e22 < 2000) {
-          adjustedpath[# "startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
-          adjustedpath[# "forward"] = forward;
-          adjustedpath[# "angles"] = angles;
+          adjustedpath[#"startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
+          adjustedpath[#"forward"] = forward;
+          adjustedpath[#"angles"] = angles;
           return adjustedpath;
         }
 
         if(!isDefined(var_c8e01926) || var_35637e22 < var_c8e01926) {
           var_c8e01926 = var_35637e22;
-          var_af2fe365[# "startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
-          var_af2fe365[# "forward"] = forward;
-          var_af2fe365[# "angles"] = angles;
+          var_af2fe365[#"startposition"] = (var_90aa61b[0], var_90aa61b[1], var_6b1fb8d9);
+          var_af2fe365[#"forward"] = forward;
+          var_af2fe365[#"angles"] = angles;
         }
       }
 
@@ -252,9 +252,9 @@ function private function_8f304847(var_d44b8c3e, startangles) {
     }
   }
 
-  adjustedpath[# "startposition"] = var_d44b8c3e + vectorscale(startforward, -1 * 20000);
-  adjustedpath[# "forward"] = startforward;
-  adjustedpath[# "angles"] = startangles;
+  adjustedpath[#"startposition"] = var_d44b8c3e + vectorscale(startforward, -1 * 20000);
+  adjustedpath[#"forward"] = startforward;
+  adjustedpath[#"angles"] = startangles;
   return adjustedpath;
 }
 
@@ -582,8 +582,8 @@ function function_2f5700b4(params) {
     var_d44b8c3e = var_10c3dd58.var_d44b8c3e;
     angles = var_10c3dd58.angles;
     adjustedpath = function_8f304847(var_d44b8c3e, angles);
-    startposition = adjustedpath[# "startposition"];
-    angles = adjustedpath[# "angles"];
+    startposition = adjustedpath[#"startposition"];
+    angles = adjustedpath[#"angles"];
     var_a50bad8f = util::spawn_model("<dev string:xc1>", (var_d44b8c3e[0], var_d44b8c3e[1], startposition[2]), angles);
     playsoundatposition("<dev string:xcf>", var_a50bad8f.origin);
     var_a50bad8f scene::play(#"p9_fxanim_mp_dogfight_01_bundle");

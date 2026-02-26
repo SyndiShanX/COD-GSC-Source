@@ -14,12 +14,12 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level.var_911cdf6e[# "min_participation"] = -5;
-  level.var_911cdf6e[# "max_participation"] = 1000;
-  level.var_911cdf6e[# "hash_15f7f611338f7f22"] = 250;
-  level.var_911cdf6e[# "friend_kill_points"] = -5;
-  level.var_911cdf6e[# "hash_308b6e99638b7c04"] = -5;
-  level.var_911cdf6e[# "hash_69a22a048631e673"] = 0.75;
+  level.var_911cdf6e[#"min_participation"] = -5;
+  level.var_911cdf6e[#"max_participation"] = 1000;
+  level.var_911cdf6e[#"hash_15f7f611338f7f22"] = 250;
+  level.var_911cdf6e[#"friend_kill_points"] = -5;
+  level.var_911cdf6e[#"hash_308b6e99638b7c04"] = -5;
+  level.var_911cdf6e[#"hash_69a22a048631e673"] = 0.75;
   level.var_edbfa7b = 0.5;
 
   if(sessionmodeiscampaigngame() && level.gametype !== "coop") {
@@ -55,7 +55,7 @@ function function_b943ac72(msg) {
 function private function_25d6cf14() {
   if(!isDefined(self.var_d5b6872a)) {
     self.var_d5b6872a = spawnStruct();
-    self.var_d5b6872a.var_987926ba = level.var_911cdf6e[# "max_participation"] - level.var_911cdf6e[# "min_participation"];
+    self.var_d5b6872a.var_987926ba = level.var_911cdf6e[#"max_participation"] - level.var_911cdf6e[#"min_participation"];
     self.var_d5b6872a.var_db612029 = 520;
     self.var_d5b6872a.var_40b5d571 = 620;
     self.var_d5b6872a.ypos = 130;
@@ -67,7 +67,7 @@ function private function_25d6cf14() {
     self.var_d5b6872a.friendly_fire.fontscale = 3;
     self.var_d5b6872a.friendly_fire.alignx = "<dev string:x68>";
     self.var_d5b6872a.friendly_fire.aligny = "<dev string:x71>";
-    self.var_d5b6872a.friendly_fire.x = self.var_d5b6872a.var_40b5d571 - self.var_d5b6872a.bar_width * level.var_911cdf6e[# "max_participation"] / self.var_d5b6872a.var_987926ba - log(self.participation) * self.var_d5b6872a.friendly_fire.fontscale;
+    self.var_d5b6872a.friendly_fire.x = self.var_d5b6872a.var_40b5d571 - self.var_d5b6872a.bar_width * level.var_911cdf6e[#"max_participation"] / self.var_d5b6872a.var_987926ba - log(self.participation) * self.var_d5b6872a.friendly_fire.fontscale;
     self.var_d5b6872a.friendly_fire.y = 100;
     self.var_d5b6872a.friendly_fire.alpha = 1;
   }
@@ -77,10 +77,10 @@ function private function_25d6cf14() {
     self.var_d5b6872a.var_9a2c2205.fontscale = 1.5;
     self.var_d5b6872a.var_9a2c2205.alignx = "<dev string:x68>";
     self.var_d5b6872a.var_9a2c2205.aligny = "<dev string:x71>";
-    self.var_d5b6872a.var_9a2c2205.x = self.var_d5b6872a.var_db612029 - (ceil(max(log(abs(level.var_911cdf6e[# "min_participation"])) / log(10), 0)) - 2 + (self.participation < 0)) * self.var_d5b6872a.friendly_fire.fontscale;
+    self.var_d5b6872a.var_9a2c2205.x = self.var_d5b6872a.var_db612029 - (ceil(max(log(abs(level.var_911cdf6e[#"min_participation"])) / log(10), 0)) - 2 + (self.participation < 0)) * self.var_d5b6872a.friendly_fire.fontscale;
     self.var_d5b6872a.var_9a2c2205.y = self.var_d5b6872a.ypos;
     self.var_d5b6872a.var_9a2c2205.alpha = 1;
-    self.var_d5b6872a.var_9a2c2205 setvalue(level.var_911cdf6e[# "min_participation"]);
+    self.var_d5b6872a.var_9a2c2205 setvalue(level.var_911cdf6e[#"min_participation"]);
   }
 
   if(!isDefined(self.var_d5b6872a.var_67b2f7ad)) {
@@ -88,10 +88,10 @@ function private function_25d6cf14() {
     self.var_d5b6872a.var_67b2f7ad.fontscale = 1.5;
     self.var_d5b6872a.var_67b2f7ad.alignx = "<dev string:x68>";
     self.var_d5b6872a.var_67b2f7ad.aligny = "<dev string:x71>";
-    self.var_d5b6872a.var_67b2f7ad.x = self.var_d5b6872a.var_40b5d571 + 2 * (ceil(max(log(abs(level.var_911cdf6e[# "max_participation"])) / log(10), 0)) + 2.5 + (self.participation < 0)) * self.var_d5b6872a.friendly_fire.fontscale;
+    self.var_d5b6872a.var_67b2f7ad.x = self.var_d5b6872a.var_40b5d571 + 2 * (ceil(max(log(abs(level.var_911cdf6e[#"max_participation"])) / log(10), 0)) + 2.5 + (self.participation < 0)) * self.var_d5b6872a.friendly_fire.fontscale;
     self.var_d5b6872a.var_67b2f7ad.y = self.var_d5b6872a.ypos;
     self.var_d5b6872a.var_67b2f7ad.alpha = 1;
-    self.var_d5b6872a.var_67b2f7ad setvalue(level.var_911cdf6e[# "max_participation"]);
+    self.var_d5b6872a.var_67b2f7ad setvalue(level.var_911cdf6e[#"max_participation"]);
   }
 
   if(!isDefined(self.var_d5b6872a.var_ce0ada2c)) {
@@ -148,7 +148,7 @@ function private function_25d6cf14() {
     self.var_d5b6872a.var_c16c1379 = newdebughudelem(self);
     self.var_d5b6872a.var_c16c1379.alignx = "<dev string:x68>";
     self.var_d5b6872a.var_c16c1379.aligny = "<dev string:x71>";
-    self.var_d5b6872a.var_c16c1379.x = self.var_d5b6872a.var_db612029 + level.var_911cdf6e[# "min_participation"] * -1 / self.var_d5b6872a.var_987926ba * self.var_d5b6872a.bar_width;
+    self.var_d5b6872a.var_c16c1379.x = self.var_d5b6872a.var_db612029 + level.var_911cdf6e[#"min_participation"] * -1 / self.var_d5b6872a.var_987926ba * self.var_d5b6872a.bar_width;
     self.var_d5b6872a.var_c16c1379.y = self.var_d5b6872a.ypos + 9;
     self.var_d5b6872a.var_c16c1379.sort = 2;
     self.var_d5b6872a.var_c16c1379.alpha = 1;
@@ -160,7 +160,7 @@ function private function_25d6cf14() {
     self.var_d5b6872a.var_24736d8c = newdebughudelem(self);
     self.var_d5b6872a.var_24736d8c.alignx = "<dev string:x68>";
     self.var_d5b6872a.var_24736d8c.aligny = "<dev string:x71>";
-    self.var_d5b6872a.var_24736d8c.x = self.var_d5b6872a.var_db612029 + level.var_911cdf6e[# "min_participation"] * -1 / self.var_d5b6872a.var_987926ba * self.var_d5b6872a.bar_width;
+    self.var_d5b6872a.var_24736d8c.x = self.var_d5b6872a.var_db612029 + level.var_911cdf6e[#"min_participation"] * -1 / self.var_d5b6872a.var_987926ba * self.var_d5b6872a.bar_width;
     self.var_d5b6872a.var_24736d8c.y = self.var_d5b6872a.ypos - 9;
     self.var_d5b6872a.var_24736d8c.sort = 2;
     self.var_d5b6872a.var_24736d8c.alpha = 1;
@@ -205,10 +205,10 @@ function debug_friendlyfire() {
       self.var_d5b6872a.var_24736d8c.alpha = 0;
     }
 
-    xpos = (level.var_911cdf6e[# "max_participation"] - self.participation) / self.var_d5b6872a.var_987926ba * self.var_d5b6872a.bar_width;
+    xpos = (level.var_911cdf6e[#"max_participation"] - self.participation) / self.var_d5b6872a.var_987926ba * self.var_d5b6872a.bar_width;
     self.var_d5b6872a.debug_health_bar.x = self.var_d5b6872a.var_40b5d571 - xpos;
     self.var_d5b6872a.friendly_fire setvalue(self.participation);
-    self.var_d5b6872a.friendly_fire.x = self.var_d5b6872a.var_40b5d571 - self.var_d5b6872a.bar_width * level.var_911cdf6e[# "max_participation"] / self.var_d5b6872a.var_987926ba + (ceil(max(log(abs(self.participation)) / log(10), 0)) + 1 + (self.participation < 0)) * self.var_d5b6872a.friendly_fire.fontscale * 2;
+    self.var_d5b6872a.friendly_fire.x = self.var_d5b6872a.var_40b5d571 - self.var_d5b6872a.bar_width * level.var_911cdf6e[#"max_participation"] / self.var_d5b6872a.var_987926ba + (ceil(max(log(abs(self.participation)) / log(10), 0)) + 1 + (self.participation < 0)) * self.var_d5b6872a.friendly_fire.fontscale * 2;
     wait 0.25;
   }
 }
@@ -309,9 +309,9 @@ function function_1ad87afd(entity, damage, attacker, method, weapon, einflictor)
 
   if(!same_team) {
     if(killed) {
-      attacker.participation += level.var_911cdf6e[# "hash_15f7f611338f7f22"];
+      attacker.participation += level.var_911cdf6e[#"hash_15f7f611338f7f22"];
       attacker participation_point_cap();
-      function_b943ac72("Enemy killed: +" + level.var_911cdf6e[# "hash_15f7f611338f7f22"]);
+      function_b943ac72("Enemy killed: +" + level.var_911cdf6e[#"hash_15f7f611338f7f22"]);
     }
 
     return;
@@ -328,14 +328,14 @@ function function_1ad87afd(entity, damage, attacker, method, weapon, einflictor)
   if(killed) {
     if(entity.archetype === # "civilian" || entity.team == # "neutral") {
       level notify(#"hash_3f3c07e5660a9695");
-      attacker.participation += level.var_911cdf6e[# "hash_308b6e99638b7c04"];
-      function_b943ac72("Civilian killed: -" + 0 - level.var_911cdf6e[# "hash_308b6e99638b7c04"]);
+      attacker.participation += level.var_911cdf6e[#"hash_308b6e99638b7c04"];
+      function_b943ac72("Civilian killed: -" + 0 - level.var_911cdf6e[#"hash_308b6e99638b7c04"]);
     } else if(isDefined(entity) && isDefined(entity.var_f9a443f6)) {
       attacker.participation += entity.var_f9a443f6;
       function_b943ac72("Friendly killed with custom penalty: -" + 0 - entity.var_f9a443f6);
     } else {
-      attacker.participation += level.var_911cdf6e[# "friend_kill_points"];
-      function_b943ac72("Friendly killed: -" + 0 - level.var_911cdf6e[# "friend_kill_points"]);
+      attacker.participation += level.var_911cdf6e[#"friend_kill_points"];
+      function_b943ac72("Friendly killed: -" + 0 - level.var_911cdf6e[#"friend_kill_points"]);
     }
   } else {
     attacker.participation -= 1;
@@ -432,9 +432,9 @@ function friendly_fire_think(entity) {
 
     if(!same_team) {
       if(killed) {
-        attacker.participation += level.var_911cdf6e[# "hash_15f7f611338f7f22"];
+        attacker.participation += level.var_911cdf6e[#"hash_15f7f611338f7f22"];
         attacker participation_point_cap();
-        function_b943ac72("Enemy killed: +" + level.var_911cdf6e[# "hash_15f7f611338f7f22"]);
+        function_b943ac72("Enemy killed: +" + level.var_911cdf6e[#"hash_15f7f611338f7f22"]);
       }
 
       return;
@@ -453,18 +453,18 @@ function friendly_fire_think(entity) {
         level notify(#"hash_3f3c07e5660a9695");
 
         if(attacker.participation <= 0) {
-          attacker.participation += level.var_911cdf6e[# "min_participation"];
+          attacker.participation += level.var_911cdf6e[#"min_participation"];
           function_b943ac72("Civilian killed with negative score, autofail!");
         } else {
-          attacker.participation += level.var_911cdf6e[# "hash_308b6e99638b7c04"];
-          function_b943ac72("Civilian killed: -" + 0 - level.var_911cdf6e[# "hash_308b6e99638b7c04"]);
+          attacker.participation += level.var_911cdf6e[#"hash_308b6e99638b7c04"];
+          function_b943ac72("Civilian killed: -" + 0 - level.var_911cdf6e[#"hash_308b6e99638b7c04"]);
         }
       } else if(isDefined(entity) && isDefined(entity.var_f9a443f6)) {
         attacker.participation += entity.var_f9a443f6;
         function_b943ac72("Friendly killed with custom penalty: -" + 0 - entity.var_f9a443f6);
       } else {
-        attacker.participation += level.var_911cdf6e[# "friend_kill_points"];
-        function_b943ac72("Friendly killed: -" + 0 - level.var_911cdf6e[# "friend_kill_points"]);
+        attacker.participation += level.var_911cdf6e[#"friend_kill_points"];
+        function_b943ac72("Friendly killed: -" + 0 - level.var_911cdf6e[#"friend_kill_points"]);
       }
     } else {
       attacker.participation -= 1;
@@ -486,7 +486,7 @@ function friendly_fire_think(entity) {
 }
 
 function friendly_fire_checkpoints() {
-  if(self.participation <= level.var_911cdf6e[# "min_participation"]) {
+  if(self.participation <= level.var_911cdf6e[#"min_participation"]) {
     self thread missionfail();
   }
 }
@@ -526,12 +526,12 @@ function participation_point_cap() {
     return;
   }
 
-  if(self.participation > level.var_911cdf6e[# "max_participation"]) {
-    self.participation = level.var_911cdf6e[# "max_participation"];
+  if(self.participation > level.var_911cdf6e[#"max_participation"]) {
+    self.participation = level.var_911cdf6e[#"max_participation"];
   }
 
-  if(self.participation < level.var_911cdf6e[# "min_participation"]) {
-    self.participation = level.var_911cdf6e[# "min_participation"];
+  if(self.participation < level.var_911cdf6e[#"min_participation"]) {
+    self.participation = level.var_911cdf6e[#"min_participation"];
   }
 }
 
@@ -544,7 +544,7 @@ function participation_point_flattenovertime() {
       self.participation--;
     }
 
-    wait level.var_911cdf6e[# "hash_69a22a048631e673"];
+    wait level.var_911cdf6e[#"hash_69a22a048631e673"];
   }
 }
 

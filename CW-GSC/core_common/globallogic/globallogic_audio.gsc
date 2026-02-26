@@ -776,7 +776,7 @@ function get_dialog_bundle_alias(dialogbundle, dialogkey, var_6ad14004) {
 
   if(!ishash(dialogalias)) {
     if(var_6ad14004 === 1) {
-      faction = teams::function_20cfd8b5(self.pers[# "team"]);
+      faction = teams::function_20cfd8b5(self.pers[#"team"]);
       var_2e00736a = faction.var_ce1913bd;
 
       if(isDefined(var_2e00736a)) {
@@ -857,11 +857,11 @@ function function_ec14f55(dialogbundle, dialogkey) {
 }
 
 function is_team_winning(checkteam) {
-  score = game.stat[# "teamscores"][checkteam];
+  score = game.stat[#"teamscores"][checkteam];
 
   foreach(team, _ in level.teams) {
     if(team != checkteam) {
-      if(game.stat[# "teamscores"][team] >= score) {
+      if(game.stat[#"teamscores"][team] >= score) {
         return false;
       }
     }
@@ -895,7 +895,7 @@ function set_music_on_team(state, team = "both", wait_time = 0, save_state = 0, 
       continue;
     }
 
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team) {
       player thread set_music_on_player(state, wait_time, save_state, return_state);
     }
   }
@@ -905,7 +905,7 @@ function function_89fe8163(state, team = "both", wait_time = 0, save_state = 0, 
   assert(isDefined(level.players));
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] != team) {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] != team) {
       player thread set_music_on_player(state, wait_time, save_state, return_state);
     }
   }

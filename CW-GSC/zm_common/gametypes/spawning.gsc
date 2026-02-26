@@ -43,7 +43,7 @@ function init_spawn_system() {
   spawnsystem.objective_facing_bonus = 0;
   spawnsystem.ispawn_teammask = [];
   spawnsystem.ispawn_teammask_free = 1;
-  spawnsystem.ispawn_teammask[# "none"] = spawnsystem.ispawn_teammask_free;
+  spawnsystem.ispawn_teammask[#"none"] = spawnsystem.ispawn_teammask_free;
   all = spawnsystem.ispawn_teammask_free;
   count = 1;
 
@@ -53,7 +53,7 @@ function init_spawn_system() {
     count++;
   }
 
-  spawnsystem.ispawn_teammask[# "all"] = all;
+  spawnsystem.ispawn_teammask[#"all"] = all;
 }
 
 function on_player_connecting() {
@@ -97,7 +97,7 @@ function ongrenadethrow() {
     waitresult = self waittill(#"grenade_fire");
     grenade = waitresult.projectile;
     weapon = waitresult.weapon;
-    level thread create_grenade_influencers(self.pers[# "team"], weapon, grenade);
+    level thread create_grenade_influencers(self.pers[#"team"], weapon, grenade);
     waitframe(1);
   }
 }
@@ -173,8 +173,8 @@ function create_player_influencers() {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
     weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
-  } else if(isDefined(self.pers[# "team"])) {
-    team = self.pers[# "team"];
+  } else if(isDefined(self.pers[#"team"])) {
+    team = self.pers[#"team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   } else {
@@ -195,7 +195,7 @@ function create_player_influencers() {
     self create_entity_masked_friendly_influencer("friend", team_mask);
   }
 
-  if(!isDefined(self.pers[# "team"]) || self.pers[# "team"] == "spectator") {
+  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == "spectator") {
     self enable_influencers(0);
   }
 }
@@ -246,7 +246,7 @@ function player_influencers_set_team() {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     enemy_teams_mask = level.spawnsystem.ispawn_teammask_free;
   } else {
-    team = self.pers[# "team"];
+    team = self.pers[#"team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   }
@@ -359,8 +359,8 @@ function onspawnplayer_unified(predictedspawn = 0) {
 
 function getspawnpoint(player_entity, predictedspawn = 0) {
   if(level.teambased) {
-    point_team = player_entity.pers[# "team"];
-    influencer_team = player_entity.pers[# "team"];
+    point_team = player_entity.pers[#"team"];
+    influencer_team = player_entity.pers[#"team"];
   } else {
     point_team = # "none";
     influencer_team = # "none";
@@ -373,7 +373,7 @@ function getspawnpoint(player_entity, predictedspawn = 0) {
   best_spawn = get_best_spawnpoint(point_team, influencer_team, player_entity, predictedspawn);
 
   if(!predictedspawn) {
-    player_entity.last_spawn_origin = best_spawn[# "origin"];
+    player_entity.last_spawn_origin = best_spawn[#"origin"];
   }
 
   return best_spawn;
@@ -381,7 +381,7 @@ function getspawnpoint(player_entity, predictedspawn = 0) {
 
 function get_debug_spawnpoint(player) {
   if(level.teambased) {
-    team = player.pers[# "team"];
+    team = player.pers[#"team"];
   } else {
     team = # "none";
   }
@@ -424,7 +424,7 @@ function get_debug_spawnpoint(player) {
 
 function get_best_spawnpoint(point_team, influencer_team, player, predictedspawn) {
   if(level.teambased) {
-    vis_team_mask = util::getotherteamsmask(player.pers[# "team"]);
+    vis_team_mask = util::getotherteamsmask(player.pers[#"team"]);
   } else {
     vis_team_mask = level.spawnsystem.ispawn_teammask_free;
   }
@@ -433,7 +433,7 @@ function get_best_spawnpoint(point_team, influencer_team, player, predictedspawn
 
   if(!predictedspawn) {
     var_48eba3a3 = {
-      #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[# "origin"][0], #y: spawn_point[# "origin"][1], #z: spawn_point[# "origin"][2]
+      #reason: "point used", #var_c734ddf2: getplayerspawnid(player), #x: spawn_point[#"origin"][0], #y: spawn_point[#"origin"][1], #z: spawn_point[#"origin"][2]
     };
     function_92d1707f(#"hash_263d9506f7e11fdd", var_48eba3a3);
   }

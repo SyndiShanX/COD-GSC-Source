@@ -554,8 +554,8 @@ function private function_a56050b0() {
     origin = self.origin;
     trace = bulletTrace(origin + (0, 0, 50), origin + (0, 0, -50), 0, self);
 
-    if(trace[# "fraction"] < 1) {
-      origin = trace[# "position"];
+    if(trace[#"fraction"] < 1) {
+      origin = trace[#"position"];
     }
 
     var_b308e59c = namespace_ec06fe4a::spawnmodel(origin, "tag_origin");

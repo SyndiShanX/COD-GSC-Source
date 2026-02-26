@@ -445,14 +445,14 @@ function_26edbcdc(inflictor, attacker, damage, flags, meansofdeath, weapon, poin
 }
 
 function_8527738e() {
-  level._effect[# "hash_fc6d4d4b4df98f8"] = # "hash_4419642343624864";
+  level._effect[#"hash_fc6d4d4b4df98f8"] = # "hash_4419642343624864";
   level.var_c8b6a556 = getent("pernel_paper_stack", "targetname");
   level.var_c8b6a556 setCanDamage(1);
   level.var_c8b6a556 val::set("private_mannequin_quest_paper_stack", "allowDeath", 0);
   s_notify = level.var_c8b6a556 waittill(#"damage");
   level.var_c8b6a556.tag = util::spawn_model("tag_origin", level.var_c8b6a556.origin);
   level.var_c8b6a556.tag.angles = level.var_c8b6a556.angles;
-  playFXOnTag(level._effect[# "hash_fc6d4d4b4df98f8"], level.var_c8b6a556.tag, "tag_origin");
+  playFXOnTag(level._effect[#"hash_fc6d4d4b4df98f8"], level.var_c8b6a556.tag, "tag_origin");
   level.var_c8b6a556 hide();
   wait 5;
   level.var_c8b6a556.tag delete();

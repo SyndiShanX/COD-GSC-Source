@@ -9,8 +9,8 @@
 #namespace pap_quest;
 
 init() {
-  level._effect[# "lightning_near"] = "maps/zm_escape/fx8_pap_lightning_near";
-  level._effect[# "lightning_bridge"] = "maps/zm_escape/fx8_pap_lightning_bridge";
+  level._effect[#"lightning_near"] = "maps/zm_escape/fx8_pap_lightning_near";
+  level._effect[#"lightning_bridge"] = "maps/zm_escape/fx8_pap_lightning_bridge";
   init_clientfield();
 }
 
@@ -27,10 +27,10 @@ lightning_near_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     v_origin = self.origin;
   }
 
-  playFX(localclientnum, level._effect[# "lightning_near"], v_origin);
+  playFX(localclientnum, level._effect[#"lightning_near"], v_origin);
 }
 
 function_5cb90582(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   s_lightning_bridge = struct::get("lightning_bridge");
-  playFX(localclientnum, level._effect[# "lightning_bridge"], s_lightning_bridge.origin, vectornormalize(anglesToForward(s_lightning_bridge.angles)), vectornormalize(anglestoup(s_lightning_bridge.angles)));
+  playFX(localclientnum, level._effect[#"lightning_bridge"], s_lightning_bridge.origin, vectornormalize(anglesToForward(s_lightning_bridge.angles)), vectornormalize(anglestoup(s_lightning_bridge.angles)));
 }

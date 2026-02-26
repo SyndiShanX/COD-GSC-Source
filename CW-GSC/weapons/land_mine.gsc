@@ -81,7 +81,7 @@ function function_fe8abb3(var_651a8943, vposition, vforward, vup) {
   if(isDefined(var_651a8943)) {
     var_54d68ee6 = isDefined(vposition) ? vposition : function_80b82a4d();
     var_bec4f825 = groundtrace(var_54d68ee6 + (0, 0, 70), var_54d68ee6 + (0, 0, -100), 0, self);
-    var_4be8e019 = self getfxfromsurfacetable(var_651a8943, var_bec4f825[# "surfacetype"]);
+    var_4be8e019 = self getfxfromsurfacetable(var_651a8943, var_bec4f825[#"surfacetype"]);
     playFX(var_4be8e019, var_54d68ee6, vforward, vup);
   }
 }
@@ -543,7 +543,7 @@ function function_6d1a12d3(var_cd03ffa) {
     }
 
     if(!level.weaponobjectdebug && level.teambased && isPlayer(eattacker) && isDefined(self.owner)) {
-      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, eattacker.pers[# "team"]) && self.owner != eattacker) {
+      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, eattacker.pers[#"team"]) && self.owner != eattacker) {
         continue;
       }
     }

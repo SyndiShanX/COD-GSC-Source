@@ -460,7 +460,7 @@ function private function_961fe569(einflictor, eattacker, idamage, idflags, smea
       }
 
       eattacker.damagedone += damagedone;
-      eattacker.pers[# "damagedone"] = eattacker.damagedone;
+      eattacker.pers[#"damagedone"] = eattacker.damagedone;
       eattacker weapons::function_b1d41bd5(weapon, damagedone);
       eattacker contracts::player_contract_event(#"damagedone", damagedone);
       eattacker stats::function_bb7eedf0(#"total_damage", int(damagedone));
@@ -472,19 +472,19 @@ function private function_961fe569(einflictor, eattacker, idamage, idflags, smea
 
       eattacker stats::function_dad108fa(#"hash_7ea1f7d46d889aff", int(damagedone));
       eattacker stats::function_dad108fa(#"hash_1239a476be0ab35d", int(damagedone));
-      eattacker function_ef823e71(1, eattacker.pers[# "damagedone"]);
+      eattacker function_ef823e71(1, eattacker.pers[#"damagedone"]);
       weaponclass = util::getweaponclass(weapon);
 
-      if(weaponclass === # "weapon_assault" && !isDefined(eattacker.pers[# "hash_70c611f9f8df7631"])) {
-        if(!isDefined(eattacker.pers[# "hash_2e379ea1a9162a8f"])) {
-          eattacker.pers[# "hash_2e379ea1a9162a8f"] = 0;
+      if(weaponclass === # "weapon_assault" && !isDefined(eattacker.pers[#"hash_70c611f9f8df7631"])) {
+        if(!isDefined(eattacker.pers[#"hash_2e379ea1a9162a8f"])) {
+          eattacker.pers[#"hash_2e379ea1a9162a8f"] = 0;
         }
 
-        eattacker.pers[# "hash_2e379ea1a9162a8f"] += damagedone;
+        eattacker.pers[#"hash_2e379ea1a9162a8f"] += damagedone;
 
-        if(eattacker.pers[# "hash_2e379ea1a9162a8f"] >= 1000) {
+        if(eattacker.pers[#"hash_2e379ea1a9162a8f"] >= 1000) {
           eattacker stats::function_d0de7686(#"hash_59e07dd9354c6be6", 1, #"hash_a2304f8a8f31a95");
-          eattacker.pers[# "hash_70c611f9f8df7631"] = 1;
+          eattacker.pers[#"hash_70c611f9f8df7631"] = 1;
         }
       }
 
@@ -1223,43 +1223,43 @@ function private update_attacker(einflictor, eattacker, smeansofdeath) {
         eattacker.headshothits = 0;
       }
 
-      if(!isDefined(eattacker.pers[# "shotshit"])) {
-        eattacker.pers[# "shotshit"] = 0;
+      if(!isDefined(eattacker.pers[#"shotshit"])) {
+        eattacker.pers[#"shotshit"] = 0;
       }
 
-      eattacker.pers[# "shotshit"]++;
+      eattacker.pers[#"shotshit"]++;
       eattacker.hits++;
 
       if(smeansofdeath == "MOD_HEAD_SHOT") {
         eattacker.headshothits++;
 
-        if(!isDefined(eattacker.pers[# "headshothits"])) {
-          eattacker.pers[# "headshothits"] = 0;
+        if(!isDefined(eattacker.pers[#"headshothits"])) {
+          eattacker.pers[#"headshothits"] = 0;
         }
 
-        eattacker.pers[# "headshothits"]++;
+        eattacker.pers[#"headshothits"]++;
       }
 
-      if(!isDefined(eattacker.pers[# "shotsfired"])) {
-        eattacker.pers[# "shotsfired"] = 0;
+      if(!isDefined(eattacker.pers[#"shotsfired"])) {
+        eattacker.pers[#"shotsfired"] = 0;
       }
 
-      shotsmissed = eattacker.pers[# "shotsfired"] - eattacker.pers[# "shotshit"];
+      shotsmissed = eattacker.pers[#"shotsfired"] - eattacker.pers[#"shotshit"];
 
       if(shotsmissed < 0) {
         shotsmissed = 0;
       }
 
-      eattacker.pers[# "shotsmissed"] = shotsmissed;
-      eattacker function_ef823e71(0, eattacker.pers[# "shotsfired"], eattacker.pers[# "shotshit"]);
+      eattacker.pers[#"shotsmissed"] = shotsmissed;
+      eattacker function_ef823e71(0, eattacker.pers[#"shotsfired"], eattacker.pers[#"shotshit"]);
     }
   }
 
-  if(!isDefined(eattacker.pers[# "participation"])) {
-    eattacker.pers[# "participation"] = 0;
+  if(!isDefined(eattacker.pers[#"participation"])) {
+    eattacker.pers[#"participation"] = 0;
   }
 
-  eattacker.pers[# "participation"]++;
+  eattacker.pers[#"participation"]++;
 }
 
 function private function_811dd365(einflictor, weapon, smeansofdeath) {
@@ -1315,30 +1315,30 @@ function private function_104e1126(einflictor, eattacker, idamage, idflags, smea
 
   if(isDefined(vdir) && (psoffsettime == "MOD_GAS" || is_explosive_damage)) {
     self.explosiveinfo = [];
-    self.explosiveinfo[# "damagetime"] = gettime();
-    self.explosiveinfo[# "damageid"] = vdir getentitynumber();
-    self.explosiveinfo[# "originalownerkill"] = 0;
-    self.explosiveinfo[# "bulletpenetrationkill"] = 0;
-    self.explosiveinfo[# "chainkill"] = 0;
-    self.explosiveinfo[# "damageexplosivekill"] = 0;
-    self.explosiveinfo[# "chainkill"] = 0;
-    self.explosiveinfo[# "cookedkill"] = 0;
-    self.explosiveinfo[# "weapon"] = boneindex;
-    self.explosiveinfo[# "originalowner"] = vdir.originalowner;
+    self.explosiveinfo[#"damagetime"] = gettime();
+    self.explosiveinfo[#"damageid"] = vdir getentitynumber();
+    self.explosiveinfo[#"originalownerkill"] = 0;
+    self.explosiveinfo[#"bulletpenetrationkill"] = 0;
+    self.explosiveinfo[#"chainkill"] = 0;
+    self.explosiveinfo[#"damageexplosivekill"] = 0;
+    self.explosiveinfo[#"chainkill"] = 0;
+    self.explosiveinfo[#"cookedkill"] = 0;
+    self.explosiveinfo[#"weapon"] = boneindex;
+    self.explosiveinfo[#"originalowner"] = vdir.originalowner;
     isfrag = boneindex.rootweapon.name == "frag_grenade";
 
     if(isDefined(shitloc) && shitloc != self) {
       if(isDefined(shitloc) && isDefined(vdir.owner) && (boneindex.name == # "satchel_charge" || boneindex.name == # "claymore" || boneindex.name == # "bouncingbetty")) {
-        self.explosiveinfo[# "originalownerkill"] = vdir.owner == self;
-        self.explosiveinfo[# "damageexplosivekill"] = isDefined(vdir.wasdamaged);
-        self.explosiveinfo[# "chainkill"] = isDefined(vdir.waschained);
-        self.explosiveinfo[# "wasjustplanted"] = isDefined(vdir.wasjustplanted);
-        self.explosiveinfo[# "bulletpenetrationkill"] = isDefined(vdir.wasdamagedfrombulletpenetration);
-        self.explosiveinfo[# "cookedkill"] = 0;
+        self.explosiveinfo[#"originalownerkill"] = vdir.owner == self;
+        self.explosiveinfo[#"damageexplosivekill"] = isDefined(vdir.wasdamaged);
+        self.explosiveinfo[#"chainkill"] = isDefined(vdir.waschained);
+        self.explosiveinfo[#"wasjustplanted"] = isDefined(vdir.wasjustplanted);
+        self.explosiveinfo[#"bulletpenetrationkill"] = isDefined(vdir.wasdamagedfrombulletpenetration);
+        self.explosiveinfo[#"cookedkill"] = 0;
       }
 
       if(isDefined(vdir) && isDefined(vdir.stucktoplayer) && boneindex.projexplosiontype == "grenade") {
-        self.explosiveinfo[# "stucktoplayer"] = vdir.stucktoplayer;
+        self.explosiveinfo[#"stucktoplayer"] = vdir.stucktoplayer;
       }
 
       if(boneindex.dostun) {
@@ -1348,15 +1348,15 @@ function private function_104e1126(einflictor, eattacker, idamage, idflags, smea
       }
 
       if(isDefined(shitloc.lastgrenadesuicidetime) && shitloc.lastgrenadesuicidetime >= gettime() - 50 && isfrag) {
-        self.explosiveinfo[# "suicidegrenadekill"] = 1;
+        self.explosiveinfo[#"suicidegrenadekill"] = 1;
       } else {
-        self.explosiveinfo[# "suicidegrenadekill"] = 0;
+        self.explosiveinfo[#"suicidegrenadekill"] = 0;
       }
     }
 
     if(isfrag) {
-      self.explosiveinfo[# "cookedkill"] = isDefined(vdir.iscooked);
-      self.explosiveinfo[# "throwbackkill"] = isDefined(vdir.throwback);
+      self.explosiveinfo[#"cookedkill"] = isDefined(vdir.iscooked);
+      self.explosiveinfo[#"throwbackkill"] = isDefined(vdir.throwback);
     }
 
     if(isDefined(shitloc) && isPlayer(shitloc) && shitloc != self) {
@@ -1370,7 +1370,7 @@ function private function_104e1126(einflictor, eattacker, idamage, idflags, smea
     }
 
     if(boneindex.rootweapon.name == "hatchet" && isDefined(vdir)) {
-      self.explosiveinfo[# "projectile_bounced"] = isDefined(vdir.bounced);
+      self.explosiveinfo[#"projectile_bounced"] = isDefined(vdir.bounced);
     }
   }
 

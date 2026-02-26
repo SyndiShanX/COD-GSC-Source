@@ -56,9 +56,9 @@ function_a2e05e6(e_attacker) {
   n_current_time = float(gettime()) / 1000;
 
   if(isPlayer(e_attacker)) {
-    if(!isDefined(e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"])) {
+    if(!isDefined(e_attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"])) {
       return true;
-    } else if(isDefined(e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"] + 30) {
+    } else if(isDefined(e_attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"]) && n_current_time >= e_attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"] + 30) {
       return true;
     }
   }
@@ -140,18 +140,18 @@ frostbite_explosion(var_4589e270, var_23255fc5, attacker, mod, weapon) {
   var_4589e270 clientfield::increment("zm_aat_frostbite_explosion_clientfield");
 
   if(isPlayer(attacker)) {
-    attacker.aat_cooldown_start[# "zm_aat_frostbite_explosion"] = float(gettime()) / 1000;
+    attacker.aat_cooldown_start[#"zm_aat_frostbite_explosion"] = float(gettime()) / 1000;
     attacker zm_stats::increment_challenge_stat(#"zombie_hunter_frostbite");
   }
 
-  a_potential_targets = array::get_all_closest(var_23255fc5, level.ai[# "axis"], undefined, undefined, 128);
+  a_potential_targets = array::get_all_closest(var_23255fc5, level.ai[#"axis"], undefined, undefined, 128);
 
   foreach(e_target in a_potential_targets) {
     if(!isalive(e_target)) {
       continue;
     }
 
-    if(isDefined(level.aat[# "zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) && level.aat[# "zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) {
+    if(isDefined(level.aat[#"zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) && level.aat[#"zm_aat_frostbite"].immune_result_indirect[e_target.archetype]) {
       return;
     }
 

@@ -619,7 +619,7 @@ nuked_zone_init() {
   add_adjacent_zone("openhouse2_backyard_zone", "ammo_door_zone", "openhouse2_backyard_2_ammo_door");
 }
 
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");
@@ -627,11 +627,11 @@ nuked_zone_init() {
   include_powerup("fire_sale");
 }
 
-#include_perks() {}
+include_perks() {}
 
-#include_equipment_for_level() {}
+include_equipment_for_level() {}
 
-#include_weapons() {
+include_weapons() {
   include_weapon("knife_zm", 0);
   include_weapon("frag_grenade_zm", 0);
   include_weapon("claymore_zm", 0);

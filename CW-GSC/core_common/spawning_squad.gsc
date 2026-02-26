@@ -492,7 +492,7 @@ function private function_61f1a8b6(player) {
 function private function_6d9e5aa2() {
   foreach(player in level.players) {
     if(isDefined(player.var_a271f211)) {
-      if(level.numlives && !player.pers[# "lives"]) {
+      if(level.numlives && !player.pers[#"lives"]) {
         player clientfield::set_player_uimodel("hudItems.squadSpawnOnStatus", 6);
         continue;
       }
@@ -698,7 +698,7 @@ function private function_32843fc9(startpoint, endpoint) {
   for(index = 0; index < 7; index++) {
     groundtrace = groundtrace(startpoint, endpoint, 0, undefined, 0);
 
-    if(groundtrace[# "fraction"] <= 0 || groundtrace[# "startsolid"]) {
+    if(groundtrace[#"fraction"] <= 0 || groundtrace[#"startsolid"]) {
       if(startpoint[2] > endpoint[2]) {
         startpoint += (0, 0, 64);
       } else {
@@ -753,8 +753,8 @@ function function_e402b74e(spawningplayer, targetplayer) {
 
     groundtrace = function_32843fc9(var_8b889046 + (0, 0, 64), var_8b889046 - (0, 0, 64));
 
-    if(groundtrace[# "fraction"] < 1) {
-      var_8b889046 = groundtrace[# "position"];
+    if(groundtrace[#"fraction"] < 1) {
+      var_8b889046 = groundtrace[#"position"];
     }
 
     spawningplayer.spawn.var_cb738111 = 0;
@@ -770,7 +770,7 @@ function function_e402b74e(spawningplayer, targetplayer) {
 
   trace = physicstrace(spawn_point.origin + (0, 0, 30), spawn_point.origin - (0, 0, 1000), (0, 0, 0), (0, 0, 0), self, 32);
 
-  if(trace[# "fraction"] == 1) {
+  if(trace[#"fraction"] == 1) {
     function_426b6bde(spawn_point.origin, #"underground");
   }
 
@@ -821,8 +821,8 @@ function function_70c0ae61(spawningplayer, objectiveposition) {
 
   groundtrace = function_32843fc9(var_8b889046 + (0, 0, 64), var_8b889046 - (0, 0, 64));
 
-  if(groundtrace[# "fraction"] < 1) {
-    var_8b889046 = groundtrace[# "position"];
+  if(groundtrace[#"fraction"] < 1) {
+    var_8b889046 = groundtrace[#"position"];
   }
 
   spawningplayer.spawn.var_cb738111 = 0;
@@ -837,7 +837,7 @@ function function_70c0ae61(spawningplayer, objectiveposition) {
 
   trace = physicstrace(spawn_point.origin + (0, 0, 30), spawn_point.origin - (0, 0, 1000), (0, 0, 0), (0, 0, 0), self, 32);
 
-  if(trace[# "fraction"] == 1) {
+  if(trace[#"fraction"] == 1) {
     function_426b6bde(spawn_point.origin, #"underground");
   }
 
@@ -865,15 +865,15 @@ function function_d66eb9cd(targetorigin, targetangles) {
         continue;
       }
 
-      navmeshposition = pointinfo[# "point"];
+      navmeshposition = pointinfo[#"point"];
       trace = function_32843fc9(navmeshposition + (0, 0, 500), navmeshposition - (0, 0, 500));
 
-      if(trace[# "fraction"] == 1) {
+      if(trace[#"fraction"] == 1) {
         continue;
       }
 
       if(!isDefined(var_27b2878f)) {
-        var_27b2878f = trace[# "position"];
+        var_27b2878f = trace[#"position"];
       }
 
       if(sighttracepassed(var_27b2878f + (0, 0, 72), targetorigin + (0, 0, 72), 0, undefined)) {
@@ -908,8 +908,8 @@ function function_d95ba61f(origin, angles, var_92d9ac4b) {
     if(sighttracepassed(origin + (0, 0, 72), var_92d9ac4b + (0, 0, 72), 0, undefined)) {
       trace = function_32843fc9(origin + (0, 0, 72), origin - (0, 0, 72));
 
-      if(trace[# "fraction"] != 1) {
-        var_8792667 = trace[# "normal"];
+      if(trace[#"fraction"] != 1) {
+        var_8792667 = trace[#"normal"];
       }
 
       return axistoangles(var_6e8e0d1a, var_8792667);
@@ -926,44 +926,44 @@ function function_d95ba61f(origin, angles, var_92d9ac4b) {
   forwardpoint = tracestart + forward * 200;
   var_a5a53f73 = physicstrace(tracestart, forwardpoint);
 
-  if(var_a5a53f73[# "fraction"] == 1) {
+  if(var_a5a53f73[#"fraction"] == 1) {
     return var_8788f2da;
   } else {
     bestangles = var_8788f2da;
-    var_3360e6f8 = var_a5a53f73[# "fraction"];
+    var_3360e6f8 = var_a5a53f73[#"fraction"];
   }
 
   rightdir = rotatepointaroundaxis(forward, (0, 0, 1), 90);
   rightpoint = tracestart + rightdir * 200;
   var_3bb4bb28 = physicstrace(tracestart, rightpoint);
 
-  if(var_3bb4bb28[# "fraction"] == 1) {
+  if(var_3bb4bb28[#"fraction"] == 1) {
     return axistoangles(rightdir, anglestoup(var_8788f2da));
-  } else if(var_3bb4bb28[# "fraction"] > var_3360e6f8) {
+  } else if(var_3bb4bb28[#"fraction"] > var_3360e6f8) {
     bestangles = axistoangles(rightdir, anglestoup(var_8788f2da));
-    var_3360e6f8 = var_3bb4bb28[# "fraction"];
+    var_3360e6f8 = var_3bb4bb28[#"fraction"];
   }
 
   leftdir = rightdir * -1;
   leftpoint = tracestart + leftdir * 200;
   var_eea13cc2 = physicstrace(tracestart, leftpoint);
 
-  if(var_eea13cc2[# "fraction"] == 1) {
+  if(var_eea13cc2[#"fraction"] == 1) {
     return axistoangles(leftdir, anglestoup(var_8788f2da));
-  } else if(var_eea13cc2[# "fraction"] > var_3360e6f8) {
+  } else if(var_eea13cc2[#"fraction"] > var_3360e6f8) {
     bestangles = axistoangles(leftdir, anglestoup(var_8788f2da));
-    var_3360e6f8 = var_eea13cc2[# "fraction"];
+    var_3360e6f8 = var_eea13cc2[#"fraction"];
   }
 
   var_cf041923 = forward * -1;
   var_13ef855 = tracestart + var_cf041923 * 200;
   var_ef688df7 = physicstrace(tracestart, var_13ef855);
 
-  if(var_ef688df7[# "fraction"] == 1) {
+  if(var_ef688df7[#"fraction"] == 1) {
     return axistoangles(var_cf041923, anglestoup(var_8788f2da));
-  } else if(var_ef688df7[# "fraction"] > var_3360e6f8) {
+  } else if(var_ef688df7[#"fraction"] > var_3360e6f8) {
     bestangles = axistoangles(var_cf041923, anglestoup(var_8788f2da));
-    var_3360e6f8 = var_ef688df7[# "fraction"];
+    var_3360e6f8 = var_ef688df7[#"fraction"];
   }
 
   return bestangles;

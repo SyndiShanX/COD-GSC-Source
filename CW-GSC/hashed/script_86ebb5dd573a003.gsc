@@ -242,22 +242,22 @@ function function_2cba9c65() {
   var_e9bf9ff9 = getent("vol_player_right_platform", "targetname");
   player = getplayers()[0];
   hidden = [];
-  hidden[# "prone"] = 100;
-  hidden[# "crouch"] = 250;
-  hidden[# "stand"] = 375;
+  hidden[#"prone"] = 100;
+  hidden[#"crouch"] = 250;
+  hidden[#"stand"] = 375;
   spotted = [];
-  spotted[# "prone"] = 8192;
-  spotted[# "crouch"] = 8192;
-  spotted[# "stand"] = 8192;
+  spotted[#"prone"] = 8192;
+  spotted[#"crouch"] = 8192;
+  spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
   var_e4307a8c = [];
-  var_e4307a8c[# "prone"] = 350;
-  var_e4307a8c[# "crouch"] = 450;
-  var_e4307a8c[# "stand"] = 650;
+  var_e4307a8c[#"prone"] = 350;
+  var_e4307a8c[#"crouch"] = 450;
+  var_e4307a8c[#"stand"] = 650;
   var_c44c865c = [];
-  var_c44c865c[# "prone"] = 8192;
-  var_c44c865c[# "crouch"] = 8192;
-  var_c44c865c[# "stand"] = 8192;
+  var_c44c865c[#"prone"] = 8192;
+  var_c44c865c[#"crouch"] = 8192;
+  var_c44c865c[#"stand"] = 8192;
 
   while(!level flag::get("ghost_station_left_platform_enemies_cleared")) {
     while(player istouching(e_vol) || player istouching(var_69a21fc0)) {
@@ -277,38 +277,38 @@ function function_2cba9c65() {
 
 function function_de88eefd() {
   hidden = [];
-  hidden[# "prone"] = 100;
-  hidden[# "crouch"] = 300;
-  hidden[# "stand"] = 500;
+  hidden[#"prone"] = 100;
+  hidden[#"crouch"] = 300;
+  hidden[#"stand"] = 500;
   spotted = [];
-  spotted[# "prone"] = 8192;
-  spotted[# "crouch"] = 8192;
-  spotted[# "stand"] = 8192;
+  spotted[#"prone"] = 8192;
+  spotted[#"crouch"] = 8192;
+  spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
 }
 
 function function_489032c9() {
   hidden = [];
-  hidden[# "prone"] = 350;
-  hidden[# "crouch"] = 550;
-  hidden[# "stand"] = 750;
+  hidden[#"prone"] = 350;
+  hidden[#"crouch"] = 550;
+  hidden[#"stand"] = 750;
   spotted = [];
-  spotted[# "prone"] = 8192;
-  spotted[# "crouch"] = 8192;
-  spotted[# "stand"] = 8192;
-  spotted[# "shadow"] = 1;
+  spotted[#"prone"] = 8192;
+  spotted[#"crouch"] = 8192;
+  spotted[#"stand"] = 8192;
+  spotted[#"shadow"] = 1;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
 }
 
 function function_25120710() {
   hidden = [];
-  hidden[# "prone"] = 500;
-  hidden[# "crouch"] = 900;
-  hidden[# "stand"] = 1600;
+  hidden[#"prone"] = 500;
+  hidden[#"crouch"] = 900;
+  hidden[#"stand"] = 1600;
   spotted = [];
-  spotted[# "prone"] = 8192;
-  spotted[# "crouch"] = 8192;
-  spotted[# "stand"] = 8192;
+  spotted[#"prone"] = 8192;
+  spotted[#"crouch"] = 8192;
+  spotted[#"stand"] = 8192;
   namespace_979752dc::set_detect_ranges(hidden, spotted);
 }
 
@@ -377,7 +377,7 @@ function function_86e07b36(a_ents) {
 
     if(isDefined(self.anim_door)) {
       self.anim_door.original_angles = self.anim_door.angles;
-      self.anim_door linkto(a_ents[# "door"], "j_prop_1", (0, 0, 0), (0, 0, 0));
+      self.anim_door linkto(a_ents[#"door"], "j_prop_1", (0, 0, 0), (0, 0, 0));
       self thread function_e4fcb32e();
 
       if(isDefined(self.anim_door.target)) {
@@ -600,8 +600,8 @@ function function_e0548884(var_8964d1a4) {
 }
 
 function function_f5598d8d(a_ents) {
-  if(isDefined(a_ents[# "hash_18e9070f6eabd46d"])) {
-    a_ents[# "hash_18e9070f6eabd46d"] thread function_ca7fdd25();
+  if(isDefined(a_ents[#"hash_18e9070f6eabd46d"])) {
+    a_ents[#"hash_18e9070f6eabd46d"] thread function_ca7fdd25();
   }
 }
 
@@ -759,7 +759,7 @@ function function_e24505b7(a_ents) {
 }
 
 function function_c1bc96cf(a_ents) {
-  level.var_b86d4e0 = a_ents[# "hash_79e6bb91445af567"];
+  level.var_b86d4e0 = a_ents[#"hash_79e6bb91445af567"];
 
   foreach(guy in a_ents) {
     if(isai(guy)) {

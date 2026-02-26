@@ -609,7 +609,7 @@ werewolftargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         return zm_utility::function_64259898(wait_locations[0].origin);
@@ -795,7 +795,7 @@ function_93211521(entity, var_856465ed) {
   var_c43ad98d = entity.origin + vectorscale(vectoenemy, 0.5);
   results = physicstraceex(var_c43ad98d, var_c43ad98d + (0, 0, 120), (-15, -15, -5), (15, 15, 5), self);
 
-  if(results[# "fraction"] == 1) {
+  if(results[#"fraction"] == 1) {
     recordcircle(var_c43ad98d, 4, (0, 1, 0));
 
     return true;
@@ -976,10 +976,10 @@ function_8b63ee0e(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
     var_65cbfb52 = distancesquared(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos);
     var_201660e6 = tracepassedonnavmesh(entity.meleeinfo.var_9bfa8497, entity.meleeinfo.adjustedendpos, entity getpathfindingradius());
     traceresult = bulletTrace(entity.origin, entity.meleeinfo.adjustedendpos + (0, 0, 30), 0, entity);
-    isvisible = traceresult[# "fraction"] == 1;
+    isvisible = traceresult[#"fraction"] == 1;
     var_535d098c = 0;
 
-    if(isDefined(traceresult[# "hitloc"]) && traceresult[# "hitloc"] == "riotshield") {
+    if(isDefined(traceresult[#"hitloc"]) && traceresult[#"hitloc"] == "riotshield") {
       entity.meleeinfo.adjustedendpos += vectorscale(var_cc075bd0, 50);
       var_535d098c = 1;
     }

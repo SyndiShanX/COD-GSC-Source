@@ -45,7 +45,7 @@ function private preinit() {
 }
 
 function function_66c8033b(instance) {
-  s_start = instance.contentgroups[# "start_crystal"][0];
+  s_start = instance.contentgroups[#"start_crystal"][0];
   instance.var_8b241b32 = s_start.origin;
   mdl_start = function_4b312787(s_start);
 
@@ -89,7 +89,7 @@ function private function_37eab05b(instance) {
   level thread function_a77f3600(instance);
   level thread function_2d2fade8(instance);
   level thread function_68aac628(instance, "monsterhouse_low");
-  var_d56fdb6 = array::randomize(isDefined(instance.contentgroups[# "spawn_crystal"]) ? instance.contentgroups[# "spawn_crystal"] : []);
+  var_d56fdb6 = array::randomize(isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : []);
   instance.var_eb3bf4b1 = [];
   var_90acdb64 = getplayers().size * 2 + 4;
   n_spawned = 0;
@@ -289,7 +289,7 @@ function private function_fa4d3a3e(instance) {
   }
 
   level endon(#"portal_activated");
-  var_d56fdb6 = isDefined(instance.contentgroups[# "spawn_crystal"]) ? instance.contentgroups[# "spawn_crystal"] : [];
+  var_d56fdb6 = isDefined(instance.contentgroups[#"spawn_crystal"]) ? instance.contentgroups[#"spawn_crystal"] : [];
 
   while(true) {
     foreach(var_d2ee34ea in var_d56fdb6) {

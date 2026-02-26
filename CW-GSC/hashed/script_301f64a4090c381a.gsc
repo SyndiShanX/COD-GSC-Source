@@ -194,12 +194,12 @@ function devgui() {
   adddebugcommand("<dev string:x22f>");
   adddebugcommand("<dev string:x293>");
   level.var_8e9d88b6 = [];
-  level.var_8e9d88b6[# "fl1"] = 1;
-  level.var_8e9d88b6[# "tn1"] = 2;
-  level.var_8e9d88b6[# "db1"] = 3;
-  level.var_8e9d88b6[# "bf1"] = 4;
-  level.var_8e9d88b6[# "helmets1"] = 5;
-  level.var_8e9d88b6[# "season1"] = 6;
+  level.var_8e9d88b6[#"fl1"] = 1;
+  level.var_8e9d88b6[#"tn1"] = 2;
+  level.var_8e9d88b6[#"db1"] = 3;
+  level.var_8e9d88b6[#"bf1"] = 4;
+  level.var_8e9d88b6[#"helmets1"] = 5;
+  level.var_8e9d88b6[#"season1"] = 6;
 
   while(true) {
     waitframe(1);

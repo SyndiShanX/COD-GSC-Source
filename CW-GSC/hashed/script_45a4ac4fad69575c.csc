@@ -43,17 +43,17 @@ function register(var_909954a3, var_66f4eb53) {
     level.var_ae746e8f = associativearray();
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_keytrade"])) {
-    level.var_ae746e8f[# "doa_keytrade"] = [];
+  if(!isDefined(level.var_ae746e8f[#"doa_keytrade"])) {
+    level.var_ae746e8f[#"doa_keytrade"] = [];
   }
 
-  if(!isDefined(level.var_ae746e8f[# "doa_keytrade"])) {
-    level.var_ae746e8f[# "doa_keytrade"] = [];
-  } else if(!isarray(level.var_ae746e8f[# "doa_keytrade"])) {
-    level.var_ae746e8f[# "doa_keytrade"] = array(level.var_ae746e8f[# "doa_keytrade"]);
+  if(!isDefined(level.var_ae746e8f[#"doa_keytrade"])) {
+    level.var_ae746e8f[#"doa_keytrade"] = [];
+  } else if(!isarray(level.var_ae746e8f[#"doa_keytrade"])) {
+    level.var_ae746e8f[#"doa_keytrade"] = array(level.var_ae746e8f[#"doa_keytrade"]);
   }
 
-  level.var_ae746e8f[# "doa_keytrade"][level.var_ae746e8f[# "doa_keytrade"].size] = elem;
+  level.var_ae746e8f[#"doa_keytrade"][level.var_ae746e8f[#"doa_keytrade"].size] = elem;
 }
 
 function register_clientside() {

@@ -243,10 +243,10 @@ function function_ab9b7039() {
 }
 
 function function_f5c78778(entity, var_213c85d7) {
-  var_a694f08d = [# "hash_7c0d83ac1e845ac2", #"zombie_dog", #"soa", #"mimic"];
+  var_a694f08d = [#"hash_7c0d83ac1e845ac2", #"zombie_dog", #"soa", #"mimic"];
 
   if(isinarray(var_a694f08d, var_213c85d7.archetype)) {
-    var_7c27952f = [# "hash_7c0d83ac1e845ac2", #"mimic"];
+    var_7c27952f = [#"hash_7c0d83ac1e845ac2", #"mimic"];
 
     if(isinarray(var_7c27952f, var_213c85d7.archetype)) {
       if(isPlayer(var_213c85d7.enemy) && var_213c85d7.enemy isinvehicle()) {

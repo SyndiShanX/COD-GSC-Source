@@ -341,7 +341,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
     var_cef2372f = getactorteamarray(enemyteam);
 
     if(!level.teambased) {
-      players = level.aliveplayers[# "free"];
+      players = level.aliveplayers[#"free"];
       var_cef2372f = getactorteamarray(#"free");
     }
 
@@ -362,8 +362,8 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
 
       if(var_a698a6df) {
         if(var_a3ca7cb2.archetype === # "mp_dog" && util::function_fbce7263(var_a3ca7cb2.team, player.team)) {
-          health = level.killstreakbundle[# "dog"].kshealth;
-          lifetime = isDefined(level.killstreakbundle[# "dog"].var_b45a7714) ? level.killstreakbundle[# "dog"].var_b45a7714 : 3;
+          health = level.killstreakbundle[#"dog"].kshealth;
+          lifetime = isDefined(level.killstreakbundle[#"dog"].var_b45a7714) ? level.killstreakbundle[#"dog"].var_b45a7714 : 3;
           var_ae727111 = health / lifetime;
           var_ae727111 *= dt;
           var_a3ca7cb2 dodamage(var_ae727111, var_a3ca7cb2.origin, player, player, "none", "MOD_BURNED");
@@ -458,11 +458,11 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
 
           if(isDefined(var_a698a6df) && var_a698a6df) {
             if(veh.archetype === "rcbomb") {
-              health = level.killstreakbundle[# "recon_car"].kshealth;
-              lifetime = isDefined(level.killstreakbundle[# "recon_car"].var_b45a7714) ? level.killstreakbundle[# "recon_car"].var_b45a7714 : 3;
+              health = level.killstreakbundle[#"recon_car"].kshealth;
+              lifetime = isDefined(level.killstreakbundle[#"recon_car"].var_b45a7714) ? level.killstreakbundle[#"recon_car"].var_b45a7714 : 3;
             } else {
-              health = level.killstreakbundle[# "tank_robot"].kshealth;
-              lifetime = isDefined(level.killstreakbundle[# "tank_robot"].var_b45a7714) ? level.killstreakbundle[# "tank_robot"].var_b45a7714 : 3;
+              health = level.killstreakbundle[#"tank_robot"].kshealth;
+              lifetime = isDefined(level.killstreakbundle[#"tank_robot"].var_b45a7714) ? level.killstreakbundle[#"tank_robot"].var_b45a7714 : 3;
             }
 
             var_ae727111 = health / lifetime;

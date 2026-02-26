@@ -376,8 +376,8 @@ function function_a1e57b34(localclientnum, oldval, newval, bnewent, binitialsnap
       v_target_pos = self.var_31574a7.origin + self.move_dir * (500 + self.beam_length);
       trace = beamtrace(self.var_31574a7.origin, v_target_pos, 0, self.owner);
 
-      if(trace[# "fraction"] < 1) {
-        v_target_pos = trace[# "position"] - trace[# "normal"];
+      if(trace[#"fraction"] < 1) {
+        v_target_pos = trace[#"position"] - trace[#"normal"];
         self.var_de6c5ff9 moveto(v_target_pos, 0.1);
       }
 
@@ -435,8 +435,8 @@ function function_c57b04f7(localclientnum) {
     v_target_pos = var_1e65372b + self.move_dir * self.beam_length;
     trace = beamtrace(var_1e65372b, v_target_pos, 0, self.owner);
 
-    if(trace[# "fraction"] < 1) {
-      v_target_pos = trace[# "position"] - trace[# "normal"];
+    if(trace[#"fraction"] < 1) {
+      v_target_pos = trace[#"position"] - trace[#"normal"];
       self.beam_length = distance(v_target_pos, var_1e65372b);
     }
 
@@ -549,7 +549,7 @@ function function_e688ee7c(localclientnum, oldval, newval, bnewent, binitialsnap
     self.var_12b59dee = undefined;
   }
 
-  var_2ddbe94 = [# "hash_16d59f099e418f4f", #"hash_7417f2cd52314463", #"hash_726534103985846c", #"hash_16d59f099e418f4f", #"hash_16d59f099e418f4f"];
+  var_2ddbe94 = [#"hash_16d59f099e418f4f", #"hash_7417f2cd52314463", #"hash_726534103985846c", #"hash_16d59f099e418f4f", #"hash_16d59f099e418f4f"];
 
   if(bwastimejump && bwastimejump < var_2ddbe94.size + 1) {
     self.var_b159952f = var_2ddbe94[bwastimejump - 1];

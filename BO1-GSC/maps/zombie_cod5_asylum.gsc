@@ -276,7 +276,7 @@ init_sounds() {
   maps\_zombiemode_utility::add_sound("zmb_couch_slam", "couch_slam");
   maps\_zombiemode_utility::add_sound("door_slide_open", "door_slide_open");
 }
-#include_weapons() {
+include_weapons() {
   include_weapon("python_zm");
   include_weapon("cz75_zm");
   include_weapon("g11_lps_zm");
@@ -339,7 +339,7 @@ init_sounds() {
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar", "zombie_bar_upgraded", &"WAW_ZOMBIE_WEAPON_BAR_1800", 1800, "mg");
   maps\_zombiemode_weapons::add_zombie_weapon("zombie_bar_bipod", "", &"WAW_ZOMBIE_WEAPON_BAR_BIPOD_2500", 2500, "mg");
 }
-#include_powerups() {
+include_powerups() {
   include_powerup("nuke");
   include_powerup("insta_kill");
   include_powerup("double_points");

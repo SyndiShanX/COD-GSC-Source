@@ -468,7 +468,7 @@ function function_86c92a7e() {
       eye = host getEye();
       dir *= 500;
       trace = bulletTrace(eye, eye + dir, 1, host);
-      target = trace[# "entity"];
+      target = trace[#"entity"];
 
       if(!isDefined(target) || !isPlayer(target)) {
         target = host;
@@ -537,7 +537,7 @@ function function_b1158c52(attacker, idamage, smeansofdeath, var_4cf51823) {
 function private function_5ffabd64(vehicle, player) {
   trace = groundtrace(player.origin, player.origin - (0, 0, 300), 0, vehicle);
 
-  if(trace[# "fraction"] >= 1) {
+  if(trace[#"fraction"] >= 1) {
     return true;
   }
 
@@ -550,7 +550,7 @@ function private function_61c14ebf(vehicle, player) {
   ignoreent = isDefined(exitposition) ? undefined : vehicle;
   trace = groundtrace(traceorigin, traceorigin - (0, 0, 500), 0, ignoreent, 1);
 
-  if(trace[# "fraction"] >= 1 || oob::chr_party(trace[# "position"])) {
+  if(trace[#"fraction"] >= 1 || oob::chr_party(trace[#"position"])) {
     return true;
   }
 

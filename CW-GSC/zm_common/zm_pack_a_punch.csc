@@ -23,7 +23,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[# "hash_2ab769386115d75c"] = # "hash_669f8d1e3151a677";
+  level._effect[#"hash_2ab769386115d75c"] = # "hash_669f8d1e3151a677";
   clientfield::register("zbarrier", "pap_working_fx", 1, 1, "int", &pap_working_fx_handler, 0, 0);
   clientfield::register("zbarrier", "pap_idle_fx", 1, 1, "int", &function_2a80c24d, 0, 0);
   clientfield::register("world", "pap_force_stream", 1, 1, "int", &pap_force_stream, 0, 0);
@@ -117,7 +117,7 @@ function private function_f74ad2c1(localclientnum, n_piece_index, str_tag) {
 
   self.var_4d7e8438 = util::spawn_model(localclientnum, "tag_origin", mdl_piece gettagorigin(str_tag), mdl_piece gettagangles(str_tag));
   self.var_4d7e8438 linkto(mdl_piece, str_tag);
-  self.n_pap_idle_fx = util::playFXOnTag(localclientnum, level._effect[# "hash_2ab769386115d75c"], self.var_4d7e8438, "tag_origin");
+  self.n_pap_idle_fx = util::playFXOnTag(localclientnum, level._effect[#"hash_2ab769386115d75c"], self.var_4d7e8438, "tag_origin");
 }
 
 function pap_working_fx_handler(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -152,5 +152,5 @@ function private pap_play_fx(localclientnum, n_piece_index, str_tag) {
 
   self.mdl_fx = util::spawn_model(localclientnum, "tag_origin", mdl_piece gettagorigin(str_tag), mdl_piece gettagangles(str_tag));
   self.mdl_fx linkto(mdl_piece, str_tag);
-  self.n_pap_fx = util::playFXOnTag(localclientnum, level._effect[# "pap_working_fx"], self.mdl_fx, "tag_origin");
+  self.n_pap_fx = util::playFXOnTag(localclientnum, level._effect[#"pap_working_fx"], self.mdl_fx, "tag_origin");
 }
