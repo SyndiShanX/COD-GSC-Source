@@ -397,7 +397,7 @@ getplayerlookingatdronetoolong(var_0, var_1) {
       continue;
     }
 
-    var_4 = anglesToForward(var_3 getangles());
+    var_4 = anglesToForward(var_3 getplayerangles());
     var_5 = vectornormalize(var_0.origin - var_3.origin);
     var_6 = vectordot(var_4, var_5);
 

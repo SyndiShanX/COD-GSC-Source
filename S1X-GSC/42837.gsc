@@ -928,13 +928,13 @@ teleport_to_zone_character(var_0, var_1) {
     var_6 = var_5[0];
     var_1 dontinterpolate();
     var_1 setorigin(var_6.origin);
-    var_1 setangles(var_6.angles);
+    var_1 setplayerangles(var_6.angles);
   } else {
     var_7 = undefined;
     var_8 = var_1.angles;
 
     if(isPlayer(var_1)) {
-      var_8 = var_1 getangles();
+      var_8 = var_1 getplayerangles();
     }
 
     foreach(var_14, var_10 in var_3.teleport_origins) {
@@ -1000,7 +1000,7 @@ teleport_to_zone_character(var_0, var_1) {
     var_1 cancelmantle();
     var_1 dontinterpolate();
     var_1 setorigin(var_7);
-    var_1 setangles(var_8);
+    var_1 setplayerangles(var_8);
     thread teleport_validate_success(var_1);
   }
 }

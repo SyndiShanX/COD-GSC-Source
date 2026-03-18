@@ -12,7 +12,7 @@ dronegetspawnpoint(var_0) {
   var_2 = 23;
   var_3 = var_2 * 2;
   var_4 = self.origin + (0, 0, var_0);
-  var_5 = self getangles();
+  var_5 = self getplayerangles();
   var_6 = anglesToForward(common_scripts\utility::flat_angle(var_5));
   var_7 = var_4 + var_6 * var_1;
   var_8 = var_7;
@@ -306,7 +306,7 @@ updateshootinglocation(var_0, var_1, var_2) {
   }
   for(;;) {
     var_3 = self getvieworigin();
-    var_4 = self getangles();
+    var_4 = self getplayerangles();
     var_5 = anglesToForward(var_4);
     var_6 = var_3 + var_5 * 8000;
     var_7 = bulletTrace(var_3, var_6, 0, var_0);

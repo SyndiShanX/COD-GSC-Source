@@ -1645,7 +1645,7 @@ flashbangplayer(var_0, var_1, var_2) {
   if(var_10 < 0.5) {
     return;
   }
-  var_11 = anglesToForward(var_0 getangles());
+  var_11 = anglesToForward(var_0 getplayerangles());
   var_12 = var_0.origin;
 
   switch (var_0 getstance()) {
@@ -2715,7 +2715,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
           var_16 = 1.0 - (var_14 - var_8) / (var_7 - var_8);
         }
 
-        var_17 = anglesToForward(self getangles());
+        var_17 = anglesToForward(self getplayerangles());
         var_18 = self.origin;
 
         switch (self getstance()) {

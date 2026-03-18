@@ -535,7 +535,7 @@ weapondisposallogic() {
       if(isDefined(var_12)) {
         var_11 setModel(var_12);
         var_13 = getoriginoffsetforitem(var_9);
-        var_14 = getanglesoffsetforitem(var_9);
+        var_14 = getplayeranglesoffsetforitem(var_9);
         var_11 linktosynchronizedparent(level.sqarm, "tag_weapon_right", var_13, var_14);
         var_15 = zombiearmplaysqvo("item");
       } else {
@@ -876,7 +876,7 @@ getoriginoffsetforitem(var_0) {
   }
 }
 
-getanglesoffsetforitem(var_0) {
+getplayeranglesoffsetforitem(var_0) {
   if(!isDefined(var_0)) {
     return;
   }
@@ -1460,7 +1460,7 @@ zmplayeraltteleport(var_0, var_1, var_2) {
 playerinzomboniroom(var_0) {
   level.zmplayerinzomboniroom = self;
   self setorigin(var_0.origin, 1);
-  self setangles(var_0.angles);
+  self setplayerangles(var_0.angles);
   level thread announcerzomboniroom(self);
   wait 5;
 
@@ -1525,7 +1525,7 @@ playertryteleporttostruct(var_0) {
     self setorigin(var_0.origin, 1);
 
     if(isDefined(var_0.angles)) {
-      self setangles(var_0.angles);
+      self setplayerangles(var_0.angles);
     }
 
     thread maps\mp\zombies\killstreaks\_zombie_camouflage::playercamouflagemode(5);
@@ -2232,7 +2232,7 @@ playerteleporttoisland(var_0) {
   self setorigin(var_0.origin, 1);
 
   if(isDefined(var_0.angles)) {
-    self setangles(var_0.angles);
+    self setplayerangles(var_0.angles);
   }
 
   self.onisland = 1;
@@ -2278,7 +2278,7 @@ playerdig() {
 
   for(;;) {
     var_0 = self getEye();
-    var_1 = anglesToForward(self getangles());
+    var_1 = anglesToForward(self getplayerangles());
     var_2 = var_0 + var_1 * 70;
     var_3 = bulletTrace(var_0, var_2, 0, self);
 

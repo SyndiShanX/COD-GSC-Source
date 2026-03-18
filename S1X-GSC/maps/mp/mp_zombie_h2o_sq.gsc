@@ -4871,7 +4871,7 @@ playerteleporttobuszone(var_0) {
   maps\mp\zombies\_teleport::teleport_players_through_chute([self], 0, 1);
   thread maps\mp\zombies\_teleport::reset_teleport_flag_after_time([self], 0.75);
   self setorigin(var_0.origin, 1);
-  self setangles(var_0.angles);
+  self setplayerangles(var_0.angles);
   self setclientomnvar("ui_zm_ee_bool2", 1);
   self.inbuszone = 1;
   level notify("sq_player_teleport_to_bus_zone");
@@ -4915,7 +4915,7 @@ playerteleportback(var_0) {
   maps\mp\zombies\_teleport::teleport_players_through_chute([self], 0, 1);
   thread maps\mp\zombies\_teleport::reset_teleport_flag_after_time([self], 0.75);
   self setorigin(var_0.origin, 1);
-  self setangles(var_0.angles);
+  self setplayerangles(var_0.angles);
   self setclientomnvar("ui_zm_ee_bool2", 0);
   self.inbuszone = undefined;
   level notify("sq_teleport_players_back");

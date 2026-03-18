@@ -122,7 +122,7 @@ bossozstage2teleportbackin(var_0) {
   self setorigin(var_2.origin, 1);
   var_3 = common_scripts\utility::random(level.players);
   var_4 = vectortoangles(var_3.origin - var_2.origin);
-  self setangles(var_4);
+  self setplayerangles(var_4);
   self.angles = var_4;
   self scragentsetorientmode("face angle abs", (0, var_4[1], 0));
   playFX(common_scripts\utility::getfx("oz_stage2_teleport"), var_2.origin, (1, 0, 0), (0, 0, 1));

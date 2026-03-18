@@ -95,7 +95,7 @@ playerteleport(var_0, var_1) {
   }
 
   if(isDefined(var_1)) {
-    self setangles(var_1);
+    self setplayerangles(var_1);
   }
 
   thread playerteleportaudio();

@@ -896,8 +896,8 @@ isbackstabevent(var_0, var_1, var_2) {
     return 0;
   }
 
-  var_3 = var_0 getangles();
-  var_4 = self getangles();
+  var_3 = var_0 getplayerangles();
+  var_4 = self getplayerangles();
   var_5 = angleclamp180(var_3[1] - var_4[1]);
 
   if(abs(var_5) < 75) {

@@ -69,7 +69,7 @@ playerplayinvalidpositioneffect(var_0) {
   var_2 = self.lastnearestnode;
 
   if(!isDefined(var_1)) {
-    var_3 = anglesToForward(self getangles());
+    var_3 = anglesToForward(self getplayerangles());
     var_4 = self getEye();
     var_5 = var_4 + var_3 * 500;
     var_1 = bulletTrace(var_4, var_5, 0, self, 1, 0, 0, 0, 0);
@@ -99,7 +99,7 @@ playerplayinvalidpositioneffect(var_0) {
 }
 
 playergetnodelookingat(var_0) {
-  var_1 = anglesToForward(self getangles());
+  var_1 = anglesToForward(self getplayerangles());
   var_2 = self getEye();
   var_3 = var_2 + var_1 * 500;
   var_4 = bulletTrace(var_2, var_3, 0, self, 1, 0, 0, 0, 0);

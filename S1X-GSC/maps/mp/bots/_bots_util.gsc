@@ -7,7 +7,7 @@ bot_get_nodes_in_cone(var_0, var_1, var_2, var_3) {
   var_4 = getnodesinradius(self.origin, var_1, var_0);
   var_5 = [];
   var_6 = self getnearestnode();
-  var_7 = anglesToForward(self getangles());
+  var_7 = anglesToForward(self getplayerangles());
   var_8 = vectornormalize(var_7 * (1, 1, 0));
 
   foreach(var_10 in var_4) {

@@ -367,9 +367,9 @@ createfxlogic() {
 
   for(;;) {
     var_7 = 0;
-    var_8 = anglestoright(level.player getangles());
-    var_9 = anglesToForward(level.player getangles());
-    var_10 = anglestoup(level.player getangles());
+    var_8 = anglestoright(level.player getplayerangles());
+    var_9 = anglesToForward(level.player getplayerangles());
+    var_10 = anglestoup(level.player getplayerangles());
     var_11 = 0.85;
     var_12 = var_9 * 750;
     level.createfxcursor = bulletTrace(level.player getEye(), level.player getEye() + var_12, 0, undefined);
@@ -1557,7 +1557,7 @@ createfx_centerprint_thread(var_0) {
 }
 
 get_selected_move_vector() {
-  var_0 = level.player getangles()[1];
+  var_0 = level.player getplayerangles()[1];
   var_1 = (0, var_0, 0);
   var_2 = anglestoright(var_1);
   var_3 = anglesToForward(var_1);
@@ -2499,7 +2499,7 @@ frame_selected() {
     var_1 = 200;
   }
 
-  var_2 = anglesToForward(level.player getangles());
+  var_2 = anglesToForward(level.player getplayerangles());
   var_3 = var_2 * (-1 * var_1);
   var_4 = level.player getEye();
   var_5 = var_4 - level.player.origin;

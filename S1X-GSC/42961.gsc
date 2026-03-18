@@ -1135,7 +1135,7 @@ updateshootinglocation(var_0) {
   level endon("ResumeWarbirdAI");
 
   for(;;) {
-    var_1 = self getangles();
+    var_1 = self getplayerangles();
     var_2 = var_0.playerattachpoint.origin;
     var_3 = anglesToForward(var_1);
     var_4 = var_2 + var_3 * 4000;
@@ -1231,7 +1231,7 @@ firewarbirdrockets(var_0) {
       earthquake(0.4, 1, var_0.origin, 1000);
       self playrumbleonentity("ac130_105mm_fire");
       var_1 = var_0 gettagorigin("tag_missile_right");
-      var_2 = vectornormalize(anglesToForward(self getangles()));
+      var_2 = vectornormalize(anglesToForward(self getplayerangles()));
       var_3 = var_0 getentityvelocity();
       var_4 = magicbullet("warbird_missile_mp", var_1 + var_3 / 10, self getEye() + var_3 + var_2 * 1000, self);
       playFXOnTag(level.chopper_fx["rocketlaunch"]["warbird"], var_0, "tag_missile_right");

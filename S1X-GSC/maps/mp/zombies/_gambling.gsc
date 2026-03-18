@@ -373,7 +373,7 @@ plinko_gates_pattern_close_when_looked_at(var_0, var_1, var_2, var_3, var_4, var
     var_9 = 0;
 
     foreach(var_11 in level.players) {
-      var_12 = anglesToForward(var_11 getangles());
+      var_12 = anglesToForward(var_11 getplayerangles());
       var_13 = vectornormalize(var_8 - var_11 getvieworigin());
       var_14 = vectordot(var_12, var_13);
 
@@ -1287,7 +1287,7 @@ discoverplinkologic(var_0) {
       if(var_9 > var_1) {
         continue;
       }
-      var_10 = anglesToForward(var_4 getangles());
+      var_10 = anglesToForward(var_4 getplayerangles());
       var_11 = vectornormalize(var_0.origin - var_4.origin);
       var_12 = vectordot(var_10, var_11);
 

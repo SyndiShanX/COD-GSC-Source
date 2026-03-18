@@ -1111,7 +1111,7 @@ playerisrocketswarmtargetlocked() {
 
 getbestenemy(var_0, var_1) {
   var_2 = 0.843391;
-  var_3 = anglesToForward(var_0 getangles());
+  var_3 = anglesToForward(var_0 getplayerangles());
   var_4 = var_0 getEye();
   var_5 = undefined;
   var_6 = [];
@@ -1205,8 +1205,8 @@ handlelockedtarget(var_0, var_1) {
 }
 
 firerocketswarm(var_0, var_1, var_2) {
-  var_3 = anglesToForward(var_1 getangles());
-  var_4 = anglestoright(var_1 getangles());
+  var_3 = anglesToForward(var_1 getplayerangles());
+  var_4 = anglestoright(var_1 getplayerangles());
   var_5 = [(0, 0, 50), (0, 0, 20), (10, 0, 0), (0, 10, 0)];
   playFXOnTag(common_scripts\utility::getfx("swarm_rocket_wv"), var_1, "TAG_ROCKET4");
 
@@ -1943,7 +1943,7 @@ firedroppod(var_0, var_1) {
 
     if(isDefined(var_12) && isalive(var_12) && !(isDefined(level.ishorde) && level.ishorde && isDefined(var_12.isspectator) && var_12.isspectator)) {
       var_12 setorigin(var_3, 1);
-      var_12 setangles(var_17.angles);
+      var_12 setplayerangles(var_17.angles);
       var_12 enableweapons();
       var_12 givejuggernaut("juggernaut_exosuit", var_1);
       var_17 delete();
@@ -2050,7 +2050,7 @@ is_entering_goliath(var_0, var_1) {
   var_2 = anglesToForward(var_0.angles);
   var_1 = var_1 - var_2 * 37;
   self setorigin(var_1, 0);
-  self setangles(var_0.angles);
+  self setplayerangles(var_0.angles);
   wait 0.05;
   var_0 scriptmodelplayanimdeltamotion("mp_goliath_enter");
   self playgoliathentryanim();

@@ -1012,7 +1012,7 @@ perkterminalsethostcure(var_0, var_1) {
     var_3 = common_scripts\utility::random(var_2);
     self dontinterpolate();
     self setorigin(var_3.origin);
-    self setangles(var_3.angles);
+    self setplayerangles(var_3.angles);
   }
 }
 

@@ -216,7 +216,7 @@ get_best_locking_target() {
   }
 
   var_17 = self getEye();
-  var_18 = anglesToForward(self getangles());
+  var_18 = anglesToForward(self getplayerangles());
   var_19 = undefined;
   var_20 = cos(5);
 
@@ -250,7 +250,7 @@ get_best_locking_target() {
 
 locking_target_still_valid(var_0) {
   var_1 = self getEye();
-  var_2 = anglesToForward(self getangles());
+  var_2 = anglesToForward(self getplayerangles());
   var_3 = stingerm7_get_target_pos(var_0);
 
   if((isPlayer(var_0) || isbot(var_0) || isDefined(level.ishorde) && level.ishorde && isagent(var_0)) && !maps\mp\_utility::isreallyalive(var_0)) {

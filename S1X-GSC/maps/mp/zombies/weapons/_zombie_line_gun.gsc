@@ -49,7 +49,7 @@ onplayerspawn() {
 
 firelinegun() {
   var_0 = self playerads();
-  var_1 = self getangles();
+  var_1 = self getplayerangles();
   var_2 = (var_1[0], var_1[1], 0);
   var_3 = randomfloatrange(-1.0, 1.0) * (1.0 - var_0);
   var_4 = randomfloatrange(-1.0, 1.0) * (1.0 - var_0);

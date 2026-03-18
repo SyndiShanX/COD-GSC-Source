@@ -392,8 +392,8 @@ doproximityalarm(var_0, var_1) {
 }
 
 playerfakeshootpaintmissile(var_0) {
-  var_1 = vectornormalize(anglesToForward(self getangles()));
-  var_2 = vectornormalize(anglestoright(self getangles()));
+  var_1 = vectornormalize(anglesToForward(self getplayerangles()));
+  var_2 = vectornormalize(anglestoright(self getplayerangles()));
   var_3 = self getEye() + var_1 * 100;
   var_4 = var_3 + var_1 * 20000;
   var_5 = bulletTrace(var_3, var_4, 0);

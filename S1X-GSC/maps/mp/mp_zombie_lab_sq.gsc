@@ -857,7 +857,7 @@ stage4_incinerator_ground_run() {
       continue;
     }
     var_6 = var_2 getEye();
-    var_7 = var_6 + anglesToForward(var_2 getangles()) * 5000;
+    var_7 = var_6 + anglesToForward(var_2 getplayerangles()) * 5000;
     var_8 = bulletTrace(var_6, var_7, 0);
     var_4 = var_8["position"];
     playFX(common_scripts\utility::getfx("incinerator_ash"), var_4);

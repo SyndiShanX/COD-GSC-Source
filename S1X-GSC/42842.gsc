@@ -4895,13 +4895,13 @@ get_spawn_weapon_name(var_0) {
 }
 
 playersaveangles() {
-  self.restoreangles = self getangles();
+  self.restoreangles = self getplayerangles();
 }
 
 playerrestoreangles() {
   if(isDefined(self.restoreangles)) {
     if(self.team != "spectator") {
-      self setangles(self.restoreangles);
+      self setplayerangles(self.restoreangles);
     }
 
     self.restoreangles = undefined;

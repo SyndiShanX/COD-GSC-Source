@@ -2439,10 +2439,10 @@ playerdamaged(var_0, var_1, var_2, var_3, var_4, var_5) {
 }
 
 playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
-  self.anglesondeath = self getangles();
+  self.anglesondeath = self getplayerangles();
 
   if(isDefined(var_1)) {
-    var_1.anglesonkill = var_1 getangles();
+    var_1.anglesonkill = var_1 getplayerangles();
   }
 
   self endon("disconnect");

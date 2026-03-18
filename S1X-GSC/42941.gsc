@@ -417,7 +417,7 @@ playerdohunterkillerbehavior(var_0) {
       var_12 = var_0.angles;
     } else {
       var_11 = self getvieworigin(1);
-      var_12 = self getangles();
+      var_12 = self getplayerangles();
       var_0.camlinkent = spawn("script_model", var_11);
       var_0.camlinkent setModel("tag_player");
       var_0.camlinkent.angles = var_12;

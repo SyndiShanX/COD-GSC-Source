@@ -652,7 +652,7 @@ givetrickshotachievement(var_0, var_1, var_2) {
   var_4 = self.origin;
   var_5 = var_0.origin;
   var_6 = vectornormalize(var_4 - var_5);
-  var_7 = anglesToForward(var_0 getangles());
+  var_7 = anglesToForward(var_0 getplayerangles());
 
   if(vectordot(var_6, var_7) >= 0) {
     return;

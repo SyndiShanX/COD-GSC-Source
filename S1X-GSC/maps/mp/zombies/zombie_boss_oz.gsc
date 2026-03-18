@@ -509,8 +509,8 @@ teleporttostructandbackatend(var_0) {
   self setorigin(var_1, 1);
 
   if(isDefined(var_0.angles)) {
-    self.prebossangles = self getangles();
-    self setangles(var_0.angles);
+    self.prebossangles = self getplayerangles();
+    self setplayerangles(var_0.angles);
   }
 
   playfxontagforclients(common_scripts\utility::getfx("oz_arena_teleport_player"), self, "tag_origin", self);
@@ -530,7 +530,7 @@ teleporttostructandbackatend(var_0) {
   self setorigin(self.prebossorigin, 1);
 
   if(isDefined(self.prebossangles)) {
-    self setangles(self.prebossangles);
+    self setplayerangles(self.prebossangles);
   }
 
   self.disabletombstonedropinarea = undefined;

@@ -119,8 +119,8 @@ createtrackingdrone(var_0, var_1, var_2, var_3, var_4) {
 
   if(!var_1) {
     var_5 = self getEye();
-    var_6 = anglesToForward(self getangles());
-    var_7 = self getangles();
+    var_6 = anglesToForward(self getplayerangles());
+    var_7 = self getplayerangles();
     var_6 = anglesToForward(var_7);
     var_8 = anglestoright(var_7);
     var_9 = var_6 * 50;

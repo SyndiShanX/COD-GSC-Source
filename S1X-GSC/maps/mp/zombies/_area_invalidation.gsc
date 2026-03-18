@@ -491,7 +491,7 @@ movesoldierstonewzone(var_0, var_1) {
 
   for(var_3 = 0; var_3 < var_1.size; var_3++) {
     var_1[var_3] setorigin(var_2[var_3].origin);
-    var_1[var_3] setangles(vectortoangles(var_0.curorigin - var_2[var_3].origin));
+    var_1[var_3] setplayerangles(vectortoangles(var_0.curorigin - var_2[var_3].origin));
     var_1[var_3].bomb_guarding = var_0;
     var_1[var_3] hide_soldier_and_make_invulnerable(0);
     var_1[var_3] thread soldier_think();

@@ -747,7 +747,7 @@ ball_shoot_watch() {
   }
 
   if(isDefined(self.carryobject)) {
-    var_3 = self getangles();
+    var_3 = self getplayerangles();
     var_3 = var_3 + (var_0, 0, 0);
     var_3 = (clamp(var_3[0], -85, 85), var_3[1], var_3[2]);
     var_4 = anglesToForward(var_3);
@@ -1422,7 +1422,7 @@ player_update_pass_target(var_0) {
     var_2 = undefined;
 
     if(!self isonladder()) {
-      var_3 = anglesToForward(self getangles());
+      var_3 = anglesToForward(self getplayerangles());
       var_4 = self getEye();
       var_5 = [];
 

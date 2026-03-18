@@ -832,7 +832,7 @@ firerocketorbitalsupportgun() {
     if(self.controlled_orbitalsupport_turret == "rocket" && self attackButtonPressed() && !isDefined(level.hostmigrationtimer)) {
       earthquake(0.3, 1, level.orbitalsupport_planemodel.origin, 1000, self);
       var_3 = level.orbitalsupport_big_turret gettagorigin("tag_missile1");
-      var_4 = vectornormalize(anglesToForward(self getangles()));
+      var_4 = vectornormalize(anglesToForward(self getplayerangles()));
       var_5 = vectornormalize(anglesToForward(level.orbitalsupport_planemodel gettagangles("tag_origin")));
 
       for(var_6 = 0; var_6 < 3; var_6++) {

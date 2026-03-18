@@ -387,7 +387,7 @@ reset_teleport_flag_after_time(var_0, var_1) {
 
 player_teleport(var_0, var_1) {
   self setorigin(var_0, 1);
-  self setangles(var_1);
+  self setplayerangles(var_1);
 }
 
 set_default_angles() {

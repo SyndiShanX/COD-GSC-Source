@@ -348,7 +348,7 @@ playercontrolorbitalstrike(var_0) {
   var_0 setjitterparams((0, 0, 0), 0, 0);
   thread leaveorbitalstrikeearly(var_0);
   thread playinteriorsound(var_0);
-  self setangles((0, 0, 0));
+  self setplayerangles((0, 0, 0));
   self remotecontrolvehicle(var_0);
   wait 0.05;
   self cameralinkto(var_0, "tag_origin");

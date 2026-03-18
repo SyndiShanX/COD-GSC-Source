@@ -31,7 +31,7 @@ lsr_rocket_think(var_0) {
 
   for(;;) {
     if(var_0 playerads() > 0.3) {
-      var_1 = anglesToForward(var_0 getangles());
+      var_1 = anglesToForward(var_0 getplayerangles());
       var_2 = var_0 getEye();
       var_3 = var_2 + var_1 * 15000;
       var_4 = bulletTrace(var_2, var_3, 1, var_0, 1, 0, 0, 0, 0);

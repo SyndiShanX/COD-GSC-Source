@@ -54,7 +54,7 @@ updatebeamrange(var_0) {
     if(!issubstr(var_1, "iw5_microwavezm_mp")) {
       continue;
     }
-    var_2 = self getangles();
+    var_2 = self getplayerangles();
     var_3 = anglesToForward(var_2);
     var_4 = self getEye();
     var_5 = var_4 + var_3 * 850;
@@ -79,7 +79,7 @@ cookenemiesinrange(var_0, var_1) {
   var_3 = squared(var_2 + var_0.beamwidth * 2);
   var_4 = squared(var_0.beamwidth);
   var_5 = self getEye();
-  var_6 = self getangles();
+  var_6 = self getplayerangles();
   var_7 = anglesToForward(var_6);
   var_8 = var_5 + var_7 * var_0.beamwidth;
   var_9 = var_8 + var_7 * var_2;
@@ -149,7 +149,7 @@ cookzombieburger(var_0, var_1, var_2) {
   var_3 = squared(var_0.beamrange + var_0.beamwidth * 2);
   var_4 = squared(var_0.beamwidth);
   var_5 = self getEye();
-  var_6 = self getangles();
+  var_6 = self getplayerangles();
   var_7 = anglesToForward(var_6);
   var_8 = var_5 + var_7 * var_0.beamwidth;
   var_9 = var_8 + var_7 * var_0.beamrange;

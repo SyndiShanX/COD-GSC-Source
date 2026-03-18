@@ -163,7 +163,7 @@ mutatorteleport_handleteleport() {
       thread play_zombie_teleport_sound();
       var_15 = self getvelocity();
       self setorigin(var_11.origin, 1);
-      self setangles(var_14);
+      self setplayerangles(var_14);
       self setvelocity(anglesToForward(var_14) * length(var_15));
       self scragenttrimpath(var_11);
       wait 0.05;

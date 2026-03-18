@@ -2150,7 +2150,7 @@ bomb_throw_watch() {
   }
 
   if(isDefined(self.carryobject)) {
-    var_3 = self getangles();
+    var_3 = self getplayerangles();
     var_3 = var_3 + (var_0, 0, 0);
     var_3 = (clamp(var_3[0], -85, 85), var_3[1], var_3[2]);
     var_4 = anglesToForward(var_3);
@@ -2203,7 +2203,7 @@ bomb_physics_launch(var_0, var_1) {
   var_2 = self.visuals[0];
   var_2.origin_prev = undefined;
   bomb_cleanup();
-  var_3 = anglesToForward(var_1 getangles()) * 940 + anglestoup(var_1 getangles()) * 120;
+  var_3 = anglesToForward(var_1 getplayerangles()) * 940 + anglestoup(var_1 getplayerangles()) * 120;
   var_4 = var_1 getEye();
   var_5 = magicgrenademanual("iw5_dlc2burgerbomb_mp", var_4, var_3, 2, var_1);
 }

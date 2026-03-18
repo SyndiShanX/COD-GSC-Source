@@ -710,7 +710,7 @@ sidequest_start_next_stage(var_0) {
 }
 
 is_facing(var_0) {
-  var_1 = self getangles();
+  var_1 = self getplayerangles();
   var_2 = anglesToForward(var_1);
   var_3 = (var_2[0], var_2[1], 0);
   var_4 = vectornormalize(var_3);
@@ -722,7 +722,7 @@ is_facing(var_0) {
 }
 
 is_facing_3d(var_0) {
-  var_1 = self getangles();
+  var_1 = self getplayerangles();
   var_2 = anglesToForward(var_1);
   var_3 = vectornormalize(var_2);
   var_4 = var_0.origin - self getEye();

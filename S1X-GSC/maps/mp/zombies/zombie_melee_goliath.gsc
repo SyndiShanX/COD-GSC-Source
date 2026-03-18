@@ -218,7 +218,7 @@ stay_in_playspace() {
       var_0 = maps\mp\zombies\_zombies::getspawnpoint("zombie_melee_goliath", 1);
       playFX(common_scripts\utility::getfx("npc_teleport_enemy"), self.origin, (1, 0, 0), (0, 0, 1));
       self setorigin(var_0.origin, 1);
-      self setangles(var_0.angles);
+      self setplayerangles(var_0.angles);
       playFX(common_scripts\utility::getfx("npc_teleport_enemy"), var_0.origin, (1, 0, 0), (0, 0, 1));
     }
 

@@ -240,7 +240,7 @@ stay_in_playspace() {
         var_1 = var_0[0];
         playFX(common_scripts\utility::getfx("npc_teleport_ally"), self.origin, (1, 0, 0), (0, 0, 1));
         self setorigin(var_1.origin, 1);
-        self setangles(var_1.angles);
+        self setplayerangles(var_1.angles);
         playFX(common_scripts\utility::getfx("npc_teleport_ally"), var_1.origin, (1, 0, 0), (0, 0, 1));
       }
     }
@@ -268,7 +268,7 @@ monitorteleporttraversals() {
       var_3 = getnode(var_0.target, "targetname");
       playFX(common_scripts\utility::getfx("npc_teleport_ally"), self.origin, (1, 0, 0), (0, 0, 1));
       self setorigin(var_3.origin, 1);
-      self setangles(var_3.angles);
+      self setplayerangles(var_3.angles);
       playFX(common_scripts\utility::getfx("npc_teleport_ally"), var_3.origin, (1, 0, 0), (0, 0, 1));
     }
 
