@@ -25,11 +25,11 @@ function private preinit() {
 }
 
 function register_deployable(weapon, var_7ec218c6) {
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
-  assert(weapon.name != # "none");
+  assert(weapon.name != #"none");
   level._deployable_weapons[weapon.statindex] = spawnStruct();
   level._deployable_weapons[weapon.statindex].var_7ec218c6 = var_7ec218c6;
 }

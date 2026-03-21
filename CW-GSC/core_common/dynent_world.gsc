@@ -93,7 +93,7 @@ function private event_handler[event_9e981c4] function_ff8b3908(eventstruct) {
       setdynentstate(dynent, stateindex);
     }
 
-    if(var_1a5e0c43 && dynent.script_noteworthy === # "hash_4d1fb8524fdfd254") {
+    if(var_1a5e0c43 && dynent.script_noteworthy === #"hash_4d1fb8524fdfd254") {
       a_players = function_a1ef346b(undefined, dynent.origin, 225);
 
       foreach(player in a_players) {

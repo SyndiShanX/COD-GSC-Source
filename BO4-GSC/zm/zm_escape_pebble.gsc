@@ -686,7 +686,7 @@ function_1877cfe4(e_tomahawk) {
 }
 
 function_cbc49ed2(s_params) {
-  if(self.archetype != # "zombie" && self.archetype != # "zombie_dog") {
+  if(self.archetype != #"zombie" && self.archetype != #"zombie_dog") {
     return;
   }
 
@@ -1359,7 +1359,7 @@ function_6bb97cee(var_a276c861, var_19e802fa) {
 }
 
 function_22927328(s_params) {
-  if(self.archetype != # "zombie" && self.archetype != # "zombie_dog") {
+  if(self.archetype != #"zombie" && self.archetype != #"zombie_dog") {
     return;
   }
 

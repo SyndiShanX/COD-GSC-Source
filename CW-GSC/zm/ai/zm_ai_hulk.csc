@@ -116,16 +116,16 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
 
   switch (bwastimejump) {
     case 1:
-      fx = # "hash_470d346ff9631146";
+      fx = #"hash_470d346ff9631146";
       break;
     case 2:
-      fx = # "hash_40bf4040b66f2027";
+      fx = #"hash_40bf4040b66f2027";
       break;
     case 3:
-      fx = # "hash_6c502dd4772c1198";
+      fx = #"hash_6c502dd4772c1198";
       break;
     case 4:
-      fx = # "hash_ba0e31960f1b3db";
+      fx = #"hash_ba0e31960f1b3db";
       break;
   }
 
@@ -145,7 +145,7 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
 
 function private function_95dc19b0(localclientnum) {
   if(isDefined(self) && isvec(self.origin)) {
-    fx = # "hash_470d346ff9631146";
+    fx = #"hash_470d346ff9631146";
     playFX(localclientnum, fx, self.origin);
   }
 }
@@ -159,13 +159,13 @@ function private function_64d1f09b(localclientnum, oldval, newval, bnewent, bini
 
   switch (bwastimejump) {
     case 2:
-      fx = # "hash_3a6de80e2a03ffd1";
+      fx = #"hash_3a6de80e2a03ffd1";
       break;
     case 3:
-      fx = # "hash_736dc8868c980f5a";
+      fx = #"hash_736dc8868c980f5a";
       break;
     case 4:
-      fx = # "hash_45ae173e6c1708dd";
+      fx = #"hash_45ae173e6c1708dd";
       break;
   }
 

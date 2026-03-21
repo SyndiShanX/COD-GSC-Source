@@ -63,13 +63,13 @@ function event_handler[gametype_init] main(eventstruct) {
   setDvar(#"scr_maxinventory_scorestreaks", 1);
   level.var_e2636f91 = 0;
   level.var_3ea9068a = [];
-  level.var_3ea9068a[0] = # "hash_1e3ef2884672600f";
-  level.var_3ea9068a[1] = # "hash_1e3ef388467261c2";
-  level.var_3ea9068a[2] = # "hash_1e3ef48846726375";
-  level.var_3ea9068a[3] = # "hash_1e3eed8846725790";
-  level.var_3ea9068a[4] = # "hash_1e3eee8846725943";
-  level.var_3ea9068a[5] = # "hash_1e3eef8846725af6";
-  level.var_3ea9068a[6] = # "hash_1e3ef08846725ca9";
+  level.var_3ea9068a[0] = #"hash_1e3ef2884672600f";
+  level.var_3ea9068a[1] = #"hash_1e3ef388467261c2";
+  level.var_3ea9068a[2] = #"hash_1e3ef48846726375";
+  level.var_3ea9068a[3] = #"hash_1e3eed8846725790";
+  level.var_3ea9068a[4] = #"hash_1e3eee8846725943";
+  level.var_3ea9068a[5] = #"hash_1e3eef8846725af6";
+  level.var_3ea9068a[6] = #"hash_1e3ef08846725ca9";
   level.var_44565297 = getweapon(#"hash_7394b28b8f9b6d60");
   level.var_6f3f9c56 = isDefined(getgametypesetting(#"capturetime")) ? getgametypesetting(#"capturetime") : 20;
   level.var_ad91ffcf = isDefined(getgametypesetting(#"hash_448f94b2a3abdbb9")) ? getgametypesetting(#"hash_448f94b2a3abdbb9") : 6;
@@ -552,7 +552,7 @@ function function_427bdf46(satlink) {
 }
 
 function function_c5b5d604(satlink) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -799,7 +799,7 @@ function private function_d0a78df6(activator) {
 }
 
 function function_4e33414c(satlink) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -847,7 +847,7 @@ function function_4e33414c(satlink) {
 }
 
 function function_11cf329c(satlink) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -1028,7 +1028,7 @@ function private function_3f63e44f(item) {
   assert(isDefined(item));
   assert(isDefined(item.itementry));
 
-  if(item.itementry.itemtype == # "generic") {
+  if(item.itementry.itemtype == #"generic") {
     switch (item.itementry.name) {
       case # "armor_pouch_item_t9":
         return !namespace_234f0efc::function_d912fa6e(self);
@@ -1040,7 +1040,7 @@ function private function_3f63e44f(item) {
       default:
         return 0;
     }
-  } else if(item.itementry.itemtype == # "scorestreak") {
+  } else if(item.itementry.itemtype == #"scorestreak") {
     if(is_true(self.selectinglocation)) {
       return 0;
     }
@@ -1056,9 +1056,9 @@ function private function_3f63e44f(item) {
     }
 
     return 1;
-  } else if(item.itementry.itemtype == # "armor_shard") {
+  } else if(item.itementry.itemtype == #"armor_shard") {
     return (self.var_c52363ab > self.armorplatecount);
-  } else if(item.itementry.itemtype == # "ammo") {
+  } else if(item.itementry.itemtype == #"ammo") {
     weaponslist = self getweaponslistprimaries();
 
     foreach(weapon in weaponslist) {

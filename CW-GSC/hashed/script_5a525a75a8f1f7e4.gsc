@@ -458,7 +458,7 @@ function function_7c1cc13c(player, weapon, model) {
       player playsoundtoplayer(#"hash_3d571b980c703675", player);
       player zm_score::minus_to_player_score(cost);
 
-      if(zm_weapons::is_wonder_weapon(weapon) || weapon.statname === # "ray_gun") {
+      if(zm_weapons::is_wonder_weapon(weapon) || weapon.statname === #"ray_gun") {
         player zm_stats::increment_challenge_stat(#"hash_1a2bee1841f18a4");
       }
     }

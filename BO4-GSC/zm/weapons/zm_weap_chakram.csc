@@ -29,21 +29,21 @@ __init__() {
   clientfield::register("vehicle", "" + # "chakram_whirlwind_shred_fx", 1, 1, "counter", &chakram_whirlwind_shred_fx, 1, 0);
   clientfield::register("toplayer", "" + # "chakram_speed_buff_postfx", 1, 1, "counter", &chakram_speed_buff_postfx, 0, 0);
   clientfield::register("toplayer", "" + # "chakram_rumble", 1, 3, "counter", &chakram_rumble, 0, 0);
-  level._effect[#"sword_bloodswipe_r_1p"] = # "zombie/fx_sword_slash_right_1p_zod_zmb";
-  level._effect[#"sword_bloodswipe_l_1p"] = # "zombie/fx_sword_slash_left_1p_zod_zmb";
-  level._effect[#"hash_720f204e4406ddbf"] = # "hash_59cdb0226e644934";
-  level._effect[#"hash_15593b3f860346f5"] = # "hash_1e957556dba822e6";
-  level._effect[#"hash_5f9bb382a47d637d"] = # "hash_68100f653a5baf2f";
-  level._effect[#"hash_6dca5478f1baf5ce"] = # "hash_1ff88e4b147015b2";
-  level._effect[#"hash_3364e81f269deca0"] = # "hash_656272f0184ae1fc";
-  level._effect[#"hash_5c2ba805602ea484"] = # "hash_3904517ed3636935";
-  level._effect[#"hash_455a47023bc1da46"] = # "hash_2109d3278a7b54fa";
-  level._effect[#"hash_bc1e5225071e47d"] = # "hash_2ca473741924f0c";
-  level._effect[#"hash_29c798afb4256dc0"] = # "hash_37cfda7fcc57f0f";
-  level._effect[#"hash_6759261c70e31d0a"] = # "hash_2103c7278a76d4e8";
-  level._effect[#"hash_6ac964121fa8b4bf"] = # "hash_212ef7da466574ba";
-  level._effect[#"hash_49a09babc9ee918a"] = # "hash_1ac3342ef816a481";
-  level._effect[#"hash_c995c57914ab2b4"] = # "hash_1157c7544a4dd8cf";
+  level._effect[#"sword_bloodswipe_r_1p"] = #"zombie/fx_sword_slash_right_1p_zod_zmb";
+  level._effect[#"sword_bloodswipe_l_1p"] = #"zombie/fx_sword_slash_left_1p_zod_zmb";
+  level._effect[#"hash_720f204e4406ddbf"] = #"hash_59cdb0226e644934";
+  level._effect[#"hash_15593b3f860346f5"] = #"hash_1e957556dba822e6";
+  level._effect[#"hash_5f9bb382a47d637d"] = #"hash_68100f653a5baf2f";
+  level._effect[#"hash_6dca5478f1baf5ce"] = #"hash_1ff88e4b147015b2";
+  level._effect[#"hash_3364e81f269deca0"] = #"hash_656272f0184ae1fc";
+  level._effect[#"hash_5c2ba805602ea484"] = #"hash_3904517ed3636935";
+  level._effect[#"hash_455a47023bc1da46"] = #"hash_2109d3278a7b54fa";
+  level._effect[#"hash_bc1e5225071e47d"] = #"hash_2ca473741924f0c";
+  level._effect[#"hash_29c798afb4256dc0"] = #"hash_37cfda7fcc57f0f";
+  level._effect[#"hash_6759261c70e31d0a"] = #"hash_2103c7278a76d4e8";
+  level._effect[#"hash_6ac964121fa8b4bf"] = #"hash_212ef7da466574ba";
+  level._effect[#"hash_49a09babc9ee918a"] = #"hash_1ac3342ef816a481";
+  level._effect[#"hash_c995c57914ab2b4"] = #"hash_1157c7544a4dd8cf";
 }
 
 function_8e1552b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

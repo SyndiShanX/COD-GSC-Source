@@ -152,7 +152,7 @@ function_e140ff5c() {
 }
 
 function_4ff2cfd9(s_result) {
-  if(self.archetype == # "zombie_dog" && zm_orange_util::function_fe8ee9f0(s_result.weapon, 0) && !level flag::get(#"hash_6046825f3ec27c48")) {
+  if(self.archetype == #"zombie_dog" && zm_orange_util::function_fe8ee9f0(s_result.weapon, 0) && !level flag::get(#"hash_6046825f3ec27c48")) {
     s_result.eattacker.var_59c409c3 += 1;
 
     if(s_result.eattacker.var_59c409c3 >= 5) {
@@ -261,7 +261,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
   }
 
   if(!isinarray(level.var_55b76576, #"hash_38c97197db36afb7")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_38c97197db36afb7";
+    level.var_55b76576[level.var_55b76576.size] = #"hash_38c97197db36afb7";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -361,7 +361,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
   }
 
   if(!isinarray(level.var_55b76576, #"hash_48e7d63b38c5e2da")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_48e7d63b38c5e2da";
+    level.var_55b76576[level.var_55b76576.size] = #"hash_48e7d63b38c5e2da";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -441,7 +441,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
   }
 
   if(!isinarray(level.var_55b76576, #"hash_52d967f4fc8b12fc")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_52d967f4fc8b12fc";
+    level.var_55b76576[level.var_55b76576.size] = #"hash_52d967f4fc8b12fc";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -451,7 +451,7 @@ third_fallen_soldiers_robots_decon_room_cleared() {
   }
 
   if(!isinarray(level.var_55b76576, #"hash_6f7fd3d4d070db87")) {
-    level.var_55b76576[level.var_55b76576.size] = # "hash_6f7fd3d4d070db87";
+    level.var_55b76576[level.var_55b76576.size] = #"hash_6f7fd3d4d070db87";
   }
 
   if(!isDefined(level.var_55b76576)) {
@@ -547,7 +547,7 @@ function_82947e72() {
   while(true) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon.name === # "pistol_standard_t8" || s_result.weapon.name === # "pistol_standard_t8_upgraded") {
+    if(s_result.weapon.name === #"pistol_standard_t8" || s_result.weapon.name === #"pistol_standard_t8_upgraded") {
       level exploder::exploder("fxexp_glass_jar_exp");
       self hide();
       self setCanDamage(0);

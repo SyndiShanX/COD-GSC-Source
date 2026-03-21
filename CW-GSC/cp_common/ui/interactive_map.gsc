@@ -113,7 +113,7 @@ function function_e0cc3b71(name, value) {
   namespace_61e6d095::function_9ade1d9b(#"interactive_map", name, value);
 }
 
-function function_879505e1(var_ff0f9714 = 1, var_509b0860 = # "hash_780067c4596705d7", var_74ac68df = # "hash_71f8107215effa5b") {
+function function_879505e1(var_ff0f9714 = 1, var_509b0860 = #"hash_780067c4596705d7", var_74ac68df = #"hash_71f8107215effa5b") {
   assert(namespace_61e6d095::exists(#"interactive_map"), "<dev string:x8f>");
   function_23036faa(#"cursor", "uid", #"cursor");
   function_23036faa(#"cursor", "widgetName", var_509b0860);
@@ -147,7 +147,7 @@ function function_50121b9(position) {
   level.interactive_map.var_87c49d20 = position;
 }
 
-function function_9e8d4999(title = # "", descriptions, interactions, object) {
+function function_9e8d4999(title = #"", descriptions, interactions, object) {
   if(!isDefined(descriptions)) {
     descriptions = [];
   } else if(!isarray(descriptions)) {
@@ -219,7 +219,7 @@ function function_2fb5abd8() {
   level.interactive_map.var_2c15274b = undefined;
 }
 
-function add_object(uid, image = # "uie_map_lubyanka_marker_waypoint", var_6d62c29c, angle_offset, title, scale) {
+function add_object(uid, image = #"uie_map_lubyanka_marker_waypoint", var_6d62c29c, angle_offset, title, scale) {
   if(!isDefined(self.interactive_map)) {
     self.interactive_map = {};
   }
@@ -254,7 +254,7 @@ function add_object(uid, image = # "uie_map_lubyanka_marker_waypoint", var_6d62c
 
   level.interactive_map.objects[uid] = self;
 
-  if(isDefined(self.interactive_map.image) && image == # "uie_map_lubyanka_marker_waypoint") {
+  if(isDefined(self.interactive_map.image) && image == #"uie_map_lubyanka_marker_waypoint") {
     image = self.interactive_map.image;
   }
 
@@ -503,7 +503,7 @@ function function_b5c2702b(prompt, prompt_struct) {
   }
 
   if(!isinarray(prompt_struct.groups, #"cursor")) {
-    prompt_struct.groups[prompt_struct.groups.size] = # "cursor";
+    prompt_struct.groups[prompt_struct.groups.size] = #"cursor";
   }
 
   if(!isDefined(self.var_174e0272)) {
@@ -594,7 +594,7 @@ function private function_5cab7397() {
   remove_object(#"map_waypoint");
 }
 
-function private function_db6cb581(uid, widget_name = # "hash_21fb68e196ffe610") {
+function private function_db6cb581(uid, widget_name = #"hash_21fb68e196ffe610") {
   function_d0243e5b(uid, "uid", uid);
   function_d0243e5b(uid, "widgetName", widget_name);
   thread function_fa8087e3();

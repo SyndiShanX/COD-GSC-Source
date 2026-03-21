@@ -175,7 +175,7 @@ function_4b016b57() {
   team = self.pers[#"team"];
   platoon = getteamplatoon(team);
 
-  if(platoon != # "invalid" && platoon != # "none") {
+  if(platoon != #"invalid" && platoon != #"none") {
     return;
   }
 
@@ -186,7 +186,7 @@ function_4b016b57() {
 function_a214d798(platoon) {
   players = [];
 
-  if(platoon == # "none" || platoon == # "invalid") {
+  if(platoon == #"none" || platoon == #"invalid") {
     return players;
   }
 

@@ -35,18 +35,18 @@ commit_weapon_data(spawnid, currentweapon, time0) {
   }
 
   time1 = gettime();
-  blackboxeventname = # "mpweapons";
-  eventname = # "hash_41cc1afc10e99541";
+  blackboxeventname = #"mpweapons";
+  eventname = #"hash_41cc1afc10e99541";
 
   if(sessionmodeiscampaigngame()) {
-    blackboxeventname = # "cpweapons";
-    eventname = # "hash_474292d3118817ab";
+    blackboxeventname = #"cpweapons";
+    eventname = #"hash_474292d3118817ab";
   } else if(sessionmodeiszombiesgame()) {
-    blackboxeventname = # "zmweapons";
-    eventname = # "hash_67140d84a7660909";
+    blackboxeventname = #"zmweapons";
+    eventname = #"hash_67140d84a7660909";
   } else if(sessionmodeiswarzonegame()) {
-    blackboxeventname = # "wzweapons";
-    eventname = # "hash_63ec5305e1ef1335";
+    blackboxeventname = #"wzweapons";
+    eventname = #"hash_63ec5305e1ef1335";
   }
 
   event_data = {

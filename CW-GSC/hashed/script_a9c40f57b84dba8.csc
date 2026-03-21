@@ -291,9 +291,9 @@ function function_5e51d561(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_7b485a17(localclientnum) {
-  var_8120ba58 = # "hash_22d5b337ab9580cb";
-  var_ff3c5ccc = # "hash_29ba123aa4f8357d";
-  var_477800b2 = # "hash_3c97b64efcb572d9";
+  var_8120ba58 = #"hash_22d5b337ab9580cb";
+  var_ff3c5ccc = #"hash_29ba123aa4f8357d";
+  var_477800b2 = #"hash_3c97b64efcb572d9";
 
   if(isDefined(self.script_string)) {
     var_8120ba58 = var_8120ba58 + "_" + self.script_string;

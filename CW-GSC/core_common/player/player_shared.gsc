@@ -864,15 +864,15 @@ function function_803e2c82(weapon) {
   if(isPlayer(self)) {
     currentweapon = self getcurrentweapon();
 
-    if(currentweapon.type === # "melee") {
+    if(currentweapon.type === #"melee") {
       weapon = currentweapon;
     } else {
       primaryweapon = self loadout::function_18a77b37("primary");
       secondaryweapon = self loadout::function_18a77b37("secondary");
 
-      if(currentweapon === primaryweapon && secondaryweapon.type === # "melee") {
+      if(currentweapon === primaryweapon && secondaryweapon.type === #"melee") {
         weapon = secondaryweapon;
-      } else if(currentweapon === secondaryweapon && primaryweapon.type === # "melee") {
+      } else if(currentweapon === secondaryweapon && primaryweapon.type === #"melee") {
         weapon = primaryweapon;
       }
     }
@@ -909,13 +909,13 @@ function function_3d288f14() {
 
     switch (rand) {
       case 0:
-        self.var_30e2c3ec = # "none";
+        self.var_30e2c3ec = #"none";
         break;
       case 1:
-        self.var_30e2c3ec = # "game";
+        self.var_30e2c3ec = #"game";
         break;
       case 2:
-        self.var_30e2c3ec = # "system";
+        self.var_30e2c3ec = #"system";
         break;
     }
 

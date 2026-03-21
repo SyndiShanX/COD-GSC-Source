@@ -22,10 +22,10 @@ __init__() {
   clientfield::register("scriptmover", "" + # "gaia_impact", 16000, 1, "counter", &gaia_impact_fx, 0, 0);
   clientfield::register("scriptmover", "" + # "spike_explode", 16000, 1, "counter", &function_10485953, 0, 0);
   clientfield::register("scriptmover", "" + # "spike_spawn", 16000, 1, "counter", &function_3672d8a5, 0, 0);
-  level._effect[#"gaia_projectile_trail"] = # "hash_5873b3e8eed6eece";
-  level._effect[#"gaia_projectile_impact"] = # "hash_d2b136a3d2607a0";
-  level._effect[#"gaia_spikes_reveal"] = # "hash_13b6231a05889663";
-  level._effect[#"gaia_spikes_crumble"] = # "hash_224a2a7d7295284";
+  level._effect[#"gaia_projectile_trail"] = #"hash_5873b3e8eed6eece";
+  level._effect[#"gaia_projectile_impact"] = #"hash_d2b136a3d2607a0";
+  level._effect[#"gaia_spikes_reveal"] = #"hash_13b6231a05889663";
+  level._effect[#"gaia_spikes_crumble"] = #"hash_224a2a7d7295284";
 }
 
 gaia_impact_zombie_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

@@ -28,7 +28,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.select_character = ct_utils::get_roleindex(#"prt_mp_trapper");
   level.var_820c5561 = "NOMAD";
   ct_utils::function_be3a76b7(level.var_820c5561);
-  level.var_f4bbd9a8[#"fail_timeover"] = # "hash_43308bd441c5527f";
+  level.var_f4bbd9a8[#"fail_timeover"] = #"hash_43308bd441c5527f";
   ct_core::function_fa03fc55();
   clientfield::register("actor", "warlord_radar_enable", 1, 1, "int");
   level.var_4c2ecc6f = &function_29b562bd;
@@ -115,7 +115,7 @@ function_f8bfe7b4(predictedspawn) {
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(level flag::get("hardpoint_active")) {
       self thread function_5ccd53d5();
     }
@@ -140,7 +140,7 @@ function_1779a8c2(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self function_f71e7ad9();
     self thread ct_utils::function_ee4639dd(-10);
     return;
@@ -453,7 +453,7 @@ function_62e9842e(var_4d4513ee) {
       var_c03b0783 = 0;
 
       foreach(ai in a_ai) {
-        if(ai.archetype == # "warlord") {
+        if(ai.archetype == #"warlord") {
           var_c03b0783++;
         }
       }

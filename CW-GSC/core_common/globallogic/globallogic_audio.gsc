@@ -932,7 +932,7 @@ function set_music_on_player(state, wait_time, save_state, return_state = 0) {
   }
 
   if(is_true(level.var_97902f80)) {
-    if(game.state === # "playing") {
+    if(game.state === #"playing") {
       return;
     }
   }
@@ -958,7 +958,7 @@ function set_music_global(state, wait_time, save_state, return_state = 0) {
   }
 
   if(is_true(level.var_97902f80)) {
-    if(game.state === # "playing") {
+    if(game.state === #"playing") {
       return;
     }
   }
@@ -975,7 +975,7 @@ function function_c246758e(str_state, n_delay = 0) {
     return;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -990,7 +990,7 @@ function function_6fbfba95(str_state, n_delay = 0) {
     return;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 

@@ -36,7 +36,7 @@ function init() {
     level.var_3a2ad19b = array(level.var_3a2ad19b);
   }
 
-  level.var_3a2ad19b[level.var_3a2ad19b.size] = # "item_zmquest_sr_ltm_food_burger";
+  level.var_3a2ad19b[level.var_3a2ad19b.size] = #"item_zmquest_sr_ltm_food_burger";
   clientfield::register("world", "" + # "hash_112d67305f861fe", 28000, 3, "int", &function_3bab499f, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_3d5c2390c0768ed2", 28000, 1, "int", &function_dc99662d, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_79077a9af52542c8", 28000, 1, "int", &function_f0302ec9, 0, 0);
@@ -311,16 +311,16 @@ function function_b794d678(localclientnum, oldval, newval, bnewent, binitialsnap
 
   switch (bwasdemojump) {
     case 1:
-      self.var_a00ef04e = # "hash_3fbc671e9c62b033";
+      self.var_a00ef04e = #"hash_3fbc671e9c62b033";
       break;
     case 2:
-      self.var_a00ef04e = # "hash_4cc46e3d55234d37";
+      self.var_a00ef04e = #"hash_4cc46e3d55234d37";
       break;
     case 3:
-      self.var_a00ef04e = # "hash_1a7dfc20f42eedc0";
+      self.var_a00ef04e = #"hash_1a7dfc20f42eedc0";
       break;
     case 4:
-      self.var_a00ef04e = # "hash_156533bbd58d8d71";
+      self.var_a00ef04e = #"hash_156533bbd58d8d71";
       break;
   }
 

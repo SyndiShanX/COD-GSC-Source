@@ -77,7 +77,7 @@ function watch_player_drowning() {
 
   while(true) {
     waitframe(1);
-    underwater = (game.state == # "pregame" || game.state == # "playing") && self isplayerunderwater();
+    underwater = (game.state == #"pregame" || game.state == #"playing") && self isplayerunderwater();
     var_790acff6 = is_true(level.var_8e910e84) && self inlaststand() && getwaterheight(self.origin) > self.origin[2] + self getplayerviewheight();
     underwater |= var_790acff6;
 

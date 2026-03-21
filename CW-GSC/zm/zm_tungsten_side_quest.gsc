@@ -1420,7 +1420,7 @@ function function_619fdf5f() {
     level.var_3a2ad19b = array(level.var_3a2ad19b);
   }
 
-  level.var_3a2ad19b[level.var_3a2ad19b.size] = # "item_zmquest_sr_ltm_food_burger";
+  level.var_3a2ad19b[level.var_3a2ad19b.size] = #"item_zmquest_sr_ltm_food_burger";
   level flag::wait_till(#"start_zombie_round_logic");
   level.var_91f71aa[#"item_zmquest_sr_ltm_food_burger"] = &function_b087107d;
   callback::on_item_pickup(&item_pickup);
@@ -1525,16 +1525,16 @@ function function_c9658564() {
 function function_ed4a5d52(var_f0de9b92) {
   switch (var_f0de9b92) {
     case # "full_ammo":
-      mdl_powerup = # "p7_zm_power_up_max_ammo";
+      mdl_powerup = #"p7_zm_power_up_max_ammo";
       break;
     case # "insta_kill":
-      mdl_powerup = # "p7_zm_power_up_insta_kill";
+      mdl_powerup = #"p7_zm_power_up_insta_kill";
       break;
     case # "fire_sale":
-      mdl_powerup = # "p7_zm_power_up_firesale";
+      mdl_powerup = #"p7_zm_power_up_firesale";
       break;
     case # "nuke":
-      mdl_powerup = # "p7_zm_power_up_nuke";
+      mdl_powerup = #"p7_zm_power_up_nuke";
       break;
     default:
       break;
@@ -1806,9 +1806,9 @@ function function_12f0e19b(var_5a2c0004 = 0, var_5359b8ff = 0, n_spawn_count = u
     }
 
     if(var_5a2c0004) {
-      ai_type = # "spawner_bo5_mechz_sr";
+      ai_type = #"spawner_bo5_mechz_sr";
     } else if(var_5359b8ff) {
-      ai_type = # "hash_51edd7595ecda822";
+      ai_type = #"hash_51edd7595ecda822";
     } else {
       ai_type = get_ai_type();
     }
@@ -2201,21 +2201,21 @@ function function_33cf6f75(var_ca0aefec, var_fdea0c17 = undefined, var_2549cdb0 
 }
 
 function function_c690f49d(s_screen, var_6f984799 = 0) {
-  str_alias = # "hash_4af7e4baa1e9ebd5";
+  str_alias = #"hash_4af7e4baa1e9ebd5";
 
   if(!var_6f984799) {
     switch (s_screen.model) {
       case # "p9_zm_tungsten_screen_yellow":
-        str_alias = # "hash_12dc213653f3d657";
+        str_alias = #"hash_12dc213653f3d657";
         break;
       case # "p9_zm_tungsten_screen_red":
-        str_alias = # "hash_2662d7b497d59042";
+        str_alias = #"hash_2662d7b497d59042";
         break;
       case # "p9_zm_tungsten_screen_green":
-        str_alias = # "hash_60370a4ca3a8e8c2";
+        str_alias = #"hash_60370a4ca3a8e8c2";
         break;
       case # "p9_zm_tungsten_screen_blue":
-        str_alias = # "hash_adc4b5656362597";
+        str_alias = #"hash_adc4b5656362597";
         break;
     }
   }

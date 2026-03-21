@@ -252,7 +252,7 @@ function_a8b4c2a7(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     return 0;
   }
 
-  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === # "spoon" && isPlayer(eattacker)) {
+  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === #"spoon" && isPlayer(eattacker)) {
     self.var_12745932 = 1;
   }
 
@@ -381,7 +381,7 @@ function_5f950378() {
       self clientfield::set("" + # "spectral_key_charging", 0);
     }
 
-    if(s_result._notify === # "hash_1a22e1dd781f58d6") {
+    if(s_result._notify === #"hash_1a22e1dd781f58d6") {
       return;
     }
   }
@@ -652,7 +652,7 @@ function_a9521272(player, fling_vec, index) {
     return;
   }
 
-  if(self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") {
+  if(self.zm_ai_category === #"basic" || self.zm_ai_category === #"enhanced") {
     if(!(isDefined(self.gibbed) && self.gibbed) && !(isDefined(self.no_gib) && self.no_gib)) {
       self zombie_utility::gib_random_parts();
     }
@@ -701,7 +701,7 @@ zombie_knockdown(player, gib) {
     return;
   }
 
-  if(self.health < 15 && self.zm_ai_category !== # "popcorn") {
+  if(self.health < 15 && self.zm_ai_category !== #"popcorn") {
     self clientfield::set("" + # "spectral_blast_death", 1);
   }
 
@@ -720,13 +720,13 @@ function_68871817(e_attacker) {
       w_damage = undefined;
     }
 
-    if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+    if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
       self thread namespace_9ff9f642::slowdown(#"hash_119644e9a557f4e9");
       self dodamage(self.maxhealth * 0.1, e_attacker.origin, e_attacker, e_attacker, "torso_lower", "MOD_IMPACT", 0, w_damage);
       return;
     }
 
-    if(self.zm_ai_category !== # "popcorn") {
+    if(self.zm_ai_category !== #"popcorn") {
       self clientfield::set("" + # "spectral_blast_death", 1);
     }
 
@@ -787,7 +787,7 @@ function_1b33fb6d(var_155e1cdd) {
 }
 
 function_dc44932e(var_c34665fc) {
-  if(var_c34665fc == # "hash_1b7c4bada7fa6175" || var_c34665fc == "weapon_change") {
+  if(var_c34665fc == #"hash_1b7c4bada7fa6175" || var_c34665fc == "weapon_change") {
     self.var_f1b20bef = undefined;
     self.var_4154aa8f = undefined;
     self clientfield::set("" + # "spectral_key_beam_fire", 0);
@@ -932,7 +932,7 @@ function_d1a7390b(w_curr) {
 }
 
 function_81947c70() {
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     var_f71f411b = 10;
   } else if(level.round_number < 16) {
     var_4e32983f = 1.3 / 16;
@@ -1001,7 +1001,7 @@ function_35d74d73(e_attacker) {
     self clientfield::set("" + # "zombie_spectral_key_stun", var_21c1ba1 + 1);
     e_attacker clientfield::set("" + # "spectral_key_beam_flash", 2);
 
-    if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+    if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
       bhtnactionstartevent(self, "electrocute");
     }
   }
@@ -1225,7 +1225,7 @@ function_9693e041(player) {
       return;
     }
 
-    self.hint_string = # "hash_53fd856df9288be7";
+    self.hint_string = #"hash_53fd856df9288be7";
     self.cost = undefined;
     return 1;
   }
@@ -1316,7 +1316,7 @@ function_e5ca1c8d() {
   self endon(#"death");
   s_result = self waittilltimeout(5, #"hash_77d44943fb143b18");
 
-  if(s_result._notify == # "hash_77d44943fb143b18" && function_98890cd8(s_result.weapon)) {
+  if(s_result._notify == #"hash_77d44943fb143b18" && function_98890cd8(s_result.weapon)) {
     self thread function_804309c();
   }
 }

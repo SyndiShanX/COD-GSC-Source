@@ -177,17 +177,17 @@ function initplayer() {
   }
 
   self.doa.var_48021422 = gettime();
-  self.doa.var_bcfd90a5 = # "hash_7eb2e5e9d5a52fbe";
+  self.doa.var_bcfd90a5 = #"hash_7eb2e5e9d5a52fbe";
 
   if(is_true(level.doa.hardcoremode)) {
-    self.doa.var_bcfd90a5 = # "hash_b3fc7f8a3625bd8";
+    self.doa.var_bcfd90a5 = #"hash_b3fc7f8a3625bd8";
   }
 
   if(is_true(level.doa.var_318aa67a)) {
     if(is_true(level.doa.hardcoremode)) {
-      self.doa.var_bcfd90a5 = # "hash_73a979a5dfcc9239";
+      self.doa.var_bcfd90a5 = #"hash_73a979a5dfcc9239";
     } else {
-      self.doa.var_bcfd90a5 = # "hash_4c137caaf669154f";
+      self.doa.var_bcfd90a5 = #"hash_4c137caaf669154f";
     }
   }
 
@@ -803,7 +803,7 @@ function commitstats(gameover) {
   self persistence::set_recent_stat(0, 0, #"damage", int(self.pers[#"damagedone"] / 10));
 
   if(!isDefined(self.pers[#"outcome"])) {
-    self.pers[#"outcome"] = # "loss";
+    self.pers[#"outcome"] = #"loss";
   }
 
   self persistence::set_recent_stat(0, 0, #"outcome", self.pers[#"outcome"]);

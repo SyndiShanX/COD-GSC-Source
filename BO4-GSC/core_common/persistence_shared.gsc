@@ -254,26 +254,26 @@ challenge_complete(eventstruct) {
   var_c4e9517b = tablenumber + 1;
 
   if(currentsessionmode() == 0) {
-    tablename = # "gamedata/stats/zm/statsmilestones" + var_c4e9517b + ".csv";
+    tablename = #"gamedata/stats/zm/statsmilestones" + var_c4e9517b + ".csv";
 
     if(var_c4e9517b == 2) {
       var_a05af556 = tablelookupcolumnforrow(tablename, row, 9);
 
-      if(var_a05af556 === # "") {
+      if(var_a05af556 === #"") {
         return;
       } else if(getdvarint(#"hash_730fab929626f598", 0) == 0) {
-        if(var_a05af556 === # "camo_gold" || var_a05af556 === # "camo_diamond" || var_a05af556 === # "camo_darkmatter") {
+        if(var_a05af556 === #"camo_gold" || var_a05af556 === #"camo_diamond" || var_a05af556 === #"camo_darkmatter") {
           return;
         }
       }
     }
   } else {
-    tablename = # "gamedata/stats/mp/statsmilestones" + var_c4e9517b + ".csv";
+    tablename = #"gamedata/stats/mp/statsmilestones" + var_c4e9517b + ".csv";
   }
 
   var_eb67c133 = tablelookupcolumnforrow(tablename, row, 5);
 
-  if(var_eb67c133 === # "hash_4a80d584aac2e7d0") {
+  if(var_eb67c133 === #"hash_4a80d584aac2e7d0") {
     return;
   }
 

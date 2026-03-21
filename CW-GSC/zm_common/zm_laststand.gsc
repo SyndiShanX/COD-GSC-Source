@@ -1989,7 +1989,7 @@ function on_item_pickup(s_params) {
   item = s_params.item;
   itementry = item.itementry;
 
-  if(itementry.name === # "self_revive_sr_item") {
+  if(itementry.name === #"self_revive_sr_item") {
     if(self function_618fd37e() < 1) {
       self function_3a00302e(1);
     }

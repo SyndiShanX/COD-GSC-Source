@@ -25,16 +25,16 @@ __init__() {
   clientfield::register("actor", "spinning_trap_eye_fx", 1, 1, "int", &spinning_trap_eye_fx, 0, 0);
   clientfield::register("toplayer", "rumble_spinning_trap", 1, 1, "int", &rumble_spinning_trap, 0, 0);
   clientfield::register("toplayer", "player_acid_trap_post_fx", 1, 1, "int", &player_acid_trap_post_fx, 0, 0);
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"fan_blood"] = # "hash_45d61db7f0d94744";
-  level._effect[#"fan_blood_head"] = # "hash_21e59a64eb02516a";
-  level._effect[#"acid_spray"] = # "hash_3a65c86ea64668f5";
-  level._effect[#"acid_spray_death"] = # "hash_78c487ac760f594c";
-  level._effect[#"hash_294b19c300d1b482"] = # "hash_45008cc138e3bba3";
-  level._effect[#"hash_4391e5c4b43c63c9"] = # "hash_215c779c48fd6856";
-  level._effect[#"hash_5647f8e593893bce"] = # "hash_4d61168f93739083";
-  level._effect[#"zombie_eye_trail"] = # "hash_526060b70ce93d7e";
-  level._effect[#"spinning_blood"] = # "hash_358533e8293f131d";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"fan_blood"] = #"hash_45d61db7f0d94744";
+  level._effect[#"fan_blood_head"] = #"hash_21e59a64eb02516a";
+  level._effect[#"acid_spray"] = #"hash_3a65c86ea64668f5";
+  level._effect[#"acid_spray_death"] = #"hash_78c487ac760f594c";
+  level._effect[#"hash_294b19c300d1b482"] = #"hash_45008cc138e3bba3";
+  level._effect[#"hash_4391e5c4b43c63c9"] = #"hash_215c779c48fd6856";
+  level._effect[#"hash_5647f8e593893bce"] = #"hash_4d61168f93739083";
+  level._effect[#"zombie_eye_trail"] = #"hash_526060b70ce93d7e";
+  level._effect[#"spinning_blood"] = #"hash_358533e8293f131d";
 }
 
 fan_trap_blood_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -205,7 +205,7 @@ spinning_trap_blood_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   if(newval == 1) {
     var_1f694afe = "j_spinelower";
 
-    if(self.archetype == # "zombie_dog") {
+    if(self.archetype == #"zombie_dog") {
       var_1f694afe = "j_spine1";
     }
 

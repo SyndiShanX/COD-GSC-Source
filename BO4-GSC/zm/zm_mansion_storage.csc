@@ -26,10 +26,10 @@ init() {
   clientfield::register("world", "" + # "hash_2c115514da4cee51", 17000, 1, "int", &function_2dbadedf, 0, 0);
   clientfield::register("scriptmover", "" + # "barrel_drip", 8000, 1, "counter", &function_3e37bb63, 0, 0);
   clientfield::register("scriptmover", "" + # "barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
-  level._effect[#"barrel_drip"] = # "hash_657c3b5d3d9bfdfa";
-  level._effect[#"barrel_splash"] = # "hash_42bcb312df258591";
-  level._effect[#"hash_6a63e8eb86cc88e2"] = # "hash_5934158bcfb9c884";
-  level._effect[#"hash_345c6b60fb9b8682"] = # "hash_782ae54493a94c4a";
+  level._effect[#"barrel_drip"] = #"hash_657c3b5d3d9bfdfa";
+  level._effect[#"barrel_splash"] = #"hash_42bcb312df258591";
+  level._effect[#"hash_6a63e8eb86cc88e2"] = #"hash_5934158bcfb9c884";
+  level._effect[#"hash_345c6b60fb9b8682"] = #"hash_782ae54493a94c4a";
 }
 
 function_438d8674(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

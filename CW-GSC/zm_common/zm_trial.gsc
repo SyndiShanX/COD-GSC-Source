@@ -221,7 +221,7 @@ function fail(reason = undefined, var_eeb30248 = undefined) {
   }
 
   if(!isDefined(reason)) {
-    reason = # "hash_3d9d6e119fdd76ae";
+    reason = #"hash_3d9d6e119fdd76ae";
   }
 
   zm_trial_util::set_game_state(1);
@@ -519,7 +519,7 @@ function private function_4dbf2663() {
         for(i = 0; i < 8; i++) {
           param = tablelookupcolumnforrow(table, row, 6 + i);
 
-          if(isDefined(param) && param != # "") {
+          if(isDefined(param) && param != #"") {
             var_10a28798[var_10a28798.size] = param;
           }
         }

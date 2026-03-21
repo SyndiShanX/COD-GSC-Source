@@ -88,7 +88,7 @@ fire_for_time(totalfiretime, turretidx, target, intervalscale = 1) {
   self endon("fire_stop" + turretidx);
   weapon = self seatgetweapon(turretidx);
 
-  if(!isDefined(weapon) || weapon.name == # "none" || weapon.firetime <= 0) {
+  if(!isDefined(weapon) || weapon.name == #"none" || weapon.firetime <= 0) {
     println("<dev string:x38>" + turretidx + "<dev string:x5f>" + self getentnum() + "<dev string:x6e>" + self.model);
     return;
   }
@@ -107,7 +107,7 @@ fire_for_rounds(firecount, turretidx, target) {
 
   weapon = self seatgetweapon(turretidx);
 
-  if(!isDefined(weapon) || weapon.name == # "none" || weapon.firetime <= 0) {
+  if(!isDefined(weapon) || weapon.name == #"none" || weapon.firetime <= 0) {
     println("<dev string:x38>" + turretidx + "<dev string:x5f>" + self getentnum() + "<dev string:x6e>" + self.model);
     return;
   }

@@ -88,7 +88,7 @@ function get_contract_stat(slot, stat_name) {
 function function_d17bcd3c(slot) {
   player = self;
   var_5ceb23d0 = spawnStruct();
-  var_5ceb23d0.var_38280f2f = # "hash_6a1133003efe7380";
+  var_5ceb23d0.var_38280f2f = #"hash_6a1133003efe7380";
   var_5ceb23d0.var_59cb904f = 0;
   var_5ceb23d0.var_c3e2bb05 = 0;
   var_38280f2f = player stats::function_ff8f4f17(#"loot_contracts", slot, #"contracthash");
@@ -97,7 +97,7 @@ function function_d17bcd3c(slot) {
     var_38280f2f = hash(var_38280f2f);
   }
 
-  if(var_38280f2f != # "") {
+  if(var_38280f2f != #"") {
     var_5ceb23d0.var_38280f2f = var_38280f2f;
     var_5ceb23d0.target_value = player stats::function_ff8f4f17(#"loot_contracts", slot, #"target");
     var_5ceb23d0.var_59cb904f = player stats::function_ff8f4f17(#"loot_contracts", slot, #"progress");
@@ -116,7 +116,7 @@ function function_de4ff5a(slot) {
     var_38280f2f = hash(var_38280f2f);
   }
 
-  if(var_38280f2f != # "") {
+  if(var_38280f2f != #"") {
     level.contract_ids[var_38280f2f] = player stats::function_ff8f4f17(#"loot_contracts", slot, #"contractid");
   }
 }
@@ -155,7 +155,7 @@ function setup_player_contracts(max_contract_slots, var_1b3f5772) {
 
     var_38280f2f = var_5ceb23d0.var_38280f2f;
 
-    if(var_38280f2f == # "hash_6a1133003efe7380") {
+    if(var_38280f2f == #"hash_6a1133003efe7380") {
       continue;
     }
 
@@ -200,7 +200,7 @@ function function_5e1c4d33(var_5ceb23d0) {
 
   var_38280f2f = var_5ceb23d0.var_38280f2f;
 
-  if(var_38280f2f == # "hash_6a1133003efe7380") {
+  if(var_38280f2f == #"hash_6a1133003efe7380") {
     player.pers[#"contracts"][var_38280f2f] = undefined;
     return;
   }
@@ -445,10 +445,10 @@ function function_78083139() {
 function function_d8c98325(var_38280f2f, delta, flags, var_4b67585c, var_2de8a050) {
   player = self;
 
-  if(var_38280f2f != # "") {
+  if(var_38280f2f != #"") {
     var_ba4b2f4 = function_83edb851(var_38280f2f, #"contract");
 
-    if(var_ba4b2f4 != # "") {
+    if(var_ba4b2f4 != #"") {
       player function_cce105c8(var_ba4b2f4, 1, delta, 2, flags, 3, var_4b67585c, 4, var_2de8a050);
     }
   }

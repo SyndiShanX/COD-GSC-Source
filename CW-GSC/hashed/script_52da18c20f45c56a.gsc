@@ -825,7 +825,7 @@ function function_b0190b65(action) {
   self.takedown.var_84ade654 = 1;
   curweap = self getcurrentweapon();
 
-  if(isDefined(curweap) && curweap.name !== # "none") {
+  if(isDefined(curweap) && curweap.name !== #"none") {
     self.last_weapon = curweap;
   }
 
@@ -1080,7 +1080,7 @@ function function_a06867b0(weapon) {
     return true;
   }
 
-  if(weapon.name == # "launcher_freefire_t9" || weapon.name == # "hash_1e25706a023b5e09" || weapon.name == # "launcher_freefire_t9_upgraded") {
+  if(weapon.name == #"launcher_freefire_t9" || weapon.name == #"hash_1e25706a023b5e09" || weapon.name == #"launcher_freefire_t9_upgraded") {
     return true;
   }
 

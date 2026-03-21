@@ -65,7 +65,7 @@ function private function_6ef31de9(s_instance) {
 }
 
 function function_b3a6e0bc(eventstruct) {
-  if(isDefined(self.ai_hulk) && self.ai_hulk.current_state.name !== # "chase" && isDefined(level.var_fdcaf3a6) && distance2dsquared(self.ai_hulk.origin, level.var_fdcaf3a6.origin) < sqr(6000)) {
+  if(isDefined(self.ai_hulk) && self.ai_hulk.current_state.name !== #"chase" && isDefined(level.var_fdcaf3a6) && distance2dsquared(self.ai_hulk.origin, level.var_fdcaf3a6.origin) < sqr(6000)) {
     self.ai_hulk.var_98f1f37c = 1;
     self.ai_hulk.allowdeath = 1;
     self.ai_hulk callback::callback(#"hash_10ab46b52df7967a");
@@ -88,7 +88,7 @@ function function_43cf284() {
   self callback::function_d8abfc3d(#"on_ai_damage", &function_558990e3);
   level flag::wait_till("objective_locked");
 
-  if(level.contentmanager.activeobjective.content_script_name === # "holdout") {
+  if(level.contentmanager.activeobjective.content_script_name === #"holdout") {
     level waittill(#"survival_holdout_dest");
     self function_8bed563f();
     self val::set(#"hash_6b8a1b0c7fbf3df1", "ignoreall", 1);
@@ -106,7 +106,7 @@ function function_43cf284() {
 }
 
 function function_a1b85021() {
-  if(self.current_state.name === # "chase") {
+  if(self.current_state.name === #"chase") {
     self thread function_cfa54bac();
   }
 }
@@ -199,7 +199,7 @@ function function_4990efc9() {
   self endon(#"damage", #"death", #"hash_5dbe35d2a8f175a5");
   wait 10;
 
-  while(self.current_state.name === # "chase") {
+  while(self.current_state.name === #"chase") {
     wait 1;
   }
 

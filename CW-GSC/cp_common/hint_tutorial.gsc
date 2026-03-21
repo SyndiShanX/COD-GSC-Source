@@ -20,7 +20,7 @@ function private preinit() {
   clientfield::register("toplayer", "hint_pause_state", 1, 1, "int");
 }
 
-function function_4c2d4fc4(message, title = # "", var_9696a2d = 0, var_db331a85 = # "", type = 0, var_c18a5a8b, var_9763e3fa, var_ad825676 = 1, var_572eedec) {
+function function_4c2d4fc4(message, title = #"", var_9696a2d = 0, var_db331a85 = #"", type = 0, var_c18a5a8b, var_9763e3fa, var_ad825676 = 1, var_572eedec) {
   self notify("401d877bc28daf47");
   self endon("401d877bc28daf47");
   player = self;
@@ -37,12 +37,12 @@ function function_4c2d4fc4(message, title = # "", var_9696a2d = 0, var_db331a85 
   }
 
   if(!namespace_61e6d095::exists(#"hint_tutorial")) {
-    var_48bf6e66 = # "hash_775d3d8906586398";
+    var_48bf6e66 = #"hash_775d3d8906586398";
 
     if(type == 2) {
-      var_48bf6e66 = # "hash_30386b6ca189daa3";
+      var_48bf6e66 = #"hash_30386b6ca189daa3";
     } else if(type > 2) {
-      var_48bf6e66 = # "hash_77649627c20d31b1";
+      var_48bf6e66 = #"hash_77649627c20d31b1";
     }
 
     if(var_ad825676) {
@@ -78,7 +78,7 @@ function function_4c2d4fc4(message, title = # "", var_9696a2d = 0, var_db331a85 
   }
 }
 
-function function_f0104b5(var_572eedec, var_86f04d40 = # "", var_71902fbb, var_cb93cf14) {
+function function_f0104b5(var_572eedec, var_86f04d40 = #"", var_71902fbb, var_cb93cf14) {
   if(!isDefined(var_572eedec)) {
     var_572eedec = [];
   } else if(!isarray(var_572eedec)) {
@@ -155,7 +155,7 @@ function function_df08d48(var_72b185dd = 0) {
   }
 }
 
-function pause(var_1d470cc4 = # "ui_cancel", var_63d0d48f = # "hash_3f87d00d07eb799e", var_29fa9286 = 2, var_f191bdbc, var_37e3f2b0, var_415dea5d = 1) {
+function pause(var_1d470cc4 = #"ui_cancel", var_63d0d48f = #"hash_3f87d00d07eb799e", var_29fa9286 = 2, var_f191bdbc, var_37e3f2b0, var_415dea5d = 1) {
   level prompts::function_86eedc();
 
   if(is_true(level.gameended) || is_true(level.missionfailed) || level flag::get("restart_checkpoint") || level flag::get("restart_mission")) {
@@ -235,7 +235,7 @@ function function_9f427d88(var_67df10fb = 1, var_f191bdbc) {
     namespace_61e6d095::function_9ade1d9b(#"hint_tutorial", "delayAndFadeTime", var_67df10fb);
   }
 
-  if(var_67df10fb > 0 && reason._notify === # "timeout") {
+  if(var_67df10fb > 0 && reason._notify === #"timeout") {
     wait 2;
   }
 

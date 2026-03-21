@@ -1322,12 +1322,12 @@ function function_852146cc(b_skipped) {
   level flag::clear(#"hash_2aecb7319e5a0d11");
   level notify(#"hash_6f1392a5c4774e60");
   level.var_c29bf3b6 = "none";
-  level.var_139ceb46 = # "hash_6084efb2631b6331";
-  level.var_6363395e = # "none";
-  level.var_f1a8b5e6 = # "none";
-  level.var_6ceeb30a = # "none";
-  level.var_f9d84559 = # "none";
-  level.var_7c027cbe = # "none";
+  level.var_139ceb46 = #"hash_6084efb2631b6331";
+  level.var_6363395e = #"none";
+  level.var_f1a8b5e6 = #"none";
+  level.var_6ceeb30a = #"none";
+  level.var_f9d84559 = #"none";
+  level.var_7c027cbe = #"none";
   level.var_29a33c08 = 1;
   level.var_aaf7505f = 90;
   level.contentmanager.var_14f09b99 = &function_14f09b99;
@@ -1348,9 +1348,9 @@ function function_14f09b99(s_result) {
   self endon(#"end_game");
 
   if(is_true(s_result.completed)) {
-    str_reason = # "exfil_success";
+    str_reason = #"exfil_success";
   } else {
-    str_reason = # "exfil_fail";
+    str_reason = #"exfil_fail";
   }
 
   waitframe(1);
@@ -1624,7 +1624,7 @@ function function_2a8262fa() {
 
     foreach(actor in var_743a066e) {
       if(isalive(actor) && distancesquared(actor.origin, var_a2e870fa.origin) <= 1600 && isDefined(actor.subarchetype)) {
-        if(actor.subarchetype == # "hash_70162f4bc795092") {
+        if(actor.subarchetype == #"hash_70162f4bc795092") {
           if(!is_true(actor.ai.var_b90dccd6) && !is_true(actor.var_8576e0be)) {
             actor.ai.var_b90dccd6 = 1;
             actor.takedamage = 0;
@@ -1653,7 +1653,7 @@ function function_2a8262fa() {
           }
         }
 
-        if(actor.subarchetype == # "hash_5653bbc44a034094") {
+        if(actor.subarchetype == #"hash_5653bbc44a034094") {
           if(!is_true(actor.ai.var_b90dccd6) && !is_true(actor.var_8576e0be)) {
             actor.ai.var_b90dccd6 = 1;
             actor.takedamage = 0;
@@ -2415,7 +2415,7 @@ function function_31125f54(var_8bb7479c) {
     }
 
     foreach(player in getplayers()) {
-      player.pers[#"outcome"] = # "win";
+      player.pers[#"outcome"] = #"win";
     }
 
     level thread namespace_591b4396::function_a7394b94(1);
@@ -2565,7 +2565,7 @@ function private function_b6a1fe09() {
   var_3fa8bde0 = [];
 
   foreach(steiner in steiners) {
-    if(isalive(steiner) && steiner.team == # "allies") {
+    if(isalive(steiner) && steiner.team == #"allies") {
       if(!isDefined(var_3fa8bde0)) {
         var_3fa8bde0 = [];
       } else if(!isarray(var_3fa8bde0)) {
@@ -2702,13 +2702,13 @@ function function_5cf1fe48(var_9f23569a, var_201095d5, var_a3d1dedb, var_5cd38a5
 
   switch (var_9f23569a) {
     case 1:
-      var_790823ce = # "hash_3a617ab5e651c2a9";
+      var_790823ce = #"hash_3a617ab5e651c2a9";
       break;
     case 2:
-      var_790823ce = # "hash_4a49aa778b3cdd8";
+      var_790823ce = #"hash_4a49aa778b3cdd8";
       break;
     case 3:
-      var_790823ce = # "hash_1aab687832f4e02b";
+      var_790823ce = #"hash_1aab687832f4e02b";
       break;
   }
 
@@ -3270,34 +3270,34 @@ function function_34a1157d(var_3b3f5ecb, var_7965c97b, str_zone_name, var_712035
 function function_8b256066(str_scene) {
   switch (str_scene) {
     case # "done_echo_scene_vogel_01":
-      stat_name = # "hash_7c24f6ffd4fe3ad5";
+      stat_name = #"hash_7c24f6ffd4fe3ad5";
       break;
     case # "done_echo_scene_vogel_02":
-      stat_name = # "hash_629e6a7ec564645a";
+      stat_name = #"hash_629e6a7ec564645a";
       break;
     case # "done_echo_scene_vogel_03":
-      stat_name = # "hash_104a0f324ff449a3";
+      stat_name = #"hash_104a0f324ff449a3";
       break;
     case # "done_echo_scene_thiefsoldier":
-      stat_name = # "hash_1639debe5cf290cb";
+      stat_name = #"hash_1639debe5cf290cb";
       break;
     case # "hash_32065ff0cf2dbf89":
-      stat_name = # "hash_8a6100b519878ac";
+      stat_name = #"hash_8a6100b519878ac";
       break;
     case # "done_echo_scene_kurtzandvogel":
-      stat_name = # "hash_55279bc6926c7ea4";
+      stat_name = #"hash_55279bc6926c7ea4";
       break;
     case # "done_echo_scene_lastsoldier":
-      stat_name = # "hash_2b58c53a46eb853";
+      stat_name = #"hash_2b58c53a46eb853";
       break;
     case # "done_echo_scene_dmitriyev_kalashnik_01_throw":
-      stat_name = # "hash_362b361c9c686ebf";
+      stat_name = #"hash_362b361c9c686ebf";
       break;
     case # "done_echo_scene_orlovandmedved":
-      stat_name = # "hash_3d79550a031d56bf";
+      stat_name = #"hash_3d79550a031d56bf";
       break;
     case # "done_echo_scene_valentinaandpeck":
-      stat_name = # "hash_2be6eda2d188e1fa";
+      stat_name = #"hash_2be6eda2d188e1fa";
       break;
     default:
       return;
@@ -3684,7 +3684,7 @@ function function_17468758(params) {
     level thread function_74e188b0(n_interval, level.var_3738589);
   }
 
-  if(self.team == level.zombie_team && self.aitype == # "hash_acac3fe7a341329" && level flag::get(#"hash_322c7f92525e008e")) {
+  if(self.team == level.zombie_team && self.aitype == #"hash_acac3fe7a341329" && level flag::get(#"hash_322c7f92525e008e")) {
     if(!level flag::get(#"hash_3a617ab5e651c2a9")) {
       level thread function_5a6268b8(15, level.var_cc18747e, #"hash_3a617ab5e651c2a9");
       return;

@@ -66,11 +66,11 @@ function private bb_getcoverflankability() {
       return "flankable";
     }
 
-    if(covernode.type == # "cover pillar") {
+    if(covernode.type == #"cover pillar") {
       return (covermode == "cover_blind");
-    } else if(covernode.type == # "cover left" || covernode.type == # "cover right") {
+    } else if(covernode.type == #"cover left" || covernode.type == #"cover right") {
       return (covermode == "cover_blind" || covermode == "cover_over");
-    } else if(covernode.type == # "cover stand" || covernode.type == # "conceal stand" || covernode.type == # "cover crouch" || covernode.type == # "cover crouch window" || covernode.type == # "conceal crouch") {
+    } else if(covernode.type == #"cover stand" || covernode.type == #"conceal stand" || covernode.type == #"cover crouch" || covernode.type == #"cover crouch window" || covernode.type == #"conceal crouch") {
       return "flankable";
     }
   }

@@ -123,7 +123,7 @@ function private function_b75dd595(entity) {
     return false;
   }
 
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 
@@ -352,7 +352,7 @@ function private function_b5047448(entity) {
 }
 
 function private function_e9819a23(entity) {
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 

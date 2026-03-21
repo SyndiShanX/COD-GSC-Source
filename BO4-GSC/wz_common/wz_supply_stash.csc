@@ -43,7 +43,7 @@ function_53d906fd(localclientnum) {
 
     foreach(stash in level.item_spawn_stashes) {
       if(function_8a8a409b(stash)) {
-        if(stash.var_aa9f8f87 === # "supply_stash_parent_dlc1" || stash.var_aa9f8f87 === # "supply_stash_parent") {
+        if(stash.var_aa9f8f87 === #"supply_stash_parent_dlc1" || stash.var_aa9f8f87 === #"supply_stash_parent") {
           stash update_fx(localclientnum, playfx, function_ffdbe8c2(stash));
         }
       }

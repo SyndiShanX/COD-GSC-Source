@@ -506,8 +506,8 @@ function function_edef7e4c() {
 
 function function_31306fa8() {
   level.adler waittill(#"model_swap");
-  old_model = # "c_t9_usa_hero_adler_undercover_berlin_pistol_body1";
-  new_model = # "c_t9_usa_hero_adler_undercover_berlin_body1";
+  old_model = #"c_t9_usa_hero_adler_undercover_berlin_pistol_body1";
+  new_model = #"c_t9_usa_hero_adler_undercover_berlin_body1";
   level.adler detach(old_model);
   level.adler attach(new_model);
 

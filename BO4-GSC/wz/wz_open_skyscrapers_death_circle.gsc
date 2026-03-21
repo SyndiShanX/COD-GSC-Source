@@ -61,7 +61,7 @@ function_6f6f5189() {
     if(isDefined(getgametypesetting(#"hash_6eb44149a8ac6dd1")) ? getgametypesetting(#"hash_6eb44149a8ac6dd1") : 0) {
       level thread namespace_3d2704b3::start_vehicle(array(#"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan"), array(2, 2, 2, 2, 2), 10, array(40, 30, 15));
     }
-  } else if(util::get_game_type() == # "warzone_bigteam_quad" || util::get_game_type() == # "warzone_bigteam_dbno_quad") {
+  } else if(util::get_game_type() == #"warzone_bigteam_quad" || util::get_game_type() == #"warzone_bigteam_dbno_quad") {
     level thread namespace_3d2704b3::start(array(2, 2, 2, 2), 20, array(45, 20, 20));
   } else {
     level thread namespace_3d2704b3::start(4, 20, array(60, 45, 20));
@@ -77,7 +77,7 @@ function_731497bb() {
   i = 0;
 
   if(isDefined(getgametypesetting(#"hash_2e8be75aaeb34d13")) ? getgametypesetting(#"hash_2e8be75aaeb34d13") : 0) {
-    level.var_6f535d7f[i] = # "open_areas";
+    level.var_6f535d7f[i] = #"open_areas";
     i += 1;
   }
 

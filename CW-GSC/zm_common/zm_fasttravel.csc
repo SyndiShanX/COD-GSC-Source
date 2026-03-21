@@ -36,13 +36,13 @@ function init_clientfields() {
 }
 
 function init_fx() {
-  level._effect[#"fasttravel_start"] = # "hash_2f54a4439f3a1dbf";
-  level._effect[#"fasttravel_end"] = # "hash_4ab05aa1282b9bb7";
-  level._effect[#"fasttravel_rail_1p"] = # "hash_259bb7806d596ed3";
-  level._effect[#"fasttravel_break_1p"] = # "hash_37257517a8fd29e";
-  level._effect[#"fasttravel_rail_3p"] = # "hash_72a1af7c420b4134";
-  level._effect[#"fasttravel_break_3p"] = # "hash_13715b19c0c0e890";
-  level._effect[#"fasttravel_rail_travel"] = # "hash_3659a06ed75f940a";
+  level._effect[#"fasttravel_start"] = #"hash_2f54a4439f3a1dbf";
+  level._effect[#"fasttravel_end"] = #"hash_4ab05aa1282b9bb7";
+  level._effect[#"fasttravel_rail_1p"] = #"hash_259bb7806d596ed3";
+  level._effect[#"fasttravel_break_1p"] = #"hash_37257517a8fd29e";
+  level._effect[#"fasttravel_rail_3p"] = #"hash_72a1af7c420b4134";
+  level._effect[#"fasttravel_break_3p"] = #"hash_13715b19c0c0e890";
+  level._effect[#"fasttravel_rail_travel"] = #"hash_3659a06ed75f940a";
 }
 
 function fasttravel_exploder(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -99,7 +99,7 @@ function player_chaos_light_rail_fx(localclientnum, oldval, newval, bnewent, bin
 function wormhole_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
   str_fx = "zombie/fx9_aether_tear_portal_tunnel_1p";
-  var_1aae8a96 = # "hash_10ea00ff34841c0b";
+  var_1aae8a96 = #"hash_10ea00ff34841c0b";
 
   if(bwastimejump === 2) {
     str_fx = var_1aae8a96;

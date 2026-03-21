@@ -204,14 +204,14 @@ function private function_c7bd0aa8(point, startpoint) {
 
 function_13339b58(istank) {
   self endon(#"death");
-  open_anim = # "hash_4f2b2f1b4df13119";
-  idle_anim = # "hash_39265b4ed372175a";
-  var_e1c31bea = # "hash_32ad963f25f115d2";
+  open_anim = #"hash_4f2b2f1b4df13119";
+  idle_anim = #"hash_39265b4ed372175a";
+  var_e1c31bea = #"hash_32ad963f25f115d2";
 
   if(isDefined(istank) && istank) {
-    open_anim = # "hash_77322c90462ba8c";
-    idle_anim = # "hash_780b50c0a9393f1d";
-    var_e1c31bea = # "hash_ac2d4936b932903";
+    open_anim = #"hash_77322c90462ba8c";
+    idle_anim = #"hash_780b50c0a9393f1d";
+    var_e1c31bea = #"hash_ac2d4936b932903";
   }
 
   self animscripted("parachute_open", self.origin, self.angles, open_anim, "normal", "root", 1, 0);
@@ -236,7 +236,7 @@ function_71c31c8d() {
   self.pop_parachute = 1;
 }
 
-function_500a6615(itemspawnlist = # "supply_drop_stash_parent_dlc1") {
+function_500a6615(itemspawnlist = #"supply_drop_stash_parent_dlc1") {
   if(isDefined(self.supplydrop)) {
     supplydrop = self.supplydrop;
     self.supplydrop = undefined;

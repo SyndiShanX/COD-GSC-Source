@@ -641,7 +641,7 @@ function onplayerkilled(params) {
   eattacker = params.eattacker;
   einflictor = params.einflictor;
 
-  if(weapon.name == # "land_mine" && eattacker util::isenemyplayer(self)) {
+  if(weapon.name == #"land_mine" && eattacker util::isenemyplayer(self)) {
     if(self isinvehicle()) {
       if(!isDefined(einflictor.var_3c0a7eef)) {
         einflictor.var_3c0a7eef = [];

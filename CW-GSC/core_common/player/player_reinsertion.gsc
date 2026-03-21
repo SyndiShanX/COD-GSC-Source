@@ -555,7 +555,7 @@ function function_4012c0ab(params) {
 }
 
 function function_c14f7557() {
-  if(game.state != # "pregame" && game.state != # "playing") {
+  if(game.state != #"pregame" && game.state != #"playing") {
     return 0;
   }
 

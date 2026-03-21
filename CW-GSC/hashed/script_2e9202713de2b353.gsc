@@ -248,7 +248,7 @@ function function_e71841a() {
     var_5e62902b.origin = var_f6198c5b.origin;
     var_5e62902b.type = args[0];
 
-    if(var_5e62902b.type == # "room_warp") {
+    if(var_5e62902b.type == #"room_warp") {
       assert(args.size >= 4, "<dev string:x38>");
       width = int(args[1]);
       length = int(args[2]);

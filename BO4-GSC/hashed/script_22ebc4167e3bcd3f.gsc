@@ -113,23 +113,23 @@ function_3fcb1e5e() {
     switch (var_18b64c03.script_string) {
       case # "nixie_tube_trigger_1":
         var_18b64c03.var_825e7054 = var_8171dd3a;
-        var_18b64c03.str_hint_string = # "";
+        var_18b64c03.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_01";
-        var_49d93843 = # "hash_30683ab79a855d68";
+        var_49d93843 = #"hash_30683ab79a855d68";
         str_clientfield_name = "p_w_o_num_01";
         break;
       case # "nixie_tube_trigger_2":
         var_18b64c03.var_825e7054 = var_8dfff656;
-        var_18b64c03.str_hint_string = # "";
+        var_18b64c03.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_02";
-        var_49d93843 = # "hash_30683db79a856281";
+        var_49d93843 = #"hash_30683db79a856281";
         str_clientfield_name = "p_w_o_num_02";
         break;
       case # "nixie_tube_trigger_3":
         var_18b64c03.var_825e7054 = var_44e1e41b;
-        var_18b64c03.str_hint_string = # "";
+        var_18b64c03.str_hint_string = #"";
         var_f6cdf98c = "n_c_w_p_03";
-        var_49d93843 = # "hash_30683cb79a8560ce";
+        var_49d93843 = #"hash_30683cb79a8560ce";
         str_clientfield_name = "p_w_o_num_03";
         break;
     }
@@ -320,7 +320,7 @@ function_32fbad12(a_ents) {
   level.var_965869c9 hidepart("jnt_skeleton", "p8_fxanim_zm_esc_crane_mod", 1);
 
   if(isDefined(level.var_a29d2d8) && level.var_a29d2d8 hasweapon(getweapon(#"tomahawk_t8_upgraded")) && level.var_a29d2d8 flag::get(#"hash_d41f651bb868608") && !level.var_a29d2d8 flag::get(#"hash_465b23ced2029d95")) {
-    var_d147b93a = # "p8_zm_esc_rock_small_blue";
+    var_d147b93a = #"p8_zm_esc_rock_small_blue";
     var_3f2fddcb = 1.2;
     v_origin = var_965869c9 gettagorigin("tag_net_3") + (-15, -10, -15);
     v_angles = (324, 135, 72);
@@ -350,12 +350,12 @@ function_32fbad12(a_ents) {
       }
     } else if(n_chance >= 4 && n_chance < 20 || isDefined(level.var_18d2e3aa) && level.var_18d2e3aa) {
       level.var_18d2e3aa = undefined;
-      var_d147b93a = # "p8_zm_vending_three_gun_sign";
+      var_d147b93a = #"p8_zm_vending_three_gun_sign";
       v_origin = var_965869c9 gettagorigin("tag_net_3") + (-15, -10, -13);
       v_angles = (324, 135, 72);
     } else if(n_chance >= 70 || isDefined(level.var_64f95ac4) && level.var_64f95ac4) {
       level.var_64f95ac4 = undefined;
-      var_d147b93a = # "p7_tire_rubber_worn_wet";
+      var_d147b93a = #"p7_tire_rubber_worn_wet";
 
       if(level flag::get(#"hash_dd62a8822ea4a38")) {
         v_origin = var_965869c9 gettagorigin("tag_net_3") + (10, 0, -10);
@@ -396,7 +396,7 @@ function_4afd150e(a_ents) {
   var_965869c9 = a_ents[#"crane"];
 
   if(var_ef78f209 < 34) {
-    var_d147b93a = # "p7_tire_rubber_worn_wet";
+    var_d147b93a = #"p7_tire_rubber_worn_wet";
 
     if(level flag::get(#"hash_dd62a8822ea4a38")) {
       v_origin = var_965869c9 gettagorigin("tag_net_3") + (10, 0, -10);
@@ -406,7 +406,7 @@ function_4afd150e(a_ents) {
       v_angles = (300, 0, 0);
     }
   } else if(var_ef78f209 > 67) {
-    var_d147b93a = # "p8_zm_vending_three_gun_sign";
+    var_d147b93a = #"p8_zm_vending_three_gun_sign";
     v_origin = var_965869c9 gettagorigin("tag_net_3") + (-15, -10, -15);
     v_angles = (324, 135, 72);
   }

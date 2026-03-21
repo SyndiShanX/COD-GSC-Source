@@ -245,7 +245,7 @@ function function_63c5e2dc(var_f487c534) {
 
   if(notetracks.size) {
     foreach(notetrack in notetracks) {
-      if(notetrack[1] == # "hash_2eff926bcf50d924" && notetrack[2] != # "end") {
+      if(notetrack[1] == #"hash_2eff926bcf50d924" && notetrack[2] != #"end") {
         v_tag_origin = var_f487c534 gettagorigin(notetrack[2]);
         a_targets[a_targets.size] = v_tag_origin;
       }
@@ -278,7 +278,7 @@ function function_8cc9e7c2(var_43182387 = 0) {
   while(true) {
     return_val = var_f487c534 waittill(#"hash_2eff926bcf50d924");
 
-    if(return_val.tag_name === # "end") {
+    if(return_val.tag_name === #"end") {
       break;
     }
 
@@ -351,8 +351,8 @@ function function_453ac55b(s_info) {
   weapon = s_info.weapon;
 
   if(attacker === level.vh_town_square_apc || weapon === getweapon(#"hash_161ca1bfb05ce95c")) {
-    level.var_85b00b2b = # "hash_2369a83a48c6a89b";
-    level.var_30eb363 = # "hash_4396a9df7f2650e6";
+    level.var_85b00b2b = #"hash_2369a83a48c6a89b";
+    level.var_30eb363 = #"hash_4396a9df7f2650e6";
   }
 }
 
@@ -425,10 +425,10 @@ function function_da6ccedc() {
   level thread namespace_fc3e8cb::function_18e5080e("flg_storage_advance_1", var_653186e7);
   level thread namespace_fc3e8cb::function_940ffdb0(["flg_rooftops_advance_right_end", "flg_rooftops_advance_left_end"], var_653186e7, "vol_rooftops_enemy_exit", 2);
 
-  if(var_63d2d7ec._notify === # "flg_rooftops_advance_right_high") {
+  if(var_63d2d7ec._notify === #"flg_rooftops_advance_right_high") {
     level thread namespace_fc3e8cb::function_8e158d78(var_41419b58, "vol_rooftops_enemy_balcony", undefined, 0);
     level thread namespace_fc3e8cb::function_8e158d78(var_4c08b0e6, "vol_rooftops_enemy_left", undefined, 0);
-  } else if(var_63d2d7ec._notify === # "flg_rooftops_advance_right_low" || var_63d2d7ec._notify === # "flg_rooftops_advance_left") {
+  } else if(var_63d2d7ec._notify === #"flg_rooftops_advance_right_low" || var_63d2d7ec._notify === #"flg_rooftops_advance_left") {
     level thread namespace_fc3e8cb::function_8e158d78(var_41419b58, "vol_rooftops_enemy_balcony", undefined, 0);
     level thread namespace_fc3e8cb::function_8e158d78(var_4c08b0e6, "vol_rooftops_enemy_right", undefined, 0);
   } else {
@@ -1092,9 +1092,9 @@ function function_7824cd0c() {
   self endon(#"flg_motor_pool_enemies_notice_player");
   var_b4767ac9 = level.player waittill(#"weapon_fired", #"grenade_fire", #"offhand_fire");
 
-  if(var_b4767ac9._notify === # "grenade_fire") {
+  if(var_b4767ac9._notify === #"grenade_fire") {
     wait 2;
-  } else if(var_b4767ac9._notify === # "offhand_fire") {
+  } else if(var_b4767ac9._notify === #"offhand_fire") {
     wait 1;
   }
 

@@ -44,8 +44,8 @@ __main__() {
     level.cymbal_monkey_model = "wpn_t7_zmb_monkey_bomb_world";
   }
 
-  level._effect[#"monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
-  level._effect[#"grenade_samantha_steal"] = # "hash_7965ec9e0938553f";
+  level._effect[#"monkey_glow"] = #"zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[#"grenade_samantha_steal"] = #"hash_7965ec9e0938553f";
   level.cymbal_monkeys = [];
   level.var_2f2478f2 = 1;
 

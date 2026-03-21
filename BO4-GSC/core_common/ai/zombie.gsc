@@ -598,7 +598,7 @@ zombieshouldattackobject(entity) {
 }
 
 function_997f1224(entity) {
-  if(entity.archetype == # "zombie" && !isDefined(entity.subarchetype) && !(isDefined(self.missinglegs) && self.missinglegs)) {
+  if(entity.archetype == #"zombie" && !isDefined(entity.subarchetype) && !(isDefined(self.missinglegs) && self.missinglegs)) {
     if(entity.zombie_move_speed == "walk") {
       return (100 * 100);
     } else if(entity.zombie_move_speed == "run") {

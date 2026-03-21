@@ -33,7 +33,7 @@ function function_45d79d27(localclientnum, oldval, newval, bnewent, binitialsnap
 
   switch (bwastimejump) {
     case 0:
-      color = # "none";
+      color = #"none";
       break;
     case 1:
       if(isDefined(room) && isDefined(room.var_cd42b9c0)) {

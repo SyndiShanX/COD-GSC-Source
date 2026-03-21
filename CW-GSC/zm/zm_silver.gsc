@@ -56,10 +56,10 @@ function autoexec opt_in() {
   level.aat_in_use = 1;
   level.random_pandora_box_start = 1;
   level.var_5470be1c = 1;
-  level.var_e2f95698 = # "hash_20902988a95a6003";
-  level.var_462ca9bb = # "blops_taacom";
-  level.var_8bb7479c = # "hash_10124966022c3040";
-  level.var_72a3d8bc = # "aib_t9_vign_cust_zm_silver_outro_fail_01";
+  level.var_e2f95698 = #"hash_20902988a95a6003";
+  level.var_462ca9bb = #"blops_taacom";
+  level.var_8bb7479c = #"hash_10124966022c3040";
+  level.var_72a3d8bc = #"aib_t9_vign_cust_zm_silver_outro_fail_01";
   level.var_6e297a0d = &exfil_success;
   level.addrbuff = &function_65c65feb;
   zm_intel::function_88645994(#"hash_1650c04a5db4ba64", #"hash_69f1546764fcc948", #"hash_44becc3958fa81a2", #"hash_549a6693186d47cc", #"hash_3c7bf14c75b291f9", #"zmintel_list_silver_omega_intel_all", #"zmintel_list_silver_darkaether_intel_all", #"zmintel_list_silver_maxis_intel_all", #"zmintel_list_silver_requiem_intel_all");
@@ -70,7 +70,7 @@ function autoexec opt_in() {
 
 function event_handler[level_init] main(eventstruct) {
   setclearanceceiling(29);
-  level.var_dfee7fc2 = # "hash_1c6b6adda3e5f98";
+  level.var_dfee7fc2 = #"hash_1c6b6adda3e5f98";
   scene::function_497689f6(#"hash_1c6b6adda3e5f98", "helicopter", "tag_probe_attach", "prb_tn_zm_silver_heli_light_cabin");
   level thread function_a6101b7();
   zm::init_fx();
@@ -98,7 +98,7 @@ function event_handler[level_init] main(eventstruct) {
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
-  level.var_d0ab70a2 = # "hash_5e105c88ae5d540f";
+  level.var_d0ab70a2 = #"hash_5e105c88ae5d540f";
   level.var_5fe8eeaa = gettime();
   level thread function_a58c1ef7();
   level.var_dbf9c70d = &function_452e5ad6;
@@ -113,12 +113,12 @@ function event_handler[level_init] main(eventstruct) {
   zm_silver_util::init();
   zm_silver_sound::init();
   namespace_c3c0ef6f::init();
-  level._effect[#"large_ceiling_dust"] = # "hash_32cd6b127f58a7bf";
-  level._effect[#"hash_10dedae3d37c056f"] = # "hash_28bb64d8996beecf";
-  level._effect[#"hash_10dedbe3d37c0722"] = # "hash_4065776f701ae199";
-  level._effect[#"hash_10dedce3d37c08d5"] = # "hash_310a2d10fb7f56d9";
-  level._effect[#"hash_10ded5e3d37bfcf0"] = # "hash_2fb218362f315f96";
-  level._effect[#"hash_10ded6e3d37bfea3"] = # "hash_11eb24ae473a4d69";
+  level._effect[#"large_ceiling_dust"] = #"hash_32cd6b127f58a7bf";
+  level._effect[#"hash_10dedae3d37c056f"] = #"hash_28bb64d8996beecf";
+  level._effect[#"hash_10dedbe3d37c0722"] = #"hash_4065776f701ae199";
+  level._effect[#"hash_10dedce3d37c08d5"] = #"hash_310a2d10fb7f56d9";
+  level._effect[#"hash_10ded5e3d37bfcf0"] = #"hash_2fb218362f315f96";
+  level._effect[#"hash_10ded6e3d37bfea3"] = #"hash_11eb24ae473a4d69";
   level.zones = [];
   level.zone_manager_init_func = &zm_silver_zones::zone_init;
   level thread zm_zonemgr::manage_zones("zone_proto_start");
@@ -696,7 +696,7 @@ function waiting_for_next_dog_spawn(count, max) {
 }
 
 function function_a6101b7() {
-  if(util::get_game_type() == # "zclassic" || !is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) && getdvarint(#"hash_40bd34b35079cf2e", 0) === 0) {
+  if(util::get_game_type() == #"zclassic" || !is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) && getdvarint(#"hash_40bd34b35079cf2e", 0) === 0) {
     hidemiscmodels("xmas_decorations");
     array::delete_all(getEntArray("xmas_decorations", "targetname"));
   }

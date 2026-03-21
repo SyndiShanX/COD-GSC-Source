@@ -15,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"spike_light"] = # "weapon/fx_light_spike_launcher";
+  level._effect[#"spike_light"] = #"weapon/fx_light_spike_launcher";
   callback::add_weapon_type(#"spike_launcher", &spawned);
   callback::add_weapon_type(#"spike_launcher_cpzm", &spawned);
   callback::add_weapon_type(#"spike_charge", &spawned_spike_charge);

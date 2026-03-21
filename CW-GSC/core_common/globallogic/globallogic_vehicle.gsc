@@ -64,7 +64,7 @@ function callback_vehiclespawned(spawner) {
     self spawner::spawn_think(spawner);
   }
 
-  if(self.vehicletype != # "zm_zod_train") {
+  if(self.vehicletype != #"zm_zod_train") {
     vehicle::init(self);
   }
 
@@ -102,7 +102,7 @@ function isfriendlyfire(eself, eattacker) {
   if(var_b423c7f3) {
     occupant_team = eself vehicle::vehicle_get_occupant_team();
 
-    if(occupant_team != # "none" && occupant_team != # "neutral" && (!util::function_fbce7263(occupant_team, eattacker.team) || util::function_9b7092ef(occupant_team, eattacker.team))) {
+    if(occupant_team != #"none" && occupant_team != #"neutral" && (!util::function_fbce7263(occupant_team, eattacker.team) || util::function_9b7092ef(occupant_team, eattacker.team))) {
       return true;
     }
   }
@@ -500,7 +500,7 @@ function callback_vehiclekilled(einflictor, eattacker, idamage, smeansofdeath, w
       vehicleteam = undefined;
 
       if(isDefined(self.team)) {
-        if(self.team != # "neutral") {
+        if(self.team != #"neutral") {
           vehicleteam = self.team;
         } else if(isDefined(self.var_37f0c900)) {
           if(self.var_37f0c900.time == gettime()) {

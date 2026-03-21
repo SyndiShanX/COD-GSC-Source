@@ -111,7 +111,7 @@ damage(trap) {
     }
   }
 
-  if(!(self.archetype === # "zombie_dog") && isactor(self)) {
+  if(!(self.archetype === #"zombie_dog") && isactor(self)) {
     if(n_param > 90 && level.burning_zombies.size < 6) {
       level.burning_zombies[level.burning_zombies.size] = self;
       self thread zm_traps::zombie_flame_watch();

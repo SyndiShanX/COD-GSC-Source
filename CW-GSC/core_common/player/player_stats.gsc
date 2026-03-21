@@ -32,7 +32,7 @@ function function_f94325d3() {
   }
 
   if(sessionmodeiszombiesgame()) {
-    if(level.gametype === # "doa") {
+    if(level.gametype === #"doa") {
       return true;
     }
   }
@@ -427,8 +427,8 @@ function function_97f7728e(equipment, statname) {
 function function_3f64434(weapon) {
   weaponname = weapon.name;
 
-  if(weaponname === # "molotov_fire") {
-    weaponname = # "eq_molotov";
+  if(weaponname === #"molotov_fire") {
+    weaponname = #"eq_molotov";
   }
 
   return weaponname;

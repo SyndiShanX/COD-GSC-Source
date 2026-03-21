@@ -444,9 +444,9 @@ add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, weaponvoresp
   struct.weapon_classname = weapon_class;
 
   if(function_8b1a219a()) {
-    struct.hint = # "hash_2791ecebb85142c4";
+    struct.hint = #"hash_2791ecebb85142c4";
   } else {
-    struct.hint = # "hash_60606b68e93a29c8";
+    struct.hint = #"hash_60606b68e93a29c8";
   }
 
   struct.cost = cost;
@@ -509,13 +509,13 @@ init_weapons() {
 
   switch (var_8e01336) {
     case 1:
-      var_4ef031c9 = # "hash_5694d3fa5334f8fe";
+      var_4ef031c9 = #"hash_5694d3fa5334f8fe";
       break;
     case 2:
-      var_4ef031c9 = # "hash_3f8d28bb3d9e9bec";
+      var_4ef031c9 = #"hash_3f8d28bb3d9e9bec";
       break;
     default:
-      var_4ef031c9 = # "hash_7bda40310359350e";
+      var_4ef031c9 = #"hash_7bda40310359350e";
       break;
   }
 
@@ -1876,7 +1876,7 @@ function_7c5dd4bd(w_weapon) {
 function_7f7c1226(weapon) {
   waittillframeend();
 
-  if(weaponhasattachment(weapon, "uber") && weapon.statname == # "smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
+  if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
     n_stock = weapon.clipsize;
   } else {
     n_stock = 0;

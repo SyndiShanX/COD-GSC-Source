@@ -88,19 +88,19 @@ function function_96d38b95(result) {
   resultstr = result;
 
   if(isDefined(player.team) && result == player.team) {
-    resultstr = # "win";
-  } else if(result == # "allies" || result == # "axis") {
-    resultstr = # "lose";
+    resultstr = #"win";
+  } else if(result == #"allies" || result == #"axis") {
+    resultstr = #"lose";
   }
 
   xpearned = currxp - prevxp;
   perkstr = function_685505ce(player getperks());
-  primaryweaponname = # "";
+  primaryweaponname = #"";
   primaryweaponattachstr = "";
-  secondaryweaponname = # "";
+  secondaryweaponname = #"";
   secondaryweaponattachstr = "";
-  grenadeprimaryname = # "";
-  grenadesecondaryname = # "";
+  grenadeprimaryname = #"";
+  grenadesecondaryname = #"";
 
   if(loadout::function_87bcb1b()) {
     primary_weapon = player loadout::function_18a77b37("primary");

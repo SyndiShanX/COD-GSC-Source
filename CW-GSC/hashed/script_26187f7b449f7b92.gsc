@@ -450,7 +450,7 @@ function function_723d0c4c(player) {
   while(gettime() < timeout) {
     result = player waittilltimeout(0.25, #"player_died", #"disconnect");
 
-    if(result._notify != # "timeout") {
+    if(result._notify != #"timeout") {
       self.lastweapon = self function_26c8b67(player, self.special);
       self notify(#"spin_out");
       return;

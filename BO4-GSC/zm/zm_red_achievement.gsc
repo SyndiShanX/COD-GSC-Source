@@ -234,7 +234,7 @@ function_84d102f2() {
   while(true) {
     s_result = level waittill(#"hash_4fb1eb2c137a7955", #"hash_1e2d6c34f734996b");
 
-    if(s_result._notify == # "hash_4fb1eb2c137a7955") {
+    if(s_result._notify == #"hash_4fb1eb2c137a7955") {
       if(s_result.e_player !== self) {
         return;
       }
@@ -249,7 +249,7 @@ function_84d102f2() {
       } else {
         self thread function_9fdcf13f();
       }
-    } else if(s_result._notify == # "hash_1e2d6c34f734996b") {
+    } else if(s_result._notify == #"hash_1e2d6c34f734996b") {
       return;
     }
 

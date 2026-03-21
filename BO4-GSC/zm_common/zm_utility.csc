@@ -20,7 +20,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
+  level._effect[#"zm_zone_edge_marker"] = #"hash_3002526b7ff53cbf";
   clientfield::register("scriptmover", "zm_zone_edge_marker_count", 1, getminbitcountfornum(15), "int", &zm_zone_edge_marker_count, 0, 0);
   clientfield::register("toplayer", "zm_zone_out_of_bounds", 1, 1, "int", &zm_zone_out_of_bounds, 0, 0);
   clientfield::register("actor", "flame_corpse_fx", 1, 1, "int", &flame_corpse_fx, 0, 0);
@@ -109,7 +109,7 @@ spawn_buildkit_weapon_model(localclientnum, weapon, camo, origin, angles) {
 is_classic() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zclassic") {
+  if(str_gametype == #"zclassic") {
     return true;
   }
 
@@ -119,7 +119,7 @@ is_classic() {
 is_standard() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zstandard") {
+  if(str_gametype == #"zstandard") {
     return true;
   }
 
@@ -129,7 +129,7 @@ is_standard() {
 is_trials() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztrials" || level flag::exists(#"ztrial")) {
+  if(str_gametype == #"ztrials" || level flag::exists(#"ztrial")) {
     return true;
   }
 
@@ -139,7 +139,7 @@ is_trials() {
 is_tutorial() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztutorial") {
+  if(str_gametype == #"ztutorial") {
     return true;
   }
 
@@ -149,7 +149,7 @@ is_tutorial() {
 is_grief() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zgrief") {
+  if(str_gametype == #"zgrief") {
     return true;
   }
 
@@ -427,12 +427,12 @@ flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 function_c599ed65() {
   if(get_story() == 1) {
     level.var_12b59dee = "rob_zm_eyes_yellow";
-    level._effect[#"eye_glow"] = # "hash_760112479afe6e2";
+    level._effect[#"eye_glow"] = #"hash_760112479afe6e2";
     return;
   }
 
   level.var_12b59dee = "rob_zm_eyes_orange";
-  level._effect[#"eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"eye_glow"] = #"zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 function_beed5764(var_ee6bcd51, str_fx) {

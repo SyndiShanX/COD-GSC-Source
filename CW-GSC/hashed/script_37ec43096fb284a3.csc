@@ -27,7 +27,7 @@ function preinit() {
   }
 
   level.var_7bd7bdc8 = [1: # "hash_6a04f899ab555f22", 2: # "hash_2964f82e2c05c8b8", 3: # "hash_54da2f2da5752d99"];
-  level.var_6e62d281 = # "hash_289962ed0e76921d";
+  level.var_6e62d281 = #"hash_289962ed0e76921d";
   var_ac22a760 = struct::get_array(#"hash_3460aae6bb799a99", "content_key");
 
   for(index = 1; index <= var_ac22a760.size; index++) {
@@ -42,9 +42,9 @@ function postinit() {}
 
 function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isinarray(array(#"p9_sur_fow_path_capsule_forest_cap", #"hash_57b5acde2128e4b4", #"p9_sur_fow_path_capsule_golova_cap", #"p9_sur_fow_path_capsule_sanatorium_cap", #"hash_7b74b9b952f922d3", #"hash_181d690a4afd8b13", #"p9_sur_fow_path_capsule_sanatorium_s4_mq_cap", #"p9_sur_fow_path_capsule_dunes_cap", #"p9_sur_fow_path_capsule_black_sea_cap"), hash(self.model))) {
-    var_ee6bcd51 = # "hash_515a30ee41d5cb3c";
+    var_ee6bcd51 = #"hash_515a30ee41d5cb3c";
   } else {
-    var_ee6bcd51 = # "hash_4a9cb80afea6f8cb";
+    var_ee6bcd51 = #"hash_4a9cb80afea6f8cb";
   }
 
   if(util::get_map_name() === "wz_sanatorium") {
@@ -53,8 +53,8 @@ function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap,
     var_ee6bcd51 += "_black_sea";
   }
 
-  if(hash(self.model) === # "p9_sur_fow_path_capsule_forest_battery") {
-    var_ee6bcd51 = # "hash_1a5c12ea1f8d94e7";
+  if(hash(self.model) === #"p9_sur_fow_path_capsule_forest_battery") {
+    var_ee6bcd51 = #"hash_1a5c12ea1f8d94e7";
   }
 
   if(bwastimejump) {

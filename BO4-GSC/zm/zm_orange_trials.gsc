@@ -368,7 +368,7 @@ blood_buff() {
   self val::set(#"bludy", "allowdeath", 0);
   level.e_bludy = self;
   self.var_e1cad99d = 3;
-  self.team = # "team3";
+  self.team = #"team3";
   self.var_d45ca662 = 1;
   self.b_ignore_cleanup = 1;
   self.ignoreme = 1;

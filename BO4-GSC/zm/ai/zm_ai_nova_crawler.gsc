@@ -190,7 +190,7 @@ function_d79b3357(entity, origin) {
   zombies = getaiteamarray(level.zombie_team);
 
   for(i = 0; i < zombies.size; i++) {
-    if(zombies[i].archetype != # "nova_crawler" && distance(origin, zombies[i].origin) <= 96) {
+    if(zombies[i].archetype != #"nova_crawler" && distance(origin, zombies[i].origin) <= 96) {
       zombies[i] dodamage(zombies[i].maxhealth * 1.05, origin, entity);
 
       if(zombies[i].health <= 0) {
@@ -253,7 +253,7 @@ function_272fa9b5(entity) {
 }
 
 function_c5b157a6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  if(self.archetype == # "nova_crawler") {
+  if(self.archetype == #"nova_crawler") {
     self destructserverutils::togglespawngibs(self, 1);
     self destructserverutils::function_629a8d54(self, "tag_weapon_right");
   }

@@ -1020,7 +1020,7 @@ function_bfefc7aa() {
       continue;
     }
 
-    if(s_notify.mod !== # "mod_melee") {
+    if(s_notify.mod !== #"mod_melee") {
       continue;
     }
 

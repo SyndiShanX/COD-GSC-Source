@@ -13,7 +13,7 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   if(!isDefined(game.state)) {
-    game.state = # "pregame";
+    game.state = #"pregame";
   }
 }
 

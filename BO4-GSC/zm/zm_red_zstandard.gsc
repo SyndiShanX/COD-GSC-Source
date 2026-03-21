@@ -82,7 +82,7 @@ main() {
   zm_round_spawning::function_306ce518(#"blight_father", &function_d0835d29);
   zm_utility::function_2959a3cb(#"gegenees", &i_zmb_robo_eye_head_lp);
   zm_utility::function_2959a3cb(#"skeleton", &function_a1f61594);
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread zm_crafting::function_ca244624(#"zblueprint_red_strike");
   level thread defend_areas();
 }
@@ -154,22 +154,22 @@ defend_areas() {
   zm_utility::function_fdb0368(3);
 
   if(math::cointoss()) {
-    var_5150f93a = # "west";
+    var_5150f93a = #"west";
     level zm_utility::open_door(array("apollo_temple_to_western_plaza"), undefined, undefined, 1);
   } else {
-    var_5150f93a = # "east";
+    var_5150f93a = #"east";
     level zm_utility::open_door(array("apollo_temple_to_eastern_plaza"), undefined, undefined, 1);
   }
 
   zm_utility::function_fdb0368(4);
 
-  if(var_5150f93a == # "west") {
+  if(var_5150f93a == #"west") {
     zm_utility::open_door(array("western_plaza_to_monument_of_craterus", "amphitheater_backstage"), undefined, undefined, 1);
   } else {
     zm_utility::open_door(array("eastern_plaza_to_upper_road", "amphitheater_backstage"), undefined, undefined, 1);
   }
 
-  str_next_defend = # "amphitheater";
+  str_next_defend = #"amphitheater";
   wait 5;
   zm_utility::function_11101458(str_next_defend);
   wait 10;
@@ -179,7 +179,7 @@ defend_areas() {
   zm_utility::function_fef4b36a(str_next_defend);
   level util::delay(15, undefined, &zm_round_spawning::function_376e51ef, #"skeleton");
 
-  if(var_5150f93a == # "east") {
+  if(var_5150f93a == #"east") {
     zm_utility::open_door(array("apollo_temple_to_western_plaza", "western_plaza_to_monument_of_craterus"), undefined, undefined, 1);
   } else {
     zm_utility::open_door(array("apollo_temple_to_eastern_plaza", "eastern_plaza_to_upper_road"), undefined, undefined, 1);
@@ -188,7 +188,7 @@ defend_areas() {
   wait 10;
   str_second_defend = array::random(array(#"bathhouse", #"offering"));
 
-  if(str_second_defend == # "bathhouse") {
+  if(str_second_defend == #"bathhouse") {
     level thread zm_utility::open_door(array("western_plaza_to_bathhouse_upper", "intersection_of_treasuries_to_bathhouse_inner"));
   } else {
     level thread zm_utility::open_door(array("eastern_plaza_to_temple_terrace", "stoa_of_the_athenians_to_intersection_of_treasuries"));
@@ -205,7 +205,7 @@ defend_areas() {
   level thread zm_utility::open_door(array("stoa_of_the_athenians_to_spartan_monument", "spartan_monument_to_intersection_of_treasuries", "stoa_of_the_athenians_to_intersection_of_treasuries"));
   level notify(#"hash_36ec7e3beabe7a4");
 
-  if(str_next_defend == # "forge") {
+  if(str_next_defend == #"forge") {
     level thread zm_utility::open_door(array("river_acheron_to_cliff_tombs"));
   } else {
     level thread zm_utility::open_door(array("river_acheron_to_serpents_pass"));
@@ -224,10 +224,10 @@ defend_areas() {
   level thread zm_utility::open_door(array("cliff_tombs_to_drakaina_arena", "serpents_pass_to_drakaina_arena", "western_plaza_to_bathhouse_upper", "intersection_of_treasuries_to_bathhouse_inner", "western_plaza_to_bathhouse_upper", "intersection_of_treasuries_to_bathhouse_inner", "river_acheron_to_cliff_tombs", "river_acheron_to_serpents_pass", "apollo_temple_to_western_plaza", "western_plaza_to_monument_of_craterus", "apollo_temple_to_eastern_plaza", "eastern_plaza_to_temple_terrace", "apollo_temple_to_western_plaza", "apollo_temple_to_eastern_plaza"));
   wait 20;
 
-  if(str_second_defend == # "bathhouse") {
-    str_next_defend = # "offering";
+  if(str_second_defend == #"bathhouse") {
+    str_next_defend = #"offering";
   } else {
-    str_next_defend = # "bathhouse";
+    str_next_defend = #"bathhouse";
   }
 
   zm_utility::function_11101458(str_next_defend);

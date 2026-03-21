@@ -518,11 +518,11 @@ function inckillstreaktracker(weapon) {
   self endon(#"disconnect");
   waittillframeend();
 
-  if(weapon.name == # "artillery") {
+  if(weapon.name == #"artillery") {
     self.pers[#"artillery_kills"]++;
   }
 
-  if(weapon.name == # "dog_bite") {
+  if(weapon.name == #"dog_bite") {
     self.pers[#"dog_kills"]++;
   }
 }

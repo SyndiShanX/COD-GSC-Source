@@ -165,13 +165,13 @@ onturretdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
     if(is_valid_target(einflictor, turretvehicle.team)) {
       turretvehicle.favoriteenemy = einflictor;
       turretvehicle.var_c8072bcc = gettime();
-      turretvehicle.var_7eb3ebd5[einflictor getentitynumber()] = # "damage";
+      turretvehicle.var_7eb3ebd5[einflictor getentitynumber()] = #"damage";
       turretvehicle targetting_delay::function_a4d6d6d8(einflictor);
     }
   } else if(isalive(eattacker) && issentient(eattacker) && !(isPlayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, turretvehicle.team)) {
     turretvehicle.favoriteenemy = eattacker;
     turretvehicle.var_c8072bcc = gettime();
-    turretvehicle.var_7eb3ebd5[eattacker getentitynumber()] = # "damage";
+    turretvehicle.var_7eb3ebd5[eattacker getentitynumber()] = #"damage";
     turretvehicle targetting_delay::function_a4d6d6d8(eattacker);
   }
 
@@ -274,7 +274,7 @@ function_fefefcc4() {
       nearby_enemies = getplayers(util::getotherteam(turretvehicle.team), turretvehicle.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
-        if(turretvehicle.var_3413afc5 != # "hash_2d94a5f22d36fc73") {
+        if(turretvehicle.var_3413afc5 != #"hash_2d94a5f22d36fc73") {
           turretvehicle function_c524c4c8();
         } else {
           foreach(nearby_enemy in nearby_enemies) {
@@ -292,16 +292,16 @@ function_fefefcc4() {
 
             turretvehicle.favoriteenemy = nearby_enemy;
             turretvehicle.var_c8072bcc = gettime();
-            turretvehicle.var_7eb3ebd5[nearby_enemy getentitynumber()] = # "hash_47697c94ffb4a5bd";
+            turretvehicle.var_7eb3ebd5[nearby_enemy getentitynumber()] = #"hash_47697c94ffb4a5bd";
             break;
           }
         }
-      } else if(turretvehicle.var_3413afc5 != # "standard_sight") {
+      } else if(turretvehicle.var_3413afc5 != #"standard_sight") {
         turretvehicle function_bc7568f1();
       }
     }
 
-    wait_time = turretvehicle.var_3413afc5 == # "standard_sight" ? 0.25 : 0.1;
+    wait_time = turretvehicle.var_3413afc5 == #"standard_sight" ? 0.25 : 0.1;
     wait wait_time;
   }
 }
@@ -324,7 +324,7 @@ function_2034705c(bundle) {
   var_351b3c55 = isDefined(self.enemy) ? max(isDefined(self.enemylastseentime) ? self.enemylastseentime : 0, isDefined(self.var_c8072bcc) ? self.var_c8072bcc : 0) : 0;
   var_c112caa0 = int((isDefined(bundle.var_fa38350a) ? bundle.var_fa38350a : 1) * 1000);
 
-  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === # "damage") {
+  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === #"damage") {
     var_c112caa0 = int((isDefined(bundle.var_33561c46) ? bundle.var_33561c46 : 3) * 1000);
   }
 
@@ -398,7 +398,7 @@ turretscanning() {
 
       var_2aa33bf1 = 0;
 
-      if(distancesquared(turretvehicle.enemy.origin, turretvehicle.origin) > turretvehicle.var_38e6355c && turretvehicle.var_7eb3ebd5[turretvehicle.enemy getentitynumber()] === # "forwardscan") {
+      if(distancesquared(turretvehicle.enemy.origin, turretvehicle.origin) > turretvehicle.var_38e6355c && turretvehicle.var_7eb3ebd5[turretvehicle.enemy getentitynumber()] === #"forwardscan") {
         var_2aa33bf1 = 1;
       } else if(turretvehicle function_9d86d74c(turretvehicle.enemy)) {
         var_2aa33bf1 = 1;
@@ -413,7 +413,7 @@ turretscanning() {
 
       if(!isDefined(turretvehicle.var_7eb3ebd5[turretvehicle.enemy getentitynumber()]) && turretvehicle targetting_delay::function_1c169b3a(turretvehicle.enemy)) {
         turretvehicle.var_c8072bcc = gettime();
-        turretvehicle.var_7eb3ebd5[turretvehicle.enemy getentitynumber()] = # "forwardscan";
+        turretvehicle.var_7eb3ebd5[turretvehicle.enemy getentitynumber()] = #"forwardscan";
       }
     }
 
@@ -506,7 +506,7 @@ turretscanning() {
 
     waitresult = turretvehicle waittilltimeout(3.5, #"enemy");
 
-    if(waitresult._notify == # "enemy" && isDefined(turretvehicle.enemy)) {
+    if(waitresult._notify == #"enemy" && isDefined(turretvehicle.enemy)) {
       if(turretvehicle.var_aac73d6c && !isDefined(turretvehicle.enemylastseentime)) {
         attempts = 0;
         max_tries = 10;

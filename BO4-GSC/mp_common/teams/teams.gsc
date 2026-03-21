@@ -26,7 +26,7 @@ __init__() {
 }
 
 init() {
-  game.strings[#"autobalance"] = # "mp/autobalance_now";
+  game.strings[#"autobalance"] = #"mp/autobalance_now";
   level.teambalance = getdvarint(#"scr_teambalance", 0);
   level.teambalancetimer = 0;
   level.timeplayedcap = getdvarint(#"scr_timeplayedcap", 1800);
@@ -250,7 +250,7 @@ track_free_played_time() {
     if(game.state == "playing") {
       team = self.pers[#"team"];
 
-      if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != # "spectator") {
+      if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != #"spectator") {
         if(!isDefined(self.timeplayed[team])) {
           self.timeplayed[team] = 0;
         }
@@ -287,15 +287,15 @@ getteamindex(team) {
     return 0;
   }
 
-  if(team == # "free") {
+  if(team == #"free") {
     return 0;
   }
 
-  if(team == # "allies") {
+  if(team == #"allies") {
     return 1;
   }
 
-  if(team == # "axis") {
+  if(team == #"axis") {
     return 2;
   }
 
@@ -308,7 +308,7 @@ getenemyteam(player_team) {
       continue;
     }
 
-    if(team == # "spectator") {
+    if(team == #"spectator") {
       continue;
     }
 
@@ -322,7 +322,7 @@ getenemyplayers() {
   enemies = [];
 
   foreach(player in level.players) {
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       continue;
     }
 

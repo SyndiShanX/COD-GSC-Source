@@ -43,7 +43,7 @@ __init__() {
   zm_loadout::register_hero_weapon_for_level(#"hero_minigun_t8_lv3");
   zm_hero_weapon::function_7eabd65d(getweapon(#"hash_492e530f9862f6cc"));
   zm_hero_weapon::function_7eabd65d(getweapon(#"hash_628d99860c78650f"));
-  level._effect[#"launcher_flash"] = # "hash_65b54823a8e8631e";
+  level._effect[#"launcher_flash"] = #"hash_65b54823a8e8631e";
 
   if(!isDefined(level.var_90e0e2a0)) {
     level.var_90e0e2a0 = new throttle();
@@ -189,13 +189,13 @@ function_34a75fed(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
         }
       }
 
-      if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+      if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
         n_damage = self function_bce04a11(weapon);
 
         if(n_damage > damage) {
           return n_damage;
         }
-      } else if(self.zm_ai_category == # "popcorn") {
+      } else if(self.zm_ai_category == #"popcorn") {
         return self.health;
       }
 
@@ -387,7 +387,7 @@ function_13409329(v_end_pos, w_minigun) {
       continue;
     }
 
-    if(a_ai_zombies[i].zm_ai_category == # "basic" || a_ai_zombies[i].zm_ai_category == # "popcorn" || a_ai_zombies[i].zm_ai_category == # "enhanced") {
+    if(a_ai_zombies[i].zm_ai_category == #"basic" || a_ai_zombies[i].zm_ai_category == #"popcorn" || a_ai_zombies[i].zm_ai_category == #"enhanced") {
       if(isDefined(a_ai_zombies[i].var_f256a4d9)) {
         var_1ae49e8d += a_ai_zombies[i].var_f256a4d9;
         a_ai_zombies[i].var_f256a4d9 = 0;
@@ -424,12 +424,12 @@ function_13409329(v_end_pos, w_minigun) {
       continue;
     }
 
-    if(var_367c14cc[i].zm_ai_category == # "basic" || var_367c14cc[i].zm_ai_category == # "enhanced" || var_367c14cc[i].zm_ai_category == # "popcorn") {
+    if(var_367c14cc[i].zm_ai_category == #"basic" || var_367c14cc[i].zm_ai_category == #"enhanced" || var_367c14cc[i].zm_ai_category == #"popcorn") {
       var_367c14cc[i] thread function_292bb3d7(self, w_minigun, v_end_pos);
       continue;
     }
 
-    if(var_367c14cc[i].zm_ai_category == # "miniboss" || var_367c14cc[i].zm_ai_category == # "boss") {
+    if(var_367c14cc[i].zm_ai_category == #"miniboss" || var_367c14cc[i].zm_ai_category == #"boss") {
       if(isDefined(self.maxhealth)) {
         var_4fbc5aad = var_367c14cc[i].maxhealth * 0.25;
       } else {
@@ -459,7 +459,7 @@ function_292bb3d7(e_player, w_minigun, v_pos) {
   self endon(#"death");
   [[level.var_90e0e2a0]] - > waitinqueue(self);
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     str_hit_loc = "none";
   } else {
     str_hit_loc = "torso_lower";

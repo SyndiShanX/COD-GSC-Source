@@ -417,9 +417,9 @@ function onroundendgame(roundwinner) {
   if(game.stat[#"roundswon"][#"allies"] == game.stat[#"roundswon"][#"axis"]) {
     winner = "tie";
   } else if(game.stat[#"roundswon"][#"axis"] > game.stat[#"roundswon"][#"allies"]) {
-    winner = # "axis";
+    winner = #"axis";
   } else {
-    winner = # "allies";
+    winner = #"allies";
   }
 
   return winner;
@@ -472,11 +472,11 @@ function menu_onmenuresponse() {
 
       if(level.console) {
         if(menu == game.menu[#"menu_changeclass"] || menu == game.menu_changeclass_offline || menu == game.menu[#"menu_team"] || menu == game.menu[#"menu_controls"]) {
-          if(self.pers[#"team"] == # "allies") {
+          if(self.pers[#"team"] == #"allies") {
             self openmenu(game.menu[#"menu_start_menu"]);
           }
 
-          if(self.pers[#"team"] == # "axis") {
+          if(self.pers[#"team"] == #"axis") {
             self openmenu(game.menu[#"menu_start_menu"]);
           }
         }
@@ -599,25 +599,25 @@ function menuallieszombies() {
     return;
   }
 
-  if(self.pers[#"team"] != # "allies") {
+  if(self.pers[#"team"] != #"allies") {
     if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
 
     if(self.sessionstate == "playing") {
       self.switching_teams = 1;
-      self.joining_team = # "allies";
+      self.joining_team = #"allies";
       self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[#"team"] = # "allies";
-    self.team = # "allies";
+    self.pers[#"team"] = #"allies";
+    self.team = #"allies";
     self.pers[#"class"] = undefined;
     self.curclass = undefined;
     self.pers[#"weapon"] = undefined;
     self.pers[#"savedmodel"] = undefined;
-    self.sessionteam = # "allies";
+    self.sessionteam = #"allies";
     self player::function_466d8a4b(0);
     self notify(#"end_respawn");
   }
@@ -699,7 +699,7 @@ function onplayerconnect_check_for_hotjoin() {
 
   gametype = hash(util::get_game_type());
 
-  if(gametype == # "zsurvival") {
+  if(gametype == #"zsurvival") {
     if(level flag::get("start_zombie_round_logic")) {
       music::setmusicstate("none", self);
     }

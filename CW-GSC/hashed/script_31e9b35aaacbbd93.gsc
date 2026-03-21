@@ -366,7 +366,7 @@ function function_1e281573() {
 
   foreach(ent in var_bfefe09c) {
     if(isDefined(ent) && isDefined(ent.model)) {
-      if(ent.model == # "p9_container_armory_crate_01_dust_dustable_fx" || ent.model == # "p9_crate_wood_01_short_fx" || ent.model == # "p9_slu_pallet_wood_01_gray_fx") {
+      if(ent.model == #"p9_container_armory_crate_01_dust_dustable_fx" || ent.model == #"p9_crate_wood_01_short_fx" || ent.model == #"p9_slu_pallet_wood_01_gray_fx") {
         snd::client_targetname(ent, "cargo_debris");
       }
     }

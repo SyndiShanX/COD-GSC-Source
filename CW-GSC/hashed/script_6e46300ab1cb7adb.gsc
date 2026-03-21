@@ -7,7 +7,7 @@
 #using script_3dc93ca9902a9cda;
 #namespace namespace_a43d1663;
 
-function init(var_4bf53b01 = # "", var_76e98c1f = # "", var_2a015e7e = 0, var_f8f020e3 = 0, var_919728b0 = 5, var_c18a5a8b = var_919728b0 + 5) {
+function init(var_4bf53b01 = #"", var_76e98c1f = #"", var_2a015e7e = 0, var_f8f020e3 = 0, var_919728b0 = 5, var_c18a5a8b = var_919728b0 + 5) {
   if(var_919728b0 >= float(function_60d95f53()) / 1000) {
     wait var_919728b0;
   }

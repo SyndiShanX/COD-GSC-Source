@@ -44,7 +44,7 @@ function private function_41015db1(&replacementarray, itemname, replacementitemn
     return;
   }
 
-  if(replacementitemname == # "") {
+  if(replacementitemname == #"") {
     replacementitemname = "";
   }
 
@@ -54,7 +54,7 @@ function private function_41015db1(&replacementarray, itemname, replacementitemn
 }
 
 function private function_bbc0b67f() {
-  flag = # "hash_67b445a4b1d59922";
+  flag = #"hash_67b445a4b1d59922";
 
   if(level flag::get(flag)) {
     assert(0, "<dev string:x38>");

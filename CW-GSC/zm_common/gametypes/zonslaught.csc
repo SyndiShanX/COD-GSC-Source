@@ -40,7 +40,7 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::register("actor", "orb_soul_capture_fx", 1, 3, "int", &orb_soul_capture_fx, 0, 0);
   clientfield::register("actor", "zombie_aether_spawn_cf", 1, 1, "int", &function_ace38635, 0, 0);
   level.var_7bd7bdc8 = [1: # "hash_6a04f899ab555f22", 2: # "hash_2964f82e2c05c8b8", 3: # "hash_54da2f2da5752d99"];
-  level.var_6e62d281 = # "hash_289962ed0e76921d";
+  level.var_6e62d281 = #"hash_289962ed0e76921d";
   onslaught_hud::register();
   level.var_12da60e6 = 1;
   callback::on_spawned(&on_player_spawned);
@@ -53,8 +53,8 @@ function event_handler[gametype_init] main(eventstruct) {
   level._effect[#"hash_308d15c5b36ba48a"] = "maps/zm_red/fx8_soul_charge_purple";
   level._effect[#"orb_idle"] = "zombie/fx9_onslaught_orb_trail";
   level._effect[#"orb_activate"] = "sr/fx9_safehouse_orb_activate";
-  level.var_de8cc106 = # "hash_6d2c4c09332d861b";
-  level.var_cb450873 = # "hash_4bfee97440e2b6f2";
+  level.var_de8cc106 = #"hash_6d2c4c09332d861b";
+  level.var_cb450873 = #"hash_4bfee97440e2b6f2";
   println("<dev string:x66>");
 }
 
@@ -62,7 +62,7 @@ function on_player_spawned(localclientnum) {
   self function_36b630a3(1);
   str_map_name = util::get_map_name();
 
-  if(str_map_name === # "mp_tundra" || str_map_name === # "mp_dune") {
+  if(str_map_name === #"mp_tundra" || str_map_name === #"mp_dune") {
     function_f58e42ae(localclientnum, 1);
   }
 }
@@ -93,7 +93,7 @@ function function_bed6f88d(local_client_num, oldval, newval, bnewent, binitialsn
   }
 
   if(bwastimejump == 2) {
-    if(is_true(level.var_612d6a21) || util::get_game_type() === # "hash_75aa82b3ae89f54e" || is_true(level.var_e35c191f) || util::get_game_type() === # "hash_125fc0c0065c7dea") {
+    if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e" || is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
       self.var_31a246b5 = util::playFXOnTag(fieldname, #"hash_60aef71494b594e5", self, "tag_origin");
       self playSound(fieldname, #"hash_5e9e10059b1e505c");
     } else {

@@ -697,7 +697,7 @@ function_bf16c9ed(einflictor, eattacker, smeansofdeath, weapon) {
     return true;
   }
 
-  if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype != # "bot" && isDefined(smeansofdeath) && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype != #"bot" && isDefined(smeansofdeath) && smeansofdeath == "MOD_EXPLOSIVE") {
     return true;
   }
 
@@ -720,7 +720,7 @@ function_ec8d8bbc(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     return 0;
   }
 
-  if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype != # "bot" && isDefined(smeansofdeath) && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype != #"bot" && isDefined(smeansofdeath) && smeansofdeath == "MOD_EXPLOSIVE") {
     if(eattacker != self && isDefined(vdir) && lengthsquared(vdir) > 0.1 && (!isDefined(eattacker) || eattacker.team === self.team) && (!isDefined(einflictor) || einflictor.team === self.team)) {
       self setvehvelocity(self.velocity + vectornormalize(vdir) * 300);
       return 1;

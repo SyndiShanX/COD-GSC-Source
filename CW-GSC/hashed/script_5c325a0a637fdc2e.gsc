@@ -50,7 +50,7 @@ function function_b85233a1(var_6e96c1c2) {
     var_641870d3++;
   }
 
-  if(var_6e96c1c2.weapon.name == # "none") {
+  if(var_6e96c1c2.weapon.name == #"none") {
     var_641870d3 = 0;
   }
 

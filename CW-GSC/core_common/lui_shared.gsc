@@ -258,7 +258,7 @@ function prime_movie(str_movie, b_looping = 0, str_key = "") {
   self primemovie(str_movie, b_looping, str_key);
 }
 
-function function_2fb8927b(str_team, str_movie, b_looping = 0, str_key = # "") {
+function function_2fb8927b(str_team, str_movie, b_looping = 0, str_key = #"") {
   callback::on_connect(&function_67373791, undefined, str_team, str_movie, b_looping, str_key);
 
   foreach(player in function_58385b58(str_team)) {
@@ -274,7 +274,7 @@ function private function_67373791(str_team, str_movie, b_looping, str_key) {
   }
 }
 
-function function_c6d1cb5d(str_team, str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = # "", n_timeout) {
+function function_c6d1cb5d(str_team, str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = #"", n_timeout) {
   callback::remove_on_connect(&function_67373791);
 
   foreach(player in function_58385b58(str_team)) {
@@ -282,7 +282,7 @@ function function_c6d1cb5d(str_team, str_movie, str_type, show_black_screen = 0,
   }
 }
 
-function play_movie(str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = # "", n_timeout) {
+function play_movie(str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = #"", n_timeout) {
   if(str_type === "fullscreen" || str_type === "fullscreen_additive") {
     b_hide_hud = 1;
   }
@@ -398,7 +398,7 @@ function private _play_movie_for_player(str_movie, str_type, show_black_screen, 
       menu = waitresult.menu;
       response = waitresult.response;
 
-      if(waitresult._notify == "timeout" || menu === hash(str_menu) && response === # "finished_movie_playback") {
+      if(waitresult._notify == "timeout" || menu === hash(str_menu) && response === #"finished_movie_playback") {
         if(str_type == "pip") {
           self playsoundtoplayer(#"uin_pip_close", self);
         }
@@ -474,14 +474,14 @@ function private function_1bc580af() {
       response = waitresult.response;
       value = waitresult.value;
 
-      if(menu === # "full_screen_movie") {
-        if(response === # "finished_movie_playback") {
+      if(menu === #"full_screen_movie") {
+        if(response === #"finished_movie_playback") {
           [[lui_menu]] - > close(self);
           self notify(#"movie_done");
           break;
         }
 
-        if(response === # "skippable" && isDefined(value)) {
+        if(response === #"skippable" && isDefined(value)) {
           [[lui_menu]] - > registerplayer_callout_traversal(self, value);
         }
       }

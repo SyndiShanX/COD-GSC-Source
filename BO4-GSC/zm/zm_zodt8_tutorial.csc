@@ -27,8 +27,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("worlduimodel", "hudItems.ztut.showShield", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showSpecial", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showElixirs", 1, 1, "int", undefined, 0, 0);
-  level._effect[#"hash_1b509b0ba634a25a"] = # "zombie/fx_ritual_barrier_defend_door_wide_zod_zmb";
-  level._effect[#"hash_1390e08de02cbdc7"] = # "hash_5b773dbbac0012ff";
+  level._effect[#"hash_1b509b0ba634a25a"] = #"zombie/fx_ritual_barrier_defend_door_wide_zod_zmb";
+  level._effect[#"hash_1390e08de02cbdc7"] = #"hash_5b773dbbac0012ff";
   zm_tut_hint_text::register("zm_tut_hint_text");
   callback::on_localclient_connect(&function_9fc8cc9c);
 }

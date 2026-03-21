@@ -22,9 +22,9 @@ pentagon_packapunch_init() {
   level.defcon_level = 1;
   level.defcon_activated = 0;
   level.ignore_spawner_func = &pentagon_ignore_spawner;
-  level._effect[#"hash_4ec0caccaa9167d3"] = # "hash_6cd6da1c7e245c1c";
+  level._effect[#"hash_4ec0caccaa9167d3"] = #"hash_6cd6da1c7e245c1c";
   level.var_5531a118 = level._effect[#"hash_4ec0caccaa9167d3"];
-  level._effect[#"hash_415ba37393754417"] = # "hash_35cb5be5a38af07c";
+  level._effect[#"hash_415ba37393754417"] = #"hash_35cb5be5a38af07c";
   level.var_2e21f906 = level._effect[#"hash_415ba37393754417"];
   level thread defcon_sign_lights();
   punch_switches = getEntArray("punch_switch", "targetname");
@@ -43,7 +43,7 @@ defcon_sign_setup() {
   level waittill(#"hash_2124984d1ece329c");
   self.lights = getEntArray(self.target, "targetname");
 
-  if(isDefined(self.lights) && util::get_game_type() != # "zstandard") {
+  if(isDefined(self.lights) && util::get_game_type() != #"zstandard") {
     for(j = 0; j < self.lights.size; j++) {
       if(isDefined(self.lights[j].script_noteworthy) && self.lights[j].script_noteworthy == "defcon_bulb") {
         self.lights[j] setModel("p8_zm_off_trap_switch_light_green_on");
@@ -297,7 +297,7 @@ pentagon_ignore_spawner(spawner) {
 pack_door_init() {
   trigger = getent("pack_room_door", "targetname");
 
-  if(util::get_game_type() === # "zstandard") {
+  if(util::get_game_type() === #"zstandard") {
     trigger hide();
   }
 

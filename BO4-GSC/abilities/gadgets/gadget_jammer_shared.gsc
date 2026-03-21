@@ -147,7 +147,7 @@ function_7d81a4ff(watcher, player) {
     return;
   }
 
-  if(waitresult._notify == # "explode" && isDefined(waitresult.position)) {
+  if(waitresult._notify == #"explode" && isDefined(waitresult.position)) {
     self thread function_87c540c0(self, waitresult.position, player);
   }
 }
@@ -351,7 +351,7 @@ function_b16c8865(entity, attackingplayer) {
     return false;
   }
 
-  if(!isPlayer(entity) && (!isDefined(entity.model) || entity.model == # "")) {
+  if(!isPlayer(entity) && (!isDefined(entity.model) || entity.model == #"")) {
     return false;
   }
 

@@ -73,12 +73,12 @@ function function_76f6cec6(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 1:
       icon = "icon_minimap_sensor_dart";
-      color = # "neutral";
+      color = #"neutral";
       var_9c06499c = 1;
       break;
     case 9:
       icon = "ui_icon_minimap_waypoint_ladder";
-      color = # "neutral";
+      color = #"neutral";
       var_9c06499c = 1;
       break;
   }

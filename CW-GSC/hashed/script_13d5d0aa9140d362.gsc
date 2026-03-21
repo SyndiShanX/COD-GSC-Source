@@ -69,7 +69,7 @@ function function_76468d55(a_ai_zombies, v_org, eattacker) {
       continue;
     }
 
-    if(a_ai_zombies[i].zm_ai_category === # "normal") {
+    if(a_ai_zombies[i].zm_ai_category === #"normal") {
       if(distance2dsquared(v_org, a_ai_zombies[i].origin) <= sqr(250)) {
         if(isDefined(a_ai_zombies[i].var_94378ef)) {
           damage = abs(a_ai_zombies[i].health - a_ai_zombies[i].var_94378ef);
@@ -88,7 +88,7 @@ function function_76468d55(a_ai_zombies, v_org, eattacker) {
       }
     }
 
-    if(!(a_ai_zombies[i].zm_ai_category === # "normal")) {
+    if(!(a_ai_zombies[i].zm_ai_category === #"normal")) {
       entity = a_ai_zombies[i];
 
       if(!isDefined(entity.basehealth)) {
@@ -123,8 +123,8 @@ function function_139ba789(zombie, eattacker) {
     return;
   }
 
-  var_a0d520ae = zombie.zm_ai_category === # "special";
-  iselite = zombie.zm_ai_category === # "elite";
+  var_a0d520ae = zombie.zm_ai_category === #"special";
+  iselite = zombie.zm_ai_category === #"elite";
   [[level.var_153ff55b]] - > waitinqueue(zombie);
 
   if(isPlayer(eattacker)) {
@@ -147,7 +147,7 @@ function function_912eedf3(zombie, eattacker) {
   self endon(#"death");
   zombie endon(#"death");
 
-  if(isDefined(zombie) && !is_true(zombie.var_a950813d) && zombie.zm_ai_category === # "normal" && isDefined(self)) {
+  if(isDefined(zombie) && !is_true(zombie.var_a950813d) && zombie.zm_ai_category === #"normal" && isDefined(self)) {
     v_dir = vectornormalize(zombie.origin - self.origin);
     v_launch = v_dir * randomintrange(10, 25) + (0, 0, randomintrange(100, 150));
 
@@ -169,12 +169,12 @@ function function_e1c4e1c2(v_org, eattacker, einflictor) {
   if(isalive(self)) {
     self dodamage(500, v_org, eattacker, einflictor, "none", "MOD_EXPLOSIVE");
 
-    if(self.zm_ai_category === # "normal") {
+    if(self.zm_ai_category === #"normal") {
       self zombie_utility::setup_zombie_knockdown(v_org);
       return;
     }
 
-    if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite") {
+    if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite") {
       self ai::stun(2);
     }
   }
@@ -769,7 +769,7 @@ function function_a6b2f443(vehicle) {
 
       if(vehicle.vehicletype === var_59efbf47.vehicletype) {
         near_dist = 128;
-      } else if(var_59efbf47.vehicletype === # "hash_2c0e11a1e87bbcd5") {
+      } else if(var_59efbf47.vehicletype === #"hash_2c0e11a1e87bbcd5") {
         near_dist = 256;
       }
 
@@ -795,7 +795,7 @@ function on_vehicle_damage(params) {
   }
 
   if(isDefined(params.eattacker) && isactor(params.eattacker)) {
-    if(params.eattacker.archetype === # "raz" && params.smeansofdeath === "MOD_EXPLOSIVE") {
+    if(params.eattacker.archetype === #"raz" && params.smeansofdeath === "MOD_EXPLOSIVE") {
       vehicle dodamage(500, params.eattacker.origin, params.eattacker);
       vehicle playrumbleonentity("sr_prototype_vehicle_run_over");
       occupants = vehicle getvehoccupants();

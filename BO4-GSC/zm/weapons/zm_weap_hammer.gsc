@@ -61,7 +61,7 @@ __init__() {
   callback::on_connect(&function_c3f6fd96);
   callback::on_disconnect(&on_player_disconnect);
   callback::function_4b58e5ab(&function_4b58e5ab);
-  level._effect[#"lightning_eyes"] = # "hash_5aa1120d061d1f6c";
+  level._effect[#"lightning_eyes"] = #"hash_5aa1120d061d1f6c";
   ability_player::register_gadget_activation_callbacks(11, undefined, &hammer_off);
 }
 
@@ -510,7 +510,7 @@ function_97429d68() {
   if(!self clientfield::get("" + # "hero_hammer_stun")) {
     self clientfield::set("" + # "hero_hammer_stun", 1);
 
-    if(self.archetype == # "zombie") {
+    if(self.archetype == #"zombie") {
       bhtnactionstartevent(self, "electrocute");
     }
   }
@@ -617,7 +617,7 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
 
   e_target clientfield::set("" + # "lightning_impact_fx", 1);
 
-  if(e_target.archetype === # "zombie") {
+  if(e_target.archetype === #"zombie") {
     bhtnactionstartevent(e_target, "electrocute");
   }
 
@@ -646,7 +646,7 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
       switch (e_target.zm_ai_category) {
         case # "basic":
         case # "enhanced":
-          if(e_target.archetype != # "tiger" && e_target.archetype != # "catalyst") {
+          if(e_target.archetype != #"tiger" && e_target.archetype != #"catalyst") {
             e_target thread zombie_shock_eyes();
           }
 
@@ -734,7 +734,7 @@ staff_lightning_is_target_valid(ai_zombie) {
 stun_zombie() {
   self endon(#"death");
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"boss") {
     return;
   }
 
@@ -762,7 +762,7 @@ zombie_shock_eyes() {
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "boss" || isvehicle(self)) {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"boss" || isvehicle(self)) {
     return;
   }
 

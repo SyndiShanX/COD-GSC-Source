@@ -170,7 +170,7 @@ function_9a9b5f49(spot) {
 }
 
 function_7e791d5d(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == # "gegenees" && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == #"gegenees" && eattacker.team != self.team) {
     if(eattacker ai::has_behavior_attribute("damage_multiplier")) {
       damage_multiplier = eattacker ai::get_behavior_attribute("damage_multiplier");
 

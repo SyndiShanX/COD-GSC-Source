@@ -143,7 +143,7 @@ function function_16ee17b2(var_6c9e0594) {
   foreach(index, trigger in var_3a0ebe3c) {
     visuals = [];
     visuals[0] = trigger.visual;
-    name = # "dom" + trigger.visual.script_label;
+    name = #"dom" + trigger.visual.script_label;
     var_6b67c295 = gameobjects::create_use_object(#"none", trigger, visuals, (0, 0, 0), name);
     var_6b67c295 gameobjects::allow_use(#"group_enemy");
     var_6b67c295 gameobjects::set_use_text(#"mp/capturing_flag");
@@ -199,44 +199,44 @@ function function_229b384c(zone) {
 
   switch (label) {
     case # "_a":
-      data.var_1629d8a0 = # "hash_3ff1c88b4360ea84";
-      data.var_44e9bd00 = # "hash_5b47de31c97a49ff";
+      data.var_1629d8a0 = #"hash_3ff1c88b4360ea84";
+      data.var_44e9bd00 = #"hash_5b47de31c97a49ff";
       data.spawnlist = "spl1";
       data.var_bd674032 = 1;
       data.var_95afd88f = "dom_a_cam";
       break;
     case # "_b":
-      data.var_1629d8a0 = # "hash_dd6191acefd6847";
-      data.var_44e9bd00 = # "hash_481e5e34f798331e";
+      data.var_1629d8a0 = #"hash_dd6191acefd6847";
+      data.var_44e9bd00 = #"hash_481e5e34f798331e";
       data.var_bd674032 = 2;
       data.spawnlist = "spl2";
       data.var_ecee1402 = 1;
       data.var_95afd88f = "dom_b_cam";
       break;
     case # "_c":
-      data.var_1629d8a0 = # "hash_25a2a0aff40c76aa";
-      data.var_44e9bd00 = # "hash_6a0c2383d37849bd";
+      data.var_1629d8a0 = #"hash_25a2a0aff40c76aa";
+      data.var_44e9bd00 = #"hash_6a0c2383d37849bd";
       data.spawnlist = "spl3";
       data.var_bd674032 = 3;
       data.var_95afd88f = "dom_c_cam";
       break;
     case # "_d":
-      data.var_1629d8a0 = # "hash_2bcd7171f9aae4a5";
-      data.var_44e9bd00 = # "hash_5079687d6a87790c";
+      data.var_1629d8a0 = #"hash_2bcd7171f9aae4a5";
+      data.var_44e9bd00 = #"hash_5079687d6a87790c";
       data.spawnlist = "spl4";
       data.var_bd674032 = 4;
       data.var_95afd88f = "dom_d_cam";
       break;
     case # "_e":
-      data.var_1629d8a0 = # "hash_5334d65b46b55660";
-      data.var_44e9bd00 = # "hash_78e2a90cf85daa3b";
+      data.var_1629d8a0 = #"hash_5334d65b46b55660";
+      data.var_44e9bd00 = #"hash_78e2a90cf85daa3b";
       data.spawnlist = "spl5";
       data.var_bd674032 = 5;
       data.var_95afd88f = "dom_d_cam";
       break;
     case # "_f":
-      data.var_1629d8a0 = # "hash_6848900356c78b93";
-      data.var_44e9bd00 = # "hash_cd72c0a5ba856da";
+      data.var_1629d8a0 = #"hash_6848900356c78b93";
+      data.var_44e9bd00 = #"hash_cd72c0a5ba856da";
       data.spawnlist = "spl6";
       data.var_bd674032 = 6;
       data.var_95afd88f = "dom_f_cam";
@@ -651,7 +651,7 @@ function capture_flag(var_5e54cb59, var_24672ed6) {
   if(level.flagcanbeneutralized && !var_24672ed6) {
     level notify(#"flag_neutralized");
     string = self.data.var_1629d8a0;
-    var_d89c1031 = # "neutral";
+    var_d89c1031 = #"neutral";
     thread give_neutralized_credit(self.users[user].touching.players, string, var_24672ed6);
   } else {
     level notify(#"flag_captured");
@@ -670,7 +670,7 @@ function capture_flag(var_5e54cb59, var_24672ed6) {
 }
 
 function function_bb3152b7(var_d89c1031, var_b4950c2b) {
-  if(var_d89c1031 == # "neutral") {
+  if(var_d89c1031 == #"neutral") {
     return;
   }
 
@@ -696,7 +696,7 @@ function function_91cdcd1e(enemy_players, var_24672ed6, var_b4950c2b) {
     if(!var_24672ed6) {
       var_56fa1097 = randomint(2) ? "lost" + self.label : # "enemy" + self.label;
     } else {
-      var_56fa1097 = # "enemy" + self.label;
+      var_56fa1097 = #"enemy" + self.label;
     }
 
     function_ea620e62(var_56fa1097, enemy_players, self.data.dialog_key);
@@ -713,7 +713,7 @@ function function_91cdcd1e(enemy_players, var_24672ed6, var_b4950c2b) {
 
 function on_use(sentient) {
   var_5e54cb59 = sentient.team;
-  assert(var_5e54cb59 != # "neutral");
+  assert(var_5e54cb59 != #"neutral");
 
   print("<dev string:x1aa>" + self.label);
 
@@ -1364,7 +1364,7 @@ function update_spawn_influencers(team) {
   assert(isDefined(self.owned_flag_influencer));
   assert(isDefined(self.enemy_flag_influencer));
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     enableinfluencer(self.neutral_flag_influencer, 1);
     enableinfluencer(self.owned_flag_influencer, 0);
     enableinfluencer(self.enemy_flag_influencer, 0);
@@ -1533,7 +1533,7 @@ function function_d24432a4(state) {
     self.var_b3890fdf = 0;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -1541,23 +1541,23 @@ function function_d24432a4(state) {
 
   switch (state) {
     case # "cap_low":
-      str_alias = # "hash_1c5192b85675532d";
+      str_alias = #"hash_1c5192b85675532d";
       n_waittime = 1.25;
       break;
     case # "cap_mid":
-      str_alias = # "hash_1c5191b85675517a";
+      str_alias = #"hash_1c5191b85675517a";
       n_waittime = 1.25;
       break;
     case # "cap_high":
-      str_alias = # "hash_1c518cb8567548fb";
+      str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 1.25;
       break;
     case # "cap_drain":
-      str_alias = # "hash_1c518fb856754e14";
+      str_alias = #"hash_1c518fb856754e14";
       n_waittime = 1.25;
       break;
     case # "cap_contested":
-      str_alias = # "hash_43014e1f7354354f";
+      str_alias = #"hash_43014e1f7354354f";
       n_waittime = 1.25;
       break;
   }
@@ -1577,7 +1577,7 @@ function function_d24432a4(state) {
 }
 
 function function_f9df98d3(type, value) {
-  if(type === # "ekia" || type === # "killed_attacker" || type === # "killed_defender" || type === # "kill_enemy_while_capping_dom") {
+  if(type === #"ekia" || type === #"killed_attacker" || type === #"killed_defender" || type === #"kill_enemy_while_capping_dom") {
     return (value + level.var_49a15413);
   }
 

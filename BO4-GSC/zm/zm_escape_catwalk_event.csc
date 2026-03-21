@@ -8,7 +8,7 @@
 #namespace zm_escape_catwalk_event;
 
 init_fx() {
-  level._effect[#"hash_46085f7d2bcd82c5"] = # "hash_404575a78667befd";
+  level._effect[#"hash_46085f7d2bcd82c5"] = #"hash_404575a78667befd";
 }
 
 init_clientfields() {

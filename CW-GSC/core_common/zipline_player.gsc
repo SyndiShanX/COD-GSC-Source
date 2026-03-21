@@ -194,7 +194,7 @@ function function_e415c864(var_5da09c55) {
   var_912fa366 setvisibletoall();
   var_912fa366 setteamfortrigger(#"none");
   var_912fa366 setcursorhint("HINT_NOICON");
-  hint = # "hash_5ca3696cb6c3bea9";
+  hint = #"hash_5ca3696cb6c3bea9";
   var_912fa366 sethintstring(hint);
   var_912fa366 callback::on_trigger(&zipline_use);
   var_912fa366 function_2e7a1fba();
@@ -372,11 +372,11 @@ function private function_c4035adb(zipline) {
   entnum = self getentitynumber();
 
   if(is_true(zipline.cooldown[entnum])) {
-    hint = # "hash_55e4459830283bc7";
+    hint = #"hash_55e4459830283bc7";
   } else if(zipline.inuse > 0) {
-    hint = # "hash_d51ffb83d896d2d";
+    hint = #"hash_d51ffb83d896d2d";
   } else {
-    hint = # "hash_5ca3696cb6c3bea9";
+    hint = #"hash_5ca3696cb6c3bea9";
   }
 
   zipline.trigger sethintstringforplayer(self, hint);

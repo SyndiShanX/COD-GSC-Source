@@ -20,7 +20,7 @@ function private preinit() {
 
 function function_c9509a9c(params) {
   if(isalive(self) && isPlayer(self)) {
-    if(params.weapon.name === # "snowball") {
+    if(params.weapon.name === #"snowball") {
       var_feafe576 = 0;
       var_cb01806c = 0;
       bleft = 0;

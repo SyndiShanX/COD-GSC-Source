@@ -9,7 +9,7 @@
 
 init() {
   clientfield::register("scriptmover", "medallion_fx", 1, 1, "int", &function_6624b679, 0, 0);
-  level._effect[#"medallion_exp"] = # "hash_4960d9278d639297";
+  level._effect[#"medallion_exp"] = #"hash_4960d9278d639297";
 }
 
 function_6624b679(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

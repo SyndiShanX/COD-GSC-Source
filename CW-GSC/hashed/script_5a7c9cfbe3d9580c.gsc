@@ -1454,9 +1454,9 @@ function function_4c29c028(a_ents) {
 
   if(isDefined(level.var_afaf5a6d)) {
     if(isDefined(level.var_afaf5a6d._scene_object._o_scene._e_root.scriptbundlename)) {
-      level.var_afaf5a6d.propername = # "hash_7f6eed032db2f3ba";
+      level.var_afaf5a6d.propername = #"hash_7f6eed032db2f3ba";
     } else {
-      level.var_afaf5a6d.propername = # "hash_7f6eed032db2f3ba";
+      level.var_afaf5a6d.propername = #"hash_7f6eed032db2f3ba";
     }
   }
 
@@ -1727,7 +1727,7 @@ function function_f0e80189(a_ents) {
   level.var_a9274912 = a_ents[#"actor 2"];
 
   if(isDefined(level.var_a9274912)) {
-    level.var_a9274912.propername = # "hash_7f6eed032db2f3ba";
+    level.var_a9274912.propername = #"hash_7f6eed032db2f3ba";
   }
 
   if(isDefined(level.gender)) {
@@ -1741,7 +1741,7 @@ function function_f0e80189(a_ents) {
   adler = a_ents[#"actor 1"];
 
   if(isDefined(adler)) {
-    adler.propername = # "hash_7f6eed032db2f3ba";
+    adler.propername = #"hash_7f6eed032db2f3ba";
     adler thread function_c6a03680("adler_turns_to_window", #"hash_7edabf22111a04da");
   }
 }
@@ -1750,7 +1750,7 @@ function function_a36bacf8(a_ents) {
   level.var_740b3f5b = a_ents[#"actor 2"];
 
   if(isDefined(level.var_740b3f5b)) {
-    level.var_740b3f5b.propername = # "hash_7f6eed032db2f3ba";
+    level.var_740b3f5b.propername = #"hash_7f6eed032db2f3ba";
 
     if(isDefined(level.gender)) {
       if(level.gender == 0 || level.gender == 1) {
@@ -1780,7 +1780,7 @@ function function_a36bacf8(a_ents) {
   adler = a_ents[#"actor 1"];
 
   if(isDefined(adler) && !isDefined(adler.var_45c9d5e8)) {
-    adler.propername = # "hash_7f6eed032db2f3ba";
+    adler.propername = #"hash_7f6eed032db2f3ba";
     adler thread function_c6a03680("window_5", #"hash_7edabf22111a04da");
     adler.var_45c9d5e8 = 1;
   }
@@ -1788,7 +1788,7 @@ function function_a36bacf8(a_ents) {
   sims = a_ents[#"actor 3"];
 
   if(isDefined(sims) && !isDefined(sims.var_45c9d5e8)) {
-    sims.propername = # "hash_7f6eed032db2f3ba";
+    sims.propername = #"hash_7f6eed032db2f3ba";
     sims thread function_c6a03680("window_5", #"hash_726674254495739e");
     sims.var_45c9d5e8 = 1;
   }
@@ -1796,14 +1796,14 @@ function function_a36bacf8(a_ents) {
   park = a_ents[#"actor 4"];
 
   if(isDefined(park)) {
-    park.propername = # "hash_7f6eed032db2f3ba";
+    park.propername = #"hash_7f6eed032db2f3ba";
     park thread function_c6a03680("window_5", #"hash_a0d642b09afc71a");
   }
 
   lazar = a_ents[#"actor 5"];
 
   if(isDefined(lazar)) {
-    lazar.propername = # "hash_7f6eed032db2f3ba";
+    lazar.propername = #"hash_7f6eed032db2f3ba";
     lazar thread function_c6a03680("window_5", #"hash_6a46f5c74f586cb6");
   }
 }

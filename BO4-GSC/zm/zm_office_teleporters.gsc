@@ -661,7 +661,7 @@ function_bb3f9afd() {
   s_portal notify(#"hash_3c91bf90cecbe758");
   s_portal = level.var_905aea40;
 
-  if(util::get_game_type() == # "zstandard") {
+  if(util::get_game_type() == #"zstandard") {
     s_portal.n_floor = -1;
   }
 
@@ -669,7 +669,7 @@ function_bb3f9afd() {
   s_portal zm_unitrigger::create("", 32, &portal_think, 0, 0);
   playFX(level._effect[#"portal_spawn"], s_portal.origin, (1, 0, 0), (0, 0, 1));
 
-  if(level flag::get("defcon_active") || util::get_game_type() == # "zstandard") {
+  if(level flag::get("defcon_active") || util::get_game_type() == #"zstandard") {
     s_portal function_79e8b4c6(2);
   } else {
     s_portal function_98cd139();
@@ -948,7 +948,7 @@ function_1bf7bc9e() {
 
 function_a6bb56f6() {
   foreach(s_portal in level.a_s_portals) {
-    if(s_portal.script_noteworthy != "portal_war_room_map" || util::get_game_type() != # "zstandard") {
+    if(s_portal.script_noteworthy != "portal_war_room_map" || util::get_game_type() != #"zstandard") {
       s_portal.var_cd2f1fed = 1;
       s_portal notify(#"hash_3c91bf90cecbe758");
       s_portal.a_e_users = [];

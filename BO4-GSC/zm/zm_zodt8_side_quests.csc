@@ -37,28 +37,28 @@ init_clientfields() {
 init_flags() {}
 
 init_fx() {
-  level._effect[#"safe_fx"] = # "hash_4bf40208439d50d6";
-  level._effect[#"hash_3ed9aa5890e4cfd2"] = # "hash_4b6b503d842bc415";
-  level._effect[#"hash_21893413efec355e"] = # "hash_cf3c06e4368bbb1";
-  level._effect[#"hash_55ab46637a8fbcb3"] = # "hash_5508b1d8864ee2d2";
-  level._effect[#"hash_2377de258e66b4ce"] = # "hash_33da19858ee59385";
-  level._effect[#"hash_76a20bbf3432c804"] = # "hash_1b5b754131008f70";
-  level._effect[#"hash_4817a1dbc7bf4ca4"] = # "hash_770af2dde4a0938c";
-  level._effect[#"hash_3ddf14b70581a57"] = # "hash_41eac18dc72dac23";
-  level._effect[#"hash_3bfcf7e07661fa18"] = # "hash_5e9dff5fcbf30022";
-  level._effect[#"hash_26c9596a43d9be2e"] = # "hash_4144490ff4773f4b";
-  level._effect[#"hash_6571250749b2c790"] = # "hash_1a3fcc6c808e55eb";
-  level._effect[#"hash_51ecda6f24a58d05"] = # "hash_13c3cecd3d059c90";
-  level._effect[#"hash_2f154bbb31e4abaf"] = # "hash_706103079a2bdb6d";
-  level._effect[#"hash_3524e302fa83d12e"] = # "hash_3a791d490f01f5c7";
-  level._effect[#"hash_2498ee8a7586b418"] = # "hash_15dc4292340f0f1c";
-  level._effect[#"hash_16c2570acb38a0ed"] = # "hash_7691f79bfc16f0bf";
-  level._effect[#"car_lights"] = # "hash_335feb1d213c22f6";
-  level._effect[#"hash_1c0ed73a9b21a882"] = # "hash_cc7196a44e2fbe3";
-  level._effect[#"hash_704d3c12d59fb5d7"] = # "hash_2aabc11b07ad74d8";
-  level._effect[#"hash_4ec5da9e09256102"] = # "hash_3063115f97c18abf";
-  level._effect[#"hash_133983d2bb8a160"] = # "hash_51ca82e6f2c21354";
-  level._effect[#"hash_13aa43d2bbed472"] = # "hash_51d16ee6f2c81006";
+  level._effect[#"safe_fx"] = #"hash_4bf40208439d50d6";
+  level._effect[#"hash_3ed9aa5890e4cfd2"] = #"hash_4b6b503d842bc415";
+  level._effect[#"hash_21893413efec355e"] = #"hash_cf3c06e4368bbb1";
+  level._effect[#"hash_55ab46637a8fbcb3"] = #"hash_5508b1d8864ee2d2";
+  level._effect[#"hash_2377de258e66b4ce"] = #"hash_33da19858ee59385";
+  level._effect[#"hash_76a20bbf3432c804"] = #"hash_1b5b754131008f70";
+  level._effect[#"hash_4817a1dbc7bf4ca4"] = #"hash_770af2dde4a0938c";
+  level._effect[#"hash_3ddf14b70581a57"] = #"hash_41eac18dc72dac23";
+  level._effect[#"hash_3bfcf7e07661fa18"] = #"hash_5e9dff5fcbf30022";
+  level._effect[#"hash_26c9596a43d9be2e"] = #"hash_4144490ff4773f4b";
+  level._effect[#"hash_6571250749b2c790"] = #"hash_1a3fcc6c808e55eb";
+  level._effect[#"hash_51ecda6f24a58d05"] = #"hash_13c3cecd3d059c90";
+  level._effect[#"hash_2f154bbb31e4abaf"] = #"hash_706103079a2bdb6d";
+  level._effect[#"hash_3524e302fa83d12e"] = #"hash_3a791d490f01f5c7";
+  level._effect[#"hash_2498ee8a7586b418"] = #"hash_15dc4292340f0f1c";
+  level._effect[#"hash_16c2570acb38a0ed"] = #"hash_7691f79bfc16f0bf";
+  level._effect[#"car_lights"] = #"hash_335feb1d213c22f6";
+  level._effect[#"hash_1c0ed73a9b21a882"] = #"hash_cc7196a44e2fbe3";
+  level._effect[#"hash_704d3c12d59fb5d7"] = #"hash_2aabc11b07ad74d8";
+  level._effect[#"hash_4ec5da9e09256102"] = #"hash_3063115f97c18abf";
+  level._effect[#"hash_133983d2bb8a160"] = #"hash_51ca82e6f2c21354";
+  level._effect[#"hash_13aa43d2bbed472"] = #"hash_51d16ee6f2c81006";
 }
 
 function_f99ce12b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

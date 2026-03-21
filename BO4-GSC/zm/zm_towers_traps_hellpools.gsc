@@ -353,7 +353,7 @@ function_db9410fa(e_trap) {
       e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }
 
-    if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "heavy") {
+    if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"heavy") {
       self.marked_for_death = 0;
       return;
     }

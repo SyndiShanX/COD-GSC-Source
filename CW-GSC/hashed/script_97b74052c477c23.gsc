@@ -254,7 +254,7 @@ function private function_9927587f() {
     level.player flag::clear("flg_random_photo_taken");
     level.player spy_camera::function_b28ab5a9(self);
 
-    if(!(s_waitresult.source === # "save_restore")) {
+    if(!(s_waitresult.source === #"save_restore")) {
       level thread namespace_4bd68414::function_b27f23a4();
       level.player stats::set_stat(#"hash_6a289d8183e39dc5", self.script_int, 1);
       uploadstats(level.player);
@@ -438,8 +438,8 @@ function function_e610d177() {
   if(!isDefined(level.park)) {
     level.park = spawn("script_model", (0, 0, 0));
     level.park.team = "allies";
-    level.park.propername = # "hash_a0d642b09afc71a";
-    level.park.name = # "hash_a0d642b09afc71a";
+    level.park.propername = #"hash_a0d642b09afc71a";
+    level.park.name = #"hash_a0d642b09afc71a";
     animation::add_notetrack_func("amerika_util::park_scene_radio_dialogue_play", &function_4bf8c9de);
   }
 }
@@ -628,7 +628,7 @@ function function_e57eea9a(var_e3e95e4e = 0) {
 }
 
 function function_2ad2c134(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
-  if(isDefined(modelindex) && modelindex.weapclass == "grenade" && (modelindex.name == # "eq_flash_grenade" || boneindex == "MOD_IMPACT")) {
+  if(isDefined(modelindex) && modelindex.weapclass == "grenade" && (modelindex.name == #"eq_flash_grenade" || boneindex == "MOD_IMPACT")) {
     return psoffsettime;
   }
 
@@ -1095,7 +1095,7 @@ function function_6fd49fc6(var_290b108c = 1) {
   self deletedelay();
 }
 
-function function_594838c(var_ca230c69, flag_name, b_rumble = 0, var_22da929b = 1, var_c652f333 = 0, str_fx = # "hash_1f520075c2af377e", var_39703059 = 0, var_15060b35 = 0) {
+function function_594838c(var_ca230c69, flag_name, b_rumble = 0, var_22da929b = 1, var_c652f333 = 0, str_fx = #"hash_1f520075c2af377e", var_39703059 = 0, var_15060b35 = 0) {
   if(isDefined(flag_name)) {
     level flag::wait_till(flag_name);
     println(flag_name + "<dev string:x10f>" + var_ca230c69);
@@ -1128,7 +1128,7 @@ function function_594838c(var_ca230c69, flag_name, b_rumble = 0, var_22da929b = 
   return vh_heli;
 }
 
-function function_b510a5de(var_c652f333 = 1, str_fx = # "hash_1f520075c2af377e", var_39703059 = 0) {
+function function_b510a5de(var_c652f333 = 1, str_fx = #"hash_1f520075c2af377e", var_39703059 = 0) {
   if(var_39703059) {
     self flag::set(#"hash_2162416b46fca89a");
   }
@@ -1267,8 +1267,8 @@ function private function_c163ea10(vh_heli) {
   level.player endon(#"death");
   var_ee8c7f3 = 25;
   var_203a2093 = 0;
-  level.var_85b00b2b = # "hash_4fa39beaac8ad1d0";
-  level.var_30eb363 = # "hash_2d80edd53253ecf1";
+  level.var_85b00b2b = #"hash_4fa39beaac8ad1d0";
+  level.var_30eb363 = #"hash_2d80edd53253ecf1";
   level flag::set("flg_vig_heli_shooting_player");
   doors::function_f35467ac("e_lockpick_door");
   self rotateto(self.angles, float(function_60d95f53()) / 1000);
@@ -1313,8 +1313,8 @@ function private function_c6dc514e() {
 
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
-  level.var_85b00b2b = # "hash_4fa39beaac8ad1d0";
-  level.var_30eb363 = # "hash_2d80edd53253ecf1";
+  level.var_85b00b2b = #"hash_4fa39beaac8ad1d0";
+  level.var_30eb363 = #"hash_2d80edd53253ecf1";
   var_9012c9b0 = getweapon(#"hash_161ca1bfb05ce95c");
   v_player_pos = level.player getplayercamerapos();
   var_1c8839e = v_player_pos + (0, 0, 16);
@@ -1385,8 +1385,8 @@ function function_6fdf0945(var_332f16b5 = 0) {
   self thread vehicle::toggle_tread_fx(1);
 
   if(var_332f16b5 == 1) {
-    self.exhaustfxtag1 = # "tag_fx_exhaust_left";
-    self.exhaustfxname = # "hash_4bfe81be0f573831";
+    self.exhaustfxtag1 = #"tag_fx_exhaust_left";
+    self.exhaustfxname = #"hash_4bfe81be0f573831";
     self.exhaust_fx = level._effect[self.exhaustfxname];
     waitframe(1);
     self thread vehicle::toggle_exhaust_fx(1);
@@ -1515,16 +1515,16 @@ function function_3ada3d71() {
 
   switch (i) {
     case 1:
-      level.var_85b00b2b = # "hash_4a2d1d12614172fd";
+      level.var_85b00b2b = #"hash_4a2d1d12614172fd";
       break;
     case 2:
-      level.var_85b00b2b = # "hash_4a2d1a1261416de4";
+      level.var_85b00b2b = #"hash_4a2d1a1261416de4";
       break;
     case 3:
-      level.var_85b00b2b = # "hash_4a2d1b1261416f97";
+      level.var_85b00b2b = #"hash_4a2d1b1261416f97";
       break;
     default:
-      level.var_85b00b2b = # "hash_4a2d1d12614172fd";
+      level.var_85b00b2b = #"hash_4a2d1d12614172fd";
       break;
   }
 
@@ -1532,22 +1532,22 @@ function function_3ada3d71() {
 
   switch (i) {
     case 1:
-      level.var_30eb363 = # "hash_1771387066ebfc94";
+      level.var_30eb363 = #"hash_1771387066ebfc94";
       break;
     case 2:
-      level.var_30eb363 = # "hash_17713b7066ec01ad";
+      level.var_30eb363 = #"hash_17713b7066ec01ad";
       break;
     case 3:
-      level.var_30eb363 = # "hash_17713a7066ebfffa";
+      level.var_30eb363 = #"hash_17713a7066ebfffa";
       break;
     case 4:
-      level.var_30eb363 = # "hash_1771357066ebf77b";
+      level.var_30eb363 = #"hash_1771357066ebf77b";
       break;
     case 5:
-      level.var_30eb363 = # "hash_1771347066ebf5c8";
+      level.var_30eb363 = #"hash_1771347066ebf5c8";
       break;
     default:
-      level.var_30eb363 = # "hash_1771387066ebfc94";
+      level.var_30eb363 = #"hash_1771387066ebfc94";
       break;
   }
 
@@ -2322,7 +2322,7 @@ function function_8ad2b291() {
       player = s_result.activator;
       var_40611693 = s_result.dropped_item[0];
 
-      if(var_40611693.item.weapclass === # "pistol") {
+      if(var_40611693.item.weapclass === #"pistol") {
         var_40611693.origin = player gettagorigin("j_spineupper");
         var_40611693 unlink();
         continue;

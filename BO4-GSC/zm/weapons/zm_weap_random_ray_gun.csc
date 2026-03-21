@@ -89,13 +89,13 @@ function_847080fa(localclientnum) {
 
   switch (self.archetype) {
     case # "zombie":
-      var_99d5ab4f = # "aib_t8_zm_zombie_base_dth_shrink_ww_wkud";
+      var_99d5ab4f = #"aib_t8_zm_zombie_base_dth_shrink_ww_wkud";
       break;
     case # "nosferatu":
-      var_99d5ab4f = # "aib_t8_zm_nfrtu_dth_shrink_ww_wkud";
+      var_99d5ab4f = #"aib_t8_zm_nfrtu_dth_shrink_ww_wkud";
       break;
     case # "bat":
-      var_99d5ab4f = # "aib_t8_zm_bat_dth_shrink_ww_wkud";
+      var_99d5ab4f = #"aib_t8_zm_bat_dth_shrink_ww_wkud";
       break;
   }
 
@@ -276,7 +276,7 @@ function_9fe38370(localclientnum, newval, str_tag) {
   if(newval) {
     self.var_4b8417f6 = util::playFXOnTag(localclientnum, "zm_weapons/fx8_www_drag_enemy_torso", self, str_tag);
 
-    if(self.archetype === # "zombie" || self.archetype === # "nosferatu") {
+    if(self.archetype === #"zombie" || self.archetype === #"nosferatu") {
       self thread function_84884488(localclientnum);
     }
 
@@ -291,7 +291,7 @@ function_84884488(localclientnum) {
   self playrenderoverridebundle(#"hash_429426f01ad84c8b");
   wait 0.7;
 
-  if(self.archetype === # "zombie" || self.archetype === # "catalyst" || self.archetype === # "nosferatu") {
+  if(self.archetype === #"zombie" || self.archetype === #"catalyst" || self.archetype === #"nosferatu") {
     if(!isDefined(level.var_4fea6622)) {
       level.var_4fea6622 = 0;
     }

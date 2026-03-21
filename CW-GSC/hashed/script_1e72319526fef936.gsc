@@ -74,7 +74,7 @@ function function_ea2db6a9(instance) {
 function function_16ee428c(params) {
   if(isarray(level.var_ff7bf48c)) {
     foreach(mdl_portal in level.var_ff7bf48c) {
-      if(isDefined(mdl_portal) && mdl_portal.instance.content_script_name !== # "hash_18be5193d8310f84") {
+      if(isDefined(mdl_portal) && mdl_portal.instance.content_script_name !== #"hash_18be5193d8310f84") {
         mdl_portal.fx_id = playFXOnTag(#"hash_7312068ea6037f71", mdl_portal, "tag_origin");
       }
     }

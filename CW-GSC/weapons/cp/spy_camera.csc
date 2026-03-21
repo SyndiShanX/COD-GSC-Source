@@ -435,7 +435,7 @@ function private function_a259ab2b(localclientnum) {
   var_1456edd4 = easing::ease_power(100, 500, math::clamp(fov / 64, 0, 1), 1, 0, 1.75);
 
   foreach(target in targets) {
-    if(!isDefined(target) || is_true(target.var_696ee14a) || is_true(target.var_7b755cc0) || target.team === # "allies") {
+    if(!isDefined(target) || is_true(target.var_696ee14a) || is_true(target.var_7b755cc0) || target.team === #"allies") {
       continue;
     }
 
@@ -446,10 +446,10 @@ function private function_a259ab2b(localclientnum) {
 }
 
 function private function_c3f05233() {
-  rob = # "hash_1dced6114b72a678";
+  rob = #"hash_1dced6114b72a678";
 
-  if(self.team !== # "axis") {
-    rob = # "hash_44adc567f9f60d61";
+  if(self.team !== #"axis") {
+    rob = #"hash_44adc567f9f60d61";
   }
 
   self.var_696ee14a = 1;

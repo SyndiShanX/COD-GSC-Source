@@ -280,20 +280,20 @@ function updatetextongamepadchange() {
 
       if(var_4084aa7) {
         if(!is_true(self.slopelocked)) {
-          self.matchslopekey.label = # "hash_7f59350f5f223501";
+          self.matchslopekey.label = #"hash_7f59350f5f223501";
         } else {
-          self.matchslopekey.label = # "hash_6ca8e1ea720ba9f";
+          self.matchslopekey.label = #"hash_6ca8e1ea720ba9f";
         }
 
-        self.spinpropkey.label = # "mp_ph_spin";
+        self.spinpropkey.label = #"mp_ph_spin";
       } else {
         if(!is_true(self.slopelocked)) {
-          self.matchslopekey.label = # "hash_4c7fbb5c1ccd5107";
+          self.matchslopekey.label = #"hash_4c7fbb5c1ccd5107";
         } else {
-          self.matchslopekey.label = # "hash_3cd8ecbf9f39b3e9";
+          self.matchslopekey.label = #"hash_3cd8ecbf9f39b3e9";
         }
 
-        self.spinpropkey.label = # "hash_39e61050ab8d325e";
+        self.spinpropkey.label = #"hash_39e61050ab8d325e";
       }
     }
 
@@ -545,9 +545,9 @@ function propmatchslope() {
 
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = # "hash_6ca8e1ea720ba9f";
+        self.matchslopekey.label = #"hash_6ca8e1ea720ba9f";
       } else {
-        self.matchslopekey.label = # "hash_3cd8ecbf9f39b3e9";
+        self.matchslopekey.label = #"hash_3cd8ecbf9f39b3e9";
       }
     }
 
@@ -565,11 +565,11 @@ function propmatchslope() {
 
   if(prop::useprophudserver()) {
     if(self is_player_gamepad_enabled()) {
-      self.matchslopekey.label = # "hash_7f59350f5f223501";
+      self.matchslopekey.label = #"hash_7f59350f5f223501";
       return;
     }
 
-    self.matchslopekey.label = # "hash_4c7fbb5c1ccd5107";
+    self.matchslopekey.label = #"hash_4c7fbb5c1ccd5107";
   }
 }
 
@@ -841,7 +841,7 @@ function unlockprop() {
     self.var_635e22e7 = 0;
 
     if(prop::useprophudserver()) {
-      self.lockpropkey.label = # "mp_ph_lock";
+      self.lockpropkey.label = #"mp_ph_lock";
       self thread flashlockpropkey();
     }
   }
@@ -867,7 +867,7 @@ function lockprop() {
   self notify(#"locked");
 
   if(prop::useprophudserver()) {
-    self.lockpropkey.label = # "mp_ph_locked";
+    self.lockpropkey.label = #"mp_ph_locked";
     self thread flashlockpropkey();
   }
 }
@@ -1056,7 +1056,7 @@ function propcamerazoom() {
 function setnewabilityhud() {
   switch (self.currentability) {
     case # "flash":
-      self.abilitykey.label = # "mp_ph_flash";
+      self.abilitykey.label = #"mp_ph_flash";
       break;
     default:
       assertmsg("<dev string:xaa>");
@@ -1547,7 +1547,7 @@ function function_2b14e8b1() {
     self clientfield::set_to_player("PROP.hide_prop", 1);
 
     if(prop::useprophudserver()) {
-      self.var_8e3b5c8c.label = # "hash_54ba1311175de71e";
+      self.var_8e3b5c8c.label = #"hash_54ba1311175de71e";
     }
 
     return;
@@ -1556,6 +1556,6 @@ function function_2b14e8b1() {
   self clientfield::set_to_player("PROP.hide_prop", 0);
 
   if(prop::useprophudserver()) {
-    self.var_8e3b5c8c.label = # "hash_fb73fdc2aff963f";
+    self.var_8e3b5c8c.label = #"hash_fb73fdc2aff963f";
   }
 }

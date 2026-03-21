@@ -12,7 +12,7 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[#"fx8_insanity_wisp"] = # "hash_75046ca8114af653";
+  level._effect[#"fx8_insanity_wisp"] = #"hash_75046ca8114af653";
 }
 
 function_4b104fc5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

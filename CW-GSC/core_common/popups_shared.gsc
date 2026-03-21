@@ -625,7 +625,7 @@ function displayteammessagetoall(message, player) {
     }
 
     cur_player.teammessagequeue[size] = spawnStruct();
-    cur_player.teammessagequeue[size].notifyhash = # "player_callout";
+    cur_player.teammessagequeue[size].notifyhash = #"player_callout";
     cur_player.teammessagequeue[size].message = message;
     cur_player.teammessagequeue[size].player = player;
     cur_player function_eb9328f3();

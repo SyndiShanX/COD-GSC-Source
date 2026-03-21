@@ -51,7 +51,7 @@ function function_a5cd9e54() {
 }
 
 function private function_354a904e(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(boneindex.archetype === # "tormentor" && boneindex.team === self.team) {
+  if(boneindex.archetype === #"tormentor" && boneindex.team === self.team) {
     return 0;
   }
 

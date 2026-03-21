@@ -17,8 +17,8 @@ autoexec __init__system__() {
 
 __init__() {
   init_clientfields();
-  level._effect[#"trap_light_green"] = # "hash_3b61ca07c83b7171";
-  level._effect[#"trap_light_red"] = # "hash_7534672c207c08ed";
+  level._effect[#"trap_light_green"] = #"hash_3b61ca07c83b7171";
+  level._effect[#"trap_light_red"] = #"hash_7534672c207c08ed";
 }
 
 init_clientfields() {

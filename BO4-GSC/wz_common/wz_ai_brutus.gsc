@@ -131,7 +131,7 @@ function_6090f71a() {
   self clientfield::set("brutus_spawn_clientfield", 1);
   var_7dd9d338 = "c_t8_zmb_mob_brutus_baton";
 
-  if(self.subarchetype === # "brutus_special") {
+  if(self.subarchetype === #"brutus_special") {
     var_7dd9d338 = "c_t8_zmb_mob_brutus_boss_baton";
   }
 

@@ -110,7 +110,7 @@ init_spawnable_weapon_upgrade() {
     spawnable_weapon.weapon = getweapon(spawnable_weapon.zombie_weapon_upgrade);
     weapon_group = zm_utility::getweaponclasszm(spawnable_weapon.weapon);
 
-    if(weapon_group == # "weapon_pistol" && !zm_custom::function_901b751c(#"zmweaponspistol") || weapon_group == # "weapon_cqb" && !zm_custom::function_901b751c(#"zmweaponsshotgun") || weapon_group == # "weapon_smg" && !zm_custom::function_901b751c(#"zmweaponssmg") || weapon_group == # "weapon_assault" && !zm_custom::function_901b751c(#"zmweaponsar") || weapon_group == # "weapon_tactical" && !zm_custom::function_901b751c(#"zmweaponstr") || weapon_group == # "weapon_lmg" && !zm_custom::function_901b751c(#"zmweaponslmg") || weapon_group == # "weapon_sniper" && !zm_custom::function_901b751c(#"zmweaponssniper") || weapon_group == # "weapon_knife" && !zm_custom::function_901b751c(#"zmweaponsknife")) {
+    if(weapon_group == #"weapon_pistol" && !zm_custom::function_901b751c(#"zmweaponspistol") || weapon_group == #"weapon_cqb" && !zm_custom::function_901b751c(#"zmweaponsshotgun") || weapon_group == #"weapon_smg" && !zm_custom::function_901b751c(#"zmweaponssmg") || weapon_group == #"weapon_assault" && !zm_custom::function_901b751c(#"zmweaponsar") || weapon_group == #"weapon_tactical" && !zm_custom::function_901b751c(#"zmweaponstr") || weapon_group == #"weapon_lmg" && !zm_custom::function_901b751c(#"zmweaponslmg") || weapon_group == #"weapon_sniper" && !zm_custom::function_901b751c(#"zmweaponssniper") || weapon_group == #"weapon_knife" && !zm_custom::function_901b751c(#"zmweaponsknife")) {
       continue;
     }
 
@@ -400,9 +400,9 @@ wall_weapon_update_prompt(player) {
 
     if(player function_284616f8()) {
       if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_7778a99e3a7d47";
+        self.stub.hint_string = #"hash_7778a99e3a7d47";
       } else {
-        self.stub.hint_string = # "hash_18379e4e114fabf9";
+        self.stub.hint_string = #"hash_18379e4e114fabf9";
       }
 
       if(self.stub.var_8d306e51) {
@@ -412,9 +412,9 @@ wall_weapon_update_prompt(player) {
       }
     } else if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_7a24a147b8f09767";
+        self.stub.hint_string = #"hash_7a24a147b8f09767";
       } else {
-        self.stub.hint_string = # "hash_791fe9da17cf7059";
+        self.stub.hint_string = #"hash_791fe9da17cf7059";
       }
 
       if(self.stub.var_8d306e51) {
@@ -424,9 +424,9 @@ wall_weapon_update_prompt(player) {
       }
     } else {
       if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_2791ecebb85142c4";
+        self.stub.hint_string = #"hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = # "hash_60606b68e93a29c8";
+        self.stub.hint_string = #"hash_60606b68e93a29c8";
       }
 
       if(self.stub.var_8d306e51) {
@@ -460,9 +460,9 @@ wall_weapon_update_prompt(player) {
         var_f7b97cc4 = 1;
 
         if(function_8b1a219a()) {
-          self.stub.hint_string = # "hash_4fc4a485b05c45ba";
+          self.stub.hint_string = #"hash_4fc4a485b05c45ba";
         } else {
-          self.stub.hint_string = # "hash_229abc68467e92ce";
+          self.stub.hint_string = #"hash_229abc68467e92ce";
         }
 
         if(self.stub.var_8d306e51) {
@@ -475,11 +475,11 @@ wall_weapon_update_prompt(player) {
 
     if(player function_284616f8()) {
       if(isDefined(self.stub.hacked) && self.stub.hacked) {
-        self.stub.hint_string = # "zombie_weaponammohacked_cfill_bgb_secret_shopper";
+        self.stub.hint_string = #"zombie_weaponammohacked_cfill_bgb_secret_shopper";
       } else if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_1299ea66da4a06b0";
+        self.stub.hint_string = #"hash_1299ea66da4a06b0";
       } else {
-        self.stub.hint_string = # "hash_4a6901dda0793d3c";
+        self.stub.hint_string = #"hash_4a6901dda0793d3c";
       }
 
       if(self.stub.var_8d306e51) {
@@ -490,14 +490,14 @@ wall_weapon_update_prompt(player) {
     } else if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(player zm_weapons::has_upgrade(weapon)) {
         if(function_8b1a219a()) {
-          self.stub.hint_string = # "hash_5897b2e20dc09cfc";
+          self.stub.hint_string = #"hash_5897b2e20dc09cfc";
         } else {
-          self.stub.hint_string = # "hash_7d4f06d135499350";
+          self.stub.hint_string = #"hash_7d4f06d135499350";
         }
       } else if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_cb6a56ab3b14604";
+        self.stub.hint_string = #"hash_cb6a56ab3b14604";
       } else {
-        self.stub.hint_string = # "hash_43ab0adee9d55608";
+        self.stub.hint_string = #"hash_43ab0adee9d55608";
       }
 
       if(self.stub.var_8d306e51) {
@@ -507,11 +507,11 @@ wall_weapon_update_prompt(player) {
       }
     } else if(!var_f7b97cc4) {
       if(isDefined(self.stub.hacked) && self.stub.hacked) {
-        self.stub.hint_string = # "zombie_weaponammohacked_cfill";
+        self.stub.hint_string = #"zombie_weaponammohacked_cfill";
       } else if(function_8b1a219a()) {
-        self.stub.hint_string = # "hash_3f279e3e0f564e99";
+        self.stub.hint_string = #"hash_3f279e3e0f564e99";
       } else {
-        self.stub.hint_string = # "hash_382490a598f64833";
+        self.stub.hint_string = #"hash_382490a598f64833";
       }
 
       if(self.stub.var_8d306e51) {

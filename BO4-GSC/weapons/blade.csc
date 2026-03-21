@@ -26,7 +26,7 @@ on_weapon_change(params) {
   localclientnum = params.localclientnum;
   weapon = self function_d2c2b168();
 
-  if(weapon.name == # "sig_blade") {
+  if(weapon.name == #"sig_blade") {
     localplayer = function_5c10bd79(localclientnum);
 
     if(self == localplayer) {
@@ -73,7 +73,7 @@ melee_event(eventstruct) {
     return;
   }
 
-  if(eventstruct.weapon.name != # "sig_blade") {
+  if(eventstruct.weapon.name != #"sig_blade") {
     return;
   }
 

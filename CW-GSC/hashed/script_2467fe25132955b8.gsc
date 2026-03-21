@@ -94,34 +94,34 @@ function function_6736205c(var_638b775a = 0) {
   duration = 3;
   damage = 100;
   weapon = getweapon(#"frost_blast");
-  var_3decbda2 = # "hash_59f3861d4983e53";
-  var_89ae2770 = # "hash_6096d838f90bc781";
-  slowdown = # "frost_blast";
+  var_3decbda2 = #"hash_59f3861d4983e53";
+  var_89ae2770 = #"hash_6096d838f90bc781";
+  slowdown = #"frost_blast";
 
   switch (var_638b775a) {
     case 2:
       weapon = getweapon(#"frost_blast_2");
-      var_89ae2770 = # "hash_6096d538f90bc268";
+      var_89ae2770 = #"hash_6096d538f90bc268";
       break;
     case 3:
       weapon = getweapon(#"frost_blast_3");
-      var_89ae2770 = # "hash_6096d638f90bc41b";
+      var_89ae2770 = #"hash_6096d638f90bc41b";
       radius = 256;
       damage = 200;
       break;
     case 4:
       weapon = getweapon(#"frost_blast_4");
-      var_89ae2770 = # "hash_6096db38f90bcc9a";
+      var_89ae2770 = #"hash_6096db38f90bcc9a";
       radius = 256;
       damage = 200;
       break;
     case 5:
       weapon = getweapon(#"frost_blast_5");
-      var_89ae2770 = # "hash_6096dc38f90bce4d";
+      var_89ae2770 = #"hash_6096dc38f90bce4d";
       radius = 256;
       damage = 200;
       duration = 5;
-      slowdown = # "frost_blast_5";
+      slowdown = #"frost_blast_5";
       break;
   }
 
@@ -143,7 +143,7 @@ function function_6736205c(var_638b775a = 0) {
     nearbyzombies = getentitiesinradius(var_189ef5f2.origin, radius, 15);
 
     foreach(zombie in nearbyzombies) {
-      if(isalive(zombie) && zombie.team === level.zombie_team && (zombie.zm_ai_category === # "normal" || zombie.archetype === # "zombie_dog" || var_638b775a >= 3 && zombie.zm_ai_category === # "special")) {
+      if(isalive(zombie) && zombie.team === level.zombie_team && (zombie.zm_ai_category === #"normal" || zombie.archetype === #"zombie_dog" || var_638b775a >= 3 && zombie.zm_ai_category === #"special")) {
         var_2b1ad45b = 0;
 
         if(is_true(zombie.var_958cf9c5)) {
@@ -166,14 +166,14 @@ function function_6736205c(var_638b775a = 0) {
           zombie clientfield::set("fx_frost_blast_clientfield", var_638b775a);
         }
 
-        if(var_638b775a >= 3 && zombie.zm_ai_category === # "special" || zombie.zm_ai_category === # "normal" || zombie.archetype === # "zombie_dog") {
+        if(var_638b775a >= 3 && zombie.zm_ai_category === #"special" || zombie.zm_ai_category === #"normal" || zombie.archetype === #"zombie_dog") {
           self stats::function_622feb0d(#"frost_blast", #"hash_485f780a2a3da36a", 1);
           zombie thread namespace_9ff9f642::slowdown(slowdown);
           zombie.var_958cf9c5 = 1;
           zombie.var_991315b5 = self;
 
           if(var_638b775a == 5 && var_2b1ad45b) {
-            if(zombie.zm_ai_category === # "normal" || zombie.archetype === # "zombie_dog") {
+            if(zombie.zm_ai_category === #"normal" || zombie.archetype === #"zombie_dog") {
               zombie damagemode("next_shot_kills");
             }
           }

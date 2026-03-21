@@ -174,7 +174,7 @@ function update_aat_hud(localclientnum, oldval, newval, bnewent, binitialsnap, f
   icon = get_icon(bwastimejump);
 
   if(str_localized == "none") {
-    str_localized = # "";
+    str_localized = #"";
   }
 
   var_ca2e17a3 = function_1df4c3b0(fieldname, #"zm_hud");

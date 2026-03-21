@@ -33,11 +33,11 @@ function event_handler[level_init] main(eventstruct) {
   level thread postload();
   util::waitforclient(0);
   function_27d5cafd(#"hash_bc5dbc7b5e13b6b", #"hash_433705ff0d359b2e");
-  level._effect[#"darkroom_light"] = # "hash_78e234f940b499a";
+  level._effect[#"darkroom_light"] = #"hash_78e234f940b499a";
 }
 
 function postload() {
-  level._effect[#"hash_2b8b4be2cb5925ab"] = # "hash_194e390fb626282e";
+  level._effect[#"hash_2b8b4be2cb5925ab"] = #"hash_194e390fb626282e";
   function_bdab05e9();
 }
 

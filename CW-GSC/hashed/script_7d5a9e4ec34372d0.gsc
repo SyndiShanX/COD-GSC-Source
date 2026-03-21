@@ -590,7 +590,7 @@ function function_794f4716() {
   self.maxhealth = 10000;
   self.health = self.maxhealth;
   self.will_die = 0;
-  self.team = # "neutral";
+  self.team = #"neutral";
   self setteam(#"neutral");
   self turret::set_team(#"neutral", 0);
   self turret::set_torso_targetting(0);

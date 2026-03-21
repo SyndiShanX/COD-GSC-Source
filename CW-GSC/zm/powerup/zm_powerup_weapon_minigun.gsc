@@ -121,7 +121,7 @@ function minigun_damage_adjust(inflictor, attacker, damage, flags, meansofdeath,
     return -1;
   }
 
-  if(self.archetype == # "zombie" || self.archetype == # "zombie_dog" || self.archetype == # "zombie_quad") {
+  if(self.archetype == #"zombie" || self.archetype == #"zombie_dog" || self.archetype == #"zombie_quad") {
     n_percent_damage = self.health * randomfloatrange(0.34, 0.75);
   }
 

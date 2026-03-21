@@ -27,7 +27,7 @@ init_shared() {
   level.var_e6a4f161 = params.var_18d16a6b;
   level.var_5d450296 = params.setype;
   level.var_e8a6b3ee = [];
-  level._effect[#"hash_31b6cc906e6d0ae0"] = # "hash_6b74a0816b45e3f8";
+  level._effect[#"hash_31b6cc906e6d0ae0"] = #"hash_6b74a0816b45e3f8";
   weaponobjects::function_e6400478(#"eq_molotov", &function_853f8cff, 1);
 }
 

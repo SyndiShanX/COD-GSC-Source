@@ -85,14 +85,14 @@ function function_5e5224f3(localclientnum) {
     if(!isDefined(var_8fe85086.b_complete)) {
       str_map = hash(var_8fe85086.script_noteworthy);
 
-      if(str_map === # "wz_forest") {
+      if(str_map === #"wz_forest") {
         var_8fe85086.b_complete = player stats::get_stat(localclientnum, #"playerstatslist", #"hash_172d82afa5eb40a8", #"statvalue");
-      } else if(str_map === # "wz_sanatorium") {
+      } else if(str_map === #"wz_sanatorium") {
         var_8fe85086.b_complete = player stats::get_stat(localclientnum, #"playerstatslist", #"hash_774b3a384fb5ad", #"statvalue");
       } else {
         var_8fe85086.b_complete = player stats::get_stat(localclientnum, #"playerstatsbymap", str_map, #"stats", #"main_quest_completed", #"statvalue");
 
-        if(str_map === # "zm_silver" && !is_true(var_8fe85086.b_complete)) {
+        if(str_map === #"zm_silver" && !is_true(var_8fe85086.b_complete)) {
           var_8fe85086.b_complete = player stats::get_stat(localclientnum, #"playerstatslist", #"hash_45419091cdb5f154", #"statvalue");
         }
       }

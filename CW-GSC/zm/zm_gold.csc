@@ -40,7 +40,7 @@ function event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + # "hash_5368b2aa337a0ec3", 16000, 2, "int", &function_36f11a86, 0, 0);
   clientfield::register("world", "" + # "hash_4c60439fcb3b4056", 16000, 1, "int", &function_d03c22c, 0, 0);
   level.setupcustomcharacterexerts = &setup_personality_character_exerts;
-  level.var_d0ab70a2 = # "hash_466c279241bfbf7c";
+  level.var_d0ab70a2 = #"hash_466c279241bfbf7c";
   level.var_a7c8e7d7 = 1;
   setDvar(#"hash_5e3c0f05d2935beb", 1);
   setDvar(#"hash_190c5373848fa8e6", 1);
@@ -121,9 +121,9 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(self zm_utility::function_f8796df3(fieldname)) {
       if(bwastimejump == 1) {
-        str_fx = # "hash_679d39e5fd4eae19";
+        str_fx = #"hash_679d39e5fd4eae19";
       } else if(bwastimejump == 2) {
-        str_fx = # "hash_1581235a1b9b6071";
+        str_fx = #"hash_1581235a1b9b6071";
       }
 
       if(viewmodelhastag(fieldname, "tag_flashlight")) {
@@ -135,9 +135,9 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
     } else {
       if(bwastimejump == 1) {
-        str_fx = # "hash_153f56ac9d13a399";
+        str_fx = #"hash_153f56ac9d13a399";
       } else if(bwastimejump == 2) {
-        str_fx = # "hash_626d3f491b870eb1";
+        str_fx = #"hash_626d3f491b870eb1";
       }
 
       level.var_3630f9c0[var_47c85523][fieldname] = util::playFXOnTag(fieldname, str_fx, self, "tag_flashlight");

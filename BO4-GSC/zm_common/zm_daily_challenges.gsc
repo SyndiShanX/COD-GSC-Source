@@ -304,7 +304,7 @@ death_check_for_challenge_updates(e_attacker) {
       break;
   }
 
-  if(w_damage.statname === # "bowie_knife") {
+  if(w_damage.statname === #"bowie_knife") {
     e_attacker zm_stats::increment_challenge_stat(#"zm_daily_kills_bowie");
 
     debug_print("<dev string:x394>");

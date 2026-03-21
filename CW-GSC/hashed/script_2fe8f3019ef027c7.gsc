@@ -67,7 +67,7 @@ function private function_36bc0c68(var_c165d3f1) {
 }
 
 function private function_e0569aac(entity) {
-  if(self.current_state.name === # "wander") {
+  if(self.current_state.name === #"wander") {
     self namespace_85745671::function_9758722(#"run");
   }
 }
@@ -89,7 +89,7 @@ function private setup_awareness(entity) {
 }
 
 function private function_2d6a2f29(entity) {
-  if(self.current_state.name === # "wander") {
+  if(self.current_state.name === #"wander") {
     function_1eaaceab(self.var_4dfe3675);
 
     if(self.var_4dfe3675.size > 3) {
@@ -110,7 +110,7 @@ function private function_2d6a2f29(entity) {
     return;
   }
 
-  if(self.current_state.name === # "chase") {
+  if(self.current_state.name === #"chase") {
     if(isarray(self.var_4dfe3675)) {
       function_1eaaceab(self.var_4dfe3675);
       enemy_array = [];
@@ -124,7 +124,7 @@ function private function_2d6a2f29(entity) {
       }
 
       foreach(zombie in self.var_4dfe3675) {
-        if(zombie.current_state.name === # "wander" && !isDefined(zombie.favoriteenemy)) {
+        if(zombie.current_state.name === #"wander" && !isDefined(zombie.favoriteenemy)) {
           var_c50b055c = undefined;
 
           if(enemy_array.size) {

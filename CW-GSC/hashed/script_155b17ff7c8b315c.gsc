@@ -1304,7 +1304,7 @@ function function_44e2b9f9() {
     level.var_c39cfb7a = spawn("script_model", s_bubby.origin);
     level.var_c39cfb7a.origin = s_bubby.origin;
     level.var_c39cfb7a.team = "allies";
-    level.var_c39cfb7a.name = # "hash_66e82142aa59cdb0";
+    level.var_c39cfb7a.name = #"hash_66e82142aa59cdb0";
   }
 }
 
@@ -1379,7 +1379,7 @@ function function_aa33d336() {
   wait 10;
   var_63d2d7ec = level flag::wait_till_timeout(5, "flg_elevator_fight_jugg_helmet_off");
 
-  if(var_63d2d7ec._notify === # "flg_elevator_fight_jugg_helmet_off") {
+  if(var_63d2d7ec._notify === #"flg_elevator_fight_jugg_helmet_off") {
     level.woods hms_util::dialogue("vox_cp_amrk_01800_wood_helmetsoff_49");
     wait 20;
     level.woods hms_util::dialogue("vox_cp_amrk_01800_wood_aimfortheface_af");

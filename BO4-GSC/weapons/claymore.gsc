@@ -18,7 +18,7 @@ init_shared() {
 
 createclaymorewatcher(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;

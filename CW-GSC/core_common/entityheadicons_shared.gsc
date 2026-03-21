@@ -28,7 +28,7 @@ function setentityheadicon(team, owner, objective) {
   }
 
   if(!isDefined(self.entityheadiconteam)) {
-    self.entityheadiconteam = # "none";
+    self.entityheadiconteam = #"none";
     self.entityheadobjectives = [];
   }
 
@@ -52,13 +52,13 @@ function setentityheadicon(team, owner, objective) {
       }
 
       if(isDefined(objective)) {
-        if(team !== # "none") {
+        if(team !== #"none") {
           owner updateentityheadteamobjective(self, team, objective);
         } else {
           owner updateentityheadclientobjective(self, objective);
         }
       }
-    } else if(isDefined(owner) && team != # "none") {
+    } else if(isDefined(owner) && team != #"none") {
       if(isDefined(objective)) {
         owner updateentityheadteamobjective(self, team, objective);
       }

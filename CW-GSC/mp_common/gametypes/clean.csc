@@ -14,14 +14,14 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::register("scriptmover", "taco_flag", 14000, 2, "int", &function_11abf5b2, 0, 0);
   clientfield::register("allplayers", "taco_carry", 14000, 1, "int", &function_aa7bb941, 0, 0);
   clientfield::register("scriptmover", "taco_waypoint", 14000, 1, "int", &function_a4a5d612, 0, 0);
-  level.var_aaaae0b = # "hash_206afab0af20880d";
-  level.var_5844252c = # "hash_672b6ef826294e77";
-  level.var_ce64ea3e = # "clean_taco";
+  level.var_aaaae0b = #"hash_206afab0af20880d";
+  level.var_5844252c = #"hash_672b6ef826294e77";
+  level.var_ce64ea3e = #"clean_taco";
 
   if(is_true(getgametypesetting(#"hash_5cc4c3042b7d4935"))) {
-    level.var_aaaae0b = # "hash_464eae7df8ee284a";
-    level.var_5844252c = # "hash_2b379a7d7b261710";
-    level.var_ce64ea3e = # "hash_3a64e972390f43aa";
+    level.var_aaaae0b = #"hash_464eae7df8ee284a";
+    level.var_5844252c = #"hash_2b379a7d7b261710";
+    level.var_ce64ea3e = #"hash_3a64e972390f43aa";
     setsoundcontext("ltm", "paddy");
     function_52ee8599();
   }

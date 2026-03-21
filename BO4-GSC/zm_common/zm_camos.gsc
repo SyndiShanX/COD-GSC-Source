@@ -32,7 +32,7 @@ function_79be4786(weapon) {
   var_3ded6a21 = getcamoindex(weaponoptions);
   var_a99ac61d = getactivecamo(var_3ded6a21);
 
-  if(!isDefined(var_a99ac61d) || var_a99ac61d == # "") {
+  if(!isDefined(var_a99ac61d) || var_a99ac61d == #"") {
     return;
   }
 

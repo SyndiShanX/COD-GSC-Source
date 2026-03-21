@@ -185,7 +185,7 @@ give_clip_of_ammo(w_weapon) {
     n_pool = w_weapon.startammo;
   }
 
-  if(weaponhasattachment(w_weapon, "uber") && w_weapon.statname == # "smg_capacity_t8" || isDefined(w_weapon.isriotshield) && w_weapon.isriotshield) {
+  if(weaponhasattachment(w_weapon, "uber") && w_weapon.statname == #"smg_capacity_t8" || isDefined(w_weapon.isriotshield) && w_weapon.isriotshield) {
     n_clip = w_weapon.clipsize / 4;
   } else {
     n_clip = w_weapon.clipsize;
@@ -198,7 +198,7 @@ give_clip_of_ammo(w_weapon) {
 function_7f7c1226(weapon) {
   waittillframeend();
 
-  if(weaponhasattachment(weapon, "uber") && weapon.statname == # "smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
+  if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8" || isDefined(weapon.isriotshield) && weapon.isriotshield) {
     n_stock = weapon.clipsize / 4;
   } else {
     n_stock = 0;

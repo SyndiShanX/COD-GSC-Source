@@ -44,15 +44,15 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.cratemodelfriendly = # "p8_care_package_01_a";
-  level.cratemodelenemy = # "p8_care_package_02_a";
-  level.cratemodeltank = # "wpn_t7_drop_box";
-  level.cratemodelboobytrapped = # "p8_care_package_03_a";
+  level.cratemodelfriendly = #"p8_care_package_01_a";
+  level.cratemodelenemy = #"p8_care_package_02_a";
+  level.cratemodeltank = #"wpn_t7_drop_box";
+  level.cratemodelboobytrapped = #"p8_care_package_03_a";
   level.vtoldrophelicoptervehicleinfo = "vehicle_t8_mil_helicopter_transport_mp";
   ir_strobe::init_shared();
   level.crateownerusetime = 500;
   level.cratenonownerusetime = int(getgametypesetting(#"cratecapturetime") * 1000);
-  level.supplydropdisarmcrate = # "hash_20071ab3686e8d58";
+  level.supplydropdisarmcrate = #"hash_20071ab3686e8d58";
   clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int");
   clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int");
   clientfield::register("scriptmover", "supplydrop_thrusters_state", 1, 1, "int");
@@ -531,7 +531,7 @@ usekillstreaksupplydrop(killstreak) {
   context.tracemask = 1 | 4;
   context.droptag = "tag_cargo_attach";
   context.var_9fc6cfe9 = 1;
-  context.killstreaktype = # "supplydrop_marker";
+  context.killstreaktype = #"supplydrop_marker";
   return self ir_strobe::function_f625256f(undefined, context);
 }
 
@@ -788,16 +788,16 @@ supplydropgrenadetimeout(team, killstreak_id, weapon) {
   self notify(#"grenade_timeout");
   killstreakrules::killstreakstop("supply_drop", team, killstreak_id);
 
-  if(weapon.name == # "tank_robot") {
+  if(weapon.name == #"tank_robot") {
     killstreakrules::killstreakstop("tank_robot", team, killstreak_id);
     self notify(#"cleanup_marker");
-  } else if(weapon.name == # "inventory_tank_robot") {
+  } else if(weapon.name == #"inventory_tank_robot") {
     killstreakrules::killstreakstop("inventory_tank_robot", team, killstreak_id);
     self notify(#"cleanup_marker");
-  } else if(weapon.name == # "combat_robot_drop") {
+  } else if(weapon.name == #"combat_robot_drop") {
     killstreakrules::killstreakstop("combat_robot_drop", team, killstreak_id);
     self notify(#"cleanup_marker");
-  } else if(weapon.name == # "inventory_combat_robot_drop") {
+  } else if(weapon.name == #"inventory_combat_robot_drop") {
     killstreakrules::killstreakstop("inventory_combat_robot_drop", team, killstreak_id);
     self notify(#"cleanup_marker");
   }
@@ -1575,7 +1575,7 @@ cratedroptogroundkill() {
         continue;
       }
 
-      if(players[i].team == # "spectator") {
+      if(players[i].team == #"spectator") {
         continue;
       }
 
@@ -1634,7 +1634,7 @@ cratedroptogroundtrace(start) {
       return;
     }
 
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       return;
     }
 
@@ -2787,7 +2787,7 @@ helidropcrate(killstreak, originalowner, offset, killcament, killstreak_id, pack
   origin = waitresult.position;
   angles = waitresult.direction;
 
-  if(waitresult._notify == # "hash_525537be2de4c159") {
+  if(waitresult._notify == #"hash_525537be2de4c159") {
     crate cratedelete(0);
     return;
   }

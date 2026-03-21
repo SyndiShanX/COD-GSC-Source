@@ -70,7 +70,7 @@ function function_13e12ab1(camoindex) {
   var_f4eb4a50 = undefined;
   activecamoname = getactivecamo(camoindex);
 
-  if(isDefined(activecamoname) && activecamoname != # "") {
+  if(isDefined(activecamoname) && activecamoname != #"") {
     var_f4eb4a50 = getscriptbundle(activecamoname);
   }
 
@@ -100,12 +100,12 @@ function function_54f0afd2(var_3594168e) {
 function function_33ed1149(weapon, var_f879230e) {
   var_de0d8ad3 = function_7afd1b32(weapon, var_f879230e);
 
-  if(isDefined(var_de0d8ad3.activecamoname) && var_de0d8ad3.activecamoname != # "") {
+  if(isDefined(var_de0d8ad3.activecamoname) && var_de0d8ad3.activecamoname != #"") {
     return var_de0d8ad3.activecamoname;
   }
 
   foreach(attachment in var_de0d8ad3.attachments) {
-    if(isDefined(attachment.activecamoname) && attachment.activecamoname != # "") {
+    if(isDefined(attachment.activecamoname) && attachment.activecamoname != #"") {
       return attachment.activecamoname;
     }
   }

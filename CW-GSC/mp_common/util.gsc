@@ -119,12 +119,12 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
       playerteam = player.pers[#"team"];
 
       if(isDefined(playerteam)) {
-        if(playerteam == team && isDefined(printfriendly) && printfriendly != # "") {
+        if(playerteam == team && isDefined(printfriendly) && printfriendly != #"") {
           player iprintln(printfriendly, printarg);
           continue;
         }
 
-        if(isDefined(printenemy) && printenemy != # "") {
+        if(isDefined(printenemy) && printenemy != #"") {
           if(isDefined(enemyteam) && playerteam == enemyteam) {
             player iprintln(printenemy, printarg);
             continue;
@@ -154,7 +154,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
 
       if(isDefined(playerteam)) {
         if(playerteam == team) {
-          if(isDefined(printfriendly) && printfriendly != # "") {
+          if(isDefined(printfriendly) && printfriendly != #"") {
             player iprintln(printfriendly, printarg);
           }
 
@@ -163,7 +163,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
         }
 
         if(isDefined(enemyteam) && playerteam == enemyteam || !isDefined(enemyteam) && playerteam != team) {
-          if(isDefined(printenemy) && printenemy != # "") {
+          if(isDefined(printenemy) && printenemy != #"") {
             player iprintln(printenemy, printarg);
           }
 
@@ -181,7 +181,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
 
     if(isDefined(playerteam)) {
       if(playerteam == team) {
-        if(isDefined(printfriendly) && printfriendly != # "") {
+        if(isDefined(printfriendly) && printfriendly != #"") {
           player iprintln(printfriendly, printarg);
         }
 
@@ -189,7 +189,7 @@ function printandsoundoneveryone(team, enemyteam, printfriendly, printenemy, sou
         continue;
       }
 
-      if(isDefined(printenemy) && printenemy != # "") {
+      if(isDefined(printenemy) && printenemy != #"") {
         if(isDefined(enemyteam) && playerteam == enemyteam) {
           player iprintln(printenemy, printarg);
           continue;
@@ -212,9 +212,9 @@ function _playlocalsound(soundalias) {
 }
 
 function getotherteam(team) {
-  if(team == # "allies") {
+  if(team == #"allies") {
     return # "axis";
-  } else if(team == # "axis") {
+  } else if(team == #"axis") {
     return # "allies";
   } else {
     return # "allies";
@@ -224,9 +224,9 @@ function getotherteam(team) {
 }
 
 function getteamenum(team) {
-  if(team == # "allies") {
+  if(team == #"allies") {
     return 1;
-  } else if(team == # "axis") {
+  } else if(team == #"axis") {
     return 2;
   }
 
@@ -642,12 +642,12 @@ function hide_hint_text_listener(n_time) {
 }
 
 function set_team_radar(team, value) {
-  if(team == # "allies") {
+  if(team == #"allies") {
     setmatchflag("radar_allies", value);
     return;
   }
 
-  if(team == # "axis") {
+  if(team == #"axis") {
     setmatchflag("radar_axis", value);
   }
 }

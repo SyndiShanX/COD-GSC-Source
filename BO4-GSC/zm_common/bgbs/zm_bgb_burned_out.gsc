@@ -69,7 +69,7 @@ result() {
   var_7694ea6b = [];
 
   for(i = 0; i < zombies.size; i++) {
-    if(zombies[i].zm_ai_category !== # "basic" && zombies[i].zm_ai_category !== # "popcorn" && zombies[i].zm_ai_category !== # "enhanced") {
+    if(zombies[i].zm_ai_category !== #"basic" && zombies[i].zm_ai_category !== #"popcorn" && zombies[i].zm_ai_category !== #"enhanced") {
       continue;
     }
 

@@ -301,7 +301,7 @@ function private function_d0c3d0ce() {
   current_mission = savegame::function_8136eb5a();
   var_6c8b1954 = savegame::function_6440b06b(#"transient");
 
-  if(current_mission == # "cp_ger_stakeout") {
+  if(current_mission == #"cp_ger_stakeout") {
     if(!isinarray(var_6c8b1954.var_f4d7790b, 4)) {
       player stats::set_stat(#"mapdata", #"cp_rus_kgb", #"hash_43a738b893199779", 2, 0);
     }
@@ -309,7 +309,7 @@ function private function_d0c3d0ce() {
     return;
   }
 
-  if(current_mission == # "cp_ger_hub8") {
+  if(current_mission == #"cp_ger_hub8") {
     if(isinarray(var_6c8b1954.var_f4d7790b, 0)) {
       player stats::set_stat(#"mapdata", #"cp_rus_duga", #"hash_43a738b893199779", 0, 0);
       player stats::set_stat(#"mapdata", #"cp_rus_duga", #"hash_43a738b893199779", 1, 0);
@@ -322,7 +322,7 @@ function private function_d0c3d0ce() {
     return;
   }
 
-  if(current_mission == # "cp_rus_siege") {
+  if(current_mission == #"cp_rus_siege") {
     if(isinarray(var_6c8b1954.var_f4d7790b, 0)) {
       player stats::set_stat(#"mapdata", #"cp_rus_duga", #"hash_43a738b893199779", 0, 0);
       player stats::set_stat(#"mapdata", #"cp_rus_duga", #"hash_43a738b893199779", 1, 0);
@@ -334,7 +334,7 @@ function private function_d0c3d0ce() {
     return;
   }
 
-  if(current_mission == # "cp_rus_duga") {
+  if(current_mission == #"cp_rus_duga") {
     if(isinarray(var_6c8b1954.var_f4d7790b, 0)) {
       player stats::set_stat(#"mapdata", #"cp_rus_siege", #"hash_43a738b893199779", 0, 0);
       player stats::set_stat(#"mapdata", #"cp_ger_hub8", #"hash_43a738b893199779", 0, 0);

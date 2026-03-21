@@ -152,7 +152,7 @@ function private ai_open_try_animated(c_door) {
 
   self.ai.doortoopen = c_door;
   result = self waittilltimeout(6, #"opening_door");
-  bsuccess = result._notify != # "timeout";
+  bsuccess = result._notify != #"timeout";
 
   if(bsuccess) {
     self waittilltimeout(4, #"opening_door_done");

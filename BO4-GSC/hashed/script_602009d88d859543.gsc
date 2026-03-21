@@ -106,88 +106,88 @@ function_c52e8ba(player, var_8d5d092c) {
   }
 
   if(!zombie_utility::is_player_valid(player)) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(player.var_16735873) && player.var_16735873 && self.stub.script_string !== "dropout") {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
     return 1;
   } else if(isDefined(player.var_564dec14) && player.var_564dec14) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(level flag::get(#"disable_fast_travel")) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(!level flag::get("power_on1")) {
-    self.hint_string[n_player_index] = # "hash_1889aab1f9075530";
+    self.hint_string[n_player_index] = #"hash_1889aab1f9075530";
     self sethintstringforplayer(player, self.hint_string[n_player_index]);
     b_result = 1;
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
-    self.hint_string[n_player_index] = # "zombie/fasttravel_locked";
+    self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c] || isDefined(level.var_8f8f85f5) && level.var_8f8f85f5 && isDefined(level.var_261ad4d[var_8d5d092c]) && level.var_261ad4d[var_8d5d092c]) {
-    self.hint_string[n_player_index] = # "hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
     self sethintstringforplayer(player, self.hint_string[n_player_index]);
     b_result = 1;
   } else {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
     b_result = 1;
 
     switch (str_loc) {
       case # "warden_house_to_shower":
         if(level flag::get(#"hash_76a9f44aee68fe8e") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self.hint_string[n_player_index] = # "hash_300b1d3d5ba4c0fe";
+            self.hint_string[n_player_index] = #"hash_300b1d3d5ba4c0fe";
           } else {
-            self.hint_string[n_player_index] = # "hash_3c4e15b133cbbbfa";
+            self.hint_string[n_player_index] = #"hash_3c4e15b133cbbbfa";
           }
         } else if(function_8b1a219a()) {
-          self.hint_string[n_player_index] = # "hash_6f301212d8bab6f9";
+          self.hint_string[n_player_index] = #"hash_6f301212d8bab6f9";
         } else {
-          self.hint_string[n_player_index] = # "hash_2110980a2c8a4dd3";
+          self.hint_string[n_player_index] = #"hash_2110980a2c8a4dd3";
         }
 
         break;
       case # "shower_to_warden_house":
         if(level flag::get(#"hash_76a9f44aee68fe8e") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self.hint_string[n_player_index] = # "hash_2e77e87570b1c528";
+            self.hint_string[n_player_index] = #"hash_2e77e87570b1c528";
           } else {
-            self.hint_string[n_player_index] = # "hash_751feed02ba9abc4";
+            self.hint_string[n_player_index] = #"hash_751feed02ba9abc4";
           }
         } else if(function_8b1a219a()) {
-          self.hint_string[n_player_index] = # "hash_6bfcbf101ce05cc3";
+          self.hint_string[n_player_index] = #"hash_6bfcbf101ce05cc3";
         } else {
-          self.hint_string[n_player_index] = # "hash_af863c29e30651d";
+          self.hint_string[n_player_index] = #"hash_af863c29e30651d";
         }
 
         break;
       case # "cafeteria_to_west_side":
         if(level flag::get(#"hash_6a5df83b0716ed39") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self.hint_string[n_player_index] = # "hash_25fef648e85ea908";
+            self.hint_string[n_player_index] = #"hash_25fef648e85ea908";
           } else {
-            self.hint_string[n_player_index] = # "hash_5bd2ed18b058d064";
+            self.hint_string[n_player_index] = #"hash_5bd2ed18b058d064";
           }
         } else if(function_8b1a219a()) {
-          self.hint_string[n_player_index] = # "hash_706a38abf5bf863";
+          self.hint_string[n_player_index] = #"hash_706a38abf5bf863";
         } else {
-          self.hint_string[n_player_index] = # "hash_1db3b05a63943f7d";
+          self.hint_string[n_player_index] = #"hash_1db3b05a63943f7d";
         }
 
         break;
       case # "west_side_to_cafeteria":
         if(level flag::get(#"hash_6a5df83b0716ed39") || zm_utility::is_standard()) {
           if(function_8b1a219a()) {
-            self.hint_string[n_player_index] = # "hash_2465c3ca09a8650f";
+            self.hint_string[n_player_index] = #"hash_2465c3ca09a8650f";
           } else {
-            self.hint_string[n_player_index] = # "hash_9fdf28b2277fe11";
+            self.hint_string[n_player_index] = #"hash_9fdf28b2277fe11";
           }
         } else if(function_8b1a219a()) {
-          self.hint_string[n_player_index] = # "hash_31a8769c6599d292";
+          self.hint_string[n_player_index] = #"hash_31a8769c6599d292";
         } else {
-          self.hint_string[n_player_index] = # "hash_3600e293ddc9f9b6";
+          self.hint_string[n_player_index] = #"hash_3600e293ddc9f9b6";
         }
 
         break;
       default:
-        self.hint_string[n_player_index] = # "hash_2731cc5c1208e2e4";
+        self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
         break;
     }
 
@@ -320,10 +320,10 @@ function_d7af842d(e_unitrigger) {
 
   switch (var_8d5d092c) {
     case # "warden_house_shower":
-      var_d5376a79 = # "hash_76a9f44aee68fe8e";
+      var_d5376a79 = #"hash_76a9f44aee68fe8e";
       break;
     case # "cafeteria_west_side":
-      var_d5376a79 = # "hash_6a5df83b0716ed39";
+      var_d5376a79 = #"hash_6a5df83b0716ed39";
       break;
   }
 

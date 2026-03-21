@@ -423,7 +423,7 @@ function function_d77fb9ee(s_instance) {
   foreach(wallbuy in wallbuys) {
     weapon_name = wallbuy.script_noteworthy;
 
-    if(!isDefined(weapon_name) || weapon_name == "" || weapon_name == # "random") {
+    if(!isDefined(weapon_name) || weapon_name == "" || weapon_name == #"random") {
       index = randomint(level.var_8e3edeb9.size);
       weapon_name = level.var_8e3edeb9[index];
     }
@@ -720,7 +720,7 @@ function init_spawnable_weapon_upgrade(s_destination) {
     spawnable_weapon.weapon = getweapon(spawnable_weapon.zombie_weapon_upgrade);
     weapon_group = util::getweaponclass(spawnable_weapon);
 
-    if(weapon_group == # "weapon_pistol" && !zm_custom::function_901b751c(#"zmweaponspistol") || weapon_group == # "weapon_cqb" && !zm_custom::function_901b751c(#"zmweaponsshotgun") || weapon_group == # "weapon_smg" && !zm_custom::function_901b751c(#"zmweaponssmg") || weapon_group == # "weapon_assault" && !zm_custom::function_901b751c(#"zmweaponsar") || weapon_group == # "weapon_tactical" && !zm_custom::function_901b751c(#"zmweaponstr") || weapon_group == # "weapon_lmg" && !zm_custom::function_901b751c(#"zmweaponslmg") || weapon_group == # "weapon_sniper" && !zm_custom::function_901b751c(#"zmweaponssniper") || weapon_group == # "weapon_knife" && !zm_custom::function_901b751c(#"zmweaponsknife")) {
+    if(weapon_group == #"weapon_pistol" && !zm_custom::function_901b751c(#"zmweaponspistol") || weapon_group == #"weapon_cqb" && !zm_custom::function_901b751c(#"zmweaponsshotgun") || weapon_group == #"weapon_smg" && !zm_custom::function_901b751c(#"zmweaponssmg") || weapon_group == #"weapon_assault" && !zm_custom::function_901b751c(#"zmweaponsar") || weapon_group == #"weapon_tactical" && !zm_custom::function_901b751c(#"zmweaponstr") || weapon_group == #"weapon_lmg" && !zm_custom::function_901b751c(#"zmweaponslmg") || weapon_group == #"weapon_sniper" && !zm_custom::function_901b751c(#"zmweaponssniper") || weapon_group == #"weapon_knife" && !zm_custom::function_901b751c(#"zmweaponsknife")) {
       continue;
     }
 
@@ -1013,9 +1013,9 @@ function wall_weapon_update_prompt(player) {
 
     if(player bgb::is_enabled(#"zm_bgb_secret_shopper") && !zm_weapons::is_wonder_weapon(player.currentweapon) && player.currentweapon.type !== "melee") {
       if(player function_8b1a219a()) {
-        self.stub.hint_string = # "hash_7778a99e3a7d47";
+        self.stub.hint_string = #"hash_7778a99e3a7d47";
       } else {
-        self.stub.hint_string = # "hash_18379e4e114fabf9";
+        self.stub.hint_string = #"hash_18379e4e114fabf9";
       }
 
       if(self.stub.var_8d306e51) {
@@ -1025,9 +1025,9 @@ function wall_weapon_update_prompt(player) {
       }
     } else if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(player function_8b1a219a()) {
-        self.stub.hint_string = # "hash_7a24a147b8f09767";
+        self.stub.hint_string = #"hash_7a24a147b8f09767";
       } else {
-        self.stub.hint_string = # "hash_791fe9da17cf7059";
+        self.stub.hint_string = #"hash_791fe9da17cf7059";
       }
 
       if(self.stub.var_8d306e51) {
@@ -1037,9 +1037,9 @@ function wall_weapon_update_prompt(player) {
       }
     } else {
       if(player function_8b1a219a()) {
-        self.stub.hint_string = # "hash_2791ecebb85142c4";
+        self.stub.hint_string = #"hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = # "hash_60606b68e93a29c8";
+        self.stub.hint_string = #"hash_60606b68e93a29c8";
       }
 
       if(self.stub.var_8d306e51) {
@@ -1138,7 +1138,7 @@ function placeable_mine_can_buy_weapon_extra_check_func(w_weapon) {
 function weapon_spawn_think() {
   self endon(#"death");
   var_4ee4441d = is_true(self.var_9f32a5f4);
-  rarity = # "none";
+  rarity = #"none";
 
   if(isDefined(self.rarity)) {
     rarity = self.rarity;
@@ -1179,7 +1179,7 @@ function weapon_spawn_think() {
     self.first_time_triggered = 0;
 
     if(var_4ee4441d) {
-      hint = # "hash_6ee6f17a7c9eb226";
+      hint = #"hash_6ee6f17a7c9eb226";
     } else {
       hint = zm_weapons::get_weapon_hint(self.weapon);
     }
@@ -1494,7 +1494,7 @@ function is_wallbuy(w_to_check) {
   return false;
 }
 
-function function_b5992fb1(str_rarity = # "none") {
+function function_b5992fb1(str_rarity = #"none") {
   switch (str_rarity) {
     case # "green":
       self clientfield::set("wallbuy_ambient_fx", 3);
@@ -1517,7 +1517,7 @@ function function_b5992fb1(str_rarity = # "none") {
   }
 }
 
-function function_36eb0acc(str_rarity = # "none") {
+function function_36eb0acc(str_rarity = #"none") {
   switch (str_rarity) {
     case # "green":
       self clientfield::set("model_rarity_rob", 3);
@@ -1611,88 +1611,88 @@ function function_d26435e4(wallbuy, rarity = undefined, weapon_name = undefined)
 
   switch (weapon_name) {
     case # "ar_accurate_t9":
-      str_model = # "p9_zm_chalk_buy_ar_accurate_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_ar_accurate_t9" + function_db435e40(rarity);
       break;
     case # "ar_damage_t9":
-      str_model = # "p9_zm_chalk_buy_ar_damage_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_ar_damage_t9" + function_db435e40(rarity);
       break;
     case # "ar_fastfire_t9":
-      str_model = # "p9_zm_chalk_buy_ar_fastfire_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_ar_fastfire_t9" + function_db435e40(rarity);
       break;
     case # "ar_mobility_t9":
-      str_model = # "p9_zm_chalk_buy_ar_mobility_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_ar_mobility_t9" + function_db435e40(rarity);
       break;
     case # "ar_standard_t9":
-      str_model = # "p9_zm_chalk_buy_ar_standard_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_ar_standard_t9" + function_db435e40(rarity);
       break;
     case # "lmg_accurate_t9":
-      str_model = # "p9_zm_chalk_buy_lmg_accurate_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_lmg_accurate_t9" + function_db435e40(rarity);
       break;
     case # "lmg_light_t9":
-      str_model = # "p9_zm_chalk_buy_lmg_light_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_lmg_light_t9" + function_db435e40(rarity);
       break;
     case # "lmg_slowfire_t9":
-      str_model = # "p9_zm_chalk_buy_lmg_slowfire_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_lmg_slowfire_t9" + function_db435e40(rarity);
       break;
     case # "pistol_burst_t9":
-      str_model = # "p9_zm_chalk_buy_pistol_burst_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_pistol_burst_t9" + function_db435e40(rarity);
       break;
     case # "pistol_revolver_t9":
-      str_model = # "p9_zm_chalk_buy_pistol_revolver_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_pistol_revolver_t9" + function_db435e40(rarity);
       break;
     case # "pistol_semiauto_t9":
-      str_model = # "p9_zm_chalk_buy_pistol_semiauto_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_pistol_semiauto_t9" + function_db435e40(rarity);
       break;
     case # "shotgun_fullauto_t9":
-      str_model = # "p9_zm_chalk_buy_shotgun_fullauto_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_shotgun_fullauto_t9" + function_db435e40(rarity);
       break;
     case # "shotgun_pump_t9":
-      str_model = # "p9_zm_chalk_buy_shotgun_pump_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_shotgun_pump_t9" + function_db435e40(rarity);
       break;
     case # "shotgun_semiauto_t9":
-      str_model = # "p9_zm_chalk_buy_shotgun_semiauto_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_shotgun_semiauto_t9" + function_db435e40(rarity);
       break;
     case # "smg_burst_t9":
-      str_model = # "p9_zm_chalk_buy_smg_burst_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_smg_burst_t9" + function_db435e40(rarity);
       break;
     case # "smg_capacity_t9":
-      str_model = # "p9_zm_chalk_buy_smg_capacity_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_smg_capacity_t9" + function_db435e40(rarity);
       break;
     case # "smg_fastfire_t9":
-      str_model = # "p9_zm_chalk_buy_smg_fastfire_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_smg_fastfire_t9" + function_db435e40(rarity);
       break;
     case # "smg_handling_t9":
-      str_model = # "p9_zm_chalk_buy_smg_handling_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_smg_handling_t9" + function_db435e40(rarity);
       break;
     case # "smg_heavy_t9":
-      str_model = # "p9_zm_chalk_buy_smg_heavy_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_smg_heavy_t9" + function_db435e40(rarity);
       break;
     case # "smg_standard_t9":
-      str_model = # "p9_zm_chalk_buy_smg_standard_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_smg_standard_t9" + function_db435e40(rarity);
       break;
     case # "sniper_powersemi_t9":
-      str_model = # "p9_zm_chalk_buy_sniper_powersemi_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_sniper_powersemi_t9" + function_db435e40(rarity);
       break;
     case # "sniper_standard_t9":
-      str_model = # "p9_zm_chalk_buy_sniper_standard_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_sniper_standard_t9" + function_db435e40(rarity);
       break;
     case # "tr_damagesemi_t9":
-      str_model = # "p9_zm_chalk_buy_tr_damagesemi_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_tr_damagesemi_t9" + function_db435e40(rarity);
       break;
     case # "tr_longburst_t9":
-      str_model = # "p9_zm_chalk_buy_tr_longburst_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_tr_longburst_t9" + function_db435e40(rarity);
       break;
     case # "tr_powerburst_t9":
-      str_model = # "p9_zm_chalk_buy_tr_powerburst_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_tr_powerburst_t9" + function_db435e40(rarity);
       break;
     case # "tr_precisionsemi_t9":
-      str_model = # "p9_zm_chalk_buy_tr_precisionsemi_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_tr_precisionsemi_t9" + function_db435e40(rarity);
       break;
     case # "sniper_quickscope_t9":
-      str_model = # "p9_zm_chalk_buy_sniper_quickscope_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_sniper_quickscope_t9" + function_db435e40(rarity);
       break;
     default:
-      str_model = # "p9_zm_chalk_buy_tr_powerburst_t9" + function_db435e40(rarity);
+      str_model = #"p9_zm_chalk_buy_tr_powerburst_t9" + function_db435e40(rarity);
       break;
   }
 

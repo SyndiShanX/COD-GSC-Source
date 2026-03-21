@@ -37,7 +37,7 @@ function reward_chest_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
       self.var_b3673abf = self playLoopSound(#"hash_3b1f5984e7ae4c48", undefined, (0, 0, 40));
       break;
     case 3:
-      if(self.model === # "hash_12e47c6c01f2ff59") {} else {
+      if(self.model === #"hash_12e47c6c01f2ff59") {} else {
         self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_chest_explore_amb_lg", self, "tag_origin");
       }
 

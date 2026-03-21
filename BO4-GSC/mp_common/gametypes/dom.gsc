@@ -305,7 +305,7 @@ domflags() {
   for(fi = 0; fi < level.flags.size; fi++) {
     trigger = level.flags[fi];
     trigger.visual setModel(level.flagmodel[#"neutral"]);
-    name = # "dom" + trigger.visual.script_label;
+    name = #"dom" + trigger.visual.script_label;
     visuals = [];
     visuals[0] = trigger.visual;
     domflag = gameobjects::create_use_object(#"neutral", trigger, visuals, (0, 0, 0), name);
@@ -383,7 +383,7 @@ getunownedflagneareststart(team, excludeflag) {
   for(i = 0; i < level.flags.size; i++) {
     flag = level.flags[i];
 
-    if(flag getflagteam() != # "neutral") {
+    if(flag getflagteam() != #"neutral") {
       continue;
     }
 
@@ -437,13 +437,13 @@ function onbeginuse(sentient) {
   ownerteam = self gameobjects::get_owner_team();
   self.didstatusnotify = 0;
 
-  if(ownerteam == # "allies") {
-    otherteam = # "axis";
+  if(ownerteam == #"allies") {
+    otherteam = #"axis";
   } else {
-    otherteam = # "allies";
+    otherteam = #"allies";
   }
 
-  if(ownerteam == # "neutral") {
+  if(ownerteam == #"neutral") {
     otherteam = util::getotherteam(sentient.team);
     statusdialog("securing" + self.label, sentient.team, "objective" + self.label);
     return;
@@ -458,7 +458,7 @@ onuseupdate(team, progress, change) {
   if(progress > 0.05 && change && !self.didstatusnotify) {
     ownerteam = self gameobjects::get_owner_team();
 
-    if(ownerteam == # "neutral") {
+    if(ownerteam == #"neutral") {
       otherteam = util::getotherteam(team);
       statusdialog("securing" + self.label, team, "objective" + self.label);
     } else {
@@ -609,24 +609,24 @@ flagneutralized(team, oldteam) {
 }
 
 getdomflagusestring(label, neutralized) {
-  string = # "";
+  string = #"";
 
   if(neutralized) {
     switch (label) {
       case # "_a":
-        string = # "hash_3ff1c88b4360ea84";
+        string = #"hash_3ff1c88b4360ea84";
         break;
       case # "_b":
-        string = # "hash_dd6191acefd6847";
+        string = #"hash_dd6191acefd6847";
         break;
       case # "_c":
-        string = # "hash_25a2a0aff40c76aa";
+        string = #"hash_25a2a0aff40c76aa";
         break;
       case # "_d":
-        string = # "hash_2bcd7171f9aae4a5";
+        string = #"hash_2bcd7171f9aae4a5";
         break;
       case # "_e":
-        string = # "hash_5334d65b46b55660";
+        string = #"hash_5334d65b46b55660";
         break;
       default:
         break;
@@ -634,19 +634,19 @@ getdomflagusestring(label, neutralized) {
   } else {
     switch (label) {
       case # "_a":
-        string = # "hash_5b47de31c97a49ff";
+        string = #"hash_5b47de31c97a49ff";
         break;
       case # "_b":
-        string = # "hash_481e5e34f798331e";
+        string = #"hash_481e5e34f798331e";
         break;
       case # "_c":
-        string = # "hash_6a0c2383d37849bd";
+        string = #"hash_6a0c2383d37849bd";
         break;
       case # "_d":
-        string = # "hash_5079687d6a87790c";
+        string = #"hash_5079687d6a87790c";
         break;
       case # "_e":
-        string = # "hash_78e2a90cf85daa3b";
+        string = #"hash_78e2a90cf85daa3b";
         break;
       default:
         break;
@@ -664,10 +664,10 @@ onusewithneutralizingflag(sentient) {
   print("<dev string:xe4>" + self.label);
 
   level.usestartspawns = 0;
-  assert(team != # "neutral");
-  string = # "";
+  assert(team != #"neutral");
+  string = #"";
 
-  if(oldteam == # "neutral") {
+  if(oldteam == #"neutral") {
     level notify(#"flag_captured");
     string = getdomflagusestring(label, 0);
     level.bestspawnflag[oldteam] = self.levelflag;
@@ -684,7 +684,7 @@ onusewithneutralizingflag(sentient) {
     self flagneutralized(team, oldteam);
   }
 
-  assert(string != # "");
+  assert(string != #"");
   touchlist = arraycopy(self.touchlist[team]);
   isbflag = 0;
 
@@ -692,7 +692,7 @@ onusewithneutralizingflag(sentient) {
     isbflag = 1;
   }
 
-  if(oldteam == # "neutral") {
+  if(oldteam == #"neutral") {
     if(isDefined(getgametypesetting(#"contributioncapture")) && getgametypesetting(#"contributioncapture")) {
       var_1dbb2b2b = arraycopy(self.var_1dbb2b2b[team]);
       self thread function_ef09febd(var_1dbb2b2b, touchlist, string, oldteam, isbflag, 0);
@@ -721,7 +721,7 @@ onusewithoutneutralizingflag(sentient) {
   self gameobjects::set_owner_team(team);
   self.visuals[0] setModel(level.flagmodel[team]);
   level.usestartspawns = 0;
-  assert(team != # "neutral");
+  assert(team != #"neutral");
   isbflag = 0;
 
   if(label == "_b") {
@@ -729,7 +729,7 @@ onusewithoutneutralizingflag(sentient) {
   }
 
   string = getdomflagusestring(label, 0);
-  assert(string != # "");
+  assert(string != #"");
 
   if(isDefined(getgametypesetting(#"contributioncapture")) && getgametypesetting(#"contributioncapture")) {
     var_1dbb2b2b = arraycopy(self.var_1dbb2b2b[team]);
@@ -742,7 +742,7 @@ onusewithoutneutralizingflag(sentient) {
 
   bb::function_95a5b5c2("dom_capture", undefined, team, sentient.origin);
 
-  if(oldteam == # "neutral") {
+  if(oldteam == #"neutral") {
     self flagcapturedfromneutral(team);
     self.firstcapture = gettime();
     self.var_a248f0a8 = 1;
@@ -882,9 +882,9 @@ credit_player(player, string, lastownerteam, isbflag, neutralizing, time, var_a8
   if(!isscoreboosting(player, self)) {
     player challenges::capturedobjective(time, self.levelflag);
 
-    if(lastownerteam == # "neutral" && neutralizing && isDefined(self.hasbeencaptured) && self.hasbeencaptured) {
+    if(lastownerteam == #"neutral" && neutralizing && isDefined(self.hasbeencaptured) && self.hasbeencaptured) {
       scoreevents::processscoreevent(#"dom_point_secured_neutralizing", player, level.weaponnone, undefined);
-    } else if(lastownerteam == # "neutral") {
+    } else if(lastownerteam == #"neutral") {
       if(isbflag) {
         scoreevents::processscoreevent(#"neutral_b_secured", player, level.weaponnone, undefined);
         player stats::function_dad108fa(#"hash_60545a50ce7c9791", 1);
@@ -992,7 +992,7 @@ updatedomscores() {
     numownedflags += numflags;
 
     if(numflags) {
-      scoring_teams[scoring_teams.size] = # "allies";
+      scoring_teams[scoring_teams.size] = #"allies";
       globallogic_score::giveteamscoreforobjective_delaypostprocessing(#"allies", numflags);
     }
 
@@ -1000,7 +1000,7 @@ updatedomscores() {
     numownedflags += numflags;
 
     if(numflags) {
-      scoring_teams[scoring_teams.size] = # "axis";
+      scoring_teams[scoring_teams.size] = #"axis";
       globallogic_score::giveteamscoreforobjective_delaypostprocessing(#"axis", numflags);
     }
 
@@ -1014,9 +1014,9 @@ updatedomscores() {
       axisroundscore = [[level._getteamscore]](#"axis") - axisroundstartscore;
 
       if(alliesroundscore >= warningscore) {
-        winningteam = # "allies";
+        winningteam = #"allies";
       } else if(axisroundscore >= warningscore) {
-        winningteam = # "axis";
+        winningteam = #"axis";
       }
 
       if(isDefined(winningteam)) {
@@ -1195,7 +1195,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       if(dist < offenseradiussq) {
         inflagzone = 1;
 
-        if(level.flags[index] getflagteam() == attacker.pers[#"team"] || level.flags[index] getflagteam() == # "neutral") {
+        if(level.flags[index] getflagteam() == attacker.pers[#"team"] || level.flags[index] getflagteam() == #"neutral") {
           defendedflag = 1;
         } else {
           offendedflag = 1;
@@ -1207,7 +1207,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       if(dist < offenseradiussq) {
         inflagzone = 1;
 
-        if(level.flags[index] getflagteam() == attacker.pers[#"team"] || level.flags[index] getflagteam() == # "neutral") {
+        if(level.flags[index] getflagteam() == attacker.pers[#"team"] || level.flags[index] getflagteam() == #"neutral") {
           defendedflag = 1;
         } else {
           offendedflag = 1;
@@ -1368,7 +1368,7 @@ killwhilecontesting(flag, weapon) {
     return;
   }
 
-  if(flag.ownerteam != playerteam && flag.ownerteam != # "neutral") {
+  if(flag.ownerteam != playerteam && flag.ownerteam != #"neutral") {
     self.clearenemycount = 0;
     return;
   }
@@ -1646,7 +1646,7 @@ update_spawn_influencers(team) {
   assert(isDefined(self.owned_flag_influencer));
   assert(isDefined(self.enemy_flag_influencer));
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     enableinfluencer(self.neutral_flag_influencer, 1);
     enableinfluencer(self.owned_flag_influencer, 0);
     enableinfluencer(self.enemy_flag_influencer, 0);
@@ -1701,9 +1701,9 @@ dominated_challenge_check() {
   for(i = 0; i < num_flags; i++) {
     flag_team = level.flags[i] getflagteam();
 
-    if(flag_team == # "allies") {
+    if(flag_team == #"allies") {
       allied_flags++;
-    } else if(flag_team == # "axis") {
+    } else if(flag_team == #"axis") {
       axis_flags++;
     } else {
       return false;
@@ -1725,9 +1725,9 @@ dominated_check() {
   for(i = 0; i < num_flags; i++) {
     flag_team = level.flags[i] getflagteam();
 
-    if(flag_team == # "allies") {
+    if(flag_team == #"allies") {
       allied_flags++;
-    } else if(flag_team == # "axis") {
+    } else if(flag_team == #"axis") {
       axis_flags++;
     }
 
@@ -1745,7 +1745,7 @@ updatecapsperminute(lastownerteam) {
     self.capsperminute = 0;
   }
 
-  if(lastownerteam == # "neutral") {
+  if(lastownerteam == #"neutral") {
     return;
   }
 
@@ -1801,7 +1801,7 @@ onupdateuserate() {
   previousstate = self.contested;
   ownerteam = self.ownerteam;
 
-  if(var_7ccef8c6 > 0 && isDefined(ownerteam) && ownerteam != # "neutral" && ownerteam != self.claimteam) {
+  if(var_7ccef8c6 > 0 && isDefined(ownerteam) && ownerteam != #"neutral" && ownerteam != self.claimteam) {
     if(previousstate == 0) {
       foreach(playerlist in self.touchlist) {
         foreach(struct in playerlist) {

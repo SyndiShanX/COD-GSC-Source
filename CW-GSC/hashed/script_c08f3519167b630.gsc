@@ -35,7 +35,7 @@ function function_df8c20ce(s_params) {
       e_player.var_f96ce53f = 0;
     }
 
-    if(isDefined(weapon) && weapon.inventorytype != # "offhand" && !is_true(e_player.var_df6978da)) {
+    if(isDefined(weapon) && weapon.inventorytype != #"offhand" && !is_true(e_player.var_df6978da)) {
       if(!is_true(e_player.var_f96ce53f)) {
         if(ai_type === "spawner_zm_steiner_split_radiation_bomb" || ai_type === "spawner_zm_steiner_split_radiation_blast") {
           switch (ai_type) {

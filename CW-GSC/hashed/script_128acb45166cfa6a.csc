@@ -27,12 +27,12 @@ function private function_7ec99c76(localclientnum) {
   util::playFXOnTag(localclientnum, "zm_ai/fx9_steiner_eyes_glow", self, "J_EyeBall_LE");
   util::playFXOnTag(localclientnum, "zm_ai/fx9_steiner_eyes_glow", self, "J_EyeBall_RI");
 
-  if(self.subarchetype === # "hash_5653bbc44a034094") {
+  if(self.subarchetype === #"hash_5653bbc44a034094") {
     self thread function_59ee055f(localclientnum);
     return;
   }
 
-  if(self.subarchetype === # "hash_70162f4bc795092") {
+  if(self.subarchetype === #"hash_70162f4bc795092") {
     self thread function_59ee055f(localclientnum);
     return;
   }
@@ -56,7 +56,7 @@ function function_bc28111c(localclientnum, oldvalue, newvalue, bnewent, binitial
 }
 
 function function_5a53905d(localclientnum, pos, surface, notetrack, bone) {
-  if(self.subarchetype === # "hash_5653bbc44a034094" || self.subarchetype === # "hash_70162f4bc795092") {
+  if(self.subarchetype === #"hash_5653bbc44a034094" || self.subarchetype === #"hash_70162f4bc795092") {
     return;
   }
 
@@ -119,7 +119,7 @@ function function_ce1bd3f2(localclientnum) {
   var_4dfa7e5a = 1.3;
   n_wait_min = var_4f50b172;
   n_wait_max = var_5fbfc988;
-  var_d49193ec = # "hash_43accb909782c33";
+  var_d49193ec = #"hash_43accb909782c33";
 
   while(true) {
     if(self.var_ce0f9600 >= 1) {
@@ -163,7 +163,7 @@ function function_b53ee6c9(localclientnum) {
   var_4dfa7e5a = 0.85;
   n_wait_min = var_4f50b172;
   n_wait_max = var_5fbfc988;
-  var_d49193ec = # "hash_24b7a2e5066beff3";
+  var_d49193ec = #"hash_24b7a2e5066beff3";
 
   while(true) {
     if(self.var_ce0f9600 >= 1) {

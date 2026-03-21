@@ -501,9 +501,9 @@ function function_4df61aed(b_teleport) {
   aiutility::removeaioverridedamagecallback(self, &function_5d4aa7f8);
 
   if(getplayers().size < 3) {
-    var_98a21198 = # "hash_4cc53090ca79c51a";
+    var_98a21198 = #"hash_4cc53090ca79c51a";
   } else {
-    var_98a21198 = # "hash_6cd6ef080cea716b";
+    var_98a21198 = #"hash_6cd6ef080cea716b";
   }
 
   zm_sq::objective_set(#"hash_1c556f45aa40ebef", self, undefined, var_98a21198, undefined, 96);

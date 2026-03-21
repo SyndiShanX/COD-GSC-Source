@@ -191,7 +191,7 @@ function private function_b8d317ee(localclientnum) {
   actor_array = getentarraybytype(localclientnum, 15);
 
   foreach(actor in actor_array) {
-    if(isDefined(actor) && actor.archetype === # "abom") {
+    if(isDefined(actor) && actor.archetype === #"abom") {
       actor thread function_3c79fe29(localclientnum, actor);
       actor flag::set(#"hash_1bf32d70c3d977f6");
     }
@@ -201,7 +201,7 @@ function private function_b8d317ee(localclientnum) {
   actor_array = getentarraybytype(localclientnum, 15);
 
   foreach(actor in actor_array) {
-    if(isDefined(actor) && actor.archetype === # "abom" && actor flag::get(#"hash_1bf32d70c3d977f6")) {
+    if(isDefined(actor) && actor.archetype === #"abom" && actor flag::get(#"hash_1bf32d70c3d977f6")) {
       actor thread function_3c79fe29(localclientnum, actor);
     }
   }
@@ -224,7 +224,7 @@ function function_9dd3c047(localclientnum, oldval, newval, bnewent, binitialsnap
       self stoprenderoverridebundle(self.var_678bc6e2);
     }
 
-    self.var_678bc6e2 = # "hash_6ca42734951d5ff2";
+    self.var_678bc6e2 = #"hash_6ca42734951d5ff2";
     self playrenderoverridebundle(#"hash_6ca42734951d5ff2");
     self fxclientutils::stopfxbundle(fieldname, self, self.fxdef);
 
@@ -423,7 +423,7 @@ function private function_8cddfdf6(localclientnum, enable, head, tag, anim, var_
       self.weakpoint_fx[head] = undefined;
     }
 
-    if(self.aitype === # "hash_469e4baceeaf38f5") {
+    if(self.aitype === #"hash_469e4baceeaf38f5") {
       self.weakpoint_fx[head] = util::playFXOnTag(localclientnum, #"zm_ai/fx9_abom_gulp_crystal_ambient", self, tag);
     } else {
       self.weakpoint_fx[head] = util::playFXOnTag(localclientnum, #"hash_5b5c7c5ca0112aef", self, tag);

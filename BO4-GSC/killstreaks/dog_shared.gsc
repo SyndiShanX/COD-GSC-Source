@@ -39,7 +39,7 @@ function_8d543b98() {
   corpses = getcorpsearray();
 
   foreach(corpse in corpses) {
-    if(isactorcorpse(corpse) && corpse.archetype === # "mp_dog") {
+    if(isactorcorpse(corpse) && corpse.archetype === #"mp_dog") {
       corpse delete();
     }
   }

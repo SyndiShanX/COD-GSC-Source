@@ -424,7 +424,7 @@ function private function_d656e945(team) {
 
   vehicle_team = self.team;
 
-  if(vehicle_team == # "neutral") {
+  if(vehicle_team == #"neutral") {
     driver = self getseatoccupant(0);
 
     if(isDefined(driver)) {

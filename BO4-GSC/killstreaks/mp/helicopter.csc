@@ -22,14 +22,14 @@ __init__() {
   init_shared();
   level.chopper_fx[#"damage"][#"light_smoke"] = "destruct/fx8_atk_chppr_smk_trail";
   level.chopper_fx[#"damage"][#"heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
-  level._effect[#"qrdrone_prop"] = # "hash_6cd811fe548313ca";
-  level._effect[#"heli_guard_light"][#"friendly"] = # "killstreaks/fx_sc_lights_grn";
-  level._effect[#"heli_guard_light"][#"enemy"] = # "killstreaks/fx_sc_lights_red";
-  level._effect[#"heli_comlink_light"][#"common"] = # "killstreaks/fx_drone_hunter_lights";
-  level._effect[#"heli_gunner_light"][#"friendly"] = # "killstreaks/fx_vtol_lights_grn";
-  level._effect[#"heli_gunner_light"][#"enemy"] = # "killstreaks/fx_vtol_lights_red";
-  level._effect[#"heli_gunner"][#"vtol_fx"] = # "killstreaks/fx_vtol_thruster";
-  level._effect[#"heli_gunner"][#"vtol_fx_ft"] = # "killstreaks/fx_vtol_thruster";
+  level._effect[#"qrdrone_prop"] = #"hash_6cd811fe548313ca";
+  level._effect[#"heli_guard_light"][#"friendly"] = #"killstreaks/fx_sc_lights_grn";
+  level._effect[#"heli_guard_light"][#"enemy"] = #"killstreaks/fx_sc_lights_red";
+  level._effect[#"heli_comlink_light"][#"common"] = #"killstreaks/fx_drone_hunter_lights";
+  level._effect[#"heli_gunner_light"][#"friendly"] = #"killstreaks/fx_vtol_lights_grn";
+  level._effect[#"heli_gunner_light"][#"enemy"] = #"killstreaks/fx_vtol_lights_red";
+  level._effect[#"heli_gunner"][#"vtol_fx"] = #"killstreaks/fx_vtol_thruster";
+  level._effect[#"heli_gunner"][#"vtol_fx_ft"] = #"killstreaks/fx_vtol_thruster";
   clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int", &warnmissilelocking, 0, 0);
   clientfield::register("vehicle", "heli_warn_locked", 1, 1, "int", &warnmissilelocked, 0, 0);
   clientfield::register("vehicle", "heli_warn_fired", 1, 1, "int", &warnmissilefired, 0, 0);
@@ -195,11 +195,11 @@ startfx(localclientnum) {
   self endon(#"death");
 
   if(isDefined(self.vehicletype)) {
-    if(self.vehicletype == # "remote_mortar_vehicle_mp") {
+    if(self.vehicletype == #"remote_mortar_vehicle_mp") {
       return;
     }
 
-    if(self.vehicletype == # "vehicle_straferun_mp") {
+    if(self.vehicletype == #"vehicle_straferun_mp") {
       return;
     }
   }

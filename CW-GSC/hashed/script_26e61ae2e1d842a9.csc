@@ -29,7 +29,7 @@ function function_9ea44286() {
 
   str_gametype = util::get_game_type();
 
-  if(str_gametype === # "zsurvival") {
+  if(str_gametype === #"zsurvival") {
     if(isDefined(mapbundle.var_b74bbf7)) {
       return getscriptbundle(mapbundle.var_b74bbf7);
     }

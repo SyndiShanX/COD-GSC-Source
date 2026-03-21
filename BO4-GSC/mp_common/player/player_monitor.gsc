@@ -39,27 +39,27 @@ monitor() {
 
 function_d35f877a(player, weapon, statname, value = 0) {
   if(isDefined(player.var_3dc66299)) {
-    if(statname == # "shots") {
+    if(statname == #"shots") {
       player.var_3dc66299.shots += value;
       return;
     }
 
-    if(statname == # "hits") {
+    if(statname == #"hits") {
       player.var_3dc66299.hits += value;
       return;
     }
 
-    if(statname == # "kills") {
+    if(statname == #"kills") {
       player.var_3dc66299.kills += value;
       return;
     }
 
-    if(statname == # "deathsduringuse") {
+    if(statname == #"deathsduringuse") {
       player.var_3dc66299.deathsduringuse += value;
       return;
     }
 
-    if(statname == # "headshots") {
+    if(statname == #"headshots") {
       player.var_3dc66299.headshots += value;
     }
   }
@@ -93,7 +93,7 @@ function_43e771ee(reason) {
 
       died = 0;
 
-      if(reason == # "death" || self.var_3dc66299.deathsduringuse > 0) {
+      if(reason == #"death" || self.var_3dc66299.deathsduringuse > 0) {
         died = 1;
       }
 
@@ -139,7 +139,7 @@ function_fa444840() {
   while(true) {
     result = self waittill(#"weapon_change_complete", #"death");
 
-    if(result._notify == # "death") {
+    if(result._notify == #"death") {
       self function_43e771ee(result._notify);
       break;
     }

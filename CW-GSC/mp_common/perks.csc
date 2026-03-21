@@ -419,12 +419,12 @@ function gettrackerfxposition(local_client_num) {
 
     if(is_true(self.trailrightfoot)) {
       if(playfastfx) {
-        fx = # "player/fx_plyr_footstep_tracker_rf";
+        fx = #"player/fx_plyr_footstep_tracker_rf";
       } else {
         fx = isDefined(level.var_d98eed82) ? level.var_d98eed82 : # "player/fx9_perk_tracker_footstep_rgt";
       }
     } else if(playfastfx) {
-      fx = # "player/fx_plyr_footstep_tracker_lf";
+      fx = #"player/fx_plyr_footstep_tracker_lf";
     } else {
       fx = isDefined(level.var_373c2e89) ? level.var_373c2e89 : # "player/fx9_perk_tracker_footstep_lft";
     }

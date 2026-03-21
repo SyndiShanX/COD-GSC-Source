@@ -68,7 +68,7 @@ init() {
 }
 
 function_cfcf2d32() {
-  if(self.archetype === # "bat") {
+  if(self.archetype === #"bat") {
     self thread function_2438d55e();
   }
 }

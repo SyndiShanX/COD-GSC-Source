@@ -225,7 +225,7 @@ function private function_3e9077b(localclientnum) {
       }
 
       if(var_448a2e21 === 1) {
-        var_7cefa3dc = # "hash_73a3e9d9afd7f5b9";
+        var_7cefa3dc = #"hash_73a3e9d9afd7f5b9";
 
         debug_sphere(self.origin, 10, (0, 1, 0));
 
@@ -266,16 +266,16 @@ function private function_3e9077b(localclientnum) {
               player.var_315c7748 = 1;
 
               if(var_5c9c06a3 > var_92434aad * -1 + 0.3) {
-                postfx = # "hash_757fef94cde1aea2";
+                postfx = #"hash_757fef94cde1aea2";
               } else {
                 var_d063eeda = anglestoright(var_b8258f8d);
                 var_15fa6db2 = (0, var_d063eeda[1], 0);
                 var_eedc2e35 = vectordot(var_d063eeda, var_77490c15);
 
                 if(var_eedc2e35 > 0) {
-                  postfx = # "hash_5b26e5dca4c669e8";
+                  postfx = #"hash_5b26e5dca4c669e8";
                 } else {
-                  postfx = # "hash_34e29783cbb9d8dd";
+                  postfx = #"hash_34e29783cbb9d8dd";
                 }
               }
 

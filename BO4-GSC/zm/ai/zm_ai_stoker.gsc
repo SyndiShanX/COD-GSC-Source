@@ -295,11 +295,11 @@ function_e4ef4e27(entity, attribute, oldvalue, value) {
 }
 
 function_a96d8bd7(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
-  if(self.archetype != # "stoker") {
+  if(self.archetype != #"stoker") {
     return;
   }
 
-  if(eattacker.archetype === # "stoker") {
+  if(eattacker.archetype === #"stoker") {
     return 0;
   }
 
@@ -338,7 +338,7 @@ function_a96d8bd7(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapo
 
       if(isDefined(weakpoints)) {
         foreach(pointinfo in weakpoints) {
-          if(namespace_81245006::function_f29756fe(pointinfo) === 1 && pointinfo.type === # "armor" && pointinfo.hitloc !== "left_arm_lower") {
+          if(namespace_81245006::function_f29756fe(pointinfo) === 1 && pointinfo.type === #"armor" && pointinfo.hitloc !== "left_arm_lower") {
             var_dd54fdb1 = pointinfo;
             var_88e794fb = 1;
             break;
@@ -348,7 +348,7 @@ function_a96d8bd7(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapo
     }
 
     if(isDefined(var_dd54fdb1)) {
-      if(var_dd54fdb1.type == # "armor") {
+      if(var_dd54fdb1.type == #"armor") {
         if(isDefined(var_88e794fb) && var_88e794fb) {
           if(isDefined(var_dd54fdb1.hitloc)) {
             armorinfo = self.armorinfo[var_dd54fdb1.hitloc];
@@ -756,7 +756,7 @@ function_717a6538(entity) {
 }
 
 function_6da30402(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == # "stoker" && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == #"stoker" && eattacker.team != self.team) {
     if(smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_BURNED") {
       eattacker.var_d691409c = 1;
     }
@@ -829,7 +829,7 @@ stoker_init() {
 }
 
 function_fa8be26d(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isDefined(attacker) && attacker.archetype === # "stoker" && self.team === attacker.team) {
+  if(isDefined(attacker) && attacker.archetype === #"stoker" && self.team === attacker.team) {
     return 0;
   }
 
@@ -837,7 +837,7 @@ function_fa8be26d(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 }
 
 killed_callback(e_attacker) {
-  if(self.archetype != # "stoker") {
+  if(self.archetype != #"stoker") {
     return;
   }
 

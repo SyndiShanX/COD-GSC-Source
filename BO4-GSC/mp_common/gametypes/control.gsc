@@ -94,8 +94,8 @@ event_handler[gametype_init] main(eventstruct) {
   level.audiocues = [];
   level.mission_bundle = getscriptbundle("mission_settings_control");
   globallogic_spawn::addsupportedspawnpointtype("control");
-  game.strings[#"hash_bab7f2001813aa7"] = # "hash_15294f07ee519376";
-  game.strings[#"hash_5db475ae2d5164e1"] = # "hash_3a9b595d0bf81f13";
+  game.strings[#"hash_bab7f2001813aa7"] = #"hash_15294f07ee519376";
+  game.strings[#"hash_5db475ae2d5164e1"] = #"hash_3a9b595d0bf81f13";
   hud_message::function_36419c2(1, game.strings[#"hash_bab7f2001813aa7"], game.strings[#"hash_5db475ae2d5164e1"]);
   level.audioplaybackthrottle = int(level.mission_bundle.msaudioplaybackthrottle);
 
@@ -267,7 +267,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
     ownerteam = zone.gameobject.ownerteam;
 
-    if(!isDefined(ownerteam) || ownerteam == # "neutral") {
+    if(!isDefined(ownerteam) || ownerteam == #"neutral") {
       return;
     }
   }
@@ -498,7 +498,7 @@ setup_zones() {
     ownerteam = game.defenders;
 
     if(isDefined(level.neutralzone) && level.neutralzone) {
-      ownerteam = # "neutral";
+      ownerteam = #"neutral";
     }
 
     zone.gameobject = gameobjects::create_use_object(ownerteam, zone.trigger, visuals, (0, 0, 0), "control_" + zi);
@@ -507,7 +507,7 @@ setup_zones() {
     zone.gameobject gameobjects::set_model_visibility(0);
     zone.gameobject.owningzone = zone;
     zone.trigger.useobj = zone.gameobject;
-    zone.gameobject.lastteamtoownzone = # "neutral";
+    zone.gameobject.lastteamtoownzone = #"neutral";
     zone.gameobject.currentlyunoccupied = 1;
     zone.gameobject.var_a0ff5eb8 = !level.flagcapturerateincrease;
     zone.zoneindex = zi;
@@ -647,9 +647,9 @@ update_objective_hint_message(attackersmsg, defendersmsg) {
 }
 
 setup_objectives() {
-  level.objectivehintpreparezone = # "mp/control_koth";
-  level.objectivehintcapturezone = # "mp/capture_koth";
-  level.objectivehintdefendhq = # "mp/defend_koth";
+  level.objectivehintpreparezone = #"mp/control_koth";
+  level.objectivehintcapturezone = #"mp/capture_koth";
+  level.objectivehintdefendhq = #"mp/defend_koth";
 
   if(level.zonespawntime) {
     update_objective_hint_message(level.objectivehintpreparezone);
@@ -657,10 +657,10 @@ setup_objectives() {
     update_objective_hint_message(level.objectivehintcapturezone);
   }
 
-  game.strings[game.attackers + "_mission_win"] = # "hash_6ed10cd957ecbde6";
-  game.strings[game.attackers + "_mission_loss"] = # "hash_504843f8a8fe0230";
-  game.strings[game.defenders + "_mission_win"] = # "hash_74e465610ac830ce";
-  game.strings[game.defenders + "_mission_loss"] = # "hash_7d37cafde0ab4ecd";
+  game.strings[game.attackers + "_mission_win"] = #"hash_6ed10cd957ecbde6";
+  game.strings[game.attackers + "_mission_loss"] = #"hash_504843f8a8fe0230";
+  game.strings[game.defenders + "_mission_win"] = #"hash_74e465610ac830ce";
+  game.strings[game.defenders + "_mission_loss"] = #"hash_7d37cafde0ab4ecd";
 }
 
 toggle_zone_effects(enabled) {
@@ -1020,7 +1020,7 @@ on_zone_capture(sentient) {
   level.nzones--;
   capture_team = sentient.team;
   capturetime = gettime();
-  string = # "hash_6d6f47aad6be619f";
+  string = #"hash_6d6f47aad6be619f";
 
   if(!isDefined(self.lastcaptureteam) || self.lastcaptureteam != capture_team) {
     if(isDefined(getgametypesetting(#"contributioncapture")) && getgametypesetting(#"contributioncapture")) {
@@ -1093,7 +1093,7 @@ on_zone_capture(sentient) {
 on_zone_capture_neutral(sentient) {
   capture_team = sentient.team;
   capturetime = gettime();
-  string = # "hash_6d6f47aad6be619f";
+  string = #"hash_6d6f47aad6be619f";
 
   if(!isDefined(self.lastcaptureteam) || self.lastcaptureteam != capture_team) {
     if(isDefined(getgametypesetting(#"contributioncapture")) && getgametypesetting(#"contributioncapture")) {
@@ -1115,7 +1115,7 @@ on_zone_capture_neutral(sentient) {
       self gameobjects::set_owner_team(capture_team);
     }
   } else {
-    if(self.ownerteam == # "neutral") {
+    if(self.ownerteam == #"neutral") {
       self gameobjects::set_owner_team(capture_team);
       self thread award_capture_points_neutral(capture_team);
     }
@@ -1450,7 +1450,7 @@ on_begin_use(sentient) {
   if(isPlayer(sentient)) {
     ownerteam = self gameobjects::get_owner_team();
 
-    if(ownerteam == # "neutral") {
+    if(ownerteam == #"neutral") {
       sentient thread battlechatter::gametype_specific_battle_chatter("hq_protect", sentient.pers[#"team"]);
     } else {
       sentient thread battlechatter::gametype_specific_battle_chatter("hq_attack", sentient.pers[#"team"]);
@@ -1560,7 +1560,7 @@ update_caps_per_minute(lastownerteam) {
     self.capsperminute = 0;
   }
 
-  if(!isDefined(lastownerteam) || lastownerteam == # "neutral") {
+  if(!isDefined(lastownerteam) || lastownerteam == #"neutral") {
     return;
   }
 
@@ -1730,7 +1730,7 @@ on_use_update_neutral(team, progress, change) {
   if(progress > 0.05) {
     if(isDefined(self.needsallstatusplayback) && self.needsallstatusplayback) {
       if(change > 0) {
-        if(self.ownerteam == # "neutral") {
+        if(self.ownerteam == #"neutral") {
           play_objective_audio("warCapturingOfs", team);
           play_objective_audio("warCapturingDef", util::getotherteam(team));
           self.needsallstatusplayback = 0;
@@ -1755,7 +1755,7 @@ on_use_update_neutral(team, progress, change) {
 set_ui_team() {
   wait 0.05;
 
-  if(game.attackers == # "allies" || isDefined(level.neutralzone) && level.neutralzone) {
+  if(game.attackers == #"allies" || isDefined(level.neutralzone) && level.neutralzone) {
     clientfield::set_world_uimodel("hudItems.war.attackingTeam", 1);
     return;
   }

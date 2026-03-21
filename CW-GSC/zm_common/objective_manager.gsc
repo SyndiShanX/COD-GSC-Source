@@ -48,7 +48,7 @@ function private finalize() {
   level thread init_devgui();
 }
 
-function register_script(scriptname, spawncallback, startcallback, category, waypoint, var_4b7d58a, var_b4fae213, var_3fc9b09f = # "hash_248bfcefe7e51481", var_549cb6f6 = undefined) {
+function register_script(scriptname, spawncallback, startcallback, category, waypoint, var_4b7d58a, var_b4fae213, var_3fc9b09f = #"hash_248bfcefe7e51481", var_549cb6f6 = undefined) {
   assert(isstring(scriptname) || ishash(scriptname));
   assert(isfunctionptr(startcallback));
   assert(ishash(category));
@@ -161,9 +161,9 @@ function function_b06af8e3(destination, var_2923cf48, category, variant) {
 
   instances = array::randomize(instances);
 
-  if(is_true(getdvarint(#"hash_c05968dc8f1a0f", 0)) && category === # "hunt" && level.var_cf558bf < 1) {
+  if(is_true(getdvarint(#"hash_c05968dc8f1a0f", 0)) && category === #"hunt" && level.var_cf558bf < 1) {
     foreach(s_instance in instances) {
-      if(s_instance.variant === # "hash_7ecff86523884e12") {
+      if(s_instance.variant === #"hash_7ecff86523884e12") {
         instance = s_instance;
         break;
       }
@@ -177,9 +177,9 @@ function function_b06af8e3(destination, var_2923cf48, category, variant) {
         break;
       }
     }
-  } else if(!var_2923cf48 && level.var_cf558bf < 1 && (category === # "hunt" || category === # "payload")) {
+  } else if(!var_2923cf48 && level.var_cf558bf < 1 && (category === #"hunt" || category === #"payload")) {
     foreach(s_instance in instances) {
-      if(s_instance.variant !== # "hash_7ecff86523884e12" && s_instance.variant !== # "hunt_steiner" && s_instance.variant !== # "hunt_mechz" && s_instance.variant !== # "payload_teleport") {
+      if(s_instance.variant !== #"hash_7ecff86523884e12" && s_instance.variant !== #"hunt_steiner" && s_instance.variant !== #"hunt_mechz" && s_instance.variant !== #"payload_teleport") {
         instance = s_instance;
         break;
       }
@@ -204,23 +204,23 @@ function function_a8ad6895(destination, var_2923cf48 = 0) {
   foreach(category in level.var_aaa6544c) {
     variant = undefined;
 
-    if(category == # "final_battle" || category == # "exfil" || category == # "ee") {
+    if(category == #"final_battle" || category == #"exfil" || category == #"ee") {
       continue;
-    } else if(category === # "payload_teleport" || category === # "payload_noteleport") {
+    } else if(category === #"payload_teleport" || category === #"payload_noteleport") {
       variant = category;
-      category = # "payload";
-    } else if(category === # "hash_7ecff86523884e12" || category === # "hunt_steiner" || category === # "hunt_mechz" || category === # "hunt_raz" || category === # "hunt_mimic") {
+      category = #"payload";
+    } else if(category === #"hash_7ecff86523884e12" || category === #"hunt_steiner" || category === #"hunt_mechz" || category === #"hunt_raz" || category === #"hunt_mimic") {
       variant = category;
-      category = # "hunt";
-    } else if(category === # "defend_prime" || category === # "defend_alt") {
+      category = #"hunt";
+    } else if(category === #"defend_prime" || category === #"defend_alt") {
       variant = category;
-      category = # "defend";
-    } else if(category === # "hash_3a562a601777fa88" || category === # "hash_716fb03a307ed1cc") {
+      category = #"defend";
+    } else if(category === #"hash_3a562a601777fa88" || category === #"hash_716fb03a307ed1cc") {
       variant = category;
-      category = # "holdout";
-    } else if(category === # "retrieval_alt" || category === # "retrieval_prime") {
+      category = #"holdout";
+    } else if(category === #"retrieval_alt" || category === #"retrieval_prime") {
       variant = category;
-      category = # "retrieval";
+      category = #"retrieval";
     }
 
     if(!function_b06af8e3(destination, var_2923cf48, category, variant)) {
@@ -282,7 +282,7 @@ function private function_ac07f9d8(&destinations, &categories) {
   destination = destinations[0];
 
   foreach(category in categories) {
-    if(category == # "final_battle" || category == # "exfil") {
+    if(category == #"final_battle" || category == #"exfil") {
       continue;
     }
 
@@ -535,7 +535,7 @@ function private function_fa47c63e(scriptname) {
   }
 }
 
-function start_timer(n_seconds, str_label = # "", var_7ae7852d = 0) {
+function start_timer(n_seconds, str_label = #"", var_7ae7852d = 0) {
   level endon(#"game_ended", #"timer_stop");
   assert(n_seconds <= 900);
   level thread function_d3b93d12(n_seconds, str_label, var_7ae7852d);
@@ -587,7 +587,7 @@ function function_bdeca498(params) {
   }
 }
 
-function function_d3b93d12(n_seconds, str_label = # "", var_7ae7852d) {
+function function_d3b93d12(n_seconds, str_label = #"", var_7ae7852d) {
   level endoncallback(&function_c30c5e91, #"game_ended", #"timer_stop", "timer_" + str_label);
   level.var_2ca7afd8 = n_seconds;
   level.var_74d92ff6 = 0;
@@ -598,10 +598,10 @@ function function_d3b93d12(n_seconds, str_label = # "", var_7ae7852d) {
 
   while(level.var_74d92ff6 < n_seconds) {
     if(var_7ae7852d) {
-      str_alias = # "hash_aae61b4002c2d97";
+      str_alias = #"hash_aae61b4002c2d97";
 
       if(level.var_2ca7afd8 - level.var_74d92ff6 <= 10) {
-        str_alias = # "hash_1d660b56dca8c84";
+        str_alias = #"hash_1d660b56dca8c84";
       }
 
       level.var_f901067f playSound(str_alias);
@@ -622,7 +622,7 @@ function function_c30c5e91(str_notify) {
   }
 }
 
-function function_b8278876(n_seconds, str_label = # "") {
+function function_b8278876(n_seconds, str_label = #"") {
   level endon(#"game_ended");
   self endon(#"death", #"timer_stop");
   assert(n_seconds <= 900);
@@ -837,7 +837,7 @@ function function_7a7ab1a2(params) {
       break;
     case # "hash_6b5cf36b6de48f0a":
       if(isDefined(level.contentmanager.activeobjective)) {
-        if(level.contentmanager.activeobjective.content_script_name === # "holdout") {
+        if(level.contentmanager.activeobjective.content_script_name === #"holdout") {
           s_instance = level.contentmanager.activeobjective;
           level notify(#"timer_stop");
           s_instance waittill(#"return");

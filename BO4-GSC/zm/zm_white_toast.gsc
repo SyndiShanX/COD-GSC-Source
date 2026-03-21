@@ -598,7 +598,7 @@ apd_lockdown() {
   foreach(e_item in a_e_items) {
     w_item = e_item.item;
 
-    if(isDefined(w_item) && isDefined(w_item.craftitem) && w_item.craftitem && (w_item.name == # "hash_79bb43e8065dc831" || w_item.name == # "hash_79bb40e8065dc318" || w_item.name == # "hash_79bb41e8065dc4cb")) {
+    if(isDefined(w_item) && isDefined(w_item.craftitem) && w_item.craftitem && (w_item.name == #"hash_79bb43e8065dc831" || w_item.name == #"hash_79bb40e8065dc318" || w_item.name == #"hash_79bb41e8065dc4cb")) {
       e_player = array::random(getplayers());
       zm_items::player_pick_up(e_player, w_item);
       e_item delete();
@@ -1221,11 +1221,11 @@ function_80a202c1(e_player) {
   str_prompt = "";
 
   if(self.stub.related_parent.var_3fc5ae3d) {
-    str_prompt = # "hash_22dc6a35ff6146d7";
+    str_prompt = #"hash_22dc6a35ff6146d7";
   } else if(!level flag::get(#"hash_56dcbeaf295dd09e")) {
     str_prompt = zm_utility::function_d6046228(#"hash_6228a6a31d64d0ee", #"hash_2b939967b7ce331a");
   } else {
-    str_prompt = # "hash_757733252517119a";
+    str_prompt = #"hash_757733252517119a";
   }
 
   self sethintstring(str_prompt);

@@ -35,7 +35,7 @@ function function_95dc818f(str_scene_name, var_2b490ed3, var_53f71e6a, var_4e21c
   while(var_53f71e6a.size > 0 && !level flag::get(var_4e21c010)) {
     s_event = level waittilltimeout(randomfloatrange(n_wait_min, n_wait_max), var_4e21c010);
 
-    if(s_event._notify === # "timeout") {
+    if(s_event._notify === #"timeout") {
       level scene::play(str_scene_name, var_53f71e6a[0]);
       arrayremoveindex(var_53f71e6a, 0);
 
@@ -54,7 +54,7 @@ function function_95dc818f(str_scene_name, var_2b490ed3, var_53f71e6a, var_4e21c
 }
 
 function scene_amk_1030_per_reveal() {
-  var_4e21c010 = # "hash_4660b6aada428755";
+  var_4e21c010 = #"hash_4660b6aada428755";
 
   if(level flag::get(var_4e21c010) == 1) {
     level flag::set("woods_at_reveal");
@@ -149,14 +149,14 @@ function function_54afad46() {
     s_waitresult = level waittill(#"hash_1c978bceb82ac69e");
     var_2503a21f = 1;
 
-    if(s_waitresult.event == # "timeout" && var_98c1db83.size != 0) {
+    if(s_waitresult.event == #"timeout" && var_98c1db83.size != 0) {
       level scene::play(#"hash_20c92577942d1dee", var_98c1db83[0]);
       arrayremoveindex(var_98c1db83, 0);
-    } else if(s_waitresult.event == # "take_picture" && var_fc46a079.size != 0) {
+    } else if(s_waitresult.event == #"take_picture" && var_fc46a079.size != 0) {
       wait 0.25;
       level scene::play(#"hash_20c92577942d1dee", var_fc46a079[0]);
       arrayremoveindex(var_fc46a079, 0);
-    } else if(s_waitresult.event == # "hash_43d27ac2611ccdc2" && var_9060dfc9.size != 0) {
+    } else if(s_waitresult.event == #"hash_43d27ac2611ccdc2" && var_9060dfc9.size != 0) {
       wait 0.25;
       level scene::play(#"hash_20c92577942d1dee", var_9060dfc9[0]);
       arrayremoveindex(var_9060dfc9, 0);
@@ -186,7 +186,7 @@ function private function_bc29dab9(var_2503a21f) {
   s_result = level.player waittilltimeout(n_wait_time, #"take_picture");
   wait 0.2;
 
-  if(is_true(var_2503a21f) && s_result._notify == # "timeout" && level.player getcurrentweapon() == level.var_e3f5eafc) {
+  if(is_true(var_2503a21f) && s_result._notify == #"timeout" && level.player getcurrentweapon() == level.var_e3f5eafc) {
     n_wait_time = randomfloatrange(6, 8);
     s_result = level.player waittilltimeout(n_wait_time, #"take_picture");
   }
@@ -211,7 +211,7 @@ function scene_amk_3010_arc_enter() {
   level thread scene::play("scene_amk_3005_arc_approach", "arcade_door_idle");
   level flag::set("flg_tunnels_woods_at_arcade_entrance");
   var_164ab092 = array("arcade_door_nag01", "arcade_door_nag02");
-  var_4e21c010 = # "hash_106670b812548c9e";
+  var_4e21c010 = #"hash_106670b812548c9e";
   level function_95dc818f("scene_amk_3005_arc_approach", "arcade_door_idle", var_164ab092, var_4e21c010);
   level scene::stop("scene_amk_3005_arc_approach");
   level scene::play("scene_amk_3010_arc_enter", "arcade_enter");
@@ -237,13 +237,13 @@ function scene_amk_3020_arc_window() {
   level.woods flag::set(#"flg_arcade_nags_begin");
   var_7fc195f4 = array("arcade_window_nag01", "arcade_window_nag02", "arcade_window_nag03", "arcade_window_nag04");
   var_f7db8da1 = array("arcade_window_nag05", "arcade_window_nag06", "arcade_window_nag07", "arcade_window_nag08");
-  var_4e21c010 = # "flg_arcade_street_photo_taken";
+  var_4e21c010 = #"flg_arcade_street_photo_taken";
   str_scene_name = "scene_amk_3020_arc_window";
 
   while((var_7fc195f4.size > 0 || var_f7db8da1.size > 0) && !level flag::get(var_4e21c010)) {
     s_event = level waittilltimeout(randomfloatrange(6, 8), var_4e21c010);
 
-    if(s_event._notify === # "timeout") {
+    if(s_event._notify === #"timeout") {
       if(level.player flag::get("playing_arcade_game") == 1) {
         level.player flag::wait_till_clear("playing_arcade_game");
         wait 5;
@@ -322,7 +322,7 @@ function scene_amk_6010_tml_computer() {
 
 function private function_cca144e3() {
   var_273fba42 = array("nag1", "nag2", "nag3");
-  var_4e21c010 = # "flg_terminal_player_interact";
+  var_4e21c010 = #"flg_terminal_player_interact";
   level endon(var_4e21c010);
   level scene::play("scene_amk_6010_tml_computer", "room_enter2");
 

@@ -140,7 +140,7 @@ function function_d81240c3(params) {
 function function_7a3ebb8a() {
   self endon(#"death");
 
-  if(self.targetname !== # "exfil_ai") {
+  if(self.targetname !== #"exfil_ai") {
     return;
   }
 

@@ -64,7 +64,7 @@ __init__() {
 __main__() {}
 
 function_7728abc3() {
-  if(isDefined(self.subarchetype) && self.subarchetype == # "zombie_wolf_ally") {
+  if(isDefined(self.subarchetype) && self.subarchetype == #"zombie_wolf_ally") {
     aiutility::addaioverridedamagecallback(self, &function_462df450);
     self allowpitchangle(1);
     self setpitchorient();
@@ -128,7 +128,7 @@ function_462df450(inflictor, attacker, damage, flags, meansofdamage, weapon, poi
 function_bd0a9007(entity, target) {
   result = 1;
 
-  if(!zm_ai_dog::is_target_valid(entity, target) || !(isDefined(target.completed_emerging_into_playable_area) && target.completed_emerging_into_playable_area) || isDefined(target.in_gravity_trap) && target.in_gravity_trap || isDefined(target.var_105c6f35) && target.var_105c6f35 || isDefined(target.archetype) && target.archetype == # "dust_ball") {
+  if(!zm_ai_dog::is_target_valid(entity, target) || !(isDefined(target.completed_emerging_into_playable_area) && target.completed_emerging_into_playable_area) || isDefined(target.in_gravity_trap) && target.in_gravity_trap || isDefined(target.var_105c6f35) && target.var_105c6f35 || isDefined(target.archetype) && target.archetype == #"dust_ball") {
     result = 0;
   }
 
@@ -159,7 +159,7 @@ get_favorite_enemy(entity) {
   valid_targets = [];
 
   for(i = 0; i < targets.size; i++) {
-    if(isDefined(targets[i].zm_ai_category) && targets[i].zm_ai_category == # "boss") {
+    if(isDefined(targets[i].zm_ai_category) && targets[i].zm_ai_category == #"boss") {
       continue;
     }
 
@@ -310,7 +310,7 @@ function_3e4b2405(entity) {
     var_31a419e0 = [];
 
     foreach(zombie in zombies) {
-      if(zombie.zm_ai_category === # "basic" || zombie.zm_ai_category === # "popcorn") {
+      if(zombie.zm_ai_category === #"basic" || zombie.zm_ai_category === #"popcorn") {
         if(!isDefined(var_31a419e0)) {
           var_31a419e0 = [];
         } else if(!isarray(var_31a419e0)) {

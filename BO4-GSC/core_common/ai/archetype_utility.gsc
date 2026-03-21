@@ -640,7 +640,7 @@ getangleusingdirection(direction) {
 
 wasatcovernode() {
   if(isDefined(self.prevnode)) {
-    if(self.prevnode.type == # "cover left" || self.prevnode.type == # "cover right" || self.prevnode.type == # "cover pillar" || self.prevnode.type == # "cover stand" || self.prevnode.type == # "conceal stand" || self.prevnode.type == # "cover crouch" || self.prevnode.type == # "cover crouch window" || self.prevnode.type == # "conceal crouch") {
+    if(self.prevnode.type == #"cover left" || self.prevnode.type == #"cover right" || self.prevnode.type == #"cover pillar" || self.prevnode.type == #"cover stand" || self.prevnode.type == #"conceal stand" || self.prevnode.type == #"cover crouch" || self.prevnode.type == #"cover crouch window" || self.prevnode.type == #"conceal crouch") {
       return true;
     }
   }
@@ -1323,17 +1323,17 @@ getsecondbestcovernodeifavailable(behaviortreeentity) {
 
 getcovertype(node) {
   if(isDefined(node)) {
-    if(node.type == # "cover pillar") {
+    if(node.type == #"cover pillar") {
       return "cover_pillar";
-    } else if(node.type == # "cover left") {
+    } else if(node.type == #"cover left") {
       return "cover_left";
-    } else if(node.type == # "cover right") {
+    } else if(node.type == #"cover right") {
       return "cover_right";
-    } else if(node.type == # "cover stand" || node.type == # "conceal stand") {
+    } else if(node.type == #"cover stand" || node.type == #"conceal stand") {
       return "cover_stand";
-    } else if(node.type == # "cover crouch" || node.type == # "cover crouch window" || node.type == # "conceal crouch") {
+    } else if(node.type == #"cover crouch" || node.type == #"cover crouch window" || node.type == #"conceal crouch") {
       return "cover_crouch";
-    } else if(node.type == # "exposed" || node.type == # "guard") {
+    } else if(node.type == #"exposed" || node.type == #"guard") {
       return "cover_exposed";
     }
   }
@@ -1343,7 +1343,7 @@ getcovertype(node) {
 
 iscoverconcealed(node) {
   if(isDefined(node)) {
-    return (node.type == # "conceal crouch" || node.type == # "conceal stand");
+    return (node.type == #"conceal crouch" || node.type == #"conceal stand");
   }
 
   return false;
@@ -1362,17 +1362,17 @@ canseeenemywrapper() {
   enemyeye = self.enemy getEye();
   yawtoenemy = angleclamp180(node.angles[1] - vectortoangles(enemyeye - node.origin)[1]);
 
-  if(node.type == # "cover left" || node.type == # "cover right") {
+  if(node.type == #"cover left" || node.type == #"cover right") {
     if(yawtoenemy > 60 || yawtoenemy < -60) {
       return 0;
     }
 
     if(isDefined(node.spawnflags) && (node.spawnflags & 4) == 4) {
-      if(node.type == # "cover left" && yawtoenemy > 10) {
+      if(node.type == #"cover left" && yawtoenemy > 10) {
         return 0;
       }
 
-      if(node.type == # "cover right" && yawtoenemy < -10) {
+      if(node.type == #"cover right" && yawtoenemy < -10) {
         return 0;
       }
     }
@@ -1380,7 +1380,7 @@ canseeenemywrapper() {
 
   nodeoffset = (0, 0, 0);
 
-  if(node.type == # "cover pillar") {
+  if(node.type == #"cover pillar") {
     assert(!(isDefined(node.spawnflags) && (node.spawnflags & 2048) == 2048) || !(isDefined(node.spawnflags) && (node.spawnflags & 1024) == 1024));
     canseefromleft = 1;
     canseefromright = 1;
@@ -1393,13 +1393,13 @@ canseeenemywrapper() {
     return (canseefromright || canseefromleft);
   }
 
-  if(node.type == # "cover left") {
+  if(node.type == #"cover left") {
     nodeoffset = (-36, 7, 63);
-  } else if(node.type == # "cover right") {
+  } else if(node.type == #"cover right") {
     nodeoffset = (36, 7, 63);
-  } else if(node.type == # "cover stand" || node.type == # "conceal stand") {
+  } else if(node.type == #"cover stand" || node.type == #"conceal stand") {
     nodeoffset = (-3.7, -22, 63);
-  } else if(node.type == # "cover crouch" || node.type == # "cover crouch window" || node.type == # "conceal crouch") {
+  } else if(node.type == #"cover crouch" || node.type == #"cover crouch window" || node.type == #"conceal crouch") {
     nodeoffset = (3.5, -12.5, 45);
   }
 
@@ -1435,7 +1435,7 @@ gethighestnodestance(node) {
 
   errormsg(node.type + "<dev string:x13b>" + node.origin + "<dev string:x146>");
 
-  if(node.type == # "cover crouch" || node.type == # "cover crouch window" || node.type == # "conceal crouch") {
+  if(node.type == #"cover crouch" || node.type == #"cover crouch window" || node.type == #"conceal crouch") {
     return "crouch";
   }
 
@@ -1976,7 +1976,7 @@ preshootlaserandglinton(ai) {
     ai.laserstatus = 0;
   }
 
-  sniper_glint = # "hash_3db1ecb54b192a49";
+  sniper_glint = #"hash_3db1ecb54b192a49";
 
   while(true) {
     self waittill(#"about_to_fire");

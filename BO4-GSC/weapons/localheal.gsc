@@ -35,7 +35,7 @@ init_shared() {
   callback::on_player_killed_with_params(&on_player_killed);
   weapon = getweapon("eq_localheal");
 
-  if(isDefined(weapon) && weapon.name != # "none") {
+  if(isDefined(weapon) && weapon.name != #"none") {
     level.var_c34a20f5 = getscriptbundle(weapon.customsettings);
   } else {
     level.var_c34a20f5 = getscriptbundle("localheal_custom_settings");
@@ -207,7 +207,7 @@ function_903b9495(weapon, source_player) {
 
   if(isDefined(self.var_121392a1)) {
     foreach(effect in self.var_121392a1) {
-      if(effect.namehash == # "hacking") {
+      if(effect.namehash == #"hacking") {
         continue;
       }
 

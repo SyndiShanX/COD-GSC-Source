@@ -227,7 +227,7 @@ function function_1ad87afd(entity, damage, attacker, method, weapon, einflictor)
   }
 
   if(!isDefined(entity.team)) {
-    entity.team = # "allies";
+    entity.team = #"allies";
   }
 
   if(!isDefined(entity)) {
@@ -258,7 +258,7 @@ function function_1ad87afd(entity, damage, attacker, method, weapon, einflictor)
     return;
   }
 
-  if(weapon.name === # "eq_flash_grenade" || weapon.name === # "land_mine_cp") {
+  if(weapon.name === #"eq_flash_grenade" || weapon.name === #"land_mine_cp") {
     return;
   }
 
@@ -289,15 +289,15 @@ function function_1ad87afd(entity, damage, attacker, method, weapon, einflictor)
 
   same_team = entity.team == attacker.team;
 
-  if(attacker.team == # "allies") {
-    if(entity.team == # "neutral" && !is_true(level.var_cd2635a5)) {
+  if(attacker.team == #"allies") {
+    if(entity.team == #"neutral" && !is_true(level.var_cd2635a5)) {
       same_team = 1;
     }
   }
 
   same_team |= util::function_9b7092ef(entity.team, attacker.team);
 
-  if(entity.team != # "neutral" || entity.team == # "neutral" && !is_true(level.var_cd2635a5)) {
+  if(entity.team != #"neutral" || entity.team == #"neutral" && !is_true(level.var_cd2635a5)) {
     attacker.var_97a2e324 = entity.team;
   }
 
@@ -326,7 +326,7 @@ function function_1ad87afd(entity, damage, attacker, method, weapon, einflictor)
   }
 
   if(killed) {
-    if(entity.archetype === # "civilian" || entity.team == # "neutral") {
+    if(entity.archetype === #"civilian" || entity.team == #"neutral") {
       level notify(#"hash_3f3c07e5660a9695");
       attacker.participation += level.var_911cdf6e[#"hash_308b6e99638b7c04"];
       function_b943ac72("Civilian killed: -" + 0 - level.var_911cdf6e[#"hash_308b6e99638b7c04"]);
@@ -360,7 +360,7 @@ function friendly_fire_think(entity) {
   }
 
   if(!isDefined(entity.team)) {
-    entity.team = # "allies";
+    entity.team = #"allies";
   }
 
   for(;;) {
@@ -412,15 +412,15 @@ function friendly_fire_think(entity) {
 
     same_team = entity.team == attacker.team;
 
-    if(attacker.team == # "allies") {
-      if(entity.team == # "neutral" && !is_true(level.var_cd2635a5)) {
+    if(attacker.team == #"allies") {
+      if(entity.team == #"neutral" && !is_true(level.var_cd2635a5)) {
         same_team = 1;
       }
     }
 
     same_team |= util::function_9b7092ef(entity.team, attacker.team);
 
-    if(entity.team != # "neutral" || entity.team == # "neutral" && !is_true(level.var_cd2635a5)) {
+    if(entity.team != #"neutral" || entity.team == #"neutral" && !is_true(level.var_cd2635a5)) {
       attacker.var_97a2e324 = entity.team;
     }
 
@@ -449,7 +449,7 @@ function friendly_fire_think(entity) {
     }
 
     if(killed) {
-      if(entity.archetype === # "civilian" || entity.team == # "neutral") {
+      if(entity.archetype === #"civilian" || entity.team == #"neutral") {
         level notify(#"hash_3f3c07e5660a9695");
 
         if(attacker.participation <= 0) {
@@ -562,7 +562,7 @@ function missionfail() {
   self.participation = 0;
   self.lives = 0;
 
-  if(self.var_97a2e324 === # "neutral") {
+  if(self.var_97a2e324 === #"neutral") {
     util::function_2a8f4806(#"hash_293687c2ffb1b911", #"hash_7d45646726cd7f74");
     return;
   }

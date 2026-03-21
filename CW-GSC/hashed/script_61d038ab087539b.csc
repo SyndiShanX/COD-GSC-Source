@@ -190,27 +190,27 @@ function function_15de0a8a(localclientnum) {
 
 function function_9db3514d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    var_9879245b = # "hash_1b7434074de37b57";
+    var_9879245b = #"hash_1b7434074de37b57";
 
     if(isDefined(self.archetype)) {
       switch (self.archetype) {
         case # "hash_7c0d83ac1e845ac2":
-          var_9879245b = # "hash_1bdd3e074e3c755e";
+          var_9879245b = #"hash_1bdd3e074e3c755e";
           break;
         case # "mechz":
-          var_9879245b = # "hash_685b3b698ec70340";
+          var_9879245b = #"hash_685b3b698ec70340";
           break;
         case # "raz":
-          var_9879245b = # "hash_1bda5f074e3a779a";
+          var_9879245b = #"hash_1bda5f074e3a779a";
           break;
         case # "mimic":
-          var_9879245b = # "hash_32f09fc1f3674574";
+          var_9879245b = #"hash_32f09fc1f3674574";
           break;
         case # "zombie_dog":
         case # "zombie":
         case # "avogadro":
         default:
-          var_9879245b = # "hash_1b7434074de37b57";
+          var_9879245b = #"hash_1b7434074de37b57";
           break;
       }
     }

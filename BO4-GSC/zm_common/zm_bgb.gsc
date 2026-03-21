@@ -63,11 +63,11 @@ __main__() {
 
   level thread setup_devgui();
 
-  level._effect[#"samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"samantha_steal"] = #"zombie/fx_monkey_lightning_zmb";
 }
 
 on_player_spawned() {
-  self.bgb = # "none";
+  self.bgb = #"none";
 
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
@@ -102,7 +102,7 @@ bgb_player_init() {
   for(i = 0; i < 4; i++) {
     str_bgb = self.bgb_pack[i];
 
-    if(str_bgb == # "weapon_null") {
+    if(str_bgb == #"weapon_null") {
       continue;
     }
 
@@ -111,7 +111,7 @@ bgb_player_init() {
       continue;
     }
 
-    if(str_bgb != # "weapon_null" && self getbgbremaining(str_bgb) > 0) {
+    if(str_bgb != #"weapon_null" && self getbgbremaining(str_bgb) > 0) {
       self thread zm_custom::function_deae84ba();
     }
   }
@@ -125,7 +125,7 @@ bgb_player_init() {
   self.bgb_stats = [];
 
   foreach(bgb in self.bgb_pack) {
-    if(bgb == # "weapon_null") {
+    if(bgb == #"weapon_null") {
       continue;
     }
 
@@ -161,7 +161,7 @@ bgb_player_init() {
     foreach(bgb in level.bgb) {
       str_name = bgb.name;
 
-      if(bgb.rarity === 0 && str_name != # "zm_bgb_point_drops" && !array::contains(self.bgb_pack, str_name)) {
+      if(bgb.rarity === 0 && str_name != #"zm_bgb_point_drops" && !array::contains(self.bgb_pack, str_name)) {
         var_544e77f8 = level.bgb[str_name].var_a1750d43;
 
         if((!isDefined(var_544e77f8) || isDefined(var_544e77f8) && n_rank >= var_544e77f8 || function_bea73b01() == 1) && zm_custom::function_3ac936c6(str_name)) {
@@ -468,7 +468,7 @@ bgb_gumball_anim(bgb) {
   evt = self waittilltimeout(3, #"hash_593f920e9efd2ecd", #"bgb_gumball_anim_give");
 
   if(isDefined(evt) && evt.bgb === bgb) {
-    if(evt._notify == # "bgb_gumball_anim_give") {
+    if(evt._notify == #"bgb_gumball_anim_give") {
       return true;
     }
   }
@@ -1044,7 +1044,7 @@ take() {
     #var_3aee8e4: # "none", #var_826ddd38: self.bgb
   });
   self notify("bgb_update_take_" + self.bgb);
-  self.bgb = # "none";
+  self.bgb = #"none";
 }
 
 get_enabled() {
@@ -1067,7 +1067,7 @@ is_enabled(name) {
 
 any_enabled() {
   assert(isDefined(self.bgb));
-  return self.bgb !== # "none";
+  return self.bgb !== #"none";
 }
 
 is_team_enabled(bgb_name) {
@@ -1139,7 +1139,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(isPlayer(attacker)) {
     name = attacker get_enabled();
 
-    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
+    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
       damage = [[level.bgb[name].actor_damage_override_func]](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
     }
   }
@@ -1155,7 +1155,7 @@ vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, 
   if(isPlayer(eattacker)) {
     name = eattacker get_enabled();
 
-    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
+    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
       idamage = [[level.bgb[name].vehicle_damage_override_func]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
     }
   }
@@ -1171,7 +1171,7 @@ actor_death_override(attacker) {
   if(isPlayer(attacker)) {
     name = attacker get_enabled();
 
-    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
+    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
       damage = [[level.bgb[name].actor_death_override_func]](attacker);
     }
   }
@@ -1203,7 +1203,7 @@ lost_perk_override(perk) {
   foreach(player in level.activeplayers) {
     name = player get_enabled();
 
-    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].lost_perk_override_func)) {
+    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].lost_perk_override_func)) {
       b_result = [[level.bgb[name].lost_perk_override_func]](perk, self, player);
 
       if(b_result) {
@@ -1235,7 +1235,7 @@ add_to_player_score_override(n_points, str_awarded_by) {
     }
   }
 
-  if(str_enabled !== # "none" && isDefined(level.bgb[str_enabled]) && isDefined(level.bgb[str_enabled].add_to_player_score_override_func)) {
+  if(str_enabled !== #"none" && isDefined(level.bgb[str_enabled]) && isDefined(level.bgb[str_enabled].add_to_player_score_override_func)) {
     n_points = [[level.bgb[str_enabled].add_to_player_score_override_func]](n_points, str_awarded_by, 1);
   }
 

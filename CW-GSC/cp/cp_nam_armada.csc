@@ -25,7 +25,7 @@ function event_handler[level_init] main(eventstruct) {
   setsaveddvar(#"wind_global_hi_altitude", 10000);
   setsaveddvar(#"wind_global_low_strength_percent", 100);
   init_clientfields();
-  level._effect[#"hash_12368454c367c6fc"] = # "hash_41db1a73a41027b";
+  level._effect[#"hash_12368454c367c6fc"] = #"hash_41db1a73a41027b";
   load::main();
   level thread namespace_72b0499b::init_audio();
   util::waitforclient(0);

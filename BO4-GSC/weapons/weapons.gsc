@@ -45,7 +45,7 @@ init_shared() {
     level.trackweaponstats = 1;
   }
 
-  level._effect[#"flashninebang"] = # "_t6/misc/fx_equip_tac_insert_exp";
+  level._effect[#"flashninebang"] = #"_t6/misc/fx_equip_tac_insert_exp";
   callback::on_start_gametype(&init);
   level.detach_all_weapons = &detach_all_weapons;
 }
@@ -875,7 +875,7 @@ watch_offhand_end(weapon) {
     while(self function_2d96f300(weapon)) {
       msg = self waittill(#"offhand_end", #"death", #"disconnect", #"grenade_fire", #"weapon_change");
 
-      if(msg._notify == # "grenade_fire") {
+      if(msg._notify == #"grenade_fire") {
         if(isDefined(self) && isDefined(weapon.var_d69ee9ed) && weapon.var_d69ee9ed && self getweaponammoclip(weapon) > 0) {
           continue;
         }
@@ -883,7 +883,7 @@ watch_offhand_end(weapon) {
         break;
       }
 
-      if(msg._notify == # "death" || msg._notify == # "disconnect" || msg._notify == # "offhand_end") {
+      if(msg._notify == #"death" || msg._notify == #"disconnect" || msg._notify == #"offhand_end") {
         break;
       }
     }
@@ -950,18 +950,18 @@ begin_grenade_tracking() {
     return;
   }
 
-  blackboxeventname = # "mpequipmentuses";
-  eventname = # "hash_7cbbee88c5db5494";
+  blackboxeventname = #"mpequipmentuses";
+  eventname = #"hash_7cbbee88c5db5494";
 
   if(sessionmodeiscampaigngame()) {
-    blackboxeventname = # "cpequipmentuses";
-    eventname = # "hash_4b0d58055ad60c5a";
+    blackboxeventname = #"cpequipmentuses";
+    eventname = #"hash_4b0d58055ad60c5a";
   } else if(sessionmodeiszombiesgame()) {
-    blackboxeventname = # "zmequipmentuses";
-    eventname = # "hash_637ce41bcec9842c";
+    blackboxeventname = #"zmequipmentuses";
+    eventname = #"hash_637ce41bcec9842c";
   } else if(sessionmodeiswarzonegame()) {
-    blackboxeventname = # "wzequipmentuses";
-    eventname = # "hash_4f877fbf665a36d8";
+    blackboxeventname = #"wzequipmentuses";
+    eventname = #"hash_4f877fbf665a36d8";
   }
 
   function_92d1707f(eventname, blackboxeventname, {

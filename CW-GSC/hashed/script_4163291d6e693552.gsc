@@ -44,7 +44,7 @@ function function_df911075() {
 }
 
 function function_82e262cf(str_aitype) {
-  if(str_aitype === # "spawner_bo5_avogadro_sr" || str_aitype === # "spawner_bo5_mechz_sr" || str_aitype === # "spawner_bo5_mimic" || str_aitype === # "hash_4f87aa2a203d37d0" || str_aitype === # "spawner_zm_steiner" || str_aitype === # "spawner_bo5_abom") {
+  if(str_aitype === #"spawner_bo5_avogadro_sr" || str_aitype === #"spawner_bo5_mechz_sr" || str_aitype === #"spawner_bo5_mimic" || str_aitype === #"hash_4f87aa2a203d37d0" || str_aitype === #"spawner_zm_steiner" || str_aitype === #"spawner_bo5_abom") {
     return true;
   }
 
@@ -56,18 +56,18 @@ function function_b9e4c169() {
     case 1:
     case 2:
       if(math::cointoss()) {
-        str_aitype = # "hash_7cba8a05511ceedf";
+        str_aitype = #"hash_7cba8a05511ceedf";
       } else {
-        str_aitype = # "hash_124b582ce08d78c0";
+        str_aitype = #"hash_124b582ce08d78c0";
       }
 
       break;
     case 3:
     case 4:
-      str_aitype = # "hash_338eb4103e0ed797";
+      str_aitype = #"hash_338eb4103e0ed797";
       break;
     default:
-      str_aitype = # "hash_46c917a1b5ed91e7";
+      str_aitype = #"hash_46c917a1b5ed91e7";
       break;
   }
 
@@ -358,7 +358,7 @@ function function_3899cfea(v_org, n_radius) {
   }
 
   for(i = 0; i < a_zombies.size; i++) {
-    if(a_zombies[i].targetname === # "world_event_orda" || is_true(a_zombies[i].var_1dccf3c1)) {
+    if(a_zombies[i].targetname === #"world_event_orda" || is_true(a_zombies[i].var_1dccf3c1)) {
       continue;
     }
 
@@ -410,7 +410,7 @@ function function_69c0c9b6() {
   self endon(#"death");
   self.allowdeath = 1;
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     gibserverutils::annihilate(self);
   }
 

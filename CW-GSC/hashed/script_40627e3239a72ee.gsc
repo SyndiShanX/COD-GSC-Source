@@ -322,7 +322,7 @@ function item_pickup(params) {
 function function_c490ff56(params) {
   attacker = params.eattacker;
 
-  if(attacker.archetype !== # "zod_companion") {
+  if(attacker.archetype !== #"zod_companion") {
     return;
   }
 
@@ -402,7 +402,7 @@ function function_54e9a43b(b_skipped, var_19e802fa) {
       spawn_angles = level.klaus.angles;
       var_55033b92 = spawnactor("spawner_zm_mannequin_ally_upgraded", spawn_loc, spawn_angles);
 
-      if(isDefined(level.klaus.current_scene) && level.klaus.current_scene == # "hash_e667b7bb5057190") {
+      if(isDefined(level.klaus.current_scene) && level.klaus.current_scene == #"hash_e667b7bb5057190") {
         scene::remove_scene_func(#"hash_e667b7bb5057190", &namespace_6fb22263::function_3691fd0b, "sit_loop");
         var_55033b92 thread scene::play(#"hash_e667b7bb5057190", "sit_loop", var_55033b92);
       }
@@ -926,7 +926,7 @@ function function_52da09c5() {
   while(true) {
     waitresult = self waittill(#"damage");
 
-    if(isDefined(waitresult.attacker.archetype) && waitresult.attacker.archetype == # "zod_companion" && waitresult.mod === "MOD_MELEE") {
+    if(isDefined(waitresult.attacker.archetype) && waitresult.attacker.archetype == #"zod_companion" && waitresult.mod === "MOD_MELEE") {
       if(isDefined(level.klaus.attackable)) {
         iprintlnbold("<dev string:x132>");
 
@@ -964,16 +964,16 @@ function function_ed04cf0f(b_debug = 0) {
 
   switch (self.index) {
     case 0:
-      str_flag = # "hash_4c498c40805ec092";
-      var_dc7e53b6 = # "hash_7af2b5eb8d8c6fda";
+      str_flag = #"hash_4c498c40805ec092";
+      var_dc7e53b6 = #"hash_7af2b5eb8d8c6fda";
       break;
     case 1:
-      str_flag = # "hash_11d54d2ecf05cb2";
-      var_dc7e53b6 = # "hash_54d43da245d6857a";
+      str_flag = #"hash_11d54d2ecf05cb2";
+      var_dc7e53b6 = #"hash_54d43da245d6857a";
       break;
     case 2:
-      str_flag = # "hash_2bd741137c515a48";
-      var_dc7e53b6 = # "hash_1f8bb9e3c0e5ac10";
+      str_flag = #"hash_2bd741137c515a48";
+      var_dc7e53b6 = #"hash_1f8bb9e3c0e5ac10";
       break;
     default:
       break;

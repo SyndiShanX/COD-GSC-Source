@@ -44,9 +44,9 @@ function timeuntilspawn(includeteamkilldelay) {
       respawndelay = level.var_cf393bff;
     } else if(isDefined(level.var_a4107aed)) {
       respawndelay = level.var_a4107aed;
-    } else if(self.team === # "allies" && isDefined(level.var_6e5e9604)) {
+    } else if(self.team === #"allies" && isDefined(level.var_6e5e9604)) {
       respawndelay = level.var_6e5e9604;
-    } else if(self.team === # "axis" && isDefined(level.var_c260c3bd)) {
+    } else if(self.team === #"axis" && isDefined(level.var_c260c3bd)) {
       respawndelay = level.var_c260c3bd;
     } else {
       respawndelay = level.playerrespawndelay;

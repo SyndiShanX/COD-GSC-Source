@@ -385,7 +385,7 @@ function function_472bf4() {
 }
 
 function function_d138afd9() {
-  if(self.zombie_type === # "silverback") {
+  if(self.zombie_type === #"silverback") {
     return;
   }
 
@@ -1096,7 +1096,7 @@ function function_4b49bf0d() {
     }
   }
 
-  if(self.team != # "allies") {
+  if(self.team != #"allies") {
     time = gettime();
     validtargets = arraycombine(getaiteamarray("allies"), namespace_7f5aeb59::function_518c4c78(), 0, 0);
     targets = [];
@@ -1332,7 +1332,7 @@ function private function_16aba2a6() {
   while(true) {
     wait randomintrange(1, 4);
 
-    if(self.team != # "axis") {
+    if(self.team != #"axis") {
       continue;
     }
 
@@ -2247,7 +2247,7 @@ function function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point
   var_8d3f5b7d = isalive(var_ebcb86d6) && isPlayer(var_ebcb86d6);
   var_84ed9a13 = function_de3dda83(var_b85996d4, var_159ce525, var_ddd319d6, var_d2314927);
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
-  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== # "armor";
+  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== #"armor";
   var_b1c1c5cf = 1;
 
   if(var_8d3f5b7d) {
@@ -2390,11 +2390,11 @@ function function_b5feb0bf() {
   self.var_4ee91a53 = gettime() + 5000;
   var_36313dca = isDefined(self.animrate) ? self.animrate : 1;
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     animrate = 1.17;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     animrate = 0.65;
   }
 

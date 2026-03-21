@@ -28,7 +28,7 @@ function event_handler[gametype_init] main(eventstruct) {
   spawning::addsupportedspawnpointtype("tdm");
   callback::on_spawned(&on_player_spawned);
   level.var_61d4f517 = 1;
-  level.var_febab1ea = # "conf_dogtags_hpc";
+  level.var_febab1ea = #"conf_dogtags_hpc";
   level.var_e7b05b51 = 1;
 }
 

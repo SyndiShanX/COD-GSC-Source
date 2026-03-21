@@ -92,7 +92,7 @@ function autoexec opt_in() {
   level.aat_in_use = 1;
   level.bgb_machine_count = 2;
   level.random_pandora_box_start = 1;
-  level.var_e2f95698 = # "hash_30d01dde2ca22cfc";
+  level.var_e2f95698 = #"hash_30d01dde2ca22cfc";
   level.var_1d1a6e08 = 1;
   level.var_6b3764b5 = 15;
   setgametypesetting("zmEnableScoreStreakNapalmStrike", 0);
@@ -100,7 +100,7 @@ function autoexec opt_in() {
 }
 
 function event_handler[level_init] main(eventstruct) {
-  level.var_dfee7fc2 = # "hash_72c14048a8615869";
+  level.var_dfee7fc2 = #"hash_72c14048a8615869";
   level.var_f937a06e = 1;
   zm_intel::function_88645994(#"hash_2315f92412308649", undefined, undefined, undefined, undefined, #"zmintel_list_zm_tungsten_omega_intel_all", #"zmintel_list_zm_tungsten_darkaether_intel_all", #"zmintel_list_zm_tungsten_maxis_intel_all", #"zmintel_list_zm_tungsten_requiem_intel_all");
   callback::on_start_gametype(&zm_tungsten_fasttravel::start_fasttravel);
@@ -161,7 +161,7 @@ function event_handler[level_init] main(eventstruct) {
   level.var_5b8c6c9b = 120;
   level.var_f1662fe9 = 121;
   level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
-  level.var_d0ab70a2 = # "hash_415d2f1314ea548a";
+  level.var_d0ab70a2 = #"hash_415d2f1314ea548a";
   level.player_out_of_playable_area_monitor = 1;
   level.var_6f6cc58 = &function_6f6cc58;
   level.local_doors_stay_open = 1;
@@ -189,14 +189,14 @@ function event_handler[level_init] main(eventstruct) {
   level thread zm_zonemgr::manage_zones("zone_helipads");
   level thread sndfunctions();
   level.addrbuff = &function_65c65feb;
-  level.var_fc439a95 = # "ww_axe_gun_melee_t9";
+  level.var_fc439a95 = #"ww_axe_gun_melee_t9";
   level flag::set(#"power_on");
   level flag::set("pause_round_timeout");
   level thread function_9a17632d();
   level.var_7f72eddd = "default_zombies_tungsten";
   level.var_dafeed10 = "exfil_tungsten_";
-  level.var_8bb7479c = # "hash_477b4126fbff1de1";
-  level.var_72a3d8bc = # "hash_4f5da795ab0a5fc";
+  level.var_8bb7479c = #"hash_477b4126fbff1de1";
+  level.var_72a3d8bc = #"hash_4f5da795ab0a5fc";
   level.var_26ed6a07 = 600;
   level.var_c86f12d4 = 200;
   level.var_aaf7505f = 120;
@@ -507,7 +507,7 @@ function function_6f6cc58(e_player) {
           return true;
         }
       }
-    } else if(isPlayer(e_player) && self.archetype === # "soa") {
+    } else if(isPlayer(e_player) && self.archetype === #"soa") {
       zone_path = zm_zonemgr::function_54fc7938(e_player, isDefined(self.cached_zone_name) ? self.cached_zone_name : self);
 
       if(isDefined(zone_path)) {
@@ -519,7 +519,7 @@ function function_6f6cc58(e_player) {
       }
 
       return false;
-    } else if(isPlayer(e_player) && self.archetype === # "mechz") {
+    } else if(isPlayer(e_player) && self.archetype === #"mechz") {
       if(!is_true(self.var_7c4488fd)) {
         zone_name = isDefined(self.cached_zone_name) ? self.cached_zone_name : self zm_utility::get_current_zone();
 
@@ -2028,25 +2028,25 @@ function function_dd3953d3() {
   switch (getdvarint(#"hash_3e6a88037f209b4d", 0)) {
     case 1:
     default:
-      step_name = # "hash_2cec5bd1113224f4";
+      step_name = #"hash_2cec5bd1113224f4";
       break;
     case 2:
-      step_name = # "collect_parts";
+      step_name = #"collect_parts";
       break;
     case 3:
-      step_name = # "hash_434b5ee7bea53369";
+      step_name = #"hash_434b5ee7bea53369";
       break;
     case 4:
-      step_name = # "hash_31740aafc81f583a";
+      step_name = #"hash_31740aafc81f583a";
       break;
     case 5:
-      step_name = # "escort";
+      step_name = #"escort";
       break;
     case 6:
-      step_name = # "end_fight";
+      step_name = #"end_fight";
       break;
     case 7:
-      step_name = # "outro";
+      step_name = #"outro";
       break;
   }
 
@@ -2368,7 +2368,7 @@ function run_step(ee, step, var_5ea5c94d) {
     waitresult = self waittill(step.var_e788cdd7 + "<dev string:x3ac>", step.var_e788cdd7 + "<dev string:x3c0>");
   }
 
-  if(game.state === # "postgame") {
+  if(game.state === #"postgame") {
     return;
   }
 
@@ -2376,7 +2376,7 @@ function run_step(ee, step, var_5ea5c94d) {
   [[step.cleanup_func]](var_5ea5c94d, ended_early);
   step.cleaned_up = 1;
 
-  if(game.state === # "postgame") {
+  if(game.state === #"postgame") {
     return;
   }
 
@@ -2444,7 +2444,7 @@ function function_23031ae8(ee_name, var_f2c264bb) {
       wait_time = 10 * ee.steps.size;
       waitresult = self waittilltimeout(wait_time, step.var_e788cdd7 + "<dev string:x3d0>");
 
-      if(waitresult._notify == # "timeout") {
+      if(waitresult._notify == #"timeout") {
         iprintlnbold("<dev string:x3dc>" + function_9e72a96(ee_name) + "<dev string:x407>" + function_9e72a96(ee.steps[ee.current_step].name));
 
         return;

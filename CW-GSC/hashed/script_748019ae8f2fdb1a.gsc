@@ -205,7 +205,7 @@ function function_59dbd2b(entity, target_pos) {
   var_dd6010e8 -= (0, 0, 30);
   var_dd6010e8 += anglesToForward(entity.angles) * 20;
   entity.var_cc6f2563 = var_dd6010e8;
-  anim = # "hash_15c778c08ce4f907";
+  anim = #"hash_15c778c08ce4f907";
   anim_angles = entity.angles;
 
   if(isDefined(target_pos)) {
@@ -320,7 +320,7 @@ function private function_64b9e51c(entity, investigate_point) {
 }
 
 function private on_ai_spawned(params) {
-  if(self.subarchetype === # "hash_12fa854f3a7721b9" || self.subarchetype === # "hash_3498fb1fbfcd0cf" || self.subarchetype === # "hash_5653bbc44a034094" || self.subarchetype === # "hash_70162f4bc795092") {
+  if(self.subarchetype === #"hash_12fa854f3a7721b9" || self.subarchetype === #"hash_3498fb1fbfcd0cf" || self.subarchetype === #"hash_5653bbc44a034094" || self.subarchetype === #"hash_70162f4bc795092") {
     self.meleeweapon = getweapon(#"hash_78e63e8be5fcdb27");
     self.var_f7f0128b = 45;
   }
@@ -346,7 +346,7 @@ function function_725ddc56() {
 }
 
 function private on_ai_damage(params) {
-  if(self.archetype === # "raz" || self.archetype === # "soa") {
+  if(self.archetype === #"raz" || self.archetype === #"soa") {
     if(isPlayer(params.eattacker) && distance2dsquared(params.eattacker.origin, self.origin) > sqr(500)) {
       var_987c2c82 = getnavfaceregion(params.eattacker.origin, 100);
       var_a404d227 = getnavfaceregion(self.origin, 100);
@@ -361,7 +361,7 @@ function private on_ai_damage(params) {
         if(self.var_1a06330f > self.maxhealth * 0.1) {
           self.var_1a06330f = 0;
 
-          if(self.archetype === # "raz") {
+          if(self.archetype === #"raz") {
             var_8d9b91de = getrandomnavpoint(params.eattacker.origin, 200, self getpathfindingradius() * 1.2);
 
             if(isDefined(var_8d9b91de)) {
@@ -376,7 +376,7 @@ function private on_ai_damage(params) {
             }
           }
 
-          if(self.archetype === # "soa") {
+          if(self.archetype === #"soa") {
             if(isDefined(self.var_11b65fa)) {
               [[self.var_11b65fa]](self, params.eattacker.origin);
             }
@@ -407,7 +407,7 @@ function private function_b218294b() {
       ais = getactorarray();
 
       foreach(ai in ais) {
-        if(ai.archetype == # "zombie") {
+        if(ai.archetype == #"zombie") {
           function_59dbd2b(ai);
         }
       }
@@ -478,7 +478,7 @@ function function_42fbf5d9(var_956ca580, s_dest) {
   var_956ca580.var_df972d6 = 1;
   var_956ca580 flag::set("kill_hvt_teleporting");
 
-  if(var_956ca580.archetype === # "hash_7c0d83ac1e845ac2") {
+  if(var_956ca580.archetype === #"hash_7c0d83ac1e845ac2") {
     level endon(#"hash_2f3cb0b1b50d517a");
   }
 

@@ -87,12 +87,12 @@ function function_fcfd6064(localclientnum, itementry, clientdata, networkid) {
           break;
       }
 
-      if(itementry.itemtype == # "resource") {
-        renderbundle = # "hash_2f523d47697a9ce3";
+      if(itementry.itemtype == #"resource") {
+        renderbundle = #"hash_2f523d47697a9ce3";
       }
 
       if(is_true(itementry.wallbuyitem)) {
-        renderbundle = # "hash_52f7937d76fafca0";
+        renderbundle = #"hash_52f7937d76fafca0";
       }
 
       if(isDefined(itementry.var_599225da)) {
@@ -102,48 +102,48 @@ function function_fcfd6064(localclientnum, itementry, clientdata, networkid) {
 
     if(isDefined(networkid) && isDefined(clientdata) && isDefined(clientdata.var_ffc1c0e1)) {
       if(isDefined(clientdata.var_ffc1c0e1[networkid]) && clientdata.var_ffc1c0e1[networkid].servertime > getservertime(localclientnum, 1)) {
-        renderbundle = # "hash_3d6eb4b9bbc74fbd";
+        renderbundle = #"hash_3d6eb4b9bbc74fbd";
       }
     }
 
     return renderbundle;
   }
 
-  renderbundle = # "hash_312ceb838675b80";
+  renderbundle = #"hash_312ceb838675b80";
 
   if(isDefined(itementry)) {
     switch (itementry.rarity) {
       case # "none":
         break;
       case # "resource":
-        renderbundle = # "hash_312ceb838675b80";
+        renderbundle = #"hash_312ceb838675b80";
         break;
       case # "uncommon":
-        renderbundle = # "hash_70c807782a37573e";
+        renderbundle = #"hash_70c807782a37573e";
         break;
       case # "rare":
-        renderbundle = # "hash_5b08235c0b55a003";
+        renderbundle = #"hash_5b08235c0b55a003";
         break;
       case # "epic":
-        renderbundle = # "rob_sr_item_purple";
+        renderbundle = #"rob_sr_item_purple";
         break;
       case # "legendary":
-        renderbundle = # "hash_64261dabb4df88cd";
+        renderbundle = #"hash_64261dabb4df88cd";
         break;
       case # "ultra":
-        renderbundle = # "rob_sr_item_gold";
+        renderbundle = #"rob_sr_item_gold";
         break;
       case # "loadout":
-        renderbundle = # "hash_3088f081654a720e";
+        renderbundle = #"hash_3088f081654a720e";
         break;
     }
 
-    if(itementry.itemtype == # "resource") {
-      renderbundle = # "hash_2f523d47697a9ce3";
+    if(itementry.itemtype == #"resource") {
+      renderbundle = #"hash_2f523d47697a9ce3";
     }
 
     if(is_true(itementry.wallbuyitem)) {
-      renderbundle = # "hash_52f7937d76fafca0";
+      renderbundle = #"hash_52f7937d76fafca0";
     }
 
     if(isDefined(itementry.var_599225da)) {
@@ -153,7 +153,7 @@ function function_fcfd6064(localclientnum, itementry, clientdata, networkid) {
 
   if(isDefined(networkid) && isDefined(clientdata) && isDefined(clientdata.var_ffc1c0e1)) {
     if(isDefined(clientdata.var_ffc1c0e1[networkid]) && clientdata.var_ffc1c0e1[networkid].servertime > getservertime(localclientnum, 1)) {
-      renderbundle = # "hash_3d6eb4b9bbc74fbd";
+      renderbundle = #"hash_3d6eb4b9bbc74fbd";
     }
   }
 
@@ -275,7 +275,7 @@ function function_6c1f79e3(localclientnum) {
 }
 
 function function_731d83de(localclientnum) {
-  if(level.var_1c1febec[localclientnum] && self.team === # "axis") {
+  if(level.var_1c1febec[localclientnum] && self.team === #"axis") {
     wait 0.25;
 
     if(isDefined(self)) {
@@ -304,7 +304,7 @@ function function_fff5377e(localclientnum) {
           if(vectordot(var_8475afc1, vectornormalize(ai.origin - self.origin)) < 0.35) {
             var_f2c7b8b0 = ai.origin;
 
-            if(ai.type === # "vehicle") {
+            if(ai.type === #"vehicle") {
               var_f2c7b8b0 = (ai.origin[0], ai.origin[1], self.origin[2]);
             }
 
@@ -334,7 +334,7 @@ function private function_793a9f3d(localclientnum) {
 }
 
 function function_6a5f77(val) {
-  return val.team === # "axis";
+  return val.team === #"axis";
 }
 
 function function_25410869(localclientnum) {

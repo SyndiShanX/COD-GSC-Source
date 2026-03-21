@@ -61,7 +61,7 @@ function_46e95cc7() {
   level.disablemomentum = 1;
   level.overrideteamscore = 1;
   level.forceusekillstreak = 1;
-  level.forcedplayerteam = # "allies";
+  level.forcedplayerteam = #"allies";
   ct_difficulty::function_be562a72();
   level.var_edd52efc = &function_edd52efc;
   level thread function_6a1d53f3();
@@ -323,7 +323,7 @@ function_1e84c767() {
     gamedifficulty = function_1aeaebae();
     level thread function_f8f94589(gamedifficulty);
 
-    if(player function_c2c1d36b(player function_76785843()) == # "not_started") {
+    if(player function_c2c1d36b(player function_76785843()) == #"not_started") {
       player function_3b91934f(player function_76785843(), #"tutorial_started");
       player function_ea859fe2();
     }
@@ -338,7 +338,7 @@ function_1e84c767() {
   if(util::function_8570168d() && b_completed) {
     str_state = player function_c2c1d36b(player function_76785843());
 
-    if(str_state == # "skirmish_completed") {
+    if(str_state == #"skirmish_completed") {
       player thread ct_tutorial_skirmish::function_b4ebcd8a();
       player function_ea859fe2();
       function_588a84ce();
@@ -346,7 +346,7 @@ function_1e84c767() {
       return;
     }
 
-    if(str_state == # "tutorial_started" || str_state == # "tutorial_completed") {
+    if(str_state == #"tutorial_started" || str_state == #"tutorial_completed") {
       player function_3b91934f(player function_76785843(), #"tutorial_completed");
       player function_ea859fe2();
       waitframe(1);

@@ -225,7 +225,7 @@ function private function_7d1d7f3f(entity) {
   namespace_19c99142::function_d9fe2b0(entity);
   var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
 
-  if(var_4d21f369 === # "attacking") {
+  if(var_4d21f369 === #"attacking") {
     if(!isDefined(soa.favoriteenemy) || entity.favoriteenemy !== soa.favoriteenemy) {
       if(!isDefined(soa.favoriteenemy) || distance2dsquared(soa.origin, entity.origin) > sqr(1000)) {
         namespace_19c99142::function_c33fb385(entity, #"following");
@@ -233,7 +233,7 @@ function private function_7d1d7f3f(entity) {
     }
   }
 
-  if(var_4d21f369 === # "following") {
+  if(var_4d21f369 === #"following") {
     if(isDefined(soa.favoriteenemy) && entity cansee(soa.favoriteenemy)) {
       namespace_19c99142::function_c33fb385(entity, #"attacking");
     }
@@ -241,13 +241,13 @@ function private function_7d1d7f3f(entity) {
 
   var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
 
-  if(var_4d21f369 === # "following") {
+  if(var_4d21f369 === #"following") {
     goal = namespace_19c99142::function_dd116fa9(entity);
     entity setgoal(goal);
     return;
   }
 
-  if(var_4d21f369 === # "attacking") {
+  if(var_4d21f369 === #"attacking") {
     if(isPlayer(soa.favoriteenemy) && is_true(entity.var_ff3cbd9e) && !getdvarint(#"hash_6f7afa24d5871b86", 0) > 0) {
       var_ce42b625 = zm_utility::function_d89330e6(soa.favoriteenemy);
 
@@ -405,7 +405,7 @@ function function_6c3b6e9d() {
 
   var_4d21f369 = namespace_19c99142::function_da71e09a(self);
 
-  if(var_4d21f369 === # "procedural_traversal") {
+  if(var_4d21f369 === #"procedural_traversal") {
     return true;
   }
 

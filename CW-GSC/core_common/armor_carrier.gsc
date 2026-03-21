@@ -67,7 +67,7 @@ function private on_player_loadout() {
 }
 
 function private function_e74225a7(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
-  if(itemcount.itementry.itemtype == # "armor_shard") {
+  if(itemcount.itementry.itemtype == #"armor_shard") {
     var_82da4e0 = int(min(slot, self.var_c52363ab - var_aec6fa7f.armorplatecount));
     var_aec6fa7f.armorplatecount += var_82da4e0;
     var_aec6fa7f clientfield::set_player_uimodel("hudItems.armorPlateCount", var_aec6fa7f.armorplatecount);
@@ -126,7 +126,7 @@ function private function_a7879258(lastweapon) {
 
   waitresult = self waittilltimeout(2, #"weapon_change_complete", #"death", #"enter_vehicle", #"exit_vehicle");
 
-  if(waitresult._notify !== # "weapon_change_complete") {
+  if(waitresult._notify !== #"weapon_change_complete") {
     self weapons::function_d571ac59(lastweapon, 0, 0, var_b2cde03b);
     return;
   }
@@ -151,7 +151,7 @@ function private function_a7879258(lastweapon) {
 
       waitresult = self waittilltimeout(1.1, #"death", #"enter_vehicle", #"exit_vehicle");
 
-      if(waitresult._notify !== # "timeout") {
+      if(waitresult._notify !== #"timeout") {
         self weapons::function_d571ac59(lastweapon, 0, 0, var_b2cde03b);
         return;
       }

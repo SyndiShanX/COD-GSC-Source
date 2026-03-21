@@ -244,7 +244,7 @@ function function_44f8874() {
     level.var_30fc6630 delete();
   }
 
-  if(isDefined(level.raid_adler.model) && level.raid_adler.model != # "c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn") {
+  if(isDefined(level.raid_adler.model) && level.raid_adler.model != #"c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn") {
     level.raid_adler thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_usa_hero_adler_civ_amsterdam_body_no_dyn");
   }
 
@@ -287,7 +287,7 @@ function function_86b6bafa() {
   level districts::function_a7d79fcb(["airfield_intro", "airfield_base"]);
   level thread slide_enemy2_clip();
 
-  if(isDefined(level.raid_adler.model) && level.raid_adler.model != # "c_t9_usa_hero_adler_civ_amsterdam_body") {
+  if(isDefined(level.raid_adler.model) && level.raid_adler.model != #"c_t9_usa_hero_adler_civ_amsterdam_body") {
     level.raid_adler thread namespace_b100dd86::function_f82142f8(undefined, "c_t9_usa_hero_adler_civ_amsterdam_body");
   }
 }

@@ -16,7 +16,7 @@ function init_shared() {
   if(!isDefined(level.var_4249c222)) {
     level.var_4249c222 = {};
     level.remoteweapons = [];
-    level.remoteexithint = # "mp/remote_exit";
+    level.remoteexithint = #"mp/remote_exit";
     callback::on_spawned(&on_player_spawned);
   }
 }

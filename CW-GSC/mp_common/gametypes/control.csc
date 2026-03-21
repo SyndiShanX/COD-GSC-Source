@@ -36,15 +36,15 @@ function event_handler[gametype_init] main(eventstruct) {
   level.effect_scriptbundles[#"zoneedgemarker"] = getscriptbundle("teamcolorfx_koth_edge_marker");
   level.effect_scriptbundles[#"zoneedgemarkerwndw"] = getscriptbundle("teamcolorfx_koth_edge_marker_window");
   level._effect[#"zoneedgemarker"] = [];
-  level._effect[#"zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
   level._effect[#"zoneedgemarkerwndw"] = [];
-  level._effect[#"zoneedgemarkerwndw"][0] = # "ui/fx8_infil_marker_neutral_window";
-  level._effect[#"zoneedgemarkerwndw"][1] = # "hash_5565c3fc2c7742fe";
-  level._effect[#"zoneedgemarkerwndw"][2] = # "hash_3283b765fe480df7";
-  level._effect[#"zoneedgemarkerwndw"][3] = # "hash_6a512c225256a2e9";
+  level._effect[#"zoneedgemarkerwndw"][0] = #"ui/fx8_infil_marker_neutral_window";
+  level._effect[#"zoneedgemarkerwndw"][1] = #"hash_5565c3fc2c7742fe";
+  level._effect[#"zoneedgemarkerwndw"][2] = #"hash_3283b765fe480df7";
+  level._effect[#"zoneedgemarkerwndw"][3] = #"hash_6a512c225256a2e9";
   level.mission_bundle = getscriptbundle("mission_settings_control");
   level.mission_bundle = getscriptbundle("mission_settings_control");
   callback::on_localclient_connect(&on_localclient_connect);
@@ -218,22 +218,22 @@ function function_64ffa588(local_client_num) {
   effects = [];
   effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
   effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
-  effects[#"zoneedgemarker"][2] = # "hash_682365220f952226";
-  effects[#"zoneedgemarker"][1] = # "hash_5c0d472966d09d41";
+  effects[#"zoneedgemarker"][2] = #"hash_682365220f952226";
+  effects[#"zoneedgemarker"][1] = #"hash_5c0d472966d09d41";
   effects[#"zoneedgemarker"][3] = [];
-  effects[#"zoneedgemarker"][3][2] = # "hash_3d943e08d321081c";
-  effects[#"zoneedgemarker"][3][1] = # "hash_6328e922e5ef809f";
-  effects[#"zoneedgemarkerwndw"][2] = # "hash_6bfa43a02f3672e3";
-  effects[#"zoneedgemarkerwndw"][1] = # "hash_7e0524ef3f409d16";
+  effects[#"zoneedgemarker"][3][2] = #"hash_3d943e08d321081c";
+  effects[#"zoneedgemarker"][3][1] = #"hash_6328e922e5ef809f";
+  effects[#"zoneedgemarkerwndw"][2] = #"hash_6bfa43a02f3672e3";
+  effects[#"zoneedgemarkerwndw"][1] = #"hash_7e0524ef3f409d16";
   effects[#"zoneedgemarkerwndw"][3] = [];
-  effects[#"zoneedgemarkerwndw"][3][2] = # "hash_252ee62d9ea8dcc9";
-  effects[#"zoneedgemarkerwndw"][3][1] = # "hash_7495c7dec3ebf9dc";
+  effects[#"zoneedgemarkerwndw"][3][2] = #"hash_252ee62d9ea8dcc9";
+  effects[#"zoneedgemarkerwndw"][3][1] = #"hash_7495c7dec3ebf9dc";
   return effects;
 }
 
 function get_fx_state(local_client_num, state, attackers, var_b8fe9b52) {
   if(var_b8fe9b52) {
-    if(attackers == # "allies") {
+    if(attackers == #"allies") {
       return state;
     } else if(state == 1) {
       return 2;
@@ -267,10 +267,10 @@ function get_fx(fx_name, fx_state, effects) {
 
 function private get_attacking_team() {
   attackers_key = codegetworlduimodelfield("hudItems.war.attackingTeam");
-  attackers = # "allies";
+  attackers = #"allies";
 
   if(attackers_key == 2) {
-    attackers = # "axis";
+    attackers = #"axis";
   }
 
   return attackers;

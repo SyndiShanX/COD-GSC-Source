@@ -124,7 +124,7 @@ event_handler[level_init] main(eventstruct) {
   level.default_game_mode = "zclassic";
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_white_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_white_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.var_161cb00c = 1;
   level.registerobjective_qzonejukeinit = 0;
@@ -704,15 +704,15 @@ function_e5c88b7b() {
 }
 
 function_785cadc4() {
-  level.var_678333a6 = # "hash_11347f5077a17dcb";
-  level._effect[#"chest_light"] = # "hash_1e8cb303d3103833";
-  level._effect[#"chest_light_closed"] = # "hash_602f075818a2fb2e";
-  level._effect[#"hash_2ff87d61167ea531"] = # "hash_1eb426cfbfef7486";
-  level._effect[#"hash_4048cb4967032c4a"] = # "hash_7e272f1a9f143051";
-  level._effect[#"lght_marker"] = # "hash_7dec2fde8393c0f4";
-  level._effect[#"lght_marker_flare"] = # "hash_11347f5077a17dcb";
-  level._effect[#"poltergeist_magicbox"] = # "hash_11347f5077a17dcb";
-  level._effect[#"hash_572a14944ad27060"] = # "zombie/fx_weapon_box_marker_zmb";
+  level.var_678333a6 = #"hash_11347f5077a17dcb";
+  level._effect[#"chest_light"] = #"hash_1e8cb303d3103833";
+  level._effect[#"chest_light_closed"] = #"hash_602f075818a2fb2e";
+  level._effect[#"hash_2ff87d61167ea531"] = #"hash_1eb426cfbfef7486";
+  level._effect[#"hash_4048cb4967032c4a"] = #"hash_7e272f1a9f143051";
+  level._effect[#"lght_marker"] = #"hash_7dec2fde8393c0f4";
+  level._effect[#"lght_marker_flare"] = #"hash_11347f5077a17dcb";
+  level._effect[#"poltergeist_magicbox"] = #"hash_11347f5077a17dcb";
+  level._effect[#"hash_572a14944ad27060"] = #"zombie/fx_weapon_box_marker_zmb";
 }
 
 function_d574cfc6() {

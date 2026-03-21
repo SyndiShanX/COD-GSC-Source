@@ -114,7 +114,7 @@ function_6a61388f(vehicle) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu22_item") {
+  if(itementry.name === #"cu22_item") {
     if(self character_unlock::function_f0406288(#"woods_unlock") && (self.deaths !== 0 || self.suicides !== 0)) {
       self character_unlock::function_c8beca5e(#"woods_unlock", #"hash_17a4bbf5ec553d9a", 2);
     }

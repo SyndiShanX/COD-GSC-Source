@@ -43,7 +43,7 @@ function private function_e79ccfd8(localclientnum) {
     codestoppostfxbundlelocal(localclientnum, #"hash_73c750f53749d44d");
   }
 
-  self.pstfx_blood = # "hash_44dcb6ac5e8787e0";
+  self.pstfx_blood = #"hash_44dcb6ac5e8787e0";
   self.wound_rob = "rob_wound_blood_splatter";
   self.var_82dad7be = self battlechatter::get_player_dialog_alias("exertBreatheHurt");
   function_6deee27e(localclientnum);
@@ -89,10 +89,10 @@ function private enter_critical_health(localclientnum) {
 function private play_critical_health_rumble(localclientnum) {
   self endon(#"death", #"disconnect", #"critical_health_end", #"spawned");
   var_cf155b98 = "new_health_stage_critical";
-  sound = # "hash_318f22e4d70ee6d3";
+  sound = #"hash_318f22e4d70ee6d3";
 
   if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
-    sound = # "hash_5bbb0f2e7cbf753c";
+    sound = #"hash_5bbb0f2e7cbf753c";
   }
 
   while(true) {
@@ -222,7 +222,7 @@ function private function_27d3ba05(localclientnum) {
     return false;
   }
 
-  if(level.var_4ecf5754 === # "silent_film") {
+  if(level.var_4ecf5754 === #"silent_film") {
     return false;
   }
 
@@ -529,18 +529,18 @@ function private function_55d01d42() {
   fields = getcharacterfields(character_index, currentsessionmode());
 
   if(isDefined(fields) && (isDefined(fields.digitalblood) ? fields.digitalblood : 0)) {
-    self.pstfx_blood = # "hash_21152915158b09dd";
+    self.pstfx_blood = #"hash_21152915158b09dd";
     self.wound_rob = "rob_wound_blood_splatter_reaper";
     return;
   }
 
   if(util::is_mature()) {
-    self.pstfx_blood = # "hash_263a0659c7ff81ad";
+    self.pstfx_blood = #"hash_263a0659c7ff81ad";
     self.wound_rob = "rob_wound_blood_splatter";
     return;
   }
 
-  self.pstfx_blood = # "hash_44dcb6ac5e8787e0";
+  self.pstfx_blood = #"hash_44dcb6ac5e8787e0";
   self.wound_rob = "rob_wound_blood_splatter";
 }
 
@@ -648,7 +648,7 @@ function private function_62b7e00d(localclientnum) {
     return;
   }
 
-  if(util::get_game_type() === # "doa") {
+  if(util::get_game_type() === #"doa") {
     return;
   }
 
@@ -910,7 +910,7 @@ function function_c0cdd1f2(localclientnum, stagefrom, stageto, ramptime, key, po
 }
 
 function private function_70299400(localclientnum) {
-  if(level.var_4ecf5754 === # "silent_film") {
+  if(level.var_4ecf5754 === #"silent_film") {
     return;
   }
 
@@ -1217,9 +1217,9 @@ function private function_22302b4b() {
   }
 
   if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
-    level.blood.var_8691ed16 = # "hash_58050d3d19333041";
-    level.blood.var_d8dc9013 = # "hash_2e7211976520b92f";
-    level.blood.var_dad052de = # "hash_774cba4a0c3e7001";
+    level.blood.var_8691ed16 = #"hash_58050d3d19333041";
+    level.blood.var_d8dc9013 = #"hash_2e7211976520b92f";
+    level.blood.var_dad052de = #"hash_774cba4a0c3e7001";
   }
 }
 

@@ -284,7 +284,7 @@ function function_7395fe24(action, fullbody, victim, scene) {
 }
 
 function function_cee18456(parms) {
-  if(parms == # "hash_20dda4a52ba67955") {
+  if(parms == #"hash_20dda4a52ba67955") {
     self thread takedown_cleanup();
   }
 }
@@ -451,7 +451,7 @@ function private function_3cadc363(prompt_struct) {
 }
 
 function private function_7d4b1333(var_201c5b1f) {
-  if(var_201c5b1f != # "death" && var_201c5b1f != # "disconnect") {
+  if(var_201c5b1f != #"death" && var_201c5b1f != #"disconnect") {
     self function_7a061b23(1, undefined);
   }
 }
@@ -506,7 +506,7 @@ function function_5ca78f5a(action) {
         continue;
       }
 
-      if(enemy.species !== # "human") {
+      if(enemy.species !== #"human") {
         continue;
       }
 
@@ -536,10 +536,10 @@ function function_5ca78f5a(action) {
             victimfwd = anglesToForward(enemy.angles);
             playerdelta = vectornormalize(self.origin - enemy.origin);
             dot = vectordot(playerdelta, victimfwd);
-            useprompt = # "hash_6a4c1594be34b79f";
+            useprompt = #"hash_6a4c1594be34b79f";
 
             if(enemy.awarenesslevelcurrent != "combat") {
-              useprompt = # "hash_6d8033f0ef3722c9";
+              useprompt = #"hash_6d8033f0ef3722c9";
             }
 
             if(isDefined(enemy.var_d3f0031c) && dot <= var_ee55055) {
@@ -962,7 +962,7 @@ function function_7a061b23(enabled, action_name) {
   var_32d84328 = var_b381ae79;
   curweap = self getcurrentweapon();
 
-  if(curweap.name == # "knife_loadout" && is_true(self.var_31df4786)) {
+  if(curweap.name == #"knife_loadout" && is_true(self.var_31df4786)) {
     var_32d84328 = 1;
   }
 

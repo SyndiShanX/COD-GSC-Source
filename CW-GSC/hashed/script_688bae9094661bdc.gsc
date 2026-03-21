@@ -40,8 +40,8 @@ function main() {
   level.stealth.fnthreatsightplayersightaudio = &threat_sight_player_sight_audio;
   level.stealth.fnsetstealthmode = &set_stealth_mode_sp;
   var_cb867b36 = [];
-  var_cb867b36[var_cb867b36.size] = # "hash_4f5d6c44d95415a7";
-  var_cb867b36[var_cb867b36.size] = # "hash_55d9a1cd61f046";
+  var_cb867b36[var_cb867b36.size] = #"hash_4f5d6c44d95415a7";
+  var_cb867b36[var_cb867b36.size] = #"hash_55d9a1cd61f046";
   battlechatter_table::function_c5dda35e("stealth", var_cb867b36);
 }
 

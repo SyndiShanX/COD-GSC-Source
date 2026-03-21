@@ -1200,7 +1200,7 @@ class csceneplayer: csceneobject {
     _set_values(player);
     player sethighdetail(1);
 
-    if(player.team === # "allies" || player.team === # "axis") {
+    if(player.team === #"allies" || player.team === #"axis") {
       str_streamer_hint = _o_scene._a_streamer_hint[player.team];
     } else {
       str_streamer_hint = _o_scene._a_streamer_hint[util::get_team_mapping(#"sidea")];

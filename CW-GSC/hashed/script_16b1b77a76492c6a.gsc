@@ -141,7 +141,7 @@ function function_be6ec6c(var_2b43a4c4, var_30ff34e3 = 1) {
 function function_47838885(var_120d0570) {
   if(isarray(var_120d0570)) {
     foreach(ai_zombie in var_120d0570) {
-      if(ai_zombie.team === # "axis") {
+      if(ai_zombie.team === #"axis") {
         ai_zombie thread namespace_85745671::function_9456addc(120);
       }
     }
@@ -214,7 +214,7 @@ function function_156560eb(var_cf21a49f, var_aa19ae, var_437c9d8d = 1500, var_f2
         var_61262c99 = arraycopy(var_42c6e7d2);
 
         foreach(ai in var_61262c99) {
-          if(ai.current_state.name === # "wander" && isDefined(ai.birthtime) && gettime() - ai.birthtime > int(5 * 1000) && !isDefined(ai.favoriteenemy)) {
+          if(ai.current_state.name === #"wander" && isDefined(ai.birthtime) && gettime() - ai.birthtime > int(5 * 1000) && !isDefined(ai.favoriteenemy)) {
             arrayremovevalue(var_61262c99, ai);
           }
         }
@@ -299,7 +299,7 @@ function function_1c491c2b(var_6cd49f50 = 120, var_f6dca9f2, var_6443acc) {
 }
 
 function function_12db74f8() {
-  if(self.zombie_move_speed !== # "super_sprint" && self.zombie_move_speed !== # "sprint") {
+  if(self.zombie_move_speed !== #"super_sprint" && self.zombie_move_speed !== #"sprint") {
     self namespace_85745671::function_9758722(#"sprint");
   }
 }
@@ -429,7 +429,7 @@ function function_5c3d1f() {
   self endon("6f3adf669d32a3cc");
   self endon(#"death");
 
-  if(self.current_state.name !== # "wander" && self.current_state.name !== # "idle") {
+  if(self.current_state.name !== #"wander" && self.current_state.name !== #"idle") {
     return;
   }
 
@@ -437,7 +437,7 @@ function function_5c3d1f() {
     wait 1;
   }
 
-  if(self.current_state.name === # "wander" || self.current_state.name === # "idle") {
+  if(self.current_state.name === #"wander" || self.current_state.name === #"idle") {
     self callback::callback(#"hash_10ab46b52df7967a");
   }
 }

@@ -174,25 +174,25 @@ function private function_fb566490(local_client_num, notification_id) {
 
   switch (notification_id) {
     case 1:
-      data.text0 = # "hash_6659fcbeb05f5fcd";
+      data.text0 = #"hash_6659fcbeb05f5fcd";
       break;
     case 2:
-      data.text0 = # "hash_3cfae1a933247193";
+      data.text0 = #"hash_3cfae1a933247193";
       break;
     case 3:
-      data.text0 = # "hash_9e806c0e4a84941";
+      data.text0 = #"hash_9e806c0e4a84941";
       break;
     case 4:
-      data.text0 = # "hash_570f97a650d32de8";
+      data.text0 = #"hash_570f97a650d32de8";
       break;
     case 5:
-      data.text0 = # "hash_e9642258a6981a1";
+      data.text0 = #"hash_e9642258a6981a1";
       break;
     case 6:
-      data.text0 = # "hash_7f1bd561d7dff6f1";
+      data.text0 = #"hash_7f1bd561d7dff6f1";
       break;
     case 7:
-      data.text0 = # "hash_48031fac2f4e8be6";
+      data.text0 = #"hash_48031fac2f4e8be6";
       break;
     case 8:
       data.text0 = function_b6937957(#"hash_3763a12e14c36e62", level.bomb_id);
@@ -201,7 +201,7 @@ function private function_fb566490(local_client_num, notification_id) {
       data.text0 = function_b6937957(#"hash_76b66f2f20eb5575", level.bomb_id);
       break;
     case 10:
-      data.text0 = # "hash_48e294b6d739a396";
+      data.text0 = #"hash_48e294b6d739a396";
       break;
     case 11:
       if(isDefined(level.var_58624fd1) && isDefined(level.var_7dfc60c)) {
@@ -212,8 +212,8 @@ function private function_fb566490(local_client_num, notification_id) {
           break;
         }
 
-        data.text0 = # "hash_57a05e18a658b499";
-        data.icon1 = # "hash_102615ce832ca8a3" + var_3de81fb5;
+        data.text0 = #"hash_57a05e18a658b499";
+        data.icon1 = #"hash_102615ce832ca8a3" + var_3de81fb5;
         attacker = function_8565908c(local_client_num, level.var_58624fd1);
 
         if(isDefined(attacker)) {
@@ -231,16 +231,16 @@ function private function_fb566490(local_client_num, notification_id) {
 
       break;
     case 14:
-      data.text0 = # "hash_3f1e1e5e0e4d5e12";
+      data.text0 = #"hash_3f1e1e5e0e4d5e12";
       break;
     case 16:
       if(isDefined(level.var_f6d9803b) && level.var_f6d9803b <= 25) {
-        data.text0 = # "hash_5bc837648123a58c";
+        data.text0 = #"hash_5bc837648123a58c";
         player = function_8565908c(local_client_num, level.var_f6d9803b);
 
         if(isDefined(player)) {
           var_4fe888f3 = function_70873aee(local_client_num, level.var_f6d9803b);
-          data.icon1 = # "hash_102615ce832ca8a3" + var_4fe888f3;
+          data.icon1 = #"hash_102615ce832ca8a3" + var_4fe888f3;
           data.text2 = player getplayername();
           data.var_9c7902e5 = -1;
         }
@@ -248,7 +248,7 @@ function private function_fb566490(local_client_num, notification_id) {
 
       break;
     case 17:
-      data.text0 = # "hash_65a5599a49c71133";
+      data.text0 = #"hash_65a5599a49c71133";
       break;
   }
 

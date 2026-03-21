@@ -74,7 +74,7 @@ function init() {
   level.var_346345d6 = [];
   level.var_7fc395cf = [];
   level.var_619e1acb = isDefined(getgametypesetting(#"hash_74a3df587177c521")) ? getgametypesetting(#"hash_74a3df587177c521") : 1;
-  level.var_1a4fbac2 = # "hash_672cc4d184d7a489";
+  level.var_1a4fbac2 = #"hash_672cc4d184d7a489";
   level.var_1c099f6 = isDefined(getgametypesetting(#"hash_703f4557d14fb593")) ? getgametypesetting(#"hash_703f4557d14fb593") : 30;
   level.var_e8ccafc7 = isDefined(getgametypesetting(#"spymodeairdrop")) ? getgametypesetting(#"spymodeairdrop") : 1;
   level.var_aeea9663 = level.var_a1f33484 === 2 || level.var_a1f33484 === 4;
@@ -486,7 +486,7 @@ function private function_ea899419() {
 
 function function_b8862f14(watcher) {
   watcher.watchforfire = 1;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
@@ -907,13 +907,13 @@ function private function_f37d284() {
 
   switch (self.bombindex) {
     case 0:
-      objective = # "hash_4858b34dd7dae1f7";
+      objective = #"hash_4858b34dd7dae1f7";
       break;
     case 1:
-      objective = # "hash_4858b44dd7dae3aa";
+      objective = #"hash_4858b44dd7dae3aa";
       break;
     case 2:
-      objective = # "hash_4858b54dd7dae55d";
+      objective = #"hash_4858b54dd7dae55d";
       break;
   }
 
@@ -1251,13 +1251,13 @@ function function_5c0f763b(player) {
 
   switch (self.bombindex) {
     case 0:
-      objective = # "hash_48d7c5b1dd60db7a";
+      objective = #"hash_48d7c5b1dd60db7a";
       break;
     case 1:
-      objective = # "hash_48d7c4b1dd60d9c7";
+      objective = #"hash_48d7c4b1dd60d9c7";
       break;
     case 2:
-      objective = # "hash_48d7c3b1dd60d814";
+      objective = #"hash_48d7c3b1dd60d814";
       break;
   }
 
@@ -1296,13 +1296,13 @@ function function_a92717bf(player) {
 
   switch (self.bombindex) {
     case 0:
-      objective = # "hash_4858b34dd7dae1f7";
+      objective = #"hash_4858b34dd7dae1f7";
       break;
     case 1:
-      objective = # "hash_4858b44dd7dae3aa";
+      objective = #"hash_4858b44dd7dae3aa";
       break;
     case 2:
-      objective = # "hash_4858b54dd7dae55d";
+      objective = #"hash_4858b54dd7dae55d";
       break;
   }
 
@@ -1396,7 +1396,7 @@ function function_82ceca6f() {
   objective_setprogress(bomb.objective_id, 0);
 
   while(isDefined(bomb) && bomb.state == 5) {
-    if(game.state != # "playing") {
+    if(game.state != #"playing") {
       return;
     }
 
@@ -1566,7 +1566,7 @@ function private function_d037bcfd() {
 }
 
 function function_cc8c84b8(bomb) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -2322,7 +2322,7 @@ function function_da63c523(player) {
 }
 
 function function_7386e1e6(radio) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -2394,8 +2394,8 @@ function function_61a3a6a0() {
       if(isDefined(var_9af06a57.origin)) {
         marker = spawn("script_model", var_9af06a57.origin);
         level.var_efd26964 = marker;
-        var_7b57a803 = # "hash_65104254ebf2ada";
-        var_ff1915b9 = # "hash_74d87a56f6e58bc7";
+        var_7b57a803 = #"hash_65104254ebf2ada";
+        var_ff1915b9 = #"hash_74d87a56f6e58bc7";
         marker.objidfriendly = gameobjects::get_next_obj_id();
         marker.var_81e11916 = gameobjects::get_next_obj_id();
         objective_add(marker.objidfriendly, "active", marker.origin, var_7b57a803);

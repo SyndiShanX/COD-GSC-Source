@@ -109,7 +109,7 @@ function_7e141cb5(weapon) {
   a_e_targets = function_56a040a5(b_up);
 
   if(isDefined(a_e_targets)) {
-    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === # "boss") {
+    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === #"boss") {
       n_proj = 3;
     } else if(!a_e_targets.size || a_e_targets.size === 1 && !isactor(a_e_targets[0])) {
       n_proj = 1;
@@ -350,7 +350,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
 
       wait n_time - 0.05;
 
-      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
         if(isDefined(ai_zombie gettagorigin("j_tail_1"))) {
           n_hit_dist_sq = 2500;
         } else {
@@ -417,7 +417,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
     e_projectile waittill(#"movedone");
   }
 
-  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
     if(isDefined(level.var_3804f7bd)) {
       self thread[[level.var_3804f7bd]](ai_zombie, level.w_hand_ouranos_uncharged, n_damage);
     } else {
@@ -430,7 +430,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
 }
 
 function_30239376(e_target) {
-  if(isDefined(e_target) && e_target.zm_ai_category === # "boss") {
+  if(isDefined(e_target) && e_target.zm_ai_category === #"boss") {
     if(isDefined(e_target gettagorigin("j_tail_1"))) {
       v_org = e_target gettagorigin("j_tail_1");
     } else if(isDefined(e_target gettagorigin("j_spine4"))) {
@@ -517,7 +517,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
 
     e_target.no_gib = 1;
 
-    if(e_target.archetype === # "skeleton") {
+    if(e_target.archetype === #"skeleton") {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
     } else {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
@@ -792,7 +792,7 @@ function_d54becbd() {
     wait randomfloatrange(1, 2.5);
     n_rand = randomint(3);
 
-    if(n_rand == 2 && self.archetype !== # "catalyst") {
+    if(n_rand == 2 && self.archetype !== #"catalyst") {
       self zombie_utility::function_df5afb5e(1);
       continue;
     }

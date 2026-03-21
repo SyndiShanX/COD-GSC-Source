@@ -26,11 +26,11 @@ __init__() {
   clientfield::register("toplayer", "" + # "hash_61ed2f45564d54f9", 1, 1, "int", &function_fa6bb35e, 0, 0);
   clientfield::register("toplayer", "" + # "totem_fall", 1, 1, "int", &totem_fall, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_2a7ceb22f84e5aa9", 1, 1, "int", &function_85aab97f, 0, 0);
-  level._effect[#"hash_1aa1c7790dc67d1e"] = # "hash_2a9ea20e6cb5f0fb";
-  level._effect[#"hash_7cdfc8f4819bab2e"] = # "hash_e1bfaf62712f587";
-  level._effect[#"hash_61ed2f45564d54f9"] = # "hash_5531980ba0ce0b70";
-  level._effect[#"blood_rise"] = # "hash_56628b3f5bc6da0d";
-  level._effect[#"blood_splash"] = # "hash_4d27fd6de25c639b";
+  level._effect[#"hash_1aa1c7790dc67d1e"] = #"hash_2a9ea20e6cb5f0fb";
+  level._effect[#"hash_7cdfc8f4819bab2e"] = #"hash_e1bfaf62712f587";
+  level._effect[#"hash_61ed2f45564d54f9"] = #"hash_5531980ba0ce0b70";
+  level._effect[#"blood_rise"] = #"hash_56628b3f5bc6da0d";
+  level._effect[#"blood_splash"] = #"hash_4d27fd6de25c639b";
 }
 
 function_e7b6c72b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

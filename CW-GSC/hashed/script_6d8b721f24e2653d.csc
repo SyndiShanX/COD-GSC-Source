@@ -24,5 +24,5 @@ function function_504792() {
   level._effect[#"hash_308d15c5b36ba48a"] = "maps/zm_red/fx8_soul_charge_red";
   level._effect[#"hash_d7a655f41aa4b03"] = "zombie/fx9_onslaught_spawn_lg_unstable";
   level._effect[#"orb_activate"] = "zombie/fx9_onslaught_orb_unstable_collapse";
-  level.var_de8cc106 = # "hash_6a78a4f5119b8978";
+  level.var_de8cc106 = #"hash_6a78a4f5119b8978";
 }

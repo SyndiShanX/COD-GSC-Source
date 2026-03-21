@@ -127,7 +127,7 @@ function function_9a72f627(var_7a91115e) {
 
 function function_c046382d(s_info) {
   if(s_info.weapon === level.var_577c9750.weapon) {
-    level.var_85b00b2b = # "hash_71946e53985f8dbb";
+    level.var_85b00b2b = #"hash_71946e53985f8dbb";
     level.var_30eb363 = array::random(level.var_577c9750.var_8431008d);
   }
 }

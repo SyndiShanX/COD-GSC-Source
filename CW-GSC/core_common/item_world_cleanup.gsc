@@ -143,7 +143,7 @@ function private function_35e11623(current_origin, var_c5a0bed8, previous_origin
               continue;
             }
 
-            if(weapon.name == # "hatchet" || weapon.name == # "tomahawk_t8") {
+            if(weapon.name == #"hatchet" || weapon.name == #"tomahawk_t8") {
               velocity = object getvelocity();
 
               if(velocity[0] > 0 || velocity[1] > 0 || velocity[2]) {

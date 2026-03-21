@@ -353,7 +353,7 @@ function function_a84a928b(params) {
   nearby_zombies = getentitiesinradius(self.origin, self getpathfindingradius() * 3, 15);
 
   foreach(zombie in nearby_zombies) {
-    if(zombie.archetype == # "zombie") {
+    if(zombie.archetype == #"zombie") {
       zombie zombie_utility::setup_zombie_knockdown(self);
     }
   }

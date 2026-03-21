@@ -24,7 +24,7 @@ __init__() {
 }
 
 function_65089f84(localclientnum) {
-  if(isDefined(self.subarchetype) && self.subarchetype == # "zombie_electric") {}
+  if(isDefined(self.subarchetype) && self.subarchetype == #"zombie_electric") {}
 }
 
 zombie_electric_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

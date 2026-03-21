@@ -92,7 +92,7 @@ function init() {
   level.active_zones = [];
   level.var_6d2f376a = &function_6d2f376a;
   level.var_e80a117f = 0;
-  level.var_f7a3b880 = # "hardpoint";
+  level.var_f7a3b880 = #"hardpoint";
 
   if(isDefined(level.var_71f9a7ea)) {
     level.var_f7a3b880 = level.var_71f9a7ea;
@@ -615,7 +615,7 @@ function function_631c3afc(sentient) {
   print("<dev string:x55>");
 
   pause_time();
-  string = # "hash_446b7b0b3e4df72e";
+  string = #"hash_446b7b0b3e4df72e";
   zone = self.zone;
   assert(isDefined(zone));
   self.iscontested = 0;
@@ -737,7 +737,7 @@ function give_capture_credit(touchlist, string, capturetime, capture_team, lastc
 
 function function_32b7bf67() {
   self.zone notify(#"zone_destroyed");
-  self.kothcapteam = # "neutral";
+  self.kothcapteam = #"neutral";
   self.wasleftunoccupied = 1;
   self.iscontested = 0;
   self recordgameeventnonplayer("hardpoint_empty");
@@ -954,12 +954,12 @@ function award_capture_points(team, lastcaptureteam) {
 
 function private function_903a84d4(type, score) {
   if(isDefined(level.var_49a15413)) {
-    if(type === # "ekia" || type === # "hardpoint_kill") {
+    if(type === #"ekia" || type === #"hardpoint_kill") {
       return (score + level.var_49a15413);
     }
   }
 
-  if(type === # "hardpoint_owned" && isDefined(self.var_b1ff3894)) {
+  if(type === #"hardpoint_owned" && isDefined(self.var_b1ff3894)) {
     return int(score * self.var_b1ff3894);
   }
 
@@ -1301,7 +1301,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
     foreach(zone in level.active_zones) {
       ownerteam = zone.gameobject gameobjects::get_owner_team();
 
-      if(isDefined(ownerteam) && ownerteam != # "neutral") {
+      if(isDefined(ownerteam) && ownerteam != #"neutral") {
         var_56bf37df = 1;
         break;
       }
@@ -1320,7 +1320,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       ownerteam = idamage.touchtriggers[triggerids[0]].useobj gameobjects::get_owner_team();
     }
 
-    if(ownerteam != # "neutral") {
+    if(ownerteam != #"neutral") {
       attacker.prevlastkilltime = attacker.lastkilltime;
       attacker.lastkilltime = gettime();
       team = attacker.pers[#"team"];
@@ -1416,7 +1416,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       ownerteam = attacker.touchtriggers[triggerids[0]].useobj gameobjects::get_owner_team();
     }
 
-    if(ownerteam != # "neutral") {
+    if(ownerteam != #"neutral") {
       team = idamage.pers[#"team"];
 
       if(team == ownerteam) {
@@ -1548,7 +1548,7 @@ function update_caps_per_minute(lastownerteam) {
     self.capsperminute = 0;
   }
 
-  if(!isDefined(lastownerteam) || lastownerteam == # "neutral") {
+  if(!isDefined(lastownerteam) || lastownerteam == #"neutral") {
     return;
   }
 
@@ -1782,7 +1782,7 @@ function function_a38cc2d7(state) {
     self.var_b3890fdf = 0;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -1790,33 +1790,33 @@ function function_a38cc2d7(state) {
 
   switch (state) {
     case # "cap_low":
-      str_alias = # "hash_1c518fb856754e14";
+      str_alias = #"hash_1c518fb856754e14";
       n_waittime = 2.5;
       break;
     case # "hash_736eee50e5b4b564":
-      str_alias = # "hash_1c5192b85675532d";
+      str_alias = #"hash_1c5192b85675532d";
       n_waittime = 2.5;
       break;
     case # "cap_mid":
-      str_alias = # "hash_1c5191b85675517a";
+      str_alias = #"hash_1c5191b85675517a";
       n_waittime = 2.5;
       break;
     case # "hash_3b47899904bb9c9e":
-      str_alias = # "hash_1c518cb8567548fb";
+      str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 2.5;
       break;
     case # "cap_high":
-      str_alias = # "hash_1c518cb8567548fb";
+      str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 1.25;
       break;
     case # "cap_contested":
-      str_alias = # "hash_43014e1f7354354f";
+      str_alias = #"hash_43014e1f7354354f";
       n_waittime = 1.25;
       break;
   }
 
   if(is_true(level.var_2179a6bf)) {
-    str_alias = # "hash_1c518cb8567548fb";
+    str_alias = #"hash_1c518cb8567548fb";
     n_waittime = 2;
   }
 

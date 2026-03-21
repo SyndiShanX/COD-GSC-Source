@@ -137,8 +137,8 @@ function force_stream_weapons(localclientnum, weaponarray) {
 
 function function_d96391ba() {
   level.var_dd9e1cd5 = [];
-  level._effect[#"player_cold_breath"] = # "hash_3276d891dff1f743";
-  level._effect[#"ai_cold_breath"] = # "hash_326fec91dfebfa91";
+  level._effect[#"player_cold_breath"] = #"hash_3276d891dff1f743";
+  level._effect[#"ai_cold_breath"] = #"hash_326fec91dfebfa91";
   clientfield::register("toplayer", "player_cold_breath", 1, 1, "int", &function_73d83dae, 0, 0);
   clientfield::register("actor", "ai_cold_breath", 1, 1, "counter", &function_f39fc31d, 0, 0);
 }

@@ -29,7 +29,7 @@ function_1c601b99() {
 }
 
 __main__() {
-  level._effect[#"monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[#"monkey_glow"] = #"zm_weapons/fx8_cymbal_monkey_light";
 }
 
 function_a23699fe() {
@@ -94,7 +94,7 @@ function_17c51c94(monkey, ent) {
 }
 
 event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == # "cymbal_monkey") {
+  if(eventstruct.weapon.name == #"cymbal_monkey") {
     e_grenade = eventstruct.projectile;
     e_grenade ghost();
     e_grenade.angles = self.angles;

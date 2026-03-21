@@ -401,7 +401,7 @@ function private function_ce7ffccb(winner) {
     setgameendtime(gettime() + int(level.var_18823aed * 1000));
     hostmigration::waitlongdurationwithgameendtimeupdate(level.var_18823aed);
 
-    if(game.state != # "playing") {
+    if(game.state != #"playing") {
       return;
     }
   }

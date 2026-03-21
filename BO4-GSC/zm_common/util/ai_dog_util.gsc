@@ -420,7 +420,7 @@ dog_init() {
   self.freezegun_damage = 0;
   self.zombie_move_speed = "sprint";
 
-  if(self.subarchetype != # "zombie_wolf") {
+  if(self.subarchetype != #"zombie_wolf") {
     self.a.nodeath = 1;
   }
 
@@ -483,7 +483,7 @@ dog_death() {
 
   self stoploopsound();
 
-  if(self.subarchetype != # "zombie_wolf" && !(isDefined(self.a.nodeath) && self.a.nodeath)) {
+  if(self.subarchetype != #"zombie_wolf" && !(isDefined(self.a.nodeath) && self.a.nodeath)) {
     trace = groundtrace(self.origin + (0, 0, 10), self.origin - (0, 0, 30), 0, self);
 
     if(trace[#"fraction"] < 1) {
@@ -495,7 +495,7 @@ dog_death() {
     }
   }
 
-  if(self.subarchetype != # "zombie_wolf" && isDefined(self.a.nodeath)) {
+  if(self.subarchetype != #"zombie_wolf" && isDefined(self.a.nodeath)) {
     if(self.b_cleaned_up !== 1) {
       level thread dog_explode_fx(self, self.origin);
       self ghost();

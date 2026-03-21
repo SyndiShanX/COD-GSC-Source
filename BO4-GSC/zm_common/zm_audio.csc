@@ -187,7 +187,7 @@ sndmeleeswipe(localclientnum, notifystring) {
       continue;
     }
 
-    if(currentweapon.statname === # "bowie_knife") {
+    if(currentweapon.statname === #"bowie_knife") {
       playSound(0, #"zmb_bowie_swing_plr", self.origin);
       continue;
     }

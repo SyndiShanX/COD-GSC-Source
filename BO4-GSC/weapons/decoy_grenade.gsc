@@ -103,7 +103,7 @@ function_7c24c60f(reloadtime) {
 
 function_a5871d04(grenade) {
   var_f64cb8d = spawnStruct();
-  var_f64cb8d.weapon = # "ar_standard_t8";
+  var_f64cb8d.weapon = #"ar_standard_t8";
   var_f64cb8d.var_5cae5968 = 0.25;
   var_f64cb8d.var_bbed619f = 1;
   var_f64cb8d.var_c8670194 = 0.25;

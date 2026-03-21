@@ -62,12 +62,12 @@ init() {
     w_blueprint = zm_crafting::function_b18074d0(#"zblueprint_zod_tricannon_upgrade");
 
     if(isDefined(w_blueprint)) {
-      w_blueprint.component01.var_62a98b13 = # "hash_4223e614aaaeb5be";
-      w_blueprint.component02.var_62a98b13 = # "condenser_coil";
-      w_blueprint.component03.var_62a98b13 = # "hash_d2d731e2804301b";
-      w_blueprint.component01.var_25bb96cc = # "hash_604432f9a80a26e3";
-      w_blueprint.component02.var_25bb96cc = # "hash_604432f9a80a26e3";
-      w_blueprint.component03.var_25bb96cc = # "hash_604432f9a80a26e3";
+      w_blueprint.component01.var_62a98b13 = #"hash_4223e614aaaeb5be";
+      w_blueprint.component02.var_62a98b13 = #"condenser_coil";
+      w_blueprint.component03.var_62a98b13 = #"hash_d2d731e2804301b";
+      w_blueprint.component01.var_25bb96cc = #"hash_604432f9a80a26e3";
+      w_blueprint.component02.var_25bb96cc = #"hash_604432f9a80a26e3";
+      w_blueprint.component03.var_25bb96cc = #"hash_604432f9a80a26e3";
     }
 
     util::delay("all_players_spawned", undefined, &function_d159d50e);
@@ -133,10 +133,10 @@ step_1_cleanup(var_a276c861, var_19e802fa) {
 function_f7b0a02a() {
   level endon(#"hash_1562cc6d96b2bc4", #"end_game");
 
-  if(self.archetype == # "stoker") {
+  if(self.archetype == #"stoker") {
     waitresult = self waittill(#"hash_4651621237a54fc7", #"death");
 
-    if(waitresult._notify == # "hash_4651621237a54fc7") {
+    if(waitresult._notify == #"hash_4651621237a54fc7") {
       if(!isDefined(level.var_86d6efbf)) {
         level.var_86d6efbf = util::spawn_model(#"p8_zm_kraken_chest_key", self.origin + (0, 0, 32), self.angles);
         level.var_86d6efbf playSound(#"hash_1390af6222266716");
@@ -313,9 +313,9 @@ function_32edfed(s_struct, ai_killed) {
 
   if(!(isDefined(level.var_f9f50915.b_vo_played) && level.var_f9f50915.b_vo_played)) {
     if(level.var_e2ce1fe1 == 1) {
-      var_39acfdda = # "activate_2";
+      var_39acfdda = #"activate_2";
     } else if(level.var_e2ce1fe1 == 2) {
-      var_39acfdda = # "activate_3";
+      var_39acfdda = #"activate_3";
     } else {
       return;
     }
@@ -371,7 +371,7 @@ function_a8fff4b0() {
   v_offset = anglestoup(self.mdl_chest.angles) * 26;
   var_5792d83f = util::spawn_model(level.var_3a67ac0e[level.var_2e2dab8d], self.mdl_chest.origin + v_offset, self.mdl_chest.angles);
 
-  if(level.var_3a67ac0e[level.var_2e2dab8d] == # "p7_compass_vintage") {
+  if(level.var_3a67ac0e[level.var_2e2dab8d] == #"p7_compass_vintage") {
     var_5792d83f setscale(2);
   }
 
@@ -388,7 +388,7 @@ function_a8fff4b0() {
 }
 
 spawn_tricannon(a_ents) {
-  if(self.targetname !== # "offering_scene") {
+  if(self.targetname !== #"offering_scene") {
     exploder::exploder(level.var_f3abf34a.str_exploder);
     mdl_tricannon = a_ents[#"kraken_weapon_drop"];
     mdl_tricannon clientfield::set("" + # "despawn_fx", 1);
@@ -488,7 +488,7 @@ registerblinkingshouldshowpain(e_player) {
 
     switch (e_player.var_b6ddf07f) {
       case # "decay":
-        if(var_9102824b.name == # "ww_tricannon_earth_t8" || var_9102824b.name == # "ww_tricannon_earth_t8_upgraded") {
+        if(var_9102824b.name == #"ww_tricannon_earth_t8" || var_9102824b.name == #"ww_tricannon_earth_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_1349c5305046946d");
@@ -514,7 +514,7 @@ registerblinkingshouldshowpain(e_player) {
 
         break;
       case # "plasma":
-        if(var_9102824b.name == # "ww_tricannon_fire_t8" || var_9102824b.name == # "ww_tricannon_fire_t8_upgraded") {
+        if(var_9102824b.name == #"ww_tricannon_fire_t8" || var_9102824b.name == #"ww_tricannon_fire_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_641a4f757e565e1");
@@ -540,7 +540,7 @@ registerblinkingshouldshowpain(e_player) {
 
         break;
       case # "purity":
-        if(var_9102824b.name == # "ww_tricannon_water_t8" || var_9102824b.name == # "ww_tricannon_water_t8_upgraded") {
+        if(var_9102824b.name == #"ww_tricannon_water_t8" || var_9102824b.name == #"ww_tricannon_water_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_6734cd1a9daa86ee");
@@ -566,7 +566,7 @@ registerblinkingshouldshowpain(e_player) {
 
         break;
       case # "radiance":
-        if(var_9102824b.name == # "ww_tricannon_air_t8" || var_9102824b.name == # "ww_tricannon_air_t8_upgraded") {
+        if(var_9102824b.name == #"ww_tricannon_air_t8" || var_9102824b.name == #"ww_tricannon_air_t8_upgraded") {
           if(zm_utility::is_standard()) {
             if(function_8b1a219a()) {
               self sethintstring(#"hash_609587f477ef819e");
@@ -650,24 +650,24 @@ function_e00eae6(e_player) {
 
     switch (e_player.var_b6ddf07f) {
       case # "decay":
-        var_be9badbc = # "ww_tricannon_earth_t8";
+        var_be9badbc = #"ww_tricannon_earth_t8";
         var_73d97896 = 2;
         break;
       case # "plasma":
-        var_be9badbc = # "ww_tricannon_fire_t8";
+        var_be9badbc = #"ww_tricannon_fire_t8";
         var_73d97896 = 3;
         break;
       case # "purity":
-        var_be9badbc = # "ww_tricannon_water_t8";
+        var_be9badbc = #"ww_tricannon_water_t8";
         var_73d97896 = 1;
         break;
       case # "radiance":
-        var_be9badbc = # "ww_tricannon_air_t8";
+        var_be9badbc = #"ww_tricannon_air_t8";
         var_73d97896 = 4;
         break;
       default:
         assert(0, "<dev string:x78>");
-        var_be9badbc = # "ww_tricannon_t8";
+        var_be9badbc = #"ww_tricannon_t8";
         break;
     }
 
@@ -692,7 +692,7 @@ function_e00eae6(e_player) {
 function_f4a7fd49(params) {
   level endon(#"end_game");
 
-  if(self.archetype == # "catalyst") {
+  if(self.archetype == #"catalyst") {
     if(is_tricannon(params.weapon)) {
       if(level.var_ab242e52 < 4 && randomint(100) <= 50) {
         level.var_ab242e52++;
@@ -819,25 +819,25 @@ function_7edbaf3a(v_origin) {
 
 function_ca37502d(e_player) {
   e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"decay");
-  e_player.var_b6ddf07f = # "decay";
+  e_player.var_b6ddf07f = #"decay";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 1, e_player);
 }
 
 function_1b182e8c(e_player) {
   e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"plasma");
-  e_player.var_b6ddf07f = # "plasma";
+  e_player.var_b6ddf07f = #"plasma";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 2, e_player);
 }
 
 function_b9b7b8c(e_player) {
   e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"purity");
-  e_player.var_b6ddf07f = # "purity";
+  e_player.var_b6ddf07f = #"purity";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 4, e_player);
 }
 
 function_b3695700(e_player) {
   e_player zm_audio::create_and_play_dialog(#"pickup_catalyst", #"radiance");
-  e_player.var_b6ddf07f = # "radiance";
+  e_player.var_b6ddf07f = #"radiance";
   zm_ui_inventory::function_7df6bb60("zm_zodt8_conc_catalyst", 3, e_player);
 }
 

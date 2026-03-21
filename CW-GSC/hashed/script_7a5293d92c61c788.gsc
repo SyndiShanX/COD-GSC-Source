@@ -76,7 +76,7 @@ function function_93a99046(struct) {
   assert(isstruct(struct), "<dev string:x38>");
 
   if(zm_utility::is_survival() || is_true(level.var_1b57c9ca)) {
-    model = # "hash_6847db4bdfca2dc8";
+    model = #"hash_6847db4bdfca2dc8";
 
     if(zm_utility::is_survival()) {
       var_c6d25878 = &zm_utility::function_f5a222a8;
@@ -84,14 +84,14 @@ function function_93a99046(struct) {
       var_c6d25878 = &zm_utility::function_4a4cf79a;
     }
   } else {
-    model = # "p9_fxanim_zm_gp_armor_station_xmodel";
+    model = #"p9_fxanim_zm_gp_armor_station_xmodel";
     var_c6d25878 = &zm_utility::function_4a4cf79a;
   }
 
   scriptmodel = content_manager::spawn_script_model(struct, model, 1);
   zm_utility::function_ca960904(scriptmodel);
 
-  if(struct.parent.content_script_name !== # "safehouse") {
+  if(struct.parent.content_script_name !== #"safehouse") {
     objid = [[var_c6d25878]](#"hash_25a19901af9e8467", scriptmodel);
     struct.objectiveid = objid;
     scriptmodel.objectiveid = objid;
@@ -186,10 +186,10 @@ function function_6c71e778(machine, trigger) {
   self val::reset(#"hash_55af237178580523", "disable_weapon_cycling");
 
   if(isDefined(machine) && isDefined(trigger)) {
-    str_hint = # "hash_614130df578d98f0";
+    str_hint = #"hash_614130df578d98f0";
 
     if(machine.script_noteworthy === "power") {
-      str_hint = # "zombie/need_power";
+      str_hint = #"zombie/need_power";
     }
 
     trigger sethintstringforplayer(self, str_hint);
@@ -239,48 +239,48 @@ function function_620db6a4(machine, trigger) {
   }
 }
 
-function function_137f88c6(var_a0abda6 = # "resource") {
-  rarity = # "white";
+function function_137f88c6(var_a0abda6 = #"resource") {
+  rarity = #"white";
 
   switch (var_a0abda6) {
     case # "resource":
     case # "loadout":
-      rarity = # "white";
+      rarity = #"white";
       break;
     case # "uncommon":
-      rarity = # "green";
+      rarity = #"green";
       break;
     case # "rare":
-      rarity = # "blue";
+      rarity = #"blue";
       break;
     case # "epic":
-      rarity = # "purple";
+      rarity = #"purple";
       break;
     case # "legendary":
-      rarity = # "orange";
+      rarity = #"orange";
       break;
   }
 
   return rarity;
 }
 
-function function_44368952(weapon, rarity = # "white") {
+function function_44368952(weapon, rarity = #"white") {
   switch (rarity) {
     case # "resource":
     case # "loadout":
-      rarity = # "white";
+      rarity = #"white";
       break;
     case # "uncommon":
-      rarity = # "green";
+      rarity = #"green";
       break;
     case # "rare":
-      rarity = # "blue";
+      rarity = #"blue";
       break;
     case # "epic":
-      rarity = # "purple";
+      rarity = #"purple";
       break;
     case # "legendary":
-      rarity = # "orange";
+      rarity = #"orange";
       break;
   }
 
@@ -371,7 +371,7 @@ function function_cb2d9b9b(machine, trigger) {
     response = waitresult.response;
     intpayload = waitresult.intpayload;
 
-    if(menu == # "sr_armor_menu") {
+    if(menu == #"sr_armor_menu") {
       weapon = self getcurrentweapon();
       item = item_inventory::function_230ceec4(weapon);
       var_bfd531ce = item_inventory::function_d768ea30();
@@ -381,7 +381,7 @@ function function_cb2d9b9b(machine, trigger) {
           var_1a988176 = level.var_ade77b07[intpayload];
           var_1d1d4a2a = level.var_3a2e321c[intpayload];
 
-          if(var_1a988176 == # "armor_item_lv3_t9_sr") {
+          if(var_1a988176 == #"armor_item_lv3_t9_sr") {
             var_3069fe3 = self namespace_2a9f256a::function_415b1e(var_1d1d4a2a);
           } else {
             var_3069fe3 = self namespace_2a9f256a::function_c29a8aa1(var_1d1d4a2a);
@@ -391,7 +391,7 @@ function function_cb2d9b9b(machine, trigger) {
             if(function_5aad4a79()) {
               self playlocalsound(#"hash_500cfba1d8f28c89");
 
-              if(var_1a988176 == # "hash_6c055e078965b4e3") {
+              if(var_1a988176 == #"hash_6c055e078965b4e3") {
                 self.armor = self.maxarmor;
               } else {
                 self give_armor(var_1a988176);
@@ -403,7 +403,7 @@ function function_cb2d9b9b(machine, trigger) {
               waitframe(1);
               machine thread scene::play("p9_fxanim_zm_gp_armor_station_bundle", "Shot 2", machine);
 
-              if(var_1a988176 == # "armor_item_lv3_t9_sr") {
+              if(var_1a988176 == #"armor_item_lv3_t9_sr") {
                 self namespace_2a9f256a::function_8bfa3267(var_1d1d4a2a);
               } else {
                 self namespace_2a9f256a::function_3610299b(var_1d1d4a2a);
@@ -425,8 +425,8 @@ function function_cb2d9b9b(machine, trigger) {
             var_372067dc = level.var_1b95a5be[intpayload];
 
             if(isDefined(var_35d31714) && isDefined(var_9b05d455)) {
-              if(var_35d31714 === # "hash_1bce1d027595650f") {
-                if(weapon.weapclass === "melee" || weapon.weapclass === "rocketlauncher" || weapon.weapclass === "grenade" || weapon.name === # "special_ballisticknife_t9_dw" || weapon.name === # "special_ballisticknife_t9_dw_upgraded" || weapon.name === # "special_nailgun_t9" || weapon.name === # "special_nailgun_t9_upgraded") {
+              if(var_35d31714 === #"hash_1bce1d027595650f") {
+                if(weapon.weapclass === "melee" || weapon.weapclass === "rocketlauncher" || weapon.weapclass === "grenade" || weapon.name === #"special_ballisticknife_t9_dw" || weapon.name === #"special_ballisticknife_t9_dw_upgraded" || weapon.name === #"special_nailgun_t9" || weapon.name === #"special_nailgun_t9_upgraded") {
                   machine playsoundtoplayer(#"uin_default_action_denied", self);
                 } else {
                   item_weapon = function_44368952(weapon, item.itementry.rarity);
@@ -535,7 +535,7 @@ function function_f3ce6afc(var_cc87b623) {
 function private on_item_pickup(params) {
   var_abf29e5c = params.item.itementry.name;
 
-  if(isPlayer(self) && isDefined(var_abf29e5c) && (isinarray(level.var_ade77b07, hash(var_abf29e5c)) || var_abf29e5c === # "armor_shard_item_sr")) {
+  if(isPlayer(self) && isDefined(var_abf29e5c) && (isinarray(level.var_ade77b07, hash(var_abf29e5c)) || var_abf29e5c === #"armor_shard_item_sr")) {
     self function_f3ce6afc(var_abf29e5c);
   }
 }

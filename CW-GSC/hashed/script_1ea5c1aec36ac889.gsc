@@ -41,7 +41,7 @@ function private preinit() {
 function function_18140c5c(params) {
   item = params.item;
 
-  if(!isDefined(item) || item.itementry.name !== # "hash_7ada82abc5dad90e") {
+  if(!isDefined(item) || item.itementry.name !== #"hash_7ada82abc5dad90e") {
     return;
   }
 
@@ -55,10 +55,10 @@ function function_18140c5c(params) {
 }
 
 function function_bad0c914(item) {
-  if(item.itementry.itemtype === # "tactical") {
+  if(item.itementry.itemtype === #"tactical") {
     tactical = self.inventory.items[13];
 
-    if(tactical.itementry.name === # "hash_7ada82abc5dad90e") {
+    if(tactical.itementry.name === #"hash_7ada82abc5dad90e") {
       return false;
     }
   }
@@ -134,7 +134,7 @@ function private function_67c8b5c3() {
   self endoncallback(&function_d6f65535, #"disconnect", #"hash_7b63ce1ec3e195b4", #"hash_65d1a61342635458");
   waitresult = self waittill(#"offhand_end", #"hash_7f812cfd98c00a7b");
 
-  if(waitresult._notify === # "hash_7f812cfd98c00a7b" && isDefined(level.klaus) && !level.klaus flag::get(#"hash_3218e127380e4a29")) {
+  if(waitresult._notify === #"hash_7f812cfd98c00a7b" && isDefined(level.klaus) && !level.klaus flag::get(#"hash_3218e127380e4a29")) {
     level.klaus waittill(#"death", #"hash_3218e127380e4a29", #"hash_6edebe8930290c3b");
   }
 
@@ -217,7 +217,7 @@ function event_handler[grenade_pullback] function_8d10e176(eventstruct) {
 
   weapon = eventstruct.weapon;
 
-  if(weapon.name == # "hash_7993749c94189bd9") {
+  if(weapon.name == #"hash_7993749c94189bd9") {
     self function_28a8ddad();
     self notify(#"hash_7b63ce1ec3e195b4");
     self function_9132ad8e();
@@ -235,7 +235,7 @@ function event_handler[grenade_fire] function_6ed5772c(eventstruct) {
 
   weapon = eventstruct.weapon;
 
-  if(weapon.name == # "hash_7993749c94189bd9") {
+  if(weapon.name == #"hash_7993749c94189bd9") {
     assert(isDefined(self.var_310a3632.var_689f4026));
     var_72c2d810 = self.var_310a3632.var_6164d302;
 
@@ -303,7 +303,7 @@ function function_e7136ed2(e_player) {
   slot = e_player item_inventory::function_e66dcff5(point);
   item = e_player.inventory.items[slot];
 
-  if(item.itementry.weapon.name === # "hash_7993749c94189bd9") {
+  if(item.itementry.weapon.name === #"hash_7993749c94189bd9") {
     return;
   }
 
@@ -345,7 +345,7 @@ function function_2d3ad651(e_player) {
   slot = e_player item_inventory::function_e66dcff5(point);
   item = e_player.inventory.items[slot];
 
-  if(item.itementry.weapon.name === # "hash_7993749c94189bd9") {
+  if(item.itementry.weapon.name === #"hash_7993749c94189bd9") {
     if(item.itementry.weapon === e_player getcurrentoffhand()) {
       e_player val::set_for_time(0.2, #"hash_e1a1061308a8a71", "disable_offhand_weapons", 1);
     }

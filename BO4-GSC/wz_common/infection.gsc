@@ -283,7 +283,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
   if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self)) {
     weaponname = eventstruct.weapon.name;
 
-    if(weaponname != # "hash_351254cd4fc93d6e") {
+    if(weaponname != #"hash_351254cd4fc93d6e") {
       return;
     }
 

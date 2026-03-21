@@ -217,11 +217,11 @@ function function_b4f071cd() {
   var_1f5969dc = distancesquared(spawns[0].origin, var_3ab559fb.origin);
 
   if(var_bbd0ce18 < var_1f5969dc) {
-    var_ba7cd990.team = # "allies";
-    var_3ab559fb.team = # "axis";
+    var_ba7cd990.team = #"allies";
+    var_3ab559fb.team = #"axis";
   } else {
-    var_3ab559fb.team = # "allies";
-    var_ba7cd990.team = # "axis";
+    var_3ab559fb.team = #"allies";
+    var_ba7cd990.team = #"axis";
   }
 
   util::function_c77e4851(var_ba7cd990.team, var_3ab559fb.team);

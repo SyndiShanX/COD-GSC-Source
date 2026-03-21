@@ -681,7 +681,7 @@ function function_c2b5b27c() {
 
     waitresult = self waittill(#"awareness_action", #"death", #"disconnect");
 
-    if(waitresult._notify !== # "awareness_action") {
+    if(waitresult._notify !== #"awareness_action") {
       self.var_7122b2ff = undefined;
       return;
     }

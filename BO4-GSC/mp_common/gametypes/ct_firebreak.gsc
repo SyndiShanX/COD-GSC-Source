@@ -64,7 +64,7 @@ function_7c4ef26b(predictedspawn) {
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self thread function_d6c7161f();
   }
 
@@ -117,7 +117,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isDefined(level.var_20361ed4)) {
       level.var_20361ed4 = -1;
     }
@@ -132,11 +132,11 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(isDefined(weapon)) {
-    if(weapon.name == # "hero_flamethrower") {
+    if(weapon.name == #"hero_flamethrower") {
       level.var_6bac32f8++;
     }
 
-    if(weapon.name == # "gadget_radiation_field") {
+    if(weapon.name == #"gadget_radiation_field") {
       e_player = getplayers()[0];
       trace = bulletTrace(e_player.origin + (0, 0, 40), self.origin + (0, 0, 40), 0, self);
 
@@ -310,7 +310,7 @@ j_fore_le_01() {
 }
 
 function_ca63e908() {
-  waypointname = # "hash_2ec158c9943b9697";
+  waypointname = #"hash_2ec158c9943b9697";
   var_90cfcf43 = spawn("script_model", self.origin);
   var_90cfcf43.objectiveid = gameobjects::get_next_obj_id();
   var_90cfcf43.curorigin = self.origin;

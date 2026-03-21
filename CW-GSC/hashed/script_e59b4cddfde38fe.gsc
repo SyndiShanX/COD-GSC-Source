@@ -64,7 +64,7 @@ function private on_end(round_reset) {
 }
 
 function private on_ai_killed(params) {
-  if(self.archetype === # "gladiator" && level.var_c23449d8 > 0) {
+  if(self.archetype === #"gladiator" && level.var_c23449d8 > 0) {
     var_d217c89e = 0;
 
     foreach(str_zone in level.var_8c6f70d0) {

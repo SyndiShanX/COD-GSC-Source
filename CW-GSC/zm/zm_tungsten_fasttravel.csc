@@ -35,7 +35,7 @@ function function_7d467651(localclientnum, oldval, newval, bnewent, binitialsnap
   function_60381056(fieldname, getent(fieldname, "portal_fx_helipads_to_observation", "targetname"));
 }
 
-function function_833e4b72(localclientnum, e_portal, str_fx = # "hash_46483584aaecbb44") {
+function function_833e4b72(localclientnum, e_portal, str_fx = #"hash_46483584aaecbb44") {
   if(!isDefined(e_portal.fx_portal)) {
     e_portal.fx_portal = playFX(localclientnum, str_fx, e_portal.origin, anglesToForward(e_portal.angles), anglestoup(e_portal.angles));
   }

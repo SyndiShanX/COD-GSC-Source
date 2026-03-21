@@ -61,13 +61,13 @@ function outro_main(var_d3440450, var_50cc0d4f) {
   level flag::set("flag_spawn_motor_pool_enemies");
   level flag::set("flag_spawn_radar_enemies");
   level flag::set("flag_spawn_fuel_depot_enemies");
-  level.var_9090a594 = # "hash_62df17fd9f467834";
-  level.var_5bb760e8 = # "hash_375f464aa679494f";
+  level.var_9090a594 = #"hash_62df17fd9f467834";
+  level.var_5bb760e8 = #"hash_375f464aa679494f";
   level.var_fe86dfc1 = 1;
   level.var_5e56e2a8 = 2048;
   level.var_5fc12b72 = 10;
   level.var_dd0b1f89 = 15;
-  level.var_f7ac00e1 = # "hash_5ce979f55b4f6483";
+  level.var_f7ac00e1 = #"hash_5ce979f55b4f6483";
   level.var_24f69721 = "scene_sm_tundra_heli_load";
   level thread function_8416099b();
   player thread function_df7926cc(var_50cc0d4f);
@@ -291,7 +291,7 @@ function function_df7926cc(var_50cc0d4f) {
     waitresult = self waittill(#"grenade_fire");
     grenade = waitresult.projectile;
 
-    if(grenade.model == # "wpn_t9_eqp_smoke_grenade_projectile") {
+    if(grenade.model == #"wpn_t9_eqp_smoke_grenade_projectile") {
       break;
     }
   }
@@ -317,7 +317,7 @@ function function_df7926cc(var_50cc0d4f) {
 
 function function_c32ef30a() {
   level waittill(#"evac_chopper_landed");
-  level.var_85b00b2b = # "hash_73070752ddd02cad";
+  level.var_85b00b2b = #"hash_73070752ddd02cad";
   level flag::set("woods_pause_overwatch");
   savegame::checkpoint_save(1);
   level thread namespace_ba979a10::function_7094e60a();

@@ -16,17 +16,17 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[#"hash_63f729c169af0c3e"] = # "hash_43a26488c9e5ce57";
-  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"hash_19f4dd97cbb87594"] = # "hash_5f376e9395e16666";
-  level._effect[#"fire_runner"] = # "hash_409439bf8b3dd862";
-  level._effect[#"hash_6778cbcf34bfebef"] = # "hash_43a26488c9e5ce57";
-  level._effect[#"hash_5f2da0ff081c1699"] = # "hash_43a26488c9e5ce57";
-  level._effect[#"hash_63697be07cc11490"] = # "hash_4924963a116d71bd";
-  level._effect[#"hash_360e9275d6096589"] = # "hash_1bc8b1078984dbda";
-  level._effect[#"hash_66be32f919d8b4a4"] = # "hash_53280ae47e5295e0";
-  level._effect[#"hash_638a4ec653717ef6"] = # "hash_1a1142d2a6711364";
-  level._effect[#"hash_1fa861cbe30adda9"] = # "hash_344ba1202db8c50a";
+  level._effect[#"hash_63f729c169af0c3e"] = #"hash_43a26488c9e5ce57";
+  level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"hash_19f4dd97cbb87594"] = #"hash_5f376e9395e16666";
+  level._effect[#"fire_runner"] = #"hash_409439bf8b3dd862";
+  level._effect[#"hash_6778cbcf34bfebef"] = #"hash_43a26488c9e5ce57";
+  level._effect[#"hash_5f2da0ff081c1699"] = #"hash_43a26488c9e5ce57";
+  level._effect[#"hash_63697be07cc11490"] = #"hash_4924963a116d71bd";
+  level._effect[#"hash_360e9275d6096589"] = #"hash_1bc8b1078984dbda";
+  level._effect[#"hash_66be32f919d8b4a4"] = #"hash_53280ae47e5295e0";
+  level._effect[#"hash_638a4ec653717ef6"] = #"hash_1a1142d2a6711364";
+  level._effect[#"hash_1fa861cbe30adda9"] = #"hash_344ba1202db8c50a";
   level.var_1d1c6c28 = [];
   clientfield::register("zbarrier", "magicbox_open_fx", 1, 1, "int", &function_8f69e904, 0, 0);
   clientfield::register("zbarrier", "magicbox_closed_fx", 1, 1, "int", &function_9253a233, 0, 0);

@@ -73,7 +73,7 @@ function private function_cef412a7(einflictor, eattacker, idamage, idflags, smea
   }
 
   if(is_true(level.is_survival) && !isDefined(self.enemy_override) && !isDefined(self.favoriteenemy) && isDefined(psoffsettime) && isPlayer(psoffsettime)) {
-    if(isDefined(modelindex) && (modelindex == "MOD_MELEE" || modelindex == "MOD_MELEE_WEAPON_BUTT") || isDefined(partname) && partname.statname === # "hatchet") {
+    if(isDefined(modelindex) && (modelindex == "MOD_MELEE" || modelindex == "MOD_MELEE_WEAPON_BUTT") || isDefined(partname) && partname.statname === #"hatchet") {
       n_radius = 512;
     } else {
       n_radius = 2048;
@@ -97,7 +97,7 @@ function function_51d21736() {
   self callback::function_d8abfc3d(#"on_dog_killed", &on_dog_killed);
   aiutility::addaioverridedamagecallback(self, &function_cef412a7);
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     self.var_12af7864 = 1;
   }
 
@@ -152,7 +152,7 @@ function function_c2400b01() {
   awareness::register_state(self, #"wander", &function_9f9d7a80, &awareness::function_4ebe4a6d, &awareness::function_b264a0bc, undefined, &awareness::function_555d960b);
   awareness::register_state(self, #"investigate", &function_461711c2, &awareness::function_9eefc327, &function_2114b12b, undefined, &awareness::function_a360dd00);
 
-  if(self.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(self.subarchetype === #"hash_28e36e7b7d5421f") {
     awareness::register_state(self, #"chase", &function_6f207918, &function_d005c417, &function_cf29908a, &awareness::function_5c40e824, undefined);
   } else {
     awareness::register_state(self, #"chase", &function_6f207918, &zm_ai_dog::function_90da9686, &function_cf29908a, &awareness::function_5c40e824, undefined);
@@ -256,7 +256,7 @@ function private function_2705e687(entity) {
 function private function_6f24d732(params) {
   self clientfield::set("sndAwarenessChange", 0);
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     self playSound(#"hash_6e603d5f1970365b");
     return;
   }
@@ -325,7 +325,7 @@ function function_e393f5fe(behaviortreeentity) {
 }
 
 function function_80f985a4(behaviortreeentity) {
-  if(behaviortreeentity.subarchetype === # "hash_2a5479b83161cb35") {
+  if(behaviortreeentity.subarchetype === #"hash_2a5479b83161cb35") {
     return true;
   }
 

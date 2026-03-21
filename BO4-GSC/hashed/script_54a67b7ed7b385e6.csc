@@ -12,14 +12,14 @@
 #namespace namespace_4a807bff;
 
 init() {
-  level._effect[#"soul_fx"] = # "hash_643bd3983b610945";
-  level._effect[#"hash_169b53a5e4572fdc"] = # "hash_10fc174d8f84f900";
-  level._effect[#"clue_fx"] = # "zombie/fx_ritual_glow_relic_zod_zmb";
-  level._effect[#"despawn_fx"] = # "hash_73a1b4258b95cb4a";
-  level._effect[#"hash_3547af665773df36"] = # "hash_4174a5c725649d80";
-  level._effect[#"hash_619321730ebe1b49"] = # "hash_1a14ad689ef08a0d";
-  level._effect[#"hash_e24c17449fcb2f6"] = # "hash_24fc9882ede4f23c";
-  level._effect[#"hash_39f5cccf6d3254d0"] = # "hash_39d7ae4b883e7e75";
+  level._effect[#"soul_fx"] = #"hash_643bd3983b610945";
+  level._effect[#"hash_169b53a5e4572fdc"] = #"hash_10fc174d8f84f900";
+  level._effect[#"clue_fx"] = #"zombie/fx_ritual_glow_relic_zod_zmb";
+  level._effect[#"despawn_fx"] = #"hash_73a1b4258b95cb4a";
+  level._effect[#"hash_3547af665773df36"] = #"hash_4174a5c725649d80";
+  level._effect[#"hash_619321730ebe1b49"] = #"hash_1a14ad689ef08a0d";
+  level._effect[#"hash_e24c17449fcb2f6"] = #"hash_24fc9882ede4f23c";
+  level._effect[#"hash_39f5cccf6d3254d0"] = #"hash_39d7ae4b883e7e75";
   a_s_chests = struct::get_array(#"hash_396f65af88a25e7d");
 
   foreach(s_chest in a_s_chests) {

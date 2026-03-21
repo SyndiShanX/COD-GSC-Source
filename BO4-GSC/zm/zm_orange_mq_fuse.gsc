@@ -167,7 +167,7 @@ function_d6a4619a() {
   for(b_hidden = 0; !b_hidden; b_hidden = 1) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon.name === # "ww_tesla_sniper_t8" || s_result.weapon.name === # "ww_tesla_sniper_upgraded_t8") {
+    if(s_result.weapon.name === #"ww_tesla_sniper_t8" || s_result.weapon.name === #"ww_tesla_sniper_upgraded_t8") {
       if(self.targetname == "big_bird_wing_n") {
         exploder::exploder("fxexp_electric_arcs_fx_to_lighthouse_left");
       } else {
@@ -225,7 +225,7 @@ function_c723e684(var_a276c861) {
 }
 
 is_soul_capture(var_88206a50, ent) {
-  if(isDefined(ent) && ent.subarchetype === # "zombie_electric") {
+  if(isDefined(ent) && ent.subarchetype === #"zombie_electric") {
     b_killed_by_player = isDefined(ent.attacker) && isPlayer(ent.attacker) || isDefined(ent.damageinflictor) && isPlayer(ent.damageinflictor);
     var_e93788f1 = var_88206a50.e_vol;
     return (b_killed_by_player && ent istouching(var_e93788f1));

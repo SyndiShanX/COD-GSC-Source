@@ -948,7 +948,7 @@ zombie_death_points(origin, mod, hit_location, attacker, inflictor, zombie, team
   str_event = "death";
 
   if(isDefined(player)) {
-    if(inflictor.subarchetype === # "zombie_wolf_ally") {
+    if(inflictor.subarchetype === #"zombie_wolf_ally") {
       zombie.var_12745932 = 1;
     }
 
@@ -1029,7 +1029,7 @@ zombie_death_animscript(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     });
   }
 
-  if((self.damagemod == "MOD_BURNED" || isDefined(self.var_b364c165) && self.var_b364c165) && self.archetype === # "zombie") {
+  if((self.damagemod == "MOD_BURNED" || isDefined(self.var_b364c165) && self.var_b364c165) && self.archetype === #"zombie") {
     self thread flame_corpse_fx();
   }
 

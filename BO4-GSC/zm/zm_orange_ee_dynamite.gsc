@@ -181,7 +181,7 @@ function_e3203a2() {
     return;
   }
 
-  if(level.var_1daa43ee && self.archetype === # "zombie" && self.subarchetype !== # "zombie_electric" && (math::cointoss(20) || level flag::get(#"debug_dynamite_zombie"))) {
+  if(level.var_1daa43ee && self.archetype === #"zombie" && self.subarchetype !== #"zombie_electric" && (math::cointoss(20) || level flag::get(#"debug_dynamite_zombie"))) {
     while(!isDefined(self.spawn_pos)) {
       waitframe(1);
     }
@@ -294,7 +294,7 @@ function_7056aa62() {
     t_crafting = self;
   }
 
-  if(t_crafting.blueprint.name == # "zblueprint_orange_dynamite_bomb") {
+  if(t_crafting.blueprint.name == #"zblueprint_orange_dynamite_bomb") {
     var_f2d24a17 = self.stub.var_4b9b60c7;
     var_f2d24a17 show();
     var_f2d24a17 zm_unitrigger::create(zm_utility::function_d6046228(#"hash_6eced05b46f243a8", #"hash_5402978e2dbb34e4"));

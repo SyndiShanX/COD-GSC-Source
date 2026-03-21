@@ -276,7 +276,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
 }
 
 function function_2adc2518(str_notify) {
-  if(isalive(self) && isPlayer(self) && str_notify !== # "new_scripted_anim") {
+  if(isalive(self) && isPlayer(self) && str_notify !== #"new_scripted_anim") {
     function_d497dbe7();
   }
 

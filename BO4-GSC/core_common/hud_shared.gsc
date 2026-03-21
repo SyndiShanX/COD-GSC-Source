@@ -242,7 +242,7 @@ function_9b9f0fd8(str_identifier, var_cc966c56, b_success = 1, e_player, b_pvp) 
     if(isDefined(b_pvp) && b_pvp) {
       str_winning_team = util::get_enemy_team(var_cc966c56);
     } else {
-      str_winning_team = # "none";
+      str_winning_team = #"none";
     }
 
     n_state = 2;
@@ -472,7 +472,7 @@ function_da72e57e(var_776f69c5, var_67af9061, var_cc966c56) {
       var_776f69c5.var_d201303e = 1;
     }
 
-    if(isDefined(var_e563ad04.var_3093fd62) && var_e563ad04.var_3093fd62 || var_e563ad04.script_team === # "any") {
+    if(isDefined(var_e563ad04.var_3093fd62) && var_e563ad04.var_3093fd62 || var_e563ad04.script_team === #"any") {
       level function_21ad06d5(1, var_cc966c56);
     }
 
@@ -485,7 +485,7 @@ function_da72e57e(var_776f69c5, var_67af9061, var_cc966c56) {
   }
 }
 
-function_e5ae6379(var_ea5acf75 = # "none", var_f30c60cd = 1) {
+function_e5ae6379(var_ea5acf75 = #"none", var_f30c60cd = 1) {
   if(!isDefined(level.var_6371e281)) {
     level function_6cf4a466();
   }
@@ -561,7 +561,7 @@ function_e5ae6379(var_ea5acf75 = # "none", var_f30c60cd = 1) {
           var_5ebfaa95[var_5ebfaa95.size] = var_cc966c56;
           var_67af9061 = "hudItems.cpObjective." + level.teams[var_cc966c56];
 
-          if(var_ea5acf75 == var_cc966c56 || var_ea5acf75 == # "none" && var_f30c60cd) {
+          if(var_ea5acf75 == var_cc966c56 || var_ea5acf75 == #"none" && var_f30c60cd) {
             n_state = 1;
           } else {
             n_state = 2;
@@ -607,7 +607,7 @@ function_e5ae6379(var_ea5acf75 = # "none", var_f30c60cd = 1) {
 
       arrayremovevalue(var_776f69c5.var_f6fd19fc, var_e563ad04, 0);
 
-      if(isDefined(var_e563ad04.var_3093fd62) && var_e563ad04.var_3093fd62 || var_e563ad04.script_team === # "any") {
+      if(isDefined(var_e563ad04.var_3093fd62) && var_e563ad04.var_3093fd62 || var_e563ad04.script_team === #"any") {
         level function_21ad06d5(0, var_cc966c56);
       }
 
@@ -635,7 +635,7 @@ function_6b2e2adf() {
 function_e16f5c1b() {
   var_ea5acf75 = self.var_ea5acf75;
 
-  if(var_ea5acf75 == # "allies" && isDefined(self.var_49b9fc91)) {
+  if(var_ea5acf75 == #"allies" && isDefined(self.var_49b9fc91)) {
     var_2d3a83aa = self.var_49b9fc91;
 
     if(isDefined(self.var_c082bba2)) {
@@ -643,7 +643,7 @@ function_e16f5c1b() {
     } else {
       var_733d0d81 = self.var_49b9fc91;
     }
-  } else if(var_ea5acf75 == # "axis" && isDefined(self.var_50023bc7)) {
+  } else if(var_ea5acf75 == #"axis" && isDefined(self.var_50023bc7)) {
     var_2d3a83aa = self.var_50023bc7;
 
     if(isDefined(self.var_eaadc829)) {
@@ -973,10 +973,10 @@ set_pvp_objective(str_identifier, n_obj_id, n_widget, var_48d81699, var_94fe5aa5
   mission flag::clear("pvp_objectives_updating");
 }
 
-function_426b1c79(str_identifier, str_winning_team = # "none", var_f30c60cd = 1) {
+function_426b1c79(str_identifier, str_winning_team = #"none", var_f30c60cd = 1) {
   var_ea5acf75 = util::get_team_mapping(str_winning_team);
   var_ae4241f = 1;
-  var_f30c60cd = str_winning_team == # "none" && var_f30c60cd;
+  var_f30c60cd = str_winning_team == #"none" && var_f30c60cd;
 
   foreach(var_cc966c56 in array(#"axis", #"allies")) {
     if(var_f30c60cd || var_ea5acf75 == var_cc966c56) {
@@ -999,7 +999,7 @@ function_b825bd3d(str_team, var_ba9a7af4 = 1, var_b002585c) {
   var_cc966c56 = util::get_team_mapping(str_team);
   var_f6d0dfa6 = 0;
 
-  if(var_cc966c56 == # "allies") {
+  if(var_cc966c56 == #"allies") {
     if(isDefined(self.var_8f05313c) && self.var_8f05313c > 0) {
       n_progress = self.var_8f05313c;
     }
@@ -1007,7 +1007,7 @@ function_b825bd3d(str_team, var_ba9a7af4 = 1, var_b002585c) {
     if(1 && (!isDefined(self.var_682d5f28) || self.var_682d5f28 == 0)) {
       var_f6d0dfa6 = 1;
     }
-  } else if(var_cc966c56 == # "axis") {
+  } else if(var_cc966c56 == #"axis") {
     if(isDefined(self.var_682d5f28) && self.var_682d5f28 > 0) {
       n_progress = self.var_682d5f28;
     }
@@ -1127,13 +1127,13 @@ function_11c081f(var_dc224d5b) {
   self.var_dc224d5b = var_dc224d5b;
 }
 
-mission_result(str_winning_team, var_db3d629e = # "hash_6ef5bcff7fb1d1ab", var_95ee5812 = # "hash_6ef5bcff7fb1d1ab", var_b6213032 = 0, var_c8b60423 = 0.5) {
+mission_result(str_winning_team, var_db3d629e = #"hash_6ef5bcff7fb1d1ab", var_95ee5812 = #"hash_6ef5bcff7fb1d1ab", var_b6213032 = 0, var_c8b60423 = 0.5) {
   foreach(e_player in util::get_human_players()) {
     if(e_player util::is_on_side(str_winning_team)) {
-      var_1a47c004 = # "hash_7fd63164f504dda1";
+      var_1a47c004 = #"hash_7fd63164f504dda1";
       var_1da53c42 = var_db3d629e;
     } else {
-      var_1a47c004 = # "hash_294bb2c7021b1b72";
+      var_1a47c004 = #"hash_294bb2c7021b1b72";
       var_1da53c42 = var_95ee5812;
     }
 
@@ -1157,7 +1157,7 @@ mission_result(str_winning_team, var_db3d629e = # "hash_6ef5bcff7fb1d1ab", var_9
     array::thread_all(a_players, &val::set, "mission_result", "ignoreme", 1);
     array::thread_all(a_players, &val::set, "mission_result", "takedamage", 0);
 
-    if(str_winning_team == # "allies") {
+    if(str_winning_team == #"allies") {
       voiceparams = {
         #team: # "allies", #side: # "allies", #targetname: level.mission_name
       };
@@ -1208,7 +1208,7 @@ function_bc4f0b54() {
   a_players = util::get_players();
 
   foreach(player in a_players) {
-    if(player.sessionstate === # "spectator") {
+    if(player.sessionstate === #"spectator") {
       player thread[[level.spawnplayer]]();
       continue;
     }
@@ -1251,8 +1251,8 @@ function_ba453727() {
   }
 }
 
-objective_result(str_winning_team, var_db3d629e = # "hash_6ef5bcff7fb1d1ab", var_95ee5812 = # "hash_6ef5bcff7fb1d1ab") {
-  var_1a47c004 = # "hash_70cccbb95b710d8c";
+objective_result(str_winning_team, var_db3d629e = #"hash_6ef5bcff7fb1d1ab", var_95ee5812 = #"hash_6ef5bcff7fb1d1ab") {
+  var_1a47c004 = #"hash_70cccbb95b710d8c";
 
   foreach(e_player in level.players) {
     if(isalive(e_player)) {

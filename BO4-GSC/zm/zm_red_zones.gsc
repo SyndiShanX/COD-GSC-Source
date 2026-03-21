@@ -240,9 +240,9 @@ on_player_spawned() {
 function_a929cb60(s_spot) {
   if(isDefined(s_spot.var_4e469313) && s_spot.var_4e469313) {
     self thread hide_pop();
-    str_anim = # "ai_t8_zombie_traverse_ground_dugup";
+    str_anim = #"ai_t8_zombie_traverse_ground_dugup";
   } else {
-    str_anim = # "ai_zombie_base_traverse_ground_climbout_fast";
+    str_anim = #"ai_zombie_base_traverse_ground_climbout_fast";
   }
 
   self animscripted("rise_anim", self.origin, s_spot.angles, str_anim, "normal");
@@ -294,97 +294,97 @@ function_27028b8e(str_zone) {
 
   switch (str_zone) {
     case # "zone_amphitheater":
-      str_display = # "hash_654702bdca18105";
+      str_display = #"hash_654702bdca18105";
       break;
     case # "zone_amphitheater_backstage":
-      str_display = # "hash_10a873392c5d4565";
+      str_display = #"hash_10a873392c5d4565";
       break;
     case # "zone_cliff_tombs_lower":
     case # "zone_cliff_tombs_forge":
     case # "zone_cliff_tombs_center":
     case # "zone_cliff_tombs_bridge":
     case # "zone_cliff_tombs_upper":
-      str_display = # "hash_50916c74fe22e63b";
+      str_display = #"hash_50916c74fe22e63b";
       break;
     case # "zone_drakaina_arena":
-      str_display = # "hash_78d4c8eb48aabd66";
+      str_display = #"hash_78d4c8eb48aabd66";
       break;
     case # "zone_eastern_plaza":
-      str_display = # "hash_65a67d1c5af364c7";
+      str_display = #"hash_65a67d1c5af364c7";
       break;
     case # "zone_bathhouse_outside":
     case # "zone_bathhouse_inside":
-      str_display = # "hash_27a6b15e094c02f1";
+      str_display = #"hash_27a6b15e094c02f1";
       break;
     case # "zone_spartan_east_to_treasuries":
     case # "zone_intersection_of_treasuries_upper":
     case # "zone_intersection_of_treasuries_lower":
-      str_display = # "hash_4785d4d350f36326";
+      str_display = #"hash_4785d4d350f36326";
       break;
     case # "zone_monument_of_craterus_lower":
     case # "zone_monument_of_craterus_upper":
-      str_display = # "hash_70363674b3e9a47c";
+      str_display = #"hash_70363674b3e9a47c";
       break;
     case # "zone_river_lower":
     case # "zone_river_upper":
-      str_display = # "hash_3a319fea8f608182";
+      str_display = #"hash_3a319fea8f608182";
       break;
     case # "zone_serpent_pass_upper":
     case # "zone_serpent_pass_bridge":
     case # "zone_serpent_pass_center":
     case # "zone_serpent_pass_lower":
-      str_display = # "hash_4f55839413fe0046";
+      str_display = #"hash_4f55839413fe0046";
       break;
     case # "zone_stoa_of_athenians_to_spartan_upper":
     case # "zone_spartan_monument_west":
     case # "zone_spartan_monument_east":
     case # "zone_spartan_monument_upper":
-      str_display = # "hash_303ce0aa4cf6a23e";
+      str_display = #"hash_303ce0aa4cf6a23e";
       break;
     case # "zone_stoa_of_the_athenians_east":
     case # "zone_stoa_of_the_athenians_west":
-      str_display = # "hash_12a9743a3b9f2236";
+      str_display = #"hash_12a9743a3b9f2236";
       break;
     case # "zone_temple_to_stoa_of_the_athenians":
-      str_display = # "hash_2910970920dd3ee3";
+      str_display = #"hash_2910970920dd3ee3";
       break;
     case # "zone_temple_of_apollo_left_path":
     case # "zone_temple_of_apollo_right_path":
     case # "zone_temple_of_apollo_back":
     case # "zone_temple_of_apollo":
-      str_display = # "hash_106d425e41e8c240";
+      str_display = #"hash_106d425e41e8c240";
       break;
     case # "zone_offering":
-      str_display = # "hash_6268d50ff53b29d4";
+      str_display = #"hash_6268d50ff53b29d4";
       break;
     case # "zone_upper_road_west":
     case # "zone_upper_road_east":
     case # "zone_portico":
-      str_display = # "hash_32a859886bcbfb10";
+      str_display = #"hash_32a859886bcbfb10";
       break;
     case # "zone_western_plaza":
-      str_display = # "hash_187fe3987a160b42";
+      str_display = #"hash_187fe3987a160b42";
       break;
     case # "zone_boss_plateau_1":
-      str_display = # "hash_63b3c5fb5611240f";
+      str_display = #"hash_63b3c5fb5611240f";
       break;
     case # "zone_boss_plateau_2":
-      str_display = # "hash_63b3c4fb5611225c";
+      str_display = #"hash_63b3c4fb5611225c";
       break;
     case # "zone_boss_plateau_3":
-      str_display = # "hash_63b3c6fb561125c2";
+      str_display = #"hash_63b3c6fb561125c2";
       break;
     case # "zone_ww_quest_earth":
-      str_display = # "hash_4903463b3bfd1f8f";
+      str_display = #"hash_4903463b3bfd1f8f";
       break;
     case # "zone_ww_quest_death":
-      str_display = # "hash_77ea88b9440ad045";
+      str_display = #"hash_77ea88b9440ad045";
       break;
     case # "zone_ww_quest_light":
-      str_display = # "hash_5e05f18694a561c7";
+      str_display = #"hash_5e05f18694a561c7";
       break;
     case # "zone_ww_quest_air":
-      str_display = # "hash_286cefa4bc6e994f";
+      str_display = #"hash_286cefa4bc6e994f";
       break;
     default:
       str_display = undefined;

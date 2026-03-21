@@ -138,7 +138,7 @@ function function_b852953c(var_aac3d74d) {
   var_438da649 = function_b143666d(item_index, 5);
   var_40e28ba = var_438da649.var_cd070e56;
 
-  if(!isDefined(var_40e28ba) || var_40e28ba == # "") {
+  if(!isDefined(var_40e28ba) || var_40e28ba == #"") {
     return var_aac3d74d;
   }
 
@@ -160,7 +160,7 @@ function function_a0a66726() {
   foreach(var_91b99f7 in self.var_7341f980) {
     itemindex = 0;
 
-    if(isDefined(var_91b99f7) && ishash(var_91b99f7) && var_91b99f7 != # "") {
+    if(isDefined(var_91b99f7) && ishash(var_91b99f7) && var_91b99f7 != #"") {
       itemindex = getitemindexfromref(var_91b99f7);
     }
 
@@ -233,7 +233,7 @@ function function_4c5d2b62() {
   return cost;
 }
 
-function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = # "") {
+function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = #"") {
   if(!isPlayer(self) || !isDefined(self.var_7341f980)) {
     return;
   }
@@ -244,15 +244,15 @@ function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = # "") {
     self.var_5c68806 = [];
     self.var_c545ae9c = round_number;
     self.var_5c68806[round_number] = talent;
-    self.var_5c68806[round_number + 1] = # "none";
-    self.var_5c68806[round_number + 2] = # "none";
-    self.var_5c68806[round_number + 3] = # "none";
-    self.var_5c68806[round_number + 4] = # "none";
-    self.var_5c68806[round_number + 5] = # "none";
-    self.var_5c68806[round_number + 6] = # "none";
-    self.var_5c68806[round_number + 7] = # "none";
-    self.var_5c68806[round_number + 8] = # "none";
-    self.var_5c68806[round_number + 9] = # "none";
+    self.var_5c68806[round_number + 1] = #"none";
+    self.var_5c68806[round_number + 2] = #"none";
+    self.var_5c68806[round_number + 3] = #"none";
+    self.var_5c68806[round_number + 4] = #"none";
+    self.var_5c68806[round_number + 5] = #"none";
+    self.var_5c68806[round_number + 6] = #"none";
+    self.var_5c68806[round_number + 7] = #"none";
+    self.var_5c68806[round_number + 8] = #"none";
+    self.var_5c68806[round_number + 9] = #"none";
   } else if(isDefined(self.var_5c68806) && isDefined(self.var_c545ae9c) && zm_utility::is_classic()) {
     if(!isinarray(self.var_5c68806, talent)) {
       self.var_5c68806[round_number] = talent;
@@ -261,7 +261,7 @@ function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = # "") {
     var_55c38743 = 1;
 
     for(i = 0; i < 10; i++) {
-      if(self.var_5c68806[self.var_c545ae9c + i] == # "none") {
+      if(self.var_5c68806[self.var_c545ae9c + i] == #"none") {
         var_55c38743 = 0;
       }
     }
@@ -301,7 +301,7 @@ function function_3fecad82(talent, var_6e2cc6cb = 1, var_96b5aff5 = # "") {
     case # "talent_quickrevive":
       var_6d3b160e = self.var_7341f980[self.var_7341f980.size - 1];
 
-      if(var_6d3b160e != # "talent_quickrevive" || var_6d3b160e != # "hash_504b41f717f8931a" || var_6d3b160e != # "hash_504b40f717f89167" || var_6d3b160e != # "hash_504b3ff717f88fb4" || var_6d3b160e != # "hash_504b3ef717f88e01" || var_6d3b160e != # "hash_504b3df717f88c4e") {
+      if(var_6d3b160e != #"talent_quickrevive" || var_6d3b160e != #"hash_504b41f717f8931a" || var_6d3b160e != #"hash_504b40f717f89167" || var_6d3b160e != #"hash_504b3ff717f88fb4" || var_6d3b160e != #"hash_504b3ef717f88e01" || var_6d3b160e != #"hash_504b3df717f88c4e") {
         self.var_7341f980[self.var_7341f980.size - 1] = self.var_7341f980[0];
         self.var_7341f980[0] = var_6d3b160e;
       }
@@ -441,13 +441,13 @@ function private function_b4083162(talent, var_96b5aff5) {
   if(isPlayer(self)) {
     switch (var_96b5aff5) {
       case 1:
-        source = # "world";
+        source = #"world";
         break;
       case 2:
-        source = # "wonderfizz";
+        source = #"wonderfizz";
         break;
       default:
-        source = # "hash_a6101af5e5d2384";
+        source = #"hash_a6101af5e5d2384";
         break;
     }
 
@@ -583,7 +583,7 @@ function on_item_pickup(params) {
 
   if(isPlayer(self)) {
     if(isDefined(item.itementry)) {
-      if(item.itementry.itemtype === # "survival_perk") {
+      if(item.itementry.itemtype === #"survival_perk") {
         if(isDefined(item.itementry.talents)) {
           foreach(talent in item.itementry.talents) {
             if(isDefined(talent.talent)) {
@@ -596,7 +596,7 @@ function on_item_pickup(params) {
         return;
       }
 
-      if(item.itementry.itemtype === # "armor") {}
+      if(item.itementry.itemtype === #"armor") {}
     }
   }
 }
@@ -691,7 +691,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "hash_afdc97f440fbcec":
     case # "hash_afdcb7f440fc052":
     case # "hash_afdcc7f440fc205":
-      str_alias = # "mus_perks_jugganog_sting";
+      str_alias = #"mus_perks_jugganog_sting";
       break;
     case # "hash_504b41f717f8931a":
     case # "talent_quickrevive":
@@ -699,7 +699,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "hash_504b3ff717f88fb4":
     case # "hash_504b3ef717f88e01":
     case # "hash_504b3df717f88c4e":
-      str_alias = # "mus_perks_revive_sting";
+      str_alias = #"mus_perks_revive_sting";
       break;
     case # "talent_speedcola":
     case # "hash_520b59b0216b70be":
@@ -707,7 +707,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "hash_520b5bb0216b7424":
     case # "hash_520b5cb0216b75d7":
     case # "hash_520b5db0216b778a":
-      str_alias = # "mus_perks_speed_sting";
+      str_alias = #"mus_perks_speed_sting";
       break;
     case # "hash_1f95b48e4a49df4a":
     case # "talent_deadshot":
@@ -715,7 +715,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "hash_1f95b08e4a49d87e":
     case # "hash_1f95b18e4a49da31":
     case # "hash_1f95b38e4a49dd97":
-      str_alias = # "mus_perks_deadshot_sting";
+      str_alias = #"mus_perks_deadshot_sting";
       break;
     case # "hash_17ccbbee64daa20e":
     case # "hash_17ccbaee64daa05b":
@@ -723,7 +723,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "hash_17ccbeee64daa727":
     case # "hash_17ccbdee64daa574":
     case # "hash_17ccbcee64daa3c1":
-      str_alias = # "mus_perks_stamin_sting";
+      str_alias = #"mus_perks_stamin_sting";
       break;
     case # "talent_elemental_pop":
     case # "talent_elemental_pop_2":
@@ -731,7 +731,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "talent_elemental_pop_1":
     case # "talent_elemental_pop_4":
     case # "talent_elemental_pop_5":
-      str_alias = # "mus_perks_elementalpop_sting";
+      str_alias = #"mus_perks_elementalpop_sting";
       break;
     case # "talent_doubletap":
     case # "talent_doubletap":
@@ -739,7 +739,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "talent_doubletap":
     case # "talent_doubletap":
     case # "talent_doubletap":
-      str_alias = # "hash_25791821a46525d9";
+      str_alias = #"hash_25791821a46525d9";
       break;
     case # "hash_59dbe8f72baaa2a3":
     case # "hash_59dbecf72baaa96f":
@@ -747,7 +747,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "hash_59dbeef72baaacd5":
     case # "hash_59dbe7f72baaa0f0":
     case # "hash_38c08136902fd553":
-      str_alias = # "mus_perks_tombstone_sting";
+      str_alias = #"mus_perks_tombstone_sting";
       break;
     case # "talent_mulekick_5":
     case # "talent_mulekick_4":
@@ -756,9 +756,9 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "talent_mulekick_1":
     case # "talent_mulekick":
       if(self.targetname === "wonderfizz") {
-        str_alias = # "mus_perks_mulekick_sting";
+        str_alias = #"mus_perks_mulekick_sting";
       } else {
-        str_alias = # "hash_239089c47153028b";
+        str_alias = #"hash_239089c47153028b";
       }
 
       break;
@@ -768,7 +768,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "talent_deathperception_4":
     case # "talent_deathperception_5":
     case # "talent_deathperception_1":
-      str_alias = # "mus_perks_deathperception_sting";
+      str_alias = #"mus_perks_deathperception_sting";
       break;
     case # "talent_phdslider_5":
     case # "talent_phdslider":
@@ -776,7 +776,7 @@ function function_3e9d8a8e(var_11868f5d) {
     case # "talent_phdslider_3":
     case # "talent_phdslider_2":
     case # "talent_phdslider_4":
-      str_alias = # "mus_perks_phd_sting";
+      str_alias = #"mus_perks_phd_sting";
       break;
   }
 
@@ -948,7 +948,7 @@ function function_1d36527d(params) {
   }
 
   foreach(player in getplayers()) {
-    if(tokens[0] === # "hash_6149e7b90451c6cd") {
+    if(tokens[0] === #"hash_6149e7b90451c6cd") {
       switch (tokens[1]) {
         case # "0":
           level.var_6f4eb990 = "<dev string:x38>";
@@ -973,12 +973,12 @@ function function_1d36527d(params) {
       continue;
     }
 
-    if(tokens[0] === # "hash_24d26fc861b6ec66") {
+    if(tokens[0] === #"hash_24d26fc861b6ec66") {
       player function_3fecad82(hash(tokens[1] + level.var_6f4eb990), 0);
       continue;
     }
 
-    if(tokens[0] === # "hash_2b274b2e4aa51e00") {
+    if(tokens[0] === #"hash_2b274b2e4aa51e00") {
       if(player.var_7341f980.size > 0) {
         player function_4c1d0e25(player.var_7341f980[player.var_7341f980.size - 1]);
       }

@@ -307,7 +307,7 @@ function_502f97fa() {
 function_8a80437(target) {
   result = 1;
 
-  if(isDefined(self) && isDefined(target) && isDefined(self.archetype) && self.archetype == # "zombie_dog") {
+  if(isDefined(self) && isDefined(target) && isDefined(self.archetype) && self.archetype == #"zombie_dog") {
     var_3eb6a47a = target function_cbaec34a();
     var_970d35d = self function_8355a4a8();
 
@@ -354,109 +354,109 @@ function_ab7f70b9(e_player, str_zone) {
   switch (str_zone) {
     case # "docks_1":
     case # "docks_2":
-      str_display = # "hash_99011c41f3d5380";
+      str_display = #"hash_99011c41f3d5380";
       break;
     case # "boathouse":
-      str_display = # "hash_6b2f9edfc77ea9b2";
+      str_display = #"hash_6b2f9edfc77ea9b2";
       break;
     case # "frozen_crevasse":
-      str_display = # "hash_1e6b498a976cdcb5";
+      str_display = #"hash_1e6b498a976cdcb5";
       break;
     case # "ice_grotto":
-      str_display = # "hash_3461ddd73c20a747";
+      str_display = #"hash_3461ddd73c20a747";
       break;
     case # "lighthouse_annex":
-      str_display = # "hash_43a7944f79cf9bf1";
+      str_display = #"hash_43a7944f79cf9bf1";
       break;
     case # "lagoon":
-      str_display = # "hash_381e2912fb0376dc";
+      str_display = #"hash_381e2912fb0376dc";
       break;
     case # "lighthouse_cove":
-      str_display = # "hash_2fb0927a65d8a9e";
+      str_display = #"hash_2fb0927a65d8a9e";
       break;
     case # "lighthouse_station":
-      str_display = # "hash_1424b8bac646249f";
+      str_display = #"hash_1424b8bac646249f";
       break;
     case # "lighthouse_level_1":
-      str_display = # "hash_7957c402b1b2ef31";
+      str_display = #"hash_7957c402b1b2ef31";
       break;
     case # "lighthouse_level_2":
-      str_display = # "hash_7957c102b1b2ea18";
+      str_display = #"hash_7957c102b1b2ea18";
       break;
     case # "lighthouse_level_3":
-      str_display = # "hash_7957c202b1b2ebcb";
+      str_display = #"hash_7957c202b1b2ebcb";
       break;
     case # "lighthouse_level_4":
-      str_display = # "hash_7957c702b1b2f44a";
+      str_display = #"hash_7957c702b1b2f44a";
       break;
     case # "lighthouse_approach":
-      str_display = # "hash_39b4e46fd4bebad5";
+      str_display = #"hash_39b4e46fd4bebad5";
       break;
     case # "beach":
-      str_display = # "hash_75f05448c75c06f";
+      str_display = #"hash_75f05448c75c06f";
       break;
     case # "hidden_path":
-      str_display = # "hash_3a98581b802c0296";
+      str_display = #"hash_3a98581b802c0296";
       break;
     case # "gangway":
-      str_display = # "hash_1797071bcd3e6fe6";
+      str_display = #"hash_1797071bcd3e6fe6";
       break;
     case # "stern":
-      str_display = # "hash_4c328e01a462f48a";
+      str_display = #"hash_4c328e01a462f48a";
       break;
     case # "navigation":
-      str_display = # "hash_3d82a67e307a0426";
+      str_display = #"hash_3d82a67e307a0426";
       break;
     case # "sun_deck":
-      str_display = # "hash_38990c0828e68602";
+      str_display = #"hash_38990c0828e68602";
       break;
     case # "bridge":
-      str_display = # "hash_5dbcb178cb1573c1";
+      str_display = #"hash_5dbcb178cb1573c1";
       break;
     case # "cargo_hold":
-      str_display = # "hash_335d7ee067ac0e68";
+      str_display = #"hash_335d7ee067ac0e68";
       break;
     case # "artifact_storage":
-      str_display = # "hash_63f7af429c316620";
+      str_display = #"hash_63f7af429c316620";
       break;
     case # "main_deck":
-      str_display = # "hash_75d26f96a738d2a3";
+      str_display = #"hash_75d26f96a738d2a3";
       break;
     case # "forecastle":
-      str_display = # "hash_3befc74a37bbeb9e";
+      str_display = #"hash_3befc74a37bbeb9e";
       break;
     case # "main_entrance":
-      str_display = # "hash_520e403cdf1ae8";
+      str_display = #"hash_520e403cdf1ae8";
       break;
     case # "security_lobby":
-      str_display = # "hash_19a2493217019135";
+      str_display = #"hash_19a2493217019135";
       break;
     case # "geological_processing":
-      str_display = # "hash_21450c4a4a6646d6";
+      str_display = #"hash_21450c4a4a6646d6";
       break;
     case # "upper_catwalk":
-      str_display = # "hash_65457ae6fbfe6c32";
+      str_display = #"hash_65457ae6fbfe6c32";
       break;
     case # "human_infusion":
-      str_display = # "hash_46ef5a594e42c371";
+      str_display = #"hash_46ef5a594e42c371";
       break;
     case # "decontamination":
-      str_display = # "hash_6571eafdcddb13ab";
+      str_display = #"hash_6571eafdcddb13ab";
       break;
     case # "specimen_storage":
-      str_display = # "hash_12750e3f1d3659e4";
+      str_display = #"hash_12750e3f1d3659e4";
       break;
     case # "loading_platform":
-      str_display = # "hash_4f2b74b3fea599ba";
+      str_display = #"hash_4f2b74b3fea599ba";
       break;
     case # "outer_walkway":
-      str_display = # "hash_778497a569854310";
+      str_display = #"hash_778497a569854310";
       break;
     case # "ice_floe":
-      str_display = # "hash_550cd5295ec40e4a";
+      str_display = #"hash_550cd5295ec40e4a";
       break;
     case # "sunken_path":
-      str_display = # "hash_18aaabdeba54214a";
+      str_display = #"hash_18aaabdeba54214a";
       break;
     default:
       str_display = undefined;

@@ -21,7 +21,7 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   level.var_1b5a1f0d = &zm_utility::is_point_inside_enabled_zone;
-  level.var_3da1a113 = # "hash_733eecf99198ecb9";
+  level.var_3da1a113 = #"hash_733eecf99198ecb9";
   level.weaponzmcymbalmonkey = getweapon(#"cymbal_monkey");
   zm_loadout::register_lethal_grenade_for_level(#"cymbal_monkey");
   zm_weapons::function_404c3ad5(level.weaponzmcymbalmonkey, &function_c1c47eb6);
@@ -47,13 +47,13 @@ function cymbal_monkey_exists() {
 }
 
 function function_c1c47eb6(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, modelindex, surfacetype, vsurfacenormal) {
-  if(isentity(surfacetype) && isPlayer(vsurfacenormal) && self.zm_ai_category === # "normal") {
+  if(isentity(surfacetype) && isPlayer(vsurfacenormal) && self.zm_ai_category === #"normal") {
     self.var_9a4dd099 = surfacetype.origin;
   }
 }
 
 function function_c58f9108(params) {
-  if(params.weapon.name === # "cymbal_monkey" && isPlayer(params.eattacker) && self.zm_ai_category === # "normal" && isvec(self.var_9a4dd099)) {
+  if(params.weapon.name === #"cymbal_monkey" && isPlayer(params.eattacker) && self.zm_ai_category === #"normal" && isvec(self.var_9a4dd099)) {
     self namespace_cc411409::ragdoll_launch(self.var_9a4dd099, 2);
     self thread function_3fb4ce3b();
   }

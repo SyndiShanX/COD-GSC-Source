@@ -333,7 +333,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
           case 1:
           case 2:
           case 3:
-            if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite") {
+            if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite") {
               n_damage = function_1fd0807c(0.1, n_base_damage);
               shitloc function_8a6ccd14(surfacetype, n_tier, n_damage);
               return n_damage;
@@ -342,7 +342,7 @@ function function_b3496fde(inflictor, attacker, damage, flags, meansofdeath, wea
             break;
           case 4:
           case 5:
-            if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite") {
+            if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite") {
               n_damage = function_1fd0807c(0.25, n_base_damage);
               shitloc function_8a6ccd14(surfacetype, n_tier, n_damage);
               return n_damage;

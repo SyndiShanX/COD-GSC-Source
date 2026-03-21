@@ -86,7 +86,7 @@ stop_all(team) {
   stop = [];
 
   foreach(speaker in level.var_3e8bd5c) {
-    if(isDefined(team) && team != # "any" && team != speaker.team) {
+    if(isDefined(team) && team != #"any" && team != speaker.team) {
       continue;
     }
 
@@ -178,7 +178,7 @@ play_next() {
   self function_7924f3ca();
   self.var_47282775 = voice;
 
-  if(isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "human_riotshield" || self.archetype == # "human_rpg" || self.archetype == # "civilian")) {
+  if(isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"human_riotshield" || self.archetype == #"human_rpg" || self.archetype == #"civilian")) {
     self clientfield::set("facial_dial", 1);
   }
 
@@ -267,7 +267,7 @@ end_play_next(notifyhash) {
 
   self.var_47282775 = undefined;
 
-  if(isactor(self) && isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "human_riotshield" || self.archetype == # "human_rpg" || self.archetype == # "civilian")) {
+  if(isactor(self) && isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"human_riotshield" || self.archetype == #"human_rpg" || self.archetype == #"civilian")) {
     self clientfield::set("facial_dial", 0);
   }
 
@@ -316,7 +316,7 @@ function_7924f3ca() {
 mask_sound(soundent, params, var_17ee4803) {
   mask = isDefined(params) ? params.mask : # "all";
 
-  if(mask == # "all") {
+  if(mask == #"all") {
     if(isDefined(self.var_54d07407)) {
       foreach(player in getplayers()) {
         self show_portrait_to(player);
@@ -328,19 +328,19 @@ mask_sound(soundent, params, var_17ee4803) {
 
   soundent hide();
 
-  if(mask == # "friendly") {
+  if(mask == #"friendly") {
     foreach(player in getplayers()) {
       if(player.team == self.team) {
         self play_to(soundent, player);
       }
     }
-  } else if(mask == # "enemy") {
+  } else if(mask == #"enemy") {
     foreach(player in getplayers()) {
       if(player.team != self.team) {
         self play_to(soundent, player);
       }
     }
-  } else if(mask == # "self") {
+  } else if(mask == #"self") {
     if(isPlayer(self)) {
       self play_to(soundent, player);
     }
@@ -396,7 +396,7 @@ play_notetrack(scriptid) {
     str_team = self._scene_object._str_team;
   }
 
-  if(isDefined(str_team) && str_team != # "any") {
+  if(isDefined(str_team) && str_team != #"any") {
     soundent hide();
 
     foreach(player in getplayers()) {

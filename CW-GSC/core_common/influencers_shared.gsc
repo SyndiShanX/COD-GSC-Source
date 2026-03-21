@@ -34,7 +34,7 @@ function on_spawned() {
 }
 
 function on_player_death(params) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -100,7 +100,7 @@ function create_influencer_generic(str_name, origin_or_entity, str_team, is_for_
     return;
   }
 
-  if(str_team === # "any") {
+  if(str_team === #"any") {
     team_mask = level.spawnsystem.ispawn_teammask[#"all"];
   } else if(is_for_enemy) {
     team_mask = self get_enemy_team_mask(str_team);
@@ -168,7 +168,7 @@ function create_player_influencers() {
     return;
   }
 
-  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == # "spectator") {
+  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == #"spectator") {
     return;
   }
 

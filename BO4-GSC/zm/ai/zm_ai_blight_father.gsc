@@ -257,7 +257,7 @@ function_36b05ed0(entity) {
 }
 
 killed_callback(e_attacker) {
-  if(self.archetype != # "blight_father") {
+  if(self.archetype != #"blight_father") {
     return;
   }
 
@@ -273,7 +273,7 @@ killed_callback(e_attacker) {
 }
 
 function_7bef9c3c(params) {
-  if(self.archetype !== # "blight_father") {
+  if(self.archetype !== #"blight_father") {
     return;
   }
 
@@ -1215,7 +1215,7 @@ function_ef973b70(entity) {
 }
 
 function_31963d63(notifyhash) {
-  if(notifyhash === # "movedone") {
+  if(notifyhash === #"movedone") {
     self flagsys::set("grapple_moveto_done");
   }
 }
@@ -1432,7 +1432,7 @@ function_def41e89() {
 
   foreach(enemy in enemies) {
     if(self istouching(enemy)) {
-      if(isDefined(enemy.allowdeath) && enemy.allowdeath && (enemy.zm_ai_category === # "basic" || enemy.zm_ai_category === # "popcorn")) {
+      if(isDefined(enemy.allowdeath) && enemy.allowdeath && (enemy.zm_ai_category === #"basic" || enemy.zm_ai_category === #"popcorn")) {
         enemy zm_cleanup::function_23621259();
         enemy kill();
         continue;

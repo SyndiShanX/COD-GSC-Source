@@ -66,7 +66,7 @@ function function_fc04a299(party) {
       continue;
     }
 
-    if(member.squad != # "none" && member.squad != # "invalid") {
+    if(member.squad != #"none" && member.squad != #"invalid") {
       return member.squad;
     }
   }
@@ -82,7 +82,7 @@ function function_c98289a5(team) {
       continue;
     }
 
-    if(player.squad != # "none" && player.squad != # "invalid") {
+    if(player.squad != #"none" && player.squad != #"invalid") {
       return player.squad;
     }
   }
@@ -94,11 +94,11 @@ function function_faeb0876() {
   status = self player::function_3d288f14();
   squad = self function_33843308(status);
 
-  if(squad == # "none") {
+  if(squad == #"none") {
     squad = function_43a7bead();
   }
 
-  if(squad == # "none") {
+  if(squad == #"none") {
     squad = function_4f237b02();
   }
 
@@ -144,11 +144,11 @@ function function_4f237b02() {
 
 function function_33843308(status) {
   foreach(squad_name, squad in level.squads) {
-    if(status == # "game") {
-      if(isDefined(squad.voip) && squad.voip != # "game") {
+    if(status == #"game") {
+      if(isDefined(squad.voip) && squad.voip != #"game") {
         continue;
       }
-    } else if(isDefined(squad.voip) && squad.voip == # "game") {
+    } else if(isDefined(squad.voip) && squad.voip == #"game") {
       continue;
     }
 
@@ -206,28 +206,28 @@ function function_4c9d66b1() {
 }
 
 function function_c70b26ea(squad = self function_4c9d66b1()) {
-  if(squad == # "none") {
+  if(squad == #"none") {
     println("<dev string:x41>");
 
     if(level.var_c58668ea) {
       squad = function_c98289a5(self.team);
 
-      if(squad == # "none") {
+      if(squad == #"none") {
         squad = function_4f237b02();
       }
     } else {
-      squad = # "none";
+      squad = #"none";
       party = self getparty();
 
       if(isDefined(party) && party.var_a15e4438 > 1) {
         squad = function_fc04a299(party);
 
-        if(squad == # "none") {
+        if(squad == #"none") {
           squad = function_49c2a7d1();
         }
       }
 
-      if(!isDefined(squad) || squad == # "none") {
+      if(!isDefined(squad) || squad == #"none") {
         if(level.var_3312552) {
           squad = function_f65acad1();
         }
@@ -263,13 +263,13 @@ function function_ff3321ee(squad_name) {
     squad = level.squads[squad_name];
     status = self player::function_3d288f14();
 
-    if(!isDefined(squad.voip) || status != squad.voip && status == # "game") {
-      if(status == # "game") {
-        squad.voip = # "game";
+    if(!isDefined(squad.voip) || status != squad.voip && status == #"game") {
+      if(status == #"game") {
+        squad.voip = #"game";
         return;
       }
 
-      squad.voip = # "none";
+      squad.voip = #"none";
     }
   }
 }
@@ -309,7 +309,7 @@ function private function_80d5f55(squadmates, party) {
 }
 
 function function_a4c9eb05() {
-  if(self.squad != # "invalid") {
+  if(self.squad != #"invalid") {
     squadmates = function_c65231e2(self.squad);
   } else {
     squadmates = getplayers(self.team);

@@ -72,7 +72,7 @@ function checkstringvalid(hash_or_str) {
 
 function function_f1e8c2f7() {
   level.var_df2ed8a5 = [];
-  var_4ef031c9 = # "hash_684fbceddd1aace2";
+  var_4ef031c9 = #"hash_684fbceddd1aace2";
   index = 0;
 
   for(row = tablelookuprow(var_4ef031c9, index); isDefined(row); row = tablelookuprow(var_4ef031c9, index)) {
@@ -843,7 +843,7 @@ function function_739fbb72(n_base_damage, weapon, aicategory, maxhealth) {
   return int(var_5d7b4163);
 }
 
-function function_379f6b5d(n_base_damage, weapon, aicategory = # "normal", maxhealth) {
+function function_379f6b5d(n_base_damage, weapon, aicategory = #"normal", maxhealth) {
   var_b663540c = zm_utility::get_round_number();
   var_5d7b4163 = n_base_damage;
   damagestruct = undefined;

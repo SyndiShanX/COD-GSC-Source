@@ -291,7 +291,7 @@ function function_38c7f077() {
 }
 
 function function_14918351(var_1ba4f070) {
-  if(var_1ba4f070._notify === # "death") {
+  if(var_1ba4f070._notify === #"death") {
     if(!issubstr(var_1ba4f070.mod, "MELEE")) {
       level flag::set(#"hash_18fb61ee26ebbfe7");
     }
@@ -357,20 +357,20 @@ function combat() {
   a_heroes = [];
   a_heroes[a_heroes.size] = spawner::simple_spawn_single("ambush_hero_woods");
   a_heroes[a_heroes.size] = spawner::simple_spawn_single("ambush_hero_mason");
-  a_heroes[0].propername = # "hash_22f2861ded3918a8";
+  a_heroes[0].propername = #"hash_22f2861ded3918a8";
   level.woods = a_heroes[0];
-  a_heroes[1].propername = # "hash_4d5f6c0e8d8bec20";
+  a_heroes[1].propername = #"hash_4d5f6c0e8d8bec20";
   level.mason = a_heroes[1];
 
   if(isDefined(level.var_deda09e)) {
     a_heroes[a_heroes.size] = spawner::simple_spawn_single("ambush_safehouse_hero_" + level.var_deda09e);
 
     if(level.var_deda09e === "lazar") {
-      a_heroes[2].propername = # "hash_6a46f5c74f586cb6";
+      a_heroes[2].propername = #"hash_6a46f5c74f586cb6";
       level.lazar = a_heroes[2];
       level.lazar val::set(#"duga_ambush", "ignoreme", 1);
     } else {
-      a_heroes[2].propername = # "hash_a0d642b09afc71a";
+      a_heroes[2].propername = #"hash_a0d642b09afc71a";
       level.park = a_heroes[2];
       level.park val::set(#"duga_ambush", "ignoreme", 1);
     }

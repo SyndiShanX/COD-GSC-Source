@@ -491,7 +491,7 @@ function function_c436fc75() {
   while(true) {
     waitresult = var_811ae6d7 waittill(#"damage");
 
-    if(isDefined(waitresult.attacker) && waitresult.attacker.archetype === # "hash_7c0d83ac1e845ac2") {
+    if(isDefined(waitresult.attacker) && waitresult.attacker.archetype === #"hash_7c0d83ac1e845ac2") {
       var_127d143e clientfield::set("" + # "hash_21ba194bb9030d0c", 1);
       var_127d143e clientfield::set("" + # "hash_5e31ed9954a7a58a", 1);
       var_8ce27402 = util::spawn_model(#"p9_fxanim_zm_ndu_fungus_liquid", var_127d143e.origin, var_127d143e.angles);
@@ -593,7 +593,7 @@ function function_8fa801ac() {
 function private function_c801979a(s_params) {
   assert(isDefined(level.var_3789aef6));
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35" && !level flag::get("container_filled_with_gas")) {
+  if(self.subarchetype === #"hash_2a5479b83161cb35" && !level flag::get("container_filled_with_gas")) {
     waittillframeend();
 
     if(!is_true(self.var_270befd2) && isDefined(self) && isDefined(level.var_3789aef6) && self istouching(level.var_3789aef6)) {
@@ -1486,7 +1486,7 @@ function function_8d9ddc22(var_e7772c37) {
 
         result = player waittilltimeout(5, #"death", #"weapon_change_complete", #"entering_last_stand");
 
-        if(result._notify == # "timeout" || player getcurrentweapon() != var_d5c2e187) {
+        if(result._notify == #"timeout" || player getcurrentweapon() != var_d5c2e187) {
           player notify(#"hash_6a9e5d5a03df7e27");
           level scene::play(#"hash_340eb7e983e34e72" + self.var_37023f0e + "_bundle", "close");
           level notify(#"hash_142e9131e668557d");

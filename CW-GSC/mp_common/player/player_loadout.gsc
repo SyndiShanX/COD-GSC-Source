@@ -618,8 +618,8 @@ function give_talents(var_b280cc48 = 1) {
   self.var_c8836f02 = self function_fd62a2aa(self.class_num);
 
   foreach(var_ebdddedf in self.var_c8836f02) {
-    if(var_ebdddedf.namehash == # "hash_6be738527a4213aa" && level.hardcoremode) {
-      var_ebdddedf.namehash = # "hash_5c9c79c25b74b7bb";
+    if(var_ebdddedf.namehash == #"hash_6be738527a4213aa" && level.hardcoremode) {
+      var_ebdddedf.namehash = #"hash_5c9c79c25b74b7bb";
     }
 
     var_b3ed76f5 = function_c84c77d8(var_ebdddedf.loadoutslot);
@@ -634,7 +634,7 @@ function give_talents(var_b280cc48 = 1) {
 
   if(isDefined(wildcards) && wildcards.size > 0) {
     foreach(var_9bb0ceab in wildcards) {
-      if(var_9bb0ceab === # "hash_4a12859000892dda") {
+      if(var_9bb0ceab === #"hash_4a12859000892dda") {
         var_621c7d1e = 1;
       }
     }
@@ -645,13 +645,13 @@ function give_talents(var_b280cc48 = 1) {
     var_72c4edde = 0;
 
     if(var_b280cc48) {
-      if(self function_b958b70d(self.class_num, "secondarygrenade") == # "eq_stimshot") {
+      if(self function_b958b70d(self.class_num, "secondarygrenade") == #"eq_stimshot") {
         var_72c4edde = 1;
       }
     } else {
       loadout = self get_loadout_slot("secondarygrenade");
 
-      if(isDefined(loadout.weapon) && loadout.weapon.name == # "eq_stimshot") {
+      if(isDefined(loadout.weapon) && loadout.weapon.name == #"eq_stimshot") {
         var_72c4edde = 1;
       }
     }
@@ -930,7 +930,7 @@ function private function_d126318c(slot, weapon) {
 
   if(weapon.isdualwield) {
     if(#"smg_handling_t8_dw" == rootweaponname) {
-      rootweaponname = # "smg_handling_t8";
+      rootweaponname = #"smg_handling_t8";
     }
   }
 
@@ -1061,10 +1061,10 @@ function private function_8e961216(slot, previous_weapon) {
   primaryoffhandname = self function_b958b70d(self.class_num, "primarygrenade");
 
   if(primaryoffhandname == "default_specialist_equipment" && isDefined(self.playerrole) && isDefined(self.playerrole.primaryequipment)) {
-    primaryoffhandname = # "weapon_null";
+    primaryoffhandname = #"weapon_null";
   }
 
-  if(primaryoffhandname != # "" && primaryoffhandname != # "weapon_null") {
+  if(primaryoffhandname != #"" && primaryoffhandname != #"weapon_null") {
     primaryoffhand = getweapon(primaryoffhandname);
     primaryoffhandcount = 1 + self getloadoutitem(self.class_num, "primarygrenadecount");
 
@@ -1131,7 +1131,7 @@ function function_c3448ab0(slot, previous_weapon, force_give_gadget_health_regen
   } else {
     secondaryoffhandname = self function_b958b70d(self.class_num, "secondarygrenade");
 
-    if(secondaryoffhandname != # "" && secondaryoffhandname != # "weapon_null") {
+    if(secondaryoffhandname != #"" && secondaryoffhandname != #"weapon_null") {
       secondaryoffhand = getweapon(secondaryoffhandname);
       secondaryoffhandcount = 1 + self getloadoutitem(self.class_num, "secondarygrenadecount");
     }
@@ -1207,7 +1207,7 @@ function private give_special_offhand(slot, previous_weapon) {
   specialoffhandcount = 0;
   var_d07d57b2 = self function_b958b70d(self.class_num, "specialgrenade");
 
-  if(var_d07d57b2 != # "" && var_d07d57b2 != # "weapon_null") {
+  if(var_d07d57b2 != #"" && var_d07d57b2 != #"weapon_null") {
     specialoffhand = getweapon(var_d07d57b2);
     var_4ee2888b = self getloadoutitem(self.class_num, "specialgrenadecount");
     specialoffhandcount = var_4ee2888b < 0 ? 1 : 2;
@@ -1479,14 +1479,14 @@ function function_53b62db1(newclass) {
   self.curclass = newclass;
 }
 
-function function_d7c205b9(newclass, calledfrom = # "unspecified") {
+function function_d7c205b9(newclass, calledfrom = #"unspecified") {
   loadoutindex = isDefined(newclass) ? get_class_num(newclass) : undefined;
   self.pers[#"loadoutindex"] = loadoutindex;
-  var_45843e9a = calledfrom == # "give_loadout";
+  var_45843e9a = calledfrom == #"give_loadout";
   var_7f8c24df = 0;
 
   if(!var_45843e9a) {
-    var_7f8c24df = isDefined(game) && isDefined(game.state) && game.state == # "playing" && isalive(self);
+    var_7f8c24df = isDefined(game) && isDefined(game.state) && game.state == #"playing" && isalive(self);
 
     if(var_7f8c24df && self.sessionstate == "playing") {
       var_25b0cd7 = self.usingsupplystation === 1;
@@ -1541,7 +1541,7 @@ function register_perks() {
     for(i = 0; i < perks.size; i++) {
       perk = perks[i];
 
-      if(perk == # "specialty_null" || perk == # "weapon_null") {
+      if(perk == #"specialty_null" || perk == #"weapon_null") {
         continue;
       }
 

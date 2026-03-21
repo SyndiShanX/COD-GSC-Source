@@ -20,8 +20,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_2d7e36f50e763c4a"] = # "hash_3cb3a6fc9eb00337";
-  level._effect[#"hash_71f4fac26bef1997"] = # "hash_3919b64dc762cab2";
+  level._effect[#"hash_2d7e36f50e763c4a"] = #"hash_3cb3a6fc9eb00337";
+  level._effect[#"hash_71f4fac26bef1997"] = #"hash_3919b64dc762cab2";
   callback::add_callback(#"freefall", &function_c9a18304);
   callback::add_callback(#"parachute", &function_26d46af3);
   animation::add_notetrack_func("player_free_fall::parachute_detach", &parachute_detach);

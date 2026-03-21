@@ -117,7 +117,7 @@ function_8886bcc4(params) {
 }
 
 function_99ce086a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isDefined(inflictor) && inflictor.archetype === # "avogadro" && meansofdeath == "MOD_MELEE") {
+  if(isDefined(inflictor) && inflictor.archetype === #"avogadro" && meansofdeath == "MOD_MELEE") {
     self status_effect::status_effect_apply(level.var_2ea60515, undefined, inflictor, 0);
   }
 

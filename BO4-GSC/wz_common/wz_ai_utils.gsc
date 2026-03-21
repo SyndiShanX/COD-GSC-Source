@@ -25,7 +25,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.var_91a15ec0 = # "world";
+  level.var_91a15ec0 = #"world";
   level.zombie_team = level.var_91a15ec0;
   level.attackables = [];
   level.var_7fc48a1a = [];
@@ -43,21 +43,21 @@ __init__() {
 
   if(isDefined(getgametypesetting(#"hash_3109a8794543000f")) && getgametypesetting(#"hash_3109a8794543000f")) {
     if(isDefined(getgametypesetting(#"wzzombiesspawnammo")) && getgametypesetting(#"wzzombiesspawnammo")) {
-      level.zombie_itemlist = # "zombie_itemlist_ammo_close_quarters";
+      level.zombie_itemlist = #"zombie_itemlist_ammo_close_quarters";
     } else {
-      level.zombie_itemlist = # "zombie_itemlist_close_quarters";
+      level.zombie_itemlist = #"zombie_itemlist_close_quarters";
     }
   } else if(isDefined(getgametypesetting(#"wzzombiesspawnammo")) && getgametypesetting(#"wzzombiesspawnammo")) {
-    level.zombie_itemlist = # "zombie_itemlist_ammo";
+    level.zombie_itemlist = #"zombie_itemlist_ammo";
   } else {
-    level.zombie_itemlist = # "zombie_itemlist";
+    level.zombie_itemlist = #"zombie_itemlist";
   }
 
-  level.var_db43cbd7 = # "zombie_raygun_itemlist";
-  level.var_1b7acd6d = # "cu12_list";
-  level.var_72151997 = # "cu13_list";
-  level.var_14364e26 = # "cu30_list";
-  level.var_7d2bc89 = # "cu31_list";
+  level.var_db43cbd7 = #"zombie_raygun_itemlist";
+  level.var_1b7acd6d = #"cu12_list";
+  level.var_72151997 = #"cu13_list";
+  level.var_14364e26 = #"cu30_list";
+  level.var_7d2bc89 = #"cu31_list";
   clientfield::register("scriptmover", "aizoneflag", -1, 2, "int");
   clientfield::register("scriptmover", "aizoneflag_tu14", 14000, 3, "int");
   clientfield::register("scriptmover", "magicboxflag", 1, 3, "int");
@@ -442,7 +442,7 @@ function_a679f9b(params) {
     wz_ai_zonemgr::function_37411c68(self.ai_zone, self);
 
     if(isDefined(params.eattacker) && isPlayer(params.eattacker)) {
-      if(self.archetype == # "zombie") {
+      if(self.archetype == #"zombie") {
         self.ai_zone.var_58ba2ab7++;
         return;
       }
@@ -658,7 +658,7 @@ function_7a1e21a9(attacker, v_origin, min_radius = 50, max_radius = 70, var_4dd1
   n_power = 100;
   time = self fake_physicslaunch(dest_origin, n_power);
 
-  if(self.item.name == # "ray_gun") {
+  if(self.item.name == #"ray_gun") {
     self playSound(#"mus_raygun_stinger");
   } else {
     self playSound(#"zmb_spawn_powerup");
@@ -1248,7 +1248,7 @@ function_71578099() {
   nodes = getallnodes();
 
   foreach(node in nodes) {
-    if(node.type != # "begin") {
+    if(node.type != #"begin") {
       continue;
     }
 
@@ -1259,7 +1259,7 @@ function_71578099() {
         var_a6131e58 = 0;
 
         foreach(dynent in dynentarray) {
-          if(dynent.var_15d44120 === # "p8_fxanim_wz_rollup_door_medium_mod") {
+          if(dynent.var_15d44120 === #"p8_fxanim_wz_rollup_door_medium_mod") {
             var_a6131e58 = 1;
             break;
           }
@@ -1309,7 +1309,7 @@ function_9caf8627() {
   nodes = getallnodes();
 
   foreach(node in nodes) {
-    if(node.type != # "begin" && node.type != # "end") {
+    if(node.type != #"begin" && node.type != #"end") {
       continue;
     }
 

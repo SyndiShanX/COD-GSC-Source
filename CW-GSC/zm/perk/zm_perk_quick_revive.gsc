@@ -163,7 +163,7 @@ function quick_revive_precache() {
     return;
   }
 
-  level._effect[#"revive_light"] = # "zombie/fx_perk_quickrevive_ndu";
+  level._effect[#"revive_light"] = #"zombie/fx_perk_quickrevive_ndu";
   level.machine_assets[#"talent_quickrevive"] = spawnStruct();
   level.machine_assets[#"talent_quickrevive"].weapon = getweapon("zombie_perk_bottle_revive");
   level.machine_assets[#"talent_quickrevive"].off_model = "p9_sur_machine_quick_revive_off";
@@ -355,7 +355,7 @@ function restart_quickrevive() {
       continue;
     }
 
-    if(trigger.script_noteworthy == # "talent_quickrevive") {
+    if(trigger.script_noteworthy == #"talent_quickrevive") {
       trigger notify(#"stop_quickrevive_logic");
       trigger thread zm_perks::vending_trigger_think();
       trigger triggerenable(1);

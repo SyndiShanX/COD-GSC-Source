@@ -328,11 +328,11 @@ function function_34459363(var_e9724d01, var_d2b863b2) {
   level flag::set(#"mission_failed");
 
   if(!isDefined(var_e9724d01)) {
-    var_e9724d01 = # "";
+    var_e9724d01 = #"";
   }
 
   if(!isDefined(var_d2b863b2)) {
-    var_d2b863b2 = # "";
+    var_d2b863b2 = #"";
   }
 
   foreach(player in level.players) {
@@ -397,7 +397,7 @@ function function_34459363(var_e9724d01, var_d2b863b2) {
     wait var_effac39e;
   }
 
-  if(var_e9724d01 != # "" || var_d2b863b2 != # "") {
+  if(var_e9724d01 != #"" || var_d2b863b2 != #"") {
     wait 2.6;
   }
 

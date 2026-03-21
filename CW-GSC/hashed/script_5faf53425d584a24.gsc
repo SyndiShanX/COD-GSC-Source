@@ -104,7 +104,7 @@ function private function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
             if(isDefined(stash) && is_true(stash.lootlocker)) {
               var_97809692 = player item_inventory::function_2e711614(10);
 
-              if(var_97809692.itementry.name == # "resource_item_loot_locker_key") {
+              if(var_97809692.itementry.name == #"resource_item_loot_locker_key") {
                 player item_inventory::use_inventory_item(var_97809692.networkid, 1);
 
                 if(!isDefined(player.var_fbcc86d3)) {
@@ -116,7 +116,7 @@ function private function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
 
               var_97809692 = player item_inventory::function_2e711614(10);
 
-              if(!isDefined(var_97809692.itementry) || var_97809692.itementry.name != # "resource_item_loot_locker_key") {
+              if(!isDefined(var_97809692.itementry) || var_97809692.itementry.name != #"resource_item_loot_locker_key") {
                 stash.var_193b3626 = undefined;
               }
 
@@ -140,9 +140,9 @@ function private function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
       if(item_world_util::function_2c7fc531(networkid)) {
         itemid = networkid;
         item = function_b1702735(itemid);
-        assert(item.itementry.itemtype == # "ammo");
+        assert(item.itementry.itemtype == #"ammo");
 
-        if(item.itementry.itemtype == # "ammo") {
+        if(item.itementry.itemtype == #"ammo") {
           var_a1ca235e = item.itementry;
           var_3d1f9df4 = count;
           player item_inventory::function_ecd1c667(itemid, count);
@@ -204,7 +204,7 @@ function private function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
         return;
       }
 
-      if(item.itementry.itemtype == # "weapon") {
+      if(item.itementry.itemtype == #"weapon") {
         var_bd31d7b2 = player item_inventory::function_ec087745();
 
         if(equipdata == 1 && var_bd31d7b2 != 32767) {
@@ -218,7 +218,7 @@ function private function_23b313bd(player, eventtype, eventdata, var_c5a66313) {
           break;
         }
 
-        var_641d3dc2 = item.itementry.itemtype != # "attachment";
+        var_641d3dc2 = item.itementry.itemtype != #"attachment";
         itementry = item.itementry;
         player item_world::pickup_item(item, var_641d3dc2);
 

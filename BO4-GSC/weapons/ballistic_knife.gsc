@@ -9,7 +9,7 @@
 #namespace ballistic_knife;
 
 init_shared() {
-  level.var_f676fe5a = # "hash_4b7ed37163f1ec57";
+  level.var_f676fe5a = #"hash_4b7ed37163f1ec57";
   weaponobjects::function_e6400478(#"special_ballisticknife_t8_dw", &createballisticknifewatcher, 0);
   weaponobjects::function_e6400478(#"special_ballisticknife_t8_dw_dw", &createballisticknifewatcher, 0);
   weaponobjects::function_e6400478(#"hash_4646a4e86c781e84", &createballisticknifewatcher, 0);

@@ -665,7 +665,7 @@ function_425d8006() {
   var_d7760961 = isDefined(level.spawnbeaconsettings.settingsbundle.var_26f4f5f0) ? level.spawnbeaconsettings.settingsbundle.var_26f4f5f0 : 0;
   var_f1c32a14 = "";
 
-  if(spawnbeacon.team == # "allies") {
+  if(spawnbeacon.team == #"allies") {
     var_f1c32a14 = "A";
   } else {
     var_f1c32a14 = "B";

@@ -417,7 +417,7 @@ function all_players_spawned() {
     count = 0;
 
     for(i = 0; i < players.size; i++) {
-      if(players[i].sessionstate == "playing" || players[i].team == # "spectator" && players[i].sessionstate == "spectator") {
+      if(players[i].sessionstate == "playing" || players[i].team == #"spectator" && players[i].sessionstate == "spectator") {
         count++;
       }
     }

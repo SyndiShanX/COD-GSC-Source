@@ -40,7 +40,7 @@ function function_f95cb457(start, target, time, ease_type, ease_in, ease_out, va
   assert(self isPlayer());
   assert(target > 0);
 
-  if(!isDefined(start) && ease_type == # "linear") {
+  if(!isDefined(start) && ease_type == #"linear") {
     self function_49cdf043(math::clamp(target, isDefined(min) ? min : 1e-05, isDefined(max) ? max : 2147483647), time);
     return;
   }
@@ -136,7 +136,7 @@ function ease_angles(localclientnum, target, time, ease_type, axis, additive, ea
   self thread function_d4a4a726(localclientnum, start_value, target, time, callback, ease_type, "ease_angles", endons, ease_in, ease_out, var_33ce6852, axis);
 }
 
-function function_d4a4a726(localclientnum, start_value, target_value, time, callback_func, ease_type = # "linear", notifies, endons, ease_in, ease_out, var_33ce6852, ...) {
+function function_d4a4a726(localclientnum, start_value, target_value, time, callback_func, ease_type = #"linear", notifies, endons, ease_in, ease_out, var_33ce6852, ...) {
   assert(isDefined(level.ease_funcs));
   assert(isDefined(level.ease_funcs[ease_type]));
   localplayer = function_5c10bd79(localclientnum);

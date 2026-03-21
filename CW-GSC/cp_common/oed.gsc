@@ -59,12 +59,12 @@ function event_handler[button_bit_actionslot_1_pressed] function_84d84898() {
 }
 
 function function_9eccf6c1() {
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     self enable_thermal();
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self enable_thermal();
   }
 }

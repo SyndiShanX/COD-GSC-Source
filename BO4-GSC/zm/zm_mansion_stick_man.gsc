@@ -698,7 +698,7 @@ function_3ce20299() {
 function_eabb32ca() {
   self endon(#"death");
   n_char_index = self zm_characters::function_d35e4c92();
-  self.var_aa24164d = # "hash_74d6f512c6c0b04c" + self.characterindex + "_0";
+  self.var_aa24164d = #"hash_74d6f512c6c0b04c" + self.characterindex + "_0";
   self zm_vo::vo_say(self.var_aa24164d, 1.5, 1, 9999, 1, 1, 1);
   level notify(#"hash_132b5b79b9aeaf9e");
 }
@@ -1060,18 +1060,18 @@ player_stuck() {
   self allowprone(0);
 
   if(self.str_name === "pic_gypsy") {
-    level.var_9661fac0 = # "scene_zm_mansn_wm_fem_fullsequence";
-    var_cab90298 = # "hash_3475f0b9b2ad7422";
+    level.var_9661fac0 = #"scene_zm_mansn_wm_fem_fullsequence";
+    var_cab90298 = #"hash_3475f0b9b2ad7422";
   } else {
-    level.var_9661fac0 = # "scene_zm_mansn_wm_male_fullsequence";
-    var_cab90298 = # "hash_54f8a53a5930ed55";
+    level.var_9661fac0 = #"scene_zm_mansn_wm_male_fullsequence";
+    var_cab90298 = #"hash_54f8a53a5930ed55";
   }
 
   var_3add8e25 = struct::get("s_stick_scene", "targetname");
   var_3add8e25 thread scene::play(level.var_9661fac0, self);
   s_result = self waittilltimeout(getanimlength(var_cab90298), #"hash_1544918b5f670dae");
 
-  if(s_result._notify === # "hash_1544918b5f670dae") {
+  if(s_result._notify === #"hash_1544918b5f670dae") {
     b_watcher = 0;
   } else {
     b_watcher = 1;
@@ -1135,7 +1135,7 @@ lead_player(nd_start, player) {
   player endon(#"disconnect");
   player thread function_45cfa31(self);
   self.var_c176969a = spawner::simple_spawn_single(getent("veh_power_on_projectile", "targetname"));
-  self.var_c176969a.team = # "allies";
+  self.var_c176969a.team = #"allies";
   self.var_c176969a.var_6353e3f1 = 1;
   self.var_c176969a setspeed(7);
   self.var_c176969a.origin = nd_start.origin;
@@ -1188,28 +1188,28 @@ function_45cfa31(mdl_ghost) {
 
   switch (n_character_index) {
     case 10:
-      var_1f92304d = # "hash_741e29cc775db83e";
-      var_1616bdce = # "hash_6bdc47828f660dbb";
-      var_8954c16e = # "hash_16fcfe9abf1617bc";
-      var_80192cb1 = # "hash_762bdec6a06169a5";
+      var_1f92304d = #"hash_741e29cc775db83e";
+      var_1616bdce = #"hash_6bdc47828f660dbb";
+      var_8954c16e = #"hash_16fcfe9abf1617bc";
+      var_80192cb1 = #"hash_762bdec6a06169a5";
       break;
     case 12:
-      var_1f92304d = # "hash_6bec691584ea685f";
-      var_1616bdce = # "hash_261ab4742c24d198";
-      var_8954c16e = # "hash_4d56b3f9f5d80d5f";
-      var_80192cb1 = # "hash_6c4f7d192847d762";
+      var_1f92304d = #"hash_6bec691584ea685f";
+      var_1616bdce = #"hash_261ab4742c24d198";
+      var_8954c16e = #"hash_4d56b3f9f5d80d5f";
+      var_80192cb1 = #"hash_6c4f7d192847d762";
       break;
     case 11:
-      var_1f92304d = # "hash_2ff0b0abb26e1dcc";
-      var_1616bdce = # "hash_542f688a23fb4faa";
-      var_8954c16e = # "hash_d0ee848487e6e89";
-      var_80192cb1 = # "hash_7228b71e32509514";
+      var_1f92304d = #"hash_2ff0b0abb26e1dcc";
+      var_1616bdce = #"hash_542f688a23fb4faa";
+      var_8954c16e = #"hash_d0ee848487e6e89";
+      var_80192cb1 = #"hash_7228b71e32509514";
       break;
     case 9:
-      var_1f92304d = # "hash_5d5042a83172ac71";
-      var_1616bdce = # "hash_5df4633a4e23f150";
-      var_8954c16e = # "hash_52a4d5c9366fd9ab";
-      var_80192cb1 = # "hash_2a80120b6197a78e";
+      var_1f92304d = #"hash_5d5042a83172ac71";
+      var_1616bdce = #"hash_5df4633a4e23f150";
+      var_8954c16e = #"hash_52a4d5c9366fd9ab";
+      var_80192cb1 = #"hash_2a80120b6197a78e";
       break;
   }
 
@@ -1741,10 +1741,10 @@ function_2c554640() {
   var_1b2ca394 = getent("pic_brigadier", "targetname");
   var_3c9ce3a9 = getent("pic_butler", "targetname");
   var_36ebb951 = getent("pic_gunslinger", "targetname");
-  var_6adbf325.var_3916fb8b = # "p8_zm_headstone_engraving_1950";
-  var_1b2ca394.var_3916fb8b = # "p8_zm_headstone_engraving_1918";
-  var_3c9ce3a9.var_3916fb8b = # "p8_zm_headstone_engraving_1927";
-  var_36ebb951.var_3916fb8b = # "p8_zm_headstone_engraving_1945";
+  var_6adbf325.var_3916fb8b = #"p8_zm_headstone_engraving_1950";
+  var_1b2ca394.var_3916fb8b = #"p8_zm_headstone_engraving_1918";
+  var_3c9ce3a9.var_3916fb8b = #"p8_zm_headstone_engraving_1927";
+  var_36ebb951.var_3916fb8b = #"p8_zm_headstone_engraving_1945";
   level.var_d70578ff = array(var_6adbf325, var_1b2ca394, var_3c9ce3a9, var_36ebb951);
 
   for(i = 0; i < level.var_d70578ff.size; i++) {

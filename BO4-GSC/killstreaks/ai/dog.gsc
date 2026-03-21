@@ -109,7 +109,7 @@ function_a543b380(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -883,7 +883,7 @@ function_668f9379(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
 }
 
 event_handler[bhtn_action_start] function_df9abf31(eventstruct) {
-  if(isDefined(self.archetype) && self.archetype == # "mp_dog") {
+  if(isDefined(self.archetype) && self.archetype == #"mp_dog") {
     if(eventstruct.action == "bark") {
       self playSound(#"aml_dog_run_bark");
     }

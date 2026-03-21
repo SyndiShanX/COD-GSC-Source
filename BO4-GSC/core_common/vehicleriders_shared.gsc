@@ -297,15 +297,15 @@ function_e84837df(ai, vehicle) {
   assert(isDefined(ai.archetype));
   assert(function_196797c9(vehicle));
 
-  if(ai.archetype == # "robot") {
+  if(ai.archetype == #"robot") {
     return vehicle get_robot_bundle();
   }
 
-  if(ai.archetype == # "warlord") {
+  if(ai.archetype == #"warlord") {
     return vehicle get_warlord_bundle();
   }
 
-  assert(ai.archetype == # "human", "<dev string:x13f>" + ai.archetype);
+  assert(ai.archetype == #"human", "<dev string:x13f>" + ai.archetype);
   return vehicle get_human_bundle();
 }
 

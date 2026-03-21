@@ -49,12 +49,12 @@ __init__() {
   level.var_b8ce09f3 = 2000;
   level.var_c83a9084 = 0;
   level.var_3ee83e3f = [];
-  level.var_3ee83e3f[0] = # "grass";
-  level.var_3ee83e3f[1] = # "sand";
-  level.var_3ee83e3f[2] = # "dirt";
-  level.var_3ee83e3f[3] = # "mud";
-  level.var_3ee83e3f[4] = # "rock";
-  level.var_3ee83e3f[5] = # "asphalt";
+  level.var_3ee83e3f[0] = #"grass";
+  level.var_3ee83e3f[1] = #"sand";
+  level.var_3ee83e3f[2] = #"dirt";
+  level.var_3ee83e3f[3] = #"mud";
+  level.var_3ee83e3f[4] = #"rock";
+  level.var_3ee83e3f[5] = #"asphalt";
   level.var_9ee73630 = [];
   level.var_9ee73630[#"walk"] = [];
   level.var_9ee73630[#"run"] = [];
@@ -202,7 +202,7 @@ custom_melee_fire() {
     eye_pos = self getEye();
     vehicle = self.enemy getvehicleoccupied();
 
-    if(isDefined(vehicle) && vehicle.scriptvehicletype == # "player_motorcycle") {
+    if(isDefined(vehicle) && vehicle.scriptvehicletype == #"player_motorcycle") {
       hitent = self function_987a9b39(self.enemy gettagorigin("j_spine4") - eye_pos, idflags);
     }
   }
@@ -452,7 +452,7 @@ function_cf051788() {
   self.clamptonavmesh = 0;
   self.var_ff3f3261 = 0;
 
-  if(isDefined(level.var_ff8e9324) && (self.aitype == # "spawner_boct_zombie_wz" || self.aitype == # "spawner_boct_zombie_mob_wz")) {
+  if(isDefined(level.var_ff8e9324) && (self.aitype == #"spawner_boct_zombie_wz" || self.aitype == #"spawner_boct_zombie_mob_wz")) {
     if(randomint(100) <= level.var_ff8e9324) {
       self.var_ff3f3261 = 1;
     }
@@ -565,7 +565,7 @@ function_c75fae30(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     idamage = self.health + 1;
   }
 
-  if((getdvarint(#"survival_prototype", 0) || getdvarint(#"cluster_awareness", 0)) && isDefined(weapon) && (!isDefined(weapon.statname) || weapon.statname !== # "melee_bowie" && weapon.statname !== # "hatchet") && !isDefined(self.enemy_override) && !isDefined(self.favoriteenemy) && isDefined(eattacker) && isPlayer(eattacker)) {
+  if((getdvarint(#"survival_prototype", 0) || getdvarint(#"cluster_awareness", 0)) && isDefined(weapon) && (!isDefined(weapon.statname) || weapon.statname !== #"melee_bowie" && weapon.statname !== #"hatchet") && !isDefined(self.enemy_override) && !isDefined(self.favoriteenemy) && isDefined(eattacker) && isPlayer(eattacker)) {
     self function_efc86793(self.origin, 300, self.team, 5, eattacker);
   }
 
@@ -1180,7 +1180,7 @@ function_cb2c8fea() {
     radius = undefined;
     entity = undefined;
 
-    if(waitresult._notify === # "glass_smash") {
+    if(waitresult._notify === #"glass_smash") {
       origin = waitresult.position;
       radius = 1000;
       ai = getentitiesinradius(origin, 50, 15);
@@ -1524,7 +1524,7 @@ function_5c293c05(entity) {
 }
 
 chase_enter(entity) {
-  if(entity.archetype === # "zombie") {
+  if(entity.archetype === #"zombie") {
     n_random = randomint(100);
 
     if(n_random < 33) {
@@ -1649,7 +1649,7 @@ function_d3a12e63() {
 }
 
 update_goal() {
-  if(isDefined(self.var_80780af2) && (isinarray(level.var_8de0b84e, self getentitynumber()) || self.archetype == # "blight_father")) {
+  if(isDefined(self.var_80780af2) && (isinarray(level.var_8de0b84e, self getentitynumber()) || self.archetype == #"blight_father")) {
     if(!self.allowoffnavmesh && self.isonnavmesh) {
       adjustedgoal = getclosestpointonnavmesh(self.var_80780af2, 100, self getpathfindingradius());
 
@@ -1740,7 +1740,7 @@ function function_6397251f() {
 
   trace = bulletTrace(self.origin, self.origin + (0, 0, level.var_12956b7c * -1), 0, self, 0);
 
-  if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != # "none") {
+  if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != #"none") {
     pos = trace[#"position"];
     self.surfacetype = trace[#"surfacetype"];
 
@@ -1752,8 +1752,8 @@ function function_6397251f() {
 
     trace2 = bulletTrace(self.origin + (0, 0, level.var_12956b7c * -1), self.origin + (0, 0, level.var_6838a92d * -1), 0, self, 0);
 
-    if(isDefined(trace2[#"position"]) && trace2[#"surfacetype"] != # "none") {
-      if(trace2[#"surfacetype"] != # "default") {
+    if(isDefined(trace2[#"position"]) && trace2[#"surfacetype"] != #"none") {
+      if(trace2[#"surfacetype"] != #"default") {
         drawdebugcross(pos, 5, (1, 0, 0), 1);
 
         return 0;
@@ -1776,7 +1776,7 @@ function function_6397251f() {
 
         trace3 = bulletTrace(pos2 + (0, 0, level.var_6838a92d * -1), pos2 + (0, 0, level.var_b8ce09f3 * -1), 0, self, 0);
 
-        if(isDefined(trace3[#"position"]) && trace3[#"surfacetype"] != # "none") {
+        if(isDefined(trace3[#"position"]) && trace3[#"surfacetype"] != #"none") {
           pos3 = trace3[#"position"];
           var_bc50df31 = trace3[#"surfacetype"];
 
@@ -1802,7 +1802,7 @@ function function_6397251f() {
 function_b67c088d() {
   enemy_override = undefined;
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     enemy_override = self function_a9cfe717();
   }
 
@@ -2479,7 +2479,7 @@ function_bfc25c77(entity) {
 
   startnode = entity.traversestartnode;
 
-  if(entity.traversestartnode.type == # "end") {
+  if(entity.traversestartnode.type == #"end") {
     startnode = getothernodeinnegotiationpair(entity.traversestartnode);
   }
 
@@ -2533,7 +2533,7 @@ function_7c8e35e8(entity, asmstate) {
   if(isDefined(self.traversestartnode)) {
     node = entity.traversestartnode;
 
-    if(entity.traversestartnode.type !== # "begin" && entity.traversestartnode.type !== "Volume") {
+    if(entity.traversestartnode.type !== #"begin" && entity.traversestartnode.type !== "Volume") {
       node = getothernodeinnegotiationpair(node);
     }
 
@@ -3331,7 +3331,7 @@ function_c2be61f2() {
     self waittill(#"state_changed");
     waitframe(1);
 
-    if(self.current_state.name == # "chase") {
+    if(self.current_state.name == #"chase") {
       bhtnactionstartevent(self, "chase_state_start");
     }
   }

@@ -41,7 +41,7 @@ function add_hackable_object(obj, test_callback, start_callback, fail_callback, 
   }
 
   if(!isDefined(obj.hackable_progress_prompt)) {
-    obj.hackable_progress_prompt = # "weapon/hacking";
+    obj.hackable_progress_prompt = #"weapon/hacking";
   }
 
   if(!isDefined(obj.hackable_cost_mult)) {

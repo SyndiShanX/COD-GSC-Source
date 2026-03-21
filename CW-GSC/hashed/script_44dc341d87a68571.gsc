@@ -161,7 +161,7 @@ function private gladiatortargetservice(entity) {
       entity.hasseenfavoriteenemy = 1;
       entity.var_908a5d30 = 1;
 
-      if(entity.subarchetype == # "gladiator_destroyer") {
+      if(entity.subarchetype == #"gladiator_destroyer") {
         entity setblackboardattribute("_gladiator_react", "idle");
 
         if(entity haspath()) {
@@ -197,7 +197,7 @@ function private gladiatortargetservice(entity) {
         }
       }
 
-      if(entity.subarchetype == # "gladiator_marauder") {
+      if(entity.subarchetype == #"gladiator_marauder") {
         entity ai::set_behavior_attribute("run", 1);
       }
     }
@@ -239,7 +239,7 @@ function private function_4f73587a(entity) {
 }
 
 function private function_4660925e(entity) {
-  if(entity.subarchetype == # "gladiator_destroyer") {
+  if(entity.subarchetype == #"gladiator_destroyer") {
     return true;
   }
 
@@ -276,7 +276,7 @@ function private function_edd0777f(entity) {
     return false;
   }
 
-  if(entity.subarchetype != # "gladiator_destroyer") {
+  if(entity.subarchetype != #"gladiator_destroyer") {
     return false;
   }
 
@@ -378,7 +378,7 @@ function function_13f886a2(entity) {
 
   var_17c3916f = sqr(128);
 
-  if(self.subarchetype == # "gladiator_marauder") {
+  if(self.subarchetype == #"gladiator_marauder") {
     if(gettime() < entity.next_leap_time) {
       return false;
     }
@@ -395,7 +395,7 @@ function function_13f886a2(entity) {
     if(z_diff > 72) {
       return false;
     }
-  } else if(self.subarchetype == # "gladiator_destroyer") {
+  } else if(self.subarchetype == #"gladiator_destroyer") {
     z_diff = abs(entity.origin[2] - entity.favoriteenemy.origin[2]);
 
     if(z_diff > 48) {
@@ -429,7 +429,7 @@ function function_61e7d5f5(entity) {
     return false;
   }
 
-  if(self.subarchetype != # "gladiator_destroyer") {
+  if(self.subarchetype != #"gladiator_destroyer") {
     return false;
   }
 
@@ -517,7 +517,7 @@ function private function_fe0ecd9f(entity) {
 }
 
 function private function_6719445a(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = 1;
     entity.var_c2986b66 = 1;
     entity function_d1242576();
@@ -527,7 +527,7 @@ function private function_6719445a(entity) {
 }
 
 function private function_fced00e1(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = undefined;
     entity.var_c2986b66 = undefined;
     entity function_d1242576();
@@ -537,14 +537,14 @@ function private function_fced00e1(entity) {
 }
 
 function private function_3963581d(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = 1;
     entity.var_c2986b66 = 1;
   }
 }
 
 function private function_dfbf9d5e(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = undefined;
     entity.var_c2986b66 = undefined;
   }
@@ -562,7 +562,7 @@ function private function_6ba071ff(entity) {
 function private function_3ca98f5a(entity) {
   entity pathmode("dont move", 1);
 
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_4f1b8d2b = 1;
   }
 }
@@ -832,7 +832,7 @@ function function_5af2c5ef() {
   self.zombie_move_speed = "walk";
   self collidewithactors(1);
 
-  if(self.subarchetype == # "gladiator_destroyer") {
+  if(self.subarchetype == #"gladiator_destroyer") {
     self.var_3a001247 = 1;
     self function_f6a04c04();
     self thread namespace_9fc66ac::function_ba33d23d(#"hash_6be5064b066a7b98", #"hash_6be5064b066a7b98", #"hash_33fa791e022eebca");
@@ -842,7 +842,7 @@ function function_5af2c5ef() {
     if(isDefined(self.org)) {
       self.org thread namespace_ec06fe4a::function_d55f042c(self, "death");
     }
-  } else if(self.subarchetype == # "gladiator_marauder") {
+  } else if(self.subarchetype == #"gladiator_marauder") {
     self function_2617ff14();
     self.next_leap_time = gettime() + 3000;
     self thread namespace_9fc66ac::function_ba33d23d(#"hash_777f818e6f3092bc", #"hash_777f818e6f3092bc", #"hash_2abe1fa45408f3b6");
@@ -874,11 +874,11 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
     return 0;
   }
 
-  if(is_true(self.var_6dc6e670) || meansofdeath === # "mod_unknown" || meansofdeath === # "mod_crush") {
+  if(is_true(self.var_6dc6e670) || meansofdeath === #"mod_unknown" || meansofdeath === #"mod_crush") {
     return (self.health + 187);
   }
 
-  if(isDefined(attacker) && self.subarchetype == # "gladiator_marauder" && !isDefined(self.var_4f1b8d2b)) {
+  if(isDefined(attacker) && self.subarchetype == #"gladiator_marauder" && !isDefined(self.var_4f1b8d2b)) {
     if(issentient(attacker)) {
       self.favoriteenemy = attacker;
       self.var_4f1b8d2b = 1;
@@ -895,7 +895,7 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 
     if(isDefined(weakpoints)) {
       foreach(pointinfo in weakpoints) {
-        if(namespace_81245006::function_f29756fe(pointinfo) === 1 && pointinfo.type === # "armor") {
+        if(namespace_81245006::function_f29756fe(pointinfo) === 1 && pointinfo.type === #"armor") {
           var_dd54fdb1 = pointinfo;
           var_88e794fb = 1;
           break;
@@ -1006,7 +1006,7 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
         return adjusted_damage;
       }
 
-      if(var_dd54fdb1.type === # "armor") {
+      if(var_dd54fdb1.type === #"armor") {
         if(isDefined(attacker)) {
           attacker util::show_hit_marker(!isalive(self));
         }
@@ -1020,7 +1020,7 @@ function private function_75f32da6(inflictor, attacker, damage, idflags, meansof
 }
 
 function private function_3b8907b9(s_params) {
-  if(self.archetype != # "gladiator") {
+  if(self.archetype != #"gladiator") {
     return;
   }
 

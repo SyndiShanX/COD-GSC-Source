@@ -31,8 +31,8 @@ function postload() {
 
 function function_f1582254(s_params) {
   if(isDefined(s_params.eattacker) && s_params.eattacker.targetname === "cp_explosive_barrel") {
-    level.var_85b00b2b = # "hash_15e17b6bf6d3ac93";
-    level.var_30eb363 = # "hash_4c1c409797e3d6ee";
+    level.var_85b00b2b = #"hash_15e17b6bf6d3ac93";
+    level.var_30eb363 = #"hash_4c1c409797e3d6ee";
   }
 }
 

@@ -63,7 +63,7 @@ on_player_killed() {
     attacker.var_8edd57b6 = 0;
   }
 
-  if(weapon.name === # "eq_molotov" || weapon.name === # "molotov_fire" || weapon.name === # "wraith_fire_fire" || weapon.name === # "eq_wraith_fire" || weapon.name === # "hero_flamethrower") {
+  if(weapon.name === #"eq_molotov" || weapon.name === #"molotov_fire" || weapon.name === #"wraith_fire_fire" || weapon.name === #"eq_wraith_fire" || weapon.name === #"hero_flamethrower") {
     attacker.var_8edd57b6++;
   }
 

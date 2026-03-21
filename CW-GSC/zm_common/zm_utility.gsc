@@ -99,7 +99,7 @@ function init_utility() {
 
 function is_classic() {
   if(!isDefined(level.var_8d156cf3)) {
-    level.var_8d156cf3 = util::get_game_type() == # "zclassic" || util::get_game_type() == # "zholiday";
+    level.var_8d156cf3 = util::get_game_type() == #"zclassic" || util::get_game_type() == #"zholiday";
   }
 
   return level.var_8d156cf3;
@@ -107,7 +107,7 @@ function is_classic() {
 
 function is_survival() {
   if(!isDefined(level.var_50d2a17f)) {
-    level.var_50d2a17f = util::get_game_type() == # "zsurvival";
+    level.var_50d2a17f = util::get_game_type() == #"zsurvival";
   }
 
   return level.var_50d2a17f;
@@ -115,7 +115,7 @@ function is_survival() {
 
 function function_c200446c() {
   if(!isDefined(level.var_e9ff2970)) {
-    level.var_e9ff2970 = util::get_game_type() == # "zonslaught" || is_true(level.var_ce3ac5b6);
+    level.var_e9ff2970 = util::get_game_type() == #"zonslaught" || is_true(level.var_ce3ac5b6);
   }
 
   return level.var_e9ff2970;
@@ -123,7 +123,7 @@ function function_c200446c() {
 
 function is_standard() {
   if(!isDefined(level.var_9bd33c61)) {
-    level.var_9bd33c61 = util::get_game_type() == # "zstandard";
+    level.var_9bd33c61 = util::get_game_type() == #"zstandard";
   }
 
   return level.var_9bd33c61;
@@ -131,7 +131,7 @@ function is_standard() {
 
 function is_trials() {
   if(!isDefined(level.var_bc0dd8f3)) {
-    level.var_bc0dd8f3 = util::get_game_type() == # "hash_32a608b582834498";
+    level.var_bc0dd8f3 = util::get_game_type() == #"hash_32a608b582834498";
   }
 
   return level.var_bc0dd8f3 || level flag::exists(#"ztrial");
@@ -139,7 +139,7 @@ function is_trials() {
 
 function is_tutorial() {
   if(!isDefined(level.var_f9cd414c)) {
-    level.var_f9cd414c = util::get_game_type() == # "ztutorial";
+    level.var_f9cd414c = util::get_game_type() == #"ztutorial";
   }
 
   return level.var_f9cd414c;
@@ -147,7 +147,7 @@ function is_tutorial() {
 
 function is_grief() {
   if(!isDefined(level.var_80b0bb3d)) {
-    level.var_80b0bb3d = util::get_game_type() == # "zgrief";
+    level.var_80b0bb3d = util::get_game_type() == #"zgrief";
   }
 
   return level.var_80b0bb3d;
@@ -155,7 +155,7 @@ function is_grief() {
 
 function function_c4b020f8() {
   if(!isDefined(level.var_7ef56397)) {
-    level.var_7ef56397 = util::get_game_type() == # "zcranked";
+    level.var_7ef56397 = util::get_game_type() == #"zcranked";
   }
 
   return level.var_7ef56397;
@@ -163,7 +163,7 @@ function function_c4b020f8() {
 
 function function_6931bc89() {
   if(!isDefined(level.var_2abedddf)) {
-    level.var_2abedddf = util::get_game_type() == # "doa";
+    level.var_2abedddf = util::get_game_type() == #"doa";
   }
 
   return level.var_2abedddf;
@@ -4795,7 +4795,7 @@ function function_9ad5aeb1(var_a8d0b313 = 1, var_82ea43f2 = 1, b_hide_body = 0, 
         ai zm_cleanup::function_23621259(0);
       }
 
-      if(var_82ea43f2 || ai.zm_ai_category !== # "normal") {
+      if(var_82ea43f2 || ai.zm_ai_category !== #"normal") {
         if(is_magic_bullet_shield_enabled(ai)) {
           ai util::stop_magic_bullet_shield();
         }
@@ -4805,7 +4805,7 @@ function function_9ad5aeb1(var_a8d0b313 = 1, var_82ea43f2 = 1, b_hide_body = 0, 
         ai.deathpoints_already_given = 1;
         ai.marked_for_death = 1;
 
-        if(!b_hide_body && ai.zm_ai_category === # "normal" && var_4b9821e4 < 6) {
+        if(!b_hide_body && ai.zm_ai_category === #"normal" && var_4b9821e4 < 6) {
           var_4b9821e4++;
           ai thread zombie_death::flame_death_fx();
 
@@ -5126,7 +5126,7 @@ function function_10e38d86() {
   return getscriptbundle("zombie_vars_settings");
 }
 
-function function_36eb0acc(str_rarity = # "none") {
+function function_36eb0acc(str_rarity = #"none") {
   switch (str_rarity) {
     case # "none":
       self clientfield::set("model_rarity_rob", 1);
@@ -5173,7 +5173,7 @@ function function_e3025ca5() {
       var_cf03ccb6 = level.var_9b7bd0e8 + 1;
     }
 
-    if(util::get_game_type() === # "hash_125fc0c0065c7dea") {
+    if(util::get_game_type() === #"hash_125fc0c0065c7dea") {
       var_cf03ccb6 = floor(var_cf03ccb6 / 3);
 
       if(var_cf03ccb6 < 1) {

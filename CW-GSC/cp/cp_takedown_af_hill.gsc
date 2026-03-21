@@ -126,8 +126,8 @@ function main(var_d3440450, var_50cc0d4f) {
   thread function_84d4429e(player);
   res = player waittilltimeout(10, #"end_binocs", #"weapon_change", #"weapon_fired");
 
-  if(res._notify != # "timeout") {
-    if(res._notify != # "weapon_fired") {
+  if(res._notify != #"timeout") {
+    if(res._notify != #"weapon_fired") {
       res = player waittilltimeout(10, #"weapon_fired");
     }
   }
@@ -135,7 +135,7 @@ function main(var_d3440450, var_50cc0d4f) {
   level flag::set("end_binocs");
   player notify(#"end_binocs");
 
-  if(res._notify != # "timeout") {
+  if(res._notify != #"timeout") {
     level music::setmusicstate("none");
     level music::function_edda155f("b4.2_shot");
     var_7810080a = level.arash waittilltimeout(0.5, #"hash_ae39942308147bf", #"damage");
@@ -150,7 +150,7 @@ function main(var_d3440450, var_50cc0d4f) {
   if(level flag::get("perfect_sniper_spot") && isDefined(var_7810080a) && var_7810080a._notify == "damage") {
     function_32398bfb(player);
     thread function_4f024edb();
-  } else if(isDefined(var_7810080a) && var_7810080a._notify == # "hash_ae39942308147bf") {
+  } else if(isDefined(var_7810080a) && var_7810080a._notify == #"hash_ae39942308147bf") {
     level thread scene::play("scene_tkd_hit3_intro_overlook_arash", "hit", [level.arash]);
     level thread scene::play("scene_tkd_hit3_intro_overlook_enemy4", "hit");
     level.arash waittill(#"hash_3d799b8c342663fa");
@@ -600,7 +600,7 @@ function function_cc465a2(player) {
     return;
   }
 
-  if(ret._notify == # "player_break_stealth_tarmac" && level flag::get("start_sniping")) {
+  if(ret._notify == #"player_break_stealth_tarmac" && level flag::get("start_sniping")) {
     return;
   }
 

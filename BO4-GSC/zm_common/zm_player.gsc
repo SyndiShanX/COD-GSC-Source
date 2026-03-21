@@ -81,7 +81,7 @@ getallotherplayers() {
 
 updateplayernum(player) {
   if(!isDefined(player.playernum)) {
-    if(player.team == # "allies") {
+    if(player.team == #"allies") {
       if(!isDefined(game._team1_num)) {
         game._team1_num = 0;
       }
@@ -132,10 +132,10 @@ getfreespawnpoint(spawnpoints, player) {
   if(isDefined(player) && isDefined(player.team)) {
     for(i = 0; isDefined(spawnpoints) && i < spawnpoints.size; i++) {
       if(side_selection == 1) {
-        if(player.team != # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
+        if(player.team != #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
           arrayremovevalue(spawnpoints, spawnpoints[i]);
           i = 0;
-        } else if(player.team == # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
+        } else if(player.team == #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
           arrayremovevalue(spawnpoints, spawnpoints[i]);
           i = 0;
         } else {
@@ -145,13 +145,13 @@ getfreespawnpoint(spawnpoints, player) {
         continue;
       }
 
-      if(player.team == # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
+      if(player.team == #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
         arrayremovevalue(spawnpoints, spawnpoints[i]);
         i = 0;
         continue;
       }
 
-      if(player.team != # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
+      if(player.team != #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
         arrayremovevalue(spawnpoints, spawnpoints[i]);
         i = 0;
         continue;
@@ -425,7 +425,7 @@ function_182d09fd(eattacker, idamage) {
     return int(idamage);
   }
 
-  if(eattacker.archetype === # "zombie" && isDefined(level.var_c739ead9)) {
+  if(eattacker.archetype === #"zombie" && isDefined(level.var_c739ead9)) {
     idamage *= level.var_c739ead9;
   }
 
@@ -922,12 +922,12 @@ player_grenade_multiattack_bookmark_watcher(grenade, weapon) {
     count = grenade.grenade_multiattack_bookmark_count;
   }
 
-  var_7b841aa9 = # "zm_player_grenade_multiattack";
+  var_7b841aa9 = #"zm_player_grenade_multiattack";
 
   if(isDefined(grenade.use_grenade_special_long_bookmark) && grenade.use_grenade_special_long_bookmark) {
-    var_7b841aa9 = # "zm_player_grenade_special_long";
+    var_7b841aa9 = #"zm_player_grenade_special_long";
   } else if(isDefined(grenade.use_grenade_special_bookmark) && grenade.use_grenade_special_bookmark) {
-    var_7b841aa9 = # "zm_player_grenade_special_long";
+    var_7b841aa9 = #"zm_player_grenade_special_long";
   }
 
   if(count <= self.grenade_multiattack_count && isDefined(self.grenade_multiattack_ent)) {
@@ -1109,8 +1109,8 @@ spawnspectator() {
 }
 
 setspectatepermissions(ison) {
-  self allowspectateteam(#"allies", ison && self.team == # "allies");
-  self allowspectateteam(#"axis", ison && self.team == # "axis");
+  self allowspectateteam(#"allies", ison && self.team == #"allies");
+  self allowspectateteam(#"axis", ison && self.team == #"axis");
   self allowspectateteam("freelook", 0);
   self allowspectateteam("none", 0);
 }
@@ -1620,7 +1620,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
         self playrumbleonentity("damage_heavy");
       }
 
-      if(eattacker.archetype === # "zombie") {
+      if(eattacker.archetype === #"zombie") {
         self zm_audio::create_and_play_dialog(#"general", #"attacked");
       }
 
@@ -1655,7 +1655,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     self thread[[self.player_damage_override]](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime);
   }
 
-  if(isDefined(einflictor) && isDefined(einflictor.archetype) && einflictor.archetype == # "zombie_quad") {
+  if(isDefined(einflictor) && isDefined(einflictor.archetype) && einflictor.archetype == #"zombie_quad") {
     if(smeansofdeath == "MOD_EXPLOSIVE") {
       if(self.health > 75) {
         return 75;
@@ -1674,7 +1674,7 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
 
     if(!(isDefined(self.is_zombie) && self.is_zombie)) {
       if(!isDefined(eattacker) || !(isDefined(eattacker.is_zombie) && eattacker.is_zombie) && !(isDefined(eattacker.b_override_explosive_damage_cap) && eattacker.b_override_explosive_damage_cap)) {
-        if(isDefined(weapon.name) && (weapon.name == # "ray_gun" || weapon.name == # "ray_gun_upgraded")) {
+        if(isDefined(weapon.name) && (weapon.name == #"ray_gun" || weapon.name == #"ray_gun_upgraded")) {
           if(self.health > 25 && idamage > 25) {
             return 25;
           }

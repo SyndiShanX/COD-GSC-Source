@@ -134,7 +134,7 @@ function private function_808efdee(hacker, entity) {
     return false;
   }
 
-  if(entity.team == # "spectator") {
+  if(entity.team == #"spectator") {
     return false;
   }
 

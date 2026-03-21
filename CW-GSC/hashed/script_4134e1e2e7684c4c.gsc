@@ -231,7 +231,7 @@ function private function_66b8c40f(var_c1deb575, linenum) {
     }
 
     if(!isDefined(var_3bf43333)) {
-      var_3bf43333 = # "";
+      var_3bf43333 = #"";
     }
 
     namespace_61e6d095::function_f2a9266(#"hash_15363747d8cbf71f", linenum, "ContentLine", var_6b14e8ab);

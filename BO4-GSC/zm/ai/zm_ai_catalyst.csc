@@ -166,7 +166,7 @@ function_1578a764(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fie
 function_5c22755(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   self util::waittill_dobj(localclientnum);
 
-  if(newvalue && isDefined(self) && self.subarchetype === # "catalyst_corrosive") {
+  if(newvalue && isDefined(self) && self.subarchetype === #"catalyst_corrosive") {
     animname = self getprimarydeltaanim();
 
     if(!isDefined(animname) || animname != "ai_t8_zm_zod_catalyst_corrosive_death_01" && animname != "ai_t8_zm_zod_catalyst_corrosive_death_02") {
@@ -209,5 +209,5 @@ function_ce9e3dc7(animname) {
 }
 
 function_5608540a(localclientnum) {
-  self.var_fab3cf78 = # "hash_10bdf06ea5640d49";
+  self.var_fab3cf78 = #"hash_10bdf06ea5640d49";
 }

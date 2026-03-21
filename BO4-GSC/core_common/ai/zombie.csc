@@ -10,7 +10,7 @@
 #namespace zombie;
 
 autoexec main() {
-  level._effect[#"zombie_special_day_effect"] = # "hash_7a37324c1988abb5";
+  level._effect[#"zombie_special_day_effect"] = #"hash_7a37324c1988abb5";
   ai::add_archetype_spawn_function(#"zombie", &zombieclientutils::zombie_override_burn_fx);
   ai::add_archetype_spawn_function(#"zombie", &zombieclientutils::zombiespawnsetup);
   clientfield::register("actor", "zombie", 1, 1, "int", &zombieclientutils::zombiehandler, 0, 0);
@@ -22,7 +22,7 @@ autoexec main() {
 zombiehandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
 
-  if(isDefined(entity.archetype) && entity.archetype != # "zombie") {
+  if(isDefined(entity.archetype) && entity.archetype != #"zombie") {
     return;
   }
 
@@ -53,7 +53,7 @@ _gibcallback(localclientnum, entity, gibflag) {
 zombiespecialdayeffectshandler(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   entity = self;
 
-  if(isDefined(entity.archetype) && entity.archetype != # "zombie") {
+  if(isDefined(entity.archetype) && entity.archetype != #"zombie") {
     return;
   }
 
@@ -68,16 +68,16 @@ zombie_override_burn_fx(localclientnum) {
       self._effect = [];
     }
 
-    level._effect[#"fire_zombie_j_elbow_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
-    level._effect[#"fire_zombie_j_elbow_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
-    level._effect[#"fire_zombie_j_shoulder_le_loop"] = # "fire/fx_fire_ai_human_arm_left_loop";
-    level._effect[#"fire_zombie_j_shoulder_ri_loop"] = # "fire/fx_fire_ai_human_arm_right_loop";
-    level._effect[#"fire_zombie_j_spine4_loop"] = # "fire/fx_fire_ai_human_torso_loop";
-    level._effect[#"fire_zombie_j_hip_le_loop"] = # "fire/fx_fire_ai_human_hip_left_loop";
-    level._effect[#"fire_zombie_j_hip_ri_loop"] = # "fire/fx_fire_ai_human_hip_right_loop";
-    level._effect[#"fire_zombie_j_knee_le_loop"] = # "fire/fx_fire_ai_human_leg_left_loop";
-    level._effect[#"fire_zombie_j_knee_ri_loop"] = # "fire/fx_fire_ai_human_leg_right_loop";
-    level._effect[#"fire_zombie_j_head_loop"] = # "fire/fx_fire_ai_human_head_loop";
+    level._effect[#"fire_zombie_j_elbow_le_loop"] = #"fire/fx_fire_ai_human_arm_left_loop";
+    level._effect[#"fire_zombie_j_elbow_ri_loop"] = #"fire/fx_fire_ai_human_arm_right_loop";
+    level._effect[#"fire_zombie_j_shoulder_le_loop"] = #"fire/fx_fire_ai_human_arm_left_loop";
+    level._effect[#"fire_zombie_j_shoulder_ri_loop"] = #"fire/fx_fire_ai_human_arm_right_loop";
+    level._effect[#"fire_zombie_j_spine4_loop"] = #"fire/fx_fire_ai_human_torso_loop";
+    level._effect[#"fire_zombie_j_hip_le_loop"] = #"fire/fx_fire_ai_human_hip_left_loop";
+    level._effect[#"fire_zombie_j_hip_ri_loop"] = #"fire/fx_fire_ai_human_hip_right_loop";
+    level._effect[#"fire_zombie_j_knee_le_loop"] = #"fire/fx_fire_ai_human_leg_left_loop";
+    level._effect[#"fire_zombie_j_knee_ri_loop"] = #"fire/fx_fire_ai_human_leg_right_loop";
+    level._effect[#"fire_zombie_j_head_loop"] = #"fire/fx_fire_ai_human_head_loop";
   }
 }
 

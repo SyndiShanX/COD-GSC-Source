@@ -114,7 +114,7 @@ function function_979f0cb4(var_a504287b, persistent_data) {
 
 function function_9f07d120() {
   foreach(player in self.players) {
-    if(player.team != # "spectator") {
+    if(player.team != #"spectator") {
       persistent_data = player.pers;
       var_a504287b = {};
       var_a504287b.kills = persistent_data[#"kills"];
@@ -283,7 +283,7 @@ function function_84b3ab79() {
 }
 
 function function_a6efe6c9() {
-  if(self.team == # "spectator") {
+  if(self.team == #"spectator") {
     return;
   }
 
@@ -305,7 +305,7 @@ function private function_5a676b2c() {
     wait 0.1;
     player_team = self.pers[#"team"];
 
-    if(player_team == # "spectator") {
+    if(player_team == #"spectator") {
       return;
     }
 
@@ -321,7 +321,7 @@ function private function_5a676b2c() {
 }
 
 function private function_42fa3a5c() {
-  if(self.team == # "spectator" || !isDefined(self.var_7a967a71) || game.state == # "pregame") {
+  if(self.team == #"spectator" || !isDefined(self.var_7a967a71) || game.state == #"pregame") {
     return;
   }
 
@@ -348,7 +348,7 @@ function function_3651a831() {
   esports_event = {
     #var_804c5177: isDefined(int(float(globallogic_utils::gettimeremaining()) / 1000)) ? int(float(globallogic_utils::gettimeremaining()) / 1000) : 0, #var_43cf7fe7: isDefined(int(float(function_a3384e()) / 1000)) ? int(float(function_a3384e()) / 1000) : 0, #var_9953c424: isDefined(team_scores[#"allies"]) ? team_scores[#"allies"] : 0, #var_a41f3c35: isDefined(team_scores[#"axis"]) ? team_scores[#"axis"] : 0
   };
-  var_284ea17f = # "hash_12a25db8eddf1e1c";
+  var_284ea17f = #"hash_12a25db8eddf1e1c";
 
   if(isDefined(level.var_88531f89)) {
     var_284ea17f = level.var_88531f89.var_284ea17f;
@@ -362,7 +362,7 @@ function function_a8ccfb6() {
   all_events = [];
 
   foreach(player in level.players) {
-    if(!isDefined(player) || player.team == # "spectator") {
+    if(!isDefined(player) || player.team == #"spectator") {
       continue;
     }
 
@@ -467,7 +467,7 @@ function function_f0ffff28() {
   esports_event = {
     #player: self.name, #total_score: persistent_data[#"score"], #var_229e9030: persistent_data[#"assists"], #total_kills: persistent_data[#"kills"], #var_ef5017c7: persistent_data[#"best_kill_streak"], #total_deaths: persistent_data[#"deaths"], #total_headshots: persistent_data[#"headshots"], #var_62f25812: persistent_data[#"time_played_alive"], #var_3426c422: persistent_data[#"hash_20464b40eeb9b465"], #var_2e369569: persistent_data[#"damagedone"], #var_be574ee1: self function_9ad755c5(), #var_5bda8eec: persistent_data[#"time_played_moving"], #var_d568c84: persistent_data[#"suicides"], #var_9411af72: persistent_data[#"shotsfired"], #var_e36aba01: persistent_data[#"headshothits"], #var_5afded2b: persistent_data[#"shotshit"], #var_f66612f0: persistent_data[#"hash_104ec9727c3d4ef7"], #var_fc1e4ef3: persistent_data[#"highestmultikill"], #var_e394d7c0: game.roundsplayed, #var_4ac15e1d: var_1bed336c
   };
-  var_284ea17f = # "hash_467c6c9bd786ed0d";
+  var_284ea17f = #"hash_467c6c9bd786ed0d";
 
   if(isDefined(level.var_ab8dd45a)) {
     var_284ea17f = level.var_ab8dd45a.var_284ea17f;
@@ -564,16 +564,16 @@ function function_e2162733() {
 }
 
 function function_2fda590d() {
-  var_d0ac2a58 = # "none";
-  var_7fe6eed1 = # "none";
+  var_d0ac2a58 = #"none";
+  var_7fe6eed1 = #"none";
 
   if(util::isroundbased()) {
-    if(game.attackers == # "allies") {
-      var_d0ac2a58 = # "attack";
-      var_7fe6eed1 = # "defense";
+    if(game.attackers == #"allies") {
+      var_d0ac2a58 = #"attack";
+      var_7fe6eed1 = #"defense";
     } else {
-      var_d0ac2a58 = # "defense";
-      var_7fe6eed1 = # "attack";
+      var_d0ac2a58 = #"defense";
+      var_7fe6eed1 = #"attack";
     }
   }
 
@@ -639,7 +639,7 @@ function function_2d28a3b3() {
   esports_event = {
     #kills: persistent_data[#"kills"] - var_a504287b.kills, #deaths: persistent_data[#"deaths"] - var_a504287b.deaths, #assists: persistent_data[#"assists"] - var_a504287b.assists, #damage_dealt: persistent_data[#"damagedone"] - var_a504287b.damage_done, #var_52bfc9cc: var_a504287b.var_52bfc9cc, #time_alive: persistent_data[#"time_played_alive"] - var_a504287b.time_alive, #var_e394d7c0: game.roundsplayed, #rounds_won: isDefined(rounds_won) ? rounds_won : 0, #score: persistent_data[#"score"] - var_a504287b.score, #shots_fired: persistent_data[#"shotsfired"] - var_a504287b.shots_fired, #shots_hit: persistent_data[#"shotshit"] - var_a504287b.shots_hit, #var_d75d8ad2: persistent_data[#"headshothits"] - var_a504287b.var_d75d8ad2, #player: self.name
   };
-  var_284ea17f = # "hash_15b84d837906d158";
+  var_284ea17f = #"hash_15b84d837906d158";
 
   if(isDefined(level.var_86d47028)) {
     var_284ea17f = level.var_86d47028.var_284ea17f;
@@ -651,7 +651,7 @@ function function_2d28a3b3() {
 }
 
 function function_712f816a(esports_event, player) {
-  esports_event.var_943dace9 = self.var_a4926509 != # "none";
+  esports_event.var_943dace9 = self.var_a4926509 != #"none";
   esports_event.var_7407eb67 = self.iscontested;
   esports_event.obj_name = function_ddf02547();
 
@@ -681,7 +681,7 @@ function function_cdce904b(esports_event, player) {
   var_1cb1e802 = level.var_1cb1e802;
   esports_event.player = player.name;
   esports_event.obj_name = function_d4ad62c7();
-  esports_event.var_943dace9 = self.var_a4926509 != # "none";
+  esports_event.var_943dace9 = self.var_a4926509 != #"none";
   esports_event.var_7407eb67 = self.contested;
   esports_event.var_b910ed34 = game.lives[#"allies"];
   esports_event.var_33a590ba = game.lives[#"axis"];
@@ -698,7 +698,7 @@ function function_d5aacfd7(credit_player) {
   esports_event = {
     #var_94e96e7d: origin[0], #var_830acac0: origin[1], #var_94d1ee7a: origin[2], #var_7b99e470: function_1674a96a(isDefined(credit_player.team) ? credit_player.team : self.var_a4926509), #var_34d28e72: function_f8d53445()
   };
-  var_284ea17f = # "hash_3cb91ecb4b176d16";
+  var_284ea17f = #"hash_3cb91ecb4b176d16";
 
   if(isDefined(level.var_8d67cbd8)) {
     var_284ea17f = level.var_8d67cbd8.var_284ea17f;

@@ -23,7 +23,7 @@ function private preinit() {
   }
 
   level.var_ef215639 = [1: # "hash_1483048e184df991", 2: # "hash_5b96bc3a1c23c571", 3: "evt_death_circle_strong"];
-  level.var_cb450873 = # "hash_313f1d0b4ff27caa";
+  level.var_cb450873 = #"hash_313f1d0b4ff27caa";
 
   if(isDefined(level.var_7bd7bdc8)) {
     level.var_f6795a59 = level.var_7bd7bdc8;
@@ -48,15 +48,15 @@ function private function_4df027f2() {
   }
 
   if(level.is_survival === 1) {
-    level.var_74017fd2 = # "hash_2ebe199a82d38283";
+    level.var_74017fd2 = #"hash_2ebe199a82d38283";
   }
 
   if(level.var_374c2805 === 1) {
-    level.var_34ac1fa = # "hash_454cceb988244ba3";
+    level.var_34ac1fa = #"hash_454cceb988244ba3";
   }
 
   if(!isDefined(level.var_74017fd2)) {
-    level.var_74017fd2 = # "hash_75168376918f5ab7";
+    level.var_74017fd2 = #"hash_75168376918f5ab7";
   }
 }
 
@@ -64,8 +64,8 @@ function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap,
   self notify(#"hash_49f273cd81c6c0f");
 
   if(bwastimejump) {
-    var_899562cf = self.team == # "neutral";
-    var_929604bb = self.team != # "neutral";
+    var_899562cf = self.team == #"neutral";
+    var_929604bb = self.team != #"neutral";
     self setcompassicon("ui_icon_minimap_collapse_ring");
     self function_811196d1(0);
     self function_95bc465d(1);
@@ -129,7 +129,7 @@ function function_1a4228a5(localclientnum, oldval, newval, bnewent, binitialsnap
 
     level.var_18a959b playrenderoverridebundle(level.var_34ac1fa);
 
-    while(player.var_1bee6f4b === 1 || player.weapon.name === # "chopper_gunner") {
+    while(player.var_1bee6f4b === 1 || player.weapon.name === #"chopper_gunner") {
       waitframe(1);
     }
 

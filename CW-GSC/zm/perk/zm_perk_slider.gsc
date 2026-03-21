@@ -272,7 +272,7 @@ function function_4d806c6a(var_a25d1f0 = 25, explosion_radius = 64, var_8b77e4de
       }
 
       if(var_a25d1f0 >= zombie.health) {
-        if(zombie.zm_ai_category === # "normal") {
+        if(zombie.zm_ai_category === #"normal") {
           var_4ce7aa6d = 1;
         }
 

@@ -162,14 +162,14 @@ function_5180cfce(s_params) {
 }
 
 function_b43c1bad(s_params) {
-  if(self.archetype !== # "tiger") {
+  if(self.archetype !== #"tiger") {
     return;
   }
 
   waitframe(1);
   var_328cd9eb = self.var_39ebb8cc;
 
-  if(!isDefined(var_328cd9eb) || var_328cd9eb.archetype !== # "tiger") {
+  if(!isDefined(var_328cd9eb) || var_328cd9eb.archetype !== #"tiger") {
     return;
   }
 

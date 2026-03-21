@@ -45,7 +45,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != # "hatchet") {
+  if(weapon.name != #"hatchet") {
     return;
   }
 

@@ -254,11 +254,11 @@ usekillstreakaitankdrop(killstreaktype) {
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
   context.islocationgood = &islocationgood;
-  context.objective = # "hash_1b5a86007f598bbc";
+  context.objective = #"hash_1b5a86007f598bbc";
   context.validlocationsound = level.killstreakcorebundle.ksvalidcarepackagelocationsound;
   context.tracemask = 1 | 4;
   context.droptag = "tag_cargo_attach";
-  context.killstreaktype = # "ai_tank_marker";
+  context.killstreaktype = #"ai_tank_marker";
   context.killstreakref = "tank_robot";
   context.dontdisconnectpaths = 1;
   context.var_655d53ec = 1;
@@ -421,10 +421,10 @@ function_e1553d5f(location, killstreak_id) {
   context.perform_physics_trace = 1;
   context.selectedlocation = location;
   context.islocationgood = &is_location_good;
-  context.objective = # "airdrop_aitank";
+  context.objective = #"airdrop_aitank";
   context.killstreakref = killstreak;
   context.validlocationsound = level.killstreakcorebundle.ksvalidaitanklocationsound;
-  context.vehiclename = # "vehicle_t8_mil_helicopter_transport_mp";
+  context.vehiclename = #"vehicle_t8_mil_helicopter_transport_mp";
   context.tracemask = 1 | 4;
   context.droptag = "tag_cargo_attach";
   context.var_9fc6cfe9 = 1;
@@ -583,7 +583,7 @@ function_9b13ebf(drone) {
   drone vehicle_ai::get_state_callbacks("combat").enter_func = &state_combat_enter;
   drone.identifier_weapon = getweapon("ai_Tank_marker");
 
-  if(drone.vehicletype == # "archetype_mini_quadtank_ct") {
+  if(drone.vehicletype == #"archetype_mini_quadtank_ct") {
     drone vehicle_ai::get_state_callbacks("combat").update_func = &function_dd91d091;
   } else {
     drone vehicle_ai::get_state_callbacks("combat").update_func = &state_combat_update;
@@ -635,7 +635,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
   }
 
   if(!isDefined(tankarchetype)) {
-    tankarchetype = # "archetype_mini_quadtank_mp";
+    tankarchetype = #"archetype_mini_quadtank_mp";
   }
 
   if(isDefined(context) && isDefined(context.vehicle)) {
@@ -698,7 +698,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
   immediate_use = isDefined(params.ksuseimmediately) ? params.ksuseimmediately : 0;
   waitframe(1);
   owner remote_weapons::useremoteweapon(drone, "killstreak_ai_tank", immediate_use);
-  owner.var_976238cf = # "tank_robot";
+  owner.var_976238cf = #"tank_robot";
   owner thread function_47e16e28(drone);
   drone thread kill_monitor();
   drone thread tank_rocket_watch_ai();
@@ -719,7 +719,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, category, tankarchetype, 
 function_47e16e28(weapon) {
   weapon endon(#"remote_weapon_end", #"death");
 
-  while(self.var_976238cf == # "tank_robot") {
+  while(self.var_976238cf == #"tank_robot") {
     waitframe(1);
   }
 
@@ -1176,7 +1176,7 @@ cantargetplayer(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 

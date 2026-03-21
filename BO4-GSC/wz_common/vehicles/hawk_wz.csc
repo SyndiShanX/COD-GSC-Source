@@ -482,7 +482,7 @@ on_local_player_spawned(localclientnum) {
   vehicle = getplayervehicle(player);
   player function_a552c160(localclientnum);
 
-  if(isDefined(vehicle) && (vehicle.vehicletype == # "veh_hawk_player_wz" || vehicle.vehicletype == # "veh_hawk_player_far_range_wz")) {
+  if(isDefined(vehicle) && (vehicle.vehicletype == #"veh_hawk_player_wz" || vehicle.vehicletype == #"veh_hawk_player_far_range_wz")) {
     return;
   }
 
@@ -490,7 +490,7 @@ on_local_player_spawned(localclientnum) {
 }
 
 function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.vehicletype != # "veh_hawk_player_wz" && self.vehicletype != # "veh_hawk_player_far_range_wz") {
+  if(self.vehicletype != #"veh_hawk_player_wz" && self.vehicletype != #"veh_hawk_player_far_range_wz") {
     return;
   }
 

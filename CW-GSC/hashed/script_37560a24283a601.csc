@@ -24,10 +24,10 @@ function function_9cb928dc(localclientnum, oldval, newval, bnewent, binitialsnap
   switch (bwastimejump) {
     case 1:
     case 2:
-      var_8cce6a5c = # "hash_302e7c518042ef82";
+      var_8cce6a5c = #"hash_302e7c518042ef82";
       break;
     case 3:
-      var_8cce6a5c = # "hash_57ddfc09a8a5cfee";
+      var_8cce6a5c = #"hash_57ddfc09a8a5cfee";
       break;
   }
 
@@ -71,16 +71,16 @@ function function_add31c08() {
 function function_6bd975fa(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (bwastimejump) {
     case 1:
-      var_90048701 = # "hash_1afd3356d5225a80";
+      var_90048701 = #"hash_1afd3356d5225a80";
       break;
     case 2:
-      var_90048701 = # "hash_7a5d71decf1bdefb";
+      var_90048701 = #"hash_7a5d71decf1bdefb";
       break;
     case 3:
-      var_90048701 = # "hash_29fd19d52a45b19e";
+      var_90048701 = #"hash_29fd19d52a45b19e";
       break;
     case 4:
-      var_90048701 = # "hash_d33a825314c9dac";
+      var_90048701 = #"hash_d33a825314c9dac";
       break;
   }
 

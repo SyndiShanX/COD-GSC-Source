@@ -330,7 +330,7 @@ zombiefindflesh(behaviortreeentity) {
     return;
   }
 
-  if(behaviortreeentity.team == # "allies") {
+  if(behaviortreeentity.team == #"allies") {
     behaviortreeentity findzombieenemy();
     return;
   }
@@ -488,7 +488,7 @@ zombiefindfleshcode(behaviortreeentity) {
   behaviortreeentity.ignore_player = [];
   behaviortreeentity.goalradius = 30;
 
-  if(behaviortreeentity.team == # "allies") {
+  if(behaviortreeentity.team == #"allies") {
     behaviortreeentity findzombieenemy();
     aiprofile_endentry();
     return;
@@ -1836,7 +1836,7 @@ function_7994fd99(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
     return -1;
   }
 
-  if(self.archetype == # "zombie") {
+  if(self.archetype == #"zombie") {
     self destructserverutils::handledamage(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex);
   }
 

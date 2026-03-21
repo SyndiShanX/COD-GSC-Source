@@ -20,15 +20,15 @@ function event_handler[gametype_init] main(eventstruct) {
 
   clientfield::register("scriptmover", "scriptid", 1, 5, "int", &function_e116df6c, 0, 0);
   level._effect[#"zoneedgemarker"] = [];
-  level._effect[#"zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
   level._effect[#"zoneedgemarkerwndw"] = [];
-  level._effect[#"zoneedgemarkerwndw"][0] = # "ui/fx8_infil_marker_neutral_window";
-  level._effect[#"zoneedgemarkerwndw"][1] = # "hash_5565c3fc2c7742fe";
-  level._effect[#"zoneedgemarkerwndw"][2] = # "hash_3283b765fe480df7";
-  level._effect[#"zoneedgemarkerwndw"][3] = # "hash_6a512c225256a2e9";
+  level._effect[#"zoneedgemarkerwndw"][0] = #"ui/fx8_infil_marker_neutral_window";
+  level._effect[#"zoneedgemarkerwndw"][1] = #"hash_5565c3fc2c7742fe";
+  level._effect[#"zoneedgemarkerwndw"][2] = #"hash_3283b765fe480df7";
+  level._effect[#"zoneedgemarkerwndw"][3] = #"hash_6a512c225256a2e9";
   level.zonemarkers = [];
   level.zonemarkers[#"a"] = struct::get_array("doma", "targetname");
   level.zonemarkers[#"b"] = struct::get_array("domb", "targetname");
@@ -61,16 +61,16 @@ function function_64ffa588(local_client_num) {
   effects = [];
   effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
   effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
-  effects[#"zoneedgemarker"][1] = # "hash_682365220f952226";
-  effects[#"zoneedgemarker"][2] = # "hash_5c0d472966d09d41";
+  effects[#"zoneedgemarker"][1] = #"hash_682365220f952226";
+  effects[#"zoneedgemarker"][2] = #"hash_5c0d472966d09d41";
   effects[#"zoneedgemarker"][3] = [];
-  effects[#"zoneedgemarker"][3][1] = # "hash_3d943e08d321081c";
-  effects[#"zoneedgemarker"][3][2] = # "hash_6328e922e5ef809f";
-  effects[#"zoneedgemarkerwndw"][1] = # "hash_6bfa43a02f3672e3";
-  effects[#"zoneedgemarkerwndw"][2] = # "hash_7e0524ef3f409d16";
+  effects[#"zoneedgemarker"][3][1] = #"hash_3d943e08d321081c";
+  effects[#"zoneedgemarker"][3][2] = #"hash_6328e922e5ef809f";
+  effects[#"zoneedgemarkerwndw"][1] = #"hash_6bfa43a02f3672e3";
+  effects[#"zoneedgemarkerwndw"][2] = #"hash_7e0524ef3f409d16";
   effects[#"zoneedgemarkerwndw"][3] = [];
-  effects[#"zoneedgemarkerwndw"][3][1] = # "hash_252ee62d9ea8dcc9";
-  effects[#"zoneedgemarkerwndw"][3][2] = # "hash_7495c7dec3ebf9dc";
+  effects[#"zoneedgemarkerwndw"][3][1] = #"hash_252ee62d9ea8dcc9";
+  effects[#"zoneedgemarkerwndw"][3][2] = #"hash_7495c7dec3ebf9dc";
   return effects;
 }
 
@@ -187,9 +187,9 @@ function monitor_flag_fx(localclientnum, flag_objective, flag_name) {
       flag update_base_fx(localclientnum, flag, team);
       state = 0;
 
-      if(team == # "allies") {
+      if(team == #"allies") {
         state = 1;
-      } else if(team == # "axis") {
+      } else if(team == #"axis") {
         state = 2;
       }
 
@@ -201,7 +201,7 @@ function monitor_flag_fx(localclientnum, flag_objective, flag_name) {
     if(progress != flag.last_progress) {
       var_76587cfe = team;
 
-      if(var_76587cfe == # "neutral") {
+      if(var_76587cfe == #"neutral") {
         var_4e8c1813 = serverobjective_getobjectivegamemodeflags(localclientnum, flag_objective);
 
         if(var_4e8c1813 == 2) {
@@ -233,16 +233,16 @@ function play_base_fx(localclientnum, flag, fx_name, team) {
 function update_base_fx(localclientnum, flag, team) {
   fx_name = get_base_fx(flag, team);
 
-  if(codcaster::function_b8fe9b52(localclientnum) && team != # "neutral") {
-    fx_name += team == # "allies" ? "_codcaster_allies" : "_codcaster_axis";
+  if(codcaster::function_b8fe9b52(localclientnum) && team != #"neutral") {
+    fx_name += team == #"allies" ? "_codcaster_allies" : "_codcaster_axis";
   }
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     play_base_fx(localclientnum, flag, fx_name, team);
     return;
   }
 
-  if(flag.last_team == # "neutral" || codcaster::function_b8fe9b52(localclientnum)) {
+  if(flag.last_team == #"neutral" || codcaster::function_b8fe9b52(localclientnum)) {
     play_base_fx(localclientnum, flag, fx_name, team);
     return;
   }
@@ -275,8 +275,8 @@ function update_cap_fx(localclientnum, flag, team, progress) {
 
   fx_name = get_cap_fx(flag, team);
 
-  if(codcaster::function_b8fe9b52(localclientnum) && team != # "neutral") {
-    fx_name += team == # "allies" ? "_codcaster_allies" : "_codcaster_axis";
+  if(codcaster::function_b8fe9b52(localclientnum) && team != #"neutral") {
+    fx_name += team == #"allies" ? "_codcaster_allies" : "_codcaster_axis";
   }
 
   play_cap_fx(localclientnum, flag, fx_name, team);
@@ -292,7 +292,7 @@ function get_base_fx(flag, team) {
     }
   }
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     return "ui/fx_dom_marker_neutral";
   }
 
@@ -308,7 +308,7 @@ function get_cap_fx(flag, team) {
     }
   }
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     return "ui/fx_dom_cap_indicator_neutral";
   }
 
@@ -398,7 +398,7 @@ function function_dd2493cc(local_client_num, objid) {
     state = 2;
   }
 
-  if(var_4bb78aa3 && (team == # "neutral" || team == # "none")) {
+  if(var_4bb78aa3 && (team == #"neutral" || team == #"none")) {
     state = 4;
   }
 
@@ -406,7 +406,7 @@ function function_dd2493cc(local_client_num, objid) {
     state = 7;
   }
 
-  if(var_c7fc4f01 && (team == # "neutral" || team == # "none")) {
+  if(var_c7fc4f01 && (team == #"neutral" || team == #"none")) {
     state = 5;
   }
 
@@ -487,13 +487,13 @@ function get_fx_state(local_client_num, state, var_b8fe9b52) {
   }
 
   if(state == 1) {
-    if(function_9b3f0ed1(local_client_num) == # "allies") {
+    if(function_9b3f0ed1(local_client_num) == #"allies") {
       return 1;
     } else {
       return 2;
     }
   } else if(state == 2) {
-    if(function_9b3f0ed1(local_client_num) == # "axis") {
+    if(function_9b3f0ed1(local_client_num) == #"axis") {
       return 1;
     } else {
       return 2;

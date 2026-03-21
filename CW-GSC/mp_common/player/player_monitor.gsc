@@ -46,27 +46,27 @@ function monitor() {
 
 function function_d35f877a(player, weapon, statname, value = 0) {
   if(isDefined(weapon.var_3dc66299)) {
-    if(statname == # "shots") {
+    if(statname == #"shots") {
       weapon.var_3dc66299.shots += value;
       return;
     }
 
-    if(statname == # "hits") {
+    if(statname == #"hits") {
       weapon.var_3dc66299.hits += value;
       return;
     }
 
-    if(statname == # "kills") {
+    if(statname == #"kills") {
       weapon.var_3dc66299.kills += value;
       return;
     }
 
-    if(statname == # "deathsduringuse") {
+    if(statname == #"deathsduringuse") {
       weapon.var_3dc66299.deathsduringuse += value;
       return;
     }
 
-    if(statname == # "headshots") {
+    if(statname == #"headshots") {
       weapon.var_3dc66299.headshots += value;
     }
   }
@@ -133,7 +133,7 @@ function event_handler[weapon_change_complete] function_91abdff4(eventstruct) {
     return;
   }
 
-  if(game.state == # "playing") {
+  if(game.state == #"playing") {
     if(isDefined(eventstruct.weapon)) {
       self function_43e771ee();
 
@@ -233,7 +233,7 @@ function private travel_dist() {
       dist = distance(self.origin, prevpos);
       var_365f7ec5 += dist;
 
-      if(dist > 0 && game.state == # "playing") {
+      if(dist > 0 && game.state == #"playing") {
         if(!self isinvehicle()) {
           groundent = self getgroundent();
 

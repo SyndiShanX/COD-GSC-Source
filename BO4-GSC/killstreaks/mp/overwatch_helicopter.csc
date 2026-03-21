@@ -30,7 +30,7 @@ function_555b0649(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 spawned(local_client_num, bundle) {
-  if(self.subarchetype === # "human_sniper") {
+  if(self.subarchetype === #"human_sniper") {
     self killstreak_bundles::spawned(local_client_num, bundle);
   }
 }

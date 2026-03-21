@@ -390,7 +390,7 @@ riotshield_knockdown_zombie(player, gib, weapon) {
     return;
   }
 
-  if(self.archetype === # "brutus") {
+  if(self.archetype === #"brutus") {
     self ai::stun();
   } else {
     self zombie_utility::setup_zombie_knockdown(player);

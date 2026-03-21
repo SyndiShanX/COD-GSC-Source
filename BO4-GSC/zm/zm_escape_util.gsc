@@ -458,13 +458,13 @@ function_34b291c3(e_player) {
     str_zone = e_player zm_zonemgr::get_player_zone();
 
     if(isDefined(str_zone) && array::contains(var_1ddd5d18, str_zone)) {
-      if(self.archetype === # "zombie") {
+      if(self.archetype === #"zombie") {
         if(e_player === level.var_7b71cdb7) {
           return 1;
         } else {
           return 0;
         }
-      } else if(self.archetype === # "zombie_dog" || self.archetype === # "brutus") {
+      } else if(self.archetype === #"zombie_dog" || self.archetype === #"brutus") {
         if(e_player === level.var_7b71cdb7) {
           return 0;
         } else {
@@ -705,7 +705,7 @@ function_5d3c7c04() {
       continue;
     }
 
-    if(s_result._notify == # "brutus_locked") {
+    if(s_result._notify == #"brutus_locked") {
       var_89ddd572 = util::spawn_model("tag_origin", s_result.s_stub.origin, s_result.s_stub.angles);
       var_89ddd572 clientfield::set("" + # "hash_59be891b288663cc", 1);
       continue;

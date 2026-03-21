@@ -498,7 +498,7 @@ function_742f2c18(n_round, archetype, n_count_total, var_4f886dd2, var_37dc6df8,
   var_77760771.var_d58fab26 = var_d58fab26;
   level.var_f944d22e[n_round][archetype] = var_77760771;
 
-  if(archetype == # "zombie") {
+  if(archetype == #"zombie") {
     if(!isDefined(level.var_ea47b206)) {
       level.var_ea47b206 = [];
     }
@@ -616,7 +616,7 @@ function_a877cd10(str_index) {
   return level.a_s_defend_areas[str_index];
 }
 
-function_11101458(str_next_defend, var_6cc77d4e = # "hash_3a35084ee8c333b2", hide_notify = "creating_zone_defend_area") {
+function_11101458(str_next_defend, var_6cc77d4e = #"hash_3a35084ee8c333b2", hide_notify = "creating_zone_defend_area") {
   var_679cd7a8 = function_a877cd10(str_next_defend);
 
   if(isDefined(var_679cd7a8.var_9fc5eea1) && !isPlayer(self)) {
@@ -687,7 +687,7 @@ function_76321cf4(b_enable = 1) {
   level.var_aef7f7d5 = 1;
 }
 
-function_33798535(var_31721422, a_str_zones, var_ed1db1a7, var_6cc77d4e = # "hash_683cf7d37afcc3ae", var_de0f1997 = 45, var_f7c3c527 = 60, var_232e4ebc = 0, var_b96be97f = undefined) {
+function_33798535(var_31721422, a_str_zones, var_ed1db1a7, var_6cc77d4e = #"hash_683cf7d37afcc3ae", var_de0f1997 = 45, var_f7c3c527 = 60, var_232e4ebc = 0, var_b96be97f = undefined) {
   level notify(#"hash_54000f24a644ad32");
   level endoncallback(&function_a5f4503c, #"end_game", #"hash_54000f24a644ad32");
 
@@ -895,7 +895,7 @@ function_d40910b4(params) {
 }
 
 function_6ca0c2d9(params) {
-  if(self.zm_ai_category !== # "miniboss" && self.zm_ai_category !== # "heavy") {
+  if(self.zm_ai_category !== #"miniboss" && self.zm_ai_category !== #"heavy") {
     return;
   }
 
@@ -903,7 +903,7 @@ function_6ca0c2d9(params) {
   var_5d4b3bca = 0;
 
   foreach(ai in a_ai_enemies) {
-    if(ai.zm_ai_category === # "miniboss" || ai.zm_ai_category === # "heavy") {
+    if(ai.zm_ai_category === #"miniboss" || ai.zm_ai_category === #"heavy") {
       var_5d4b3bca++;
     }
   }

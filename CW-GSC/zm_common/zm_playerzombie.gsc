@@ -75,7 +75,7 @@ function zombify_player() {
 
   gametype = hash(util::get_game_type());
 
-  if(gametype == # "zsurvival") {
+  if(gametype == #"zsurvival") {
     self val::reset(#"laststand", "ignoreme");
   }
 

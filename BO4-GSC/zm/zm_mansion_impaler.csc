@@ -25,12 +25,12 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + # "jewelry_dropped", 8000, 1, "int", &function_4e782d34, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_3d5a64bed5e39d24", 8000, 1, "int", &function_3f039efc, 0, 0);
   clientfield::register("world", "" + # "hash_73123721764d7374", 8000, 1, "int", &function_12852d1a, 0, 0);
-  level._effect[#"candle_light"] = # "hash_7c3ce9a7a1d0be65";
-  level._effect[#"candle_extinguish"] = # "hash_46177358e1ae4e80";
-  level._effect[#"monolith_water"] = # "hash_4290601f9ae7b873";
-  level._effect[#"hash_4d45dc65a8307183"] = # "hash_59977c4c851916e0";
-  level._effect[#"soul_possess"] = # "hash_5ea48c095e439dd3";
-  level._effect[#"jewelry_dropped"] = # "hash_69fe2bd378e08226";
+  level._effect[#"candle_light"] = #"hash_7c3ce9a7a1d0be65";
+  level._effect[#"candle_extinguish"] = #"hash_46177358e1ae4e80";
+  level._effect[#"monolith_water"] = #"hash_4290601f9ae7b873";
+  level._effect[#"hash_4d45dc65a8307183"] = #"hash_59977c4c851916e0";
+  level._effect[#"soul_possess"] = #"hash_5ea48c095e439dd3";
+  level._effect[#"jewelry_dropped"] = #"hash_69fe2bd378e08226";
 }
 
 function_7b2555da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -115,19 +115,19 @@ function_4e782d34(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self.var_dd761cc9 = util::playFXOnTag(localclientnum, level._effect[#"jewelry_dropped"], self, "tag_origin");
       playSound(localclientnum, #"hash_6dda9e544bcd6f0d", self.origin);
 
-      if(self.model == # "p8_zm_man_watch_pocket_gold") {
+      if(self.model == #"p8_zm_man_watch_pocket_gold") {
         var_a0cc5b31 = self playLoopSound(#"hash_5354467970ab7b00");
       }
 
-      if(self.model == # "p8_zm_man_jewelry_ring") {
+      if(self.model == #"p8_zm_man_jewelry_ring") {
         var_a0cc5b31 = self playLoopSound(#"hash_1555e7c9f5c441db");
       }
 
-      if(self.model == # "p8_zm_man_jewelry_necklace") {
+      if(self.model == #"p8_zm_man_jewelry_necklace") {
         var_a0cc5b31 = self playLoopSound(#"hash_21148ffbe9af801d");
       }
 
-      if(self.model == # "p8_zm_man_jewelry_bracelet") {
+      if(self.model == #"p8_zm_man_jewelry_bracelet") {
         var_a0cc5b31 = self playLoopSound(#"hash_35715829aad8de55");
       }
     }
@@ -146,7 +146,7 @@ function_3f039efc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self stoprenderoverridebundle(#"hash_3b7b44b7a440e5f");
     self playrenderoverridebundle(#"hash_3d9f08ef1b60239e");
 
-    if(self.model == # "hash_2b87b734e194ea79") {
+    if(self.model == #"hash_2b87b734e194ea79") {
       level notify(#"hash_5a1a7e205b6f5b88");
     }
 

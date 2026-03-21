@@ -225,12 +225,12 @@ init_blocker_fx() {}
 init_riser_fx() {
   if(isDefined(level.var_7f632569) && level.var_7f632569) {}
 
-  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
 
   if(isDefined(level.riser_type) && level.riser_type == "snow") {
-    level._effect[#"rise_billow_snow"] = # "hash_793798659a4b9560";
+    level._effect[#"rise_billow_snow"] = #"hash_793798659a4b9560";
   }
 }
 
@@ -482,7 +482,7 @@ zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, binitialsnap, f
 }
 
 init_zombie_explode_fx() {
-  level._effect[#"zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"zombie_guts_explosion"] = #"zombie/fx_blood_torso_explo_lg_zmb";
 }
 
 zombie_wait_explode(localclientnum) {
@@ -1167,7 +1167,7 @@ update_aat_hud(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
   icon = aat::get_icon(newval);
 
   if(str_localized == "none") {
-    str_localized = # "";
+    str_localized = #"";
   }
 
   controllermodel = getuimodelforcontroller(localclientnum);

@@ -140,9 +140,9 @@ function_4e81317c(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     return idamage;
   }
 
-  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
+  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
     return (self.health + 100);
-  } else if(self.zm_ai_category == # "heavy" || self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+  } else if(self.zm_ai_category == #"heavy" || self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
     switch (self.zm_ai_category) {
       case # "heavy":
         return (0.2 * self.maxhealth);
@@ -163,7 +163,7 @@ function_af221ee1(s_params) {
 
   if(isPlayer(s_params.eattacker)) {
     if(function_c740060f(s_params.weapon, 1)) {
-      if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+      if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
         if(isDefined(level.no_gib_in_wolf_area) && isDefined(self[[level.no_gib_in_wolf_area]]()) && self[[level.no_gib_in_wolf_area]]()) {
           var_bec5660f = 1;
         }
@@ -172,7 +172,7 @@ function_af221ee1(s_params) {
           var_bec5660f = 1;
         }
 
-        if(isDefined(s_params.shitloc) && self.archetype === # "zombie") {
+        if(isDefined(s_params.shitloc) && self.archetype === #"zombie") {
           if(!(isDefined(var_bec5660f) && var_bec5660f)) {
             if(s_params.shitloc === "head" || s_params.shitloc === "helmet") {
               self thread function_1475944a();
@@ -201,7 +201,7 @@ function_af221ee1(s_params) {
         return;
       }
 
-      if(self.zm_ai_category == # "miniboss") {
+      if(self.zm_ai_category == #"miniboss") {
         if(s_params.shitloc === "head" || s_params.shitloc === "helmet" && isDefined(self.hashelmet) && self.hashelmet) {
           if(isDefined(self.helmethits && isDefined(self.var_905e4ce2))) {
             self.helmethits = self.var_905e4ce2;
@@ -228,7 +228,7 @@ function_8d02f57b(w_katana) {
   self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
 
   while(true) {
-    if(w_katana.name == # "hero_katana_t8_lv3") {
+    if(w_katana.name == #"hero_katana_t8_lv3") {
       s_result = self waittill(#"weapon_melee_power");
     } else {
       s_result = self waittill(#"weapon_melee_power", #"weapon_melee");
@@ -295,7 +295,7 @@ function_bbe55589(e_player, w_katana, str_hitloc) {
   self endon(#"death");
   n_base_damage = 50;
 
-  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
+  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
     self.var_48a548c1 = 1;
     [[level.var_3594d33a]] - > waitinqueue(self);
     self dodamage(self.health + 100, e_player.origin, e_player, e_player, str_hitloc, "MOD_MELEE", 0, w_katana);
@@ -350,7 +350,7 @@ function_bed1fd9f() {
   self clientfield::set("" + # "katana_rush_postfx", 1);
   waitresult = self waittill(#"hero_katana_expired", #"hero_katana_rush_toggle");
 
-  if(waitresult._notify == # "hero_katana_expired") {
+  if(waitresult._notify == #"hero_katana_expired") {
     self playSound(#"hash_58397a948dd38b37");
   }
 

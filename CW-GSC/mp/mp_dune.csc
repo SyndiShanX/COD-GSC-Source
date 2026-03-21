@@ -17,7 +17,7 @@ function event_handler[level_init] main(eventstruct) {
     function_11e3e877(#"hash_6be5853fe57d01b0", #"hash_118e10d00498591e");
   }
 
-  if(function_be90acca(util::get_game_type()) === # "zsurvival") {
+  if(function_be90acca(util::get_game_type()) === #"zsurvival") {
     clientfield::register("toplayer", "" + # "hash_732e76418cbd8453", 1, 1, "int", &function_8f4ebcaf, 0, 0);
     callback::on_spawned(&on_player_spawned);
   }

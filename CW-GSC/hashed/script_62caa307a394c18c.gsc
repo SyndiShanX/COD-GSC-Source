@@ -44,26 +44,26 @@ function function_d6863a3(inflictor, attacker, meansofdeath, weapon, aat, item) 
         if(isDefined(var_c3317960)) {
           switch (var_c3317960) {
             case 1:
-              element = # "cold";
+              element = #"cold";
               break;
             case 4:
             case 14:
             case 15:
-              element = # "electrical";
+              element = #"electrical";
               break;
             case 3:
             case 10:
             case 12:
-              element = # "fire";
+              element = #"fire";
               break;
             case 7:
             case 9:
-              element = # "explosive";
+              element = #"explosive";
               break;
             case 6:
             case 8:
             case 16:
-              element = # "toxic";
+              element = #"toxic";
               break;
           }
         }

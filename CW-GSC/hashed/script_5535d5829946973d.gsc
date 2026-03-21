@@ -934,8 +934,8 @@ function function_59945288() {
     var_1c8839e = level.player getEye() + v_fwd * -80;
     a_enemies = getaiteamarray("axis");
     a_enemies = arraysortclosest(a_enemies, level.player.origin);
-    level.var_85b00b2b = # "hash_aa1a0042fd9fd71";
-    level.var_30eb363 = # "hash_761c2b2b6618dd2c";
+    level.var_85b00b2b = #"hash_aa1a0042fd9fd71";
+    level.var_30eb363 = #"hash_761c2b2b6618dd2c";
     waitframe(1);
     level.player util::stop_magic_bullet_shield();
     level.player disableinvulnerability();
@@ -1399,7 +1399,7 @@ function function_d1863cca() {
   wait 1;
 
   if(level flag::get("flg_helipad_advance_1") == 0) {
-    if(e_attacker === level.player || str_notify === # "takedown_begin") {
+    if(e_attacker === level.player || str_notify === #"takedown_begin") {
       level thread namespace_4bd68414::function_19e4681b();
     } else {
       level thread namespace_4bd68414::function_8a5d9832();
@@ -1602,16 +1602,16 @@ function function_52f9130e() {
 
   switch (i) {
     case 1:
-      level.var_85b00b2b = # "hash_bf2ac24d39c2373";
+      level.var_85b00b2b = #"hash_bf2ac24d39c2373";
       break;
     case 2:
-      level.var_85b00b2b = # "hash_bf2ad24d39c2526";
+      level.var_85b00b2b = #"hash_bf2ad24d39c2526";
       break;
     case 3:
-      level.var_85b00b2b = # "hash_bf2ae24d39c26d9";
+      level.var_85b00b2b = #"hash_bf2ae24d39c26d9";
       break;
     default:
-      level.var_85b00b2b = # "hash_bf2ac24d39c2373";
+      level.var_85b00b2b = #"hash_bf2ac24d39c2373";
       break;
   }
 
@@ -1619,22 +1619,22 @@ function function_52f9130e() {
 
   switch (i) {
     case 1:
-      level.var_30eb363 = # "hash_3c61cf89bbd8cd6a";
+      level.var_30eb363 = #"hash_3c61cf89bbd8cd6a";
       break;
     case 2:
-      level.var_30eb363 = # "hash_3c61ce89bbd8cbb7";
+      level.var_30eb363 = #"hash_3c61ce89bbd8cbb7";
       break;
     case 3:
-      level.var_30eb363 = # "hash_3c61cd89bbd8ca04";
+      level.var_30eb363 = #"hash_3c61cd89bbd8ca04";
       break;
     case 4:
-      level.var_30eb363 = # "hash_3c61cc89bbd8c851";
+      level.var_30eb363 = #"hash_3c61cc89bbd8c851";
       break;
     case 5:
-      level.var_30eb363 = # "hash_3c61cb89bbd8c69e";
+      level.var_30eb363 = #"hash_3c61cb89bbd8c69e";
       break;
     default:
-      level.var_30eb363 = # "hash_3c61cf89bbd8cd6a";
+      level.var_30eb363 = #"hash_3c61cf89bbd8cd6a";
       break;
   }
 
@@ -1980,8 +1980,8 @@ function private function_b49d9d8a(var_ed03deed = 1) {
   }
 
   var_ec67a181 = self gettagorigin(var_c197f9aa) + (0, 0, 32);
-  level.var_85b00b2b = # "hash_695810e2d2481345";
-  level.var_30eb363 = # "hash_70772ca86e781390";
+  level.var_85b00b2b = #"hash_695810e2d2481345";
+  level.var_30eb363 = #"hash_70772ca86e781390";
   waitframe(1);
   b_trace = sighttracepassed(var_ec67a181, v_player_pos, 0, self);
 

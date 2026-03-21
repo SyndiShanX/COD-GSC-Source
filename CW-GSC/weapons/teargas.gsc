@@ -276,7 +276,7 @@ function function_516794d8(grenadeent, var_7e6e7f9f) {
         continue;
       }
 
-      if(waitresult._notify == # "timeout" && isDefined(var_160d2855) && player istouching(var_160d2855) && bullettracepassed(grenadeent.origin, player.origin + (0, 0, 12), 0, player)) {
+      if(waitresult._notify == #"timeout" && isDefined(var_160d2855) && player istouching(var_160d2855) && bullettracepassed(grenadeent.origin, player.origin + (0, 0, 12), 0, player)) {
         if(!isDefined(player.var_2ee59975)) {
           player.var_2ee59975 = [];
         } else if(!isarray(player.var_2ee59975)) {

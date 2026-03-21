@@ -61,8 +61,8 @@ add_bot(team, name = undefined, clanabbrev = undefined) {
 
   if(level.teambased && isDefined(team) && isDefined(level.teams[team])) {
     bot.botteam = team;
-  } else if(isDefined(team) && team == # "spectator") {
-    bot.botteam = # "spectator";
+  } else if(isDefined(team) && team == #"spectator") {
+    bot.botteam = #"spectator";
   } else {
     bot.botteam = "autoassign";
   }
@@ -1268,10 +1268,10 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
 
 devgui_relative_team(host, botarg) {
   if(isDefined(host)) {
-    team = host.team != # "spectator" ? host.team : # "allies";
+    team = host.team != #"spectator" ? host.team : # "allies";
 
     if(botarg == "enemy") {
-      team = team == # "allies" ? # "axis" : # "allies";
+      team = team == #"allies" ? # "axis" : # "allies";
     }
 
     return team;

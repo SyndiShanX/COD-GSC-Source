@@ -196,10 +196,10 @@ function private _spawn_item(point, row, stashitem = 0) {
     level.var_d80c35aa[itementry.itemtype]++;
   }
 
-  if(!isDefined(itementry) || !isDefined(itementry.itemtype) || itementry.itemtype == # "blank") {
+  if(!isDefined(itementry) || !isDefined(itementry.itemtype) || itementry.itemtype == #"blank") {
     function_43cd95f4(point.id, "");
     return;
-  } else if(itementry.itemtype == # "vehicle") {
+  } else if(itementry.itemtype == #"vehicle") {
     function_43cd95f4(point.id, "");
 
     level.var_f2db6a7f++;
@@ -370,7 +370,7 @@ function private function_ea39d1fa(stash) {
 
       var_1dd9b7f1 = getscriptbundle(var_ee110db8.replacement);
 
-      if(var_1dd9b7f1.type !== # "itemspawnlist") {
+      if(var_1dd9b7f1.type !== #"itemspawnlist") {
         assert(0, "<dev string:x83>" + var_ee110db8);
         continue;
       }
@@ -417,7 +417,7 @@ function private function_ea39d1fa(stash) {
         continue;
       }
 
-      var_bbe618cc = itemlistbundle.type == # "itemspawnlist" || itemlistbundle.type == # "itemspawnlistalias";
+      var_bbe618cc = itemlistbundle.type == #"itemspawnlist" || itemlistbundle.type == #"itemspawnlistalias";
       available = isDefined(var_eff83f3.itemlist[row].available) ? var_eff83f3.itemlist[row].available : 0;
       var_8107154f = [];
 
@@ -434,7 +434,7 @@ function private function_ea39d1fa(stash) {
       while(available > 0);
 
       if(var_bbe618cc) {
-        if(itemlistbundle.type == # "itemspawnlistalias") {
+        if(itemlistbundle.type == #"itemspawnlistalias") {
           var_12ab6449 = function_440f0490(itemlistbundle);
 
           if(!isDefined(var_12ab6449)) {
@@ -598,7 +598,7 @@ function private function_216a69d6(spawnchance) {
           dynent.fx = undefined;
         }
 
-        if(newstate.statefx !== # "hash_633319dd8957ddbb") {
+        if(newstate.statefx !== #"hash_633319dd8957ddbb") {
           dynent.fx = playfxondynent(newstate.statefx, dynent);
         }
       }
@@ -654,7 +654,7 @@ function private _setup() {
     self.var_8107154f[pointid] = pointid;
   }
 
-  if(!isDefined(level.var_28cd0b1f[self.target]) && self.target !== # "hash_4f6d836b1441bd94") {}
+  if(!isDefined(level.var_28cd0b1f[self.target]) && self.target !== #"hash_4f6d836b1441bd94") {}
 
   if(!isDefined(self.points)) {
     self.points = [];
@@ -694,7 +694,7 @@ function private function_9db93def() {
 
 function private function_a8e0dc24(itementry, data, limit, var_a3a56d95, maxattachments) {
   assert(isstruct(itementry));
-  assert(itementry.itemtype == # "weapon");
+  assert(itementry.itemtype == #"weapon");
   assert(maxattachments >= var_a3a56d95);
   assert(isarray(data.currentattachments));
   assert(isarray(data.possibleattachments));
@@ -775,7 +775,7 @@ function private function_a8e0dc24(itementry, data, limit, var_a3a56d95, maxatta
 
 function function_67456242(itementry) {
   assert(isstruct(itementry));
-  assert(itementry.itemtype == # "weapon");
+  assert(itementry.itemtype == #"weapon");
   assert(isDefined(itementry.random_attachments) || isDefined(itementry.var_3e805062));
   weapon = item_world_util::function_35e06774(itementry, 1);
   attachments = weapon.attachments;
@@ -1038,7 +1038,7 @@ function private function_e25c9d12(var_f16b79a, &var_8107154f, spawncount, stash
     if(isDefined(itementry) && itementry != "") {
       scriptbundle = isDefined(level.var_de3d5d56) && isDefined(level.var_de3d5d56[itementry]) ? level.var_de3d5d56[itementry] : getscriptbundle(itementry);
 
-      if(isDefined(scriptbundle) && isDefined(scriptbundle.type) && (scriptbundle.type == # "itemspawnlist" || scriptbundle.type == # "itemspawnlistalias")) {
+      if(isDefined(scriptbundle) && isDefined(scriptbundle.type) && (scriptbundle.type == #"itemspawnlist" || scriptbundle.type == #"itemspawnlistalias")) {
         self.var_ccc6d5b7[var_75aa5cbb] = self.var_202d2992[var_75aa5cbb];
         self.var_202d2992[var_75aa5cbb] = 0;
         var_f5111345++;
@@ -1071,7 +1071,7 @@ function private function_e25c9d12(var_f16b79a, &var_8107154f, spawncount, stash
         }
 
         if(isDefined(self.itemlistbundle.var_dc7ffbef) && isDefined(itemtype)) {
-          if(itemtype == # "vehicle") {} else {
+          if(itemtype == #"vehicle") {} else {
             var_f4b807cb = function_abaeb170(itemspawnpoint.origin, undefined, undefined, self.itemlistbundle.var_7fb0967b, -1, 1, -2147483647);
 
             for(var_55879fe2 = 0; var_55879fe2 < var_f4b807cb.size; var_55879fe2++) {
@@ -1122,11 +1122,11 @@ function private function_e25c9d12(var_f16b79a, &var_8107154f, spawncount, stash
 
     itemlistbundle = getscriptbundle(itemlist.itementry);
 
-    if(!isDefined(itemlistbundle.type) || itemlistbundle.type != # "itemspawnlist" && itemlistbundle.type != # "itemspawnlistalias") {
+    if(!isDefined(itemlistbundle.type) || itemlistbundle.type != #"itemspawnlist" && itemlistbundle.type != #"itemspawnlistalias") {
       continue;
     }
 
-    if(itemlistbundle.type == # "itemspawnlistalias") {
+    if(itemlistbundle.type == #"itemspawnlistalias") {
       var_12ab6449 = function_440f0490(itemlistbundle);
 
       if(!isDefined(var_12ab6449)) {
@@ -1249,7 +1249,7 @@ function function_ca77960f() {
     var_52096b93.classname = "scriptbundle_itemspawnlist";
     var_52096b93.count = -1;
     var_52096b93.modelscale = 1;
-    var_52096b93.target = # "hash_4f6d836b1441bd94";
+    var_52096b93.target = #"hash_4f6d836b1441bd94";
     item_spawn_groups[item_spawn_groups.size] = var_52096b93;
   }
 
@@ -1430,7 +1430,7 @@ function function_5eada592(scriptbundlename, linkto = 1) {
       }
 
       itemlistbundle = getscriptbundle(self.itemlistbundle.itemlist[row].itementry);
-      var_bbe618cc = itemlistbundle.type == # "itemspawnlist" || itemlistbundle.type == # "itemspawnlistalias";
+      var_bbe618cc = itemlistbundle.type == #"itemspawnlist" || itemlistbundle.type == #"itemspawnlistalias";
       available = isDefined(self.itemlistbundle.itemlist[row].available) ? self.itemlistbundle.itemlist[row].available : 0;
       var_8107154f = [];
 
@@ -1447,7 +1447,7 @@ function function_5eada592(scriptbundlename, linkto = 1) {
       while(available > 0);
 
       if(var_bbe618cc) {
-        if(itemlistbundle.type == # "itemspawnlistalias") {
+        if(itemlistbundle.type == #"itemspawnlistalias") {
           var_12ab6449 = function_440f0490(itemlistbundle);
 
           if(!isDefined(var_12ab6449)) {

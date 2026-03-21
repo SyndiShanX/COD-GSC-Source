@@ -321,7 +321,7 @@ function istouchinganyoobtrigger() {
 
     n_flags = function_27f2ef17(trigger);
 
-    if(trigger.classname == "trigger_out_of_bounds" && self.team == # "axis" && !(n_flags & 1) || self.team == # "allies" && !(n_flags & 2)) {
+    if(trigger.classname == "trigger_out_of_bounds" && self.team == #"axis" && !(n_flags & 1) || self.team == #"allies" && !(n_flags & 2)) {
       continue;
     }
 
@@ -479,7 +479,7 @@ function enter_oob(entity) {
     if(!getdvarint(#"hash_4f2471155144a80a", 0)) {
       weapon = player loadout::function_18a77b37("specialgrenade");
 
-      if(weapon.name === # "gadget_jammer" || weapon.name === # "listening_device" || weapon.name === # "tear_gas") {
+      if(weapon.name === #"gadget_jammer" || weapon.name === #"listening_device" || weapon.name === #"tear_gas") {
         player val::set(#"oob", "disable_offhand_special", 1);
       }
     }

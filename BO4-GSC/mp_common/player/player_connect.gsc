@@ -101,7 +101,7 @@ callback_playerconnect() {
 
   self.killedplayerscurrent = [];
 
-  if(self.team != # "spectator" && util::isfirstround()) {
+  if(self.team != #"spectator" && util::isfirstround()) {
     if(isDefined(level.draftstage) && level.draftstage >= 6) {
       self thread globallogic_audio::set_music_on_player("none");
     } else if(game.state != "playing") {
@@ -172,7 +172,7 @@ callback_playerconnect() {
 
   if(gamestate::is_game_over()) {
     self.pers[#"needteam"] = 1;
-    self.pers[#"team"] = # "spectator";
+    self.pers[#"team"] = #"spectator";
     self.team = self.sessionteam;
     self setclientuivisibilityflag("hud_visible", 0);
     self[[level.spawnintermission]]();
@@ -232,9 +232,9 @@ callback_playerconnect() {
     }
 
     self.pers[#"needteam"] = undefined;
-    self.pers[#"team"] = # "spectator";
-    self.team = # "spectator";
-    self.sessionteam = # "spectator";
+    self.pers[#"team"] = #"spectator";
+    self.team = #"spectator";
+    self.sessionteam = #"spectator";
     self.sessionstate = "dead";
     self globallogic_ui::updateobjectivetext();
     [[level.spawnspectator]]();
@@ -244,8 +244,8 @@ callback_playerconnect() {
       self thread globallogic_spawn::kickifdontspawn();
     }
 
-    if(self.pers[#"team"] == # "spectator") {
-      self.sessionteam = # "spectator";
+    if(self.pers[#"team"] == #"spectator") {
+      self.sessionteam = #"spectator";
       self thread spectate_player_watcher();
     }
 
@@ -260,9 +260,9 @@ callback_playerconnect() {
     }
 
     init_character_index();
-  } else if(self.pers[#"team"] == # "spectator") {
+  } else if(self.pers[#"team"] == #"spectator") {
     [[level.spawnspectator]]();
-    self.sessionteam = # "spectator";
+    self.sessionteam = #"spectator";
     self.sessionstate = "spectator";
     self thread spectate_player_watcher();
   } else {
@@ -283,7 +283,7 @@ callback_playerconnect() {
     self thread spectating::set_permissions();
   }
 
-  if(self.sessionteam != # "spectator" && self.sessionstate != "playing" && !isalive(self)) {
+  if(self.sessionteam != #"spectator" && self.sessionstate != "playing" && !isalive(self)) {
     self thread spawning::onspawnplayer(1);
   }
 
@@ -482,7 +482,7 @@ init_character_index() {
       if(var_72964a59 != 0 && isDefined(getgametypesetting(#"wzspectrerising")) && getgametypesetting(#"wzspectrerising")) {
         rf = getplayerrolefields(var_72964a59, currentsessionmode());
 
-        if(isDefined(rf) && rf.unlockableitementry === # "wz_character_spectre") {
+        if(isDefined(rf) && rf.unlockableitementry === #"wz_character_spectre") {
           var_72964a59 = 0;
         }
       }
@@ -581,7 +581,7 @@ function_efa6e25f() {
   }
 
   self.pointstowin = self.pers[#"pointstowin"];
-  self.pers[#"outcome"] = # "loss";
+  self.pers[#"outcome"] = #"loss";
   self globallogic_score::initpersstat(#"momentum", 0);
   self.momentum = self globallogic_score::getpersstat(#"momentum");
   self globallogic_score::initpersstat(#"suicides");

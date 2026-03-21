@@ -66,7 +66,7 @@ function function_4366bf50(params) {
   eattacker = params.eattacker;
   weapon = params.weapon;
 
-  if(isDefined(self.team) && isDefined(eattacker.team) && self.team != # "neutral" && util::function_fbce7263(self.team, eattacker.team) && self getvehoccupants().size > 0) {
+  if(isDefined(self.team) && isDefined(eattacker.team) && self.team != #"neutral" && util::function_fbce7263(self.team, eattacker.team) && self getvehoccupants().size > 0) {
     scoreevents::processscoreevent(#"destroyed_tank", eattacker, undefined, weapon);
   }
 

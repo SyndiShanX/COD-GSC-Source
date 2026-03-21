@@ -83,7 +83,7 @@ function function_a6101b7() {
     util::set_lighting_state(1);
     exploder::exploder("fxexp_holiday");
 
-    if(util::get_game_type() === # "zonslaught") {
+    if(util::get_game_type() === #"zonslaught") {
       hidemiscmodels("nt6_xmas_props_no_zm");
       array::delete_all(getEntArray("nt6_xmas_props_no_zm", "targetname"));
     }
@@ -94,7 +94,7 @@ function function_a6101b7() {
     util::set_lighting_state(1);
     exploder::exploder("fxexp_halloween");
 
-    if(util::get_game_type() === # "zonslaught") {
+    if(util::get_game_type() === #"zonslaught") {
       hidemiscmodels("nt6_halloween_props_no_zm");
       array::delete_all(getEntArray("nt6_halloween_props_no_zm", "targetname"));
     }
@@ -113,7 +113,7 @@ function function_a6101b7() {
 }
 
 function function_21acba11() {
-  if(util::get_game_type() !== # "zonslaught" && util::get_game_type() !== # "hash_321225a5ce1eb35") {
+  if(util::get_game_type() !== #"zonslaught" && util::get_game_type() !== #"hash_321225a5ce1eb35") {
     hidemiscmodels("nt6_onslaught_props");
     array::delete_all(getEntArray("nt6_onslaught_props", "targetname"));
   }
@@ -122,7 +122,7 @@ function function_21acba11() {
 function function_29584e41() {
   level flag::wait_till(#"item_world_reset");
 
-  if(util::get_game_type() !== # "spy") {
+  if(util::get_game_type() !== #"spy") {
     var_94c44cac = getdynentarray("spy_special_weapon_stash");
     var_de285f77 = getdynentarray("spy_ammo_stash");
     var_ffd6a2d3 = getdynentarray("spy_equipment_stash");

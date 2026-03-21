@@ -22,8 +22,8 @@ function event_handler[gametype_init] main(eventstruct) {
   level._zombie_gamemodeprecache = &onprecachegametype;
   level._zombie_gamemodemain = &onstartgametype;
 
-  if(util::get_map_name() === # "zm_gold") {
-    level.str_magicbox_weapon_itemspawnlist = # "hash_6b07c24817b7820f";
+  if(util::get_map_name() === #"zm_gold") {
+    level.str_magicbox_weapon_itemspawnlist = #"hash_6b07c24817b7820f";
   }
 
   if(!isDefined(level.var_352498c6)) {
@@ -80,7 +80,7 @@ function function_ee85e4e3(localclientnum) {
   self endon(#"death", #"disconnect", #"hash_42ef04c28c2ef326");
   waitframe(1);
   n_timer = self clientfield::get_to_player("sr_defend_timer");
-  str_alias = # "hash_43c0fcbfe93e6423";
+  str_alias = #"hash_43c0fcbfe93e6423";
   function_672403ca("zmb_cranked_neardeath", 0, 0);
 
   if(is_true(self.var_5a72f7c9)) {
@@ -105,12 +105,12 @@ function function_ee85e4e3(localclientnum) {
 
       function_672403ca("zmb_cranked_neardeath", 1, blendscale);
       self.var_5a72f7c9 = 1;
-      str_alias = # "hash_37a0bf7f61bc3362" + n_timer;
+      str_alias = #"hash_37a0bf7f61bc3362" + n_timer;
       self playrumbleonentity(localclientnum, #"infiltration_rumble");
     } else if(n_timer <= 10) {
-      str_alias = # "hash_bb1df4387e47518";
+      str_alias = #"hash_bb1df4387e47518";
     } else if(n_timer <= 15) {
-      str_alias = # "hash_43c0ffbfe93e693c";
+      str_alias = #"hash_43c0ffbfe93e693c";
     }
 
     if(n_timer <= 6) {

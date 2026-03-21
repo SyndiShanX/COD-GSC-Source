@@ -142,7 +142,7 @@ function function_8136eb5a() {
   return level.var_3a8f95b4;
 }
 
-function function_6440b06b(dataname = # "transient", missionname = function_8136eb5a()) {
+function function_6440b06b(dataname = #"transient", missionname = function_8136eb5a()) {
   if(!isDefined(world.mapdata)) {
     world.mapdata = [];
   }

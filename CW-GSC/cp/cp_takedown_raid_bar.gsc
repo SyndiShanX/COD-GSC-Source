@@ -526,9 +526,9 @@ function function_68461db2() {
   weapon.var_e035b3c3 = getEntArray("trunk_smg1", "targetname");
   weapon.var_5dc45345 = getEntArray("trunk_smg2", "targetname");
   weapon.var_ccbb5ad1 = getEntArray("trunk_smg3", "targetname");
-  weapon.var_4bb56827 = # "hash_354b11b88d53b149";
-  weapon.var_895ad5bc = # "hash_354b0eb88d53ac30";
-  weapon.var_d7c6490d = # "hash_354b0fb88d53ade3";
+  weapon.var_4bb56827 = #"hash_354b11b88d53b149";
+  weapon.var_895ad5bc = #"hash_354b0eb88d53ac30";
+  weapon.var_d7c6490d = #"hash_354b0fb88d53ade3";
   weapon.var_5a3a522d = getent("smg_use", "targetname");
   weapon.var_ba0f1686 = getent("shg_use", "targetname");
   weapon.var_e9482014 = getent("ar_use", "targetname");

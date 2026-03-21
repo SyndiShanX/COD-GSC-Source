@@ -941,7 +941,7 @@ function function_6220c1cb() {
 }
 
 function function_8ed10706() {
-  if(self.archetype == # "civilian") {
+  if(self.archetype == #"civilian") {
     return;
   }
 
@@ -1495,8 +1495,8 @@ function function_dfd339e4() {
   self endon(#"death");
   level flag::clear("informant_not_found");
   self.targetname = "actor_informant";
-  old_model = # "c_t9_cp_ger_civ_male_informant_body";
-  new_model = # "c_t9_cp_ger_civ_male_informant_body_tape";
+  old_model = #"c_t9_cp_ger_civ_male_informant_body";
+  new_model = #"c_t9_cp_ger_civ_male_informant_body_tape";
   self detach(old_model);
   self attach(new_model);
   self setteam(#"allies");
@@ -1664,14 +1664,14 @@ function function_1b6d2916() {
   self endon(#"death");
   self thread function_9dd751e9();
   level flag::set("informant_choice_05_note_not_found");
-  var_6e695d6d = # "hash_534ff4023162856c";
-  var_314be333 = # "hash_534ff70231628a85";
-  var_41dc8454 = # "hash_534ff602316288d2";
-  var_3194e3c1 = # "hash_534ff10231628053";
-  var_e66718e1 = # "hash_7356b7b9ea5fd343";
-  var_43558742 = # "hash_534ff00231627ea0";
-  var_f98ce627 = # "hash_656b6f2304158027";
-  var_d1de180 = # "hash_11f0e4dd5bf7075b";
+  var_6e695d6d = #"hash_534ff4023162856c";
+  var_314be333 = #"hash_534ff70231628a85";
+  var_41dc8454 = #"hash_534ff602316288d2";
+  var_3194e3c1 = #"hash_534ff10231628053";
+  var_e66718e1 = #"hash_7356b7b9ea5fd343";
+  var_43558742 = #"hash_534ff00231627ea0";
+  var_f98ce627 = #"hash_656b6f2304158027";
+  var_d1de180 = #"hash_11f0e4dd5bf7075b";
   var_87b83dca = dialog_tree::new_tree(&function_88724c2d, undefined, 1, 0, "aib_vign_stakeout_alley2_informant");
   var_87b83dca thread dialog_tree::function_a3a3ea7d(var_d1de180, "informant_enemies_cleared");
   var_dfc957f2 = var_87b83dca dialog_tree::add_option(var_6e695d6d, "vox_cp_stkt_07300_info_ivebeenmonitori_73", undefined, undefined, 0, undefined, undefined, &function_9a8402c8);
@@ -1719,8 +1719,8 @@ function function_e97a2940() {}
 function function_ac42a645() {
   level.informant endon(#"death");
   level.informant notify(#"hash_4d9e21fd0dcc04a9");
-  old_model = # "c_t9_cp_ger_civ_male_informant_body_tape";
-  new_model = # "c_t9_cp_ger_civ_male_informant_body";
+  old_model = #"c_t9_cp_ger_civ_male_informant_body_tape";
+  new_model = #"c_t9_cp_ger_civ_male_informant_body";
   level.informant detach(old_model);
   level.informant attach(new_model);
   level.informant util::delay(0.2, "death", &dialogue::queue, "vox_cp_stkt_07300_info_thankyouforsavi_ee");

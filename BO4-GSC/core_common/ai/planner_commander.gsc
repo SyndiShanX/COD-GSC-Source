@@ -217,7 +217,7 @@ _debugcommander(commander) {
       var_b5dfd8a6 = strategiccommandutility::function_45c5edc6(side);
 
       if(!isDefined(var_b5dfd8a6)) {
-        var_b5dfd8a6 = # "default_strategicbundle";
+        var_b5dfd8a6 = #"default_strategicbundle";
       }
 
       yoffset += 13;

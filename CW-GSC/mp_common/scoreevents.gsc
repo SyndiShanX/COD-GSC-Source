@@ -87,11 +87,11 @@ function private on_weapon_change(params) {
     return;
   }
 
-  if(var_86ecd1f2.var_76ce72e8 === 1 || var_86ecd1f2.issignatureweapon === 1 || var_86ecd1f2.name == # "none") {
+  if(var_86ecd1f2.var_76ce72e8 === 1 || var_86ecd1f2.issignatureweapon === 1 || var_86ecd1f2.name == #"none") {
     return;
   }
 
-  if(var_b577d267.var_76ce72e8 === 1 || var_b577d267.issignatureweapon === 1 || var_b577d267.name == # "none") {
+  if(var_b577d267.var_76ce72e8 === 1 || var_b577d267.issignatureweapon === 1 || var_b577d267.name == #"none") {
     return;
   }
 
@@ -103,13 +103,13 @@ function private on_weapon_change(params) {
 }
 
 function function_abe2675d() {
-  if(self.var_9cd2c51d.var_158e75d4 === # "eq_stimshot") {
+  if(self.var_9cd2c51d.var_158e75d4 === #"eq_stimshot") {
     self stats::function_622feb0d(#"eq_stimshot", #"uses", 1);
   }
 }
 
 function function_9c3085c8() {
-  if(self.var_9cd2c51d.var_158e75d4 === # "eq_stimshot") {
+  if(self.var_9cd2c51d.var_158e75d4 === #"eq_stimshot") {
     var_b68a8a9f = self.health - self.var_9cd2c51d.var_6e219f3c;
     self stats::function_622feb0d(#"eq_stimshot", #"hash_2bc3b9360ca17edf", var_b68a8a9f);
   }
@@ -275,7 +275,7 @@ function scoreeventplayerkill(data, time) {
       attacker contracts::player_contract_event(#"objective_kill");
     }
 
-    if(isgrenade == 0 || weapon.name == # "hero_gravityspikes") {
+    if(isgrenade == 0 || weapon.name == #"hero_gravityspikes") {
       if(attackersliding == 1 || time - attacker_slide_end < 350) {
         processscoreevent(#"kill_enemy_while_sliding", attacker, victim, weapon);
         attacker stats::function_e24eec31(weapon, #"kill_enemy_while_sliding", 1);
@@ -336,9 +336,9 @@ function scoreeventplayerkill(data, time) {
       attacker contracts::increment_contract(#"hash_4a30207a6036bed0");
     }
 
-    if(attackerwasflashed === 1 && data.var_1c4553e5.name === # "eq_flash_grenade" && data.attackerlastflashedby !== attacker) {
+    if(attackerwasflashed === 1 && data.var_1c4553e5.name === #"eq_flash_grenade" && data.attackerlastflashedby !== attacker) {
       processscoreevent(#"hash_7e54fa6e53910c4e", attacker, victim, data.var_1c4553e5);
-    } else if(var_c3782b05 === 1 && data.var_c2cdb4a1.name === # "eq_slow_grenade") {
+    } else if(var_c3782b05 === 1 && data.var_c2cdb4a1.name === #"eq_slow_grenade") {
       processscoreevent(#"hash_7e54fa6e53910c4e", attacker, victim, data.var_c2cdb4a1);
     }
 
@@ -427,9 +427,9 @@ function scoreeventplayerkill(data, time) {
       }
     }
 
-    if(weapon.statname == # "frag_grenade") {
+    if(weapon.statname == #"frag_grenade") {
       attacker stats::function_dad108fa(#"kills_frag_grenade", 1);
-    } else if(weapon.statname == # "eq_molotov") {
+    } else if(weapon.statname == #"eq_molotov") {
       attacker stats::function_dad108fa(#"kills_molotov", 1);
     }
 
@@ -528,7 +528,7 @@ function scoreeventplayerkill(data, time) {
         processscoreevent(#"hash_56ede06b1821a561", attacker, victim, weapon);
         challenges::function_ffdecc69(attacker, weapon, weaponclass);
 
-        if(weaponclass === # "weapon_pistol") {
+        if(weaponclass === #"weapon_pistol") {
           victimyaw = victimangles[1];
           var_a48ab0d6 = vectortoyaw(victimorigin - attackerorigin);
           anglediff = angleclamp180(victimyaw - var_a48ab0d6);
@@ -608,7 +608,7 @@ function scoreeventplayerkill(data, time) {
       attacker.pers[#"stabs"]++;
       attacker.stabs = attacker.pers[#"stabs"];
 
-      if(getdvarint(#"hash_5c49df97f4f82e12", 0) && weaponclass === # "weapon_knife") {
+      if(getdvarint(#"hash_5c49df97f4f82e12", 0) && weaponclass === #"weapon_knife") {
         processscoreevent(#"hash_7036af264dd467b", attacker, victim, weapon);
         attacker stats::function_42277145(#"hash_5135a4983fb81980", 1);
       }
@@ -638,7 +638,7 @@ function scoreeventplayerkill(data, time) {
 
         attacker.pers[#"backstabs"]++;
       } else if(!is_true(weapon.var_cfc07f04) && (anglediff < -30 || anglediff > 70 || is_true(victim.laststand))) {
-        if(meansofdeath == "MOD_MELEE_WEAPON_BUTT" && weapon.name != # "ball" && weapon.name != # "hash_29ab150f9f8964f") {
+        if(meansofdeath == "MOD_MELEE_WEAPON_BUTT" && weapon.name != #"ball" && weapon.name != #"hash_29ab150f9f8964f") {
           processscoreevent(#"kill_enemy_with_gunbutt", attacker, victim, weapon);
         } else if(weapons::ispunch(weapon)) {
           processscoreevent(#"kill_enemy_with_fists", attacker, victim, weapon);
@@ -1107,7 +1107,7 @@ function specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
     case # "inventory_sig_lmg":
     case # "sig_lmg":
       if(getdvarint(#"hash_5c49df97f4f82e12", 0)) {
-        event = # "hash_152f120fead67512";
+        event = #"hash_152f120fead67512";
         attacker stats::function_42277145(#"hash_122768477016f4e5", 1);
         break;
       }
@@ -1337,7 +1337,7 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
     }
   }
 
-  if(weaponclass.name == # "satchel_charge") {
+  if(weaponclass.name == #"satchel_charge") {
     self.recentc4killcount++;
   }
 
@@ -1393,7 +1393,7 @@ function updatemultikills(weapon, weaponclass, killstreak, victim, time, meansof
     }
   }
 
-  if(self.var_a7f5c61e && weaponclass.name == # "eq_gravityslam") {
+  if(self.var_a7f5c61e && weaponclass.name == #"eq_gravityslam") {
     self.var_cc5ece37++;
   }
 
@@ -1744,7 +1744,7 @@ function get_distance_for_weapon(weapon, weaponclass) {
     return 0;
   }
 
-  if(weapon.statname === # "pistol_shotgun_t9") {
+  if(weapon.statname === #"pistol_shotgun_t9") {
     return 187489;
   }
 

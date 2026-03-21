@@ -38,7 +38,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu02_item") {
+  if(itementry.name === #"cu02_item") {
     self.var_cadd241b = 1;
     var_c503939b = globallogic::function_e9e52d05();
 
@@ -61,7 +61,7 @@ function_a2877194(params) {
 
   item_name = params.item.itementry.name;
 
-  if(item_name === # "concertina_wire_wz_item") {
+  if(item_name === #"concertina_wire_wz_item") {
     if(!isDefined(self.var_41ae08e8)) {
       self.var_41ae08e8 = 0;
     }
@@ -75,7 +75,7 @@ function_a2877194(params) {
     return;
   }
 
-  if(item_name === # "barricade_wz_item") {
+  if(item_name === #"barricade_wz_item") {
     if(!isDefined(self.var_c0bc1135)) {
       self.var_c0bc1135 = 0;
     }

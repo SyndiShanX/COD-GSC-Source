@@ -31,7 +31,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu10_item") {
+  if(itementry.name === #"cu10_item") {
     self thread function_798820a9(item);
   }
 }
@@ -44,7 +44,7 @@ on_drop_item(params) {
   if(isDefined(params.item) && isDefined(params.item.itementry)) {
     itementry = params.item.itementry;
 
-    if(itementry.name === # "cu10_item" && !self character_unlock::function_f0406288(#"prophet_unlock")) {
+    if(itementry.name === #"cu10_item" && !self character_unlock::function_f0406288(#"prophet_unlock")) {
       self notify(#"dropped_prophet_item");
     }
   }

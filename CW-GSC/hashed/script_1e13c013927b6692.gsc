@@ -23,7 +23,7 @@ function private autoexec __init__system__() {
 
 function preinit() {
   clientfield::register("toplayer", "" + # "hash_69dc133e22a2769f", 16000, 1, "int");
-  level.var_5bfd847e = # "power_fasttravel";
+  level.var_5bfd847e = #"power_fasttravel";
   level.var_e9737821 = &function_c52e8ba;
   level.var_352c9e03 = &function_af65fe93;
   level.var_91171ae5 = &function_54a36ee5;
@@ -55,12 +55,12 @@ function function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(!self zm_fasttravel::function_d06e636b(player) || player isswitchingweapons() || level flag::get(#"hash_49e515cdcf4bb8db")) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a92d1b24) && !level flag::get_all(self.stub.var_a92d1b24)) {
     switch (self.stub.script_string) {
       case # "village":
       case # "firebase":
-        self.hint_string[n_player_index] = # "zombie/fasttravel_locked";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
         break;
       default:
         break;
@@ -70,22 +70,22 @@ function function_c52e8ba(player, var_8d5d092c) {
   } else if(is_true(player.var_9c7b96ed[var_8d5d092c])) {
     switch (self.stub.script_string) {
       case # "village":
-        self.hint_string[n_player_index] = # "hash_1b9857d1769d3430";
+        self.hint_string[n_player_index] = #"hash_1b9857d1769d3430";
         b_result = 1;
         break;
       case # "firebase":
-        self.hint_string[n_player_index] = # "hash_6357eb67494da1b";
+        self.hint_string[n_player_index] = #"hash_6357eb67494da1b";
         b_result = 1;
         break;
     }
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
     switch (self.stub.script_string) {
       case # "village":
-        self.hint_string[n_player_index] = # "hash_1b9857d1769d3430";
+        self.hint_string[n_player_index] = #"hash_1b9857d1769d3430";
         b_result = 1;
         break;
       case # "firebase":
-        self.hint_string[n_player_index] = # "hash_6357eb67494da1b";
+        self.hint_string[n_player_index] = #"hash_6357eb67494da1b";
         b_result = 1;
         break;
     }
@@ -93,9 +93,9 @@ function function_c52e8ba(player, var_8d5d092c) {
     switch (self.stub.script_string) {
       case # "village":
         if(level flag::get(#"hash_7752d012501cd222") || level flag::get(#"hash_7735f4e5fdb1382b")) {
-          self.hint_string[n_player_index] = # "hash_1155071b36db5cc4";
+          self.hint_string[n_player_index] = #"hash_1155071b36db5cc4";
         } else {
-          self.hint_string[n_player_index] = # "hash_661484e87df6401d";
+          self.hint_string[n_player_index] = #"hash_661484e87df6401d";
 
           if(!player zm_score::can_player_purchase(self.stub.zombie_cost)) {
             player globallogic::function_d1924f29(#"hash_6e3ae7967dc5d414");
@@ -105,9 +105,9 @@ function function_c52e8ba(player, var_8d5d092c) {
         break;
       case # "firebase":
         if(level flag::get(#"hash_7752d012501cd222") || level flag::get(#"hash_7735f4e5fdb1382b")) {
-          self.hint_string[n_player_index] = # "hash_6da21d98bf10aee5";
+          self.hint_string[n_player_index] = #"hash_6da21d98bf10aee5";
         } else {
-          self.hint_string[n_player_index] = # "hash_3bd7d7def4239ab6";
+          self.hint_string[n_player_index] = #"hash_3bd7d7def4239ab6";
 
           if(!player zm_score::can_player_purchase(self.stub.zombie_cost)) {
             player globallogic::function_d1924f29(#"hash_6e3ae7967dc5d414");

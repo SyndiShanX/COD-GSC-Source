@@ -39,36 +39,36 @@ function function_675f0963(localclientnum) {
         self.var_dee85a7a = "j_head";
         break;
       case # "zombie_dog":
-        if(self.subarchetype === # "hash_2a5479b83161cb35") {
-          self.var_6ffc5953 = # "hash_2d158c5af72b951c";
+        if(self.subarchetype === #"hash_2a5479b83161cb35") {
+          self.var_6ffc5953 = #"hash_2d158c5af72b951c";
         } else {
-          self.var_6ffc5953 = # "hash_2d158c5af72b951c";
+          self.var_6ffc5953 = #"hash_2d158c5af72b951c";
         }
 
         self.var_dee85a7a = "j_head";
         break;
       case # "raz":
-        self.var_6ffc5953 = # "hash_279687d633e3788b";
+        self.var_6ffc5953 = #"hash_279687d633e3788b";
         self.var_dee85a7a = "j_head";
-        self.var_fbfc64db = # "hash_567c329bd17fa23e";
+        self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
       case # "mimic":
-        self.var_6ffc5953 = # "hash_577e281da25751ae";
+        self.var_6ffc5953 = #"hash_577e281da25751ae";
         self.var_dee85a7a = "j_head";
-        self.var_fbfc64db = # "hash_567c329bd17fa23e";
+        self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
       case # "mechz":
-        self.var_6ffc5953 = # "hash_36be37cb09a62a29";
+        self.var_6ffc5953 = #"hash_36be37cb09a62a29";
         self.var_dee85a7a = "j_head";
-        self.var_fbfc64db = # "hash_567c329bd17fa23e";
+        self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
       case # "hash_7c0d83ac1e845ac2":
-        self.var_6ffc5953 = # "hash_208ba71db2a5843e";
+        self.var_6ffc5953 = #"hash_208ba71db2a5843e";
         self.var_dee85a7a = "j_head";
-        self.var_fbfc64db = # "hash_567c329bd17fa23e";
+        self.var_fbfc64db = #"hash_567c329bd17fa23e";
         break;
       case # "soa":
-        self.var_6ffc5953 = # "hash_73aa050fa52a8f98";
+        self.var_6ffc5953 = #"hash_73aa050fa52a8f98";
         self.var_dee85a7a = "j_head";
         wait 1.416;
         break;

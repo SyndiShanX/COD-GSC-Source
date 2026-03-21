@@ -51,14 +51,14 @@ function private on_entity_spawn(localclientnum) {
     return;
   }
 
-  if(isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "zombie" || self.archetype == # "civilian")) {
+  if(isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"zombie" || self.archetype == #"civilian")) {
     self secondaryanimationsinit(localclientnum);
     self thread function_909a3089(localclientnum);
   }
 }
 
 function private function_b27b8716(localclientnum) {
-  self.archetype = # "human";
+  self.archetype = #"human";
   self on_entity_spawn(localclientnum);
 }
 
@@ -170,7 +170,7 @@ function private function_176c97f8(substate) {
     return false;
   }
 
-  return substate == # "pain" || substate == # "inplace_pain" || substate == # "pain_intro" || substate == # "pain_outro" || substate == # "painrecovery" || substate == # "pronepain";
+  return substate == #"pain" || substate == #"inplace_pain" || substate == #"pain_intro" || substate == #"pain_outro" || substate == #"painrecovery" || substate == #"pronepain";
 }
 
 function private function_f5dde44(substate) {
@@ -178,14 +178,14 @@ function private function_f5dde44(substate) {
     return false;
   }
 
-  return substate == # "melee" || substate == # "charge_melee" || substate == # "hash_48dda7ed88efe32f";
+  return substate == #"melee" || substate == #"charge_melee" || substate == #"hash_48dda7ed88efe32f";
 }
 
 function private function_9d9508f(localclientnum) {
   self.var_a5cdf0bd = 0;
   self.var_74a451af = 0;
 
-  if(!isDefined(self.archetype) || self.archetype != # "human" && self.archetype != # "civilian") {
+  if(!isDefined(self.archetype) || self.archetype != #"human" && self.archetype != #"civilian") {
     return;
   }
 
@@ -195,7 +195,7 @@ function private function_9d9508f(localclientnum) {
   while(true) {
     waitresult = self waittill(#"hash_f88532a558ad684", #"vox");
 
-    if(waitresult._notify == # "vox") {
+    if(waitresult._notify == #"vox") {
       self.var_74a451af++;
       continue;
     }
@@ -281,7 +281,7 @@ function private function_909a3089(localclientnum) {
   while(isDefined(self.archetype)) {
     self waittill(#"hash_570b7fe3dfbdf155");
 
-    if(self.archetype == # "human" && self clientfield::get("facial_dial")) {
+    if(self.archetype == #"human" && self clientfield::get("facial_dial")) {
       self._currentfacestate = "inactive";
       self clearcurrentfacialanim(localclientnum);
       continue;

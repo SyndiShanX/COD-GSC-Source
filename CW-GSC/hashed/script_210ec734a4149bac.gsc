@@ -45,7 +45,7 @@ function private function_478f2963() {
 function private function_9308c21b() {
   result = 0;
 
-  if(isDefined(self.node) && self.node.type == # "exposed" && self isatcovernode()) {
+  if(isDefined(self.node) && self.node.type == #"exposed" && self isatcovernode()) {
     result = 1;
   }
 
@@ -154,7 +154,7 @@ function private function_ddb1fd83(nearestnode, tacpoints, pickedpoint) {
     color = (1, 0.752941, 0.796078);
     var_f08d182b = " cover goalpos";
 
-    if(pickedpoint.node.type == # "exposed") {
+    if(pickedpoint.node.type == #"exposed") {
       color = (1, 0, 1);
       var_f08d182b = " exposed goalpos";
     }
@@ -262,7 +262,7 @@ function private function_9cefbbde(var_5f60ac6c) {
 }
 
 function private on_ai_killed(params) {
-  if(self.archetype === # "civilian") {
+  if(self.archetype === #"civilian") {
     if(isDefined(self.civilian_props)) {
       foreach(var_5f60ac6c in self.civilian_props) {
         function_9cefbbde(var_5f60ac6c);

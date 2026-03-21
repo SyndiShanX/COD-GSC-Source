@@ -512,7 +512,7 @@ function cantargetplayer(player, hardpointtype) {
     return false;
   }
 
-  if(hardpointtype.team == # "spectator") {
+  if(hardpointtype.team == #"spectator") {
     return false;
   }
 

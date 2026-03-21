@@ -14,7 +14,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(!item_world_util::use_item_spawns() || util::get_game_type() === # "zsurvival") {
+  if(!item_world_util::use_item_spawns() || util::get_game_type() === #"zsurvival") {
     return;
   }
 

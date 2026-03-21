@@ -10,9 +10,9 @@ function is_state(state) {
 }
 
 function is_game_over() {
-  return game.state == # "postgame" || game.state == # "shutdown";
+  return game.state == #"postgame" || game.state == #"shutdown";
 }
 
 function is_shutting_down() {
-  return game.state == # "shutdown";
+  return game.state == #"shutdown";
 }

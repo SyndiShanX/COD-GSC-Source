@@ -75,14 +75,14 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "elite" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"elite" || self.zm_ai_category === #"boss") {
     return;
   }
 
   aat_name = weapon aat::getaatonweapon(vpoint, 1);
   tier = function_e8018847(aat_name);
 
-  if(tier < 4 && self.zm_ai_category === # "special") {
+  if(tier < 4 && self.zm_ai_category === #"special") {
     return;
   }
 
@@ -95,7 +95,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "special") {
+  if(self.zm_ai_category === #"special") {
     if(tier >= 4) {
       self thread function_80b0dbe5(weapon, vpoint, tier);
       self thread function_be5234be(weapon, var_fd90b0bb, vpoint, shitloc, tier);
@@ -104,7 +104,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "normal") {
+  if(self.zm_ai_category === #"normal") {
     self thread function_80b0dbe5(weapon, vpoint, tier);
     self thread function_be5234be(weapon, var_fd90b0bb, vpoint, shitloc, tier);
   }
@@ -155,7 +155,7 @@ function function_c8e3a0dc(var_4589e270, var_23255fc5, e_attacker, mod, w_weapon
       continue;
     }
 
-    if(isalive(zombie) && (zombie.zm_ai_category === # "normal" || zombie.archetype === # "zombie_dog")) {
+    if(isalive(zombie) && (zombie.zm_ai_category === #"normal" || zombie.archetype === #"zombie_dog")) {
       zombie thread function_80b0dbe5(mod, w_weapon, 5);
       zombie thread function_be5234be(mod, undefined, w_weapon, var_fd90b0bb, 5);
     }
@@ -188,14 +188,14 @@ function function_80b0dbe5(e_attacker, w_weapon, tier) {
 
   while(i <= total_ticks) {
     if(tier >= 1 && !var_2c5684be) {
-      if(var_9b6cf9b5 >= self.health && w_weapon.name !== # "hero_flamethrower") {
+      if(var_9b6cf9b5 >= self.health && w_weapon.name !== #"hero_flamethrower") {
         self.var_9b0f545e = 1;
       }
 
       self dodamage(var_9b6cf9b5, self.origin, e_attacker, undefined, "none", "MOD_AAT", 0, w_weapon);
       var_2c5684be = 1;
     } else {
-      if(var_70ab6bc >= self.health && w_weapon.name !== # "hero_flamethrower") {
+      if(var_70ab6bc >= self.health && w_weapon.name !== #"hero_flamethrower") {
         self.var_9b0f545e = 1;
       }
 

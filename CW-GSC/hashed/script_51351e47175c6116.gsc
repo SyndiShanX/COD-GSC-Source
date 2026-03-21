@@ -36,7 +36,7 @@ function function_32160152(player, modelname, origin, angles, scale = 1) {
 
   if(isDefined(model)) {
     model setscale(scale);
-    scenedef = # "hash_30c46dd666dd7707";
+    scenedef = #"hash_30c46dd666dd7707";
     var_2468c36a = "fireworks";
     model namespace_83eb6304::function_3ecfde67("glow_white");
     model namespace_e32bb68::function_3a59ec34("evt_doa_pickup_giftbox_activated");

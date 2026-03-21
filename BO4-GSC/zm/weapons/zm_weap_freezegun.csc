@@ -21,18 +21,18 @@ _init_() {
   clientfield::register("actor", "" + # "hash_1aa3522b88c2b76f", 1, 1, "int", &function_7cdb7d7f, 0, 0);
   clientfield::register("actor", "" + # "hash_259cdeffe60fe48f", 1, 1, "int", &function_bf0f2e8f, 0, 0);
   clientfield::register("actor", "" + # "hash_5ad28d5f104a6e3b", 1, 1, "int", &function_3b23bb2f, 0, 0);
-  level._effect[#"hash_2f305a0bea20d6ed"] = # "hash_6910f1de979f539f";
-  level._effect[#"hash_757f891a37d3db00"] = # "hash_3da4857b4b1553dc";
-  level._effect[#"hash_26d3eeef96a2291e"] = # "hash_35e2193ab697e2f1";
-  level._effect[#"hash_32ec41222f58aa75"] = # "hash_3de16b7e3bd7e5ce";
-  level._effect[#"hash_4a12914ab0026a9d"] = # "hash_50599e96f376b4fa";
-  level._effect[#"hash_1aa3522b88c2b76f"] = # "hash_7bd6bc3aea3ff42f";
-  level._effect[#"hash_485f1b39da0ca6ca"] = # "hash_58c96eb815e5079c";
-  level._effect[#"hash_57c210bb97cf187c"] = # "hash_58c964b815e4f69e";
-  level._effect[#"hash_211384df1c05676c"] = # "hash_434ed0cd342c0caa";
-  level._effect[#"hash_3cf697eb0a408b2e"] = # "hash_432cd0cd340f2644";
-  level._effect[#"hash_390d70fef1885250"] = # "hash_7af6b9564f0fbeca";
-  level._effect[#"hash_3864bbc0912cb852"] = # "hash_6d51d7c934576ac8";
+  level._effect[#"hash_2f305a0bea20d6ed"] = #"hash_6910f1de979f539f";
+  level._effect[#"hash_757f891a37d3db00"] = #"hash_3da4857b4b1553dc";
+  level._effect[#"hash_26d3eeef96a2291e"] = #"hash_35e2193ab697e2f1";
+  level._effect[#"hash_32ec41222f58aa75"] = #"hash_3de16b7e3bd7e5ce";
+  level._effect[#"hash_4a12914ab0026a9d"] = #"hash_50599e96f376b4fa";
+  level._effect[#"hash_1aa3522b88c2b76f"] = #"hash_7bd6bc3aea3ff42f";
+  level._effect[#"hash_485f1b39da0ca6ca"] = #"hash_58c96eb815e5079c";
+  level._effect[#"hash_57c210bb97cf187c"] = #"hash_58c964b815e4f69e";
+  level._effect[#"hash_211384df1c05676c"] = #"hash_434ed0cd342c0caa";
+  level._effect[#"hash_3cf697eb0a408b2e"] = #"hash_432cd0cd340f2644";
+  level._effect[#"hash_390d70fef1885250"] = #"hash_7af6b9564f0fbeca";
+  level._effect[#"hash_3864bbc0912cb852"] = #"hash_6d51d7c934576ac8";
 }
 
 function_16d503c6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -243,7 +243,7 @@ function_3ab6779c(localclientnum, var_44146a38) {
 function_3386e437(gibflag) {
   gib_model = undefined;
 
-  if(isDefined(self.archetype) && self.archetype == # "nova_crawler") {
+  if(isDefined(self.archetype) && self.archetype == #"nova_crawler") {
     switch (gibflag) {
       case 16:
         gib_model = "c_t8_zmb_ofc_quadcrawler_s_rarmspawn";

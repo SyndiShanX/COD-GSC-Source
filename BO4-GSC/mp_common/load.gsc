@@ -85,7 +85,7 @@ setup_traversals() {
   for(i = 0; i < potential_traverse_nodes.size; i++) {
     node = potential_traverse_nodes[i];
 
-    if(node.type == # "begin") {
+    if(node.type == #"begin") {
       node init_traverse();
     }
   }

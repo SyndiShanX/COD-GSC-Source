@@ -78,7 +78,7 @@ defaultrole() {
   self vehicle_ai::get_state_callbacks("emped").update_func = &state_emped_update;
   self vehicle_ai::get_state_callbacks("death").update_func = &state_death_update;
 
-  if(self.vehicletype != # "archetype_mini_quadtank_mp") {
+  if(self.vehicletype != #"archetype_mini_quadtank_mp") {
     self vehicle_ai::add_state("stationary", &state_stationary_enter, &state_stationary_update, &state_stationary_exit);
     vehicle_ai::add_interrupt_connection("stationary", "scripted", "enter_scripted");
     vehicle_ai::add_interrupt_connection("stationary", "emped", "emped");

@@ -378,7 +378,7 @@ function private function_c01bcef(zombie, mechz, predicted_pos) {
     return false;
   }
 
-  if(mechz.archetype !== # "zombie") {
+  if(mechz.archetype !== #"zombie") {
     return false;
   }
 
@@ -1078,7 +1078,7 @@ function function_679ee5b3(inflictor, attacker, damage, dflags, mod, weapon, var
     var_31e96b81 = int(var_3cddb028);
 
     foreach(weakpoint in self.var_5ace757d) {
-      if(weakpoint.type === # "armor" && weakpoint.currstate === 1) {
+      if(weakpoint.type === #"armor" && weakpoint.currstate === 1) {
         function_669e8e27(self, weakpoint, damage, dflags, var_fd90b0bb, weapon, attacker);
       }
     }
@@ -1150,7 +1150,7 @@ function function_679ee5b3(inflictor, attacker, damage, dflags, mod, weapon, var
 function private function_669e8e27(entity, weakpoint, attacker, damage, weapon, mod, inflictor) {
   var_6dd5345c = undefined;
 
-  if(weakpoint.type === # "weakpoint") {
+  if(weakpoint.type === #"weakpoint") {
     var_6dd5345c = 2;
     namespace_81245006::damageweakpoint(weakpoint, damage);
 
@@ -1165,7 +1165,7 @@ function private function_669e8e27(entity, weakpoint, attacker, damage, weapon, 
 
     level scoreevents::doscoreeventcallback("scoreEventZM", {
       #attacker: attacker, #scoreevent: "hit_weak_point_zm"});
-  } else if(weakpoint.type === # "armor") {
+  } else if(weakpoint.type === #"armor") {
     var_6dd5345c = 3;
     damage_mod = 1;
 
@@ -1204,11 +1204,11 @@ function private function_669e8e27(entity, weakpoint, attacker, damage, weapon, 
 
 function private function_311ae556(damage, weapon) {
   if(isDefined(weapon) && isDefined(weapon.name)) {
-    if(weapon.name == # "eq_mechz_firebomb") {
+    if(weapon.name == #"eq_mechz_firebomb") {
       return 0;
     }
 
-    if(weapon.name == # "molotov_fire") {
+    if(weapon.name == #"molotov_fire") {
       return 0;
     }
   }

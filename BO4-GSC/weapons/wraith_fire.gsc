@@ -30,7 +30,7 @@ init_shared() {
   level.var_ccdda8d1 = params.setype;
   level.var_660293e0 = [];
   level.var_d3b05dcb = [];
-  level._effect[#"hash_6024e139900c449a"] = # "hash_3937ef26298b6caf";
+  level._effect[#"hash_6024e139900c449a"] = #"hash_3937ef26298b6caf";
   weaponobjects::function_e6400478(#"eq_wraith_fire", &function_5ea93036, 1);
   weaponobjects::function_e6400478(#"eq_wraith_fire_extra", &function_5ea93036, 1);
   level.var_f9145520 = 0;

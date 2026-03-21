@@ -53,7 +53,7 @@ function private function_116fd9a7() {
 }
 
 function private function_d045e83b(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
-  if(itemid.itementry.itemtype !== # "ammo") {
+  if(itemid.itementry.itemtype !== #"ammo") {
     assertmsg("<dev string:x38>" + itemid.name + "<dev string:x42>");
     return 0;
   }
@@ -73,7 +73,7 @@ function private function_2e5b5858(item, player, networkid, itemid, itemcount, v
   var_381f3b39 = 0;
   remainingitems = 0;
 
-  if(networkid.itementry.var_4a1a4613 === # "armor_swap") {
+  if(networkid.itementry.var_4a1a4613 === #"armor_swap") {
     if(itemid armor::has_armor()) {
       inventoryitem = itemid.inventory.items[6];
 
@@ -97,7 +97,7 @@ function private function_2e5b5858(item, player, networkid, itemid, itemcount, v
         var_381f3b39 = networkid.itementry.amount;
       }
     }
-  } else if(networkid.itementry.var_4a1a4613 === # "armor_heal") {
+  } else if(networkid.itementry.var_4a1a4613 === #"armor_heal") {
     noarmor = 1;
 
     if(itemid.armortier > 0) {

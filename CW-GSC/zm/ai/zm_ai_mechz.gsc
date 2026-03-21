@@ -434,7 +434,7 @@ function private function_ea7b33b6() {
 
     var_c84ba99b = 0;
 
-    if(waitresult._notify == # "bad_path") {
+    if(waitresult._notify == #"bad_path") {
       if(!self function_dd070839() && !namespace_47c5b560::aiisleaping(self)) {
         goalinfo = self function_4794d6a3();
 

@@ -45,13 +45,13 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_feca0aa5 = [];
   level.var_8d6d3139 = array(#"allies", #"axis", #"team3", #"team4", #"team5", #"team6", #"team7", #"team8", #"team9", #"team10");
   level.var_3ea9068a = [];
-  level.var_3ea9068a[0] = # "hash_1e3ef2884672600f";
-  level.var_3ea9068a[1] = # "hash_1e3ef388467261c2";
-  level.var_3ea9068a[2] = # "hash_1e3ef48846726375";
-  level.var_3ea9068a[3] = # "hash_1e3eed8846725790";
-  level.var_3ea9068a[4] = # "hash_1e3eee8846725943";
-  level.var_3ea9068a[5] = # "hash_1e3eef8846725af6";
-  level.var_3ea9068a[6] = # "hash_1e3ef08846725ca9";
+  level.var_3ea9068a[0] = #"hash_1e3ef2884672600f";
+  level.var_3ea9068a[1] = #"hash_1e3ef388467261c2";
+  level.var_3ea9068a[2] = #"hash_1e3ef48846726375";
+  level.var_3ea9068a[3] = #"hash_1e3eed8846725790";
+  level.var_3ea9068a[4] = #"hash_1e3eee8846725943";
+  level.var_3ea9068a[5] = #"hash_1e3eef8846725af6";
+  level.var_3ea9068a[6] = #"hash_1e3ef08846725ca9";
 }
 
 function on_localclient_connect(localclientnum) {
@@ -122,7 +122,7 @@ function private function_bb2f717e(localclientnum) {
 }
 
 function private function_e99f251a(localclientnum, itementry) {
-  if(itementry.itemtype == # "generic") {
+  if(itementry.itemtype == #"generic") {
     switch (itementry.name) {
       case # "armor_pouch_item_t9":
         return (self clientfield::get_player_uimodel("hudItems.armorPlateMaxCarry") != 10);
@@ -133,7 +133,7 @@ function private function_e99f251a(localclientnum, itementry) {
     }
 
     return false;
-  } else if(itementry.itemtype == # "armor_shard") {
+  } else if(itementry.itemtype == #"armor_shard") {
     return false;
   }
 
@@ -141,12 +141,12 @@ function private function_e99f251a(localclientnum, itementry) {
 }
 
 function private function_218c0417(localclientnum, itementry) {
-  if(itementry.itemtype == # "armor_shard") {
+  if(itementry.itemtype == #"armor_shard") {
     currentcount = self clientfield::get_player_uimodel("hudItems.armorPlateCount");
     return (currentcount < 5);
   }
 
-  if(itementry.itemtype == # "generic") {
+  if(itementry.itemtype == #"generic") {
     return false;
   }
 
@@ -154,7 +154,7 @@ function private function_218c0417(localclientnum, itementry) {
 }
 
 function private function_a2807fc5(localclientnum, itementry) {
-  if(itementry.itemtype == # "scorestreak") {
+  if(itementry.itemtype == #"scorestreak") {
     weapons = self getweaponslist();
 
     foreach(weapon in weapons) {
@@ -235,17 +235,17 @@ function function_dd2493cc(local_client_num, objid) {
 
   if(friendlyteam == team) {
     state = 1;
-  } else if(team != # "none" && team != # "neutral") {
+  } else if(team != #"none" && team != #"neutral") {
     state = 2;
   }
 
-  if(var_4bb78aa3 && (team == # "neutral" || team == # "none")) {
+  if(var_4bb78aa3 && (team == #"neutral" || team == #"none")) {
     state = 4;
   } else if(var_4bb78aa3 && team != friendlyteam) {
     state = 7;
   }
 
-  if(var_c7fc4f01 && (team == # "neutral" || team == # "none")) {
+  if(var_c7fc4f01 && (team == #"neutral" || team == #"none")) {
     state = 5;
   }
 

@@ -360,7 +360,7 @@ function function_9c0c8ac3(v_vortex_origin, n_vortex_radius, n_start_time, n_vor
 
       switch (ai_zombie.zm_ai_category) {
         case # "normal":
-          if(ai_zombie.archetype === # "zombie_dog") {
+          if(ai_zombie.archetype === #"zombie_dog") {
             ai_zombie thread namespace_9ff9f642::slowdown(#"bhb_slowdown");
 
             if(!isDefined(ai_zombie.var_56912e22) || time >= ai_zombie.var_56912e22) {

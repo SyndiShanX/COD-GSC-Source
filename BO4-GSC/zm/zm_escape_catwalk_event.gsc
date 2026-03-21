@@ -185,7 +185,7 @@ function_1646f141(var_e8ba54a2 = 0) {
 
 function_dc212e9f() {
   mdl_wire = getent("catwalk_wires", "targetname");
-  bundle = # "p8_fxanim_zm_esc_wires_catwalk_bundle";
+  bundle = #"p8_fxanim_zm_esc_wires_catwalk_bundle";
   mdl_wire thread scene::play(bundle, "LOOP", mdl_wire);
   level flag::wait_till(#"catwalk_door_open");
   mdl_wire thread scene::play(bundle, "SHOCKED", mdl_wire);

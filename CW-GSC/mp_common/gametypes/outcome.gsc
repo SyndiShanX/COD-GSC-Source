@@ -22,7 +22,7 @@ function function_a1a81955() {
   outcome = spawnStruct();
   outcome.flags = 0;
   outcome.var_c1e98979 = 0;
-  outcome.team = # "none";
+  outcome.team = #"none";
   outcome.players = [];
   outcome.players_score = [];
   return outcome;

@@ -34,7 +34,7 @@ function function_39bce377(localclientnum) {
 }
 
 function function_f47e494a(localclientnum, team, colorindex) {
-  if(team == # "allies") {
+  if(team == #"allies") {
     return function_aa0b7b86(localclientnum, "codcaster_team1_color" + colorindex);
   }
 
@@ -46,8 +46,8 @@ function get_team_color(localclientnum, team, colorindex) {
     var_216b0054 = function_f47e494a(localclientnum, team, colorindex);
     teamcolor = (var_216b0054[0] / 255, var_216b0054[1] / 255, var_216b0054[2] / 255);
   } else {
-    if(team == # "neutral") {
-      team = # "axis";
+    if(team == #"neutral") {
+      team = #"axis";
     }
 
     teamcolor = function_45a33458(localclientnum, team, colorindex);
@@ -64,16 +64,16 @@ function is_friendly(localclientnum, team) {
   }
 
   if(!scorepanel_flipped) {
-    friendly = team == # "allies";
+    friendly = team == #"allies";
   } else {
-    friendly = team == # "axis";
+    friendly = team == #"axis";
   }
 
   return friendly;
 }
 
 function function_57a6b7b0(localclientnum) {
-  if(game.state == # "postgame") {
+  if(game.state == #"postgame") {
     return;
   }
 
@@ -122,7 +122,7 @@ function private codcaster_monitor_xray_change(localclientnum) {
     localplayer = function_5c10bd79(localclientnum);
     team = localplayer.team;
 
-    if(game.state == # "pregame" || game.state == # "postgame") {
+    if(game.state == #"pregame" || game.state == #"postgame") {
       level.var_6a64742e = 1;
       level.isigcactive = isigcactive(localclientnum);
     }
@@ -175,11 +175,11 @@ function private function_1cc61419(localclientnum, settings) {
       continue;
     }
 
-    if(entity.archetype != # "mp_dog") {
+    if(entity.archetype != #"mp_dog") {
       continue;
     }
 
-    if(entity.team != # "allies" && entity.team != # "axis") {
+    if(entity.team != #"allies" && entity.team != #"axis") {
       continue;
     }
 
@@ -230,7 +230,7 @@ function function_471909d9(localclientnum, entity, settings, localplayerteam) {
     return false;
   }
 
-  if(isigcactive(localclientnum) || game.state == # "postgame") {
+  if(isigcactive(localclientnum) || game.state == #"postgame") {
     return false;
   }
 
@@ -247,10 +247,10 @@ function function_471909d9(localclientnum, entity, settings, localplayerteam) {
 
     if(!function_9e39e246(localclientnum)) {
       var_7a7c5b7d = is_friendly(localclientnum, #"allies") ? # "allies" : # "axis";
-    } else if(localplayerteam == # "spectator" || localplayerteam == # "allies") {
-      var_7a7c5b7d = # "allies";
+    } else if(localplayerteam == #"spectator" || localplayerteam == #"allies") {
+      var_7a7c5b7d = #"allies";
     } else {
-      var_7a7c5b7d = # "axis";
+      var_7a7c5b7d = #"axis";
     }
 
     var_3be52391 = util::get_enemy_team(var_7a7c5b7d);
@@ -276,7 +276,7 @@ function function_89106df8(localclientnum, robkey, rob, var_4724c867, settings) 
     team = var_4724c867;
   }
 
-  if(team == # "spectator") {
+  if(team == #"spectator") {
     return;
   }
 
@@ -331,7 +331,7 @@ function function_995e01b6(localclientnum, player) {
   }
 
   rob = player is_friendly(localclientnum) ? # "hash_17daa1d16cd73cd2" : # "hash_17daa0d16cd73b1f";
-  postfx = # "hash_2e3ec8882293a18f" + (player is_friendly(localclientnum) ? "_team1" : "_team2");
+  postfx = #"hash_2e3ec8882293a18f" + (player is_friendly(localclientnum) ? "_team1" : "_team2");
   var_1762ffa = util::spawn_model(localclientnum, #"hash_445c4aedaf62d3b9", player.origin, player.angles - (90, 0, 0));
   teamcolor = get_team_color(localclientnum, player.team, 3);
 

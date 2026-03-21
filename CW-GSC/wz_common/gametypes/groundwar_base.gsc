@@ -50,7 +50,7 @@ function onstartgametype() {
   setmatchflag("bomb_timer_a", 0);
   setbombtimer("B", 0);
   setmatchflag("bomb_timer_b", 0);
-  level._effect[#"bombexplosion"] = # "explosions/fx_exp_bomb_demo_mp";
+  level._effect[#"bombexplosion"] = #"explosions/fx_exp_bomb_demo_mp";
   bombzones = getEntArray(level.var_3cf1b85, "targetname");
   thread updategametypedvars();
   thread bombs();
@@ -216,7 +216,7 @@ function bombs() {
     clipbrushes = getEntArray("bombzone_clip" + scriptlabel, "targetname");
     visuals = getEntArray(bombzones[index].target, "targetname");
     var_b3c46dd0 = trigger.script_team;
-    name = # "base" + scriptlabel;
+    name = #"base" + scriptlabel;
     bombzone = gameobjects::create_use_object(var_b3c46dd0, trigger, visuals, (0, 0, 0), name, 1, 1);
     bombzone gameobjects::set_use_time(level.planttime);
     bombzone gameobjects::set_use_text(#"mp/planting_explosive");
@@ -252,7 +252,7 @@ function bombs() {
     }
 
     foreach(visual in bombzone.visuals) {
-      visual.team = # "neutral";
+      visual.team = #"neutral";
     }
 
     level.bombzones[level.bombzones.size] = bombzone;
@@ -303,7 +303,7 @@ function function_208ed5d5(team) {
 
   owner_team = self gameobjects::get_owner_team();
 
-  if(owner_team == # "any") {
+  if(owner_team == #"any") {
     return true;
   }
 

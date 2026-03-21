@@ -147,7 +147,7 @@ function function_295c9975() {
   self namespace_250e9486::function_db744d28();
   self.no_gib = 1;
   self.overrideactordamage = &function_36603968;
-  self.ai.phase = # "hash_266f56fb994e6639";
+  self.ai.phase = #"hash_266f56fb994e6639";
   self disableaimassist();
   self.var_3a001247 = 1;
   self pushplayer(1);
@@ -161,7 +161,7 @@ function function_295c9975() {
   self.ai.var_a5dabb8b = 1;
   self bloodimpact("none");
   namespace_81245006::initweakpoints(self);
-  self.ai.var_112ec817 = # "hash_8e170ae91588f20";
+  self.ai.var_112ec817 = #"hash_8e170ae91588f20";
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
   self thread function_4ccdadc3();
   self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_hellephant_spawn");
@@ -430,7 +430,7 @@ function private function_4ccdadc3() {
     wait 0.1;
   }
 
-  if(self.ai.phase === # "hash_266f56fb994e6639") {
+  if(self.ai.phase === #"hash_266f56fb994e6639") {
     self clientfield::set("towers_boss_eye_fx_cf", 2);
     return;
   }
@@ -588,7 +588,7 @@ function function_ce8fe2b0(entity, splitorigin) {
     return;
   }
 
-  if(targets.size > 1 && self.ai.phase == # "hash_266f56fb994e6639" && isDefined(dustball) && isalive(dustball) && !isDefined(splitorigin)) {
+  if(targets.size > 1 && self.ai.phase == #"hash_266f56fb994e6639" && isDefined(dustball) && isalive(dustball) && !isDefined(splitorigin)) {
     function_ce8fe2b0(self, dustball.origin);
   }
 }

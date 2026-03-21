@@ -524,7 +524,7 @@ function private function_b16c8865(entity, attackingplayer) {
     return false;
   }
 
-  if(!isPlayer(entity) && (!isDefined(entity.model) || entity.model == # "")) {
+  if(!isPlayer(entity) && (!isDefined(entity.model) || entity.model == #"")) {
     return false;
   }
 

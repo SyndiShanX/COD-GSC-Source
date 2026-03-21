@@ -44,7 +44,7 @@ function function_dd87ddce() {
   self val::set(#"woods", "allowdeath", 0);
   self ai::set_behavior_attribute("demeanor", "patrol");
   self.name = "Woods";
-  self.propername = # "hash_22f2861ded3918a8";
+  self.propername = #"hash_22f2861ded3918a8";
   self.attackeraccuracy = 0.1;
   self namespace_b73b9191::function_d432b47b();
 }

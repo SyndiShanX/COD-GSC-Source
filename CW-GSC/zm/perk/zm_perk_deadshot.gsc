@@ -88,14 +88,14 @@ function function_4d088c19(inflictor, attacker, damage, flags, meansofdeath, wea
 
     if(vpoint namespace_e86ffa8::function_7bf30775(1)) {
       if(self.health >= self.maxhealth) {
-        if(isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type !== # "armor") {
+        if(isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type !== #"armor") {
           vdir += vdir * 1;
         }
       }
     }
 
     if(vpoint namespace_e86ffa8::function_7bf30775(4)) {
-      if(isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type !== # "armor") {
+      if(isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type !== #"armor") {
         vdir += vdir * 0.1;
       }
     }

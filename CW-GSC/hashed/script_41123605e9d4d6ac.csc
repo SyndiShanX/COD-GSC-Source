@@ -48,7 +48,7 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
   fx = undefined;
 
   if(bwastimejump) {
-    fx = # "hash_78ae17d0e989e328";
+    fx = #"hash_78ae17d0e989e328";
   }
 
   if(!isDefined(fx)) {
@@ -65,7 +65,7 @@ function private function_440e968(localclientnum, oldval, newval, bnewent, binit
 
 function private function_95dc19b0(localclientnum) {
   if(isDefined(self)) {
-    fx = # "hash_69eb668e9f7736bd";
+    fx = #"hash_69eb668e9f7736bd";
     playFX(localclientnum, fx, self.origin);
   }
 }
@@ -80,7 +80,7 @@ function private function_64d1f09b(localclientnum, oldval, newval, bnewent, bini
   fx = undefined;
 
   if(bwastimejump) {
-    fx = # "hash_26265474bcb72a8a";
+    fx = #"hash_26265474bcb72a8a";
   }
 
   if(!isDefined(fx)) {

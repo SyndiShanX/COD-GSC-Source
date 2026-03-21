@@ -191,7 +191,7 @@ function function_60ef20d8(params) {
   item = params.item;
 
   if(isPlayer(self)) {
-    if(isDefined(item.itementry) && item.itementry.name == # "item_zmquest_platinum_power_quest_fuse") {
+    if(isDefined(item.itementry) && item.itementry.name == #"item_zmquest_platinum_power_quest_fuse") {
       if(level flag::get(#"hash_1d6357b2512a35e5")) {
         var_46e76b4b = randomintrangeinclusive(0, 2);
 
@@ -741,7 +741,7 @@ function private function_9af4005() {
 }
 
 function function_57138f33(params) {
-  if(self.archetype === # "mechz" && self.team === level.zombie_team && !level flag::get(#"hash_1e1634794b3aab52")) {
+  if(self.archetype === #"mechz" && self.team === level.zombie_team && !level flag::get(#"hash_1e1634794b3aab52")) {
     level flag::set(#"hash_1e1634794b3aab52");
     var_773dbbf2 = 0;
 
@@ -783,7 +783,7 @@ function function_57138f33(params) {
 }
 
 function function_fd4567c1(params) {
-  if(self.archetype === # "avogadro" && self.team === level.zombie_team && !level flag::get(#"hash_34e667966f6e9ab1")) {
+  if(self.archetype === #"avogadro" && self.team === level.zombie_team && !level flag::get(#"hash_34e667966f6e9ab1")) {
     level flag::set(#"hash_34e667966f6e9ab1");
     var_773dbbf2 = 0;
 
@@ -824,7 +824,7 @@ function function_fd4567c1(params) {
 }
 
 function function_cc68dd0b(params) {
-  if(self.archetype === # "soa" && self.team === level.zombie_team) {
+  if(self.archetype === #"soa" && self.team === level.zombie_team) {
     wait 1.5;
     var_46e76b4b = randomintrangeinclusive(0, 2);
 

@@ -144,7 +144,7 @@ function_c92a5584(activator) {
   }
 
   foreach(item in activator.inventory.items) {
-    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== # "cash") {
+    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== #"cash") {
       continue;
     }
 
@@ -203,7 +203,7 @@ function_2cef7d98() {
   var_22aec194 = undefined;
 
   foreach(item in self.inventory.items) {
-    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== # "cash") {
+    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== #"cash") {
       continue;
     }
 

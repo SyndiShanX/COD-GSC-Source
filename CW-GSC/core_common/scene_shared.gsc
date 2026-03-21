@@ -2717,11 +2717,11 @@ function wait_server_time(n_time, n_start_time = 0) {
   waitframe(int(n_len));
 }
 
-function check_team(str_team1 = # "any", str_team2 = # "any") {
+function check_team(str_team1 = #"any", str_team2 = #"any") {
   str_team1 = util::get_team_mapping(str_team1);
   str_team2 = util::get_team_mapping(str_team2);
 
-  if(str_team1 == # "any" || str_team2 == # "any") {
+  if(str_team1 == #"any" || str_team2 == #"any") {
     return true;
   }
 

@@ -143,7 +143,7 @@ function private function_b38c1846(e_projectile, target, b_ignore_cleanup, orda)
     var_2cadffe7 = util::spawn_model("tag_origin", self.origin);
     var_2cadffe7 clientfield::set("" + # "dog_launcher_explode_fx", 1);
 
-    if(isDefined(target.targetname) && target.targetname == # "mdl_support_machine") {
+    if(isDefined(target.targetname) && target.targetname == #"mdl_support_machine") {
       if(level.var_f0fc72bc > 0 && distancesquared(target.origin, var_2cadffe7.origin) < 40000) {
         target notify(#"damage", {
           #amount: 250

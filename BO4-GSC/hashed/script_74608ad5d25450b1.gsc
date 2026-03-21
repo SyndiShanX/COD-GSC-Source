@@ -177,7 +177,7 @@ start_step_2() {
 function_ecdebc72() {
   self endon(#"death");
 
-  if(self.archetype === # "zombie" && math::cointoss(20)) {
+  if(self.archetype === #"zombie" && math::cointoss(20)) {
     while(!isDefined(self.spawn_pos)) {
       waitframe(1);
     }

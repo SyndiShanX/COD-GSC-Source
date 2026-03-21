@@ -66,7 +66,7 @@ init() {
     level.zombie_powerups = [];
   }
 
-  level._effect[#"powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
+  level._effect[#"powerup_off"] = #"zombie/fx_powerup_off_green_zmb";
   init_powerups();
 
   if(!level.enable_magic || !zm_custom::function_901b751c(#"zmpowerupsactive")) {
@@ -176,7 +176,7 @@ powerup_hud_monitor() {
           continue;
         }
 
-        if(player.team === # "spectator") {
+        if(player.team === #"spectator") {
           continue;
         }
 
@@ -554,7 +554,7 @@ add_zombie_powerup(powerup_name, model_name, hint, func_should_drop_with_regular
     struct.on_name = on_name;
   }
 
-  if(isDefined(powerup_name) && powerup_name == # "full_ammo") {
+  if(isDefined(powerup_name) && powerup_name == #"full_ammo") {
     level.var_aebef29d = gettime() / 1000;
   }
 }

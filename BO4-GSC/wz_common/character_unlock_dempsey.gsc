@@ -37,7 +37,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu15_item") {
+  if(itementry.name === #"cu15_item") {
     self thread function_895b40e4();
   }
 }

@@ -311,7 +311,7 @@ function function_dd7587e4(bundle, maxhealth, attacker, weapon, type, damage, fl
           }
 
           if(rocketstokill == 0) {} else if(rocketstokill > 0) {
-            if(type.rootweapon.name == "launcher_multi" || type.rootweapon.name == # "hash_2de6f2fb4eb1529") {
+            if(type.rootweapon.name == "launcher_multi" || type.rootweapon.name == #"hash_2de6f2fb4eb1529") {
               rocketstokill *= 2;
             }
 

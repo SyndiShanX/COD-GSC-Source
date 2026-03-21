@@ -203,7 +203,7 @@ function private function_c263fd97() {
   self show();
   self solid();
 
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     if(isDefined(level.var_fd167bf6)) {
       self luinotifyevent(#"create_prematch_timer", 2, level.var_fd167bf6, level.var_5654073f);
       return;

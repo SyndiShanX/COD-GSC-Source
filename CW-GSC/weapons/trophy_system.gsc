@@ -23,8 +23,8 @@
 #namespace trophy_system;
 
 function init_shared() {
-  level.trophydetonationfx = # "hash_7e2c1749cc5fcfb9";
-  level.fx_trophy_radius_indicator = # "weapon/fx_trophy_radius_indicator";
+  level.trophydetonationfx = #"hash_7e2c1749cc5fcfb9";
+  level.fx_trophy_radius_indicator = #"weapon/fx_trophy_radius_indicator";
   trophydeployanim = "p8_fxanim_mp_eqp_trophy_system_world_anim";
   trophyspinanim = "p8_fxanim_mp_eqp_trophy_system_world_open_anim";
   level.var_4f3822f4 = &trophysystemdetonate;
@@ -90,14 +90,14 @@ function on_player_killed(s_params) {
     return;
   }
 
-  if(weapon.name == # "trophy_system") {
+  if(weapon.name == #"trophy_system") {
     scoreevents::processscoreevent(#"trophy_system_kill", attacker, self, weapon);
   }
 }
 
 function createtrophysystemwatcher(watcher) {
   watcher.ondetonatecallback = &trophysystemdetonate;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
   watcher.ownergetsassist = 1;
@@ -264,15 +264,15 @@ function trophyactive(owner) {
       distance = distance(grenade.origin, traceposition);
 
       if(distance > 425) {
-        fx = # "hash_477d0da44d77c340";
+        fx = #"hash_477d0da44d77c340";
       } else if(distance > 325) {
-        fx = # "hash_509348a452bc270b";
+        fx = #"hash_509348a452bc270b";
       } else if(distance > 225) {
-        fx = # "hash_7be30fa46b44c382";
+        fx = #"hash_7be30fa46b44c382";
       } else if(distance > 125) {
-        fx = # "hash_4f94aa47089274d";
+        fx = #"hash_4f94aa47089274d";
       } else {
-        fx = # "hash_6a2339a461182aac";
+        fx = #"hash_6a2339a461182aac";
       }
 
       playFX(fx, traceposition, fwd, up);
@@ -367,7 +367,7 @@ function function_3170d645(projectile, trophy) {
 
     ent = entities[i];
 
-    if(isDefined(ent.owner) && !ent util::isenemyteam(player.team) && (ent.classname === "noclass" || ent.classname === "script_model" || ent.classname === "script_vehicle" || ent.archetype === # "mp_dog" || ent.archetype === # "human" || isDefined(ent.aitype)) && (ent.item !== level.weaponnone || ent.weapon !== level.weaponnone || ent.meleeweapon !== level.weaponnone || ent.turretweapon !== level.weaponnone) && is_true(ent.takedamage)) {
+    if(isDefined(ent.owner) && !ent util::isenemyteam(player.team) && (ent.classname === "noclass" || ent.classname === "script_model" || ent.classname === "script_vehicle" || ent.archetype === #"mp_dog" || ent.archetype === #"human" || isDefined(ent.aitype)) && (ent.item !== level.weaponnone || ent.weapon !== level.weaponnone || ent.meleeweapon !== level.weaponnone || ent.turretweapon !== level.weaponnone) && is_true(ent.takedamage)) {
       if((isDefined(ent.health) ? ent.health : 0) > 0) {
         var_48b7bfeb = 1;
         break;
@@ -389,7 +389,7 @@ function function_3170d645(projectile, trophy) {
         continue;
       }
 
-      var_2e36557f |= useobj.userate && (useobj gameobjects::function_4b64b7fd(player.team) || useobj.interactteam === # "group_enemy");
+      var_2e36557f |= useobj.userate && (useobj gameobjects::function_4b64b7fd(player.team) || useobj.interactteam === #"group_enemy");
 
       if(var_2e36557f) {
         break;
@@ -411,7 +411,7 @@ function function_3170d645(projectile, trophy) {
         continue;
       }
 
-      var_2e36557f |= useobj.userate && (useobj gameobjects::function_4b64b7fd(player.team) || useobj.interactteam === # "group_enemy");
+      var_2e36557f |= useobj.userate && (useobj gameobjects::function_4b64b7fd(player.team) || useobj.interactteam === #"group_enemy");
 
       if(var_2e36557f) {
         break;
@@ -431,7 +431,7 @@ function function_3170d645(projectile, trophy) {
         continue;
       }
 
-      var_2e36557f |= useobj.userate && (useobj gameobjects::function_4b64b7fd(player.team) || useobj.interactteam === # "group_enemy");
+      var_2e36557f |= useobj.userate && (useobj gameobjects::function_4b64b7fd(player.team) || useobj.interactteam === #"group_enemy");
 
       if(var_2e36557f) {
         break;

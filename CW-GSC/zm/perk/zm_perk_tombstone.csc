@@ -185,16 +185,16 @@ function function_2f3a5c2(localclientnum, oldval, newval, bnewent, binitialsnap,
     switch (self.model) {
       case # "hash_4bee36a9434de051":
       default:
-        str_fx = # "hash_719c2cabe9153a26";
+        str_fx = #"hash_719c2cabe9153a26";
         break;
       case # "hash_4bee33a9434ddb38":
-        str_fx = # "hash_73c4fd152aecf624";
+        str_fx = #"hash_73c4fd152aecf624";
         break;
       case # "hash_4bee34a9434ddceb":
-        str_fx = # "hash_56b93c93cc14dacf";
+        str_fx = #"hash_56b93c93cc14dacf";
         break;
       case # "hash_4bee39a9434de56a":
-        str_fx = # "hash_749676da3b26efc8";
+        str_fx = #"hash_749676da3b26efc8";
         break;
     }
 

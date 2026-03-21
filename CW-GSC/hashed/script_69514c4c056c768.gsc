@@ -68,7 +68,7 @@ function function_f0297225(var_2ab9d3bd, replacementcount, var_3afaa57b) {
 }
 
 function function_d0178153(var_2ab9d3bd) {
-  level.var_ef5dbc90[var_2ab9d3bd] = # "t9_supply_drop_stash_parent";
+  level.var_ef5dbc90[var_2ab9d3bd] = #"t9_supply_drop_stash_parent";
 }
 
 function start(supplydrops = 1, minwaittime = 20, var_fe6b2eab = 20) {

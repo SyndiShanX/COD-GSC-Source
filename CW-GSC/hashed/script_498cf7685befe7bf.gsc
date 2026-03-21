@@ -178,7 +178,7 @@ function function_4a3de7f5(var_57ef78ed) {
 }
 
 function function_62013e65() {
-  while(!isDefined(level.player.str_current_anim) || isDefined(level.player.str_current_anim) && level.player.str_current_anim != # "hash_48a062b24f466225") {
+  while(!isDefined(level.player.str_current_anim) || isDefined(level.player.str_current_anim) && level.player.str_current_anim != #"hash_48a062b24f466225") {
     waitframe(1);
   }
 
@@ -454,7 +454,7 @@ function function_e969ae51(var_c31a6f62, ai_enemy, var_fa359e06) {
 
   ai_enemy notify(#"deathanim");
 
-  if(isDefined(ai_enemy.str_current_anim) && ai_enemy.str_current_anim != # "hash_7123e27ee7e0f94c") {
+  if(isDefined(ai_enemy.str_current_anim) && ai_enemy.str_current_anim != #"hash_7123e27ee7e0f94c") {
     ai_enemy animation::set_death_anim("t9_sge_0000_ambient_aa_gun_killed_enemy", var_c31a6f62.origin, var_c31a6f62.angles);
   }
 

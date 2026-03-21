@@ -132,11 +132,11 @@ function private function_71efd0e6(a_ai_targets, v_origin, var_f61738a0 = 0, b_s
       continue;
     }
 
-    if(var_f61738a0 && ai.zm_ai_category === # "normal") {
+    if(var_f61738a0 && ai.zm_ai_category === #"normal") {
       ai zombie_utility::setup_zombie_knockdown(v_origin);
     }
 
-    if(b_stun && ai.zm_ai_category === # "special") {
+    if(b_stun && ai.zm_ai_category === #"special") {
       ai ai::clear_stun();
       ai ai::stun();
     }
@@ -199,7 +199,7 @@ function function_39aea6b8(name) {
 }
 
 function function_1ac47afc(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, modelindex, surfacetype, vsurfacenormal) {
-  if(isentity(surfacetype) && isPlayer(vsurfacenormal) && self.zm_ai_category === # "normal") {
+  if(isentity(surfacetype) && isPlayer(vsurfacenormal) && self.zm_ai_category === #"normal") {
     self.var_6d683e5a = surfacetype.origin;
   }
 }
@@ -209,7 +209,7 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
     return;
   }
 
-  if(isentity(psoffsettime) && isPlayer(boneindex) && self.zm_ai_category === # "normal") {
+  if(isentity(psoffsettime) && isPlayer(boneindex) && self.zm_ai_category === #"normal") {
     self.var_6d683e5a = psoffsettime.origin;
     namespace_81245006::function_76e239dc(self, boneindex);
   }
@@ -219,9 +219,9 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
       self.var_786be2f0 = [];
     }
 
-    if(self.archetype === # "raz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[#"raz"])) {
+    if(self.archetype === #"raz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[#"raz"])) {
       foreach(weakpoint in self.var_5ace757d) {
-        if(weakpoint.type === # "armor" && weakpoint.currstate === 1 && weakpoint.health > 0 && !isinarray(self.var_786be2f0, weakpoint.var_f371ebb0)) {
+        if(weakpoint.type === #"armor" && weakpoint.currstate === 1 && weakpoint.health > 0 && !isinarray(self.var_786be2f0, weakpoint.var_f371ebb0)) {
           if(!isDefined(self.var_786be2f0)) {
             self.var_786be2f0 = [];
           } else if(!isarray(self.var_786be2f0)) {
@@ -236,9 +236,9 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
       return;
     }
 
-    if(self.archetype === # "mechz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[#"mechz"])) {
+    if(self.archetype === #"mechz" && isarray(self.var_5ace757d) && isDefined(level.var_92e56a0f[#"mechz"])) {
       foreach(weakpoint in self.var_5ace757d) {
-        if(weakpoint.type === # "armor" && weakpoint.currstate === 1 && weakpoint.health > 0 && !isinarray(self.var_786be2f0, weakpoint.var_f371ebb0)) {
+        if(weakpoint.type === #"armor" && weakpoint.currstate === 1 && weakpoint.health > 0 && !isinarray(self.var_786be2f0, weakpoint.var_f371ebb0)) {
           if(!isDefined(self.var_786be2f0)) {
             self.var_786be2f0 = [];
           } else if(!isarray(self.var_786be2f0)) {
@@ -254,7 +254,7 @@ function function_a68304b6(inflictor, attacker, damage, flags, meansofdeath, wea
 }
 
 function private function_9b6145a(params) {
-  if(function_39aea6b8(params.weapon.name) && isPlayer(params.eattacker) && self.zm_ai_category === # "normal" && isvec(self.var_6d683e5a)) {
+  if(function_39aea6b8(params.weapon.name) && isPlayer(params.eattacker) && self.zm_ai_category === #"normal" && isvec(self.var_6d683e5a)) {
     self namespace_cc411409::ragdoll_launch(self.var_6d683e5a, 2);
     self thread function_3fb4ce3b();
   }

@@ -324,7 +324,7 @@ function private function_c20f7b00(eventstruct, str) {
 }
 
 function private function_3e781451(node, color) {
-  if(node.type == # "volume") {
+  if(node.type == #"volume") {
     mins = (0, 0, 0) - node.aabb_extents;
     maxs = node.aabb_extents;
     recordbox(node.origin, mins, maxs, node.angles[1], color, "<dev string:x88>", self);

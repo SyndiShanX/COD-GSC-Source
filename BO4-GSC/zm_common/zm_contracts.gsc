@@ -96,37 +96,37 @@ function_74872db6() {
 on_round_end() {
   switch (level.script) {
     case # "zm_zodt8":
-      var_c5440c34 = # "contract_zm_zodt8_rounds";
+      var_c5440c34 = #"contract_zm_zodt8_rounds";
       break;
     case # "zm_towers":
-      var_c5440c34 = # "contract_zm_towers_rounds";
+      var_c5440c34 = #"contract_zm_towers_rounds";
       break;
     case # "zm_escape":
-      var_c5440c34 = # "contract_zm_escape_rounds";
+      var_c5440c34 = #"contract_zm_escape_rounds";
       break;
     case # "zm_office":
-      var_c5440c34 = # "contract_zm_office_rounds";
+      var_c5440c34 = #"contract_zm_office_rounds";
       break;
     case # "zm_mansion":
-      var_c5440c34 = # "contract_zm_mansion_rounds";
+      var_c5440c34 = #"contract_zm_mansion_rounds";
       break;
     case # "zm_red":
-      var_c5440c34 = # "contract_zm_red_rounds";
+      var_c5440c34 = #"contract_zm_red_rounds";
       break;
     case # "zm_white":
-      var_c5440c34 = # "contract_zm_white_rounds";
+      var_c5440c34 = #"contract_zm_white_rounds";
       break;
     case # "zm_orange":
-      var_c5440c34 = # "contract_zm_orange_rounds";
+      var_c5440c34 = #"contract_zm_orange_rounds";
       break;
   }
 
   switch (level.var_837aa533) {
     case # "zclassic":
-      var_fc80b645 = # "contract_zm_classic_rounds";
+      var_fc80b645 = #"contract_zm_classic_rounds";
       break;
     case # "ztrials":
-      var_fc80b645 = # "contract_zm_gauntlet_rounds";
+      var_fc80b645 = #"contract_zm_gauntlet_rounds";
 
       if(level flag::get("round_reset")) {
         return;

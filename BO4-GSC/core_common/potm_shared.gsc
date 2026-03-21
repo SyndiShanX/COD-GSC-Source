@@ -66,7 +66,7 @@ init() {
     game.var_aafe322f = [];
     game.var_12ffe1e3 = [];
     game.potmevents = [];
-    game.var_8ea529d1 = # "potm";
+    game.var_8ea529d1 = #"potm";
 
     debuginit();
 
@@ -336,14 +336,14 @@ function_f909006c(currentevent) {
       var_e0aa3530 = var_dcbc5c97[index];
 
       if(var_e0aa3530.time - starttime < timeelapsed) {
-        if(var_e0aa3530.bookmarkname == # "medal") {
+        if(var_e0aa3530.bookmarkname == #"medal") {
           medalstruct = {};
           medalstruct.medal_index = var_e0aa3530.eventdata.tableindex;
 
           if(!util::function_8570168d() && isDefined(medalstruct.medal_index)) {
             luinotifyevent(#"medal_received", 1, medalstruct.medal_index);
           }
-        } else if(var_e0aa3530.bookmarkname == # "score_event") {
+        } else if(var_e0aa3530.bookmarkname == #"score_event") {
           if(isDefined(var_e0aa3530.eventdata.event_info)) {
             label = rank::getscoreinfolabel(var_e0aa3530.eventdata.event_info);
             score = rank::getscoreinfovalue(var_e0aa3530.eventdata.event_info);
@@ -357,7 +357,7 @@ function_f909006c(currentevent) {
           }
 
           if(!isDefined(label)) {
-            label = # "hash_480234a872bd64ac";
+            label = #"hash_480234a872bd64ac";
           }
 
           if(!isDefined(score)) {
@@ -461,7 +461,7 @@ play_potm_on_player(event) {
     self[[game.var_321b0d80]](event.clientxuid);
   }
 
-  var_f699686a = # "melee_amuletfist_t8";
+  var_f699686a = #"melee_amuletfist_t8";
   hide_event = 0;
   killcamparams = event.currentevent.killcamparams;
 
@@ -608,7 +608,7 @@ function_60211cf4(sequence) {
     event = sequence.params.events[cameraindex];
     processevent = 1;
 
-    if(isDefined(event.cameraname) && event.cameraname == # "hash_520dfab6dc8b7832") {
+    if(isDefined(event.cameraname) && event.cameraname == #"hash_520dfab6dc8b7832") {
       level thread function_d1cb3471();
     }
 
@@ -1333,7 +1333,7 @@ function_e81fe19d(bookmark) {
 function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, scoreeventpriority, einflictor, var_50d1e41a, overrideentitycamera, eventdata) {
   var_7491f0eb = 0;
 
-  if(modulename == # "potm") {
+  if(modulename == #"potm") {
     var_7491f0eb = 1;
   }
 
@@ -1425,7 +1425,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
   } else {
     bookmark.eventdata = {};
     bookmark.eventdata.tableindex = 0;
-    bookmark.eventdata.event_info = # "";
+    bookmark.eventdata.event_info = #"";
   }
 
   if(isDefined(scoreeventpriority)) {
@@ -1658,7 +1658,7 @@ function_79c0d595(bookmarkname, etype, var_50d1e41a) {
             return info;
           }
 
-          if(info.var_38446242 == # "") {
+          if(info.var_38446242 == #"") {
             result = info;
             var_bee9d27f = 1;
           }
@@ -1666,13 +1666,13 @@ function_79c0d595(bookmarkname, etype, var_50d1e41a) {
       }
 
       if(!var_bee9d27f) {
-        if(info.var_4e86a573 == # "" && info.var_38446242 == level.var_837aa533) {
+        if(info.var_4e86a573 == #"" && info.var_38446242 == level.var_837aa533) {
           result = info;
           var_91d32f1 = 1;
           continue;
         }
 
-        if(!var_91d32f1 && info.var_4e86a573 == # "" && info.var_38446242 == # "") {
+        if(!var_91d32f1 && info.var_4e86a573 == #"" && info.var_38446242 == #"") {
           result = info;
         }
       }
@@ -1694,7 +1694,7 @@ function_876f528(infoindex) {
 }
 
 function_e38a52f0(clientnum, bookmark) {
-  if(bookmark.bookmarkname == # "player_revived") {
+  if(bookmark.bookmarkname == #"player_revived") {
     return (bookmark.mainclientnum == clientnum || bookmark.otherclientnum == clientnum);
   }
 
@@ -1728,7 +1728,7 @@ function_cbc0ec1c(bookmark, preparinginformation) {
 }
 
 function_d832ee94(preparinginformation, bookmark) {
-  if(bookmark.bookmarkname != # "medal" && bookmark.bookmarkname != # "score_event") {
+  if(bookmark.bookmarkname != #"medal" && bookmark.bookmarkname != #"score_event") {
     return;
   }
 
@@ -2135,7 +2135,7 @@ updatedebugmenudata(forceupdate) {
   }
 
   level.potmdebugeventnum = debugeventnum;
-  infoindex = # "n/a";
+  infoindex = #"n/a";
   starttime = -1;
   endtime = -1;
   duration = -1;

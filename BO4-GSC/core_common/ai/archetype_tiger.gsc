@@ -202,7 +202,7 @@ is_target_valid(tiger, target) {
     return 0;
   }
 
-  if(!(tiger.team == # "allies")) {
+  if(!(tiger.team == #"allies")) {
     if(!isPlayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
@@ -247,7 +247,7 @@ get_favorite_enemy(tiger) {
   var_7c746996 = [];
 
   if(sessionmodeiszombiesgame()) {
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       var_7c746996 = getaiteamarray(level.zombie_team);
     } else {
       var_7c746996 = getplayers();
@@ -352,7 +352,7 @@ tigertargetservice(behaviortreeentity) {
     return;
   }
 
-  if((!sessionmodeiszombiesgame() || behaviortreeentity.team == # "allies") && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
+  if((!sessionmodeiszombiesgame() || behaviortreeentity.team == #"allies") && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     behaviortreeentity.favoriteenemy = get_favorite_enemy(behaviortreeentity);
   }
 

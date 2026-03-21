@@ -374,7 +374,7 @@ function_bfb15d08() {
 
 function_130c65ff() {
   zm_ui_inventory::function_7df6bb60("flinger_gear_box_1", 2);
-  level.pablo_npc.var_cb3ed98f[4].var_e7b75754 = # "";
+  level.pablo_npc.var_cb3ed98f[4].var_e7b75754 = #"";
   level notify(#"hash_3cbe96c6150e208c");
 }
 
@@ -474,7 +474,7 @@ function_b37bdeb4() {
 
 function_7619040c() {
   zm_ui_inventory::function_7df6bb60("flinger_gear_box_2", 2);
-  level.pablo_npc.var_cb3ed98f[5].var_e7b75754 = # "";
+  level.pablo_npc.var_cb3ed98f[5].var_e7b75754 = #"";
   level notify(#"hash_3b6b392c9f59fe4b");
 }
 
@@ -638,7 +638,7 @@ function_b6b24d3a() {
 function_ee63b8a7(var_a276c861, var_19e802fa) {}
 
 is_weapon_sniper(w_weapon) {
-  if(isDefined(w_weapon.issniperweapon) && w_weapon.issniperweapon || w_weapon.name === # "ww_tesla_sniper_t8" || w_weapon.name === # "ww_tesla_sniper_upgraded_t8") {
+  if(isDefined(w_weapon.issniperweapon) && w_weapon.issniperweapon || w_weapon.name === #"ww_tesla_sniper_t8" || w_weapon.name === #"ww_tesla_sniper_upgraded_t8") {
     if(weaponhasattachment(w_weapon, "elo") || weaponhasattachment(w_weapon, "reflex") || weaponhasattachment(w_weapon, "holo") || weaponhasattachment(w_weapon, "is")) {
       return false;
     } else {
@@ -832,7 +832,7 @@ function_7836d215() {
   s_location thread function_cabcfdd2();
   waitresult = level flag::wait_till_any(array(#"hash_778a2b8282d704f", #"hash_431a5026505d71aa"));
 
-  if(waitresult._notify === # "hash_431a5026505d71aa") {
+  if(waitresult._notify === #"hash_431a5026505d71aa") {
     if(level.musicsystem.currentplaytype < 4) {
       level thread zm_audio::sndmusicsystem_stopandflush();
       waitframe(1);

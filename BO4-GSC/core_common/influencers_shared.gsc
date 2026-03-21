@@ -92,7 +92,7 @@ add_influencer_tracker(influencer, name) {
 }
 
 create_influencer_generic(str_name, origin_or_entity, str_team, is_for_enemy = 0) {
-  if(str_team === # "any") {
+  if(str_team === #"any") {
     team_mask = level.spawnsystem.ispawn_teammask[#"all"];
   } else if(is_for_enemy) {
     team_mask = self get_enemy_team_mask(str_team);
@@ -148,7 +148,7 @@ create_entity_enemy_influencer(name, team) {
 }
 
 create_player_influencers() {
-  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == # "spectator") {
+  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == #"spectator") {
     return;
   }
 

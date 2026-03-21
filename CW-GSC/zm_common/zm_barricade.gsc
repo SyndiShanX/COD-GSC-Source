@@ -100,7 +100,7 @@ function function_14354831() {
 
   target_nodes = getnodearray(str_target, "targetname");
 
-  if(target_nodes[0].type !== # "volume") {
+  if(target_nodes[0].type !== #"volume") {
     return;
   }
 
@@ -142,7 +142,7 @@ function private function_348283c9() {
   while(true) {
     waitresult = self waittill(#"zombie_board_tear", #"hash_5cfbbb6ee8378665");
 
-    if(waitresult._notify === # "hash_5cfbbb6ee8378665") {
+    if(waitresult._notify === #"hash_5cfbbb6ee8378665") {
       chunks = zm_utility::get_non_destroyed_chunks(self, self.barrier_chunks);
 
       if(isarray(chunks)) {
@@ -179,7 +179,7 @@ function private function_55ce3493() {
       continue;
     }
 
-    if(waitresult._notify === # "hash_45aa77702fef26f4" && var_6195506c == var_1b8b64ca - 1) {
+    if(waitresult._notify === #"hash_45aa77702fef26f4" && var_6195506c == var_1b8b64ca - 1) {
       setenablenode(self.neg_start, 1);
     }
   }

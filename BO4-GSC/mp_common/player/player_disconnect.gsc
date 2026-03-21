@@ -25,13 +25,13 @@ callback_playerdisconnect() {
     if(level.teambased) {
       ourteam = self.team;
 
-      if(ourteam == # "allies" || ourteam == # "axis") {
+      if(ourteam == #"allies" || ourteam == #"axis") {
         theirteam = "";
 
-        if(ourteam == # "allies") {
-          theirteam = # "axis";
-        } else if(ourteam == # "axis") {
-          theirteam = # "allies";
+        if(ourteam == #"allies") {
+          theirteam = #"axis";
+        } else if(ourteam == #"axis") {
+          theirteam = #"allies";
         }
 
         recordplayerstats(self, "playerQuitTeamScore", getteamscore(ourteam));

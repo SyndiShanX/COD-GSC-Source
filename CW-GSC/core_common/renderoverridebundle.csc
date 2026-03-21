@@ -111,7 +111,7 @@ function function_e04728e4(local_client_num) {
       if(var_2bd670bd) {
         if(var_b8fe9b52) {
           foreach(flag, var_166900a8 in entity_array) {
-            if(var_166900a8 == # "hash_48a9d99bb016fbd3" || var_166900a8 == # "hash_2fff175ca0ba28b2" || var_166900a8 == # "hash_2476e7ae62469f70" || var_166900a8 == # "hash_2476eaae6246a489") {
+            if(var_166900a8 == #"hash_48a9d99bb016fbd3" || var_166900a8 == #"hash_2fff175ca0ba28b2" || var_166900a8 == #"hash_2476e7ae62469f70" || var_166900a8 == #"hash_2476eaae6246a489") {
               continue;
             }
 

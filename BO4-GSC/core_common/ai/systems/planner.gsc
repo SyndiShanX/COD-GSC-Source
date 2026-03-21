@@ -572,7 +572,7 @@ createplannerfromasset(assetname) {
       parentnode = plannernodes[nodeindex];
       htnnode = htnasset.nodes[nodeindex];
 
-      if(!isDefined(htnnode.childindexes) || htnnode.type == # "goto") {
+      if(!isDefined(htnnode.childindexes) || htnnode.type == #"goto") {
         continue;
       }
 
@@ -581,7 +581,7 @@ createplannerfromasset(assetname) {
         childnum = htnnode.childindexes[childindex];
         childnode = plannernodes[childnum];
 
-        for(htnchildnode = htnasset.nodes[childnum]; htnchildnode.type === # "goto"; htnchildnode = htnasset.nodes[childnum]) {
+        for(htnchildnode = htnasset.nodes[childnum]; htnchildnode.type === #"goto"; htnchildnode = htnasset.nodes[childnum]) {
           assert(isDefined(htnchildnode.childindexes));
           assert(htnchildnode.childindexes.size == 1);
           childnum = htnchildnode.childindexes[0];

@@ -111,7 +111,7 @@ function_d8a9b5a6(weapon) {
   a_e_targets = function_6880852f(b_up);
 
   if(isDefined(a_e_targets)) {
-    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === # "boss") {
+    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === #"boss") {
       n_proj = 3;
     } else if(!a_e_targets.size || a_e_targets.size === 1 && !isactor(a_e_targets[0])) {
       n_proj = 1;
@@ -370,7 +370,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
 
       wait n_time - 0.05;
 
-      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
         if(isDefined(ai_zombie gettagorigin("j_tail_1"))) {
           n_hit_dist_sq = 2500;
         } else {
@@ -445,7 +445,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
     e_projectile waittill(#"movedone");
   }
 
-  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
     self thread function_dced5aef(ai_zombie, level.w_hand_hemera_uncharged, n_damage);
   }
 
@@ -454,7 +454,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
 }
 
 function_30239376(e_target) {
-  if(isDefined(e_target) && e_target.zm_ai_category === # "boss") {
+  if(isDefined(e_target) && e_target.zm_ai_category === #"boss") {
     if(isDefined(e_target gettagorigin("j_tail_1"))) {
       v_org = e_target gettagorigin("j_tail_1");
     } else if(isDefined(e_target gettagorigin("j_spine4"))) {
@@ -500,7 +500,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
           e_target.marked_for_death = 1;
         }
 
-        if(e_target.archetype === # "skeleton") {
+        if(e_target.archetype === #"skeleton") {
           e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
         } else if(isDefined(e_target.marked_for_death) && e_target.marked_for_death) {
           self thread function_e56c350e(e_target, b_charged, n_damage);
@@ -763,7 +763,7 @@ function_e56c350e(e_target, b_charged, n_damage) {
   }
 
   if(isalive(e_target)) {
-    if(e_target.archetype === # "skeleton") {
+    if(e_target.archetype === #"skeleton") {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, w_weapon);
     } else {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, w_weapon);

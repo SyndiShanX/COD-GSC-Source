@@ -206,20 +206,20 @@ function_123bcbcf() {
       a_str_rewards = [];
 
       if(zm_custom::function_901b751c(#"zmpowerupsactive")) {
-        a_str_rewards[a_str_rewards.size] = # "double_points";
-        a_str_rewards[a_str_rewards.size] = # "insta_kill";
+        a_str_rewards[a_str_rewards.size] = #"double_points";
+        a_str_rewards[a_str_rewards.size] = #"insta_kill";
       }
 
       a_players = getplayers();
 
       if(a_players.size == 1 && !(isDefined(self.var_6482c679) && self.var_6482c679) && !zm_utility::is_trials()) {
-        a_str_rewards[a_str_rewards.size] = # "extra_life";
+        a_str_rewards[a_str_rewards.size] = #"extra_life";
       }
 
       wpn_bowie = getweapon(#"bowie_knife");
 
       if(!self hasweapon(wpn_bowie) && zm_custom::function_901b751c(#"zmweaponsknife")) {
-        a_str_rewards[a_str_rewards.size] = # "bowie_knife";
+        a_str_rewards[a_str_rewards.size] = #"bowie_knife";
       }
 
       str_reward = function_56c888ce(a_str_rewards);
@@ -245,14 +245,14 @@ function_123bcbcf() {
       a_str_rewards = array(#"weapon");
 
       if(zm_custom::function_901b751c(#"zmpowerupsactive")) {
-        a_str_rewards[a_str_rewards.size] = # "full_ammo";
-        a_str_rewards[a_str_rewards.size] = # "fire_sale";
+        a_str_rewards[a_str_rewards.size] = #"full_ammo";
+        a_str_rewards[a_str_rewards.size] = #"fire_sale";
       }
 
       wpn_bn = getweapon(#"bowie_knife");
 
       if(!self hasweapon(wpn_bn) && zm_custom::function_901b751c(#"zmweaponsknife")) {
-        a_str_rewards[a_str_rewards.size] = # "bowie_knife";
+        a_str_rewards[a_str_rewards.size] = #"bowie_knife";
       }
 
       str_reward = function_56c888ce(a_str_rewards);
@@ -278,11 +278,11 @@ function_123bcbcf() {
       wpn_current = self getcurrentweapon();
 
       if(zm_weapons::is_weapon_upgraded(wpn_current)) {
-        a_str_rewards[a_str_rewards.size] = # "aat";
+        a_str_rewards[a_str_rewards.size] = #"aat";
       }
 
       if(zm_custom::function_901b751c(#"zmspecweaponisenabled") && zm_custom::function_901b751c(#"zmpowerupsactive")) {
-        a_str_rewards[a_str_rewards.size] = # "weapon_power";
+        a_str_rewards[a_str_rewards.size] = #"weapon_power";
       }
 
       str_reward = function_56c888ce(a_str_rewards);
@@ -308,13 +308,13 @@ function_123bcbcf() {
       a_str_rewards = array(#"weapon");
 
       if(zm_custom::function_901b751c(#"zmperksactive") && self.var_123836f9 < 2) {
-        a_str_rewards[a_str_rewards.size] = # "free_perk";
+        a_str_rewards[a_str_rewards.size] = #"free_perk";
       }
 
       a_players = getplayers();
 
       if(a_players.size == 1 && !(isDefined(self.var_17d719b9) && self.var_17d719b9) && zm_custom::function_901b751c(#"zmpowerupsactive") && !zm_utility::is_trials()) {
-        a_str_rewards[a_str_rewards.size] = # "extra_life";
+        a_str_rewards[a_str_rewards.size] = #"extra_life";
       }
 
       var_b42aa272 = 1;
@@ -329,7 +329,7 @@ function_123bcbcf() {
       }
 
       if(var_b42aa272 && zm_custom::function_901b751c(#"zmequipmentisenabled") && zm_weapons::get_is_in_box(level.w_thunderstorm)) {
-        a_str_rewards[a_str_rewards.size] = # "pegasus";
+        a_str_rewards[a_str_rewards.size] = #"pegasus";
       }
 
       str_reward = function_56c888ce(a_str_rewards);
@@ -534,7 +534,7 @@ give_weapon_reward(var_7ed75e97, var_6c9485fc = 15, b_upgraded = 0, var_5876e0e2
   mdl_reward = zm_utility::spawn_buildkit_weapon_model(self, getweapon(str_weapon_name), undefined, v_loc, v_angles);
   b_rotate = 1;
 
-  if(str_weapon_name == # "thunderstorm") {
+  if(str_weapon_name == #"thunderstorm") {
     b_rotate = 0;
   }
 
@@ -770,11 +770,11 @@ function_ae2c0ba5() {
 
 function_a8243f37() {
   level.var_30641602 = [];
-  level.var_30641602[level.var_30641602.size] = # "pistol_standard_t8";
-  level.var_30641602[level.var_30641602.size] = # "pistol_burst_t8";
+  level.var_30641602[level.var_30641602.size] = #"pistol_standard_t8";
+  level.var_30641602[level.var_30641602.size] = #"pistol_burst_t8";
 
   if(zm_custom::function_901b751c(#"zmweaponssmg")) {
-    level.var_30641602[level.var_30641602.size] = # "smg_drum_pistol_t8";
+    level.var_30641602[level.var_30641602.size] = #"smg_drum_pistol_t8";
   }
 
   level.var_30641602 = array::randomize(level.var_30641602);
@@ -782,30 +782,30 @@ function_a8243f37() {
   level.var_fc2d4a2 = [];
 
   if(zm_custom::function_901b751c(#"zmweaponsar")) {
-    level.var_fc2d4a2[level.var_fc2d4a2.size] = # "ar_galil_t8";
+    level.var_fc2d4a2[level.var_fc2d4a2.size] = #"ar_galil_t8";
   }
 
   if(zm_custom::function_901b751c(#"zmweaponsshotgun")) {
-    level.var_fc2d4a2[level.var_fc2d4a2.size] = # "shotgun_fullauto_t8";
+    level.var_fc2d4a2[level.var_fc2d4a2.size] = #"shotgun_fullauto_t8";
   }
 
   if(zm_custom::function_901b751c(#"zmweaponssmg")) {
-    level.var_fc2d4a2[level.var_fc2d4a2.size] = # "smg_folding_t8";
+    level.var_fc2d4a2[level.var_fc2d4a2.size] = #"smg_folding_t8";
   }
 
   level.var_e3d39f70 = 0;
   level.var_24b50714 = [];
 
   if(zm_custom::function_901b751c(#"zmweaponssmg")) {
-    level.var_24b50714[level.var_24b50714.size] = # "smg_fastburst_t8";
+    level.var_24b50714[level.var_24b50714.size] = #"smg_fastburst_t8";
   }
 
   if(zm_custom::function_901b751c(#"zmweaponsar")) {
-    level.var_24b50714[level.var_24b50714.size] = # "ar_standard_t8";
+    level.var_24b50714[level.var_24b50714.size] = #"ar_standard_t8";
   }
 
   if(zm_custom::function_901b751c(#"zmweaponssniper")) {
-    level.var_24b50714[level.var_24b50714.size] = # "sniper_powersemi_t8";
+    level.var_24b50714[level.var_24b50714.size] = #"sniper_powersemi_t8";
   }
 
   level.var_de18c954 = 0;
@@ -1222,12 +1222,12 @@ function_e08e4c9c(str_bgb, var_8b84b3ce) {
 
   switch (str_bgb) {
     case # "zm_bgb_shields_up":
-      str_model = # "p8_zm_red_powerup_free_shield";
+      str_model = #"p8_zm_red_powerup_free_shield";
       n_scale = 0.3;
       break;
     case # "zm_bgb_equip_mint":
     default:
-      str_model = # "p8_zm_red_powerup_free_equiptment";
+      str_model = #"p8_zm_red_powerup_free_equiptment";
       n_scale = 0.45;
       break;
   }

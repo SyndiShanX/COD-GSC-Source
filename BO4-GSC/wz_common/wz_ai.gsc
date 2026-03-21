@@ -83,7 +83,7 @@ function_afce0cdb(spawn_loc) {
         patroller.fovcosine = zone.fovcosine;
         patroller.zone = zone;
 
-        if(patroller.archetype === # "amws") {
+        if(patroller.archetype === #"amws") {
           patroller.scan_turret = 1;
           patroller.var_9b4a5686 = 1;
           patroller.var_a8c60b0e = 1;

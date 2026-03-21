@@ -53,7 +53,7 @@ function init_shared() {
     level.var_8c5a071d = 1;
   }
 
-  level._effect[#"flashninebang"] = # "_t6/misc/fx_equip_tac_insert_exp";
+  level._effect[#"flashninebang"] = #"_t6/misc/fx_equip_tac_insert_exp";
   callback::on_start_gametype(&init);
   callback::on_player_killed(&on_death);
   level.detach_all_weapons = &detach_all_weapons;
@@ -407,7 +407,7 @@ function update_timings(newtime) {
 }
 
 function on_death(params) {
-  if(game.state == # "playing" && level.trackweaponstats) {
+  if(game.state == #"playing" && level.trackweaponstats) {
     if(!isDefined(self.var_e09dd2bf)) {
       self.var_e09dd2bf = gettime();
     }
@@ -602,7 +602,7 @@ function private function_6cf6f3fb(attacker, sweapon, smeansofdeath, damage, var
     println("<dev string:x12e>" + weapon.name);
   }
 
-  if(!isDefined(item.model) || item.model == # "") {
+  if(!isDefined(item.model) || item.model == #"") {
     iprintlnbold("<dev string:x142>" + weapon.name);
   }
 
@@ -793,7 +793,7 @@ function function_f2c53bb2(curweapon) {
     return;
   }
 
-  if(sessionmodeiswarzonegame() && game.state !== # "playing") {
+  if(sessionmodeiswarzonegame() && game.state !== #"playing") {
     return;
   }
 
@@ -1040,7 +1040,7 @@ function watch_offhand_end(weapon) {
     while(self function_2d96f300(weapon)) {
       msg = self waittill(#"offhand_end", #"death", #"disconnect", #"grenade_fire", #"weapon_change");
 
-      if(msg._notify == # "grenade_fire") {
+      if(msg._notify == #"grenade_fire") {
         if(isDefined(self) && is_true(weapon.var_d69ee9ed) && self getweaponammoclip(weapon) > 0) {
           continue;
         }
@@ -1048,7 +1048,7 @@ function watch_offhand_end(weapon) {
         break;
       }
 
-      if(msg._notify == # "death" || msg._notify == # "disconnect" || msg._notify == # "offhand_end") {
+      if(msg._notify == #"death" || msg._notify == #"disconnect" || msg._notify == #"offhand_end") {
         break;
       }
     }
@@ -1120,15 +1120,15 @@ function begin_grenade_tracking() {
     return;
   }
 
-  structname = # "mpequipmentuses";
-  eventname = # "hash_7cbbee88c5db5494";
+  structname = #"mpequipmentuses";
+  eventname = #"hash_7cbbee88c5db5494";
 
   if(sessionmodeiscampaigngame()) {
-    structname = # "cpequipmentuses";
-    eventname = # "hash_4b0d58055ad60c5a";
+    structname = #"cpequipmentuses";
+    eventname = #"hash_4b0d58055ad60c5a";
   } else if(sessionmodeiszombiesgame()) {
-    structname = # "zmequipmentuses";
-    eventname = # "hash_637ce41bcec9842c";
+    structname = #"zmequipmentuses";
+    eventname = #"hash_637ce41bcec9842c";
   }
 
   function_92d1707f(eventname, structname, {
@@ -2141,7 +2141,7 @@ function dropweaponfordeathlaunch(item, damage, angles, weapon, var_a5baf64e, va
     return;
   }
 
-  if(!isDefined(item.model) || item.model == # "") {
+  if(!isDefined(item.model) || item.model == #"") {
     println("<dev string:x1dc>" + weapon.name);
     return;
   }

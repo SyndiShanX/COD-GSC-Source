@@ -104,7 +104,7 @@ function private on_end(round_reset) {
 }
 
 function private on_player_spawned() {
-  if(level.var_4ecf5754 === # "silent_film") {
+  if(level.var_4ecf5754 === #"silent_film") {
     self clientfield::set_to_player("" + # "hash_b905d796914b710", 1);
   }
 }

@@ -20,7 +20,7 @@ function private preinit() {
   ai::add_archetype_spawn_function(#"zod_companion", &zodcompanionspawnsetup);
   level._effect[#"fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
   level._effect[#"fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";
-  level._effect[#"companion_revive_effect"] = # "hash_3adc423957988632";
+  level._effect[#"companion_revive_effect"] = #"hash_3adc423957988632";
   ai::add_archetype_spawn_function(#"robot", &zodcompanionspawnsetup);
 }
 

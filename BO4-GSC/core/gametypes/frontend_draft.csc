@@ -19,8 +19,8 @@ init() {
   level thread function_ca03ab69();
   level thread function_91858511();
   level.draftactivecam = "";
-  level.draftxcam = # "ui_cam_draft_common";
-  level.var_482af62e = # "hash_12263e5d70551bf9";
+  level.draftxcam = #"ui_cam_draft_common";
+  level.var_482af62e = #"hash_12263e5d70551bf9";
   level.var_df72fe54 = undefined;
   level.draftcharacters = [];
   level.var_6963abdb = [];
@@ -39,16 +39,16 @@ function_75442e78(index) {
   var_8cb8d474 = [];
 
   if(currentsessionmode() == 0) {
-    var_8cb8d474[0] = # "zm_lobby_player_2";
-    var_8cb8d474[1] = # "zm_lobby_player_1";
-    var_8cb8d474[2] = # "zm_lobby_player_0";
-    var_8cb8d474[3] = # "zm_lobby_player_3";
+    var_8cb8d474[0] = #"zm_lobby_player_2";
+    var_8cb8d474[1] = #"zm_lobby_player_1";
+    var_8cb8d474[2] = #"zm_lobby_player_0";
+    var_8cb8d474[3] = #"zm_lobby_player_3";
   } else {
-    var_8cb8d474[0] = # "draft_player_struct_2_allies";
-    var_8cb8d474[1] = # "draft_player_struct_1_allies";
-    var_8cb8d474[2] = # "draft_player_struct_0_allies";
-    var_8cb8d474[3] = # "draft_player_struct_3_allies";
-    var_8cb8d474[4] = # "draft_player_struct_4_allies";
+    var_8cb8d474[0] = #"draft_player_struct_2_allies";
+    var_8cb8d474[1] = #"draft_player_struct_1_allies";
+    var_8cb8d474[2] = #"draft_player_struct_0_allies";
+    var_8cb8d474[3] = #"draft_player_struct_3_allies";
+    var_8cb8d474[4] = #"draft_player_struct_4_allies";
   }
 
   if(index < var_8cb8d474.size) {
@@ -76,9 +76,9 @@ function_f701ad2a() {
     return 2;
   }
 
-  if(level.lastlobbystate === # "lobby_pose" || level.lastlobbystate === # "private_lobby_pose") {
+  if(level.lastlobbystate === #"lobby_pose" || level.lastlobbystate === #"private_lobby_pose") {
     return 0;
-  } else if(level.lastlobbystate === # "arena_pose") {
+  } else if(level.lastlobbystate === #"arena_pose") {
     return 1;
   }
 
@@ -357,10 +357,10 @@ setup_team(localclientnum) {
   targetname = "draftCharacter";
 
   if(sessionmode == 3) {
-    level.draftxcam = # "hash_2598b6f5e72695c7";
+    level.draftxcam = #"hash_2598b6f5e72695c7";
     targetname = "WZdraftCharacter";
   } else if(sessionmode == 0) {
-    level.draftxcam = # "hash_590b617ac1441b1b";
+    level.draftxcam = #"hash_590b617ac1441b1b";
     targetname = "ZMdraftCharacter";
   }
 
@@ -400,7 +400,7 @@ function_a5644aa3(localclientnum) {
     level.var_e6802f10 = 1;
     waitresult = level waittill(#"hash_4ef5fa5de0b8868b", #"hash_3f81f5a6c0c89878");
 
-    if(waitresult._notify == # "hash_4ef5fa5de0b8868b") {
+    if(waitresult._notify == #"hash_4ef5fa5de0b8868b") {
       function_e79c182b(localclientnum, 1000);
     } else {
       function_e79c182b(localclientnum, 0, 1);
@@ -419,7 +419,7 @@ function_9c896b69(localclientnum) {
     waitresult = level waittill(#"positiondraft_update", #"positiondraft_reject", #"hash_6f2435126950e914");
     localclientnum = waitresult.localclientnum;
 
-    if(waitresult._notify == # "hash_6f2435126950e914") {
+    if(waitresult._notify == #"hash_6f2435126950e914") {
       level childthread update_team(localclientnum, 1);
       level childthread function_1cf2437c(localclientnum, waitresult.characterindex);
       continue;

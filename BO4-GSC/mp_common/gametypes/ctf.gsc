@@ -93,11 +93,11 @@ event_handler[gametype_init] main(eventstruct) {
 
   level.var_537d7278 = [];
   level.var_537d7278[#"allies"] = spawnStruct();
-  level.var_537d7278[#"allies"].friendly = # "p8_mp_flag_carry_1_blackops";
-  level.var_537d7278[#"allies"].enemy = # "hash_1ad3d7548486082";
+  level.var_537d7278[#"allies"].friendly = #"p8_mp_flag_carry_1_blackops";
+  level.var_537d7278[#"allies"].enemy = #"hash_1ad3d7548486082";
   level.var_537d7278[#"axis"] = spawnStruct();
-  level.var_537d7278[#"axis"].friendly = # "hash_4ddde6545c52fa2f";
-  level.var_537d7278[#"axis"].enemy = # "p8_mp_flag_carry_1_mercs";
+  level.var_537d7278[#"axis"].friendly = #"hash_4ddde6545c52fa2f";
+  level.var_537d7278[#"axis"].enemy = #"p8_mp_flag_carry_1_mercs";
   globallogic_audio::set_leader_gametype_dialog("startCtf", "hcStartCtf", "objCapture", "objCapture", "bbStartCtf", "hcbbStartCtf");
   level thread ctf_icon_hide();
 }
@@ -105,7 +105,7 @@ event_handler[gametype_init] main(eventstruct) {
 onprecachegametype() {
   game.flag_dropped_sound = "mp_war_objective_lost";
   game.flag_recovered_sound = "mp_war_objective_taken";
-  game.strings[#"score_limit_reached"] = # "hash_5218d2db23ab36aa";
+  game.strings[#"score_limit_reached"] = #"hash_5218d2db23ab36aa";
 }
 
 function_a8da260c() {
@@ -233,7 +233,7 @@ onendround(var_c1e98979) {
   game.overtime_best_time[#"ctf"] = globallogic_utils::gettimepassed();
   globallogic_score::updateteamscorebyroundswon();
 
-  if(winning_team === # "allies" || winning_team === # "axis") {
+  if(winning_team === #"allies" || winning_team === #"axis") {
     [[level._setteamscore]](winning_team, game.stat[#"roundswon"][winning_team] + 1);
   }
 }
@@ -264,11 +264,11 @@ onendgame(var_c1e98979) {
       }
 
       if(game.overtime_first_winner == winningteam) {
-        level.endvictoryreasontext = # "hash_7cafa946822ee652";
-        level.enddefeatreasontext = # "hash_34d0ee5d4c21542d";
+        level.endvictoryreasontext = #"hash_7cafa946822ee652";
+        level.enddefeatreasontext = #"hash_34d0ee5d4c21542d";
       } else {
-        level.endvictoryreasontext = # "hash_7cafa946822ee652";
-        level.enddefeatreasontext = # "hash_5235bbca93844647";
+        level.endvictoryreasontext = #"hash_7cafa946822ee652";
+        level.enddefeatreasontext = #"hash_5235bbca93844647";
       }
     } else {
       winningteam = game.outcome.var_aefc8b8d.team;
@@ -383,7 +383,7 @@ createflag(trigger) {
     flag.canuseobject = &function_a5f40b8e;
   } else {
     flag.allowweapons = 1;
-    flag.identifier = # "hash_7044a4ac19b5324e";
+    flag.identifier = #"hash_7044a4ac19b5324e";
   }
 
   flag.onpickup = &onpickup;

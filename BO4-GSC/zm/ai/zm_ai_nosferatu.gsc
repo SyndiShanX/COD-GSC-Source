@@ -170,7 +170,7 @@ function_c12f7b53() {
   self.var_fad2bca9 = 1;
   self.var_ccb2e201 = 0;
 
-  if(self.subarchetype === # "crimson_nosferatu") {
+  if(self.subarchetype === #"crimson_nosferatu") {
     self.var_dd6fe31f = 1;
     self.var_f46fbf3f = 1;
     self.var_126d7bef = 1;
@@ -195,7 +195,7 @@ function_c12f7b53() {
 }
 
 function_8a2cb5ed(params) {
-  if(self.archetype === # "nosferatu") {
+  if(self.archetype === #"nosferatu") {
     attackerdistance = 0;
     isexplosive = 0;
     iscloseexplosive = 0;
@@ -267,7 +267,7 @@ function_e05b2c36() {
 function_8dc028ba(s_params) {
   attacker = s_params.eattacker;
 
-  if(isDefined(attacker) && isDefined(attacker.archetype) && attacker.archetype == # "nosferatu" && s_params.idamage > 0) {
+  if(isDefined(attacker) && isDefined(attacker.archetype) && attacker.archetype == #"nosferatu" && s_params.idamage > 0) {
     self function_2b35beda();
     attacker function_c59b482e();
 
@@ -553,7 +553,7 @@ function_82785646(entity) {
     return false;
   }
 
-  if(!isDefined(self.subarchetype) || self.subarchetype != # "crimson_nosferatu") {
+  if(!isDefined(self.subarchetype) || self.subarchetype != #"crimson_nosferatu") {
     return false;
   }
 
@@ -589,7 +589,7 @@ function_c16e1ca1(entity) {
     return false;
   }
 
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 

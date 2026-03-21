@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  game.var_e9714926 = # "demo";
+  game.var_e9714926 = #"demo";
   callback::on_start_gametype(&init);
   level thread watch_actor_bookmarks();
 }

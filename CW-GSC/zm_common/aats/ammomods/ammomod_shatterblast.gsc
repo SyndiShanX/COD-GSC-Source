@@ -72,7 +72,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc = se
     return;
   }
 
-  if(self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"boss") {
     return;
   }
 
@@ -154,7 +154,7 @@ function function_945cac2d(damage, attacker, weapon, shitloc, var_84ed9a13) {
   }
 
   if(isDefined(var_84ed9a13) && is_true(var_84ed9a13.var_b98c4585)) {
-    if(namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type == # "armor" && var_84ed9a13.health > 0) {
+    if(namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type == #"armor" && var_84ed9a13.health > 0) {
       namespace_81245006::damageweakpoint(var_84ed9a13, var_84ed9a13.health);
     }
 
@@ -211,7 +211,7 @@ function function_aa443b97(attacker, weapon, shitloc, vpoint, tier, extra = 0) {
     }
 
     if(tier >= 2) {
-      if(zombie.zm_ai_category === # "normal") {
+      if(zombie.zm_ai_category === #"normal") {
         zombie function_cbd0f7ea(weapon, damage, shitloc);
         var_6e1f497c = 1;
       }
@@ -223,11 +223,11 @@ function function_aa443b97(attacker, weapon, shitloc, vpoint, tier, extra = 0) {
 
     if(isalive(zombie)) {
       if(tier >= 3) {
-        if(zombie.zm_ai_category === # "normal") {
+        if(zombie.zm_ai_category === #"normal") {
           zombie zombie_utility::setup_zombie_knockdown(vpoint);
         }
       }
-    } else if(zombie.zm_ai_category === # "normal") {
+    } else if(zombie.zm_ai_category === #"normal") {
       v_curr_zombie_origin = zombie getcentroid();
       n_random_x = randomfloatrange(-3, 3);
       n_random_y = randomfloatrange(-3, 3);

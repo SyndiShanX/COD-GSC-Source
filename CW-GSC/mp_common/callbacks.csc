@@ -186,44 +186,44 @@ function airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner
 
   switch (owner) {
     case # "v":
-      owner = # "vietcong";
+      owner = #"vietcong";
       break;
     case # "nva":
     case # "n":
-      owner = # "nva";
+      owner = #"nva";
       break;
     case # "j":
-      owner = # "japanese";
+      owner = #"japanese";
       break;
     case # "m":
-      owner = # "marines";
+      owner = #"marines";
       break;
     case # "s":
-      owner = # "specops";
+      owner = #"specops";
       break;
     case # "r":
-      owner = # "russian";
+      owner = #"russian";
       break;
     default:
       println("<dev string:x82>");
       println("<dev string:xbf>" + owner + "<dev string:xd9>");
-      owner = # "marines";
+      owner = #"marines";
       break;
   }
 
   switch (teamfaction) {
     case # "x":
-      teamfaction = # "axis";
+      teamfaction = #"axis";
       break;
     case # "l":
-      teamfaction = # "allies";
+      teamfaction = #"allies";
       break;
     case # "r":
-      teamfaction = # "none";
+      teamfaction = #"none";
       break;
     default:
       println("<dev string:xde>" + teamfaction + "<dev string:xd9>");
-      teamfaction = # "allies";
+      teamfaction = #"allies";
       break;
   }
 
@@ -243,7 +243,7 @@ function airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner
     data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
     data.planemodel = "t5_veh_air_b52";
     data.flybysound = "null";
-    data.washsound = # "veh_b52_flyby_wash";
+    data.washsound = #"veh_b52_flyby_wash";
     data.apextime = 6145;
     data.exittype = -1;
     data.flyspeed = 2000;
@@ -259,7 +259,7 @@ function airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner
     data.endpoint = pos + vectorscale(anglesToForward(direction), planehalfdistance);
     data.planemodel = airsupport::getplanemodel(owner);
     data.flybysound = "null";
-    data.washsound = # "evt_us_napalm_wash";
+    data.washsound = #"evt_us_napalm_wash";
     data.apextime = 2362;
     data.exittype = time;
     data.flyspeed = 7000;

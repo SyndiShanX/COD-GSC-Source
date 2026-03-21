@@ -77,7 +77,7 @@ function friendlyfirecheck(owner, attacker, forcedfriendlyfirerule) {
       occupant_team = attacker vehicle::vehicle_get_occupant_team();
 
       if(isPlayer(owner)) {
-        if(util::function_fbce7263(occupant_team, owner.pers[#"team"]) && occupant_team != # "spectator") {
+        if(util::function_fbce7263(occupant_team, owner.pers[#"team"]) && occupant_team != #"spectator") {
           return true;
         }
       } else if(util::function_fbce7263(owner.team, occupant_team)) {

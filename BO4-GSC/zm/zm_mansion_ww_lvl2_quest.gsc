@@ -47,8 +47,8 @@ __main__() {
     level thread function_6b6712e3();
     level thread function_c9e23896();
     w_blueprint = zm_crafting::function_b18074d0(#"zblueprint_mansion_ww_lvl2");
-    w_blueprint.component02.var_62a98b13 = # "weapon_frame";
-    w_blueprint.component03.var_62a98b13 = # "prima_materia";
+    w_blueprint.component02.var_62a98b13 = #"weapon_frame";
+    w_blueprint.component03.var_62a98b13 = #"prima_materia";
     zm_crafting::function_d1f16587(#"zblueprint_mansion_ww_lvl2", &ww_lvl2_crafted);
     callback::on_connect(&function_27b91fdb);
   }
@@ -200,21 +200,21 @@ function_ea6f56ee() {
       continue;
     }
 
-    var_21839a96 = # "";
-    var_57ec466d = # "zmb_sq_souls_release";
+    var_21839a96 = #"";
+    var_57ec466d = #"zmb_sq_souls_release";
 
     if(level flag::get("flag_player_grabbed_werewolf_material") && !level flag::get("flag_player_grabbed_werewolf_prima")) {
-      var_21839a96 = # "hash_5dba850c6ed3ebee";
+      var_21839a96 = #"hash_5dba850c6ed3ebee";
       level thread function_29f66f1a(var_21839a96, var_57ec466d);
       level.var_9332cecc = 1;
       level zm_ui_inventory::function_7df6bb60(#"ww_p1_2", 0);
     } else if(level flag::get("flag_player_grabbed_catalyst_material") && !level flag::get("flag_player_grabbed_bat_prima")) {
-      var_21839a96 = # "zitem_chaos_lvl3_part_1";
+      var_21839a96 = #"zitem_chaos_lvl3_part_1";
       level thread function_29f66f1a(var_21839a96, var_57ec466d);
       level.var_f6a6ddae = 1;
       level zm_ui_inventory::function_7df6bb60(#"ww_p2_2", 0);
     } else if(level flag::get("flag_player_grabbed_nosferatu_material") && !level flag::get("flag_player_grabbed_nosferatu_prima")) {
-      var_21839a96 = # "zitem_chaos_lvl3_part_2";
+      var_21839a96 = #"zitem_chaos_lvl3_part_2";
       level thread function_29f66f1a(var_21839a96, var_57ec466d);
       level.var_ea58030a = 1;
       level zm_ui_inventory::function_7df6bb60(#"ww_p2_3", 0);

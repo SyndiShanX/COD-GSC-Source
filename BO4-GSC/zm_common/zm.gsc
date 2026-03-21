@@ -910,46 +910,46 @@ init_client_field_callback_funcs() {
 
 init_fx() {
   level.createfx_callback_thread = &delete_in_createfx;
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[#"switch_sparks"] = # "hash_26f37488feec03c3";
-  level._effect[#"hash_4159f23a18f644a7"] = # "hash_71ed4f412b17e19e";
-  level._effect[#"fx_zombie_bar_break"] = # "hash_718a24841c1e00c9";
-  level._effect[#"fx_zombie_bar_break_lite"] = # "hash_35ee6425adf16fb6";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
+  level._effect[#"hash_4159f23a18f644a7"] = #"hash_71ed4f412b17e19e";
+  level._effect[#"fx_zombie_bar_break"] = #"hash_718a24841c1e00c9";
+  level._effect[#"fx_zombie_bar_break_lite"] = #"hash_35ee6425adf16fb6";
 
   if(!(isDefined(level.fx_exclude_edge_fog) && level.fx_exclude_edge_fog)) {
-    level._effect[#"edge_fog"] = # "_t6/maps/zombie/fx_fog_zombie_amb";
+    level._effect[#"edge_fog"] = #"_t6/maps/zombie/fx_fog_zombie_amb";
   }
 
-  level._effect[#"chest_light"] = # "zombie/fx_weapon_box_open_glow_zmb";
-  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"chest_light"] = #"zombie/fx_weapon_box_open_glow_zmb";
+  level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
 
   if(!(isDefined(level.fx_exclude_tesla_head_light) && level.fx_exclude_tesla_head_light)) {
-    level._effect[#"tesla_head_light"] = # "hash_757d002378ec934c";
+    level._effect[#"tesla_head_light"] = #"hash_757d002378ec934c";
   }
 
-  level._effect[#"zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
-  level._effect[#"rise_burst_water"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow_water"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"rise_dust_water"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"fall_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"fall_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"fall_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
-  level._effect[#"character_fire_death_torso"] = # "hash_5686def5b4c85661";
+  level._effect[#"zombie_guts_explosion"] = #"zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"rise_burst_water"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow_water"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust_water"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"fall_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"fall_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"fall_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"character_fire_death_sm"] = #"hash_c9cf0acc938a7f6";
+  level._effect[#"character_fire_death_torso"] = #"hash_5686def5b4c85661";
 
   if(!(isDefined(level.fx_exclude_default_explosion) && level.fx_exclude_default_explosion)) {
-    level._effect[#"def_explosion"] = # "_t6/explosions/fx_default_explosion";
+    level._effect[#"def_explosion"] = #"_t6/explosions/fx_default_explosion";
   }
 
   if(!(isDefined(level.disable_fx_upgrade_aquired) && level.disable_fx_upgrade_aquired)) {
-    level._effect[#"upgrade_aquired"] = # "hash_359f0993cf4ebe66";
+    level._effect[#"upgrade_aquired"] = #"hash_359f0993cf4ebe66";
   }
 }
 
@@ -1061,7 +1061,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   damage = zm_perks::actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
   damage = namespace_e38c57c1::actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
   damage = self check_actor_damage_callbacks(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
-  self.knuckles_extinguish_flames = weapon.name == # "tazer_knuckles";
+  self.knuckles_extinguish_flames = weapon.name == #"tazer_knuckles";
   attacker thread zm_audio::sndplayerhitalert(self, meansofdeath, inflictor, weapon, shitloc, damage);
 
   if(!isPlayer(attacker) && isDefined(self.non_attacker_func)) {
@@ -1094,10 +1094,10 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 
   self.var_2e581a5 = undefined;
 
-  if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+  if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
     var_84ed9a13 = self zm_ai_utility::function_de3dda83(boneindex, shitloc, vpoint);
 
-    if(isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type !== # "armor") {
+    if(isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1 && var_84ed9a13.type !== #"armor") {
       self.var_2e581a5 = 1;
     }
   }
@@ -1132,10 +1132,10 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
     }
   }
 
-  if(isDefined(inflictor) && isDefined(inflictor.archetype) && inflictor.archetype == # "glaive") {
+  if(isDefined(inflictor) && isDefined(inflictor.archetype) && inflictor.archetype == #"glaive") {
     if(meansofdeath == "MOD_CRUSH") {
       if(isDefined(inflictor.enemy) && inflictor.enemy != self || isDefined(inflictor._glaive_must_return_to_owner) && inflictor._glaive_must_return_to_owner) {
-        if(isDefined(self.archetype) && self.archetype != # "margwa") {
+        if(isDefined(self.archetype) && self.archetype != #"margwa") {
           final_damage += self.health;
 
           if(isactor(self)) {
@@ -1173,7 +1173,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(isDefined(attacker) && final_damage > 0 && !(isDefined(self.var_265cb589) && self.var_265cb589) && !(isDefined(level.var_dc60105c) && level.var_dc60105c)) {
     var_6b5f7089 = 0;
 
-    if((weapon.name === # "lmg_heavy_t8_upgraded" || weapon.name === # "ar_mg1909_t8_upgraded") && meansofdeath == "MOD_PROJECTILE_SPLASH") {
+    if((weapon.name === #"lmg_heavy_t8_upgraded" || weapon.name === #"ar_mg1909_t8_upgraded") && meansofdeath == "MOD_PROJECTILE_SPLASH") {
       var_6b5f7089 = 1;
     }
 
@@ -1361,15 +1361,15 @@ actor_killed_override(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     perks = [];
     killstreaks = [];
     rounds = level.round_number;
-    bookmarkname = # "";
+    bookmarkname = #"";
 
-    if(isDefined(self.archetype) && (self.archetype == # "tiger" || self.archetype == # "brutus" || self.archetype == # "zombie_dog" || self.archetype == # "catalyst" || self.archetype == # "stoker" || self.archetype == # "blight_father")) {
-      bookmarkname = # "hash_1553fcea4f6a00e";
+    if(isDefined(self.archetype) && (self.archetype == #"tiger" || self.archetype == #"brutus" || self.archetype == #"zombie_dog" || self.archetype == #"catalyst" || self.archetype == #"stoker" || self.archetype == #"blight_father")) {
+      bookmarkname = #"hash_1553fcea4f6a00e";
     } else {
-      bookmarkname = # "hash_37300d83d8e6f1fc";
+      bookmarkname = #"hash_37300d83d8e6f1fc";
     }
 
-    if(bookmarkname == # "hash_1553fcea4f6a00e") {
+    if(bookmarkname == #"hash_1553fcea4f6a00e") {
       demo::bookmark(bookmarkname, gettime(), player);
     }
 

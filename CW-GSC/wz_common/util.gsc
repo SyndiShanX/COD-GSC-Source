@@ -50,7 +50,7 @@ function function_de15dc32(killed_player, disconnected_player) {
 }
 
 function function_47851c07() {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 

@@ -72,7 +72,7 @@ main() {
   zm_round_spawning::function_306ce518(#"werewolf", &function_124d3657);
   zm_utility::function_2959a3cb(#"nosferatu", &function_c22d1f6a);
   zm_utility::function_2959a3cb(#"werewolf", &function_9ab66ae8);
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
   var_4ce6fa3d = getent("connect_forest_entrance_to_forest", "script_flag");
   var_4ce6fa3d.script_noteworthy = "";
@@ -169,7 +169,7 @@ defend_areas() {
   zm_utility::function_fdb0368(4);
   zm_utility::open_door(array("door_hallend_to_grand_staircase", "door_to_entrance_hall"), undefined, undefined, 1);
   level thread scene::play("entrance_hall_exploding_door", "targetname");
-  str_next_defend = # "grand_staircase";
+  str_next_defend = #"grand_staircase";
   wait 5;
   zm_utility::function_11101458(str_next_defend);
   wait 10;
@@ -182,9 +182,9 @@ defend_areas() {
   wait 10;
   str_second_defend = array::random(array(#"cellar", #"library", #"dining_room"));
 
-  if(str_second_defend == # "cellar") {
+  if(str_second_defend == #"cellar") {
     level thread zm_utility::open_door(array("door_to_cellar"));
-  } else if(str_second_defend == # "library") {
+  } else if(str_second_defend == #"library") {
     level thread zm_utility::open_door(array("door_to_library_floor", "door_to_library"));
   } else {
     level thread zm_utility::open_door(array("door_to_dining_room_lower", "debris_to_dining_room_upper"));
@@ -197,7 +197,7 @@ defend_areas() {
   zm_utility::function_fef4b36a(str_second_defend);
   level zm_utility::open_door(array("debris_startwest_to_mainhall", "debris_starteast_to_mainhall"), undefined, undefined, 1);
   wait 5;
-  str_next_defend = # "main_hall";
+  str_next_defend = #"main_hall";
   zm_utility::function_11101458(str_next_defend);
   registertrench_dogs_coop_round();
   wait 15;
@@ -225,11 +225,11 @@ defend_areas() {
   level thread registerlast_truck_headshot_();
   wait 30;
 
-  if(str_second_defend == # "library") {
-    str_next_defend = # "cemetery";
+  if(str_second_defend == #"library") {
+    str_next_defend = #"cemetery";
     level thread zm_utility::open_door(array("debris_cemetery_entrance", "debris_cemetery", "door_to_library", "door_to_library_floor"));
   } else {
-    str_next_defend = # "greenhouse";
+    str_next_defend = #"greenhouse";
     level thread zm_utility::open_door(array("gate_greenhouse", "door_dining_room_to_greenhouse_entrance", "door_to_dining_room_lower", "debris_to_dining_room_upper"));
   }
 

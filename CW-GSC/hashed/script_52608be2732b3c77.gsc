@@ -293,7 +293,7 @@ function private function_fc4cc729(enemy, origin) {
     return false;
   }
 
-  if(enemy.archetype === # "gegenees") {
+  if(enemy.archetype === #"gegenees") {
     return false;
   }
 
@@ -738,7 +738,7 @@ function private function_ca5688e3(inflictor, attacker, damage, idflags, meansof
         }
       }
 
-      if(var_dd54fdb1.type === # "armor") {
+      if(var_dd54fdb1.type === #"armor") {
         attacker util::show_hit_marker(!isalive(self));
 
         if(isDefined(dir) && isDefined(point)) {
@@ -780,7 +780,7 @@ function private function_ca5688e3(inflictor, attacker, damage, idflags, meansof
 }
 
 function private function_a231dd3b(s_params) {
-  if(!isDefined(self) || self.archetype !== # "gegenees") {
+  if(!isDefined(self) || self.archetype !== #"gegenees") {
     return;
   }
 

@@ -247,7 +247,7 @@ function function_4e1614d() {
   while(true) {
     level.player waittill(#"weapon_fire");
 
-    if(level.player getcurrentweapon().name != # "hash_165cf52ce418f5a1") {
+    if(level.player getcurrentweapon().name != #"hash_165cf52ce418f5a1") {
       level flag::set("flag_caves_room1_player_shot");
       break;
     }

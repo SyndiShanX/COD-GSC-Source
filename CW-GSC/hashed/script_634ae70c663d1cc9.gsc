@@ -419,9 +419,9 @@ function function_7763059c() {
   while(isDefined(self.owner)) {
     color = self istriggerenabled() ? (1, 0, 0) : (0, 0, 0);
 
-    if(self.classname === # "trigger_radius") {
+    if(self.classname === #"trigger_radius") {
       level thread namespace_1e25ad94::function_e8f2d12c(self.origin, self.radius, self.height, 1, color);
-    } else if(self.classname === # "trigger_box") {
+    } else if(self.classname === #"trigger_box") {
       level thread namespace_1e25ad94::function_67127ba2(self, self.angles[1], self.length, self.width, self.height, 0.05, color);
     }
 
@@ -437,57 +437,57 @@ function function_b04a33c5(platforms) {
 
 function function_96e2f261(traps, page) {
   foreach(trap in traps) {
-    if(trap.script_noteworthy === # "pungi") {
+    if(trap.script_noteworthy === #"pungi") {
       namespace_d20e7d3b::function_f42615a9(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "pressureplate") {
+    if(trap.script_noteworthy === #"pressureplate") {
       namespace_9529b92d::function_b3e13787(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "pole") {
+    if(trap.script_noteworthy === #"pole") {
       namespace_53f73cda::function_28826539(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "barrel") {
+    if(trap.script_noteworthy === #"barrel") {
       namespace_fb2125f::function_3dd2c543(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "dragonhead") {
+    if(trap.script_noteworthy === #"dragonhead") {
       namespace_3c9cfcff::function_c808b1bb(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "killbox") {
+    if(trap.script_noteworthy === #"killbox") {
       namespace_6624770a::function_bbdbcaa5(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "killzone") {
+    if(trap.script_noteworthy === #"killzone") {
       namespace_538252ab::function_7ae8d74a(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "flogger") {
+    if(trap.script_noteworthy === #"flogger") {
       namespace_85f9e33a::function_7fb58446(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "logdrop") {
+    if(trap.script_noteworthy === #"logdrop") {
       namespace_a7c12078::function_7f3d5e5d(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "fireball") {
+    if(trap.script_noteworthy === #"fireball") {
       namespace_2a2a39d4::function_7a2f725d(trap, page);
       continue;
     }
 
-    if(trap.script_noteworthy === # "physicsbox") {
+    if(trap.script_noteworthy === #"physicsbox") {
       namespace_61052b71::function_bb1d1cf9(trap, page);
     }
   }

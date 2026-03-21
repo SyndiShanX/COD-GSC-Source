@@ -568,7 +568,7 @@ function onplaceturret(turret) {
   turret.vehicle function_d2d0a813();
   trigger_origin = turret.origin + (0, 0, 15);
   trigger = spawn("trigger_radius_use", trigger_origin, 0, 85, 85);
-  trigger.str_hint = # "hash_2c90cbfdfac140bf";
+  trigger.str_hint = #"hash_2c90cbfdfac140bf";
   trigger setteamfortrigger(self.team);
   trigger setinvisibletoall();
   trigger setvisibletoplayer(self);
@@ -780,13 +780,13 @@ function onturretdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, 
       if(is_valid_target(vpoint)) {
         self.favoriteenemy = vpoint;
         self.var_c8072bcc = gettime();
-        self.var_7eb3ebd5[vpoint getentitynumber()] = # "damage";
+        self.var_7eb3ebd5[vpoint getentitynumber()] = #"damage";
         self targetting_delay::function_a4d6d6d8(vpoint);
       }
     } else if(isalive(vdir) && issentient(vdir) && !(isPlayer(vdir) && vdir isremotecontrolling()) && is_valid_target(vdir)) {
       self.favoriteenemy = vdir;
       self.var_c8072bcc = gettime();
-      self.var_7eb3ebd5[vdir getentitynumber()] = # "damage";
+      self.var_7eb3ebd5[vdir getentitynumber()] = #"damage";
       self targetting_delay::function_a4d6d6d8(vdir);
     }
   }
@@ -1003,7 +1003,7 @@ function function_fefefcc4() {
       nearby_enemies = getplayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
-        if(veh.var_3413afc5 != # "hash_2d94a5f22d36fc73") {
+        if(veh.var_3413afc5 != #"hash_2d94a5f22d36fc73") {
           veh function_c524c4c8();
         } else {
           foreach(nearby_enemy in nearby_enemies) {
@@ -1021,16 +1021,16 @@ function function_fefefcc4() {
 
             veh.favoriteenemy = nearby_enemy;
             veh.var_c8072bcc = gettime();
-            veh.var_7eb3ebd5[nearby_enemy getentitynumber()] = # "hash_47697c94ffb4a5bd";
+            veh.var_7eb3ebd5[nearby_enemy getentitynumber()] = #"hash_47697c94ffb4a5bd";
             break;
           }
         }
-      } else if(veh.var_3413afc5 != # "standard_sight") {
+      } else if(veh.var_3413afc5 != #"standard_sight") {
         veh function_bc7568f1();
       }
     }
 
-    wait_time = veh.var_3413afc5 == # "standard_sight" ? 0.25 : 0.1;
+    wait_time = veh.var_3413afc5 == #"standard_sight" ? 0.25 : 0.1;
     wait wait_time;
   }
 }
@@ -1053,7 +1053,7 @@ function function_2034705c(bundle) {
   var_351b3c55 = isDefined(self.enemy) ? max(isDefined(self.enemylastseentime) ? self.enemylastseentime : 0, isDefined(self.var_c8072bcc) ? self.var_c8072bcc : 0) : 0;
   var_c112caa0 = int((isDefined(bundle.var_fa38350a) ? bundle.var_fa38350a : 1) * 1000);
 
-  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === # "damage") {
+  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === #"damage") {
     var_c112caa0 = int((isDefined(bundle.var_33561c46) ? bundle.var_33561c46 : 3) * 1000);
   }
 
@@ -1077,14 +1077,14 @@ function function_bc7568f1() {
   self.sightlatency = 100;
   self.fovcosine = 0.5;
   self.fovcosinebusy = 0.5;
-  self.var_3413afc5 = # "standard_sight";
+  self.var_3413afc5 = #"standard_sight";
 }
 
 function function_c524c4c8() {
   self.sightlatency = 100;
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
-  self.var_3413afc5 = # "hash_2d94a5f22d36fc73";
+  self.var_3413afc5 = #"hash_2d94a5f22d36fc73";
 }
 
 function get_target_offset(target) {
@@ -1526,11 +1526,11 @@ function on_player_killed(params) {
       continue;
     }
 
-    if(self.var_e78602fc.vehicletype === # "ultimate_turret") {
+    if(self.var_e78602fc.vehicletype === #"ultimate_turret") {
       continue;
     }
 
-    if(var_69501900.vehicletype === # "ultimate_turret") {
+    if(var_69501900.vehicletype === #"ultimate_turret") {
       if(!isDefined(var_f60ab10f)) {
         var_f60ab10f = [];
       } else if(!isarray(var_f60ab10f)) {

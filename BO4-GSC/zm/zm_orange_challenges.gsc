@@ -188,37 +188,37 @@ function_848a8225(e_player) {
 function_9f2ab302() {
   switch (self.var_d6578e1f.str_reward) {
     case # "bonus_points_team":
-      var_289d3f49 = # "hash_33e97cafe9a6ce11";
+      var_289d3f49 = #"hash_33e97cafe9a6ce11";
       return var_289d3f49;
     case # "insta_kill":
-      var_289d3f49 = # "hash_5f22e6bba160236";
+      var_289d3f49 = #"hash_5f22e6bba160236";
       return var_289d3f49;
     case # "fire_sale":
-      var_289d3f49 = # "hash_5979dcb633c28888";
+      var_289d3f49 = #"hash_5979dcb633c28888";
       return var_289d3f49;
     case # "hero_weapon_power":
-      var_289d3f49 = # "hash_649852d17720d7f9";
+      var_289d3f49 = #"hash_649852d17720d7f9";
       return var_289d3f49;
     case # "carpenter":
-      var_289d3f49 = # "hash_3f3c0bdcb88cacfa";
+      var_289d3f49 = #"hash_3f3c0bdcb88cacfa";
       return var_289d3f49;
     case # "full_ammo":
-      var_289d3f49 = # "hash_1c356afe160c9b7a";
+      var_289d3f49 = #"hash_1c356afe160c9b7a";
       return var_289d3f49;
     case # "self_revives":
-      var_289d3f49 = # "hash_189972b46e07775";
+      var_289d3f49 = #"hash_189972b46e07775";
       return var_289d3f49;
     case # "extra_snowballs":
-      var_289d3f49 = # "hash_1c6212f5aff79380";
+      var_289d3f49 = #"hash_1c6212f5aff79380";
       return var_289d3f49;
     case # "half_price_traps":
-      var_289d3f49 = # "hash_6875903d42d6d8ba";
+      var_289d3f49 = #"hash_6875903d42d6d8ba";
       return var_289d3f49;
     case # "break_freeze_faster":
-      var_289d3f49 = # "hash_1cc63d50dbd08da7";
+      var_289d3f49 = #"hash_1cc63d50dbd08da7";
       return var_289d3f49;
     case # "armor":
-      var_289d3f49 = # "hash_6c9edec0976eeca1";
+      var_289d3f49 = #"hash_6c9edec0976eeca1";
       return var_289d3f49;
   }
 }
@@ -375,7 +375,7 @@ function_561fda29() {
 }
 
 function_54e8826c(e_player) {
-  if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
+  if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
     return 0;
   }
 
@@ -1374,19 +1374,19 @@ function_472fa2ca(s_challenge) {
 
     switch (self.script_int) {
       case 0:
-        var_66bb9366 = # "hash_b2dd9a0b97705ad";
+        var_66bb9366 = #"hash_b2dd9a0b97705ad";
         playsoundatposition(#"hash_23c7abbf9d34bf4a", self.origin);
         break;
       case 1:
-        var_66bb9366 = # "hash_53f014fab33492d8";
+        var_66bb9366 = #"hash_53f014fab33492d8";
         playsoundatposition(#"hash_23c7a9bf9d34bbe4", self.origin);
         break;
       case 2:
-        var_66bb9366 = # "hash_594894375473c7b";
+        var_66bb9366 = #"hash_594894375473c7b";
         playsoundatposition(#"hash_23c7a7bf9d34b87e", self.origin);
         break;
       case 3:
-        var_66bb9366 = # "hash_33ce9da949624fae";
+        var_66bb9366 = #"hash_33ce9da949624fae";
         playsoundatposition(#"hash_23c7a5bf9d34b518", self.origin);
         break;
     }
@@ -1616,7 +1616,7 @@ function_11001794() {
     case # "self_revives":
       self.var_f7d17867 = (0, 0, 0);
       self.var_14172483 = var_50ed6de;
-      self.var_3ff570f3 = # "p8_zm_gla_heart_zombie";
+      self.var_3ff570f3 = #"p8_zm_gla_heart_zombie";
       a_e_players = getplayers();
       a_e_players[0] clientfield::set("zm_orange_force_challenge_model", 1);
       break;

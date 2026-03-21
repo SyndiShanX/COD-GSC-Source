@@ -33,15 +33,15 @@ function function_c238a64a(var_d7eb0053, var_cfa5cedf, var_de721607, var_1aebd61
   namespace_82bfe441::fade(1, "FadeImmediate");
 
   if(!isDefined(var_d7eb0053)) {
-    var_d7eb0053 = # "";
+    var_d7eb0053 = #"";
   }
 
   if(!isDefined(var_cfa5cedf)) {
-    var_cfa5cedf = # "";
+    var_cfa5cedf = #"";
   }
 
   if(!isDefined(var_de721607)) {
-    var_de721607 = # "";
+    var_de721607 = #"";
   }
 
   if(!isDefined(var_1aebd615)) {
@@ -64,12 +64,12 @@ function function_c238a64a(var_d7eb0053, var_cfa5cedf, var_de721607, var_1aebd61
   namespace_c8e236da::function_ebf737f8(#"hash_4e10d70903ef5630");
 }
 
-function function_bd2b7003(var_6acccd9c = # "", var_7a6d5da7 = # "") {
+function function_bd2b7003(var_6acccd9c = #"", var_7a6d5da7 = #"") {
   namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_name", var_6acccd9c);
   namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_location", var_7a6d5da7);
 }
 
-function function_6e6cbceb(var_862f0a8a = # "", var_d3e70c7c = 0) {
+function function_6e6cbceb(var_862f0a8a = #"", var_d3e70c7c = 0) {
   namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_date", var_862f0a8a);
   namespace_61e6d095::function_9ade1d9b(#"hash_48087cf592ac15d8", "camera_timer_start", var_d3e70c7c);
 }

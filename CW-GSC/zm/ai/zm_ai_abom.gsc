@@ -341,7 +341,7 @@ function private function_3ec01d7a() {
 
     var_c84ba99b = 0;
 
-    if(waitresult._notify == # "bad_path") {
+    if(waitresult._notify == #"bad_path") {
       if(!self function_dd070839()) {
         goalinfo = self function_4794d6a3();
 

@@ -245,7 +245,7 @@ function_a8e6f773(n_time = 3) {
 
   self.var_36c260a2 = 1;
 
-  if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+  if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
     self thread namespace_9ff9f642::slowdown(#"hash_63a208b609d3fa87");
   } else {
     self thread namespace_9ff9f642::slowdown(#"hash_5d9e1ae933ad6f87");

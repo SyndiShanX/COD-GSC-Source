@@ -39,7 +39,7 @@ function register_character_unlock(unlock_name, unlock_stat, item, var_f27097cc,
     var_9ba1646c.var_3845495 = array(var_9ba1646c.var_3845495);
   }
 
-  var_9ba1646c.var_3845495[var_9ba1646c.var_3845495.size] = # "hash_3f07579f66b464e8";
+  var_9ba1646c.var_3845495[var_9ba1646c.var_3845495.size] = #"hash_3f07579f66b464e8";
   level.var_7d8da246[unlock_name] = var_9ba1646c;
 }
 
@@ -97,7 +97,7 @@ function function_c67a5089() {
     var_f279f28f = [];
 
     for(i = 0; i < var_743d50f5.size; i++) {
-      if(var_743d50f5[i] == # "stanton_unlock" || var_743d50f5[i] == # "scarlett_unlock" || var_743d50f5[i] == # "diego_unlock" || var_743d50f5[i] == # "bruno_unlock" || var_743d50f5[i] == "#dempsey_unlock" || var_743d50f5[i] == # "nikolai_unlock" || var_743d50f5[i] == # "richtofen_unlock" || var_743d50f5[i] == # "takeo_unlock") {
+      if(var_743d50f5[i] == #"stanton_unlock" || var_743d50f5[i] == #"scarlett_unlock" || var_743d50f5[i] == #"diego_unlock" || var_743d50f5[i] == #"bruno_unlock" || var_743d50f5[i] == "#dempsey_unlock" || var_743d50f5[i] == #"nikolai_unlock" || var_743d50f5[i] == #"richtofen_unlock" || var_743d50f5[i] == #"takeo_unlock") {
         if(!isDefined(var_f279f28f)) {
           var_f279f28f = [];
         } else if(!isarray(var_f279f28f)) {

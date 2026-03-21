@@ -85,7 +85,7 @@ function_6e9fced0(a_ents) {
 
 function_bf7a2005(a_ents) {
   foreach(ent in a_ents) {
-    ent.team = # "team4";
+    ent.team = #"team4";
   }
 }
 
@@ -191,7 +191,7 @@ is_equipment(entity) {
   if(isDefined(entity.weapon)) {
     weapon = entity.weapon;
 
-    if(weapon.name === # "ability_smart_cover" || weapon.name === # "eq_tripwire" || weapon.name === # "trophy_system" || weapon.name === # "eq_concertina_wire" || weapon.name === # "eq_sensor" || weapon.name === # "cymbal_monkey" || weapon.name === # "gadget_supplypod" || weapon.name === # "homunculus") {
+    if(weapon.name === #"ability_smart_cover" || weapon.name === #"eq_tripwire" || weapon.name === #"trophy_system" || weapon.name === #"eq_concertina_wire" || weapon.name === #"eq_sensor" || weapon.name === #"cymbal_monkey" || weapon.name === #"gadget_supplypod" || weapon.name === #"homunculus") {
       return true;
     }
   }

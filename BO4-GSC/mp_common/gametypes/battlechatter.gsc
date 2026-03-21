@@ -410,7 +410,7 @@ function_44b5e397() {
         dialogkey = playerbundle.tempestweaponuse;
         break;
       case # "sig_lmg":
-        if(waitresult.last_weapon.name != # "sig_lmg_alt") {
+        if(waitresult.last_weapon.name != #"sig_lmg_alt") {
           dialogkey = playerbundle.scytheweaponuse;
         }
 
@@ -676,12 +676,12 @@ function_7139078d() {
           break;
       }
     } else if(isDefined(result.suppressor.turretweapon)) {
-      if(result.suppressor.turretweapon.name == # "gun_ultimate_turret") {
+      if(result.suppressor.turretweapon.name == #"gun_ultimate_turret") {
         result.suppressor.var_87b1ba00 = 1;
         self play_killstreak_threat(result.suppressor.killstreaktype);
       }
     } else if(isDefined(result.suppressor.weapon)) {
-      if(isDefined(level.var_24de8afe) && isDefined(result.suppressor.ai) && isDefined(result.suppressor.ai.swat_gunner) && result.suppressor.ai.swat_gunner && result.suppressor.weapon.name == # "hash_6c1be4b025206124") {
+      if(isDefined(level.var_24de8afe) && isDefined(result.suppressor.ai) && isDefined(result.suppressor.ai.swat_gunner) && result.suppressor.ai.swat_gunner && result.suppressor.weapon.name == #"hash_6c1be4b025206124") {
         result.suppressor[[level.var_24de8afe]](self, result.suppressor.script_owner);
         result.suppressor.var_87b1ba00 = 1;
       }
@@ -1217,9 +1217,9 @@ player_killed(attacker, killstreaktype, einflictor, weapon, mod) {
   waittillframeend();
 
   if(isDefined(attacker) && isPlayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
-    if(weapon.name == # "dog_ai_defaultmelee" && isDefined(einflictor)) {
+    if(weapon.name == #"dog_ai_defaultmelee" && isDefined(einflictor)) {
       attacker function_bd715920(weapon, self, einflictor.origin, einflictor);
-    } else if(weapon.name == # "hero_flamethrower" || weapon.name == # "sig_blade") {
+    } else if(weapon.name == #"hero_flamethrower" || weapon.name == #"sig_blade") {
       attacker function_bd715920(weapon, self, attacker.origin, attacker);
     }
   }
@@ -1442,7 +1442,7 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor, meansofdeath) {
     return;
   }
 
-  if((isDefined(meansofdeath) && meansofdeath == "MOD_MELEE" && weapon.name != # "sig_blade" || meansofdeath == "MOD_MELEE_WEAPON_BUTT") && weapon != getweapon("dog_ai_defaultmelee")) {
+  if((isDefined(meansofdeath) && meansofdeath == "MOD_MELEE" && weapon.name != #"sig_blade" || meansofdeath == "MOD_MELEE_WEAPON_BUTT") && weapon != getweapon("dog_ai_defaultmelee")) {
     return;
   }
 
@@ -1582,7 +1582,7 @@ incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
       return;
     }
 
-    if(!isDefined(thrower) || thrower.team == # "spectator") {
+    if(!isDefined(thrower) || thrower.team == #"spectator") {
       return;
     }
 
@@ -1845,7 +1845,7 @@ get_death_vox(weapon, meansofdeath) {
       case # "mod_burned":
         return playerbundle.exertdeathburned;
       case # "mod_melee_weapon_butt":
-        if(weapon.rootweapon.name == # "ar_stealth_t8" || weapon.rootweapon.name == # "pistol_standard_t8") {
+        if(weapon.rootweapon.name == #"ar_stealth_t8" || weapon.rootweapon.name == #"pistol_standard_t8") {
           if(weaponhasattachment(weapon, "uber")) {
             return playerbundle.exertdeathstabbed;
           }

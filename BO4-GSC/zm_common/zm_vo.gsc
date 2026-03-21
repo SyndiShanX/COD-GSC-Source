@@ -386,9 +386,9 @@ function_d74752d8(var_2753f06a) {
       e_player = a_players[0];
 
       if(var_2753f06a == 0) {
-        str_suffix = # "vox_solo_game_start";
+        str_suffix = #"vox_solo_game_start";
       } else {
-        str_suffix = # "vox_solo_end_round" + var_2753f06a;
+        str_suffix = #"vox_solo_end_round" + var_2753f06a;
       }
 
       if(isDefined(e_player.var_ab7bf755)) {

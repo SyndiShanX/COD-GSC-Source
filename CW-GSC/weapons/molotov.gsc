@@ -29,7 +29,7 @@ function init_shared() {
   level.var_e6a4f161 = params.var_18d16a6b;
   level.var_5d450296 = params.setype;
   level.var_e8a6b3ee = [];
-  level._effect[#"hash_31b6cc906e6d0ae0"] = # "hash_275ff19f0dcbb2a6";
+  level._effect[#"hash_31b6cc906e6d0ae0"] = #"hash_275ff19f0dcbb2a6";
   weaponobjects::function_e6400478(#"eq_molotov", &function_853f8cff, 1);
   status_effect::function_30e7d622(getweapon(#"molotov_fire"), "flakjacket");
 }
@@ -78,10 +78,10 @@ function function_1cdbb1e5(owner, weapon) {
       playertrace = bulletTrace(self.origin, self.origin - vectorscale(normal, 4), 1, self);
 
       if(isPlayer(playertrace[#"entity"]) || isactor(playertrace[#"entity"])) {
-        explosionfx = # "hash_76c34cde560cd085";
+        explosionfx = #"hash_76c34cde560cd085";
         var_cb4f434e = 1;
       } else {
-        explosionfx = # "hash_48ee6e0152301529";
+        explosionfx = #"hash_48ee6e0152301529";
         var_cb4f434e = 0;
       }
 

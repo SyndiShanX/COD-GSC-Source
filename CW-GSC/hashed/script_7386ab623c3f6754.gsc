@@ -117,7 +117,7 @@ function private function_ef5cde9f(str_weapon_name) {
 }
 
 function on_ai_killed(params) {
-  if(params.weapon.name === # "toxic_growth_5" && is_true(self.var_d0de7f41) && params.einflictor.weapon === params.weapon) {
+  if(params.weapon.name === #"toxic_growth_5" && is_true(self.var_d0de7f41) && params.einflictor.weapon === params.weapon) {
     self clientfield::increment("" + # "hash_6a9eb737488c81c7", 1);
     var_a0722b6e = getaiteamarray(level.zombie_team);
     var_a0722b6e = arraysortclosest(var_a0722b6e, self.origin, undefined, 0, 64);
@@ -287,7 +287,7 @@ function function_ae618f2b(params) {
     ai.var_10552fac = 1;
     ai callback::callback(#"hash_69106b41ba3763f7");
 
-    if(ai.zm_ai_category === # "special" || ai.zm_ai_category === # "elite") {
+    if(ai.zm_ai_category === #"special" || ai.zm_ai_category === #"elite") {
       var_86890135 = self.var_f968837d.weapon.name + "_special_elite";
     } else {
       var_86890135 = self.var_f968837d.weapon.name;
@@ -307,7 +307,7 @@ function function_ae618f2b(params) {
 }
 
 function function_3fc6f786() {
-  if(isactor(self) && isalive(self) && self.team === level.zombie_team && (self.zm_ai_category === # "normal" || self.zm_ai_category === # "special" || self.zm_ai_category === # "elite" || self.archetype === # "zombie_dog") && !is_true(self.var_d0de7f41) && !is_true(self.var_7fb7de87) && !is_true(self.var_8576e0be)) {
+  if(isactor(self) && isalive(self) && self.team === level.zombie_team && (self.zm_ai_category === #"normal" || self.zm_ai_category === #"special" || self.zm_ai_category === #"elite" || self.archetype === #"zombie_dog") && !is_true(self.var_d0de7f41) && !is_true(self.var_7fb7de87) && !is_true(self.var_8576e0be)) {
     if(!isDefined(self.var_207045e5) || gettime() >= self.var_207045e5 + 1000) {
       return true;
     }
@@ -379,7 +379,7 @@ function function_5276a443(var_9055f9a9, var_f968837d, var_6254bcaf, var_8689013
       self thread namespace_9ff9f642::slowdown(var_86890135, undefined, &function_9ed9a337);
     }
 
-    if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite") {
+    if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite") {
       self.var_19ec2cc3 = 0.7;
     } else {
       self.var_19ec2cc3 = 0.6;
@@ -397,7 +397,7 @@ function function_5276a443(var_9055f9a9, var_f968837d, var_6254bcaf, var_8689013
     if(isDefined(var_6254bcaf)) {
       var_70ab6bc = var_6254bcaf;
       var_6254bcaf = undefined;
-    } else if(self.zm_ai_category === # "elite" || self.zm_ai_category === # "special") {
+    } else if(self.zm_ai_category === #"elite" || self.zm_ai_category === #"special") {
       var_70ab6bc = var_34e3b3f7;
     } else {
       var_70ab6bc = var_da4a3267;

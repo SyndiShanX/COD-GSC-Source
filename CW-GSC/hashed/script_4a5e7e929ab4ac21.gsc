@@ -156,7 +156,7 @@ function function_44e72b9e(var_e25c39ec = 0, start_node) {
     level.var_6fb3a1e6.owner = level.players[0];
     level.var_6fb3a1e6.soundmod = "heli";
     level.var_6fb3a1e6.targetname = "chopper";
-    level.var_6fb3a1e6.team = # "allies";
+    level.var_6fb3a1e6.team = #"allies";
     level.var_6fb3a1e6 setteam(#"allies");
     level.var_6fb3a1e6.target_offset = (0, 0, 0);
     target_set(level.var_6fb3a1e6, level.var_6fb3a1e6.target_offset);

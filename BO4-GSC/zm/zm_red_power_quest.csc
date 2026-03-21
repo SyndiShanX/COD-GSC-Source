@@ -33,24 +33,24 @@ init() {
   clientfield::register("vehicle", "" + # "hash_463ff879b8d656bb", 16000, 1, "int", &function_c96c5397, 0, 0);
   clientfield::register("vehicle", "" + # "perseus_energy", 16000, 1, "int", &function_192be936, 0, 0);
   clientfield::register("world", "" + # "amphi_blood", 16000, 1, "int", &function_5f8c1946, 0, 0);
-  level._effect[#"hash_6d5686b05e69fcb0"] = # "zombie/fx_spawn_body_cp_zmb";
-  level._effect[#"hash_440ca00839d907a8"] = # "hash_4c14004cd89a0d66";
-  level._effect[#"hash_2a586a321116326c"] = # "hash_7770e29dfcabc1cb";
-  level._effect[#"hash_3ec0452110ea5621"] = # "hash_28e306b2b1b0a110";
-  level._effect[#"hash_5da65e20d966c63f"] = # "hash_54b810af1fb36d6d";
-  level._effect[#"hash_463ff879b8d656bb"] = # "hash_57817f8de95527cd";
-  level._effect[#"artifact_glow"] = # "hash_4c14004cd89a0d66";
-  level._effect[#"zombie_delete"] = # "maps/zm_office/fx8_teleporter_destination";
-  level._effect[#"chaos_breakout"] = # "hash_7e6fa9ad6b551a7d";
-  level._effect[#"perseus_teleport"] = # "hash_230a59dd0d0f7361";
-  level._effect[#"perseus_energy"] = # "hash_6009053e911b946a";
-  level._effect[#"zombie_shock"] = # "zm_ai/fx8_elec_shock_eyes";
-  level._effect[#"pegasus_teleport"] = # "hash_5f7d8c231fbcf09e";
-  level._effect[#"hash_672766c8e292cfbf"] = # "hash_1615f2a383a626ca";
-  level._effect[#"hash_67277cc8e292f521"] = # "hash_16460aa383cf7354";
-  level._effect[#"hash_33d5355e9824552e"] = # "hash_4368d718964d6faf";
-  level._effect[#"hash_33d51f5e98242fcc"] = # "hash_4362bf189648db39";
-  level._effect[#"shield_gegenees"] = # "hash_1807ad62ba867a20";
+  level._effect[#"hash_6d5686b05e69fcb0"] = #"zombie/fx_spawn_body_cp_zmb";
+  level._effect[#"hash_440ca00839d907a8"] = #"hash_4c14004cd89a0d66";
+  level._effect[#"hash_2a586a321116326c"] = #"hash_7770e29dfcabc1cb";
+  level._effect[#"hash_3ec0452110ea5621"] = #"hash_28e306b2b1b0a110";
+  level._effect[#"hash_5da65e20d966c63f"] = #"hash_54b810af1fb36d6d";
+  level._effect[#"hash_463ff879b8d656bb"] = #"hash_57817f8de95527cd";
+  level._effect[#"artifact_glow"] = #"hash_4c14004cd89a0d66";
+  level._effect[#"zombie_delete"] = #"maps/zm_office/fx8_teleporter_destination";
+  level._effect[#"chaos_breakout"] = #"hash_7e6fa9ad6b551a7d";
+  level._effect[#"perseus_teleport"] = #"hash_230a59dd0d0f7361";
+  level._effect[#"perseus_energy"] = #"hash_6009053e911b946a";
+  level._effect[#"zombie_shock"] = #"zm_ai/fx8_elec_shock_eyes";
+  level._effect[#"pegasus_teleport"] = #"hash_5f7d8c231fbcf09e";
+  level._effect[#"hash_672766c8e292cfbf"] = #"hash_1615f2a383a626ca";
+  level._effect[#"hash_67277cc8e292f521"] = #"hash_16460aa383cf7354";
+  level._effect[#"hash_33d5355e9824552e"] = #"hash_4368d718964d6faf";
+  level._effect[#"hash_33d51f5e98242fcc"] = #"hash_4362bf189648db39";
+  level._effect[#"shield_gegenees"] = #"hash_1807ad62ba867a20";
 }
 
 pegasus_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

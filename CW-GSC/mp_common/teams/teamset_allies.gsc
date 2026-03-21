@@ -15,7 +15,7 @@ function private preinit() {
   init(#"none");
 
   foreach(team in level.teams) {
-    if(team == # "axis") {
+    if(team == #"axis") {
       continue;
     }
 

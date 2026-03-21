@@ -85,7 +85,7 @@ function destroyedequipment(weapon) {
   self stats::function_dad108fa(#"destroy_equipment", 1);
 
   if(isDefined(weapon)) {
-    if(weapon.statname !== # "special_crossbow_t9") {
+    if(weapon.statname !== #"special_crossbow_t9") {
       self stats::function_e24eec31(weapon, #"destroy_any", 1);
     }
 
@@ -215,7 +215,7 @@ function initchallengedata() {
 }
 
 function isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
-  if(weapon.name == # "ai_tank_drone_gun") {
+  if(weapon.name == #"ai_tank_drone_gun") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(is_true(einflictor.controlled)) {
         if(eattacker.remoteweapon == einflictor) {
@@ -223,7 +223,7 @@ function isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
         }
       }
     }
-  } else if(weapon.name == # "ai_tank_drone_rocket") {
+  } else if(weapon.name == #"ai_tank_drone_rocket") {
     if(isDefined(einflictor) && !isDefined(einflictor.from_ai)) {
       return true;
     }
@@ -233,7 +233,7 @@ function isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
 }
 
 function isdamagefromplayercontrolledsentry(eattacker, einflictor, weapon) {
-  if(weapon.name == # "auto_gun_turret") {
+  if(weapon.name == #"auto_gun_turret") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(eattacker.remoteweapon == einflictor) {
         if(is_true(einflictor.controlled)) {
@@ -347,7 +347,7 @@ function perkkills(victim, isstunned, time) {
 }
 
 function flakjacketprotected(weapon, attacker) {
-  if(weapon.name == # "claymore") {
+  if(weapon.name == #"claymore") {
     self.flakjacketclaymore[attacker.clientid] = 1;
   }
 
@@ -359,7 +359,7 @@ function flakjacketprotected(weapon, attacker) {
 function earnedkillstreak() {
   gear = self function_b958b70d(self.class_num, "tacticalgear");
 
-  if(gear === # "gear_scorestreakcharge") {
+  if(gear === #"gear_scorestreakcharge") {
     self stats::function_dad108fa(#"hash_656a2ab7e777796b", 1);
 
     if(isDefined(self.var_ea1458aa)) {
@@ -789,13 +789,13 @@ function controllerparticipationcheck() {
   }
 
   self.pers[#"controllerparticipationchecks"]++;
-  var_51ba979b = # "failure";
+  var_51ba979b = #"failure";
   var_a7674114 = "controllerParticipationConsecutiveFailureMax";
   var_fb144707 = self function_1bc04df9();
 
   if(var_fb144707 >= level.var_5b7e9056) {
     self.pers[#"controllerparticipation"]++;
-    var_51ba979b = # "success";
+    var_51ba979b = #"success";
     var_a7674114 = "controllerParticipationConsecutiveSuccessMax";
 
     if(self.pers[#"controllerparticipationinactivitywarnings"]) {
@@ -951,7 +951,7 @@ function destroyscorestreak(weapon, playercontrolled, groundbased, countaskillst
     weaponclass = util::getweaponclass(weapon);
     weaponclass = isstring(weaponclass) ? hash(weaponclass) : weaponclass;
 
-    if(weaponclass === # "weapon_launcher") {
+    if(weaponclass === #"weapon_launcher") {
       self stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
       self stats::function_dad108fa(#"hash_6b344091a61ea57a", 1);
       self stats::function_dad108fa(#"hash_6b343b91a61e9cfb", 1);
@@ -979,7 +979,7 @@ function destroyscorestreak(weapon, playercontrolled, groundbased, countaskillst
     self stats::function_e24eec31(weapon, #"destroy_5_killstreak_vehicle", 1);
   }
 
-  if(weapon.statname !== # "special_crossbow_t9") {
+  if(weapon.statname !== #"special_crossbow_t9") {
     self stats::function_e24eec31(weapon, #"destroy_any", 1);
   }
 
@@ -999,7 +999,7 @@ function destroyscorestreak(weapon, playercontrolled, groundbased, countaskillst
   }
 
   if(isDefined(weapon.attachments) && weapon.attachments.size > 0) {
-    if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
+    if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
       if(self weaponhasattachmentandunlocked(weapon, "fastreload")) {
         self stats::function_dad108fa(#"hash_4b19afce40dfc918", 1);
       }
@@ -1038,7 +1038,7 @@ function function_24db0c33(weapon = level.weaponnone, destroyedobject) {
     self contracts::increment_contract(#"hash_448a34bf383a87a6", 1);
   }
 
-  if(weaponclass === # "weapon_launcher") {
+  if(weaponclass === #"weapon_launcher") {
     self stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
     self stats::function_dad108fa(#"hash_6b344091a61ea57a", 1);
     self stats::function_dad108fa(#"hash_6b343b91a61e9cfb", 1);
@@ -1362,7 +1362,7 @@ function multikill(killcount, weapon) {
   weaponclass = util::getweaponclass(weapon);
   weaponclass = isstring(weaponclass) ? hash(weaponclass) : weaponclass;
 
-  if(weaponclass === # "weapon_smg") {
+  if(weaponclass === #"weapon_smg") {
     self stats::function_dad108fa(#"hash_59b46a27ebbdb7d0", 1);
   }
 
@@ -1464,7 +1464,7 @@ function multi_lmg_smg_kill() {
 }
 
 function killedzoneattacker(weapon) {
-  if(weapon.statname == # "planemortar" || weapon.statname == "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+  if(weapon.statname == #"planemortar" || weapon.statname == "remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
     self thread updatezonemultikills();
   }
 }
@@ -1591,9 +1591,9 @@ function destroyedaircraft(attacker, weapon, playercontrolled, vehicle, var_91d2
   if(isDefined(weapon)) {
     killstreaks::function_47b44bcc(attacker, weapon, 1);
 
-    if(weapon.name == # "emp" && attacker util::is_item_purchased(#"killstreak_emp")) {
+    if(weapon.name == #"emp" && attacker util::is_item_purchased(#"killstreak_emp")) {
       attacker stats::function_dad108fa(#"destroy_aircraft_with_emp", 1);
-    } else if(weapon.name == # "missile_drone_projectile" || weapon.name == # "missile_drone") {
+    } else if(weapon.name == #"missile_drone_projectile" || weapon.name == #"missile_drone") {
       attacker stats::function_dad108fa(#"destroy_aircraft_with_missile_drone", 1);
     } else if(weapon.isbulletweapon) {
       attacker stats::function_dad108fa(#"shoot_aircraft", 1);
@@ -1609,7 +1609,7 @@ function destroyedaircraft(attacker, weapon, playercontrolled, vehicle, var_91d2
   weaponclass = util::getweaponclass(weapon);
   weaponclass = isstring(weaponclass) ? hash(weaponclass) : weaponclass;
 
-  if(weaponclass === # "weapon_launcher") {
+  if(weaponclass === #"weapon_launcher") {
     if(var_91d2e813 === 1) {
       attacker stats::function_dad108fa(#"hash_32a02036b210e14d", 1);
     }
@@ -2158,7 +2158,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
   }
 
   if(smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_EXPLOSIVE" || smeansofdeath == "MOD_PROJECTILE_SPLASH") {
-    if(weapon.name == # "napalm_strike") {
+    if(weapon.name == #"napalm_strike") {
       data.var_254ce896 = einflictor.var_813987b5;
     } else {
       data.var_254ce896 = einflictor.birthtime;
@@ -2553,19 +2553,19 @@ function function_7f86a7b8(attacker, attackerweapon, meansofdeath) {
   if(isDefined(attackerweapon) && attackerweapon != level.weaponnone) {
     attacker stats::function_e24eec31(attackerweapon, #"hash_6759c0df02e8aa9d", 1);
 
-    if(attackerweapon.statname === # "special_crossbow_t9" && !weapons::ismeleemod(meansofdeath)) {
+    if(attackerweapon.statname === #"special_crossbow_t9" && !weapons::ismeleemod(meansofdeath)) {
       attacker stats::function_e24eec31(attackerweapon, #"hash_6a9ef93d619f4bcc", 1);
     }
 
     weaponclass = util::getweaponclass(attackerweapon);
     weaponclass = isstring(weaponclass) ? hash(weaponclass) : weaponclass;
 
-    if(weaponclass === # "weapon_knife" && !isDefined(attacker.pers[#"hash_23898018c4f3a260"])) {
+    if(weaponclass === #"weapon_knife" && !isDefined(attacker.pers[#"hash_23898018c4f3a260"])) {
       attacker stats::function_d0de7686(#"hash_6a34be0ae51df16d", 1, #"hash_34a28edc5d90a87");
       attacker.pers[#"hash_23898018c4f3a260"] = 1;
     }
 
-    if(weaponclass === # "weapon_smg" && !isDefined(attacker.pers[#"hash_5cd5482ab60ed275"])) {
+    if(weaponclass === #"weapon_smg" && !isDefined(attacker.pers[#"hash_5cd5482ab60ed275"])) {
       attacker stats::function_d0de7686(#"hash_4425e8a9deb73e9a", 1, #"hash_2b4649f1d1493b64");
       attacker.pers[#"hash_5cd5482ab60ed275"] = 1;
     }

@@ -15,9 +15,9 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("actor", "zombie_riser_fx", 1, 1, "int", &handle_zombie_risers, 1, 1);
   clientfield::register("actor", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 0);
-  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"eye_glow"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"eye_glow"] = #"zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 handle_zombie_risers(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

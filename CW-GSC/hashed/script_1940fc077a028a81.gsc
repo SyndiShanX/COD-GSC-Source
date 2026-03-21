@@ -281,7 +281,7 @@ function function_1ca9d31b(entity) {
     }
 
     should_break = 0;
-    var_144ce0a0 = dynent.script_noteworthy == # "hash_4d1fb8524fdfd254";
+    var_144ce0a0 = dynent.script_noteworthy == #"hash_4d1fb8524fdfd254";
 
     if(var_144ce0a0 || dynent.destructible) {
       bundle = isDefined(dynent.bundle) ? dynent.bundle : zm_utility::function_b42da08a(dynent);
@@ -651,7 +651,7 @@ function private function_7c8e35e8(entity, asmstate) {
   if(isDefined(self.traversestartnode)) {
     node = entity.traversestartnode;
 
-    if(entity.traversestartnode.type !== # "begin" && entity.traversestartnode.type !== "Volume") {
+    if(entity.traversestartnode.type !== #"begin" && entity.traversestartnode.type !== "Volume") {
       node = getothernodeinnegotiationpair(node);
     }
 
@@ -659,7 +659,7 @@ function private function_7c8e35e8(entity, asmstate) {
     entity.var_834b0770 = node;
     node.owner = entity;
 
-    if(entity.archetype !== # "zombie" && !isentity(entity.var_597f08bf)) {
+    if(entity.archetype !== #"zombie" && !isentity(entity.var_597f08bf)) {
       entity callback::function_d8abfc3d(#"on_ai_melee", &damagedoor);
     }
 

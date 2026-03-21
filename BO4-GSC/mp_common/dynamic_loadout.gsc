@@ -79,7 +79,7 @@ onplayerkilled(params) {
     return;
   }
 
-  if(params.weapon.name == # "frag_grenade") {
+  if(params.weapon.name == #"frag_grenade") {
     function_597cbfb8(self gadgetgetslot(params.weapon), params.weapon, 1);
   }
 }
@@ -537,7 +537,7 @@ function_898839b4() {
   var_81b9af1a = self.pers[#"dynamic_loadout"].talents;
 
   foreach(item in var_81b9af1a) {
-    if(item == # "hash_7932008294f0d876") {
+    if(item == #"hash_7932008294f0d876") {
       return getweapon(#"hash_7932008294f0d876");
     }
   }
@@ -573,13 +573,13 @@ function_422164cd() {
   self clearperks();
 
   foreach(talent in self.pers[#"dynamic_loadout"].talents) {
-    if(talent == # "hash_7932008294f0d876") {
+    if(talent == #"hash_7932008294f0d876") {
       continue;
     }
 
     self addtalent(talent + level.game_mode_suffix);
 
-    if(talent == # "gear_medicalinjectiongun") {
+    if(talent == #"gear_medicalinjectiongun") {
       self.var_c7e6d7c7 = 1;
     }
   }

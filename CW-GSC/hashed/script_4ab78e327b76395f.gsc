@@ -88,7 +88,7 @@ function function_c74e98cb(var_4aed6923 = 0, tag) {
     tag = "j_spinelower";
   }
 
-  button = # "use";
+  button = #"use";
   var_70ddc449 = 18;
 
   if(is_true(self.var_b9c0ade5)) {
@@ -360,7 +360,7 @@ function function_32d8a3e0(victim) {
 }
 
 function function_9abb3f03(victim) {
-  button = # "stance";
+  button = #"stance";
   self prompts::create(button);
   self prompts::function_263320e2(button, #"hash_137214393a59c3a");
   self prompts::function_cd2391cb(button, "body_drop");

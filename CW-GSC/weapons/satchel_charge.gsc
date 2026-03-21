@@ -327,7 +327,7 @@ function onplayerkilled(params) {
   self.var_1e593689 = undefined;
   self.var_bf73db8c = undefined;
 
-  if(weapon.name === # "satchel_charge" && eattacker util::isenemyplayer(self) && self isinvehicle()) {
+  if(weapon.name === #"satchel_charge" && eattacker util::isenemyplayer(self) && self isinvehicle()) {
     if(!isDefined(einflictor.var_3c0a7eef)) {
       einflictor.var_3c0a7eef = [];
     }

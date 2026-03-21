@@ -29,13 +29,13 @@ function_62cd02cc() {
     wz_common_fixup::item_replacer(var_d2223309, var_74257310, #"ammo_type_12ga_item", #"ammo_type_50cal_item");
 
     if(var_e92b5b25 == 1) {
-      str_list = # "ambush";
+      str_list = #"ambush";
     } else {
       wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"equipment_list_good", #"equipment_list_good_ambush_v2");
       wz_common_fixup::item_replacer(var_edfbccd0, undefined, #"supply_stash_parent", #"ambush_v2_supply_stash_parent");
       wz_common_fixup::item_replacer(var_edfbccd0, undefined, #"supply_stash_parent_dlc1", #"ambush_v2_supply_stash_parent");
       wz_common_fixup::item_replacer(var_f8a4c541, undefined, #"supply_stash_weapons", #"ambush_v2_supply_stash_weapons");
-      str_list = # "ambush_v2";
+      str_list = #"ambush_v2";
     }
 
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"open_skyscraper_vehicles_arav", #"open_skyscraper_vehicles_cargo_truck_small");

@@ -835,7 +835,7 @@ function_c2dea172(player, w_hero) {
     return;
   }
 
-  if(self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"popcorn") {
     self zm_cleanup::function_23621259();
     self.var_2f68be48 = 1;
     self dodamage(self.health + 100, player.origin, player, player, "torso_lower", "MOD_IMPACT", 0, w_hero);

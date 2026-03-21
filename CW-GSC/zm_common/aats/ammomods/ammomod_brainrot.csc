@@ -62,11 +62,11 @@ function function_d500905a(localclientnum, oldval, newval, bnewent, binitialsnap
             break;
           case # "zombie_dog":
             if(isDefined(self gettagorigin("j_eyeball_le"))) {
-              if(self.subarchetype === # "hash_28e36e7b7d5421f") {
+              if(self.subarchetype === #"hash_28e36e7b7d5421f") {
                 self.var_d59aa7bb = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_brain_rot_lvl1_mc_hound_hell_eye", self, "j_eyeball_le");
               }
 
-              if(self.subarchetype === # "hash_2a5479b83161cb35") {
+              if(self.subarchetype === #"hash_2a5479b83161cb35") {
                 self.var_d59aa7bb = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_brain_rot_lvl1_mc_hound_plague_eye", self, "j_eyeball_le");
               }
             }

@@ -20,11 +20,11 @@ function function_8b7b98f(item, attachmentitem, var_41a74919 = 1, allowdupe = 0)
   assert(isentity(item));
   assert(isstruct(attachmentitem));
 
-  if(!isDefined(item.itementry) || item.itementry.itemtype != # "weapon") {
+  if(!isDefined(item.itementry) || item.itementry.itemtype != #"weapon") {
     return false;
   }
 
-  if(!isDefined(attachmentitem.itementry) || !isDefined(attachmentitem.networkid) || attachmentitem.itementry.itemtype != # "attachment") {
+  if(!isDefined(attachmentitem.itementry) || !isDefined(attachmentitem.networkid) || attachmentitem.itementry.itemtype != #"attachment") {
     return false;
   }
 
@@ -63,11 +63,11 @@ function function_9e9c82a6(item, attachmentitem, var_41a74919 = 1, allowdupe = 0
   assert(isstruct(item));
   assert(isstruct(attachmentitem));
 
-  if(!isDefined(item) || !isDefined(item.itementry) || item.itementry.itemtype != # "weapon") {
+  if(!isDefined(item) || !isDefined(item.itementry) || item.itementry.itemtype != #"weapon") {
     return false;
   }
 
-  if(!isDefined(attachmentitem) || !isDefined(attachmentitem.itementry) || !isDefined(attachmentitem.networkid) || attachmentitem.itementry.itemtype != # "attachment") {
+  if(!isDefined(attachmentitem) || !isDefined(attachmentitem.itementry) || !isDefined(attachmentitem.networkid) || attachmentitem.itementry.itemtype != #"attachment") {
     return false;
   }
 
@@ -114,12 +114,12 @@ function function_2ced1d34(item, var_fe35755b, allowdupes = 0) {
     return;
   }
 
-  if(item.itementry.itemtype != # "weapon") {
+  if(item.itementry.itemtype != #"weapon") {
     assert(0, "<dev string:x38>");
     return;
   }
 
-  if(var_fe35755b.itemtype != # "attachment") {
+  if(var_fe35755b.itemtype != #"attachment") {
     assert(0, "<dev string:x68>");
     return;
   }
@@ -130,7 +130,7 @@ function function_2ced1d34(item, var_fe35755b, allowdupes = 0) {
 
   weapon = item_world_util::function_35e06774(item.itementry);
 
-  if(isDefined(weapon) && isDefined(weapon.statname) && weapon.statname != # "" && !isDefined(weapon.dualwieldweapon)) {
+  if(isDefined(weapon) && isDefined(weapon.statname) && weapon.statname != #"" && !isDefined(weapon.dualwieldweapon)) {
     weapon = getweapon(weapon.statname);
   }
 
@@ -198,7 +198,7 @@ function function_dfaca25e(weaponid, attachmentoffset) {
 }
 
 function function_837f4a57(var_fe35755b) {
-  if(!isDefined(var_fe35755b) || var_fe35755b.itemtype != # "attachment") {
+  if(!isDefined(var_fe35755b) || var_fe35755b.itemtype != #"attachment") {
     return;
   }
 
@@ -278,7 +278,7 @@ function function_cfa794ca(mutators, itementry) {
   weapon = item_world_util::function_35e06774(itementry);
 
   if(isDefined(weapon)) {
-    if(weapon.name == # "eq_tripwire") {
+    if(weapon.name == #"eq_tripwire") {
       if(mutators & 8192) {
         return 8;
       }
@@ -286,7 +286,7 @@ function function_cfa794ca(mutators, itementry) {
       return 4;
     }
 
-    if(itementry.itemtype == # "health") {
+    if(itementry.itemtype == #"health") {
       var_9b624be0 = array(#"health_item_small", #"health_item_medium", #"health_item_large", #"health_item_squad", #"hash_20699a922abaf2e1");
       var_448bc079 = array(128, 256, 512, 1024, 256);
 
@@ -472,7 +472,7 @@ function function_70b12595(item) {
     foreach(attachment in item.itementry.attachments) {
       var_fe35755b = getscriptbundle(attachment.attachment_type);
 
-      if(!isDefined(var_fe35755b) || var_fe35755b.type != # "itemspawnentry" || !isarray(var_fe35755b.attachments)) {
+      if(!isDefined(var_fe35755b) || var_fe35755b.type != #"itemspawnentry" || !isarray(var_fe35755b.attachments)) {
         continue;
       }
 
@@ -558,7 +558,7 @@ function function_819781bf() {
 }
 
 function function_1507e6f0(itementry) {
-  return itementry.itemtype == # "equipment" || itementry.itemtype == # "field_upgrade" || itementry.itemtype == # "tactical";
+  return itementry.itemtype == #"equipment" || itementry.itemtype == #"field_upgrade" || itementry.itemtype == #"tactical";
 }
 
 function function_398b9770(weaponslotid, var_f9f8c0b5) {
@@ -578,11 +578,11 @@ function function_31a0b1ef(item, attachmentitem, var_41a74919 = 1) {
   assert(isstruct(item));
   assert(isstruct(attachmentitem));
 
-  if(!isDefined(item) || !isDefined(item.attachments) || item.attachments.size <= 0 || !isDefined(item.itementry) || item.itementry.itemtype != # "weapon") {
+  if(!isDefined(item) || !isDefined(item.attachments) || item.attachments.size <= 0 || !isDefined(item.itementry) || item.itementry.itemtype != #"weapon") {
     return 0;
   }
 
-  if(!isDefined(attachmentitem) || !isDefined(attachmentitem.itementry) || attachmentitem.itementry.itemtype != # "attachment") {
+  if(!isDefined(attachmentitem) || !isDefined(attachmentitem.itementry) || attachmentitem.itementry.itemtype != #"attachment") {
     return 0;
   }
 

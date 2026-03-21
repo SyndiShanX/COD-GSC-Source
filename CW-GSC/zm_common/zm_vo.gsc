@@ -140,17 +140,17 @@ function private function_d773f2e(params) {
   switch (params.weapon.name) {
     case # "ray_gun_mk2":
     case # "ray_gun":
-      var_64edfc97 = # "hash_47911e56b3253861";
+      var_64edfc97 = #"hash_47911e56b3253861";
       break;
     case # "ww_ray_rifle_t9":
-      var_64edfc97 = # "hash_6d5b8296c64bfe35";
+      var_64edfc97 = #"hash_6d5b8296c64bfe35";
       break;
     case # "ww_ieu_shockwave_t9":
     case # "ww_ieu_electric_t9":
     case # "ww_ieu_acid_t9":
     case # "ww_ieu_gas_t9":
     case # "ww_ieu_plasma_t9":
-      var_64edfc97 = # "hash_763fd19c812336";
+      var_64edfc97 = #"hash_763fd19c812336";
       break;
     case # "sig_bow_flame":
       return;
@@ -164,7 +164,7 @@ function private function_d773f2e(params) {
       return;
     default:
       if(zm_weapons::is_wonder_weapon(params.weapon)) {
-        var_64edfc97 = # "hash_5c81d3724f900e7";
+        var_64edfc97 = #"hash_5c81d3724f900e7";
       }
 
       break;
@@ -177,7 +177,7 @@ function private function_d773f2e(params) {
 }
 
 function private on_grenade_fired(params) {
-  if(params.weapon.name === # "cymbal_monkey") {
+  if(params.weapon.name === #"cymbal_monkey") {
     params.projectile thread function_1084cf1d();
   }
 }
@@ -192,17 +192,17 @@ function function_1084cf1d() {
   self endon(#"death");
   mdl_monkey endon(#"death");
   n_index = randomintrangeinclusive(0, 3);
-  var_64edfc97 = # "hash_1df2b33f0eb8bf56" + n_index;
+  var_64edfc97 = #"hash_1df2b33f0eb8bf56" + n_index;
   mdl_monkey playSound(var_64edfc97);
   s_waitresult = self waittill(#"stationary");
   v_origin = mdl_monkey.origin;
   mdl_monkey stopsound(var_64edfc97);
   n_index = randomintrangeinclusive(0, 3);
-  var_64edfc97 = # "hash_35fa8d80060451c1" + n_index;
+  var_64edfc97 = #"hash_35fa8d80060451c1" + n_index;
   mdl_monkey playsoundwithnotify(var_64edfc97, "sounddone");
   wait 5;
   n_index = randomintrangeinclusive(0, 11);
-  var_64edfc97 = # "hash_73e4d6659cb4dda3" + n_index;
+  var_64edfc97 = #"hash_73e4d6659cb4dda3" + n_index;
   playsoundatposition(var_64edfc97, v_origin);
 }
 
@@ -215,18 +215,18 @@ function private on_item_pickup(params) {
 
   weapon = item_inventory_util::function_2b83d3ff(item);
 
-  if(item.itementry.name === # "self_revive_sr_item" && is_true(item.var_14948fd)) {
-    var_64edfc97 = # "hash_761fd0a07d2e04f";
+  if(item.itementry.name === #"self_revive_sr_item" && is_true(item.var_14948fd)) {
+    var_64edfc97 = #"hash_761fd0a07d2e04f";
   } else if(isDefined(item) && isDefined(weapon)) {
     switch (item.itementry.itemtype) {
       case # "scorestreak":
         if(is_true(item.var_14948fd)) {
-          if(weapon.name == # "chopper_gunner" || weapon.name == # "inventory_napalm_strike_zm") {
-            var_64edfc97 = # "hash_1451a78cbf91a4e3";
-          } else if(weapon.name == # "ultimate_turret") {
-            var_64edfc97 = # "hash_61917b06ef391bae";
+          if(weapon.name == #"chopper_gunner" || weapon.name == #"inventory_napalm_strike_zm") {
+            var_64edfc97 = #"hash_1451a78cbf91a4e3";
+          } else if(weapon.name == #"ultimate_turret") {
+            var_64edfc97 = #"hash_61917b06ef391bae";
           } else {
-            var_64edfc97 = # "hash_6b760a9e97d27ca3";
+            var_64edfc97 = #"hash_6b760a9e97d27ca3";
           }
 
           item.var_14948fd = undefined;
@@ -237,16 +237,16 @@ function private on_item_pickup(params) {
       case # "tactical":
       case # "equipment":
         if(is_true(item.var_14948fd)) {
-          var_64edfc97 = # "hash_7ae658278829f860";
+          var_64edfc97 = #"hash_7ae658278829f860";
           item.var_14948fd = undefined;
         }
 
         n_timeout = 3;
         break;
       case # "weapon":
-        if(is_true(item.var_5b4ae99d)) {} else if(function_5fef4201(weapon) || weapon.name === # "ww_ray_rifle_t9" || weapon.name === # "hash_ac86d29509a8939") {
+        if(is_true(item.var_5b4ae99d)) {} else if(function_5fef4201(weapon) || weapon.name === #"ww_ray_rifle_t9" || weapon.name === #"hash_ac86d29509a8939") {
           if(self function_2d3f319c()) {
-            var_64edfc97 = # "hash_62aba8e16a728e4";
+            var_64edfc97 = #"hash_62aba8e16a728e4";
             self.var_f502715d = gettime();
           }
         } else if(self function_99262cf3()) {
@@ -255,46 +255,46 @@ function private on_item_pickup(params) {
           if(is_true(item.var_14948fd) || is_true(item.wallbuy_weapon) || is_true(item.var_519e776c)) {
             switch (weapon.weapclass) {
               case # "mg":
-                var_64edfc97 = # "hash_52e3a2e29f0f0544";
+                var_64edfc97 = #"hash_52e3a2e29f0f0544";
                 break;
               case # "spread":
-                var_64edfc97 = # "hash_245da60fd43ac21a";
+                var_64edfc97 = #"hash_245da60fd43ac21a";
                 break;
               case # "pistol":
-                if(weapon.name == # "ray_gun" || weapon.name == # "ray_gun_mk2") {
+                if(weapon.name == #"ray_gun" || weapon.name == #"ray_gun_mk2") {
                   if(self function_2d3f319c()) {
-                    var_64edfc97 = # "hash_56d268fc5786455e";
+                    var_64edfc97 = #"hash_56d268fc5786455e";
                     self.var_f502715d = gettime();
                   }
                 } else {
-                  var_64edfc97 = # "hash_e36abf6446d1c67";
+                  var_64edfc97 = #"hash_e36abf6446d1c67";
                 }
 
                 break;
               case # "rocketlauncher":
-                var_64edfc97 = # "hash_1f9d617af9161090";
+                var_64edfc97 = #"hash_1f9d617af9161090";
                 break;
               case # "smg":
-                var_64edfc97 = # "hash_103dc1e2c2034ff1";
+                var_64edfc97 = #"hash_103dc1e2c2034ff1";
                 break;
               case # "rifle":
                 if(weapon.issniperweapon) {
-                  var_64edfc97 = # "hash_6f77ec873d50a5a3";
+                  var_64edfc97 = #"hash_6f77ec873d50a5a3";
                 } else if(zm_weapons::is_tactical_rifle(weapon)) {
-                  var_64edfc97 = # "hash_65a5f39e9b407c79";
-                } else if(weapon.name === # "special_crossbow_t9") {
-                  var_64edfc97 = # "hash_54d519e96ca368ad";
+                  var_64edfc97 = #"hash_65a5f39e9b407c79";
+                } else if(weapon.name === #"special_crossbow_t9") {
+                  var_64edfc97 = #"hash_54d519e96ca368ad";
                 } else {
-                  var_64edfc97 = # "hash_17608d93085cc567";
+                  var_64edfc97 = #"hash_17608d93085cc567";
                 }
 
                 break;
               default:
-                var_64edfc97 = # "hash_54d519e96ca368ad";
+                var_64edfc97 = #"hash_54d519e96ca368ad";
                 break;
             }
           } else {
-            var_64edfc97 = # "hash_54d519e96ca368ad";
+            var_64edfc97 = #"hash_54d519e96ca368ad";
           }
 
           n_timeout = 3;
@@ -1008,12 +1008,12 @@ function function_2cf4b07f(str_type, str_alias) {
 }
 
 function function_b47e0399(var_7382ea8b, attacker, weapon, victim, einflictor) {
-  if(weapon === # "hash_1561254978f7d1ed" || weapon === # "hash_d6e9cf445a840a") {
+  if(weapon === #"hash_1561254978f7d1ed" || weapon === #"hash_d6e9cf445a840a") {
     if(zm_weapons::is_wonder_weapon(einflictor)) {
       return;
     }
 
-    if(weapon === # "hash_1561254978f7d1ed" && math::cointoss()) {
+    if(weapon === #"hash_1561254978f7d1ed" && math::cointoss()) {
       weapon = "killGeneric";
     }
   }
@@ -1231,7 +1231,7 @@ function function_7622cb70(var_b58a6345, n_delay, b_wait_if_busy = 1, var_54c38d
   }
 
   if(!isDefined(var_b4dd2e62)) {
-    var_b4dd2e62 = # "";
+    var_b4dd2e62 = #"";
   }
 
   if(isDefined(str_vo_alias)) {
@@ -1336,7 +1336,7 @@ function function_7622cb70(var_b58a6345, n_delay, b_wait_if_busy = 1, var_54c38d
   if(isarray(var_d8d8b84c.var_aa02f35a) && var_d8d8b84c.var_aa02f35a.size) {
     var_ce5964ab = [];
 
-    if(var_d8d8b84c.var_824bf975 === # "random_select") {
+    if(var_d8d8b84c.var_824bf975 === #"random_select") {
       var_73a92203 = array::random(var_d8d8b84c.var_aa02f35a);
       level.var_f6ea0657 = 1;
 
@@ -1355,7 +1355,7 @@ function function_7622cb70(var_b58a6345, n_delay, b_wait_if_busy = 1, var_54c38d
       }
 
       self function_f2efbd1c(var_73a92203.soundevent, var_73a92203.var_aebcb4b1, var_73a92203.var_f35c5951, undefined, var_ce5964ab, var_73a92203.var_5d4b5964);
-    } else if(var_d8d8b84c.var_824bf975 === # "timeline") {
+    } else if(var_d8d8b84c.var_824bf975 === #"timeline") {
       foreach(index, var_73a92203 in var_d8d8b84c.var_aa02f35a) {
         if(index == var_d8d8b84c.var_aa02f35a.size - 1) {
           level.var_f6ea0657 = 1;
@@ -1444,7 +1444,7 @@ function private function_f2efbd1c(var_64edfc97, var_b4dd2e62, var_dcfc156f, var
   }
 
   if(!isDefined(var_b4dd2e62)) {
-    var_b4dd2e62 = # "";
+    var_b4dd2e62 = #"";
   }
 
   if(isDefined(var_dcfc156f)) {
@@ -1839,7 +1839,7 @@ function function_82f9bc9f() {
 }
 
 function function_cb39455f(speaker) {
-  if(!isDefined(speaker) || speaker == # "" || !isDefined(level.a_speakers)) {
+  if(!isDefined(speaker) || speaker == #"" || !isDefined(level.a_speakers)) {
     return 0;
   }
 

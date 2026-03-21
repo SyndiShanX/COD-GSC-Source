@@ -43,13 +43,13 @@ function function_a7a5e842(localclientnum, oldval, newval, bnewent, binitialsnap
       stopfx(fieldname, self.var_feabd9ee);
     }
 
-    if(self.archetype === # "zombie_dog") {
+    if(self.archetype === #"zombie_dog") {
       self.var_feabd9ee = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_cryofreeze_lvl1_slow_hound", self, "j_spine2");
-    } else if(self.archetype === # "raz") {
+    } else if(self.archetype === #"raz") {
       self.var_feabd9ee = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_cryofreeze_lvl1_slow_raz", self, "j_spine4");
-    } else if(self.archetype === # "hash_7c0d83ac1e845ac2") {
+    } else if(self.archetype === #"hash_7c0d83ac1e845ac2") {
       self.var_feabd9ee = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_cryofreeze_lvl1_slow_steiner", self, "j_spine4");
-    } else if(self.archetype === # "zombie") {
+    } else if(self.archetype === #"zombie") {
       self.var_feabd9ee = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_cryofreeze_lvl1_slow", self, "j_spine4");
 
       if(isDefined(self.var_e109cfb8) && isDefined(self.var_e1a27f4e) && isDefined(self.var_39236a3c) && isDefined(self.var_e03ac221) && isDefined(self.var_31612490) && isDefined(self.var_5023dc3f) && isDefined(self.var_a76dc6cf) && isDefined(self.var_abe559b3)) {
@@ -75,7 +75,7 @@ function function_a7a5e842(localclientnum, oldval, newval, bnewent, binitialsnap
       self.var_feabd9ee = util::playFXOnTag(fieldname, "zm_weapons/fx9_aat_cryofreeze_lvl1_slow", self, str_fx_tag);
     }
 
-    if(self.archetype === # "zombie_dog") {
+    if(self.archetype === #"zombie_dog") {
       self thread function_a565490f(fieldname);
     }
 

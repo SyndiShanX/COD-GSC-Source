@@ -35,7 +35,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
     return;
   }
 
-  if(self.team == # "spectator") {
+  if(self.team == #"spectator") {
     return;
   }
 

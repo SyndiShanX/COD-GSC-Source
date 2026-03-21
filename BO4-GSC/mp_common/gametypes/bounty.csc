@@ -75,7 +75,7 @@ function_a1b40aa4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 spawned(localclientnum, killstreak_duration) {
   if(localclientnum === 0) {
-    if(self.team === # "neutral") {
+    if(self.team === #"neutral") {
       self.var_22a05c26 = level.var_c80088b7;
     }
   }

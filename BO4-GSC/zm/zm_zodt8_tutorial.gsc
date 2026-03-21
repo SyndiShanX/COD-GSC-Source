@@ -87,7 +87,7 @@ init_level_vars() {
   level._supress_survived_screen = 1;
   level.disablescoreevents = 1;
   level.zm_disable_recording_stats = 1;
-  level._effect[#"spawn_fx"] = # "maps/zm_office/fx8_teleporter_destination";
+  level._effect[#"spawn_fx"] = #"maps/zm_office/fx8_teleporter_destination";
   zm_transform::function_cfca77a7(getEntArray("zombie_spawner_catalyst_plasma", "targetname")[0], "catalyst_plasma_tutorial", undefined, 5, undefined, undefined, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split_tutorial", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split_tutorial");
 }
 
@@ -510,10 +510,10 @@ function_43b2606b() {
 function_f761f5e4() {
   self.dontspeak = 1;
   zm_characters::set_character(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"));
-  self.var_c27f1e90[0] = # "specialty_staminup";
-  self.var_c27f1e90[1] = # "specialty_extraammo";
-  self.var_c27f1e90[2] = # "specialty_cooldown";
-  self.var_c27f1e90[3] = # "specialty_deadshot";
+  self.var_c27f1e90[0] = #"specialty_staminup";
+  self.var_c27f1e90[1] = #"specialty_extraammo";
+  self.var_c27f1e90[2] = #"specialty_cooldown";
+  self.var_c27f1e90[3] = #"specialty_deadshot";
   self.var_47654123[0] = 0;
   self.var_47654123[1] = 0;
   self.var_47654123[2] = 0;
@@ -592,12 +592,12 @@ function_513e90cf() {
   a_mdl_doors = getEntArray("state_rooms_to_lower_stairs_door", "targetname");
 
   foreach(mdl_door in a_mdl_doors) {
-    if(mdl_door.model === # "p8_kit_zod_sta_05_door_28_left_painted_wood_01") {
+    if(mdl_door.model === #"p8_kit_zod_sta_05_door_28_left_painted_wood_01") {
       mdl_door setModel(#"p8_kit_zod_din_05_door_42_left_stained_wood_02");
       continue;
     }
 
-    if(mdl_door.model === # "p8_kit_zod_sta_05_door_28_right_painted_wood_01") {
+    if(mdl_door.model === #"p8_kit_zod_sta_05_door_28_right_painted_wood_01") {
       mdl_door setModel(#"p8_kit_zod_din_05_door_42_right_stained_wood_02");
     }
   }

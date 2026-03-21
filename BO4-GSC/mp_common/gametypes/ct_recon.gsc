@@ -83,7 +83,7 @@ function_53d38216(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self.var_6b6241ac = undefined;
     self.var_45cac770 = undefined;
     self thread ct_utils::function_ee4639dd(-5);

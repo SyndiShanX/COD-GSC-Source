@@ -110,11 +110,11 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_2f418a15 = [];
   level.var_910f361c = [];
   level.var_d8fd137b = [];
-  level.var_d8fd137b[0] = # "hash_2854f6c09dd9a316";
-  level.var_d8fd137b[1] = # "hash_2854f5c09dd9a163";
-  level.var_d8fd137b[2] = # "hash_2854f4c09dd99fb0";
-  level.var_d8fd137b[3] = # "hash_2854fbc09dd9ab95";
-  level.var_d8fd137b[4] = # "hash_2854fac09dd9a9e2";
+  level.var_d8fd137b[0] = #"hash_2854f6c09dd9a316";
+  level.var_d8fd137b[1] = #"hash_2854f5c09dd9a163";
+  level.var_d8fd137b[2] = #"hash_2854f4c09dd99fb0";
+  level.var_d8fd137b[3] = #"hash_2854fbc09dd9ab95";
+  level.var_d8fd137b[4] = #"hash_2854fac09dd9a9e2";
 
   if(getdvarint(#"hash_74074ce39d0658e7", 0)) {
     level.var_12ff620b = 0;
@@ -238,7 +238,7 @@ function private function_3f63e44f(item) {
   assert(isDefined(item));
   assert(isDefined(item.itementry));
 
-  if(item.itementry.itemtype == # "generic") {
+  if(item.itementry.itemtype == #"generic") {
     switch (item.itementry.name) {
       case # "uranium_item_t9":
         var_e3483afe = self clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
@@ -254,7 +254,7 @@ function private function_3f63e44f(item) {
       default:
         return 0;
     }
-  } else if(item.itementry.itemtype == # "scorestreak") {
+  } else if(item.itementry.itemtype == #"scorestreak") {
     if(is_true(self.selectinglocation)) {
       return 0;
     }
@@ -270,7 +270,7 @@ function private function_3f63e44f(item) {
     }
 
     return 1;
-  } else if(item.itementry.itemtype == # "armor_shard") {
+  } else if(item.itementry.itemtype == #"armor_shard") {
     return (self.var_c52363ab > self.armorplatecount);
   }
 
@@ -1114,7 +1114,7 @@ function private function_fcc87504(triggerstruct) {
       break;
     }
 
-    if(game.state != # "playing") {
+    if(game.state != #"playing") {
       break;
     }
 
@@ -1252,7 +1252,7 @@ function function_ce8f2021(bomb) {
     return false;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -1262,7 +1262,7 @@ function function_ce8f2021(bomb) {
 function function_3b72c4b2(player) {
   player function_80d6d39b();
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -1299,7 +1299,7 @@ function function_3b72c4b2(player) {
   player globallogic_score::incpersstat(#"objectivescore", 1, 0, 1);
   player stats::function_bb7eedf0(#"dirty_bomb_deposits", 1);
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -1695,7 +1695,7 @@ function private function_f9f4b255() {
 }
 
 function function_8e1791eb(bomb) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -2013,7 +2013,7 @@ function function_7fc57bc9() {
 }
 
 function function_1283ff24(player) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 

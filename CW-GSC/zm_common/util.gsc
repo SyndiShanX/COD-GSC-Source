@@ -184,9 +184,9 @@ function _playlocalsound(soundalias) {
 }
 
 function getotherteam(team) {
-  if(team == # "allies") {
+  if(team == #"allies") {
     return # "axis";
-  } else if(team == # "axis") {
+  } else if(team == #"axis") {
     return # "allies";
   } else {
     return # "allies";

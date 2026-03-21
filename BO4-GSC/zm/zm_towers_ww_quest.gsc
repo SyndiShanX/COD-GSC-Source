@@ -27,8 +27,8 @@
 #namespace zm_towers_ww_quest;
 
 init() {
-  level._effect[#"hash_42cc4bf5e47478c5"] = # "hash_387c78244f5f45e5";
-  level._effect[#"hash_5b4e7c178480d885"] = # "hash_62eafc17a432322a";
+  level._effect[#"hash_42cc4bf5e47478c5"] = #"hash_387c78244f5f45e5";
+  level._effect[#"hash_5b4e7c178480d885"] = #"hash_62eafc17a432322a";
   level flag::init(#"hash_57454e59c155098d");
   level flag::init(#"hash_2fb4b4431d3ed627");
   level flag::init(#"hash_40f20925227353f4");

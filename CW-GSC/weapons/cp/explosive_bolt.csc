@@ -8,7 +8,7 @@
 #namespace explosive_bolt;
 
 function main() {
-  level._effect[#"crossbow_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"crossbow_light"] = #"weapon/fx8_equip_light_os";
 }
 
 function spawned(localclientnum) {

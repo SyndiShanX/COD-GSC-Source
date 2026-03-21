@@ -14,14 +14,14 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_2bba72fdcc5508b5"] = # "hash_3b22162a96d9389";
-  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"hash_19f4dd97cbb87594"] = # "hash_5f376e9395e16666";
-  level._effect[#"hash_246062f68a34e289"] = # "hash_55cc904817de4a07";
-  level._effect[#"hash_73c11d9bf55cbb6"] = # "hash_31c4723879504cb7";
-  level._effect[#"hash_5239f7431d4c72ca"] = # "hash_3f4154d786124350";
-  level._effect[#"hash_b6e7f724af1ad5b"] = # "hash_7ed77a22f165e308";
-  level._effect[#"fire_runner"] = # "hash_409439bf8b3dd862";
+  level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_3b22162a96d9389";
+  level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"hash_19f4dd97cbb87594"] = #"hash_5f376e9395e16666";
+  level._effect[#"hash_246062f68a34e289"] = #"hash_55cc904817de4a07";
+  level._effect[#"hash_73c11d9bf55cbb6"] = #"hash_31c4723879504cb7";
+  level._effect[#"hash_5239f7431d4c72ca"] = #"hash_3f4154d786124350";
+  level._effect[#"hash_b6e7f724af1ad5b"] = #"hash_7ed77a22f165e308";
+  level._effect[#"fire_runner"] = #"hash_409439bf8b3dd862";
   clientfield::register("zbarrier", "magicbox_open_fx", 1, 1, "int", &function_8f69e904, 0, 0);
   clientfield::register("zbarrier", "magicbox_closed_fx", 1, 1, "int", &function_9253a233, 0, 0);
   clientfield::register("zbarrier", "magicbox_leave_fx", 1, 1, "counter", &function_68f67f85, 0, 0);

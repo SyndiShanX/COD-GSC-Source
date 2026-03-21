@@ -125,7 +125,7 @@ function function_2c8aac6() {
   player contracts::function_78083139();
   player challenges::function_659f7dc(var_3e32dc53, undefined);
 
-  if(game.state == # "playing" && isDefined(level.var_13de4626)) {
+  if(game.state == #"playing" && isDefined(level.var_13de4626)) {
     player[[level.var_13de4626]]();
   }
 
@@ -664,7 +664,7 @@ function function_35ac33e1(attacker, victim, var_c5948a69 = {}) {
       weaponclass = util::getweaponclass(weapon);
       dist_to_target = distance(var_c5948a69.attackerorigin, var_c5948a69.victimorigin);
 
-      if(dist_to_target >= 13779 && weaponclass == # "weapon_sniper") {
+      if(dist_to_target >= 13779 && weaponclass == #"weapon_sniper") {
         attacker stats::function_d40764f3(#"kills_longshot_sniper", 1);
       }
 
@@ -759,11 +759,11 @@ function function_106be0dc(params) {
       self.items_picked_up[item.id] = 1;
       self stats::function_d40764f3(#"items_picked_up", 1);
 
-      if(isDefined(item.itementry) && item.itementry.itemtype === # "armor") {
+      if(isDefined(item.itementry) && item.itementry.itemtype === #"armor") {
         self stats::function_d40764f3(#"items_armor_used", 1);
       }
 
-      if(isDefined(item.itementry) && item.itementry.itemtype === # "backpack") {
+      if(isDefined(item.itementry) && item.itementry.itemtype === #"backpack") {
         self stats::function_d40764f3(#"items_backpacks_used", 1);
       }
     }
@@ -777,7 +777,7 @@ function function_393ec79e(params) {
 
   item = params.item;
 
-  if(isDefined(item.itementry) && item.itementry.itemtype === # "health") {
+  if(isDefined(item.itementry) && item.itementry.itemtype === #"health") {
     self stats::function_d40764f3(#"items_health_used", 1);
 
     if(is_true(self.outsidedeathcircle)) {
@@ -807,7 +807,7 @@ function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
   }
 
   if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
-    if(eventstruct.weapon.name === # "basketball") {
+    if(eventstruct.weapon.name === #"basketball") {
       if(isDefined(eventstruct.projectile)) {
         ball = eventstruct.projectile;
         ball thread function_16de96c7(self);
@@ -943,7 +943,7 @@ function on_item_pickup(params) {
   count = params.count;
 
   if(isPlayer(self)) {
-    if(isDefined(item.itementry) && item.itementry.itemtype === # "resource" && item_world_util::function_41f06d9d(item.itementry) && count > 0) {
+    if(isDefined(item.itementry) && item.itementry.itemtype === #"resource" && item_world_util::function_41f06d9d(item.itementry) && count > 0) {
       self stats::function_dad108fa(#"items_paint_cans_collected", count);
       self stats::function_b7f80d87("paint_cans_collected", count);
     }
@@ -957,7 +957,7 @@ function private event_handler[event_cf200f34] function_209450ae(eventstruct) {
 
   dynent = eventstruct.ent;
 
-  if(dynent.targetname !== # "firing_range_target_challenge") {
+  if(dynent.targetname !== #"firing_range_target_challenge") {
     return;
   }
 

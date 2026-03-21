@@ -552,23 +552,23 @@ function temp_get_arm_offset(entity, throwposition) {
   }
 
   if(function_4387243d(throwposition)) {
-    if(throwposition.node.type == # "cover left") {
+    if(throwposition.node.type == #"cover left") {
       if(stance == "crouch") {
         arm_offset = (-38, 15, 23);
       } else {
         arm_offset = (-45, 0, 40);
       }
-    } else if(throwposition.node.type == # "cover right") {
+    } else if(throwposition.node.type == #"cover right") {
       if(stance == "crouch") {
         arm_offset = (46, 12, 26);
       } else {
         arm_offset = (34, -21, 50);
       }
-    } else if(throwposition.node.type == # "cover stand" || throwposition.node.type == # "conceal stand") {
+    } else if(throwposition.node.type == #"cover stand" || throwposition.node.type == #"conceal stand") {
       arm_offset = (10, 7, 77);
-    } else if(throwposition.node.type == # "cover crouch" || throwposition.node.type == # "cover crouch window" || throwposition.node.type == # "conceal crouch") {
+    } else if(throwposition.node.type == #"cover crouch" || throwposition.node.type == #"cover crouch window" || throwposition.node.type == #"conceal crouch") {
       arm_offset = (19, 5, 60);
-    } else if(throwposition.node.type == # "cover pillar") {
+    } else if(throwposition.node.type == #"cover pillar") {
       leftoffset = undefined;
       rightoffset = undefined;
 

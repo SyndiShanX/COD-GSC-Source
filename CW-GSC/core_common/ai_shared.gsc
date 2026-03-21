@@ -302,9 +302,9 @@ function function_620eeb6b(goalent) {
     targetent = undefined;
     var_b266f03e = "";
 
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       var_b266f03e = "ai_likelyenemydir_allies";
-    } else if(self.team == # "axis") {
+    } else if(self.team == #"axis") {
       var_b266f03e = "ai_likelyenemydir_axis";
     }
 

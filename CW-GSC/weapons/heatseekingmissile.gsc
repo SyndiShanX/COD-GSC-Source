@@ -18,7 +18,7 @@ function init_shared() {
   game.locking_on_sound = "uin_alert_lockon_start";
   game.locked_on_sound = "uin_alert_lockon";
   callback::on_spawned(&on_player_spawned);
-  level.fx_flare = # "hash_409b85809816c79b";
+  level.fx_flare = #"hash_409b85809816c79b";
 
   setDvar(#"scr_freelock", 0);
 }
@@ -431,7 +431,7 @@ function private function_d656e945(team) {
 
   vehicle_team = self.team;
 
-  if(vehicle_team == # "neutral") {
+  if(vehicle_team == #"neutral") {
     if(is_true(game.var_f4787795)) {
       return false;
     }

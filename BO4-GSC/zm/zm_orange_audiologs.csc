@@ -8,7 +8,7 @@
 #namespace zm_orange_audiologs;
 
 preload() {
-  level._effect[#"sam_orb"] = # "hash_445f04139d92c61b";
+  level._effect[#"sam_orb"] = #"hash_445f04139d92c61b";
   clientfield::register("scriptmover", "" + # "hash_4a18e1ea1950215d", 24000, 1, "int", &function_db7a9c9d, 0, 0);
 }
 

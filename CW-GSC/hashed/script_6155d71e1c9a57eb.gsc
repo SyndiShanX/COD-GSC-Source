@@ -293,7 +293,7 @@ function function_61eeb910(e_player, a_enemies) {
       if(enemy.favoriteenemy == self) {
         n_counter++;
 
-        if(is_true(enemy.var_d8695234) || is_true(enemy.var_c588eb) || enemy.archetype === # "raz" || enemy.archetype === # "mimic") {
+        if(is_true(enemy.var_d8695234) || is_true(enemy.var_c588eb) || enemy.archetype === #"raz" || enemy.archetype === #"mimic") {
           var_fb83b33f = 1;
         }
       }

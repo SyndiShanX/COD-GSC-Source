@@ -451,7 +451,7 @@ function function_bf315481(player) {
     return;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -498,7 +498,7 @@ function function_4e1f3901(origin) {
   fwd = (0, 0, 1);
   right = (0, -1, 0);
   var_8e875f24.fx = spawnfx("ui/fx_dom_marker_team_r90", origin, fwd, right);
-  var_8e875f24.fx.team = # "none";
+  var_8e875f24.fx.team = #"none";
   triggerfx(var_8e875f24.fx, 0.001);
 }
 
@@ -534,7 +534,7 @@ function private function_dbd23466() {
 }
 
 function private function_5bc7928d() {
-  var_44dd7e5d = # "hash_1d827850f422986b";
+  var_44dd7e5d = #"hash_1d827850f422986b";
   playerroletemplatecount = getplayerroletemplatecount(currentsessionmode());
 
   for(i = 0; i < playerroletemplatecount; i++) {
@@ -789,7 +789,7 @@ function function_fa62642c(var_8b0bfce9, var_5c25da5) {
   self loadout::function_442539("specialgrenade", var_8b0bfce9);
   waitframe(1);
 
-  if(game.state == # "playing" && isalive(self) && self hasweapon(var_8b0bfce9)) {
+  if(game.state == #"playing" && isalive(self) && self hasweapon(var_8b0bfce9)) {
     self.pers[#"fieldupgrades"][#"ammo"] = var_5c25da5;
     self setweaponammoclip(var_8b0bfce9, var_5c25da5);
   }
@@ -1010,7 +1010,7 @@ function private function_8cac4c76() {
 function private set_ui_team() {
   wait 0.05;
 
-  if(game.attackers == # "allies") {
+  if(game.attackers == #"allies") {
     clientfield::set_world_uimodel("hudItems.war.attackingTeam", 1);
     return;
   }
@@ -1264,7 +1264,7 @@ function private function_7082507b(helicopter) {
   helicopter endon(#"death", #"hash_4c9df8896f727a2e");
   helicopter.rope endon(#"death");
   helicopter.rope show();
-  anim = # "hash_2216bcebd33b5779";
+  anim = #"hash_2216bcebd33b5779";
 
   if(true) {
     var_2e2c7ee7 = getanimlength(anim) / 10;

@@ -41,15 +41,15 @@ function function_af3e97c(localclientnum, oldval, newval, bnewent, binitialsnap,
       for(i = 0; i < 3; i++) {
         switch (i) {
           case 0:
-            var_395f162a = # "hash_1252cdeb68490a6d";
+            var_395f162a = #"hash_1252cdeb68490a6d";
             str_tag = "monitor_01_jnt";
             break;
           case 1:
-            var_395f162a = # "hash_41dc7c0724f35b12";
+            var_395f162a = #"hash_41dc7c0724f35b12";
             str_tag = "monitor_02_jnt";
             break;
           case 2:
-            var_395f162a = # "hash_60994b01519271ea";
+            var_395f162a = #"hash_60994b01519271ea";
             str_tag = "keyboard_jnt";
             break;
         }

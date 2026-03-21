@@ -61,7 +61,7 @@ function_10687511(entity) {
     return 0;
   }
 
-  if(entity.team == # "allies") {
+  if(entity.team == #"allies") {
     entity function_cd6f239();
 
     if(isDefined(entity.favoriteenemy)) {
@@ -306,7 +306,7 @@ on_tiger_killed(params) {
 }
 
 function_9808e44f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == # "tiger" && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == #"tiger" && eattacker.team != self.team) {
     if(isDefined(eattacker.var_d6c43d9b)) {
       self function_8fc19416(eattacker.var_d6c43d9b);
     }

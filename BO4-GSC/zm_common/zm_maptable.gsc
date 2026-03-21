@@ -42,7 +42,7 @@ function_10672567() {
 }
 
 get_cast() {
-  cast = # "other";
+  cast = #"other";
   fields = function_10672567();
 
   if(isDefined(fields)) {
@@ -55,7 +55,7 @@ get_cast() {
 get_story() {
   var_26ea2807 = get_cast();
 
-  if(var_26ea2807 === # "story1") {
+  if(var_26ea2807 === #"story1") {
     return 1;
   }
 

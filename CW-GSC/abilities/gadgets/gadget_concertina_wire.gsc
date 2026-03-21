@@ -589,7 +589,7 @@ function onkilled(var_c946c04c) {
 }
 
 function getmodel(var_796be15d) {
-  return self.team == # "allies" ? level.var_87226c31.bundle.var_397ed90c : level.var_87226c31.bundle.var_b256e3da;
+  return self.team == #"allies" ? level.var_87226c31.bundle.var_397ed90c : level.var_87226c31.bundle.var_b256e3da;
 }
 
 function function_dac69ad1(player, concertinawire) {
@@ -685,18 +685,18 @@ function function_f067d867(concertinawire) {
         player dodamage(1, player.origin, concertinawire.owner, concertinawire, undefined, "MOD_IMPACT", 0, level.var_87226c31.concertinawireweapon);
       }
 
-      if(isDefined(player.archetype) && player.archetype == # "robot" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
+      if(isDefined(player.archetype) && player.archetype == #"robot" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
         player.var_85c3882d = 1;
         continue;
       }
 
-      if(isDefined(player.archetype) && player.archetype == # "wasp" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
+      if(isDefined(player.archetype) && player.archetype == #"wasp" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
         continue;
       }
 
       if(isDefined(concertinawire.owner) && util::function_fbce7263(player.team, concertinawire.owner.team)) {
         if(is_true(level.is_survival)) {
-          if(player.archetype === # "zombie" || player.archetype === # "zombie_dog" || player.archetype === # "avogadro") {
+          if(player.archetype === #"zombie" || player.archetype === #"zombie_dog" || player.archetype === #"avogadro") {
             damageamount = 5;
           } else {
             damageamount = concertinawire.health;

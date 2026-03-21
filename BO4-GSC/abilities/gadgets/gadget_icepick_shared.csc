@@ -32,9 +32,9 @@ function_b53fa4ba(entity) {
   }
 
   if(isDefined(entity.vehicletype)) {
-    if(entity.vehicletype == # "vehicle_t8_mil_helicopter_swat_transport") {
+    if(entity.vehicletype == #"vehicle_t8_mil_helicopter_swat_transport") {
       return getweapon("player_air_vehicle1_main_turret_3rd_person_swat");
-    } else if(entity.vehicletype == # "vehicle_t8_mil_helicopter_overwatch") {
+    } else if(entity.vehicletype == #"vehicle_t8_mil_helicopter_overwatch") {
       return getweapon("overwatch_helicopter");
     }
   }
@@ -170,7 +170,7 @@ function_ca096bad(model, index, namehash, entnum, category, categoryindex, weapo
   doublewidth = 0;
   setuimodelvalue(createuimodel(itemuimodel, "hackableId"), entnum);
 
-  if(isDefined(weapon) && weapon.statname != # "") {
+  if(isDefined(weapon) && weapon.statname != #"") {
     weaponindex = getitemindexfromref(weapon.statname);
     setuimodelvalue(createuimodel(itemuimodel, "hackableItemIndex"), weaponindex);
     doublewidth = weapon.var_df381b5d == 2;
@@ -466,7 +466,7 @@ function_34aba8d8(local_client_num, targetid, newval) {
         var_b095c57b = function_b2755499(self.weapon, self);
         flavortext = var_b095c57b.var_77b46a8c;
       } else {
-        flavortext = # "";
+        flavortext = #"";
       }
 
       setuimodelvalue(getuimodel(itemuimodel, "hackableFlavorText"), flavortext);

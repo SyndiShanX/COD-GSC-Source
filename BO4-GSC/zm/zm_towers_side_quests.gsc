@@ -24,7 +24,7 @@ init() {
   level flag::init(#"hash_26c0c05d0a3e382f");
   level flag::init(#"pyre_lit");
   level flag::init(#"hash_6205682540170b8");
-  level._effect[#"hash_3ecc995bb97331ac"] = # "hash_37631c88b85a74ec";
+  level._effect[#"hash_3ecc995bb97331ac"] = #"hash_37631c88b85a74ec";
   level.var_c1549bc8 = spawnStruct();
   level.var_c1549bc8.var_25f5a473 = struct::get_array("s_pyre");
 
@@ -504,7 +504,7 @@ function_def71ac3() {
   while(true) {
     self waittill(#"hash_29bd5874900989d6");
 
-    if(self.var_b3122c84 == # "hash_4a67009994e6a476" && !(isDefined(self.var_a4ab5d88) && self.var_a4ab5d88)) {
+    if(self.var_b3122c84 == #"hash_4a67009994e6a476" && !(isDefined(self.var_a4ab5d88) && self.var_a4ab5d88)) {
       self.var_a4ab5d88 = 1;
       level notify(#"hash_46267aa0f17a3c00", {
         #var_8571ab76: 1

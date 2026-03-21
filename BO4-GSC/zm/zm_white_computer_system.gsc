@@ -1151,7 +1151,7 @@ function_5fbede7a() {
 
 function_60f15ca8() {
   var_a94d1ca3 = getent("code_printer_paper", "targetname");
-  level._effect[#"hash_ae7ff67227046f2"] = # "hash_731cff4f6f2d012d";
+  level._effect[#"hash_ae7ff67227046f2"] = #"hash_731cff4f6f2d012d";
   var_73a8928d = var_a94d1ca3.origin;
   level.var_5d577798 stoploopsound();
   level.var_5d577798 playSound(#"hash_42924f60b7b4c07a");

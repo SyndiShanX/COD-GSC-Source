@@ -26,15 +26,15 @@ event_handler[gametype_init] main(eventstruct) {
   clientfield::register("world", "hardpoint", 1, 5, "int", &hardpoint, 0, 0);
   clientfield::register("world", "hardpointteam", 1, 5, "int", &hardpoint_state, 0, 0);
   level._effect[#"zoneedgemarker"] = [];
-  level._effect[#"zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
   level._effect[#"zoneedgemarkerwndw"] = [];
-  level._effect[#"zoneedgemarkerwndw"][0] = # "ui/fx8_infil_marker_neutral_window";
-  level._effect[#"zoneedgemarkerwndw"][1] = # "hash_5565c3fc2c7742fe";
-  level._effect[#"zoneedgemarkerwndw"][2] = # "hash_3283b765fe480df7";
-  level._effect[#"zoneedgemarkerwndw"][3] = # "hash_6a512c225256a2e9";
+  level._effect[#"zoneedgemarkerwndw"][0] = #"ui/fx8_infil_marker_neutral_window";
+  level._effect[#"zoneedgemarkerwndw"][1] = #"hash_5565c3fc2c7742fe";
+  level._effect[#"zoneedgemarkerwndw"][2] = #"hash_3283b765fe480df7";
+  level._effect[#"zoneedgemarkerwndw"][3] = #"hash_6a512c225256a2e9";
   callback::on_spawned(&function_df78674f);
 
   if(util::function_8570168d()) {
@@ -54,16 +54,16 @@ get_shoutcaster_fx(local_client_num) {
   effects = [];
   effects[#"zoneedgemarker"] = level._effect[#"zoneedgemarker"];
   effects[#"zoneedgemarkerwndw"] = level._effect[#"zoneedgemarkerwndw"];
-  effects[#"zoneedgemarker"][1] = # "ui/fx8_infil_marker_shoutcaster_allies";
-  effects[#"zoneedgemarker"][2] = # "ui/fx8_infil_marker_shoutcaster_axis";
+  effects[#"zoneedgemarker"][1] = #"ui/fx8_infil_marker_shoutcaster_allies";
+  effects[#"zoneedgemarker"][2] = #"ui/fx8_infil_marker_shoutcaster_axis";
   effects[#"zoneedgemarker"][3] = [];
-  effects[#"zoneedgemarker"][3][1] = # "hash_2d6240bcbe378735";
-  effects[#"zoneedgemarker"][3][2] = # "hash_1485defdfe47975a";
-  effects[#"zoneedgemarkerwndw"][1] = # "ui/fx8_infil_marker_shoutcaster_allies_window";
-  effects[#"zoneedgemarkerwndw"][2] = # "ui/fx8_infil_marker_shoutcaster_axis_window";
+  effects[#"zoneedgemarker"][3][1] = #"hash_2d6240bcbe378735";
+  effects[#"zoneedgemarker"][3][2] = #"hash_1485defdfe47975a";
+  effects[#"zoneedgemarkerwndw"][1] = #"ui/fx8_infil_marker_shoutcaster_allies_window";
+  effects[#"zoneedgemarkerwndw"][2] = #"ui/fx8_infil_marker_shoutcaster_axis_window";
   effects[#"zoneedgemarkerwndw"][3] = [];
-  effects[#"zoneedgemarkerwndw"][3][1] = # "hash_3add4ab2008b6ea2";
-  effects[#"zoneedgemarkerwndw"][3][2] = # "hash_49751fe881244b5f";
+  effects[#"zoneedgemarkerwndw"][3][1] = #"hash_3add4ab2008b6ea2";
+  effects[#"zoneedgemarkerwndw"][3][2] = #"hash_49751fe881244b5f";
   return effects;
 }
 
@@ -73,13 +73,13 @@ get_fx_state(local_client_num, state, is_shoutcaster) {
   }
 
   if(state == 1) {
-    if(function_9b3f0ed1(local_client_num) == # "allies") {
+    if(function_9b3f0ed1(local_client_num) == #"allies") {
       return 1;
     } else {
       return 2;
     }
   } else if(state == 2) {
-    if(function_9b3f0ed1(local_client_num) == # "axis") {
+    if(function_9b3f0ed1(local_client_num) == #"axis") {
       return 1;
     } else {
       return 2;

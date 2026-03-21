@@ -245,7 +245,7 @@ do_final_killcam() {
   level waittill(#"play_final_killcam");
   setslowmotion(1, 1, 0);
   level.infinalkillcam = 1;
-  winner = # "none";
+  winner = #"none";
 
   if(isDefined(level.finalkillcam_winner)) {
     winner = level.finalkillcam_winner;
@@ -371,7 +371,7 @@ killcam(attackernum, targetnum, killcam_entity_info, weapon, meansofdeath, death
     #start_time: gettime()
   });
 
-  if(isDefined(weapon) && weapon.name === # "straferun_rockets") {
+  if(isDefined(weapon) && weapon.name === #"straferun_rockets") {
     self setmodellodbias(8);
   }
 
@@ -731,7 +731,7 @@ spawn_end_of_final_killcam() {
 }
 
 is_entity_weapon(weapon) {
-  if(weapon.statname == # "planemortar") {
+  if(weapon.statname == #"planemortar") {
     return true;
   }
 
@@ -851,17 +851,17 @@ get_killcam_entity(attacker, einflictor, weapon) {
     }
   }
 
-  if(weapon.name == # "hero_gravityspikes") {
+  if(weapon.name == #"hero_gravityspikes") {
     return undefined;
   }
 
   if(isDefined(attacker) && isPlayer(attacker) && attacker isremotecontrolling() && (einflictor.controlled === 1 || einflictor.occupied === 1)) {
-    if(weapon.name == # "sentinel_turret" || weapon.name == # "amws_gun_turret_mp_player" || weapon.name == # "auto_gun_turret") {
+    if(weapon.name == #"sentinel_turret" || weapon.name == #"amws_gun_turret_mp_player" || weapon.name == #"auto_gun_turret") {
       return undefined;
     }
   }
 
-  if(weapon.name == # "dart") {
+  if(weapon.name == #"dart") {
     return undefined;
   }
 

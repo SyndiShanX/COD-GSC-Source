@@ -103,7 +103,7 @@ function private function_7904ef68(territory) {
     center.maxs = (-2.14748e+09, -2.14748e+09, 0);
 
     foreach(entity in entities) {
-      if(isDefined(entity.classname) && entity.classname == # "trigger_within_bounds") {
+      if(isDefined(entity.classname) && entity.classname == #"trigger_within_bounds") {
         territory.bounds[territory.bounds.size] = entity;
         function_49695e98(center, entity.mins, entity.maxs, entity.origin);
       }

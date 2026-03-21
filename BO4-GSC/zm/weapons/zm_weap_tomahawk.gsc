@@ -49,7 +49,7 @@ __init__() {
 __main__() {}
 
 tomahawk_on_player_connect() {
-  self.var_4f8fb07f = # "tomahawk_t8";
+  self.var_4f8fb07f = #"tomahawk_t8";
   self thread watch_for_tomahawk_throw();
   self thread watch_for_tomahawk_charge();
 }
@@ -139,7 +139,7 @@ play_charge_fx(w_grenade) {
     self.var_4f8fb07f = w_grenade.name;
 
     if(time >= var_673471b1) {
-      if(self.var_4f8fb07f == # "tomahawk_t8_upgraded") {
+      if(self.var_4f8fb07f == #"tomahawk_t8_upgraded") {
         self clientfield::increment("tomahawk_charge_up_fx", 2);
       } else {
         self clientfield::increment("tomahawk_charge_up_fx", 1);
@@ -149,7 +149,7 @@ play_charge_fx(w_grenade) {
       self playrumbleonentity("reload_small");
     }
 
-    if(var_673471b1 > 2400 && self.var_4f8fb07f != # "tomahawk_t8_upgraded") {
+    if(var_673471b1 > 2400 && self.var_4f8fb07f != #"tomahawk_t8_upgraded") {
       break;
     }
 
@@ -180,18 +180,18 @@ get_grenade_charge_power(player) {
   }
 
   if(self.n_cookedtime > 1000 && self.n_cookedtime < 2000) {
-    if(player.var_4f8fb07f == # "tomahawk_t8_upgraded") {
+    if(player.var_4f8fb07f == #"tomahawk_t8_upgraded") {
       return 4.5;
     }
 
     return 1.5;
   } else if(self.n_cookedtime > 2000 && self.n_cookedtime < 3000) {
-    if(player.var_4f8fb07f == # "tomahawk_t8_upgraded") {
+    if(player.var_4f8fb07f == #"tomahawk_t8_upgraded") {
       return 6;
     }
 
     return 2;
-  } else if(self.n_cookedtime >= 3000 && player.var_4f8fb07f != # "tomahawk_t8_upgraded") {
+  } else if(self.n_cookedtime >= 3000 && player.var_4f8fb07f != #"tomahawk_t8_upgraded") {
     return 2;
   } else if(self.n_cookedtime >= 3000) {
     return 3;
@@ -500,7 +500,7 @@ function_c7ddedb2(mdl_tomahawk, ai_zombie, var_bfed4a7 = 0.25) {
     if(isalive(ai_zombie)) {
       ai_zombie.hit_by_tomahawk = 1;
 
-      if(self.var_4f8fb07f == # "tomahawk_t8_upgraded") {
+      if(self.var_4f8fb07f == #"tomahawk_t8_upgraded") {
         ai_zombie clientfield::set("tomahawk_impact_fx", 2);
       } else {
         ai_zombie clientfield::set("tomahawk_impact_fx", 1);
@@ -618,7 +618,7 @@ tomahawk_spawn(grenade_origin, charged) {
   mdl_tomahawk = util::spawn_model("wpn_t8_zm_tomahawk_world", grenade_origin);
   mdl_tomahawk thread tomahawk_spin();
 
-  if(self.var_4f8fb07f == # "tomahawk_t8_upgraded" || isDefined(self.var_67ea42af) && self.var_67ea42af) {
+  if(self.var_4f8fb07f == #"tomahawk_t8_upgraded" || isDefined(self.var_67ea42af) && self.var_67ea42af) {
     mdl_tomahawk clientfield::set("tomahawk_trail_fx", 2);
   } else {
     mdl_tomahawk clientfield::set("tomahawk_trail_fx", 1);
@@ -662,7 +662,7 @@ calculate_tomahawk_damage(ai_target_zombie, n_tomahawk_power, tomahawk) {
 }
 
 function_c34db78(einflictor, eattacker, idamage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === # "spoon" && isPlayer(eattacker)) {
+  if(zm_trial_restrict_loadout::is_active() && zm_trial_restrict_loadout::function_937e218c() === #"spoon" && isPlayer(eattacker)) {
     self.var_12745932 = 1;
   }
 

@@ -97,7 +97,7 @@ function_e4b73b34() {
 function_15652808(str_archetype) {
   str_script_noteworthy = "tiger_location";
 
-  if(str_archetype == # "gladiator") {
+  if(str_archetype == #"gladiator") {
     str_script_noteworthy = "gladiator_location";
   }
 
@@ -167,7 +167,7 @@ function_461a99a5(s_spot) {
     self waittill(#"completed_emerging_into_playable_area");
   }
 
-  if(self.archetype == # "tiger") {
+  if(self.archetype == #"tiger") {
     self ai::set_behavior_attribute("sprint", 1);
     return;
   }

@@ -491,7 +491,7 @@ heli_get_protect_spot(protectdest, overrideradius, heli_team) {
   heightmin = level.var_bf127508;
   heightmax = level.var_5f6d1a12;
 
-  if(heli_team == # "axis") {
+  if(heli_team == #"axis") {
     assert(isDefined(level.var_fb59767));
     heightmin += level.var_fb59767;
     heightmax += level.var_fb59767;
@@ -546,7 +546,7 @@ function_ab667e1c(owner, helicopter) {
   helicopter.var_e60e2941 = [];
   aitypes = level.var_3c5cbd62[#"axis"];
 
-  if(isDefined(owner.team) && owner.team == # "allies") {
+  if(isDefined(owner.team) && owner.team == #"allies") {
     aitypes = level.var_3c5cbd62[#"allies"];
   }
 
@@ -603,7 +603,7 @@ function_ab667e1c(owner, helicopter) {
 
 function_64b435c4(ai) {
   self endon(#"death");
-  sniper_glint = # "hash_3db1ecb54b192a49";
+  sniper_glint = #"hash_3db1ecb54b192a49";
 
   while(true) {
     self waittill(#"sniper_glint");
@@ -683,7 +683,7 @@ on_player_killed(params) {
   self notify("105d6541393f1fd");
   self endon("105d6541393f1fd");
 
-  if(!isDefined(params) || !isDefined(self) || !isDefined(params.einflictor) || !isDefined(params.einflictor.script_owner) || !isDefined(params.einflictor.voxid) || !isDefined(params.einflictor.ai) || !(isDefined(params.einflictor.ai.swat_gunner) && params.einflictor.ai.swat_gunner) || params.einflictor.weapon.name != # "hash_6c1be4b025206124" || self == params.einflictor.script_owner || level.teambased && self.team == params.einflictor.script_owner.team) {
+  if(!isDefined(params) || !isDefined(self) || !isDefined(params.einflictor) || !isDefined(params.einflictor.script_owner) || !isDefined(params.einflictor.voxid) || !isDefined(params.einflictor.ai) || !(isDefined(params.einflictor.ai.swat_gunner) && params.einflictor.ai.swat_gunner) || params.einflictor.weapon.name != #"hash_6c1be4b025206124" || self == params.einflictor.script_owner || level.teambased && self.team == params.einflictor.script_owner.team) {
     return;
   }
 

@@ -30,13 +30,13 @@ __init__() {
   clientfield::register("actor", "" + # "hero_hammer_stun", 1, 1, "int", &function_cd968d6, 0, 0);
   clientfield::register("vehicle", "" + # "hero_hammer_stun", 1, 1, "int", &function_cd968d6, 0, 0);
   clientfield::register("toplayer", "" + # "hammer_rumble", 1, 1, "counter", &hammer_rumble, 0, 0);
-  level._effect[#"hammer_storm"] = # "hash_20c78a023629447a";
-  level._effect[#"lightning_miss"] = # "hash_211c80023671737b";
-  level._effect[#"lightning_arc"] = # "hash_5bf3f1914a8ad11f";
-  level._effect[#"lightning_impact"] = # "hash_13721326cc2b0c0d";
-  level._effect[#"hash_68b51e827d391590"] = # "hash_6a3c982733846cf1";
-  level._effect[#"hash_68bc2a827d3f48a2"] = # "hash_6a3c982733846cf1";
-  level._effect[#"hash_710d46f7ce760dda"] = # "hash_421d1bfc8c356db6";
+  level._effect[#"hammer_storm"] = #"hash_20c78a023629447a";
+  level._effect[#"lightning_miss"] = #"hash_211c80023671737b";
+  level._effect[#"lightning_arc"] = #"hash_5bf3f1914a8ad11f";
+  level._effect[#"lightning_impact"] = #"hash_13721326cc2b0c0d";
+  level._effect[#"hash_68b51e827d391590"] = #"hash_6a3c982733846cf1";
+  level._effect[#"hash_68bc2a827d3f48a2"] = #"hash_6a3c982733846cf1";
+  level._effect[#"hash_710d46f7ce760dda"] = #"hash_421d1bfc8c356db6";
   level.var_76234ae5 = [];
 }
 

@@ -99,7 +99,7 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
         dynent.fx = undefined;
       }
 
-      if(newstate.statefx !== # "hash_633319dd8957ddbb") {
+      if(newstate.statefx !== #"hash_633319dd8957ddbb") {
         dynent.fx = playfxondynent(newstate.statefx, dynent);
       }
     }

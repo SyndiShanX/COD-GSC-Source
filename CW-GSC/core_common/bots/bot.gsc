@@ -90,8 +90,8 @@ function add_bot(team, name = undefined, clanabbrev = undefined) {
 
   if(level.teambased && isDefined(team) && isDefined(level.teams[team])) {
     bot.botteam = team;
-  } else if(isDefined(team) && team == # "spectator") {
-    bot.botteam = # "spectator";
+  } else if(isDefined(team) && team == #"spectator") {
+    bot.botteam = #"spectator";
   } else {
     bot.botteam = "autoassign";
   }
@@ -287,7 +287,7 @@ function private function_b781f1e5() {
   self thread function_ef59c9e();
   self thread bot_position::startup();
 
-  while(game.state != # "playing") {
+  while(game.state != #"playing") {
     waitframe(1);
   }
 
@@ -346,7 +346,7 @@ function private function_4fb21bb4() {
 
   pixbeginevent(#"");
 
-  if(self.combatstate == # "combat_state_idle" || !isDefined(self.enemy) || !isalive(self.enemy) || self.bot.flashed || self function_ce3dfcfc(self.enemy)) {
+  if(self.combatstate == #"combat_state_idle" || !isDefined(self.enemy) || !isalive(self.enemy) || self.bot.flashed || self function_ce3dfcfc(self.enemy)) {
     self.bot.enemyvisible = 0;
     self.bot.enemyseen = 0;
   } else if(isPlayer(self.enemy) && self.enemy isinvehicle() && !self.enemy isremotecontrolling()) {
@@ -417,7 +417,7 @@ function private function_ce3dfcfc(enemy) {
   weapons = self getweaponslist();
 
   foreach(weapon in weapons) {
-    if(weapon.lockontype == # "legacy single" && self getammocount(weapon) > 0) {
+    if(weapon.lockontype == #"legacy single" && self getammocount(weapon) > 0) {
       return false;
     }
   }
@@ -634,12 +634,12 @@ function private check_stuck() {
       record3dtext(ent.targetname, ent.origin, (1, 0, 0), "<dev string:x3d>");
     }
 
-    if(isDefined(ent.targetname) && ent.targetname == # "smart_cover") {
+    if(isDefined(ent.targetname) && ent.targetname == #"smart_cover") {
       self.bot.var_ad331541 = ent;
       break;
     }
 
-    if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == # "care_package" && ent isusable()) {
+    if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == #"care_package" && ent isusable()) {
       self.bot.var_510b1057 = ent;
       break;
     }
@@ -662,7 +662,7 @@ function private check_stuck() {
   trace = bulletTrace(eye, end, 0, self);
   surfacetype = trace[#"surfacetype"];
 
-  if(isDefined(surfacetype) && surfacetype == # "glass" && !isDefined(trace[#"entity"])) {
+  if(isDefined(surfacetype) && surfacetype == #"glass" && !isDefined(trace[#"entity"])) {
     self notify(#"glass", {
       #position: trace[#"position"]
     });
@@ -760,7 +760,7 @@ function private function_e4055765() {
   if(getdvarint(#"bot_forcefire", 0)) {
     weapon = self getcurrentweapon();
 
-    if(weapon.firetype == # "full auto" || weapon.firetype == # "auto burst" || weapon.firetype == # "minigun" || !self attackButtonPressed()) {
+    if(weapon.firetype == #"full auto" || weapon.firetype == #"auto burst" || weapon.firetype == #"minigun" || !self attackButtonPressed()) {
       self bottapbutton(0);
 
       if(weapon.dualwieldweapon != level.weaponnone) {

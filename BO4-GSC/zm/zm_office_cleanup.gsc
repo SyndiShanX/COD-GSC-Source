@@ -108,7 +108,7 @@ function_1969a102() {
       } else {
         self.favoriteenemy = undefined;
 
-        if(self.archetype === # "zombie_dog") {
+        if(self.archetype === #"zombie_dog") {
           target.hunted_by--;
           self thread function_29aabbb3();
         }
@@ -146,7 +146,7 @@ function_29aabbb3() {
 }
 
 function_fa5d232f() {
-  if(self.archetype !== # "zombie_dog") {
+  if(self.archetype !== #"zombie_dog") {
     return;
   }
 

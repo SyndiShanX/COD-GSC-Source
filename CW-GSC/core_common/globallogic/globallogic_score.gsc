@@ -551,7 +551,7 @@ function private function_d68ae402(inflictor, meansofdeath, victim, attacker, sc
   waitresult = attacker waittilltimeout(4, #"death", #"team_changed");
 
   if(attacker.multikills[var_ac4c1].kills >= 2) {
-    if(var_ac4c1 == # "frag_grenade" || var_ac4c1 == # "eq_molotov" || var_ac4c1 == # "hatchet") {
+    if(var_ac4c1 == #"frag_grenade" || var_ac4c1 == #"eq_molotov" || var_ac4c1 == #"hatchet") {
       if(!isDefined(attacker.pers[#"hash_52e978325c91fe24"])) {
         attacker.pers[#"hash_52e978325c91fe24"] = 0;
       }
@@ -561,7 +561,7 @@ function private function_d68ae402(inflictor, meansofdeath, victim, attacker, sc
       if(attacker.pers[#"hash_52e978325c91fe24"] % 2 == 0) {
         attacker stats::function_dad108fa(#"hash_52e978325c91fe24", 1);
       }
-    } else if(var_ac4c1 == # "nightingale") {
+    } else if(var_ac4c1 == #"nightingale") {
       attacker contracts::increment_contract(#"hash_7ce05509f5b3e35");
     }
   }

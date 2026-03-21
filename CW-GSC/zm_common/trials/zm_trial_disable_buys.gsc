@@ -294,7 +294,7 @@ function private function_c348adcc() {
 
 function private hide_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = # "hash_55d25caf8f7bbb2f";
+  str_text = #"hash_55d25caf8f7bbb2f";
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text);
@@ -305,7 +305,7 @@ function private hide_traps() {
 
 function private show_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = # "hash_23c1c09e94181fdb";
+  str_text = #"hash_23c1c09e94181fdb";
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);

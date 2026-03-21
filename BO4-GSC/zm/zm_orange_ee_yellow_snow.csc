@@ -11,10 +11,10 @@
 #namespace zm_orange_ee_yellow_snow;
 
 preload() {
-  level._effect[#"campfire_soul"] = # "hash_59977c4c851916e0";
-  level._effect[#"hash_6d2d7bab75c2c0"] = # "hash_1a06427eff8dfe13";
-  level._effect[#"campfire_flames"] = # "hash_487863cb3f012833";
-  level._effect[#"snowpile_swap"] = # "hash_6d8c75ffdf65fe0";
+  level._effect[#"campfire_soul"] = #"hash_59977c4c851916e0";
+  level._effect[#"hash_6d2d7bab75c2c0"] = #"hash_1a06427eff8dfe13";
+  level._effect[#"campfire_flames"] = #"hash_487863cb3f012833";
+  level._effect[#"snowpile_swap"] = #"hash_6d8c75ffdf65fe0";
   init_clientfields();
   forcestreamxmodel("p8_zm_ora_specimen_container_lrg_cracked");
   forcestreamxmodel("p8_zm_ora_specimen_container_lrg_dmg");

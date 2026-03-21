@@ -52,7 +52,7 @@ function function_fd051611(s_params) {
   origin = self.origin;
   angles = self.angles;
 
-  if(self.vehicletype == # "spawner_zombietron_veh_meatball") {
+  if(self.vehicletype == #"spawner_zombietron_veh_meatball") {
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_meatball_lrg_death");
 
     if(!isDefined(level.doa.var_e37e1100)) {
@@ -60,7 +60,7 @@ function function_fd051611(s_params) {
     }
 
     def = level.doa.var_e37e1100;
-  } else if(self.vehicletype == # "spawner_zombietron_veh_meatball_med") {
+  } else if(self.vehicletype == #"spawner_zombietron_veh_meatball_med") {
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_meatball_med_death");
 
     if(!isDefined(level.doa.var_77c6357f)) {
@@ -159,7 +159,7 @@ function function_d240d5de() {
   }
 
   if(namespace_4dae815d::function_59a9cf1d() != 5) {
-    if(self.vehicletype == # "spawner_zombietron_veh_meatball") {
+    if(self.vehicletype == #"spawner_zombietron_veh_meatball") {
       self thread namespace_250e9486::function_e10af211(isDefined(self.spawnloc) ? self.spawnloc.origin : undefined, "gem_trail_red", undefined, 1, 1);
     }
 

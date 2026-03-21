@@ -252,7 +252,7 @@ function aat_response(death, inflictor, attacker, damage, flags, mod, weapon, va
     return;
   }
 
-  if(vdir.weapclass !== # "rocketlauncher" && vpoint != "MOD_PISTOL_BULLET" && vpoint != "MOD_RIFLE_BULLET" && vpoint != "MOD_GRENADE" && vpoint != "MOD_PROJECTILE" && vpoint != "MOD_EXPLOSIVE" && vpoint != "MOD_IMPACT" && (vpoint != "MOD_MELEE" || !is_true(level.var_9d1d502c))) {
+  if(vdir.weapclass !== #"rocketlauncher" && vpoint != "MOD_PISTOL_BULLET" && vpoint != "MOD_RIFLE_BULLET" && vpoint != "MOD_GRENADE" && vpoint != "MOD_PROJECTILE" && vpoint != "MOD_EXPLOSIVE" && vpoint != "MOD_IMPACT" && (vpoint != "MOD_MELEE" || !is_true(level.var_9d1d502c))) {
     return;
   }
 

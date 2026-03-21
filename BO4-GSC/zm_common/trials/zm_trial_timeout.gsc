@@ -50,12 +50,12 @@ on_begin(timer_label, var_1215371f, grace_period, var_29cadcde, var_c811984d, va
       break;
   }
 
-  if(var_afb6cb74 === # "melee_only") {
-    level.var_f6f33e5f = # "melee_only";
+  if(var_afb6cb74 === #"melee_only") {
+    level.var_f6f33e5f = #"melee_only";
     callback::on_ai_killed(&function_cbd444ad);
     array::thread_all(getplayers(), &val::set, "zm_trial_timeout", "freezecontrols", 1);
-  } else if(var_afb6cb74 === # "zombie_keep_away") {
-    level.var_f6f33e5f = # "zombie_keep_away";
+  } else if(var_afb6cb74 === #"zombie_keep_away") {
+    level.var_f6f33e5f = #"zombie_keep_away";
     callback::on_ai_spawned(&function_d3eb9969);
 
     foreach(player in getplayers()) {
@@ -80,10 +80,10 @@ on_end(round_reset) {
   callback::remove_on_spawned(&function_31f197c2);
   callback::remove_callback(#"on_host_migration_end", &function_ff66b979);
 
-  if(level.var_f6f33e5f === # "melee_only") {
+  if(level.var_f6f33e5f === #"melee_only") {
     callback::remove_on_ai_killed(&function_cbd444ad);
     array::thread_all(getplayers(), &val::reset, "zm_trial_timeout", "freezecontrols");
-  } else if(level.var_f6f33e5f === # "zombie_keep_away") {
+  } else if(level.var_f6f33e5f === #"zombie_keep_away") {
     callback::remove_on_ai_spawned(&function_d3eb9969);
 
     foreach(player in getplayers()) {
@@ -139,7 +139,7 @@ function_28663a8f() {
   level endon(#"hash_7646638df88a3656");
   wait 1;
 
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype === # "zombie") {
+  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype === #"zombie") {
     self waittill(#"completed_emerging_into_playable_area");
   }
 
@@ -245,7 +245,7 @@ function_8b87e57c(timer_label, grace_period, timer_value, var_1215371f) {
 
     player zm_trial_util::start_timer(timer_value);
 
-    if(level.var_f6f33e5f === # "melee_only") {
+    if(level.var_f6f33e5f === #"melee_only") {
       player val::reset("zm_trial_timeout", "freezecontrols");
     }
   }

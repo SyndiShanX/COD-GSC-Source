@@ -195,7 +195,7 @@ register_action(name, rankfunc, weightfunc, executefunc) {
 register_weapon(weaponname, rankfunc) {
   weapon = getweapon(weaponname);
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
@@ -1757,7 +1757,7 @@ function_e73c8946(actionparams) {
 function_22e2ba8c(actionparams) {
   weapon = actionparams.weapon;
   weaponclass = util::getweaponclass(weapon);
-  assert(weaponclass == # "weapon_sniper");
+  assert(weaponclass == #"weapon_sniper");
 
   while(!self function_cf788c22() && self is_target_enemy(actionparams) && self is_target_visible(actionparams) && self bot::weapon_loaded(weapon)) {
     self function_8a2b82ad(actionparams);

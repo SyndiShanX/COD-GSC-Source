@@ -465,7 +465,7 @@ function function_a6affb6a() {
     level scene::stop("scene_z_stk_amb_window_peek");
   }
 
-  if(self.archetype == # "civilian") {
+  if(self.archetype == #"civilian") {
     self ai::set_behavior_attribute(#"_civ_mode", "panic");
   }
 }
@@ -888,7 +888,7 @@ function function_262b28d4(is_civ, scenedef) {
   self.var_f953d31a = 1;
 
   if(is_true(is_civ)) {
-    if(self.archetype == # "civilian") {
+    if(self.archetype == #"civilian") {
       ran = randomfloat(0.15);
       self util::delay(ran, undefined, &ai::set_behavior_attribute, #"_civ_mode", "panic");
     }
@@ -923,7 +923,7 @@ function function_958168b9(is_civ, var_3d23fb80) {
   }
 
   if(waitresult._notify == "stop_vignette_scene") {
-    if(self flag::get("in_closet") && self.archetype != # "civilian") {
+    if(self flag::get("in_closet") && self.archetype != #"civilian") {
       if(isDefined(self.target)) {
         vol = getent(self.target, "targetname");
         self setgoal(vol);
@@ -986,7 +986,7 @@ function function_958168b9(is_civ, var_3d23fb80) {
       return;
     }
 
-    if(self.archetype == # "civilian") {
+    if(self.archetype == #"civilian") {
       ran = randomfloat(0.15);
       wait ran;
       self.var_c0321be9 = 1;
@@ -2134,7 +2134,7 @@ function private function_f78628e6() {
   while(!flag::get("apt_street_done")) {
     gameRef = self.script_noteworthy;
     var_ae865aeb = getscriptbundle(gameRef);
-    var_3b88de0c = # "hash_6ffbe136c9ac4c4e";
+    var_3b88de0c = #"hash_6ffbe136c9ac4c4e";
 
     if(isDefined(var_ae865aeb) && isDefined(var_ae865aeb.var_303ce84a)) {
       var_3b88de0c = var_ae865aeb.var_303ce84a;

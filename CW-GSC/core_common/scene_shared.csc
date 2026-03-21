@@ -743,7 +743,7 @@ class csceneobject: cscriptbundleobjectbase {
   }
 
   function function_9a43e31(clientnum, var_6410e385, b_camera = 0) {
-    if(_s.type === # "fakeplayer" || _s.type === # "player") {
+    if(_s.type === #"fakeplayer" || _s.type === #"player") {
       if(isDefined(level.var_29369e8c)) {
         var_3b97696d = self[[level.var_29369e8c]](clientnum, isDefined(_s.var_1b22ecf4) ? _s.var_1b22ecf4 : 0);
       }
@@ -1164,7 +1164,7 @@ class csceneobject: cscriptbundleobjectbase {
           }
         }
       }
-    } else if(_s.type === # "sharedplayer" || _s.type === # "player") {
+    } else if(_s.type === #"sharedplayer" || _s.type === #"player") {
       result = 0;
 
       if(isDefined(_o_scene) && isDefined(_o_scene._str_name) && isDefined(_o_scene._e_root) && isDefined(_str_shot)) {
@@ -1521,7 +1521,7 @@ class csceneobject: cscriptbundleobjectbase {
         _e_array[clientnum] = util::spawn_anim_model(clientnum, _s.model, _e_align.origin, _e_align.angles);
         cscriptbundleobjectbase::error(!isDefined(_e_array[clientnum]), "util::spawn_anim_model returned undefined");
 
-        if(_s.type === # "fakeplayer" || _s.type === # "player") {
+        if(_s.type === #"fakeplayer" || _s.type === #"player") {
           _e_array[clientnum] useanimtree("all_player");
           _e_array[clientnum].animtree = "all_player";
         }

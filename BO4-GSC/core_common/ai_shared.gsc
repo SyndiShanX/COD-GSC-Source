@@ -408,14 +408,14 @@ patrol(start_path_node) {
   self endon(#"death", #"stop_patrolling");
   assert(isDefined(start_path_node), self.targetname + "<dev string:x1f3>");
 
-  if(start_path_node.type === # "bad node") {
+  if(start_path_node.type === #"bad node") {
     errormsg = "<dev string:x24f>" + start_path_node.targetname + "<dev string:x266>" + int(start_path_node.origin[0]) + "<dev string:x26c>" + int(start_path_node.origin[1]) + "<dev string:x26c>" + int(start_path_node.origin[2]) + "<dev string:x270>";
     iprintln(errormsg);
 
     return;
   }
 
-  assert(start_path_node.type === # "path" || isDefined(start_path_node.scriptbundlename), "<dev string:x282>" + start_path_node.targetname + "<dev string:x299>");
+  assert(start_path_node.type === #"path" || isDefined(start_path_node.scriptbundlename), "<dev string:x282>" + start_path_node.targetname + "<dev string:x299>");
   self notify(#"go_to_spawner_target");
   self.target = undefined;
   self.old_goal_radius = self.goalradius;

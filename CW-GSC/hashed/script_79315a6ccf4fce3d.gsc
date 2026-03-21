@@ -140,7 +140,7 @@ function function_d971ecbd(time) {
 
     result = self waittilltimeout(0.5, #"damage");
 
-    if(result._notify == # "damage") {
+    if(result._notify == #"damage") {
       namespace_1e25ad94::debugmsg("Barrel (" + self getentitynumber() + ") took damage of: " + result.amount + " Health left: " + self.health);
       self.fuselit = 1;
       detonationtime -= 2000;

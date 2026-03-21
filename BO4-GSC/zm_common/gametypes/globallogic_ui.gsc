@@ -124,7 +124,7 @@ menuautoassign(comingfrommenu) {
   self closemenus();
 
   if(isDefined(level.forceallallies) && level.forceallallies) {
-    assignment = # "allies";
+    assignment = #"allies";
   } else if(level.teambased) {
     if(getdvarint(#"party_autoteams", 0) == 1) {
       if(level.allow_teamchange && (self.hasspawned || comingfrommenu)) {
@@ -161,7 +161,7 @@ menuautoassign(comingfrommenu) {
     }
 
     if(assignment == "" || getdvarint(#"party_autoteams", 0) == 0) {
-      assignment = # "allies";
+      assignment = #"allies";
     }
 
     if(assignment == self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
@@ -240,7 +240,7 @@ teamwithlowestscore() {
 }
 
 pickteamfromscores(teams) {
-  assignment = # "allies";
+  assignment = #"allies";
 
   if(teamscoresequal()) {
     assignment = teams[randomint(teams.size)];

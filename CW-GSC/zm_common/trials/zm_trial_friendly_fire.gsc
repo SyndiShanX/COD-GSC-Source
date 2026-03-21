@@ -55,7 +55,7 @@ function private on_begin(var_9e0a2a85 = 1) {
   callback::on_player_damage(&on_player_damage);
   level.var_edae191d = 1;
   var_6a94fd5e = 4 - getplayers().size;
-  var_be33ceec = # "allies";
+  var_be33ceec = #"allies";
   level notify(#"hash_d3e36871aa6829f");
 
   for(i = 0; i < var_6a94fd5e; i++) {

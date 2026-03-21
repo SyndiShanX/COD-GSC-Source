@@ -371,7 +371,7 @@ function function_6b6cc0a8() {
   while(true) {
     result = self waittill(#"missile_fire");
 
-    if(isDefined(result.weapon) && result.weapon.name === # "zombietron_launcher_2") {
+    if(isDefined(result.weapon) && result.weapon.name === #"zombietron_launcher_2") {
       self thread function_64adaae3();
     }
   }

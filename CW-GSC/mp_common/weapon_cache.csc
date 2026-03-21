@@ -150,7 +150,7 @@ function private function_a979e61b(localclientnum) {
     return;
   }
 
-  if(self.weapon.statname === # "ultimate_turret") {
+  if(self.weapon.statname === #"ultimate_turret") {
     return 0;
   }
 

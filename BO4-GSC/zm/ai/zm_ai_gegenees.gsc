@@ -302,7 +302,7 @@ function_7e633e59() {
       continue;
     }
 
-    if(zombie.archetype === # "gegenees") {
+    if(zombie.archetype === #"gegenees") {
       continue;
     }
 
@@ -562,7 +562,7 @@ gegeneestargetservice(entity) {
     var_eee191fa = 1;
 
     if(isDefined(entity.zombie_poi[1].var_8305fd51)) {
-      if(entity.zombie_poi[1].var_8305fd51 == # "thunderstorm" || entity.zombie_poi[1].var_8305fd51 == # "charon_pool") {
+      if(entity.zombie_poi[1].var_8305fd51 == #"thunderstorm" || entity.zombie_poi[1].var_8305fd51 == #"charon_pool") {
         var_eee191fa = 0;
         entity.zombie_poi = undefined;
       }
@@ -848,7 +848,7 @@ function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
         }
       }
 
-      if(var_dd54fdb1.type === # "armor") {
+      if(var_dd54fdb1.type === #"armor") {
         attacker util::show_hit_marker(!isalive(self));
 
         if(isDefined(dir)) {
@@ -881,7 +881,7 @@ function_ca5688e3(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 }
 
 function_a231dd3b(s_params) {
-  if(self.archetype != # "gegenees") {
+  if(self.archetype != #"gegenees") {
     return;
   }
 
@@ -915,12 +915,12 @@ function_a231dd3b(s_params) {
     }
 
     self.var_d0686fde = [];
-    self.var_d0686fde[self.var_d0686fde.size] = # "fire_sale";
-    self.var_d0686fde[self.var_d0686fde.size] = # "nuke";
+    self.var_d0686fde[self.var_d0686fde.size] = #"fire_sale";
+    self.var_d0686fde[self.var_d0686fde.size] = #"nuke";
 
     if(var_67a1b262) {
-      self.var_d0686fde[self.var_d0686fde.size] = # "full_ammo";
-      self.var_d0686fde[self.var_d0686fde.size] = # "full_ammo";
+      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
+      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
     }
 
     level.var_51c8013a = n_time;

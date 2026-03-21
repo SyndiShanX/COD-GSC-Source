@@ -210,7 +210,7 @@ function function_86e8d9af(n_radius = 200) {
 
   foreach(ai_zombie in a_zombies) {
     if(isalive(ai_zombie)) {
-      if(ai_zombie.zm_ai_category === # "normal") {
+      if(ai_zombie.zm_ai_category === #"normal") {
         v_dir = vectornormalize(ai_zombie.origin - self.origin);
         v_launch = v_dir * randomintrange(80, 100) + (0, 0, 150);
         ai_zombie zm_utility::function_ffc279(v_launch, self.owner, ai_zombie.health, self.weapon);

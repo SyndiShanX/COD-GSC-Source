@@ -99,14 +99,14 @@ function_81058b09(var_d92ac80e) {
     ai dodamage(1200, v_explosion_origin, self, self, "none", "MOD_EXPLOSIVE", 0, var_d92ac80e);
 
     if(isalive(ai)) {
-      if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
+      if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
         if(!(isDefined(ai.knockdown) && ai.knockdown)) {
           ai ai::stun();
         }
       } else {
         ai zombie_utility::setup_zombie_knockdown(v_explosion_origin);
       }
-    } else if(isDefined(ai) && (ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "enhanced")) {
+    } else if(isDefined(ai) && (ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"enhanced")) {
       ai zm_spawner::zombie_explodes_intopieces(0);
     }
 

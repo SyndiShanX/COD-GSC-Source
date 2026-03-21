@@ -38,7 +38,7 @@ function enable_death_perception_perk_for_level() {
 function on_item_pickup(s_params) {
   itementry = s_params.item.itementry;
 
-  if(itementry.itemtype === # "survival_scrap") {
+  if(itementry.itemtype === #"survival_scrap") {
     if(isPlayer(self)) {
       e_player = self;
     } else {
@@ -49,25 +49,25 @@ function on_item_pickup(s_params) {
       if(namespace_e86ffa8::function_cb561923(3)) {
         rarity = itementry.rarity;
 
-        if(itementry.name === # "scrap_legendary_item_sr") {
+        if(itementry.name === #"scrap_legendary_item_sr") {
           var_595a11bc = 25 * itementry.amount * 0.2;
           e_player namespace_2a9f256a::function_a6d4221f(var_595a11bc);
           return;
         }
 
-        if(itementry.name === # "scrap_epic_item_sr") {
+        if(itementry.name === #"scrap_epic_item_sr") {
           var_595a11bc = 300 * itementry.amount * 0.2;
           e_player namespace_2a9f256a::function_afab250a(var_595a11bc);
           return;
         }
 
-        if(itementry.name === # "scrap_item_harvesting_sr") {
+        if(itementry.name === #"scrap_item_harvesting_sr") {
           var_595a11bc = 200 * 0.2;
           e_player namespace_2a9f256a::function_afab250a(var_595a11bc);
           return;
         }
 
-        if(rarity === # "rare") {
+        if(rarity === #"rare") {
           var_595a11bc = 10 * itementry.amount * 0.2;
           e_player namespace_2a9f256a::function_a6d4221f(int(var_595a11bc));
           return;

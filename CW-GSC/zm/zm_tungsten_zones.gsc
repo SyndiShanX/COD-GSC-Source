@@ -317,9 +317,9 @@ function zone_init() {
   namespace_f0b43eb5::create_challenge(#"hash_453a742eed680932", 90, "zone_xxx_club_roof", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_xxx_club_roof", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
   namespace_f0b43eb5::create_challenge(#"hash_30c036366e17895", 90, "zone_pizza_parlor", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_pizza_parlor", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_2c457fb4d5c4a3b9", 90, "zone_dark_aether_lab_upper", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_dark_aether_lab_upper", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-  s_challenge.var_4e0096cd = # "hash_19f7784bc90ba3c5";
+  s_challenge.var_4e0096cd = #"hash_19f7784bc90ba3c5";
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_6cda1bb2296c5334", 90, "zone_dark_aether_lab_lower", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_dark_aether_lab_lower", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
-  s_challenge.var_4e0096cd = # "hash_366946412ba7b470";
+  s_challenge.var_4e0096cd = #"hash_366946412ba7b470";
   namespace_f0b43eb5::create_challenge(#"hash_6f2d55d2d3f4d404", 90, "zone_video_store_2f", undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_video_store_2f", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
   var_f8f0b389 = struct::get("s_obj_challenge_zone_tv_repair");
 
@@ -539,103 +539,103 @@ function function_27028b8e(str_zone) {
 
   switch (str_zone) {
     case # "zone_anytown_usa_backlot":
-      str_display = # "hash_13d56fe3ab409e5";
+      str_display = #"hash_13d56fe3ab409e5";
       break;
     case # "zone_anytown_usa_east":
-      str_display = # "hash_184b38d3bddc3620";
+      str_display = #"hash_184b38d3bddc3620";
       break;
     case # "zone_drinks_bar_roof":
-      str_display = # "hash_7cc77ccbc8b3f62a";
+      str_display = #"hash_7cc77ccbc8b3f62a";
       break;
     case # "zone_anytown_usa_rooftops":
-      str_display = # "hash_6dc19a704897a7a3";
+      str_display = #"hash_6dc19a704897a7a3";
       break;
     case # "zone_anytown_usa_west":
-      str_display = # "hash_261ebc5ca63b1d5a";
+      str_display = #"hash_261ebc5ca63b1d5a";
       break;
     case # "zone_arcade":
-      str_display = # "hash_4f1016f8fb60b23e";
+      str_display = #"hash_4f1016f8fb60b23e";
       break;
     case # "zone_board_room_01":
-      str_display = # "hash_54f3ecaca280008c";
+      str_display = #"hash_54f3ecaca280008c";
       break;
     case # "zone_board_room_02":
-      str_display = # "hash_b204e33898248cf";
+      str_display = #"hash_b204e33898248cf";
       break;
     case # "zone_bunker_entrance_03":
     case # "zone_bunker_entrance_02":
     case # "zone_bunker_entrance_01":
-      str_display = # "hash_47d4a8c4751828ea";
+      str_display = #"hash_47d4a8c4751828ea";
       break;
     case # "zone_burger_town":
-      str_display = # "hash_5a9a6d8fdf9e5f58";
+      str_display = #"hash_5a9a6d8fdf9e5f58";
       break;
     case # "zone_cinema":
-      str_display = # "hash_579d50ea19f0fe9";
+      str_display = #"hash_579d50ea19f0fe9";
       break;
     case # "zone_concessions":
-      str_display = # "hash_5a38dd3025ad247f";
+      str_display = #"hash_5a38dd3025ad247f";
       break;
     case # "zone_diner":
-      str_display = # "hash_3b6bb42366cfd4aa";
+      str_display = #"hash_3b6bb42366cfd4aa";
       break;
     case # "zone_drinks_bar":
-      str_display = # "hash_547cca8e6424b8f3";
+      str_display = #"hash_547cca8e6424b8f3";
       break;
     case # "zone_helipads":
     case # "zone_helipads_portal_room":
     case # "zone_helipads_4":
     case # "zone_helipads_3":
     case # "zone_helipads_2":
-      str_display = # "hash_3c025d87182e7e3c";
+      str_display = #"hash_3c025d87182e7e3c";
       break;
     case # "zone_high_tide_bar":
-      str_display = # "hash_19e0e208ab46aaf5";
+      str_display = #"hash_19e0e208ab46aaf5";
       break;
     case # "zone_main_street_02":
     case # "zone_main_street_01":
-      str_display = # "hash_37cb3084f1ed10a7";
+      str_display = #"hash_37cb3084f1ed10a7";
       break;
     case # "zone_main_street_backlot":
-      str_display = # "hash_5b061064f7d4ef36";
+      str_display = #"hash_5b061064f7d4ef36";
       break;
     case # "zone_observation":
-      str_display = # "hash_342e6dc1966544a8";
+      str_display = #"hash_342e6dc1966544a8";
       break;
     case # "zone_pizza_parlor":
-      str_display = # "hash_7ce2860b6f3b7061";
+      str_display = #"hash_7ce2860b6f3b7061";
       break;
     case # "zone_service_tunnels_01":
     case # "zone_service_tunnels_02":
     case # "zone_service_tunnels_03":
-      str_display = # "hash_72ac36585c1de4c1";
+      str_display = #"hash_72ac36585c1de4c1";
       break;
     case # "zone_town_square_01":
-      str_display = # "hash_18ff37374dac36f4";
+      str_display = #"hash_18ff37374dac36f4";
       break;
     case # "zone_tv_repair":
-      str_display = # "hash_229d0feeecd8c374";
+      str_display = #"hash_229d0feeecd8c374";
       break;
     case # "zone_video_store":
-      str_display = # "hash_7115e7d86a5f7a57";
+      str_display = #"hash_7115e7d86a5f7a57";
       break;
     case # "zone_xxx_club":
-      str_display = # "hash_64e9623136c6d327";
+      str_display = #"hash_64e9623136c6d327";
       break;
     case # "zone_high_tide_bar_roof":
-      str_display = # "hash_59a9723a6effa74c";
+      str_display = #"hash_59a9723a6effa74c";
       break;
     case # "zone_main_street_bridge":
-      str_display = # "hash_2789b3302c124ddd";
+      str_display = #"hash_2789b3302c124ddd";
       break;
     case # "zone_video_store_roof":
-      str_display = # "hash_22403c671894486";
+      str_display = #"hash_22403c671894486";
       break;
     case # "zone_video_store_2f":
-      str_display = # "hash_ac2ef2906462ba8";
+      str_display = #"hash_ac2ef2906462ba8";
       break;
     case # "zone_xxx_club_roof":
-      str_display = # "hash_3399f0fdbae86fc9";
+      str_display = #"hash_3399f0fdbae86fc9";
       break;
     default:
       str_display = undefined;

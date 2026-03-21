@@ -134,13 +134,13 @@ function snipercam() {
     if(isentity(victim) && ishash(victim.aitype)) {
       alias = undefined;
 
-      if(victim.aitype == # "hash_781db9049c2c6ddf") {
+      if(victim.aitype == #"hash_781db9049c2c6ddf") {
         alias = "vox_duga_park_sniperdeath";
-      } else if(victim.aitype == # "hash_19de03b4f022b1d8") {
+      } else if(victim.aitype == #"hash_19de03b4f022b1d8") {
         alias = "vox_duga_lazr_sniperdeath";
-      } else if(victim.aitype == # "hash_7ea7dd19debbc45d") {
+      } else if(victim.aitype == #"hash_7ea7dd19debbc45d") {
         alias = "vox_duga_masn_sniperdeath";
-      } else if(victim.aitype == # "hash_6cc1e6454859f3bc") {
+      } else if(victim.aitype == #"hash_6cc1e6454859f3bc") {
         alias = "vox_duga_wood_sniperdeath";
       }
 

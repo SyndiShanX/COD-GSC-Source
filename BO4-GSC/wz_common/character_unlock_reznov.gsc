@@ -111,7 +111,7 @@ on_player_killed() {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(isDefined(itementry) && itementry.name === # "cu21_item") {
+  if(isDefined(itementry) && itementry.name === #"cu21_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {

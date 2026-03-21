@@ -138,7 +138,7 @@ function private function_1e0501c8(eventstruct) {
   foreach(actor in var_9d27f60c) {
     var_dfc4aab4 = actor getteam();
 
-    if(var_dfc4aab4 == # "axis") {
+    if(var_dfc4aab4 == #"axis") {
       actor dodamage(1, dynent.origin, undefined, undefined, 0, "MOD_UNKNOWN", 0, undefined, undefined, var_f2f0344e);
     }
   }
@@ -147,7 +147,7 @@ function private function_1e0501c8(eventstruct) {
 function private event_handler[event_9e981c4] function_87fb14da(eventstruct) {
   dynent = eventstruct.ent;
 
-  if(isDefined(dynent.targetname) && dynent.targetname == # "hash_59014f81a0bff5e7") {
+  if(isDefined(dynent.targetname) && dynent.targetname == #"hash_59014f81a0bff5e7") {
     function_1e0501c8(eventstruct);
   }
 }

@@ -122,7 +122,7 @@ function function_ab048a51(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(is_true(self.isdog)) {
     fx_tag = "J_Spine1";
-  } else if(self.archetype !== # "zombie") {
+  } else if(self.archetype !== #"zombie") {
     fx_tag = "tag_origin";
   }
 
@@ -222,13 +222,13 @@ function function_ba2d251(localclientnum, target, val) {
       fxname = distance > 200 ? # "hash_402f9042dc87f055" : # "hash_4381a516acca3cfa";
       break;
     case 3:
-      fxname = # "hash_794f3c866e2f2c33";
+      fxname = #"hash_794f3c866e2f2c33";
       break;
     case 4:
-      fxname = # "hash_e3fb468d5dacb91";
+      fxname = #"hash_e3fb468d5dacb91";
       break;
     case 5:
-      fxname = # "hash_4cca54a0f0586d88";
+      fxname = #"hash_4cca54a0f0586d88";
       break;
     default:
       return;
@@ -454,7 +454,7 @@ function function_7a17571a(localclientnum, newval) {
 }
 
 function function_20c975a8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_fa5b0a8f = # "hash_432baacca32a077d";
+  var_fa5b0a8f = #"hash_432baacca32a077d";
 
   if(bwastimejump) {
     self playrumblelooponentity(fieldname, var_fa5b0a8f);
@@ -574,7 +574,7 @@ function function_2eaa501a(localclientnum) {
   }
 
   self.var_36d7ee48[localclientnum] = [];
-  var_18e19c80 = # "hash_7bd6bc3aea3ff42f";
+  var_18e19c80 = #"hash_7bd6bc3aea3ff42f";
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 16)) {
     function_e2c3df2f(localclientnum, var_18e19c80, "right_arm", "j_elbow_ri");
@@ -663,7 +663,7 @@ function private function_cd07a2bb(localclientnum, oldval, newval, bnewent, bini
 
   if(is_true(self.isdog)) {
     fx_tag = "J_Spine1";
-  } else if(self.archetype !== # "zombie") {
+  } else if(self.archetype !== #"zombie") {
     fx_tag = "tag_origin";
   }
 
@@ -787,7 +787,7 @@ function private function_12050e71(var_dd6fbcf0) {
 function function_48f0fe69(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
     self.var_7c1596d6 = util::playFXOnTag(fieldname, "zm_weapons/fx9_ww_ieu_shockwave_trail_1p", self, "tag_origin");
-    var_fa5b0a8f = # "hash_165ad2675780cb74";
+    var_fa5b0a8f = #"hash_165ad2675780cb74";
     self playrumblelooponentity(fieldname, var_fa5b0a8f);
 
     if(!isDefined(self.var_d7319ee)) {

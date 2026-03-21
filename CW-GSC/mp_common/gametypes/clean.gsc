@@ -64,17 +64,17 @@ function event_handler[gametype_init] main(eventstruct) {
   level.cleandropweapon = getweapon(#"dogtag_drop");
   level.goalfx = "ui/fx8_fracture_deposit_point";
   level.var_6c5ba305 = "ui/fx8_fracture_deposit_point_end";
-  level.var_dfce3f1c = # "clean_deposit";
-  level.var_7e9929c6 = # "hash_76315cb50906f6a9";
-  level.var_f3ac1626 = # "hash_7fcd27b1d6d34d4";
+  level.var_dfce3f1c = #"clean_deposit";
+  level.var_7e9929c6 = #"hash_76315cb50906f6a9";
+  level.var_f3ac1626 = #"hash_7fcd27b1d6d34d4";
   level.var_ce802423 = 1;
 
   if(is_true(level.var_c5e28dc5)) {
     level.goalfx = "ui/fx8_fracture_deposit_point_ire";
     level.var_6c5ba305 = "ui/fx8_fracture_deposit_point_end_ire";
-    level.var_dfce3f1c = # "hash_6c8a4a73bc07da57";
-    level.var_7e9929c6 = # "hash_44649de0c0654449";
-    level.var_f3ac1626 = # "hash_334f9a386d27edb4";
+    level.var_dfce3f1c = #"hash_6c8a4a73bc07da57";
+    level.var_7e9929c6 = #"hash_44649de0c0654449";
+    level.var_f3ac1626 = #"hash_334f9a386d27edb4";
   }
 
   callback::on_connect(&onplayerconnect);
@@ -223,7 +223,7 @@ function function_b25ab1e7() {
   var_ba985a3c = undefined;
 
   foreach(taco in level.tacos) {
-    if(taco.interactteam == # "group_none") {
+    if(taco.interactteam == #"group_none") {
       return taco;
     }
 
@@ -452,7 +452,7 @@ function function_bad2b0d4(origin) {
 function function_b8a3dde4() {
   level endon(#"game_ended");
   self.baseeffect = spawnfx(level.goalfx, self.effectorigin);
-  self.baseeffect.team = # "none";
+  self.baseeffect.team = #"none";
   triggerfx(self.baseeffect, 0.001);
 
   if(is_true(level.var_c5e28dc5)) {
@@ -480,7 +480,7 @@ function function_b8a3dde4() {
 
   self.baseeffect delete();
   self.baseeffect = spawnfx(level.var_6c5ba305, self.effectorigin);
-  self.baseeffect.team = # "none";
+  self.baseeffect.team = #"none";
   triggerfx(self.baseeffect, 0.001);
   self.baseeffect = spawnfx(level.var_6c5ba305, self.effectorigin);
 }

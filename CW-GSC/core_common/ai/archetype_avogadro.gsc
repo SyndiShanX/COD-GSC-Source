@@ -344,7 +344,7 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
     var_31e96b81 = int(var_3cddb028);
 
     foreach(weakpoint in self.var_5ace757d) {
-      if(weakpoint.type === # "armor" && weakpoint.currstate === 1) {
+      if(weakpoint.type === #"armor" && weakpoint.currstate === 1) {
         namespace_81245006::damageweakpoint(weakpoint, var_31e96b81);
 
         if(namespace_81245006::function_f29756fe(weakpoint) === 3 && isDefined(weakpoint.var_f371ebb0)) {
@@ -361,7 +361,7 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
     weakpoint = namespace_81245006::function_73ab4754(self, boneindex, 1);
   }
 
-  if(isDefined(weakpoint) && weakpoint.type === # "armor" && namespace_81245006::function_f29756fe(weakpoint) !== 3) {
+  if(isDefined(weakpoint) && weakpoint.type === #"armor" && namespace_81245006::function_f29756fe(weakpoint) !== 3) {
     var_ebcff177 = 3;
     vdir = 0.5 * vdir;
 
@@ -585,7 +585,7 @@ function function_b1b41f33(owner) {
     return;
   }
 
-  if((waitresult._notify == # "explode" || waitresult._notify == # "projectile_impact_explode") && isDefined(waitresult.position)) {
+  if((waitresult._notify == #"explode" || waitresult._notify == #"projectile_impact_explode") && isDefined(waitresult.position)) {
     owner callback::callback(#"hash_c1d64b00f1dc607", {
       #origin: waitresult.position, #radius: self.weapon.explosionradius, #jammer: self
     });
@@ -1281,22 +1281,22 @@ function function_de781d41(entity) {
 }
 
 function function_598bf886(entity) {
-  nextstate = # "hash_24e69bf779de4940";
+  nextstate = #"hash_24e69bf779de4940";
 
   switch (entity.var_e8a7f45d.state) {
     case # "hash_24e69bf779de4940":
       random = randomint(100);
 
       if(random < 33) {
-        nextstate = # "hash_a69905121714d7c";
+        nextstate = #"hash_a69905121714d7c";
       } else if(random < 66) {
-        nextstate = # "hash_46c85a951b2258a9";
+        nextstate = #"hash_46c85a951b2258a9";
       }
 
       break;
     case # "hash_a69905121714d7c":
     case # "hash_46c85a951b2258a9":
-      nextstate = # "hash_24e69bf779de4940";
+      nextstate = #"hash_24e69bf779de4940";
       break;
     default:
       break;
@@ -1309,10 +1309,10 @@ function function_598bf886(entity) {
     angles = vectortoangles(dirtoenemy);
     angles = (0, angles[1], 0);
 
-    if(nextstate == # "hash_a69905121714d7c") {
+    if(nextstate == #"hash_a69905121714d7c") {
       dir = anglestoright(angles) * -1;
       movepos = entity.origin + dir * randomintrange(100, 300);
-    } else if(nextstate == # "hash_46c85a951b2258a9") {
+    } else if(nextstate == #"hash_46c85a951b2258a9") {
       dir = anglestoright(angles);
       movepos = entity.origin + dir * randomintrange(100, 300);
     } else {

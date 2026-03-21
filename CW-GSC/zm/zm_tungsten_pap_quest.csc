@@ -51,7 +51,7 @@ function function_34eb3249(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump) {
     var_1da0aee8 = getent(fieldname, "anytown_usa_teleporter", "targetname");
 
-    if(var_1da0aee8.model !== # "p9_zm_gold_teleporter_b") {
+    if(var_1da0aee8.model !== #"p9_zm_gold_teleporter_b") {
       var_1da0aee8 setModel(#"p9_zm_gold_teleporter_b");
     }
 

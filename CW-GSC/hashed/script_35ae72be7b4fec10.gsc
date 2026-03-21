@@ -136,10 +136,10 @@ function private function_c63f7472(model) {
 
 function create_waypoint(uid = "waypoint", ent, image, text, offset, tag, var_7bd05154 = 1, var_754bedbb = 1, clamp = 1, var_577a0c84 = 0, progress) {
   uid = string(uid) + ent getentitynumber();
-  widget_type = # "hash_14992af6bd994ba2";
+  widget_type = #"hash_14992af6bd994ba2";
 
   if(isDefined(progress)) {
-    widget_type = # "hash_266631c3a5d0ffdb";
+    widget_type = #"hash_266631c3a5d0ffdb";
   }
 
   create(uid, widget_type);

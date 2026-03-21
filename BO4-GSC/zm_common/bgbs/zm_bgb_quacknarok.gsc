@@ -36,7 +36,7 @@ activation() {
 deactivation() {}
 
 on_ai_spawned() {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     var_85574d7a = 0;
 
     foreach(player in getplayers()) {

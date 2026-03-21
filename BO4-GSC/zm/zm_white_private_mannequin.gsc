@@ -445,7 +445,7 @@ function_26edbcdc(inflictor, attacker, damage, flags, meansofdeath, weapon, poin
 }
 
 function_8527738e() {
-  level._effect[#"hash_fc6d4d4b4df98f8"] = # "hash_4419642343624864";
+  level._effect[#"hash_fc6d4d4b4df98f8"] = #"hash_4419642343624864";
   level.var_c8b6a556 = getent("pernel_paper_stack", "targetname");
   level.var_c8b6a556 setCanDamage(1);
   level.var_c8b6a556 val::set("private_mannequin_quest_paper_stack", "allowDeath", 0);

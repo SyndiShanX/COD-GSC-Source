@@ -13,13 +13,13 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   if(!isDefined(game.state)) {
-    game.state = # "pregame";
+    game.state = #"pregame";
   }
 }
 
 function event_handler[event_f7d4a05b] function_69452d92(eventstruct) {
   if(!isDefined(game.state)) {
-    game.state = # "pregame";
+    game.state = #"pregame";
   }
 
   if(eventstruct.gamestate !== game.state) {

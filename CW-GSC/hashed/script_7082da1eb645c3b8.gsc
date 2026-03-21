@@ -148,7 +148,7 @@ function function_c73d21cc() {
   level.woods ai::set_behavior_attribute("vignette_mode", "fast");
   level.woods battlechatter::function_2ab9360b(0);
 
-  if(var_63d2d7ec._notify === # "flg_elevator_all_enemies_dead") {
+  if(var_63d2d7ec._notify === #"flg_elevator_all_enemies_dead") {
     level thread namespace_4bd68414::function_ffca973f();
     level thread function_204f03cb();
     level flag::wait_till("flg_elevator_player_interact");
@@ -644,13 +644,13 @@ function function_ea2e6360() {
 
   switch (randomintrange(1, 3)) {
     case 1:
-      var_bdd9eaad = # "terminal_hint_sticky_note";
+      var_bdd9eaad = #"terminal_hint_sticky_note";
       break;
     case 2:
-      var_bdd9eaad = # "terminal_hint_postcard";
+      var_bdd9eaad = #"terminal_hint_postcard";
       break;
     case 3:
-      var_bdd9eaad = # "terminal_hint_poster";
+      var_bdd9eaad = #"terminal_hint_poster";
       break;
     default:
 

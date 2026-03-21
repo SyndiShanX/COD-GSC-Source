@@ -178,7 +178,7 @@ function_2f394f36() {
 }
 
 function_836af3b3(bundle, state) {
-  hintstring = # "";
+  hintstring = #"";
 
   if(isDefined(bundle) && isDefined(bundle.dynentstates) && isDefined(bundle.dynentstates[state]) && isDefined(bundle.dynentstates[state].hintstring)) {
     hintstring = bundle.dynentstates[state].hintstring;

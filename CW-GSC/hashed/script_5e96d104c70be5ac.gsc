@@ -503,11 +503,11 @@ function function_143fa1b9() {
   playerdata.var_c3b47473 = isDefined(game.telemetry.var_dd636281) ? game.telemetry.var_dd636281 : 0;
 
   if(is_true(level.host_ended_game)) {
-    playerdata.var_a3ba1678 = # "host_aborted";
+    playerdata.var_a3ba1678 = #"host_aborted";
   } else if(is_true(self.var_b9ff264c)) {
-    playerdata.var_a3ba1678 = # "win";
+    playerdata.var_a3ba1678 = #"win";
   } else {
-    playerdata.var_a3ba1678 = # "loss";
+    playerdata.var_a3ba1678 = #"loss";
   }
 
   self function_678f57c8(#"hash_60754262dd09efac", playerdata);
@@ -862,12 +862,12 @@ function private on_player_damage(params) {
 }
 
 function private on_ai_killed(params) {
-  death_type = # "normal";
+  death_type = #"normal";
 
   if(params.smeansofdeath === "MOD_MELEE") {
-    death_type = # "melee";
+    death_type = #"melee";
   } else if(zm_utility::function_4562a3ef(params.shitloc, params.vpoint)) {
-    death_type = # "critical";
+    death_type = #"critical";
   }
 
   var_39872854 = int(gettime() - (isDefined(self.telemetry.spawn_time) ? self.telemetry.spawn_time : 0));
@@ -888,14 +888,14 @@ function private on_ai_killed(params) {
   };
   var_b850e84d = undefined;
 
-  if(self.zm_ai_category === # "normal") {
-    var_b850e84d = # "hash_4aa10c55601000bd";
-  } else if(self.zm_ai_category === # "special") {
-    var_b850e84d = # "hash_27f21bbb589d2075";
-  } else if(self.zm_ai_category === # "elite") {
-    var_b850e84d = # "hash_214bfcabc3ccf495";
-  } else if(self.zm_ai_category === # "boss") {
-    var_b850e84d = # "hash_60436c4b0bca1ab7";
+  if(self.zm_ai_category === #"normal") {
+    var_b850e84d = #"hash_4aa10c55601000bd";
+  } else if(self.zm_ai_category === #"special") {
+    var_b850e84d = #"hash_27f21bbb589d2075";
+  } else if(self.zm_ai_category === #"elite") {
+    var_b850e84d = #"hash_214bfcabc3ccf495";
+  } else if(self.zm_ai_category === #"boss") {
+    var_b850e84d = #"hash_60436c4b0bca1ab7";
   }
 
   if(isPlayer(params.eattacker) && ishash(var_b850e84d)) {

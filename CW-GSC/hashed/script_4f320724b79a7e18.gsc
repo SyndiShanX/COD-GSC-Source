@@ -479,7 +479,7 @@ function function_b9e0d497(turret_index, target, offset, enemy) {
 
 function getenemyarray(include_ai, include_player) {
   enemyarray = [];
-  enemy_team = # "allies";
+  enemy_team = #"allies";
 
   if(is_true(include_ai)) {
     aiarray = getaiteamarray(enemy_team);

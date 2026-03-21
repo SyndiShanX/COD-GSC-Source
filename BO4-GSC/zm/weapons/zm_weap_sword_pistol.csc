@@ -26,17 +26,17 @@ __init__() {
   clientfield::register("vehicle", "" + # "viper_bite_projectile_impact", 1, 1, "counter", &viper_bite_projectile_impact, 1, 0);
   clientfield::register("actor", "" + # "viper_bite_bitten_fx", 1, 1, "int", &viper_bite_bitten_fx, 1, 0);
   clientfield::register("toplayer", "" + # "swordpistol_rumble", 1, 3, "counter", &swordpistol_rumble, 0, 0);
-  level._effect[#"hash_25626300bbf56aa7"] = # "hash_6a8080a7153541f6";
-  level._effect[#"hash_67085795f324f6b5"] = # "hash_6a8080a7153541f6";
-  level._effect[#"hash_72dcd3be23419b87"] = # "hash_597abd90e7ff80e0";
-  level._effect[#"hash_2cce5c832c2c19be"] = # "hash_358368e2fa3ca4f1";
-  level._effect[#"hash_6890c4ba9ae61d0b"] = # "hash_28918c31efbce546";
-  level._effect[#"hash_206a58239ffb5e0f"] = # "hash_73d097f983d47f3c";
-  level._effect[#"viper_bite_projectile"] = # "hash_2ecc9e78037c5407";
-  level._effect[#"viper_bite_projectile_impact"] = # "hash_571fb567ca3d4add";
-  level._effect[#"hash_b784dd4d224f7e"] = # "hash_90808e1ff32f322";
-  level._effect[#"dragon_roar_impact"] = # "hash_128e20307b969081";
-  level._effect[#"dragon_roar_explosion"] = # "hash_1d90aa9406e48582";
+  level._effect[#"hash_25626300bbf56aa7"] = #"hash_6a8080a7153541f6";
+  level._effect[#"hash_67085795f324f6b5"] = #"hash_6a8080a7153541f6";
+  level._effect[#"hash_72dcd3be23419b87"] = #"hash_597abd90e7ff80e0";
+  level._effect[#"hash_2cce5c832c2c19be"] = #"hash_358368e2fa3ca4f1";
+  level._effect[#"hash_6890c4ba9ae61d0b"] = #"hash_28918c31efbce546";
+  level._effect[#"hash_206a58239ffb5e0f"] = #"hash_73d097f983d47f3c";
+  level._effect[#"viper_bite_projectile"] = #"hash_2ecc9e78037c5407";
+  level._effect[#"viper_bite_projectile_impact"] = #"hash_571fb567ca3d4add";
+  level._effect[#"hash_b784dd4d224f7e"] = #"hash_90808e1ff32f322";
+  level._effect[#"dragon_roar_impact"] = #"hash_128e20307b969081";
+  level._effect[#"dragon_roar_explosion"] = #"hash_1d90aa9406e48582";
 }
 
 function_8e1552b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

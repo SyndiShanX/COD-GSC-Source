@@ -510,7 +510,7 @@ function_f665fde0(trig) {
   unitrigger_stub.script_parameters = trig.script_parameters;
   unitrigger_stub.script_string = trig.script_string;
   unitrigger_stub.cursor_hint = "HINT_NOICON";
-  unitrigger_stub.hint_string = # "hash_a502ccb8fec4c7a";
+  unitrigger_stub.hint_string = #"hash_a502ccb8fec4c7a";
   unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
   unitrigger_stub.require_look_at = 1;
   unitrigger_stub.require_look_toward = 0;
@@ -845,7 +845,7 @@ function_8109ae21(player) {
   }
 
   if(blueprints.size < 1 || !array::contains(blueprints, self.blueprint)) {
-    self.hint_string = # "hash_64cb545dd18c607";
+    self.hint_string = #"hash_64cb545dd18c607";
 
     if(zm_utility::get_story() == 1 && isDefined(self.var_c2f40a58) && isDefined(self.var_c2f40a58.is_visible) && self.var_c2f40a58.is_visible) {
       self.var_c2f40a58 ghost();
@@ -1094,7 +1094,7 @@ function_230f6303() {
 
 function_9693e041(player) {
   if(player function_7bffa1ac(self.blueprint.var_54a97edd)) {
-    self.hint_string = # "hash_718d32f9e8cea17";
+    self.hint_string = #"hash_718d32f9e8cea17";
     self.cost = undefined;
     return true;
   }
@@ -1113,7 +1113,7 @@ function_9693e041(player) {
       self.hint_string = isDefined(hint_str) ? hint_str : backup_str;
       _shad_turret_debug_server = 1;
     } else {
-      self.hint_string = # "hash_53fd856df9288be7";
+      self.hint_string = #"hash_53fd856df9288be7";
       self.cost = undefined;
       return true;
     }
@@ -1124,7 +1124,7 @@ function_9693e041(player) {
     self.hint_string = isDefined(hint_str) ? hint_str : "";
     self.cost = undefined;
   } else if(zm_trial_disable_buys::is_active()) {
-    self.hint_string = # "hash_55d25caf8f7bbb2f";
+    self.hint_string = #"hash_55d25caf8f7bbb2f";
   } else {
     if(!(isDefined(_shad_turret_debug_server) && _shad_turret_debug_server)) {
       str = self.blueprint.var_391591d0;
@@ -1385,10 +1385,10 @@ function_6e16f902() {
 
 function_15d10d06(player) {
   if(player function_7bffa1ac(self.blueprint.var_54a97edd)) {
-    self.hint_string = # "hash_7b4e31b02c13ed59";
+    self.hint_string = #"hash_7b4e31b02c13ed59";
     return true;
   } else if(isDefined(self.bought) && self.bought) {
-    self.hint_string = # "hash_48157c44f8771b6c";
+    self.hint_string = #"hash_48157c44f8771b6c";
     return true;
   }
 
@@ -1433,9 +1433,9 @@ function_42673a26(player) {
   }
 
   if(player function_7bffa1ac(self.stub.blueprint.var_54a97edd)) {
-    self.stub.hint_string = # "hash_7b4e31b02c13ed59";
+    self.stub.hint_string = #"hash_7b4e31b02c13ed59";
   } else {
-    self.stub.hint_string = # "hash_48157c44f8771b6c";
+    self.stub.hint_string = #"hash_48157c44f8771b6c";
   }
 
   self sethintstring(self.stub.hint_string);

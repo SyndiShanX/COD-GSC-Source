@@ -298,7 +298,7 @@ function_87d0a127(grenadeent, smokeweapon) {
     waitresult = grenadeent waittilltimeout(0.25, #"death");
 
     if(isDefined(owner)) {
-      if(isDefined(grenadeent) && isDefined(grenadeent.smoketrigger) && owner istouching(grenadeent.smoketrigger) && waitresult._notify == # "timeout") {
+      if(isDefined(grenadeent) && isDefined(grenadeent.smoketrigger) && owner istouching(grenadeent.smoketrigger) && waitresult._notify == #"timeout") {
         owner clientfield::set("inenemysmoke", 1);
       } else {
         owner clientfield::set("inenemysmoke", 0);
@@ -324,7 +324,7 @@ function_8b6ddd71(grenadeent, smokeweapon) {
     foreach(player in level.players) {
       curval = player clientfield::get("insmoke");
 
-      if(isDefined(grenadeent) && isDefined(grenadeent.smoketrigger) && player istouching(grenadeent.smoketrigger) && waitresult._notify == # "timeout") {
+      if(isDefined(grenadeent) && isDefined(grenadeent.smoketrigger) && player istouching(grenadeent.smoketrigger) && waitresult._notify == #"timeout") {
         if(player util::isenemyteam(grenadeteam)) {
           player clientfield::set("insmoke", curval | 1);
         } else {

@@ -79,7 +79,7 @@ function soul_capture_leave(localclientnum, oldval, newval, bnewent, binitialsna
 }
 
 function function_86bba240(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.model === # "p9_fxanim_sv_dragon_console_mod") {
+  if(self.model === #"p9_fxanim_sv_dragon_console_mod") {
     if(bwastimejump) {
       self playrenderoverridebundle(#"hash_5e190029d2c86444");
       self function_78233d29(#"hash_5e190029d2c86444", "", "Brightness", 1);

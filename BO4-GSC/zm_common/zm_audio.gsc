@@ -358,7 +358,7 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
   str_weapon = function_350fc8cc(weapon, zombie, mod, player);
 
   if(isDefined(str_weapon)) {
-    return (str_weapon == # "novox" ? undefined : str_weapon);
+    return (str_weapon == #"novox" ? undefined : str_weapon);
   }
 
   if(isDefined(weapon.isheroweapon) && weapon.isheroweapon) {
@@ -369,7 +369,7 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
     return "specialround";
   }
 
-  if(zombie.archetype === # "zombie_dog") {
+  if(zombie.archetype === #"zombie_dog") {
     return;
   }
 
@@ -383,7 +383,7 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
     }
   }
 
-  if(zombie.archetype === # "zombie") {
+  if(zombie.archetype === #"zombie") {
     if(mod == "MOD_MELEE") {
       return # "melee";
     } else if(isDefined(zombie.missinglegs) && zombie.missinglegs) {
@@ -499,10 +499,10 @@ function_350fc8cc(weapon, zombie, mod, player) {
         }
       }
 
-      if(str_weapon == # "chakram") {
+      if(str_weapon == #"chakram") {
         if(isDefined(player) && isDefined(player.var_fbe120be) && player.var_fbe120be) {
           if(player function_6049efce(str_weapon, 3, 0.75)) {
-            str_weapon = # "chakram_multi";
+            str_weapon = #"chakram_multi";
           } else {
             return # "novox";
           }
@@ -511,17 +511,17 @@ function_350fc8cc(weapon, zombie, mod, player) {
         }
       }
 
-      if(str_weapon == # "sword_pistol") {
+      if(str_weapon == #"sword_pistol") {
         if(mod == "MOD_MELEE") {
           if(player function_6049efce(str_weapon)) {
-            str_weapon = # "sword";
+            str_weapon = #"sword";
           } else {
             return # "novox";
           }
         } else if(mod == "MOD_UNKNOWN" || mod == "MOD_PROJECTILE" || isDefined(zombie.var_8c8102a5) && zombie.var_8c8102a5) {
           return # "novox";
         } else if(player function_6049efce(str_weapon)) {
-          str_weapon = # "pistol";
+          str_weapon = #"pistol";
         }
       }
     } else {
@@ -530,45 +530,45 @@ function_350fc8cc(weapon, zombie, mod, player) {
           case # "ray_gun_upgraded":
           case # "ray_gun":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = # "raygun";
+              str_weapon = #"raygun";
             }
 
             break;
           case # "ray_gun_mk2":
           case # "ray_gun_mk2_upgraded":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = # "raygun_mk2";
+              str_weapon = #"raygun_mk2";
             }
 
             break;
           case # "ww_tesla_sniper_t8":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = # "tempest";
+              str_weapon = #"tempest";
             }
 
             break;
           case # "thundergun":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = # "thundergun";
+              str_weapon = #"thundergun";
             } else {
-              str_weapon = # "no_vox";
+              str_weapon = #"no_vox";
             }
 
             break;
           case # "tundragun":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = # "tundragun";
+              str_weapon = #"tundragun";
             } else {
-              str_weapon = # "no_vox";
+              str_weapon = #"no_vox";
             }
 
             break;
           case # "ww_freezegun_t8":
-            if(zombie.archetype === # "zombie_dog") {
+            if(zombie.archetype === #"zombie_dog") {
               break;
             }
           default:
-            str_weapon = # "wonder";
+            str_weapon = #"wonder";
             break;
         }
       }
@@ -588,24 +588,24 @@ function_350fc8cc(weapon, zombie, mod, player) {
   switch (zombie.damageweapon.name) {
     case # "homunculus":
     case # "cymbal_monkey":
-      str_weapon = # "homunculus";
+      str_weapon = #"homunculus";
       break;
     case # "bowie_knife_story_1":
     case # "bowie_knife":
     case # "knife":
-      str_weapon = # "melee";
+      str_weapon = #"melee";
       break;
     case # "special_ballisticknife_t8_dw_upgraded":
     case # "special_ballisticknife_t8_dw":
       if(mod == "MOD_MELEE") {
-        str_weapon = # "melee";
+        str_weapon = #"melee";
       } else {
-        str_weapon = # "ballistic";
+        str_weapon = #"ballistic";
       }
 
       break;
     case # "galvaknuckles_t8":
-      str_weapon = # "galva";
+      str_weapon = #"galva";
       break;
     case # "eq_wraith_fire":
     case # "molotov_fire":
@@ -613,7 +613,7 @@ function_350fc8cc(weapon, zombie, mod, player) {
     case # "wraith_fire_fire":
     case # "eq_molotov":
     case # "eq_wraith_fire_extra":
-      str_weapon = # "molotov";
+      str_weapon = #"molotov";
       break;
     case # "mini_turret":
       str_weapon = undefined;
@@ -880,7 +880,7 @@ zmbvoxadd(category, subcategory, suffix, percentage = 100, cooldown = 0, var_502
 }
 
 function_ef9ba49c(category, delay = 2, var_ba54b77d = -1, n_range = 800, endons, var_618a04 = 0) {
-  subcategory = # "react";
+  subcategory = #"react";
   self endon(#"death");
 
   if(!isDefined(endons)) {
@@ -2337,7 +2337,7 @@ vo_clear_underwater() {
 }
 
 sndplayerhitalert(e_victim, str_meansofdeath, e_inflictor, weapon, shitloc, damage) {
-  str_alias = # "zmb_hit_alert";
+  str_alias = #"zmb_hit_alert";
 
   if(!isDefined(e_inflictor)) {
     return;
@@ -2590,7 +2590,7 @@ zmbaivox_playelectrocution() {
       continue;
     }
 
-    if(weapon.name === # "zombie_beast_lightning_dwl" || weapon.name === # "zombie_beast_lightning_dwl2" || weapon.name === # "zombie_beast_lightning_dwl3") {
+    if(weapon.name === #"zombie_beast_lightning_dwl" || weapon.name === #"zombie_beast_lightning_dwl2" || weapon.name === #"zombie_beast_lightning_dwl3") {
       bhtnactionstartevent(self, "electrocute");
       self notify(#"bhtn_action_notify", {
         #action: "electrocute"});

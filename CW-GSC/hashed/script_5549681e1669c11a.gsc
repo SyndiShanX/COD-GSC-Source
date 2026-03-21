@@ -394,7 +394,7 @@ function function_3db4a0b1(roundnumber = level.doa.roundnumber) {
       continue;
     }
 
-    if(room.name === # "cellar" && isDefined(level.doa.var_98764e02)) {
+    if(room.name === #"cellar" && isDefined(level.doa.var_98764e02)) {
       delta = gettime() - level.doa.var_98764e02;
 
       if(delta < 15 * 60000) {
@@ -698,12 +698,12 @@ function function_898ca25f(room) {
       while(timeout > 0) {
         result = room.var_1406397f waittilltimeout(1, #"trigger", #"abort");
 
-        if(result._notify == # "timeout") {
+        if(result._notify == #"timeout") {
           timeout--;
           continue;
         }
 
-        win = result._notify === # "abort" ? 0 : 1;
+        win = result._notify === #"abort" ? 0 : 1;
         level notify(#"hash_26543e77189e41db", {
           #success: win
         });
@@ -713,7 +713,7 @@ function function_898ca25f(room) {
       namespace_6e90e490::function_fa6f7ba7();
     }
 
-    var_62ad07bf = result._notify == # "abort" ? "evt_doa_travel_doors_chosen" : "evt_doa_travel_doors_chosen";
+    var_62ad07bf = result._notify == #"abort" ? "evt_doa_travel_doors_chosen" : "evt_doa_travel_doors_chosen";
   } else {
     room waittill(#"room_done");
     var_62ad07bf = "evt_doa_travel_doors_chosen";
@@ -1185,7 +1185,7 @@ function function_e5c7bce7() {
 function function_170eefc7(room, aicount = 28) {
   result = level waittill(#"hash_11a3b1e82b21ec58", #"game_over", #"hash_26543e77189e41db");
 
-  if(result._notify === # "hash_26543e77189e41db" && is_true(result.success)) {
+  if(result._notify === #"hash_26543e77189e41db" && is_true(result.success)) {
     namespace_7f5aeb59::function_f8645db3(getdvarint(#"hash_1f4204c11443f80a", 1000));
   }
 
@@ -1589,7 +1589,7 @@ function function_430e5080(room) {
   function_1eaaceab(level.doa.var_6f3d327.var_bf8dbf30);
 
   foreach(boss in level.doa.var_6f3d327.var_bf8dbf30) {
-    if(boss.classname === # "hash_502ad85371f449ed") {
+    if(boss.classname === #"hash_502ad85371f449ed") {
       margwa = boss;
       break;
     }
@@ -1626,7 +1626,7 @@ function function_2f1636cd(room) {
   while(true) {
     result = level waittill(#"bonus_ai");
 
-    if(result.ai.classname === # "hash_502ad85371f449ed") {
+    if(result.ai.classname === #"hash_502ad85371f449ed") {
       result.ai.ignoreall = 1;
     }
   }
@@ -1713,7 +1713,7 @@ function function_38de5c23(room, aicount = 28) {
   self endon("720c48f1c7d989d4");
   result = level waittill(#"hash_11a3b1e82b21ec58", #"game_over", #"hash_26543e77189e41db");
 
-  if(result._notify === # "hash_26543e77189e41db" && is_true(result.success)) {
+  if(result._notify === #"hash_26543e77189e41db" && is_true(result.success)) {
     namespace_7f5aeb59::function_f8645db3(getdvarint(#"hash_1f4204c11443f80a", 1000));
   }
 
@@ -1782,7 +1782,7 @@ function function_1dfe9126(room) {
     result = self waittill(#"plate_deactivated", #"hash_7e6e589015c9e33d");
     self namespace_e32bb68::function_ae271c0b("stoneDoorOpening");
 
-    if(result._notify == # "hash_7e6e589015c9e33d") {
+    if(result._notify == #"hash_7e6e589015c9e33d") {
       self namespace_e32bb68::function_3a59ec34("evt_doa_stonedoor_close_fast");
       self moveto(originalpos, 1);
       return;
@@ -1842,10 +1842,10 @@ function function_c0dff79(room) {
 
 function function_ab6edfa3(room) {
   level.doa.var_e5217306 = undefined;
-  level.doa.var_1da3c49e = # "orange";
+  level.doa.var_1da3c49e = #"orange";
 
   if(randomint(100) < 50) {
-    level.doa.var_1da3c49e = # "yellow";
+    level.doa.var_1da3c49e = #"yellow";
   }
 
   level thread function_27cb8f5b(room);

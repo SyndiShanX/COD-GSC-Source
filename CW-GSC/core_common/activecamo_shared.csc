@@ -631,7 +631,7 @@ function function_51bb743b(weapon, camooptions) {
   if(isDefined(weapon)) {
     activecamoname = self function_ada2946d(weapon);
 
-    if(isDefined(activecamoname) && activecamoname != # "") {
+    if(isDefined(activecamoname) && activecamoname != #"") {
       var_f4eb4a50 = getscriptbundle(activecamoname);
       return var_f4eb4a50;
     }

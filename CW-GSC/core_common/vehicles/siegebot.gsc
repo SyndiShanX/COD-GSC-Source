@@ -52,7 +52,7 @@ function siegebot_initialize() {
   self.overridevehicledamage = &siegebot_callback_damage;
   self turretsetontargettolerance(0, 5);
 
-  if(self.scriptvehicletype == # "xbot") {
+  if(self.scriptvehicletype == #"xbot") {
     self.destructible_event_handler = &xbot_destructible_event_handler;
     self.isxbot = 1;
   }
@@ -69,7 +69,7 @@ function siegebot_initialize() {
     self hidepart("tag_turret_panel_03_d0");
     self hidepart("tag_turret_panel_04_d0");
     self hidepart("tag_turret_panel_05_d0");
-  } else if(self.vehicletype == # "hash_962ecc6fc2eca01") {
+  } else if(self.vehicletype == #"hash_962ecc6fc2eca01") {
     self asmsetanimationrate(2);
   }
 
@@ -820,7 +820,7 @@ function attack_thread_javelin() {
       if(fired) {
         cooldown = 15;
 
-        if(self.scriptvehicletype == # "xbot") {
+        if(self.scriptvehicletype == #"xbot") {
           if(is_true(self.left_arm_disabled)) {
             cooldown -= 5;
           }

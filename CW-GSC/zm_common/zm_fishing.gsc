@@ -163,7 +163,7 @@ function function_e126c567(eventstruct) {
     return;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 

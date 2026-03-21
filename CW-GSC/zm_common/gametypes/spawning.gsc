@@ -362,8 +362,8 @@ function getspawnpoint(player_entity, predictedspawn = 0) {
     point_team = player_entity.pers[#"team"];
     influencer_team = player_entity.pers[#"team"];
   } else {
-    point_team = # "none";
-    influencer_team = # "none";
+    point_team = #"none";
+    influencer_team = #"none";
   }
 
   if(level.teambased && isDefined(game.switchedsides) && game.switchedsides && level.spawnsystem.unifiedsideswitching) {
@@ -383,13 +383,13 @@ function get_debug_spawnpoint(player) {
   if(level.teambased) {
     team = player.pers[#"team"];
   } else {
-    team = # "none";
+    team = #"none";
   }
 
   index = level.test_spawn_point_index;
   level.test_spawn_point_index++;
 
-  if(team == # "none") {
+  if(team == #"none") {
     spawn_counts = 0;
 
     foreach(team, _ in level.teams) {
@@ -468,7 +468,7 @@ function teams_have_enmity(team1, team2) {
     return true;
   }
 
-  return team1 != # "neutral" && team2 != # "neutral" && team1 != team2;
+  return team1 != #"neutral" && team2 != #"neutral" && team1 != team2;
 }
 
 function remove_unused_spawn_entities() {

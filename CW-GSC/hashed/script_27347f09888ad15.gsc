@@ -108,7 +108,7 @@ function private function_15541865(&var_8def964, &var_fcfdb752, var_e1be5b85 = 0
 
   var_74142af1 = getscriptbundle(var_8452bcb9);
 
-  if(var_74142af1.type === # "survivalailistentry") {
+  if(var_74142af1.type === #"survivalailistentry") {
     return_struct = {
       #aitype_name: var_74142af1.var_5fa96b51[randomint(var_74142af1.var_5fa96b51.size)].var_1b48d0fc
     };
@@ -144,7 +144,7 @@ function private function_cbafbbab(&var_8def964, &var_bcaf6518) {
 
     var_74142af1 = getscriptbundle(var_8452bcb9);
 
-    if(var_74142af1.type === # "survivalailistentry") {
+    if(var_74142af1.type === #"survivalailistentry") {
       assert(isDefined(var_74142af1.var_5fa96b51) && var_74142af1.var_5fa96b51.size > 0, "<dev string:x139>");
 
       foreach(aitype in var_74142af1.var_5fa96b51) {

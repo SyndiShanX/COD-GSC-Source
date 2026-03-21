@@ -63,7 +63,7 @@ function_7c4ef26b(predictedspawn) {
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self thread function_7f166658();
     nd_node = function_5d9ec9e5();
 
@@ -88,7 +88,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       self thread ct_utils::function_ee4639dd(-5);
     }

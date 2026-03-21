@@ -666,7 +666,7 @@ setvalue(value) {
 
 setuproundstarthud() {
   level.phcountdowntimer = spawnStruct();
-  level.phcountdowntimer.label = # "mp_ph_starts_in";
+  level.phcountdowntimer.label = #"mp_ph_starts_in";
   level.phcountdowntimer.alpha = 0;
   level.phcountdowntimer.archived = 0;
   level.phcountdowntimer.hidewheninmenu = 1;
@@ -682,7 +682,7 @@ setuproundstarthud() {
     }
 
     level.elim_hud = spawnStruct();
-    level.elim_hud.label = # "mp_ph_alive";
+    level.elim_hud.label = #"mp_ph_alive";
     level.elim_hud setvalue(0);
     level.elim_hud.x = 5;
     level.elim_hud.y = var_ed243a5d;
@@ -704,13 +704,13 @@ setuproundstarthud() {
       level.phwhistletimer.aligny = "top";
       level.phwhistletimer.horzalign = "left";
       level.phwhistletimer.vertalign = "top";
-      level.phwhistletimer.label = # "mp_ph_whistle_in";
+      level.phwhistletimer.label = #"mp_ph_whistle_in";
       level.phwhistletimer.alpha = 0;
       level.phwhistletimer.archived = 1;
       level.phwhistletimer.hidewheninmenu = 0;
       level.phwhistletimer settimer(120);
       level.whistling = spawnStruct();
-      level.whistling.label = # "mp_ph_whistling";
+      level.whistling.label = #"mp_ph_whistling";
       level.whistling.x = 5;
       level.whistling.y = var_ed243a5d + var_15c99f84;
       level.whistling.alignx = "left";
@@ -1112,7 +1112,7 @@ propwhistle() {
       } else {
         if(var_2baed43 * 2 + getteamplayersalive(game.defenders) * 2500 >= globallogic_utils::gettimeremaining() - var_99b741b6) {
           if(useprophudserver()) {
-            level.phwhistletimer.label = # "mp_ph_final_whistle";
+            level.phwhistletimer.label = #"mp_ph_final_whistle";
           }
 
           var_2baed43 += getteamplayersalive(game.defenders) * 2500;
@@ -3051,19 +3051,19 @@ function_9c1a133a(isvisible) {
 
 function_5099a828() {
   level.var_1103f74e.var_1455c6df = 0;
-  label = # "mp_ph_pregame_hunt";
+  label = #"mp_ph_pregame_hunt";
 
   if(randomfloat(1) < 0.5) {
     level.var_1103f74e.var_1455c6df = 1;
-    label = # "mp_ph_pregame_chase";
+    label = #"mp_ph_pregame_chase";
   }
 
   if(getdvarint(#"hash_6132db0becb8f98", 0) == 2 && level.var_1103f74e.var_1455c6df) {
     level.var_1103f74e.var_1455c6df = 0;
-    label = # "mp_ph_pregame_hunt";
+    label = #"mp_ph_pregame_hunt";
   } else if(getdvarint(#"hash_6132db0becb8f98", 0) == 1 && !level.var_1103f74e.var_1455c6df) {
     level.var_1103f74e.var_1455c6df = 1;
-    label = # "mp_ph_pregame_chase";
+    label = #"mp_ph_pregame_chase";
   }
 
   thread function_f6f7aa90(label);
@@ -3582,7 +3582,7 @@ function_80334286(damage, attacker, direction_vec, point, meansofdeath, modelnam
 set_ui_team() {
   wait 0.05;
 
-  if(game.attackers == # "allies") {
+  if(game.attackers == #"allies") {
     clientfield::set_world_uimodel("hudItems.war.attackingTeam", 1);
     return;
   }

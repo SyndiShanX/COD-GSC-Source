@@ -48,7 +48,7 @@ function autoexec __init__() {
     level.killstreakevents[eventname] = eventname;
   }
 
-  var_5191d6f7 = # "killstreak_more_than_30";
+  var_5191d6f7 = #"killstreak_more_than_30";
   level.killstreakevents[var_5191d6f7] = var_5191d6f7;
   clientfield::register_clientuimodel("hudItems.scoreProtected", 1, 1, "int");
   clientfield::register_clientuimodel("hudItems.minorActions.action0", 1, 1, "counter");
@@ -191,7 +191,7 @@ function function_f7e4fb88(outcome) {
       continue;
     }
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == # "spectator") {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == #"spectator") {
       continue;
     }
 
@@ -399,7 +399,7 @@ function giveplayermomentumnotification(score, label, descvalue, weapon, combate
       event = 1;
     }
 
-    if(var_dbaa74e2.notificationtype === # "streak") {
+    if(var_dbaa74e2.notificationtype === #"streak") {
       self luinotifyevent(#"hash_4aa652796cc3e19", 3, combatefficiencybonus, weapon, var_dbaa74e2.var_c874a8ab);
       self function_8ba40d2f(#"hash_4aa652796cc3e19", 3, combatefficiencybonus, weapon, var_dbaa74e2.var_c874a8ab);
       potm::function_bcad6f70(#"hash_4aa652796cc3e19", self, combatefficiencybonus, weapon, var_dbaa74e2.var_c874a8ab);
@@ -696,7 +696,7 @@ function function_3172cf59(player, newscore, weapon, mpplayerscore) {
 }
 
 function function_a85339ff(event) {
-  if(event == # "golden_kill_bonus" || event == # "hash_7b62ccbe655dc08a" || event == # "hash_131b23d720fc82c3") {
+  if(event == #"golden_kill_bonus" || event == #"hash_7b62ccbe655dc08a" || event == #"hash_131b23d720fc82c3") {
     return 1;
   }
 
@@ -1298,7 +1298,7 @@ function function_3bd226fa(killstreaktype, var_9595834) {
 }
 
 function function_13123cee(player, killstreakslot) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return 0;
   }
 
@@ -1729,7 +1729,7 @@ function threadedrecordplayerstats(dataname) {
 
 function updatewinstats(winner) {
   winner stats::function_bb7eedf0(#"losses", -1);
-  winner.pers[#"outcome"] = # "win";
+  winner.pers[#"outcome"] = #"win";
   winner stats::function_bb7eedf0(#"wins", 1);
 
   if(level.rankedmatch && !level.disablestattracking && sessionmodeismultiplayergame()) {
@@ -1908,7 +1908,7 @@ function registercontractwinevent(event) {
 }
 
 function updatelossstats(loser) {
-  loser.pers[#"outcome"] = # "loss";
+  loser.pers[#"outcome"] = #"loss";
   loser stats::function_bb7eedf0(#"losses", 1);
   loser updatestatratio("wlratio", "wins", "losses");
 
@@ -1933,7 +1933,7 @@ function updatelosslatejoinstats(loser) {
 
 function updatetiestats(loser) {
   loser stats::function_bb7eedf0(#"losses", -1);
-  loser.pers[#"outcome"] = # "draw";
+  loser.pers[#"outcome"] = #"draw";
   loser stats::function_bb7eedf0(#"ties", 1);
   loser updatestatratio("wlratio", "wins", "losses");
 
@@ -2121,11 +2121,11 @@ function inckillstreaktracker(weapon) {
   self endon(#"disconnect");
   waittillframeend();
 
-  if(weapon.name == # "artillery") {
+  if(weapon.name == #"artillery") {
     self.pers[#"artillery_kills"]++;
   }
 
-  if(weapon.name == # "dog_bite") {
+  if(weapon.name == #"dog_bite") {
     self.pers[#"dog_kills"]++;
   }
 }
@@ -2370,7 +2370,7 @@ function givekillstats(smeansofdeath, weapon, evictim, var_e7a369ea) {
       attacker stats::function_dad108fa(#"hash_185c3c78ebc24268", 1);
       weaponclass = util::getweaponclass(weapon);
 
-      if(weaponclass === # "weapon_tactical") {
+      if(weaponclass === #"weapon_tactical") {
         attacker stats::function_dad108fa(#"hash_70d4e38a66f99086", 1);
         attacker stats::function_dad108fa(#"hash_70d4e48a66f99239", 1);
       }
@@ -2522,7 +2522,7 @@ function function_672746e0(attacker, inflictor, weapon) {
     return false;
   }
 
-  if(weapon.team == # "spectator") {
+  if(weapon.team == #"spectator") {
     return false;
   }
 

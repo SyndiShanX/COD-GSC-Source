@@ -20,10 +20,10 @@ init() {
   level.var_2f8e7ed7 = isDefined(getgametypesetting(#"hash_3fb5dc1cb345b96d")) ? getgametypesetting(#"hash_3fb5dc1cb345b96d") : 0;
   level.var_97d3cd33 = isDefined(getgametypesetting(#"hash_4c2ba49a89782be7")) ? getgametypesetting(#"hash_4c2ba49a89782be7") : 0;
   level.var_66626ce3 = isDefined(getgametypesetting(#"hash_448933e114e4d339")) ? getgametypesetting(#"hash_448933e114e4d339") : 0;
-  level.var_85d43ea3 = # "spawner_boct_zombie_wz";
+  level.var_85d43ea3 = #"spawner_boct_zombie_wz";
 
   if((isDefined(getgametypesetting(#"hash_72594454f1c833aa")) ? getgametypesetting(#"hash_72594454f1c833aa") : 0) == 1) {
-    level.var_85d43ea3 = # "spawner_boct_zombie_mob_wz";
+    level.var_85d43ea3 = #"spawner_boct_zombie_mob_wz";
   }
 
   level.var_6df0d3b6 = &function_6df0d3b6;
@@ -164,15 +164,15 @@ function_14cf2357() {
   var_d71618bb = [];
 
   if(function_6df0d3b6(#"farmnorth")) {
-    var_d71618bb[var_d71618bb.size] = # "farmnorth";
+    var_d71618bb[var_d71618bb.size] = #"farmnorth";
   }
 
   if(function_6df0d3b6(#"farmsouth")) {
-    var_d71618bb[var_d71618bb.size] = # "farmsouth";
+    var_d71618bb[var_d71618bb.size] = #"farmsouth";
   }
 
   if(function_6df0d3b6(#"farmwest")) {
-    var_d71618bb[var_d71618bb.size] = # "farmwest";
+    var_d71618bb[var_d71618bb.size] = #"farmwest";
   }
 
   if(var_d71618bb.size == 0) {

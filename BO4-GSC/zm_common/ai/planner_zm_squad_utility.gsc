@@ -79,7 +79,7 @@ function_37d90686(bot, path) {
 }
 
 function_3e6c9e50(weapon) {
-  if(isDefined(weapon.firetype) && weapon.firetype == # "single shot") {
+  if(isDefined(weapon.firetype) && weapon.firetype == #"single shot") {
     if(weapon.clipsize < 20) {
       return 0.5;
     }
@@ -99,7 +99,7 @@ function_3e6c9e50(weapon) {
 function_48d6c189(weapon) {
   var_f8e2456f = weapon.clipsize * weapon.firetime + weapon.reloadtime;
 
-  if(isDefined(weapon.firetype) && weapon.firetype == # "single shot") {
+  if(isDefined(weapon.firetype) && weapon.firetype == #"single shot") {
     var_f8e2456f += weapon.clipsize * 0.5;
   }
 
@@ -301,7 +301,7 @@ function_14c67eb3(planner, constants) {
     altar = var_509f4558[#"__unsafe__"][#"altar"];
     pathsegment = strategiccommandutility::function_e696ce55(params.bots[0], altar);
 
-    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
       if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
@@ -398,7 +398,7 @@ function_2af9b775(planner, constants) {
 
     pathsegment = strategiccommandutility::calculatepathtotrigger(params.bots[0], blocker);
 
-    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
       if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
@@ -505,7 +505,7 @@ function_e057582f(planner, constants) {
 
     pathsegment = strategiccommandutility::function_e696ce55(params.bots[0], chest.unitrigger_stub);
 
-    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
       if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
@@ -565,7 +565,7 @@ function_ac1b59c(planner, constants) {
 
     pathsegment = strategiccommandutility::function_e696ce55(params.bots[0], chest.unitrigger_stub);
 
-    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
       if(!isDefined(path) || pathsegment.pathdistance < shortestpath) {
         if(function_37d90686(params.bots[0], pathsegment) <= 4.5) {
           path = pathsegment;
@@ -651,7 +651,7 @@ function_4f6a626d(planner, constants) {
     pointstruct.origin = poweruporigin;
     pathsegment = strategiccommandutility::calculatepathtopoints(params.bots[0], array(pointstruct));
 
-    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
       if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
@@ -743,7 +743,7 @@ function_557051df(planner, constants) {
 
     pathsegment = strategiccommandutility::calculatepathtotrigger(params.bots[0], switchent);
 
-    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+    if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
       if(pathsegment.pathdistance > constants[#"distance"] * 2) {
         continue;
       }
@@ -890,7 +890,7 @@ function_393b9c76(planner, constants) {
     if(isDefined(var_141550e2) && isDefined(params.botpositions[0])) {
       pathsegment = generatenavmeshpath(params.botpositions[0], var_141550e2, params.bots[0]);
 
-      if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == # "succeeded") {
+      if(isDefined(pathsegment) && isDefined(pathsegment.status) && pathsegment.status == #"succeeded") {
         if(pathsegment.pathdistance > constants[#"distance"] * 2) {
           continue;
         }

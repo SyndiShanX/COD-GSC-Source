@@ -207,7 +207,7 @@ function private shouldusesidearmpistol(entity, checkdistance = sqr(300)) {
         targetangles = vectortoangles(entity.enemy.origin - entity.origin);
         entityangles = entity.angles;
 
-        if(isDefined(entity.node) && (entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover pillar" || entity.node.type == # "cover stand" || entity.node.type == # "conceal stand" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") && btapi_isatcovercondition(entity)) {
+        if(isDefined(entity.node) && (entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover pillar" || entity.node.type == #"cover stand" || entity.node.type == #"conceal stand" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") && btapi_isatcovercondition(entity)) {
           entityangles = entity.node.angles;
         }
 

@@ -139,7 +139,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
         }
 
         sound_id = var_ffe2b6da - 1;
-        sound_alias = # "hash_5ae0628f3d30469e" + sound_id;
+        sound_alias = #"hash_5ae0628f3d30469e" + sound_id;
         struct.var_7a993bec = playSound(0, sound_alias, struct.origin);
       }
 
@@ -175,7 +175,7 @@ function_44e1ce2e(var_ffe2b6da = 0) {
         }
 
         sound_id = var_ffe2b6da - 1;
-        sound_alias = # "hash_59821865a3dff39c" + sound_id;
+        sound_alias = #"hash_59821865a3dff39c" + sound_id;
         struct.var_7a993bec = playSound(0, sound_alias, struct.origin);
       }
 

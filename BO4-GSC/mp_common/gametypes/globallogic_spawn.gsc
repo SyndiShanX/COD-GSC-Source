@@ -58,7 +58,7 @@ __init__() {
   array::add(level.spawnentitytypes, {
     #team: "all", #entityname: "mp_t8_spawn_point"});
 
-  if(level.gametype == # "dom") {
+  if(level.gametype == #"dom") {
     array::add(level.spawnentitytypes, {
       #team: # "allies", #entityname: "mp_t8_spawn_point"});
     array::add(level.spawnentitytypes, {
@@ -834,7 +834,7 @@ respawn_asspectator(origin, angles) {
 }
 
 function_3ee5119e() {
-  if(self.pers[#"team"] != # "spectator" && level.spectatetype == 4 && self.spectatorteam == # "invalid") {
+  if(self.pers[#"team"] != #"spectator" && level.spectatetype == 4 && self.spectatorteam == #"invalid") {
     team_players = getplayers(self.team);
 
     foreach(player in team_players) {
@@ -846,7 +846,7 @@ function_3ee5119e() {
     }
 
     foreach(player in team_players) {
-      if(player != self && player.spectatorteam != # "invalid") {
+      if(player != self && player.spectatorteam != #"invalid") {
         self.spectatorteam = player.spectatorteam;
         println("<dev string:xe8>" + player.spectatorteam + "<dev string:x105>" + self.name + "<dev string:x10d>" + self.team + "<dev string:x11f>" + player.name + "<dev string:x137>");
         return;
@@ -868,13 +868,13 @@ in_spawnspectator(origin, angles) {
   self.spectatekillcam = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     self.statusicon = "";
   } else {
     self.statusicon = "hud_status_dead";
   }
 
-  if(level.spectatetype != 4 || self.pers[#"team"] == # "spectator") {
+  if(level.spectatetype != 4 || self.pers[#"team"] == #"spectator") {
     self.spectatorclient = -1;
     spectating::set_permissions_for_machine();
   }
@@ -910,7 +910,7 @@ forcespawn(time) {
     return;
   }
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     return;
   }
 
@@ -977,7 +977,7 @@ kickifidontspawninternal() {
     return;
   }
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     return;
   }
 

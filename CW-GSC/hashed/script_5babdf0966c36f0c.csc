@@ -119,17 +119,17 @@ function private function_372485e9(localclientnum, oldval, newval, bnewent, bini
 
   switch (bwastimejump) {
     case 1:
-      fx = # "hash_6056afc2dadb83c6";
+      fx = #"hash_6056afc2dadb83c6";
       self.var_af4484a7 = 0;
       break;
     case 2:
-      fx = # "hash_45d44373b029b4c8";
+      fx = #"hash_45d44373b029b4c8";
       break;
     case 3:
-      fx = # "hash_45a53073b00223bd";
+      fx = #"hash_45a53073b00223bd";
       break;
     case 4:
-      fx = # "hash_68a705e07e5e43f3";
+      fx = #"hash_68a705e07e5e43f3";
       break;
   }
 
@@ -149,7 +149,7 @@ function private function_372485e9(localclientnum, oldval, newval, bnewent, bini
 
 function private function_5dbf2fbf(localclientnum) {
   if(isDefined(self) && self hasdobj(localclientnum) && isvec(self.origin) && is_true(self.var_af4484a7)) {
-    fx = # "hash_6056afc2dadb83c6";
+    fx = #"hash_6056afc2dadb83c6";
     playFX(localclientnum, fx, self.origin);
   }
 }

@@ -194,7 +194,7 @@ initchallengedata() {
 }
 
 isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
-  if(weapon.name == # "ai_tank_drone_gun") {
+  if(weapon.name == #"ai_tank_drone_gun") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(isDefined(einflictor.controlled) && einflictor.controlled) {
         if(eattacker.remoteweapon == einflictor) {
@@ -202,7 +202,7 @@ isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
         }
       }
     }
-  } else if(weapon.name == # "ai_tank_drone_rocket") {
+  } else if(weapon.name == #"ai_tank_drone_rocket") {
     if(isDefined(einflictor) && !isDefined(einflictor.from_ai)) {
       return true;
     }
@@ -212,7 +212,7 @@ isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
 }
 
 isdamagefromplayercontrolledsentry(eattacker, einflictor, weapon) {
-  if(weapon.name == # "auto_gun_turret") {
+  if(weapon.name == #"auto_gun_turret") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(eattacker.remoteweapon == einflictor) {
         if(isDefined(einflictor.controlled) && einflictor.controlled) {
@@ -334,7 +334,7 @@ perkkills(victim, isstunned, time) {
 }
 
 flakjacketprotected(weapon, attacker) {
-  if(weapon.name == # "claymore") {
+  if(weapon.name == #"claymore") {
     self.flakjacketclaymore[attacker.clientid] = 1;
   }
 
@@ -346,7 +346,7 @@ flakjacketprotected(weapon, attacker) {
 earnedkillstreak() {
   gear = self function_b958b70d(self.class_num, "tacticalgear");
 
-  if(gear === # "gear_scorestreakcharge") {
+  if(gear === #"gear_scorestreakcharge") {
     self stats::function_dad108fa(#"hash_656a2ab7e777796b", 1);
 
     if(isDefined(self.var_ea1458aa)) {
@@ -386,12 +386,12 @@ function_80327323(data) {
   attackerstance = data.attackerstance;
 
   if(isDefined(attackerstance)) {
-    if(attackerstance == # "crouch") {
+    if(attackerstance == #"crouch") {
       player stats::function_dad108fa(#"kill_enemy_while_crouched", 1);
       return;
     }
 
-    if(attackerstance == # "prone") {
+    if(attackerstance == #"prone") {
       player stats::function_dad108fa(#"kill_enemy_while_prone", 1);
     }
   }
@@ -837,13 +837,13 @@ controllerparticipationcheck() {
   }
 
   self.pers[#"controllerparticipationchecks"]++;
-  var_51ba979b = # "failure";
+  var_51ba979b = #"failure";
   var_a7674114 = "controllerParticipationConsecutiveFailureMax";
   var_fb144707 = self function_1bc04df9();
 
   if(var_fb144707 >= level.var_5b7e9056) {
     self.pers[#"controllerparticipation"]++;
-    var_51ba979b = # "success";
+    var_51ba979b = #"success";
     var_a7674114 = "controllerParticipationConsecutiveSuccessMax";
 
     if(self.pers[#"controllerparticipationinactivitywarnings"]) {
@@ -966,7 +966,7 @@ destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehic
   } else {
     weaponclass = util::getweaponclass(weapon);
 
-    if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
+    if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
       self stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
     }
   }
@@ -1020,7 +1020,7 @@ destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehic
       self stats::function_dad108fa(#"destroy_scorestreak_rapidfire_fmj", 1);
     }
 
-    if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
+    if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
       if(self weaponhasattachmentandunlocked(weapon, "fastreload")) {
         self stats::function_dad108fa(#"hash_4b19afce40dfc918", 1);
       }
@@ -1056,7 +1056,7 @@ function_24db0c33(weapon, destroyedobject) {
     self stats::function_dad108fa(#"destroy_scorestreaks_equipment_engineer", 1);
   }
 
-  if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
+  if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
     self stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
 
     if(isDefined(weapon.attachments) && weapon.attachments.size > 0) {
@@ -1080,7 +1080,7 @@ function_24db0c33(weapon, destroyedobject) {
     }
   }
 
-  if(sessionmodeiswarzonegame() && !(destroyedobject.name === # "eq_sensor")) {
+  if(sessionmodeiswarzonegame() && !(destroyedobject.name === #"eq_sensor")) {
     self stats::function_dad108fa(#"destroy_equipment", 1);
     callback::callback(#"hash_67dd51a5d529c64c");
   }
@@ -1384,7 +1384,7 @@ multi_lmg_smg_kill() {
 }
 
 killedzoneattacker(weapon) {
-  if(weapon.statname == # "planemortar" || weapon.statname == "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+  if(weapon.statname == #"planemortar" || weapon.statname == "remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
     self thread updatezonemultikills();
   }
 }
@@ -1510,9 +1510,9 @@ destroyedaircraft(attacker, weapon, playercontrolled, lethal = 1) {
   }
 
   if(isDefined(weapon)) {
-    if(weapon.name == # "emp" && attacker util::is_item_purchased(#"killstreak_emp")) {
+    if(weapon.name == #"emp" && attacker util::is_item_purchased(#"killstreak_emp")) {
       attacker stats::function_dad108fa(#"destroy_aircraft_with_emp", 1);
-    } else if(weapon.name == # "missile_drone_projectile" || weapon.name == # "missile_drone") {
+    } else if(weapon.name == #"missile_drone_projectile" || weapon.name == #"missile_drone") {
       attacker stats::function_dad108fa(#"destroy_aircraft_with_missile_drone", 1);
     } else if(weapon.isbulletweapon) {
       attacker stats::function_dad108fa(#"shoot_aircraft", 1);

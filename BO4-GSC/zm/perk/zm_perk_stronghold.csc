@@ -17,7 +17,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_stronghold_perk_for_level();
-  level._effect[#"hash_24e322568c9492c5"] = # "hash_497cb15bcf6c05b1";
+  level._effect[#"hash_24e322568c9492c5"] = #"hash_497cb15bcf6c05b1";
   callback::on_localclient_connect(&on_localclient_connect);
 }
 

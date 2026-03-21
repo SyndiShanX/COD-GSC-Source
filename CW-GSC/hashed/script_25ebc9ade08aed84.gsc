@@ -468,22 +468,22 @@ function function_b858693f(index) {
 
       switch (var_90ddceac.script_int) {
         case 1:
-          var_b4fbcdc9 = # "hash_612ce7acf731e45c";
+          var_b4fbcdc9 = #"hash_612ce7acf731e45c";
           break;
         case 2:
-          var_b4fbcdc9 = # "hash_612ceaacf731e975";
+          var_b4fbcdc9 = #"hash_612ceaacf731e975";
           break;
         case 3:
-          var_b4fbcdc9 = # "hash_612ce9acf731e7c2";
+          var_b4fbcdc9 = #"hash_612ce9acf731e7c2";
           break;
         case 4:
-          var_b4fbcdc9 = # "hash_612ce4acf731df43";
+          var_b4fbcdc9 = #"hash_612ce4acf731df43";
           break;
         case 5:
-          var_b4fbcdc9 = # "hash_612ce3acf731dd90";
+          var_b4fbcdc9 = #"hash_612ce3acf731dd90";
           break;
         case 6:
-          var_b4fbcdc9 = # "hash_612ce6acf731e2a9";
+          var_b4fbcdc9 = #"hash_612ce6acf731e2a9";
           break;
         default:
           break;

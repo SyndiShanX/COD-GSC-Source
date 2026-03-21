@@ -483,7 +483,7 @@ class class_f4bf8a8 {
     while(true) {
       result = self waittilltimeout(10, #"trigger");
 
-      if(result._notify == # "timeout") {
+      if(result._notify == #"timeout") {
         continue;
       }
 
@@ -875,7 +875,7 @@ function main() {
 
     result = level waittill(#"teleporter_taken", #"enter_the_wild");
 
-    if(result._notify == # "enter_the_wild") {
+    if(result._notify == #"enter_the_wild") {
       level thread doa_wild::function_7c5bc025(result.param, result.data);
       level waittill(#"hash_325440d5433be263");
       namespace_d2efac9a::function_47498d07(0, 0, 1);
@@ -1392,7 +1392,7 @@ function function_3f18205d() {
     var_c6906ae1 = [[level.doa.var_39e3fa99]] - > function_51dd0a59();
 
     if(is_true(level.doa.hardcoremode) && isDefined(var_c6906ae1)) {
-      if(var_c6906ae1.targetname !== # "hash_10d262cdf5d256d8") {
+      if(var_c6906ae1.targetname !== #"hash_10d262cdf5d256d8") {
         var_c6906ae1 = undefined;
       }
     }
@@ -1547,7 +1547,7 @@ function function_3f18205d() {
     level.doa.var_6c225512 = undefined;
   }
 
-  if(note === # "enter_the_wild") {
+  if(note === #"enter_the_wild") {
     level.doa.zombie_health += 250 + getplayers().size * 250;
   }
 

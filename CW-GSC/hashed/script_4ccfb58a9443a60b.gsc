@@ -75,7 +75,7 @@ function function_db05041b(struct, hint_string, callbackfunction) {
   assert(isDefined(hint_string), "<dev string:x8b>");
 
   if(zm_utility::is_survival() || is_true(level.var_76e8fb05)) {
-    model = # "hash_15f88361c2fa15c";
+    model = #"hash_15f88361c2fa15c";
 
     if(zm_utility::is_survival()) {
       var_c6d25878 = &zm_utility::function_f5a222a8;
@@ -83,14 +83,14 @@ function function_db05041b(struct, hint_string, callbackfunction) {
       var_c6d25878 = &zm_utility::function_4a4cf79a;
     }
   } else {
-    model = # "p9_fxanim_zm_gp_crafting_xmodel";
+    model = #"p9_fxanim_zm_gp_crafting_xmodel";
     var_c6d25878 = &zm_utility::function_4a4cf79a;
   }
 
   scriptmodel = content_manager::spawn_script_model(struct, model, 1);
   zm_utility::function_ca960904(scriptmodel);
 
-  if(struct.parent.content_script_name !== # "safehouse") {
+  if(struct.parent.content_script_name !== #"safehouse") {
     objid = [[var_c6d25878]](#"hash_72c703e01db3de5d", scriptmodel);
     struct.objectiveid = objid;
     scriptmodel.objectiveid = objid;
@@ -374,11 +374,11 @@ function function_4b23ad31(machine, trigger) {
     response = waitresult.response;
     intpayload = waitresult.intpayload;
 
-    if(menu === # "sr_crafting_table_menu" && response === # "hash_300cd920d1c2290e") {
+    if(menu === #"sr_crafting_table_menu" && response === #"hash_300cd920d1c2290e") {
       self.var_486e4bcd = 1;
     }
 
-    if(menu == # "sr_crafting_table_menu") {
+    if(menu == #"sr_crafting_table_menu") {
       switch (waitresult.response) {
         case # "hash_300cd920d1c2290e":
           var_82e23366 = getunlockableiteminfofromindex(intpayload, 1);
@@ -403,7 +403,7 @@ function function_4b23ad31(machine, trigger) {
               var_1d1d4a2a = 0;
             }
 
-            var_d53eef6c = var_1a988176 == # "self_revive_sr_item";
+            var_d53eef6c = var_1a988176 == #"self_revive_sr_item";
 
             if(var_d53eef6c) {
               if(var_1f514c83) {
@@ -512,7 +512,7 @@ function function_4b23ad31(machine, trigger) {
     waitframe(1);
 
     if(isPlayer(self)) {
-      if(menu === # "sr_crafting_table_menu" && response === # "hash_300cd920d1c2290e") {
+      if(menu === #"sr_crafting_table_menu" && response === #"hash_300cd920d1c2290e") {
         self.var_486e4bcd = undefined;
       }
     }
@@ -522,7 +522,7 @@ function function_4b23ad31(machine, trigger) {
 function give_item(itemname, amount = 1, var_75766173 = 0, var_d2468501 = 0) {
   self endon(#"death");
 
-  if(!isDefined(itemname) || itemname == # "") {
+  if(!isDefined(itemname) || itemname == #"") {
     return;
   }
 
@@ -530,7 +530,7 @@ function give_item(itemname, amount = 1, var_75766173 = 0, var_d2468501 = 0) {
   currentweapon = self getcurrentweapon();
 
   if(isDefined(item)) {
-    if(itemname === # "grapple_t9_item_sr" && !var_d2468501) {
+    if(itemname === #"grapple_t9_item_sr" && !var_d2468501) {
       if(amount == 1) {
         item.count = 5;
       } else if(amount == 2) {
@@ -578,7 +578,7 @@ function give_item(itemname, amount = 1, var_75766173 = 0, var_d2468501 = 0) {
 
       item.hidetime = 0;
 
-      if(item.itementry.itemtype === # "scorestreak") {
+      if(item.itementry.itemtype === #"scorestreak") {
         if(self.inventory.items[var_fa3df96].networkid != 32767) {
           self item_inventory::drop_inventory_item(self.inventory.items[var_fa3df96].networkid);
           item_world::function_de2018e3(item, self, var_fa3df96);
@@ -607,7 +607,7 @@ function give_equipment(itemname, var_738dfc81) {
       dropitem = self item_drop::drop_item(i, point.itementry.weapon, 1, point.itementry.amount, point.id, self.origin, self.angles);
 
       if(isDefined(dropitem)) {
-        var_641d3dc2 = dropitem.itementry.itemtype != # "attachment";
+        var_641d3dc2 = dropitem.itementry.itemtype != #"attachment";
         itementry = dropitem.itementry;
         var_1035544d = self item_world::pickup_item(dropitem, var_641d3dc2);
 

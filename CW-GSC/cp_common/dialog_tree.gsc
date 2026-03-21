@@ -62,7 +62,7 @@ function new_tree(enter_func = undefined, exit_func = undefined, allow_movement 
   new_dialog.position = array(1224, 650);
   new_dialog.state_index = 0;
   new_dialog.temp_disabled = 0;
-  new_dialog.var_6c2428f4 = # "hash_23c2f3c5f7013d69";
+  new_dialog.var_6c2428f4 = #"hash_23c2f3c5f7013d69";
   new_dialog set_scriptbundle(script_bundle);
   var_ed170ba3 = level.var_d5314f55.size;
   level.var_d5314f55[var_ed170ba3] = new_dialog;
@@ -428,7 +428,7 @@ function function_cfa96cee(dialog_tree, anim_struct, timer, kill_notify = "dialo
     tagname = undefined;
   }
 
-  interactstring = # "OBJECTIVES/TALK_TO";
+  interactstring = #"OBJECTIVES/TALK_TO";
   self util::create_cursor_hint(tagname, use_offset, interactstring, use_dist, undefined, undefined, undefined, display_dist, use_angles);
   self prompts::function_92127496(1);
   self prompts::function_1a5e1da6(#"use", 1);
@@ -845,7 +845,7 @@ function private function_58881e72(sb, str_shot, anim_struct) {
 
       if(notetracks.size) {
         foreach(notetrack in notetracks) {
-          if(notetrack[5] == # "vox") {
+          if(notetrack[5] == #"vox") {
             ent.stop_sound = 1;
 
             if(notetrack[3] > curr_time && notetrack[3] * anim_len < db.skipt) {

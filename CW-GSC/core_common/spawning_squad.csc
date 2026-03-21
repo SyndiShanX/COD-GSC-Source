@@ -75,7 +75,7 @@ function function_cc03b772(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_cbcbd56d(localclientnum) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -85,7 +85,7 @@ function function_cbcbd56d(localclientnum) {
 }
 
 function function_48811bf4(localclientnum) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 

@@ -42,7 +42,7 @@ function private function_9b8d4d02(prematch) {
   var_3a1737b4 = getscriptbundles(#"itemspawnentry");
 
   foreach(var_1461de43, var_28f8f6a9 in var_3a1737b4) {
-    if(var_28f8f6a9.itemtype == # "quest") {
+    if(var_28f8f6a9.itemtype == #"quest") {
       item_world_fixup::remove_item(var_1461de43);
     }
   }

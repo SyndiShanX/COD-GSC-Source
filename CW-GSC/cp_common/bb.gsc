@@ -89,7 +89,7 @@ function private function_88a4e45c() {
       if(waitresult.weapon.name !== "none") {
         function_141c945e("start", waitresult.weapon, self);
 
-        if(waitresult.weapon.name === # "gadget_health_regen") {
+        if(waitresult.weapon.name === #"gadget_health_regen") {
           function_cd497743("heal", self);
         }
       }

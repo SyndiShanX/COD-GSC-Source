@@ -21,7 +21,7 @@
 function init() {
   clientfield::register("world", "" + # "hash_666ad912cb4541f1", 28000, 1, "int");
   clientfield::register("world", "" + # "hash_6601c584f23761c4", 28000, 1, "int");
-  level.var_5bfd847e = # "hash_1446e25b57f66305";
+  level.var_5bfd847e = #"hash_1446e25b57f66305";
   level.var_352c9e03 = &function_af65fe93;
   level.var_e9737821 = &function_c52e8ba;
   level.var_a5a050c1 = 30;
@@ -80,46 +80,46 @@ function function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(!self zm_fasttravel::function_d06e636b(player) || player isswitchingweapons()) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a92d1b24) && !level flag::get_all(self.stub.var_a92d1b24)) {
     switch (self.stub.script_string) {
       case # "helipads_to_main_street":
         if(level flag::get(#"hash_5981a23fdea21f78")) {
-          self.hint_string[n_player_index] = # "hash_5d6c42a597323f3c";
+          self.hint_string[n_player_index] = #"hash_5d6c42a597323f3c";
           b_result = 1;
         }
 
         break;
       case # "anytown_usa_to_bunker":
         if(!level flag::get(#"hash_bc6e6c4a2ea3f60")) {
-          self.hint_string[n_player_index] = # "hash_116dced27129125c";
+          self.hint_string[n_player_index] = #"hash_116dced27129125c";
           b_result = 1;
         }
 
         break;
       case # "observation_to_helipads":
         if(!level flag::get(#"power_on1")) {
-          self.hint_string[n_player_index] = # "hash_793db3dc20917334";
+          self.hint_string[n_player_index] = #"hash_793db3dc20917334";
           b_result = 1;
         }
 
         break;
       default:
-        self.hint_string[n_player_index] = # "zombie/fasttravel_locked";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
         b_result = 1;
         break;
     }
   } else if(is_true(player.var_9c7b96ed[var_8d5d092c])) {
     switch (self.stub.script_string) {
       default:
-        self.hint_string[n_player_index] = # "hash_7667bd0f83307360";
+        self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
         b_result = 1;
         break;
     }
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
     switch (self.stub.script_string) {
       default:
-        self.hint_string[n_player_index] = # "zombie/fasttravel_delay";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
         b_result = 1;
         break;
     }
@@ -127,32 +127,32 @@ function function_c52e8ba(player, var_8d5d092c) {
     switch (self.stub.script_string) {
       case # "main_street_to_helipads":
       case # "observation_to_helipads":
-        self.hint_string[n_player_index] = # "hash_304d3a663d56e57f";
+        self.hint_string[n_player_index] = #"hash_304d3a663d56e57f";
         break;
       case # "helipads_to_main_street":
-        self.hint_string[n_player_index] = # "hash_44a5bc69db5e0ee7";
+        self.hint_string[n_player_index] = #"hash_44a5bc69db5e0ee7";
         break;
       case # "anytown_usa_to_main_street":
-        self.hint_string[n_player_index] = # "hash_423e9a8e530ed95a";
+        self.hint_string[n_player_index] = #"hash_423e9a8e530ed95a";
         break;
       case # "main_street_to_anytown_usa":
-        self.hint_string[n_player_index] = # "hash_29eee6d6112fe209";
+        self.hint_string[n_player_index] = #"hash_29eee6d6112fe209";
         break;
       case # "bunker_to_anytown_usa":
-        self.hint_string[n_player_index] = # "hash_6250636afaff2f8b";
+        self.hint_string[n_player_index] = #"hash_6250636afaff2f8b";
         break;
       case # "anytown_usa_to_bunker":
-        self.hint_string[n_player_index] = # "hash_4c57d5cff43d2407";
+        self.hint_string[n_player_index] = #"hash_4c57d5cff43d2407";
         break;
       case # "observation_to_bunker":
-        self.hint_string[n_player_index] = # "hash_656093d7320c2914";
+        self.hint_string[n_player_index] = #"hash_656093d7320c2914";
         break;
       case # "helipads_to_observation":
       case # "bunker_to_observation":
-        self.hint_string[n_player_index] = # "hash_3b286335feef3751";
+        self.hint_string[n_player_index] = #"hash_3b286335feef3751";
         break;
       default:
-        self.hint_string[n_player_index] = # "hash_2731cc5c1208e2e4";
+        self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
         break;
     }
 
@@ -265,7 +265,7 @@ function private function_c8901681(var_b09af3eb) {
     }
   }
 
-  if(var_b09af3eb == # "hash_419cb6aea3c6771e") {
+  if(var_b09af3eb == #"hash_419cb6aea3c6771e") {
     if(isDefined(level.var_474108be)) {
       if(ishash(level.var_474108be) || isstring(level.var_474108be)) {
         level zm_sq::objective_complete(level.var_474108be);

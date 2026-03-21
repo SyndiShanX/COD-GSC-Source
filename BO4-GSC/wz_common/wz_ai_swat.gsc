@@ -44,7 +44,7 @@ function_8acd749d(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
 }
 
 function_e3151f98(entity) {
-  if(entity.subarchetype === # "human_swat_gunner") {
+  if(entity.subarchetype === #"human_swat_gunner") {
     return true;
   }
 

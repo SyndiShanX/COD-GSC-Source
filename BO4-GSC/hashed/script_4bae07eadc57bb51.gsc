@@ -104,7 +104,7 @@ function_1792ae3(e_item) {
 
   if(isDefined(s_reel)) {
     s_reel.in_inventory = 1;
-    str_alias = # "hash_3b57b74e2c90aee5" + level.var_804a56e3 + 1 + "_pickup";
+    str_alias = #"hash_3b57b74e2c90aee5" + level.var_804a56e3 + 1 + "_pickup";
     self thread zm_vo::function_a2bd5a0c(str_alias);
 
     if(isDefined(e_item)) {
@@ -401,31 +401,31 @@ function_b116e882(var_237f80b0, var_54bb7f87, var_5876458) {
     switch (var_237f80b0) {
       case 0:
         if(var_54bb7f87 == 7) {
-          var_d34b6d2b = # "hash_176589c86eb7168d";
+          var_d34b6d2b = #"hash_176589c86eb7168d";
         }
 
         if(var_54bb7f87 == 8) {
-          var_d34b6d2b = # "hash_176588c86eb714da";
+          var_d34b6d2b = #"hash_176588c86eb714da";
         }
 
         if(var_54bb7f87 == 9) {
-          var_d34b6d2b = # "hash_176583c86eb70c5b";
+          var_d34b6d2b = #"hash_176583c86eb70c5b";
         }
 
         break;
       case 2:
         if(var_54bb7f87 == 1) {
-          var_d34b6d2b = # "hash_57ed5c4232271772";
+          var_d34b6d2b = #"hash_57ed5c4232271772";
         }
 
         if(var_54bb7f87 == 12) {
-          var_d34b6d2b = # "hash_57ed594232271259";
+          var_d34b6d2b = #"hash_57ed594232271259";
         }
 
         break;
       case 4:
         if(var_54bb7f87 == 6) {
-          var_d34b6d2b = # "hash_53a3ee7f09c3cdca";
+          var_d34b6d2b = #"hash_53a3ee7f09c3cdca";
         }
 
         break;
@@ -434,45 +434,45 @@ function_b116e882(var_237f80b0, var_54bb7f87, var_5876458) {
     switch (var_237f80b0) {
       case 0:
         if(var_54bb7f87 == 5) {
-          var_d34b6d2b = # "hash_176586c86eb71174";
+          var_d34b6d2b = #"hash_176586c86eb71174";
         }
 
         break;
       case 1:
         if(var_54bb7f87 == 14) {
-          var_d34b6d2b = # "hash_74fa51b8f89d1cc1";
+          var_d34b6d2b = #"hash_74fa51b8f89d1cc1";
         }
 
         if(var_54bb7f87 == 17) {
-          var_d34b6d2b = # "hash_74fa4eb8f89d17a8";
+          var_d34b6d2b = #"hash_74fa4eb8f89d17a8";
         }
 
         break;
       case 2:
         if(var_54bb7f87 == 6) {
-          var_d34b6d2b = # "hash_57ed5b42322715bf";
+          var_d34b6d2b = #"hash_57ed5b42322715bf";
         }
 
         if(var_54bb7f87 == 9) {
-          var_d34b6d2b = # "hash_57ed5a423227140c";
+          var_d34b6d2b = #"hash_57ed5a423227140c";
         }
 
         break;
       case 4:
         if(var_54bb7f87 == 3) {
-          var_d34b6d2b = # "hash_53a3eb7f09c3c8b1";
+          var_d34b6d2b = #"hash_53a3eb7f09c3c8b1";
         }
 
         if(var_54bb7f87 == 4) {
-          var_d34b6d2b = # "hash_53a3e87f09c3c398";
+          var_d34b6d2b = #"hash_53a3e87f09c3c398";
         }
 
         if(var_54bb7f87 == 6) {
-          var_d34b6d2b = # "hash_53a3e97f09c3c54b";
+          var_d34b6d2b = #"hash_53a3e97f09c3c54b";
         }
 
         if(var_54bb7f87 == 9) {
-          var_d34b6d2b = # "hash_53a3ef7f09c3cf7d";
+          var_d34b6d2b = #"hash_53a3ef7f09c3cf7d";
         }
 
         break;
@@ -518,7 +518,7 @@ function_2767c5d7(e_player) {
     t_crafting = self;
   }
 
-  if(t_crafting.blueprint.name == # "zblueprint_office_teleporter_modifier") {
+  if(t_crafting.blueprint.name == #"zblueprint_office_teleporter_modifier") {
     t_crafting.var_4f749ffe show();
 
     if(function_8b1a219a()) {
@@ -833,7 +833,7 @@ function_55ca39d8() {
   var_19400951 = spawn("script_origin", self.origin);
   var_19400951 playLoopSound(#"hash_5fcc4dd87aec52c7", 0.5);
 
-  if(util::get_game_type() != # "zstandard") {
+  if(util::get_game_type() != #"zstandard") {
     wait 3;
   }
 
@@ -842,7 +842,7 @@ function_55ca39d8() {
   var_19400951 delete();
   array::run_all(self.a_e_clip, &delete);
 
-  if(util::get_game_type() != # "zstandard") {
+  if(util::get_game_type() != #"zstandard") {
     if(self.a_s_powerups.size > 1) {
       zm_powerups::specific_powerup_drop("full_ammo", self.a_s_powerups[0].origin);
 

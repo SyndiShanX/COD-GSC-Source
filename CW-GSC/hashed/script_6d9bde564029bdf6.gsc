@@ -108,12 +108,12 @@ function event_handler[bulletwhizby] function_e77b4f15(eventstruct) {
         break;
     }
   } else if(isDefined(source.turretweapon)) {
-    if(source.turretweapon.name == # "gun_ultimate_turret") {
+    if(source.turretweapon.name == #"gun_ultimate_turret") {
       source.var_87b1ba00 = 1;
       self playkillstreakthreat(source.killstreaktype);
     }
   } else if(isDefined(source.weapon)) {
-    if(isDefined(level.var_24de8afe) && isDefined(source.ai) && is_true(source.ai.swat_gunner) && source.weapon.name == # "hash_6c1be4b025206124") {
+    if(isDefined(level.var_24de8afe) && isDefined(source.ai) && is_true(source.ai.swat_gunner) && source.weapon.name == #"hash_6c1be4b025206124") {
       source[[level.var_24de8afe]](self, source.script_owner);
       source.var_87b1ba00 = 1;
     }
@@ -272,9 +272,9 @@ function private function_b18b0b7b(attacker, inflictor, weapon, mod) {
   waittillframeend();
 
   if(isDefined(attacker) && isPlayer(attacker) && !attacker hasperk(#"specialty_quieter")) {
-    if(weapon.name == # "dog_ai_defaultmelee" && isDefined(inflictor)) {
+    if(weapon.name == #"dog_ai_defaultmelee" && isDefined(inflictor)) {
       attacker function_bd715920(weapon, self, inflictor.origin, inflictor);
-    } else if(weapon.name == # "hero_flamethrower" || weapon.name == # "sig_blade") {
+    } else if(weapon.name == #"hero_flamethrower" || weapon.name == #"sig_blade") {
       attacker function_bd715920(weapon, self, attacker.origin, attacker);
     }
   }
@@ -295,7 +295,7 @@ function private function_b18b0b7b(attacker, inflictor, weapon, mod) {
 
   weaponclass = util::getweaponclass(weapon);
 
-  if(isDefined(weaponclass) && weaponclass == # "weapon_sniper") {
+  if(isDefined(weaponclass) && weaponclass == #"weapon_sniper") {
     self function_b06bbccf(attacker);
   }
 }

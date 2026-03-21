@@ -36,7 +36,7 @@ on_player_damage(params) {
     str_current_anim = params.einflictor.str_current_anim;
   }
 
-  if(var_e72cb811 === # "crimson_nosferatu" && str_current_anim === # "hash_30a3ae992c453f0c") {
+  if(var_e72cb811 === #"crimson_nosferatu" && str_current_anim === #"hash_30a3ae992c453f0c") {
     self notify(#"hash_6938bc311a1a893e");
   }
 }
@@ -45,21 +45,21 @@ on_ai_killed(params) {
   e_attacker = params.eattacker;
 
   if(isPlayer(e_attacker)) {
-    if(self.archetype == # "nosferatu") {
+    if(self.archetype == #"nosferatu") {
       str_zone = self zm_utility::get_current_zone();
 
       if(isDefined(params.weapon) && isDefined(params.weapon.name)) {
         str_weapon = params.weapon.name;
       }
 
-      if(str_zone === "zone_dining_room" && str_weapon === # "stake_knife") {
+      if(str_zone === "zone_dining_room" && str_weapon === #"stake_knife") {
         e_attacker notify(#"hash_4505abb76e48700a");
       }
 
       return;
     }
 
-    if(self.archetype == # "werewolf") {
+    if(self.archetype == #"werewolf") {
       str_zone = self zm_utility::get_current_zone();
 
       if(isDefined(params.weapon) && isDefined(params.weapon.name)) {

@@ -112,16 +112,16 @@ function function_df36a02d(attacker, weapon, mod) {
 
     switch (weaponclass) {
       case # "weapon_knife":
-        var_f2c36eba = # "hash_49b586d05aaa0209";
-        var_22938e87 = # "kills";
+        var_f2c36eba = #"hash_49b586d05aaa0209";
+        var_22938e87 = #"kills";
         break;
       case # "weapon_launcher":
-        var_f2c36eba = # "hash_67536f932f6aeb36";
-        var_22938e87 = # "hash_497df827743010c3";
+        var_f2c36eba = #"hash_67536f932f6aeb36";
+        var_22938e87 = #"hash_497df827743010c3";
         break;
       default:
-        var_f2c36eba = # "hash_14b7133a39a0456e";
-        var_22938e87 = # "ekia";
+        var_f2c36eba = #"hash_14b7133a39a0456e";
+        var_22938e87 = #"ekia";
         break;
     }
 
@@ -134,7 +134,7 @@ function function_df36a02d(attacker, weapon, mod) {
     }
 
     if(var_89ea0a9f == 0) {
-      if(weaponclass == # "weapon_knife" || weaponclass == # "weapon_special") {
+      if(weaponclass == #"weapon_knife" || weaponclass == #"weapon_special") {
         if(attacker stats::function_1bb1c57c(#"globalchallenges", #"hash_7f0ce2a2e0a76e67", #"challengetier") > 0) {
           var_89ea0a9f = 2;
         }
@@ -312,7 +312,7 @@ function callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, wea
     return;
   }
 
-  if(self.sessionteam == # "spectator") {
+  if(self.sessionteam == #"spectator") {
     return;
   }
 
@@ -443,7 +443,7 @@ function callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, wea
     self thread[[level.spawnplayerprediction]]();
   }
 
-  if(self.currentspectatingclient != -1 && (level.spectatetype == 4 || level.spectatetype == 5) && self.pers[#"team"] != # "spectator") {
+  if(self.currentspectatingclient != -1 && (level.spectatetype == 4 || level.spectatetype == 5) && self.pers[#"team"] != #"spectator") {
     function_39a7df61(self);
   }
 
@@ -587,7 +587,7 @@ function private function_42862f77(death_params, attacker, deathtimeoffset, psof
 
     return;
   } else {
-    if(game.state != # "playing") {
+    if(game.state != #"playing") {
       return;
     }
 
@@ -1133,7 +1133,7 @@ function function_9956f107() {
 }
 
 function function_21695e86() {
-  if(game.state != # "pregame" && game.state != # "playing") {
+  if(game.state != #"pregame" && game.state != #"playing") {
     return 0;
   }
 
@@ -1161,7 +1161,7 @@ function private function_93115f65(enteredresurrect) {
     return;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     self.sessionstate = "dead";
     self.spectatorclient = -1;
     self.killcamtargetentity = -1;
@@ -1428,7 +1428,7 @@ function private update_weapon_stats(attacker, weapon, smeansofdeath, inflictor)
     }
 
     if(smeansofdeath != "MOD_FALLING" && recordweaponstatkills) {
-      if(weapon.name == # "explosive_bolt" && isDefined(inflictor) && isDefined(inflictor.ownerweaponatlaunch) && inflictor.owneradsatlaunch) {
+      if(weapon.name == #"explosive_bolt" && isDefined(inflictor) && isDefined(inflictor.ownerweaponatlaunch) && inflictor.owneradsatlaunch) {
         inflictorownerweaponatlaunchpickedup = 0;
 
         if(isDefined(attacker.pickedupweapons) && isDefined(attacker.pickedupweapons[inflictor.ownerweaponatlaunch])) {
@@ -1452,7 +1452,7 @@ function private update_weapon_stats(attacker, weapon, smeansofdeath, inflictor)
     if(smeansofdeath == "MOD_HEAD_SHOT") {
       attacker stats::function_eec52333(weapon, #"headshots", 1, attacker.class_num, attackerweaponpickedup);
 
-      if(weapon.statname === # "special_crossbow_t9") {
+      if(weapon.statname === #"special_crossbow_t9") {
         attacker stats::function_e24eec31(weapon, #"destroy_any", 1);
       }
 
@@ -1844,7 +1844,7 @@ function private kill(einflictor, attacker, smeansofdeath, weapon, shitloc) {
   self thread globallogic_score::trackattackeedeath(attackername, smeansofdeath.pers[#"rank"], smeansofdeath.pers[#"rankxp"], smeansofdeath.pers[#"prestige"], smeansofdeath getxuid());
   self thread medals::setlastkilledby(smeansofdeath, attacker);
 
-  if(level.teambased && smeansofdeath.team != # "spectator") {
+  if(level.teambased && smeansofdeath.team != #"spectator") {
     killstreak = killstreaks::get_killstreak_for_weapon(shitloc);
 
     if(!isDefined(killstreak) || is_true(level.killstreaksgivegamescore)) {
@@ -2247,7 +2247,7 @@ function private is_explosive_ragdoll(weapon, inflictor) {
     return false;
   }
 
-  if(weapon.name == # "destructible_car" || weapon.name == # "explodable_barrel") {
+  if(weapon.name == #"destructible_car" || weapon.name == #"explodable_barrel") {
     return true;
   }
 
@@ -2271,7 +2271,7 @@ function private start_explosive_ragdoll(dir, weapon) {
   y = randomintrange(50, 100);
   z = randomintrange(10, 20);
 
-  if(isDefined(weapon) && (weapon.name == # "sticky_grenade" || weapon.name == # "explosive_bolt")) {
+  if(isDefined(weapon) && (weapon.name == #"sticky_grenade" || weapon.name == #"explosive_bolt")) {
     if(isDefined(dir) && lengthsquared(dir) > 0) {
       x = dir[0] * x;
       y = dir[1] * y;
@@ -2378,23 +2378,23 @@ function private update_attacker(attacker, weapon) {
   }
 
   if(isDefined(attacker) && attacker != self && isDefined(weapon)) {
-    if(weapon.statname == # "planemortar") {
+    if(weapon.statname == #"planemortar") {
       if(!isDefined(attacker.planemortarbda)) {
         attacker.planemortarbda = 0;
       }
 
       attacker.planemortarbda++;
-    } else if(weapon.statname == # "dart" || weapon.statname == # "dart_turret") {
+    } else if(weapon.statname == #"dart" || weapon.statname == #"dart_turret") {
       if(!isDefined(attacker.dartbda)) {
         attacker.dartbda = 0;
       }
 
       attacker.dartbda++;
-    } else if(weapon.name == # "straferun_rockets" || weapon.name == # "straferun_gun") {
+    } else if(weapon.name == #"straferun_rockets" || weapon.name == #"straferun_gun") {
       if(isDefined(attacker.straferunbda)) {
         attacker.straferunbda++;
       }
-    } else if(weapon.statname == # "remote_missile" || weapon.statname == # "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+    } else if(weapon.statname == #"remote_missile" || weapon.statname == #"remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
       if(!isDefined(attacker.remotemissilebda)) {
         attacker.remotemissilebda = 0;
       }
@@ -2445,7 +2445,7 @@ function private function_e8decd0b(attacker, weapon, victim, einflictor, smeanso
       var_46604f00 = level.var_648e79b7[attackerentnum];
 
       if(attacker.var_d853c1af === 1 || !isDefined(var_46604f00)) {
-        statname = # "hash_23e04a595aa862a";
+        statname = #"hash_23e04a595aa862a";
         var_46604f00 = {
           #statname: statname, #timestamp: gettime() + level.var_42648a02[statname][3], #weapon: weapon, #victim: victim, #inflictor: einflictor
         };
@@ -2535,7 +2535,7 @@ function updatekillstreak(einflictor, attacker, weapon) {
           };
 
           if(var_6456e8ec <= 30) {
-            var_f952d0b8 = # "killstreak_" + attacker.pers[#"cur_kill_streak"];
+            var_f952d0b8 = #"killstreak_" + attacker.pers[#"cur_kill_streak"];
             scoreevents::processscoreevent(var_f952d0b8, attacker, self, weapon, undefined, var_dbaa74e2);
 
             if(var_6456e8ec == 30) {
@@ -2569,7 +2569,7 @@ function updatekillstreak(einflictor, attacker, weapon) {
         weaponclass = util::getweaponclass(weapon);
         weaponclass = isstring(weaponclass) ? hash(weaponclass) : weaponclass;
 
-        if(weaponclass === # "weapon_pistol") {
+        if(weaponclass === #"weapon_pistol") {
           attacker.pers[#"hash_53c274d14dadc40b"]++;
 
           if(attacker.pers[#"hash_53c274d14dadc40b"] % 5 == 0) {

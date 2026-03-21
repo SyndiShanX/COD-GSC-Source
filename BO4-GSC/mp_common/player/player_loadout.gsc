@@ -579,8 +579,8 @@ give_talents() {
   self.var_c8836f02 = self function_fd62a2aa(self.class_num);
 
   foreach(var_ebdddedf in self.var_c8836f02) {
-    if(var_ebdddedf.namehash == # "hash_6be738527a4213aa" && level.hardcoremode) {
-      var_ebdddedf.namehash = # "hash_5c9c79c25b74b7bb";
+    if(var_ebdddedf.namehash == #"hash_6be738527a4213aa" && level.hardcoremode) {
+      var_ebdddedf.namehash = #"hash_5c9c79c25b74b7bb";
     }
 
     var_b3ed76f5 = function_c84c77d8(var_ebdddedf.loadoutslot);
@@ -888,7 +888,7 @@ function_d126318c(slot, weapon) {
 
   if(weapon.isdualwield) {
     if(#"smg_handling_t8_dw" == rootweaponname) {
-      rootweaponname = # "smg_handling_t8";
+      rootweaponname = #"smg_handling_t8";
     }
   }
 
@@ -1027,11 +1027,11 @@ function_8e961216(slot, previous_weapon) {
     if(isDefined(level.var_50e97365) && level.var_50e97365) {
       primaryoffhandname = self.playerrole.primaryequipment;
     } else {
-      primaryoffhandname = # "weapon_null";
+      primaryoffhandname = #"weapon_null";
     }
   }
 
-  if(primaryoffhandname != # "" && primaryoffhandname != # "weapon_null") {
+  if(primaryoffhandname != #"" && primaryoffhandname != #"weapon_null") {
     primaryoffhand = getweapon(primaryoffhandname);
     var_46119dfa = self getloadoutitem(self.class_num, "primarygrenadecount");
     primaryoffhandcount = var_46119dfa ? 2 : 1;
@@ -1087,7 +1087,7 @@ function_c3448ab0(slot, previous_weapon, force_give_gadget_health_regen = 1) {
   } else {
     secondaryoffhandname = self function_b958b70d(self.class_num, "specialgrenade");
 
-    if(secondaryoffhandname != # "" && secondaryoffhandname != # "weapon_null") {
+    if(secondaryoffhandname != #"" && secondaryoffhandname != #"weapon_null") {
       secondaryoffhand = getweapon(secondaryoffhandname);
       secondaryoffhandcount = self getloadoutitem(self.class_num, "specialgrenadecount");
     }
@@ -1187,7 +1187,7 @@ give_special_offhand(slot, previous_weapon) {
       self ability_util::gadget_power_full(specialoffhand);
     }
 
-    if(isDefined(self.var_ad1472a2) && self.var_ad1472a2 && specialoffhand.name == # "eq_gravityslam") {
+    if(isDefined(self.var_ad1472a2) && self.var_ad1472a2 && specialoffhand.name == #"eq_gravityslam") {
       gadgetslot = self gadgetgetslot(specialoffhand);
       self gadgetpowerchange(gadgetslot, 100 - specialoffhand.var_d911d477);
       self.var_ad1472a2 = 0;
@@ -1418,10 +1418,10 @@ function_53b62db1(newclass) {
   self.curclass = newclass;
 }
 
-function_d7c205b9(newclass, calledfrom = # "unspecified") {
+function_d7c205b9(newclass, calledfrom = #"unspecified") {
   loadoutindex = isDefined(newclass) ? get_class_num(newclass) : undefined;
   self.pers[#"loadoutindex"] = loadoutindex;
-  var_45843e9a = calledfrom == # "give_loadout";
+  var_45843e9a = calledfrom == #"give_loadout";
   var_7f8c24df = 0;
 
   if(!var_45843e9a) {
@@ -1477,7 +1477,7 @@ register_perks() {
     for(i = 0; i < perks.size; i++) {
       perk = perks[i];
 
-      if(perk == # "specialty_null" || perk == # "weapon_null") {
+      if(perk == #"specialty_null" || perk == #"weapon_null") {
         continue;
       }
 

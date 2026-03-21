@@ -92,7 +92,7 @@ function function_fb942d18(localclientnum, oldval, newval, bnewent, binitialsnap
 function private function_88883a8f(localclientnum) {
   self endon(#"keyline_disabled");
 
-  if(function_73f4b33(localclientnum) === self.team || self.team === # "none" || self.script_team === # "any") {
+  if(function_73f4b33(localclientnum) === self.team || self.team === #"none" || self.script_team === #"any") {
     self function_67243557(localclientnum);
 
     if(isDefined(self)) {

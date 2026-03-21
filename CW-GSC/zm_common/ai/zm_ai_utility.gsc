@@ -54,7 +54,7 @@ function private function_a34c1f02() {
     return;
   }
 
-  if(isDefined(self.archetype) && self.archetype == # "zombie") {
+  if(isDefined(self.archetype) && self.archetype == #"zombie") {
     if(is_true(level.var_4d30a9f0)) {
       while(!is_true(self.completed_emerging_into_playable_area)) {
         waitframe(1);
@@ -101,11 +101,11 @@ function private function_637778cf() {
   self.maxhealth = function_f7014c3d(self.health);
   self.health = self.maxhealth;
 
-  if(getdvarint(#"hash_26d204300c52be34", 0) && self.zm_ai_category === # "special") {
+  if(getdvarint(#"hash_26d204300c52be34", 0) && self.zm_ai_category === #"special") {
     target_set(self, (0, 0, 48));
   }
 
-  if(getdvarint(#"hash_367c47109502674", 0) && self.zm_ai_category === # "elite") {
+  if(getdvarint(#"hash_367c47109502674", 0) && self.zm_ai_category === #"elite") {
     target_set(self, (0, 0, 48));
   }
 
@@ -409,7 +409,7 @@ function function_db610082() {
     return false;
   }
 
-  if(self.archetype !== # "zombie") {
+  if(self.archetype !== #"zombie") {
     return false;
   }
 
@@ -461,7 +461,7 @@ function function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point
   var_201ce857 = var_8d3f5b7d && attacker zm_powerups::is_insta_kill_active();
   var_84ed9a13 = function_de3dda83(var_5457dc44, hitloc, point, var_ebcb86d6);
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
-  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== # "armor";
+  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== #"armor";
 
   if(entity function_94d76123(weapon)) {
     var_532264f5 = entity function_86cb3728(weapon);
@@ -678,7 +678,7 @@ function function_a8dc3363(s_location) {
     self.at_entrance_tear_spot = undefined;
     self.spawn_time = gettime();
 
-    if(self.zm_ai_category === # "normal" && s_location.script_noteworthy !== "spawn_location" && s_location.script_noteworthy !== "blight_father_location") {
+    if(self.zm_ai_category === #"normal" && s_location.script_noteworthy !== "spawn_location" && s_location.script_noteworthy !== "blight_father_location") {
       self.spawn_pos = undefined;
       self zm_utility::move_zombie_spawn_location(s_location);
     }
@@ -702,7 +702,7 @@ function function_54054394(entity) {
 function hashelmet(hitloc, enemy) {
   weakpoint = namespace_81245006::function_3131f5dd(enemy, hitloc, 1);
 
-  if(isDefined(weakpoint) && weakpoint.type === # "armor" && weakpoint.var_f371ebb0 === "helmet" && namespace_81245006::function_f29756fe(weakpoint) !== 3) {
+  if(isDefined(weakpoint) && weakpoint.type === #"armor" && weakpoint.var_f371ebb0 === "helmet" && namespace_81245006::function_f29756fe(weakpoint) !== 3) {
     return true;
   }
 

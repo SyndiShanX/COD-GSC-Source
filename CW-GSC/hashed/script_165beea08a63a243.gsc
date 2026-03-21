@@ -56,7 +56,7 @@ function function_7a1e21a9(attacker, v_origin, min_radius, max_radius = 50, var_
 
   time = self fake_physicslaunch(dest_origin, n_power);
 
-  if(self.item.name == # "ray_gun") {
+  if(self.item.name == #"ray_gun") {
     self playSound(#"hash_79ad1219ecf63fc8");
   } else {
     self playSound(#"hash_79ad1219ecf63fc8");

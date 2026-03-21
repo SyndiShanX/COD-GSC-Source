@@ -40,7 +40,7 @@ init_clientfields() {
 }
 
 function_3d4e24ea() {
-  level._effect[#"hash_723a7c4a495d1008"] = # "hash_17207501ee73a374";
+  level._effect[#"hash_723a7c4a495d1008"] = #"hash_17207501ee73a374";
 }
 
 ship_lights_control() {

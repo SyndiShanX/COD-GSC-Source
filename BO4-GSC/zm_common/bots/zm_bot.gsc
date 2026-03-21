@@ -258,7 +258,7 @@ function_e16b5033(actor) {
       override_round_num = actor._starting_round_number;
     }
 
-    if(actor.archetype == # "zombie") {
+    if(actor.archetype == #"zombie") {
       max_health = float(level.zombie_health);
     } else {
       max_health = float(actor zm_ai_utility::function_8d44707e(level.var_faf67c27[actor.archetype].var_6109b81d, override_round_num));

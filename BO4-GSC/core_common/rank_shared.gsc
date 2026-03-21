@@ -57,7 +57,7 @@ initscoreinfo() {
   rowcount = tablelookuprowcount(scoreinfotablename);
 
   if(sessionmodeismultiplayergame() && rowcount === 0) {
-    scoreinfotablename = # "gamedata/tables/mp/scoreinfo/mp_scoreinfo" + "_base.csv";
+    scoreinfotablename = #"gamedata/tables/mp/scoreinfo/mp_scoreinfo" + "_base.csv";
     rowcount = tablelookuprowcount(scoreinfotablename);
   }
 
@@ -103,7 +103,7 @@ initscoreinfo() {
         var_9750677a = tablelookup(scoreinfotablename, 0, type, 10);
         var_9f6af7ed = tablelookup(scoreinfotablename, 0, type, 11);
 
-        if(isDefined(var_9750677a) && var_9750677a != # "" && isDefined(var_9f6af7ed) && var_9f6af7ed != # "") {
+        if(isDefined(var_9750677a) && var_9750677a != #"" && isDefined(var_9f6af7ed) && var_9f6af7ed != #"") {
           ismedal = 1;
         }
 
@@ -183,7 +183,7 @@ registerscoreinfo(type, row, lp, xp, sp, hs, res, var_e775f7ed, dp, is_obj, labe
       level.scoreinfo[type][#"label"] = label;
     }
 
-    if(isDefined(medalname) && medalname != # "") {
+    if(isDefined(medalname) && medalname != #"") {
       level.scoreinfo[type][#"medalnamehash"] = medalname;
     }
 
@@ -451,7 +451,7 @@ on_player_connect() {
   }
 
   if(!isDefined(self.pers[#"hash_4a01db5796cf12b1"])) {
-    self.pers[#"hash_4a01db5796cf12b1"] = # "none";
+    self.pers[#"hash_4a01db5796cf12b1"] = #"none";
   }
 
   if(!isDefined(self.pers[#"controllerparticipationendgameresult"])) {

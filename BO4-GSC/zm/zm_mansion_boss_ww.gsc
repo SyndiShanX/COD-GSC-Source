@@ -139,7 +139,7 @@ init_boss() {
   level.s_boss.var_4944ec8 = getent("boss_sp_mdl", "targetname");
   target_set(level.s_boss.var_4944ec8, (0, 0, 64));
   level.s_boss.var_4944ec8.health = 99999;
-  level.s_boss.var_4944ec8.zm_ai_category = # "boss";
+  level.s_boss.var_4944ec8.zm_ai_category = #"boss";
   level.s_boss.var_b65df36 = getent("boss_stunned_blocker", "targetname");
   level.s_boss.var_f4aac79b = [];
   n_index = 0;
@@ -898,7 +898,7 @@ function_f433c7f5(n_stage) {
         break;
     }
 
-    var_b3160934 = # "hash_44e932e9dc79e15a" + var_6bbd958f;
+    var_b3160934 = #"hash_44e932e9dc79e15a" + var_6bbd958f;
     var_23ee4083 = vectortoangles(var_c43c78f9.origin - var_f26f9e5a.origin);
     level.s_boss.var_4944ec8.origin = var_f26f9e5a.origin;
     level.s_boss.var_4944ec8.angles = var_23ee4083;
@@ -970,12 +970,12 @@ function_c1b6e914() {
       }
 
       if(isai(ent) && isDefined(ent.zm_ai_category)) {
-        if(ent.zm_ai_category == # "basic") {
+        if(ent.zm_ai_category == #"basic") {
           ent thread zombie_utility::setup_zombie_knockdown(self);
           continue;
         }
 
-        if(ent.zm_ai_category == # "popcorn") {
+        if(ent.zm_ai_category == #"popcorn") {
           ent dodamage(ent.health + 100, ent.origin);
           continue;
         }
@@ -1035,7 +1035,7 @@ function_cc0b32f8(n_stage) {
   s_result = level waittilltimeout(var_bfa47c6b, #"hash_38f29f9cb03586ea");
   var_2100633b = 1;
 
-  if(s_result._notify == # "timeout") {
+  if(s_result._notify == #"timeout") {
     var_2100633b = 0;
   }
 
@@ -1199,7 +1199,7 @@ function_bb528a4b(n_stage) {
       continue;
     }
 
-    if(isDefined(w_weapon) && (w_weapon.name === # "stake_knife" || w_weapon.name === # "bowie_knife")) {
+    if(isDefined(w_weapon) && (w_weapon.name === #"stake_knife" || w_weapon.name === #"bowie_knife")) {
       n_damage *= 0.1;
     }
 
@@ -1334,7 +1334,7 @@ function_8d29523e(str_waittill, b_slow = 0) {
 
   level waittill(str_waittill);
 
-  if(str_waittill == # "boss_visible") {
+  if(str_waittill == #"boss_visible") {
     self clientfield::set(str_clientfield, 1);
     return;
   }
@@ -1803,7 +1803,7 @@ function_de60e752() {
 }
 
 function_e9b8eaff(e_attacker) {
-  if(self.archetype !== # "zombie") {
+  if(self.archetype !== #"zombie") {
     return;
   }
 

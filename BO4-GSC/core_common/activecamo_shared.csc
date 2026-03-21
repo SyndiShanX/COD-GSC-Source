@@ -124,7 +124,7 @@ function_ae141bf2(camoindex) {
   activecamoinfo = undefined;
   activecamoname = getactivecamo(camoindex);
 
-  if(isDefined(activecamoname) && activecamoname != # "") {
+  if(isDefined(activecamoname) && activecamoname != #"") {
     activecamoinfo = getscriptbundle(activecamoname);
   }
 

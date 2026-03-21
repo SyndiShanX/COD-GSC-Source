@@ -195,14 +195,14 @@ function_d74a3faf(e_player) {
   var_f2528cbc = undefined;
 
   if(e_player hasweapon(getweapon(#"ww_blundergat_t8"))) {
-    var_f2528cbc = # "ww_blundergat_t8";
+    var_f2528cbc = #"ww_blundergat_t8";
   } else if(e_player hasweapon(getweapon(#"ww_blundergat_t8_upgraded"))) {
-    var_f2528cbc = # "ww_blundergat_t8_upgraded";
+    var_f2528cbc = #"ww_blundergat_t8_upgraded";
   } else if(e_player hasweapon(getweapon(#"ww_blundergat_acid_t8"))) {
-    var_f2528cbc = # "ww_blundergat_acid_t8";
+    var_f2528cbc = #"ww_blundergat_acid_t8";
     var_da887cb9 = getweapon(#"ww_blundergat_acid_t8");
   } else if(e_player hasweapon(getweapon(#"ww_blundergat_acid_t8_upgraded"))) {
-    var_f2528cbc = # "ww_blundergat_acid_t8_upgraded";
+    var_f2528cbc = #"ww_blundergat_acid_t8_upgraded";
     var_da887cb9 = getweapon(#"ww_blundergat_acid_t8_upgraded");
   }
 
@@ -272,7 +272,7 @@ function_fcf0a319(e_player, var_a29167c5) {
   self.var_a29167c5 = undefined;
   self.e_player = undefined;
 
-  if(isDefined(var_2b94e3bb) && var_2b94e3bb._notify == # "magma_timeout") {
+  if(isDefined(var_2b94e3bb) && var_2b94e3bb._notify == #"magma_timeout") {
     self function_599013ad(e_player, 1);
     playsoundatposition(#"hash_65b4e7aafb64c1a1", (0, 0, 0));
   }
@@ -413,7 +413,7 @@ function_6eca1fcc(str_notify) {
 }
 
 function_ed30e654(s_params) {
-  if(self.archetype != # "zombie" && self.archetype != # "zombie_dog" && self.archetype != # "brutus") {
+  if(self.archetype != #"zombie" && self.archetype != #"zombie_dog" && self.archetype != #"brutus") {
     return;
   }
 
@@ -844,22 +844,22 @@ function_d3db303d() {
     if(!(isDefined(self.stub.var_154419fd) && self.stub.var_154419fd)) {
       if(!level flag::get(#"magma_forge_completed")) {
         if(e_player hasweapon(getweapon(#"ww_blundergat_fire_t8_unfinished"))) {
-          var_fc074136 = # "ww_blundergat_fire_t8_unfinished";
+          var_fc074136 = #"ww_blundergat_fire_t8_unfinished";
         }
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_t8"))) {
-        var_fc074136 = # "ww_blundergat_t8";
+        var_fc074136 = #"ww_blundergat_t8";
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_t8_upgraded"))) {
-        var_fc074136 = # "ww_blundergat_t8_upgraded";
+        var_fc074136 = #"ww_blundergat_t8_upgraded";
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_acid_t8"))) {
-        var_fc074136 = # "ww_blundergat_acid_t8";
+        var_fc074136 = #"ww_blundergat_acid_t8";
       } else if(e_player hasweapon(getweapon(#"ww_blundergat_acid_t8_upgraded"))) {
-        var_fc074136 = # "ww_blundergat_acid_t8_upgraded";
+        var_fc074136 = #"ww_blundergat_acid_t8_upgraded";
       }
 
       if(isDefined(var_fc074136)) {
         self.stub.var_cec3094a = 1;
 
-        if(var_fc074136 == # "ww_blundergat_fire_t8_unfinished") {
+        if(var_fc074136 == #"ww_blundergat_fire_t8_unfinished") {
           e_player clientfield::set_to_player("" + # "magma_gat_glow_override", 0);
         } else {
           var_da887cb9 = getweapon(var_fc074136);
@@ -1004,7 +1004,7 @@ function_a6a91f7a(var_f2528cbc) {
     return 0;
   }
 
-  if(var_f2528cbc == # "ww_blundergat_t8" || var_f2528cbc == # "ww_blundergat_acid_t8") {
+  if(var_f2528cbc == #"ww_blundergat_t8" || var_f2528cbc == #"ww_blundergat_acid_t8") {
     self.var_607f49de = zm_utility::spawn_weapon_model(getweapon(#"ww_blundergat_fire_t8"), undefined, self.v_weapon_origin, self.v_weapon_angles);
     return 0;
   }

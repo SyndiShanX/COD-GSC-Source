@@ -21,13 +21,13 @@ function_a1a81955() {
   outcome = spawnStruct();
   outcome.flags = 0;
   outcome.var_c1e98979 = 0;
-  outcome.team = # "free";
+  outcome.team = #"free";
 
   foreach(team, _ in level.teams) {
     outcome.team_score[team] = 0;
   }
 
-  outcome.platoon = # "none";
+  outcome.platoon = #"none";
   outcome.players = [];
   outcome.players_score = [];
   return outcome;

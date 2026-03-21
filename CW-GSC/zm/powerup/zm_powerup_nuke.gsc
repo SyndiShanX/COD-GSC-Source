@@ -144,11 +144,11 @@ function nuke_powerup(drop_item, player_team, var_264cf1f9) {
       zombies_nuked[i] playSound(#"evt_nuked");
     }
 
-    if(zombies_nuked[i].zm_ai_category === # "normal") {
+    if(zombies_nuked[i].zm_ai_category === #"normal") {
       zombies_nuked[i] kill();
-    } else if(zombies_nuked[i].zm_ai_category === # "special") {
+    } else if(zombies_nuked[i].zm_ai_category === #"special") {
       var_c790ea95 = zombies_nuked[i].maxhealth * 0.75;
-    } else if(zombies_nuked[i].zm_ai_category === # "elite") {
+    } else if(zombies_nuked[i].zm_ai_category === #"elite") {
       var_c790ea95 = zombies_nuked[i].maxhealth * 0.25;
     }
 

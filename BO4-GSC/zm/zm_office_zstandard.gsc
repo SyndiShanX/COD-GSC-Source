@@ -41,7 +41,7 @@ init_level_vars() {
   level.var_d7853f35 = 20;
   level.var_ecdf38f = 13;
   level.var_55e562f9 = 15;
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread zm_blockers::function_6f01c3cf("conference1_clocks_tear_in_barricade", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("conference1_clocks_left_barricade", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("conference1_clocks_right_barricade", "script_string", 0);
@@ -149,7 +149,7 @@ defend_areas() {
     return;
   }
 
-  str_next_defend = # "offices";
+  str_next_defend = #"offices";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   zm_utility::function_fdb0368(3);
   level zm_utility::open_door("conf1_file_door", undefined, undefined, 1);
@@ -186,7 +186,7 @@ defend_areas() {
   level zm_utility::open_door("elev1_blocker", undefined, undefined, 1);
   function_cc31fe55(var_3e4bb460);
 
-  if(str_next_defend == # "morgue") {
+  if(str_next_defend == #"morgue") {
     var_420e4589 = array("lab3_level3", "lab1_level3");
   } else {
     var_420e4589 = array("lab3_level3");
@@ -204,7 +204,7 @@ defend_areas() {
   level thread namespace_8f53e87b::play_pentagon_announcer_vox(#"power_activated");
   level.var_4c71614b = 1;
   zm_utility::function_fef4b36a(str_next_defend);
-  str_next_defend = # "groom_lake";
+  str_next_defend = #"groom_lake";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   wait 10;
   enable_groom_lake();
@@ -227,7 +227,7 @@ defend_areas() {
 
   var_420e4589 = array("lab2_level3");
 
-  if(str_third_defend == # "lab_halls") {
+  if(str_third_defend == #"lab_halls") {
     var_420e4589 = array("lab2_level3", "lab1_level3");
   }
 
@@ -238,14 +238,14 @@ defend_areas() {
 function_c87db3f7(str_next_defend) {
   level waittill(#"creating_zone_defend_area");
 
-  if(str_next_defend == # "groom_lake" && isDefined(level.var_35da2d77)) {
+  if(str_next_defend == #"groom_lake" && isDefined(level.var_35da2d77)) {
     gameobjects::release_obj_id(level.var_35da2d77);
     level.var_35da2d77 = undefined;
   }
 
   level flag::wait_till("started_defend_area");
 
-  if(str_next_defend == # "groom_lake") {
+  if(str_next_defend == #"groom_lake") {
     if(isDefined(level.s_cage_portal.s_unitrigger)) {
       zm_unitrigger::unregister_unitrigger(level.s_cage_portal.s_unitrigger);
     }
@@ -257,7 +257,7 @@ function_c87db3f7(str_next_defend) {
   level waittill(#"hash_7a04a7fb98fa4e4d");
   wait 2;
 
-  if(str_next_defend == # "groom_lake") {
+  if(str_next_defend == #"groom_lake") {
     level.s_cage_portal zm_unitrigger::create("", 32, &zm_office_teleporters::portal_think, 0, 0);
     zm_office_teleporters::function_60abbae4(1);
     n_obj_id = gameobjects::get_next_obj_id();
@@ -459,7 +459,7 @@ function_466fb0ff(str_last_defend) {
   str_next_defend = zm_utility::function_40ef77ab(str_last_defend);
 
   for(var_679cd7a8 = zm_utility::function_a877cd10(str_next_defend); true; var_679cd7a8 = zm_utility::function_a877cd10(str_next_defend)) {
-    if(str_next_defend != # "groom_lake") {
+    if(str_next_defend != #"groom_lake") {
       util::delay(4, undefined, &zm_utility::function_11101458, str_next_defend);
     } else {
       var_37b7b46a = function_ac496011();
@@ -475,7 +475,7 @@ function_466fb0ff(str_last_defend) {
     level thread function_c87db3f7(str_next_defend);
     zm_utility::function_33798535(var_679cd7a8.var_39c44288, var_679cd7a8.a_str_zones, var_679cd7a8.var_ed1db1a7);
 
-    if(str_next_defend == # "groom_lake") {
+    if(str_next_defend == #"groom_lake") {
       foreach(e_player in getplayers()) {
         e_player notify(#"defend_completed");
         e_player function_b4afc059(var_37b7b46a);
@@ -517,7 +517,7 @@ function_9217567c() {
     foreach(s_crafting in a_s_crafting) {
       if(isarray(s_crafting.craftfoundry.blueprints)) {
         foreach(s_blueprint in s_crafting.craftfoundry.blueprints) {
-          if(s_blueprint.name === # "zblueprint_shield_zhield_riot") {
+          if(s_blueprint.name === #"zblueprint_shield_zhield_riot") {
             s_crafting.blueprint = s_blueprint;
           }
         }

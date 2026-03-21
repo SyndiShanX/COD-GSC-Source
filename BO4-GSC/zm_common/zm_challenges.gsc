@@ -356,7 +356,7 @@ death_check_for_challenge_updates(e_attacker) {
     e_attacker stats::inc_stat(#"item_stats", w_damage.name, #"instakills", #"statvalue", 1);
   }
 
-  if(w_damage.rootweapon.name == # "smg_handling_t8_dw" || w_damage.rootweapon.name == # "hash_1aea58adc540688c" || w_damage.rootweapon.name == # "smg_handling_t8_upgraded_dw" || w_damage.rootweapon.name == # "hash_3b19c698ebc05141") {
+  if(w_damage.rootweapon.name == #"smg_handling_t8_dw" || w_damage.rootweapon.name == #"hash_1aea58adc540688c" || w_damage.rootweapon.name == #"smg_handling_t8_upgraded_dw" || w_damage.rootweapon.name == #"hash_3b19c698ebc05141") {
     e_attacker debug_print("<dev string:x434>");
 
     e_attacker zm_stats::increment_challenge_stat(#"hash_2a72be53205a8db3");
@@ -366,42 +366,42 @@ death_check_for_challenge_updates(e_attacker) {
   if(weaponhasattachment(w_damage, "uber")) {
     var_4709221d = w_damage.statname;
 
-    if(str_damagemod == "MOD_MELEE" && (var_4709221d == # "ar_stealth_t8" || var_4709221d == # "pistol_standard_t8")) {
+    if(str_damagemod == "MOD_MELEE" && (var_4709221d == #"ar_stealth_t8" || var_4709221d == #"pistol_standard_t8")) {
       e_attacker debug_print("<dev string:x48b>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_3a43a56f5f2aeacc");
       return;
     }
 
-    if(var_4709221d == # "sniper_quickscope_t8" || var_4709221d == # "smg_capacity_t8" || var_4709221d == # "lmg_spray_t8") {
+    if(var_4709221d == #"sniper_quickscope_t8" || var_4709221d == #"smg_capacity_t8" || var_4709221d == #"lmg_spray_t8") {
       e_attacker debug_print("<dev string:x4c6>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_63e3f06d30760b7e");
       return;
     }
 
-    if(var_4709221d == # "lmg_heavy_t8" || var_4709221d == # "shotgun_pump_t8" || var_4709221d == # "pistol_revolver_t8") {
+    if(var_4709221d == #"lmg_heavy_t8" || var_4709221d == #"shotgun_pump_t8" || var_4709221d == #"pistol_revolver_t8") {
       e_attacker debug_print("<dev string:x434>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_2a72be53205a8db3");
       return;
     }
 
-    if(var_4709221d == # "tr_midburst_t8" || var_4709221d == # "smg_fastfire_t8" || var_4709221d == # "ar_fastfire_t8") {
+    if(var_4709221d == #"tr_midburst_t8" || var_4709221d == #"smg_fastfire_t8" || var_4709221d == #"ar_fastfire_t8") {
       e_attacker debug_print("<dev string:x50b>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_733f619bc1c13bdd");
       return;
     }
 
-    if(var_4709221d == # "tr_powersemi_t8" || var_4709221d == # "tr_longburst_t8" || var_4709221d == # "sniper_fastrechamber_t8" || var_4709221d == # "smg_accurate_t8") {
+    if(var_4709221d == #"tr_powersemi_t8" || var_4709221d == #"tr_longburst_t8" || var_4709221d == #"sniper_fastrechamber_t8" || var_4709221d == #"smg_accurate_t8") {
       e_attacker debug_print("<dev string:x556>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_7ac3980eb0c9f12d");
       return;
     }
 
-    if(var_4709221d == # "lmg_standard_t8" || var_4709221d == # "shotgun_semiauto_t8") {
+    if(var_4709221d == #"lmg_standard_t8" || var_4709221d == #"shotgun_semiauto_t8") {
       e_attacker debug_print("<dev string:x5ac>");
 
       e_attacker zm_stats::increment_challenge_stat(#"hash_d0eb45f997dadf0");
@@ -409,7 +409,7 @@ death_check_for_challenge_updates(e_attacker) {
     }
   }
 
-  if(w_damage.statname === # "bowie_knife") {
+  if(w_damage.statname === #"bowie_knife") {
     e_attacker debug_print("<dev string:x5ee>");
 
     e_attacker zm_stats::increment_challenge_stat(#"bowie_kills");

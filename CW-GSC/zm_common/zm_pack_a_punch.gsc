@@ -755,7 +755,7 @@ function private third_person_weapon_upgrade(current_weapon, current_weaponoptio
   if(self hasperk(#"specialty_cooldown")) {
     pap_machine playSound(#"hash_552a43efc3f770d");
     var_397d50da = min(var_397d50da, 1.25);
-  } else if(util::get_game_type() === # "zstandard") {
+  } else if(util::get_game_type() === #"zstandard") {
     pap_machine playSound(#"hash_552a43efc3f770d");
   } else {
     pap_machine playSound(#"zmb_perks_packa_upgrade");

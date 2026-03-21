@@ -620,7 +620,7 @@ function_63102269() {
 function_a7bdf314() {
   foreach(ai in getaiteamarray(level.zombie_team)) {
     if(isalive(ai) && !(isDefined(ai.var_d45ca662) && ai.var_d45ca662) && !(isDefined(ai.marked_for_death) && ai.marked_for_death) && !(isDefined(ai.var_ae4569d5) && ai.var_ae4569d5)) {
-      if(ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "popcorn") {
+      if(ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"popcorn") {
         if(zm_utility::is_magic_bullet_shield_enabled(ai)) {
           ai util::stop_magic_bullet_shield();
         }
@@ -865,7 +865,7 @@ function_aa54541d() {
 
     if(isDefined(a_ai_zombies) && isarray(a_ai_zombies) && a_ai_zombies.size > level.zombie_ai_limit) {
       foreach(ai_zombie in a_ai_zombies) {
-        if(ai_zombie.archetype == # "zombie" && !(isDefined(ai_zombie.var_ae4569d5) && ai_zombie.var_ae4569d5) && !zm_utility::is_magic_bullet_shield_enabled(ai_zombie)) {
+        if(ai_zombie.archetype == #"zombie" && !(isDefined(ai_zombie.var_ae4569d5) && ai_zombie.var_ae4569d5) && !zm_utility::is_magic_bullet_shield_enabled(ai_zombie)) {
           ai_zombie kill();
           break;
         }
@@ -1000,7 +1000,7 @@ function_9ead836c() {
       ai.deathpoints_already_given = 1;
       ai.marked_for_death = 1;
 
-      if((ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "enhanced") && var_4b9821e4 < 6) {
+      if((ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"enhanced") && var_4b9821e4 < 6) {
         var_4b9821e4++;
         ai thread zombie_death::flame_death_fx();
 
@@ -1202,7 +1202,7 @@ pegasus_victim() {
   self thread zm_perk_electric_cherry::electric_cherry_death_fx();
   self clientfield::set("tesla_shock_eyes_fx", 1);
 
-  if(self.archetype == # "zombie") {
+  if(self.archetype == #"zombie") {
     bhtnactionstartevent(self, "electrocute");
   }
 
@@ -1545,17 +1545,17 @@ function_f95a14a0() {
     self.e_linkto.angles = s_scene.angles;
   }
 
-  var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
+  var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
 
   switch (self.subarchetype) {
     case # "hash_fd7b9665529dd42":
-      var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_bundle";
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_bundle";
       break;
     case # "skeleton_spear":
-      var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_spear_no_helm_bundle";
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_no_helm_bundle";
       break;
     case # "hash_1520c8987a671df0":
-      var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_spear_bundle";
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_bundle";
       break;
   }
 
@@ -1708,7 +1708,7 @@ pegasus_strike(str_side) {
     return;
   }
 
-  if(str_side == # "right") {
+  if(str_side == #"right") {
     self clientfield::increment("" + # "hash_1bdce857fd614cef");
   } else {
     self clientfield::increment("" + # "hash_2856f87ecdfaf62");

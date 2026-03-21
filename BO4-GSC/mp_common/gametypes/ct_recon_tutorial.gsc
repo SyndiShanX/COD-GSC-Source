@@ -33,7 +33,7 @@ init() {
 }
 
 function_c9ff0dce() {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self ct_utils::player_reset();
     self.overrideplayerdamage = &callback_player_damage;
 
@@ -95,7 +95,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
     return n_damage;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(isDefined(level.var_ad7c0539)) {
       switch (level.var_ad7c0539) {
         case 7:
@@ -129,7 +129,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       if(isDefined(level.var_ad7c0539)) {
         switch (level.var_ad7c0539) {
@@ -193,7 +193,7 @@ function_9b9525e9() {
   }
 
   level.var_d4668c34 = 1;
-  level.zombie_team = # "axis";
+  level.zombie_team = #"axis";
   level.var_ad7c0539 = 1;
   function_86c058b();
   level.var_ad7c0539 = 2;
@@ -327,7 +327,7 @@ function_5598747a() {
   level thread ct_bots::activate_bots(level.var_66b3c127.size, #"axis");
   level thread function_a71a97eb(undefined, 0.1, undefined, "s_bot_approach_tank_loc");
   level thread ct_vo::function_14b08e49(array(#"hash_46c4843e8f5d2451"), "stop_nag");
-  level.var_3e67eeea = # "hash_2a38a07c2fc52c1f";
+  level.var_3e67eeea = #"hash_2a38a07c2fc52c1f";
   ct_utils::function_93c86846(array(#"hash_36d8331fa342d02a"), "s_sensor_dart_crum_4", array(#"gadget_vision_pulse"), 0, undefined, 50);
   level notify(#"stop_nag");
   ct_vo::function_3ca1b77d();
@@ -887,7 +887,7 @@ function_94c8f1d8(n_max_zombies) {
 }
 
 function_a5f160e7(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, modelindex) {
-  if(isDefined(einflictor) && einflictor.team == # "allies" && isbot(einflictor)) {
+  if(isDefined(einflictor) && einflictor.team == #"allies" && isbot(einflictor)) {
     idamage = 1;
 
     if(randomint(100) < 80) {
@@ -1098,7 +1098,7 @@ function_58c62280(n_goal_radius, b_ignoreall, b_keyline) {
   if(isDefined(b_keyline) && b_keyline) {
     waitframe(1);
 
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       self clientfield::set("player_keyline_render", 1);
     } else {
       self clientfield::set("enemy_keyline_render", 1);
@@ -1113,7 +1113,7 @@ function_58c62280(n_goal_radius, b_ignoreall, b_keyline) {
 
   switch (level.var_ad7c0539) {
     case 1:
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread function_1d2b336(s_loc);
       } else {
         self thread function_75345caf(s_loc);
@@ -1347,7 +1347,7 @@ function_75c5b3ae() {
   a_zombies = getaiarray();
 
   foreach(zombie in a_zombies) {
-    if(isDefined(zombie.weapon) && zombie.weapon.name == # "eq_sensor") {
+    if(isDefined(zombie.weapon) && zombie.weapon.name == #"eq_sensor") {
       arrayremovevalue(a_zombies, zombie);
       break;
     }

@@ -82,7 +82,7 @@ function_93b89303(localclientnum) {
         if(item.id != 32767) {
           point = function_b1702735(item.id);
 
-          if(isDefined(point) && isDefined(point.itementry) && point.itementry.itemtype == # "cash") {
+          if(isDefined(point) && isDefined(point.itementry) && point.itementry.itemtype == #"cash") {
             carryingcash = 1;
             break;
           }

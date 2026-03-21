@@ -110,7 +110,7 @@ function_82e6d4e0() {
 }
 
 function_a2f2a9a3() {
-  if(self.subarchetype !== # "zombie_electric") {
+  if(self.subarchetype !== #"zombie_electric") {
     return false;
   }
 

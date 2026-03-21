@@ -34,25 +34,25 @@ function private function_62708cfa(localclientnum, oldval, newval, bnewent, bini
 
   switch (bwastimejump) {
     case 1:
-      rob = # "hash_c7c1fdf822a1a26";
+      rob = #"hash_c7c1fdf822a1a26";
       break;
     case 2:
-      rob = # "hash_6d27d975efe79b4";
+      rob = #"hash_6d27d975efe79b4";
       break;
     case 3:
-      rob = # "hash_348ef4791d409901";
+      rob = #"hash_348ef4791d409901";
       break;
     case 4:
-      rob = # "hash_286a43b21719f503";
+      rob = #"hash_286a43b21719f503";
       break;
     case 5:
-      rob = # "hash_27be64a191e50e23";
+      rob = #"hash_27be64a191e50e23";
       break;
     case 6:
-      rob = # "hash_19412ffb8206f9cb";
+      rob = #"hash_19412ffb8206f9cb";
       break;
     case 7:
-      rob = # "hash_b7a62ed4703e9e4";
+      rob = #"hash_b7a62ed4703e9e4";
       break;
     default:
       break;

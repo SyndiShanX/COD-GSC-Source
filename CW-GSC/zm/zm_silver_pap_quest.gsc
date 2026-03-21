@@ -104,7 +104,7 @@ function function_3629d229(params) {
 
 function pap_quest_init() {
   level endon(#"end_game");
-  level.var_ce45839f = # "pap_quest_completed";
+  level.var_ce45839f = #"pap_quest_completed";
   level.var_ba3a0e1f = 0;
   level flag::wait_till("all_players_spawned");
   function_ce84849b();
@@ -177,7 +177,7 @@ function function_af722d1c() {
   while(true) {
     waitresult = level flag::wait_till_any(array(#"dark_aether_active", #"hash_447ca5049bb26ab6"));
 
-    if(waitresult._notify == # "dark_aether_active") {
+    if(waitresult._notify == #"dark_aether_active") {
       level.var_f2484ed9 thread zm_silver_util::function_cc15b58a();
       zm_sq::function_3029d343(#"hash_52a7a8068eacfe", level.var_f2484ed9);
       level flag::wait_till_clear(#"dark_aether_active");
@@ -253,12 +253,12 @@ function function_af722d1c() {
   while(!level flag::get(#"pap_quest_completed")) {
     s_waitresult = level waittill(#"pap_quest_completed", #"in_dark_side", #"hash_4adb3a0e79514d43");
 
-    if(s_waitresult._notify === # "hash_4adb3a0e79514d43") {
+    if(s_waitresult._notify === #"hash_4adb3a0e79514d43") {
       level waittill(#"pap_quest_completed");
       continue;
     }
 
-    if(s_waitresult._notify === # "in_dark_side") {
+    if(s_waitresult._notify === #"in_dark_side") {
       if(level flag::get(#"in_dark_side")) {
         zm_sq::function_aee0b4b4(#"hash_502a7e67764fe01a", level.var_241be029);
         level.var_f2484ed9 thread zm_silver_util::function_cc15b58a();
@@ -695,14 +695,14 @@ function function_c95d2c8() {
     level.var_6cddddd9 = util::spawn_model(#"p9_fxanim_zm_sur_machine_weapon_mid_mod", struct::get("piece_midway_mid", "script_noteworthy").origin, struct::get("piece_midway_mid", "script_noteworthy").angles);
     level.var_f070b39a = level.var_6cddddd9;
     level.var_f070b39a.objective_string = "fasttravel_loc_pond_down";
-    level.var_f070b39a.var_b8b53a8f = # "hash_426979dda15dd76f";
-    level.var_f070b39a.var_2490cffb = # "hash_4682886f7b5b58fa";
+    level.var_f070b39a.var_b8b53a8f = #"hash_426979dda15dd76f";
+    level.var_f070b39a.var_2490cffb = #"hash_4682886f7b5b58fa";
   } else {
     level.var_6cddddd9 = util::spawn_model(#"p9_fxanim_zm_sur_machine_weapon_mid_mod", struct::get("piece_midway_btm", "script_noteworthy").origin, struct::get("piece_midway_btm", "script_noteworthy").angles);
     level.var_f070b39a = level.var_6cddddd9;
     level.var_f070b39a.objective_string = "fasttravel_loc_crash_site_down";
-    level.var_f070b39a.var_b8b53a8f = # "hash_5674ed1aa008ba97";
-    level.var_f070b39a.var_2490cffb = # "hash_1e341fd8a260be32";
+    level.var_f070b39a.var_b8b53a8f = #"hash_5674ed1aa008ba97";
+    level.var_f070b39a.var_2490cffb = #"hash_1e341fd8a260be32";
   }
 
   level.var_6cddddd9 clientfield::set("" + # "hash_54d221181b1a11f", 2);
@@ -1200,7 +1200,7 @@ function function_4b593f32() {
 }
 
 function private function_958b2b63(notify_name) {
-  if(notify_name == # "hash_268c943ffdd74fa") {
+  if(notify_name == #"hash_268c943ffdd74fa") {
     level thread zm_utility::function_60daf5f7("wonderfizz", "targetname", 0);
     hidemiscmodels("replace_wunderfizz_thing");
   }

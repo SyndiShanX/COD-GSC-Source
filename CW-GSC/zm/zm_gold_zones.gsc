@@ -326,9 +326,9 @@ function zone_init() {
   namespace_f0b43eb5::create_challenge(#"hash_363ccc9296a0bb43", 90, array("zone_artillery_strike", "zone_artillery_strike2"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_artillery_strike", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
   namespace_f0b43eb5::create_challenge(#"hash_97ec7cda4d126e", 90, array("zone_village", "zone_village2", "zone_village3"), undefined, #"hash_374955e0c82d6aa4", "s_obj_challenge_zone_village", &namespace_f0b43eb5::function_f51adffa, &namespace_f0b43eb5::function_9742c28f);
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_2274efc6b68c164b", 90, "zone_artillery_strike", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_upper_data_center", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_7cfeb04f6733358c";
+  s_challenge.var_4e0096cd = #"hash_7cfeb04f6733358c";
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_1cc52d72244f1eda", 90, "zone_artillery_strike2", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_lower_data_center", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_2c46e924aa04dbf1";
+  s_challenge.var_4e0096cd = #"hash_2c46e924aa04dbf1";
   namespace_f0b43eb5::create_challenge(#"hash_79ec66f63fc093c6", 90, "zone_trenches_office", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_motor_office", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   namespace_f0b43eb5::create_challenge(#"hash_3b5a9c328640c84f", 90, "zone_trenches_garage", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_motor_garage", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   namespace_f0b43eb5::create_challenge(#"hash_864f03f723d7dc3", 90, "zone_tents_a", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_tents_a", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
@@ -336,20 +336,20 @@ function zone_init() {
   namespace_f0b43eb5::create_challenge(#"hash_78b5818aca0414eb", 90, "zone_field_hospital", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_field_hospital", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   namespace_f0b43eb5::create_challenge(#"hash_3f88531b59d4cc0b", 90, "zone_walkway", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_walkway", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_64cc9ec22d551ae5", 90, "zone_colonel_office", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_colonel_office", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_64c3b50e1de42d57";
+  s_challenge.var_4e0096cd = #"hash_64c3b50e1de42d57";
   namespace_f0b43eb5::create_challenge(#"hash_1f16e513ff381c18", 90, "zone_chopper_gunner", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_chopper_gunner", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   namespace_f0b43eb5::create_challenge(#"hash_2f4a7e5da228eead", 90, "zone_chopper_gunner3", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_chopper_gunner3", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_257a005f64e8c41e", 90, array("zone_armory2", "zone_armory2_outside"), undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_armory", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_3cc28115aef8d6f6";
+  s_challenge.var_4e0096cd = #"hash_3cc28115aef8d6f6";
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_6e9cc81a9a529f18", 90, "zone_lot", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_lot", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_4e1d8a30f4ea2f2b";
+  s_challenge.var_4e0096cd = #"hash_4e1d8a30f4ea2f2b";
   namespace_f0b43eb5::create_challenge(#"hash_52a6d61d1d8e570c", 90, "zone_weapon_lab", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_weapon_lab", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_346b7588b58a9ac5", 90, "zone_mess_hall", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_mess_hall", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_8dfbc02b8d787a5";
+  s_challenge.var_4e0096cd = #"hash_8dfbc02b8d787a5";
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_b5ed710fa19696b", 90, "zone_briefing_room", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_briefing_room", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_3802e9f1f7fdc236";
+  s_challenge.var_4e0096cd = #"hash_3802e9f1f7fdc236";
   s_challenge = namespace_f0b43eb5::create_challenge(#"hash_749eb9a0557be48d", 90, "zone_scientist_quarters", undefined, #"hash_5cee7e17aff44d7e", "s_obj_challenge_zone_scientist_quarters", &namespace_f0b43eb5::function_1d60215, &namespace_f0b43eb5::function_6be352fc);
-  s_challenge.var_4e0096cd = # "hash_6e2fe33d2742e702";
+  s_challenge.var_4e0096cd = #"hash_6e2fe33d2742e702";
 }
 
 function function_2c6d81f9() {
@@ -378,13 +378,13 @@ function function_a2cfeff5() {
   level flag::wait_till(#"all_players_spawned");
 
   foreach(var_9503a78 in getEntArray("flinger_pad_aimer", "targetname")) {
-    if(var_9503a78.script_noteworthy === # "jump_pad") {
+    if(var_9503a78.script_noteworthy === #"jump_pad") {
       var_9503a78 clientfield::set("set_compass_icon", 1);
     }
   }
 
   foreach(var_b338b8ed in getEntArray("flinger_landing_pad", "targetname")) {
-    if(var_b338b8ed.script_noteworthy === # "landing_pad") {
+    if(var_b338b8ed.script_noteworthy === #"landing_pad") {
       var_b338b8ed clientfield::set("set_compass_icon", 1);
     }
   }
@@ -455,95 +455,95 @@ function function_27028b8e(str_zone) {
     case # "zone_village3":
     case # "zone_village2":
     case # "zone_village":
-      str_display = # "hash_1a784c62f3f40a7c";
+      str_display = #"hash_1a784c62f3f40a7c";
       break;
     case # "zone_village_house":
-      str_display = # "hash_712a00f5a89f306c";
+      str_display = #"hash_712a00f5a89f306c";
       break;
     case # "zone_portal_transfer":
-      str_display = # "hash_435a0098fb8df5e4";
+      str_display = #"hash_435a0098fb8df5e4";
       break;
     case # "zone_atrium":
-      str_display = # "hash_7f333ea55aeef7fe";
+      str_display = #"hash_7f333ea55aeef7fe";
       break;
     case # "zone_scientist":
-      str_display = # "hash_6e2fe33d2742e702";
+      str_display = #"hash_6e2fe33d2742e702";
       break;
     case # "zone_peck_quarters":
-      str_display = # "hash_475dca43d660d1cb";
+      str_display = #"hash_475dca43d660d1cb";
       break;
     case # "zone_firebase":
     case # "zone_firebase3":
     case # "zone_firebase2":
-      str_display = # "hash_5c666bba11ef5ae5";
+      str_display = #"hash_5c666bba11ef5ae5";
       break;
     case # "zone_lot":
-      str_display = # "hash_4e1d8a30f4ea2f2b";
+      str_display = #"hash_4e1d8a30f4ea2f2b";
       break;
     case # "zone_armory2":
     case # "zone_armory":
-      str_display = # "hash_3cc28115aef8d6f6";
+      str_display = #"hash_3cc28115aef8d6f6";
       break;
     case # "zone_chopper_gunner":
-      str_display = # "hash_3a39c1a8fe2b4634";
+      str_display = #"hash_3a39c1a8fe2b4634";
       break;
     case # "zone_chopper_gunner2":
-      str_display = # "hash_6a4e6de3fc04ec43";
+      str_display = #"hash_6a4e6de3fc04ec43";
       break;
     case # "zone_chopper_gunner3":
-      str_display = # "hash_11c2394ea2e2d131";
+      str_display = #"hash_11c2394ea2e2d131";
       break;
     case # "zone_trenches":
-      str_display = # "hash_5194b7f4cbf03b5e";
+      str_display = #"hash_5194b7f4cbf03b5e";
       break;
     case # "zone_trenches_office":
-      str_display = # "hash_2b4cf31f8f6bf7e6";
+      str_display = #"hash_2b4cf31f8f6bf7e6";
       break;
     case # "zone_trenches_garage":
-      str_display = # "hash_452e2000b54dc76f";
+      str_display = #"hash_452e2000b54dc76f";
       break;
     case # "zone_tents2":
     case # "zone_tents":
-      str_display = # "hash_7c1689ac620afc8a";
+      str_display = #"hash_7c1689ac620afc8a";
       break;
     case # "zone_tents_a":
-      str_display = # "hash_481096036403fa63";
+      str_display = #"hash_481096036403fa63";
       break;
     case # "zone_tents_b":
-      str_display = # "hash_481097036403fc16";
+      str_display = #"hash_481097036403fc16";
       break;
     case # "zone_artillery_strike2":
     case # "zone_artillery_strike":
-      str_display = # "hash_6412a219d050bd95";
+      str_display = #"hash_6412a219d050bd95";
       break;
     case # "zone_rocky_slope_defend":
-      str_display = # "hash_6b7c9e9fcdc2d4f5";
+      str_display = #"hash_6b7c9e9fcdc2d4f5";
       break;
     case # "zone_napalm_strike":
     case # "zone_napalm_strike2":
-      str_display = # "hash_2c0516d13ededf0c";
+      str_display = #"hash_2c0516d13ededf0c";
       break;
     case # "hash_3dcad3b850818581":
-      str_display = # "hash_3020c93a3f65deed";
+      str_display = #"hash_3020c93a3f65deed";
       break;
     case # "zone_burnt_forest_defend":
-      str_display = # "hash_49e45240b857b096";
+      str_display = #"hash_49e45240b857b096";
       break;
     case # "zone_hillside_road_defend":
-      str_display = # "hash_1159d5e7f96b57cc";
+      str_display = #"hash_1159d5e7f96b57cc";
       break;
     case # "zone_opc":
     case # "zone_opc_room":
-      str_display = # "hash_67b0f231034932d8";
+      str_display = #"hash_67b0f231034932d8";
       break;
     case # "zone_field_hospital":
-      str_display = # "hash_5387a0350fe7780b";
+      str_display = #"hash_5387a0350fe7780b";
       break;
     case # "zone_walkway":
-      str_display = # "hash_2aa69d05c4cff89c";
+      str_display = #"hash_2aa69d05c4cff89c";
       break;
     case # "zone_weapon_lab":
-      str_display = # "hash_42192a6d158c852c";
+      str_display = #"hash_42192a6d158c852c";
       break;
     default:
       str_display = undefined;

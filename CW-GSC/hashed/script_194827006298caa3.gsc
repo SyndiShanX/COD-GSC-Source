@@ -91,7 +91,7 @@ function private function_dbeb7b0f(eventstruct) {
   self.b_activated = 1;
   self sethintstring("");
   var_b976eb20 = randomint(9);
-  str_vox = # "hash_51f7b50d9cc1fe6" + var_b976eb20 + 1 + "_" + var_b976eb20;
+  str_vox = #"hash_51f7b50d9cc1fe6" + var_b976eb20 + 1 + "_" + var_b976eb20;
   var_9bb8ce1a = util::spawn_model("tag_origin", self.origin);
   waitframe(1);
   var_9bb8ce1a zm_vo::function_d6f8bbd9(str_vox);
@@ -213,11 +213,11 @@ function private function_8a9ecf71(instance, var_842cdacd, var_aa19ae, spawn_fun
       ai thread[[spawn_func]](instance, spawn);
       ai thread function_f0abbc8b();
 
-      if(ai.archetype === # "mechz") {
+      if(ai.archetype === #"mechz") {
         ai thread function_c7db899f();
-      } else if(ai.archetype === # "zombie_dog") {
+      } else if(ai.archetype === #"zombie_dog") {
         ai clientfield::set("sr_dog_fx", 1);
-      } else if(ai.archetype === # "hash_7c0d83ac1e845ac2") {
+      } else if(ai.archetype === #"hash_7c0d83ac1e845ac2") {
         level thread function_d3d7a798(ai);
       }
     }
@@ -355,7 +355,7 @@ function private function_57a97c81(instance, spawn) {
 
     s_result = self waittill(#"hash_11eeb7d23f82d744", #"hash_2e9e1859076296fb");
 
-    if(s_result._notify === # "hash_11eeb7d23f82d744") {
+    if(s_result._notify === #"hash_11eeb7d23f82d744") {
       arrayremovevalue(instance.a_goals, self.var_6b51e390);
       self.var_6b51e390 = struct::get(self.var_6b51e390.targetname, "target");
 
@@ -539,9 +539,9 @@ function private function_92184323(eventstruct) {
   function_1eaaceab(instance.a_ai);
   arrayremovevalue(instance.a_ai, undefined);
 
-  if(self.current_state.name === # "wander") {
+  if(self.current_state.name === #"wander") {
     foreach(ai in instance.a_ai) {
-      if(ai.current_state.name === # "chase" || self.current_state.name === # "investigate") {
+      if(ai.current_state.name === #"chase" || self.current_state.name === #"investigate") {
         function_7d9c6082(instance, ai);
         instance flag::set(#"hash_3ea0bab19c8c86b6");
         return;
@@ -558,7 +558,7 @@ function private function_92184323(eventstruct) {
     return;
   }
 
-  if(self.current_state.name === # "investigate" || self.current_state.name === # "chase") {
+  if(self.current_state.name === #"investigate" || self.current_state.name === #"chase") {
     self.var_7c4488fd = 1;
     function_7d9c6082(instance, self);
     instance flag::set(#"hash_3ea0bab19c8c86b6");
@@ -570,7 +570,7 @@ function private function_7d9c6082(instance, ai) {
     return;
   }
 
-  if(ai.current_state.name === # "chase") {
+  if(ai.current_state.name === #"chase") {
     if(isDefined(ai.favoriteenemy)) {
       instance.var_571f5454 = ai.favoriteenemy.origin;
       return;
@@ -675,8 +675,8 @@ function private function_d3d7a798(ai) {
       ai function_ca912561(instance);
     } else {
       foreach(var_f077a87e in instance.a_ai) {
-        if(var_f077a87e.aitype === # "spawner_zm_steiner_split_radiation_blast" || var_f077a87e.aitype === # "spawner_zm_steiner_split_radiation_bomb") {
-          ai_name = var_f077a87e.aitype === # "spawner_zm_steiner_split_radiation_blast" ? "<dev string:xad>" : "<dev string:xc4>";
+        if(var_f077a87e.aitype === #"spawner_zm_steiner_split_radiation_blast" || var_f077a87e.aitype === #"spawner_zm_steiner_split_radiation_bomb") {
+          ai_name = var_f077a87e.aitype === #"spawner_zm_steiner_split_radiation_blast" ? "<dev string:xad>" : "<dev string:xc4>";
           println("<dev string:xda>" + ai_name + "<dev string:xfe>" + var_f077a87e getentitynumber() + "<dev string:x104>" + var_f077a87e.origin);
 
           if(var_f077a87e.origin[2] < -1000) {

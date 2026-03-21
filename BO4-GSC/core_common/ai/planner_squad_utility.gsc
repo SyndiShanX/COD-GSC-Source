@@ -893,7 +893,7 @@ strategyhasattackobject(planner, constants) {
 
   if(isDefined(objects)) {
     foreach(object in objects) {
-      if(object[#"team"] == team || object[#"team"] == # "any" || object[#"team"] == "free") {
+      if(object[#"team"] == team || object[#"team"] == #"any" || object[#"team"] == "free") {
         return true;
       }
     }
@@ -1023,7 +1023,7 @@ strategyhasdefendobject(planner, constants) {
 
   if(isDefined(objects)) {
     foreach(object in objects) {
-      if(object[#"team"] != team && object[#"team"] != # "any" && object[#"team"] != "free") {
+      if(object[#"team"] != team && object[#"team"] != #"any" && object[#"team"] != "free") {
         return true;
       }
     }

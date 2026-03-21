@@ -237,7 +237,7 @@ function function_2ec075a9(model_name, var_c15ae58d) {
   }
 }
 
-function function_4e49c51d(title = # "", description = # "", var_c7f36d1c = 0, var_92c0faf8, cancel_callback, callback_params, var_380e2def = # "", var_c9ec8cda = # "") {
+function function_4e49c51d(title = #"", description = #"", var_c7f36d1c = 0, var_92c0faf8, cancel_callback, callback_params, var_380e2def = #"", var_c9ec8cda = #"") {
   function_9ed5232e("cp_confirm_overlay" + ".title", title);
   function_9ed5232e("cp_confirm_overlay" + ".description", description);
   function_9ed5232e("cp_confirm_overlay" + ".disableCancel", var_c7f36d1c);
@@ -429,7 +429,7 @@ function teamwithlowestplayercount(playercounts, ignore_team) {
 
 function menuautoassign(comingfrommenu) {
   self closemenus();
-  assignment = # "allies";
+  assignment = #"allies";
 
   if(isDefined(self.botteam) && self.botteam != "autoassign") {
     assignment = self.botteam;
@@ -515,7 +515,7 @@ function teamwithlowestscore() {
 }
 
 function pickteamfromscores(teams) {
-  assignment = # "allies";
+  assignment = #"allies";
 
   if(teamscoresequal()) {
     assignment = teams[randomint(teams.size)];
@@ -678,7 +678,7 @@ function function_cdbb5c49(show, persistent) {
 function function_ac6e682a() {
   self endon(#"disconnect");
   initial_black = lui::get_luimenu("InitialBlack");
-  initial_black.var_6fba7045 = # "kill_initial_black";
+  initial_black.var_6fba7045 = #"kill_initial_black";
   self val::set(#"initial_black", "disable_oob", 1);
   function_cdbb5c49(1, 1);
 

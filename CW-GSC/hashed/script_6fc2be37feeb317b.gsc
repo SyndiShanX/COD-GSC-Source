@@ -104,7 +104,7 @@ function function_e0069640(struct) {
   scriptmodel = content_manager::spawn_script_model(struct, #"p9_fxanim_zm_gp_pap_xmodel", 1);
   zm_utility::function_ca960904(scriptmodel);
 
-  if(struct.parent.content_script_name !== # "safehouse") {
+  if(struct.parent.content_script_name !== #"safehouse") {
     objid = [[var_c6d25878]](#"hash_1fb6c7512b2e0e38", scriptmodel);
     struct.objectiveid = objid;
     scriptmodel.objectiveid = objid;
@@ -204,13 +204,13 @@ function private function_90017e84(params) {
 
   switch (params.paplv) {
     case 1:
-      var_ee3c60e = # "hash_2490c799564294c7";
+      var_ee3c60e = #"hash_2490c799564294c7";
       break;
     case 2:
-      var_ee3c60e = # "hash_2490c8995642967a";
+      var_ee3c60e = #"hash_2490c8995642967a";
       break;
     case 3:
-      var_ee3c60e = # "hash_2490c9995642982d";
+      var_ee3c60e = #"hash_2490c9995642982d";
       break;
   }
 
@@ -237,7 +237,7 @@ function function_e3af0084() {
 
       if(!zm_weapons::is_wonder_weapon(weapon)) {
         if(isDefined(var_d2648452.aat)) {
-          if(weapon.weapclass != "melee" && weapon.name != # "special_ballisticknife_t9_dw" && weapon.name != # "special_ballisticknife_t9_dw_upgraded") {
+          if(weapon.weapclass != "melee" && weapon.name != #"special_ballisticknife_t9_dw" && weapon.name != #"special_ballisticknife_t9_dw_upgraded") {
             self function_bf3044dc(weapon, 1);
           }
         } else {
@@ -442,7 +442,7 @@ function function_4609e67c(machine, trigger) {
     var_9f40587a = 0;
 
     if(isDefined(weapon)) {
-      var_9f40587a = weapon.name === # "ray_gun" || weapon.name === # "ray_gun_upgraded" || weapon.name === # "ray_gun_mk2" || weapon.name === # "ray_gun_mk2_upgraded";
+      var_9f40587a = weapon.name === #"ray_gun" || weapon.name === #"ray_gun_upgraded" || weapon.name === #"ray_gun_mk2" || weapon.name === #"ray_gun_mk2_upgraded";
     }
 
     var_9684b86c = 0;
@@ -463,7 +463,7 @@ function function_4609e67c(machine, trigger) {
     response = waitresult.response;
     intpayload = waitresult.intpayload;
 
-    if(response === # "disconnect") {
+    if(response === #"disconnect") {
       return;
     }
 
@@ -473,7 +473,7 @@ function function_4609e67c(machine, trigger) {
     var_9f40587a = 0;
 
     if(isDefined(weapon)) {
-      var_9f40587a = weapon.name === # "ray_gun" || weapon.name === # "ray_gun_upgraded" || weapon.name === # "ray_gun_mk2" || weapon.name === # "ray_gun_mk2_upgraded";
+      var_9f40587a = weapon.name === #"ray_gun" || weapon.name === #"ray_gun_upgraded" || weapon.name === #"ray_gun_mk2" || weapon.name === #"ray_gun_mk2_upgraded";
     }
 
     var_9684b86c = 0;
@@ -494,7 +494,7 @@ function function_4609e67c(machine, trigger) {
       var_9684b86c = 1;
     }
 
-    if(menu == # "sr_weapon_upgrade_menu") {
+    if(menu == #"sr_weapon_upgrade_menu") {
       switch (waitresult.response) {
         case # "hash_6235f4ca625f415":
           if(var_9684b86c) {
@@ -611,12 +611,12 @@ function function_be24d7ce(item) {
     rarity = item.itementry.rarity;
     weapon = item.itementry.weapon;
 
-    if(!isDefined(rarity) || rarity == # "none") {
+    if(!isDefined(rarity) || rarity == #"none") {
       return;
     }
 
-    if(rarity == # "ultra") {
-      rarity = # "legendary";
+    if(rarity == #"ultra") {
+      rarity = #"legendary";
     }
 
     if(isDefined(level.var_dcd62c45[weapon.name][rarity])) {

@@ -60,7 +60,7 @@ function function_777d7ba2() {
   setDvar(#"slide_blur_enabled", 1);
 }
 
-function is_active(var_4ecf5754 = # "silent_film") {
+function is_active(var_4ecf5754 = #"silent_film") {
   s_challenge = zm_trial::function_a36e8c38(#"hash_6c768f3c15d55377");
 
   if(isDefined(s_challenge) && level.var_4ecf5754 === var_4ecf5754) {
@@ -108,7 +108,7 @@ function function_9cf0edbf(localclientnum, b_show) {
     a_ai = arraycombine(a_ai, a_vh, 0, 0);
 
     foreach(ai in a_ai) {
-      if(ai.team == # "axis") {
+      if(ai.team == #"axis") {
         if(b_show && !is_true(ai.var_d8b9c4bf)) {
           ai show();
           continue;

@@ -174,7 +174,7 @@ _annihilatecorpse() {
       cliententgibleftleg(localclientnum, body);
     }
 
-    if(isDefined(body) && _hasgibdef(body) && body.archetype == # "human") {
+    if(isDefined(body) && _hasgibdef(body) && body.archetype == #"human") {
       if(randomint(100) >= 50) {
         continue;
       }

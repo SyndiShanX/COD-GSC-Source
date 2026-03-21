@@ -65,10 +65,10 @@ function function_30933ca1(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     var_d1dc644a = playFX(bwastimejump, #"hash_baef237a01b261a", self.origin + (0, 0, 36), anglestoup(self.angles));
     playSound(bwastimejump, #"hash_6b6572c7d66929d", self.origin + (0, 0, 36));
-  } else if(self.subarchetype === # "hash_28e36e7b7d5421f") {
+  } else if(self.subarchetype === #"hash_28e36e7b7d5421f") {
     var_d1dc644a = playFX(bwastimejump, #"hash_2de6c1300bec68cd", self.origin + (0, 0, 36), anglestoup(self.angles));
     playSound(bwastimejump, #"hash_3731f907ac5beb1", self.origin + (0, 0, 36));
   } else {
@@ -83,10 +83,10 @@ function function_30933ca1(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function dog_spawn_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     util::playFXOnTag(bwasdemojump, #"hash_784a8bc7b9b17876", self, "j_spine2");
     playSound(bwasdemojump, #"hash_6ba18f5ab09d3e00", self.origin + (0, 0, 36));
-  } else if(self.subarchetype === # "hash_28e36e7b7d5421f") {
+  } else if(self.subarchetype === #"hash_28e36e7b7d5421f") {
     util::playFXOnTag(bwasdemojump, #"hash_44214bf58f0e6d87", self, "j_spine2");
     playSound(bwasdemojump, #"hash_6a7f1f4ef6078e4", self.origin + (0, 0, 36));
   } else {

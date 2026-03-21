@@ -173,8 +173,8 @@ function_5650f4ee(var_7a594c78, var_55a94d2c, actualteam, isstartspawn) {
     return 0;
   } else if(isstartspawn && var_55a94d2c != "<dev string:x16e>") {
     return 0;
-  } else if(var_55a94d2c == "<dev string:x176>" && var_7a594c78 != # "any") {
-    if(var_7a594c78 == # "neutral" && isDefined(actualteam)) {
+  } else if(var_55a94d2c == "<dev string:x176>" && var_7a594c78 != #"any") {
+    if(var_7a594c78 == #"neutral" && isDefined(actualteam)) {
       return 0;
     }
 

@@ -21,18 +21,18 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_37c2ef99d645cf87"] = # "hash_446cf10b26252043";
-  level._effect[#"hash_690509b9a2ec2ef3"] = # "hash_75b48b8b912d1e41";
-  level._effect[#"hash_25f2b145ee5374d9"] = # "hash_11321db507e6caf1";
-  level._effect[#"hash_389b5fcf2a0e0690"] = # "hash_794c542edfcb65cb";
-  level._effect[#"hash_665c75d58cefe3d1"] = # "hash_794c532edfcb6418";
-  level._effect[#"hash_25f9bd45ee59a7eb"] = # "hash_7872962edf123231";
-  level._effect[#"hash_38a26bcf2a1439a2"] = # "hash_5b37197a43afded7";
-  level._effect[#"hash_666361d58cf5e083"] = # "hash_2f290373e23f9616";
-  level._effect[#"hash_70d2a1e399efcc91"] = # "hash_50be4928aa2fb3d4";
-  level._effect[#"hash_70d98de399f5c943"] = # "hash_50c53528aa35b086";
-  level._effect[#"hash_650bbbea29506d1e"] = # "hash_2b4f0b7b45b86a3d";
-  level._effect[#"hash_cfd019f2f01e866"] = # "hash_2c30b8327eb9deaa";
+  level._effect[#"hash_37c2ef99d645cf87"] = #"hash_446cf10b26252043";
+  level._effect[#"hash_690509b9a2ec2ef3"] = #"hash_75b48b8b912d1e41";
+  level._effect[#"hash_25f2b145ee5374d9"] = #"hash_11321db507e6caf1";
+  level._effect[#"hash_389b5fcf2a0e0690"] = #"hash_794c542edfcb65cb";
+  level._effect[#"hash_665c75d58cefe3d1"] = #"hash_794c532edfcb6418";
+  level._effect[#"hash_25f9bd45ee59a7eb"] = #"hash_7872962edf123231";
+  level._effect[#"hash_38a26bcf2a1439a2"] = #"hash_5b37197a43afded7";
+  level._effect[#"hash_666361d58cf5e083"] = #"hash_2f290373e23f9616";
+  level._effect[#"hash_70d2a1e399efcc91"] = #"hash_50be4928aa2fb3d4";
+  level._effect[#"hash_70d98de399f5c943"] = #"hash_50c53528aa35b086";
+  level._effect[#"hash_650bbbea29506d1e"] = #"hash_2b4f0b7b45b86a3d";
+  level._effect[#"hash_cfd019f2f01e866"] = #"hash_2c30b8327eb9deaa";
   level.var_7cfd8159 = [];
   clientfield::register("missile", "" + # "hash_6308b5ed3cbd99e3", 1, 1, "counter", &function_75a608a3, 0, 0);
   clientfield::register("actor", "" + # "hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);

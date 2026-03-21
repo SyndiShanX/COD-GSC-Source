@@ -129,7 +129,7 @@ function_ccbbe9c4(n_obj_id) {
   s_notify = self waittill(#"hash_9e146af7233ec36", #"hash_7646638df88a3656");
   objective_setinvisibletoplayer(n_obj_id, self);
 
-  if(s_notify._notify == # "hash_9e146af7233ec36") {
+  if(s_notify._notify == #"hash_9e146af7233ec36") {
     self thread function_8b87e57c(undefined, 2, 60);
   }
 }

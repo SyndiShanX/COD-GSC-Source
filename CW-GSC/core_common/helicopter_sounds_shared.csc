@@ -574,7 +574,7 @@ function aircraft_dustkick(localclientnum) {
   maxheight = 1200;
   minheight = 350;
 
-  if(self.vehicletype == # "qrdrone_mp") {
+  if(self.vehicletype == #"qrdrone_mp") {
     maxheight = 120;
     minheight = 1;
   }

@@ -656,7 +656,7 @@ cantargetplayer(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 

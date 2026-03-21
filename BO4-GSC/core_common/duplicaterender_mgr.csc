@@ -394,11 +394,11 @@ show_friendly_outlines(local_client_num) {
 
 set_entity_draft_unselected(localclientnum, on_off) {
   if(util::is_frontend_map()) {
-    rob = # "hash_79892e1d5a8f9f33";
+    rob = #"hash_79892e1d5a8f9f33";
   } else if(util::function_26489405()) {
-    rob = # "hash_5418181592b8b61a";
+    rob = #"hash_5418181592b8b61a";
   } else {
-    rob = # "hash_68bd6efcb1324e3";
+    rob = #"hash_68bd6efcb1324e3";
   }
 
   if(isDefined(on_off) && on_off) {

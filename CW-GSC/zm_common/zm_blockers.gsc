@@ -1207,10 +1207,10 @@ function door_opened(cost, quick_close) {
     var_dba3d9ab = [[level.var_27028b8e]](zm_zonemgr::function_8a130a46(self, self.purchaser));
 
     if(isDefined(var_dba3d9ab)) {
-      var_ee3c60e = # "hash_156427c599c42bdb";
+      var_ee3c60e = #"hash_156427c599c42bdb";
 
       if(self.clip.script_string === "dynamite" && !is_true(self.var_5cf8fde9)) {
-        var_ee3c60e = # "hash_72191038da6410db";
+        var_ee3c60e = #"hash_72191038da6410db";
       }
 
       level thread popups::displayteammessagetoteam(var_ee3c60e, self.purchaser, self.purchaser.team, var_dba3d9ab, undefined);
@@ -1821,7 +1821,7 @@ function blocker_init() {
   target_nodes = getnodearray(self.target, "targetname");
 
   for(j = 0; j < target_nodes.size; j++) {
-    if(target_nodes[j].type == # "begin") {
+    if(target_nodes[j].type == #"begin") {
       self.neg_start = target_nodes[j];
 
       if(isDefined(self.neg_start.target)) {
@@ -2055,7 +2055,7 @@ function has_blocker_affecting_perk() {
   has_perk = undefined;
 
   if(isDefined(self) && self namespace_e86ffa8::function_efb6dedf(4)) {
-    has_perk = # "talent_speedcola";
+    has_perk = #"talent_speedcola";
   }
 
   return has_perk;
@@ -2645,7 +2645,7 @@ function replace_chunk(barrier, chunk, has_perk, via_powerup = 0, player) {
   barrier.zbarrier.chunk_health[chunk] = 0;
   scalar = 1;
 
-  if(has_perk === # "talent_speedcola") {
+  if(has_perk === #"talent_speedcola") {
     scalar = 0.31;
   }
 

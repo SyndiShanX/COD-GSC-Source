@@ -18,13 +18,13 @@
 #namespace mansion_triad;
 
 init_clientfields() {
-  level._effect[#"hash_2321fa1d61c16113"] = # "hash_3b34b1e477be8113";
-  level._effect[#"hash_231b0e1d61bb6461"] = # "hash_3b2dc5e477b88461";
-  level._effect[#"kp_projectile"] = # "hash_59977c4c851916e0";
-  level._effect[#"hash_27063b90fbaa52"] = # "hash_1a06427eff8dfe13";
-  level._effect[#"hash_2e3e645052f77846"] = # "hash_78712d347cdd5147";
-  level._effect[#"hash_3953ee06542d1089"] = # "hash_795ee7d89d6f10d2";
-  level._effect[#"hash_48b3ee505e47cbfc"] = # "hash_69f0c87c19162d91";
+  level._effect[#"hash_2321fa1d61c16113"] = #"hash_3b34b1e477be8113";
+  level._effect[#"hash_231b0e1d61bb6461"] = #"hash_3b2dc5e477b88461";
+  level._effect[#"kp_projectile"] = #"hash_59977c4c851916e0";
+  level._effect[#"hash_27063b90fbaa52"] = #"hash_1a06427eff8dfe13";
+  level._effect[#"hash_2e3e645052f77846"] = #"hash_78712d347cdd5147";
+  level._effect[#"hash_3953ee06542d1089"] = #"hash_795ee7d89d6f10d2";
+  level._effect[#"hash_48b3ee505e47cbfc"] = #"hash_69f0c87c19162d91";
   clientfield::register("allplayers", "" + # "shield_fire", 8000, 1, "int", &function_da63d789, 0, 0);
   clientfield::register("scriptmover", "" + # "triad_beam", 8000, getminbitcountfornum(3), "int", &triad_beam, 0, 0);
   clientfield::register("scriptmover", "" + # "wisp_fx", 8000, 2, "int", &function_41640257, 0, 0);
@@ -193,13 +193,13 @@ function_b24b4025(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     if(!isDefined(self.var_2cf005a1)) {
       switch (newval) {
         case 1:
-          self.var_2cf005a1 = # "hash_6358e0c353947bef";
+          self.var_2cf005a1 = #"hash_6358e0c353947bef";
           break;
         case 2:
-          self.var_2cf005a1 = # "hash_2cc925174fca95fa";
+          self.var_2cf005a1 = #"hash_2cc925174fca95fa";
           break;
         case 3:
-          self.var_2cf005a1 = # "hash_18d5b37bd34e52c3";
+          self.var_2cf005a1 = #"hash_18d5b37bd34e52c3";
           break;
       }
 

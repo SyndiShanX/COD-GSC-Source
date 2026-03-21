@@ -42,7 +42,7 @@ function private function_c0e2f147(team) {
   }
 
   if(!level.teambased) {
-    team = # "allies";
+    team = #"allies";
   }
 
   teamstr = level.teams[team];

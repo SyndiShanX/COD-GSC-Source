@@ -75,10 +75,10 @@ function function_602f1c7e(instance) {
   instance.s_start = s_start;
   instance.trigger = content_manager::spawn_interact(s_start, &function_1d6f6f32, #"hash_4f14ba599385295e", undefined, 64);
   instance.trigger.instance = instance;
-  var_7f1aa846 = # "hash_2c156700f31bca97";
+  var_7f1aa846 = #"hash_2c156700f31bca97";
 
   if(instance.content_script_name === "amplify") {
-    var_7f1aa846 = # "hash_47ed2b712bc3aa56";
+    var_7f1aa846 = #"hash_47ed2b712bc3aa56";
   }
 
   instance.mdl_radio playLoopSound(var_7f1aa846);
@@ -140,10 +140,10 @@ function function_556eed55(trigger) {
 function function_ba971eed(instance) {
   instance endon(#"cleanup");
   instance.mdl_radio stoploopsound();
-  var_a2f3927f = # "hash_7e7c603e2ee4fc35";
+  var_a2f3927f = #"hash_7e7c603e2ee4fc35";
 
   if(instance.content_script_name === "amplify") {
-    var_a2f3927f = # "hash_e5c05e974fad1d6";
+    var_a2f3927f = #"hash_e5c05e974fad1d6";
   }
 
   instance.mdl_radio playSound(var_a2f3927f);
@@ -172,10 +172,10 @@ function function_ba971eed(instance) {
   level thread function_2c1d994f(instance);
   instance flag::wait_till("radio_tuning_success");
   instance.mdl_radio stoploopsound();
-  var_84152d93 = # "hash_7395bde5c5f8e1b9";
+  var_84152d93 = #"hash_7395bde5c5f8e1b9";
 
   if(instance.content_script_name === "amplify") {
-    var_84152d93 = # "hash_7306f4c002ca0976";
+    var_84152d93 = #"hash_7306f4c002ca0976";
   }
 
   instance.mdl_radio playSound(var_84152d93);
@@ -375,43 +375,43 @@ function function_b1aee549(instance, var_976623c6) {
 
   switch (var_976623c6) {
     case # "hash_21cd65c5d1f254be":
-      str_soundalias = # "hash_6755c177f50bb3fa";
+      str_soundalias = #"hash_6755c177f50bb3fa";
       break;
     case # "hash_4b7cc96fc84ad4b1":
-      str_soundalias = # "hash_599e14c54d1ea19a";
+      str_soundalias = #"hash_599e14c54d1ea19a";
       break;
     case # "hash_4b7cc86fc84ad2fe":
-      str_soundalias = # "hash_738f7006809f42c5";
+      str_soundalias = #"hash_738f7006809f42c5";
       break;
     case # "hash_4b7ccb6fc84ad817":
-      str_soundalias = # "hash_37eada309854dffb";
+      str_soundalias = #"hash_37eada309854dffb";
       break;
     case # "hash_4b7cca6fc84ad664":
-      str_soundalias = # "hash_78c7fa9c089c9381";
+      str_soundalias = #"hash_78c7fa9c089c9381";
       break;
     case # "item_zmquest_sr_cassette_tape_06":
-      str_soundalias = # "hash_5e33c483e58b6702";
+      str_soundalias = #"hash_5e33c483e58b6702";
       break;
     case # "item_zmquest_sr_cassette_tape_07":
-      str_soundalias = # "hash_170ba2307aac7c2d";
+      str_soundalias = #"hash_170ba2307aac7c2d";
       break;
     case # "item_zmquest_sr_cassette_tape_08":
-      str_soundalias = # "hash_45de3a102350938d";
+      str_soundalias = #"hash_45de3a102350938d";
       break;
     case # "item_zmquest_sr_cassette_tape_09":
-      str_soundalias = # "hash_35287d8d56302388";
+      str_soundalias = #"hash_35287d8d56302388";
       break;
     case # "item_zmquest_sr_cassette_tape_10":
-      str_soundalias = # "hash_3eb6b923f3a43bff";
+      str_soundalias = #"hash_3eb6b923f3a43bff";
       break;
     case # "item_zmquest_sr_cassette_tape_11":
-      str_soundalias = # "hash_302e3a9e4c319483";
+      str_soundalias = #"hash_302e3a9e4c319483";
       break;
     case # "item_zmquest_sr_cassette_tape_12":
-      str_soundalias = # "hash_60495857d8fa7605";
+      str_soundalias = #"hash_60495857d8fa7605";
       break;
     case # "item_zmquest_sr_cassette_tape_13":
-      str_soundalias = # "hash_7cf9b86388acf946";
+      str_soundalias = #"hash_7cf9b86388acf946";
       break;
   }
 

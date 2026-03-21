@@ -52,7 +52,7 @@ function init() {
 }
 
 function function_2d43051c() {
-  if(self.archetype === # "raz") {
+  if(self.archetype === #"raz") {
     self thread function_fc49d802();
   }
 }
@@ -228,7 +228,7 @@ function function_8de4f4ec() {
     spawn_ai = spawnactor("spawner_bo5_zombie_zm_gold", s_spawn.origin, s_spawn.angles, undefined, 1);
 
     if(isDefined(spawn_ai)) {
-      spawn_ai.var_c9b11cb3 = # "hash_5d96e8e3ed203968";
+      spawn_ai.var_c9b11cb3 = #"hash_5d96e8e3ed203968";
       spawn_ai thread namespace_85745671::function_2089690e();
       spawn_ai pathmode("move allowed");
       spawn_ai.ignore_enemy_count = 1;
@@ -898,13 +898,13 @@ function function_eeecf07f(params) {
 function private function_cf884a61() {
   switch (level.var_85422c0e) {
     case # "strauss":
-      var_d0767760 = # "hash_3ed655c697ae2603";
+      var_d0767760 = #"hash_3ed655c697ae2603";
       break;
     case # "carver":
-      var_d0767760 = # "hash_3ed645c697ae0ad3";
+      var_d0767760 = #"hash_3ed645c697ae0ad3";
       break;
     case # "grey":
-      var_d0767760 = # "hash_3ed649c697ae119f";
+      var_d0767760 = #"hash_3ed649c697ae119f";
       break;
     default:
       break;
@@ -990,7 +990,7 @@ function spawn_mangler() {
 function function_fdccaaa8(s_params) {
   str_hit_loc = s_params.shitloc;
 
-  if(self.archetype === # "raz" && str_hit_loc === "<dev string:x31b>") {
+  if(self.archetype === #"raz" && str_hit_loc === "<dev string:x31b>") {
     level thread function_f4a3a8b0(self);
   }
 }

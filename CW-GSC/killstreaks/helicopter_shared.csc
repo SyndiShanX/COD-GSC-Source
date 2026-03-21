@@ -173,11 +173,11 @@ function startfx(localclientnum) {
   self endon(#"death");
 
   if(isDefined(self.vehicletype)) {
-    if(self.vehicletype == # "remote_mortar_vehicle_mp") {
+    if(self.vehicletype == #"remote_mortar_vehicle_mp") {
       return;
     }
 
-    if(self.vehicletype == # "vehicle_straferun_mp") {
+    if(self.vehicletype == #"vehicle_straferun_mp") {
       return;
     }
   }

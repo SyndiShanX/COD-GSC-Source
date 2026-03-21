@@ -126,7 +126,7 @@ function private function_1a45bc2a(item) {
     return false;
   }
 
-  if(!isDefined(item.type) || item.type != # "scriptmover" && item.type != # "missile") {
+  if(!isDefined(item.type) || item.type != #"scriptmover" && item.type != #"missile") {
     return false;
   }
 
@@ -153,7 +153,7 @@ function function_1fe1281(localclientnum, newval) {
     return;
   }
 
-  if(self.itementry.itemtype === # "ammo" || self.itementry.itemtype === # "armor" || self.itementry.itemtype === # "weapon") {
+  if(self.itementry.itemtype === #"ammo" || self.itementry.itemtype === #"armor" || self.itementry.itemtype === #"weapon") {
     if(isDefined(self.amount) && newval !== self.amount) {
       item_inventory::function_31868137(localclientnum, self);
     }

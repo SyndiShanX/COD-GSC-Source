@@ -88,11 +88,11 @@ function private control_start() {
     controlinfo[controlinfo.size] = info;
 
     foreach(team in level.teams) {
-      order = # "defend";
+      order = #"defend";
       weight = &function_e8d188ad;
 
       if(team == game.attackers) {
-        order = # "capture";
+        order = #"capture";
         weight = &function_1fb784fb;
       }
 
@@ -157,7 +157,7 @@ function private dom_start() {
   foreach(object in level.domflags) {
     info = level function_5f64ef84(object);
     var_647c4a69[var_647c4a69.size] = info;
-    var_ba83b5af = # "capture";
+    var_ba83b5af = #"capture";
 
     foreach(team in level.teams) {
       level function_8f96464(team, info, var_ba83b5af, #"assault", var_654bc2bc[var_ba83b5af]);
@@ -316,7 +316,7 @@ function private function_8d249e99() {
 
   zoneinfo = function_5f64ef84(level.zones[0].gameobject);
 
-  while(zoneinfo.target.interactteam != # "group_all") {
+  while(zoneinfo.target.interactteam != #"group_all") {
     waitframe(1);
   }
 

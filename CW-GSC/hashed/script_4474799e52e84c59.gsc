@@ -105,20 +105,20 @@ function function_3b0cb5a4(struct) {
     if(isDefined(var_e57cfd4a)) {
       switch (var_e57cfd4a) {
         case # "cryo":
-          str_hint = # "hash_23ffe27517c6140c";
-          var_f8fadaec = # "p9_fxanim_zm_contain_crate_cryo_mod";
+          str_hint = #"hash_23ffe27517c6140c";
+          var_f8fadaec = #"p9_fxanim_zm_contain_crate_cryo_mod";
           break;
         case # "electric":
-          str_hint = # "hash_448d0fa028c30675";
-          var_f8fadaec = # "p9_fxanim_zm_contain_crate_electric_mod";
+          str_hint = #"hash_448d0fa028c30675";
+          var_f8fadaec = #"p9_fxanim_zm_contain_crate_electric_mod";
           break;
         case # "gas":
-          str_hint = # "hash_1f88bf6da4e314";
-          var_f8fadaec = # "p9_fxanim_zm_contain_crate_gas_mod";
+          str_hint = #"hash_1f88bf6da4e314";
+          var_f8fadaec = #"p9_fxanim_zm_contain_crate_gas_mod";
           break;
         case # "plasma":
-          str_hint = # "hash_3122d671887ef5a5";
-          var_f8fadaec = # "p9_fxanim_zm_contain_crate_rust_mod";
+          str_hint = #"hash_3122d671887ef5a5";
+          var_f8fadaec = #"p9_fxanim_zm_contain_crate_rust_mod";
           break;
       }
     } else {
@@ -126,7 +126,7 @@ function function_3b0cb5a4(struct) {
     }
 
     if(getdvarint(#"hash_7dae47192308f053", 1)) {
-      var_f8fadaec = # "p9_fxanim_zm_contain_crate_rust_mod";
+      var_f8fadaec = #"p9_fxanim_zm_contain_crate_rust_mod";
     }
 
     spawn_struct = point;
@@ -238,7 +238,7 @@ function function_35eeef70(var_e57cfd4a) {
       if(isDefined(itemweapon) && function_165e54c9(itemweapon)) {
         switch (var_e57cfd4a) {
           case # "cryo":
-            if(itemweapon.itementry.name == # "ww_ieu_acid_t9_item_sr") {
+            if(itemweapon.itementry.name == #"ww_ieu_acid_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
               self sethintstringforplayer(player, #"hash_23ffe27517c6140c");
@@ -246,7 +246,7 @@ function function_35eeef70(var_e57cfd4a) {
 
             break;
           case # "electric":
-            if(itemweapon.itementry.name == # "ww_ieu_electric_t9_item_sr") {
+            if(itemweapon.itementry.name == #"ww_ieu_electric_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
               self sethintstringforplayer(player, #"hash_448d0fa028c30675");
@@ -254,7 +254,7 @@ function function_35eeef70(var_e57cfd4a) {
 
             break;
           case # "gas":
-            if(itemweapon.itementry.name == # "ww_ieu_gas_t9_item_sr") {
+            if(itemweapon.itementry.name == #"ww_ieu_gas_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
               self sethintstringforplayer(player, #"hash_1f88bf6da4e314");
@@ -262,7 +262,7 @@ function function_35eeef70(var_e57cfd4a) {
 
             break;
           case # "plasma":
-            if(itemweapon.itementry.name == # "ww_ieu_plasma_t9_item_sr") {
+            if(itemweapon.itementry.name == #"ww_ieu_plasma_t9_item_sr") {
               self sethintstringforplayer(player, #"hash_4425ec8a1a0dcd32");
             } else {
               self sethintstringforplayer(player, #"hash_3122d671887ef5a5");
@@ -470,7 +470,7 @@ function function_8d9ddc22(player, var_e7772c37) {
 
       result = player waittilltimeout(5, #"death", #"weapon_change_complete", #"entering_last_stand");
 
-      if(result._notify == # "timeout" || player getcurrentweapon() != var_d5c2e187) {
+      if(result._notify == #"timeout" || player getcurrentweapon() != var_d5c2e187) {
         player notify(#"hash_6a9e5d5a03df7e27");
         self function_72ffec4f();
         level notify(#"hash_142e9131e668557d");

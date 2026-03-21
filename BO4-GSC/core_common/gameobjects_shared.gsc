@@ -83,7 +83,7 @@ class cinteractobj {
     e_object.mdl_gameobject endon(#"death");
     level waittill(#"all_players_spawned");
 
-    if(m_str_team == # "none") {
+    if(m_str_team == #"none") {
       return;
     }
 
@@ -185,7 +185,7 @@ class cinteractobj {
     m_t_interact.var_a865c2cd = isDefined(m_s_bundle.var_a865c2cd) ? m_s_bundle.var_a865c2cd : 0;
     m_t_interact.str_hint = m_str_hint;
 
-    if(m_str_team != # "any") {
+    if(m_str_team != #"any") {
       m_t_interact setteamfortrigger(m_str_team);
     }
 
@@ -248,7 +248,7 @@ class cinteractobj {
     mdl_gameobject.angles = m_t_interact.angles;
     mdl_gameobject gameobjects::set_owner_team(m_str_team);
 
-    if(m_str_team == # "any") {
+    if(m_str_team == #"any") {
       mdl_gameobject gameobjects::allow_use(m_str_team);
       mdl_gameobject gameobjects::set_visible_team(m_str_team);
     } else {
@@ -444,7 +444,7 @@ main() {
   level.vehiclesenabled = getgametypesetting(#"vehiclesenabled");
   level.vehiclestimed = getgametypesetting(#"vehiclestimed");
   level.objectivepingdelay = getgametypesetting(#"objectivepingtime");
-  level.nonteambasedteam = # "allies";
+  level.nonteambasedteam = #"allies";
 
   if(!isDefined(level.allowedgameobjects)) {
     level.allowedgameobjects = [];
@@ -581,7 +581,7 @@ function_176070dc() {
   waittillframeend();
 
   foreach(s_radiant in level.a_s_gameobjects) {
-    if(isDefined(s_radiant.script_team) && s_radiant.script_team != # "none") {
+    if(isDefined(s_radiant.script_team) && s_radiant.script_team != #"none") {
       str_team_override = s_radiant.script_team;
     } else {
       str_team_override = undefined;
@@ -1046,7 +1046,7 @@ create_carry_object(ownerteam, trigger, visuals, offset, objectivename, hitsound
 
   carryobject.carrier = undefined;
   carryobject.isresetting = 0;
-  carryobject.interactteam = # "none";
+  carryobject.interactteam = #"none";
   carryobject.allowweapons = 0;
   carryobject.visiblecarriermodel = undefined;
   carryobject.dropoffset = 0;
@@ -1054,7 +1054,7 @@ create_carry_object(ownerteam, trigger, visuals, offset, objectivename, hitsound
   carryobject.var_22389d70 = 1;
   carryobject.worldicons = [];
   carryobject.carriervisible = 0;
-  carryobject.visibleteam = # "none";
+  carryobject.visibleteam = #"none";
   carryobject.worldiswaypoint = [];
   carryobject.worldicons_disabled = [];
   carryobject.carryicon = undefined;
@@ -1081,9 +1081,9 @@ create_carry_object(ownerteam, trigger, visuals, offset, objectivename, hitsound
     carryobject setup_touching();
     carryobject.curprogress = 0;
     carryobject.userate = 0;
-    carryobject.claimteam = # "none";
+    carryobject.claimteam = #"none";
     carryobject.claimplayer = undefined;
-    carryobject.lastclaimteam = # "none";
+    carryobject.lastclaimteam = #"none";
     carryobject.lastclaimtime = 0;
     carryobject.claimgraceperiod = 0;
     carryobject.mustmaintainclaim = 0;
@@ -1440,7 +1440,7 @@ set_dropped(var_e329a2fa) {
   endorigin = (0, 0, 0);
   body = undefined;
 
-  if(isDefined(self.carrier) && self.carrier.team != # "spectator") {
+  if(isDefined(self.carrier) && self.carrier.team != #"spectator") {
     startorigin = self.carrier.origin + (0, 0, 20);
     endorigin = self.carrier.origin - (0, 0, 2000);
     body = self.carrier.body;
@@ -2030,7 +2030,7 @@ create_generic_object(ownerteam, trigger, visuals, offset) {
     generic_object.keepweapon = 1;
   }
 
-  generic_object.interactteam = # "none";
+  generic_object.interactteam = #"none";
   generic_object.onuse = undefined;
   generic_object.oncantuse = undefined;
   generic_object.onresumeuse = undefined;
@@ -2045,9 +2045,9 @@ create_generic_object(ownerteam, trigger, visuals, offset) {
     generic_object.teamusetimes = [];
     generic_object.teamusetexts = [];
     generic_object.userate = 0;
-    generic_object.claimteam = # "none";
+    generic_object.claimteam = #"none";
     generic_object.claimplayer = undefined;
-    generic_object.lastclaimteam = # "none";
+    generic_object.lastclaimteam = #"none";
     generic_object.lastclaimtime = 0;
     generic_object.claimgraceperiod = 1;
     generic_object.mustmaintainclaim = 0;
@@ -2111,9 +2111,9 @@ create_use_object(ownerteam, trigger, visuals, offset, objectivename, allowiniti
     useobject.trigger sethintstring(useobject.trigger.str_hint);
   }
 
-  useobject.interactteam = # "none";
+  useobject.interactteam = #"none";
   useobject.worldicons = [];
-  useobject.visibleteam = # "none";
+  useobject.visibleteam = #"none";
   useobject.worldiswaypoint = [];
   useobject.worldicons_disabled = [];
   useobject.onuse = undefined;
@@ -2132,9 +2132,9 @@ create_use_object(ownerteam, trigger, visuals, offset, objectivename, allowiniti
     useobject.teamusetimes = [];
     useobject.teamusetexts = [];
     useobject.userate = 0;
-    useobject.claimteam = # "none";
+    useobject.claimteam = #"none";
     useobject.claimplayer = undefined;
-    useobject.lastclaimteam = # "none";
+    useobject.lastclaimteam = #"none";
     useobject.lastclaimtime = 0;
     useobject.claimgraceperiod = 1;
     useobject.mustmaintainclaim = 0;
@@ -2375,7 +2375,7 @@ use_object_onuse(player) {
 }
 
 get_earliest_claim_player() {
-  assert(self.claimteam != # "none");
+  assert(self.claimteam != #"none");
   team = self.claimteam;
   earliestplayer = self.claimplayer;
 
@@ -2512,7 +2512,7 @@ use_object_prox_think() {
 
     previousprogress = self.curprogress;
 
-    if(self.claimteam != # "none") {
+    if(self.claimteam != #"none") {
       if(self use_object_locked_for_team(self.claimteam)) {
         if(isDefined(self.onenduse)) {
           if(isDefined(self.classobj)) {
@@ -2592,7 +2592,7 @@ use_object_prox_think() {
           }
 
           if(self.curprogress == 0) {
-            if(self.claimteam != # "none") {
+            if(self.claimteam != #"none") {
               self set_claim_team(#"none");
             }
           }
@@ -2639,7 +2639,7 @@ use_object_prox_think() {
           self use_object_onuse(self.claimplayer);
         }
 
-        if(!self.mustmaintainclaim && self.claimteam != # "none") {
+        if(!self.mustmaintainclaim && self.claimteam != #"none") {
           self set_claim_team(#"none");
           self.claimplayer = undefined;
         }
@@ -2660,14 +2660,14 @@ use_object_prox_think() {
         self clear_progress();
       }
 
-      if(self.mustmaintainclaim && self get_owner_team() != # "none") {
+      if(self.mustmaintainclaim && self get_owner_team() != #"none") {
         if(!self.numtouching[self get_owner_team()]) {
           self.inuse = 0;
 
           if(isDefined(self.onunoccupied)) {
             self[[self.onunoccupied]]();
           }
-        } else if(self.cancontestclaim && self.lastclaimteam != # "none" && self.numtouching[self.lastclaimteam]) {
+        } else if(self.cancontestclaim && self.lastclaimteam != #"none" && self.numtouching[self.lastclaimteam]) {
           numother = get_num_touching_except_team(self.lastclaimteam);
 
           if(numother == 0) {
@@ -2783,7 +2783,7 @@ function_bbb55f41(sentient) {
     return false;
   }
 
-  if(self.claimteam == # "none") {
+  if(self.claimteam == #"none") {
     if(self can_claim(sentient)) {
       set_claim_team(sentient.team);
       self.claimplayer = sentient;
@@ -2882,9 +2882,9 @@ set_claim_team(newteam) {
   assert(newteam != self.claimteam);
 
   if(self.var_5083077c !== 1) {
-    if(!self.decayprogress && self.claimteam == # "none" && gettime() - self.lastclaimtime > int(self.claimgraceperiod * 1000)) {
+    if(!self.decayprogress && self.claimteam == #"none" && gettime() - self.lastclaimtime > int(self.claimgraceperiod * 1000)) {
       self clear_progress();
-    } else if(newteam != # "none" && newteam != self.lastclaimteam) {
+    } else if(newteam != #"none" && newteam != self.lastclaimteam) {
       self clear_progress();
     }
   }
@@ -3456,12 +3456,12 @@ update_trigger() {
     return;
   }
 
-  if(self.interactteam == # "none") {
+  if(self.interactteam == #"none") {
     self.trigger triggerenable(0);
     return;
   }
 
-  if(self.interactteam == # "friendly") {
+  if(self.interactteam == #"friendly") {
     self.trigger triggerenable(1);
 
     if(isDefined(level.teams[self.ownerteam])) {
@@ -3473,13 +3473,13 @@ update_trigger() {
     return;
   }
 
-  if(self.interactteam == # "enemy") {
+  if(self.interactteam == #"enemy") {
     self.trigger triggerenable(1);
     self.trigger setexcludeteamfortrigger(self.ownerteam);
     return;
   }
 
-  if(self.interactteam == # "any" || !level.teambased) {
+  if(self.interactteam == #"any" || !level.teambased) {
     self.trigger triggerenable(1);
     self.trigger setteamfortrigger(#"none");
   }
@@ -3496,18 +3496,18 @@ update_objective() {
     objective_setteam(self.objectiveid, self.ownerteam);
   }
 
-  if(isDefined(self.absolute_visible_and_interact_team) && self.visibleteam != # "none") {
+  if(isDefined(self.absolute_visible_and_interact_team) && self.visibleteam != #"none") {
     objective_setstate(self.objectiveid, "active");
     function_da7940a3(self.objectiveid, 0);
     function_3ae6fa3(self.objectiveid, self.absolute_visible_and_interact_team, 1);
-  } else if(self.visibleteam == # "any") {
+  } else if(self.visibleteam == #"any") {
     objective_setstate(self.objectiveid, "active");
     function_da7940a3(self.objectiveid, 1);
-  } else if(isDefined(self.ownerteam) && isDefined(level.spawnsystem.ispawn_teammask[self.ownerteam]) && self.visibleteam == # "friendly") {
+  } else if(isDefined(self.ownerteam) && isDefined(level.spawnsystem.ispawn_teammask[self.ownerteam]) && self.visibleteam == #"friendly") {
     objective_setstate(self.objectiveid, "active");
     function_da7940a3(self.objectiveid, 0);
     function_3ae6fa3(self.objectiveid, self.ownerteam, 1);
-  } else if(isDefined(self.ownerteam) && isDefined(level.spawnsystem.ispawn_teammask[self.ownerteam]) && self.visibleteam == # "enemy") {
+  } else if(isDefined(self.ownerteam) && isDefined(level.spawnsystem.ispawn_teammask[self.ownerteam]) && self.visibleteam == #"enemy") {
     objective_setstate(self.objectiveid, "active");
     function_da7940a3(self.objectiveid, 1);
     function_3ae6fa3(self.objectiveid, self.ownerteam, 0);
@@ -3601,9 +3601,9 @@ show_waypoint(e_player) {
 }
 
 should_ping_object(relativeteam) {
-  if(relativeteam == # "friendly" && self.objidpingfriendly) {
+  if(relativeteam == #"friendly" && self.objidpingfriendly) {
     return true;
-  } else if(relativeteam == # "enemy" && self.objidpingenemy) {
+  } else if(relativeteam == #"enemy" && self.objidpingenemy) {
     return true;
   }
 
@@ -3614,23 +3614,23 @@ get_update_teams(relativeteam) {
   updateteams = [];
 
   if(level.teambased) {
-    if(relativeteam == # "friendly") {
+    if(relativeteam == #"friendly") {
       foreach(team, _ in level.teams) {
         if(self is_friendly_team(team)) {
           updateteams[updateteams.size] = team;
         }
       }
-    } else if(relativeteam == # "enemy") {
+    } else if(relativeteam == #"enemy") {
       foreach(team, _ in level.teams) {
         if(!self is_friendly_team(team)) {
           updateteams[updateteams.size] = team;
         }
       }
     }
-  } else if(relativeteam == # "friendly") {
+  } else if(relativeteam == #"friendly") {
     updateteams[updateteams.size] = level.nonteambasedteam;
   } else {
-    updateteams[updateteams.size] = # "axis";
+    updateteams[updateteams.size] = #"axis";
   }
 
   return updateteams;
@@ -3659,7 +3659,7 @@ should_show_compass_due_to_radar(team) {
 _set_team(team) {
   self.ownerteam = team;
 
-  if(team != # "any") {
+  if(team != #"any") {
     self.team = team;
 
     foreach(visual in self.visuals) {
@@ -3671,8 +3671,8 @@ _set_team(team) {
 set_owner_team(team) {
   mdl_gameobject = self function_fd4a5f2f();
 
-  if(team == # "any") {
-    team = # "none";
+  if(team == #"any") {
+    team = #"none";
   }
 
   team = util::get_team_mapping(team);
@@ -3690,9 +3690,9 @@ flip_owner_team() {
   team = get_owner_team();
   b_trigger_enabled = self.trigger istriggerenabled();
 
-  if(team === # "allies") {
+  if(team === #"allies") {
     self set_owner_team(#"axis");
-  } else if(team === # "axis") {
+  } else if(team === #"axis") {
     self set_owner_team(#"allies");
   }
 
@@ -3764,7 +3764,7 @@ set_visible_team(relativeteam) {
   mdl_gameobject.visibleteam = relativeteam;
 
   if(!tweakables::gettweakablevalue("hud", "showobjicons")) {
-    mdl_gameobject.visibleteam = # "none";
+    mdl_gameobject.visibleteam = #"none";
   }
 
   mdl_gameobject update_objective();
@@ -3898,13 +3898,13 @@ gameobject_is_player_looking_at(origin, dot, do_trace, ignore_ent, ignore_trace_
 }
 
 hide_icons(team) {
-  if(self.visibleteam == # "any" || self.visibleteam == # "friendly") {
+  if(self.visibleteam == #"any" || self.visibleteam == #"friendly") {
     hide_friendly = 1;
   } else {
     hide_friendly = 0;
   }
 
-  if(self.visibleteam == # "any" || self.visibleteam == # "enemy") {
+  if(self.visibleteam == #"any" || self.visibleteam == #"enemy") {
     hide_enemy = 1;
   } else {
     hide_enemy = 0;
@@ -4127,7 +4127,7 @@ enable_object(var_13c260df, b_show_objective = 1) {
 get_relative_team(team) {
   team = util::get_team_mapping(team);
 
-  if(self.ownerteam == # "any") {
+  if(self.ownerteam == #"any") {
     return # "friendly";
   }
 
@@ -4149,7 +4149,7 @@ is_friendly_team(team) {
     return true;
   }
 
-  if(self.ownerteam == # "any") {
+  if(self.ownerteam == #"any") {
     return true;
   }
 
@@ -4255,7 +4255,7 @@ can_interact_with(sentient) {
         } else {
           return false;
         }
-      } else if(sentient.team == self.ownerteam && sentient.team != # "free") {
+      } else if(sentient.team == self.ownerteam && sentient.team != #"free") {
         return true;
       } else {
         return false;
@@ -4324,7 +4324,7 @@ get_enemy_team(team) {
 
 set_absolute_visible_and_interact_team(team) {
   team = util::get_team_mapping(team);
-  assert(team == # "allies" || team == # "axis", "<dev string:x1d6>");
+  assert(team == #"allies" || team == #"axis", "<dev string:x1d6>");
   self.absolute_visible_and_interact_team = team;
 }
 
@@ -4470,13 +4470,13 @@ create_pack_object(ownerteam, trigger, visuals, offset, objectivename, allowinit
 
   packobject.carrier = undefined;
   packobject.isresetting = 0;
-  packobject.interactteam = # "none";
+  packobject.interactteam = #"none";
   packobject.allowweapons = 1;
   packobject.visiblecarriermodel = undefined;
   packobject.dropoffset = 0;
   packobject.worldicons = [];
   packobject.carriervisible = 0;
-  packobject.visibleteam = # "none";
+  packobject.visibleteam = #"none";
   packobject.worldiswaypoint = [];
   packobject.worldicons_disabled = [];
   packobject.packicon = undefined;
@@ -4497,9 +4497,9 @@ create_pack_object(ownerteam, trigger, visuals, offset, objectivename, allowinit
     packobject setup_touching();
     packobject.curprogress = 0;
     packobject.userate = 0;
-    packobject.claimteam = # "none";
+    packobject.claimteam = #"none";
     packobject.claimplayer = undefined;
-    packobject.lastclaimteam = # "none";
+    packobject.lastclaimteam = #"none";
     packobject.lastclaimtime = 0;
     packobject.claimgraceperiod = 0;
     packobject.mustmaintainclaim = 0;

@@ -13,11 +13,11 @@
 #namespace killstreak_vehicle;
 
 init() {
-  level._effect[#"rcbomb_enemy_light"] = # "killstreaks/fx_rcxd_lights_blinky";
-  level._effect[#"rcbomb_friendly_light"] = # "killstreaks/fx_rcxd_lights_solid";
-  level._effect[#"rcbomb_enemy_light_blink"] = # "killstreaks/fx_rcxd_lights_red";
-  level._effect[#"rcbomb_friendly_light_blink"] = # "killstreaks/fx_rcxd_lights_grn";
-  level._effect[#"rcbomb_stunned"] = # "hash_622d3cdb93e01de5";
+  level._effect[#"rcbomb_enemy_light"] = #"killstreaks/fx_rcxd_lights_blinky";
+  level._effect[#"rcbomb_friendly_light"] = #"killstreaks/fx_rcxd_lights_solid";
+  level._effect[#"rcbomb_enemy_light_blink"] = #"killstreaks/fx_rcxd_lights_red";
+  level._effect[#"rcbomb_friendly_light_blink"] = #"killstreaks/fx_rcxd_lights_grn";
+  level._effect[#"rcbomb_stunned"] = #"hash_622d3cdb93e01de5";
   clientfield::register("vehicle", "stunned", 1, 1, "int", &callback::callback_stunned, 0, 0);
 }
 

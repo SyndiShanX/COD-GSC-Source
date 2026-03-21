@@ -22,7 +22,7 @@ function preinit() {
   }
 
   var_39539c05 = zm_utility::is_ee_enabled();
-  var_95613111 = # "hash_50cc93a10c9d2175";
+  var_95613111 = #"hash_50cc93a10c9d2175";
   var_a0ab1f0d = getgametypesetting(var_95613111);
 
   var_39539c05 = getdvarint(#"zm_ee_enabled", 0);
@@ -106,7 +106,7 @@ function private function_f33e1112(localclientnum, oldval, newval, bnewent, bini
   self util::waittill_dobj(fieldname);
 
   if(bwastimejump == 1) {
-    if(self.model === # "hash_30876ea41ba82413") {
+    if(self.model === #"hash_30876ea41ba82413") {
       self.n_fx_id = function_239993de(fieldname, #"hash_10e51613cc775f48", self, "tag_origin");
     } else {
       self.n_fx_id = function_239993de(fieldname, #"hash_709af4fd54580701", self, "tag_origin");
@@ -237,12 +237,12 @@ function private function_1b83f2b2(localclientnum, oldval, newval, bnewent, bini
 
 function private ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
-    if(self.model === # "p9_fxanim_zm_silver_jellyfish_large_xmodel") {
+    if(self.model === #"p9_fxanim_zm_silver_jellyfish_large_xmodel") {
       self thread animation::play_siege("p9_fxanim_zm_silver_jellyfish_large_sanim", undefined, 1, 1);
       self.n_fx_id = util::playFXOnTag(fieldname, "sr/fx9_aether_jellyfish_self_large", self, "tag_origin");
       self.var_b3673abf = self playLoopSound(#"hash_2d10d0d2c9e2258d");
       self thread function_816573ad(fieldname);
-    } else if(self.model === # "hash_46cb6387fd2006a7") {
+    } else if(self.model === #"hash_46cb6387fd2006a7") {
       util::playFXOnTag(fieldname, "sr/fx9_boss_avo_amb_torso", self, "j_spine4");
       util::playFXOnTag(fieldname, "sr/fx9_boss_avo_amb_wrist_le", self, "j_wrist_le");
       util::playFXOnTag(fieldname, "sr/fx9_boss_avo_amb_wrist_ri", self, "j_wrist_ri");
@@ -256,7 +256,7 @@ function private ambient_fx(localclientnum, oldval, newval, bnewent, binitialsna
   if(isDefined(self.n_fx_id)) {
     stopfx(fieldname, self.n_fx_id);
     self.n_fx_id = undefined;
-  } else if(self.model === # "hash_46cb6387fd2006a7") {
+  } else if(self.model === #"hash_46cb6387fd2006a7") {
     self.var_51d78901 = playFX(fieldname, #"zm_ai/fx9_orda_spawn_portal_c", self.origin + (0, 0, 7000), anglesToForward(self.angles), anglestoup(self.angles + (90, 0, 0)));
     self.var_d63b9eb9 = playFX(fieldname, #"sr/fx9_orda_aether_portal_beam", self.origin, anglesToForward(self.angles), anglestoup(self.angles));
 

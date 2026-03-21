@@ -116,7 +116,7 @@ function_176c97f8(substate) {
     return false;
   }
 
-  return substate == # "pain" || substate == # "inplace_pain" || substate == # "pain_intro" || substate == # "pain_outro" || substate == # "painrecovery" || substate == # "pronepain";
+  return substate == #"pain" || substate == #"inplace_pain" || substate == #"pain_intro" || substate == #"pain_outro" || substate == #"painrecovery" || substate == #"pronepain";
 }
 
 function_f5dde44(substate) {
@@ -124,11 +124,11 @@ function_f5dde44(substate) {
     return false;
   }
 
-  return substate == # "melee" || substate == # "charge_melee" || substate == # "hash_48dda7ed88efe32f";
+  return substate == #"melee" || substate == #"charge_melee" || substate == #"hash_48dda7ed88efe32f";
 }
 
 secondaryfacialanimationthink(localclientnum) {
-  if(!(isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "zombie"))) {
+  if(!(isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"zombie"))) {
     assert(0, "<dev string:x9d>");
     return;
   }
@@ -138,7 +138,7 @@ secondaryfacialanimationthink(localclientnum) {
   self._currentfacestate = "inactive";
 
   while(isDefined(self.archetype)) {
-    if(self.archetype == # "human" && self clientfield::get("facial_dial")) {
+    if(self.archetype == #"human" && self clientfield::get("facial_dial")) {
       self._currentfacestate = "inactive";
       self clearcurrentfacialanim(localclientnum);
       wait 0.5;

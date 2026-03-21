@@ -183,7 +183,7 @@ function on_ai_spawned() {
 }
 
 function begin_other_grenade_tracking(params) {
-  if(isDefined(params.weapon) && isDefined(params.weapon.rootweapon) && params.weapon.rootweapon.name == # "electroball_grenade") {
+  if(isDefined(params.weapon) && isDefined(params.weapon.rootweapon) && params.weapon.rootweapon.name == #"electroball_grenade") {
     params.projectile thread watchproximitygrenadehitplayer(self);
   }
 }

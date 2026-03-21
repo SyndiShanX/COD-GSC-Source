@@ -36,19 +36,19 @@ on_ai_killed(params) {
   if(isPlayer(params.eattacker)) {
     params.eattacker thread function_e7750e06(params);
 
-    if(self.archetype == # "zombie" || self.archetype == # "catalyst") {
+    if(self.archetype == #"zombie" || self.archetype == #"catalyst") {
       if(self clientfield::get("sndActorUnderwater")) {
         params.eattacker thread function_9ac35f47();
       }
 
-      if(isDefined(params.einflictor) && params.einflictor.archetype === # "catalyst" && isDefined(params.einflictor.var_85387c5b) && params.einflictor.var_85387c5b) {
+      if(isDefined(params.einflictor) && params.einflictor.archetype === #"catalyst" && isDefined(params.einflictor.var_85387c5b) && params.einflictor.var_85387c5b) {
         params.eattacker thread function_4060b2c6();
       }
 
       return;
     }
 
-    if(self.archetype == # "stoker") {
+    if(self.archetype == #"stoker") {
       if(isDefined(self.var_6f3ba226) && self.var_6f3ba226) {
         params.eattacker thread function_79182658();
       }

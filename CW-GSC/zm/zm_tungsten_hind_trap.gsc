@@ -565,7 +565,7 @@ function function_f35a7c49(target) {
   while(isalive(target)) {
     playsoundatposition(#"hash_28fd24537d849f13", self.var_b74bb962.origin);
 
-    if(target.zm_ai_category === # "normal") {
+    if(target.zm_ai_category === #"normal") {
       if(var_8d2dfb7b) {
         v_offset = (randomfloatrange(-50, 50), randomfloatrange(-50, 50), 0);
         var_4a5383d9++;
@@ -611,7 +611,7 @@ function function_f35a7c49(target) {
     a_zombies = self getenemiesinradius(target.origin, 70);
 
     foreach(zombie in a_zombies) {
-      if(isalive(zombie) && zombie.zm_ai_category === # "normal") {
+      if(isalive(zombie) && zombie.zm_ai_category === #"normal") {
         if(math::cointoss(50)) {
           zombie zombie_utility::setup_zombie_knockdown(zombie.origin);
         }

@@ -172,7 +172,7 @@ class phalanx {
       sentient setavoidancemask("avoid all");
       aiutility::removeaioverridedamagecallback(sentient, &_dampenexplosivedamage);
 
-      if(isDefined(sentient.archetype) && sentient.archetype == # "robot") {
+      if(isDefined(sentient.archetype) && sentient.archetype == #"robot") {
         sentient ai::set_behavior_attribute("move_mode", "normal");
         sentient ai::set_behavior_attribute("force_cover", 0);
       }
@@ -216,7 +216,7 @@ class phalanx {
 
     sentient setavoidancemask("avoid none");
 
-    if(isDefined(sentient.archetype) && sentient.archetype == # "robot") {
+    if(isDefined(sentient.archetype) && sentient.archetype == #"robot") {
       sentient ai::set_behavior_attribute("move_mode", "marching");
       sentient ai::set_behavior_attribute("force_cover", 1);
     }

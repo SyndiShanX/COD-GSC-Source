@@ -40,13 +40,13 @@ function private function_bebdaa6b(actionparams) {
   actionparams.debug[actionparams.debug.size] = getweaponname(weapon);
 
   if(weapon.clipsize <= 0) {
-    actionparams.debug[actionparams.debug.size] = # "hash_6cc185a34e14aed8";
+    actionparams.debug[actionparams.debug.size] = #"hash_6cc185a34e14aed8";
 
     return undefined;
   }
 
   if(weapon.iscliponly) {
-    actionparams.debug[actionparams.debug.size] = # "hash_4e551057548eeffb";
+    actionparams.debug[actionparams.debug.size] = #"hash_4e551057548eeffb";
 
     return undefined;
   }
@@ -54,7 +54,7 @@ function private function_bebdaa6b(actionparams) {
   clipammo = self getweaponammoclip(weapon);
   stockammo = self getweaponammostock(weapon);
 
-  actionparams.debug[actionparams.debug.size] = # "ammo: " + clipammo + "<dev string:x38>" + weapon.clipsize + "<dev string:x3d>" + stockammo;
+  actionparams.debug[actionparams.debug.size] = #"ammo: " + clipammo + "<dev string:x38>" + weapon.clipsize + "<dev string:x3d>" + stockammo;
 
   if(clipammo >= weapon.clipsize) {
     return undefined;
@@ -64,11 +64,11 @@ function private function_bebdaa6b(actionparams) {
   var_7b03547c = clipammo < 10 && var_1cc50542 < 0.4;
 
   if(var_7b03547c) {
-    actionparams.debug[actionparams.debug.size] = # "hash_3e095e0ff2b45cd";
+    actionparams.debug[actionparams.debug.size] = #"hash_3e095e0ff2b45cd";
   }
 
   if(self isreloading()) {
-    actionparams.debug[actionparams.debug.size] = # "in progress";
+    actionparams.debug[actionparams.debug.size] = #"in progress";
 
     if(var_7b03547c) {
       return 95;
@@ -79,7 +79,7 @@ function private function_bebdaa6b(actionparams) {
     return undefined;
   }
 
-  if(clipammo > 0 && self.combatstate != # "combat_state_idle") {
+  if(clipammo > 0 && self.combatstate != #"combat_state_idle") {
     if(self bot_action::in_combat(actionparams) || !var_7b03547c) {
       return undefined;
     }
@@ -90,7 +90,7 @@ function private function_bebdaa6b(actionparams) {
   }
 
   if(getdvarint(#"bot_forcefire", 0)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_3e0a83260046323b";
+    actionparams.debug[actionparams.debug.size] = #"hash_3e0a83260046323b";
 
     return undefined;
   }
@@ -102,7 +102,7 @@ function private function_bebdaa6b(actionparams) {
   }
 
   if(is_true(self.bot.var_458ddbc0[0])) {
-    actionparams.debug[actionparams.debug.size] = # "hash_3eae9d22b23d42b0";
+    actionparams.debug[actionparams.debug.size] = #"hash_3eae9d22b23d42b0";
 
     return undefined;
   }
@@ -123,15 +123,15 @@ function private reload(actionparams) {
 }
 
 function private function_6ba9f861(actionparams) {
-  actionparams.debug[actionparams.debug.size] = # "hash_51e16bdecd933178" + self function_e8e1d88e();
+  actionparams.debug[actionparams.debug.size] = #"hash_51e16bdecd933178" + self function_e8e1d88e();
 
   if(!isDefined(self.bot.var_538135ed)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_72064563ae580ae7";
+    actionparams.debug[actionparams.debug.size] = #"hash_72064563ae580ae7";
 
     return undefined;
   }
 
-  actionparams.debug[actionparams.debug.size] = # "hash_4d12c107453cb454";
+  actionparams.debug[actionparams.debug.size] = #"hash_4d12c107453cb454";
 
   if(self bot_action::function_a43bc7e2(actionparams) || self bot_action::function_ebb8205b(actionparams) || self bot_action::function_a0b0f487(actionparams) || self bot_action::function_2c3ea0c6(actionparams) || self bot_action::in_vehicle(actionparams) || self bot_action::function_ed7b2f42(actionparams)) {
     return undefined;
@@ -141,7 +141,7 @@ function private function_6ba9f861(actionparams) {
   trigger = object.trigger;
 
   if(!isDefined(trigger) || !self touching_trigger(trigger)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_56cc687e292770eb";
+    actionparams.debug[actionparams.debug.size] = #"hash_56cc687e292770eb";
 
     return undefined;
   }
@@ -159,7 +159,7 @@ function private function_22e246dd(actionparams) {
 
 function private function_9575b14a(actionparams) {
   if(!isDefined(level.var_578f7c6d)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_7e0fd1a337ef84d4";
+    actionparams.debug[actionparams.debug.size] = #"hash_7e0fd1a337ef84d4";
 
     return undefined;
   }
@@ -182,7 +182,7 @@ function private function_9575b14a(actionparams) {
   }
 
   if(!isDefined(jammer) || !isDefined(jammer.enemytrigger) || !self istouching(jammer.enemytrigger)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_5c3f03b58ee2c60d";
+    actionparams.debug[actionparams.debug.size] = #"hash_5c3f03b58ee2c60d";
 
     return undefined;
   }
@@ -220,16 +220,16 @@ function private function_5040c5b8(actionparams) {
 
   actionparams.revivetarget = revivetarget;
 
-  actionparams.debug[actionparams.debug.size] = # "hash_7c7cb9edd6407d3a" + revivetarget.name;
+  actionparams.debug[actionparams.debug.size] = #"hash_7c7cb9edd6407d3a" + revivetarget.name;
 
   if(!isDefined(revivetarget.revivetrigger)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_5045506c17e1ba97";
+    actionparams.debug[actionparams.debug.size] = #"hash_5045506c17e1ba97";
 
     return undefined;
   }
 
   if(!self istouching(revivetarget.revivetrigger)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_bd44498ec7dd434";
+    actionparams.debug[actionparams.debug.size] = #"hash_bd44498ec7dd434";
 
     return undefined;
   }
@@ -263,13 +263,13 @@ function private function_97bc2873(actionparams) {
   actionparams.debug[actionparams.debug.size] = getweaponname(weapon);
 
   if(self ismeleeing()) {
-    actionparams.debug[actionparams.debug.size] = # "in progress";
+    actionparams.debug[actionparams.debug.size] = #"in progress";
 
     return 100;
   }
 
-  if(!weapon.ismeleeweapon && weapon.type != # "melee") {
-    actionparams.debug[actionparams.debug.size] = # "hash_5a434ba5ce81ed4b";
+  if(!weapon.ismeleeweapon && weapon.type != #"melee") {
+    actionparams.debug[actionparams.debug.size] = #"hash_5a434ba5ce81ed4b";
 
     return undefined;
   }
@@ -278,7 +278,7 @@ function private function_97bc2873(actionparams) {
     return undefined;
   }
 
-  if(self bot_action::function_ed7b2f42(actionparams) && self.bot.traversal.type != # "drop") {
+  if(self bot_action::function_ed7b2f42(actionparams) && self.bot.traversal.type != #"drop") {
     return undefined;
   }
 
@@ -292,37 +292,37 @@ function private function_97bc2873(actionparams) {
   actionparams.var_bd773dde = undefined;
 
   if(!(!isDefined(self.bot.difficulty) || is_true(self.bot.difficulty.allowmelee))) {
-    if(level.gametype != "gun" || weapon.type != # "melee") {
-      actionparams.debug[actionparams.debug.size] = # "hash_6b201a2b19d09fd";
+    if(level.gametype != "gun" || weapon.type != #"melee") {
+      actionparams.debug[actionparams.debug.size] = #"hash_6b201a2b19d09fd";
 
       return undefined;
     }
   }
 
   if(!(!isDefined(self.bot.var_9376be2e) || self.bot.var_9376be2e <= gettime())) {
-    actionparams.debug[actionparams.debug.size] = # "hash_499c1441b9e70c21";
+    actionparams.debug[actionparams.debug.size] = #"hash_499c1441b9e70c21";
 
     return undefined;
   }
 
   if(!self.bot.enemyvisible) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
 
   if(isvehicle(self.enemy)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_18edaf9b6eee19a1";
+    actionparams.debug[actionparams.debug.size] = #"hash_18edaf9b6eee19a1";
 
     return undefined;
   }
 
   if(isPlayer(self.enemy) && self.enemy isinvehicle() && !self.enemy isremotecontrolling()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_28145be29cdebb73";
+    actionparams.debug[actionparams.debug.size] = #"hash_28145be29cdebb73";
   }
 
   if(self.bot.enemydist > weapon.var_bfbec33f * 0.95) {
-    actionparams.debug[actionparams.debug.size] = # "hash_1d62b754bc2de90";
+    actionparams.debug[actionparams.debug.size] = #"hash_1d62b754bc2de90";
 
     return undefined;
   }
@@ -332,13 +332,13 @@ function private function_97bc2873(actionparams) {
   enemydot = vectordot(fwd, enemydir);
 
   if(enemydot < 0.7) {
-    actionparams.debug[actionparams.debug.size] = # "hash_47cdd5472dea843c";
+    actionparams.debug[actionparams.debug.size] = #"hash_47cdd5472dea843c";
 
     return undefined;
   }
 
   if(randomfloat(1) > 0.75) {
-    actionparams.debug[actionparams.debug.size] = # "hash_202a436ac21976ce";
+    actionparams.debug[actionparams.debug.size] = #"hash_202a436ac21976ce";
 
     self.bot.var_9376be2e = gettime() + int(3 * 1000);
     return undefined;
@@ -375,7 +375,7 @@ function private melee(actionparams) {
 
 function private function_d31a5b9a(actionparams) {
   if(!isDefined(self.bot.var_ad331541)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_72617b03a99ed6a3";
+    actionparams.debug[actionparams.debug.size] = #"hash_72617b03a99ed6a3";
 
     return undefined;
   }
@@ -391,7 +391,7 @@ function private function_3aab44a3(actionparams) {
   self endon(#"hash_1ae115949cd752c8", #"death", #"bot_shutdown");
   center = self.bot.var_ad331541 getcentroid();
   weapon = self getcurrentweapon();
-  meleeweapon = weapon.ismeleeweapon || weapon.type == # "melee";
+  meleeweapon = weapon.ismeleeweapon || weapon.type == #"melee";
 
   if(!meleeweapon || isDefined(self.bot.traversal)) {
     self.bot.var_ad331541 dodamage(10000, center, self, undefined, "MOD_MELEE_WEAPON_BUTT");
@@ -410,13 +410,13 @@ function private function_3aab44a3(actionparams) {
 
 function private function_96340252(actionparams) {
   if(isDefined(self.bot.var_87a04600) && self.bot.var_87a04600 isusable()) {
-    actionparams.debug[actionparams.debug.size] = # "capturing";
+    actionparams.debug[actionparams.debug.size] = #"capturing";
 
     return 100;
   }
 
   if(!isDefined(self.bot.var_510b1057)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_45918de363b9f172";
+    actionparams.debug[actionparams.debug.size] = #"hash_45918de363b9f172";
 
     return undefined;
   }
@@ -468,8 +468,8 @@ function private function_84f889a2(notifyhash) {
 function private function_9f7ee32b(actionparams) {
   target = self.bot.objective.info.target;
 
-  if(!isDefined(target) || !isDefined(target.triggertype) || target.triggertype != # "use" || !target gameobjects::can_interact_with(self)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_7c6d555093009c78";
+  if(!isDefined(target) || !isDefined(target.triggertype) || target.triggertype != #"use" || !target gameobjects::can_interact_with(self)) {
+    actionparams.debug[actionparams.debug.size] = #"hash_7c6d555093009c78";
 
     return undefined;
   }
@@ -479,7 +479,7 @@ function private function_9f7ee32b(actionparams) {
   }
 
   if(!isDefined(target.trigger) || !self touching_trigger(target.trigger)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_56cc687e292770eb";
+    actionparams.debug[actionparams.debug.size] = #"hash_56cc687e292770eb";
 
     return undefined;
   }
@@ -528,7 +528,7 @@ function private touching_trigger(trigger) {
     return false;
   }
 
-  if(trigger.classname != # "trigger_radius_use") {
+  if(trigger.classname != #"trigger_radius_use") {
     return true;
   }
 

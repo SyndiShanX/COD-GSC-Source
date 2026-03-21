@@ -70,13 +70,13 @@ function function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(level flag::get(#"hash_322c7f92525e008e")) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(is_true(player.var_9c7b96ed[var_8d5d092c])) {
-    self.hint_string[n_player_index] = # "hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
     b_result = 1;
   } else if(level flag::get(#"hash_268c943ffdd74fa")) {
     if(is_true(level.var_fe6ca5e8)) {
-      self.hint_string[n_player_index] = # "zombie/fasttravel_delay";
+      self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
     } else {
       if(!player zm_score::can_player_purchase(self.stub.zombie_cost)) {
         player globallogic::function_d1924f29(#"hash_6e3ae7967dc5d414");
@@ -86,35 +86,35 @@ function function_c52e8ba(player, var_8d5d092c) {
       b_result = 1;
     }
   } else if(!level flag::get(#"dark_aether_active")) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(!self zm_fasttravel::function_d06e636b(player) || player isswitchingweapons()) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a92d1b24) && !level flag::get_all(self.stub.var_a92d1b24)) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
-    self.hint_string[n_player_index] = # "zombie/fasttravel_delay";
+    self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
     b_result = 1;
   } else if(is_true(level.var_fe6ca5e8)) {
-    self.hint_string[n_player_index] = # "zombie/fasttravel_delay";
+    self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
   } else {
     switch (self.stub.script_string) {
       case # "hash_63156dac534aede7":
-        hint_string = # "hash_1b5d024264e26e98";
+        hint_string = #"hash_1b5d024264e26e98";
         break;
       case # "hash_15d6fece382a5cbe":
-        hint_string = # "hash_19ae69436c39da09";
+        hint_string = #"hash_19ae69436c39da09";
         break;
       case # "fasttravel_loc_crash_site_down":
-        hint_string = # "hash_3be004aaa3ef2edd";
+        hint_string = #"hash_3be004aaa3ef2edd";
         break;
       case # "hash_2b732b2cff505c84":
-        hint_string = # "hash_5a1913d1fec350f9";
+        hint_string = #"hash_5a1913d1fec350f9";
         break;
       case # "hash_5af6096260ab857c":
-        hint_string = # "hash_5c514164da699bed";
+        hint_string = #"hash_5c514164da699bed";
         break;
       case # "fasttravel_loc_pond_down":
-        hint_string = # "hash_5de92cc1bf44a38a";
+        hint_string = #"hash_5de92cc1bf44a38a";
         break;
       default:
         break;

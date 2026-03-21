@@ -3418,7 +3418,7 @@ function_5efab4f9(var_27d47c17, var_a9d2fdec = 0) {
           }
         }
 
-        if(var_a4937b41._notify == # "hash_12a631be319641a1") {
+        if(var_a4937b41._notify == #"hash_12a631be319641a1") {
           level flag::set(#"hash_4fac802bd5dcebf4");
         }
       } else {
@@ -3706,7 +3706,7 @@ function_f90d2c81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
     if(isDefined(weapon) && weapon == var_607b7fd9) {
       n_damage = 0;
     }
-  } else if(isDefined(self.subarchetype) && self.subarchetype == # "brutus_special" && !level.var_b491030) {
+  } else if(isDefined(self.subarchetype) && self.subarchetype == #"brutus_special" && !level.var_b491030) {
     n_damage = 0;
   }
 
@@ -4421,9 +4421,9 @@ function_9c59bce1(a_ents) {
 
 function_6546242b(a_ents) {
   var_17099f35 = [];
-  var_17099f35[-1] = # "hash_46e0921e3e770840";
-  var_17099f35[0] = # "hash_46e0981e3e771272";
-  var_17099f35[1] = # "hash_46e0961e3e770f0c";
+  var_17099f35[-1] = #"hash_46e0921e3e770840";
+  var_17099f35[0] = #"hash_46e0981e3e771272";
+  var_17099f35[1] = #"hash_46e0961e3e770f0c";
   a_ents[#"boss"] playsoundtoteam(var_17099f35[level.var_a36cbfaf], util::get_active_players()[0].team);
 }
 
@@ -4452,11 +4452,11 @@ function_7aa8f66f(var_e083ecbd) {
     case 0:
     case 1:
     case 2:
-      str_vo_line = # "hash_453eca2863f832b1";
+      str_vo_line = #"hash_453eca2863f832b1";
       break;
     case 3:
     case 4:
-      str_vo_line = # "hash_453ec72863f82d98";
+      str_vo_line = #"hash_453ec72863f82d98";
       break;
     default:
       break;
@@ -4727,7 +4727,7 @@ outro_cleanup(var_a276c861, var_19e802fa) {}
 
 function_44267df1(a_ents) {
   foreach(e_prop in a_ents) {
-    if(isDefined(e_prop.model) && (e_prop.model == # "c_t8_zmb_mob_ghoul_body2_rob" || e_prop.model == # "c_t8_zmb_mob_ghoul_body1_rob" || e_prop.model == # "c_t8_zmb_mob_ghoul_body3_rob")) {
+    if(isDefined(e_prop.model) && (e_prop.model == #"c_t8_zmb_mob_ghoul_body2_rob" || e_prop.model == #"c_t8_zmb_mob_ghoul_body1_rob" || e_prop.model == #"c_t8_zmb_mob_ghoul_body3_rob")) {
       e_prop clientfield::set("" + # "hash_624198b41791933f", 1);
       e_prop ghost();
     }
@@ -4747,7 +4747,7 @@ function_ed66b9f7(a_ents) {
   wait 5;
 
   foreach(e_prop in a_ents) {
-    if(isDefined(e_prop.model) && (e_prop.model == # "c_t8_zmb_mob_ghoul_body2_rob" || e_prop.model == # "c_t8_zmb_mob_ghoul_body1_rob" || e_prop.model == # "c_t8_zmb_mob_ghoul_body3_rob")) {
+    if(isDefined(e_prop.model) && (e_prop.model == #"c_t8_zmb_mob_ghoul_body2_rob" || e_prop.model == #"c_t8_zmb_mob_ghoul_body1_rob" || e_prop.model == #"c_t8_zmb_mob_ghoul_body3_rob")) {
       e_prop clientfield::set("" + # "hash_624198b41791933f", 0);
       e_prop show();
     }

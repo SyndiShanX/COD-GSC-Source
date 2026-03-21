@@ -226,21 +226,21 @@ function function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(!self function_d06e636b(player)) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a92d1b24) && !level flag::get_all(self.stub.var_a92d1b24)) {
-    self.hint_string[n_player_index] = # "zombie/fasttravel_locked";
+    self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
     b_result = 1;
   } else if(is_true(player.var_9c7b96ed[var_8d5d092c])) {
-    self.hint_string[n_player_index] = # "hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
     b_result = 1;
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
-    self.hint_string[n_player_index] = # "zombie/fasttravel_delay";
+    self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
     b_result = 1;
   } else {
     if(player function_8b1a219a()) {
-      self.hint_string[n_player_index] = # "hash_47b20f457b370888";
+      self.hint_string[n_player_index] = #"hash_47b20f457b370888";
     } else {
-      self.hint_string[n_player_index] = # "hash_2731cc5c1208e2e4";
+      self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
     }
 
     b_result = 1;
@@ -875,7 +875,7 @@ function function_62686dda(var_6c365dbf) {
     self function_2aed1d83(var_f0bbde5);
   }
 
-  str_alias = # "hash_3388d9809bf60b12";
+  str_alias = #"hash_3388d9809bf60b12";
 
   if(isDefined(self.var_1bfa91a)) {
     str_alias += self.var_1bfa91a;
@@ -891,7 +891,7 @@ function function_62686dda(var_6c365dbf) {
     self clientfield::set_to_player("fasttravel_teleport_sfx", 0);
   }
 
-  str_alias = # "hash_52aaa9a4a2e71c73";
+  str_alias = #"hash_52aaa9a4a2e71c73";
 
   if(isDefined(self.var_1bfa91a)) {
     str_alias += self.var_1bfa91a;
@@ -922,7 +922,7 @@ function function_946fc2d6() {
 }
 
 function function_6c856fde(e_zombie) {
-  if(e_zombie.zm_ai_category === # "normal") {
+  if(e_zombie.zm_ai_category === #"normal") {
     return true;
   }
 
@@ -1066,7 +1066,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
     self clientfield::set_to_player("fasttravel_teleport_sfx", 1);
   }
 
-  str_alias = # "hash_3388d9809bf60b12";
+  str_alias = #"hash_3388d9809bf60b12";
 
   if(isDefined(self.var_1bfa91a)) {
     str_alias += self.var_1bfa91a;
@@ -1132,7 +1132,7 @@ function function_a78584c0(var_6c365dbf, var_896486fb, var_1f8fbe0b = 0) {
     self clientfield::set_to_player("fasttravel_teleport_sfx", 0);
   }
 
-  str_alias = # "hash_52aaa9a4a2e71c73";
+  str_alias = #"hash_52aaa9a4a2e71c73";
 
   if(isDefined(self.var_1bfa91a)) {
     str_alias += self.var_1bfa91a;

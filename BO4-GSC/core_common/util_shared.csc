@@ -726,9 +726,9 @@ server_wait(localclientnum, seconds, waitbetweenchecks, level_endon) {
 }
 
 get_other_team(str_team) {
-  if(str_team == # "allies") {
+  if(str_team == #"allies") {
     return # "axis";
-  } else if(str_team == # "axis") {
+  } else if(str_team == #"axis") {
     return # "allies";
   } else {
     return # "allies";
@@ -1334,16 +1334,16 @@ preload_frontend(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 set_team_mapping(str_team_for_sidea, str_team_for_sideb) {
-  if(str_team_for_sidea == # "allies") {
-    str_team_for_sidea = # "allies";
-  } else if(str_team_for_sidea == # "axis") {
-    str_team_for_sidea = # "axis";
+  if(str_team_for_sidea == #"allies") {
+    str_team_for_sidea = #"allies";
+  } else if(str_team_for_sidea == #"axis") {
+    str_team_for_sidea = #"axis";
   }
 
-  if(str_team_for_sideb == # "axis") {
-    str_team_for_sideb = # "axis";
-  } else if(str_team_for_sideb == # "allies") {
-    str_team_for_sideb = # "allies";
+  if(str_team_for_sideb == #"axis") {
+    str_team_for_sideb = #"axis";
+  } else if(str_team_for_sideb == #"allies") {
+    str_team_for_sideb = #"allies";
   }
 
   assert(str_team_for_sidea != str_team_for_sideb, "<dev string:x302>");
@@ -1353,11 +1353,11 @@ set_team_mapping(str_team_for_sidea, str_team_for_sideb) {
   level.team_mapping[#"defender"] = str_team_for_sideb;
   level.team_mapping[#"attackers"] = str_team_for_sidea;
   level.team_mapping[#"defenders"] = str_team_for_sideb;
-  level.team_mapping[#"wun"] = # "allies";
-  level.team_mapping[#"fpa"] = # "axis";
+  level.team_mapping[#"wun"] = #"allies";
+  level.team_mapping[#"fpa"] = #"axis";
   level.team_mapping[#"teama"] = level.team_mapping[#"sidea"];
   level.team_mapping[#"teamb"] = level.team_mapping[#"sideb"];
-  level.team_mapping[#"side3"] = # "team3";
+  level.team_mapping[#"side3"] = #"team3";
 }
 
 get_team_mapping(str_team) {

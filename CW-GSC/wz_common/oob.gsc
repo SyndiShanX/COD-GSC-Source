@@ -87,7 +87,7 @@ function function_b777ff94(entity) {
     vehicle = entity getvehicleoccupied();
     players = vehicle getvehoccupants();
 
-    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == # "tactical_raft_wz") {
+    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == #"tactical_raft_wz") {
       var_9914886a = 1;
     }
   } else {

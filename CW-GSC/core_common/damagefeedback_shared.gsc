@@ -73,9 +73,9 @@ function hit_alert_sfx_cp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     }
 
     if(weapons::isheadshot(victim, shitloc, weapon)) {
-      hitalias = # "hash_7049f87709615569";
+      hitalias = #"hash_7049f87709615569";
     } else {
-      hitalias = # "hash_66f38123cad3a33b";
+      hitalias = #"hash_66f38123cad3a33b";
     }
 
     if(isDefined(hitalias)) {
@@ -83,7 +83,7 @@ function hit_alert_sfx_cp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     }
 
     if(isvehicle(psoffsettime)) {
-      hitalias = # "hash_2ce81d103e923201";
+      hitalias = #"hash_2ce81d103e923201";
     }
   }
 
@@ -101,8 +101,8 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     return # "hash_58d3709b34454b17";
   }
 
-  if(is_true(fatal) && victim.name == # "inventory_hero_flamethrower") {
-    hitalias = # "hash_bb326e71044938c";
+  if(is_true(fatal) && victim.name == #"inventory_hero_flamethrower") {
+    hitalias = #"hash_bb326e71044938c";
     return hitalias;
   }
 
@@ -113,9 +113,9 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
 
   if(victim.var_965cc0b3) {
     if(is_true(fatal)) {
-      hitalias = # "hash_6d7fa87ddd50800";
+      hitalias = #"hash_6d7fa87ddd50800";
     } else {
-      hitalias = # "hash_644a18cd873e501d";
+      hitalias = #"hash_644a18cd873e501d";
     }
   }
 
@@ -123,23 +123,23 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
     if(isDefined(victim.hitsound) && victim.hitsound != "") {
       hitalias = victim.hitsound;
     } else if(victim.grappleweapon) {
-      hitalias = # "hash_671bc9a2de453f2e";
-    } else if(victim.name == # "snowball") {
-      hitalias = # "mpl_hit_alert_snow";
-    } else if(victim.name == # "waterballoon") {
-      hitalias = # "hash_1fd605562fb1fd3a";
+      hitalias = #"hash_671bc9a2de453f2e";
+    } else if(victim.name == #"snowball") {
+      hitalias = #"mpl_hit_alert_snow";
+    } else if(victim.name == #"waterballoon") {
+      hitalias = #"hash_1fd605562fb1fd3a";
     } else if(isvehicle(psoffsettime)) {
-      hitalias = # "hash_2ce81d103e923201";
+      hitalias = #"hash_2ce81d103e923201";
     } else if(isDefined(psoffsettime) && isDefined(psoffsettime.victimsoundmod)) {
       switch (psoffsettime.victimsoundmod) {
         case # "safeguard_robot":
-          hitalias = # "mpl_hit_alert_escort";
+          hitalias = #"mpl_hit_alert_escort";
           break;
         case # "vehicle":
-          hitalias = # "hash_2ce81d103e923201";
+          hitalias = #"hash_2ce81d103e923201";
           break;
         default:
-          hitalias = # "mpl_hit_alert";
+          hitalias = #"mpl_hit_alert";
           break;
       }
     } else if(isDefined(perkfeedback) && isDefined(perkfeedback.soundmod)) {
@@ -148,89 +148,89 @@ function hit_alert_sfx_mp(mod, inflictor, perkfeedback, weapon, victim, psoffset
           if(isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
             if(isDefined(psoffsettime.var_426947c4)) {
               if(weapons::isheadshot(victim, shitloc, inflictor)) {
-                hitalias = # "hash_6b219a0cac330e0b";
+                hitalias = #"hash_6b219a0cac330e0b";
               } else {
-                hitalias = # "mpl_hit_alert_armor_broke";
+                hitalias = #"mpl_hit_alert_armor_broke";
               }
             } else {
-              hitalias = # "mpl_hit_alert_armor_hit";
+              hitalias = #"mpl_hit_alert_armor_hit";
             }
           } else if(isDefined(psoffsettime) && is_true(psoffsettime.isaiclone)) {
-            hitalias = # "mpl_hit_alert_clone";
+            hitalias = #"mpl_hit_alert_clone";
           } else if(isDefined(psoffsettime) && is_true(psoffsettime.isaiclone)) {
-            hitalias = # "mpl_hit_alert_clone";
+            hitalias = #"mpl_hit_alert_clone";
           } else if(isDefined(psoffsettime) && is_true(psoffsettime.var_342564dd)) {
-            hitalias = # "mpl_hit_alert_rad";
+            hitalias = #"mpl_hit_alert_rad";
           } else if(isDefined(psoffsettime) && isPlayer(psoffsettime) && isDefined(psoffsettime.carryobject) && isDefined(psoffsettime.carryobject.hitsound) && isDefined(weapon) && weapon == "armor") {
             hitalias = psoffsettime.carryobject.hitsound;
           } else if(inflictor == "MOD_BURNED") {
-            hitalias = # "mpl_hit_alert_burn";
+            hitalias = #"mpl_hit_alert_burn";
           } else if(is_true(fatal)) {
             if(weapons::isheadshot(victim, shitloc, inflictor)) {
-              hitalias = # "hash_616dd8ea01d089ac";
+              hitalias = #"hash_616dd8ea01d089ac";
             } else {
-              hitalias = # "hash_31e38d8520839566";
+              hitalias = #"hash_31e38d8520839566";
             }
           } else if(weapons::isheadshot(victim, shitloc, inflictor)) {
-            hitalias = # "hash_29ca1afa9209bfc6";
+            hitalias = #"hash_29ca1afa9209bfc6";
           } else if(inflictor == "MOD_MELEE_WEAPON_BUTT") {} else if(shitloc === "riotshield") {
-            hitalias = # "prj_bullet_impact_shield";
+            hitalias = #"prj_bullet_impact_shield";
           } else {
-            hitalias = # "hash_205c83ac75849f80";
+            hitalias = #"hash_205c83ac75849f80";
           }
 
           break;
         case # "heatwave":
-          hitalias = # "mpl_hit_alert_heatwave";
+          hitalias = #"mpl_hit_alert_heatwave";
           break;
         case # "heli":
-          hitalias = # "mpl_hit_alert_air";
+          hitalias = #"mpl_hit_alert_air";
           break;
         case # "hpm":
-          hitalias = # "mpl_hit_alert_hpm";
+          hitalias = #"mpl_hit_alert_hpm";
           break;
         case # "taser_spike":
-          hitalias = # "mpl_hit_alert_taser_spike";
+          hitalias = #"mpl_hit_alert_taser_spike";
           break;
         case # "straferun":
         case # "dog":
           break;
         case # "firefly":
-          hitalias = # "mpl_hit_alert_firefly";
+          hitalias = #"mpl_hit_alert_firefly";
           break;
         case # "drone_land":
-          hitalias = # "mpl_hit_alert_air";
+          hitalias = #"mpl_hit_alert_air";
           break;
         case # "mini_turret":
-          hitalias = # "mpl_hit_alert_quiet";
+          hitalias = #"mpl_hit_alert_quiet";
           break;
         case # "raps":
-          hitalias = # "mpl_hit_alert_air";
+          hitalias = #"mpl_hit_alert_air";
           break;
         case # "default_loud":
-          hitalias = # "mpl_hit_heli_gunner";
+          hitalias = #"mpl_hit_heli_gunner";
           break;
         default:
-          hitalias = # "mpl_hit_alert";
+          hitalias = #"mpl_hit_alert";
           break;
       }
     } else if(inflictor == "MOD_BURNED" || inflictor == "MOD_DOT") {
-      hitalias = # "mpl_hit_alert_burn";
+      hitalias = #"mpl_hit_alert_burn";
     } else {
-      hitalias = # "hash_205c83ac75849f80";
+      hitalias = #"hash_205c83ac75849f80";
 
       if(is_true(fatal)) {
-        hitalias = # "hash_31e38d8520839566";
+        hitalias = #"hash_31e38d8520839566";
       }
     }
   } else if(inflictor === "MOD_MELEE_WEAPON_BUTT") {
     if(fatal === 1) {
-      hitalias = # "hash_27781beb722b7488";
+      hitalias = #"hash_27781beb722b7488";
     }
   } else if(isDefined(perkfeedback) && isDefined(perkfeedback.owner) && isDefined(perkfeedback.owner.soundmod)) {
-    if(perkfeedback.owner.soundmod == # "player" && isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
+    if(perkfeedback.owner.soundmod == #"player" && isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
       if(isDefined(psoffsettime.var_426947c4)) {
-        hitalias = # "mpl_hit_alert_armor_broke";
+        hitalias = #"mpl_hit_alert_armor_broke";
       }
     }
   }
@@ -251,69 +251,69 @@ function hit_alert_sfx_zm(mod, inflictor, perkfeedback, weapon, victim, psoffset
   }
 
   if(victim.var_965cc0b3) {
-    hitalias = # "hash_644a18cd873e501d";
+    hitalias = #"hash_644a18cd873e501d";
   }
 
   if(should_play_sound(perkfeedback)) {
     if(isDefined(victim.hitsound) && victim.hitsound != "") {
       hitalias = victim.hitsound;
     } else if(isvehicle(psoffsettime)) {
-      hitalias = # "hash_2ce81d103e923201";
+      hitalias = #"hash_2ce81d103e923201";
     } else if(isDefined(weapon) && isDefined(weapon.soundmod)) {
       switch (weapon.soundmod) {
         case # "player":
           if(isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
             if(isDefined(psoffsettime.var_426947c4)) {
               if(weapons::isheadshot(victim, shitloc, perkfeedback)) {
-                hitalias = # "hash_6b219a0cac330e0b";
+                hitalias = #"hash_6b219a0cac330e0b";
               } else {
-                hitalias = # "mpl_hit_alert_armor_broke";
+                hitalias = #"mpl_hit_alert_armor_broke";
               }
             } else {
-              hitalias = # "mpl_hit_alert_armor_hit";
+              hitalias = #"mpl_hit_alert_armor_hit";
             }
           } else if(psoffsettime.aitype === "spawner_bo5_abom") {
             if(shitloc != "head") {
-              hitalias = # "hash_1b935b754d624965";
+              hitalias = #"hash_1b935b754d624965";
             }
           } else if(perkfeedback == "MOD_BURNED") {
-            hitalias = # "mpl_hit_alert_burn";
+            hitalias = #"mpl_hit_alert_burn";
           } else if(is_true(fatal)) {
             if(weapons::isheadshot(victim, shitloc, perkfeedback)) {
-              hitalias = # "hash_616dd8ea01d089ac";
+              hitalias = #"hash_616dd8ea01d089ac";
             } else {
-              hitalias = # "hash_31e38d8520839566";
+              hitalias = #"hash_31e38d8520839566";
             }
           } else if(weapons::isheadshot(victim, shitloc, perkfeedback)) {
-            hitalias = # "hash_29ca1afa9209bfc6";
+            hitalias = #"hash_29ca1afa9209bfc6";
           } else if(perkfeedback == "MOD_MELEE_WEAPON_BUTT") {} else if(shitloc === "riotshield") {
-            hitalias = # "prj_bullet_impact_shield";
+            hitalias = #"prj_bullet_impact_shield";
           } else {
-            hitalias = # "hash_205c83ac75849f80";
+            hitalias = #"hash_205c83ac75849f80";
           }
 
           break;
         default:
-          hitalias = # "mpl_hit_alert";
+          hitalias = #"mpl_hit_alert";
           break;
       }
     } else if(perkfeedback == "MOD_BURNED" || perkfeedback == "MOD_DOT") {
-      hitalias = # "mpl_hit_alert_burn";
+      hitalias = #"mpl_hit_alert_burn";
     } else {
-      hitalias = # "hash_205c83ac75849f80";
+      hitalias = #"hash_205c83ac75849f80";
 
       if(is_true(fatal)) {
-        hitalias = # "hash_31e38d8520839566";
+        hitalias = #"hash_31e38d8520839566";
       }
     }
   } else if(perkfeedback === "MOD_MELEE_WEAPON_BUTT") {
     if(fatal === 1) {
-      hitalias = # "hash_27781beb722b7488";
+      hitalias = #"hash_27781beb722b7488";
     }
   } else if(isDefined(weapon) && isDefined(weapon.owner) && isDefined(weapon.owner.soundmod)) {
-    if(weapon.owner.soundmod == # "player" && isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
+    if(weapon.owner.soundmod == #"player" && isDefined(idflags) && idflags & 2048 && isDefined(psoffsettime)) {
       if(isDefined(psoffsettime.var_426947c4)) {
-        hitalias = # "mpl_hit_alert_armor_broke";
+        hitalias = #"mpl_hit_alert_armor_broke";
       }
     }
   }
@@ -342,7 +342,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
     return;
   }
 
-  if(isDefined(weapon) && weapon.statname == # "recon_car" && isDefined(victim) && isDefined(victim.owner) && inflictor === victim.owner) {
+  if(isDefined(weapon) && weapon.statname == #"recon_car" && isDefined(victim) && isDefined(victim.owner) && inflictor === victim.owner) {
     return;
   }
 
@@ -429,7 +429,7 @@ function update(mod, inflictor, perkfeedback, weapon, victim, psoffsettime, shit
 
   is_dead = damagestage == 5;
 
-  if(isDefined(victim) && victim.archetype === # "robot") {
+  if(isDefined(victim) && victim.archetype === #"robot") {
     is_vehicle = 1;
   }
 

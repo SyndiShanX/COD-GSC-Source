@@ -294,7 +294,7 @@ function function_d260edc9(localclientnum, enabled) {
   }
 
   if(enabled && !function_148ccc79(localclientnum, postfxbundle) && (!function_1cbf351b(localclientnum) || function_f9af4fc2(localclientnum)) && !codcaster::function_c955fbd1(localclientnum)) {
-    if(isDefined(self.weapon) && self.weapon.statname == # "remote_missile") {
+    if(isDefined(self.weapon) && self.weapon.statname == #"remote_missile") {
       function_a837926b(localclientnum, postfxbundle);
     }
 

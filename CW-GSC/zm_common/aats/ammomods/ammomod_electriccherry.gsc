@@ -36,7 +36,7 @@ function event_handler[reload] function_b4174270(eventstruct) {
   weapon = self getcurrentweapon();
   item = item_inventory::function_230ceec4(weapon);
 
-  if(item.itementry.ammomodname === # "ammomod_electriccherry") {
+  if(item.itementry.ammomodname === #"ammomod_electriccherry") {
     self function_aa4171b9();
   }
 }
@@ -56,7 +56,7 @@ function function_aa4171b9() {
       continue;
     }
 
-    if(e_zombie.zm_ai_category === # "elite") {
+    if(e_zombie.zm_ai_category === #"elite") {
       continue;
     }
 

@@ -36,7 +36,7 @@ function init_shared() {
 }
 
 function function_4f3cd1f0() {
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     self.var_90d0c0ff = "anim_spawn_plaguehound";
     self clientfield::set("pustule_pulse_plague", 1);
     self callback::function_d8abfc3d(#"on_dog_killed", &function_a6c93300);
@@ -108,7 +108,7 @@ function function_659d1778(attacker) {
     foreach(ai in ai_targets) {
       waitframe(1);
 
-      if(isalive(ai) && ai.subarchetype !== # "hash_2a5479b83161cb35") {
+      if(isalive(ai) && ai.subarchetype !== #"hash_2a5479b83161cb35") {
         damage = 3;
         round = zm_utility::get_round_number();
 
@@ -138,7 +138,7 @@ function function_659d1778(attacker) {
           ai dodamage(damage, self.origin, undefined, undefined, "none", "MOD_BURNED", 0, undefined);
           scoreevents::function_82234b38(ai, attacker, undefined, undefined, undefined, undefined);
 
-          if(ai.zm_ai_category === # "normal") {
+          if(ai.zm_ai_category === #"normal") {
             ai thread namespace_9ff9f642::slowdown(#"hash_10d83afaeb265fde");
           }
 

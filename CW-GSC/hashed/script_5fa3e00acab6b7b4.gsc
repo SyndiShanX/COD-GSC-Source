@@ -302,13 +302,13 @@ function on_player_disconnect() {
   }
 
   playerdata.var_161a9fc9 = 0;
-  playerdata.var_a3ba1678 = # "tie";
+  playerdata.var_a3ba1678 = #"tie";
 
   if(!match::get_flag("tie")) {
     if(match::function_a2b53e17(self)) {
-      playerdata.var_a3ba1678 = # "win";
+      playerdata.var_a3ba1678 = #"win";
     } else {
-      playerdata.var_a3ba1678 = # "loss";
+      playerdata.var_a3ba1678 = #"loss";
     }
   }
 

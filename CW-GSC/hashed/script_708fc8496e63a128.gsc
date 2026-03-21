@@ -212,7 +212,7 @@ function function_37acd633() {
   foreach(guy in ai_array) {
     guy val::reset("electronics_store", "ignoreall");
 
-    if(guy.archetype != # "civilian") {
+    if(guy.archetype != #"civilian") {
       ai::setaiattribute(guy, "can_melee", 0);
     }
   }

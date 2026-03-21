@@ -259,23 +259,23 @@ function function_7b19219a(localclientnum) {
 }
 
 function function_218c0417(localclientnum, itementry) {
-  if(itementry.itemtype === # "equipment" || itementry.itemtype === # "tactical") {
+  if(itementry.itemtype === #"equipment" || itementry.itemtype === #"tactical") {
     data = item_world::function_a7e98a1a(localclientnum);
     lethal = data.inventory.items[7];
     tactical = data.inventory.items[13];
 
-    if(itementry.itemtype == # "equipment" && lethal.networkid != 32767) {
+    if(itementry.itemtype == #"equipment" && lethal.networkid != 32767) {
       if(lethal.itementry.name === itementry.name && lethal.count >= itementry.stackcount) {
         return false;
       }
-    } else if(itementry.itemtype == # "tactical" && tactical.networkid != 32767) {
+    } else if(itementry.itemtype == #"tactical" && tactical.networkid != 32767) {
       if(tactical.itementry.name === itementry.name && tactical.count >= itementry.stackcount) {
         return false;
       }
     }
   }
 
-  if(itementry.itemtype == # "quest") {
+  if(itementry.itemtype == #"quest") {
     return true;
   }
 
@@ -410,11 +410,11 @@ function init_blocker_fx() {}
 function init_riser_fx() {
   if(isDefined(level.var_7f632569) && level.var_7f632569) {}
 
-  level._effect[#"rise_burst"] = # "hash_355ef8d541b9f5c4";
-  level._effect[#"rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = #"hash_355ef8d541b9f5c4";
+  level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
 
   if(isDefined(level.riser_type) && level.riser_type == "snow") {
-    level._effect[#"rise_billow_snow"] = # "hash_793798659a4b9560";
+    level._effect[#"rise_billow_snow"] = #"hash_793798659a4b9560";
   }
 }
 
@@ -659,7 +659,7 @@ function zombie_gut_explosion_cb(localclientnum, oldval, newval, bnewent, biniti
 }
 
 function init_zombie_explode_fx() {
-  level._effect[#"zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"zombie_guts_explosion"] = #"zombie/fx_blood_torso_explo_lg_zmb";
 }
 
 function zombie_wait_explode(localclientnum) {
@@ -1342,7 +1342,7 @@ function update_aat_hud(localclientnum, oldval, newval, bnewent, binitialsnap, f
   icon = aat::get_icon(bwastimejump);
 
   if(str_localized == "none") {
-    str_localized = # "";
+    str_localized = #"";
   }
 
   var_2961e149 = createuimodel(function_1df4c3b0(fieldname, #"zm_hud"), "aatNameHash");

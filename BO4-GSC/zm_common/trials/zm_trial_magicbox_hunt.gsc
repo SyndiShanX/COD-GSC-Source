@@ -78,7 +78,7 @@ function_a4bcce4e() {
   for(i = 0; i < 4; i++) {
     str_bgb = self.bgb_pack[i];
 
-    if(str_bgb === # "zm_bgb_immolation_liquidation") {
+    if(str_bgb === #"zm_bgb_immolation_liquidation") {
       self.var_abfa1f6a = bgb_pack::function_834d35e(i);
       self bgb_pack::function_b2308cd(i, 3);
     }
@@ -89,7 +89,7 @@ function_e8f640a5() {
   for(i = 0; i < 4; i++) {
     str_bgb = self.bgb_pack[i];
 
-    if(str_bgb === # "zm_bgb_immolation_liquidation") {
+    if(str_bgb === #"zm_bgb_immolation_liquidation") {
       self bgb_pack::function_b2308cd(i, self.var_abfa1f6a);
       self.var_abfa1f6a = undefined;
     }

@@ -37,7 +37,7 @@ function game_time() {
   level.n_start_time = gettime();
 }
 
-function countdown_timer(var_753cb060, var_3b192471 = "mission_fail_timer", str_team = # "any", var_9c038d31 = 1, var_f27011e3 = 1, var_3efd443d, var_edf9778a = 3, var_72f304a8 = 0, var_243f2dbe, var_f2a3a140 = array()) {
+function countdown_timer(var_753cb060, var_3b192471 = "mission_fail_timer", str_team = #"any", var_9c038d31 = 1, var_f27011e3 = 1, var_3efd443d, var_edf9778a = 3, var_72f304a8 = 0, var_243f2dbe, var_f2a3a140 = array()) {
   function_d1eb8589(var_3b192471);
   level endon("destroy_ui_countdown_timer_" + var_3b192471);
   level.var_ef4974d7[var_3b192471] = spawnStruct();
@@ -291,15 +291,15 @@ function game_result(str_winning_team) {
     player playlocalsound(#"hash_339c0a10af56146d");
 
     if(!isbot(player)) {
-      if(str_winning_team == # "none") {
-        var_1a47c004 = # "hash_694986fb14b7d7dd";
-        var_1da53c42 = # "hash_42774b4d7620fcbc";
+      if(str_winning_team == #"none") {
+        var_1a47c004 = #"hash_694986fb14b7d7dd";
+        var_1da53c42 = #"hash_42774b4d7620fcbc";
       } else if(player util::is_on_side(str_winning_team)) {
-        var_1a47c004 = # "hash_5379a106e94c7ecc";
-        var_1da53c42 = # "hash_26e1226347737c3c";
+        var_1a47c004 = #"hash_5379a106e94c7ecc";
+        var_1da53c42 = #"hash_26e1226347737c3c";
       } else {
-        var_1a47c004 = # "hash_694986fb14b7d7dd";
-        var_1da53c42 = # "hash_6e65cf69191bdda7";
+        var_1a47c004 = #"hash_694986fb14b7d7dd";
+        var_1da53c42 = #"hash_6e65cf69191bdda7";
       }
 
       player luinotifyevent(#"pre_killcam_transition", 4, 1, level.teamindex[util::get_team_mapping(str_winning_team)], var_1a47c004, var_1da53c42);

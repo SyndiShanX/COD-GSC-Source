@@ -69,7 +69,7 @@ function init() {
     level.zombie_powerups = [];
   }
 
-  level._effect[#"powerup_off"] = # "zombie/fx_powerup_off_green_zmb";
+  level._effect[#"powerup_off"] = #"zombie/fx_powerup_off_green_zmb";
   init_powerups();
 
   if(!level.enable_magic || !is_true(zm_custom::function_901b751c(#"zmpowerupsactive"))) {
@@ -185,7 +185,7 @@ function powerup_hud_monitor() {
         continue;
       }
 
-      if(player.team === # "spectator") {
+      if(player.team === #"spectator") {
         continue;
       }
 
@@ -587,7 +587,7 @@ function add_zombie_powerup(powerup_name, model_name, hint, func_should_drop_wit
     struct.on_name = on_name;
   }
 
-  if(isDefined(powerup_name) && powerup_name == # "full_ammo") {
+  if(isDefined(powerup_name) && powerup_name == #"full_ammo") {
     level.var_aebef29d = gettime() / 1000;
   }
 }
@@ -1386,7 +1386,7 @@ function function_80b4c5e0(var_f0de9b92, b_disable = 1) {
   }
 }
 
-function function_59f7f2c6(var_f0de9b92, var_64ae47e = # "hash_52de50e5184d1c7", var_9c464736 = # "hash_601ae32339098104", var_721ec012 = # "hash_9dbd105c3060c91") {
+function function_59f7f2c6(var_f0de9b92, var_64ae47e = #"hash_52de50e5184d1c7", var_9c464736 = #"hash_601ae32339098104", var_721ec012 = #"hash_9dbd105c3060c91") {
   if(isDefined(level.zombie_powerups[var_f0de9b92])) {
     level.zombie_powerups[var_f0de9b92].var_6029fea3 = spawnStruct();
     level.zombie_powerups[var_f0de9b92].var_6029fea3.var_64ae47e = var_64ae47e;
@@ -1607,11 +1607,11 @@ function function_fe6d6eac(player, mod, hit_location, weapon, damage) {
   }
 
   if(isDefined(player) && isalive(player) && player is_insta_kill_active()) {
-    if(self.zm_ai_category === # "special") {
+    if(self.zm_ai_category === #"special") {
       damage *= 5;
-    } else if(self.zm_ai_category === # "elite") {
+    } else if(self.zm_ai_category === #"elite") {
       damage *= 2.5;
-    } else if(self.zm_ai_category === # "boss") {
+    } else if(self.zm_ai_category === #"boss") {
       damage *= 1.2;
     }
 
@@ -1631,7 +1631,7 @@ function function_fe6d6eac(player, mod, hit_location, weapon, damage) {
       self zombie_utility::zombie_head_gib();
     }
 
-    if(self.zm_ai_category === # "normal") {
+    if(self.zm_ai_category === #"normal") {
       self.health = 1;
       return (self.health + self.maxhealth);
     } else {

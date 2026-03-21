@@ -205,7 +205,7 @@ function forcespawnplayer() {
     return;
   }
 
-  if(isalive(self) || self.pers[#"team"] === # "spectator") {
+  if(isalive(self) || self.pers[#"team"] === #"spectator") {
     return;
   }
 

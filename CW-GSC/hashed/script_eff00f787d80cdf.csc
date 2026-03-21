@@ -62,29 +62,29 @@ function function_3b0ca643(e_ai) {
   if(isDefined(e_ai.archetype)) {
     switch (e_ai.archetype) {
       case # "avogadro":
-        var_1510a94a = # "hash_33e62839d84aaec7";
-        var_e31a323c = # "hash_621285559daed3af";
-        var_fd89f5fb = # "hash_123425d677b928fa";
-        var_4ec57c29 = # "hash_729db72e5e196219";
-        var_f6b3e5dd = # "hash_1d2437fd7fe38d19";
-        var_6e38d21c = # "hash_39c41891747dabba";
+        var_1510a94a = #"hash_33e62839d84aaec7";
+        var_e31a323c = #"hash_621285559daed3af";
+        var_fd89f5fb = #"hash_123425d677b928fa";
+        var_4ec57c29 = #"hash_729db72e5e196219";
+        var_f6b3e5dd = #"hash_1d2437fd7fe38d19";
+        var_6e38d21c = #"hash_39c41891747dabba";
         v_offset = (0, 0, 45);
         break;
       case # "zombie_dog":
-        if(self.subarchetype === # "hash_2a5479b83161cb35") {
-          var_1510a94a = # "hash_2991459f20df3789";
-          var_e31a323c = # "hash_2daacd7b15881d1d";
-          var_fd89f5fb = # "hash_16838de4eb2b7f00";
-          var_4ec57c29 = # "hash_50a34ea4add0897";
-          var_f6b3e5dd = # "hash_58176fa004d16f13";
-          var_6e38d21c = # "hash_219cfeed2cbf8adc";
+        if(self.subarchetype === #"hash_2a5479b83161cb35") {
+          var_1510a94a = #"hash_2991459f20df3789";
+          var_e31a323c = #"hash_2daacd7b15881d1d";
+          var_fd89f5fb = #"hash_16838de4eb2b7f00";
+          var_4ec57c29 = #"hash_50a34ea4add0897";
+          var_f6b3e5dd = #"hash_58176fa004d16f13";
+          var_6e38d21c = #"hash_219cfeed2cbf8adc";
         } else {
-          var_1510a94a = # "hash_30094147649a2ce8";
-          var_e31a323c = # "hash_7e0d7ce34dcb51e8";
-          var_fd89f5fb = # "hash_324d41aa84a6a925";
-          var_4ec57c29 = # "hash_7650d07efcd13f86";
-          var_f6b3e5dd = # "hash_6c87cdcb89dd8aa2";
-          var_6e38d21c = # "hash_6e0e18e77c0f28c1";
+          var_1510a94a = #"hash_30094147649a2ce8";
+          var_e31a323c = #"hash_7e0d7ce34dcb51e8";
+          var_fd89f5fb = #"hash_324d41aa84a6a925";
+          var_4ec57c29 = #"hash_7650d07efcd13f86";
+          var_f6b3e5dd = #"hash_6c87cdcb89dd8aa2";
+          var_6e38d21c = #"hash_6e0e18e77c0f28c1";
         }
 
         v_offset = (20, 0, 30);

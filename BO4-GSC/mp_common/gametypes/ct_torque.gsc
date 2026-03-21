@@ -47,7 +47,7 @@ event_handler[gametype_init] main(eventstruct) {
   level.select_character = ct_utils::get_roleindex(#"prt_mp_engineer");
   level.var_820c5561 = "TORQUE";
   ct_utils::function_be3a76b7(level.var_820c5561);
-  level.var_f4bbd9a8[#"fail_objective_killed"] = # "hash_36b8141cc58566bd";
+  level.var_f4bbd9a8[#"fail_objective_killed"] = #"hash_36b8141cc58566bd";
   level.debugbots = 0;
   ct_core::function_fa03fc55();
   clientfield::register("allplayers", "danger_pstfx", 1, 1, "counter");
@@ -119,7 +119,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self.var_6b6241ac = self.last_valid_position;
     self.var_45cac770 = self.angles;
 
@@ -171,7 +171,7 @@ function_6db6572b() {
 function_c4632a02() {
   var_553008b4 = util::spawn_model("tag_origin");
   var_553008b4.targetname = "zombie_bait";
-  var_553008b4.team = # "allies";
+  var_553008b4.team = #"allies";
   return var_553008b4;
 }
 
@@ -872,7 +872,7 @@ function_4c551667() {
   }
 }
 
-spawn_robot(str_team = # "allies", var_3b640040 = "walk") {
+spawn_robot(str_team = #"allies", var_3b640040 = "walk") {
   s_vip = struct::get("s_vip", "targetname");
   robot = spawnactor("spawner_bo3_robot_grunt_assault_mp", s_vip.origin, s_vip.angles, "ai_vip", 1);
   robot ai::set_behavior_attribute("rogue_control_speed", var_3b640040);

@@ -211,12 +211,12 @@ slide_explosion(n_slot) {
           ai dodamage(var_fd11502e, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, level.weaponnone);
 
           if(ai.health > 0) {
-            if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
+            if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
               ai ai::stun();
             } else {
               ai zombie_utility::setup_zombie_knockdown(self);
             }
-          } else if(ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "enhanced") {
+          } else if(ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"enhanced") {
             n_kill_count++;
             ai zm_spawner::zombie_explodes_intopieces(0);
           }
@@ -241,7 +241,7 @@ function_2772480a() {
     return false;
   }
 
-  if(namespace_fcd611c3::is_active() && level.var_e91491fb !== # "slide") {
+  if(namespace_fcd611c3::is_active() && level.var_e91491fb !== #"slide") {
     return false;
   }
 

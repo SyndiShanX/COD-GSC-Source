@@ -393,7 +393,7 @@ function private shouldtacticalarrivecondition(behaviortreeentity) {
     return false;
   }
 
-  if(!(behaviortreeentity.node.type == # "cover left")) {
+  if(!(behaviortreeentity.node.type == #"cover left")) {
     return false;
   }
 
@@ -592,7 +592,7 @@ function private getarrivalsplittime(arrivalanim) {
     var_ccd34262 = issubstr(var_1e582813, "<dev string:x128>") || issubstr(var_1e582813, "<dev string:x12e>") || issubstr(var_1e582813, "<dev string:x134>");
     var_ffc4381b = issubstr(var_1e582813, "<dev string:x13a>");
 
-    if(var_ccd34262 && !var_ffc4381b && self.archetype == # "human") {
+    if(var_ccd34262 && !var_ffc4381b && self.archetype == #"human") {
       assertmsg("<dev string:xde>" + var_1e582813 + "<dev string:x145>" + "<dev string:x10f>" + "<dev string:x154>");
     }
   }
@@ -608,24 +608,24 @@ function private deltarotate(delta, yaw) {
 }
 
 function private function_e7f9cf11() {
-  assert(self.archetype == # "human" || self.archetype == # "civilian");
+  assert(self.archetype == #"human" || self.archetype == #"civilian");
   speed = self function_28e7d252();
   return speed;
 }
 
 function private function_3298688b() {
-  assert(self.archetype == # "human");
+  assert(self.archetype == #"human");
   speed = self function_359fd121();
   return speed;
 }
 
 function private function_eb731440() {
-  assert(self.archetype == # "human");
+  assert(self.archetype == #"human");
   return self.var_55a3f1d3;
 }
 
 function private function_631d7179() {
-  assert(self.archetype == # "human");
+  assert(self.archetype == #"human");
 
   if(is_true(self.var_dd1cd771)) {
     return self.var_31162969;

@@ -52,10 +52,10 @@ function on_item_pickup(params) {
   item = params.item;
   player_zone = zm_zonemgr::get_zone_from_position(self.origin);
 
-  if(isPlayer(self) && player_zone === "zone_pizza_kitchen" && item.itementry.name === # "ray_gun_item_sr") {
+  if(isPlayer(self) && player_zone === "zone_pizza_kitchen" && item.itementry.name === #"ray_gun_item_sr") {
     var_a998408b = self.inventory.items[17 + 1];
 
-    if(var_a998408b.itementry.name === # "ray_gun_item_sr") {
+    if(var_a998408b.itementry.name === #"ray_gun_item_sr") {
       self setweaponammoclip(var_a998408b.var_627c698b, 20);
       self setweaponammostock(var_a998408b.var_627c698b, 80);
       return;
@@ -63,7 +63,7 @@ function on_item_pickup(params) {
 
     var_bf5e6c17 = self.inventory.items[17 + 1 + 8 + 1];
 
-    if(var_bf5e6c17.itementry.name === # "ray_gun_item_sr") {
+    if(var_bf5e6c17.itementry.name === #"ray_gun_item_sr") {
       self setweaponammoclip(var_bf5e6c17.var_627c698b, 20);
       self setweaponammostock(var_bf5e6c17.var_627c698b, 80);
       return;
@@ -71,7 +71,7 @@ function on_item_pickup(params) {
 
     var_8e20899c = self.inventory.items[17 + 1 + 8 + 1 + 8 + 1];
 
-    if(var_8e20899c.itementry.name === # "ray_gun_item_sr") {
+    if(var_8e20899c.itementry.name === #"ray_gun_item_sr") {
       self setweaponammoclip(var_8e20899c.var_627c698b, 20);
       self setweaponammostock(var_8e20899c.var_627c698b, 80);
       return;
@@ -423,7 +423,7 @@ function function_a32f14f8() {
       var_9e536071 = item_drop::drop_item(0, undefined, 1, 0, point.id, v_pos, var_53313495.angles, 0);
       var_9e536071.var_dd21aec2 = 1 | 16;
 
-      if(var_aa4f9213 === # "armor_item_lv1_t9_sr" || var_aa4f9213 === # "ray_gun_item_sr") {
+      if(var_aa4f9213 === #"armor_item_lv1_t9_sr" || var_aa4f9213 === #"ray_gun_item_sr") {
         var_53313495.origin += (0, 0, 12);
       }
 
@@ -451,9 +451,9 @@ function function_a42c42c2() {
   if(var_e083ecbd <= 30) {
     if(var_e083ecbd <= 10) {
       if(function_f23f302d()) {
-        str_item = # "self_revive_sr_item";
+        str_item = #"self_revive_sr_item";
       } else {
-        str_item = # "armor_item_lv1_t9_sr";
+        str_item = #"armor_item_lv1_t9_sr";
       }
     } else if(var_e083ecbd <= 20) {
       str_item = "full_ammo";
@@ -464,14 +464,14 @@ function function_a42c42c2() {
     }
   } else if(var_e083ecbd <= 65) {
     if(var_e083ecbd <= 55) {
-      str_item = # "scrap_epic_item_sr";
+      str_item = #"scrap_epic_item_sr";
     } else {
-      str_item = # "scrap_legendary_item_sr";
+      str_item = #"scrap_legendary_item_sr";
     }
   } else if(var_e083ecbd <= 95) {
-    str_item = # "hash_69a628368f8263f";
+    str_item = #"hash_69a628368f8263f";
   } else {
-    str_item = # "ray_gun_item_sr";
+    str_item = #"ray_gun_item_sr";
   }
 
   return str_item;

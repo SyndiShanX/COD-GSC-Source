@@ -196,7 +196,7 @@ registerbehaviorscriptfunctions() {
 }
 
 function_83ac16b5(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == # "gladiator" && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == #"gladiator" && eattacker.team != self.team) {
     if(eattacker ai::has_behavior_attribute("damage_multiplier")) {
       damage_multiplier = eattacker ai::get_behavior_attribute("damage_multiplier");
 
@@ -226,9 +226,9 @@ gladiatortargetservice(entity) {
     entity.var_4f1b8d2b = 0;
   }
 
-  if(entity.subarchetype == # "gladiator_marauder" && !(isDefined(entity.var_4f1b8d2b) && entity.var_4f1b8d2b)) {
+  if(entity.subarchetype == #"gladiator_marauder" && !(isDefined(entity.var_4f1b8d2b) && entity.var_4f1b8d2b)) {
     entity.favoriteenemy = entity.var_93a62fe;
-  } else if(entity.subarchetype == # "gladiator_destroyer") {
+  } else if(entity.subarchetype == #"gladiator_destroyer") {
     entity.favoriteenemy = entity.var_93a62fe;
   }
 
@@ -263,7 +263,7 @@ gladiatortargetservice(entity) {
       entity.hasseenfavoriteenemy = 1;
       entity.var_908a5d30 = 1;
 
-      if(entity.subarchetype == # "gladiator_destroyer") {
+      if(entity.subarchetype == #"gladiator_destroyer") {
         entity setblackboardattribute("_gladiator_react", "idle");
 
         if(entity haspath()) {
@@ -294,7 +294,7 @@ gladiatortargetservice(entity) {
         }
       }
 
-      if(entity.subarchetype == # "gladiator_marauder") {
+      if(entity.subarchetype == #"gladiator_marauder") {
         entity ai::set_behavior_attribute("run", 1);
       }
     }
@@ -340,7 +340,7 @@ function_4f73587a(entity) {
 }
 
 function_4660925e(entity) {
-  if(entity.subarchetype == # "gladiator_destroyer") {
+  if(entity.subarchetype == #"gladiator_destroyer") {
     return true;
   }
 
@@ -373,7 +373,7 @@ function_edd0777f(entity) {
     return false;
   }
 
-  if(entity.subarchetype != # "gladiator_destroyer") {
+  if(entity.subarchetype != #"gladiator_destroyer") {
     return false;
   }
 
@@ -470,7 +470,7 @@ function_c6c44df1(entity) {
   z_diff = abs(entity.origin[2] - entity.favoriteenemy.origin[2]);
   z_max = 48;
 
-  if(isDefined(entity.favoriteenemy.zone_name) && entity.favoriteenemy.zone_name == # "zone_starting_area_center") {
+  if(isDefined(entity.favoriteenemy.zone_name) && entity.favoriteenemy.zone_name == #"zone_starting_area_center") {
     z_max = 8;
   }
 
@@ -504,7 +504,7 @@ function_13f886a2(entity) {
 
   var_17c3916f = 128 * 128;
 
-  if(self.subarchetype == # "gladiator_marauder") {
+  if(self.subarchetype == #"gladiator_marauder") {
     if(gettime() < entity.next_leap_time) {
       return false;
     }
@@ -521,11 +521,11 @@ function_13f886a2(entity) {
     if(z_diff > 72) {
       return false;
     }
-  } else if(self.subarchetype == # "gladiator_destroyer") {
+  } else if(self.subarchetype == #"gladiator_destroyer") {
     z_diff = abs(entity.origin[2] - entity.favoriteenemy.origin[2]);
     z_max = 48;
 
-    if(isDefined(entity.favoriteenemy.zone_name) && entity.favoriteenemy.zone_name == # "zone_starting_area_center") {
+    if(isDefined(entity.favoriteenemy.zone_name) && entity.favoriteenemy.zone_name == #"zone_starting_area_center") {
       z_max = 8;
     }
 
@@ -566,7 +566,7 @@ function_61e7d5f5(entity) {
     return false;
   }
 
-  if(self.subarchetype != # "gladiator_destroyer") {
+  if(self.subarchetype != #"gladiator_destroyer") {
     return false;
   }
 
@@ -660,7 +660,7 @@ function_fe0ecd9f(entity) {
 }
 
 function_6719445a(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = 1;
     entity.var_c2986b66 = 1;
     entity function_d1242576();
@@ -670,7 +670,7 @@ function_6719445a(entity) {
 }
 
 function_fced00e1(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = undefined;
     entity.var_c2986b66 = undefined;
     entity function_d1242576();
@@ -680,14 +680,14 @@ function_fced00e1(entity) {
 }
 
 function_3963581d(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = 1;
     entity.var_c2986b66 = 1;
   }
 }
 
 function_dfbf9d5e(entity) {
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_5dd07a80 = undefined;
     entity.var_c2986b66 = undefined;
   }
@@ -705,7 +705,7 @@ function_6ba071ff(entity) {
 function_3ca98f5a(entity) {
   entity pathmode("dont move", 1);
 
-  if(entity.subarchetype == # "gladiator_marauder") {
+  if(entity.subarchetype == #"gladiator_marauder") {
     entity.var_4f1b8d2b = 1;
   }
 }
@@ -947,9 +947,9 @@ function_caed4d61() {
   self setblackboardattribute("_locomotion_speed", "locomotion_speed_walk");
   self collidewithactors(1);
 
-  if(self.subarchetype == # "gladiator_destroyer") {
+  if(self.subarchetype == #"gladiator_destroyer") {
     self function_f6a04c04();
-  } else if(self.subarchetype == # "gladiator_marauder") {
+  } else if(self.subarchetype == #"gladiator_marauder") {
     self function_2617ff14();
     self.next_leap_time = gettime() + 3000;
   }
@@ -981,7 +981,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return 0;
   }
 
-  if(isDefined(attacker) && isPlayer(attacker) && self.subarchetype == # "gladiator_marauder" && !isDefined(self.var_4f1b8d2b) && isDefined(zm_zonemgr::function_54fc7938(attacker, self))) {
+  if(isDefined(attacker) && isPlayer(attacker) && self.subarchetype == #"gladiator_marauder" && !isDefined(self.var_4f1b8d2b) && isDefined(zm_zonemgr::function_54fc7938(attacker, self))) {
     self.favoriteenemy = attacker;
     self.var_4f1b8d2b = 1;
     self.var_cb89528d = 1;
@@ -1001,7 +1001,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     weakpoints = namespace_81245006::function_fab3ee3e(self);
 
     foreach(pointinfo in weakpoints) {
-      if(namespace_81245006::function_f29756fe(pointinfo) === 1 && pointinfo.type === # "armor") {
+      if(namespace_81245006::function_f29756fe(pointinfo) === 1 && pointinfo.type === #"armor") {
         var_dd54fdb1 = pointinfo;
         var_88e794fb = 1;
         break;
@@ -1118,7 +1118,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
         }
       }
 
-      if(var_dd54fdb1.type === # "armor" && !var_ae30c5b0) {
+      if(var_dd54fdb1.type === #"armor" && !var_ae30c5b0) {
         attacker util::show_hit_marker(!isalive(self));
         return 0;
       }
@@ -1129,7 +1129,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 }
 
 function_3b8907b9(s_params) {
-  if(self.archetype != # "gladiator") {
+  if(self.archetype != #"gladiator") {
     return;
   }
 
@@ -1273,7 +1273,7 @@ function_88d65504(axe, var_7900b267, move_pos) {
         hit_ent playsoundtoplayer(#"evt_player_swiped", hit_ent);
         return true;
       } else if(isai(hit_ent)) {
-        if(hit_ent.archetype === # "zombie") {
+        if(hit_ent.archetype === #"zombie") {
           if(isalive(hit_ent) && !(isDefined(hit_ent.magic_bullet_shield) && hit_ent.magic_bullet_shield) && !zm_utility::is_magic_bullet_shield_enabled(hit_ent)) {
             gibserverutils::gibhead(hit_ent);
             hit_ent zm_cleanup::function_23621259();

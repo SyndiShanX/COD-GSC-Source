@@ -233,7 +233,7 @@ function is_target_valid(target) {
     return 0;
   }
 
-  if(self.team != # "allies") {
+  if(self.team != #"allies") {
     if(!isPlayer(target)) {
       return 0;
     }
@@ -283,7 +283,7 @@ function is_target_valid(target) {
 function get_favorite_enemy() {
   dog_targets = [];
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     dog_targets = getaiteamarray(level.zombie_team);
   } else {
     dog_targets = getplayers();
@@ -449,7 +449,7 @@ function play_dog_round() {
 }
 
 function private function_7d5fa17e() {
-  return self.subarchetype != # "zombie_wolf" && self.subarchetype != # "hash_28e36e7b7d5421f" && self.subarchetype != # "hash_2a5479b83161cb35";
+  return self.subarchetype != #"zombie_wolf" && self.subarchetype != #"hash_28e36e7b7d5421f" && self.subarchetype != #"hash_2a5479b83161cb35";
 }
 
 function dog_init() {
@@ -570,7 +570,7 @@ function dog_death() {
     }
   }
 
-  if(self.subarchetype != # "zombie_wolf" && isDefined(self.a.nodeath)) {
+  if(self.subarchetype != #"zombie_wolf" && isDefined(self.a.nodeath)) {
     if(self.var_c39323b5 !== 1) {
       level thread dog_explode_fx(self, self.origin);
       self ghost();

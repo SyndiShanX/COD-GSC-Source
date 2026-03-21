@@ -776,13 +776,13 @@ function function_b90ebd9a() {
 
   if(level flag::get("af_player_get_in_back")) {
     shot = "get_in";
-    anim = # "hash_5916909863e780a8";
+    anim = #"hash_5916909863e780a8";
   } else if(level flag::get("af_player_get_in_right")) {
     shot = "get_in_right";
-    anim = # "hash_139b3208e93b39f5";
+    anim = #"hash_139b3208e93b39f5";
   } else {
     shot = "get_in_left";
-    anim = # "hash_697f6a68b0ce4e60";
+    anim = #"hash_697f6a68b0ce4e60";
   }
 
   level.player val::set(#"getin", "allowdeath", 0);
@@ -1896,7 +1896,7 @@ function function_e90d5c1() {
   for(var_c500345d = player function_ab88cc4(); var_c500345d > 0; var_c500345d = player function_ab88cc4()) {
     ret = player waittilltimeout(tag_time, #"weapon_fired");
 
-    if(ret._notify == # "timeout") {
+    if(ret._notify == #"timeout") {
       guys = getaiarray("af_vh_enemy", "targetname");
       array::thread_all(guys, &function_a75da416);
       player waittill(#"weapon_fired");

@@ -20,11 +20,11 @@ function function_dc7eaabd(assignment) {
   if(isDefined(level.teams[assignment])) {
     status = self player::function_3d288f14();
 
-    if(!isDefined(level.var_75dffa9f[assignment]) || status != level.var_75dffa9f[assignment] && status == # "game") {
-      if(status == # "game") {
-        level.var_75dffa9f[assignment] = # "game";
+    if(!isDefined(level.var_75dffa9f[assignment]) || status != level.var_75dffa9f[assignment] && status == #"game") {
+      if(status == #"game") {
+        level.var_75dffa9f[assignment] = #"game";
       } else {
-        level.var_75dffa9f[assignment] = # "none";
+        level.var_75dffa9f[assignment] = #"none";
       }
     }
   }
@@ -158,7 +158,7 @@ function private function_ba459d03(team) {
     voip = "<dev string:x7d>";
 
     if(isDefined(level.var_75dffa9f[team])) {
-      voip += level.var_75dffa9f[team] == # "game" ? "<dev string:x86>" : "<dev string:x8e>";
+      voip += level.var_75dffa9f[team] == #"game" ? "<dev string:x86>" : "<dev string:x8e>";
     } else {
       voip += "<dev string:x98>";
     }

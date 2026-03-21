@@ -33,14 +33,14 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[#"apd_projectile"] = # "maps/zm_white/fx8_power_wisp";
-  level._effect[#"hash_50817e52341b2129"] = # "maps/zm_white/fx8_power_wisp_lg";
-  level._effect[#"hash_2ccbbf521f943fc4"] = # "hash_4b9c72e8053cbd1e";
-  level._effect[#"hash_6a86077d83942719"] = # "hash_51c50bab95b10eb4";
-  level._effect[#"hash_3215540730982960"] = # "hash_108f821580c61bdc";
-  level._effect[#"discharge_pap"] = # "hash_443a4f41b97dd62";
-  level._effect[#"discharge_perk"] = # "hash_7ab3f7caf7bc6d91";
-  level._effect[#"discharge_wallbuy"] = # "hash_1f66229beff9787f";
+  level._effect[#"apd_projectile"] = #"maps/zm_white/fx8_power_wisp";
+  level._effect[#"hash_50817e52341b2129"] = #"maps/zm_white/fx8_power_wisp_lg";
+  level._effect[#"hash_2ccbbf521f943fc4"] = #"hash_4b9c72e8053cbd1e";
+  level._effect[#"hash_6a86077d83942719"] = #"hash_51c50bab95b10eb4";
+  level._effect[#"hash_3215540730982960"] = #"hash_108f821580c61bdc";
+  level._effect[#"discharge_pap"] = #"hash_443a4f41b97dd62";
+  level._effect[#"discharge_perk"] = #"hash_7ab3f7caf7bc6d91";
+  level._effect[#"discharge_wallbuy"] = #"hash_1f66229beff9787f";
 }
 
 function_2a58f409(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

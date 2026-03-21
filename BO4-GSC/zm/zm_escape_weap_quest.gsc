@@ -223,7 +223,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
   a_scene_ents = self.s_scene.scene_ents;
 
   foreach(ent in a_scene_ents) {
-    if(ent.model === # "c_t8_zmb_mob_wolf_head") {
+    if(ent.model === #"c_t8_zmb_mob_wolf_head") {
       var_3e1900e4 = ent;
       break;
     }
@@ -533,7 +533,7 @@ function_f0ef3897(e_player) {
 
   if(e_player flag::exists(#"hash_11ab20934759ebc3") && e_player flag::get(#"hash_11ab20934759ebc3")) {
     e_player zm_weapons::weapon_give(getweapon(#"tomahawk_t8_upgraded"));
-    str_tutorial = # "hash_77bbe7cec9945ff5";
+    str_tutorial = #"hash_77bbe7cec9945ff5";
 
     if(!(isDefined(e_player.var_e9c9a450) && e_player.var_e9c9a450)) {
       e_player thread zm_audio::create_and_play_dialog(#"ax_upgrade", #"pickup", undefined, 1);
@@ -541,7 +541,7 @@ function_f0ef3897(e_player) {
     }
   } else {
     e_player zm_weapons::weapon_give(getweapon(#"tomahawk_t8"));
-    str_tutorial = # "hash_a89ec051050c008";
+    str_tutorial = #"hash_a89ec051050c008";
 
     if(!(isDefined(e_player.var_d2351fa5) && e_player.var_d2351fa5)) {
       e_player thread zm_audio::create_and_play_dialog(#"ax", #"pickup", undefined, 1);

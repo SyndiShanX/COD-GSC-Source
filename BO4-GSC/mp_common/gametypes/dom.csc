@@ -69,7 +69,7 @@ monitor_flag_fx(localclientnum, flag_objective, flag_name) {
     if(progress != flag.last_progress) {
       var_76587cfe = team;
 
-      if(var_76587cfe == # "neutral") {
+      if(var_76587cfe == #"neutral") {
         var_4e8c1813 = serverobjective_getobjectivegamemodeflags(localclientnum, flag_objective);
 
         if(var_4e8c1813 == 2) {
@@ -103,16 +103,16 @@ play_base_fx(localclientnum, flag, fx_name, team) {
 update_base_fx(localclientnum, flag, team) {
   fx_name = get_base_fx(flag, team);
 
-  if(shoutcaster::is_shoutcaster(localclientnum) && team != # "neutral") {
-    fx_name += team == # "allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
+  if(shoutcaster::is_shoutcaster(localclientnum) && team != #"neutral") {
+    fx_name += team == #"allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
   }
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     play_base_fx(localclientnum, flag, fx_name, team);
     return;
   }
 
-  if(flag.last_team == # "neutral" || shoutcaster::is_shoutcaster(localclientnum)) {
+  if(flag.last_team == #"neutral" || shoutcaster::is_shoutcaster(localclientnum)) {
     play_base_fx(localclientnum, flag, fx_name, team);
     return;
   }
@@ -144,8 +144,8 @@ update_cap_fx(localclientnum, flag, team, progress) {
 
   fx_name = get_cap_fx(flag, team);
 
-  if(shoutcaster::is_shoutcaster(localclientnum) && team != # "neutral") {
-    fx_name += team == # "allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
+  if(shoutcaster::is_shoutcaster(localclientnum) && team != #"neutral") {
+    fx_name += team == #"allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
   }
 
   play_cap_fx(localclientnum, flag, fx_name, team);
@@ -161,7 +161,7 @@ get_base_fx(flag, team) {
     }
   }
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     return "ui/fx_dom_marker_neutral";
   }
 
@@ -177,7 +177,7 @@ get_cap_fx(flag, team) {
     }
   }
 
-  if(team == # "neutral") {
+  if(team == #"neutral") {
     return "ui/fx_dom_cap_indicator_neutral";
   }
 

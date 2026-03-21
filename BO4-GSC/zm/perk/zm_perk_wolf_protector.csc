@@ -30,9 +30,9 @@ function_27473e44() {
 }
 
 init() {
-  level._effect[#"hash_7e57e8f68ea37ffa"] = # "hash_66c3b340356c182b";
-  level._effect[#"hash_2b6b5aa12ed687c5"] = # "hash_6ded6189669f2669";
-  level._effect[#"hash_674126a125f46aae"] = # "hash_1d5598025e3875a8";
+  level._effect[#"hash_7e57e8f68ea37ffa"] = #"hash_66c3b340356c182b";
+  level._effect[#"hash_2b6b5aa12ed687c5"] = #"hash_6ded6189669f2669";
+  level._effect[#"hash_674126a125f46aae"] = #"hash_1d5598025e3875a8";
 }
 
 client_field_func() {

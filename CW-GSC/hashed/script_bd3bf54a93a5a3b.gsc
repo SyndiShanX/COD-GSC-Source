@@ -634,7 +634,7 @@ function function_5c001093() {
   self.goalradius = 64;
   self ai::set_behavior_attribute("demeanor", "combat");
 
-  if(s_result._notify == # "guard_station_doors_opened" || s_result._notify == # "player_in_guard_room") {
+  if(s_result._notify == #"guard_station_doors_opened" || s_result._notify == #"player_in_guard_room") {
     if(self.targetname == "left_platform_guy_1" || self.targetname == "left_platform_guy_2") {
       vol = getent("ghost_station_left_platform_enemy_combat_volume", "targetname");
       self setgoal(vol, 1);

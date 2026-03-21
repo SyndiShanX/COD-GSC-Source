@@ -54,7 +54,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != # "melee_bowie" && weapon.name != # "melee_bowie_bloody") {
+  if(weapon.name != #"melee_bowie" && weapon.name != #"melee_bowie_bloody") {
     return;
   }
 

@@ -104,7 +104,7 @@ function init() {
     level.zombie_team_index = level.teamcount + 1;
 
     if(2 == level.zombie_team_index) {
-      level.zombie_team = # "axis";
+      level.zombie_team = #"axis";
     } else {
       level.zombie_team = "team" + level.zombie_team_index;
     }
@@ -136,7 +136,7 @@ function init() {
   level.gameforfeited = 0;
   level.forceautoassign = 0;
   level.halftimetype = "halftime";
-  level.halftimesubcaption = # "hash_54b0f0ec952ddba8";
+  level.halftimesubcaption = #"hash_54b0f0ec952ddba8";
   level.laststatustime = 0;
   level.waswinning = [];
   level.lastslowprocessframe = 0;
@@ -254,13 +254,13 @@ function compareteambygamestat(gamestat, teama, teamb, previous_winner_score) {
   winner = undefined;
 
   if(teama == "tie") {
-    winner = # "tie";
+    winner = #"tie";
 
     if(previous_winner_score < game.stat[gamestat][teamb]) {
       winner = teamb;
     }
   } else if(game.stat[gamestat][teama] == game.stat[gamestat][teamb]) {
-    winner = # "tie";
+    winner = #"tie";
   } else if(game.stat[gamestat][teamb] > game.stat[gamestat][teama]) {
     winner = teamb;
   } else {
@@ -353,11 +353,11 @@ function forceend(hostsucks = 0) {
   level.hostforcedend = 1;
 
   if(hostsucks) {
-    endstring = # "mp/host_sucks";
+    endstring = #"mp/host_sucks";
   } else if(level.splitscreen) {
-    endstring = # "mp/ended_game";
+    endstring = #"mp/ended_game";
   } else {
-    endstring = # "mp/host_ended_game";
+    endstring = #"mp/host_ended_game";
   }
 
   setmatchflag("disableIngameMenu", 1);
@@ -388,7 +388,7 @@ function killserverpc() {
   level.forcedend = 1;
   level.hostforcedend = 1;
   level.killserver = 1;
-  endstring = # "mp/host_ended_game";
+  endstring = #"mp/host_ended_game";
   println("<dev string:x82>");
   thread endgame(winner, endstring);
 }
@@ -755,7 +755,7 @@ function function_6c8d7c31(winner) {
 }
 
 function endgame(winner, endreasontext) {
-  if(game.state == # "postgame" || level.gameended) {
+  if(game.state == #"postgame" || level.gameended) {
     return;
   }
 
@@ -1342,11 +1342,11 @@ function callback_startgametype() {
     }
 
     if(!isDefined(game.attackers)) {
-      game.attackers = # "allies";
+      game.attackers = #"allies";
     }
 
     if(!isDefined(game.defenders)) {
-      game.defenders = # "axis";
+      game.defenders = #"axis";
     }
 
     assert(game.attackers != game.defenders);
@@ -1359,32 +1359,32 @@ function callback_startgametype() {
 
     gamestate::set_state(#"playing");
     setDvar(#"cg_thirdpersonangle", 354);
-    game.strings[#"press_to_spawn"] = # "hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
 
     if(level.teambased) {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_teams";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     } else {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_players";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_players";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"match_starting_in"] = # "hash_18e58cc95db34427";
-    game.strings[#"spawn_next_round"] = # "mp/spawn_next_round";
-    game.strings[#"waiting_to_spawn"] = # "mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
-    game.strings[#"you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
-    game.strings[#"match_starting"] = # "mp/match_starting";
-    game.strings[#"change_class"] = # "mp/change_class_next_spawn";
-    game.strings[#"last_stand"] = # "hash_5732d212e4511a00";
-    game.strings[#"cowards_way"] = # "hash_268e464278a2f8ff";
-    game.strings[#"tie"] = # "mp/match_tie";
-    game.strings[#"round_draw"] = # "mp/round_draw";
-    game.strings[#"enemies_eliminated"] = # "mp_enemies_eliminated";
-    game.strings[#"score_limit_reached"] = # "mp/score_limit_reached";
-    game.strings[#"round_limit_reached"] = # "mp/round_limit_reached";
-    game.strings[#"time_limit_reached"] = # "mp/time_limit_reached";
-    game.strings[#"players_forfeited"] = # "mp/players_forfeited";
+    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
+    game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
+    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
+    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"match_starting"] = #"mp/match_starting";
+    game.strings[#"change_class"] = #"mp/change_class_next_spawn";
+    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
+    game.strings[#"tie"] = #"mp/match_tie";
+    game.strings[#"round_draw"] = #"mp/round_draw";
+    game.strings[#"enemies_eliminated"] = #"mp_enemies_eliminated";
+    game.strings[#"score_limit_reached"] = #"mp/score_limit_reached";
+    game.strings[#"round_limit_reached"] = #"mp/round_limit_reached";
+    game.strings[#"time_limit_reached"] = #"mp/time_limit_reached";
+    game.strings[#"players_forfeited"] = #"mp/players_forfeited";
     assertteamvariables();
 
     if(isDefined(level.onprecachegametype)) {

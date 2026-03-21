@@ -1290,10 +1290,10 @@ robotisatcovercondition(entity) {
 robotsupportsovercover(entity) {
   if(isDefined(entity.node)) {
     if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4) {
-      return (entity.node.type == # "cover stand" || entity.node.type == # "conceal stand");
+      return (entity.node.type == #"cover stand" || entity.node.type == #"conceal stand");
     }
 
-    return (entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch");
+    return (entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch");
   }
 
   return false;
@@ -1542,7 +1542,7 @@ robotscanexposedpainterminate(entity) {
 robottookempdamage(entity) {
   if(isDefined(entity.damageweapon) && isDefined(entity.damagemod)) {
     weapon = entity.damageweapon;
-    return (entity.damagemod == "MOD_GRENADE_SPLASH" && weapon.rootweapon.name == # "emp_grenade");
+    return (entity.damagemod == "MOD_GRENADE_SPLASH" && weapon.rootweapon.name == #"emp_grenade");
   }
 
   return false;
@@ -2130,7 +2130,7 @@ stepoutterminate(entity, asmstatename) {
 }
 
 supportsstepoutcondition(entity) {
-  return entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover pillar";
+  return entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover pillar";
 }
 
 shouldstepincondition(entity) {
@@ -2157,7 +2157,7 @@ robotdeployminiraps() {
 }
 
 function_125cc705() {
-  if(self.subarchetype === # "robot_rpg") {
+  if(self.subarchetype === #"robot_rpg") {
     self.var_21001b38 = getweapon(#"hash_3b5610f58856b4ea");
     self.var_d5bd74f1 = getweapon(#"hash_1d8ec79043d16eb");
     self.var_cdf2311b = 0;
@@ -2432,7 +2432,7 @@ robotdamageoverride(inflictor, attacker, damage, flags, meansofdamage, weapon, p
     }
   }
 
-  if(weapon.name == # "sticky_grenade") {
+  if(weapon.name == #"sticky_grenade") {
     switch (meansofdamage) {
       case # "mod_impact":
         entity.stuckwithstickygrenade = 1;

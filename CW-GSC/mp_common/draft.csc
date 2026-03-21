@@ -29,38 +29,38 @@ function private preinit() {
   clientfield::function_5b7d846d("PositionDraft.waitingForPlayers", #"position_draft", #"waitingforplayers", 1, 1, "int", undefined, 0, 0);
   serverfield::register("PositionDraft.uiLoaded", 1, 1, "int");
   level.var_a968beb = [];
-  level.var_a968beb[0] = # "none";
-  level.var_a968beb[1] = # "allies";
-  level.var_a968beb[2] = # "axis";
+  level.var_a968beb[0] = #"none";
+  level.var_a968beb[1] = #"allies";
+  level.var_a968beb[2] = #"axis";
   level.var_8cb8d474 = [];
   level.var_8cb8d474[#"none"] = [];
-  level.var_8cb8d474[#"none"][0] = # "hash_6eb882c3b52cdbb3";
-  level.var_8cb8d474[#"none"][2] = # "hash_6eb881c3b52cda00";
-  level.var_8cb8d474[#"none"][1] = # "hash_6eb884c3b52cdf19";
-  level.var_8cb8d474[#"none"][3] = # "hash_6eb883c3b52cdd66";
-  level.var_8cb8d474[#"none"][4] = # "hash_6eb886c3b52ce27f";
+  level.var_8cb8d474[#"none"][0] = #"hash_6eb882c3b52cdbb3";
+  level.var_8cb8d474[#"none"][2] = #"hash_6eb881c3b52cda00";
+  level.var_8cb8d474[#"none"][1] = #"hash_6eb884c3b52cdf19";
+  level.var_8cb8d474[#"none"][3] = #"hash_6eb883c3b52cdd66";
+  level.var_8cb8d474[#"none"][4] = #"hash_6eb886c3b52ce27f";
   level.var_8cb8d474[#"allies"] = [];
-  level.var_8cb8d474[#"allies"][0] = # "draft_player_struct_0_allies";
-  level.var_8cb8d474[#"allies"][2] = # "draft_player_struct_1_allies";
-  level.var_8cb8d474[#"allies"][1] = # "draft_player_struct_2_allies";
-  level.var_8cb8d474[#"allies"][3] = # "draft_player_struct_3_allies";
-  level.var_8cb8d474[#"allies"][4] = # "draft_player_struct_4_allies";
+  level.var_8cb8d474[#"allies"][0] = #"draft_player_struct_0_allies";
+  level.var_8cb8d474[#"allies"][2] = #"draft_player_struct_1_allies";
+  level.var_8cb8d474[#"allies"][1] = #"draft_player_struct_2_allies";
+  level.var_8cb8d474[#"allies"][3] = #"draft_player_struct_3_allies";
+  level.var_8cb8d474[#"allies"][4] = #"draft_player_struct_4_allies";
   level.var_8cb8d474[#"axis"] = [];
-  level.var_8cb8d474[#"axis"][0] = # "hash_3b2607cfca030035";
-  level.var_8cb8d474[#"axis"][2] = # "hash_253fd3975ea7547c";
-  level.var_8cb8d474[#"axis"][1] = # "hash_1edd5ff5456df7f7";
-  level.var_8cb8d474[#"axis"][3] = # "hash_61f816d9a00b29c6";
-  level.var_8cb8d474[#"axis"][4] = # "hash_753a11f84aa8941";
+  level.var_8cb8d474[#"axis"][0] = #"hash_3b2607cfca030035";
+  level.var_8cb8d474[#"axis"][2] = #"hash_253fd3975ea7547c";
+  level.var_8cb8d474[#"axis"][1] = #"hash_1edd5ff5456df7f7";
+  level.var_8cb8d474[#"axis"][3] = #"hash_61f816d9a00b29c6";
+  level.var_8cb8d474[#"axis"][4] = #"hash_753a11f84aa8941";
   level.var_a72b250f = [];
-  level.var_a72b250f[#"none"] = # "hash_24d789c80dba10e6";
-  level.var_a72b250f[#"allies"] = # "hash_e2e52f9cab15dce";
-  level.var_a72b250f[#"axis"] = # "hash_50c9ef9e41155cf9";
-  level.var_a72b250f[#"spectator"] = # "hash_e2e52f9cab15dce";
+  level.var_a72b250f[#"none"] = #"hash_24d789c80dba10e6";
+  level.var_a72b250f[#"allies"] = #"hash_e2e52f9cab15dce";
+  level.var_a72b250f[#"axis"] = #"hash_50c9ef9e41155cf9";
+  level.var_a72b250f[#"spectator"] = #"hash_e2e52f9cab15dce";
   level.draftstructs = [];
-  level.draftstructs[#"none"] = # "draft_team_struct";
-  level.draftstructs[#"allies"] = # "draft_team_struct_allies";
-  level.draftstructs[#"axis"] = # "hash_700492f71a083a7c";
-  level.draftstructs[#"spectator"] = # "draft_team_struct_allies";
+  level.draftstructs[#"none"] = #"draft_team_struct";
+  level.draftstructs[#"allies"] = #"draft_team_struct_allies";
+  level.draftstructs[#"axis"] = #"hash_700492f71a083a7c";
+  level.draftstructs[#"spectator"] = #"draft_team_struct_allies";
   level.draftexploders = [];
   level.draftexploders[#"allies"] = "mp_draft_lights_allies";
   level.draftexploders[#"axis"] = "mp_draft_lights_axis";
@@ -113,7 +113,7 @@ function function_c4dfe16e(localclientnum) {
 
 function function_75442e78(team, index) {
   if(!isDefined(level.var_8cb8d474[team])) {
-    team = # "none";
+    team = #"none";
   }
 
   return struct::get(level.var_8cb8d474[team][index]);
@@ -140,7 +140,7 @@ function play_intro_cinematic(localclientnum) {
 
   setuimodelvalue(createuimodel(function_1df4c3b0(localclientnum, #"hash_6797d4cd7534952f"), "introPlayed"), 1);
 
-  if(team == # "spectator") {
+  if(team == #"spectator") {
     function_532dfc0b(localclientnum, 0);
   } else {
     function_e79c182b(localclientnum, 0);
@@ -300,20 +300,20 @@ function function_bb0565d0(var_de58f286) {
 
     if(isDefined(level.var_f35699bc[weapon.name])) {
       weapon_group_anim = level.var_f35699bc[weapon.name];
-    } else if(weapon_group == # "") {
+    } else if(weapon_group == #"") {
       weapon_group_anim = "brawler";
       dualwield = getweapon(#"smg_handling_t8_dw");
 
       if(weapon.name == dualwield.name) {
         weapon_group_anim = "pistol";
       }
-    } else if(weapon_group == # "weapon_launcher" || weapon_group == # "weapon_launcher_alt") {
+    } else if(weapon_group == #"weapon_launcher" || weapon_group == #"weapon_launcher_alt") {
       weapon_group_anim = "launcher";
-    } else if(weapon_group == # "weapon_pistol" || weapon_group == # "weapon_pistol_dw") {
+    } else if(weapon_group == #"weapon_pistol" || weapon_group == #"weapon_pistol_dw") {
       weapon_group_anim = "pistol";
-    } else if(weapon_group == # "weapon_smg") {
+    } else if(weapon_group == #"weapon_smg") {
       weapon_group_anim = "smg";
-    } else if(weapon_group == # "weapon_knife") {
+    } else if(weapon_group == #"weapon_knife") {
       weapon_group_anim = "melee";
     }
   }

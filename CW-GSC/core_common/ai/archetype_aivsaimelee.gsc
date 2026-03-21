@@ -137,7 +137,7 @@ function private hasaivsaienemy(behaviortreeentity) {
   }
 
   if(isDefined(enemy.archetype)) {
-    if(enemy.archetype != # "human" && enemy.archetype != # "human_riotshield" && enemy.archetype != # "robot") {
+    if(enemy.archetype != #"human" && enemy.archetype != #"human_riotshield" && enemy.archetype != #"robot") {
       record3dtext("<dev string:xff>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x64>", behaviortreeentity, 0.4);
 
       return false;
@@ -371,7 +371,7 @@ function private chooseaivsaimeleeanimations(behaviortreeentity) {
 }
 
 function private choosearchetypevariant(entity) {
-  if(entity.archetype == # "robot") {
+  if(entity.archetype == #"robot") {
     robot_state = entity ai::get_behavior_attribute("rogue_control");
 
     if(isinarray(array("forced_level_1", "level_1", "level_0"), robot_state)) {

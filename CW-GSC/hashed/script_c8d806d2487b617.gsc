@@ -31,7 +31,7 @@ function function_df1ecefe(maxhealth, var_1263c72f, var_9653dad7 = 0, var_21a592
   level.radiation.levels[level.radiation.levels.size] = radiationlevel;
 }
 
-function function_1cb3c52d(name, radiationlevel, duration, var_4267b283 = # "hash_4ae27316c3f95575") {
+function function_1cb3c52d(name, radiationlevel, duration, var_4267b283 = #"hash_4ae27316c3f95575") {
   if(!function_ab99e60c()) {
     return;
   }

@@ -168,7 +168,7 @@ is_target_valid(dog, target) {
     return 0;
   }
 
-  if(!(dog.team == # "allies")) {
+  if(!(dog.team == #"allies")) {
     if(!isPlayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
@@ -219,7 +219,7 @@ get_favorite_enemy(dog) {
   dog_targets = [];
 
   if(sessionmodeiszombiesgame()) {
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       dog_targets = getaiteamarray(level.zombie_team);
     } else {
       dog_targets = getplayers();

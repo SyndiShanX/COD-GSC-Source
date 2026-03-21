@@ -339,7 +339,7 @@ function_1dc8ad86() {
   while(true) {
     s_waitresult = self waittill(#"hash_15ccd1fdda38284a", #"rune_bashed");
 
-    if(s_waitresult._notify == # "hash_15ccd1fdda38284a") {
+    if(s_waitresult._notify == #"hash_15ccd1fdda38284a") {
       if(s_waitresult.var_c8407ea2 == var_1fc5672) {
         var_1fc5672++;
         level clientfield::set("" + # "hash_70b438bea0135fc8", var_1fc5672);
@@ -349,7 +349,7 @@ function_1dc8ad86() {
       continue;
     }
 
-    if(s_waitresult._notify == # "rune_bashed") {
+    if(s_waitresult._notify == #"rune_bashed") {
       if(s_waitresult.var_c8407ea2 == 0 && var_1fc5672 == 4) {
         playsoundatposition("zmb_sk_tree_hit_shield", (-440, 4200, -415));
         return 1;
@@ -453,7 +453,7 @@ function_62856590(var_a276c861, ended_early) {
 }
 
 function_123eb361(var_88206a50, ent) {
-  if(ent.archetype !== # "bat" && ent.archetype !== # "nosferatu") {
+  if(ent.archetype !== #"bat" && ent.archetype !== #"nosferatu") {
     return false;
   }
 

@@ -146,11 +146,11 @@ function_d4147875(var_5ea5c94d) {
   println("<dev string:x71>");
   sam_spawner = getent("mq_gehen_s", "targetname");
   level.sam = sam_spawner spawnfromspawner("sam", 1);
-  level.sam.team = # "allies";
+  level.sam.team = #"allies";
   util::magic_bullet_shield(level.sam);
   eddie_spawner = getent("mq_gehen_e", "targetname");
   eddie = eddie_spawner spawnfromspawner("eddie", 1);
-  eddie.team = # "allies";
+  eddie.team = #"allies";
   util::magic_bullet_shield(eddie);
   waitframe(1);
   println("<dev string:x93>");
@@ -276,7 +276,7 @@ function_c40f70df(var_21c1ba1) {
   self hide();
   w_current = self getcurrentweapon();
 
-  if(w_current.name == # "ww_tesla_sniper_t8" || w_current.name == # "ww_tesla_sniper_upgraded_t8") {
+  if(w_current.name == #"ww_tesla_sniper_t8" || w_current.name == #"ww_tesla_sniper_upgraded_t8") {
     self zm_weapons::weapon_give(level.weaponzmfists, 1);
   }
 

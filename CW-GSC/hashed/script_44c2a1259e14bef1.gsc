@@ -165,12 +165,12 @@ function function_87d44a60() {
   nearbyzombies = getentitiesinradius(self.origin, 64, 15);
 
   foreach(zombie in nearbyzombies) {
-    if(zombie.zm_ai_category == # "normal") {
+    if(zombie.zm_ai_category == #"normal") {
       zombie zombie_utility::setup_zombie_knockdown(self.origin);
       continue;
     }
 
-    if(zombie.zm_ai_category == # "special" || zombie.zm_ai_category == # "elite") {
+    if(zombie.zm_ai_category == #"special" || zombie.zm_ai_category == #"elite") {
       zombie ai::stun(2);
     }
   }
@@ -186,12 +186,12 @@ function function_451de831(var_c360c10f) {
           #stun_time: gettime(), #player: self
         };
 
-        if(zombie.zm_ai_category == # "normal") {
+        if(zombie.zm_ai_category == #"normal") {
           zombie zombie_utility::setup_zombie_knockdown(self);
           continue;
         }
 
-        if(zombie.zm_ai_category == # "special" || zombie.zm_ai_category == # "elite") {
+        if(zombie.zm_ai_category == #"special" || zombie.zm_ai_category == #"elite") {
           zombie ai::stun(2);
         }
       }

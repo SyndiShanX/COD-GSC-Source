@@ -449,7 +449,7 @@ function private function_20e100b4(entity, mocompanim, mocompanimblendouttime, m
 
   var_85c30cab = max(mocompanimflag.var_417905cf - 0.05 * mocompanimflag.maxhealth, 0);
 
-  if(mocompanimflag.subarchetype === # "hash_471ba598e7e8c460") {
+  if(mocompanimflag.subarchetype === #"hash_471ba598e7e8c460") {
     var_85c30cab = max(mocompanimflag.var_417905cf - 0.01 * mocompanimflag.maxhealth, 0);
   }
 
@@ -842,7 +842,7 @@ function private function_abaec088() {
 }
 
 function private function_2171139f(zombie, target) {
-  if(zombie.archetype !== # "zombie" || zombie.knockdown === 1 || gibserverutils::isgibbed(zombie, 384)) {
+  if(zombie.archetype !== #"zombie" || zombie.knockdown === 1 || gibserverutils::isgibbed(zombie, 384)) {
     return false;
   }
 
@@ -1089,7 +1089,7 @@ function private function_37c7f369() {
   while(true) {
     waitresult = self waittill(#"melee_fire", #"zombie_melee");
 
-    if(waitresult._notify === # "melee_fire") {
+    if(waitresult._notify === #"melee_fire") {
       zombiebehavior::zombienotetrackmeleefire(self);
     }
 
@@ -1097,7 +1097,7 @@ function private function_37c7f369() {
     function_1eaaceab(a_zombies);
 
     foreach(zombie in a_zombies) {
-      if(zombie.archetype !== # "zombie" || is_true(zombie.no_gib)) {
+      if(zombie.archetype !== #"zombie" || is_true(zombie.no_gib)) {
         continue;
       }
 
@@ -1240,7 +1240,7 @@ function private function_85b9ec36(inflictor, attacker, damage, dflags, mod, wea
     var_31e96b81 = int(var_3cddb028);
 
     foreach(weakpoint in self.var_5ace757d) {
-      if(weakpoint.type === # "armor" && weakpoint.currstate === 1) {
+      if(weakpoint.type === #"armor" && weakpoint.currstate === 1) {
         function_4c13b4e7(entity, weakpoint, var_fd90b0bb, var_31e96b81, var_a70572a9, hitloc, offsettime, dir, weapon);
       }
     }
@@ -1255,7 +1255,7 @@ function private function_85b9ec36(inflictor, attacker, damage, dflags, mod, wea
   if(isDefined(weakpoint)) {
     function_4c13b4e7(entity, weakpoint, var_fd90b0bb, point, var_a70572a9, hitloc, offsettime, dir, weapon);
 
-    if(weakpoint.type === # "armor" && weakpoint.var_f371ebb0 !== "right_arm_armor") {
+    if(weakpoint.type === #"armor" && weakpoint.var_f371ebb0 !== "right_arm_armor") {
       var_ebcff177 = 3;
       point = int(point * var_a70572a9);
     }
@@ -1298,13 +1298,13 @@ function function_1bdbe36c() {
 }
 
 function function_4c13b4e7(entity, weakpoint, attacker, damage, var_a70572a9, weapon, point, mod, inflictor) {
-  if(weakpoint.type === # "weakpoint") {
+  if(weakpoint.type === #"weakpoint") {
     level scoreevents::doscoreeventcallback("scoreEventZM", {
       #attacker: attacker, #scoreevent: "hit_weak_point_zm"});
     return;
   }
 
-  if(weakpoint.type === # "armor") {
+  if(weakpoint.type === #"armor") {
     self.var_426947c4 = undefined;
 
     if(namespace_81245006::function_f29756fe(weakpoint) === 1 && isDefined(weakpoint.var_f371ebb0)) {
@@ -1421,7 +1421,7 @@ function function_afcd63e1(attacker, damage, point, damage_weapon, mod, inflicto
     var_64d07420 = entity.health - damage;
     var_8b859118 = entity.maxhealth * 0.33;
 
-    if(entity.subarchetype === # "hash_471ba598e7e8c460") {
+    if(entity.subarchetype === #"hash_471ba598e7e8c460") {
       var_8b859118 = entity.maxhealth * 0.15;
     }
 

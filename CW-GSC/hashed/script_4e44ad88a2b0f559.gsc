@@ -71,7 +71,7 @@ function private function_37d408b6(traversal) {
     return false;
   }
 
-  return traversal.type == # "ladder" || traversal.type == # "jump" || traversal.deltaz >= 50;
+  return traversal.type == #"ladder" || traversal.type == #"jump" || traversal.deltaz >= 50;
 }
 
 function private function_9b25bbe5(traversal, aimpoint) {

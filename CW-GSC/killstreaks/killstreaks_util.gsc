@@ -487,9 +487,9 @@ function function_ef1303ba(end_time, var_e72137e8) {
 
 function function_16a1f9b6() {
   if(sessionmodeiszombiesgame()) {
-    var_8756d70f = # "hash_5c02726a4663b7dd";
+    var_8756d70f = #"hash_5c02726a4663b7dd";
   } else {
-    var_8756d70f = # "hash_25d8f7d855b13f45";
+    var_8756d70f = #"hash_25d8f7d855b13f45";
   }
 
   return var_8756d70f;
@@ -497,9 +497,9 @@ function function_16a1f9b6() {
 
 function function_cb0594d5() {
   if(sessionmodeiszombiesgame()) {
-    var_8756d70f = # "hash_45468d6066fbc34e";
+    var_8756d70f = #"hash_45468d6066fbc34e";
   } else {
-    var_8756d70f = # "hash_710b205b26e46446";
+    var_8756d70f = #"hash_710b205b26e46446";
   }
 
   return var_8756d70f;

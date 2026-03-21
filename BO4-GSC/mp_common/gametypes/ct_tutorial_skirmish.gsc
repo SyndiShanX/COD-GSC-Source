@@ -25,7 +25,7 @@ init() {
   level.var_86513cd0 = &function_c11071a8;
   level.var_edd52efc = &function_edd52efc;
   level.b_movie = 0;
-  level.forcedplayerteam = # "allies";
+  level.forcedplayerteam = #"allies";
   level.var_b0fade70 = 1;
   setDvar(#"botfill", 0);
 
@@ -633,7 +633,7 @@ function_b4ebcd8a() {
   foreach(index in var_3e22bae5) {
     str_state = self function_c2c1d36b(index);
 
-    if(str_state == # "tutorial_completed" || str_state == # "skirmish_completed" || str_state == # "skirmish_started") {
+    if(str_state == #"tutorial_completed" || str_state == #"skirmish_completed" || str_state == #"skirmish_started") {
       var_10e6d37f++;
     }
   }
@@ -768,7 +768,7 @@ on_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon,
 
 function_5f516f9d(stathash, var_16538d01 = 0) {
   if(isDefined(var_16538d01) && var_16538d01) {
-    stathash = # "weapon_class_";
+    stathash = #"weapon_class_";
   }
 
   target = tablelookup(#"gamedata/tables/mp/mp_combat_training_challenges.csv", 2, stathash, 1);

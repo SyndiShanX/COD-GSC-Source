@@ -209,13 +209,13 @@ function function_7957254c() {
   while(true) {
     result = self waittill(#"enter_vehicle", #"exit_vehicle");
 
-    if(result._notify === # "exit_vehicle") {
+    if(result._notify === #"exit_vehicle") {
       disconnect = 1;
 
       while(self getspeed() > 1) {
         result = self waittilltimeout(float(function_60d95f53()) / 1000, #"enter_vehicle");
 
-        if(result._notify === # "enter_vehicle") {
+        if(result._notify === #"enter_vehicle") {
           disconnect = 0;
           break;
         }
@@ -228,7 +228,7 @@ function function_7957254c() {
       continue;
     }
 
-    if(result._notify === # "enter_vehicle") {
+    if(result._notify === #"enter_vehicle") {
       self connectpaths();
     }
   }
@@ -310,7 +310,7 @@ function function_43cc18d2() {
 
     result = self waittilltimeout(1, #"damage");
 
-    if(result._notify != # "timeout") {
+    if(result._notify != #"timeout") {
       break;
     }
   }
@@ -338,7 +338,7 @@ function function_4ab4dc9f(var_d8e073bd, throne) {
       var_d8e073bd animscripted(var_73eec401, tagorigin, tagangles, var_73eec401, "normal", undefined, 1, 0.2);
       result = var_d8e073bd waittill(var_73eec401, #"hash_324ed30049158b16");
 
-      if(result._notify == # "hash_324ed30049158b16") {
+      if(result._notify == #"hash_324ed30049158b16") {
         namespace_9fc66ac::function_5e3127a5(undefined, "bossfight_00");
         break;
       }
@@ -730,7 +730,7 @@ function function_b11eca29() {
     while(true) {
       result = level waittilltimeout(1, #"door_activated");
 
-      if(result._notify == # "door_activated") {
+      if(result._notify == #"door_activated") {
         return;
       }
 
@@ -821,7 +821,7 @@ function function_d723726a() {
         exits = [[level.doa.var_a77e6349]] - > function_ef5ade99();
 
         foreach(exit in exits) {
-          if(exit.targetname !== # "hash_5c7a54138393acbc") {
+          if(exit.targetname !== #"hash_5c7a54138393acbc") {
             if(isDefined(exit.trigger)) {
               exit.trigger delete();
             }
@@ -908,7 +908,7 @@ function function_231e7cd8(fxname, type, min = 0.6, max = 2, stop = 1, delay = 4
 
     result = self waittilltimeout(delay, #"stop_fx");
 
-    if(stop || result._notify == # "stop_fx") {
+    if(stop || result._notify == #"stop_fx") {
       if(isDefined(var_47242ffa)) {
         wait var_47242ffa;
       }
@@ -916,7 +916,7 @@ function function_231e7cd8(fxname, type, min = 0.6, max = 2, stop = 1, delay = 4
       self namespace_83eb6304::turnofffx(type);
     }
 
-    if(result._notify != # "timeout") {
+    if(result._notify != #"timeout") {
       return;
     }
   }
@@ -980,7 +980,7 @@ function function_821f3d71() {
 
     result = level waittilltimeout(randomintrange(10, 16), #"hash_2282d796a1f7533a");
 
-    if(result._notify === # "hash_2282d796a1f7533a") {
+    if(result._notify === #"hash_2282d796a1f7533a") {
       continue;
     }
 
@@ -1149,7 +1149,7 @@ function function_a80babc3() {
       var_30f23074.var_92595434.target = var_30f23074.target;
       var_30f23074.var_92595434.speed = speed;
       var_30f23074.var_92595434.trigger = trigger;
-      var_30f23074.type = # "hash_1af42a1c565c45de";
+      var_30f23074.type = #"hash_1af42a1c565c45de";
       trigger thread namespace_ec06fe4a::function_73d79e7d(var_30f23074.var_92595434);
       trigger thread function_577f978a();
       var_30f23074.var_92595434 setscale(scale);

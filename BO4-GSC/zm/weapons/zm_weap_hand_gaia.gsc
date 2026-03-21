@@ -96,7 +96,7 @@ function_10b4d6ac(weapon) {
   a_e_targets = function_31ad5b3d(b_up);
 
   if(isDefined(a_e_targets)) {
-    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === # "boss") {
+    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === #"boss") {
       n_proj = 3;
     } else if(!a_e_targets.size || a_e_targets.size === 1 && !isactor(a_e_targets[0])) {
       n_proj = 1;
@@ -354,7 +354,7 @@ gaia_projectile(e_projectile, ai_zombie, n_damage) {
 
       wait n_time - 0.05;
 
-      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
         if(isDefined(ai_zombie gettagorigin("j_tail_1"))) {
           n_hit_dist_sq = 2500;
         } else {
@@ -423,7 +423,7 @@ gaia_projectile(e_projectile, ai_zombie, n_damage) {
     e_projectile waittill(#"movedone");
   }
 
-  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
     self thread function_dced5aef(ai_zombie, level.w_hand_gaia_uncharged, n_damage, undefined);
   }
 
@@ -432,7 +432,7 @@ gaia_projectile(e_projectile, ai_zombie, n_damage) {
 }
 
 function_30239376(e_target) {
-  if(isDefined(e_target) && e_target.zm_ai_category === # "boss") {
+  if(isDefined(e_target) && e_target.zm_ai_category === #"boss") {
     if(isDefined(e_target gettagorigin("j_tail_1"))) {
       v_org = e_target gettagorigin("j_tail_1");
     } else if(isDefined(e_target gettagorigin("j_spine4"))) {
@@ -484,7 +484,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged, v_di
           e_target.marked_for_death = 1;
         }
 
-        if(e_target.archetype === # "skeleton") {
+        if(e_target.archetype === #"skeleton") {
           e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
         } else if(isDefined(e_target.marked_for_death) && e_target.marked_for_death || isDefined(b_charged)) {
           self thread function_85d88e17(e_target, b_charged, v_dir, n_damage);
@@ -640,7 +640,7 @@ function_33f9ab00(a_e_targets, weapon) {
         self.owner thread gaia_slow(e_target);
       }
 
-      if(!(isDefined(self.var_6fe9ec3f) && self.var_6fe9ec3f) && !(isDefined(e_target.var_a447e680) && e_target.var_a447e680) && (e_target.archetype === # "zombie" || e_target.archetype === # "catalyst")) {
+      if(!(isDefined(self.var_6fe9ec3f) && self.var_6fe9ec3f) && !(isDefined(e_target.var_a447e680) && e_target.var_a447e680) && (e_target.archetype === #"zombie" || e_target.archetype === #"catalyst")) {
         self.var_6fe9ec3f = 1;
         e_target.var_a447e680 = 1;
         self thread scene::play(#"aib_vign_cust_zm_red_zmb_impale_from_below_00", e_target);
@@ -759,7 +759,7 @@ function_85d88e17(e_target, b_charged, v_dir, n_damage) {
       e_target.marked_for_death = 1;
     }
 
-    if(e_target.archetype === # "skeleton") {
+    if(e_target.archetype === #"skeleton") {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, w_weapon);
     } else {
       e_target dodamage(n_damage, e_target.origin, self, undefined, "none", "MOD_UNKNOWN", 0, w_weapon);

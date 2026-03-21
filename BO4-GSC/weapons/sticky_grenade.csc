@@ -14,8 +14,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"grenade_light"] = # "weapon/fx8_equip_light_os";
-  level._effect[#"hash_61fd92df093ebdb4"] = # "hash_44b0fea08babccac";
+  level._effect[#"grenade_light"] = #"weapon/fx8_equip_light_os";
+  level._effect[#"hash_61fd92df093ebdb4"] = #"hash_44b0fea08babccac";
   callback::add_weapon_type(#"sticky_grenade", &spawned);
   callback::add_weapon_type(#"eq_sticky_grenade", &spawned);
   callback::add_weapon_type(#"hash_4b92b1a2aa3037f5", &spawned);

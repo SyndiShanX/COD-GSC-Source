@@ -695,7 +695,7 @@ function_7bd8cfde(e_activator, s_trap) {
   v_hook = s_trap.e_trap.scene_ents[#"prop 1"] gettagorigin("tag_fan_blade_A_2");
   n_dist = distance2d(self.origin, v_hook);
 
-  if(!(isDefined(s_trap.var_705682df) && s_trap.var_705682df) && self.zm_ai_category === # "basic" && n_dist <= 128 && self.team != # "allies") {
+  if(!(isDefined(s_trap.var_705682df) && s_trap.var_705682df) && self.zm_ai_category === #"basic" && n_dist <= 128 && self.team != #"allies") {
     self thread function_bcfd9acb(s_trap);
     a_e_players = util::get_array_of_closest(self.origin, getplayers());
     return;
@@ -705,7 +705,7 @@ function_7bd8cfde(e_activator, s_trap) {
     self thread a_a_arms();
   }
 
-  if(self.zm_ai_category === # "basic" && !isvehicle(self)) {
+  if(self.zm_ai_category === #"basic" && !isvehicle(self)) {
     if(randomint(100) < 20) {
       gibserverutils::annihilate(self);
     } else {
@@ -831,27 +831,27 @@ function_af613bbf(a_weapons) {
 
   switch (self.var_45c57fa5.script_string) {
     case # "tr":
-      self.var_af561b1f = # "hash_4176883a68b00090";
-      self.var_a794d091 = # "hash_2fa3f09f73bf523c";
-      self.var_636a8bf7 = # "tr_longburst_t8_upgraded";
+      self.var_af561b1f = #"hash_4176883a68b00090";
+      self.var_a794d091 = #"hash_2fa3f09f73bf523c";
+      self.var_636a8bf7 = #"tr_longburst_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
     case # "lmg":
-      self.var_af561b1f = # "hash_4e543dd90408cd76";
-      self.var_a794d091 = # "hash_2e3938a646e43352";
-      self.var_636a8bf7 = # "lmg_standard_t8_upgraded";
+      self.var_af561b1f = #"hash_4e543dd90408cd76";
+      self.var_a794d091 = #"hash_2e3938a646e43352";
+      self.var_636a8bf7 = #"lmg_standard_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
     case # "ar":
-      self.var_af561b1f = # "hash_6dd7b677c74ebba9";
-      self.var_a794d091 = # "hash_24f2c78de733d877";
-      self.var_636a8bf7 = # "ar_accurate_t8_upgraded";
+      self.var_af561b1f = #"hash_6dd7b677c74ebba9";
+      self.var_a794d091 = #"hash_24f2c78de733d877";
+      self.var_636a8bf7 = #"ar_accurate_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
     case # "shotgun":
-      self.var_af561b1f = # "hash_58eff35154ec1990";
-      self.var_a794d091 = # "hash_670dd9efc63b2d3c";
-      self.var_636a8bf7 = # "shotgun_pump_t8_upgraded";
+      self.var_af561b1f = #"hash_58eff35154ec1990";
+      self.var_a794d091 = #"hash_670dd9efc63b2d3c";
+      self.var_636a8bf7 = #"shotgun_pump_t8_upgraded";
       self.var_45c57fa5 setinvisibletoplayer(self, 0);
       break;
   }

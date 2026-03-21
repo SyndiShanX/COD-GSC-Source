@@ -56,7 +56,7 @@ init_level_vars() {
   level.var_d7853f35 = 18;
   level.var_ecdf38f = 12;
   level.var_55e562f9 = 18;
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
   level thread function_9217567c();
   level thread init_traps();
@@ -82,7 +82,7 @@ defend_areas() {
   }
 
   level flag::set("power_on1");
-  str_next_defend = # "lighthouse";
+  str_next_defend = #"lighthouse";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   var_420e4589 = [];
   var_49f2dcca = [];
@@ -115,13 +115,13 @@ defend_areas() {
     var_49f2dcca = arraycombine(var_49f2dcca, array("lighthouse_cove_to_cargo_hold", "main_deck_to_forecastle", "main_deck_to_forecastle_blocker"), 0, 0);
     level flag::set("station_points");
     level flag::set("beach_points");
-    str_next_defend = # "beach";
+    str_next_defend = #"beach";
   } else {
     var_420e4589 = array("lighthouse_cove_to_cargo_hold", "main_deck_to_forecastle", "main_deck_to_forecastle_blocker");
     var_49f2dcca = arraycombine(var_49f2dcca, array("lighthouse_cove_to_lighthouse_station", "lighthouse_station_to_lighthouse_level_2", "lighthouse_station_to_lighthouse_level_3", "beach_to_lighthouse_approach"), 0, 0);
     level flag::set("cargo_points");
     level flag::set("forecastle_points");
-    str_next_defend = # "forecastle";
+    str_next_defend = #"forecastle";
   }
 
   level zm_utility::open_door(var_420e4589, undefined, undefined, 1);
@@ -134,7 +134,7 @@ defend_areas() {
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7, undefined, undefined, 45);
   level flag::set(#"hash_50990d5b9376f50d");
   zm_utility::function_fef4b36a(str_next_defend);
-  str_next_defend = # "sundeck";
+  str_next_defend = #"sundeck";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   level.var_a385f14 notify(#"force_extinguisher");
   zm_orange_lighthouse::function_602d605();
@@ -180,9 +180,9 @@ defend_areas() {
   zm_utility::function_fef4b36a(str_next_defend);
 
   if(math::cointoss()) {
-    str_next_defend = # "decon";
+    str_next_defend = #"decon";
   } else {
-    str_next_defend = # "geo";
+    str_next_defend = #"geo";
   }
 
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);

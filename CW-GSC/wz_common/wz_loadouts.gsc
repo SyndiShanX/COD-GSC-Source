@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   gametype = util::get_game_type();
 
-  if(gametype !== # "warzone_hot_pursuit" && gametype !== # "warzone_heavy_metal" && gametype !== # "warzone_bigteam_dbno_quad") {
+  if(gametype !== #"warzone_hot_pursuit" && gametype !== #"warzone_heavy_metal" && gametype !== #"warzone_bigteam_dbno_quad") {
     return;
   }
 
@@ -29,7 +29,7 @@ function private preinit() {
   if(isDefined(getgametypesetting(#"hash_4149d5d65eb07138")) ? getgametypesetting(#"hash_4149d5d65eb07138") : 0) {
     level.var_317fb13c = &function_3fed57dd;
 
-    if(gametype === # "warzone_bigteam_dbno_quad") {
+    if(gametype === #"warzone_bigteam_dbno_quad") {
       level.var_317fb13c = &function_a9b8fa06;
     }
   }
@@ -113,7 +113,7 @@ function give_item(item_name, item_count) {
   item = item_world_util::function_49ce7663(item_name);
 
   if(isDefined(item_count) && isint(item_count)) {
-    if(item.itementry.itemtype == # "ammo") {
+    if(item.itementry.itemtype == #"ammo") {
       item.amount = item.itementry.amount * item_count;
     } else {
       item.count = item_count;
@@ -165,19 +165,19 @@ function give_weapon(weaponname, attachmentnames) {
 function private function_58190f52() {
   gametype = util::get_game_type();
 
-  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
+  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
     give_weapon(#"pistol_standard_t8_item");
     give_item(#"ammo_type_45_item");
     return;
   }
 
-  if(gametype == # "warzone_heavy_metal") {
+  if(gametype == #"warzone_heavy_metal") {
     give_weapon(#"lmg_spray_t8_item");
     give_item(#"ammo_type_556_item");
     return;
   }
 
-  if(gametype == # "hash_135cf8c5c6396f04") {
+  if(gametype == #"hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
@@ -185,21 +185,21 @@ function private function_58190f52() {
 function private function_6667abef() {
   gametype = util::get_game_type();
 
-  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
+  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
     give_weapon(#"pistol_standard_t8_item", array(#"fastmag_wz_item", #"tritium_wz_item"));
     give_item(#"ammo_type_45_item");
     give_item(#"health_item_small", 5);
     return;
   }
 
-  if(gametype == # "warzone_heavy_metal") {
+  if(gametype == #"warzone_heavy_metal") {
     give_weapon(#"lmg_spray_t8_item", array(#"fastmag_wz_item", #"acog_wz_item"));
     give_item(#"ammo_type_556_item");
     give_item(#"health_item_large");
     return;
   }
 
-  if(gametype == # "hash_135cf8c5c6396f04") {
+  if(gametype == #"hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
@@ -207,21 +207,21 @@ function private function_6667abef() {
 function private function_7376c60d() {
   gametype = util::get_game_type();
 
-  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
+  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
     give_weapon(#"smg_standard_t8_item");
     give_item(#"ammo_type_9mm_item");
     give_item(#"health_item_small", 5);
     return;
   }
 
-  if(gametype == # "warzone_heavy_metal") {
+  if(gametype == #"warzone_heavy_metal") {
     give_weapon(#"lmg_standard_t8_item");
     give_item(#"ammo_type_762_item");
     give_item(#"health_item_large", 2);
     return;
   }
 
-  if(gametype == # "hash_135cf8c5c6396f04") {
+  if(gametype == #"hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
@@ -229,7 +229,7 @@ function private function_7376c60d() {
 function private function_1f091d2f() {
   gametype = util::get_game_type();
 
-  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
+  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
     give_weapon(#"smg_standard_t8_item", array(#"laser_sight_wz_item"));
     give_item(#"ammo_type_9mm_item");
     give_item(#"health_item_small", 5);
@@ -238,7 +238,7 @@ function private function_1f091d2f() {
     return;
   }
 
-  if(gametype == # "warzone_heavy_metal") {
+  if(gametype == #"warzone_heavy_metal") {
     give_weapon(#"lmg_standard_t8_item", array(#"fastmag_wz_item", #"acog_wz_item"));
     give_item(#"ammo_type_762_item");
     give_item(#"health_item_large", 3);
@@ -246,7 +246,7 @@ function private function_1f091d2f() {
     return;
   }
 
-  if(gametype == # "hash_135cf8c5c6396f04") {
+  if(gametype == #"hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }
@@ -254,7 +254,7 @@ function private function_1f091d2f() {
 function private function_2d31b980() {
   gametype = util::get_game_type();
 
-  if(gametype == # "warzone_hot_pursuit" || gametype == # "warzone_bigteam_dbno_quad") {
+  if(gametype == #"warzone_hot_pursuit" || gametype == #"warzone_bigteam_dbno_quad") {
     give_weapon(#"smg_standard_t8_item", array(#"holo_wz_item", #"laser_sight_wz_item", #"extbarrel_wz_item"));
     give_item(#"ammo_type_9mm_item");
     give_item(#"health_item_small", 5);
@@ -263,7 +263,7 @@ function private function_2d31b980() {
     return;
   }
 
-  if(gametype == # "warzone_heavy_metal") {
+  if(gametype == #"warzone_heavy_metal") {
     give_weapon(#"lmg_standard_t8_item", array(#"extmag_wz_item", #"reddot_wz_item", #"extbarrel_wz_item"));
     give_item(#"ammo_type_762_item");
     give_item(#"health_item_large", 3);
@@ -272,7 +272,7 @@ function private function_2d31b980() {
     return;
   }
 
-  if(gametype == # "hash_135cf8c5c6396f04") {
+  if(gametype == #"hash_135cf8c5c6396f04") {
     function_f56a5599();
   }
 }

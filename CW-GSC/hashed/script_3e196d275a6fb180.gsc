@@ -25,7 +25,7 @@ function function_f210e027() {
     #team: "all", #entityname: "mp_t8_spawn_point", #spawntype: 1, #group_index: 0
   });
 
-  if(level.gametype === # "dom") {
+  if(level.gametype === #"dom") {
     array::add(level.spawnentitytypes, {
       #team: # "allies", #entityname: "mp_t8_spawn_point", #spawntype: 1, #group_index: 1
     });

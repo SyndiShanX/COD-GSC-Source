@@ -27,7 +27,7 @@ function private function_35aed314(localplayerteam, otherteam) {
     return false;
   }
 
-  if(otherteam == # "neutral") {
+  if(otherteam == #"neutral") {
     return false;
   }
 

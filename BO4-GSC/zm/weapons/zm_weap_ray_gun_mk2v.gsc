@@ -92,7 +92,7 @@ function_8d93c592(w_curr) {
     if(isDefined(a_trace[#"entity"])) {
       e_last_target = a_trace[#"entity"];
 
-      if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== # "allies" || isDefined(e_last_target.male_head)) {
+      if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== #"allies" || isDefined(e_last_target.male_head)) {
         self thread function_5c035588(e_last_target, var_1c218ece, w_curr);
       }
     }
@@ -167,7 +167,7 @@ function_5c035588(e_target, v_target_pos, w_curr, b_launched = 0, var_9a119ceb =
     [[level.var_46a7950a]] - > waitinqueue(e_target);
   }
 
-  if(e_target.archetype === # "zombie") {
+  if(e_target.archetype === #"zombie") {
     str_hitloc = "torso_lower";
     str_tag = e_target get_closest_tag(v_target_pos);
 
@@ -196,7 +196,7 @@ function_5c035588(e_target, v_target_pos, w_curr, b_launched = 0, var_9a119ceb =
     e_target dodamage(n_damage, v_target_pos, self, self, str_hitloc, "MOD_UNKNOWN", 0, w_curr);
   }
 
-  if(b_launched && (e_target.zm_ai_category === # "basic" || e_target.zm_ai_category === # "enhanced")) {
+  if(b_launched && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"enhanced")) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
     v_fling = 200 * vectornormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));

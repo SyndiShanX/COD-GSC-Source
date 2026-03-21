@@ -70,7 +70,7 @@ function event_handler[gametype_init] main(eventstruct) {
 function function_b4530b39() {
   level endon(#"game_ended");
 
-  while(game.state != # "playing") {
+  while(game.state != #"playing") {
     waitframe(1);
   }
 
@@ -79,7 +79,7 @@ function function_b4530b39() {
   foreach(player in level.players) {
     team = player.pers[#"team"];
 
-    if(team === # "spectator") {
+    if(team === #"spectator") {
       continue;
     }
 
@@ -125,7 +125,7 @@ function getbetterteam() {
     player = level.players[i];
     team = player.pers[#"team"];
 
-    if(isDefined(team) && (team == # "allies" || team == # "axis")) {
+    if(isDefined(team) && (team == #"allies" || team == #"axis")) {
       kills[team] += player.kills;
       deaths[team] += player.deaths;
     }
@@ -158,10 +158,10 @@ function onstartgametype() {
   level.usingextratime = 0;
   hud_message::function_36419c2(1, game.strings[#"target_destroyed"], game.strings[#"target_destroyed"]);
   setclientnamemode("manual_change");
-  game.strings[#"target_destroyed"] = # "mp/target_destroyed";
-  game.strings[#"bomb_defused"] = # "mp/bomb_defused";
-  level._effect[#"bombexplosion"] = # "hash_1811460fd925f1f8";
-  level._effect[#"hash_568509fa2561a75d"] = # "hash_4d29da75039cfce";
+  game.strings[#"target_destroyed"] = #"mp/target_destroyed";
+  game.strings[#"bomb_defused"] = #"mp/bomb_defused";
+  level._effect[#"bombexplosion"] = #"hash_1811460fd925f1f8";
+  level._effect[#"hash_568509fa2561a75d"] = #"hash_4d29da75039cfce";
   bombzones = getEntArray(level.var_cbdf9ba4, "targetname");
 
   if(bombzones.size == 0) {
@@ -308,12 +308,12 @@ function checkallowspectating() {
   livesleft = !(level.numlives && !self.pers[#"lives"]);
 
   if(!function_a1ef346b(game.attackers).size && !livesleft) {
-    level.spectateoverride[game.attackers].allowenemyspectate = # "all";
+    level.spectateoverride[game.attackers].allowenemyspectate = #"all";
     update = 1;
   }
 
   if(!function_a1ef346b(game.defenders).size && !livesleft) {
-    level.spectateoverride[game.defenders].allowenemyspectate = # "all";
+    level.spectateoverride[game.defenders].allowenemyspectate = #"all";
     update = 1;
   }
 
@@ -509,7 +509,7 @@ function bombs() {
     clipbrushes = getEntArray("bombzone_clip" + scriptlabel, "targetname");
     defusetrig = getent(visuals[0].target, "targetname");
     var_b3c46dd0 = game.defenders;
-    var_2b4ef22b = # "group_enemy";
+    var_2b4ef22b = #"group_enemy";
 
     if(overtime::is_overtime_round()) {
       if(scriptlabel != "_overtime") {
@@ -524,8 +524,8 @@ function bombs() {
         continue;
       }
 
-      var_b3c46dd0 = # "neutral";
-      var_2b4ef22b = # "group_all";
+      var_b3c46dd0 = #"neutral";
+      var_2b4ef22b = #"group_all";
       scriptlabel = "_a";
     } else if(scriptlabel == "_overtime") {
       trigger delete();
@@ -539,7 +539,7 @@ function bombs() {
       continue;
     }
 
-    name = # "dem" + scriptlabel;
+    name = #"dem" + scriptlabel;
     trigger setcursorhint("HINT_INTERACTIVE_PROMPT");
     trigger usetriggerignoreuseholdtime();
     trigger function_268e4500();
@@ -569,7 +569,7 @@ function bombs() {
     }
 
     foreach(visual in bombzone.visuals) {
-      visual.team = # "none";
+      visual.team = #"none";
     }
 
     level.bombzones[level.bombzones.size] = bombzone;
@@ -612,7 +612,7 @@ function function_208ed5d5(team) {
 
   owner_team = self gameobjects::get_owner_team();
 
-  if(owner_team == # "any") {
+  if(owner_team == #"any") {
     return true;
   }
 
@@ -1001,7 +1001,7 @@ function bombplanted(destroyedobj, player) {
   foreach(player in level.players) {
     team = player.pers[#"team"];
 
-    if(team === # "spectator") {
+    if(team === #"spectator") {
       continue;
     }
 

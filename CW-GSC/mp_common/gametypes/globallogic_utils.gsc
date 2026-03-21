@@ -191,7 +191,7 @@ function gametimer() {
 
   prevtime = gettime() - 1000;
 
-  while(game.state == # "playing") {
+  while(game.state == #"playing") {
     if(!level.timerstopped) {
       game.timepassed += gettime() - prevtime;
     }
@@ -229,7 +229,7 @@ function getroundstartdelay() {
 function applyroundstartdelay() {
   self endon(#"disconnect", #"joined_spectators", #"death");
 
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     level waittill(#"game_playing");
   } else {
     waitframe(1);

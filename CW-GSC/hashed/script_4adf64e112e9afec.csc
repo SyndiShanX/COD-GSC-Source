@@ -838,7 +838,7 @@ function function_d47b1ac(id, var_a793c1e1 = 0, var_a6e8b35b) {
         break;
     }
   } else {
-    val.msg = # "hash_4bec7ac65a15bb06";
+    val.msg = #"hash_4bec7ac65a15bb06";
 
     switch (id) {
       case 1:
@@ -883,100 +883,100 @@ function function_d47b1ac(id, var_a793c1e1 = 0, var_a6e8b35b) {
         val.q = 1;
         break;
       case 21:
-        val.msg = # "hash_9d56a2e5a17db7d";
-        val.audio = # "hash_1896db69557c5e11";
+        val.msg = #"hash_9d56a2e5a17db7d";
+        val.audio = #"hash_1896db69557c5e11";
         val.q = 1;
         break;
       case 22:
-        val.msg = # "hash_284ba6bcad0fa011";
-        val.audio = # "hash_3e81803ccb560d6a";
+        val.msg = #"hash_284ba6bcad0fa011";
+        val.audio = #"hash_3e81803ccb560d6a";
         val.q = 1;
         break;
       case 23:
-        val.msg = # "hash_7f4cffc1031f00b5";
-        val.audio = # "hash_960c838d32b0e8c";
+        val.msg = #"hash_7f4cffc1031f00b5";
+        val.audio = #"hash_960c838d32b0e8c";
         val.cooldown = 60000;
         val.q = 1;
         break;
       case 24:
-        val.msg = # "hash_3b4bad43aa759f1f";
-        val.audio = # "hash_77239a5e66ecb44e";
+        val.msg = #"hash_3b4bad43aa759f1f";
+        val.audio = #"hash_77239a5e66ecb44e";
         val.q = 1;
         break;
       case 25:
-        val.msg = # "hash_7645e95bcead3896";
-        val.audio = # "hash_4755fe2ee3054075";
+        val.msg = #"hash_7645e95bcead3896";
+        val.audio = #"hash_4755fe2ee3054075";
         val.q = 1;
         break;
       case 26:
-        val.msg = # "hash_609187824bab8f8c";
-        val.audio = # "hash_1ff8f63b3359b055";
+        val.msg = #"hash_609187824bab8f8c";
+        val.audio = #"hash_1ff8f63b3359b055";
         val.q = 1;
         break;
       case 27:
-        val.msg = # "hash_55f7d13453910be6";
-        val.audio = # "hash_5f5539a0f0a1cec9";
+        val.msg = #"hash_55f7d13453910be6";
+        val.audio = #"hash_5f5539a0f0a1cec9";
         val.q = 1;
         break;
       case 28:
-        val.msg = # "hash_54810c69b1e10296";
-        val.audio = # "hash_1c7d3da2f3f4766b";
+        val.msg = #"hash_54810c69b1e10296";
+        val.audio = #"hash_1c7d3da2f3f4766b";
         val.q = 1;
         break;
       case 29:
-        val.msg = # "hash_4785a63a664e7e55";
-        val.audio = # "hash_7fe1ef05f43ee976";
+        val.msg = #"hash_4785a63a664e7e55";
+        val.audio = #"hash_7fe1ef05f43ee976";
         val.q = 1;
         break;
       case 30:
-        val.msg = # "hash_61eedbd5833223cd";
-        val.audio = # "hash_6b032800e231f06c";
+        val.msg = #"hash_61eedbd5833223cd";
+        val.audio = #"hash_6b032800e231f06c";
         val.q = 1;
         break;
       case 31:
-        val.msg = # "hash_6cfbe5e38a154902";
-        val.audio = # "hash_1a3ed45b1f0c08e1";
+        val.msg = #"hash_6cfbe5e38a154902";
+        val.audio = #"hash_1a3ed45b1f0c08e1";
         val.q = 1;
         break;
       case 32:
-        val.msg = # "hash_7069bbfd2df0b9d5";
-        val.audio = # "hash_378c7a0d252fe332";
+        val.msg = #"hash_7069bbfd2df0b9d5";
+        val.audio = #"hash_378c7a0d252fe332";
         val.q = 1;
         break;
       case 33:
-        val.msg = # "hash_19083756004a8d81";
-        val.audio = # "hash_6e94595ca610130";
+        val.msg = #"hash_19083756004a8d81";
+        val.audio = #"hash_6e94595ca610130";
         val.q = 1;
         break;
       case 34:
-        val.msg = # "hash_35dabf0d1049ba8d";
-        val.audio = # "hash_22426692f607a5e";
+        val.msg = #"hash_35dabf0d1049ba8d";
+        val.audio = #"hash_22426692f607a5e";
         val.q = 1;
         break;
       case 40:
         val.msg = randomint(100) < 50 ? # "hash_61b1168e92e80ba5" : # "hash_67f52b43a04c1e55";
-        val.audio = # "hash_6298fe3f8c45ac9f";
+        val.audio = #"hash_6298fe3f8c45ac9f";
         break;
       case 41:
-        val.msg = # "hash_146f885685f54d05";
-        val.audio = # "hash_8c6429df541c34c";
+        val.msg = #"hash_146f885685f54d05";
+        val.audio = #"hash_8c6429df541c34c";
         break;
       case 42:
-        val.msg = # "hash_17532668544a90bb";
-        val.audio = # "hash_8c6429df541c34c";
+        val.msg = #"hash_17532668544a90bb";
+        val.audio = #"hash_8c6429df541c34c";
         break;
       case 48:
         rnd = randomint(3);
 
         if(rnd == 0) {
-          val.msg = # "hash_3d7f0f4a1c902cc";
+          val.msg = #"hash_3d7f0f4a1c902cc";
         } else if(rnd == 1) {
-          val.msg = # "hash_50f16daee890159a";
+          val.msg = #"hash_50f16daee890159a";
         } else if(rnd == 2) {
-          val.msg = # "hash_50f16eaee890174d";
+          val.msg = #"hash_50f16eaee890174d";
         }
 
-        val.audio = # "hash_3551d2b408fff8cb";
+        val.audio = #"hash_3551d2b408fff8cb";
         break;
     }
   }
@@ -1003,43 +1003,43 @@ function setplayerowner(localclientnum, oldval, newval, bnewent, binitialsnap, f
 function function_3d3e551(var_9ba84610) {
   switch (var_9ba84610) {
     case 2:
-      msg = # "hash_4fac620ccd173768";
+      msg = #"hash_4fac620ccd173768";
       break;
     case 3:
-      msg = # "hash_3226d445d31f0b78";
+      msg = #"hash_3226d445d31f0b78";
       break;
     case 4:
-      msg = # "hash_69a3dcbe573f702d";
+      msg = #"hash_69a3dcbe573f702d";
       break;
     case 5:
-      msg = # "hash_25cb04bb12d240c2";
+      msg = #"hash_25cb04bb12d240c2";
       break;
     case 6:
-      msg = # "hash_1a782e95144c944a";
+      msg = #"hash_1a782e95144c944a";
       break;
     case 7:
-      msg = # "hash_5308cbbdab4e1267";
+      msg = #"hash_5308cbbdab4e1267";
       break;
     case 8:
-      msg = # "hash_10cdd3fcab044ece";
+      msg = #"hash_10cdd3fcab044ece";
       break;
     case 9:
-      msg = # "hash_70ff900f36417489";
+      msg = #"hash_70ff900f36417489";
       break;
     case 10:
-      msg = # "hash_3495d70dcc1dfce0";
+      msg = #"hash_3495d70dcc1dfce0";
       break;
     case 11:
-      msg = # "hash_70abbd3574b572f5";
+      msg = #"hash_70abbd3574b572f5";
       break;
     case 12:
-      msg = # "hash_50a737d9aecb6d57";
+      msg = #"hash_50a737d9aecb6d57";
       break;
     case 13:
-      msg = # "hash_605483745ef5b07e";
+      msg = #"hash_605483745ef5b07e";
       break;
     case 14:
-      msg = # "hash_528a7ccb64d23b67";
+      msg = #"hash_528a7ccb64d23b67";
       break;
   }
 

@@ -71,7 +71,7 @@ perk_death_perception_visuals(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function_731d83de(localclientnum) {
-  if(level.var_1c1febec[localclientnum] && self.team === # "axis") {
+  if(level.var_1c1febec[localclientnum] && self.team === #"axis") {
     self playrenderoverridebundle(#"hash_30651f363ef055e9");
   }
 }
@@ -90,7 +90,7 @@ function_fff5377e(localclientnum) {
           if(vectordot(var_8475afc1, vectornormalize(ai.origin - self.origin)) < 0.35) {
             var_f2c7b8b0 = ai.origin;
 
-            if(ai.type === # "vehicle") {
+            if(ai.type === #"vehicle") {
               var_f2c7b8b0 = (ai.origin[0], ai.origin[1], self.origin[2]);
             }
 
@@ -120,7 +120,7 @@ function_793a9f3d(localclientnum) {
 }
 
 function_6a5f77(val) {
-  return val.team === # "axis";
+  return val.team === #"axis";
 }
 
 function_25410869(localclientnum) {

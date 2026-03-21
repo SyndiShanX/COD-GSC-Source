@@ -597,13 +597,13 @@ function function_3fe5e74f(var_5d4d655a, scene, delay) {
     foreach(ai in var_4014838e) {
       if(ai istouchingvolume(volume.origin, volume getmins(), volume getmaxs())) {
         if(isDefined(ai.archetype) && isDefined(ai.targetname)) {
-          if(ai.archetype != # "civilian" && ai.targetname == "kgb_hq_guard") {
+          if(ai.archetype != #"civilian" && ai.targetname == "kgb_hq_guard") {
             return;
           }
 
           var_7f9418b3 = issubstr(ai.targetname, "walker");
 
-          if(ai.archetype == # "civilian" && issubstr(ai.targetname, "walker") && !isDefined(ai.reached_path_end)) {
+          if(ai.archetype == #"civilian" && issubstr(ai.targetname, "walker") && !isDefined(ai.reached_path_end)) {
             return;
           }
         }

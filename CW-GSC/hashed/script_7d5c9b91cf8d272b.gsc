@@ -58,7 +58,7 @@ function preinit() {
     [[level.var_5ef577c5]] - > initialize(1, float(function_60d95f53()) / 1000 * 2);
   }
 
-  if(util::get_game_type() === # "zsurvival") {
+  if(util::get_game_type() === #"zsurvival") {
     level.var_1a4cc228[#"hash_7cba8a05511ceedf"] = [#"hash_49adea61f71924bf", #"hash_1798ecca7f98873d", #"hash_26f6708ef92a0eae", #"hash_1c8805fec5806efe", #"hash_4d95f42b33499eba", #"hash_6799427e5e6c417c", #"hash_11e4908180a964c", #"hash_1340313347e93335"];
     level.var_1a4cc228[#"hash_29771ab26cb78d9b"] = [#"hash_69143c727337ba1a", #"hash_299e8cfa6d75ffd4", #"hash_7d223eb036f4a31b", #"hash_11d7f39f088f3822", #"hash_5e074c09a3a31d97", #"hash_1c437f787033a2e5", #"hash_34d9e63476111b5d", #"hash_779daa809936d578"];
     level.var_1a4cc228[#"hash_46c917a1b5ed91e7"] = [#"hash_4729aed4cfa43476"];
@@ -290,7 +290,7 @@ function function_ea311395(params) {
     return;
   }
 
-  if(!isDefined(params.eattacker) || params.eattacker.archetype !== # "abom") {
+  if(!isDefined(params.eattacker) || params.eattacker.archetype !== #"abom") {
     return;
   }
 
@@ -399,7 +399,7 @@ function function_a1e5b1db(einflictor, eattacker, idamage, idflags, smeansofdeat
     }
   }
 
-  if(isDefined(weakpoint) && weakpoint.type === # "weakpoint" && namespace_81245006::function_f29756fe(weakpoint) !== 3) {
+  if(isDefined(weakpoint) && weakpoint.type === #"weakpoint" && namespace_81245006::function_f29756fe(weakpoint) !== 3) {
     var_8df5a32 = self.var_3539aa66;
 
     if(function_a5cc03cf(weakpoint, vdir, vpoint) && !is_true(self.var_c588eb)) {
@@ -445,7 +445,7 @@ function function_a1e5b1db(einflictor, eattacker, idamage, idflags, smeansofdeat
 function private function_a5cc03cf(weakpoint, var_31e96b81, eattacker) {
   var_5f61b252 = 0;
 
-  if(var_31e96b81.type === # "weakpoint" && var_31e96b81.currstate === 1) {
+  if(var_31e96b81.type === #"weakpoint" && var_31e96b81.currstate === 1) {
     heads_remaining = function_fc845eb6(self);
     var_e5da1214 = 0;
 
@@ -1275,7 +1275,7 @@ function private function_2fe507a5(entity, var_9a4357f2, radius = 48, var_3a5ece
 }
 
 function private function_4a332962(zombie, target) {
-  if(zombie.archetype !== # "zombie" || zombie.knockdown === 1 || gibserverutils::isgibbed(zombie, 384)) {
+  if(zombie.archetype !== #"zombie" || zombie.knockdown === 1 || gibserverutils::isgibbed(zombie, 384)) {
     return false;
   }
 
@@ -1296,7 +1296,7 @@ function private function_4a332962(zombie, target) {
 }
 
 function private function_13ba4731(zombie, target) {
-  if(zombie.archetype === # "zombie" || zombie flag::get(#"hash_222ae70a0dc4273a") === 1) {
+  if(zombie.archetype === #"zombie" || zombie flag::get(#"hash_222ae70a0dc4273a") === 1) {
     return false;
   }
 
@@ -2359,12 +2359,12 @@ function private function_e1a54e93(entity) {
               hit_ent dodamage(var_8104fad, trace[#"position"], entity, entity, undefined, "MOD_ELECTROCUTED");
               hit_ent.var_e12bf6a3 = gettime();
             }
-          } else if(hit_ent.zm_ai_category === # "normal") {
+          } else if(hit_ent.zm_ai_category === #"normal") {
             hit_ent.allowdeath = 1;
             hit_ent dodamage(hit_ent.health, hit_ent.origin, entity, entity, undefined, "MOD_ELECTROCUTED");
             var_ab2fdbbc = gettime() + int(2 * 1000);
             entity.var_16109727 = max(var_ab2fdbbc, entity.var_16109727);
-          } else if(hit_ent.zm_ai_category === # "elite" || hit_ent.zm_ai_category === # "special") {
+          } else if(hit_ent.zm_ai_category === #"elite" || hit_ent.zm_ai_category === #"special") {
             hit_ent ai::stun(1);
           }
 
@@ -2537,11 +2537,11 @@ function function_acb229fd(entity) {
 
   dist_sq = distancesquared(entity.origin, enemy.origin);
 
-  if(dist_sq > sqr((util::get_game_type() == # "zsurvival" ? 1300 : 900) - 100) || dist_sq < sqr(300) && !is_true(entity.var_1fa24724)) {
+  if(dist_sq > sqr((util::get_game_type() == #"zsurvival" ? 1300 : 900) - 100) || dist_sq < sqr(300) && !is_true(entity.var_1fa24724)) {
     return false;
   }
 
-  if(dist_sq > sqr((util::get_game_type() == # "zsurvival" ? 1300 : 900) - 100 - 200)) {
+  if(dist_sq > sqr((util::get_game_type() == #"zsurvival" ? 1300 : 900) - 100 - 200)) {
     function_4d4efd70(entity, 1, int(5 * 1000));
   }
 
@@ -2614,7 +2614,7 @@ function function_59685ed1(entity, asmstatename) {
     forward_vec = anglesToForward(entity gettagangles("j_head"));
     forward_vec = (forward_vec[0], forward_vec[1], 0);
     entity.var_ee2440ac dontinterpolate();
-    entity.var_ee2440ac.origin = entity gettagorigin("j_head") + forward_vec * (util::get_game_type() == # "zsurvival" ? 1300 : 900);
+    entity.var_ee2440ac.origin = entity gettagorigin("j_head") + forward_vec * (util::get_game_type() == #"zsurvival" ? 1300 : 900);
     entity.var_ac71e4ab = (0, 0, 0);
     entity thread function_4ac5ff55(entity);
   }
@@ -2685,7 +2685,7 @@ function function_58607a4e(behaviortreeentity, asmstatename) {
   }
 
   forward_vec = anglesToForward(head_angles + asmstatename.var_ac71e4ab);
-  asmstatename.var_ee2440ac.origin = asmstatename gettagorigin("j_head") + forward_vec * (util::get_game_type() == # "zsurvival" ? 1300 : 900);
+  asmstatename.var_ee2440ac.origin = asmstatename gettagorigin("j_head") + forward_vec * (util::get_game_type() == #"zsurvival" ? 1300 : 900);
 
   if(!is_true(asmstatename.var_308a238a)) {
     if(isPlayer(enemy) && !zombie_utility::is_player_valid(enemy, 1)) {

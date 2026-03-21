@@ -147,7 +147,7 @@ on_joined_team(params) {
   self endon(#"disconnect");
 
   if(level.teambased) {
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       self set_blops_dialog();
     } else {
       self set_cdp_dialog();
@@ -541,7 +541,7 @@ incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
       return;
     }
 
-    if(!isDefined(thrower) || thrower.team == # "spectator") {
+    if(!isDefined(thrower) || thrower.team == #"spectator") {
       return;
     }
 

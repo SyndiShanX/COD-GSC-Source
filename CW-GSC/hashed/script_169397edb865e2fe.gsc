@@ -421,7 +421,7 @@ function function_85f27f87() {
   level thread function_7e2956d3();
 
   foreach(guy in var_6e6dffeb) {
-    if(guy.archetype == # "civilian") {
+    if(guy.archetype == #"civilian") {
       guy ai::set_behavior_attribute(#"_civ_mode", "panic");
       guy.health = 1;
     }

@@ -33,7 +33,7 @@ function event_handler[level_init] main(eventstruct) {
   compass::setupminimap("");
   level.var_29cfe9dd = 1;
 
-  if(util::get_game_type() === # "zsurvival") {
+  if(util::get_game_type() === #"zsurvival") {
     level util::set_lighting_state(1);
   }
 
@@ -77,7 +77,7 @@ function function_564698fd() {
 }
 
 function function_a387f4f5() {
-  if(level.basegametype == # "fireteam_dirty_bomb" || level.basegametype == # "fireteam_elimination" || level.basegametype == # "fireteam_koth" || level.basegametype == # "fireteam_satlink") {
+  if(level.basegametype == #"fireteam_dirty_bomb" || level.basegametype == #"fireteam_elimination" || level.basegametype == #"fireteam_koth" || level.basegametype == #"fireteam_satlink") {
     level thread function_f9492b33();
 
     if(isDefined(level.var_574cc797)) {

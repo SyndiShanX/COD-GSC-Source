@@ -10,8 +10,8 @@
 
 init() {
   init_clientfields();
-  level._effect[#"hash_604a40ef1ed899a4"] = # "hash_7d36c353ea2640ad";
-  level._effect[#"hash_74f5897234e8d579"] = # "hash_59c49f21e6675534";
+  level._effect[#"hash_604a40ef1ed899a4"] = #"hash_7d36c353ea2640ad";
+  level._effect[#"hash_74f5897234e8d579"] = #"hash_59c49f21e6675534";
 }
 
 init_clientfields() {

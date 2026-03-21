@@ -168,7 +168,7 @@ function private registercentrifuge_zip_doormember() {
   self endon(#"death");
 
   if(isalive(self)) {
-    if(self.archetype == # "zombie" || self.archetype == # "catalyst") {
+    if(self.archetype == #"zombie" || self.archetype == #"catalyst") {
       self.var_eceaa835 = 1;
 
       if(self.zombie_move_speed !== "sprint" && self.zombie_move_speed !== "super_sprint") {
@@ -182,7 +182,7 @@ function private registercentrifuge_zip_doormember() {
       return;
     }
 
-    if(self.archetype == # "tiger") {
+    if(self.archetype == #"tiger") {
       self.var_eceaa835 = 1;
       self ai::set_behavior_attribute("sprint", 1);
     }

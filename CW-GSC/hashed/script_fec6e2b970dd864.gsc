@@ -140,7 +140,7 @@ function function_f8b76690(var_a0345f37, player, weapon) {
     return;
   }
 
-  if((player.zm_ai_category === # "elite" || player.zm_ai_category === # "special") && weapon.var_14c9514c.var_3f8123b0.size < 5) {
+  if((player.zm_ai_category === #"elite" || player.zm_ai_category === #"special") && weapon.var_14c9514c.var_3f8123b0.size < 5) {
     if(!isDefined(weapon.var_14c9514c.var_3f8123b0)) {
       weapon.var_14c9514c.var_3f8123b0 = [];
     } else if(!isarray(weapon.var_14c9514c.var_3f8123b0)) {
@@ -266,20 +266,20 @@ function on_item_pickup(params) {
 
   if(isPlayer(self)) {
     if(isDefined(item.itementry.name)) {
-      if((item.itementry.name === # "scrap_rare_item_sr" || item.itementry.name === # "scrap_item_sr") && is_true(item.var_569199b9)) {
+      if((item.itementry.name === #"scrap_rare_item_sr" || item.itementry.name === #"scrap_item_sr") && is_true(item.var_569199b9)) {
         self zm_stats::increment_challenge_stat(#"hash_5d77c9a44bc6f7eb");
-      } else if(item.itementry.name === # "resource_item_harvesting_sr" && is_true(self.var_f163034c)) {
+      } else if(item.itementry.name === #"resource_item_harvesting_sr" && is_true(self.var_f163034c)) {
         if(!isDefined(self.var_664db4ed)) {
           self.var_664db4ed = 0;
         }
 
         self.var_664db4ed++;
-      } else if(item.itementry.name === # "resource_item_sr" && item.itementry.var_31dcb18d === # "hash_3b44370452dc91f8") {
+      } else if(item.itementry.name === #"resource_item_sr" && item.itementry.var_31dcb18d === #"hash_3b44370452dc91f8") {
         self zm_stats::increment_challenge_stat(#"hash_3c8437e4e9f1e638");
       }
     }
 
-    if(is_true(item.var_387e74f4) && item.itementry.itemtype === # "weapon") {
+    if(is_true(item.var_387e74f4) && item.itementry.itemtype === #"weapon") {
       self thread function_c62f5aff(item);
     }
   }

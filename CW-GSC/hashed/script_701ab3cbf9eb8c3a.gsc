@@ -407,7 +407,7 @@ function function_cd3c6f53(str_objective, var_50cc0d4f) {
 }
 
 function function_be831785() {
-  if(self getteam() === # "axis") {
+  if(self getteam() === #"axis") {
     self actions::function_df6077("takedown", 0);
   }
 }

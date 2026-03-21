@@ -174,7 +174,7 @@ function function_1cd2646f(localclientnum, oldval, newval, bnewent, binitialsnap
     if(self isPlayer()) {
       self.var_726a59ef = playfxoncamera(fieldname, #"sr/fx9_camera_canister_in_hand", (0, 0, 0), (1, 0, 0), (0, 0, 1));
       self postfx::playpostfxbundle(#"pstfx_retrieve");
-      self.var_51dd9721 = # "pstfx_retrieve";
+      self.var_51dd9721 = #"pstfx_retrieve";
 
       if(!isDefined(self.var_fbd5f7c8)) {
         self.var_fbd5f7c8 = util::playFXOnTag(fieldname, #"sr/fx9_obj_retrieval_container_gas_trail", self, "tag_stowed_back");
@@ -456,7 +456,7 @@ function function_1d33d741(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_6d56f7a8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump == 1) {
     var_3b1d1169 = getent(fieldname, "lab_second_hidden_door", "targetname");
-    var_3b1d1169.rob = # "hash_7f1bc2146f524d7c";
+    var_3b1d1169.rob = #"hash_7f1bc2146f524d7c";
     var_3b1d1169.reveal = 1;
     var_3b1d1169.brightness = 0;
     var_3b1d1169 playrenderoverridebundle(var_3b1d1169.rob);
@@ -920,13 +920,13 @@ function function_f5972a6e(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump > 0) {
     switch (bwasdemojump) {
       case 1:
-        str_rumble = # "hash_65da6011d5335d33";
+        str_rumble = #"hash_65da6011d5335d33";
         break;
       case 2:
-        str_rumble = # "hash_65da6111d5335ee6";
+        str_rumble = #"hash_65da6111d5335ee6";
         break;
       case 3:
-        str_rumble = # "hash_65da6211d5336099";
+        str_rumble = #"hash_65da6211d5336099";
         break;
     }
 

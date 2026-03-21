@@ -127,7 +127,7 @@ function smokedetonate(owner, statweapon, smokeweapon, position, radius, effectl
         }
 
         if(var_96138b54.var_6f327e4a < var_d6b53fbd) {
-          owner.var_e0e2e070[key] = # "stale";
+          owner.var_e0e2e070[key] = #"stale";
         }
       }
 
@@ -263,7 +263,7 @@ function private function_aff603b2(attacker, victim, weapon, attackerweapon, mea
       weaponclass = util::getweaponclass(meansofdeath);
 
       if(isDefined(level.var_91dfce3b)) {
-        if(weaponclass === # "weapon_smg") {
+        if(weaponclass === #"weapon_smg") {
           weapon[[level.var_91dfce3b]]();
         }
       }
@@ -393,7 +393,7 @@ function function_87d0a127(grenadeent, smokeweapon) {
     waitresult = smokeweapon waittilltimeout(0.15, #"death");
 
     if(isDefined(owner)) {
-      if(isDefined(smokeweapon.smoketrigger) && owner istouching(smokeweapon.smoketrigger) && waitresult._notify == # "timeout") {
+      if(isDefined(smokeweapon.smoketrigger) && owner istouching(smokeweapon.smoketrigger) && waitresult._notify == #"timeout") {
         owner clientfield::set("inenemysmoke", 1);
       } else {
         owner clientfield::set("inenemysmoke", 0);
@@ -423,15 +423,15 @@ function function_8b6ddd71(grenadeent, smokeweapon) {
 
       curval = player clientfield::get("insmoke");
 
-      if(waitresult._notify == # "timeout" && player function_65fc89ee(smokeweapon)) {
-        if(game.state == # "playing") {
+      if(waitresult._notify == #"timeout" && player function_65fc89ee(smokeweapon)) {
+        if(game.state == #"playing") {
           player clientfield::set("foggerpostfx", 1);
         }
       } else {
         player clientfield::set("foggerpostfx", 0);
       }
 
-      if(isDefined(grenadeent.smoketrigger) && player istouching(grenadeent.smoketrigger) && waitresult._notify == # "timeout") {
+      if(isDefined(grenadeent.smoketrigger) && player istouching(grenadeent.smoketrigger) && waitresult._notify == #"timeout") {
         if(player util::isenemyteam(grenadeteam)) {
           player clientfield::set("insmoke", curval | 1);
         } else {

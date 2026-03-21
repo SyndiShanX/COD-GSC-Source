@@ -604,7 +604,7 @@ getweaponobjecthacktimems(entity) {
 
 isentityhackablecarepackage(entity) {
   if(isDefined(entity.model)) {
-    return (entity.model == # "wpn_t7_care_package_world");
+    return (entity.model == #"wpn_t7_care_package_world");
   }
 
   return 0;

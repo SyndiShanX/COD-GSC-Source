@@ -36,14 +36,14 @@ function private preinit() {
 }
 
 function function_634677dd() {
-  if(self.vehicletype === # "hash_d57fa1b1aacffc7") {
+  if(self.vehicletype === #"hash_d57fa1b1aacffc7") {
     level.var_6f2028c7--;
     level.var_6f2028c7 = math::clamp(level.var_6f2028c7, 0, 4);
   }
 }
 
 function function_bf97d10(params) {
-  if(self.vehicletype === # "hash_d57fa1b1aacffc7") {
+  if(self.vehicletype === #"hash_d57fa1b1aacffc7") {
     self.var_4a64e878 = 1;
     val::set(#"ultimate_turret_zm", "takedamage", 0);
     level.var_6f2028c7++;

@@ -174,11 +174,11 @@ function private function_1cbc22b0(weapon, n_radius) {
       }
 
       foreach(ai in a_ai) {
-        if(isalive(ai) && ai.zm_ai_category === # "normal") {
+        if(isalive(ai) && ai.zm_ai_category === #"normal") {
           var_16e6b8ea = ai.maxhealth * var_3889eb68.var_5b61dff6;
           ai namespace_9ff9f642::burn(weapon.name, self, weapon, var_16e6b8ea);
 
-          if(var_3889eb68.var_bb41cf71 && ai.zm_ai_category === # "normal" && math::cointoss(var_3889eb68.var_fc827c27)) {
+          if(var_3889eb68.var_bb41cf71 && ai.zm_ai_category === #"normal" && math::cointoss(var_3889eb68.var_fc827c27)) {
             ai.allowdeath = 1;
             ai dodamage(ai.health, var_3889eb68.origin, self, var_3889eb68, "none", "MOD_BURNED", 0, weapon);
           }
@@ -280,7 +280,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
             #attacker: self.owner, #scoreevent: # "hash_56aa82cbbc11009b"});
           self.owner stats::function_622feb0d(#"ring_of_fire", #"hash_5c5c962a0971316a", 1);
 
-          if(missile.weapon.name === # "hash_2b47921791da6f0" || missile.weapon.name === # "hash_67307aa00ad6f686") {
+          if(missile.weapon.name === #"hash_2b47921791da6f0" || missile.weapon.name === #"hash_67307aa00ad6f686") {
             self.owner zm_stats::increment_challenge_stat(#"hash_370c230dce9e1be6");
           }
 
@@ -398,7 +398,7 @@ function function_da2298bc() {
           debug2dtext((500, var_b68b8d0 + 40, 0), "<dev string:x95>" + var_3889eb68.var_5b61dff6, v_color, undefined, (0, 0, 0), 1, 0.8, var_1bc24030);
           debug2dtext((500, var_b68b8d0 + 60, 0), "<dev string:xc5>" + var_3889eb68.n_duration, v_color, undefined, (0, 0, 0), 1, 0.8, var_1bc24030);
 
-          if(var_3889eb68.weapon.name === # "ring_of_fire_5" && isDefined(var_3889eb68.var_8ad82414)) {
+          if(var_3889eb68.weapon.name === #"ring_of_fire_5" && isDefined(var_3889eb68.var_8ad82414)) {
             debug2dtext((500, var_b68b8d0 + 80, 0), "<dev string:xe0>" + floor(var_3889eb68.var_8ad82414), v_color, undefined, (0, 0, 0), 1, 0.8, var_1bc24030);
           }
 

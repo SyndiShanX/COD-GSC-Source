@@ -133,7 +133,7 @@ function function_30285c9c(root, pname, a_weapons, weapon_type) {
       name = getweaponname(a_weapons[i]);
       displayname = a_weapons[i].displayname;
 
-      if(displayname == # "") {
+      if(displayname == #"") {
         displayname = "<dev string:x31c>";
       } else {
         displayname = "<dev string:x323>" + makelocalizedstring(displayname) + "<dev string:x329>";

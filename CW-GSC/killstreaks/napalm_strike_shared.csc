@@ -61,7 +61,7 @@ function function_344bba9b(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function event_handler[entity_spawned] codecallback_entityspawned(eventstruct) {
-  if(self.weapon.name !== # "napalm_strike") {
+  if(self.weapon.name !== #"napalm_strike") {
     return;
   }
 }

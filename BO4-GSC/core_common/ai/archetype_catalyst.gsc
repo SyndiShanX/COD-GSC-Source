@@ -26,7 +26,7 @@ registerbehaviorscriptfunctions() {
 }
 
 iscatalyst(entity) {
-  return self.archetype === # "catalyst";
+  return self.archetype === #"catalyst";
 }
 
 function_5608540a() {

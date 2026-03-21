@@ -35,10 +35,10 @@ __init__() {
   clientfield::register("zbarrier", "lightning_bolt_FX_toggle", 1, 1, "int");
   clientfield::register("scriptmover", "turn_active_perk_ball_light", 1, 1, "int");
   clientfield::register("scriptmover", "zone_captured", 1, 1, "int");
-  level._effect[#"perk_machine_light_yellow"] = # "hash_63cff764b54ceca2";
-  level._effect[#"perk_machine_light_red"] = # "hash_5b7d2edb8392ef21";
-  level._effect[#"perk_machine_light_green"] = # "hash_130f1aaf8384975";
-  level._effect[#"perk_machine_location"] = # "hash_130f1aaf8384975";
+  level._effect[#"perk_machine_light_yellow"] = #"hash_63cff764b54ceca2";
+  level._effect[#"perk_machine_light_red"] = #"hash_5b7d2edb8392ef21";
+  level._effect[#"perk_machine_light_green"] = #"hash_130f1aaf8384975";
+  level._effect[#"perk_machine_location"] = #"hash_130f1aaf8384975";
   level flag::init("machine_can_reset");
 }
 
@@ -138,7 +138,7 @@ perk_random_machine_stub_update_prompt(player) {
   n_power_on = is_power_on(self.stub.script_int);
 
   if(!n_power_on) {
-    self.hint_string = # "zombie/need_power";
+    self.hint_string = #"zombie/need_power";
     return 0;
   }
 
@@ -146,7 +146,7 @@ perk_random_machine_stub_update_prompt(player) {
     n_purchase_limit = player zm_utility::get_player_perk_purchase_limit();
 
     if(!player zm_utility::can_player_purchase_perk()) {
-      self.hint_string = # "hash_4c509a13051ab81";
+      self.hint_string = #"hash_4c509a13051ab81";
 
       if(isDefined(n_purchase_limit)) {
         self.hint_parm1 = n_purchase_limit;
@@ -155,7 +155,7 @@ perk_random_machine_stub_update_prompt(player) {
       return 0;
     } else if(isDefined(self.stub.trigger_target.machine_user)) {
       if(isDefined(self.stub.trigger_target.grab_perk_hint) && self.stub.trigger_target.grab_perk_hint) {
-        self.hint_string = # "hash_58afe6f04e854611";
+        self.hint_string = #"hash_58afe6f04e854611";
         return 1;
       } else {
         self.hint_string = "";
@@ -165,7 +165,7 @@ perk_random_machine_stub_update_prompt(player) {
       n_purchase_limit = player zm_utility::get_player_perk_purchase_limit();
 
       if(!player zm_utility::can_player_purchase_perk()) {
-        self.hint_string = # "hash_4c509a13051ab81";
+        self.hint_string = #"hash_4c509a13051ab81";
 
         if(isDefined(n_purchase_limit)) {
           self.hint_parm1 = n_purchase_limit;
@@ -173,7 +173,7 @@ perk_random_machine_stub_update_prompt(player) {
 
         return 0;
       } else {
-        self.hint_string = # "hash_5a5c92d88d46def";
+        self.hint_string = #"hash_5a5c92d88d46def";
         self.hint_parm1 = level._random_zombie_perk_cost;
         return 1;
       }
@@ -182,7 +182,7 @@ perk_random_machine_stub_update_prompt(player) {
     return;
   }
 
-  self.hint_string = # "hash_2696440da6a4b627";
+  self.hint_string = #"hash_2696440da6a4b627";
   return 0;
 }
 

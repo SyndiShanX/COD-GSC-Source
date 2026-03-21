@@ -99,7 +99,7 @@ function_6061a15(var_f4b807cb, maxdist, origin, angles, forward, var_4bd72bfe = 
       var_c5722fe1 = 0;
 
       if(var_4bd72bfe) {
-        var_c5722fe1 = itemdef.itementry.itemtype == # "weapon";
+        var_c5722fe1 = itemdef.itementry.itemtype == #"weapon";
       }
 
       if(var_1777205e >= 0.965 && (var_abd887b5 < var_6b7d827a || !var_c5722fe1 && var_404fbede) && var_abd887b5 > var_6b35a0b8) {
@@ -178,10 +178,10 @@ function_6061a15(var_f4b807cb, maxdist, origin, angles, forward, var_4bd72bfe = 
 }
 
 function_45efe0ab(itementry) {
-  var_caafaa25 = # "";
+  var_caafaa25 = #"";
 
   if(isDefined(itementry.weapon) && itementry.weapon != level.weaponnone) {
-    if(itementry.itemtype != # "ammo") {
+    if(itementry.itemtype != #"ammo") {
       var_caafaa25 = itementry.weapon.displayname;
     } else {
       var_caafaa25 = isDefined(itementry.hintstring) ? itementry.hintstring : # "";
@@ -284,39 +284,39 @@ function_6af455de(localclientnum, origin, angles) {
 }
 
 function_c62ad9a7(vehicle) {
-  hinttext = # "";
+  hinttext = #"";
 
   if(isDefined(vehicle) && isDefined(vehicle.scriptvehicletype)) {
     switch (vehicle.scriptvehicletype) {
       case # "player_atv":
-        hinttext = # "wz/player_atv";
+        hinttext = #"wz/player_atv";
         break;
       case # "helicopter_light":
-        hinttext = # "wz/helicopter";
+        hinttext = #"wz/helicopter";
         break;
       case # "cargo_truck_wz":
-        hinttext = # "wz/cargo_truck";
+        hinttext = #"wz/cargo_truck";
         break;
       case # "tactical_raft_wz":
-        hinttext = # "hash_602556b5bd4f952d";
+        hinttext = #"hash_602556b5bd4f952d";
         break;
       case # "player_fav":
-        hinttext = # "wz/arav";
+        hinttext = #"wz/arav";
         break;
       case # "player_suv":
-        hinttext = # "wz/suv";
+        hinttext = #"wz/suv";
         break;
       case # "player_muscle":
-        hinttext = # "wz/muscle_car";
+        hinttext = #"wz/muscle_car";
         break;
       case # "pbr_boat_wz":
-        hinttext = # "wz/pbr";
+        hinttext = #"wz/pbr";
         break;
       case # "player_motorcycle":
-        hinttext = # "wz/motorcycle";
+        hinttext = #"wz/motorcycle";
         break;
       case # "player_tank":
-        hinttext = # "wz/tank";
+        hinttext = #"wz/tank";
         break;
     }
   }
@@ -452,7 +452,7 @@ function_7363384a(name) {
     return false;
   }
 
-  if(bundle.type != # "itemspawnentry") {
+  if(bundle.type != #"itemspawnentry") {
     return false;
   }
 
@@ -468,7 +468,7 @@ function_41f06d9d(itementry) {
     return false;
   }
 
-  return itementry.name == # "resource_item_paint" || itementry.name == # "resource_item_paint_stack_10";
+  return itementry.name == #"resource_item_paint" || itementry.name == #"resource_item_paint_stack_10";
 }
 
 function_74e1e547(point) {
@@ -495,7 +495,7 @@ function_35e06774(itementry, var_48cfb6ca = 0) {
       foreach(attachment in itementry.attachments) {
         var_fe35755b = getscriptbundle(attachment.attachment_type);
 
-        if(!isDefined(var_fe35755b) || var_fe35755b.type != # "itemspawnentry" || !isarray(var_fe35755b.attachments)) {
+        if(!isDefined(var_fe35755b) || var_fe35755b.type != #"itemspawnentry" || !isarray(var_fe35755b.attachments)) {
           continue;
         }
 

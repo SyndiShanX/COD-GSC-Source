@@ -23,14 +23,14 @@ function private postinit() {}
 function on_ai_spawned() {
   self endon(#"death");
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     self thread delayed_zombie_eye_glow();
     callback::function_d8abfc3d(#"head_gibbed", &function_95cae3e3);
   }
 }
 
 function on_ai_killed(params) {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     self function_95cae3e3();
   }
 }

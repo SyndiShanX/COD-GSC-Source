@@ -196,10 +196,10 @@ function function_adfd1e5b(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(isDefined(self.var_15039a49)) {
-    var_6fa5e5b7 = # "hash_60da5cd1a4e517a4";
+    var_6fa5e5b7 = #"hash_60da5cd1a4e517a4";
 
     if(is_true(self.var_ecf22cc9)) {
-      var_6fa5e5b7 = # "hash_4dd42218144c8aa6";
+      var_6fa5e5b7 = #"hash_4dd42218144c8aa6";
     }
 
     self playSound(fieldname, var_6fa5e5b7);
@@ -573,10 +573,10 @@ function function_ab0de377(localclientnum, oldval, newval, bnewent, binitialsnap
   if(bwasdemojump) {
     switch (bwasdemojump) {
       case 1:
-        var_3de77b5f = # "hash_6c62fd85414863a8";
+        var_3de77b5f = #"hash_6c62fd85414863a8";
         break;
       case 2:
-        var_3de77b5f = # "hash_61d6690f3e92388a";
+        var_3de77b5f = #"hash_61d6690f3e92388a";
         break;
     }
 
@@ -589,16 +589,16 @@ function function_ab0de377(localclientnum, oldval, newval, bnewent, binitialsnap
 
           switch (s_wall.fx) {
             case # "a":
-              var_2fd02f35 = # "hash_303939bfec2470d3";
+              var_2fd02f35 = #"hash_303939bfec2470d3";
               break;
             case # "b":
-              var_2fd02f35 = # "hash_30393abfec247286";
+              var_2fd02f35 = #"hash_30393abfec247286";
               break;
             case # "c":
-              var_2fd02f35 = # "hash_30393bbfec247439";
+              var_2fd02f35 = #"hash_30393bbfec247439";
               break;
             case # "d":
-              var_2fd02f35 = # "hash_30393cbfec2475ec";
+              var_2fd02f35 = #"hash_30393cbfec2475ec";
               break;
           }
 

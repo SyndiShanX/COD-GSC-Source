@@ -164,7 +164,7 @@ function_c9ff0dce() {
   if(isDefined(level.var_72d7275b) && level.var_72d7275b) {
     self.ignoreall = 0;
 
-    if(self.team === # "axis") {
+    if(self.team === #"axis") {
       self.var_71a70093 = 150;
 
       if(isDefined(level.var_8ca3c62)) {
@@ -197,7 +197,7 @@ function_c9ff0dce() {
       if(isDefined(level.var_1569cc4d) && level.var_1569cc4d) {
         self thread ct_utils::function_8963dae3();
       }
-    } else if(self.team === # "allies") {
+    } else if(self.team === #"allies") {
       self.var_71a70093 = 150;
 
       if(isDefined(level.var_8ca3c62)) {
@@ -220,12 +220,12 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     self.overrideplayerdamage = undefined;
 
     if(level.var_8ca3c62 == 7) {
-      if(self.team === # "axis" && attacker == ct_utils::get_player()) {
+      if(self.team === #"axis" && attacker == ct_utils::get_player()) {
         self thread function_5d65fa2b();
       }
     }
 
-    if(self.team == # "axis" && isDefined(self.b_sniper) && self.b_sniper) {
+    if(self.team == #"axis" && isDefined(self.b_sniper) && self.b_sniper) {
       level.var_e8126cf6--;
       self.b_sniper = 0;
     }
@@ -1001,9 +1001,9 @@ function_fb37c68(s_loc) {
   e_player = ct_utils::get_player();
 
   if(randomint(10) > 5) {
-    str_wpn = # "smg_standard_t8";
+    str_wpn = #"smg_standard_t8";
   } else {
-    str_wpn = # "ar_accurate_t8";
+    str_wpn = #"ar_accurate_t8";
   }
 
   wpn = getweapon(str_wpn);
@@ -1133,13 +1133,13 @@ function_f22f1511(var_f3aa6dfe) {
   do {
     s_notify = self waittill(#"damage", #"death");
 
-    if(isDefined(s_notify.attacker) && s_notify.attacker.team === # "axis") {
+    if(isDefined(s_notify.attacker) && s_notify.attacker.team === #"axis") {
       level notify(var_304623ae[var_f3aa6dfe]);
     }
   }
   while(isalive(self));
 
-  if(isDefined(s_notify.attacker) && s_notify.attacker.team === # "axis") {
+  if(isDefined(s_notify.attacker) && s_notify.attacker.team === #"axis") {
     ct_vo::function_831e0584(array(var_c3a1cb60[var_f3aa6dfe]));
   }
 }
@@ -1251,7 +1251,7 @@ function_1633d58c() {
   while(true) {
     s_notify = self waittill(#"damage");
 
-    if(isDefined(s_notify.attacker) && s_notify.attacker.team == # "axis") {
+    if(isDefined(s_notify.attacker) && s_notify.attacker.team == #"axis") {
       self dodamage(s_notify.amount * 0.5, s_notify.position, s_notify.attacker, s_notify.inflictor, s_notify.part_name, s_notify.mod, s_notify.flags, s_notify.weapon);
     }
   }
@@ -1324,7 +1324,7 @@ function_d8b20bcd(s_loc) {
   str_wpn = array::random(a_str_wpns);
   self ct_utils::give_weapon(str_wpn);
 
-  if(str_wpn == # "sniper_powerbolt_t8") {
+  if(str_wpn == #"sniper_powerbolt_t8") {
     self.b_sniper = 1;
     level.var_e8126cf6++;
   }
@@ -1356,7 +1356,7 @@ function_d8b20bcd(s_loc) {
           break;
       }
 
-      if(str_wpn != # "sniper_powerbolt_t8" && !isbot(self.e_target)) {
+      if(str_wpn != #"sniper_powerbolt_t8" && !isbot(self.e_target)) {
         if(self.e_target.var_d1da3a83 == "cover_barricade" && !(isDefined(self.e_target.b_badplace) && self.e_target.b_badplace)) {
           s_loc = undefined;
           b_water_plant_intro_go_dust_ = arraycopy(self.e_target.b_water_plant_intro_go_dust_);
@@ -1394,7 +1394,7 @@ function_d8b20bcd(s_loc) {
           continue;
         }
       } else {
-        if(str_wpn == # "sniper_powerbolt_t8") {
+        if(str_wpn == #"sniper_powerbolt_t8") {
           self.bot.var_b2b8f0b6 = 50;
           self.bot.var_e8c941d6 = 100;
           s_loc = arraygetclosest(self.e_target.origin, var_65769d68, 200);
@@ -1489,7 +1489,7 @@ function_e32e98c9(s_loc) {
 
     var_c481f7e6 = randomfloatrange(0, 100);
 
-    if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == # "crouch" || var_c481f7e6 < 50) {
+    if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == #"crouch" || var_c481f7e6 < 50) {
       self bot_stance::crouch();
     }
 
@@ -1529,7 +1529,7 @@ function_32d78b44() {
     a_ai_bots = ct_bots::function_fbe3dcbb();
 
     foreach(ai_bot in a_ai_bots) {
-      if(isalive(ai_bot) && ai_bot.team == # "allies" && isDefined(ai_bot.allowdeath) && ai_bot.allowdeath) {
+      if(isalive(ai_bot) && ai_bot.team == #"allies" && isDefined(ai_bot.allowdeath) && ai_bot.allowdeath) {
         ai_bot.var_d1da3a83 = "bot";
         var_538664a6[var_538664a6.size] = ai_bot;
       }
@@ -1688,7 +1688,7 @@ function_78986232(params) {
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"swat_team");
     var_23efb519 = 10;
     var_595e41ee = 150;
-    event = # "ekia";
+    event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
     eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
@@ -1701,7 +1701,7 @@ function_78986232(params) {
   }
 }
 
-function_b2e3d55a(str_notify, var_6202642d = # "axis", var_64179396 = 1) {
+function_b2e3d55a(str_notify, var_6202642d = #"axis", var_64179396 = 1) {
   level endon(#"combattraining_logic_finished", #"hash_4daf98b666a39c1d");
   e_player = ct_utils::get_player();
   e_player endon(#"death");
@@ -1713,7 +1713,7 @@ function_b2e3d55a(str_notify, var_6202642d = # "axis", var_64179396 = 1) {
   }
 }
 
-vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = # "axis", str_mod, str_weapon) {
+vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = #"axis", str_mod, str_weapon) {
   level endon(#"combattraining_logic_finished");
   self endon(#"death");
   e_player = ct_utils::get_player();
@@ -1775,7 +1775,7 @@ function_fde0ed2f(a_n_counts, spawnpts, n_rest = 0.25, b_randomize = 0, var_e9cd
 function_8749da79(_hash) {
   level notify(#"hash_6ebe7e4ea0726f0b");
 
-  if(_hash == # "done") {
+  if(_hash == #"done") {
     level notify(#"hash_7284521e58220f16");
   }
 }
@@ -1881,7 +1881,7 @@ function_344aee09(_hash) {
       level.var_7afae51f concertina_wire::function_4ee7d46a(1);
     }
 
-    if(_hash == # "death") {
+    if(_hash == #"death") {
       n_wait = 1;
 
       if(level.var_8ca3c62 === 4) {
@@ -1907,19 +1907,19 @@ function_344aee09(_hash) {
     } else {
       n_wait = 2;
 
-      if(_hash == # "tut_6_barricade_dead") {
+      if(_hash == #"tut_6_barricade_dead") {
         e_player ct_vo::function_c72e58c1(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_smrt_cvr_destroy"));
         var_16b5c6bb = e_player gamepadusedlast() ? # "hash_4194c81053f07918" : # "hash_7b43013359063e4";
         ct_utils::function_a61ebb46(var_16b5c6bb);
         str_respawn = "s_torque_tut_6_respawn";
-      } else if(_hash == # "tut_6_razorwire_dead") {
+      } else if(_hash == #"tut_6_razorwire_dead") {
         e_player ct_vo::function_c72e58c1(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_razor_wire_destroy"));
         var_edd14440 = e_player gamepadusedlast() ? # "hash_16e6d107836c380a" : # "hash_618673f250fa320a";
         ct_utils::function_a61ebb46(var_edd14440);
         str_respawn = "s_torque_tut_6_respawn";
-      } else if(_hash == # "hash_34a524e09eb9209f") {
+      } else if(_hash == #"hash_34a524e09eb9209f") {
         e_player ct_vo::function_c72e58c1(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_stuck_nag"));
         var_a139eb64 = e_player gamepadusedlast() ? # "hash_4762a2aaf0787460" : # "hash_1736a34805e7e1cc";
@@ -2153,11 +2153,11 @@ function_44776cd(var_f3aa6dfe, s_loc, n_range = 24) {
   var_45006933[2] = "barricade_placed_near_spot";
   var_45006933[1] = "razorwire_placed_near_spot";
   var_4633cf09 = [];
-  var_4633cf09[2] = # "wpn_t8_eqp_smartcover_cover_blue_fac_10";
-  var_4633cf09[1] = # "p8_fxanim_test_concertina_wire_mod";
+  var_4633cf09[2] = #"wpn_t8_eqp_smartcover_cover_blue_fac_10";
+  var_4633cf09[1] = #"p8_fxanim_test_concertina_wire_mod";
   var_88b303ee = [];
-  var_88b303ee[2] = # "hash_390cef32b1105c1d";
-  var_88b303ee[1] = # "hash_5885b4abb984f9df";
+  var_88b303ee[2] = #"hash_390cef32b1105c1d";
+  var_88b303ee[1] = #"hash_5885b4abb984f9df";
 
   if(isstring(s_loc)) {
     s_loc = struct::get(s_loc, "targetname");
@@ -2265,7 +2265,7 @@ function_400149db() {
   }
 }
 
-function_6ad22c31(var_9a9deac6, var_227aa02e, str_objective = # "hash_5fadc5cf57233ef4") {
+function_6ad22c31(var_9a9deac6, var_227aa02e, str_objective = #"hash_5fadc5cf57233ef4") {
   level endon(#"combattraining_logic_finished");
   self ct_utils::function_1bb93418();
   level waittill(#"enemy_stuck_in_razorwire");
@@ -2282,7 +2282,7 @@ on_concertinawire_placed(newcover) {
     self[[level.var_bb9429c2]](newcover);
   }
 
-  if(self.team === # "axis") {
+  if(self.team === #"axis") {
     level.var_7afae51f = newcover.concertinawire;
     level.var_7afae51f thread function_1df46b8d();
     self notify(#"hash_794fe961bd7a1e08");
@@ -2491,8 +2491,8 @@ function_6e4b6ccc(var_f3aa6dfe) {
 
 function_b512a9bf(n_slot) {
   a_str_gadgets = [];
-  a_str_gadgets[2] = # "ability_smart_cover";
-  a_str_gadgets[0] = # "eq_concertina_wire";
+  a_str_gadgets[2] = #"ability_smart_cover";
+  a_str_gadgets[0] = #"eq_concertina_wire";
   str_gadget = a_str_gadgets[n_slot];
 
   if(isDefined(level.var_e72728b8)) {

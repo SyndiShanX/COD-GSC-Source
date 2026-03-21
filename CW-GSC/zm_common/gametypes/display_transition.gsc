@@ -328,10 +328,10 @@ function private function_7285f7e1(e1, e2, b_lowest_first = 0) {
 
 function private function_6b33e951() {
   var_9a829482 = 6;
-  winning_team = # "allies";
+  winning_team = #"allies";
 
-  if(winning_team == # "none") {
-    winning_team = # "allies";
+  if(winning_team == #"none") {
+    winning_team = #"allies";
   }
 
   winners = getplayers(winning_team);
@@ -419,7 +419,7 @@ function function_40a46b5b(transition, outcome) {
   }
 
   if(transition.type == "team_pose") {
-    if(outcome.team == # "none") {
+    if(outcome.team == #"none") {
       return true;
     }
 

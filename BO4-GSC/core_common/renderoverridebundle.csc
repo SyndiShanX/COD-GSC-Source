@@ -87,7 +87,7 @@ function_e04728e4(local_client_num) {
 
       if(isalive(entity)) {
         foreach(flag, var_166900a8 in entity_array) {
-          if(shoutcaster::is_shoutcaster(local_client_num) && (var_166900a8 == # "hash_2f86d28434166be7" || var_166900a8 == # "hash_16bdbd0b3de5c91a")) {
+          if(shoutcaster::is_shoutcaster(local_client_num) && (var_166900a8 == #"hash_2f86d28434166be7" || var_166900a8 == #"hash_16bdbd0b3de5c91a")) {
             continue;
           }
 
@@ -223,7 +223,7 @@ function_c8d97b8e(local_client_num, flag, var_166900a8) {
 }
 
 function_6803f977(local_client_num, bundle) {
-  if(!self function_4e0ca360() || self.team === # "free") {
+  if(!self function_4e0ca360() || self.team === #"free") {
     return false;
   }
 
@@ -246,7 +246,7 @@ function_ce7fd1b9(local_client_num, bundle) {
     return false;
   }
 
-  if(self function_4e0ca360() && self.team !== # "free") {
+  if(self function_4e0ca360() && self.team !== #"free") {
     return false;
   }
 

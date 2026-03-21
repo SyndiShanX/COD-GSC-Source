@@ -7,7 +7,7 @@
 
 function ispistol(weapon, var_d3511cd9 = 0) {
   if(var_d3511cd9) {
-    return (weapon.weapclass === # "pistol");
+    return (weapon.weapclass === #"pistol");
   }
 
   return isDefined(level.side_arm_array[weapon]);
@@ -43,15 +43,15 @@ function isexplosivedamage(meansofdeath) {
 }
 
 function ispunch(weapon) {
-  return weapon.type == "melee" && weapon.statname == # "bare_hands";
+  return weapon.type == "melee" && weapon.statname == #"bare_hands";
 }
 
 function isknife(weapon) {
-  return weapon.type == "melee" && (weapon.rootweapon.name == # "knife_loadout" || weapon.rootweapon.name == # "knife_held");
+  return weapon.type == "melee" && (weapon.rootweapon.name == #"knife_loadout" || weapon.rootweapon.name == #"knife_held");
 }
 
 function isnonbarehandsmelee(weapon) {
-  return weapon.type == "melee" && weapon.rootweapon.name != # "bare_hands";
+  return weapon.type == "melee" && weapon.rootweapon.name != #"bare_hands";
 }
 
 function isbulletdamage(meansofdeath) {

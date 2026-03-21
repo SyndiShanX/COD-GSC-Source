@@ -221,7 +221,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     return;
   }
 
-  if(self.sessionteam == # "spectator") {
+  if(self.sessionteam == #"spectator") {
     return;
   }
 
@@ -821,7 +821,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
 
   weaponclass = util::getweaponclass(weapon);
 
-  if(isDefined(weaponclass) && weaponclass == # "weapon_sniper") {
+  if(isDefined(weaponclass) && weaponclass == #"weapon_sniper") {
     self thread battlechatter::killed_by_sniper(attacker);
   } else {
     self thread battlechatter::player_killed(attacker, killstreak, einflictor, weapon, smeansofdeath);
@@ -852,7 +852,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     }
   }
 
-  if(self.currentspectatingclient != -1 && level.spectatetype == 4 && self.pers[#"team"] != # "spectator") {
+  if(self.currentspectatingclient != -1 && level.spectatetype == 4 && self.pers[#"team"] != #"spectator") {
     function_39a7df61(self);
   }
 
@@ -1248,7 +1248,7 @@ update_weapon_stats(attacker, weapon, smeansofdeath, inflictor) {
     }
 
     if(smeansofdeath != "MOD_FALLING" && recordweaponstatkills) {
-      if(weapon.name == # "explosive_bolt" && isDefined(inflictor) && isDefined(inflictor.ownerweaponatlaunch) && inflictor.owneradsatlaunch) {
+      if(weapon.name == #"explosive_bolt" && isDefined(inflictor) && isDefined(inflictor.ownerweaponatlaunch) && inflictor.owneradsatlaunch) {
         inflictorownerweaponatlaunchpickedup = 0;
 
         if(isDefined(attacker.pickedupweapons) && isDefined(attacker.pickedupweapons[inflictor.ownerweaponatlaunch])) {
@@ -1610,7 +1610,7 @@ kill(einflictor, attacker, smeansofdeath, weapon, shitloc) {
   self thread globallogic_score::trackattackeedeath(attackername, attacker.pers[#"rank"], attacker.pers[#"rankxp"], attacker.pers[#"prestige"], attacker getxuid());
   self thread medals::setlastkilledby(attacker, einflictor);
 
-  if(level.teambased && attacker.team != # "spectator") {
+  if(level.teambased && attacker.team != #"spectator") {
     killstreak = killstreaks::get_killstreak_for_weapon(weapon);
 
     if(!isDefined(killstreak) || isDefined(level.killstreaksgivegamescore) && level.killstreaksgivegamescore) {
@@ -1722,9 +1722,9 @@ function_395ef176() {
       return;
     }
 
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       var_e6caaa48 -= 1;
-    } else if(self.team == # "axis") {
+    } else if(self.team == #"axis") {
       var_5724b72f -= 1;
     }
 
@@ -2020,7 +2020,7 @@ is_explosive_ragdoll(weapon, inflictor) {
     return false;
   }
 
-  if(weapon.name == # "destructible_car" || weapon.name == # "explodable_barrel") {
+  if(weapon.name == #"destructible_car" || weapon.name == #"explodable_barrel") {
     return true;
   }
 
@@ -2044,7 +2044,7 @@ start_explosive_ragdoll(dir, weapon) {
   y = randomintrange(50, 100);
   z = randomintrange(10, 20);
 
-  if(isDefined(weapon) && (weapon.name == # "sticky_grenade" || weapon.name == # "explosive_bolt")) {
+  if(isDefined(weapon) && (weapon.name == #"sticky_grenade" || weapon.name == #"explosive_bolt")) {
     if(isDefined(dir) && lengthsquared(dir) > 0) {
       x = dir[0] * x;
       y = dir[1] * y;
@@ -2138,23 +2138,23 @@ update_attacker(attacker, weapon) {
   }
 
   if(isDefined(attacker) && attacker != self && isDefined(weapon)) {
-    if(weapon.statname == # "planemortar") {
+    if(weapon.statname == #"planemortar") {
       if(!isDefined(attacker.planemortarbda)) {
         attacker.planemortarbda = 0;
       }
 
       attacker.planemortarbda++;
-    } else if(weapon.statname == # "dart" || weapon.statname == # "dart_turret") {
+    } else if(weapon.statname == #"dart" || weapon.statname == #"dart_turret") {
       if(!isDefined(attacker.dartbda)) {
         attacker.dartbda = 0;
       }
 
       attacker.dartbda++;
-    } else if(weapon.name == # "straferun_rockets" || weapon.name == # "straferun_gun") {
+    } else if(weapon.name == #"straferun_rockets" || weapon.name == #"straferun_gun") {
       if(isDefined(attacker.straferunbda)) {
         attacker.straferunbda++;
       }
-    } else if(weapon.statname == # "remote_missile" || weapon.statname == # "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+    } else if(weapon.statname == #"remote_missile" || weapon.statname == #"remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
       if(!isDefined(attacker.remotemissilebda)) {
         attacker.remotemissilebda = 0;
       }

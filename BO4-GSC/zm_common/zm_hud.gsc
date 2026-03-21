@@ -42,7 +42,7 @@ on_player_spawned() {
     level.zm_location zm_location::close(self);
   }
 
-  self.var_b3122c84 = # "";
+  self.var_b3122c84 = #"";
   util::wait_network_frame();
 
   if(isDefined(self)) {

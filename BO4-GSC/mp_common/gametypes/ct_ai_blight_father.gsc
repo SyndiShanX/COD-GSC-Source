@@ -79,7 +79,7 @@ on_player_spawned() {
 
 function_7c52f40() {
   self endon(#"death");
-  self.var_ef46cd4 = # "zombie_e1_itemlist";
+  self.var_ef46cd4 = #"zombie_e1_itemlist";
   self.clamptonavmesh = 0;
   self.ignorepathenemyfightdist = 1;
   self.var_bb185cc5 = 0;
@@ -151,7 +151,7 @@ function_36b05ed0(entity) {
 }
 
 killed_callback(e_attacker) {
-  if(self.archetype != # "blight_father") {
+  if(self.archetype != #"blight_father") {
     return;
   }
 
@@ -577,7 +577,7 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
   }
 
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
-  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== # "armor";
+  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== #"armor";
   var_c6cc6205 = var_b85996d4;
   var_fff93f95 = var_159ce525;
   var_cee56a92 = var_ddd319d6;

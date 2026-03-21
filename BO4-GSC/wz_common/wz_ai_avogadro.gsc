@@ -206,7 +206,7 @@ function_ac94df05(entity) {
     return (entity.aistate === 3 && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000));
   }
 
-  return isDefined(entity.current_state) && entity.current_state.name === # "chase" && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000);
+  return isDefined(entity.current_state) && entity.current_state.name === #"chase" && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000);
 }
 
 function_7d5cf0e4(entity) {
@@ -214,7 +214,7 @@ function_7d5cf0e4(entity) {
     return (entity.aistate === 3);
   }
 
-  return isDefined(entity.current_state) && entity.current_state.name == # "chase";
+  return isDefined(entity.current_state) && entity.current_state.name == #"chase";
 }
 
 function_c698f66b() {

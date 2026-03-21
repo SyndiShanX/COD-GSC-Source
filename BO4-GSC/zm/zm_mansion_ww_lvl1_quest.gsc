@@ -243,16 +243,16 @@ init_lock() {
 
   switch (self.script_int) {
     case 0:
-      var_1e30344b = # "hash_7305c7f343dd8850";
+      var_1e30344b = #"hash_7305c7f343dd8850";
       break;
     case 1:
-      var_1e30344b = # "hash_51efb8481233c40d";
+      var_1e30344b = #"hash_51efb8481233c40d";
       break;
     case 2:
-      var_1e30344b = # "hash_727b0a70b6f41db2";
+      var_1e30344b = #"hash_727b0a70b6f41db2";
       break;
     case 3:
-      var_1e30344b = # "hash_6c453062178e1617";
+      var_1e30344b = #"hash_6c453062178e1617";
       break;
   }
 

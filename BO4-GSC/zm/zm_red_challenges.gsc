@@ -64,41 +64,41 @@ init() {
   level.var_857878e6 = &function_857878e6;
   zm::register_actor_damage_callback(&actor_damage_callback);
   level.var_45420301 = [];
-  level.var_45420301[level.var_45420301.size] = # "weapon_pistol";
-  level.var_45420301[level.var_45420301.size] = # "weapon_cqb";
-  level.var_45420301[level.var_45420301.size] = # "weapon_assault";
-  level.var_45420301[level.var_45420301.size] = # "weapon_tactical";
-  level.var_45420301[level.var_45420301.size] = # "weapon_lmg";
-  level.var_45420301[level.var_45420301.size] = # "weapon_sniper";
-  level.var_45420301[level.var_45420301.size] = # "weapon_knife";
+  level.var_45420301[level.var_45420301.size] = #"weapon_pistol";
+  level.var_45420301[level.var_45420301.size] = #"weapon_cqb";
+  level.var_45420301[level.var_45420301.size] = #"weapon_assault";
+  level.var_45420301[level.var_45420301.size] = #"weapon_tactical";
+  level.var_45420301[level.var_45420301.size] = #"weapon_lmg";
+  level.var_45420301[level.var_45420301.size] = #"weapon_sniper";
+  level.var_45420301[level.var_45420301.size] = #"weapon_knife";
   level.var_45420301 = array::randomize(level.var_45420301);
   level.var_b95f226e = 0;
   level.var_54800463 = [];
-  level.var_54800463[level.var_54800463.size] = # "torso";
-  level.var_54800463[level.var_54800463.size] = # "arms";
-  level.var_54800463[level.var_54800463.size] = # "hands";
-  level.var_54800463[level.var_54800463.size] = # "legs";
-  level.var_54800463[level.var_54800463.size] = # "feet";
+  level.var_54800463[level.var_54800463.size] = #"torso";
+  level.var_54800463[level.var_54800463.size] = #"arms";
+  level.var_54800463[level.var_54800463.size] = #"hands";
+  level.var_54800463[level.var_54800463.size] = #"legs";
+  level.var_54800463[level.var_54800463.size] = #"feet";
   level.var_7ccd49a7 = 0;
   level.var_529bdc63 = [];
   level.var_529bdc63[0] = struct::spawn();
-  level.var_529bdc63[0].n_zombie_archetype = # "gegenees";
-  level.var_529bdc63[0].str_msg = # "hash_7d3a87af11535537";
+  level.var_529bdc63[0].n_zombie_archetype = #"gegenees";
+  level.var_529bdc63[0].str_msg = #"hash_7d3a87af11535537";
   level.var_529bdc63[0].var_18f2b3cb = 0.05;
   level.var_529bdc63[0].str_zone = undefined;
   level.var_529bdc63[1] = struct::spawn();
-  level.var_529bdc63[1].n_zombie_archetype = # "blight_father";
-  level.var_529bdc63[1].str_msg = # "hash_33f17c3034f8da74";
+  level.var_529bdc63[1].n_zombie_archetype = #"blight_father";
+  level.var_529bdc63[1].str_msg = #"hash_33f17c3034f8da74";
   level.var_529bdc63[1].var_18f2b3cb = 0.08;
   level.var_529bdc63[1].str_zone = undefined;
   level.var_529bdc63[2] = struct::spawn();
-  level.var_529bdc63[2].n_zombie_archetype = # "skeleton";
-  level.var_529bdc63[2].str_msg = # "hash_2e51dfa0a7d98b5a";
+  level.var_529bdc63[2].n_zombie_archetype = #"skeleton";
+  level.var_529bdc63[2].str_msg = #"hash_2e51dfa0a7d98b5a";
   level.var_529bdc63[2].var_18f2b3cb = 0.07;
   level.var_529bdc63[2].str_zone = undefined;
   level.var_529bdc63[3] = struct::spawn();
-  level.var_529bdc63[3].n_zombie_archetype = # "catalyst";
-  level.var_529bdc63[3].str_msg = # "hash_30c2fa2ab04f1d99";
+  level.var_529bdc63[3].n_zombie_archetype = #"catalyst";
+  level.var_529bdc63[3].str_msg = #"hash_30c2fa2ab04f1d99";
   level.var_529bdc63[3].var_18f2b3cb = 0.07;
   level.var_529bdc63[3].str_zone = undefined;
   level.var_529bdc63 = array::randomize(level.var_529bdc63);
@@ -108,27 +108,27 @@ init() {
   level.var_c6ab748f = 0;
   level.var_8b7ab859 = 1000;
   level.var_e8503818 = [];
-  level.var_e8503818[1] = # "hash_725802b808e14c76";
-  level.var_e8503818[2] = # "hash_725802b808e14c76";
-  level.var_e8503818[3] = # "hash_725802b808e14c76";
-  level.var_e8503818[4] = # "hash_725802b808e14c76";
-  level.var_e8503818[5] = # "hash_725802b808e14c76";
-  level.var_e8503818[6] = # "hash_725802b808e14c76";
-  level.var_e8503818[7] = # "hash_725802b808e14c76";
-  level.var_e8503818[13] = # "hash_6401bc0ff0d3db94";
-  level.var_e8503818[10] = # "hash_73d3851d119f51a4";
-  level.var_e8503818[11] = # "hash_6b8b6df4e4c161a7";
-  level.var_e8503818[14] = # "hash_25b9a3d3430aa158";
-  level.var_e8503818[15] = # "hash_59056a7b92714e58";
-  level.var_e8503818[16] = # "hash_59056a7b92714e58";
-  level.var_e8503818[17] = # "hash_59056a7b92714e58";
-  level.var_e8503818[18] = # "hash_59056a7b92714e58";
-  level.var_e8503818[19] = # "hash_59056a7b92714e58";
-  level.var_e8503818[20] = # "hash_59056a7b92714e58";
-  level.var_e8503818[12] = # "hash_5440bf458877a7e2";
-  level.var_e8503818[0] = # "hash_1517f0bbb322181e";
-  level.var_e8503818[9] = # "hash_3cdcae60e7ea21e7";
-  level.var_e8503818[8] = # "hash_62cbc1e881d872fb";
+  level.var_e8503818[1] = #"hash_725802b808e14c76";
+  level.var_e8503818[2] = #"hash_725802b808e14c76";
+  level.var_e8503818[3] = #"hash_725802b808e14c76";
+  level.var_e8503818[4] = #"hash_725802b808e14c76";
+  level.var_e8503818[5] = #"hash_725802b808e14c76";
+  level.var_e8503818[6] = #"hash_725802b808e14c76";
+  level.var_e8503818[7] = #"hash_725802b808e14c76";
+  level.var_e8503818[13] = #"hash_6401bc0ff0d3db94";
+  level.var_e8503818[10] = #"hash_73d3851d119f51a4";
+  level.var_e8503818[11] = #"hash_6b8b6df4e4c161a7";
+  level.var_e8503818[14] = #"hash_25b9a3d3430aa158";
+  level.var_e8503818[15] = #"hash_59056a7b92714e58";
+  level.var_e8503818[16] = #"hash_59056a7b92714e58";
+  level.var_e8503818[17] = #"hash_59056a7b92714e58";
+  level.var_e8503818[18] = #"hash_59056a7b92714e58";
+  level.var_e8503818[19] = #"hash_59056a7b92714e58";
+  level.var_e8503818[20] = #"hash_59056a7b92714e58";
+  level.var_e8503818[12] = #"hash_5440bf458877a7e2";
+  level.var_e8503818[0] = #"hash_1517f0bbb322181e";
+  level.var_e8503818[9] = #"hash_3cdcae60e7ea21e7";
+  level.var_e8503818[8] = #"hash_62cbc1e881d872fb";
   level.var_edbe6a7f = [];
   level.var_edbe6a7f[0] = 0;
   level.var_edbe6a7f[1] = 0;
@@ -218,7 +218,7 @@ on_ai_killed(s_params) {
   weapon = s_params.weapon;
   means_of_death = s_params.smeansofdeath;
 
-  if(isPlayer(e_player) && isDefined(weapon) && weapon.name == # "zhield_zpear_turret") {
+  if(isPlayer(e_player) && isDefined(weapon) && weapon.name == #"zhield_zpear_turret") {
     if(!isDefined(e_player.var_53ce87a7)) {
       e_player.var_53ce87a7 = 0;
       e_player.var_822346e9 = 0;
@@ -236,7 +236,7 @@ on_ai_killed(s_params) {
   if(isPlayer(e_player)) {
     if(is_challenge_active(14) && !(isDefined(self.var_45bfef99) && self.var_45bfef99)) {
       if(isDefined(str_hit_loc)) {
-        if(str_hit_loc == # "helmet" || str_hit_loc == # "head") {
+        if(str_hit_loc == #"helmet" || str_hit_loc == #"head") {
           level notify(#"zombie_challenge_kill", {
             #e_player: s_params.eattacker
           });
@@ -267,7 +267,7 @@ on_ai_killed(s_params) {
     }
 
     if(is_challenge_active(9)) {
-      if(isDefined(weapon) && weapon.inventorytype == # "offhand") {
+      if(isDefined(weapon) && weapon.inventorytype == #"offhand") {
         level notify(#"kill_with_equipment", {
           #e_player: e_player, #means_of_death: means_of_death
         });
@@ -312,7 +312,7 @@ function_4ca8c034(attacker, weapon, hit_loc, means_of_death) {
 
   if(is_challenge_active(0)) {
     if(isDefined(weapon)) {
-      if(weapon.name == # "zhield_zpear_dw" || weapon.name == # "zhield_zpear_turret") {
+      if(weapon.name == #"zhield_zpear_dw" || weapon.name == #"zhield_zpear_turret") {
         level notify(#"shield_and_spear_damage", {
           #e_player: attacker
         });
@@ -848,25 +848,25 @@ function_4a88eb80() {
 function_f51adffa() {
   switch (level.s_active_challenge.n_id) {
     case 1:
-      level.var_80ec74ca = # "hash_792c0919250a07e";
+      level.var_80ec74ca = #"hash_792c0919250a07e";
       break;
     case 2:
-      level.var_80ec74ca = # "hash_4691be55f6b2f7fb";
+      level.var_80ec74ca = #"hash_4691be55f6b2f7fb";
       break;
     case 3:
-      level.var_80ec74ca = # "hash_4ee0858a78847ce8";
+      level.var_80ec74ca = #"hash_4ee0858a78847ce8";
       break;
     case 4:
-      level.var_80ec74ca = # "hash_19886b94618ff9a4";
+      level.var_80ec74ca = #"hash_19886b94618ff9a4";
       break;
     case 5:
-      level.var_80ec74ca = # "hash_474e7ba807dd9646";
+      level.var_80ec74ca = #"hash_474e7ba807dd9646";
       break;
     case 6:
-      level.var_80ec74ca = # "hash_395eaaa6ebb3ceb7";
+      level.var_80ec74ca = #"hash_395eaaa6ebb3ceb7";
       break;
     case 7:
-      level.var_80ec74ca = # "hash_756f97bb7e6ff36d";
+      level.var_80ec74ca = #"hash_756f97bb7e6ff36d";
       break;
   }
 
@@ -900,28 +900,28 @@ function_1d60215() {
 
   switch (level.s_active_challenge.n_id) {
     case 15:
-      level.var_c699da9d = # "hash_3ae778d55ad6e8e4";
-      var_9862b6f2 = # "hash_787fa78858071ba9";
+      level.var_c699da9d = #"hash_3ae778d55ad6e8e4";
+      var_9862b6f2 = #"hash_787fa78858071ba9";
       break;
     case 16:
-      level.var_c699da9d = # "hash_7fce9e20e92e7a3d";
-      var_9862b6f2 = # "hash_50663d02f6b02c16";
+      level.var_c699da9d = #"hash_7fce9e20e92e7a3d";
+      var_9862b6f2 = #"hash_50663d02f6b02c16";
       break;
     case 17:
-      level.var_c699da9d = # "hash_12d624b76e928e2a";
-      var_9862b6f2 = # "hash_224b2f96e6aeef3d";
+      level.var_c699da9d = #"hash_12d624b76e928e2a";
+      var_9862b6f2 = #"hash_224b2f96e6aeef3d";
       break;
     case 18:
-      level.var_c699da9d = # "hash_503d347bb0f6c1ad";
-      var_9862b6f2 = # "hash_365d2b268bbfd068";
+      level.var_c699da9d = #"hash_503d347bb0f6c1ad";
+      var_9862b6f2 = #"hash_365d2b268bbfd068";
       break;
     case 19:
-      level.var_c699da9d = # "hash_3221d4665aec6c07";
-      var_9862b6f2 = # "hash_5b07fa123f86d7e0";
+      level.var_c699da9d = #"hash_3221d4665aec6c07";
+      var_9862b6f2 = #"hash_5b07fa123f86d7e0";
       break;
     case 20:
-      level.var_c699da9d = # "hash_7a9a40ca466c3b4d";
-      var_9862b6f2 = # "hash_666d2ebd0b7eb112";
+      level.var_c699da9d = #"hash_7a9a40ca466c3b4d";
+      var_9862b6f2 = #"hash_666d2ebd0b7eb112";
       break;
     default:
       return;

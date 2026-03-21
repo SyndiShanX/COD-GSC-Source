@@ -1164,7 +1164,7 @@ set_static_postfxbundle(localclientnum, oldval, newval, bnewent, binitialsnap, f
     vehicle = getplayervehicle(player);
 
     if(isDefined(vehicle)) {
-      if(vehicle.vehicletype == # "veh_hawk_player_mp" || vehicle.vehicletype == # "veh_hawk_player_far_range_mp" || vehicle.vehicletype == # "veh_hawk_player_wz" || vehicle.vehicletype == # "veh_hawk_player_far_range_wz") {
+      if(vehicle.vehicletype == #"veh_hawk_player_mp" || vehicle.vehicletype == #"veh_hawk_player_far_range_mp" || vehicle.vehicletype == #"veh_hawk_player_wz" || vehicle.vehicletype == #"veh_hawk_player_far_range_wz") {
         if(player postfx::function_556665f2(#"hash_15d46f4ad6539103") == 0) {
           player thread postfx::playpostfxbundle(#"hash_15d46f4ad6539103");
         }

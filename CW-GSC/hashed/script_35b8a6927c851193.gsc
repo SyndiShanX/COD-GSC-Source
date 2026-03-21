@@ -41,7 +41,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   gametype = util::get_game_type();
 
-  if(gametype == # "zsurvival") {
+  if(gametype == #"zsurvival") {
     level.var_9ee73630 = [];
     level.var_9ee73630[#"walk"] = [];
     level.var_9ee73630[#"run"] = [];
@@ -158,7 +158,7 @@ function private function_bf21203e(params) {
 function private function_853cd0f0(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   self.var_67f98db0 = 0;
 
-  if(isactor(vpoint) && vpoint.team == self.team && vpoint.archetype !== # "abom") {
+  if(isactor(vpoint) && vpoint.team == self.team && vpoint.archetype !== #"abom") {
     return 0;
   }
 
@@ -191,7 +191,7 @@ function private function_853cd0f0(einflictor, eattacker, idamage, idflags, smea
   }
 
   if(!isDefined(self.enemy_override) && !isDefined(self.favoriteenemy) && isDefined(vpoint) && isPlayer(vpoint)) {
-    if(isDefined(psoffsettime) && (psoffsettime == "MOD_MELEE" || psoffsettime == "MOD_MELEE_WEAPON_BUTT") || isDefined(damagefromunderneath) && damagefromunderneath.statname === # "hatchet") {
+    if(isDefined(psoffsettime) && (psoffsettime == "MOD_MELEE" || psoffsettime == "MOD_MELEE_WEAPON_BUTT") || isDefined(damagefromunderneath) && damagefromunderneath.statname === #"hatchet") {
       n_radius = 128;
     } else {
       n_radius = 512;
@@ -345,7 +345,7 @@ function private function_6f78caa9() {
 
   waitresult = self waittilltimeout(5, #"projectile_impact_player", #"death");
 
-  if(waitresult._notify == # "projectile_impact_player" && isDefined(waitresult.player)) {
+  if(waitresult._notify == #"projectile_impact_player" && isDefined(waitresult.player)) {
     player = waitresult.player;
     player playSound(#"hash_7531b73b4b99b19d");
     player dodamage(self.weapon.damagevalues[0], start_pos, attacker, self);

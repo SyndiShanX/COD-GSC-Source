@@ -91,44 +91,44 @@ init() {
   clientfield::register("scriptmover", "" + # "hash_508fc6409c815104", 16000, 1, "counter", &function_842fb5d0, 0, 0);
   clientfield::register("world", "" + # "cleanse_portal", 16000, 1, "int", &cleanse_portal, 0, 0);
   clientfield::register("world", "" + # "narrative_room", 16000, 1, "int", &narrative_room, 0, 0);
-  level._effect[#"hash_7209746af2213da9"] = # "hash_528248a4206b00af";
-  level._effect[#"hash_7210806af22770bb"] = # "hash_527b5ca4206503fd";
-  level._effect[#"hash_48f9a29daf00294a"] = # "hash_752bfcf80c9da234";
-  level._effect[#"hash_48f3969daefba938"] = # "hash_7531e8f80ca1ebe6";
-  level._effect[#"hash_2a17f2993036fab4"] = # "hash_6638fd8cf4876df";
-  level._effect[#"rune_fire"] = # "hash_7504bcf503817eb2";
-  level._effect[#"hash_784f06b253332f8f"] = # "hash_7d24820ee5231fef";
-  level._effect[#"hash_797e7381ba62ff8a"] = # "hash_795ee7d89d6f10d2";
-  level._effect[#"hash_30660c47aae060a9"] = # "zm_ai/fx8_elec_bolt";
-  level._effect[#"hash_22acf133b0aa208a"] = # "hash_4d09e042a77cfba3";
-  level._effect[#"hash_530e1caa1a8c81d2"] = # "hash_4bbfe2d612f8393d";
-  level._effect[#"hash_6d76e4b7a31537af"] = # "hash_2b71a6c9f08cfe3b";
-  level._effect[#"hash_4d77ba61cd7f3eb7"] = # "hash_25c4a39b373bfc67";
-  level._effect[#"hash_7fc7f7b5958831d4"] = # "hash_520fd2427c5fcea3";
-  level._effect[#"hash_431f319e4b8fe9db"] = # "hash_37bc7da216893b77";
-  level._effect[#"hash_415416bf220de94"] = # "hash_7b7ba0ac0755a064";
-  level._effect[#"hash_3e2b1092de25c2dd"] = # "hash_318aaa12f9dc7fd4";
-  level._effect[#"hash_24b5302c2f39ebc2"] = # "hash_569b6effe4db6f54";
-  level._effect[#"hash_6a8479b5a5b359a7"] = # "hash_513bda1b67490064";
-  level._effect[#"hash_4feb66128e57d092"] = # "hash_194fead3457d21f5";
-  level._effect[#"hash_7552d5567ab25417"] = # "hash_17e9105690c8500d";
-  level._effect[#"hash_4e1b58f05f69a65a"] = # "hash_7e9736ee8b5ec443";
-  level._effect[#"hash_5a6761fe764bdccf"] = # "hash_72d74d75e679897b";
-  level._effect[#"hash_579a1ad0a61119fc"] = # "hash_150e82f10596be24";
-  level._effect[#"hash_257185644d8c28b0"] = # "hash_31c3c5542f095358";
-  level._effect[#"hash_79910e1d73c43922"] = # "hash_39c7de58cd57bf14";
-  level._effect[#"hash_3d71b8c8036f8a4e"] = # "hash_7e78428dbf4099a8";
-  level._effect[#"hash_2b1f96b3ed3451d2"] = # "hash_7519a614333f0ab5";
-  level._effect[#"hash_1caa39c10fd546be"] = # "hash_3a840f89285e77e9";
-  level._effect[#"hash_151f6238e261520a"] = # "hash_2c5e782929758203";
-  level._effect[#"hash_5c18b169297a5116"] = # "hash_698145b245c1bff";
-  level._effect[#"play_fanfare"] = # "maps/zm_towers/fx8_crowd_reward_flower_exp";
-  level._effect[#"blood_teleport"] = # "hash_570e356dcecf7c0f";
-  level._effect[#"hash_51e28147388ee3d8"] = # "hash_1ce96a401d67fe8f";
-  level._effect[#"hash_297c800c6e18f746"] = # "hash_34fb31ef6c57f845";
-  level._effect[#"hash_44330c38e995c437"] = # "hash_5ff2bd993dcf28d3";
-  level._effect[#"hash_76947a7b04c592a6"] = # "hash_567c5a1dcc540804";
-  level._effect[#"cleanse_portal"] = # "hash_47156cf8a794bef0";
+  level._effect[#"hash_7209746af2213da9"] = #"hash_528248a4206b00af";
+  level._effect[#"hash_7210806af22770bb"] = #"hash_527b5ca4206503fd";
+  level._effect[#"hash_48f9a29daf00294a"] = #"hash_752bfcf80c9da234";
+  level._effect[#"hash_48f3969daefba938"] = #"hash_7531e8f80ca1ebe6";
+  level._effect[#"hash_2a17f2993036fab4"] = #"hash_6638fd8cf4876df";
+  level._effect[#"rune_fire"] = #"hash_7504bcf503817eb2";
+  level._effect[#"hash_784f06b253332f8f"] = #"hash_7d24820ee5231fef";
+  level._effect[#"hash_797e7381ba62ff8a"] = #"hash_795ee7d89d6f10d2";
+  level._effect[#"hash_30660c47aae060a9"] = #"zm_ai/fx8_elec_bolt";
+  level._effect[#"hash_22acf133b0aa208a"] = #"hash_4d09e042a77cfba3";
+  level._effect[#"hash_530e1caa1a8c81d2"] = #"hash_4bbfe2d612f8393d";
+  level._effect[#"hash_6d76e4b7a31537af"] = #"hash_2b71a6c9f08cfe3b";
+  level._effect[#"hash_4d77ba61cd7f3eb7"] = #"hash_25c4a39b373bfc67";
+  level._effect[#"hash_7fc7f7b5958831d4"] = #"hash_520fd2427c5fcea3";
+  level._effect[#"hash_431f319e4b8fe9db"] = #"hash_37bc7da216893b77";
+  level._effect[#"hash_415416bf220de94"] = #"hash_7b7ba0ac0755a064";
+  level._effect[#"hash_3e2b1092de25c2dd"] = #"hash_318aaa12f9dc7fd4";
+  level._effect[#"hash_24b5302c2f39ebc2"] = #"hash_569b6effe4db6f54";
+  level._effect[#"hash_6a8479b5a5b359a7"] = #"hash_513bda1b67490064";
+  level._effect[#"hash_4feb66128e57d092"] = #"hash_194fead3457d21f5";
+  level._effect[#"hash_7552d5567ab25417"] = #"hash_17e9105690c8500d";
+  level._effect[#"hash_4e1b58f05f69a65a"] = #"hash_7e9736ee8b5ec443";
+  level._effect[#"hash_5a6761fe764bdccf"] = #"hash_72d74d75e679897b";
+  level._effect[#"hash_579a1ad0a61119fc"] = #"hash_150e82f10596be24";
+  level._effect[#"hash_257185644d8c28b0"] = #"hash_31c3c5542f095358";
+  level._effect[#"hash_79910e1d73c43922"] = #"hash_39c7de58cd57bf14";
+  level._effect[#"hash_3d71b8c8036f8a4e"] = #"hash_7e78428dbf4099a8";
+  level._effect[#"hash_2b1f96b3ed3451d2"] = #"hash_7519a614333f0ab5";
+  level._effect[#"hash_1caa39c10fd546be"] = #"hash_3a840f89285e77e9";
+  level._effect[#"hash_151f6238e261520a"] = #"hash_2c5e782929758203";
+  level._effect[#"hash_5c18b169297a5116"] = #"hash_698145b245c1bff";
+  level._effect[#"play_fanfare"] = #"maps/zm_towers/fx8_crowd_reward_flower_exp";
+  level._effect[#"blood_teleport"] = #"hash_570e356dcecf7c0f";
+  level._effect[#"hash_51e28147388ee3d8"] = #"hash_1ce96a401d67fe8f";
+  level._effect[#"hash_297c800c6e18f746"] = #"hash_34fb31ef6c57f845";
+  level._effect[#"hash_44330c38e995c437"] = #"hash_5ff2bd993dcf28d3";
+  level._effect[#"hash_76947a7b04c592a6"] = #"hash_567c5a1dcc540804";
+  level._effect[#"cleanse_portal"] = #"hash_47156cf8a794bef0";
 }
 
 function_8d3c45d8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -199,7 +199,7 @@ function_70f269cd(localclientnum, newval, str_step) {
       function_77072f95(localclientnum, str_step, a_s_points);
       break;
     case 2:
-      if(str_step == # "blood") {
+      if(str_step == #"blood") {
         s_final = struct::get(#"hash_74c74fa352fbfa70");
         a_s_points[a_s_points.size - 1] = s_final;
       }
@@ -982,8 +982,8 @@ function_b750bd91(localclientnum, newval, str_ww) {
           break;
       }
 
-      var_408c2f30 = # "hash_5c827c8b5d6786d0";
-      var_f5257d20 = # "hash_4e0f49a6de027614";
+      var_408c2f30 = #"hash_5c827c8b5d6786d0";
+      var_f5257d20 = #"hash_4e0f49a6de027614";
       var_88dfc0c9 = 0.37;
     } else {
       switch (newval) {
@@ -1016,8 +1016,8 @@ function_b750bd91(localclientnum, newval, str_ww) {
           break;
       }
 
-      var_408c2f30 = # "hash_57f7a8a10722c251";
-      var_f5257d20 = # "";
+      var_408c2f30 = #"hash_57f7a8a10722c251";
+      var_f5257d20 = #"";
       var_88dfc0c9 = 0.75;
     }
 
@@ -1037,16 +1037,16 @@ function_b750bd91(localclientnum, newval, str_ww) {
 function_985f4598(str_ww) {
   switch (str_ww) {
     case # "death":
-      var_cfc545ad = # "p8_zm_red_rune_circle_charron";
+      var_cfc545ad = #"p8_zm_red_rune_circle_charron";
       break;
     case # "earth":
-      var_cfc545ad = # "p8_zm_red_rune_circle_gaia";
+      var_cfc545ad = #"p8_zm_red_rune_circle_gaia";
       break;
     case # "air":
-      var_cfc545ad = # "p8_zm_red_rune_circle_ouranos";
+      var_cfc545ad = #"p8_zm_red_rune_circle_ouranos";
       break;
     case # "light":
-      var_cfc545ad = # "hash_31a411dafa5678e2";
+      var_cfc545ad = #"hash_31a411dafa5678e2";
       break;
   }
 
@@ -1175,43 +1175,43 @@ function_d482f96b(localclientnum, newval) {
 
   switch (newval) {
     case 0:
-      var_54b5dd3f = # "center";
+      var_54b5dd3f = #"center";
       break;
     case 1:
-      var_54b5dd3f = # "center";
+      var_54b5dd3f = #"center";
       b_immediate = 0;
       break;
     case 2:
-      var_54b5dd3f = # "center";
+      var_54b5dd3f = #"center";
       b_immediate = 0;
       var_1a458c97 = 0;
       break;
     case 3:
-      var_54b5dd3f = # "close";
+      var_54b5dd3f = #"close";
       break;
     case 4:
-      var_54b5dd3f = # "close";
+      var_54b5dd3f = #"close";
       b_immediate = 0;
       break;
     case 5:
-      var_54b5dd3f = # "close";
+      var_54b5dd3f = #"close";
       b_immediate = 0;
       var_1a458c97 = 0;
       break;
     case 6:
-      var_54b5dd3f = # "far";
+      var_54b5dd3f = #"far";
       break;
     case 7:
-      var_54b5dd3f = # "far";
+      var_54b5dd3f = #"far";
       b_immediate = 0;
       break;
     case 8:
-      var_54b5dd3f = # "far";
+      var_54b5dd3f = #"far";
       b_immediate = 0;
       var_1a458c97 = 0;
       break;
     case 9:
-      var_54b5dd3f = # "all";
+      var_54b5dd3f = #"all";
       b_random = 0;
       b_immediate = 0;
       break;
@@ -1258,13 +1258,13 @@ function_180e26e2() {
 
     switch (str_type) {
       case # "center":
-        str_array = # "center";
+        str_array = #"center";
         break;
       case # "close":
-        str_array = # "close";
+        str_array = #"close";
         break;
       case # "far":
-        str_array = # "far";
+        str_array = #"far";
         break;
     }
 

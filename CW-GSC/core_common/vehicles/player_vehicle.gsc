@@ -765,7 +765,7 @@ function function_adc0649a() {
 function function_3054737a(player) {
   vehicle = self;
 
-  if(game.state == # "pregame" || !isPlayer(player) || player isremotecontrolling() || isDefined(vehicle.session)) {
+  if(game.state == #"pregame" || !isPlayer(player) || player isremotecontrolling() || isDefined(vehicle.session)) {
     return;
   }
 
@@ -774,7 +774,7 @@ function function_3054737a(player) {
 }
 
 function function_2d00376() {
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     return;
   }
 
@@ -867,13 +867,13 @@ function private function_92bb5a6f(vehicle, oldseatindex) {
 
   var_a90d69df = self function_1e0b31cf(vehicle.vehicleassembly);
 
-  if(isDefined(var_a90d69df) && var_a90d69df != # "") {
+  if(isDefined(var_a90d69df) && var_a90d69df != #"") {
     vehicle function_5fb6b45c(var_a90d69df);
   }
 
   var_b6cebec7 = self function_9497b7cb(vehicle.vehicleassembly);
 
-  if(isDefined(var_b6cebec7) && var_b6cebec7 != # "") {
+  if(isDefined(var_b6cebec7) && var_b6cebec7 != #"") {
     vehicle function_b5220c3c(var_b6cebec7);
   }
 }
@@ -1028,7 +1028,7 @@ function event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
       vehicle.var_37f0c900 = {
         #team: vehicle.team, #time: gettime()
       };
-      vehicle.team = # "neutral";
+      vehicle.team = #"neutral";
 
       if(isDefined(level.var_c3f91417)) {
         vehicle clientfield::set("enemyvehicle", 0);
@@ -1411,7 +1411,7 @@ function private function_17949e01() {
         return;
       }
 
-      if(waitresult._notify == # "touch" && isDefined(waitresult.entity) && isPlayer(waitresult.entity)) {
+      if(waitresult._notify == #"touch" && isDefined(waitresult.entity) && isPlayer(waitresult.entity)) {
         time = gettime();
 
         if(time > var_80831eb5 && waitresult.entity isonslide()) {
@@ -1670,7 +1670,7 @@ function function_948f0984(params) {
   }
 
   if(isvehicle(params.entity)) {
-    var_ed422386 = isDefined(params.entity.scriptvehicletype) && (params.entity.scriptvehicletype == "player_tank" || hash(params.entity.scriptvehicletype) == # "player_truck_transport");
+    var_ed422386 = isDefined(params.entity.scriptvehicletype) && (params.entity.scriptvehicletype == "player_tank" || hash(params.entity.scriptvehicletype) == #"player_truck_transport");
 
     if(!var_ed422386) {
       array::add(self.var_9be5a571, params.entity, 0);

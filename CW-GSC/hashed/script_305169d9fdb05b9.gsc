@@ -269,7 +269,7 @@ function function_45405080() {
   namespace_e1ccb37b::music("5.0_comrade", 9.666);
   namespace_82bfe441::fade(1, "FadeMedium");
   e_player val::set(#"hash_23bfeea7d10f466b", "disable_weapons", 1);
-  level.perseus.propername = # "hash_1208e1b319606beb";
+  level.perseus.propername = #"hash_1208e1b319606beb";
   level thread scene::play(str_scene, "reveal", [level.perseus, e_player]);
   a_actors = [level.perseus, e_player];
 

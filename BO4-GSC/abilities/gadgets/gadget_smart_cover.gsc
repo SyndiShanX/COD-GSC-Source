@@ -606,11 +606,11 @@ onkilled(var_c946c04c) {
 }
 
 function_884d0700(var_796be15d) {
-  return self.team == # "allies" ? level.smartcoversettings.bundle.var_ee0c73a5 : level.smartcoversettings.bundle.var_d3ea02d6;
+  return self.team == #"allies" ? level.smartcoversettings.bundle.var_ee0c73a5 : level.smartcoversettings.bundle.var_d3ea02d6;
 }
 
 getmodel(var_796be15d) {
-  return self.team == # "allies" ? level.smartcoversettings.bundle.var_397ed90c : level.smartcoversettings.bundle.var_b256e3da;
+  return self.team == #"allies" ? level.smartcoversettings.bundle.var_397ed90c : level.smartcoversettings.bundle.var_b256e3da;
 }
 
 function_d2368084(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, iboneindex, imodelindex) {
@@ -638,17 +638,17 @@ function_d2368084(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     idamage = startinghealth / bundle.kshero_gravityspikes;
   } else if(isDefined(bundle.var_4be7d629) && weapon == getweapon(#"shock_rifle") && smeansofdeath == "MOD_IMPACT") {
     idamage = startinghealth / bundle.var_4be7d629;
-  } else if(isDefined(bundle.var_843b7bd3) && weapon.statname == # "planemortar") {
+  } else if(isDefined(bundle.var_843b7bd3) && weapon.statname == #"planemortar") {
     idamage = startinghealth / bundle.var_843b7bd3;
   } else if(isDefined(bundle.ksdartstokill) && (weapon == getweapon(#"dart_blade") || weapon == getweapon(#"dart_turret"))) {
     idamage = startinghealth / bundle.ksdartstokill;
-  } else if(isDefined(bundle.var_8eca21ba) && weapon.statname == # "recon_car") {
+  } else if(isDefined(bundle.var_8eca21ba) && weapon.statname == #"recon_car") {
     idamage = startinghealth / bundle.var_8eca21ba;
-  } else if(isDefined(bundle.ksremote_missile_missile) && weapon.statname == # "remote_missile_missile") {
+  } else if(isDefined(bundle.ksremote_missile_missile) && weapon.statname == #"remote_missile_missile") {
     idamage = startinghealth / bundle.ksremote_missile_missile;
   } else if(isDefined(bundle.kshero_pineapplegun) && weapon == getweapon(#"hero_pineapplegun")) {
     idamage = startinghealth / bundle.kshero_pineapplegun;
-  } else if(isDefined(bundle.kshero_bowlauncher) && weapon.statname == # "sig_bow_quickshot" && (smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE_SPLASH")) {
+  } else if(isDefined(bundle.kshero_bowlauncher) && weapon.statname == #"sig_bow_quickshot" && (smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE_SPLASH")) {
     idamage = startinghealth / bundle.kshero_bowlauncher;
   }
 

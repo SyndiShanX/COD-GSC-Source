@@ -38,7 +38,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu04_item") {
+  if(itementry.name === #"cu04_item") {
     if(self character_unlock::function_f0406288(#"recon_unlock")) {
       self character_unlock::function_c8beca5e(#"recon_unlock", #"hash_91d5ea7b26a8aca", 1);
       var_f63b894c = 0;

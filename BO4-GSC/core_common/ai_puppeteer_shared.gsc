@@ -317,7 +317,7 @@ ai_puppet_cursor_tracker() {
       if(nodes.size > 0) {
         node = nodes[0];
 
-        if(node.type != # "path" && distancesquared(node.origin, level.playercursor[#"position"]) < 576) {
+        if(node.type != #"path" && distancesquared(node.origin, level.playercursor[#"position"]) < 576) {
           if(!level.ai_puppet_highlighting) {
             ai_puppeteer_render_node(node, (0, 1, 1));
           }

@@ -210,9 +210,9 @@ function function_faf7d71b(local_client_num) {
 
   if(distancesquared(self.var_c37910a5, pos) > 1024) {
     if(is_true(self.trailrightfoot)) {
-      fx = # "hash_18f1b4f6dff39f44";
+      fx = #"hash_18f1b4f6dff39f44";
     } else {
-      fx = # "hash_427f0cf6af092813";
+      fx = #"hash_427f0cf6af092813";
     }
 
     fwd = self getvelocity();

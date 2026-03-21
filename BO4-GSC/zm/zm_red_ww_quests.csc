@@ -51,47 +51,47 @@ init() {
   clientfield::register("scriptmover", "" + # "gaia_chaos_destroy", 16000, 1, "int", &gaia_chaos_destroy, 0, 0);
   clientfield::register("scriptmover", "" + # "ouranos_feather_hit_fx", 16000, 1, "counter", &ouranos_feather_hit_fx, 0, 0);
   clientfield::register("actor", "" + # "ww_combat_fx", 16000, getminbitcountfornum(4), "int", &ww_combat_fx, 0, 0);
-  level._effect[#"charon_hand_available"] = # "hash_13a5a3395df9015f";
-  level._effect[#"hemera_hand_available"] = # "hash_45df7abd6ad1c06";
-  level._effect[#"gaia_hand_available"] = # "hash_105b525291a60488";
-  level._effect[#"ouranos_hand_available"] = # "hash_7c755acc6547a0fd";
-  level._effect[#"hemera_source_glow"] = # "hash_7e62aa95417546aa";
-  level._effect[#"hemera_shrine_glow"] = # "hash_3a7504611a8ee7ef";
-  level._effect[#"hash_7ba74dab3ce4c1a9"] = # "hash_65d0dff5c51ac70d";
-  level._effect[#"hash_223052fa57a81234"] = # "hash_4bd8c2963780c080";
-  level._effect[#"hash_4982dd14ad4cfd2d"] = # "hash_7da081bd4cf99d11";
-  level._effect[#"hash_7bae59ab3ceaf4bb"] = # "hash_65d7cbf5c520c3bf";
-  level._effect[#"hash_22363efa57ac5be6"] = # "hash_4bdfce963786f392";
-  level._effect[#"hash_4989c914ad52f9df"] = # "hash_7da76dbd4cff99c3";
-  level._effect[#"hemera_bounce_glow"] = # "hash_281a29752dd70fec";
-  level._effect[#"hash_1ba95bf40a5e2422"] = # "hash_1a423b45182c5613";
-  level._effect[#"hash_3f63da724d02ddbd"] = # "hash_410c47b601f1eb2a";
-  level._effect[#"charon_portal_active"] = # "hash_a522275afc959a7";
-  level._effect[#"gaia_portal_active"] = # "hash_307731202349b92a";
-  level._effect[#"hash_1df737ccb8838bac"] = # "hash_2b910e77f63948fb";
-  level._effect[#"hash_4e4c7f6982d8ed31"] = # "hash_2fa2ffba30119b62";
-  level._effect[#"hash_19da57144416b720"] = # "hash_17e7186ea20ae80c";
-  level._effect[#"gaia_chaos_glow"] = # "hash_d0cf56779f6c4e1";
-  level._effect[#"gaia_chaos_destroy"] = # "hash_2c52af4b97cdbc0a";
-  level._effect[#"gaia_combat_fx"] = # "hash_569b6effe4db6f54";
-  level._effect[#"charon_combat_fx"] = # "hash_7b7ba0ac0755a064";
-  level._effect[#"hemera_combat_fx"] = # "hash_7e9736ee8b5ec443";
-  level._effect[#"ouranos_combat_fx"] = # "hash_194fead3457d21f5";
-  level._effect[#"hash_4024dfc409879380"] = # "hash_570e356dcecf7c0f";
-  level._effect[#"hash_18794d000c118e97"] = # "hash_131f7254a32ca20e";
-  level._effect[#"hash_799b84ee296b448d"] = # "hash_690957421115776c";
-  level._effect[#"hash_25540559b2b0c1b4"] = # "hash_3f2f5721b1727993";
-  level._effect[#"hash_3c9246be63bb58bd"] = # "hash_5199aa40f704fb10";
-  level._effect[#"hash_23f796cb2dcb35c3"] = # "hash_1dfbcfd9b38812ed";
-  level._effect[#"hash_3c9241be63bb503e"] = # "hash_56c34b9c914d89a7";
-  level._effect[#"hash_32278e3b7ad26e0"] = # "hash_1185a069551613dc";
-  level._effect[#"hash_3c9256be63bb73ed"] = # "maps/zm_red/fx8_soul_red";
-  level._effect[#"hash_70ef864effe35b13"] = # "maps/zm_red/fx8_soul_charge_red";
-  level._effect[#"hash_3c924bbe63bb613c"] = # "hash_36d2617efc112fc";
-  level._effect[#"hash_2c33b0af2f93389e"] = # "hash_7425021c14828449";
-  level._effect[#"gaia_sprout_fx"] = # "hash_4ee71079fa3bd589";
-  level._effect[#"hash_28b5e7d929f598ee"] = # "hash_7d10580c812fce51";
-  level._effect[#"hash_3f03e0537e170fc4"] = # "hash_647338beb2cb34ec";
+  level._effect[#"charon_hand_available"] = #"hash_13a5a3395df9015f";
+  level._effect[#"hemera_hand_available"] = #"hash_45df7abd6ad1c06";
+  level._effect[#"gaia_hand_available"] = #"hash_105b525291a60488";
+  level._effect[#"ouranos_hand_available"] = #"hash_7c755acc6547a0fd";
+  level._effect[#"hemera_source_glow"] = #"hash_7e62aa95417546aa";
+  level._effect[#"hemera_shrine_glow"] = #"hash_3a7504611a8ee7ef";
+  level._effect[#"hash_7ba74dab3ce4c1a9"] = #"hash_65d0dff5c51ac70d";
+  level._effect[#"hash_223052fa57a81234"] = #"hash_4bd8c2963780c080";
+  level._effect[#"hash_4982dd14ad4cfd2d"] = #"hash_7da081bd4cf99d11";
+  level._effect[#"hash_7bae59ab3ceaf4bb"] = #"hash_65d7cbf5c520c3bf";
+  level._effect[#"hash_22363efa57ac5be6"] = #"hash_4bdfce963786f392";
+  level._effect[#"hash_4989c914ad52f9df"] = #"hash_7da76dbd4cff99c3";
+  level._effect[#"hemera_bounce_glow"] = #"hash_281a29752dd70fec";
+  level._effect[#"hash_1ba95bf40a5e2422"] = #"hash_1a423b45182c5613";
+  level._effect[#"hash_3f63da724d02ddbd"] = #"hash_410c47b601f1eb2a";
+  level._effect[#"charon_portal_active"] = #"hash_a522275afc959a7";
+  level._effect[#"gaia_portal_active"] = #"hash_307731202349b92a";
+  level._effect[#"hash_1df737ccb8838bac"] = #"hash_2b910e77f63948fb";
+  level._effect[#"hash_4e4c7f6982d8ed31"] = #"hash_2fa2ffba30119b62";
+  level._effect[#"hash_19da57144416b720"] = #"hash_17e7186ea20ae80c";
+  level._effect[#"gaia_chaos_glow"] = #"hash_d0cf56779f6c4e1";
+  level._effect[#"gaia_chaos_destroy"] = #"hash_2c52af4b97cdbc0a";
+  level._effect[#"gaia_combat_fx"] = #"hash_569b6effe4db6f54";
+  level._effect[#"charon_combat_fx"] = #"hash_7b7ba0ac0755a064";
+  level._effect[#"hemera_combat_fx"] = #"hash_7e9736ee8b5ec443";
+  level._effect[#"ouranos_combat_fx"] = #"hash_194fead3457d21f5";
+  level._effect[#"hash_4024dfc409879380"] = #"hash_570e356dcecf7c0f";
+  level._effect[#"hash_18794d000c118e97"] = #"hash_131f7254a32ca20e";
+  level._effect[#"hash_799b84ee296b448d"] = #"hash_690957421115776c";
+  level._effect[#"hash_25540559b2b0c1b4"] = #"hash_3f2f5721b1727993";
+  level._effect[#"hash_3c9246be63bb58bd"] = #"hash_5199aa40f704fb10";
+  level._effect[#"hash_23f796cb2dcb35c3"] = #"hash_1dfbcfd9b38812ed";
+  level._effect[#"hash_3c9241be63bb503e"] = #"hash_56c34b9c914d89a7";
+  level._effect[#"hash_32278e3b7ad26e0"] = #"hash_1185a069551613dc";
+  level._effect[#"hash_3c9256be63bb73ed"] = #"maps/zm_red/fx8_soul_red";
+  level._effect[#"hash_70ef864effe35b13"] = #"maps/zm_red/fx8_soul_charge_red";
+  level._effect[#"hash_3c924bbe63bb613c"] = #"hash_36d2617efc112fc";
+  level._effect[#"hash_2c33b0af2f93389e"] = #"hash_7425021c14828449";
+  level._effect[#"gaia_sprout_fx"] = #"hash_4ee71079fa3bd589";
+  level._effect[#"hash_28b5e7d929f598ee"] = #"hash_7d10580c812fce51";
+  level._effect[#"hash_3f03e0537e170fc4"] = #"hash_647338beb2cb34ec";
   zm_sq_modules::function_d8383812(#"ww_sc_earth", 16000, #"ww_sc_g", 100, level._effect[#"hash_3c9241be63bb503e"], level._effect[#"hash_32278e3b7ad26e0"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"ww_sc_death", 16000, #"ww_sc_c", 100, level._effect[#"hash_3c9256be63bb73ed"], level._effect[#"hash_70ef864effe35b13"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"ww_sc_light", 16000, #"ww_sc_h", 100, level._effect[#"hash_3c924bbe63bb613c"], level._effect[#"hash_2c33b0af2f93389e"], undefined, undefined, 1);
@@ -105,11 +105,11 @@ function_91aa103(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 
   if(newval == 1) {
-    if(self.model !== # "p8_zm_red_gauntlet_handle") {
+    if(self.model !== #"p8_zm_red_gauntlet_handle") {
       util::lock_model(#"p8_zm_red_gauntlet_handle");
     }
 
-    if(self.model === # "p8_fxanim_zm_red_ww_vase_mod") {
+    if(self.model === #"p8_fxanim_zm_red_ww_vase_mod") {
       v_location = (self.origin[0], self.origin[1], self.origin[2] + 18);
       self.var_a7be4b54 = playFX(localclientnum, level._effect[#"hash_19da57144416b720"], v_location);
     } else {
@@ -119,7 +119,7 @@ function_91aa103(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     return;
   }
 
-  if(self.model === # "p8_zm_red_gauntlet_handle") {
+  if(self.model === #"p8_zm_red_gauntlet_handle") {
     util::unlock_model(#"p8_zm_red_gauntlet_handle");
   }
 }
@@ -275,13 +275,13 @@ function_b50a9153(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_d152d13c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    if(self.model === # "hash_31a411dafa5678e2") {
+    if(self.model === #"hash_31a411dafa5678e2") {
       self.var_97486d35 = playFX(localclientnum, level._effect[#"hash_1ba95bf40a5e2422"], self.origin);
-    } else if(self.model === # "p8_zm_red_rune_circle_ouranos") {
+    } else if(self.model === #"p8_zm_red_rune_circle_ouranos") {
       self.var_97486d35 = playFX(localclientnum, level._effect[#"hash_4e4c7f6982d8ed31"], self.origin);
-    } else if(self.model === # "p8_zm_red_rune_circle_gaia") {
+    } else if(self.model === #"p8_zm_red_rune_circle_gaia") {
       self.var_97486d35 = playFX(localclientnum, level._effect[#"hash_1df737ccb8838bac"], self.origin);
-    } else if(self.model === # "p8_zm_red_rune_circle_charron") {
+    } else if(self.model === #"p8_zm_red_rune_circle_charron") {
       self.var_97486d35 = playFX(localclientnum, level._effect[#"hash_3f63da724d02ddbd"], self.origin);
     }
 

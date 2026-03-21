@@ -256,8 +256,8 @@ function private _think() {
   while(level.object_descriptions.trace_dist > 0) {
     eye = self getplayercamerapos();
     eye_dir = anglesToForward(self getplayerangles());
-    text = # "";
-    var_36247bfb = # "";
+    text = #"";
+    var_36247bfb = #"";
 
     if(!namespace_61e6d095::exists(#"hint_tutorial") && !self flag::get(#"lockpicking") && function_185fc34e(eye, eye_dir)) {
       end = eye + eye_dir * level.object_descriptions.trace_dist;
@@ -290,8 +290,8 @@ function private _think() {
     if(var_ebb41806 !== text) {
       var_ebb41806 = text;
 
-      if(isDefined(data) && isDefined(var_ebb41806) && var_ebb41806 != # "") {
-        if(isDefined(var_36247bfb) && var_36247bfb != # "") {
+      if(isDefined(data) && isDefined(var_ebb41806) && var_ebb41806 != #"") {
+        if(isDefined(var_36247bfb) && var_36247bfb != #"") {
           namespace_61e6d095::set_text(#"object_descriptions", var_36247bfb);
           namespace_61e6d095::function_bfdab223(#"object_descriptions", text);
         } else if(data.var_774d5d03 == 3) {

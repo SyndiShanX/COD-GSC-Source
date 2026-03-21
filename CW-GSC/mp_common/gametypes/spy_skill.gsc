@@ -955,7 +955,7 @@ function function_ea44a840(skill) {
 }
 
 function function_d724b608(skill) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -976,7 +976,7 @@ function function_d724b608(skill) {
 }
 
 function function_c82e22aa(skill) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 

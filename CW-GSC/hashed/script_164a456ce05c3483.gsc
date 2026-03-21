@@ -518,13 +518,13 @@ function function_83fe843d(player) {
   i = 0;
 
   if(is_true(level.var_29628b5f)) {
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       return "blue";
-    } else if(self.team == # "axis") {
+    } else if(self.team == #"axis") {
       return "red";
-    } else if(self.team == # "team3") {
+    } else if(self.team == #"team3") {
       return "green";
-    } else if(self.team == # "team4") {
+    } else if(self.team == #"team4") {
       return "yellow";
     } else {
       return "yellow";
@@ -1602,7 +1602,7 @@ function function_12bdee53(clone, player) {
 
       headmodel = player startquantity();
 
-      if(isDefined(headmodel) && headmodel != # "tag_origin") {
+      if(isDefined(headmodel) && headmodel != #"tag_origin") {
         if(isDefined(clone.head)) {
           clone detach(clone.head);
         }
@@ -1612,7 +1612,7 @@ function function_12bdee53(clone, player) {
 
       var_b4d88433 = player function_cde23658();
 
-      if(isDefined(var_b4d88433) && var_b4d88433 != # "tag_origin") {
+      if(isDefined(var_b4d88433) && var_b4d88433 != #"tag_origin") {
         if(isDefined(clone.legs)) {
           clone detach(clone.legs);
         }
@@ -1622,7 +1622,7 @@ function function_12bdee53(clone, player) {
 
       var_1749f1e8 = player function_92ea4100();
 
-      if(isDefined(var_1749f1e8) && var_1749f1e8 != # "tag_origin") {
+      if(isDefined(var_1749f1e8) && var_1749f1e8 != #"tag_origin") {
         if(isDefined(clone.torso)) {
           clone detach(clone.torso);
         }
@@ -1652,15 +1652,15 @@ function function_f98b7b5f(player) {
     clone setModel(var_41206ae3);
   }
 
-  if(isDefined(headmodel) && headmodel != # "tag_origin") {
+  if(isDefined(headmodel) && headmodel != #"tag_origin") {
     clone attach(headmodel);
   }
 
-  if(isDefined(var_b4d88433) && var_b4d88433 != # "tag_origin") {
+  if(isDefined(var_b4d88433) && var_b4d88433 != #"tag_origin") {
     clone attach(var_b4d88433);
   }
 
-  if(isDefined(var_1749f1e8) && var_1749f1e8 != # "tag_origin") {
+  if(isDefined(var_1749f1e8) && var_1749f1e8 != #"tag_origin") {
     clone attach(var_1749f1e8);
   }
 

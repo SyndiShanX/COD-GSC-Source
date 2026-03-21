@@ -654,7 +654,7 @@ function function_547ca7d2(safehouse, var_fc9732a9 = 1) {
   mapbundle = function_2717b55f(safehouse);
   assert(isDefined(mapbundle) && isDefined(mapbundle.issafehouse));
 
-  if(safehouse == # "cp_ger_hub_post_cuba" || safehouse == # "cp_ger_hub8") {
+  if(safehouse == #"cp_ger_hub_post_cuba" || safehouse == #"cp_ger_hub8") {
     var_fc9732a9 = 0;
   }
 
@@ -1433,9 +1433,9 @@ function function_f3d2a1c3(e_player) {
     return "skipto_allies";
   }
 
-  if(e_player.team === # "axis") {
+  if(e_player.team === #"axis") {
     return "skipto_axis";
-  } else if(e_player.team === # "allies") {
+  } else if(e_player.team === #"allies") {
     return "skipto_allies";
   }
 
@@ -1643,7 +1643,7 @@ function function_6914f647() {
       mapbundle = function_2717b55f(missionname);
       missiondata = savegame::function_6440b06b(#"persistent", missionname);
 
-      if(isDefined(mapbundle) && is_true(mapbundle.issafehouse) && is_true(missiondata.unlocked) && missionname != # "cp_ger_hub_post_cuba" && missionname != # "cp_ger_hub8") {
+      if(isDefined(mapbundle) && is_true(mapbundle.issafehouse) && is_true(missiondata.unlocked) && missionname != #"cp_ger_hub_post_cuba" && missionname != #"cp_ger_hub8") {
         return missionname;
       }
     }
@@ -1655,15 +1655,15 @@ function function_6914f647() {
 function function_99ddd76d() {
   safehouse = function_6914f647();
 
-  if(safehouse == # "cp_ger_hub_post_yamantau") {
+  if(safehouse == #"cp_ger_hub_post_yamantau") {
     return 1;
   }
 
-  if(safehouse == # "cp_ger_hub_post_kgb") {
+  if(safehouse == #"cp_ger_hub_post_kgb") {
     return 2;
   }
 
-  assert(safehouse != # "cp_ger_hub_post_cuba" && safehouse != # "cp_ger_hub8");
+  assert(safehouse != #"cp_ger_hub_post_cuba" && safehouse != #"cp_ger_hub8");
   return 0;
 }
 
@@ -1761,7 +1761,7 @@ function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = fu
 
     if(var_9ba5cef7 != "") {
       var_43758eae = function_2717b55f(var_9ba5cef7);
-      var_5e7454e = is_true(var_43758eae.issafehouse) && var_9ba5cef7 != # "cp_ger_hub_post_cuba" && var_9ba5cef7 != # "cp_ger_hub8";
+      var_5e7454e = is_true(var_43758eae.issafehouse) && var_9ba5cef7 != #"cp_ger_hub_post_cuba" && var_9ba5cef7 != #"cp_ger_hub8";
     }
 
     if(!var_8e962e56) {
@@ -1793,7 +1793,7 @@ function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = fu
     function_4e3ab877(level.var_b28c2c3a);
   }
 
-  if(level.script === # "cp_ger_hub" || function_3b424100()) {
+  if(level.script === #"cp_ger_hub" || function_3b424100()) {
     activities::function_59e67711("_exit");
   }
 

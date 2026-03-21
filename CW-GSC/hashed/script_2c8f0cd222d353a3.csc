@@ -16,7 +16,7 @@ function on_player_spawned(local_client_num) {
 }
 
 function on_weapon_change(params) {
-  if(params.weapon.name == # "none") {
+  if(params.weapon.name == #"none") {
     return;
   }
 

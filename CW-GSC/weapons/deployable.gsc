@@ -35,11 +35,11 @@ function register_deployable(weapon, var_c0064c29, var_94b4fa08 = undefined, pla
     level._deployable_weapons = [];
   }
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
-  assert(weapon.name != # "none");
+  assert(weapon.name != #"none");
   level._deployable_weapons[weapon.statindex] = spawnStruct();
   level._deployable_weapons[weapon.statindex].var_159652c0 = &function_6654310c;
   level._deployable_weapons[weapon.statindex].var_9f2c21ea = var_c0064c29;

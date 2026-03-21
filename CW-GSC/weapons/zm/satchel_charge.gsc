@@ -26,13 +26,13 @@ function private preinit() {
 }
 
 function function_558ac85a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, boneindex, modelindex, surfacetype, vsurfacenormal) {
-  if(isentity(surfacetype) && isPlayer(vsurfacenormal) && self.zm_ai_category === # "normal") {
+  if(isentity(surfacetype) && isPlayer(vsurfacenormal) && self.zm_ai_category === #"normal") {
     self.var_8efbca7e = surfacetype.origin;
   }
 }
 
 function function_7c8d1738(params) {
-  if(params.weapon.name === # "satchel_charge" && isPlayer(params.eattacker) && self.zm_ai_category === # "normal" && isvec(self.var_8efbca7e)) {
+  if(params.weapon.name === #"satchel_charge" && isPlayer(params.eattacker) && self.zm_ai_category === #"normal" && isvec(self.var_8efbca7e)) {
     self namespace_cc411409::ragdoll_launch(self.var_8efbca7e, 2);
     self thread function_3fb4ce3b();
   }

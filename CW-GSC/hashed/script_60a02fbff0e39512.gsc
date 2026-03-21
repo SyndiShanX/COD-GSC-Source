@@ -59,7 +59,7 @@ function private event_handler[event_9673dc9a] function_3981d015(eventstruct) {
       continue;
     }
 
-    if(object.weapon.name == # "land_mine") {
+    if(object.weapon.name == #"land_mine") {
       object land_mine::function_338f99f5();
       continue;
     }
@@ -112,7 +112,7 @@ function function_160e40a2() {
               continue;
             }
 
-            if(dynent.script_noteworthy !== # "hash_4d1fb8524fdfd254") {
+            if(dynent.script_noteworthy !== #"hash_4d1fb8524fdfd254") {
               continue;
             }
 

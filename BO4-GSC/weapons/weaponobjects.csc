@@ -23,14 +23,14 @@ init_shared(friendly_rob, var_4885f19e) {
   clientfield::register("clientuimodel", "hudItems.proximityAlarm", 1, 3, "int", undefined, 0, 0);
   clientfield::register("missile", "friendlyequip", 1, 1, "int", &friendly_outline, 0, 1);
   clientfield::register("scriptmover", "friendlyequip", 1, 1, "int", &friendly_outline, 0, 0);
-  level._effect[#"powerlight"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"powerlight"] = #"weapon/fx8_equip_light_os";
 
   if(getgametypesetting(#"hash_48670d9509071424")) {
     level.var_58253868 = friendly_rob;
   }
 
   level.var_420d7d7e = var_4885f19e;
-  level.var_4de4699b = # "rob_sonar_set_enemy";
+  level.var_4de4699b = #"rob_sonar_set_enemy";
 
   if(!isDefined(level.retrievable)) {
     level.retrievable = [];
@@ -107,11 +107,11 @@ updateretrievable(local_client_num, newval) {
 }
 
 function_f89c4b81() {
-  if(isDefined(self.weapon) && self.weapon.statname == # "ac130") {
+  if(isDefined(self.weapon) && self.weapon.statname == #"ac130") {
     return false;
   }
 
-  if(isDefined(self.weapon) && self.weapon.statname == # "tr_flechette_t8") {
+  if(isDefined(self.weapon) && self.weapon.statname == #"tr_flechette_t8") {
     return false;
   }
 
@@ -128,7 +128,7 @@ enemyequip_changed(local_client_num, oldval, newval, bnewent, binitialsnap, fiel
 }
 
 function_6a5648dc(local_client_num, bundle) {
-  if(!self function_4e0ca360() || self.team === # "free") {
+  if(!self function_4e0ca360() || self.team === #"free") {
     return false;
   }
 
@@ -150,7 +150,7 @@ function_6a5648dc(local_client_num, bundle) {
 }
 
 function_232f3acf(local_client_num, bundle) {
-  if(self function_4e0ca360() && self.team !== # "free") {
+  if(self function_4e0ca360() && self.team !== #"free") {
     return false;
   }
 

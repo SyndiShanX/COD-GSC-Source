@@ -152,7 +152,7 @@ function_6fe1307b(weapon) {
 }
 
 blood_death_fx(var_14ef0a6c) {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     if(var_14ef0a6c) {
       self clientfield::increment("" + # "sword_pistol_slice_left", 1);
       return;
@@ -323,7 +323,7 @@ function_698ddbd9(weapon) {
   var_2069eb4c = zm_hero_weapon::function_7c3681f7();
   var_2069eb4c = arraysortclosest(var_2069eb4c, var_2ed6f142, undefined, undefined, var_2dfd6afd);
 
-  if(isDefined(a_beamtrace[#"entity"]) && a_beamtrace[#"entity"].zm_ai_category === # "inanimate" || isDefined(level.var_2c19331b) && isinarray(level.var_2c19331b, a_beamtrace[#"entity"])) {
+  if(isDefined(a_beamtrace[#"entity"]) && a_beamtrace[#"entity"].zm_ai_category === #"inanimate" || isDefined(level.var_2c19331b) && isinarray(level.var_2c19331b, a_beamtrace[#"entity"])) {
     a_beamtrace[#"entity"].b_is_valid_target = 1;
 
     if(!isDefined(var_2069eb4c)) {
@@ -546,7 +546,7 @@ function_698ddbd9(weapon) {
     var_2069eb4c = zm_hero_weapon::function_7c3681f7();
     var_2069eb4c = arraysortclosest(var_2069eb4c, var_2ed6f142, undefined, undefined, level.hero_weapon_stats[#"sword_pistol"][#"hash_634b06c9d5064145"]);
 
-    if(isDefined(a_trace) && isDefined(a_trace[#"entity"]) && function_ffa5b184(a_trace[#"entity"].zm_ai_category === # "inanimate")) {
+    if(isDefined(a_trace) && isDefined(a_trace[#"entity"]) && function_ffa5b184(a_trace[#"entity"].zm_ai_category === #"inanimate")) {
       if(!isDefined(var_2069eb4c)) {
         var_2069eb4c = [];
       } else if(!isarray(var_2069eb4c)) {
@@ -761,7 +761,7 @@ function_5c924730() {
       continue;
     }
 
-    if(a_ai_zombies[i].archetype !== # "zombie" && (!isDefined(level.var_2c19331b) || !isinarray(level.var_2c19331b, a_ai_zombies[i]))) {
+    if(a_ai_zombies[i].archetype !== #"zombie" && (!isDefined(level.var_2c19331b) || !isinarray(level.var_2c19331b, a_ai_zombies[i]))) {
       continue;
     }
 

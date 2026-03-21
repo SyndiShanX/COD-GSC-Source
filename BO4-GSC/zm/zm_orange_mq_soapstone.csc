@@ -11,8 +11,8 @@
 #namespace zm_orange_mq_soapstone;
 
 preload() {
-  level._effect[#"soapstone_cold"] = # "hash_75215ea3c21f31d3";
-  level._effect[#"soapstone_hot"] = # "hash_7cdf08df557a9b3f";
+  level._effect[#"soapstone_cold"] = #"hash_75215ea3c21f31d3";
+  level._effect[#"soapstone_hot"] = #"hash_7cdf08df557a9b3f";
   init_clientfields();
 }
 

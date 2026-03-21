@@ -95,7 +95,7 @@ function_7c4ef26b(predictedspawn) {
   self thread ct_core::function_d2845186();
   spawning::onspawnplayer(predictedspawn);
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(isDefined(level.var_f78f9034)) {
       self thread function_6b37f8a5();
     }
@@ -114,7 +114,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       self thread ct_utils::function_ee4639dd(-10);
     }
@@ -122,7 +122,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(isPlayer(einflictor) && einflictor.team == # "allies") {
+  if(isPlayer(einflictor) && einflictor.team == #"allies") {
     einflictor thread ct_utils::function_d471f8fa(5, undefined, 1);
 
     if(isDefined(level.var_93f322c9) && level.var_93f322c9) {

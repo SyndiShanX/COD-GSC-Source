@@ -664,7 +664,7 @@ function function_26a6d33c() {
   a_aoe_ai = arraysortclosest(a_ai, self.origin, a_ai.size, 0, 200);
 
   foreach(ai in a_aoe_ai) {
-    if(isactor(ai) && isalive(ai) && ai.zm_ai_category === # "normal") {
+    if(isactor(ai) && isalive(ai) && ai.zm_ai_category === #"normal") {
       ai.marked_for_recycle = 1;
       ai.has_been_damaged_by_player = 0;
       ai dodamage(ai.health, self.origin, self);
@@ -900,13 +900,13 @@ function function_8bc73ff9() {
       switch (var_12a9e30a.var_6032cf15) {
         case 1:
         default:
-          str_level = # "armor_item_lv1_t9_sr";
+          str_level = #"armor_item_lv1_t9_sr";
           break;
         case 2:
-          str_level = # "armor_item_lv2_t9_sr";
+          str_level = #"armor_item_lv2_t9_sr";
           break;
         case 3:
-          str_level = # "armor_item_lv2_t9_sr";
+          str_level = #"armor_item_lv2_t9_sr";
           break;
       }
 

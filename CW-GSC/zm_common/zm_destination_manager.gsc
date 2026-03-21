@@ -40,7 +40,7 @@ function private finalize() {
 
 function function_123b048f(var_8a952bed) {
   assert(isDefined(var_8a952bed), "<dev string:x38>");
-  assert(var_8a952bed.variantname == # "content_destination", "<dev string:x38>");
+  assert(var_8a952bed.variantname == #"content_destination", "<dev string:x38>");
   level.contentmanager.var_5f2429b1 = var_8a952bed;
 }
 
@@ -88,7 +88,7 @@ function function_e4254bac(destination, var_f281f968) {
   locations = array::randomize(content_manager::get_children(destination));
 
   for(i = 0; i < locations.size; i++) {
-    if(locations[i].variantname !== # "content_location") {
+    if(locations[i].variantname !== #"content_location") {
       arrayremoveindex(locations, i, 1);
     }
   }
@@ -99,7 +99,7 @@ function function_e4254bac(destination, var_f281f968) {
     instances = array::randomize(content_manager::get_children(location));
 
     foreach(instance in instances) {
-      if(instance.content_script_name === # "start_spawn" && instance.script_int === var_f281f968) {
+      if(instance.content_script_name === #"start_spawn" && instance.script_int === var_f281f968) {
         return instance;
       }
     }

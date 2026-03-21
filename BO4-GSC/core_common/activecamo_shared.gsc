@@ -180,7 +180,7 @@ function_3aa81e0e(activecamoinfo) {
           activecamoname = getactivecamo(stage.var_19b6044e);
           var_31567a86 = undefined;
 
-          if(isDefined(activecamoname) && activecamoname != # "") {
+          if(isDefined(activecamoname) && activecamoname != #"") {
             var_31567a86 = getscriptbundle(activecamoname);
           }
 
@@ -225,7 +225,7 @@ weapon_get_activecamo(weapon, b_has_weapon = 1) {
   camoindex = getcamoindex(weaponoptions);
   activecamoname = getactivecamo(camoindex);
 
-  if(isDefined(activecamoname) && activecamoname != # "") {
+  if(isDefined(activecamoname) && activecamoname != #"") {
     activecamoinfo = getscriptbundle(activecamoname);
   }
 
@@ -439,25 +439,25 @@ function_938534a8(permanentstatname) {
 
   switch (permanentstatname) {
     case # "hash_3d392c6f96aa2ac1":
-      var_19ef0b8d = # "camo_active_ar_accurate_base";
+      var_19ef0b8d = #"camo_active_ar_accurate_base";
       break;
     case # "hash_9da725fe15aa048":
-      var_19ef0b8d = # "camo_active_ar_fastfire_base";
+      var_19ef0b8d = #"camo_active_ar_fastfire_base";
       break;
     case # "hash_5cf945d7954a39e0":
-      var_19ef0b8d = # "camo_active_lmg_standard_base";
+      var_19ef0b8d = #"camo_active_lmg_standard_base";
       break;
     case # "hash_1ffb9d5647330a52":
-      var_19ef0b8d = # "camo_active_pistol_standard_base";
+      var_19ef0b8d = #"camo_active_pistol_standard_base";
       break;
     case # "hash_6ed19b98000fb441":
-      var_19ef0b8d = # "camo_active_shotgun_semiauto_base";
+      var_19ef0b8d = #"camo_active_shotgun_semiauto_base";
       break;
     case # "hash_4b703056e870752e":
-      var_19ef0b8d = # "camo_active_smg_accurate_base";
+      var_19ef0b8d = #"camo_active_smg_accurate_base";
       break;
     case # "hash_207f20afd71816c":
-      var_19ef0b8d = # "camo_active_smg_standard_base";
+      var_19ef0b8d = #"camo_active_smg_standard_base";
       break;
     default:
       break;
@@ -618,13 +618,13 @@ function_896ac347(oweapon, statname, value) {
             }
 
             if(sessionmodeismultiplayergame()) {
-              if(activecamoinfo.name == # "activecamoinfo_t8_darkmatter") {
+              if(activecamoinfo.name == #"activecamoinfo_t8_darkmatter") {
                 if(stagenum == 1 && stage.var_dd54a13b[activecamo.baseweapon].statvalue == 5) {
                   self stats::function_dad108fa(#"hash_51eff59939399dc9", 1);
                 } else if(stagenum == 5 && stage.var_dd54a13b[activecamo.baseweapon].statvalue == 5) {
                   self function_c0fa0ecb(weapon);
                 }
-              } else if(activecamoinfo.name == # "activecamoinfo_t8_gold") {
+              } else if(activecamoinfo.name == #"activecamoinfo_t8_gold") {
                 if(stagenum == 1 && stage.var_dd54a13b[activecamo.baseweapon].statvalue == 1) {
                   self stats::function_dad108fa(#"hash_354bfe5c140365bf", 1);
                 }
@@ -647,7 +647,7 @@ function_896ac347(oweapon, statname, value) {
         }
       }
 
-      if(statname == # "kills") {
+      if(statname == #"kills") {
         self function_36feaf9e(activecamo, value, activecamo.weapon);
       }
     }

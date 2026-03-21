@@ -144,7 +144,7 @@ function private function_beea5074() {
 
   if(isDefined(eattacker) && eattacker != self) {
     if(!isDefined(einflictor) || !isai(einflictor) || isvehicle(einflictor) && einflictor getseatoccupant(0) === eattacker) {
-      if(idamage > 0 && !same_team && self.team != # "neutral" && shitloc !== "riotshield") {
+      if(idamage > 0 && !same_team && self.team != #"neutral" && shitloc !== "riotshield") {
         fatal = var_24c578bc && self.health <= 0;
         eattacker thread damagefeedback::update(smeansofdeath, einflictor, undefined, weapon, self, undefined, shitloc, fatal);
       }

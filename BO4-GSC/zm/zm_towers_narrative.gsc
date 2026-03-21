@@ -250,47 +250,47 @@ function_b116e882(var_237f80b0, var_54bb7f87, var_5876458) {
     switch (var_237f80b0) {
       case 0:
         if(var_54bb7f87 == 0) {
-          var_d34b6d2b = # "hash_1ac8c014caa1f64d";
+          var_d34b6d2b = #"hash_1ac8c014caa1f64d";
         }
 
         if(var_54bb7f87 == 1) {
-          var_d34b6d2b = # "hash_4e8555d4b9f67fb5";
+          var_d34b6d2b = #"hash_4e8555d4b9f67fb5";
         }
 
         if(var_54bb7f87 == 3) {
-          var_d34b6d2b = # "hash_4e8552d4b9f67a9c";
+          var_d34b6d2b = #"hash_4e8552d4b9f67a9c";
         }
 
         if(var_54bb7f87 == 4) {
-          var_d34b6d2b = # "hash_4e8553d4b9f67c4f";
+          var_d34b6d2b = #"hash_4e8553d4b9f67c4f";
         }
 
         break;
       case 2:
         if(var_54bb7f87 == 9) {
-          var_d34b6d2b = # "hash_70155a583c7b3ae2";
+          var_d34b6d2b = #"hash_70155a583c7b3ae2";
         }
 
         if(var_54bb7f87 == 11) {
-          var_d34b6d2b = # "hash_701559583c7b392f";
+          var_d34b6d2b = #"hash_701559583c7b392f";
         }
 
         if(var_54bb7f87 == 12) {
-          var_d34b6d2b = # "hash_701558583c7b377c";
+          var_d34b6d2b = #"hash_701558583c7b377c";
         }
 
         if(var_54bb7f87 == 13) {
-          var_d34b6d2b = # "hash_701557583c7b35c9";
+          var_d34b6d2b = #"hash_701557583c7b35c9";
         }
 
         if(var_54bb7f87 == 14) {
-          var_d34b6d2b = # "hash_701556583c7b3416";
+          var_d34b6d2b = #"hash_701556583c7b3416";
         }
 
         break;
       case 3:
         if(var_54bb7f87 == 2) {
-          var_d34b6d2b = # "hash_481d86c03825cd82";
+          var_d34b6d2b = #"hash_481d86c03825cd82";
         }
 
         break;
@@ -774,7 +774,7 @@ function_d6357bd4(s_params) {
   str_mod = s_params.smeansofdeath;
   var_10280e3c = getent("e_challenge_center_stage", "targetname");
 
-  if(self.archetype == # "blight_father" && isDefined(self.var_2c2980d3) && self.var_2c2980d3 && self istouching(var_10280e3c) && isPlayer(e_player) && e_player istouching(var_10280e3c) && str_mod === "MOD_UNKNOWN" && isDefined(e_player.var_a70d2cfe) && e_player.var_a70d2cfe) {
+  if(self.archetype == #"blight_father" && isDefined(self.var_2c2980d3) && self.var_2c2980d3 && self istouching(var_10280e3c) && isPlayer(e_player) && e_player istouching(var_10280e3c) && str_mod === "MOD_UNKNOWN" && isDefined(e_player.var_a70d2cfe) && e_player.var_a70d2cfe) {
     level flag::set(#"hash_7b6594521dfb7bb1");
   }
 }

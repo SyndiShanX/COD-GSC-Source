@@ -568,7 +568,7 @@ node_get(player) {
       return undefined;
     }
 
-    if(node.type == # "path") {
+    if(node.type == #"path") {
       draw_pathnode(node, (1, 0, 1));
       continue;
     }

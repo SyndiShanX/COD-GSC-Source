@@ -320,7 +320,7 @@ function_e31c5d7a() {
   self endon(#"death");
 
   if(isDefined(level.var_d6d98fbe) && level.var_d6d98fbe) {
-    if(self.team == # "axis") {
+    if(self.team == #"axis") {
       self thread ct_utils::function_8963dae3();
     }
   }

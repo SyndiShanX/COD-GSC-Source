@@ -1867,8 +1867,8 @@ function function_c8ac96b3() {
     thread namespace_5ceacc03::function_271bf326();
     level scene::play("scene_z_stk_apt_plant_tracker", "start");
     level thread scene::play("scene_z_stk_apt_plant_tracker", "loop");
-    var_6e695d6d = # "hash_1be67a050a98eb";
-    var_314be333 = # "hash_1be77a050a9a9e";
+    var_6e695d6d = #"hash_1be67a050a98eb";
+    var_314be333 = #"hash_1be77a050a9a9e";
     var_87b83dca = dialog_tree::new_tree(undefined, undefined, 1, 1);
     var_dfc957f2 = var_87b83dca dialog_tree::add_option(var_6e695d6d, undefined, undefined, undefined, 1, "flag_close_briefcase");
     var_ed08f271 = var_87b83dca dialog_tree::add_option(var_314be333, undefined, undefined, undefined, 1, "flag_close_briefcase");

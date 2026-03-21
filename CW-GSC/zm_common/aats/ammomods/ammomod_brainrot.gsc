@@ -75,14 +75,14 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "elite" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"elite" || self.zm_ai_category === #"boss") {
     return;
   }
 
   aat_name = var_fd90b0bb aat::getaatonweapon(vpoint, 1);
   tier = function_76ade8b5(aat_name);
 
-  if(tier < 4 && self.zm_ai_category === # "special") {
+  if(tier < 4 && self.zm_ai_category === #"special") {
     return;
   }
 
@@ -90,7 +90,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
   playFX("zm_weapons/fx9_aat_bul_impact_corrosive", boneindex);
   var_fd90b0bb zm_utility::function_5d356609(aat_name, tier);
 
-  if(self.zm_ai_category === # "special") {
+  if(self.zm_ai_category === #"special") {
     if(tier >= 3) {
       self thread function_c81ac3e5(var_fd90b0bb, vpoint, shitloc, tier);
     }
@@ -98,13 +98,13 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "normal") {
+  if(self.zm_ai_category === #"normal") {
     self thread function_c81ac3e5(var_fd90b0bb, vpoint, shitloc, tier);
   }
 }
 
 function function_c81ac3e5(attacker, weapon, var_fd90b0bb, tier) {
-  if(self.zm_ai_category === # "elite" || self.zm_ai_category === # "boss" || self.zm_ai_category === # "inanimate") {
+  if(self.zm_ai_category === #"elite" || self.zm_ai_category === #"boss" || self.zm_ai_category === #"inanimate") {
     return;
   }
 
@@ -115,12 +115,12 @@ function function_c81ac3e5(attacker, weapon, var_fd90b0bb, tier) {
     #eattacker: attacker
   });
   self.aat_turned = 1;
-  self.team = # "allies";
+  self.team = #"allies";
   self.n_aat_turned_zombie_kills = 0;
   self thread function_589926fd();
   max_health = self.maxhealth;
 
-  if(self.archetype == # "zombie_dog") {
+  if(self.archetype == #"zombie_dog") {
     if(isDefined(level.var_41dd92fd[#"zombie"])) {
       max_health = level.var_41dd92fd[#"zombie"].health;
     }
@@ -141,7 +141,7 @@ function function_c81ac3e5(attacker, weapon, var_fd90b0bb, tier) {
   self.allowpain = 0;
   self.b_ignore_cleanup = 1;
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     self zombie_utility::set_zombie_run_cycle_override_value("super_sprint");
 
     if(math::cointoss()) {
@@ -303,7 +303,7 @@ function zombie_death_time_limit(e_attacker, weapon, var_fd90b0bb, tier) {
   if(isalive(self)) {
     self.takedamage = 1;
     self.allowdeath = 1;
-    self.team = # "axis";
+    self.team = #"axis";
     self.var_18b53286 = 1;
     self zombie_death_explosion(var_8651a024, e_attacker, weapon, var_fd90b0bb, tier);
     self zombie_death_gib(e_attacker, weapon, var_fd90b0bb);
@@ -372,7 +372,7 @@ function zombie_death_explosion(var_3a5b1930, e_attacker, weapon, var_fd90b0bb, 
 
     if(tier >= 5) {
       if(var_5bb9cba5 < var_a374f6da) {
-        if(isDefined(a_ai_zombies[i].zm_ai_category) && a_ai_zombies[i].zm_ai_category != # "elite") {
+        if(isDefined(a_ai_zombies[i].zm_ai_category) && a_ai_zombies[i].zm_ai_category != #"elite") {
           a_ai_zombies[i] function_c81ac3e5(e_attacker, weapon, var_fd90b0bb, 3);
           var_5bb9cba5++;
         }
@@ -394,8 +394,8 @@ function zombie_kill_tracker(e_attacker) {
   var_a57adbdc = 1;
 
   while(self.n_aat_turned_zombie_kills < 6) {
-    if(!isDefined(self.favoriteenemy) && self.archetype != # "zombie_dog" && isPlayer(self.var_443d78cc)) {
-      if(self.zm_ai_category === # "normal") {
+    if(!isDefined(self.favoriteenemy) && self.archetype != #"zombie_dog" && isPlayer(self.var_443d78cc)) {
+      if(self.zm_ai_category === #"normal") {
         self.favoriteenemy = self.var_443d78cc;
       }
     }

@@ -146,19 +146,19 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
 
   switch (bwastimejump) {
     case 0:
-      str_model = # "p9_sur_machine_computer_screen_off";
+      str_model = #"p9_sur_machine_computer_screen_off";
       break;
     case 1:
-      str_model = # "hash_3408d07d4023960a";
+      str_model = #"hash_3408d07d4023960a";
       break;
     case 2:
-      str_model = # "hash_22c3f2b14a8af39";
+      str_model = #"hash_22c3f2b14a8af39";
       break;
     case 3:
-      str_model = # "hash_78d1631457df7faa";
+      str_model = #"hash_78d1631457df7faa";
       break;
     case 4:
-      str_model = # "hash_51840445e2753066";
+      str_model = #"hash_51840445e2753066";
       break;
     case 5:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d");
@@ -169,7 +169,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
 
       break;
     case 6:
-      str_model = # "hash_75170f904e96e8ef";
+      str_model = #"hash_75170f904e96e8ef";
       break;
     case 7:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d", #"audiolog");
@@ -180,7 +180,7 @@ function function_b5557b14(localclientnum, oldval, newval, bnewent, binitialsnap
 
       break;
     case 8:
-      str_model = # "p9_sur_machine_computer_screen_no_radio";
+      str_model = #"p9_sur_machine_computer_screen_no_radio";
       break;
     case 9:
       var_d5fa8477 = self zm_intel::function_2bcfd899(fieldname, #"hash_71c51f24f7f3037d");

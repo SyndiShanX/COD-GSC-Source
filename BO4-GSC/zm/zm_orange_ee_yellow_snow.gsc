@@ -169,7 +169,7 @@ function_f77c5d83() {
   while(!b_hidden) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon.name === # "snowball" || s_result.weapon.name === # "snowball_upgraded") {
+    if(s_result.weapon.name === #"snowball" || s_result.weapon.name === #"snowball_upgraded") {
       level.var_c2dce33e -= 1;
       self hide();
       self setCanDamage(0);

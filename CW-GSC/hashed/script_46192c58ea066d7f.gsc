@@ -116,11 +116,11 @@ function function_d5766919(var_4c42f7cf) {
       killstreaks::take(killstreakbundle.kstype);
       var_f8ffe143 = 0;
 
-      if(killstreakbundle.ksinventoryweapon.name == # "inventory_recon_car") {
+      if(killstreakbundle.ksinventoryweapon.name == #"inventory_recon_car") {
         if(self hasweapon(killstreakbundle.ksweapon)) {
           var_f8ffe143 = 1;
         }
-      } else if(killstreakbundle.ksinventoryweapon.name == # "inventory_planemortar") {
+      } else if(killstreakbundle.ksinventoryweapon.name == #"inventory_planemortar") {
         ammo = isDefined(self.pers[#"hash_1aaccfe69e328d6e"][3]) ? self.pers[#"hash_1aaccfe69e328d6e"][3] : 3;
       }
 

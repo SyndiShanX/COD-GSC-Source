@@ -1506,7 +1506,7 @@ class csceneobject {
         if(is_true(_s.var_8a65366f)) {
           _e setvisibletoall();
         } else if(!is_true(_s.var_186d089d)) {
-          if(sessionmodeismultiplayergame() && (_e.team == # "allies" || _e.team == # "axis")) {
+          if(sessionmodeismultiplayergame() && (_e.team == #"allies" || _e.team == #"axis")) {
             _e setvisibletoallexceptteam(util::getotherteam(_e.team));
           } else {
             _e setvisibletoteam(_e.team);
@@ -1518,7 +1518,7 @@ class csceneobject {
         if(_o_scene._str_team === "any" || is_true(_o_scene._b_testing) || is_true(_s.var_8a65366f)) {
           _e setvisibletoall();
         } else if(isarray(level.teams) && isDefined(_o_scene._str_team) && isinarray(getarraykeys(level.teams), hash(_o_scene._str_team))) {
-          if(sessionmodeismultiplayergame() && (_o_scene._str_team == # "allies" || _o_scene._str_team == # "axis")) {
+          if(sessionmodeismultiplayergame() && (_o_scene._str_team == #"allies" || _o_scene._str_team == #"axis")) {
             _e setvisibletoallexceptteam(util::getotherteam(_o_scene._str_team));
           } else {
             _e setvisibletoteam(_o_scene._str_team);

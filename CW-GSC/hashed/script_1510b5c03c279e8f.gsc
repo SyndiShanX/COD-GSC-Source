@@ -346,7 +346,7 @@ function function_c7208b7d(enemy) {
     self asmrequestsubstate("fire@stationary");
     timedout = self waittilltimeout(5, #"spider_fire");
 
-    if(timedout._notify !== # "timeout") {
+    if(timedout._notify !== #"timeout") {
       self fireweapon();
       self util::cooldown("rocket", 3);
       self vehicle_ai::waittill_asm_complete("fire@stationary", 5);
@@ -569,7 +569,7 @@ function function_f7dc8837(enemy) {
   self asmrequestsubstate("melee@stationary");
   timedout = self waittilltimeout(3, #"spider_melee");
 
-  if(timedout._notify !== # "timeout") {
+  if(timedout._notify !== #"timeout") {
     if(isalive(enemy) && distance2dsquared(self.origin, enemy.origin) < sqr(60)) {
       enemy dodamage(100, self.origin, self, self);
     }

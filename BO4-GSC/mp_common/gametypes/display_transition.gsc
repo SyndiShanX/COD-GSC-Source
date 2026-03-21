@@ -465,7 +465,7 @@ function_40a46b5b(transition, outcome) {
   }
 
   if(transition.type == "team_pose") {
-    if(outcome.team == # "free") {
+    if(outcome.team == #"free") {
       return true;
     }
 

@@ -158,9 +158,9 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
   }
 
   if(weapon.isemp && isDefined(self.type) && self.type == "robot") {
-    if(weapon.name == # "emp_grenade") {
+    if(weapon.name == #"emp_grenade") {
       self.var_e6e7d1c1 = self.idflagstime;
-    } else if(weapon.name == # "hash_8820860b9c7d979" || weapon.name == # "hash_294001bc58d294f8") {
+    } else if(weapon.name == #"hash_8820860b9c7d979" || weapon.name == #"hash_294001bc58d294f8") {
       self.var_cc76f50a = self.idflagstime;
     }
   }
@@ -190,7 +190,7 @@ function callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofd
 
     if(isDefined(eattacker) && eattacker != self) {
       if(!isDefined(einflictor) || !isai(einflictor) || isvehicle(einflictor) && einflictor getseatoccupant(0) === eattacker) {
-        if(idamage > 0 && !same_team && self.team != # "neutral" && shitloc !== "riotshield" && self.health - idamage > 0) {
+        if(idamage > 0 && !same_team && self.team != #"neutral" && shitloc !== "riotshield" && self.health - idamage > 0) {
           eattacker thread damagefeedback::update(smeansofdeath, einflictor, undefined, weapon, self, psoffsettime, shitloc, 0);
         }
       }
@@ -229,7 +229,7 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
 
   if(isDefined(eattacker) && eattacker != self) {
     if(!isDefined(einflictor) || !isai(einflictor) || isvehicle(einflictor) && einflictor getseatoccupant(0) === eattacker) {
-      if(idamage > 0 && self.team != eattacker.team && self.team != # "neutral" && shitloc !== "riotshield") {
+      if(idamage > 0 && self.team != eattacker.team && self.team != #"neutral" && shitloc !== "riotshield") {
         eattacker thread damagefeedback::update(smeansofdeath, einflictor, undefined, weapon, self, psoffsettime, shitloc, 1);
       }
     }
@@ -279,7 +279,7 @@ function callback_actorkilled(einflictor, eattacker, idamage, smeansofdeath, wea
     }
 
     if(isDefined(weapon)) {
-      if(weapon.name == # "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+      if(weapon.name == #"remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
         if(!isDefined(player.remotemissilebda)) {
           player.remotemissilebda = 0;
         }

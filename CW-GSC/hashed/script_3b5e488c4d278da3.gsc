@@ -35,27 +35,27 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  if((is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) || getdvarint(#"hash_40bd34b35079cf2e", 0) > 0) && (zm_utility::is_classic() || util::get_game_type() === # "zholiday")) {
+  if((is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) || getdvarint(#"hash_40bd34b35079cf2e", 0) > 0) && (zm_utility::is_classic() || util::get_game_type() === #"zholiday")) {
     setDvar(#"hash_34cae673a047c202", 1);
   }
 }
 
 function init() {
-  if((is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) || getdvarint(#"hash_40bd34b35079cf2e", 0) > 0) && (zm_utility::is_classic() || util::get_game_type() === # "zholiday")) {
+  if((is_true(getgametypesetting(#"hash_7e8e34cc69a77e0b")) || getdvarint(#"hash_40bd34b35079cf2e", 0) > 0) && (zm_utility::is_classic() || util::get_game_type() === #"zholiday")) {
     namespace_679a22ba::function_3ba2f5dd(#"hash_9c00f9e4e4bd95a", #"silver_ai_zombie_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_539facc2c096b82", #"silver_ai_zombie_heavy_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_208e2483f559ccd2", #"silver_ai_dog_xmas");
     namespace_679a22ba::function_3ba2f5dd(#"hash_47bae14a2b1b4511", #"silver_ai_zombie_mega_xmas");
     level.var_8f576c00 = [#"hash_5214ebcccbd95a36": # "hash_796dff2ea842c1ac", #"hash_19ef16d1ba01a5": # "hash_7725a0435b44b1e5", #"hash_12a17ab3df5889eb": # "hash_2792674ef4fce09f", #"hash_53f4e0daa341a161": # "hash_156c697af81feaf9", #"spawner_zm_steiner": # "hash_43b8d4f24851653e", #"hash_7f957e36b4f6160f": # "hash_5e24e4aa952bb1bb", #"spawner_zm_steiner_split_radiation_blast": # "hash_2c0da7720a1c2f90", #"hash_6904f5c7bef64405": # "hash_1d599c94a087ca05", #"spawner_zm_steiner_split_radiation_bomb": # "hash_16d309f1ce9e015a"];
     level.overridezombiespawn = &function_767a6a84;
-    level.var_9d098364 = # "hash_43b8d4f24851653e";
-    level.var_c42bdd1b = # "hash_2c0da7720a1c2f90";
-    level.var_dc38daf = # "hash_16d309f1ce9e015a";
-    level.var_d3d40dcb = # "hash_156c697af81feaf9";
-    level.var_68b26ea = # "hash_2c0da7720a1c2f90";
-    level.var_887c5017 = # "hash_16d309f1ce9e015a";
-    level.var_9e513533 = # "c_t9_zmb_zombie_heavy_helmet_xmas";
-    level.var_eea9f85a = # "c_t9_zmb_zombie_heavy_torso_armor_xmas";
+    level.var_9d098364 = #"hash_43b8d4f24851653e";
+    level.var_c42bdd1b = #"hash_2c0da7720a1c2f90";
+    level.var_dc38daf = #"hash_16d309f1ce9e015a";
+    level.var_d3d40dcb = #"hash_156c697af81feaf9";
+    level.var_68b26ea = #"hash_2c0da7720a1c2f90";
+    level.var_887c5017 = #"hash_16d309f1ce9e015a";
+    level.var_9e513533 = #"c_t9_zmb_zombie_heavy_helmet_xmas";
+    level.var_eea9f85a = #"c_t9_zmb_zombie_heavy_torso_armor_xmas";
     level.var_1a4cc228[#"hash_796dff2ea842c1ac"] = [#"hash_7f5ab1dc6cfb5e8b", #"hash_7d3fe2134df8b974", #"hash_7808152e8467362f", #"hash_50645fbb1e049528", #"hash_4cc6bea1049efc55", #"hash_9c9737cf22069a5", #"hash_55cd178e8d6db2aa"];
     level.var_1a4cc228[#"hash_2792674ef4fce09f"] = [#"hash_7247a6e723dbd7ab"];
     level.var_1a4cc228[#"hash_2c0da7720a1c2f90"] = [#"hash_78bcaad275fa3c26"];
@@ -465,7 +465,7 @@ function function_4d68903d(zone) {
   snowman.zone.var_e600b8df++;
   snowman.spawn_time = gettime();
   snowman.var_5d6eb0f1 = 1;
-  snowman.rattle_sound = # "hash_52c65a6a82b13cfd";
+  snowman.rattle_sound = #"hash_52c65a6a82b13cfd";
   snowman disconnectpaths();
   snowman solid();
   snowman setCanDamage(1);
@@ -671,7 +671,7 @@ function function_96244838(weapon, attacker) {
 }
 
 function on_ai_damaged(params) {
-  if(params.weapon.name === # "snowball" && !(self.zm_ai_category === # "elite")) {
+  if(params.weapon.name === #"snowball" && !(self.zm_ai_category === #"elite")) {
     if(!isDefined(self.var_2b2c16c7)) {
       self.var_2b2c16c7 = {};
     }

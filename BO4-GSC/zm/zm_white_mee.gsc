@@ -225,7 +225,7 @@ function_ce7e594b() {
 
 function_5b685950() {
   var_8ce4094 = level.var_e80139f === 3;
-  zm_weap_chakram_melee_hit_rumblemembers = self.weapon.name === # "galvaknuckles_t8";
+  zm_weap_chakram_melee_hit_rumblemembers = self.weapon.name === #"galvaknuckles_t8";
   return var_8ce4094 && !zm_weap_chakram_melee_hit_rumblemembers;
 }
 
@@ -252,7 +252,7 @@ function_8d3f2364(waitresult) {
     return;
   } else if(level.var_e80139f === 0) {
     if(waitresult.mod === "MOD_MELEE") {
-      if(waitresult.weapon.name === # "galvaknuckles_t8") {
+      if(waitresult.weapon.name === #"galvaknuckles_t8") {
         level.var_e80139f = 3;
         zm_sq::start(#"mee_galvaknuckle");
 
@@ -410,7 +410,7 @@ function_edcadf04() {
     if(self.male_head) {
       head_model = "p8_zm_white_mannequin_male_01_head_dyn";
 
-      if(self.model == # "c_t8_zmb_dlc3_mannequin_male_damage_head_2") {
+      if(self.model == #"c_t8_zmb_dlc3_mannequin_male_damage_head_2") {
         head_model = "c_t8_zmb_dlc3_mannequin_male_damage_head_2_dyn";
       }
     }
@@ -695,7 +695,7 @@ function_800ff39e() {
   level.e_weeper.var_72411ccf = &function_589845fe;
   level.e_weeper val::set(#"mee_2", "takedamage", 0);
   level.e_weeper val::set(#"mee_2", "ignoreme", 1);
-  level.e_weeper.team = # "team3";
+  level.e_weeper.team = #"team3";
   var_83302022 = getent("t_mee_2_activate", "targetname");
   level thread trigger::look_trigger(var_83302022);
   waitresult = var_83302022 waittill(#"trigger_look");
@@ -713,7 +713,7 @@ function_800ff39e() {
   level.e_partner thread function_6fa00342(level.e_weeper);
   s_goal = struct::get("s_mee_2_goalPos", "targetname");
   level.e_weeper.var_3d366381 = getclosestpointonnavmesh(s_goal.origin, 32);
-  level.e_weeper.team = # "allies";
+  level.e_weeper.team = #"allies";
   level.e_weeper zombie_utility::set_zombie_run_cycle("run");
   level.e_weeper.var_72411ccf = &function_589845fe;
 

@@ -856,7 +856,7 @@ get_trap_array(trap_type) {
   return traps;
 }
 
-trap_disable(var_ccf895cc = # "zombie/trap_locked") {
+trap_disable(var_ccf895cc = #"zombie/trap_locked") {
   if(!(isDefined(self.var_b3166dc1) && self.var_b3166dc1)) {
     return;
   }
@@ -881,7 +881,7 @@ trap_disable(var_ccf895cc = # "zombie/trap_locked") {
   self trap_set_string(var_ccf895cc);
 }
 
-trap_enable(var_f9afc2b3 = # "hash_23c1c09e94181fdb", var_b8c50025 = # "hash_6e8ef1b690e98e51") {
+trap_enable(var_f9afc2b3 = #"hash_23c1c09e94181fdb", var_b8c50025 = #"hash_6e8ef1b690e98e51") {
   if(!(isDefined(self.var_b3166dc1) && self.var_b3166dc1)) {
     return;
   }
@@ -897,7 +897,7 @@ trap_enable(var_f9afc2b3 = # "hash_23c1c09e94181fdb", var_b8c50025 = # "hash_6e8
   self trap_lights_green();
 }
 
-function_6966417b(var_ccf895cc = # "zombie/trap_locked") {
+function_6966417b(var_ccf895cc = #"zombie/trap_locked") {
   a_t_traps = getEntArray("zombie_trap", "targetname");
 
   foreach(t_trap in a_t_traps) {
@@ -907,7 +907,7 @@ function_6966417b(var_ccf895cc = # "zombie/trap_locked") {
   level.var_4f7df1ac = 1;
 }
 
-function_9d0c9706(var_f9afc2b3 = # "hash_23c1c09e94181fdb", var_b8c50025 = # "hash_6e8ef1b690e98e51") {
+function_9d0c9706(var_f9afc2b3 = #"hash_23c1c09e94181fdb", var_b8c50025 = #"hash_6e8ef1b690e98e51") {
   a_t_traps = getEntArray("zombie_trap", "targetname");
 
   foreach(t_trap in a_t_traps) {

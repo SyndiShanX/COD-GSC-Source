@@ -145,7 +145,7 @@ stop_timer() {
   self clientfield::set_to_player("zm_trials_timer", 0);
 }
 
-function_128378c9(n_timer, var_97fd1b64 = 1, var_779bd906 = # "") {
+function_128378c9(n_timer, var_97fd1b64 = 1, var_779bd906 = #"") {
   if(!level.var_f995ece6 zm_trial_timer::is_open(self)) {
     level.var_f995ece6 zm_trial_timer::open(self);
     level.var_f995ece6 zm_trial_timer::set_under_round_rules(self, var_97fd1b64);
@@ -283,7 +283,7 @@ function_3f8a4145(var_26f4f16d) {
         });
       }
 
-      if(vapor == # "specialty_additionalprimaryweapon") {
+      if(vapor == #"specialty_additionalprimaryweapon") {
         var_806e2de0.additional_primary_weapon = self.var_2a62e678;
       }
 

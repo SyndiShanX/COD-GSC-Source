@@ -155,7 +155,7 @@ function private function_a20b03ed(vs) {
         continue;
       }
 
-      if(ent.model == # "") {
+      if(ent.model == #"") {
         continue;
       }
 

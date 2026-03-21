@@ -134,7 +134,7 @@ function function_c0b09ab0() {
   self.var_a516906f = {
     #origin: self.origin, #angles: self.angles
   };
-  self.var_a516906f.anim = # "ai_t9_zm_mimic_com_emerge_prop_quick_f_01";
+  self.var_a516906f.anim = #"ai_t9_zm_mimic_com_emerge_prop_quick_f_01";
   self animcustom(&archetype_mimic::function_f3b371f1);
 }
 

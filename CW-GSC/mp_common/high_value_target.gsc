@@ -65,9 +65,9 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       }
 
       if(var_13f7eb29 > 20) {
-        scoreevent = # "hash_782e222fd957d953" + 20;
+        scoreevent = #"hash_782e222fd957d953" + 20;
       } else {
-        scoreevent = # "hash_782e222fd957d953" + var_13f7eb29;
+        scoreevent = #"hash_782e222fd957d953" + var_13f7eb29;
       }
 
       scoreevents::processscoreevent(scoreevent, psoffsettime, self, deathanimduration);

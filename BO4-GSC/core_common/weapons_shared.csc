@@ -93,7 +93,7 @@ function_ec73770b(local_client_num) {
   player = self;
   player endon(#"death", #"disconnect");
   wait randomfloatrange(0.1, 0.5);
-  var_935615f7 = # "mountable_point";
+  var_935615f7 = #"mountable_point";
   obj_id = undefined;
   var_8e35a928 = 0;
   var_4798772a = 0;

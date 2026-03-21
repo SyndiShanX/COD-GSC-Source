@@ -398,7 +398,7 @@ function function_1ef44bfb(params) {
     self.var_a516906f = {
       #origin: origin, #angles: (0, angles[1], 0), #activator: activator
     };
-    self.var_a516906f.anim = # "ai_t9_zm_mimic_com_emerge_prop_quick_f_01";
+    self.var_a516906f.anim = #"ai_t9_zm_mimic_com_emerge_prop_quick_f_01";
 
     if(dist_sqr > sqr(200)) {
       if(isentity(activator)) {
@@ -406,7 +406,7 @@ function function_1ef44bfb(params) {
         end_point = var_8a9e27f9 + vectornormalize(activator getcentroid() - var_8a9e27f9) * 200;
 
         if(bullettracepassed(var_8a9e27f9, end_point, 0, self, activator)) {
-          self.var_a516906f.anim = # "hash_6194bdd16068478f";
+          self.var_a516906f.anim = #"hash_6194bdd16068478f";
         }
       }
     }

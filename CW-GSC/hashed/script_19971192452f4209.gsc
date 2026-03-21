@@ -1132,7 +1132,7 @@ function function_7b0516d7(var_5fc1b24e) {
     tagname = var_5fc1b24e;
   }
 
-  interactstring = # "OBJECTIVES/TALK_TO";
+  interactstring = #"OBJECTIVES/TALK_TO";
 
   while(true) {
     if(!self flag::get("flag_in_scene") && !self flag::get("flag_in_dialog") && !level flag::get("flag_player_in_dialog") && !level flag::get("flag_player_using_evidence_board")) {
@@ -1898,7 +1898,7 @@ function function_1c7c20ac() {
       level.var_af143f1d = array(level.var_af143f1d);
     }
 
-    level.var_af143f1d[level.var_af143f1d.size] = # "hash_dccc69fc3b473fe";
+    level.var_af143f1d[level.var_af143f1d.size] = #"hash_dccc69fc3b473fe";
   } else {
     if(!isDefined(level.var_af143f1d)) {
       level.var_af143f1d = [];
@@ -1906,7 +1906,7 @@ function function_1c7c20ac() {
       level.var_af143f1d = array(level.var_af143f1d);
     }
 
-    level.var_af143f1d[level.var_af143f1d.size] = # "hash_2cd7687452ec14c9";
+    level.var_af143f1d[level.var_af143f1d.size] = #"hash_2cd7687452ec14c9";
   }
 
   foreach(item in level.var_af143f1d) {
@@ -2571,7 +2571,7 @@ function function_ca7fd487(origin) {
     tag util::create_cursor_hint("tag_origin", (0, 0, 0), #"hash_5a99713f8e17468c", 85, undefined, &function_f5ee087c, undefined, undefined, undefined, undefined, undefined, 1, undefined);
     s_result = player waittill(#"exit", #"combination_correct");
 
-    if(s_result._notify == # "combination_correct") {
+    if(s_result._notify == #"combination_correct") {
       tag util::remove_cursor_hint();
       wait 1;
       namespace_6fdcb0::function_838e9ba9();
@@ -2596,13 +2596,13 @@ function function_f5ee087c() {
   while(true) {
     s_result = player waittill(#"exit", #"combination_correct");
 
-    if(s_result._notify == # "exit") {
+    if(s_result._notify == #"exit") {
       level flag::set("combination_lock_exited");
       self notify(#"exit");
       break;
     }
 
-    if(s_result._notify == # "combination_correct") {
+    if(s_result._notify == #"combination_correct") {
       level flag::set("combination_lock_opened");
       combination_correct = 1;
       self notify(#"combination_correct");

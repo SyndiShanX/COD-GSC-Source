@@ -404,7 +404,7 @@ function private function_19287ba5() {
 }
 
 function private function_d647a79d(entity) {
-  return self.subarchetype === # "catalyst_corrosive";
+  return self.subarchetype === #"catalyst_corrosive";
 }
 
 function private function_cda81e65(entity) {
@@ -1077,16 +1077,16 @@ function function_bbe2a1d2(var_3b720eb2) {
 function function_e1763259(var_3d9951bb) {
   switch (var_3d9951bb) {
     case 1:
-      var_b62aefe1 = # "catalyst_corrosive";
+      var_b62aefe1 = #"catalyst_corrosive";
       break;
     case 3:
-      var_b62aefe1 = # "catalyst_electric";
+      var_b62aefe1 = #"catalyst_electric";
       break;
     case 2:
-      var_b62aefe1 = # "catalyst_plasma";
+      var_b62aefe1 = #"catalyst_plasma";
       break;
     case 4:
-      var_b62aefe1 = # "catalyst_water";
+      var_b62aefe1 = #"catalyst_water";
       break;
   }
 
@@ -1165,7 +1165,7 @@ function function_3f664506(e_catalyst, player, v_loc) {
     case # "normal":
       var_103da188 = self.health;
 
-      if(self.archetype === # "zombie" || self.archetype === # "catalyst") {
+      if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
         self function_27a8f02d();
       }
 
@@ -1279,10 +1279,10 @@ function private function_255c7194() {
 
 function private function_fa69f8d2(type) {
   var_7a56405a = [];
-  var_7a56405a[1] = # "catalyst_corrosive";
-  var_7a56405a[3] = # "catalyst_electric";
-  var_7a56405a[2] = # "catalyst_plasma";
-  var_7a56405a[4] = # "catalyst_water";
+  var_7a56405a[1] = #"catalyst_corrosive";
+  var_7a56405a[3] = #"catalyst_electric";
+  var_7a56405a[2] = #"catalyst_plasma";
+  var_7a56405a[4] = #"catalyst_water";
   player = getplayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);

@@ -31,12 +31,12 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(util::get_game_type() === # "hash_5aa4949e75ab9d9c") {
+  if(util::get_game_type() === #"hash_5aa4949e75ab9d9c") {
     level.var_2d41db66 = 1;
     level.var_3d9229ee = 1000;
     level.var_f35ad8f3 = 250;
 
-    if((is_true(level.var_2d41db66) || util::get_game_type() === # "hash_5aa4949e75ab9d9c") && getdvarint(#"hash_d3df2c834aa1010", 1)) {
+    if((is_true(level.var_2d41db66) || util::get_game_type() === #"hash_5aa4949e75ab9d9c") && getdvarint(#"hash_d3df2c834aa1010", 1)) {
       level.var_aa36d14e = (level.var_3d9229ee - 1) / 75;
     } else {
       level.var_aa36d14e = (level.var_3d9229ee - level.var_f35ad8f3) / 60;

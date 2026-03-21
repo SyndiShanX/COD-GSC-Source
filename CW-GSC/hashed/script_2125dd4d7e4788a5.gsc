@@ -223,14 +223,14 @@ function function_1a58f438() {
 function function_4be8796(instance) {
   instance endon(#"objective_ended");
   self endon(#"disconnect", #"player_downed", #"drop_comp");
-  str_icon = # "ui_icon_zm_field_upgrade_canister";
-  str_weapon = # "hash_60cb3fd3716d711e";
-  str_item = # "field_upgrade_canister_item_sr";
+  str_icon = #"ui_icon_zm_field_upgrade_canister";
+  str_weapon = #"hash_60cb3fd3716d711e";
+  str_item = #"field_upgrade_canister_item_sr";
 
   if(self flag::get(#"hash_35735a804a34da04")) {
-    str_icon = # "ui_icon_zm_field_upgrade_bunny";
-    str_weapon = # "hash_52e8029a24a2d7e5";
-    str_item = # "field_upgrade_bunny_item_sr";
+    str_icon = #"ui_icon_zm_field_upgrade_bunny";
+    str_weapon = #"hash_52e8029a24a2d7e5";
+    str_item = #"field_upgrade_bunny_item_sr";
   }
 
   if(isDefined(self.var_67aa3392) && !is_true(self.var_67aa3392.var_a325551c)) {
@@ -277,19 +277,19 @@ function function_d52adbbc(instance) {
 
     if(is_true(self.inventory.items[12].count)) {
       if(var_4beb87c8 != self gamepadusedlast() || !var_c648969d) {
-        hint = # "hash_41f8f4fb911cb409";
-        var_6538202a = # "hash_78fe1369a615f8e9";
+        hint = #"hash_41f8f4fb911cb409";
+        var_6538202a = #"hash_78fe1369a615f8e9";
 
         if(self flag::get(#"hash_35735a804a34da04")) {
-          hint = # "hash_8c286b74b006c61";
-          var_6538202a = # "hash_616ad42a93e0f761";
+          hint = #"hash_8c286b74b006c61";
+          var_6538202a = #"hash_616ad42a93e0f761";
         }
 
         if(!self gamepadusedlast()) {
-          hint = # "hash_17dc67453fe5d632";
+          hint = #"hash_17dc67453fe5d632";
 
           if(self flag::get(#"hash_35735a804a34da04")) {
-            hint = # "hash_3bf2ca483e07981a";
+            hint = #"hash_3bf2ca483e07981a";
           }
 
           var_6538202a = hint;
@@ -316,7 +316,7 @@ function function_62801b2f() {
 
   for(i = 0; i < a_zombies.size; i++) {
     if(isalive(a_zombies[i])) {
-      if(a_zombies[i].zm_ai_category === # "boss" || a_zombies[i] === level.var_c39a4b8f) {
+      if(a_zombies[i].zm_ai_category === #"boss" || a_zombies[i] === level.var_c39a4b8f) {
         continue;
       }
 
@@ -337,12 +337,12 @@ function function_62801b2f() {
 
 function function_e1c4e1c2(ai_zombie) {
   if(isDefined(ai_zombie)) {
-    if(ai_zombie.zm_ai_category === # "normal") {
+    if(ai_zombie.zm_ai_category === #"normal") {
       ai_zombie zombie_utility::setup_zombie_knockdown(self.origin);
       return;
     }
 
-    if(ai_zombie.zm_ai_category === # "special" || ai_zombie.zm_ai_category === # "elite") {
+    if(ai_zombie.zm_ai_category === #"special" || ai_zombie.zm_ai_category === #"elite") {
       ai_zombie ai::stun(2);
     }
   }
@@ -440,11 +440,11 @@ function function_320199e9() {
 
   if(isDefined(self.e_attacker) && isalive(self) && isDefined(n_dmg)) {
     if(self.e_attacker flag::get(#"hash_35735a804a34da04")) {
-      if(self.zm_ai_category === # "elite") {
+      if(self.zm_ai_category === #"elite") {
         level scoreevents::doscoreeventcallback("scoreEventSR", {
           #scoreevent: "outbreak_mq_aether_bunny_elite_kill_zm", #attacker: self.e_attacker, #enemy: self
         });
-      } else if(self.zm_ai_category === # "special") {
+      } else if(self.zm_ai_category === #"special") {
         level scoreevents::doscoreeventcallback("scoreEventSR", {
           #scoreevent: "outbreak_mq_aether_bunny_special_kill_zm", #attacker: self.e_attacker, #enemy: self
         });
@@ -780,9 +780,9 @@ function function_457be561(v_org, v_ang) {
   wait 1;
 
   if(self.n_id) {
-    str_scene = # "p9_fxanim_sv_canister_eject_01_bundle";
+    str_scene = #"p9_fxanim_sv_canister_eject_01_bundle";
   } else {
-    str_scene = # "p9_fxanim_sv_canister_eject_02_bundle";
+    str_scene = #"p9_fxanim_sv_canister_eject_02_bundle";
   }
 
   self thread scene::play(str_scene, self);
@@ -870,7 +870,7 @@ function function_223e16e6(instance) {
 function function_f4562137(instance) {
   instance endon(#"objective_ended");
   self.var_7be19157.n_objective_id = gameobjects::get_next_obj_id();
-  self.var_7be19157.var_db7449cf = # "hash_336d05892f9a780e";
+  self.var_7be19157.var_db7449cf = #"hash_336d05892f9a780e";
   objective_add(self.var_7be19157.n_objective_id, "active", self.var_7be19157, self.var_7be19157.var_db7449cf);
 
   while(true) {
@@ -1148,14 +1148,14 @@ function function_c36cb7b1(params) {
   }
 
   if(is_true(params.eattacker.var_28107825)) {
-    if(self.zm_ai_category === # "elite") {
+    if(self.zm_ai_category === #"elite") {
       level scoreevents::doscoreeventcallback("scoreEventSR", {
         #scoreevent: "retrieve_cannister_elite_kill_zm", #attacker: params.eattacker, #enemy: self
       });
       return;
     }
 
-    if(self.zm_ai_category === # "special") {
+    if(self.zm_ai_category === #"special") {
       level scoreevents::doscoreeventcallback("scoreEventSR", {
         #scoreevent: "retrieve_cannister_special_kill_zm", #attacker: params.eattacker, #enemy: self
       });
@@ -1753,7 +1753,7 @@ function function_bf606a73() {
 }
 
 function function_fd68cae4() {
-  if(self.archetype == # "zombie") {
+  if(self.archetype == #"zombie") {
     if(is_true(self.var_4a44f930)) {
       self namespace_85745671::function_9758722("sprint");
       return;
@@ -1811,7 +1811,7 @@ function function_eb9a0f67() {
   self endon(#"death");
   waitframe(1);
 
-  if(self.vehicletype === # "vehicle_t9_mil_ru_tank_t72_sr") {
+  if(self.vehicletype === #"vehicle_t9_mil_ru_tank_t72_sr") {
     players = self getvehoccupants();
 
     foreach(player in players) {
@@ -2015,7 +2015,7 @@ function retrieval_start(instance, activator) {
       mdl_canister thread function_6cbbd741(instance);
     }
 
-    if(instance.targetname === # "hash_17f3ee07ca053ac8" || instance.targetname === # "hash_3b93357ae8f9a4e5" || instance.targetname === # "hash_c03d28393d74ee5" || instance.targetname === # "hash_1f8de1a22943c599" || instance.targetname === # "hash_20b26d60b0dab3a5" || instance.targetname === # "objective_zoo_retrieval" || instance.targetname === # "hash_b422045138dab00") {
+    if(instance.targetname === #"hash_17f3ee07ca053ac8" || instance.targetname === #"hash_3b93357ae8f9a4e5" || instance.targetname === #"hash_c03d28393d74ee5" || instance.targetname === #"hash_1f8de1a22943c599" || instance.targetname === #"hash_20b26d60b0dab3a5" || instance.targetname === #"objective_zoo_retrieval" || instance.targetname === #"hash_b422045138dab00") {
       var_cdce8e6f = instance.contentgroups[#"hash_5819d8571ea7c838"][0];
 
       if(isDefined(var_cdce8e6f.script_noteworthy)) {
@@ -2045,18 +2045,18 @@ function function_9c54feb0(instance) {
   self.n_objective_id = gameobjects::get_next_obj_id();
 
   if(!isDefined(self.n_id)) {
-    self.var_805ed574 = # "hash_449cd1c65196f3a8";
+    self.var_805ed574 = #"hash_449cd1c65196f3a8";
   } else {
     switch (self.n_id) {
       case 0:
-        self.var_805ed574 = # "hash_3084c6ecc7696cb4";
-        self.var_7017d40 = # "hash_2fc69f49d36f4c3c";
-        self.var_11cf37e3 = # "hash_61f64747e0c7fd48";
+        self.var_805ed574 = #"hash_3084c6ecc7696cb4";
+        self.var_7017d40 = #"hash_2fc69f49d36f4c3c";
+        self.var_11cf37e3 = #"hash_61f64747e0c7fd48";
         break;
       case 1:
-        self.var_805ed574 = # "hash_3084c9ecc76971cd";
-        self.var_7017d40 = # "hash_2fc6a249d36f5155";
-        self.var_11cf37e3 = # "hash_61f64a47e0c80261";
+        self.var_805ed574 = #"hash_3084c9ecc76971cd";
+        self.var_7017d40 = #"hash_2fc6a249d36f5155";
+        self.var_11cf37e3 = #"hash_61f64a47e0c80261";
         break;
     }
   }
@@ -2106,28 +2106,28 @@ function objective_marker(instance) {
 function function_aece4588(var_3afe334f) {
   switch (var_3afe334f) {
     case 1:
-      var_e7a1cbae = # "objective_retrieval_ailist_1";
+      var_e7a1cbae = #"objective_retrieval_ailist_1";
       break;
     case 2:
-      var_e7a1cbae = # "objective_retrieval_ailist_2";
+      var_e7a1cbae = #"objective_retrieval_ailist_2";
       break;
     case 3:
-      var_e7a1cbae = # "objective_retrieval_ailist_3";
+      var_e7a1cbae = #"objective_retrieval_ailist_3";
       break;
     case 4:
-      var_e7a1cbae = # "objective_retrieval_ailist_4";
+      var_e7a1cbae = #"objective_retrieval_ailist_4";
       break;
     case 5:
-      var_e7a1cbae = # "objective_retrieval_ailist_5";
+      var_e7a1cbae = #"objective_retrieval_ailist_5";
       break;
     case 6:
-      var_e7a1cbae = # "objective_retrieval_ailist_6";
+      var_e7a1cbae = #"objective_retrieval_ailist_6";
       break;
     case 7:
-      var_e7a1cbae = # "objective_retrieval_ailist_7";
+      var_e7a1cbae = #"objective_retrieval_ailist_7";
       break;
     default:
-      var_e7a1cbae = # "objective_retrieval_ailist_8";
+      var_e7a1cbae = #"objective_retrieval_ailist_8";
       break;
   }
 

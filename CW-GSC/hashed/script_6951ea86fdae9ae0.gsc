@@ -31,7 +31,7 @@ function private on_begin(var_c8a36f90, var_a9dd1993, var_2953986a, var_3790b4e4
   callback::function_33f0ddd3(&function_33f0ddd3);
   level zm_trial::function_25ee130(1);
 
-  if(level.var_e91491fb === # "prone") {
+  if(level.var_e91491fb === #"prone") {
     array::thread_all(getplayers(), &zm_trial_util::function_9bf8e274);
   }
 
@@ -44,7 +44,7 @@ function private on_end(round_reset) {
   callback::function_824d206(&function_33f0ddd3);
   level zm_trial::function_25ee130(0);
 
-  if(level.var_e91491fb === # "prone") {
+  if(level.var_e91491fb === #"prone") {
     array::thread_all(getplayers(), &zm_trial_util::function_73ff0096);
   }
 
@@ -104,7 +104,7 @@ function private function_1633056a(var_a9dd1993, var_2953986a, var_3790b4e4, var
       }
 
       if(var_9d590e70) {
-        var_3940c585 = level.var_e91491fb !== # "prone";
+        var_3940c585 = level.var_e91491fb !== #"prone";
         self zm_trial_util::function_dc0859e(var_3940c585);
       }
 

@@ -47,7 +47,7 @@ function preinit() {
   }
 
   var_39539c05 = zm_utility::is_ee_enabled();
-  var_95613111 = # "hash_50cc93a10c9d2175";
+  var_95613111 = #"hash_50cc93a10c9d2175";
   var_a0ab1f0d = getgametypesetting(var_95613111);
 
   var_39539c05 = getdvarint(#"zm_ee_enabled", 0);
@@ -230,7 +230,7 @@ function private function_ada90340(var_2b357ce9) {
   mdl_device ghost();
   s_result = var_2b357ce9 waittill(#"player_exiting", #"rift_close");
 
-  if(s_result._notify === # "rift_close") {
+  if(s_result._notify === #"rift_close") {
     mdl_device delete();
     return;
   }
@@ -254,7 +254,7 @@ function private function_ada90340(var_2b357ce9) {
 }
 
 function private function_6c8a368(eventstruct) {
-  if(isPlayer(self) && eventstruct.item.itementry.name === # "item_survival_mq4_beacon_device") {
+  if(isPlayer(self) && eventstruct.item.itementry.name === #"item_survival_mq4_beacon_device") {
     callback::remove_callback(#"on_item_pickup", &function_6c8a368);
 
     if(!level flag::get(#"hash_537da116d92d952f")) {
@@ -467,7 +467,7 @@ function private function_701ee731(v_loc, var_751350bb = 800, n_timeout = 120) {
     a_ai = arraysortclosest(getaiteamarray(#"axis"), v_loc, undefined, undefined, var_751350bb);
 
     foreach(ai in a_ai) {
-      if(ai.current_state.name === # "wander") {
+      if(ai.current_state.name === #"wander") {
         arrayremovevalue(a_ai, ai);
       }
     }
@@ -654,7 +654,7 @@ function private function_4cb97b84(eventstruct) {
 function function_f37669b6(eventstruct) {
   item = eventstruct.item;
 
-  if(isPlayer(self) && item.itementry.name === # "item_zmintel_survival_requiem_document_15") {
+  if(isPlayer(self) && item.itementry.name === #"item_zmintel_survival_requiem_document_15") {
     array::thread_all(getplayers(), &zm_intel::collect_intel, #"zmintel_survival_requiem_document_15");
     callback::remove_callback(#"on_item_pickup", &function_f37669b6);
   }
@@ -879,7 +879,7 @@ function private unstable_orb(instance) {
     mdl_orb playSound(#"hash_2d17bb0a3d5bdb37");
     mdl_orb playLoopSound(#"hash_5dc7884f02e73776");
 
-    if(var_9f3b9a91.script_noteworthy === # "final_loc") {
+    if(var_9f3b9a91.script_noteworthy === #"final_loc") {
       level flag::set(#"hash_24be0dad9e05661a");
 
       if(level flag::get(#"hash_1d1fe20ab0d24d9e")) {

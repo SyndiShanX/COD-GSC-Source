@@ -348,7 +348,7 @@ lc_play_death_fx(arc_num, params) {
   if(isDefined(self.teslafxtag)) {
     b_can_clientside = 0;
     tag = self.teslafxtag;
-  } else if(!(self.archetype === # "zombie")) {
+  } else if(!(self.archetype === #"zombie")) {
     tag = "tag_origin";
   }
 
@@ -383,7 +383,7 @@ lc_play_arc_fx(target, params) {
 
   if(isDefined(self.isdog) && self.isdog) {
     tag = "J_Spine1";
-  } else if(!(self.archetype === # "zombie")) {
+  } else if(!(self.archetype === #"zombie")) {
     tag = "tag_origin";
   }
 
@@ -391,7 +391,7 @@ lc_play_arc_fx(target, params) {
 
   if(isDefined(target.isdog) && target.isdog) {
     target_tag = "J_Spine1";
-  } else if(!(target.archetype === # "zombie")) {
+  } else if(!(target.archetype === #"zombie")) {
     target_tag = "tag_origin";
   }
 

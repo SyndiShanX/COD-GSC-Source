@@ -40,16 +40,16 @@ function function_596f8772() {
   } else {
     switch (currentsessionmode()) {
       case 0:
-        faction = # "factions_zm";
+        faction = #"factions_zm";
         break;
       case 1:
-        faction = # "factions_mp";
+        faction = #"factions_mp";
         break;
       case 2:
-        faction = # "factions_cp";
+        faction = #"factions_cp";
         break;
       case 3:
-        faction = # "factions_wz";
+        faction = #"factions_wz";
         break;
     }
 

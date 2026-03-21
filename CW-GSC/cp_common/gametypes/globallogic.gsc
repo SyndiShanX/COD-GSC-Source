@@ -98,7 +98,7 @@ function init() {
   level.var_2216ae6c = level.teamcount + 1;
 
   if(2 == level.var_2216ae6c) {
-    level.var_c20ad7aa = # "axis";
+    level.var_c20ad7aa = #"axis";
   } else {
     level.var_c20ad7aa = "team" + level.var_2216ae6c;
   }
@@ -108,8 +108,8 @@ function init() {
   level.teamindex = [];
   level.playerteams = [];
   teamcount = level.teamcount;
-  level.playerteams[#"allies"] = # "allies";
-  level.playerteams[#"axis"] = # "axis";
+  level.playerteams[#"allies"] = #"allies";
+  level.playerteams[#"axis"] = #"axis";
   level.teams[#"allies"] = "allies";
   level.teams[#"axis"] = "axis";
   level.teams[#"team3"] = "team3";
@@ -134,7 +134,7 @@ function init() {
   level.gameforfeited = 0;
   level.forceautoassign = 0;
   level.halftimetype = "halftime";
-  level.halftimesubcaption = # "hash_54b0f0ec952ddba8";
+  level.halftimesubcaption = #"hash_54b0f0ec952ddba8";
   level.laststatustime = 0;
   level.waswinning = [];
   level.lastslowprocessframe = 0;
@@ -305,13 +305,13 @@ function compareteambygamestat(gamestat, teama, teamb, previous_winner_score) {
   winner = undefined;
 
   if(teama == "tie") {
-    winner = # "tie";
+    winner = #"tie";
 
     if(previous_winner_score < game.stat[gamestat][teamb]) {
       winner = teamb;
     }
   } else if(game.stat[gamestat][teama] == game.stat[gamestat][teamb]) {
-    winner = # "tie";
+    winner = #"tie";
   } else if(game.stat[gamestat][teamb] > game.stat[gamestat][teama]) {
     winner = teamb;
   } else {
@@ -329,7 +329,7 @@ function determineteamwinnerbygamestat(gamestat) {
   for(teamindex = 1; teamindex < teamkeys.size; teamindex++) {
     winner = compareteambygamestat(gamestat, winner, teamkeys[teamindex], previous_winner_score);
 
-    if(winner != # "tie") {
+    if(winner != #"tie") {
       previous_winner_score = game.stat[gamestat][winner];
     }
   }
@@ -1478,7 +1478,7 @@ function function_2905c18e() {
       level.botscount[team]++;
     }
 
-    if(team != # "spectator" && isDefined(var_c5c29dab) && var_c5c29dab != "") {
+    if(team != #"spectator" && isDefined(var_c5c29dab) && var_c5c29dab != "") {
       level.playercount[team]++;
 
       if(player.sessionstate == "playing") {
@@ -1733,7 +1733,7 @@ function graceperiod() {
     for(i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!player.hasspawned && player.sessionteam != # "spectator" && !isalive(player)) {
+      if(!player.hasspawned && player.sessionteam != #"spectator" && !isalive(player)) {
         player.statusicon = "hud_status_dead";
       }
     }
@@ -1767,59 +1767,59 @@ function callback_startgametype() {
 
   if(!isDefined(game.gamestarted)) {
     if(!isDefined(game.allies)) {
-      game.allies = # "cia";
+      game.allies = #"cia";
     }
 
     if(!isDefined(game.axis)) {
-      game.axis = # "kgb";
+      game.axis = #"kgb";
     }
 
     if(!isDefined(game.attackers)) {
-      game.attackers = # "allies";
+      game.attackers = #"allies";
     }
 
     if(!isDefined(game.defenders)) {
-      game.defenders = # "axis";
+      game.defenders = #"axis";
     }
 
     assert(game.attackers != game.defenders);
 
     foreach(team, _ in level.teams) {
       if(!isDefined(game.team)) {
-        game.team = # "cia";
+        game.team = #"cia";
       }
     }
 
     gamestate::set_state(#"playing");
     setDvar(#"cg_thirdpersonangle", 354);
-    game.strings[#"press_to_spawn"] = # "hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
 
     if(level.teambased) {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_teams";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     } else {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_players";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_players";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"match_starting_in"] = # "hash_18e58cc95db34427";
-    game.strings[#"spawn_next_round"] = # "hash_5659065fae9d42fb";
-    game.strings[#"waiting_to_spawn"] = # "mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
-    game.strings[#"you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
-    game.strings[#"match_starting"] = # "mp/match_starting";
-    game.strings[#"item_on_respawn"] = # "hash_220160808c99fe71";
-    game.strings[#"hash_b71875e85956ea"] = # "hash_61f8bf2959b7bd5a";
-    game.strings[#"last_stand"] = # "hash_5732d212e4511a00";
-    game.strings[#"cowards_way"] = # "hash_268e464278a2f8ff";
-    game.strings[#"tie"] = # "mp/match_tie";
-    game.strings[#"round_draw"] = # "mp/round_draw";
-    game.strings[#"enemies_eliminated"] = # "mp_enemies_eliminated";
-    game.strings[#"score_limit_reached"] = # "mp/score_limit_reached";
-    game.strings[#"round_limit_reached"] = # "mp/round_limit_reached";
-    game.strings[#"time_limit_reached"] = # "mp/time_limit_reached";
-    game.strings[#"players_forfeited"] = # "mp/players_forfeited";
-    game.strings[#"other_teams_forfeited"] = # "mp_other_teams_forfeited";
+    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"spawn_next_round"] = #"hash_5659065fae9d42fb";
+    game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
+    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
+    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"match_starting"] = #"mp/match_starting";
+    game.strings[#"item_on_respawn"] = #"hash_220160808c99fe71";
+    game.strings[#"hash_b71875e85956ea"] = #"hash_61f8bf2959b7bd5a";
+    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
+    game.strings[#"tie"] = #"mp/match_tie";
+    game.strings[#"round_draw"] = #"mp/round_draw";
+    game.strings[#"enemies_eliminated"] = #"mp_enemies_eliminated";
+    game.strings[#"score_limit_reached"] = #"mp/score_limit_reached";
+    game.strings[#"round_limit_reached"] = #"mp/round_limit_reached";
+    game.strings[#"time_limit_reached"] = #"mp/time_limit_reached";
+    game.strings[#"players_forfeited"] = #"mp/players_forfeited";
+    game.strings[#"other_teams_forfeited"] = #"mp_other_teams_forfeited";
 
     if(isDefined(level.onprecachegametype)) {
       [[level.onprecachegametype]]();

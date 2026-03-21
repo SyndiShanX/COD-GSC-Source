@@ -929,9 +929,9 @@ function_226e15cc() {
   level.var_fbcb1d5b moveto(level.var_fbcb1d5b.origin + v_offset, 0.25);
   level.var_c22f75e6 moveto(level.var_c22f75e6.origin + v_offset, 0.25);
   array::wait_till(array(level.var_abe1b67c, level.var_fbcb1d5b, level.var_c22f75e6), "movedone", 1);
-  level.var_abe1b67c.str_model = # "hash_2fd7d12881613ff1";
-  level.var_fbcb1d5b.str_model = # "hash_485dabee10eddd9a";
-  level.var_c22f75e6.str_model = # "hash_1e5559d9a4922ce7";
+  level.var_abe1b67c.str_model = #"hash_2fd7d12881613ff1";
+  level.var_fbcb1d5b.str_model = #"hash_485dabee10eddd9a";
+  level.var_c22f75e6.str_model = #"hash_1e5559d9a4922ce7";
   scene::add_scene_func(#"p8_fxanim_zm_man_kag03_bundle", &function_92227ee8, "rise");
   level.var_abe1b67c thread scene::play(#"p8_fxanim_zm_man_kag03_bundle", "rise", level.var_abe1b67c);
   level.var_fbcb1d5b thread scene::play(#"p8_fxanim_zm_man_kag03_bundle", "rise", level.var_fbcb1d5b);
@@ -1116,7 +1116,7 @@ function_60bda2cf(var_f0e6c7a2, ent) {
 }
 
 is_soul_capture_forest(var_88206a50, ent) {
-  if(ent.archetype !== # "werewolf") {
+  if(ent.archetype !== #"werewolf") {
     return 0;
   }
 

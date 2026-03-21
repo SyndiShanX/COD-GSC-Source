@@ -54,7 +54,7 @@ function_41015db1(&replacementarray, itemname, replacementitemname) {
     return;
   }
 
-  if(replacementitemname == # "") {
+  if(replacementitemname == #"") {
     replacementitemname = "";
   }
 
@@ -65,9 +65,9 @@ function_41015db1(&replacementarray, itemname, replacementitemname) {
 
 function_bbc0b67f(prematch = 0) {
   if(prematch) {
-    flag = # "hash_11c9cde7b522c5a9";
+    flag = #"hash_11c9cde7b522c5a9";
   } else {
-    flag = # "hash_67b445a4b1d59922";
+    flag = #"hash_67b445a4b1d59922";
   }
 
   if(level flagsys::get(flag)) {

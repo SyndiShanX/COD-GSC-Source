@@ -120,7 +120,7 @@ function private function_4dbf2663() {
         for(i = 0; i < 8; i++) {
           param = tablelookupcolumnforrow(table, row, 6 + i);
 
-          if(isDefined(param) && param != # "") {
+          if(isDefined(param) && param != #"") {
             var_10a28798[var_10a28798.size] = param;
           }
         }

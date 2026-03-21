@@ -164,7 +164,7 @@ function_b3862968() {
 }
 
 function_7033488b(notifyhash) {
-  if(notifyhash == # "death") {
+  if(notifyhash == #"death") {
     self function_40abb79a(0, undefined);
   }
 }
@@ -203,10 +203,10 @@ function_c2e7fcb4() {
 
 function_40abb79a(in_enemy_mute_smoke, applicant) {
   player = self;
-  var_65ce58a2 = # "deaf";
+  var_65ce58a2 = #"deaf";
 
   if(player getplayerresistance(0) > 0) {
-    var_65ce58a2 = # "hash_74cdcf6548f09fcd";
+    var_65ce58a2 = #"hash_74cdcf6548f09fcd";
   }
 
   var_56d6af0e = getstatuseffect(var_65ce58a2);

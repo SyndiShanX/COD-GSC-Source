@@ -224,7 +224,7 @@ play_death_audio() {
 }
 
 play_spinning_plane_sound() {
-  if(self.vehicletype == # "veh_dart_wz") {
+  if(self.vehicletype == #"veh_dart_wz") {
     return;
   }
 

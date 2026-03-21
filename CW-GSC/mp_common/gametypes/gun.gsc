@@ -32,7 +32,7 @@
 #namespace gun;
 
 function autoexec ignore_systems() {
-  if(util::get_game_type() === # "gun_rambo") {
+  if(util::get_game_type() === #"gun_rambo") {
     system::ignore(#"killstreaks");
   }
 }
@@ -54,7 +54,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_34842a14 = 1;
   level.var_be0e9c3e = "taco_music";
 
-  if(level.gametype === # "gun_rambo") {
+  if(level.gametype === #"gun_rambo") {
     game.musicset = "_rgg";
     level.var_be0e9c3e += game.musicset;
   }
@@ -159,7 +159,7 @@ function onendgame(var_c1e98979) {
 function function_9ffa772e(var_ad9f582e = 0) {
   loadouts = getscriptbundle(#"hash_64fc10899d9faf46");
 
-  if(level.gametype === # "gun_rambo") {
+  if(level.gametype === #"gun_rambo") {
     loadouts = getscriptbundle(#"hash_2deaed5c3e4b941");
   }
 
@@ -268,7 +268,7 @@ function givecustomloadout(takeoldweapon = 0) {
   self cleartalents();
   self clearperks();
 
-  if(level.gametype === # "gun_rambo") {
+  if(level.gametype === #"gun_rambo") {
     self addtalent(#"talent_gungho" + level.game_mode_suffix);
   }
 
@@ -470,7 +470,7 @@ function function_5c23e4f5() {
   var_5a4bc4d6 = 18;
   var_ee737733 = 15;
 
-  if(level.gametype === # "gun_rambo") {
+  if(level.gametype === #"gun_rambo") {
     var_5a4bc4d6 = 19;
     var_ee737733 = 17;
   }

@@ -84,7 +84,7 @@ function event_handler[level_init] main(eventstruct) {
   setDvar(#"hash_2d56e13848a82d14", 0);
   setDvar(#"hash_b3395a8d3abf84a", 1);
   level.setupcustomcharacterexerts = &setup_personality_character_exerts;
-  level.var_d0ab70a2 = # "hash_415d2f1314ea548a";
+  level.var_d0ab70a2 = #"hash_415d2f1314ea548a";
   level.var_c2964bec = 400;
   zm_intel::function_88645994(#"hash_2315f92412308649");
   load::main();

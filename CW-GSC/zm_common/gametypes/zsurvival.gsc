@@ -209,7 +209,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.customspawnlogic = &function_716def93;
   level.var_16918506 = &function_58d07657;
   level.var_4e1e5411 = &function_f30d46d0;
-  level.var_d0ab70a2 = # "hash_2e67a581bd97b96c";
+  level.var_d0ab70a2 = #"hash_2e67a581bd97b96c";
   level.var_946a4954 = 90;
   level.var_38743886 = &function_d7cf81e;
   callback::on_game_playing(&on_game_playing);
@@ -271,7 +271,7 @@ function function_68b4ecc9(var_d5fa8477, var_f014519d) {
   level flag::wait_till("spawn_intel_at_start_complete");
   str_map_name = util::get_map_name();
 
-  if(str_map_name === # "mp_dune") {
+  if(str_map_name === #"mp_dune") {
     s_intel = struct::get(#"zmintel_survival_maxis_audiolog_15", "scriptbundlename");
 
     if(isDefined(s_intel)) {
@@ -289,7 +289,7 @@ function function_68b4ecc9(var_d5fa8477, var_f014519d) {
 function function_aa5d57c6() {
   level flag::wait_till("spawn_intel_at_start_complete");
 
-  if(util::get_map_name() === # "wz_forest") {
+  if(util::get_map_name() === #"wz_forest") {
     var_e5b9ea93 = struct::get("zmintel_survival_omega_artifact_2", "scriptbundlename");
 
     if(!isDefined(var_e5b9ea93)) {
@@ -315,7 +315,7 @@ function function_9663b13b() {
   a_dynents = getdynentarray();
 
   foreach(dynent in a_dynents) {
-    if(dynent.var_15d44120 === # "p9_fxanim_wz_rus_door_garage_accordion_small_01_mod" && !isDefined(dynent.ondamaged)) {
+    if(dynent.var_15d44120 === #"p9_fxanim_wz_rus_door_garage_accordion_small_01_mod" && !isDefined(dynent.ondamaged)) {
       dynent.ondamaged = &namespace_f3e83343::function_c743094d;
       dynent.maxhealth = dynent.health;
     }
@@ -542,7 +542,7 @@ function function_716def93(ispredictedspawn) {
     return spawn_point;
   }
 
-  if(game.state == # "pregame" || game.state == # "playing") {
+  if(game.state == #"pregame" || game.state == #"playing") {
     return function_aad874d();
   }
 
@@ -896,7 +896,7 @@ function on_ai_spawned() {
   self function_8f8f0c52(800);
   self zm_score::function_82732ced();
 
-  if(self.archetype === # "hash_7c0d83ac1e845ac2" && !isDefined(self.subarchetype) && self.team === level.zombie_team) {
+  if(self.archetype === #"hash_7c0d83ac1e845ac2" && !isDefined(self.subarchetype) && self.team === level.zombie_team) {
     self thread function_398dbc69();
   }
 }
@@ -982,7 +982,7 @@ function private function_33cac8e7() {
 
 function on_end_game(waitresult) {
   if(!is_true(level.var_1726e2c7)) {
-    if(waitresult.reason === # "hash_4e5756202af6ae94" || waitresult.reason === # "last_player_died") {
+    if(waitresult.reason === #"hash_4e5756202af6ae94" || waitresult.reason === #"last_player_died") {
       level notify(#"players_dead");
 
       if(level.contentmanager.activeobjective.content_script_name !== "holdout") {
@@ -1058,7 +1058,7 @@ function function_798c4aa9() {
   self endon("59a98f67be584019");
   item_world::function_1b11e73c();
 
-  while(!isDefined(self.inventory) || self.sessionstate !== "playing" || game.state !== # "playing") {
+  while(!isDefined(self.inventory) || self.sessionstate !== "playing" || game.state !== #"playing") {
     waitframe(1);
   }
 

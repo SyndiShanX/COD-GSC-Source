@@ -224,7 +224,7 @@ function contract_kills(data) {
       break;
   }
 
-  if(weapon.statname == # "land_mine") {
+  if(weapon.statname == #"land_mine") {
     attacker function_fd9fb79b(#"hash_6d99dd47b6819429");
 
     if(data.washacked === 1) {
@@ -347,30 +347,30 @@ function on_ekia(weapon, victim) {
   weaponclass = util::getweaponclass(weapon);
 
   if(!isDefined(weaponclass)) {
-    weaponclass = # "unspecified";
+    weaponclass = #"unspecified";
   }
 
   switch (weaponclass) {
     case # "weapon_assault":
-      var_6b9aa5a0 = # "hash_1005918e22a7865b";
+      var_6b9aa5a0 = #"hash_1005918e22a7865b";
       break;
     case # "weapon_lmg":
-      var_6b9aa5a0 = # "hash_151c8e7a35e1e380";
+      var_6b9aa5a0 = #"hash_151c8e7a35e1e380";
       break;
     case # "weapon_pistol":
-      var_6b9aa5a0 = # "hash_250c2d8ef2261723";
+      var_6b9aa5a0 = #"hash_250c2d8ef2261723";
       break;
     case # "weapon_cqb":
-      var_6b9aa5a0 = # "hash_5262d5b92e0fdc2";
+      var_6b9aa5a0 = #"hash_5262d5b92e0fdc2";
       break;
     case # "weapon_smg":
-      var_6b9aa5a0 = # "hash_2173bc0bfcbdf90f";
+      var_6b9aa5a0 = #"hash_2173bc0bfcbdf90f";
       break;
     case # "weapon_sniper":
-      var_6b9aa5a0 = # "hash_21762ab1513fddf";
+      var_6b9aa5a0 = #"hash_21762ab1513fddf";
       break;
     case # "weapon_tactical":
-      var_6b9aa5a0 = # "hash_1a4fe101c7aab2d";
+      var_6b9aa5a0 = #"hash_1a4fe101c7aab2d";
       break;
     default:
       break;
@@ -433,7 +433,7 @@ function on_ekia(weapon, victim) {
   if(isDefined(loadout_secondary_weapon) && attacker function_db654c9(attacker.class_num, #"hash_639ebbcda56447e7")) {
     secondaryweaponclass = util::getweaponclass(loadout_secondary_weapon);
 
-    if(secondaryweaponclass === # "weapon_assault" || secondaryweaponclass === # "weapon_lmg" || secondaryweaponclass === # "weapon_smg" || secondaryweaponclass === # "weapon_sniper" || secondaryweaponclass === # "weapon_tactical") {
+    if(secondaryweaponclass === #"weapon_assault" || secondaryweaponclass === #"weapon_lmg" || secondaryweaponclass === #"weapon_smg" || secondaryweaponclass === #"weapon_sniper" || secondaryweaponclass === #"weapon_tactical") {
       attacker function_fd9fb79b(#"hash_6439891be84a20b1");
     }
   }
@@ -500,15 +500,15 @@ function function_fd9fb79b(var_38280f2f, delta = 1) {
 function function_fb608f0a(weapon) {
   self increment_contract(#"hash_186da11489a29d82");
 
-  if(weapon.statname == # "land_mine") {
+  if(weapon.statname == #"land_mine") {
     increment_contract(#"hash_4ef18c4603d407ad");
     return;
   }
 
-  if(util::getweaponclass(weapon) === # "weapon_grenade") {
+  if(util::getweaponclass(weapon) === #"weapon_grenade") {
     increment_contract(#"hash_58b984c08b43c46a");
 
-    if(weapon.statname == # "satchel_charge") {
+    if(weapon.statname == #"satchel_charge") {
       increment_contract(#"hash_16feef44241889e5");
     }
   }
@@ -519,7 +519,7 @@ function function_4b024d04() {
 
   switch (level.basegametype) {
     case # "fireteam_dirty_bomb":
-      var_c421e6b = # "hash_3a3d0c0b64f00008";
+      var_c421e6b = #"hash_3a3d0c0b64f00008";
       break;
   }
 
@@ -579,7 +579,7 @@ function private function_902ef0de(var_38280f2f, delta) {
 
 function function_90a854d2(slot) {
   if(getdvarint(#"hash_657185da33fd5f8", 0) > 0) {
-    var_38280f2f = # "hash_6a1133003efe7380";
+    var_38280f2f = #"hash_6a1133003efe7380";
 
     switch (slot) {
       case 0:
@@ -650,35 +650,35 @@ function contract_win(winner) {
 
   switch (level.basegametype) {
     case # "conf":
-      var_831b642b = # "hash_62eeb56528fb2dd2";
+      var_831b642b = #"hash_62eeb56528fb2dd2";
       break;
     case # "control":
-      var_831b642b = # "hash_42a587fd027c16d7";
+      var_831b642b = #"hash_42a587fd027c16d7";
       break;
     case # "dom":
-      var_831b642b = # "hash_1286a20fba67f00f";
+      var_831b642b = #"hash_1286a20fba67f00f";
       break;
     case # "dropkick":
-      var_831b642b = # "hash_7fe7c331c3ac1d69";
+      var_831b642b = #"hash_7fe7c331c3ac1d69";
       break;
     case # "gunfight":
-      var_831b642b = # "hash_637c243c43c99f88";
+      var_831b642b = #"hash_637c243c43c99f88";
       break;
     case # "koth":
-      var_831b642b = # "hash_1fa6cd6ec6b44413";
+      var_831b642b = #"hash_1fa6cd6ec6b44413";
       break;
     case # "tdm":
       if(level.hardcoremode) {
         winner function_fd9fb79b(#"hash_91095804fbbf4ae");
       }
 
-      var_831b642b = # "hash_491aa3b35ce36b7f";
+      var_831b642b = #"hash_491aa3b35ce36b7f";
       break;
     case # "sd":
-      var_831b642b = # "hash_7065ab34c90b39b4";
+      var_831b642b = #"hash_7065ab34c90b39b4";
       break;
     case # "vip":
-      var_831b642b = # "hash_769fc475cca99231";
+      var_831b642b = #"hash_769fc475cca99231";
       break;
     default:
       break;
@@ -694,68 +694,68 @@ function function_c5958b54() {
 
   switch (level.basegametype) {
     case # "ball":
-      var_c421e6b = # "contract_mp_play_uplink";
+      var_c421e6b = #"contract_mp_play_uplink";
       break;
     case # "bounty":
-      var_c421e6b = # "contract_mp_play_heist";
+      var_c421e6b = #"contract_mp_play_heist";
       break;
     case # "conf":
-      var_c421e6b = # "hash_5de2883b8961e46f";
+      var_c421e6b = #"hash_5de2883b8961e46f";
       break;
     case # "control":
-      var_c421e6b = # "hash_62d0b4c184c48912";
+      var_c421e6b = #"hash_62d0b4c184c48912";
       break;
     case # "ctf":
-      var_c421e6b = # "hash_42b7ebc5926b0008";
+      var_c421e6b = #"hash_42b7ebc5926b0008";
       break;
     case # "dem":
-      var_c421e6b = # "contract_mp_play_demolition";
+      var_c421e6b = #"contract_mp_play_demolition";
       break;
     case # "dm":
-      var_c421e6b = # "hash_5dbf89f59ac323e3";
+      var_c421e6b = #"hash_5dbf89f59ac323e3";
       break;
     case # "dom":
-      var_c421e6b = # "hash_4289a3f53c536915";
+      var_c421e6b = #"hash_4289a3f53c536915";
       break;
     case # "dropkick":
-      var_c421e6b = # "hash_4d02445b8cdd4388";
+      var_c421e6b = #"hash_4d02445b8cdd4388";
       break;
     case # "gunfight":
-      var_c421e6b = # "hash_6f88335358950e1";
+      var_c421e6b = #"hash_6f88335358950e1";
       break;
     case # "escort":
-      var_c421e6b = # "contract_mp_play_safeguard";
+      var_c421e6b = #"contract_mp_play_safeguard";
       break;
     case # "gun":
-      var_c421e6b = # "hash_f916a0b9718fb8";
+      var_c421e6b = #"hash_f916a0b9718fb8";
       break;
     case # "infect":
-      var_c421e6b = # "contract_mp_play_infection";
+      var_c421e6b = #"contract_mp_play_infection";
       break;
     case # "koth":
-      var_c421e6b = # "hash_50f232749a3c2486";
+      var_c421e6b = #"hash_50f232749a3c2486";
       break;
     case # "prop":
-      var_c421e6b = # "contract_mp_play_prop_hunt";
+      var_c421e6b = #"contract_mp_play_prop_hunt";
       break;
     case # "sas":
-      var_c421e6b = # "contract_mp_play_sticks_and_stones";
+      var_c421e6b = #"contract_mp_play_sticks_and_stones";
       break;
     case # "sd":
-      var_c421e6b = # "hash_5039727046c10015";
+      var_c421e6b = #"hash_5039727046c10015";
       break;
     case # "tdm":
       if(level.hardcoremode) {
         self function_fd9fb79b(#"hash_30ac3098e945e653");
       }
 
-      var_c421e6b = # "hash_697ce077df5b3b5a";
+      var_c421e6b = #"hash_697ce077df5b3b5a";
       break;
     case # "vip":
-      var_c421e6b = # "hash_4384359f95ad0db0";
+      var_c421e6b = #"hash_4384359f95ad0db0";
       break;
     case # "fireteam_dirty_bomb":
-      var_c421e6b = # "hash_445752ece698bef2";
+      var_c421e6b = #"hash_445752ece698bef2";
       break;
     default:
       break;
@@ -781,30 +781,30 @@ function on_headshot_kill(weapon) {
   weaponclass = util::getweaponclass(weapon);
 
   if(!isDefined(weaponclass)) {
-    weaponclass = # "unspecified";
+    weaponclass = #"unspecified";
   }
 
   switch (weaponclass) {
     case # "weapon_assault":
-      var_6b9aa5a0 = # "hash_3a58a49b35b9fa33";
+      var_6b9aa5a0 = #"hash_3a58a49b35b9fa33";
       break;
     case # "weapon_lmg":
-      var_6b9aa5a0 = # "hash_4fad0a97fc2fd9d4";
+      var_6b9aa5a0 = #"hash_4fad0a97fc2fd9d4";
       break;
     case # "weapon_pistol":
-      var_6b9aa5a0 = # "hash_192947c83a9aafab";
+      var_6b9aa5a0 = #"hash_192947c83a9aafab";
       break;
     case # "weapon_cqb":
-      var_6b9aa5a0 = # "hash_6a65c11816351cf2";
+      var_6b9aa5a0 = #"hash_6a65c11816351cf2";
       break;
     case # "weapon_smg":
-      var_6b9aa5a0 = # "hash_5a9d9828ffe3c05f";
+      var_6b9aa5a0 = #"hash_5a9d9828ffe3c05f";
       break;
     case # "weapon_sniper":
-      var_6b9aa5a0 = # "hash_4e0aa3269ac3f32f";
+      var_6b9aa5a0 = #"hash_4e0aa3269ac3f32f";
       break;
     case # "weapon_tactical":
-      var_6b9aa5a0 = # "hash_52862bdba426ec21";
+      var_6b9aa5a0 = #"hash_52862bdba426ec21";
       break;
     default:
       break;
@@ -824,7 +824,7 @@ function function_8af6a5a() {
 }
 
 function function_d9ae19f0(player) {
-  if(player.var_9cd2c51d.var_43797ec0.statname === # "eq_stimshot" && isDefined(player.heal.heal_amount) && isDefined(player.heal.var_fa57541f)) {
+  if(player.var_9cd2c51d.var_43797ec0.statname === #"eq_stimshot" && isDefined(player.heal.heal_amount) && isDefined(player.heal.var_fa57541f)) {
     player function_fd9fb79b(#"hash_4222068ae31bdf3f", player.heal.heal_amount - player.heal.var_fa57541f);
   }
 }

@@ -67,7 +67,7 @@ set_ammo(b_max_ammo = 1) {
   a_weapons = self getweaponslistprimaries();
 
   foreach(weapon in a_weapons) {
-    if(weaponhasattachment(weapon, "uber") && weapon.statname == # "smg_capacity_t8") {
+    if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8") {
       continue;
     }
 

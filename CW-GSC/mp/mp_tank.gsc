@@ -35,7 +35,7 @@ function function_a4fed09f(a_ents) {
 }
 
 function function_21acba11() {
-  if(util::get_game_type() !== # "zonslaught") {
+  if(util::get_game_type() !== #"zonslaught") {
     hidemiscmodels("tank_onslaught_props");
     array::delete_all(getEntArray("tank_onslaught_props", "targetname"));
   }

@@ -16,7 +16,7 @@
 function autoexec function_7defddbd() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype === # "vip" || str_gametype === # "zsurvival") {
+  if(str_gametype === #"vip" || str_gametype === #"zsurvival") {
     setgametypesetting(#"hash_3a15393c2e90e121", 1);
   }
 }

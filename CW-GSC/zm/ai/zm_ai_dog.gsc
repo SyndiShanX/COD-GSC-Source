@@ -100,7 +100,7 @@ function function_b9d56970() {
     self.var_cc7af248 = 1;
   }
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     self callback::function_d8abfc3d(#"on_ai_killed", &function_dd2995a8);
   }
 }
@@ -180,12 +180,12 @@ function private function_d4dbfd41(origin, angles, spawn_anim) {
   self clientfield::increment("sr_dog_pre_spawn_fx");
   self setfreecameralockonallowed(0);
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     self animation::play("ai_t9_zm_zombie_dog_spawn_air_plaguehound_01", self.origin, spawn_anim);
     return;
   }
 
-  if(self.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(self.subarchetype === #"hash_28e36e7b7d5421f") {
     self animation::play("ai_t9_zm_zombie_dog_spawn_air_hellhound_01", self.origin, spawn_anim);
   }
 }
@@ -378,7 +378,7 @@ function is_target_valid(dog, target) {
     return 0;
   }
 
-  if(!(dog.team == # "allies")) {
+  if(!(dog.team == #"allies")) {
     if(!isPlayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
@@ -429,7 +429,7 @@ function private get_favorite_enemy(dog) {
   dog_targets = [];
 
   if(sessionmodeiszombiesgame()) {
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       dog_targets = getaiteamarray(level.zombie_team);
     } else {
       dog_targets = getplayers();
@@ -601,11 +601,11 @@ function zombiedogtargetservice(behaviortreeentity) {
 }
 
 function zombiedogshouldmelee(behaviortreeentity) {
-  if(behaviortreeentity.subarchetype === # "hash_2a5479b83161cb35") {
+  if(behaviortreeentity.subarchetype === #"hash_2a5479b83161cb35") {
     return 0;
   }
 
-  if(behaviortreeentity.subarchetype === # "hash_28e36e7b7d5421f" && function_a82712bc(behaviortreeentity)) {
+  if(behaviortreeentity.subarchetype === #"hash_28e36e7b7d5421f" && function_a82712bc(behaviortreeentity)) {
     return 1;
   }
 
@@ -613,7 +613,7 @@ function zombiedogshouldmelee(behaviortreeentity) {
     shouldmelee = namespace_e292b080::zombieshouldmelee(behaviortreeentity);
 
     if(!shouldmelee) {
-      if(behaviortreeentity.subarchetype === # "hash_28e36e7b7d5421f") {
+      if(behaviortreeentity.subarchetype === #"hash_28e36e7b7d5421f") {
         if(isDefined(behaviortreeentity.favoriteenemy)) {
           goal_info = behaviortreeentity function_4794d6a3();
 
@@ -675,7 +675,7 @@ function function_9c2fe7e6(behaviortreeentity) {
 }
 
 function function_a82712bc(behaviortreeentity) {
-  if(behaviortreeentity.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(behaviortreeentity.subarchetype === #"hash_28e36e7b7d5421f") {
     node = behaviortreeentity.traversestartnode;
 
     if(namespace_85745671::function_f4087909(node.var_597f08bf)) {
@@ -698,7 +698,7 @@ function function_4a7e2ba0(behaviortreeentity) {
     return false;
   }
 
-  if(behaviortreeentity.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(behaviortreeentity.subarchetype === #"hash_28e36e7b7d5421f") {
     return true;
   }
 
@@ -716,7 +716,7 @@ function function_c13b6bae(behaviortreeentity) {
 }
 
 function function_f0beb97c(entity) {
-  if(entity.subarchetype === # "hash_2a5479b83161cb35") {
+  if(entity.subarchetype === #"hash_2a5479b83161cb35") {
     if(isDefined(entity.favoriteenemy)) {
       if(is_true(entity.var_326351f)) {
         goal_info = entity function_4794d6a3();
@@ -836,7 +836,7 @@ function function_ea61b64a(dog) {
 }
 
 function private function_7ee905fc(params) {
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     function_120c3407(self);
   }
 
@@ -854,7 +854,7 @@ function private function_7ee905fc(params) {
 }
 
 function private function_b077b73d(time) {
-  if(self.subarchetype === # "hash_28e36e7b7d5421f" || self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_28e36e7b7d5421f" || self.subarchetype === #"hash_2a5479b83161cb35") {
     context = self getblackboardattribute("_context");
 
     if(isDefined(context) && (context == "low" || context == "high")) {
@@ -867,7 +867,7 @@ function private function_b077b73d(time) {
 function private function_ca4ce82b(s_params) {
   self clientfield::set("ZombieDogVocals", 0);
 
-  if(self.subarchetype === # "hash_2a5479b83161cb35") {
+  if(self.subarchetype === #"hash_2a5479b83161cb35") {
     self playSound(#"hash_6e603d5f1970365b");
     return;
   }
@@ -900,7 +900,7 @@ function private function_731939c2(entity) {
 }
 
 function function_77b7ec2d(entity) {
-  if(entity.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(entity.subarchetype === #"hash_28e36e7b7d5421f") {
     return false;
   }
 
@@ -963,7 +963,7 @@ function function_2d500a7e(entity) {
 }
 
 function function_70daebd0(entity) {
-  if(self.subarchetype !== # "hash_2a5479b83161cb35") {
+  if(self.subarchetype !== #"hash_2a5479b83161cb35") {
     return false;
   }
 
@@ -1058,7 +1058,7 @@ function function_70daebd0(entity) {
 }
 
 function function_9baf0ee8(entity) {
-  if(self.subarchetype !== # "hash_2a5479b83161cb35") {
+  if(self.subarchetype !== #"hash_2a5479b83161cb35") {
     return false;
   }
 

@@ -195,7 +195,7 @@ on_spawn_player() {
     platoon = getteamplatoon(self.team);
     var_8cc84817 = infection::function_76601b7d();
 
-    if(var_8cc84817 != # "none" && platoon == infection::function_76601b7d()) {
+    if(var_8cc84817 != #"none" && platoon == infection::function_76601b7d()) {
       self infection::give_body();
       self player::spawn_player();
     }
@@ -1008,7 +1008,7 @@ on_dead_event(team) {
     return;
   }
 
-  if(platoons::function_382a49e0() && platoon != # "none" && platoon != # "invalid") {
+  if(platoons::function_382a49e0() && platoon != #"none" && platoon != #"invalid") {
     if(teams::function_9dd75dad(team) && !(isDefined(level.var_606becce[team]) && level.var_606becce[team]) && platoons::is_all_dead(platoon)) {
       foreach(team in function_37d3bfcb(platoon)) {
         team_eliminated(team, platoons::function_cea75f29() + 1);
@@ -1220,7 +1220,7 @@ on_one_left_event(team) {
 
   platoon = getteamplatoon(team);
 
-  if(platoon != # "none" && platoon != # "invalid") {
+  if(platoon != #"none" && platoon != #"invalid") {
     return;
   }
 
@@ -1897,7 +1897,7 @@ function_b777ff94(entity) {
     vehicle = entity getvehicleoccupied();
     players = vehicle getvehoccupants();
 
-    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == # "tactical_raft_wz") {
+    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == #"tactical_raft_wz") {
       var_9914886a = 1;
     }
   } else {
@@ -1997,7 +1997,7 @@ function function_ec375172(player) {
   player endon(#"disconnect");
   characterassetname = getcharacterassetname(player getcharacterbodytype(), currentsessionmode());
 
-  if(characterassetname !== # "hash_4b5db84146fbdfd5" && !getdvarint(#"hash_65cc1eba6dcaba72", 0)) {
+  if(characterassetname !== #"hash_4b5db84146fbdfd5" && !getdvarint(#"hash_65cc1eba6dcaba72", 0)) {
     return;
   }
 

@@ -10,8 +10,8 @@
 #namespace tacticalinsertion;
 
 init_shared() {
-  level._effect[#"tacticalinsertionfriendly"] = # "_t6/misc/fx_equip_tac_insert_light_grn";
-  level._effect[#"tacticalinsertionenemy"] = # "_t6/misc/fx_equip_tac_insert_light_red";
+  level._effect[#"tacticalinsertionfriendly"] = #"_t6/misc/fx_equip_tac_insert_light_grn";
+  level._effect[#"tacticalinsertionenemy"] = #"_t6/misc/fx_equip_tac_insert_light_red";
   clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int", &spawned, 0, 0);
   latlongstruct = struct::get("lat_long", "targetname");
 

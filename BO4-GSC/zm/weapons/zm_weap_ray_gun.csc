@@ -13,9 +13,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_64dc4c79d9035fca"] = # "hash_73bf7604340dd645";
-  level._effect[#"hash_41c6282937fa564d"] = # "zombie/fx_powerup_on_green_zmb";
-  level._effect[#"hash_537eedf1dffba786"] = # "zombie/fx_powerup_grab_green_zmb";
+  level._effect[#"hash_64dc4c79d9035fca"] = #"hash_73bf7604340dd645";
+  level._effect[#"hash_41c6282937fa564d"] = #"zombie/fx_powerup_on_green_zmb";
+  level._effect[#"hash_537eedf1dffba786"] = #"zombie/fx_powerup_grab_green_zmb";
   clientfield::register("actor", "raygun_disintegrate", 20000, 1, "counter", &function_2602ff58, 0, 0);
 }
 

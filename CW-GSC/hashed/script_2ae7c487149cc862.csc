@@ -268,9 +268,9 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(self zm_utility::function_f8796df3(fieldname)) {
       if(bwastimejump == 2) {
-        str_fx = # "hash_679d39e5fd4eae19";
+        str_fx = #"hash_679d39e5fd4eae19";
       } else if(bwastimejump == 1) {
-        str_fx = # "hash_462352157053fa4a";
+        str_fx = #"hash_462352157053fa4a";
       }
 
       if(viewmodelhastag(fieldname, "tag_flashlight")) {
@@ -278,9 +278,9 @@ function function_4fd00e1f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
     } else {
       if(bwastimejump == 2) {
-        str_fx = # "hash_153f56ac9d13a399";
+        str_fx = #"hash_153f56ac9d13a399";
       } else if(bwastimejump == 1) {
-        str_fx = # "hash_64e79a7456f58dec";
+        str_fx = #"hash_64e79a7456f58dec";
       }
 
       level.var_3630f9c0[var_47c85523][fieldname] = util::playFXOnTag(fieldname, str_fx, self, "tag_flashlight");

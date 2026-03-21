@@ -95,7 +95,7 @@ function is_winning_team(team) {
 }
 
 function function_a2b53e17(player) {
-  if(game.outcome.team !== # "none" && player.pers[#"team"] === game.outcome.team) {
+  if(game.outcome.team !== #"none" && player.pers[#"team"] === game.outcome.team) {
     return true;
   }
 
@@ -215,7 +215,7 @@ function function_10cd0ad() {
 
     foreach(i, team in var_578c6319) {
       if(totaldeaths[team] != lowestdeathcount) {
-        var_578c6319[i] = # "hash_14ed42bb8a61e1e2";
+        var_578c6319[i] = #"hash_14ed42bb8a61e1e2";
       }
     }
 

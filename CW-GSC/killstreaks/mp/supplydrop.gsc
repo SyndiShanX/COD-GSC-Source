@@ -47,20 +47,20 @@ function private preinit() {
   setDvar(#"hash_763d6ee8f054423f", 1);
   level.cratemodelfriendly = bundle.var_e7faf6c2;
   level.cratemodelenemy = bundle.var_65ed53d3;
-  level.cratemodeltank = # "wpn_t7_drop_box";
+  level.cratemodeltank = #"wpn_t7_drop_box";
   level.cratemodelboobytrapped = bundle.var_b25fc1fc;
 
   if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 1) {
-    level.cratemodelfriendly = # "hash_12e47c6c01f2ff59";
-    level.cratemodelenemy = # "hash_5c54841918c40b74";
-    level.cratemodelboobytrapped = # "hash_2d42a64e786470ce";
+    level.cratemodelfriendly = #"hash_12e47c6c01f2ff59";
+    level.cratemodelenemy = #"hash_5c54841918c40b74";
+    level.cratemodelboobytrapped = #"hash_2d42a64e786470ce";
   }
 
   level.vtoldrophelicoptervehicleinfo = "vehicle_t9_mil_helicopter_care_package";
   ir_strobe::init_shared();
   level.crateownerusetime = 500;
   level.cratenonownerusetime = int(getgametypesetting(#"cratecapturetime") * 1000);
-  level.supplydropdisarmcrate = # "hash_20071ab3686e8d58";
+  level.supplydropdisarmcrate = #"hash_20071ab3686e8d58";
   level.var_f90e0e29 = &cratedelete;
   clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int");
   clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int");
@@ -975,16 +975,16 @@ function supplydropgrenadetimeout(team, killstreak_id, weapon) {
   self notify(#"grenade_timeout");
   killstreakrules::killstreakstop("supply_drop", team, killstreak_id);
 
-  if(weapon.name == # "tank_robot") {
+  if(weapon.name == #"tank_robot") {
     killstreakrules::killstreakstop("tank_robot", team, killstreak_id);
     self notify(#"cleanup_marker");
-  } else if(weapon.name == # "inventory_tank_robot") {
+  } else if(weapon.name == #"inventory_tank_robot") {
     killstreakrules::killstreakstop("inventory_tank_robot", team, killstreak_id);
     self notify(#"cleanup_marker");
-  } else if(weapon.name == # "combat_robot_drop") {
+  } else if(weapon.name == #"combat_robot_drop") {
     killstreakrules::killstreakstop("combat_robot_drop", team, killstreak_id);
     self notify(#"cleanup_marker");
-  } else if(weapon.name == # "inventory_combat_robot_drop") {
+  } else if(weapon.name == #"inventory_combat_robot_drop") {
     killstreakrules::killstreakstop("inventory_combat_robot_drop", team, killstreak_id);
     self notify(#"cleanup_marker");
   }
@@ -1155,7 +1155,7 @@ function cratespawn(killstreak, killstreakid, owner, team, drop_origin, drop_ang
   function_d79fe484(crate, getdvarint(#"g_useholdtime", 0) / 1000);
   function_708a32ec(crate);
   crate.angles = drop_angle;
-  crate.visibletoall = team == # "neutral";
+  crate.visibletoall = team == #"neutral";
   crate.script_noteworthy = "care_package";
   crate.weapon = getweapon(#"supplydrop");
   crate setweapon(crate.weapon);
@@ -1597,7 +1597,7 @@ function default_land_function(crate, category, owner, team) {
     killcament = spawn("script_model", crate.origin + (0, 0, 60));
     killcament setweapon(getweapon(#"supplydrop"));
 
-    if(crate.team != # "neutral" && (playerhasengineerperk || remote_hack == 1) && owner != player && (level.teambased && util::function_fbce7263(team, player.team) || !level.teambased)) {
+    if(crate.team != #"neutral" && (playerhasengineerperk || remote_hack == 1) && owner != player && (level.teambased && util::function_fbce7263(team, player.team) || !level.teambased)) {
       spawn_explosive_crate(crate.origin, crate.angles, category, owner, team, player, playerhasengineerperk, killcament);
       util::wait_network_frame();
       crate cratedelete(0);
@@ -1639,7 +1639,7 @@ function watch_explosive_crate(killcament) {
   remote_hack = waitresult.is_remote_hack;
   player = waitresult.player;
 
-  if(waitresult._notify == # "captured") {
+  if(waitresult._notify == #"captured") {
     if(isDefined(self)) {
       if(!player hasperk(#"specialty_showenemyequipment") && !remote_hack) {
         self thread scene::play(#"p9_fxanim_mp_care_package_bundle", self);
@@ -1843,7 +1843,7 @@ function cratedroptogroundkill() {
         continue;
       }
 
-      if(players[i].team == # "spectator") {
+      if(players[i].team == #"spectator") {
         continue;
       }
 
@@ -1902,7 +1902,7 @@ function cratedroptogroundtrace(start) {
       return;
     }
 
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       return;
     }
 
@@ -2038,7 +2038,7 @@ function crateusethink() {
       break;
     }
 
-    if(self.team == # "neutral") {
+    if(self.team == #"neutral") {
       continue;
     }
 
@@ -2101,7 +2101,7 @@ function crateusethinkowner() {
       continue;
     }
 
-    if(self.team != # "neutral") {
+    if(self.team != #"neutral") {
       if(!isDefined(self.owner)) {
         continue;
       }
@@ -2266,15 +2266,15 @@ function personalusebar(object) {
   self endon(#"disconnect");
   capturecratestate = 0;
 
-  if(object.team != # "neutral" && self hasperk(#"hash_2373f1c307651b95") && object.owner != self && !isDefined(object.hacker) && (level.teambased && util::function_fbce7263(object.owner.team, self.team) || !level.teambased)) {
+  if(object.team != #"neutral" && self hasperk(#"hash_2373f1c307651b95") && object.owner != self && !isDefined(object.hacker) && (level.teambased && util::function_fbce7263(object.owner.team, self.team) || !level.teambased)) {
     capturecratestate = 2;
     self playlocalsound(#"evt_hacker_hacking");
-  } else if(object.team != # "neutral" && self hasperk(#"hash_2373f1c307651b95") && isDefined(object.hacker) && (object.owner == self || level.teambased && object.owner.team == self.team)) {
+  } else if(object.team != #"neutral" && self hasperk(#"hash_2373f1c307651b95") && isDefined(object.hacker) && (object.owner == self || level.teambased && object.owner.team == self.team)) {
     capturecratestate = 3;
     self playlocalsound(#"evt_hacker_hacking");
   } else {
     capturecratestate = 1;
-    self.is_capturing_own_supply_drop = object.team != # "neutral" && object.owner === self && (!isDefined(object.originalowner) || object.originalowner == self);
+    self.is_capturing_own_supply_drop = object.team != #"neutral" && object.owner === self && (!isDefined(object.originalowner) || object.originalowner == self);
   }
 
   lastrate = -1;
@@ -3128,7 +3128,7 @@ function helidropcrate(killstreak, originalowner, offset, killcament, killstreak
   origin = waitresult.position;
   angles = waitresult.direction;
 
-  if(waitresult._notify == # "hash_525537be2de4c159") {
+  if(waitresult._notify == #"hash_525537be2de4c159") {
     self.crate.var_da439787 = 1;
     self.crate.angles = (0, self.crate.angles[1], 0);
   }

@@ -259,7 +259,7 @@ function private function_7a12a868(var_4838ddab, origin) {
 
 function private function_cd602d73() {
   self.var_b06ed2fa = spawn("script_model", self.origin);
-  self.var_b06ed2fa.team = # "neutral";
+  self.var_b06ed2fa.team = #"neutral";
   self.var_b06ed2fa setModel("tag_origin");
   self.var_b06ed2fa clientfield::set("ftdb_zoneCircle", 2);
   self.var_b06ed2fa.numrings = self.numrings;
@@ -412,7 +412,7 @@ function private function_2be7a212(ringindex, origin) {
   self.var_e17ae8be[ringindex][radindex] = {};
   self.var_e17ae8be[ringindex][radindex].origin = origin;
   self.var_e17ae8be[ringindex][radindex].model = spawn("script_model", origin);
-  self.var_e17ae8be[ringindex][radindex].model.team = # "neutral";
+  self.var_e17ae8be[ringindex][radindex].model.team = #"neutral";
   self.var_e17ae8be[ringindex][radindex].model setModel("tag_origin");
   self.var_e17ae8be[ringindex][radindex].model clientfield::set("ftdb_zoneCircle", 1);
   self.var_e17ae8be[ringindex][radindex].model.var_2c8491dd = self;

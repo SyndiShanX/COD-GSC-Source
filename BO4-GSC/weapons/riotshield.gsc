@@ -15,10 +15,10 @@ init_shared() {
     level.weaponriotshield = getweapon(#"riotshield");
   }
 
-  level.deployedshieldmodel = # "wpn_t7_shield_riot_world";
-  level.stowedshieldmodel = # "wpn_t7_shield_riot_world";
-  level.carriedshieldmodel = # "wpn_t7_shield_riot_world";
-  level.detectshieldmodel = # "wpn_t7_shield_riot_world";
+  level.deployedshieldmodel = #"wpn_t7_shield_riot_world";
+  level.stowedshieldmodel = #"wpn_t7_shield_riot_world";
+  level.carriedshieldmodel = #"wpn_t7_shield_riot_world";
+  level.detectshieldmodel = #"wpn_t7_shield_riot_world";
   level.riotshielddestroyanim = "o_riot_stand_destroyed";
   level.riotshielddeployanim = "o_riot_stand_deploy";
   level.riotshieldshotanimfront = "o_riot_stand_shot";
@@ -133,7 +133,7 @@ resetreconmodelvisibility(owner) {
 
   for(i = 0; i < level.players.size; i++) {
     if(level.players[i] hasperk(#"specialty_showenemyequipment")) {
-      if(level.players[i].team == # "spectator") {
+      if(level.players[i].team == #"spectator") {
         continue;
       }
 

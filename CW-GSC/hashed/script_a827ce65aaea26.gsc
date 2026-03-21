@@ -74,8 +74,8 @@ function function_d5ab66bf() {
     level.var_b03d5c95 function_268e4500();
     level.var_b03d5c95 usetriggerrequirelookat(0);
     level.var_b03d5c95 triggerignoreteam();
-    level.var_b03d5c95.var_9d7362a4 = # "hash_67f5a549d99a3f56";
-    level.var_b03d5c95.var_f0468c71 = # "hash_5b07da139f0eb5d3";
+    level.var_b03d5c95.var_9d7362a4 = #"hash_67f5a549d99a3f56";
+    level.var_b03d5c95.var_f0468c71 = #"hash_5b07da139f0eb5d3";
     level.var_b03d5c95.var_51c14c0b = var_87f8ede0;
     var_a999a6b1 = gameobjects::create_use_object(#"any", level.var_b03d5c95, [], (0, 0, 0), #"hash_33e4ad6732f37b84", 1);
     var_a999a6b1 gameobjects::set_visible(#"group_all");
@@ -123,7 +123,7 @@ function onuse(player) {
       var_bbec6b17 = getentarraybytype(15);
 
       foreach(zombie in var_bbec6b17) {
-        if(zombie.zm_ai_category === # "normal" && isalive(zombie) && zombie.archetype !== # "tormentor") {
+        if(zombie.zm_ai_category === #"normal" && isalive(zombie) && zombie.archetype !== #"tormentor") {
           zombie zombie_utility::set_zombie_run_cycle_restore_from_override();
         }
       }
@@ -144,7 +144,7 @@ function onuse(player) {
     var_bbec6b17 = getentarraybytype(15);
 
     foreach(zombie in var_bbec6b17) {
-      if(zombie.zm_ai_category === # "normal" && isalive(zombie) && zombie.archetype !== # "tormentor") {
+      if(zombie.zm_ai_category === #"normal" && isalive(zombie) && zombie.archetype !== #"tormentor") {
         if(math::cointoss(level.var_44064cc6)) {
           zombie zombie_utility::set_zombie_run_cycle_override_value("super_sprint");
           continue;

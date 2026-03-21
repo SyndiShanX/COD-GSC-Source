@@ -116,17 +116,17 @@ function on_menu_response(params) {
     }
   }
 
-  if(response == # "play_deathcam") {
+  if(response == #"play_deathcam") {
     self killcam::start_deathcam();
     return;
   }
 
-  if(response == # "first_snapshot") {
+  if(response == #"first_snapshot") {
     level flag::set(#"hud_initialized");
     self callback::callback(#"hash_4fd893d99ecc3458");
   }
 
-  if(response == # "skip_deathcam") {
+  if(response == #"skip_deathcam") {
     self.sessionstate = "spectator";
     self.spectatorclient = -1;
     self.killcamentity = -1;
@@ -228,7 +228,7 @@ function function_2d1eb0ec(intpayload) {
     if(callout.name == "sgc_warzone_item") {
       var_5f6c1c04 = self.var_cc586562;
 
-      if(!isDefined(var_5f6c1c04) || var_5f6c1c04 == # "") {
+      if(!isDefined(var_5f6c1c04) || var_5f6c1c04 == #"") {
         return;
       }
     }

@@ -47,7 +47,7 @@ function function_473fedfd(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(!isDefined(var_64774ae3)) {
-    var_64774ae3 = # "";
+    var_64774ae3 = #"";
   }
 
   model = function_1df4c3b0(fieldname, #"zm_field_upgrade_loadout");
@@ -61,32 +61,32 @@ function function_1079747f(localclientnum, oldval, newval, bnewent, binitialsnap
 
   switch (bwastimejump) {
     case 1:
-      var_5f8075ff = # "hash_48008a3a2268e196";
-      var_c785352b = # "hash_47f99e3a2262e4e4";
+      var_5f8075ff = #"hash_48008a3a2268e196";
+      var_c785352b = #"hash_47f99e3a2262e4e4";
       break;
     case 2:
-      var_5f8075ff = # "hash_6754f5f14b55f3ff";
-      var_c785352b = # "hash_674f09f14b51aa4d";
+      var_5f8075ff = #"hash_6754f5f14b55f3ff";
+      var_c785352b = #"hash_674f09f14b51aa4d";
       break;
     case 3:
-      var_5f8075ff = # "hash_48e29537fcb81599";
-      var_c785352b = # "hash_48e9a137fcbe48ab";
+      var_5f8075ff = #"hash_48e29537fcb81599";
+      var_c785352b = #"hash_48e9a137fcbe48ab";
       break;
     case 4:
-      var_5f8075ff = # "hash_7238cf4ee4d6c516";
-      var_c785352b = # "hash_7231e34ee4d0c864";
+      var_5f8075ff = #"hash_7238cf4ee4d6c516";
+      var_c785352b = #"hash_7231e34ee4d0c864";
       break;
     case 5:
-      var_5f8075ff = # "hash_4c83572625d08ca";
-      var_c785352b = # "hash_4c22972625888b8";
+      var_5f8075ff = #"hash_4c83572625d08ca";
+      var_c785352b = #"hash_4c22972625888b8";
       break;
     case 6:
-      var_5f8075ff = # "hash_79a0e1fa0ed24c50";
-      var_c785352b = # "hash_79a6edfa0ed6cc62";
+      var_5f8075ff = #"hash_79a0e1fa0ed24c50";
+      var_c785352b = #"hash_79a6edfa0ed6cc62";
       break;
     case 7:
-      var_5f8075ff = # "hash_5371aaf87d10f74a";
-      var_c785352b = # "hash_536b9ef87d0c7738";
+      var_5f8075ff = #"hash_5371aaf87d10f74a";
+      var_c785352b = #"hash_536b9ef87d0c7738";
       break;
     case 8:
       break;

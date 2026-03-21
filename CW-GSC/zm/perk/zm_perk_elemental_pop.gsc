@@ -52,7 +52,7 @@ function precache() {
     return;
   }
 
-  level._effect[#"elemental_pop_light"] = # "hash_17afc35bb449d1c2";
+  level._effect[#"elemental_pop_light"] = #"hash_17afc35bb449d1c2";
   level.machine_assets[#"talent_elemental_pop"] = spawnStruct();
   level.machine_assets[#"talent_elemental_pop"].weapon = getweapon("zombie_perk_bottle_elemental_pop");
   level.machine_assets[#"talent_elemental_pop"].off_model = "p9_sur_elemental_pop_off";
@@ -86,7 +86,7 @@ function function_abddd809(inflictor, attacker, damage, flags, meansofdeath, wea
     return flags;
   }
 
-  if(isPlayer(damage) && !(self.zm_ai_category === # "elite") && !(self.zm_ai_category === # "boss")) {
+  if(isPlayer(damage) && !(self.zm_ai_category === #"elite") && !(self.zm_ai_category === #"boss")) {
     if(damage namespace_e86ffa8::function_cd6787b()) {
       if(isvehicle(attacker) && !damage namespace_e86ffa8::function_cd6787b(1)) {
         return flags;
@@ -119,7 +119,7 @@ function function_abddd809(inflictor, attacker, damage, flags, meansofdeath, wea
 
         damage.aat[w_aat] = str_choice;
 
-        if(self.zm_ai_category === # "normal" || self.zm_ai_category === # "special" && isDefined(n_tier) && n_tier > 3) {
+        if(self.zm_ai_category === #"normal" || self.zm_ai_category === #"special" && isDefined(n_tier) && n_tier > 3) {
           damage clientfield::increment_to_player("" + # "hash_12c6e46c315cd43b", 1);
           aat::aat_response(b_death, attacker, damage, flags, meansofdeath, weapon, w_aat, var_bebe15e1, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
           damage.var_4caed594 = gettime();
@@ -370,7 +370,7 @@ function function_c262b70e(player) {
     return;
   }
 
-  if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite" || self.zm_ai_category === #"boss") {
     return;
   }
 

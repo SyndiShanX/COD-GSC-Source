@@ -27,7 +27,7 @@ function private function_7718419d(var_c93cfecf = "") {
 }
 
 function private function_62443495(var_c93cfecf = "") {
-  if(var_c93cfecf == # "game_select") {
+  if(var_c93cfecf == #"game_select") {
     namespace_61e6d095::function_73c9a490(#"hash_541706109c2cadca", 1);
     namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "useGameSelect", 1);
     namespace_61e6d095::function_9ade1d9b(#"hash_541706109c2cadca", "gameRef", "");
@@ -82,7 +82,7 @@ function function_5058f233(var_c93cfecf, var_c18a5a8b = 5) {
   }
 
   var_ae865aeb = getscriptbundle(var_c93cfecf);
-  previewimage = # "";
+  previewimage = #"";
 
   if(isDefined(var_ae865aeb) && isDefined(var_ae865aeb.previewimage)) {
     previewimage = var_ae865aeb.previewimage;

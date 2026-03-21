@@ -126,9 +126,9 @@ coverpeekterminate(entity) {
 
 function_dc503571(entity) {
   if(isDefined(entity.node)) {
-    if(entity.node.type == # "cover left" || entity.node.type == # "cover right") {
+    if(entity.node.type == #"cover left" || entity.node.type == #"cover right") {
       return true;
-    } else if(entity.node.type == # "cover pillar") {
+    } else if(entity.node.type == #"cover pillar") {
       if(!(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) || !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048)) {
         return true;
       }
@@ -146,13 +146,13 @@ function_eb148f38(entity) {
   yawtoenemyposition = getaimyawtoenemyfromnode(entity, entity.node, entity.enemy);
   legalaimyaw = 0;
 
-  if(entity.node.type == # "cover left") {
+  if(entity.node.type == #"cover left") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_left_lean");
     legalaimyaw = yawtoenemyposition <= aimlimitsforcover[#"aim_left"] + 10 && yawtoenemyposition >= -10;
-  } else if(entity.node.type == # "cover right") {
+  } else if(entity.node.type == #"cover right") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_right_lean");
     legalaimyaw = yawtoenemyposition >= aimlimitsforcover[#"aim_right"] - 10 && yawtoenemyposition <= 10;
-  } else if(entity.node.type == # "cover pillar") {
+  } else if(entity.node.type == #"cover pillar") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover");
     supportsleft = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024);
     supportsright = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048);
@@ -196,13 +196,13 @@ function_7353f95b(entity) {
 
   legalaimyaw = 0;
 
-  if(entity.node.type == # "cover left") {
+  if(entity.node.type == #"cover left") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_left_lean");
     legalaimyaw = yawtoenemyposition <= aimlimitsforcover[#"aim_left"] + 10 && yawtoenemyposition >= -10;
-  } else if(entity.node.type == # "cover right") {
+  } else if(entity.node.type == #"cover right") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_right_lean");
     legalaimyaw = yawtoenemyposition >= aimlimitsforcover[#"aim_right"] - 10 && yawtoenemyposition <= 10;
-  } else if(entity.node.type == # "cover pillar") {
+  } else if(entity.node.type == #"cover pillar") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover");
     supportsleft = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024);
     supportsright = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048);
@@ -247,9 +247,9 @@ function_f82f8634(entity) {
 
 supportsleancovercondition(entity) {
   if(isDefined(entity.node)) {
-    if(entity.node.type == # "cover left" || entity.node.type == # "cover right") {
+    if(entity.node.type == #"cover left" || entity.node.type == #"cover right") {
       return true;
-    } else if(entity.node.type == # "cover pillar") {
+    } else if(entity.node.type == #"cover pillar") {
       if(!(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) || !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048)) {
         return true;
       }
@@ -267,13 +267,13 @@ shouldleanatcovercondition(entity) {
   yawtoenemyposition = getaimyawtoenemyfromnode(entity, entity.node, entity.enemy);
   legalaimyaw = 0;
 
-  if(entity.node.type == # "cover left") {
+  if(entity.node.type == #"cover left") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_left_lean");
     legalaimyaw = yawtoenemyposition <= aimlimitsforcover[#"aim_left"] + 10 && yawtoenemyposition >= -10;
-  } else if(entity.node.type == # "cover right") {
+  } else if(entity.node.type == #"cover right") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_right_lean");
     legalaimyaw = yawtoenemyposition >= aimlimitsforcover[#"aim_right"] - 10 && yawtoenemyposition <= 10;
-  } else if(entity.node.type == # "cover pillar") {
+  } else if(entity.node.type == #"cover pillar") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover");
     supportsleft = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024);
     supportsright = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048);
@@ -317,13 +317,13 @@ shouldleanatcoveridlecondition(entity) {
 
   legalaimyaw = 0;
 
-  if(entity.node.type == # "cover left") {
+  if(entity.node.type == #"cover left") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_left_lean");
     legalaimyaw = yawtoenemyposition <= aimlimitsforcover[#"aim_left"] + 10 && yawtoenemyposition >= -10;
-  } else if(entity.node.type == # "cover right") {
+  } else if(entity.node.type == #"cover right") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover_right_lean");
     legalaimyaw = yawtoenemyposition >= aimlimitsforcover[#"aim_right"] - 10 && yawtoenemyposition <= 10;
-  } else if(entity.node.type == # "cover pillar") {
+  } else if(entity.node.type == #"cover pillar") {
     aimlimitsforcover = entity getaimlimitsfromentry("cover");
     supportsleft = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024);
     supportsright = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048);
@@ -378,7 +378,7 @@ supportsovercovercondition(entity) {
   stance = entity getblackboardattribute("_stance");
 
   if(isDefined(entity.node)) {
-    if(entity.node.type == # "conceal crouch" || entity.node.type == # "conceal stand") {
+    if(entity.node.type == #"conceal crouch" || entity.node.type == #"conceal stand") {
       return true;
     }
 
@@ -386,11 +386,11 @@ supportsovercovercondition(entity) {
       return false;
     }
 
-    if(entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") {
+    if(entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") {
       if(stance == "crouch") {
         return true;
       }
-    } else if(entity.node.type == # "cover stand" || entity.node.type == # "conceal stand") {
+    } else if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand") {
       if(stance == "stand") {
         return true;
       }
@@ -483,7 +483,7 @@ coverflankedactionterminate(entity) {
 }
 
 isatcrouchnode(entity) {
-  if(isDefined(entity.node) && (entity.node.type == # "exposed" || entity.node.type == # "guard" || entity.node.type == # "path")) {
+  if(isDefined(entity.node) && (entity.node.type == #"exposed" || entity.node.type == #"guard" || entity.node.type == #"path")) {
     if(distancesquared(entity.origin, entity.node.origin) <= 24 * 24) {
       return (!isstanceallowedatnode("stand", entity.node) && isstanceallowedatnode("crouch", entity.node));
     }
@@ -555,15 +555,15 @@ calculatecoverdirection(entity, stepout) {
 
     coverdirection = "cover_front_direction";
 
-    if(entity.node.type == # "cover left") {
+    if(entity.node.type == #"cover left") {
       if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4 || math::cointoss() || stepout) {
         coverdirection = "cover_left_direction";
       }
-    } else if(entity.node.type == # "cover right") {
+    } else if(entity.node.type == #"cover right") {
       if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4 || math::cointoss() || stepout) {
         coverdirection = "cover_right_direction";
       }
-    } else if(entity.node.type == # "cover pillar") {
+    } else if(entity.node.type == #"cover pillar") {
       if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) {
         return "cover_right_direction";
       }
@@ -589,7 +589,7 @@ calculatecoverdirection(entity, stepout) {
   } else {
     coverdirection = "cover_front_direction";
 
-    if(entity.node.type == # "cover pillar") {
+    if(entity.node.type == #"cover pillar") {
       if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) {
         return "cover_right_direction";
       }

@@ -100,8 +100,8 @@ function function_dd2493cc(local_client_num, objid) {
     state = 0;
   } else if(contested) {
     state = 3;
-  } else if(capturingteam === # "none") {
-    if(var_b65ea6f2 === # "none") {
+  } else if(capturingteam === #"none") {
+    if(var_b65ea6f2 === #"none") {
       state = 0;
     } else if(var_b65ea6f2 === var_c86e6ba8) {
       state = 1;
@@ -109,7 +109,7 @@ function function_dd2493cc(local_client_num, objid) {
       state = 2;
     }
   } else if(capturingteam === var_c86e6ba8) {
-    var_4c107e47 = var_b65ea6f2 === var_c86e6ba8 || var_b65ea6f2 === # "none";
+    var_4c107e47 = var_b65ea6f2 === var_c86e6ba8 || var_b65ea6f2 === #"none";
     state = var_4c107e47 ? 4 : 7;
   } else {
     var_6dbe5a6e = var_b65ea6f2 !== var_c86e6ba8;
@@ -168,12 +168,12 @@ function function_df78674f(localclientnum) {
 }
 
 function function_364d50b(teamindex = 0) {
-  team = # "none";
+  team = #"none";
 
   if(teamindex === 1) {
-    team = # "allies";
+    team = #"allies";
   } else if(teamindex === 2) {
-    team = # "axis";
+    team = #"axis";
   }
 
   return team;

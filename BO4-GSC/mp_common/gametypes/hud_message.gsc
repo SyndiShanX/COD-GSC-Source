@@ -11,34 +11,34 @@
 #namespace hud_message;
 
 init() {
-  game.strings[#"draw"] = # "hash_18114ebf7e352c55";
-  game.strings[#"round_draw"] = # "hash_68d9a667406d9e2e";
-  game.strings[#"round_win"] = # "hash_3f72c8cf61961fb2";
-  game.strings[#"round_loss"] = # "hash_70e6b03f0ea9b11d";
-  game.strings[#"victory"] = # "hash_31e1e88e88ba263f";
-  game.strings[#"defeat"] = # "hash_141c79e0a2e1383e";
-  game.strings[#"game_over"] = # "hash_ddc319addc8bcb2";
-  game.strings[#"halftime"] = # "hash_4403919077b48aaf";
-  game.strings[#"overtime"] = # "hash_19d325d8d1bfd3de";
-  game.strings[#"roundend"] = # "hash_62af47ae5592dbf8";
-  game.strings[#"intermission"] = # "hash_24bb668f17a9cc67";
-  game.strings[#"match_bonus"] = # "mp/match_bonus_is";
-  game.strings[#"codpoints_match_bonus"] = # "mp_codpoints_match_bonus_is";
-  game.strings[#"cod_caster_team_wins"] = # "mp/wins";
-  game.strings[#"cod_caster_team_eliminated"] = # "mp/team_eliminated";
-  game.strings[#"tie"] = # "mp/match_tie";
-  game.strings[#"round_draw"] = # "mp/round_draw";
-  game.strings[#"enemies_eliminated"] = # "hash_3191d03a1c0615ad";
-  game.strings[#"team_eliminated"] = # "hash_5ebfcbc4ad2769b6";
-  game.strings[#"score_limit_reached"] = # "mp/score_limit_reached";
-  game.strings[#"round_score_limit_reached"] = # "mp/score_limit_reached";
-  game.strings[#"round_limit_reached"] = # "mp/round_limit_reached";
-  game.strings[#"time_limit_reached"] = # "mp/time_limit_reached";
-  game.strings[#"players_forfeited"] = # "mp/players_forfeited";
-  game.strings[#"other_teams_forfeited"] = # "mp_other_teams_forfeited";
-  game.strings[#"host_sucks"] = # "mp/host_sucks";
-  game.strings[#"host_ended"] = # "mp/host_ended_game";
-  game.strings[#"game_ended"] = # "mp/ended_game";
+  game.strings[#"draw"] = #"hash_18114ebf7e352c55";
+  game.strings[#"round_draw"] = #"hash_68d9a667406d9e2e";
+  game.strings[#"round_win"] = #"hash_3f72c8cf61961fb2";
+  game.strings[#"round_loss"] = #"hash_70e6b03f0ea9b11d";
+  game.strings[#"victory"] = #"hash_31e1e88e88ba263f";
+  game.strings[#"defeat"] = #"hash_141c79e0a2e1383e";
+  game.strings[#"game_over"] = #"hash_ddc319addc8bcb2";
+  game.strings[#"halftime"] = #"hash_4403919077b48aaf";
+  game.strings[#"overtime"] = #"hash_19d325d8d1bfd3de";
+  game.strings[#"roundend"] = #"hash_62af47ae5592dbf8";
+  game.strings[#"intermission"] = #"hash_24bb668f17a9cc67";
+  game.strings[#"match_bonus"] = #"mp/match_bonus_is";
+  game.strings[#"codpoints_match_bonus"] = #"mp_codpoints_match_bonus_is";
+  game.strings[#"cod_caster_team_wins"] = #"mp/wins";
+  game.strings[#"cod_caster_team_eliminated"] = #"mp/team_eliminated";
+  game.strings[#"tie"] = #"mp/match_tie";
+  game.strings[#"round_draw"] = #"mp/round_draw";
+  game.strings[#"enemies_eliminated"] = #"hash_3191d03a1c0615ad";
+  game.strings[#"team_eliminated"] = #"hash_5ebfcbc4ad2769b6";
+  game.strings[#"score_limit_reached"] = #"mp/score_limit_reached";
+  game.strings[#"round_score_limit_reached"] = #"mp/score_limit_reached";
+  game.strings[#"round_limit_reached"] = #"mp/round_limit_reached";
+  game.strings[#"time_limit_reached"] = #"mp/time_limit_reached";
+  game.strings[#"players_forfeited"] = #"mp/players_forfeited";
+  game.strings[#"other_teams_forfeited"] = #"mp_other_teams_forfeited";
+  game.strings[#"host_sucks"] = #"mp/host_sucks";
+  game.strings[#"host_ended"] = #"mp/host_ended_game";
+  game.strings[#"game_ended"] = #"mp/ended_game";
   level.var_c3abe983 = [];
   function_5d9d54a9(0, game.strings[#"tie"]);
   function_36419c2(1, game.strings[#"victory"], game.strings[#"defeat"]);
@@ -59,8 +59,8 @@ function_4e36b458(winner) {
 
   team = self.pers[#"team"];
 
-  if(team != # "spectator" && (!isDefined(team) || !isDefined(level.teams[team]))) {
-    team = # "allies";
+  if(team != #"spectator" && (!isDefined(team) || !isDefined(level.teams[team]))) {
+    team = #"allies";
   }
 
   return winner == team;
@@ -146,8 +146,8 @@ teamoutcomenotify(outcome) {
   self notify(#"reset_outcome");
   team = self.pers[#"team"];
 
-  if(team != # "spectator" && (!isDefined(team) || !isDefined(level.teams[team]))) {
-    team = # "allies";
+  if(team != #"spectator" && (!isDefined(team) || !isDefined(level.teams[team]))) {
+    team = #"allies";
   }
 
   self endon(#"reset_outcome");
@@ -179,9 +179,9 @@ teamoutcomenotify(outcome) {
         winningtime = undefined;
 
         if(outcome::get_flag(outcome, "tie") && isDefined(game.overtime_first_winner)) {
-          if(game.overtime_first_winner == # "allies") {
+          if(game.overtime_first_winner == #"allies") {
             winnerenum = 1;
-          } else if(game.overtime_first_winner == # "axis") {
+          } else if(game.overtime_first_winner == #"axis") {
             winnerenum = 2;
           }
         }
@@ -228,7 +228,7 @@ teamoutcomenotify(outcome) {
       winnerenum = 0;
     }
 
-    if(team == # "spectator" && outcome.var_7d5c2c5f) {
+    if(team == #"spectator" && outcome.var_7d5c2c5f) {
       outcometext = game.strings[#"cod_caster_team_wins"];
       var_277c7d47 = 0;
     }
@@ -244,7 +244,7 @@ teamoutcomenotify(outcome) {
       losingtime = 0;
     }
 
-    if(team == # "spectator" && outcome.var_7d5c2c5f) {
+    if(team == #"spectator" && outcome.var_7d5c2c5f) {
       title_text = game.strings[#"cod_caster_team_wins"];
       var_277c7d47 = 0;
     }
@@ -253,7 +253,7 @@ teamoutcomenotify(outcome) {
     return;
   }
 
-  if(team == # "spectator" && outcome.var_7d5c2c5f) {
+  if(team == #"spectator" && outcome.var_7d5c2c5f) {
     if(outcome.var_c1e98979 == 6) {
       title_text = game.strings[#"cod_caster_team_eliminated"];
     }
@@ -280,7 +280,7 @@ outcomenotify(outcome) {
   outcometext = function_5b0c08ec(self, outcome);
   team = self.pers[#"team"];
 
-  if(isDefined(team) && team == # "spectator" && outcome.var_7d5c2c5f) {
+  if(isDefined(team) && team == #"spectator" && outcome.var_7d5c2c5f) {
     outcometext = game.strings[#"cod_caster_team_wins"];
     self luinotifyevent(#"show_outcome", 5, outcome.title_text, outcometext, matchbonus, outcome::get_winner(outcome), 0);
     return;

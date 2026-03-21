@@ -3601,7 +3601,7 @@ wait_for_zombie(crawler) {
 
     if(isDefined(zombie)) {
       foreach(node in nodes) {
-        if(node.type == # "begin" || node.type == # "end" || node.type == # "bad node") {
+        if(node.type == #"begin" || node.type == #"end" || node.type == #"bad node") {
           if(isDefined(node.animscript)) {
             zombie setblackboardattribute("<dev string:xdfc>", "<dev string:xe06>");
             zombie setblackboardattribute("<dev string:xe0e>", node.animscript);

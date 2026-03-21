@@ -227,7 +227,7 @@ function private function_914f5e7(params) {
 }
 
 function private function_6ad60d9b(inflictor, attacker, damage, dflags, mod, weapon, var_fd90b0bb, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(hitloc.name === # "hero_annihilator") {
+  if(hitloc.name === #"hero_annihilator") {
     return point;
   }
 
@@ -414,7 +414,7 @@ function private function_91c27ca7(model_name, tag, origin_offset, angle_offset)
 }
 
 function function_f0247c06(params) {
-  if(!isDefined(params.entity) || params.entity.parent.archetype !== # "hulk" || !isDefined(params.intensity) || params.intensity < 10) {
+  if(!isDefined(params.entity) || params.entity.parent.archetype !== #"hulk" || !isDefined(params.intensity) || params.intensity < 10) {
     return;
   }
 
@@ -1288,7 +1288,7 @@ function private function_59e78833(pos, damage, damage_min, inner_radius, outer_
       }
 
       should_break = 0;
-      var_144ce0a0 = dynent.script_noteworthy == # "hash_4d1fb8524fdfd254";
+      var_144ce0a0 = dynent.script_noteworthy == #"hash_4d1fb8524fdfd254";
 
       if(var_144ce0a0 || dynent.destructible) {
         bundle = isDefined(dynent.bundle) ? dynent.bundle : zm_utility::function_b42da08a(dynent);
@@ -1500,7 +1500,7 @@ function private function_53660c1e() {
     }
 
     if(!isDefined(aitype)) {
-      aitype = # "hash_7cba8a05511ceedf";
+      aitype = #"hash_7cba8a05511ceedf";
     }
 
     self thread function_75a4863b(aitype, a_s_pts[0].origin, origin, var_c165d3f1);

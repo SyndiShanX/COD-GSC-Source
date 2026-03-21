@@ -915,15 +915,15 @@ spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawninglimit) {
     archetype = undefined;
     archetype_spawner = undefined;
 
-    if(self.team == # "axis") {
+    if(self.team == #"axis") {
       archetype = getdvarstring(#"feature_ai_enemy_archetype");
 
-      if(getdvarstring(#"feature_ai_archetype_override") == # "enemy") {
+      if(getdvarstring(#"feature_ai_archetype_override") == #"enemy") {
         archetype = getdvarstring(#"feature_ai_enemy_archetype");
       }
 
       archetype_spawner = level.archetype_spawners[archetype];
-    } else if(self.team == # "allies") {
+    } else if(self.team == #"allies") {
       archetype = getdvarstring(#"feature_ai_ally_archetype");
 
       if(getdvarstring(#"feature_ai_archetype_override") == "<dev string:x24d>") {
@@ -931,8 +931,8 @@ spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawninglimit) {
       }
 
       archetype_spawner = level.archetype_spawners[archetype];
-    } else if(self.team == # "team3") {
-      if(getdvarstring(#"feature_ai_archetype_override") == # "enemy") {
+    } else if(self.team == #"team3") {
+      if(getdvarstring(#"feature_ai_archetype_override") == #"enemy") {
         archetype = getdvarstring(#"feature_ai_enemy_archetype");
       } else if(getdvarstring(#"feature_ai_archetype_override") == "<dev string:x24d>") {
         archetype = getdvarstring(#"feature_ai_ally_archetype");

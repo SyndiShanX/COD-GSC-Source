@@ -53,7 +53,7 @@ init_level_vars() {
   level.var_d7853f35 = 18;
   level.var_ecdf38f = 12;
   level.var_55e562f9 = 18;
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
   level thread function_9217567c();
   level thread init_traps();
@@ -87,7 +87,7 @@ defend_areas() {
     return;
   }
 
-  str_next_defend = # "culdesac";
+  str_next_defend = #"culdesac";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   var_420e4589 = [];
   var_49f2dcca = [];
@@ -137,13 +137,13 @@ defend_areas() {
   var_4aa70779 = "";
 
   if(math::cointoss()) {
-    str_next_defend = # "lounge";
+    str_next_defend = #"lounge";
     var_4aa70779 = "lounge";
     var_420e4589 = array("culdesac_to_yellow_house_f1_door", "yellow_backyard_to_yellow_house_door", "green_backyard_to_bunker_door", "yellow_backyard_to_bunker_door", "street_start_to_street_mid_door");
     var_dca419c2 = array("culdesac_to_green_house_door", "green_backyard_to_green_house_door");
     level flag::set("lounge_points");
   } else {
-    str_next_defend = # "diner";
+    str_next_defend = #"diner";
     var_4aa70779 = "diner";
     var_420e4589 = array("culdesac_to_green_house_door", "green_backyard_to_green_house_door", "green_backyard_to_bunker_door", "yellow_backyard_to_bunker_door", "street_start_to_street_mid_door");
     var_dca419c2 = array("culdesac_to_yellow_house_f1_door", "yellow_backyard_to_yellow_house_door");
@@ -159,7 +159,7 @@ defend_areas() {
   level flag::set(#"pap_power_ready");
   level registerlast_truck_headshot_();
   zm_utility::function_fef4b36a(str_next_defend);
-  str_next_defend = # "power_room";
+  str_next_defend = #"power_room";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   wait 10;
   var_420e4589 = array("bunker_beds_to_bunker_power_debris");
@@ -178,14 +178,14 @@ defend_areas() {
   zm_utility::function_fef4b36a(str_next_defend);
 
   if(var_73ca1ee9 == "apd") {
-    str_next_defend = # "operations";
+    str_next_defend = #"operations";
     level thread zm_white_util::function_364cd8c0("bunker_power_event_storage");
     level thread zm_white_util::function_612918d9("bunker_door_storage_blocker");
     level thread zm_white_util::function_bf25aeb1("bunker_door_storage_lockdown");
     level flag::set("storage_points");
     level flag::set("operations_points");
   } else {
-    str_next_defend = # "apd";
+    str_next_defend = #"apd";
     level thread zm_white_util::function_364cd8c0("bunker_power_event_solitary");
     level thread zm_white_util::function_612918d9("bunker_door_solitary_blocker");
     level thread zm_white_util::function_bf25aeb1("bunker_door_solitary_lockdown");

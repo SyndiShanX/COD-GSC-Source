@@ -36,7 +36,7 @@ function private function_142ecedc(param) {
   duration = -1;
   ai = getentbynum(param);
 
-  if(isactor(ai) && isalive(ai) && ai.zm_ai_category === # "boss") {
+  if(isactor(ai) && isalive(ai) && ai.zm_ai_category === #"boss") {
     duration = 10;
   }
 

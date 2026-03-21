@@ -36,7 +36,7 @@ function on_localclient_connect(localclientnum) {
 }
 
 function function_c8bff20a(eventstruct) {
-  if(eventstruct.gamestate === # "pregame") {
+  if(eventstruct.gamestate === #"pregame") {
     function_bb763df8(eventstruct.localclientnum);
   }
 }
@@ -46,7 +46,7 @@ function function_549a01b9(localclientnum) {
     return;
   }
 
-  if(function_56e2eaa8(self) && isDefined(level.killcam[localclientnum]) && game.state !== # "pregame") {
+  if(function_56e2eaa8(self) && isDefined(level.killcam[localclientnum]) && game.state !== #"pregame") {
     level.killcam[localclientnum].var_57426003 = util::getnextobjid(localclientnum);
     objective_add(localclientnum, level.killcam[localclientnum].var_57426003, "active", #"hash_e8ccf98fcea7a36", (0, 0, -10000));
     objective_onentity(localclientnum, level.killcam[localclientnum].var_57426003, self, 0, 0, 0);

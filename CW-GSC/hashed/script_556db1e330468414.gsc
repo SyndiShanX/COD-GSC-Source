@@ -231,10 +231,10 @@ function function_84ab63bd(instance, n_wait_time) {
 
 function private function_4b312787(struct) {
   if(math::cointoss(50)) {
-    model = # "p9_sur_crystal_medium_01_orange";
+    model = #"p9_sur_crystal_medium_01_orange";
     str_scene = "p9_zm_gold_sur_crystal_medium_01_bundle";
   } else {
-    model = # "p9_sur_crystal_medium_02_orange";
+    model = #"p9_sur_crystal_medium_02_orange";
     str_scene = "p9_zm_gold_sur_crystal_medium_02_bundle";
   }
 
@@ -242,7 +242,7 @@ function private function_4b312787(struct) {
   mdl_crystal setscale(randomfloatrange(0.9, 1.1));
   mdl_crystal val::set(#"hash_3f8039e6e19dc02b", "takedamage", 1);
   mdl_crystal.health = 5;
-  mdl_crystal.var_ef3ac4e = # "hash_73df079d82dffbb";
+  mdl_crystal.var_ef3ac4e = #"hash_73df079d82dffbb";
   mdl_crystal.var_9880bf81 = 1;
   mdl_crystal thread function_fc37bb4f("active");
   mdl_crystal thread scene::play(str_scene, mdl_crystal);

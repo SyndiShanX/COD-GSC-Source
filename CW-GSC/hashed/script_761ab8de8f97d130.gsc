@@ -100,7 +100,7 @@ function function_c291edbd() {
     return false;
   }
 
-  return [[level.doa.var_39e3fa99]] - > function_7856fdb6() == # "bloodlake";
+  return [[level.doa.var_39e3fa99]] - > function_7856fdb6() == #"bloodlake";
 }
 
 function function_1eb8e7ef() {
@@ -494,14 +494,14 @@ function function_d2fee26e(einflictor, eattacker, idamage, idflags, smeansofdeat
     return 0;
   }
 
-  if(boneindex === # "mod_unknown") {
+  if(boneindex === #"mod_unknown") {
     return psoffsettime;
   }
 
   self.var_426947c4 = undefined;
   weakpoint = namespace_81245006::function_3131f5dd(self, modelindex, 1);
 
-  if(isDefined(weakpoint) && weakpoint.type === # "armor") {
+  if(isDefined(weakpoint) && weakpoint.type === #"armor") {
     namespace_81245006::damageweakpoint(weakpoint, psoffsettime);
 
     if(namespace_81245006::function_f29756fe(weakpoint) === 3 && isDefined(weakpoint.var_f371ebb0)) {
@@ -513,9 +513,9 @@ function function_d2fee26e(einflictor, eattacker, idamage, idflags, smeansofdeat
       }
     }
 
-    if(self.subarchetype === # "hash_7a778318514578f7") {
+    if(self.subarchetype === #"hash_7a778318514578f7") {
       psoffsettime = int(psoffsettime * 0.25);
-    } else if(self.subarchetype === # "zombie_medium_armor") {
+    } else if(self.subarchetype === #"zombie_medium_armor") {
       psoffsettime = int(psoffsettime * 0.5);
     }
 
@@ -537,7 +537,7 @@ function function_f4e9bba4(entity) {
   }
 
   foreach(weakpoint in weakpoints) {
-    if(weakpoint.type === # "armor") {
+    if(weakpoint.type === #"armor") {
       max_health += weakpoint.maxhealth;
       curr_health += max(weakpoint.health, 0);
     }

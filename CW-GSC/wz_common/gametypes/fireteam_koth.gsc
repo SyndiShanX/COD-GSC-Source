@@ -21,13 +21,13 @@ function private autoexec __init__system__() {
 }
 
 function event_handler[gametype_init] main(eventstruct) {
-  level.var_71f9a7ea = # "hash_7ef67720e2eb965a";
+  level.var_71f9a7ea = #"hash_7ef67720e2eb965a";
   level.var_84a07819 = &onstartgametype;
   namespace_2938acdc::init();
   namespace_d150537f::init();
   namespace_234f0efc::init();
   spawning::addsupportedspawnpointtype("tdm");
-  level.var_5747998d = # "insertion_begin_completed";
+  level.var_5747998d = #"insertion_begin_completed";
   level.var_bc5a3eed = 1;
   callback::on_player_killed(&on_player_killed);
   level.var_ce6749e3 = 1;

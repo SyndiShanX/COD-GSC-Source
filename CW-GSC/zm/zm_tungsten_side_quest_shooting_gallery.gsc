@@ -295,15 +295,15 @@ function function_c1bb3b65(var_ebcbedc1, var_86690ce9, str_weapon_type, var_bc37
     switch (str_weapon_type) {
       case # "smg":
         level.var_a76f0ecf = undefined;
-        var_f0480b84 = # "hash_3935e5f9f62638a9";
+        var_f0480b84 = #"hash_3935e5f9f62638a9";
         break;
       case # "pistol":
         level.var_9c6cf8c = undefined;
-        var_f0480b84 = # "hash_1c407c39d0df508f";
+        var_f0480b84 = #"hash_1c407c39d0df508f";
         break;
       case # "sniper":
         level.var_d352f703 = undefined;
-        var_f0480b84 = # "hash_2ee9d427cbd6bd9";
+        var_f0480b84 = #"hash_2ee9d427cbd6bd9";
         break;
       default:
         return 0;
@@ -666,7 +666,7 @@ function function_2c660cd2(e_player, var_24b25ceb) {
   while(var_3d23ecc < var_77ba553d) {
     waitresult = self waittill(#"target_shot", #"target_timeout");
 
-    if(waitresult._notify === # "target_shot") {
+    if(waitresult._notify === #"target_shot") {
       var_3d23ecc++;
       continue;
     }
@@ -949,7 +949,7 @@ function function_d6ee3b1d(e_player, var_24b25ceb, var_ae876f40, var_eb891a8f, n
   while(var_3d23ecc < var_77ba553d) {
     waitresult = self waittill(#"target_shot", #"target_timeout");
 
-    if(waitresult._notify === # "target_shot") {
+    if(waitresult._notify === #"target_shot") {
       var_3d23ecc++;
       continue;
     }
@@ -1109,7 +1109,7 @@ function function_10418fa8(e_player, var_24b25ceb, var_ae876f40, var_eb891a8f, n
   while(var_3d23ecc < var_77ba553d) {
     waitresult = self waittill(#"target_shot", #"target_timeout");
 
-    if(waitresult._notify === # "target_shot") {
+    if(waitresult._notify === #"target_shot") {
       var_3d23ecc++;
       continue;
     }
@@ -1327,7 +1327,7 @@ function function_1cb31d02(e_player, var_24b25ceb, n_round) {
   while(var_3d23ecc < var_77ba553d) {
     waitresult = self waittill(#"target_shot", #"target_timeout");
 
-    if(waitresult._notify === # "target_shot") {
+    if(waitresult._notify === #"target_shot") {
       var_3d23ecc++;
       continue;
     }

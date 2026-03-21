@@ -495,7 +495,7 @@ function should_spawn_tags(einflictor, attacker, idamage, smeansofdeath, weapon,
     return false;
   }
 
-  if(isDefined(deathanimduration) && (!isDefined(deathanimduration.team) || deathanimduration.team == # "none") && (deathanimduration.classname == "trigger_hurt" || deathanimduration.classname == "worldspawn")) {
+  if(isDefined(deathanimduration) && (!isDefined(deathanimduration.team) || deathanimduration.team == #"none") && (deathanimduration.classname == "trigger_hurt" || deathanimduration.classname == "worldspawn")) {
     return false;
   }
 

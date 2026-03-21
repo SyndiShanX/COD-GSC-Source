@@ -15,7 +15,7 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 0);
   clientfield::register("scriptmover", "exhibit_vo", 1, 4, "int", &exhibit_vo, 0, 0);
-  level._effect[#"hash_61fce653578d7f82"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"hash_61fce653578d7f82"] = #"zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

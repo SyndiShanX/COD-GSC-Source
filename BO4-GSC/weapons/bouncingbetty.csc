@@ -11,11 +11,11 @@ init_shared(localclientnum) {
   level.explode_1st_offset = 55;
   level.explode_2nd_offset = 95;
   level.explode_main_offset = 140;
-  level._effect[#"fx_betty_friendly_light"] = # "hash_5f76ecd582d98e38";
-  level._effect[#"fx_betty_enemy_light"] = # "hash_330682ff4f12f646";
-  level._effect[#"fx_betty_exp"] = # "weapon/fx_betty_exp";
-  level._effect[#"fx_betty_exp_death"] = # "weapon/fx_betty_exp_death";
-  level._effect[#"fx_betty_launch_dust"] = # "weapon/fx_betty_launch_dust";
+  level._effect[#"fx_betty_friendly_light"] = #"hash_5f76ecd582d98e38";
+  level._effect[#"fx_betty_enemy_light"] = #"hash_330682ff4f12f646";
+  level._effect[#"fx_betty_exp"] = #"weapon/fx_betty_exp";
+  level._effect[#"fx_betty_exp_death"] = #"weapon/fx_betty_exp_death";
+  level._effect[#"fx_betty_launch_dust"] = #"weapon/fx_betty_launch_dust";
   clientfield::register("missile", "bouncingbetty_state", 1, 2, "int", &bouncingbetty_state_change, 0, 0);
   clientfield::register("scriptmover", "bouncingbetty_state", 1, 2, "int", &bouncingbetty_state_change, 0, 0);
 }

@@ -360,7 +360,7 @@ function init() {
 }
 
 function function_bdf9485e() {
-  var_34451a50 = self.pers[#"hash_4a01db5796cf12b1"] === # "failure";
+  var_34451a50 = self.pers[#"hash_4a01db5796cf12b1"] === #"failure";
 
   if(var_34451a50) {
     var_c069e1cd = self.pers[#"hash_3b7fc8c62a7d4420"] * level.var_df437ed2;
@@ -423,7 +423,7 @@ function function_21e4b1c2() {
     var_57e7a401 = float(gettime() - self.var_11eebcd3) / 1000;
 
     if(var_57e7a401 < level.var_df437ed2) {
-      if(isDefined(self.var_97a988e7) && namespace_1b527536::function_841bae20(self.var_97a988e7.statname) === # "toxic_growth") {
+      if(isDefined(self.var_97a988e7) && namespace_1b527536::function_841bae20(self.var_97a988e7.statname) === #"toxic_growth") {
         return false;
       }
 
@@ -438,7 +438,7 @@ function function_21e4b1c2() {
 function function_f986fb53() {
   self.var_c069e1cd = 0;
 
-  if(self.pers[#"hash_4a01db5796cf12b1"] === # "failure") {
+  if(self.pers[#"hash_4a01db5796cf12b1"] === #"failure") {
     self.pers[#"hash_3b7fc8c62a7d4420"] = 0;
   }
 }
@@ -571,7 +571,7 @@ function onallplayersready() {
   changeadvertisedstatus(0);
   gametype = hash(util::get_game_type());
 
-  if(gametype == # "zclassic") {
+  if(gametype == #"zclassic") {
     changeadvertisedstatus(1);
   }
 
@@ -739,7 +739,7 @@ function initialblack() {
   self endon(#"disconnect");
   gametype = hash(util::get_game_type());
 
-  if(gametype != # "zsurvival" && level flag::get("start_zombie_round_logic")) {
+  if(gametype != #"zsurvival" && level flag::get("start_zombie_round_logic")) {
     return;
   }
 
@@ -1149,46 +1149,46 @@ function init_client_field_callback_funcs() {
 
 function init_fx() {
   level.createfx_callback_thread = &delete_in_createfx;
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[#"switch_sparks"] = # "hash_26f37488feec03c3";
-  level._effect[#"hash_4159f23a18f644a7"] = # "hash_71ed4f412b17e19e";
-  level._effect[#"fx_zombie_bar_break"] = # "hash_718a24841c1e00c9";
-  level._effect[#"fx_zombie_bar_break_lite"] = # "hash_35ee6425adf16fb6";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
+  level._effect[#"hash_4159f23a18f644a7"] = #"hash_71ed4f412b17e19e";
+  level._effect[#"fx_zombie_bar_break"] = #"hash_718a24841c1e00c9";
+  level._effect[#"fx_zombie_bar_break_lite"] = #"hash_35ee6425adf16fb6";
 
   if(!is_true(level.fx_exclude_edge_fog)) {
-    level._effect[#"edge_fog"] = # "_t6/maps/zombie/fx_fog_zombie_amb";
+    level._effect[#"edge_fog"] = #"_t6/maps/zombie/fx_fog_zombie_amb";
   }
 
-  level._effect[#"chest_light"] = # "zombie/fx_weapon_box_open_glow_zmb";
-  level._effect[#"chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"chest_light"] = #"zombie/fx_weapon_box_open_glow_zmb";
+  level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
 
   if(!is_true(level.fx_exclude_tesla_head_light)) {
-    level._effect[#"tesla_head_light"] = # "hash_757d002378ec934c";
+    level._effect[#"tesla_head_light"] = #"hash_757d002378ec934c";
   }
 
-  level._effect[#"zombie_guts_explosion"] = # "zombie/fx_blood_torso_explo_lg_zmb";
-  level._effect[#"rise_burst_water"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow_water"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"rise_dust_water"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"rise_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"fall_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"fall_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
-  level._effect[#"fall_dust"] = # "zombie/fx_spawn_dirt_body_dustfalling_zmb";
-  level._effect[#"character_fire_death_sm"] = # "hash_c9cf0acc938a7f6";
-  level._effect[#"character_fire_death_torso"] = # "hash_5686def5b4c85661";
+  level._effect[#"zombie_guts_explosion"] = #"zombie/fx_blood_torso_explo_lg_zmb";
+  level._effect[#"rise_burst_water"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow_water"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust_water"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"fall_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"fall_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"fall_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
+  level._effect[#"character_fire_death_sm"] = #"hash_c9cf0acc938a7f6";
+  level._effect[#"character_fire_death_torso"] = #"hash_5686def5b4c85661";
 
   if(!is_true(level.fx_exclude_default_explosion)) {
-    level._effect[#"def_explosion"] = # "_t6/explosions/fx_default_explosion";
+    level._effect[#"def_explosion"] = #"_t6/explosions/fx_default_explosion";
   }
 
   if(!is_true(level.disable_fx_upgrade_aquired)) {
-    level._effect[#"upgrade_aquired"] = # "hash_359f0993cf4ebe66";
+    level._effect[#"upgrade_aquired"] = #"hash_359f0993cf4ebe66";
   }
 }
 
@@ -1312,9 +1312,9 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
     if(weapon.offhandslot === "Tactical grenade" || weapon.offhandslot === "Lethal grenade" || weapon.offhandslot === "Special" || killstreaks::is_killstreak_weapon(weapon)) {
       if(!zm_equipment::function_4f51b6ea(weapon, meansofdeath) && !is_true(self.var_88bc9ca8) && meansofdeath !== "MOD_MELEE") {
         if(zm_utility::is_survival()) {
-          if(self.zm_ai_category === # "boss") {
+          if(self.zm_ai_category === #"boss") {
             if(killstreaks::is_killstreak_weapon(weapon)) {
-              if(weapon.name === # "hero_annihilator") {
+              if(weapon.name === #"hero_annihilator") {
                 damage = zm_equipment::function_739fbb72(damage, weapon, self.zm_ai_category, self.maxhealth);
               } else {
                 damage = zm_equipment::function_739fbb72(damage, weapon, self.zm_ai_category, self.maxhealth);
@@ -1371,7 +1371,7 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
     }
   }
 
-  if(weapon.name === # "hero_flamethrower" && (self.zm_ai_category === # "normal" || self.zm_ai_category === # "special")) {
+  if(weapon.name === #"hero_flamethrower" && (self.zm_ai_category === #"normal" || self.zm_ai_category === #"special")) {
     if(isDefined(level.var_da1321f4) && !is_true(self.var_e7dcb25b)) {
       self.var_e7dcb25b = 1;
       self thread[[level.var_da1321f4]](attacker, weapon, 0);
@@ -1622,7 +1622,7 @@ function actor_damage_override_wrapper(inflictor, attacker, damage, flags, means
     return 0;
   }
 
-  if(isDefined(inflictor) && isvehicle(inflictor) && inflictor.vehicletype !== # "hash_d57fa1b1aacffc7") {
+  if(isDefined(inflictor) && isvehicle(inflictor) && inflictor.vehicletype !== #"hash_d57fa1b1aacffc7") {
     if(meansofdeath === "MOD_CRUSH") {
       var_6348e344 = self.maxhealth / self.basehealth;
       damage_override = int(damage_override * var_6348e344);
@@ -1631,9 +1631,9 @@ function actor_damage_override_wrapper(inflictor, attacker, damage, flags, means
         var_6348e344 = self.maxhealth / self.basehealth;
         var_40bc7bf7 = 1;
 
-        if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite") {
+        if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite") {
           var_40bc7bf7 = 0.2;
-        } else if(self.zm_ai_category === # "boss") {
+        } else if(self.zm_ai_category === #"boss") {
           var_40bc7bf7 = 0.1;
         } else {
           var_40bc7bf7 = 0.4;
@@ -1649,9 +1649,9 @@ function actor_damage_override_wrapper(inflictor, attacker, damage, flags, means
       var_6348e344 = self.maxhealth / self.basehealth;
       var_40bc7bf7 = 1;
 
-      if(self.zm_ai_category === # "special" || self.zm_ai_category === # "elite") {
+      if(self.zm_ai_category === #"special" || self.zm_ai_category === #"elite") {
         var_40bc7bf7 = 0.8;
-      } else if(self.zm_ai_category === # "boss") {
+      } else if(self.zm_ai_category === #"boss") {
         var_40bc7bf7 = 1;
       } else {
         var_40bc7bf7 = 0.4;
@@ -1777,7 +1777,7 @@ function actor_damage_override_wrapper(inflictor, attacker, damage, flags, means
     attacker.var_e7b05e99 = 1;
   }
 
-  if((shitloc === "head" || shitloc === "helmet") && !zm_ai_utility::hashelmet(shitloc, self) && self.archetype !== # "zombie_dog" && meansofdeath != "MOD_MELEE") {
+  if((shitloc === "head" || shitloc === "helmet") && !zm_ai_utility::hashelmet(shitloc, self) && self.archetype !== #"zombie_dog" && meansofdeath != "MOD_MELEE") {
     level scoreevents::doscoreeventcallback("scoreEventZM", {
       #attacker: attacker, #scoreevent: "hit_weak_point_zm", #enemy: self, #hitloc: shitloc, #weapon: weapon
     });
@@ -1859,15 +1859,15 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
     perks = [];
     killstreaks = [];
     rounds = level.round_number;
-    bookmarkname = # "";
+    bookmarkname = #"";
 
-    if(isDefined(self.archetype) && (self.archetype == # "tiger" || self.archetype == # "brutus" || self.archetype == # "zombie_dog" || self.archetype == # "catalyst" || self.archetype == # "stoker" || self.archetype == # "blight_father")) {
-      bookmarkname = # "hash_1553fcea4f6a00e";
+    if(isDefined(self.archetype) && (self.archetype == #"tiger" || self.archetype == #"brutus" || self.archetype == #"zombie_dog" || self.archetype == #"catalyst" || self.archetype == #"stoker" || self.archetype == #"blight_father")) {
+      bookmarkname = #"hash_1553fcea4f6a00e";
     } else {
-      bookmarkname = # "hash_37300d83d8e6f1fc";
+      bookmarkname = #"hash_37300d83d8e6f1fc";
     }
 
-    if(bookmarkname == # "hash_1553fcea4f6a00e") {
+    if(bookmarkname == #"hash_1553fcea4f6a00e") {
       demo::bookmark(bookmarkname, gettime(), player);
     }
 
@@ -1954,7 +1954,7 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
 
   params.enemy = self;
 
-  if(smeansofdeath !== "MOD_MELEE" && (shitloc === "head" || shitloc === "helmet") && !zm_ai_utility::hashelmet(shitloc, self) && self.archetype !== # "zombie_dog") {
+  if(smeansofdeath !== "MOD_MELEE" && (shitloc === "head" || shitloc === "helmet") && !zm_ai_utility::hashelmet(shitloc, self) && self.archetype !== #"zombie_dog") {
     params.var_3fb48d9c = 1;
   }
 
@@ -1975,7 +1975,7 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
         break;
     }
 
-    if(einflictor.item.name === # "hatchet") {
+    if(einflictor.item.name === #"hatchet") {
       if(isDefined(attacker.var_8ff34f45)) {
         einflictor.var_8ff34f45 = attacker.var_8ff34f45;
       } else {
@@ -2000,7 +2000,7 @@ function actor_killed_override(einflictor, attacker, idamage, smeansofdeath, wea
 }
 
 function function_df94f87e(weapon) {
-  if(killstreaks::is_killstreak_weapon(weapon) && weapon.name !== # "gun_ultimate_turret") {
+  if(killstreaks::is_killstreak_weapon(weapon) && weapon.name !== #"gun_ultimate_turret") {
     killstreak_item = self.inventory.items[17];
 
     if(isDefined(killstreak_item.kills)) {
@@ -2014,7 +2014,7 @@ function function_df94f87e(weapon) {
       killstreak_item.kills = 1;
     }
 
-    if(weapon.name == # "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+    if(weapon.name == #"remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
       if(!isDefined(self.remotemissilebda)) {
         self.remotemissilebda = 0;
       }
@@ -2125,9 +2125,9 @@ function function_2a49523d(winner) {
     #var_c1e98979: 0, #var_68c25772: 1, #var_7d5c2c5f: 0, #var_277c7d47: 1, #var_14f94126: game.strings[#"defeat"], #team: # "axis", #players: []
   };
 
-  if(isDefined(winner) && winner == # "allies") {
+  if(isDefined(winner) && winner == #"allies") {
     outcome.var_14f94126 = game.strings[#"victory"];
-    outcome.team = # "allies";
+    outcome.team = #"allies";
   }
 
   display_transition::function_e6b4f2f7(outcome);
@@ -2173,7 +2173,7 @@ function end_game() {
   waitresult = level waittill(#"end_game");
 
   if(!isDefined(level.winningteam)) {
-    level.winningteam = # "draw";
+    level.winningteam = #"draw";
   }
 
   [[level.onendgame]](level.winningteam);
@@ -2190,7 +2190,7 @@ function end_game() {
     visionsetnaked("zombie_last_stand", 2);
   }
 
-  game.state = # "postgame";
+  game.state = #"postgame";
   level.ingraceperiod = 0;
   level.intermission = 1;
   setDvar(#"g_gameended", 1);
@@ -2342,7 +2342,7 @@ function end_game() {
       level.var_7c7c6c35 zm_game_over::set_rounds(players[i], level.round_number - zm_custom::function_901b751c(#"startround") + var_5c965b78);
     }
 
-    if(waitresult.reason === # "hash_4e5756202af6ae94" || waitresult.reason === # "last_player_died" || waitresult.reason === # "exfil_fail") {
+    if(waitresult.reason === #"hash_4e5756202af6ae94" || waitresult.reason === #"last_player_died" || waitresult.reason === #"exfil_fail") {
       playsoundatposition(#"hash_3f1eca72dab56b29", (0, 0, 0));
     }
   } else if("ztrials" == util::get_game_type()) {
@@ -2866,7 +2866,7 @@ function function_a2b54d42(event) {
 }
 
 function private function_70ce74eb(event) {
-  var_326a8ea4 = isDefined(level.scoreinfo[event][#"medalnamehash"]) && level.scoreinfo[event][#"medalnamehash"] != # "";
+  var_326a8ea4 = isDefined(level.scoreinfo[event][#"medalnamehash"]) && level.scoreinfo[event][#"medalnamehash"] != #"";
   var_b6cc2245 = is_true(level.scoreinfo[event][#"hash_2ecf46b14fe1efc9"]);
   return var_326a8ea4 || var_b6cc2245;
 }
@@ -3108,7 +3108,7 @@ function private function_85ea1f60(item) {
     }
   }
 
-  if(item.itementry.name === # "self_revive_sr_item") {
+  if(item.itementry.name === #"self_revive_sr_item") {
     if(self zm_laststand::function_618fd37e() < 1) {
       return 1;
     } else {
@@ -3154,7 +3154,7 @@ function private function_85ea1f60(item) {
 
       return 1;
     case # "armor":
-      if(item.itementry.var_4a1a4613 === # "armor_heal") {
+      if(item.itementry.var_4a1a4613 === #"armor_heal") {
         return (!self function_d87329b7() || !self function_1072c231() || self.armortier < (isDefined(item.itementry.armortier) ? item.itementry.armortier : 1));
       } else {
         return 1;
@@ -3215,7 +3215,7 @@ function register_perks() {
     for(i = 0; i < perks.size; i++) {
       perk = perks[i];
 
-      if(perk == # "specialty_null" || perk == # "weapon_null") {
+      if(perk == #"specialty_null" || perk == #"weapon_null") {
         continue;
       }
 

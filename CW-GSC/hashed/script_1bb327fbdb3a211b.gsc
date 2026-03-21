@@ -195,7 +195,7 @@ function function_cdea4abe(v_origin, n_radius) {
 
   foreach(ai_zombie in a_zombies) {
     if(isalive(ai_zombie)) {
-      if(ai_zombie.zm_ai_category === # "normal") {
+      if(ai_zombie.zm_ai_category === #"normal") {
         v_dir = vectornormalize(ai_zombie.origin - v_origin);
         v_launch = v_dir * randomintrange(80, 100) + (0, 0, 150);
         ai_zombie zm_utility::function_ffc279(v_launch, undefined, ai_zombie.health, undefined);
@@ -305,9 +305,9 @@ function function_4d67771c(n_wave) {
     ai.ignore_enemy_count = 1;
     ai.no_powerups = 1;
 
-    if(ai.aitype === # "spawner_bo5_avogadro_sr") {
+    if(ai.aitype === #"spawner_bo5_avogadro_sr") {
       archetype_avogadro::function_33237109(ai, self.origin, 600);
-    } else if(ai.aitype === # "spawner_bo5_mimic") {
+    } else if(ai.aitype === #"spawner_bo5_mimic") {
       ai clientfield::increment("" + # "hash_54e2a4e02a26cc62", 1);
     }
 
@@ -333,7 +333,7 @@ function function_b49b76d4(eventstruct) {
     return;
   }
 
-  if(isDefined(attacker) && attacker.archetype === # "abom") {
+  if(isDefined(attacker) && attacker.archetype === #"abom") {
     level thread function_844cd1f6(dynent.origin);
   }
 }
@@ -352,8 +352,8 @@ function function_c24ab28e(s_params) {
   weapon = s_params.weapon;
   means_of_death = s_params.smeansofdeath;
 
-  if(isPlayer(attacker) && self.archetype === # "tormentor" && isDefined(weapon)) {
-    if(means_of_death === "MOD_BURNED" && weapon.name === # "hero_flamethrower" || means_of_death === "MOD_EXPLOSIVE" && weapon.name === # "napalm_strike" || function_313be247(attacker, weapon, means_of_death) || function_1c058bc5(weapon, means_of_death)) {
+  if(isPlayer(attacker) && self.archetype === #"tormentor" && isDefined(weapon)) {
+    if(means_of_death === "MOD_BURNED" && weapon.name === #"hero_flamethrower" || means_of_death === "MOD_EXPLOSIVE" && weapon.name === #"napalm_strike" || function_313be247(attacker, weapon, means_of_death) || function_1c058bc5(weapon, means_of_death)) {
       self thread function_4f49262c();
     }
   }
@@ -605,7 +605,7 @@ function function_cf6cdaa5(s_params) {
     return;
   }
 
-  if(weapon.name === # "hatchet" && means_of_death === "MOD_IMPACT" || means_of_death === "MOD_MELEE") {
+  if(weapon.name === #"hatchet" && means_of_death === "MOD_IMPACT" || means_of_death === "MOD_MELEE") {
     var_29eb5284 = struct::get("ww_soul_charge");
 
     if(distance2dsquared(self.origin, var_29eb5284.origin) <= sqr(500)) {
@@ -679,7 +679,7 @@ function function_3d1e19ec(v_origin, n_radius, var_a8d0b313 = 1, var_82ea43f2 = 
         ai zm_cleanup::function_23621259(0);
       }
 
-      if(var_82ea43f2 || ai.zm_ai_category !== # "normal") {
+      if(var_82ea43f2 || ai.zm_ai_category !== #"normal") {
         if(zm_utility::is_magic_bullet_shield_enabled(ai)) {
           ai util::stop_magic_bullet_shield();
         }
@@ -689,7 +689,7 @@ function function_3d1e19ec(v_origin, n_radius, var_a8d0b313 = 1, var_82ea43f2 = 
         ai.deathpoints_already_given = 1;
         ai.marked_for_death = 1;
 
-        if(!b_hide_body && ai.zm_ai_category === # "normal" && var_4b9821e4 < 6) {
+        if(!b_hide_body && ai.zm_ai_category === #"normal" && var_4b9821e4 < 6) {
           var_4b9821e4++;
           ai thread zombie_death::flame_death_fx();
 

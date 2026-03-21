@@ -34,7 +34,7 @@ function_c9ff0dce() {
   self ct_utils::player_reset();
   self.overrideplayerdamage = &callback_player_damage;
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     ct_utils::function_8f04870f();
 
     if(isDefined(level.var_ad7c0539)) {
@@ -120,7 +120,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
     return n_damage;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(isDefined(level.var_ad7c0539)) {
       switch (level.var_ad7c0539) {
         case 1:
@@ -133,7 +133,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 
           break;
         case 3:
-          if(isDefined(weapon) && weapon.name == # "eq_tripwire") {
+          if(isDefined(weapon) && weapon.name == #"eq_tripwire") {
             n_damage = self.health + 100;
           }
 
@@ -161,7 +161,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self) && isDefined(level.e_dog) && isalive(level.e_dog) && level.var_ad7c0539 >= 5) {
       level.e_dog abort_dog();
     }
@@ -207,7 +207,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
 
         break;
       case 9:
-        if(isDefined(weapon) && weapon.name == # "gun_ultimate_turret") {
+        if(isDefined(weapon) && weapon.name == #"gun_ultimate_turret") {
           level.var_628c0318++;
         }
 
@@ -348,7 +348,7 @@ function_45d34164(var_2970d97, var_9c8d914, var_af764233, var_f1111d99, var_7d59
       e_player = getplayers()[0];
       gadget_weapon = e_player getcurrentoffhand();
 
-      if(isDefined(gadget_weapon) && gadget_weapon.name == # "eq_tripwire") {
+      if(isDefined(gadget_weapon) && gadget_weapon.name == #"eq_tripwire") {
         e_player ability_player::function_fc4dc54();
       }
     }
@@ -1488,7 +1488,7 @@ function_7a427be() {
   self setorigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
 
-  if(s_loc.script_noteworthy == # "right") {
+  if(s_loc.script_noteworthy == #"right") {
     s_path = level.var_7cf83a79[level.var_e4e874ae];
     level.var_e4e874ae++;
 
@@ -1541,19 +1541,19 @@ function_621ffb5a() {
 
   switch (level.var_ad7c0539) {
     case 1:
-      var_e0c4ac7b = # "hash_7e28358c078ebb60";
-      var_8e7430e4 = # "hash_62b72cf84f007831";
-      str_objective = # "hash_7a2e2caa5f180ee3";
+      var_e0c4ac7b = #"hash_7e28358c078ebb60";
+      var_8e7430e4 = #"hash_62b72cf84f007831";
+      str_objective = #"hash_7a2e2caa5f180ee3";
       break;
     case 2:
-      var_e0c4ac7b = # "hash_3bd663865bd0aed0";
-      var_8e7430e4 = # "hash_72f46a598530d181";
-      str_objective = # "hash_682b9ed55c6bee93";
+      var_e0c4ac7b = #"hash_3bd663865bd0aed0";
+      var_8e7430e4 = #"hash_72f46a598530d181";
+      str_objective = #"hash_682b9ed55c6bee93";
       break;
     case 4:
-      var_e0c4ac7b = # "hash_463b560d5cd8df69";
-      var_8e7430e4 = # "hash_2c401f882edd1300";
-      str_objective = # "hash_22835225646d5f24";
+      var_e0c4ac7b = #"hash_463b560d5cd8df69";
+      var_8e7430e4 = #"hash_2c401f882edd1300";
+      str_objective = #"hash_22835225646d5f24";
       break;
   }
 

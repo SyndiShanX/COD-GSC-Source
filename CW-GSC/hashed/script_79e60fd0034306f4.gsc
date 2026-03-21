@@ -186,12 +186,12 @@ function function_131f5dc5() {
   level.park.animname = "park";
   level thread function_44f6ffee();
   level thread function_66685f();
-  var_84ccdeed = # "hash_57683ed4de0128fe";
-  var_3997c880 = # "hash_57683dd4de01274b";
-  var_1fd89502 = # "hash_57683cd4de012598";
-  var_4419dea4 = # "hash_576c66d4de0555cd";
-  var_4dcbf208 = # "hash_576c63d4de0550b4";
-  var_d98d098c = # "hash_576c64d4de055267";
+  var_84ccdeed = #"hash_57683ed4de0128fe";
+  var_3997c880 = #"hash_57683dd4de01274b";
+  var_1fd89502 = #"hash_57683cd4de012598";
+  var_4419dea4 = #"hash_576c66d4de0555cd";
+  var_4dcbf208 = #"hash_576c63d4de0550b4";
+  var_d98d098c = #"hash_576c64d4de055267";
   level.var_27da2f39 = dialog_tree::new_tree(&function_cddf31f8, undefined, 1, 1, "scene_z_stk_warehouse_dt");
   level.var_27da2f39 dialog_tree::add_option(var_84ccdeed, undefined, "fu_response", "loop", 1, undefined, undefined, &function_f23b762a);
   level.var_27da2f39 dialog_tree::add_option(var_3997c880, undefined, "eliminate_u_response", "loop", 1, undefined, undefined, &function_e31e5b0e);

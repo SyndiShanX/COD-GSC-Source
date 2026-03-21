@@ -140,7 +140,7 @@ function private function_d33c99f8() {
   timeremaining = undefined;
   var_6b21cef = undefined;
 
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     if(isDefined(level.var_fd167bf6)) {
       timeremaining = float(max(0, level.var_fd167bf6 - gettime())) / 1000;
     } else {
@@ -148,10 +148,10 @@ function private function_d33c99f8() {
     }
 
     var_6b21cef = 2;
-  } else if(game.state == # "playing") {
+  } else if(game.state == #"playing") {
     timeremaining = float(max(0, globallogic_utils::gettimeremaining())) / 1000;
     var_6b21cef = level.var_31f5f23 === 1 ? 1 : 0;
-  } else if(game.state == # "postgame") {
+  } else if(game.state == #"postgame") {
     timeremaining = 0;
     var_6b21cef = 3;
   }
@@ -193,7 +193,7 @@ function givecustomloadout() {
 function function_86513cd0() {
   if(level.disablecustomcac === 1) {
     foreach(player in level.players) {
-      if(player.team == # "spectator") {
+      if(player.team == #"spectator") {
         player function_1f551f49();
       }
     }
@@ -220,7 +220,7 @@ function private function_1f551f49() {
 
 function onconnect() {
   if(util::isfirstround()) {
-    if(game.state != # "playing") {
+    if(game.state != #"playing") {
       music::setmusicstate("gunfight_preloop", self);
     }
   }
@@ -229,7 +229,7 @@ function onconnect() {
 }
 
 function onspawned() {
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     self clientfield::set("gunfight_pregame_rob", 1);
     return;
   }
@@ -304,7 +304,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
 }
 
 function ondisconnect() {
-  if(game.state === # "playing" && isalive(self)) {
+  if(game.state === #"playing" && isalive(self)) {
     function_8f5272b2(self);
   }
 }
@@ -566,7 +566,7 @@ function givetalents(talents, var_1c89585f, var_285151c1) {
   }
 
   foreach(talent in talents) {
-    if(isDefined(talent.talent) && talent.talent != # "weapon_null") {
+    if(isDefined(talent.talent) && talent.talent != #"weapon_null") {
       self addtalent(talent.talent + level.game_mode_suffix);
     }
   }

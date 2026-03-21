@@ -116,7 +116,7 @@ function function_206ee608() {
   a_vehicles = getvehiclearray();
 
   foreach(vehicle in a_vehicles) {
-    if(vehicle.vehicletype !== # "vehicle_motorcycle_mil_us_offroad") {
+    if(vehicle.vehicletype !== #"vehicle_motorcycle_mil_us_offroad") {
       if(isDefined(vehicle)) {
         vehicle delete();
       }
@@ -566,28 +566,28 @@ function function_e677fbe0() {
 function function_aece4588(var_3afe334f) {
   switch (var_3afe334f) {
     case 1:
-      var_e7a1cbae = # "objective_rover_ailist_1";
+      var_e7a1cbae = #"objective_rover_ailist_1";
       break;
     case 2:
-      var_e7a1cbae = # "objective_rover_ailist_2";
+      var_e7a1cbae = #"objective_rover_ailist_2";
       break;
     case 3:
-      var_e7a1cbae = # "objective_rover_ailist_3";
+      var_e7a1cbae = #"objective_rover_ailist_3";
       break;
     case 4:
-      var_e7a1cbae = # "objective_rover_ailist_4";
+      var_e7a1cbae = #"objective_rover_ailist_4";
       break;
     case 5:
-      var_e7a1cbae = # "objective_rover_ailist_5";
+      var_e7a1cbae = #"objective_rover_ailist_5";
       break;
     case 6:
-      var_e7a1cbae = # "objective_rover_ailist_6";
+      var_e7a1cbae = #"objective_rover_ailist_6";
       break;
     case 7:
-      var_e7a1cbae = # "objective_rover_ailist_7";
+      var_e7a1cbae = #"objective_rover_ailist_7";
       break;
     default:
-      var_e7a1cbae = # "objective_rover_ailist_8";
+      var_e7a1cbae = #"objective_rover_ailist_8";
       break;
   }
 
@@ -630,7 +630,7 @@ function function_b3791df9(params) {
 }
 
 function function_fd68cae4() {
-  if(self.archetype == # "zombie") {
+  if(self.archetype == #"zombie") {
     self namespace_85745671::function_9758722("super_sprint");
   }
 }
@@ -643,7 +643,7 @@ function function_79ae8e99(instance) {
     a_zombies = function_a38db454(self.origin, 200);
 
     foreach(zombie in a_zombies) {
-      if(zombie.archetype === # "zombie" && is_true(self.var_a123c71) && !is_true(zombie.knockdown)) {
+      if(zombie.archetype === #"zombie" && is_true(self.var_a123c71) && !is_true(zombie.knockdown)) {
         if(distance2dsquared(self.origin, zombie.origin) > sqr(60)) {
           continue;
         }
@@ -686,7 +686,7 @@ function function_79ae8e99(instance) {
         continue;
       }
 
-      if(zombie.archetype === # "zombie" && is_true(self.var_a123c71) && is_true(zombie.knockdown)) {
+      if(zombie.archetype === #"zombie" && is_true(self.var_a123c71) && is_true(zombie.knockdown)) {
         if(distance2dsquared(self.origin, zombie.origin) > sqr(60)) {
           continue;
         }
@@ -828,13 +828,13 @@ function function_24735dd6(instance) {
 
     if(s_result._notify === "bridge_riser") {
       var_90a50598 = isDefined(instance.contentgroups[#"hash_49cdcfaa651f27b1"]) ? instance.contentgroups[#"hash_49cdcfaa651f27b1"] : [];
-      str_soundalias = # "hash_77ae7c9f20198410";
+      str_soundalias = #"hash_77ae7c9f20198410";
       n_dist = 600;
       n_speed = 100;
     } else {
       var_90a50598 = isDefined(instance.contentgroups[#"hash_2cbcef3b0e436f8f"]) ? instance.contentgroups[#"hash_2cbcef3b0e436f8f"] : [];
-      str_soundalias = # "hash_86b3b0126e9a252";
-      var_cec14fb9 = # "";
+      str_soundalias = #"hash_86b3b0126e9a252";
+      var_cec14fb9 = #"";
       n_dist = 2400;
       n_speed = 150;
     }
@@ -974,13 +974,13 @@ function function_978eec63(einflictor, eattacker, idamage, idflags, smeansofdeat
       self playSound(#"hash_1ddeb8af5a217a6e");
     }
 
-    if(modelindex.model === # "wpn_t9_sr_electric_avogadro_projectile") {
+    if(modelindex.model === #"wpn_t9_sr_electric_avogadro_projectile") {
       partname = 60;
-    } else if(modelindex.zm_ai_category === # "elite") {
+    } else if(modelindex.zm_ai_category === #"elite") {
       partname = 100;
-    } else if(modelindex.zm_ai_category === # "special") {
+    } else if(modelindex.zm_ai_category === #"special") {
       partname = 80;
-    } else if(modelindex.zm_ai_category === # "normal") {
+    } else if(modelindex.zm_ai_category === #"normal") {
       partname = 50;
     } else if(vsurfacenormal === "MOD_UNKNOWN") {
       partname = 0;
@@ -1021,10 +1021,10 @@ function function_c97fdd1d(s_loot) {
 
       foreach(spawn in var_842cdacd) {
         if(math::cointoss(50)) {
-          model = # "p9_gold_surcrystal_medium_01";
+          model = #"p9_gold_surcrystal_medium_01";
           str_scene = "p9_zm_gold_sur_crystal_medium_01_bundle";
         } else {
-          model = # "p9_gold_surcrystal_medium_02";
+          model = #"p9_gold_surcrystal_medium_02";
           str_scene = "p9_zm_gold_sur_crystal_medium_02_bundle";
         }
 

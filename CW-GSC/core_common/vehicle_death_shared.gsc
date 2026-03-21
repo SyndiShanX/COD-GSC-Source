@@ -288,7 +288,7 @@ function play_death_audio() {
 }
 
 function play_spinning_plane_sound() {
-  if(self.vehicletype == # "veh_dart_wz") {
+  if(self.vehicletype == #"veh_dart_wz") {
     return;
   }
 
@@ -587,12 +587,12 @@ function helicopter_collision() {
 }
 
 function play_crashing_loop() {
-  var_cc04d521 = # "hash_624d3da70bb7d2f";
+  var_cc04d521 = #"hash_624d3da70bb7d2f";
 
   if(isDefined(self.vehicletype)) {
     switch (self.vehicletype) {
       case # "hash_10e49116dd0a922f":
-        var_cc04d521 = # "hash_4b5b2baa68a0e53b";
+        var_cc04d521 = #"hash_4b5b2baa68a0e53b";
         break;
     }
   }

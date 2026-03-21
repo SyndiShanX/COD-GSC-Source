@@ -249,7 +249,7 @@ function_607df9c6(ai) {
   actors = getentitiesinradius(ai.origin, 80, 15);
 
   foreach(actor in actors) {
-    if(actor.team !== level.zombie_team || actor.archetype !== # "zombie") {
+    if(actor.team !== level.zombie_team || actor.archetype !== #"zombie") {
       continue;
     }
 
@@ -279,7 +279,7 @@ function_1b029905() {
   while(true) {
     waitresult = level waittill(#"transformation_complete");
 
-    if(waitresult.id === # "hash_791d597ac0457860" && isDefined(waitresult.data)) {
+    if(waitresult.id === #"hash_791d597ac0457860" && isDefined(waitresult.data)) {
       newai = waitresult.new_ai[0];
       newai.maxhealth *= waitresult.data.healthmultiplier;
       newai.health = newai.maxhealth;

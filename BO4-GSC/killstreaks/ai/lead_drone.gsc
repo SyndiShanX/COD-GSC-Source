@@ -278,7 +278,7 @@ cantargetplayer(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -536,7 +536,7 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   idamage = vehicle_ai::shared_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
 
   if(isDefined(weapon)) {
-    if(weapon.dostun && smeansofdeath == "MOD_GRENADE_SPLASH" || weapon.var_8456d4d === # "damageeffecttype_electrical") {
+    if(weapon.dostun && smeansofdeath == "MOD_GRENADE_SPLASH" || weapon.var_8456d4d === #"damageeffecttype_electrical") {
       minempdowntime = 0.8 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 0);
       maxempdowntime = 1.2 * (isDefined(self.settings.empdowntime) ? self.settings.empdowntime : 1);
       self notify(#"emped", {
@@ -549,7 +549,7 @@ function_9bbb40ab(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
   idamage = killstreaks::ondamageperweapon("drone_squadron", eattacker, idamage, idflags, smeansofdeath, weapon, self.maxhealth, &destroyed_cb, self.maxhealth * 0.4, &low_health_cb, emp_damage, undefined, 1, 1);
 
   if(isDefined(weapon)) {
-    if(weapon.name == # "hatchet" && smeansofdeath == "MOD_IMPACT") {
+    if(weapon.name == #"hatchet" && smeansofdeath == "MOD_IMPACT") {
       idamage = self.maxhealth;
     }
   }

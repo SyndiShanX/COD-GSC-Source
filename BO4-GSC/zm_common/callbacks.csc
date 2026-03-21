@@ -119,7 +119,7 @@ entityspawned(localclientnum) {
 
     if(self.type == "helicopter") {}
 
-    if(self.archetype === # "bat") {
+    if(self.archetype === #"bat") {
       if(isDefined(level._customactorcbfunc)) {
         self thread[[level._customactorcbfunc]](localclientnum);
       }

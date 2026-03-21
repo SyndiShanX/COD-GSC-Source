@@ -27,7 +27,7 @@ function private preinit() {
   zm_trial::register_challenge(#"restrict_controls", &on_begin, &on_end);
 }
 
-function private on_begin(var_bd9d962 = # "invert") {
+function private on_begin(var_bd9d962 = #"invert") {
   level endon(#"hash_7646638df88a3656");
   wait 5;
   level.var_2439365b = var_bd9d962;

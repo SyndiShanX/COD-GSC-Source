@@ -42,10 +42,10 @@ __init__() {
   level.ct_shared_warning = ct_shared_warning::register("ct_shared_warning");
   level.ct_shared_objcounter = ct_shared_objcounter::register("ct_shared_objcounter");
   level._effect[#"zoneedgemarker"] = [];
-  level._effect[#"zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
   level.var_57b466e9 = level._effect[#"zoneedgemarker"][0];
   level.var_84c5e66d = "area_";
   level.a_ct_timer_mod_ticks = [];

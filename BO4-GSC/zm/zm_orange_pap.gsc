@@ -270,7 +270,7 @@ function_56db9cdc() {
 
     zm_orange_lighthouse::function_da304f6e(0);
 
-    if(s_notify._notify !== # "hash_39b6629ce957cce9") {
+    if(s_notify._notify !== #"hash_39b6629ce957cce9") {
       level waittilltimeout(30, #"hash_39b6629ce957cce9");
     }
   }

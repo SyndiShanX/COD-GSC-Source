@@ -98,10 +98,10 @@ function callback_playerconnect() {
 
   self.killedplayerscurrent = [];
 
-  if(self.team != # "spectator" && util::isfirstround()) {
+  if(self.team != #"spectator" && util::isfirstround()) {
     if(isDefined(level.draftstage) && level.draftstage >= 6) {
       self thread globallogic_audio::set_music_on_player("none");
-    } else if(game.state != # "playing") {
+    } else if(game.state != #"playing") {
       if(is_true(level.var_894b9d74)) {
         self thread globallogic_audio::set_music_on_player("none");
       } else {
@@ -175,7 +175,7 @@ function callback_playerconnect() {
 
   if(gamestate::is_game_over()) {
     self.pers[#"needteam"] = 1;
-    self.pers[#"team"] = # "spectator";
+    self.pers[#"team"] = #"spectator";
     self.team = self.sessionteam;
     self setclientuivisibilityflag("hud_visible", 0);
     self[[level.spawnintermission]]();
@@ -190,7 +190,7 @@ function callback_playerconnect() {
   }
 
   if((level.rankedmatch || level.leaguematch) && !isDefined(self.pers[#"latejoin"])) {
-    if(game.state == # "playing" || self.pers[#"roundjoined"] > 0) {
+    if(game.state == #"playing" || self.pers[#"roundjoined"] > 0) {
       self.pers[#"latejoin"] = 1;
     } else {
       self.pers[#"latejoin"] = 0;
@@ -232,9 +232,9 @@ function callback_playerconnect() {
     var_4c542e39 = self function_2a8a03ed();
     var_432c77c2 = self squads::function_4c9d66b1();
     self.pers[#"needteam"] = undefined;
-    self.pers[#"team"] = # "spectator";
-    self.team = # "spectator";
-    self.sessionteam = # "spectator";
+    self.pers[#"team"] = #"spectator";
+    self.team = #"spectator";
+    self.sessionteam = #"spectator";
     self.sessionstate = "dead";
 
     if(!level flag::get(#"hash_263f55e6bcaa1891")) {
@@ -249,8 +249,8 @@ function callback_playerconnect() {
       self thread globallogic_spawn::kickifdontspawn();
     }
 
-    if(self.pers[#"team"] == # "spectator") {
-      self.sessionteam = # "spectator";
+    if(self.pers[#"team"] == #"spectator") {
+      self.sessionteam = #"spectator";
       self thread spectate_player_watcher();
     }
 
@@ -265,9 +265,9 @@ function callback_playerconnect() {
     }
 
     init_character_index();
-  } else if(self.pers[#"team"] == # "spectator") {
+  } else if(self.pers[#"team"] == #"spectator") {
     [[level.spawnspectator]]();
-    self.sessionteam = # "spectator";
+    self.sessionteam = #"spectator";
     self.sessionstate = "spectator";
     self thread spectate_player_watcher();
   } else {
@@ -288,7 +288,7 @@ function callback_playerconnect() {
     self thread spectating::set_permissions();
   }
 
-  if(self.sessionteam != # "spectator" && self.sessionstate != "playing" && !isalive(self)) {
+  if(self.sessionteam != #"spectator" && self.sessionstate != "playing" && !isalive(self)) {
     self thread spawning::function_d62887a1(1);
   }
 
@@ -322,7 +322,7 @@ function callback_playerconnect() {
 function function_b7c4c231() {
   var_f18c60b3 = undefined;
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     [[level.spawnspectator]]();
     self thread namespace_66d6aa44::function_a8f822ee();
     return;
@@ -363,7 +363,7 @@ function private function_2a8a03ed() {
   if(playerteams.size > 0) {
     playerteam = playerteams[self getentitynumber()];
 
-    if(isDefined(playerteam) && (isDefined(level.teams[playerteam]) || playerteam == # "spectator")) {
+    if(isDefined(playerteam) && (isDefined(level.teams[playerteam]) || playerteam == #"spectator")) {
       var_4c542e39 = playerteam;
     }
   }
@@ -690,15 +690,15 @@ function private function_efa6e25f() {
   }
 
   self.pointstowin = self.pers[#"pointstowin"];
-  self.pers[#"outcome"] = # "loss";
+  self.pers[#"outcome"] = #"loss";
   self globallogic_score::initpersstat(#"momentum", 0);
   self.momentum = self globallogic_score::getpersstat(#"momentum");
 
   if(!isDefined(level.var_e57efb05)) {
     level.var_e57efb05 = [];
-    level.var_e57efb05[0] = # "hash_580eb37a65c9aec3";
-    level.var_e57efb05[1] = # "hash_580eb27a65c9ad10";
-    level.var_e57efb05[2] = # "hash_580eb57a65c9b229";
+    level.var_e57efb05[0] = #"hash_580eb37a65c9aec3";
+    level.var_e57efb05[1] = #"hash_580eb27a65c9ad10";
+    level.var_e57efb05[2] = #"hash_580eb57a65c9b229";
   }
 
   for(slot = 0; slot < 3; slot++) {

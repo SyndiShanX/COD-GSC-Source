@@ -117,17 +117,17 @@ widows_wine_contact_explosion() {
 
     switch (ai_target.zm_ai_category) {
       case # "heavy":
-        var_3e5502b5 = # "hash_6b28a9e80349ad7e";
+        var_3e5502b5 = #"hash_6b28a9e80349ad7e";
         var_ca6267ad = 6;
         break;
       case # "miniboss":
-        var_3e5502b5 = # "hash_fa4899571ae8dbd";
+        var_3e5502b5 = #"hash_fa4899571ae8dbd";
         var_ca6267ad = 3;
         break;
       case # "boss":
         continue;
       default:
-        var_3e5502b5 = # "hash_54016f8b03c9745e";
+        var_3e5502b5 = #"hash_54016f8b03c9745e";
         var_ca6267ad = 12;
         b_freeze = 1;
         break;
@@ -174,17 +174,17 @@ function_c6366dbe() {
 
       switch (ai.zm_ai_category) {
         case # "heavy":
-          var_3e5502b5 = # "hash_6b28a9e80349ad7e";
+          var_3e5502b5 = #"hash_6b28a9e80349ad7e";
           var_ca6267ad = 6;
           break;
         case # "miniboss":
-          var_3e5502b5 = # "hash_fa4899571ae8dbd";
+          var_3e5502b5 = #"hash_fa4899571ae8dbd";
           var_ca6267ad = 3;
           break;
         case # "boss":
           continue;
         default:
-          var_3e5502b5 = # "hash_54016f8b03c9745e";
+          var_3e5502b5 = #"hash_54016f8b03c9745e";
           var_ca6267ad = 12;
           break;
       }
@@ -296,7 +296,7 @@ widows_wine_vehicle_behavior(attacker, weapon) {
   self.b_widows_wine_cocoon = 1;
 
   if(isDefined(self.archetype)) {
-    if(self.archetype == # "raps") {
+    if(self.archetype == #"raps") {
       self clientfield::set("winters_wail_freeze", 1);
       self._override_raps_combat_speed = 5;
       wait 6;
@@ -304,7 +304,7 @@ widows_wine_vehicle_behavior(attacker, weapon) {
       return;
     }
 
-    if(self.archetype == # "parasite") {
+    if(self.archetype == #"parasite") {
       waitframe(1);
       self dodamage(self.maxhealth, self.origin);
     }

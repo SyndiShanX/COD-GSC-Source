@@ -1261,7 +1261,7 @@ function private function_6ca9ecd8() {
 }
 
 function private function_27cfa452() {
-  return self.grenadeweapon.name == # "hash_34fa23e332e34886";
+  return self.grenadeweapon.name == #"hash_34fa23e332e34886";
 }
 
 function function_5852aae6(entity, throwposition) {
@@ -1521,16 +1521,16 @@ function autoexec function_998cd770() {
 
 function private function_45ab28c7(s_info) {
   if(self function_d3b23b75()) {
-    level.var_85b00b2b = # "hash_e086893b3cc6931";
-    level.var_30eb363 = # "hash_6856b5089c2dcf1e";
+    level.var_85b00b2b = #"hash_e086893b3cc6931";
+    level.var_30eb363 = #"hash_6856b5089c2dcf1e";
     return;
   }
 
   if(isDefined(s_info.eattacker.var_d3fb5ec5)) {
-    level.var_85b00b2b = # "hash_e086593b3cc6418";
+    level.var_85b00b2b = #"hash_e086593b3cc6418";
 
     if(s_info.smeansofdeath == "MOD_MELEE_WEAPON_BUTT") {
-      level.var_30eb363 = # "hash_6856b0089c2dc69f";
+      level.var_30eb363 = #"hash_6856b0089c2dc69f";
       return;
     }
 

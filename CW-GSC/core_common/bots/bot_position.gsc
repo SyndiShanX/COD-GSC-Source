@@ -206,7 +206,7 @@ function private function_794e2efa(trigger, point) {
     return false;
   }
 
-  if(trigger.classname != # "trigger_radius_use") {
+  if(trigger.classname != #"trigger_radius_use") {
     return true;
   }
 

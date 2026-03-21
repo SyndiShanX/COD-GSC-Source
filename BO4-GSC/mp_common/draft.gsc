@@ -407,7 +407,7 @@ draft_run() {
       ready = 1;
 
       foreach(player in level.players) {
-        if(player.pers[#"team"] == # "spectator" || isbot(player)) {
+        if(player.pers[#"team"] == #"spectator" || isbot(player)) {
           continue;
         }
 
@@ -434,7 +434,7 @@ draft_run() {
       var_97286e53 = 1;
 
       foreach(player in level.players) {
-        if(player.pers[#"team"] == # "spectator") {
+        if(player.pers[#"team"] == #"spectator") {
           continue;
         }
 
@@ -532,7 +532,7 @@ assign_remaining_players(only_assign_player) {
   }
 
   foreach(player in level.players) {
-    if(player.pers[#"team"] == # "spectator") {
+    if(player.pers[#"team"] == #"spectator") {
       continue;
     }
 
@@ -679,7 +679,7 @@ game_start() {
 
   if(level.gametype !== "bounty") {
     foreach(player in level.players) {
-      if(player.hasspawned || player.pers[#"team"] == # "spectator") {
+      if(player.hasspawned || player.pers[#"team"] == #"spectator") {
         player globallogic_audio::set_music_on_player("spawnPreRise");
       }
     }
@@ -714,7 +714,7 @@ draft_finalize() {
   level.inprematchperiod = 0;
 
   foreach(player in level.players) {
-    if(player.sessionstate == "spectator" && player.team != # "spectator") {
+    if(player.sessionstate == "spectator" && player.team != #"spectator") {
       assign_remaining_players(player);
     }
 

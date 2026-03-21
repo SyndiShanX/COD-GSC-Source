@@ -22,7 +22,7 @@ function_eefb5c87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   ent = getentbynum(localclientnum, newval);
 
   if(newval != oldval || isDefined(ent) && !(isDefined(ent.var_4dffc910) && ent.var_4dffc910)) {
-    robname = # "hash_aa2ba3bf66e25d2";
+    robname = #"hash_aa2ba3bf66e25d2";
     oldent = getentbynum(localclientnum, oldval);
 
     if(isDefined(oldent) && isDefined(oldent.var_4dffc910) && oldent.var_4dffc910) {

@@ -151,7 +151,7 @@ getbetterteam() {
     player = level.players[i];
     team = player.pers[#"team"];
 
-    if(isDefined(team) && (team == # "allies" || team == # "axis")) {
+    if(isDefined(team) && (team == #"allies" || team == #"axis")) {
       kills[team] += player.kills;
       deaths[team] += player.deaths;
     }
@@ -194,11 +194,11 @@ onstartgametype() {
   setbombtimer("B", 0);
   setmatchflag("bomb_timer_b", 0);
   setclientnamemode("manual_change");
-  game.strings[#"target_destroyed"] = # "mp/target_destroyed";
-  game.strings[#"bomb_defused"] = # "mp/bomb_defused";
+  game.strings[#"target_destroyed"] = #"mp/target_destroyed";
+  game.strings[#"bomb_defused"] = #"mp/bomb_defused";
   hud_message::function_36419c2(1, game.strings[#"target_destroyed"], game.strings[#"target_destroyed"]);
   hud_message::function_36419c2(11, game.strings[#"bomb_defused"], game.strings[#"bomb_defused"]);
-  level._effect[#"bombexplosion"] = # "explosions/fx_exp_bomb_demo_mp";
+  level._effect[#"bombexplosion"] = #"explosions/fx_exp_bomb_demo_mp";
   level.alwaysusestartspawns = 1;
 
   foreach(team, _ in level.teams) {
@@ -500,8 +500,8 @@ bombs() {
     visuals = getEntArray(bombzones[index].target, "targetname");
     smart_cover::addprotectedzone(trigger);
     concertina_wire::addprotectedzone(trigger);
-    name = # "sd" + trigger.script_label;
-    waypointname = # "sd_waypoint" + trigger.script_label;
+    name = #"sd" + trigger.script_label;
+    waypointname = #"sd_waypoint" + trigger.script_label;
     trigger.angles = visuals[0].angles;
     bombzone = gameobjects::create_use_object(game.defenders, trigger, visuals, (0, 0, 0), name, 1, 1);
     bombzone.angles = visuals[0].angles;
@@ -1001,7 +1001,7 @@ bombdefused(defusedobject, player) {
 set_ui_team() {
   wait 0.05;
 
-  if(game.attackers == # "allies") {
+  if(game.attackers == #"allies") {
     clientfield::set_world_uimodel("hudItems.war.attackingTeam", 1);
     return;
   }
@@ -1024,7 +1024,7 @@ sd_iskillboosting() {
     return true;
   }
 
-  if(level.teambased && (self.team == # "allies" || self.team == # "axis")) {
+  if(level.teambased && (self.team == #"allies" || self.team == #"axis")) {
     if(game.totalkillsteam[self.team] > level.playerkillsmax * (roundsplayed + 1)) {
       return true;
     }

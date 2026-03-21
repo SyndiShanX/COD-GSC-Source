@@ -39,8 +39,8 @@ __init__() {
   clientfield::register("actor", "water_tricannon_slow_fx", 1, 1, "int");
   clientfield::register("allplayers", "fire_tricannon_muzzle_fx", 1, 1, "counter");
   clientfield::register("allplayers", "water_tricannon_muzzle_fx", 1, 1, "counter");
-  level._effect[#"earth_impact"] = # "hash_4587acdb7cd704b6";
-  level._effect[#"fire_impact"] = # "hash_65320106e9ad659c";
+  level._effect[#"earth_impact"] = #"hash_4587acdb7cd704b6";
+  level._effect[#"fire_impact"] = #"hash_65320106e9ad659c";
   level.custom_magic_box_selection_logic = &function_a543db40;
   level.var_ee565b3f = &function_689d923b;
   level.var_bb2323e4 = &function_73a498c8;
@@ -87,7 +87,7 @@ function_68e4ed32(weapon) {
   a_targets = getentitiesinradius(self.origin, 192, 15);
 
   foreach(ai in a_targets) {
-    if(!isalive(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
+    if(!isalive(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
       continue;
     }
 
@@ -119,7 +119,7 @@ function_321f468b() {
   v_start = self getweaponmuzzlepoint();
 
   foreach(ai in a_targets) {
-    if(!isalive(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
+    if(!isalive(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
       continue;
     }
 
@@ -234,7 +234,7 @@ function_54d03fdd(weapon, b_packed) {
     }
 
     if(n_dist_sq < 122500) {
-      if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
+      if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
         ai ai::stun();
         continue;
       }
@@ -260,7 +260,7 @@ function_71233d37(params) {
   playFX(level._effect[#"earth_impact"], params.vpoint);
 
   if(params.idamage >= self.health) {
-    if(self.archetype == # "zombie") {
+    if(self.archetype == #"zombie") {
       self clientfield::set("zombie_gut_explosion", 1);
       waitframe(5);
 
@@ -272,7 +272,7 @@ function_71233d37(params) {
     return;
   }
 
-  if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+  if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
     self ai::stun();
     return;
   }
@@ -300,10 +300,10 @@ function_14d49bd7(weapon) {
   v_impact = results.position;
 
   if(weapon == getweapon(#"ww_tricannon_water_t8" + "_upgraded")) {
-    var_bdbde2d2 = # "hash_64aafe3cc04860be";
+    var_bdbde2d2 = #"hash_64aafe3cc04860be";
     n_duration = 5;
   } else {
-    var_bdbde2d2 = # "hash_7dd6cbed104dd8bd";
+    var_bdbde2d2 = #"hash_7dd6cbed104dd8bd";
     n_duration = 4;
   }
 
@@ -330,8 +330,8 @@ function_cee7424b(v_impact, var_bdbde2d2, n_duration) {
     var_ae51959e = arraysortclosest(var_ae51959e, v_impact, undefined, undefined, 112);
 
     foreach(ai in var_ae51959e) {
-      if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
-        if(var_bdbde2d2 == # "hash_64aafe3cc04860be") {
+      if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
+        if(var_bdbde2d2 == #"hash_64aafe3cc04860be") {
           ai thread namespace_9ff9f642::slowdown(#"hash_111531769a0bf9e");
         } else {
           ai thread namespace_9ff9f642::slowdown(#"hash_7eece5e5a5f9cc4d");
@@ -397,7 +397,7 @@ function_3e2e539(params) {
       return false;
     }
 
-    if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+    if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
       self ai::stun();
 
       if(isDefined(params.vpoint) && isDefined(params.vdir)) {

@@ -999,7 +999,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
       isfrag = weaponname == "frag_grenade";
 
       if(isDefined(eattacker) && eattacker != self) {
-        if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == # "satchel_charge" || weapon.name == # "claymore" || weapon.name == # "bouncingbetty")) {
+        if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == #"satchel_charge" || weapon.name == #"claymore" || weapon.name == #"bouncingbetty")) {
           self.explosiveinfo[#"originalownerkill"] = einflictor.owner == self;
           self.explosiveinfo[#"damageexplosivekill"] = isDefined(einflictor.wasdamaged);
           self.explosiveinfo[#"chainkill"] = isDefined(einflictor.waschained);
@@ -1031,7 +1031,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
     }
 
     if(smeansofdeath == "MOD_IMPACT" && isDefined(eattacker) && isPlayer(eattacker) && eattacker != self) {
-      if(weapon.name == # "hatchet" && isDefined(einflictor)) {
+      if(weapon.name == #"hatchet" && isDefined(einflictor)) {
         self.explosiveinfo[#"projectile_bounced"] = isDefined(einflictor.bounced);
       }
     }
@@ -1573,7 +1573,7 @@ function function_4e570d77(attacker, weapon, smeansofdeath, wasinlaststand, var_
     }
 
     if(smeansofdeath != "MOD_FALLING") {
-      if(weapon.name == # "explosive_bolt" && isDefined(inflictor) && isDefined(inflictor.ownerweaponatlaunch) && inflictor.owneradsatlaunch) {
+      if(weapon.name == #"explosive_bolt" && isDefined(inflictor) && isDefined(inflictor.ownerweaponatlaunch) && inflictor.owneradsatlaunch) {
         attacker stats::function_eec52333(inflictor.ownerweaponatlaunch, #"kills", 1, attacker.class_num, 0, 1);
       } else {
         attacker stats::function_eec52333(weapon, #"kills", 1, attacker.class_num);
@@ -2378,7 +2378,7 @@ function is_explosive_ragdoll(weapon, inflictor) {
     return false;
   }
 
-  if(weapon.name == # "destructible_car" || weapon.name == # "explodable_barrel") {
+  if(weapon.name == #"destructible_car" || weapon.name == #"explodable_barrel") {
     return true;
   }
 
@@ -2402,7 +2402,7 @@ function start_explosive_ragdoll(dir, weapon) {
   y = randomintrange(50, 100);
   z = randomintrange(10, 20);
 
-  if(isDefined(weapon) && (weapon.name == # "sticky_grenade" || weapon.name == # "explosive_bolt")) {
+  if(isDefined(weapon) && (weapon.name == #"sticky_grenade" || weapon.name == #"explosive_bolt")) {
     if(isDefined(dir) && lengthsquared(dir) > 0) {
       x = dir[0] * x;
       y = dir[1] * y;
@@ -2553,7 +2553,7 @@ function function_ff093620(attacker, weapon) {
     attacker.lastcapkiller = 1;
   }
 
-  if(isDefined(attacker) && isDefined(weapon) && weapon.statname == # "planemortar") {
+  if(isDefined(attacker) && isDefined(weapon) && weapon.statname == #"planemortar") {
     if(!isDefined(attacker.planemortarbda)) {
       attacker.planemortarbda = 0;
     }
@@ -2561,7 +2561,7 @@ function function_ff093620(attacker, weapon) {
     attacker.planemortarbda++;
   }
 
-  if(isDefined(attacker) && isDefined(weapon) && (weapon.name == # "straferun_rockets" || weapon.name == # "straferun_gun")) {
+  if(isDefined(attacker) && isDefined(weapon) && (weapon.name == #"straferun_rockets" || weapon.name == #"straferun_gun")) {
     if(isDefined(attacker.straferunbda)) {
       attacker.straferunbda++;
     }

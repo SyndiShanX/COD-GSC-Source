@@ -26,7 +26,7 @@ function function_288ebce4(localclientnum, itementry) {
   data = item_world::function_a7e98a1a(localclientnum);
   tactical = data.inventory.items[13];
 
-  if(tactical.itementry.name === # "hash_7ada82abc5dad90e") {
+  if(tactical.itementry.name === #"hash_7ada82abc5dad90e") {
     return false;
   }
 

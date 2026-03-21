@@ -23,9 +23,9 @@ function preload() {
 }
 
 function postload() {
-  level._effect[#"hash_38deef315d53cb25"] = # "hash_6e1d732b61ae9026";
-  level._effect[#"hash_10164f9d7f646dfc"] = # "hash_3428f097d0ad7f33";
-  level._effect[#"hash_66333bf9362fbf33"] = # "hash_779fdcf65019d708";
+  level._effect[#"hash_38deef315d53cb25"] = #"hash_6e1d732b61ae9026";
+  level._effect[#"hash_10164f9d7f646dfc"] = #"hash_3428f097d0ad7f33";
+  level._effect[#"hash_66333bf9362fbf33"] = #"hash_779fdcf65019d708";
 }
 
 function set_dof(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

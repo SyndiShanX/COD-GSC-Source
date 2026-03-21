@@ -137,9 +137,9 @@ function private supportsleancovercondition(entity) {
   }
 
   if(isDefined(entity.node)) {
-    if(entity.node.type == # "cover left" || entity.node.type == # "cover right") {
+    if(entity.node.type == #"cover left" || entity.node.type == #"cover right") {
       return true;
-    } else if(entity.node.type == # "cover pillar") {
+    } else if(entity.node.type == #"cover pillar") {
       if(!(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) || !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048)) {
         return true;
       }
@@ -156,19 +156,19 @@ function private shouldleanatcovercondition(entity) {
 
   legalaim = 0;
 
-  if(entity.node.type == # "cover left") {
+  if(entity.node.type == #"cover left") {
     if(!(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4)) {
       legalaim = function_cfe04a8d(entity, "cover_left_crouch_lean");
     } else {
       legalaim = function_cfe04a8d(entity, "cover_left_lean");
     }
-  } else if(entity.node.type == # "cover right") {
+  } else if(entity.node.type == #"cover right") {
     if(!(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 4) == 4)) {
       legalaim = function_cfe04a8d(entity, "cover_right_crouch_lean");
     } else {
       legalaim = function_cfe04a8d(entity, "cover_right_lean");
     }
-  } else if(entity.node.type == # "cover pillar") {
+  } else if(entity.node.type == #"cover pillar") {
     supportsleft = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024);
     supportsright = !(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048);
     angleleeway = 10;
@@ -265,7 +265,7 @@ function private supportsovercovercondition(entity) {
   stance = entity getblackboardattribute("_stance");
 
   if(isDefined(entity.node)) {
-    if(entity.node.type == # "conceal crouch" || entity.node.type == # "conceal stand") {
+    if(entity.node.type == #"conceal crouch" || entity.node.type == #"conceal stand") {
       return true;
     }
 
@@ -273,11 +273,11 @@ function private supportsovercovercondition(entity) {
       return false;
     }
 
-    if(entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") {
+    if(entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") {
       if(stance == "crouch") {
         return true;
       }
-    } else if(entity.node.type == # "cover stand" || entity.node.type == # "conceal stand") {
+    } else if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand") {
       if(stance == "stand") {
         return true;
       }
@@ -397,7 +397,7 @@ function private coveridleterminate(entity) {
 }
 
 function isatcrouchnode(entity) {
-  if(isDefined(entity.node) && (entity.node.type == # "exposed" || entity.node.type == # "guard" || entity.node.type == # "path")) {
+  if(isDefined(entity.node) && (entity.node.type == #"exposed" || entity.node.type == #"guard" || entity.node.type == #"path")) {
     if(distancesquared(entity.origin, entity.node.origin) <= sqr(24)) {
       return (!entity function_c97b59f8("stand", entity.node) && entity function_c97b59f8("crouch", entity.node));
     }
@@ -407,7 +407,7 @@ function isatcrouchnode(entity) {
 }
 
 function function_1d3ee45b(entity) {
-  if(isDefined(entity.node) && (entity.node.type == # "exposed" || entity.node.type == # "guard" || entity.node.type == # "path")) {
+  if(isDefined(entity.node) && (entity.node.type == #"exposed" || entity.node.type == #"guard" || entity.node.type == #"path")) {
     if(distancesquared(entity.origin, entity.node.origin) <= sqr(24)) {
       return (!entity function_c97b59f8("stand", entity.node) && !entity function_c97b59f8("crouch", entity.node) && entity function_c97b59f8("prone", entity.node));
     }
@@ -484,7 +484,7 @@ function isatcovermodenone(entity) {
 }
 
 function function_d18f7e29(entity) {
-  if(entity.node.type == # "cover stand" || entity.node.type == # "conceal stand") {
+  if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand") {
     covermode = entity getblackboardattribute("_cover_mode");
 
     if(covermode == "cover_over") {
@@ -580,15 +580,15 @@ function calculatecoverdirection(entity, stepout) {
 
     coverdirection = "cover_front_direction";
 
-    if(entity.node.type == # "cover left") {
+    if(entity.node.type == #"cover left") {
       if(entity function_c97b59f8("stand", entity.node) || math::cointoss() || stepout) {
         coverdirection = "cover_left_direction";
       }
-    } else if(entity.node.type == # "cover right") {
+    } else if(entity.node.type == #"cover right") {
       if(entity function_c97b59f8("stand", entity.node) || math::cointoss() || stepout) {
         coverdirection = "cover_right_direction";
       }
-    } else if(entity.node.type == # "cover pillar") {
+    } else if(entity.node.type == #"cover pillar") {
       coverdirection = function_f6d48a6a(entity);
     }
 
@@ -596,7 +596,7 @@ function calculatecoverdirection(entity, stepout) {
   } else {
     coverdirection = "cover_front_direction";
 
-    if(entity.node.type == # "cover pillar") {
+    if(entity.node.type == #"cover pillar") {
       coverdirection = function_f6d48a6a(entity);
     }
   }

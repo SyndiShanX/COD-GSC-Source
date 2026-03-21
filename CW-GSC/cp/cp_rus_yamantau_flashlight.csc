@@ -13,7 +13,7 @@ function preload() {
 }
 
 function postload() {
-  level._effect[#"hash_2b8b4be2cb5925ab"] = # "hash_670a56e843776b6f";
+  level._effect[#"hash_2b8b4be2cb5925ab"] = #"hash_670a56e843776b6f";
 }
 
 function function_70723e25(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

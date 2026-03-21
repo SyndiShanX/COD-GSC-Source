@@ -49,7 +49,7 @@ function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
     player = eventstruct.player;
   }
 
-  if(!isalive(player) || !isalive(vehicle) || vehicle.vehicletype !== # "hash_2c0e11a1e87bbcd5") {
+  if(!isalive(player) || !isalive(vehicle) || vehicle.vehicletype !== #"hash_2c0e11a1e87bbcd5") {
     return;
   }
 

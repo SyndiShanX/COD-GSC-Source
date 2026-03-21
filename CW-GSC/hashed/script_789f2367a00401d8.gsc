@@ -41,7 +41,7 @@ function init_shared() {
 }
 
 function function_4f3cd1f0() {
-  if(self.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(self.subarchetype === #"hash_28e36e7b7d5421f") {
     self.var_90d0c0ff = "anim_spawn_hellhound";
     self callback::function_d8abfc3d(#"on_dog_killed", &function_84a3128e);
   }
@@ -700,7 +700,7 @@ function function_851843a5(target, position, fireeffectarea, var_289a74bc, weapo
     trace = bulletTrace(fireeffectarea, position getshootatpos(), 0, position);
 
     if(trace[#"fraction"] == 1) {
-      if(position.subarchetype === # "hash_28e36e7b7d5421f") {
+      if(position.subarchetype === #"hash_28e36e7b7d5421f") {
         position thread function_c049196a();
       }
 
@@ -923,7 +923,7 @@ function function_59d981cc(origin, blast_radius, attacker, exploder) {
         var_9dea1e72 = int(var_9dea1e72);
         target dodamage(var_9dea1e72, origin, undefined, attacker, "none", "MOD_EXPLOSIVE", 0, undefined);
 
-        if(isDefined(exploder.var_ab1b3515) && exploder.var_ab1b3515.zm_ai_category === # "boss") {
+        if(isDefined(exploder.var_ab1b3515) && exploder.var_ab1b3515.zm_ai_category === #"boss") {
           occupants = target getvehoccupants();
 
           foreach(occupant in occupants) {
@@ -986,7 +986,7 @@ function candofiredamage(victim, resetfiretime) {
     return false;
   }
 
-  if(isactor(victim) && victim.subarchetype === # "hash_28e36e7b7d5421f") {
+  if(isactor(victim) && victim.subarchetype === #"hash_28e36e7b7d5421f") {
     return false;
   }
 
@@ -1041,7 +1041,7 @@ function private function_53811067(zombie) {
     return false;
   }
 
-  if(zombie.archetype !== # "zombie") {
+  if(zombie.archetype !== #"zombie") {
     return false;
   }
 

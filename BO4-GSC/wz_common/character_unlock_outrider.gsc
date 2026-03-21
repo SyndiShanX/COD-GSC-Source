@@ -28,7 +28,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu33_item") {
+  if(itementry.name === #"cu33_item") {
     if(self character_unlock::function_f0406288(#"outrider_unlock")) {
       if(self stats::get_stat_global(#"hash_35020c395a89befb") >= 25) {
         self character_unlock::function_c8beca5e(#"outrider_unlock", #"hash_28966e441535b733", 1);

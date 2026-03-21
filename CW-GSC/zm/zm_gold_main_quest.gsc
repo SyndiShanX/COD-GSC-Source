@@ -884,7 +884,7 @@ function function_35e13260() {
 }
 
 function function_7814d598(status) {
-  if(status === # "on") {
+  if(status === #"on") {
     s_portal_pos = struct::get("tp_pos");
 
     if(isDefined(s_portal_pos)) {
@@ -1560,7 +1560,7 @@ function function_b5fc7e46() {
 function function_9c74e3e3(e_player) {
   if(isPlayer(e_player)) {
     if(level flag::get(#"got_shovel") && !is_true(self.stub.spawn_pos.trigger_disable)) {
-      if(self.stub.spawn_pos.script_noteworthy === # "zone_hillside_road_defend" && self.stub.spawn_pos flag::get(#"canister_revealed")) {
+      if(self.stub.spawn_pos.script_noteworthy === #"zone_hillside_road_defend" && self.stub.spawn_pos flag::get(#"canister_revealed")) {
         self sethintstringforplayer(e_player, #"hash_10171975870a057a");
         return true;
       }

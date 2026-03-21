@@ -28,7 +28,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu34_item") {
+  if(itementry.name === #"cu34_item") {
     if(self character_unlock::function_f0406288(#"spectre_unlock")) {
       if(self stats::get_stat_global(#"hash_41f134c3e727d877") >= 20) {
         self character_unlock::function_c8beca5e(#"spectre_unlock", #"hash_27023afb3f91aba5", 1);

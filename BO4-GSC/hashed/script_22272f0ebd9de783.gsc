@@ -171,11 +171,11 @@ deactivate_trap(e_trap) {
 }
 
 damage(e_trap) {
-  if(!isalive(self) || self.archetype === # "tiger" || isvehicle(self)) {
+  if(!isalive(self) || self.archetype === #"tiger" || isvehicle(self)) {
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy") {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy") {
     e_trap.soul_whale deactivate_trap(e_trap);
 
     if(isDefined(e_trap.activated_by_player)) {

@@ -158,7 +158,7 @@ function function_c937e51f(var_f40cf449) {
   while(var_f40cf449 > 0) {
     result = level waittilltimeout(1, #"hash_d075b46833ffc79");
 
-    if(result._notify == # "timeout") {
+    if(result._notify == #"timeout") {
       var_f40cf449--;
 
       if(!is_true(level.var_efd3338c)) {

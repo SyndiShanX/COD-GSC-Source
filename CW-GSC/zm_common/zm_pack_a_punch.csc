@@ -23,7 +23,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[#"hash_2ab769386115d75c"] = # "hash_669f8d1e3151a677";
+  level._effect[#"hash_2ab769386115d75c"] = #"hash_669f8d1e3151a677";
   clientfield::register("zbarrier", "pap_working_fx", 1, 1, "int", &pap_working_fx_handler, 0, 0);
   clientfield::register("zbarrier", "pap_idle_fx", 1, 1, "int", &function_2a80c24d, 0, 0);
   clientfield::register("world", "pap_force_stream", 1, 1, "int", &pap_force_stream, 0, 0);

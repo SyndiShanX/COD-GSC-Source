@@ -467,7 +467,7 @@ teams_have_enmity(team1, team2) {
     return true;
   }
 
-  return team1 != # "neutral" && team2 != # "neutral" && team1 != team2;
+  return team1 != #"neutral" && team2 != #"neutral" && team1 != team2;
 }
 
 remove_unused_spawn_entities() {

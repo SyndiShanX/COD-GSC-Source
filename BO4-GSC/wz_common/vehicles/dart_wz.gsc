@@ -43,7 +43,7 @@ kill_vehicle(attackingplayer, weapon = level.weaponnone) {
 on_item_use(params) {
   self endon(#"death", #"disconnect");
 
-  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != # "dart") {
+  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != #"dart") {
     return;
   }
 
@@ -207,7 +207,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 
   vehicle = eventstruct.vehicle;
 
-  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != # "dart_wz") {
+  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != #"dart_wz") {
     return;
   }
 
@@ -252,7 +252,7 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 
   vehicle = eventstruct.vehicle;
 
-  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != # "dart_wz") {
+  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != #"dart_wz") {
     return;
   }
 
@@ -378,7 +378,7 @@ function_c6ac711a(target) {
     return false;
   }
 
-  if(!isDefined(target.weapon) || target.weapon.name != # "dart") {
+  if(!isDefined(target.weapon) || target.weapon.name != #"dart") {
     return false;
   }
 

@@ -941,19 +941,19 @@ function_cdd9b388() {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
             case 3:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "ammo") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"ammo") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 4:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "weapon") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"weapon") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 5:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "health") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"health") {
                 if(item.itementry.name == "<dev string:x9fc>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:xa10>") {
@@ -967,7 +967,7 @@ function_cdd9b388() {
 
               break;
             case 6:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "armor") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"armor") {
                 if(item.itementry.name == "<dev string:xa39>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:xa4c>") {
@@ -981,49 +981,49 @@ function_cdd9b388() {
 
               break;
             case 7:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"equipment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 8:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "backpack") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"backpack") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 9:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "attachment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"attachment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 10:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "generic") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"generic") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 11:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "killstreak") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"killstreak") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 15:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "quest") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"quest") {
                 sphere(item.origin, radius, (1, 0.5, 0), 1, 0, 10, 20);
               }
 
               break;
             case 16:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "cash") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"cash") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 17:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "resource") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"resource") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 

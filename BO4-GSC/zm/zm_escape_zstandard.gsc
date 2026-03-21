@@ -57,7 +57,7 @@ init_level_vars() {
   level thread zm_blockers::function_6f01c3cf("model_industries_b", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("model_industries_d", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("model_industries_e", "script_string", 0);
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
   level thread function_9217567c();
 }
@@ -72,7 +72,7 @@ function_9217567c() {
     foreach(s_crafting in a_s_crafting) {
       if(isarray(s_crafting.craftfoundry.blueprints)) {
         foreach(s_blueprint in s_crafting.craftfoundry.blueprints) {
-          if(s_blueprint.name === # "zblueprint_shield_spectral_shield") {
+          if(s_blueprint.name === #"zblueprint_shield_spectral_shield") {
             s_crafting.blueprint = s_blueprint;
           }
         }
@@ -169,7 +169,7 @@ defend_areas() {
   str_next_defend = array::random(array(#"powerhouse", #"new_industries"));
   level waittill(#"end_of_round");
 
-  if(str_next_defend == # "powerhouse") {
+  if(str_next_defend == #"powerhouse") {
     level zm_utility::open_door("door_model_west_side_exterior_upper_to_west_side_exterior_upper", undefined, undefined, 1);
   } else {
     level zm_utility::open_door("door_model_west_side_exterior_to_new_industries", undefined, undefined, 1);
@@ -181,12 +181,12 @@ defend_areas() {
   zm_utility::enable_power_switch(1, 1, "power_house_power_switch", "script_noteworthy");
   level notify(#"hash_417b024aa81e3cb8");
 
-  if(str_next_defend == # "new_industries") {
-    str_first_defend = # "new_industries";
-    str_second_defend = # "powerhouse";
+  if(str_next_defend == #"new_industries") {
+    str_first_defend = #"new_industries";
+    str_second_defend = #"powerhouse";
   } else {
-    str_first_defend = # "powerhouse";
-    str_second_defend = # "new_industries";
+    str_first_defend = #"powerhouse";
+    str_second_defend = #"new_industries";
   }
 
   wait 5;
@@ -239,7 +239,7 @@ defend_areas() {
   level thread function_c3ad6d4a(1);
   str_next_defend = array::random(array(#"building_64", #"docks"));
 
-  if(str_next_defend == # "building_64") {
+  if(str_next_defend == #"building_64") {
     var_420e4589 = array("door_citadel_to_tunnels", "sally_door");
   } else {
     var_420e4589 = array("door_citadel_to_tunnels", "door_alley_to_docks_bridge");
@@ -253,11 +253,11 @@ defend_areas() {
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
   zm_utility::function_fef4b36a(str_next_defend);
 
-  if(str_next_defend == # "building_64") {
-    str_next_defend = # "docks";
+  if(str_next_defend == #"building_64") {
+    str_next_defend = #"docks";
     var_420e4589 = array("door_alley_to_docks_bridge", "door_sally_to_docks");
   } else {
-    str_next_defend = # "building_64";
+    str_next_defend = #"building_64";
     var_420e4589 = array("sally_door", "door_sally_to_docks");
   }
 
@@ -464,61 +464,61 @@ function_b356f6ae() {
     if(isDefined(s_waitresult.e_door) && isDefined(s_waitresult.e_door.script_flag)) {
       switch (s_waitresult.e_door.script_flag) {
         case # "activate_west_side_exterior":
-          var_ff20f7d3 = # "hash_48b098165e01518e";
+          var_ff20f7d3 = #"hash_48b098165e01518e";
           break;
         case # "activate_new_industries":
-          var_ff20f7d3 = # "hash_50e05912992c7bc3";
+          var_ff20f7d3 = #"hash_50e05912992c7bc3";
           break;
         case # "activate_west_side_exterior_lower":
-          var_ff20f7d3 = # "hash_4ddad8473f8f44cd";
+          var_ff20f7d3 = #"hash_4ddad8473f8f44cd";
           break;
         case # "activate_west_side_exterior_tunnel":
-          var_ff20f7d3 = # "hash_3f684b6336ac27e7";
+          var_ff20f7d3 = #"hash_3f684b6336ac27e7";
           break;
         case # "activate_cellblock_ca":
-          var_ff20f7d3 = # "hash_4766f082bbf2cbf0";
+          var_ff20f7d3 = #"hash_4766f082bbf2cbf0";
           break;
         case # "activate_cafeteria":
-          var_ff20f7d3 = # "hash_4f024ba2f12a1e8";
+          var_ff20f7d3 = #"hash_4f024ba2f12a1e8";
           break;
         case # "activate_infirmary":
-          var_ff20f7d3 = # "hash_2525f49ae61a9065";
+          var_ff20f7d3 = #"hash_2525f49ae61a9065";
           break;
         case # "activate_cellblock_infirmary":
-          var_ff20f7d3 = # "hash_18077f7c3b49f099";
+          var_ff20f7d3 = #"hash_18077f7c3b49f099";
           break;
         case # "activate_wa_h":
-          var_ff20f7d3 = # "hash_a15209027c6a477";
+          var_ff20f7d3 = #"hash_a15209027c6a477";
           break;
         case # "activate_cellblock_library":
-          var_ff20f7d3 = # "hash_2d2fbe4505249056";
+          var_ff20f7d3 = #"hash_2d2fbe4505249056";
           break;
         case # "activate_cellblock_gondola":
-          var_ff20f7d3 = # "hash_7a8ad982bdebf31";
+          var_ff20f7d3 = #"hash_7a8ad982bdebf31";
           break;
         case # "activate_basement_gondola":
-          var_ff20f7d3 = # "hash_50679632c0929ef5";
+          var_ff20f7d3 = #"hash_50679632c0929ef5";
           break;
         case # "activate_basement_building":
-          var_ff20f7d3 = # "hash_7b6541d8fb121048";
+          var_ff20f7d3 = #"hash_7b6541d8fb121048";
           break;
         case # "activate_dock_sally":
-          var_ff20f7d3 = # "hash_22b9577531ef397d";
+          var_ff20f7d3 = #"hash_22b9577531ef397d";
           break;
         case # "activate_citadel_stair":
-          var_ff20f7d3 = # "hash_4febfe746d3a53b1";
+          var_ff20f7d3 = #"hash_4febfe746d3a53b1";
           break;
         case # "activate_cellblock_citadel":
-          var_ff20f7d3 = # "hash_11d4351c92a0261";
+          var_ff20f7d3 = #"hash_11d4351c92a0261";
           break;
         case # "activate_shower_citadel":
-          var_ff20f7d3 = # "hash_41102abe52b5027";
+          var_ff20f7d3 = #"hash_41102abe52b5027";
           break;
         default:
           if(s_waitresult.e_door.targetname === "zombie_debris") {
-            var_ff20f7d3 = # "hash_782714d88bdaa1b6";
+            var_ff20f7d3 = #"hash_782714d88bdaa1b6";
           } else {
-            var_ff20f7d3 = # "hash_7203281c0385cddd";
+            var_ff20f7d3 = #"hash_7203281c0385cddd";
           }
 
           break;

@@ -13,7 +13,7 @@ function preload() {
 }
 
 function postload() {
-  level._effect[#"hash_57ee68985468f554"] = # "wz/fx8_plyr_pstfx_numbers";
+  level._effect[#"hash_57ee68985468f554"] = #"wz/fx8_plyr_pstfx_numbers";
 }
 
 function optional_objective_camera_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

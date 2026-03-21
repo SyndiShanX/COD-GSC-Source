@@ -124,7 +124,7 @@ function function_60eeb02c(spawninfo) {
 }
 
 function spawnlootitem(origin, angles, lootname, radius, context) {
-  if(lootname === # "fate") {
+  if(lootname === #"fate") {
     if(context != 2) {
       return;
     }
@@ -318,7 +318,7 @@ function function_389aad25(item, type) {
   rare = 0;
   var_9e20508c = 10;
   radius = isDefined(item.radius) ? item.radius : 128;
-  scenedef = # "hash_7a2190c40fdc3bbc";
+  scenedef = #"hash_7a2190c40fdc3bbc";
 
   switch (type) {
     case 1:
@@ -328,7 +328,7 @@ function function_389aad25(item, type) {
       var_3e2d48b2 = "glow_yellow";
       fxtrail = "player_trail_yellow";
       reward = "treasure_horde";
-      scenedef = # "hash_30c46dd666dd7707";
+      scenedef = #"hash_30c46dd666dd7707";
       var_9e20508c = 16;
       break;
     case 3:
@@ -341,14 +341,14 @@ function function_389aad25(item, type) {
       var_3e2d48b2 = "glow_yellow";
       fxtrail = "player_trail_yellow";
       reward = "treasure_horde_plus";
-      scenedef = # "hash_78fd0527319f0425";
+      scenedef = #"hash_78fd0527319f0425";
       var_9e20508c = 64;
       var_2468c36a = "fireworks";
       break;
     case 10:
       var_3e2d48b2 = "glow_yellow";
       fxtrail = "player_trail_yellow";
-      scenedef = # "hash_7a2190c40fdc3bbc";
+      scenedef = #"hash_7a2190c40fdc3bbc";
       var_9e20508c = 2;
       roll = randomint(100);
 
@@ -367,7 +367,7 @@ function function_389aad25(item, type) {
     case 8:
       var_3e2d48b2 = "glow_yellow";
       fxtrail = "player_trail_yellow";
-      scenedef = # "hash_7a2190c40fdc3bbc";
+      scenedef = #"hash_7a2190c40fdc3bbc";
       reward = "extraLife";
       var_9e20508c = 2;
       var_2468c36a = "fireworks";
@@ -381,7 +381,7 @@ function function_389aad25(item, type) {
     case 9:
       var_3e2d48b2 = "glow_blue";
       fxtrail = "player_trail_blue";
-      scenedef = # "hash_78fd0527319f0425";
+      scenedef = #"hash_78fd0527319f0425";
       var_2468c36a = "lightningStrike";
       nodelete = 1;
       level.doa.var_2e2d85d4 = 1;

@@ -42,7 +42,7 @@ function_5cf91552() {
 }
 
 add_to_player_score_override(n_points, str_awarded_by, zm_scr_spawner_location_distance) {
-  if(str_awarded_by == # "zm_bgb_dividend_yield" || n_points == 0) {
+  if(str_awarded_by == #"zm_bgb_dividend_yield" || n_points == 0) {
     return n_points;
   }
 

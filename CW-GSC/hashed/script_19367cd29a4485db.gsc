@@ -1197,9 +1197,9 @@ function function_fabd315d(spawn_point, var_957493b8) {
 
       waitresult = self waittilltimeout(7, #"goal", #"bad_path", #"death");
 
-      if(waitresult._notify == # "goal" || waitresult._notify == "<dev string:xc90>") {
+      if(waitresult._notify == #"goal" || waitresult._notify == "<dev string:xc90>") {
         break;
-      } else if(waitresult._notify == # "bad_path") {
+      } else if(waitresult._notify == #"bad_path") {
         var_6e56b150++;
       }
 

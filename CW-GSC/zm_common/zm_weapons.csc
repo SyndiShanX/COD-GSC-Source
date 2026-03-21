@@ -321,7 +321,7 @@ function checkstringvalid(str) {
 
 function init_weapons() {
   level.var_c60359dc = [];
-  var_4ef031c9 = # "hash_2298893b58cc2885";
+  var_4ef031c9 = #"hash_2298893b58cc2885";
   load_weapon_spec_from_table(var_4ef031c9, 0);
 
   if(isDefined(level.var_d0ab70a2)) {

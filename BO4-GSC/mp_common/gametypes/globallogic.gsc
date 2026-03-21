@@ -671,7 +671,7 @@ function_4b670b29() {
     foreach(team in params.teams_forfeited) {
       platoon = getteamplatoon(team);
 
-      if(platoon != # "none" && platoon != # "invalid") {
+      if(platoon != #"none" && platoon != #"invalid") {
         if(!isDefined(params.var_f300b200)) {
           params.var_f300b200 = [];
         } else if(!isarray(params.var_f300b200)) {
@@ -769,7 +769,7 @@ function_9c839e9() {
     foreach(team in params.teams_alive) {
       platoon = getteamplatoon(team);
 
-      if(platoon != # "invalid") {
+      if(platoon != #"invalid") {
         if(!isDefined(params.platoons_alive)) {
           params.platoons_alive = [];
         } else if(!isarray(params.platoons_alive)) {
@@ -787,7 +787,7 @@ function_9c839e9() {
     foreach(team in params.var_46a749a8) {
       platoon = getteamplatoon(team);
 
-      if(platoon != # "invalid" && !isDefined(params.platoons_alive[platoon])) {
+      if(platoon != #"invalid" && !isDefined(params.platoons_alive[platoon])) {
         if(!isDefined(params.var_eb1984d4)) {
           params.var_eb1984d4 = [];
         } else if(!isarray(params.var_eb1984d4)) {
@@ -1023,7 +1023,7 @@ showobjectivenotificationuiforallplayers(missiontype, delay) {
   foreach(player in level.players) {
     team = player.pers[#"team"];
 
-    if(team === # "spectator") {
+    if(team === #"spectator") {
       continue;
     }
 
@@ -1054,7 +1054,7 @@ matchstarttimer() {
         level thread sndsetmatchsnapshot(0);
 
         foreach(player in level.players) {
-          if(player.hasspawned || player.pers[#"team"] == # "spectator") {
+          if(player.hasspawned || player.pers[#"team"] == #"spectator") {
             player globallogic_audio::set_music_on_player("spawnPreRise");
           }
         }
@@ -1658,14 +1658,14 @@ function_9113e843() {
 }
 
 function_e8cd6051() {
-  result = # "draw";
+  result = #"draw";
 
   if(!match::get_flag("tie") && match::function_c10174e7()) {
     result = match::get_winning_team();
   }
 
   if(result == "tie" || result == "free") {
-    result = # "draw";
+    result = #"draw";
   }
 
   return result;
@@ -2838,7 +2838,7 @@ updateteamstatus() {
       continue;
     }
 
-    if(level.teambased || player.team == # "spectator") {
+    if(level.teambased || player.team == #"spectator") {
       team = player.team;
     } else {
       team = "free";
@@ -2846,7 +2846,7 @@ updateteamstatus() {
 
     playerclass = player.curclass;
 
-    if(team != # "spectator" && (isDefined(playerclass) && playerclass != "" || !loadout::function_87bcb1b())) {
+    if(team != #"spectator" && (isDefined(playerclass) && playerclass != "" || !loadout::function_87bcb1b())) {
       level.playercount[team]++;
 
       if(isbot(player)) {
@@ -3288,7 +3288,7 @@ waitforplayers() {
         continue;
       }
 
-      if(player.team != # "spectator") {
+      if(player.team != #"spectator") {
         activeplayercount++;
         player_num = player getentitynumber();
 
@@ -3416,7 +3416,7 @@ graceperiod() {
     for(i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!player.hasspawned && player.sessionteam != # "spectator" && !isalive(player)) {
+      if(!player.hasspawned && player.sessionteam != #"spectator" && !isalive(player)) {
         player.statusicon = "hud_status_dead";
       }
     }
@@ -3492,27 +3492,27 @@ function_b9b7618() {
     }
 
     gamestate::set_state(game.state);
-    game.strings[#"press_to_spawn"] = # "hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
 
     if(level.teambased) {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_teams";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     } else {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_players";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_players";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"match_starting_in"] = # "hash_18e58cc95db34427";
-    game.strings[#"spawn_next_round"] = # "mp/spawn_next_round";
-    game.strings[#"waiting_to_spawn"] = # "mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
-    game.strings[#"you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
-    game.strings[#"match_starting"] = # "mp/match_starting";
-    game.strings[#"change_class"] = # "mp/change_class_next_spawn";
-    game.strings[#"item_on_respawn"] = # "hash_220160808c99fe71";
-    game.strings[#"hash_b71875e85956ea"] = # "hash_61f8bf2959b7bd5a";
-    game.strings[#"last_stand"] = # "hash_5732d212e4511a00";
-    game.strings[#"cowards_way"] = # "hash_268e464278a2f8ff";
+    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
+    game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
+    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
+    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"match_starting"] = #"mp/match_starting";
+    game.strings[#"change_class"] = #"mp/change_class_next_spawn";
+    game.strings[#"item_on_respawn"] = #"hash_220160808c99fe71";
+    game.strings[#"hash_b71875e85956ea"] = #"hash_61f8bf2959b7bd5a";
+    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
     [[level.onprecachegametype]]();
     game.gamestarted = 1;
     game.totalkills = 0;
@@ -4081,7 +4081,7 @@ doweaponspecificcorpseeffects(body, einflictor, attacker, idamage, smeansofdeath
   }
 
   if(weapon.isheavyweapon && isPlayer(attacker)) {
-    if(weapon.name == # "hero_firefly_swarm") {
+    if(weapon.name == #"hero_firefly_swarm") {
       value = randomint(2) + 1;
 
       if(!isactor(body)) {

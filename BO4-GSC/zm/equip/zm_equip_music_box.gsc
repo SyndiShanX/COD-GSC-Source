@@ -72,7 +72,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
 
   foreach(e_zombie in a_zombies) {
     if(isalive(e_zombie) && e_zombie.marked_for_death !== 1 && e_zombie.var_46d39f48 !== 1 && e_zombie.no_gib !== 1) {
-      if(e_zombie.zm_ai_category === # "popcorn") {
+      if(e_zombie.zm_ai_category === #"popcorn") {
         [[level.var_14160fb0]] - > waitinqueue(e_zombie);
         e_zombie dodamage(e_zombie.maxhealth, e_zombie.origin, attacker, self, 0, "MOD_GRENADE", 0, self.weapon);
         continue;
@@ -86,7 +86,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
       e_zombie thread util::delete_on_death(e_zombie.e_floater);
       e_floater moveto(e_floater.origin + (0, 0, randomfloatrange(16, 64)), 0.5);
 
-      if(e_zombie.archetype === # "zombie") {
+      if(e_zombie.archetype === #"zombie") {
         e_floater thread function_3710157f(e_zombie);
       }
     }

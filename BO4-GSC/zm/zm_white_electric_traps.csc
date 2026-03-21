@@ -18,10 +18,10 @@ __init__() {
 }
 
 init_fx() {
-  level._effect[#"hash_6d40a3f1944d81b2"] = # "hash_3a5776a6c23c9563";
-  level._effect[#"hash_3d339d7ae7b008d3"] = # "hash_6a84f61b7271e098";
-  level._effect[#"hash_6a97de5de4ae14a"] = # "zombie/fx_tesla_shock_zmb";
-  level._effect[#"hash_21e93d9faa37cad"] = # "zombie/fx_tesla_shock_eyes_zmb";
+  level._effect[#"hash_6d40a3f1944d81b2"] = #"hash_3a5776a6c23c9563";
+  level._effect[#"hash_3d339d7ae7b008d3"] = #"hash_6a84f61b7271e098";
+  level._effect[#"hash_6a97de5de4ae14a"] = #"zombie/fx_tesla_shock_zmb";
+  level._effect[#"hash_21e93d9faa37cad"] = #"zombie/fx_tesla_shock_eyes_zmb";
 }
 
 init_clientfields() {
@@ -51,7 +51,7 @@ electrocute_ai(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     if(isDefined(self.var_c8b0b5be)) {
       str_tag = self.var_c8b0b5be;
-    } else if(self.archetype === # "zombie_dog") {
+    } else if(self.archetype === #"zombie_dog") {
       str_tag = "J_Spine1";
     }
 

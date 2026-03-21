@@ -72,7 +72,7 @@ function event_handler[level_init] main(eventstruct) {
   callback::on_localclient_connect(&on_localclient_connect);
   util::register_system(#"platmusunlock", &function_20daf01);
   level.setupcustomcharacterexerts = &setup_personality_character_exerts;
-  level.var_d0ab70a2 = # "hash_499ec58230cbe8b6";
+  level.var_d0ab70a2 = #"hash_499ec58230cbe8b6";
   level.var_59815895 = 1600;
   level.var_49ba13b2 = 3100;
   level.var_40753b66 = 0;
@@ -100,7 +100,7 @@ function event_handler[level_init] main(eventstruct) {
   setsoundcontext("dark_aether", "inactive");
   namespace_b574e135::function_dcf22669();
   animation::add_notetrack_func("klausLeaveAudio", &function_8ba39ad0);
-  level.var_bb1f7e1e.var_19f55f0 = # "hash_1501143ad2865b6e";
+  level.var_bb1f7e1e.var_19f55f0 = #"hash_1501143ad2865b6e";
 }
 
 function setup_personality_character_exerts() {
@@ -564,7 +564,7 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
 
     if(!function_148ccc79(localclientnum, #"hash_2964f82e2c05c8b8")) {
       function_a837926b(localclientnum, #"hash_2964f82e2c05c8b8");
-      self.var_7bd7bdc8 = # "hash_2964f82e2c05c8b8";
+      self.var_7bd7bdc8 = #"hash_2964f82e2c05c8b8";
     }
 
     return;
@@ -583,7 +583,7 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
 
     if(!function_148ccc79(localclientnum, #"pstfx_electrified")) {
       function_a837926b(localclientnum, #"pstfx_electrified");
-      self.var_7bd7bdc8 = # "pstfx_electrified";
+      self.var_7bd7bdc8 = #"pstfx_electrified";
     }
 
     return;
@@ -630,16 +630,16 @@ function function_20daf01(localclientnum, state, oldstate) {
 
   switch (oldstate) {
     case # "unlockdia1":
-      var_8c7054cc = # "musictrack_zm_platinum_berlin";
+      var_8c7054cc = #"musictrack_zm_platinum_berlin";
       break;
     case # "unlocksqueak":
-      var_8c7054cc = # "musictrack_zm_platinum_acidbunny";
+      var_8c7054cc = #"musictrack_zm_platinum_acidbunny";
       break;
     case # "unlockdia2":
-      var_8c7054cc = # "musictrack_zm_platinum_whatawaits";
+      var_8c7054cc = #"musictrack_zm_platinum_whatawaits";
       break;
     case # "unlockshatter":
-      var_8c7054cc = # "musictrack_zm_platinum_wrath";
+      var_8c7054cc = #"musictrack_zm_platinum_wrath";
       break;
   }
 

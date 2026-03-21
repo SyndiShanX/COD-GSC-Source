@@ -25,8 +25,8 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   entry = spawnStruct();
-  entry.weapon_name = # "hash_f223cacb02788e3";
-  entry.item_name = # "item_zmintel_gold_omega_artifact_4";
+  entry.weapon_name = #"hash_f223cacb02788e3";
+  entry.item_name = #"item_zmintel_gold_omega_artifact_4";
 
   if(!isDefined(level.var_d385a742)) {
     level.var_d385a742 = [];
@@ -48,7 +48,7 @@ function private preinit() {
 }
 
 function on_item_pickup(params) {
-  if(!isDefined(params.item) || params.item.itementry.name !== # "item_zmintel_gold_omega_artifact_4") {
+  if(!isDefined(params.item) || params.item.itementry.name !== #"item_zmintel_gold_omega_artifact_4") {
     return;
   }
 
@@ -106,7 +106,7 @@ function function_5c927d7(zombie) {
 }
 
 function on_item_drop(params) {
-  if(!isDefined(params.item) || params.item.itementry.name !== # "item_zmintel_gold_omega_artifact_4" || !isDefined(self.var_348162a4)) {
+  if(!isDefined(params.item) || params.item.itementry.name !== #"item_zmintel_gold_omega_artifact_4" || !isDefined(self.var_348162a4)) {
     return;
   }
 
@@ -416,7 +416,7 @@ function function_3b028b4a(time_left, var_646dca28, var_7961a37e, var_b512a2d) {
     var_1967ad3 = level.var_acb5d4ce[var_7961a37e].var_b512a2d;
     var_b722fee6 = level.var_acb5d4ce[var_7961a37e].var_b722fee6;
 
-    if(result._notify == # "timeout") {
+    if(result._notify == #"timeout") {
       if(!isDefined(var_646dca28)) {
         println("<dev string:x1eb>");
       } else if(isDefined(var_1967ad3)) {

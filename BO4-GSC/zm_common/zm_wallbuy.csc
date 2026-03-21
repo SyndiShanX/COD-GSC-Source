@@ -72,7 +72,7 @@ init() {
     spawnable_weapon.weapon = getweapon(spawnable_weapon.zombie_weapon_upgrade);
     weapon_group = function_e2703c27(spawnable_weapon.weapon);
 
-    if(weapon_group == # "weapon_pistol" && !getgametypesetting(#"zmweaponspistol") || weapon_group == # "weapon_cqb" && !getgametypesetting(#"zmweaponsshotgun") || weapon_group == # "weapon_smg" && !getgametypesetting(#"zmweaponssmg") || weapon_group == # "weapon_assault" && !getgametypesetting(#"zmweaponsar") || weapon_group == # "weapon_tactical" && !getgametypesetting(#"zmweaponstr") || weapon_group == # "weapon_lmg" && !getgametypesetting(#"zmweaponslmg") || weapon_group == # "weapon_sniper" && !getgametypesetting(#"zmweaponssniper") || weapon_group == # "weapon_knife" && !getgametypesetting(#"zmweaponsknife")) {
+    if(weapon_group == #"weapon_pistol" && !getgametypesetting(#"zmweaponspistol") || weapon_group == #"weapon_cqb" && !getgametypesetting(#"zmweaponsshotgun") || weapon_group == #"weapon_smg" && !getgametypesetting(#"zmweaponssmg") || weapon_group == #"weapon_assault" && !getgametypesetting(#"zmweaponsar") || weapon_group == #"weapon_tactical" && !getgametypesetting(#"zmweaponstr") || weapon_group == #"weapon_lmg" && !getgametypesetting(#"zmweaponslmg") || weapon_group == #"weapon_sniper" && !getgametypesetting(#"zmweaponssniper") || weapon_group == #"weapon_knife" && !getgametypesetting(#"zmweaponsknife")) {
       continue;
     }
 

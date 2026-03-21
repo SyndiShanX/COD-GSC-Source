@@ -20,19 +20,19 @@ __init__() {
   n_bits = getminbitcountfornum(6);
   clientfield::register("actor", "positional_zombie_fire_fx", 1, n_bits, "int", &positional_zombie_fire_fx, 0, 0);
   clientfield::register("actor", "zombie_magma_fire_explosion", 1, 1, "int", &zombie_magma_fire_explosion, 0, 0);
-  level._effect[#"dart_light"] = # "hash_64a1305d0a32ab5c";
-  level._effect[#"hash_246bcda21a086519"] = # "hash_43a0a5d1ff9073d1";
-  level._effect[#"hash_1ac90f7b38a61c4f"] = # "hash_209f1d5520f6f4aa";
-  level._effect[#"magma_fire_explosion"] = # "hash_8b3391780a4489a";
-  level._effect[#"zombie_fire_fx_head"] = # "hash_6b19659fd76f81c6";
-  level._effect[#"zombie_fire_fx_arm_left"] = # "hash_119076c138c439de";
-  level._effect[#"zombie_fire_fx_arm_right"] = # "hash_657f3202e3b4b33";
-  level._effect[#"zombie_fire_fx_torso"] = # "hash_7318fda4b878154b";
-  level._effect[#"zombie_fire_fx_waist"] = # "hash_77ce4eece51be38e";
-  level._effect[#"zombie_fire_fx_leg_left"] = # "hash_7892c8f224113e3c";
-  level._effect[#"zombie_fire_fx_leg_right"] = # "hash_3724539471890d29";
-  level._effect[#"zombie_fire_fx_hip_left"] = # "hash_7b28ddc1bdd23a79";
-  level._effect[#"zombie_fire_fx_hip_right"] = # "hash_2c1d46fac64d3252";
+  level._effect[#"dart_light"] = #"hash_64a1305d0a32ab5c";
+  level._effect[#"hash_246bcda21a086519"] = #"hash_43a0a5d1ff9073d1";
+  level._effect[#"hash_1ac90f7b38a61c4f"] = #"hash_209f1d5520f6f4aa";
+  level._effect[#"magma_fire_explosion"] = #"hash_8b3391780a4489a";
+  level._effect[#"zombie_fire_fx_head"] = #"hash_6b19659fd76f81c6";
+  level._effect[#"zombie_fire_fx_arm_left"] = #"hash_119076c138c439de";
+  level._effect[#"zombie_fire_fx_arm_right"] = #"hash_657f3202e3b4b33";
+  level._effect[#"zombie_fire_fx_torso"] = #"hash_7318fda4b878154b";
+  level._effect[#"zombie_fire_fx_waist"] = #"hash_77ce4eece51be38e";
+  level._effect[#"zombie_fire_fx_leg_left"] = #"hash_7892c8f224113e3c";
+  level._effect[#"zombie_fire_fx_leg_right"] = #"hash_3724539471890d29";
+  level._effect[#"zombie_fire_fx_hip_left"] = #"hash_7b28ddc1bdd23a79";
+  level._effect[#"zombie_fire_fx_hip_right"] = #"hash_2c1d46fac64d3252";
 }
 
 blundergat_dart_blink(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -105,7 +105,7 @@ zombie_magma_fire_explosion(localclientnum, oldval, newval, bnewent, binitialsna
   if(newval == 1) {
     str_tag = "j_spineupper";
 
-    if(self.archetype == # "zombie_dog") {
+    if(self.archetype == #"zombie_dog") {
       str_tag = "j_spine1";
     }
 

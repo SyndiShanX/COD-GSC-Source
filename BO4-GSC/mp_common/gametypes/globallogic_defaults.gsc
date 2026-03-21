@@ -61,7 +61,7 @@ default_onforfeit(params) {
 default_ondeadevent(team) {
   current_winner = round::get_winner();
 
-  if(isDefined(current_winner) && current_winner != # "free") {
+  if(isDefined(current_winner) && current_winner != #"free") {
     return;
   }
 

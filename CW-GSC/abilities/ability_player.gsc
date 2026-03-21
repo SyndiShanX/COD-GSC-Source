@@ -68,7 +68,7 @@ function on_player_spawned() {
     }
   }
 
-  if((isDefined(self.var_36546d49) ? self.var_36546d49 : 1) && game.state == # "playing") {
+  if((isDefined(self.var_36546d49) ? self.var_36546d49 : 1) && game.state == #"playing") {
     self.var_36546d49 = 0;
 
     for(slot = 0; slot < 3; slot++) {
@@ -80,7 +80,7 @@ function on_player_spawned() {
         }
       }
     }
-  } else if(game.state != # "playing") {
+  } else if(game.state != #"playing") {
     self.var_36546d49 = 0;
   }
 
@@ -165,7 +165,7 @@ function function_116ec442() {
       continue;
     }
 
-    if(self._gadgets_player[slot].statname == # "gadget_health_regen") {
+    if(self._gadgets_player[slot].statname == #"gadget_health_regen") {
       continue;
     }
 
@@ -246,7 +246,7 @@ function function_c2d9d3e1() {
 }
 
 function function_32e782df(params) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -595,7 +595,7 @@ function turn_gadget_on(slot, weapon) {
   }
 
   if(sessionmodeismultiplayergame()) {
-    if(weapon.name == # "gadget_health_regen") {
+    if(weapon.name == #"gadget_health_regen") {
       var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
       if(isDefined(var_f8e6b703)) {
@@ -673,7 +673,7 @@ function turn_gadget_off(slot, weapon) {
   dead = self.health <= 0;
 
   if(sessionmodeismultiplayergame()) {
-    if(weapon.name != # "gadget_health_regen") {
+    if(weapon.name != #"gadget_health_regen") {
       self function_79cd8cd6(game.timepassed, weapon.name, dead, self.heavyweaponshots, self.heavyweaponhits);
     }
   } else {
@@ -860,7 +860,7 @@ function gadget_ready(slot, weapon) {
   }
 
   if(sessionmodeismultiplayergame()) {
-    if(weapon.name == # "gadget_health_regen") {
+    if(weapon.name == #"gadget_health_regen") {
       var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
       if(isDefined(var_f8e6b703)) {

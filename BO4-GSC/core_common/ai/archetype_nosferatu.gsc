@@ -124,7 +124,7 @@ function_b75dd595(entity) {
     return false;
   }
 
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 
@@ -353,7 +353,7 @@ function_b5047448(entity) {
 }
 
 function_e9819a23(entity) {
-  if(entity.subarchetype !== # "crimson_nosferatu") {
+  if(entity.subarchetype !== #"crimson_nosferatu") {
     return false;
   }
 

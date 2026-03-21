@@ -57,7 +57,7 @@ event_handler[level_init] main(eventstruct) {
   level wz_open_skyscrapers_death_circle::function_6f6f5189();
 
   if(isDefined(getgametypesetting(#"wzheavymetalheroes")) && getgametypesetting(#"wzheavymetalheroes")) {
-    level.var_2089aa11 = # "supply_drop_stash_parent_dlc1_heroes";
+    level.var_2089aa11 = #"supply_drop_stash_parent_dlc1_heroes";
     namespace_3d2704b3::function_f0297225(#"supply_drop_stash_parent_dlc1_flare_gun_heroes", 2, 4);
   }
 
@@ -1282,7 +1282,7 @@ event_handler[event_9673dc9a] function_f9b68fd7(eventstruct) {
     var_91d1913b = distance2d(dynent.origin, level.players[0].origin);
 
     if(level.players[0] util::is_player_looking_at(dynent.origin, 0.8, 0) && var_91d1913b <= 6000) {
-      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== # "hash_1dcbe8021fb16344") {
+      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== #"hash_1dcbe8021fb16344") {
         function_a476d876(dynent.origin, dynent.angles, (1, 0.5, 0), 10);
 
         if(var_91d1913b <= 768) {

@@ -1065,7 +1065,7 @@ function_1e3c1b91(var_b7f15515, var_5e513205) {
   assert(var_6da809dc.size == var_e3e0ebe5.size);
 
   foreach(kvp in var_6da809dc) {
-    if(!isDefined(var_5e513205.(kvp)) || var_5e513205.(kvp) === # "hash_13275474a58f1175") {
+    if(!isDefined(var_5e513205.(kvp)) || var_5e513205.(kvp) === #"hash_13275474a58f1175") {
       if(!isDefined(var_b7f15515.(kvp))) {
         var_389ef689.(kvp) = 0;
       } else {
@@ -1191,11 +1191,11 @@ function_4b0c469d(vehicle) {
 }
 
 canattackgameobject(team, gameobject) {
-  return gameobject.team == team && gameobject.interactteam == # "friendly" || gameobject.team != team && gameobject.interactteam == # "enemy" || gameobject.absolute_visible_and_interact_team === team;
+  return gameobject.team == team && gameobject.interactteam == #"friendly" || gameobject.team != team && gameobject.interactteam == #"enemy" || gameobject.absolute_visible_and_interact_team === team;
 }
 
 candefendgameobject(team, gameobject) {
-  return gameobject.team == team && gameobject.interactteam == # "enemy" || gameobject.team != team && gameobject.interactteam == # "friendly";
+  return gameobject.team == team && gameobject.interactteam == #"enemy" || gameobject.team != team && gameobject.interactteam == #"friendly";
 }
 
 function_a1edb007(team) {
@@ -1340,7 +1340,7 @@ isvalidplayer(client) {
 
 function_f867cce0(missioncomponent, commanderteam) {
   component = missioncomponent.var_36f0c06d;
-  assert(commanderteam == # "any" || commanderteam == # "allies" || commanderteam == # "axis", "<dev string:x43c>" + commanderteam + "<dev string:x44f>");
+  assert(commanderteam == #"any" || commanderteam == #"allies" || commanderteam == #"axis", "<dev string:x43c>" + commanderteam + "<dev string:x44f>");
 
   if(!isDefined(component)) {
     return false;
@@ -1354,7 +1354,7 @@ function_f867cce0(missioncomponent, commanderteam) {
     return false;
   }
 
-  if(component.m_str_team !== commanderteam && component.m_str_team != # "any") {
+  if(component.m_str_team !== commanderteam && component.m_str_team != #"any") {
     if(!isDefined(missioncomponent.var_3093fd62) || missioncomponent.var_3093fd62 == 0) {
       return false;
     }
@@ -1562,35 +1562,35 @@ function_f4921cb3(var_6d1ae0e2) {
 
   switch (var_6d1ae0e2) {
     case # "hash_617966a33a6bad2b":
-      focuses[focuses.size] = # "hash_617966a33a6bad2b";
+      focuses[focuses.size] = #"hash_617966a33a6bad2b";
       break;
     case # "follow player":
-      focuses[focuses.size] = # "follow player";
+      focuses[focuses.size] = #"follow player";
       break;
     case # "hash_a465dbf9320e821":
-      focuses[focuses.size] = # "hash_617966a33a6bad2b";
-      focuses[focuses.size] = # "follow player";
+      focuses[focuses.size] = #"hash_617966a33a6bad2b";
+      focuses[focuses.size] = #"follow player";
       break;
     case # "hash_964e75ec7937916":
-      focuses[focuses.size] = # "hash_964e75ec7937916";
+      focuses[focuses.size] = #"hash_964e75ec7937916";
       break;
     case # "hash_64a01d6e814c8dc":
-      focuses[focuses.size] = # "hash_64a01d6e814c8dc";
+      focuses[focuses.size] = #"hash_64a01d6e814c8dc";
       break;
     case # "hash_584bf5a5b6fe57ca":
-      focuses[focuses.size] = # "hash_964e75ec7937916";
-      focuses[focuses.size] = # "hash_64a01d6e814c8dc";
+      focuses[focuses.size] = #"hash_964e75ec7937916";
+      focuses[focuses.size] = #"hash_64a01d6e814c8dc";
       break;
     case # "hash_833af17ffa224fe":
-      focuses[focuses.size] = # "hash_617966a33a6bad2b";
-      focuses[focuses.size] = # "hash_964e75ec7937916";
+      focuses[focuses.size] = #"hash_617966a33a6bad2b";
+      focuses[focuses.size] = #"hash_964e75ec7937916";
       break;
     case # "hash_692e498c8008c994":
-      focuses[focuses.size] = # "follow player";
-      focuses[focuses.size] = # "hash_64a01d6e814c8dc";
+      focuses[focuses.size] = #"follow player";
+      focuses[focuses.size] = #"hash_64a01d6e814c8dc";
       break;
     case # "objective":
-      focuses[focuses.size] = # "objective";
+      focuses[focuses.size] = #"objective";
       break;
   }
 

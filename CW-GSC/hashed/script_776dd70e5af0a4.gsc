@@ -497,7 +497,7 @@ function function_11a7fafb() {
   level thread function_b211098e();
   var_63d2d7ec = level flag::wait_till_any(["flg_main_street_parking_lot_truck_unloaded", "flg_main_street_parking_lot_truck_dead", "flg_main_street_2_start", "flg_main_street_pizza_store"]);
 
-  if(var_63d2d7ec._notify === # "flg_main_street_parking_lot_truck_unloaded") {
+  if(var_63d2d7ec._notify === #"flg_main_street_parking_lot_truck_unloaded") {
     wait 1;
   }
 
@@ -890,7 +890,7 @@ function function_92386a2b() {
   var_9eac748 = spawner::simple_spawn("sp_enemy_burger_town_resistance");
   level thread namespace_fc3e8cb::function_85939627(var_9eac748, "flg_main_street_resistance_wave_2_spawn", 2);
 
-  if(var_63d2d7ec._notify === # "flg_burger_town_resistance_pizza_store") {
+  if(var_63d2d7ec._notify === #"flg_burger_town_resistance_pizza_store") {
     level thread function_55b55bb4("sm_main_street_smoke_2");
   } else {
     level thread function_55b55bb4("sm_main_street_smoke_1");

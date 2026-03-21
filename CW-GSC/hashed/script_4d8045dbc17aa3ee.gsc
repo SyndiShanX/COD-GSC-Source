@@ -1565,7 +1565,7 @@ function function_1552e594() {
         result = level waittilltimeout(estimate.time, #"hash_7626a6770055d63c");
         level thread namespace_6e90e490::function_fa6f7ba7();
 
-        if(result._notify == # "timeout") {
+        if(result._notify == #"timeout") {
           while(isDefined(level.doa.var_6f3d327) || isDefined(level.doa.var_182fb75a)) {
             wait 1;
           }

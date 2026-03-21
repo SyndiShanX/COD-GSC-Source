@@ -14,8 +14,8 @@
 
 function event_handler[gametype_init] main(eventstruct) {
   level.var_433dea4 = 1;
-  level.var_d98eed82 = # "hash_7004ef7271235614";
-  level.var_373c2e89 = # "hash_2ec26772dd39fa83";
+  level.var_d98eed82 = #"hash_7004ef7271235614";
+  level.var_373c2e89 = #"hash_2ec26772dd39fa83";
   level.scream_deathmatch_timer = scream_deathmatch_timer::register();
   callback::on_spawned(&on_player_spawned);
   clientfield::register("toplayer", "scream_slasher_postfx", 17000, 1, "int", &scream_slasher_postfx, 0, 0);
@@ -86,10 +86,10 @@ function scream_role_assignment(localclientnum, oldval, newval, bnewent, binitia
 
 function scream_slasher_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(bwastimejump) {
-    postfx = # "hash_3ffcd14aabd4005d";
+    postfx = #"hash_3ffcd14aabd4005d";
 
-    if(!self function_da43934d() || function_65b9eb0f(fieldname) || game.state == # "postgame") {
-      postfx = # "hash_6148cfc4d39c2456";
+    if(!self function_da43934d() || function_65b9eb0f(fieldname) || game.state == #"postgame") {
+      postfx = #"hash_6148cfc4d39c2456";
     }
 
     if(!self postfx::function_556665f2(postfx)) {
@@ -136,7 +136,7 @@ function function_20d6d0e5(localclientnum) {
     if(var_41c3055b && self.var_98524ca2 !== 1) {
       self.var_98524ca2 = 1;
 
-      if(game.state === # "playing") {
+      if(game.state === #"playing") {
         playSound(localclientnum, #"hash_52643e8998135dc8");
       }
 
@@ -173,7 +173,7 @@ function function_9a00f210(localclientnum) {
     if(var_5423ce61 && self.var_80b4d848 !== 1) {
       self.var_80b4d848 = 1;
 
-      if(game.state === # "playing" && !is_true(self.var_f9cc5c06)) {
+      if(game.state === #"playing" && !is_true(self.var_f9cc5c06)) {
         if(!isDefined(self.var_354f4d95)) {
           self.var_354f4d95 = self playLoopSound(#"hash_7cac75bfad504a7d");
         }

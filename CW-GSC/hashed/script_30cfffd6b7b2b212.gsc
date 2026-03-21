@@ -218,7 +218,7 @@ function function_9aa54139() {
 
 function function_4c12f50() {
   self endon(#"death");
-  var_31203ce7 = # "hash_6c5af7e35803f61d";
+  var_31203ce7 = #"hash_6c5af7e35803f61d";
   a_ai = spawner::simple_spawn("heli_crew_second_heli");
   array::thread_all(a_ai, &val::set, var_31203ce7, "ignoreme", 1);
   array::thread_all(a_ai, &val::set, var_31203ce7, "allowdeath", 0);

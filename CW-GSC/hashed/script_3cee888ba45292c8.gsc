@@ -146,7 +146,7 @@ function private function_21eb9d09(entity) {
   if(isDefined(var_cc7597dc) && !var_6d4f3481 && namespace_19c99142::function_85d7a413(entity, var_cc7597dc)) {
     var_4d21f369 = namespace_19c99142::function_da71e09a(entity);
 
-    if(var_4d21f369 !== # "hash_6192d8af630c6c07") {
+    if(var_4d21f369 !== #"hash_6192d8af630c6c07") {
       namespace_19c99142::function_708afe1d(entity, #"hash_6192d8af630c6c07");
     }
 
@@ -278,7 +278,7 @@ function private function_1ea26b11(entity) {
   soa = namespace_19c99142::function_9dd68a24(entity);
   var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
 
-  if(var_4d21f369 === # "attacking") {
+  if(var_4d21f369 === #"attacking") {
     var_c50ad196 = !awareness::function_2bc424fd(entity.favoriteenemy);
 
     if(entity.favoriteenemy !== soa.favoriteenemy || var_c50ad196) {
@@ -288,7 +288,7 @@ function private function_1ea26b11(entity) {
     }
   }
 
-  if(var_4d21f369 === # "following") {
+  if(var_4d21f369 === #"following") {
     if(isDefined(soa.favoriteenemy) && entity cansee(soa.favoriteenemy)) {
       namespace_19c99142::function_c33fb385(entity, #"attacking");
     }
@@ -296,13 +296,13 @@ function private function_1ea26b11(entity) {
 
   var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
 
-  if(var_4d21f369 === # "following") {
+  if(var_4d21f369 === #"following") {
     goal = namespace_19c99142::function_dd116fa9(entity);
     entity namespace_e292b080::zombieupdategoal(goal);
     return;
   }
 
-  if(var_4d21f369 === # "attacking") {
+  if(var_4d21f369 === #"attacking") {
     awareness::function_39da6c3c(entity);
   }
 }
@@ -328,7 +328,7 @@ function private function_39ab6f8d(entity) {
   var_4d21f369 = namespace_19c99142::function_2905c7db(entity);
   var_15cfc4f4 = 0;
 
-  if(var_4d21f369 === # "attacking") {
+  if(var_4d21f369 === #"attacking") {
     if(isPlayer(soa.favoriteenemy) && is_true(entity.var_ff3cbd9e) && !getdvarint(#"hash_6f7afa24d5871b86", 0) > 0) {
       var_ce42b625 = zm_utility::function_d89330e6(soa.favoriteenemy);
 
@@ -368,7 +368,7 @@ function function_917994fb(entity, n_to_spawn) {
 }
 
 function function_acf89fbb(entity, move_speed) {
-  if(isDefined(entity.current_state) && entity.current_state.name === # "wander") {
+  if(isDefined(entity.current_state) && entity.current_state.name === #"wander") {
     return "locomotion_speed_walk";
   }
 

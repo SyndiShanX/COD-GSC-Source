@@ -456,11 +456,11 @@ function function_c26120ff(ent) {
 
   if(isfemale) {
     prefix = "female";
-  } else if(head == # "c_t9_cp_usa_hero_adler_head1") {
+  } else if(head == #"c_t9_cp_usa_hero_adler_head1") {
     prefix = "adler";
-  } else if(head == # "c_t9_cp_usa_hero_lazar_head1") {
+  } else if(head == #"c_t9_cp_usa_hero_lazar_head1") {
     prefix = "lazar";
-  } else if(head == # "c_t9_eng_hero_park_head") {
+  } else if(head == #"c_t9_eng_hero_park_head") {
     prefix = "park";
   }
 

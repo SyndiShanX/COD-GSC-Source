@@ -84,7 +84,7 @@ onoutofboundschange(localclientnum, oldval, newval, bnewent, binitialsnap, field
       filter::enable_filter_oob(localclientnum, 0);
       localplayer.oob_effect_enabled = 1;
 
-      if(util::get_game_type() === # "zstandard") {
+      if(util::get_game_type() === #"zstandard") {
         level.oob_sound_ent[localclientnum] playLoopSound(#"hash_6da7ae12f538ef5e", 0.5);
       } else {
         level.oob_sound_ent[localclientnum] playLoopSound(#"uin_out_of_bounds_loop", 0.5);

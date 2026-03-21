@@ -142,30 +142,30 @@ on_ekia(weapon) {
   weaponclass = util::getweaponclass(weapon);
 
   if(!isDefined(weaponclass)) {
-    weaponclass = # "unspecified";
+    weaponclass = #"unspecified";
   }
 
   switch (weaponclass) {
     case # "weapon_assault":
-      var_6b9aa5a0 = # "hash_1005918e22a7865b";
+      var_6b9aa5a0 = #"hash_1005918e22a7865b";
       break;
     case # "weapon_lmg":
-      var_6b9aa5a0 = # "hash_151c8e7a35e1e380";
+      var_6b9aa5a0 = #"hash_151c8e7a35e1e380";
       break;
     case # "weapon_pistol":
-      var_6b9aa5a0 = # "hash_250c2d8ef2261723";
+      var_6b9aa5a0 = #"hash_250c2d8ef2261723";
       break;
     case # "weapon_cqb":
-      var_6b9aa5a0 = # "hash_5262d5b92e0fdc2";
+      var_6b9aa5a0 = #"hash_5262d5b92e0fdc2";
       break;
     case # "weapon_smg":
-      var_6b9aa5a0 = # "hash_2173bc0bfcbdf90f";
+      var_6b9aa5a0 = #"hash_2173bc0bfcbdf90f";
       break;
     case # "weapon_sniper":
-      var_6b9aa5a0 = # "hash_21762ab1513fddf";
+      var_6b9aa5a0 = #"hash_21762ab1513fddf";
       break;
     case # "weapon_tactical":
-      var_6b9aa5a0 = # "hash_1a4fe101c7aab2d";
+      var_6b9aa5a0 = #"hash_1a4fe101c7aab2d";
       break;
     default:
       break;
@@ -275,7 +275,7 @@ function_902ef0de(var_38280f2f, delta) {
 
 function_90a854d2(slot) {
   if(getdvarint(#"hash_657185da33fd5f8", 0) > 0) {
-    var_38280f2f = # "hash_6a1133003efe7380";
+    var_38280f2f = #"hash_6a1133003efe7380";
 
     switch (slot) {
       case 0:
@@ -325,77 +325,77 @@ function_c5958b54() {
   switch (level.var_12323003) {
     case # "ball":
     case # "ball_hc":
-      var_c421e6b = # "contract_mp_play_uplink";
+      var_c421e6b = #"contract_mp_play_uplink";
       break;
     case # "bounty":
     case # "bounty_hc":
-      var_c421e6b = # "contract_mp_play_heist";
+      var_c421e6b = #"contract_mp_play_heist";
       break;
     case # "clean":
     case # "clean_hc":
-      var_c421e6b = # "contract_mp_play_stockpile";
+      var_c421e6b = #"contract_mp_play_stockpile";
       break;
     case # "conf":
     case # "conf_hc":
-      var_c421e6b = # "hash_2156d88add08f25f";
+      var_c421e6b = #"hash_2156d88add08f25f";
       break;
     case # "control":
     case # "control_hc":
-      var_c421e6b = # "contract_mp_play_control";
+      var_c421e6b = #"contract_mp_play_control";
       break;
     case # "ctf":
     case # "ctf_hc":
-      var_c421e6b = # "hash_42b7ebc5926b0008";
+      var_c421e6b = #"hash_42b7ebc5926b0008";
       break;
     case # "dem_hc":
     case # "dem":
-      var_c421e6b = # "contract_mp_play_demolition";
+      var_c421e6b = #"contract_mp_play_demolition";
       break;
     case # "dm_hc":
     case # "dm":
-      var_c421e6b = # "hash_5dbf89f59ac323e3";
+      var_c421e6b = #"hash_5dbf89f59ac323e3";
       break;
     case # "dom":
     case # "dom_hc":
-      var_c421e6b = # "contract_mp_play_domination";
+      var_c421e6b = #"contract_mp_play_domination";
       break;
     case # "escort_hc":
     case # "escort":
-      var_c421e6b = # "contract_mp_play_safeguard";
+      var_c421e6b = #"contract_mp_play_safeguard";
       break;
     case # "gun":
     case # "gun_hc":
-      var_c421e6b = # "hash_f916a0b9718fb8";
+      var_c421e6b = #"hash_f916a0b9718fb8";
       break;
     case # "infect_hc":
     case # "infect":
-      var_c421e6b = # "contract_mp_play_infection";
+      var_c421e6b = #"contract_mp_play_infection";
       break;
     case # "koth":
     case # "koth_hc":
-      var_c421e6b = # "contract_mp_play_hardpoint";
+      var_c421e6b = #"contract_mp_play_hardpoint";
       break;
     case # "prop":
     case # "prop_hc":
-      var_c421e6b = # "contract_mp_play_prop_hunt";
+      var_c421e6b = #"contract_mp_play_prop_hunt";
       break;
     case # "sas":
     case # "sas_hc":
-      var_c421e6b = # "contract_mp_play_sticks_and_stones";
+      var_c421e6b = #"contract_mp_play_sticks_and_stones";
       break;
     case # "sd":
     case # "sd_hc":
-      var_c421e6b = # "contract_mp_play_search";
+      var_c421e6b = #"contract_mp_play_search";
       break;
     case # "svz":
     case # "svz_hc":
-      var_c421e6b = # "hash_1d7bdd403c90dda6";
+      var_c421e6b = #"hash_1d7bdd403c90dda6";
       break;
     case # "tdm":
-      var_c421e6b = # "contract_mp_play_team_deathmatch";
+      var_c421e6b = #"contract_mp_play_team_deathmatch";
       break;
     case # "tdm_hc":
-      var_c421e6b = # "contract_mp_play_hardcore_team_deathmatch";
+      var_c421e6b = #"contract_mp_play_hardcore_team_deathmatch";
       break;
     default:
       break;

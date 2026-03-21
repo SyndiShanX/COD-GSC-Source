@@ -136,7 +136,7 @@ function_f6515ba2(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
     var_5a8c565a = damage * 3;
 
-    if(self.archetype === # "zombie" || self.archetype === # "catalyst") {
+    if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
       self thread electric_cherry_death_fx();
 
       attacker zm_challenges::debug_print("<dev string:x57>");

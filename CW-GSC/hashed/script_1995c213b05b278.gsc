@@ -40,7 +40,7 @@ function private function_b58b73b6(oldval, newval) {
     return;
   }
 
-  if(level.var_5f632232 === # "hash_5b4b0dc5da9b211d" || level.var_5f632232 === # "hash_5b44c3504ac0a01e") {
+  if(level.var_5f632232 === #"hash_5b4b0dc5da9b211d" || level.var_5f632232 === #"hash_5b44c3504ac0a01e") {
     hint_tutorial::function_9f427d88(0);
   }
 
@@ -48,7 +48,7 @@ function private function_b58b73b6(oldval, newval) {
 }
 
 function event_handler[checkpoint_restore] function_d49b3ac5() {
-  if(level.var_5f632232 === # "hash_5b4b0dc5da9b211d" || level.var_5f632232 === # "hash_5b44c3504ac0a01e") {
+  if(level.var_5f632232 === #"hash_5b4b0dc5da9b211d" || level.var_5f632232 === #"hash_5b44c3504ac0a01e") {
     hint_tutorial::function_9f427d88(0);
     player = getplayers()[0];
     player val::reset_all(#"hold_breath");

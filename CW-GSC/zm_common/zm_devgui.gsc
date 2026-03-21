@@ -109,7 +109,7 @@ function function_a4eebdf3() {
     return;
   }
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     self.custom_location = &function_9960be00;
     self.start_inert = 1;
     var_c5de9c31 = 0;
@@ -3285,7 +3285,7 @@ function zombie_devgui_unpack_current_weapon() {
 
 function function_3594cd6d(rarity) {
   if(!isDefined(rarity)) {
-    rarity = # "white";
+    rarity = #"white";
   }
 
   self endon(#"death");
@@ -3712,7 +3712,7 @@ function wait_for_zombie(crawler) {
 
     if(isDefined(zombie)) {
       foreach(node in nodes) {
-        if(node.type == # "begin" || node.type == # "end" || node.type == # "bad node") {
+        if(node.type == #"begin" || node.type == #"end" || node.type == #"bad node") {
           if(isDefined(node.animscript)) {
             zombie setblackboardattribute("<dev string:xf4a>", "<dev string:xf55>");
             zombie setblackboardattribute("<dev string:xf5e>", node.animscript);
@@ -4642,7 +4642,7 @@ function private function_62e3e0a() {
       color = (1, 1, 1);
       var_10623ec8 = function_9e72a96(key);
 
-      if(key == # "zombie_location") {
+      if(key == #"zombie_location") {
         color = (1, 0, 0);
       }
 

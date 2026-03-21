@@ -20,7 +20,7 @@ function private autoexec function_4047919b() {
     level._snd._callbacks = [];
     level._snd.var_3cc765a3 = [];
     level._snd.var_92f63ad0 = [];
-    level._snd.var_d37e94ca = # "centity";
+    level._snd.var_d37e94ca = #"centity";
     level._snd.var_90903fc0 = 0;
     level._snd._callbacks[#"pitch_get"] = &function_6f94855d;
     level._snd._callbacks[#"pitch_set"] = &function_679011ab;
@@ -356,7 +356,7 @@ function function_5275752c(soundalias, var_1d25915, linkedentity, var_e330010e) 
 
   assert(isDefined(ent), "<dev string:x129>");
   ent.var_90c86b97 = linkedentity;
-  ent.soundtype = # "centity";
+  ent.soundtype = #"centity";
   ent.soundkey = ent getentitynumber();
   ent.targetname = "snd " + soundalias;
   return ent;

@@ -94,7 +94,7 @@ event_handler[level_init] main(eventstruct) {
   level.disableclassselection = 0;
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
-  level.var_d0ab70a2 = # "hash_2ed6ad41883dc026";
+  level.var_d0ab70a2 = #"hash_2ed6ad41883dc026";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.var_161cb00c = 1;
@@ -241,7 +241,7 @@ function_e5086229(var_404e4288, var_8dd554ee) {
 registergondola_moving_watcher() {
   level clientfield::set("flicker_function_controller", 1);
   level clientfield::set("flicker_function_controller_persistant", 1);
-  level._effect[#"zombie_light_board"] = # "hash_e1d8f427f2f23c6";
+  level._effect[#"zombie_light_board"] = #"hash_e1d8f427f2f23c6";
   level.var_6579276 = level._effect[#"zombie_light_board"];
   var_4ef1324a = getEntArray("yellow_conf_screen_part", "script_noteworthy");
   var_4d8e3426 = getent("fx_light_origin", "script_noteworthy");
@@ -297,14 +297,14 @@ function_31085f45() {
 }
 
 function_785cadc4() {
-  level.var_678333a6 = # "hash_11347f5077a17dcb";
-  level._effect[#"chest_light"] = # "hash_1e8cb303d3103833";
-  level._effect[#"chest_light_closed"] = # "hash_602f075818a2fb2e";
-  level._effect[#"hash_2ff87d61167ea531"] = # "hash_1eb426cfbfef7486";
-  level._effect[#"hash_4048cb4967032c4a"] = # "hash_7e272f1a9f143051";
-  level._effect[#"lght_marker"] = # "hash_7dec2fde8393c0f4";
-  level._effect[#"lght_marker_flare"] = # "hash_11347f5077a17dcb";
-  level._effect[#"poltergeist_magicbox"] = # "hash_11347f5077a17dcb";
+  level.var_678333a6 = #"hash_11347f5077a17dcb";
+  level._effect[#"chest_light"] = #"hash_1e8cb303d3103833";
+  level._effect[#"chest_light_closed"] = #"hash_602f075818a2fb2e";
+  level._effect[#"hash_2ff87d61167ea531"] = #"hash_1eb426cfbfef7486";
+  level._effect[#"hash_4048cb4967032c4a"] = #"hash_7e272f1a9f143051";
+  level._effect[#"lght_marker"] = #"hash_7dec2fde8393c0f4";
+  level._effect[#"lght_marker_flare"] = #"hash_11347f5077a17dcb";
+  level._effect[#"poltergeist_magicbox"] = #"hash_11347f5077a17dcb";
 }
 
 function_9f50079d() {

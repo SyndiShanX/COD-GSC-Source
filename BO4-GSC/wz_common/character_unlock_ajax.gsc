@@ -30,7 +30,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(isDefined(itementry) && itementry.name === # "cu01_item") {
+  if(isDefined(itementry) && itementry.name === #"cu01_item") {
     var_b6015a5d = self function_b854ffba();
 
     if(var_b6015a5d >= 3 && self character_unlock::function_f0406288(#"ajax_unlock")) {
@@ -51,7 +51,7 @@ on_drop_item(params) {
     return;
   }
 
-  if(isDefined(itementry) && itementry.name === # "cu01_item") {
+  if(isDefined(itementry) && itementry.name === #"cu01_item") {
     var_b6015a5d = self function_b854ffba();
 
     if(var_b6015a5d < 3 && self character_unlock::function_c70bcc7a(#"ajax_unlock")) {
@@ -63,7 +63,7 @@ on_drop_item(params) {
 on_item_use(params) {
   itementry = params.item.itementry;
 
-  if(isDefined(itementry) && itementry.name === # "cu01_item") {
+  if(isDefined(itementry) && itementry.name === #"cu01_item") {
     if(self character_unlock::function_c70bcc7a(#"ajax_unlock")) {
       var_b6015a5d = self function_b854ffba();
 
@@ -81,7 +81,7 @@ function_b854ffba() {
     foreach(item in self.inventory.items) {
       itementry = item.itementry;
 
-      if(isDefined(itementry) && itementry.name === # "cu01_item") {
+      if(isDefined(itementry) && itementry.name === #"cu01_item") {
         var_b6015a5d += item.count;
       }
     }

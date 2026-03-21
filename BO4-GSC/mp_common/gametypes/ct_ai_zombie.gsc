@@ -500,7 +500,7 @@ function_e261b81d() {
 }
 
 update_goal() {
-  if(isDefined(self.var_80780af2) && (level.var_8de0b84e === self getentitynumber() || self.archetype == # "blight_father")) {
+  if(isDefined(self.var_80780af2) && (level.var_8de0b84e === self getentitynumber() || self.archetype == #"blight_father")) {
     if(!self.allowoffnavmesh && self.isonnavmesh) {
       adjustedgoal = getclosestpointonnavmesh(self.var_80780af2, 100, self getpathfindingradius());
 

@@ -13,8 +13,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[#"water_player_jump_out"] = # "player/fx_plyr_water_jump_out_splash_1p";
-  level._effect[#"hash_1e7095084eda811c"] = # "hash_123c2521c68b2167";
+  level._effect[#"water_player_jump_out"] = #"player/fx_plyr_water_jump_out_splash_1p";
+  level._effect[#"hash_1e7095084eda811c"] = #"hash_123c2521c68b2167";
 
   if(is_true(level.disablewatersurfacefx)) {
     return;

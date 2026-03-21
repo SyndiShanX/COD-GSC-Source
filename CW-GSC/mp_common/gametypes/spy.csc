@@ -27,8 +27,8 @@ function event_handler[gametype_init] main(eventstruct) {
 
   namespace_b77e8eb1::init();
   dogtags::init();
-  level.var_ba243d66 = # "hash_570a24781e04172d";
-  level.var_febab1ea = # "axis_base";
+  level.var_ba243d66 = #"hash_570a24781e04172d";
+  level.var_febab1ea = #"axis_base";
   level.var_f2d68e02 = &function_f2d68e02;
   level.var_1d16b8a = &function_1d16b8a;
   clientfield::register_clientuimodel("hudItems.radiationVestHealth", #"hud_items", #"radiationvesthealth", 1, 5, "float", undefined, 0, 0);
@@ -139,14 +139,14 @@ function function_f8e1b7(local_client_num, oldval, newval, bnewent, binitialsnap
   var_493fffa1 = undefined;
   var_d35e9a2 = undefined;
   var_d5c64c00 = -1;
-  var_7bc93714 = # "hash_178cac301a36cf2";
-  var_603e6dd8 = # "hash_473f17e761b0de5b";
+  var_7bc93714 = #"hash_178cac301a36cf2";
+  var_603e6dd8 = #"hash_473f17e761b0de5b";
 
   if(level.var_78904b18 <= 25) {
     var_81131a47 = function_70873aee(fieldname, level.var_78904b18);
 
     if(isDefined(var_81131a47)) {
-      var_493fffa1 = # "hash_102615ce832ca8a3" + var_81131a47;
+      var_493fffa1 = #"hash_102615ce832ca8a3" + var_81131a47;
     }
 
     var_5e8846d4 = self getentitynumber();
@@ -177,14 +177,14 @@ function function_f8e1b7(local_client_num, oldval, newval, bnewent, binitialsnap
       var_d5c64c00 = -1;
     }
 
-    var_7bc93714 = # "hash_1380f38b1a748dfe";
+    var_7bc93714 = #"hash_1380f38b1a748dfe";
     var_603e6dd8 = undefined;
   }
 
   var_30c494d1 = function_70873aee(fieldname, level.corpse_client_num);
 
   if(isDefined(var_30c494d1)) {
-    var_6ede17a0 = # "hash_102615ce832ca8a3" + var_30c494d1;
+    var_6ede17a0 = #"hash_102615ce832ca8a3" + var_30c494d1;
   }
 
   corpse_name = "";

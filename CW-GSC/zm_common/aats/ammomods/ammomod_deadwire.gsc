@@ -45,61 +45,61 @@ function init_deadwire() {
   level.var_6f993f47.head_gib_chance = 0;
   level.var_6f993f47.network_death_choke = 4;
   level.var_6f993f47.should_kill_enemies = 0;
-  level.var_6f993f47.challenge_stat_name = # "zm_ammomod_deadwire";
+  level.var_6f993f47.challenge_stat_name = #"zm_ammomod_deadwire";
   level.var_6f993f47.no_fx = 1;
   level.var_6f993f47.clientside_fx = 0;
   level.var_6f993f47.str_mod = "MOD_AAT";
-  level.var_6f993f47.var_a9255d36 = # "hash_ff52504bb0aceb9";
+  level.var_6f993f47.var_a9255d36 = #"hash_ff52504bb0aceb9";
   level.var_6f993f47.stun_duration = 2;
   level.var_6f993f47.tier = 0;
   level.var_620d4080.head_gib_chance = 0;
   level.var_620d4080.network_death_choke = 4;
   level.var_620d4080.should_kill_enemies = 0;
-  level.var_620d4080.challenge_stat_name = # "zm_ammomod_deadwire";
+  level.var_620d4080.challenge_stat_name = #"zm_ammomod_deadwire";
   level.var_620d4080.no_fx = 1;
   level.var_620d4080.clientside_fx = 0;
   level.var_620d4080.str_mod = "MOD_AAT";
-  level.var_620d4080.var_a9255d36 = # "hash_ff52504bb0aceb9";
+  level.var_620d4080.var_a9255d36 = #"hash_ff52504bb0aceb9";
   level.var_620d4080.stun_duration = 4;
   level.var_620d4080.tier = 1;
   level.var_8ec0ca14.head_gib_chance = 0;
   level.var_8ec0ca14.network_death_choke = 4;
   level.var_8ec0ca14.should_kill_enemies = 0;
-  level.var_8ec0ca14.challenge_stat_name = # "zm_ammomod_deadwire";
+  level.var_8ec0ca14.challenge_stat_name = #"zm_ammomod_deadwire";
   level.var_8ec0ca14.no_fx = 1;
   level.var_8ec0ca14.clientside_fx = 0;
   level.var_8ec0ca14.str_mod = "MOD_AAT";
-  level.var_8ec0ca14.var_a9255d36 = # "hash_ff52504bb0aceb9";
+  level.var_8ec0ca14.var_a9255d36 = #"hash_ff52504bb0aceb9";
   level.var_8ec0ca14.stun_duration = 4;
   level.var_8ec0ca14.tier = 2;
   level.var_b347489f.head_gib_chance = 0;
   level.var_b347489f.network_death_choke = 4;
   level.var_b347489f.should_kill_enemies = 0;
-  level.var_b347489f.challenge_stat_name = # "zm_ammomod_deadwire";
+  level.var_b347489f.challenge_stat_name = #"zm_ammomod_deadwire";
   level.var_b347489f.no_fx = 1;
   level.var_b347489f.clientside_fx = 0;
   level.var_b347489f.str_mod = "MOD_AAT";
-  level.var_b347489f.var_a9255d36 = # "hash_ff52504bb0aceb9";
+  level.var_b347489f.var_a9255d36 = #"hash_ff52504bb0aceb9";
   level.var_b347489f.stun_duration = 4;
   level.var_b347489f.tier = 3;
   level.var_9d477dfa.head_gib_chance = 0;
   level.var_9d477dfa.network_death_choke = 4;
   level.var_9d477dfa.should_kill_enemies = 0;
-  level.var_9d477dfa.challenge_stat_name = # "zm_ammomod_deadwire";
+  level.var_9d477dfa.challenge_stat_name = #"zm_ammomod_deadwire";
   level.var_9d477dfa.no_fx = 1;
   level.var_9d477dfa.clientside_fx = 0;
   level.var_9d477dfa.str_mod = "MOD_AAT";
-  level.var_9d477dfa.var_a9255d36 = # "hash_ff52504bb0aceb9";
+  level.var_9d477dfa.var_a9255d36 = #"hash_ff52504bb0aceb9";
   level.var_9d477dfa.stun_duration = 4;
   level.var_9d477dfa.tier = 4;
   level.var_7659ca85.head_gib_chance = 0;
   level.var_7659ca85.network_death_choke = 4;
   level.var_7659ca85.should_kill_enemies = 0;
-  level.var_7659ca85.challenge_stat_name = # "zm_ammomod_deadwire";
+  level.var_7659ca85.challenge_stat_name = #"zm_ammomod_deadwire";
   level.var_7659ca85.no_fx = 1;
   level.var_7659ca85.clientside_fx = 0;
   level.var_7659ca85.str_mod = "MOD_AAT";
-  level.var_7659ca85.var_a9255d36 = # "hash_ff52504bb0aceb9";
+  level.var_7659ca85.var_a9255d36 = #"hash_ff52504bb0aceb9";
   level.var_7659ca85.stun_duration = 4;
   level.var_7659ca85.tier = 5;
   callback::add_callback(#"hash_210adcf09e99fba1", &function_ffe2bb2f);
@@ -141,14 +141,14 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "elite" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"elite" || self.zm_ai_category === #"boss") {
     return;
   }
 
   aat_name = vpoint aat::getaatonweapon(shitloc, 1);
   tier = function_832f84f6(aat_name);
 
-  if(tier < 4 && self.zm_ai_category === # "special") {
+  if(tier < 4 && self.zm_ai_category === #"special") {
     return;
   }
 
@@ -191,7 +191,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
       break;
   }
 
-  if(self.zm_ai_category === # "special") {
+  if(self.zm_ai_category === #"special") {
     if(tier >= 4) {
       self thread function_e0e02bed(vpoint, s_params, tier);
     }
@@ -199,7 +199,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "normal") {
+  if(self.zm_ai_category === #"normal") {
     self thread function_e0e02bed(vpoint, s_params, tier);
   }
 }
@@ -255,7 +255,7 @@ function function_5e4b580b(player, s_params, tier) {
       continue;
     }
 
-    if(e_zombie.zm_ai_category === # "elite" || e_zombie.zm_ai_category === # "special") {
+    if(e_zombie.zm_ai_category === #"elite" || e_zombie.zm_ai_category === #"special") {
       continue;
     }
 
@@ -281,7 +281,7 @@ function function_de99f2ad(player, var_fb0999c0, s_params, tier, var_ebf63dce = 
     return;
   }
 
-  if(self.zm_ai_category === # "elite") {
+  if(self.zm_ai_category === #"elite") {
     return;
   }
 
@@ -313,7 +313,7 @@ function function_2bd8c11(player, damage_percent, weapon, stun_duration) {
     foreach(zombie in a_potential_targets) {
       if(isalive(zombie) && isPlayer(player) && isDefined(var_4691e777)) {
         if(zombie == self) {
-          if(zombie.zm_ai_category === # "special") {
+          if(zombie.zm_ai_category === #"special") {
             damage = zombie.maxhealth * 0.1;
           } else {
             damage = zombie.maxhealth * damage_percent;

@@ -27,7 +27,7 @@ autoexec __init__system__() {
 
 __init__() {
   level flag::init(#"warden_blundergat_obtained");
-  level._effect[#"ee_skull_shot"] = # "electric/fx_elec_sparks_burst_sm_omni_blue_os";
+  level._effect[#"ee_skull_shot"] = #"electric/fx_elec_sparks_burst_sm_omni_blue_os";
 }
 
 __main__() {

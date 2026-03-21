@@ -53,7 +53,7 @@ function_8b96ace8(b_walk = 1) {
 
     if(isDefined(level.var_2f67e192)) {
       var_5d66253 = [[level.var_2f67e192]](a_ai[i]);
-    } else if(isalive(a_ai[i]) && (a_ai[i].zm_ai_category === # "basic" || a_ai[i].zm_ai_category === # "enhanced") && a_ai[i].team === level.zombie_team) {
+    } else if(isalive(a_ai[i]) && (a_ai[i].zm_ai_category === #"basic" || a_ai[i].zm_ai_category === #"enhanced") && a_ai[i].team === level.zombie_team) {
       var_5d66253 = 1;
     }
 
@@ -76,7 +76,7 @@ function_db1ee563() {
 
   if(isDefined(level.var_2f67e192)) {
     var_5d66253 = [[level.var_2f67e192]](self);
-  } else if(isalive(self) && (self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") && self.team === level.zombie_team) {
+  } else if(isalive(self) && (self.zm_ai_category === #"basic" || self.zm_ai_category === #"enhanced") && self.team === level.zombie_team) {
     var_5d66253 = 1;
   }
 

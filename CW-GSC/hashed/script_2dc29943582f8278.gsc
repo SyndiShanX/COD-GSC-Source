@@ -397,7 +397,7 @@ function private _configureclone(clone, player, forward, spawntime) {
   clone thread _show(spawntime, player);
   result = clone waittilltimeout(spawntime + 0.5, #"clone_reveal", #"clone_shutdown", #"death");
 
-  if(result._notify != # "clone_shutdown") {
+  if(result._notify != #"clone_shutdown") {
     _configurecloneteam(clone, player, 0);
     clone thread _updateclonepathing(player);
   }

@@ -305,7 +305,7 @@ function private function_199c092d(supplystash, player = undefined) {
   supplystash.var_193b3626 = player getentitynumber();
   item = function_cc1aec8(player, 10);
 
-  if(!isDefined(item) || item.itementry.name !== # "resource_item_loot_locker_key") {
+  if(!isDefined(item) || item.itementry.name !== #"resource_item_loot_locker_key") {
     return false;
   }
 
@@ -383,7 +383,7 @@ function private _on_player_disconnect() {
 }
 
 function private function_9aefb438(params) {
-  if(isDefined(params) && params.message == # "hash_52e9e8e985489587") {
+  if(isDefined(params) && params.message == #"hash_52e9e8e985489587") {
     if(!isDefined(self) || !isPlayer(self) || !isalive(self)) {
       params.player = undefined;
       return;
@@ -405,8 +405,8 @@ function private function_9aefb438(params) {
         return;
       }
 
-      if(!is_true(var_9b882d22.var_5d97fed1) && var_9b882d22.itementry.rarity == # "epic") {
-        params.message = # "hash_433c75db9fd3177e";
+      if(!is_true(var_9b882d22.var_5d97fed1) && var_9b882d22.itementry.rarity == #"epic") {
+        params.message = #"hash_433c75db9fd3177e";
       }
 
       networkid = var_9b882d22.networkid;
@@ -928,11 +928,11 @@ function function_ad255265(params) {
   }
 
   if(self.stash_type === 0) {
-    drop_type = # "opened_stash";
+    drop_type = #"opened_stash";
   } else if(self.stash_type === 1) {
-    drop_type = # "hash_4fbb9339305f16f2";
+    drop_type = #"hash_4fbb9339305f16f2";
   } else if(self.stash_type === 2) {
-    drop_type = # "hash_5a5b9e642747c4ab";
+    drop_type = #"hash_5a5b9e642747c4ab";
   }
 
   if(isDefined(drop_type)) {
@@ -1130,16 +1130,16 @@ function private function_7c84312d(origin, angles) {
     var_9b882d22 = function_b30c15ae(origin, angles, forward, var_f4b807cb, var_512ddf16, maxdist);
   }
 
-  var_caafaa25 = # "";
+  var_caafaa25 = #"";
 
   if(isDefined(var_9b882d22) && !self isinvehicle()) {
     self.groupitems = [];
     hasbackpack = self item_inventory::has_backpack();
     stashitem = item_world_util::function_83c20f83(var_9b882d22);
     canstack = !stashitem && function_6105623a(var_9b882d22);
-    var_f4b42fba = self item_inventory::has_armor() && var_9b882d22.itementry.itemtype == # "armor";
-    isammo = var_9b882d22.itementry.itemtype == # "ammo";
-    var_de41d336 = !hasbackpack && var_9b882d22.itementry.itemtype == # "backpack";
+    var_f4b42fba = self item_inventory::has_armor() && var_9b882d22.itementry.itemtype == #"armor";
+    isammo = var_9b882d22.itementry.itemtype == #"ammo";
+    var_de41d336 = !hasbackpack && var_9b882d22.itementry.itemtype == #"backpack";
 
     if(stashitem || !isammo && !var_de41d336 && !canstack && !var_f4b42fba) {
       var_433d429 = 14;
@@ -1196,9 +1196,9 @@ function private function_7c84312d(origin, angles) {
       itementry = var_9b882d22.itementry;
 
       if(isDefined(itementry.weapon) && itementry.weapon != level.weaponnone) {
-        if(itementry.itemtype != # "ammo") {
+        if(itementry.itemtype != #"ammo") {
           usetrigger setcursorhint("HINT_WEAPON_3D", item_inventory_util::function_2b83d3ff(var_9b882d22));
-          var_caafaa25 = # "";
+          var_caafaa25 = #"";
 
           if(isDefined(itementry.hintstring)) {
             var_caafaa25 = itementry.hintstring;
@@ -1227,13 +1227,13 @@ function private function_7c84312d(origin, angles) {
     usetrigger triggerenable(1);
 
     if(!is_true(var_9b882d22.var_5d97fed1)) {
-      self clientfield::set_player_uimodel("hudItems.pickupHintGold", var_9b882d22.itementry.rarity == # "epic");
+      self clientfield::set_player_uimodel("hudItems.pickupHintGold", var_9b882d22.itementry.rarity == #"epic");
     }
 
     var_512ddf16 = self clientfield::get_player_uimodel("hudItems.multiItemPickup.status") == 2;
 
     if(!is_true(var_9b882d22.var_5d97fed1) && !var_512ddf16) {
-      if(var_9b882d22.itementry.itemtype == # "ammo") {
+      if(var_9b882d22.itementry.itemtype == #"ammo") {
         if(!function_c199bcc6(var_9b882d22)) {
           usetrigger function_dae4ab9b(0);
         }
@@ -1262,7 +1262,7 @@ function private function_7c84312d(origin, angles) {
   eyepos = self getplayercamerapos();
 
   if(isDefined(var_9b882d22) && is_true(var_9b882d22.var_5d97fed1)) {
-    var_caafaa25 = # "wz/supply_stash";
+    var_caafaa25 = #"wz/supply_stash";
     var_1ba7b9c8 = arraysortclosest(level.var_5ce07338, var_9b882d22.origin, 1, 0, 12);
 
     if(var_1ba7b9c8.size > 0 && isDefined(var_1ba7b9c8[0].displayname)) {
@@ -1272,12 +1272,12 @@ function private function_7c84312d(origin, angles) {
     var_c36bd68a = arraysortclosest(level.var_ace9fb52, var_9b882d22.origin, 1, 0, 12);
 
     if(var_c36bd68a.size > 0) {
-      var_caafaa25 = # "wz/death_stash";
+      var_caafaa25 = #"wz/death_stash";
     } else {
       var_6594679a = arraysortclosest(level.item_supply_drops, var_9b882d22.origin, 1, 0, 12);
 
       if(var_6594679a.size > 0) {
-        var_caafaa25 = # "wz/supply_drop";
+        var_caafaa25 = #"wz/supply_drop";
       }
     }
   } else if(!isDefined(var_9b882d22) || distance2dsquared(var_9b882d22.origin, eyepos) > sqr(128)) {
@@ -1285,7 +1285,7 @@ function private function_7c84312d(origin, angles) {
     self.var_bf3cabc9 = item_world_util::function_6af455de(0, eyepos, angles);
     hintstring = item_world_util::function_c62ad9a7(self.var_bf3cabc9);
 
-    if(hintstring != # "") {
+    if(hintstring != #"") {
       var_caafaa25 = hintstring;
     }
   }
@@ -1301,7 +1301,7 @@ function function_c8ab2022(item, var_cdf8c0d1 = 0) {
   itementry = item.itementry;
   itemcount = item.count;
 
-  if(itementry.itemtype == # "cash") {
+  if(itementry.itemtype == #"cash") {
     if(var_cdf8c0d1 && !is_true(itementry.stackable)) {
       return 1;
     }
@@ -1312,7 +1312,7 @@ function function_c8ab2022(item, var_cdf8c0d1 = 0) {
   if(!isDefined(itemcount)) {
     itemcount = isDefined(itementry.amount) ? itementry.amount : 1;
 
-    if(itementry.itemtype == # "weapon") {
+    if(itementry.itemtype == #"weapon") {
       itemcount = 1;
     }
   }
@@ -1476,11 +1476,11 @@ function function_de2018e3(item, player, slotid = undefined, playgesture = 1, va
       var_aec6fa7f = item.amount;
 
       if(!isDefined(var_aec6fa7f) || item.amount == 0) {
-        if(itementry.itemtype == # "ammo") {
+        if(itementry.itemtype == #"ammo") {
           if(!isDefined(var_aec6fa7f)) {
             var_aec6fa7f = itementry.amount;
           }
-        } else if(itementry.itemtype == # "weapon") {
+        } else if(itementry.itemtype == #"weapon") {
           if(!isDefined(item.amount)) {
             weapon = item_inventory_util::function_2b83d3ff(item);
             var_aec6fa7f = itementry.amount;
@@ -1489,7 +1489,7 @@ function function_de2018e3(item, player, slotid = undefined, playgesture = 1, va
               var_aec6fa7f = itementry.amount * weapon.clipsize;
             }
           }
-        } else if(itementry.itemtype == # "armor") {
+        } else if(itementry.itemtype == #"armor") {
           if(!is_true(itementry.var_b5b2485b)) {
             armoramount = isDefined(item.amount) ? item.amount : itementry.amount;
             var_aec6fa7f = armoramount;
@@ -1517,13 +1517,13 @@ function function_de2018e3(item, player, slotid = undefined, playgesture = 1, va
       var_c5781c22 += var_d72b1a4b - var_8cd447d8;
       assert(isint(var_c5781c22) && var_c5781c22 >= 0);
 
-      if(itementry.itemtype == # "ammo" && var_d72b1a4b === var_c5781c22) {} else if(var_c5781c22 == var_d72b1a4b) {} else {
+      if(itementry.itemtype == #"ammo" && var_d72b1a4b === var_c5781c22) {} else if(var_c5781c22 == var_d72b1a4b) {} else {
         if(is_true(playgesture)) {
           player gestures::function_56e00fbf("gestable_grab", undefined, 0);
         }
 
         if(isDefined(item)) {
-          if(itementry.itemtype == # "ammo") {
+          if(itementry.itemtype == #"ammo") {
             item.amount = var_c5781c22;
           } else {
             item.count = var_c5781c22;
@@ -1578,7 +1578,7 @@ function pickup_item(item, var_22be503 = 1, var_26a492bc = 0, autopickup = 0) {
     return 0;
   }
 
-  if(item.weapon.name === # "satchel_charge") {
+  if(item.weapon.name === #"satchel_charge") {
     if(self isgestureplaying("ges_t9_satchel_charge_clacker_fire_oneoff") || self isgestureplaying("ges_t9_satchel_charge_clacker_fire_oneoff_bare_hands") || self isgestureplaying("ges_t9_satchel_charge_clacker_fire_oneoff_dw") || self isgestureplaying("ges_t9_satchel_charge_clacker_fire_oneoff_rh")) {
       return 0;
     }
@@ -1613,7 +1613,7 @@ function pickup_item(item, var_22be503 = 1, var_26a492bc = 0, autopickup = 0) {
     }
 
     return success;
-  } else if(item_inventory::function_7d5553ac() || item.itementry.itemtype != # "weapon") {
+  } else if(item_inventory::function_7d5553ac() || item.itementry.itemtype != #"weapon") {
     var_d72b1a4b = function_c8ab2022(item, 0);
     var_8cd447d8 = function_c8ab2022(item, 1);
     remainingitems = function_de2018e3(item, self, undefined, !autopickup, 1);
@@ -1624,7 +1624,7 @@ function pickup_item(item, var_22be503 = 1, var_26a492bc = 0, autopickup = 0) {
         self function_bc82f900(rumble);
       }
 
-      if(item.itementry.itemtype != # "armor") {
+      if(item.itementry.itemtype != #"armor") {
         if(isDefined(item) && isDefined(item.itementry)) {
           function_1a46c8ae(self, undefined, undefined, item.itementry, item.itementry.amount);
         }
@@ -1632,7 +1632,7 @@ function pickup_item(item, var_22be503 = 1, var_26a492bc = 0, autopickup = 0) {
 
       consume_item(item);
       return 1;
-    } else if(remainingitems < var_8cd447d8 && !isentity(item) && item.itementry.itemtype != # "ammo") {
+    } else if(remainingitems < var_8cd447d8 && !isentity(item) && item.itementry.itemtype != #"ammo") {
       if(isDefined(rumble) && isPlayer(self)) {
         self function_bc82f900(rumble);
       }
@@ -1684,7 +1684,7 @@ function function_8e0d14c1(var_4b0875ec = 0) {
 }
 
 function function_1a46c8ae(player, var_a1ca235e, var_3d1f9df4, var_7089b458, var_381f3b39) {
-  if(game.state == # "pregame" || !isDefined(var_a1ca235e) && !isDefined(var_7089b458)) {
+  if(game.state == #"pregame" || !isDefined(var_a1ca235e) && !isDefined(var_7089b458)) {
     return;
   }
 
@@ -1706,7 +1706,7 @@ function function_1a46c8ae(player, var_a1ca235e, var_3d1f9df4, var_7089b458, var
 function function_83ddce0f(item, inventoryslot) {
   var_a1ca235e = undefined;
   var_3d1f9df4 = 0;
-  var_8acbe1d0 = self function_6105623a(item) || item.itementry.itemtype == # "armor_shard" || item.itementry.itemtype == # "resource" || item.itementry.itemtype == # "ammo" || item.itementry.itemtype == # "backpack" && !self item_inventory::has_backpack() || item.itementry.var_4a1a4613 == # "armor_heal";
+  var_8acbe1d0 = self function_6105623a(item) || item.itementry.itemtype == #"armor_shard" || item.itementry.itemtype == #"resource" || item.itementry.itemtype == #"ammo" || item.itementry.itemtype == #"backpack" && !self item_inventory::has_backpack() || item.itementry.var_4a1a4613 == #"armor_heal";
   stashitem = item_world_util::function_83c20f83(item);
   deathstashitem = isDefined(item.deathstash) ? item.deathstash : 0;
   stashitem &= ~deathstashitem;
@@ -1730,7 +1730,7 @@ function function_83ddce0f(item, inventoryslot) {
   }
 
   if(!isDefined(item) || !item_world_util::can_pick_up(item)) {
-    if(isDefined(dropitem) && isDefined(item) && isDefined(item.itementry) && item.itementry.itemtype == # "backpack") {
+    if(isDefined(dropitem) && isDefined(item) && isDefined(item.itementry) && item.itementry.itemtype == #"backpack") {
       item_inventory::function_ec238da8();
     }
 
@@ -1743,13 +1743,13 @@ function function_83ddce0f(item, inventoryslot) {
     if(isDefined(item) && isDefined(item.itementry)) {
       function_1a46c8ae(self, var_a1ca235e, var_3d1f9df4, item.itementry, item.itementry.amount);
 
-      if(item.itementry.itemtype == # "backpack") {
+      if(item.itementry.itemtype == #"backpack") {
         item_inventory::function_ec238da8();
       }
     }
 
     consume_item(item);
-  } else if(!isentity(item) && item.itementry.itemtype != # "ammo") {
+  } else if(!isentity(item) && item.itementry.itemtype != #"ammo") {
     dropitem = self item_drop::function_fd9026e4(0, item.itementry.weapon, item.count, item.amount, item.id, item.origin, item.angles, 2, 0, undefined, isDefined(item.targetnamehash) ? item.targetnamehash : item.targetname, undefined, undefined, 0);
 
     if(isDefined(dropitem)) {

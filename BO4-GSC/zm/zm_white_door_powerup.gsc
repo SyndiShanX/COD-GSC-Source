@@ -34,7 +34,7 @@ door_powerup_drop(powerup_name, var_e3a28454, powerup_team, powerup_location) {
   level notify(#"powerup_dropped", powerup);
 
   if(isDefined(powerup)) {
-    powerup.grabbed_level_notify = # "magic_door_power_up_grabbed";
+    powerup.grabbed_level_notify = #"magic_door_power_up_grabbed";
     powerup function_94cd396e(powerup_name, powerup_team, var_e3a28454);
     powerup thread zm_powerups::powerup_wobble();
     powerup thread zm_powerups::powerup_grab(powerup_team);

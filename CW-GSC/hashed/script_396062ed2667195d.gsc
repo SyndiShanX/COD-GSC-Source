@@ -143,12 +143,12 @@ function function_429cb29f() {
   chair = getent("informant_chair", "targetname");
   self.var_a08ba405 = chair;
   self.var_c681e4c1 = 0;
-  self.propername = # "hash_32ec1ebb26836258";
+  self.propername = #"hash_32ec1ebb26836258";
   self actions::function_df6077("body_shield", 0);
   self.var_d3f0031c = "td_scene_nonlethal_behind_b_informant";
-  self.var_4f8ed4b2 = # "hash_6a4c1594be34b79f";
+  self.var_4f8ed4b2 = #"hash_6a4c1594be34b79f";
   self.var_59212ad0 = "td_scene_nonlethal_behind_b_informant";
-  self.var_f535b314 = # "hash_6a4c1594be34b79f";
+  self.var_f535b314 = #"hash_6a4c1594be34b79f";
   self.var_1f1bd6ed = chair.origin;
   self.var_598a8a9 = chair.angles;
   self.var_caa295ea = 0;

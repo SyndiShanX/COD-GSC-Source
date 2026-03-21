@@ -33,12 +33,12 @@ function start_vortex(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   bwastimejump -= fieldname;
 
   if(bwastimejump == 2) {
-    registerplayer_lift_clipbamfupdate = # "zombie/fx_idgun_vortex_ug_zod_zmb";
-    fx_vortex_explosion = # "zombie/fx_idgun_vortex_explo_ug_zod_zmb";
+    registerplayer_lift_clipbamfupdate = #"zombie/fx_idgun_vortex_ug_zod_zmb";
+    fx_vortex_explosion = #"zombie/fx_idgun_vortex_explo_ug_zod_zmb";
     n_vortex_time = 10;
   } else if(bwastimejump == 1) {
-    registerplayer_lift_clipbamfupdate = # "hash_12f5667e03414550";
-    fx_vortex_explosion = # "hash_23fb7256f9bcc7b2";
+    registerplayer_lift_clipbamfupdate = #"hash_12f5667e03414550";
+    fx_vortex_explosion = #"hash_23fb7256f9bcc7b2";
     n_vortex_time = 10;
   }
 

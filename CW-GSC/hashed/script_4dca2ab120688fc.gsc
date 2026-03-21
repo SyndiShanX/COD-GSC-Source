@@ -128,7 +128,7 @@ function function_f5ed7704(entity) {
   entity setblackboardattribute("_locomotion_speed", "locomotion_speed_run");
 
   if(!isDefined(self.never_hide) && !is_true(self.aat_turned)) {
-    entity.var_78f5fd91 = # "hidden";
+    entity.var_78f5fd91 = #"hidden";
   }
 
   awareness::function_978025e4(entity);

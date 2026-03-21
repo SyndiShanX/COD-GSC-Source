@@ -15,7 +15,7 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("world", "flip_skybox", 8000, 1, "int", &flip_skybox, 0, 0);
   clientfield::register("scriptmover", "zombie_has_eyes", 1, 1, "int", &zombie_eyes_clientfield_cb, 0, 0);
-  level._effect[#"hash_61fce653578d7f82"] = # "zm_ai/fx8_zombie_eye_glow_orange";
+  level._effect[#"hash_61fce653578d7f82"] = #"zm_ai/fx8_zombie_eye_glow_orange";
 }
 
 flip_skybox(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

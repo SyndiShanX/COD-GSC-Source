@@ -241,7 +241,7 @@ function function_ea7dccdf(var_a276c861, var_19e802fa) {
 }
 
 function function_ffe3712a(params) {
-  if(self.archetype !== # "mechz") {
+  if(self.archetype !== #"mechz") {
     return;
   }
 
@@ -267,7 +267,7 @@ function function_c8b7a7da() {
 }
 
 function private on_ai_spawned() {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     if(!level flag::get(#"hash_1ec3570883b4621e")) {
       self.on_brainrot = &function_f0c28731;
     }
@@ -983,7 +983,7 @@ function private function_75de6325() {
   a_zombies = self getenemiesinradius(self.origin, 400);
 
   foreach(zombie in a_zombies) {
-    if(zombie.zm_ai_category === # "normal" && isalive(zombie)) {
+    if(zombie.zm_ai_category === #"normal" && isalive(zombie)) {
       zombie zombie_utility::setup_zombie_knockdown(self.origin);
     }
   }

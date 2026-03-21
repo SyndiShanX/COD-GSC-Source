@@ -118,7 +118,7 @@ function_44a6883c(&drop_item_id, &drop_items, &drop_count, &drop_amount, var_4a5
     itementry = item.itementry;
     itemname = item_world_util::get_itemtype(itementry);
 
-    if(itementry.itemtype == # "weapon") {
+    if(itementry.itemtype == #"weapon") {
       continue;
     }
 
@@ -265,7 +265,7 @@ function_23b6897(player, position) {
         var_d154a9ba = 0;
 
         for(var_b7e54435 = 0; var_b7e54435 < var_f4b807cb.size; var_b7e54435++) {
-          if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == # "weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, checkpoint) < var_f24d242c) {
+          if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == #"weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, checkpoint) < var_f24d242c) {
             var_d154a9ba = 1;
             break;
           }
@@ -691,7 +691,7 @@ drop_inventory(player) {
     return items;
   }
 
-  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == # "mod_trigger_hurt" && player.laststandparams.sweapon.name === # "none") {
+  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == #"mod_trigger_hurt" && player.laststandparams.sweapon.name === #"none") {
     player.var_33a24f82 = 0;
     return items;
   }
@@ -792,7 +792,7 @@ drop_inventory(player) {
     count = isDefined(inventoryitem.count) ? inventoryitem.count : 1;
     amount = inventoryitem.amount;
 
-    if(isDefined(item_weapon) && inventoryitem.itementry.itemtype == # "weapon") {
+    if(isDefined(item_weapon) && inventoryitem.itementry.itemtype == #"weapon") {
       var_4f21d62e = item_inventory_util::function_2b83d3ff(inventoryitem);
       inventoryitem.weaponoptions = player item_inventory::function_fc04b237(var_4f21d62e, inventoryitem.weaponoptions);
       var_ca577a9c = player getweaponammoclip(var_4f21d62e);
@@ -840,7 +840,7 @@ drop_inventory(player) {
       if(isDefined(level.var_4afb8f5a[itemname])) {
         itemname = level.var_4afb8f5a[itemname];
 
-        if(itemname == # "") {
+        if(itemname == #"") {
           continue;
         }
       }
@@ -992,7 +992,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
   if(isDefined(level.var_4afb8f5a[item.itementry.name])) {
     item_name = level.var_4afb8f5a[item.itementry.name];
 
-    if(item_name == # "") {
+    if(item_name == #"") {
       return;
     }
 
@@ -1023,7 +1023,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
   dropitem.networkid = item_world_util::function_1f0def85(dropitem);
   dropitem.itementry = item.itementry;
 
-  if(item.itementry.name == # "sig_blade_wz_item" && isDefined(level.var_5b2a8d88)) {
+  if(item.itementry.name == #"sig_blade_wz_item" && isDefined(level.var_5b2a8d88)) {
     level.var_5b2a8d88[dropitem.networkid] = 1;
   }
 
@@ -1124,7 +1124,7 @@ function_4da960f6(origin, radius, time) {
         continue;
       }
 
-      if(isDefined(item.classname) && item.classname == # "grenade") {
+      if(isDefined(item.classname) && item.classname == #"grenade") {
         continue;
       }
 

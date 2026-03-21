@@ -20,22 +20,22 @@ autoexec __init__system__() {
 
 __init__() {
   register_clientfields();
-  level._effect[#"gravityspikes_destroy"] = # "hash_2b135053e0f7140";
-  level._effect[#"gravityspikes_location"] = # "hash_22bdc8201af7b841";
-  level._effect[#"gravityspikes_slam"] = # "hash_2714b949033af35d";
-  level._effect[#"gravityspikes_slam_1p"] = # "hash_4e7dd6f6f41ead5f";
-  level._effect[#"gravityspikes_trap_start"] = # "hash_779eebf7aed3f4c0";
-  level._effect[#"gravityspikes_trap_loop"] = # "hash_7df2dbfda69b0792";
-  level._effect[#"gravityspikes_trap_end"] = # "hash_70f0169b86a98ce1";
-  level._effect[#"gravityspikes_shockwave"] = # "hash_74ea4245b0e1646d";
-  level._effect[#"hash_2c2dcd840a548ef2"] = # "hash_77964e1811bb9a67";
-  level._effect[#"hash_1758af99ff212148"] = # "hash_74f12e45b0e7611f";
-  level._effect[#"gravity_trap_spike_spark"] = # "hash_34fb31ef6c57f845";
-  level._effect[#"zombie_sparky"] = # "hash_751b9a4bf53bfb69";
-  level._effect[#"zombie_spark_light"] = # "hash_28908b7bf0b56107";
-  level._effect[#"zombie_spark_trail"] = # "hash_5e483d0e64c5d58";
-  level._effect[#"gravity_spike_zombie_explode"] = # "hash_62cd02e76c0d3da0";
-  level._effect[#"hash_d73bbc3bff0a6f3"] = # "hash_5959ee9eff7b2eac";
+  level._effect[#"gravityspikes_destroy"] = #"hash_2b135053e0f7140";
+  level._effect[#"gravityspikes_location"] = #"hash_22bdc8201af7b841";
+  level._effect[#"gravityspikes_slam"] = #"hash_2714b949033af35d";
+  level._effect[#"gravityspikes_slam_1p"] = #"hash_4e7dd6f6f41ead5f";
+  level._effect[#"gravityspikes_trap_start"] = #"hash_779eebf7aed3f4c0";
+  level._effect[#"gravityspikes_trap_loop"] = #"hash_7df2dbfda69b0792";
+  level._effect[#"gravityspikes_trap_end"] = #"hash_70f0169b86a98ce1";
+  level._effect[#"gravityspikes_shockwave"] = #"hash_74ea4245b0e1646d";
+  level._effect[#"hash_2c2dcd840a548ef2"] = #"hash_77964e1811bb9a67";
+  level._effect[#"hash_1758af99ff212148"] = #"hash_74f12e45b0e7611f";
+  level._effect[#"gravity_trap_spike_spark"] = #"hash_34fb31ef6c57f845";
+  level._effect[#"zombie_sparky"] = #"hash_751b9a4bf53bfb69";
+  level._effect[#"zombie_spark_light"] = #"hash_28908b7bf0b56107";
+  level._effect[#"zombie_spark_trail"] = #"hash_5e483d0e64c5d58";
+  level._effect[#"gravity_spike_zombie_explode"] = #"hash_62cd02e76c0d3da0";
+  level._effect[#"hash_d73bbc3bff0a6f3"] = #"hash_5959ee9eff7b2eac";
 }
 
 register_clientfields() {
@@ -215,7 +215,7 @@ ragdoll_impact_watch(localclientnum) {
 
 play_sparky_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
-    if(self.archetype === # "zombie_dog") {
+    if(self.archetype === #"zombie_dog") {
       return;
     }
 

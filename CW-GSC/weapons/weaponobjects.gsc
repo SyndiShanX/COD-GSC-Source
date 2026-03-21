@@ -74,11 +74,11 @@ function start_gametype() {
   }
 
   level.weaponobjectexplodethisframe = 0;
-  level._equipment_spark_fx = # "hash_28e1ed61483962d0";
-  level._equipment_fizzleout_fx = # "hash_565dc21878e3cfbe";
-  level._equipment_emp_destroy_fx = # "hash_4a466a3be8d20fe9";
-  level._equipment_explode_fx = # "hash_4a466a3be8d20fe9";
-  level._equipment_explode_fx_lg = # "hash_4a466a3be8d20fe9";
+  level._equipment_spark_fx = #"hash_28e1ed61483962d0";
+  level._equipment_fizzleout_fx = #"hash_565dc21878e3cfbe";
+  level._equipment_emp_destroy_fx = #"hash_4a466a3be8d20fe9";
+  level._equipment_explode_fx = #"hash_4a466a3be8d20fe9";
+  level._equipment_explode_fx_lg = #"hash_4a466a3be8d20fe9";
   level.weaponobjects_hacker_trigger_width = 32;
   level.weaponobjects_hacker_trigger_height = 32;
   function_db765b94();
@@ -1124,7 +1124,7 @@ function proximityalarmloop(watcher, owner) {
         owner = entity.owner;
       }
 
-      if(entity.team == # "spectator") {
+      if(entity.team == #"spectator") {
         continue;
       }
 
@@ -2398,7 +2398,7 @@ function function_23b0aea9(watcher, player) {
     return;
   }
 
-  if(player.pers[#"team"] == # "spectator") {
+  if(player.pers[#"team"] == #"spectator") {
     return;
   }
 

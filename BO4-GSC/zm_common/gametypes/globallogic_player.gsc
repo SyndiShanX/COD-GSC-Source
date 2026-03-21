@@ -380,9 +380,9 @@ function_7314957c(player, result) {
   lpselfnum = player getentitynumber();
   lpxuid = player getxuid(1);
   bb::function_e0dfa262(player.name, lpselfnum, lpxuid);
-  primaryweaponname = # "";
+  primaryweaponname = #"";
   primaryweaponattachstr = "";
-  secondaryweaponname = # "";
+  secondaryweaponname = #"";
   secondaryweaponattachstr = "";
 
   if(isDefined(player.primaryloadoutweapon)) {
@@ -398,9 +398,9 @@ function_7314957c(player, result) {
   resultstr = result;
 
   if(isDefined(player.team) && result == player.team) {
-    resultstr = # "win";
-  } else if(result == # "allies" || result == # "axis") {
-    resultstr = # "lose";
+    resultstr = #"win";
+  } else if(result == #"allies" || result == #"axis") {
+    resultstr = #"lose";
   }
 
   timeplayed = game.timepassed / 1000;

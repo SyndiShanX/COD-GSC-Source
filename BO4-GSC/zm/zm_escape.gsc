@@ -111,11 +111,11 @@ event_handler[level_init] main(eventstruct) {
   zm_escape_util::init_clientfields();
   namespace_1063645::init_clientfields();
   namespace_b99141ed::init_clientfields();
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
   level.var_c1013f84 = 1;
   level._no_vending_machine_auto_collision = 1;
   level.default_start_location = "prison";
@@ -123,12 +123,12 @@ event_handler[level_init] main(eventstruct) {
   level.disableclassselection = 0;
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_escape_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_escape_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
-  level._effect[#"lght_marker"] = # "hash_2eb17822848d1484";
-  level._effect[#"lght_marker_flare"] = # "hash_4d4ecfd7d55314e9";
-  level._effect[#"poltergeist"] = # "hash_64ab8440e31c3057";
+  level._effect[#"lght_marker"] = #"hash_2eb17822848d1484";
+  level._effect[#"lght_marker_flare"] = #"hash_4d4ecfd7d55314e9";
+  level._effect[#"poltergeist"] = #"hash_64ab8440e31c3057";
   level.var_a9c40fde = &function_2d2f3503;
   level.var_1e480ea7 = &function_bcc6a9d8;
   namespace_b99141ed::init();
@@ -205,7 +205,7 @@ event_handler[level_init] main(eventstruct) {
   level thread function_30a6ae7c();
 
   if(zm_utility::is_trials()) {
-    level.var_22dfe858 = # "hash_5d69a47fd8c0e9e5";
+    level.var_22dfe858 = #"hash_5d69a47fd8c0e9e5";
   }
 }
 
@@ -566,7 +566,7 @@ function_ab7f70b9(str_location) {
   }
 
   if(isDefined(self.var_16735873) && self.var_16735873) {
-    str_display = # "hash_4499d5469a09785c";
+    str_display = #"hash_4499d5469a09785c";
     return str_display;
   }
 
@@ -576,130 +576,130 @@ function_ab7f70b9(str_location) {
 
   switch (str_zone) {
     case # "zone_model_industries":
-      str_display = # "hash_1a8cabe1cd38cf05";
+      str_display = #"hash_1a8cabe1cd38cf05";
       break;
     case # "zone_model_industries_upper":
-      str_display = # "hash_5d43e6a30d61f2c2";
+      str_display = #"hash_5d43e6a30d61f2c2";
       break;
     case # "zone_west_side_exterior_upper_05":
     case # "zone_west_side_exterior_upper_04":
     case # "zone_west_side_exterior_upper_02":
     case # "zone_west_side_exterior_upper":
-      str_display = # "hash_1bb116d35c69f7";
+      str_display = #"hash_1bb116d35c69f7";
       break;
     case # "zone_west_side_exterior_tunnel":
     case # "zone_new_industries_transverse_tunnel":
-      str_display = # "hash_3487be8c75233a0b";
+      str_display = #"hash_3487be8c75233a0b";
       break;
     case # "zone_west_side_exterior_lower":
     case # "zone_powerhouse":
-      str_display = # "hash_7806b6b51cd2aed2";
+      str_display = #"hash_7806b6b51cd2aed2";
       break;
     case # "zone_new_industries":
-      str_display = # "hash_786af67b8225aaf4";
+      str_display = #"hash_786af67b8225aaf4";
       break;
     case # "zone_catwalk_02":
     case # "zone_catwalk_01":
-      str_display = # "hash_7d83ea134c9fa0e";
+      str_display = #"hash_7d83ea134c9fa0e";
       break;
     case # "zone_catwalk_03":
     case # "zone_catwalk_04":
-      str_display = # "hash_5d3ed783f8450d92";
+      str_display = #"hash_5d3ed783f8450d92";
       break;
     case # "zone_cellblock_entrance":
-      str_display = # "hash_9b40009eaa83579";
+      str_display = #"hash_9b40009eaa83579";
       break;
     case # "zone_start":
-      str_display = # "hash_3f0a132a9ef3cd11";
+      str_display = #"hash_3f0a132a9ef3cd11";
       break;
     case # "zone_library":
-      str_display = # "hash_737ac11c81c21f4c";
+      str_display = #"hash_737ac11c81c21f4c";
       break;
     case # "zone_cellblock_east":
-      str_display = # "hash_6578f574dddfb02e";
+      str_display = #"hash_6578f574dddfb02e";
       break;
     case # "zone_cellblock_west":
-      str_display = # "hash_23dc7787e4d6b8b5";
+      str_display = #"hash_23dc7787e4d6b8b5";
       break;
     case # "zone_broadway_floor_2":
-      str_display = # "hash_6181016e2d71c94e";
+      str_display = #"hash_6181016e2d71c94e";
       break;
     case # "zone_cellblock_jail_1":
     case # "zone_cellblock_jail_3":
     case # "zone_cellblock_jail_4":
     case # "zone_cellblock_jail_2":
     case # "zone_cellblock_west_gondola":
-      str_display = # "hash_53208a43bb33987d";
+      str_display = #"hash_53208a43bb33987d";
       break;
     case # "zone_cellblock_west_gondola_dock":
-      str_display = # "hash_578cde50a0ed0829";
+      str_display = #"hash_578cde50a0ed0829";
       break;
     case # "zone_cellblock_west_barber":
     case # "zone_cellblock_west_warden":
-      str_display = # "hash_70fa5ff9f448bc96";
+      str_display = #"hash_70fa5ff9f448bc96";
       break;
     case # "zone_sally_port":
     case # "zone_sally_port_acid":
-      str_display = # "hash_68ef83a1a918a522";
+      str_display = #"hash_68ef83a1a918a522";
       break;
     case # "zone_administration":
-      str_display = # "hash_7b3972c143382703";
+      str_display = #"hash_7b3972c143382703";
       break;
     case # "zone_warden_office":
-      str_display = # "hash_4c183909b38ae649";
+      str_display = #"hash_4c183909b38ae649";
       break;
     case # "zone_warden_house_exterior":
-      str_display = # "hash_6ba6b293ed38ed6e";
+      str_display = #"hash_6ba6b293ed38ed6e";
       break;
     case # "zone_warden_house":
-      str_display = # "hash_3aafbefc77b80ce3";
+      str_display = #"hash_3aafbefc77b80ce3";
       break;
     case # "zone_warden_home":
-      str_display = # "hash_5da659405984efa3";
+      str_display = #"hash_5da659405984efa3";
       break;
     case # "zone_cafeteria":
     case # "zone_cafeteria_end":
-      str_display = # "hash_f76546edee4a6a1";
+      str_display = #"hash_f76546edee4a6a1";
       break;
     case # "zone_infirmary_roof":
     case # "zone_in_cr":
     case # "zone_infirmary":
-      str_display = # "hash_960d3edb9fefcec";
+      str_display = #"hash_960d3edb9fefcec";
       break;
     case # "zone_roof":
     case # "zone_roof_infirmary":
-      str_display = # "hash_676a058bfe70473";
+      str_display = #"hash_676a058bfe70473";
       break;
     case # "cellblock_shower":
-      str_display = # "hash_8a1754e2c346504";
+      str_display = #"hash_8a1754e2c346504";
       break;
     case # "zone_citadel":
     case # "zone_citadel_shower":
     case # "zone_citadel_warden":
-      str_display = # "hash_12fef669980586e7";
+      str_display = #"hash_12fef669980586e7";
       break;
     case # "zone_citadel_stairs":
     case # "zone_citadel_basement":
-      str_display = # "hash_408e00ed0c7af3b3";
+      str_display = #"hash_408e00ed0c7af3b3";
       break;
     case # "zone_citadel_basement_building":
-      str_display = # "hash_5e714183f1264faa";
+      str_display = #"hash_5e714183f1264faa";
       break;
     case # "zone_studio":
-      str_display = # "hash_68da319819d879ec";
+      str_display = #"hash_68da319819d879ec";
       break;
     case # "zone_dock":
-      str_display = # "hash_4213dc004145588f";
+      str_display = #"hash_4213dc004145588f";
       break;
     case # "zone_dock_gondola":
-      str_display = # "hash_3b3867cba3ae468a";
+      str_display = #"hash_3b3867cba3ae468a";
       break;
     case # "zone_gondola_ride":
-      str_display = # "hash_3be34a9bf8a7da9d";
+      str_display = #"hash_3be34a9bf8a7da9d";
       break;
     case # "zone_fast_travel_warden_house_to_shower":
     case # "zone_fast_travel_west_side_tunnel_to_cafeteria":
-      str_display = # "hash_4499d5469a09785c";
+      str_display = #"hash_4499d5469a09785c";
       break;
     default:
       str_display = undefined;

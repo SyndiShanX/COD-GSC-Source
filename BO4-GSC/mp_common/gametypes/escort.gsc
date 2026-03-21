@@ -590,7 +590,7 @@ function_dd7755c1() {
       foreach(var_318fa3a5 in var_628b766f) {
         barrierent = getentbynum(var_318fa3a5);
 
-        if(isDefined(barrierent) && isDefined(barrierent.weapon) && barrierent.weapon.name === # "ability_smart_cover") {
+        if(isDefined(barrierent) && isDefined(barrierent.weapon) && barrierent.weapon.name === #"ability_smart_cover") {
           animrate -= 0.3;
           break;
         }
@@ -771,23 +771,23 @@ robot_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpo
     self shutdown_robot();
 
     if(isDefined(eattacker) && eattacker != self && isDefined(weapon)) {
-      if(weapon.statname == # "planemortar") {
+      if(weapon.statname == #"planemortar") {
         if(!isDefined(eattacker.planemortarbda)) {
           eattacker.planemortarbda = 0;
         }
 
         eattacker.planemortarbda++;
-      } else if(weapon.statname == # "dart" || weapon.name == # "dart_turret") {
+      } else if(weapon.statname == #"dart" || weapon.name == #"dart_turret") {
         if(!isDefined(eattacker.dartbda)) {
           eattacker.dartbda = 0;
         }
 
         eattacker.dartbda++;
-      } else if(weapon.name == # "straferun_rockets" || weapon.name == # "straferun_gun") {
+      } else if(weapon.name == #"straferun_rockets" || weapon.name == #"straferun_gun") {
         if(isDefined(eattacker.straferunbda)) {
           eattacker.straferunbda++;
         }
-      } else if(weapon.statname == # "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
+      } else if(weapon.statname == #"remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
         if(!isDefined(eattacker.remotemissilebda)) {
           eattacker.remotemissilebda = 0;
         }
@@ -1584,7 +1584,7 @@ kill_anything_blocking_goal(goal) {
       return 1;
     }
 
-    if(isvehicle(entity) && (!isDefined(entity.team) || entity.team != # "neutral")) {
+    if(isvehicle(entity) && (!isDefined(entity.team) || entity.team != #"neutral")) {
       if(!(isDefined(entity.magic_bullet_shield) && entity.magic_bullet_shield)) {
         entity kill();
       }
@@ -1592,12 +1592,12 @@ kill_anything_blocking_goal(goal) {
       return 1;
     }
 
-    if(entity.team === self.team && entity.item.name === # "ability_smart_cover") {
+    if(entity.team === self.team && entity.item.name === #"ability_smart_cover") {
       entity smart_cover::function_2a494565(0);
       return 1;
     }
 
-    if(entity.team === self.team && entity.item.name === # "eq_concertina_wire") {
+    if(entity.team === self.team && entity.item.name === #"eq_concertina_wire") {
       entity concertina_wire::function_4ee7d46a(0);
       return 1;
     }

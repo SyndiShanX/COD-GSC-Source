@@ -102,10 +102,10 @@ function function_1eb1d4d6(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function canister_shockwave(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.model === # "p9_zm_platinum_magic_box_bunny") {
-    str_fx = # "hash_138a5318ce27c2ca";
+  if(self.model === #"p9_zm_platinum_magic_box_bunny") {
+    str_fx = #"hash_138a5318ce27c2ca";
   } else {
-    str_fx = # "zombie/fx9_player_shockwave_retrieval";
+    str_fx = #"zombie/fx9_player_shockwave_retrieval";
   }
 
   playFX(bwastimejump, str_fx, self.origin, (180, 0, 0));
@@ -124,7 +124,7 @@ function function_d3af9ddb(localclientnum, oldval, newval, bnewent, binitialsnap
     if(self isPlayer()) {
       self.var_726a59ef = playfxoncamera(fieldname, "sr/fx9_camera_canister_in_hand", (0, 0, 0), (1, 0, 0), (0, 0, 1));
       self postfx::playpostfxbundle(#"pstfx_retrieve");
-      self.var_51dd9721 = # "pstfx_retrieve";
+      self.var_51dd9721 = #"pstfx_retrieve";
       self function_116b95e5(#"pstfx_retrieve", #"inner mask", 0.3);
       self function_116b95e5(#"pstfx_retrieve", #"outer mask", 0.8);
 

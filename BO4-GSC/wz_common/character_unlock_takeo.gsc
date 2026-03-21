@@ -88,7 +88,7 @@ function_d5cd583a(activator, laststate, state) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu18_item") {
+  if(itementry.name === #"cu18_item") {
     if(self character_unlock::function_f0406288(#"takeo_unlock")) {
       self function_895b40e4();
       self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5eb94fb75cbed", 1);
@@ -113,7 +113,7 @@ on_item_use(params) {
 
   item = params.item;
 
-  if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
+  if(isDefined(item.itementry) && item.itementry.itemtype === #"equipment") {
     if(self character_unlock::function_c70bcc7a(#"takeo_unlock")) {
       self character_unlock::function_c8beca5e(#"takeo_unlock", #"hash_56b5eb94fb75cbed", 2);
       self.var_979273e3 = 1;

@@ -36,7 +36,7 @@ function private on_begin() {
   }
 
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = # "hash_24a438482954901";
+  str_text = #"hash_24a438482954901";
 
   foreach(t_trap in a_t_traps) {
     if(!is_true(t_trap._trap_in_use) && is_true(t_trap.var_b3166dc1)) {
@@ -47,7 +47,7 @@ function private on_begin() {
   a_ai = getaiteamarray(level.zombie_team);
 
   foreach(ai in a_ai) {
-    if(isalive(ai) && (ai.zm_ai_category === # "elite" || ai.zm_ai_category === # "special")) {
+    if(isalive(ai) && (ai.zm_ai_category === #"elite" || ai.zm_ai_category === #"special")) {
       ai.takedamage = 1;
       ai.allowdeath = 1;
       ai kill();
@@ -72,7 +72,7 @@ function private on_end(round_reset) {
   }
 
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = # "hash_23c1c09e94181fdb";
+  str_text = #"hash_23c1c09e94181fdb";
 
   foreach(t_trap in a_t_traps) {
     if(!is_true(t_trap._trap_in_use) && is_true(t_trap.var_b3166dc1)) {

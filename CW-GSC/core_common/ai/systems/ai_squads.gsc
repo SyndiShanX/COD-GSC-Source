@@ -62,7 +62,7 @@ class aisquad {
 
   function addaitosquad(ai) {
     if(!isinarray(squadmembers, ai)) {
-      if(ai.archetype == # "robot") {
+      if(ai.archetype == #"robot") {
         ai ai::set_behavior_attribute("move_mode", "squadmember");
       }
 

@@ -309,11 +309,11 @@ function_3ce1516d(a_s_spawn_locs) {
 }
 
 alloc_dynamic_buffer(origin, radius, half_height) {
-  assert(self.archetype === # "skeleton", "<dev string:x38>");
+  assert(self.archetype === #"skeleton", "<dev string:x38>");
   self.var_dbbbae12 = ai::t_cylinder(origin, radius, half_height);
 }
 
 function_9ac81c11() {
-  assert(self.archetype === # "skeleton", "<dev string:x77>");
+  assert(self.archetype === #"skeleton", "<dev string:x77>");
   self.var_dbbbae12 = undefined;
 }

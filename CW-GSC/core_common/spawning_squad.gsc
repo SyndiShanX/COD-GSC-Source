@@ -1198,7 +1198,7 @@ function function_9e0c4479() {
 }
 
 function on_player_connect() {
-  if(level.var_d2f7a339 && self.team != # "spectator") {
+  if(level.var_d2f7a339 && self.team != #"spectator") {
     self spectate_view::function_86df9236();
     return;
   }

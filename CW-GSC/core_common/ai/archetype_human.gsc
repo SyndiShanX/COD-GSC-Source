@@ -292,7 +292,7 @@ function damageoverride(einflictor, eattacker, idamage, idflags, smeansofdeath, 
     idamage = entity.health;
   }
 
-  if(weapon.name == # "hash_165cf52ce418f5a1") {
+  if(weapon.name == #"hash_165cf52ce418f5a1") {
     self.var_ec422675 = "light";
   }
 
@@ -655,7 +655,7 @@ function private function_4e71bfb4(entity) {
 }
 
 function function_f27f3a91() {
-  if(self.damageweapon.name == # "hash_165cf52ce418f5a1") {
+  if(self.damageweapon.name == #"hash_165cf52ce418f5a1") {
     return "bow";
   }
 

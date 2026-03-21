@@ -139,7 +139,7 @@ function scoreeventzm(params) {
   if(isDefined(params.scoreevent) && zm_utility::is_player_valid(params.attacker, 0, 0)) {
     processscoreevent(params.scoreevent, params.attacker, params.enemy, params.weapon);
 
-    if(params.scoreevent === # "avogadro_projectile_destroyed_zm") {
+    if(params.scoreevent === #"avogadro_projectile_destroyed_zm") {
       params.attacker zm_stats::increment_challenge_stat(#"hash_2fa65e71a6411a7a");
     }
 
@@ -155,9 +155,9 @@ function scoreeventzm(params) {
 
 function function_a1f450c2(event, attacker, enemy, weapon) {
   if(zm_utility::is_player_valid(attacker, 0, 0)) {
-    if(enemy.zm_ai_category === # "elite") {
+    if(enemy.zm_ai_category === #"elite") {
       processscoreevent(event + "_elite_zm", attacker, enemy, weapon);
-    } else if(enemy.zm_ai_category === # "special") {
+    } else if(enemy.zm_ai_category === #"special") {
       processscoreevent(event + "_special_zm", attacker, enemy, weapon);
     } else {
       processscoreevent(event + "_zm", attacker, enemy, weapon);
@@ -265,11 +265,11 @@ function function_970a97b2(params) {
 
   if(zm_utility::is_player_valid(params.eattacker, 0, 0)) {
     if(params.eattacker.var_d853c1af !== 1) {
-      if(var_a0345f37.zm_ai_category === # "special") {
+      if(var_a0345f37.zm_ai_category === #"special") {
         function_644d867a(params.eattacker, params.time, #"hash_4efbe7fdd1c5873d", params.weapon);
-      } else if(var_a0345f37.zm_ai_category === # "elite") {
+      } else if(var_a0345f37.zm_ai_category === #"elite") {
         function_644d867a(params.eattacker, params.time, #"hash_2bdba8dd04a772a9", params.weapon);
-      } else if(var_a0345f37.zm_ai_category === # "boss") {
+      } else if(var_a0345f37.zm_ai_category === #"boss") {
         function_644d867a(params.eattacker, params.time, #"hash_7d61681b4a86f9c1", params.weapon);
       } else {
         function_8fb658e2(params);
@@ -283,9 +283,9 @@ function function_970a97b2(params) {
     }
 
     if(is_true(var_a0345f37.var_81651e9f)) {
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         processscoreevent("phd_slider_kill_elite_zm", params.eattacker, var_a0345f37, level.weaponnone, undefined, params);
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("phd_slider_kill_special_zm", params.eattacker, var_a0345f37, level.weaponnone, undefined, params);
       } else {
         processscoreevent("phd_slider_kill_zm", params.eattacker, var_a0345f37, level.weaponnone, undefined, params);
@@ -306,9 +306,9 @@ function function_970a97b2(params) {
           params.eattacker stats::function_d0de7686(#"hash_36199b2fd0602c5d", 1, #"hash_79710ef1b5aafb5e");
         }
 
-        if(var_a0345f37.zm_ai_category === # "elite") {
+        if(var_a0345f37.zm_ai_category === #"elite") {
           processscoreevent("longshot_killingblow_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-        } else if(var_a0345f37.zm_ai_category === # "special") {
+        } else if(var_a0345f37.zm_ai_category === #"special") {
           processscoreevent("longshot_killingblow_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         } else {
           processscoreevent("longshot_killingblow_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -317,10 +317,10 @@ function function_970a97b2(params) {
     }
 
     if(is_true(var_a0345f37.var_379bc25d)) {
-      if(params.smeansofdeath != "MOD_UNKNOWN" && params.weapon.name !== # "hash_6a4dd5ed56f6e3f6") {
-        if(var_a0345f37.zm_ai_category === # "elite") {
+      if(params.smeansofdeath != "MOD_UNKNOWN" && params.weapon.name !== #"hash_6a4dd5ed56f6e3f6") {
+        if(var_a0345f37.zm_ai_category === #"elite") {
           processscoreevent("lt53_kazimir_grav_pull_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-        } else if(var_a0345f37.zm_ai_category === # "special") {
+        } else if(var_a0345f37.zm_ai_category === #"special") {
           processscoreevent("lt53_kazimir_grav_pull_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
 
           if(var_947d01ee === "ar") {
@@ -337,9 +337,9 @@ function function_970a97b2(params) {
         if(var_a0345f37.var_5f6261a5 === params.eattacker) {
           params.eattacker stats::function_622feb0d(#"lightning_links", #"kills", 1);
 
-          if(var_a0345f37.zm_ai_category === # "elite") {
+          if(var_a0345f37.zm_ai_category === #"elite") {
             processscoreevent("tesla_storm_finisher_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-          } else if(var_a0345f37.zm_ai_category === # "special") {
+          } else if(var_a0345f37.zm_ai_category === #"special") {
             processscoreevent("tesla_storm_finisher_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
           } else {
             processscoreevent("tesla_storm_finisher_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -370,9 +370,9 @@ function function_970a97b2(params) {
         if(var_a0345f37.var_9258f88f === params.eattacker) {
           params.eattacker stats::function_622feb0d(#"toxic_growth", #"kills", 1);
 
-          if(var_a0345f37.zm_ai_category === # "elite") {
+          if(var_a0345f37.zm_ai_category === #"elite") {
             processscoreevent("toxic_growth_finisher_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-          } else if(var_a0345f37.zm_ai_category === # "special") {
+          } else if(var_a0345f37.zm_ai_category === #"special") {
             processscoreevent("toxic_growth_finisher_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
           } else {
             processscoreevent("toxic_growth_finisher_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -400,9 +400,9 @@ function function_970a97b2(params) {
           params.eattacker.var_4d3653eb++;
         }
 
-        if(var_a0345f37.zm_ai_category === # "elite") {
+        if(var_a0345f37.zm_ai_category === #"elite") {
           processscoreevent("frenzied_guard_elite_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-        } else if(var_a0345f37.zm_ai_category === # "special") {
+        } else if(var_a0345f37.zm_ai_category === #"special") {
           processscoreevent("frenzied_guard_special_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         } else {
           processscoreevent("frenzied_guard_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -433,9 +433,9 @@ function function_970a97b2(params) {
         params.eattacker.var_edae10c++;
       }
 
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         processscoreevent("aether_shroud_kill_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("aether_shroud_kill_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
       } else {
         processscoreevent("aether_shroud_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -460,19 +460,19 @@ function function_970a97b2(params) {
       params.eattacker.var_edae10c = undefined;
     }
 
-    if(var_a0345f37.archetype === # "abom" && is_true(var_a0345f37.var_2bd7ca9d)) {
+    if(var_a0345f37.archetype === #"abom" && is_true(var_a0345f37.var_2bd7ca9d)) {
       processscoreevent("abomination_kill_while_stunned_from_charge_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
     }
 
     if(isDefined(params.var_a3660fca) || is_true(var_a0345f37.var_f42aed2a)) {
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         processscoreevent("brain_rot_turned_kill_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("brain_rot_turned_kill_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
 
-        if(var_a0345f37.archetype === # "raz") {
+        if(var_a0345f37.archetype === #"raz") {
           params.eattacker zm_stats::increment_challenge_stat(#"hash_3eed494910a05bbc");
         }
       } else {
@@ -480,7 +480,7 @@ function function_970a97b2(params) {
         params.eattacker.var_9c448324 = 1;
       }
 
-      if(params.einflictor.archetype === # "soa") {
+      if(params.einflictor.archetype === #"soa") {
         params.eattacker zm_stats::function_7ec42fbf(#"hash_7c2104436691d80d");
         params.eattacker zm_stats::increment_challenge_stat(#"hash_5698f14f777a2bf5");
       }
@@ -491,8 +491,8 @@ function function_970a97b2(params) {
     if(isDefined(var_a0345f37.var_3f87fe17)) {
       if(var_a0345f37.var_3f87fe17.stun_time > gettime() - 2.5 * 1000) {
         if(var_a0345f37.var_3f87fe17.player === params.eattacker) {
-          if(var_a0345f37.zm_ai_category === # "elite") {} else if(var_a0345f37.zm_ai_category === # "special") {}
-        } else if(var_a0345f37.zm_ai_category === # "elite" && var_a0345f37.zm_ai_category === # "special") {
+          if(var_a0345f37.zm_ai_category === #"elite") {} else if(var_a0345f37.zm_ai_category === #"special") {}
+        } else if(var_a0345f37.zm_ai_category === #"elite" && var_a0345f37.zm_ai_category === #"special") {
           processscoreevent("healing_aura_stun_assist_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         }
       } else {
@@ -505,23 +505,23 @@ function function_970a97b2(params) {
         params.eattacker zm_challenges::function_d6b32ad3(params.weapon, #"meleecombo", 1);
       }
 
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         processscoreevent("melee_killingblow_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("melee_killingblow_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
       } else {
         processscoreevent("melee_killingblow_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
       }
-    } else if(var_a0345f37.var_d3ed3a9b && params.weapon.name !== # "gun_ultimate_turret" && params.weapon.name !== # "hatchet" && !killstreaks::is_killstreak_weapon(params.weapon)) {
+    } else if(var_a0345f37.var_d3ed3a9b && params.weapon.name !== #"gun_ultimate_turret" && params.weapon.name !== #"hatchet" && !killstreaks::is_killstreak_weapon(params.weapon)) {
       params.var_3fb48d9c = 1;
 
-      if(var_a0345f37.zm_ai_category === # "elite" && !isDefined(params.enemy.var_e293f8ac)) {
+      if(var_a0345f37.zm_ai_category === #"elite" && !isDefined(params.enemy.var_e293f8ac)) {
         processscoreevent("headshot_killingblow_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("headshot_killingblow_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         params.eattacker.var_9c448324 = 1;
       } else {
@@ -554,9 +554,9 @@ function function_970a97b2(params) {
       params.eattacker.var_9c448324 = 1;
       scoreevent = undefined;
 
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         scoreevent = event_struct.var_9b275351;
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         scoreevent = event_struct.special_event;
       }
 
@@ -577,7 +577,7 @@ function function_970a97b2(params) {
         case # "ww_ieu_acid_t9":
         case # "ww_ieu_gas_t9":
         case # "ww_ieu_plasma_t9":
-          if(is_true(params.enemy.var_49fdad6a) && params.enemy.zm_ai_category === # "elite" && (!isDefined(var_a0345f37.var_e293f8ac) || isDefined(var_a0345f37.var_e293f8ac) && var_a0345f37.var_e293f8ac.size === 0)) {
+          if(is_true(params.enemy.var_49fdad6a) && params.enemy.zm_ai_category === #"elite" && (!isDefined(var_a0345f37.var_e293f8ac) || isDefined(var_a0345f37.var_e293f8ac) && var_a0345f37.var_e293f8ac.size === 0)) {
             params.eattacker zm_stats::increment_challenge_stat(#"hash_3969fa6c05de12ef");
             processscoreevent("kill_steiner_caught_with_ieu_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
             params.eattacker.var_9c448324 = 1;
@@ -590,9 +590,9 @@ function function_970a97b2(params) {
 
   if(var_a0345f37.var_d1b39105 === 1 && zm_utility::is_player_valid(var_a0345f37.var_9c33fa32, 0, 0)) {
     if(params.eattacker === var_a0345f37.var_9c33fa32) {
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         processscoreevent("dead_wire_stun_kill_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("dead_wire_stun_kill_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
       } else {
         processscoreevent("dead_wire_stun_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -606,9 +606,9 @@ function function_970a97b2(params) {
     }
   } else if(var_a0345f37.var_fc304017 === 1 && zm_utility::is_player_valid(params.eattacker, 0, 0)) {
     if(params.eattacker === var_a0345f37.var_9c33fa32) {
-      if(var_a0345f37.zm_ai_category === # "elite") {
+      if(var_a0345f37.zm_ai_category === #"elite") {
         processscoreevent("dead_wire_stun_kill_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-      } else if(var_a0345f37.zm_ai_category === # "special") {
+      } else if(var_a0345f37.zm_ai_category === #"special") {
         processscoreevent("dead_wire_stun_kill_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
       } else {
         processscoreevent("dead_wire_stun_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -632,9 +632,9 @@ function function_970a97b2(params) {
             params.eattacker stats::function_622feb0d(#"ring_of_fire", #"ekia", 1);
             params.eattacker stats::function_6fb0b113(#"ring_of_fire", #"best_ekia");
 
-            if(var_a0345f37.zm_ai_category === # "elite") {
+            if(var_a0345f37.zm_ai_category === #"elite") {
               processscoreevent("ring_of_fire_finisher_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-            } else if(var_a0345f37.zm_ai_category === # "special") {
+            } else if(var_a0345f37.zm_ai_category === #"special") {
               processscoreevent("ring_of_fire_finisher_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
             } else {
               processscoreevent("ring_of_fire_finisher_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -659,9 +659,9 @@ function function_970a97b2(params) {
 
     if(zm_utility::is_player_valid(var_a0345f37.var_e5d5f66e, 0, 0) && !is_true(var_a0345f37.var_aa2ce9a4)) {
       if(params.eattacker === var_a0345f37.var_e5d5f66e) {
-        if(var_a0345f37.zm_ai_category === # "elite") {
+        if(var_a0345f37.zm_ai_category === #"elite") {
           processscoreevent("cryo_freeze_slow_kill_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-        } else if(var_a0345f37.zm_ai_category === # "special") {
+        } else if(var_a0345f37.zm_ai_category === #"special") {
           processscoreevent("cryo_freeze_slow_kill_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         } else {
           processscoreevent("cryo_freeze_slow_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -671,9 +671,9 @@ function function_970a97b2(params) {
       }
     } else if(zm_utility::is_player_valid(var_a0345f37.var_991315b5, 0, 0)) {
       if(params.eattacker === var_a0345f37.var_991315b5) {
-        if(var_a0345f37.zm_ai_category === # "elite") {
+        if(var_a0345f37.zm_ai_category === #"elite") {
           processscoreevent("frost_blast_frozen_kill_elite_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-        } else if(var_a0345f37.zm_ai_category === # "special") {
+        } else if(var_a0345f37.zm_ai_category === #"special") {
           processscoreevent("frost_blast_frozen_kill_special_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
         } else {
           processscoreevent("frost_blast_frozen_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -709,9 +709,9 @@ function function_970a97b2(params) {
 
             params.enemy.enemy_override.owner stats::function_622feb0d(#"nightingale", #"kills", 1);
 
-            if(params.enemy.zm_ai_category === # "elite") {
+            if(params.enemy.zm_ai_category === #"elite") {
               processscoreevent("nightengale_elite_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
-            } else if(params.enemy.zm_ai_category === # "special") {
+            } else if(params.enemy.zm_ai_category === #"special") {
               processscoreevent("nightengale_special_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
             } else {
               processscoreevent("nightengale_kill_zm", params.eattacker, var_a0345f37, params.weapon, undefined, params);
@@ -765,9 +765,9 @@ function function_970a97b2(params) {
 }
 
 function function_841e454b(var_f6537fa9, enemy, weapon, params) {
-  if(enemy.zm_ai_category === # "elite") {
+  if(enemy.zm_ai_category === #"elite") {
     scoreevent = var_f6537fa9 + "_elite_zm";
-  } else if(enemy.zm_ai_category === # "special") {
+  } else if(enemy.zm_ai_category === #"special") {
     scoreevent = var_f6537fa9 + "_special_zm";
   } else {
     scoreevent = var_f6537fa9 + "_zm";
@@ -793,11 +793,11 @@ function function_82234b38(victim, attacker, weapon, meansofdeath, var_a3660fca,
       var_569e4e47 = 1;
     }
 
-    if(zm_weapons::is_wonder_weapon(weapon) || weapon.statname === # "ray_gun") {
+    if(zm_weapons::is_wonder_weapon(weapon) || weapon.statname === #"ray_gun") {
       victim.var_c2dcab66[attacker getentitynumber()] = {
         #player: attacker, #time: gettime(), #weapon: weapon, #signature_weapon: 1, #var_569e4e47: var_569e4e47
       };
-    } else if(weapon.name === # "eq_sticky_grenade" || weapon.name === # "satchel_charge" || weapon.name === # "frag_grenade" || weapon.name === # "cymbal_monkey" || weapon.name === # "molotov_fire" || weapon.name === # "concussion_grenade" || weapon.name === # "hatchet") {
+    } else if(weapon.name === #"eq_sticky_grenade" || weapon.name === #"satchel_charge" || weapon.name === #"frag_grenade" || weapon.name === #"cymbal_monkey" || weapon.name === #"molotov_fire" || weapon.name === #"concussion_grenade" || weapon.name === #"hatchet") {
       victim.var_c2dcab66[attacker getentitynumber()] = {
         #player: attacker, #time: gettime(), #weapon: weapon, #var_b8fea68d: 1, #var_569e4e47: var_569e4e47
       };
@@ -808,7 +808,7 @@ function function_82234b38(victim, attacker, weapon, meansofdeath, var_a3660fca,
     }
   }
 
-  if(weapon.name === # "eq_slow_grenade" && meansofdeath !== "MOD_IMPACT" && !(victim.zm_ai_category === # "boss")) {
+  if(weapon.name === #"eq_slow_grenade" && meansofdeath !== "MOD_IMPACT" && !(victim.zm_ai_category === #"boss")) {
     processscoreevent("concussion_grenade_concussed_enemy_zm", attacker, victim, weapon);
     attacker contracts::increment_zm_contract(#"hash_51d4ecc2bd44fb2b");
   }
@@ -881,10 +881,10 @@ function function_f2ce8b86(params) {
           var_a5165f0e = veh getoccupantseat(var_c2dcab66.player);
 
           if(isDefined(veh.var_260e3593) && var_a5165f0e === veh.var_260e3593) {
-            if(params.enemy.zm_ai_category === # "elite") {
+            if(params.enemy.zm_ai_category === #"elite") {
               processscoreevent("driver_kia_elite_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
               var_c2dcab66.player.var_9c448324 = 1;
-            } else if(params.enemy.zm_ai_category === # "special") {
+            } else if(params.enemy.zm_ai_category === #"special") {
               processscoreevent("driver_kia_special_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
               var_c2dcab66.player.var_9c448324 = 1;
             } else {
@@ -894,10 +894,10 @@ function function_f2ce8b86(params) {
           } else {
             switch (var_a5165f0e) {
               case 0:
-                if(params.enemy.zm_ai_category === # "elite") {
+                if(params.enemy.zm_ai_category === #"elite") {
                   processscoreevent("driver_kia_elite_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
                   var_c2dcab66.player.var_9c448324 = 1;
-                } else if(params.enemy.zm_ai_category === # "special") {
+                } else if(params.enemy.zm_ai_category === #"special") {
                   processscoreevent("driver_kia_special_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
                   var_c2dcab66.player.var_9c448324 = 1;
                 } else {
@@ -910,11 +910,11 @@ function function_f2ce8b86(params) {
               case 2:
               case 3:
               case 4:
-                if(var_c2dcab66.weapon.statname !== # "chopper_gunner") {
-                  if(params.enemy.zm_ai_category === # "elite") {
+                if(var_c2dcab66.weapon.statname !== #"chopper_gunner") {
+                  if(params.enemy.zm_ai_category === #"elite") {
                     processscoreevent("gunner_kia_elite_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
                     var_c2dcab66.player.var_9c448324 = 1;
-                  } else if(params.enemy.zm_ai_category === # "special") {
+                  } else if(params.enemy.zm_ai_category === #"special") {
                     processscoreevent("gunner_kia_special_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
                     var_c2dcab66.player.var_9c448324 = 1;
                   } else {
@@ -930,10 +930,10 @@ function function_f2ce8b86(params) {
               case 8:
               case 9:
               case 10:
-                if(params.enemy.zm_ai_category === # "elite") {
+                if(params.enemy.zm_ai_category === #"elite") {
                   processscoreevent("freelance_kia_elite_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
                   var_c2dcab66.player.var_9c448324 = 1;
-                } else if(params.enemy.zm_ai_category === # "special") {
+                } else if(params.enemy.zm_ai_category === #"special") {
                   processscoreevent("freelance_kia_special_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
                   var_c2dcab66.player.var_9c448324 = 1;
                 } else {
@@ -980,7 +980,7 @@ function function_f2ce8b86(params) {
               break;
           }
 
-          if(var_c2dcab66.einflictor.item.name === # "gun_ultimate_turret" && var_c2dcab66.einflictor.owner !== params.eattacker) {
+          if(var_c2dcab66.einflictor.item.name === #"gun_ultimate_turret" && var_c2dcab66.einflictor.owner !== params.eattacker) {
             if(zm_utility::is_player_valid(var_c2dcab66.einflictor.owner, 0, 0)) {
               processscoreevent("sentry_turret_assist_zm", var_c2dcab66.einflictor.owner, params.enemy, var_c2dcab66.weapon);
               var_c2dcab66.einflictor.owner.var_9c448324 = 1;
@@ -1028,7 +1028,7 @@ function function_f2ce8b86(params) {
                 processscoreevent("kill_both_steiner_halves_rapidly_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
               }
 
-              if(var_c2dcab66.player === params.eattacker && var_c2dcab66.weapon.name === # "satchel_charge") {
+              if(var_c2dcab66.player === params.eattacker && var_c2dcab66.weapon.name === #"satchel_charge") {
                 params.eattacker zm_stats::increment_challenge_stat(#"hash_1a8c582d9511cea8");
               }
 
@@ -1048,7 +1048,7 @@ function function_f2ce8b86(params) {
               processscoreevent("kill_both_steiner_halves_rapidly_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
             }
 
-            if(var_c2dcab66.player === params.eattacker && var_c2dcab66.weapon.name === # "satchel_charge") {
+            if(var_c2dcab66.player === params.eattacker && var_c2dcab66.weapon.name === #"satchel_charge") {
               params.eattacker zm_stats::increment_challenge_stat(#"hash_1a8c582d9511cea8");
             }
 
@@ -1057,15 +1057,15 @@ function function_f2ce8b86(params) {
           }
         }
 
-        if(params.enemy.archetype === # "avogadro" && gettime() - (isDefined(params.enemy.var_7fde19e8) ? params.enemy.var_7fde19e8 : 0) <= 2000) {
+        if(params.enemy.archetype === #"avogadro" && gettime() - (isDefined(params.enemy.var_7fde19e8) ? params.enemy.var_7fde19e8 : 0) <= 2000) {
           processscoreevent("avogadro_teleport_kia_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
         }
 
-        if(!isDefined(params.enemy.var_9624a42c) && params.enemy.archetype === # "mimic") {
+        if(!isDefined(params.enemy.var_9624a42c) && params.enemy.archetype === #"mimic") {
           processscoreevent("mimic_killed_without_getting_hit_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
         }
 
-        if((params.enemy.zm_ai_category === # "elite" || params.enemy.zm_ai_category === # "special") && isDefined(var_c2dcab66.weapon) && (!isDefined(params.enemy.var_e293f8ac) || isDefined(params.enemy.var_e293f8ac) && params.enemy.var_e293f8ac.size === 0)) {
+        if((params.enemy.zm_ai_category === #"elite" || params.enemy.zm_ai_category === #"special") && isDefined(var_c2dcab66.weapon) && (!isDefined(params.enemy.var_e293f8ac) || isDefined(params.enemy.var_e293f8ac) && params.enemy.var_e293f8ac.size === 0)) {
           var_c2dcab66.player zm_challenges::function_d6b32ad3(var_c2dcab66.weapon, #"eliteeliminations", 1);
         }
 
@@ -1122,17 +1122,17 @@ function function_4ffff5df(attacker, weapon, var_9c448324, enemy) {
       }
     }
 
-    if(weapon.name === # "molotov_fire") {
+    if(weapon.name === #"molotov_fire") {
       processscoreevent("molotov_assist_zm", attacker, enemy);
       return;
     }
 
-    if(weapon.name === # "eq_slow_grenade") {
+    if(weapon.name === #"eq_slow_grenade") {
       processscoreevent("concussion_grenade_assist_zm", attacker, enemy);
       return;
     }
 
-    if(weapon.name === # "hash_6a4dd5ed56f6e3f6") {
+    if(weapon.name === #"hash_6a4dd5ed56f6e3f6") {
       processscoreevent("lt53_kazimir_assist_zm", attacker, enemy);
     }
   }
@@ -1208,7 +1208,7 @@ function updatemultikill(params) {
   if(zm_utility::is_player_valid(params.eattacker, 0, 0)) {
     var_1c91bc3c = 0;
 
-    if(!killstreaks::is_killstreak_weapon(params.weapon) && is_true(params.enemy zm_utility::function_4562a3ef(params.enemy.damagelocation)) && (params.smeansofdeath === "MOD_PISTOL_BULLET" || params.smeansofdeath === "MOD_RIFLE_BULLET" || (params.weapon.statname === # "special_crossbow_t9" || params.weapon.statname === # "special_nailgun_t9") && (params.smeansofdeath === "MOD_PROJECTILE" || params.smeansofdeath === "MOD_IMPACT"))) {
+    if(!killstreaks::is_killstreak_weapon(params.weapon) && is_true(params.enemy zm_utility::function_4562a3ef(params.enemy.damagelocation)) && (params.smeansofdeath === "MOD_PISTOL_BULLET" || params.smeansofdeath === "MOD_RIFLE_BULLET" || (params.weapon.statname === #"special_crossbow_t9" || params.weapon.statname === #"special_nailgun_t9") && (params.smeansofdeath === "MOD_PROJECTILE" || params.smeansofdeath === "MOD_IMPACT"))) {
       var_1c91bc3c = 1;
     }
 
@@ -1264,7 +1264,7 @@ function updatemultikill(params) {
           }
         }
 
-        if(params.weapon.statname === # "ray_gun") {
+        if(params.weapon.statname === #"ray_gun") {
           params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_5524bc59++;
 
           if(params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_5524bc59 === 5) {
@@ -1298,27 +1298,27 @@ function updatemultikill(params) {
                 #scoreevent: "multikillstreak_5_zm"});
               params.eattacker zm_stats::function_17ee4529(#"hash_5a96ee436e73190", 1, #"hash_6abe83944d701459");
 
-              if(params.weapon.statname === # "ar_mobility_t9" || params.weapon.statname === # "smg_handling_t9") {
+              if(params.weapon.statname === #"ar_mobility_t9" || params.weapon.statname === #"smg_handling_t9") {
                 params.eattacker zm_stats::function_fbce465a(#"hash_76bf58f08a08d598");
               }
 
-              if(params.weapon.statname === # "ar_damage_t9" || params.weapon.statname === # "smg_burst_t9" || params.weapon.statname === # "shotgun_pump_t9") {
+              if(params.weapon.statname === #"ar_damage_t9" || params.weapon.statname === #"smg_burst_t9" || params.weapon.statname === #"shotgun_pump_t9") {
                 params.eattacker zm_stats::function_fbce465a(#"hash_734f1d49f5395c1");
               }
 
-              if(params.weapon.statname === # "ar_standard_t9" || params.weapon.statname === # "smg_heavy_t9") {
+              if(params.weapon.statname === #"ar_standard_t9" || params.weapon.statname === #"smg_heavy_t9") {
                 params.eattacker zm_stats::function_fbce465a(#"hash_777767b99c350232");
               }
 
-              if(params.weapon.statname === # "ar_british_t9" || params.weapon.statname === # "smg_burst_t9") {
+              if(params.weapon.statname === #"ar_british_t9" || params.weapon.statname === #"smg_burst_t9") {
                 params.eattacker zm_stats::function_fbce465a(#"hash_24abaa59aafa466b");
               }
 
-              if(params.weapon.statname === # "special_grenadelauncher_t9" || params.weapon.statname === # "smg_standard_t9") {
+              if(params.weapon.statname === #"special_grenadelauncher_t9" || params.weapon.statname === #"smg_standard_t9") {
                 params.eattacker zm_stats::function_fbce465a(#"hash_3a26c6202d86ed8d");
               }
 
-              if(params.weapon.statname === # "smg_handling_t9" || params.weapon.statname === # "ar_british_t9" || params.weapon.statname === # "pistol_fullauto_t9") {
+              if(params.weapon.statname === #"smg_handling_t9" || params.weapon.statname === #"ar_british_t9" || params.weapon.statname === #"pistol_fullauto_t9") {
                 params.eattacker zm_stats::function_fbce465a(#"hash_7208e21496453ace");
               }
 
@@ -1375,7 +1375,7 @@ function updatemultikill(params) {
           }
         }
 
-        if(params.eattacker.var_9cd2c51d.var_158e75d4 === # "eq_stimshot" && isDefined(params.eattacker.var_9cd2c51d.var_63362b1e) && params.eattacker.var_9cd2c51d.var_63362b1e > gettime() - 6500) {
+        if(params.eattacker.var_9cd2c51d.var_158e75d4 === #"eq_stimshot" && isDefined(params.eattacker.var_9cd2c51d.var_63362b1e) && params.eattacker.var_9cd2c51d.var_63362b1e > gettime() - 6500) {
           if(params.eattacker.var_4927d3d[params.eattacker getentitynumber()].multikills === 3) {
             params.eattacker stats::function_622feb0d(#"eq_stimshot", #"hash_7bf29fa438d54aad", 1);
             processscoreevent("stim_shot_multikill_zm", params.eattacker, undefined, params.weapon);
@@ -1405,7 +1405,7 @@ function updatemultikill(params) {
         params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_52c02390 = undefined;
         params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_e5ae4603 = undefined;
 
-        if(params.weapon.statname === # "ray_gun") {
+        if(params.weapon.statname === #"ray_gun") {
           params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_5524bc59 = 1;
         } else {
           params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_5524bc59 = 0;
@@ -1424,7 +1424,7 @@ function updatemultikill(params) {
       params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_52c02390 = undefined;
       params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_e5ae4603 = undefined;
 
-      if(params.weapon.statname === # "ray_gun") {
+      if(params.weapon.statname === #"ray_gun") {
         params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_5524bc59 = 1;
       } else {
         params.eattacker.var_4927d3d[params.eattacker getentitynumber()].var_5524bc59 = 0;
@@ -1489,7 +1489,7 @@ function updatemultikill(params) {
       if(params.eattacker.var_4927d3d[params.weapon.name].var_8935d078 > gettime() - 2000) {
         w_base = zm_weapons::get_base_weapon(params.weapon);
 
-        if(w_base.name === # "special_ballisticknife_t9_dw") {
+        if(w_base.name === #"special_ballisticknife_t9_dw") {
           var_95d7a0e4 = 10;
         } else {
           var_95d7a0e4 = 2;
@@ -1526,9 +1526,9 @@ function updatemultikill(params) {
               default:
                 break;
             }
-          } else if(params.eattacker.var_4927d3d[params.weapon.name].oneshotmultikills === 3 && (params.weapon.statname !== # "launcher_freefire_t9" || params.weapon.statname !== # "special_grenadelauncher_t9" || params.weapon.statname !== # "launcher_standard_t9")) {
+          } else if(params.eattacker.var_4927d3d[params.weapon.name].oneshotmultikills === 3 && (params.weapon.statname !== #"launcher_freefire_t9" || params.weapon.statname !== #"special_grenadelauncher_t9" || params.weapon.statname !== #"launcher_standard_t9")) {
             if(isweapon(params.weapon) && !zm_loadout::is_lethal_grenade(params.weapon) && !zm_loadout::is_tactical_grenade(params.weapon) && !zm_loadout::is_placeable_mine(params.weapon) && !zm_loadout::is_melee_weapon(params.weapon)) {
-              if(params.weapon.statname === # "special_crossbow_t9") {
+              if(params.weapon.statname === #"special_crossbow_t9") {
                 params.eattacker zm_challenges::function_d6b32ad3(params.weapon, #"bigbang", 1);
               }
 
@@ -1595,7 +1595,7 @@ function updatemultikill(params) {
             params.eattacker.var_4927d3d[params.weapon.name].var_510ca9f9++;
 
             if(params.eattacker.var_4927d3d[params.weapon.name].var_510ca9f9 === 3) {
-              if(params.weapon.statname === # "special_crossbow_t9") {
+              if(params.weapon.statname === #"special_crossbow_t9") {
                 params.eattacker zm_challenges::function_d6b32ad3(params.weapon, #"rapidkills", 1);
               }
 
@@ -2000,9 +2000,9 @@ function updatemultikill(params) {
       params.enemy.var_31cadcc9[#"eq_slow_grenade"].player stats::function_6fb0b113(#"eq_slow_grenade", #"assists");
     }
 
-    if(params.enemy.zm_ai_category === # "elite") {
+    if(params.enemy.zm_ai_category === #"elite") {
       processscoreevent("concussion_grenade_killingblow_elite_zm", params.eattacker, params.enemy, undefined, undefined, params);
-    } else if(params.enemy.zm_ai_category === # "special") {
+    } else if(params.enemy.zm_ai_category === #"special") {
       processscoreevent("concussion_grenade_killingblow_special_zm", params.eattacker, params.enemy, undefined, undefined, params);
     } else {
       processscoreevent("concussion_grenade_killingblow_zm", params.eattacker, params.enemy, undefined, undefined, params);
@@ -2037,11 +2037,11 @@ function updatemultikill(params) {
   }
 
   if(zm_utility::is_player_valid(params.eattacker, 0, 0)) {
-    if(params.enemy.damagemod === "MOD_UNKNOWN" && (params.weapon.name === # "hash_ac86d29509a8939" || params.weapon.name === # "hash_493fc891e20b4f8a")) {
+    if(params.enemy.damagemod === "MOD_UNKNOWN" && (params.weapon.name === #"hash_ac86d29509a8939" || params.weapon.name === #"hash_493fc891e20b4f8a")) {
       function_2bf1d1bb("ray_rifle_multikill_zm", params.eattacker, params.weapon.name, params.weapon, 2000, 10);
-    } else if(params.enemy.damagemod === "MOD_MELEE" && (params.weapon.name === # "ww_axe_gun_melee_t9" || params.weapon.name === # "ww_axe_gun_melee_t9_upgraded")) {
+    } else if(params.enemy.damagemod === "MOD_MELEE" && (params.weapon.name === #"ww_axe_gun_melee_t9" || params.weapon.name === #"ww_axe_gun_melee_t9_upgraded")) {
       function_2bf1d1bb("crystal_axe_blade_multikill_zm", params.eattacker, params.weapon.name, params.weapon, 2000, 10);
-    } else if(params.enemy.damagemod === "MOD_PISTOL_BULLET" && (params.weapon.name === # "hash_18696150427f2efb" || params.weapon.name === # "hash_7eab88123b09e2c")) {
+    } else if(params.enemy.damagemod === "MOD_PISTOL_BULLET" && (params.weapon.name === #"hash_18696150427f2efb" || params.weapon.name === #"hash_7eab88123b09e2c")) {
       function_2bf1d1bb("crystal_axe_shardshooter_multikill_zm", params.eattacker, params.weapon.name, params.weapon, 2000, 10);
     } else if(params.enemy.damagemod === "MOD_EXPLOSIVE" && isDefined(params.eattacker.var_6de2953f) && params.eattacker.var_6de2953f > gettime() - 100) {
       function_2bf1d1bb("mechz_jetpack_multikill_zm", params.eattacker, #"mechz_jetpack", params.weapon, 2000, 3);
@@ -2079,7 +2079,7 @@ function updatemultikill(params) {
 
       w_base = zm_weapons::get_base_weapon(params.weapon);
 
-      if(var_947d01ee === "melee" || params.enemy.damagemod === "MOD_MELEE" && w_base.name === # "special_ballisticknife_t9_dw") {
+      if(var_947d01ee === "melee" || params.enemy.damagemod === "MOD_MELEE" && w_base.name === #"special_ballisticknife_t9_dw") {
         var_e6309676 = function_2bf1d1bb("soa_melee_weapon_multikill_zm", params.eattacker, #"hash_562f799525140a69", params.weapon, 2000, 7);
 
         if(var_e6309676) {
@@ -2097,7 +2097,7 @@ function updatemultikill(params) {
         if(isvehicle(params.einflictor)) {
           function_2bf1d1bb("vehicle_impact_multikill_zm", params.eattacker, #"vehicle_driver", params.weapon, 2000, 3);
 
-          if(params.enemy.zm_ai_category === # "elite" || params.enemy.zm_ai_category === # "special") {
+          if(params.enemy.zm_ai_category === #"elite" || params.enemy.zm_ai_category === #"special") {
             processscoreevent("vehicle_impact_kill_special_elite_zm", params.eattacker, params.enemy, params.weapon);
           }
         }
@@ -2148,7 +2148,7 @@ function updatemultikill(params) {
     params.eattacker zm_stats::increment_challenge_stat(#"hash_6e761859bc1ffd3d");
   }
 
-  if(params.enemy.zm_ai_category === # "elite") {
+  if(params.enemy.zm_ai_category === #"elite") {
     if(isDefined(params.enemy.var_e293f8ac)) {
       function_1eaaceab(params.enemy.var_e293f8ac);
 
@@ -2217,7 +2217,7 @@ function get_distance_for_weapon(weapon, weaponclass = util::getweaponclass(weap
     return 0;
   }
 
-  if(weapon.statname === # "pistol_shotgun_t9") {
+  if(weapon.statname === #"pistol_shotgun_t9") {
     return 187489;
   }
 
@@ -2266,16 +2266,16 @@ function get_distance_for_weapon(weapon, weaponclass = util::getweaponclass(weap
 }
 
 function function_8fb658e2(params) {
-  if(is_true(params.einflictor.aat_turned) || is_true(params.enemy.aat_turned) || is_true(params.enemy.var_f42aed2a) || is_true(params.enemy.var_b70158b5) || is_true(params.enemy.var_865b1595) || params.enemy.archetype === # "zombie_dog") {
+  if(is_true(params.einflictor.aat_turned) || is_true(params.enemy.aat_turned) || is_true(params.enemy.var_f42aed2a) || is_true(params.enemy.var_b70158b5) || is_true(params.enemy.var_865b1595) || params.enemy.archetype === #"zombie_dog") {
     return;
   }
 
-  if(zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath) && isDefined(params.enemy.archetype) && params.enemy.archetype !== # "zombie_dog" && function_39571ae(params.eattacker, params.enemy)) {
-    statname = # "hash_25f082a4f62ed553";
+  if(zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath) && isDefined(params.enemy.archetype) && params.enemy.archetype !== #"zombie_dog" && function_39571ae(params.eattacker, params.enemy)) {
+    statname = #"hash_25f082a4f62ed553";
   } else if(params.eattacker function_f5c2c1ec()) {
-    statname = # "hash_46c54199043c3149";
+    statname = #"hash_46c54199043c3149";
   } else {
-    statname = # "hash_3e68a28d3c2e0479";
+    statname = #"hash_3e68a28d3c2e0479";
   }
 
   var_42648a02 = level.var_42648a02[statname];

@@ -20,7 +20,7 @@ function private autoexec function_4047919b() {
     level._snd._callbacks = [];
     level._snd.var_3cc765a3 = [];
     level._snd.var_92f63ad0 = [];
-    level._snd.var_d37e94ca = # "gentity";
+    level._snd.var_d37e94ca = #"gentity";
     level._snd.var_90903fc0 = 0;
     level._snd._callbacks[#"player_view"] = &function_9d361345;
     level._snd._callbacks[#"player_angles"] = &function_d33afb70;
@@ -228,7 +228,7 @@ function function_85daf9f0(soundalias, var_1d25915, linkedentity, var_e330010e) 
 
   if(isentity(ent)) {
     ent.var_90c86b97 = linkedentity;
-    ent.soundtype = # "gentity";
+    ent.soundtype = #"gentity";
     ent.soundkey = ent getentitynumber();
     ent.targetname = "snd " + soundalias;
   }

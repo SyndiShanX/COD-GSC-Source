@@ -133,7 +133,7 @@ function burnedkilled(entity) {
 }
 
 function rapskilled(entity) {
-  if(isDefined(self.attacker) && isDefined(self.attacker.archetype) && self.attacker.archetype == # "raps") {
+  if(isDefined(self.attacker) && isDefined(self.attacker.archetype) && self.attacker.archetype == #"raps") {
     return true;
   }
 

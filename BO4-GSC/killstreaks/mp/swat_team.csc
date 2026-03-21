@@ -30,8 +30,8 @@ __init__() {
 }
 
 spawned(local_client_num, bundle) {
-  if(self.subarchetype === # "human_lmg") {
-    if(self.team === # "free" && isDefined(level.var_fd6018ca) && level.var_fd6018ca) {
+  if(self.subarchetype === #"human_lmg") {
+    if(self.team === #"free" && isDefined(level.var_fd6018ca) && level.var_fd6018ca) {
       self killstreak_bundles::spawned(local_client_num, level.var_c80088b7);
       return;
     }

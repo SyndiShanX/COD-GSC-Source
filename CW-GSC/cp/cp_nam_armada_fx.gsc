@@ -20,10 +20,10 @@ function function_c44464c8() {
 
 function init_fx() {
   thread function_d54bb61();
-  level._effect[#"hash_75a6e0287f64b467"] = # "hash_b6ab7aa2e4af0ce";
-  level._effect[#"hash_1d9204870892bf9c"] = # "hash_3d58577d8964749b";
-  level._effect[#"hash_7e6d961e2c87c2c9"] = # "hash_1195c44b2991b9e";
-  level._effect[#"hash_430013754d2d4603"] = # "hash_5cad1a1b9fdc43ee";
+  level._effect[#"hash_75a6e0287f64b467"] = #"hash_b6ab7aa2e4af0ce";
+  level._effect[#"hash_1d9204870892bf9c"] = #"hash_3d58577d8964749b";
+  level._effect[#"hash_7e6d961e2c87c2c9"] = #"hash_1195c44b2991b9e";
+  level._effect[#"hash_430013754d2d4603"] = #"hash_5cad1a1b9fdc43ee";
   thread exploder::kill_exploder("fx_firebase_nukeretrieve");
   thread exploder::kill_exploder("fx_firebase_nukeretrieve_downdraft");
 }
@@ -79,7 +79,7 @@ function function_ee673d3d() {
   level.var_7466d419.var_6bbdd0a5 setModel(#"tag_origin");
   level.var_7466d419.var_6bbdd0a5 enablelinkto();
   level.var_7466d419.var_6bbdd0a5 linkto(level.var_7466d419, "tag_fire_extinguisher_attach", (0, 0, 35), (90, 0, 0));
-  level.var_7466d419.var_585ee020 = # "hash_7401be881ac98bd9";
+  level.var_7466d419.var_585ee020 = #"hash_7401be881ac98bd9";
   level waittill(#"hash_227cc8ce5802e6b5");
   level.var_7466d419.var_6bbdd0a5 delete();
   level waittill(#"hash_1849624165c8255f");

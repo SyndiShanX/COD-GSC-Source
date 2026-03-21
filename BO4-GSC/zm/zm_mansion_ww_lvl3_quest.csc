@@ -29,17 +29,17 @@ init() {
     clientfield::register("scriptmover", "" + # "hash_486960f190957256", 8000, 1, "int", &function_fdbcb111, 0, 0);
     clientfield::register("scriptmover", "" + # "hash_12e4702a9346b3d9", 8000, 1, "int", &function_d96d1ec8, 0, 0);
     clientfield::register("scriptmover", "" + # "ww_lvl3_crafting_table_fx", 8000, 1, "int", &ww_lvl3_crafting_table_fx, 0, 0);
-    level._effect[#"hash_63ffcbb6c8f4bc11"] = # "hash_9c1cc9cff68a30b";
-    level._effect[#"hash_62ee80337662b3cd"] = # "hash_d49412589217ae5";
-    level._effect[#"hash_7ef82b98770c5c0d"] = # "hash_5faeba7ac14ce809";
-    level._effect[#"hash_48c6d058e9587c19"] = # "hash_26219308102ab88";
-    level._effect[#"hash_1789fef86cd8b57e"] = # "hash_6155f098cde9b5d6";
-    level._effect[#"hash_6ded20ebb8e016ba"] = # "hash_12294859753682f";
-    level._effect[#"hash_c0e8acbde8dbc06"] = # "hash_3c302e20c7521265";
-    level._effect[#"hash_1e5190677354bcbb"] = # "hash_43db5529d30606a4";
-    level._effect[#"hash_12e4702a9346b3d9"] = # "hash_6f5790d353dd5caf";
-    level._effect[#"hash_486960f190957256"] = # "hash_6c903fa4abc8dbaa";
-    level._effect[#"ww_lvl3_crafting_table_fx"] = # "hash_2a894b9650914bb6";
+    level._effect[#"hash_63ffcbb6c8f4bc11"] = #"hash_9c1cc9cff68a30b";
+    level._effect[#"hash_62ee80337662b3cd"] = #"hash_d49412589217ae5";
+    level._effect[#"hash_7ef82b98770c5c0d"] = #"hash_5faeba7ac14ce809";
+    level._effect[#"hash_48c6d058e9587c19"] = #"hash_26219308102ab88";
+    level._effect[#"hash_1789fef86cd8b57e"] = #"hash_6155f098cde9b5d6";
+    level._effect[#"hash_6ded20ebb8e016ba"] = #"hash_12294859753682f";
+    level._effect[#"hash_c0e8acbde8dbc06"] = #"hash_3c302e20c7521265";
+    level._effect[#"hash_1e5190677354bcbb"] = #"hash_43db5529d30606a4";
+    level._effect[#"hash_12e4702a9346b3d9"] = #"hash_6f5790d353dd5caf";
+    level._effect[#"hash_486960f190957256"] = #"hash_6c903fa4abc8dbaa";
+    level._effect[#"ww_lvl3_crafting_table_fx"] = #"hash_2a894b9650914bb6";
   }
 }
 
@@ -78,7 +78,7 @@ function_d19e8c30(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    if(self.archetype === # "bat") {
+    if(self.archetype === #"bat") {
       str_tag = "tag_chest_ws";
     } else {
       str_tag = "tag_origin";

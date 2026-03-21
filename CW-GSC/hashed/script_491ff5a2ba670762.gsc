@@ -35,7 +35,7 @@ function function_76a18acc(var_8fb24641) {
   foreach(var_8ad31d96 in var_e1a8ec1c) {
     team = isDefined(var_8ad31d96.team) ? var_8ad31d96.team : # "none";
 
-    if(team == # "none") {
+    if(team == #"none") {
       continue;
     }
 
@@ -90,7 +90,7 @@ function function_fbff01ea() {
 }
 
 function function_9b36f6dc(spawnfilter, team) {
-  if(team == # "none" || team == # "neutral") {
+  if(team == #"none" || team == #"neutral") {
     if(isDefined(spawnfilter.friendlyinfluencer)) {
       enableinfluencer(spawnfilter.friendlyinfluencer, 0);
     }

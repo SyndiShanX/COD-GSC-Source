@@ -57,9 +57,9 @@ __init__() {
   clientfield::register("toplayer", "thermal_sight", 1, 1, "int", &function_765b7c63, 0, 0);
   clientfield::register("toplayer", "strobe_light", 1, 1, "int", &fireflykillcam, 0, 0);
   clientfield::register("allplayers", "cold_blooded", 1, 1, "int", &function_194072a7, 0, 0);
-  level.var_20369084 = # "rob_sonar_set_enemy_cold";
-  level._effect[#"annihilate_explosion"] = # "hash_17591c79f2960fba";
-  level._effect[#"pineapplegun_explosion"] = # "hash_84cd1f227fcd07e";
+  level.var_20369084 = #"rob_sonar_set_enemy_cold";
+  level._effect[#"annihilate_explosion"] = #"hash_17591c79f2960fba";
+  level._effect[#"pineapplegun_explosion"] = #"hash_84cd1f227fcd07e";
   level.gameended = 0;
   level.postgame = 0;
   level.new_health_model = getdvarint(#"new_health_model", 1) > 0;

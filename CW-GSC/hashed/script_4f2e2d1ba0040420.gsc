@@ -110,16 +110,16 @@ function function_5c3b5e05(v_position, n_obj_id) {
 }
 
 function function_1e6004ec(instance) {
-  level.var_8bb7479c = # "hash_337507057cf84321";
+  level.var_8bb7479c = #"hash_337507057cf84321";
   level.var_aaf7505f = min(540, 270 + 10 * level.var_b48509f9 + 10 * getplayers().size);
   level.var_d1572d48 = 0;
   level.var_6e297a0d = &function_6bae9c0a;
-  level.var_c29bf3b6 = # "none";
-  level.var_7c027cbe = # "none";
-  level.var_139ceb46 = # "none";
-  level.var_f1a8b5e6 = # "none";
-  level.var_6ceeb30a = # "none";
-  level.var_6363395e = # "none";
+  level.var_c29bf3b6 = #"none";
+  level.var_7c027cbe = #"none";
+  level.var_139ceb46 = #"none";
+  level.var_f1a8b5e6 = #"none";
+  level.var_6ceeb30a = #"none";
+  level.var_6363395e = #"none";
   level.var_7dfc84b7 = 1;
   var_e2062f3 = struct::get(#"hash_28db7b3821bf6879", "targetname");
   content_manager::spawn_instance(var_e2062f3);
@@ -171,11 +171,11 @@ function function_1e6004ec(instance) {
   s_result = level waittill(#"objective_ended");
 
   if(is_true(s_result.completed)) {
-    str_reason = # "exfil_success";
-    level.winningteam = # "allies";
+    str_reason = #"exfil_success";
+    level.winningteam = #"allies";
   } else {
-    str_reason = # "exfil_fail";
-    level.winningteam = # "axis";
+    str_reason = #"exfil_fail";
+    level.winningteam = #"axis";
   }
 
   level notify(#"end_game", {
@@ -224,7 +224,7 @@ function function_6ebbb35b(target) {
 
   while(isalive(self) && isDefined(target)) {
     if(isai(target) || isPlayer(target)) {
-      if(target.zm_ai_category === # "boss") {
+      if(target.zm_ai_category === #"boss") {
         self turretsettarget(0, target.origin + (0, 0, 165));
       } else {
         self turretsettarget(0, target);
@@ -306,7 +306,7 @@ function private function_31125f54() {
     s_waitresult = level waittill(#"exfil_complete", #"exfil_cleared");
 
     if(level flag::get(#"exfil_cleared") && level flag::get(#"hash_fdc24944f59c262") || is_true(s_waitresult.b_success)) {
-      level.var_9f6064a4 = # "hash_6893db9b6c7b5a58";
+      level.var_9f6064a4 = #"hash_6893db9b6c7b5a58";
       level.var_73677dfc = 3;
 
       if(isDefined(level.var_8bb7479c)) {
@@ -382,7 +382,7 @@ function function_5ec737ca(params) {
 }
 
 function private on_item_pickup(params) {
-  if(params.item.itementry.name === # "item_survival_mq4_phase_neutralizer_blueprint") {
+  if(params.item.itementry.name === #"item_survival_mq4_phase_neutralizer_blueprint") {
     foreach(player in getplayers()) {
       player thread zm_intel::collect_intel(#"zmintel_survival_omega_document_13");
     }

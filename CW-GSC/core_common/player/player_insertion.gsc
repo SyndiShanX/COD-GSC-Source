@@ -1380,19 +1380,19 @@ function function_598b7862(aircraft) {
 
   if(forwarddot > 0.707107) {
     if(math::cointoss()) {
-      anim = # "hash_49be5b5409a97147";
+      anim = #"hash_49be5b5409a97147";
     } else {
-      anim = # "hash_49be415409a94519";
+      anim = #"hash_49be415409a94519";
     }
   } else if(forwarddot < -0.707107) {
-    anim = # "hash_d6c9fa8235b69f8";
+    anim = #"hash_d6c9fa8235b69f8";
   } else {
     rightdot = vectordot(planeright, playerforward);
 
     if(rightdot > 0) {
-      anim = # "hash_46c65ea54508f35f";
+      anim = #"hash_46c65ea54508f35f";
     } else {
-      anim = # "hash_46c674a5450918c1";
+      anim = #"hash_46c674a5450918c1";
     }
   }
 

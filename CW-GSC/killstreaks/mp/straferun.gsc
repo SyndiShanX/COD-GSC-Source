@@ -46,7 +46,7 @@ function private preinit() {
   level.straferunkillsbeforeexit = 10;
   level.straferunnumkillcams = 5;
   level.straferunmodel = "veh_t6_air_a10f";
-  level.straferunmodelenemy = # "veh_t9_mil_ru_air_frogfoot_mp";
+  level.straferunmodelenemy = #"veh_t9_mil_ru_air_frogfoot_mp";
   level.straferunvehicle = "vehicle_straferun_mp";
   level.straferungunweapon = getweapon(#"straferun_gun");
   level.straferungunsound = "wpn_a10_shot_loop_npc";
@@ -211,7 +211,7 @@ function function_1e30e51e(hardpointtype, killstreak_id, location, var_a6b1bda0,
 
   plane clientfield::set("scorestreakActive", 1);
   plane.var_739aa202 = var_a6b1bda0;
-  var_6f0661aa = plane.var_739aa202 == # "plane_a";
+  var_6f0661aa = plane.var_739aa202 == #"plane_a";
   plane.attackers = [];
   plane.attackerdata = [];
   plane.attackerdamage = [];
@@ -642,7 +642,7 @@ function function_ec6320ce(bundle, var_a6b1bda0) {
     var_47f1292b = var_9ec4e10e + vectorscale(var_b01435f6, var_af2dc9d2);
     var_b3a734d8 = isDefined(bundle.var_a6bb5503) ? bundle.var_a6bb5503 : level.straferungunradius;
 
-    if(var_a6b1bda0 == # "plane_a") {
+    if(var_a6b1bda0 == #"plane_a") {
       var_47f1292b += vectorscale(var_f6fe02b9, var_d7e70604 + randomfloatrange(var_b3a734d8 * -1, var_b3a734d8));
     } else {
       var_47f1292b -= vectorscale(var_f6fe02b9, var_d7e70604 + randomfloatrange(var_b3a734d8 * -1, var_b3a734d8));
@@ -909,7 +909,7 @@ function cantargetplayer(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 

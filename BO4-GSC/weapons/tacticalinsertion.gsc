@@ -14,7 +14,7 @@
 
 init_shared() {
   level.weapontacticalinsertion = getweapon(#"tactical_insertion");
-  level._effect[#"tacticalinsertionfizzle"] = # "_t6/misc/fx_equip_tac_insert_exp";
+  level._effect[#"tacticalinsertionfizzle"] = #"_t6/misc/fx_equip_tac_insert_exp";
   clientfield::register("scriptmover", "tacticalinsertion", 1, 1, "int");
 }
 

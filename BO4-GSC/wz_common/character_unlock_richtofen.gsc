@@ -67,10 +67,10 @@ function_80635b6f() {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name == # "cu15_item" || itementry.name == # "cu16_item" || itementry.name == # "cu18_item") {
+  if(itementry.name == #"cu15_item" || itementry.name == #"cu16_item" || itementry.name == #"cu18_item") {
     characterassetname = getcharacterassetname(self getcharacterbodytype(), currentsessionmode());
 
-    if(characterassetname !== # "hash_f66f1d73b4acc45" && characterassetname !== # "hash_29e6a0007c925dd4" && characterassetname !== # "hash_22648ce3a4423d8f") {
+    if(characterassetname !== #"hash_f66f1d73b4acc45" && characterassetname !== #"hash_29e6a0007c925dd4" && characterassetname !== #"hash_22648ce3a4423d8f") {
       return;
     }
 
@@ -84,7 +84,7 @@ function_1c4b5097(item) {
     return;
   }
 
-  if(itementry.name == # "cu17_item") {
+  if(itementry.name == #"cu17_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {

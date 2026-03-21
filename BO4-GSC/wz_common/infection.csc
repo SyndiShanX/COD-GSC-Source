@@ -21,8 +21,8 @@ __init__() {
 
   clientfield::register("toplayer", "infected", 21000, 1, "int", &_infected, 0, 0);
   callback::on_localclient_connect(&on_localclient_connect);
-  level._effect[#"rise_burst"] = # "zombie/fx_spawn_dirt_hand_burst_zmb";
-  level._effect[#"rise_billow"] = # "zombie/fx_spawn_dirt_body_billowing_zmb";
+  level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
+  level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";
 }
 
 on_localclient_connect(localclientnum) {

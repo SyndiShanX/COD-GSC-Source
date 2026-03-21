@@ -199,12 +199,12 @@ function function_e01f1b8b() {
 function function_5a4491ab() {
   waitresult = level flag::wait_till_any([#"hash_453dee78e48aa120", #"hash_7cbfe0771046c209"]);
 
-  if(waitresult._notify == # "hash_453dee78e48aa120") {
+  if(waitresult._notify == #"hash_453dee78e48aa120") {
     level thread function_9f0d2282("maintenance_room_fuse_hint_loc");
     return;
   }
 
-  if(waitresult._notify == # "hash_7cbfe0771046c209") {
+  if(waitresult._notify == #"hash_7cbfe0771046c209") {
     level thread function_9f0d2282("sewer_fuse_hint_loc");
   }
 }
@@ -243,7 +243,7 @@ function function_9f0d2282(var_23589c3d) {
 }
 
 function function_9de5caaf(params) {
-  if(self.archetype === # "avogadro" && is_true(self.var_93057265)) {
+  if(self.archetype === #"avogadro" && is_true(self.var_93057265)) {
     level notify(#"hash_24ebf2a541a3c3ea", {
       #position: self.origin, #aitype: self.aitype
     });
@@ -294,7 +294,7 @@ function function_3cd87dd2(params) {
   }
 
   if(isPlayer(self)) {
-    if(isDefined(item.itementry) && item.itementry.name == # "item_zmquest_platinum_power_quest_fuse") {
+    if(isDefined(item.itementry) && item.itementry.name == #"item_zmquest_platinum_power_quest_fuse") {
       level.var_f48dca1d++;
 
       iprintlnbold("<dev string:x5a>");

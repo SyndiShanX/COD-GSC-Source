@@ -108,7 +108,7 @@ event_handler[event_cf200f34] function_209450ae(eventstruct) {
 
   dynent = eventstruct.ent;
 
-  if(dynent.targetname !== # "hash_3af83a27a707345a") {
+  if(dynent.targetname !== #"hash_3af83a27a707345a") {
     return;
   }
 
@@ -165,7 +165,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != # "hero_annihilator") {
+  if(weapon.name != #"hero_annihilator") {
     return;
   }
 
@@ -181,7 +181,7 @@ on_player_killed() {
 }
 
 function_1c4b5097(item) {
-  if(isDefined(item.itementry) && item.itementry.name === # "annihilator_wz_item") {
+  if(isDefined(item.itementry) && item.itementry.name === #"annihilator_wz_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {

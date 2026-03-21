@@ -665,7 +665,7 @@ class class_744b99c {
           loc.scale = int(args[1]);
         }
 
-        if(args.size > 2 && loc.script_noteworthy === # "hash_6b07679758a7acc") {
+        if(args.size > 2 && loc.script_noteworthy === #"hash_6b07679758a7acc") {
           loc.parameters = [];
 
           for(i = 2; i < args.size; i++) {

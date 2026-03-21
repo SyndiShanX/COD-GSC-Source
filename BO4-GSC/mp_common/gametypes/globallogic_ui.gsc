@@ -94,7 +94,7 @@ freegameplayhudelems() {
 }
 
 function private function_34a60b2f(original_team, new_team) {
-  if(!isDefined(original_team) || original_team == # "spectator" || !isDefined(new_team)) {
+  if(!isDefined(original_team) || original_team == #"spectator" || !isDefined(new_team)) {
     return;
   }
 
@@ -126,7 +126,7 @@ menuautoassign(comingfrommenu, var_4c542e39) {
 
   assignmentoverride = getdvarstring(#"autoassignteam");
 
-  if(assignmentoverride != "<dev string:x38>" && (assignmentoverride != # "spectator" || !isbot(self))) {
+  if(assignmentoverride != "<dev string:x38>" && (assignmentoverride != #"spectator" || !isbot(self))) {
     assignment = assignmentoverride;
   }
 
@@ -136,7 +136,7 @@ menuautoassign(comingfrommenu, var_4c542e39) {
 
   assert(isDefined(assignment));
 
-  if(assignment === # "spectator" && !level.forceautoassign) {
+  if(assignment === #"spectator" && !level.forceautoassign) {
     self teams::function_dc7eaabd(assignment);
     return;
   }
@@ -176,7 +176,7 @@ menuautoassign(comingfrommenu, var_4c542e39) {
 }
 
 updateobjectivetext() {
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     self setclientcgobjectivetext("");
     return;
   }
@@ -288,23 +288,23 @@ menuteam(team) {
 menuspectator() {
   self closemenus();
 
-  if(self.pers[#"team"] != # "spectator") {
+  if(self.pers[#"team"] != #"spectator") {
     if(isalive(self)) {
       self.switching_teams = 1;
       self.switchedteamsresetgadgets = 1;
-      self.joining_team = # "spectator";
+      self.joining_team = #"spectator";
       self.leaving_team = self.pers[#"team"];
       self suicide();
     }
 
-    self.pers[#"team"] = # "spectator";
-    self.team = # "spectator";
+    self.pers[#"team"] = #"spectator";
+    self.team = #"spectator";
     self.pers[#"class"] = "";
     self.curclass = "";
     self.pers[#"weapon"] = undefined;
     self.pers[#"savedmodel"] = undefined;
     self updateobjectivetext();
-    self.sessionteam = # "spectator";
+    self.sessionteam = #"spectator";
     [[level.spawnspectator]]();
     self thread player::spectate_player_watcher();
     self player::function_6f6c29e(1);
@@ -454,7 +454,7 @@ menuspecialist(characterindex) {
 menuautocontrolplayer() {
   self closemenus();
 
-  if(self.pers[#"team"] != # "spectator") {
+  if(self.pers[#"team"] != #"spectator") {
     toggleplayercontrol(self);
   }
 }

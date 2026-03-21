@@ -35,7 +35,7 @@ function private function_26d68622(v_center, var_50721d66) {
   var_4fb7e8bb = struct::get("satellite_computer_screen", "targetname");
   var_91b180f0 = {};
   var_91b180f0.entity = getent("mq_sat_scr", "targetname");
-  var_91b180f0.model = # "hash_3bc4ed2f30d82d31" + var_50721d66;
+  var_91b180f0.model = #"hash_3bc4ed2f30d82d31" + var_50721d66;
   var_91b180f0.info = util::spawn_model("tag_origin", var_91b180f0.entity.origin, var_91b180f0.entity.angles);
   var_91b180f0.info hide();
   var_91b180f0.center = v_center;
@@ -277,7 +277,7 @@ function private function_d228e8b0(var_3f94a5b6) {
     menu = waitresult.menu;
     response = waitresult.response;
 
-    if(menu == # "zm_gold_align_satellite_hud") {
+    if(menu == #"zm_gold_align_satellite_hud") {
       switch (waitresult.response) {
         case # "hash_72b3080b298c200b":
           var_3f94a5b6.var_fa7400be[self getentitynumber()][4] = 1;

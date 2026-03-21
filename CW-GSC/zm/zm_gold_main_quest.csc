@@ -299,16 +299,16 @@ function function_d3dcbd21(localclientnum, oldval, newval, bnewent, binitialsnap
 
       return;
     case 1:
-      str_fx = # "hash_583109873d692b3d";
+      str_fx = #"hash_583109873d692b3d";
       break;
     case 2:
-      str_fx = # "hash_3e89c687f8e00739";
+      str_fx = #"hash_3e89c687f8e00739";
       break;
     case 3:
-      str_fx = # "hash_7178b6fbac52be02";
+      str_fx = #"hash_7178b6fbac52be02";
       break;
     case 4:
-      str_fx = # "hash_bdf528c41738ef5";
+      str_fx = #"hash_bdf528c41738ef5";
       break;
   }
 
@@ -389,13 +389,13 @@ function function_b66e99f1(localclientnum, oldval, newval, bnewent, binitialsnap
       if(!isDefined(s_fx.var_bdfdbc4d)) {
         switch (s_fx.str_fx) {
           case # "sm":
-            str_fx = # "zm_ai/fx9_steiner_rad_bomb_spot_sm_loop";
+            str_fx = #"zm_ai/fx9_steiner_rad_bomb_spot_sm_loop";
             break;
           case # "md":
-            str_fx = # "zm_ai/fx9_steiner_rad_bomb_spot_md_loop";
+            str_fx = #"zm_ai/fx9_steiner_rad_bomb_spot_md_loop";
             break;
           case # "lg":
-            str_fx = # "zm_ai/fx9_steiner_rad_bomb_spot_lg_loop";
+            str_fx = #"zm_ai/fx9_steiner_rad_bomb_spot_lg_loop";
             break;
         }
 

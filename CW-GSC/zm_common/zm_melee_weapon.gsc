@@ -185,9 +185,9 @@ function function_e5bf8f08(player) {
 
     if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(player function_8b1a219a()) {
-        self.stub.hint_string = # "hash_7a24a147b8f09767";
+        self.stub.hint_string = #"hash_7a24a147b8f09767";
       } else {
-        self.stub.hint_string = # "hash_791fe9da17cf7059";
+        self.stub.hint_string = #"hash_791fe9da17cf7059";
       }
 
       if(self.stub.var_8d306e51) {
@@ -197,9 +197,9 @@ function function_e5bf8f08(player) {
       }
     } else {
       if(player function_8b1a219a()) {
-        self.stub.hint_string = # "hash_2791ecebb85142c4";
+        self.stub.hint_string = #"hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = # "hash_60606b68e93a29c8";
+        self.stub.hint_string = #"hash_60606b68e93a29c8";
       }
 
       if(self.stub.var_8d306e51) {

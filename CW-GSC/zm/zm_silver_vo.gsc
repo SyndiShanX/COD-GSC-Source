@@ -20,7 +20,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level.var_4d16d15f = # "strauss";
+  level.var_4d16d15f = #"strauss";
   level.var_24cfb8fb = "none";
 }
 
@@ -35,7 +35,7 @@ function private postinit() {
 }
 
 function on_ai_spawned() {
-  if(self.archetype === # "hash_7c0d83ac1e845ac2" && !isDefined(self.subarchetype) && self.team === level.zombie_team) {
+  if(self.archetype === #"hash_7c0d83ac1e845ac2" && !isDefined(self.subarchetype) && self.team === level.zombie_team) {
     if(!is_true(level.var_8804e5b7) || !is_true(level.var_8fff3192)) {
       self thread function_40466d11();
     }
@@ -47,7 +47,7 @@ function on_ai_spawned() {
     self thread function_c3b9424b();
   }
 
-  if(self.aitype === # "hash_53f4e0daa341a161" && self.team === level.zombie_team) {
+  if(self.aitype === #"hash_53f4e0daa341a161" && self.team === level.zombie_team) {
     self thread function_df33ea46();
   }
 }
@@ -749,7 +749,7 @@ function function_c7ca9f21() {
   while(true) {
     waitresult = level waittill(#"hash_7e3660d8d125a63a");
 
-    if(waitresult.aitype === # "hash_53f4e0daa341a161") {
+    if(waitresult.aitype === #"hash_53f4e0daa341a161") {
       level function_14a92dc6(#"hash_898a2ece2e63db5");
     }
   }

@@ -135,7 +135,7 @@ function function_52b5ffe3(localclientnum) {
     return;
   }
 
-  if(util::get_game_type() === # "zstandard") {
+  if(util::get_game_type() === #"zstandard") {
     level.var_5b8ec4d[localclientnum] = function_604c9983(localclientnum, #"hash_6da7ae12f538ef5e", 0.5);
     return;
   }

@@ -135,7 +135,7 @@ function function_465aaf09(player, origin) {
     arcademachine namespace_e32bb68::function_3a59ec34("evt_doa_lightning_bolt");
     arcademachine thread function_44cc3493(randomintrange(1, 5), player);
 
-    if(result._notify != # "timeout") {
+    if(result._notify != #"timeout") {
       break;
     }
   }

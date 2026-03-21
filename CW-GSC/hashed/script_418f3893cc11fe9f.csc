@@ -76,8 +76,8 @@ function private function_9874b8cd(localclientnum) {
   self setanim(#"ai_margwa_head_r_closed_add", 1, 0.2, 1);
 
   for(i = 1; i <= 7; i++) {
-    var_25dd550a = # "hash_3aa340cf7e8075f0" + i;
-    var_43aa83b8 = # "hash_79ffdacfeb1dcc9e" + i;
+    var_25dd550a = #"hash_3aa340cf7e8075f0" + i;
+    var_43aa83b8 = #"hash_79ffdacfeb1dcc9e" + i;
     self setanim(var_25dd550a, 1, 0.2, 1);
     self setanim(var_43aa83b8, 1, 0.2, 1);
   }
@@ -85,15 +85,15 @@ function private function_9874b8cd(localclientnum) {
   self.heads = [];
   self.heads[1] = spawnStruct();
   self.heads[1].index = 1;
-  self.heads[1].var_90d98881 = # "ai_margwa_head_l_closed_add";
+  self.heads[1].var_90d98881 = #"ai_margwa_head_l_closed_add";
   self.heads[1].var_64883f29 = "ai_margwa_jaw_l_";
   self.heads[2] = spawnStruct();
   self.heads[2].index = 2;
-  self.heads[2].var_90d98881 = # "ai_margwa_head_m_closed_add";
+  self.heads[2].var_90d98881 = #"ai_margwa_head_m_closed_add";
   self.heads[2].var_64883f29 = "ai_margwa_jaw_m_";
   self.heads[3] = spawnStruct();
   self.heads[3].index = 3;
-  self.heads[3].var_90d98881 = # "ai_margwa_head_r_closed_add";
+  self.heads[3].var_90d98881 = #"ai_margwa_head_r_closed_add";
   self.heads[3].var_64883f29 = "ai_margwa_jaw_r_";
 }
 
@@ -110,7 +110,7 @@ function private function_7f774ede(localclientnum, oldvalue, newvalue, bnewent, 
 
   switch (wasdemojump) {
     case 1:
-      self.heads[1].var_90d98881 = # "ai_margwa_head_l_open_add";
+      self.heads[1].var_90d98881 = #"ai_margwa_head_l_open_add";
       self setanim(#"ai_margwa_head_l_open_add", 1, 0.1, 1);
       self clearanim(#"ai_margwa_head_l_closed_add", 0.1);
       var_60a180bc = level._effect[#"fx_margwa_roar_zod_zmb"];
@@ -127,13 +127,13 @@ function private function_7f774ede(localclientnum, oldvalue, newvalue, bnewent, 
 
       break;
     case 2:
-      self.heads[1].var_90d98881 = # "ai_margwa_head_l_closed_add";
+      self.heads[1].var_90d98881 = #"ai_margwa_head_l_closed_add";
       self setanim(#"ai_margwa_head_l_closed_add", 1, 0.1, 1);
       self clearanim(#"ai_margwa_head_l_open_add", 0.1);
       self clearanim(#"ai_margwa_head_l_smash_attack_1", 0.1);
       break;
     case 3:
-      self.heads[1].var_90d98881 = # "ai_margwa_head_l_smash_attack_1";
+      self.heads[1].var_90d98881 = #"ai_margwa_head_l_smash_attack_1";
       self clearanim(#"ai_margwa_head_l_open_add", 0.1);
       self clearanim(#"ai_margwa_head_l_closed_add", 0.1);
       self setanimrestart(#"ai_margwa_head_l_smash_attack_1", 1, 0.1, 1);

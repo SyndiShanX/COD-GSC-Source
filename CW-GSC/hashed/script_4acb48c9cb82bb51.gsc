@@ -105,7 +105,7 @@ function shouldplayovertimeround() {
 function function_b4530b39() {
   level endon(#"game_ended");
 
-  while(game.state != # "playing") {
+  while(game.state != #"playing") {
     waitframe(1);
   }
 
@@ -165,13 +165,13 @@ function function_1804ad1c() {
 
       if(zoneindex < var_1871ddeb) {
         level.var_1b3b480b[zoneindex] gameobjects::set_owner_team(#"allies");
-        level.var_1b3b480b[zoneindex].team = # "allies";
+        level.var_1b3b480b[zoneindex].team = #"allies";
         continue;
       }
 
       if(zoneindex > var_1871ddeb) {
         level.var_1b3b480b[zoneindex] gameobjects::set_owner_team(#"axis");
-        level.var_1b3b480b[zoneindex].team = # "axis";
+        level.var_1b3b480b[zoneindex].team = #"axis";
       }
     }
   }
@@ -319,7 +319,7 @@ function private function_15b6cb2b(capturezone) {
   }
 
   level.var_1b3b480b[capturezone.script_index] = var_6b67c295;
-  var_6b67c295.var_48550e00 = # "neutral";
+  var_6b67c295.var_48550e00 = #"neutral";
   deactivatezone(capturezone.script_index);
 }
 
@@ -335,7 +335,7 @@ function onzonecapture(sentient) {
 
   otherteam = util::getotherteam(sentient.team);
 
-  if(self.var_48550e00 == # "neutral") {
+  if(self.var_48550e00 == #"neutral") {
     function_7aa95c76(self, level.var_1845db12[#"neutral"].captured, sentient.team);
     function_7aa95c76(self, level.var_1845db12[#"neutral"].lost, otherteam);
   } else if(self.var_48550e00 == sentient.team) {
@@ -441,16 +441,16 @@ function private function_547ca9df() {
 
   if(numallies == 0 && var_794d4493 == 0) {
     state = 0;
-    team = # "none";
+    team = #"none";
   } else if(numallies == var_794d4493) {
     state = 3;
-    team = # "none";
+    team = #"none";
   } else if(level.gameobjectscontestedmajoritywins === 1 || numallies == 0 || var_794d4493 == 0) {
     state = numallies < var_794d4493 ? 2 : 1;
     team = numallies < var_794d4493 ? # "axis" : # "allies";
   } else {
     state = 3;
-    team = # "none";
+    team = #"none";
   }
 
   self.var_6e4f06e2 = state;
@@ -460,16 +460,16 @@ function private function_547ca9df() {
 
 function function_3e4f6efb() {
   self.var_6e4f06e2 = 0;
-  self.var_d2711fe1 = # "none";
+  self.var_d2711fe1 = #"none";
   self function_209d6da2(0);
 }
 
 function function_6f764775(zoneindex, team) {
-  if(zoneindex === 0 && team === # "axis") {
+  if(zoneindex === 0 && team === #"axis") {
     return true;
   }
 
-  if(zoneindex === level.var_1b3b480b.size - 1 && team === # "allies") {
+  if(zoneindex === level.var_1b3b480b.size - 1 && team === #"allies") {
     return true;
   }
 
@@ -500,7 +500,7 @@ function private function_7a4fcbfe(zone, var_b8522be2, team1, var_6f9b2d8c, team
 }
 
 function function_8df8131e(zone, team, progress) {
-  if(!isDefined(team) || team == # "none") {
+  if(!isDefined(team) || team == #"none") {
     return;
   }
 
@@ -511,14 +511,14 @@ function function_8df8131e(zone, team, progress) {
       function_7a4fcbfe(zone, "warTakingFinal", team, "warLosingFinal", otherteam);
     } else {
       if(zone.var_48550e00 == team) {
-        var_ecdd36b6 = # "friendly";
-        var_971743e7 = # "enemy";
-      } else if(zone.var_48550e00 == # "neutral") {
-        var_ecdd36b6 = # "neutral";
-        var_971743e7 = # "neutral";
+        var_ecdd36b6 = #"friendly";
+        var_971743e7 = #"enemy";
+      } else if(zone.var_48550e00 == #"neutral") {
+        var_ecdd36b6 = #"neutral";
+        var_971743e7 = #"neutral";
       } else {
-        var_ecdd36b6 = # "enemy";
-        var_971743e7 = # "friendly";
+        var_ecdd36b6 = #"enemy";
+        var_971743e7 = #"friendly";
       }
 
       function_7a4fcbfe(zone, level.var_1845db12[var_ecdd36b6].var_c8bc87ae, team, level.var_1845db12[var_971743e7].losing, otherteam);
@@ -551,12 +551,12 @@ function function_b4ed1ea0(capturingteam) {
 function on_use_update(var_b65ea6f2, progress, change) {
   function_8df8131e(self, self.var_d2711fe1, change);
 
-  if(progress == # "allies") {
+  if(progress == #"allies") {
     objective_setgamemodeflags(self.objectiveid, 1);
     return;
   }
 
-  if(progress == # "axis") {
+  if(progress == #"axis") {
     objective_setgamemodeflags(self.objectiveid, 2);
   }
 }
@@ -568,7 +568,7 @@ function on_touch_use(player) {
 
   team = self.var_d2711fe1;
 
-  if(isDefined(team) && team != # "none") {
+  if(isDefined(team) && team != #"none") {
     if(team == player.team) {
       player playsoundtoplayer(#"hash_5739d2bc3554b3f9", player);
     } else {
@@ -584,9 +584,9 @@ function getuseratemultiplier(var_a4926509) {
 }
 
 function private function_d018d4fb(currentzoneindex, winningteam) {
-  if(winningteam == # "allies") {
+  if(winningteam == #"allies") {
     currentzoneindex++;
-  } else if(winningteam == # "axis") {
+  } else if(winningteam == #"axis") {
     currentzoneindex--;
   }
 
@@ -655,7 +655,7 @@ function private function_98b8ad44(zoneindex, waittimesec) {
   function_9fbbd002(var_6b67c295.objectiveid, var_beb65940, game.attackers);
   function_9fbbd002(var_6b67c295.objectiveid, var_d88c1173, game.defenders);
 
-  if(var_6b67c295.var_48550e00 == # "neutral") {
+  if(var_6b67c295.var_48550e00 == #"neutral") {
     function_7a4fcbfe(var_6b67c295, "warZoneAvailable_WasNeutral", #"allies", "warZoneAvailable_WasNeutral", #"axis");
   } else {
     otherteam = util::getotherteam(var_6b67c295.var_48550e00);
@@ -939,14 +939,14 @@ function private function_c1d8ad94(team) {
   var_f304a0c3 = math::clamp((team_momentum.value - level.var_8fec4866) / level.var_277bdbaa, 0, 1);
   currentlevel = isDefined(team_momentum.currentlevel) ? team_momentum.currentlevel : 0;
 
-  if(team === # "allies") {
+  if(team === #"allies") {
     level clientfield::set_world_uimodel("team_momentum.level1PercentageAllies", var_a501243e);
     level clientfield::set_world_uimodel("team_momentum.level2PercentageAllies", var_f304a0c3);
     level clientfield::set_world_uimodel("team_momentum.currentLevelAllies", currentlevel);
     return;
   }
 
-  if(team === # "axis") {
+  if(team === #"axis") {
     level clientfield::set_world_uimodel("team_momentum.level1PercentageAxis", var_a501243e);
     level clientfield::set_world_uimodel("team_momentum.level2PercentageAxis", var_f304a0c3);
     level clientfield::set_world_uimodel("team_momentum.currentLevelAxis", currentlevel);
@@ -1086,7 +1086,7 @@ function function_d24432a4(state) {
     self.var_b3890fdf = 0;
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -1094,31 +1094,31 @@ function function_d24432a4(state) {
 
   switch (state) {
     case # "cap_war_percent_0":
-      str_alias = # "hash_1c518fb856754e14";
+      str_alias = #"hash_1c518fb856754e14";
       n_waittime = 2.5;
       break;
     case # "cap_war_percent_25":
-      str_alias = # "hash_1c5192b85675532d";
+      str_alias = #"hash_1c5192b85675532d";
       n_waittime = 2.5;
       break;
     case # "cap_war_percent_50":
-      str_alias = # "hash_1c5192b85675532d";
+      str_alias = #"hash_1c5192b85675532d";
       n_waittime = 1.25;
       break;
     case # "cap_war_percent_75":
-      str_alias = # "hash_1c5191b85675517a";
+      str_alias = #"hash_1c5191b85675517a";
       n_waittime = 1.25;
       break;
     case # "cap_war_percent_90":
-      str_alias = # "hash_1c518cb8567548fb";
+      str_alias = #"hash_1c518cb8567548fb";
       n_waittime = 1.25;
       break;
     case # "cap_war_draining":
-      str_alias = # "hash_1c518fb856754e14";
+      str_alias = #"hash_1c518fb856754e14";
       n_waittime = 2.5;
       break;
     case # "cap_war_contested":
-      str_alias = # "hash_43014e1f7354354f";
+      str_alias = #"hash_43014e1f7354354f";
       n_waittime = 1.25;
       break;
   }

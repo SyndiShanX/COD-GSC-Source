@@ -45,9 +45,9 @@ function sr_demented_echo_fx(localclientnum, oldval, newval, bnewent, binitialsn
   }
 
   if(bwastimejump == 1) {
-    if(self.model === # "hash_2641cfb5c2cdcc85") {
+    if(self.model === #"hash_2641cfb5c2cdcc85") {
       var_1e7f4865 = getscriptbundle("fxd9_zm_char_ndu_ghoul_dark");
-      var_ee6bcd51 = # "hash_611d3f9c34b1cbd1";
+      var_ee6bcd51 = #"hash_611d3f9c34b1cbd1";
     } else {
       var_1e7f4865 = getscriptbundle("fxd9_zm_char_ndu_ghoul");
     }
@@ -73,7 +73,7 @@ function sr_demented_echo_fx(localclientnum, oldval, newval, bnewent, binitialsn
   }
 
   if(bwastimejump == 2) {
-    if(self.model === # "hash_2641cfb5c2cdcc85") {
+    if(self.model === #"hash_2641cfb5c2cdcc85") {
       function_239993de(fieldname, #"hash_2d19b2d474adee02", self, "tag_origin");
       self stoprenderoverridebundle(#"hash_611d3f9c34b1cbd1");
     } else {
@@ -88,7 +88,7 @@ function sr_demented_echo_fx(localclientnum, oldval, newval, bnewent, binitialsn
     return;
   }
 
-  if(self.model === # "hash_2641cfb5c2cdcc85") {
+  if(self.model === #"hash_2641cfb5c2cdcc85") {
     function_239993de(fieldname, #"hash_3a4d83f77eba6968", self, "tag_origin");
     self stoprenderoverridebundle(#"hash_611d3f9c34b1cbd1");
     return;

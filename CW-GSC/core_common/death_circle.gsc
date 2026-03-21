@@ -306,7 +306,7 @@ function private function_9bae34b3(var_b0b91d4, finalcircle) {
     trace = groundtrace(origin + (0, 0, 20000), origin + (0, 0, -10000), 0, undefined);
     tracepos = trace[#"position"];
 
-    if(trace[#"fraction"] >= 1 || trace[#"surfacetype"] == # "water" || trace[#"surfacetype"] == # "watershallow" || !_second_compass_map_mp_ruins(origin)) {
+    if(trace[#"fraction"] >= 1 || trace[#"surfacetype"] == #"water" || trace[#"surfacetype"] == #"watershallow" || !_second_compass_map_mp_ruins(origin)) {
       level.var_475c53d7[level.var_475c53d7.size] = tracepos;
 
       continue;
@@ -504,7 +504,7 @@ function start() {
   level callback::callback(#"hash_405e46788e83af41");
   level.var_74887eb = level.deathcircles.size - 1;
 
-  if(util::get_game_type() == # "warzone_bigteam_dbno_quad") {
+  if(util::get_game_type() == #"warzone_bigteam_dbno_quad") {
     level.var_74887eb = level.deathcircles.size - 3;
   }
 
@@ -634,7 +634,7 @@ function function_bfdaeb3a(origin, radius) {
   nextcircle.targetname = "next_death_circle";
   nextcircle setModel("tag_origin");
   function_55ffaf7(nextcircle, radius);
-  nextcircle.team = # "neutral";
+  nextcircle.team = #"neutral";
   nextcircle clientfield::set("deathcircleflag", 1);
   return nextcircle;
 }

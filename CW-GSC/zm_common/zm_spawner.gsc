@@ -969,7 +969,7 @@ function zombie_death_points(origin, mod, hit_location, attacker, inflictor, zom
   str_event = "death";
 
   if(isDefined(player)) {
-    if(inflictor.subarchetype === # "zombie_wolf_ally") {
+    if(inflictor.subarchetype === #"zombie_wolf_ally") {
       zombie.var_12745932 = 1;
     }
 
@@ -1061,7 +1061,7 @@ function zombie_death_animscript(einflictor, attacker, idamage, smeansofdeath, w
     });
   }
 
-  if((self.damagemod == "MOD_BURNED" || is_true(self.var_b364c165)) && self.archetype === # "zombie") {
+  if((self.damagemod == "MOD_BURNED" || is_true(self.var_b364c165)) && self.archetype === #"zombie") {
     self thread flame_corpse_fx();
   }
 
@@ -1336,7 +1336,7 @@ function zombie_death_event(zombie) {
       println("<dev string:x18e>");
     }
 
-    if(zombie.zm_ai_category === # "elite") {
+    if(zombie.zm_ai_category === #"elite") {
       var_a8dede81 = 1;
 
       if(isarray(zombie.var_e293f8ac)) {
@@ -1355,7 +1355,7 @@ function zombie_death_event(zombie) {
       }
     }
 
-    if(zombie.zm_ai_category === # "special") {
+    if(zombie.zm_ai_category === #"special") {
       attacker zm_stats::increment_client_stat(#"kills_special");
       attacker zm_stats::function_7bc347f6(#"kills_special");
       attacker zm_stats::function_f1a1191d(#"kills_special");
@@ -1387,7 +1387,7 @@ function zombie_death_event(zombie) {
         #player: attacker, #weapon: zombie.damageweapon, #statname: # "kills", #value: 1
       });
 
-      if(zombie.damageweapon.statname === # "planemortar") {
+      if(zombie.damageweapon.statname === #"planemortar") {
         if(!isDefined(attacker.planemortarbda)) {
           attacker.planemortarbda = 0;
         }

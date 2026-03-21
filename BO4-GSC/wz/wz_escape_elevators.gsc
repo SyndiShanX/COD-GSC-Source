@@ -144,7 +144,7 @@ is_equipment(entity) {
   if(isDefined(entity.weapon)) {
     weapon = entity.weapon;
 
-    if(weapon.name === # "ability_smart_cover" || weapon.name === # "eq_tripwire" || weapon.name === # "trophy_system" || weapon.name === # "eq_concertina_wire" || weapon.name === # "eq_sensor" || weapon.name === # "cymbal_monkey" || weapon.name === # "gadget_supplypod" || weapon.name === # "homunculus") {
+    if(weapon.name === #"ability_smart_cover" || weapon.name === #"eq_tripwire" || weapon.name === #"trophy_system" || weapon.name === #"eq_concertina_wire" || weapon.name === #"eq_sensor" || weapon.name === #"cymbal_monkey" || weapon.name === #"gadget_supplypod" || weapon.name === #"homunculus") {
       return true;
     }
   }
@@ -249,7 +249,7 @@ function_26ab1b5e(t_damage) {
       var_8fa58819 = var_38ae32ff[2];
       var_8fa58819 *= var_8fa58819;
 
-      if(var_8fa58819 < 32 || e_vehicle.scriptvehicletype === # "helicopter_light") {
+      if(var_8fa58819 < 32 || e_vehicle.scriptvehicletype === #"helicopter_light") {
         a_players = e_vehicle getvehoccupants();
         e_vehicle.takedamage = 1;
         e_vehicle.allowdeath = 1;

@@ -35,9 +35,9 @@ function private preinit() {
     level.var_5bc34f35 = array(level.var_5bc34f35);
   }
 
-  level.var_5bc34f35[0] = # "hash_6395e1f6c15c9836";
-  level.var_5bc34f35[1] = # "hash_5f6d3a2792178e29";
-  level.var_5bc34f35[2] = # "hash_23d733932ddd62b4";
+  level.var_5bc34f35[0] = #"hash_6395e1f6c15c9836";
+  level.var_5bc34f35[1] = #"hash_5f6d3a2792178e29";
+  level.var_5bc34f35[2] = #"hash_23d733932ddd62b4";
 
   if(!isDefined(level.var_5d881f3a)) {
     level.var_5d881f3a = [];
@@ -45,9 +45,9 @@ function private preinit() {
     level.var_5d881f3a = array(level.var_5d881f3a);
   }
 
-  level.var_5d881f3a[0] = # "hash_5e4a019c329ade68";
-  level.var_5d881f3a[1] = # "hash_439ea8dd5a16d629";
-  level.var_5d881f3a[2] = # "hash_5055722139451102";
+  level.var_5d881f3a[0] = #"hash_5e4a019c329ade68";
+  level.var_5d881f3a[1] = #"hash_439ea8dd5a16d629";
+  level.var_5d881f3a[2] = #"hash_5055722139451102";
 
   if(!isDefined(level.var_9a8b65b)) {
     level.var_9a8b65b = [];
@@ -55,9 +55,9 @@ function private preinit() {
     level.var_9a8b65b = array(level.var_9a8b65b);
   }
 
-  level.var_9a8b65b[0] = # "hash_3c90d5c126974d0f";
-  level.var_9a8b65b[1] = # "hash_21bb9d616abf305a";
-  level.var_9a8b65b[2] = # "hash_2884c0d1a250451d";
+  level.var_9a8b65b[0] = #"hash_3c90d5c126974d0f";
+  level.var_9a8b65b[1] = #"hash_21bb9d616abf305a";
+  level.var_9a8b65b[2] = #"hash_2884c0d1a250451d";
 
   if(!isDefined(level.var_b421585f)) {
     level.var_b421585f = [];
@@ -65,9 +65,9 @@ function private preinit() {
     level.var_b421585f = array(level.var_b421585f);
   }
 
-  level.var_b421585f[0] = # "hash_1eb0fcd268ad64f9";
-  level.var_b421585f[1] = # "hash_7d68903fe1e1885a";
-  level.var_b421585f[2] = # "hash_1b5cc8850bb5d913";
+  level.var_b421585f[0] = #"hash_1eb0fcd268ad64f9";
+  level.var_b421585f[1] = #"hash_7d68903fe1e1885a";
+  level.var_b421585f[2] = #"hash_1b5cc8850bb5d913";
   level.var_6614c251 = &function_6247981b;
 }
 
@@ -289,7 +289,7 @@ function function_6247981b(localclientnum, itementry) {
   }
 
   if(isDefined(var_b84949d0)) {
-    if(itementry.name === # "axe_gun_energetic_shard_item_t9") {
+    if(itementry.name === #"axe_gun_energetic_shard_item_t9") {
       if(isDefined(self.var_c926b4fc) && self.var_c926b4fc >= 5) {
         return 4194304;
       } else {

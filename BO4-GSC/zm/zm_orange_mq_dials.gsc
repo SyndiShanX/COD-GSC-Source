@@ -110,7 +110,7 @@ function_1e5c0d3b() {
   while(!level flag::get(#"dials_done")) {
     s_results = self waittill(#"trigger_activated", #"dials_done");
 
-    if(s_results._notify == # "dials_done") {
+    if(s_results._notify == #"dials_done") {
       return;
     }
 

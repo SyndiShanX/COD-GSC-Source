@@ -260,7 +260,7 @@ function private function_fccfb0af(loadoutclass, &var_19546df5, var_38e0e278, co
   groupnames = [];
 
   foreach(groupname, attachments in var_38e0e278) {
-    if(groupname != # "none") {
+    if(groupname != #"none") {
       groupnames[groupnames.size] = groupname;
     }
   }
@@ -284,7 +284,7 @@ function private function_fccfb0af(loadoutclass, &var_19546df5, var_38e0e278, co
 
     attachmentindex = var_b8a59e38;
 
-    if(groupname == # "optic") {
+    if(groupname == #"optic") {
       attachmentindex = 0;
     } else if(!var_41a600fd) {
       attachmentindex++;
@@ -292,7 +292,7 @@ function private function_fccfb0af(loadoutclass, &var_19546df5, var_38e0e278, co
 
     if(self[[var_1b426c77]](loadoutclass, attachment, attachmentindex)) {
       var_b8a59e38++;
-      var_41a600fd |= groupname == # "optic";
+      var_41a600fd |= groupname == #"optic";
       arrayremoveindex(groupnames, groupindex, 0);
       continue;
     }
@@ -362,7 +362,7 @@ function private function_20d254c4(var_543fda24, statindexoffset, overridedvar =
   if(isDefined(overridedvar)) {
     dvarstr = getdvarstring(overridedvar, "<dev string:x38>");
 
-    if(dvarstr == # "none") {
+    if(dvarstr == #"none") {
       return [];
     }
 
@@ -381,7 +381,7 @@ function private function_20d254c4(var_543fda24, statindexoffset, overridedvar =
 
   foreach(item in var_543fda24) {
     if(!isDefined(item.name)) {
-      names[names.size] = # "none";
+      names[names.size] = #"none";
       continue;
     }
 
@@ -416,7 +416,7 @@ function private function_ef026df8(attachments, overridedvar = undefined) {
   if(isDefined(overridedvar)) {
     dvarstr = getdvarstring(overridedvar, "<dev string:x38>");
 
-    if(dvarstr == # "none") {
+    if(dvarstr == #"none") {
       return [];
     }
 

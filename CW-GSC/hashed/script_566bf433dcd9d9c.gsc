@@ -108,7 +108,7 @@ function private opendooratreasonabletime() {
   var_45047e1c = distance2dsquared(doorcenter, self.origin);
   opendist = 64;
 
-  if(self.archetype == # "human" && self haspath()) {
+  if(self.archetype == #"human" && self haspath()) {
     currentspeed = self function_28e7d252();
     var_a3bb43c4 = function_f002dade(#"human", #"run");
 
@@ -149,7 +149,7 @@ function private closedoorifnecessary(door) {
 
 function private waitfordooropen(var_91fea62e) {
   self.ai.var_10150769 = var_91fea62e;
-  var_636f02cd = # "hash_3866cfe35818bf88";
+  var_636f02cd = #"hash_3866cfe35818bf88";
   self notify(#"hash_4df5ebbdfb65254e");
   self endon(#"hash_4df5ebbdfb65254e", #"death");
 

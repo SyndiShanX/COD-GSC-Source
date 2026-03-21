@@ -70,8 +70,8 @@ function function_2a1e5c1f(origin, angles, modelname, type = 1, var_5653e2ee = 2
       if(args.size > 2) {
         switch (int(args[2])) {
           case 1:
-            door_model.var_fc5f2aa0.hintstring = # "hash_4bd50984d9d381eb";
-            door_model.var_fc5f2aa0.var_e8dff5e5 = # "hash_4de7d058f1248fe8";
+            door_model.var_fc5f2aa0.hintstring = #"hash_4bd50984d9d381eb";
+            door_model.var_fc5f2aa0.var_e8dff5e5 = #"hash_4de7d058f1248fe8";
             break;
         }
       }
@@ -90,7 +90,7 @@ function function_2a1e5c1f(origin, angles, modelname, type = 1, var_5653e2ee = 2
     }
   }
 
-  if(door_model.var_fc5f2aa0.type === # "hardcore") {
+  if(door_model.var_fc5f2aa0.type === #"hardcore") {
     if(is_true(level.doa.hardcoremode)) {
       door_model.var_d6118311 = 1;
     }

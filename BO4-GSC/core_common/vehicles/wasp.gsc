@@ -1321,7 +1321,7 @@ drone_callback_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
 }
 
 drone_allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon) {
-  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == # "wasp" && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && isDefined(smeansofdeath) && eattacker.archetype == #"wasp" && smeansofdeath == "MOD_EXPLOSIVE") {
     return true;
   }
 

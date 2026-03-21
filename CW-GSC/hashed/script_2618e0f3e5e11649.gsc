@@ -188,11 +188,11 @@ function function_c43e2960(var_89bd79c0, tunables) {
 
 function function_ba8b8ba3(&spawn_points) {
   foreach(point in spawn_points) {
-    if(point.var_90d0c0ff === # " ") {
+    if(point.var_90d0c0ff === #" ") {
       point.var_90d0c0ff = undefined;
     }
 
-    if(point.archetype === # " ") {
+    if(point.archetype === #" ") {
       point.archetype = undefined;
     }
   }
@@ -874,7 +874,7 @@ function spawn_ai(hotzone) {
   spawn_point = function_89116a1e(var_e592e473, instance, spawn_info.aitype_name);
 
   if(hotzone === level.var_2c56b3ec && !level flag::get(#"hash_ad588d53f52329a")) {
-    var_9f9ede51 = # "hash_729b116cf9d044";
+    var_9f9ede51 = #"hash_729b116cf9d044";
   } else {
     var_9f9ede51 = spawn_info.aitype_name;
   }
@@ -896,7 +896,7 @@ function spawn_ai(hotzone) {
       new_ai.var_c9b11cb3 = spawn_point.var_90d0c0ff;
     }
 
-    if(var_9f9ede51 == # "hash_729b116cf9d044" && !level flag::get(#"hash_ad588d53f52329a")) {
+    if(var_9f9ede51 == #"hash_729b116cf9d044" && !level flag::get(#"hash_ad588d53f52329a")) {
       level flag::set(#"hash_ad588d53f52329a");
 
       level thread namespace_1125e192::function_ace23f69(spawn_point.origin);
@@ -990,7 +990,7 @@ function function_418ab095(ai, hotzone) {
   ai.hotzone = hotzone;
   ai function_18c143e6();
 
-  if(ai.current_state.name === # "chase" && isDefined(ai.favoriteenemy) && ai.favoriteenemy.team !== level.zombie_team) {
+  if(ai.current_state.name === #"chase" && isDefined(ai.favoriteenemy) && ai.favoriteenemy.team !== level.zombie_team) {
     self function_11efa003(hotzone, ai.favoriteenemy);
   } else {
     ai thread function_8967ab54();
@@ -1035,7 +1035,7 @@ function function_2b886fac(params, hotzone, var_679c4943 = 0) {
 }
 
 function function_95899b5c(hotzone) {
-  if(self.aitype === # "hash_729b116cf9d044") {
+  if(self.aitype === #"hash_729b116cf9d044") {
     level flag::clear(#"hash_ad588d53f52329a");
   }
 
@@ -1143,7 +1143,7 @@ function function_64a303c6(hotzone) {
   }
 
   foreach(ai in hotzone.instance.active_ai) {
-    if(isDefined(ai.current_state) && ai.current_state.name == # "chase") {
+    if(isDefined(ai.current_state) && ai.current_state.name == #"chase") {
       return true;
     }
   }

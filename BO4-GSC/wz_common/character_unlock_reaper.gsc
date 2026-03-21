@@ -31,7 +31,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu35_item") {
+  if(itementry.name === #"cu35_item") {
     if(self character_unlock::function_f0406288(#"reaper_unlock")) {
       if(self stats::get_stat_global(#"kills_early") >= 115) {
         self character_unlock::function_c8beca5e(#"reaper_unlock", #"hash_555c37b28c4a770c", 1);

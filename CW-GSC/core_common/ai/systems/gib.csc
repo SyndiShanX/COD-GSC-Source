@@ -188,7 +188,7 @@ function private _annihilatecorpse() {
       cliententgibleftleg(localclientnum, body, 0);
     }
 
-    if(isDefined(body) && _hasgibdef(body, 0) && body.archetype == # "human") {
+    if(isDefined(body) && _hasgibdef(body, 0) && body.archetype == #"human") {
       if(randomint(100) >= 50) {
         continue;
       }
@@ -488,7 +488,7 @@ function _gibpiece(localclientnum, entity, gibmodel, gibtag, gibfx, gibdir, gibd
     return;
   }
 
-  if(gibmodel == # "") {
+  if(gibmodel == #"") {
     return;
   }
 

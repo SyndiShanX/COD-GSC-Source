@@ -58,7 +58,7 @@ function default_onforfeit(params) {
 function default_ondeadevent(team) {
   current_winner = round::get_winner();
 
-  if(isDefined(current_winner) && current_winner != # "none") {
+  if(isDefined(current_winner) && current_winner != #"none") {
     return;
   }
 
@@ -103,7 +103,7 @@ function onendgame(var_c1e98979) {
 
   winner = match::function_6d0354e3();
 
-  if(level.tournamentmatch === 1 && (!isDefined(winner) || winner == # "none")) {
+  if(level.tournamentmatch === 1 && (!isDefined(winner) || winner == #"none")) {
     winner = match::function_10cd0ad();
   }
 
@@ -155,7 +155,7 @@ function default_onroundscorelimit() {
 function private function_85d45b4b(origin, angles) {
   self spawn(origin, angles);
 
-  if(self.pers[#"team"] != # "spectator" && level.var_1ba484ad === 2) {
+  if(self.pers[#"team"] != #"spectator" && level.var_1ba484ad === 2) {
     self spectate_view::function_86df9236();
   }
 }

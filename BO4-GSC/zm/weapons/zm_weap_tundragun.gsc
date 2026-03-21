@@ -24,7 +24,7 @@ __main__() {
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(self.zm_ai_category === # "basic" || self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"basic" || self.zm_ai_category === #"popcorn") {
     self.water_damage = 1;
     return (self.health + 666);
   }

@@ -164,15 +164,15 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + # "hash_458d10e70473adfd", 8000, 1, "int");
   zm_sq::register(#"zm_mansion_pap_quest", #"hash_12a37f2c621d1245", #"capture_souls", &mansion_pap::init, &mansion_pap::cleanup);
   zm_sq::register(#"zm_mansion_silver_bullet", #"collect_silver", #"silver_bullet", &mansion_silver_bullet::init, &mansion_silver_bullet::cleanup);
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[#"switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
-  level._effect[#"zombie_jump_in_glass_burst"] = # "hash_336284821ea3902e";
-  level._effect[#"power_on_impact"] = # "hash_6e44fde5d49cfc9b";
-  level._effect[#"zmb_marker"] = # "hash_6714ad8af406b4ee";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = #"electric/fx8_sparks_burst_dir_sm_orange_os";
+  level._effect[#"zombie_jump_in_glass_burst"] = #"hash_336284821ea3902e";
+  level._effect[#"power_on_impact"] = #"hash_6e44fde5d49cfc9b";
+  level._effect[#"zmb_marker"] = #"hash_6714ad8af406b4ee";
   level._no_vending_machine_auto_collision = 1;
   level.default_start_location = "start_room";
   level.default_game_mode = "zclassic";
@@ -184,7 +184,7 @@ event_handler[level_init] main(eventstruct) {
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
   level.var_ee565b3f = &ww_random_ray_gun::function_1998c3ac;
   level.var_bb2323e4 = &ww_random_ray_gun::function_912c1a28;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_mansion_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_mansion_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
@@ -199,7 +199,7 @@ event_handler[level_init] main(eventstruct) {
   spawner::add_archetype_spawn_function(#"zombie", &function_d7bc28f1);
   callback::on_spawned(&zm_mansion_sound::function_a3a92098);
 
-  if(util::get_game_type() == # "zstandard") {
+  if(util::get_game_type() == #"zstandard") {
     level.var_c032ff64 = &function_3bc4f1b5;
   }
 
@@ -223,17 +223,17 @@ event_handler[level_init] main(eventstruct) {
 
   level._zombiemode_custom_box_move_logic = &function_c8ac6f35;
   level.customrandomweaponweights = &function_adac5e49;
-  level.var_d5bd7049 = # "hash_d113c0c2602fb97";
+  level.var_d5bd7049 = #"hash_d113c0c2602fb97";
   level thread sndfunctions();
-  getweapon(#"zitem_silver_bullet_part_1").var_62a98b13 = # "charcoal";
-  getweapon(#"zitem_silver_bullet_part_2").var_62a98b13 = # "guano";
-  getweapon(#"zitem_silver_bullet_part_3").var_62a98b13 = # "sulfur";
-  getweapon(#"zitem_silver_molten_part_1").var_25bb96cc = # "hash_70ba93e662197328";
-  getweapon(#"zitem_silver_molten_part_2").var_25bb96cc = # "hash_70ba93e662197328";
-  getweapon(#"zitem_silver_molten_part_3").var_25bb96cc = # "hash_70ba93e662197328";
-  getweapon(#"zitem_silver_bullet_part_1").var_25bb96cc = # "hash_69e071a8eb1f216e";
-  getweapon(#"zitem_silver_bullet_part_2").var_25bb96cc = # "hash_b94435b24bcdaf7";
-  getweapon(#"zitem_silver_bullet_part_3").var_25bb96cc = # "hash_7b5b4849016125ac";
+  getweapon(#"zitem_silver_bullet_part_1").var_62a98b13 = #"charcoal";
+  getweapon(#"zitem_silver_bullet_part_2").var_62a98b13 = #"guano";
+  getweapon(#"zitem_silver_bullet_part_3").var_62a98b13 = #"sulfur";
+  getweapon(#"zitem_silver_molten_part_1").var_25bb96cc = #"hash_70ba93e662197328";
+  getweapon(#"zitem_silver_molten_part_2").var_25bb96cc = #"hash_70ba93e662197328";
+  getweapon(#"zitem_silver_molten_part_3").var_25bb96cc = #"hash_70ba93e662197328";
+  getweapon(#"zitem_silver_bullet_part_1").var_25bb96cc = #"hash_69e071a8eb1f216e";
+  getweapon(#"zitem_silver_bullet_part_2").var_25bb96cc = #"hash_b94435b24bcdaf7";
+  getweapon(#"zitem_silver_bullet_part_3").var_25bb96cc = #"hash_7b5b4849016125ac";
   zm_sq::start(#"zm_mansion_pap_quest", 1);
   zm_sq::start(#"zm_mansion_silver_bullet", 1);
   level thread function_2d164b86();
@@ -585,7 +585,7 @@ offhand_weapon_give_override(str_weapon) {
 }
 
 function_78f60fd5(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(isPlayer(attacker) && isDefined(self.archetype) && (self.archetype == # "nosferatu" || self.archetype == # "crimson_nosferatu") && attacker hasweapon(level.w_stake_knife)) {
+  if(isPlayer(attacker) && isDefined(self.archetype) && (self.archetype == #"nosferatu" || self.archetype == #"crimson_nosferatu") && attacker hasweapon(level.w_stake_knife)) {
     if(!(isDefined(attacker.var_594a3318) && attacker.var_594a3318)) {
       attacker thread zm_vo::function_a2bd5a0c(#"hash_682afe734ec44af", 3);
       attacker.var_594a3318 = 1;
@@ -772,7 +772,7 @@ setupmusic() {
 }
 
 function_7abcb565() {
-  if(util::get_game_type() == # "zstandard") {
+  if(util::get_game_type() == #"zstandard") {
     s_loc = struct::get("rush_perk_altar_cellar", "targetname");
   } else {
     s_loc = struct::get("random_perk_vapor_altar", "script_noteworthy");
@@ -826,9 +826,9 @@ function_df9d5ef() {
   foreach(s_altar in struct::get_array("perk_vapor_altar")) {
     switch (s_altar.prefabname) {
       case # "graveyard":
-        if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_zeus_mod") {
+        if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_zeus_mod") {
           exploder::exploder("exp_lgt_cemeter_alter_zeus");
-        } else if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_odin_mod") {
+        } else if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_odin_mod") {
           exploder::exploder("exp_lgt_cemeter_alter_odin");
         } else {
           exploder::exploder("exp_lgt_cemeter_alter_ra");
@@ -836,9 +836,9 @@ function_df9d5ef() {
 
         break;
       case # "gardens":
-        if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_zeus_mod") {
+        if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_zeus_mod") {
           exploder::exploder("exp_lgt_garden_alter_zeus");
-        } else if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_odin_mod") {
+        } else if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_odin_mod") {
           exploder::exploder("exp_lgt_garden_alter_odin");
         } else {
           exploder::exploder("exp_lgt_garden_alter_ra");
@@ -846,9 +846,9 @@ function_df9d5ef() {
 
         break;
       case # "cellar":
-        if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_zeus_mod") {
+        if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_zeus_mod") {
           exploder::exploder("exp_lgt_cellar_alter_zeus");
-        } else if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_odin_mod") {
+        } else if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_odin_mod") {
           exploder::exploder("exp_lgt_cellar_alter_odin");
         } else {
           exploder::exploder("exp_lgt_cellar_alter_ra");
@@ -856,9 +856,9 @@ function_df9d5ef() {
 
         break;
       case # "forest_entrance":
-        if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_zeus_mod") {
+        if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_zeus_mod") {
           exploder::exploder("exp_lgt_forest_alter_zeus");
-        } else if(s_altar.mdl_altar.model === # "p8_fxanim_zm_vapor_altar_odin_mod") {
+        } else if(s_altar.mdl_altar.model === #"p8_fxanim_zm_vapor_altar_odin_mod") {
           exploder::exploder("exp_lgt_forest_alter_odin");
         } else {
           exploder::exploder("exp_lgt_forest_alter_ra");
@@ -1169,7 +1169,7 @@ debris_scene(str_targetname, str_script_flag, var_d46cd47, var_d6d5180b) {
 
 function_2c7766d0() {
   zm_fasttravel::function_44a82004("power_on1");
-  level.var_5bfd847e = # "power_on1";
+  level.var_5bfd847e = #"power_on1";
   level.var_e9737821 = &function_c52e8ba;
   level.var_352c9e03 = &function_af65fe93;
 }
@@ -1184,23 +1184,23 @@ function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(!self zm_fasttravel::function_d06e636b(player)) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
     switch (self.stub.var_a4134e51) {
       case # "open_pap":
-        self.hint_string[n_player_index] = # "hash_6dcacaabbe757952";
+        self.hint_string[n_player_index] = #"hash_6dcacaabbe757952";
         break;
       default:
-        self.hint_string[n_player_index] = # "zombie/fasttravel_locked";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
         break;
     }
 
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c]) {
-    self.hint_string[n_player_index] = # "hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
     b_result = 1;
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
-    self.hint_string[n_player_index] = # "zombie/fasttravel_delay";
+    self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
     b_result = 1;
   } else {
     switch (self.stub.script_string) {
@@ -1241,7 +1241,7 @@ function_ae29ba0f(player) {
     case # "zblueprint_chaos_lvl3":
     case # "zblueprint_mansion_ww_lvl2":
       if(!player hasweapon(self.blueprint.components[0]) && isDefined(self.bought) && self.bought) {
-        self.hint_string = # "hash_64cb545dd18c607";
+        self.hint_string = #"hash_64cb545dd18c607";
       }
 
       break;
@@ -2166,7 +2166,7 @@ function_1aba9a64() {
 function_a72077f8() {
   foreach(ai_zombie in getaiteamarray(#"axis")) {
     if(!isDefined(ai_zombie.var_3f5addd0)) {
-      if(isalive(ai_zombie) && isDefined(ai_zombie.archetype) && (ai_zombie.archetype == # "zombie" || ai_zombie.archetype == # "nosferatu" || ai_zombie.archetype == # "zombie_dog")) {
+      if(isalive(ai_zombie) && isDefined(ai_zombie.archetype) && (ai_zombie.archetype == #"zombie" || ai_zombie.archetype == #"nosferatu" || ai_zombie.archetype == #"zombie_dog")) {
         ai_zombie clientfield::set("<dev string:x3f5a>" + # "wisp_kill", 1);
         ai_zombie.var_3f5addd0 = 1;
       }
@@ -2336,7 +2336,7 @@ function_e907bb3d(cmd) {
 
 function_ae21a5ee(cmd) {
   foreach(ai in getaiteamarray(#"axis")) {
-    if(isalive(ai) && ai.archetype === # "zombie") {
+    if(isalive(ai) && ai.archetype === #"zombie") {
       ai clientfield::set("<dev string:x3f5a>" + # "clock_zombie", 1);
     }
   }

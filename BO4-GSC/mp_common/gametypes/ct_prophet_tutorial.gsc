@@ -48,7 +48,7 @@ init() {
 }
 
 function_c9ff0dce() {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self thread ct_utils::function_8f04870f();
     self thread function_74efec9a();
     return;
@@ -99,7 +99,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     if(isDefined(level.var_8ca3c62)) {
       if(level.var_8ca3c62 == 9) {
         if(isDefined(level.var_4572ae40) && isDefined(self.var_e37e98ba) && self.var_e37e98ba) {
@@ -388,7 +388,7 @@ function_7c64c8be(s_start_loc) {
   self ct_utils::give_weapon(#"ar_accurate_t8", 1);
   self thread ct_utils::function_96dda082();
 
-  if(isDefined(s_start_loc.script_noteworthy) && s_start_loc.script_noteworthy == # "seeker_target") {
+  if(isDefined(s_start_loc.script_noteworthy) && s_start_loc.script_noteworthy == #"seeker_target") {
     level.var_bc8c7099 = struct::get(#"seeker_target", "script_noteworthy");
     var_d6456ed5 = 0;
   } else {
@@ -398,7 +398,7 @@ function_7c64c8be(s_start_loc) {
   s_target = struct::get(s_start_loc.target, "targetname");
   var_adf33a9e = util::spawn_model("tag_origin", s_target.origin, s_target.angles);
   var_adf33a9e function_2baad8fc();
-  var_adf33a9e.team = # "allies";
+  var_adf33a9e.team = #"allies";
   self setentitytarget(var_adf33a9e);
   self thread function_df8f80c4(var_adf33a9e);
   level waittill(#"hash_7711f0aa30443b10");
@@ -908,7 +908,7 @@ function_c4546e73(s_start_loc) {
   s_target = array::random(a_s_target);
   var_adf33a9e = util::spawn_model("tag_origin", s_target.origin, s_target.angles);
   var_adf33a9e function_2baad8fc();
-  var_adf33a9e.team = # "allies";
+  var_adf33a9e.team = #"allies";
   self setentitytarget(var_adf33a9e);
   self thread function_df8f80c4(var_adf33a9e);
   s_notify = self waittill(#"damage");
@@ -1611,8 +1611,8 @@ overridedamage_player(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_
 
 function_b512a9bf(n_slot) {
   a_str_gadgets = [];
-  a_str_gadgets[0] = # "eq_seeker_mine";
-  a_str_gadgets[2] = # "shock_rifle";
+  a_str_gadgets[0] = #"eq_seeker_mine";
+  a_str_gadgets[2] = #"shock_rifle";
   str_gadget = a_str_gadgets[n_slot];
 
   if(isinarray(level.var_e72728b8, str_gadget)) {
@@ -1626,7 +1626,7 @@ function_9bf1e805(e_player) {
   level endon(#"combattraining_logic_finished");
   self endon(#"death");
 
-  if(e_player.team === # "axis") {
+  if(e_player.team === #"axis") {
     if(isDefined(level.var_31a4679)) {
       var_d4abfbec = ct_utils::get_player();
       v_to_player = var_d4abfbec.origin - level.var_31a4679.origin;
@@ -1688,7 +1688,7 @@ function_a4036130() {
 }
 
 function_8259415c(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
-  if(eattacker.team == # "allies") {
+  if(eattacker.team == #"allies") {
     return 0;
   }
 
@@ -1848,7 +1848,7 @@ function_980638c8(params) {
     cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"dart");
     var_23efb519 = level.var_dd8875fe;
     level.var_595e41ee = 50;
-    event = # "ekia";
+    event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
     eattacker globallogic_score::giveplayermomentumnotification(level.var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;

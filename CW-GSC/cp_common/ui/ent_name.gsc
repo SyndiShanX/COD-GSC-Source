@@ -16,7 +16,7 @@ function add(name, team = 1) {
   var_b40f1dcd = level.var_479cdca1.size == 0;
 
   if(ishash(team)) {
-    if(team == # "axis" || team == # "enemy") {
+    if(team == #"axis" || team == #"enemy") {
       team = 2;
     } else {
       team = 1;
@@ -73,13 +73,13 @@ function private _think() {
   level.var_435c3a22 = [];
   util::init_dvar("cg_maxActorNameDist", 500, &function_e65ba67);
   namespace_61e6d095::create(#"entname", #"hash_1624d8814bab0c71");
-  name = # "";
+  name = #"";
   team = 0;
   namespace_61e6d095::set_text(#"entname", name);
   namespace_61e6d095::set_state(#"entname", team);
 
   while(isDefined(level.var_479cdca1)) {
-    new_name = # "";
+    new_name = #"";
     new_team = 0;
 
     if(isDefined(player.lookatent) && distancesquared(player.origin, player.lookatent.origin) <= level.var_435c3a22[#"cg_maxActorNameDist"]) {
@@ -107,7 +107,7 @@ function private _think() {
 }
 
 function private function_e65ba67(dvar) {
-  if(dvar.name == # "cg_maxActorNameDist") {
+  if(dvar.name == #"cg_maxActorNameDist") {
     dvar.value *= dvar.value;
   }
 

@@ -548,13 +548,13 @@ onturretdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, v
       if(is_valid_target(einflictor, self.team)) {
         self.favoriteenemy = einflictor;
         self.var_c8072bcc = gettime();
-        self.var_7eb3ebd5[einflictor getentitynumber()] = # "damage";
+        self.var_7eb3ebd5[einflictor getentitynumber()] = #"damage";
         self targetting_delay::function_a4d6d6d8(einflictor);
       }
     } else if(isalive(eattacker) && issentient(eattacker) && !(isPlayer(eattacker) && eattacker isremotecontrolling()) && is_valid_target(eattacker, self.team)) {
       self.favoriteenemy = eattacker;
       self.var_c8072bcc = gettime();
-      self.var_7eb3ebd5[eattacker getentitynumber()] = # "damage";
+      self.var_7eb3ebd5[eattacker getentitynumber()] = #"damage";
       self targetting_delay::function_a4d6d6d8(eattacker);
     }
   }
@@ -788,7 +788,7 @@ function_fefefcc4() {
       nearby_enemies = getplayers(util::getotherteam(veh.team), veh.origin, var_beeadda8);
 
       if(nearby_enemies.size > 0) {
-        if(veh.var_3413afc5 != # "hash_2d94a5f22d36fc73") {
+        if(veh.var_3413afc5 != #"hash_2d94a5f22d36fc73") {
           veh function_c524c4c8();
         } else {
           foreach(nearby_enemy in nearby_enemies) {
@@ -806,16 +806,16 @@ function_fefefcc4() {
 
             veh.favoriteenemy = nearby_enemy;
             veh.var_c8072bcc = gettime();
-            veh.var_7eb3ebd5[nearby_enemy getentitynumber()] = # "hash_47697c94ffb4a5bd";
+            veh.var_7eb3ebd5[nearby_enemy getentitynumber()] = #"hash_47697c94ffb4a5bd";
             break;
           }
         }
-      } else if(veh.var_3413afc5 != # "standard_sight") {
+      } else if(veh.var_3413afc5 != #"standard_sight") {
         veh function_bc7568f1();
       }
     }
 
-    wait_time = veh.var_3413afc5 == # "standard_sight" ? 0.25 : 0.1;
+    wait_time = veh.var_3413afc5 == #"standard_sight" ? 0.25 : 0.1;
     wait wait_time;
   }
 }
@@ -838,7 +838,7 @@ function_2034705c(bundle) {
   var_351b3c55 = isDefined(self.enemy) ? max(isDefined(self.enemylastseentime) ? self.enemylastseentime : 0, isDefined(self.var_c8072bcc) ? self.var_c8072bcc : 0) : 0;
   var_c112caa0 = int((isDefined(bundle.var_fa38350a) ? bundle.var_fa38350a : 1) * 1000);
 
-  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === # "damage") {
+  if(isDefined(self.enemy) && self.var_7eb3ebd5[self.enemy getentitynumber()] === #"damage") {
     var_c112caa0 = int((isDefined(bundle.var_33561c46) ? bundle.var_33561c46 : 3) * 1000);
   }
 
@@ -862,14 +862,14 @@ function_bc7568f1() {
   self.sightlatency = 100;
   self.fovcosine = 0.5;
   self.fovcosinebusy = 0.5;
-  self.var_3413afc5 = # "standard_sight";
+  self.var_3413afc5 = #"standard_sight";
 }
 
 function_c524c4c8() {
   self.sightlatency = 100;
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
-  self.var_3413afc5 = # "hash_2d94a5f22d36fc73";
+  self.var_3413afc5 = #"hash_2d94a5f22d36fc73";
 }
 
 get_target_offset(target) {
@@ -946,7 +946,7 @@ turretscanning() {
 
       var_2aa33bf1 = 0;
 
-      if(distancesquared(veh.enemy.origin, veh.origin) > veh.var_38e6355c && veh.var_7eb3ebd5[veh.enemy getentitynumber()] === # "forwardscan") {
+      if(distancesquared(veh.enemy.origin, veh.origin) > veh.var_38e6355c && veh.var_7eb3ebd5[veh.enemy getentitynumber()] === #"forwardscan") {
         var_2aa33bf1 = 1;
       } else if(veh function_9d86d74c(veh.enemy)) {
         var_2aa33bf1 = 1;
@@ -961,7 +961,7 @@ turretscanning() {
 
       if(!isDefined(veh.var_7eb3ebd5[veh.enemy getentitynumber()]) && veh targetting_delay::function_1c169b3a(veh.enemy)) {
         veh.var_c8072bcc = gettime();
-        veh.var_7eb3ebd5[veh.enemy getentitynumber()] = # "forwardscan";
+        veh.var_7eb3ebd5[veh.enemy getentitynumber()] = #"forwardscan";
       }
     }
 
@@ -1054,7 +1054,7 @@ turretscanning() {
 
     waitresult = veh waittilltimeout(3.5, #"enemy");
 
-    if(waitresult._notify == # "enemy" && isDefined(veh.enemy)) {
+    if(waitresult._notify == #"enemy" && isDefined(veh.enemy)) {
       if(veh.var_aac73d6c && !isDefined(veh.enemylastseentime)) {
         attempts = 0;
         max_tries = 10;
@@ -1218,11 +1218,11 @@ on_player_killed() {
       continue;
     }
 
-    if(self.var_e78602fc.vehicletype === # "ultimate_turret") {
+    if(self.var_e78602fc.vehicletype === #"ultimate_turret") {
       continue;
     }
 
-    if(var_69501900.vehicletype === # "ultimate_turret") {
+    if(var_69501900.vehicletype === #"ultimate_turret") {
       if(!isDefined(var_f60ab10f)) {
         var_f60ab10f = [];
       } else if(!isarray(var_f60ab10f)) {

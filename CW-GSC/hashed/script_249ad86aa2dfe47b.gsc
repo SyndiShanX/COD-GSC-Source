@@ -756,7 +756,7 @@ function function_438267a6() {
   while(true) {
     level.player waittill(#"weapon_fire");
 
-    if(level.player getcurrentweapon().name != # "hash_165cf52ce418f5a1") {
+    if(level.player getcurrentweapon().name != #"hash_165cf52ce418f5a1") {
       level flag::set("flag_waterfall_path_player_shot");
       break;
     }

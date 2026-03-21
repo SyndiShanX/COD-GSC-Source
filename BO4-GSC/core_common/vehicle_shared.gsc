@@ -2022,9 +2022,9 @@ control_lights_groups(on) {
 
 lights_on(team) {
   if(isDefined(team)) {
-    if(team == # "allies") {
+    if(team == #"allies") {
       self clientfield::set("toggle_lights", 2);
-    } else if(team == # "axis") {
+    } else if(team == #"axis") {
       self clientfield::set("toggle_lights", 3);
     }
   } else {
@@ -3179,7 +3179,7 @@ function_831cd622(e_player) {
   s_info = {};
   v_movement = e_player getnormalizedmovement();
 
-  if(self.archetype === # "fav") {
+  if(self.archetype === #"fav") {
     var_d526c0e4 = self.origin + anglestoright(self.angles) * 115;
     var_c1af71a1 = self.origin + anglestoright(self.angles) * -125;
     var_b44997b4 = self.origin + anglesToForward(self.angles) * -110;
@@ -3196,7 +3196,7 @@ function_831cd622(e_player) {
     if(!ispointonnavmesh(var_b44997b4) || !bullettracepassed(self.origin + (0, 0, 75), var_b44997b4 + (0, 0, 75), 1, self)) {
       s_info.var_ad3d636d = getclosestpointonnavmesh(self.origin, 256, 16);
     }
-  } else if(self.archetype === # "quad") {
+  } else if(self.archetype === #"quad") {
     var_d526c0e4 = self.origin + anglestoright(self.angles) * 85;
     var_c1af71a1 = self.origin + anglestoright(self.angles) * -85;
 

@@ -73,7 +73,7 @@ function_7c4ef26b(predictedspawn) {
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       if(level flag::get("hardpoint_active")) {
         self thread function_5ccd53d5();
@@ -102,7 +102,7 @@ function_7c4ef26b(predictedspawn) {
       self[[level.var_e31c5d7a]]();
     }
 
-    if(self.team == # "axis") {
+    if(self.team == #"axis") {
       if(level.var_7150ddcb < 5) {
         self thread function_5237d068();
       }
@@ -127,7 +127,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       self thread ct_utils::function_ee4639dd(5);
     }
@@ -386,7 +386,7 @@ function_6c645ca4() {
         a_bots = arraysort(a_bots, level.var_4d47c040, 1);
 
         foreach(bot in a_bots) {
-          if(bot.team == # "axis") {
+          if(bot.team == #"axis") {
             level.var_5795f618 = bot;
             level.var_5795f618 function_bf5c4d90();
           }

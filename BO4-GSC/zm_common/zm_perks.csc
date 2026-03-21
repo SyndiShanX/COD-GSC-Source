@@ -19,19 +19,19 @@ init() {
   }
 
   callback::on_start_gametype(&init_perk_machines_fx);
-  level._effect[#"hash_57c8c9eff08ddf44"] = # "hash_56161fdf383c5fdc";
-  level._effect[#"hash_7c3a9f5103c06ff6"] = # "hash_420040b9ccd8bd85";
+  level._effect[#"hash_57c8c9eff08ddf44"] = #"hash_56161fdf383c5fdc";
+  level._effect[#"hash_7c3a9f5103c06ff6"] = #"hash_420040b9ccd8bd85";
 
   if(level.var_c3e5c4cd == 2) {
-    level._effect[#"hash_223e3f9bde46f5b4"] = # "hash_1678d9a47030413d";
-    level._effect[#"hash_10e42380c1009ee9"] = # "hash_6ecd7d04b43d3fde";
-    level._effect[#"hash_110d9fbfd034c819"] = # "hash_3060d78224e9c44e";
-    level._effect[#"hash_6e4e902b59a22662"] = # "hash_3bb50572a528b187";
-    level._effect[#"hash_26247c4bfd6fed73"] = # "hash_57eb5602b41fa4db";
-    level._effect[#"hash_46334db9e3c76275"] = # "hash_3a24f6e29267c4d7";
+    level._effect[#"hash_223e3f9bde46f5b4"] = #"hash_1678d9a47030413d";
+    level._effect[#"hash_10e42380c1009ee9"] = #"hash_6ecd7d04b43d3fde";
+    level._effect[#"hash_110d9fbfd034c819"] = #"hash_3060d78224e9c44e";
+    level._effect[#"hash_6e4e902b59a22662"] = #"hash_3bb50572a528b187";
+    level._effect[#"hash_26247c4bfd6fed73"] = #"hash_57eb5602b41fa4db";
+    level._effect[#"hash_46334db9e3c76275"] = #"hash_3a24f6e29267c4d7";
   }
 
-  level._effect[#"altar_icon_ambient_fx"] = # "hash_2c9a36103f6cc1e9";
+  level._effect[#"altar_icon_ambient_fx"] = #"hash_2c9a36103f6cc1e9";
   init_custom_perks();
   perks_register_clientfield();
   init_perk_custom_threads();
@@ -300,7 +300,7 @@ function_bb184fed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
         var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
       }
     } else {
-      var_c1cbeea5 = # "tag_origin";
+      var_c1cbeea5 = #"tag_origin";
       var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
     }
 
@@ -407,7 +407,7 @@ function_30bf6142(localclientnum, newval, oldval, n_slot) {
         var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
       }
     } else {
-      var_c1cbeea5 = # "tag_origin";
+      var_c1cbeea5 = #"tag_origin";
       var_fe0b737a = level._effect[#"altar_icon_ambient_fx"];
     }
 

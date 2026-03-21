@@ -97,54 +97,54 @@ function_ab7f70b9(e_player) {
       var_dd0ed16d = getent("file_hallway_zone", "targetname");
 
       if(e_player istouching(var_dd0ed16d)) {
-        str_display = # "hash_38aec412b15daa7f";
+        str_display = #"hash_38aec412b15daa7f";
       } else {
-        str_display = # "hash_2960dd7ca313a1d0";
+        str_display = #"hash_2960dd7ca313a1d0";
       }
 
       break;
     case # "hallway_level1":
-      str_display = # "hash_23e7b86056327ad8";
+      str_display = #"hash_23e7b86056327ad8";
       break;
     case # "file_room_level1":
-      str_display = # "hash_43e992b83f837d3e";
+      str_display = #"hash_43e992b83f837d3e";
       break;
     case # "offices_level1":
-      str_display = # "hash_179368775ecfafa9";
+      str_display = #"hash_179368775ecfafa9";
       break;
     case # "war_room_zone_south":
     case # "war_room_zone_north":
     case # "war_room_zone_elevator":
-      str_display = # "hash_25854f4ac1fdadf5";
+      str_display = #"hash_25854f4ac1fdadf5";
       break;
     case # "war_room_server_room":
-      str_display = # "hash_7d3cd67fea75827c";
+      str_display = #"hash_7d3cd67fea75827c";
       break;
     case # "war_room_zone_top":
-      str_display = # "hash_572f6dd3e58ede79";
+      str_display = #"hash_572f6dd3e58ede79";
       break;
     case # "conference_level2":
-      str_display = # "hash_2960e07ca313a6e9";
+      str_display = #"hash_2960e07ca313a6e9";
       break;
     case # "labs_elevator":
     case # "labs_hallway1":
-      str_display = # "hash_48fce08911acd38a";
+      str_display = #"hash_48fce08911acd38a";
       break;
     case # "labs_hallway2":
-      str_display = # "hash_48fcdf8911acd1d7";
+      str_display = #"hash_48fcdf8911acd1d7";
       break;
     case # "labs_zone1":
-      str_display = # "hash_6e0edea58f326450";
+      str_display = #"hash_6e0edea58f326450";
       break;
     case # "labs_zone2":
-      str_display = # "hash_6e0ee1a58f326969";
+      str_display = #"hash_6e0ee1a58f326969";
       break;
     case # "labs_zone3":
-      str_display = # "hash_6e0ee0a58f3267b6";
+      str_display = #"hash_6e0ee0a58f3267b6";
       break;
     case # "cage_upper":
     case # "cage":
-      str_display = # "hash_62b9f4974de13b76";
+      str_display = #"hash_62b9f4974de13b76";
       break;
     default:
       str_display = undefined;

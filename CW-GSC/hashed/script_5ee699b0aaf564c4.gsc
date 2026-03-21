@@ -132,7 +132,7 @@ function function_e624cfcf(player, origin, angles) {
   playerorigin = origin;
   trace = groundtrace(playerorigin + (0, 0, 100), playerorigin - (0, 0, 10100), 0, playerorigin, 0, 0);
 
-  if(trace[#"surfacetype"] == # "none" || trace[#"surfacetype"] == # "default") {
+  if(trace[#"surfacetype"] == #"none" || trace[#"surfacetype"] == #"default") {
     playerorigin = (playerorigin[0], playerorigin[1], level.mapcenter[2]);
   } else {
     playerorigin = trace[#"position"];
@@ -378,7 +378,7 @@ function function_1e077098() {
 
       trace = groundtrace(var_ab9478c7.origin, var_ab9478c7.origin - (0, 0, 5000), 0, var_ab9478c7, 0, 0);
 
-      if(trace[#"surfacetype"] == # "none") {
+      if(trace[#"surfacetype"] == #"none") {
         var_dbcced97[var_dbcced97.size] = var_ab9478c7;
         continue;
       }

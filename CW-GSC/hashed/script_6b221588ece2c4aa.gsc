@@ -95,7 +95,7 @@ function watchspikelauncheritemcountchanged(watcher) {
   while(true) {
     waitresult = self waittill(#"weapon_change");
 
-    for(weapon = waitresult.weapon; weapon.name == # "spike_launcher"; weapon = self getcurrentweapon()) {
+    for(weapon = waitresult.weapon; weapon.name == #"spike_launcher"; weapon = self getcurrentweapon()) {
       currentitemcount = getspikelauncheractivespikecount(watcher);
 
       if(currentitemcount !== lastitemcount) {
@@ -116,7 +116,7 @@ function spikesdetonating(watcher) {
 }
 
 function createspikelauncherwatcher(watcher) {
-  watcher.altname = # "spike_charge";
+  watcher.altname = #"spike_charge";
   watcher.altweapon = getweapon(#"spike_charge");
   watcher.altdetonate = 0;
   watcher.watchforfire = 1;
@@ -129,7 +129,7 @@ function createspikelauncherwatcher(watcher) {
   watcher.ownergetsassist = 1;
   watcher.detonatestationary = 0;
   watcher.detonationdelay = 0;
-  watcher.detonationsound = # "wpn_claymore_alert";
+  watcher.detonationsound = #"wpn_claymore_alert";
   watcher.ondetonationhandle = &spikesdetonating;
 }
 

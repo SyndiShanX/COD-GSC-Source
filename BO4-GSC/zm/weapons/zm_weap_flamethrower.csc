@@ -22,10 +22,10 @@ __init__() {
   clientfield::register("toplayer", "flamethrower_wind_blast_flash", -1, 1, "counter", &flamethrower_wind_blast_flash, 0, 0);
   clientfield::register("allplayers", "flamethrower_wind_blast_tu16", 16000, 1, "counter", &flamethrower_wind_blast_flash, 0, 0);
   clientfield::register("toplayer", "flamethrower_tornado_blast_flash", 1, 1, "counter", &flamethrower_tornado_blast_flash, 0, 0);
-  level._effect[#"flamethrower_tornado"] = # "hash_2f45879d2658065c";
-  level._effect[#"wind_blast_flash"] = # "hash_312fc9707e06f6f4";
-  level._effect[#"hash_34db403668f7f353"] = # "hash_52e3de5257e268c2";
-  level._effect[#"tornado_blast_flash"] = # "hash_5c5ffb835c39dce3";
+  level._effect[#"flamethrower_tornado"] = #"hash_2f45879d2658065c";
+  level._effect[#"wind_blast_flash"] = #"hash_312fc9707e06f6f4";
+  level._effect[#"hash_34db403668f7f353"] = #"hash_52e3de5257e268c2";
+  level._effect[#"tornado_blast_flash"] = #"hash_5c5ffb835c39dce3";
 }
 
 flamethrower_tornado_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

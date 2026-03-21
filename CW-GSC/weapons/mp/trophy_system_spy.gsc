@@ -19,8 +19,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level.trophydetonationfx = # "hash_7e2c1749cc5fcfb9";
-  level.fx_trophy_radius_indicator = # "weapon/fx_trophy_radius_indicator";
+  level.trophydetonationfx = #"hash_7e2c1749cc5fcfb9";
+  level.fx_trophy_radius_indicator = #"weapon/fx_trophy_radius_indicator";
   trophydeployanim = "p8_fxanim_mp_eqp_trophy_system_world_anim";
   trophyspinanim = "p8_fxanim_mp_eqp_trophy_system_world_open_anim";
   level.var_4f3822f4 = &trophysystemdetonate;
@@ -44,7 +44,7 @@ function function_ccfcde75(trophy, grenade) {
 
 function createtrophysystemwatcher(watcher) {
   watcher.ondetonatecallback = &trophysystemdetonate;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
   watcher.ownergetsassist = 1;

@@ -62,7 +62,7 @@ function clear() {
 
 function function_a0b0f487(actionparams) {
   if(self arecontrolsfrozen() || self function_5972c3cf()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_329792b380cfd409";
+    actionparams.debug[actionparams.debug.size] = #"hash_329792b380cfd409";
 
     return true;
   }
@@ -72,7 +72,7 @@ function function_a0b0f487(actionparams) {
 
 function function_2c3ea0c6(actionparams) {
   if(self isplayinganimscripted()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_5cbefc6b234455fc";
+    actionparams.debug[actionparams.debug.size] = #"hash_5cbefc6b234455fc";
 
     return true;
   }
@@ -82,7 +82,7 @@ function function_2c3ea0c6(actionparams) {
 
 function in_vehicle(actionparams) {
   if(self isinvehicle()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_74dd6cdecdd53e96";
+    actionparams.debug[actionparams.debug.size] = #"hash_74dd6cdecdd53e96";
 
     return true;
   }
@@ -92,7 +92,7 @@ function in_vehicle(actionparams) {
 
 function function_ed7b2f42(actionparams) {
   if(isDefined(self.bot.traversal)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_17222d5087946703";
+    actionparams.debug[actionparams.debug.size] = #"hash_17222d5087946703";
 
     return true;
   }
@@ -102,7 +102,7 @@ function function_ed7b2f42(actionparams) {
 
 function function_a43bc7e2(actionparams) {
   if(self.ignoreall) {
-    actionparams.debug[actionparams.debug.size] = # "hash_5a308775df684ba1";
+    actionparams.debug[actionparams.debug.size] = #"hash_5a308775df684ba1";
 
     return true;
   }
@@ -111,8 +111,8 @@ function function_a43bc7e2(actionparams) {
 }
 
 function in_combat(actionparams) {
-  if(self.combatstate == # "combat_state_in_combat" || self.combatstate == # "combat_state_has_visible_enemy") {
-    actionparams.debug[actionparams.debug.size] = # "hash_6c8a68a6b0ba3e46";
+  if(self.combatstate == #"combat_state_in_combat" || self.combatstate == #"combat_state_has_visible_enemy") {
+    actionparams.debug[actionparams.debug.size] = #"hash_6c8a68a6b0ba3e46";
 
     return true;
   }
@@ -122,7 +122,7 @@ function in_combat(actionparams) {
 
 function just_spawned(actionparams) {
   if(self.spawntime >= gettime()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_5080fb7f9d457021";
+    actionparams.debug[actionparams.debug.size] = #"hash_5080fb7f9d457021";
 
     return true;
   }
@@ -132,7 +132,7 @@ function just_spawned(actionparams) {
 
 function flashed(actionparams) {
   if(self.bot.flashed) {
-    actionparams.debug[actionparams.debug.size] = # "flashed";
+    actionparams.debug[actionparams.debug.size] = #"flashed";
 
     return true;
   }
@@ -142,11 +142,11 @@ function flashed(actionparams) {
 
 function function_ebb8205b(actionparams) {
   if(self isinexecutionvictim()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_6ad5723518a9aa59";
+    actionparams.debug[actionparams.debug.size] = #"hash_6ad5723518a9aa59";
 
     return true;
   } else if(self isinexecutionattack()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_21cc6a6be1e0b67";
+    actionparams.debug[actionparams.debug.size] = #"hash_21cc6a6be1e0b67";
 
     return true;
   }
@@ -163,7 +163,7 @@ function register_action(name, weightfunc, executefunc) {
 function register_weapon(weaponname, weightfunc, executefunc) {
   weapon = getweapon(weaponname);
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 

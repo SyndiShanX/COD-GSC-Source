@@ -17,7 +17,7 @@ init() {
   level._effect[#"fx8_toxic_gas_lg"] = "maps/zm_white/fx8_toxic_gas_lg";
   level._effect[#"fx8_toxic_gas_venting_lg"] = "maps/zm_white/fx8_toxic_gas_venting_lg";
   level._effect[#"fx8_special_round_green_gas_md"] = "maps/zm_towers/fx8_special_round_green_gas_md";
-  level._effect[#"hash_670acb2528e7f014"] = # "hash_67f59250cb33cc07";
+  level._effect[#"hash_670acb2528e7f014"] = #"hash_67f59250cb33cc07";
   function_aa1e486e();
 }
 

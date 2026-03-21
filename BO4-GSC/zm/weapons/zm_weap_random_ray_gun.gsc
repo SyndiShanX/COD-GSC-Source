@@ -163,7 +163,7 @@ function_14a32f64(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 function_1ec5c573(weapon, n_damage, meansofdeath) {
   var_aebb78d5 = n_damage;
 
-  if(self.zm_ai_category !== # "heavy" && self.zm_ai_category !== # "miniboss") {
+  if(self.zm_ai_category !== #"heavy" && self.zm_ai_category !== #"miniboss") {
     if(!(isDefined(self.var_6a36f6dc) && self.var_6a36f6dc) && !(isDefined(self.var_780857a) && self.var_780857a) && !(isDefined(self.var_7fcb707c) && self.var_7fcb707c) && !(isDefined(self.var_bd48b030) && self.var_bd48b030)) {
       self.instakill_func = &function_35a0a5cc;
       self.var_3ca04328 = 1;
@@ -461,7 +461,7 @@ function_5114b093() {
 
           var_dc70aff9 = 1;
 
-          if(var_688083e6.zm_ai_category === # "heavy" || var_688083e6.zm_ai_category === # "miniboss") {
+          if(var_688083e6.zm_ai_category === #"heavy" || var_688083e6.zm_ai_category === #"miniboss") {
             if(isDefined(var_688083e6.var_287c79bd) && gettime() - var_688083e6.var_287c79bd > 50) {
               var_a9dd0fe1 = gettime();
 
@@ -591,7 +591,7 @@ function_45b0dfc6(v_origin, str_text, str_endon) {
 function function_2d3beb68(var_ea0a46dc, e_attacker) {
   self endon(#"death");
 
-  if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+  if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
     self function_a851c777(var_ea0a46dc, e_attacker);
     return;
   }
@@ -766,7 +766,7 @@ function_c9b2e87f(...) {
 
   self.var_780857a = 1;
 
-  if(self.zm_ai_category === # "boss" || self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy") {
+  if(self.zm_ai_category === #"boss" || self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy") {
     self function_2d3beb68(3, e_attacker);
     return;
   }
@@ -875,7 +875,7 @@ function_f724358c(e_attacker) {
     return;
   }
 
-  if(self.zm_ai_category === # "boss" || self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy") {
+  if(self.zm_ai_category === #"boss" || self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy") {
     self function_2d3beb68(0, e_attacker);
     return;
   }
@@ -945,7 +945,7 @@ function_b47bcfb0(e_attacker, var_3ae458c8) {
   self notify("2635a9c678b738b");
   self endon("2635a9c678b738b");
   self endon(#"death");
-  var_1ee06b23 = self.archetype === # "nosferatu" ? 4 : 12;
+  var_1ee06b23 = self.archetype === #"nosferatu" ? 4 : 12;
   n_timeout = isDefined(var_3ae458c8) ? var_3ae458c8 : var_1ee06b23;
   util::wait_endon(n_timeout, #"hash_28e3235da53ba083");
 
@@ -1049,7 +1049,7 @@ function_e5e6e403(...) {
 
   self.var_bd48b030 = 1;
 
-  if(self.zm_ai_category === # "boss" || self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy") {
+  if(self.zm_ai_category === #"boss" || self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy") {
     self function_2d3beb68(1, e_attacker);
     return;
   }
@@ -1101,12 +1101,12 @@ function_ba22c7e1() {
   self.marked_for_death = 1;
   self.no_powerups = 1;
 
-  if(self.archetype == # "nosferatu") {
-    var_444cebf6 = # "aib_vign_zm_man_tornado_nfrtu_start";
-    var_38c23eeb = # "aib_vign_zm_man_tornado_nfrtu_loop";
+  if(self.archetype == #"nosferatu") {
+    var_444cebf6 = #"aib_vign_zm_man_tornado_nfrtu_start";
+    var_38c23eeb = #"aib_vign_zm_man_tornado_nfrtu_loop";
   } else {
-    var_444cebf6 = # "aib_vign_zm_man_tornado_zombie_start";
-    var_38c23eeb = # "aib_vign_zm_man_tornado_zombie_loop";
+    var_444cebf6 = #"aib_vign_zm_man_tornado_zombie_start";
+    var_38c23eeb = #"aib_vign_zm_man_tornado_zombie_loop";
   }
 
   self scene::play(var_444cebf6, self);
@@ -1161,7 +1161,7 @@ function_3ebc5d0c(e_attacker) {
     self function_61b2f057(e_attacker, level.var_74cf08b1);
     self zm_utility::function_ffc279((0, 0, 0), e_attacker, self.health + 666, level.var_4b14202f);
 
-    if(self.archetype == # "nosferatu") {
+    if(self.archetype == #"nosferatu") {
       gibserverutils::annihilate(self);
       return;
     }
@@ -1293,7 +1293,7 @@ function_886f2b8d(...) {
 
   self.var_7fcb707c = 1;
 
-  if(self.zm_ai_category === # "boss" || self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy") {
+  if(self.zm_ai_category === #"boss" || self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy") {
     self function_2d3beb68(2, e_attacker);
     return;
   }

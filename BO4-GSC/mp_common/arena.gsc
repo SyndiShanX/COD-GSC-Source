@@ -77,13 +77,13 @@ update_arena_challenge_seasons() {
 
   switch (eventtype) {
     case 0:
-      eventstate = # "rankedplaystats";
+      eventstate = #"rankedplaystats";
       break;
     case 1:
-      eventstate = # "leagueplaystats";
+      eventstate = #"leagueplaystats";
       break;
     case 4:
-      eventstate = # "hash_4986c748eb81d3c5";
+      eventstate = #"hash_4986c748eb81d3c5";
       break;
     default:
       return;
@@ -135,7 +135,7 @@ match_end() {
     return;
   }
 
-  if(game.outcome.team == # "allies") {
+  if(game.outcome.team == #"allies") {
     function_a357a2b8(1);
     return;
   }

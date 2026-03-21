@@ -117,7 +117,7 @@ function function_23320f08(b_condition, var_6c91f8cd) {
 
 function function_63264d28(a_ents) {
   belikov = a_ents[#"belikov"];
-  belikov.propername = # "hash_59ecd456f45762d4";
+  belikov.propername = #"hash_59ecd456f45762d4";
   belikov ai::gun_remove();
   level waittill(#"intro_dialog_done");
   level flag::set("flg_intro_dialog_done");
@@ -408,7 +408,7 @@ function private function_f05650bc(str_scene, str_shot) {
 }
 
 function function_174832fd() {
-  var_4e21c010 = # "flg_excavation_descent_started";
+  var_4e21c010 = #"flg_excavation_descent_started";
   level scene::play("scene_yam_7030_exc_vert_descend", "woods_enter");
   level thread scene::play("scene_yam_7030_exc_vert_descend", "woods_loop");
   var_9f249e8 = array("woods_nag1", "woods_nag2", "woods_nag3");
@@ -545,7 +545,7 @@ function function_95dc818f(str_scene_name, var_2b490ed3, var_53f71e6a, var_4e21c
   while(var_53f71e6a.size > 0 && !level flag::get(var_4e21c010)) {
     s_event = level waittilltimeout(randomfloatrange(n_wait_min, n_wait_max), var_4e21c010);
 
-    if(s_event._notify === # "timeout") {
+    if(s_event._notify === #"timeout") {
       level scene::play(str_scene_name, var_53f71e6a[0]);
       arrayremoveindex(var_53f71e6a, 0);
       level thread scene::play(str_scene_name, var_2b490ed3);

@@ -40,7 +40,7 @@ function supply_drop_parachute(localclientnum, oldval, newval, bnewent, binitial
 }
 
 function on_vehicle_spawned(localclientnum) {
-  if(self.vehicletype === # "hash_669d01ea5db4e10c") {
+  if(self.vehicletype === #"hash_669d01ea5db4e10c") {
     self function_1f0c7136(3);
     self.var_fc558e74 = "helicopter_escape_heli";
   }

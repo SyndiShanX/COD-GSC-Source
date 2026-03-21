@@ -35,7 +35,7 @@ function on_weapon_change(params) {
 }
 
 function on_player_death(params) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -165,7 +165,7 @@ function function_8a6ced15(var_f4eb4a50) {
           activecamoname = getactivecamo(stage.var_19b6044e);
           var_7216636e = undefined;
 
-          if(isDefined(activecamoname) && activecamoname != # "") {
+          if(isDefined(activecamoname) && activecamoname != #"") {
             var_7216636e = getscriptbundle(activecamoname);
           }
 
@@ -470,7 +470,7 @@ function function_896ac347(oweapon, statname, value) {
           self function_b9119037(activecamo);
         }
 
-        if(statname == # "kills") {
+        if(statname == #"kills") {
           self function_e2212969(activecamo, value);
         }
       }
@@ -722,7 +722,7 @@ function function_a80cb651(activecamo, stagenum) {
         s_result = self waittill(stage.var_62b564ee.resetnotify);
       }
 
-      if(s_result._notify == # "timeout") {
+      if(s_result._notify == #"timeout") {
         break;
       }
 
@@ -773,7 +773,7 @@ function function_155299d(weapon, b_has_weapon = 1) {
 
   activecamoname = self function_5aa1d2c8(weapon, b_has_weapon);
 
-  if(isDefined(activecamoname) && activecamoname != # "") {
+  if(isDefined(activecamoname) && activecamoname != #"") {
     var_f4eb4a50 = getscriptbundle(activecamoname);
   }
 
@@ -789,7 +789,7 @@ function function_b004e227(weapon, b_has_weapon = 1) {
 
   activecamoname = function_5af7df72(camooptions);
 
-  if(isDefined(activecamoname) && activecamoname != # "") {
+  if(isDefined(activecamoname) && activecamoname != #"") {
     return activecamoname;
   }
 
@@ -910,7 +910,7 @@ function function_85cb822d(root, index) {
   activecamos = function_2c48197b();
 
   foreach(activecamo in activecamos) {
-    if(activecamo == # "") {
+    if(activecamo == #"") {
       continue;
     }
 

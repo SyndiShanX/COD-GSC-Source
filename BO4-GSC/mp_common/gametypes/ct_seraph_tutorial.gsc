@@ -37,7 +37,7 @@ setup() {
 function_c9ff0dce() {
   self.overrideplayerdamage = &callback_player_damage;
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self ct_utils::player_reset();
 
     if(!isbot(self)) {
@@ -114,7 +114,7 @@ function_c9ff0dce() {
           self thread function_2b612805("s_defend_hardpoint_obj", 350);
           break;
         case 11:
-          if(self.team == # "axis") {
+          if(self.team == #"axis") {
             self thread function_58c62280(0, 1);
           } else if(isDefined(level.var_e190d640) && level.var_e190d640) {
             self thread function_99a579e2();
@@ -176,7 +176,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
     } else {
       switch (level.var_ad7c0539) {
         case 10:
-          if(self.team == # "axis" && isDefined(e_inflictor) && isbot(e_inflictor)) {
+          if(self.team == #"axis" && isDefined(e_inflictor) && isbot(e_inflictor)) {
             n_damage *= 4;
           }
 
@@ -189,7 +189,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(isDefined(level.var_ad7c0539)) {
       switch (level.var_ad7c0539) {
         case 10:
@@ -799,7 +799,7 @@ function_322f5659(s_loc, n_delay) {
   self ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 32);
   self.var_1574ae06 = 1;
 
-  if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == # "crouch") {
+  if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == #"crouch") {
     while(true) {
       n_dist = distance(s_loc.origin, self.origin);
 
@@ -1064,7 +1064,7 @@ function_f036b362() {
     for(i = 0; i < level.var_357913db.size; i++) {
       var_a08d57dd = level.var_357913db[i];
 
-      if(isDefined(var_a08d57dd.script_noteworthy) && var_a08d57dd.script_noteworthy == # "wave2") {
+      if(isDefined(var_a08d57dd.script_noteworthy) && var_a08d57dd.script_noteworthy == #"wave2") {
         arrayremovevalue(level.var_357913db, var_a08d57dd);
         var_fcc58830 = 1;
         break;
@@ -1106,7 +1106,7 @@ function_d4bbc142() {
     e_beacon clientfield::set("animate_spawn_beacon", 1);
     e_beacon setCanDamage(1);
     e_beacon.health = 400;
-    e_beacon.team = # "axis";
+    e_beacon.team = #"axis";
     e_beacon thread function_a623876e();
     e_beacon thread function_ffdd31e0();
     e_beacon.s_loc = s_loc;
@@ -1856,7 +1856,7 @@ function_58c62280(b_keyline, var_2f3964e3) {
       self thread function_d832af02(s_loc);
       break;
     case 6:
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 32);
       }
 
@@ -1867,7 +1867,7 @@ function_58c62280(b_keyline, var_2f3964e3) {
     case 9:
       self val::reset(#"enemy_bot", "ignoreall");
 
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread ct_utils::function_5b59f3b7(s_loc.origin, s_loc.angles, 800);
       } else {
         self thread function_d832af02(s_loc);
@@ -1877,7 +1877,7 @@ function_58c62280(b_keyline, var_2f3964e3) {
       break;
     case 10:
     case 11:
-      if(self.team == # "axis") {
+      if(self.team == #"axis") {
         self thread ct_utils::function_5149c890(1, 1);
 
         if(isDefined(level.var_74bfba73) && level.var_74bfba73) {
@@ -2065,7 +2065,7 @@ function_d832af02(s_loc) {
   } else if(level.var_ad7c0539 == 10) {
     s_path = s_loc;
   } else if(level.var_ad7c0539 == 11) {
-    if(self.team == # "axis") {
+    if(self.team == #"axis") {
       s_path = s_loc;
     } else {
       s_path = struct::get(s_loc.script_noteworthy, "targetname");

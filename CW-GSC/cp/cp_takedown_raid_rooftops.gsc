@@ -124,7 +124,7 @@ function takedown_tutorial() {
 
   if(isDefined(victim)) {
     victim.takedamage = 1;
-    victim.var_ab101371 = # "hash_10e2d6b9f9bef6a3";
+    victim.var_ab101371 = #"hash_10e2d6b9f9bef6a3";
     player.takedown.victim[#"takedown"] = victim;
     player.takedown.scene[#"takedown"] = victim.var_ab101371;
     player.takedown.victim[#"body_shield"] = victim;

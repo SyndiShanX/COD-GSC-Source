@@ -446,7 +446,7 @@ function function_ea2f5d05(a_ents) {
 
 function function_70b8bf8f() {
   foreach(destination in level.contentmanager.destinations) {
-    if(destination.targetname === # "dest_dp") {
+    if(destination.targetname === #"dest_dp") {
       foreach(location in destination.locations) {
         var_19845e62 = location.instances[#"explore_chests"];
 
@@ -474,7 +474,7 @@ function function_70b8bf8f() {
 
   assert(isDefined(level.var_15140b8d));
   level.var_15140b8d.scriptmodel solid();
-  level.var_15140b8d.trigger.var_cc1fb2d0 = # "hash_2c38a7d6a634dee2";
+  level.var_15140b8d.trigger.var_cc1fb2d0 = #"hash_2c38a7d6a634dee2";
   level.var_15140b8d thread function_4dad3cb6();
   level.var_15140b8d util::delay(300, "chest_opened", &function_3076a002);
 }
@@ -1008,7 +1008,7 @@ function function_3bb0b75b(mdl_monkey, zombie) {
 }
 
 function function_e5a2222e(params) {
-  if((self.damagemod === "MOD_GRENADE_SPLASH" || self.damagemod === "MOD_GRENADE") && self.damageweapon.name === # "cymbal_monkey" && isinarray(level.var_3d1077ef, self.zone_name)) {
+  if((self.damagemod === "MOD_GRENADE_SPLASH" || self.damagemod === "MOD_GRENADE") && self.damageweapon.name === #"cymbal_monkey" && isinarray(level.var_3d1077ef, self.zone_name)) {
     level.var_b1b99545 += 1;
 
     if(level.var_b1b99545 == 50) {
@@ -1306,7 +1306,7 @@ function function_e1ea43c1(params) {
   if(isPlayer(self)) {
     item = params.item;
 
-    if(item.itementry.name === # "hash_1680835628ff9442") {
+    if(item.itementry.name === #"hash_1680835628ff9442") {
       level notify(#"head_pickup");
       level thread function_c64d2826(self);
     }

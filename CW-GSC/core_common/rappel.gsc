@@ -171,7 +171,7 @@ function function_1fd398d8() {
 function function_752582be(ascender) {
   if(isDefined(ascender)) {
     ascender.inuse = 0;
-    hint = # "hash_4079b1df1f035718";
+    hint = #"hash_4079b1df1f035718";
     ascender.trigger sethintstring(hint);
 
     if(isDefined(ascender.ascendstructend) && isDefined(ascender.ascendstructend.trigger)) {
@@ -219,7 +219,7 @@ function function_c487f6c0(ascendstart) {
   var_3d783ef7 setteamfortrigger(#"none");
   var_3d783ef7 setcursorhint("HINT_NOICON");
   var_3d783ef7 function_95c6df5a();
-  hint = # "hash_4079b1df1f035718";
+  hint = #"hash_4079b1df1f035718";
   var_3d783ef7 sethintstring(hint);
   var_3d783ef7 callback::on_trigger(&function_4945d10b);
 
@@ -303,11 +303,11 @@ function private function_2f037a69(ascender) {
   entnum = self getentitynumber();
 
   if(is_true(ascender.cooldown[entnum])) {
-    hint = # "hash_7030ee296306731c";
+    hint = #"hash_7030ee296306731c";
   } else if(ascender.inuse > 0) {
-    hint = # "hash_607b12b5d5733b3e";
+    hint = #"hash_607b12b5d5733b3e";
   } else {
-    hint = # "hash_4079b1df1f035718";
+    hint = #"hash_4079b1df1f035718";
   }
 
   ascender.trigger sethintstringforplayer(self, hint);
@@ -367,7 +367,7 @@ function function_4945d10b(trigger_info) {
 
 function function_8c46de17(ascendstart, ascendend) {
   wait 0.2;
-  hint = # "hash_607b12b5d5733b3e";
+  hint = #"hash_607b12b5d5733b3e";
   ascendstart.trigger sethintstring(hint);
 
   if(isDefined(ascendend) && isDefined(ascendend.trigger)) {

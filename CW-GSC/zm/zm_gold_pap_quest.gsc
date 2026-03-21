@@ -23,7 +23,7 @@ function init() {
   clientfield::register("world", "" + # "hash_666ad912cb4541f1", 16000, 1, "int");
   clientfield::register("world", "" + # "hash_18c31f1201f7c968", 16000, 1, "counter");
   clientfield::register("world", "" + # "teleporter_minimap", 16000, 1, "counter");
-  level.var_ce45839f = # "pap_quest_completed";
+  level.var_ce45839f = #"pap_quest_completed";
   level.var_2645bbc0 = 0;
   function_675b2881();
   level thread function_2be12d47();
@@ -131,7 +131,7 @@ function function_31abb662() {
   level.ravenov_chair animation::stop();
 
   if(!level flag::get("enable_firebase_zone")) {
-    if(s_waitresult._notify === # "hash_5cdcf4e238ae5f1f") {
+    if(s_waitresult._notify === #"hash_5cdcf4e238ae5f1f") {
       zm_utility::function_d729de6a(1, [#"zone_atrium"]);
     }
 

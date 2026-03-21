@@ -134,7 +134,7 @@ function private function_26ff990a(local_client_num) {
       continue;
     }
 
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       continue;
     }
 
@@ -197,21 +197,21 @@ function private updatefacialanimforplayer(localclientnum, player) {
   }
 
   if(player isplayerdead()) {
-    nextfacestate = # "death";
+    nextfacestate = #"death";
   } else if(player isplayerfiring()) {
-    nextfacestate = # "combat_shoot";
+    nextfacestate = #"combat_shoot";
   } else if(player isplayersliding()) {
-    nextfacestate = # "sliding";
+    nextfacestate = #"sliding";
   } else if(player isplayerwallrunning()) {
-    nextfacestate = # "wallrunning";
+    nextfacestate = #"wallrunning";
   } else if(player isplayersprinting()) {
-    nextfacestate = # "sprinting";
+    nextfacestate = #"sprinting";
   } else if(player isplayerjumping() || player isplayerdoublejumping()) {
-    nextfacestate = # "jumping";
+    nextfacestate = #"jumping";
   } else if(player isplayerswimming()) {
-    nextfacestate = # "swimming";
+    nextfacestate = #"swimming";
   } else {
-    nextfacestate = # "combat";
+    nextfacestate = #"combat";
   }
 
   if(player._currentfacestate == "inactive" || currfacestate != nextfacestate) {
@@ -233,12 +233,12 @@ function private applynewfaceanim(localclientnum, animation) {
 }
 
 function private applydeathanim(localclientnum) {
-  if(isDefined(self._currentfacestate) && self._currentfacestate == # "death") {
+  if(isDefined(self._currentfacestate) && self._currentfacestate == #"death") {
     return;
   }
 
   if(isDefined(self) && isDefined(level.__clientfacialanimationslist) && isDefined(level.__clientfacialanimationslist[#"death"])) {
-    self._currentfacestate = # "death";
+    self._currentfacestate = #"death";
     applynewfaceanim(localclientnum, array::random(level.__clientfacialanimationslist[#"death"]));
   }
 }

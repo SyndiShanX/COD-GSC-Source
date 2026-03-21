@@ -126,7 +126,7 @@ function add_contract_slot(localclientnum, slot) {
   }
 
   root += "<dev string:x2bc>" + slot + "<dev string:x319>";
-  table = # "gamedata/tables/mp/mp_contracttable.csv";
+  table = #"gamedata/tables/mp/mp_contracttable.csv";
   num_rows = tablelookuprowcount(table);
   stat_write = "<dev string:x31e>" + slot;
   next_cmd = "<dev string:x83>";

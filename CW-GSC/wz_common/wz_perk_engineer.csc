@@ -107,7 +107,7 @@ function private function_76a0624a() {
     return 0;
   }
 
-  if(self.owner.team == # "neutral") {
+  if(self.owner.team == #"neutral") {
     return 0;
   }
 
@@ -119,7 +119,7 @@ function private function_da8108ae() {
     return false;
   }
 
-  if(self.owner.team == # "neutral") {
+  if(self.owner.team == #"neutral") {
     return false;
   }
 

@@ -1226,7 +1226,7 @@ function function_de60e752(var_533ac894, a_s_spawnpoints) {
 function on_ai_killed(params) {
   e_attacker = params.eattacker;
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     if(!isPlayer(e_attacker)) {
       level thread function_a42d50ad();
       return;
@@ -1237,7 +1237,7 @@ function on_ai_killed(params) {
     level.var_d306d2e++;
   }
 
-  if(self.archetype === # "mimic") {
+  if(self.archetype === #"mimic") {
     if(!isPlayer(e_attacker)) {
       level thread function_11cc0e55();
       return;
@@ -1247,7 +1247,7 @@ function on_ai_killed(params) {
     level.var_d306d2e++;
   }
 
-  if(self.archetype === # "raz") {
+  if(self.archetype === #"raz") {
     if(!isPlayer(e_attacker)) {
       level thread function_c658f846();
       return;

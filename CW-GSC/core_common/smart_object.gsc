@@ -341,7 +341,7 @@ function private function_ca2d3925(&shots, ai, var_ee9cbc26, result) {
     var_fd84bab2 = !isDefined(react) || is_true(var_ee9cbc26.var_fd84bab2);
 
     if(isDefined(ai)) {
-      if((result._notify == # "damage" || result._notify == # "death") && (var_fd84bab2 || isDefined(ai.var_a965704f))) {
+      if((result._notify == #"damage" || result._notify == #"death") && (var_fd84bab2 || isDefined(ai.var_a965704f))) {
         ai scene::stop(self.scriptbundlename);
         ai util::stop_magic_bullet_shield();
         ai.var_4a438c2b = 0;

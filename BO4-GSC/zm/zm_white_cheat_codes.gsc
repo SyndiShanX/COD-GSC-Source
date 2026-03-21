@@ -507,7 +507,7 @@ function_80d5023d(params) {
 function_82457e35(params) {
   var_62e3519c = params.smeansofdeath === "MOD_MELEE" || params.smeansofdeath === "MOD_MELEE_WEAPON_BUTT" || params.smeansofdeath === "MOD_MELEE_ASSASSINATE";
 
-  if(isalive(self) && self.archetype === # "zombie" && var_62e3519c) {
+  if(isalive(self) && self.archetype === #"zombie" && var_62e3519c) {
     v_origin = self gettagorigin("tag_eye");
     v_angles = self gettagangles("tag_eye");
     var_4095cc33 = anglestoup(v_angles);
@@ -551,7 +551,7 @@ duck() {
 function_369efa3e(params) {
   var_62e3519c = params.smeansofdeath === "MOD_MELEE" || params.smeansofdeath === "MOD_MELEE_WEAPON_BUTT" || params.smeansofdeath === "MOD_MELEE_ASSASSINATE";
 
-  if(isalive(self) && (self.archetype === # "zombie" || self.archetype === # "zombie_dog" || self.archetype === # "nova_crawler") && var_62e3519c) {
+  if(isalive(self) && (self.archetype === #"zombie" || self.archetype === #"zombie_dog" || self.archetype === #"nova_crawler") && var_62e3519c) {
     if(zm_audio::sndisnetworksafe()) {
       self playsoundontag(#"zmb_vocals_zombie_death_quack", "j_head");
     }

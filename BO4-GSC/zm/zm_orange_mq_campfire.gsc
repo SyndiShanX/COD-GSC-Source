@@ -75,26 +75,26 @@ function_1ad84248() {
 
   while(true) {
     self waittill(#"trigger_activated");
-    story = # "";
+    story = #"";
 
     switch (level.var_80c25d0a) {
       case 1:
-        story = # "hash_416ddb9315ab3501";
+        story = #"hash_416ddb9315ab3501";
         break;
       case 2:
-        story = # "hash_413ddfbab7b3a95a";
+        story = #"hash_413ddfbab7b3a95a";
         break;
       case 3:
-        story = # "hash_53a36973514df1fd";
+        story = #"hash_53a36973514df1fd";
         break;
       case 4:
-        story = # "hash_39fc90dd61a2e104";
+        story = #"hash_39fc90dd61a2e104";
         break;
       case 5:
-        story = # "hash_1470aa1d4389dd44";
+        story = #"hash_1470aa1d4389dd44";
         break;
       case 6:
-        story = # "hash_261241a6b2301317";
+        story = #"hash_261241a6b2301317";
         break;
     }
 
@@ -163,17 +163,17 @@ function_561d9cff() {
   level flag::set(#"hold_round_end");
   level.sndvoxoverride = 1;
   wait 5;
-  story = # "";
+  story = #"";
 
   switch (level.var_96eedc2a) {
     case 1:
-      story = # "hash_11249122ea4664c1";
+      story = #"hash_11249122ea4664c1";
       break;
     case 2:
-      story = # "hash_8cd5544966d910";
+      story = #"hash_8cd5544966d910";
       break;
     case 3:
-      story = # "hash_375451a6e54ce91";
+      story = #"hash_375451a6e54ce91";
       break;
   }
 

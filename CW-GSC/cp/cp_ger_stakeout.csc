@@ -28,11 +28,11 @@ function event_handler[level_init] main(eventstruct) {
   load::main();
   util::waitforclient(0);
   level flashlight::function_69258685(undefined, "maps/cp_stakeout/fx9_flashlight");
-  level._effect[#"guard_room_light"] = # "hash_d2a2dd55181f074";
-  level._effect[#"darkroom_light"] = # "hash_78e234f940b499a";
-  level._effect[#"rooftop_spotlight"] = # "hash_3a149841990ac7b1";
-  level._effect[#"hash_27d555878676deb1"] = # "hash_7c3a90be6566a844";
-  level._effect[#"player_blacklight"] = # "hash_2a8bc9be6587131c";
+  level._effect[#"guard_room_light"] = #"hash_d2a2dd55181f074";
+  level._effect[#"darkroom_light"] = #"hash_78e234f940b499a";
+  level._effect[#"rooftop_spotlight"] = #"hash_3a149841990ac7b1";
+  level._effect[#"hash_27d555878676deb1"] = #"hash_7c3a90be6566a844";
+  level._effect[#"player_blacklight"] = #"hash_2a8bc9be6587131c";
 }
 
 function init_clientfields() {
@@ -493,28 +493,28 @@ function render_emissive_blacklight_material(localclientnum, oldval, newval, bne
     case 0:
       break;
     case 1:
-      rob = # "hash_75541f13ad214906";
+      rob = #"hash_75541f13ad214906";
       break;
     case 2:
-      rob = # "hash_75541e13ad214753";
+      rob = #"hash_75541e13ad214753";
       break;
     case 3:
-      rob = # "hash_75541d13ad2145a0";
+      rob = #"hash_75541d13ad2145a0";
       break;
     case 4:
-      rob = # "hash_75542413ad215185";
+      rob = #"hash_75542413ad215185";
       break;
     case 5:
-      rob = # "hash_75542313ad214fd2";
+      rob = #"hash_75542313ad214fd2";
       break;
     case 6:
-      rob = # "hash_75542213ad214e1f";
+      rob = #"hash_75542213ad214e1f";
       break;
     case 7:
-      rob = # "hash_75542113ad214c6c";
+      rob = #"hash_75542113ad214c6c";
       break;
     case 8:
-      rob = # "hash_75542813ad215851";
+      rob = #"hash_75542813ad215851";
       break;
   }
 

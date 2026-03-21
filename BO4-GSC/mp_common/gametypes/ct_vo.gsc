@@ -289,7 +289,7 @@ function_869da1cf(_hash) {
   }
 }
 
-vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = # "axis", str_mod, str_weapon) {
+vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = #"axis", str_mod, str_weapon) {
   level endon(#"combattraining_logic_finished", #"hash_658f0911fdecfaf8");
   self endon(#"death", #"hash_658f0911fdecfaf8");
   e_player = get_player();

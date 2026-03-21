@@ -214,7 +214,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
 
   if(sessionmodeiscampaigngame() && isDefined(xp_difficulty_multiplier)) {
     if(isDefined(victim) && isDefined(victim.team)) {
-      if(victim.team == # "axis" || victim.team == # "team3") {
+      if(victim.team == #"axis" || victim.team == #"team3") {
         scoregiven *= xp_difficulty_multiplier;
       }
     }
@@ -368,14 +368,14 @@ function function_2b96d7dc() {
       gametype = "base";
     }
 
-    prefix = # "gamedata/tables/mp/scoreinfo/mp_scoreinfo";
+    prefix = #"gamedata/tables/mp/scoreinfo/mp_scoreinfo";
 
     if(sessionmodeiscampaigngame()) {
-      prefix = # "gamedata/tables/cp/scoreinfo/cp_scoreinfo";
+      prefix = #"gamedata/tables/cp/scoreinfo/cp_scoreinfo";
     } else if(sessionmodeiszombiesgame()) {
-      prefix = # "gamedata/tables/zm/scoreinfo/zm_scoreinfo";
+      prefix = #"gamedata/tables/zm/scoreinfo/zm_scoreinfo";
     } else if(sessionmodeiswarzonegame()) {
-      prefix = # "gamedata/tables/wz/scoreinfo/wz_scoreinfo";
+      prefix = #"gamedata/tables/wz/scoreinfo/wz_scoreinfo";
     }
 
     gametype = strreplace(gametype, "_hc", "");

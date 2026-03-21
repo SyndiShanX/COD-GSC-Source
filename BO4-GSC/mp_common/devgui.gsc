@@ -1015,7 +1015,7 @@ function_354e12a4() {
         keystring = function_9e72a96(key);
         util::add_devgui(path + "<dev string:x8eb>" + keystring[0] + "<dev string:x294>" + keystring, cmd + action[#"row"]);
 
-        if(isDefined(action[#"hash_401b1493e5188252"]) && action[#"hash_401b1493e5188252"] == # "ender") {
+        if(isDefined(action[#"hash_401b1493e5188252"]) && action[#"hash_401b1493e5188252"] == #"ender") {
           util::add_devgui(path + "<dev string:x8f3>" + keystring[0] + "<dev string:x294>" + keystring, var_ab79c6df + action[#"row"]);
         }
       }

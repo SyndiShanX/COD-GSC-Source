@@ -356,13 +356,13 @@ function_b1bd4115() {
 function_7b170638(var_8163cc4, b_found) {
   switch (var_8163cc4) {
     case 1:
-      var_7a0a29e3 = # "hash_379a0cb8e272c259";
+      var_7a0a29e3 = #"hash_379a0cb8e272c259";
       break;
     case 2:
-      var_7a0a29e3 = # "hash_379a09b8e272bd40";
+      var_7a0a29e3 = #"hash_379a09b8e272bd40";
       break;
     case 3:
-      var_7a0a29e3 = # "hash_379a0ab8e272bef3";
+      var_7a0a29e3 = #"hash_379a0ab8e272bef3";
       break;
   }
 
@@ -518,20 +518,20 @@ function_5627d722() {
 function_5ad19000(e_trap) {
   self endon(#"death");
 
-  if(self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"popcorn") {
     return;
   }
 
-  if(self.subarchetype === # "catalyst_plasma" && e_trap flag::get(#"friendly") == 0) {
+  if(self.subarchetype === #"catalyst_plasma" && e_trap flag::get(#"friendly") == 0) {
     return;
   }
 
-  if(self.team === # "allies") {
+  if(self.team === #"allies") {
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy" || self.zm_ai_category === # "boss") {
-    if(self.archetype === # "blight_father") {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy" || self.zm_ai_category === #"boss") {
+    if(self.archetype === #"blight_father") {
       e_trap deactivate_trap();
     }
 

@@ -123,10 +123,10 @@ function_5726a711() {
       if(isDefined(var_2d727ba0)) {
         var_a8539bf6 = spawnStruct();
 
-        if(isDefined(var_5e63b00d.script_team) && var_5e63b00d.script_team != # "none") {
+        if(isDefined(var_5e63b00d.script_team) && var_5e63b00d.script_team != #"none") {
           var_a8539bf6.team = var_5e63b00d.script_team;
         } else {
-          var_a8539bf6.team = # "any";
+          var_a8539bf6.team = #"any";
         }
 
         var_a8539bf6.origin = var_5e63b00d.origin;
@@ -342,14 +342,14 @@ function_e191d35c(e_player) {
 function_51ca9c38(origin, team) {
   actorteam = team;
 
-  if(actorteam == # "any") {
+  if(actorteam == #"any") {
     actorteam = "all";
   }
 
   owners = getactorteamarray(actorteam);
 
   foreach(player in level.players) {
-    if(player.team == team || team == # "any") {
+    if(player.team == team || team == #"any") {
       if(!isDefined(owners)) {
         owners = [];
       } else if(!isarray(owners)) {
@@ -384,7 +384,7 @@ function_69996073(var_3af54106) {
   teamowner = undefined;
   team = util::get_team_mapping(var_5e63b00d.var_a8539bf6.team);
 
-  if(team == # "any") {
+  if(team == #"any") {
     var_db4c606e = function_51ca9c38(var_5e63b00d.var_a8539bf6.origin, team);
     team = var_db4c606e.team;
   }
@@ -405,7 +405,7 @@ function_8ecf6615(var_3af54106) {
       team = util::get_team_mapping(var_5e63b00d.var_a8539bf6.team);
     }
 
-    if(team == # "any") {
+    if(team == #"any") {
       var_db4c606e = function_51ca9c38(var_5e63b00d.var_a8539bf6.origin, team);
       team = var_db4c606e.team;
     }

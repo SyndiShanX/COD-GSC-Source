@@ -246,7 +246,7 @@ function gadget_reset(gadgetweapon, changedclass, roundbased, firstround, change
     return;
   }
 
-  if(gadgetweapon.gadget_powerusetype == # "ammo") {
+  if(gadgetweapon.gadget_powerusetype == #"ammo") {
     return;
   }
 

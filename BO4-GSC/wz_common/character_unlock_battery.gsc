@@ -41,7 +41,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != # "hero_pineapple_grenade" && weapon.name != # "hero_pineapplegun") {
+  if(weapon.name != #"hero_pineapple_grenade" && weapon.name != #"hero_pineapplegun") {
     return;
   }
 

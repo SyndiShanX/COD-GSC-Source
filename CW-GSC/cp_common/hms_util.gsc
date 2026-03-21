@@ -711,9 +711,9 @@ function function_d370236e(target, var_7b23aa51 = 500, var_e544dc47 = 400, tacqu
       result = self waittill(#"hash_4f2aaaef2327c2a9", #"hash_1c5b621b87bcbdc6");
 
       if(getdvarint(#"hash_7f1fd7271ba70c67", 0) == 1) {
-        if(result._notify == # "hash_4f2aaaef2327c2a9") {
+        if(result._notify == #"hash_4f2aaaef2327c2a9") {
           record3dtext("<dev string:x40c>", self.origin + (0, 0, 32), (1, 1, 1));
-        } else if(result._notify == # "hash_1c5b621b87bcbdc6") {
+        } else if(result._notify == #"hash_1c5b621b87bcbdc6") {
           record3dtext("<dev string:x41c>", self.origin + (0, 0, 32), (1, 1, 1));
         }
       }
@@ -772,9 +772,9 @@ function function_d370236e(target, var_7b23aa51 = 500, var_e544dc47 = 400, tacqu
         result = self waittill(#"hash_4f2aaaef2327c2a9", #"hash_1c5b621b87bcbdc6");
 
         if(getdvarint(#"hash_7f1fd7271ba70c67", 0) == 1) {
-          if(result._notify == # "hash_4f2aaaef2327c2a9") {
+          if(result._notify == #"hash_4f2aaaef2327c2a9") {
             record3dtext("<dev string:x40c>", self.origin + (0, 0, 32), (1, 1, 1));
-          } else if(result._notify == # "hash_1c5b621b87bcbdc6") {
+          } else if(result._notify == #"hash_1c5b621b87bcbdc6") {
             record3dtext("<dev string:x41c>", self.origin + (0, 0, 32), (1, 1, 1));
           }
         }
@@ -981,7 +981,7 @@ function function_ad6fd59c(var_a81df2cc = 1) {
   }
 
   foreach(weapon in a_weapons) {
-    if(weapon.istacticalgrenade || weapon.name === # "eq_stimshot") {
+    if(weapon.istacticalgrenade || weapon.name === #"eq_stimshot") {
       return weapon;
     }
   }
@@ -1134,7 +1134,7 @@ function throw_grenade(v_target, var_9ff6ef8f = 0) {
     while(true) {
       var_29b8f3d0 = self waittill(#"bhtn_action_terminate");
 
-      if(var_29b8f3d0.action === # "grenade") {
+      if(var_29b8f3d0.action === #"grenade") {
         break;
       }
     }
@@ -1686,7 +1686,7 @@ function function_cafa23ec(var_77bf059) {
 function function_8b7cb19c(eventstruct) {
   result = 1;
 
-  if(isDefined(eventstruct) && isDefined(eventstruct.action) && isai(self) && self.team == # "allies" && (eventstruct.action == "enemycontact" || eventstruct.action == "exposed")) {
+  if(isDefined(eventstruct) && isDefined(eventstruct.action) && isai(self) && self.team == #"allies" && (eventstruct.action == "enemycontact" || eventstruct.action == "exposed")) {
     enemies = self getenemies();
 
     if(enemies.size == 0) {

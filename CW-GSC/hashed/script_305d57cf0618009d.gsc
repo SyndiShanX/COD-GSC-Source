@@ -363,7 +363,7 @@ function function_20cba65e(player) {
   teams = array(#"allies", #"axis");
 
   for(index = 3; index <= level.teamcount; index++) {
-    teams[teams.size] = # "team" + index;
+    teams[teams.size] = #"team" + index;
   }
 
   var_aa3d62e3 = [];

@@ -162,7 +162,7 @@ function debugdvars() {
 }
 
 function get_team_substr() {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isDefined(self.node.script_color_allies_old)) {
       return;
     }
@@ -170,7 +170,7 @@ function get_team_substr() {
     return self.node.script_color_allies_old;
   }
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     if(!isDefined(self.node.script_color_axis_old)) {
       return;
     }
@@ -1054,7 +1054,7 @@ function private function_4120bbac(node) {
 }
 
 function get_best_available_colored_node() {
-  assert(self.team != # "neutral");
+  assert(self.team != #"neutral");
   assert(isDefined(self.script_forcecolor), "<dev string:x11b>" + self.export+"<dev string:x289>");
   colorcode = level.currentcolorforced[self.team][self.script_forcecolor];
   nodes = get_prioritized_colorcoded_nodes(self.team, colorcode, self.script_forcecolor);
@@ -1068,7 +1068,7 @@ function get_best_available_colored_node() {
 }
 
 function get_best_available_new_colored_node() {
-  assert(self.team != # "neutral");
+  assert(self.team != #"neutral");
   assert(isDefined(self.script_forcecolor), "<dev string:x11b>" + self.export+"<dev string:x289>");
   colorcode = level.currentcolorforced[self.team][self.script_forcecolor];
   nodes = get_prioritized_colorcoded_nodes(self.team, colorcode, self.script_forcecolor);
@@ -1334,7 +1334,7 @@ function colornode_replace_on_death() {
   assert(isalive(self), "<dev string:x34c>");
   self endon(#"_disable_reinforcement");
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     return;
   }
 
@@ -1656,11 +1656,11 @@ function update_debug_friendlycolor() {
 }
 
 function has_color() {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     return (isDefined(self.script_color_allies) || isDefined(self.script_forcecolor));
-  } else if(self.team == # "axis") {
+  } else if(self.team == #"axis") {
     return (isDefined(self.script_color_axis) || isDefined(self.script_forcecolor));
-  } else if(self.team == # "team3") {
+  } else if(self.team == #"team3") {
     return (isDefined(self.script_color_team3) || isDefined(self.script_forcecolor));
   }
 

@@ -93,32 +93,32 @@ function event_handler[gametype_init] main(eventstruct) {
 
   level.var_537d7278 = [];
   level.var_537d7278[#"allies"] = spawnStruct();
-  level.var_537d7278[#"allies"].friendly = # "hash_284308e81d362553";
-  level.var_537d7278[#"allies"].enemy = # "hash_104d7846da83e67e";
+  level.var_537d7278[#"allies"].friendly = #"hash_284308e81d362553";
+  level.var_537d7278[#"allies"].enemy = #"hash_104d7846da83e67e";
   level.var_537d7278[#"axis"] = spawnStruct();
-  level.var_537d7278[#"axis"].friendly = # "hash_5a946f3f24347a8e";
-  level.var_537d7278[#"axis"].enemy = # "hash_34ce58df766f54dd";
+  level.var_537d7278[#"axis"].friendly = #"hash_5a946f3f24347a8e";
+  level.var_537d7278[#"axis"].enemy = #"hash_34ce58df766f54dd";
   level thread ctf_icon_hide();
   game.flagmodels[#"allies"] = spawnStruct();
-  game.flagmodels[#"allies"].allies = # "hash_1f046ad8773b6c3";
-  game.flagmodels[#"allies"].axis = # "hash_1001e79caa6049ce";
+  game.flagmodels[#"allies"].allies = #"hash_1f046ad8773b6c3";
+  game.flagmodels[#"allies"].axis = #"hash_1001e79caa6049ce";
   game.flagmodels[#"axis"] = spawnStruct();
-  game.flagmodels[#"axis"].axis = # "hash_4409a354dd61569e";
-  game.flagmodels[#"axis"].allies = # "hash_592aa91190e3938d";
-  game.carry_flagmodels[#"allies"] = # "hash_284308e81d362553";
-  game.carry_flagmodels[#"axis"] = # "hash_5a946f3f24347a8e";
+  game.flagmodels[#"axis"].axis = #"hash_4409a354dd61569e";
+  game.flagmodels[#"axis"].allies = #"hash_592aa91190e3938d";
+  game.carry_flagmodels[#"allies"] = #"hash_284308e81d362553";
+  game.carry_flagmodels[#"axis"] = #"hash_5a946f3f24347a8e";
 }
 
 function onprecachegametype() {
   game.flag_dropped_sound = "mp_war_objective_lost";
   game.flag_recovered_sound = "mp_war_objective_taken";
-  game.strings[#"score_limit_reached"] = # "hash_5218d2db23ab36aa";
+  game.strings[#"score_limit_reached"] = #"hash_5218d2db23ab36aa";
 }
 
 function function_b4530b39() {
   level endon(#"game_ended");
 
-  while(game.state != # "playing") {
+  while(game.state != #"playing") {
     waitframe(1);
   }
 
@@ -166,7 +166,7 @@ function function_bc074337(var_69437f64) {
   foreach(player in level.players) {
     team = player.pers[#"team"];
 
-    if(team === # "spectator") {
+    if(team === #"spectator") {
       continue;
     }
 
@@ -237,7 +237,7 @@ function onendround(var_c1e98979) {
     game.overtime_best_time[#"ctf"] = globallogic_utils::gettimepassed();
     globallogic_score::function_9779ac61();
 
-    if(winning_team === # "allies" || winning_team === # "axis") {
+    if(winning_team === #"allies" || winning_team === #"axis") {
       [[level._setteamscore]](winning_team, game.stat[#"roundswon"][winning_team] + 1);
     }
   }
@@ -287,18 +287,18 @@ function onendgame(var_c1e98979) {
 
   if(overtime::is_overtime_round()) {
     if(isDefined(game.overtime_first_winner)) {
-      if(game.outcome.var_aefc8b8d.team == # "none") {
+      if(game.outcome.var_aefc8b8d.team == #"none") {
         winningteam = game.overtime_first_winner;
       } else {
         winningteam = game.outcome.var_aefc8b8d.team;
       }
 
       if(game.overtime_first_winner == winningteam) {
-        level.endvictoryreasontext = # "hash_7cafa946822ee652";
-        level.enddefeatreasontext = # "hash_34d0ee5d4c21542d";
+        level.endvictoryreasontext = #"hash_7cafa946822ee652";
+        level.enddefeatreasontext = #"hash_34d0ee5d4c21542d";
       } else {
-        level.endvictoryreasontext = # "hash_7cafa946822ee652";
-        level.enddefeatreasontext = # "hash_5235bbca93844647";
+        level.endvictoryreasontext = #"hash_7cafa946822ee652";
+        level.enddefeatreasontext = #"hash_5235bbca93844647";
       }
     } else {
       winningteam = game.outcome.var_aefc8b8d.team;
@@ -431,7 +431,7 @@ function createflag(trigger) {
     flag.canuseobject = &function_a5f40b8e;
   } else {
     flag.allowweapons = 1;
-    flag.identifier = # "hash_7044a4ac19b5324e";
+    flag.identifier = #"hash_7044a4ac19b5324e";
   }
 
   flag.onpickup = &onpickup;
@@ -531,9 +531,9 @@ function ctf() {
       var_846ab111.origin = var_b226f916;
     }
 
-    var_786a6f75.team = # "allies";
+    var_786a6f75.team = #"allies";
     playFXOnTag(#"hash_56da9f8d4180ae4b", var_786a6f75, "tag_origin");
-    var_846ab111.team = # "axis";
+    var_846ab111.team = #"axis";
     playFXOnTag(#"hash_47e717b473ae9708", var_846ab111, "tag_origin");
   }
 
@@ -872,7 +872,7 @@ function function_883c46cc(team) {
     alliesroundswon = game.stat[#"roundswon"][#"allies"];
     axisroundswon = game.stat[#"roundswon"][#"axis"];
 
-    if(team == # "allies") {
+    if(team == #"allies") {
       alliesroundswon--;
     } else {
       axisroundswon--;

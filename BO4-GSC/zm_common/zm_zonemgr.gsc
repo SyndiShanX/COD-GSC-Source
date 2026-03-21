@@ -488,7 +488,7 @@ zone_init(zone_name, zone_tag) {
             nodes = getnodearray(barricades[k].target, "targetname");
 
             for(j = 0; j < nodes.size; j++) {
-              if(isDefined(nodes[j].type) && nodes[j].type == # "begin") {
+              if(isDefined(nodes[j].type) && nodes[j].type == #"begin") {
                 spot.target = nodes[j].targetname;
               }
             }
@@ -826,7 +826,7 @@ zone_flag_wait(flag_name) {
       check_flag = level.zone_flags[keys[i]];
 
       for(k = 0; k < check_flag.size; k++) {
-        if(check_flag[k] != # "power_on") {
+        if(check_flag[k] != #"power_on") {
           if(!level flag::get(check_flag[k])) {
             level flag::set(check_flag[k]);
             zone_flag_wait_throttle();

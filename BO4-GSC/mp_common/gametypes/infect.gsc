@@ -182,12 +182,12 @@ function_8d346fd8(winningteam) {
 
 inithud() {
   level.var_43406ee9 = spawnStruct();
-  level.var_43406ee9.label = # "hash_7bf80a392d947b6e";
+  level.var_43406ee9.label = #"hash_7bf80a392d947b6e";
   level.var_43406ee9.alpha = 0;
   level.var_43406ee9.archived = 0;
   level.var_43406ee9.hidewheninmenu = 1;
   level.var_6c6b8981 = spawnStruct();
-  level.var_6c6b8981.label = # "hash_29028683f846db5d";
+  level.var_6c6b8981.label = #"hash_29028683f846db5d";
   level.var_6c6b8981.alpha = 0;
   level.var_6c6b8981.archived = 0;
   level.var_6c6b8981.hidewheninmenu = 1;
@@ -671,7 +671,7 @@ choosefirstinfected() {
   wait 30;
 
   foreach(player in level.players) {
-    if(player.team == # "allies") {
+    if(player.team == #"allies") {
       scoreevents::processscoreevent("infected_survive_30_seconds", player);
     }
   }
@@ -845,7 +845,7 @@ function_57f1203() {
 }
 
 changeteam(team) {
-  if(team === # "axis") {
+  if(team === #"axis") {
     self infection::function_d3da95cf();
   } else {
     if(self.sessionstate != "dead") {
@@ -862,7 +862,7 @@ changeteam(team) {
     self.pers[#"teamtime"] = undefined;
   }
 
-  self clientfield::set("Infected.player_infected", team === # "axis");
+  self clientfield::set("Infected.player_infected", team === #"axis");
   self globallogic_ui::updateobjectivetext();
   self notify(#"end_respawn");
 }

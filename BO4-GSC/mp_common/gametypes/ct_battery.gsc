@@ -91,7 +91,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self ct_utils::function_ee4639dd(-5, 1);
     self notify(#"hash_789b40a7845c0591");
     self.var_6b6241ac = self.last_valid_position;
@@ -99,7 +99,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(level flag::exists("combat_training_started") && level flag::get("combat_training_started") && self.team == # "axis" && isDefined(level.var_902e7351) && level.var_902e7351) {
+  if(level flag::exists("combat_training_started") && level flag::get("combat_training_started") && self.team == #"axis" && isDefined(level.var_902e7351) && level.var_902e7351) {
     self ct_bots::function_43df30a8();
     e_player = ct_utils::get_player();
 

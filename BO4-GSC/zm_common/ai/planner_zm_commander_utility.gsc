@@ -143,7 +143,7 @@ function_ccdf2c6f(commander) {
         continue;
       }
 
-      if(powerup.powerup_name == # "nuke") {
+      if(powerup.powerup_name == #"nuke") {
         continue;
       }
 

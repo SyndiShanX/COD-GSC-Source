@@ -140,12 +140,12 @@ function function_2675a176() {
       break;
     case # "woods_regroup":
     case # "excavation":
-      var_6bacd91d = # "smg_standard_t9";
+      var_6bacd91d = #"smg_standard_t9";
       w_secondary = getweapon(#"pistol_semiauto_t9");
 
       if(namespace_b73b9191::function_34163738()) {
         if(isinarray(level.var_7334dc42, #"hash_165cf52ce418f5a1")) {
-          var_6bacd91d = # "hash_165cf52ce418f5a1";
+          var_6bacd91d = #"hash_165cf52ce418f5a1";
         }
 
         if(isinarray(level.var_7334dc42, #"hash_3ed4419427e0d85a")) {

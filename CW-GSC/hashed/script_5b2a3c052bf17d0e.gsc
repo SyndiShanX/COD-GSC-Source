@@ -121,7 +121,7 @@ function private function_e7e5c90d(s_instance) {
     var_50ebf8f1 = struct::get_array(var_5207017.targetname, "target");
 
     foreach(s_struct in var_50ebf8f1) {
-      if(s_struct.content_key === # "launch_target") {
+      if(s_struct.content_key === #"launch_target") {
         var_5207017.s_target = s_struct;
         continue;
       }

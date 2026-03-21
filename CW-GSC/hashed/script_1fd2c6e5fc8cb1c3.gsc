@@ -232,12 +232,12 @@ function function_c6e1b306() {
   while(true) {
     msg = level waittill(#"hash_33452e25c7f8048c", #"hash_75603f5b1241ba55");
 
-    if(msg._notify == # "hash_33452e25c7f8048c") {
+    if(msg._notify == #"hash_33452e25c7f8048c") {
       level.elevator_doorway_player_clip solid();
       continue;
     }
 
-    if(msg._notify == # "hash_75603f5b1241ba55") {
+    if(msg._notify == #"hash_75603f5b1241ba55") {
       level.elevator_doorway_player_clip notsolid();
     }
   }
@@ -784,7 +784,7 @@ function function_c2c71c9f() {
 }
 
 function function_50de5cd0(poi) {
-  var_a706170a = # "hash_49fdce58155f91e3";
+  var_a706170a = #"hash_49fdce58155f91e3";
 
   switch (poi.script_noteworthy) {
     case # "hash_18d800872b06dc78":
@@ -1433,7 +1433,7 @@ function private function_f78628e6() {
   while(true) {
     gameRef = self.script_noteworthy;
     var_ae865aeb = getscriptbundle(gameRef);
-    var_3b88de0c = # "hash_6ffbe136c9ac4c4e";
+    var_3b88de0c = #"hash_6ffbe136c9ac4c4e";
 
     if(isDefined(var_ae865aeb) && isDefined(var_ae865aeb.var_303ce84a) && var_ae865aeb.var_303ce84a != "") {
       var_3b88de0c = var_ae865aeb.var_303ce84a;

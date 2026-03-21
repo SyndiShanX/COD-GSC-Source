@@ -601,7 +601,7 @@ function function_fae6123(entity) {
       return true;
     }
 
-    if(!isPlayer(entity.enemy) || entity.enemy getstance() != # "prone") {
+    if(!isPlayer(entity.enemy) || entity.enemy getstance() != #"prone") {
       if(!entity cansee(isDefined(entity.var_5a81324d) ? entity.var_5a81324d : entity.enemy)) {
         entity.var_e8e74caf = 0;
         return true;
@@ -694,7 +694,7 @@ function zombiefindflesh(behaviortreeentity) {
     return;
   }
 
-  if(behaviortreeentity.team == # "allies") {
+  if(behaviortreeentity.team == #"allies") {
     behaviortreeentity findzombieenemy();
     return;
   }
@@ -703,7 +703,7 @@ function zombiefindflesh(behaviortreeentity) {
     return;
   }
 
-  if(!(self.zm_ai_category === # "special") && !(self.zm_ai_category === # "elite")) {
+  if(!(self.zm_ai_category === #"special") && !(self.zm_ai_category === #"elite")) {
     decoy = nightingale::function_29fbe24f(behaviortreeentity);
     monkey = gadget_cymbal_monkey::function_4a5dff80(behaviortreeentity, 0);
     var_67372704 = [decoy, monkey];
@@ -941,7 +941,7 @@ function zombiefindfleshcode(behaviortreeentity) {
   behaviortreeentity.ignore_player = [];
   behaviortreeentity.goalradius = 30;
 
-  if(behaviortreeentity.team == # "allies") {
+  if(behaviortreeentity.team == #"allies") {
     behaviortreeentity findzombieenemy();
     aiprofile_endentry();
     return;
@@ -2526,7 +2526,7 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
     var_31e96b81 = int(var_3cddb028);
 
     foreach(weakpoint in self.var_5ace757d) {
-      if(weakpoint.type === # "armor" && weakpoint.currstate === 1) {
+      if(weakpoint.type === #"armor" && weakpoint.currstate === 1) {
         self function_671249fb(weakpoint, vdir, var_3cddb028);
       }
     }
@@ -2537,7 +2537,7 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
     var_31e96b81 = int(var_3cddb028);
 
     foreach(weakpoint in self.var_5ace757d) {
-      if(weakpoint.type === # "armor" && weakpoint.currstate === 1) {
+      if(weakpoint.type === #"armor" && weakpoint.currstate === 1) {
         self function_671249fb(weakpoint, vdir, var_3cddb028, 0);
       }
     }
@@ -2551,7 +2551,7 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
     var_93c42150 = namespace_81245006::function_fab3ee3e(self);
 
     foreach(weakpoint in var_93c42150) {
-      if(weakpoint.type === # "armor") {
+      if(weakpoint.type === #"armor") {
         if(isPlayer(vdir)) {
           n_tier = vdir namespace_b61a349a::function_998f8321(boneindex);
 
@@ -2575,17 +2575,17 @@ function function_29c1ba76(einflictor, eattacker, idamage, idflags, smeansofdeat
 
   weakpoint = namespace_81245006::function_3131f5dd(self, surfacetype, 1);
 
-  if(isDefined(weakpoint) && weakpoint.type === # "armor") {
+  if(isDefined(weakpoint) && weakpoint.type === #"armor") {
     var_3cddb028 = shitloc * function_ac6dcd03(self, boneindex, vdir);
     var_3cddb028 = int(var_3cddb028);
     self function_671249fb(weakpoint, vdir, var_3cddb028);
     var_36d55c9c = function_c5a2dbe5(self, boneindex, vdir);
 
     if(isPlayer(vdir)) {
-      if(self.subarchetype === # "hash_7a778318514578f7") {
+      if(self.subarchetype === #"hash_7a778318514578f7") {
         shitloc = int(shitloc * 0.35 * var_36d55c9c);
         vdir namespace_b61a349a::function_8a6ccd14(boneindex, n_tier, undefined, shitloc);
-      } else if(self.subarchetype === # "zombie_medium_armor") {
+      } else if(self.subarchetype === #"zombie_medium_armor") {
         shitloc = int(shitloc * 0.5 * var_36d55c9c);
         vdir namespace_b61a349a::function_8a6ccd14(boneindex, n_tier, undefined, shitloc);
       }
@@ -2666,7 +2666,7 @@ function function_f4e9bba4(entity) {
   }
 
   foreach(weakpoint in weakpoints) {
-    if(weakpoint.type === # "armor") {
+    if(weakpoint.type === #"armor") {
       max_health += weakpoint.maxhealth;
       curr_health += max(weakpoint.health, 0);
     }
@@ -2684,7 +2684,7 @@ function function_7994fd99(inflictor, attacker, damage, flags, meansofdeath, wea
     return -1;
   }
 
-  if(self.archetype == # "zombie" && !isDefined(self.subarchetype)) {
+  if(self.archetype == #"zombie" && !isDefined(self.subarchetype)) {
     self destructserverutils::handledamage(attacker, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
   }
 
@@ -2850,7 +2850,7 @@ function function_4a99b560(entity, enemy) {
   launch_speed = (0.5 * getdvarfloat(#"bg_lowgravity", 400) * sqr(time) + to_target[2]) / time;
   to_target = vectornormalize((to_target[0], to_target[1], 0)) * 700;
 
-  if(zm_utility::is_survival() && isDefined(entity.current_state) && entity.current_state.name !== # "chase" || zm_utility::is_survival() && distance2dsquared(entity.origin, enemy.origin) <= sqr(100) || !isinarray(enemy.var_f904e440, entity) || !entity function_92dcde87(start_pos, target_pos, (to_target[0], to_target[1], launch_speed), time, enemy)) {
+  if(zm_utility::is_survival() && isDefined(entity.current_state) && entity.current_state.name !== #"chase" || zm_utility::is_survival() && distance2dsquared(entity.origin, enemy.origin) <= sqr(100) || !isinarray(enemy.var_f904e440, entity) || !entity function_92dcde87(start_pos, target_pos, (to_target[0], to_target[1], launch_speed), time, enemy)) {
     return false;
   }
 
@@ -2868,7 +2868,7 @@ function function_e5f60f55(entity) {
   var_a702ff0 = [];
 
   foreach(zombie in enemy.var_f904e440) {
-    if(zombie.enemy !== enemy || zm_utility::is_survival() && isDefined(zombie.current_state) && zombie.current_state.name !== # "chase") {
+    if(zombie.enemy !== enemy || zm_utility::is_survival() && isDefined(zombie.current_state) && zombie.current_state.name !== #"chase") {
       var_a702ff0[var_a702ff0.size] = zombie;
     }
   }

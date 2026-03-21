@@ -120,7 +120,7 @@ activation(var_fad9ed02 = 1) {
 
   foreach(ai in a_aoe_ai) {
     if(isactor(ai)) {
-      if(ai.archetype === # "zombie") {
+      if(ai.archetype === #"zombie") {
         playFX(level._effect[#"teleport_aoe_kill"], ai gettagorigin("j_spineupper"));
       } else {
         playFX(level._effect[#"teleport_aoe_kill"], ai.origin);
@@ -147,7 +147,7 @@ activation(var_fad9ed02 = 1) {
 }
 
 validation() {
-  if(level.var_2439365b === # "turret") {
+  if(level.var_2439365b === #"turret") {
     return 0;
   }
 

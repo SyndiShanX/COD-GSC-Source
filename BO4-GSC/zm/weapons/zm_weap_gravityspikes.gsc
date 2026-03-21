@@ -231,7 +231,7 @@ play_slam_fx(v_pos) {
 zombie_slam_direction(v_position) {
   self endon(#"death");
 
-  if(!(self.archetype === # "zombie") || isDefined(self.knockdown) && self.knockdown) {
+  if(!(self.archetype === #"zombie") || isDefined(self.knockdown) && self.knockdown) {
     return;
   }
 
@@ -296,7 +296,7 @@ gravityspikes_stuck_above_zombie_watcher() {
       }
 
       if(trace[#"fraction"] < 1) {
-        if(isactor(trace[#"entity"]) && trace[#"entity"].health > 0 && (trace[#"entity"].archetype == # "zombie" || trace[#"entity"].archetype == # "zombie_dog")) {
+        if(isactor(trace[#"entity"]) && trace[#"entity"].health > 0 && (trace[#"entity"].archetype == #"zombie" || trace[#"entity"].archetype == #"zombie_dog")) {
           self thread knockdown_zombies_slam();
           self thread no_damage_gravityspikes_slam();
           wait 1;
@@ -336,7 +336,7 @@ function_26a4b7f5(w_gravityspikes) {
     a_ai_zombies = array::get_all_closest(self.origin, getaiteamarray(level.zombie_team), undefined, undefined, 200);
 
     foreach(ai_zombie in a_ai_zombies) {
-      if(isalive(ai_zombie) && (ai_zombie.zm_ai_category == # "basic" || ai_zombie.zm_ai_category == # "enhanced") && math::cointoss()) {
+      if(isalive(ai_zombie) && (ai_zombie.zm_ai_category == #"basic" || ai_zombie.zm_ai_category == #"enhanced") && math::cointoss()) {
         ai_zombie thread zombie_utility::setup_zombie_knockdown(v_pos);
       }
     }
@@ -346,7 +346,7 @@ function_26a4b7f5(w_gravityspikes) {
       continue;
     }
 
-    if(var_b735005c.zm_ai_category == # "basic" || var_b735005c.zm_ai_category == # "popcorn" || var_b735005c.zm_ai_category == # "enhanced") {
+    if(var_b735005c.zm_ai_category == #"basic" || var_b735005c.zm_ai_category == #"popcorn" || var_b735005c.zm_ai_category == #"enhanced") {
       while(isalive(var_b735005c)) {
         var_b735005c thread function_6a21cc79(self, w_gravityspikes);
         wait 0.2;
@@ -365,7 +365,7 @@ function_26a4b7f5(w_gravityspikes) {
 function_6a21cc79(e_player, w_gravityspikes) {
   self endon(#"death");
 
-  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     n_damage = self.maxhealth * 0.25;
     self clientfield::increment("gravity_aoe_impact_tu6");
@@ -380,14 +380,14 @@ function_6a21cc79(e_player, w_gravityspikes) {
     return;
   }
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     self clientfield::increment("gravity_aoe_impact_tu6");
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     self dodamage(self.health + 100, self.origin, e_player, e_player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
     return;
   }
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
     self clientfield::increment("gravity_aoe_impact_tu6");
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     self dodamage(self.maxhealth * 0.1, self.origin, e_player, e_player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
@@ -912,7 +912,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
     return;
   }
 
-  if(self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"popcorn") {
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
     self.no_powerups = 1;
     self dodamage(self.health + 100, self.origin, player, player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
@@ -920,7 +920,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss") {
+  if(self.zm_ai_category === #"miniboss") {
     [[level.ai_gravity_throttle]] - > waitinqueue(self);
 
     if(isalive(self) && isDefined(self.b_melee_kill) && self.b_melee_kill && !(isDefined(self.var_5bf7575e) && self.var_5bf7575e) && !(isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground)) {
@@ -974,7 +974,7 @@ zombie_lift(player, v_attack_source, n_push_away, n_lift_height, v_lift_offset, 
     return;
   }
 
-  if(self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"boss") {
     if(isalive(self) && isDefined(self.b_melee_kill) && self.b_melee_kill && !(isDefined(self.var_5bf7575e) && self.var_5bf7575e) && !(isDefined(player.b_gravity_trap_spikes_in_ground) && player.b_gravity_trap_spikes_in_ground)) {
       [[level.ai_gravity_throttle]] - > waitinqueue(self);
       self dodamage(self.maxhealth * 0.05, self.origin, player, player, "head", "MOD_ELECTROCUTED", 0, w_gravityspikes);
@@ -1167,7 +1167,7 @@ track_lifted_for_ragdoll_count() {
 corpse_off_navmesh_watcher(n_timeout) {
   self.b_ignore_cleanup = 1;
 
-  if(self.zm_ai_category !== # "basic" && self.zm_ai_category !== # "enhanced") {
+  if(self.zm_ai_category !== #"basic" && self.zm_ai_category !== #"enhanced") {
     return;
   }
 

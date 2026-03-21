@@ -79,7 +79,7 @@ function function_6708490a() {
       dynents = function_c3d68575(position, (200, 200, 32));
 
       foreach(dynent in dynents) {
-        if(dynent.var_15d44120 === # "p9_fxanim_wz_rus_door_garage_sliding_large_01_mod") {
+        if(dynent.var_15d44120 === #"p9_fxanim_wz_rus_door_garage_sliding_large_01_mod") {
           dynent.var_993e9bb0 = 1;
         }
       }
@@ -96,7 +96,7 @@ function function_24198689() {
 }
 
 function function_a387f4f5() {
-  if(level.basegametype == # "fireteam_dirty_bomb" || level.basegametype == # "fireteam_elimination" || level.basegametype == # "fireteam_koth" || level.basegametype == # "fireteam_satlink") {
+  if(level.basegametype == #"fireteam_dirty_bomb" || level.basegametype == #"fireteam_elimination" || level.basegametype == #"fireteam_koth" || level.basegametype == #"fireteam_satlink") {
     level thread function_f9492b33();
 
     if(isDefined(level.var_574cc797)) {

@@ -30,7 +30,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(util::get_game_type() === # "hash_1aecd78b7244ff81") {
+  if(util::get_game_type() === #"hash_1aecd78b7244ff81") {
     callback::add_callback(#"hash_7852c3cae4d4082a", &function_2d9abf0f);
     callback::add_callback(#"hash_75d9baf9eed8610b", &function_4e9f972a);
     callback::add_callback(#"hash_668017ea3d415b3b", &function_bc1832a2);
@@ -246,7 +246,7 @@ function function_e3871553(var_4d2ad93e) {
   if(isDefined(self.currentweapon)) {
     weapon = zm_weapons::get_base_weapon(self.currentweapon);
 
-    if((weapon.weapclass === "melee" || is_true(weapon.issniperweapon) || weapon.weapclass === # "pistol") && (level.wave_number % 3 == 0 || level.wave_number >= 6) || is_true(weapon.islauncher) && var_27751b99 == 0 || weapon.name === # "special_crossbow_t9" && level.wave_number >= 3) {
+    if((weapon.weapclass === "melee" || is_true(weapon.issniperweapon) || weapon.weapclass === #"pistol") && (level.wave_number % 3 == 0 || level.wave_number >= 6) || is_true(weapon.islauncher) && var_27751b99 == 0 || weapon.name === #"special_crossbow_t9" && level.wave_number >= 3) {
       self thread zm_vo::function_8abe0568(#"game_over");
     }
   }
@@ -281,7 +281,7 @@ function function_e3871553(var_4d2ad93e) {
 
     if(!zm_weapons::is_wonder_weapon(weapon)) {
       if(isDefined(var_a781b3e1.aat)) {
-        if(weapon.weapclass != "melee" && weapon.name != # "special_ballisticknife_t9_dw" && weapon.name != # "special_ballisticknife_t9_dw_upgraded") {
+        if(weapon.weapclass != "melee" && weapon.name != #"special_ballisticknife_t9_dw" && weapon.name != #"special_ballisticknife_t9_dw_upgraded") {
           self function_bf3044dc(weapon, 1);
         }
       } else {

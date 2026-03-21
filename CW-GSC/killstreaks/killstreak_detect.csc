@@ -153,7 +153,7 @@ function function_903bbed3(local_client_num, bundle) {
 }
 
 function function_d859c344(local_client_num, newval) {
-  if(self.weapon.name === # "uav" || self.weapon.name === # "counteruav") {
+  if(self.weapon.name === #"uav" || self.weapon.name === #"counteruav") {
     var_fd9de919 = function_9b3f0ed1(newval);
 
     if(self.team === var_fd9de919) {

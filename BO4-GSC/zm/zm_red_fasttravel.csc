@@ -19,10 +19,10 @@ init() {
   clientfield::register("allplayers", "" + # "hash_52693a3ba1bbc7ea", 16000, 1, "counter", &override_fasttravel_end_fx, 0, 0);
   clientfield::register("world", "" + # "hash_761511e09cb8324e", 16000, 1, "int", &function_e968fd4f, 0, 0);
   clientfield::register("scriptmover", "" + # "forcestream_crafted_item", 16000, 1, "int", &forcestream_crafted_item, 0, 0);
-  level._effect[#"hash_7844498a1d0272cf"] = # "hash_36a8758df9221bce";
-  level._effect[#"hash_1485000e3492adb9"] = # "hash_240783e54de51f0";
-  level._effect[#"hash_359655df3976b4e0"] = # "hash_4df6f1dbc41bc9c3";
-  level._effect[#"override_fasttravel_end_fx"] = # "hash_50655ac7dc942305";
+  level._effect[#"hash_7844498a1d0272cf"] = #"hash_36a8758df9221bce";
+  level._effect[#"hash_1485000e3492adb9"] = #"hash_240783e54de51f0";
+  level._effect[#"hash_359655df3976b4e0"] = #"hash_4df6f1dbc41bc9c3";
+  level._effect[#"override_fasttravel_end_fx"] = #"hash_50655ac7dc942305";
 }
 
 main() {

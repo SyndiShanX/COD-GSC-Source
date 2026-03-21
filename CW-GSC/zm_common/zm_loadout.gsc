@@ -284,7 +284,7 @@ function function_e884e095(slot, weapon) {
     weapon = getweapon(weapon);
   }
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
@@ -765,14 +765,14 @@ function get_class_num(weaponclass) {
   return class_num;
 }
 
-function function_d7c205b9(newclass, calledfrom = # "unspecified") {
+function function_d7c205b9(newclass, calledfrom = #"unspecified") {
   loadoutindex = isDefined(newclass) ? get_class_num(newclass) : undefined;
   self.pers[#"loadoutindex"] = loadoutindex;
-  var_45843e9a = calledfrom == # "give_loadout";
+  var_45843e9a = calledfrom == #"give_loadout";
   var_7f8c24df = 0;
 
   if(!var_45843e9a) {
-    var_7f8c24df = isDefined(game) && isDefined(game.state) && game.state == # "playing" && isalive(self);
+    var_7f8c24df = isDefined(game) && isDefined(game.state) && game.state == #"playing" && isalive(self);
 
     if(var_7f8c24df && self.sessionstate == "playing") {
       var_25b0cd7 = self.usingsupplystation === 1;
@@ -804,7 +804,7 @@ function menuclass(response, forcedclass, updatecharacterindex, var_632376a3) {
   }
 
   if(!loadout::function_87bcb1b()) {
-    if((game.state == # "pregame" || game.state == # "playing") && self.sessionstate != "playing") {
+    if((game.state == #"pregame" || game.state == #"playing") && self.sessionstate != "playing") {
       self thread[[level.spawnclient]](0);
     }
 

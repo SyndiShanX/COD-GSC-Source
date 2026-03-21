@@ -357,7 +357,7 @@ start() {
   level callback::callback(#"hash_405e46788e83af41");
   level.var_74887eb = level.deathcircles.size;
 
-  if(util::get_game_type() == # "warzone_bigteam_dbno_quad") {
+  if(util::get_game_type() == #"warzone_bigteam_dbno_quad") {
     level.var_74887eb = level.deathcircles.size - 2;
   }
 
@@ -397,7 +397,7 @@ start() {
         var_9275bfa4 = spawn("script_model", var_7791d394.origin);
         var_9275bfa4.targetname = "next_death_circle";
         var_9275bfa4 setModel("tag_origin");
-        var_9275bfa4.team = # "neutral";
+        var_9275bfa4.team = #"neutral";
         var_9275bfa4 clientfield::set("deathcircleflag", 1);
       } else {
         var_9275bfa4 dontinterpolate();

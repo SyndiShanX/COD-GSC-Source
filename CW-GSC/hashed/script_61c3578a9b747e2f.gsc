@@ -205,7 +205,7 @@ function function_5bcee875(player_source, weapon, var_5baceff5, var_2b003a39) {
 }
 
 function function_65e5989c(weapon) {
-  if(weapon.name === # "lightning_links_4" || weapon.name === # "lightning_links_5") {
+  if(weapon.name === #"lightning_links_4" || weapon.name === #"lightning_links_5") {
     self function_7b69ae3f();
     var_e3ad032b = self getmovespeedscale() + self getmovespeedscale() * 0.25;
     self notify(#"hash_2873117ec68db93c");
@@ -221,9 +221,9 @@ function function_7b69ae3f() {
 
 function function_165a06f0(player_source, var_2b003a39, var_5baceff5, weapon) {
   if(isactor(self) && isalive(self) && !self flag::get(#"hash_6ab8e3db32b20d33") && isalive(player_source) && !player_source laststand::player_is_in_laststand() && self.team === level.zombie_team && !is_true(self.var_c8065bf4) && !is_true(self.var_8576e0be) && !is_true(player_source.var_16735873)) {
-    if(self.zm_ai_category === # "boss") {
+    if(self.zm_ai_category === #"boss") {
       return false;
-    } else if(self.zm_ai_category === # "elite") {
+    } else if(self.zm_ai_category === #"elite") {
       switch (weapon.name) {
         case # "lightning_links":
         case # "lightning_links_1":
@@ -232,7 +232,7 @@ function function_165a06f0(player_source, var_2b003a39, var_5baceff5, weapon) {
         case # "lightning_links_4":
           return false;
       }
-    } else if(self.zm_ai_category === # "special") {
+    } else if(self.zm_ai_category === #"special") {
       switch (weapon.name) {
         case # "lightning_links":
         case # "lightning_links_1":
@@ -326,13 +326,13 @@ function function_c79f4bd7(weapon, player_source, var_15625d6b) {
         break;
     }
 
-    if(self.zm_ai_category === # "elite") {
+    if(self.zm_ai_category === #"elite") {
       var_70ab6bc = var_19ba813e;
       n_clientfield = 3;
-    } else if(self.zm_ai_category === # "special") {
+    } else if(self.zm_ai_category === #"special") {
       var_70ab6bc = var_34e3b3f7;
       n_clientfield = 2;
-    } else if(self.zm_ai_category === # "normal") {
+    } else if(self.zm_ai_category === #"normal") {
       var_70ab6bc = var_da4a3267;
       n_clientfield = 1;
     }

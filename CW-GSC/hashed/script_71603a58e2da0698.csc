@@ -323,19 +323,19 @@ function changecamera(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
   switch (self.doa.cameramode) {
     case 1:
-      msg = # "hash_447dc787430ef129";
+      msg = #"hash_447dc787430ef129";
       break;
     case 0:
-      msg = # "hash_7d810006d120ca86";
+      msg = #"hash_7d810006d120ca86";
       break;
     case 2:
-      msg = # "hash_61823fb81c973c88";
+      msg = #"hash_61823fb81c973c88";
       break;
     case 3:
-      msg = # "hash_604d22d46a737a0b";
+      msg = #"hash_604d22d46a737a0b";
       break;
     case 4:
-      msg = # "hash_6fca4e61bae022cd";
+      msg = #"hash_6fca4e61bae022cd";
       break;
   }
 

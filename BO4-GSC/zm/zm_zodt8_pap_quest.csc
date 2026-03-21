@@ -28,11 +28,11 @@
 #namespace zodt8_pap_quest;
 
 init() {
-  level._effect[#"hash_711cbb6b36694a2a"] = # "hash_76b535da68eacfe5";
-  level._effect[#"hash_2ad6c6017f084d7a"] = # "hash_4e58e9dad90ada6d";
-  level._effect[#"hash_23bb6df1e8d8a032"] = # "hash_4f8332385445d967";
-  level._effect[#"hash_14d2dc2c31e6dab9"] = # "hash_37e114058b86991a";
-  level._effect[#"hash_79b06b6af34ac1ab"] = # "hash_1e30126e06b4956";
+  level._effect[#"hash_711cbb6b36694a2a"] = #"hash_76b535da68eacfe5";
+  level._effect[#"hash_2ad6c6017f084d7a"] = #"hash_4e58e9dad90ada6d";
+  level._effect[#"hash_23bb6df1e8d8a032"] = #"hash_4f8332385445d967";
+  level._effect[#"hash_14d2dc2c31e6dab9"] = #"hash_37e114058b86991a";
+  level._effect[#"hash_79b06b6af34ac1ab"] = #"hash_1e30126e06b4956";
   clientfield::register("zbarrier", "pap_chunk_small_rune", 1, getminbitcountfornum(16), "int", &pap_chunk_small_rune, 0, 0);
   clientfield::register("zbarrier", "pap_chunk_big_rune", 1, getminbitcountfornum(5), "int", &pap_chunk_big_rune, 0, 0);
   clientfield::register("zbarrier", "pap_machine_rune", 1, getminbitcountfornum(5), "int", &pap_machine_rune, 0, 0);

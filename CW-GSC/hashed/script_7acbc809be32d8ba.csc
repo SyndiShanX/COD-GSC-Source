@@ -343,7 +343,7 @@ function function_a1e57b34(localclientnum, oldval, newval, bnewent, binitialsnap
 
     weapon = self.owner function_d2c2b168().rootweapon;
 
-    if(weapon.name === # "ww_mega_barrel_fullauto_blazer_beam_t9_upgraded") {
+    if(weapon.name === #"ww_mega_barrel_fullauto_blazer_beam_t9_upgraded") {
       self.var_d34c8bb = self.owner zm_utility::function_f8796df3(fieldname) ? "beam9_zm_mega_barrel_blazer_upgraded" : "beam9_zm_mega_barrel_blazer_3p_upgraded";
     } else {
       self.var_d34c8bb = self.owner zm_utility::function_f8796df3(fieldname) ? "beam9_zm_mega_barrel_blazer" : "beam9_zm_mega_barrel_blazer_3p";
@@ -482,7 +482,7 @@ function function_53bb1917(localclientnum, oldval, newval, bnewent, binitialsnap
     if(!isDefined(self.var_accb4770)) {
       weapon = self function_d2c2b168().rootweapon;
       var_accb4770 = util::spawn_model(fieldname, #"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_mod");
-      var_accb4770.var_515e20e6 = weapon.name === # "ww_mega_barrel_fullauto_copycat_t9_upgraded";
+      var_accb4770.var_515e20e6 = weapon.name === #"ww_mega_barrel_fullauto_copycat_t9_upgraded";
       var_accb4770 linktocamera();
       var_accb4770 setforcenocull();
       var_accb4770 thread scene::play(#"p9_fxanim_ww_mega_barrel_fullauto_copycat_circle_bundle", var_accb4770);

@@ -187,7 +187,7 @@ function function_c45d8312(player, time) {
   while(isDefined(self)) {
     result = self waittilltimeout(1, #"death", #"flipped", #"exit_vehicle");
 
-    if(result._notify != # "timeout") {
+    if(result._notify != #"timeout") {
       break;
     }
 

@@ -23,7 +23,7 @@ function private preinit() {
 }
 
 function private postinit() {
-  level._effect[#"monkey_glow"] = # "hash_5d0dd3293cfdb3dd";
+  level._effect[#"monkey_glow"] = #"hash_5d0dd3293cfdb3dd";
 }
 
 function private finalize() {
@@ -96,7 +96,7 @@ function private function_17c51c94(monkey, ent) {
 }
 
 function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == # "cymbal_monkey") {
+  if(eventstruct.weapon.name == #"cymbal_monkey") {
     e_grenade = eventstruct.projectile;
     e_grenade ghost();
     e_grenade.angles = self.angles;

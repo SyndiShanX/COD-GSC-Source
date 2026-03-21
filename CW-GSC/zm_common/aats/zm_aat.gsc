@@ -92,7 +92,7 @@ function function_ec7953fa() {
   w_stat = zm_weapons::get_base_weapon(weapon);
   var_947d01ee = level.zombie_weapons[w_stat].weapon_classname;
 
-  if(var_947d01ee === "melee" || weapon.name === # "special_ballisticknife_t9_dw" || weapon.name === # "special_ballisticknife_t9_dw_upgraded") {
+  if(var_947d01ee === "melee" || weapon.name === #"special_ballisticknife_t9_dw" || weapon.name === #"special_ballisticknife_t9_dw_upgraded") {
     return;
   }
 

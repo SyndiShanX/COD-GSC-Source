@@ -11,10 +11,10 @@
 #namespace namespace_4b68b2b3;
 
 preload() {
-  level._effect[#"pap_soul"] = # "hash_59977c4c851916e0";
-  level._effect[#"hash_1549a7f7c4a3d66e"] = # "hash_1a06427eff8dfe13";
-  level._effect[#"pap_explosion"] = # "hash_c25bcbc2422f364";
-  level._effect[#"pap_fire"] = # "hash_4847c0d5a4c9cd6";
+  level._effect[#"pap_soul"] = #"hash_59977c4c851916e0";
+  level._effect[#"hash_1549a7f7c4a3d66e"] = #"hash_1a06427eff8dfe13";
+  level._effect[#"pap_explosion"] = #"hash_c25bcbc2422f364";
+  level._effect[#"pap_fire"] = #"hash_4847c0d5a4c9cd6";
   init_clientfields();
 }
 

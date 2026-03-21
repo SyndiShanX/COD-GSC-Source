@@ -158,7 +158,7 @@ function function_d99e101d(localclientnum, var_86cccd7b) {
   var_86cccd7b endon(#"death");
   var_c848a436 = array("j_elbow_le", "j_elbow_ri", "j_shoulder_le", "j_shoulder_ri", "j_spine4", "j_head");
 
-  if(var_86cccd7b.archetype == # "zombie_dog") {
+  if(var_86cccd7b.archetype == #"zombie_dog") {
     var_c848a436 = array("j_spine2", "j_spine3", "j_spine4", "j_neck", "j_head");
   }
 

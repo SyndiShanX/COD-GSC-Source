@@ -204,7 +204,7 @@ function function_941ed5d6() {
 }
 
 function function_aa2c622b(weapon) {
-  return weapon.name === # "gadget_health_regen" || weapon.name === # "gadget_medicalinjectiongun" || weapon.name === # "hash_788c96e19cc7a46e";
+  return weapon.name === #"gadget_health_regen" || weapon.name === #"gadget_medicalinjectiongun" || weapon.name === #"hash_788c96e19cc7a46e";
 }
 
 function gadget_health_regen_on(slot, weapon) {

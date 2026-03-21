@@ -81,7 +81,7 @@ function_c9ff0dce() {
   self.health_start = self.health;
   self.overrideplayerdamage = &callback_player_damage;
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     if(!isbot(self)) {
       if(level.var_ad7c0539 === 4) {
         self thread function_6e01051f();
@@ -122,21 +122,21 @@ function_62afa484() {
 }
 
 callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, weapon, v_point, v_dir, str_hit_loc, n_psoffsettime, var_8b69d5cf) {
-  if(level.var_ad7c0539 === 1 && self.team == # "allies" && isbot(self)) {
+  if(level.var_ad7c0539 === 1 && self.team == #"allies" && isbot(self)) {
     if(self.health > int(self.health_start * 0.3)) {
       n_damage *= 1.5;
     }
   }
 
-  if(level.var_ad7c0539 === 4 && self.team == # "allies") {
+  if(level.var_ad7c0539 === 4 && self.team == #"allies") {
     n_damage *= 0.1;
-  } else if(self.health < int(self.health_start * 0.3) && self.team == # "allies" && isbot(self)) {
+  } else if(self.health < int(self.health_start * 0.3) && self.team == #"allies" && isbot(self)) {
     n_damage = 0;
   } else if(isbot(e_attacker)) {
     n_damage *= 0.2;
   }
 
-  if(level.var_ad7c0539 === 2 && self.team == # "axis") {
+  if(level.var_ad7c0539 === 2 && self.team == #"axis") {
     n_damage *= 4;
   }
 
@@ -144,7 +144,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(isbot(self) && self.team === # "axis") {
+  if(isbot(self) && self.team === #"axis") {
     self.isinuse = 0;
   }
 
@@ -152,7 +152,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     self ct_utils::clear_killstreaks();
   }
 
-  if(level.var_ad7c0539 === 2 && self.team === # "axis") {
+  if(level.var_ad7c0539 === 2 && self.team === #"axis") {
     if(isalive(level.players[0])) {
       level.var_3cdb14a8--;
       level.players[0] ct_utils::function_80bf685b(level.var_3cdb14a8);
@@ -161,7 +161,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(level.var_ad7c0539 === 4 && self.team === # "axis" && isPlayer(attacker)) {
+  if(level.var_ad7c0539 === 4 && self.team === #"axis" && isPlayer(attacker)) {
     if(isDefined(level.var_f9242904) && level.var_f9242904 && isalive(level.players[0])) {
       function_1089714c();
       return;
@@ -523,7 +523,7 @@ function_8ab81320() {
         level ct_vo::play_vo(#"hash_fc616b0cea91320", 1);
         level.players[0] ct_utils::function_61c3d59c(#"hash_6294dadea114ab41", undefined);
         ct_utils::function_e44c5b8e(#"ai_tank_marker", 10);
-        level.var_b4a06c5b = # "tank_robot";
+        level.var_b4a06c5b = #"tank_robot";
         setDvar(#"hash_3e06b14c41136e95", 0);
         level.players[0] thread function_667b9fbc();
         level waittill(#"marker_ready");
@@ -561,7 +561,7 @@ function_8ab81320() {
     }
 
     if(isDefined(level.mantis)) {
-      level.mantis.team = # "allies";
+      level.mantis.team = #"allies";
       level.mantis thread function_27c1d990();
       level thread function_89bb199b();
     }
@@ -629,7 +629,7 @@ function_45f0ba8d() {
 
   while(level.var_f9242904) {
     ct_utils::function_e44c5b8e(#"ai_tank_marker", 10);
-    level.var_b4a06c5b = # "tank_robot";
+    level.var_b4a06c5b = #"tank_robot";
     setDvar(#"hash_3e06b14c41136e95", 0);
     level.players[0] thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_EarnMantis");
     level.var_37591676 = 0;
@@ -705,7 +705,7 @@ function_1089714c(str_type) {
     }
 
     level.var_37591676 += n_points;
-    event = # "ekia";
+    event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
     level.players[0] globallogic_score::giveplayermomentumnotification(n_points, #"hash_480234a872bd64ac", undefined, 0, level.players[0].currentweapon, 0, eventindex, event, undefined);
   } else {
@@ -944,7 +944,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
   switch (level.var_ad7c0539) {
     case 1:
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread function_58521014(s_loc);
         self thread function_85903699();
         self thread function_68ac03e(s_loc);
@@ -955,7 +955,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
       break;
     case 2:
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread function_85903699();
       } else {
         self thread function_257306e5(s_loc);
@@ -963,7 +963,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
       break;
     case 3:
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread function_68ac03e(s_loc);
         self thread function_d43893a9(s_loc);
       } else if(s_loc.script_noteworthy === "flash_bang") {
@@ -974,7 +974,7 @@ function_58c62280(b_keyline, b_ignoreall) {
 
       break;
     case 4:
-      if(self.team == # "allies") {
+      if(self.team == #"allies") {
         self thread function_d43893a9(s_loc);
       } else if(!isDefined(s_loc.script_noteworthy)) {
         self thread function_de259bfd(s_loc);

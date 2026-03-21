@@ -399,7 +399,7 @@ function onplaceturret(turret) {
   turret.vehicle unlink();
   turret.vehicle function_3e06504d();
   trigger = spawn("trigger_radius_use", turret.origin, 0, 85, 85);
-  trigger.str_hint = # "hash_2c90cbfdfac140bf";
+  trigger.str_hint = #"hash_2c90cbfdfac140bf";
   trigger setteamfortrigger(self.team);
   trigger setinvisibletoall();
   trigger setvisibletoplayer(self);
@@ -575,7 +575,7 @@ function function_bc7568f1() {
   self.sightlatency = 100;
   self.fovcosine = 0;
   self.fovcosinebusy = 0;
-  self.var_3413afc5 = # "standard_sight";
+  self.var_3413afc5 = #"standard_sight";
 }
 
 function function_ad4037ec() {
@@ -1116,11 +1116,11 @@ function on_player_killed() {
       continue;
     }
 
-    if(self.var_e78602fc.vehicletype === # "missile_turret") {
+    if(self.var_e78602fc.vehicletype === #"missile_turret") {
       continue;
     }
 
-    if(var_69501900.vehicletype === # "missile_turret") {
+    if(var_69501900.vehicletype === #"missile_turret") {
       if(!isDefined(var_f60ab10f)) {
         var_f60ab10f = [];
       } else if(!isarray(var_f60ab10f)) {
@@ -1148,9 +1148,9 @@ function function_db0ce567(e_target) {
 
       if(isDefined(var_b8ed7d21)) {
         if(var_b8ed7d21 == "blops_taacom") {
-          var_649cb645 = # "hash_a7f1fe227eab438";
+          var_649cb645 = #"hash_a7f1fe227eab438";
         } else if(var_b8ed7d21 == "cdp_taacom") {
-          var_649cb645 = # "hash_161500023c0563cd";
+          var_649cb645 = #"hash_161500023c0563cd";
         } else {
           return;
         }

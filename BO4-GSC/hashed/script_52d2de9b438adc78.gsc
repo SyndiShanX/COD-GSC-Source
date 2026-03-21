@@ -390,7 +390,7 @@ function_d5ca3f62(player) {
   self delete();
 }
 
-function_2cbae477(var_babebdbc = # "weapon/fx8_equip_swat_smk_signal", var_76361c1a = "tag_flash") {
+function_2cbae477(var_babebdbc = #"weapon/fx8_equip_swat_smk_signal", var_76361c1a = "tag_flash") {
   playFXOnTag(var_babebdbc, self, var_76361c1a);
   self playSound(#"hash_6c91edfde8408dad");
   self.sndent = spawn("script_origin", self.origin);

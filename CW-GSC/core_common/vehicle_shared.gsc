@@ -1152,7 +1152,7 @@ function init(vehicle) {
         function_24ece0fc(turret_node, vehicle, v_origin, v_angles);
         dropnodetofloor(turret_node, 32);
 
-        if(turret_node.type == # "turret") {
+        if(turret_node.type == #"turret") {
           setturretnode(turret_node, vehicle);
         } else {
           setenablenode(turret_node, 0);
@@ -2112,9 +2112,9 @@ function control_lights_groups(on) {
 
 function lights_on(team) {
   if(isDefined(team)) {
-    if(team == # "allies") {
+    if(team == #"allies") {
       self clientfield::set("toggle_lights", 2);
-    } else if(team == # "axis") {
+    } else if(team == #"axis") {
       self clientfield::set("toggle_lights", 3);
     }
   } else {
@@ -3169,7 +3169,7 @@ function private function_40fc185b(params) {
 
 function function_1f05ebe8(vehicleassets) {
   foreach(asset in vehicleassets) {
-    if(asset.var_57f5cdd8 != # "") {
+    if(asset.var_57f5cdd8 != #"") {
       foreach(var_58388e8c in vehicleassets) {
         if(var_58388e8c.name == asset.var_57f5cdd8) {
           var_58388e8c.variant = 1;
@@ -3179,7 +3179,7 @@ function function_1f05ebe8(vehicleassets) {
       continue;
     }
 
-    if(asset.var_5a25c2fb != # "") {
+    if(asset.var_5a25c2fb != #"") {
       foreach(var_3913f550 in vehicleassets) {
         if(var_3913f550.name == asset.var_5a25c2fb) {
           var_3913f550.variant = 1;
@@ -3518,7 +3518,7 @@ function private function_831cd622(e_player) {
   s_info = {};
   v_movement = e_player getnormalizedmovement();
 
-  if(self.archetype === # "fav") {
+  if(self.archetype === #"fav") {
     var_d526c0e4 = self.origin + anglestoright(self.angles) * 115;
     var_c1af71a1 = self.origin + anglestoright(self.angles) * -125;
     var_b44997b4 = self.origin + anglesToForward(self.angles) * -110;
@@ -3531,7 +3531,7 @@ function private function_831cd622(e_player) {
       s_info.var_664b49b8 = "left";
       s_info.v_teleport_pos = getclosestpointonnavmesh(self.origin, 256, 16);
     }
-  } else if(self.archetype === # "quad") {
+  } else if(self.archetype === #"quad") {
     var_d526c0e4 = self.origin + anglestoright(self.angles) * 85;
     var_c1af71a1 = self.origin + anglestoright(self.angles) * -85;
 

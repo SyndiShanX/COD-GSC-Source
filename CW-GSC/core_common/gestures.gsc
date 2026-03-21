@@ -219,16 +219,16 @@ function function_f3e2696f(ent, weapon, weapon_options, timeout, var_1e89628f, v
   while(true) {
     result = self waittilltimeout(timeout, #"grenade_pullback", #"offhand_fire", #"offhand_end");
 
-    if(result._notify == # "timeout") {
+    if(result._notify == #"timeout") {
       break;
     }
 
     if(result.weapon == weapon) {
-      if(result._notify == # "offhand_end") {
+      if(result._notify == #"offhand_end") {
         break;
       }
 
-      if(result._notify == # "grenade_pullback") {
+      if(result._notify == #"grenade_pullback") {
         var_f3b15ce0 = 1;
 
         if(isDefined(var_1e89628f)) {
@@ -238,7 +238,7 @@ function function_f3e2696f(ent, weapon, weapon_options, timeout, var_1e89628f, v
         continue;
       }
 
-      if(result._notify == # "offhand_fire") {
+      if(result._notify == #"offhand_fire") {
         if(isDefined(var_1d78d31)) {
           self[[var_1d78d31]](ent);
         }

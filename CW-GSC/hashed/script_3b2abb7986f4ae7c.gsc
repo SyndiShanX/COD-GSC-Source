@@ -137,7 +137,7 @@ function function_95c09591(destination) {
 
 function function_685a8288(instance) {
   level endon(#"end_game");
-  instance.var_422ae63e = # "p9_fxanim_mp_care_package_bundle";
+  instance.var_422ae63e = #"p9_fxanim_mp_care_package_bundle";
   var_28bf3706 = instance.contentgroups[#"heli_spawn"][0];
   assert(isDefined(var_28bf3706.target), "<dev string:x38>");
   nd_start = getvehiclenode(var_28bf3706.target, "targetname");
@@ -171,7 +171,7 @@ function function_685a8288(instance) {
     vh_heli makesentient();
   }
 
-  if(util::get_map_name() === # "wz_sanatorium") {
+  if(util::get_map_name() === #"wz_sanatorium") {
     vh_heli vehicle::toggle_lights_group(3, 1);
     vh_heli turretsettargetangles(0, (0, 0, 0));
   }
@@ -360,9 +360,9 @@ function function_be51796c(einflictor, eattacker, idamage, idflags, smeansofdeat
         if(shitloc === "MOD_PROJECTILE_SPLASH") {
           damage = 0;
         } else {
-          if(vdamageorigin.name === # "ww_ieu_plasma_t9" || vdamageorigin.name === # "ww_ieu_plasma_t9_upgraded") {
+          if(vdamageorigin.name === #"ww_ieu_plasma_t9" || vdamageorigin.name === #"ww_ieu_plasma_t9_upgraded") {
             damage = self namespace_b376a999::function_fd195372(weapon, var_fd90b0bb, damage, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
-          } else if(vdamageorigin.name === # "ww_ieu_gas_t9" || vdamageorigin.name === # "ww_ieu_gas_t9_upgraded") {
+          } else if(vdamageorigin.name === #"ww_ieu_gas_t9" || vdamageorigin.name === #"ww_ieu_gas_t9_upgraded") {
             damage *= 0.1;
           }
 
@@ -461,7 +461,7 @@ function cratecontrolleddrop(instance, v_target_location, n_drop_time = 10, var_
   }
 
   if(!isDefined(params.var_827e3209)) {
-    params.var_827e3209 = # "hash_3aa3ac8dc366dcf1";
+    params.var_827e3209 = #"hash_3aa3ac8dc366dcf1";
   }
 
   crate thread watchforcratekill(v_target_location[2] + 200);
@@ -539,7 +539,7 @@ function cratephysics(instance) {
   self.trigger.origin = self.origin;
   self.trigger.angles = self.angles;
   self.trigger.struct = instance;
-  self.trigger.var_cc1fb2d0 = # "sr_helicopter_escape_resource_list";
+  self.trigger.var_cc1fb2d0 = #"sr_helicopter_escape_resource_list";
   self function_d2d0a813();
 }
 

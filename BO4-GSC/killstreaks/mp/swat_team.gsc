@@ -151,7 +151,7 @@ function_87bf6422(killstreak) {
   context.max_dist_from_location = 4;
   context.perform_physics_trace = 1;
   context.islocationgood = &islocationgood;
-  context.objective = # "hash_1b5a86007f598bbc";
+  context.objective = #"hash_1b5a86007f598bbc";
   context.validlocationsound = level.killstreakcorebundle.ksvalidcarepackagelocationsound;
   context.tracemask = 1;
   context.droptag = "tag_attach";
@@ -311,7 +311,7 @@ swatshouldmelee(entity) {
       return false;
     }
 
-    if(entity.enemy.archetype != # "human") {
+    if(entity.enemy.archetype != #"human") {
       return false;
     }
   }
@@ -1270,7 +1270,7 @@ function_ab667e1c(owner, helicopter) {
   assert(isDefined(helicopter));
   aitypes = level.var_1e18ffa0[#"axis"];
 
-  if(isDefined(owner.team) && owner.team == # "allies") {
+  if(isDefined(owner.team) && owner.team == #"allies") {
     aitypes = level.var_1e18ffa0[#"allies"];
   }
 
@@ -1319,7 +1319,7 @@ function_a543b380(player) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -1603,7 +1603,7 @@ function_fe13a227(helicopter, var_1c996690, destination) {
 function_2bade425(owner, helicopter) {
   aitypes = level.var_1e18ffa0[#"axis"];
 
-  if(isDefined(owner.team) && owner.team == # "allies") {
+  if(isDefined(owner.team) && owner.team == #"allies") {
     aitypes = level.var_1e18ffa0[#"allies"];
   }
 
@@ -1625,7 +1625,7 @@ function_2bade425(owner, helicopter) {
     obj_set("swat_member", swat);
     swat.ai.var_2b570fa6 = "parametric_traverse@traversal";
 
-    if(self.team == # "allies") {
+    if(self.team == #"allies") {
       if(i == 0) {
         swat.voxid = 2;
       } else {
@@ -1902,7 +1902,7 @@ function_48d57bc8() {
     return;
   }
 
-  if(isactor(self) && self.archetype === # "human") {
+  if(isactor(self) && self.archetype === #"human") {
     laser_weapon = getweapon(self.weapon.name, "steadyaim");
     self ai::gun_remove();
     self ai::gun_switchto(laser_weapon, "right");
@@ -1951,7 +1951,7 @@ function_8821879c(killstreak_id) {
       break;
     }
 
-    if(self.var_976238cf == # "swat_team") {
+    if(self.var_976238cf == #"swat_team") {
       waitframe(1);
 
       if(!self function_55acff10() && !(isDefined(self.is_capturing_own_supply_drop) && self.is_capturing_own_supply_drop)) {
@@ -2035,7 +2035,7 @@ function_8821879c(killstreak_id) {
 function_47e16e28() {
   self endon(#"hash_71a1db99eb99dcff", #"disconnect", #"joined_team");
 
-  while(self.var_976238cf == # "swat_team") {
+  while(self.var_976238cf == #"swat_team") {
     waitframe(1);
   }
 
@@ -2049,7 +2049,7 @@ swat_loop(killstreak_id) {
   self endon(#"hash_71a1db99eb99dcff");
   self endoncallback(&function_d524c2b8, #"disconnect", #"joined_team");
   endtime = gettime() + self.var_6c0553ea.time;
-  self.var_976238cf = # "swat_team";
+  self.var_976238cf = #"swat_team";
   self.var_5f43fa0c = "swat_escort";
   function_4c2ed78d(self, 1);
   self thread swat_escort(0);

@@ -111,7 +111,7 @@ function function_ab498154(scene, speed = 10, content) {
   }
 
   if(!isDefined(content)) {
-    content = # "hash_90177fb520dea18";
+    content = #"hash_90177fb520dea18";
   }
 
   namespace_6f1d35e1::function_f99d2e8a();

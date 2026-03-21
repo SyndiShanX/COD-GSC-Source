@@ -319,7 +319,7 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
     }
   }
 
-  if(var_9bcc82c8.size <= 0 || self.archetype != # "zombie" || !is_true(self.var_2e85cbf2)) {
+  if(var_9bcc82c8.size <= 0 || self.archetype != #"zombie" || !is_true(self.var_2e85cbf2)) {
     return surfacetype;
   }
 
@@ -411,36 +411,36 @@ function function_544f03e3(s_instance) {
 
   switch (var_6e938f0b) {
     case 5:
-      s_instance.var_2348a8fb = # "small";
-      s_instance.var_91c84189 = # "p9_fxanim_zm_gp_chest_01_sml_bundle";
-      s_instance.mdl_chest = # "p9_fxanim_zm_gp_chest_01_sml_low_xmodel";
+      s_instance.var_2348a8fb = #"small";
+      s_instance.var_91c84189 = #"p9_fxanim_zm_gp_chest_01_sml_bundle";
+      s_instance.mdl_chest = #"p9_fxanim_zm_gp_chest_01_sml_low_xmodel";
       s_instance.var_dae71351 = 1;
       s_instance.var_c9df36f = "takeoff level 1";
       str_shot = "fuel level 1";
       s_instance.var_5ea363c playSound(#"hash_22ba30d426789fe");
       break;
     case 12:
-      s_instance.var_2348a8fb = # "medium";
-      s_instance.var_91c84189 = # "p9_fxanim_zm_gp_chest_01_med_bundle";
-      s_instance.mdl_chest = # "p9_fxanim_zm_gp_chest_01_med_low_xmodel";
+      s_instance.var_2348a8fb = #"medium";
+      s_instance.var_91c84189 = #"p9_fxanim_zm_gp_chest_01_med_bundle";
+      s_instance.mdl_chest = #"p9_fxanim_zm_gp_chest_01_med_low_xmodel";
       s_instance.var_dae71351 = 2;
       s_instance.var_c9df36f = "takeoff level 2";
       str_shot = "fuel level 2";
       s_instance.var_5ea363c playSound(#"hash_d39ad0d4958aed2");
       break;
     case 20:
-      s_instance.var_2348a8fb = # "large";
-      s_instance.var_91c84189 = # "p9_fxanim_zm_gp_chest_01_lrg_bundle";
-      s_instance.mdl_chest = # "p9_fxanim_zm_gp_chest_01_lrg_low_xmodel";
+      s_instance.var_2348a8fb = #"large";
+      s_instance.var_91c84189 = #"p9_fxanim_zm_gp_chest_01_lrg_bundle";
+      s_instance.mdl_chest = #"p9_fxanim_zm_gp_chest_01_lrg_low_xmodel";
       s_instance.var_dae71351 = 3;
       s_instance.var_c9df36f = "takeoff level 3";
       str_shot = "fuel level 3";
       s_instance.var_5ea363c playSound(#"hash_2fa3cbab386aafa0");
       break;
     case 25:
-      s_instance.var_2348a8fb = # "gold";
-      s_instance.var_91c84189 = # "p9_fxanim_zm_gp_chest_01_lrg_bundle";
-      s_instance.mdl_chest = # "p9_fxanim_zm_gp_chest_01_lrg_gold_xmodel";
+      s_instance.var_2348a8fb = #"gold";
+      s_instance.var_91c84189 = #"p9_fxanim_zm_gp_chest_01_lrg_bundle";
+      s_instance.mdl_chest = #"p9_fxanim_zm_gp_chest_01_lrg_gold_xmodel";
       s_instance.var_dae71351 = 3;
       s_instance.var_c9df36f = "takeoff level 4";
       str_shot = "fuel level 4";
@@ -619,7 +619,7 @@ function function_bbc6c929(ai_zombie, var_6be8a3b9 = 1) {
 }
 
 function function_df7d32bc() {
-  if(self.current_state.name == # "chase" && self.archetype == # "zombie") {
+  if(self.current_state.name == #"chase" && self.archetype == #"zombie") {
     var_8c6394e3 = "sprint";
     var_481bf1b8 = isDefined(level.var_b48509f9) ? level.var_b48509f9 : 1;
 

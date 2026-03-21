@@ -49,10 +49,10 @@ function function_cd8ee3c5() {
   self endon(#"grenade_dud");
   waitresult = self waittill(#"explode", #"death");
 
-  if(waitresult._notify == # "explode") {
+  if(waitresult._notify == #"explode") {
     trace = groundtrace(waitresult.position, waitresult.position + (0, 0, -20000), 0, self, 0);
 
-    if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != # "none") {
+    if(isDefined(trace[#"position"]) && trace[#"surfacetype"] != #"none") {
       org = trace[#"position"];
       item_supply_drop::drop_supply_drop(org, 1);
     }

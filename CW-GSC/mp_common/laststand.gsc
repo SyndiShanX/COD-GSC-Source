@@ -383,7 +383,7 @@ function function_67b38e11(einflictor, attacker, idamage, smeansofdeath, weapon,
   self.laststandparams.vdir = vdir;
   self.laststandparams.shitloc = shitloc;
 
-  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === # "planemortar") {
+  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === #"planemortar") {
     self.laststandparams.killcam_entity_info_cached = killcam::get_killcam_entity_info(attacker, einflictor, weapon);
   }
 }
@@ -424,7 +424,7 @@ function function_78d8cf9b(player) {
     return friendlies;
   }
 
-  if(player.squad != # "none" && squads::function_a9758423()) {
+  if(player.squad != #"none" && squads::function_a9758423()) {
     friendlies = arraycombine(friendlies, function_c65231e2(player.squad), 0, 0);
   }
 
@@ -855,9 +855,9 @@ function laststand_bleedout(bleedouttime, var_969fabf4) {
   var_93b9385d = bleedouttime * 0.06;
   var_1b4f5d73 = "BUTTON_BIT_ACTIONSLOT_4";
 
-  if(self function_a8bbc98a(4) != # "scorestreak_wheel") {
+  if(self function_a8bbc98a(4) != #"scorestreak_wheel") {
     for(i = 1; i <= 4; i++) {
-      if(self function_a8bbc98a(i) == # "scorestreak_wheel") {
+      if(self function_a8bbc98a(i) == #"scorestreak_wheel") {
         var_1b4f5d73 = "BUTTON_BIT_ACTIONSLOT_" + i;
         break;
       }
@@ -1037,7 +1037,7 @@ function respawn_player_after_time(n_time_seconds) {
   level endon(#"objective_changed");
   wait n_time_seconds;
 
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     self thread globallogic_spawn::waitandspawnclient();
   }
 }

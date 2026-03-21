@@ -119,12 +119,12 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "" + # "postfx_play", 16000, 2, "int");
   clientfield::register("world", "" + # "hash_71f9fcfb2cd84a9c", 16000, 1, "int");
   clientfield::register("toplayer", "" + # "eye_vignette", 16000, 1, "int");
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[#"switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = #"electric/fx8_sparks_burst_dir_sm_orange_os";
   level.default_start_location = "zone_temple_of_apollo";
   level.default_game_mode = "zclassic";
   level.var_22fda912 = &function_9f50079d;
@@ -133,12 +133,12 @@ event_handler[level_init] main(eventstruct) {
   if(zm_custom::function_901b751c(#"zmpowerdoorstate") == 0) {
     level.var_d5bd7049 = "";
   } else {
-    level.var_d5bd7049 = # "hash_3ca4508c9597fd12";
+    level.var_d5bd7049 = #"hash_3ca4508c9597fd12";
   }
 
   level.pack_a_punch.custom_power_think = &zm_red_pap_quest::function_9b917fd5;
   level.var_c02e63 = &function_c02e63;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_red_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_red_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.custom_spawner_entry[#"crawl"] = &zm_spawner::function_45bb11e4;
@@ -1208,11 +1208,11 @@ function_9f645f7(e_holder, w_item) {
 
 function_8f72e6b8() {
   w_component = zm_crafting::get_component(#"zitem_red_strike_part_1");
-  w_component.var_62a98b13 = # "anvil_brontes";
+  w_component.var_62a98b13 = #"anvil_brontes";
   w_component = zm_crafting::get_component(#"zitem_red_strike_part_2");
-  w_component.var_62a98b13 = # "hammer_arges";
+  w_component.var_62a98b13 = #"hammer_arges";
   w_component = zm_crafting::get_component(#"zitem_red_strike_part_3");
-  w_component.var_62a98b13 = # "hash_2ac16e115b8e401a";
+  w_component.var_62a98b13 = #"hash_2ac16e115b8e401a";
 }
 
 function_f2427bae(slot, weapon) {
@@ -1444,7 +1444,7 @@ function_338bae81(e_player) {
 }
 
 function_7c7c6a1(weapon) {
-  if(weapon.name == # "thunderstorm") {
+  if(weapon.name == #"thunderstorm") {
     self thread zm_audio::create_and_play_dialog(#"magicbox", #"peg", undefined, 1);
     return true;
   }
@@ -1458,7 +1458,7 @@ function_443f6873(str_weapon) {
   if(isDefined(str_weapon)) {
     switch (str_weapon) {
       case # "zhield_zpear_dw":
-        var_a7c8ee36 = # "novox";
+        var_a7c8ee36 = #"novox";
         break;
     }
   }

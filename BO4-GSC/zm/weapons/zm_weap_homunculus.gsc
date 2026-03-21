@@ -45,7 +45,7 @@ __main__() {
     return;
   }
 
-  level._effect[#"grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"grenade_samantha_steal"] = #"zombie/fx_monkey_lightning_zmb";
 
   if(!isDefined(level.var_fe96a4c4)) {
     level.var_fe96a4c4 = [];
@@ -133,9 +133,9 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   var_515e20e6 = e_grenade.weapon == level.w_homunculus_upgraded;
 
   if(e_grenade.weapon == getweapon(#"homunculus_leprechaun")) {
-    var_9ddf478 = # "hash_5e7f95fc402bc5f8";
+    var_9ddf478 = #"hash_5e7f95fc402bc5f8";
   } else {
-    var_9ddf478 = # "c_t8_zmb_homunculus_fb1";
+    var_9ddf478 = #"c_t8_zmb_homunculus_fb1";
   }
 
   e_grenade ghost();
@@ -391,7 +391,7 @@ function_2c022ba8(e_player, e_grenade) {
 
       self dodamage(var_5d7b4163, self.origin, e_player, undefined, undefined, "MOD_UNKNOWN", 0, level.w_homunculus, undefined, 1);
 
-      if(self.health <= 0 && self.archetype == # "zombie") {
+      if(self.health <= 0 && self.archetype == #"zombie") {
         gibserverutils::gibhead(self);
       }
 

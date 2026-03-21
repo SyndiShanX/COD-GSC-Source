@@ -43,9 +43,9 @@ function init_shared() {
     debug_refresh = 1;
 
     thread heli_update_global_dvars(debug_refresh);
-    level.choppercomlinkfriendly = # "veh_t7_drone_hunter";
-    level.choppercomlinkenemy = # "hash_7948c5263c738621";
-    level.chopperregular = # "hash_7948c5263c738621";
+    level.choppercomlinkfriendly = #"veh_t7_drone_hunter";
+    level.choppercomlinkenemy = #"hash_7948c5263c738621";
+    level.chopperregular = #"hash_7948c5263c738621";
     precachehelicopter(level.chopperregular);
     clientfield::register("vehicle", "heli_comlink_bootup_anim", 1, 1, "int");
     clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int");
@@ -57,8 +57,8 @@ function init_shared() {
     level.last_start_node_index = 0;
     level.chopper_fx[#"smoke"][#"trail"] = "destruct/fx8_atk_chppr_exp_trail";
     level.chopper_fx[#"fire"][#"trail"][#"large"] = "killstreaks/fx_heli_smk_trail_engine";
-    level._effect[#"heli_comlink_light"][#"friendly"] = # "hash_33eb8912b6c63ecd";
-    level._effect[#"heli_comlink_light"][#"enemy"] = # "hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"friendly"] = #"hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"enemy"] = #"hash_33eb8912b6c63ecd";
 
     if(!path_start.size && !loop_start.size) {
       return;
@@ -102,13 +102,13 @@ function function_bff5c062(helicopter, attackingplayer) {
 
 function precachehelicopter(model) {
   level.vehicle_deathmodel[model] = model;
-  level.heli_sound[#"hit"] = # "evt_helicopter_hit";
-  level.heli_sound[#"hitsecondary"] = # "evt_helicopter_hit";
-  level.heli_sound[#"damaged"] = # "null";
-  level.heli_sound[#"spinloop"] = # "evt_helicopter_spin_loop";
-  level.heli_sound[#"spinstart"] = # "evt_helicopter_spin_start";
-  level.heli_sound[#"crash"] = # "evt_helicopter_midair_exp";
-  level.heli_sound[#"missilefire"] = # "wpn_hellfire_fire_npc";
+  level.heli_sound[#"hit"] = #"evt_helicopter_hit";
+  level.heli_sound[#"hitsecondary"] = #"evt_helicopter_hit";
+  level.heli_sound[#"damaged"] = #"null";
+  level.heli_sound[#"spinloop"] = #"evt_helicopter_spin_loop";
+  level.heli_sound[#"spinstart"] = #"evt_helicopter_spin_start";
+  level.heli_sound[#"crash"] = #"evt_helicopter_midair_exp";
+  level.heli_sound[#"missilefire"] = #"wpn_hellfire_fire_npc";
 }
 
 function function_7da89497() {
@@ -766,7 +766,7 @@ function cantargetplayer_turret(player, hardpointtype) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -917,7 +917,7 @@ function cantargetplayer_missile(player, hardpointtype) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -1345,13 +1345,13 @@ function heli_damage_monitor(hardpointtype) {
         self[[level.var_4d5e1035]](attacker, weapon, type, weapon_damage, event, playercontrolled, hardpointtype);
       }
 
-      weaponstatname = # "destroyed";
+      weaponstatname = #"destroyed";
 
       switch (weapon.name) {
         case # "tow_turret":
         case # "tow_turret_drop":
         case # "auto_tow":
-          weaponstatname = # "kills";
+          weaponstatname = #"kills";
           break;
       }
 
@@ -1367,11 +1367,11 @@ function heli_damage_monitor(hardpointtype) {
         case # "helicopter_comlink":
         case # "helicopter":
         case # "inventory_helicopter_comlink":
-          notifystring = # "hash_286f843fea185e5";
+          notifystring = #"hash_286f843fea185e5";
           killstreakreference = "killstreak_helicopter_comlink";
           break;
         case # "supply_drop":
-          notifystring = # "hash_3267fdfd0c2b7fdc";
+          notifystring = #"hash_3267fdfd0c2b7fdc";
           killstreakreference = "killstreak_supply_drop";
           break;
         case # "helicopter_guard":
@@ -2079,7 +2079,7 @@ function heli_get_protect_spot(heli, protectdest, overrideradius, heli_team = se
   heightmin = self.killstreakbundle.var_2e4c8245;
   heightmax = self.killstreakbundle.var_8c1406f;
 
-  if(hardpointtype == # "axis") {
+  if(hardpointtype == #"axis") {
     heightmin += self.killstreakbundle.var_d2c774e8;
     heightmax += self.killstreakbundle.var_d2c774e8;
   }
@@ -2150,7 +2150,7 @@ function function_438e7b44(startnode, protectdest, hardpointtype, heli_team) {
   nextnode = startnode;
   heightoffset = 0;
 
-  if(heli_team == # "axis") {
+  if(heli_team == #"axis") {
     heightoffset = 400;
   }
 

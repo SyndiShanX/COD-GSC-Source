@@ -95,11 +95,11 @@ function function_ccb3bc7a(teams) {
 
 function function_b919f6aa(status) {
   foreach(team in level.teams) {
-    if(status == # "game") {
-      if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] != # "game") {
+    if(status == #"game") {
+      if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] != #"game") {
         continue;
       }
-    } else if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] == # "game") {
+    } else if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] == #"game") {
       continue;
     }
 
@@ -119,7 +119,7 @@ function function_5c389625() {
   status = self player::function_3d288f14();
   assignment = self function_b919f6aa(status);
 
-  if(!isDefined(assignment) || assignment == # "spectator") {
+  if(!isDefined(assignment) || assignment == #"spectator") {
     assignment = function_959bac94();
   }
 
@@ -146,7 +146,7 @@ function function_5d02dd86(party) {
       continue;
     }
 
-    if(member.team != "autoassign" && member.team != # "spectator" && member.team != # "none") {
+    if(member.team != "autoassign" && member.team != #"spectator" && member.team != #"none") {
       println("<dev string:x38>" + "<dev string:xf7>" + self.name + "<dev string:x11d>" + member.team + "<dev string:x12a>" + member.name);
 
       function_d28f6fa0(member.team);
@@ -259,29 +259,29 @@ function function_d22a4fbb(comingfrommenu, var_4c542e39, var_432c77c2) {
   teamname = var_4c542e39;
 
   if(!isDefined(teamname)) {
-    teamname = # "none";
+    teamname = #"none";
   }
 
   squad_name = var_432c77c2;
 
   if(!isDefined(squad_name)) {
-    squad_name = # "none";
+    squad_name = #"none";
   }
 
   println("<dev string:x38>" + "<dev string:x259>" + self.name + "<dev string:x270>" + (comingfrommenu ? "<dev string:x276>" : "<dev string:x283>") + "<dev string:x294>" + (isDefined(var_4c542e39) ? function_2c846a74(var_4c542e39) : "<dev string:x299>"));
 
-  if(level.teamcount > 2 && squad_name !== # "none" && !comingfrommenu) {
+  if(level.teamcount > 2 && squad_name !== #"none" && !comingfrommenu) {
     assignment = function_79740c0f(squad_name);
     println("<dev string:x38>" + "<dev string:x16e>" + self.name + "<dev string:x2ad>" + squad_name + "<dev string:x2c8>" + function_2c846a74(assignment));
-  } else if(teamname !== # "none" && !comingfrommenu) {
+  } else if(teamname !== #"none" && !comingfrommenu) {
     assignment = teamname;
     println("<dev string:x38>" + "<dev string:x16e>" + self.name + "<dev string:x2e0>" + function_2c846a74(assignment));
   } else if(function_a3e209ba(teamname, comingfrommenu)) {
-    assignment = # "spectator";
+    assignment = #"spectator";
     println("<dev string:x38>" + "<dev string:x16e>" + self.name + "<dev string:x2fa>");
   }
 
-  if(!isDefined(assignment) || assignment != # "spectator" && !isDefined(level.teams[assignment])) {
+  if(!isDefined(assignment) || assignment != #"spectator" && !isDefined(level.teams[assignment])) {
     assignment = function_bec6e9a();
     assert(isDefined(assignment));
 
@@ -325,7 +325,7 @@ function function_4818e9af() {
 }
 
 function function_dd2e9892(teams) {
-  assignment = # "allies";
+  assignment = #"allies";
 
   if(teamscoresequal()) {
     assignment = function_ccb3bc7a(teams);
@@ -352,7 +352,7 @@ function get_splitscreen_team() {
 
     team = level.players[index].sessionteam;
 
-    if(team != # "spectator") {
+    if(team != #"spectator") {
       return team;
     }
   }
@@ -404,7 +404,7 @@ function function_a3e209ba(teamname, comingfrommenu) {
     return false;
   }
 
-  if(teamname != # "none") {
+  if(teamname != #"none") {
     return false;
   }
 
@@ -454,7 +454,7 @@ function function_7d93567f() {
     team = player function_567994de();
     squad = player.squad;
 
-    if(squad == # "invalid") {
+    if(squad == #"invalid") {
       continue;
     }
 
@@ -527,7 +527,7 @@ function function_569914e8(var_e439f5d6, var_a9ab69de, var_d9438b7, var_f36ce5dd
     }
 
     foreach(squad in var_2a80e9e0) {
-      if(squad == # "none") {
+      if(squad == #"none") {
         continue;
       }
 
@@ -543,7 +543,7 @@ function function_569914e8(var_e439f5d6, var_a9ab69de, var_d9438b7, var_f36ce5dd
 }
 
 function private function_5e84fc28(var_68253610) {
-  team = # "none";
+  team = #"none";
   var_d549939e = function_c65231e2(var_68253610);
 
   foreach(player in var_d549939e) {
@@ -594,7 +594,7 @@ function function_344e464d() {
 
     foreach(var_a787dfe7, var_2a80e9e0 in var_e08edbde) {
       foreach(index, squad in var_2a80e9e0) {
-        if(squad == # "none") {
+        if(squad == #"none") {
           continue;
         }
 
@@ -617,7 +617,7 @@ function function_344e464d() {
 
             foreach(remove_index, var_16ba986d in var_1e066fba) {
               if(var_16ba986d == var_d28e4159) {
-                var_1e066fba[remove_index] = # "none";
+                var_1e066fba[remove_index] = #"none";
               }
             }
           }
@@ -625,7 +625,7 @@ function function_344e464d() {
           current_count += function_8c162ba0(var_d28e4159, squad);
         }
 
-        var_2a80e9e0[index] = # "none";
+        var_2a80e9e0[index] = #"none";
       }
     }
   }
@@ -665,7 +665,7 @@ function private function_6c66cc64(team) {
   voip = "<dev string:x3c4>";
 
   if(isDefined(level.var_75dffa9f[team])) {
-    voip += level.var_75dffa9f[team] == # "game" ? "<dev string:x3cd>" : "<dev string:x3d5>";
+    voip += level.var_75dffa9f[team] == #"game" ? "<dev string:x3cd>" : "<dev string:x3d5>";
   } else {
     voip += "<dev string:x3df>";
   }
@@ -676,9 +676,9 @@ function private function_6c66cc64(team) {
     squad = player.squad;
     squad_name = undefined;
 
-    if(squad == # "invalid") {
+    if(squad == #"invalid") {
       squad_name = "<dev string:x3ec>";
-    } else if(squad == # "none") {
+    } else if(squad == #"none") {
       squad_name = "<dev string:x3f7>";
     } else if(isDefined(level.squads[squad])) {
       squad_name = level.squads[squad].name;
@@ -711,14 +711,14 @@ function function_58b6d2c9() {
 
     if(!level.custommatch) {
       foreach(player in players) {
-        if(player.team == # "spectator") {
+        if(player.team == #"spectator") {
           continue;
         }
 
         party = player getparty();
 
         foreach(party_member in party.party_members) {
-          if(party_member.team == # "spectator") {
+          if(party_member.team == #"spectator") {
             continue;
           }
 

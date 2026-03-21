@@ -156,7 +156,7 @@ timer(n_time, str_endon, x = 1080, y = 200, height = 60) {
   self closeluimenu(lui);
 }
 
-prime_movie(str_movie, b_looping = 0, str_key = # "") {
+prime_movie(str_movie, b_looping = 0, str_key = #"") {
   if(isarray(self)) {
     foreach(player in self) {
       player primemovie(str_movie, b_looping, str_key);
@@ -176,7 +176,7 @@ prime_movie(str_movie, b_looping = 0, str_key = # "") {
   self primemovie(str_movie, b_looping, str_key);
 }
 
-function_2fb8927b(str_team, str_movie, b_looping = 0, str_key = # "") {
+function_2fb8927b(str_team, str_movie, b_looping = 0, str_key = #"") {
   callback::on_connect(&function_67373791, undefined, str_team, str_movie, b_looping, str_key);
 
   foreach(player in util::get_human_players(str_team)) {
@@ -192,7 +192,7 @@ function_67373791(str_team, str_movie, b_looping, str_key) {
   }
 }
 
-function_c6d1cb5d(str_team, str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = # "", n_timeout) {
+function_c6d1cb5d(str_team, str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = #"", n_timeout) {
   callback::remove_on_connect(&function_67373791);
 
   foreach(player in util::get_human_players(str_team)) {
@@ -200,7 +200,7 @@ function_c6d1cb5d(str_team, str_movie, str_type, show_black_screen = 0, b_loopin
   }
 }
 
-play_movie(str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = # "", n_timeout, var_c16d0253 = 1) {
+play_movie(str_movie, str_type, show_black_screen = 0, b_looping = 0, b_skippable = 0, str_key = #"", n_timeout, var_c16d0253 = 1) {
   if(str_type === "fullscreen" || str_type === "fullscreen_additive") {
     b_hide_hud = 1;
   }
@@ -310,7 +310,7 @@ _play_movie_for_player(str_movie, str_type, show_black_screen, b_looping, b_skip
       menu = waitresult.menu;
       response = waitresult.response;
 
-      if(waitresult._notify == "timeout" || menu === hash(str_menu) && response === # "finished_movie_playback") {
+      if(waitresult._notify == "timeout" || menu === hash(str_menu) && response === #"finished_movie_playback") {
         if(str_type == "pip") {
           self playsoundtoplayer(#"uin_pip_close", self);
         }
@@ -344,7 +344,7 @@ function_6c2457a9(b_disable = 1) {
 play_outro_movie(show_black_screen = 1) {
   outro_movie = getmapoutromovie();
 
-  if(!isDefined(outro_movie) || outro_movie == # "") {
+  if(!isDefined(outro_movie) || outro_movie == #"") {
     return;
   }
 
@@ -397,14 +397,14 @@ function_1bc580af() {
       response = waitresult.response;
       value = waitresult.value;
 
-      if(menu === # "full_screen_movie") {
-        if(response === # "finished_movie_playback") {
+      if(menu === #"full_screen_movie") {
+        if(response === #"finished_movie_playback") {
           [[lui_menu]] - > close(self);
           self notify(#"movie_done");
           break;
         }
 
-        if(response === # "skippable" && isDefined(value)) {
+        if(response === #"skippable" && isDefined(value)) {
           [[lui_menu]] - > registerplayer_callout_traversal(self, value);
         }
       }

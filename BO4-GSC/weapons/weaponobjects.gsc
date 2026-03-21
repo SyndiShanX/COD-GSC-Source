@@ -73,11 +73,11 @@ start_gametype() {
   }
 
   level.deleteexplosivesonspawn = getdvarint(#"scr_deleteexplosivesonspawn", 0);
-  level._equipment_spark_fx = # "explosions/fx8_exp_equipment_lg";
-  level._equipment_fizzleout_fx = # "explosions/fx8_exp_equipment_lg";
-  level._equipment_emp_destroy_fx = # "killstreaks/fx_emp_explosion_equip";
-  level._equipment_explode_fx = # "_t6/explosions/fx_exp_equipment";
-  level._equipment_explode_fx_lg = # "explosions/fx8_exp_equipment_lg";
+  level._equipment_spark_fx = #"explosions/fx8_exp_equipment_lg";
+  level._equipment_fizzleout_fx = #"explosions/fx8_exp_equipment_lg";
+  level._equipment_emp_destroy_fx = #"killstreaks/fx_emp_explosion_equip";
+  level._equipment_explode_fx = #"_t6/explosions/fx_exp_equipment";
+  level._equipment_explode_fx_lg = #"explosions/fx8_exp_equipment_lg";
   level.weaponobjects_hacker_trigger_width = 32;
   level.weaponobjects_hacker_trigger_height = 32;
   function_db765b94();
@@ -1066,7 +1066,7 @@ proximityalarmloop(watcher, owner) {
         owner = entity.owner;
       }
 
-      if(entity.team == # "spectator") {
+      if(entity.team == #"spectator") {
         continue;
       }
 
@@ -2213,7 +2213,7 @@ function_23b0aea9(watcher, player) {
     return;
   }
 
-  if(player.pers[#"team"] == # "spectator") {
+  if(player.pers[#"team"] == #"spectator") {
     return;
   }
 

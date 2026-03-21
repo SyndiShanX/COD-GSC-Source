@@ -605,7 +605,7 @@ function function_723f322d() {
         var_36ff13de = 0;
         ret = ai waittilltimeout(var_bdccc219 + 0.1, #"death");
 
-        if(ret._notify === # "death" && ret.attacker === self) {
+        if(ret._notify === #"death" && ret.attacker === self) {
           self notify(#"hash_35a85d0d53e9405e");
         } else {
           self.var_5b0f2db2 = gettime() + 5000 / 3;

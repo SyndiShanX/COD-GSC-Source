@@ -979,7 +979,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         entity forced_attachment("boas_killed_by_zdog");
         break;
       case # "nosferatu":
-        if(eattacker.subarchetype === # "crimson_nosferatu") {
+        if(eattacker.subarchetype === #"crimson_nosferatu") {
           entity increment_client_stat("killed_by_crimson_nosferatu");
           entity increment_player_stat("killed_by_crimson_nosferatu");
           entity forced_attachment("boas_killed_by_crimson_nosferatu");
@@ -1068,7 +1068,7 @@ handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           eattacker forced_attachment("boas_zdogs_killed");
           break;
         case # "nosferatu":
-          if(entity.subarchetype === # "crimson_nosferatu") {
+          if(entity.subarchetype === #"crimson_nosferatu") {
             eattacker increment_client_stat("crimson_nosferatus_killed");
             eattacker increment_player_stat("crimson_nosferatus_killed");
             eattacker forced_attachment("boas_crimson_nosferatus_killed");

@@ -677,7 +677,7 @@ function function_b03d7dd0(var_8f426cc8) {
   return 1;
 }
 
-function function_4f5dff62(starlevel = 1, type = # "rare") {
+function function_4f5dff62(starlevel = 1, type = #"rare") {
   switch (starlevel) {
     case 1:
       switch (type) {
@@ -1012,7 +1012,7 @@ function on_item_pickup(params) {
 
   if(isPlayer(self)) {
     if(isDefined(item.itementry)) {
-      if(item.itementry.itemtype === # "hash_6a8c9b279aa1c2c5") {
+      if(item.itementry.itemtype === #"hash_6a8c9b279aa1c2c5") {
         if(isDefined(item.itementry.rarity)) {
           switch (item.itementry.rarity) {
             case # "rare":

@@ -22,7 +22,7 @@ is_shoutcaster_using_team_identity(localclientnum) {
 }
 
 get_team_color_id(localclientnum, team) {
-  if(team == # "allies") {
+  if(team == #"allies") {
     return getshoutcastersetting(localclientnum, "shoutcaster_fe_team1_color");
   }
 
@@ -46,9 +46,9 @@ is_friendly(localclientnum) {
   scorepanel_flipped = getshoutcastersetting(localclientnum, "shoutcaster_ds_flip_scorepanel");
 
   if(!scorepanel_flipped) {
-    friendly = self.team == # "allies";
+    friendly = self.team == #"allies";
   } else {
-    friendly = self.team == # "axis";
+    friendly = self.team == #"axis";
   }
 
   return friendly;
@@ -122,8 +122,8 @@ function_4c4946d4(local_client_num, localplayerteam, var_52fe6881, var_faa7a3fb)
 
     var_f2a410c9[var_f2a410c9.size] = [];
     var_f2a410c9[var_f2a410c9.size - 1][0] = player;
-    var_f2a410c9[var_f2a410c9.size - 1][1] = # "hash_2f86d28434166be7";
-    var_f2a410c9[var_f2a410c9.size - 1][2] = # "hash_71fbf1094f57b910";
+    var_f2a410c9[var_f2a410c9.size - 1][1] = #"hash_2f86d28434166be7";
+    var_f2a410c9[var_f2a410c9.size - 1][2] = #"hash_71fbf1094f57b910";
   }
 
   ents = getentarraybytype(local_client_num, 15);
@@ -133,14 +133,14 @@ function_4c4946d4(local_client_num, localplayerteam, var_52fe6881, var_faa7a3fb)
       continue;
     }
 
-    if(entity.archetype != # "mp_dog") {
+    if(entity.archetype != #"mp_dog") {
       continue;
     }
 
     var_f2a410c9[var_f2a410c9.size] = [];
     var_f2a410c9[var_f2a410c9.size - 1][0] = entity;
-    var_f2a410c9[var_f2a410c9.size - 1][1] = # "hash_16bdbd0b3de5c91a";
-    var_f2a410c9[var_f2a410c9.size - 1][2] = # "hash_71fbf1094f57b910";
+    var_f2a410c9[var_f2a410c9.size - 1][1] = #"hash_16bdbd0b3de5c91a";
+    var_f2a410c9[var_f2a410c9.size - 1][2] = #"hash_71fbf1094f57b910";
   }
 
   foreach(array in var_f2a410c9) {
@@ -185,7 +185,7 @@ function_a0b844f1(local_client_num, rob_key, rob) {
   }
 
   self renderoverridebundle::function_c8d97b8e(local_client_num, #"shoutcaster_flag", rob_key);
-  teamcolor = self.team == # "allies" ? (0.13, 0.87, 0.94) : (0.98, 0.18, 0.1);
+  teamcolor = self.team == #"allies" ? (0.13, 0.87, 0.94) : (0.98, 0.18, 0.1);
 
   if(is_shoutcaster_using_team_identity(local_client_num)) {
     var_f90afe60 = get_team_color_id(local_client_num, self.team);
@@ -235,10 +235,10 @@ function_2b07633f(playername) {
 }
 
 function_995e01b6(localclientnum, player) {
-  if(player.team == # "allies") {
-    var_11792f05 = # "hash_e7985dec7c3faa9";
+  if(player.team == #"allies") {
+    var_11792f05 = #"hash_e7985dec7c3faa9";
   } else {
-    var_11792f05 = # "hash_40193ed2b55dd6b6";
+    var_11792f05 = #"hash_40193ed2b55dd6b6";
   }
 
   level.shoutcasterpucks[player.name] = util::playFXOnTag(localclientnum, var_11792f05, self, "tag_origin");
@@ -247,10 +247,10 @@ function_995e01b6(localclientnum, player) {
 function_8e1e7736(localclientnum, player) {
   level.var_b9e7d957 = player.name;
 
-  if(player.team == # "allies") {
-    var_e15b5f0c = # "hash_1e1361dd9519bc55";
+  if(player.team == #"allies") {
+    var_e15b5f0c = #"hash_1e1361dd9519bc55";
   } else {
-    var_e15b5f0c = # "hash_7a180b53914e467a";
+    var_e15b5f0c = #"hash_7a180b53914e467a";
   }
 
   level.var_fea1a13 = util::playFXOnTag(localclientnum, var_e15b5f0c, self, "tag_origin");

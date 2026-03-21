@@ -11,9 +11,9 @@
 #namespace zm_orange_mq_fuse;
 
 preload() {
-  level._effect[#"generator_soul"] = # "hash_59977c4c851916e0";
-  level._effect[#"hash_25d427b0d162135a"] = # "hash_1a06427eff8dfe13";
-  level._effect[#"elemental_shard_glow"] = # "hash_4310e1cb3f897c7c";
+  level._effect[#"generator_soul"] = #"hash_59977c4c851916e0";
+  level._effect[#"hash_25d427b0d162135a"] = #"hash_1a06427eff8dfe13";
+  level._effect[#"elemental_shard_glow"] = #"hash_4310e1cb3f897c7c";
   init_clientfields();
 }
 

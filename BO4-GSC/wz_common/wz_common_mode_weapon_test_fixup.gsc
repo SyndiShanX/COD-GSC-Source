@@ -21,7 +21,7 @@ function_e420bad2() {
   var_edfbccd0 = &item_world_fixup::function_e70fa91c;
 
   if(isDefined(getgametypesetting(#"wzweaponstest")) && getgametypesetting(#"wzweaponstest")) {
-    str_list = # "weapons_test";
+    str_list = #"weapons_test";
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"world_base_event_parent", str_list + "_guns");
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"equipment_list_low", str_list + "_equipment_list_good");
     wz_common_fixup::item_replacer(var_b5014996, var_f8a4c541, #"equipment_list_med", str_list + "_equipment_list_good");

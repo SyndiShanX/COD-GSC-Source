@@ -265,7 +265,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitl
 }
 
 function_f9df98d3(type, value) {
-  if(type === # "ekia") {
+  if(type === #"ekia") {
     return (value + level.var_49a15413);
   }
 

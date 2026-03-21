@@ -35,11 +35,11 @@ function zombiedogvocals(localclientnum, oldval, newval, bnewent, binitialsnap, 
     switch (wasdemojump) {
       case 1:
         var_e5404960 = undefined;
-        var_9c464736 = # "hash_50a34ea4add0897";
+        var_9c464736 = #"hash_50a34ea4add0897";
         break;
       case 2:
-        var_e5404960 = # "hash_16838de4eb2b7f00";
-        var_9c464736 = # "hash_219cfeed2cbf8adc";
+        var_e5404960 = #"hash_16838de4eb2b7f00";
+        var_9c464736 = #"hash_219cfeed2cbf8adc";
         break;
     }
 

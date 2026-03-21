@@ -26,7 +26,7 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function private on_vehicle_spawned(localclientnum) {
-  if(self.vehicletype === # "hash_d069dee6a0076c8") {
+  if(self.vehicletype === #"hash_d069dee6a0076c8") {
     if(self function_b835102b()) {
       self function_3f24c5a(1);
     }

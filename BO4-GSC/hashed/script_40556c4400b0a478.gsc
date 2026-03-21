@@ -20,7 +20,7 @@ __init__() {
 }
 
 function_e67297f2() {
-  if(self.subarchetype !== # "brutus_special") {
+  if(self.subarchetype !== #"brutus_special") {
     return;
   }
 
@@ -39,7 +39,7 @@ function_5162a3de(cmd) {
       spawners = getspawnerarray();
 
       foreach(spawner in spawners) {
-        if(spawner.subarchetype === # "brutus_special" && isDefined(spawner.script_noteworthy)) {
+        if(spawner.subarchetype === #"brutus_special" && isDefined(spawner.script_noteworthy)) {
           zm_devgui::spawn_archetype(spawner.script_noteworthy);
           break;
         }
@@ -50,7 +50,7 @@ function_5162a3de(cmd) {
       brutuses = getaiarchetypearray(#"brutus");
 
       foreach(brutus in brutuses) {
-        if(brutus.subarchetype === # "brutus_special") {
+        if(brutus.subarchetype === #"brutus_special") {
           brutus kill(undefined, undefined, undefined, undefined, 0, 1);
         }
       }

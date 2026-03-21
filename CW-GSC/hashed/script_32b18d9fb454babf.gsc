@@ -238,7 +238,7 @@ function private function_66855ea6(destination, str_type) {
 }
 
 function private function_9b9c7696(destination, str_type) {
-  if(str_type === # "hulking_summoner" && level.var_b48509f9 < 2 && !getdvarint(#"hash_730311c63805303a", 0) && !is_true(getgametypesetting(#"hash_1e1a5ebefe2772ba"))) {
+  if(str_type === #"hulking_summoner" && level.var_b48509f9 < 2 && !getdvarint(#"hash_730311c63805303a", 0) && !is_true(getgametypesetting(#"hash_1e1a5ebefe2772ba"))) {
     return 0;
   }
 
@@ -309,7 +309,7 @@ function private function_9b9c7696(destination, str_type) {
     }
   }
 
-  if(is_true(getgametypesetting(#"hash_1e1a5ebefe2772ba")) && str_type === # "hulking_summoner" && var_ba9835cd.size == 0) {
+  if(is_true(getgametypesetting(#"hash_1e1a5ebefe2772ba")) && str_type === #"hulking_summoner" && var_ba9835cd.size == 0) {
     var_ba9835cd = var_dc84dad0;
   }
 
@@ -397,7 +397,7 @@ function private function_d4de820e() {
       instance = struct::get(var_13f49a56[i]);
       location = struct::get(instance.target);
       destination = struct::get(location.target);
-      assert(destination.variantname == # "content_destination");
+      assert(destination.variantname == #"content_destination");
       script = content_manager::get_script(instance.content_script_name);
       category = script.objectivecategory;
       destination.var_e859e591 = [];
@@ -436,7 +436,7 @@ function private function_b3dda48(s_destination) {
 
 function function_a6f84bf(s_destination) {
   var_39539c05 = zm_utility::is_ee_enabled();
-  var_95613111 = # "hash_50cc93a10c9d2175";
+  var_95613111 = #"hash_50cc93a10c9d2175";
   var_a0ab1f0d = getgametypesetting(var_95613111);
 
   var_39539c05 = getdvarint(#"zm_ee_enabled", 0);
@@ -477,7 +477,7 @@ function function_a6f84bf(s_destination) {
   }
 }
 
-function function_8e64a2b1(var_6e542c1a, var_a3b3f1b, var_8f08f2fe = # "") {
+function function_8e64a2b1(var_6e542c1a, var_a3b3f1b, var_8f08f2fe = #"") {
   assert(isDefined(var_6e542c1a) && isDefined(var_a3b3f1b), "<dev string:x38>");
   level.var_3d1ef3ae = var_6e542c1a;
   level.var_edb2bb69 = ishash(var_a3b3f1b) ? var_a3b3f1b : hash(var_a3b3f1b);
@@ -582,7 +582,7 @@ function function_eb705b60() {
 }
 
 function function_369007bb() {
-  if(level.var_490ade6 === # "ee") {
+  if(level.var_490ade6 === #"ee") {
     return;
   }
 
@@ -735,7 +735,7 @@ function function_63b54d8c() {
     return;
   }
 
-  if(level.var_b48509f9 === 1 && level.contentmanager.var_407236bf.list[0] === # "hunt") {
+  if(level.var_b48509f9 === 1 && level.contentmanager.var_407236bf.list[0] === #"hunt") {
     if(isDefined(level.contentmanager.var_9614b1d2[#"hunt"])) {
       arrayremovevalue(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_steiner");
       arrayremovevalue(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_mechz");
@@ -744,14 +744,14 @@ function function_63b54d8c() {
     }
   }
 
-  if(level.var_b48509f9 === 2 && level.contentmanager.var_407236bf.list[1] === # "hunt") {
+  if(level.var_b48509f9 === 2 && level.contentmanager.var_407236bf.list[1] === #"hunt") {
     if(isDefined(level.contentmanager.var_9614b1d2[#"hunt"])) {
       arrayremovevalue(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_mechz");
       arrayinsert(level.contentmanager.var_9614b1d2[#"hunt"].list, #"hunt_mechz", randomintrangeinclusive(2, level.contentmanager.var_9614b1d2[#"hunt"].list.size));
     }
   }
 
-  if(level.var_b48509f9 === 1 && level.contentmanager.var_407236bf.list[0] === # "payload") {
+  if(level.var_b48509f9 === 1 && level.contentmanager.var_407236bf.list[0] === #"payload") {
     if(isDefined(level.contentmanager.var_9614b1d2.list[#"payload"])) {
       level.contentmanager.var_9614b1d2[#"payload"].list = [#"payload_noteleport", #"payload_teleport"];
     }

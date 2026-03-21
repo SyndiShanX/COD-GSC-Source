@@ -23,7 +23,7 @@ init() {
   level.var_45b0f2f3 = &function_e43bea18;
   level.var_210f9911 = &function_e162fac3;
   level.var_8c164439 = [];
-  level.var_8c164439[#"hash_1242b7914448ebc7"] = # "hash_3708586aed65f7b7";
+  level.var_8c164439[#"hash_1242b7914448ebc7"] = #"hash_3708586aed65f7b7";
   level.var_1c53964e = spawn("script_origin", (0, 0, 0));
   level.var_1c53964e.name = "plr_7";
   level.var_1c53964e.isspeaking = 0;
@@ -60,9 +60,9 @@ function_583cad13(var_2753f06a) {
     e_player = a_players[0];
 
     if(var_2753f06a == 0) {
-      str_suffix = # "vox_solo_game_start_" + var_5316ea7d;
+      str_suffix = #"vox_solo_game_start_" + var_5316ea7d;
     } else {
-      str_suffix = # "vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
+      str_suffix = #"vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
     }
 
     b_played = e_player zm_vo::function_a2bd5a0c(str_suffix, 0, 1);
@@ -144,7 +144,7 @@ function_2e565334() {
   self endon(#"disconnect");
 
   while(true) {
-    if(zm_vo::is_player_speaking(self) && self.str_vo_being_spoken === # "hash_1242b7914448ebc7") {
+    if(zm_vo::is_player_speaking(self) && self.str_vo_being_spoken === #"hash_1242b7914448ebc7") {
       while(!isDefined(self.var_4377124)) {
         wait 0.1;
       }
@@ -280,7 +280,7 @@ function_fd24e47f(str_alias, n_variant = int(-1), b_wait_if_busy = 0, var_a97d4e
 }
 
 function_865209df(category, flag, delay = 2, var_ba54b77d = -1, n_range = 800, var_618a04 = 0) {
-  subcategory = # "react";
+  subcategory = #"react";
   self endon(#"death", #"dynamited");
   b_flag = level flag::get(flag);
 
@@ -348,13 +348,13 @@ function_e43bea18(var_11975e15) {
     case # "snowball":
     case # "snowball_yellow_upgraded":
     case # "snowball_yellow":
-      str_weapon = # "snowball";
+      str_weapon = #"snowball";
       break;
     case # "hash_a2556a2905fd952":
-      str_weapon = # "matryoshka";
+      str_weapon = #"matryoshka";
       break;
     case # "music_box":
-      str_weapon = # "music_box";
+      str_weapon = #"music_box";
       break;
   }
 
@@ -490,7 +490,7 @@ function_adb657dd(e_player) {
     } else {
       self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
     }
-  } else if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
+  } else if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
     return false;
   } else {
     self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), w_give.displayname);

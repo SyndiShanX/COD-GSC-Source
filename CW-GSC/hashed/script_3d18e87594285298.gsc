@@ -750,7 +750,7 @@ function function_9e4f9044() {
 }
 
 function function_adf60f68(params) {
-  if(params === # "death") {
+  if(params === #"death") {
     self startragdoll();
   }
 }

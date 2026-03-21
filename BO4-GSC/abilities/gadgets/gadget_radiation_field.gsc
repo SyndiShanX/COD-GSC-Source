@@ -361,7 +361,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
       var_a698a6df = dist < radius && var_a3ca7cb2.origin[2] < player.var_ab42e44e[2] + half_height && var_a3ca7cb2.origin[2] > player.var_ab42e44e[2] - half_height;
 
       if(var_a698a6df) {
-        if(var_a3ca7cb2.archetype === # "mp_dog" && util::function_fbce7263(var_a3ca7cb2.team, player.team)) {
+        if(var_a3ca7cb2.archetype === #"mp_dog" && util::function_fbce7263(var_a3ca7cb2.team, player.team)) {
           health = level.killstreakbundle[#"dog"].kshealth;
           lifetime = isDefined(level.killstreakbundle[#"dog"].var_b45a7714) ? level.killstreakbundle[#"dog"].var_b45a7714 : 3;
           var_ae727111 = health / lifetime;
@@ -389,7 +389,7 @@ damage_state(state_id, weapon, min_radius, max_radius, min_height, max_height, d
             var_6f4ece8f = 1;
           }
 
-          if(isDefined(var_5e39ac54) && var_5e39ac54 && var_a3ca7cb2.archetype !== # "robot") {
+          if(isDefined(var_5e39ac54) && var_5e39ac54 && var_a3ca7cb2.archetype !== #"robot") {
             var_7ba94ed3++;
           }
 

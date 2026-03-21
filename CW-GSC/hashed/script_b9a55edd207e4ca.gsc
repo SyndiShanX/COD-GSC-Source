@@ -513,7 +513,7 @@ function function_cb5befb2() {
 }
 
 function function_11fa5782(vehicletype, droppoint) {
-  if(vehicletype != # "hash_6595f5efe62a4ec") {
+  if(vehicletype != #"hash_6595f5efe62a4ec") {
     return;
   }
 
@@ -552,22 +552,22 @@ function function_4212369d() {
     vehicles = [];
 
     if(is_true(getgametypesetting(#"hash_7fc70ca67b167d76"))) {
-      vehicles[vehicles.size] = # "vehicle_t9_mil_ru_truck_transport_player";
-      vehicles[vehicles.size] = # "vehicle_t9_mil_ru_truck_transport_player";
+      vehicles[vehicles.size] = #"vehicle_t9_mil_ru_truck_transport_player";
+      vehicles[vehicles.size] = #"vehicle_t9_mil_ru_truck_transport_player";
     }
 
     if(is_true(getgametypesetting(#"hash_183c8366c2eb71e2"))) {
-      vehicles[vehicles.size] = # "vehicle_t9_mil_fav_light";
-      vehicles[vehicles.size] = # "vehicle_t9_mil_fav_light";
+      vehicles[vehicles.size] = #"vehicle_t9_mil_fav_light";
+      vehicles[vehicles.size] = #"vehicle_t9_mil_fav_light";
     }
 
     if(is_true(getgametypesetting(#"hash_28b3c94342b6914c"))) {
-      vehicles[vehicles.size] = # "hash_6595f5efe62a4ec";
+      vehicles[vehicles.size] = #"hash_6595f5efe62a4ec";
     }
 
     if(is_true(getgametypesetting(#"hash_21ac269b4a3e7e37"))) {
-      vehicles[vehicles.size] = # "hash_28d512b739c9d9c1";
-      vehicles[vehicles.size] = # "hash_28d512b739c9d9c1";
+      vehicles[vehicles.size] = #"hash_28d512b739c9d9c1";
+      vehicles[vehicles.size] = #"hash_28d512b739c9d9c1";
     }
 
     if(vehicles.size > 0) {

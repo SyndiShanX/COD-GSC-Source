@@ -372,7 +372,7 @@ function devgui_add_player_weapons(root, a_weapons, weapon_type, mindex) {
       name = getweaponname(weapon);
       displayname = weapon.displayname;
 
-      if(displayname == # "") {
+      if(displayname == #"") {
         displayname = "<dev string:x507>";
       } else {
         displayname = "<dev string:x50e>" + makelocalizedstring(displayname) + "<dev string:x514>";
@@ -724,21 +724,21 @@ function devgui_give_weapon(weapon_name) {
 
     if(weapon.isgrenadeweapon && !getdvarint(#"hash_1fce8e806b5356fc", 0)) {}
 
-    if(weapon.inventorytype == # "offhand" || weapon.inventorytype == # "offhand_primary") {
+    if(weapon.inventorytype == #"offhand" || weapon.inventorytype == #"offhand_primary") {
       pweapons = self getweaponslist();
 
       foreach(pweapon in pweapons) {
-        if(pweapon != weapon && pweapon.gadget_type == 0 && (pweapon.inventorytype == # "offhand" || pweapon.inventorytype == # "offhand_primary")) {
+        if(pweapon != weapon && pweapon.gadget_type == 0 && (pweapon.inventorytype == #"offhand" || pweapon.inventorytype == #"offhand_primary")) {
           if(self hasweapon(pweapon)) {
             self takeweapon(pweapon);
           }
         }
       }
-    } else if(weapon.inventorytype == # "ability" && weapon.offhandslot == "<dev string:x60c>") {
+    } else if(weapon.inventorytype == #"ability" && weapon.offhandslot == "<dev string:x60c>") {
       pweapons = self getweaponslist();
 
       foreach(pweapon in pweapons) {
-        if(pweapon != weapon && pweapon.inventorytype == # "ability" && pweapon.offhandslot == "<dev string:x60c>") {
+        if(pweapon != weapon && pweapon.inventorytype == #"ability" && pweapon.offhandslot == "<dev string:x60c>") {
           if(self hasweapon(pweapon)) {
             self takeweapon(pweapon);
           }
@@ -757,18 +757,18 @@ function devgui_give_weapon(weapon_name) {
       if(weapon.gadget_type == 0) {
         self giveweapon(weapon);
 
-        if(weapon.inventorytype == # "offhand" || weapon.inventorytype == # "offhand_primary") {
+        if(weapon.inventorytype == #"offhand" || weapon.inventorytype == #"offhand_primary") {
           gadgets[0] = level.var_34d27b26;
         } else {
           gadgets[2] = level.var_43a51921;
         }
-      } else if(weapon.inventorytype == # "offhand" || weapon.inventorytype == # "offhand_primary") {
+      } else if(weapon.inventorytype == #"offhand" || weapon.inventorytype == #"offhand_primary") {
         if(weapon.gadget_type == 23) {
           gadgets[1] = weapon;
         } else {
           gadgets[0] = weapon;
         }
-      } else if(weapon.inventorytype == # "ability") {
+      } else if(weapon.inventorytype == #"ability") {
         gadgets[2] = weapon;
       }
 
@@ -786,7 +786,7 @@ function devgui_give_weapon(weapon_name) {
         }
       }
 
-      if(!weapon.isgrenadeweapon && weapon.inventorytype != # "ability") {
+      if(!weapon.isgrenadeweapon && weapon.inventorytype != #"ability") {
         self switchtoweapon(weapon);
       }
     }

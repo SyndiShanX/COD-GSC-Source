@@ -186,7 +186,7 @@ function private function_491bb6b7(instance, var_cf21a49f) {
   instance endon(#"cleanup");
   wait 1.5;
   var_18d554fc = int(max(2, min(5, level.realm)));
-  var_e7c0ea90 = # "hash_3f4bb6758c283d17" + var_18d554fc;
+  var_e7c0ea90 = #"hash_3f4bb6758c283d17" + var_18d554fc;
 
   if(isDefined(getscriptbundle(var_e7c0ea90))) {
     level thread namespace_2c949ef8::function_8b6ae460(var_cf21a49f, var_e7c0ea90, 64, 256, undefined, undefined, 0, "demented_echo_zombie");
@@ -194,7 +194,7 @@ function private function_491bb6b7(instance, var_cf21a49f) {
 
   wait 3.5;
   n_variant = randomintrangeinclusive(1, 3);
-  var_aa19ae = # "hash_247b96224cbaafaf" + var_18d554fc + "_variant_" + n_variant;
+  var_aa19ae = #"hash_247b96224cbaafaf" + var_18d554fc + "_variant_" + n_variant;
 
   if(isDefined(getscriptbundle(var_aa19ae))) {
     namespace_2c949ef8::function_8b6ae460(var_cf21a49f, var_aa19ae, 512, 2048);
@@ -212,7 +212,7 @@ function private function_a1ce8017(var_85c920d0) {
   while(isDefined(var_85c920d0)) {
     s_result = var_85c920d0 waittill(#"damage", #"death");
 
-    if(!isDefined(var_85c920d0) || s_result._notify === # "death") {
+    if(!isDefined(var_85c920d0) || s_result._notify === #"death") {
       return;
     }
 

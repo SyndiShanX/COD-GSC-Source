@@ -289,16 +289,16 @@ function type_string(soundtype) {
     case # "entity":
     case # "e":
     case # "ent":
-      snd_type = # "gentity";
+      snd_type = #"gentity";
       break;
     case 1:
     case # "centity":
     case # "c":
     case # "cent":
-      snd_type = # "centity";
+      snd_type = #"centity";
       break;
     case # "emitter":
-      snd_type = # "emitter";
+      snd_type = #"emitter";
       break;
     default:
       snd_type = undefined;
@@ -575,7 +575,7 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
       }
 
       if(fadeinseconds > 0) {
-        if(soundtype == # "gentity" && isDefined(linkedentity)) {
+        if(soundtype == #"gentity" && isDefined(linkedentity)) {
           delaytime += 0.05;
         }
 
@@ -610,7 +610,7 @@ function private function_f937a6f7(soundobject, fadeoutseconds) {
   assert(isDefined(soundobject), "<dev string:x139>");
   assert(isDefined(soundobject.soundtype), "<dev string:x163>");
 
-  if(soundobject.soundtype == # "emitter") {
+  if(soundobject.soundtype == #"emitter") {
     soundobject notify(#"snd_emitter_stop");
     soundobject.soundtype = undefined;
     soundobject.soundalias = undefined;
@@ -766,7 +766,7 @@ function private function_1ce48d0f(target, dist, var_3c67b910, elevation, rotati
 function private function_d1e7d514(emitter) {
   iss = isstruct(emitter);
   hast = isDefined(emitter.soundtype);
-  ist = emitter.soundtype == # "emitter";
+  ist = emitter.soundtype == #"emitter";
   is_emitter = iss && hast && ist;
 
   if(function_81fac19d(is_emitter == 0, "snd emitter stop not an emitter")) {
@@ -877,7 +877,7 @@ function emitter(soundalias, target, spawntime, distancerange, rotation, elevati
 
     if(ise || isv) {
       emitter = spawnStruct();
-      emitter.soundtype = # "emitter";
+      emitter.soundtype = #"emitter";
       emitter.soundalias = soundalias;
       emitter.spawntime = spawntime;
       emitter.distancerange = distancerange;

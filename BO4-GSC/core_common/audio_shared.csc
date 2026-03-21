@@ -989,7 +989,7 @@ dorattle(origin, min, max) {
 
 sndrattle_server(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(isDefined(self.model) && self.model == # "wpn_t7_bouncing_betty_world") {
+    if(isDefined(self.model) && self.model == #"wpn_t7_bouncing_betty_world") {
       betty = getweapon(#"bouncingbetty");
       level thread dorattle(self.origin, betty.soundrattlerangemin, betty.soundrattlerangemax);
       return;

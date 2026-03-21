@@ -35,8 +35,8 @@ function event_handler[level_init] main(eventstruct) {
   load::main();
   init_callbacks();
   level.player = getplayers()[0];
-  level.var_30eb363 = # "hash_4e516e60f6798859";
-  level.var_85b00b2b = # "hash_67c0d8cb1c978161";
+  level.var_30eb363 = #"hash_4e516e60f6798859";
+  level.var_85b00b2b = #"hash_67c0d8cb1c978161";
   level.var_3ff1b984[getweapon(#"ac130")] = 1;
   setDvar(#"compassmaxrange", "2100");
   vehicle::add_spawn_function_by_type("vehicle_t9_mil_ru_truck_light_cp_canvas_top", &util::delay, 1, undefined, &setteam, "axis");

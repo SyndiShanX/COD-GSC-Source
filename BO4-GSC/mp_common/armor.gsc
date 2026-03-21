@@ -293,7 +293,7 @@ function_37f4e0e0(smeansofdeath, shitloc) {
 }
 
 function_7538fede(weapon) {
-  if(weapon.name == # "ar_stealth_t8_operator") {
+  if(weapon.name == #"ar_stealth_t8_operator") {
     return true;
   }
 

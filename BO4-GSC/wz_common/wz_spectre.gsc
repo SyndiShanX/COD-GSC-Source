@@ -45,7 +45,7 @@ function_4467066e(params) {
     foreach(item in self.inventory.items) {
       itementry = item.itementry;
 
-      if(isDefined(item.itementry) && item.itementry.name == # "sig_blade_wz_item") {
+      if(isDefined(item.itementry) && item.itementry.name == #"sig_blade_wz_item") {
         var_ec8e239d = 1;
         break;
       }
@@ -116,7 +116,7 @@ function_ef53914c() {
   attacker = params.attacker;
   weapon = params.sweapon;
 
-  if(!isPlayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
+  if(!isPlayer(attacker) || attacker.team == self.team || weapon.name != #"sig_blade") {
     return;
   }
 
@@ -179,7 +179,7 @@ function_de83cc91(params) {
     weapon = params.laststandparams.sweapon;
   }
 
-  if(!isPlayer(attacker) || attacker.team == self.team || weapon.name != # "sig_blade") {
+  if(!isPlayer(attacker) || attacker.team == self.team || weapon.name != #"sig_blade") {
     return;
   }
 }

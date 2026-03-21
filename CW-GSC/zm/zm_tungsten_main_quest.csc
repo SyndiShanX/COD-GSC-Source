@@ -90,7 +90,7 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
 
     if(!function_148ccc79(localclientnum, #"hash_2964f82e2c05c8b8")) {
       function_a837926b(localclientnum, #"hash_2964f82e2c05c8b8");
-      self.var_7bd7bdc8 = # "hash_2964f82e2c05c8b8";
+      self.var_7bd7bdc8 = #"hash_2964f82e2c05c8b8";
     }
 
     return;
@@ -112,10 +112,10 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
 }
 
 function function_9b05e2c0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.model === # "hash_1d9e6c13811400c6" || self.model === # "hash_1d9e6b138113ff13") {
-    var_ee6bcd51 = # "hash_1a6400b20e8126bf";
+  if(self.model === #"hash_1d9e6c13811400c6" || self.model === #"hash_1d9e6b138113ff13") {
+    var_ee6bcd51 = #"hash_1a6400b20e8126bf";
   } else {
-    var_ee6bcd51 = # "hash_4a9cb80afea6f8cb";
+    var_ee6bcd51 = #"hash_4a9cb80afea6f8cb";
   }
 
   if(bwastimejump) {
@@ -407,7 +407,7 @@ function function_26e6cccc(localclientnum, oldval, newval, bnewent, binitialsnap
   util::playFXOnTag(bwastimejump, "maps/zm_tungsten/fx9_zm_rcxd_born", self, "tag_origin");
   playSound(bwastimejump, #"hash_828435c0edc0e5c", self.origin + (0, 0, 20));
 
-  if(self.model === # "hash_7dde995ef49216f") {
+  if(self.model === #"hash_7dde995ef49216f") {
     n_delay = 1;
     var_b978a3c9 = 0;
     wait 20;

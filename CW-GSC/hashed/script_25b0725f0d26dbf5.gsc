@@ -85,10 +85,10 @@ function function_27e76b4c(var_39a61773, var_c027e5d, var_8703bf11 = 1) {
     }
 
     if(var_c027e5d == 0) {
-      if(level.var_7466d419.vehicletype != # "hash_75cd743f7ce45c03") {
+      if(level.var_7466d419.vehicletype != #"hash_75cd743f7ce45c03") {
         level.var_7466d419 setvehicletype(#"hash_75cd743f7ce45c03");
       }
-    } else if(level.var_7466d419.vehicletype != # "vehicle_t9_mil_us_helicopter_large_cp_armada_player") {
+    } else if(level.var_7466d419.vehicletype != #"vehicle_t9_mil_us_helicopter_large_cp_armada_player") {
       level.var_7466d419 setvehicletype(#"vehicle_t9_mil_us_helicopter_large_cp_armada_player");
     }
 
@@ -213,7 +213,7 @@ function function_d777fe61(var_b54b1d1d) {
   }
 
   if(var_b54b1d1d === 0) {
-    if(chopper.vehicletype != # "hash_75cd743f7ce45c03") {
+    if(chopper.vehicletype != #"hash_75cd743f7ce45c03") {
       chopper setvehicletype(#"hash_75cd743f7ce45c03");
       chopper player_large_helicopter_armada::function_38ae4287();
     }
@@ -238,7 +238,7 @@ function function_d777fe61(var_b54b1d1d) {
   }
 
   if(var_b54b1d1d != 0) {
-    if(chopper.vehicletype != # "vehicle_t9_mil_us_helicopter_large_cp_armada_player") {
+    if(chopper.vehicletype != #"vehicle_t9_mil_us_helicopter_large_cp_armada_player") {
       chopper setvehicletype(#"vehicle_t9_mil_us_helicopter_large_cp_armada_player");
     }
 
@@ -255,7 +255,7 @@ function function_d777fe61(var_b54b1d1d) {
     chopper function_803e9bf3(1);
   }
 
-  chopper.team = # "allies";
+  chopper.team = #"allies";
 }
 
 function function_9c308f91(is_immediate = 0) {
@@ -660,7 +660,7 @@ function swap_hat_model(var_91270791 = 0) {
   }
 
   if(level.buddy === self) {
-    hatmodel = # "c_t9_usa_armada_headset_sims_01";
+    hatmodel = #"c_t9_usa_armada_headset_sims_01";
     var_a914e969 = "j_head";
   } else if(level.vip === self) {
     return;
@@ -967,7 +967,7 @@ function function_d01d891(boat, position) {
   boat endon(#"death", #"hash_2ec2df211f113591");
   level endon(#"game_ended");
   var_ef41a687 = [];
-  str_model = # "hash_262ebc4f609e2513";
+  str_model = #"hash_262ebc4f609e2513";
   weapon_name = undefined;
 
   if(!isDefined(boat.var_16826e92)) {
@@ -1060,7 +1060,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
   helicopter endon(#"death", #"hash_2ec2df211f113591");
   level endon(#"game_ended");
   var_ef41a687 = [];
-  str_model = # "hash_262ebc4f609e2513";
+  str_model = #"hash_262ebc4f609e2513";
   weapon_name = undefined;
   tag = "tag_body_animate";
 
@@ -1081,7 +1081,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
       }
 
       var_ef41a687[var_ef41a687.size] = "t9_arm_intro_driver_takeoff";
-      str_model = # "hash_4d52bea52bd00dbd";
+      str_model = #"hash_4d52bea52bd00dbd";
       break;
     case 1:
       if(!isDefined(var_ef41a687)) {
@@ -1099,7 +1099,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
       }
 
       var_ef41a687[var_ef41a687.size] = "t9_arm_intro_passenger_takeoff";
-      str_model = # "hash_421500ac712b73b2";
+      str_model = #"hash_421500ac712b73b2";
       break;
     case 6:
       if(!isDefined(var_ef41a687)) {
@@ -1109,7 +1109,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
       }
 
       var_ef41a687[var_ef41a687.size] = "t9_arm_intro_crew_6_idle";
-      weapon_name = # "hash_4ff481a4f55ed901";
+      weapon_name = #"hash_4ff481a4f55ed901";
       break;
     case 7:
       if(!isDefined(var_ef41a687)) {
@@ -1145,7 +1145,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
       }
 
       var_ef41a687[var_ef41a687.size] = "t9_arm_intro_enterhuey_sittingonedge_9_idle_guy02";
-      weapon_name = # "hash_4ff481a4f55ed901";
+      weapon_name = #"hash_4ff481a4f55ed901";
       break;
     case 10:
       if(!isDefined(var_ef41a687)) {
@@ -1163,7 +1163,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
       }
 
       var_ef41a687[var_ef41a687.size] = "t9_arm_intro_enterhuey_sittingonedge_10_idle_guy02";
-      weapon_name = # "hash_4ff481a4f55ed901";
+      weapon_name = #"hash_4ff481a4f55ed901";
       break;
     case 11:
       if(!isDefined(var_ef41a687)) {
@@ -1173,7 +1173,7 @@ function function_b50b1da4(helicopter, position, var_f37b2ff0) {
       }
 
       var_ef41a687[var_ef41a687.size] = "ai_t9_crw_lg_heli_base_rifle_11_idle_cover";
-      weapon_name = # "hash_4ff481a4f55ed901";
+      weapon_name = #"hash_4ff481a4f55ed901";
       break;
     default:
       assertmsg("<dev string:x1a3>");

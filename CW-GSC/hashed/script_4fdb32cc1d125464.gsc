@@ -312,7 +312,7 @@ function function_e6fcee54() {
   level thread function_f8c9f021();
   msg = level flag::wait_till_any(["escape_vehicle_enter", "exfil_escape_russians_cleared"]);
 
-  if(msg._notify == # "exfil_escape_russians_cleared") {
+  if(msg._notify == #"exfil_escape_russians_cleared") {
     level flag::wait_till_timeout(1.5, "escape_vehicle_enter");
   }
 

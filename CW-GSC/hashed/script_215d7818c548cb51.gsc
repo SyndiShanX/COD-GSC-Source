@@ -52,7 +52,7 @@ function private function_2778528() {
   }
 }
 
-function function_cc8342e0(string = # "hash_6c919cffb550417a", opentime = 10) {
+function function_cc8342e0(string = #"hash_6c919cffb550417a", opentime = 10) {
   level endon(#"game_ended");
   self endon(#"death");
 

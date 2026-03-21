@@ -12,12 +12,12 @@
 #namespace zm_orange_mq_hell;
 
 preload() {
-  level._effect[#"lantern_moving"] = # "hash_73e8d2cf76175901";
-  level._effect[#"lantern_waiting"] = # "hash_4f1f3e18228ac0a0";
-  level._effect[#"lantern_charging"] = # "hash_7af8fa2d13abeeb1";
-  level._effect[#"lantern_explode"] = # "hash_306c49d67fca8485";
-  level._effect[#"lantern_soul"] = # "hash_59977c4c851916e0";
-  level._effect[#"hash_7336b7a4cc9d2581"] = # "hash_1a06427eff8dfe13";
+  level._effect[#"lantern_moving"] = #"hash_73e8d2cf76175901";
+  level._effect[#"lantern_waiting"] = #"hash_4f1f3e18228ac0a0";
+  level._effect[#"lantern_charging"] = #"hash_7af8fa2d13abeeb1";
+  level._effect[#"lantern_explode"] = #"hash_306c49d67fca8485";
+  level._effect[#"lantern_soul"] = #"hash_59977c4c851916e0";
+  level._effect[#"hash_7336b7a4cc9d2581"] = #"hash_1a06427eff8dfe13";
   clientfield::register("scriptmover", "" + # "hash_6aaf03a4358f45f5", 24000, 1, "counter", &function_f1749965, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_6a4317183d0ca452", 24000, 1, "counter", &function_44aa40e0, 0, 0);
   clientfield::register("world", "" + # "lava_init", 24000, 1, "int", &lava_init, 0, 0);

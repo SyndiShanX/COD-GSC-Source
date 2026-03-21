@@ -30,7 +30,7 @@ on_begin(var_c2964c77, description, image, challenge_stat, var_191009a6, trial_c
   self.var_c2964c77 = var_c2964c77;
   self.challenge_stat = challenge_stat;
   self.var_191009a6 = var_191009a6;
-  self.trial_completed = trial_completed === # "1";
+  self.trial_completed = trial_completed === #"1";
 }
 
 on_end(round_reset) {

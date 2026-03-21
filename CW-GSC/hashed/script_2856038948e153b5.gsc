@@ -206,7 +206,7 @@ function function_36e68765(var_d3440450) {
   function_1eaaceab(level.gas_guards);
   level thread scene::play("scene_kgb_inside_man_on_knees", "Downed_Loop", level.gas_guards);
 
-  if(s_result._notify == # "trigger") {
+  if(s_result._notify == #"trigger") {
     level.player val::set(#"scene_kgb_inside_man_on_knees", "disable_weapons", 1);
     level flag::set("inside_man_rescued");
     level.inside_man scene::stop();
@@ -226,7 +226,7 @@ function function_36e68765(var_d3440450) {
     return;
   }
 
-  if(s_result._notify == # "timeout") {
+  if(s_result._notify == #"timeout") {
     level.var_a910b1a delete();
     util::missionfailedwrapper(#"hash_7880a61f047fcad3", #"hash_2190ae4a3848729d");
   }

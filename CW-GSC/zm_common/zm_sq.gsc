@@ -238,7 +238,7 @@ function private run_step(ee, step, var_5ea5c94d) {
     println(function_9e72a96(ee.name) + "<dev string:x2d8>" + function_9e72a96(step.name) + "<dev string:x2f0>");
   }
 
-  if(game.state === # "postgame") {
+  if(game.state === #"postgame") {
     return;
   }
 
@@ -252,7 +252,7 @@ function private run_step(ee, step, var_5ea5c94d) {
 
   step.cleaned_up = 1;
 
-  if(game.state === # "postgame") {
+  if(game.state === #"postgame") {
     return;
   }
 
@@ -1010,7 +1010,7 @@ function function_f2dd8601(ee_name, var_f2c264bb) {
       wait_time = 10 * ee.steps.size;
       waitresult = self waittilltimeout(wait_time, step.var_e788cdd7 + "<dev string:x577>");
 
-      if(waitresult._notify == # "timeout") {
+      if(waitresult._notify == #"timeout") {
         if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
           iprintlnbold("<dev string:x583>" + function_9e72a96(ee_name) + "<dev string:x2d8>" + function_9e72a96(ee.steps[ee.current_step].name));
           println("<dev string:x583>" + function_9e72a96(ee_name) + "<dev string:x2d8>" + function_9e72a96(ee.steps[ee.current_step].name));

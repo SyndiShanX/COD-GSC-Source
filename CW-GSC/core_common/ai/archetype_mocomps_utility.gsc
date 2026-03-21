@@ -1007,8 +1007,8 @@ function private mocompadjusttocoverinit(entity, mocompanim, mocompanimblendoutt
     angledifference = floor(absangleclamp360(mocompanimflag.angles[1] - mocompanimflag.node.angles[1]));
     var_c9145b1d = mocompanimflag.archetype;
 
-    if(var_c9145b1d == # "civilian") {
-      var_c9145b1d = # "human";
+    if(var_c9145b1d == #"civilian") {
+      var_c9145b1d = #"human";
     }
 
     mocompanimflag.mocompanglestarttime = _getadjusttocoverrotation(var_c9145b1d, covertype, mocompanimflag.nodefinalstance, angledifference);
@@ -1070,7 +1070,7 @@ function private mocompadjusttocoverterminate(entity, mocompanim, mocompanimblen
     return;
   }
 
-  if(mocompduration != # "") {
+  if(mocompduration != #"") {
     animtime = mocompanimflag getanimtime(mocompduration);
 
     if(animtime > mocompanimflag.mocompanglestarttime) {

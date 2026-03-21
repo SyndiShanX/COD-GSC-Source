@@ -211,13 +211,13 @@ function private function_ec3bfba7(localclientnum, radiationlevel, var_50cd907d)
       var_ef12093e = undefined;
       break;
     case 1:
-      var_ef12093e = # "hash_595f62c3706d32ab";
+      var_ef12093e = #"hash_595f62c3706d32ab";
       break;
     case 2:
-      var_ef12093e = # "hash_527718c36d03591f";
+      var_ef12093e = #"hash_527718c36d03591f";
       break;
     case 3:
-      var_ef12093e = # "hash_62105b9a2192156";
+      var_ef12093e = #"hash_62105b9a2192156";
       break;
     default:
       var_ef12093e = undefined;

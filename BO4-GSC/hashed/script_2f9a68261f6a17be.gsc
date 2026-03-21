@@ -47,7 +47,7 @@ on_begin() {
   a_ai = getaiteamarray(level.zombie_team);
 
   foreach(ai in a_ai) {
-    if(isalive(ai) && (ai.zm_ai_category === # "miniboss" || ai.zm_ai_category === # "heavy")) {
+    if(isalive(ai) && (ai.zm_ai_category === #"miniboss" || ai.zm_ai_category === #"heavy")) {
       ai.takedamage = 1;
       ai.allowdeath = 1;
       ai kill();

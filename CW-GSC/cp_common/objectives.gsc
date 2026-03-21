@@ -113,15 +113,15 @@ function set(str_objective, a_targets, var_8c7ec5ce, var_4cfa0710 = str_objectiv
   }
 }
 
-function follow(var_4cfa0710, var_b3177bd9, var_690561dc, show_splash, show_waypoint = 0, var_c3056ba3 = # "hash_f71affaf9c403ac") {
+function follow(var_4cfa0710, var_b3177bd9, var_690561dc, show_splash, show_waypoint = 0, var_c3056ba3 = #"hash_f71affaf9c403ac") {
   set(var_c3056ba3, var_b3177bd9, 1, var_4cfa0710, var_690561dc, show_splash, show_waypoint);
 }
 
-function kill(var_4cfa0710, var_3829dccf, var_690561dc, show_splash, show_waypoint, var_bfcac307, var_c3056ba3 = # "hash_5c90265e62b1f975") {
+function kill(var_4cfa0710, var_3829dccf, var_690561dc, show_splash, show_waypoint, var_bfcac307, var_c3056ba3 = #"hash_5c90265e62b1f975") {
   set(var_c3056ba3, var_3829dccf, 1, var_4cfa0710, var_690561dc, show_splash, show_waypoint, var_bfcac307);
 }
 
-function area(var_4cfa0710, var_8343acf6, radius, var_690561dc, show_splash, show_waypoint, var_bfcac307, var_c3056ba3 = # "hash_4a026a0a4473d478") {
+function area(var_4cfa0710, var_8343acf6, radius, var_690561dc, show_splash, show_waypoint, var_bfcac307, var_c3056ba3 = #"hash_4a026a0a4473d478") {
   set(var_c3056ba3, undefined, 0, var_4cfa0710, var_690561dc, show_splash, show_waypoint, var_bfcac307);
 
   if(isentity(var_8343acf6)) {
@@ -133,7 +133,7 @@ function area(var_4cfa0710, var_8343acf6, radius, var_690561dc, show_splash, sho
   function_64eaa790(var_4cfa0710, var_8343acf6, radius);
 }
 
-function goto(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3 = # "hash_7057d3992f70bf08") {
+function goto(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3 = #"hash_7057d3992f70bf08") {
   if(isDefined(mission.var_c68f10d0[var_4cfa0710])) {
     update_position(var_4cfa0710, position);
     return;
@@ -142,7 +142,7 @@ function goto(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, 
   set(var_c3056ba3, position, 0, var_4cfa0710, var_690561dc, show_splash, show_waypoint);
 }
 
-function function_4eb5c04a(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3 = # "hash_6d05b1cec06f98c") {
+function function_4eb5c04a(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3 = #"hash_6d05b1cec06f98c") {
   goto(var_4cfa0710, position, var_690561dc, show_splash, show_waypoint, var_c3056ba3);
 }
 

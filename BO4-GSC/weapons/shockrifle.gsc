@@ -82,7 +82,7 @@ function_c1aa8f6b(watcher) {
   watcher.timeout = level.var_a5ff950.shockduration;
   watcher.ondetonatecallback = &function_7ce0a335;
   watcher.activationdelay = 0;
-  watcher.activatesound = # "wpn_claymore_alert";
+  watcher.activatesound = #"wpn_claymore_alert";
   watcher.immunespecialty = "specialty_immunetriggershock";
   watcher.onspawn = &function_aa6e2f52;
   watcher.ondamage = &function_bcc47944;
@@ -368,7 +368,7 @@ function_e0141557(ent, var_51415470) {
     damage = 10000;
   } else if(isplayer && ent isplayerswimming()) {
     damage = 10000;
-  } else if((isplayer || isbot(ent)) && (ent isremotecontrolling() || ent.currentweapon.statname == # "recon_car")) {
+  } else if((isplayer || isbot(ent)) && (ent isremotecontrolling() || ent.currentweapon.statname == #"recon_car")) {
     damage = 10000;
   }
 

@@ -338,7 +338,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
       self.stopanimdistsq = 0.0001;
     }
 
-    if(isDefined(self.archetype) && self.archetype == # "robot") {
+    if(isDefined(self.archetype) && self.archetype == #"robot") {
       ai::set_behavior_attribute("rogue_control_force_goal", goal);
     } else if(ai::has_behavior_attribute("vignette_mode") && !(isDefined(self.ignorevignettemodeforanimreach) && self.ignorevignettemodeforanimreach)) {
       ai::set_behavior_attribute("vignette_mode", "fast");
@@ -358,7 +358,7 @@ _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disable_arrival
     waittillframeend();
   }
 
-  if(!(isDefined(self.archetype) && self.archetype == # "robot") && ai::has_behavior_attribute("vignette_mode")) {
+  if(!(isDefined(self.archetype) && self.archetype == #"robot") && ai::has_behavior_attribute("vignette_mode")) {
     ai::set_behavior_attribute("vignette_mode", "off");
   }
 

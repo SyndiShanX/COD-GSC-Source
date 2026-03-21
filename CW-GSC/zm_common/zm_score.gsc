@@ -570,7 +570,7 @@ function can_player_purchase(n_cost, var_1c65f833 = 0) {
 function on_item_pickup(s_params) {
   itementry = s_params.item.itementry;
 
-  if(itementry.itemtype === # "survival_essence") {
+  if(itementry.itemtype === #"survival_essence") {
     if(isPlayer(self)) {
       e_player = self;
     } else {
@@ -645,7 +645,7 @@ function function_89db94b3(e_attacker, n_damage, e_inflictor) {
   }
 
   if(n_points) {
-    if(isDefined(e_inflictor) && e_inflictor.subarchetype === # "zombie_wolf_ally") {
+    if(isDefined(e_inflictor) && e_inflictor.subarchetype === #"zombie_wolf_ally") {
       e_attacker player_add_points("damage_points", 10, undefined, undefined, undefined, undefined, undefined, self.var_12745932);
       self.var_f256a4d9 -= n_points;
     } else {

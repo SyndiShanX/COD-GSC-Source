@@ -6,7 +6,7 @@
 #using scripts\core_common\territory;
 #namespace namespace_99c84a33;
 
-function function_99652b58(name, index, team = # "none") {
+function function_99652b58(name, index, team = #"none") {
   cameras = territory::function_1f583d2e(name, "targetname");
 
   if(cameras.size) {

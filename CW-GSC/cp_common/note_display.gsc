@@ -11,7 +11,7 @@
 #using scripts\cp_common\ui\prompts;
 #namespace note_display;
 
-function function_97c69304(var_e1ab1198, var_ad825676 = 1, var_4d757ace = 2, var_34c6a562 = # "hash_7cf7750cf3228d3f", var_5d0591d = # "hash_5f8dea2ec57cdca9", var_ec9a3f05 = 0) {
+function function_97c69304(var_e1ab1198, var_ad825676 = 1, var_4d757ace = 2, var_34c6a562 = #"hash_7cf7750cf3228d3f", var_5d0591d = #"hash_5f8dea2ec57cdca9", var_ec9a3f05 = 0) {
   if(!namespace_61e6d095::exists(#"note_display")) {
     namespace_61e6d095::create(#"note_display", #"hash_3ddadc19cc3c44ad");
   }

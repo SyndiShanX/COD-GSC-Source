@@ -458,14 +458,14 @@ function private function_aa89ee85(v_center, n_duration = 5, n_delay, a_ai, n_ra
 
   foreach(ai in a_ai) {
     if(isalive(ai)) {
-      if(ai.zm_ai_category === # "normal") {
+      if(ai.zm_ai_category === #"normal") {
         ai function_9513424();
       } else {
         ai clientfield::set("soul_capture_zombie_fire", 0);
 
-        if(ai.zm_ai_category === # "special") {
+        if(ai.zm_ai_category === #"special") {
           var_82b50c7 = ai.maxhealth * 0.75;
-        } else if(ai.zm_ai_category === # "elite") {
+        } else if(ai.zm_ai_category === #"elite") {
           var_82b50c7 = ai.maxhealth * 0.25;
         }
 

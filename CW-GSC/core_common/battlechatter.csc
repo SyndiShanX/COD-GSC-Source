@@ -535,7 +535,7 @@ function function_ee8935da(player) {
 
   commander = "blops_commander";
 
-  if(player.team === # "axis") {
+  if(player.team === #"axis") {
     commander = "cdp_commander";
   }
 

@@ -11,6 +11,6 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level.allies_team = # "allies";
-  level.axis_team = # "axis";
+  level.allies_team = #"allies";
+  level.axis_team = #"axis";
 }

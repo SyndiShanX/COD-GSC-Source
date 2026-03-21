@@ -18,7 +18,7 @@ function radarsweeps() {
   level.var_fdd4b16 = getgametypesetting(#"hash_926bf70c5a0d23b");
   level.var_e4cfa0c3 = getgametypesetting(#"hash_3da025c068c34bcb");
 
-  while(game.state !== # "playing") {
+  while(game.state !== #"playing") {
     wait 1;
   }
 
@@ -35,7 +35,7 @@ function radarsweeps() {
   }
 
   if(level.var_fdd4b16) {
-    while(game.state == # "playing") {
+    while(game.state == #"playing") {
       wait level.var_fdd4b16;
       var_bc40925b = level.var_fdd4b16 > 10;
       thread doradarsweep();

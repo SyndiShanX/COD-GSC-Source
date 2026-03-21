@@ -11,8 +11,8 @@
 #namespace mp_offshore_alt;
 
 event_handler[level_init] main(eventstruct) {
-  level.draftxcam = # "ui_cam_draft_common";
-  level.var_482af62e = # "hash_12263e5d70551bf9";
+  level.draftxcam = #"ui_cam_draft_common";
+  level.var_482af62e = #"hash_12263e5d70551bf9";
   mp_offshore_alt_fx::main();
   mp_offshore_alt_sound::main();
   load::main();
@@ -25,7 +25,7 @@ event_handler[level_init] main(eventstruct) {
 dom_flag_base_fx_override(flag, team) {
   switch (flag.name) {
     case # "a":
-      if(team == # "neutral") {
+      if(team == #"neutral") {
         return "ui/fx_dom_marker_neutral_r120";
       } else {
         return "ui/fx_dom_marker_team_r120";
@@ -35,7 +35,7 @@ dom_flag_base_fx_override(flag, team) {
     case # "b":
       break;
     case # "c":
-      if(team == # "neutral") {
+      if(team == #"neutral") {
         return "ui/fx_dom_marker_neutral_r120";
       } else {
         return "ui/fx_dom_marker_team_r120";
@@ -48,7 +48,7 @@ dom_flag_base_fx_override(flag, team) {
 dom_flag_cap_fx_override(flag, team) {
   switch (flag.name) {
     case # "a":
-      if(team == # "neutral") {
+      if(team == #"neutral") {
         return "ui/fx_dom_cap_indicator_neutral_r120";
       } else {
         return "ui/fx_dom_cap_indicator_team_r120";
@@ -58,7 +58,7 @@ dom_flag_cap_fx_override(flag, team) {
     case # "b":
       break;
     case # "c":
-      if(team == # "neutral") {
+      if(team == #"neutral") {
         return "ui/fx_dom_cap_indicator_neutral_r120";
       } else {
         return "ui/fx_dom_cap_indicator_team_r120";

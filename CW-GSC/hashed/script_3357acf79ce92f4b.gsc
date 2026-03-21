@@ -172,7 +172,7 @@ function private function_3041c2b8() {
     radius = undefined;
     entity = undefined;
 
-    if(waitresult._notify === # "glass_smash") {
+    if(waitresult._notify === #"glass_smash") {
       origin = waitresult.position;
       radius = 800;
       ai = getentitiesinradius(origin, 50, 15);
@@ -305,7 +305,7 @@ function private function_4645d5f8(params) {
   while(true) {
     waitresult = self waittill(#"gunshot", #"explode", #"radio_event", #"alert");
 
-    if(self.current_state.name === # "chase") {
+    if(self.current_state.name === #"chase") {
       self waittill(#"state_changed");
       continue;
     }
@@ -467,7 +467,7 @@ function function_fa6e010d() {
 }
 
 function function_5f511313(params) {
-  if(isDefined(params.eattacker) && isDefined(params) && isDefined(self.current_state) && self.current_state.name !== # "chase" && distancesquared(params.eattacker.origin, self.origin) <= sqr(5000) && function_4df0b826(self, params.eattacker) && params.idamage < self.health && !self.ignoreall) {
+  if(isDefined(params.eattacker) && isDefined(params) && isDefined(self.current_state) && self.current_state.name !== #"chase" && distancesquared(params.eattacker.origin, self.origin) <= sqr(5000) && function_4df0b826(self, params.eattacker) && params.idamage < self.health && !self.ignoreall) {
     set_state(self, #"chase");
     function_c241ef9a(self, params.eattacker, -1);
   }
@@ -496,7 +496,7 @@ function function_b184324d(origin, radius, var_5e8ea34a = 0, dist_from_boundary 
 }
 
 function function_496e0dbc(entity, origin, radius, var_5e8ea34a = 0, dist_from_boundary = 15, height) {
-  if(level.script !== # "wz_ski_slopes" || !is_true(getDvar(#"hash_2d0879ab385bc2c8", 0))) {
+  if(level.script !== #"wz_ski_slopes" || !is_true(getDvar(#"hash_2d0879ab385bc2c8", 0))) {
     queryresult = positionquery_source_navigation(origin, var_5e8ea34a, radius, max(height, 10) / 2, dist_from_boundary, entity);
   } else {
     queryresult = {
@@ -537,7 +537,7 @@ function function_555d960b(entity) {
 }
 
 function function_9c9d96b5(entity) {
-  if(self.current_state.name === # "chase" || self.current_state.name === # "investigate") {
+  if(self.current_state.name === #"chase" || self.current_state.name === #"investigate") {
     self.var_2772a472 = 1;
   }
 
@@ -601,13 +601,13 @@ function function_3bac247(entity) {
     } else {
       waitresult = entity waittilltimeout(randomfloatrange(var_e49abf9f, var_a33458ef), #"goal", #"bad_path");
 
-      if(waitresult._notify === # "bad_path") {
+      if(waitresult._notify === #"bad_path") {
         debugstar(waitresult.position, 100, (1, 0, 1), type);
         line(entity.origin, waitresult.position, (1, 0, 1), 1, 0, 100);
       }
     }
 
-    if(waitresult._notify === # "goal" || waitresult._notify === # "bad_path") {
+    if(waitresult._notify === #"goal" || waitresult._notify === #"bad_path") {
       wait randomfloatrange(var_f0b43a45, var_7f4fe0f1);
     }
   }
@@ -801,7 +801,7 @@ function function_2eab2251(entity, awareness_event) {
     entity namespace_e292b080::zombieupdategoal(investigate_point);
     waitresult = entity waittill(#"goal", #"bad_path");
 
-    if(isDefined(waitresult) && waitresult._notify == # "bad_path") {
+    if(isDefined(waitresult) && waitresult._notify == #"bad_path") {
       entity.var_3eaac485 = gettime() + int(randomfloatrange(1.5, 2.5) * 1000);
       entity setgoal(entity.origin);
     }
@@ -1421,7 +1421,7 @@ function function_39da6c3c(entity) {
       entity.var_1fa24724 = 0;
     }
 
-    if(entity.archetype === # "zombie") {
+    if(entity.archetype === #"zombie") {
       entity.keep_moving = 0;
       return;
     }
@@ -1501,7 +1501,7 @@ function function_39da6c3c(entity) {
     if(isDefined(goal)) {
       if(getdvarint(#"hash_6fcfffa58806f673", 1) && !is_true(entity.var_1fa24724)) {
         entity namespace_e292b080::zombieupdategoal(goal);
-      } else if(entity.archetype !== # "zombie") {
+      } else if(entity.archetype !== #"zombie") {
         entity.keep_moving = 0;
         entity setgoal(goal);
       }
@@ -1624,7 +1624,7 @@ function function_fd83d499(entity) {
 }
 
 function function_b6aca908(entity) {
-  if(self.current_state.name === # "chase" || self.current_state.name === # "investigate") {
+  if(self.current_state.name === #"chase" || self.current_state.name === #"investigate") {
     self.var_2772a472 = 1;
   }
 

@@ -98,7 +98,7 @@ shouldthrowgrenadeatcovercondition(entity, throwifpossible = 0) {
 
   entityangles = entity.angles;
 
-  if(isDefined(entity.node) && (entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover pillar" || entity.node.type == # "cover stand" || entity.node.type == # "conceal stand" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") && entity isatcovernodestrict()) {
+  if(isDefined(entity.node) && (entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover pillar" || entity.node.type == #"cover stand" || entity.node.type == #"conceal stand" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") && entity isatcovernodestrict()) {
     entityangles = entity.node.angles;
   }
 
@@ -396,23 +396,23 @@ temp_get_arm_offset(entity, throwposition) {
   }
 
   if(isDefined(entity.node) && entity isatcovernodestrict()) {
-    if(entity.node.type == # "cover left") {
+    if(entity.node.type == #"cover left") {
       if(stance == "crouch") {
         arm_offset = (-38, 15, 23);
       } else {
         arm_offset = (-45, 0, 40);
       }
-    } else if(entity.node.type == # "cover right") {
+    } else if(entity.node.type == #"cover right") {
       if(stance == "crouch") {
         arm_offset = (46, 12, 26);
       } else {
         arm_offset = (34, -21, 50);
       }
-    } else if(entity.node.type == # "cover stand" || entity.node.type == # "conceal stand") {
+    } else if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand") {
       arm_offset = (10, 7, 77);
-    } else if(entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") {
+    } else if(entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") {
       arm_offset = (19, 5, 60);
-    } else if(entity.node.type == # "cover pillar") {
+    } else if(entity.node.type == #"cover pillar") {
       leftoffset = undefined;
       rightoffset = undefined;
 

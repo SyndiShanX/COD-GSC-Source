@@ -137,7 +137,7 @@ function function_6ad1ac64(var_d3440450, var_50cc0d4f) {
 }
 
 function function_e59c6d2a() {
-  if(self.team === # "axis") {
+  if(self.team === #"axis") {
     self.dontdropweapon = 1;
   }
 }
@@ -1151,10 +1151,10 @@ function function_8060162f(v_target, n_index = 1) {
 
   if(n_index == 1) {
     var_9012c9b0 = getweapon(#"hash_2f6f5a990bc32cbd");
-    var_1620c159 = # "hash_10f4fd64af1dfe61";
+    var_1620c159 = #"hash_10f4fd64af1dfe61";
   } else {
     var_9012c9b0 = getweapon(#"hash_73d955d55fddba26");
-    var_1620c159 = # "hash_6d6d720fe18d9609";
+    var_1620c159 = #"hash_6d6d720fe18d9609";
   }
 
   for(i = 0; i < 50; i++) {
@@ -2668,7 +2668,7 @@ function function_6b5096fe() {
     level.var_52874eb2 turret::set_target_leading(4, 0.1);
   }
 
-  if(level.var_52874eb2.vehicletype != # "hash_308369147254321b") {
+  if(level.var_52874eb2.vehicletype != #"hash_308369147254321b") {
     level.var_52874eb2 setvehicletype(#"hash_308369147254321b");
   }
 

@@ -1180,15 +1180,15 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
     archetype = undefined;
     archetype_spawner = undefined;
 
-    if(self.team == # "axis") {
+    if(self.team == #"axis") {
       archetype = getdvarstring(#"feature_ai_enemy_archetype");
 
-      if(getdvarstring(#"feature_ai_archetype_override") == # "enemy") {
+      if(getdvarstring(#"feature_ai_archetype_override") == #"enemy") {
         archetype = getdvarstring(#"feature_ai_enemy_archetype");
       }
 
       archetype_spawner = level.archetype_spawners[archetype];
-    } else if(self.team == # "allies") {
+    } else if(self.team == #"allies") {
       archetype = getdvarstring(#"feature_ai_ally_archetype");
 
       if(getdvarstring(#"feature_ai_archetype_override") == "<dev string:x2e9>") {
@@ -1196,8 +1196,8 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
       }
 
       archetype_spawner = level.archetype_spawners[archetype];
-    } else if(self.team == # "team3") {
-      if(getdvarstring(#"feature_ai_archetype_override") == # "enemy") {
+    } else if(self.team == #"team3") {
+      if(getdvarstring(#"feature_ai_archetype_override") == #"enemy") {
         archetype = getdvarstring(#"feature_ai_enemy_archetype");
       } else if(getdvarstring(#"feature_ai_archetype_override") == "<dev string:x2e9>") {
         archetype = getdvarstring(#"feature_ai_ally_archetype");
@@ -1282,9 +1282,9 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
 
       if(currentsessionmode() === 2 && getdvarint(#"hash_99ad36e628f93d0", 0)) {
         if(isDefined(self) && isactorspawner(self)) {
-          if(self.team == # "allies") {
+          if(self.team == #"allies") {
             override_aitype = "<dev string:x2ff>";
-          } else if(self.team == # "axis") {
+          } else if(self.team == #"axis") {
             override_aitype = "<dev string:x320>";
           }
         }

@@ -125,7 +125,7 @@ init_boss() {
   e_boss.e_damage = getent("bs_bdy_dmg", "targetname");
   e_boss.e_damage.takedamage = 1;
   e_boss.e_damage function_2baad8fc();
-  e_boss.e_damage.zm_ai_category = # "boss";
+  e_boss.e_damage.zm_ai_category = #"boss";
   e_boss.e_damage enablelinkto();
   e_boss.e_damage linkto(e_boss);
   e_boss.e_damage notsolid();
@@ -320,12 +320,12 @@ init_vo() {
   }
 
   level.var_bd976920[5][level.var_bd976920[5].size] = array(1, #"hash_3cde846b48875568");
-  level.var_d748689e = # "hash_2df184d89b83d7a6";
-  level.var_73f9d759 = # "hash_68b36b3fd33fde80";
-  level.var_99d2b056 = # "hash_50eaadbd6d85e554";
-  level.var_2404b2a5 = # "hash_1eb09b9ee996d6ed";
-  level.var_c7daa370 = # "hash_1ad33382e08dace7";
-  level.var_ad9b527b = # "hash_6c43ec4efecb96f8";
+  level.var_d748689e = #"hash_2df184d89b83d7a6";
+  level.var_73f9d759 = #"hash_68b36b3fd33fde80";
+  level.var_99d2b056 = #"hash_50eaadbd6d85e554";
+  level.var_2404b2a5 = #"hash_1eb09b9ee996d6ed";
+  level.var_c7daa370 = #"hash_1ad33382e08dace7";
+  level.var_ad9b527b = #"hash_6c43ec4efecb96f8";
 }
 
 function_51e51897(var_5ea5c94d) {
@@ -501,11 +501,11 @@ function_500cb0be(str_mdl, str_scene) {
   self setModel(str_mdl);
   self.mdl_base = str_mdl;
 
-  if(str_mdl == # "hash_678aaf8e37498e9a") {
+  if(str_mdl == #"hash_678aaf8e37498e9a") {
     self clientfield::set("bs_bdy_base_cf", 1);
-  } else if(str_mdl == # "hash_32a51dafb1c7344f") {
+  } else if(str_mdl == #"hash_32a51dafb1c7344f") {
     self clientfield::set("bs_bdy_base_cf", 2);
-  } else if(str_mdl == # "hash_597bdc83a7c9e8c") {
+  } else if(str_mdl == #"hash_597bdc83a7c9e8c") {
     self clientfield::set("bs_bdy_base_cf", 3);
   }
 
@@ -1305,7 +1305,7 @@ function_c85b83f3() {
     self.var_914750d = 0;
   }
 
-  if(self.mdl_base == # "hash_32a51dafb1c7344f") {
+  if(self.mdl_base == #"hash_32a51dafb1c7344f") {
     if(self.var_914750d == 2) {
       self function_3d8879d7("crack");
     } else {
@@ -1315,7 +1315,7 @@ function_c85b83f3() {
     return;
   }
 
-  if(self.mdl_base == # "hash_678aaf8e37498e9a") {
+  if(self.mdl_base == #"hash_678aaf8e37498e9a") {
     if(self.var_914750d == 1) {
       self function_3d8879d7("crack");
       return;
@@ -2565,7 +2565,7 @@ function_de60e752(var_533ac894) {
 }
 
 function_e9b8eaff(e_attacker) {
-  if(self.archetype !== # "zombie") {
+  if(self.archetype !== #"zombie") {
     return;
   }
 

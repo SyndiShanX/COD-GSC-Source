@@ -349,8 +349,8 @@ function function_109823ff(b_skipped, var_19e802fa) {
 }
 
 function function_b3d60c36() {
-  if(self.blueprint.name === # "hash_434e63df930cc195") {
-    self.hint_string = # "hash_116dced27129125c";
+  if(self.blueprint.name === #"hash_434e63df930cc195") {
+    self.hint_string = #"hash_116dced27129125c";
   }
 }
 
@@ -508,16 +508,16 @@ function function_ec1c666a() {
   switch (level.var_f3ec3e94) {
     case 0:
     default:
-      var_441061cd = # "hash_767f31cac737428";
+      var_441061cd = #"hash_767f31cac737428";
       break;
     case 1:
-      var_441061cd = # "hash_203dee68e7b0d8cc";
+      var_441061cd = #"hash_203dee68e7b0d8cc";
       break;
     case 2:
-      var_441061cd = # "hash_203df168e7b0dde5";
+      var_441061cd = #"hash_203df168e7b0dde5";
       break;
     case 3:
-      var_441061cd = # "hash_203df068e7b0dc32";
+      var_441061cd = #"hash_203df068e7b0dc32";
       break;
   }
 

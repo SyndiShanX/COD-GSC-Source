@@ -70,15 +70,15 @@ function private is_weapon_allowed(weapon) {
 function private is_melee_allowed(weapon) {
   challenge = zm_trial::function_a36e8c38(#"restrict_loadout");
 
-  if(challenge.var_e097dc07 == # "melee") {
+  if(challenge.var_e097dc07 == #"melee") {
     return true;
   }
 
-  if((challenge.var_e097dc07 == "any_pistol" || challenge.var_e097dc07 == # "hash_7416cabf26f52c5f") && is_true(weapon.isriotshield) && weapon.weapclass == "pistol") {
+  if((challenge.var_e097dc07 == "any_pistol" || challenge.var_e097dc07 == #"hash_7416cabf26f52c5f") && is_true(weapon.isriotshield) && weapon.weapclass == "pistol") {
     return false;
   }
 
-  if(isDefined(challenge) && challenge.var_e097dc07 != # "melee") {
+  if(isDefined(challenge) && challenge.var_e097dc07 != #"melee") {
     return self is_weapon_allowed(weapon);
   }
 
@@ -300,7 +300,7 @@ function private on_begin(var_e097dc07, var_f5300808) {
   }
 
   foreach(player in getplayers()) {
-    if(var_e097dc07 === # "spear_only") {
+    if(var_e097dc07 === #"spear_only") {
       player allowmelee(0);
     }
 
@@ -368,12 +368,12 @@ function private on_end(round_reset) {
     player zm_trial_util::function_73ff0096();
     player zm_trial_util::function_7dbb1712(1);
 
-    if(self.var_e097dc07 == # "spear_only") {
+    if(self.var_e097dc07 == #"spear_only") {
       player allowmelee(1);
     }
   }
 
-  if(round_reset && self.var_e097dc07 == # "equipment") {
+  if(round_reset && self.var_e097dc07 == #"equipment") {
     foreach(player in getplayers()) {
       player function_f66032dd();
     }
@@ -464,7 +464,7 @@ function private disable_offhand_weapons() {
 }
 
 function private function_e20ebcfd() {
-  if(self.var_e097dc07 != # "equipment") {
+  if(self.var_e097dc07 != #"equipment") {
     foreach(player in getplayers()) {
       player thread disable_offhand_weapons();
 

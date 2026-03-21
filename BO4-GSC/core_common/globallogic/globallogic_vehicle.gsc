@@ -61,7 +61,7 @@ callback_vehiclespawned(spawner) {
     self spawner::spawn_think(spawner);
   }
 
-  if(self.vehicletype != # "zm_zod_train") {
+  if(self.vehicletype != #"zm_zod_train") {
     vehicle::init(self);
   }
 
@@ -465,7 +465,7 @@ vehiclecrush(eattacker, einflictor) {
 }
 
 getvehicleunderneathsplashscalar(weapon) {
-  if(weapon.name == # "satchel_charge") {
+  if(weapon.name == #"satchel_charge") {
     scale = 10;
     scale *= 3;
   } else {

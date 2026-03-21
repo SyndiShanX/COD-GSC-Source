@@ -143,7 +143,7 @@ function_a913e7bc(e_player) {
     t_crafting = self;
   }
 
-  if(t_crafting.blueprint.name == # "zblueprint_orange_heat_pack") {
+  if(t_crafting.blueprint.name == #"zblueprint_orange_heat_pack") {
     var_7c0185ab = t_crafting.var_4f749ffe;
     var_7c0185ab show();
     var_7c0185ab zm_unitrigger::create(&function_96dcf25a, 64);

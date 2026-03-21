@@ -496,7 +496,7 @@ function_d59c4b07(entity) {
   var_31a419e0 = [];
 
   foreach(zombie in zombies) {
-    if(zombie.zm_ai_category === # "basic" || zombie.zm_ai_category === # "popcorn") {
+    if(zombie.zm_ai_category === #"basic" || zombie.zm_ai_category === #"popcorn") {
       if(!isDefined(var_31a419e0)) {
         var_31a419e0 = [];
       } else if(!isarray(var_31a419e0)) {

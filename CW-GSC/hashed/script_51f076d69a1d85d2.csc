@@ -22,8 +22,8 @@ function preload() {
 }
 
 function postload() {
-  level._effect[#"zipline_ai_landing_fx"] = # "hash_62e38c7e6420e59d";
-  level._effect[#"zipline_player_landing_fx"] = # "hash_62e38c7e6420e59d";
+  level._effect[#"zipline_ai_landing_fx"] = #"hash_62e38c7e6420e59d";
+  level._effect[#"zipline_player_landing_fx"] = #"hash_62e38c7e6420e59d";
 }
 
 function zipline_postfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

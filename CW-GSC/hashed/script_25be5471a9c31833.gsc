@@ -57,9 +57,9 @@ function function_1532e0b6() {
     function_999594fe(location.contentgroups[#"hash_6e55d13f9423215a"], #"hash_56e1ed93d9ce235c", #"hash_43372808f8cd00cb", #"talent_doubletap", function_cce40d6d(#"talent_doubletap"));
 
     if(zm_utility::is_survival() || is_true(level.var_dfe80386)) {
-      model = # "hash_6e47d6576612543c";
+      model = #"hash_6e47d6576612543c";
     } else {
-      model = # "p9_fxanim_zm_gp_wunderfizz_on_xmodel";
+      model = #"p9_fxanim_zm_gp_wunderfizz_on_xmodel";
     }
 
     function_999594fe(location.contentgroups[#"perk_machine_choice"], #"hash_4af85251966549b8", model, #"hash_3eac5ec7a888ddfb", 0);
@@ -96,10 +96,10 @@ function function_744f2a2(struct, var_a0f07ebc, modelname, hint_string, var_c024
 
   if(var_1b39aebe) {
     var_386a4480 = hint_string;
-    hint_string = # "zombie/need_power";
+    hint_string = #"zombie/need_power";
   }
 
-  if(struct.parent.content_script_name !== # "safehouse") {
+  if(struct.parent.content_script_name !== #"safehouse") {
     objid = [[var_c6d25878]](#"hash_7d2b8cd6f37639c9", scriptmodel);
     struct.objectiveid = objid;
     scriptmodel.objectiveid = objid;
@@ -133,7 +133,7 @@ function function_744f2a2(struct, var_a0f07ebc, modelname, hint_string, var_c024
   level thread function_96a51643(scriptmodel);
 
   if(!var_1b39aebe) {
-    if(modelname == # "p9_fxanim_zm_gp_wunderfizz_on_xmodel" || modelname == # "hash_6e47d6576612543c") {
+    if(modelname == #"p9_fxanim_zm_gp_wunderfizz_on_xmodel" || modelname == #"hash_6e47d6576612543c") {
       struct thread function_dc1b3863(scriptmodel);
       scriptmodel thread namespace_791d0451::function_c5fb4741(1);
       return;
@@ -211,7 +211,7 @@ function function_472f16d8(eventstruct) {
   assert(isDefined(var_87abc3a0), "<dev string:x1a4>");
 
   if(isPlayer(player)) {
-    if(var_c024c2e0 == # "hash_3eac5ec7a888ddfb") {
+    if(var_c024c2e0 == #"hash_3eac5ec7a888ddfb") {
       if(!level.var_5df76d0 sr_perk_machine_choice::is_open(player) && !player clientfield::get_player_uimodel("hudItems.srOverlayOpen")) {
         player notify(#"hash_5f178db4550eeae9");
         level.var_5df76d0 sr_perk_machine_choice::open(player, 0);
@@ -327,7 +327,7 @@ function function_4513f006(machine, trigger) {
     response = waitresult.response;
     intpayload = waitresult.intpayload;
 
-    if(menu == # "sr_perk_machine_choice") {
+    if(menu == #"sr_perk_machine_choice") {
       switch (waitresult.response) {
         case # "hash_5c8984efe0e105db":
           var_82e23366 = getunlockableiteminfofromindex(intpayload, 5);
@@ -387,16 +387,16 @@ function function_d9cdb025(destination) {
 
     if(isDefined(var_4064e964)) {
       if(zm_utility::is_survival() || is_true(level.var_dfe80386)) {
-        model = # "hash_6e47d6576612543c";
+        model = #"hash_6e47d6576612543c";
       } else {
-        model = # "p9_fxanim_zm_gp_wunderfizz_on_xmodel";
+        model = #"p9_fxanim_zm_gp_wunderfizz_on_xmodel";
       }
 
       if(is_true(level.var_9d96d174)) {
         if(is_true(level.var_dfe80386)) {
-          model = # "hash_6ceeb1e8c8e22a40";
+          model = #"hash_6ceeb1e8c8e22a40";
         } else {
-          model = # "p9_fxanim_zm_gp_wunderfizz_off_xmodel";
+          model = #"p9_fxanim_zm_gp_wunderfizz_off_xmodel";
         }
 
         var_1b39aebe = 1;

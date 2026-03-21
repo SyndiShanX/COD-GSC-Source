@@ -169,7 +169,7 @@ function private archetypezombieonanimscriptedcallback(entity) {
 function function_eb55349f() {
   var_1690db4a = [#"c_t9_zmb_ndu_zombie_shirtless2", #"hash_16837b6c9b7a1881", #"hash_50fdc172aee097e6", #"hash_ef041655f01ad34", #"hash_502c60e0a94ba04b"];
 
-  if(self.model === # "c_t9_zmb_zombie_light_body2" || isDefined(self.model) && isinarray(var_1690db4a, self.model)) {
+  if(self.model === #"c_t9_zmb_zombie_light_body2" || isDefined(self.model) && isinarray(var_1690db4a, self.model)) {
     self clientfield::set("pustule_pulse_cf", 1);
     self callback::function_d8abfc3d(#"on_ai_killed", &function_5b8201e0);
   }
@@ -260,7 +260,7 @@ function function_f771a3f8(params) {
 }
 
 function function_84b43711(weapon) {
-  if(weapon.name === # "ray_gun" || weapon.name === # "ray_gun_upgraded") {
+  if(weapon.name === #"ray_gun" || weapon.name === #"ray_gun_upgraded") {
     return false;
   }
 
@@ -306,7 +306,7 @@ function bb_getlowgravityvariant() {
 }
 
 function private function_a95e9277() {
-  assert(self.archetype == # "zombie");
+  assert(self.archetype == #"zombie");
   speed = self function_28e7d252();
   return speed;
 }
@@ -743,7 +743,7 @@ function function_997f1224(entity) {
     var_565fd664 = isDefined(entity.var_46fc9994.position) && distance2dsquared(entity.origin, entity.var_46fc9994.position) < sqr(entity getpathfindingradius());
   }
 
-  if(entity.archetype == # "zombie" && !isDefined(entity.subarchetype) && !is_true(self.missinglegs) && !(var_ac8727d2 && var_b0027f10 && var_565fd664)) {
+  if(entity.archetype == #"zombie" && !isDefined(entity.subarchetype) && !is_true(self.missinglegs) && !(var_ac8727d2 && var_b0027f10 && var_565fd664)) {
     if(entity.zombie_move_speed == "walk") {
       return sqr(100);
     } else if(entity.zombie_move_speed == "run") {
@@ -1484,7 +1484,7 @@ function function_22762653() {
     return;
   }
 
-  if(util::get_game_type() === # "zsurvival" && getDvar(#"hash_fb0f3afcdafbdf3", 1)) {
+  if(util::get_game_type() === #"zsurvival" && getDvar(#"hash_fb0f3afcdafbdf3", 1)) {
     if(!isDefined(self.var_1f2c0ce1)) {
       self.var_1f2c0ce1 = self.origin;
     } else if(distancesquared(self.var_1f2c0ce1, self.origin) < sqr(self getpathfindingradius())) {

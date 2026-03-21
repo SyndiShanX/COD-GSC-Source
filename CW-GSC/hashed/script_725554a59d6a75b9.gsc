@@ -92,9 +92,9 @@ function pain_vox(meansofdeath, weapon) {
   } else if(weapons::ismeleemod(meansofdeath)) {
     var_1f2bdb96 = playerbundle.var_b801796c;
   } else if(weapons::isexplosivedamage(meansofdeath)) {
-    if(weapon.name === # "eq_flash_grenade") {
+    if(weapon.name === #"eq_flash_grenade") {
       var_1f2bdb96 = playerbundle.var_af97fe9b;
-    } else if(weapon.name === # "eq_slow_grenade") {
+    } else if(weapon.name === #"eq_slow_grenade") {
       var_1f2bdb96 = playerbundle.var_ed50283e;
     }
   } else if(weapons::isbulletdamage(meansofdeath)) {

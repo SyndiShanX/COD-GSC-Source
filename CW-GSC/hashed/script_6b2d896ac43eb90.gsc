@@ -78,7 +78,7 @@ function function_e28ce6d9(struct) {
 
   v_trigger_offset = (0, 0, 32);
   trigger = content_manager::spawn_interact(struct, &function_1fab9ee0, #"hash_48951800c1051da7", undefined, 100, undefined, undefined, v_trigger_offset);
-  trigger.var_9d7362a4 = # "hash_48951800c1051da7";
+  trigger.var_9d7362a4 = #"hash_48951800c1051da7";
   trigger usetriggerrequirelookat(0);
   struct zm_utility::function_747180ea(struct.objid, undefined, trigger);
   trigger.scriptmodel = mdl_beacon;
@@ -141,7 +141,7 @@ function function_6c71e778(machine, trigger, var_4bbc024b = 0) {
 
   if(!is_true(var_4bbc024b)) {
     if(isDefined(machine) && isDefined(trigger)) {
-      str_hint = # "hash_48951800c1051da7";
+      str_hint = #"hash_48951800c1051da7";
       trigger sethintstringforplayer(self, str_hint);
 
       if(isDefined(machine.objectiveid)) {
@@ -361,7 +361,7 @@ function function_21ba74a1(machine, trigger) {
     menu = waitresult.menu;
     response = waitresult.response;
 
-    if(menu == # "sr_beacon_menu") {
+    if(menu == #"sr_beacon_menu") {
       switch (waitresult.response) {
         case # "hash_4d6bf94bcefe50c0":
           self notify(#"hash_11ed79645f6768e1");

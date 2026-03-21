@@ -1867,7 +1867,7 @@ function debug_goalradius() {
   guys = getaiarray();
 
   for(i = 0; i < guys.size; i++) {
-    if(guys[i].team == # "axis") {
+    if(guys[i].team == #"axis") {
       print3d(guys[i].origin + (0, 0, 70), isDefined(guys[i].goalradius) ? "<dev string:x38>" + guys[i].goalradius : "<dev string:x38>", (1, 0, 0), 1, 1, 1);
       record3dtext("<dev string:x38>" + guys[i].goalradius, guys[i].origin + (0, 0, 70), (1, 0, 0), "<dev string:x957>");
       continue;

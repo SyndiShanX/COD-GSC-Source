@@ -27,7 +27,7 @@ function private preinit() {
 
 function function_50634409(params) {
   player = util::gethostplayerforbots();
-  team = player.team == # "allies" ? # "axis" : # "allies";
+  team = player.team == #"allies" ? # "axis" : # "allies";
   bot = level bot::add_bot(team);
 
   if(isDefined(bot)) {
@@ -37,7 +37,7 @@ function function_50634409(params) {
 
 function rscaddenemy(params) {
   player = [[level.rat.common.gethostplayer]]();
-  team = # "axis";
+  team = #"axis";
 
   if(isDefined(player.pers[#"team"])) {
     team = util::getotherteam(player.pers[#"team"]);

@@ -23,7 +23,7 @@ __init__() {
   zm_trial::register_challenge(#"hash_3493e071de24d8a1", &on_begin, &on_end);
 }
 
-on_begin(var_53c7b205 = # "1") {
+on_begin(var_53c7b205 = #"1") {
   level.var_53c7b205 = zm_trial::function_5769f26a(var_53c7b205);
 
   foreach(player in getplayers()) {

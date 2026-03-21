@@ -38,9 +38,9 @@ init_shared(bundle_name) {
 
     thread heli_update_global_dvars(debug_refresh);
     level.chaff_offset[#"attack"] = (-130, 0, -140);
-    level.choppercomlinkfriendly = # "veh_t7_drone_hunter";
-    level.choppercomlinkenemy = # "hash_7948c5263c738621";
-    level.chopperregular = # "hash_7948c5263c738621";
+    level.choppercomlinkfriendly = #"veh_t7_drone_hunter";
+    level.choppercomlinkenemy = #"hash_7948c5263c738621";
+    level.chopperregular = #"hash_7948c5263c738621";
     precachehelicopter(level.chopperregular);
     clientfield::register("vehicle", "heli_comlink_bootup_anim", 1, 1, "int");
     clientfield::register("vehicle", "heli_warn_targeted", 1, 1, "int");
@@ -61,8 +61,8 @@ init_shared(bundle_name) {
     level.chopper_fx[#"damage"][#"heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
     level.chopper_fx[#"smoke"][#"trail"] = "destruct/fx8_atk_chppr_exp_trail";
     level.chopper_fx[#"fire"][#"trail"][#"large"] = "killstreaks/fx_heli_smk_trail_engine";
-    level._effect[#"heli_comlink_light"][#"friendly"] = # "hash_33eb8912b6c63ecd";
-    level._effect[#"heli_comlink_light"][#"enemy"] = # "hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"friendly"] = #"hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"enemy"] = #"hash_33eb8912b6c63ecd";
     bundle = struct::get_script_bundle("killstreak", bundle_name);
     killstreaks::register_bundle(bundle, &usekillstreakhelicopter);
     killstreaks::set_team_kill_penalty_scale("helicopter_comlink", 0);
@@ -111,13 +111,13 @@ function_bff5c062(helicopter, attackingplayer) {
 
 precachehelicopter(model) {
   level.vehicle_deathmodel[model] = model;
-  level.heli_sound[#"hit"] = # "evt_helicopter_hit";
-  level.heli_sound[#"hitsecondary"] = # "evt_helicopter_hit";
-  level.heli_sound[#"damaged"] = # "null";
-  level.heli_sound[#"spinloop"] = # "evt_helicopter_spin_loop";
-  level.heli_sound[#"spinstart"] = # "evt_helicopter_spin_start";
-  level.heli_sound[#"crash"] = # "evt_helicopter_midair_exp";
-  level.heli_sound[#"missilefire"] = # "wpn_hellfire_fire_npc";
+  level.heli_sound[#"hit"] = #"evt_helicopter_hit";
+  level.heli_sound[#"hitsecondary"] = #"evt_helicopter_hit";
+  level.heli_sound[#"damaged"] = #"null";
+  level.heli_sound[#"spinloop"] = #"evt_helicopter_spin_loop";
+  level.heli_sound[#"spinstart"] = #"evt_helicopter_spin_start";
+  level.heli_sound[#"crash"] = #"evt_helicopter_midair_exp";
+  level.heli_sound[#"missilefire"] = #"wpn_hellfire_fire_npc";
 }
 
 function_7da89497() {
@@ -786,7 +786,7 @@ cantargetplayer_turret(player, hardpointtype) {
     return false;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return false;
   }
 
@@ -899,7 +899,7 @@ cantargetplayer_missile(player, hardpointtype) {
     return 0;
   }
 
-  if(player.team == # "spectator") {
+  if(player.team == #"spectator") {
     return 0;
   }
 
@@ -1299,13 +1299,13 @@ heli_damage_monitor(hardpointtype) {
         self[[level.var_4d5e1035]](attacker, weapon, type, weapon_damage, event, playercontrolled, hardpointtype);
       }
 
-      weaponstatname = # "destroyed";
+      weaponstatname = #"destroyed";
 
       switch (weapon.name) {
         case # "tow_turret":
         case # "tow_turret_drop":
         case # "auto_tow":
-          weaponstatname = # "kills";
+          weaponstatname = #"kills";
           break;
       }
 
@@ -1321,11 +1321,11 @@ heli_damage_monitor(hardpointtype) {
         case # "helicopter_comlink":
         case # "helicopter":
         case # "inventory_helicopter_comlink":
-          notifystring = # "hash_286f843fea185e5";
+          notifystring = #"hash_286f843fea185e5";
           killstreakreference = "killstreak_helicopter_comlink";
           break;
         case # "supply_drop":
-          notifystring = # "hash_3267fdfd0c2b7fdc";
+          notifystring = #"hash_3267fdfd0c2b7fdc";
           killstreakreference = "killstreak_supply_drop";
           break;
         case # "helicopter_guard":
@@ -1506,7 +1506,7 @@ heli_health(hardpointtype, playernotify) {
     }
 
     if(self.damagetaken >= self.maxhealth * 0.66 && damagestate >= 2) {
-      if(isDefined(self.vehicletype) && self.vehicletype == # "heli_player_gunner_mp") {
+      if(isDefined(self.vehicletype) && self.vehicletype == #"heli_player_gunner_mp") {
         playFXOnTag(level.chopper_fx[#"damage"][#"heavy_smoke"], self, "tag_origin");
       } else {
         playFXOnTag(level.chopper_fx[#"damage"][#"heavy_smoke"], self, "tag_engine_left");
@@ -1520,7 +1520,7 @@ heli_health(hardpointtype, playernotify) {
     }
 
     if(self.damagetaken >= self.maxhealth * 0.33 && damagestate == 3) {
-      if(isDefined(self.vehicletype) && self.vehicletype == # "heli_player_gunner_mp") {
+      if(isDefined(self.vehicletype) && self.vehicletype == #"heli_player_gunner_mp") {
         playFXOnTag(level.chopper_fx[#"damage"][#"light_smoke"], self, "tag_origin");
       } else {
         playFXOnTag(level.chopper_fx[#"damage"][#"light_smoke"], self, "tag_main_rotor");
@@ -1711,7 +1711,7 @@ heli_secondary_explosions() {
   playFXOnTag(level.chopper_fx[#"explode"][#"large"], self, self checkhelicoptertag("tag_engine_left"));
   self playSound(level.heli_sound[#"hit"]);
 
-  if(isDefined(self.vehicletype) && self.vehicletype == # "heli_player_gunner_mp") {
+  if(isDefined(self.vehicletype) && self.vehicletype == #"heli_player_gunner_mp") {
     self thread trail_fx(level.chopper_fx[#"smoke"][#"trail"], self checkhelicoptertag("tag_engine_right"), "stop tail smoke");
   } else {
     self thread trail_fx(level.chopper_fx[#"smoke"][#"trail"], self checkhelicoptertag("tail_rotor_jnt"), "stop tail smoke");
@@ -1799,9 +1799,9 @@ function_e1058a3e() {
 
   if(isDefined(self.helitype) && self.helitype == "littlebird") {
     playFX(level.chopper_fx[#"explode"][#"guard"], self.origin, forward);
-  } else if(isDefined(self.vehicletype) && self.vehicletype == # "heli_player_gunner_mp") {
+  } else if(isDefined(self.vehicletype) && self.vehicletype == #"heli_player_gunner_mp") {
     playFX(level.chopper_fx[#"explode"][#"gunner"], self.origin, forward);
-  } else if(isDefined(self.vehicletype) && self.vehicletype == # "vehicle_t8_mil_helicopter_swat_transport") {
+  } else if(isDefined(self.vehicletype) && self.vehicletype == #"vehicle_t8_mil_helicopter_swat_transport") {
     fxpos = self gettagorigin("tag_deathfx");
 
     if(!isDefined(fxpos)) {
@@ -2247,7 +2247,7 @@ heli_get_protect_spot(protectdest, overrideradius, heli_team) {
   heightmin = level.var_17076139;
   heightmax = level.var_c2bbc18f;
 
-  if(heli_team == # "axis") {
+  if(heli_team == #"axis") {
     assert(isDefined(level.var_d9c77d70));
     heightmin += level.var_d9c77d70;
     heightmax += level.var_d9c77d70;
@@ -2310,7 +2310,7 @@ function_438e7b44(startnode, protectdest, hardpointtype, heli_team) {
   nextnode = startnode;
   heightoffset = 0;
 
-  if(heli_team == # "axis") {
+  if(heli_team == #"axis") {
     heightoffset = 400;
   }
 

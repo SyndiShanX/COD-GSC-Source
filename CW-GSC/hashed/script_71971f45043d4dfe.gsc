@@ -90,11 +90,11 @@ function function_a485d734() {
     self.org thread namespace_ec06fe4a::function_d55f042c(self, "death");
   }
 
-  if(!isDefined(self.subarchetype) || self.subarchetype == # "hash_5653bbc44a034094") {
+  if(!isDefined(self.subarchetype) || self.subarchetype == #"hash_5653bbc44a034094") {
     self.var_53bac70d = 1;
   }
 
-  if(!isDefined(self.subarchetype) || self.subarchetype == # "hash_70162f4bc795092") {
+  if(!isDefined(self.subarchetype) || self.subarchetype == #"hash_70162f4bc795092") {
     self.var_22b8f534 = 1;
   }
 
@@ -953,7 +953,7 @@ function private function_aed09e18(var_2fa3c4c9, location) {
 
   if(isDefined(steiner)) {
     steiner forceteleport(location.origin, location.angles);
-    steiner.team = # "allies";
+    steiner.team = #"allies";
     steiner.ignoreall = 1;
     steiner.ignoreme = 1;
     steiner.ignore_nuke = 1;
@@ -994,7 +994,7 @@ function private function_46d99f6b() {
   var_ddb534a3 = [];
 
   foreach(steiner in steiners) {
-    if(isalive(steiner) && steiner.team == # "allies") {
+    if(isalive(steiner) && steiner.team == #"allies") {
       if(!isDefined(var_ddb534a3)) {
         var_ddb534a3 = [];
       } else if(!isarray(var_ddb534a3)) {

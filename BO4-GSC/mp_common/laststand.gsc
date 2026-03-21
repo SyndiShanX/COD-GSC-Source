@@ -233,7 +233,7 @@ function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   self.laststandparams.bledout = 0;
   self.laststandparams.var_59b19c1b = 1;
 
-  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === # "planemortar") {
+  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === #"planemortar") {
     self.laststandparams.killcam_entity_info_cached = killcam::get_killcam_entity_info(attacker, einflictor, weapon);
   }
 }
@@ -261,7 +261,7 @@ function_67b38e11(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   self.laststandparams.vdir = vdir;
   self.laststandparams.shitloc = shitloc;
 
-  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === # "planemortar") {
+  if(isDefined(einflictor) && isDefined(einflictor.item) && einflictor.item.name === #"planemortar") {
     self.laststandparams.killcam_entity_info_cached = killcam::get_killcam_entity_info(attacker, einflictor, weapon);
   }
 }
@@ -680,7 +680,7 @@ respawn_player_after_time(n_time_seconds) {
   level endon(#"objective_changed");
   wait n_time_seconds;
 
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     self thread globallogic_spawn::waitandspawnclient();
   }
 }

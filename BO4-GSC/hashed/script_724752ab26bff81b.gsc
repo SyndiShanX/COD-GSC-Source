@@ -345,48 +345,48 @@ function_c3076788(e_player) {
 
   switch (e_player.var_bec34462.n_id) {
     case 0:
-      str_hint = # "hash_3f0cb3a3a888e340";
-      var_306b9dd6 = # "hash_351a359dee18e66c";
+      str_hint = #"hash_3f0cb3a3a888e340";
+      var_306b9dd6 = #"hash_351a359dee18e66c";
       break;
     case 1:
-      str_hint = # "hash_45e0e71f5c4ad089";
-      var_306b9dd6 = # "hash_2c1852a26bee7917";
+      str_hint = #"hash_45e0e71f5c4ad089";
+      var_306b9dd6 = #"hash_2c1852a26bee7917";
       break;
     case 2:
-      str_hint = # "hash_314a7588b45256eb";
-      var_306b9dd6 = # "hash_6831cfd35264e1";
+      str_hint = #"hash_314a7588b45256eb";
+      var_306b9dd6 = #"hash_6831cfd35264e1";
       var_339390e4 = w_give.displayname;
       break;
     case 3:
-      str_hint = # "hash_53f9aac41c4fa384";
-      var_306b9dd6 = # "hash_3a6067fdb28789e8";
+      str_hint = #"hash_53f9aac41c4fa384";
+      var_306b9dd6 = #"hash_3a6067fdb28789e8";
       var_339390e4 = w_take.displayname;
       break;
     case 4:
-      str_hint = # "hash_7aea9fef103ab16";
-      var_306b9dd6 = # "hash_3e916dea9d22f1b2";
+      str_hint = #"hash_7aea9fef103ab16";
+      var_306b9dd6 = #"hash_3e916dea9d22f1b2";
       var_339390e4 = w_take.displayname;
       var_45d63569 = w_give.displayname;
       break;
     case 5:
-      str_hint = # "hash_1d175f6387d44262";
-      var_306b9dd6 = # "hash_6686ce3bf4639b76";
+      str_hint = #"hash_1d175f6387d44262";
+      var_306b9dd6 = #"hash_6686ce3bf4639b76";
       var_339390e4 = w_give.displayname;
       break;
     case 6:
-      str_hint = # "hash_68ae5772aec47222";
-      var_306b9dd6 = # "hash_58bd37425bd02736";
+      str_hint = #"hash_68ae5772aec47222";
+      var_306b9dd6 = #"hash_58bd37425bd02736";
       var_339390e4 = w_take.displayname;
       break;
     case 7:
-      str_hint = # "hash_172253c9314825fc";
-      var_306b9dd6 = # "hash_71016e43b6fe0570";
+      str_hint = #"hash_172253c9314825fc";
+      var_306b9dd6 = #"hash_71016e43b6fe0570";
       var_339390e4 = w_give.displayname;
       var_45d63569 = w_take.displayname;
       break;
     case 8:
-      str_hint = # "hash_28c1446ca1a2440c";
-      var_306b9dd6 = # "hash_2df82d83303d3d40";
+      str_hint = #"hash_28c1446ca1a2440c";
+      var_306b9dd6 = #"hash_2df82d83303d3d40";
       var_339390e4 = w_give.displayname;
       var_45d63569 = w_take.displayname;
       break;
@@ -394,7 +394,7 @@ function_c3076788(e_player) {
       return false;
   }
 
-  if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
+  if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
     self sethintstring("");
   } else if(isDefined(var_45d63569)) {
     self sethintstring(zm_utility::function_d6046228(str_hint, var_306b9dd6), var_339390e4, var_45d63569);
@@ -414,7 +414,7 @@ function_7d123028() {
     s_notify = self waittill(#"trigger_activated");
     e_player = s_notify.e_who;
 
-    if(isPlayer(e_player) && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== # "zhield_riot_dw") {
+    if(isPlayer(e_player) && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== #"zhield_riot_dw") {
       function_75e61716(e_player);
     }
   }

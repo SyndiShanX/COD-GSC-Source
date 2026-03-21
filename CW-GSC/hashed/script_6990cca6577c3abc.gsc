@@ -86,7 +86,7 @@ function private preinit() {
   }
 
   if(!isinarray(level.var_faabb06f, #"hash_18696150427f2efb")) {
-    level.var_faabb06f[level.var_faabb06f.size] = # "hash_18696150427f2efb";
+    level.var_faabb06f[level.var_faabb06f.size] = #"hash_18696150427f2efb";
   }
 
   if(!isDefined(level.var_faabb06f)) {
@@ -96,7 +96,7 @@ function private preinit() {
   }
 
   if(!isinarray(level.var_faabb06f, #"hash_7eab88123b09e2c")) {
-    level.var_faabb06f[level.var_faabb06f.size] = # "hash_7eab88123b09e2c";
+    level.var_faabb06f[level.var_faabb06f.size] = #"hash_7eab88123b09e2c";
   }
 
   zm_weapons::function_90953640(level.axe_gun, 5, float(function_60d95f53()) / 1000);
@@ -149,7 +149,7 @@ function function_5a35d482(weapon) {
     var_94459b80 = 0;
   }
 
-  if(weapon.name === # "ww_axe_gun_melee_t9" || weapon.name === # "ww_axe_gun_melee_t9_upgraded") {
+  if(weapon.name === #"ww_axe_gun_melee_t9" || weapon.name === #"ww_axe_gun_melee_t9_upgraded") {
     smg_weapon = weapon.altweapon;
   } else {
     smg_weapon = weapon;
@@ -170,7 +170,7 @@ function function_5a35d482(weapon) {
 }
 
 function function_f53bdacf(weapon) {
-  if(weapon.name === # "ww_axe_gun_melee_t9" || weapon.name === # "ww_axe_gun_melee_t9_upgraded") {
+  if(weapon.name === #"ww_axe_gun_melee_t9" || weapon.name === #"ww_axe_gun_melee_t9_upgraded") {
     smg_weapon = weapon.altweapon;
   } else {
     smg_weapon = weapon;
@@ -799,7 +799,7 @@ function function_24e9dbc2(position, array, var_e7b59cda) {
 }
 
 function function_709843c2(params) {
-  if(!is_true(self.zm_ai_category === # "normal")) {
+  if(!is_true(self.zm_ai_category === #"normal")) {
     return;
   }
 
@@ -971,7 +971,7 @@ function on_item_pickup(params) {
       return;
     }
 
-    if(item.itementry.name === # "axe_gun_energetic_shard_item_t9") {
+    if(item.itementry.name === #"axe_gun_energetic_shard_item_t9") {
       self.var_c926b4fc++;
 
       if(self.var_c926b4fc > 5) {
@@ -985,7 +985,7 @@ function on_item_pickup(params) {
       return;
     }
 
-    if(item.itementry.name === # "axe_gun_volatile_crystal_item_t9") {
+    if(item.itementry.name === #"axe_gun_volatile_crystal_item_t9") {
       var_3c4fcfcf = self function_49fa2899();
 
       if(!isDefined(var_3c4fcfcf)) {

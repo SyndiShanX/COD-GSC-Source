@@ -35,7 +35,7 @@ class class_d28acd06: class_9e71c1a2 {
   function _init() {
     var_1c4a269e = 1;
     var_7529951f = 1;
-    var_b4563cfa = # "hash_74dc1865536890ee";
+    var_b4563cfa = #"hash_74dc1865536890ee";
 
     if(sessionmodeiscampaigngame() && isDefined(level.var_6a7fb742)) {
       foreach(interact_location in var_63e8057) {
@@ -46,7 +46,7 @@ class class_d28acd06: class_9e71c1a2 {
           if(isDefined(bundle.objective)) {
             image = function_b91948e(bundle.objective);
 
-            if(image == # "") {
+            if(image == #"") {
               image = undefined;
             }
           }

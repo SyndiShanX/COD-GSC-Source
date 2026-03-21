@@ -53,7 +53,7 @@ function private function_a2eec6c2(killstreaktype, killstreakweapon) {
   self endon(#"disconnect");
   waitresult = self waittill(#"weapon_fired", #"weapon_change", #"airsupport_interference");
 
-  if(waitresult._notify === # "airsupport_interference") {
+  if(waitresult._notify === #"airsupport_interference") {
     self notify(#"cancel_selection");
     currentweapon = self getcurrentweapon();
 

@@ -224,7 +224,7 @@ function private locomotionstairsstart(behaviortreeentity) {
   behaviortreeentity._stairsstartnode = startnode;
   behaviortreeentity._stairsendnode = endnode;
 
-  if(startnode.type == # "begin") {
+  if(startnode.type == #"begin") {
     direction = "staircase_down";
   } else {
     direction = "staircase_up";

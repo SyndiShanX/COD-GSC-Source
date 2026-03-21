@@ -34,9 +34,9 @@ function function_3022f6ba(eventstruct) {
         camera = "dom_e_cam";
         break;
       case # "dom_headquarter":
-        if(eventstruct.team == # "allies") {
+        if(eventstruct.team == #"allies") {
           camera = "dom_allies_hq_cam";
-        } else if(eventstruct.team == # "axis") {
+        } else if(eventstruct.team == #"axis") {
           camera = "dom_axis_hq_cam";
         }
 

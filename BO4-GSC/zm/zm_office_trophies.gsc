@@ -94,7 +94,7 @@ function_8addaa01(params) {
     return;
   }
 
-  if(self.archetype != # "nova_crawler" || params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET") {
+  if(self.archetype != #"nova_crawler" || params.smeansofdeath == "MOD_PISTOL_BULLET" || params.smeansofdeath == "MOD_RIFLE_BULLET") {
     return;
   }
 

@@ -26,7 +26,7 @@ function private preinit() {
 }
 
 function init() {
-  game.strings[#"autobalance"] = # "mp/autobalance_now";
+  game.strings[#"autobalance"] = #"mp/autobalance_now";
   level.teambalance = getdvarint(#"scr_teambalance", 0);
   level.teambalancetimer = 0;
   level.timeplayedcap = getdvarint(#"scr_timeplayedcap", 1800);
@@ -98,7 +98,7 @@ function function_badbaae6() {
   }
 
   for(;;) {
-    if(game.state == # "playing") {
+    if(game.state == #"playing") {
       function_351a57a9();
     }
 
@@ -172,7 +172,7 @@ function update_played_time() {
 }
 
 function update_time() {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -249,10 +249,10 @@ function track_free_played_time() {
   self.timeplayed[#"alive"] = 0;
 
   for(;;) {
-    if(game.state == # "playing") {
+    if(game.state == #"playing") {
       team = self.pers[#"team"];
 
-      if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != # "spectator") {
+      if(isDefined(team) && isDefined(level.teams[team]) && self.sessionteam != #"spectator") {
         if(!isDefined(self.timeplayed[team])) {
           self.timeplayed[team] = 0;
         }
@@ -277,15 +277,15 @@ function getteamindex(team) {
     return 0;
   }
 
-  if(team == # "none") {
+  if(team == #"none") {
     return 0;
   }
 
-  if(team == # "allies") {
+  if(team == #"allies") {
     return 1;
   }
 
-  if(team == # "axis") {
+  if(team == #"axis") {
     return 2;
   }
 
@@ -298,7 +298,7 @@ function getenemyteam(player_team) {
       continue;
     }
 
-    if(team == # "spectator") {
+    if(team == #"spectator") {
       continue;
     }
 
@@ -312,7 +312,7 @@ function getenemyplayers() {
   enemies = [];
 
   foreach(player in level.players) {
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       continue;
     }
 

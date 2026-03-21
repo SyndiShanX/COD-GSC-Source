@@ -112,7 +112,7 @@ function register(prompt, var_92bb1cb1, button_text, notify_string, var_9a98e590
   };
 }
 
-function create(prompt = # "use", prompt_text, complete_callback, var_531201f1, notify_string, offset, tag, var_754bedbb, var_de6f0004, var_4ac77177, var_71b9f0c0, var_87c991f3, var_5e83875a, var_8ce60046, var_9a27c4ee, var_be77841a, flags, var_c9643122) {
+function create(prompt = #"use", prompt_text, complete_callback, var_531201f1, notify_string, offset, tag, var_754bedbb, var_de6f0004, var_4ac77177, var_71b9f0c0, var_87c991f3, var_5e83875a, var_8ce60046, var_9a27c4ee, var_be77841a, flags, var_c9643122) {
   prompt_struct = {
     #prompt_text: prompt_text, #complete_callback: complete_callback, #var_531201f1: var_531201f1, #notify_string: notify_string, #offset: offset, #tag: tag, #var_754bedbb: var_754bedbb, #var_de6f0004: var_de6f0004, #var_4ac77177: var_4ac77177, #var_71b9f0c0: var_71b9f0c0, #var_87c991f3: var_87c991f3, #var_5e83875a: var_5e83875a, #var_8ce60046: var_8ce60046, #var_9a27c4ee: var_9a27c4ee, #var_be77841a: var_be77841a, #flags: flags, #var_c9643122: var_c9643122
   };
@@ -1105,7 +1105,7 @@ function private function_e8006b47() {
       break;
     }
 
-    ease_type = # "logarithmic";
+    ease_type = #"logarithmic";
     ease_in = 1;
     ease_out = 1;
     var_249ae409 = 10;
@@ -1141,7 +1141,7 @@ function private function_e8006b47() {
     if(var_b48ce78 > var_3714e9ea) {
       var_203de47b = math::clamp((var_b48ce78 - dist) / (var_b48ce78 - var_3714e9ea), 0, 1);
 
-      if(ease_type == # "power" || ease_type == # "exponential" || ease_type == # "logarithmic") {
+      if(ease_type == #"power" || ease_type == #"exponential" || ease_type == #"logarithmic") {
         alpha = [[level.ease_funcs[ease_type]]](var_81f357d7, max_alpha, var_203de47b, ease_in, ease_out, var_249ae409);
       } else {
         alpha = [[level.ease_funcs[ease_type]]](var_81f357d7, max_alpha, var_203de47b, ease_in, ease_out);
@@ -1269,7 +1269,7 @@ function private function_fcef5f5b(prompt, var_62bce5b6, player) {
 function private function_2af9819b(prompt, var_62bce5b6, player) {
   var_de6f0004 = int((isDefined(var_62bce5b6.var_de6f0004) ? var_62bce5b6.var_de6f0004 : 0.25) * 1000);
   var_c9643122 = isDefined(var_62bce5b6.var_c9643122) ? var_62bce5b6.var_c9643122 : 0;
-  var_ab23834f = prompt == # "use" || prompt == # "use_tap";
+  var_ab23834f = prompt == #"use" || prompt == #"use_tap";
   return !player gamepadusedlast() && !player function_5c0f244() && !var_c9643122 && var_de6f0004 <= level.var_503dffcb[#"cg_cpmaxholddurationignore"] && var_ab23834f;
 }
 
@@ -1281,7 +1281,7 @@ function private function_efb98d80(prompt, var_62bce5b6, player) {
   });
   bb::function_a0d15803(var_62bce5b6.prompt_text, self function_334e020(), player);
 
-  if(prompt == # "use" || prompt == # "use_tap") {
+  if(prompt == #"use" || prompt == #"use_tap") {
     player function_58b29f4f();
   }
 

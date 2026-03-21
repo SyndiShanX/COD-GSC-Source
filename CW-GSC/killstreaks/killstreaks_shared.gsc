@@ -122,12 +122,12 @@ function private killstreak_init(killstreak_type) {
 }
 
 function private register_weapon(killstreak_type, bundle, weapon) {
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
   assert(isDefined(killstreak_type), "<dev string:x79>");
-  assert(weapon.name != # "none");
+  assert(weapon.name != #"none");
   assert(!isDefined(level.killstreakweapons[weapon]), "<dev string:xdb>");
   level.killstreaks[killstreak_type].weapon = weapon;
   level.killstreakweapons[weapon] = killstreak_type;
@@ -196,7 +196,7 @@ function private function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use
 function register_bundle(bundle, killstreak_use_function) {
   function_e48aca4d(bundle.kstype, bundle, bundle.ksweapon, bundle.ksvehicle, killstreak_use_function, 0);
 
-  if(isDefined(bundle.ksinventoryweapon) && bundle.ksinventoryweapon.name != # "none") {
+  if(isDefined(bundle.ksinventoryweapon) && bundle.ksinventoryweapon.name != #"none") {
     function_e48aca4d("inventory_" + bundle.kstype, bundle, bundle.ksinventoryweapon, undefined, killstreak_use_function, 1);
 
     if(bundle.ksinventoryweapon.iscarriedkillstreak && bundle.ksweapon.iscarriedkillstreak) {
@@ -331,7 +331,7 @@ function devgui_scorestreak_command(killstreaktype, title, command) {
   killstreak_weapon = get_killstreak_weapon(killstreaktype);
 
   if(isDefined(killstreak_weapon) && killstreak_weapon != level.weaponnone) {
-    if(killstreak_weapon.displayname == # "") {
+    if(killstreak_weapon.displayname == #"") {
       display_name += "<dev string:x28a>";
     } else {
       display_name = makelocalizedstring(killstreak_weapon.displayname);
@@ -1276,7 +1276,7 @@ function wait_till_heavy_weapon_is_fully_on(weapon) {
 }
 
 function function_4f415d8e(params) {
-  if(game.state == # "postgame" || !isDefined(self)) {
+  if(game.state == #"postgame" || !isDefined(self)) {
     return;
   }
 
@@ -1367,7 +1367,7 @@ function function_4167ea4e(params) {
     }
   }
 
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     if(var_783deeed || weapon === level.weaponnone) {
       self switch_to_last_non_killstreak_weapon();
 
@@ -1598,7 +1598,7 @@ function should_give_killstreak(weapon) {
 }
 
 function play_killstreak_ready_sfx(killstreaktype) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -2225,7 +2225,7 @@ function get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bul
         break;
       }
 
-      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == # "remote_missile_missile") {
+      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == #"remote_missile_missile") {
         damage = self.remotemissiledamage;
       } else if(isDefined(self.rocketdamage)) {
         damage = self.rocketdamage;
@@ -2394,7 +2394,7 @@ function private init_ride_killstreak_internal(streak, always_allow) {
       return "disconnect";
     }
 
-    if(!isDefined(self.team) || self.team == # "spectator") {
+    if(!isDefined(self.team) || self.team == #"spectator") {
       return "fail";
     }
 
@@ -2427,7 +2427,7 @@ function private init_ride_killstreak_internal(streak, always_allow) {
   if(var_c3d5a8a9._notify != "disconnect") {
     self thread clear_ride_intro(1);
 
-    if(!isDefined(self.team) || self.team == # "spectator") {
+    if(!isDefined(self.team) || self.team == #"spectator") {
       return "fail";
     }
   }
@@ -3279,13 +3279,13 @@ function function_fc82c544(killstreaktype) {
     player.var_8e94d71c[killstreak_weapon] = undefined;
   }
 
-  if(result._notify === # "death") {
+  if(result._notify === #"death") {
     if(isDefined(level.var_1d971504)) {
       [[level.var_1d971504]](result.attacker, player, killstreak_weapon);
     }
   }
 
-  if((isDefined(result.last_weapon) || result._notify === # "death") && isDefined(player)) {
+  if((isDefined(result.last_weapon) || result._notify === #"death") && isDefined(player)) {
     var_37b0037 = player function_ea21be29(killstreaktype, killstreak_weapon, result._notify === "death");
 
     if(!var_37b0037) {
@@ -3299,8 +3299,8 @@ function function_fc82c544(killstreaktype) {
       var_8756d70f = function_cb0594d5();
       function_92d1707f(var_8756d70f, mpkillstreakuses);
 
-      if(result._notify === # "death") {
-        var_e72137e8 = # "player_died";
+      if(result._notify === #"death") {
+        var_e72137e8 = #"player_died";
 
         if(isDefined(result.weapon)) {
           player function_4aad9803(killstreaktype, -1, result.weapon);

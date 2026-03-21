@@ -189,13 +189,13 @@ function private function_d4db3361() {
 }
 
 function private function_a79f6dfb() {
-  if(level.gametype == # "dropkick") {
+  if(level.gametype == #"dropkick") {
     bot_action::register_weapon(#"hash_29ab150f9f8964f", &function_6aa40bb4, &use_pistol);
   }
 }
 
 function private function_66e1fe37(actionparams) {
-  actionparams.debug[actionparams.debug.size] = # "not implemented";
+  actionparams.debug[actionparams.debug.size] = #"not implemented";
 
   return undefined;
 }
@@ -206,7 +206,7 @@ function private function_319dfab4(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -245,7 +245,7 @@ function private function_aadbe8c(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -284,7 +284,7 @@ function private function_183e848d(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -323,7 +323,7 @@ function private function_c75d81ab(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -362,7 +362,7 @@ function private function_b9557a8a(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -401,7 +401,7 @@ function private function_6aa40bb4(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -440,7 +440,7 @@ function private function_408f0f07(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -449,7 +449,7 @@ function private function_408f0f07(actionparams) {
   damage = self function_6b54ab21(weapon);
 
   if(damage <= 0) {
-    actionparams.debug[actionparams.debug.size] = # "hash_6100adb01aed83f8";
+    actionparams.debug[actionparams.debug.size] = #"hash_6100adb01aed83f8";
 
     return undefined;
   }
@@ -488,7 +488,7 @@ function private function_3929fa65(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -500,21 +500,21 @@ function private function_3929fa65(actionparams) {
     target = self.enemy getvehicleoccupied();
   }
 
-  if(weapon.lockontype == # "legacy single") {
+  if(weapon.lockontype == #"legacy single") {
     if(target_istarget(target)) {
-      actionparams.debug[actionparams.debug.size] = # "hash_1c1fadf51fa38d5f";
+      actionparams.debug[actionparams.debug.size] = #"hash_1c1fadf51fa38d5f";
 
       return 91;
     }
   }
 
   if(isvehicle(target)) {
-    actionparams.debug[actionparams.debug.size] = # "vehicle enemy";
+    actionparams.debug[actionparams.debug.size] = #"vehicle enemy";
 
     return self function_4b1db2f8(actionparams, 80, 90, 90);
   }
 
-  actionparams.debug[actionparams.debug.size] = # "hash_18db4acb1408239d";
+  actionparams.debug[actionparams.debug.size] = #"hash_18db4acb1408239d";
 
   return 60;
 }
@@ -533,7 +533,7 @@ function private use_launcher(actionparams) {
       target = self.enemy getvehicleoccupied();
     }
 
-    lockon = target_istarget(target) && weapon.lockontype != # "none";
+    lockon = target_istarget(target) && weapon.lockontype != #"none";
     self function_bbef6e21();
 
     if(lockon) {
@@ -566,7 +566,7 @@ function private function_97bc2873(actionparams) {
   weapon = actionparams.weapon;
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -586,7 +586,7 @@ function private function_e105d8c8(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -596,14 +596,14 @@ function private function_e105d8c8(actionparams) {
   }
 
   if(self.bot.enemydist <= 600) {
-    actionparams.debug[actionparams.debug.size] = # "hash_71800c4878bd026d";
+    actionparams.debug[actionparams.debug.size] = #"hash_71800c4878bd026d";
 
     return undefined;
   }
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = # "hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
 
       return undefined;
     }
@@ -630,7 +630,7 @@ function private function_16906804(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -642,14 +642,14 @@ function private function_16906804(actionparams) {
   weapon = actionparams.weapon;
 
   if(self.bot.enemydist <= weapon.explosionradius * 1.2) {
-    actionparams.debug[actionparams.debug.size] = # "hash_71800c4878bd026d";
+    actionparams.debug[actionparams.debug.size] = #"hash_71800c4878bd026d";
 
     return undefined;
   }
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = # "hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
 
       return undefined;
     }
@@ -672,7 +672,7 @@ function private function_8640f24(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -682,14 +682,14 @@ function private function_8640f24(actionparams) {
   }
 
   if(self.bot.enemydist <= 600) {
-    actionparams.debug[actionparams.debug.size] = # "hash_71800c4878bd026d";
+    actionparams.debug[actionparams.debug.size] = #"hash_71800c4878bd026d";
 
     return undefined;
   }
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = # "hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
 
       return undefined;
     }
@@ -712,7 +712,7 @@ function private function_d3c685b8(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -724,14 +724,14 @@ function private function_d3c685b8(actionparams) {
   weapon = actionparams.weapon;
 
   if(self.bot.enemydist <= weapon.explosionradius * 0.6) {
-    actionparams.debug[actionparams.debug.size] = # "hash_71800c4878bd026d";
+    actionparams.debug[actionparams.debug.size] = #"hash_71800c4878bd026d";
 
     return undefined;
   }
 
   if(self.bot.enemyvisible) {
     if(!self function_754cc239(actionparams)) {
-      actionparams.debug[actionparams.debug.size] = # "hash_7ff8e322102305fd";
+      actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
 
       return undefined;
     }
@@ -755,10 +755,10 @@ function private function_bd46948a(actionparams) {
 
   healthratio = self.health / self.maxhealth;
 
-  actionparams.debug[actionparams.debug.size] = # "health: " + self.health + "<dev string:x38>" + self.maxhealth + "<dev string:x3d>" + string(healthratio);
+  actionparams.debug[actionparams.debug.size] = #"health: " + self.health + "<dev string:x38>" + self.maxhealth + "<dev string:x3d>" + string(healthratio);
 
   if(is_true(self.heal.enabled)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_79840b33c01531d9";
+    actionparams.debug[actionparams.debug.size] = #"hash_79840b33c01531d9";
 
     return undefined;
   }
@@ -767,10 +767,10 @@ function private function_bd46948a(actionparams) {
     return undefined;
   }
 
-  actionparams.debug[actionparams.debug.size] = # "hash_203858dc9db13ce9";
+  actionparams.debug[actionparams.debug.size] = #"hash_203858dc9db13ce9";
 
   if(self.bot.enemyvisible) {
-    actionparams.debug[actionparams.debug.size] = # "hash_7ff8e322102305fd";
+    actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
 
     return undefined;
   }
@@ -793,7 +793,7 @@ function private function_22630da6(actionparams) {
   }
 
   if(!self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -803,7 +803,7 @@ function private function_22630da6(actionparams) {
   }
 
   if(self.bot.enemyvisible) {
-    actionparams.debug[actionparams.debug.size] = # "hash_7ff8e322102305fd";
+    actionparams.debug[actionparams.debug.size] = #"hash_7ff8e322102305fd";
 
     return undefined;
   }
@@ -811,7 +811,7 @@ function private function_22630da6(actionparams) {
   weapon = actionparams.weapon;
 
   if(self.bot.enemydist <= weapon.explosionradius * 0.6) {
-    actionparams.debug[actionparams.debug.size] = # "hash_71800c4878bd026d";
+    actionparams.debug[actionparams.debug.size] = #"hash_71800c4878bd026d";
 
     return undefined;
   }
@@ -831,7 +831,7 @@ function private function_643065f9(actionparams) {
   }
 
   if(!self.bot.enemyvisible) {
-    actionparams.debug[actionparams.debug.size] = # "hash_53aa4f678b9a027c";
+    actionparams.debug[actionparams.debug.size] = #"hash_53aa4f678b9a027c";
 
     return undefined;
   }
@@ -841,7 +841,7 @@ function private function_643065f9(actionparams) {
   }
 
   if(self.bot.enemydist <= 200) {
-    actionparams.debug[actionparams.debug.size] = # "hash_71800c4878bd026d";
+    actionparams.debug[actionparams.debug.size] = #"hash_71800c4878bd026d";
 
     return undefined;
   }
@@ -869,7 +869,7 @@ function private function_f023f6f9(actionparams) {
   }
 
   if(isDefined(level.activecounteruavs) && isDefined(level.activecounteruavs[self.team]) && level.activecounteruavs[self.team] > 0) {
-    actionparams.debug[actionparams.debug.size] = # "hash_2edecc464042406a";
+    actionparams.debug[actionparams.debug.size] = #"hash_2edecc464042406a";
 
     return undefined;
   }
@@ -1028,7 +1028,7 @@ function private function_d0cdb00e(actionparams) {
 
 function private function_8d7445b8(actionparams) {
   if(!isarray(level.var_500867a0)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_511cde69ac409b1b";
+    actionparams.debug[actionparams.debug.size] = #"hash_511cde69ac409b1b";
 
     return undefined;
   }
@@ -1060,7 +1060,7 @@ function private function_8d7445b8(actionparams) {
   }
 
   if(!targetfound) {
-    actionparams.debug[actionparams.debug.size] = # "hash_66f0e93a3c9b4252";
+    actionparams.debug[actionparams.debug.size] = #"hash_66f0e93a3c9b4252";
 
     return undefined;
   }
@@ -1081,7 +1081,7 @@ function private function_f70eb03b(actionparams) {
   weapon = actionparams.weapon;
 
   if(self getcurrentweapon() == weapon) {
-    actionparams.debug[actionparams.debug.size] = # "in use";
+    actionparams.debug[actionparams.debug.size] = #"in use";
 
     return 100;
   }
@@ -1122,7 +1122,7 @@ function private function_eb23222e(actionparams) {
   weapon = actionparams.weapon;
 
   if(self getcurrentweapon() == weapon) {
-    actionparams.debug[actionparams.debug.size] = # "in use";
+    actionparams.debug[actionparams.debug.size] = #"in use";
 
     return 100;
   }
@@ -1186,7 +1186,7 @@ function private function_f1fb9968(actionparams) {
   weapon = actionparams.weapon;
 
   if(self getcurrentweapon() == weapon) {
-    actionparams.debug[actionparams.debug.size] = # "in progress";
+    actionparams.debug[actionparams.debug.size] = #"in progress";
 
     return 100;
   }
@@ -1210,7 +1210,7 @@ function private remote_missile(actionparams) {
 
   target = undefined;
 
-  while(isDefined(self.rocket) && self.rocket.targetname == # "remote_missile") {
+  while(isDefined(self.rocket) && self.rocket.targetname == #"remote_missile") {
     if(!isDefined(target) || !isalive(target)) {
       targets = [];
       players = function_f6f34851(self.team);
@@ -1237,7 +1237,7 @@ function private remote_missile(actionparams) {
 }
 
 function private function_17d6fe21(notifyhash) {
-  if(isDefined(self.rocket) && self.rocket.targetname == # "remote_missile") {
+  if(isDefined(self.rocket) && self.rocket.targetname == #"remote_missile") {
     self.rocket missile_settarget(undefined);
   }
 }
@@ -1332,7 +1332,7 @@ function private function_25933177(actionparams) {
   weapon = actionparams.weapon;
 
   if(self getcurrentweapon() == weapon) {
-    actionparams.debug[actionparams.debug.size] = # "in use";
+    actionparams.debug[actionparams.debug.size] = #"in use";
 
     return 100;
   }
@@ -1423,7 +1423,7 @@ function private function_784440a3(actionparams) {
   weapon = actionparams.weapon;
 
   if(self getcurrentweapon() == weapon) {
-    actionparams.debug[actionparams.debug.size] = # "in progress";
+    actionparams.debug[actionparams.debug.size] = #"in progress";
 
     return 100;
   }
@@ -1432,8 +1432,8 @@ function private function_784440a3(actionparams) {
     return undefined;
   }
 
-  if(self.combatstate != # "combat_state_idle") {
-    actionparams.debug[actionparams.debug.size] = # "hash_5ff27b6b0a6d2c08";
+  if(self.combatstate != #"combat_state_idle") {
+    actionparams.debug[actionparams.debug.size] = #"hash_5ff27b6b0a6d2c08";
 
     return undefined;
   }
@@ -1457,14 +1457,14 @@ function private function_c329e7cf(actionparams) {
     return undefined;
   }
 
-  if(self.bot.order !== # "capture" && self.bot.order !== # "defend") {
-    actionparams.debug[actionparams.debug.size] = # "hash_6ef3b55c5d05427a";
+  if(self.bot.order !== #"capture" && self.bot.order !== #"defend") {
+    actionparams.debug[actionparams.debug.size] = #"hash_6ef3b55c5d05427a";
 
     return undefined;
   }
 
   if(self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "hash_b0e78729bd8dfce";
+    actionparams.debug[actionparams.debug.size] = #"hash_b0e78729bd8dfce";
 
     return undefined;
   }
@@ -1474,7 +1474,7 @@ function private function_c329e7cf(actionparams) {
 
   foreach(ent in ents) {
     if(ent.team == self.team && ent.item == weapon) {
-      actionparams.debug[actionparams.debug.size] = # "hash_4ba65c4749a07103" + getweaponname(weapon);
+      actionparams.debug[actionparams.debug.size] = #"hash_4ba65c4749a07103" + getweaponname(weapon);
 
       return undefined;
     }
@@ -1495,13 +1495,13 @@ function private function_86ce2c(actionparams) {
   goldenammo = self function_e8e1d88e();
 
   if(goldenammo > 0) {
-    actionparams.debug[actionparams.debug.size] = # "hash_51e16bdecd933178" + goldenammo;
+    actionparams.debug[actionparams.debug.size] = #"hash_51e16bdecd933178" + goldenammo;
 
     return undefined;
   }
 
   if(isDefined(self.bot.var_538135ed)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_1dff7a8b83fc563c";
+    actionparams.debug[actionparams.debug.size] = #"hash_1dff7a8b83fc563c";
 
     return undefined;
   }
@@ -1518,14 +1518,14 @@ function private function_d6e71e28(actionparams) {
     return undefined;
   }
 
-  if(self.bot.order !== # "capture" && self.bot.order !== # "defend") {
-    actionparams.debug[actionparams.debug.size] = # "hash_6ef3b55c5d05427a";
+  if(self.bot.order !== #"capture" && self.bot.order !== #"defend") {
+    actionparams.debug[actionparams.debug.size] = #"hash_6ef3b55c5d05427a";
 
     return undefined;
   }
 
   if(self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "hash_b0e78729bd8dfce";
+    actionparams.debug[actionparams.debug.size] = #"hash_b0e78729bd8dfce";
 
     return undefined;
   }
@@ -1535,7 +1535,7 @@ function private function_d6e71e28(actionparams) {
 
   foreach(ent in ents) {
     if(ent.team == self.team && ent.item == weapon) {
-      actionparams.debug[actionparams.debug.size] = # "hash_4ba65c4749a07103" + getweaponname(weapon);
+      actionparams.debug[actionparams.debug.size] = #"hash_4ba65c4749a07103" + getweaponname(weapon);
 
       return undefined;
     }
@@ -1554,7 +1554,7 @@ function private function_5c276034(actionparams) {
   }
 
   if(!self.bot.enemyvisible && !self function_6faf985b()) {
-    actionparams.debug[actionparams.debug.size] = # "no enemy";
+    actionparams.debug[actionparams.debug.size] = #"no enemy";
 
     return undefined;
   }
@@ -1566,7 +1566,7 @@ function private function_5c276034(actionparams) {
   }
 
   if(!target_istarget(target)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_bdb94cf566c2704";
+    actionparams.debug[actionparams.debug.size] = #"hash_bdb94cf566c2704";
 
     return undefined;
   }
@@ -1595,14 +1595,14 @@ function private function_126a6787(actionparams) {
     return undefined;
   }
 
-  if(self.bot.order !== # "capture" && self.bot.order !== # "defend") {
-    actionparams.debug[actionparams.debug.size] = # "hash_6ef3b55c5d05427a";
+  if(self.bot.order !== #"capture" && self.bot.order !== #"defend") {
+    actionparams.debug[actionparams.debug.size] = #"hash_6ef3b55c5d05427a";
 
     return undefined;
   }
 
   if(self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "hash_b0e78729bd8dfce";
+    actionparams.debug[actionparams.debug.size] = #"hash_b0e78729bd8dfce";
 
     return undefined;
   }
@@ -1612,7 +1612,7 @@ function private function_126a6787(actionparams) {
 
   foreach(ent in ents) {
     if(ent.team == self.team && ent.item == weapon) {
-      actionparams.debug[actionparams.debug.size] = # "hash_4ba65c4749a07103" + getweaponname(weapon);
+      actionparams.debug[actionparams.debug.size] = #"hash_4ba65c4749a07103" + getweaponname(weapon);
 
       return undefined;
     }
@@ -1630,14 +1630,14 @@ function private function_69624ba2(actionparams) {
     return undefined;
   }
 
-  if(self.bot.order !== # "capture" && self.bot.order !== # "defend") {
-    actionparams.debug[actionparams.debug.size] = # "hash_6ef3b55c5d05427a";
+  if(self.bot.order !== #"capture" && self.bot.order !== #"defend") {
+    actionparams.debug[actionparams.debug.size] = #"hash_6ef3b55c5d05427a";
 
     return undefined;
   }
 
   if(self.bot.enemyseen) {
-    actionparams.debug[actionparams.debug.size] = # "hash_b0e78729bd8dfce";
+    actionparams.debug[actionparams.debug.size] = #"hash_b0e78729bd8dfce";
 
     return undefined;
   }
@@ -1647,7 +1647,7 @@ function private function_69624ba2(actionparams) {
 
   foreach(ent in ents) {
     if(ent.team == self.team && ent.item == weapon) {
-      actionparams.debug[actionparams.debug.size] = # "hash_4ba65c4749a07103" + getweaponname(weapon);
+      actionparams.debug[actionparams.debug.size] = #"hash_4ba65c4749a07103" + getweaponname(weapon);
 
       return undefined;
     }
@@ -1665,11 +1665,11 @@ function private function_303bbccf(actionparams) {
   clipammo = self getweaponammoclip(weapon);
 
   if(weapon.iscliponly) {
-    actionparams.debug[actionparams.debug.size] = # "ammo: " + clipammo + "<dev string:x38>" + weapon.clipsize;
+    actionparams.debug[actionparams.debug.size] = #"ammo: " + clipammo + "<dev string:x38>" + weapon.clipsize;
   } else {
     stockammo = self getweaponammostock(weapon);
 
-    actionparams.debug[actionparams.debug.size] = # "ammo: " + clipammo + "<dev string:x38>" + weapon.clipsize + "<dev string:x44>" + stockammo;
+    actionparams.debug[actionparams.debug.size] = #"ammo: " + clipammo + "<dev string:x38>" + weapon.clipsize + "<dev string:x44>" + stockammo;
   }
 
   return clipammo > 0;
@@ -1684,7 +1684,7 @@ function private function_d55b60f8(actionparams) {
     weapon = actionparams.weapon;
 
     if(weapon != self getcurrentweapon()) {
-      actionparams.debug[actionparams.debug.size] = # "hash_4655fb464b842dfc";
+      actionparams.debug[actionparams.debug.size] = #"hash_4655fb464b842dfc";
 
       return false;
     }
@@ -1695,7 +1695,7 @@ function private function_d55b60f8(actionparams) {
 
 function private function_98a9dad4(actionparams) {
   if(!(!isDefined(self.bot.offhandcooldown) || self.bot.offhandcooldown <= gettime())) {
-    actionparams.debug[actionparams.debug.size] = # "hash_499c1441b9e70c21";
+    actionparams.debug[actionparams.debug.size] = #"hash_499c1441b9e70c21";
 
     return false;
   }
@@ -1705,7 +1705,7 @@ function private function_98a9dad4(actionparams) {
   }
 
   if(!self offhandweaponsenabled()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_6ac9b1d785eef92";
+    actionparams.debug[actionparams.debug.size] = #"hash_6ac9b1d785eef92";
 
     return false;
   }
@@ -1729,13 +1729,13 @@ function private function_808ca6bb(actionparams) {
   }
 
   if(!registered) {
-    actionparams.debug[actionparams.debug.size] = # "hash_40fce486e054dde0";
+    actionparams.debug[actionparams.debug.size] = #"hash_40fce486e054dde0";
 
     return false;
   }
 
   if(!self killstreakrules::iskillstreakallowed(type, self.team, 1)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_15c89d85f9320bf6";
+    actionparams.debug[actionparams.debug.size] = #"hash_15c89d85f9320bf6";
 
     return false;
   }
@@ -1745,13 +1745,13 @@ function private function_808ca6bb(actionparams) {
 
 function private function_f338aefb(actionparams) {
   if(isDefined(level.activeuavs) && isDefined(level.activeuavs[self.team]) && level.activeuavs[self.team] > 0) {
-    actionparams.debug[actionparams.debug.size] = # "hash_36676f11c5573c1e";
+    actionparams.debug[actionparams.debug.size] = #"hash_36676f11c5573c1e";
 
     return true;
   }
 
   if(isDefined(level.var_eb10c6a7) && isDefined(level.var_eb10c6a7[self.team]) && level.var_eb10c6a7[self.team] > 0) {
-    actionparams.debug[actionparams.debug.size] = # "hash_3839215d605aaf2f";
+    actionparams.debug[actionparams.debug.size] = #"hash_3839215d605aaf2f";
 
     return true;
   }
@@ -1763,7 +1763,7 @@ function private function_f338aefb(actionparams) {
       }
 
       if(isDefined(level.activecounteruavs[team]) && level.activecounteruavs[team] > 0) {
-        actionparams.debug[actionparams.debug.size] = # "hash_669d47e05d0f549f";
+        actionparams.debug[actionparams.debug.size] = #"hash_669d47e05d0f549f";
 
         return true;
       }
@@ -1781,7 +1781,7 @@ function private function_82350d4c(actionparams) {
       }
 
       if(isDefined(level.activecounteruavs[team]) && level.activecounteruavs[team] > 0) {
-        actionparams.debug[actionparams.debug.size] = # "hash_669d47e05d0f549f";
+        actionparams.debug[actionparams.debug.size] = #"hash_669d47e05d0f549f";
 
         return true;
       }
@@ -1806,7 +1806,7 @@ function private function_4e17fb37(actionparams, hitradius) {
   aimangles = self botgetprojectileaimangles(weapon, aimpoint);
 
   if(!isDefined(aimangles)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_4861201ac3ea229e";
+    actionparams.debug[actionparams.debug.size] = #"hash_4861201ac3ea229e";
 
     return false;
   }
@@ -1815,7 +1815,7 @@ function private function_4e17fb37(actionparams, hitradius) {
   dist = distance2d(self.origin, aimpoint) - hitradius;
 
   if(!function_e63ee3e8(trace, dist)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_50c1f0722206aaa8";
+    actionparams.debug[actionparams.debug.size] = #"hash_50c1f0722206aaa8";
 
     return false;
   }
@@ -1825,12 +1825,12 @@ function private function_4e17fb37(actionparams, hitradius) {
 
 function private function_754cc239(actionparams) {
   if(self.bot.var_faa25d47 || !self.bot.var_e9ff4b76) {
-    actionparams.debug[actionparams.debug.size] = # "hash_74827205c9eaaffe";
+    actionparams.debug[actionparams.debug.size] = #"hash_74827205c9eaaffe";
 
     return false;
   }
 
-  actionparams.debug[actionparams.debug.size] = # "hash_3e4e2bab6555c31b";
+  actionparams.debug[actionparams.debug.size] = #"hash_3e4e2bab6555c31b";
 
   return true;
 }
@@ -1841,13 +1841,13 @@ function private function_64f2e29(actionparams) {
   }
 
   if(isvehicle(self.enemy)) {
-    actionparams.debug[actionparams.debug.size] = # "hash_18edaf9b6eee19a1";
+    actionparams.debug[actionparams.debug.size] = #"hash_18edaf9b6eee19a1";
 
     return true;
   }
 
   if(isPlayer(self.enemy) && self.enemy isinvehicle() && !self.enemy isremotecontrolling()) {
-    actionparams.debug[actionparams.debug.size] = # "hash_28145be29cdebb73";
+    actionparams.debug[actionparams.debug.size] = #"hash_28145be29cdebb73";
 
     return true;
   }
@@ -1856,8 +1856,8 @@ function private function_64f2e29(actionparams) {
 }
 
 function private function_a469c9cd(actionparams) {
-  if(isDefined(self.enemy) && self.enemy.classname == # "grenade") {
-    actionparams.debug[actionparams.debug.size] = # "hash_495e9766dfcb4aa3";
+  if(isDefined(self.enemy) && self.enemy.classname == #"grenade") {
+    actionparams.debug[actionparams.debug.size] = #"hash_495e9766dfcb4aa3";
 
     return true;
   }
@@ -1893,16 +1893,16 @@ function private max_damage(weapon) {
 
 function private function_4b1db2f8(actionparams, var_f97fefd9, var_f7b379b8, var_edd1b764) {
   if(self.bot.enemydist <= 500) {
-    actionparams.debug[actionparams.debug.size] = # "hash_22d191cc118ae2f5";
+    actionparams.debug[actionparams.debug.size] = #"hash_22d191cc118ae2f5";
 
     return var_f97fefd9;
   } else if(self.bot.enemydist <= 1500) {
-    actionparams.debug[actionparams.debug.size] = # "hash_29c69b288d5c7dbc";
+    actionparams.debug[actionparams.debug.size] = #"hash_29c69b288d5c7dbc";
 
     return var_f7b379b8;
   }
 
-  actionparams.debug[actionparams.debug.size] = # "hash_4b3f063cd1f54255";
+  actionparams.debug[actionparams.debug.size] = #"hash_4b3f063cd1f54255";
 
   return var_edd1b764;
 }
@@ -2004,14 +2004,14 @@ function private function_c1515256(weapon) {
 }
 
 function private fire_weapon(weapon) {
-  if(weapon.firetype == # "single shot" || weapon.firetype == # "burst") {
+  if(weapon.firetype == #"single shot" || weapon.firetype == #"burst") {
     if(self isfiring() || !(!isDefined(self.bot.var_51cee2ad) || self.bot.var_51cee2ad <= gettime())) {
       return;
     }
 
-    if(weapon.firetype == # "single shot") {
+    if(weapon.firetype == #"single shot") {
       self.bot.var_51cee2ad = gettime() + int((isDefined(self.bot.difficulty.var_b489efb7) ? self.bot.difficulty.var_b489efb7 : 0) * 1000);
-    } else if(weapon.firetype == # "burst") {
+    } else if(weapon.firetype == #"burst") {
       self.bot.var_51cee2ad = gettime() + int((isDefined(self.bot.difficulty.burstdelay) ? self.bot.difficulty.burstdelay : 0) * 1000);
     }
   }

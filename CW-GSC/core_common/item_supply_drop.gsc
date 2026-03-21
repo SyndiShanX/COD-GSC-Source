@@ -22,7 +22,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(!item_world_util::use_item_spawns() || util::get_game_type() === # "zsurvival") {
+  if(!item_world_util::use_item_spawns() || util::get_game_type() === #"zsurvival") {
     return;
   }
 
@@ -273,24 +273,24 @@ function private function_71c31c8d() {
   }
 }
 
-function private function_500a6615(itemspawnlist = # "t9_supply_drop_stash_parent", var_93fe96a6 = 0, s_instance) {
+function private function_500a6615(itemspawnlist = #"t9_supply_drop_stash_parent", var_93fe96a6 = 0, s_instance) {
   if(isDefined(self.supplydrop)) {
     supplydrop = self.supplydrop;
     self.supplydrop = undefined;
 
     if(isDefined(self.harness)) {
-      var_6d9635e7 = # "hash_3ce4bc719a3ea6b";
-      var_36ff1928 = # "hash_7e54508e8fa9ef96";
+      var_6d9635e7 = #"hash_3ce4bc719a3ea6b";
+      var_36ff1928 = #"hash_7e54508e8fa9ef96";
 
       if(isDefined(supplydrop.var_d5552131)) {
         switch (supplydrop.var_d5552131.vehicletype) {
           case # "vehicle_t9_mil_fav_light":
-            var_6d9635e7 = # "hash_3791502c5d089d79";
-            var_36ff1928 = # "hash_5e21433684751cdc";
+            var_6d9635e7 = #"hash_3791502c5d089d79";
+            var_36ff1928 = #"hash_5e21433684751cdc";
             break;
           default:
-            var_6d9635e7 = # "hash_66caa605c0a985bc";
-            var_36ff1928 = # "hash_382ac153f17ffc5b";
+            var_6d9635e7 = #"hash_66caa605c0a985bc";
+            var_36ff1928 = #"hash_382ac153f17ffc5b";
             break;
         }
       }
@@ -1132,7 +1132,7 @@ function function_47ec98c4(startpoint, endpoint, droppoint, var_d91c179d = 0, ve
 
   if(isDefined(harness)) {
     harness linkto(supplydropveh, "tag_cargo_attach", (0, 0, -90));
-    var_6fe5490e = # "hash_7b1793df2c9b8245";
+    var_6fe5490e = #"hash_7b1793df2c9b8245";
     attachtag = "tag_care_package";
 
     if(isDefined(supplydrop.var_d5552131)) {
@@ -1140,10 +1140,10 @@ function function_47ec98c4(startpoint, endpoint, droppoint, var_d91c179d = 0, ve
 
       switch (supplydrop.var_d5552131.vehicletype) {
         case # "vehicle_t9_mil_fav_light":
-          var_6fe5490e = # "hash_333ac707d1003c63";
+          var_6fe5490e = #"hash_333ac707d1003c63";
           break;
         default:
-          var_6fe5490e = # "hash_105bba381b94f622";
+          var_6fe5490e = #"hash_105bba381b94f622";
           break;
       }
     }

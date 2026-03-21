@@ -32,10 +32,10 @@ function spawned(localclientnum) {
 }
 
 function function_86e8d9af(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  str_fx = # "hash_5627dee1716af1be";
+  str_fx = #"hash_5627dee1716af1be";
 
-  if(self.model === # "hash_7dde995ef49216f") {
-    str_fx = # "hash_1fd4c0687c9801d2";
+  if(self.model === #"hash_7dde995ef49216f") {
+    str_fx = #"hash_1fd4c0687c9801d2";
   }
 
   util::playFXOnTag(bwastimejump, str_fx, self, "tag_origin");

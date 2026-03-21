@@ -181,7 +181,7 @@ function function_e1fab6a9(instance, v_center) {
       a_ai = getaiteamarray(level.zombie_team);
 
       foreach(ai in a_ai) {
-        if(isalive(ai) && ai.zm_ai_category === # "normal" && distance(ai.origin, v_center) < 600) {
+        if(isalive(ai) && ai.zm_ai_category === #"normal" && distance(ai.origin, v_center) < 600) {
           v_dir = vectornormalize(ai.origin - v_center);
           v_launch = v_dir * randomintrange(80, 100) + (0, 0, 150);
           ai thread zm_utility::function_ffc279(v_launch);
@@ -273,9 +273,9 @@ function function_ae44cb3d(instance, var_eece1f6a) {
   switch (var_eece1f6a) {
     case # "perk_machine_choice":
       if(zm_utility::is_survival()) {
-        var_78a3e26a = # "hash_6e47d6576612543c";
+        var_78a3e26a = #"hash_6e47d6576612543c";
       } else {
-        var_78a3e26a = # "p9_fxanim_zm_gp_wunderfizz_on_xmodel";
+        var_78a3e26a = #"p9_fxanim_zm_gp_wunderfizz_on_xmodel";
       }
 
       namespace_82b4c2d1::function_999594fe(instance.contentgroups[#"perk_machine_choice"], #"hash_4af85251966549b8", var_78a3e26a, #"hash_3eac5ec7a888ddfb", 0);
@@ -393,7 +393,7 @@ function private function_9d178321() {
       a_structs = struct::get_array(safehouse.targetname, "target");
 
       foreach(struct in a_structs) {
-        if(struct.content_key === # "zed") {
+        if(struct.content_key === #"zed") {
           safehouse.var_8947b368 = content_manager::spawn_script_model(struct, #"toy_stuffed_animal_monkey_01");
           safehouse.var_8947b368 val::set(#"zed", "allowdeath", 0);
           safehouse.s_ee = struct;

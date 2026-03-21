@@ -234,7 +234,7 @@ function function_10bdb4ab() {
 }
 
 function function_683839c7(s_event) {
-  if(s_event.weapon.name != # "hash_165cf52ce418f5a1") {
+  if(s_event.weapon.name != #"hash_165cf52ce418f5a1") {
     level flag::set("flg_bunker_stealth_fail");
     self callback::remove_on_weapon_fired(&function_683839c7);
   }
@@ -656,7 +656,7 @@ function function_4a6ba207() {
 function function_ab20f837(var_d79d7bf4) {
   s_notify = level waittilltimeout(7, #"hash_6b2091e6c001e49a");
 
-  if(s_notify._notify == # "timeout") {
+  if(s_notify._notify == #"timeout") {
     objectives::goto(#"hash_177f2110897e65c0", var_d79d7bf4, undefined, 1);
     objectives::function_67f87f80(#"hash_177f2110897e65c0", undefined, #"hash_a1f9f57e59cae69");
   }
@@ -721,7 +721,7 @@ function function_deb7a15b(var_6e96c1c2) {
   level notify(#"hash_2acb72769c464cfa");
 
   if(isDefined(var_6e96c1c2.weapon.name)) {
-    if(var_6e96c1c2.weapon.name == # "hash_165cf52ce418f5a1") {
+    if(var_6e96c1c2.weapon.name == #"hash_165cf52ce418f5a1") {
       level.player thread function_aafaafcd(var_6e96c1c2);
     }
   }

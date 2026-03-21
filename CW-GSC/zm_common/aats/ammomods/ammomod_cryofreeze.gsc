@@ -79,14 +79,14 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "elite" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"elite" || self.zm_ai_category === #"boss") {
     return;
   }
 
   aat_name = var_fd90b0bb aat::getaatonweapon(shitloc, 1);
   tier = function_a0c6cb5d(aat_name);
 
-  if(tier < 4 && self.zm_ai_category === # "special") {
+  if(tier < 4 && self.zm_ai_category === #"special") {
     return;
   }
 
@@ -94,12 +94,12 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
   playFX("zm_weapons/fx9_aat_bul_impact_frost", boneindex);
   var_fd90b0bb zm_utility::function_5d356609(aat_name, tier);
 
-  if(is_true(weapon) && function_3be79107(var_fd90b0bb) && tier >= 5 && (self.zm_ai_category === # "normal" || self.zm_ai_category === # "special")) {
+  if(is_true(weapon) && function_3be79107(var_fd90b0bb) && tier >= 5 && (self.zm_ai_category === #"normal" || self.zm_ai_category === #"special")) {
     level thread function_9366890d(self, self.origin, var_fd90b0bb, vpoint, shitloc);
     return;
   }
 
-  if(self.zm_ai_category === # "special") {
+  if(self.zm_ai_category === #"special") {
     if(tier >= 4) {
       self thread function_f00409f3(var_fd90b0bb, vpoint, shitloc, 0, tier);
     }
@@ -107,7 +107,7 @@ function result(death, attacker, mod, weapon, var_fd90b0bb, vpoint, shitloc, bon
     return;
   }
 
-  if(self.zm_ai_category === # "normal") {
+  if(self.zm_ai_category === #"normal") {
     self thread function_f00409f3(var_fd90b0bb, vpoint, shitloc, 0, tier);
   }
 }
@@ -274,7 +274,7 @@ function function_9366890d(var_4589e270, var_23255fc5, attacker, mod, weapon) {
       continue;
     }
 
-    if(isalive(e_target) && (e_target.zm_ai_category === # "normal" || e_target.archetype === # "zombie_dog")) {
+    if(isalive(e_target) && (e_target.zm_ai_category === #"normal" || e_target.archetype === #"zombie_dog")) {
       e_target thread function_f00409f3(attacker, mod, weapon, 1, 5);
     }
 

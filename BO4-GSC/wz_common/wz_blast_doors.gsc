@@ -101,7 +101,7 @@ function_cd4de84f(doors) {
   var_7344b4ac = 0;
 
   foreach(vehicle in vehicles) {
-    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == # "cargo_truck_wz") {
+    if(isDefined(vehicle.scriptvehicletype) && vehicle.scriptvehicletype == #"cargo_truck_wz") {
       var_7344b4ac = 1;
       playsoundatposition(#"hash_694b6b5d665c7a5e", centerposition);
       break;

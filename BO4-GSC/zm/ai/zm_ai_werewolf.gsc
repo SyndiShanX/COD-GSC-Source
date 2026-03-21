@@ -253,7 +253,7 @@ function_3d5e8286() {
 }
 
 on_werewolf_killed(params) {
-  if(self.archetype != # "werewolf") {
+  if(self.archetype != #"werewolf") {
     return;
   }
 
@@ -691,7 +691,7 @@ function_6488bc7e(entity) {
   var_31a419e0 = [];
 
   foreach(zombie in zombies) {
-    if(zombie.zm_ai_category === # "basic" || zombie.zm_ai_category === # "popcorn") {
+    if(zombie.zm_ai_category === #"basic" || zombie.zm_ai_category === #"popcorn") {
       if(!isDefined(var_31a419e0)) {
         var_31a419e0 = [];
       } else if(!isarray(var_31a419e0)) {
@@ -1175,7 +1175,7 @@ function_e79ce40a() {
 
   if(isDefined(spawners)) {
     foreach(spawner in spawners) {
-      if(spawner.subarchetype === # "werewolf_hallion" && isDefined(spawner.script_noteworthy)) {
+      if(spawner.subarchetype === #"werewolf_hallion" && isDefined(spawner.script_noteworthy)) {
         adddebugcommand("<dev string:x175>");
         break;
       }
@@ -1203,7 +1203,7 @@ function_e79ce40a() {
           spawners = getspawnerarray();
 
           foreach(spawner in spawners) {
-            if(spawner.subarchetype === # "werewolf_hallion" && isDefined(spawner.script_noteworthy)) {
+            if(spawner.subarchetype === #"werewolf_hallion" && isDefined(spawner.script_noteworthy)) {
               zm_devgui::spawn_archetype(spawner.script_noteworthy);
               break;
             }

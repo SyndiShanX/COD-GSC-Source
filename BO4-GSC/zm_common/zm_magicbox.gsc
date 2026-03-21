@@ -46,11 +46,11 @@ autoexec __init__system__() {
 
 __init__() {
   level.start_chest_name = "start_chest";
-  level._effect[#"hash_2ff87d61167ea531"] = # "hash_d66a9f5776f1fba";
-  level._effect[#"hash_4048cb4967032c4a"] = # "hash_1e43d43c6586fcb5";
-  level._effect[#"lght_marker"] = # "zombie/fx_weapon_box_marker_zmb";
-  level._effect[#"lght_marker_flare"] = # "zombie/fx_weapon_box_marker_fl_zmb";
-  level._effect[#"poltergeist"] = # "zombie/fx_barrier_buy_zmb";
+  level._effect[#"hash_2ff87d61167ea531"] = #"hash_d66a9f5776f1fba";
+  level._effect[#"hash_4048cb4967032c4a"] = #"hash_1e43d43c6586fcb5";
+  level._effect[#"lght_marker"] = #"zombie/fx_weapon_box_marker_zmb";
+  level._effect[#"lght_marker_flare"] = #"zombie/fx_weapon_box_marker_fl_zmb";
+  level._effect[#"poltergeist"] = #"zombie/fx_barrier_buy_zmb";
   clientfield::register("zbarrier", "magicbox_open_fx", 1, 1, "int");
   clientfield::register("zbarrier", "magicbox_closed_fx", 1, 1, "int");
   clientfield::register("zbarrier", "magicbox_leave_fx", 1, 1, "counter");
@@ -283,30 +283,30 @@ boxstub_update_prompt(player) {
 
     if(isDefined(level.magic_box_check_equipment) && [[level.magic_box_check_equipment]](cursor_hint_weapon)) {
       if(function_8b1a219a()) {
-        self.hint_string = # "hash_51b8af0794e70749";
+        self.hint_string = #"hash_51b8af0794e70749";
       } else {
-        self.hint_string = # "hash_53005c8d5b45bca3";
+        self.hint_string = #"hash_53005c8d5b45bca3";
       }
 
       if(!(isDefined(self.stub.trigger_target.var_1f9dff37) && self.stub.trigger_target.var_1f9dff37) && !(isDefined(self.stub.trigger_target.var_481aa649) && self.stub.trigger_target.var_481aa649) && isDefined(self.stub.trigger_target.var_c2f3a87c) && self.stub.trigger_target.var_c2f3a87c) {
         if(function_8b1a219a()) {
-          self.hint_string = # "hash_90ca7c41027482c";
+          self.hint_string = #"hash_90ca7c41027482c";
         } else {
-          self.hint_string = # "hash_4320539409034300";
+          self.hint_string = #"hash_4320539409034300";
         }
       }
     } else {
       if(function_8b1a219a()) {
-        self.hint_string = # "hash_62a71d8ac2e7af43";
+        self.hint_string = #"hash_62a71d8ac2e7af43";
       } else {
-        self.hint_string = # "hash_6a4c5538a960189d";
+        self.hint_string = #"hash_6a4c5538a960189d";
       }
 
       if(!(isDefined(self.stub.trigger_target.var_1f9dff37) && self.stub.trigger_target.var_1f9dff37) && !(isDefined(self.stub.trigger_target.var_481aa649) && self.stub.trigger_target.var_481aa649) && isDefined(self.stub.trigger_target.var_c2f3a87c) && self.stub.trigger_target.var_c2f3a87c) {
         if(function_8b1a219a()) {
-          self.hint_string = # "hash_6b94377deeed6d0e";
+          self.hint_string = #"hash_6b94377deeed6d0e";
         } else {
-          self.hint_string = # "hash_4a972ee1265d60a";
+          self.hint_string = #"hash_4a972ee1265d60a";
         }
       }
     }
@@ -1225,7 +1225,7 @@ function_db355791(player, weapon, var_21b5a3f4 = 1) {
     return 0;
   }
 
-  if(weapon.name == # "ray_gun" && player zm_weapons::has_weapon_or_upgrade(getweapon(#"raygun_mark2"))) {
+  if(weapon.name == #"ray_gun" && player zm_weapons::has_weapon_or_upgrade(getweapon(#"raygun_mark2"))) {
     return 0;
   }
 
@@ -1933,55 +1933,55 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
     }
   }
 
-  if(weapon.name == # "ray_gun" || weapon.name == # "ray_gun_mk2") {
+  if(weapon.name == #"ray_gun" || weapon.name == #"ray_gun_mk2") {
     playsoundatposition(#"mus_raygun_stinger", (0, 0, 0));
-    str_vo_line = # "raygun";
+    str_vo_line = #"raygun";
 
-    if(weapon.name == # "ray_gun_mk2" && zm_audio::function_63f85f39(#"magicbox", #"raygun_mk2")) {
-      str_vo_line = # "raygun_mk2";
+    if(weapon.name == #"ray_gun_mk2" && zm_audio::function_63f85f39(#"magicbox", #"raygun_mk2")) {
+      str_vo_line = #"raygun_mk2";
     }
-  } else if(weapon.name == # "music_box") {
-    str_vo_line = # "music_box";
+  } else if(weapon.name == #"music_box") {
+    str_vo_line = #"music_box";
   } else if(zm_weapons::is_wonder_weapon(weapon)) {
-    str_vo_line = # "wonder";
+    str_vo_line = #"wonder";
 
     if(isPlayer(var_75c86f89) && var_75c86f89 != self) {
       var_75c86f89 zm_utility::giveachievement_wrapper("zm_trophy_straw_purchase");
     }
   } else if(weapon === getweapon(#"homunculus") || weapon === getweapon(#"cymbal_monkey")) {
-    str_vo_line = # "homunculus";
+    str_vo_line = #"homunculus";
   } else if(weapon === getweapon(#"special_ballisticknife_t8_dw")) {
     if(zm_audio::function_63f85f39(#"magicbox", #"ballistic")) {
-      str_vo_line = # "ballistic";
+      str_vo_line = #"ballistic";
     }
   } else if(weapon === getweapon(#"special_crossbow_t8")) {
     if(zm_audio::function_63f85f39(#"magicbox", #"hash_36b817536004725")) {
-      str_vo_line = # "hash_36b817536004725";
+      str_vo_line = #"hash_36b817536004725";
     }
   } else {
     switch (weapon.weapclass) {
       case # "mg":
-        str_vo_line = # "lmg";
+        str_vo_line = #"lmg";
         break;
       case # "spread":
-        str_vo_line = # "shotgun";
+        str_vo_line = #"shotgun";
         break;
       case # "pistol":
-        str_vo_line = # "pistol";
+        str_vo_line = #"pistol";
         break;
       case # "rocketlauncher":
-        str_vo_line = # "launcher";
+        str_vo_line = #"launcher";
         break;
       case # "smg":
-        str_vo_line = # "smg";
+        str_vo_line = #"smg";
         break;
       case # "rifle":
         if(weapon.issniperweapon) {
-          str_vo_line = # "sniper";
+          str_vo_line = #"sniper";
         } else if(zm_weapons::is_tactical_rifle(weapon)) {
-          str_vo_line = # "tactical";
+          str_vo_line = #"tactical";
         } else {
-          str_vo_line = # "ar";
+          str_vo_line = #"ar";
         }
 
         break;
@@ -1995,7 +1995,7 @@ treasure_chest_give_weapon(weapon, var_75c86f89, e_chest) {
   }
 
   if(isDefined(str_vo_line)) {
-    if(str_vo_line == # "homunculus") {
+    if(str_vo_line == #"homunculus") {
       self thread function_e62595c2(e_chest);
     } else {
       self thread zm_audio::create_and_play_dialog(#"magicbox", str_vo_line);

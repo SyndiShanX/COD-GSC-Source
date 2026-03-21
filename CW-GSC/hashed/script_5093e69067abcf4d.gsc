@@ -1115,7 +1115,7 @@ function function_dfdba661(params) {
     return;
   }
 
-  if(params.weapon.name != # "hash_6d516e633b87af84") {
+  if(params.weapon.name != #"hash_6d516e633b87af84") {
     return;
   }
 

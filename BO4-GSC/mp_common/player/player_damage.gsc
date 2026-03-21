@@ -486,7 +486,7 @@ function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
         self.var_ea1458aa.var_64ffda50[attackerentnum] = gettime();
       }
     } else if(weapon_utils::isexplosivedamage(smeansofdeath)) {
-      if(isDefined(einflictor) && isDefined(einflictor.weapon) && einflictor.weapon.statname == # "recon_car") {
+      if(isDefined(einflictor) && isDefined(einflictor.weapon) && einflictor.weapon.statname == #"recon_car") {
         if(!isDefined(self.var_ea1458aa.var_8f7ff7ed)) {
           self.var_ea1458aa.var_8f7ff7ed = [];
         }
@@ -497,7 +497,7 @@ function_961fe569(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     }
   }
 
-  if(level.competitivesettingsenabled && weapon.statname == # "launcher_standard_t8" && smeansofdeath == "MOD_PROJECTILE_SPLASH") {
+  if(level.competitivesettingsenabled && weapon.statname == #"launcher_standard_t8" && smeansofdeath == "MOD_PROJECTILE_SPLASH") {
     idamage = int(idamage * 0.25);
   }
 
@@ -678,7 +678,7 @@ does_player_completely_avoid_damage(idflags, shitloc, weapon, friendlyfire, atta
   if(self.currentweapon === getweapon(#"sig_buckler_turret") && weapon != getweapon(#"remote_missile_missile") && (smeansofdeath == "MOD_GRENADE" || smeansofdeath == "MOD_GRENADE_SPLASH" || smeansofdeath == "MOD_PROJECTILE_SPLASH" || smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_EXPLOSIVE" || weapon.type == "gas" && (smeansofdeath == "MOD_GAS" || smeansofdeath == "MOD_BURNED"))) {
     angles = self getplayerangles();
     forward = anglesToForward((0, angles[1], 0));
-    var_587ddb7b = weapon.statname == # "hero_flamethrower" && weapon.type == "gas" && (smeansofdeath == "MOD_GAS" || smeansofdeath == "MOD_BURNED");
+    var_587ddb7b = weapon.statname == #"hero_flamethrower" && weapon.type == "gas" && (smeansofdeath == "MOD_GAS" || smeansofdeath == "MOD_BURNED");
 
     if(var_587ddb7b && isDefined(eattacker) && false) {
       vpoint = eattacker.origin;
@@ -800,7 +800,7 @@ should_do_player_damage(eattacker, einflictor, weapon, smeansofdeath, idflags) {
     return 0;
   }
 
-  if(self.sessionteam == # "spectator") {
+  if(self.sessionteam == #"spectator") {
     return 0;
   }
 
@@ -1153,7 +1153,7 @@ function_104e1126(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
     isfrag = weapon.rootweapon.name == "frag_grenade";
 
     if(isDefined(eattacker) && eattacker != self) {
-      if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == # "satchel_charge" || weapon.name == # "claymore" || weapon.name == # "bouncingbetty")) {
+      if(isDefined(eattacker) && isDefined(einflictor.owner) && (weapon.name == #"satchel_charge" || weapon.name == #"claymore" || weapon.name == #"bouncingbetty")) {
         self.explosiveinfo[#"originalownerkill"] = einflictor.owner == self;
         self.explosiveinfo[#"damageexplosivekill"] = isDefined(einflictor.wasdamaged);
         self.explosiveinfo[#"chainkill"] = isDefined(einflictor.waschained);

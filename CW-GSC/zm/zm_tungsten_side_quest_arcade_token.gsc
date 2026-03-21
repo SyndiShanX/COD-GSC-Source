@@ -177,7 +177,7 @@ function function_1525bc35(params) {
 function on_item_pickup(params) {
   item = params.item;
 
-  if(isPlayer(self) && item.itementry.name === # "hash_5e770ca79b0e5aa4") {
+  if(isPlayer(self) && item.itementry.name === #"hash_5e770ca79b0e5aa4") {
     self function_aff8caac(1, item);
   }
 
@@ -2108,13 +2108,13 @@ function function_ceb0a340() {
       switch (var_12a9e30a.var_6032cf15) {
         case 1:
         default:
-          str_level = # "armor_item_lv1_t9_sr";
+          str_level = #"armor_item_lv1_t9_sr";
           break;
         case 2:
-          str_level = # "armor_item_lv2_t9_sr";
+          str_level = #"armor_item_lv2_t9_sr";
           break;
         case 3:
-          str_level = # "armor_item_lv3_t9_sr";
+          str_level = #"armor_item_lv3_t9_sr";
           break;
       }
 

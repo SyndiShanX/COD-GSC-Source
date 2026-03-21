@@ -15,7 +15,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(util::get_game_type() === # "hash_125fc0c0065c7dea") {
+  if(util::get_game_type() === #"hash_125fc0c0065c7dea") {
     callback::add_callback(#"hash_5118a91e667446ee", &function_9e216600);
     level.var_e35c191f = 1;
   }

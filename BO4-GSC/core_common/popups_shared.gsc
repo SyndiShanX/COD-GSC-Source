@@ -648,12 +648,12 @@ function_921657e4() {
       continue;
     }
 
-    notifyhash = # "player_callout";
+    notifyhash = #"player_callout";
 
     if(isDefined(nextnotifydata.var_3d4cfe83) && nextnotifydata.var_3d4cfe83) {
-      notifyhash = # "hash_22b5b25be43ad2d7";
+      notifyhash = #"hash_22b5b25be43ad2d7";
     } else if(isDefined(nextnotifydata.var_cf88c427) && nextnotifydata.var_cf88c427) {
-      notifyhash = # "hash_2a3c608f65b1cead";
+      notifyhash = #"hash_2a3c608f65b1cead";
     }
 
     if(isDefined(nextnotifydata.optionalarg)) {

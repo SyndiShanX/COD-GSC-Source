@@ -467,7 +467,7 @@ function doaenemyfillerfodder() {
 function function_600ea4f() {
   retval = level waittilltimeout(30, #"hash_db5742cf48f5e5");
 
-  if(retval._notify == # "timeout") {
+  if(retval._notify == #"timeout") {
     namespace_1e25ad94::function_4e3cfad("\tDungeon creation timeout!", (1, 0, 0), undefined, 1.5, 1000);
     namespace_1e25ad94::debugmsg("Dungeon creation timeout!", 1);
   }
@@ -571,7 +571,7 @@ function function_73730269(var_f3c8eb3) {
   level thread namespace_ec06fe4a::function_87612422(level.doa.var_e84586f1.origin, level.doa.var_e84586f1.angles, 0.5, 999999999, level.var_564dda4);
   result = level waittill(#"ladder_up", #"game_over");
 
-  if(result._notify == # "ladder_up" && result.pickup === var_f3c8eb3) {
+  if(result._notify == #"ladder_up" && result.pickup === var_f3c8eb3) {
     namespace_7f5aeb59::function_f8645db3(getdvarint(#"hash_2a014ab8179901f4", 500));
 
     foreach(player in namespace_7f5aeb59::function_23e1f90f()) {

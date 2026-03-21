@@ -177,13 +177,13 @@ function function_287ce935(var_8b9e1fe4, var_e058812d = 0) {
     waitresult = self waittill(#"menuresponse");
     response = waitresult.response;
 
-    if(response === # "hash_4555ff5843fd0c43") {
+    if(response === #"hash_4555ff5843fd0c43") {
       var_f4f8379d = 1;
       self clientfield::set_player_uimodel("sr_vote_prompt.status", var_f4f8379d);
       continue;
     }
 
-    if(response === # "hash_690c429815dfb9dc") {
+    if(response === #"hash_690c429815dfb9dc") {
       var_f4f8379d = 2;
       self clientfield::set_player_uimodel("sr_vote_prompt.status", var_f4f8379d);
     }

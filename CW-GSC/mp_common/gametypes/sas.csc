@@ -10,6 +10,6 @@ function event_handler[gametype_init] main(eventstruct) {
   level.var_207a1c9a = 1;
 
   if(getgametypesetting(#"hash_48670d9509071424")) {
-    level.var_58253868 = # "hash_117d1cef613b8398";
+    level.var_58253868 = #"hash_117d1cef613b8398";
   }
 }

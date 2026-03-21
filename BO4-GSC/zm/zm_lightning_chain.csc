@@ -70,7 +70,7 @@ lc_play_death_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     str_tag = "J_Spine1";
   }
 
-  if(!(self.archetype === # "zombie")) {
+  if(!(self.archetype === #"zombie")) {
     tag = "tag_origin";
   }
 

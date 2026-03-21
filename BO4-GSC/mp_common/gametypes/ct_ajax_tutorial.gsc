@@ -31,7 +31,7 @@ function_d0ad09c5(effect) {
 function_c9ff0dce() {
   self.overrideplayerdamage = &callback_player_damage;
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self ct_utils::player_reset();
     self thread player_grenade_watcher();
     self thread function_f9eac817();
@@ -71,7 +71,7 @@ function_c9ff0dce() {
     return;
   }
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     self thread ct_utils::function_5149c890(1);
 
     if(isDefined(level.var_7b46025)) {
@@ -111,7 +111,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
   switch (level.var_ad7c0539) {
     case 1:
     case 2:
-      if(isDefined(weapon) && (weapon.name == # "hash_3f62a872201cd1ce" || weapon.name == # "eq_swat_grenade")) {
+      if(isDefined(weapon) && (weapon.name == #"hash_3f62a872201cd1ce" || weapon.name == #"eq_swat_grenade")) {
         if(self.health < 10) {
           self.health = 10;
         }
@@ -121,7 +121,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 
       break;
     case 4:
-      if(isDefined(weapon) && weapon.name == # "sig_buckler_turret") {
+      if(isDefined(weapon) && weapon.name == #"sig_buckler_turret") {
         if(self.health < 151) {
           self.health = 151;
         }
@@ -137,7 +137,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
   }
 
   if(!isbot(self)) {
-    if(isDefined(weapon) && (weapon.name == # "recon_car" || weapon.name == # "hash_38ffd09564931482")) {
+    if(isDefined(weapon) && (weapon.name == #"recon_car" || weapon.name == #"hash_38ffd09564931482")) {
       self.health += 1;
       n_damage = 1;
     }
@@ -151,7 +151,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
 }
 
 function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     self.isinuse = 0;
 
     if(level.var_ad7c0539 === 5) {
@@ -1385,7 +1385,7 @@ player_grenade_watcher() {
     level flag::clear("grenade_exp");
     waitresult = self waittill(#"grenade_fire");
 
-    if(waitresult.weapon.name == # "eq_swat_grenade") {
+    if(waitresult.weapon.name == #"eq_swat_grenade") {
       v_pos = waitresult.projectile.origin;
 
       while(isDefined(waitresult.projectile)) {
@@ -1524,7 +1524,7 @@ function_f9eac817() {
     waitresult = self waittill(#"weapon_change");
     next_weapon = waitresult.weapon;
 
-    if(isDefined(next_weapon) && next_weapon.name == # "sig_buckler_turret") {
+    if(isDefined(next_weapon) && next_weapon.name == #"sig_buckler_turret") {
       level.var_d7622168 = 1;
       continue;
     }

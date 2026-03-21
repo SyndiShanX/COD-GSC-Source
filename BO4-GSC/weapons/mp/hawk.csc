@@ -117,7 +117,7 @@ on_local_player_spawned(localclientnum) {
   player = function_5c10bd79(localclientnum);
   vehicle = getplayervehicle(player);
 
-  if(isDefined(vehicle) && (vehicle.vehicletype === # "veh_hawk_player_mp" || vehicle.vehicletype === # "veh_hawk_player_far_range_mp")) {
+  if(isDefined(vehicle) && (vehicle.vehicletype === #"veh_hawk_player_mp" || vehicle.vehicletype === #"veh_hawk_player_far_range_mp")) {
     return;
   }
 
@@ -125,7 +125,7 @@ on_local_player_spawned(localclientnum) {
 }
 
 function_6701affc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.vehicletype != # "veh_hawk_player_mp" && self.vehicletype != # "veh_hawk_player_far_range_mp") {
+  if(self.vehicletype != #"veh_hawk_player_mp" && self.vehicletype != #"veh_hawk_player_far_range_mp") {
     return;
   }
 
@@ -255,7 +255,7 @@ function_5a1bf101(localclientnum) {
 
   while(isDefined(hawk_owner) && isPlayer(hawk_owner) && hawk_owner function_21c0fa55()) {
     if(hawk_owner isremotecontrolling(localclientnum)) {
-      if(!isinvehicle(localclientnum, self) && isDefined(hawk_owner.weapon) && hawk_owner.weapon.statname == # "remote_missile") {
+      if(!isinvehicle(localclientnum, self) && isDefined(hawk_owner.weapon) && hawk_owner.weapon.statname == #"remote_missile") {
         if(var_c0443ab2) {
           function_86f17acc(controllermodel, var_1f3cc5f9);
           var_6c8b920a = [];

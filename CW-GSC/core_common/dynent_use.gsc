@@ -225,7 +225,7 @@ function function_662eb91e(dynent, vieworigin, viewforward, drawframes = 1) {
 }
 
 function function_836af3b3(bundle, state) {
-  hintstring = # "";
+  hintstring = #"";
 
   if(isDefined(bundle) && isDefined(bundle.dynentstates) && isDefined(bundle.dynentstates[state]) && isDefined(bundle.dynentstates[state].hintstring)) {
     hintstring = bundle.dynentstates[state].hintstring;

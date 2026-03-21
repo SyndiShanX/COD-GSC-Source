@@ -128,7 +128,7 @@ function private function_44a6883c(&drop_item_id, &drop_items, &drop_count, &dro
     itementry = item.itementry;
     itemname = item_world_util::get_itemtype(itementry);
 
-    if(itementry.itemtype == # "weapon") {
+    if(itementry.itemtype == #"weapon") {
       continue;
     }
 
@@ -250,7 +250,7 @@ function private function_21cfd4a(index, position, angles, var_71a7bf18) {
     var_d154a9ba = 0;
 
     for(var_b7e54435 = 0; var_b7e54435 < var_f4b807cb.size; var_b7e54435++) {
-      if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == # "weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, var_e37d8974) < var_f24d242c) {
+      if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == #"weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, var_e37d8974) < var_f24d242c) {
         var_d154a9ba = 1;
         break;
       }
@@ -331,7 +331,7 @@ function private function_23b6897(player, position) {
         var_d154a9ba = 0;
 
         for(var_b7e54435 = 0; var_b7e54435 < var_f4b807cb.size; var_b7e54435++) {
-          if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == # "weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, checkpoint) < var_f24d242c) {
+          if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == #"weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, checkpoint) < var_f24d242c) {
             var_d154a9ba = 1;
             break;
           }
@@ -738,7 +738,7 @@ function function_8a47b954(player) {
     return;
   }
 
-  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == # "mod_trigger_hurt" && player.laststandparams.weapon.name === # "none") {
+  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == #"mod_trigger_hurt" && player.laststandparams.weapon.name === #"none") {
     return;
   }
 
@@ -799,7 +799,7 @@ function drop_inventory(player) {
     return items;
   }
 
-  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == # "mod_trigger_hurt" && player.laststandparams.weapon.name === # "none") {
+  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == #"mod_trigger_hurt" && player.laststandparams.weapon.name === #"none") {
     return items;
   }
 
@@ -894,7 +894,7 @@ function drop_inventory(player) {
     count = isDefined(inventoryitem.count) ? inventoryitem.count : 1;
     amount = inventoryitem.amount;
 
-    if(isDefined(item_weapon) && inventoryitem.itementry.itemtype == # "weapon") {
+    if(isDefined(item_weapon) && inventoryitem.itementry.itemtype == #"weapon") {
       var_4f21d62e = item_inventory_util::function_2b83d3ff(inventoryitem);
       inventoryitem.weaponoptions = player item_inventory::function_fc04b237(var_4f21d62e, inventoryitem.weaponoptions);
       var_ca577a9c = player getweaponammoclip(var_4f21d62e);
@@ -942,7 +942,7 @@ function drop_inventory(player) {
       if(isDefined(level.var_4afb8f5a[itemname])) {
         itemname = level.var_4afb8f5a[itemname];
 
-        if(itemname == # "") {
+        if(itemname == #"") {
           continue;
         }
       }
@@ -1036,7 +1036,7 @@ function drop_inventory(player) {
 
     deathstash.var_7b500c20[deathstash.var_7b500c20.size] = item;
 
-    if(isPlayer(player) && item.itementry.itemtype == # "dogtag") {
+    if(isPlayer(player) && item.itementry.itemtype == #"dogtag") {
       item.victim = player;
       item.victimteam = player.team;
 
@@ -1130,7 +1130,7 @@ function function_30f75868(index = 0, weapon = undefined, count = 0, amount = 0,
   if(isDefined(level.var_4afb8f5a[item.itementry.name])) {
     item_name = level.var_4afb8f5a[item.itementry.name];
 
-    if(item_name == # "") {
+    if(item_name == #"") {
       return undefined;
     }
 
@@ -1371,7 +1371,7 @@ function function_4da960f6(origin, radius, time) {
         continue;
       }
 
-      if(isDefined(item.classname) && item.classname == # "grenade") {
+      if(isDefined(item.classname) && item.classname == #"grenade") {
         continue;
       }
 
@@ -1386,7 +1386,7 @@ function function_d8342646(deathstash) {
   if(isentity(deathstash)) {
     function_f04e5fc2(deathstash.var_befa8c8c);
     deathstash.var_befa8c8c = undefined;
-    deathstash.team = # "none";
+    deathstash.team = #"none";
   }
 }
 

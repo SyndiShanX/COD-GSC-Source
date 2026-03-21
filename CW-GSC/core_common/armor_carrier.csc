@@ -124,7 +124,7 @@ function private function_86b9a404() {
 }
 
 function event_handler[event_647adea6] function_465c8646(eventstruct) {
-  if(eventstruct.name === # "armor_plate_behavior_gpad" || eventstruct.name === # "armor_plate_behavior_kbm") {
+  if(eventstruct.name === #"armor_plate_behavior_gpad" || eventstruct.name === #"armor_plate_behavior_kbm") {
     function_321bb79b(eventstruct.localclientnum, int(eventstruct.value));
   }
 }

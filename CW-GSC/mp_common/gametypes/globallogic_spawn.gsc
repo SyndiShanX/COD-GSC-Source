@@ -182,7 +182,7 @@ function mayspawn() {
     return false;
   }
 
-  if(game.state == # "playing" && level.spawnsystem.var_c2cc011f && !function_31f04670(self.team)) {
+  if(game.state == #"playing" && level.spawnsystem.var_c2cc011f && !function_31f04670(self.team)) {
     return false;
   }
 
@@ -604,7 +604,7 @@ function function_3ee5119e() {
     return;
   }
 
-  if(self.pers[#"team"] != # "spectator" && level.spectatetype == 5 && self.var_ba35b2d2 == # "invalid") {
+  if(self.pers[#"team"] != #"spectator" && level.spectatetype == 5 && self.var_ba35b2d2 == #"invalid") {
     spectating::set_permissions();
     var_74578e76 = function_c65231e2(self.squad);
     player = spectating::function_327e6270(var_74578e76, &spectating::function_44d43a69, #"invalid");
@@ -612,7 +612,7 @@ function function_3ee5119e() {
     self.var_ba35b2d2 = player.squad;
   }
 
-  if(self.pers[#"team"] != # "spectator" && level.spectatetype == 4 && self.spectatorteam == # "invalid") {
+  if(self.pers[#"team"] != #"spectator" && level.spectatetype == 4 && self.spectatorteam == #"invalid") {
     spectating::set_permissions();
     team_players = getplayers(self.team);
     player = spectating::function_327e6270(team_players, &spectating::spectator_team, #"invalid");
@@ -629,7 +629,7 @@ function function_3ee5119e() {
 }
 
 function private function_9ead6959() {
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     return true;
   }
 
@@ -650,7 +650,7 @@ function in_spawnspectator(origin, angles) {
   self.spectatekillcam = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     self.statusicon = "";
   } else {
     self.statusicon = "hud_status_dead";
@@ -680,7 +680,7 @@ function forcespawn(time) {
     return;
   }
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     return;
   }
 
@@ -747,7 +747,7 @@ function kickifidontspawninternal() {
     return;
   }
 
-  if(self.pers[#"team"] == # "spectator") {
+  if(self.pers[#"team"] == #"spectator") {
     return;
   }
 

@@ -283,7 +283,7 @@ function_c1c51837(e_player) {
   self.var_b364c165 = 1;
   e_player.var_d675d730.n_kill_count++;
 
-  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
+  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
     if(self.no_gib !== 1) {
       var_d3876bb9 = [ &gibserverutils::gibhead, &gibserverutils::gibleftarm, &gibserverutils::gibleftleg, &gibserverutils::giblegs, &gibserverutils::gibrightarm, &gibserverutils::gibrightleg, &gibserverutils::annihilate];
       var_d3876bb9 = array::randomize(var_d3876bb9);
@@ -399,7 +399,7 @@ function_69153101() {
     return false;
   }
 
-  if(level.var_2439365b === # "turret") {
+  if(level.var_2439365b === #"turret") {
     return false;
   }
 

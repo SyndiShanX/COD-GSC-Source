@@ -43,13 +43,13 @@ function private function_83fbb13c(params) {
 
   switch (params.tier) {
     case 1:
-      var_ee3c60e = # "hash_3f4dec20d8ee78d3";
+      var_ee3c60e = #"hash_3f4dec20d8ee78d3";
       break;
     case 2:
-      var_ee3c60e = # "hash_3f4ded20d8ee7a86";
+      var_ee3c60e = #"hash_3f4ded20d8ee7a86";
       break;
     case 3:
-      var_ee3c60e = # "hash_3f4dee20d8ee7c39";
+      var_ee3c60e = #"hash_3f4dee20d8ee7c39";
       break;
   }
 
@@ -90,7 +90,7 @@ function function_49f4b6ee() {
   }
 }
 
-function add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = # "hash_2082da6662372184") {
+function add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = #"hash_2082da6662372184") {
   var_4812bba2 = 0;
 
   if(isDefined(var_28066539)) {

@@ -41,7 +41,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
   self notify(#"new_scripted_anim");
   self endon(#"new_scripted_anim", #"death");
 
-  if(!isDefined(self.model) || self.model == # "") {
+  if(!isDefined(self.model) || self.model == #"") {
     assertmsg("<dev string:x38>" + self.origin);
     return;
   }

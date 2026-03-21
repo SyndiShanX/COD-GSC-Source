@@ -96,7 +96,7 @@ function_c9ff0dce() {
     return;
   }
 
-  if(self.team == # "axis" && isDefined(level.var_ad7c0539)) {
+  if(self.team == #"axis" && isDefined(level.var_ad7c0539)) {
     if(isDefined(level.var_66b3c127)) {
       switch (level.var_ad7c0539) {
         case 2:
@@ -211,7 +211,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     self.isinuse = 0;
 
     if(self.targetname === "war_machine_victim") {
@@ -519,7 +519,7 @@ function_bd6468f() {
 
   while(!level flag::get("swim_done")) {
     level.players[0] thread function_232a26ae();
-    level.var_3e67eeea = # "hash_5d94c1a3e60a6741";
+    level.var_3e67eeea = #"hash_5d94c1a3e60a6741";
     ct_utils::function_e0d36a2c(undefined, "s_war_machine_swim_goto", array(#"eq_cluster_semtex_grenade", #"hero_pineapplegun"), 0, undefined, 25);
     ct_utils::function_e9ab1003("s_war_machine_swim_goto");
     level.var_3e67eeea = undefined;

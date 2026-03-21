@@ -40,7 +40,7 @@ function private postinit() {
   level.var_d03afa3 = [];
   level.var_e30d350e = [];
   level.var_f3901984 = 1.6;
-  level.var_7b2bc947 = # "hash_451f320375b42851";
+  level.var_7b2bc947 = #"hash_451f320375b42851";
   level.var_7c48c7c3 = "_right";
   var_c10384b6 = struct::get_array("red_door", "groupname");
 

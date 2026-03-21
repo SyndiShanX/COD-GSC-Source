@@ -152,7 +152,7 @@ updatematchbonusscores(outcome) {
       continue;
     }
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == # "spectator") {
+    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == #"spectator") {
       continue;
     }
 
@@ -361,7 +361,7 @@ giveplayermomentumnotification(score, label, descvalue, countstowardrampage, wea
 
   if(isalive(self)) {
     if(isDefined(level.var_bdff8e21) && level.var_bdff8e21) {
-      score = event === # "kill" ? 1 : 0;
+      score = event === #"kill" ? 1 : 0;
     }
 
     _setplayermomentum(self, self.pers[#"momentum"] + score);
@@ -1199,7 +1199,7 @@ threadedrecordplayerstats(dataname) {
 
 updatewinstats(winner) {
   winner stats::function_bb7eedf0(#"losses", -1);
-  winner.pers[#"outcome"] = # "win";
+  winner.pers[#"outcome"] = #"win";
   winner stats::function_bb7eedf0(#"wins", 1);
 
   if(level.rankedmatch && !level.disablestattracking && sessionmodeismultiplayergame()) {
@@ -1339,7 +1339,7 @@ registercontractwinevent(event) {
 }
 
 updatelossstats(loser) {
-  loser.pers[#"outcome"] = # "loss";
+  loser.pers[#"outcome"] = #"loss";
   loser stats::function_bb7eedf0(#"losses", 1);
   loser updatestatratio("wlratio", "wins", "losses");
   loser notify(#"loss");
@@ -1353,7 +1353,7 @@ updatelosslatejoinstats(loser) {
 
 updatetiestats(loser) {
   loser stats::function_bb7eedf0(#"losses", -1);
-  loser.pers[#"outcome"] = # "draw";
+  loser.pers[#"outcome"] = #"draw";
   loser stats::function_bb7eedf0(#"ties", 1);
   loser updatestatratio("wlratio", "wins", "losses");
 
@@ -1502,11 +1502,11 @@ inckillstreaktracker(weapon) {
   self endon(#"disconnect");
   waittillframeend();
 
-  if(weapon.name == # "artillery") {
+  if(weapon.name == #"artillery") {
     self.pers[#"artillery_kills"]++;
   }
 
-  if(weapon.name == # "dog_bite") {
+  if(weapon.name == #"dog_bite") {
     self.pers[#"dog_kills"]++;
   }
 }
@@ -1805,7 +1805,7 @@ function_f38e3d84(attacker, inflictor, weapon) {
     return false;
   }
 
-  if(attacker.team == # "spectator") {
+  if(attacker.team == #"spectator") {
     return false;
   }
 

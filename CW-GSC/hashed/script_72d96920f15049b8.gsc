@@ -140,7 +140,7 @@ function function_5160bb1e(killstreaktype) {
         break;
       }
     }
-  } else if(sessionmodeiszombiesgame() && !isDefined(level.var_97e461d4) && util::get_game_type() === # "zsurvival") {
+  } else if(sessionmodeiszombiesgame() && !isDefined(level.var_97e461d4) && util::get_game_type() === #"zsurvival") {
     a_startnodes = getvehiclenodearray("chopper_gunner_path_start_multi", "targetname");
 
     foreach(node in a_startnodes) {
@@ -328,7 +328,7 @@ function function_dede0607(isowner, killstreaktype) {
   choppergunner clearanim(#"hash_7483c325182bab52", 0.2);
   choppergunner clientfield::set("" + # "hash_4ddf67f7aa0f6884", 0);
 
-  if(var_df4a5052._notify == # "hash_623a20b6b2608171") {
+  if(var_df4a5052._notify == #"hash_623a20b6b2608171") {
     choppergunner thread scene::stop(#"chopper_gunner_door_open");
 
     if(sessionmodeiszombiesgame()) {
@@ -336,7 +336,7 @@ function function_dede0607(isowner, killstreaktype) {
     }
   }
 
-  if(!isDefined(self) || var_df4a5052._notify != # "timeout") {
+  if(!isDefined(self) || var_df4a5052._notify != #"timeout") {
     function_cf58dcdd();
     return false;
   }

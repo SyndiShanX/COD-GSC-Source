@@ -25,7 +25,7 @@ function private preinit() {
 
   gametype = util::get_game_type();
 
-  if(gametype == # "zsurvival") {
+  if(gametype == #"zsurvival") {
     return;
   }
 
@@ -41,7 +41,7 @@ function private preinit() {
 function private postinit() {
   gametype = util::get_game_type();
 
-  if(gametype == # "zsurvival") {
+  if(gametype == #"zsurvival") {
     return;
   }
 
@@ -1042,7 +1042,7 @@ function private function_cdd9b388() {
                 }
               }
             case 3:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "survival_ammo") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"survival_ammo") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
 
                 if(isDefined(item.targetname)) {
@@ -1052,13 +1052,13 @@ function private function_cdd9b388() {
 
               break;
             case 4:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "weapon") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"weapon") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 5:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "armor") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"armor") {
                 if(item.itementry.name == "<dev string:x8f8>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:x90c>") {
@@ -1069,32 +1069,32 @@ function private function_cdd9b388() {
                   sphere(item.origin, radius, color, 1, 0, 10, 20);
                 }
 
-                if(isDefined(item.itementry) && item.itementry.itemtype === # "weapon") {
+                if(isDefined(item.itementry) && item.itementry.itemtype === #"weapon") {
                   sphere(item.origin, radius, color, 1, 0, 10, 20);
                 }
               }
 
               break;
             case 6:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"equipment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 7:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "attachment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"attachment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 8:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "survival_armor_shard") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"survival_armor_shard") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 9:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "survival_essence") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"survival_essence") {
                 if(item.itementry.amount === 1) {
                   color = (0.75, 0.75, 0.75);
                 } else {
@@ -1106,7 +1106,7 @@ function private function_cdd9b388() {
 
               break;
             case 10:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "survival_scrap") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"survival_scrap") {
                 if(item.itementry.amount === 1) {
                   color = (0.75, 0.75, 0.75);
                 } else {
@@ -1118,37 +1118,37 @@ function private function_cdd9b388() {
 
               break;
             case 11:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "survival_perk") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"survival_perk") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 12:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "survival_scorestreak") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"survival_scorestreak") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 13:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "generic") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"generic") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 14:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "resource") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"resource") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 16:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "field_upgrade") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"field_upgrade") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 17:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "tactical") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"tactical") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
@@ -1260,19 +1260,19 @@ function private function_cdd9b388() {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
             case 3:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "ammo") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"ammo") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 4:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "weapon") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"weapon") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 5:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "health") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"health") {
                 if(item.itementry.name == "<dev string:x935>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:x94a>") {
@@ -1286,7 +1286,7 @@ function private function_cdd9b388() {
 
               break;
             case 6:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "armor") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"armor") {
                 if(item.itementry.name == "<dev string:x8f8>") {
                   sphere(item.origin, radius, (0, 1, 0), 1, 0, 10, 20);
                 } else if(item.itementry.name == "<dev string:x90c>") {
@@ -1300,61 +1300,61 @@ function private function_cdd9b388() {
 
               break;
             case 7:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "equipment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"equipment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 8:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "backpack") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"backpack") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 9:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "attachment") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"attachment") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 10:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "generic") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"generic") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 11:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "killstreak") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"killstreak") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 12:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "quest") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"quest") {
                 sphere(item.origin, radius, (1, 0.5, 0), 1, 0, 10, 20);
               }
 
               break;
             case 13:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "cash") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"cash") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 14:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "resource") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"resource") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 15:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "field_upgrade") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"field_upgrade") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 
               break;
             case 16:
-              if(isDefined(item.itementry) && item.itementry.itemtype === # "tactical") {
+              if(isDefined(item.itementry) && item.itementry.itemtype === #"tactical") {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
               }
 

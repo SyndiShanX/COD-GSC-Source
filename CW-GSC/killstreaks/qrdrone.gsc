@@ -32,30 +32,30 @@ function init_shared() {
     level.qrdrone_vehicle = "qrdrone_mp";
     params = getscriptbundle("killstreak_tank_robot");
     level.ai_tank_stun_fx = params.var_9e0f2ad3;
-    level.qrdrone_dialog[#"launch"][0] = # "ac130_plt_yeahcleared";
-    level.qrdrone_dialog[#"launch"][1] = # "ac130_plt_rollinin";
-    level.qrdrone_dialog[#"launch"][2] = # "ac130_plt_scanrange";
-    level.qrdrone_dialog[#"out_of_range"][0] = # "ac130_plt_cleanup";
-    level.qrdrone_dialog[#"out_of_range"][1] = # "ac130_plt_targetreset";
-    level.qrdrone_dialog[#"track"][0] = # "ac130_fco_moreenemy";
-    level.qrdrone_dialog[#"track"][1] = # "ac130_fco_getthatguy";
-    level.qrdrone_dialog[#"track"][2] = # "ac130_fco_guymovin";
-    level.qrdrone_dialog[#"track"][3] = # "ac130_fco_getperson";
-    level.qrdrone_dialog[#"track"][4] = # "ac130_fco_guyrunnin";
-    level.qrdrone_dialog[#"track"][5] = # "ac130_fco_gotarunner";
-    level.qrdrone_dialog[#"track"][6] = # "ac130_fco_backonthose";
-    level.qrdrone_dialog[#"track"][7] = # "ac130_fco_gonnagethim";
-    level.qrdrone_dialog[#"track"][8] = # "ac130_fco_personnelthere";
-    level.qrdrone_dialog[#"track"][9] = # "ac130_fco_rightthere";
-    level.qrdrone_dialog[#"track"][10] = # "ac130_fco_tracking";
-    level.qrdrone_dialog[#"tag"][0] = # "ac130_fco_nice";
-    level.qrdrone_dialog[#"tag"][1] = # "ac130_fco_yougothim";
-    level.qrdrone_dialog[#"tag"][2] = # "ac130_fco_yougothim2";
-    level.qrdrone_dialog[#"tag"][3] = # "ac130_fco_okyougothim";
-    level.qrdrone_dialog[#"assist"][0] = # "ac130_fco_goodkill";
-    level.qrdrone_dialog[#"assist"][1] = # "ac130_fco_thatsahit";
-    level.qrdrone_dialog[#"assist"][2] = # "ac130_fco_directhit";
-    level.qrdrone_dialog[#"assist"][3] = # "ac130_fco_rightontarget";
+    level.qrdrone_dialog[#"launch"][0] = #"ac130_plt_yeahcleared";
+    level.qrdrone_dialog[#"launch"][1] = #"ac130_plt_rollinin";
+    level.qrdrone_dialog[#"launch"][2] = #"ac130_plt_scanrange";
+    level.qrdrone_dialog[#"out_of_range"][0] = #"ac130_plt_cleanup";
+    level.qrdrone_dialog[#"out_of_range"][1] = #"ac130_plt_targetreset";
+    level.qrdrone_dialog[#"track"][0] = #"ac130_fco_moreenemy";
+    level.qrdrone_dialog[#"track"][1] = #"ac130_fco_getthatguy";
+    level.qrdrone_dialog[#"track"][2] = #"ac130_fco_guymovin";
+    level.qrdrone_dialog[#"track"][3] = #"ac130_fco_getperson";
+    level.qrdrone_dialog[#"track"][4] = #"ac130_fco_guyrunnin";
+    level.qrdrone_dialog[#"track"][5] = #"ac130_fco_gotarunner";
+    level.qrdrone_dialog[#"track"][6] = #"ac130_fco_backonthose";
+    level.qrdrone_dialog[#"track"][7] = #"ac130_fco_gonnagethim";
+    level.qrdrone_dialog[#"track"][8] = #"ac130_fco_personnelthere";
+    level.qrdrone_dialog[#"track"][9] = #"ac130_fco_rightthere";
+    level.qrdrone_dialog[#"track"][10] = #"ac130_fco_tracking";
+    level.qrdrone_dialog[#"tag"][0] = #"ac130_fco_nice";
+    level.qrdrone_dialog[#"tag"][1] = #"ac130_fco_yougothim";
+    level.qrdrone_dialog[#"tag"][2] = #"ac130_fco_yougothim2";
+    level.qrdrone_dialog[#"tag"][3] = #"ac130_fco_okyougothim";
+    level.qrdrone_dialog[#"assist"][0] = #"ac130_fco_goodkill";
+    level.qrdrone_dialog[#"assist"][1] = #"ac130_fco_thatsahit";
+    level.qrdrone_dialog[#"assist"][2] = #"ac130_fco_directhit";
+    level.qrdrone_dialog[#"assist"][3] = #"ac130_fco_rightontarget";
     level.qrdrone_lastdialogtime = 0;
     level.qrdrone_nodeployzones = getEntArray("no_vehicles", "targetname");
 
@@ -148,7 +148,7 @@ function setcarryingqrdrone(carryqrdrone) {
   carryqrdrone thread carryqrdrone_setcarried(self);
 
   if(!carryqrdrone.canbeplaced) {
-    if(self.team != # "spectator") {
+    if(self.team != #"spectator") {
       self iprintlnbold(#"hash_7602a0cff466eccd");
     }
 

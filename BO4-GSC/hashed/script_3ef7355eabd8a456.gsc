@@ -277,7 +277,7 @@ function_54db89ef() {
       level flag::wait_till("card_inserted");
       zm_hms_util::function_52c3fe8d(s_card.vo_line, level.var_a73534b7.origin);
 
-      if(s_card.vo_line[0] == # "hash_217e6ae56b61ad3b") {
+      if(s_card.vo_line[0] == #"hash_217e6ae56b61ad3b") {
         level flag::set(#"hash_5df188993c013698");
       }
 

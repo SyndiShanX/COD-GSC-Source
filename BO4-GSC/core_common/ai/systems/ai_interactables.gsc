@@ -43,7 +43,7 @@ function_2f0f1b62() {
 }
 
 function_64d25a18(entity) {
-  if(entity.archetype !== # "human") {
+  if(entity.archetype !== #"human") {
     return false;
   }
 

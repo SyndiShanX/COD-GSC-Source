@@ -64,7 +64,7 @@ function event_handler[gametype_init] main(eventstruct) {
     game.var_dc542c3a = [];
   }
 
-  level.var_febab1ea = # "axis_base";
+  level.var_febab1ea = #"axis_base";
   level.onstartgametype = &onstartgametype;
   level.ontimelimit = &ontimelimit;
   level.onendround = &onendround;
@@ -281,7 +281,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "ekia";
+  level.var_e4688422[level.var_e4688422.size] = #"ekia";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -289,7 +289,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "kill_enemy_with_armor";
+  level.var_e4688422[level.var_e4688422.size] = #"kill_enemy_with_armor";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -297,7 +297,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "uav_kill";
+  level.var_e4688422[level.var_e4688422.size] = #"uav_kill";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -305,7 +305,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "hash_729bc010900de6e1";
+  level.var_e4688422[level.var_e4688422.size] = #"hash_729bc010900de6e1";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -313,7 +313,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "hash_18522e88ad05a3b2";
+  level.var_e4688422[level.var_e4688422.size] = #"hash_18522e88ad05a3b2";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -321,7 +321,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "hash_5a02ff4e546b68f1";
+  level.var_e4688422[level.var_e4688422.size] = #"hash_5a02ff4e546b68f1";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -329,7 +329,7 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "hash_7b589b3c0bd1a913";
+  level.var_e4688422[level.var_e4688422.size] = #"hash_7b589b3c0bd1a913";
 
   if(!isDefined(level.var_e4688422)) {
     level.var_e4688422 = [];
@@ -337,19 +337,19 @@ function function_9e23f471() {
     level.var_e4688422 = array(level.var_e4688422);
   }
 
-  level.var_e4688422[level.var_e4688422.size] = # "hash_374faf9b296382e8";
+  level.var_e4688422[level.var_e4688422.size] = #"hash_374faf9b296382e8";
 }
 
 function function_fa414efa() {
   level.var_6196feea = [];
-  level.var_6196feea[1] = # "pistol_semiauto_t9_item";
-  level.var_6196feea[2] = # "hash_218f6b7797b8ccfc";
-  level.var_6196feea[3] = # "hash_cf3994dfed6c15f";
-  level.var_6196feea[4] = # "hash_593b4312a751497f";
-  level.var_6196feea[5] = # "hash_53e92e3233adce70";
-  level.var_6196feea[6] = # "hash_42886dffb475ca60";
-  level.var_6196feea[7] = # "hash_4f99bd070512e22d";
-  level.var_6196feea[8] = # "hash_7e675508bfa4337a";
+  level.var_6196feea[1] = #"pistol_semiauto_t9_item";
+  level.var_6196feea[2] = #"hash_218f6b7797b8ccfc";
+  level.var_6196feea[3] = #"hash_cf3994dfed6c15f";
+  level.var_6196feea[4] = #"hash_593b4312a751497f";
+  level.var_6196feea[5] = #"hash_53e92e3233adce70";
+  level.var_6196feea[6] = #"hash_42886dffb475ca60";
+  level.var_6196feea[7] = #"hash_4f99bd070512e22d";
+  level.var_6196feea[8] = #"hash_7e675508bfa4337a";
 }
 
 function onstartgametype() {
@@ -392,8 +392,8 @@ function function_3d83e588(playerrole) {
 
 function ontimelimit() {
   thread globallogic::function_a3e3bd39(#"allies", 13);
-  game.telemetry.var_8b9e841f = # "hash_37c13a8a191d2108";
-  game.telemetry.var_e72137e8 = # "timeout";
+  game.telemetry.var_8b9e841f = #"hash_37c13a8a191d2108";
+  game.telemetry.var_e72137e8 = #"timeout";
 }
 
 function onendround(var_c1e98979) {
@@ -403,7 +403,7 @@ function onendround(var_c1e98979) {
     game.telemetry.var_160ffca5 = 0;
   }
 
-  if(round::get_winning_team() == # "axis") {
+  if(round::get_winning_team() == #"axis") {
     var_79bd9998 = 1;
     game.telemetry.var_160ffca5++;
   }
@@ -505,7 +505,7 @@ function givecustomloadout() {
   }
 
   if(!isinarray(self.var_7ec4f7d7, #"hash_25c2dcf9ec4c42e2")) {
-    self.var_7ec4f7d7[self.var_7ec4f7d7.size] = # "hash_25c2dcf9ec4c42e2";
+    self.var_7ec4f7d7[self.var_7ec4f7d7.size] = #"hash_25c2dcf9ec4c42e2";
   }
 
   if(!isDefined(self.var_7ec4f7d7)) {
@@ -515,7 +515,7 @@ function givecustomloadout() {
   }
 
   if(!isinarray(self.var_7ec4f7d7, #"talent_flakjacket_mp")) {
-    self.var_7ec4f7d7[self.var_7ec4f7d7.size] = # "talent_flakjacket_mp";
+    self.var_7ec4f7d7[self.var_7ec4f7d7.size] = #"talent_flakjacket_mp";
   }
 
   self item_inventory::reset_inventory(0);
@@ -998,18 +998,18 @@ function function_6a1d53f3() {
 
   if(var_8577fb12 == 0 && aliveplayercount > 0) {
     thread globallogic::function_a3e3bd39(#"allies", 14);
-    game.telemetry.var_8b9e841f = # "hash_37c13a8a191d2108";
-    game.telemetry.var_e72137e8 = # "hash_2b0828f67a90160d";
+    game.telemetry.var_8b9e841f = #"hash_37c13a8a191d2108";
+    game.telemetry.var_e72137e8 = #"hash_2b0828f67a90160d";
   } else if(!function_b106923d(3) && !function_b106923d(2)) {
     thread globallogic::function_a3e3bd39(#"axis", 12);
-    game.telemetry.var_8b9e841f = # "hash_7c4041b358f9cfe";
-    game.telemetry.var_e72137e8 = # "hash_61cf92141266b6eb";
+    game.telemetry.var_8b9e841f = #"hash_7c4041b358f9cfe";
+    game.telemetry.var_e72137e8 = #"hash_61cf92141266b6eb";
   }
 
   if(level.var_d815e50d != 1 && is_true(getdvarint(#"hash_388a565a02f4a632")) && level.var_346345d6.size == 0) {
     thread globallogic::function_a3e3bd39(#"axis", 15);
-    game.telemetry.var_8b9e841f = # "hash_7c4041b358f9cfe";
-    game.telemetry.var_e72137e8 = # "hash_702839005c1c3dd7";
+    game.telemetry.var_8b9e841f = #"hash_7c4041b358f9cfe";
+    game.telemetry.var_e72137e8 = #"hash_702839005c1c3dd7";
   }
 }
 
@@ -1305,7 +1305,7 @@ function function_f9935e6c() {
   weaponslist = "t9_spy_weapons";
 
   if(level.var_a1f33484 === 1) {
-    weaponslist = # "hash_72184d98be62d1da";
+    weaponslist = #"hash_72184d98be62d1da";
     var_5609c166 = 0;
   }
 
@@ -1405,7 +1405,7 @@ function function_61b78a16(role) {
     objective_setinvisibletoplayer(self.var_a08e14c4, self);
     self thread function_ac945cba();
     self thread globallogic_audio::leader_dialog_on_player("spyRoleAssignedDoubleAgent");
-    self.pers[#"telemetry"].spyRole = # "hash_7c4041b358f9cfe";
+    self.pers[#"telemetry"].spyRole = #"hash_7c4041b358f9cfe";
     self.pers[#"hash_1ef87e3d4b5f018a"] = 1;
   } else {
     self thread globallogic_audio::function_c246758e("role_set");
@@ -1454,7 +1454,7 @@ function function_61b78a16(role) {
 
       player_role::set(self.characterindex);
       self thread globallogic_audio::leader_dialog_on_player("spyRoleAssignedInvestigator");
-      self.pers[#"telemetry"].spyRole = # "investigator";
+      self.pers[#"telemetry"].spyRole = #"investigator";
       self.pers[#"hash_1ef87e3d4b5f018a"] = 1;
     } else {
       if(level.var_383f3268 > 1) {
@@ -1463,7 +1463,7 @@ function function_61b78a16(role) {
         self thread globallogic_audio::leader_dialog_on_player("spyRoleAssignedOperative");
       }
 
-      self.pers[#"telemetry"].spyRole = # "operative";
+      self.pers[#"telemetry"].spyRole = #"operative";
     }
   }
 
@@ -2448,7 +2448,7 @@ function private processassist(killedplayer) {
 }
 
 function function_cb429de3() {
-  return teams::function_959bac94() == # "spectator" || flag::get("spy_role_assigned");
+  return teams::function_959bac94() == #"spectator" || flag::get("spy_role_assigned");
 }
 
 function function_20f8f88a(seconds) {
@@ -2494,7 +2494,7 @@ function private all_players_spawned() {
   }
 
   foreach(player in level.players) {
-    if(player.team === # "spectator" || player.sessionstate === "disconnected") {
+    if(player.team === #"spectator" || player.sessionstate === "disconnected") {
       continue;
     }
 

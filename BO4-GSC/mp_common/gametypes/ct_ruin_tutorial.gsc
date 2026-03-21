@@ -47,7 +47,7 @@ init() {
 }
 
 function_c9ff0dce() {
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self.overrideplayerdamage = &callback_player_damage;
     self ct_utils::player_reset();
     self thread function_523dd7be();
@@ -79,7 +79,7 @@ function_c9ff0dce() {
     return;
   }
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     if(isDefined(level.var_7b46025)) {
       switch (level.var_ad7c0539) {
         case 5:
@@ -134,7 +134,7 @@ callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
   }
 
   if(isDefined(level.var_eb5015e6) && level.var_eb5015e6) {
-    if(isDefined(weapon) && (weapon.name == # "eq_gravityslam" || weapon.name == # "eq_gravityslam_ct")) {
+    if(isDefined(weapon) && (weapon.name == #"eq_gravityslam" || weapon.name == #"eq_gravityslam_ct")) {
       return n_damage;
     } else {
       self.health++;
@@ -149,7 +149,7 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   self.var_6b6241ac = self.origin;
   self.var_45cac770 = self.angles;
 
-  if(self.team == # "axis") {
+  if(self.team == #"axis") {
     if(level.var_ad7c0539 === 10) {
       e_player = ct_utils::get_player();
 
@@ -723,7 +723,7 @@ function_baae9a51() {
     e_beacon clientfield::set("animate_spawn_beacon", 1);
     e_beacon setCanDamage(1);
     e_beacon.health = 400;
-    e_beacon.team = # "axis";
+    e_beacon.team = #"axis";
     e_beacon thread function_ffdd31e0();
     e_beacon.s_loc = s_loc;
     level.a_spawn_beacons[level.a_spawn_beacons.size] = e_beacon;
@@ -783,7 +783,7 @@ function_baae9a51() {
   while(true) {
     weapon = e_player getcurrentweapon();
 
-    if(!(isDefined(weapon) && weapon.name == # "none")) {
+    if(!(isDefined(weapon) && weapon.name == #"none")) {
       level.var_e72728b8 = array(#"eq_gravityslam");
       wait 0.1;
       break;
@@ -1033,7 +1033,7 @@ function_5de4ec62() {
   while(true) {
     e_player = getplayers()[0];
 
-    if(isDefined(e_player.var_657a47ca) && (e_player.var_657a47ca == # "eq_gravityslam" || e_player.var_657a47ca == # "eq_gravityslam_ct")) {
+    if(isDefined(e_player.var_657a47ca) && (e_player.var_657a47ca == #"eq_gravityslam" || e_player.var_657a47ca == #"eq_gravityslam_ct")) {
       break;
     }
 
@@ -1394,7 +1394,7 @@ function_356af630() {
     otherteam = util::getotherteam(e_player.team);
     newpos = getclosestpointonnavmesh(e_player.origin + (-600, -600, 0), 800, 60);
     drone = spawnvehicle(#"archetype_mini_quadtank_ct", newpos + (0, 0, 20), (0, 0, 0), "talon", undefined, 1);
-    drone.vehicletype = # "archetype_mini_quadtank_ct";
+    drone.vehicletype = #"archetype_mini_quadtank_ct";
     ai_tank::function_9b13ebf(drone);
     drone.controlled = 0;
     drone.goalradius = 250;
@@ -1441,7 +1441,7 @@ function_1f212110(params) {
       var_595e41ee = 150;
     }
 
-    event = # "ekia";
+    event = #"ekia";
     eventindex = level.scoreinfo[event][#"row"];
     var_6a98b865 = eattacker.momentum;
     eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
@@ -1661,7 +1661,7 @@ function_1cf646fa() {
   str_paths = var_1de166d.script_noteworthy;
 
   if(!isDefined(var_1de166d.var_6361cc82)) {
-    if(var_1de166d.s_loc.script_noteworthy == # "s_beacon_1_path") {
+    if(var_1de166d.s_loc.script_noteworthy == #"s_beacon_1_path") {
       var_1de166d.var_6361cc82 = [];
       var_1de166d.var_6361cc82[var_1de166d.var_6361cc82.size] = struct::get("s_beacon_1_path", "targetname");
       var_1de166d.var_6361cc82[var_1de166d.var_6361cc82.size] = struct::get("s_beacon_2_path", "targetname");

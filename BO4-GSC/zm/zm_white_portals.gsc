@@ -100,7 +100,7 @@ function_5702b2e7(e_player) {
     t_crafting = self;
   }
 
-  if(t_crafting.blueprint.name == # "zblueprint_white_mmtd") {
+  if(t_crafting.blueprint.name == #"zblueprint_white_mmtd") {
     t_crafting.var_4f749ffe show();
     t_crafting.var_ae360c37 show();
     level flag::set(#"hash_2120a14c5eeab590");

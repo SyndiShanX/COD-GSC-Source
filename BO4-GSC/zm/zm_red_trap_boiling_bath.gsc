@@ -97,7 +97,7 @@ trap_damage(t_trap) {
       #e_victim: self, #e_trap: t_trap
     });
 
-    if(self.archetype === # "zombie") {
+    if(self.archetype === #"zombie") {
       level.var_c33299e2++;
       level function_922c05f();
       self clientfield::set("boiling_trap_death_fx", 1);

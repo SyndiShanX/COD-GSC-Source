@@ -158,7 +158,7 @@ function function_ed6e936b(var_626fec81, var_dcaf4972) {
 }
 
 function function_76ddcd65() {
-  if(function_be90acca(getdvarstring(#"g_gametype")) === # "gunfight") {
+  if(function_be90acca(getdvarstring(#"g_gametype")) === #"gunfight") {
     zone = level.zones[0];
 
     if(isDefined(zone) && isDefined(zone.gameobject)) {

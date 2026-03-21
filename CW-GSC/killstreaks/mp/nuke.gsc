@@ -272,7 +272,7 @@ function forcespawnplayer() {
     return;
   }
 
-  if(self.pers[#"team"] === # "spectator") {
+  if(self.pers[#"team"] === #"spectator") {
     return;
   }
 

@@ -1289,7 +1289,7 @@ door_open_update(c_door) {
     e_who = waitresult.activator;
     c_door.m_e_trigger_player = e_who;
 
-    if(c_door.var_a2f96f78.script_team !== # "any" && !c_door.m_e_trigger_player util::is_on_side(c_door.var_a2f96f78.script_team)) {
+    if(c_door.var_a2f96f78.script_team !== #"any" && !c_door.m_e_trigger_player util::is_on_side(c_door.var_a2f96f78.script_team)) {
       continue;
     }
 

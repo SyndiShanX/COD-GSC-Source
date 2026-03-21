@@ -115,7 +115,7 @@ function on_menu_response() {
       continue;
     }
 
-    if(response == # "first_snapshot") {
+    if(response == #"first_snapshot") {
       if(level flag::get(#"hud_initialized")) {
         globallogic_ui::function_3f278444();
       }
@@ -124,17 +124,17 @@ function on_menu_response() {
       continue;
     }
 
-    if(response == # "restartmission") {
+    if(response == #"restartmission") {
       level function_c35a1bfc();
       continue;
     }
 
-    if(response == # "restartcheckpoint") {
+    if(response == #"restartcheckpoint") {
       level function_d7c2965();
       continue;
     }
 
-    if(response == # "hash_30abbfec4597c191") {
+    if(response == #"hash_30abbfec4597c191") {
       skipto::function_cfb483b7();
       continue;
     }
@@ -203,7 +203,7 @@ function on_menu_response() {
       continue;
     }
 
-    if(response == # "lui_button") {
+    if(response == #"lui_button") {
       level notify(#"lui_button", {
         #button: "" + intpayload
       });

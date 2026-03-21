@@ -294,7 +294,7 @@ function function_cf3f5b23() {
   }
 }
 
-function function_8fdfe5e4(weapon, item, var_d97184db, rarity = # "white", clipsize, var_9839b3b1, var_7fa2b50b) {
+function function_8fdfe5e4(weapon, item, var_d97184db, rarity = #"white", clipsize, var_9839b3b1, var_7fa2b50b) {
   self endoncallback(&function_898c65a1, #"death");
 
   if(isstring(var_d97184db) || ishash(var_d97184db)) {
@@ -614,19 +614,19 @@ function function_d4f870ec(item_rarity) {
   switch (item_rarity) {
     case # "resource":
     case # "loadout":
-      rarity = # "white";
+      rarity = #"white";
       break;
     case # "uncommon":
-      rarity = # "green";
+      rarity = #"green";
       break;
     case # "rare":
-      rarity = # "blue";
+      rarity = #"blue";
       break;
     case # "epic":
-      rarity = # "purple";
+      rarity = #"purple";
       break;
     case # "legendary":
-      rarity = # "orange";
+      rarity = #"orange";
       break;
     default:
       rarity = item_rarity;
@@ -636,7 +636,7 @@ function function_d4f870ec(item_rarity) {
   return rarity;
 }
 
-function function_17e9ed37(rarity = # "white", clipsize, var_9839b3b1, var_7fa2b50b, var_7b1ab4e4 = 0) {
+function function_17e9ed37(rarity = #"white", clipsize, var_9839b3b1, var_7fa2b50b, var_7b1ab4e4 = 0) {
   self endoncallback(&function_898c65a1, #"death");
   weapon = self getcurrentweapon();
   rarity = function_d4f870ec(rarity);
@@ -649,7 +649,7 @@ function function_17e9ed37(rarity = # "white", clipsize, var_9839b3b1, var_7fa2b
     var_51fbc989 = getcamoindex(weaponoptions);
 
     if(isDefined(item)) {
-      if(is_true(item.var_b3546c09) && rarity === # "orange") {
+      if(is_true(item.var_b3546c09) && rarity === #"orange") {
         self zm_stats::increment_challenge_stat(#"hash_4568ec6d243eafa1");
       }
 
@@ -688,7 +688,7 @@ function function_17e9ed37(rarity = # "white", clipsize, var_9839b3b1, var_7fa2b
         aat_name = item.aat;
       }
 
-      if(is_true(item.var_b3546c09) || item.itementry.rarity === # "loadout") {
+      if(is_true(item.var_b3546c09) || item.itementry.rarity === #"loadout") {
         var_5302a1ef = 1;
       }
 
@@ -758,16 +758,16 @@ function function_17e9ed37(rarity = # "white", clipsize, var_9839b3b1, var_7fa2b
             case # "white":
               break;
             case # "green":
-              var_ee3c60e = # "hash_393b11eaff09fb94";
+              var_ee3c60e = #"hash_393b11eaff09fb94";
               break;
             case # "blue":
-              var_ee3c60e = # "hash_77e066ee890f14fe";
+              var_ee3c60e = #"hash_77e066ee890f14fe";
               break;
             case # "purple":
-              var_ee3c60e = # "hash_1973a95f411b3bdf";
+              var_ee3c60e = #"hash_1973a95f411b3bdf";
               break;
             case # "orange":
-              var_ee3c60e = # "hash_5a8770083150213";
+              var_ee3c60e = #"hash_5a8770083150213";
               break;
             default:
               assert(0, "<dev string:x38>");
@@ -1175,14 +1175,14 @@ function add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, wea
   struct.weapon = weapon;
   struct.upgrade = upgrade;
   struct.weapon_classname = weapon_class;
-  struct.hint = # "hash_60606b68e93a29c8";
+  struct.hint = #"hash_60606b68e93a29c8";
   struct.cost = cost;
   struct.vox = weaponvo;
   struct.vox_response = weaponvoresp;
   struct.is_wonder_weapon = is_wonder_weapon;
   struct.tier = tier;
   struct.item_entry = weapon_name + "_item_sr";
-  struct.element = isDefined(element) && element != # "" ? element : undefined;
+  struct.element = isDefined(element) && element != #"" ? element : undefined;
 
   if(is_true(is_wonder_weapon)) {
     struct.var_51344511 = [];
@@ -1243,7 +1243,7 @@ function init_weapons() {
 
   switch (var_8e01336) {
     default:
-      var_4ef031c9 = # "hash_2298893b58cc2885";
+      var_4ef031c9 = #"hash_2298893b58cc2885";
       break;
   }
 
@@ -1294,39 +1294,39 @@ function private function_350ee41() {
   }
 
   if(!isDefined(level.str_magicbox_weapon_itemspawnlist)) {
-    level.str_magicbox_weapon_itemspawnlist = # "zm_magicbox_weapons_list";
+    level.str_magicbox_weapon_itemspawnlist = #"zm_magicbox_weapons_list";
   }
 
   if(!isDefined(level.var_e2f02558)) {
-    level.var_e2f02558 = # "zm_magicbox_weapon_pistols_list";
+    level.var_e2f02558 = #"zm_magicbox_weapon_pistols_list";
   }
 
   if(!isDefined(level.var_430d4cfe)) {
-    level.var_430d4cfe = # "zm_magicbox_weapon_shotgun_list";
+    level.var_430d4cfe = #"zm_magicbox_weapon_shotgun_list";
   }
 
   if(!isDefined(level.var_3d802d78)) {
-    level.var_3d802d78 = # "zm_magicbox_weapon_lmg_list";
+    level.var_3d802d78 = #"zm_magicbox_weapon_lmg_list";
   }
 
   if(!isDefined(level.var_5793d07d)) {
-    level.var_5793d07d = # "zm_magicbox_weapon_smg_list";
+    level.var_5793d07d = #"zm_magicbox_weapon_smg_list";
   }
 
   if(!isDefined(level.var_5396aa34)) {
-    level.var_5396aa34 = # "zm_magicbox_weapon_ar_list";
+    level.var_5396aa34 = #"zm_magicbox_weapon_ar_list";
   }
 
   if(!isDefined(level.var_887d12df)) {
-    level.var_887d12df = # "zm_magicbox_weapon_tr_list";
+    level.var_887d12df = #"zm_magicbox_weapon_tr_list";
   }
 
   if(!isDefined(level.var_5cf89c5c)) {
-    level.var_5cf89c5c = # "zm_magicbox_weapon_sniper_list";
+    level.var_5cf89c5c = #"zm_magicbox_weapon_sniper_list";
   }
 
   if(!isDefined(level.var_95f4d593)) {
-    level.var_95f4d593 = # "zm_magicbox_weapon_misc_list";
+    level.var_95f4d593 = #"zm_magicbox_weapon_misc_list";
   }
 
   function_a2ce802c(level.var_e2f02558);
@@ -2026,7 +2026,7 @@ function give_build_kit_weapon(weapon, var_51ec4e93, var_bd5d43c6, b_switch_weap
 }
 
 function function_98776900(item, nosound = 0, var_ac6e9818 = 0, var_d29fef1 = 0) {
-  if(item.itementry.itemtype !== # "weapon") {
+  if(item.itementry.itemtype !== #"weapon") {
     return;
   }
 
@@ -2053,7 +2053,7 @@ function function_98776900(item, nosound = 0, var_ac6e9818 = 0, var_d29fef1 = 0)
     foreach(attachment in attachments) {
       var_41ade915 = item_world_util::function_6a0ee21a(attachment);
 
-      if(level.itemreplacement[var_41ade915] === # "") {
+      if(level.itemreplacement[var_41ade915] === #"") {
         continue;
       }
 
@@ -2166,7 +2166,7 @@ function function_943eabd9(item_struct, nosound = 1, var_8e917f9b = 0, var_8f608
       foreach(attachment_name in additional_attachments) {
         var_67419ad4 = item_world_util::function_6a0ee21a(attachment_name);
 
-        if(level.itemreplacement[var_67419ad4] === # "") {
+        if(level.itemreplacement[var_67419ad4] === #"") {
           continue;
         }
 
@@ -2200,7 +2200,7 @@ function function_943eabd9(item_struct, nosound = 1, var_8e917f9b = 0, var_8f608
   return undefined;
 }
 
-function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var_8f608a31 = 0, var_823339c8 = # "none", additional_attachments, var_8e917f9b = 0, var_e6a8f11f) {
+function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var_8f608a31 = 0, var_823339c8 = #"none", additional_attachments, var_8e917f9b = 0, var_e6a8f11f) {
   if(!is_true(b_switch_weapon)) {
     self zm_utility::play_sound_on_ent("purchase");
   }
@@ -2217,18 +2217,18 @@ function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var
     }
 
     if(is_weapon_upgraded(nosound)) {
-      if(nosound.name == # "knife_loadout_upgraded") {
+      if(nosound.name == #"knife_loadout_upgraded") {
         str_item = "knife_loadout" + "_t9_upgraded" + "_item_sr";
       } else {
         str_item = nosound.name + "_item_sr";
       }
-    } else if(var_823339c8 != # "none" && isDefined(level.var_29d88fe5[nosound.name][var_823339c8])) {
+    } else if(var_823339c8 != #"none" && isDefined(level.var_29d88fe5[nosound.name][var_823339c8])) {
       str_item = level.var_29d88fe5[nosound.name][var_823339c8];
     } else if(var_8e917f9b) {
       rarity = function_cab9277e();
 
-      if(rarity == # "white") {
-        if(nosound.name == # "knife_loadout") {
+      if(rarity == #"white") {
+        if(nosound.name == #"knife_loadout") {
           str_item = nosound.name + "_t9" + "_item_sr";
         } else {
           str_item = nosound.name + "_item_sr";
@@ -2236,7 +2236,7 @@ function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var
       } else {
         str_item = level.var_ec04a8a4[nosound.name][rarity];
       }
-    } else if(nosound.name == # "knife_loadout") {
+    } else if(nosound.name == #"knife_loadout") {
       str_item = nosound.name + "_t9" + "_item_sr";
     } else {
       str_item = nosound.name + "_item_sr";
@@ -2250,7 +2250,7 @@ function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var
             var_62cd846 = var_e6a8f11f;
             break;
           case # "blue":
-            if(var_e6a8f11f != # "green") {
+            if(var_e6a8f11f != #"green") {
               var_62cd846 = var_e6a8f11f;
             }
 
@@ -2294,7 +2294,7 @@ function weapon_give(weapon, nosound, b_switch_weapon = 0, var_bc218695 = 0, var
       foreach(attachment_name in additional_attachments) {
         var_67419ad4 = item_world_util::function_6a0ee21a(attachment_name);
 
-        if(level.itemreplacement[var_67419ad4] === # "") {
+        if(level.itemreplacement[var_67419ad4] === #"") {
           continue;
         }
 
@@ -3222,7 +3222,7 @@ function on_item_pickup(params) {
   self endon(#"death");
   item = params.item;
 
-  if(isPlayer(self) && isDefined(item) && item.itementry.itemtype == # "weapon") {
+  if(isPlayer(self) && isDefined(item) && item.itementry.itemtype == #"weapon") {
     weapon = item_inventory_util::function_2b83d3ff(item);
 
     if(isDefined(item) && isDefined(weapon)) {
@@ -3254,7 +3254,7 @@ function on_item_pickup(params) {
     return;
   }
 
-  if(isPlayer(self) && isDefined(item) && isDefined(item.itementry.name) && item.itementry.itemtype === # "survival_upgrade_item") {
+  if(isPlayer(self) && isDefined(item) && isDefined(item.itementry.name) && item.itementry.itemtype === #"survival_upgrade_item") {
     currentweapon = self getcurrentweapon();
     var_4657c1e0 = self item_inventory::function_230ceec4(currentweapon);
 
@@ -3650,7 +3650,7 @@ function function_52b3c7ca(weapon, item, var_b2e08916, clipsize, var_9839b3b1, v
         item_world::consume_item(dropweapon);
         waitframes = 1;
 
-        if(rootweapon.weapclass === # "melee") {
+        if(rootweapon.weapclass === #"melee") {
           waitframes = 2;
         }
 
@@ -3758,45 +3758,45 @@ function private function_adff8850(params) {
   }
 }
 
-function function_137f88c6(var_a0abda6 = # "resource", var_9a8a7d26 = 0) {
-  rarity = # "white";
+function function_137f88c6(var_a0abda6 = #"resource", var_9a8a7d26 = 0) {
+  rarity = #"white";
 
   switch (var_a0abda6) {
     case # "resource":
     case # "loadout":
-      rarity = # "white";
+      rarity = #"white";
 
       if(var_9a8a7d26) {
-        rarity = # "green";
+        rarity = #"green";
       }
 
       break;
     case # "uncommon":
-      rarity = # "green";
+      rarity = #"green";
 
       if(var_9a8a7d26) {
-        rarity = # "blue";
+        rarity = #"blue";
       }
 
       break;
     case # "rare":
-      rarity = # "blue";
+      rarity = #"blue";
 
       if(var_9a8a7d26) {
-        rarity = # "purple";
+        rarity = #"purple";
       }
 
       break;
     case # "epic":
-      rarity = # "purple";
+      rarity = #"purple";
 
       if(var_9a8a7d26) {
-        rarity = # "legendary";
+        rarity = #"legendary";
       }
 
       break;
     case # "legendary":
-      rarity = # "orange";
+      rarity = #"orange";
       break;
   }
 
@@ -3860,12 +3860,12 @@ function private function_9b75e4aa() {
     response = waitresult.response;
     intval = waitresult.intpayload;
 
-    if(menu == # "hash_622989972bff8eae" && response == # "hash_f501dc3a5854d86") {
+    if(menu == #"hash_622989972bff8eae" && response == #"hash_f501dc3a5854d86") {
       self thread apply_blueprint(intval);
       continue;
     }
 
-    if(menu == # "hash_622989972bff8eae" && response == # "hash_2ab01373ffdd165c") {
+    if(menu == #"hash_622989972bff8eae" && response == #"hash_2ab01373ffdd165c") {
       self thread function_56c9bbd4();
     }
   }

@@ -294,7 +294,7 @@ function private function_37f4e0e0(smeansofdeath, shitloc) {
 }
 
 function private function_7538fede(weapon) {
-  if(weapon.name == # "ar_stealth_t8_operator") {
+  if(weapon.name == #"ar_stealth_t8_operator") {
     return true;
   }
 
@@ -379,7 +379,7 @@ function apply_damage(weapon, damage, smeansofdeath, eattacker, shitloc) {
     self.armor = 0;
     var_2274e560 = 0;
     weaponclass = util::getweaponclass(weapon);
-    var_616f02b4 = weaponclass === # "weapon_sniper" || weaponclass === # "weapon_shotgun" || weaponclass === # "weapon_cqb";
+    var_616f02b4 = weaponclass === #"weapon_sniper" || weaponclass === #"weapon_shotgun" || weaponclass === #"weapon_cqb";
 
     if(!var_616f02b4 && damage > self.health - 5) {
       var_9bb721d3 = max(self.health - 5, 0);

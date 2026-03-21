@@ -316,7 +316,7 @@ function function_57a15b5(ai, vh) {
 function function_d2b31a03(vh) {
   s_result = vh waittill(#"death");
 
-  if(isDefined(s_result.weapon) && s_result.weapon.name === # "hash_154127ac67af815e") {
+  if(isDefined(s_result.weapon) && s_result.weapon.name === #"hash_154127ac67af815e") {
     level.player.var_ee4032c4++;
   }
 }

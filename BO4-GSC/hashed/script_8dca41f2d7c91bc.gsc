@@ -114,7 +114,7 @@ function_d38bb58b(var_32e3ef04) {
   s_waitresult = self waittill(#"hash_11371635986ba290", #"death", #"player_downed", #"fake_death");
   var_b4fb8b2a thread function_c9e7bec4(self);
 
-  if(s_waitresult._notify == # "hash_11371635986ba290" && isDefined(s_waitresult.b_success) && s_waitresult.b_success) {
+  if(s_waitresult._notify == #"hash_11371635986ba290" && isDefined(s_waitresult.b_success) && s_waitresult.b_success) {
     self.var_be737ce7 = 1;
     self zm_trial_util::function_63060af4(1);
 
@@ -245,7 +245,7 @@ function_4ff0c5fd(e_player) {
       var_1cda8410 = array::remove_dead(var_1cda8410);
       a_ai_spawned = array::remove_dead(a_ai_spawned);
 
-      if(self.targetname === # "earth") {
+      if(self.targetname === #"earth") {
         if(var_1cda8410.size < 6) {
           ai_zombie = zm_red_ww_quests::function_eeed4f2f(s_spawn);
           n_wait_time = 0.5;
@@ -258,7 +258,7 @@ function_4ff0c5fd(e_player) {
         continue;
       }
 
-      if(self.targetname === # "air") {
+      if(self.targetname === #"air") {
         if(var_1cda8410.size < 3) {
           s_spawn = array::random(a_s_spawns);
           ai_zombie = zombie_skeleton_util::function_1ea880bd(1, s_spawn, undefined, undefined, 1);
@@ -272,7 +272,7 @@ function_4ff0c5fd(e_player) {
         continue;
       }
 
-      if(self.targetname === # "light") {
+      if(self.targetname === #"light") {
         if(var_1cda8410.size < 1) {
           s_spawn = array::random(struct::get_array("s_ww_quest_light_spawn_gegenees"));
           ai_zombie = zombie_gegenees_util::spawn_single(1, s_spawn);
@@ -286,7 +286,7 @@ function_4ff0c5fd(e_player) {
         continue;
       }
 
-      if(self.targetname === # "death") {
+      if(self.targetname === #"death") {
         if(var_1cda8410.size < 1) {
           s_spawn = struct::get("s_ww_d_spawn_bl");
           ai_zombie = zm_red_ww_quests::function_7a15e228(s_spawn);

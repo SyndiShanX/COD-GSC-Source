@@ -2150,7 +2150,7 @@ function function_16136fe9(c_door, waitresult) {
   e_who = waitresult.activator;
   c_door.var_9b9642be = e_who;
 
-  if(isDefined(c_door.var_a2f96f78.script_team) && c_door.var_a2f96f78.script_team != # "any" && !c_door.var_9b9642be util::is_on_side(c_door.var_a2f96f78.script_team)) {
+  if(isDefined(c_door.var_a2f96f78.script_team) && c_door.var_a2f96f78.script_team != #"any" && !c_door.var_9b9642be util::is_on_side(c_door.var_a2f96f78.script_team)) {
     return;
   }
 
@@ -3262,11 +3262,11 @@ function door_bash_open(var_84e2c431, var_a6028302 = 0, var_d14527df) {
 function private function_14c2fe40(player) {
   weapon = player getcurrentweapon();
 
-  if(weapon.displayname == # "weapon/noweapon" || is_true(weapon.ismeleeweapon) && !is_true(weapon.isbulletweapon) && !is_true(weapon.isprojectileweapon)) {
+  if(weapon.displayname == #"weapon/noweapon" || is_true(weapon.ismeleeweapon) && !is_true(weapon.isbulletweapon) && !is_true(weapon.isprojectileweapon)) {
     return true;
   }
 
-  if(weapon.name == # "eq_spy_camera") {
+  if(weapon.name == #"eq_spy_camera") {
     return true;
   }
 
@@ -3386,7 +3386,7 @@ function private function_1e18148c() {
   s_minigame.var_5ebe1cc1 = 0;
   s_minigame.var_3b6bc456 = self.var_3b6bc456;
   s_minigame.script_team = isDefined(self.script_team) ? self.script_team : # "any";
-  s_minigame.scriptbundlename = # "minigame_lockpick";
+  s_minigame.scriptbundlename = #"minigame_lockpick";
   s_minigame.var_5350598b = self;
   s_minigame.ent = self.c_door.m_e_door;
   s_minigame.var_80778410 = var_80778410;
@@ -3440,11 +3440,11 @@ function function_191c5a63() {
   }
 
   if(is_true(close)) {
-    var_c29308f4.prompt_text = # "hash_13649de3a914d713";
+    var_c29308f4.prompt_text = #"hash_13649de3a914d713";
     var_c29308f4.var_de6f0004 = self.m_s_bundle.var_4123e857;
     self.m_e_door thread[[level.var_6a7fb742]](#"use", var_c29308f4);
   } else {
-    hint = # "hash_7b4d7f70e8bef419";
+    hint = #"hash_7b4d7f70e8bef419";
 
     if(isDefined(self.m_s_bundle.door_interact)) {
       var_b4d98031 = getscriptbundle(self.m_s_bundle.door_interact);
@@ -3459,7 +3459,7 @@ function function_191c5a63() {
     self.m_e_door thread[[level.var_6a7fb742]](#"use", var_c29308f4);
 
     if(!is_true(self.var_d587661f) && !is_true(self.var_c4c3fa39)) {
-      var_c29308f4.prompt_text = # "hash_33182658cd3b9acf";
+      var_c29308f4.prompt_text = #"hash_33182658cd3b9acf";
       var_c29308f4.var_de6f0004 = 0;
       var_c29308f4.var_4ac77177 = 0;
       var_c29308f4.var_9cc6a78e = 60;

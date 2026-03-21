@@ -38,7 +38,7 @@ function_bad6b477(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     self.var_c19403bf = util::playFXOnTag(localclientnum, level._effect[#"hash_139ac9f86d1a96cd"], self, str_fx_tag);
 
-    if(self.archetype === # "catalyst" || self.archetype === # "tiger") {
+    if(self.archetype === #"catalyst" || self.archetype === #"tiger") {
       self thread function_b8cda358(localclientnum);
     }
 

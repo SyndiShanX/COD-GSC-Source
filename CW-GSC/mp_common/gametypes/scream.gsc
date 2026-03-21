@@ -494,7 +494,7 @@ function givecustomloadout() {
 }
 
 function private function_5737e2d4() {
-  var_44dd7e5d = # "hash_511bbcd521bfe80e";
+  var_44dd7e5d = #"hash_511bbcd521bfe80e";
   playerroletemplatecount = getplayerroletemplatecount(currentsessionmode());
 
   for(i = 0; i < playerroletemplatecount; i++) {
@@ -845,8 +845,8 @@ function function_1a7fd1b7(primary, primaryattachments, secondary, secondaryatta
 }
 
 function private function_af7d16ac(weaponname, attachments) {
-  if(weaponname === # "hash_28fdaa999c8aa3af") {
-    weaponname = # "hash_75224185e7789694";
+  if(weaponname === #"hash_28fdaa999c8aa3af") {
+    weaponname = #"hash_75224185e7789694";
   }
 
   weapon = getweapon(weaponname, attachments);
@@ -862,7 +862,7 @@ function function_fa62642c(var_8b0bfce9, var_5c25da5) {
     return;
   }
 
-  if(game.state == # "playing" && isalive(self) && self hasweapon(var_8b0bfce9)) {
+  if(game.state == #"playing" && isalive(self) && self hasweapon(var_8b0bfce9)) {
     self.pers[#"fieldupgrades"][#"ammo"] = var_5c25da5;
     self setweaponammoclip(var_8b0bfce9, var_5c25da5);
   }
@@ -932,10 +932,10 @@ function function_6e23a6f9() {
           continue;
         }
 
-        var_73326434 = # "hash_17b3e3c40e7314c5";
+        var_73326434 = #"hash_17b3e3c40e7314c5";
 
         if(survivor getplayergendertype() === "female") {
-          var_73326434 = # "hash_78b7fe4e5d92ba48";
+          var_73326434 = #"hash_78b7fe4e5d92ba48";
         }
 
         survivor playSound(var_73326434);
@@ -994,12 +994,12 @@ function function_2c0f551b() {
           var_2586180f = 0.6 + fraction * var_56463c00;
         }
 
-        var_89dbab63 = # "hash_5d9332bbba421aef";
+        var_89dbab63 = #"hash_5d9332bbba421aef";
 
         if(var_2586180f >= var_3bd70d7) {
-          var_89dbab63 = # "hash_58affb5b9a7a5538";
+          var_89dbab63 = #"hash_58affb5b9a7a5538";
         } else if(var_2586180f >= var_37805d8) {
-          var_89dbab63 = # "hash_71485ac352b330d9";
+          var_89dbab63 = #"hash_71485ac352b330d9";
         }
 
         currenttime = gettime();

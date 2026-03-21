@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"gravity_spike_dust"] = # "weapon/fx_hero_grvity_spk_grnd_hit_dust";
+  level._effect[#"gravity_spike_dust"] = #"weapon/fx_hero_grvity_spk_grnd_hit_dust";
   level.gravity_spike_table = "surface_explosion_gravityspikes";
   level thread watchforgravityspikeexplosion();
   level.dirt_enable_gravity_spikes = getdvarint(#"scr_dirt_enable_gravity_spikes", 0);

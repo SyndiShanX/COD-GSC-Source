@@ -101,7 +101,7 @@ custom_class_update(localclientnum) {
   }
 
   if(!isDefined(xmodel_name)) {
-    xmodel_name = # "";
+    xmodel_name = #"";
   }
 
   if(isDefined(var_f0bf9259)) {
@@ -142,7 +142,7 @@ toggle_locked_weapon_shader(localclientnum, is_item_unlocked = 1) {
 }
 
 is_optic(attachmentname) {
-  csv_filename = # "gamedata/weapons/common/attachmenttable.csv";
+  csv_filename = #"gamedata/weapons/common/attachmenttable.csv";
   row = tablelookuprownum(csv_filename, 4, attachmentname);
 
   if(row > -1) {
@@ -518,7 +518,7 @@ function_3e2b5b60(localclientnum, weaponmodel) {
   return activecamo::function_374e37a0(localclientnum, weaponmodel, var_3594168e, level.var_aa10d0b4);
 }
 
-update_weapon_script_model(localclientnum, newweaponstring, var_f020955, should_update_weapon_options = 1, is_item_unlocked = 1, xmodel_scale = 1, xmodel_name = # "") {
+update_weapon_script_model(localclientnum, newweaponstring, var_f020955, should_update_weapon_options = 1, is_item_unlocked = 1, xmodel_scale = 1, xmodel_name = #"") {
   assert(isDefined(newweaponstring), "<dev string:x38>");
   assert(isDefined(var_f020955), "<dev string:x84>");
 
@@ -555,13 +555,13 @@ update_weapon_script_model(localclientnum, newweaponstring, var_f020955, should_
 
   level.current_weapon[localclientnum] = getweapon(level.last_weapon_name[localclientnum], strtok(level.var_8ad413c[localclientnum], "+"));
 
-  if(level.current_weapon[localclientnum] == level.weaponnone || !(xmodel_name === # "")) {
+  if(level.current_weapon[localclientnum] == level.weaponnone || !(xmodel_name === #"")) {
     level.weapon_script_model[localclientnum] delete();
     position = level.weapon_position;
     level.weapon_script_model[localclientnum] = spawn_weapon_model(localclientnum, position.origin, position.angles);
     toggle_locked_weapon_shader(localclientnum, is_item_unlocked);
 
-    if(!(xmodel_name === # "")) {
+    if(!(xmodel_name === #"")) {
       level.weapon_script_model[localclientnum] setModel(xmodel_name);
     } else {
       level.weapon_script_model[localclientnum] setModel(level.last_weapon_name[localclientnum]);

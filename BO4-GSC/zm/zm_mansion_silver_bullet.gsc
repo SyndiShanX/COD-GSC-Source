@@ -50,7 +50,7 @@ function_3088962c() {
     var_255fe317 = 0;
     s_notify = self waittill(#"weapon_change", #"hash_3cc002901b983064");
 
-    if(s_notify._notify === # "weapon_change") {
+    if(s_notify._notify === #"weapon_change") {
       self clientfield::set_to_player("" + # "hash_6a4f537da00ae3f9", 0);
       self mansion_util::function_268efa09(0);
       s_notify = self waittilltimeout(1.2, #"weapon_change_complete");
@@ -58,7 +58,7 @@ function_3088962c() {
       var_255fe317 = 1;
     }
 
-    if(s_notify._notify === # "timeout") {
+    if(s_notify._notify === #"timeout") {
       var_12680c28 = self getcurrentweapon();
 
       if(isDefined(var_12680c28)) {

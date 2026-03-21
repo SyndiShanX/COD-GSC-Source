@@ -78,7 +78,7 @@ function_39002b98(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     var_d0df641a = spawning::get_spawnpoint_array("mp_t8_spawn_point");
     spawn_pt = arraygetclosest(self.last_valid_position, var_d0df641a);
     self.var_6b6241ac = spawn_pt.origin;
@@ -87,8 +87,8 @@ function_39002b98(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(level.var_9b517372 == 1) {
-    if(self.team == # "axis") {
-      if(isDefined(weapon) && weapon.name == # "eq_gravityslam") {
+    if(self.team == #"axis") {
+      if(isDefined(weapon) && weapon.name == #"eq_gravityslam") {
         if(!(isDefined(level.var_1aa75661) && level.var_1aa75661)) {
           level.var_1aa75661 = 1;
           level thread function_d999dbe2(undefined);
@@ -244,7 +244,7 @@ function_926fcb2f(b_success) {
 }
 
 function_ecd8cc50() {
-  waypointname = # "hash_3489718f227fba3";
+  waypointname = #"hash_3489718f227fba3";
   var_69bc8821 = spawn("script_model", self.origin);
   var_69bc8821.objectiveid = gameobjects::get_next_obj_id();
   var_69bc8821.curorigin = self.origin;
@@ -327,7 +327,7 @@ function_4b5c96a0() {
     e_attacker = s_notify.attacker;
     e_weapon = s_notify.weapon;
 
-    if(isDefined(e_attacker) && isDefined(e_weapon) && e_weapon.name == # "eq_gravityslam") {
+    if(isDefined(e_attacker) && isDefined(e_weapon) && e_weapon.name == #"eq_gravityslam") {
       level.var_b5529824--;
       e_attacker thread ct_utils::function_785eb2ca();
       level thread ct_utils::function_bfa522d1(0);

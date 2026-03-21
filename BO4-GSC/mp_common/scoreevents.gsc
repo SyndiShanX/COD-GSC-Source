@@ -80,11 +80,11 @@ on_weapon_change(params) {
     return;
   }
 
-  if(var_86ecd1f2.var_76ce72e8 === 1 || var_86ecd1f2.issignatureweapon === 1 || var_86ecd1f2.name == # "none") {
+  if(var_86ecd1f2.var_76ce72e8 === 1 || var_86ecd1f2.issignatureweapon === 1 || var_86ecd1f2.name == #"none") {
     return;
   }
 
-  if(var_b577d267.var_76ce72e8 === 1 || var_b577d267.issignatureweapon === 1 || var_b577d267.name == # "none") {
+  if(var_b577d267.var_76ce72e8 === 1 || var_b577d267.issignatureweapon === 1 || var_b577d267.name == #"none") {
     return;
   }
 
@@ -272,7 +272,7 @@ scoreeventplayerkill(data, time) {
       }
     }
 
-    if(isgrenade == 0 || weapon.name == # "hero_gravityspikes") {
+    if(isgrenade == 0 || weapon.name == #"hero_gravityspikes") {
       if(attackersliding == 1) {
         processscoreevent(#"kill_enemy_while_sliding", attacker, victim, weapon);
       }
@@ -671,9 +671,9 @@ scoreeventplayerkill(data, time) {
       }
     }
 
-    if(weapon.statname == # "frag_grenade") {
+    if(weapon.statname == #"frag_grenade") {
       attacker stats::function_dad108fa(#"kills_frag_grenade", 1);
-    } else if(weapon.statname == # "eq_molotov") {
+    } else if(weapon.statname == #"eq_molotov") {
       attacker stats::function_dad108fa(#"kills_molotov", 1);
     }
 
@@ -1276,7 +1276,7 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
     }
   }
 
-  if(weapon.name == # "satchel_charge") {
+  if(weapon.name == #"satchel_charge") {
     self.recentc4killcount++;
   }
 
@@ -1332,7 +1332,7 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
     }
   }
 
-  if(self.var_a7f5c61e && weapon.name == # "eq_gravityslam") {
+  if(self.var_a7f5c61e && weapon.name == #"eq_gravityslam") {
     self.var_cc5ece37++;
   }
 

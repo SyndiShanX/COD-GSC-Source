@@ -461,7 +461,7 @@ function function_897b13a9() {
     self battlechatter::function_d2600afc(self.var_846acfcf, player, level.var_c9404b0a.weapon, self.var_d02ddb8e);
   }
 
-  if(game.state == # "playing") {
+  if(game.state == #"playing") {
     if(self.health <= 0) {
       if(isDefined(level.var_c9404b0a.bundle.destructionaudio)) {
         self playSound(level.var_c9404b0a.bundle.destructionaudio);

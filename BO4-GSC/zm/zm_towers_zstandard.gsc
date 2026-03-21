@@ -35,13 +35,13 @@ main() {
 init_level_vars() {
   function_edd5bb1a();
   function_ac904e5e();
-  level.var_d5bd7049 = # "hash_17758d1de3b1fe6a";
+  level.var_d5bd7049 = #"hash_17758d1de3b1fe6a";
   level.var_b0ebbc69 = "zblueprint_shield_zhield_zword";
   level.var_3f86fd35 = 15;
   level.var_d7853f35 = 25;
   level.var_ecdf38f = 20;
   level.var_55e562f9 = 20;
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   callback::function_74872db6(&function_74872db6);
   level thread defend_areas();
 }
@@ -211,7 +211,7 @@ defend_areas() {
   str_next_defend = array::random(array(#"danu", #"ra"));
   var_b4476de3 = str_next_defend;
 
-  if(str_next_defend == # "danu") {
+  if(str_next_defend == #"danu") {
     level zm_utility::open_door("door_starting_area_to_danu_hallway", undefined, undefined, 1);
   } else {
     level zm_utility::open_door("door_starting_area_to_ra_hallway", undefined, undefined, 1);
@@ -227,13 +227,13 @@ defend_areas() {
   var_381c9eeb = str_next_defend;
   var_420e4589 = [];
 
-  if(var_69e6a669 == # "danu") {
-    if(str_next_defend == # "pit") {
+  if(var_69e6a669 == #"danu") {
+    if(str_next_defend == #"pit") {
       var_420e4589 = array("door_danu_basement_to_danu_ra_tunnel", "door_ra_tunnel_to_body_pit");
     } else {
       var_420e4589 = array("door_danu_basement_to_danu_ra_tunnel", "door_zeus_tunnel_to_flooded_crypt");
     }
-  } else if(str_next_defend == # "pit") {
+  } else if(str_next_defend == #"pit") {
     var_420e4589 = array("door_ra_basement_to_danu_ra_tunnel", "door_ra_tunnel_to_body_pit");
   } else {
     var_420e4589 = array("door_ra_basement_to_danu_ra_tunnel", "door_zeus_tunnel_to_flooded_crypt");
@@ -262,7 +262,7 @@ defend_areas() {
   str_next_defend = array::random(array(#"odin", #"zeus"));
   var_2803cfda = str_next_defend;
 
-  if(str_next_defend == # "odin") {
+  if(str_next_defend == #"odin") {
     var_420e4589 = array("door_starting_area_to_odin_hallway", "door_odin_basement_to_odin_zeus_tunnel");
   } else {
     var_420e4589 = array("door_starting_area_to_zeus_hallway", "door_zeus_basement_to_odin_zeus_tunnel");
@@ -278,7 +278,7 @@ defend_areas() {
   level util::delay("started_defend_area", "end_game", &zm_round_spawning::function_376e51ef, #"gladiator_destroyer");
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
   zm_utility::function_fef4b36a(str_next_defend);
-  str_next_defend = # "arena";
+  str_next_defend = #"arena";
   zm_utility::function_11101458(#"arena");
   wait 45;
   s_defend_area = zm_utility::function_a877cd10(#"arena");
@@ -289,11 +289,11 @@ defend_areas() {
   level thread zm_towers_special_rounds::function_417990b9();
   zm_utility::function_fef4b36a(#"arena");
 
-  if(var_b4476de3 == # "danu") {
-    str_next_defend = # "ra";
+  if(var_b4476de3 == #"danu") {
+    str_next_defend = #"ra";
     var_420e4589 = array("door_starting_area_to_ra_hallway", "door_danu_ra_bridge", "door_ra_basement_to_danu_ra_tunnel");
   } else {
-    str_next_defend = # "danu";
+    str_next_defend = #"danu";
     var_420e4589 = array("door_starting_area_to_danu_hallway", "door_danu_ra_bridge", "door_danu_basement_to_danu_ra_tunnel");
   }
 
@@ -306,11 +306,11 @@ defend_areas() {
   zm_zonemgr::function_8caa21df(s_defend_area.a_str_zones);
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
 
-  if(var_381c9eeb == # "pit") {
-    str_next_defend = # "flooded_crypt";
+  if(var_381c9eeb == #"pit") {
+    str_next_defend = #"flooded_crypt";
     var_420e4589 = array("door_zeus_tunnel_to_flooded_crypt");
   } else {
-    str_next_defend = # "pit";
+    str_next_defend = #"pit";
     var_420e4589 = array("door_ra_tunnel_to_body_pit");
   }
 
@@ -321,11 +321,11 @@ defend_areas() {
   zm_zonemgr::function_8caa21df(s_defend_area.a_str_zones);
   zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
 
-  if(var_2803cfda == # "odin") {
-    str_next_defend = # "zeus";
+  if(var_2803cfda == #"odin") {
+    str_next_defend = #"zeus";
     var_420e4589 = array("door_starting_area_to_zeus_hallway", "door_zeus_basement_to_odin_zeus_tunnel", "door_odin_zeus_bridge");
   } else {
-    str_next_defend = # "odin";
+    str_next_defend = #"odin";
     var_420e4589 = array("door_starting_area_to_odin_hallway", "door_odin_basement_to_odin_zeus_tunnel", "door_odin_zeus_bridge");
   }
 
@@ -344,13 +344,13 @@ defend_areas() {
     s_defend_area = zm_utility::function_a877cd10(str_next_defend);
     zm_zonemgr::function_8caa21df(s_defend_area.a_str_zones);
 
-    if(var_837cd1b4 == 3 || str_next_defend == # "arena") {
+    if(var_837cd1b4 == 3 || str_next_defend == #"arena") {
       level thread zm_towers_special_rounds::function_93eab559();
     }
 
     zm_utility::function_33798535(s_defend_area.var_39c44288, s_defend_area.a_str_zones, s_defend_area.var_ed1db1a7);
 
-    if(var_837cd1b4 == 3 || str_next_defend == # "arena") {
+    if(var_837cd1b4 == 3 || str_next_defend == #"arena") {
       level thread zm_towers_special_rounds::function_417990b9();
       var_837cd1b4 = 0;
     }
@@ -455,46 +455,46 @@ function_3747b95() {
     if(isDefined(s_waitresult.e_door) && isDefined(s_waitresult.e_door.script_flag)) {
       switch (s_waitresult.e_door.script_flag) {
         case # "connect_starting_area_to_danu_hallway":
-          var_ff20f7d3 = # "hash_756891f8e9b19c50";
+          var_ff20f7d3 = #"hash_756891f8e9b19c50";
           break;
         case # "connect_starting_area_to_ra_hallway":
-          var_ff20f7d3 = # "hash_2bf18201f54178a3";
+          var_ff20f7d3 = #"hash_2bf18201f54178a3";
           break;
         case # "connect_starting_area_to_odin_hallway":
-          var_ff20f7d3 = # "hash_51ae58346462e5ea";
+          var_ff20f7d3 = #"hash_51ae58346462e5ea";
           break;
         case # "connect_starting_area_to_zeus_hallway":
-          var_ff20f7d3 = # "hash_2a82088dd0b6b42f";
+          var_ff20f7d3 = #"hash_2a82088dd0b6b42f";
           break;
         case # "connect_danu_ra_bridge":
-          var_ff20f7d3 = # "hash_25d85717f971c376";
+          var_ff20f7d3 = #"hash_25d85717f971c376";
           break;
         case # "connect_odin_zeus_bridge":
-          var_ff20f7d3 = # "hash_634e7ac7c0316c00";
+          var_ff20f7d3 = #"hash_634e7ac7c0316c00";
           break;
         case # "connect_danu_basement_to_danu_ra_tunnel":
-          var_ff20f7d3 = # "hash_77bd07afdb58abd9";
+          var_ff20f7d3 = #"hash_77bd07afdb58abd9";
           break;
         case # "connect_ra_basement_to_danu_ra_tunnel":
-          var_ff20f7d3 = # "hash_45d7dc4e4f0b00f4";
+          var_ff20f7d3 = #"hash_45d7dc4e4f0b00f4";
           break;
         case # "connect_odin_basement_to_odin_zeus_tunnel":
-          var_ff20f7d3 = # "hash_2e9e5b687ffd2e47";
+          var_ff20f7d3 = #"hash_2e9e5b687ffd2e47";
           break;
         case # "connect_zeus_basement_to_odin_zeus_tunnel":
-          var_ff20f7d3 = # "hash_1354af92e864254c";
+          var_ff20f7d3 = #"hash_1354af92e864254c";
           break;
         case # "connect_zeus_tunnel_to_flooded_crypt":
-          var_ff20f7d3 = # "hash_1a0bc9a2403dc1ee";
+          var_ff20f7d3 = #"hash_1a0bc9a2403dc1ee";
           break;
         case # "connect_ra_tunnel_to_body_pit":
-          var_ff20f7d3 = # "hash_35fd31a4342c9786";
+          var_ff20f7d3 = #"hash_35fd31a4342c9786";
           break;
         default:
           if(s_waitresult.e_door.targetname === "zombie_debris") {
-            var_ff20f7d3 = # "hash_782714d88bdaa1b6";
+            var_ff20f7d3 = #"hash_782714d88bdaa1b6";
           } else {
-            var_ff20f7d3 = # "hash_7203281c0385cddd";
+            var_ff20f7d3 = #"hash_7203281c0385cddd";
           }
 
           break;

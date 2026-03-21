@@ -69,12 +69,12 @@ event_handler[gametype_init] main(eventstruct) {
   globallogic_audio::set_leader_gametype_dialog("startStockpile", "hcStartStockpile", stockpileorders, stockpileorders, "bbStartStockpile", "hcbbStartStockpile");
   level.goalfx = "ui/fx8_fracture_deposit_point";
   level.var_6c5ba305 = "ui/fx8_fracture_deposit_point_end";
-  level.var_dfce3f1c = # "clean_deposit";
+  level.var_dfce3f1c = #"clean_deposit";
 
   if(isDefined(level.var_c5e28dc5) && level.var_c5e28dc5) {
     level.goalfx = "ui/fx8_fracture_deposit_point_ire";
     level.var_6c5ba305 = "ui/fx8_fracture_deposit_point_end_ire";
-    level.var_dfce3f1c = # "hash_6c8a4a73bc07da57";
+    level.var_dfce3f1c = #"hash_6c8a4a73bc07da57";
   }
 
   callback::on_connect(&onplayerconnect);
@@ -226,7 +226,7 @@ function_b25ab1e7() {
   var_ba985a3c = undefined;
 
   foreach(taco in level.tacos) {
-    if(taco.interactteam == # "none") {
+    if(taco.interactteam == #"none") {
       return taco;
     }
 
@@ -432,7 +432,7 @@ function_bad2b0d4(origin) {
 function_b8a3dde4() {
   level endon(#"game_ended");
   self.baseeffect = spawnfx(level.goalfx, self.effectorigin);
-  self.baseeffect.team = # "none";
+  self.baseeffect.team = #"none";
   triggerfx(self.baseeffect, 0.001);
   wait_time = level.cleandepositonlinetime;
 
@@ -448,7 +448,7 @@ function_b8a3dde4() {
 
   self.baseeffect delete();
   self.baseeffect = spawnfx(level.var_6c5ba305, self.effectorigin);
-  self.baseeffect.team = # "none";
+  self.baseeffect.team = #"none";
   triggerfx(self.baseeffect, 0.001);
   self.baseeffect = spawnfx(level.var_6c5ba305, self.effectorigin);
 }

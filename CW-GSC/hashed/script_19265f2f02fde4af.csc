@@ -58,7 +58,7 @@ function private _think(local_client_num) {
     waitframe(1);
 
     foreach(index, ent in var_4edf0398.var_1e4697f4) {
-      if(ent.model !== # "") {
+      if(ent.model !== #"") {
         var_4edf0398.var_4ecc769d = ent.origin;
         var_4edf0398.var_5fabbca1 = ent.angles;
         arrayremoveindex(var_4edf0398.var_1e4697f4, index);

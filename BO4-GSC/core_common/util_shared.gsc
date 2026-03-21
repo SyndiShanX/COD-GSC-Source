@@ -2053,7 +2053,7 @@ getweaponclass(weapon) {
 
   baseweaponparam = weapons::getbaseweapon(weapon);
   baseweaponindex = getbaseweaponitemindex(baseweaponparam);
-  weaponclass = # "";
+  weaponclass = #"";
   weaponinfo = getunlockableiteminfofromindex(baseweaponindex, 1);
 
   if(isDefined(weaponinfo)) {
@@ -3160,9 +3160,9 @@ getteammask(team) {
 getotherteam(team) {
   team = get_team_mapping(team);
 
-  if(team == # "allies") {
+  if(team == #"allies") {
     return # "axis";
-  } else if(team == # "axis") {
+  } else if(team == #"axis") {
     return # "allies";
   } else {
     return # "allies";
@@ -3201,10 +3201,10 @@ add_debug_command(cmd) {
   adddebugcommand(cmd);
 }
 
-get_players(team = # "any") {
+get_players(team = #"any") {
   arrayremovevalue(level.players, undefined, 0);
 
-  if(team == # "any") {
+  if(team == #"any") {
     return arraycopy(level.players);
   }
 
@@ -3224,8 +3224,8 @@ get_players(team = # "any") {
   return players;
 }
 
-get_active_players(team = # "any") {
-  if(team != # "any") {
+get_active_players(team = #"any") {
+  if(team != #"any") {
     assert(isDefined(level.teams[team]), "<dev string:x9e6>" + function_9e72a96(team) + "<dev string:x9ea>");
   }
 
@@ -3237,7 +3237,7 @@ get_active_players(team = # "any") {
       continue;
     }
 
-    if(!isDefined(team) || team == # "any" || player.team === team) {
+    if(!isDefined(team) || team == #"any" || player.team === team) {
       players[players.size] = player;
     }
   }
@@ -3245,10 +3245,10 @@ get_active_players(team = # "any") {
   return players;
 }
 
-function_81ccf6d3(team = # "any") {
+function_81ccf6d3(team = #"any") {
   players = get_active_players();
 
-  if(team == # "any") {
+  if(team == #"any") {
     return players;
   }
 
@@ -3264,7 +3264,7 @@ function_81ccf6d3(team = # "any") {
   return enemies;
 }
 
-get_human_players(team = # "any") {
+get_human_players(team = #"any") {
   players = getplayers(team);
   humanplayers = [];
 
@@ -3281,7 +3281,7 @@ function_8e89351(player) {
   return isDefined(player) && !isbot(player) && isinarray(level.players, player);
 }
 
-get_bot_players(team = # "any") {
+get_bot_players(team = #"any") {
   players = get_players(team);
   botplayers = [];
 
@@ -3294,12 +3294,12 @@ get_bot_players(team = # "any") {
   return botplayers;
 }
 
-is_game_solo(team = # "any") {
+is_game_solo(team = #"any") {
   humanplayers = get_human_players(team);
   return humanplayers.size == 1;
 }
 
-is_game_coop(team = # "any") {
+is_game_coop(team = #"any") {
   humanplayers = get_human_players(team);
   return humanplayers.size > 1;
 }
@@ -3382,7 +3382,7 @@ function_4627b63d(alias) {
 function_3cb7a62d() {
   assert(isDefined(level.team_mapping));
 
-  if(get_team_mapping("sidea") == # "allies" && get_team_mapping("sideb") == # "axis") {
+  if(get_team_mapping("sidea") == #"allies" && get_team_mapping("sideb") == #"axis") {
     level clientfield::set("cf_team_mapping", 1);
     return;
   }
@@ -3479,7 +3479,7 @@ function_c16f65a3(enemy_a, enemy_b) {
 }
 
 function_9db3109f(team, alias) {
-  assert(team == # "allies" || team == # "axis" || team == # "team3");
+  assert(team == #"allies" || team == #"axis" || team == #"team3");
   level.team_mapping_alias[alias] = team;
 }
 
@@ -3838,7 +3838,7 @@ function_8eb53136(radius) {
 }
 
 is_spectating() {
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     return true;
   }
 

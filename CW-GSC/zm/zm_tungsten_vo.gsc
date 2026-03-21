@@ -23,7 +23,7 @@
 #namespace zm_tungsten_vo;
 
 function init() {
-  level.var_f9d84559 = # "hash_30060ec2da14e93d";
+  level.var_f9d84559 = #"hash_30060ec2da14e93d";
   level thread function_9469a0c4();
   level thread function_a2a8d090();
   level thread function_b65c4342();
@@ -332,7 +332,7 @@ function function_28594421() {
 }
 
 function function_ed634081(params) {
-  if(isPlayer(params.eattacker) && self.archetype === # "abom") {
+  if(isPlayer(params.eattacker) && self.archetype === #"abom") {
     if(isDefined(level.ai_abomination) && self == level.ai_abomination) {
       return;
     }

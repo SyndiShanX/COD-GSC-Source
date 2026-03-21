@@ -28,5 +28,5 @@ __init__() {
 }
 
 activate_talisman() {
-  self.talisman_weapon_start = # "lmg_standard_t8";
+  self.talisman_weapon_start = #"lmg_standard_t8";
 }

@@ -18,8 +18,8 @@ __init__() {
 }
 
 __main__() {
-  level._effect[#"hash_5dfe974bf370a5f4"] = # "zm_weapons/fx8_equip_mltv_fire_human_torso_loop_zm";
-  level._effect[#"hash_31b6cc906e6d0ae0"] = # "hash_3937ef26298b6caf";
+  level._effect[#"hash_5dfe974bf370a5f4"] = #"zm_weapons/fx8_equip_mltv_fire_human_torso_loop_zm";
+  level._effect[#"hash_31b6cc906e6d0ae0"] = #"hash_3937ef26298b6caf";
 }
 
 function_32766bb7(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
@@ -33,7 +33,7 @@ function_32766bb7(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
       case # "eq_molotov":
       case # "molotov_steam":
         if(meansofdeath === "MOD_GRENADE") {
-          if(self.archetype == # "zombie" && damage <= self.health) {
+          if(self.archetype == #"zombie" && damage <= self.health) {
             return self.health;
           }
         }

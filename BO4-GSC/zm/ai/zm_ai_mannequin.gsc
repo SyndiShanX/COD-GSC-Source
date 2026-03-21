@@ -21,7 +21,7 @@ __init__() {
 __main__() {}
 
 function_c381536b() {
-  if(isDefined(self.subarchetype) && self.subarchetype == # "mannequin") {
+  if(isDefined(self.subarchetype) && self.subarchetype == #"mannequin") {
     self.var_80d367d8 = 1;
   }
 }

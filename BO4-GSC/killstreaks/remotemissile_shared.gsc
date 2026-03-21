@@ -335,7 +335,7 @@ getbestspawnpoint(remotemissilespawnpoints) {
       continue;
     }
 
-    if(player.team == # "spectator") {
+    if(player.team == #"spectator") {
       continue;
     }
 

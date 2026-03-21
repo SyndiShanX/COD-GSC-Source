@@ -68,7 +68,7 @@ init_utility() {
 is_classic() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zclassic") {
+  if(str_gametype == #"zclassic") {
     return true;
   }
 
@@ -78,7 +78,7 @@ is_classic() {
 is_standard() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zstandard") {
+  if(str_gametype == #"zstandard") {
     return true;
   }
 
@@ -88,7 +88,7 @@ is_standard() {
 is_trials() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztrials" || level flag::exists(#"ztrial")) {
+  if(str_gametype == #"ztrials" || level flag::exists(#"ztrial")) {
     return true;
   }
 
@@ -98,7 +98,7 @@ is_trials() {
 is_tutorial() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztutorial") {
+  if(str_gametype == #"ztutorial") {
     return true;
   }
 
@@ -108,7 +108,7 @@ is_tutorial() {
 is_grief() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zgrief") {
+  if(str_gametype == #"zgrief") {
     return true;
   }
 
@@ -4270,7 +4270,7 @@ function_9ad5aeb1(var_a8d0b313 = 1, var_82ea43f2 = 1, b_hide_body = 0, var_b0e62
         ai zm_cleanup::function_23621259(0);
       }
 
-      if(var_82ea43f2 || ai.zm_ai_category !== # "basic" && ai.zm_ai_category !== # "popcorn" && ai.zm_ai_category !== # "enhanced") {
+      if(var_82ea43f2 || ai.zm_ai_category !== #"basic" && ai.zm_ai_category !== #"popcorn" && ai.zm_ai_category !== #"enhanced") {
         if(is_magic_bullet_shield_enabled(ai)) {
           ai util::stop_magic_bullet_shield();
         }
@@ -4280,7 +4280,7 @@ function_9ad5aeb1(var_a8d0b313 = 1, var_82ea43f2 = 1, b_hide_body = 0, var_b0e62
         ai.deathpoints_already_given = 1;
         ai.marked_for_death = 1;
 
-        if(!b_hide_body && (ai.zm_ai_category === # "basic" || ai.zm_ai_category === # "enhanced") && var_4b9821e4 < 6) {
+        if(!b_hide_body && (ai.zm_ai_category === #"basic" || ai.zm_ai_category === #"enhanced") && var_4b9821e4 < 6) {
           var_4b9821e4++;
           ai thread zombie_death::flame_death_fx();
 

@@ -571,7 +571,7 @@ function_89db94b3(e_attacker, n_damage, e_inflictor) {
   }
 
   if(n_points) {
-    if(isDefined(e_inflictor) && e_inflictor.subarchetype === # "zombie_wolf_ally") {
+    if(isDefined(e_inflictor) && e_inflictor.subarchetype === #"zombie_wolf_ally") {
       e_attacker player_add_points("damage_points", 70, undefined, undefined, undefined, undefined, undefined, self.var_12745932);
       self.var_f256a4d9 -= n_points;
     } else {

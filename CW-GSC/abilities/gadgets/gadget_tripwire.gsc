@@ -98,7 +98,7 @@ function function_9f97e1a3(watcher) {
   watcher.ondamage = &function_7a905654;
   watcher.ondestroyed = &function_9b3a657f;
   watcher.var_994b472b = &function_9a98f669;
-  watcher.activatesound = # "hash_3185e3ad37d8b947";
+  watcher.activatesound = #"hash_3185e3ad37d8b947";
   watcher.ontimeout = &function_9b3a657f;
   watcher.onfizzleout = &function_9b3a657f;
 }
@@ -563,10 +563,10 @@ function function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
     }
 
     explosiondir = self.hitnormal;
-    explosionsound = # "exp_tripwire";
+    explosionsound = #"exp_tripwire";
 
     if(isDefined(var_2f6adbe3)) {
-      explosionsound = # "exp_tripwire";
+      explosionsound = #"exp_tripwire";
       explosiondir = self.origin - var_2f6adbe3.origin;
       explosiondir = vectornormalize(explosiondir);
       perpvec = perpendicularvector(explosiondir);

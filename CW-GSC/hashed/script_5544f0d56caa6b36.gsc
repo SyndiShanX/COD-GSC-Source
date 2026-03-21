@@ -30,7 +30,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  if(util::get_game_type() === # "hash_75aa82b3ae89f54e") {
+  if(util::get_game_type() === #"hash_75aa82b3ae89f54e") {
     level.var_612d6a21 = 1;
     level.var_51514f45 = 0.25;
     level.var_e2fec446 = 0.25;

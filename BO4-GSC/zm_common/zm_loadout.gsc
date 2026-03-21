@@ -216,7 +216,7 @@ function_e884e095(slot, weapon) {
     weapon = getweapon(weapon);
   }
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 

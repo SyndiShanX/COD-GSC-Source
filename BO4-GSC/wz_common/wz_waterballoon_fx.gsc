@@ -20,7 +20,7 @@ __init__() {
 
 function_c9509a9c(params) {
   if(isalive(self) && isPlayer(self)) {
-    if(params.weapon.name === # "waterballoon") {
+    if(params.weapon.name === #"waterballoon") {
       var_feafe576 = 0;
       var_cb01806c = 0;
       bleft = 0;

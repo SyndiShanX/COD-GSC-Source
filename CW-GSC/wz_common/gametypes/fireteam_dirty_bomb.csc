@@ -115,7 +115,7 @@ function private function_bb2f717e(localclientnum) {
 }
 
 function private function_e99f251a(localclientnum, itementry) {
-  if(itementry.itemtype == # "generic") {
+  if(itementry.itemtype == #"generic") {
     switch (itementry.name) {
       case # "armor_pouch_item_t9":
         return (self clientfield::get_player_uimodel("hudItems.armorPlateMaxCarry") != 10);
@@ -128,7 +128,7 @@ function private function_e99f251a(localclientnum, itementry) {
     }
 
     return false;
-  } else if(itementry.itemtype == # "armor_shard") {
+  } else if(itementry.itemtype == #"armor_shard") {
     return false;
   }
 
@@ -136,7 +136,7 @@ function private function_e99f251a(localclientnum, itementry) {
 }
 
 function private function_218c0417(localclientnum, itementry) {
-  if(itementry.itemtype == # "generic") {
+  if(itementry.itemtype == #"generic") {
     if(itementry.name == "uranium_item_t9") {
       var_e3483afe = self clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
 
@@ -146,7 +146,7 @@ function private function_218c0417(localclientnum, itementry) {
     }
 
     return false;
-  } else if(itementry.itemtype == # "armor_shard") {
+  } else if(itementry.itemtype == #"armor_shard") {
     currentcount = self clientfield::get_player_uimodel("hudItems.armorPlateCount");
     return (currentcount < 5);
   }
@@ -155,7 +155,7 @@ function private function_218c0417(localclientnum, itementry) {
 }
 
 function private function_a2807fc5(localclientnum, itementry) {
-  if(itementry.itemtype == # "scorestreak") {
+  if(itementry.itemtype == #"scorestreak") {
     weapons = self getweaponslist();
 
     foreach(weapon in weapons) {

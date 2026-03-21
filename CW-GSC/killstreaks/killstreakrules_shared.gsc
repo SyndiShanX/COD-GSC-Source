@@ -477,7 +477,7 @@ function iskillstreakallowed(hardpointtype, team, var_1d8339ae, var_91419d5) {
     return 0;
   }
 
-  if(game.state == # "postgame") {
+  if(game.state == #"postgame") {
     return 0;
   }
 
@@ -501,7 +501,7 @@ function iskillstreakallowed(hardpointtype, team, var_1d8339ae, var_91419d5) {
       return 1;
     }
 
-    if(hardpointtype == # "supplydrop_marker" || hardpointtype == # "inventory_supplydrop_marker") {
+    if(hardpointtype == #"supplydrop_marker" || hardpointtype == #"inventory_supplydrop_marker") {
       return 1;
     }
 

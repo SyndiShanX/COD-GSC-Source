@@ -145,7 +145,7 @@ function_29de6f1f(weapon, meansofdeath = undefined) {
   baseweapon = weapons::getbaseweapon(weapon);
   var_a489f56 = isDefined(baseweapon.issignatureweapon) && baseweapon.issignatureweapon || isDefined(baseweapon.var_76ce72e8) && baseweapon.var_76ce72e8;
   iskillstreak = isDefined(killstreaks::get_from_weapon(weapon));
-  ismelee = isDefined(meansofdeath) && (meansofdeath == # "mod_melee" || meansofdeath == # "mod_melee_weapon_butt");
+  ismelee = isDefined(meansofdeath) && (meansofdeath == #"mod_melee" || meansofdeath == #"mod_melee_weapon_butt");
   var_4ea2a976 = weapon.name == "launcher_standard_t8" || weapon.name == "sig_buckler_dw";
 
   if(var_a489f56 || iskillstreak || var_4ea2a976 || ismelee) {
@@ -796,7 +796,7 @@ function_18f999b5(waittime) {
   self endon(#"hash_10cd6a20d4e45365", #"disconnect");
   result = self waittilltimeout(waittime, #"death");
 
-  if(result._notify == # "timeout") {
+  if(result._notify == #"timeout") {
     self function_46d74bb7(1);
   } else if(isDefined(level.var_934fb97.bundle.var_98da26d) ? level.var_934fb97.bundle.var_98da26d : 0) {
     self.var_17d74a5c -= gettime();

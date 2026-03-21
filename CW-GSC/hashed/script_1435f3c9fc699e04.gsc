@@ -19,7 +19,7 @@ function function_e553e480() {
   self.mustmaintainclaim = 0;
   self.cancontestclaim = 0;
   self function_58901d83();
-  self.var_5f35f19a = # "none";
+  self.var_5f35f19a = #"none";
 }
 
 function function_818d69ee(user) {
@@ -347,11 +347,11 @@ function function_6c27e90c(obj_id, team) {
 
 function function_58901d83() {
   self.var_5f35f19a = self.var_a4926509;
-  self.var_a4926509 = # "none";
+  self.var_a4926509 = #"none";
 }
 
 function function_7db44d1b(user) {
-  if(user != # "none") {
+  if(user != #"none") {
     return true;
   }
 
@@ -395,7 +395,7 @@ function function_abe3458c() {
 }
 
 function function_abb86400() {
-  if(self.ownerteam != # "neutral" && self.ownerteam != # "none") {
+  if(self.ownerteam != #"neutral" && self.ownerteam != #"none") {
     return true;
   }
 

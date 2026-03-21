@@ -41,7 +41,7 @@ function_3675de8b() {
 on_item_use(params) {
   self endon(#"death", #"disconnect", #"begin_grenade_tracking", #"grenade_throw_cancelled");
 
-  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != # "eq_hawk") {
+  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != #"eq_hawk") {
     return;
   }
 

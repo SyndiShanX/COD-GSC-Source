@@ -71,7 +71,7 @@ function_da29ac13() {
 }
 
 function_e12bc077() {
-  if(isDefined(level.var_17bf15ba) || isDefined(level.var_c94d8a40) && level.var_c94d8a40 || self.archetype !== # "zombie") {
+  if(isDefined(level.var_17bf15ba) || isDefined(level.var_c94d8a40) && level.var_c94d8a40 || self.archetype !== #"zombie") {
     return;
   }
 
@@ -147,7 +147,7 @@ function_23287dd() {
   a_ai_zombies = array::randomize(a_ai_zombies);
 
   foreach(ai_zombie in a_ai_zombies) {
-    if(ai_zombie.archetype === # "zombie" && ai_zombie !== level.var_17bf15ba) {
+    if(ai_zombie.archetype === #"zombie" && ai_zombie !== level.var_17bf15ba) {
       n_move_time = 1.5;
       zm_transform::function_5db4f2f5(ai_zombie, 1);
 
@@ -239,8 +239,8 @@ function_4634a866() {
 
   level.var_47cc5401 = 1;
   level flag::wait_till("magicbox_initialized");
-  level._effect[#"hash_2ff87d61167ea531"] = # "hash_4bd4c9b0fb97f425";
-  level._effect[#"hash_21167096dfea3409"] = # "hash_4bd4c9b0fb97f425";
+  level._effect[#"hash_2ff87d61167ea531"] = #"hash_4bd4c9b0fb97f425";
+  level._effect[#"hash_21167096dfea3409"] = #"hash_4bd4c9b0fb97f425";
 
   foreach(s_chest in level.chests) {
     if(isDefined(s_chest.pandora_light)) {
@@ -324,7 +324,7 @@ function_705afbf2() {
   a_ai_zombies = arraysortclosest(a_ai_zombies, e_host.origin);
 
   foreach(ai_zombie in a_ai_zombies) {
-    if(ai_zombie.archetype === # "zombie") {
+    if(ai_zombie.archetype === #"zombie") {
       ai_zombie clientfield::set("<dev string:x24d>" + # "hash_59e8c30d5e28dad3", 1);
       level.var_17bf15ba = ai_zombie;
       return;

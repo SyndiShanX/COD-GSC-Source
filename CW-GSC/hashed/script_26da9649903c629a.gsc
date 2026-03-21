@@ -37,7 +37,7 @@ function function_b26dad22(level_notify) {
   setDvar(#"top_distance", top_distance);
   var_270e748f = 0;
   var_9ddd4d57 = undefined;
-  level.var_7466d419.var_2939dba = # "hash_5cad1a1b9fdc43ee";
+  level.var_7466d419.var_2939dba = #"hash_5cad1a1b9fdc43ee";
 
   while(true) {
     trace_result = physicstrace(level.var_7466d419.origin + (0, 0, 50), level.var_7466d419.origin + (0, 0, 5000), (0, 0, 0), (0, 0, 0), level.var_7466d419, 16);
@@ -180,7 +180,7 @@ function function_ad449a1b(level_notify) {
 
         if(num_shots <= 1) {
           missle.var_30dc969d = 1;
-          missle.team = # "axis";
+          missle.team = #"axis";
           missle setteam(#"axis");
           level.var_7466d419 thread heatseekingmissile::missiletarget_proximitydetonate(missle, missle, weapon, "death");
           attractor = missile_createattractorent(level.var_7466d419, 25000, 150, 1);
@@ -191,7 +191,7 @@ function function_ad449a1b(level_notify) {
 
         if(num_shots <= 1) {
           missle.var_30dc969d = 1;
-          missle.team = # "axis";
+          missle.team = #"axis";
           missle setteam(#"axis");
           level.var_7466d419 thread heatseekingmissile::missiletarget_proximitydetonate(missle, missle, weapon, "death");
           attractor = missile_createattractorent(level.var_7466d419, 25000, 150, 1);

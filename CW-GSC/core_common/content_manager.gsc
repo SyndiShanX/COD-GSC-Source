@@ -48,7 +48,7 @@ function register_script(scriptname, spawncallback, var_99021fa0 = 0) {
     }
 
     level.contentmanager.var_ab00156[level.contentmanager.var_ab00156.size] = scriptname;
-  } else if(scriptname === # "safehouse") {
+  } else if(scriptname === #"safehouse") {
     script.var_b4fae213 = 9;
   }
 
@@ -69,7 +69,7 @@ function function_31e8da78(destination, content_category) {
   locations = array::randomize(get_children(destination));
 
   for(i = 0; i < locations.size; i++) {
-    if(locations[i].variantname !== # "content_location") {
+    if(locations[i].variantname !== #"content_location") {
       arrayremoveindex(locations, i, 1);
     }
   }
@@ -102,7 +102,7 @@ function private setup_destinations() {
     children = get_children(destination);
 
     foreach(child in children) {
-      if(child.variantname != # "content_location") {
+      if(child.variantname != #"content_location") {
         continue;
       }
 
@@ -148,7 +148,7 @@ function setup_adjacencies(str_destination, var_2d26f85c) {
 
 function function_fe9fb6fd(location) {
   assert(isstruct(location));
-  assert(location.variantname == # "content_location");
+  assert(location.variantname == #"content_location");
   spawned_instances = isarray(location.spawnedinstances) && location.spawnedinstances.size > 0;
   return spawned_instances;
 }
@@ -166,7 +166,7 @@ function private setup_locations() {
     if(isDefined(location.target)) {
       parent = struct::get(location.target);
 
-      if(parent.variantname == # "content_destination") {
+      if(parent.variantname == #"content_destination") {
         location.destination = parent;
       }
     }
@@ -177,7 +177,7 @@ function private setup_locations() {
     children = get_children(location);
 
     foreach(child in children) {
-      if(child.variantname != # "content_instance") {
+      if(child.variantname != #"content_instance") {
         continue;
       }
 
@@ -191,7 +191,7 @@ function private setup_locations() {
 
 function spawn_instance(instance) {
   assert(isstruct(instance));
-  assert(instance.variantname == # "content_instance");
+  assert(instance.variantname == #"content_instance");
   assert(isstring(instance.content_script_name) || ishash(instance.content_script_name));
   assert(isstruct(instance.location));
   function_656a32f0(instance);
@@ -206,7 +206,7 @@ function spawn_instance(instance) {
 
 function function_1c78a45d(instance) {
   assert(isstruct(instance));
-  assert(instance.variantname == # "content_instance");
+  assert(instance.variantname == #"content_instance");
   assert(isstring(instance.content_script_name) || ishash(instance.content_script_name));
   assert(isstruct(instance.location));
   return !function_fe9fb6fd(instance.location);
@@ -326,7 +326,7 @@ function spawn_script_model(struct, modelname, var_bfbc537c = 0, var_619a5c20 = 
   parent = struct;
 
   while(true) {
-    if(parent.variantname === # "content_instance") {
+    if(parent.variantname === #"content_instance") {
       if(!isDefined(parent.a_models)) {
         parent.a_models = [];
       } else if(!isarray(parent.a_models)) {
@@ -361,7 +361,7 @@ function spawn_zbarrier(struct, zbarrier_classname, var_e546275c = 0) {
   parent = struct;
 
   while(true) {
-    if(parent.variantname === # "content_instance") {
+    if(parent.variantname === #"content_instance") {
       if(!isDefined(parent.a_models)) {
         parent.a_models = [];
       } else if(!isarray(parent.a_models)) {
@@ -446,7 +446,7 @@ function private function_656a32f0(parent) {
   parent.contentgroups = contentgroups;
 
   foreach(child in children) {
-    if(child.variantname !== # "content_struct" || !isDefined(child.content_key)) {
+    if(child.variantname !== #"content_struct" || !isDefined(child.content_key)) {
       continue;
     }
 
@@ -459,7 +459,7 @@ function private function_bedd4c47(children) {
   groups = [];
 
   foreach(child in children) {
-    if(child.variantname != # "content_struct" || !isDefined(child.content_key)) {
+    if(child.variantname != #"content_struct" || !isDefined(child.content_key)) {
       continue;
     }
 

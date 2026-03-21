@@ -34,7 +34,7 @@ __init__() {
 result(death, attacker, mod, weapon) {
   self thread clientfield::set("zm_aat_brain_decay", 1);
   self thread zombie_death_time_limit(attacker, weapon);
-  self.team = # "allies";
+  self.team = #"allies";
   self.aat_turned = 1;
   self.n_aat_turned_zombie_kills = 0;
   self.var_16d0eb06 = 20000;
@@ -43,7 +43,7 @@ result(death, attacker, mod, weapon) {
   self.allowpain = 0;
   self.b_ignore_cleanup = 1;
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     self zombie_utility::set_zombie_run_cycle("super_sprint");
 
     if(math::cointoss()) {

@@ -54,7 +54,7 @@ function get_splitscreen_team() {
 
     team = level.players[index].sessionteam;
 
-    if(team != # "spectator") {
+    if(team != #"spectator") {
       return team;
     }
   }
@@ -87,13 +87,13 @@ function other_local_player_still_alive() {
 function set_permissions() {
   team = self.sessionteam;
 
-  if(team == # "spectator") {
+  if(team == #"spectator") {
     if(self issplitscreen() && !level.splitscreen) {
       team = get_splitscreen_team();
     }
 
-    if(team == # "spectator") {
-      self.spectatorteam = # "invalid";
+    if(team == #"spectator") {
+      self.spectatorteam = #"invalid";
       self allowspectateallteams(1);
       self allowspectateteam("freelook", 0);
       self allowspectateteam(#"none", 1);
@@ -108,19 +108,19 @@ function set_permissions() {
 
   switch (level.spectatetype) {
     case 0:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
       self allowspectateteam(#"none", 1);
       self allowspectateteam("localplayers", 0);
       break;
     case 3:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
 
       if(self issplitscreen() && self other_local_player_still_alive()) {
         self allowspectateteam(#"none", 0);
         break;
       }
     case 1:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
 
       if(!level.teambased) {
         self allowspectateallteams(1);
@@ -139,7 +139,7 @@ function set_permissions() {
       self allowspectateteam(team, 1);
       break;
     case 2:
-      self.spectatorteam = # "invalid";
+      self.spectatorteam = #"invalid";
       self allowspectateteam(#"none", 1);
       self allowspectateallteams(1);
 
@@ -175,7 +175,7 @@ function set_permissions() {
     }
 
     if(isDefined(level.spectateoverride[team].allowenemyspectate)) {
-      if(level.spectateoverride[team].allowenemyspectate == # "all") {
+      if(level.spectateoverride[team].allowenemyspectate == #"all") {
         self allowspectateallteams(1);
         return;
       }
@@ -287,7 +287,7 @@ function function_460b3788(players, var_22b78352, var_89bd5332, var_c9fe8766) {
 function function_4c37bb21() {
   players = undefined;
 
-  if(self.team != # "spectator") {
+  if(self.team != #"spectator") {
     players = function_a1ef346b(self.team);
   }
 
@@ -309,7 +309,7 @@ function function_4c37bb21() {
 function function_10fbd7e5() {
   players = undefined;
 
-  if(self.team != # "spectator") {
+  if(self.team != #"spectator") {
     players = function_a1cff525(self.squad);
   }
 
@@ -329,11 +329,11 @@ function function_10fbd7e5() {
 }
 
 function function_da128b1() {
-  if(level.spectatetype === 5 && self.var_ba35b2d2 !== # "invalid") {
+  if(level.spectatetype === 5 && self.var_ba35b2d2 !== #"invalid") {
     return function_10fbd7e5();
   }
 
-  if(level.spectatetype === 4 && self.spectatorteam !== # "invalid") {
+  if(level.spectatetype === 4 && self.spectatorteam !== #"invalid") {
     return function_4c37bb21();
   }
 

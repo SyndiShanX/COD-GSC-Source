@@ -49,7 +49,7 @@ __main__() {
     return;
   }
 
-  level._effect[#"grenade_samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
+  level._effect[#"grenade_samantha_steal"] = #"zombie/fx_monkey_lightning_zmb";
   scene::add_scene_func("p8_fxanim_zm_zod_staff_ra_bundle", &function_f2cc0ca9, "play");
 }
 
@@ -282,7 +282,7 @@ function_5d44b698(v_origin) {
     mdl_poi.var_abfcb0d9 = 1;
     mdl_poi zm_utility::create_zombie_point_of_interest(undefined, 16, 10000);
     mdl_poi zm_utility::create_zombie_point_of_interest_attractor_positions(undefined, 8, 400, 1);
-    mdl_poi.var_8305fd51 = # "thunderstorm";
+    mdl_poi.var_8305fd51 = #"thunderstorm";
     self waittill(#"hash_7a19b162c9e303dc");
     mdl_poi delete();
   }
@@ -396,7 +396,7 @@ function_90c53706(var_10d4f67d, n_player_index) {
 
   self function_97429d68(n_player_index);
 
-  if(self.archetype == # "zombie" || self.archetype == # "skeleton" || self.archetype == # "catalyst") {
+  if(self.archetype == #"zombie" || self.archetype == #"skeleton" || self.archetype == #"catalyst") {
     self playSound(#"hash_3fbc22745dc90009");
     gibserverutils::annihilate(self);
     self dodamage(self.health + 999, self.origin, e_player, e_player, "none", "MOD_UNKNOWN", 0, level.w_thunderstorm);
@@ -480,7 +480,7 @@ function_97429d68(n_player_index) {
   if(!(isDefined(self.var_c6aafbdb) && self.var_c6aafbdb)) {
     self ai::stun();
 
-    if(self.archetype == # "zombie") {
+    if(self.archetype == #"zombie") {
       bhtnactionstartevent(self, "electrocute");
     }
   }

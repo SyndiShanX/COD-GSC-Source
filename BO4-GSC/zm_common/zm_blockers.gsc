@@ -1603,7 +1603,7 @@ blocker_init() {
   target_nodes = getnodearray(self.target, "targetname");
 
   for(j = 0; j < target_nodes.size; j++) {
-    if(target_nodes[j].type == # "begin") {
+    if(target_nodes[j].type == #"begin") {
       self.neg_start = target_nodes[j];
 
       if(isDefined(self.neg_start.target)) {
@@ -1831,7 +1831,7 @@ has_blocker_affecting_perk() {
   has_perk = undefined;
 
   if(isDefined(self) && self hasperk(#"specialty_fastreload")) {
-    has_perk = # "specialty_fastreload";
+    has_perk = #"specialty_fastreload";
   }
 
   return has_perk;
@@ -2406,7 +2406,7 @@ replace_chunk(barrier, chunk, has_perk, via_powerup) {
   barrier.zbarrier.chunk_health[chunk] = 0;
   scalar = 1;
 
-  if(has_perk === # "specialty_fastreload") {
+  if(has_perk === #"specialty_fastreload") {
     scalar = 0.31;
   }
 

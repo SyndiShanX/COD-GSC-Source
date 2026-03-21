@@ -77,7 +77,7 @@ function callback_playerconnect() {
     iprintln(#"mp/connected", self);
   }
 
-  self.pers[#"outcome"] = # "loss";
+  self.pers[#"outcome"] = #"loss";
 
   if(!isDefined(self.pers[#"score"])) {
     if(level.onlinegame && gamemodeismode(0) && !zm_utility::is_survival()) {
@@ -408,9 +408,9 @@ function function_7314957c(player, result) {
   lpselfnum = player getentitynumber();
   lpxuid = player getxuid(1);
   bb::function_e0dfa262(player.name, lpselfnum, lpxuid);
-  primaryweaponname = # "";
+  primaryweaponname = #"";
   primaryweaponattachstr = "";
-  secondaryweaponname = # "";
+  secondaryweaponname = #"";
   secondaryweaponattachstr = "";
 
   if(isDefined(player.primaryloadoutweapon)) {
@@ -426,9 +426,9 @@ function function_7314957c(player, result) {
   resultstr = result;
 
   if(isDefined(player.team) && result == player.team) {
-    resultstr = # "win";
-  } else if(result == # "allies" || result == # "axis") {
-    resultstr = # "lose";
+    resultstr = #"win";
+  } else if(result == #"allies" || result == #"axis") {
+    resultstr = #"lose";
   }
 
   timeplayed = game.timepassed / 1000;

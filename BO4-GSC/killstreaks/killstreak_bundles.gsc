@@ -335,7 +335,7 @@ function_dd7587e4(bundle, maxhealth, attacker, weapon, type, damage, flags, char
         } else {
           weapon_damage = 0;
         }
-      } else if((type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE_SPLASH" && bundle.var_38de4989 === 1) && (!isDefined(weapon.isempkillstreak) || !weapon.isempkillstreak) && (!isDefined(level.weaponpistolenergy) || weapon.statname != level.weaponpistolenergy.statname || level.weaponpistolenergy.statname == level.weaponnone.statname) && (!isDefined(level.weaponspecialcrossbow) || weapon.statname != level.weaponspecialcrossbow.statname || level.weaponspecialcrossbow.statname == level.weaponnone.statname) && weapon.rootweapon.name != # "trophy_system") {
+      } else if((type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE_SPLASH" && bundle.var_38de4989 === 1) && (!isDefined(weapon.isempkillstreak) || !weapon.isempkillstreak) && (!isDefined(level.weaponpistolenergy) || weapon.statname != level.weaponpistolenergy.statname || level.weaponpistolenergy.statname == level.weaponnone.statname) && (!isDefined(level.weaponspecialcrossbow) || weapon.statname != level.weaponspecialcrossbow.statname || level.weaponspecialcrossbow.statname == level.weaponnone.statname) && weapon.rootweapon.name != #"trophy_system") {
         if(function_6bacfedc(weapon, level.weaponshotgunenergy)) {
           weapon_damage = function_daad16b8(maxhealth, weapon_damage, bundle.ksshotgunenergytokill);
         } else {

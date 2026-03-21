@@ -152,8 +152,8 @@ function_671d7ad5(localclientnum, attacker_entnum) {
   self endon(#"death");
   var_4c6480bf = level.var_2e0bd467.var_641f6852 * level.var_2e0bd467.var_641f6852;
   var_572ced0c = level.var_2e0bd467.var_cbe3d2b8 * level.var_2e0bd467.var_cbe3d2b8;
-  var_8acd204b = # "hash_1a49fb45be903460";
-  var_daa90ad6 = # "hash_1cc8ef91832fa038";
+  var_8acd204b = #"hash_1a49fb45be903460";
+  var_daa90ad6 = #"hash_1cc8ef91832fa038";
 
   while(true) {
     player = function_5c10bd79(localclientnum);
@@ -444,7 +444,7 @@ function_3caac9e(localclientnum) {
 }
 
 function_95252d1f(localclientnum, var_7e4d34a7, script_mover) {
-  event = # "hash_5eb05b2054c53425" + var_7e4d34a7;
+  event = #"hash_5eb05b2054c53425" + var_7e4d34a7;
 
   function_1a7aaaa8(localclientnum, "<dev string:x20f>" + script_mover getentitynumber());
 

@@ -207,7 +207,7 @@ function function_d74e40c3() {
 
     result = self.trigger waittill(#"trigger", #"hash_5dc5b7f198cd1bec");
 
-    if(result._notify === # "hash_5dc5b7f198cd1bec") {
+    if(result._notify === #"hash_5dc5b7f198cd1bec") {
       wait 0.25;
       continue;
     }

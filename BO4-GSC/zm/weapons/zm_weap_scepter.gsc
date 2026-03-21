@@ -415,7 +415,7 @@ function_be8ae52f(w_curr) {
     if(isDefined(a_trace[#"entity"])) {
       e_last_target = a_trace[#"entity"];
 
-      if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== # "allies") {
+      if(isDefined(e_last_target.zm_ai_category) && e_last_target.team !== #"allies") {
         if(zm_trial_restrict_loadout::is_active(1)) {
           self zm_trial_util::function_97444b02();
           return;
@@ -499,7 +499,7 @@ function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched = 0, var_
     [[level.var_cfeea502]] - > waitinqueue(e_target);
   }
 
-  if(e_target.archetype === # "zombie") {
+  if(e_target.archetype === #"zombie") {
     str_hitloc = "torso_lower";
     str_tag = e_target get_closest_tag(v_target_pos);
 
@@ -518,7 +518,7 @@ function_b67b2aff(e_target, n_damage, v_target_pos, w_hero, b_launched = 0, var_
     e_target dodamage(int(n_damage), v_target_pos, self, self, str_hitloc, "MOD_BURNED", 0, w_hero);
   }
 
-  if(b_launched && (e_target.zm_ai_category === # "basic" || e_target.zm_ai_category === # "enhanced")) {
+  if(b_launched && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"enhanced")) {
     n_random_x = randomfloatrange(-3, 3);
     n_random_y = randomfloatrange(-3, 3);
     v_fling = 200 * vectornormalize(e_target.origin - v_target_pos + (n_random_x, n_random_y, 100));
@@ -745,12 +745,12 @@ function_97429d68(n_time = 5) {
   self.var_25cb9682 = 1;
 
   if(n_time == 5) {
-    if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+    if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
       self thread namespace_9ff9f642::slowdown(#"hash_1cc2b03094ad09bd");
     } else {
       self thread namespace_9ff9f642::slowdown(#"hash_6c580f93aa40248d");
     }
-  } else if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
+  } else if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
     self thread namespace_9ff9f642::slowdown(#"hash_449bc314b0c3da73");
   } else {
     self thread namespace_9ff9f642::slowdown(#"hash_6c580993aa401a5b");
@@ -1153,7 +1153,7 @@ beacon_check(e_player, var_a7e57ef9, n_loop_time) {
       e_player thread function_b67b2aff(self, n_damage, var_a7e57ef9, level.hero_weapon[#"scepter"][2]);
     }
 
-    if((self.zm_ai_category === # "basic" || self.zm_ai_category === # "enhanced") && isalive(self) && isactor(self) && !(isDefined(self.var_25cb9682) && self.var_25cb9682) && !self function_dd070839()) {
+    if((self.zm_ai_category === #"basic" || self.zm_ai_category === #"enhanced") && isalive(self) && isactor(self) && !(isDefined(self.var_25cb9682) && self.var_25cb9682) && !self function_dd070839()) {
       if(!isDefined(self.var_1b6dab30)) {
         self.var_1b6dab30 = e_player;
       }

@@ -30,12 +30,12 @@ __init__() {
   level.var_7fe61e7a.head_gib_chance = 0;
   level.var_7fe61e7a.network_death_choke = 4;
   level.var_7fe61e7a.should_kill_enemies = 0;
-  level.var_7fe61e7a.challenge_stat_name = # "zombie_hunter_kill_o_watt";
+  level.var_7fe61e7a.challenge_stat_name = #"zombie_hunter_kill_o_watt";
   level.var_7fe61e7a.no_fx = 1;
   level.var_7fe61e7a.clientside_fx = 0;
   level.var_7fe61e7a.str_mod = "MOD_AAT";
   level.var_7fe61e7a.n_damage_max = 20000;
-  level.var_7fe61e7a.var_a9255d36 = # "hash_1003dc8cc0b680f2";
+  level.var_7fe61e7a.var_a9255d36 = #"hash_1003dc8cc0b680f2";
   callback::function_4b58e5ab(&function_439d6573);
 }
 

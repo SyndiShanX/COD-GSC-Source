@@ -26,7 +26,7 @@ function private postinit() {
     cost = 3000;
   }
 
-  prompt = # "hash_60606b68e93a29c8";
+  prompt = #"hash_60606b68e93a29c8";
   level.var_8e4168e9 = "bowie_knife";
   level.var_63af3e00 = "bowie_flourish";
   var_57858dd5 = "zombie_fists_bowie";

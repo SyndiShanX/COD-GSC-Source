@@ -9,8 +9,8 @@
 
 init_shared() {
   clientfield::register("scriptmover", "riotshield_state", 1, 2, "int", &shield_state_change, 0, 0);
-  level._effect[#"riotshield_light"] = # "_t6/weapon/riotshield/fx_riotshield_depoly_lights";
-  level._effect[#"riotshield_dust"] = # "_t6/weapon/riotshield/fx_riotshield_depoly_dust";
+  level._effect[#"riotshield_light"] = #"_t6/weapon/riotshield/fx_riotshield_depoly_lights";
+  level._effect[#"riotshield_dust"] = #"_t6/weapon/riotshield/fx_riotshield_depoly_dust";
 }
 
 shield_state_change(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

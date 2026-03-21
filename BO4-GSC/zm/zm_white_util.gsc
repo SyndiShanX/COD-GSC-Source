@@ -90,9 +90,9 @@ function_5d7d0c85(var_2753f06a) {
     e_player = a_players[0];
 
     if(var_2753f06a == 0) {
-      str_suffix = # "vox_solo_game_start_" + var_5316ea7d;
+      str_suffix = #"vox_solo_game_start_" + var_5316ea7d;
     } else {
-      str_suffix = # "vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
+      str_suffix = #"vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
     }
 
     b_played = e_player zm_vo::function_a2bd5a0c(str_suffix, 0, 1);
@@ -373,7 +373,7 @@ take_ray_gun_mk2() {
 }
 
 on_ai_spawned() {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     self.var_8b59c468 = &function_ae18909c;
   }
 }

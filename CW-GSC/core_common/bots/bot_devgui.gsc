@@ -555,9 +555,9 @@ function private function_881d3aa(host, botarg) {
     return level.teams[botarg];
   }
 
-  friendlyteam = # "allies";
+  friendlyteam = #"allies";
 
-  if(isDefined(host) && host.team != # "spectator") {
+  if(isDefined(host) && host.team != #"spectator") {
     friendlyteam = host.team;
   }
 
@@ -870,7 +870,7 @@ function private function_ef14f060() {
   weapons = self getweaponslist();
 
   foreach(weapon in weapons) {
-    if(weapon.inventorytype != # "item" || self getweaponammoclip(weapon) <= 0) {
+    if(weapon.inventorytype != #"item" || self getweaponammoclip(weapon) <= 0) {
       continue;
     }
 

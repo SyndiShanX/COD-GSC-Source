@@ -592,11 +592,11 @@ getteamclientfieldvalue(team) {
 
   teamname = util::get_team_mapping(team);
 
-  if(team == # "allies") {
+  if(team == #"allies") {
     return 1;
-  } else if(team == # "axis") {
+  } else if(team == #"axis") {
     return 2;
-  } else if(team == # "neutral") {
+  } else if(team == #"neutral") {
     return 3;
   }
 

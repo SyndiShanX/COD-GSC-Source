@@ -120,7 +120,7 @@ function hasarmor(entity) {
   }
 
   foreach(var_dd54fdb1 in entity.var_5ace757d) {
-    if(var_dd54fdb1.type === # "armor") {
+    if(var_dd54fdb1.type === #"armor") {
       return true;
     }
   }
@@ -294,7 +294,7 @@ function function_76e239dc(entity, attacker) {
 
   if(isarray(var_e67ec32)) {
     foreach(var_7092cd34 in var_e67ec32) {
-      if(var_7092cd34.type === # "armor" && var_7092cd34.health > 0) {
+      if(var_7092cd34.type === #"armor" && var_7092cd34.health > 0) {
         damageweakpoint(var_7092cd34, var_7092cd34.health);
 
         if(isDefined(var_7092cd34.var_f371ebb0)) {

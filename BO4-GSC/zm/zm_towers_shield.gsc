@@ -45,7 +45,7 @@ __init__() {
   clientfield::register("toplayer", "" + # "hash_2cd1bb15f71aedb8", 1, 1, "counter");
   clientfield::register("toplayer", "" + # "hash_1769e95fdb10dfae", 1, 1, "counter");
   clientfield::register("scriptmover", "" + # "hash_333e3741e6552db3", 1, 1, "int");
-  level._effect[#"hash_3ecc995bb97331ac"] = # "hash_266633b36a852fd5";
+  level._effect[#"hash_3ecc995bb97331ac"] = #"hash_266633b36a852fd5";
   level.var_c9d375dc = spawnStruct();
   level.var_c9d375dc.firestorm_weapon = getweapon(#"zhield_zword_turret");
   level.var_c9d375dc.melee_weapon = getweapon(#"zhield_zword_dw");
@@ -157,7 +157,7 @@ function_28f576a9(player) {
       return;
     }
 
-    self.hint_string = # "hash_53fd856df9288be7";
+    self.hint_string = #"hash_53fd856df9288be7";
     self.cost = undefined;
     return 1;
   }
@@ -422,7 +422,7 @@ function_2a9a30bb(death, inflictor, attacker, damage, flags, mod, weapon, vpoint
       } else {
         n_damage = self.maxhealth + 666;
 
-        if(self.archetype === # "zombie") {
+        if(self.archetype === #"zombie") {
           self.var_b364c165 = 1;
         }
       }
@@ -506,16 +506,16 @@ function_693527ec(str_piece) {
 
   switch (str_piece) {
     case # "lower":
-      var_f4c9f09a = # "hash_4752663d0689d2c2";
-      var_f00b4f9f = # "hash_4246a36eeaccdedb";
+      var_f4c9f09a = #"hash_4752663d0689d2c2";
+      var_f00b4f9f = #"hash_4246a36eeaccdedb";
       break;
     case # "katar":
-      var_f4c9f09a = # "hash_3c5ef4492a237f89";
-      var_f00b4f9f = # "hash_1e11ea0627c40424";
+      var_f4c9f09a = #"hash_3c5ef4492a237f89";
+      var_f00b4f9f = #"hash_1e11ea0627c40424";
       break;
     case # "upper":
-      var_f4c9f09a = # "hash_5be88bdaaf36eedf";
-      var_f00b4f9f = # "hash_15ea02b45ed633fa";
+      var_f4c9f09a = #"hash_5be88bdaaf36eedf";
+      var_f00b4f9f = #"hash_15ea02b45ed633fa";
       break;
   }
 
@@ -730,7 +730,7 @@ function_a11cc995(s_params) {
     return;
   }
 
-  if(isDefined(self.archetype != # "gladiator") && self.archetype != # "gladiator") {
+  if(isDefined(self.archetype != #"gladiator") && self.archetype != #"gladiator") {
     return;
   }
 
@@ -770,8 +770,8 @@ function_3624f8c8(str_piece) {
       var_73f25fd = "" + # "hash_6b725eefec5d09d1";
       var_3299d066 = "" + # "hash_73e9280f74528e8f";
       str_trigger = "t_shield_quest_lower_drop";
-      var_f4c9f09a = # "hash_4752663d0689d2c2";
-      var_f00b4f9f = # "hash_4246a36eeaccdedb";
+      var_f4c9f09a = #"hash_4752663d0689d2c2";
+      var_f00b4f9f = #"hash_4246a36eeaccdedb";
       n_drop_time = 1;
       break;
     case # "katar":
@@ -779,8 +779,8 @@ function_3624f8c8(str_piece) {
       var_73f25fd = "" + # "hash_64a830301c1adbf3";
       var_3299d066 = "" + # "hash_4f32455c6a0286cd";
       str_trigger = "t_shield_quest_katar_drop";
-      var_f4c9f09a = # "hash_3c5ef4492a237f89";
-      var_f00b4f9f = # "hash_1e11ea0627c40424";
+      var_f4c9f09a = #"hash_3c5ef4492a237f89";
+      var_f00b4f9f = #"hash_1e11ea0627c40424";
       n_drop_time = 0;
       break;
     case # "upper":
@@ -788,15 +788,15 @@ function_3624f8c8(str_piece) {
       var_73f25fd = "" + # "hash_2cd1bb15f71aedb8";
       var_3299d066 = "" + # "hash_1769e95fdb10dfae";
       str_trigger = "t_shield_quest_upper_drop";
-      var_f4c9f09a = # "hash_5be88bdaaf36eedf";
-      var_f00b4f9f = # "hash_15ea02b45ed633fa";
+      var_f4c9f09a = #"hash_5be88bdaaf36eedf";
+      var_f00b4f9f = #"hash_15ea02b45ed633fa";
       n_drop_time = 0.5;
       break;
   }
 
   self clientfield::increment_to_player(var_4f1671d8);
 
-  if(str_piece != # "katar") {
+  if(str_piece != #"katar") {
     trigger::wait_till(str_trigger, "targetname", self);
   }
 

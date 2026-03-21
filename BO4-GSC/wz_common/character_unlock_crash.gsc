@@ -40,7 +40,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu03_item") {
+  if(itementry.name === #"cu03_item") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
@@ -71,7 +71,7 @@ on_drop_item(params) {
     return;
   }
 
-  if(isDefined(itementry) && itementry.itemtype === # "health") {
+  if(isDefined(itementry) && itementry.itemtype === #"health") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
@@ -85,7 +85,7 @@ on_drop_item(params) {
 on_item_pickup(params) {
   itementry = params.item.itementry;
 
-  if(isDefined(itementry) && itementry.itemtype === # "health") {
+  if(isDefined(itementry) && itementry.itemtype === #"health") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
@@ -99,7 +99,7 @@ on_item_pickup(params) {
 on_item_use(params) {
   itementry = params.item.itementry;
 
-  if(isDefined(itementry) && itementry.itemtype === # "health") {
+  if(isDefined(itementry) && itementry.itemtype === #"health") {
     if(self character_unlock::function_f0406288(#"crash_unlock")) {
       var_4862d883 = self function_687146d();
 
@@ -115,7 +115,7 @@ function_687146d() {
 
   if(isDefined(self.inventory) && isDefined(self.inventory.items)) {
     foreach(item in self.inventory.items) {
-      if(isDefined(item.itementry) && item.itementry.itemtype === # "health") {
+      if(isDefined(item.itementry) && item.itementry.itemtype === #"health") {
         var_4862d883 += item.count;
       }
     }

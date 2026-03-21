@@ -93,7 +93,7 @@ function_29543c() {
 
     if(isalive(e_nikolai) && isalive(e_player)) {
       if(distancesquared(e_nikolai.origin, e_player.origin) < 589824) {
-        var_9a0250b7 = # "hash_465a6e7feb94a61d";
+        var_9a0250b7 = #"hash_465a6e7feb94a61d";
         e_nikolai zm_vo::vo_say(var_9a0250b7, 0, 0, 9999);
       }
     }

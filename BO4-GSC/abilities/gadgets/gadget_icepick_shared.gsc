@@ -278,7 +278,7 @@ function_808efdee(hacker, entity) {
     return false;
   }
 
-  if(entity.team == # "spectator") {
+  if(entity.team == #"spectator") {
     return false;
   }
 
@@ -572,7 +572,7 @@ function_2b2ed159(entity, attackingplayer) {
   attackingplayer.var_86f63ff1++;
 
   if(isPlayer(entity)) {
-    targetname = # "player";
+    targetname = #"player";
     playernum = entity.entnum;
     thread function_39026c34(attackingplayer, entity, 1);
   } else {
@@ -598,7 +598,7 @@ function_2b2ed159(entity, attackingplayer) {
 }
 
 function_4802ca63(str_notify) {
-  if(str_notify != # "hash_7b4714f415b8f49e" || !isDefined(self) || !isPlayer(self)) {
+  if(str_notify != #"hash_7b4714f415b8f49e" || !isDefined(self) || !isPlayer(self)) {
     return;
   }
 

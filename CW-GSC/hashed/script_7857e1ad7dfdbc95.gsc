@@ -459,7 +459,7 @@ function private function_af85a094(inflictor, attacker, damage, idflags, meansof
     return 0;
   }
 
-  if(meansofdeath === # "mod_unknown") {
+  if(meansofdeath === #"mod_unknown") {
     return damage;
   }
 
@@ -495,9 +495,9 @@ function private function_af85a094(inflictor, attacker, damage, idflags, meansof
   }
 
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
-  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== # "armor";
+  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== #"armor";
 
-  if(registerzombie_bgb_used_reinforce && var_84ed9a13.type === # "armor") {
+  if(registerzombie_bgb_used_reinforce && var_84ed9a13.type === #"armor") {
     namespace_81245006::damageweakpoint(var_84ed9a13, damage);
 
     if(namespace_81245006::function_f29756fe(var_84ed9a13) === 3) {
@@ -578,7 +578,7 @@ function function_c9f197d2() {
     self thread function_42a1dabd();
     waitresult = self waittilltimeout(60, #"hash_782dbc5eec90f62f");
 
-    if(waitresult._notify == # "timeout") {
+    if(waitresult._notify == #"timeout") {
       self val::reset(#"hash_65edbe063d05f17b", "takedamage");
       self kill();
     }
@@ -593,7 +593,7 @@ function function_c9f197d2() {
 
     if(isDefined(weakpoints)) {
       foreach(weakpoint in weakpoints) {
-        if(weakpoint.type === # "weakpoint") {
+        if(weakpoint.type === #"weakpoint") {
           weakpoint_state = namespace_81245006::function_f29756fe(weakpoint);
           namespace_81245006::function_26901d33(weakpoint);
           namespace_81245006::function_6c64ebd3(weakpoint, weakpoint_state);
@@ -621,7 +621,7 @@ function private function_42a1dabd() {
   }
 
   self endon(#"death");
-  var_67f0b3a6 = # "aib_vign_cust_zm_red_spart_swrd_dth_f_00";
+  var_67f0b3a6 = #"aib_vign_cust_zm_red_spart_swrd_dth_f_00";
   self namespace_ec06fe4a::function_8c808737();
   self notsolid();
   var_ee3cfcfe = {
@@ -636,10 +636,10 @@ function private function_42a1dabd() {
 
   if(isDefined(self)) {
     var_ee3cfcfe scene::stop(var_67f0b3a6);
-    var_cee6fc30 = # "ai_t8_zm_red_spar_swrd_rebuild_01";
+    var_cee6fc30 = #"ai_t8_zm_red_spar_swrd_rebuild_01";
 
-    if(self.subarchetype == # "skeleton_spear" || self.subarchetype == # "hash_1520c8987a671df0") {
-      var_cee6fc30 = # "ai_t8_zm_red_spar_spear_rebuild_01";
+    if(self.subarchetype == #"skeleton_spear" || self.subarchetype == #"hash_1520c8987a671df0") {
+      var_cee6fc30 = #"ai_t8_zm_red_spar_spear_rebuild_01";
     }
 
     var_93a62fe = namespace_7f5aeb59::function_7781556b(self.origin);
@@ -653,18 +653,18 @@ function private function_42a1dabd() {
     self thread animation::play(var_cee6fc30, undefined, undefined, 1, 0, 0);
     self namespace_e32bb68::function_3a59ec34("zmb_doa_ai_skeleton_spawn");
     var_708e5e40.angles = (var_ee3cfcfe.angles[0], var_ee3cfcfe.angles[1] + 90, var_ee3cfcfe.angles[2]);
-    var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
+    var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_no_helm_bundle";
 
     if(is_true(self.var_3420e847)) {
-      var_704f0f40 = # "hash_27a8f88c6e23290e";
+      var_704f0f40 = #"hash_27a8f88c6e23290e";
     }
 
-    if(self.subarchetype == # "hash_fd7b9665529dd42" && !is_true(self.var_992c3917)) {
-      var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_bundle";
-    } else if(self.subarchetype == # "hash_1520c8987a671df0" && !is_true(self.var_992c3917)) {
-      var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_spear_bundle";
-    } else if(self.subarchetype == # "hash_1520c8987a671df0" || self.subarchetype == # "skeleton_spear") {
-      var_704f0f40 = # "p8_fxanim_zm_red_spartoi_rise_spear_no_helm_bundle";
+    if(self.subarchetype == #"hash_fd7b9665529dd42" && !is_true(self.var_992c3917)) {
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_bundle";
+    } else if(self.subarchetype == #"hash_1520c8987a671df0" && !is_true(self.var_992c3917)) {
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_bundle";
+    } else if(self.subarchetype == #"hash_1520c8987a671df0" || self.subarchetype == #"skeleton_spear") {
+      var_704f0f40 = #"p8_fxanim_zm_red_spartoi_rise_spear_no_helm_bundle";
     }
 
     var_708e5e40 scene::play(var_704f0f40);

@@ -98,7 +98,7 @@ function_10b4d6ac(weapon) {
   a_e_targets = function_b04434cf(b_up);
 
   if(isDefined(a_e_targets)) {
-    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === # "boss") {
+    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === #"boss") {
       n_proj = 3;
     } else if(!a_e_targets.size || a_e_targets.size === 1 && !isactor(a_e_targets[0])) {
       n_proj = 1;
@@ -332,7 +332,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
 
       wait n_time - 0.05;
 
-      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
         if(isDefined(ai_zombie gettagorigin("j_tail_1"))) {
           n_hit_dist_sq = 2500;
         } else {
@@ -403,7 +403,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
     e_projectile waittill(#"movedone");
   }
 
-  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
+  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
     if(isDefined(level.var_2f926dcc)) {
       self thread[[level.var_2f926dcc]](ai_zombie, level.w_hand_charon_uncharged);
     } else {
@@ -416,7 +416,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
 }
 
 function_30239376(e_target) {
-  if(isDefined(e_target) && e_target.zm_ai_category === # "boss") {
+  if(isDefined(e_target) && e_target.zm_ai_category === #"boss") {
     if(isDefined(e_target gettagorigin("j_tail_1"))) {
       v_org = e_target gettagorigin("j_tail_1");
     } else if(isDefined(e_target gettagorigin("j_spine4"))) {
@@ -462,7 +462,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, v_to_target, n_damage) {
           e_target.var_131a4fb0 = 1;
         }
 
-        if(e_target.archetype === # "skeleton") {
+        if(e_target.archetype === #"skeleton") {
           e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
         } else if(isDefined(e_target.var_131a4fb0) && e_target.var_131a4fb0) {
           self thread function_197896ad(e_target, n_damage);
@@ -646,7 +646,7 @@ charon_pool(n_damage) {
     mdl_aoe clientfield::set("charon_pool", 1);
     mdl_aoe zm_utility::create_zombie_point_of_interest(200, 16, 1000);
     mdl_aoe zm_utility::create_zombie_point_of_interest_attractor_positions(undefined, undefined, 100, 1);
-    mdl_aoe.var_8305fd51 = # "charon_pool";
+    mdl_aoe.var_8305fd51 = #"charon_pool";
     self thread function_249b5556(n_damage);
     self notify(#"hash_52d2f17ac6d67de2");
 
@@ -808,7 +808,7 @@ function_31d8c58() {
     self.diedinscriptedanim = 1;
     self ghost();
 
-    if(self.archetype === # "skeleton") {
+    if(self.archetype === #"skeleton") {
       self dodamage(self.health + 999, mdl_tag.origin, self.e_attacker, self.e_attacker, undefined, "MOD_UNKNOWN", 0, level.w_hand_charon);
     } else {
       self dodamage(self.health + 100, mdl_tag.origin, self.e_attacker, self.e_attacker, undefined, "MOD_UNKNOWN", 0, level.w_hand_charon);
@@ -875,7 +875,7 @@ function_197896ad(e_target, n_damage) {
         e_target hide();
       }
 
-      if(e_target.archetype === # "skeleton") {
+      if(e_target.archetype === #"skeleton") {
         e_target dodamage(n_damage, self.origin, self, self, "none", "MOD_UNKNOWN", 0, level.w_hand_charon_uncharged);
       } else {
         e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_UNKNOWN", 0, level.w_hand_charon_uncharged);

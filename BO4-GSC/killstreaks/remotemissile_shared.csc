@@ -203,10 +203,10 @@ hud_update(localclientnum) {
 
 function_d260edc9(localclientnum) {
   player = function_5c10bd79(localclientnum);
-  postfxbundle = # "hash_778f4a554a5cfc33";
+  postfxbundle = #"hash_778f4a554a5cfc33";
 
   if(!function_148ccc79(localclientnum, postfxbundle) && (!function_1cbf351b(localclientnum) || function_93e0f729(localclientnum) === function_27673a7(localclientnum)) && !shoutcaster::function_2e6e4ee0(localclientnum)) {
-    if(isDefined(self.weapon) && self.weapon.statname == # "remote_missile") {
+    if(isDefined(self.weapon) && self.weapon.statname == #"remote_missile") {
       function_a837926b(localclientnum, postfxbundle);
     }
 
@@ -224,7 +224,7 @@ function_d260edc9(localclientnum) {
 
 function_c65b18ed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   player = function_5c10bd79(localclientnum);
-  postfxbundle = # "hash_778f4a554a5cfc33";
+  postfxbundle = #"hash_778f4a554a5cfc33";
 
   if(!isDefined(self)) {
     return;

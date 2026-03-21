@@ -207,7 +207,7 @@ function getenemies() {
   }
 
   foreach(combatant in combatants) {
-    if(combatant.team === # "spectator") {
+    if(combatant.team === #"spectator") {
       continue;
     }
 

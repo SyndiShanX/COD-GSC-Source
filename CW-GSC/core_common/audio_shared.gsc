@@ -157,29 +157,29 @@ function function_c25f7d1(params) {
 function unlockfrontendmusic(unlockname, allplayers) {}
 
 function function_30d4f8c4(attacker, smeansofdeath, weapon) {
-  str_alias = # "hash_4296e7b3cbb7f3de";
+  str_alias = #"hash_4296e7b3cbb7f3de";
   var_90937e56 = function_bd53fa92(attacker, smeansofdeath, weapon);
 
   if(isDefined(var_90937e56)) {
-    if(var_90937e56 === # "explosive") {
-      str_alias = # "hash_c43c0f6a63f7e0";
+    if(var_90937e56 === #"explosive") {
+      str_alias = #"hash_c43c0f6a63f7e0";
     }
 
-    if(var_90937e56 === # "gas") {
-      str_alias = # "hash_291958f59b6be82";
+    if(var_90937e56 === #"gas") {
+      str_alias = #"hash_291958f59b6be82";
     }
 
-    if(var_90937e56 === # "execution") {
-      str_alias = # "hash_58d3709b34454b17";
+    if(var_90937e56 === #"execution") {
+      str_alias = #"hash_58d3709b34454b17";
     }
 
-    if(var_90937e56 === # "bullet") {
-      str_alias = # "hash_100370f52a9e0c99";
+    if(var_90937e56 === #"bullet") {
+      str_alias = #"hash_100370f52a9e0c99";
     }
   }
 
-  if(weapon.name === # "hatchet") {
-    str_alias = # "hash_55bb02aa30e19da8";
+  if(weapon.name === #"hatchet") {
+    str_alias = #"hash_55bb02aa30e19da8";
   }
 
   self playsoundtoplayer(str_alias, self);
@@ -224,7 +224,7 @@ function function_641cec60(weapon) {
 
   var_80de6af = 0;
 
-  if(weapon.name == # "knife_loadout") {
+  if(weapon.name == #"knife_loadout") {
     var_80de6af = 1;
   }
 

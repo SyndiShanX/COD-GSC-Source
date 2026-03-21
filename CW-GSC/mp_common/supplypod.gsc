@@ -146,7 +146,7 @@ function function_29de6f1f(weapon, meansofdeath = undefined) {
   islethalgrenade = weapon.inventorytype == "offhand" && weapon.offhandslot == "Lethal grenade";
   istacticalgrenade = weapon.inventorytype == "offhand" && weapon.offhandslot == "Tactical grenade";
   iskillstreak = isDefined(killstreaks::get_from_weapon(weapon));
-  ismelee = isDefined(meansofdeath) && (meansofdeath == # "mod_melee" || meansofdeath == # "mod_melee_weapon_butt");
+  ismelee = isDefined(meansofdeath) && (meansofdeath == #"mod_melee" || meansofdeath == #"mod_melee_weapon_butt");
   var_4ea2a976 = weapon.name == "launcher_standard_t9" || weapon.name == "sig_buckler_dw" || weapon.name == "briefcase_bomb";
 
   if(var_62c1bfaa || islethalgrenade || istacticalgrenade || iskillstreak || ismelee || var_4ea2a976) {
@@ -430,7 +430,7 @@ function function_827486aa(destroyedbyenemy, var_7497ba51 = 1) {
   self function_890b2784();
 
   if(isDefined(self.owner)) {
-    if(game.state == # "playing") {
+    if(game.state == #"playing") {
       if(is_true(destroyedbyenemy)) {
         self.owner globallogic_score::function_5829abe3(self.var_846acfcf, self.var_d02ddb8e, level.var_934fb97.weapon);
       }
@@ -457,7 +457,7 @@ function function_9d4aabb9(destroyedbyenemy) {
     self battlechatter::function_d2600afc(self.var_846acfcf, player, level.var_934fb97.weapon, self.var_d02ddb8e);
   }
 
-  if(game.state == # "playing") {
+  if(game.state == #"playing") {
     if(self.health <= 0) {
       if(isDefined(level.var_934fb97.bundle.destructionaudio)) {
         self playSound(level.var_934fb97.bundle.destructionaudio);
@@ -804,7 +804,7 @@ function function_18f999b5(waittime) {
   self endon(#"hash_10cd6a20d4e45365", #"disconnect");
   result = self waittilltimeout(waittime, #"death");
 
-  if(result._notify == # "timeout") {
+  if(result._notify == #"timeout") {
     self function_46d74bb7(1);
   } else if(isDefined(level.var_934fb97.bundle.var_98da26d) ? level.var_934fb97.bundle.var_98da26d : 0) {
     self.var_17d74a5c -= gettime();

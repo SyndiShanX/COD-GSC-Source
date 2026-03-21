@@ -32,13 +32,13 @@ function function_9f1f304b(localclientnum, oldval, newval, bnewent, binitialsnap
       return;
     case 1:
     default:
-      str_loc = # "hash_4036f38ad60f61f";
+      str_loc = #"hash_4036f38ad60f61f";
       break;
     case 2:
-      str_loc = # "hash_4037038ad60f7d2";
+      str_loc = #"hash_4037038ad60f7d2";
       break;
     case 3:
-      str_loc = # "hash_4037138ad60f985";
+      str_loc = #"hash_4037138ad60f985";
       break;
   }
 

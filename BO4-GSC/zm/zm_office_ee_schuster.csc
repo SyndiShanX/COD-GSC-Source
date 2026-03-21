@@ -15,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("toplayer", "audio_log_ball_fx", 1, 3, "int", &function_50865dc7, 0, 0);
-  level._effect[#"audio_ball"] = # "hash_445f04139d92c61b";
+  level._effect[#"audio_ball"] = #"hash_445f04139d92c61b";
 }
 
 function_50865dc7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

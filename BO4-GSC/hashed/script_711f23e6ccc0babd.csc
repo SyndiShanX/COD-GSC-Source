@@ -18,7 +18,7 @@ init() {
 }
 
 init_fx() {
-  level._effect[#"hash_5cd079f7090da957"] = # "hash_468f18455c9e9e0f";
+  level._effect[#"hash_5cd079f7090da957"] = #"hash_468f18455c9e9e0f";
 }
 
 init_clientfields() {

@@ -460,7 +460,7 @@ stow_on_back(current) {
   index_weapon = level.weaponnone;
 
   if(isDefined(self.carryobject) && isDefined(self.carryobject gameobjects::get_visible_carrier_model())) {
-    if(self.carryobject.identifier === # "hash_7044a4ac19b5324e") {
+    if(self.carryobject.identifier === #"hash_7044a4ac19b5324e") {
       return;
     }
 

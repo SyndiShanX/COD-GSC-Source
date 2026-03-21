@@ -58,7 +58,7 @@ electric_cherry_precache() {
     return;
   }
 
-  level._effect[#"electric_cherry_light"] = # "hash_1442db17b83460ad";
+  level._effect[#"electric_cherry_light"] = #"hash_1442db17b83460ad";
   level.machine_assets[#"specialty_electriccherry"] = spawnStruct();
   level.machine_assets[#"specialty_electriccherry"].weapon = getweapon("zombie_perk_bottle_cherry");
   level.machine_assets[#"specialty_electriccherry"].off_model = "p7_zm_vending_nuke";
@@ -83,7 +83,7 @@ electric_cherry_perk_machine_setup(use_trigger, perk_machine, bump_trigger, coll
 }
 
 init_electric_cherry() {
-  level._effect[#"electric_cherry_explode"] = # "hash_413a313438a3a4e1";
+  level._effect[#"electric_cherry_explode"] = #"hash_413a313438a3a4e1";
   level.custom_laststand_func = &electric_cherry_laststand;
   zombie_utility::set_zombie_var(#"tesla_head_gib_chance", 50);
   clientfield::register("allplayers", "electric_cherry_reload_fx", 1, 2, "int");

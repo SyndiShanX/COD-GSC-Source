@@ -30,7 +30,7 @@ function private on_begin(var_c2964c77, description, image, challenge_stat, var_
   self.var_c2964c77 = image;
   self.challenge_stat = challenge_stat;
   self.var_191009a6 = var_191009a6;
-  self.trial_completed = trial_completed === # "1";
+  self.trial_completed = trial_completed === #"1";
 }
 
 function private on_end(round_reset) {

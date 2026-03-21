@@ -30,15 +30,15 @@ init_clientfields() {
   clientfield::register("scriptmover", "" + # "hash_546e7612359187c3", 8000, 1, "counter", &function_a0d4ae11, 0, 0);
   clientfield::register("toplayer", "" + # "mansion_mq_rumble", 8000, 1, "counter", &mansion_mq_rumble, 0, 0);
   clientfield::register("world", "" + # "skybox_stream", 8000, 1, "int", &function_bca55d4e, 0, 0);
-  level._effect[#"red_ray"] = # "hash_7046110ad3c65161";
-  level._effect[#"green_ray"] = # "hash_532ac819595d9bb5";
-  level._effect[#"blue_ray"] = # "hash_4a495cef0ef4aee2";
-  level._effect[#"hash_415a43ea0ce519d0"] = # "hash_6a1ab09280787b72";
-  level._effect[#"hash_52032416326181f0"] = # "hash_2cd1f480eb43a66e";
-  level._effect[#"hash_4588a89d6156133b"] = # "hash_547b680a63dd5023";
-  level._effect[#"hash_250f495cbd75db2a"] = # "zombie/fx8_doorbuy_death";
-  level._effect[#"hash_52d102bc9f3a4964"] = # "hash_1e6d673cdbbf3f40";
-  level._effect[#"hash_52d7eebc9f404616"] = # "hash_1e74733cdbc57252";
+  level._effect[#"red_ray"] = #"hash_7046110ad3c65161";
+  level._effect[#"green_ray"] = #"hash_532ac819595d9bb5";
+  level._effect[#"blue_ray"] = #"hash_4a495cef0ef4aee2";
+  level._effect[#"hash_415a43ea0ce519d0"] = #"hash_6a1ab09280787b72";
+  level._effect[#"hash_52032416326181f0"] = #"hash_2cd1f480eb43a66e";
+  level._effect[#"hash_4588a89d6156133b"] = #"hash_547b680a63dd5023";
+  level._effect[#"hash_250f495cbd75db2a"] = #"zombie/fx8_doorbuy_death";
+  level._effect[#"hash_52d102bc9f3a4964"] = #"hash_1e6d673cdbbf3f40";
+  level._effect[#"hash_52d7eebc9f404616"] = #"hash_1e74733cdbc57252";
 }
 
 function_a0d4ae11(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

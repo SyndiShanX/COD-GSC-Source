@@ -260,7 +260,7 @@ function function_e3c937ee() {
   while(true) {
     s_result = self waittill(#"trigger");
 
-    if(isalive(s_result.activator) && s_result.activator.archetype === # "zombie") {
+    if(isalive(s_result.activator) && s_result.activator.archetype === #"zombie") {
       s_result.activator kill();
       s_result.activator function_ae1b4f5b();
       level.var_c49b0cf5 += 1;
@@ -544,7 +544,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_start";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_start";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -552,7 +552,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_start2";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_start2";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -560,7 +560,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_interior_lower";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_interior_lower";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -568,7 +568,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_interior_cave";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_interior_cave";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -576,7 +576,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_upstairs";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_upstairs";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -584,7 +584,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_upstairs_2";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_upstairs_2";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -592,7 +592,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_roof_plane";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_roof_plane";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -600,7 +600,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_exterior_rear";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_exterior_rear";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -608,7 +608,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_exterior_rear2";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_exterior_rear2";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -616,7 +616,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_plane_exterior";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_plane_exterior";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -624,7 +624,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_proto_plane_exterior2";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_proto_plane_exterior2";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -632,7 +632,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_power_tunnel";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_power_tunnel";
 
   if(!isDefined(var_64a4aebe)) {
     var_64a4aebe = [];
@@ -640,7 +640,7 @@ function function_953a87da(var_a276c861) {
     var_64a4aebe = array(var_64a4aebe);
   }
 
-  var_64a4aebe[var_64a4aebe.size] = # "zone_tunnel_interior";
+  var_64a4aebe[var_64a4aebe.size] = #"zone_tunnel_interior";
   level.var_a4db12b6 = struct::get_array("ceiling_dust_med", "targetname");
   level.var_e4aa236f = struct::get_array("ceiling_dust_lg", "targetname");
 
@@ -686,7 +686,7 @@ function function_953a87da(var_a276c861) {
   var_64a4aebe thread function_b21d09cb(var_24be5744);
   waitresult = level waittill(#"hash_5a95b150295599a9", #"dark_side_timeout");
 
-  if(waitresult._notify === # "dark_side_timeout") {
+  if(waitresult._notify === #"dark_side_timeout") {
     level notify(#"hash_5a95b150295599a9");
   }
 
@@ -833,7 +833,7 @@ function function_9ea6f403() {
   level endon(#"hash_59a98cc550dbc416");
 
   foreach(destination in level.contentmanager.destinations) {
-    if(destination.targetname === # "hash_86dbad917999c92") {
+    if(destination.targetname === #"hash_86dbad917999c92") {
       foreach(location in destination.locations) {
         var_30cea8e0 = location.instances[#"hash_b72834e821a0e34"];
 
@@ -1152,7 +1152,7 @@ function function_31fabc7c() {
       break;
     }
 
-    if(waitresult._notify === # "into_the_dark_side") {
+    if(waitresult._notify === #"into_the_dark_side") {
       self function_22198558(t_damage, var_7b423d38, 1);
       level waittill(#"dark_aether_active");
     } else if(waitresult._notify === "rbz_exfil_beacon_active") {
@@ -1358,7 +1358,7 @@ function function_dd843411(var_a276c861, var_19e802fa) {
 
 function function_8e8d08cd() {
   foreach(destination in level.contentmanager.destinations) {
-    if(destination.targetname === # "dest_dp") {
+    if(destination.targetname === #"dest_dp") {
       foreach(location in destination.locations) {
         var_19845e62 = location.instances[#"explore_chests"];
 
@@ -1386,7 +1386,7 @@ function function_8e8d08cd() {
 
   assert(isDefined(level.var_a04cebc2));
   level.var_a04cebc2.scriptmodel solid();
-  level.var_a04cebc2.trigger.var_cc1fb2d0 = # "hash_24c6cc74b974a7af";
+  level.var_a04cebc2.trigger.var_cc1fb2d0 = #"hash_24c6cc74b974a7af";
   level.var_a04cebc2 thread function_4dad3cb6();
   level.var_a04cebc2 util::delay(300, "chest_opened", &function_3076a002);
 }

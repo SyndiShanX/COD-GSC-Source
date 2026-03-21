@@ -96,32 +96,32 @@ function function_41109d42(localclientnum, oldval, newval, bnewent, binitialsnap
       function_56821d13(fieldname);
       return;
     case 2:
-      text = # "hash_29f2d2688d79b468";
+      text = #"hash_29f2d2688d79b468";
       break;
     case 3:
-      text = # "hash_33ee5da9fc46b6a5";
+      text = #"hash_33ee5da9fc46b6a5";
       break;
     case 4:
-      text = # "hash_5bffd8a0e4b9f938";
+      text = #"hash_5bffd8a0e4b9f938";
       break;
     case 5:
-      text = # "hash_4f7305231f2f2bb7";
+      text = #"hash_4f7305231f2f2bb7";
       break;
     case 6:
-      text = # "hash_2a1ca49779ad5f32";
+      text = #"hash_2a1ca49779ad5f32";
       break;
     case 7:
-      text = # "hash_7a1b01c3e3f1437";
+      text = #"hash_7a1b01c3e3f1437";
       break;
     case 1:
-      text = # "hash_549db2754f6c985f";
+      text = #"hash_549db2754f6c985f";
       break;
     case 9:
-      text = # "hash_420476f9d6971298";
+      text = #"hash_420476f9d6971298";
       var_d6bac235.scale = 0.6;
       break;
     case 8:
-      text = # "hash_34cd5701c0b949b8";
+      text = #"hash_34cd5701c0b949b8";
       var_d6bac235.scale = 0.6;
       break;
   }
@@ -153,14 +153,14 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 14:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "doa/wild";
+      var_936d31f7.text = #"doa/wild";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 4;
       var_936d31f7.color = (0.3, 0.84, 0.2);
       break;
     case 15:
       var_d6bac235 = spawnStruct();
-      var_d6bac235.text = # "hash_3a07bfbf9fc8fe5e";
+      var_d6bac235.text = #"hash_3a07bfbf9fc8fe5e";
       assert(isDefined(var_d6bac235.text));
       var_d6bac235.y = 200;
       var_d6bac235.timeout = 3;
@@ -170,7 +170,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 13:
       if(isDefined(level.doa)) {
         var_d6bac235 = spawnStruct();
-        var_d6bac235.text = # "hash_6a342a929b6bfca2";
+        var_d6bac235.text = #"hash_6a342a929b6bfca2";
         assert(isDefined(var_d6bac235.text));
         var_d6bac235.y = 200;
         assert(isDefined(level.doa.roundnumber), "<dev string:x38>");
@@ -185,7 +185,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       }
 
       var_8d552f67 = spawnStruct();
-      var_8d552f67.text = # "hash_2bca86061b6767e4";
+      var_8d552f67.text = #"hash_2bca86061b6767e4";
       assert(isDefined(var_8d552f67.text));
       var_8d552f67.y = 280;
       var_8d552f67.timeout = 9999;
@@ -204,7 +204,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
         }
 
         var_d6bac235 = spawnStruct();
-        var_d6bac235.text = # "hash_6a342a929b6bfca2";
+        var_d6bac235.text = #"hash_6a342a929b6bfca2";
         assert(isDefined(var_d6bac235.text));
         var_d6bac235.y = 200;
         var_d6bac235.payload = level.doa.roundnumber;
@@ -213,12 +213,12 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
         var_8d552f67 = spawnStruct();
       }
 
-      var_8d552f67.text = # "hash_f123d93fac4c288";
+      var_8d552f67.text = #"hash_f123d93fac4c288";
       assert(isDefined(var_8d552f67.text));
       var_8d552f67.y = 280;
       var_8d552f67.timeout = 25;
 
-      if(isDefined(level.doa) && isDefined(level.doa.var_72b899ad) && level.doa.var_72b899ad.script_noteworthy == # "wintercave") {
+      if(isDefined(level.doa) && isDefined(level.doa.var_72b899ad) && level.doa.var_72b899ad.script_noteworthy == #"wintercave") {
         var_8d552f67.timeout = 9999;
       }
 
@@ -226,20 +226,20 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       var_8d552f67.delay = 2;
       var_8d552f67.scale = 0.6;
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "doa/or";
+      var_c4241d08.text = #"doa/or";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 330;
       var_c4241d08.timeout = 1;
       var_c4241d08.color = (1, 0.55, 0);
       var_c4241d08.delay = 3;
       var_c4241d08.scale = 0.6;
-      var_c4241d08.text2 = # "hash_2bca86061b6767e4";
+      var_c4241d08.text2 = #"hash_2bca86061b6767e4";
       assert(isDefined(var_c4241d08.text2));
       var_c4241d08.var_b6501bb5 = 9999;
       break;
     case 16:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_53e517a90b3cd2e2";
+      var_936d31f7.text = #"hash_53e517a90b3cd2e2";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (0.35, 0.35, 0.89);
@@ -270,10 +270,10 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       var_aa7fba18 = 4 - level.doa.roundnumber % 4;
 
       if(var_aa7fba18 == 1) {
-        txt = # "hash_20cec1153efec555";
+        txt = #"hash_20cec1153efec555";
         var_aa7fba18 = undefined;
       } else {
-        txt = # "hash_6547ed675c5dca52";
+        txt = #"hash_6547ed675c5dca52";
       }
     case 11:
       if(!isDefined(level.doa.roundnumber)) {
@@ -282,7 +282,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
 
       if(isDefined(level.doa) && isDefined(level.doa.roundnumber)) {
         var_d6bac235 = spawnStruct();
-        var_d6bac235.text = # "hash_6a342a929b6bfca2";
+        var_d6bac235.text = #"hash_6a342a929b6bfca2";
         assert(isDefined(var_d6bac235.text));
         var_d6bac235.y = 200;
         var_d6bac235.payload = level.doa.roundnumber;
@@ -302,26 +302,26 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 61:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_64706df7d9dd7484";
+      var_936d31f7.text = #"hash_64706df7d9dd7484";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.var_6dcbe6ee = 1.5;
       var_936d31f7.timeout = 6;
       break;
     case 62:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_54f36d5e55ebd1a0";
+      var_936d31f7.text = #"hash_54f36d5e55ebd1a0";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.var_6dcbe6ee = 1.5;
       var_936d31f7.timeout = 8;
       break;
     case 60:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_1f7c09e88239dac";
+      var_936d31f7.text = #"hash_1f7c09e88239dac";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (1, 0.84, 0);
       var_d6bac235 = spawnStruct();
-      var_d6bac235.text = # "hash_279b40f60bc50dc4";
+      var_d6bac235.text = #"hash_279b40f60bc50dc4";
       assert(isDefined(var_d6bac235.text));
       var_d6bac235.y = 320;
       var_d6bac235.timeout = 6;
@@ -331,7 +331,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 59:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_7841b2473599470";
+      var_936d31f7.text = #"hash_7841b2473599470";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.var_6dcbe6ee = 1.5;
       var_936d31f7.timeout = 15;
@@ -339,7 +339,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
 
       if(isDefined(level.doa)) {
         var_8d552f67 = spawnStruct();
-        var_8d552f67.text = # "hash_2294c09e27c1dd1a";
+        var_8d552f67.text = #"hash_2294c09e27c1dd1a";
         assert(isDefined(var_8d552f67.text));
         var_8d552f67.y = 300;
         var_8d552f67.payload = level.doa.roundnumber;
@@ -350,7 +350,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
 
       if(getdvarint(#"hash_29afb60660d7bc06", 0)) {
         var_c4241d08 = spawnStruct();
-        var_c4241d08.text = # "hash_b9e3616935b95c0";
+        var_c4241d08.text = #"hash_b9e3616935b95c0";
         assert(isDefined(var_c4241d08.text));
         var_c4241d08.y = 400;
         var_c4241d08.timeout = 15;
@@ -358,7 +358,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
         var_c4241d08.scale = 0.4;
       } else if(getdvarint(#"hash_47849a8681a67ce7", 0)) {
         var_c4241d08 = spawnStruct();
-        var_c4241d08.text = # "hash_2081e18dffda7e9f";
+        var_c4241d08.text = #"hash_2081e18dffda7e9f";
         assert(isDefined(var_c4241d08.text));
         var_c4241d08.y = 400;
         var_c4241d08.timeout = 15;
@@ -374,7 +374,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 28:
       level thread namespace_9fc66ac::announce(fieldname, 19);
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_30cfa520b05f1c31";
+      var_936d31f7.text = #"hash_30cfa520b05f1c31";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (1, 0.84, 0);
@@ -396,7 +396,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 26:
       level thread namespace_9fc66ac::announce(fieldname, 12);
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_7baa5fa3bb1a720b";
+      var_936d31f7.text = #"hash_7baa5fa3bb1a720b";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (1, 0.84, 0);
@@ -412,14 +412,14 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 25:
       var_d6bac235 = spawnStruct();
-      var_d6bac235.text = # "hash_8bdf3c0ddafe15a";
+      var_d6bac235.text = #"hash_8bdf3c0ddafe15a";
       assert(isDefined(var_d6bac235.text));
       var_d6bac235.y = 200;
       var_d6bac235.timeout = 6;
       var_d6bac235.color = (1, 0.1, 0.1);
       var_d6bac235.scale = 0.7;
       var_8d552f67 = spawnStruct();
-      var_8d552f67.text = # "hash_686dc889dc26ce9a";
+      var_8d552f67.text = #"hash_686dc889dc26ce9a";
       assert(isDefined(var_8d552f67.text));
       var_8d552f67.y = 280;
       var_8d552f67.timeout = 6;
@@ -437,7 +437,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 40:
     case 42:
       var_d6bac235 = spawnStruct();
-      var_d6bac235.text = # "hash_5cf341d25f5b6392";
+      var_d6bac235.text = #"hash_5cf341d25f5b6392";
       assert(isDefined(var_d6bac235.text));
       var_d6bac235.y = 200;
       var_d6bac235.timeout = 6;
@@ -457,7 +457,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
     case 34:
     case 43:
       var_d6bac235 = spawnStruct();
-      var_d6bac235.text = # "hash_4efeacff23c592b7";
+      var_d6bac235.text = #"hash_4efeacff23c592b7";
       assert(isDefined(var_d6bac235.text));
       var_d6bac235.y = 200;
       var_d6bac235.timeout = 6;
@@ -473,12 +473,12 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 52:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "doa/roj";
+      var_936d31f7.text = #"doa/roj";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (0.35, 0.35, 0.89);
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_10f337afa86612b4";
+      var_c4241d08.text = #"hash_10f337afa86612b4";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -488,7 +488,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 53:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_10f33aafa86617cd";
+      var_c4241d08.text = #"hash_10f33aafa86617cd";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -498,7 +498,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 54:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_10f339afa866161a";
+      var_c4241d08.text = #"hash_10f339afa866161a";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -508,12 +508,12 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 55:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_2754828e3e485547";
+      var_936d31f7.text = #"hash_2754828e3e485547";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (0.35, 0.35, 0.89);
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_6c6bf5dfe635c87a";
+      var_c4241d08.text = #"hash_6c6bf5dfe635c87a";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -523,12 +523,12 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 56:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_2754828e3e485547";
+      var_936d31f7.text = #"hash_2754828e3e485547";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (0.35, 0.35, 0.89);
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_284b81f16c3d9e48";
+      var_c4241d08.text = #"hash_284b81f16c3d9e48";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -538,12 +538,12 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 44:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "hash_3415698ef62cc127";
+      var_936d31f7.text = #"hash_3415698ef62cc127";
       assert(isDefined(var_936d31f7.text));
       var_936d31f7.timeout = 6;
       var_936d31f7.color = (0.35, 0.35, 0.89);
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_220c6afbbdd6e391";
+      var_c4241d08.text = #"hash_220c6afbbdd6e391";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -553,7 +553,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 57:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_220c6afbbdd6e391";
+      var_c4241d08.text = #"hash_220c6afbbdd6e391";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -563,11 +563,11 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 49:
       var_936d31f7 = spawnStruct();
-      var_936d31f7.text = # "doa/wild";
+      var_936d31f7.text = #"doa/wild";
       var_936d31f7.timeout = 4;
       var_936d31f7.color = (0.3, 0.84, 0.2);
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_241673ce039e1331";
+      var_c4241d08.text = #"hash_241673ce039e1331";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -577,7 +577,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 45:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_49bc9775ce122be2";
+      var_c4241d08.text = #"hash_49bc9775ce122be2";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 5;
@@ -586,7 +586,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 46:
       var_d6bac235 = spawnStruct();
-      var_d6bac235.text = # "hash_155e552e57ff5998";
+      var_d6bac235.text = #"hash_155e552e57ff5998";
       assert(isDefined(var_d6bac235.text));
       var_d6bac235.y = 200;
       var_d6bac235.timeout = 5;
@@ -595,7 +595,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 47:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_653fc36b071285d5";
+      var_c4241d08.text = #"hash_653fc36b071285d5";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -604,7 +604,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 48:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_5c99b98fb7538d89";
+      var_c4241d08.text = #"hash_5c99b98fb7538d89";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 4;
@@ -613,7 +613,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 50:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_35c9692834e646f8";
+      var_c4241d08.text = #"hash_35c9692834e646f8";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 10;
@@ -622,7 +622,7 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 51:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_485f00a41720d5b3";
+      var_c4241d08.text = #"hash_485f00a41720d5b3";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 10;
@@ -631,14 +631,14 @@ function function_778aa85f(localclientnum, oldval, newval, bnewent, binitialsnap
       break;
     case 58:
       var_c4241d08 = spawnStruct();
-      var_c4241d08.text = # "hash_39d9e1cbc7106724";
+      var_c4241d08.text = #"hash_39d9e1cbc7106724";
       assert(isDefined(var_c4241d08.text));
       var_c4241d08.y = 300;
       var_c4241d08.timeout = 9;
       var_c4241d08.color = (0.35, 0.35, 0.89);
       var_c4241d08.scale = 0.45;
       var_e8f666ac = spawnStruct();
-      var_e8f666ac.text = # "hash_6286324b57917ce9";
+      var_e8f666ac.text = #"hash_6286324b57917ce9";
       assert(isDefined(var_e8f666ac.text));
       var_e8f666ac.y = 365;
       var_e8f666ac.timeout = 9;

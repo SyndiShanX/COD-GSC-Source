@@ -6,7 +6,7 @@
 #namespace weapons;
 
 function ispistol(weapon) {
-  return weapon.weapclass === # "pistol";
+  return weapon.weapclass === #"pistol";
 }
 
 function isflashorstunweapon(weapon) {
@@ -14,13 +14,13 @@ function isflashorstunweapon(weapon) {
 }
 
 function ispunch(weapon) {
-  return weapon.type == "melee" && weapon.statname == # "bare_hands";
+  return weapon.type == "melee" && weapon.statname == #"bare_hands";
 }
 
 function isknife(weapon) {
-  return weapon.type == "melee" && (weapon.rootweapon.name == # "knife_loadout" || weapon.rootweapon.name == # "knife_held");
+  return weapon.type == "melee" && (weapon.rootweapon.name == #"knife_loadout" || weapon.rootweapon.name == #"knife_held");
 }
 
 function isnonbarehandsmelee(weapon) {
-  return weapon.type == "melee" && weapon.rootweapon.name != # "bare_hands";
+  return weapon.type == "melee" && weapon.rootweapon.name != #"bare_hands";
 }

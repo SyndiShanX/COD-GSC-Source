@@ -197,7 +197,7 @@ function_6090f71a() {
 }
 
 on_brutus_killed(params) {
-  if(self.archetype !== # "brutus") {
+  if(self.archetype !== #"brutus") {
     return;
   }
 
@@ -566,7 +566,7 @@ function_85e8940a(entity) {
     }
 
     if(isai(ent)) {
-      if(ent.zm_ai_category === # "basic") {
+      if(ent.zm_ai_category === #"basic") {
         ent zombie_utility::setup_zombie_knockdown(entity);
       }
     }
@@ -749,7 +749,7 @@ function_9a4a6d02() {
 function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, damageoverride) {
   if(!(isDefined(self.hashelmet) && self.hashelmet)) {
     if(isDefined(attacker) && isPlayer(attacker) && attacker hasperk(#"specialty_mod_awareness")) {
-      if(self.zm_ai_category === # "boss") {
+      if(self.zm_ai_category === #"boss") {
         damage *= 1.1;
       } else {
         damage *= 1.2;
@@ -760,7 +760,7 @@ function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, dama
   }
 
   if(weaponhasattachment(weapon, "fmj2")) {
-    if(self.zm_ai_category === # "boss") {
+    if(self.zm_ai_category === #"boss") {
       damagemultiplier *= 1.1;
     } else {
       damagemultiplier = min(1, damagemultiplier + 0.1);
@@ -829,7 +829,7 @@ function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
   if(shitloc !== "head" && shitloc !== "helmet") {
     if(weaponhasattachment(weapon, "fmj") && var_9000ab2 < 1) {
-      if(self.zm_ai_category == # "boss") {
+      if(self.zm_ai_category == #"boss") {
         var_9000ab2 *= 1.1;
       } else {
         var_9000ab2 = min(1, var_9000ab2 + 0.1);
@@ -843,7 +843,7 @@ function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 }
 
 instakill_override(player, mod, shitloc) {
-  if(self.archetype === # "brutus") {
+  if(self.archetype === #"brutus") {
     return true;
   }
 

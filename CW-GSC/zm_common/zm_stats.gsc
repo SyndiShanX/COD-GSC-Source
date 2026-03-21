@@ -1295,7 +1295,7 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
         entity function_8f10788e("boas_killed_by_zdog");
         break;
       case # "nosferatu":
-        if(weapon.subarchetype === # "crimson_nosferatu") {
+        if(weapon.subarchetype === #"crimson_nosferatu") {
           entity increment_client_stat("killed_by_crimson_nosferatu");
           entity increment_player_stat("killed_by_crimson_nosferatu");
           entity function_8f10788e("boas_killed_by_crimson_nosferatu");
@@ -1384,7 +1384,7 @@ function handle_death(einflictor, eattacker, weapon, smeansofdeath) {
           weapon function_8f10788e("boas_zdogs_killed");
           break;
         case # "nosferatu":
-          if(entity.subarchetype === # "crimson_nosferatu") {
+          if(entity.subarchetype === #"crimson_nosferatu") {
             weapon increment_client_stat("crimson_nosferatus_killed");
             weapon increment_player_stat("crimson_nosferatus_killed");
             weapon function_8f10788e("boas_crimson_nosferatus_killed");

@@ -191,7 +191,7 @@ onconnect() {
 
   if(level.var_aad2ad58 && !isDefined(self.pers[#"dynamic_loadout"].weapons[1])) {
     self.pers[#"dynamic_loadout"].weapons[1] = spawnStruct();
-    self.pers[#"dynamic_loadout"].weapons[1].name = # "pistol_standard_t8";
+    self.pers[#"dynamic_loadout"].weapons[1].name = #"pistol_standard_t8";
     self.pers[#"dynamic_loadout"].weapons[1].attachments = [];
     self.pers[#"dynamic_loadout"].weapons[1].ammo = -1;
     self.pers[#"dynamic_loadout"].weapons[1].startammo = level.var_2f990fc4;
@@ -1411,7 +1411,7 @@ function_d8151863(origin) {
   fwd = (0, 0, 1);
   right = (0, -1, 0);
   useobj.fx = spawnfx(#"ui/fx_dom_marker_team_r90", origin, fwd, right);
-  useobj.fx.team = # "none";
+  useobj.fx.team = #"none";
   triggerfx(useobj.fx, 0.001);
 }
 

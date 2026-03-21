@@ -154,12 +154,12 @@ function function_591138a4() {
       continue;
     }
 
-    if(waitresult.menu == # "startmenu_main") {
-      if(waitresult.response == # "menu_opened") {
+    if(waitresult.menu == #"startmenu_main") {
+      if(waitresult.response == #"menu_opened") {
         continue;
       }
 
-      if(waitresult.response == # "menu_closed") {}
+      if(waitresult.response == #"menu_closed") {}
     }
   }
 }
@@ -1120,7 +1120,7 @@ function callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansof
 
   time = gettime();
 
-  if(smeansofdeath === # "mod_melee" && self.last_damaged_by === eattacker && isDefined(self.last_damaged_time)) {
+  if(smeansofdeath === #"mod_melee" && self.last_damaged_by === eattacker && isDefined(self.last_damaged_time)) {
     deltatime = time - self.last_damaged_time;
 
     if(deltatime < 100) {

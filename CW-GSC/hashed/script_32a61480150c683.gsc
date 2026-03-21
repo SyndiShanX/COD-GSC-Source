@@ -856,7 +856,7 @@ function function_f929c0db() {
 function function_379bceb2(params) {
   level.player endon(#"death");
 
-  if(!isDefined(params.weapon) || !isweapon(params.weapon) || !isDefined(self) || !isPlayer(self) || params.weapon.name == # "hash_32454fc6213eedd6" || params.weapon.name == # "none" || params.weapon.name == # "hash_609dfb2c210630ac") {
+  if(!isDefined(params.weapon) || !isweapon(params.weapon) || !isDefined(self) || !isPlayer(self) || params.weapon.name == #"hash_32454fc6213eedd6" || params.weapon.name == #"none" || params.weapon.name == #"hash_609dfb2c210630ac") {
     return;
   }
 
@@ -866,7 +866,7 @@ function function_379bceb2(params) {
 
   level.weapon_count++;
 
-  if(params.weapon.name == # "hash_4ff481a4f55ed901") {
+  if(params.weapon.name == #"hash_4ff481a4f55ed901") {
     level flag::set("rice_paddies_weapon_one");
   } else {
     level flag::set("rice_paddies_weapon_two");

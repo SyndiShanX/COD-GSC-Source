@@ -259,7 +259,7 @@ function team_eliminated(params) {
 }
 
 function function_5d7553c9() {
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     return;
   }
 
@@ -325,7 +325,7 @@ function private function_23600e7d() {
     return;
   }
 
-  while(!isDefined(game.state) || game.state != # "pregame") {
+  while(!isDefined(game.state) || game.state != #"pregame") {
     waitframe(1);
   }
 
@@ -536,7 +536,7 @@ function private function_ec2c9808(response, intpayload) {
 }
 
 function function_cc47bb2f() {
-  if(game.state == # "pregame") {
+  if(game.state == #"pregame") {
     return true;
   }
 
@@ -773,7 +773,7 @@ function on_item_pickup(params) {
   item = params.item;
   itementry = item.itementry;
 
-  if(itementry.itemtype != # "dogtag") {
+  if(itementry.itemtype != #"dogtag") {
     return;
   }
 
@@ -807,7 +807,7 @@ function function_c14ef1aa(attacker) {
     return false;
   }
 
-  if(isDefined(attacker) && (!isDefined(attacker.team) || attacker.team == # "none") && (attacker.classname == "trigger_hurt" || attacker.classname == "worldspawn")) {
+  if(isDefined(attacker) && (!isDefined(attacker.team) || attacker.team == #"none") && (attacker.classname == "trigger_hurt" || attacker.classname == "worldspawn")) {
     return false;
   }
 
@@ -871,7 +871,7 @@ function function_16e6bd2e(var_c1e98979) {
 }
 
 function function_73b0f715(player) {
-  if(game.state != # "pregame") {
+  if(game.state != #"pregame") {
     return;
   }
 

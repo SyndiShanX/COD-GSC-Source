@@ -597,7 +597,7 @@ spawn_mannequin() {
 }
 
 mannequindamage(inflictor, attacker, damage, dflags, mod, weapon, point, dir, hitloc, offsettime, boneindex, modelindex) {
-  if(isDefined(inflictor) && isactor(inflictor) && inflictor.archetype == # "zombie") {
+  if(isDefined(inflictor) && isactor(inflictor) && inflictor.archetype == #"zombie") {
     return 0;
   }
 

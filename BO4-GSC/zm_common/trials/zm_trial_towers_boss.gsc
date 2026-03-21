@@ -190,7 +190,7 @@ function_33935d5f() {
 
   while(!self.b_exploded) {
     waitresult = self waittill(#"trigger", #"tower_boss_scripted_trigger_tower");
-    shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === # "elephant";
+    shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === #"elephant";
 
     if(shouldexplode || waitresult._notify == "tower_boss_scripted_trigger_tower") {
       if(isDefined(e_clip)) {

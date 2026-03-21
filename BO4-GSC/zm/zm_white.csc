@@ -52,9 +52,9 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
   level._effect[#"animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
   level._effect[#"animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
-  level._effect[#"hash_4cee8d16fd03fab3"] = # "hash_d763bb85d068431";
-  level._effect[#"hash_b6fb18d53b3ba8f"] = # "hash_2a09c05622f43005";
-  level._effect[#"hash_50a4de8d221c0d88"] = # "hash_5088b0c20d6a9452";
+  level._effect[#"hash_4cee8d16fd03fab3"] = #"hash_d763bb85d068431";
+  level._effect[#"hash_b6fb18d53b3ba8f"] = #"hash_2a09c05622f43005";
+  level._effect[#"hash_50a4de8d221c0d88"] = #"hash_5088b0c20d6a9452";
   clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int", &function_61c6d401, 0, 0);
   clientfield::register("world", "portal_map_magicbox_lights_init", 1, 1, "int", &portal_map_magicbox_lights_init, 0, 0);
   clientfield::register("world", "portal_map_start_chest1", 1, 1, "int", &portal_map_start_chest1, 0, 0);
@@ -79,7 +79,7 @@ event_handler[level_init] main(eventstruct) {
   level.zombiemode_using_juggernaut_perk = 1;
   level.zombiemode_using_revive_perk = 1;
   level.zombiemode_using_sleightofhand_perk = 1;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_white_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_white_weapons.csv";
   level zm_white_zstandard::main();
   level zm_white_computer_system::preload();
   level zm_white_special_rounds::register_clientfields();
@@ -103,13 +103,13 @@ event_handler[level_init] main(eventstruct) {
 
 function_b8da6f44() {
   level.var_4016a739 = (0, 90, 0);
-  level._effect[#"hash_2bba72fdcc5508b5"] = # "hash_1e8cb303d3103833";
-  level._effect[#"chest_light_closed"] = # "hash_602f075818a2fb2e";
-  level._effect[#"hash_19f4dd97cbb87594"] = # "hash_2f7533f7f5b59f7c";
-  level._effect[#"hash_246062f68a34e289"] = # "hash_61b9b9ada5bb46b1";
-  level._effect[#"hash_73c11d9bf55cbb6"] = # "hash_71e5e40c76a09b21";
-  level._effect[#"hash_5239f7431d4c72ca"] = # "hash_200de2be21c77806";
-  level._effect[#"hash_b6e7f724af1ad5b"] = # "hash_6e05ede771d9fb16";
+  level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_1e8cb303d3103833";
+  level._effect[#"chest_light_closed"] = #"hash_602f075818a2fb2e";
+  level._effect[#"hash_19f4dd97cbb87594"] = #"hash_2f7533f7f5b59f7c";
+  level._effect[#"hash_246062f68a34e289"] = #"hash_61b9b9ada5bb46b1";
+  level._effect[#"hash_73c11d9bf55cbb6"] = #"hash_71e5e40c76a09b21";
+  level._effect[#"hash_5239f7431d4c72ca"] = #"hash_200de2be21c77806";
+  level._effect[#"hash_b6e7f724af1ad5b"] = #"hash_6e05ede771d9fb16";
 }
 
 function_bc7eec87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

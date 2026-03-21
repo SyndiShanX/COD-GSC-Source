@@ -134,7 +134,7 @@ function_7b89f32a() {
   for(n_attacks = 0; n_attacks < 9; n_attacks++) {
     s_result = var_ff4b3a13 waittill(#"damage");
 
-    if(s_result.mod === # "mod_melee") {}
+    if(s_result.mod === #"mod_melee") {}
   }
 
   s_loc = struct::get(#"clottedcreamtea");
@@ -529,7 +529,7 @@ function_e1a452f5(e_homunculus, var_21bb918c, var_c8279d50) {
     if(isalive(player)) {
       weapon = player getcurrentweapon();
 
-      if(player === self && isDefined(weapon) && player adsButtonPressed() && util::getweaponclass(weapon) === # "weapon_sniper") {
+      if(player === self && isDefined(weapon) && player adsButtonPressed() && util::getweaponclass(weapon) === #"weapon_sniper") {
         wait 0.2;
 
         if(isalive(player)) {

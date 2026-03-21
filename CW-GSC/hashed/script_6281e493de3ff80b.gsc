@@ -206,7 +206,7 @@ function private function_b4c86753(entity) {
 }
 
 function private function_11199ef4(entity) {
-  if(self.archetype == # "margwa") {
+  if(self.archetype == #"margwa") {
     entity ghost();
 
     if(isDefined(self.var_5ba15acc)) {

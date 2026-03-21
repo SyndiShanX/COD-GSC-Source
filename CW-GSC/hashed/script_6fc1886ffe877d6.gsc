@@ -59,7 +59,7 @@ function event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + # "barrier_fx", 1, 1, "int");
   clientfield::register("scriptmover", "" + # "jellyfish_trail", 1, 1, "counter");
   clientfield::register("world", "" + # "hash_77ba2c603a746873", 1, 1, "int");
-  var_a409140d = # "hash_ccc16cf6360464b";
+  var_a409140d = #"hash_ccc16cf6360464b";
   objective_manager::register_script(#"holdout", &function_50a0c288, &function_a0779bca, #"holdout", #"hash_12475c4fdd2e51cb", #"hash_183fac0f1cab9dc6", 10, var_a409140d);
   callback::on_spawned(&on_player_spawned);
 }
@@ -666,10 +666,10 @@ function function_b8df700f(s_loot) {
 
       foreach(spawn in var_842cdacd) {
         if(math::cointoss(50)) {
-          model = # "p9_gold_surcrystal_medium_01";
+          model = #"p9_gold_surcrystal_medium_01";
           str_scene = "p9_zm_gold_sur_crystal_medium_01_bundle";
         } else {
-          model = # "p9_gold_surcrystal_medium_02";
+          model = #"p9_gold_surcrystal_medium_02";
           str_scene = "p9_zm_gold_sur_crystal_medium_02_bundle";
         }
 
@@ -769,7 +769,7 @@ function function_f5087df2() {
   objective_manager::stop_timer();
   level flag::clear(#"in_dark_side");
 
-  if(s_result._notify === # "players_dead") {
+  if(s_result._notify === #"players_dead") {
     if(self.targetname !== "objective_sanatorium_holdout") {
       level util::set_lighting_state(1);
     }
@@ -1199,7 +1199,7 @@ function function_cd1515dc() {
       doors = function_c3d68575(barrier.origin, (20, 20, 20));
 
       foreach(door in doors) {
-        if(door.script_noteworthy === # "hash_4d1fb8524fdfd254") {
+        if(door.script_noteworthy === #"hash_4d1fb8524fdfd254") {
           a_doors[a_doors.size] = door;
           setdynentenabled(door, 0);
         }
@@ -1283,7 +1283,7 @@ function lock_doors() {
     doors = function_c3d68575(self.var_6bc2eac8.origin, (100, 100, 200));
 
     foreach(door in doors) {
-      if(door.var_15d44120 === # "p9_fxanim_wz_rus_door_garage_sliding_large_01_mod") {
+      if(door.var_15d44120 === #"p9_fxanim_wz_rus_door_garage_sliding_large_01_mod") {
         self thread function_b746ae20(door);
       }
     }
@@ -1331,7 +1331,7 @@ function function_44fe71e3() {
       var_936c52b5.var_3b6eef70 = 1;
     }
 
-    if(var_936c52b5.model === # "barrier_door_double") {
+    if(var_936c52b5.model === #"barrier_door_double") {
       var_936c52b5.a_nodes = getnodesinradius(var_936c52b5.origin, 80, 20, 50);
     } else {
       var_936c52b5.a_nodes = getnodesinradius(var_936c52b5.origin, 60, 20, 50);
@@ -1658,7 +1658,7 @@ function function_be1b951c() {
   models = getentarraybytype(6);
 
   foreach(model in models) {
-    if(model.model === # "hash_6e47d6576612543c") {
+    if(model.model === #"hash_6e47d6576612543c") {
       self thread function_ed93e125(model);
     }
   }
@@ -1873,7 +1873,7 @@ function function_34ac205(n_active, n_wave) {
         }
       }
 
-      if(str_aitype === # "hash_12a17ab3df5889eb" || str_aitype === # "hash_7a8b592728eec95d") {
+      if(str_aitype === #"hash_12a17ab3df5889eb" || str_aitype === #"hash_7a8b592728eec95d") {
         if(isDefined(self.var_cbd80ad6)) {
           var_f6d8c730 = array::random(self.var_cbd80ad6);
         }
@@ -2048,7 +2048,7 @@ function function_bf606a73() {
 }
 
 function function_fd68cae4() {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     if(level.var_b48509f9 < 5) {
       self namespace_85745671::function_9758722("sprint");
     }

@@ -56,59 +56,59 @@ init_clientfields() {
 init_flags() {}
 
 init_fx() {
-  level._effect[#"hash_2e7f9a3bff90af4a"] = # "hash_7b0d80c48289dd0b";
-  level._effect[#"hash_573af1567956ac69"] = # "hash_661da9149933ecf9";
-  level._effect[#"hash_538a9337bb9927da"] = # "zm_ai/fx8_cata_elec_aura";
-  level._effect[#"hash_3dba8e7d212e4382"] = # "hash_641c2257723638c2";
-  level._effect[#"hash_59916e76378fa3d8"] = # "hash_62eafc17a432322a";
-  level._effect[#"hash_1e6b4bfa36f9487b"] = # "hash_1832a0ef5af0040d";
-  level._effect[#"hash_4b9011909a431ac8"] = # "hash_619361bb6a9a5d2d";
-  level._effect[#"hash_50a595992ac285d0"] = # "hash_3009e42178ffd484";
-  level._effect[#"hash_4ab2496c89a7d871"] = # "hash_4a305119bc50ca3d";
-  level._effect[#"packed_artifact"] = # "zombie/fx_ritual_glow_relic_zod_zmb";
-  level._effect[#"catalyst_blocker"] = # "hash_5b773dbbac0012ff";
-  level._effect[#"sentinel_aura"] = # "hash_3def678deb7f4078";
-  level._effect[#"sentinel_activate"] = # "hash_464f27bfbf0ce7bf";
-  level._effect[#"sentinel_glow"] = # "hash_41b2c270f26faabc";
-  level._effect[#"jupiter_glow"] = # "hash_55ea6f0ddba66d44";
-  level._effect[#"saturn_glow"] = # "hash_69afd734b3a42e4";
-  level._effect[#"uranus_glow"] = # "hash_3f6350484ab2986b";
-  level._effect[#"mars_glow"] = # "hash_ae75b80f4484d6a";
-  level._effect[#"mercury_glow"] = # "hash_53011431a4abc4d0";
-  level._effect[#"sun_glow"] = # "hash_7ff11c8ee1217d6f";
-  level._effect[#"venus_glow"] = # "hash_22922c09fc971250";
-  level._effect[#"neptune_glow"] = # "hash_74fd337197b421f8";
-  level._effect[#"glyph_activate"] = # "hash_6a4db7ffc84cf7fc";
-  level._effect[#"orb_trail"] = # "hash_6d900123df67f4ce";
-  level._effect[#"orb_essence"] = # "hash_2aac2efa85bfb786";
-  level._effect[#"hash_2dd4629ae81753e5"] = # "hash_203548b984de70a4";
-  level._effect[#"hash_23c18b717592a89d"] = # "hash_43cec289a09441e9";
-  level._effect[#"hash_2bb182b164a2d789"] = # "hash_71fc8c15d53b5fe2";
-  level._effect[#"hash_4274dc30c3876166"] = # "hash_2f27882b95a820fd";
-  level._effect[#"ice_blocker"] = # "hash_55a1d3ce6c554a7a";
-  level._effect[#"hash_53533bf74eb74209"] = # "hash_2909be1122353509";
-  level._effect[#"hash_535338f74eb73cf0"] = # "hash_28b4c41121ecff3c";
-  level._effect[#"hash_452505f92d084e74"] = # "hash_7fb7de4ea65f1b9d";
-  level._effect[#"hash_6160e75bd4d4852"] = # "hash_369788360ca4879d";
-  level._effect[#"hash_3316f2b0a2dcecda"] = # "hash_56e16e07d428fead";
-  level._effect[#"step7_snow"] = # "hash_d778729ca762c5a";
-  level._effect[#"loc_jupiter"] = # "hash_618dd5f64c043c98";
-  level._effect[#"loc_saturn"] = # "hash_c02fd55105bf590";
-  level._effect[#"loc_uranus"] = # "hash_28b92cc776e22757";
-  level._effect[#"loc_neptune"] = # "hash_7f0ec9b1b2e75c04";
-  level._effect[#"loc_mars"] = # "hash_1a3f1102ecab4c66";
-  level._effect[#"loc_venus"] = # "hash_762bfc3142f1039c";
-  level._effect[#"loc_mercury"] = # "hash_68cc20f5cb8f2474";
-  level._effect[#"loc_sun"] = # "hash_7d600aa6483d645b";
-  level._effect[#"loc_moon"] = # "hash_7111a6031de7ead2";
-  level._effect[#"hash_5c7f484e340fdde6"] = # "hash_728126700110e700";
-  level._effect[#"hash_331f4a597e6c0189"] = # "hash_1899ecdfcd7daa00";
-  level._effect[#"hash_345b045ea57a58e8"] = # "hash_231dd4d8a69cc3b2";
-  level._effect[#"sigil_on"] = # "hash_454a052cba35b654";
-  level._effect[#"sigil_off"] = # "hash_22f995964a88d0e0";
-  level._effect[#"tree_impact"] = # "hash_39b325729fc733ae";
-  level._effect[#"tree_trail"] = # "hash_4d7b9b72e10c3737";
-  level._effect[#"tree_activate"] = # "hash_6776cc88134ba740";
+  level._effect[#"hash_2e7f9a3bff90af4a"] = #"hash_7b0d80c48289dd0b";
+  level._effect[#"hash_573af1567956ac69"] = #"hash_661da9149933ecf9";
+  level._effect[#"hash_538a9337bb9927da"] = #"zm_ai/fx8_cata_elec_aura";
+  level._effect[#"hash_3dba8e7d212e4382"] = #"hash_641c2257723638c2";
+  level._effect[#"hash_59916e76378fa3d8"] = #"hash_62eafc17a432322a";
+  level._effect[#"hash_1e6b4bfa36f9487b"] = #"hash_1832a0ef5af0040d";
+  level._effect[#"hash_4b9011909a431ac8"] = #"hash_619361bb6a9a5d2d";
+  level._effect[#"hash_50a595992ac285d0"] = #"hash_3009e42178ffd484";
+  level._effect[#"hash_4ab2496c89a7d871"] = #"hash_4a305119bc50ca3d";
+  level._effect[#"packed_artifact"] = #"zombie/fx_ritual_glow_relic_zod_zmb";
+  level._effect[#"catalyst_blocker"] = #"hash_5b773dbbac0012ff";
+  level._effect[#"sentinel_aura"] = #"hash_3def678deb7f4078";
+  level._effect[#"sentinel_activate"] = #"hash_464f27bfbf0ce7bf";
+  level._effect[#"sentinel_glow"] = #"hash_41b2c270f26faabc";
+  level._effect[#"jupiter_glow"] = #"hash_55ea6f0ddba66d44";
+  level._effect[#"saturn_glow"] = #"hash_69afd734b3a42e4";
+  level._effect[#"uranus_glow"] = #"hash_3f6350484ab2986b";
+  level._effect[#"mars_glow"] = #"hash_ae75b80f4484d6a";
+  level._effect[#"mercury_glow"] = #"hash_53011431a4abc4d0";
+  level._effect[#"sun_glow"] = #"hash_7ff11c8ee1217d6f";
+  level._effect[#"venus_glow"] = #"hash_22922c09fc971250";
+  level._effect[#"neptune_glow"] = #"hash_74fd337197b421f8";
+  level._effect[#"glyph_activate"] = #"hash_6a4db7ffc84cf7fc";
+  level._effect[#"orb_trail"] = #"hash_6d900123df67f4ce";
+  level._effect[#"orb_essence"] = #"hash_2aac2efa85bfb786";
+  level._effect[#"hash_2dd4629ae81753e5"] = #"hash_203548b984de70a4";
+  level._effect[#"hash_23c18b717592a89d"] = #"hash_43cec289a09441e9";
+  level._effect[#"hash_2bb182b164a2d789"] = #"hash_71fc8c15d53b5fe2";
+  level._effect[#"hash_4274dc30c3876166"] = #"hash_2f27882b95a820fd";
+  level._effect[#"ice_blocker"] = #"hash_55a1d3ce6c554a7a";
+  level._effect[#"hash_53533bf74eb74209"] = #"hash_2909be1122353509";
+  level._effect[#"hash_535338f74eb73cf0"] = #"hash_28b4c41121ecff3c";
+  level._effect[#"hash_452505f92d084e74"] = #"hash_7fb7de4ea65f1b9d";
+  level._effect[#"hash_6160e75bd4d4852"] = #"hash_369788360ca4879d";
+  level._effect[#"hash_3316f2b0a2dcecda"] = #"hash_56e16e07d428fead";
+  level._effect[#"step7_snow"] = #"hash_d778729ca762c5a";
+  level._effect[#"loc_jupiter"] = #"hash_618dd5f64c043c98";
+  level._effect[#"loc_saturn"] = #"hash_c02fd55105bf590";
+  level._effect[#"loc_uranus"] = #"hash_28b92cc776e22757";
+  level._effect[#"loc_neptune"] = #"hash_7f0ec9b1b2e75c04";
+  level._effect[#"loc_mars"] = #"hash_1a3f1102ecab4c66";
+  level._effect[#"loc_venus"] = #"hash_762bfc3142f1039c";
+  level._effect[#"loc_mercury"] = #"hash_68cc20f5cb8f2474";
+  level._effect[#"loc_sun"] = #"hash_7d600aa6483d645b";
+  level._effect[#"loc_moon"] = #"hash_7111a6031de7ead2";
+  level._effect[#"hash_5c7f484e340fdde6"] = #"hash_728126700110e700";
+  level._effect[#"hash_331f4a597e6c0189"] = #"hash_1899ecdfcd7daa00";
+  level._effect[#"hash_345b045ea57a58e8"] = #"hash_231dd4d8a69cc3b2";
+  level._effect[#"sigil_on"] = #"hash_454a052cba35b654";
+  level._effect[#"sigil_off"] = #"hash_22f995964a88d0e0";
+  level._effect[#"tree_impact"] = #"hash_39b325729fc733ae";
+  level._effect[#"tree_trail"] = #"hash_4d7b9b72e10c3737";
+  level._effect[#"tree_activate"] = #"hash_6776cc88134ba740";
 }
 
 function_91be5845() {
@@ -127,16 +127,16 @@ function_7729e81c(localclientnum, def, s_capture_point) {}
 function_33aa16f0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   switch (newval) {
     case 1:
-      str_fx = # "hash_2e7f9a3bff90af4a";
+      str_fx = #"hash_2e7f9a3bff90af4a";
       break;
     case 2:
-      str_fx = # "hash_573af1567956ac69";
+      str_fx = #"hash_573af1567956ac69";
       break;
     case 3:
-      str_fx = # "hash_538a9337bb9927da";
+      str_fx = #"hash_538a9337bb9927da";
       break;
     case 4:
-      str_fx = # "hash_3dba8e7d212e4382";
+      str_fx = #"hash_3dba8e7d212e4382";
       break;
   }
 
@@ -341,7 +341,7 @@ function_bcb676b9() {
   while(true) {
     s_result = level waittilltimeout(20, #"hash_5010527c7518e767");
 
-    if(isalive(self) && s_result._notify == # "hash_5010527c7518e767") {
+    if(isalive(self) && s_result._notify == #"hash_5010527c7518e767") {
       self function_116b95e5(#"pstfx_frost_loop", "Reveal Threshold", n_val);
       n_val += 0.1;
 
@@ -609,31 +609,31 @@ function_e7c0fb8c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      str_fx = # "loc_sun";
+      str_fx = #"loc_sun";
       break;
     case 2:
-      str_fx = # "loc_mercury";
+      str_fx = #"loc_mercury";
       break;
     case 3:
-      str_fx = # "loc_venus";
+      str_fx = #"loc_venus";
       break;
     case 4:
-      str_fx = # "loc_moon";
+      str_fx = #"loc_moon";
       break;
     case 5:
-      str_fx = # "loc_mars";
+      str_fx = #"loc_mars";
       break;
     case 6:
-      str_fx = # "loc_jupiter";
+      str_fx = #"loc_jupiter";
       break;
     case 7:
-      str_fx = # "loc_saturn";
+      str_fx = #"loc_saturn";
       break;
     case 8:
-      str_fx = # "loc_uranus";
+      str_fx = #"loc_uranus";
       break;
     case 9:
-      str_fx = # "loc_neptune";
+      str_fx = #"loc_neptune";
       break;
   }
 

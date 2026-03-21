@@ -890,7 +890,7 @@ daemonupdategameobjects(commander) {
         continue;
       }
 
-      if(!(gameobject.team == commanderteam || gameobject.team == var_31b80437 || gameobject.absolute_visible_and_interact_team === commanderteam || gameobject.team == # "free")) {
+      if(!(gameobject.team == commanderteam || gameobject.team == var_31b80437 || gameobject.absolute_visible_and_interact_team === commanderteam || gameobject.team == #"free")) {
         continue;
       }
 
@@ -1339,8 +1339,8 @@ function_14c766b3(planner, constant) {
 
   players = planner::getblackboardattribute(planner, #"players");
   hasplayers = players.size > 0;
-  var_8769837e = !hasplayers || target[#"strategy"].("doppelbotsinteractions") == # "first come first served";
-  var_f75536ec = !hasplayers || target[#"strategy"].("companionsinteractions") == # "first come first served";
+  var_8769837e = !hasplayers || target[#"strategy"].("doppelbotsinteractions") == #"first come first served";
+  var_f75536ec = !hasplayers || target[#"strategy"].("companionsinteractions") == #"first come first served";
   airvehicles = strategiccommandutility::function_698a5382(target[#"strategy"]);
   groundvehicles = strategiccommandutility::function_54032f13(target[#"strategy"]);
   var_eda803e5 = groundvehicles;

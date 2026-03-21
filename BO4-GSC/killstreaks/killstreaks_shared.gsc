@@ -133,12 +133,12 @@ killstreak_init(killstreak_type) {
 }
 
 register_weapon(killstreak_type, weapon) {
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
   assert(isDefined(killstreak_type), "<dev string:x77>");
-  assert(weapon.name != # "none");
+  assert(weapon.name != #"none");
   assert(!isDefined(level.killstreakweapons[weapon]), "<dev string:xd6>");
   level.killstreaks[killstreak_type].weapon = weapon;
   level.killstreakweapons[weapon] = killstreak_type;
@@ -257,7 +257,7 @@ function_e48aca4d(type, bundle, weapon, vehicle, killstreak_use_function, isinve
 register_bundle(bundle, killstreak_use_function) {
   function_e48aca4d(bundle.kstype, bundle, bundle.ksweapon, bundle.ksvehicle, killstreak_use_function, 0);
 
-  if(isDefined(bundle.ksinventoryweapon) && bundle.ksinventoryweapon.name != # "none") {
+  if(isDefined(bundle.ksinventoryweapon) && bundle.ksinventoryweapon.name != #"none") {
     function_e48aca4d("inventory_" + bundle.kstype, bundle, bundle.ksinventoryweapon, undefined, killstreak_use_function, 1);
   }
 }
@@ -326,7 +326,7 @@ function_181f96a6(killstreaktype, weapon) {
   assert(isDefined(killstreaktype), "<dev string:x77>");
   assert(isDefined(level.killstreaks[killstreaktype]), "<dev string:x1fd>");
 
-  if(weapon.name == # "none") {
+  if(weapon.name == #"none") {
     return;
   }
 
@@ -2347,7 +2347,7 @@ get_old_damage(attacker, weapon, type, damage, allow_bullet_damage, bullet_damag
         break;
       }
 
-      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == # "remote_missile_missile") {
+      if(isDefined(self.remotemissiledamage) && isDefined(weapon) && weapon.name == #"remote_missile_missile") {
         damage = self.remotemissiledamage;
       } else if(isDefined(self.rocketdamage)) {
         damage = self.rocketdamage;
@@ -2815,7 +2815,7 @@ init_ride_killstreak_internal(streak, always_allow) {
       return "disconnect";
     }
 
-    if(!isDefined(self.team) || self.team == # "spectator") {
+    if(!isDefined(self.team) || self.team == #"spectator") {
       return "fail";
     }
 
@@ -2839,7 +2839,7 @@ init_ride_killstreak_internal(streak, always_allow) {
   if(blackoutwait._notify != "disconnect") {
     self thread clear_ride_intro(1);
 
-    if(!isDefined(self.team) || self.team == # "spectator") {
+    if(!isDefined(self.team) || self.team == #"spectator") {
       return "fail";
     }
   }

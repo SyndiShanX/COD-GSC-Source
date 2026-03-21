@@ -480,7 +480,7 @@ function check_kill_damage(inflictor, attacker, damage, flags, meansofdamage, we
     return hitloc;
   }
 
-  if(isDefined(boneindex) && boneindex.weapclass == "grenade" && (boneindex.name == # "eq_flash_grenade" || offsettime == "MOD_IMPACT")) {
+  if(isDefined(boneindex) && boneindex.weapclass == "grenade" && (boneindex.name == #"eq_flash_grenade" || offsettime == "MOD_IMPACT")) {
     return hitloc;
   }
 
@@ -588,7 +588,7 @@ function event_handler_should_ignore(event) {
   }
 
   if(event.typeorig == "grenade danger") {
-    if(isDefined(event.entity.item.name) && event.entity.item.name == # "hatchet") {
+    if(isDefined(event.entity.item.name) && event.entity.item.name == #"hatchet") {
       return 1;
     }
   }

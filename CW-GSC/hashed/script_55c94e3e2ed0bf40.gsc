@@ -252,7 +252,7 @@ function private function_e5368a6a() {
     var_9a528114 useweaponmodel(var_b2e05f73);
   }
 
-  if(var_9a528114.model != # "") {
+  if(var_9a528114.model != #"") {
     level.var_eea5b22[#"weapon"] = var_9a528114;
     return;
   }
@@ -402,7 +402,7 @@ function private function_29962dd8(params) {
   setslowmotion(1, var_691d0722, 0.5);
   s_result = var_86514cc waittilltimeout(2, #"death");
 
-  if(s_result._notify === # "death") {
+  if(s_result._notify === #"death") {
     level flag::set(#"hash_2254d709726e6725");
   } else {
     var_86514cc.health = 9999;

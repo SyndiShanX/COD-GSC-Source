@@ -26,13 +26,13 @@ function function_9f8d8c38() {
   if(isDefined(self.zm_ai_category)) {
     switch (self.zm_ai_category) {
       case # "normal":
-        var_3e5502b5 = # "hash_1c9af7bb427952d";
+        var_3e5502b5 = #"hash_1c9af7bb427952d";
         break;
       case # "special":
-        var_3e5502b5 = # "hash_1d07249a2211a81d";
+        var_3e5502b5 = #"hash_1d07249a2211a81d";
         break;
       case # "elite":
-        var_3e5502b5 = # "hash_721bfbe781c0d680";
+        var_3e5502b5 = #"hash_721bfbe781c0d680";
         break;
     }
 
@@ -50,7 +50,7 @@ function dragons_breath(e_attacker, n_damage, weapon) {
   }
 
   if(isinarray(self.var_f6291271, e_attacker)) {
-    if(self.archetype === # "zombie" && n_damage > self.health) {
+    if(self.archetype === #"zombie" && n_damage > self.health) {
       self.var_b364c165 = 1;
     }
 
@@ -66,7 +66,7 @@ function dragons_breath(e_attacker, n_damage, weapon) {
   self.var_f6291271[self.var_f6291271.size] = e_attacker;
   self thread function_ddda26e(e_attacker);
 
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     n_damage += 100;
 
     if(n_damage < self.health) {
@@ -89,7 +89,7 @@ function private function_ddda26e(e_attacker) {
 
 function function_82bca1c7(e_attacker) {
   if(e_attacker playerads() == 1) {
-    if(self.zm_ai_category === # "normal" && math::cointoss(10) && distancesquared(self.origin, e_attacker.origin) < 40000) {
+    if(self.zm_ai_category === #"normal" && math::cointoss(10) && distancesquared(self.origin, e_attacker.origin) < 40000) {
       self ai::stun(2);
     }
   }

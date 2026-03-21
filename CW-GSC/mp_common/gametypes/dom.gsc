@@ -197,7 +197,7 @@ function function_610d3790(einflictor, victim, idamage, weapon) {
       if(idamage istouching(trigger) || attacker istouching(trigger)) {
         inflagzone = 1;
 
-        if(trigger getflagteam() == attacker.pers[#"team"] || trigger getflagteam() == # "neutral") {
+        if(trigger getflagteam() == attacker.pers[#"team"] || trigger getflagteam() == #"neutral") {
           defendedflag = 1;
         } else {
           offendedflag = 1;
@@ -369,7 +369,7 @@ function killwhilecontesting(flag, weapon) {
     return;
   }
 
-  if(flag.ownerteam != playerteam && flag gameobjects::get_owner_team() != # "neutral") {
+  if(flag.ownerteam != playerteam && flag gameobjects::get_owner_team() != #"neutral") {
     self.clearenemycount = 0;
     return;
   }

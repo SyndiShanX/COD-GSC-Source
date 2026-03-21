@@ -186,7 +186,7 @@ function private function_7dfb4daa(decoygrenade) {
 }
 
 function private event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == # "nightingale" || eventstruct.weapon.name == # "nightingale_zm") {
+  if(eventstruct.weapon.name == #"nightingale" || eventstruct.weapon.name == #"nightingale_zm") {
     grenade = eventstruct.projectile;
     grenade.var_cb19e5d4 = 1;
     grenade.var_515d6dda = 1;
@@ -230,7 +230,7 @@ function function_db24f032() {
   decoy setteam(self.team);
   decoy.team = self.team;
   decoy clientfield::set("enemyequip", 1);
-  decoy.aitype = # "hash_25454a5a4de341b8";
+  decoy.aitype = #"hash_25454a5a4de341b8";
   decoy linkto(self);
 
   if(isDefined(self.originalowner) && isPlayer(self.originalowner)) {

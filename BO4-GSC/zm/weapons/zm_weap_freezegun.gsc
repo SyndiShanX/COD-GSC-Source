@@ -74,13 +74,13 @@ function_b65fd5ae(params) {
     self.var_4592c713 = 0;
   }
 
-  var_bdbde2d2 = # "freezegun_slowdown";
+  var_bdbde2d2 = #"freezegun_slowdown";
 
   if(self.var_4592c713 || params.weapon == level.w_freezegun_upgraded) {
-    var_bdbde2d2 = # "hash_5a1a7bceb3b8fded";
+    var_bdbde2d2 = #"hash_5a1a7bceb3b8fded";
   }
 
-  if(self.archetype != # "zombie_dog") {
+  if(self.archetype != #"zombie_dog") {
     self thread namespace_9ff9f642::slowdown(var_bdbde2d2);
     self thread slow_watcher(var_bdbde2d2);
   }
@@ -96,7 +96,7 @@ slow_watcher(var_bdbde2d2) {
   self.var_4592c713 = 1;
   n_wait = 10;
 
-  if(var_bdbde2d2 == # "hash_5a1a7bceb3b8fded") {
+  if(var_bdbde2d2 == #"hash_5a1a7bceb3b8fded") {
     n_wait = 15;
   }
 
@@ -152,7 +152,7 @@ freezegun_get_enemies_in_range(is_upgraded) {
   }
 
   foreach(ai in a_targets) {
-    if(!isDefined(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "zombie_dog" && ai.archetype !== # "nova_crawler" || ai getteam() !== level.zombie_team || !isalive(ai)) {
+    if(!isDefined(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"zombie_dog" && ai.archetype !== #"nova_crawler" || ai getteam() !== level.zombie_team || !isalive(ai)) {
       continue;
     }
 
@@ -216,7 +216,7 @@ freezegun_do_shatter(params, shatter_trigger, crumple_trigger) {
   a_targets = getentitiesinradius(centroid, freezegun_get_shatter_range(is_upgraded), 15);
 
   foreach(ai in a_targets) {
-    if(!isDefined(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "zombie_dog" && ai.archetype !== # "nova_crawler" || ai getteam() !== level.zombie_team) {
+    if(!isDefined(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"zombie_dog" && ai.archetype !== #"nova_crawler" || ai getteam() !== level.zombie_team) {
       continue;
     }
 
@@ -287,7 +287,7 @@ freezegun_run_skipped_death_events() {
 }
 
 freezegun_death(params) {
-  if(self.archetype === # "zombie_dog") {
+  if(self.archetype === #"zombie_dog") {
     self freezegun_run_skipped_death_events();
     return;
   }

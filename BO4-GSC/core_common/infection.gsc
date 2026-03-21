@@ -151,12 +151,12 @@ function_da08f4d0() {
   wait randomintrange(2, 4);
 
   while(true) {
-    str_alias = # "hash_61fc4fa3eeafcf07";
+    str_alias = #"hash_61fc4fa3eeafcf07";
     n_wait_min = 2;
     n_wait_max = 5;
 
     if(self issprinting()) {
-      str_alias = # "hash_64441bbb83e130e9";
+      str_alias = #"hash_64441bbb83e130e9";
       n_wait_min = 4;
       n_wait_max = 7;
     }
@@ -185,7 +185,7 @@ function_687661ea() {
 }
 
 get_infected_team() {
-  if(level.infection.platoon != # "invalid") {
+  if(level.infection.platoon != #"invalid") {
     if(self is_infected()) {
       return self.team;
     }
@@ -196,7 +196,7 @@ get_infected_team() {
 
     team = self.team;
 
-    if(team != # "spectator") {
+    if(team != #"spectator") {
       players_on_team = getplayers(team);
 
       if(players_on_team.size <= 1) {
@@ -219,7 +219,7 @@ function_d3da95cf() {
   team = self get_infected_team();
   platoon = function_76601b7d();
 
-  if(platoon != # "invalid") {
+  if(platoon != #"invalid") {
     level.infection.platoon_team[self.team] = team;
     platoons::function_334c4bec(team, platoon);
   }

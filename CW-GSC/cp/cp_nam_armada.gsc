@@ -398,16 +398,16 @@ function function_a291d0f(var_d3440450, var_50cc0d4f, var_fcf2c706 = 0) {
   if(var_50cc0d4f) {
     switch (var_d3440450) {
       case # "player_controlled_huey_01":
-        str_script_noteworthy = # "hash_44b941c1984f5dc6";
+        str_script_noteworthy = #"hash_44b941c1984f5dc6";
         break;
       case # "player_controlled_huey_02":
-        str_script_noteworthy = # "hash_651a32ffba7e27b4";
+        str_script_noteworthy = #"hash_651a32ffba7e27b4";
         break;
       case # "defend_firebase_ripcord":
-        str_script_noteworthy = # "hash_1668bd06b3baa8e2";
+        str_script_noteworthy = #"hash_1668bd06b3baa8e2";
         break;
       case # "secure_the_nuke":
-        str_script_noteworthy = # "hash_8f14f3cf9fd498a";
+        str_script_noteworthy = #"hash_8f14f3cf9fd498a";
         break;
     }
 
@@ -467,7 +467,7 @@ function function_a291d0f(var_d3440450, var_50cc0d4f, var_fcf2c706 = 0) {
   level battlechatter::function_2ab9360b(0);
   var_78110506 = 1;
 
-  if(var_50cc0d4f && (var_d3440450 === # "secure_the_nuke" || var_d3440450 === # "defend_firebase_ripcord")) {
+  if(var_50cc0d4f && (var_d3440450 === #"secure_the_nuke" || var_d3440450 === #"defend_firebase_ripcord")) {
     var_78110506 = 0;
   }
 
@@ -1009,7 +1009,7 @@ function function_906d6449(var_562dce82, var_59ec68d9) {
 }
 
 function function_cb853b3d(s_params) {
-  if(level.var_c2ccaeac === # "defend_firebase_ripcord" || level.var_c2ccaeac === # "secure_the_nuke") {
+  if(level.var_c2ccaeac === #"defend_firebase_ripcord" || level.var_c2ccaeac === #"secure_the_nuke") {
     if(isPlayer(s_params.eattacker)) {
       function_53c1b17f(s_params);
     }
@@ -1592,7 +1592,7 @@ function function_986e037a(str_vehicletype, v_impact, var_3728a157) {
     return false;
   }
 
-  if(str_vehicletype != # "hash_4420cded39673048" && self.vehicletype == # "hash_4420cded39673048") {
+  if(str_vehicletype != #"hash_4420cded39673048" && self.vehicletype == #"hash_4420cded39673048") {
     return false;
   }
 
@@ -3413,12 +3413,12 @@ function function_f53de8f5(enemy) {
     if(!is_true(level.var_53bb8ef2.var_78bd98cb.var_918b6ecc)) {
       flag::set("hind_damage_vo_playing");
 
-      if(damage_data.weapon.name == # "hash_1b226dddac770884" && var_4d0d207b.size > 0) {
+      if(damage_data.weapon.name == #"hash_1b226dddac770884" && var_4d0d207b.size > 0) {
         var_fd3f3dfe = randomintrangeinclusive(0, var_4d0d207b.size - 1);
         level.player dialogue::queue(var_4d0d207b[var_fd3f3dfe]);
         var_4d0d207b = array::remove_index(var_4d0d207b, var_fd3f3dfe);
         wait 1;
-      } else if(damage_data.weapon.name == # "hash_25b7b14b6698454a" && var_633ec8ba.size > 0) {
+      } else if(damage_data.weapon.name == #"hash_25b7b14b6698454a" && var_633ec8ba.size > 0) {
         var_fd3f3dfe = randomintrangeinclusive(0, var_633ec8ba.size - 1);
         level.player dialogue::queue(var_633ec8ba[var_fd3f3dfe]);
         var_633ec8ba = array::remove_index(var_633ec8ba, var_fd3f3dfe);
@@ -3954,7 +3954,7 @@ function function_1fcee01d() {
 }
 
 function function_53c1b17f(s_params) {
-  if(isDefined(level.var_9051f4a3) && isPlayer(s_params.eattacker) && self.team === # "axis") {
+  if(isDefined(level.var_9051f4a3) && isPlayer(s_params.eattacker) && self.team === #"axis") {
     level.var_9051f4a3.var_8c393c78 = 0;
   }
 }
@@ -3980,7 +3980,7 @@ function function_56ca8045(n_damage, var_624c5691 = 1) {
     level flag::set(#"hash_189bbc62bf947091");
 
     if(isalive(level.player)) {
-      level.player.var_97a2e324 = # "allies";
+      level.player.var_97a2e324 = #"allies";
       level.player thread friendlyfire::missionfail();
     }
 
@@ -4104,7 +4104,7 @@ function function_8544c23e(var_549c5e7b, var_f95b722f, var_854f3b02, var_b253c92
 function function_9d49cee9() {
   self endon(#"death");
 
-  if(self.vehicletype == # "hash_2bf574cefe3e6d9e") {
+  if(self.vehicletype == #"hash_2bf574cefe3e6d9e") {
     self thread function_12f91d79();
   }
 
@@ -4161,7 +4161,7 @@ function function_9aaa0e13() {
   level.var_9051f4a3 endon(#"skipped");
 
   foreach(struct in struct::get_array(self.target)) {
-    if(struct.script_noteworthy === # "objective") {
+    if(struct.script_noteworthy === #"objective") {
       s_obj = struct;
       break;
     }
@@ -4187,7 +4187,7 @@ function function_d8b47383() {
   self endon(#"destroyed");
 
   foreach(ent in getEntArray(self.target, "targetname", 1)) {
-    if(ent.script_noteworthy === # "trigger_damage") {
+    if(ent.script_noteworthy === #"trigger_damage") {
       t_damage = ent;
       break;
     }
@@ -4228,7 +4228,7 @@ function function_2e9bb366(e_attacker) {
   }
 
   foreach(struct in struct::get_array(self.target)) {
-    if(struct.script_noteworthy === # "explosion") {
+    if(struct.script_noteworthy === #"explosion") {
       var_85e471f5 = struct;
       break;
     }
@@ -4369,19 +4369,19 @@ function function_ac5ebfa1() {
     switch (i) {
       case 0:
         var_3ba94e96 = "sp_ripcord_reinf_runners_01";
-        str_spawns = # "hash_661c0d6b54386759";
+        str_spawns = #"hash_661c0d6b54386759";
         break;
       case 1:
         var_3ba94e96 = "sp_ripcord_reinf_runners_02";
-        str_spawns = # "hash_661c0a6b54386240";
+        str_spawns = #"hash_661c0a6b54386240";
         break;
       case 2:
         var_3ba94e96 = "sp_ripcord_reinf_runners_03";
-        str_spawns = # "hash_661c0b6b543863f3";
+        str_spawns = #"hash_661c0b6b543863f3";
         break;
       case 3:
         var_3ba94e96 = "sp_ripcord_reinf_runners_04";
-        str_spawns = # "hash_661c106b54386c72";
+        str_spawns = #"hash_661c106b54386c72";
         break;
     }
 
@@ -4607,7 +4607,7 @@ function function_286a4ce2(var_e81f32c5 = 0) {
   self.var_b71ad346 = 650;
   self.var_a84747b2 = 1;
 
-  if(self.script_noteworthy === # "hash_7169b6adf298d58b") {
+  if(self.script_noteworthy === #"hash_7169b6adf298d58b") {
     level thread function_ec6e2d8a(self);
   }
 
@@ -4706,7 +4706,7 @@ function function_cffa5653() {
   self.var_972f9755 = [];
 
   foreach(ent in getEntArray(self.target, "targetname", 1)) {
-    if(ent.script_noteworthy === # "trigger_damage") {
+    if(ent.script_noteworthy === #"trigger_damage") {
       self.t_damage = ent;
       self thread function_cff233c();
     }
@@ -4723,7 +4723,7 @@ function function_cffa5653() {
 
     self.var_2199674d[self.var_2199674d.size] = e_spawned;
 
-    if(e_spawned.script_noteworthy === # "crew") {
+    if(e_spawned.script_noteworthy === #"crew") {
       if(!isDefined(self.var_447b1ac8)) {
         self.var_447b1ac8 = [];
       } else if(!isarray(self.var_447b1ac8)) {
@@ -4762,7 +4762,7 @@ function function_cff233c() {
     s_waitresult = self.t_damage waittill(#"damage");
     e_attacker = s_waitresult.attacker;
 
-    if(issentient(e_attacker) && e_attacker getteam() == # "allies") {
+    if(issentient(e_attacker) && e_attacker getteam() == #"allies") {
       break;
     }
   }
@@ -5351,7 +5351,7 @@ function function_b7727676(var_4f7542) {
 
 function function_9f50131() {
   self endon(#"death");
-  self.var_97de493f = # "hash_681bd6072c58cbb7";
+  self.var_97de493f = #"hash_681bd6072c58cbb7";
   self function_1b0fcde7();
   self.a_crash_zones = struct::get_array(#"ripcord_support_huey_01", "ripcord_heli_crash_zones");
   level.var_9051f4a3.var_4817b03f = self;
@@ -5433,7 +5433,7 @@ function function_1c6687fb() {
 
 function function_e6828e29() {
   self endon(#"death");
-  self.var_97de493f = # "hash_681bd7072c58cd6a";
+  self.var_97de493f = #"hash_681bd7072c58cd6a";
   self function_1b0fcde7();
   self.a_crash_zones = struct::get_array(#"ripcord_support_huey_02", "ripcord_heli_crash_zones");
   self thread function_22761cc0(#"hash_571e6eb87af9dfe2");
@@ -5492,7 +5492,7 @@ function function_c97e7d1b(n_delay, var_968d174e = 0) {
 
 function function_432b55b() {
   self endon(#"death");
-  self.var_97de493f = # "hash_681bd8072c58cf1d";
+  self.var_97de493f = #"hash_681bd8072c58cf1d";
   self function_1b0fcde7(1, 0);
   self.a_crash_zones = struct::get_array(#"ripcord_support_huey_03", "ripcord_heli_crash_zones");
   self function_a57c34b7(self.origin, 1);
@@ -5550,7 +5550,7 @@ function function_7b3c7bb1() {
 
 function function_ca16a858() {
   self endon(#"death");
-  self.var_97de493f = # "hash_681bd1072c58c338";
+  self.var_97de493f = #"hash_681bd1072c58c338";
   self function_1b0fcde7(1, 0);
   self.var_83bc6615 = 1;
   self function_a57c34b7(self.origin, 1);
@@ -5628,7 +5628,7 @@ function function_e5ecc2aa() {
 
 function function_cfa8bf1a() {
   self endon(#"death");
-  self.var_97de493f = # "hash_681bd2072c58c4eb";
+  self.var_97de493f = #"hash_681bd2072c58c4eb";
   self function_1b0fcde7(1, 0);
   self.a_crash_zones = struct::get_array(#"ripcord_support_huey_05", "ripcord_heli_crash_zones");
   self function_22761cc0(#"hash_257d28ccd5ddab7d", 1024, 0);
@@ -5688,17 +5688,17 @@ function function_7c0da395() {
 
 function function_4112226(var_9ff20235 = 1) {
   self endon(#"death");
-  self.var_97de493f = # "hash_681bd3072c58c69e";
+  self.var_97de493f = #"hash_681bd3072c58c69e";
   self function_1b0fcde7(1, 10);
   self.a_crash_zones = struct::get_array(#"ripcord_rpg_huey", "ripcord_heli_crash_zones");
   s_start = struct::get(#"hash_5c43cfcac08b9ec3");
-  var_8be533d2 = # "hash_45296b8f85fbfa9e";
+  var_8be533d2 = #"hash_45296b8f85fbfa9e";
   var_262212e0 = 1;
   var_42b5e5c1 = 2.5;
 
   if(!var_9ff20235) {
     s_start = struct::get(#"hash_70aaa0728e68d78f");
-    var_8be533d2 = # "hash_6ef61f17ca57df64";
+    var_8be533d2 = #"hash_6ef61f17ca57df64";
     var_262212e0 = 1.5;
     var_42b5e5c1 = 4.5;
   }
@@ -5969,7 +5969,7 @@ function function_ede2a394(var_3368b534 = 1) {
 
   level.var_9051f4a3.var_51ae0380[level.var_9051f4a3.var_51ae0380.size] = self;
 
-  if(self.vehicletype == # "hash_3677daa34d36098a") {
+  if(self.vehicletype == #"hash_3677daa34d36098a") {
     a_spawners = getspawnerarray("sp_ripcord_north_face_convoy_riders", "targetname");
 
     for(i = 0; i < 8; i++) {
@@ -6360,7 +6360,7 @@ function function_43a56026() {
 function function_e5184fac() {
   self endon(#"death");
   self function_158cdaa();
-  self.var_1eca86c3 = # "breach_02";
+  self.var_1eca86c3 = #"breach_02";
   wait randomfloatrange(10, 15);
   self kill();
 }
@@ -7073,7 +7073,7 @@ function function_e0fedfbc() {
   var_539110f3 endon(#"skipped");
   waitframe(1);
   var_539110f3.s_waypoint = struct::get(#"hash_2d00d540e2beca6b");
-  var_539110f3.var_805ed574 = # "nuke_return";
+  var_539110f3.var_805ed574 = #"nuke_return";
   objectives::function_4eb5c04a(var_539110f3.var_805ed574, var_539110f3.s_waypoint, #"hash_7d1526cc7da37ff6", undefined, undefined, #"hash_5c53b6128244009d");
   level flag::wait_till(#"hash_11ed3cb4b3a96f61");
   objectives::complete(var_539110f3.var_805ed574, var_539110f3.s_waypoint);
@@ -7187,7 +7187,7 @@ function function_226ff16b(b_skip = 0, var_844ac87e = 1, var_50cc0d4f = 0) {
 function function_51a65f48(b_skip, var_50cc0d4f) {
   self endon(#"death");
   level endon(#"hash_1514f781f5772ca1");
-  self.var_97de493f = # "hash_681bd4072c58c851";
+  self.var_97de493f = #"hash_681bd4072c58c851";
   self function_1b0fcde7(1, 0);
   self.var_83bc6615 = 1;
 
@@ -7240,19 +7240,19 @@ function function_4d89239b(var_78bd98cb) {
 
   switch (self.script_int) {
     case 1:
-      str_scene = # "hash_14899833ec8a1750";
+      str_scene = #"hash_14899833ec8a1750";
       n_delay = 0;
       break;
     case 2:
-      str_scene = # "hash_77195c19fb332536";
+      str_scene = #"hash_77195c19fb332536";
       n_delay = 0.5;
       break;
     case 3:
-      str_scene = # "hash_6d8304cc2577a711";
+      str_scene = #"hash_6d8304cc2577a711";
       n_delay = 0;
       break;
     case 4:
-      str_scene = # "hash_2943864d6b335089";
+      str_scene = #"hash_2943864d6b335089";
       n_delay = 0.5;
       break;
   }
@@ -7535,7 +7535,7 @@ function function_5c03f4d6(var_50cc0d4f) {
   self function_a265ea();
   nd_path = getvehiclenode(self.target, "targetname");
   self vehicle::get_on_path(nd_path);
-  self.var_7613726a = # "hash_5823504556939fca";
+  self.var_7613726a = #"hash_5823504556939fca";
   self thread scene::play(self.var_7613726a);
   level flag::wait_till(#"hash_6a59e2434ff3978c");
   self vehicle::go_path();

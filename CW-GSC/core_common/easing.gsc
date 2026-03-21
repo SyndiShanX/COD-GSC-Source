@@ -56,7 +56,7 @@ function ease_angles(target, time, ease_type, axis, additive, ease_in, ease_out,
   self thread function_d4a4a726(start_value, target, time, callback, ease_type, "ease_angles", endons, ease_in, ease_out, var_33ce6852, axis);
 }
 
-function function_d4a4a726(start_value, target_value, time, callback_func, ease_type = # "linear", notifies, endons, ease_in, ease_out, var_33ce6852, ...) {
+function function_d4a4a726(start_value, target_value, time, callback_func, ease_type = #"linear", notifies, endons, ease_in, ease_out, var_33ce6852, ...) {
   assert(isDefined(level.ease_funcs));
   assert(isDefined(level.ease_funcs[ease_type]));
 

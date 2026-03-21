@@ -31,7 +31,7 @@ function function_6b0f6eb8(localclientnum, oldval, newval, bnewent, binitialsnap
 function function_955683ea(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(bwasdemojump == 1) {
     var_2674d143 = util::spawn_model(fieldname, #"p9_zm_platinum_hidden_numbers_icon", self.origin, self.angles);
-    var_2674d143.rob = # "hash_30a0a9539339983f";
+    var_2674d143.rob = #"hash_30a0a9539339983f";
 
     if(!isDefined(level.var_1a3fe1eb)) {
       level.var_1a3fe1eb = [];

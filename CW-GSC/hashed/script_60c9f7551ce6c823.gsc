@@ -155,7 +155,7 @@ function function_a0fe5f28() {
     if(isDefined(self.trigger)) {
       result = self.trigger waittilltimeout(0.25, #"trigger");
 
-      if(result._notify == # "timeout") {
+      if(result._notify == #"timeout") {
         continue;
       }
 

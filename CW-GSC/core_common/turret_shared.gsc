@@ -1165,7 +1165,7 @@ function _init_turret(n_index = 0) {
   self endon(#"death");
   w_weapon = get_weapon(n_index);
 
-  if(w_weapon.name == # "none") {
+  if(w_weapon.name == #"none") {
     assertmsg("<dev string:x396>");
     return;
   }

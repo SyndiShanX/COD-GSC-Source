@@ -105,7 +105,7 @@ function on_player_death(params) {
     return;
   }
 
-  if(game.state == # "playing") {
+  if(game.state == #"playing") {
     self commit_spawn_data();
   }
 }

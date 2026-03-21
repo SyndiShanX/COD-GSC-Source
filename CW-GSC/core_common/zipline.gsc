@@ -282,7 +282,7 @@ function private function_c7c70177(entity, asmstatename) {
         var_3229ed5d = var_cf56bb8f.var_aff2bad6 * var_cf56bb8f.var_dc6e66ea;
       }
 
-      var_3c5c113f = asmstatename.team == # "allies" ? 35 : 25;
+      var_3c5c113f = asmstatename.team == #"allies" ? 35 : 25;
 
       if(var_3229ed5d < 1) {
         var_3229ed5d = 1;

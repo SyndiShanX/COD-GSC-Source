@@ -131,7 +131,7 @@ start_timed_vortex(effect_version, v_vortex_origin, n_vortex_radius, n_vortex_ex
   }
 
   n_vortex_time = int(n_vortex_time_sv * 1000);
-  team = # "axis";
+  team = #"axis";
 
   if(isDefined(level.zombie_team)) {
     team = level.zombie_team;
@@ -213,7 +213,7 @@ vortex_z_extension(a_ai_zombies, v_vortex_origin, n_vortex_radius) {
 }
 
 vortex_explosion(v_vortex_explosion_origin, eattacker, n_vortex_radius) {
-  team = # "axis";
+  team = #"axis";
 
   if(isDefined(level.zombie_team)) {
     team = level.zombie_team;
@@ -290,7 +290,7 @@ state_idgun_crush_update(params) {
   attacker = params.attacker;
   weapon = params.weapon;
 
-  if(self.archetype == # "raps") {
+  if(self.archetype == #"raps") {
     crush_anim = "ai_zombie_zod_raps_dth_f_id_gun_crush";
   }
 

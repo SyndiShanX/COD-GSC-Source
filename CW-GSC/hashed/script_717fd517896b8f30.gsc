@@ -50,9 +50,9 @@ function private on_end(round_reset) {
 
     if(var_696c3b4.size) {
       if(is_true(self.var_2d4ba9d4)) {
-        var_ded5d2ed = # "hash_192dc062b9c5de31";
+        var_ded5d2ed = #"hash_192dc062b9c5de31";
       } else {
-        var_ded5d2ed = # "hash_26f44827b2b24825";
+        var_ded5d2ed = #"hash_26f44827b2b24825";
       }
 
       zm_trial::fail(var_ded5d2ed, var_696c3b4);

@@ -134,13 +134,13 @@ function function_2a230737() {
   self.var_358eb81d = gettime();
   damage = level.var_a8fa842f;
   radius = level.var_baf51b1a;
-  fx = # "hash_5206e3009c8fa11d";
+  fx = #"hash_5206e3009c8fa11d";
   sound = "mpl_d_hard_explo_sml";
 
   if(self.var_2a9b3d6d === 1) {
     damage = level.var_9dba0d13;
     radius = level.var_1b3b9a89;
-    fx = # "hash_148b2600797f1690";
+    fx = #"hash_148b2600797f1690";
     sound = "mpl_d_hard_explo_lrg";
   }
 
@@ -280,7 +280,7 @@ function function_1c4fb667() {
 
   tier = self.var_a53bf240 <= 5 ? self.var_a53bf240 : 5;
   self clientfield::set_player_uimodel("hud_items_cranked.crankedTier", tier);
-  var_43df0177 = # "hash_50731bef82e61c83" + (isDefined(self.var_a53bf240) ? self.var_a53bf240 : 1) + "_mp";
+  var_43df0177 = #"hash_50731bef82e61c83" + (isDefined(self.var_a53bf240) ? self.var_a53bf240 : 1) + "_mp";
 
   if(!self hastalent(var_43df0177)) {
     self addtalent(var_43df0177);

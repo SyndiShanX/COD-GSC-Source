@@ -53,7 +53,7 @@ init_level_vars() {
   level.var_d7853f35 = 23;
   level.var_ecdf38f = 15;
   level.var_55e562f9 = 12;
-  level.zombie_hints[#"default_treasure_chest"] = # "hash_57a34375dddce337";
+  level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread zm_blockers::function_6f01c3cf("forecastle_window_l", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("forecastle_window_r", "script_string", 0);
   level thread zm_blockers::function_6f01c3cf("forecastle_window_front", "script_string", 0);
@@ -152,7 +152,7 @@ defend_areas() {
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   str_first_defend = str_next_defend;
 
-  if(str_next_defend == # "dining_hall") {
+  if(str_next_defend == #"dining_hall") {
     level zm_utility::open_door("forecastle_state_rooms_door", undefined, undefined, 1);
     zm_utility::function_fdb0368(5);
     level zm_utility::open_door("state_rooms_to_lower_stairs_door", undefined, undefined, 1);
@@ -177,14 +177,14 @@ defend_areas() {
   level waittill(#"hash_7a04a7fb98fa4e4d");
   zm_utility::function_fef4b36a(str_next_defend);
 
-  if(str_next_defend == # "dining_hall") {
+  if(str_next_defend == #"dining_hall") {
     level zm_utility::open_door(array("dining_to_promenade_door", "promenade_aft_door"), undefined, 15, 1);
   } else {
     level zm_utility::open_door(array("suites_promenade_door", "library_boat_deck_door"), undefined, 15, 1);
   }
 
   function_52498131("started_defend_area");
-  str_next_defend = # "poop_deck";
+  str_next_defend = #"poop_deck";
   s_defend_area = zm_utility::function_a877cd10(str_next_defend);
   util::delay(4, undefined, &zm_utility::function_11101458, #"poop_deck");
   zm_zonemgr::zone_wait_till_enabled("zone_poop_deck");
@@ -197,7 +197,7 @@ defend_areas() {
   level.stopshellshock = 1;
   zm_utility::enable_power_switch(1, 1);
 
-  if(str_first_defend == # "dining_hall") {
+  if(str_first_defend == #"dining_hall") {
     var_420e4589 = array("suites_promenade_door", "library_boat_deck_door", "state_rooms_bridge_door", "bridge_to_upper_stairs_door", "grand_stairs_suites_door");
   } else {
     var_420e4589 = array("dining_to_promenade_door", "promenade_aft_door", "forecastle_state_rooms_door", "state_rooms_to_lower_stairs_door", "grand_stair_lower_to_dining");
@@ -235,9 +235,9 @@ function_466fb0ff() {
   while(true) {
     zm_utility::function_11101458(str_next_defend);
 
-    if(str_next_defend == # "engine_room") {
+    if(str_next_defend == #"engine_room") {
       level thread zm_utility::open_door(array("engine_room_door", "engine_room_dropdown"), undefined, 10);
-    } else if(str_next_defend == # "cargo_hold") {
+    } else if(str_next_defend == #"cargo_hold") {
       level thread zm_utility::open_door("cargo_hold_door", undefined, 10);
     }
 
@@ -297,34 +297,34 @@ function function_c52e8ba(player, var_8d5d092c) {
   n_player_index = player getentitynumber();
 
   if(level flag::get(#"disable_fast_travel")) {
-    self.hint_string[n_player_index] = # "hash_91829275c00db24";
+    self.hint_string[n_player_index] = #"hash_91829275c00db24";
   } else if(!(isDefined(player zombie_utility::is_player_valid(player)) && player zombie_utility::is_player_valid(player))) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(player.var_564dec14) && player.var_564dec14) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(!level flag::get("power_on")) {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(player.var_16735873) && player.var_16735873 && str_loc != "dropout") {
-    self.hint_string[n_player_index] = # "";
+    self.hint_string[n_player_index] = #"";
   } else if(isDefined(self.stub.var_a4134e51) && !level flag::get(self.stub.var_a4134e51)) {
     switch (self.stub.var_a4134e51) {
       case # "connect_provisions_to_engine_room":
-        self.hint_string[n_player_index] = # "hash_6134f96bfd8584b9";
+        self.hint_string[n_player_index] = #"hash_6134f96bfd8584b9";
         break;
       case # "connect_mail_rooms_to_cargo":
-        self.hint_string[n_player_index] = # "hash_2bdcee65a214c377";
+        self.hint_string[n_player_index] = #"hash_2bdcee65a214c377";
         break;
       default:
-        self.hint_string[n_player_index] = # "";
+        self.hint_string[n_player_index] = #"";
         break;
     }
 
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c]) {
-    self.hint_string[n_player_index] = # "hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
     b_result = 1;
   } else {
-    self.hint_string[n_player_index] = # "hash_204ec88c63b3436b";
+    self.hint_string[n_player_index] = #"hash_204ec88c63b3436b";
     b_result = 1;
   }
 
@@ -390,46 +390,46 @@ function_a18a0aba() {
     if(isDefined(s_waitresult.e_door) && isDefined(s_waitresult.e_door.script_flag)) {
       switch (s_waitresult.e_door.script_flag) {
         case # "connect_forecastle_to_state_rooms":
-          var_ff20f7d3 = # "hash_2b0a7eea7d5837b2";
+          var_ff20f7d3 = #"hash_2b0a7eea7d5837b2";
           break;
         case # "connect_forecastle_to_bridge":
-          var_ff20f7d3 = # "hash_1164f7d8857e245";
+          var_ff20f7d3 = #"hash_1164f7d8857e245";
           break;
         case # "connect_state_rooms_to_millionaire":
-          var_ff20f7d3 = # "hash_655f56d5efd95945";
+          var_ff20f7d3 = #"hash_655f56d5efd95945";
           break;
         case # "connect_grand_stair_lower_to_dining":
-          var_ff20f7d3 = # "hash_aea2910160f712a";
+          var_ff20f7d3 = #"hash_aea2910160f712a";
           break;
         case # "connect_dining_to_promenade":
-          var_ff20f7d3 = # "hash_7e2ebfe7b5099a2e";
+          var_ff20f7d3 = #"hash_7e2ebfe7b5099a2e";
           break;
         case # "connect_promenade_to_poop":
-          var_ff20f7d3 = # "hash_34b52b88e2ff0049";
+          var_ff20f7d3 = #"hash_34b52b88e2ff0049";
           break;
         case # "connect_aft_to_poop_deck":
-          var_ff20f7d3 = # "hash_1970bc2b9acd5bf5";
+          var_ff20f7d3 = #"hash_1970bc2b9acd5bf5";
           break;
         case # "connect_suites_to_aft":
-          var_ff20f7d3 = # "hash_2bc3fbaefaa3b764";
+          var_ff20f7d3 = #"hash_2bc3fbaefaa3b764";
           break;
         case # "connect_grand_stairs_to_lounge":
-          var_ff20f7d3 = # "hash_334ff5daed081f31";
+          var_ff20f7d3 = #"hash_334ff5daed081f31";
           break;
         case # "connect_bridge_to_grand_stairs":
-          var_ff20f7d3 = # "hash_7f462ab50be41252";
+          var_ff20f7d3 = #"hash_7f462ab50be41252";
           break;
         case # "connect_mail_rooms_to_cargo":
-          var_ff20f7d3 = # "hash_25929136eae0e6ae";
+          var_ff20f7d3 = #"hash_25929136eae0e6ae";
           break;
         case # "connect_provisions_to_engine_room":
-          var_ff20f7d3 = # "hash_a8d366608b42172";
+          var_ff20f7d3 = #"hash_a8d366608b42172";
           break;
         default:
           if(s_waitresult.e_door.targetname === "zombie_debris") {
-            var_ff20f7d3 = # "hash_782714d88bdaa1b6";
+            var_ff20f7d3 = #"hash_782714d88bdaa1b6";
           } else {
-            var_ff20f7d3 = # "hash_7203281c0385cddd";
+            var_ff20f7d3 = #"hash_7203281c0385cddd";
           }
 
           break;

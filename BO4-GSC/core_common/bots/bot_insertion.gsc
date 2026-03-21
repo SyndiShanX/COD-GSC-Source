@@ -71,7 +71,7 @@ function_a4f516ef() {
   if(function_58a44f22()) {
     waitresult = self waittill(#"hash_3a41cbe85bdb81e1", #"hash_224cb97b8f682317");
 
-    if(waitresult._notify != # "hash_224cb97b8f682317") {
+    if(waitresult._notify != #"hash_224cb97b8f682317") {
       self flagsys::wait_till_timeout(function_8ed212d(), #"hash_224cb97b8f682317");
     }
 

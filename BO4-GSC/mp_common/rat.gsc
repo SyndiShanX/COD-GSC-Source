@@ -38,7 +38,7 @@ function_50634409(params) {
 
 rscaddenemy(params) {
   player = [[level.rat.common.gethostplayer]]();
-  team = # "axis";
+  team = #"axis";
 
   if(isDefined(player.pers[#"team"])) {
     team = util::getotherteam(player.pers[#"team"]);

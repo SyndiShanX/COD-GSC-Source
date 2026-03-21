@@ -39,7 +39,7 @@ function function_c50aa4b2(localclientnum) {
 }
 
 function function_ef33ecb7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  if(self.archetype !== # "mimic") {
+  if(self.archetype !== #"mimic") {
     return;
   }
 
@@ -142,7 +142,7 @@ function function_90fb7f1f(localclientnum, oldval, newval, bnewent, binitialsnap
     return;
   }
 
-  var_86b3d9b7 = # "hash_5e666010ee5cb822";
+  var_86b3d9b7 = #"hash_5e666010ee5cb822";
 
   if(self postfx::function_556665f2(var_86b3d9b7)) {
     self postfx::stoppostfxbundle(var_86b3d9b7);

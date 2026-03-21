@@ -18,10 +18,10 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  temp = # "hash_147e5fa1e7f7cd06";
-  temp = # "hash_850d28553336ed0";
-  temp = # "hash_3537e7d6b8dc612b";
-  temp = # "hash_147fefcf7bb5023c";
+  temp = #"hash_147e5fa1e7f7cd06";
+  temp = #"hash_850d28553336ed0";
+  temp = #"hash_3537e7d6b8dc612b";
+  temp = #"hash_147fefcf7bb5023c";
   clientfield::register("toplayer", "show_objectives", 1, 2, "int");
 }
 

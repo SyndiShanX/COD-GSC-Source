@@ -34,7 +34,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, wea
     return;
   }
 
-  if(self.team == # "spectator") {
+  if(self.team == #"spectator") {
     return;
   }
 

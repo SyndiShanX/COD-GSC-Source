@@ -20,15 +20,15 @@ init() {
   clientfield::register("actor", "spinning_trap_blood_fx", 1, 1, "int", &spinning_trap_blood_fx, 0, 0);
   clientfield::register("actor", "spinning_trap_eye_fx", 1, 1, "int", &spinning_trap_eye_fx, 0, 0);
   clientfield::register("toplayer", "rumble_spinning_trap", 1, 1, "int", &rumble_spinning_trap, 0, 0);
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"acid_spray"] = # "hash_424786ecbc7f5672";
-  level._effect[#"acid_spray_death"] = # "hash_48d74d13d0c569c";
-  level._effect[#"hash_294b19c300d1b482"] = # "hash_29ac72c5aa5398bc";
-  level._effect[#"hash_4391e5c4b43c63c9"] = # "hash_709cca7d0048aa72";
-  level._effect[#"hash_5647f8e593893bce"] = # "hash_69af1783a31b44f7";
-  level._effect[#"zombie_eye_trail"] = # "hash_526060b70ce93d7e";
-  level._effect[#"spinning_blood"] = # "hash_358533e8293f131d";
-  level._effect[#"hash_44ccd33973542202"] = # "hash_5fdb13b4843bc710";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"acid_spray"] = #"hash_424786ecbc7f5672";
+  level._effect[#"acid_spray_death"] = #"hash_48d74d13d0c569c";
+  level._effect[#"hash_294b19c300d1b482"] = #"hash_29ac72c5aa5398bc";
+  level._effect[#"hash_4391e5c4b43c63c9"] = #"hash_709cca7d0048aa72";
+  level._effect[#"hash_5647f8e593893bce"] = #"hash_69af1783a31b44f7";
+  level._effect[#"zombie_eye_trail"] = #"hash_526060b70ce93d7e";
+  level._effect[#"spinning_blood"] = #"hash_358533e8293f131d";
+  level._effect[#"hash_44ccd33973542202"] = #"hash_5fdb13b4843bc710";
 }
 
 acid_trap_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
@@ -220,7 +220,7 @@ spinning_trap_blood_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   if(newval == 1) {
     var_1f694afe = "j_spinelower";
 
-    if(self.archetype == # "zombie_dog") {
+    if(self.archetype == #"zombie_dog") {
       var_1f694afe = "j_spine1";
     }
 

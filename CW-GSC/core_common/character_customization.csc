@@ -110,7 +110,7 @@ class class_7da27482 {
     var_8d79cdc7 = undefined;
     var_640fbaae = undefined;
     var_266b2ff0 = undefined;
-    var_7245a8e1 = # "";
+    var_7245a8e1 = #"";
     var_d781e2e4 = undefined;
     var_180f1c7d = [];
     var_87449256 = undefined;
@@ -519,7 +519,7 @@ class class_7da27482 {
     }
 
     if(is_true(params.var_90d2372c)) {
-      base_model = # "hash_2b18a5af849da51b";
+      base_model = #"hash_2b18a5af849da51b";
       attached_models = [#"outfit_head": # "tag_origin", #"outfit_headgear": # "tag_origin", #"outfit_legs": # "tag_origin", #"outfit_torso": # "tag_origin"];
     } else if(function_bf7bce05()) {
       base_model = function_d5e754c6();
@@ -601,7 +601,7 @@ class class_7da27482 {
       var_56293673 &= function_c358189(model);
     }
 
-    if(is_true(params.var_90d2372c) && var_228f64da.model !== # "hash_2b18a5af849da51b" || !is_true(params.var_90d2372c) && var_228f64da.model === # "hash_2b18a5af849da51b") {
+    if(is_true(params.var_90d2372c) && var_228f64da.model !== #"hash_2b18a5af849da51b" || !is_true(params.var_90d2372c) && var_228f64da.model === #"hash_2b18a5af849da51b") {
       var_b627749c = 1;
     }
 
@@ -931,7 +931,7 @@ class class_7da27482 {
     if(is_true(params.var_66125429) && isDefined(_xuid)) {
       var_7245a8e1 = function_aa09bdbb(_xuid);
 
-      if(isDefined(var_7245a8e1) && var_7245a8e1 != # "") {
+      if(isDefined(var_7245a8e1) && var_7245a8e1 != #"") {
         var_521d2f55 = function_61067007(var_7245a8e1);
         var_7668a4b7 = var_521d2f55.var_fdd95115;
         var_d53d9189 = var_521d2f55.var_8c74e89e;

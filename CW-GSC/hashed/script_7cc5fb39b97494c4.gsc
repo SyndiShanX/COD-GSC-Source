@@ -390,8 +390,8 @@ class class_9e71c1a2 {
       str_objective = var_b5a03b21.script_objective_override;
     }
 
-    if(var_2be76207 == # "any") {
-      var_2b5577a7 = # "any";
+    if(var_2be76207 == #"any") {
+      var_2b5577a7 = #"any";
     } else if(var_678a6f36) {
       var_2b5577a7 = var_2be76207;
     } else {
@@ -403,7 +403,7 @@ class class_9e71c1a2 {
         interact_location.var_3093fd62 = var_678a6f36;
         interact_location gameobjects::init_game_objects(var_5f7d7d0d, var_2b5577a7, undefined, undefined, undefined, str_objective);
 
-        if(!var_678a6f36 && var_2be76207 != # "any") {
+        if(!var_678a6f36 && var_2be76207 != #"any") {
           interact_location.mdl_gameobject gameobjects::allow_use(#"group_enemy");
           interact_location.mdl_gameobject gameobjects::set_visible(#"group_enemy");
         }
@@ -443,7 +443,7 @@ class class_9e71c1a2 {
         if(isDefined(bundle.objective)) {
           image = function_b91948e(bundle.objective);
 
-          if(image == # "") {
+          if(image == #"") {
             image = undefined;
           }
         }
@@ -730,7 +730,7 @@ class class_9e71c1a2 {
 
   function function_c6a410ce() {
     if(var_678a6f36) {
-      var_d045c932 = # "any";
+      var_d045c932 = #"any";
     } else {
       var_d045c932 = var_2be76207;
     }

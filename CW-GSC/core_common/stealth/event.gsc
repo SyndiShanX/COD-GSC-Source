@@ -463,11 +463,11 @@ function function_961c59a4(event) {
     return false;
   }
 
-  if(event.entity.item.name == # "hatchet") {
+  if(event.entity.item.name == #"hatchet") {
     return true;
   }
 
-  if(event.entity.item.name == # "eq_flash_grenade") {
+  if(event.entity.item.name == #"eq_flash_grenade") {
     return true;
   }
 

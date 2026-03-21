@@ -20,7 +20,7 @@ autoexec __init__system__() {
 
 __init__() {
   enable_mod_deadshot_perk_for_level();
-  level._effect[#"hash_950ebbfb250b43e"] = # "hash_1695e8ac20dd5629";
+  level._effect[#"hash_950ebbfb250b43e"] = #"hash_1695e8ac20dd5629";
 }
 
 enable_mod_deadshot_perk_for_level() {

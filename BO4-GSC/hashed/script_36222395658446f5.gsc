@@ -292,7 +292,7 @@ function_831aa56d(e_player, var_69970c6) {
   level.var_4024aaf6.var_e88acf63 = level.var_4024aaf6 gettagorigin("tag_spork");
   level.var_4024aaf6.var_a9a3211a = level.var_4024aaf6 gettagangles("tag_spork");
 
-  if(var_69970c6 == # "spork_alcatraz") {
+  if(var_69970c6 == #"spork_alcatraz") {
     level.var_4024aaf6.mdl_spork = util::spawn_model("wpn_t8_zm_spork_world", level.var_4024aaf6.var_e88acf63, level.var_4024aaf6.var_a9a3211a);
     level.var_4024aaf6.mdl_spork linkto(level.var_4024aaf6);
     e_player takeweapon(getweapon(#"spork_alcatraz"));
@@ -923,7 +923,7 @@ function_134e0d03(e_player) {
 
   w_knife = getweapon("knife");
 
-  if(self.damageweapon == w_knife && self.archetype == # "brutus" && e_player.var_946c0773 === 1) {
+  if(self.damageweapon == w_knife && self.archetype == #"brutus" && e_player.var_946c0773 === 1) {
     e_player.var_c5641545++;
     e_player flag::set(#"hash_7bcf95ea12236f0d");
     level.var_ba89bc85 = 0;

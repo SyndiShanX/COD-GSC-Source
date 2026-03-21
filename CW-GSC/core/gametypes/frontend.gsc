@@ -41,7 +41,7 @@ function event_handler[gametype_init] main(eventstruct) {
 }
 
 function private on_menu_response(eventstruct) {
-  if(eventstruct.response === # "hash_45ef0f91897a4887") {
+  if(eventstruct.response === #"hash_45ef0f91897a4887") {
     if(isDefined(level.var_850ff7e2) && isDefined(level.var_850ff7e2[eventstruct.intpayload]) && ishash(level.var_850ff7e2[eventstruct.intpayload])) {
       self giveachievement(level.var_850ff7e2[eventstruct.intpayload]);
     }
@@ -49,7 +49,7 @@ function private on_menu_response(eventstruct) {
     return;
   }
 
-  if(eventstruct.response === # "hash_5d0de86d96808d71") {
+  if(eventstruct.response === #"hash_5d0de86d96808d71") {
     if(eventstruct.intpayload === 1) {
       machine_array = getdynentarray(#"hash_69b47fecbecb8b0", 1);
       assert(isDefined(machine_array) && machine_array.size == 1);
@@ -61,7 +61,7 @@ function private on_menu_response(eventstruct) {
     return;
   }
 
-  if(eventstruct.response === # "arcade_state") {
+  if(eventstruct.response === #"arcade_state") {
     if(isDefined(level.var_d0e9b96)) {
       setdynentstate(level.var_d0e9b96, eventstruct.intpayload);
     }

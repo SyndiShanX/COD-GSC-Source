@@ -533,16 +533,16 @@ function function_662458e() {
   switch (n_index) {
     case 0:
     default:
-      var_3cbf62f9.str_color = # "purple";
+      var_3cbf62f9.str_color = #"purple";
       break;
     case 1:
-      var_3cbf62f9.str_color = # "orange";
+      var_3cbf62f9.str_color = #"orange";
       break;
     case 2:
-      var_3cbf62f9.str_color = # "green";
+      var_3cbf62f9.str_color = #"green";
       break;
     case 3:
-      var_3cbf62f9.str_color = # "blue";
+      var_3cbf62f9.str_color = #"blue";
       break;
   }
 
@@ -551,7 +551,7 @@ function function_662458e() {
   return var_3cbf62f9;
 }
 
-function function_e1dd6a53(state = # "off") {
+function function_e1dd6a53(state = #"off") {
   self detachall();
   self stoploopsound();
 
@@ -561,7 +561,7 @@ function function_e1dd6a53(state = # "off") {
     return;
   }
 
-  if(state == # "no_reward") {
+  if(state == #"no_reward") {
     switch (self.str_color) {
       case # "purple":
         self attach(#"p9_zm_ndu_trial_terminal_01_screen_face_static_purple", "tag_origin");
@@ -645,7 +645,7 @@ function on_ai_killed(s_params) {
     }
 
     if(is_challenge_active(#"hash_1db5106df3c3c0c4")) {
-      if(weapon.inventorytype === # "offhand") {
+      if(weapon.inventorytype === #"offhand") {
         e_player namespace_f999c142::function_53a333a8(#"hash_1db5106df3c3c0c4");
       }
 
@@ -672,7 +672,7 @@ function on_ai_killed(s_params) {
 
     if(is_challenge_active(#"hash_62bc7c158375f1f2")) {
       if(!e_player playerads() && means_of_death !== "MOD_MELEE" && means_of_death !== "MOD_MELEE_WEAPON_BUTT" && means_of_death !== "MOD_CRUSH" && !isvehicle(s_params.einflictor)) {
-        if(weapon.name === # "hero_pineapplegun" || weapon.name === # "sig_bow_flame" || (weapon.inventorytype === # "dwlefthand" || weapon.inventorytype === # "primary" || weapon.inventorytype === # "altmode") && !killstreaks::is_killstreak_weapon(weapon)) {
+        if(weapon.name === #"hero_pineapplegun" || weapon.name === #"sig_bow_flame" || (weapon.inventorytype === #"dwlefthand" || weapon.inventorytype === #"primary" || weapon.inventorytype === #"altmode") && !killstreaks::is_killstreak_weapon(weapon)) {
           e_player namespace_f999c142::function_53a333a8(#"hash_62bc7c158375f1f2", level.var_8b7ab859 * 0.01);
         }
       }
@@ -731,12 +731,12 @@ function on_ai_killed(s_params) {
       return;
     }
 
-    if(is_challenge_active(#"hash_749e36c2ffef5f86") && (self.zm_ai_category === # "special" || self.zm_ai_category === # "elite")) {
+    if(is_challenge_active(#"hash_749e36c2ffef5f86") && (self.zm_ai_category === #"special" || self.zm_ai_category === #"elite")) {
       e_player namespace_f999c142::function_53a333a8(#"hash_749e36c2ffef5f86", level.var_8b7ab859 * 0.25);
       return;
     }
 
-    if(is_challenge_active(#"hash_72b2e5815bcbcc12") && self.current_state.name !== # "chase") {
+    if(is_challenge_active(#"hash_72b2e5815bcbcc12") && self.current_state.name !== #"chase") {
       e_player namespace_f999c142::function_53a333a8(#"hash_72b2e5815bcbcc12", level.var_8b7ab859 * 0.1);
     }
   }
@@ -768,7 +768,7 @@ function private function_284f537c() {
 }
 
 function private function_cc254d94(params) {
-  if(is_challenge_active(#"hash_41722fe0656b9a5f") && (params.item.itementry.itemtype === # "survival_essence" || params.item.itementry.itemtype === # "survival_scrap") && isPlayer(params.player)) {
+  if(is_challenge_active(#"hash_41722fe0656b9a5f") && (params.item.itementry.itemtype === #"survival_essence" || params.item.itementry.itemtype === #"survival_scrap") && isPlayer(params.player)) {
     params.player namespace_f999c142::function_53a333a8(#"hash_41722fe0656b9a5f", level.var_8b7ab859 * 0.1);
   }
 }
@@ -1580,7 +1580,7 @@ function function_432b2abf() {
   }
 }
 
-function set_challenge_text(challenge_text, location_name = # "") {
+function set_challenge_text(challenge_text, location_name = #"") {
   self endon(#"death");
   self function_432b2abf();
 
@@ -1849,7 +1849,7 @@ function function_5a327610() {
         var_ad7704f = struct::get_array(var_1b7cb15f.targetname, "<dev string:x5e0>");
 
         foreach(var_543e34e3 in var_ad7704f) {
-          if(var_543e34e3.content_key === # "dac_trial_computer") {
+          if(var_543e34e3.content_key === #"dac_trial_computer") {
             circle(var_543e34e3.origin, 50, (1, 0, 0));
             print3d(var_543e34e3.origin, "<dev string:x612>", (1, 0, 0), undefined, 0.5);
 
@@ -1872,7 +1872,7 @@ function function_5a327610() {
             continue;
           }
 
-          if(var_543e34e3.content_key === # "hash_3b68487ef7d135d7") {
+          if(var_543e34e3.content_key === #"hash_3b68487ef7d135d7") {
             circle(var_543e34e3.origin, 50, (1, 0, 0));
             print3d(var_543e34e3.origin, "<dev string:x644>", (1, 0, 0), undefined, 0.5);
 

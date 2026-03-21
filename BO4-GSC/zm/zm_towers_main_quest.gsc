@@ -1428,7 +1428,7 @@ function_fac3622f() {
   }
 
   if(!isinarray(level.var_27e60fb6, #"spawner_zm_blight_father")) {
-    level.var_27e60fb6[level.var_27e60fb6.size] = # "spawner_zm_blight_father";
+    level.var_27e60fb6[level.var_27e60fb6.size] = #"spawner_zm_blight_father";
   }
 
   level.var_41437b5 = function_718cc148(level.var_27e60fb6);
@@ -1527,7 +1527,7 @@ function_df18663(str_key) {
 function function_e59f6c8d() {
   var_a10268d3 = getplayers();
   level.var_90e9a9bf = 0;
-  var_7b32e288 = # "zone_ra_top_floor";
+  var_7b32e288 = #"zone_ra_top_floor";
 
   if(zm_zonemgr::get_players_in_zone(var_7b32e288) == var_a10268d3.size && !level flag::get(#"hash_4f293396150d2c00") && isDefined(level.var_8c8485cf) && level.var_8c8485cf) {
     level.var_90e9a9bf = 1;
@@ -1794,9 +1794,9 @@ function_bf12114b(str_spawner, a_s_spawns) {
 }
 
 function_663fbdcd(ai) {
-  if(isDefined(ai.subarchetype) && ai.subarchetype == # "catalyst_plasma") {
+  if(isDefined(ai.subarchetype) && ai.subarchetype == #"catalyst_plasma") {
     ai callback::function_d8abfc3d(#"on_ai_killed", &function_d71f26d6);
-  } else if(ai.archetype === # "blight_father") {
+  } else if(ai.archetype === #"blight_father") {
     var_f69ab3f2 = array(#"zone_ra_top_floor", #"zone_ra_ground_floor", #"zone_ra_basement");
     ai thread function_b540bcee(var_f69ab3f2);
   }
@@ -1830,7 +1830,7 @@ function_ba68589a(e_attacker) {
     return;
   }
 
-  if(self.archetype == # "zombie") {
+  if(self.archetype == #"zombie") {
     level.var_404e4288--;
     return;
   }
@@ -2201,19 +2201,19 @@ function_d6a5d146() {
 
       switch (i) {
         case 1:
-          str_flag = # "hash_66eb0da5f179e659";
+          str_flag = #"hash_66eb0da5f179e659";
           break;
         case 3:
-          str_flag = # "hash_66eb0ca5f179e4a6";
+          str_flag = #"hash_66eb0ca5f179e4a6";
           break;
         case 4:
-          str_flag = # "hash_66eb0fa5f179e9bf";
+          str_flag = #"hash_66eb0fa5f179e9bf";
           break;
         case 5:
-          str_flag = # "hash_66eb0ea5f179e80c";
+          str_flag = #"hash_66eb0ea5f179e80c";
           break;
         case 6:
-          str_flag = # "hash_66eb11a5f179ed25";
+          str_flag = #"hash_66eb11a5f179ed25";
           break;
       }
 
@@ -2290,7 +2290,7 @@ function_b0ada3cc() {
   while(!self flag::get(#"hash_2789af19411aa6bb")) {
     s_waitresult = self waittill(#"spin_crank", #"hash_2789af19411aa6bb");
 
-    if(s_waitresult._notify == # "spin_crank") {
+    if(s_waitresult._notify == #"spin_crank") {
       self flag::set(#"hash_2fcd8f57a30258bd");
       self playSound(#"hash_56d7ef0008ae3f23");
       self playLoopSound(#"hash_5f80ae9db16e36f5");
@@ -2411,7 +2411,7 @@ function_af7564d9(s_params) {
 
   mdl_spike = a_mdl_spikes[0];
 
-  if(mdl_spike flag::get(#"hash_6865328fef54bb82") || (str_archetype == # "blight_father" || str_archetype == # "gladiator") && str_aat !== "zm_aat_kill_o_watt") {
+  if(mdl_spike flag::get(#"hash_6865328fef54bb82") || (str_archetype == #"blight_father" || str_archetype == #"gladiator") && str_aat !== "zm_aat_kill_o_watt") {
     return;
   }
 
@@ -2431,7 +2431,7 @@ function_af7564d9(s_params) {
       break;
   }
 
-  if(!var_d6241ccb && !(isDefined(var_7663fec2) && var_7663fec2) && var_1e137cec !== # "catalyst_electric") {
+  if(!var_d6241ccb && !(isDefined(var_7663fec2) && var_7663fec2) && var_1e137cec !== #"catalyst_electric") {
     return;
   }
 
@@ -3126,7 +3126,7 @@ function_ba568d37(str_enemy, a_s_spawns) {
       ai_enemy.completed_emerging_into_playable_area = 1;
       ai_enemy notify(#"completed_emerging_into_playable_area");
 
-      if(str_enemy == # "tiger") {
+      if(str_enemy == #"tiger") {
         ai_enemy ai::set_behavior_attribute("sprint", 1);
       } else {
         ai_enemy ai::set_behavior_attribute("run", 1);
@@ -3543,7 +3543,7 @@ function pressure_plate_setup(b_skipped) {
       level thread function_2eb4a526();
       s_waitresult = level waittilltimeout(6, #"hash_bd86f45a8e41ad7");
 
-      if(!level flag::get("special_round") && !level flag::get(#"hash_4fd3d0c01f9b4c30") && s_waitresult._notify == # "timeout") {
+      if(!level flag::get("special_round") && !level flag::get(#"hash_4fd3d0c01f9b4c30") && s_waitresult._notify == #"timeout") {
         break;
       }
     }
@@ -4793,7 +4793,7 @@ function_3a3bf6e8() {
 
     array::randomize(a_s_entrances);
 
-    if(isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === # "tiger" && !(isDefined(waitresult.activator.b_entered) && waitresult.activator.b_entered)) {
+    if(isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === #"tiger" && !(isDefined(waitresult.activator.b_entered) && waitresult.activator.b_entered)) {
       waitresult.activator.b_entered = 1;
       s_scene = array::pop(a_s_entrances);
       e_gate = getent(s_scene.target, "targetname");
@@ -4849,7 +4849,7 @@ function_33935d5f() {
       shouldexplode = 1;
     } else {
       waitresult = self waittill(#"trigger", #"tower_boss_scripted_trigger_tower");
-      shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === # "elephant";
+      shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === #"elephant";
     }
 
     if(shouldexplode || waitresult._notify == "tower_boss_scripted_trigger_tower") {

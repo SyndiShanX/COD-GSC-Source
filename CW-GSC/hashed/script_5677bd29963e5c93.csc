@@ -59,7 +59,7 @@ function fire_weapon(parms) {
   startpos = self gettagorigin("tag_flash");
   angles = self gettagangles("tag_flash");
 
-  if(isDefined(startpos) && isDefined(self.weapon.name) && isDefined(angles) && self.weapon.name != # "none") {
+  if(isDefined(startpos) && isDefined(self.weapon.name) && isDefined(angles) && self.weapon.name != #"none") {
     self magicbullet(self.weapon, startpos, angles);
   }
 }

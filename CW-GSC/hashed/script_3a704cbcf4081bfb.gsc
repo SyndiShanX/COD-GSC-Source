@@ -550,8 +550,8 @@ function function_8f0687e(prop) {
   }
 
   var_8b84b3ce = groundtrace(loc.origin + (0, 0, 32) + (0, 0, 8), loc.origin + (0, 0, 32) + (0, 0, -100000), 0, undefined)[#"position"];
-  var_8d3beb7f = # "p9_sur_junk_parts_rare";
-  model2 = # "p9_sur_junk_parts_pile";
+  var_8d3beb7f = #"p9_sur_junk_parts_rare";
+  model2 = #"p9_sur_junk_parts_pile";
   var_d661f9f1 = util::spawn_model(array::random([var_8d3beb7f, model2]), var_8b84b3ce, (0, 0, 0));
 
   if(isDefined(var_d661f9f1)) {
@@ -652,10 +652,10 @@ function trap_thread(&prop_array, condition_func) {
 
     activator = self[[condition_func]]();
 
-    if(isDefined(activator) || waitresult._notify === # "hash_7fd40fb3202e52db") {
+    if(isDefined(activator) || waitresult._notify === #"hash_7fd40fb3202e52db") {
       activators = [activator];
 
-      if(waitresult._notify === # "hash_7fd40fb3202e52db") {
+      if(waitresult._notify === #"hash_7fd40fb3202e52db") {
         activators = getplayers();
       }
 
@@ -806,7 +806,7 @@ function transform_spawn(prop, &activators, activation_info) {
 
     if(have_room) {
       if(!isDefined(level.var_15a5fa7f)) {
-        level.var_15a5fa7f = # "spawner_bo5_mimic";
+        level.var_15a5fa7f = #"spawner_bo5_mimic";
       }
 
       var_c25f58d9 = spawnactor(level.var_15a5fa7f, prop.origin, prop.angles, undefined, 1);

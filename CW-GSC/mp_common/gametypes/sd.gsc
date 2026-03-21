@@ -133,7 +133,7 @@ function getbetterteam() {
     player = level.players[i];
     team = player.pers[#"team"];
 
-    if(isDefined(team) && (team == # "allies" || team == # "axis")) {
+    if(isDefined(team) && (team == #"allies" || team == #"axis")) {
       kills[team] += player.kills;
       deaths[team] += player.deaths;
     }
@@ -169,8 +169,8 @@ function onstartgametype() {
   setbombtimer("B", 0);
   setmatchflag("bomb_timer_b", 0);
   setclientnamemode("manual_change");
-  level._effect[#"bombexplosion"] = # "hash_1811460fd925f1f8";
-  level._effect[#"hash_568509fa2561a75d"] = # "hash_4d29da75039cfce";
+  level._effect[#"bombexplosion"] = #"hash_1811460fd925f1f8";
+  level._effect[#"hash_568509fa2561a75d"] = #"hash_4d29da75039cfce";
   level.alwaysusestartspawns = 1;
 
   foreach(team, _ in level.teams) {
@@ -518,7 +518,7 @@ function bombs() {
     }
 
     foreach(visual in level.sdbomb.visuals) {
-      visual.team = # "neutral";
+      visual.team = #"neutral";
     }
   } else {
     trigger delete();
@@ -534,9 +534,9 @@ function bombs() {
     visuals = getEntArray(bombzones[index].target, "targetname");
     smart_cover::addprotectedzone(trigger);
     concertina_wire::addprotectedzone(trigger);
-    name = # "sd" + trigger.script_label;
+    name = #"sd" + trigger.script_label;
     var_70d8f2ac = name + "_codcaster";
-    waypointname = # "sd_waypoint" + trigger.script_label;
+    waypointname = #"sd_waypoint" + trigger.script_label;
     trigger.angles = visuals[0].angles;
     trigger function_682f34cf(-800);
     trigger usetriggerignoreuseholdtime();
@@ -592,7 +592,7 @@ function bombs() {
     }
 
     foreach(visual in bombzone.visuals) {
-      visual.team = # "neutral";
+      visual.team = #"neutral";
     }
 
     level.bombzones[level.bombzones.size] = bombzone;
@@ -992,7 +992,7 @@ function bombplanted(destroyedobj, player) {
   var_3df9aa45.ownerteam = game.attackers;
   var_3df9aa45.team = game.attackers;
   var_3df9aa45.type = "Waypoint";
-  waypointname = # "sd_defuse" + label;
+  waypointname = #"sd_defuse" + label;
   objective_add(var_3df9aa45.objectiveid, "invisible", var_3df9aa45, waypointname);
   function_18fbab10(var_3df9aa45.objectiveid, waypointname + "_codcaster");
   var_3df9aa45 gameobjects::set_visible(#"group_all");
@@ -1116,7 +1116,7 @@ function bombdefused(defusedobject, player) {
 function private set_ui_team() {
   wait 0.05;
 
-  if(game.attackers == # "allies") {
+  if(game.attackers == #"allies") {
     clientfield::set_world_uimodel("hudItems.war.attackingTeam", 1);
     return;
   }
@@ -1143,7 +1143,7 @@ function sd_iskillboosting() {
     return true;
   }
 
-  if(level.teambased && isDefined(self.team) && (self.team == # "allies" || self.team == # "axis")) {
+  if(level.teambased && isDefined(self.team) && (self.team == #"allies" || self.team == #"axis")) {
     if(game.totalkillsteam[self.team] > level.playerkillsmax * (roundsplayed + 1)) {
       return true;
     }
@@ -1164,7 +1164,7 @@ function private function_4c593022() {
   roundsplayed = util::getroundsplayed() + 1;
 
   foreach(player in level.players) {
-    if(player.team != # "spectator") {
+    if(player.team != #"spectator") {
       player function_ef823e71(7, player.pers[#"kills"], roundsplayed);
       player function_ef823e71(8, player.pers[#"damagedone"], roundsplayed);
     }
@@ -1173,7 +1173,7 @@ function private function_4c593022() {
 
 function private function_7996e36d() {
   foreach(player in level.players) {
-    if(player.team != # "spectator") {
+    if(player.team != #"spectator") {
       if(!isDefined(game.var_629fe99f[player.playername])) {
         game.var_629fe99f[player.playername] = [];
       }

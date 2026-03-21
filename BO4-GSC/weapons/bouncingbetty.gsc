@@ -12,9 +12,9 @@
 #namespace bouncingbetty;
 
 init_shared() {
-  level.bettydestroyedfx = # "weapon/fx_betty_exp_destroyed";
-  level._effect[#"fx_betty_friendly_light"] = # "hash_5f76ecd582d98e38";
-  level._effect[#"fx_betty_enemy_light"] = # "hash_330682ff4f12f646";
+  level.bettydestroyedfx = #"weapon/fx_betty_exp_destroyed";
+  level._effect[#"fx_betty_friendly_light"] = #"hash_5f76ecd582d98e38";
+  level._effect[#"fx_betty_enemy_light"] = #"hash_330682ff4f12f646";
   level.bettymindist = 20;
   level.bettystuntime = 1;
   bettyexplodeanim = "o_spider_mine_detonate";
@@ -67,7 +67,7 @@ function createbouncingbettywatcher(watcher) {
   watcher.onspawn = &onspawnbouncingbetty;
   watcher.watchforfire = 1;
   watcher.ondetonatecallback = &bouncingbettydetonate;
-  watcher.activatesound = # "wpn_betty_alert";
+  watcher.activatesound = #"wpn_betty_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;

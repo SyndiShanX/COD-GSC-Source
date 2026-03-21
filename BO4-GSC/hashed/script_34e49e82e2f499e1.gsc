@@ -133,7 +133,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
   }
 
   if(sessionmodeiswarzonegame() && isPlayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
-    if(eventstruct.weapon.name === # "hatchet") {
+    if(eventstruct.weapon.name === #"hatchet") {
       if(isDefined(eventstruct.projectile)) {
         hatchet = eventstruct.projectile;
         dartboard = getdynent(#"buried_dartboard");

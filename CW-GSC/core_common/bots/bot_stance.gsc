@@ -54,7 +54,7 @@ function private function_29975d32() {
   mindist = 250;
 
   if(isDefined(var_8be65bb9.var_2cfdc66d)) {
-    if(self.bot.order !== # "chase_enemy") {
+    if(self.bot.order !== #"chase_enemy") {
       return false;
     }
 
@@ -92,7 +92,7 @@ function private function_a4a505a9() {
     return false;
   }
 
-  if(self.bot.order === # "assault" || self.bot.order === # "chase_enemy") {
+  if(self.bot.order === #"assault" || self.bot.order === #"chase_enemy") {
     return true;
   }
 

@@ -441,13 +441,13 @@ function_d486a10() {
   level.s_code_drawer.e_drawer = getent("code_drawer", "targetname");
   key = getent("code2_key", "targetname");
 
-  if(util::get_game_type() != # "zstandard") {
+  if(util::get_game_type() != #"zstandard") {
     key zm_item_pickup::item_pickup_init(&function_b32c1898);
   }
 }
 
 function_b32c1898(e_item) {
-  if(util::get_game_type() != # "zstandard") {
+  if(util::get_game_type() != #"zstandard") {
     level.s_code_drawer zm_unitrigger::create("", 64, &function_3410748f);
   }
 }
@@ -495,7 +495,7 @@ function_63572ef0() {
 }
 
 function_4c07537f() {
-  level._effect[#"hash_609938034ce1dc5a"] = # "hash_1d6e6d988a3f243c";
+  level._effect[#"hash_609938034ce1dc5a"] = #"hash_1d6e6d988a3f243c";
   var_998a2c39 = level._effect[#"hash_609938034ce1dc5a"];
   self.e_photo.fx_ent = util::spawn_model("tag_origin", self.e_photo.origin);
   self.e_photo.fx_ent.angles = self.e_photo.angles;
@@ -561,7 +561,7 @@ function_c056a0ad() {
 }
 
 function_81ed41a8() {
-  level._effect[#"panic_room_monitor_light"] = # "hash_10d93d34c24f01bd";
+  level._effect[#"panic_room_monitor_light"] = #"hash_10d93d34c24f01bd";
   level.var_c2f35c64 = level._effect[#"panic_room_monitor_light"];
   level.var_497a573d = getent("sadako_mover", "targetname");
   level.panic_room_monitor_light = getent("panic_room_monitor_light_origin", "targetname");

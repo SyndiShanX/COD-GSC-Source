@@ -290,7 +290,7 @@ function private interact_door_ispushentclose() {
   team = self.script_team;
 
   if(!isDefined(team)) {
-    team = # "all";
+    team = #"all";
   }
 
   pushents = getplayers(team);

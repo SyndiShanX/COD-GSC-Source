@@ -29,7 +29,7 @@ function planemortar_contrail(localclientnum, oldval, newval, bnewent, binitials
 }
 
 function event_handler[entity_spawned] codecallback_entityspawned(eventstruct) {
-  if(self.weapon.name !== # "planemortar") {
+  if(self.weapon.name !== #"planemortar") {
     return;
   }
 }

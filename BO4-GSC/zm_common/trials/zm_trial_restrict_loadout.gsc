@@ -40,7 +40,7 @@ function_d805557c(weapon) {
 
   challenge = zm_trial::function_a36e8c38(#"restrict_loadout");
 
-  if(challenge.var_e097dc07 === # "melee" && is_ballistic_knife(weapon)) {
+  if(challenge.var_e097dc07 === #"melee" && is_ballistic_knife(weapon)) {
     return false;
   }
 
@@ -84,15 +84,15 @@ is_ballistic_knife(weapon) {
 is_melee_allowed(weapon) {
   challenge = zm_trial::function_a36e8c38(#"restrict_loadout");
 
-  if(challenge.var_e097dc07 == # "melee") {
+  if(challenge.var_e097dc07 == #"melee") {
     return true;
   }
 
-  if((challenge.var_e097dc07 == "any_pistol" || challenge.var_e097dc07 == # "hash_7416cabf26f52c5f") && isDefined(weapon.isriotshield) && weapon.isriotshield && weapon.weapclass == "pistol") {
+  if((challenge.var_e097dc07 == "any_pistol" || challenge.var_e097dc07 == #"hash_7416cabf26f52c5f") && isDefined(weapon.isriotshield) && weapon.isriotshield && weapon.weapclass == "pistol") {
     return false;
   }
 
-  if(isDefined(challenge) && challenge.var_e097dc07 != # "melee") {
+  if(isDefined(challenge) && challenge.var_e097dc07 != #"melee") {
     return self function_d805557c(weapon);
   }
 
@@ -367,13 +367,13 @@ on_begin(var_e097dc07, var_f5300808) {
   }
 
   foreach(player in getplayers()) {
-    if(var_e097dc07 === # "spear_only") {
+    if(var_e097dc07 === #"spear_only") {
       player allowmelee(0);
     }
 
     player thread function_f0e03d3(var_f5300808);
 
-    if(var_e097dc07 == # "snowballs") {
+    if(var_e097dc07 == #"snowballs") {
       if(!player function_f3fdd8f7()) {
         level zm_trial::function_cd75b690(1);
       }
@@ -429,7 +429,7 @@ on_end(round_reset) {
   callback::remove_on_weapon_change(&zm_trial_util::function_79518194);
   challenge = zm_trial::function_a36e8c38(#"restrict_loadout");
 
-  if(challenge.var_e097dc07 === # "snowballs") {
+  if(challenge.var_e097dc07 === #"snowballs") {
     callback::function_824d206(&function_10c80e10);
   }
 
@@ -449,7 +449,7 @@ on_end(round_reset) {
     player zm_trial_util::function_73ff0096();
     player zm_trial_util::function_7dbb1712(1);
 
-    if(self.var_e097dc07 == # "spear_only") {
+    if(self.var_e097dc07 == #"spear_only") {
       player allowmelee(1);
     }
 
@@ -457,7 +457,7 @@ on_end(round_reset) {
     player enableoffhandspecial();
   }
 
-  if(round_reset && self.var_e097dc07 == # "equipment") {
+  if(round_reset && self.var_e097dc07 == #"equipment") {
     foreach(player in getplayers()) {
       player function_f66032dd();
     }
@@ -548,7 +548,7 @@ disable_offhand_weapons() {
 }
 
 function_e20ebcfd() {
-  if(self.var_e097dc07 != # "equipment") {
+  if(self.var_e097dc07 != #"equipment") {
     foreach(player in getplayers()) {
       player thread disable_offhand_weapons();
 

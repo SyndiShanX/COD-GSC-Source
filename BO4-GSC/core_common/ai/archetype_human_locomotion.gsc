@@ -433,7 +433,7 @@ shouldtacticalarrivecondition(behaviortreeentity) {
     return false;
   }
 
-  if(!(behaviortreeentity.node.type == # "cover left")) {
+  if(!(behaviortreeentity.node.type == #"cover left")) {
     return false;
   }
 
@@ -521,7 +521,7 @@ planhumanarrivalatcover(behaviortreeentity, arrivalanim) {
     }
 
     if(isDefined(arrivalanim)) {
-      isright = behaviortreeentity.node.type == # "cover right";
+      isright = behaviortreeentity.node.type == #"cover right";
       splittime = getarrivalsplittime(arrivalanim, isright);
       issplitarrival = splittime < 1;
       nodeapproachyaw = behaviortreeentity getnodeoffsetangles(behaviortreeentity.node)[1];

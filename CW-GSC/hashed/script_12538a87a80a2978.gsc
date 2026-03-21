@@ -83,7 +83,7 @@ function function_a92a93e9(v_location, v_angles, var_75b5cef0 = 0, n_delay = 1) 
 
 function function_bdd95292(struct) {
   struct.scriptmodel = content_manager::spawn_script_model(struct, "p8_fxanim_wz_supply_stash_01_glow_mod", 1);
-  struct.var_422ae63e = # "hash_5657ee89257b06fe";
+  struct.var_422ae63e = #"hash_5657ee89257b06fe";
   struct.scriptmodel fx::play("sr/fx9_chest_objective_amb", struct.origin, struct.angles, "death");
   struct.state = 0;
   struct.usetriggers = [];
@@ -166,20 +166,20 @@ function function_b4f2a34e(eventstruct) {
 }
 
 function function_39340834(struct, trigger) {
-  rewards = # "sr_objective_rewards_guns_tier_1";
+  rewards = #"sr_objective_rewards_guns_tier_1";
   var_9c9943cf = 0;
 
   if(level.var_cf558bf < 1) {
-    rewards = # "sr_objective_rewards_guns_tier_1";
+    rewards = #"sr_objective_rewards_guns_tier_1";
   }
 
   if(level.var_cf558bf == 1) {
-    rewards = # "sr_objective_rewards_guns_tier_2";
+    rewards = #"sr_objective_rewards_guns_tier_2";
     var_9c9943cf = 1;
   }
 
   if(level.var_cf558bf >= 2) {
-    rewards = # "sr_objective_rewards_guns_tier_3";
+    rewards = #"sr_objective_rewards_guns_tier_3";
     var_9c9943cf = 2;
   }
 
@@ -520,7 +520,7 @@ function function_80bbb50b(chest, trigger) {
           playerindex = 0;
         }
 
-        var_25b6fcfc = # "ar_accurate_t9_item_sr";
+        var_25b6fcfc = #"ar_accurate_t9_item_sr";
 
         if(isDefined(chest.var_f0f92268[playerindex][self.var_ba0ccdab])) {
           var_25b6fcfc = chest.var_f0f92268[playerindex][self.var_ba0ccdab];

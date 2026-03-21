@@ -26,12 +26,12 @@ __init__() {
   clientfield::register("actor", "" + # "ouranos_proj_knock", 16000, getminbitcountfornum(3), "int", &function_a1d614f9, 0, 1);
   clientfield::register("actor", "" + # "ouranos_zombie_impact", 16000, 1, "counter", &function_1322534b, 0, 0);
   serverfield::register("ouranos_feather_hit", 16000, getminbitcountfornum(3), "int");
-  level._effect[#"ouranos_wind"] = # "hash_3ee5b689d09f0824";
-  level._effect[#"ouranos_trail"] = # "hash_62f4ee1a2e3c46fc";
-  level._effect[#"ouranos_impact"] = # "hash_5869597389a55f7b";
-  level._effect[#"ouranos_proj_knock"] = # "hash_215ead487c4bef59";
-  level._effect[#"ouranos_wind_knock"] = # "hash_4cc40e13ee8dff61";
-  level._effect[#"hash_31736c99409b40ef"] = # "hash_44bd80522ac100e7";
+  level._effect[#"ouranos_wind"] = #"hash_3ee5b689d09f0824";
+  level._effect[#"ouranos_trail"] = #"hash_62f4ee1a2e3c46fc";
+  level._effect[#"ouranos_impact"] = #"hash_5869597389a55f7b";
+  level._effect[#"ouranos_proj_knock"] = #"hash_215ead487c4bef59";
+  level._effect[#"ouranos_wind_knock"] = #"hash_4cc40e13ee8dff61";
+  level._effect[#"hash_31736c99409b40ef"] = #"hash_44bd80522ac100e7";
 }
 
 function_1322534b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

@@ -49,7 +49,7 @@ function_ee114cab() {
     return;
   }
 
-  level._effect[#"ethereal_razor_light"] = # "hash_1442db17b83460ad";
+  level._effect[#"ethereal_razor_light"] = #"hash_1442db17b83460ad";
   level.machine_assets[#"specialty_etherealrazor"] = spawnStruct();
   level.machine_assets[#"specialty_etherealrazor"].weapon = getweapon("zombie_perk_bottle_ethereal_razor");
   level.machine_assets[#"specialty_etherealrazor"].off_model = "p7_zm_vending_nuke";
@@ -94,7 +94,7 @@ function_f86e4c3d() {
         self clientfield::increment("" + # "hash_450d9f824068dcc2");
       }
 
-      if(var_c34665fc === # "weapon_melee_charge") {
+      if(var_c34665fc === #"weapon_melee_charge") {
         self function_1f7c6bb9(w_melee, 20, 40, 1);
         continue;
       }
@@ -153,7 +153,7 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
     }
 
     if(is_lunge) {
-      if(self hasperk(#"specialty_mod_etherealrazor") && (e_target.zm_ai_category === # "basic" || e_target.zm_ai_category === # "popcorn" || e_target.zm_ai_category === # "enhanced")) {
+      if(self hasperk(#"specialty_mod_etherealrazor") && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"popcorn" || e_target.zm_ai_category === #"enhanced")) {
         n_total_damage = e_target.health + 666;
       } else if(self hasperk(#"specialty_mod_etherealrazor")) {
         n_total_damage += 4000;

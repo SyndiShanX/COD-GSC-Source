@@ -65,7 +65,7 @@ function_fe65f5a6(var_b7358df3, e_player, n_timeout = 1) {
   self endon(#"death");
   self.var_cda2fa8 = 1;
 
-  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype !== # "zombie_dog") {
+  if(!(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) && self.archetype !== #"zombie_dog") {
     self waittill(#"completed_emerging_into_playable_area");
   }
 

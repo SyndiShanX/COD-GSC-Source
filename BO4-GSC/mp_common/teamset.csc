@@ -11,6 +11,6 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level.allies_team = # "allies";
-  level.axis_team = # "axis";
+  level.allies_team = #"allies";
+  level.axis_team = #"axis";
 }

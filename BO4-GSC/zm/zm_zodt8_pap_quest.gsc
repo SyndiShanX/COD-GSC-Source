@@ -281,16 +281,16 @@ function_afab6169(e_player) {
   b_result = 0;
 
   if(!(isDefined(e_player zombie_utility::is_player_valid(e_player)) && e_player zombie_utility::is_player_valid(e_player))) {
-    self.hint_string = # "";
+    self.hint_string = #"";
   } else if(isDefined(self.stub.b_used) && self.stub.b_used) {
-    self.hint_string = # "";
+    self.hint_string = #"";
   } else if(level flag::get("pap_quest_complete")) {
-    self.hint_string = # "";
+    self.hint_string = #"";
   } else {
     if(function_8b1a219a()) {
-      self.hint_string = # "hash_36ba40b9e876f572";
+      self.hint_string = #"hash_36ba40b9e876f572";
     } else {
-      self.hint_string = # "hash_15494c7927282ad6";
+      self.hint_string = #"hash_15494c7927282ad6";
     }
 
     b_result = 1;

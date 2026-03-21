@@ -477,7 +477,7 @@ function_5dbd6a40(s_zipline_use) {
   m_player_fake linkto(self.var_b20b0960, "tag_origin");
   current_weapon = self getcurrentweapon();
 
-  if(isDefined(current_weapon.name) && current_weapon.name != # "none") {
+  if(isDefined(current_weapon.name) && current_weapon.name != #"none") {
     m_weapon_fake = util::spawn_model(current_weapon.worldmodel, m_player_fake gettagorigin("tag_weapon_right"), m_player_fake gettagangles("tag_weapon_right"));
     m_weapon_fake linkto(m_player_fake, "tag_weapon_right");
     m_weapon_fake setowner(self);

@@ -205,7 +205,7 @@ function initialize(animscript) {
   self.a.scriptstarttime = gettime();
   self.a.atconcealmentnode = 0;
 
-  if(isDefined(self.node) && (self.node.type == # "conceal crouch" || self.node.type == # "conceal stand")) {
+  if(isDefined(self.node) && (self.node.type == #"conceal crouch" || self.node.type == #"conceal stand")) {
     self.a.atconcealmentnode = 1;
   }
 
@@ -540,7 +540,7 @@ function showlastenemysightpos(string) {
     return;
   }
 
-  if(self.enemy.team == # "allies") {
+  if(self.enemy.team == #"allies") {
     color = (0.4, 0.7, 1);
   } else {
     color = (1, 0.7, 0.4);
@@ -570,7 +570,7 @@ function debugposinternal(org, string, size) {
   ent thread debugtimeout();
   ent endon(#"timeout");
 
-  if(self.enemy.team == # "allies") {
+  if(self.enemy.team == #"allies") {
     color = (0.4, 0.7, 1);
   } else {
     color = (1, 0.7, 0.4);
@@ -1363,7 +1363,7 @@ function ai_calculate_health(base_health, round_number) {
     }
   }
 
-  if(util::get_game_type() == # "zclassic" && level.gamedifficulty < 2 && round_number > 35) {
+  if(util::get_game_type() == #"zclassic" && level.gamedifficulty < 2 && round_number > 35) {
     round_number = 35;
   }
 
@@ -1563,7 +1563,7 @@ function set_zombie_run_cycle(new_move_speed) {
       }
     }
 
-    if(self.archetype === # "zombie" || self.archetype === # "catalyst") {
+    if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
       if(isDefined(self.zm_variant_type_max)) {
         self.variant_type = randomint(self.zm_variant_type_max[self.zombie_move_speed][self.zombie_arms_position]);
       } else {

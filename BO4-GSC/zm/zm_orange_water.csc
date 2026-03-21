@@ -19,12 +19,12 @@ init() {
   clientfield::register("toplayer", "" + # "hash_13f1aaee7ebf9986", 24000, 2, "int", &function_3c820626, 0, 1);
   clientfield::register("toplayer", "" + # "hash_603fc9d210bdbc4d", 24000, 1, "int", &function_45df4c17, 0, 0);
   clientfield::register("toplayer", "" + # "hash_67340426cd141891", 24000, 2, "int", &function_6b5ed7f9, 0, 0);
-  level._effect[#"hash_4a12914ab0026a9d"] = # "hash_50599e96f376b4fa";
-  level._effect[#"hash_211384df1c05676c"] = # "hash_434ed0cd342c0caa";
-  level._effect[#"hash_3cf697eb0a408b2e"] = # "hash_432cd0cd340f2644";
-  level._effect[#"hash_2f305a0bea20d6ed"] = # "hash_6910f1de979f539f";
-  level._effect[#"hash_28591d0dc8bbbf02"] = # "hash_8197ce41f763db3";
-  level._effect[#"hash_2818130dc884170f"] = # "hash_86876e41fba07d2";
+  level._effect[#"hash_4a12914ab0026a9d"] = #"hash_50599e96f376b4fa";
+  level._effect[#"hash_211384df1c05676c"] = #"hash_434ed0cd342c0caa";
+  level._effect[#"hash_3cf697eb0a408b2e"] = #"hash_432cd0cd340f2644";
+  level._effect[#"hash_2f305a0bea20d6ed"] = #"hash_6910f1de979f539f";
+  level._effect[#"hash_28591d0dc8bbbf02"] = #"hash_8197ce41f763db3";
+  level._effect[#"hash_2818130dc884170f"] = #"hash_86876e41fba07d2";
 }
 
 main() {

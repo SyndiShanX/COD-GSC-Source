@@ -100,7 +100,7 @@ function private function_898628ef(item, player, networkid, itemid, itemcount, v
         itempoint = function_4ba8fde(var_16f12c31);
         var_390fc2d8 = getscriptbundle(itempoint.itementry.killstreak);
 
-        if(var_390fc2d8.ksinventoryweapon.name == # "inventory_planemortar") {
+        if(var_390fc2d8.ksinventoryweapon.name == #"inventory_planemortar") {
           ammo = isDefined(itemcount.pers[#"hash_1aaccfe69e328d6e"][3]) ? itemcount.pers[#"hash_1aaccfe69e328d6e"][3] : 3;
         }
 
@@ -116,7 +116,7 @@ function private function_898628ef(item, player, networkid, itemid, itemcount, v
     result = killstreaks::give(killstreakname, undefined, undefined, undefined, undefined);
 
     if(isDefined(slotid) && slotid > 0 && isDefined(killstreakbundle.ksinventoryweapon)) {
-      if(killstreakbundle.ksinventoryweapon.name == # "inventory_planemortar") {
+      if(killstreakbundle.ksinventoryweapon.name == #"inventory_planemortar") {
         itemcount.pers[#"hash_1aaccfe69e328d6e"][3] = slotid;
         clientfield::set_player_uimodel("hudItems.planeMortarShotsRemaining", slotid);
         itemcount loadout::function_3ba6ee5d(killstreakbundle.ksinventoryweapon, 1);
@@ -213,9 +213,9 @@ function private function_2eebeff5(item, player, networkid, itemid, itemcount, v
   weapon = item_inventory_util::function_2b83d3ff(itemcount);
   heldweapon = level.var_34d27b26;
 
-  if(itemcount.itementry.itemtype == # "equipment") {
+  if(itemcount.itementry.itemtype == #"equipment") {
     heldweapon = isDefined(heldweapons[2]) ? heldweapons[2] : level.var_34d27b26;
-  } else if(itemcount.itementry.itemtype == # "tactical") {
+  } else if(itemcount.itementry.itemtype == #"tactical") {
     heldweapon = isDefined(heldweapons[3]) ? heldweapons[3] : level.var_6388e216;
   } else {
     return slotid;

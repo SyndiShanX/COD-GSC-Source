@@ -91,7 +91,7 @@ function function_51759b03(var_84d1299, eventstruct = undefined) {
 }
 
 function private function_2346ea47(event) {
-  if(event == # "flanked") {
+  if(event == #"flanked") {
     if(self haspath() || absangleclamp180(self aiutility::function_dc8e1a0a()) < 45) {
       return false;
     }
@@ -143,7 +143,7 @@ function function_b791d0e4() {
   self.soundmod = "player";
   self thread function_158cbf3();
 
-  if(self.team == # "allies") {
+  if(self.team == #"allies") {
     self thread function_e1c920f9();
   }
 }
@@ -209,7 +209,7 @@ function event_handler[actor_killed] function_a94f4749(eventstruct) {
   attacker = eventstruct.attacker;
   meansofdeath = eventstruct.mod;
 
-  if(isDefined(self.archetype) && self.archetype == # "robot") {
+  if(isDefined(self.archetype) && self.archetype == #"robot") {
     if(isDefined(attacker) && !isPlayer(attacker)) {
       if(meansofdeath == "MOD_MELEE") {
         attacker thread function_bd51deb1("meleeKill");
@@ -347,13 +347,13 @@ function event_handler[grenade_fire] function_edd0c161(eventstruct) {
   grenade = eventstruct.projectile;
   weapon = eventstruct.weapon;
 
-  if(weapon.name == # "eq_frag_grenade" || weapon.name == # "frag_grenade" || weapon.name == # "hash_15ed0347f1459a04") {
+  if(weapon.name == #"eq_frag_grenade" || weapon.name == #"frag_grenade" || weapon.name == #"hash_15ed0347f1459a04") {
     self thread function_bd51deb1("grenadetoss");
     level thread function_8be08180(self, grenade, "grenadeincoming");
     return;
   }
 
-  if(weapon.name == # "eq_flash_grenade" || weapon.name == # "flash_grenade" || weapon.name == # "hash_ae7d40bb12f5ab6") {
+  if(weapon.name == #"eq_flash_grenade" || weapon.name == #"flash_grenade" || weapon.name == #"hash_ae7d40bb12f5ab6") {
     self thread function_bd51deb1("flashtoss");
     level thread function_8be08180(self, grenade, "flashincoming");
   }
@@ -366,10 +366,10 @@ function function_8be08180(thrower, grenade, event) {
     return;
   }
 
-  team = # "axis";
+  team = #"axis";
 
   if(isDefined(thrower.team) && team == thrower.team) {
-    team = # "allies";
+    team = #"allies";
   }
 
   ai = function_c9f7a37c(team, grenade);
@@ -439,7 +439,7 @@ function function_bf0a663a() {
     level.var_ecbd73e7 = array();
 
     foreach(enemy in enemies) {
-      if(isDefined(enemy.archetype) && enemy.archetype == # "robot") {
+      if(isDefined(enemy.archetype) && enemy.archetype == #"robot") {
         array::add(level.var_ecbd73e7, enemy, 0);
       }
     }
@@ -456,7 +456,7 @@ function function_bf0a663a() {
       arrayremovevalue(level.var_ecbd73e7, undefined);
 
       foreach(enemy in enemies) {
-        if(isDefined(enemy.archetype) && enemy.archetype == # "robot") {
+        if(isDefined(enemy.archetype) && enemy.archetype == #"robot") {
           array::add(level.var_ecbd73e7, enemy, 0);
         }
       }
@@ -535,7 +535,7 @@ function function_9cb2c120(ai, line, var_7488e05b, category, var_954826ad, var_a
     return;
   }
 
-  if(isDefined(ai.archetype) && ai.archetype == # "robot") {
+  if(isDefined(ai.archetype) && ai.archetype == #"robot") {
     soundalias = ai.voiceprefix + ai.var_3d0026c9 + "_" + "chatter";
   } else if(!is_hero(ai) && strstartswith(line, "exert_")) {
     if(line == "exert_immolation") {
@@ -587,7 +587,7 @@ function function_7e56a9a1(soundalias, var_954826ad, var_a8bd89dd, category, is_
         print3d(self.origin + (0, 0, 60), soundalias, (0, 1, 0), 1, 1, 100);
       }
 
-      if(isalive(self) && isactor(self) && self.archetype !== # "zombie_dog" && self.archetype !== # "mp_dog") {
+      if(isalive(self) && isactor(self) && self.archetype !== #"zombie_dog" && self.archetype !== #"mp_dog") {
         self playsoundontag(soundalias, "j_head");
       } else {
         self playSound(soundalias);
@@ -758,7 +758,7 @@ function function_c17c8a8e(var_928cff8, maxdist) {
         continue;
       }
 
-      if(isDefined(dude.archetype) && dude.archetype == # "robot") {
+      if(isDefined(dude.archetype) && dude.archetype == #"robot") {
         continue;
       }
 
@@ -805,7 +805,7 @@ function function_c9f7a37c(team, object, maxdist) {
       continue;
     }
 
-    if(isDefined(dude.archetype) && dude.archetype == # "robot") {
+    if(isDefined(dude.archetype) && dude.archetype == #"robot") {
       continue;
     }
 

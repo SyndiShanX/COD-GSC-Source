@@ -10,7 +10,7 @@
 init_clientfields() {
   clientfield::register("scriptmover", "" + # "hash_3e57db9b106dff0a", 1, 1, "int", &function_10675d52, 0, 0);
   clientfield::register("scriptmover", "" + # "hash_4ccf2ce25e0dc836", 1, 1, "int", &function_c6b07c39, 0, 0);
-  level._effect[#"hash_62343c2144d3f8d1"] = # "hash_e567a706dafea31";
+  level._effect[#"hash_62343c2144d3f8d1"] = #"hash_e567a706dafea31";
 }
 
 function_10675d52(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

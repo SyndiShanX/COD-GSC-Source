@@ -41,14 +41,14 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[#"hash_1e4fa83f4db14c46"] = # "hash_40a93ef9da58e006";
-  level._effect[#"fx8_boss_eye_glow"] = # "hash_1cd0bfd0a3ff1817";
-  level._effect[#"hash_420110993bafb86b"] = # "hash_4edfb7b10f36a12b";
-  level._effect[#"hash_3665813f5609df50"] = # "hash_105035871586710";
-  level._effect[#"hash_2699e8762805fbdc"] = # "hash_f378b1b7c38569c";
-  level._effect[#"hash_4cd18caca0e2880b"] = # "hash_155810298f5c76cb";
-  level._effect[#"hash_4d8984a98c0beba2"] = # "hash_ea19875e4f1d962";
-  level._effect[#"hash_24ce7f381d2f1ff5"] = # "hash_4ca6f513f26662b5";
+  level._effect[#"hash_1e4fa83f4db14c46"] = #"hash_40a93ef9da58e006";
+  level._effect[#"fx8_boss_eye_glow"] = #"hash_1cd0bfd0a3ff1817";
+  level._effect[#"hash_420110993bafb86b"] = #"hash_4edfb7b10f36a12b";
+  level._effect[#"hash_3665813f5609df50"] = #"hash_105035871586710";
+  level._effect[#"hash_2699e8762805fbdc"] = #"hash_f378b1b7c38569c";
+  level._effect[#"hash_4cd18caca0e2880b"] = #"hash_155810298f5c76cb";
+  level._effect[#"hash_4d8984a98c0beba2"] = #"hash_ea19875e4f1d962";
+  level._effect[#"hash_24ce7f381d2f1ff5"] = #"hash_4ca6f513f26662b5";
 }
 
 function_6e123c7b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -156,18 +156,18 @@ function_444660d9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     case 0:
       return;
     case 1:
-      self.var_69ab30d0 = # "hash_7de33b7647f4c33a";
+      self.var_69ab30d0 = #"hash_7de33b7647f4c33a";
       break;
     case 2:
-      self.var_69ab30d0 = # "hash_7de33a7647f4c187";
+      self.var_69ab30d0 = #"hash_7de33a7647f4c187";
       break;
     case 3:
-      self.var_69ab30d0 = # "hash_7de3397647f4bfd4";
+      self.var_69ab30d0 = #"hash_7de3397647f4bfd4";
       break;
   }
 
   if(!isDefined(self.var_69ab30d0)) {
-    self.var_69ab30d0 = # "hash_7de33b7647f4c33a";
+    self.var_69ab30d0 = #"hash_7de33b7647f4c33a";
   }
 
   self playrenderoverridebundle(self.var_69ab30d0, "ROOT");

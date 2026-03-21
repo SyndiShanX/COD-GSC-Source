@@ -163,13 +163,13 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("scriptmover", "" + # "hash_5afda864f8b64f5c", 1, 1, "int");
   clientfield::register("world", "" + # "hash_39e6b14b9e5b0f3d", 1, 1, "int");
   level.var_210ce105 = zm_towers_crowd_meter::register("zm_towers_crowd_meter");
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[#"switch_sparks"] = # "electric/fx8_sparks_burst_dir_sm_orange_os";
-  level._effect[#"hash_21167096dfea3409"] = # "hash_b6f89a048c38cf6";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"switch_sparks"] = #"electric/fx8_sparks_burst_dir_sm_orange_os";
+  level._effect[#"hash_21167096dfea3409"] = #"hash_b6f89a048c38cf6";
   level.default_start_location = "zone_starting_area_ra";
   level.default_game_mode = "zclassic";
   level.var_cd8b6cd0 = 2;
@@ -185,7 +185,7 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_towers_special_rounds::init();
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_towers_weapons.csv";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_towers_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.w_wraithfire = getweapon(#"eq_wraith_fire");
@@ -230,7 +230,7 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_towers_side_quests::init();
   level.vending_machines_powered_on_at_start = 1;
   level flag::set("power_on");
-  level.var_d5bd7049 = # "hash_30a8de8c86fd7103";
+  level.var_d5bd7049 = #"hash_30a8de8c86fd7103";
 
   if(!zm_utility::is_standard()) {
     level.var_d0b54199 = &function_b770efae;
@@ -637,7 +637,7 @@ function_f1e7bc35(s_spot) {
     case # "gladiator":
       str_scene = s_spot.var_5b15e8cd;
 
-      if(self.subarchetype == # "gladiator_marauder") {
+      if(self.subarchetype == #"gladiator_marauder") {
         str_scene = s_spot.var_f8f13141;
       }
 
@@ -681,7 +681,7 @@ function_f1e7bc35(s_spot) {
 
   self notify(#"hash_1d525fe23da088ca");
 
-  if(self.archetype == # "gladiator") {
+  if(self.archetype == #"gladiator") {
     self notify(#"hash_7ff69a201a93f099");
   }
 

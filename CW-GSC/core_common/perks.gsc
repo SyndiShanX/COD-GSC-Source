@@ -106,14 +106,14 @@ function private event_handler[gadget_on] function_7d697841(eventstruct) {
   weapon = eventstruct.weapon;
 
   if(level.var_222e62a6 === 1) {
-    if(isPlayer(player) && weapon.name == # "eq_stimshot") {
+    if(isPlayer(player) && weapon.name == #"eq_stimshot") {
       player thread function_845e1139();
     }
 
     return;
   }
 
-  if(isPlayer(player) && player hasperk("specialty_equipmentrecharge") && weapon.name == # "eq_stimshot") {
+  if(isPlayer(player) && player hasperk("specialty_equipmentrecharge") && weapon.name == #"eq_stimshot") {
     var_e0ca50e9 = {
       #slot: weapon.offhandslot, #weapon: weapon, #var_acddd81e: 0
     };

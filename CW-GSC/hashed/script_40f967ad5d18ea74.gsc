@@ -155,8 +155,8 @@ class class_c4926dee {
     m_type = undefined;
     var_1d308eec = "generic_generator_active";
     var_87ef4b13 = "generic_generator_die";
-    var_5eeaacc8 = # "zmb_aat_kilowatt_explode";
-    var_520afec4 = # "zmb_aat_kilowatt_explode";
+    var_5eeaacc8 = #"zmb_aat_kilowatt_explode";
+    var_520afec4 = #"zmb_aat_kilowatt_explode";
     var_c24010e8 = 0;
     var_83cb975 = undefined;
     var_cda957a8 = undefined;
@@ -183,7 +183,7 @@ class class_c4926dee {
       return 0;
     }
 
-    if(iboneindex === # "mod_crush") {
+    if(iboneindex === #"mod_crush") {
       return 0;
     }
 

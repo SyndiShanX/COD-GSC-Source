@@ -813,9 +813,9 @@ function server_wait(localclientnum, seconds, waitbetweenchecks, level_endon) {
 }
 
 function get_other_team(str_team) {
-  if(str_team == # "allies") {
+  if(str_team == #"allies") {
     return # "axis";
-  } else if(str_team == # "axis") {
+  } else if(str_team == #"axis") {
     return # "allies";
   } else {
     return # "allies";
@@ -847,7 +847,7 @@ function isenemyplayer(player) {
     return false;
   }
 
-  if(player.team != # "none") {
+  if(player.team != #"none") {
     if(player.team === self.team) {
       return false;
     }
@@ -1469,11 +1469,11 @@ function set_team_mapping(str_team_for_sidea, str_team_for_sideb) {
   level.team_mapping[#"defender"] = str_team_for_sideb;
   level.team_mapping[#"attackers"] = str_team_for_sidea;
   level.team_mapping[#"defenders"] = str_team_for_sideb;
-  level.team_mapping[#"cia"] = # "allies";
-  level.team_mapping[#"kgb"] = # "axis";
+  level.team_mapping[#"cia"] = #"allies";
+  level.team_mapping[#"kgb"] = #"axis";
   level.team_mapping[#"teama"] = level.team_mapping[#"sidea"];
   level.team_mapping[#"teamb"] = level.team_mapping[#"sideb"];
-  level.team_mapping[#"side3"] = # "team3";
+  level.team_mapping[#"side3"] = #"team3";
 }
 
 function get_team_mapping(str_team) {

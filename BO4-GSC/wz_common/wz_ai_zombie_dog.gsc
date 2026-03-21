@@ -203,7 +203,7 @@ bb_getshouldrunstatus() {
     return "<dev string:x38>";
   }
 
-  if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint") || getdvarint(#"survival_prototype", 0) && isDefined(self.current_state) && self.current_state.name === # "chase") {
+  if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint") || getdvarint(#"survival_prototype", 0) && isDefined(self.current_state) && self.current_state.name === #"chase") {
     return "run";
   }
 

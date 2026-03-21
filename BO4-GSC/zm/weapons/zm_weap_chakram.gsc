@@ -156,7 +156,7 @@ function_7bef3ea0(w_hero) {
   self endon(#"death");
   s_result = self waittilltimeout(5, #"seeker_done", #"hero_chakram_activated");
 
-  if(s_result._notify !== # "seeker_done") {
+  if(s_result._notify !== #"seeker_done") {
     self notify(#"seeker_done");
   }
 
@@ -185,7 +185,7 @@ function_c965a5a9(weapon) {
 }
 
 blood_death_fx(var_14ef0a6c) {
-  if(self.archetype === # "zombie") {
+  if(self.archetype === #"zombie") {
     if(var_14ef0a6c) {
       self clientfield::increment("" + # "zombie_slice_left", 1);
       return;
@@ -534,7 +534,7 @@ function_46f125d(v_start, var_4d1ea1ad, v_forward) {
       continue;
     }
 
-    if(isDefined(e_target.zm_ai_category) && (e_target.zm_ai_category == # "heavy" || e_target.zm_ai_category == # "miniboss" || e_target.zm_ai_category == # "boss")) {
+    if(isDefined(e_target.zm_ai_category) && (e_target.zm_ai_category == #"heavy" || e_target.zm_ai_category == #"miniboss" || e_target.zm_ai_category == #"boss")) {
       if(isDefined(self.var_8d8b7454) && isinarray(self.var_8d8b7454, e_target)) {
         continue;
       }
@@ -750,7 +750,7 @@ function_b475223e(weapon) {
 }
 
 function_7d1739b8(var_201c5b1f) {
-  assert(var_201c5b1f == # "round_reset");
+  assert(var_201c5b1f == #"round_reset");
 
   foreach(player in getplayers()) {
     player function_892bdee2();

@@ -166,7 +166,7 @@ function givecustomloadout(takeoldweapon) {
 function onplayerspawned() {
   self namespace_234f0efc::function_b0000c15();
 
-  if(game.state === # "playing") {
+  if(game.state === #"playing") {
     if(self.pers[#"lives"] > 1) {
       self util::delay(1, "disconnect", &playlocalsound, #"hash_2ddeea4fb69be891");
       return;
@@ -183,7 +183,7 @@ function on_player_killed(params) {
 }
 
 function function_ec3bb66c() {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -385,7 +385,7 @@ function private function_a3e78cba() {
   }
 
   level.exfilstruct.var_f389af4f = 1;
-  level.exfilstruct.hintstring = # "hash_1ed278859e55fb7b";
+  level.exfilstruct.hintstring = #"hash_1ed278859e55fb7b";
   level.var_36cba6d6 = level.exfilstruct.origin;
   var_e8a4ae59 = 64;
   var_a3c01952 = 128;
@@ -798,13 +798,13 @@ function function_2d5cfefd() {
     wait bomb.growtime;
   }
 
-  level.var_4afb8f5a[#"hash_6ebec4f42d4b01c"] = # "hash_fb37841b0d2d7e7";
+  level.var_4afb8f5a[#"hash_6ebec4f42d4b01c"] = #"hash_fb37841b0d2d7e7";
 }
 
 function function_c77a61d() {
   self.model namespace_b77e8eb1::function_1cb7e339();
   self.objectiveid = gameobjects::get_next_obj_id();
-  objective = # "hash_2854f6c09dd9a316";
+  objective = #"hash_2854f6c09dd9a316";
   objective_add(self.objectiveid, "active", self.model.origin, objective);
   function_9a8950ee(self.objectiveid, 1);
   objective_setgamemodeflags(self.objectiveid, 1);
@@ -1038,7 +1038,7 @@ function private function_a90b3aca() {
 
   level.players[0] iprintlnbold("<dev string:x209>" + level.var_5d5301ba);
   level.exfilstruct.var_f389af4f = 1;
-  level.exfilstruct.hintstring = # "hash_1ed278859e55fb7b";
+  level.exfilstruct.hintstring = #"hash_1ed278859e55fb7b";
   function_c21c59f();
 
   if(isDefined(level.exfilstruct.target)) {

@@ -21,7 +21,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  level._effect[#"zm_zone_edge_marker"] = # "hash_3002526b7ff53cbf";
+  level._effect[#"zm_zone_edge_marker"] = #"hash_3002526b7ff53cbf";
   clientfield::register_clientuimodel("hudItems.armorType", #"hud_items", #"armortype", 1, 2, "int", undefined, 0, 0);
   clientfield::register_clientuimodel("hudItems.armorPercent", #"hud_items", #"armorpercent", 1, 7, "float", undefined, 0, 0);
   clientfield::register_clientuimodel("hudItems.scrap", #"hud_items", #"scrap", 1, 16, "int", undefined, 0, 0);
@@ -125,7 +125,7 @@ function spawn_buildkit_weapon_model(localclientnum, weapon, camo, origin, angle
 function is_classic() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zclassic") {
+  if(str_gametype == #"zclassic") {
     return true;
   }
 
@@ -135,7 +135,7 @@ function is_classic() {
 function is_survival() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zsurvival") {
+  if(str_gametype == #"zsurvival") {
     return true;
   }
 
@@ -145,7 +145,7 @@ function is_survival() {
 function is_standard() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zstandard") {
+  if(str_gametype == #"zstandard") {
     return true;
   }
 
@@ -155,7 +155,7 @@ function is_standard() {
 function is_trials() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztrials" || level flag::exists(#"ztrial")) {
+  if(str_gametype == #"ztrials" || level flag::exists(#"ztrial")) {
     return true;
   }
 
@@ -165,7 +165,7 @@ function is_trials() {
 function is_tutorial() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "ztutorial") {
+  if(str_gametype == #"ztutorial") {
     return true;
   }
 
@@ -175,7 +175,7 @@ function is_tutorial() {
 function is_grief() {
   str_gametype = util::get_game_type();
 
-  if(str_gametype == # "zgrief") {
+  if(str_gametype == #"zgrief") {
     return true;
   }
 
@@ -384,25 +384,25 @@ function flame_corpse_fx(localclientnum, oldval, newval, bnewent, binitialsnap, 
 function model_rarity_rob(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   switch (bwasdemojump) {
     case 1:
-      self.var_d9e5ccb2 = # "hash_6f1ab68ac78ac2ea";
+      self.var_d9e5ccb2 = #"hash_6f1ab68ac78ac2ea";
       break;
     case 2:
-      self.var_d9e5ccb2 = # "hash_312ceb838675b80";
+      self.var_d9e5ccb2 = #"hash_312ceb838675b80";
       break;
     case 3:
-      self.var_d9e5ccb2 = # "hash_70c807782a37573e";
+      self.var_d9e5ccb2 = #"hash_70c807782a37573e";
       break;
     case 4:
-      self.var_d9e5ccb2 = # "hash_5b08235c0b55a003";
+      self.var_d9e5ccb2 = #"hash_5b08235c0b55a003";
       break;
     case 5:
-      self.var_d9e5ccb2 = # "rob_sr_item_purple";
+      self.var_d9e5ccb2 = #"rob_sr_item_purple";
       break;
     case 6:
-      self.var_d9e5ccb2 = # "hash_64261dabb4df88cd";
+      self.var_d9e5ccb2 = #"hash_64261dabb4df88cd";
       break;
     case 7:
-      self.var_d9e5ccb2 = # "rob_sr_item_gold";
+      self.var_d9e5ccb2 = #"rob_sr_item_gold";
       break;
     case 0:
     default:
@@ -423,37 +423,37 @@ function set_compass_icon(localclientnum, oldval, newval, bnewent, binitialsnap,
   if(bwastimejump) {
     switch (self.model) {
       case # "p9_zm_platinum_radio_call_boxes_on":
-        str_objective = # "hash_4542aa212012068";
+        str_objective = #"hash_4542aa212012068";
         break;
       case # "p8_wz_ep_fishing_pole":
-        str_objective = # "hash_249d888e2d3c6aed";
+        str_objective = #"hash_249d888e2d3c6aed";
         break;
       case # "hash_94b3a8b935248d0":
-        str_objective = # "hash_669c000075d7222";
+        str_objective = #"hash_669c000075d7222";
         break;
       case # "p9_fxanim_zm_gold_control_point_collector_mod":
-        str_objective = # "hash_1da886c89c2e4073";
+        str_objective = #"hash_1da886c89c2e4073";
         break;
       case # "p9_fxanim_zm_gold_control_point_crystal_mod":
-        str_objective = # "hash_73705646f7ccc79c";
+        str_objective = #"hash_73705646f7ccc79c";
         break;
       case # "hash_3d3aeedc296addd":
-        str_objective = # "hash_5ae3492cc261d9c9";
+        str_objective = #"hash_5ae3492cc261d9c9";
         break;
       case # "p9_zm_gold_teleporter_b":
-        str_objective = # "hash_48c296f58e75bbc7";
+        str_objective = #"hash_48c296f58e75bbc7";
         break;
       case # "p9_zm_gold_jumppads_machine_mod":
-        str_objective = # "hash_7ccf11b4a680682a";
+        str_objective = #"hash_7ccf11b4a680682a";
         break;
       case # "p9_zm_gold_jumppads_machine_sub":
-        str_objective = # "hash_7f5d2d61a6f36e5d";
+        str_objective = #"hash_7f5d2d61a6f36e5d";
         break;
       case # "p8_zm_off_trap_switch_box":
-        str_objective = # "hash_6906420c98a0ea37";
+        str_objective = #"hash_6906420c98a0ea37";
         break;
       default:
-        str_objective = # "hash_7ec87a35af8f03b0";
+        str_objective = #"hash_7ec87a35af8f03b0";
         self zm_wallbuy::function_8f12abec(fieldname);
         break;
     }
@@ -547,9 +547,9 @@ function force_stream_changed(localclientnum, oldval, newval, bnewent, binitials
       level.var_c427e93b[level.var_c427e93b.size] = self;
     }
 
-    if(self.model == # "p9_fxanim_zm_gp_dac_xmodel") {
+    if(self.model == #"p9_fxanim_zm_gp_dac_xmodel") {
       self.var_35f71e38 = array(#"p9_sur_machine_computer_side_screen_on_seq_01", #"p9_sur_machine_computer_side_screen_on_seq_02");
-    } else if(self.model == # "p9_zm_ndu_trial_terminal_01") {
+    } else if(self.model == #"p9_zm_ndu_trial_terminal_01") {
       player = function_5c10bd79(fieldname);
       n_ent_num = player getentitynumber();
 

@@ -105,7 +105,7 @@ function getallotherplayers() {
 
 function updateplayernum(player) {
   if(!isDefined(player.playernum)) {
-    if(player.team == # "allies") {
+    if(player.team == #"allies") {
       if(!isDefined(game._team1_num)) {
         game._team1_num = 0;
       }
@@ -156,10 +156,10 @@ function getfreespawnpoint(spawnpoints, player) {
   if(isDefined(player) && isDefined(player.team)) {
     for(i = 0; isDefined(spawnpoints) && i < spawnpoints.size; i++) {
       if(side_selection == 1) {
-        if(player.team != # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
+        if(player.team != #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
           arrayremovevalue(spawnpoints, spawnpoints[i]);
           i = 0;
-        } else if(player.team == # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
+        } else if(player.team == #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
           arrayremovevalue(spawnpoints, spawnpoints[i]);
           i = 0;
         } else {
@@ -169,13 +169,13 @@ function getfreespawnpoint(spawnpoints, player) {
         continue;
       }
 
-      if(player.team == # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
+      if(player.team == #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 1) {
         arrayremovevalue(spawnpoints, spawnpoints[i]);
         i = 0;
         continue;
       }
 
-      if(player.team != # "allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
+      if(player.team != #"allies" && isDefined(spawnpoints[i].script_int) && spawnpoints[i].script_int == 2) {
         arrayremovevalue(spawnpoints, spawnpoints[i]);
         i = 0;
         continue;
@@ -320,7 +320,7 @@ function function_7681dccc(einflictor, eattacker) {
       return vehicle.overrideplayerdamage;
     }
 
-    if(isDefined(eattacker) && eattacker.archetype === # "soa") {
+    if(isDefined(eattacker) && eattacker.archetype === #"soa") {
       return undefined;
     }
 
@@ -487,19 +487,19 @@ function function_182d09fd(eattacker, idamage) {
     return int(idamage);
   }
 
-  if(eattacker.archetype === # "zombie" && isDefined(level.var_c739ead9)) {
+  if(eattacker.archetype === #"zombie" && isDefined(level.var_c739ead9)) {
     idamage *= level.var_c739ead9;
   }
 
-  if(eattacker.zm_ai_category === # "elite" && isDefined(level.var_5a59b382)) {
+  if(eattacker.zm_ai_category === #"elite" && isDefined(level.var_5a59b382)) {
     idamage *= level.var_5a59b382;
   }
 
-  if(eattacker.zm_ai_category === # "special" && isDefined(level.var_cfbc34ae)) {
+  if(eattacker.zm_ai_category === #"special" && isDefined(level.var_cfbc34ae)) {
     idamage *= level.var_cfbc34ae;
   }
 
-  if(eattacker.zm_ai_category === # "normal" && isDefined(level.var_97850f30)) {
+  if(eattacker.zm_ai_category === #"normal" && isDefined(level.var_97850f30)) {
     idamage *= level.var_97850f30;
   }
 
@@ -801,7 +801,7 @@ function function_b01adf41() {
   if(isPlayer(self)) {
     var_6e618382 = item_inventory::function_2e711614(13);
 
-    if(var_6e618382.itementry.name === # "stimshot_t9_item_sr") {
+    if(var_6e618382.itementry.name === #"stimshot_t9_item_sr") {
       return true;
     }
   }
@@ -1014,12 +1014,12 @@ function player_grenade_multiattack_bookmark_watcher(grenade, weapon) {
     count = grenade.grenade_multiattack_bookmark_count;
   }
 
-  var_7b841aa9 = # "zm_player_grenade_multiattack";
+  var_7b841aa9 = #"zm_player_grenade_multiattack";
 
   if(is_true(grenade.use_grenade_special_long_bookmark)) {
-    var_7b841aa9 = # "zm_player_grenade_special_long";
+    var_7b841aa9 = #"zm_player_grenade_special_long";
   } else if(is_true(grenade.use_grenade_special_bookmark)) {
-    var_7b841aa9 = # "zm_player_grenade_special_long";
+    var_7b841aa9 = #"zm_player_grenade_special_long";
   }
 
   if(count <= self.grenade_multiattack_count && isDefined(self.grenade_multiattack_ent)) {
@@ -1220,8 +1220,8 @@ function function_97f613de() {
 }
 
 function setspectatepermissions(ison) {
-  self allowspectateteam(#"allies", ison && self.team == # "allies");
-  self allowspectateteam(#"axis", ison && self.team == # "axis");
+  self allowspectateteam(#"allies", ison && self.team == #"allies");
+  self allowspectateteam(#"axis", ison && self.team == #"axis");
   self allowspectateteam("freelook", 0);
   self allowspectateteam("none", 0);
 }
@@ -1706,7 +1706,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   }
 
   if(self namespace_e86ffa8::function_582d36be(3)) {
-    if(zm_utility::is_explosive_damage(smeansofdeath) || smeansofdeath === "MOD_SUICIDE" && weapon.name === # "frag_grenade") {
+    if(zm_utility::is_explosive_damage(smeansofdeath) || smeansofdeath === "MOD_SUICIDE" && weapon.name === #"frag_grenade") {
       if(isPlayer(eattacker) || isPlayer(einflictor)) {
         return 0;
       }
@@ -1745,7 +1745,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
       }
     }
 
-    if(isactor(eattacker) && (smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE" || smeansofdeath == "MOD_MELEE_WEAPON_BUTT" || weapon.name === # "zombie_projectile")) {
+    if(isactor(eattacker) && (smeansofdeath == "MOD_MELEE" || smeansofdeath == "MOD_MELEE_ASSASSINATE" || smeansofdeath == "MOD_MELEE_WEAPON_BUTT" || weapon.name === #"zombie_projectile")) {
       var_88e5b029 = 1;
       round_number = zm_utility::get_round_number();
 
@@ -1759,11 +1759,11 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
 
       idamage = int(ceil(idamage * var_88e5b029));
 
-      if(!(eattacker.zm_ai_category === # "boss") && idamage > 225) {
+      if(!(eattacker.zm_ai_category === #"boss") && idamage > 225) {
         idamage = 225;
       }
 
-      if(eattacker.zm_ai_category === # "boss" && idamage > 300) {
+      if(eattacker.zm_ai_category === #"boss" && idamage > 300) {
         idamage = 300;
       }
     }
@@ -1779,7 +1779,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
         self playrumbleonentity("damage_heavy");
       }
 
-      if(eattacker.archetype === # "zombie") {
+      if(eattacker.archetype === #"zombie") {
         self zm_audio::create_and_play_dialog(#"general", #"attacked");
       }
 
@@ -1811,7 +1811,7 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   if(zm_utility::is_explosive_damage(smeansofdeath)) {
     if(!is_true(self.is_zombie)) {
       if(!isDefined(eattacker) || !is_true(eattacker.is_zombie) && !is_true(eattacker.b_override_explosive_damage_cap)) {
-        if(isDefined(weapon.name) && (weapon.name == # "ray_gun" || weapon.name == # "ray_gun_upgraded")) {
+        if(isDefined(weapon.name) && (weapon.name == #"ray_gun" || weapon.name == #"ray_gun_upgraded")) {
           if(self.health > 25 && idamage > 25) {
             idamage = 25;
           }
@@ -1856,11 +1856,11 @@ function player_damage_override(einflictor, eattacker, idamage, idflags, smeanso
   }
 
   if(is_true(self.var_96971e3c) || is_true(eattacker.var_9a6fcc)) {
-    if(is_true(eattacker.is_zombie) && eattacker.zm_ai_category === # "normal") {
+    if(is_true(eattacker.is_zombie) && eattacker.zm_ai_category === #"normal") {
       eattacker.var_6e9934ba = 1;
       playFXOnTag(#"hash_2bc83d9e991e53ad", eattacker, "j_spine4");
       eattacker thread zm_ai_utility::function_e9209002(self.origin, 2, 1, self);
-    } else if(eattacker.archetype === # "zombie_dog") {
+    } else if(eattacker.archetype === #"zombie_dog") {
       eattacker.var_6e9934ba = 1;
       playFXOnTag(#"hash_2bc83d9e991e53ad", eattacker, "j_spine4");
       eattacker kill(eattacker.origin, self, self, undefined, undefined, 1);

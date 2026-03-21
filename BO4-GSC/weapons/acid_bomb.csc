@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __main__() {
-  level._effect[#"grenade_light"] = # "weapon/fx8_equip_light_os";
+  level._effect[#"grenade_light"] = #"weapon/fx8_equip_light_os";
 }
 
 spawned(localclientnum) {

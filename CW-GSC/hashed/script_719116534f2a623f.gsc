@@ -324,7 +324,7 @@ function private function_f78628e6() {
   while(!flag::get("flg_arcade_end_gundown")) {
     gameRef = self.script_noteworthy;
     var_ae865aeb = getscriptbundle(gameRef);
-    var_3b88de0c = # "hash_6ffbe136c9ac4c4e";
+    var_3b88de0c = #"hash_6ffbe136c9ac4c4e";
 
     if(isDefined(var_ae865aeb) && isDefined(var_ae865aeb.var_303ce84a)) {
       var_3b88de0c = var_ae865aeb.var_303ce84a;

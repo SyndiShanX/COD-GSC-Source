@@ -26,7 +26,7 @@ createcommanderplanner(team) {
 }
 
 createcommander() {
-  team = # "allies";
+  team = #"allies";
   commander = plannercommanderutility::createcommander(team, createcommanderplanner(team), createsquadplanner(team));
   plannergenericcommander::commanderdaemons(commander);
   plannercommanderutility::adddaemon(commander, #"daemonzmaltars");

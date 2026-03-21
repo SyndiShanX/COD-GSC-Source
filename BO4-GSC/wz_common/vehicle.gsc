@@ -230,7 +230,7 @@ function_ed173e0b() {
 }
 
 function_b8c069cc(notifyhash) {
-  if(notifyhash == # "emped_vehicle") {
+  if(notifyhash == #"emped_vehicle") {
     if(isDefined(self) && isDefined(level.var_fc1bbaef)) {
       [[level.var_fc1bbaef]](self);
     }
@@ -612,7 +612,7 @@ on_vehicle_damage(params) {
   if(isDefined(getgametypesetting(#"hash_464afa49c60793b7")) ? getgametypesetting(#"hash_464afa49c60793b7") : 0) {
     if(vehicle.scriptvehicletype == "player_fav") {
       if(isDefined(params) && isDefined(params.smeansofdeath)) {
-        if(params.partname === # "tag_gunner_turret1" || params.partname === # "tag_gunner_barrel1") {
+        if(params.partname === #"tag_gunner_turret1" || params.partname === #"tag_gunner_barrel1") {
           var_b522a590 = isDefined(getgametypesetting(#"hash_3e111be61438fd22")) ? getgametypesetting(#"hash_3e111be61438fd22") : 1;
           var_204c6da4 = isDefined(getgametypesetting(#"hash_5ba752e23e79af9d")) ? getgametypesetting(#"hash_5ba752e23e79af9d") : 5;
           var_ebe816eb = isDefined(getgametypesetting(#"hash_36c2eeb3865325f2")) ? getgametypesetting(#"hash_36c2eeb3865325f2") : 0.25;
@@ -1425,7 +1425,7 @@ function_da0c353b(player, eventstruct) {
 
       characterassetname = getcharacterassetname(player getcharacterbodytype(), currentsessionmode());
 
-      if(characterassetname !== # "hash_15db91b18278dea9") {
+      if(characterassetname !== #"hash_15db91b18278dea9") {
         return;
       }
 
@@ -1673,7 +1673,7 @@ function_17949e01() {
     while(true) {
       waitresult = self waittill(#"touch", #"unbeached");
 
-      if(waitresult._notify == # "touch" && isDefined(waitresult.pm_flags)) {
+      if(waitresult._notify == #"touch" && isDefined(waitresult.pm_flags)) {
         time = gettime();
 
         if(time > var_80831eb5 && waitresult.pm_flags & 128) {

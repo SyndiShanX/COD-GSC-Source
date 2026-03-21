@@ -229,9 +229,9 @@ function _playlocalsound(soundalias) {
 function getotherteam(str_team) {
   str_team = get_team_mapping(str_team);
 
-  if(str_team == # "allies") {
+  if(str_team == #"allies") {
     return # "axis";
-  } else if(str_team == # "axis") {
+  } else if(str_team == #"axis") {
     return # "allies";
   } else {
     return # "allies";
@@ -947,7 +947,7 @@ function function_250b79b0(n_zone) {
   self notify("streamer" + n_zone);
 }
 
-function function_749362d7(var_53cdb3f5, gesture = # "dem_lowready") {
+function function_749362d7(var_53cdb3f5, gesture = #"dem_lowready") {
   self val::reset_all(#"low_ready");
 
   if(isDefined(self.var_acac2f93)) {
@@ -1177,7 +1177,7 @@ function function_2b98ebb1(str_team, str_objective, var_26ed87a4 = 3, var_86fdb2
   array::thread_all(a_players, &globallogic_ui::function_d679cb5b);
   waitframe(1);
 
-  if(str_team === # "allies") {
+  if(str_team === #"allies") {
     mission.var_efc64276 = str_objective;
   } else {
     mission.var_24134271 = str_objective;
@@ -1218,15 +1218,15 @@ function function_4e4e008c(str_objective, var_f1515fd2 = 2, var_86fdb2cc = 1) {
   }
 }
 
-function function_74a9e89b(str_team = # "any", str_vehicle = undefined) {
+function function_74a9e89b(str_team = #"any", str_vehicle = undefined) {
   level flag::wait_till("all_players_spawned");
 
   foreach(e_player in getplayers(str_team)) {
     var_30181301 = [];
 
-    if(str_team == # "axis") {
+    if(str_team == #"axis") {
       var_261c6219 = struct::get_array("cp_player_vehicle_spawn_axis", "targetname");
-    } else if(str_team == # "allies") {
+    } else if(str_team == #"allies") {
       var_261c6219 = struct::get_array("cp_player_vehicle_spawn_allies", "targetname");
     } else {
       var_261c6219 = arraycombine(struct::get_array("cp_player_vehicle_spawn_axis", "targetname"), struct::get_array("cp_player_vehicle_spawn_allies", "targetname"), 0, 0);
@@ -1385,8 +1385,8 @@ function can_see_ai(var_428cf68a, ai, latency, var_593afcc1, var_8230ceac) {
   return 0;
 }
 
-function create_cursor_hint(tag, originoffset = (0, 0, 0), hintstring, var_2b3af0de = 85, var_2625ed95 = 0.25, var_49394206, prompt = # "use", var_42dabd79, var_b42660a4, var_3a0702cc, ignorecollision, var_a9618cc5, validatefunc) {
-  if(isDefined(tag) && (tag == # "" || !isDefined(self gettagorigin(tag)))) {
+function create_cursor_hint(tag, originoffset = (0, 0, 0), hintstring, var_2b3af0de = 85, var_2625ed95 = 0.25, var_49394206, prompt = #"use", var_42dabd79, var_b42660a4, var_3a0702cc, ignorecollision, var_a9618cc5, validatefunc) {
+  if(isDefined(tag) && (tag == #"" || !isDefined(self gettagorigin(tag)))) {
     tag = undefined;
   }
 
@@ -1408,7 +1408,7 @@ function create_cursor_hint(tag, originoffset = (0, 0, 0), hintstring, var_2b3af
   self prompts::function_c97a48c7(prompt, prompt_struct);
 }
 
-function remove_cursor_hint(prompt = # "use") {
+function remove_cursor_hint(prompt = #"use") {
   self prompts::remove(prompt);
 }
 
@@ -1758,11 +1758,11 @@ function function_a5318821(var_79a934ad = 1, var_6fa12df4 = 0, var_64b54706 = un
 function function_de500b59() {
   mapname = get_map_name();
 
-  if(mapname === # "cp_takedown" || mapname === # "cp_rus_yamantau" || mapname === # "cp_sidemission_takedown" || mapname === # "cp_sidemission_tundra") {
+  if(mapname === #"cp_takedown" || mapname === #"cp_rus_yamantau" || mapname === #"cp_sidemission_takedown" || mapname === #"cp_sidemission_tundra") {
     return # "hash_4d5f6c0e8d8bec20";
   }
 
-  if(mapname === # "cp_rus_kgb") {
+  if(mapname === #"cp_rus_kgb") {
     if(getplayers()[0].var_4fc36735 === 1) {
       return # "hash_40c037a247e8b24f";
     } else {
@@ -1790,15 +1790,15 @@ function getteamindex(team) {
     return 0;
   }
 
-  if(team == # "none") {
+  if(team == #"none") {
     return 0;
   }
 
-  if(team == # "allies") {
+  if(team == #"allies") {
     return 1;
   }
 
-  if(team == # "axis") {
+  if(team == #"axis") {
     return 2;
   }
 

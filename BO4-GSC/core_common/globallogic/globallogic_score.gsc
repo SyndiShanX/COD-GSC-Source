@@ -515,10 +515,10 @@ function_d68ae402(inflictor, meansofdeath, victim, attacker, scoreevents, weapon
     inflictor.var_7fff4605 = 1;
   }
 
-  if(var_ac4c1 == # "frag_grenade" || var_ac4c1 == # "eq_molotov" || var_ac4c1 == # "hatchet") {
+  if(var_ac4c1 == #"frag_grenade" || var_ac4c1 == #"eq_molotov" || var_ac4c1 == #"hatchet") {
     attacker contracts::increment_contract(#"hash_3ffc3d28289d21bb");
 
-    if(var_ac4c1 == # "eq_molotov") {
+    if(var_ac4c1 == #"eq_molotov") {
       attacker contracts::increment_contract(#"contract_mp_molotov_kill");
     }
   }
@@ -529,7 +529,7 @@ function_d68ae402(inflictor, meansofdeath, victim, attacker, scoreevents, weapon
 
   waitresult = attacker waittilltimeout(4, #"death", #"team_changed");
 
-  if(var_ac4c1 == # "frag_grenade" || var_ac4c1 == # "eq_molotov" || var_ac4c1 == # "hatchet") {
+  if(var_ac4c1 == #"frag_grenade" || var_ac4c1 == #"eq_molotov" || var_ac4c1 == #"hatchet") {
     if(attacker.multikills[var_ac4c1].kills >= 2) {
       if(!isDefined(attacker.pers[#"hash_52e978325c91fe24"])) {
         attacker.pers[#"hash_52e978325c91fe24"] = 0;
@@ -543,13 +543,13 @@ function_d68ae402(inflictor, meansofdeath, victim, attacker, scoreevents, weapon
     }
   }
 
-  if(var_ac4c1 == # "frag_grenade") {
+  if(var_ac4c1 == #"frag_grenade") {
     if(attacker.multikills[var_ac4c1].kills >= 2) {
       attacker contracts::increment_contract(#"hash_6696408f54c6ada7");
     }
   }
 
-  if(var_ac4c1 == # "eq_molotov") {
+  if(var_ac4c1 == #"eq_molotov") {
     if(attacker.multikills[var_ac4c1].kills >= 2) {
       attacker contracts::increment_contract(#"hash_4a7d49c14e026e91");
     }

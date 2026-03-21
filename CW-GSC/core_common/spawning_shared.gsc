@@ -286,8 +286,8 @@ function private function_99ca1277(player, predictedspawn) {
     influencer_team = player.pers[#"team"];
     vis_team_mask = util::getotherteamsmask(player.pers[#"team"]);
   } else {
-    point_team = # "none";
-    influencer_team = # "none";
+    point_team = #"none";
+    influencer_team = #"none";
     vis_team_mask = level.spawnsystem.ispawn_teammask[#"all"];
   }
 

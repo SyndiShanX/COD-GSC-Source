@@ -128,9 +128,9 @@ function_785d5e6d() {
 onstartgametype() {
   globallogic_score::resetteamscores();
   level.kothtotalsecondsinzone = 0;
-  level.objectivehintpreparezone = # "mp/control_koth";
-  level.objectivehintcapturezone = # "mp/capture_koth";
-  level.objectivehintdefendhq = # "mp/defend_koth";
+  level.objectivehintpreparezone = #"mp/control_koth";
+  level.objectivehintcapturezone = #"mp/capture_koth";
+  level.objectivehintdefendhq = #"mp/defend_koth";
 
   if(getgametypesetting(#"allowovertime")) {
     level.ontimelimit = &function_a2ef4132;
@@ -392,12 +392,12 @@ updateteamclientfield() {
     return;
   }
 
-  if(ownerteam == # "neutral") {
+  if(ownerteam == #"neutral") {
     level clientfield::set("hardpointteam", 0);
     return;
   }
 
-  if(ownerteam == # "allies") {
+  if(ownerteam == #"allies") {
     level clientfield::set("hardpointteam", 1);
     return;
   }
@@ -465,7 +465,7 @@ onbeginuse(sentient) {
 
   ownerteam = self gameobjects::get_owner_team();
 
-  if(ownerteam == # "neutral") {
+  if(ownerteam == #"neutral") {
     player thread battlechatter::gametype_specific_battle_chatter("hq_protect", player.pers[#"team"]);
     return;
   }
@@ -500,7 +500,7 @@ onzonecapture(sentient) {
   print("<dev string:x52>");
 
   pause_time();
-  string = # "hash_446b7b0b3e4df72e";
+  string = #"hash_446b7b0b3e4df72e";
   level.zone.gameobject.iscontested = 0;
   level.usestartspawns = 0;
 
@@ -624,7 +624,7 @@ give_held_credit(touchlist, team) {
 
 onzoneunoccupied() {
   level notify(#"zone_destroyed");
-  level.kothcapteam = # "neutral";
+  level.kothcapteam = #"neutral";
   level.zone.gameobject.wasleftunoccupied = 1;
   level.zone.gameobject.iscontested = 0;
   level.zone.gameobject recordgameeventnonplayer("hardpoint_empty");
@@ -841,7 +841,7 @@ setupzones() {
       }
     }
 
-    objective_name = # "hardpoint";
+    objective_name = #"hardpoint";
     zone.gameobject = gameobjects::create_use_object(#"neutral", zone.trig, visuals, (0, 0, 0), objective_name);
     zone.gameobject gameobjects::set_objective_entity(zone);
     zone.gameobject gameobjects::disable_object();
@@ -986,7 +986,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
 
     ownerteam = level.zone.gameobject.ownerteam;
 
-    if(!isDefined(ownerteam) || ownerteam == # "neutral") {
+    if(!isDefined(ownerteam) || ownerteam == #"neutral") {
       return;
     }
   }
@@ -997,7 +997,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       ownerteam = victim.touchtriggers[triggerids[0]].useobj.ownerteam;
     }
 
-    if(ownerteam != # "neutral") {
+    if(ownerteam != #"neutral") {
       attacker.lastkilltime = gettime();
       team = attacker.pers[#"team"];
 
@@ -1066,7 +1066,7 @@ function_610d3790(einflictor, victim, idamage, weapon) {
       ownerteam = attacker.touchtriggers[triggerids[0]].useobj.ownerteam;
     }
 
-    if(ownerteam != # "neutral") {
+    if(ownerteam != #"neutral") {
       team = victim.pers[#"team"];
 
       if(team == ownerteam) {
@@ -1151,7 +1151,7 @@ updatecapsperminute(lastownerteam) {
     self.capsperminute = 0;
   }
 
-  if(!isDefined(lastownerteam) || lastownerteam == # "neutral") {
+  if(!isDefined(lastownerteam) || lastownerteam == #"neutral") {
     return;
   }
 

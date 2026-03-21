@@ -215,7 +215,7 @@ function_f4970a20(watcher, player) {
   player.shrouds[player.shrouds.size] = self;
   waitresult = self waittilltimeout(5, #"stationary");
 
-  if(waitresult._notify == # "timeout") {
+  if(waitresult._notify == #"timeout") {
     function_4db10465();
     return;
   }

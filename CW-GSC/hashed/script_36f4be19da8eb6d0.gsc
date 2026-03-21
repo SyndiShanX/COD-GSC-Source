@@ -126,7 +126,7 @@ function private preinit() {
   }
 
   if(!isinarray(level.var_faabb06f, #"ww_ieu_electric_t9")) {
-    level.var_faabb06f[level.var_faabb06f.size] = # "ww_ieu_electric_t9";
+    level.var_faabb06f[level.var_faabb06f.size] = #"ww_ieu_electric_t9";
   }
 
   if(!isDefined(level.var_faabb06f)) {
@@ -136,7 +136,7 @@ function private preinit() {
   }
 
   if(!isinarray(level.var_faabb06f, #"ww_ieu_electric_t9_upgraded")) {
-    level.var_faabb06f[level.var_faabb06f.size] = # "ww_ieu_electric_t9_upgraded";
+    level.var_faabb06f[level.var_faabb06f.size] = #"ww_ieu_electric_t9_upgraded";
   }
 }
 
@@ -444,7 +444,7 @@ function function_33fb41f6(params) {
       if(!isDefined(self.var_423a9ef2)) {
         self callback::callback(#"hash_7f690ab86160d4f6");
 
-        if(isactor(self) && self.zm_ai_category !== # "boss") {
+        if(isactor(self) && self.zm_ai_category !== #"boss") {
           self clientfield::set("" + # "hash_48257c0dba76b140", 1);
         }
 
@@ -479,11 +479,11 @@ function function_4adc16f(params) {
   var_bdbde2d2 = function_51986fd2(params.weapon, params.smeansofdeath);
   var_11c67a51 = function_3f1cb8ec(params.weapon, params.smeansofdeath);
 
-  if(var_bdbde2d2 == # "" || var_11c67a51 == 0) {
+  if(var_bdbde2d2 == #"" || var_11c67a51 == 0) {
     return;
   }
 
-  if(var_bdbde2d2 == # "hash_659e542bc102c218" && isDefined(self.archetype) && self.archetype != # "hash_7c0d83ac1e845ac2") {
+  if(var_bdbde2d2 == #"hash_659e542bc102c218" && isDefined(self.archetype) && self.archetype != #"hash_7c0d83ac1e845ac2") {
     return;
   }
 
@@ -990,7 +990,7 @@ function function_6dbf1bb3(player, var_77c89bbd = 1, start_pos = undefined) {
   if(!isDefined(start_pos)) {
     var_c848a436 = array("j_elbow_le", "j_elbow_ri", "j_shoulder_le", "j_shoulder_ri", "j_spine4", "j_head");
 
-    if(self.archetype == # "zombie_dog") {
+    if(self.archetype == #"zombie_dog") {
       var_c848a436 = array("j_spine2", "j_spine3", "j_spine4", "j_neck", "j_head");
     }
 
@@ -1179,7 +1179,7 @@ function function_21b7e322() {
 }
 
 function function_fb58c072(params) {
-  if(self.archetype === # "zombie_dog") {
+  if(self.archetype === #"zombie_dog") {
     self function_21b7e322();
     return;
   }
@@ -1349,7 +1349,7 @@ function function_88d1f10d(params) {
   a_targets = getentitiesinradius(centroid, 64, 15);
 
   foreach(ai in a_targets) {
-    if(!isDefined(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "zombie_dog" && ai.archetype !== # "nova_crawler" || ai getteam() !== level.zombie_team) {
+    if(!isDefined(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"zombie_dog" && ai.archetype !== #"nova_crawler" || ai getteam() !== level.zombie_team) {
       continue;
     }
 
@@ -1746,7 +1746,7 @@ function private get_closest_tag(v_pos) {
 function function_3a84d307(e_target, v_target_pos, weapon) {
   var_d3c8f6cd = self function_c3b3603d(weapon, 0);
 
-  if(e_target.archetype === # "zombie") {
+  if(e_target.archetype === #"zombie") {
     str_hitloc = "torso_lower";
     str_tag = e_target get_closest_tag(v_target_pos);
 
@@ -1780,7 +1780,7 @@ function function_4a074bb5(weapon) {
     if(isDefined(a_trace[#"entity"])) {
       e_last_target = a_trace[#"entity"];
 
-      if((isvehicle(e_last_target) && e_last_target getteam() === level.zombie_team || isDefined(e_last_target.zm_ai_category)) && e_last_target.team !== # "allies" || isinarray(zm_utility::function_d34f6296(), e_last_target)) {
+      if((isvehicle(e_last_target) && e_last_target getteam() === level.zombie_team || isDefined(e_last_target.zm_ai_category)) && e_last_target.team !== #"allies" || isinarray(zm_utility::function_d34f6296(), e_last_target)) {
         self thread function_3a84d307(e_last_target, var_1c218ece, weapon);
       }
 

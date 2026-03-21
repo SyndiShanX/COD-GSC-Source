@@ -112,7 +112,7 @@ function_62318121(homunculus, ent) {
 }
 
 event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == # "homunculus") {
+  if(eventstruct.weapon.name == #"homunculus") {
     grenade = eventstruct.projectile;
     grenade ghost();
     grenade.angles = self.angles;

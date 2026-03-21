@@ -28,7 +28,7 @@ _createsquadplanner(team) {
 }
 
 createcommander() {
-  team = # "allies";
+  team = #"allies";
   commander = plannercommanderutility::createcommander(team, _createcommanderplanner(team), _createsquadplanner(team));
   plannergenericcommander::commanderdaemons(commander);
   plannercommanderutility::adddaemon(commander, "daemonZmBlockers");

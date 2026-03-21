@@ -106,7 +106,7 @@ function function_1a038e0b() {
   unitrigger_stub.script_length = 72;
   unitrigger_stub.require_look_at = 0;
   unitrigger_stub.targetname = "random_vapor_altar_stub";
-  unitrigger_stub.hint_string = # "zombie/need_power";
+  unitrigger_stub.hint_string = #"zombie/need_power";
   unitrigger_stub.script_struct = self;
   zm_unitrigger::unitrigger_force_per_player_triggers(unitrigger_stub, 1);
   unitrigger_stub.prompt_and_visibility_func = &function_6842bdd7;
@@ -178,33 +178,33 @@ function function_6842bdd7(player) {
       switch (var_e308e3ba) {
         case 0:
           if(player function_8b1a219a()) {
-            str_altar = # "hash_17ff339e7f75ae18";
+            str_altar = #"hash_17ff339e7f75ae18";
           } else {
-            str_altar = # "hash_7e97aa53c3038fb4";
+            str_altar = #"hash_7e97aa53c3038fb4";
           }
 
           break;
         case 1:
           if(player function_8b1a219a()) {
-            str_altar = # "hash_5eaee5bec056161d";
+            str_altar = #"hash_5eaee5bec056161d";
           } else {
-            str_altar = # "hash_133c9b7b564b707f";
+            str_altar = #"hash_133c9b7b564b707f";
           }
 
           break;
         case 2:
           if(player function_8b1a219a()) {
-            str_altar = # "hash_2599dfad21d29341";
+            str_altar = #"hash_2599dfad21d29341";
           } else {
-            str_altar = # "hash_726a5f9b0d18c78b";
+            str_altar = #"hash_726a5f9b0d18c78b";
           }
 
           break;
         case 3:
           if(player function_8b1a219a()) {
-            str_altar = # "hash_497917c49187deea";
+            str_altar = #"hash_497917c49187deea";
           } else {
-            str_altar = # "hash_228c88065496b9fe";
+            str_altar = #"hash_228c88065496b9fe";
           }
 
           break;
@@ -225,73 +225,73 @@ function function_6842bdd7(player) {
     switch (s_altar.var_62fef0f1) {
       case # "specialty_additionalprimaryweapon":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_7a82d19279cc6daf";
+          var_5137b086 = #"hash_7a82d19279cc6daf";
         } else {
-          var_5137b086 = # "hash_481e84e3d5747771";
+          var_5137b086 = #"hash_481e84e3d5747771";
         }
 
         break;
       case # "hash_47d7a8105237c88":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_58febf66d0aaf436";
+          var_5137b086 = #"hash_58febf66d0aaf436";
         } else {
-          var_5137b086 = # "hash_514ee426b54c1122";
+          var_5137b086 = #"hash_514ee426b54c1122";
         }
 
         break;
       case # "specialty_cooldown":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_279db126c954111";
+          var_5137b086 = #"hash_279db126c954111";
         } else {
-          var_5137b086 = # "hash_c5eaf038e40129b";
+          var_5137b086 = #"hash_c5eaf038e40129b";
         }
 
         break;
       case # "talent_deadshot":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_2f89c70e07ddab1c";
+          var_5137b086 = #"hash_2f89c70e07ddab1c";
         } else {
-          var_5137b086 = # "hash_554eba058d6a7c30";
+          var_5137b086 = #"hash_554eba058d6a7c30";
         }
 
         break;
       case # "specialty_electriccherry":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_5fc8f9fbce3e5074";
+          var_5137b086 = #"hash_5fc8f9fbce3e5074";
         } else {
-          var_5137b086 = # "hash_2d6886135fa75f38";
+          var_5137b086 = #"hash_2d6886135fa75f38";
         }
 
         break;
       case # "talent_speedcola":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_1589f4207559932b";
+          var_5137b086 = #"hash_1589f4207559932b";
         } else {
-          var_5137b086 = # "hash_1c530c71188469b5";
+          var_5137b086 = #"hash_1c530c71188469b5";
         }
 
         break;
       case # "talent_quickrevive":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_1c6b895369b478b4";
+          var_5137b086 = #"hash_1c6b895369b478b4";
         } else {
-          var_5137b086 = # "hash_45143147d543f878";
+          var_5137b086 = #"hash_45143147d543f878";
         }
 
         break;
       case # "talent_staminup":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_307615269eadecab";
+          var_5137b086 = #"hash_307615269eadecab";
         } else {
-          var_5137b086 = # "hash_461fdf40d1afda35";
+          var_5137b086 = #"hash_461fdf40d1afda35";
         }
 
         break;
       case # "specialty_widowswine":
         if(player function_8b1a219a()) {
-          var_5137b086 = # "hash_4d8ca83f86b22f28";
+          var_5137b086 = #"hash_4d8ca83f86b22f28";
         } else {
-          var_5137b086 = # "hash_62a4738313dcd9c4";
+          var_5137b086 = #"hash_62a4738313dcd9c4";
         }
 
         break;

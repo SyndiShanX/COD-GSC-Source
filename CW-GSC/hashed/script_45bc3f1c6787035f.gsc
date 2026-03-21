@@ -25,7 +25,7 @@ function on_player_connect() {
 function on_item_pickup(s_params) {
   itementry = s_params.item.itementry;
 
-  if(itementry.itemtype === # "survival_essence") {
+  if(itementry.itemtype === #"survival_essence") {
     if(isPlayer(self)) {
       e_player = self;
     } else {
@@ -69,7 +69,7 @@ function on_ai_killed(s_params) {
   if(!isDefined(var_b25755cf)) {
     var_b25755cf = 10;
 
-    if(self.subarchetype === # "hash_7a778318514578f7" || self.subarchetype === # "zombie_medium_armor") {
+    if(self.subarchetype === #"hash_7a778318514578f7" || self.subarchetype === #"zombie_medium_armor") {
       var_b25755cf = 20;
     } else {
       switch (self.archetype) {

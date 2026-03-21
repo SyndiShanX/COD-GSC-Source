@@ -37,7 +37,7 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === # "cu14_item") {
+  if(itementry.name === #"cu14_item") {
     self function_895b40e4();
   }
 }
@@ -54,7 +54,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != # "eq_acid_bomb" && weapon.name != # "wraith_fire_fire" && weapon.name != # "eq_wraith_fire") {
+  if(weapon.name != #"eq_acid_bomb" && weapon.name != #"wraith_fire_fire" && weapon.name != #"eq_wraith_fire") {
     return;
   }
 

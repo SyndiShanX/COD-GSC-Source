@@ -260,7 +260,7 @@ function private function_1201b5da(medal) {
   for(i = 0; i < round_info.challenges.size; i++) {
     challenge = round_info.challenges[i];
 
-    if(challenge.name == # "give_reward") {
+    if(challenge.name == #"give_reward") {
       return challenge;
     }
   }

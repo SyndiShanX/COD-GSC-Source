@@ -28,7 +28,7 @@ function_2613aeec(enabled) {
 }
 
 function_1c4b5097(item) {
-  if(isDefined(item.itementry) && item.itementry.name === # "cu31_item") {
+  if(isDefined(item.itementry) && item.itementry.name === #"cu31_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {

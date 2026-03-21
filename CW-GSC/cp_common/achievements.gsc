@@ -202,7 +202,7 @@ function function_2240fcb8(eattacker, evictim, eweapon) {
 }
 
 function function_8b531812(eplayer, evictim) {
-  if(isDefined(evictim.var_e2f6147a) && evictim.var_e2f6147a == eplayer && evictim.team !== # "allies") {
+  if(isDefined(evictim.var_e2f6147a) && evictim.var_e2f6147a == eplayer && evictim.team !== #"allies") {
     eplayer give_achievement(#"hash_1f0a3ec94eff5513");
   }
 }

@@ -21,7 +21,7 @@ __init__() {
   }
 
   level.var_ef215639 = [1: # "hash_1483048e184df991", 2: # "hash_5b96bc3a1c23c571", 3: "evt_death_circle_strong"];
-  level.var_cb450873 = # "hash_313f1d0b4ff27caa";
+  level.var_cb450873 = #"hash_313f1d0b4ff27caa";
   level.var_f6795a59 = [1: # "hash_7c7ea03189fe65d8", 2: # "hash_5c64e89ab323857a", 3: # "hash_3fc5123369b4c59f"];
   level.var_601fc3c5 = [1: # "wz/fx8_player_outside_circle", 2: # "hash_474c4d87482063e0", 3: # "hash_474c4e8748206593"];
   level.var_7e948a2d = [1: # "wz/fx8_plyr_pstfx_barrier_lvl_01_wz", 2: # "hash_2ccb19ff6223b693", 3: # "hash_559017f41745034e"];
@@ -40,8 +40,8 @@ function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   self notify(#"hash_49f273cd81c6c0f");
 
   if(newval) {
-    var_899562cf = self.team == # "neutral";
-    var_929604bb = self.team != # "neutral";
+    var_899562cf = self.team == #"neutral";
+    var_929604bb = self.team != #"neutral";
     self setcompassicon("minimap_collapse_ring");
     self function_811196d1(0);
     self function_95bc465d(1);

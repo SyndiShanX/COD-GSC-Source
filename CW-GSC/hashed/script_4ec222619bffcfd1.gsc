@@ -380,7 +380,7 @@ function function_c26120ff(ent) {
 
   if(isfemale) {
     prefix = "female";
-  } else if(head == # "c_t9_cp_usa_hero_adler_head1_kgb_officer") {
+  } else if(head == #"c_t9_cp_usa_hero_adler_head1_kgb_officer") {
     prefix = "adler";
   }
 

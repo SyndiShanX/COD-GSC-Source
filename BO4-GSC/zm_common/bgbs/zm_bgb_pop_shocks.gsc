@@ -136,7 +136,7 @@ tesla_death(player) {
   player zm_stats::increment_challenge_stat(#"hash_133575f669ffc55c");
 
   foreach(weapon in player getweaponslist()) {
-    if(weapon.statname == # "bowie_knife") {
+    if(weapon.statname == #"bowie_knife") {
       player stats::function_e24eec31(weapon, #"hash_657e22dcdd18da77", 1);
       player stats::inc_stat(#"item_stats", weapon.name, #"hash_657e22dcdd18da77", #"statvalue", 1);
     }

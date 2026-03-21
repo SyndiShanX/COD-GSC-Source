@@ -1490,7 +1490,7 @@ function function_df5f0267(dvar) {
 }
 
 function function_b08684ac(event) {
-  if(isPlayer(event.entity) && event.typeorig === "projectile_impact" && event.entity getcurrentweapon().name === # "hash_165cf52ce418f5a1") {
+  if(isPlayer(event.entity) && event.typeorig === "projectile_impact" && event.entity getcurrentweapon().name === #"hash_165cf52ce418f5a1") {
     return true;
   }
 
@@ -1710,7 +1710,7 @@ function force_weapon_loadout(area, visit) {
 
   current_weapon = level.player getcurrentweapon();
 
-  if(isDefined(current_weapon.name) && current_weapon.name == # "hash_165cf52ce418f5a1") {
+  if(isDefined(current_weapon.name) && current_weapon.name == #"hash_165cf52ce418f5a1") {
     level.player val::set("force_weapon_loadout", "disable_weapons", 1);
     wait 0.5;
   }
@@ -2159,7 +2159,7 @@ function pstfx_injection(state = 0) {
 function function_7428d519() {
   self disableaimassist();
   self setteam(#"none");
-  self.propername = # "hash_7f6eed032db2f3ba";
+  self.propername = #"hash_7f6eed032db2f3ba";
 }
 
 function function_be6f6790(var_7bd31922, flag) {
@@ -2277,7 +2277,7 @@ function private function_f78628e6() {
   while(true) {
     gameRef = self.script_noteworthy;
     var_ae865aeb = getscriptbundle(gameRef);
-    var_3b88de0c = # "hash_6ffbe136c9ac4c4e";
+    var_3b88de0c = #"hash_6ffbe136c9ac4c4e";
 
     if(isDefined(var_ae865aeb) && isDefined(var_ae865aeb.var_303ce84a)) {
       var_3b88de0c = var_ae865aeb.var_303ce84a;

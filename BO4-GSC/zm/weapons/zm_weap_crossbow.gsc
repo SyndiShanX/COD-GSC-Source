@@ -109,7 +109,7 @@ function_51f76fdb(inflictor, attacker, damage, flags, smeansofdeath, weapon, vpo
       return -1;
     }
 
-    if(isDefined(self.var_2c2980d3) && self.var_2c2980d3 || self.archetype == # "elephant_rider" || self.archetype == # "dust_ball") {
+    if(isDefined(self.var_2c2980d3) && self.var_2c2980d3 || self.archetype == #"elephant_rider" || self.archetype == #"dust_ball") {
       return -1;
     }
 
@@ -237,7 +237,7 @@ function_615d8c38(params) {
     case # "right_foot":
     case # "left_leg_upper":
       if(isalive(self)) {
-        if(self.archetype == # "zombie") {
+        if(self.archetype == #"zombie") {
           if(is_crossbow_charged(params.weapon) || self.missinglegs && !(isDefined(self.var_410503e) && self.var_410503e)) {
             self thread function_c805f2f9(params);
           } else {
@@ -327,7 +327,7 @@ function_c805f2f9(params) {
 
   player.var_7cfd8159 = array::remove_dead(player.var_7cfd8159);
 
-  if(isDefined(var_5ff12d5f.var_99100b64) && var_5ff12d5f.var_99100b64 || !is_crossbow_charged(w_crossbow) || isDefined(self.var_1df64653) && self.var_1df64653 || isDefined(self.var_427e5396) && self.var_427e5396 || isDefined(self.var_2c2980d3) && self.var_2c2980d3 || params.smeansofdeath === "MOD_MELEE" || self.archetype == # "elephant_rider" || self.archetype == # "dust_ball") {
+  if(isDefined(var_5ff12d5f.var_99100b64) && var_5ff12d5f.var_99100b64 || !is_crossbow_charged(w_crossbow) || isDefined(self.var_1df64653) && self.var_1df64653 || isDefined(self.var_427e5396) && self.var_427e5396 || isDefined(self.var_2c2980d3) && self.var_2c2980d3 || params.smeansofdeath === "MOD_MELEE" || self.archetype == #"elephant_rider" || self.archetype == #"dust_ball") {
     if(isDefined(self.var_427e5396) && self.var_427e5396 || isDefined(self.var_2c2980d3) && self.var_2c2980d3) {
       return;
     }
@@ -339,7 +339,7 @@ function_c805f2f9(params) {
     if(isDefined(params.vdir) && self.health <= 0) {
       if(params.shitloc === "head" || params.shitloc === "helmet") {
         gibserverutils::gibhead(self);
-      } else if(self.archetype === # "zombie") {
+      } else if(self.archetype === #"zombie") {
         self zombie_utility::derive_damage_refs(params.vpoint);
       }
 
@@ -427,7 +427,7 @@ function_c805f2f9(params) {
     self.instakill_func = undefined;
     self clientfield::set("" + # "hash_37c2ef99d645cf87", 0);
 
-    if(self.health <= 0 && self.archetype !== # "elephant") {
+    if(self.health <= 0 && self.archetype !== #"elephant") {
       self playSound("wpn_scorpion_zombie_explode");
       gibserverutils::annihilate(self);
       v_origin = self.origin;
@@ -533,12 +533,12 @@ function_e1c4ab06(params) {
     level.var_7cfd8159 = array::remove_dead(level.var_7cfd8159);
     a_zombies = array::exclude(getaiteamarray(level.zombie_team), level.var_7cfd8159);
 
-    if(self.archetype === # "elephant" && isDefined(self.ai) && isDefined(self.ai.riders)) {
+    if(self.archetype === #"elephant" && isDefined(self.ai) && isDefined(self.ai.riders)) {
       a_zombies = array::exclude(a_zombies, self.ai.riders);
     }
 
     foreach(ai in a_zombies) {
-      if(isalive(ai) && ai function_8a514a61(v_origin, w_crossbow) && ai.archetype !== # "dust_ball") {
+      if(isalive(ai) && ai function_8a514a61(v_origin, w_crossbow) && ai.archetype !== #"dust_ball") {
         if(!(isDefined(ai.var_427e5396) && ai.var_427e5396)) {
           if(isDefined(player)) {
             if(!isDefined(player.var_d382ba7a)) {

@@ -137,7 +137,7 @@ function function_2cadff8e() {
   self.destroyfunc = &destroyhelicopter;
   self.soundmod = "heli";
   self.targetname = "chopper";
-  self.team = # "allies";
+  self.team = #"allies";
   self setteam(#"allies");
   self.target_offset = (0, 0, 0);
   self.var_54b19f55 = 1;
@@ -431,7 +431,7 @@ function function_41d2eebc(params, chopper) {
   grenade = params.projectile;
   waitresult = grenade waittill(#"explode", #"death");
 
-  if(waitresult._notify === # "explode") {
+  if(waitresult._notify === #"explode") {
     chopper.var_94e122a8 = grenade.origin;
     chopper.var_1768de8f = util::spawn_model("tag_origin", chopper.var_94e122a8, (0, 0, 0));
     chopper.var_5b7a23a6 = getclosestpointonnavmesh(grenade.origin, 1000);

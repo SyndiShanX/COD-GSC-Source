@@ -84,7 +84,7 @@ function function_d7c9c129() {
       v_angles = anglesToForward(self getplayerangles());
       a_trace = bulletTrace(v_origin, v_origin + vectorscale(v_angles, 30000), 1, level.var_7466d419, 1, 0, self);
       var_fd92bc1 = a_trace[#"entity"];
-      str_name = # "";
+      str_name = #"";
       var_dfc4aab4 = 0;
 
       if(isDefined(var_fd92bc1)) {
@@ -107,7 +107,7 @@ function function_d7c9c129() {
 
         if(isDefined(v_hit) && istouching(v_hit, var_e583559a)) {
           var_2f37fbd = 1;
-          str_name = # "hash_37c430482010f0d0";
+          str_name = #"hash_37c430482010f0d0";
           var_dfc4aab4 = 1;
         }
       }

@@ -647,7 +647,7 @@ function function_f25690c1(team) {
 }
 
 function function_4b670b29() {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return false;
   }
 
@@ -1054,7 +1054,7 @@ function showobjectivenotificationuiforallplayers(missiontype, delay) {
   foreach(player in level.players) {
     team = player.pers[#"team"];
 
-    if(team === # "spectator") {
+    if(team === #"spectator") {
       continue;
     }
 
@@ -1170,7 +1170,7 @@ function wavespawntimer() {
     return;
   }
 
-  while(game.state == # "playing") {
+  while(game.state == #"playing") {
     time = gettime();
     notified = 0;
 
@@ -1699,14 +1699,14 @@ function private function_9113e843() {
 }
 
 function private function_e8cd6051() {
-  result = # "draw";
+  result = #"draw";
 
   if(!match::get_flag("tie") && match::function_c10174e7()) {
     result = match::get_winning_team();
   }
 
-  if(result == "tie" || result == # "none") {
-    result = # "draw";
+  if(result == "tie" || result == #"none") {
+    result = #"draw";
   }
 
   return result;
@@ -2427,7 +2427,7 @@ function checktimelimit() {
 }
 
 function checkscorelimit() {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -2453,7 +2453,7 @@ function checkscorelimit() {
 }
 
 function checksuddendeathscorelimit(team) {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -2473,7 +2473,7 @@ function checksuddendeathscorelimit(team) {
 }
 
 function checkroundscorelimit() {
-  if(game.state != # "playing") {
+  if(game.state != #"playing") {
     return;
   }
 
@@ -2864,15 +2864,15 @@ function updateteamstatus() {
   resetteamvariables(#"none");
 
   foreach(player in getplayers()) {
-    if(level.teambased || player.team == # "spectator") {
+    if(level.teambased || player.team == #"spectator") {
       team = player.team;
     } else {
-      team = # "none";
+      team = #"none";
     }
 
     playerclass = player.curclass;
 
-    if(team != # "spectator" && (isDefined(playerclass) && playerclass != "" || !loadout::function_87bcb1b())) {
+    if(team != #"spectator" && (isDefined(playerclass) && playerclass != "" || !loadout::function_87bcb1b())) {
       level.playercount[team]++;
 
       if(isbot(player)) {
@@ -3093,7 +3093,7 @@ function timelimitclock() {
     clockobject.targetname = "timeLimitClock";
   }
 
-  var_df4e70cd = # "hash_6c97261a8e7dd055";
+  var_df4e70cd = #"hash_6c97261a8e7dd055";
 
   while(!gamestate::is_game_over() && is_true(level.var_8e3a3faf)) {
     using_tickets_as_time = level.timelimit == 0 && isDefined(level.low_tickets_enabled) && isDefined(level.get_tickets_as_time);
@@ -3144,7 +3144,7 @@ function timelimitclock() {
       }
 
       if(timeleftint <= level.var_537d4629) {
-        var_df4e70cd = # "hash_470c729e4c6298b2";
+        var_df4e70cd = #"hash_470c729e4c6298b2";
       }
 
       if(timeleftint <= level.var_537d4629 || timeleftint <= level.var_1cc83170 && timeleftint % 2 == 0 || level.low_ticket_count === 1 && timeleftint % 2 == 0 || level.very_low_ticket_count === 1) {
@@ -3338,7 +3338,7 @@ function function_2960a822(activeteamcount) {
     }
 
     foreach(key, team in activeteamcount) {
-      if(key == # "any") {
+      if(key == #"any") {
         continue;
       }
 
@@ -3401,7 +3401,7 @@ function function_bf2901cf() {
         var_15016392 = player player::function_114b77dd(time, var_94fab29);
       }
 
-      assert(isDefined(level.teams[player.team]) || player.team == # "spectator" || player.team == # "none");
+      assert(isDefined(level.teams[player.team]) || player.team == #"spectator" || player.team == #"none");
 
       if(isDefined(level.teams[player.team])) {
         var_1cee3797++;
@@ -3610,7 +3610,7 @@ function graceperiod() {
     for(i = 0; i < players.size; i++) {
       player = players[i];
 
-      if(!player.hasspawned && player.sessionteam != # "spectator" && !isalive(player)) {
+      if(!player.hasspawned && player.sessionteam != #"spectator" && !isalive(player)) {
         player.statusicon = "hud_status_dead";
       }
     }
@@ -3681,28 +3681,28 @@ function function_b9b7618() {
     assert(isDefined(game.attackers) && isDefined(game.defenders));
     assert(game.attackers != game.defenders);
     gamestate::set_state(#"pregame");
-    game.strings[#"press_to_spawn"] = # "hash_203ff65a4ee460e6";
+    game.strings[#"press_to_spawn"] = #"hash_203ff65a4ee460e6";
 
     if(level.teambased) {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_teams";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_teams";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     } else {
-      game.strings[#"waiting_for_teams"] = # "mp/waiting_for_players";
-      game.strings[#"opponent_forfeiting_in"] = # "mp/opponent_forfeiting_in";
+      game.strings[#"waiting_for_teams"] = #"mp/waiting_for_players";
+      game.strings[#"opponent_forfeiting_in"] = #"mp/opponent_forfeiting_in";
     }
 
-    game.strings[#"hash_2c24048870125b69"] = # "hash_5b89787111eb4479";
-    game.strings[#"match_starting_in"] = # "hash_18e58cc95db34427";
-    game.strings[#"spawn_next_round"] = # "mp/spawn_next_round";
-    game.strings[#"waiting_to_spawn"] = # "mp/waiting_to_spawn";
-    game.strings[#"waiting_to_spawn_ss"] = # "hash_78bf3a61cf52e257";
-    game.strings[#"you_will_spawn"] = # "hash_53c0ba6abce1c0ea";
-    game.strings[#"match_starting"] = # "mp/match_starting";
-    game.strings[#"change_class"] = # "mp/change_class_next_spawn";
-    game.strings[#"item_on_respawn"] = # "hash_220160808c99fe71";
-    game.strings[#"hash_b71875e85956ea"] = # "hash_61f8bf2959b7bd5a";
-    game.strings[#"last_stand"] = # "hash_5732d212e4511a00";
-    game.strings[#"cowards_way"] = # "hash_268e464278a2f8ff";
+    game.strings[#"hash_2c24048870125b69"] = #"hash_5b89787111eb4479";
+    game.strings[#"match_starting_in"] = #"hash_18e58cc95db34427";
+    game.strings[#"spawn_next_round"] = #"mp/spawn_next_round";
+    game.strings[#"waiting_to_spawn"] = #"mp/waiting_to_spawn";
+    game.strings[#"waiting_to_spawn_ss"] = #"hash_78bf3a61cf52e257";
+    game.strings[#"you_will_spawn"] = #"hash_53c0ba6abce1c0ea";
+    game.strings[#"match_starting"] = #"mp/match_starting";
+    game.strings[#"change_class"] = #"mp/change_class_next_spawn";
+    game.strings[#"item_on_respawn"] = #"hash_220160808c99fe71";
+    game.strings[#"hash_b71875e85956ea"] = #"hash_61f8bf2959b7bd5a";
+    game.strings[#"last_stand"] = #"hash_5732d212e4511a00";
+    game.strings[#"cowards_way"] = #"hash_268e464278a2f8ff";
     [[level.onprecachegametype]]();
     game.gamestarted = 1;
     game.totalkills = 0;
@@ -4348,7 +4348,7 @@ function doweaponspecificcorpseeffects(body, einflictor, attacker, idamage, smea
   }
 
   if(psoffsettime.isheavyweapon && isPlayer(vdir)) {
-    if(psoffsettime.name == # "hero_firefly_swarm") {
+    if(psoffsettime.name == #"hero_firefly_swarm") {
       value = randomint(2) + 1;
 
       if(!isactor(weapon)) {

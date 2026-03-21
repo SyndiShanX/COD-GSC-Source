@@ -236,7 +236,7 @@ function_c025efba(prompt, var_a1258c6b) {
 }
 
 function_2b77bc35() {
-  if(platoons::function_382a49e0() && getteamplatoon(self.team) != # "none" && getteamplatoon(self.team) != # "invalid") {
+  if(platoons::function_382a49e0() && getteamplatoon(self.team) != #"none" && getteamplatoon(self.team) != #"invalid") {
     teams = function_37d3bfcb(getteamplatoon(self.team));
   } else {
     teams = [];
@@ -618,7 +618,7 @@ function_102748f8() {
 laststand_enable_player_weapons() {
   self endon(#"disconnect");
 
-  if(isDefined(self.var_60956d6) && self.var_60956d6.name == # "sig_blade") {
+  if(isDefined(self.var_60956d6) && self.var_60956d6.name == #"sig_blade") {
     wait 0.03;
   }
 
@@ -899,7 +899,7 @@ respawn_player_after_time(n_time_seconds) {
   level endon(#"objective_changed");
   wait n_time_seconds;
 
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     self thread globallogic_spawn::waitandspawnclient();
   }
 }

@@ -49,50 +49,50 @@ function register_clientfields() {
 }
 
 function function_d0ca1d49() {
-  foo = # "hash_2cbf19b375ce697b";
-  foo = # "hash_181d101310c5b7d8";
-  foo = # "hash_7d7aa223a009b278";
-  foo = # "hash_20418753afb5fa52";
-  foo = # "jump_root";
-  foo = # "hash_3436ce80f0d5c5d0";
-  foo = # "grapple_root";
-  foo = # "walk_root";
-  foo = # "hash_2623a8dc653f53c4";
-  foo = # "transition_root";
-  foo = # "fall_root";
-  foo = # "hash_2090be0c418abec4";
-  foo = # "hash_253100c3583a80f1";
-  foo = # "hash_544c94c5fbac431c";
-  foo = # "hash_6d1d6fcd128ab7b4";
-  foo = # "ads_root";
-  foo = # "settle_root";
-  foo = # "recoil_root";
-  foo = # "hash_35002f9f1e35c896";
-  foo = # "hash_297b5219ec680c76";
-  foo = # "hash_505dc71b920e6128";
-  foo = # "hash_8a348f3fe0535d0";
-  foo = # "hash_5882b6a8f9547351";
-  foo = # "hash_7b2e004311415ea7";
-  foo = # "hash_463834f670f7faac";
-  foo = # "hash_50eb3266c73376fa";
-  foo = # "hash_59f0d889b0d9e974";
-  foo = # "hash_46bfeaeb90cf3db4";
-  foo = # "hash_715acca500367619";
-  foo = # "hash_3f7121fa3e7804ba";
-  foo = # "hash_7b8cee431191d495";
-  foo = # "hash_7799488d593a04fa";
-  foo = # "hash_6bd7b78c7f75bb76";
-  foo = # "hash_38e2dc706b6e3aca";
-  foo = # "hash_42d9eb2ff30acbf";
-  foo = # "hash_3df08d3b3ec03a70";
-  foo = # "hash_2e3ee9672a69326f";
-  foo = # "hash_1d257299f8fcb384";
-  foo = # "hash_50816054223f50e6";
-  foo = # "hash_1df06c8b694f7f87";
-  foo = # "hash_19944d4fce93c20a";
-  foo = # "gesture_pitch";
-  foo = # "gesture_yaw";
-  foo = # "hash_7dd72283dd0ab6f6";
+  foo = #"hash_2cbf19b375ce697b";
+  foo = #"hash_181d101310c5b7d8";
+  foo = #"hash_7d7aa223a009b278";
+  foo = #"hash_20418753afb5fa52";
+  foo = #"jump_root";
+  foo = #"hash_3436ce80f0d5c5d0";
+  foo = #"grapple_root";
+  foo = #"walk_root";
+  foo = #"hash_2623a8dc653f53c4";
+  foo = #"transition_root";
+  foo = #"fall_root";
+  foo = #"hash_2090be0c418abec4";
+  foo = #"hash_253100c3583a80f1";
+  foo = #"hash_544c94c5fbac431c";
+  foo = #"hash_6d1d6fcd128ab7b4";
+  foo = #"ads_root";
+  foo = #"settle_root";
+  foo = #"recoil_root";
+  foo = #"hash_35002f9f1e35c896";
+  foo = #"hash_297b5219ec680c76";
+  foo = #"hash_505dc71b920e6128";
+  foo = #"hash_8a348f3fe0535d0";
+  foo = #"hash_5882b6a8f9547351";
+  foo = #"hash_7b2e004311415ea7";
+  foo = #"hash_463834f670f7faac";
+  foo = #"hash_50eb3266c73376fa";
+  foo = #"hash_59f0d889b0d9e974";
+  foo = #"hash_46bfeaeb90cf3db4";
+  foo = #"hash_715acca500367619";
+  foo = #"hash_3f7121fa3e7804ba";
+  foo = #"hash_7b8cee431191d495";
+  foo = #"hash_7799488d593a04fa";
+  foo = #"hash_6bd7b78c7f75bb76";
+  foo = #"hash_38e2dc706b6e3aca";
+  foo = #"hash_42d9eb2ff30acbf";
+  foo = #"hash_3df08d3b3ec03a70";
+  foo = #"hash_2e3ee9672a69326f";
+  foo = #"hash_1d257299f8fcb384";
+  foo = #"hash_50816054223f50e6";
+  foo = #"hash_1df06c8b694f7f87";
+  foo = #"hash_19944d4fce93c20a";
+  foo = #"gesture_pitch";
+  foo = #"gesture_yaw";
+  foo = #"hash_7dd72283dd0ab6f6";
 }
 
 function error(msg) {
@@ -3499,9 +3499,9 @@ function getteammask(team) {
 function getotherteam(team) {
   team = get_team_mapping(team);
 
-  if(team == # "allies") {
+  if(team == #"allies") {
     return # "axis";
-  } else if(team == # "axis") {
+  } else if(team == #"axis") {
     return # "allies";
   } else {
     return # "allies";
@@ -3519,7 +3519,7 @@ function function_668e9d6c(skip_team) {
       continue;
     }
 
-    if(team == # "spectator") {
+    if(team == #"spectator") {
       continue;
     }
 
@@ -3647,7 +3647,7 @@ function private function_4627b63d(alias) {
 function private function_3cb7a62d() {
   assert(isDefined(level.team_mapping));
 
-  if(get_team_mapping("sidea") == # "allies" && get_team_mapping("sideb") == # "axis") {
+  if(get_team_mapping("sidea") == #"allies" && get_team_mapping("sideb") == #"axis") {
     level clientfield::set("cf_team_mapping", 1);
     return;
   }
@@ -3754,7 +3754,7 @@ function function_c16f65a3(enemy_a, enemy_b) {
 }
 
 function function_9db3109f(team, alias) {
-  assert(team == # "allies" || team == # "axis" || team == # "team3");
+  assert(team == #"allies" || team == #"axis" || team == #"team3");
   level.team_mapping_alias[alias] = team;
 }
 
@@ -4102,7 +4102,7 @@ function function_8eb53136(radius) {
 }
 
 function is_spectating() {
-  if(self.sessionstate == # "spectator") {
+  if(self.sessionstate == #"spectator") {
     return true;
   }
 
@@ -4205,7 +4205,7 @@ function function_8561e73e() {
     return;
   }
 
-  if(getdvarstring(#"loot_special_contract_bundle", "") != # "hash_4a2ae4f804e5b4a8") {
+  if(getdvarstring(#"loot_special_contract_bundle", "") != #"hash_4a2ae4f804e5b4a8") {
     profilestop();
     return;
   }
@@ -4233,7 +4233,7 @@ function function_2a269390() {
     return;
   }
 
-  if(getdvarstring(#"loot_special_contract_bundle", "") != # "hash_4693c8962234d1af") {
+  if(getdvarstring(#"loot_special_contract_bundle", "") != #"hash_4693c8962234d1af") {
     profilestop();
     return;
   }
@@ -4261,7 +4261,7 @@ function function_baee40f5() {
     return;
   }
 
-  if(getdvarstring(#"loot_special_contract_bundle", "") != # "hash_c294f0f7edcd8c7") {
+  if(getdvarstring(#"loot_special_contract_bundle", "") != #"hash_c294f0f7edcd8c7") {
     profilestop();
     return;
   }
@@ -4289,7 +4289,7 @@ function function_99c354e1() {
     return;
   }
 
-  if(getdvarstring(#"loot_special_contract_bundle", "") != # "hash_4ddd5f4046a44f9c") {
+  if(getdvarstring(#"loot_special_contract_bundle", "") != #"hash_4ddd5f4046a44f9c") {
     profilestop();
     return;
   }
@@ -4314,7 +4314,7 @@ function function_f67628d4() {
     return;
   }
 
-  if(getdvarstring(#"loot_special_contract_bundle", "") != # "hash_4bb3605f730f2335") {
+  if(getdvarstring(#"loot_special_contract_bundle", "") != #"hash_4bb3605f730f2335") {
     return;
   }
 
@@ -4707,7 +4707,7 @@ function function_49be6dce(player) {
 
 function function_1c8873f6(pause) {
   foreach(player in level.players) {
-    if(player.team != # "spectator") {
+    if(player.team != #"spectator") {
       if(pause) {
         player function_256dd160(player);
         continue;

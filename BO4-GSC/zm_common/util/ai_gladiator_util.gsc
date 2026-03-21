@@ -41,7 +41,7 @@ __main__() {
 function_8c0ab720() {
   n_hp = zm_ai_utility::function_8d44707e(1) * (isDefined(level.var_1b0cc4f5) ? level.var_1b0cc4f5 : 1);
 
-  if(self.subarchetype == # "gladiator_marauder") {
+  if(self.subarchetype == #"gladiator_marauder") {
     n_hp *= 0.7;
     self.var_17a22c08 = 150;
     self playSound(#"zmb_ai_gladiator_spawn_mar");
@@ -55,9 +55,9 @@ function_8c0ab720() {
   self zm_powerup_nuke::function_9a79647b(0.5);
   self zm_score::function_82732ced();
 
-  if(self.subarchetype == # "gladiator_destroyer") {
+  if(self.subarchetype == #"gladiator_destroyer") {
     namespace_81245006::initweakpoints(self, "c_t8_zmb_gladiator_dst_weakpoint_def");
-  } else if(self.subarchetype == # "gladiator_marauder") {
+  } else if(self.subarchetype == #"gladiator_marauder") {
     namespace_81245006::initweakpoints(self, "c_t8_zmb_gladiator_mar_weakpoint_def");
   }
 

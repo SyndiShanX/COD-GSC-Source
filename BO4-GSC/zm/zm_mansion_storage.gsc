@@ -99,12 +99,12 @@ function_63ceee4b(var_a276c861) {
   level thread function_ff726bbb();
   s_waitresult = var_969e8ac2 waittill(#"hash_35caca73b82a6707", #"hash_1184db7e6252576");
 
-  if(s_waitresult._notify == # "hash_35caca73b82a6707") {
+  if(s_waitresult._notify == #"hash_35caca73b82a6707") {
     var_969e8ac2.var_c0ceb69c = s_waitresult.var_537e3893;
     return;
   }
 
-  var_969e8ac2.var_c0ceb69c = # "hash_1184db7e6252576";
+  var_969e8ac2.var_c0ceb69c = #"hash_1184db7e6252576";
 }
 
 function_a1ed8c28(var_a276c861, ended_early) {
@@ -114,7 +114,7 @@ function_a1ed8c28(var_a276c861, ended_early) {
   zm_unitrigger::unregister_unitrigger(level.var_969e8ac2.a_e_books[3].s_unitrigger_stub);
 
   if(var_a276c861 || ended_early) {
-    level.var_969e8ac2.var_c0ceb69c = # "hash_2b73105e32379a57";
+    level.var_969e8ac2.var_c0ceb69c = #"hash_2b73105e32379a57";
   }
 }
 
@@ -274,7 +274,7 @@ function_46348c75() {
 }
 
 function_941b297c(var_22c00989) {
-  if(var_22c00989 == # "east") {
+  if(var_22c00989 == #"east") {
     self.var_872e2994 = struct::get("e_secret_reward_pos", "targetname");
     level thread util::delay(2, undefined, &scene::play, #"p8_fxanim_zm_man_bookcase_01_bundle");
   } else {
@@ -715,17 +715,17 @@ function_cd9f1d74(n_reward) {
       function_a7983bee();
       return;
     case 1:
-      var_b7a9df7c = # "p8_zm_elixir_ctrl_z_ui";
-      str_elixir = # "zm_bgb_ctrl_z";
+      var_b7a9df7c = #"p8_zm_elixir_ctrl_z_ui";
+      str_elixir = #"zm_bgb_ctrl_z";
     case 2:
-      var_b7a9df7c = # "p8_zm_elixir_in_plain_sight_ui";
-      str_elixir = # "zm_bgb_in_plain_sight";
+      var_b7a9df7c = #"p8_zm_elixir_in_plain_sight_ui";
+      str_elixir = #"zm_bgb_in_plain_sight";
     case 3:
-      var_b7a9df7c = # "hash_65291a8ef0716ac6";
-      str_elixir = # "zm_bgb_phantom_reload";
+      var_b7a9df7c = #"hash_65291a8ef0716ac6";
+      str_elixir = #"zm_bgb_phantom_reload";
     case 4:
-      var_b7a9df7c = # "p8_zm_elixir_sword_flay_ui";
-      str_elixir = # "zm_bgb_sword_flay";
+      var_b7a9df7c = #"p8_zm_elixir_sword_flay_ui";
+      str_elixir = #"zm_bgb_sword_flay";
 
       if(isDefined(var_b7a9df7c)) {
         mdl_elixir = util::spawn_model(var_b7a9df7c, s_shelf.origin, s_shelf.angles);
@@ -813,7 +813,7 @@ function_2b75135a(player) {
 
   cursor_hint = "HINT_WEAPON";
   self setcursorhint(cursor_hint, self.stub.w_reward);
-  self.hint_string = # "hash_53005c8d5b45bca3";
+  self.hint_string = #"hash_53005c8d5b45bca3";
   return 1;
 }
 

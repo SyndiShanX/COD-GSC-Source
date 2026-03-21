@@ -193,7 +193,7 @@ function_9c2d463d(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
     t_damage notify(#"trap_finished");
     return;
   }
@@ -533,7 +533,7 @@ function_9699194a(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"boss") {
     return;
   }
 
@@ -763,7 +763,7 @@ function_1f7e661f(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "boss") {
+  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"boss") {
     t_damage notify(#"trap_finished");
     return;
   }
@@ -786,7 +786,7 @@ function_1f7e661f(t_damage) {
   v_hook = t_damage.mdl_trap gettagorigin("tag_weapon_3");
   n_dist = distance2d(self.origin, v_hook);
 
-  if(!(isDefined(t_damage.var_705682df) && t_damage.var_705682df) && self.zm_ai_category === # "basic" && n_dist <= 128 && self.team != # "allies") {
+  if(!(isDefined(t_damage.var_705682df) && t_damage.var_705682df) && self.zm_ai_category === #"basic" && n_dist <= 128 && self.team != #"allies") {
     t_damage.var_705682df = 1;
     self.var_bd4627e1 = 1;
     self clientfield::set("spinning_trap_eye_fx", 1);
@@ -806,7 +806,7 @@ function_1f7e661f(t_damage) {
     self thread a_a_arms();
   }
 
-  if(self.zm_ai_category === # "basic" && !isvehicle(self)) {
+  if(self.zm_ai_category === #"basic" && !isvehicle(self)) {
     str_tag = t_damage.mdl_trap get_closest_tag(self.origin);
 
     if(str_tag === "tag_weapon_1") {
@@ -839,7 +839,7 @@ function_1f7e661f(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category === # "popcorn") {
+  if(self.zm_ai_category === #"popcorn") {
     level notify(#"hash_148b3ce521088846", {
       #e_player: t_damage.activated_by_player
     });
@@ -991,7 +991,7 @@ function_61791b8b(s_pos = self) {
   a_ai_zombies = getaiteamarray(level.zombie_team);
 
   foreach(ai_zombie in a_ai_zombies) {
-    if(ai_zombie.zm_ai_category == # "miniboss" || ai_zombie.zm_ai_category == # "boss") {
+    if(ai_zombie.zm_ai_category == #"miniboss" || ai_zombie.zm_ai_category == #"boss") {
       ai_zombie thread zm_utility::add_poi_to_ignore_list(var_dd239d21);
     }
   }

@@ -144,7 +144,7 @@ function function_9212e29c(s_instance, s_chest) {
   mdl_fx playLoopSound(#"hash_3b2e8e212c9bfb8a");
   wait 1;
   s_chest.scriptmodel = content_manager::spawn_script_model(struct, #"p9_fxanim_zm_gp_chest_01_lrg_gold_xmodel", 1);
-  s_chest.var_422ae63e = # "p9_fxanim_zm_gp_chest_01_lrg_bundle";
+  s_chest.var_422ae63e = #"p9_fxanim_zm_gp_chest_01_lrg_bundle";
   mdl_chest = s_chest.scriptmodel;
   mdl_chest notsolid();
   mdl_chest function_619a5c20();
@@ -227,7 +227,7 @@ function function_19490940(eventstruct) {
 
 function private function_873ab308() {
   var_18d554fc = int(min(level.realm, 4));
-  var_aa19ae = # "hash_31755cceac541303" + var_18d554fc + "_variant_" + randomintrange(1, 4);
+  var_aa19ae = #"hash_31755cceac541303" + var_18d554fc + "_variant_" + randomintrange(1, 4);
 
   if(isDefined(getscriptbundle(var_aa19ae))) {
     return var_aa19ae;

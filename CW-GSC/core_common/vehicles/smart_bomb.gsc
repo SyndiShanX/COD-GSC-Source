@@ -694,7 +694,7 @@ function function_bf16c9ed(einflictor, eattacker, smeansofdeath, weapon) {
     return true;
   }
 
-  if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype != # "bot" && isDefined(smeansofdeath) && smeansofdeath == "MOD_EXPLOSIVE") {
+  if(isDefined(eattacker) && isDefined(eattacker.archetype) && eattacker.archetype != #"bot" && isDefined(smeansofdeath) && smeansofdeath == "MOD_EXPLOSIVE") {
     return true;
   }
 
@@ -717,7 +717,7 @@ function function_ec8d8bbc(einflictor, eattacker, idamage, idflags, smeansofdeat
     return 0;
   }
 
-  if(isDefined(psoffsettime) && isDefined(psoffsettime.archetype) && psoffsettime.archetype != # "bot" && isDefined(modelindex) && modelindex == "MOD_EXPLOSIVE") {
+  if(isDefined(psoffsettime) && isDefined(psoffsettime.archetype) && psoffsettime.archetype != #"bot" && isDefined(modelindex) && modelindex == "MOD_EXPLOSIVE") {
     if(psoffsettime != self && isDefined(vsurfacenormal) && lengthsquared(vsurfacenormal) > 0.1 && (!isDefined(psoffsettime) || psoffsettime.team === self.team) && (!isDefined(vdamageorigin) || vdamageorigin.team === self.team)) {
       self setvehvelocity(self.velocity + vectornormalize(vsurfacenormal) * 300);
       return 1;

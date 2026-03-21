@@ -55,17 +55,17 @@ function private preinit() {
     callback::on_game_playing(&on_game_playing);
     level.var_4e5449b1 = [];
 
-    if(level.script === # "mp_dune") {
+    if(level.script === #"mp_dune") {
       function_549c8ed1((-1977, -973, 936), 225, 128, 45);
       return;
     }
 
-    if(level.script === # "wz_duga") {
+    if(level.script === #"wz_duga") {
       function_549c8ed1((2294.5, 2921, 2816), 200, 128, 30);
       return;
     }
 
-    if(level.script === # "wz_golova") {
+    if(level.script === #"wz_golova") {
       function_549c8ed1((-19440, 4163, 1848), 24, 65, 30);
     }
   }
@@ -140,11 +140,11 @@ function function_c8fb4513(var_63c85287 = 600, var_1f7b3936 = int(600 / 5)) {
   s_result = level waittill(#"objective_ended");
 
   if(is_true(s_result.completed)) {
-    str_reason = # "exfil_success";
-    level.winningteam = # "allies";
+    str_reason = #"exfil_success";
+    level.winningteam = #"allies";
   } else {
-    str_reason = # "exfil_fail";
-    level.winningteam = # "axis";
+    str_reason = #"exfil_fail";
+    level.winningteam = #"axis";
   }
 
   level notify(#"end_game", {
@@ -189,7 +189,7 @@ function function_8c6ab347() {
   a_ai = getaiteamarray(level.zombie_team);
 
   foreach(ai in a_ai) {
-    if(!(ai.zm_ai_category === # "normal")) {
+    if(!(ai.zm_ai_category === #"normal")) {
       ai.var_d45ca662 = 1;
     }
   }
@@ -366,7 +366,7 @@ function function_ab0f88ca() {
   self endon("59ba60f87992239b");
   level endon(#"hash_58abffc4e8e535c7", #"hash_6a805bca389d1daf", #"end_game");
 
-  if(level.script === # "mp_black_sea") {
+  if(level.script === #"mp_black_sea") {
     var_2a291abf = 1500;
     n_delay = 15;
   } else {
@@ -390,7 +390,7 @@ function function_ab0f88ca() {
       v_dir = vectornormalize(var_6b6b0446 - player.origin + v_mod);
       v_spawn = player.origin + v_dir * var_2a291abf;
 
-      if(level.script === # "mp_black_sea" || level.script === # "wz_forest") {
+      if(level.script === #"mp_black_sea" || level.script === #"wz_forest") {
         var_c8311b6d = getnavfaceregion(v_spawn, 100);
         var_69ad0d71 = getnavfaceregion(player.origin, 100);
 
@@ -418,7 +418,7 @@ function function_a42a57d2() {
       instances = array::randomize(content_manager::get_children(location));
 
       foreach(instance in instances) {
-        if(instance.content_script_name === # "safehouse") {
+        if(instance.content_script_name === #"safehouse") {
           if(!isDefined(var_6581be33)) {
             var_6581be33 = [];
           } else if(!isarray(var_6581be33)) {
@@ -445,7 +445,7 @@ function function_a68a96e7() {
       instances = array::randomize(content_manager::get_children(location));
 
       foreach(instance in instances) {
-        if(instance.content_script_name === # "exfil") {
+        if(instance.content_script_name === #"exfil") {
           if(!isDefined(var_b81a64be)) {
             var_b81a64be = [];
           } else if(!isarray(var_b81a64be)) {

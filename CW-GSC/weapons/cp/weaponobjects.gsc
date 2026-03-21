@@ -26,7 +26,7 @@ function start_gametype() {
 
 function on_player_spawned() {
   for(watcher = 0; watcher < self.weaponobjectwatcherarray.size; watcher++) {
-    if(self.weaponobjectwatcherarray[watcher].name == # "spike_charge") {
+    if(self.weaponobjectwatcherarray[watcher].name == #"spike_charge") {
       arrayremoveindex(self.weaponobjectwatcherarray, watcher);
     }
   }

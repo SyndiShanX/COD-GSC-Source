@@ -335,7 +335,7 @@ calculate_map_center() {
     }
 
     for(index = 0; index < nodes.size; index++) {
-      if(nodes[index].type == # "bad node") {
+      if(nodes[index].type == #"bad node") {
         println("<dev string:xb4>", nodes[index].origin);
         continue;
       }

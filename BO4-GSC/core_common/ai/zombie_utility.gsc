@@ -200,7 +200,7 @@ initialize(animscript) {
   self.a.scriptstarttime = gettime();
   self.a.atconcealmentnode = 0;
 
-  if(isDefined(self.node) && (self.node.type == # "conceal crouch" || self.node.type == # "conceal stand")) {
+  if(isDefined(self.node) && (self.node.type == #"conceal crouch" || self.node.type == #"conceal stand")) {
     self.a.atconcealmentnode = 1;
   }
 
@@ -535,7 +535,7 @@ showlastenemysightpos(string) {
     return;
   }
 
-  if(self.enemy.team == # "allies") {
+  if(self.enemy.team == #"allies") {
     color = (0.4, 0.7, 1);
   } else {
     color = (1, 0.7, 0.4);
@@ -565,7 +565,7 @@ debugposinternal(org, string, size) {
   ent thread debugtimeout();
   ent endon(#"timeout");
 
-  if(self.enemy.team == # "allies") {
+  if(self.enemy.team == #"allies") {
     color = (0.4, 0.7, 1);
   } else {
     color = (1, 0.7, 0.4);
@@ -660,7 +660,7 @@ checkpitchvisibility(frompoint, topoint, atnode) {
   pitch = angleclamp180(vectortoangles(topoint - frompoint)[0]);
 
   if(abs(pitch) > 45) {
-    if(isDefined(atnode) && atnode.type != # "cover crouch" && atnode.type != # "conceal crouch") {
+    if(isDefined(atnode) && atnode.type != #"cover crouch" && atnode.type != #"conceal crouch") {
       return false;
     }
 
@@ -1511,7 +1511,7 @@ ai_calculate_health(base_health, round_number) {
     }
   }
 
-  if(util::get_game_type() == # "zclassic" && level.gamedifficulty < 2 && round_number > 35) {
+  if(util::get_game_type() == #"zclassic" && level.gamedifficulty < 2 && round_number > 35) {
     round_number = 35;
   }
 
@@ -1593,7 +1593,7 @@ get_zombie_array() {
   enemies = getaispeciesarray(level.zombie_team, "all");
 
   for(i = 0; i < enemies.size; i++) {
-    if(enemies[i].archetype === # "zombie") {
+    if(enemies[i].archetype === #"zombie") {
       if(!isDefined(valid_enemies)) {
         valid_enemies = [];
       } else if(!isarray(valid_enemies)) {
@@ -1712,7 +1712,7 @@ set_zombie_run_cycle(new_move_speed) {
       }
     }
 
-    if(self.archetype === # "zombie" || self.archetype === # "catalyst") {
+    if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
       if(isDefined(self.zm_variant_type_max)) {
         self.variant_type = randomint(self.zm_variant_type_max[self.zombie_move_speed][self.zombie_arms_position]);
       } else {

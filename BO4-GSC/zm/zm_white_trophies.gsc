@@ -170,7 +170,7 @@ function_48f916b(params) {
     return;
   }
 
-  if(params.weapon.name != # "galvaknuckles_t8") {
+  if(params.weapon.name != #"galvaknuckles_t8") {
     return;
   }
 

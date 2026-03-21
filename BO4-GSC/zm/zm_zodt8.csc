@@ -60,17 +60,17 @@ event_handler[level_init] main(eventstruct) {
   setDvar(#"player_shallowwaterwadescale", 1);
   setDvar(#"player_waistwaterwadescale", 1);
   setDvar(#"player_deepwaterwadescale", 1);
-  level._effect[#"headshot"] = # "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = # "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = # "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = # "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = # "blood/fx_blood_gib_limb_trail";
-  level._effect[#"pap_projectile"] = # "hash_6009053e911b946a";
-  level._effect[#"pap_projectile_end"] = # "hash_6c0eb029adb5f6c6";
+  level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[#"animscript_gib_fx"] = #"zombie/fx_blood_torso_explo_zmb";
+  level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
+  level._effect[#"pap_projectile"] = #"hash_6009053e911b946a";
+  level._effect[#"pap_projectile_end"] = #"hash_6c0eb029adb5f6c6";
   level.var_24cb6ae8 = findvolumedecalindexarray("cargo_hold_water_puddles");
   level.var_ec4c3b67 = findvolumedecalindexarray("engine_room_water_puddles");
-  level.var_59d3631c = # "hash_129339f4a4da8ea2";
-  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_zodt8_weapons.csv";
+  level.var_59d3631c = #"hash_129339f4a4da8ea2";
+  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_zodt8_weapons.csv";
   zodt8_pap_quest::init();
   zodt8_sentinel::init();
   namespace_4a807bff::init();
@@ -248,7 +248,7 @@ function_5b0384a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 }
 
 function_53da552d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_a1b31107 = # "hash_d3b7cb6eb2177fb";
+  var_a1b31107 = #"hash_d3b7cb6eb2177fb";
   ww_base = getweapon(#"ww_tricannon_t8");
   addzombieboxweapon(ww_base, var_a1b31107, 0);
 }
@@ -505,7 +505,7 @@ sentinel_artifact_activated(localclientnum, oldval, newval, bnewent, binitialsna
 
     util::playFXOnTag(localclientnum, level._effect[#"sentinel_activate"], self, "tag_fx_x_pos");
 
-    while(isDefined(self) && self.model !== # "hash_2c0078538e398b4f") {
+    while(isDefined(self) && self.model !== #"hash_2c0078538e398b4f") {
       waitframe(1);
     }
 

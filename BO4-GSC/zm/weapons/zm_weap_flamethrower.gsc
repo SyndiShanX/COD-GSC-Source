@@ -161,7 +161,7 @@ function_f63feeb6(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     self thread function_d8ee4d6a(eattacker);
   }
 
-  if(meansofdeath === "MOD_BURNED" && self.health <= idamage && self.zm_ai_category == # "basic") {
+  if(meansofdeath === "MOD_BURNED" && self.health <= idamage && self.zm_ai_category == #"basic") {
     self.var_b364c165 = 1;
   }
 
@@ -171,7 +171,7 @@ function_f63feeb6(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
   }
 
   if(isPlayer(einflictor) && !(isDefined(self.var_d9e7a08a) && self.var_d9e7a08a) && meansofdeath === "MOD_BURNED") {
-    if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
+    if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
       return self.health;
     }
   }
@@ -183,12 +183,12 @@ function_d8ee4d6a(eattacker) {
   self endon(#"death");
   self.var_95468c43 = 1;
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"popcorn") {
     self thread namespace_9ff9f642::slowdown(#"hash_6ff4731de876ab68");
     wait 1;
-  } else if(self.zm_ai_category == # "boss") {
+  } else if(self.zm_ai_category == #"boss") {
     wait 1;
-  } else if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+  } else if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
     if(self zombie_utility::function_33da7a07() !== "walk") {
       self thread function_c95fe16();
     }
@@ -216,7 +216,7 @@ function_c95fe16() {
 function_d8e7e308(v_position) {
   self endon(#"death");
 
-  if(self.zm_ai_category !== # "basic" || self.zm_ai_category !== # "enhanced" || isDefined(self.knockdown) && self.knockdown) {
+  if(self.zm_ai_category !== #"basic" || self.zm_ai_category !== #"enhanced" || isDefined(self.knockdown) && self.knockdown) {
     return;
   }
 
@@ -381,20 +381,20 @@ function_ea906434(e_player, w_flamethrower) {
     return;
   }
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
     self thread function_d8ee4d6a(e_player);
     [[level.var_f2f67d17]] - > waitinqueue(self);
     self dodamage(self.maxhealth * 0.18, e_player.origin, e_player, e_player, "torso_lower", "MOD_IMPACT", 0, w_flamethrower);
   }
 
-  if(self.zm_ai_category == # "heavy") {
+  if(self.zm_ai_category == #"heavy") {
     self thread function_d8ee4d6a(e_player);
     [[level.var_f2f67d17]] - > waitinqueue(self);
     self dodamage(self.maxhealth * 0.2, e_player.origin, e_player, e_player, "torso_lower", "MOD_IMPACT", 0, w_flamethrower);
     return;
   }
 
-  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
+  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
     [[level.var_f2f67d17]] - > waitinqueue(self);
     n_dist = distance2d(self.origin, e_player.origin);
 
@@ -435,7 +435,7 @@ function_ea906434(e_player, w_flamethrower) {
     return;
   }
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     [[level.var_f2f67d17]] - > waitinqueue(self);
     self dodamage(self.health + 100, e_player.origin, e_player, e_player, undefined, "MOD_IMPACT", 0, w_flamethrower);
   }
@@ -693,17 +693,17 @@ function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_lift_spe
   self.var_d9e7a08a = 1;
   v_origin = var_ab287846.origin;
 
-  if(self.zm_ai_category == # "popcorn") {
+  if(self.zm_ai_category == #"popcorn") {
     self.no_powerups = 1;
     self dodamage(self.health + 100, v_origin, e_player, e_player, undefined, "MOD_BURNED", 0, w_flamethrower);
     return;
   }
 
-  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss" || self.zm_ai_category == # "heavy") {
+  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss" || self.zm_ai_category == #"heavy") {
     self endon(#"death");
     [[level.var_f2f67d17]] - > waitinqueue(self);
 
-    if(var_ab287846 function_58942bba(self) && self.zm_ai_category == # "miniboss") {
+    if(var_ab287846 function_58942bba(self) && self.zm_ai_category == #"miniboss") {
       var_ab287846 thread scene::init(#"p8_zm_flame_tornado_miniboss_scene", self);
       self dodamage(self.maxhealth * 0.18, v_origin, e_player, e_player, "none", "MOD_BURNED", 0, w_flamethrower);
       self.var_42d5176d = 1;
@@ -729,7 +729,7 @@ function_72601dd2(e_player, var_ab287846, n_push_away, n_lift_height, n_lift_spe
         self.var_d9e7a08a = undefined;
         self.var_68f4c9de delete();
       }
-    } else if(self.zm_ai_category == # "heavy") {
+    } else if(self.zm_ai_category == #"heavy") {
       self zombie_utility::setup_zombie_knockdown(e_player);
       self dodamage(self.maxhealth * 0.2, v_origin, e_player, e_player, "none", "MOD_BURNED", 0, w_flamethrower);
       wait 1;

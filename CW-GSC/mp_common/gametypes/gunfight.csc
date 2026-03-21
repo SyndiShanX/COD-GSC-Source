@@ -14,12 +14,12 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::register("scriptmover", "scriptid", 1, 1, "int", &function_e116df6c, 0, 0);
   clientfield::register("allplayers", "gunfight_pregame_rob", 9000, 1, "int", &function_f923f745, 0, 0);
   callback::add_callback(#"server_objective", &function_3022f6ba);
-  level.var_9c5e7d9 = # "hash_5b34830d9a8a7f52";
+  level.var_9c5e7d9 = #"hash_5b34830d9a8a7f52";
   level._effect[#"zoneedgemarker"] = [];
-  level._effect[#"zoneedgemarker"][0] = # "ui/fx8_infil_marker_neutral";
-  level._effect[#"zoneedgemarker"][1] = # "hash_5c2ae9f4f331d4b9";
-  level._effect[#"zoneedgemarker"][2] = # "hash_7d1b0f001ea88b82";
-  level._effect[#"zoneedgemarker"][3] = # "hash_7981eb245ea536fc";
+  level._effect[#"zoneedgemarker"][0] = #"ui/fx8_infil_marker_neutral";
+  level._effect[#"zoneedgemarker"][1] = #"hash_5c2ae9f4f331d4b9";
+  level._effect[#"zoneedgemarker"][2] = #"hash_7d1b0f001ea88b82";
+  level._effect[#"zoneedgemarker"][3] = #"hash_7981eb245ea536fc";
   fields = getmapfields();
   level.var_117b4a3a = [];
   level.var_117b4a3a[0] = isDefined(fields.var_306136ca) ? fields.var_306136ca : # "hash_280d5153e1276d";
@@ -51,7 +51,7 @@ function private function_b72cd4c9(localclientnum) {
 
   var_fd9bf390 = function_9b3f0ed1(localclientnum);
 
-  if(self.team !== var_fd9bf390 && game.state === # "pregame") {
+  if(self.team !== var_fd9bf390 && game.state === #"pregame") {
     if(!self function_d2503806(#"hash_1dced6114b72a678")) {
       self playrenderoverridebundle(#"hash_1dced6114b72a678");
     }

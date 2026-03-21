@@ -216,7 +216,7 @@ function function_a6b2f443(vehicle) {
 
       if(vehicle.vehicletype === var_59efbf47.vehicletype) {
         near_dist = 128;
-      } else if(var_59efbf47.vehicletype === # "hash_2c0e11a1e87bbcd5") {
+      } else if(var_59efbf47.vehicletype === #"hash_2c0e11a1e87bbcd5") {
         near_dist = 256;
       }
 
