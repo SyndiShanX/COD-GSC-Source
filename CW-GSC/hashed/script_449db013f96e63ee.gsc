@@ -23,7 +23,7 @@ function start(str_objective) {
   level flag::set("flg_turn_on_rooftop_kill_volume");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   hms_util::function_eaa0342e("rooftop_containment_warnings", "rooftop_containment_fails");
@@ -41,6 +41,6 @@ function function_5a5ce08a() {
   hms_util::dialogue("(Spanish) There they are!", undefined, "axis", "Sandinista 01");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x55>");
 }

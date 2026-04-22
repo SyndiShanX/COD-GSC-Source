@@ -57,8 +57,8 @@ function function_2c620a1d(str_objective) {
   snd::client_msg("audio_level_begin_duck_start");
 }
 
-function function_d033814a(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_d033814a(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level globallogic_ui::function_7bc0e4b9();
   level thread function_c7bb3708();
@@ -74,10 +74,10 @@ function function_d033814a(str_objective, var_50cc0d4f) {
   level thread function_bf20595f();
   level thread function_d2597977();
   level flag::wait_till("flg_perimeter_start");
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function function_34489c64(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_34489c64(str_objective, b_starting, var_aa1a6455, player) {
   level flag::clear("no_corpse_pickup ");
   clientfield::set("cull_mainstreet", 2);
   clientfield::set("cull_facility", 1);
@@ -212,11 +212,11 @@ function function_51e9b894() {
   }
 }
 
-function function_d2597977(var_50cc0d4f = 0) {
+function function_d2597977(b_starting = 0) {
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
 
-  if(var_50cc0d4f == 0) {
+  if(b_starting == 0) {
     level flag::wait_till("flg_forest_approaching_vista");
   }
 
@@ -246,17 +246,17 @@ function function_bdf1abf6(str_objective) {
   namespace_b61bbd82::music("2.0_infiltrate");
 }
 
-function function_ccc536c3(str_objective, var_50cc0d4f) {
+function function_ccc536c3(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::function_7790f03();
   }
 
   level thread function_14ea178a();
   level thread function_fb756f88();
   level.is_dark = 1;
-  level thread function_ed4f7807(var_50cc0d4f);
+  level thread function_ed4f7807(b_starting);
   level thread function_ac248ed1();
   level thread function_21905e6d();
   level thread function_aa2788ec();
@@ -268,7 +268,7 @@ function function_ccc536c3(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_1399c3c8(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_1399c3c8(str_objective, b_starting, var_aa1a6455, player) {
   level flag::set("flg_perimeter_approaching_fence");
   level thread function_be7864ef(player);
 
@@ -381,11 +381,11 @@ function function_f1107b0e() {
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_streetlight_right", 0);
 }
 
-function function_ed4f7807(var_50cc0d4f) {
+function function_ed4f7807(b_starting) {
   level flag::wait_till("flg_amk_player_spawned");
   level.player endon(#"death");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level scene::play("scene_amk_1030_per_reveal", "to_idle_woods");
     level scene::play("scene_amk_1030_per_reveal", "woods_idle_nags4");
     level thread namespace_2977687d::function_504c79a0();
@@ -889,8 +889,8 @@ function function_34f5b376() {
   array::delete_all(var_5d11ac37);
 }
 
-function function_be7864ef(var_50cc0d4f) {
-  if(var_50cc0d4f == 0) {
+function function_be7864ef(b_starting) {
+  if(b_starting == 0) {
     level flag::wait_till("flg_helipad_at_open_ground");
   }
 
@@ -963,8 +963,8 @@ function function_b53f913c(str_objective) {
   namespace_b61bbd82::music("2.0_infiltrate");
 }
 
-function function_4f9d9de3(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_4f9d9de3(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level thread function_db273da1();
   level.is_dark = 1;
@@ -988,7 +988,7 @@ function function_4f9d9de3(str_objective, var_50cc0d4f) {
   }
 
   if(!level flag::get(#"flg_vig_heli_shooting_player")) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -1012,7 +1012,7 @@ function function_c594d332() {
   }
 }
 
-function function_f83ba620(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_f83ba620(str_objective, b_starting, var_aa1a6455, player) {
   if(isDefined(level.var_9d0b8f71)) {
     level.var_9d0b8f71 namespace_fc3e8cb::function_621fafb2();
   }
@@ -1678,10 +1678,10 @@ function function_908a5d78(str_objective) {
   namespace_b61bbd82::music("2.0_infiltrate");
 }
 
-function function_d27fe3f3(str_objective, var_50cc0d4f) {
+function function_d27fe3f3(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::checkpoint_save(1);
   }
 
@@ -1699,7 +1699,7 @@ function function_d27fe3f3(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_56a40f23(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_56a40f23(str_objective, b_starting, var_aa1a6455, player) {
   level flag::set("no_corpse_pickup ");
 }
 

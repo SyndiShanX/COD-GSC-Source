@@ -509,7 +509,7 @@ function function_d849bbf2(str_objective, a_targets) {
     }
 
     foreach(target in a_targets) {
-      if(isDefined(target) && !function_3132f113(target) && target function_31679256(str_objective)) {
+      if(isDefined(target) && !isremovedentity(target) && target function_31679256(str_objective)) {
         if(!isDefined(a_n_objective_ids)) {
           a_n_objective_ids = [];
         } else if(!isarray(a_n_objective_ids)) {

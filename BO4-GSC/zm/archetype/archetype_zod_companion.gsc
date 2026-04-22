@@ -364,8 +364,8 @@ zodcompaniontryreacquireservice(entity) {
 manage_companion_movement(entity) {
   self endon(#"death");
 
-  if(isDefined(level.var_1a612d42) && level.var_1a612d42.eligible_leader) {
-    self.leader = level.var_1a612d42;
+  if(isDefined(level.companion_leader) && level.companion_leader.eligible_leader) {
+    self.leader = level.companion_leader;
   }
 
   if(!isDefined(entity.var_5f694f04)) {
@@ -398,7 +398,7 @@ manage_companion_movement(entity) {
   }
 
   if(isDefined(entity.leader) && entity.leader.is_flung === 1) {
-    entity thread function_d5390a05(entity.leader.var_a76eba5b);
+    entity thread take_flinger(entity.leader.var_a76eba5b);
   }
 
   foreach(player in level.players) {
@@ -548,7 +548,7 @@ function_818f64d1(var_d2a1361a) {
   self.var_8dc43281 = 0;
 }
 
-function_d5390a05(var_33d955f9) {
+take_flinger(var_33d955f9) {
   self endon(#"death");
   self.var_7e56b71c = 1;
   var_cf5caf08 = getnodearray("flinger_traversal", "script_noteworthy");
@@ -949,8 +949,8 @@ function_dbd6fcc6() {
 }
 
 define_new_leader() {
-  if(isDefined(level.var_1a612d42) && level.var_1a612d42.eligible_leader) {
-    self.leader = level.var_1a612d42;
+  if(isDefined(level.companion_leader) && level.companion_leader.eligible_leader) {
+    self.leader = level.companion_leader;
     return;
   }
 

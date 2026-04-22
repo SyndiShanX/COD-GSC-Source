@@ -28,7 +28,7 @@
 #using scripts\cp_common\snd;
 #namespace namespace_a2d2e744;
 
-function function_965213e6(str_objective, var_50cc0d4f) {
+function function_965213e6(str_objective, b_starting) {
   transient = savegame::function_6440b06b(#"transient");
   transient.var_296ec611 = 1;
   savegame::function_7790f03(1);
@@ -36,8 +36,8 @@ function function_965213e6(str_objective, var_50cc0d4f) {
   level thread function_32d297d8();
 }
 
-function function_32d297d8(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_32d297d8(str_objective, b_starting) {
+  if(b_starting) {
     level namespace_5d7a2dac::music("5.8_tension_2");
   }
 
@@ -341,18 +341,18 @@ function function_46e76f7d() {
   function_76f8ca3b();
 }
 
-function function_dfe7cd78(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_dfe7cd78(str_objective, b_starting, var_aa1a6455, player) {
   waitframe(1);
   namespace_b73b9191::function_ee83e03a("cull_inside_bunkerext");
 }
 
-function function_198e08b8(str_objective, var_50cc0d4f) {
+function function_198e08b8(str_objective, b_starting) {
   level thread function_eeb0dce6();
   zipline_fall_position_1 = getent("zipline_fall_position_1", "targetname");
   collapsing_catwalk_mover = getent("collapsing_catwalk_mover", "targetname");
   collapsing_catwalk_end_ref = struct::get("collapsing_catwalk_end_ref", "targetname");
   level thread namespace_8a404420::function_85bd6953();
-  level.ai_woods thread function_822e1b52(var_50cc0d4f);
+  level.ai_woods thread function_822e1b52(b_starting);
   level thread namespace_7468806b::function_e208410b();
   level thread namespace_7468806b::function_e15849a0();
   level thread function_98887da();
@@ -410,11 +410,11 @@ function function_8e7fd8d5(var_6d2c41af, var_8a72b686) {
   }
 }
 
-function function_822e1b52(var_50cc0d4f) {
+function function_822e1b52(b_starting) {
   self endon(#"death");
   self pushplayer(1);
 
-  if(!is_true(var_50cc0d4f)) {
+  if(!is_true(b_starting)) {
     vol_catwalks_fallback = getent("vol_catwalks_fallback_woods", "targetname");
     self setgoal(vol_catwalks_fallback);
     level thread namespace_b73b9191::function_5d981106("ai_catwalks", 0, "f_catwalks_combat_dead");
@@ -444,9 +444,9 @@ function function_eeb0dce6() {
 }
 
 function function_f1f4ca3e() {
-  var_3ba4bf7d = level.player getweaponslistprimaries();
+  a_w_primaries = level.player getweaponslistprimaries();
 
-  foreach(w_primary in var_3ba4bf7d) {
+  foreach(w_primary in a_w_primaries) {
     level.player takeweapon(w_primary);
   }
 
@@ -456,7 +456,7 @@ function function_f1f4ca3e() {
   level.player val::set("zip_fall", "show_weapon_hud", 0);
   level.player val::set("zip_fall", "show_crosshair", 0);
 
-  if(!(level.var_28c22d88[0] == "bunker_encounter")) {
+  if(!(level.skipto_current_objective[0] == "bunker_encounter")) {
     level waittill(#"hash_7abd2158f9add682");
     wait 2;
   }
@@ -482,4 +482,4 @@ function function_9539fa90(str_objective) {
   level flag::set("flg_satcom_birds_trigger");
 }
 
-function function_b366b7a9(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_b366b7a9(str_objective, b_starting, var_aa1a6455, player) {}

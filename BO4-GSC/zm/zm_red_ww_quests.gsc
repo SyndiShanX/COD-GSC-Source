@@ -825,7 +825,7 @@ function_887b7e4b(str_hand, var_b6bc44ed) {
   s_quest.var_a1327d58 notify(#"hand_returned");
   s_quest thread function_530d7ea0(0);
   s_quest.var_a1327d58.var_481aa649 = 1;
-  s_quest.var_a1327d58.var_c76a870a = var_b6bc44ed;
+  s_quest.var_a1327d58.n_ammo_count = var_b6bc44ed;
   s_quest.var_a1327d58 thread function_4c66319a(str_hand);
 }
 
@@ -1286,9 +1286,9 @@ function_4c66319a(str_hand) {
       e_player zm_weapons::weapon_give(w_hand);
       self.holding_weapon = 0;
 
-      if(isDefined(self.var_c76a870a)) {
-        e_player setweaponammoclip(w_hand, self.var_c76a870a);
-        self.var_c76a870a = undefined;
+      if(isDefined(self.n_ammo_count)) {
+        e_player setweaponammoclip(w_hand, self.n_ammo_count);
+        self.n_ammo_count = undefined;
       }
 
       mdl_uncharged_hand thread scene::stop(s_quest.var_99aa2e37);
@@ -2773,12 +2773,12 @@ function_381519d9(var_8290a028, mdl_feather, n_max_height, s_original) {
   while(true) {
     s_result = level waittill(#"ww_ouranos_hit");
     e_player = s_result.player;
-    var_2ed6f142 = e_player getweaponmuzzlepoint();
+    v_view_pos = e_player getweaponmuzzlepoint();
     var_16d329c7 = e_player getweaponforwarddir();
-    v_end_pos = var_2ed6f142 + vectorscale(var_16d329c7, 3000);
-    a_beamtrace = bulletTrace(var_2ed6f142, v_end_pos, 0, e_player);
+    v_end_pos = v_view_pos + vectorscale(var_16d329c7, 3000);
+    a_beamtrace = bulletTrace(v_view_pos, v_end_pos, 0, e_player);
     var_74238e2c = out_of_range_lp_ * out_of_range_lp_;
-    var_1dc736c5 = pointonsegmentnearesttopoint(var_2ed6f142, v_end_pos, var_8290a028.origin);
+    var_1dc736c5 = pointonsegmentnearesttopoint(v_view_pos, v_end_pos, var_8290a028.origin);
     n_dist = distancesquared(var_8290a028.origin, var_1dc736c5);
 
     if(n_dist <= var_74238e2c) {
@@ -2788,7 +2788,7 @@ function_381519d9(var_8290a028, mdl_feather, n_max_height, s_original) {
     waitframe(1);
   }
 
-  n_dist_to_target = distance2d(var_2ed6f142, var_8290a028.origin);
+  n_dist_to_target = distance2d(v_view_pos, var_8290a028.origin);
   n_time = n_dist_to_target / 1500;
 
   if(n_time >= 0.1) {
@@ -3763,12 +3763,12 @@ function_aeaedb3c() {
 
     if(s_result.weapon == level.var_ce3aa8a8 || s_result.weapon == level.var_96059a93) {
       if(isDefined(self.var_b4f85096) && self.var_b4f85096) {
-        var_2ed6f142 = self getweaponmuzzlepoint();
+        v_view_pos = self getweaponmuzzlepoint();
         var_16d329c7 = self getweaponforwarddir();
-        v_end_pos = var_2ed6f142 + vectorscale(var_16d329c7, 3000);
-        a_beamtrace = bulletTrace(var_2ed6f142, v_end_pos, 0, self);
+        v_end_pos = v_view_pos + vectorscale(var_16d329c7, 3000);
+        a_beamtrace = bulletTrace(v_view_pos, v_end_pos, 0, self);
         var_74238e2c = 50 * 50;
-        var_1dc736c5 = pointonsegmentnearesttopoint(var_2ed6f142, v_end_pos, s_tall_brazier.origin);
+        var_1dc736c5 = pointonsegmentnearesttopoint(v_view_pos, v_end_pos, s_tall_brazier.origin);
         n_dist = distancesquared(s_tall_brazier.origin, var_1dc736c5);
 
         if(n_dist <= var_74238e2c && var_1dc736c5[2] > s_tall_brazier.origin[2]) {

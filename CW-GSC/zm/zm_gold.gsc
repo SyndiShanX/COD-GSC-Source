@@ -1256,8 +1256,8 @@ function function_452e5ad6() {
   spawn_points = zm_gametype::get_player_spawns_for_gametype();
   var_98fd8384 = array("zone_village", "zone_village2", "zone_village3", "zone_atrium", "zone_village_house", "zone_village_house2", "zone_radio_room", "zone_peck_quarters", "zone_scientist", "zone_portal_transfer");
   var_a6107c9 = array("zone_bunny_room_1", "zone_bunny_room_2");
-  var_bdf9e3c2 = zm_zonemgr::get_player_zone();
-  var_d9814981 = isinarray(var_98fd8384, var_bdf9e3c2);
+  str_current_zone = zm_zonemgr::get_player_zone();
+  var_d9814981 = isinarray(var_98fd8384, str_current_zone);
   var_d117c934 = [];
 
   foreach(point in spawn_points) {

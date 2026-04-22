@@ -47,7 +47,7 @@ function init() {
 }
 
 function on_player_connect() {
-  if(isDefined(self) && !function_3132f113(self)) {
+  if(isDefined(self) && !isremovedentity(self)) {
     self.resetgameoverhudrequired = 0;
 
     if(!level.hardcoremode) {

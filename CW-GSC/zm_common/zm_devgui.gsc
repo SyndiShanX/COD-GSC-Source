@@ -2748,8 +2748,8 @@ function zombie_devgui_give_bhb() {
     self zm_weapons::weapon_take(self zm_loadout::get_player_tactical_grenade());
   }
 
-  if(isDefined(level.var_5076c574)) {
-    self[[level.var_5076c574]]();
+  if(isDefined(level.zombiemode_devgui_black_hole_bomb_give)) {
+    self[[level.zombiemode_devgui_black_hole_bomb_give]]();
 
     while(true) {
       self givemaxammo(level.w_black_hole_bomb);
@@ -2771,8 +2771,8 @@ function zombie_devgui_give_qed() {
     self zm_weapons::weapon_take(self zm_loadout::get_player_tactical_grenade());
   }
 
-  if(isDefined(level.var_3079bbd7)) {
-    self[[level.var_3079bbd7]]();
+  if(isDefined(level.zombiemode_devgui_quantum_bomb_give)) {
+    self[[level.zombiemode_devgui_quantum_bomb_give]]();
 
     while(true) {
       self givemaxammo(level.w_quantum_bomb);
@@ -2794,8 +2794,8 @@ function zombie_devgui_give_dolls() {
     self zm_weapons::weapon_take(self zm_loadout::get_player_tactical_grenade());
   }
 
-  if(isDefined(level.var_42cebfa6)) {
-    self[[level.var_42cebfa6]]();
+  if(isDefined(level.zombiemode_devgui_nesting_dolls_give)) {
+    self[[level.zombiemode_devgui_nesting_dolls_give]]();
 
     while(true) {
       self givemaxammo(level.w_nesting_dolls);
@@ -2817,8 +2817,8 @@ function zombie_devgui_give_emp_bomb() {
     self zm_weapons::weapon_take(self zm_loadout::get_player_tactical_grenade());
   }
 
-  if(isDefined(level.var_153af402)) {
-    self[[level.var_153af402]]();
+  if(isDefined(level.zombiemode_devgui_emp_bomb_give)) {
+    self[[level.zombiemode_devgui_emp_bomb_give]]();
 
     while(true) {
       self givemaxammo(getweapon(#"emp_grenade"));
@@ -3156,23 +3156,23 @@ function zombie_devgui_goto_round(target_round) {
 }
 
 function zombie_devgui_monkey_round() {
-  if(isDefined(level.var_141b0a3a)) {
-    zombie_devgui_goto_round(level.var_141b0a3a);
+  if(isDefined(level.next_monkey_round)) {
+    zombie_devgui_goto_round(level.next_monkey_round);
   }
 }
 
 function zombie_devgui_thief_round() {
-  if(isDefined(level.var_3a35aed4)) {
-    zombie_devgui_goto_round(level.var_3a35aed4);
+  if(isDefined(level.next_thief_round)) {
+    zombie_devgui_goto_round(level.next_thief_round);
   }
 }
 
 function zombie_devgui_dog_round(num_dogs) {
-  if(!isDefined(level.var_57c1626e) || !level.var_57c1626e) {
+  if(!isDefined(level.dogs_enabled) || !level.dogs_enabled) {
     return;
   }
 
-  if(!isDefined(level.var_a3f67fc2) || !level.var_a3f67fc2) {
+  if(!isDefined(level.dog_rounds_enabled) || !level.dog_rounds_enabled) {
     return;
   }
 
@@ -3508,8 +3508,8 @@ function get_upgrade(weapon) {
 }
 
 function zombie_devgui_director_easy() {
-  if(isDefined(level.var_e5cb87fe)) {
-    [[level.var_e5cb87fe]]();
+  if(isDefined(level.director_devgui_health)) {
+    [[level.director_devgui_health]]();
   }
 }
 

@@ -48,7 +48,7 @@ function start(str_objective) {
   namespace_232ddc52::music("9.0_c4");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   level.var_9b05d82d = spawnStruct();
@@ -66,7 +66,7 @@ function main(str_objective, var_50cc0d4f) {
   savegame::checkpoint_save();
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x4e>");
 
   level notify(#"hash_24b259ee7a18193a");

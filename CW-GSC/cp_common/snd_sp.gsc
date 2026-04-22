@@ -66,7 +66,7 @@ function private function_e2782c4a(inputvalue, userdata) {
     var_ab57c0be = 0;
 
     foreach(var_453b3fb3 in var_79162eff) {
-      if(function_3132f113(var_453b3fb3) == 1) {
+      if(isremovedentity(var_453b3fb3) == 1) {
         continue;
       }
 
@@ -146,7 +146,7 @@ function private function_bfea3a77(submix, var_d89a17f3, distancemin, distancema
       waitframe(1);
     }
 
-    if(function_3132f113(var_5a696c5d) == 1) {
+    if(isremovedentity(var_5a696c5d) == 1) {
       return;
     }
 
@@ -817,7 +817,7 @@ function function_9299618(var_16ae04ab, var_5b2df2a0, endons) {
     return;
   }
 
-  if(function_3132f113(self)) {
+  if(isremovedentity(self)) {
     return;
   }
 
@@ -825,7 +825,7 @@ function function_9299618(var_16ae04ab, var_5b2df2a0, endons) {
   self.lastsaytime = gettime();
   assert(isDefined(self.lastsaytime) == 1);
 
-  while(function_3132f113(self) == 0) {
+  while(isremovedentity(self) == 0) {
     if(isDefined(level._snd.var_91ff3ae4)) {
       var_8969a580 = level._snd.var_91ff3ae4;
     }

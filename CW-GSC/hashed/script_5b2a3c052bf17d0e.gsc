@@ -91,12 +91,12 @@ function private function_e7e5c90d(s_instance) {
 
       foreach(var_a2593226 in var_2685dd6d) {
         if(level.contentmanager.var_1fcbdf50 === var_a2593226) {
-          var_e7f5b3e0 = 0;
+          b_can_spawn = 0;
           break;
         }
       }
 
-      if(is_false(var_e7f5b3e0)) {
+      if(is_false(b_can_spawn)) {
         continue;
       }
     }

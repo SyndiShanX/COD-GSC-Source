@@ -38,8 +38,8 @@ enable_deadshot_perk_for_level() {
 }
 
 deadshot_precache() {
-  if(isDefined(level.var_bc5f9f6a)) {
-    [[level.var_bc5f9f6a]]();
+  if(isDefined(level.deadshot_precache_override_func)) {
+    [[level.deadshot_precache_override_func]]();
     return;
   }
 

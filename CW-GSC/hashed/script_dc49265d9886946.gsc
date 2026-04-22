@@ -403,32 +403,32 @@ function function_f2eab818() {
 }
 
 function function_5f80f13f() {
-  var_10e6d37f = 0;
+  n_completed = 0;
 
   foreach(str_map in array(#"zm_silver", #"zm_gold", #"zm_platinum", #"zm_tungsten", #"wz_forest", #"wz_sanatorium")) {
     b_complete = self stats::get_stat(#"playerstatsbymap", str_map, #"stats", #"main_quest_completed", #"statvalue");
 
     if(b_complete) {
-      var_10e6d37f++;
+      n_completed++;
       continue;
     }
 
     if(str_map == #"wz_forest" && self zm_stats::get_global_stat(#"hash_172d82afa5eb40a8")) {
-      var_10e6d37f++;
+      n_completed++;
       continue;
     }
 
     if(str_map == #"wz_sanatorium" && self zm_stats::get_global_stat(#"hash_774b3a384fb5ad")) {
-      var_10e6d37f++;
+      n_completed++;
       continue;
     }
 
     if(str_map == #"zm_silver" && self zm_stats::get_global_stat(#"hash_45419091cdb5f154")) {
-      var_10e6d37f++;
+      n_completed++;
     }
   }
 
-  return var_10e6d37f;
+  return n_completed;
 }
 
 function function_a43a8406() {

@@ -813,9 +813,9 @@ function function_5ea16763(state, dest_ent) {
   var_aacbd881 = 0;
 
   foreach(player in all_players) {
-    if(isDefined(player.var_2790fd8b)) {
+    if(isDefined(player.vh_rail)) {
       player.var_91e83c57 = player zm_fasttravel::function_c78572ab(player.var_388ee880);
-      player.var_2790fd8b notify(#"stop path");
+      player.vh_rail notify(#"stop path");
       var_aacbd881 = 1;
     }
   }

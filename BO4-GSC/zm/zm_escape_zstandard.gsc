@@ -59,10 +59,10 @@ init_level_vars() {
   level thread zm_blockers::function_6f01c3cf("model_industries_e", "script_string", 0);
   level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
-  level thread function_9217567c();
+  level thread init_crafting();
 }
 
-function_9217567c() {
+init_crafting() {
   level waittill(#"all_players_spawned");
   w_item = zm_crafting::get_component(#"zitem_spectral_shield_part_3");
   e_player = array::random(level.players);

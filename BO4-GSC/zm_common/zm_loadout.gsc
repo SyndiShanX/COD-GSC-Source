@@ -454,8 +454,8 @@ has_player_hero_weapon() {
 }
 
 register_offhand_weapons_for_level_defaults() {
-  if(isDefined(level.var_54f1e174)) {
-    [[level.var_54f1e174]]();
+  if(isDefined(level.register_offhand_weapons_for_level_defaults_override)) {
+    [[level.register_offhand_weapons_for_level_defaults_override]]();
     return;
   }
 

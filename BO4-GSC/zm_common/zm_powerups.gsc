@@ -89,8 +89,8 @@ init_powerups() {
 
   add_zombie_powerup("insta_kill_ug", "zombie_skull", #"hash_1784640b956f2f85", &func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
 
-  if(isDefined(level.var_cacd8f96)) {
-    [[level.var_cacd8f96]]();
+  if(isDefined(level.level_specific_init_powerups)) {
+    [[level.level_specific_init_powerups]]();
   }
 
   randomize_powerups();
@@ -180,8 +180,8 @@ powerup_hud_monitor() {
           continue;
         }
 
-        if(isDefined(level.var_209e0eb4)) {
-          if(![[level.var_209e0eb4]](player)) {
+        if(isDefined(level.powerup_player_valid)) {
+          if(![[level.powerup_player_valid]](player)) {
             continue;
           }
         }
@@ -637,8 +637,8 @@ powerup_drop(drop_point, powerup, var_4e31704a = 1) {
     return;
   }
 
-  if(isDefined(level.var_7e3a9cf2)) {
-    b_outcome = [[level.var_7e3a9cf2]](drop_point);
+  if(isDefined(level.custom_zombie_powerup_drop)) {
+    b_outcome = [[level.custom_zombie_powerup_drop]](drop_point);
 
     if(isDefined(b_outcome) && b_outcome) {
       return;
@@ -1002,8 +1002,8 @@ powerup_zombie_grab(powerup_team) {
     waitresult = zombie_grab_trigger waittill(#"trigger");
     who = waitresult.activator;
 
-    if(isDefined(level.var_e387a39)) {
-      if(!self[[level.var_e387a39]](who)) {
+    if(isDefined(level._powerup_grab_check)) {
+      if(!self[[level._powerup_grab_check]](who)) {
         continue;
       }
     } else if(!isDefined(who) || !isai(who)) {
@@ -1058,8 +1058,8 @@ powerup_grab(powerup_team) {
     if(isDefined(self.powerup_player)) {
       grabbers = [];
       grabbers[0] = self.powerup_player;
-    } else if(isDefined(level.var_9671faed)) {
-      grabbers = [[level.var_9671faed]]();
+    } else if(isDefined(level.powerup_grab_get_players_override)) {
+      grabbers = [[level.powerup_grab_get_players_override]]();
     } else {
       grabbers = getplayers();
     }
@@ -1101,8 +1101,8 @@ powerup_grab(powerup_team) {
       }
 
       if(isalive(grabber) && (distancesquared(grabber.origin, self.origin) < range_squared || ignore_range)) {
-        if(isDefined(level.var_e387a39)) {
-          if(!self[[level.var_e387a39]](player)) {
+        if(isDefined(level._powerup_grab_check)) {
+          if(!self[[level._powerup_grab_check]](player)) {
             continue;
           }
         }
@@ -1443,8 +1443,8 @@ powerup_timeout() {
   self powerup_show();
   wait_time = 15;
 
-  if(isDefined(level.var_977f68ea)) {
-    time = [[level.var_977f68ea]](self);
+  if(isDefined(level._powerup_timeout_custom_time)) {
+    time = [[level._powerup_timeout_custom_time]](self);
 
     if(time == 0) {
       return;

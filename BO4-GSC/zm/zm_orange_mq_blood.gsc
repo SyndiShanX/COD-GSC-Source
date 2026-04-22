@@ -152,7 +152,7 @@ blood_think() {
       }
 
       if(level flag::get(#"blood_hints")) {
-        level.var_4adebdfc playsoundtoplayer(level.var_60b08c24.var_489c2917 + "_apot_0", player);
+        level.var_4adebdfc playsoundtoplayer(level.var_60b08c24.current_hint + "_apot_0", player);
       }
 
       wait 2;

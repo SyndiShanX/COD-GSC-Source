@@ -659,7 +659,7 @@ function function_190ab063(v_origin, n_radius, notify_end) {
   level flag::set(#"hash_18141f1491e42a85");
   level clientfield::set_world_uimodel("hudItems.warzone.collapseTimerState", 0);
   var_17eeb662 = level.deathcircle.origin;
-  var_24d6686a = level.deathcircle.radius;
+  n_old_radius = level.deathcircle.radius;
 
   if(!is_true(level.deathcircle.scaling)) {
     var_e9f455c0 = level.deathcircles[level.deathcircleindex].waitsec;
@@ -669,7 +669,7 @@ function function_190ab063(v_origin, n_radius, notify_end) {
   level.deathcircle.origin = v_origin;
   function_55ffaf7(level.deathcircle, n_radius);
   level waittill(notify_end);
-  function_55ffaf7(level.deathcircle, var_24d6686a);
+  function_55ffaf7(level.deathcircle, n_old_radius);
   level.deathcircle.origin = var_17eeb662;
 
   if(isDefined(var_e9f455c0) && var_e9f455c0 > 0) {

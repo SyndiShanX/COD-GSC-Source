@@ -41,17 +41,17 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_exfil_escape;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_exfil_escape_begin");
   level battlechatter::function_2ab9360b(1);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450, "adler_casual_killer");
-    level.inside_man = namespace_e77bf565::function_e4660071(var_d3440450, "inside_man_casual_killer");
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_casual_killer");
+    level.inside_man = namespace_e77bf565::function_e4660071(str_skipto, "inside_man_casual_killer");
     level thread alarm_lights();
     level thread namespace_353d803e::function_d4ea305a();
     level thread function_1f999428();
@@ -63,13 +63,13 @@ function main(var_d3440450, var_50cc0d4f) {
     level flag::set("inside_man_exfil_escape_start_pathing");
     level flag::set("slow_mo_stopped");
     level thread scene::skipto_end_noai("scene_kgb_elevator_exfil_destroyed_cabinets");
-    level thread break_c4_explosion_dynents(var_50cc0d4f);
+    level thread break_c4_explosion_dynents(b_starting);
     exploder::exploder("elevator_explosion_aftermath");
     level thread namespace_e77bf565::function_e2e72d4(0, 1);
   }
 
   spawner::add_spawn_function_group("exfil_escape_spetsnaz", "script_noteworthy", &function_4ab39cb8);
-  level thread namespace_e77bf565::escape_objective(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
   level thread function_2ce634b9();
   level thread function_b735db01();
   level thread function_d883a464();
@@ -89,8 +89,8 @@ function main(var_d3440450, var_50cc0d4f) {
 
   level flag::wait_till("aslt_exfil_escape_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 
   player_decision::function_430ebd4b(3, 6);
@@ -98,8 +98,8 @@ function main(var_d3440450, var_50cc0d4f) {
   skipto::function_1c2dfc20("cp_ger_hub_post_kgb");
 }
 
-function break_c4_explosion_dynents(var_50cc0d4f) {
-  if(is_true(var_50cc0d4f)) {
+function break_c4_explosion_dynents(b_starting) {
+  if(is_true(b_starting)) {
     level flag::wait_till(#"hash_507a4486c4a79f1d");
     util::wait_network_frame();
   }

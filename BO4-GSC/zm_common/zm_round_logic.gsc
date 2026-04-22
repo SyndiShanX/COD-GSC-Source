@@ -523,8 +523,8 @@ round_start() {
 
   println("<dev string:xd2>");
 
-  if(isDefined(level.var_b2f996e6)) {
-    [[level.var_b2f996e6]]();
+  if(isDefined(level.round_prestart_func)) {
+    [[level.round_prestart_func]]();
   } else {
     n_delay = 2;
 
@@ -724,8 +724,8 @@ round_think(restart = 0) {
   level endon(#"end_round_think", #"end_game");
 
   if(!(isDefined(restart) && restart)) {
-    if(isDefined(level.var_12e11406)) {
-      [[level.var_12e11406]]();
+    if(isDefined(level.initial_round_wait_func)) {
+      [[level.initial_round_wait_func]]();
     }
 
     if(!(isDefined(level.host_ended_game) && level.host_ended_game)) {
@@ -754,9 +754,9 @@ round_think(restart = 0) {
     level.pro_tips_start_time = gettime();
     level.zombie_last_run_time = gettime();
 
-    if(isDefined(level.var_fc735431)) {
+    if(isDefined(level.zombie_round_change_custom)) {
       level thread zm_audio::function_4138a262();
-      [[level.var_fc735431]]();
+      [[level.zombie_round_change_custom]]();
     } else {
       level thread zm_audio::function_4138a262();
       round_one_up();

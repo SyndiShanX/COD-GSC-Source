@@ -38,7 +38,7 @@ function start(str_objective) {
   flag::set("flg_open_nuke_door");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   level.park ai::set_behavior_attribute("disablepeek", 1);
@@ -65,7 +65,7 @@ function main(str_objective, var_50cc0d4f) {
   level.park lookatentity();
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x4d>");
 }
 

@@ -87,7 +87,7 @@ function function_95c61f07(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_2fb8e4d4(localclientnum, localplayer) {
-  if(function_3132f113(localplayer)) {
+  if(isremovedentity(localplayer)) {
     return false;
   }
 

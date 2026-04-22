@@ -94,7 +94,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.callbackplayerkilled = &function_62dd8e0c;
   level.callbackplayerlaststand = &function_2f8f38e7;
   level.var_deb2145c = &zombie_move_speed_override;
-  level.var_57cc29f3 = &function_aa5777b3;
+  level.check_end_game_override = &function_aa5777b3;
   level.var_a4e9271b = &function_26cf03ff;
   level.musicsystemoverride = 1;
   zm_vo::function_2cf4b07f(#"hash_33e242de9ff79fce", #"hash_566a2e8557ec05e");

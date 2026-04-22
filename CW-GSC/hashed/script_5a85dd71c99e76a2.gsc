@@ -35,7 +35,7 @@
 
 function function_e39e219e() {}
 
-function function_37c8a043(str_objective, var_50cc0d4f) {
+function function_37c8a043(str_objective, b_starting) {
   level thread scene::init("scene_yam_1010_hel_intro");
   level thread globallogic_ui::function_7bc0e4b9();
   snd::client_msg("audio_level_begin_duck_start");
@@ -73,7 +73,7 @@ function function_38910b5f(str_objective) {
   namespace_b73b9191::function_2683ec5d();
 }
 
-function function_a0b88490(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_a0b88490(str_objective, b_starting, var_aa1a6455, player) {
   waitframe(1);
   level flag::set("chyron_menu_closed");
   namespace_b73b9191::function_15426f9d("cull_inside_satcom");
@@ -85,7 +85,7 @@ function function_a0b88490(str_objective, var_50cc0d4f, var_aa1a6455, player) {
   level thread namespace_b73b9191::function_5b62c8af();
 }
 
-function function_3d1df8a6(str_objective, var_50cc0d4f) {
+function function_3d1df8a6(str_objective, b_starting) {
   var_14cbb6e9 = struct::get("woods_ice_slide_teleport", "targetname");
   level.ai_woods thread hms_util::function_b064d2a4("jog", var_14cbb6e9.origin, "flg_mountain_slide_woods_start", 1);
   level.player allowslide(0);
@@ -153,9 +153,9 @@ function function_d3655e70(str_objective) {
   level.ai_woods forceteleport(s_mountain_woods_teleport.origin, s_mountain_woods_teleport.angles);
 }
 
-function function_fdbb9f1e(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_fdbb9f1e(str_objective, b_starting, var_aa1a6455, player) {}
 
-function function_ae06da18(str_objective, var_50cc0d4f) {
+function function_ae06da18(str_objective, b_starting) {
   level.ai_woods.script_accuracy = 1;
   level.ai_woods notify(#"flg_mountain_slide_woods_start");
   level flag::set("flg_mountain_hill_woods_start");
@@ -368,9 +368,9 @@ function function_bb34c64(str_objective) {
   level thread function_ed43d759(1);
 }
 
-function function_33fd8fa3(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_33fd8fa3(str_objective, b_starting, var_aa1a6455, player) {}
 
-function function_11648e12(str_objective, var_50cc0d4f) {
+function function_11648e12(str_objective, b_starting) {
   level.ai_woods.script_accuracy = 1;
   level.ai_woods.perfectaim = 1;
   level.ai_woods pushplayer(1);
@@ -1048,7 +1048,7 @@ function function_b205e5be(str_objective) {
   level flag::set("flg_mountain_spotter_dead");
 }
 
-function function_71f05605(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_71f05605(str_objective, b_starting, var_aa1a6455, player) {
   waitframe(1);
   namespace_b73b9191::function_ee83e03a("cull_inside_satcom");
 }

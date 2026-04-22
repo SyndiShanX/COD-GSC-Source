@@ -22,7 +22,7 @@ __init__() {
 
   bgb::register(#"zm_bgb_alchemical_antithesis", "activated", 1, undefined, undefined, &validation, &activation);
   bgb::function_57eb02e(#"zm_bgb_alchemical_antithesis");
-  bgb::function_c2721e81(#"zm_bgb_alchemical_antithesis", &add_to_player_score_override, 0);
+  bgb::register_add_to_player_score_override(#"zm_bgb_alchemical_antithesis", &add_to_player_score_override, 0);
 }
 
 validation() {
@@ -44,7 +44,7 @@ add_to_player_score_override(points, str_awarded_by, zm_scr_spawner_location_dis
     return points;
   }
 
-  var_f32fbbf5 = int(points / 7.5);
+  n_ammo_count_to_add = int(points / 7.5);
   w_current = self getcurrentweapon();
 
   if(zm_loadout::is_offhand_weapon(w_current)) {
@@ -63,8 +63,8 @@ add_to_player_score_override(points, str_awarded_by, zm_scr_spawner_location_dis
     return points;
   }
 
-  var_67a898af = self getweaponammostock(w_current);
-  var_67a898af += var_f32fbbf5;
+  n_current_ammo_stock = self getweaponammostock(w_current);
+  n_current_ammo_stock += n_ammo_count_to_add;
 
   if(self hasperk(#"specialty_extraammo")) {
     var_6ec34556 = w_current.maxammo;
@@ -76,8 +76,8 @@ add_to_player_score_override(points, str_awarded_by, zm_scr_spawner_location_dis
     var_6ec34556 *= 2;
   }
 
-  var_67a898af = math::clamp(var_67a898af, 0, var_6ec34556);
-  self setweaponammostock(w_current, var_67a898af);
+  n_current_ammo_stock = math::clamp(n_current_ammo_stock, 0, var_6ec34556);
+  self setweaponammostock(w_current, n_current_ammo_stock);
   self thread function_ec301a0d();
   return 0;
 }

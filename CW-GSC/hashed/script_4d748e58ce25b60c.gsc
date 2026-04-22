@@ -1441,18 +1441,18 @@ function function_49b2bfe5(duration) {
   }
 
   self.laststandparams = undefined;
-  self.var_bfc8055f = undefined;
+  self.laststandkillcam = undefined;
   self notify(#"player_revived");
   self thread namespace_7f5aeb59::function_513831e1();
 }
 
 function function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, var_fd90b0bb, vdir, shitloc) {
   self.laststandparams = spawnStruct();
-  self.var_bfc8055f = spawnStruct();
+  self.laststandkillcam = spawnStruct();
   self.laststandparams.einflictor = einflictor;
-  self.var_bfc8055f.var_b5346661 = isDefined(einflictor) ? einflictor getentitynumber() : -1;
+  self.laststandkillcam.einflictornum = isDefined(einflictor) ? einflictor getentitynumber() : -1;
   self.laststandparams.attacker = attacker;
-  self.var_bfc8055f.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
+  self.laststandkillcam.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
   self.laststandparams.attackerorigin = attacker.origin;
 
   if(isPlayer(attacker)) {

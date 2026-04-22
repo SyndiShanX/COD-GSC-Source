@@ -628,7 +628,7 @@ function private function_abc34a6c() {
 }
 
 function private function_43ad32c1(action, result) {
-  if(isDefined(self) && !function_3132f113(self)) {
+  if(isDefined(self) && !isremovedentity(self)) {
     self.var_a7c7b958[self.var_a7c7b958.size] = [action, result];
     self notify(#"hash_41a2ad64c03a0ec3");
   }

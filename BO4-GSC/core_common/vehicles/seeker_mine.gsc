@@ -626,7 +626,7 @@ function_3e16dec3(params) {
   }
 }
 
-function_ab9a9770(target) {
+duf47(target) {
   results = groundtrace(target.origin + (0, 0, 70), target.origin + (0, 0, -100), 0, target);
 
   if(isDefined(results) && isDefined(results[#"entity"]) && results[#"entity"] ismovingplatform()) {
@@ -670,7 +670,7 @@ function_9ba314a1(target) {
       }
     }
 
-    if(function_ab9a9770(target)) {
+    if(duf47(target)) {
       return true;
     }
 

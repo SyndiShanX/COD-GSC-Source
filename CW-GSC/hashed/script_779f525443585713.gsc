@@ -41,7 +41,7 @@ function function_25482400() {
   level flag::init("flag_shot_2_single_anim_over");
 }
 
-function function_99e99ffa(var_d3440450) {
+function function_99e99ffa(str_skipto) {
   function_25482400();
   level.var_d22e9216 = [];
   level.var_89838737 = getdvarint(#"hash_7ed94d53db6a7d54", 99);
@@ -77,7 +77,7 @@ function function_99e99ffa(var_d3440450) {
   level thread function_176a7f2();
   level thread function_3bf9566c();
 
-  if(isDefined(level.var_28c22d88) && (array::contains(level.var_28c22d88, "kgb_ins_activation") || array::contains(level.var_28c22d88, "kgb_ins_briefing"))) {
+  if(isDefined(level.skipto_current_objective) && (array::contains(level.skipto_current_objective, "kgb_ins_activation") || array::contains(level.skipto_current_objective, "kgb_ins_briefing"))) {
     level thread function_92a2f743();
     level thread function_ea21fe3e();
     level thread function_92169709();
@@ -365,7 +365,7 @@ function function_e21cd128() {
 function function_92a2f743() {
   level endon(#"kgb_fail_mission");
 
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "kgb_ins_activation")) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "kgb_ins_activation")) {
     level flag::wait_till("flag_start_lobby_scene");
     level scene::play("lobby_scene_1", "Shot 1");
     level thread scene::play("lobby_scene_1", "Shot 2");
@@ -380,7 +380,7 @@ function function_92a2f743() {
 function function_ea21fe3e() {
   level endon(#"kgb_fail_mission");
 
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "kgb_ins_activation")) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "kgb_ins_activation")) {
     level flag::wait_till("kgb_ins_activation_completed");
     function_1b3a9d9f("play", "scene_talk_duo_b", "Shot 2");
   }
@@ -393,7 +393,7 @@ function function_ea21fe3e() {
 function function_92169709() {
   level endon(#"kgb_fail_mission");
 
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "kgb_ins_activation")) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "kgb_ins_activation")) {
     level waittill(#"hash_b7d623ab42e754a");
     wait 10;
     function_1b3a9d9f("play", "kgb_ins_activation_walk_briefcase_a");
@@ -423,7 +423,7 @@ function function_9da2d35a() {
   level endon(#"kgb_fail_mission");
   spawner::add_spawn_function_group("security_guard_splitup", "script_noteworthy", &kgb_ins_prepare::function_862e8bf9);
 
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "kgb_ins_activation") || array::contains(level.var_28c22d88, "kgb_ins_briefing") || array::contains(level.var_28c22d88, "kgb_ins_tutorial")) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "kgb_ins_activation") || array::contains(level.skipto_current_objective, "kgb_ins_briefing") || array::contains(level.skipto_current_objective, "kgb_ins_tutorial")) {
     level flag::wait_till("kgb_ins_briefing_completed");
     level flag::wait_till("flag_tutorial_map_complete");
     function_1b3a9d9f("play", "scene_kgb_ambient_security_guard_splitup", "Shot 3", 1);
@@ -441,7 +441,7 @@ function function_176a7f2() {
     return;
   }
 
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "kgb_ins_activation") || array::contains(level.var_28c22d88, "kgb_ins_briefing") || array::contains(level.var_28c22d88, "kgb_ins_tutorial") || array::contains(level.var_28c22d88, "kgb_ins_prepare")) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "kgb_ins_activation") || array::contains(level.skipto_current_objective, "kgb_ins_briefing") || array::contains(level.skipto_current_objective, "kgb_ins_tutorial") || array::contains(level.skipto_current_objective, "kgb_ins_prepare")) {
     while(!level flag::get("kgb_ins_briefing_completed") || !level flag::get("kgb_ins_tutorial_completed")) {
       level flag::wait_till("flag_atrium_ambient_scenes");
       function_1b3a9d9f("play", "scene_kgb_ambient_atrium_talk", "Shot 1", 1);

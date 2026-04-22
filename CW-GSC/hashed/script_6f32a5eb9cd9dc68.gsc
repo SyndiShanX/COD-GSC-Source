@@ -26,7 +26,7 @@
 
 function function_afb0a04c() {}
 
-function function_22e1ef3a(str_objective, var_50cc0d4f) {}
+function function_22e1ef3a(str_objective, b_starting) {}
 
 function function_cc91ce1f(str_objective) {
   var_5b7b93ad = getspawnerarray("woods_ar", "script_noteworthy");
@@ -49,7 +49,7 @@ function function_dd87ddce() {
   self namespace_b73b9191::function_d432b47b();
 }
 
-function function_56b991c1(str_objective, var_50cc0d4f) {
+function function_56b991c1(str_objective, b_starting) {
   level thread function_7233c5ee();
   level thread function_de27b0eb();
   level thread function_de26569a();
@@ -492,10 +492,10 @@ function function_c73772c6(str_objective) {
   level flag::set("flg_satcom_birds_trigger");
 }
 
-function function_844967aa(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_844967aa(str_objective, b_starting, var_aa1a6455, player) {}
 
-function function_8cc2cc25(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_8cc2cc25(str_objective, b_starting) {
+  if(b_starting) {
     level namespace_5d7a2dac::music("5.8_tension_2");
   }
 
@@ -552,6 +552,6 @@ function function_f6f8cdca(str_objective) {
   level.var_13434d89 = [];
 }
 
-function function_a46dc345(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_a46dc345(str_objective, b_starting, var_aa1a6455, player) {
   level callback::remove_on_ai_killed(&function_dbc98faf);
 }

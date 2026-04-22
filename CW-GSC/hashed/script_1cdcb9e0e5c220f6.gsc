@@ -43,23 +43,23 @@
 #using scripts\cp_common\util;
 #namespace kgb_ins_rv;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread scene::init("scene_kgb_poison_tea");
   level thread scene::init("scene_kgb_elevator_holdup");
   namespace_e77bf565::function_e2e72d4(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level thread function_9987ec40();
   level scene::add_scene_func("scene_kgb_walkup_charkov", &function_ec6bb2ec);
   level thread function_57279bf6();
 
-  if(is_true(var_50cc0d4f)) {
+  if(is_true(b_starting)) {
     level thread scene::init("scene_kgb_walkup_adler");
-    kgb_ins_prepare::function_52f0fcb3(var_d3440450);
+    kgb_ins_prepare::function_52f0fcb3(str_skipto);
     kgb_ins_prepare::function_84d00884();
-    level thread namespace_99e99ffa::function_99e99ffa(var_d3440450);
+    level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
     level thread kgb_ins_prepare::function_799b3854();
     level thread function_1f4d29f8();
@@ -71,8 +71,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread namespace_e77bf565::function_8191bcdc();
   level flag::clear("no_corpse_pickup");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -601,7 +601,7 @@ function function_7f7143e4(player, var_7b20e52b) {
   return false;
 }
 
-function function_ce801c8b(skipto, var_50cc0d4f) {
+function function_ce801c8b(skipto, b_starting) {
   level flag::set("flag_player_swap");
   level.player endon(#"death");
   level scene::add_scene_func("scene_kgb_walkup_charkov", &function_ec6bb2ec);
@@ -611,7 +611,7 @@ function function_ce801c8b(skipto, var_50cc0d4f) {
   level.adler = namespace_e77bf565::function_52fe0eb3("kgb_ins_rv");
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
-  level thread namespace_99e99ffa::function_99e99ffa(var_50cc0d4f);
+  level thread namespace_99e99ffa::function_99e99ffa(b_starting);
   level thread scene::play("scene_kgb_acquire_disguises_player", "Outro");
   level thread scene::play("scene_kgb_acquire_disguises_bag", "Outro");
   level scene::play("scene_kgb_acquire_disguises_actors", "Outro");

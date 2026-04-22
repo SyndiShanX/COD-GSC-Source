@@ -46,7 +46,7 @@ function function_3c367117(path_points, point_color, line_color, var_80bf7c44) {
   function_a760f3bf(path_points, &function_d88e0349, point_color, line_color, var_80bf7c44);
 }
 
-function function_aa9bfd9d(path_points, point_color, line_color, var_80bf7c44) {
+function debug_draw_path(path_points, point_color, line_color, var_80bf7c44) {
   if(!isDefined(point_color)) {
     point_color = (0, 0, 1);
   }

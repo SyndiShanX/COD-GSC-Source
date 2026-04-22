@@ -226,16 +226,16 @@ function vehicle_keyline_toggle(localclientnum, oldval, newval, bnewent, binitia
   e_player endon(#"death", #"disconnect");
   self endon(#"death");
   waitframe(1);
-  var_80730518 = getplayervehicle(e_player);
+  vh_player = getplayervehicle(e_player);
 
   if(bwastimejump == 1) {
     foreach(var_ac85c33a in getplayers(fieldname)) {
-      if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && var_80730518 === self && (self.archetype === "fighter" || self.scriptvehicletype === "player_fav")) {
+      if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && vh_player === self && (self.archetype === "fighter" || self.scriptvehicletype === "player_fav")) {
         var_ac85c33a thread function_39273849(1);
       }
     }
 
-    if(self !== var_80730518 && self.team === function_73f4b33(fieldname)) {
+    if(self !== vh_player && self.team === function_73f4b33(fieldname)) {
       self thread function_66d9f518(fieldname);
     }
 
@@ -243,7 +243,7 @@ function vehicle_keyline_toggle(localclientnum, oldval, newval, bnewent, binitia
   }
 
   foreach(var_ac85c33a in getplayers(fieldname)) {
-    if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && !isDefined(var_80730518)) {
+    if(isbot(var_ac85c33a) && var_ac85c33a.owner === e_player && !isDefined(vh_player)) {
       var_ac85c33a thread function_39273849(0);
     }
   }

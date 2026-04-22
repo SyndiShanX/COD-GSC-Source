@@ -139,8 +139,8 @@ event_handler[level_init] main(eventstruct) {
     zm_ui_inventory::function_7df6bb60(#"zm_zodt8_sentinel_trial", 0);
   }
 
-  var_8090ebe4 = getnodearray("traversal_unlink_at_start", "targetname");
-  array::thread_all(var_8090ebe4, &function_183a6d46);
+  a_nd_traversals = getnodearray("traversal_unlink_at_start", "targetname");
+  array::thread_all(a_nd_traversals, &function_183a6d46);
   level thread function_4d4e4de();
   level thread function_d515e5e7();
   level thread function_a987d50f();
@@ -216,7 +216,7 @@ function_6beeab1d() {
 }
 
 init_level_vars() {
-  level.var_cc984236 = &function_18f12f69;
+  level.zone_occupied_func = &function_18f12f69;
   level.var_c9bb3e4a = 1;
   level.default_start_location = "zone_forecastle_upper";
   level.default_game_mode = "zclassic";
@@ -266,7 +266,7 @@ init_level_vars() {
   }
 
   level.var_562c8f67 = 200;
-  level.zm_bgb_anywhere_but_here_validation_override = &function_3910bef9;
+  level.zm_bgb_anywhere_but_here_validation_override = &anywhere_but_here_validation_override;
 }
 
 function_8ceb4377() {
@@ -1903,7 +1903,7 @@ function_2021b5df() {
   level notify(#"hash_361427de75870cde");
 }
 
-function_3910bef9() {
+anywhere_but_here_validation_override() {
   s_point = zm_bgb_anywhere_but_here::function_91a62549();
 
   if(!isDefined(s_point)) {

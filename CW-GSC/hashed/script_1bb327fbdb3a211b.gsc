@@ -660,10 +660,10 @@ function function_fa6cc1f2() {
   level flag::clear("hold_round_end");
 }
 
-function function_3d1e19ec(v_origin, n_radius, var_a8d0b313 = 1, var_82ea43f2 = 1, b_hide_body = 0, var_b0e62e21 = 0) {
+function function_3d1e19ec(v_origin, n_radius, var_a8d0b313 = 1, var_82ea43f2 = 1, b_hide_body = 0, b_flash_screen = 0) {
   var_4b9821e4 = 0;
 
-  if(var_b0e62e21) {
+  if(b_flash_screen) {
     a_players = function_72d3bca6(function_a1ef346b(), v_origin, undefined, undefined, n_radius);
 
     foreach(player in a_players) {

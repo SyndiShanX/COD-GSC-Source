@@ -53,7 +53,7 @@ function start(str_objective) {
   level thread namespace_a789f8ae::function_986b3cba(7, 10);
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   level.var_34c0ce7a = spawnStruct();
@@ -126,7 +126,7 @@ function main(str_objective, var_50cc0d4f) {
   cctv_entrance_door_clip notsolid();
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x4e>");
 
   level notify(#"hash_2fb605a6c7053f96");

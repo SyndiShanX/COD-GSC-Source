@@ -126,7 +126,7 @@ function_3387f756(targetname, origin, radius) {
 activate_safe() {
   setdynentstate(self, 0);
   self.var_e7823894 = 1;
-  self.canuse = &function_c92a5584;
+  self.canuse = &iidz;
   self.onbeginuse = &function_97eb71f0;
   self.var_263c4ded = &function_3d49217f;
   self.onuse = &function_7c5a1e82;
@@ -138,7 +138,7 @@ hide_safe() {
   setdynentstate(self, 2);
 }
 
-function_c92a5584(activator) {
+iidz(activator) {
   if(!isDefined(activator) || !isstruct(activator.inventory) || !isarray(activator.inventory.items)) {
     return false;
   }

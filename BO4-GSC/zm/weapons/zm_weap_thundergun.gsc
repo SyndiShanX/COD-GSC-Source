@@ -268,8 +268,8 @@ thundergun_fling_zombie(player, fling_vec, index) {
     return;
   }
 
-  if(isDefined(self.var_4462c95e)) {
-    self[[self.var_4462c95e]](player);
+  if(isDefined(self.thundergun_fling_func)) {
+    self[[self.thundergun_fling_func]](player);
     return;
   }
 

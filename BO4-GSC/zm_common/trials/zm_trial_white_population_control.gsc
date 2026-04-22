@@ -48,7 +48,7 @@ on_begin(var_80bd7996, var_49d28bc1, var_5b932f42, var_a53dc296, var_60bdad5f) {
   level flag::set(#"infinite_round_spawning");
   level thread function_a4adaedb();
   level thread nuked_population_sign_think(n_base);
-  level thread function_8e69c85();
+  level thread monitor_trigger();
 }
 
 on_end(round_reset) {
@@ -67,7 +67,7 @@ on_end(round_reset) {
   }
 }
 
-function_8e69c85() {
+monitor_trigger() {
   level endon(#"hash_7646638df88a3656");
   level.var_d76270a8 = spawn("trigger_damage_new", (-208, 530, -24), 1048576 | 2097152 | 8388608, 16, 16);
   level.var_d76270a8 thread function_75f0aac6();

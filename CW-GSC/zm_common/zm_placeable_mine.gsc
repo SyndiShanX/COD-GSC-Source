@@ -315,8 +315,8 @@ function private replenish_after_rounds() {
   while(true) {
     level waittill(#"between_round_over");
 
-    if(isDefined(level.var_9c6b209c)) {
-      [[level.var_9c6b209c]]();
+    if(isDefined(level.func_custom_placeable_mine_round_replenish)) {
+      [[level.func_custom_placeable_mine_round_replenish]]();
       continue;
     }
 

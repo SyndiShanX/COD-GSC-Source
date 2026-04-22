@@ -298,9 +298,9 @@ function_671e5ede() {
 
 function_ca179a0c() {
   if(isDefined(level.var_a62b1ae0)) {
-    var_bfdeaeb8 = getnodearray("nd_prophet_player_start_" + level.var_8db5b490 + 1, "targetname");
-    var_bfdeaeb8 = array::randomize(var_bfdeaeb8);
-    var_f34999b8 = var_bfdeaeb8[0];
+    a_nd_nodes = getnodearray("nd_prophet_player_start_" + level.var_8db5b490 + 1, "targetname");
+    a_nd_nodes = array::randomize(a_nd_nodes);
+    var_f34999b8 = a_nd_nodes[0];
     self setorigin(var_f34999b8.origin);
     self setplayerangles(var_f34999b8.angles);
   }

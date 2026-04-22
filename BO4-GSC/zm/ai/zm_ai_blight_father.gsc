@@ -1137,7 +1137,7 @@ function_96f5d05a(entity, var_4c0587b) {
   entity.var_54c1950f.status = 1;
   grapple_end playSound(#"zmb_grapple_start");
   grapple_end moveto(var_4c0587b, n_time, 0, n_time * 0.1);
-  grapple_end.return_pos = entity zm_grappler::function_f21c3519();
+  grapple_end.return_pos = entity zm_grappler::grapple_point();
   thread function_9d1a26f1(entity, entity ai::function_9139c839().var_23426e9a * entity ai::function_9139c839().var_23426e9a, level.players);
   grapple_end flagsys::wait_till("grapple_moveto_done");
   grapple_end flagsys::clear("grapple_moveto_done");
@@ -1186,15 +1186,15 @@ function_28dddd64(entity) {
   entity.var_cdc2bec8 = 0;
 
   if(zombie_utility::is_player_valid(entity.var_bef7624d, 1, 1, 0)) {
-    dir = entity.var_bef7624d zm_grappler::function_f21c3519() - entity zm_grappler::function_f21c3519();
+    dir = entity.var_bef7624d zm_grappler::grapple_point() - entity zm_grappler::grapple_point();
     dir_norm = vectornormalize(dir);
 
     if(vectordot(dir_norm, anglesToForward(entity.angles)) < entity ai::function_9139c839().var_b2656f44) {
       dir_norm = anglesToForward(entity.angles);
     }
 
-    var_4c0587b = entity zm_grappler::function_f21c3519() + dir_norm * entity ai::function_9139c839().var_b30a945;
-    test_trace = worldtrace(entity zm_grappler::function_f21c3519(), var_4c0587b);
+    var_4c0587b = entity zm_grappler::grapple_point() + dir_norm * entity ai::function_9139c839().var_b30a945;
+    test_trace = worldtrace(entity zm_grappler::grapple_point(), var_4c0587b);
 
     if(test_trace[#"fraction"] < 1) {
       var_4c0587b = test_trace[#"position"];
@@ -1276,7 +1276,7 @@ function_9d1a26f1(entity, var_8a713db5, var_3e06882e) {
             entity.var_54c1950f.ignore_ents[entity.var_54c1950f.ignore_ents.size] = e_grapplee;
           }
         } else {
-          function_91dcbd1c(entity, entity.var_54c1950f.beamend, e_grapplee);
+          grapple_entity(entity, entity.var_54c1950f.beamend, e_grapplee);
         }
 
         entity.var_54c1950f.beamend flagsys::set("grapple_moveto_done");
@@ -1318,7 +1318,7 @@ function_c1b0cbda() {
   self thread riotshield::function_a9109d26();
 }
 
-function_91dcbd1c(prone_2_run_roll, var_a424c06a, e_grapplee) {
+grapple_entity(prone_2_run_roll, var_a424c06a, e_grapplee) {
   if(!isDefined(var_a424c06a)) {
     return;
   }

@@ -35,8 +35,8 @@ function enable_staminup_perk_for_level() {
 }
 
 function staminup_precache() {
-  if(isDefined(level.var_cf57ff63)) {
-    [[level.var_cf57ff63]]();
+  if(isDefined(level.staminup_precache_override_func)) {
+    [[level.staminup_precache_override_func]]();
     return;
   }
 

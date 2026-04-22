@@ -39,7 +39,7 @@ function timeuntilspawn(includeteamkilldelay) {
     if(isDefined(result)) {
       respawndelay = result;
     } else if(is_true(self.diedonvehicle) && isDefined(level.var_cf393bff)) {
-      self.var_84c0402e = undefined;
+      self.last_bleedout_time = undefined;
       self.bleedout_time = undefined;
       respawndelay = level.var_cf393bff;
     } else if(isDefined(level.var_a4107aed)) {
@@ -89,10 +89,10 @@ function timeuntilspawn(includeteamkilldelay) {
       respawndelay += globallogic_player::teamkilldelay();
     }
 
-    if(isDefined(self.bleedout_time) && isDefined(self.var_84c0402e)) {
+    if(isDefined(self.bleedout_time) && isDefined(self.last_bleedout_time)) {
       assert(self.bleedout_time >= 0);
-      assert(self.bleedout_time <= self.var_84c0402e);
-      respawndelay -= self.var_84c0402e - self.bleedout_time;
+      assert(self.bleedout_time <= self.last_bleedout_time);
+      respawndelay -= self.last_bleedout_time - self.bleedout_time;
     }
   }
 

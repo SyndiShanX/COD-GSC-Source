@@ -44,7 +44,7 @@ function start(str_objective) {
   var_602672df delete();
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   flag::set("flg_escape_spawn_triggers");
@@ -69,7 +69,7 @@ function main(str_objective, var_50cc0d4f) {
   level thread function_341c17f6();
   level thread function_d9227637();
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level.player util::function_749362d7(1);
     level thread namespace_307260b8::function_529afded(0);
     level notify(#"hash_73e317451c95becb");
@@ -78,7 +78,7 @@ function main(str_objective, var_50cc0d4f) {
   savegame::checkpoint_save();
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x4b>");
 
   level notify(#"hash_494ec42a5050d27f");

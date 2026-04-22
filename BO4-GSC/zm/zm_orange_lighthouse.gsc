@@ -641,8 +641,8 @@ function_2853c44e(e_trap) {
   self endon(#"death");
   self clientfield::increment("" + # "hash_5af1cd27f90895ae", 1);
 
-  if(isDefined(self.var_5475b4ad)) {
-    self[[self.var_5475b4ad]](e_trap);
+  if(isDefined(self.fire_damage_func)) {
+    self[[self.fire_damage_func]](e_trap);
     return;
   }
 

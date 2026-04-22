@@ -372,8 +372,8 @@ function riotshield_fling_zombie(player, fling_vec, index) {
     return;
   }
 
-  if(isDefined(self.var_9c1f60e8)) {
-    self[[self.var_9c1f60e8]](fling_vec);
+  if(isDefined(self.riotshield_fling_func)) {
+    self[[self.riotshield_fling_func]](fling_vec);
     return;
   }
 

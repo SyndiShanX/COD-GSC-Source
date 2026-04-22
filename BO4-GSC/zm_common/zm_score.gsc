@@ -589,11 +589,11 @@ function_acaab828(b_disabled = 1) {
   }
 }
 
-function_ffc2d0bc() {
+get_player_score() {
   return self.pers[#"score"];
 }
 
-function_c1f146ff(score) {
+set_player_score(score) {
   self.pers[#"score"] = score;
   self.score = score;
 }

@@ -25,8 +25,8 @@ event_handler[level_init] main(eventstruct) {
   precache();
   lui::add_luimenu("full_screen_movie", &full_screen_movie::register, "full_screen_movie");
   level.mannequin_mode = 0;
-  level.var_ecb7b947 = 0;
-  level.destructible_callbacks[#"headless"] = &function_e0136874;
+  level.headless_mannequin_count = 0;
+  level.destructible_callbacks[#"headless"] = &mannequin_headless;
   level.nuketown_population = 0;
   clientfield::register("world", "nuketown_population", 8000, 7, "int");
   clientfield::register("world", "nuketown_missile_scene", 8000, 1, "int");
@@ -145,15 +145,15 @@ function_b3e0f5e0() {
   }
 }
 
-function_e0136874(destructible_event, attacker, weapon, piece_index, point, dir, mod) {
+mannequin_headless(destructible_event, attacker, weapon, piece_index, point, dir, mod) {
   if(!isDefined(level.mannequin_time)) {
     return;
   }
 
   if(gettime() < level.mannequin_time + getdvarint(#"mannequin_timelimit", 120) * 1000) {
-    level.var_ecb7b947++;
+    level.headless_mannequin_count++;
 
-    if(level.var_ecb7b947 >= 27 && level.mannequin_mode == 0) {
+    if(level.headless_mannequin_count >= 27 && level.mannequin_mode == 0) {
       level thread mannequin_mode();
     }
   }

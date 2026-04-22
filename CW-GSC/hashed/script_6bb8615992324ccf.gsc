@@ -22,8 +22,8 @@ function preload() {
 function function_6186baa2(var_b3a11ae2) {
   self endon(#"death");
 
-  if(isDefined(self.var_80730518)) {
-    self.var_80730518 usevehicle(self, 0);
+  if(isDefined(self.vh_player)) {
+    self.vh_player usevehicle(self, 0);
     self clientfield::increment_to_player("swap_camera", 1);
   } else {
     self clientfield::set_to_player("set_camera_state", 1);
@@ -41,7 +41,7 @@ function function_c168eb01() {
   self val::set(#"hash_5bc761d26eb100ef", "freezecontrols", 1);
   wait 0.4;
   self val::reset(#"hash_5bc761d26eb100ef", "freezecontrols");
-  self.var_80730518 usevehicle(self, 0);
+  self.vh_player usevehicle(self, 0);
 }
 
 function block_zoom_input(b_state) {

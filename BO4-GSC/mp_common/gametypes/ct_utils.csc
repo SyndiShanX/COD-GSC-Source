@@ -129,10 +129,10 @@ area_arrows(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
   function_59ace802(localclientnum);
 
   if(newval) {
-    var_b29c151c = level.var_84c5e66d;
+    str_area_name = level.var_84c5e66d;
 
     if(!(isDefined(level.var_8c3d6a40) && level.var_8c3d6a40)) {
-      var_b29c151c += newval;
+      str_area_name += newval;
     } else if(newval == 4) {
       level.var_57b466e9 = level._effect[#"zoneedgemarker"][3];
     } else if(newval == 3) {
@@ -144,7 +144,7 @@ area_arrows(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
     }
 
     level.var_6158c164 = [];
-    level.var_c39096f2 = struct::get_array(var_b29c151c, "targetname");
+    level.var_c39096f2 = struct::get_array(str_area_name, "targetname");
 
     if(level.var_c39096f2.size > 0) {
       foreach(s_arrow in level.var_c39096f2) {

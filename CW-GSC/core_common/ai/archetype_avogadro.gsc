@@ -113,7 +113,7 @@ function function_ee579eb5() {
   self.var_f3bbe853 = 1;
   self.var_fc782c29 = 0;
   self.var_b4ca9f11 = gettime();
-  self.var_7fde19e8 = 0;
+  self.last_phase_time = 0;
   self.var_9bff71aa = 0;
   self.var_696e2d53 = 0;
   self.var_e3b6f14a = 1;
@@ -1015,7 +1015,7 @@ function function_ceeb405(entity) {
 
 function function_36f6a838(entity) {
   entity.phase_time = gettime() + entity.var_15aa1ae0;
-  entity.var_7fde19e8 = gettime();
+  entity.last_phase_time = gettime();
 }
 
 function function_b57de57a(entity) {
@@ -1149,7 +1149,7 @@ function function_7b70bdbe(entity, mocompanim, mocompanimblendouttime, mocompani
   mocompduration.blockingpain = 0;
   mocompduration.var_78dd7804 = undefined;
   mocompduration.var_d39541c9 = undefined;
-  mocompduration.var_7fde19e8 = gettime();
+  mocompduration.last_phase_time = gettime();
 
   if(isactor(mocompduration)) {
     mocompduration finishtraversal();

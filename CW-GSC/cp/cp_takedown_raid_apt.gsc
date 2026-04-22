@@ -38,7 +38,7 @@
 #using scripts\cp_common\util;
 #namespace tkdn_raid_apt;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   player = getplayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
@@ -76,10 +76,10 @@ function starting(var_d3440450) {
   level thread objectives::follow("follow_adler", level.adler, undefined, 0, 0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     player util::function_749362d7(1);
   }
 
@@ -117,8 +117,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level flag::wait_till("raid_apt_complete");
   videostop("cp_shared_1981_dutch_soccer_game");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

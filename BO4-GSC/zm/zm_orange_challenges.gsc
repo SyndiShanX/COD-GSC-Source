@@ -126,7 +126,7 @@ function_d3fc7131() {
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(7, 20, 40, #"hash_d9f2cedb84b8d66", &function_658f9053, &function_5ba49bb9, "bonus_points_team", #"hash_78a6b67ab7d98b2f");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(8, 6, 12, #"hash_d9f2bedb84b8bb3", &function_8885885d, &function_b0848cf7, "full_ammo", #"hash_697d3cc07f8424da");
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(9, 5, 5, #"hash_d9f2aedb84b8a00", &function_39ca7654, &function_a0ebbf07, "extra_snowballs", #"hash_607ea24c3576c5b2");
-      self function_e12fb431();
+      self init_bells();
       break;
     case # "lighthouse_station":
       self.a_s_challenges[self.a_s_challenges.size] = init_challenge(10, 25, 50, #"hash_3f452857bdecf44e", &function_6384ebfd, &function_fd31e27b, "carpenter", #"hash_78a6b67ab7d98b2f");
@@ -1320,7 +1320,7 @@ function_f1da3c8(s_challenge) {
   }
 }
 
-function_e12fb431() {
+init_bells() {
   level endon(#"end_game");
   s_challenge = self.a_s_challenges[2];
   s_challenge.var_2abe7ecb = getEntArray("challenges_bell", "targetname");

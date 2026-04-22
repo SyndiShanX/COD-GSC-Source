@@ -68,10 +68,10 @@ function start(str_objective) {
   level thread namespace_acaa3a2e::function_e76b838d(1);
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_5ceacc03::music("5.0_kraus");
     level thread function_ab5026e9();
     player setmovespeedscale(0.72);
@@ -93,7 +93,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("street");
 }
 
-function function_dc6107f7(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_dc6107f7(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("start_rooftop_descend_alley");
     level flag::set("street_done");
@@ -376,10 +376,10 @@ function function_ae924b50(str_objective) {
   level thread function_e632b562(1);
 }
 
-function function_9145f67a(str_objective, var_50cc0d4f) {
+function function_9145f67a(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_11998b8f::stakeout_stow_weapon();
     level thread function_70978834(1);
     level thread function_ab5026e9("bar");
@@ -404,7 +404,7 @@ function function_9145f67a(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("bar");
 }
 
-function function_34aae650(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_34aae650(str_objective, b_starting, var_aa1a6455, player) {
   var_33b3e0a3 = getent("adler_alley_door", "targetname");
   var_2e0784ad = getent(var_33b3e0a3.target, "targetname");
 

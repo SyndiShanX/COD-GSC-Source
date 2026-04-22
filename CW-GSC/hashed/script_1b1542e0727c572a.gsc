@@ -28,14 +28,14 @@ function starting(str_objective) {
   scene::function_27f5972e("p9_fxanim_cp_siege_guard_tower_01_bundle");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   level thread function_ba67eb3b();
   level thread function_a2982a04();
   level flag::wait_till("flag_siege_activate_approach");
   skipto::function_4e3ab877("rail_ride");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_ba67eb3b() {
   level flag::wait_till("flg_wall_rpg");

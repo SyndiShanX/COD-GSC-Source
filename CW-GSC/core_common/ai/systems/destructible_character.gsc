@@ -87,8 +87,8 @@ function getdestructstate(entity) {
   return 0;
 }
 
-function function_f865501b(entity, var_e9807706, var_9cea16fe) {
-  entity._destruct_state = var_e9807706;
+function function_f865501b(entity, destruct_state, var_9cea16fe) {
+  entity._destruct_state = destruct_state;
   togglespawngibs(entity, var_9cea16fe);
   reapplydestructedpieces(entity);
 }

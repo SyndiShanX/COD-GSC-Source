@@ -235,13 +235,13 @@ function_e19c174f() {
 
 function_668e3f89(e_player) {
   if(!level flag::get("pap_quest_complete")) {
-    var_235457fd = self function_afab6169(e_player);
+    b_can_use = self function_afab6169(e_player);
 
     if(isDefined(self.hint_string)) {
       self sethintstring(self.hint_string);
     }
 
-    return var_235457fd;
+    return b_can_use;
   }
 
   var_d679d54f = !isDefined(level.s_pap_quest.var_69e563d);

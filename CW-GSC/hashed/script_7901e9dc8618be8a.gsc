@@ -29,18 +29,18 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_escape_lights_out;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_bunker_escape_lights_out_begin");
   level battlechatter::function_2ab9360b(1);
   namespace_353d803e::function_7ecf08d8();
   setsaveddvar(#"hash_7bf40e4b6a830d11", 0);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450, "adler_shotgun");
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
     level thread scene::init("scene_kgb_tunnel_catwalk_transition");
@@ -52,14 +52,14 @@ function main(var_d3440450, var_50cc0d4f) {
   level.adler battlechatter::function_2ab9360b(0);
   spawner::add_spawn_function_group("ambient_cqb_searcher", "script_noteworthy", &function_dfeaa423);
   spawner::add_spawn_function_group("ambusher", "script_noteworthy", &function_adbd78ad);
-  level thread namespace_e77bf565::escape_objective(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
   level thread function_5b6d6f91();
   level thread spawn_ambient_cqb_searchers();
   exploder::exploder("lights_out");
   level flag::wait_till("aslt_bunker_escape_lights_out_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

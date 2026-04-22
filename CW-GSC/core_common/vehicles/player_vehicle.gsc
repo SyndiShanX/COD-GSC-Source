@@ -675,7 +675,7 @@ function private function_ea4291d3() {
   return isDefined(self.locked_on) && self.locked_on > 0;
 }
 
-function private function_b3caeebc(player) {
+function private lock_on_warning(player) {
   self endon(#"death");
   player endon(#"exit_vehicle", #"death");
 
@@ -938,7 +938,7 @@ function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
     vehicle function_388973e4(isemped);
   }
 
-  vehicle thread function_b3caeebc(self);
+  vehicle thread lock_on_warning(self);
 
   if(isDefined(level.var_c3f91417)) {
     vehicle clientfield::set("enemyvehicle", 1);

@@ -138,8 +138,8 @@ function turn_to_zombie() {
   self.meleedamage = 1000;
   self detachall();
 
-  if(isDefined(level.var_d78dbeb6)) {
-    self[[level.var_d78dbeb6]]();
+  if(isDefined(level.custom_zombie_player_loadout)) {
+    self[[level.custom_zombie_player_loadout]]();
   } else {
     self setModel(#"c_zom_player_zombie_fb");
     self.skeleton = "base";

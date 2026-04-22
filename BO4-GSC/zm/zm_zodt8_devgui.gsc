@@ -217,7 +217,7 @@ function_51855e65(round_number) {
   assert(round_index >= 0 && round_index < 30);
 
   foreach(player in getplayers()) {
-    player zm_score::function_c1f146ff(var_efac84b3[round_index]);
+    player zm_score::set_player_score(var_efac84b3[round_index]);
   }
 
   if(round_number >= 7) {

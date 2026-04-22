@@ -212,7 +212,7 @@ function function_31bcd153(arr) {
 function function_f218bff5(v) {
   if(!isDefined(v)) {
     return array();
-  } else if(isDefined(v) == 1 && function_3132f113(v) == 0 && isarray(v) == 1) {} else {
+  } else if(isDefined(v) == 1 && isremovedentity(v) == 0 && isarray(v) == 1) {} else {
     return array(v);
   }
 
@@ -377,7 +377,7 @@ function function_64a5440a(arr) {
 function positionhelper(thing) {
   position = undefined;
 
-  if(function_3132f113(thing) == 0 && isDefined(thing.origin)) {
+  if(isremovedentity(thing) == 0 && isDefined(thing.origin)) {
     position = thing.origin;
   } else if(isvec(thing) == 1) {
     position = thing;
@@ -457,7 +457,7 @@ function function_6ecb085(value, midvalue, var_2c789a2) {
 function waittilldeleted() {
   assert(isDefined(self) == 1);
 
-  while(function_3132f113(self) == 0) {
+  while(isremovedentity(self) == 0) {
     self waittill(#"death", #"disconnect");
   }
 }

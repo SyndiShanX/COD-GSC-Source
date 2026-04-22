@@ -811,10 +811,10 @@ function_38146f54() {
     setDvar(#"hash_639a741f419f5790", 0);
 
     foreach(var_f0ffe8b2 in level.var_6eef6733) {
-      foreach(var_80730518 in var_f0ffe8b2) {
-        if(distance2d(self getorigin(), var_80730518.origin) <= var_80730518.radiusdamageradius) {
+      foreach(vh_player in var_f0ffe8b2) {
+        if(distance2d(self getorigin(), vh_player.origin) <= vh_player.radiusdamageradius) {
           self val::set(#"warzonestaging", "<dev string:x404>", 1);
-          var_80730518 dodamage(100000, var_80730518.origin);
+          vh_player dodamage(100000, vh_player.origin);
         }
       }
     }
@@ -1478,7 +1478,7 @@ function_c21a7f52(tracepoint, weapon, color, mp) {
   }
 }
 
-function_61e22785(tracepoint, radius, var_5a1fa430, color) {
+function_61e22785(tracepoint, radius, num_damage, color) {
   self endon(#"hash_7e565f1e80f93ecd");
 
   while(!getdvarint(#"hash_5fd194403e0d175e", 0)) {
@@ -1490,19 +1490,19 @@ function_61e22785(tracepoint, radius, var_5a1fa430, color) {
 
     circle(tracepoint, radius, color, 0, 1);
     var_eb9780e9 = tracepoint + (radius, 0, 0);
-    print3d(var_eb9780e9, var_5a1fa430, (1, 1, 1), 1, scale, 3);
+    print3d(var_eb9780e9, num_damage, (1, 1, 1), 1, scale, 3);
     var_eb9780e9 = tracepoint + (radius, 0, -10 * scale);
     print3d(var_eb9780e9, int(radius), (1, 0, 0), 1, scale * 0.25, 3);
     var_eb9780e9 = tracepoint - (radius, 0, 0);
-    print3d(var_eb9780e9, var_5a1fa430, (1, 1, 1), 1, scale, 3);
+    print3d(var_eb9780e9, num_damage, (1, 1, 1), 1, scale, 3);
     var_eb9780e9 = tracepoint - (radius, 0, 10 * scale);
     print3d(var_eb9780e9, int(radius), (1, 0, 0), 1, scale * 0.25, 3);
     var_eb9780e9 = tracepoint + (0, radius, 0);
-    print3d(var_eb9780e9, var_5a1fa430, (1, 1, 1), 1, scale, 3);
+    print3d(var_eb9780e9, num_damage, (1, 1, 1), 1, scale, 3);
     var_eb9780e9 = tracepoint + (0, radius, -10 * scale);
     print3d(var_eb9780e9, int(radius), (1, 0, 0), 1, scale * 0.25, 3);
     var_eb9780e9 = tracepoint - (0, radius, 0);
-    print3d(var_eb9780e9, var_5a1fa430, (1, 1, 1), 1, scale, 3);
+    print3d(var_eb9780e9, num_damage, (1, 1, 1), 1, scale, 3);
     var_eb9780e9 = tracepoint - (0, radius, 10 * scale);
     print3d(var_eb9780e9, int(radius), (1, 0, 0), 1, scale * 0.25, 3);
     waitframe(1);

@@ -279,11 +279,11 @@ function_a4998ccd(grenade_origin, player_origin, weapon) {
   grenadeangles = vectortoangles(velocity);
   speed = length(velocity);
   var_2571f440 = grenadeangles + (var_de0fa6f1, var_71c4a0d9, 0);
-  var_d2922c1e = vectorscale(anglesToForward(var_2571f440), speed * var_46f48578);
-  self magicgrenadeplayer(weapon, grenade_origin, var_d2922c1e);
+  velocity2 = vectorscale(anglesToForward(var_2571f440), speed * var_46f48578);
+  self magicgrenadeplayer(weapon, grenade_origin, velocity2);
   var_c1917dbc = grenadeangles + (var_99803ce, var_6b0817d7, 0);
-  var_c0cb8891 = vectorscale(anglesToForward(var_c1917dbc), speed * var_3300383);
-  self magicgrenadeplayer(weapon, grenade_origin, var_c0cb8891);
+  velocity3 = vectorscale(anglesToForward(var_c1917dbc), speed * var_3300383);
+  self magicgrenadeplayer(weapon, grenade_origin, velocity3);
 }
 
 function_9dddd194(position, color) {

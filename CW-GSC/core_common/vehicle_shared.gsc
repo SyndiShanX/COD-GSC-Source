@@ -121,7 +121,7 @@ function private postinit() {
 
   if(!is_true(level.var_26be8a4f)) {
     setDvar(#"hash_55a12fa73793eaf1", 0);
-    function_cd140ee9(#"hash_55a12fa73793eaf1", &function_40fc185b);
+    function_cd140ee9(#"hash_55a12fa73793eaf1", &delete_all_vehicles);
     setDvar(#"hash_6e675a2062aa1f3e", 0);
     function_cd140ee9(#"hash_6e675a2062aa1f3e", &function_ef1192d);
     setDvar(#"hash_4381be5e131dc9aa", 0);
@@ -1874,7 +1874,7 @@ function wait_till_stable() {
   }
 }
 
-function function_fa5a19de() {
+function wait_till_stopped() {
   while(isDefined(self) && self getspeed() > 1) {
     waitframe(1);
   }
@@ -1894,7 +1894,7 @@ function unload_node(node) {
     self sethoverparams(0, 0, 10);
     wait_till_stable();
   } else {
-    function_fa5a19de();
+    wait_till_stopped();
   }
 
   if(node is_unload_node()) {
@@ -3156,7 +3156,7 @@ function private function_ef1192d(params) {
   player notify(#"hash_71971051d63a4545");
 }
 
-function private function_40fc185b(params) {
+function private delete_all_vehicles(params) {
   waitframe(1);
   vehicles = getvehiclearray();
 
@@ -3821,9 +3821,9 @@ function function_fa8ced6e(v_origin, v_angles, str_vehicle = undefined) {
   }
 
   assert(isDefined(str_vehicle), "<dev string:x6b1>");
-  var_80730518 = spawnvehicle(str_vehicle, v_origin, v_angles, "player_spawned_vehicle");
-  var_80730518 usevehicle(self, 0);
-  return var_80730518;
+  vh_player = spawnvehicle(str_vehicle, v_origin, v_angles, "player_spawned_vehicle");
+  vh_player usevehicle(self, 0);
+  return vh_player;
 }
 
 function function_715433be(vehicle, bot, n_seat) {
@@ -3948,7 +3948,7 @@ function private function_1eab63e3(flare_lifetime = undefined) {
 function fire_flares(player, flare_tag = undefined, flare_lifetime = undefined) {
   var_f9a2afb9 = function_1eab63e3(flare_lifetime);
 
-  for(var_558d81a6 = 0; var_558d81a6 < 4; var_558d81a6++) {
+  for(flareindex = 0; flareindex < 4; flareindex++) {
     model = "tag_origin";
 
     if(!isDefined(flare_tag)) {
@@ -3973,7 +3973,7 @@ function fire_flares(player, flare_tag = undefined, flare_lifetime = undefined) 
 
     flare = util::spawn_model(model, start_origin, var_ac3aef54);
     flare clientfield::set("play_flare_fx", 1);
-    flare_lifetime = max(var_f9a2afb9[var_558d81a6] - var_558d81a6 * 0.15, 0.5);
+    flare_lifetime = max(var_f9a2afb9[flareindex] - flareindex * 0.15, 0.5);
     flare thread move_flare(self, (0, 0, -200), 0.5, 0.25, flare_lifetime, flare_tag);
     flare thread function_9ff1a886(self);
     wait 0.15;
@@ -4118,13 +4118,13 @@ function function_ae93aef2(usephysics) {
 
 function function_1bb979ca(n_cooldown_time, e_player, var_a18a512) {
   e_player endon(#"death");
-  var_e41dced6 = 0;
+  n_increments = 0;
   var_d969828b = n_cooldown_time / 0.05;
 
-  while(var_e41dced6 <= var_d969828b) {
-    var_50d0d640 = mapfloat(0, var_d969828b, 0, 1, var_e41dced6);
+  while(n_increments <= var_d969828b) {
+    var_50d0d640 = mapfloat(0, var_d969828b, 0, 1, n_increments);
     e_player clientfield::set_player_uimodel("vehicle.bindingCooldown" + var_a18a512 + ".cooldown", var_50d0d640);
-    var_e41dced6++;
+    n_increments++;
     wait 0.05;
   }
 }

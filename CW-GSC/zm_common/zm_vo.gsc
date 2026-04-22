@@ -1757,9 +1757,9 @@ function private function_d3fc42dc(str_vo_alias) {
 }
 
 function function_45e29f06() {
-  var_5eb47b1d = function_a1ef346b();
+  a_active_players = function_a1ef346b();
 
-  foreach(player in var_5eb47b1d) {
+  foreach(player in a_active_players) {
     if(is_player_speaking(player)) {
       return true;
     }

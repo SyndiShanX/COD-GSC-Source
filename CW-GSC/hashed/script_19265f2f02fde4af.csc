@@ -375,7 +375,7 @@ function private function_a4507e23(local_client_num, effect_id, augmented_impact
   level.var_8a1c2b55.var_6a01400c--;
   arrayremovevalue(level.var_8a1c2b55.var_f782e821[augmented_impact_fx], damage_data, 0);
 
-  if(isDefined(self) && !function_3132f113(self)) {
+  if(isDefined(self) && !isremovedentity(self)) {
     arrayremovevalue(self.var_8a1c2b55.var_33c88c75, damage_data.var_7c5043e3, 0);
   }
 

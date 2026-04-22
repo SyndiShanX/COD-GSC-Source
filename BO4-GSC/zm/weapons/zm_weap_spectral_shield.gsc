@@ -440,8 +440,8 @@ function_92a54dac() {
     n_dist_sq = distancesquared(e_afterlife.origin, self.origin);
 
     if(n_dist_sq < 262144) {
-      var_2ed6f142 = self getweaponmuzzlepoint();
-      v_normal = vectornormalize(e_afterlife.origin - var_2ed6f142);
+      v_view_pos = self getweaponmuzzlepoint();
+      v_normal = vectornormalize(e_afterlife.origin - v_view_pos);
       var_ee5864e0 = self getweaponforwarddir();
       n_dot = vectordot(var_ee5864e0, v_normal);
 
@@ -455,7 +455,7 @@ function_92a54dac() {
 }
 
 function_b18688c9() {
-  var_2ed6f142 = self getweaponmuzzlepoint();
+  v_view_pos = self getweaponmuzzlepoint();
   v_forward_angles = self getweaponforwarddir();
 
   if(level.players.size == 1) {
@@ -469,7 +469,7 @@ function_b18688c9() {
 
     n_dist_sq = distancesquared(e_player.origin, self.origin);
 
-    if(n_dist_sq < 262144 && isDefined(e_player sightconetrace(var_2ed6f142, self, v_forward_angles, 25)) && e_player sightconetrace(var_2ed6f142, self, v_forward_angles, 25)) {
+    if(n_dist_sq < 262144 && isDefined(e_player sightconetrace(v_view_pos, self, v_forward_angles, 25)) && e_player sightconetrace(v_view_pos, self, v_forward_angles, 25)) {
       if(e_player laststand::player_is_in_laststand()) {
         if(self zm_laststand::can_revive(e_player, 1, 1)) {
           if(isDefined(e_player.revivetrigger) && isDefined(e_player.revivetrigger.beingrevived)) {
@@ -537,8 +537,8 @@ function_d1cb7257(n_clientfield) {
 }
 
 function_750abd36() {
-  var_2ed6f142 = self getweaponmuzzlepoint();
-  a_zombies = array::get_all_closest(var_2ed6f142, getaiteamarray(level.zombie_team), undefined, undefined, 1200);
+  v_view_pos = self getweaponmuzzlepoint();
+  a_zombies = array::get_all_closest(v_view_pos, getaiteamarray(level.zombie_team), undefined, undefined, 1200);
 
   if(!a_zombies.size) {
     return;
@@ -551,7 +551,7 @@ function_750abd36() {
   var_60f35d29 = 9216;
   var_d6b10e11 = 9216;
   var_ee5864e0 = self getweaponforwarddir();
-  v_end_pos = var_2ed6f142 + vectorscale(var_ee5864e0, 1200);
+  v_end_pos = v_view_pos + vectorscale(var_ee5864e0, 1200);
 
   for(i = 0; i < a_zombies.size; i++) {
     if(!isalive(a_zombies[i])) {
@@ -559,19 +559,19 @@ function_750abd36() {
     }
 
     v_zombie_origin = a_zombies[i] getcentroid();
-    var_a155935 = distancesquared(var_2ed6f142, v_zombie_origin);
+    var_a155935 = distancesquared(v_view_pos, v_zombie_origin);
 
     if(var_a155935 > var_c57defd6) {
       return;
     }
 
-    normal = vectornormalize(v_zombie_origin - var_2ed6f142);
+    normal = vectornormalize(v_zombie_origin - v_view_pos);
     dot = vectordot(var_ee5864e0, normal);
 
     if(var_a155935 < var_d6b10e11) {
       level.var_2f7aae6c[level.var_2f7aae6c.size] = a_zombies[i];
       dist_mult = 1;
-      fling_vec = vectornormalize(v_zombie_origin - var_2ed6f142);
+      fling_vec = vectornormalize(v_zombie_origin - v_view_pos);
       fling_vec = (fling_vec[0], fling_vec[1], abs(fling_vec[2]));
       fling_vec = vectorscale(fling_vec, 50 + 50 * dist_mult);
       level.var_8cd4a995[level.var_8cd4a995.size] = fling_vec;
@@ -590,13 +590,13 @@ function_750abd36() {
       continue;
     }
 
-    radial_origin = pointonsegmentnearesttopoint(var_2ed6f142, v_end_pos, v_zombie_origin);
+    radial_origin = pointonsegmentnearesttopoint(v_view_pos, v_end_pos, v_zombie_origin);
 
     if(distancesquared(v_zombie_origin, radial_origin) > var_74238e2c) {
       continue;
     }
 
-    if(0 == a_zombies[i] damageconetrace(var_2ed6f142, self)) {
+    if(0 == a_zombies[i] damageconetrace(v_view_pos, self)) {
       continue;
     }
 
@@ -605,7 +605,7 @@ function_750abd36() {
     if(var_a155935 < n_fling_range_sq) {
       level.var_2f7aae6c[level.var_2f7aae6c.size] = a_zombies[i];
       dist_mult = (n_fling_range_sq - var_a155935) / n_fling_range_sq;
-      fling_vec = vectornormalize(v_zombie_origin - var_2ed6f142);
+      fling_vec = vectornormalize(v_zombie_origin - v_view_pos);
 
       if(5000 < var_a155935) {
         fling_vec += vectornormalize(v_zombie_origin - radial_origin);
@@ -952,10 +952,10 @@ function_81947c70() {
 }
 
 function_f0b16c98(w_curr, n_dist_sq_max) {
-  var_2ed6f142 = self getweaponmuzzlepoint();
+  v_view_pos = self getweaponmuzzlepoint();
   v_forward_angles = self getweaponforwarddir();
 
-  if(isalive(self.var_f1b20bef) && isDefined(self.var_f1b20bef sightconetrace(var_2ed6f142, self, v_forward_angles, 25)) && self.var_f1b20bef sightconetrace(var_2ed6f142, self, v_forward_angles, 25)) {
+  if(isalive(self.var_f1b20bef) && isDefined(self.var_f1b20bef sightconetrace(v_view_pos, self, v_forward_angles, 25)) && self.var_f1b20bef sightconetrace(v_view_pos, self, v_forward_angles, 25)) {
     return self.var_f1b20bef;
   }
 
@@ -963,20 +963,20 @@ function_f0b16c98(w_curr, n_dist_sq_max) {
     n_dist_sq = distancesquared(self.origin, level.var_68fa1bc.origin);
 
     if(n_dist_sq < n_dist_sq_max) {
-      if(isDefined(level.var_68fa1bc sightconetrace(var_2ed6f142, self, v_forward_angles, 25)) && level.var_68fa1bc sightconetrace(var_2ed6f142, self, v_forward_angles, 25)) {
+      if(isDefined(level.var_68fa1bc sightconetrace(v_view_pos, self, v_forward_angles, 25)) && level.var_68fa1bc sightconetrace(v_view_pos, self, v_forward_angles, 25)) {
         return level.var_68fa1bc;
       }
     }
   }
 
   var_c581a3b2 = getaiteamarray(level.zombie_team);
-  a_ai_zombies = arraysortclosest(var_c581a3b2, var_2ed6f142, 12);
+  a_ai_zombies = arraysortclosest(var_c581a3b2, v_view_pos, 12);
 
   for(i = 0; i < a_ai_zombies.size; i++) {
     n_dist_sq = distancesquared(self.origin, a_ai_zombies[i].origin);
 
     if(n_dist_sq < n_dist_sq_max) {
-      if(isDefined(a_ai_zombies[i] sightconetrace(var_2ed6f142, self, v_forward_angles, 25) && isDefined(a_ai_zombies[i].allowdeath) && a_ai_zombies[i].allowdeath) && a_ai_zombies[i] sightconetrace(var_2ed6f142, self, v_forward_angles, 25) && isDefined(a_ai_zombies[i].allowdeath) && a_ai_zombies[i].allowdeath) {
+      if(isDefined(a_ai_zombies[i] sightconetrace(v_view_pos, self, v_forward_angles, 25) && isDefined(a_ai_zombies[i].allowdeath) && a_ai_zombies[i].allowdeath) && a_ai_zombies[i] sightconetrace(v_view_pos, self, v_forward_angles, 25) && isDefined(a_ai_zombies[i].allowdeath) && a_ai_zombies[i].allowdeath) {
         return a_ai_zombies[i];
       }
     }

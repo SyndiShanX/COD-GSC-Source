@@ -34,7 +34,7 @@ function start(str_objective) {
   level thread namespace_a789f8ae::function_ba3f106b("rooftop_defend");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   var_b6ac0499 = struct::get("defend_obj_pos", "targetname");
@@ -330,7 +330,7 @@ function function_98346614() {
   }
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x78>");
 }
 

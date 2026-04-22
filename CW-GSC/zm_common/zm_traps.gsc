@@ -382,7 +382,7 @@ function trap_lights_green() {
   for(i = 0; i < self._trap_lights.size; i++) {
     light = self._trap_lights[i];
 
-    if(isDefined(light.var_1cc6f364)) {
+    if(isDefined(light._switch_disabled)) {
       continue;
     }
 
@@ -683,8 +683,8 @@ function zombie_trap_death(e_trap, param) {
         }
       }
 
-      if(isDefined(self.var_5475b4ad)) {
-        self[[self.var_5475b4ad]](e_trap);
+      if(isDefined(self.fire_damage_func)) {
+        self[[self.fire_damage_func]](e_trap);
       } else {
         level notify(#"trap_kill", {
           #e_victim: self, #e_trap: e_trap
@@ -698,8 +698,8 @@ function zombie_trap_death(e_trap, param) {
       ang = vectortoangles(e_trap.origin - self.origin);
       direction_vec = vectorscale(anglestoright(ang), param);
 
-      if(isDefined(self.var_d89f2f98)) {
-        self[[self.var_d89f2f98]](e_trap);
+      if(isDefined(self.trap_reaction_func)) {
+        self[[self.trap_reaction_func]](e_trap);
       }
 
       level notify(#"trap_kill", {

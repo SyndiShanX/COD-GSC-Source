@@ -77,13 +77,13 @@ init_level_vars() {
   level.var_e52901a5 = 1;
   level.var_3c8ad64b = -1;
   level.var_fdba6f4b = &function_558fab23;
-  level.var_7e3a9cf2 = &function_69b9de8b;
+  level.custom_zombie_powerup_drop = &function_69b9de8b;
   level.var_fd2e6f70 = &function_b5000f75;
   level.player_death_override = &tutorial_reset;
   level.zm_bgb_anywhere_but_here_validation_override = &function_170ff027;
   level.var_f44e37f7 = &function_55fb48a3;
   level.player_out_of_playable_area_override = &function_912b7df6;
-  level.var_77805e8 = &function_99bc766a;
+  level.custom_end_screen = &function_99bc766a;
   level._supress_survived_screen = 1;
   level.disablescoreevents = 1;
   level.zm_disable_recording_stats = 1;
@@ -266,16 +266,16 @@ function_57bf8455() {
   self endon(#"death");
 
   while(true) {
-    var_f7dae996 = 0;
+    b_has_ammo = 0;
     a_w_primary = self getweaponslistprimaries();
 
     foreach(w_primary in a_w_primary) {
       if(self getweaponammostock(w_primary) > 0 || self getweaponammoclip(w_primary) > 0) {
-        var_f7dae996 = 1;
+        b_has_ammo = 1;
       }
     }
 
-    if(isDefined(var_f7dae996) && !var_f7dae996) {
+    if(isDefined(b_has_ammo) && !b_has_ammo) {
       if(!isDefined(self.var_21c47e5c)) {
         level thread function_68da8e33(#"hash_3d2e3c2f451c8e2a");
         self.var_21c47e5c = 1;
@@ -709,7 +709,7 @@ function_c3b8207f() {
   self notify(#"crouch_completed");
   level flag::wait_till_clear("tutorial_vo_playing");
   level thread function_68da8e33(#"hash_3af16170dcb577e5", 0.5);
-  self thread function_3e1e39f8(#"hash_2e816a34f4c828df", "sprint_completed", &function_40050d3e, 8);
+  self thread function_3e1e39f8(#"hash_2e816a34f4c828df", "sprint_completed", &watch_for_sprint, 8);
   waittill_trigger("tutorial_finish_pronesprint");
   level flag::wait_till_clear("tutorial_vo_playing");
 }
@@ -749,7 +749,7 @@ points() {
   level thread function_68da8e33(#"hash_51f56d21fa70d946");
 
   if(!self adsButtonPressed()) {
-    self thread function_3e1e39f8(#"hash_c360659fdde1ca7", "ads_completed", &function_7b8a4b02);
+    self thread function_3e1e39f8(#"hash_c360659fdde1ca7", "ads_completed", &watch_for_ads);
   }
 
   self function_fb2e7309();
@@ -1618,7 +1618,7 @@ function_78dbf7e8() {
   }
 }
 
-function_40050d3e() {
+watch_for_sprint() {
   self endon(#"death", #"sprint_completed");
 
   while(true) {
@@ -1631,7 +1631,7 @@ function_40050d3e() {
   }
 }
 
-function_7b8a4b02() {
+watch_for_ads() {
   self endon(#"death", #"ads_completed");
 
   while(true) {
@@ -1794,23 +1794,23 @@ function_384bed55(b_on = 1) {
 
 function_269d9f82(str_barrier, b_on = 1) {
   var_d3c21d73 = (0, 0, 48);
-  var_d23fea4f = struct::get_array(str_barrier, "targetname");
+  a_s_positions = struct::get_array(str_barrier, "targetname");
 
   if(isDefined(b_on) && b_on) {
-    foreach(s_position in var_d23fea4f) {
+    foreach(s_position in a_s_positions) {
       s_position.mdl_pos = util::spawn_model("tag_origin", s_position.origin, s_position.angles);
       s_position.mdl_pos clientfield::set("" + # "hash_1b509b0ba634a25a", 1);
       s_position.mdl_fx = util::spawn_model(#"p8_zm_power_door_symbol_01", s_position.origin + var_d3c21d73, s_position.angles);
       s_position.mdl_fx clientfield::set("" + # "hash_1390e08de02cbdc7", 1);
-      s_position.var_3cefdbf5 = util::spawn_model("collision_player_wall_128x128x10", s_position.origin + var_d3c21d73, s_position.angles);
-      s_position.var_3cefdbf5 disconnectpaths();
-      s_position.var_3cefdbf5 ghost();
+      s_position.mdl_collision = util::spawn_model("collision_player_wall_128x128x10", s_position.origin + var_d3c21d73, s_position.angles);
+      s_position.mdl_collision disconnectpaths();
+      s_position.mdl_collision ghost();
     }
 
     return;
   }
 
-  foreach(s_position in var_d23fea4f) {
+  foreach(s_position in a_s_positions) {
     if(isDefined(s_position.mdl_pos)) {
       s_position.mdl_pos clientfield::set("" + # "hash_1b509b0ba634a25a", 0);
       util::wait_network_frame();
@@ -1823,10 +1823,10 @@ function_269d9f82(str_barrier, b_on = 1) {
       s_position.mdl_fx delete();
     }
 
-    if(isDefined(s_position.var_3cefdbf5)) {
-      s_position.var_3cefdbf5 notsolid();
-      s_position.var_3cefdbf5 connectpaths();
-      s_position.var_3cefdbf5 delete();
+    if(isDefined(s_position.mdl_collision)) {
+      s_position.mdl_collision notsolid();
+      s_position.mdl_collision connectpaths();
+      s_position.mdl_collision delete();
     }
   }
 }

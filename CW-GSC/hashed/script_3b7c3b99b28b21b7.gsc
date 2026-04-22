@@ -77,13 +77,13 @@ function wall_start(str_objective) {
   getent("sewer_cover_clip", "targetname") delete();
 }
 
-function function_cca0368(str_objective, var_50cc0d4f) {
+function function_cca0368(str_objective, b_starting) {
   scene::add_scene_func("aib_vign_stakeout_wall_gl", &function_a23963d2, "init");
   scene::add_scene_func("aib_vign_stakeout_wall_gl", &function_ba702467, "wall_acroof");
   player = getplayers()[0];
   namespace_5ceacc03::music("4.0_rooftops");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level scene::init("aib_vign_stakeout_wall_gl");
     level scene::init("aib_vign_stakeout_wall_alley_door");
     player namespace_979752dc::set_disguised(1);
@@ -113,7 +113,7 @@ function function_cca0368(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("wall");
 }
 
-function function_f39fdd43(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_f39fdd43(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("climbed_out_of_sewer");
     level flag::set("at_street_overlook");
@@ -709,10 +709,10 @@ function rooftop_start(str_objective) {
   level scene::init("aib_vign_stakeout_street_rooftop_descend");
 }
 
-function rooftop_main(str_objective, var_50cc0d4f) {
+function rooftop_main(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_5ceacc03::music("4.0_rooftops");
     level.adler val::set("wall_adler", "ignoreall", 1);
     level.adler val::set("wall_adler", "ignoreme", 1);
@@ -751,7 +751,7 @@ function function_85133ec9() {
   }
 }
 
-function rooftop_cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function rooftop_cleanup(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("identify_kraus_done");
     level flag::set("rooftop_done");

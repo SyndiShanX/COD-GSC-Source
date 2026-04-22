@@ -381,7 +381,7 @@ function private codcaster_monitor_player_pucks(localclientnum) {
 
     foreach(player in getplayers(localclientnum)) {
       var_1db99579 = function_7ed4edd3(player.name);
-      var_950b4dc5 = isDefined(player) && var_1aee36ff && isalive(player) && !function_3132f113(player);
+      var_950b4dc5 = isDefined(player) && var_1aee36ff && isalive(player) && !isremovedentity(player);
 
       if(!var_15dfb7fc && var_1db99579 && player function_21c0fa55() && (!isDefined(level.var_4f107064) || level.var_4f107064 != player.name)) {
         function_35248a94(level.var_4f107064);
@@ -410,7 +410,7 @@ function private codcaster_monitor_player_pucks(localclientnum) {
 
         linkedent = var_5854d8e.player;
 
-        if(!isDefined(linkedent) || function_3132f113(linkedent) || !isalive(linkedent)) {
+        if(!isDefined(linkedent) || isremovedentity(linkedent) || !isalive(linkedent)) {
           function_425a51a2(var_5854d8e);
           continue;
         }

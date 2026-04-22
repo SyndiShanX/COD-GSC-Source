@@ -2121,12 +2121,12 @@ function_bb5a8b5e(b_charged) {
   a_w_ww = array::randomize(a_w_ww);
 
   foreach(i, e_player in getplayers()) {
-    var_3ba4bf7d = e_player getweaponslistprimaries();
+    a_w_primaries = e_player getweaponslistprimaries();
 
-    if(var_3ba4bf7d.size > 1) {
+    if(a_w_primaries.size > 1) {
       w_current = e_player getcurrentweapon();
 
-      if(isDefined(w_current) && isinarray(var_3ba4bf7d, w_current)) {
+      if(isDefined(w_current) && isinarray(a_w_primaries, w_current)) {
         e_player takeweapon(w_current);
       } else {
         return;

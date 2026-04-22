@@ -1472,7 +1472,7 @@ function_3f504167() {
 
   foreach(e_zombie in a_e_zombies) {
     if(isalive(e_zombie) && !(isDefined(e_zombie.var_c57bc555) && e_zombie.var_c57bc555)) {
-      v_zombie_loc = mansion_util::function_a8176b98(e_zombie.origin);
+      v_zombie_loc = mansion_util::get_drop_pos(e_zombie.origin);
     }
 
     if(isDefined(v_zombie_loc) && zm_zonemgr::function_66bf6a43(v_zombie_loc) && distance2dsquared(v_zombie_loc, self.origin > 250000)) {

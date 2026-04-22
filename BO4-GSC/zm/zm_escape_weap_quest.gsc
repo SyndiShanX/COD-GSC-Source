@@ -203,9 +203,9 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
   }
 
   vec_dir = self.s_scene.origin - var_678e573f.origin;
-  var_17deee3d = vectorscale(vec_dir, 0.2);
+  vec_dir_scaled = vectorscale(vec_dir, 0.2);
   v_angles_forward = vectortoangles(vec_dir);
-  var_678e573f moveto(var_678e573f.origin + var_17deee3d, var_66a8d5fc, var_66a8d5fc);
+  var_678e573f moveto(var_678e573f.origin + vec_dir_scaled, var_66a8d5fc, var_66a8d5fc);
 
   if(self.var_43bd3b5 == 0) {
     self flag::wait_till(#"wolf_intro_anim_complete");
@@ -303,11 +303,11 @@ soul_catcher_state_manager() {
   self flag::init(#"wolf_intro_anim_complete");
 
   if(self.script_noteworthy == "rune_3") {
-    self.var_740e1e0e = getent("rune_3", "targetname");
+    self.mdl_rune = getent("rune_3", "targetname");
   } else if(self.script_noteworthy == "rune_2") {
-    self.var_740e1e0e = getent("rune_2", "targetname");
+    self.mdl_rune = getent("rune_2", "targetname");
   } else if(self.script_noteworthy == "rune_1") {
-    self.var_740e1e0e = getent("rune_1", "targetname");
+    self.mdl_rune = getent("rune_1", "targetname");
   }
 
   self waittill(#"first_zombie_killed_in_zone");
@@ -316,7 +316,7 @@ soul_catcher_state_manager() {
     self.t_hurt show();
   }
 
-  self.var_740e1e0e clientfield::set("" + # "hash_5ecbfb9042fc7f38", 1);
+  self.mdl_rune clientfield::set("" + # "hash_5ecbfb9042fc7f38", 1);
   self.s_scene scene::play("Start");
   self flag::set(#"wolf_intro_anim_complete");
   self waittill(#"finished_eating");
@@ -327,8 +327,8 @@ soul_catcher_state_manager() {
   }
 
   self notify(#"hash_1c2dd0a16f7ac134");
-  self.var_740e1e0e clientfield::set("" + # "hash_5ecbfb9042fc7f38", 0);
-  self.var_740e1e0e setModel("p8_zm_esc_dream_catcher");
+  self.mdl_rune clientfield::set("" + # "hash_5ecbfb9042fc7f38", 0);
+  self.mdl_rune setModel("p8_zm_esc_dream_catcher");
   self.s_scene scene::play("Depart");
 }
 
@@ -337,9 +337,9 @@ function_ee929ece() {
   self endon(#"wolf_eating", #"hash_1c2dd0a16f7ac134", #"wolf_idling");
 
   while(true) {
-    var_ba0da6c = array::random(level.var_22f00ccf);
-    self.s_scene thread scene::play(var_ba0da6c);
-    var_c74251a4 = scene::function_8582657c(self.s_scene.scriptbundlename, var_ba0da6c);
+    random_idle_anim = array::random(level.var_22f00ccf);
+    self.s_scene thread scene::play(random_idle_anim);
+    var_c74251a4 = scene::function_8582657c(self.s_scene.scriptbundlename, random_idle_anim);
     wait var_c74251a4 + randomintrange(4, 10);
   }
 }

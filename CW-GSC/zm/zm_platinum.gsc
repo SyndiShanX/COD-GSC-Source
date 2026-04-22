@@ -285,11 +285,11 @@ function function_452e5ad6() {
   spawn_points = zm_gametype::get_player_spawns_for_gametype();
   spawn_points = arraysortclosest(spawn_points, self.origin, undefined, 0, 2000);
   var_a6107c9 = array("zone_bunny_club");
-  var_bdf9e3c2 = self zm_zonemgr::get_player_zone();
-  a_adjacent_zones = level.zones[var_bdf9e3c2].adjacent_zones;
+  str_current_zone = self zm_zonemgr::get_player_zone();
+  a_adjacent_zones = level.zones[str_current_zone].adjacent_zones;
   var_d117c934 = [];
 
-  if(isDefined(var_bdf9e3c2)) {
+  if(isDefined(str_current_zone)) {
     foreach(point in spawn_points) {
       if(isentity(level.var_22a21403) && !istouching(point.origin, level.var_22a21403)) {
         continue;
@@ -302,13 +302,13 @@ function function_452e5ad6() {
       if(isDefined(a_adjacent_zones) && a_adjacent_zones.size > 0) {
         var_1d4c3ee8 = zm_zonemgr::get_zone_from_position(point.origin);
 
-        if(!isDefined(var_1d4c3ee8) || !isinarray(a_adjacent_zones, var_1d4c3ee8) && var_1d4c3ee8 != var_bdf9e3c2) {
+        if(!isDefined(var_1d4c3ee8) || !isinarray(a_adjacent_zones, var_1d4c3ee8) && var_1d4c3ee8 != str_current_zone) {
           continue;
         }
       } else {
         var_1d4c3ee8 = zm_zonemgr::get_zone_from_position(point.origin);
 
-        if(var_1d4c3ee8 != var_bdf9e3c2) {
+        if(var_1d4c3ee8 != str_current_zone) {
           continue;
         }
       }

@@ -71,7 +71,7 @@ function_eaba72c9() {
 
   while(true) {
     if(getdvarint(#"wz_delete_vehicles", 0) > 0) {
-      function_40fc185b();
+      delete_all_vehicles();
       setDvar(#"wz_delete_vehicles", 0);
     }
 
@@ -79,8 +79,8 @@ function_eaba72c9() {
   }
 }
 
-function_40fc185b() {
-  level notify(#"hash_724a3976e45a71e2");
+delete_all_vehicles() {
+  level notify(#"delete_all_vehicles");
 }
 
 _setup_devgui() {
@@ -755,7 +755,7 @@ function_ea4291d3() {
   return isDefined(self.locked_on) && self.locked_on > 0;
 }
 
-function_b3caeebc(player) {
+lock_on_warning(player) {
   self endon(#"death");
   player endon(#"exit_vehicle", #"death");
 
@@ -896,7 +896,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 
   isemped = vehicle function_adc0649a();
   vehicle function_388973e4(isemped);
-  vehicle thread function_b3caeebc(self);
+  vehicle thread lock_on_warning(self);
 }
 
 event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
@@ -1824,7 +1824,7 @@ function_b1d54776() {
   self.var_96c0f900[2] = 1000;
   self.var_96c0f900[1] = 1000;
 
-  if(!isDefined(self) || function_3132f113(self)) {
+  if(!isDefined(self) || isremovedentity(self)) {
     return;
   }
 
@@ -1860,7 +1860,7 @@ function_8fb65b2a() {
   self.var_96c0f900[2] = 1000;
   self function_4c6bcfe2(1);
 
-  if(!isDefined(self) || function_3132f113(self)) {
+  if(!isDefined(self) || isremovedentity(self)) {
     return;
   }
 

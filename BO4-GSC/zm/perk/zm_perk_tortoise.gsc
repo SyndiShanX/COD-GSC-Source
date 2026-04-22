@@ -72,7 +72,7 @@ function_b754923d(b_pause, str_perk, str_result, n_slot) {
   self.var_27aeb716 = undefined;
 }
 
-function_81058b09(var_d92ac80e) {
+function_81058b09(w_riotshield) {
   a_ai = self getenemiesinradius(self.origin, 320);
   a_ai = arraysortclosest(a_ai, self.origin);
 
@@ -96,7 +96,7 @@ function_81058b09(var_d92ac80e) {
     }
 
     ai.var_cbfc5f6e = 1;
-    ai dodamage(1200, v_explosion_origin, self, self, "none", "MOD_EXPLOSIVE", 0, var_d92ac80e);
+    ai dodamage(1200, v_explosion_origin, self, self, "none", "MOD_EXPLOSIVE", 0, w_riotshield);
 
     if(isalive(ai)) {
       if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {

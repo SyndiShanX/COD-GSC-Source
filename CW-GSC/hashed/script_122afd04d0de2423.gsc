@@ -44,7 +44,7 @@
 #using scripts\weapons\cp\spy_camera;
 #namespace namespace_f464d565;
 
-function function_dbf2a80e(var_d3440450) {
+function function_dbf2a80e(str_skipto) {
   level.var_aece851d = [];
   level.var_33621ea7 = 1;
   namespace_42da7c51::function_ed760ecb("woods");
@@ -55,7 +55,7 @@ function function_dbf2a80e(var_d3440450) {
   level thread namespace_61150688::music("combat");
 }
 
-function function_b474f6be(var_d3440450, var_50cc0d4f) {
+function function_b474f6be(str_skipto, b_starting) {
   player = getplayers()[0];
   player thread function_8896f07c();
   level.woods endon(#"death");
@@ -70,8 +70,8 @@ function function_b474f6be(var_d3440450, var_50cc0d4f) {
   level thread function_50051760();
   level flag::wait_till("flag_parking_lot_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -107,13 +107,13 @@ function function_50051760() {
   }
 }
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   namespace_42da7c51::function_ed760ecb("woods");
   level thread function_377fcb1e();
   level util::delay(1, undefined, &flag::set, "flag_assault_heli_4");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.woods endon(#"death");
   level battlechatter::function_2ab9360b(0);
   level.woods colors::disable();
@@ -132,8 +132,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level.woods val::reset_all(#"hash_fc8c2d0605f3557");
   snd::client_msg("stop_camera_zoom");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

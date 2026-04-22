@@ -76,7 +76,7 @@ function function_7514adbc() {
   level flag::set("train_door_used");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   level flag::set("start_train_lighting");
   scene::function_d0d7d9f7("cin_stakeout_train_intro", &function_e9812a44);
   scene::add_scene_func("cin_stakeout_train_cam_shake", &function_6c744934, "play");
@@ -172,7 +172,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("train");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     train_tunnel_01 = function_dd407ea1(getEntArray("train_tunnel_01", "targetname"));
     train_tunnel_02 = function_dd407ea1(getEntArray("train_tunnel_02", "targetname"));
@@ -767,7 +767,7 @@ function function_4cb25b61(str_objective) {
   level thread function_805f1669();
 }
 
-function function_1eb97f49(str_objective, var_50cc0d4f) {
+function function_1eb97f49(str_objective, b_starting) {
   level flag::set("start_train_lighting");
   scene::function_d0d7d9f7("cin_stakeout_train_intro", &function_e9812a44);
   scene::add_scene_func("cin_stakeout_train_cam_shake", &function_6c744934, "play");

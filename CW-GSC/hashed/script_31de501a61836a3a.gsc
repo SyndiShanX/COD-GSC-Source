@@ -117,8 +117,8 @@ function init(instance) {
   if(isDefined(instance.contentgroups[#"collision_platform"])) {
     var_111c92a8 = content_manager::function_cfa4f1a0(instance.contentgroups[#"collision_platform"], #"hash_1435198d5240ac8c", 0);
 
-    foreach(var_3cefdbf5 in var_111c92a8) {
-      var_3cefdbf5 ghost();
+    foreach(mdl_collision in var_111c92a8) {
+      mdl_collision ghost();
     }
   }
 

@@ -237,13 +237,13 @@ function function_35ba0b0e(localclientnum, n_slot) {
   self endon(#"death");
   self zm_loadout::function_622d8349(localclientnum);
   n_perk = n_slot + 1;
-  var_3e311473 = self zm_loadout::get_loadout_item(localclientnum, "specialty" + n_perk);
+  n_perk_index = self zm_loadout::get_loadout_item(localclientnum, "specialty" + n_perk);
 
-  if(!isDefined(var_3e311473)) {
+  if(!isDefined(n_perk_index)) {
     return;
   }
 
-  s_perk = getunlockableiteminfofromindex(var_3e311473, 3);
+  s_perk = getunlockableiteminfofromindex(n_perk_index, 3);
 
   if(!isDefined(s_perk) || !isDefined(s_perk.specialties) || !isDefined(s_perk.specialties[0])) {
     return;

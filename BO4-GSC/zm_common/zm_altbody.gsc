@@ -33,8 +33,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  if(!isDefined(level.var_28f2d2b1)) {
-    level.var_28f2d2b1 = [];
+  if(!isDefined(level.altbody_bgb_blacklists)) {
+    level.altbody_bgb_blacklists = [];
   }
 
   clientfield::register("clientuimodel", "player_lives", 1, 2, "int");
@@ -43,7 +43,7 @@ __init__() {
   clientfield::register("allplayers", "player_altbody", 1, 1, "int");
 }
 
-init(name, kiosk_name, trigger_hint, visionset_name, visionset_priority, loadout, character_index, enter_callback, exit_callback, allow_callback, notrigger_hint, var_64d51f6) {
+init(name, kiosk_name, trigger_hint, visionset_name, visionset_priority, loadout, character_index, enter_callback, exit_callback, allow_callback, notrigger_hint, bgb_blacklist) {
   if(!isDefined(level.altbody_enter_callbacks)) {
     level.altbody_enter_callbacks = [];
   }
@@ -73,17 +73,17 @@ init(name, kiosk_name, trigger_hint, visionset_name, visionset_priority, loadout
     visionset_mgr::register_info("visionset", visionset_name, 1, visionset_priority, 1, 1);
   }
 
-  function_87585132(name, kiosk_name, trigger_hint, notrigger_hint);
+  register_kiosk_triggers(name, kiosk_name, trigger_hint, notrigger_hint);
   level.altbody_enter_callbacks[name] = enter_callback;
   level.altbody_exit_callbacks[name] = exit_callback;
   level.altbody_allow_callbacks[name] = allow_callback;
   level.altbody_loadouts[name] = loadout;
   level.altbody_charindexes[name] = character_index;
-  level.var_28f2d2b1[name] = var_64d51f6;
-  level thread function_6991025d();
+  level.altbody_bgb_blacklists[name] = bgb_blacklist;
+  level thread watch_end_game();
 }
 
-function_6991025d() {
+watch_end_game() {
   level waittill(#"end_game");
   players = getplayers();
 
@@ -96,7 +96,7 @@ devgui_start_altbody(name) {
   self player_altbody(name);
 }
 
-function private function_17d98816(trigger, name) {
+function private player_can_altbody_trigger(trigger, name) {
   if(self zm_utility::is_drinking() && !(isDefined(self.trigger_kiosks_in_altbody) && self.trigger_kiosks_in_altbody)) {
     return false;
   }
@@ -165,15 +165,15 @@ player_can_altbody(kiosk, name) {
 }
 
 function_1193c448(name) {
-  if(!isDefined(level.var_28f2d2b1)) {
-    level.var_28f2d2b1 = [];
+  if(!isDefined(level.altbody_bgb_blacklists)) {
+    level.altbody_bgb_blacklists = [];
   }
 
-  if(!isDefined(level.var_28f2d2b1[name])) {
-    level.var_28f2d2b1[name] = [];
+  if(!isDefined(level.altbody_bgb_blacklists[name])) {
+    level.altbody_bgb_blacklists[name] = [];
   }
 
-  foreach(str_bgb in level.var_28f2d2b1[name]) {
+  foreach(str_bgb in level.altbody_bgb_blacklists[name]) {
     if(self bgb::is_enabled(str_bgb)) {
       return true;
     }
@@ -331,7 +331,7 @@ function_d709966a(washuman) {
   self playlocalsound(#"zmb_player_disapparate_2d");
 }
 
-function_87585132(name, kiosk_name, trigger_hint, notrigger_hint) {
+register_kiosk_triggers(name, kiosk_name, trigger_hint, notrigger_hint) {
   if(!isDefined(level.altbody_kiosks)) {
     level.altbody_kiosks = [];
   }
@@ -339,13 +339,13 @@ function_87585132(name, kiosk_name, trigger_hint, notrigger_hint) {
   level.altbody_kiosks[name] = struct::get_array(kiosk_name, "targetname");
 
   foreach(kiosk in level.altbody_kiosks[name]) {
-    function_f5e5eac2(kiosk, name, trigger_hint, notrigger_hint);
+    register_kiosk_unitrigger(kiosk, name, trigger_hint, notrigger_hint);
   }
 
   level notify(#"hash_3cf24457a0015f72", name);
 }
 
-function_f5e5eac2(kiosk, name, trigger_hint, notrigger_hint) {
+register_kiosk_unitrigger(kiosk, name, trigger_hint, notrigger_hint) {
   width = 128;
   height = 128;
   length = 128;

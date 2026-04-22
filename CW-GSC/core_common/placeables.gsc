@@ -682,7 +682,7 @@ function shutdownoncancelevent(placeable) {
     }
   }
 
-  if(function_3132f113(placeable)) {
+  if(isremovedentity(placeable)) {
     if(isDefined(vehicle)) {
       vehicle.selfdestruct = 1;
       vehicle._no_death_state = 1;

@@ -32,7 +32,7 @@ function function_38ae4287() {
   self callback::function_d8abfc3d(#"on_vehicle_spawned", &function_89c08ee4);
   self player_vehicle::function_bc79899e();
 
-  if(!isDefined(self) || function_3132f113(self)) {
+  if(!isDefined(self) || isremovedentity(self)) {
     return;
   }
 

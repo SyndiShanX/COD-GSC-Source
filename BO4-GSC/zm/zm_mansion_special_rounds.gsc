@@ -162,9 +162,9 @@ function_e1c262fb(entity) {
   }
 
   if(isDefined(entity) && isDefined(entity.favoriteenemy) && zm_utility::is_player_valid(entity.favoriteenemy)) {
-    var_46d2ec35 = entity.favoriteenemy;
+    e_favorite_enemy = entity.favoriteenemy;
   } else {
-    var_46d2ec35 = get_favorite_enemy();
+    e_favorite_enemy = get_favorite_enemy();
   }
 
   var_ae51d146 = 400 * 400;
@@ -175,11 +175,11 @@ function_e1c262fb(entity) {
       continue;
     }
 
-    if(!isalive(var_46d2ec35)) {
+    if(!isalive(e_favorite_enemy)) {
       return array::random(a_locs);
     }
 
-    n_dist_squared = distancesquared(a_locs[i].origin, var_46d2ec35.origin);
+    n_dist_squared = distancesquared(a_locs[i].origin, e_favorite_enemy.origin);
 
     if(n_dist_squared > var_ae51d146 && n_dist_squared < var_5c124858) {
       level.var_445185e3 = a_locs[i];
@@ -187,7 +187,7 @@ function_e1c262fb(entity) {
     }
   }
 
-  return arraygetclosest(var_46d2ec35.origin, a_locs);
+  return arraygetclosest(e_favorite_enemy.origin, a_locs);
 }
 
 function_c79d744e(s_spawn_loc) {
@@ -319,7 +319,7 @@ function_38c0c907() {
   var_d3b167fd = self.origin;
 
   if(isDefined(var_d3b167fd)) {
-    v_drop = mansion_util::function_a8176b98(var_d3b167fd);
+    v_drop = mansion_util::get_drop_pos(var_d3b167fd);
   }
 
   if(!isDefined(v_drop)) {
@@ -389,10 +389,10 @@ function_50ec1ddf() {
   }
 
   a_s_spawn_locs = struct::get_array("werewolf_location", "script_noteworthy");
-  var_46d2ec35 = get_favorite_enemy();
+  e_favorite_enemy = get_favorite_enemy();
 
-  if(isDefined(var_46d2ec35)) {
-    a_s_spawn_locs = array::get_all_closest(var_46d2ec35.origin, a_s_spawn_locs);
+  if(isDefined(e_favorite_enemy)) {
+    a_s_spawn_locs = array::get_all_closest(e_favorite_enemy.origin, a_s_spawn_locs);
   } else {
     a_s_spawn_locs = array::randomize(a_s_spawn_locs);
   }
@@ -424,12 +424,12 @@ function_e91102ad() {
 
 function_1a27cc15() {
   var_c9e3c7bc = arraycombine(getplayers(), getaiarchetypearray(#"werewolf"), 0, 0);
-  var_bdf9e3c2 = self zm_utility::get_current_zone();
+  str_current_zone = self zm_utility::get_current_zone();
 
   foreach(e_entity in var_c9e3c7bc) {
     var_91dfe7f4 = e_entity zm_utility::get_current_zone();
 
-    if(var_91dfe7f4 === var_bdf9e3c2) {
+    if(var_91dfe7f4 === str_current_zone) {
       return true;
     }
   }

@@ -44,7 +44,7 @@ function init_clientfields() {
   clientfield::register("toplayer", "clf_pstfx_burn_safehouse", 1, 1, "int");
 }
 
-function function_f4db46d4(var_d3440450) {
+function function_f4db46d4(str_skipto) {
   level thread scene::init_streamer(#"scene_hub_post_prisoner_brainwash_find_bell", getplayers());
   cargo_plane = getent("cargo_plane", "targetname");
 
@@ -61,12 +61,12 @@ function function_f4db46d4(var_d3440450) {
   }
 }
 
-function rescue_main(var_d3440450, var_50cc0d4f) {
+function rescue_main(str_skipto, b_starting) {
   while(!isDefined(level.player_connected) || isDefined(level.player_connected) && level.player_connected != 1) {
     waitframe(1);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 
@@ -76,4 +76,4 @@ function rescue_main(var_d3440450, var_50cc0d4f) {
   scene::stop("scene_hub_post_prisoner_brainwash_find_bell", 1);
 }
 
-function rescue_cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function rescue_cleanup(str_objective, b_starting, var_aa1a6455, player) {}

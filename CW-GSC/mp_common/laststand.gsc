@@ -323,11 +323,11 @@ function function_5de626dc(var_a1258c6b) {
 
 function function_dc7906e8(einflictor, attacker, idamage, smeansofdeath, weapon, var_fd90b0bb, vdir, shitloc) {
   self.laststandparams = spawnStruct();
-  self.var_bfc8055f = spawnStruct();
+  self.laststandkillcam = spawnStruct();
   self.laststandparams.einflictor = einflictor;
-  self.var_bfc8055f.var_b5346661 = isDefined(einflictor) ? einflictor getentitynumber() : -1;
+  self.laststandkillcam.einflictornum = isDefined(einflictor) ? einflictor getentitynumber() : -1;
   self.laststandparams.attacker = attacker;
-  self.var_bfc8055f.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
+  self.laststandkillcam.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
   self.laststandparams.attackerorigin = attacker.origin;
 
   if(isPlayer(attacker)) {
@@ -368,14 +368,14 @@ function function_67b38e11(einflictor, attacker, idamage, smeansofdeath, weapon,
     self.laststandparams = [];
   }
 
-  if(!isDefined(self.var_bfc8055f)) {
-    self.var_bfc8055f = [];
+  if(!isDefined(self.laststandkillcam)) {
+    self.laststandkillcam = [];
   }
 
   self.laststandparams.einflictor = einflictor;
-  self.var_bfc8055f.var_b5346661 = isDefined(einflictor) ? einflictor getentitynumber() : -1;
+  self.laststandkillcam.einflictornum = isDefined(einflictor) ? einflictor getentitynumber() : -1;
   self.laststandparams.attacker = attacker;
-  self.var_bfc8055f.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
+  self.laststandkillcam.attackernum = isDefined(attacker) ? attacker getentitynumber() : -1;
   self.laststandparams.idamage = idamage;
   self.laststandparams.smeansofdeath = smeansofdeath;
   self.laststandparams.weapon = weapon;
@@ -844,7 +844,7 @@ function function_72e0c544() {
 function laststand_bleedout(bleedouttime, var_969fabf4) {
   level endon(#"game_ended");
   self endon(#"player_revived", #"player_bleedout", #"death", #"disconnect");
-  self.var_84c0402e = bleedouttime;
+  self.last_bleedout_time = bleedouttime;
   self.bleedout_time = bleedouttime;
   self.var_969fabf4 = var_969fabf4;
   self.var_2d19ce3c = 0;
@@ -1013,11 +1013,11 @@ function bleed_out() {
   }
 
   if(getdvarint(#"hash_62b8db0428755a32", 1) && isPlayer(self)) {
-    var_d7e063c = getdvarfloat(#"hash_44de9418bb6289ac", 1.5);
+    bleed_out_fade_time = getdvarfloat(#"hash_44de9418bb6289ac", 1.5);
     self playsoundtoplayer(#"hash_11d39dca0f911535", self);
-    self lui::screen_fade(var_d7e063c, 1, 0, "black", 0);
-    wait var_d7e063c + 0.2;
-    self lui::screen_fade(var_d7e063c, 0, 1, "black", 0);
+    self lui::screen_fade(bleed_out_fade_time, 1, 0, "black", 0);
+    wait bleed_out_fade_time + 0.2;
+    self lui::screen_fade(bleed_out_fade_time, 0, 1, "black", 0);
   }
 
   if(isDefined(self) && self.no_respawn !== 1) {
@@ -1388,7 +1388,7 @@ function can_revive(revivee, ignore_touch_checks = 0, height = undefined) {
     return false;
   }
 
-  if(isDefined(level.var_1461fd14) && ![[level.var_1461fd14]](revivee)) {
+  if(isDefined(level.can_revive_game_module) && ![[level.can_revive_game_module]](revivee)) {
     return false;
   }
 

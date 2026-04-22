@@ -44,12 +44,12 @@ activation() {
     chest = level.chests[i];
 
     if(isDefined(chest.zbarrier.weapon_model) && isDefined(chest.chest_user) && self == chest.chest_user) {
-      chest thread function_80b33681(self);
+      chest thread respin_chest_thread(self);
     }
   }
 }
 
-function_80b33681(player) {
+respin_chest_thread(player) {
   self.zbarrier clientfield::increment("zm_bgb_respin_cycle");
 
   if(isDefined(self.zbarrier.weapon_model)) {

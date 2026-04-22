@@ -29,8 +29,8 @@ on_begin() {
   var_a2c75164 = getent("mannequin_ally_door", "targetname");
   var_a2c75164 zm_white_private_mannequin::function_a51b6403(1);
   wait 1;
-  level.var_1a612d42 = getplayers()[0];
-  level.var_1a612d42.eligible_leader = 1;
+  level.companion_leader = getplayers()[0];
+  level.companion_leader.eligible_leader = 1;
   mannequin_ally_spawner = getent("mannequin_american_spawner", "targetname");
 
   if(isDefined(mannequin_ally_spawner)) {

@@ -66,8 +66,8 @@ zombify_player() {
   self zm_score::player_died_penalty();
   self recordplayerdeathzombies();
 
-  if(isDefined(level.var_1025308b)) {
-    self[[level.var_1025308b]]();
+  if(isDefined(level.deathcard_spawn_func)) {
+    self[[level.deathcard_spawn_func]]();
   }
 
   if(isDefined(level.func_clone_plant_respawn) && isDefined(self.s_clone_plant)) {

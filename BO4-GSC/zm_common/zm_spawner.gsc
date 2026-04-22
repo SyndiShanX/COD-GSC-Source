@@ -236,8 +236,8 @@ zombie_spawn_init() {
     self.sword_kill_power = 2;
   }
 
-  if(isDefined(level.var_9c55db3)) {
-    self[[level.var_9c55db3]]();
+  if(isDefined(level.achievement_monitor_func)) {
+    self[[level.achievement_monitor_func]]();
   }
 
   if(isDefined(zm_utility::get_gamemode_var("post_init_zombie_spawn_func"))) {
@@ -1011,8 +1011,8 @@ zombie_death_animscript(einflictor, attacker, idamage, smeansofdeath, weapon, vd
     return false;
   }
 
-  if(isDefined(level.var_5250bbfe)) {
-    self[[level.var_5250bbfe]]();
+  if(isDefined(level.zombie_death_animscript_override)) {
+    self[[level.zombie_death_animscript_override]]();
   }
 
   self.grenadeammo = 0;
@@ -1773,8 +1773,8 @@ function do_zombie_rise(spot) {
 
   if(isDefined(custom_riseanim)) {
     self animscripted("rise_anim", self.origin, spot.angles, custom_riseanim, "normal");
-  } else if(isDefined(level.var_6129f460)) {
-    self[[level.var_6129f460]](spot);
+  } else if(isDefined(level.custom_rise_func)) {
+    self[[level.custom_rise_func]](spot);
   } else {
     self animscripted("rise_anim", self.origin, spot.angles, "ai_zombie_base_traverse_ground_climbout_fast", "normal");
   }

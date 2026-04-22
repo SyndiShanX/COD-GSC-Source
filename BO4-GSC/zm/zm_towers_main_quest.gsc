@@ -2172,7 +2172,7 @@ function_d6a5d146() {
   var_49c750a8 thread function_b0ada3cc();
   b_rotated = 0;
   n_health = 8500;
-  var_e41dced6 = 1416.67;
+  n_increments = 1416.67;
   var_45ad4c92 = 0;
 
   while(!b_rotated) {
@@ -2197,7 +2197,7 @@ function_d6a5d146() {
     var_49c750a8 flag::set(#"hash_66eb0aa5f179e140");
 
     for(i = 1; i <= 6; i++) {
-      n_threshold = 8500 - var_e41dced6 * i;
+      n_threshold = 8500 - n_increments * i;
 
       switch (i) {
         case 1:

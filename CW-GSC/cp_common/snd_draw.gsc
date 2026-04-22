@@ -341,7 +341,7 @@ function private function_6ee9efa7(color, depthtest, duration, offset) {
       var_c6150a06 = drawpatharray;
     }
 
-    if(isDefined(self) == 1 && isDefined(self.origin) == 1 && function_3132f113(self) == 0) {
+    if(isDefined(self) == 1 && isDefined(self.origin) == 1 && isremovedentity(self) == 0) {
       var_c6150a06[var_c6150a06.size] = self.origin;
     }
 

@@ -353,10 +353,10 @@ function_11efbb03(e_player) {
       if(zm_utility::can_use(e_player, 1) && e_player.currentweapon.name != "none") {
         self notify(#"magma_taken");
         e_player notify(#"magma_taken");
-        var_287a8343 = zm_utility::get_player_weapon_limit(e_player);
+        n_weapon_limit = zm_utility::get_player_weapon_limit(e_player);
         a_primaries = e_player getweaponslistprimaries();
 
-        if(isDefined(a_primaries) && a_primaries.size >= var_287a8343) {
+        if(isDefined(a_primaries) && a_primaries.size >= n_weapon_limit) {
           e_player takeweapon(e_player.currentweapon);
         }
 
@@ -894,10 +894,10 @@ function_d3db303d() {
       if(zm_utility::can_use(e_player, 1) && e_player.currentweapon.name != "none") {
         self.stub notify(#"magma_taken");
         e_player notify(#"magma_taken");
-        var_287a8343 = zm_utility::get_player_weapon_limit(e_player);
+        n_weapon_limit = zm_utility::get_player_weapon_limit(e_player);
         a_primaries = e_player getweaponslistprimaries();
 
-        if(isDefined(a_primaries) && a_primaries.size >= var_287a8343) {
+        if(isDefined(a_primaries) && a_primaries.size >= n_weapon_limit) {
           e_player takeweapon(e_player.currentweapon);
         }
 

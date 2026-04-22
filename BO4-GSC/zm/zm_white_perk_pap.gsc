@@ -109,10 +109,10 @@ function_ee662714() {
   level.var_dcd1e798 useanimtree("generic");
 }
 
-function_22bf8bd4(var_3e311473) {
-  assert(isDefined(var_3e311473) && var_3e311473 > -1 && var_3e311473 < 5, "<dev string:x62>");
+function_22bf8bd4(n_perk_index) {
+  assert(isDefined(n_perk_index) && n_perk_index > -1 && n_perk_index < 5, "<dev string:x62>");
 
-  if(var_3e311473 == 4) {
+  if(n_perk_index == 4) {
     var_5e879929 = getent("zm_pack_a_punch", "targetname");
     var_fc50707f = getEntArray("zm_random_machine_blocker", "script_noteworthy");
     var_46d6340f = arraygetclosest(var_5e879929.origin, var_fc50707f);
@@ -126,7 +126,7 @@ function_22bf8bd4(var_3e311473) {
   foreach(var_5baafbb2 in level.var_76a7ad28) {
     assert(isDefined(var_5baafbb2.var_3468124), "<dev string:xab>");
 
-    if(var_5baafbb2.var_3468124.script_int == var_3e311473) {
+    if(var_5baafbb2.var_3468124.script_int == n_perk_index) {
       var_fc50707f = getEntArray("zm_random_machine_blocker", "script_noteworthy");
       var_46d6340f = arraygetclosest(var_5baafbb2.origin, var_fc50707f);
       var_46d6340f thread function_da95f7();

@@ -91,7 +91,7 @@ function function_6a3e8a89() {
     while(isalive(player) && player istouching(self) && player useButtonPressed() && elapsed_time < 0.5) {
       elapsed_time = float(gettime() - var_b1336156) / 1000;
       progress = elapsed_time / 0.5;
-      n_resource = player zm_score::function_ffc2d0bc();
+      n_resource = player zm_score::get_player_score();
 
       if(!isDefined(self.parent_struct.door)) {
         var_b9fbcc94 = 0;
@@ -116,7 +116,7 @@ function function_6a3e8a89() {
     player function_3dfeef3b(0);
 
     if(elapsed_time >= 0.5) {
-      n_resource = player zm_score::function_ffc2d0bc();
+      n_resource = player zm_score::get_player_score();
 
       if(!isDefined(self.parent_struct.door)) {
         var_b9fbcc94 = 0;
@@ -378,7 +378,7 @@ function private function_51095a3d() {
       while(isalive(player) && player istouching(self) && player util::is_player_looking_at(self.parent_struct.origin, 0.8) && player useButtonPressed() && elapsed_time < 1.5) {
         elapsed_time = float(gettime() - var_b1336156) / 1000;
         progress = elapsed_time / 1.5;
-        n_resource = player zm_score::function_ffc2d0bc();
+        n_resource = player zm_score::get_player_score();
 
         if(!isDefined(self.parent_struct.window)) {
           var_b9fbcc94 = 0;
@@ -399,7 +399,7 @@ function private function_51095a3d() {
     player function_3dfeef3b(0);
 
     if(elapsed_time >= 1.5 && player util::is_player_looking_at(self.parent_struct.origin, 0.8)) {
-      n_resource = player zm_score::function_ffc2d0bc();
+      n_resource = player zm_score::get_player_score();
 
       if(!isDefined(self.parent_struct.window)) {
         var_b9fbcc94 = 0;

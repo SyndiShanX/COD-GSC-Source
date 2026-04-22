@@ -351,8 +351,8 @@ function_6b532f83(localclientnum, var_de58f286, sessionmode) {
 
     if(var_de58f286.var_91065a59 != var_de58f286.var_3afd181d) {
       if(var_de58f286.var_91065a59) {
-        var_ca1716fe = weapongroupanim[#"ready"][gender];
-        anim_intro_name = var_ca1716fe[posindex % var_ca1716fe.size];
+        readyanimarray = weapongroupanim[#"ready"][gender];
+        anim_intro_name = readyanimarray[posindex % readyanimarray.size];
         var_177782dd = weapongroupanim[#"readyidle"][gender];
         anim_name = var_177782dd[posindex % var_177782dd.size];
       }
@@ -374,8 +374,8 @@ function_6b532f83(localclientnum, var_de58f286, sessionmode) {
         var_b793aad = weapongroupanim[#"preready"][gender];
         anim_name = var_b793aad[posindex % var_b793aad.size];
       } else {
-        var_ca1716fe = weapongroupanim[#"ready"][gender];
-        anim_intro_name = var_ca1716fe[posindex % var_ca1716fe.size];
+        readyanimarray = weapongroupanim[#"ready"][gender];
+        anim_intro_name = readyanimarray[posindex % readyanimarray.size];
         var_177782dd = weapongroupanim[#"readyidle"][gender];
         anim_name = var_177782dd[posindex % var_177782dd.size];
       }

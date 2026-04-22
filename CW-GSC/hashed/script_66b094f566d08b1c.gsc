@@ -2361,9 +2361,9 @@ function function_7196f878() {
   s_point = self.var_95c305b0;
 
   if(isDefined(var_72aa02d6) && isDefined(s_point)) {
-    var_8fc81e63 = gettime();
+    n_time_start = gettime();
 
-    for(n_time_left = var_72aa02d6.var_3c08dad2; n_time_left > 0; n_time_left = var_72aa02d6.var_3c08dad2 - (gettime() - var_8fc81e63) / 1000) {
+    for(n_time_left = var_72aa02d6.var_3c08dad2; n_time_left > 0; n_time_left = var_72aa02d6.var_3c08dad2 - (gettime() - n_time_start) / 1000) {
       s_waitresult = var_72aa02d6 waittilltimeout(n_time_left, #"hash_22bd92006977a473", #"hash_4058c646c38232d7");
 
       if(s_waitresult._notify === #"timeout") {
@@ -5116,7 +5116,7 @@ function function_31aa1903(s_instance) {
   }
 
   s_instance endon(#"keys_inserted", #"hash_2dcd9b6c51ad575b");
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
   level zm_vo::function_d6f8bbd9(#"hash_2a80b288016e01c5", undefined, getplayers());
   level zm_vo::function_d6f8bbd9(#"hash_2a80b188016e0012", undefined, getplayers());
   a_s_lines = [{
@@ -5134,7 +5134,7 @@ function function_31aa1903(s_instance) {
 
   while(a_s_lines.size > 0) {
     wait 0.1;
-    n_time_left = 45 - (gettime() - var_8fc81e63) / 1000;
+    n_time_left = 45 - (gettime() - n_time_start) / 1000;
     var_69c09621 = undefined;
 
     foreach(s_option in a_s_lines) {
@@ -5469,11 +5469,11 @@ function function_c5021764(var_b4488d57, n_total_time) {
     #var_7ddb4474: 3, #var_33e81c58: # "hash_c15b3e851c6c4e5"}, {
     #var_7ddb4474: 2, #var_33e81c58: # "hash_c15b4e851c6c698"}, {
     #var_7ddb4474: 1, #var_33e81c58: # "hash_c15b5e851c6c84b"}];
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
 
   while(a_s_lines.size > 0) {
     wait 0.1;
-    n_time_left = n_total_time - (gettime() - var_8fc81e63) / 1000;
+    n_time_left = n_total_time - (gettime() - n_time_start) / 1000;
     var_69c09621 = undefined;
 
     foreach(s_option in a_s_lines) {
@@ -5583,10 +5583,10 @@ function function_81881f85(var_b4488d57) {
 function function_91f25de8(var_b4488d57, var_308ec6c6, var_f7ca5cc0, n_duration) {
   var_b4488d57 notify(#"hash_799045ab34e28e5f");
   var_b4488d57 endon(#"failed", #"defeated", #"hash_799045ab34e28e5f");
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
 
   while(true) {
-    n_percent = (gettime() - var_8fc81e63) / 1000 / n_duration;
+    n_percent = (gettime() - n_time_start) / 1000 / n_duration;
 
     if(n_percent < 0) {
       n_percent = 0;
@@ -6056,10 +6056,10 @@ function function_9b762c44(var_b4488d57, var_5beedbc3) {
           str_fx = #"hash_3e61e24b62e33593";
         } else {
           damage = var_5beedbc3 function_d8f3e6bb(inflictor, e_player, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
-          var_6e859516 = function_1bf5ba61(meansofdeath, weapon, var_b4488d57.var_d43e9ae3);
+          n_damage_cap = function_1bf5ba61(meansofdeath, weapon, var_b4488d57.var_d43e9ae3);
 
-          if(isDefined(var_6e859516) && damage > var_6e859516) {
-            damage = var_6e859516;
+          if(isDefined(n_damage_cap) && damage > n_damage_cap) {
+            damage = n_damage_cap;
           }
 
           damage = int(damage);
@@ -6187,8 +6187,8 @@ function function_1bf5ba61(meansofdeath, weapon, var_be81a997, var_900b4d4 = 0) 
   }
 
   if(isDefined(var_2e185307) && isDefined(var_be81a997)) {
-    var_6e859516 = int(var_2e185307 * var_be81a997);
-    return var_6e859516;
+    n_damage_cap = int(var_2e185307 * var_be81a997);
+    return n_damage_cap;
   }
 }
 
@@ -6635,10 +6635,10 @@ function function_64b681ba(var_b4488d57, mdl_orb, var_7fd775e2) {
       b_destroyed = 0;
       damage = mdl_orb function_d8f3e6bb(inflictor, e_player, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
       damage *= 2;
-      var_6e859516 = function_1bf5ba61(meansofdeath, weapon, var_b4488d57.var_720d5b8e, 1);
+      n_damage_cap = function_1bf5ba61(meansofdeath, weapon, var_b4488d57.var_720d5b8e, 1);
 
-      if(isDefined(var_6e859516) && damage > var_6e859516) {
-        damage = var_6e859516;
+      if(isDefined(n_damage_cap) && damage > n_damage_cap) {
+        damage = n_damage_cap;
       }
 
       damage = int(damage);
@@ -6856,10 +6856,10 @@ function function_287438e9() {
     }
 
     self clientfield::set_to_player("" + # "hash_583ce51cd4d9a904", 3);
-    var_8fc81e63 = gettime();
+    n_time_start = gettime();
 
     while(self.var_749332e7 > 0) {
-      n_time_passed = (gettime() - var_8fc81e63) / 1000;
+      n_time_passed = (gettime() - n_time_start) / 1000;
       n_damage = 10;
 
       if(n_time_passed >= 2) {
@@ -7285,10 +7285,10 @@ function function_e0e5c765(var_b4488d57, var_5beedbc3, var_dbbe30cd) {
   level thread function_1de45527(var_dbbe30cd);
   level thread function_fe64262f(var_dbbe30cd);
   playsoundatposition(#"hash_468ecd2f2269a7d0", var_dbbe30cd.origin);
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
   var_5beedbc3 scene::play(#"aib_t9_zm_tmpst_boss_fight", "aether_bolt_start", var_5beedbc3);
   var_5beedbc3 thread scene::play(#"aib_t9_zm_tmpst_boss_fight", "aether_bolt_loop", var_5beedbc3);
-  n_time_remaining = 5 - (gettime() - var_8fc81e63) / 1000;
+  n_time_remaining = 5 - (gettime() - n_time_start) / 1000;
 
   if(n_time_remaining > 0) {
     wait n_time_remaining;

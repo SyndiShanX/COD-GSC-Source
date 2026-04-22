@@ -503,9 +503,9 @@ function_f0e03d3(var_f5300808) {
       waitframe(1);
     }
 
-    var_3ba4bf7d = self getweaponslistprimaries();
+    a_w_primaries = self getweaponslistprimaries();
 
-    foreach(weapon in var_3ba4bf7d) {
+    foreach(weapon in a_w_primaries) {
       self takeweapon(weapon);
     }
 

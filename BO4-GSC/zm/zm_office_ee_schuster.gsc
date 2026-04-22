@@ -26,8 +26,8 @@ __main__() {
   var_66ef9199 = struct::get_array("office_audio_log_schuster");
 
   foreach(var_9dc0380f in var_66ef9199) {
-    var_5ee87ca5 = getEntArray(var_9dc0380f.target, "targetname");
-    array::run_all(var_5ee87ca5, &hide);
+    a_e_triggers = getEntArray(var_9dc0380f.target, "targetname");
+    array::run_all(a_e_triggers, &hide);
   }
 
   level flag::init(#"hash_519e40d088b134");
@@ -108,8 +108,8 @@ ee_schuster_step1_cleanup(var_5ea5c94d, ended_early) {
 }
 
 function_84471080(var_9dc0380f, e_player) {
-  var_5ee87ca5 = getEntArray(var_9dc0380f.target, "targetname");
-  array::run_all(var_5ee87ca5, &showtoplayer, e_player);
+  a_e_triggers = getEntArray(var_9dc0380f.target, "targetname");
+  array::run_all(a_e_triggers, &showtoplayer, e_player);
   e_player clientfield::set_to_player("audio_log_ball_fx", var_9dc0380f.var_614bfc5c + 1);
 }
 
@@ -161,7 +161,7 @@ function_8c80503() {
       break;
   }
 
-  self.var_b21e0263 = 0;
+  self.is_playing_audio = 0;
   level.var_18ee515d++;
 
   if(level.var_18ee515d == 4) {
@@ -170,11 +170,11 @@ function_8c80503() {
 }
 
 function_d4c6dc0d() {
-  self.var_b21e0263 = 1;
+  self.is_playing_audio = 1;
   e_recorder = getent(self.target2, "targetname");
   var_df4e73a7 = getEntArray(e_recorder.target, "targetname");
 
-  while(self.var_b21e0263 && var_df4e73a7.size > 0) {
+  while(self.is_playing_audio && var_df4e73a7.size > 0) {
     var_df4e73a7[0] rotatepitch(45, 1);
     wait 0.1;
     var_df4e73a7[1] rotatepitch(60, 1);

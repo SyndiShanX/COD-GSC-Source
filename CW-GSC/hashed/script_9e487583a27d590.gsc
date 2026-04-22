@@ -27,9 +27,9 @@ function function_f50bc4b9() {
   level flag::init("flag_post_takedown_post_briefing_scene_started");
 }
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level thread function_24092391();
   level namespace_31c67f6d::function_6194f34a("post_takedown", undefined, 5);
   level thread function_21727b7c();
@@ -44,8 +44,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread function_5a121cbf();
   level namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 7, 5);
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -272,7 +272,7 @@ function function_21727b7c() {
   level thread namespace_4ed3ce47::function_e81e970a();
 }
 
-function function_e937a9b(var_d3440450) {
+function function_e937a9b(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_takedown");
   level thread function_21727b7c();
   level notify(#"hash_30a43574a5dc7eaf");
@@ -284,12 +284,12 @@ function function_e937a9b(var_d3440450) {
   level thread function_a7c58081();
 }
 
-function function_e695c6d4(var_d3440450, var_50cc0d4f) {
+function function_e695c6d4(str_skipto, b_starting) {
   level thread function_c151a47e();
   level flag::wait_till("flag_post_takedown_ambient_scene_started");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -445,7 +445,7 @@ function function_a3e12ec8(volume, struct, str_shot) {
   }
 }
 
-function function_c6fd7841(var_d3440450) {
+function function_c6fd7841(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_takedown");
   level thread function_21727b7c();
   level notify(#"hash_30a43574a5dc7eaf");
@@ -461,11 +461,11 @@ function function_c6fd7841(var_d3440450) {
   level thread function_a74a977e();
 }
 
-function function_7fb12c66(var_d3440450, var_50cc0d4f) {
+function function_7fb12c66(str_skipto, b_starting) {
   flag::wait_till("flag_post_takedown_complete");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_a74a977e() {
   level thread function_5ad45a0();

@@ -721,9 +721,9 @@ function_802dde1f() {
   level.var_4b5a684c = zm_round_logic::get_zombie_count_for_round(level.round_number, level.players.size);
 
   while(true) {
-    var_7e5b8365 = zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
+    b_should_wait = zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
 
-    if(!var_7e5b8365 || level flag::get("end_round_wait")) {
+    if(!b_should_wait || level flag::get("end_round_wait")) {
       break;
     }
 

@@ -362,10 +362,10 @@ getrankfromname(name) {
   shortrank = tokens[0];
 
   switch (shortrank) {
-    case # "hash_61c7340e20b9c509":
+    case # "pvt.":
       self.airank = "private";
       break;
-    case # "hash_5827a20dd30caea2":
+    case # "pfc.":
       self.airank = "private";
       break;
     case # "hash_2116fd90943206f0":

@@ -27,16 +27,16 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_vault_approach;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_vault_approach_begin");
   level battlechatter::function_2ab9360b(1);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450);
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::init("scene_kgb_utility_room_adler");
@@ -48,14 +48,14 @@ function main(var_d3440450, var_50cc0d4f) {
 
   namespace_353d803e::music("11.0_sabotage");
   spawner::add_spawn_function_group("vault_guards", "script_noteworthy", &function_e38e5c6e);
-  level thread namespace_e77bf565::function_7feb07bb(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::function_7feb07bb(str_skipto, b_starting);
   level thread function_b735db01();
   level thread scene::init("scene_kgb_open_vault");
   level thread scene::init("scene_kgb_door_shoulder");
   level flag::wait_till("aslt_vault_approach_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

@@ -21,7 +21,7 @@
 
 init() {
   callback::on_spawned(&on_player_spawned);
-  level.var_6129f460 = &function_a929cb60;
+  level.custom_rise_func = &function_a929cb60;
   level thread cliff_forge_vo();
 }
 

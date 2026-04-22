@@ -58,7 +58,7 @@ init_level_vars() {
   level.var_55e562f9 = 18;
   level.zombie_hints[#"default_treasure_chest"] = #"hash_57a34375dddce337";
   level thread defend_areas();
-  level thread function_9217567c();
+  level thread init_crafting();
   level thread init_traps();
   level thread function_f436d901();
   zm_round_spawning::function_2876740e(#"zombie_dog", &function_c7e2bbe2);
@@ -389,7 +389,7 @@ function init_traps() {
   }
 }
 
-function_9217567c() {
+init_crafting() {
   level waittill(#"all_players_spawned");
 
   foreach(a_s_crafting in level.var_4fe2f84d) {

@@ -17,9 +17,9 @@
 #using scripts\cp_common\skipto;
 #namespace hub_post_yamantau;
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level namespace_31c67f6d::function_6194f34a("post_yamantau");
   level thread function_81c3adaf();
   setlightingstate(2);
@@ -35,8 +35,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread function_cfce0b24();
   level namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 3, 1);
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -318,7 +318,7 @@ function function_f50bc4b9() {
   flag::init("flag_post_yamantau_complete");
 }
 
-function function_6b03a78e(var_d3440450) {
+function function_6b03a78e(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_yamantau");
   level thread function_81c3adaf();
   setlightingstate(2);
@@ -341,11 +341,11 @@ function function_81c3adaf() {
   level thread namespace_4ed3ce47::function_d701d197();
 }
 
-function function_29390787(var_d3440450, var_50cc0d4f) {
+function function_29390787(str_skipto, b_starting) {
   flag::wait_till("flag_post_yamantau_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

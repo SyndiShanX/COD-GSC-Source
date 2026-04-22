@@ -57,8 +57,8 @@ function function_d7d24283(e_powerup, player) {
 function function_8be02874(drop_item, player) {
   players = getplayers(player.team);
 
-  if(isDefined(level.var_73345bfd)) {
-    players = [[level.var_73345bfd]](player);
+  if(isDefined(level._get_game_module_players)) {
+    players = [[level._get_game_module_players]](player);
   }
 
   level notify(#"hash_41ccd6a10f7370cc");

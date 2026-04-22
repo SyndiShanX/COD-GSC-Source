@@ -166,7 +166,7 @@ function function_15e0dfb8(localclientnum, var_dc9f0c39) {
   while(true) {
     localplayer = function_5c10bd79(localclientnum);
     spectating = function_65b9eb0f(localclientnum) && !function_1cbf351b(localclientnum);
-    var_6955388c = (!isDefined(self.owner) || self.owner != localplayer || spectating) && isDefined(self.team) && isDefined(localplayer.team) && self.team == localplayer.team;
+    ishighlighted = (!isDefined(self.owner) || self.owner != localplayer || spectating) && isDefined(self.team) && isDefined(localplayer.team) && self.team == localplayer.team;
 
     if(var_dc9f0c39 == 1) {}
 
@@ -195,16 +195,16 @@ function function_29561f83(localclientnum, var_dc9f0c39) {
       break;
     }
 
-    var_6955388c = self != localplayer && isDefined(self.team) && isDefined(localplayer.team) && self.team == localplayer.team;
+    ishighlighted = self != localplayer && isDefined(self.team) && isDefined(localplayer.team) && self.team == localplayer.team;
     level waittill("team_changed" + var_dc9f0c39, "localPlayerSpectating" + var_dc9f0c39);
   }
 }
 
 function hideprop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   localplayer = function_5c10bd79(fieldname);
-  var_6955388c = bwastimejump && isDefined(self) && self == localplayer;
+  ishighlighted = bwastimejump && isDefined(self) && self == localplayer;
 
-  if(var_6955388c) {
+  if(ishighlighted) {
     if(isDefined(self.prop)) {
       self.prop playrenderoverridebundle(#"hash_14be6378dfef6b7");
     }

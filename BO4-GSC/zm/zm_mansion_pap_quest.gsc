@@ -1197,12 +1197,12 @@ function_16288b92(str_type, s_loc, mdl_key, vol_transform) {
       level thread function_49eab22d(s_key);
       break;
     case # "painting":
-      var_ff4b3a13 = getent(s_stub.str_hint, "targetname");
+      mdl_painting = getent(s_stub.str_hint, "targetname");
       var_19762c3e = 96;
       str_loc = s_stub.str_hint;
       v_offset = (0, 0, 0);
 
-      if(var_ff4b3a13.targetname == "painting_4") {
+      if(mdl_painting.targetname == "painting_4") {
         v_offset = (0, 0, -16);
       } else {
         v_offset = (0, 0, -28);
@@ -1219,41 +1219,41 @@ function_16288b92(str_type, s_loc, mdl_key, vol_transform) {
         s_clue = array::random(struct::get_array("painting_clue_garden"));
       }
 
-      s_spawnpt = struct::get(var_ff4b3a13.target);
-      s_portal = struct::get(var_ff4b3a13.script_noteworthy);
+      s_spawnpt = struct::get(mdl_painting.target);
+      s_portal = struct::get(mdl_painting.script_noteworthy);
 
-      var_ff4b3a13 thread function_debf98ad();
+      mdl_painting thread function_debf98ad();
 
       s_spawnpt thread debug_draw_star();
 
       var_47323b73 = s_spawnpt zm_unitrigger::create(&function_7c097281, 64, &function_450b01a5);
       var_47323b73.str_flag = "painting_clue";
       var_47323b73.mdl_clue = getent(str_clue, "targetname");
-      var_47323b73.var_ff4b3a13 = var_ff4b3a13;
+      var_47323b73.mdl_painting = mdl_painting;
       var_47323b73.v_offset = v_offset;
       var_47323b73.str_flag = "painting_clue";
       var_47323b73.str_clue = str_clue;
       level flag::wait_till("painting_clue");
-      var_ff4b3a13 clientfield::set("" + # "hash_11eb6b7dc7db71ad", 0);
-      var_ff4b3a13 playSound(#"hash_20df90b365932d7c");
+      mdl_painting clientfield::set("" + # "hash_11eb6b7dc7db71ad", 0);
+      mdl_painting playSound(#"hash_20df90b365932d7c");
       wait 2;
       e_fx = util::spawn_model(#"tag_origin", s_spawnpt.origin);
       e_fx playSound("zmb_sq_souls_release");
       e_fx playLoopSound("zmb_sq_souls_lp");
       e_fx delete();
 
-      var_ff4b3a13 debug_draw_stop();
+      mdl_painting debug_draw_stop();
 
       s_spawnpt debug_draw_stop();
 
-      nd_start = getvehiclenode(var_ff4b3a13.targetname + "_spline", "targetname");
+      nd_start = getvehiclenode(mdl_painting.targetname + "_spline", "targetname");
       e_trail = util::spawn_model("tag_origin", nd_start.origin, nd_start.angles);
       e_trail thread function_c9c7a593();
       e_trail thread function_7ff450ae();
 
       e_trail thread function_debf98ad();
 
-      e_trail show_trail(nd_start, var_ff4b3a13);
+      e_trail show_trail(nd_start, mdl_painting);
       e_trail thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", e_trail);
       e_trail.mdl_head thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", e_trail.mdl_head);
       s_loc = s_portal;
@@ -1310,9 +1310,9 @@ function_16288b92(str_type, s_loc, mdl_key, vol_transform) {
       var_47323b73.str_flag = "trophy_prints";
 
       if(s_trophy.targetname == "monkey_loc") {
-        var_7b57e2cc = getent("monkey_lid", "targetname");
-        var_7b57e2cc rotateroll(-27, 0.5);
-        var_7b57e2cc playSound(#"hash_56315c5fd55c0092");
+        mdl_lid = getent("monkey_lid", "targetname");
+        mdl_lid rotateroll(-27, 0.5);
+        mdl_lid playSound(#"hash_56315c5fd55c0092");
       }
 
       level flag::wait_till(var_47323b73.str_flag);
@@ -1321,9 +1321,9 @@ function_16288b92(str_type, s_loc, mdl_key, vol_transform) {
       e_fx playLoopSound("zmb_sq_souls_lp");
 
       if(s_trophy.targetname == "monkey_loc") {
-        var_7b57e2cc = getent("monkey_lid", "targetname");
-        var_7b57e2cc rotateroll(27, 0.5);
-        var_7b57e2cc playSound(#"hash_3d156fc836a3f16");
+        mdl_lid = getent("monkey_lid", "targetname");
+        mdl_lid rotateroll(27, 0.5);
+        mdl_lid playSound(#"hash_3d156fc836a3f16");
       }
 
       e_fx delete();
@@ -1463,7 +1463,7 @@ function_f7b04d9c(s_key) {
     exploder::exploder("fxexp_pap_barrier_nosferatu_2");
   }
 
-  level thread function_a1d7d92b(self, "nosferatu_pap_event_done", "nosferatu_defend");
+  level thread check_player_proximity(self, "nosferatu_pap_event_done", "nosferatu_defend");
   level thread function_b7e42989();
   level.var_84b2907f = &function_1ea41244;
   level.var_2f477020 = self;
@@ -1616,7 +1616,7 @@ function_57fcbf3f() {
 
   if(level flag::get("nosferatu_pap_drop")) {
     var_d3b167fd = self.origin;
-    v_drop = mansion_util::function_a8176b98(var_d3b167fd);
+    v_drop = mansion_util::get_drop_pos(var_d3b167fd);
 
     if(isDefined(v_drop) && !isDefined(level.var_9ce3e25a)) {
       level.var_9ce3e25a = v_drop;
@@ -2144,7 +2144,7 @@ function_d480d1a3() {
   level notify(#"hash_597743410e6561dd");
 }
 
-show_trail(nd_start, var_ff4b3a13) {
+show_trail(nd_start, mdl_painting) {
   self setModel(#"c_t8_zmb_dlc1_catherine_ghost_body");
 
   if(!isDefined(self.mdl_head)) {
@@ -2164,7 +2164,7 @@ show_trail(nd_start, var_ff4b3a13) {
   self.var_c176969a.var_6353e3f1 = 1;
   self.var_c176969a setspeed(7);
 
-  if(isDefined(var_ff4b3a13)) {
+  if(isDefined(mdl_painting)) {
     if(!isDefined(nd_start.var_7eedec61)) {
       nd_start.var_7eedec61 = 1;
     }
@@ -2568,7 +2568,7 @@ function_d29a3f81() {
     if(!level flag::get(self.stub.str_flag)) {
       level thread function_3088c773(self.stub.str_flag);
       level thread function_d48fb847(self.stub, self.stub.str_flag, self.stub.vol_defend, player);
-      level thread function_a1d7d92b(self.stub.vol_defend, self.stub.str_flag, "clock_defend");
+      level thread check_player_proximity(self.stub.vol_defend, self.stub.str_flag, "clock_defend");
       level thread function_4dfd5cf6(self.stub.vol_defend.targetname, self.stub.str_flag, self.stub.vol_defend, self.stub.str_flag, "clock_defend");
       level thread function_e8355769(self.stub.vol_defend, self.stub.str_flag);
       level thread function_b7c114a2(player);
@@ -2584,10 +2584,10 @@ function_e8355769(vol_defend, str_flag) {
   var_ef6d594a = mansion_util::function_91dfc9d4(vol_defend);
 
   while(!level flag::get(str_flag)) {
-    var_840c2f31 = mansion_util::function_91dfc9d4(vol_defend);
+    a_players_touching = mansion_util::function_91dfc9d4(vol_defend);
 
     foreach(var_b930e62d in array::remove_undefined(var_ef6d594a)) {
-      if(!isinarray(var_840c2f31, var_b930e62d)) {
+      if(!isinarray(a_players_touching, var_b930e62d)) {
         var_b930e62d.var_e6abb74b = 1;
       }
     }
@@ -2784,7 +2784,7 @@ function_d48fb847(var_ffba68db, str_flag, e_volume, e_player) {
   }
 }
 
-function_a1d7d92b(vol_defend, var_39cddd2a, var_854f3b02) {
+check_player_proximity(vol_defend, var_39cddd2a, var_854f3b02) {
   while(!level flag::get(var_39cddd2a)) {
     if(var_854f3b02 == "clock_defend") {
       array::thread_all(mansion_util::function_91dfc9d4(vol_defend), &function_4387bfae, vol_defend, var_39cddd2a);

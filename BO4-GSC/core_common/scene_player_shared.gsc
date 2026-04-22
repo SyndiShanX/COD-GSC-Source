@@ -297,7 +297,7 @@ class csceneplayer: csceneobject {
     }
 
     player notify(#"hash_7ba9e3058f933eb");
-    player.var_c3a79d20 = undefined;
+    player.disable_last_stand = undefined;
     player.scene_set_visible_time = level.time;
     player setvisibletoall();
     player val::reset(#"scene", "hide");
@@ -724,7 +724,7 @@ class csceneplayer: csceneobject {
     player.player_anim_clamp_left = isDefined(player.player_anim_clamp_left) ? player.player_anim_clamp_left : 75;
     player.player_anim_clamp_top = isDefined(player.player_anim_clamp_top) ? player.player_anim_clamp_top : 180;
     player.player_anim_clamp_bottom = isDefined(player.player_anim_clamp_bottom) ? player.player_anim_clamp_bottom : 60;
-    player.var_c3a79d20 = 1;
+    player.disable_last_stand = 1;
     thread function_bd3a7030(player, var_ec50a0d3.var_9532f6db);
     _str_current_anim = csceneobject::get_animation_name(_str_shot);
 

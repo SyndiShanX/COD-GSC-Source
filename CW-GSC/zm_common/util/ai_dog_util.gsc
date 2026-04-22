@@ -34,8 +34,8 @@ function private autoexec __init__system__() {
 function private preinit() {
   clientfield::register("actor", "dog_fx", 1, 1, "int");
   clientfield::register("world", "dog_round_fog_bank", 1, 1, "int");
-  level.var_57c1626e = 1;
-  level.var_a3f67fc2 = 0;
+  level.dogs_enabled = 1;
+  level.dog_rounds_enabled = 0;
   level.dog_round_count = 1;
   level.dog_spawners = [];
   level flag::init("dog_clips");
@@ -52,7 +52,7 @@ function dog_enable_rounds(b_ignore_cleanup = 1) {
     return;
   }
 
-  level.var_a3f67fc2 = 1;
+  level.dog_rounds_enabled = 1;
   level.var_dc50acfa = b_ignore_cleanup;
 
   if(!isDefined(level.dog_round_track_override)) {
@@ -506,8 +506,8 @@ function dog_init() {
 
   self zm_spawner::zombie_history("<dev string:x72>" + self.origin);
 
-  if(isDefined(level.var_9c55db3)) {
-    self[[level.var_9c55db3]]();
+  if(isDefined(level.achievement_monitor_func)) {
+    self[[level.achievement_monitor_func]]();
   }
 }
 
@@ -518,11 +518,11 @@ function dog_death() {
     var_24a0ed8c = function_bb101706();
 
     if(var_24a0ed8c == 0 && level.zombie_total == 0) {
-      level.var_eb06f292 = self.origin;
+      level.last_dog_origin = self.origin;
       level notify(#"last_dog_down");
     }
   } else if(zombie_utility::get_current_zombie_count() == 0 && level.zombie_total == 0) {
-    level.var_eb06f292 = self.origin;
+    level.last_dog_origin = self.origin;
     level notify(#"last_dog_down");
   }
 
@@ -593,8 +593,8 @@ function zombie_setup_attack_properties_dog() {
   self.disablearrivals = 1;
   self.disableexits = 1;
 
-  if(isDefined(level.var_a5d11757)) {
-    self[[level.var_a5d11757]]();
+  if(isDefined(level.dog_setup_func)) {
+    self[[level.dog_setup_func]]();
   }
 }
 
@@ -609,7 +609,7 @@ function dog_clip_monitor() {
 
     level flag::wait_till("dog_clips");
 
-    if(isDefined(level.var_53f3cbde) && level.var_53f3cbde == 1) {
+    if(isDefined(level.no_dog_clip) && level.no_dog_clip == 1) {
       return;
     }
 

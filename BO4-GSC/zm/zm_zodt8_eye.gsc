@@ -351,7 +351,7 @@ function_51e51897(var_5ea5c94d) {
   level.custom_spawnplayer = &function_9bc4f8cb;
   level.disable_nuke_delay_spawning = 1;
   level notify(#"disable_nuke_delay_spawning");
-  level zodt8_sentinel::function_77a859a8(1);
+  level zodt8_sentinel::clean_up_ai(1);
   level.var_d6f059f7 = max(level.round_number, 25);
   zm_spawner::register_zombie_death_event_callback(&function_e9b8eaff);
   level.var_c9f5947d = 1;
@@ -656,7 +656,7 @@ function_482a7a01() {
   self endon("1c4193aa80a6dcb8");
   level waittill(#"hash_38f29f9cb03586ea", #"intermission");
   zm_transform::function_e95ec8df();
-  level zodt8_sentinel::function_77a859a8(1, 0, 0);
+  level zodt8_sentinel::clean_up_ai(1, 0, 0);
 }
 
 function_c8f90603(str_blocker, b_solid) {

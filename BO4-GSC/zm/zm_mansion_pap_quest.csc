@@ -316,8 +316,8 @@ ghost_trail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
         level.var_e62313ec = [];
       }
 
-      foreach(var_ff4b3a13 in array::remove_undefined(level.var_e62313ec)) {
-        var_ff4b3a13.b_force_stream = 0;
+      foreach(mdl_painting in array::remove_undefined(level.var_e62313ec)) {
+        mdl_painting.b_force_stream = 0;
       }
 
       self.fx_ghost_trail = util::playFXOnTag(localclientnum, level._effect[#"ghost_trail"], self, "j_spine4");

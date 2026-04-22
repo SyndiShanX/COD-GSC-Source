@@ -235,8 +235,8 @@ function_a77f3804(e_activator, e_volume) {
   }
 }
 
-shower_trap_fx(var_9d9f02b4) {
-  if(var_9d9f02b4) {
+shower_trap_fx(b_is_on) {
+  if(b_is_on) {
     foreach(var_9e659454 in self.var_28ea1870) {
       var_9e659454.mdl_fx = util::spawn_model("tag_origin", var_9e659454.origin, var_9e659454.angles);
       var_9e659454.mdl_fx clientfield::set("shower_trap_fx", 1);
@@ -468,8 +468,8 @@ function_11e5b2ee(e_activator, e_volume) {
   self dodamage(self.health + 666, self.origin, e_volume);
 }
 
-fire_trap_fx(var_9d9f02b4) {
-  if(var_9d9f02b4) {
+fire_trap_fx(b_is_on) {
+  if(b_is_on) {
     foreach(var_9e659454 in self.var_28ea1870) {
       var_9e659454.mdl_fx = util::spawn_model("tag_origin", var_9e659454.origin, var_9e659454.angles);
       var_9e659454.mdl_fx clientfield::set("fire_trap_fx", 1);

@@ -27,22 +27,22 @@
 #using scripts\cp_common\spawn_manager;
 #namespace kgb_aslt_bunker_escape;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
   level thread scene::init_streamer("scene_kgb_env_server_loops", getplayers());
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_bunker_escape_begin");
   level battlechatter::function_2ab9360b(1);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450, "adler_shotgun");
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
     level thread scene::play_from_time("scene_kgb_open_vault", "Enemies_Breach_Vault", undefined, 1, 1, 1, 0, 0);
     level thread scene::skipto_end("scene_kgb_door_shoulder");
-    level thread kgb_aslt_vault::function_833a9413(var_50cc0d4f);
+    level thread kgb_aslt_vault::function_833a9413(b_starting);
     level thread function_bfe40bf0();
     level thread kgb_aslt_vault::function_46fe3d22(undefined, 1);
     level flag::set("vault_breached");
@@ -55,7 +55,7 @@ function main(var_d3440450, var_50cc0d4f) {
     level thread scene::init("scene_kgb_tunnel_catwalk_transition");
     level thread scene::init("scene_kgb_lights_out");
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_bunker", "player_grabbed_armor");
-    level thread vault_explosion_dynents(var_50cc0d4f);
+    level thread vault_explosion_dynents(b_starting);
   }
 
   spawner::set_ai_group_cleared_count("bunker_escape_catwalk_enemies", 1);
@@ -63,7 +63,7 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread namespace_e77bf565::function_1067ebf5("rotating_object_abandoned_bunker", "player_grabbed_armor");
   wait 2;
   level thread function_d6861ec3();
-  level thread namespace_e77bf565::escape_objective(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
   level flag::wait_till("aslt_bunker_escape_complete");
   exploder::exploder_stop("vault_breach");
   exploder::exploder_stop("vault_breach_aftermath");
@@ -77,8 +77,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread namespace_e77bf565::cleanup_corpses();
   level thread scene::init("scene_kgb_tunnel_catwalk_transition");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -162,8 +162,8 @@ function function_d6861ec3() {
   snd::function_9ae4fc6f("vox_cp_rkgb_04400_rms1_escapeisimpossi_d2", org);
 }
 
-function vault_explosion_dynents(var_50cc0d4f) {
-  if(is_true(var_50cc0d4f)) {
+function vault_explosion_dynents(b_starting) {
+  if(is_true(b_starting)) {
     level flag::wait_till(#"hash_507a4486c4a79f1d");
     util::wait_network_frame();
     level clientfield::set("vault_explosion_dynents", 1);

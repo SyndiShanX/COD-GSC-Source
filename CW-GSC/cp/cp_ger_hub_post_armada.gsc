@@ -18,9 +18,9 @@
 #using scripts\cp_common\skipto;
 #namespace hub_post_armada;
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level namespace_31c67f6d::function_6194f34a("post_armada");
   level thread function_f856db57();
   setlightingstate(1);
@@ -38,8 +38,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread function_ae2b72b9();
   level namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 3, 1);
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -283,7 +283,7 @@ function function_f50bc4b9() {
   level flag::init("flag_post_armada_eavesdropped_timeout");
 }
 
-function function_7e4e7cf4(var_d3440450) {
+function function_7e4e7cf4(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_armada");
   level thread function_f856db57();
   setlightingstate(1);
@@ -294,11 +294,11 @@ function function_7e4e7cf4(var_d3440450) {
   level thread function_14d4099c();
 }
 
-function function_428d9889(var_d3440450, var_50cc0d4f) {
+function function_428d9889(str_skipto, b_starting) {
   level flag::wait_till("flag_post_armada_ambient_scene_started");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -417,7 +417,7 @@ function function_c8bbb8b0(var_6b68fbe2, var_da5872f1, idle_scene) {
   level thread scene::play(idle_scene, "zone_idle");
 }
 
-function function_5ae6f952(var_d3440450) {
+function function_5ae6f952(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_armada");
   level thread function_f856db57();
   setlightingstate(1);
@@ -428,7 +428,7 @@ function function_5ae6f952(var_d3440450) {
   level thread function_9ff4321a();
 }
 
-function function_d3875afa(var_d3440450, var_50cc0d4f) {
+function function_d3875afa(str_skipto, b_starting) {
   flag::wait_till("flag_post_armada_complete");
 }
 

@@ -1421,7 +1421,7 @@ function private function_2fc1b3a7(soundobject, player, org_start, org_end) {
 }
 
 function function_ff8cbed3(soundobject) {
-  if(!isDefined(soundobject) || function_3132f113(soundobject)) {
+  if(!isDefined(soundobject) || isremovedentity(soundobject)) {
     return;
   }
 

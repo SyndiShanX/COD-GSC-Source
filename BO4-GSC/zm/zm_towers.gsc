@@ -416,9 +416,9 @@ function_ebe4d15c() {
   level.var_4b5a684c = zm_round_logic::get_zombie_count_for_round(level.round_number, level.players.size);
 
   while(true) {
-    var_7e5b8365 = level flag::get(#"infinite_round_spawning") || zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
+    b_should_wait = level flag::get(#"infinite_round_spawning") || zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
 
-    if(!var_7e5b8365 || level flag::get("end_round_wait")) {
+    if(!b_should_wait || level flag::get("end_round_wait")) {
       break;
     }
 
@@ -1188,7 +1188,7 @@ function_51855e65(round_number) {
   assert(round_index >= 0 && round_index < 30);
 
   foreach(player in getplayers()) {
-    player zm_score::function_c1f146ff(var_efac84b3[round_index]);
+    player zm_score::set_player_score(var_efac84b3[round_index]);
   }
 
   if(round_number >= 9) {

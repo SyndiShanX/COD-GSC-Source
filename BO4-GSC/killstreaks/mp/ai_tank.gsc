@@ -22,7 +22,7 @@ autoexec __init__system__() {
 __init__() {
   init_shared();
   level.var_1dd2fbe1 = &function_c44c9bde;
-  level.aitank_explode = &function_1e11d939;
+  level.aitank_explode = &tankexplode;
   level.var_2e0b35c2 = &function_103d8f6;
   level.var_daa33d93 = &function_23e43434;
   level.var_cffcf4da = &function_577150fd;
@@ -75,7 +75,7 @@ function_23e43434(killstreak_id, context, team) {
   return true;
 }
 
-function_1e11d939(attacker, weapon) {
+tankexplode(attacker, weapon) {
   if(self.exploding === 1) {
     return;
   }

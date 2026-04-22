@@ -28,12 +28,12 @@
 #using scripts\cp_common\util;
 #namespace namespace_29b42773;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level.var_aece851d = [];
   level.var_33621ea7 = 1;
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.var_33621ea7 = 1;
 
   if(is_true(level.var_33621ea7)) {
@@ -50,8 +50,8 @@ function main(var_d3440450, var_50cc0d4f) {
     iprintlnbold("Hit 1 Ending being reworked.");
   }
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -76,10 +76,10 @@ function function_aa3c5fab(params) {
   }
 }
 
-function function_cfc3fd5f(var_d3440450) {}
+function function_cfc3fd5f(str_skipto) {}
 
-function bustout(var_d3440450, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function bustout(str_skipto, b_starting) {
+  if(b_starting) {
     wait 0.5;
     spawners = getspawnerarray("intro_bustout_truck_ally_woods", "script_noteworthy");
     level.var_664fd741 = spawners[0] spawner::spawn(1);
@@ -103,8 +103,8 @@ function bustout(var_d3440450, var_50cc0d4f) {
   level flag::wait_till("heli_target_complete");
   level lui::play_movie(#"hash_61b3a08db9dd71b0", "fullscreen", 1, 0, 0);
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

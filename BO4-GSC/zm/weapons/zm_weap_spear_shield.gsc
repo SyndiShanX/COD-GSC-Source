@@ -144,8 +144,8 @@ function_80a146c1(player, weapon) {
     return;
   }
 
-  if(isDefined(self.var_9c1f60e8)) {
-    self[[self.var_9c1f60e8]](player);
+  if(isDefined(self.riotshield_fling_func)) {
+    self[[self.riotshield_fling_func]](player);
     return;
   }
 

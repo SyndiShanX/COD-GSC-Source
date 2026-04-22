@@ -1070,10 +1070,10 @@ function function_223f7204(var_75a7d6, var_b39864d6) {
         damage = var_b39864d6 get_weapon_damage(inflictor, e_attacker, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
 
         if(!is_wonder_weapon(weapon)) {
-          var_6e859516 = function_51846e52(meansofdeath, weapon);
+          n_damage_cap = function_51846e52(meansofdeath, weapon);
 
-          if(isDefined(var_6e859516) && damage > var_6e859516) {
-            damage = var_6e859516;
+          if(isDefined(n_damage_cap) && damage > n_damage_cap) {
+            damage = n_damage_cap;
           }
         }
       }
@@ -1224,10 +1224,10 @@ function function_ab3592be(var_75a7d6, var_b39864d6) {
           damage = var_b39864d6 get_weapon_damage(inflictor, e_attacker, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
 
           if(!is_wonder_weapon(weapon)) {
-            var_6e859516 = function_51846e52(meansofdeath, weapon);
+            n_damage_cap = function_51846e52(meansofdeath, weapon);
 
-            if(isDefined(var_6e859516) && damage > var_6e859516) {
-              damage = var_6e859516;
+            if(isDefined(n_damage_cap) && damage > n_damage_cap) {
+              damage = n_damage_cap;
             }
           }
         }
@@ -1460,14 +1460,14 @@ function get_weapon_damage(inflictor, attacker, damage, flags, meansofdeath, wea
 
 function function_51846e52(meansofdeath, weapon) {
   if(meansofdeath === "MOD_HEAD_SHOT" || meansofdeath === "MOD_RIFLE_BULLET" || meansofdeath === "MOD_PISTOL_BULLET") {
-    var_6e859516 = 1500;
+    n_damage_cap = 1500;
   } else if(weapon.guidedmissiletype === "Ballistic") {
-    var_6e859516 = 1500;
+    n_damage_cap = 1500;
   } else {
-    var_6e859516 = 3000;
+    n_damage_cap = 3000;
   }
 
-  return var_6e859516;
+  return n_damage_cap;
 }
 
 function teleport_players(var_a347ab1) {
@@ -2898,7 +2898,7 @@ function function_101fd34c(var_75a7d6) {
 
   var_b39864d6 = var_75a7d6.var_b39864d6;
   var_b39864d6 clientfield::set("" + # "hash_bae11639a0dd182", 1);
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
   var_b39864d6 = var_75a7d6.var_b39864d6;
   var_504cdb19 = "sit_blast_in";
   var_70c303e9 = "sit_blast_loop";
@@ -2910,7 +2910,7 @@ function function_101fd34c(var_75a7d6) {
 
   var_b39864d6 scene::play(#"hash_63636406a7a2326", var_504cdb19, var_b39864d6);
   var_b39864d6 thread scene::play(#"hash_63636406a7a2326", var_70c303e9, var_b39864d6);
-  n_time_left = 6 - (gettime() - var_8fc81e63) / 1000;
+  n_time_left = 6 - (gettime() - n_time_start) / 1000;
 
   if(n_time_left > 0) {
     wait n_time_left;

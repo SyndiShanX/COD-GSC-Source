@@ -31,7 +31,7 @@
 
 function function_56b84660() {}
 
-function function_a2c4f153(var_d3440450, var_50cc0d4f) {
+function function_a2c4f153(str_skipto, b_starting) {
   setDvar(#"setsunshadowsplitdistance", "1500");
   level.var_3741fc24 = 1;
   level.ally_spawner = getent("bamboo_ally_adler", "targetname");
@@ -1157,12 +1157,12 @@ function function_c6968b8f(nodename, nodekey, benabled) {
   }
 }
 
-function function_4eccc114(var_d3440450, var_50cc0d4f) {
+function function_4eccc114(str_skipto, b_starting) {
   level flag::clear("flag_player_flying_ambience_start");
   level flag::set("flag_player_flying_ambience_kill");
 
   if(!isDefined(level.var_b3464ee0)) {
-    level.var_b3464ee0 = struct::get(var_50cc0d4f);
+    level.var_b3464ee0 = struct::get(b_starting);
   }
 
   level.var_3851f0df = 1400;
@@ -1171,11 +1171,11 @@ function function_4eccc114(var_d3440450, var_50cc0d4f) {
   waitframe(2);
   level thread function_7d2b8848();
   level flag::wait_till("flag_bamboo_main_end");
-  level skipto::function_4e3ab877(var_50cc0d4f, 0);
+  level skipto::function_4e3ab877(b_starting, 0);
   level skipto::function_51726ac8(["armada_bamboo_end"], 0, level.player);
 }
 
-function function_a15d0e63(var_d3440450, var_50cc0d4f) {
+function function_a15d0e63(str_skipto, b_starting) {
   level.var_3741fc24 = 1;
   level flag::clear("flag_player_flying_ambience_start");
   level flag::set("flag_player_flying_ambience_kill");
@@ -1188,12 +1188,12 @@ function function_a15d0e63(var_d3440450, var_50cc0d4f) {
   function_7d2b8848();
   function_5818c90e();
   level flag::wait_till("flag_bamboo_main_end");
-  level skipto::function_4e3ab877(var_50cc0d4f, 0);
+  level skipto::function_4e3ab877(b_starting, 0);
   level skipto::function_51726ac8(["armada_bamboo_end"], 0, level.player);
 }
 
-function function_ddac4979(var_d3440450, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_ddac4979(str_skipto, b_starting) {
+  if(b_starting) {
     waitframe(1);
   }
 
@@ -1205,7 +1205,7 @@ function function_ddac4979(var_d3440450, var_50cc0d4f) {
   transient = savegame::function_6440b06b(#"transient");
   transient.var_8ffe00b6 = 1;
   namespace_b7cfe907::function_d777fe61(0);
-  level skipto::function_4e3ab877(var_d3440450, 0);
+  level skipto::function_4e3ab877(str_skipto, 0);
   next_obj = "armada_fly_bamboo_to_mortar";
 
   if(is_true(transient.var_32839ab6)) {

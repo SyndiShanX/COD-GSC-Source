@@ -53,10 +53,10 @@ function function_757efcb6(str_objective) {
   level scene::init("sc_motor_pool_entry_door");
 }
 
-function function_6bd1bb5a(str_objective, var_50cc0d4f) {
+function function_6bd1bb5a(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread cp_rus_amerika::function_f6b6f426("apc_townsquare");
   }
 
@@ -73,7 +73,7 @@ function function_6bd1bb5a(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_54337d3f(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_54337d3f(str_objective, b_starting, var_aa1a6455, player) {
   level flag::set("flg_escape_apc_interact_triggered");
   level thread function_17316c5e();
   level thread namespace_f6d09d1a::function_bdf9ac3e();
@@ -263,10 +263,10 @@ function function_7da641f5(str_objective) {
   namespace_b61bbd82::music("12.1_exit");
 }
 
-function function_a668e580(str_objective, var_50cc0d4f) {
+function function_a668e580(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04("<dev string:x54>");
 
-  if(var_50cc0d4f == 0 && str_objective != #"apc_townsquare") {
+  if(b_starting == 0 && str_objective != #"apc_townsquare") {
     return;
   }
 
@@ -332,7 +332,7 @@ function function_13cde8e() {
   namespace_b61bbd82::music("deactivate_12.1_exit");
 }
 
-function function_28117f7e(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_28117f7e(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_de15d472() {
   if(!isDefined(objectives::function_285e460("obj_apc_ride_main"))) {

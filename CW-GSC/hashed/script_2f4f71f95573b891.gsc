@@ -45,8 +45,8 @@ function function_d7e02379(str_objective) {
   snd::client_msg("audio_graveyard_fire_start");
 }
 
-function function_8b10d19c(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_8b10d19c(str_objective, b_starting) {
+  if(b_starting) {
     exploder::exploder("fxexp_env_fx_set_graveyard");
     exploder::exploder("fxexp_env_fx_set_graveyard_2");
   }
@@ -89,7 +89,7 @@ function function_8b10d19c(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("graveyard");
 }
 
-function function_cdf0a865(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_cdf0a865(str_objective, b_starting, var_aa1a6455, player) {
   function_693651a7();
 }
 

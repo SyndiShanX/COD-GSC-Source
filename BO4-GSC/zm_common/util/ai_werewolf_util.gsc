@@ -171,7 +171,7 @@ round_spawn() {
   return false;
 }
 
-function_47a88a0c(n_to_spawn = 1, var_1fafa3fc, b_force_spawn = 0, var_eb3a8721, n_round) {
+function_47a88a0c(n_to_spawn = 1, func_on_spawned, b_force_spawn = 0, var_eb3a8721, n_round) {
   n_spawned = 0;
 
   while(n_spawned < n_to_spawn) {
@@ -180,7 +180,7 @@ function_47a88a0c(n_to_spawn = 1, var_1fafa3fc, b_force_spawn = 0, var_eb3a8721,
     }
 
     players = getplayers();
-    var_46d2ec35 = get_favorite_enemy();
+    e_favorite_enemy = get_favorite_enemy();
 
     if(isDefined(var_eb3a8721)) {
       s_spawn_loc = var_eb3a8721;
@@ -207,8 +207,8 @@ function_47a88a0c(n_to_spawn = 1, var_1fafa3fc, b_force_spawn = 0, var_eb3a8721,
         ai.var_cf3ac201 = 1;
       }
 
-      if(isDefined(var_46d2ec35)) {
-        ai.favoriteenemy = var_46d2ec35;
+      if(isDefined(e_favorite_enemy)) {
+        ai.favoriteenemy = e_favorite_enemy;
         ai.favoriteenemy.hunted_by++;
       }
 
@@ -218,8 +218,8 @@ function_47a88a0c(n_to_spawn = 1, var_1fafa3fc, b_force_spawn = 0, var_eb3a8721,
         ai thread[[level.var_7e40409b]](s_spawn_loc);
       }
 
-      if(isDefined(var_1fafa3fc)) {
-        ai thread[[var_1fafa3fc]]();
+      if(isDefined(func_on_spawned)) {
+        ai thread[[func_on_spawned]]();
       }
 
       ai playSound(#"hash_63299a75a97f9678");

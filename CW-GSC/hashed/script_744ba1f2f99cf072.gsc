@@ -36,7 +36,7 @@
 #using scripts\cp_common\util;
 #namespace kgb_ins_activation;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level.checkpoint_clip = getent("checkpoint_clip", "targetname");
   level.checkpoint_clip notsolid();
@@ -46,7 +46,7 @@ function starting(var_d3440450) {
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   namespace_82bfe441::fade(1, "FadeImmediate");
   level thread scene::init("scene_kgb_poison_tea");
   level thread scene::init("scene_kgb_elevator_holdup");
@@ -58,17 +58,17 @@ function main(var_d3440450, var_50cc0d4f) {
   snd::client_msg(#"hash_7527c0556d529822");
   snd::client_msg(#"hash_695d2aba2d66c4b2");
   level thread function_ea6a0033();
-  kgb_ins_prepare::function_52f0fcb3(var_50cc0d4f);
+  kgb_ins_prepare::function_52f0fcb3(b_starting);
   kgb_ins_prepare::function_84d00884();
-  level thread namespace_99e99ffa::function_99e99ffa(var_50cc0d4f);
+  level thread namespace_99e99ffa::function_99e99ffa(b_starting);
   level thread scene::play("scene_kgb_ambient_security_vignette");
   level thread namespace_e77bf565::function_ada6d016();
   level battlechatter::function_2ab9360b(0);
   level thread namespace_e77bf565::function_1067ebf5("rotating_object_inside_man", "team_in_elevator");
   function_30c2cc8f();
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 
   level flag::wait_till("ins_activation_complete");

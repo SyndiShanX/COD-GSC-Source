@@ -897,14 +897,14 @@ function_a039c992() {
 
   while(true) {
     if(self.currentweapon == level.var_4e845c84 || self.currentweapon == level.var_58e17ce3) {
-      var_bdf9e3c2 = self zm_zonemgr::get_player_zone();
+      str_current_zone = self zm_zonemgr::get_player_zone();
       a_str_active_zones = zm_cleanup::get_adjacencies_to_zone(level.var_dcc985c4.script_string);
 
-      if(isDefined(var_bdf9e3c2) && isDefined(a_str_active_zones)) {
+      if(isDefined(str_current_zone) && isDefined(a_str_active_zones)) {
         var_455e0e0 = 0;
 
         foreach(str_zone in a_str_active_zones) {
-          if(var_bdf9e3c2 == str_zone) {
+          if(str_current_zone == str_zone) {
             var_455e0e0 = 1;
             break;
           }
@@ -928,9 +928,9 @@ function_1875f44f() {
   while(true) {
     if(isDefined(level.var_dcc985c4.mdl_bird)) {
       if(self.currentweapon == level.var_4e845c84 || self.currentweapon == level.var_58e17ce3) {
-        var_bdf9e3c2 = zm_zonemgr::get_player_zone();
+        str_current_zone = zm_zonemgr::get_player_zone();
 
-        if(isDefined(var_bdf9e3c2) && var_bdf9e3c2 == level.var_dcc985c4.script_string && isDefined(level.var_dcc985c4.mdl_bird)) {
+        if(isDefined(str_current_zone) && str_current_zone == level.var_dcc985c4.script_string && isDefined(level.var_dcc985c4.mdl_bird)) {
           var_dc40fc85 = level.var_dcc985c4.mdl_bird sightconetrace(self getweaponmuzzlepoint(), self, self getweaponforwarddir(), 10);
 
           if(isDefined(var_dc40fc85) && var_dc40fc85) {
@@ -1088,9 +1088,9 @@ function_baf69ec9() {
   while(true) {
     if(isDefined(level.var_dcc985c4.mdl_bird)) {
       if(self.currentweapon == level.var_4e845c84 || self.currentweapon == level.var_58e17ce3) {
-        var_bdf9e3c2 = zm_zonemgr::get_player_zone();
+        str_current_zone = zm_zonemgr::get_player_zone();
 
-        if(isDefined(var_bdf9e3c2) && var_bdf9e3c2 == level.var_dcc985c4.script_string && isDefined(level.var_dcc985c4.mdl_bird)) {
+        if(isDefined(str_current_zone) && str_current_zone == level.var_dcc985c4.script_string && isDefined(level.var_dcc985c4.mdl_bird)) {
           var_dc40fc85 = level.var_dcc985c4.mdl_bird sightconetrace(self getweaponmuzzlepoint(), self, self getweaponforwarddir(), 50);
 
           if(isDefined(var_dc40fc85) && var_dc40fc85) {
@@ -3565,7 +3565,7 @@ step_6(var_a276c861) {
 
   level.musicsystemoverride = 1;
   music::setmusicstate("boss");
-  level.var_5816975b = &function_ea25ff10;
+  level.check_valid_spawn_override = &function_ea25ff10;
   changeadvertisedstatus(0);
   function_5022ff9d();
 
@@ -3694,7 +3694,7 @@ boss_fight_setup() {
   mdl_portal clientfield::set("" + # "dm_energy", 3);
   mdl_portal.script_noteworthy = "blast_attack_interactables";
   mdl_portal thread function_2f4c3a4e();
-  level.var_977f68ea = &function_f8173af0;
+  level._powerup_timeout_custom_time = &function_f8173af0;
 }
 
 function_f90d2c81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
@@ -4114,7 +4114,7 @@ function_77cf4d4a() {
   level flag::set(#"hash_1b4b6ce05cb62d56");
 
   if(util::get_active_players().size == 1) {
-    level.var_cc984236 = &function_5622ed7e;
+    level.zone_occupied_func = &function_5622ed7e;
   }
 
   e_richtofen.var_f22c83f5 = 1;

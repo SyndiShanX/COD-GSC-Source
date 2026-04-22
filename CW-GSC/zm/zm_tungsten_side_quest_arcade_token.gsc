@@ -103,7 +103,7 @@ function init() {
   level thread function_9dced9c4(#"hash_6570ebf5a30c93d");
   level function_d1f847f9();
   level.var_bd7e65ee = 45;
-  level.var_9671faed = &function_3d9adfea;
+  level.powerup_grab_get_players_override = &function_3d9adfea;
 
   if(!isDefined(level.var_fd23d5ca)) {
     level.var_fd23d5ca = [];
@@ -718,7 +718,7 @@ function function_a1abe9f5() {
   }
 
   if(!zm_score::can_player_purchase(500)) {
-    self zm_score::add_to_player_score(500 - self zm_score::function_ffc2d0bc());
+    self zm_score::add_to_player_score(500 - self zm_score::get_player_score());
   }
 
   content_manager::spawn_instance(level.var_2ab5eeb7);

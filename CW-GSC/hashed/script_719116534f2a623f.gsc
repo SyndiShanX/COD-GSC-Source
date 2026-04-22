@@ -41,8 +41,8 @@ function function_c4dc0c81(str_objective) {
   level thread function_8fbb8d72();
 }
 
-function function_f31f54a0(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_f31f54a0(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level thread function_d9a12f35();
   level thread function_212dbe3();
@@ -62,10 +62,10 @@ function function_f31f54a0(str_objective, var_50cc0d4f) {
   level thread namespace_fc3e8cb::function_6fe40e14("video_store_gun_rack1", "video_store_gun_rack2", "video_store_gun_rack3");
   level thread namespace_979752dc::function_740dbf99();
   level flag::wait_till_any(["flg_arcade_at_exit", "flg_arcade_scenes_complete"]);
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function function_bb767617(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_bb767617(str_objective, b_starting, var_aa1a6455, player) {
   clientfield::set("cull_facility", 2);
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_arcade_window_volumetric", 0);
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_tunnel", 1);

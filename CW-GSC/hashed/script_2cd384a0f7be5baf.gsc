@@ -32,7 +32,7 @@
 
 function function_157fc984() {}
 
-function function_6d9e84ea(str_objective, var_50cc0d4f) {
+function function_6d9e84ea(str_objective, b_starting) {
   level.e_steiner_radio = getent("e_steiner_radio", "targetname");
 
   if(!isDefined(level.player)) {
@@ -40,7 +40,7 @@ function function_6d9e84ea(str_objective, var_50cc0d4f) {
     level.player = a_e_players[0];
   }
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level.player util::function_749362d7(1, #"hash_320ff7b9723b7e5d");
     snd::client_msg("audio_level_triton_verb_disable");
   }
@@ -727,11 +727,11 @@ function function_ab15a34c(str_objective) {
   level thread namespace_c8bf7287::function_c17f029c();
 }
 
-function function_1e5a768a(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_1e5a768a(str_objective, b_starting, var_aa1a6455, player) {
   level thread function_f2797a4(1);
 }
 
-function function_e30ea9da(str_objective, var_50cc0d4f) {
+function function_e30ea9da(str_objective, b_starting) {
   savegame::checkpoint_save(1);
   level thread function_ee32da2d();
   level thread function_4ef657c();
@@ -1112,7 +1112,7 @@ function function_4a1a74fe(str_objective) {
   level thread namespace_7468806b::function_7337a5cc();
 }
 
-function function_888e9b6b(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_888e9b6b(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_f5ae4873() {
   e_bunker_survey_exit_door_closed = getent("e_bunker_survey_exit_door_closed", "targetname");

@@ -52,8 +52,8 @@ enable_widows_wine_perk_for_level() {
 }
 
 widows_wine_precache() {
-  if(isDefined(level.var_ea6a217f)) {
-    [[level.var_ea6a217f]]();
+  if(isDefined(level.widows_wine_precache_override_func)) {
+    [[level.widows_wine_precache_override_func]]();
     return;
   }
 

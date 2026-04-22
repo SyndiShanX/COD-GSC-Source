@@ -59,7 +59,7 @@ init() {
     game.var_659f084a = getgametypesetting(#"hash_6881c7cab0dcef39");
     game.var_50b05a28 = getgametypesetting(#"hash_7c0dcff6ffb1e348");
     game.var_6bd02863 = getgametypesetting(#"hash_4f4a73f236278ba8");
-    game.var_691bbcd2 = getgametypesetting(#"hash_7c0acf14fb1f4080");
+    game.actsq = getgametypesetting(#"hash_7c0acf14fb1f4080");
     function_f6b119c7();
     game.var_c7826a3f = getgametypesetting(#"hash_6269eb986d22cd37");
     game.var_b924522a = getgametypesetting(#"hash_6e2abf2cc40e03f1");
@@ -1535,7 +1535,7 @@ kill_bookmark(var_81538b15, var_f28fb772, einflictor, var_50d1e41a, overrideenti
     return;
   }
 
-  if(game.var_691bbcd2) {
+  if(game.actsq) {
     println("<dev string:x814>");
     return;
   }
@@ -1560,7 +1560,7 @@ function_66d09fea(bookmarkname, var_81538b15, var_f28fb772, einflictor, var_50d1
     return;
   }
 
-  if(game.var_691bbcd2) {
+  if(game.actsq) {
     println(function_9e72a96(game.var_8ea529d1) + "<dev string:x87e>");
     return;
   }

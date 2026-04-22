@@ -21,7 +21,7 @@ autoexec __init() {
 }
 
 __init__() {
-  level thread function_82141ae4();
+  level thread init_switch();
   level thread function_920f9a6();
   level thread function_624de77b();
 }
@@ -77,7 +77,7 @@ function_920f9a6() {
   }
 }
 
-function_82141ae4() {
+init_switch() {
   if(!level.var_c30abd0d) {
     var_fff29b0e = getdynentarray(#"t_switch");
     item_world::function_1b11e73c();

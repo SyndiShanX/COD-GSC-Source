@@ -347,7 +347,7 @@ function_35046386(target) {
   return false;
 }
 
-function_d53feb8c(localclientnum, targets) {
+update_target_hud(localclientnum, targets) {
   var_b3f5ea99 = self getentitynumber();
   var_1dcaad7e = [];
   var_97e92766 = [];
@@ -438,7 +438,7 @@ function_a552c160(localclientnum) {
   while(true) {
     if(function_a0e351e0(localclientnum)) {
       targets = self function_bba5f8f7();
-      self function_d53feb8c(localclientnum, targets);
+      self update_target_hud(localclientnum, targets);
     }
 
     waitframe(1);

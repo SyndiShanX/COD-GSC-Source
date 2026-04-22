@@ -53,12 +53,12 @@ function start(str_objective) {
   level thread namespace_11998b8f::function_de88eefd();
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   player = getplayers()[0];
   level thread function_1c58d4d4();
   level thread namespace_11998b8f::function_7ad4f5cb();
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread namespace_11998b8f::function_973a721b("alley_3_car");
     player util::delay(0.25, undefined, &util::function_749362d7, 1);
     level thread scene::play("scene_z_stk_electronics_store", "rr_wait_loop");
@@ -193,7 +193,7 @@ function function_8d76ed51() {
   level.var_49a292bb animation::last_frame(#"z_stk_surveillance_desk_kraus_exit", level.var_bd5c9b86);
 }
 
-function function_7451d8da(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_7451d8da(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("flag_meetup_park");
     level flag::set("meetup_done");
@@ -204,8 +204,8 @@ function function_7451d8da(str_objective, var_50cc0d4f, var_aa1a6455, player) {
   }
 }
 
-function function_36a9bec7(var_50cc0d4f) {
-  if(!is_true(var_50cc0d4f)) {
+function function_36a9bec7(b_starting) {
+  if(!is_true(b_starting)) {
     level flag::wait_till("give_meetup_obj");
     doors::unlock("door_electronics_store", undefined, 0);
   }

@@ -35,11 +35,11 @@
 #using scripts\cp_common\util;
 #namespace namespace_7ef9d872;
 
-function function_87560e1a(str_objective, var_50cc0d4f) {
+function function_87560e1a(str_objective, b_starting) {
   level.player endon(#"death");
   level thread function_1e5e4f4c();
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread function_79905291("vh_kgb_excavation_hind");
   }
 
@@ -225,7 +225,7 @@ function function_dba43792(str_objective) {
   level.ai_woods forceteleport(var_8c37586a.origin, var_8c37586a.angles);
 }
 
-function function_bb405879(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_bb405879(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_4cf852d1() {
   self endon(#"death");
@@ -298,14 +298,14 @@ function function_2c1b9f8b(s_info) {
   }
 }
 
-function function_e936fbf4(str_objective, var_50cc0d4f) {
+function function_e936fbf4(str_objective, b_starting) {
   level.var_7ddd2b02 = 0;
   var_a6937647 = struct::get("server_attach_interact", "targetname");
   objectives::goto(#"hash_4141fb8a6f3458b2", var_a6937647.origin + (0, 0, 30));
   objectives::complete("obj_yamantau_4");
   objectives::scripted("obj_yamantau_5", undefined, #"hash_22b60d94db70b18c");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread server_attach_interact();
     snd::client_msg("audio_sever_heli_custom");
     snd::client_targetname(level.var_ebbd5cf8, "audio_srv_heli");
@@ -553,7 +553,7 @@ function function_f59af500(str_objective) {
   level.ai_woods forceteleport(var_b4bb921.origin, var_b4bb921.angles);
 }
 
-function function_b80cf494(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_b80cf494(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_fef400d0() {
   self endon(#"death");

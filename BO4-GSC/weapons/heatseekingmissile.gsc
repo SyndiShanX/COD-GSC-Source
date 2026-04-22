@@ -1149,7 +1149,7 @@ _missiledetonate(attacker, weapon, range, mindamage, maxdamage, allowdirectdamag
 
   attackerentity = attacker;
 
-  if(function_3132f113(attacker) || isDefined(attacker) && !isPlayer(attacker) && !isalive(attacker)) {
+  if(isremovedentity(attacker) || isDefined(attacker) && !isPlayer(attacker) && !isalive(attacker)) {
     attackerentity = undefined;
   }
 

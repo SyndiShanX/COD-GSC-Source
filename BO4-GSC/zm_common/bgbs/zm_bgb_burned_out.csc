@@ -20,35 +20,35 @@ __init__() {
   }
 
   bgb::register(#"zm_bgb_burned_out", "event");
-  clientfield::register("toplayer", "zm_bgb_burned_out" + "_1p" + "toplayer", 1, 1, "counter", &function_874dcef1, 0, 0);
-  clientfield::register("allplayers", "zm_bgb_burned_out" + "_3p" + "_allplayers", 1, 1, "counter", &function_5b403c46, 0, 0);
-  clientfield::register("actor", "zm_bgb_burned_out" + "_fire_torso" + "_actor", 1, 1, "counter", &function_908b00b2, 0, 0);
-  clientfield::register("vehicle", "zm_bgb_burned_out" + "_fire_torso" + "_vehicle", 1, 1, "counter", &function_35616d2, 0, 0);
+  clientfield::register("toplayer", "zm_bgb_burned_out" + "_1p" + "toplayer", 1, 1, "counter", &zm_bgb_burned_out_1p_toplayer_cb, 0, 0);
+  clientfield::register("allplayers", "zm_bgb_burned_out" + "_3p" + "_allplayers", 1, 1, "counter", &zm_bgb_burned_out_3p_allplayers_cb, 0, 0);
+  clientfield::register("actor", "zm_bgb_burned_out" + "_fire_torso" + "_actor", 1, 1, "counter", &zm_bgb_burned_out_fire_torso_actor_cb, 0, 0);
+  clientfield::register("vehicle", "zm_bgb_burned_out" + "_fire_torso" + "_vehicle", 1, 1, "counter", &zm_bgb_burned_out_fire_torso_vehicle_cb, 0, 0);
   level._effect["zm_bgb_burned_out" + "_1p"] = "zombie/fx_bgb_burned_out_1p_zmb";
   level._effect["zm_bgb_burned_out" + "_3p"] = "zombie/fx_bgb_burned_out_3p_zmb";
   level._effect["zm_bgb_burned_out" + "_fire_torso"] = "zombie/fx_bgb_burned_out_fire_torso_zmb";
 }
 
-function_874dcef1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+zm_bgb_burned_out_1p_toplayer_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self zm_utility::function_f8796df3(localclientnum)) {
     util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_1p"], self, "tag_origin");
   }
 }
 
-function_5b403c46(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+zm_bgb_burned_out_3p_allplayers_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(!self zm_utility::function_f8796df3(localclientnum)) {
     util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_3p"], self, "tag_origin");
   }
 }
 
-function_908b00b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_54e59513 = "j_spinelower";
+zm_bgb_burned_out_fire_torso_actor_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  fire_torso_tag = "j_spinelower";
 
-  if(isDefined(self gettagorigin(var_54e59513))) {
-    var_54e59513 = "tag_origin";
+  if(isDefined(self gettagorigin(fire_torso_tag))) {
+    fire_torso_tag = "tag_origin";
   }
 
-  util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_fire_torso"], self, var_54e59513);
+  util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_fire_torso"], self, fire_torso_tag);
 
   if(!isDefined(self.var_de2c8500)) {
     self playSound(localclientnum, #"hash_4539c48ed56aa72b");
@@ -56,14 +56,14 @@ function_908b00b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_35616d2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_54e59513 = "tag_body";
+zm_bgb_burned_out_fire_torso_vehicle_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+  fire_torso_tag = "tag_body";
 
-  if(isDefined(self gettagorigin(var_54e59513))) {
-    var_54e59513 = "tag_origin";
+  if(isDefined(self gettagorigin(fire_torso_tag))) {
+    fire_torso_tag = "tag_origin";
   }
 
-  util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_fire_torso"], self, var_54e59513);
+  util::playFXOnTag(localclientnum, level._effect["zm_bgb_burned_out" + "_fire_torso"], self, fire_torso_tag);
 
   if(!isDefined(self.var_de2c8500)) {
     self playSound(localclientnum, #"hash_4539c48ed56aa72b");

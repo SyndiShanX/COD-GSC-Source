@@ -50,12 +50,12 @@ function function_73c2b700() {
   level thread scene::play_from_time("cin_stakeout_train_jumpout", "jump_out_post_teleport", undefined, 10, 0, 1, 0, 1);
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   player = getplayers()[0];
   player endon(#"death");
   namespace_5ceacc03::music("2.0_tracks");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level function_73c2b700();
     player setmovespeedscale(0.72);
   } else {
@@ -85,7 +85,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("ghost_station");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   ghost_station_volumes = getEntArray("ghost_station_volumes", "script_noteworthy");
   array::delete_all(ghost_station_volumes);
 

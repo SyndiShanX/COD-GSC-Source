@@ -25,9 +25,9 @@
 #using scripts\cp_common\util;
 #namespace tkdn_af_tarmac;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   namespace_b100dd86::function_5aabc3fb();
-  tkdn_af_hill::function_a2015343(var_d3440450);
+  tkdn_af_hill::function_a2015343(str_skipto);
   plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(plane, 0);
   exploder::stop_exploder("airfield_assault_lighting_noplane");
@@ -49,7 +49,7 @@ function starting(var_d3440450) {
   util::delay(0.2, undefined, &tkdn_af_hill::function_9967d19b, arash);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level util::delay(0.1, undefined, &namespace_979752dc::disable_stealth_system);
   level.player = getplayers()[0];
   level.player endon(#"death");
@@ -83,8 +83,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level.woods thread util::function_27f5f662(["vox_cp_tdwn_07200_wood_getarash_50", "vox_cp_tdwn_07200_wood_quickbeforethep_01", "vox_cp_tdwn_07200_wood_hurry_3b"], "woods_to_truck", 2);
   level flag::wait_till("af_tarmac_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

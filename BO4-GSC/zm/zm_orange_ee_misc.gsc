@@ -81,7 +81,7 @@ main() {
     zm_sq::start(#"hash_729a1e4eb041be9b");
     level thread function_716974ba();
     level thread sq_glasses();
-    level thread function_7836d215();
+    level thread hidden_song_2();
   }
 }
 
@@ -826,7 +826,7 @@ function_fdc3c7c4() {
   return undefined;
 }
 
-function_7836d215() {
+hidden_song_2() {
   s_location = struct::spawn((-528, 1196, 320));
   s_unitrigger = s_location zm_unitrigger::create("", 32);
   s_location thread function_cabcfdd2();

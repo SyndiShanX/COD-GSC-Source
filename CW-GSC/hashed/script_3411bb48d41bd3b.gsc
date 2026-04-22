@@ -2061,10 +2061,10 @@ function function_e441487e(vehicle) {
 function on_ai_damage(params) {
   if(isDefined(params.einflictor.scriptvehicletype) && isDefined(params.smeansofdeath) && isDefined(params.idamage)) {
     if(params.einflictor.classname === "script_vehicle" && params.smeansofdeath == "MOD_CRUSH") {
-      var_80730518 = params.einflictor;
+      vh_player = params.einflictor;
       var_b35e868f = 0;
 
-      switch (var_80730518.scriptvehicletype) {
+      switch (vh_player.scriptvehicletype) {
         case # "player_motorcycle_2wd":
           n_damage = 200;
           n_slowdown = 0.05;
@@ -2112,8 +2112,8 @@ function on_ai_damage(params) {
         if(isalive(self) && !is_true(self.var_490b950e)) {
           self.var_490b950e = 1;
           self thread function_595cd0e4();
-          v_forward = var_80730518.origin + vectornormalize(anglesToForward(var_80730518.angles)) * 110;
-          v_velocity = var_80730518 getvelocity();
+          v_forward = vh_player.origin + vectornormalize(anglesToForward(vh_player.angles)) * 110;
+          v_velocity = vh_player getvelocity();
           v_launch = v_velocity * n_slowdown * -1;
           v_hitloc = params.vpoint;
 
@@ -2125,21 +2125,21 @@ function on_ai_damage(params) {
             n_damage *= 8;
           }
 
-          if(isDefined(var_80730518)) {
-            var_80730518 thread function_66c37f3b();
-            var_80730518 function_dbf5bfd3(self, params.idamage);
+          if(isDefined(vh_player)) {
+            vh_player thread function_66c37f3b();
+            vh_player function_dbf5bfd3(self, params.idamage);
 
             if(!(self.zm_ai_category === #"boss")) {
-              var_80730518 function_117ab176(self);
+              vh_player function_117ab176(self);
             }
 
-            if(isDefined(v_forward) && !isDefined(var_80730518.b_launched)) {
-              var_80730518.b_launched = 1;
-              var_80730518 thread function_695f2040();
+            if(isDefined(v_forward) && !isDefined(vh_player.b_launched)) {
+              vh_player.b_launched = 1;
+              vh_player thread function_695f2040();
               n_damage = int(n_damage);
 
-              if(!is_true(self.var_bc8466c7) && !is_true(self.var_81568da5) && (!is_true(self.var_6cdeac5e) || !is_true(var_80730518.var_2b60f92f))) {
-                var_80730518 launchvehicle(v_launch, v_hitloc, 0, 0);
+              if(!is_true(self.var_bc8466c7) && !is_true(self.var_81568da5) && (!is_true(self.var_6cdeac5e) || !is_true(vh_player.var_2b60f92f))) {
+                vh_player launchvehicle(v_launch, v_hitloc, 0, 0);
               }
             }
 
@@ -2148,7 +2148,7 @@ function on_ai_damage(params) {
             if(damage_percentage >= 0.01 || self.zm_ai_category === #"boss") {
               if(damage_percentage > 2.4 || var_b35e868f) {
                 if(isDefined(self) && self.archetype === #"zombie") {
-                  if(math::cointoss(40) || isDefined(var_80730518.var_e955dfad) || var_b35e868f) {
+                  if(math::cointoss(40) || isDefined(vh_player.var_e955dfad) || var_b35e868f) {
                     self thread zombie_utility::zombie_gut_explosion();
                   } else {
                     self thread zombie_utility::zombie_gib();
@@ -2162,7 +2162,7 @@ function on_ai_damage(params) {
                 }
               }
 
-              var_80730518 dodamage(n_damage, var_80730518.origin, self, undefined, "", "MOD_IMPACT");
+              vh_player dodamage(n_damage, vh_player.origin, self, undefined, "", "MOD_IMPACT");
             }
           }
         }

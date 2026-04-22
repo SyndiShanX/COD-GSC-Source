@@ -43,7 +43,7 @@
 #using scripts\weapons\cp\spy_camera;
 #namespace namespace_da32b76a;
 
-function function_c17355e(var_d3440450) {
+function function_c17355e(str_skipto) {
   level flag::set("tundra_intro_done");
   level flag::set("player_is_rappelling");
   level flag::set("player_rappel_done");
@@ -54,7 +54,7 @@ function function_c17355e(var_d3440450) {
   level thread namespace_ba979a10::function_d6af6077();
 }
 
-function function_baff9422(var_d3440450, var_50cc0d4f) {
+function function_baff9422(str_skipto, b_starting) {
   thread function_896664a1();
   wait 1;
   skipto::function_4e3ab877("dev_vip_active");
@@ -77,7 +77,7 @@ function function_896664a1() {
   level flag::set("dev_view_arms_hack");
 }
 
-function function_bf8d2448(var_d3440450, var_50cc0d4f) {
+function function_bf8d2448(str_skipto, b_starting) {
   level thread function_89e4fd54();
   level thread function_81f64302();
   level thread function_335d39d4();

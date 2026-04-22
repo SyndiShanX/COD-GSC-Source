@@ -223,7 +223,7 @@ force_update_player_clientfields(localclientnum) {
 init_blocker_fx() {}
 
 init_riser_fx() {
-  if(isDefined(level.var_7f632569) && level.var_7f632569) {}
+  if(isDefined(level.use_new_riser_water) && level.use_new_riser_water) {}
 
   level._effect[#"rise_burst"] = #"zombie/fx_spawn_dirt_hand_burst_zmb";
   level._effect[#"rise_billow"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";

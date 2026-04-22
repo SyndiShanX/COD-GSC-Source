@@ -105,8 +105,8 @@ damage(trap) {
     trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
 
-    if(isDefined(trap.activated_by_player.var_a8049e3d)) {
-      trap.activated_by_player.var_a8049e3d++;
+    if(isDefined(trap.activated_by_player.zapped_zombies)) {
+      trap.activated_by_player.zapped_zombies++;
       trap.activated_by_player notify(#"zombie_zapped");
     }
   }
@@ -142,8 +142,8 @@ damage(trap) {
     }
   }
 
-  if(isDefined(self.var_5475b4ad)) {
-    self[[self.var_5475b4ad]](trap);
+  if(isDefined(self.fire_damage_func)) {
+    self[[self.fire_damage_func]](trap);
     return;
   }
 

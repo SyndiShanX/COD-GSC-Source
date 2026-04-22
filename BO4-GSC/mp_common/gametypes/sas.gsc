@@ -259,7 +259,7 @@ onendgame(var_c1e98979) {
   match::set_winner(player);
 }
 
-function_bbf3128e() {
+playerhumiliation() {
   self endon(#"disconnect", #"death");
 }
 

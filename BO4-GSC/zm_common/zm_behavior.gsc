@@ -399,7 +399,7 @@ zombiefindflesh(behaviortreeentity) {
     [[level.var_d22435d9]](behaviortreeentity);
   }
 
-  if(!isDefined(level.var_4bde8b8f) || ![[level.var_4bde8b8f]]()) {
+  if(!isDefined(level.check_for_alternate_poi) || ![[level.check_for_alternate_poi]]()) {
     behaviortreeentity.enemyoverride = behaviortreeentity.zombie_poi;
     behaviortreeentity.favoriteenemy = behaviortreeentity.var_93a62fe;
   }

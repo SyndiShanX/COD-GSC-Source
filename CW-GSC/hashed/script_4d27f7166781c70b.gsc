@@ -35,12 +35,12 @@ function function_7ab616c1(str_objective) {
   level.player util::function_a5318821();
 }
 
-function function_2435d3e(str_objective, var_50cc0d4f) {
+function function_2435d3e(str_objective, b_starting) {
   snd::client_msg("ending_fade_out");
   namespace_82bfe441::fade(1, "FadeImmediate");
   exploder::kill_exploder("fxexp_nuke_loop_fx");
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     setlightingstate(3);
   }
 
@@ -120,7 +120,7 @@ function function_f1c8f3ad() {
   level.player notifyonplayercommand("gun_shot", "+attack");
 }
 
-function function_8f77588(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_8f77588(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_50f30bc3() {
   wait 0.1;

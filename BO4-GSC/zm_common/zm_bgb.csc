@@ -25,7 +25,7 @@ __init__() {
   callback::on_localclient_connect(&on_player_connect);
   level.bgb = [];
   level.bgb_pack = [];
-  clientfield::register("clientuimodel", "zmhud.bgb_current", 1, 8, "int", &function_d9afd5ee, 0, 0);
+  clientfield::register("clientuimodel", "zmhud.bgb_current", 1, 8, "int", &bgb_store_current, 0, 0);
   clientfield::register("clientuimodel", "zmhud.bgb_display", 1, 1, "int", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.bgb_timer", 1, 8, "float", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.bgb_activations_remaining", 1, 3, "int", undefined, 0, 0);
@@ -104,7 +104,7 @@ bgb_finalize() {
 
     v.camo_index = var_5415dfb9.var_daefc551;
     v.flying_gumball_tag = "tag_gumball_" + v.limit_type;
-    v.var_c0362ae9 = "tag_gumball_" + v.limit_type + "_" + level.var_afb8293c[v.rarity];
+    v.give_gumball_tag = "tag_gumball_" + v.limit_type + "_" + level.var_afb8293c[v.rarity];
     level.bgb_item_index_to_name[v.item_index] = v.name;
   }
 }
@@ -155,22 +155,22 @@ function_5e7b3f16(localclientnum, time) {
   }
 }
 
-function_d9afd5ee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
+bgb_store_current(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self.bgb = level.bgb_item_index_to_name[newval];
   self thread function_5e7b3f16(localclientnum, 3);
 }
 
-function_f4763ffe(localclientnum, fx) {
-  if(isDefined(self.var_629940ea)) {
-    deletefx(localclientnum, self.var_629940ea, 1);
+bgb_play_fx_on_camera(localclientnum, fx) {
+  if(isDefined(self.bgb_bubble_blow_fx)) {
+    deletefx(localclientnum, self.bgb_bubble_blow_fx, 1);
   }
 
   if(isDefined(fx)) {
-    self.var_629940ea = playfxoncamera(localclientnum, fx);
+    self.bgb_bubble_blow_fx = playfxoncamera(localclientnum, fx);
   }
 }
 
 bgb_blow_bubble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  function_f4763ffe(localclientnum, level._effect[#"bgb_blow_bubble"]);
+  bgb_play_fx_on_camera(localclientnum, level._effect[#"bgb_blow_bubble"]);
   self thread function_5e7b3f16(localclientnum, 0.5);
 }

@@ -234,7 +234,7 @@ function function_970a97b2(params) {
     var_a0345f37.var_9258f88f = params.enemy.var_9258f88f;
     var_a0345f37.var_379bc25d = is_true(params.enemy.interdimensional_gun_kill);
     var_a0345f37.var_5f6261a5 = params.enemy.var_5f6261a5;
-    var_a0345f37.var_7fde19e8 = params.enemy.var_7fde19e8;
+    var_a0345f37.last_phase_time = params.enemy.last_phase_time;
     var_a0345f37.var_c3e92aaf = params.enemy.var_c3e92aaf;
     var_a0345f37.var_2bd7ca9d = params.enemy flag::get(#"hash_5047ba8da693e1c5");
   }
@@ -1057,7 +1057,7 @@ function function_f2ce8b86(params) {
           }
         }
 
-        if(params.enemy.archetype === #"avogadro" && gettime() - (isDefined(params.enemy.var_7fde19e8) ? params.enemy.var_7fde19e8 : 0) <= 2000) {
+        if(params.enemy.archetype === #"avogadro" && gettime() - (isDefined(params.enemy.last_phase_time) ? params.enemy.last_phase_time : 0) <= 2000) {
           processscoreevent("avogadro_teleport_kia_zm", var_c2dcab66.player, params.enemy, var_c2dcab66.weapon);
         }
 

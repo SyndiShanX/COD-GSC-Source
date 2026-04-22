@@ -15,12 +15,12 @@ event_handler[gametype_init] main(eventstruct) {
   clientfield::register("allplayers", "taco_carry", 14000, 1, "int", &function_aa7bb941, 0, 0);
   clientfield::register("scriptmover", "taco_player_entnum", 14000, 4, "int", &function_568727a2, 0, 0);
   level.var_aaaae0b = "ui/fx8_fracture_plyr_marker";
-  level.var_5844252c = "ui/fx8_fracture_drop_marker";
+  level.tacofx = "ui/fx8_fracture_drop_marker";
   level.var_ce64ea3e = #"clean_taco";
 
   if(isDefined(getgametypesetting(#"hash_5cc4c3042b7d4935")) && getgametypesetting(#"hash_5cc4c3042b7d4935")) {
     level.var_aaaae0b = "ui/fx8_fracture_plyr_marker_shamrock";
-    level.var_5844252c = "ui/fx8_fracture_drop_marker_shamrock";
+    level.tacofx = "ui/fx8_fracture_drop_marker_shamrock";
     level.var_ce64ea3e = #"hash_3a64e972390f43aa";
   }
 
@@ -48,8 +48,8 @@ function_11abf5b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       self thread function_bcb88fb7(localclientnum);
     }
 
-    self.var_5844252c = util::playFXOnTag(localclientnum, level.var_5844252c, self.var_47b256ef, "tag_origin");
-    setfxteam(localclientnum, self.var_5844252c, self.team);
+    self.tacofx = util::playFXOnTag(localclientnum, level.tacofx, self.var_47b256ef, "tag_origin");
+    setfxteam(localclientnum, self.tacofx, self.team);
   }
 
   if(newval == 1) {
@@ -58,7 +58,7 @@ function_11abf5b2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 2) {
-    self thread function_d1834e16(localclientnum);
+    self thread bounce_effect(localclientnum);
   }
 }
 
@@ -70,13 +70,13 @@ function_bcb88fb7(localclientnum) {
 }
 
 function_81431153(localclientnum) {
-  if(isDefined(self.var_5844252c)) {
-    killfx(localclientnum, self.var_5844252c);
-    self.var_5844252c = undefined;
+  if(isDefined(self.tacofx)) {
+    killfx(localclientnum, self.tacofx);
+    self.tacofx = undefined;
   }
 }
 
-function_d1834e16(localclientnum) {
+bounce_effect(localclientnum) {
   self endon(#"stopbounce");
   self endon(#"death");
   toppos = self.origin + (0, 0, 12);

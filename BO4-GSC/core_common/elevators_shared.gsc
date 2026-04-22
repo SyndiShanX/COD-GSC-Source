@@ -87,7 +87,7 @@ class class_727456f3 {
       var_b66bd46e = var_de7ae77 - var_c0a091bc;
     }
 
-    n_movetime = m_s_bundle.var_db3c84cf * var_b66bd46e;
+    n_movetime = m_s_bundle.elevator_move_time * var_b66bd46e;
     n_movetime = math::clamp(n_movetime, 1, 30);
     var_2af3d553 movez(-1 * m_s_bundle.var_a4446fd0 * var_b66bd46e, n_movetime, 0.1, 0.1);
     var_2af3d553 waittill(#"movedone");
@@ -165,7 +165,7 @@ class class_727456f3 {
       var_b66bd46e = var_de7ae77 - var_c0a091bc;
     }
 
-    n_movetime = m_s_bundle.var_db3c84cf * var_b66bd46e;
+    n_movetime = m_s_bundle.elevator_move_time * var_b66bd46e;
     n_movetime = math::clamp(n_movetime, 1, 30);
     var_2af3d553 movez(m_s_bundle.var_a4446fd0 * var_b66bd46e, n_movetime, 0.1, 0.1);
     var_2af3d553 waittill(#"movedone");
@@ -672,9 +672,9 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("toplayer", "elevator_floor_selection", 1, 1, "int");
-  var_78f0e5f1 = struct::get_array("scriptbundle_elevators", "classname");
+  a_elevators = struct::get_array("scriptbundle_elevators", "classname");
 
-  foreach(s_instance in var_78f0e5f1) {
+  foreach(s_instance in a_elevators) {
     var_1313d6ba = s_instance init_elevator();
 
     if(isDefined(var_1313d6ba)) {
@@ -752,9 +752,9 @@ __main__() {
 }
 
 function_a7d817a6() {
-  var_78f0e5f1 = struct::get_array("scriptbundle_elevators", "classname");
+  a_elevators = struct::get_array("scriptbundle_elevators", "classname");
 
-  foreach(s_instance in var_78f0e5f1) {
+  foreach(s_instance in a_elevators) {
     if(s_instance.var_1313d6ba.m_s_bundle.var_46d9acb0 == "auto_up" || s_instance.var_1313d6ba.m_s_bundle.var_46d9acb0 == "auto_down") {
       thread[[s_instance.var_1313d6ba]] - > function_cae3f0e7();
       continue;

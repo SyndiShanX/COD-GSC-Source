@@ -56,8 +56,8 @@ function_4235c686(player) {
   height = getwaterheight(player.origin);
   player_z = player.origin[2];
   depth = height - player_z;
-  var_101b13f6 = depth > 50;
-  return var_101b13f6;
+  submerged = depth > 50;
+  return submerged;
 }
 
 function_325b468a(player) {

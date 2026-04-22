@@ -47,7 +47,7 @@ function start(str_objective) {
   level thread namespace_a789f8ae::function_8d918610("floor_one_cctv");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   level thread namespace_a789f8ae::function_eff61506();
@@ -80,7 +80,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("1st_floor_cctv");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x53>");
 
   actors[#"door2"] = getent("cctv_exit_door_left", "targetname");
@@ -514,7 +514,7 @@ function function_9f9e880e() {
 }
 
 function function_26ddb694(s_info) {
-  return isDefined(level.player.var_80730518);
+  return isDefined(level.player.vh_player);
 }
 
 function function_581e59c1() {

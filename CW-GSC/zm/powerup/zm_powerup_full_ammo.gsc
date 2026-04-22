@@ -68,8 +68,8 @@ function function_dae1df4d(e_powerup, player) {
 function full_ammo_powerup(drop_item, player) {
   players = getplayers(player.team);
 
-  if(isDefined(level.var_73345bfd)) {
-    players = [[level.var_73345bfd]](player);
+  if(isDefined(level._get_game_module_players)) {
+    players = [[level._get_game_module_players]](player);
   }
 
   level notify(#"zmb_max_ammo_level");

@@ -17,7 +17,7 @@ function function_dccb21b3(str_objective) {
   level thread namespace_9e5ef376::function_b7e649c0();
 }
 
-function function_f554eb14(str_objective, var_50cc0d4f) {
+function function_f554eb14(str_objective, b_starting) {
   level.player namespace_534279a::function_a3c3a2b0();
   level thread function_a7bfc002();
   level thread function_596aab36();
@@ -32,7 +32,7 @@ function function_f554eb14(str_objective, var_50cc0d4f) {
   level thread skipto::function_4e3ab877("parapet");
 }
 
-function function_23b06946(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_23b06946(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_596aab36() {}
 

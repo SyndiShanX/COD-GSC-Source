@@ -555,7 +555,7 @@ class class_c4926dee {
     arrayremovevalue(removed, undefined, 1);
 
     foreach(obj in removed) {
-      if(function_3132f113(obj)) {
+      if(isremovedentity(obj)) {
         arrayremovevalue(removed, obj, 1);
       }
     }

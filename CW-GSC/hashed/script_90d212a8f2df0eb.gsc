@@ -41,7 +41,7 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   if(level.var_731c10af.var_42659717 == 0) {
     next_obj = "path_end_1";
   }
@@ -61,10 +61,10 @@ function main(str_objective, var_50cc0d4f) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "village";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(var_50cc0d4f, 0);
+  level skipto::function_4e3ab877(b_starting, 0);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   wait 1;
   village_heli = getEntArray("village_heli", "targetname");
 
@@ -948,7 +948,7 @@ function function_84f506c9() {
   dialogue::radio("vox_cp_prsn_14700_adlr_bellwhatdidyouf_b2");
 }
 
-function function_909afeee(str_objective, var_50cc0d4f) {
+function function_909afeee(str_objective, b_starting) {
   level endon(#"visit_restart");
   level endon(#"start_outro");
   var_c79d614f = "<dev string:x38>";

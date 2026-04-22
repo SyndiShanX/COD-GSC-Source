@@ -128,7 +128,7 @@ function event_handler[gametype_init] main(eventstruct) {
   init_talismans();
   init_pack_a_punch();
   init_magicbox();
-  function_24a75fd1();
+  init_scoring();
   level thread function_d717724e();
   thread function_e71942eb();
   finalize_clientfields();
@@ -322,7 +322,7 @@ function function_4a631b98() {
   level.var_f03084a6 = 1;
 }
 
-function function_24a75fd1() {
+function init_scoring() {
   callback::on_ai_killed(&function_45a520db);
   callback::on_ai_damage(&function_e0c53cf);
   level.var_e01b92bb = 0;
@@ -1795,8 +1795,8 @@ function function_21669ebc(restart = 0) {
   level endon(#"end_round_think");
 
   if(!is_true(restart)) {
-    if(isDefined(level.var_12e11406)) {
-      [[level.var_12e11406]]();
+    if(isDefined(level.initial_round_wait_func)) {
+      [[level.initial_round_wait_func]]();
     }
 
     if(!is_true(level.host_ended_game)) {
@@ -1819,9 +1819,9 @@ function function_21669ebc(restart = 0) {
 
     level thread function_ec53cb2c();
 
-    if(isDefined(level.var_fc735431)) {
+    if(isDefined(level.zombie_round_change_custom)) {
       level thread zm_audio::function_4138a262();
-      [[level.var_fc735431]]();
+      [[level.zombie_round_change_custom]]();
     } else {
       level thread zm_audio::function_4138a262();
       zm_round_logic::round_one_up();
@@ -1973,16 +1973,16 @@ function function_cab8ebff(var_5707265b = 120) {
 
   while(true) {
     if(function_5a2c9b1c(level.round_number)) {
-      var_7e5b8365 = function_77ee3cd2(level.round_number) && zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
+      b_should_wait = function_77ee3cd2(level.round_number) && zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
     } else {
-      var_7e5b8365 = zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
+      b_should_wait = zombie_utility::get_current_zombie_count() > 0 || level.zombie_total > 0 || level.intermission;
     }
 
     if(getdvarint(#"hash_19d726be121cfa2", 0)) {
-      var_7e5b8365 = var_7e5b8365 && gettime() - var_fcf7225b < var_5707265b;
+      b_should_wait = b_should_wait && gettime() - var_fcf7225b < var_5707265b;
     }
 
-    if((!var_7e5b8365 || level flag::get("end_round_wait")) && !level flag::get(#"infinite_round_spawning")) {
+    if((!b_should_wait || level flag::get("end_round_wait")) && !level flag::get(#"infinite_round_spawning")) {
       return;
     }
 

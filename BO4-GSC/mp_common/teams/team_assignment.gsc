@@ -57,13 +57,13 @@ function_ee150fcc(team, team_players) {
     }
   }
 
-  var_6195506c = 0;
+  used_spots = 0;
 
   foreach(count in var_ab9e77bf) {
-    var_6195506c += count;
+    used_spots += count;
   }
 
-  return level.maxteamplayers - var_6195506c;
+  return level.maxteamplayers - used_spots;
 }
 
 function_f18da875(platoon, player_counts) {

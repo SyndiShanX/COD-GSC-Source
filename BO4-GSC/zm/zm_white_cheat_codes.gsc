@@ -117,10 +117,10 @@ guns() {
         continue;
       }
 
-      var_4cd7f83c = e_player getweaponslistprimaries();
+      a_w_current = e_player getweaponslistprimaries();
 
-      for(i = 0; i < var_4cd7f83c.size; i++) {
-        var_4cd7f83c[i] = zm_weapons::get_base_weapon(var_4cd7f83c[i]);
+      for(i = 0; i < a_w_current.size; i++) {
+        a_w_current[i] = zm_weapons::get_base_weapon(a_w_current[i]);
       }
 
       w_current = e_player getcurrentweapon();
@@ -132,7 +132,7 @@ guns() {
       do {
         w_random = array::random(var_fb1db24c);
       }
-      while(w_random == level.weaponnone || isDefined(array::find(var_4cd7f83c, w_random)));
+      while(w_random == level.weaponnone || isDefined(array::find(a_w_current, w_random)));
 
       if(is_weapon_upgraded) {
         w_random = zm_white_insanity_mode::get_upgrade(w_random);

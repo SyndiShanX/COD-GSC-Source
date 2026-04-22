@@ -64,14 +64,14 @@ function function_abfa576(str_objective) {
   scene::function_27f5972e("p9_fxanim_cp_siege_radar_destruction_01_bundle");
 }
 
-function function_802a0aed(str_objective, var_50cc0d4f) {
+function function_802a0aed(str_objective, b_starting) {
   level.player endon(#"death");
   level thread function_33dd0a42();
   namespace_95f223d5::music("2.0_courtyard");
   level util::function_f6847a11();
   level thread namespace_604e2e22::function_1af0cb0("courtyard");
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     level waittill(#"hash_465d6bb5960c37f8");
     level.allowbattlechatter[#"allies"] = 1;
     level.allowbattlechatter[#"axis"] = 1;
@@ -390,7 +390,7 @@ function function_e3f8cfba() {
   }
 }
 
-function function_77335d30(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_77335d30(str_objective, b_starting, var_aa1a6455, player) {
   level flag::set("flg_courtyard_completed");
 }
 
@@ -821,8 +821,8 @@ function function_4b8cec86(str_objective) {
   namespace_95f223d5::music("6.0_danger_close");
 }
 
-function outro_main(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function outro_main(str_objective, b_starting) {
+  if(b_starting) {
     namespace_9940c067::function_a5083d9c();
     level thread namespace_604e2e22::function_f2f9526e();
     a = [];
@@ -870,7 +870,7 @@ function outro_main(str_objective, var_50cc0d4f) {
   level thread skipto::function_4e3ab877("outro");
 }
 
-function outro_cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function outro_cleanup(str_objective, b_starting, var_aa1a6455, player) {
   if(isDefined(level.adler)) {
     util::stop_magic_bullet_shield(level.adler);
     level.adler delete();

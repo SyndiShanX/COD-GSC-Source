@@ -21,7 +21,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   level flag::init("level_has_skiptos");
   level flag::init("level_has_skipto_branches");
-  level.var_28c22d88 = [];
+  level.skipto_current_objective = [];
   clientfield::register("toplayer", "catch_up_transition", 1, 1, "counter", &catch_up_transition, 0, 0);
   clientfield::register("world", "set_last_map_dvar", 1, 1, "counter", &set_last_map_dvar, 0, 0);
   level.var_46d8992a = "_default";
@@ -314,9 +314,9 @@ function handle() {
   function_4b70d35f();
   skiptos = function_5a61e21a();
 
-  foreach(var_d3440450 in skiptos) {
-    if(isDefined(level.var_c55064fd[var_d3440450])) {
-      var_48a6b9bd = level.var_c55064fd[var_d3440450].var_48a6b9bd;
+  foreach(str_skipto in skiptos) {
+    if(isDefined(level.var_c55064fd[str_skipto])) {
+      var_48a6b9bd = level.var_c55064fd[str_skipto].var_48a6b9bd;
 
       if(isDefined(var_48a6b9bd) && !isinarray(skiptos, var_48a6b9bd)) {
         if(!isDefined(skiptos)) {
@@ -428,10 +428,10 @@ function function_51726ac8(objectives, starting) {
   }
 
   function_d037bbec(objectives, starting);
-  level.var_b28c2c3a = level.var_28c22d88[0];
-  level.var_28c22d88 = objectives;
+  level.var_b28c2c3a = level.skipto_current_objective[0];
+  level.skipto_current_objective = objectives;
   level notify(#"objective_changed", {
-    #objectives: level.var_28c22d88
+    #objectives: level.skipto_current_objective
   });
 }
 
@@ -458,14 +458,14 @@ function function_d037bbec(name, starting) {
 
   if(isDefined(level.var_c55064fd[name])) {
     if(!is_true(level.var_c55064fd[name].var_9dd617f2)) {
-      if(!isinarray(level.var_28c22d88, name)) {
-        if(!isDefined(level.var_28c22d88)) {
-          level.var_28c22d88 = [];
-        } else if(!isarray(level.var_28c22d88)) {
-          level.var_28c22d88 = array(level.var_28c22d88);
+      if(!isinarray(level.skipto_current_objective, name)) {
+        if(!isDefined(level.skipto_current_objective)) {
+          level.skipto_current_objective = [];
+        } else if(!isarray(level.skipto_current_objective)) {
+          level.skipto_current_objective = array(level.skipto_current_objective);
         }
 
-        level.var_28c22d88[level.var_28c22d88.size] = name;
+        level.skipto_current_objective[level.skipto_current_objective.size] = name;
       }
 
       level notify(name + "_init");
@@ -510,8 +510,8 @@ function function_60288de7(name, starting) {
       cleaned = 1;
       level.var_c55064fd[name].var_9dd617f2 = 0;
 
-      if(isinarray(level.var_28c22d88, name)) {
-        arrayremovevalue(level.var_28c22d88, name);
+      if(isinarray(level.skipto_current_objective, name)) {
+        arrayremovevalue(level.skipto_current_objective, name);
       }
 
       if(isDefined(level.var_c55064fd[name].cleanup_func)) {

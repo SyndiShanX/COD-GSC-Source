@@ -242,8 +242,8 @@ function host_migration_respawn() {
   println("<dev string:xa0>");
   new_origin = undefined;
 
-  if(isDefined(level.var_5816975b)) {
-    new_origin = [[level.var_5816975b]](self);
+  if(isDefined(level.check_valid_spawn_override)) {
+    new_origin = [[level.check_valid_spawn_override]](self);
   }
 
   if(!isDefined(new_origin)) {

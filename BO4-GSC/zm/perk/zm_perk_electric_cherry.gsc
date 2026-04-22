@@ -53,8 +53,8 @@ enable_electric_cherry_perk_for_level() {
 }
 
 electric_cherry_precache() {
-  if(isDefined(level.var_e0f12444)) {
-    [[level.var_e0f12444]]();
+  if(isDefined(level.electric_cherry_precache_override_func)) {
+    [[level.electric_cherry_precache_override_func]]();
     return;
   }
 
@@ -121,8 +121,8 @@ electric_cherry_laststand() {
         if(a_zombies[i].health <= 1000) {
           a_zombies[i] thread electric_cherry_death_fx();
 
-          if(isDefined(self.var_999011b9)) {
-            self.var_999011b9++;
+          if(isDefined(self.cherry_kills)) {
+            self.cherry_kills++;
           }
 
           self zm_score::add_to_player_score(40);
@@ -285,8 +285,8 @@ electric_cherry_reload_attack() {
           if(a_zombies[i].health <= perk_dmg) {
             a_zombies[i] thread electric_cherry_death_fx();
 
-            if(isDefined(self.var_999011b9)) {
-              self.var_999011b9++;
+            if(isDefined(self.cherry_kills)) {
+              self.cherry_kills++;
             }
 
             self zm_score::add_to_player_score(40);

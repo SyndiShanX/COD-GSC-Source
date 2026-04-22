@@ -38,7 +38,7 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_entry;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread function_272c06e0();
   level thread namespace_e77bf565::function_8191bcdc(1);
@@ -50,13 +50,13 @@ function starting(var_d3440450) {
   namespace_e77bf565::function_e2e72d4(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.player endon(#"death");
 
-  if(is_true(var_50cc0d4f)) {
-    kgb_ins_prepare::function_52f0fcb3(var_d3440450);
+  if(is_true(b_starting)) {
+    kgb_ins_prepare::function_52f0fcb3(str_skipto);
     kgb_ins_prepare::function_84d00884();
-    level thread namespace_99e99ffa::function_99e99ffa(var_d3440450);
+    level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
     level thread scene::play("scene_kgb_walkup_adler", "Shot 4", [level.adler]);
     namespace_e77bf565::function_c4de67de();
@@ -70,11 +70,11 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread function_b8027a11();
   level flag::set("flag_prep_elevator");
   level thread function_9e8ed6b4();
-  function_5c4d2cf9(var_50cc0d4f);
+  function_5c4d2cf9(b_starting);
   level thread function_c7b22bd4();
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -105,8 +105,8 @@ function function_272c06e0() {
   doors::function_f35467ac("checkpoint_door", "targetname");
 }
 
-function function_5c4d2cf9(var_50cc0d4f) {
-  level thread function_c844d59a(var_50cc0d4f);
+function function_5c4d2cf9(b_starting) {
+  level thread function_c844d59a(b_starting);
   level flag::wait_till("checkpoint_crossed");
 }
 
@@ -124,11 +124,11 @@ function function_b6138231() {
   level flag::set("checkpoint_crossed");
 }
 
-function function_c844d59a(var_50cc0d4f) {
+function function_c844d59a(b_starting) {
   struct = struct::get("checkpoint_interact", "targetname");
   struct util::create_cursor_hint(undefined, (0, 0, 0), #"hash_1b2da47a0dd85d2d", 80);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level flag::set("flag_aslt_entry_prompt_door");
     level thread kgb_ins_rv::function_eb4677fe();
   }

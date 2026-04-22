@@ -31,15 +31,15 @@ function start(str_objective) {
   level thread namespace_c6aa31df::function_d1fa28d3("rice_paddies");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   var_c79d614f = "jungle_path";
   level thread jungle_path();
   level flag::wait_till(var_c79d614f + "_complete");
   savegame::function_379f84b3();
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_c26b0bc0() {
   level flag::init("flag_final_visit");

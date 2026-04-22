@@ -49,7 +49,7 @@ function starting(str_objective) {
   level thread namespace_604e2e22::function_1e2a0690("aa_courtyard", "courtyard_aa_gunner", "scene_sge_0000_ambient_aa_gun");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   level.player clientfield::set_to_player("stream_intro_assets", 1);
   savegame::checkpoint_save();
   setDvar(#"hash_6f9f3341a7820247", 0.2);
@@ -131,7 +131,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("infil");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function intro_objectives() {
   level waittill(#"hash_34379201e08ecdef");

@@ -724,7 +724,7 @@ function function_603d935(var_c5827a95, n_goalradius = 200, var_dd47e22 = 0.1, v
   self val::reset_all(#"hash_4629ea2949a36bbb");
 }
 
-function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, var_d3440450 = level.var_28c22d88[0]) {
+function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, str_skipto = level.skipto_current_objective[0]) {
   ai = getent(var_a7f24c3d, "targetname", 1);
 
   if(!isalive(ai)) {
@@ -745,7 +745,7 @@ function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, var_d3440450 = level.
   }
 
   if(is_true(var_b895b611)) {
-    ai function_55623c92(var_d3440450, var_a7f24c3d);
+    ai function_55623c92(str_skipto, var_a7f24c3d);
   }
 
   ai setgoal(ai.origin);
@@ -753,8 +753,8 @@ function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, var_d3440450 = level.
   return ai;
 }
 
-function function_55623c92(var_d3440450 = level.var_28c22d88[0], str_name = self.targetname) {
-  var_142cfe56 = var_d3440450 + "_" + str_name;
+function function_55623c92(str_skipto = level.skipto_current_objective[0], str_name = self.targetname) {
+  var_142cfe56 = str_skipto + "_" + str_name;
   s_org = struct::get(var_142cfe56, "targetname");
 
   if(isDefined(s_org)) {

@@ -479,7 +479,7 @@ function function_e44ef704(params) {
 }
 
 function function_ac94df05(entity) {
-  return isDefined(entity.current_state) && entity.current_state.name === #"chase" && (entity.var_9bff71aa < 2 || gettime() - entity.var_7fde19e8 > 1000);
+  return isDefined(entity.current_state) && entity.current_state.name === #"chase" && (entity.var_9bff71aa < 2 || gettime() - entity.last_phase_time > 1000);
 }
 
 function function_7d5cf0e4(entity) {

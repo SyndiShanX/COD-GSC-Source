@@ -100,7 +100,7 @@ function function_26d91402(old_position, new_position) {
   return trace[#"position"];
 }
 
-function function_b7f367ed(old_position, new_position) {
+function is_valid_new_pos(old_position, new_position) {
   trace = get_trace(old_position, new_position);
 
   if(trace[#"fraction"] < 1) {
@@ -111,7 +111,7 @@ function function_b7f367ed(old_position, new_position) {
 }
 
 function is_falling(position) {
-  return function_b7f367ed(position, position + (0, 0, -500));
+  return is_valid_new_pos(position, position + (0, 0, -500));
 }
 
 function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc1198, var_d7e15204, var_f2499291, var_dda415f2, lookdir, var_a571008b, var_eea7b52e) {
@@ -183,7 +183,7 @@ function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc
       new_position = position - vectorscale(forwardvec, var_fdb8844a);
       var_d2ca9e9b = position - vectorscale(forwardvec, var_fdb8844a + epsilon);
 
-      if(function_b7f367ed(position, var_d2ca9e9b)) {
+      if(is_valid_new_pos(position, var_d2ca9e9b)) {
         position = new_position;
       } else {
         var_8abc8992 = 1;
@@ -202,7 +202,7 @@ function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc
       new_position = (position[0], position[1], position[2] - var_35187b11);
       var_d2ca9e9b = (position[0], position[1], position[2] - var_35187b11 - epsilon);
 
-      if(function_b7f367ed(position, var_d2ca9e9b)) {
+      if(is_valid_new_pos(position, var_d2ca9e9b)) {
         position = new_position;
         continue;
       }
@@ -211,7 +211,7 @@ function function_33141024(vdir, tweentime, var_c69fe125, var_eebc8ec0, var_3cbc
     }
   }
 
-  if(!function_b7f367ed(original_position, position)) {
+  if(!is_valid_new_pos(original_position, position)) {
     position = function_26d91402(original_position, position);
   }
 

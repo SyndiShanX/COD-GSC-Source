@@ -46,9 +46,9 @@
 #using scripts\cp_common\util;
 #namespace tkdn_af_chase;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level.player = getplayers()[0];
-  tkdn_af_hill::function_a2015343(var_d3440450);
+  tkdn_af_hill::function_a2015343(str_skipto);
   plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(plane, 1);
   exploder::stop_exploder("airfield_assault_lighting_noplane");
@@ -64,12 +64,12 @@ function starting(var_d3440450) {
   level clientfield::set("prop_wash", 1);
 }
 
-function function_614083bb(var_d3440450) {
+function function_614083bb(str_skipto) {
   thread namespace_a052577e::function_79270d32();
   namespace_b100dd86::function_5aabc3fb();
   level.player = getplayers()[0];
   thread namespace_a052577e::function_79270d32();
-  tkdn_af_hill::function_a2015343(var_d3440450);
+  tkdn_af_hill::function_a2015343(str_skipto);
   plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(plane, 1);
   setDvar(#"hash_76c0d7e6385ee6de", 0.05);
@@ -124,11 +124,11 @@ function ri_door_en2_death_fallout_server(params) {
   self.vehicle setanim(#"hash_7ed3204394a2ff5e", 1, 0, 1);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   player = getplayers()[0];
   player endon(#"death");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     util::delay(0.2, undefined, &tkdn_af_tarmac::function_565588e1);
   }
 
@@ -145,7 +145,7 @@ function main(var_d3440450, var_50cc0d4f) {
   vehicle::add_spawn_function_group("af_enemy_chase_veh_l", "script_noteworthy", &function_40c45b6);
   function_d9fae56b();
   thread function_dcc35e0b();
-  thread function_4c87c5cf(var_50cc0d4f);
+  thread function_4c87c5cf(b_starting);
   thread function_b90ebd9a();
   thread function_9555ada1();
   wait 2;
@@ -163,8 +163,8 @@ function main(var_d3440450, var_50cc0d4f) {
   wait 2;
   level notify(#"hash_351eb749d2c8fa9c");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 
   level.woods ai::gun_recall();
@@ -207,7 +207,7 @@ function function_269adc62(var_d36613f6) {
   }
 }
 
-function function_2ccc781e(var_d3440450, var_50cc0d4f) {
+function function_2ccc781e(str_skipto, b_starting) {
   vehicle::add_spawn_function_group("challenge_truck", "script_noteworthy", &function_2016824f);
   spawner::add_spawn_function_group("af_vh_rc_enemy", "targetname", &function_db378ce0);
   player = getplayers()[0];
@@ -220,7 +220,7 @@ function function_2ccc781e(var_d3440450, var_50cc0d4f) {
   pathnode = getvehiclenode("rc_chase_start", "targetname");
   level.chase_truck thread vehicle::get_on_and_go_path(pathnode);
   player unlink();
-  thread function_3c7a908d(var_50cc0d4f);
+  thread function_3c7a908d(b_starting);
   thread function_9535c641();
   thread function_e585ec0d();
   thread function_1ce84183();
@@ -298,8 +298,8 @@ function function_2ccc781e(var_d3440450, var_50cc0d4f) {
   array::delete_all(vehs);
   vehs = getvehiclearray();
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -1255,7 +1255,7 @@ function function_7730c3f4() {
   wait 2;
 }
 
-function function_3c7a908d(var_50cc0d4f) {
+function function_3c7a908d(b_starting) {
   thread namespace_a052577e::function_b3b2671a(level.player);
   snd::client_targetname(level.af_plane, "cargo_plane");
   snd::client_targetname(level.plane_mover, "cargo_plane_mover");
@@ -1301,7 +1301,7 @@ function function_3c7a908d(var_50cc0d4f) {
   level.rc_car.angles = var_a00e7b18;
   push = 42;
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     push = 36;
   }
 

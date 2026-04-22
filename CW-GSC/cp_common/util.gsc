@@ -1235,9 +1235,9 @@ function function_74a9e89b(str_team = #"any", str_vehicle = undefined) {
     var_b72afb0d = struct::get_array("cp_vh_spawn_loc", "variantname");
     var_17d40a0f = arraycombine(var_b72afb0d, var_261c6219, 0, 0);
 
-    if(isDefined(level.var_28c22d88) && level.var_28c22d88.size > 0) {
+    if(isDefined(level.skipto_current_objective) && level.skipto_current_objective.size > 0) {
       foreach(var_e56f5f30 in var_17d40a0f) {
-        if(!isDefined(var_e56f5f30.script_objective) || isinarray(level.var_28c22d88, var_e56f5f30.script_objective)) {
+        if(!isDefined(var_e56f5f30.script_objective) || isinarray(level.skipto_current_objective, var_e56f5f30.script_objective)) {
           if(!isDefined(var_30181301)) {
             var_30181301 = [];
           } else if(!isarray(var_30181301)) {

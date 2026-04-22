@@ -40,7 +40,7 @@
 #using scripts\killstreaks\killstreaks_shared;
 #namespace namespace_19fc4094;
 
-function function_4b8cec86(var_d3440450) {
+function function_4b8cec86(str_skipto) {
   level flag::set("tundra_intro_done");
   level flag::set("player_is_rappelling");
   level flag::set("player_rappel_done");
@@ -54,7 +54,7 @@ function function_4b8cec86(var_d3440450) {
   level thread namespace_ba979a10::function_7fe34c6e();
 }
 
-function outro_main(var_d3440450, var_50cc0d4f) {
+function outro_main(str_skipto, b_starting) {
   level flag::wait_till("level_is_go");
   player = getplayers()[0];
   level notify(#"hash_146b46855a0f35b8");
@@ -70,7 +70,7 @@ function outro_main(var_d3440450, var_50cc0d4f) {
   level.var_f7ac00e1 = #"hash_5ce979f55b4f6483";
   level.var_24f69721 = "scene_sm_tundra_heli_load";
   level thread function_8416099b();
-  player thread function_df7926cc(var_50cc0d4f);
+  player thread function_df7926cc(b_starting);
   level flag::wait_till("continue_evac_outro");
   player thread evac::main(player.origin, "start_evac_heli_infil", undefined, 2);
   player thread function_29758311();
@@ -266,8 +266,8 @@ function function_b8b78cfa() {
   self notify(#"hash_338ed48ff527b98c");
 }
 
-function function_df7926cc(var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_df7926cc(b_starting) {
+  if(b_starting) {
     wait 4;
   }
 

@@ -440,16 +440,16 @@ update_inspection_character(localclientnum, xuid, menu_name) {
     fields = getcharacterfields(var_23904c1d.charactertype, var_23904c1d.charactermode);
   }
 
-  var_8e0277a = undefined;
+  new_scene_name = undefined;
 
   if(isDefined(fields)) {
-    var_8e0277a = fields.var_2081b2ed;
+    new_scene_name = fields.var_2081b2ed;
   }
 
-  if(isDefined(var_8e0277a) && character_customization::function_aa5382ed([[var_d0b01271]] - > function_e599283f(), var_23904c1d)) {
+  if(isDefined(new_scene_name) && character_customization::function_aa5382ed([[var_d0b01271]] - > function_e599283f(), var_23904c1d)) {
     [[var_d0b01271]] - > function_1ec9448d(0);
     params = {
-      #var_401d9a1: 1, #var_c76f3e47: 1, #scene: var_8e0277a
+      #var_401d9a1: 1, #var_c76f3e47: 1, #scene: new_scene_name
     };
     [[var_d0b01271]] - > function_15a8906a(var_23904c1d);
     [[var_d0b01271]] - > update(params);
@@ -1695,19 +1695,19 @@ function_f00765ad(localclientnum, xuid, ccobject, index, var_3f0e790b) {
     }
   }
 
-  var_8e0277a = undefined;
+  new_scene_name = undefined;
 
   if(isDefined(fields)) {
     scenes = function_b7d4bfd9(fields, var_3f0e790b);
 
     if(isDefined(scenes)) {
-      var_8e0277a = scenes[index % scenes.size].scene;
+      new_scene_name = scenes[index % scenes.size].scene;
     }
   }
 
-  if(isDefined(var_8e0277a)) {
+  if(isDefined(new_scene_name)) {
     params = {
-      #scene: var_8e0277a, #scene_target: self, #var_a34c858c: 1, #var_c76f3e47: 1, #var_401d9a1: 1
+      #scene: new_scene_name, #scene_target: self, #var_a34c858c: 1, #var_c76f3e47: 1, #var_401d9a1: 1
     };
 
     if(isDefined(var_23904c1d)) {
@@ -2070,39 +2070,39 @@ function_f00ff0c7(localclientnum) {
 
 function_b1b8f767(localclientnum, play) {
   var_6aeec2ad = getdvarstring(#"hash_52abdac1a234fa29", "");
-  var_bfe5e572 = struct::get(#"lobby_align_tag" + var_6aeec2ad);
+  camera_struct = struct::get(#"lobby_align_tag" + var_6aeec2ad);
 
-  if(isDefined(var_bfe5e572)) {
+  if(isDefined(camera_struct)) {
     if(play) {
-      var_bfe5e572.var_e8b5aff5 = 1;
+      camera_struct.var_e8b5aff5 = 1;
       function_b0442428(level.var_6f1da91a, 0);
-      var_bfe5e572 thread scene::play("scene_frontend_lobby_team" + var_6aeec2ad);
+      camera_struct thread scene::play("scene_frontend_lobby_team" + var_6aeec2ad);
       return;
     }
 
-    if(!play && isDefined(var_bfe5e572.var_e8b5aff5) && var_bfe5e572.var_e8b5aff5) {
-      var_bfe5e572.var_e8b5aff5 = 0;
+    if(!play && isDefined(camera_struct.var_e8b5aff5) && camera_struct.var_e8b5aff5) {
+      camera_struct.var_e8b5aff5 = 0;
       function_f5eca51d(level.var_6f1da91a, 0);
-      var_bfe5e572 thread scene::stop("scene_frontend_lobby_team" + var_6aeec2ad, 1);
+      camera_struct thread scene::stop("scene_frontend_lobby_team" + var_6aeec2ad, 1);
     }
   }
 }
 
 function_db9d479f(localclientnum, play) {
-  var_bfe5e572 = struct::get(#"arena_align_tag");
+  camera_struct = struct::get(#"arena_align_tag");
 
-  if(isDefined(var_bfe5e572)) {
+  if(isDefined(camera_struct)) {
     if(play) {
-      var_bfe5e572.var_e8b5aff5 = 1;
+      camera_struct.var_e8b5aff5 = 1;
       function_b0442428(level.var_6f1da91a, 1);
-      var_bfe5e572 thread scene::play("scene_frontend_arena_team");
+      camera_struct thread scene::play("scene_frontend_arena_team");
       return;
     }
 
-    if(!play && isDefined(var_bfe5e572.var_e8b5aff5) && var_bfe5e572.var_e8b5aff5) {
-      var_bfe5e572.var_e8b5aff5 = 0;
+    if(!play && isDefined(camera_struct.var_e8b5aff5) && camera_struct.var_e8b5aff5) {
+      camera_struct.var_e8b5aff5 = 0;
       function_f5eca51d(level.var_6f1da91a, 1);
-      var_bfe5e572 thread scene::stop("scene_frontend_arena_team", 1);
+      camera_struct thread scene::stop("scene_frontend_arena_team", 1);
     }
   }
 }
@@ -2415,9 +2415,9 @@ function_a71254a9(localclientnum, play, player_data, var_1c5551d6 = 0, scene_sho
       }
 
       if(isDefined(scene_shot)) {
-        var_e9a3b264 = scene::get_all_shot_names(var_53511779, undefined, 0);
+        all_scenes = scene::get_all_shot_names(var_53511779, undefined, 0);
 
-        if(!isDefined(var_e9a3b264) || var_e9a3b264.size == 0 || !array::contains(var_e9a3b264, scene_shot)) {
+        if(!isDefined(all_scenes) || all_scenes.size == 0 || !array::contains(all_scenes, scene_shot)) {
           scene_shot = undefined;
         }
       }

@@ -60,17 +60,17 @@ function function_c9f70832() {
 
 function function_99bd35ec() {
   level.zdraw.commands = [];
-  level.zdraw.commands[#"color"] = &function_54389019;
-  level.zdraw.commands[#"alpha"] = &function_82f2d020;
-  level.zdraw.commands[#"duration"] = &function_cb18c560;
+  level.zdraw.commands[#"color"] = &zdraw_color;
+  level.zdraw.commands[#"alpha"] = &zdraw_alpha;
+  level.zdraw.commands[#"duration"] = &zdraw_duration;
   level.zdraw.commands[#"seconds"] = &function_82201799;
-  level.zdraw.commands[#"scale"] = &function_f7176625;
+  level.zdraw.commands[#"scale"] = &zdraw_scale;
   level.zdraw.commands[#"radius"] = &function_a026f442;
   level.zdraw.commands[#"sides"] = &function_912c8db9;
-  level.zdraw.commands[#"text"] = &function_b5cdeec6;
+  level.zdraw.commands[#"text"] = &zdraw_text;
   level.zdraw.commands[#"star"] = &function_da7503f4;
   level.zdraw.commands[#"sphere"] = &function_3a2c5c6b;
-  level.zdraw.commands[#"line"] = &function_25fd7d2a;
+  level.zdraw.commands[#"line"] = &zdraw_line;
 }
 
 function function_b36498d3() {
@@ -95,7 +95,7 @@ function function_c78d9e67() {
     if(cmd.size) {
       function_b36498d3();
       params = strtok(cmd, "<dev string:x3c>");
-      function_cd7ed6c5(params, 0, 1);
+      zdraw_command(params, 0, 1);
       setDvar(#"zdraw", "<dev string:x38>");
     }
 
@@ -103,7 +103,7 @@ function function_c78d9e67() {
   }
 }
 
-function function_cd7ed6c5(var_a99ac828, startat, toplevel) {
+function zdraw_command(var_a99ac828, startat, toplevel) {
   if(!isDefined(toplevel)) {
     toplevel = 0;
   }
@@ -127,7 +127,7 @@ function function_cd7ed6c5(var_a99ac828, startat, toplevel) {
 function function_3a2c5c6b(var_a99ac828, startat) {
   while(isDefined(var_a99ac828[startat])) {
     if(function_b0f457f2(var_a99ac828[startat])) {
-      var_769ff4d7 = function_b59acc83(var_a99ac828, startat);
+      var_769ff4d7 = zdraw_vector(var_a99ac828, startat);
 
       if(var_769ff4d7 > startat) {
         startat = var_769ff4d7;
@@ -139,7 +139,7 @@ function function_3a2c5c6b(var_a99ac828, startat) {
       continue;
     }
 
-    var_769ff4d7 = function_cd7ed6c5(var_a99ac828, startat);
+    var_769ff4d7 = zdraw_command(var_a99ac828, startat);
 
     if(var_769ff4d7 > startat) {
       startat = var_769ff4d7;
@@ -155,7 +155,7 @@ function function_3a2c5c6b(var_a99ac828, startat) {
 function function_da7503f4(var_a99ac828, startat) {
   while(isDefined(var_a99ac828[startat])) {
     if(function_b0f457f2(var_a99ac828[startat])) {
-      var_769ff4d7 = function_b59acc83(var_a99ac828, startat);
+      var_769ff4d7 = zdraw_vector(var_a99ac828, startat);
 
       if(var_769ff4d7 > startat) {
         startat = var_769ff4d7;
@@ -167,7 +167,7 @@ function function_da7503f4(var_a99ac828, startat) {
       continue;
     }
 
-    var_769ff4d7 = function_cd7ed6c5(var_a99ac828, startat);
+    var_769ff4d7 = zdraw_command(var_a99ac828, startat);
 
     if(var_769ff4d7 > startat) {
       startat = var_769ff4d7;
@@ -180,12 +180,12 @@ function function_da7503f4(var_a99ac828, startat) {
   return startat;
 }
 
-function function_25fd7d2a(var_a99ac828, startat) {
+function zdraw_line(var_a99ac828, startat) {
   level.zdraw.linestart = undefined;
 
   while(isDefined(var_a99ac828[startat])) {
     if(function_b0f457f2(var_a99ac828[startat])) {
-      var_769ff4d7 = function_b59acc83(var_a99ac828, startat);
+      var_769ff4d7 = zdraw_vector(var_a99ac828, startat);
 
       if(var_769ff4d7 > startat) {
         startat = var_769ff4d7;
@@ -202,7 +202,7 @@ function function_25fd7d2a(var_a99ac828, startat) {
       continue;
     }
 
-    var_769ff4d7 = function_cd7ed6c5(var_a99ac828, startat);
+    var_769ff4d7 = zdraw_command(var_a99ac828, startat);
 
     if(var_769ff4d7 > startat) {
       startat = var_769ff4d7;
@@ -215,7 +215,7 @@ function function_25fd7d2a(var_a99ac828, startat) {
   return startat;
 }
 
-function function_b5cdeec6(var_a99ac828, startat) {
+function zdraw_text(var_a99ac828, startat) {
   level.zdraw.text = "<dev string:x38>";
 
   if(isDefined(var_a99ac828[startat])) {
@@ -230,7 +230,7 @@ function function_b5cdeec6(var_a99ac828, startat) {
 
   while(isDefined(var_a99ac828[startat])) {
     if(function_b0f457f2(var_a99ac828[startat])) {
-      var_769ff4d7 = function_b59acc83(var_a99ac828, startat);
+      var_769ff4d7 = zdraw_vector(var_a99ac828, startat);
 
       if(var_769ff4d7 > startat) {
         startat = var_769ff4d7;
@@ -242,7 +242,7 @@ function function_b5cdeec6(var_a99ac828, startat) {
       continue;
     }
 
-    var_769ff4d7 = function_cd7ed6c5(var_a99ac828, startat);
+    var_769ff4d7 = zdraw_command(var_a99ac828, startat);
 
     if(var_769ff4d7 > startat) {
       startat = var_769ff4d7;
@@ -255,10 +255,10 @@ function function_b5cdeec6(var_a99ac828, startat) {
   return startat;
 }
 
-function function_54389019(var_a99ac828, startat) {
+function zdraw_color(var_a99ac828, startat) {
   if(isDefined(var_a99ac828[startat])) {
     if(function_b0f457f2(var_a99ac828[startat])) {
-      var_769ff4d7 = function_b59acc83(var_a99ac828, startat);
+      var_769ff4d7 = zdraw_vector(var_a99ac828, startat);
 
       if(var_769ff4d7 > startat) {
         startat = var_769ff4d7;
@@ -282,7 +282,7 @@ function function_54389019(var_a99ac828, startat) {
   return startat;
 }
 
-function function_82f2d020(var_a99ac828, startat) {
+function zdraw_alpha(var_a99ac828, startat) {
   if(isDefined(var_a99ac828[startat])) {
     var_769ff4d7 = revive_getDvar(var_a99ac828, startat);
 
@@ -298,7 +298,7 @@ function function_82f2d020(var_a99ac828, startat) {
   return startat;
 }
 
-function function_f7176625(var_a99ac828, startat) {
+function zdraw_scale(var_a99ac828, startat) {
   if(isDefined(var_a99ac828[startat])) {
     var_769ff4d7 = revive_getDvar(var_a99ac828, startat);
 
@@ -314,7 +314,7 @@ function function_f7176625(var_a99ac828, startat) {
   return startat;
 }
 
-function function_cb18c560(var_a99ac828, startat) {
+function zdraw_duration(var_a99ac828, startat) {
   if(isDefined(var_a99ac828[startat])) {
     var_769ff4d7 = revive_getDvar(var_a99ac828, startat);
 
@@ -386,7 +386,7 @@ function function_b0f457f2(param) {
   return 0;
 }
 
-function function_b59acc83(var_a99ac828, startat) {
+function zdraw_vector(var_a99ac828, startat) {
   if(isDefined(var_a99ac828[startat])) {
     var_769ff4d7 = revive_getDvar(var_a99ac828, startat);
 

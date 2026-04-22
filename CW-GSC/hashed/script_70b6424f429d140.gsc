@@ -30,9 +30,9 @@
 #using scripts\cp_common\snd_utility;
 #namespace tkdn_heli_intro;
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level thread globallogic_ui::function_7bc0e4b9();
   level.var_aece851d = [];
   level.var_fc514951 = 0;
@@ -56,8 +56,8 @@ function main(var_d3440450, var_50cc0d4f) {
   thread flyin();
   level flag::wait_till("heli_intro_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

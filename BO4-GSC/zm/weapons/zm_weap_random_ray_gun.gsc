@@ -463,7 +463,7 @@ function_5114b093() {
 
           if(var_688083e6.zm_ai_category === #"heavy" || var_688083e6.zm_ai_category === #"miniboss") {
             if(isDefined(var_688083e6.var_287c79bd) && gettime() - var_688083e6.var_287c79bd > 50) {
-              var_a9dd0fe1 = gettime();
+              n_test = gettime();
 
               var_dc70aff9 = 0;
             }
@@ -598,32 +598,32 @@ function function_2d3beb68(var_ea0a46dc, e_attacker) {
 
   switch (var_ea0a46dc) {
     case 0:
-      var_d31c4f26 = level.var_74cf08b1;
+      w_damage_weapon = level.var_74cf08b1;
 
       var_1deac56b = "<dev string:x221>";
 
       break;
     case 1:
-      var_d31c4f26 = level.var_74cf08b1;
+      w_damage_weapon = level.var_74cf08b1;
 
       var_1deac56b = "<dev string:x1ae>";
 
       break;
     case 2:
-      var_d31c4f26 = level.var_4b14202f;
+      w_damage_weapon = level.var_4b14202f;
 
       var_1deac56b = "<dev string:x1bb>";
 
       break;
     case 3:
-      var_d31c4f26 = level.var_4b14202f;
+      w_damage_weapon = level.var_4b14202f;
 
       var_1deac56b = "<dev string:x236>";
 
       break;
   }
 
-  self dodamage(var_d31c4f26.damagevalues[0], self.origin, e_attacker, e_attacker, undefined, "MOD_UNKNOWN", 0, var_d31c4f26);
+  self dodamage(w_damage_weapon.damagevalues[0], self.origin, e_attacker, e_attacker, undefined, "MOD_UNKNOWN", 0, w_damage_weapon);
 
   iprintlnbold("<dev string:x24b>" + var_1deac56b + "<dev string:x251>" + level.var_74cf08b1.damagevalues[0] + "<dev string:x265>" + function_9e72a96(self.archetype));
 
@@ -1282,7 +1282,7 @@ function_886f2b8d(...) {
   e_attacker = vararg[0][1];
 
   if(isDefined(e_trigger)) {
-    var_8007b1a0 = e_trigger.origin;
+    v_trigger_origin = e_trigger.origin;
   }
 
   self endon(#"death");
@@ -1317,8 +1317,8 @@ function_886f2b8d(...) {
       self clientfield::set("" + # "hash_3bedaaea2c17af23", 1);
       self notsolid();
 
-      if(isDefined(var_8007b1a0)) {
-        level thread function_e8ab7e4d(var_8007b1a0, self getEye(), randomfloatrange(1.3, 1.7));
+      if(isDefined(v_trigger_origin)) {
+        level thread function_e8ab7e4d(v_trigger_origin, self getEye(), randomfloatrange(1.3, 1.7));
       }
 
       self val::set(#"hash_4ca9f93d2b6aefb2", "ignoreall", 1);
@@ -1332,10 +1332,10 @@ function_886f2b8d(...) {
   }
 }
 
-function_e8ab7e4d(var_8007b1a0, var_446e486f, n_move_time) {
+function_e8ab7e4d(v_trigger_origin, var_446e486f, n_move_time) {
   var_2d9e33ca = util::spawn_model(#"tag_origin", var_446e486f);
   var_2d9e33ca clientfield::set("" + # "hash_69b312bcaae6308b", 1);
-  var_2d9e33ca moveto(var_8007b1a0, n_move_time);
+  var_2d9e33ca moveto(v_trigger_origin, n_move_time);
   wait n_move_time;
   var_2d9e33ca delete();
 }

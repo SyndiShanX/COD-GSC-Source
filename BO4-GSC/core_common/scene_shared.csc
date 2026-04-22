@@ -266,7 +266,7 @@ class cscene: cscriptbundlebase {
     if(_s.scenetype === "fxanim") {}
   }
 
-  function function_2ba44cd0() {
+  function get_current_shot() {
     return _str_shot;
   }
 

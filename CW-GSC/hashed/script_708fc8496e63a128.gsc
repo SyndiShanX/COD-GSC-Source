@@ -46,17 +46,17 @@ function start(str_objective) {
   level thread scene::play("scene_z_stk_electronics_store", "repair_room_enter");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   player = getplayers()[0];
   namespace_5ceacc03::music("12.0_company");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread namespace_11998b8f::function_7ad4f5cb();
     util::function_268bdf4f("lazar", &namespace_11998b8f::function_2f0f0a84);
     level.lazar val::set("meetup", "ignoreme", 1);
     level.lazar val::set("meetup", "ignoreall", 1);
     level thread scene::play("scene_z_stk_electronics_store", "end_loops");
-    level thread namespace_afd0968c::function_36a9bec7(var_50cc0d4f);
+    level thread namespace_afd0968c::function_36a9bec7(b_starting);
     player setmovespeedscale(0.72);
     player setcinematicmotionoverride("cinematicmotion_kgb");
   }
@@ -470,7 +470,7 @@ function function_26a2480e() {
   self deletedelay();
 }
 
-function function_f62cf54d(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_f62cf54d(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("flag_dart_gun_ready");
     level flag::set("apt_street_done");

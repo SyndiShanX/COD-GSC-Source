@@ -1027,8 +1027,8 @@ function function_5a5ab20b(str_scenedef, str_shot, var_695d4d5d = 0.5) {
   self stopanimscripted(var_695d4d5d);
 }
 
-function function_1c62d05e(var_b3a058ca, var_8d888516, var_290b108c = 1, n_min_delay = 3, n_max_delay = 6, var_3c0eec56 = 1, var_84e3f01 = undefined) {
-  a_spawners = getspawnerarray(var_b3a058ca, "targetname");
+function function_1c62d05e(str_spawner_targetname, var_8d888516, var_290b108c = 1, n_min_delay = 3, n_max_delay = 6, var_3c0eec56 = 1, var_84e3f01 = undefined) {
+  a_spawners = getspawnerarray(str_spawner_targetname, "targetname");
   var_89472944 = [];
   current_spawner = undefined;
   last_spawner = undefined;
@@ -1431,13 +1431,13 @@ function function_3e1ec1b6(flag_name, var_58470915, n_time = 5) {
   var_96a2f546 deletedelay();
 }
 
-function function_8a263f80(n_move_x, var_a6fa9fe7, var_26cb1f8e, n_move_time) {
+function function_8a263f80(n_move_x, n_move_y, var_26cb1f8e, n_move_time) {
   self endon(#"damage");
 
   while(true) {
-    self moveto(self.origin - (n_move_x, var_a6fa9fe7, var_26cb1f8e), n_move_time, 0.25, 0.25);
+    self moveto(self.origin - (n_move_x, n_move_y, var_26cb1f8e), n_move_time, 0.25, 0.25);
     wait 2;
-    self moveto(self.origin + (n_move_x, var_a6fa9fe7, var_26cb1f8e), n_move_time, 0.25, 0.25);
+    self moveto(self.origin + (n_move_x, n_move_y, var_26cb1f8e), n_move_time, 0.25, 0.25);
     wait 2;
   }
 }
@@ -1456,8 +1456,8 @@ function function_634f458e() {
   while(self getspeedmph() > 5) {
     var_99352089 = int(self getspeedmph() * 0.25);
     n_accel = var_99352089 * 0.5;
-    var_99997505 = n_accel * 0.5;
-    self setspeed(var_99352089, n_accel, var_99997505);
+    n_decel = n_accel * 0.5;
+    self setspeed(var_99352089, n_accel, n_decel);
     wait 0.1;
   }
 

@@ -252,7 +252,7 @@ function_8c80503() {
   self thread function_d4c6dc0d();
   wait 2;
   self function_43ef7a9a(level.var_a89ec78a[self.var_614bfc5c], self.origin);
-  self.var_b21e0263 = 0;
+  self.is_playing_audio = 0;
 }
 
 function_43ef7a9a(a_audio, v_pos) {
@@ -483,12 +483,12 @@ function_b116e882(var_237f80b0, var_54bb7f87, var_5876458) {
 }
 
 function_d4c6dc0d() {
-  self.var_b21e0263 = 1;
+  self.is_playing_audio = 1;
   var_df4e73a7 = getEntArray(self.target2, "targetname");
   var_df4e73a7[0] playSound(#"hash_3cca3c060dacc7de");
   var_df4e73a7[0] playLoopSound(#"hash_14cf26f9ee5a9962");
 
-  while(self.var_b21e0263 && var_df4e73a7.size > 0) {
+  while(self.is_playing_audio && var_df4e73a7.size > 0) {
     var_df4e73a7[0] rotatepitch(45, 1);
     wait 0.1;
     var_df4e73a7[1] rotatepitch(60, 1);

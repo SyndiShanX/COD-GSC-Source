@@ -416,7 +416,7 @@ function function_f807c679(e_attacker, e_inflictor) {
   }
 
   var_a0345f37 = {
-    #str_damagemod: isvehicle(self) ? self.str_damagemod : self.damagemod, #w_damage: isvehicle(self) ? self.w_damage : self.damageweapon, #is_stunned: self ai::is_stunned(), #archetype: self.archetype, #subarchetype: self.subarchetype, #zm_ai_category: self.zm_ai_category, #var_d1b39105: self flag::get(#"deadwire_stun"), #var_8126f3c8: self.var_8126f3c8, #enemy_override: self.enemy_override, #var_2290a541: isDefined(self.var_2290a541) ? self.var_2290a541 : 0, #var_84e41b20: self.var_84e41b20, #var_88421cc2: self.var_88421cc2, #var_cbf4894c: self.var_cbf4894c, #var_36fa0ac4: self.var_36fa0ac4, #aat_turned: self.aat_turned, #var_6e9934ba: self.var_6e9934ba, #var_1d8cde9: self.var_1d8cde9, #var_958cf9c5: self.var_958cf9c5, #var_1b760cdb: self.var_d0de7f41, #var_81af229: self.var_9258f88f, #var_fc304017: self.var_fc304017, #var_5c09e990: self.var_5c09e990, #missinglegs: self.missinglegs, #stuck_items: self.stuck_items, #origin: self.origin, #var_3f87fe17: self.var_3f87fe17, #var_e12c4e3d: self.var_8a3828c6, #var_7fde19e8: self.var_7fde19e8, #var_276a8013: self.var_276a8013, #var_60a19127: var_60a19127, #var_18551f4: self.var_390850ac, #var_85e14c33: self flag::get(#"hash_6ab8e3db32b20d33")
+    #str_damagemod: isvehicle(self) ? self.str_damagemod : self.damagemod, #w_damage: isvehicle(self) ? self.w_damage : self.damageweapon, #is_stunned: self ai::is_stunned(), #archetype: self.archetype, #subarchetype: self.subarchetype, #zm_ai_category: self.zm_ai_category, #var_d1b39105: self flag::get(#"deadwire_stun"), #var_8126f3c8: self.var_8126f3c8, #enemy_override: self.enemy_override, #var_2290a541: isDefined(self.var_2290a541) ? self.var_2290a541 : 0, #var_84e41b20: self.var_84e41b20, #var_88421cc2: self.var_88421cc2, #var_cbf4894c: self.var_cbf4894c, #var_36fa0ac4: self.var_36fa0ac4, #aat_turned: self.aat_turned, #var_6e9934ba: self.var_6e9934ba, #var_1d8cde9: self.var_1d8cde9, #var_958cf9c5: self.var_958cf9c5, #var_1b760cdb: self.var_d0de7f41, #var_81af229: self.var_9258f88f, #var_fc304017: self.var_fc304017, #var_5c09e990: self.var_5c09e990, #missinglegs: self.missinglegs, #stuck_items: self.stuck_items, #origin: self.origin, #var_3f87fe17: self.var_3f87fe17, #var_e12c4e3d: self.var_8a3828c6, #last_phase_time: self.last_phase_time, #var_276a8013: self.var_276a8013, #var_60a19127: var_60a19127, #var_18551f4: self.var_390850ac, #var_85e14c33: self flag::get(#"hash_6ab8e3db32b20d33")
   };
   weaponslotid = e_attacker item_inventory::function_d768ea30();
   weapon_item = e_attacker.inventory.items[weaponslotid];
@@ -541,7 +541,7 @@ function function_f807c679(e_attacker, e_inflictor) {
     }
 
     if(var_947d01ee === "smg" && var_a0345f37.archetype === #"avogadro") {
-      if(gettime() - (isDefined(var_a0345f37.var_7fde19e8) ? var_a0345f37.var_7fde19e8 : 0) <= int(2 * 1000)) {
+      if(gettime() - (isDefined(var_a0345f37.last_phase_time) ? var_a0345f37.last_phase_time : 0) <= int(2 * 1000)) {
         e_attacker stats::function_d0de7686(#"hash_3b12ed4f1d5665e1", 1, #"hash_564ba202834000a6");
       }
     }
@@ -2129,11 +2129,11 @@ function function_c8cf642e() {
         player zm_stats::increment_challenge_stat(#"hash_6a28c3c8320ac9a9");
       }
 
-      var_3ba4bf7d = player getweaponslistprimaries();
+      a_w_primaries = player getweaponslistprimaries();
       var_2a818961 = player zm_loadout::function_439b009a("primary");
       var_80a87db = player stats::get_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade");
 
-      if(zm_utility::function_e3025ca5() >= 3 && var_3ba4bf7d.size <= 2 && player hasweapon(var_2a818961) && player hasweapon(level.weaponbasemeleeheld) && var_80a87db == 0) {
+      if(zm_utility::function_e3025ca5() >= 3 && a_w_primaries.size <= 2 && player hasweapon(var_2a818961) && player hasweapon(level.weaponbasemeleeheld) && var_80a87db == 0) {
         player zm_stats::increment_challenge_stat(#"hash_48f57ba1008a331f");
       }
 

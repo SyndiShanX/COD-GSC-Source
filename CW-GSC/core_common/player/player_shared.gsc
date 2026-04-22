@@ -974,13 +974,13 @@ function function_1cec6cba(players) {
     }
   }
 
-  var_6195506c = 0;
+  used_spots = 0;
 
   foreach(count in var_ab9e77bf) {
-    var_6195506c += count;
+    used_spots += count;
   }
 
-  return var_6195506c;
+  return used_spots;
 }
 
 function function_114b77dd(time, timeout) {

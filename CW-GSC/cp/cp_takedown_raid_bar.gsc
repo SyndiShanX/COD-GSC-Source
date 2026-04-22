@@ -41,13 +41,13 @@
 #using scripts\cp_common\util;
 #namespace tkdn_raid_bar;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level.var_c0c469ea = 1.75;
   level thread scene::init_streamer(#"scene_tkd_hit2_intro_bar_v2", getplayers());
   namespace_a052577e::function_b9b9189c();
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   setDvar(#"r_lightingsunshadowdisabledynamicdraw", 1);
   setsaveddvar(#"hash_6b57212fd4fcdd3a", 0);
   player = getplayers()[0];
@@ -98,8 +98,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level flag::wait_till("raid_bar_complete");
   setDvar(#"r_lightingsunshadowdisabledynamicdraw", 0);
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

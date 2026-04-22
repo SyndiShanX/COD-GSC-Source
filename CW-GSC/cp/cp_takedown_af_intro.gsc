@@ -38,7 +38,7 @@
 #using scripts\weapons\cp\spy_camera;
 #namespace tkdn_af_intro;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   player = getplayers()[0];
 
   if(!isDefined(player)) {
@@ -50,7 +50,7 @@ function starting(var_d3440450) {
   player freezecontrols(1);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(plane, 0);
   exploder::stop_exploder("airfield_assault_lighting_noplane");
@@ -117,8 +117,8 @@ function main(var_d3440450, var_50cc0d4f) {
   thread namespace_a052577e::function_92a6fd6a(plane_flyover);
   level flag::wait_till("start_tarmac");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

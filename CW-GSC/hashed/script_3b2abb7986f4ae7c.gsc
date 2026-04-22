@@ -91,20 +91,20 @@ function function_95c09591(destination) {
         level.var_fcb2823[level.var_fcb2823.size] = instance;
       }
 
-      var_e7f5b3e0 = 1;
+      b_can_spawn = 1;
 
       if(isDefined(instance.var_501bc8c9)) {
         var_2685dd6d = strtok(instance.var_501bc8c9, ", ");
 
         foreach(var_a2593226 in var_2685dd6d) {
           if(level.contentmanager.var_1fcbdf50 === var_a2593226) {
-            var_e7f5b3e0 = 0;
+            b_can_spawn = 0;
             break;
           }
         }
       }
 
-      if(var_e7f5b3e0) {
+      if(b_can_spawn) {
         if(!isDefined(var_4a91da6d)) {
           var_4a91da6d = [];
         } else if(!isarray(var_4a91da6d)) {

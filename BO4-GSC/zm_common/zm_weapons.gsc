@@ -1838,9 +1838,9 @@ function_f5a0899d(weapon, var_d921715f = 1) {
       return false;
     }
 
-    var_3ba4bf7d = self getweaponslistprimaries();
+    a_w_primaries = self getweaponslistprimaries();
 
-    if(isinarray(var_3ba4bf7d, weapon)) {
+    if(isinarray(a_w_primaries, weapon)) {
       return true;
     }
   }

@@ -377,10 +377,10 @@ function_74f25f8a(b_force_spawn = 0, var_eb3a8721, b_crimson = 0, round_number) 
       ai thread[[level.var_ae4acb3f]](s_spawn_loc);
     }
 
-    var_46d2ec35 = get_favorite_enemy();
+    e_favorite_enemy = get_favorite_enemy();
 
-    if(isDefined(var_46d2ec35)) {
-      ai.favoriteenemy = var_46d2ec35;
+    if(isDefined(e_favorite_enemy)) {
+      ai.favoriteenemy = e_favorite_enemy;
       ai.favoriteenemy.hunted_by++;
     }
   }
@@ -435,12 +435,12 @@ function_6502a84d(entity) {
   }
 
   if(isDefined(entity) && isDefined(entity.favoriteenemy) && zm_utility::is_player_valid(entity.favoriteenemy)) {
-    var_46d2ec35 = entity.favoriteenemy;
+    e_favorite_enemy = entity.favoriteenemy;
   } else {
-    var_46d2ec35 = get_favorite_enemy();
+    e_favorite_enemy = get_favorite_enemy();
   }
 
-  if(!isDefined(var_46d2ec35) || !isalive(var_46d2ec35)) {
+  if(!isDefined(e_favorite_enemy) || !isalive(e_favorite_enemy)) {
     return array::random(a_locs);
   }
 
@@ -451,7 +451,7 @@ function_6502a84d(entity) {
       continue;
     }
 
-    n_dist_squared = distancesquared(a_locs[i].origin, var_46d2ec35.origin);
+    n_dist_squared = distancesquared(a_locs[i].origin, e_favorite_enemy.origin);
 
     if(n_dist_squared < var_3ca1175) {
       level.var_445185e3 = a_locs[i];
@@ -459,7 +459,7 @@ function_6502a84d(entity) {
     }
   }
 
-  return arraygetclosest(var_46d2ec35.origin, a_locs);
+  return arraygetclosest(e_favorite_enemy.origin, a_locs);
 }
 
 get_favorite_enemy() {

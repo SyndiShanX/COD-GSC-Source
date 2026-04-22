@@ -514,9 +514,9 @@ checkpoints_think() {
   level notify(#"hash_2158824660e02fa2");
 }
 
-function_96d0afea(var_e8ee1cd1, var_c8e04bda = 0) {
+function_96d0afea(n_ndx, var_c8e04bda = 0) {
   level endon(#"combattraining_logic_finished");
-  level.var_94dda6f = level.var_ac03813[var_e8ee1cd1];
+  level.var_94dda6f = level.var_ac03813[n_ndx];
   level.var_94dda6f.waypoint gameobjects::set_visible_team("any");
   level clientfield::set("area_arrows", level.var_94dda6f.script_int);
   self thread ct_utils::function_61c3d59c(#"hash_1e6dbca449a65f9", undefined);
@@ -548,14 +548,14 @@ function_96d0afea(var_e8ee1cd1, var_c8e04bda = 0) {
   self notify(#"hash_3bd66153d302d5e3");
   level.ai_vip notify(#"hash_3bd66153d302d5e3");
   wait 2;
-  a_parms = function_e4e6f295(var_e8ee1cd1);
+  a_parms = function_e4e6f295(n_ndx);
   self thread function_db21e968(a_parms[#"hash_26e3f994cd3be7ad"], 0, a_parms[#"hash_6ac476a653e52b43"], a_parms[#"hash_79c09420f2a9d1b5"], a_parms[#"hash_c89b29b1052eb3a"], a_parms[#"hash_65d515c48dec9a90"]);
   level.ai_vip thread function_db21e968(a_parms[#"hash_666d68ff5ab5708b"], 0, a_parms[#"hash_1b654f4b57692315"], a_parms[#"hash_26f2c8d3a06033f3"], a_parms[#"hash_53a6b6a30b8be9ae"], a_parms[#"hash_4afa2b23e812aa80"]);
   self thread function_2444772e(30);
   level waittill(#"sabotage_done");
   self thread function_beca73db();
 
-  if(level.var_ac03813.size - 1 > var_e8ee1cd1) {
+  if(level.var_ac03813.size - 1 > n_ndx) {
     self thread ct_utils::function_329f9ba6(#"hash_494852129a3c431c", 7, "grey", 1);
     self thread ct_utils::function_61c3d59c(#"hash_1e6dbca449a65f9", undefined);
   }
@@ -1035,9 +1035,9 @@ function_8d5cfdef() {
         if(isDefined(coverobj) && coverobj.health > 0) {
           foreach(var_553008b4 in coverobj.var_55c5726a) {
             if(isDefined(var_553008b4)) {
-              var_337e484e = self canpath(self.origin, var_553008b4.origin);
+              b_can_path = self canpath(self.origin, var_553008b4.origin);
 
-              if(var_337e484e) {
+              if(b_can_path) {
                 var_a3e53b82 = var_553008b4;
                 var_20e43fcf[var_20e43fcf.size] = var_553008b4;
                 break;
@@ -1053,9 +1053,9 @@ function_8d5cfdef() {
         if(isDefined(coverobj) && coverobj.health > 0) {
           foreach(var_553008b4 in coverobj.var_55c5726a) {
             if(isDefined(var_553008b4)) {
-              var_337e484e = self canpath(self.origin, var_553008b4.origin);
+              b_can_path = self canpath(self.origin, var_553008b4.origin);
 
-              if(var_337e484e) {
+              if(b_can_path) {
                 var_20e43fcf[var_20e43fcf.size] = var_553008b4;
               }
             }

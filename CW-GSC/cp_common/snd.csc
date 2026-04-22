@@ -363,7 +363,7 @@ function function_5275752c(soundalias, var_1d25915, linkedentity, var_e330010e) 
 }
 
 function function_bdc44456(ent) {
-  if(snd::function_81fac19d(!isDefined(ent) || function_3132f113(ent), "snd: free on deleted entity!")) {
+  if(snd::function_81fac19d(!isDefined(ent) || isremovedentity(ent), "snd: free on deleted entity!")) {
     if(snd::function_f984063f()) {
       debugbreak();
     }
@@ -434,7 +434,7 @@ function function_273d939b(soundobject, fadeoutseconds) {
   soundobject endon(#"death");
   ent = soundobject;
 
-  if(snd::function_81fac19d(!isDefined(ent) || function_3132f113(ent), "snd: stop on deleted entity!")) {
+  if(snd::function_81fac19d(!isDefined(ent) || isremovedentity(ent), "snd: stop on deleted entity!")) {
     if(snd::function_f984063f()) {
       debugbreak();
     }
@@ -516,7 +516,7 @@ function function_9f156b27(soundobject, fadeoutseconds) {
 #namespace snd;
 
 function private function_3323ac64(soundobject) {
-  if(isDefined(soundobject) == 1 && function_3132f113(soundobject) == 0 && isDefined(soundobject.var_aceb47b0) == 0) {
+  if(isDefined(soundobject) == 1 && isremovedentity(soundobject) == 0 && isDefined(soundobject.var_aceb47b0) == 0) {
     soundobject.var_aceb47b0 = spawnStruct();
     soundobject.var_aceb47b0.volume = 1;
     soundobject.var_aceb47b0.pitch = 1;
@@ -548,7 +548,7 @@ function private function_d7b79aea(sound, pitch, time) {
 }
 
 function private function_d72fc2b9(soundobject, value, scalefunc) {
-  if(function_3132f113(soundobject) == 1 || isDefined(soundobject) == 0) {
+  if(isremovedentity(soundobject) == 1 || isDefined(soundobject) == 0) {
     return;
   }
 
@@ -696,7 +696,7 @@ function private function_48e190dd(curve, scale, time, scalefunc, callbackfunc) 
     [[scalefunc]](self, scalevalue, waittime);
     wait waittime;
 
-    if(isDefined(self) == 1 && function_3132f113(self) == 0) {
+    if(isDefined(self) == 1 && isremovedentity(self) == 0) {
       function_d72fc2b9(self, scalevalue, scalefunc);
     }
   }
@@ -731,12 +731,12 @@ function snd_scale(soundobject, scalewhat, value, time, curve, callbackfunc) {
     return;
   }
 
-  if(function_81fac19d(function_3132f113(soundobject) == 1, "snd_scale: called on removed entity")) {
+  if(function_81fac19d(isremovedentity(soundobject) == 1, "snd_scale: called on removed entity")) {
     return;
   }
 
   assert(isDefined(soundobject) == 1, "<dev string:x1bc>");
-  assert(function_3132f113(soundobject) == 0, "<dev string:x1e5>");
+  assert(isremovedentity(soundobject) == 0, "<dev string:x1e5>");
   assert(isDefined(value) == 1);
   function_3323ac64(soundobject);
   var_e127d44f = value;
@@ -799,7 +799,7 @@ function function_7308d4d0(soundobject) {
     return 0;
   }
 
-  if(function_81fac19d(function_3132f113(soundobject) == 1, "snd_scale: called on removed entity")) {
+  if(function_81fac19d(isremovedentity(soundobject) == 1, "snd_scale: called on removed entity")) {
     return 0;
   }
 
@@ -812,7 +812,7 @@ function function_6f94855d(soundobject) {
     return 0;
   }
 
-  if(function_81fac19d(function_3132f113(soundobject) == 1, "snd_scale: called on removed entity")) {
+  if(function_81fac19d(isremovedentity(soundobject) == 1, "snd_scale: called on removed entity")) {
     return 0;
   }
 

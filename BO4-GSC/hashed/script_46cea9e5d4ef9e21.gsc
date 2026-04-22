@@ -51,7 +51,7 @@ function_fb0bd6b9() {
 
 _goodlighting_hangar_a() {
   self sethintstring(#"hash_2f5a14e8bf175422");
-  self.var_c6613c99 = 0;
+  self.b_can_open = 0;
   level flag::wait_till(#"hash_7039457b1cc827de");
 
   if(function_8b1a219a()) {

@@ -34,7 +34,7 @@
 #using scripts\cp_common\util;
 #namespace armada_mortar;
 
-function function_6ad1ac64(var_d3440450, var_50cc0d4f) {
+function function_6ad1ac64(str_skipto, b_starting) {
   util::function_3e65fe0b(0);
   level namespace_b7cfe907::function_d777fe61();
   level.player setorigin(struct::get("mortar_obj_landing_spot").origin);
@@ -44,9 +44,9 @@ function function_6ad1ac64(var_d3440450, var_50cc0d4f) {
   level.player util::create_streamer_hint((-22405, 41199, 880), (14, -21, 0), 1);
   level thread namespace_b7cfe907::function_2647f901("mortar_village_completed");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level util::delay(0.25, "disconnect", &namespace_b7cfe907::pstfx_teleport, 1, 0);
-    level namespace_b7cfe907::function_6a03d24d(var_d3440450);
+    level namespace_b7cfe907::function_6a03d24d(str_skipto);
   } else {
     level vehicle::get_in(level.buddy, level.var_7466d419, "crew", 1);
     level vehicle::get_in(level.pilot, level.var_7466d419, "driver", 1);
@@ -268,10 +268,10 @@ function function_8feeb0be() {
   }
 
   var_61dc66d2 = 5 * (1 - var_c62824cc / var_be81a997);
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
 
   while(true) {
-    n_time_passed = float(gettime() - var_8fc81e63) / 1000;
+    n_time_passed = float(gettime() - n_time_start) / 1000;
     n_percent = min(1, n_time_passed / var_61dc66d2);
     var_53bb8ef2.var_cfa81957 = lerpfloat(var_c62824cc, var_be81a997, n_percent);
     self function_e7152de8();
@@ -464,14 +464,14 @@ function function_97a20289() {
   level scene::init(#"hash_32b809763b13c282", a_ents);
 }
 
-function function_6acbfbb1(var_50cc0d4f = 0) {
+function function_6acbfbb1(b_starting = 0) {
   self endon(#"death");
 
   if(!isalive(level.var_7466d419)) {
     return;
   }
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     var_8720c122 = getvehiclenode("nd_mortar_orbit_final_pos", "targetname");
     n_speed = level.var_7466d419 getspeed();
     n_dist = distance(level.var_7466d419.origin, var_8720c122.origin);
@@ -710,10 +710,10 @@ function function_48ac87db() {
   }
 }
 
-function function_94a21d8b(var_d3440450, var_50cc0d4f) {
+function function_94a21d8b(str_skipto, b_starting) {
   level.player endon(#"death");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level util::screen_fade_out(0.05, "black", "mortar_main_start");
     level clientfield::set("toggle_dynsignage_mortartown", 1);
     level util::delay(0.5, undefined, &clientfield::set, "toggle_dynsignage_mortartown", 0);
@@ -746,7 +746,7 @@ function function_94a21d8b(var_d3440450, var_50cc0d4f) {
   function_92d60a9d();
   namespace_72b0499b::music("5.0_village_combat");
   level thread function_a65af49d();
-  level.player function_6acbfbb1(var_50cc0d4f);
+  level.player function_6acbfbb1(b_starting);
   level flag::set("flag_play_landed_vo");
   level snd::client_msg(#"hash_2086d5e690a6ff1b");
   level thread function_80089cc9();
@@ -759,7 +759,7 @@ function function_94a21d8b(var_d3440450, var_50cc0d4f) {
   spawner::remove_spawn_function_ai_group("mortar_ai_wave_3_right", &function_287230c8);
   spawner::remove_spawn_function_ai_group("mortar_ai_wave_3_left", &function_287230c8);
   savegame::function_379f84b3();
-  level skipto::function_4e3ab877(var_d3440450, 0);
+  level skipto::function_4e3ab877(str_skipto, 0);
   level skipto::function_51726ac8(["armada_mortar_exfil"], 0, level.player);
 }
 
@@ -2305,11 +2305,11 @@ function function_ce1faca(a_ents) {
   level scene::remove_scene_func(#"hash_5705e398ad93ac99", &function_ce1faca, "stop");
 }
 
-function function_262e8906(var_50cc0d4f) {
+function function_262e8906(b_starting) {
   a_ents = [];
   a_ents[#"buddy"] = level.buddy;
 
-  if(!is_true(var_50cc0d4f)) {
+  if(!is_true(b_starting)) {
     level scene::play(#"hash_7d15d57d22684df", "sims_stairs", a_ents);
   }
 
@@ -2356,10 +2356,10 @@ function function_315508be() {
   }
 }
 
-function function_997dda5e(var_d3440450, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_997dda5e(str_skipto, b_starting) {
+  if(b_starting) {
     level thread util::screen_fade_out(0, "black", "mortar_exfil_flow_fade");
-    level namespace_b7cfe907::function_6a03d24d(var_d3440450);
+    level namespace_b7cfe907::function_6a03d24d(str_skipto);
     level flag::set("flag_enable_mortar_exfil_color_chain");
     level clientfield::set("toggle_dynsignage_mortartown", 1);
     level util::delay(0.5, undefined, &clientfield::set, "toggle_dynsignage_mortartown", 0);
@@ -2384,7 +2384,7 @@ function function_997dda5e(var_d3440450, var_50cc0d4f) {
   level.var_7466d419 vehicle_ai::clearallmovement(1);
   level.var_7466d419 function_24c9e377();
   level flag::set("mortar_village_completed");
-  level skipto::function_4e3ab877(var_d3440450, 0);
+  level skipto::function_4e3ab877(str_skipto, 0);
   next_obj = "player_controlled_huey_01";
   level skipto::function_51726ac8([next_obj], 0, level.player);
   level.buddy ai::disable_careful();

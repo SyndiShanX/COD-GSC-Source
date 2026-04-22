@@ -35,7 +35,7 @@ __init__() {
 
   level flag::init(#"music_box_first_use");
   level thread callback::on_ai_killed(&function_da6a44df);
-  level.var_722474af = &function_cdb0d1e;
+  level.gravityspikes_target_filter_callback = &function_cdb0d1e;
 }
 
 on_grenade_fired(s_params) {

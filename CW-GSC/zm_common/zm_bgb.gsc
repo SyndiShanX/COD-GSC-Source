@@ -136,9 +136,9 @@ function private bgb_player_init() {
     self.bgb_stats[bgb] = spawnStruct();
 
     if(!isbot(self)) {
-      self.bgb_stats[bgb].var_c2a984f0 = self getbgbremaining(bgb);
+      self.bgb_stats[bgb].bgb_available_at_start = self getbgbremaining(bgb);
     } else {
-      self.bgb_stats[bgb].var_c2a984f0 = 0;
+      self.bgb_stats[bgb].bgb_available_at_start = 0;
     }
 
     self.bgb_stats[bgb].bgb_used_this_game = 0;
@@ -266,10 +266,10 @@ function private setup_devgui() {
 
 function private bgb_devgui_think() {
   for(;;) {
-    var_522737d6 = getdvarstring(#"bgb_acquire_devgui");
+    bgb_acquire_name = getdvarstring(#"bgb_acquire_devgui");
 
-    if(var_522737d6 != "<dev string:x7b>") {
-      bgb_devgui_acquire(var_522737d6);
+    if(bgb_acquire_name != "<dev string:x7b>") {
+      bgb_devgui_acquire(bgb_acquire_name);
     }
 
     setDvar(#"bgb_acquire_devgui", "<dev string:x7b>");
@@ -350,9 +350,9 @@ function private bgb_set_debug_text(name, activations_remaining) {
 }
 
 function bgb_print_stats(bgb) {
-  printtoprightln(function_9e72a96(bgb) + "<dev string:x17e>" + self.bgb_stats[bgb].var_c2a984f0, (1, 1, 1));
+  printtoprightln(function_9e72a96(bgb) + "<dev string:x17e>" + self.bgb_stats[bgb].bgb_available_at_start, (1, 1, 1));
   printtoprightln(function_9e72a96(bgb) + "<dev string:x19b>" + self.bgb_stats[bgb].bgb_used_this_game, (1, 1, 1));
-  n_available = self.bgb_stats[bgb].var_c2a984f0 - self.bgb_stats[bgb].bgb_used_this_game;
+  n_available = self.bgb_stats[bgb].bgb_available_at_start - self.bgb_stats[bgb].bgb_used_this_game;
   printtoprightln(function_9e72a96(bgb) + "<dev string:x1b3>" + n_available, (1, 1, 1));
 }
 
@@ -391,9 +391,9 @@ function get_bgb_available(bgb) {
     return true;
   }
 
-  var_cb4d0349 = self.bgb_stats[bgb].var_c2a984f0;
+  n_bgb_available_at_start = self.bgb_stats[bgb].bgb_available_at_start;
   n_bgb_used_this_game = self.bgb_stats[bgb].bgb_used_this_game;
-  n_bgb_remaining = var_cb4d0349 - n_bgb_used_this_game;
+  n_bgb_remaining = n_bgb_available_at_start - n_bgb_used_this_game;
 
   if(is_true(level.var_4af38aa3)) {
     return true;
@@ -403,7 +403,7 @@ function get_bgb_available(bgb) {
 }
 
 function private function_b331a28c(bgb) {
-  if(!is_true(level.bgb[bgb].var_50206ca3)) {
+  if(!is_true(level.bgb[bgb].invulnerable_during_activation)) {
     return;
   }
 
@@ -604,7 +604,7 @@ function private bgb_limit_monitor() {
         level.bgb[self.bgb].var_dbe7d224 = i;
 
         if(level.bgb[self.bgb].var_57eb02e) {
-          function_f0d592c9();
+          fill_timer();
         } else {
           self set_timer(i, level.bgb[self.bgb].limit);
         }
@@ -709,11 +709,11 @@ function private bgb_activation_monitor() {
   }
 }
 
-function function_e98aa964(var_3e37f503 = 0, str_check = self.bgb) {
+function function_e98aa964(b_chewing = 0, str_check = self.bgb) {
   var_ceb582a8 = isDefined(level.bgb[str_check].validation_func) && !self[[level.bgb[str_check].validation_func]]();
   var_e6b14ccc = isDefined(level.var_67713b46) && !self[[level.var_67713b46]]();
 
-  if(!var_3e37f503 && is_true(self.is_drinking) || is_true(self.bgb_activation_in_progress) && !is_true(self.var_ec8a9710) || self laststand::player_is_in_laststand() || var_ceb582a8 || var_e6b14ccc || is_true(self.var_16735873) || is_true(self.var_30cbff55)) {
+  if(!b_chewing && is_true(self.is_drinking) || is_true(self.bgb_activation_in_progress) && !is_true(self.var_ec8a9710) || self laststand::player_is_in_laststand() || var_ceb582a8 || var_e6b14ccc || is_true(self.var_16735873) || is_true(self.var_30cbff55)) {
     self clientfield::increment_uimodel("zmhud.bgb_invalid_use");
     return false;
   }
@@ -724,7 +724,7 @@ function function_e98aa964(var_3e37f503 = 0, str_check = self.bgb) {
 function private function_1fdcef80(bgb) {
   self endon(#"disconnect", #"bled_out", #"bgb_update");
 
-  if(is_true(level.bgb[bgb].var_5a047886)) {
+  if(is_true(level.bgb[bgb].is_cancellable)) {
     function_9c8e12d1(6);
   } else {
     return;
@@ -855,7 +855,7 @@ function private bgb_set_timer_clientfield(percent, var_5f12e334 = 0) {
   self clientfield::set_player_uimodel("zmhud.bgb_timer", percent);
 }
 
-function private function_f0d592c9() {
+function private fill_timer() {
   self bgb_set_timer_clientfield(1);
 }
 
@@ -960,15 +960,15 @@ function register_lost_perk_override(name, lost_perk_override_func, lost_perk_ov
   level.bgb[name].lost_perk_override_func_always_run = lost_perk_override_func_always_run;
 }
 
-function function_c2721e81(name, add_to_player_score_override_func, add_to_player_score_override_func_always_run) {
+function register_add_to_player_score_override(name, add_to_player_score_override_func, add_to_player_score_override_func_always_run) {
   assert(isDefined(level.bgb[name]), "<dev string:x594>" + name + "<dev string:x4ec>");
   level.bgb[name].add_to_player_score_override_func = add_to_player_score_override_func;
   level.bgb[name].add_to_player_score_override_func_always_run = add_to_player_score_override_func_always_run;
 }
 
-function function_72469efe(name, var_50206ca3) {
+function register_invulnerable_during_activation(name, invulnerable_during_activation) {
   assert(isDefined(level.bgb[name]), "<dev string:x5cb>" + name + "<dev string:x4ec>");
-  level.bgb[name].var_50206ca3 = var_50206ca3;
+  level.bgb[name].invulnerable_during_activation = invulnerable_during_activation;
 }
 
 function function_8a5d8cfb(name, var_f1f46d6b) {
@@ -981,9 +981,9 @@ function function_be42abb0(name, var_f8d9ac8c) {
   level.bgb[name].var_f8d9ac8c = var_f8d9ac8c;
 }
 
-function function_afe7b8e7(name) {
+function register_cancellable(name) {
   assert(isDefined(level.bgb[name]), "<dev string:x666>" + name + "<dev string:x4ec>");
-  level.bgb[name].var_5a047886 = 1;
+  level.bgb[name].is_cancellable = 1;
 }
 
 function function_e1f37ce7(name) {
@@ -1118,7 +1118,7 @@ function function_9d8118f5(v_origin) {
     var_116b3a00 = 0;
   }
 
-  if(self zm_utility::function_ab9a9770() || var_806b07bd zm_utility::function_ab9a9770()) {
+  if(self zm_utility::duf47() || var_806b07bd zm_utility::duf47()) {
     var_116b3a00 = 0;
   }
 

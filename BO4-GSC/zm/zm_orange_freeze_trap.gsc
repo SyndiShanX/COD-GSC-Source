@@ -209,8 +209,8 @@ function_92f341d0(e_activator, e_volume) {
   }
 }
 
-freeze_trap_fx(var_9d9f02b4) {
-  if(var_9d9f02b4) {
+freeze_trap_fx(b_is_on) {
+  if(b_is_on) {
     exploder::exploder("fxexp_frost_trap");
     return;
   }

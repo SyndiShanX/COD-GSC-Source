@@ -534,8 +534,8 @@ function_72cf5db2() {
         if(!player zm_score::can_player_purchase(var_376755db)) {
           self playSound(#"zmb_perks_packa_deny");
 
-          if(isDefined(level.pack_a_punch.var_25a37ed7)) {
-            player[[level.pack_a_punch.var_25a37ed7]]();
+          if(isDefined(level.pack_a_punch.custom_deny_func)) {
+            player[[level.pack_a_punch.custom_deny_func]]();
           } else {
             player zm_audio::create_and_play_dialog(#"general", #"outofmoney", 0);
           }
@@ -1191,8 +1191,8 @@ process_pap_zbarrier_state(state) {
       self.state = "hidden";
       break;
     default:
-      if(isDefined(level.var_c6c65322)) {
-        self[[level.var_c6c65322]](state);
+      if(isDefined(level.custom_pap_state_handler)) {
+        self[[level.custom_pap_state_handler]](state);
       }
 
       break;

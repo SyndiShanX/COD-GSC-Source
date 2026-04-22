@@ -282,7 +282,7 @@ assign_lowest_unused_character_index() {
 }
 
 givecustomcharacters() {
-  if(isDefined(level.var_fa7525e8) && [[level.var_fa7525e8]]("c_zom_farmgirl_viewhands")) {
+  if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_farmgirl_viewhands")) {
     return;
   }
 

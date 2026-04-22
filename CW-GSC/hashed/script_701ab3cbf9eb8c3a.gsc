@@ -36,7 +36,7 @@
 #using scripts\killstreaks\napalm_strike_shared;
 #namespace armada_crash;
 
-function function_945def6e(var_d3440450, var_50cc0d4f) {
+function function_945def6e(str_skipto, b_starting) {
   level function_7b315e60();
   level clientfield::set("" + # "hash_16a1381cc22da440", 1);
   level battlechatter::function_2ab9360b(0);
@@ -46,7 +46,7 @@ function function_945def6e(var_d3440450, var_50cc0d4f) {
     level.var_7466d419.var_6bbdd0a5 delete();
   }
 
-  if(is_true(var_50cc0d4f)) {
+  if(is_true(b_starting)) {
     namespace_82bfe441::fade(1, "FadeSlow");
   }
 
@@ -74,14 +74,14 @@ function function_945def6e(var_d3440450, var_50cc0d4f) {
 
   objectives::scripted(#"nuke_return", undefined, #"hash_ac851f5cde226a9");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread namespace_722cc932::function_dda1c23b(1);
   }
 
   a_ents[#"hash_4972abe0166bbc73"] = level.var_7466d419;
   level scene::play(#"armada_crash_start", a_ents);
   objectives::complete(#"nuke_return");
-  skipto::function_4e3ab877(var_d3440450);
+  skipto::function_4e3ab877(str_skipto);
 }
 
 function function_7b315e60() {
@@ -141,7 +141,7 @@ function function_6ac5ef82() {
   level clientfield::set("" + # "hash_7dc38a630ed68eb3", 0);
 }
 
-function function_58ef8b05(str_objective, var_50cc0d4f) {
+function function_58ef8b05(str_objective, b_starting) {
   util::function_3e65fe0b(0);
   level snd::client_msg(#"hash_66209bfcf3bd11ca");
   level snd::client_msg(#"hash_4a41082a1d97f925");
@@ -175,7 +175,7 @@ function function_58ef8b05(str_objective, var_50cc0d4f) {
   util::delay(15, undefined, &function_bbcf495);
   util::delay(20, undefined, &objectives::scripted, #"last_stand", undefined, #"hash_512f51804b601599", 1);
   level scene::init(#"hash_30c1ba04c9ba0bf3");
-  level function_3dda2db1(var_50cc0d4f);
+  level function_3dda2db1(b_starting);
   namespace_72b0499b::music("12.0_turret");
   level thread scene::play(#"hash_30c1ba04c9ba0bf3", "intro");
   level.player flag::wait_till_clear(#"scene");
@@ -202,8 +202,8 @@ function function_58ef8b05(str_objective, var_50cc0d4f) {
   level skipto::function_51726ac8(["armada_crash_part_4_laststand"], 0);
 }
 
-function function_3dda2db1(var_50cc0d4f = 0) {
-  if(var_50cc0d4f) {
+function function_3dda2db1(b_starting = 0) {
+  if(b_starting) {
     util::wait_network_frame(2);
     namespace_b7cfe907::pstfx_teleport(1, 0);
   } else {
@@ -318,7 +318,7 @@ function m16(a_ents) {
   a_ents[#"m16"] useweaponmodel(getweapon("lmg_slowfire_t9"));
 }
 
-function function_cd3c6f53(str_objective, var_50cc0d4f) {
+function function_cd3c6f53(str_objective, b_starting) {
   level.player endon(#"death");
   level battlechatter::function_2ab9360b(0);
   callback::on_ai_spawned(&function_9a7a2ede);
@@ -331,7 +331,7 @@ function function_cd3c6f53(str_objective, var_50cc0d4f) {
   scene::add_scene_func(#"hash_30c1ba04c9ba0bf3", &function_151b3bc9, "transition");
   scene::add_scene_func(#"hash_30c1ba04c9ba0bf3", &function_151b3bc9, "outro");
 
-  if(!var_50cc0d4f && isinarray(scene::get_all_shot_names(#"hash_30c1ba04c9ba0bf3"), "transition")) {
+  if(!b_starting && isinarray(scene::get_all_shot_names(#"hash_30c1ba04c9ba0bf3"), "transition")) {
     level scene::play(#"hash_30c1ba04c9ba0bf3", "transition");
   }
 

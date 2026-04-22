@@ -31,16 +31,16 @@ __init__() {
 
 event() {
   self endon(#"disconnect", #"death", #"bgb_update");
-  self.var_727695ba = 5;
+  self.bgb_remaining_hits = 5;
 
-  while(self.var_727695ba > 0) {
+  while(self.bgb_remaining_hits > 0) {
     wait 0.1;
   }
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(meansofdeath === "MOD_MELEE" && !zm_trial_headshots_only::is_active() && !zm_loadout::is_hero_weapon(weapon) && weapon != level.weaponnone) {
-    attacker function_40383770(self);
+    attacker electric_strike(self);
   }
 
   return damage;
@@ -48,20 +48,20 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 
 vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal) {
   if(smeansofdeath === "MOD_MELEE" && !zm_loadout::is_hero_weapon(weapon)) {
-    eattacker function_40383770(self);
+    eattacker electric_strike(self);
   }
 
   return idamage;
 }
 
-function_40383770(target) {
+electric_strike(target) {
   if(isDefined(self.beastmode) && self.beastmode) {
     return;
   }
 
   self bgb::do_one_shot_use();
-  self.var_727695ba -= 1;
-  self bgb::set_timer(self.var_727695ba, 5);
+  self.bgb_remaining_hits -= 1;
+  self bgb::set_timer(self.bgb_remaining_hits, 5);
   self playSound(#"zmb_bgb_popshocks_impact");
   zombie_list = getaiteamarray(level.zombie_team);
 
@@ -131,7 +131,7 @@ arc_damage_init(player) {
 tesla_death(player) {
   self endon(#"death");
   player endon(#"disconnect");
-  self thread function_f724a242(1);
+  self thread zombie_explodes_on_swipe(1);
   wait 2;
   player zm_stats::increment_challenge_stat(#"hash_133575f669ffc55c");
 
@@ -145,7 +145,7 @@ tesla_death(player) {
   self dodamage(self.health + 1, self.origin, player, undefined, undefined, "MOD_ELECTROCUTED", 0, level.weapondefault);
 }
 
-function_f724a242(random_gibs) {
+zombie_explodes_on_swipe(random_gibs) {
   self waittill(#"death");
 
   if(isDefined(self) && isactor(self)) {

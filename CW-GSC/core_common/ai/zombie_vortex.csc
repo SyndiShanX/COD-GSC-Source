@@ -97,16 +97,16 @@ function function_2dd3c5bc(localclientnum, vortex_fx_handle, vposition, fx_vorte
   self notify(#"vortex_stop");
 
   if(var_c385f09c == 2) {
-    var_ad8208a9 = playFX(localclientnum, fx_vortex_explosion, vposition);
+    vortex_explosion_fx_handle = playFX(localclientnum, fx_vortex_explosion, vposition);
     audio::stoploopat("evt_doa_pickup_vortex_active_lp", vposition);
     playSound(0, #"evt_doa_pickup_vortex_explode", vposition);
   } else if(var_c385f09c == 1) {
-    var_ad8208a9 = playFX(localclientnum, fx_vortex_explosion, vposition, (1, 0, 0), (0, 0, 1));
+    vortex_explosion_fx_handle = playFX(localclientnum, fx_vortex_explosion, vposition, (1, 0, 0), (0, 0, 1));
     self stoploopsound(self.var_ccc1f809);
     self playSound(localclientnum, #"hash_a594ffd27037691");
   }
 
-  setfxignorepause(localclientnum, var_ad8208a9, 1);
+  setfxignorepause(localclientnum, vortex_explosion_fx_handle, 1);
   waitframe(1);
 
   if(!is_true(level.var_12983b40)) {

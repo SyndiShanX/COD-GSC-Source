@@ -591,7 +591,7 @@ treasure_chest_think() {
     reduced_cost = undefined;
 
     if(isDefined(self.auto_open) && zm_utility::is_player_valid(user)) {
-      if(!isDefined(self.var_3b8f3332)) {
+      if(!isDefined(self.no_charge)) {
         user zm_score::minus_to_player_score(self.zombie_cost);
         user_cost = self.zombie_cost;
       } else {
@@ -1507,8 +1507,8 @@ treasure_chest_should_move(chest, player) {
       chance_of_joker = -1;
     }
 
-    if(isDefined(level.var_b0344a3c)) {
-      chance_of_joker = [[level.var_b0344a3c]](chance_of_joker);
+    if(isDefined(level._zombiemode_chest_joker_chance_override_func)) {
+      chance_of_joker = [[level._zombiemode_chest_joker_chance_override_func]](chance_of_joker);
     }
 
     if(isDefined(level.var_401aaa92) && level.var_401aaa92) {
@@ -1635,8 +1635,8 @@ treasure_chest_weapon_spawn(chest, player, respin) {
     }
   }
 
-  if(isDefined(level.var_9e2df930)) {
-    [[level.var_9e2df930]]();
+  if(isDefined(level.custom_magic_box_weapon_wait)) {
+    [[level.custom_magic_box_weapon_wait]]();
   }
 
   if(!move_the_box && preferred_weapon == level.weaponnone) {

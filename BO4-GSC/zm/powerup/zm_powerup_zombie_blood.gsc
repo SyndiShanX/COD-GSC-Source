@@ -33,8 +33,8 @@ __init__() {
   level.a_zombie_blood_entities = getEntArray("zombie_blood_visible", "targetname");
 
   if(isDefined(level.a_zombie_blood_entities)) {
-    foreach(var_8bd48f90 in level.a_zombie_blood_entities) {
-      var_8bd48f90 thread make_zombie_blood_entity();
+    foreach(e_zombie_blood_entity in level.a_zombie_blood_entities) {
+      e_zombie_blood_entity thread make_zombie_blood_entity();
     }
   }
 

@@ -303,7 +303,7 @@ turn_perk_off(ishidden) {
 }
 
 play_loop_on_machine() {
-  if(isDefined(level.var_29a12b0)) {
+  if(isDefined(level.sndperksacolaloopoverride)) {
     return;
   }
 
@@ -620,8 +620,8 @@ vending_trigger_post_think(player, perk) {
 
   player notify(#"burp");
 
-  if(isDefined(level.var_c4bedce3)) {
-    player[[level.var_c4bedce3]](perk);
+  if(isDefined(level.perk_bought_func)) {
+    player[[level.perk_bought_func]](perk);
   }
 
   player.perk_purchased = undefined;
@@ -755,8 +755,8 @@ perk_think(perk) {
   self set_perk_clientfield(perk, 0);
   self.perk_purchased = undefined;
 
-  if(isDefined(level.var_a903ab55)) {
-    self[[level.var_a903ab55]](perk);
+  if(isDefined(level.perk_lost_func)) {
+    self[[level.perk_lost_func]](perk);
   }
 
   self function_2ac7579(-1, 0, level._custom_perks[hash(perk)].alias);
@@ -880,7 +880,7 @@ quantum_bomb_give_nearest_perk_validation(position) {
 }
 
 quantum_bomb_give_nearest_perk_result(position) {
-  [[level.var_77926928]](position);
+  [[level.quantum_bomb_play_mystery_effect_func]](position);
   vending_machines = get_perk_machines();
   nearest = 0;
 
@@ -902,7 +902,7 @@ quantum_bomb_give_nearest_perk_result(position) {
 
     if(!player hasperk(perk) && (!isDefined(player.perk_purchased) || player.perk_purchased != perk) && randomint(5)) {
       player function_a7ae070c(perk);
-      player[[level.var_cbbe9244]]();
+      player[[level.quantum_bomb_play_player_effect_func]]();
     }
   }
 }
@@ -2291,8 +2291,8 @@ taking_cover_tanks_(player, perk, n_slot, var_3468124) {
 
     player thread function_9bdf581f(perk, n_slot, 1);
 
-    if(isDefined(level.var_c4bedce3)) {
-      player[[level.var_c4bedce3]](perk);
+    if(isDefined(level.perk_bought_func)) {
+      player[[level.perk_bought_func]](perk);
     }
 
     return;
@@ -2599,8 +2599,8 @@ function_329ae65e(perk, n_slot) {
     }
   }
 
-  if(isDefined(level.var_a903ab55)) {
-    self[[level.var_a903ab55]](perk);
+  if(isDefined(level.perk_lost_func)) {
+    self[[level.perk_lost_func]](perk);
   }
 
   arrayremovevalue(self.var_466b927f, perk, 0);
@@ -3288,7 +3288,7 @@ function_28ac0614(var_bbb2c705, var_613b7621 = 0) {
 function_dc10fc94(var_cd5d9345, var_bbb2c705) {
   var_8b77bf0c = arraycopy(var_cd5d9345);
   var_c25e1f9c = array(0, 1, 2, 3);
-  var_b0696a17 = [];
+  a_n_order = [];
 
   if(var_8b77bf0c.size <= 1) {
     for(n_slot = 0; n_slot < 4; n_slot++) {
@@ -3297,7 +3297,7 @@ function_dc10fc94(var_cd5d9345, var_bbb2c705) {
     }
 
     self clientfield::set_player_uimodel("hudItems.perkVapor.bleedoutProgress", 1);
-    var_b0696a17 = array::reverse(var_c25e1f9c);
+    a_n_order = array::reverse(var_c25e1f9c);
   } else {
     arrayremoveindex(var_8b77bf0c, 0);
 
@@ -3319,13 +3319,13 @@ function_dc10fc94(var_cd5d9345, var_bbb2c705) {
       }
 
       if(var_224c0c9c >= 0 && var_224c0c9c < 4) {
-        if(!isDefined(var_b0696a17)) {
-          var_b0696a17 = [];
-        } else if(!isarray(var_b0696a17)) {
-          var_b0696a17 = array(var_b0696a17);
+        if(!isDefined(a_n_order)) {
+          a_n_order = [];
+        } else if(!isarray(a_n_order)) {
+          a_n_order = array(a_n_order);
         }
 
-        var_b0696a17[var_b0696a17.size] = var_224c0c9c;
+        a_n_order[a_n_order.size] = var_224c0c9c;
         self clientfield::set_player_uimodel("hudItems.perkVapor." + var_224c0c9c + ".bleedoutOrderIndex", n_slot);
       }
 
@@ -3335,10 +3335,10 @@ function_dc10fc94(var_cd5d9345, var_bbb2c705) {
     self clientfield::set_player_uimodel("hudItems.perkVapor.bleedoutProgress", 1);
   }
 
-  self thread set_bleedout_progress(var_bbb2c705, var_b0696a17);
+  self thread set_bleedout_progress(var_bbb2c705, a_n_order);
 }
 
-set_bleedout_progress(var_bbb2c705, var_b0696a17) {
+set_bleedout_progress(var_bbb2c705, a_n_order) {
   self endon(#"player_revived", #"zombified", #"disconnect");
   level endon(#"end_game", #"round_reset");
 

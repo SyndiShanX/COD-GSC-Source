@@ -86,7 +86,7 @@ function function_37dfd679() {
   skipto::add_dev("<dev string:x76>", &function_ff99024a);
 }
 
-function function_1d4d824f(var_d3440450, var_50cc0d4f) {}
+function function_1d4d824f(str_skipto, b_starting) {}
 
 function init_flags() {
   level flag::init("elevator_clips_ready");
@@ -152,19 +152,19 @@ function init_callbacks() {
 }
 
 function function_7b24434e() {
-  if(isDefined(level.var_28c22d88) && isinarray(level.var_28c22d88, "kgb_ins_activation") || level.var_28c22d88.size == 0) {
+  if(isDefined(level.skipto_current_objective) && isinarray(level.skipto_current_objective, "kgb_ins_activation") || level.skipto_current_objective.size == 0) {
     util::function_f3cadc9a("cp_rus_kgb_player_ready");
   }
 }
 
 function function_39e4a7a9() {
-  if(!isDefined(level.var_28c22d88[0])) {
+  if(!isDefined(level.skipto_current_objective[0])) {
     return;
   }
 
   outfit = "inside_man";
 
-  switch (level.var_28c22d88[0]) {
+  switch (level.skipto_current_objective[0]) {
     case # "kgb_aslt_entry":
     case # "kgb_aslt_elev_down":
       outfit = "kgb_officer";
@@ -338,10 +338,10 @@ function function_e876a652(var_18cf1709, var_79a934ad = 1) {
   }
 }
 
-function function_ff99024a(var_d3440450, var_50cc0d4f) {
+function function_ff99024a(str_skipto, b_starting) {
   car = getent("escape_vehicle", "targetname");
   car delete();
-  level.adler = namespace_e77bf565::function_52fe0eb3(var_50cc0d4f);
+  level.adler = namespace_e77bf565::function_52fe0eb3(b_starting);
   waitframe(1);
   tag = spawn("script_model", level.adler.origin);
   tag setModel("tag_origin");

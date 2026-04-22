@@ -407,7 +407,7 @@ function_47ed291b() {
 function_10801ad3() {
   foreach(player in getplayers()) {
     player.var_42a4759e = {};
-    player.var_42a4759e.score = player zm_score::function_ffc2d0bc();
+    player.var_42a4759e.score = player zm_score::get_player_score();
     player.var_42a4759e.score_total = player.score_total;
 
     if(player.sessionstate == "spectator") {
@@ -451,7 +451,7 @@ function_bcd35efc() {
     }
 
     player zm_trial_util::function_d37a769(player.var_42a4759e.var_8c5bddf5);
-    player zm_score::function_c1f146ff(player.var_42a4759e.score);
+    player zm_score::set_player_score(player.var_42a4759e.score);
     player.score_total = player.var_42a4759e.score_total;
 
     if(isDefined(player.var_42a4759e.loadout)) {

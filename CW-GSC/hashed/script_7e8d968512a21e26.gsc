@@ -52,12 +52,12 @@ function start(var_1c513c79) {
   level flag::set("flag_adler_at_ladder");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   level endon(#"mission_failed");
   player = getplayers()[0];
   player endon(#"death");
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_5ceacc03::music("2.0_tracks");
     player setmovespeedscale(0.72);
     level namespace_979752dc::function_2324f175(0);
@@ -95,7 +95,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("ghost_station_exit");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   if(isDefined(level.var_91ee8248) && level.var_91ee8248.size > 0) {
     foreach(guy in level.var_91ee8248) {
       if(isDefined(guy)) {

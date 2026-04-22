@@ -2399,13 +2399,13 @@ function_7355c240(actionparams) {
     fwd = anglesToForward(angles);
     right = anglestoright(angles);
     up = anglestoup(angles);
-    aimoffset = function_d2e41376(actionparams.aimpoint, eyes, fwd, right, up, self.bot.var_ea5b64df, 0);
+    aimoffset = calculate_aim_offset(actionparams.aimpoint, eyes, fwd, right, up, self.bot.var_ea5b64df, 0);
 
     if(isDefined(aimoffset)) {
       self.bot.aimoffset = aimoffset;
     }
 
-    var_9492fdcb = function_d2e41376(actionparams.var_97065630, eyes, fwd, right, up, self.bot.var_ea5b64df, 1);
+    var_9492fdcb = calculate_aim_offset(actionparams.var_97065630, eyes, fwd, right, up, self.bot.var_ea5b64df, 1);
 
     if(isDefined(var_9492fdcb)) {
       self.bot.var_9492fdcb = var_9492fdcb;
@@ -2421,7 +2421,7 @@ function_7355c240(actionparams) {
   actionparams.var_97065630 += self.bot.var_9492fdcb;
 }
 
-function_d2e41376(var_9d9ae85, eyes, fwd, right, up, var_ea5b64df, close) {
+calculate_aim_offset(var_9d9ae85, eyes, fwd, right, up, var_ea5b64df, close) {
   attachmentisselectable = var_9d9ae85 - eyes;
   var_df4809a5 = vectornormalize(attachmentisselectable);
   aimoffset = undefined;

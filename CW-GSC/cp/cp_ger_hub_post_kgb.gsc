@@ -21,9 +21,9 @@
 #using scripts\cp_common\util;
 #namespace hub_post_kgb;
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level namespace_31c67f6d::function_6194f34a("post_kgb", 1);
   level thread function_53ea6532();
   setlightingstate(3);
@@ -42,8 +42,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread namespace_31c67f6d::function_7fd3a4d8(undefined, undefined, 3, 1);
   level waittill(#"start_ambient");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -220,7 +220,7 @@ function function_f50bc4b9() {
   level thread exploder::exploder("exp_post_kgb_briefing");
 }
 
-function function_b58272a1(var_d3440450) {
+function function_b58272a1(str_skipto) {
   level namespace_31c67f6d::function_6194f34a("post_kgb");
   level thread function_53ea6532();
   setlightingstate(3);
@@ -243,16 +243,16 @@ function function_d51cce5a() {
   level.hudson util::delay_notify(0.5, "dialog_ready");
 }
 
-function function_223f05aa(var_d3440450, var_50cc0d4f) {
+function function_223f05aa(str_skipto, b_starting) {
   level.hudson waittill(#"dialog_ready");
   level.hudson thread function_77e1542b();
   flag::wait_till("flag_post_kgb_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 }

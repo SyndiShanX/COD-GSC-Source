@@ -53,7 +53,7 @@ function function_99791793(str_objective) {
   }
 }
 
-function function_690ab87a(str_objective, var_50cc0d4f) {
+function function_690ab87a(str_objective, b_starting) {
   level flag::set("flag_in_memory");
   util::delay(3, undefined, &districts::function_930f8c81, ["memory_2_obey", "memory_2_disobey", "memory_2_jungle_path_fork_right", "memory_2_jungle_path_fork_left", "memory_3"]);
   level thread function_cae2d8f5();
@@ -62,7 +62,7 @@ function function_690ab87a(str_objective, var_50cc0d4f) {
   level.players[0] util::delay(3, undefined, &clientfield::set_to_player, "rt_character_visibility", 2);
   level thread namespace_d9b153b9::force_weapon_loadout(str_objective);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level flag::wait_till("level_intro_complete");
   } else {
     level flag::wait_till("bunker_door_start_function_end");
@@ -198,7 +198,7 @@ function function_cae2d8f5() {
   setDvar(#"r_lightingsunshadowdisabledynamicdraw", 0);
 }
 
-function function_e4f91def(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_e4f91def(str_objective, b_starting, var_aa1a6455, player) {
   if(player == "memory_1") {}
 
   if(player == "memory_2") {

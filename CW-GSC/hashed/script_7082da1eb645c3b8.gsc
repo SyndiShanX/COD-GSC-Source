@@ -45,10 +45,10 @@ function function_cc475eed(str_objective) {
   level thread namespace_fc3e8cb::elevator_descend(1);
 }
 
-function elevator_main(str_objective, var_50cc0d4f) {
+function elevator_main(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread cp_rus_amerika::function_f6b6f426("terminal");
   }
 
@@ -65,7 +65,7 @@ function elevator_main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_987cb73(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_987cb73(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     function_46490d4e(1);
     level flag::set("flg_elevator_end");
@@ -333,8 +333,8 @@ function function_4254583f(str_objective) {
   namespace_fc3e8cb::function_2987fd4c("s_teleport_woods_terminal", 0, 0);
 }
 
-function function_da9636d5(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_da9636d5(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level thread function_2f099c26();
   namespace_b61bbd82::music("10.0_hacking");
@@ -346,10 +346,10 @@ function function_da9636d5(str_objective, var_50cc0d4f) {
   level thread function_37b57088();
   function_b53a12d0();
   level flag::wait_till("flg_terminal_end");
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function function_207b0552(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_207b0552(str_objective, b_starting, var_aa1a6455, player) {
   clientfield::set("cull_courtyard", 1);
   var_5c5d4c59 = getactorteamarray("axis");
 
@@ -784,10 +784,10 @@ function function_170cfeb3(str_objective) {
   level thread function_cd9b75f7();
 }
 
-function function_7ff0a4d3(str_objective, var_50cc0d4f) {
+function function_7ff0a4d3(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::function_7790f03();
   }
 
@@ -821,7 +821,7 @@ function function_9df17fc0() {
   }
 }
 
-function function_123e9b38(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_123e9b38(str_objective, b_starting, var_aa1a6455, player) {
   if(player == 0) {
     level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_motorpool_vista", 0);
     level flag::set("flg_terminal_end_gundown");

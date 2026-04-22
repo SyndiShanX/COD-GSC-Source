@@ -23,7 +23,7 @@ __init__() {
   callback::on_spawned(&on_player_spawned);
   callback::on_player_corpse(&on_player_corpse);
   callback::function_930e5d42(&function_930e5d42);
-  callback::on_weapon_change(&function_585458);
+  callback::on_weapon_change(&on_player_weapon_change);
   callback::on_localclient_connect(&shoutcaster::function_981be10f);
   level.var_15ab9bbd = 1;
   renderoverridebundle::function_f72f089c(#"hash_27554b8df2b9e92b", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", &function_6803f977, undefined, undefined, 1);
@@ -112,7 +112,7 @@ on_player_corpse(localclientnum, params) {
   }
 }
 
-function_585458(params) {
+on_player_weapon_change(params) {
   if(self == level) {
     local_client_num = params.localclientnum;
     var_a6426655 = function_5778f82(local_client_num, #"hash_410c46b5ff702c96");

@@ -1984,7 +1984,7 @@ function function_58c3eef7() {
 
 function stillalivexp() {
   level endon(#"game_ended");
-  level.var_b06adc58[#"kill"][#"value"] = 300;
+  level.xpeventinfo[#"kill"][#"value"] = 300;
   level waittill(#"props_hide_over");
 
   while(true) {
@@ -2075,7 +2075,7 @@ function function_d1f10992(idflags, shitloc, weapon, friendlyfire, attackerishit
     return true;
   }
 
-  if(self function_84793f03()) {
+  if(self ishunter()) {
     if(attackerishittingself === level.phsettings.var_86fda1fd) {
       return true;
     }
@@ -2433,7 +2433,7 @@ function onplayerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vd
       continue;
     }
 
-    if(player != lifeid && player function_84793f03() && victim.team == game.defenders) {
+    if(player != lifeid && player ishunter() && victim.team == game.defenders) {
       scoreevents::processscoreevent("prop_killed", player, victim);
     }
   }
@@ -2664,7 +2664,7 @@ function disablespawningforplayer() {
     return false;
   }
 
-  if(self function_84793f03()) {
+  if(self ishunter()) {
     return false;
   } else if(self util::isprop()) {
     return !level.ingraceperiod;
@@ -2673,7 +2673,7 @@ function disablespawningforplayer() {
   return false;
 }
 
-function function_84793f03() {
+function ishunter() {
   return isDefined(self.team) && self.team == game.attackers;
 }
 
@@ -2798,7 +2798,7 @@ function function_e60dbbee(time) {
   self.var_5f355eed = 0;
   self.var_5e8990b6 = 0;
 
-  if(level.var_1103f74e.var_1455c6df && self function_84793f03() && time > 8) {
+  if(level.var_1103f74e.var_1455c6df && self ishunter() && time > 8) {
     waittillframeend();
 
     if(level.var_23661cff.size < 0) {
@@ -3115,7 +3115,7 @@ function movetarget() {
   fxent hide();
 
   foreach(player in level.players) {
-    if(player function_84793f03()) {
+    if(player ishunter()) {
       fxent showtoplayer(player);
     }
   }

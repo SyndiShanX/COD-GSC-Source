@@ -508,8 +508,8 @@ function player_teleport(var_2cb02b2f, var_880840af = 1, var_b9a81537 = 0.5) {
 }
 
 function function_87bd340() {
-  if(isDefined(level.var_28c22d88)) {
-    if(array::contains(level.var_28c22d88, "path_end_1")) {
+  if(isDefined(level.skipto_current_objective)) {
+    if(array::contains(level.skipto_current_objective, "path_end_1")) {
       if(isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_7121e70a = struct::get(level.var_731c10af.var_d8a772da + "_teleport", "targetname");
       } else {
@@ -519,7 +519,7 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "path_end_2")) {
+    if(array::contains(level.skipto_current_objective, "path_end_2")) {
       if(isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_7121e70a = struct::get(level.var_731c10af.var_d8a772da + "_teleport", "targetname");
       } else {
@@ -529,7 +529,7 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "path_end_3")) {
+    if(array::contains(level.skipto_current_objective, "path_end_3")) {
       if(isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_7121e70a = struct::get(level.var_731c10af.var_d8a772da + "_teleport", "targetname");
       } else {
@@ -539,7 +539,7 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "path_end_4")) {
+    if(array::contains(level.skipto_current_objective, "path_end_4")) {
       if(isDefined(level.var_731c10af.var_d8a772da)) {
         level.var_7121e70a = struct::get(level.var_731c10af.var_d8a772da + "_teleport", "targetname");
       } else {
@@ -549,7 +549,7 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "memory_1")) {
+    if(array::contains(level.skipto_current_objective, "memory_1")) {
       if(isDefined(level.var_731c10af.path_end_1) && level.var_731c10af.path_end_1 == level.var_baa7cf92) {
         level.var_7121e70a = struct::get("bunker_1_teleport", "targetname");
       } else {
@@ -559,7 +559,7 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "memory_2")) {
+    if(array::contains(level.skipto_current_objective, "memory_2")) {
       if(isDefined(level.var_731c10af.path_end_2) && level.var_731c10af.path_end_2 == level.var_baa7cf92) {
         level.var_7121e70a = struct::get("bunker_2_teleport", "targetname");
       } else {
@@ -569,10 +569,10 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "memory_3") || array::contains(level.var_28c22d88, "dev_memory_3_disobey_end") || array::contains(level.var_28c22d88, "dev_memory_3_end")) {
-      if(array::contains(level.var_28c22d88, "dev_memory_3_disobey_end")) {
+    if(array::contains(level.skipto_current_objective, "memory_3") || array::contains(level.skipto_current_objective, "dev_memory_3_disobey_end") || array::contains(level.skipto_current_objective, "dev_memory_3_end")) {
+      if(array::contains(level.skipto_current_objective, "dev_memory_3_disobey_end")) {
         level.var_7121e70a = struct::get("memory_3_disobey_end_teleport", "targetname");
-      } else if(array::contains(level.var_28c22d88, "dev_memory_3_end")) {
+      } else if(array::contains(level.skipto_current_objective, "dev_memory_3_end")) {
         level.var_7121e70a = struct::get("memory_3_end_teleport", "targetname");
       } else {
         level.var_7121e70a = struct::get("dev_infinite_hallway_loop_2", "script_objective");
@@ -581,7 +581,7 @@ function function_87bd340() {
       return 1;
     }
 
-    if(array::contains(level.var_28c22d88, "memory_4")) {
+    if(array::contains(level.skipto_current_objective, "memory_4")) {
       level.var_7121e70a = struct::get("bunker_1_teleport", "targetname");
       return 1;
     }
@@ -1424,8 +1424,8 @@ function function_7826a351(dvar) {
     case # "0":
       world.var_7f7d3c51 = undefined;
 
-      if(isDefined(level.var_28c22d88[0])) {
-        setDvar(#"skipto_jump", level.var_28c22d88[0]);
+      if(isDefined(level.skipto_current_objective[0])) {
+        setDvar(#"skipto_jump", level.skipto_current_objective[0]);
       }
 
       break;
@@ -1436,8 +1436,8 @@ function function_7826a351(dvar) {
         world.var_94e99af[struct.str] = struct.count;
       }
 
-      if(isDefined(level.var_28c22d88[0])) {
-        setDvar(#"skipto_jump", level.var_28c22d88[0]);
+      if(isDefined(level.skipto_current_objective[0])) {
+        setDvar(#"skipto_jump", level.skipto_current_objective[0]);
       }
 
       break;

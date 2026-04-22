@@ -30,7 +30,7 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   level thread globallogic_ui::function_7bc0e4b9();
@@ -55,7 +55,7 @@ function main(str_objective, var_50cc0d4f) {
   level.park setgoal(var_345f4332);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x49>");
 }
 

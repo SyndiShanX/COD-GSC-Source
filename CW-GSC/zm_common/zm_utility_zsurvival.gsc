@@ -54,7 +54,7 @@ function end_match(b_success = 1, var_131cc614 = 1) {
 
 function function_8e066676() {
   foreach(ai in getaiarray()) {
-    if(isalive(ai) && !function_3132f113(ai)) {
+    if(isalive(ai) && !isremovedentity(ai)) {
       util::stop_magic_bullet_shield(ai);
       ai.allowdeath = 1;
       ai.takedamage = 1;

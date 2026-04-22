@@ -27,8 +27,8 @@
 #namespace namespace_b73b9191;
 
 function function_2683ec5d() {
-  if(isDefined(level.var_28c22d88[0])) {
-    switch (level.var_28c22d88[0]) {
+  if(isDefined(level.skipto_current_objective[0])) {
+    switch (level.skipto_current_objective[0]) {
       case # "excavation_finale":
       case # "mountain_summit":
       case # "intro_heli":
@@ -68,8 +68,8 @@ function function_2341d661() {
 }
 
 function function_d432b47b() {
-  if(isDefined(level.var_28c22d88[0])) {
-    switch (level.var_28c22d88[0]) {
+  if(isDefined(level.skipto_current_objective[0])) {
+    switch (level.skipto_current_objective[0]) {
       case # "mountain_summit":
       case # "intro_heli":
       case # "zipline_intro":
@@ -230,7 +230,7 @@ function function_5c5b6ea7(var_13a1bfd8, var_d6acc33, var_1da4b8f4 = 0, b_ignore
   }
 }
 
-function function_f206e65e(var_b3a058ca, var_83d281d, var_86a56d5f = 1) {
+function function_f206e65e(str_spawner_targetname, var_83d281d, var_86a56d5f = 1) {
   heli = vehicle::simple_spawn_single(var_83d281d, 1);
   heli thread function_53c06d6e();
 

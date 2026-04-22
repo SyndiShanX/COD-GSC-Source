@@ -483,9 +483,9 @@ function_9258efe1(str_zone) {
   var_cb24ec97 = 1;
 
   foreach(e_player in getplayers()) {
-    var_bdf9e3c2 = e_player zm_zonemgr::get_player_zone();
+    str_current_zone = e_player zm_zonemgr::get_player_zone();
 
-    if(!isDefined(var_bdf9e3c2) || var_bdf9e3c2 != str_zone) {
+    if(!isDefined(str_current_zone) || str_current_zone != str_zone) {
       var_cb24ec97 = 0;
       break;
     }

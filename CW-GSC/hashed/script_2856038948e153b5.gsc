@@ -34,24 +34,24 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_escape_deploy_gas;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_bunker_escape_deploy_gas_begin");
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450, "adler_shotgun");
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_bunker", "player_grabbed_armor");
   }
 
   level.adler battlechatter::function_2ab9360b(0);
-  level thread namespace_e77bf565::escape_objective(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
   level thread function_b735db01();
-  level thread function_d0ef0702(var_d3440450);
+  level thread function_d0ef0702(str_skipto);
   level thread kgb_aslt_exfil_escape::function_1f999428();
   level thread namespace_e77bf565::function_5dfd7fb1("window_traversal_near_rescue_belikov", "script_noteworthy", 0);
   spawner::add_spawn_function_ai_group("gas_masked_shotgun_seekers", &function_92d72c13);
@@ -69,8 +69,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level flag::set("turn_on_elevator_alarm_light");
   level flag::wait_till("aslt_bunker_escape_deploy_gas_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -127,8 +127,8 @@ function function_22b7fffd() {
   animation::add_notetrack_func("kgb_aslt_escape_deploy_gas::belikov_rescue_anim_done", &function_548627b8);
 }
 
-function function_d0ef0702(var_d3440450) {
-  level thread function_36e68765(var_d3440450);
+function function_d0ef0702(str_skipto) {
+  level thread function_36e68765(str_skipto);
   level flag::wait_till("player_at_deploy_gas_door");
   namespace_353d803e::music("13.7_holding_belikov");
   thread namespace_353d803e::function_b6b29051();
@@ -181,7 +181,7 @@ function function_548627b8(params) {
   level.inside_man ai::set_behavior_attribute("demeanor", "cqb");
 }
 
-function function_36e68765(var_d3440450) {
+function function_36e68765(str_skipto) {
   level.player endon(#"death");
   level flag::wait_till("adler_exit_walkup_loop");
   wait 4.5;

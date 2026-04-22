@@ -113,7 +113,7 @@ function function_2ce126c4() {
     level.var_7e2af8d5 = [#"spawner_zm_steiner", #"hash_4f87aa2a203d37d0", #"spawner_bo5_mimic"];
   }
 
-  level.var_77805e8 = &function_77805e8;
+  level.custom_end_screen = &function_77805e8;
   spawner::add_archetype_spawn_function(#"zombie", &zombiespawnsetup);
   spawner::function_89a2cd87(#"zombie", &function_a9b7dc57);
   spawner::add_archetype_spawn_function(#"zombie_dog", &function_6a89f900);
@@ -823,7 +823,7 @@ function function_46ff5efa(var_82ea43f2 = 1, var_f91adf76 = 0) {
 
   if(var_82ea43f2) {
     foreach(ai in getaiarray()) {
-      if(isalive(ai) && !function_3132f113(ai) && ai.team !== #"allies" && !is_true(ai.var_2e948547) && !isvehicle(ai)) {
+      if(isalive(ai) && !isremovedentity(ai) && ai.team !== #"allies" && !is_true(ai.var_2e948547) && !isvehicle(ai)) {
         util::stop_magic_bullet_shield(ai);
         ai.allowdeath = 1;
         ai.takedamage = 1;

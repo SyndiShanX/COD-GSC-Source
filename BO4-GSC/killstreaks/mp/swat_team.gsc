@@ -133,7 +133,7 @@ function_944f0911(hintstring) {
   self.usetrigger sethintstring(hintstring);
 }
 
-function_ab9a9770(player) {
+duf47(player) {
   results = groundtrace(player.origin + (0, 0, 70), player.origin + (0, 0, -100), 0, player);
 
   if(isDefined(results) && isDefined(results[#"entity"]) && results[#"entity"] ismovingplatform()) {
@@ -171,7 +171,7 @@ function_87bf6422(killstreak) {
 
   waterdepth = self depthofplayerinwater();
 
-  if(!self isonground() || self util::isusingremote() || waterdepth > 2 || self function_ab9a9770(self)) {
+  if(!self isonground() || self util::isusingremote() || waterdepth > 2 || self duf47(self)) {
     self iprintlnbold(#"hash_7b15978f7b8174f7");
     return false;
   }
@@ -807,7 +807,7 @@ function_ab6f69a1(swat) {
   swat endon(#"swat_landed");
   swat waittill(#"death");
 
-  if(isDefined(swat) && !function_3132f113(swat)) {
+  if(isDefined(swat) && !isremovedentity(swat)) {
     swat unlink();
     swat startragdoll();
   }
@@ -1662,7 +1662,7 @@ function_820e7c92(owner, var_1c996690, nodes, context) {
   position = 0;
 
   foreach(swat in owner.swat_team) {
-    if(isDefined(swat) && !function_3132f113(swat)) {
+    if(isDefined(swat) && !isremovedentity(swat)) {
       aiutility::addaioverridedamagecallback(swat, &function_e588f057);
       swat linkto(helicopter, "tag_origin", (0, 0, 0), (0, 0, 0));
       swat thread function_8fa2faa5(swat, helicopter, position);
@@ -1691,7 +1691,7 @@ function_820e7c92(owner, var_1c996690, nodes, context) {
   position = 0;
 
   foreach(swat in owner.swat_team) {
-    if(isDefined(swat) && !function_3132f113(swat) && isalive(swat)) {
+    if(isDefined(swat) && !isremovedentity(swat) && isalive(swat)) {
       if(position == 0) {
         swat thread swat_deploy(swat, helicopter, position, nodes[position], 1);
       } else {

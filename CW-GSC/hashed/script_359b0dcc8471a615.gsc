@@ -25,8 +25,8 @@ function event_handler[gametype_start] main(eventstruct) {
 
   callback::on_game_playing(&on_game_playing);
   level.mannequin_mode = 0;
-  level.var_ecb7b947 = 0;
-  level.destructible_callbacks[#"headless"] = &function_e0136874;
+  level.headless_mannequin_count = 0;
+  level.destructible_callbacks[#"headless"] = &mannequin_headless;
 }
 
 function mannequin_init() {
@@ -85,7 +85,7 @@ function on_game_playing() {
   level thread function_ee18bf8f();
 }
 
-function function_e0136874(destructible_event, attacker, weapon, piece_index, point, dir, mod) {
+function mannequin_headless(destructible_event, attacker, weapon, piece_index, point, dir, mod) {
   if(!isDefined(level.mannequin_time)) {
     return;
   }
@@ -93,10 +93,10 @@ function function_e0136874(destructible_event, attacker, weapon, piece_index, po
   mannequin_timelimit = int(getdvarint(#"mannequin_timelimit", 120) * 1000);
 
   if(gettime() < level.mannequin_time + mannequin_timelimit || !mannequin_timelimit) {
-    level.var_ecb7b947++;
+    level.headless_mannequin_count++;
     var_fa149ac8 = getdvarint(#"hash_21da43870d56a220", 28);
 
-    if(level.var_ecb7b947 >= var_fa149ac8 && level.mannequin_mode == 0) {
+    if(level.headless_mannequin_count >= var_fa149ac8 && level.mannequin_mode == 0) {
       level.destructible_callbacks[#"headless"] = undefined;
       level thread mannequin_mode();
     }

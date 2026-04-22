@@ -237,7 +237,7 @@ function function_85daf9f0(soundalias, var_1d25915, linkedentity, var_e330010e) 
 }
 
 function function_6ac5b570(ent) {
-  if(snd::function_81fac19d(!isDefined(ent) || function_3132f113(ent), "snd: free on deleted entity!")) {
+  if(snd::function_81fac19d(!isDefined(ent) || isremovedentity(ent), "snd: free on deleted entity!")) {
     if(snd::function_f984063f()) {
       debugbreak();
     }
@@ -323,7 +323,7 @@ function function_9f156b27(soundobject, fadeoutseconds) {
   soundobject endon(#"death");
   ent = soundobject;
 
-  if(snd::function_81fac19d(!isDefined(ent) || function_3132f113(ent), "snd: stop on deleted entity!")) {
+  if(snd::function_81fac19d(!isDefined(ent) || isremovedentity(ent), "snd: stop on deleted entity!")) {
     if(snd::function_f984063f()) {
       debugbreak();
     }

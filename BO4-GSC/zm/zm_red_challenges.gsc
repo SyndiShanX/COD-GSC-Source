@@ -1132,10 +1132,10 @@ function_5ee56208(var_5acfb6d) {
   level endon(#"hash_61075af70fbd9082");
 
   while(true) {
-    var_bdf9e3c2 = zm_zonemgr::get_zone_from_position(self.origin);
+    str_current_zone = zm_zonemgr::get_zone_from_position(self.origin);
 
-    if(isDefined(var_bdf9e3c2)) {
-      var_72192bfa = zm_red_zones::function_27028b8e(var_bdf9e3c2);
+    if(isDefined(str_current_zone)) {
+      var_72192bfa = zm_red_zones::function_27028b8e(str_current_zone);
 
       if(isDefined(var_72192bfa)) {
         if(var_72192bfa === var_5acfb6d) {

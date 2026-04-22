@@ -443,14 +443,14 @@ function private function_a4507e23(fx_ent, augmented_impact_fx, lifetime, damage
     wait lifetime;
   }
 
-  if(isDefined(fx_ent) && !function_3132f113(fx_ent)) {
+  if(isDefined(fx_ent) && !isremovedentity(fx_ent)) {
     fx_ent delete();
   }
 
   level.var_8a1c2b55.var_6a01400c--;
   arrayremovevalue(level.var_8a1c2b55.var_f782e821[augmented_impact_fx], damage_data, 0);
 
-  if(isDefined(self) && !function_3132f113(self)) {
+  if(isDefined(self) && !isremovedentity(self)) {
     arrayremovevalue(self.var_8a1c2b55.var_33c88c75, damage_data.var_7c5043e3, 0);
   }
 }
@@ -618,7 +618,7 @@ function private function_db7de647(var_917c5c76, settings, position, normal, var
 function private function_1a4bd745() {
   self endon(#"deleted");
 
-  while(isDefined(self) && !function_3132f113(self)) {
+  while(isDefined(self) && !isremovedentity(self)) {
     if(getdvarint(#"hash_3f5a3042d616052b", 0)) {
       if(self.radius > 0) {
         sphere(self.origin, self.radius, (0, 0, 1), 0.5, 0, 20, 1);

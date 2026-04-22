@@ -26,19 +26,19 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_bunker;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
   level.player util::delay(0.05, undefined, &clientfield::set_to_player, "stream_adler_assault_assets", 1);
   level thread scene::init_streamer("scene_kgb_bunker_intro_elevator", getplayers());
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.player endon(#"death");
   level flag::set("aslt_bunker_begin");
   level battlechatter::function_2ab9360b(1);
   spawner::add_spawn_function_ai_group("bunker_intro_security", &function_5f5e32bd);
 
-  if(is_true(var_50cc0d4f)) {
+  if(is_true(b_starting)) {
     level thread scene::init("scene_kgb_bunker_intro_elevator");
   }
 
@@ -47,13 +47,13 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread scene::init("scene_kgb_utility_room_player");
   level.player setlowready(1);
   level thread function_8f134086();
-  level thread namespace_e77bf565::function_7feb07bb(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::function_7feb07bb(str_skipto, b_starting);
   level thread function_1c059274();
   level thread function_deb648d2();
   level thread function_c8052750();
 
   if(!isDefined(level.adler)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450);
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
   }
 
@@ -67,8 +67,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread kgb_aslt_escape_lights_out::function_a0d18564();
   level flag::wait_till("aslt_bunker_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

@@ -225,11 +225,11 @@ player_damage(t_damage) {
   self setstance("crouch");
 }
 
-function_373d49f(v_dest, n_time = 1, n_accel = 0, var_99997505 = 0) {
+function_373d49f(v_dest, n_time = 1, n_accel = 0, n_decel = 0) {
   if(isPlayer(self)) {
     var_3fba37cd = util::spawn_model("tag_origin", self.origin, self.angles);
     self linkto(var_3fba37cd);
-    var_3fba37cd moveto(v_dest, n_time, n_accel, var_99997505);
+    var_3fba37cd moveto(v_dest, n_time, n_accel, n_decel);
     var_3fba37cd waittill(#"movedone");
     var_3fba37cd delete();
     return;

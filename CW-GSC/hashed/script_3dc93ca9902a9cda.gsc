@@ -505,7 +505,7 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
     var_1d25915 = undefined;
     soundobject = undefined;
     ise = isentity(t);
-    isr = function_3132f113(t);
+    isr = isremovedentity(t);
     iss = isstruct(t);
     isv = isvec(t);
     isn = isstring(t);
@@ -525,7 +525,7 @@ function private function_2639b80c(soundtype, soundalias, var_9ab0e73a) {
     } else if(isv) {
       var_1d25915 = t;
     } else if(isn) {} else if(isarray(t)) {
-      if(!isDefined(t[0]) || function_3132f113(t[0])) {
+      if(!isDefined(t[0]) || isremovedentity(t[0])) {
         continue;
       } else if(isentity(t[0]) && isstring(t[1])) {
         linkedentity = t[0];
@@ -598,7 +598,7 @@ function private function_f937a6f7(soundobject, fadeoutseconds) {
     return;
   }
 
-  if(function_81fac19d(!isDefined(soundobject) || function_3132f113(soundobject), "snd_stop with undefined soundObject")) {
+  if(function_81fac19d(!isDefined(soundobject) || isremovedentity(soundobject), "snd_stop with undefined soundObject")) {
     return;
   }
 
@@ -633,7 +633,7 @@ function private function_f937a6f7(soundobject, fadeoutseconds) {
     wait fadeoutseconds;
     waitframe(1);
 
-    if(function_3132f113(soundobject)) {
+    if(isremovedentity(soundobject)) {
       return;
     }
   }
@@ -662,7 +662,7 @@ function private function_78a6b95b(soundobject, levelnotifystring, fadeoutsecond
 }
 
 function private function_6f736cc1(soundobject, fadeinseconds, delaytime) {
-  if(function_81fac19d(!isDefined(soundobject) || function_3132f113(soundobject), "snd: fade in on deleted gentity!")) {
+  if(function_81fac19d(!isDefined(soundobject) || isremovedentity(soundobject), "snd: fade in on deleted gentity!")) {
     return;
   }
 
@@ -684,7 +684,7 @@ function private function_5eb4c6d(target) {
 
   if(isplayersafe(target)) {
     position = target getplayervieworigin();
-  } else if(!function_3132f113(target) && isDefined(target.origin)) {
+  } else if(!isremovedentity(target) && isDefined(target.origin)) {
     position = target.origin;
   } else if(isvec(target) == 1) {
     position = target;
@@ -1199,7 +1199,7 @@ function private function_8eaaf665() {
   self endon(#"disconnect");
   self endon(#"param_stop");
 
-  while(function_3132f113(self) == 0 && isDefined(self.var_3dc056c0) && self.var_3dc056c0.size > 0) {
+  while(isremovedentity(self) == 0 && isDefined(self.var_3dc056c0) && self.var_3dc056c0.size > 0) {
     now = gettime();
 
     foreach(p in self.var_3dc056c0) {
@@ -1235,7 +1235,7 @@ function private function_8eaaf665() {
     waitframe(1);
   }
 
-  if(function_3132f113(self)) {
+  if(isremovedentity(self)) {
     self function_bc4f45dd();
   }
 }
@@ -1722,7 +1722,7 @@ function private _snd_doppler_main(player, dopplerscale, pitchscale, var_a47261d
     player snd_param("doppler", undefined, &function_c0e3d9aa);
   }
 
-  if(function_3132f113(self)) {
+  if(isremovedentity(self)) {
     return;
   }
 

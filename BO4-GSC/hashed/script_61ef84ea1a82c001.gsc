@@ -181,9 +181,9 @@ function_7927b4f1() {
   self endon(#"disconnect", #"roof_kills_completed");
 
   while(true) {
-    var_bdf9e3c2 = self zm_zonemgr::get_player_zone();
+    str_current_zone = self zm_zonemgr::get_player_zone();
 
-    if(var_bdf9e3c2 === "zone_roof" || var_bdf9e3c2 === "zone_roof_infirmary") {
+    if(str_current_zone === "zone_roof" || str_current_zone === "zone_roof_infirmary") {
       self.var_3909389c = 1;
     } else {
       self.var_3909389c = 0;

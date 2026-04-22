@@ -496,8 +496,8 @@ function has_player_hero_weapon() {
 }
 
 function register_offhand_weapons_for_level_defaults() {
-  if(isDefined(level.var_54f1e174)) {
-    [[level.var_54f1e174]]();
+  if(isDefined(level.register_offhand_weapons_for_level_defaults_override)) {
+    [[level.register_offhand_weapons_for_level_defaults_override]]();
     return;
   }
 
@@ -552,13 +552,13 @@ function has_hero_weapon() {
 function function_3e5c3a27() {
   if(zm_utility::is_survival()) {
     if(level.var_b48509f9 === 1) {
-      self zm_score::function_c1f146ff(500);
+      self zm_score::set_player_score(500);
       return;
     }
   }
 
   var_4ba090b7 = function_fc8ff147();
-  score = self zm_score::function_ffc2d0bc();
+  score = self zm_score::get_player_score();
 
   if(score < var_4ba090b7) {
     diff = var_4ba090b7 - score;
@@ -566,7 +566,7 @@ function function_3e5c3a27() {
     return;
   }
 
-  self zm_score::function_c1f146ff(var_4ba090b7);
+  self zm_score::set_player_score(var_4ba090b7);
 }
 
 function function_fc8ff147() {
@@ -647,7 +647,7 @@ function give_start_weapon(b_switch_weapon) {
       self function_3e5c3a27();
 
       if(zm_utility::is_survival() && !var_9e4954fa && level.var_b48509f9 === 1) {
-        self zm_score::function_c1f146ff(level.player_starting_points);
+        self zm_score::set_player_score(level.player_starting_points);
       }
 
       self.var_595a11bc = 0;

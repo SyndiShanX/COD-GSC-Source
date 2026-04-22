@@ -88,7 +88,7 @@ function function_37dfd679() {
   skipto::add_dev("<dev string:x129>", &function_5bef74d0);
 }
 
-function function_5bef74d0(var_d3440450, var_50cc0d4f) {}
+function function_5bef74d0(str_skipto, b_starting) {}
 
 function init_flags() {
   tkdn_heli_intro::init_flags();
@@ -142,7 +142,7 @@ function init_callbacks() {
 }
 
 function on_player_connect() {
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "tkdn_raid_bar") || level.var_28c22d88.size == 0) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "tkdn_raid_bar") || level.skipto_current_objective.size == 0) {
     util::function_f3cadc9a("cp_takedown_player_ready");
 
     if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
@@ -154,13 +154,13 @@ function on_player_connect() {
 function function_8106e2e1() {
   self setcharacterbodytype(1);
 
-  if(strstartswith(level.var_28c22d88[0], "tkdn_af_")) {
+  if(strstartswith(level.skipto_current_objective[0], "tkdn_af_")) {
     self setcharacteroutfit(9);
   } else {
     self setcharacteroutfit(2);
   }
 
-  thread namespace_b100dd86::setup_objectives(level.var_28c22d88[0]);
+  thread namespace_b100dd86::setup_objectives(level.skipto_current_objective[0]);
   knife = getweapon(#"knife_held");
   player = getplayers()[0];
 
@@ -168,7 +168,7 @@ function function_8106e2e1() {
     player takeweapon(knife, 1);
   }
 
-  switch (level.var_28c22d88[0]) {
+  switch (level.skipto_current_objective[0]) {
     case # "tkdn_raid_bar":
       var_4f2ba130 = self getweaponslist();
 

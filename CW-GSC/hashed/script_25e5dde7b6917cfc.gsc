@@ -38,7 +38,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_e871b49a;
 
-function intro_flow(var_d3440450, var_50cc0d4f) {
+function intro_flow(str_skipto, b_starting) {
   level thread util::screen_fade_out(0, "black", "armada_intro_black_screen");
   util::function_3e65fe0b(1);
   level function_55d23d1e();
@@ -962,7 +962,7 @@ function function_d4337a8d() {
   namespace_b7cfe907::function_d777fe61(2);
 }
 
-function function_50d6beb5(var_d3440450, var_50cc0d4f) {
+function function_50d6beb5(str_skipto, b_starting) {
   level thread function_38197823();
   level flag::wait_till_any(array("flag_intro_adler_at_chopper", "flag_intro_player_at_chopper"));
   objectives::complete("armada_obj_intro_follow_vip", level.vip);
@@ -1243,7 +1243,7 @@ function function_3705ef2f(wait_flag) {
   }
 }
 
-function function_c81e0f3f(var_d3440450, var_50cc0d4f) {
+function function_c81e0f3f(str_skipto, b_starting) {
   var_a129a5ee = getent("trigger_oob_firebase_to_branch", "targetname");
   thread function_d97a8605();
   thread function_b53b7c30(34);
@@ -1289,7 +1289,7 @@ function function_d97a8605() {
   thread function_20c273a1();
 }
 
-function function_67f53057(var_d3440450, var_50cc0d4f) {
+function function_67f53057(str_skipto, b_starting) {
   level flag::wait_till("flag_armada_player_chopper_spawned");
   callback::on_player_damage(&namespace_b7cfe907::function_38a76cc5);
   var_802ba9ea = struct::get("obj_firebase", "targetname");
@@ -1669,7 +1669,7 @@ function function_c4d91c06(var_8bb4b3f5, var_81769f79, var_fff01c66, var_2e2ef8e
   }
 }
 
-function function_90b53888(var_d3440450, var_50cc0d4f) {
+function function_90b53888(str_skipto, b_starting) {
   a_ents = [];
 
   if(isDefined(level.var_52874eb2)) {
@@ -1704,7 +1704,7 @@ function function_4c73716e(a_ents) {
   namespace_b7cfe907::function_1c2abcda();
 }
 
-function function_55a3220(var_d3440450, var_50cc0d4f) {
+function function_55a3220(str_skipto, b_starting) {
   org = struct::get("heli_spawn_fly_to_branch", "script_noteworthy");
   level.var_7466d419.origin = org.origin;
   level.var_7466d419.angles = org.angles;
@@ -1714,7 +1714,7 @@ function function_55a3220(var_d3440450, var_50cc0d4f) {
   var_a129a5ee = getent("trigger_oob_firebase_to_branch", "targetname");
   var_a129a5ee triggerenable(1);
 
-  if(!is_true(var_50cc0d4f)) {
+  if(!is_true(b_starting)) {
     if(!isDefined(level.buddy)) {
       thread namespace_b7cfe907::function_ed68628c(1);
     }
@@ -1746,7 +1746,7 @@ function function_55a3220(var_d3440450, var_50cc0d4f) {
   iprintlnbold("Adler crash scene");
   level flag::set("flag_vo_flying_ally_down_react");
   flag::set("flag_vo_flying_ally_down_choice");
-  level skipto::function_4e3ab877(var_d3440450, 0);
+  level skipto::function_4e3ab877(str_skipto, 0);
   level skipto::function_51726ac8(["armada_fly_to_branch_reached"], 0, level.player);
 }
 
@@ -1811,7 +1811,7 @@ function function_e0598f16(input, var_aff9d4d0, var_8c5bec46) {
   level.player notify(var_8c5bec46);
 }
 
-function function_216af582(var_d3440450, var_50cc0d4f) {
+function function_216af582(str_skipto, b_starting) {
   level flag::wait_till("flag_armada_player_chopper_spawned");
   namespace_b7cfe907::function_d777fe61(0);
   var_8bd1af86 = struct::get("obj_branch_reached_mortar_choice", "targetname");
@@ -1832,7 +1832,7 @@ function function_216af582(var_d3440450, var_50cc0d4f) {
   snd::stop(level.var_4dcf3b93, 2);
 }
 
-function function_6eb72af2(var_d3440450, var_50cc0d4f) {
+function function_6eb72af2(str_skipto, b_starting) {
   namespace_b7cfe907::function_d777fe61(0);
   level thread function_d428a291();
   level thread function_27fafffc();
@@ -1840,7 +1840,7 @@ function function_6eb72af2(var_d3440450, var_50cc0d4f) {
   level flag::set("flag_player_flying_ambience_kill");
   namespace_b7cfe907::function_9c308f91();
   trigger::wait_till("trig_reached_firebase");
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
 function function_d428a291() {
@@ -1872,12 +1872,12 @@ function function_d428a291() {
 
 function function_27fafffc() {}
 
-function function_78be51a6(var_d3440450, var_50cc0d4f) {
+function function_78be51a6(str_skipto, b_starting) {
   level thread function_9137167f();
   level thread function_72cfe867();
   level flag::wait_till("flag_obj_firebase_defend_complete");
   wait 5;
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
 function function_9137167f() {

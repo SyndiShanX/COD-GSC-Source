@@ -642,7 +642,7 @@ function_d5c9a81(e_revivee) {
     return false;
   }
 
-  if(isDefined(level.var_1461fd14) && ![[level.var_1461fd14]](e_revivee)) {
+  if(isDefined(level.can_revive_game_module) && ![[level.can_revive_game_module]](e_revivee)) {
     return false;
   }
 
@@ -892,8 +892,8 @@ check_for_range_and_los(v_attack_source, n_allowed_z_diff, n_radius_sq) {
 gravityspikes_target_filtering(ai_enemy) {
   b_callback_result = 1;
 
-  if(isDefined(level.var_722474af)) {
-    b_callback_result = [[level.var_722474af]](ai_enemy);
+  if(isDefined(level.gravityspikes_target_filter_callback)) {
+    b_callback_result = [[level.gravityspikes_target_filter_callback]](ai_enemy);
   }
 
   return b_callback_result;

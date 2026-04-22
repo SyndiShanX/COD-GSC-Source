@@ -28,11 +28,11 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
-  level thread namespace_d9b153b9::start_outro(var_50cc0d4f);
+function main(str_objective, b_starting) {
+  level thread namespace_d9b153b9::start_outro(b_starting);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_c26b0bc0() {
   level flag::init("creek_path_completed");

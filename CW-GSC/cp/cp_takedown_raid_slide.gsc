@@ -36,7 +36,7 @@
 #using scripts\cp_common\util;
 #namespace tkdn_raid_slide;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   player = getplayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
@@ -60,8 +60,8 @@ function starting(var_d3440450) {
   level thread scene::play("scene_tkd_hit2_apt_blindfire_bathroom", "death");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function main(str_skipto, b_starting) {
+  if(b_starting) {
     tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
     tkdn_raid_apt::function_aeaba0c9("glass_door_start_right", "glass_door_dest_right", 0);
     tkdn_raid_apt::function_aeaba0c9("glass_door_start_left", "glass_door_dest_left", 0);
@@ -171,8 +171,8 @@ function main(var_d3440450, var_50cc0d4f) {
   player enableweapons();
   player util::blend_movespeedscale(0.5, 1);
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

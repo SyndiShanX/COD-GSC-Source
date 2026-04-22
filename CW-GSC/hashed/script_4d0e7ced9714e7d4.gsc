@@ -36,7 +36,7 @@
 #using scripts\weapons\weapon_utils;
 #namespace namespace_ac5221d7;
 
-function function_292592aa(var_50cc0d4f) {
+function function_292592aa(b_starting) {
   self flag::wait_till(#"loadout_given");
   self takeallweapons();
   var_9e22157a = getweapon(#"ar_standard_t9", array("stalker"));
@@ -49,7 +49,7 @@ function function_292592aa(var_50cc0d4f) {
   self switchtoweaponimmediate(var_9e22157a);
 }
 
-function function_a22db743(var_50cc0d4f) {
+function function_a22db743(b_starting) {
   self flag::wait_till(#"loadout_given");
   self takeallweapons();
   var_9e22157a = getweapon(#"ar_damage_t9", array("scope4x", "stalker", "fastreload", "speedgrip"));
@@ -112,7 +112,7 @@ function function_6f94ced5(a_ents, str_shot) {
   }
 }
 
-function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, var_d3440450 = level.var_28c22d88[0]) {
+function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, str_skipto = level.skipto_current_objective[0]) {
   ai = getent(var_a7f24c3d, "targetname", 1);
 
   if(!isalive(ai)) {
@@ -131,7 +131,7 @@ function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, var_d3440450 = level.
   }
 
   if(is_true(var_b895b611)) {
-    ai function_55623c92(var_d3440450, var_a7f24c3d);
+    ai function_55623c92(str_skipto, var_a7f24c3d);
   }
 
   ai val::set(#"duga", "ignoreme", 1);
@@ -141,8 +141,8 @@ function function_ed760ecb(var_a7f24c3d, var_b895b611 = 1, var_d3440450 = level.
   return ai;
 }
 
-function function_55623c92(var_d3440450 = level.var_28c22d88[0], str_name = self.targetname) {
-  var_142cfe56 = var_d3440450 + "_" + str_name;
+function function_55623c92(str_skipto = level.skipto_current_objective[0], str_name = self.targetname) {
+  var_142cfe56 = str_skipto + "_" + str_name;
   s_org = struct::get(var_142cfe56, "targetname");
 
   if(isDefined(s_org)) {

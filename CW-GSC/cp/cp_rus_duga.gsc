@@ -49,7 +49,7 @@ function function_37dfd679() {
   skipto::add_dev("<dev string:xae>", &function_7eb26947, &function_ef6b71e7, "<dev string:xcd>");
 }
 
-function function_b679cee1(var_805ed574, var_50cc0d4f) {}
+function function_b679cee1(var_805ed574, b_starting) {}
 
 function function_4c352dc6(var_805ed574) {}
 
@@ -115,7 +115,7 @@ function function_9995e4d5() {
 function on_connect() {
   self function_48737ebb();
 
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "comprimised") || level.var_28c22d88.size == 0) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "comprimised") || level.skipto_current_objective.size == 0) {
     util::function_f3cadc9a("cp_duga_player_ready");
 
     if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
@@ -140,7 +140,7 @@ function on_spawned() {
   self util::function_a5318821();
   wait 0.2;
 
-  switch (level.var_28c22d88[0]) {
+  switch (level.skipto_current_objective[0]) {
     case # "comprimised":
       self thread namespace_ac5221d7::function_292592aa(1);
       break;
@@ -158,13 +158,13 @@ function on_spawned() {
 
 function function_b3fbad5c(str_objective) {}
 
-function function_a3a9332(str_objective, var_50cc0d4f) {
+function function_a3a9332(str_objective, b_starting) {
   level namespace_ac5221d7::function_ae1eba32();
 }
 
 function function_ef6b71e7(str_objective) {}
 
-function function_7eb26947(str_objective, var_50cc0d4f) {
+function function_7eb26947(str_objective, b_starting) {
   level.var_b00240a2 = 1;
   level namespace_ac5221d7::function_ae1eba32();
 }

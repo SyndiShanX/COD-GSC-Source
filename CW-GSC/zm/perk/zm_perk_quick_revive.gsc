@@ -158,8 +158,8 @@ function enable_quick_revive_perk_for_level() {
 }
 
 function quick_revive_precache() {
-  if(isDefined(level.var_88d522c3)) {
-    [[level.var_88d522c3]]();
+  if(isDefined(level.quick_revive_precache_override_func)) {
+    [[level.quick_revive_precache_override_func]]();
     return;
   }
 

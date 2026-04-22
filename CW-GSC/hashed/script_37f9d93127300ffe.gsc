@@ -35,7 +35,7 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   util::init_dvar("scr_napalm_strike_capture_model", 0);
 
   if(level.var_731c10af.var_42659717 == 0) {
@@ -57,10 +57,10 @@ function main(str_objective, var_50cc0d4f) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "sniper_overlook";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(var_50cc0d4f, 0);
+  level skipto::function_4e3ab877(b_starting, 0);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   wait 1;
   vehicle_plane_group1 = getEntArray("vehicle_plane_group1", "targetname");
   arrayremovevalue(vehicle_plane_group1, undefined);
@@ -593,12 +593,12 @@ function function_f4f616bb(str_objective) {
   level thread function_f46355f3();
 }
 
-function function_5f076197(str_objective, var_50cc0d4f) {
-  var_50cc0d4f = "sniper_overlook";
+function function_5f076197(str_objective, b_starting) {
+  b_starting = "sniper_overlook";
   sniper_napalm();
 }
 
-function function_f3b9155f(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_f3b9155f(str_objective, b_starting, var_aa1a6455, player) {}
 
 function sniper_napalm() {
   level endon(#"visit_restart");

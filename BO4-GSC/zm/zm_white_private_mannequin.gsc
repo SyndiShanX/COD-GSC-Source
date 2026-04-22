@@ -349,7 +349,7 @@ function_1e88595a() {
   }
   while(!var_6ba58f5f);
 
-  self.var_1a612d42 = e_who;
+  self.companion_leader = e_who;
   level flag::set(#"hash_6202f3e00d7008b0");
 }
 
@@ -415,8 +415,8 @@ function_88265619() {
     }
 
     zm_unitrigger::unregister_unitrigger(var_e3d10631[0].s_unitrigger);
-    level.var_1a612d42 = var_e3d10631[0].var_1a612d42;
-    level.var_1a612d42.eligible_leader = 1;
+    level.companion_leader = var_e3d10631[0].companion_leader;
+    level.companion_leader.eligible_leader = 1;
 
     if(isDefined(level.mannequin_ally_spawner)) {
       level.mannequin_ally = level.mannequin_ally_spawner spawnfromspawner();

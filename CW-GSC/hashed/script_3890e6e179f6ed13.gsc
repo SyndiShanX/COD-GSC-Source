@@ -36,7 +36,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_347b95ee;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level.var_aece851d = [];
   snd::client_msg("heli_intro_submix");
   level thread scene::init_streamer(#"scene_tkd_hit1_intro_fly_in", getplayers());
@@ -53,7 +53,7 @@ function starting(var_d3440450) {
   level thread scene::init("scene_tkd_hit1_intro_fly_in", actors);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   player = getplayers()[0];
   player val::set(#"intro", "freezecontrols", 1);
   level util::screen_fade_out(0);
@@ -75,8 +75,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level.woods sethighdetail(0);
   level.player_heli sethighdetail(0);
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -91,7 +91,7 @@ function intro_vo() {
 
 function cleanup(name, starting, direct, player) {
   if(player) {
-    level thread function_c9c8c2f5(level.var_28c22d88[0] === "tkdn_heli_convoy_aslt");
+    level thread function_c9c8c2f5(level.skipto_current_objective[0] === "tkdn_heli_convoy_aslt");
   }
 }
 

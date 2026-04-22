@@ -19,14 +19,14 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("allplayers", "" + # "lightning_bolt_fx", 1, 1, "counter", &function_37d03e44, 0, 0);
   clientfield::register("toplayer", "" + # "hero_hammer_armor_postfx", 1, 1, "counter", &function_6765f5b4, 0, 0);
-  clientfield::register("scriptmover", "" + # "lightning_miss_fx", 1, 1, "int", &function_93d275f2, 0, 0);
+  clientfield::register("scriptmover", "" + # "lightning_miss_fx", 1, 1, "int", &lightning_miss_play_fx, 0, 0);
   clientfield::register("scriptmover", "" + # "hammer_storm", 1, 1, "int", &hammer_storm, 0, 0);
   clientfield::register("actor", "" + # "hero_hammer_melee_impact_trail", 1, 1, "counter", &function_e6845153, 0, 0);
   clientfield::register("vehicle", "" + # "hero_hammer_melee_impact_trail", 1, 1, "counter", &function_e6845153, 0, 0);
-  clientfield::register("actor", "" + # "lightning_impact_fx", 1, 1, "int", &function_54b0b1b, 0, 0);
-  clientfield::register("vehicle", "" + # "lightning_impact_fx", 1, 1, "int", &function_54b0b1b, 0, 0);
-  clientfield::register("actor", "" + # "lightning_arc_fx", 1, 1, "int", &function_311f3501, 0, 0);
-  clientfield::register("vehicle", "" + # "lightning_arc_fx", 1, 1, "int", &function_311f3501, 0, 0);
+  clientfield::register("actor", "" + # "lightning_impact_fx", 1, 1, "int", &lightning_impact_play_fx, 0, 0);
+  clientfield::register("vehicle", "" + # "lightning_impact_fx", 1, 1, "int", &lightning_impact_play_fx, 0, 0);
+  clientfield::register("actor", "" + # "lightning_arc_fx", 1, 1, "int", &lightning_arc_play_fx, 0, 0);
+  clientfield::register("vehicle", "" + # "lightning_arc_fx", 1, 1, "int", &lightning_arc_play_fx, 0, 0);
   clientfield::register("actor", "" + # "hero_hammer_stun", 1, 1, "int", &function_cd968d6, 0, 0);
   clientfield::register("vehicle", "" + # "hero_hammer_stun", 1, 1, "int", &function_cd968d6, 0, 0);
   clientfield::register("toplayer", "" + # "hammer_rumble", 1, 1, "counter", &hammer_rumble, 0, 0);
@@ -101,7 +101,7 @@ function_9f78a957(localclientnum) {
   }
 }
 
-function_54b0b1b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+lightning_impact_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(isDefined(self.var_89d8285)) {
     deletefx(localclientnum, self.var_89d8285, 1);
     self.var_89d8285 = undefined;
@@ -113,7 +113,7 @@ function_54b0b1b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
   }
 }
 
-function_93d275f2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+lightning_miss_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(isDefined(self.var_9f5d50f5)) {
     deletefx(localclientnum, self.var_9f5d50f5, 1);
     self.var_9f5d50f5 = undefined;
@@ -129,8 +129,8 @@ function_93d275f2(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 }
 
-function_7dac3bb6(localclientnum) {
-  self endon(#"death", #"hash_5531647ca0352039");
+lightning_arc_play_fx_thread(localclientnum) {
+  self endon(#"death", #"stop_arc_fx");
 
   while(!isDefined(level.var_76234ae5[localclientnum])) {
     waitframe(1);
@@ -167,18 +167,18 @@ function_7dac3bb6(localclientnum) {
   }
 }
 
-function_311f3501(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
+lightning_arc_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self thread function_7dac3bb6(localclientnum);
+    self thread lightning_arc_play_fx_thread(localclientnum);
     self thread function_85050f7f(localclientnum);
     return;
   }
 
-  self notify(#"hash_5531647ca0352039");
+  self notify(#"stop_arc_fx");
 }
 
 function_85050f7f(localclientnum) {
-  self waittill(#"death", #"hash_5531647ca0352039");
+  self waittill(#"death", #"stop_arc_fx");
 
   if(isDefined(self.fx_arc)) {
     stopfx(localclientnum, self.fx_arc);

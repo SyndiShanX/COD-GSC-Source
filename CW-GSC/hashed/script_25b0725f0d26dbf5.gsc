@@ -355,13 +355,13 @@ function function_544b0755() {
     var_efa5472a = skipto::function_5a61e21a()[0];
 
     if(var_efa5472a === "armada_intro") {
-      var_c76a870a = 1;
+      n_ammo_count = 1;
     } else {
-      var_c76a870a = frag.maxammo;
+      n_ammo_count = frag.maxammo;
     }
 
-    self setweaponammoclip(frag, var_c76a870a);
-    self setweaponammostock(frag, var_c76a870a);
+    self setweaponammoclip(frag, n_ammo_count);
+    self setweaponammostock(frag, n_ammo_count);
   }
 }
 
@@ -387,8 +387,8 @@ function function_4fa636c5(start_node, var_212b9b37 = 0, var_2747d300) {
   level thread namespace_486c0593::function_6973d387(start_node, var_212b9b37, var_2747d300);
 }
 
-function function_6a03d24d(var_d3440450) {
-  switch (var_d3440450) {
+function function_6a03d24d(str_skipto) {
+  switch (str_skipto) {
     case # "armada_intro":
     case # "armada_flyin":
       function_27e76b4c("heli_spawn_airbase", undefined, 0);

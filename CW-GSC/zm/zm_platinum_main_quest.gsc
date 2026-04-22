@@ -1131,7 +1131,7 @@ function function_dc0c0830(player, a_s_spawn_locs) {
 }
 
 function function_945bc567(player) {
-  var_40118c33 = [];
+  a_s_spawn_loc = [];
 
   if(isDefined(player.var_9c08fce7)) {
     var_a3089335 = struct::get_array(player.var_9c08fce7.target, "targetname");
@@ -1142,20 +1142,20 @@ function function_945bc567(player) {
           slots = namespace_85745671::function_7a1b21f6(s_loc.origin, s_loc.angles, 20, 512, 512, 128);
 
           if(isarray(slots)) {
-            var_40118c33 = arraycombine(var_40118c33, slots);
+            a_s_spawn_loc = arraycombine(a_s_spawn_loc, slots);
           }
         }
       } else {
         slots = namespace_85745671::function_7a1b21f6(player.var_9c08fce7.origin, player.var_9c08fce7.angles, 20, 512, 512, 128);
 
         if(isarray(slots)) {
-          var_40118c33 = arraycombine(var_40118c33, slots);
+          a_s_spawn_loc = arraycombine(a_s_spawn_loc, slots);
         }
       }
     }
   }
 
-  return array::random(var_40118c33);
+  return array::random(a_s_spawn_loc);
 }
 
 function spawn_zombie(ai_type, player) {
@@ -3624,14 +3624,14 @@ function private function_770d26d0() {
 
 function private function_ffa66365() {
   self endon(#"death");
-  var_145237a9 = self.origin;
+  v_original_pos = self.origin;
   var_5d8e38e6 = (1, 1, 1);
 
   while(true) {
     var_1b580374 = randomfloatrange(-0.5, 0.5);
     var_11f970b3 = randomfloatrange(-0.5, 0.5);
     var_3cbd458 = randomfloatrange(-0.5, 0.5);
-    self.origin = var_145237a9 + (var_5d8e38e6[0] * var_1b580374, var_5d8e38e6[1] * var_11f970b3, var_5d8e38e6[2] * var_3cbd458);
+    self.origin = v_original_pos + (var_5d8e38e6[0] * var_1b580374, var_5d8e38e6[1] * var_11f970b3, var_5d8e38e6[2] * var_3cbd458);
     wait 0.05;
   }
 }

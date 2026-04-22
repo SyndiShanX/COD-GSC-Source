@@ -151,7 +151,7 @@ play_pentagon_announcer_vox(alias, defcon_level) {
 
   if(level.pentann_is_speaking == 0) {
     level.pentann_is_speaking = 1;
-    level function_b66105cb();
+    level play_initial_alarm();
     level function_2389bb7a(alias);
     level.pentann_is_speaking = 0;
   }
@@ -170,7 +170,7 @@ function_2389bb7a(str_sound) {
   wait n_wait;
 }
 
-function_b66105cb() {
+play_initial_alarm() {
   structs = struct::get_array("defcon_alarms", "targetname");
 
   for(i = 0; i < structs.size; i++) {

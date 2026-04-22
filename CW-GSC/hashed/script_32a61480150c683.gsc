@@ -42,8 +42,8 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function main(str_objective, b_starting) {
+  if(b_starting) {
     level flag::wait_till("level_intro_complete");
 
     if(level.var_731c10af.paths[#"rice_paddies"].count != 0) {
@@ -67,7 +67,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   intro_anim_trees = getEntArray("intro_anim_trees", "targetname");
   array::thread_all(intro_anim_trees, &namespace_d9b153b9::ent_cleanup);
 }
@@ -178,7 +178,7 @@ function function_61c7a808(str_objective) {
   scene::add_scene_func("scene_pri_intro_short_fastforward", &function_cc5291ff);
   scene::add_scene_func("scene_pri_intro_short", &function_cc5291ff);
 
-  if(isDefined(level.var_731c10af.paths[#"rice_paddies"]) && isDefined(level.var_731c10af.paths) && isDefined(level.var_731c10af) && isDefined(level.var_28c22d88) && (array::contains(level.var_28c22d88, "rice_paddies_1") || array::contains(level.var_28c22d88, "dev_rice_paddies_1_all_districts"))) {
+  if(isDefined(level.var_731c10af.paths[#"rice_paddies"]) && isDefined(level.var_731c10af.paths) && isDefined(level.var_731c10af) && isDefined(level.skipto_current_objective) && (array::contains(level.skipto_current_objective, "rice_paddies_1") || array::contains(level.skipto_current_objective, "dev_rice_paddies_1_all_districts"))) {
     if(level.var_731c10af.paths[#"rice_paddies"].count == 0) {
       level flag::set("player_intro_anim_done");
       level flag::set("rice_paddies_v1_initial_wave");

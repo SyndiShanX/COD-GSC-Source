@@ -415,7 +415,7 @@ function_29e6dc49(var_be164210 = 1, var_6c9485fc = 15) {
   }
 }
 
-function_d36fb590(var_aa4f9213, var_6c9485fc = 15, var_b7e0faf0 = 1) {
+function_d36fb590(var_aa4f9213, var_6c9485fc = 15, n_fx_type = 1) {
   self endon(#"death");
 
   if(!zm_custom::function_901b751c(#"zmpowerupsactive")) {
@@ -439,7 +439,7 @@ function_d36fb590(var_aa4f9213, var_6c9485fc = 15, var_b7e0faf0 = 1) {
   mdl_reward = util::spawn_model(var_24a867e4, var_8b84b3ce, v_spawn_angles);
   mdl_reward playSound(#"zmb_spawn_powerup");
   mdl_reward playLoopSound(#"zmb_spawn_powerup_loop");
-  b_give_reward = self function_dcda5d87(mdl_reward, 1, 1, var_b7e0faf0);
+  b_give_reward = self function_dcda5d87(mdl_reward, 1, 1, n_fx_type);
 
   if(b_give_reward) {
     level thread zm_audio::sndannouncerplayvox(var_aa4f9213);
@@ -983,11 +983,11 @@ get_weapon_upgrade(weapon) {
   return zm_weapons::get_upgrade_weapon(weapon, 1);
 }
 
-function_dcda5d87(mdl_reward, b_rotate = 1, var_b9b24 = 1, var_b7e0faf0 = 1) {
+function_dcda5d87(mdl_reward, b_rotate = 1, var_b9b24 = 1, n_fx_type = 1) {
   self endon(#"death");
   self.var_7a281a7e = mdl_reward;
   mdl_reward thread pickup_timeout(self, "challenge_reward_timeout");
-  mdl_reward thread function_f7cdf2f7(var_b7e0faf0);
+  mdl_reward thread function_f7cdf2f7(n_fx_type);
 
   if(isDefined(b_rotate) && b_rotate) {
     mdl_reward thread function_51fd2597(var_b9b24);
@@ -1049,14 +1049,14 @@ function_57b8a4e9(e_pickup) {
   self delete();
 }
 
-function_f7cdf2f7(var_b7e0faf0 = 1) {
+function_f7cdf2f7(n_fx_type = 1) {
   self endon(#"death");
 
   if(!isDefined(self)) {
     return;
   }
 
-  self clientfield::set("powerup_fx", var_b7e0faf0);
+  self clientfield::set("powerup_fx", n_fx_type);
 }
 
 pickup_timeout(e_player, var_cbfbd48a, var_22b0e42b = 15) {
@@ -1261,7 +1261,7 @@ give_bgb(var_de21c97b) {
   }
 }
 
-function_445c5623(var_aa4f9213, var_8b84b3ce, var_b7e0faf0 = 1) {
+function_445c5623(var_aa4f9213, var_8b84b3ce, n_fx_type = 1) {
   if(!zm_custom::function_901b751c(#"zmpowerupsactive")) {
     return;
   }
@@ -1288,7 +1288,7 @@ function_445c5623(var_aa4f9213, var_8b84b3ce, var_b7e0faf0 = 1) {
   n_power = length(mdl_reward.origin - var_8b84b3ce);
   var_cef149e8 = mdl_reward zm_utility::fake_physicslaunch(var_8b84b3ce + (0, 0, 50), n_power);
   wait var_cef149e8;
-  e_player = level function_c45635c7(mdl_reward, 0, 1, var_b7e0faf0);
+  e_player = level function_c45635c7(mdl_reward, 0, 1, n_fx_type);
 
   if(isPlayer(e_player)) {
     level thread zm_audio::sndannouncerplayvox(var_aa4f9213);
@@ -1330,9 +1330,9 @@ function_ae58bd73(var_8b84b3ce) {
   }
 }
 
-function_c45635c7(mdl_reward, b_rotate, var_b9b24, var_b7e0faf0 = 1) {
+function_c45635c7(mdl_reward, b_rotate, var_b9b24, n_fx_type = 1) {
   mdl_reward thread pickup_timeout(undefined, "spew_reward_picked_up");
-  mdl_reward thread function_f7cdf2f7(var_b7e0faf0);
+  mdl_reward thread function_f7cdf2f7(n_fx_type);
 
   if(isDefined(b_rotate) && b_rotate) {
     mdl_reward thread function_51fd2597(var_b9b24);
@@ -1370,12 +1370,12 @@ function_c45635c7(mdl_reward, b_rotate, var_b9b24, var_b7e0faf0 = 1) {
   return e_collision;
 }
 
-function_cdb9fba6(mdl_reward, b_rotate, var_b9b24, var_b7e0faf0 = 1) {
+function_cdb9fba6(mdl_reward, b_rotate, var_b9b24, n_fx_type = 1) {
   self endon(#"death");
   mdl_reward thread pickup_timeout(self, "spew_reward_picked_up");
 
   if(isDefined(var_b9b24) && var_b9b24) {
-    mdl_reward thread function_f7cdf2f7(var_b7e0faf0);
+    mdl_reward thread function_f7cdf2f7(n_fx_type);
   }
 
   if(isDefined(b_rotate) && b_rotate) {

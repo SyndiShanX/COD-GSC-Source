@@ -18,9 +18,9 @@
 #using scripts\cp_common\util;
 #namespace hub_post_cuba;
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level thread namespace_31c67f6d::function_f2cd5fc0();
 
   if(level.var_b28c2c3a == "dev_post_cuba_park_survived") {
@@ -38,15 +38,15 @@ function main(var_d3440450, var_50cc0d4f) {
   level namespace_31c67f6d::function_6194f34a("post_cuba", 1);
   level namespace_31c67f6d::init_notetracks_postcuba();
   level thread function_ff7cb1bd();
-  level thread namespace_4ed3ce47::function_7edafa59(var_50cc0d4f + "_briefing");
+  level thread namespace_4ed3ce47::function_7edafa59(b_starting + "_briefing");
   setlightingstate(3);
   level thread namespace_31c67f6d::function_29279de1("post_cuba");
   level thread namespace_31c67f6d::function_b0558ba2("7");
   level.player thread clientfield::set_to_player("set_hub_fov", 7);
   level function_107195fb();
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 
   skipto::function_1c2dfc20("cp_nam_prisoner");
@@ -97,7 +97,7 @@ function function_276264f4(str_scene) {
   level thread namespace_4ed3ce47::allies_init();
   wait 3;
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 

@@ -901,8 +901,8 @@ weapon_spawn_think() {
 }
 
 should_upgrade_weapon(player) {
-  if(isDefined(level.var_f270168a)) {
-    return [[level.var_f270168a]]();
+  if(isDefined(level.wallbuy_should_upgrade_weapon_override)) {
+    return [[level.wallbuy_should_upgrade_weapon_override]]();
   }
 
   if(player bgb::is_enabled(#"zm_bgb_wall_power")) {

@@ -32,7 +32,7 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   if(level.var_731c10af.var_42659717 == 0) {
     next_obj = "path_end_1";
   }
@@ -52,10 +52,10 @@ function main(str_objective, var_50cc0d4f) {
   level thread cp_nam_prisoner::function_1f911b89(next_obj);
   flag = "caves";
   level flag::wait_till(flag + "_complete");
-  level skipto::function_4e3ab877(var_50cc0d4f, 0);
+  level skipto::function_4e3ab877(b_starting, 0);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   wait 1;
   caves1_room1_enemies1 = getEntArray("caves1_room1_enemies1", "targetname");
   array::thread_all(caves1_room1_enemies1, &namespace_d9b153b9::ent_cleanup);

@@ -381,7 +381,7 @@ clock_run(time_values) {
       case # "chicago":
         hour = curr_time[0] - 6;
         break;
-      case # "hash_2361ce1f22a20d88":
+      case # "new york":
         hour = curr_time[0] - 5;
         break;
       case # "halifax":

@@ -299,17 +299,17 @@ function function_90fab2ab() {
   level flag::set("flg_amk_explosive_barrel_info_stored");
 }
 
-function function_f6b6f426(var_d3440450) {
-  if(!level flag::get("flg_amk_explosive_barrels_respawned_" + var_d3440450)) {
+function function_f6b6f426(str_skipto) {
+  if(!level flag::get("flg_amk_explosive_barrels_respawned_" + str_skipto)) {
     level flag::wait_till("flg_amk_explosive_barrel_info_stored");
 
     foreach(s_barrel in level.var_c9de7735) {
-      if(s_barrel.script_objective === var_d3440450) {
+      if(s_barrel.script_objective === str_skipto) {
         s_barrel function_20d471e4();
       }
     }
 
-    level flag::set("flg_amk_explosive_barrels_respawned_" + var_d3440450);
+    level flag::set("flg_amk_explosive_barrels_respawned_" + str_skipto);
   }
 }
 
@@ -332,9 +332,9 @@ function function_20d471e4() {
   }
 }
 
-function function_cee29c87(var_d3440450) {
+function function_cee29c87(str_skipto) {
   foreach(s_barrel in level.var_c9de7735) {
-    if(s_barrel.script_objective === var_d3440450) {
+    if(s_barrel.script_objective === str_skipto) {
       if(isDefined(s_barrel.var_fc3729bf)) {
         s_barrel.var_fc3729bf delete();
       }

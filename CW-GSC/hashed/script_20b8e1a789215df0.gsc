@@ -70,7 +70,7 @@ function function_9de162de(str_objective) {
   getent("tgt_apt_front_door", "targetname").var_aff33935 = 0;
 }
 
-function function_b3837ddc(str_objective, var_50cc0d4f) {
+function function_b3837ddc(str_objective, b_starting) {
   ai_array = getaiteamarray("axis");
 
   foreach(ai in ai_array) {
@@ -86,8 +86,8 @@ function function_b3837ddc(str_objective, var_50cc0d4f) {
   level thread function_c0a7c66();
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
-    level thread namespace_afd0968c::function_36a9bec7(var_50cc0d4f);
+  if(b_starting) {
+    level thread namespace_afd0968c::function_36a9bec7(b_starting);
     level thread namespace_fba81a7f::function_3dfe810();
 
     level.player savegame::set_player_data(#"hash_58df9478d677bb38", 0);
@@ -1591,7 +1591,7 @@ function function_a3233bf5() {
   level notify(#"hash_6317f16a37432c3a");
 }
 
-function function_69c02b2b(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_69c02b2b(str_objective, b_starting, var_aa1a6455, player) {
   level flag::set("flag_see_kraus_shadow_failsafe");
   level flag::set("flag_kraus_umbrella_done");
 }
@@ -1619,10 +1619,10 @@ function function_2d6c81be(str_objective) {
   getent("tgt_apt_front_door", "targetname").var_aff33935 = 0;
 }
 
-function function_34ee80b8(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_34ee80b8(str_objective, b_starting) {
+  if(b_starting) {
     namespace_5ceacc03::music("14.0_find_briefcase");
-    level thread namespace_afd0968c::function_36a9bec7(var_50cc0d4f);
+    level thread namespace_afd0968c::function_36a9bec7(b_starting);
     level thread function_328da7d3();
     level thread namespace_fba81a7f::function_3dfe810();
   }
@@ -1633,7 +1633,7 @@ function function_34ee80b8(str_objective, var_50cc0d4f) {
   level util::delay(0.5, undefined, &darkroom_light_interact);
   level thread function_c8ac96b3();
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread function_af031d54();
   }
 
@@ -1997,7 +1997,7 @@ function function_d2de5ec5(scenedef) {
   }
 }
 
-function function_a3c49bc0(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_a3c49bc0(str_objective, b_starting, var_aa1a6455, player) {
   level thread function_6b7988be();
   level flag::set("apartment_2_done");
 }

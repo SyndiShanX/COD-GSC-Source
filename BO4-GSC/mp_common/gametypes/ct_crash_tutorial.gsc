@@ -738,7 +738,7 @@ function_9b2c973f() {
   self endon(#"hash_600461f8d5fa1837");
   level endon(#"squad_dead");
   a_bots = self ct_bots::function_71ec2b36();
-  var_c5a2f4b9 = a_bots.size;
+  n_squad_size = a_bots.size;
   var_c378327e = 0;
   var_2cf11630 = 0;
   n_start_health = 0;
@@ -1199,9 +1199,9 @@ function_83085be6(s_loc) {
 
 function_257306e5(s_loc) {
   self endon(#"death");
-  var_91aa9c27 = level.players[0] ct_bots::function_dde6edbd().size;
+  n_guys = level.players[0] ct_bots::function_dde6edbd().size;
 
-  if(!level flag::get("stop_reinforce") && var_91aa9c27 < level.var_3cdb14a8) {
+  if(!level flag::get("stop_reinforce") && n_guys < level.var_3cdb14a8) {
     self thread reinforce_enemy(s_loc);
   }
 
@@ -1687,15 +1687,15 @@ function_44b78b73() {
   self takeweapon(getweapon(#"ar_accurate_t8"));
   self giveweapon(getweapon(#"ar_fastfire_t8", "elo", "fastreload", "fastreload2", "quickdraw", "quickdraw2"));
   self giveweapon(getweapon(#"pistol_standard_t8"));
-  var_3ba4bf7d = self getweaponslistprimaries();
+  a_w_primaries = self getweaponslistprimaries();
 
-  for(i = 0; i < var_3ba4bf7d.size; i++) {
-    self giveweapon(var_3ba4bf7d[i]);
-    self givemaxammo(var_3ba4bf7d[i]);
+  for(i = 0; i < a_w_primaries.size; i++) {
+    self giveweapon(a_w_primaries[i]);
+    self givemaxammo(a_w_primaries[i]);
   }
 
-  self switchtoweapon(var_3ba4bf7d[0]);
-  self setspawnweapon(var_3ba4bf7d[0]);
+  self switchtoweapon(a_w_primaries[0]);
+  self setspawnweapon(a_w_primaries[0]);
 }
 
 ammo_watch(str_event) {
@@ -1706,7 +1706,7 @@ ammo_watch(str_event) {
 
   while(true) {
     var_75d65e7e = self getammocount(self.currentweapon);
-    self.var_1e0b475b = 0;
+    self.b_reloaded = 0;
     s_result = level.players[0] waittill(#"supplypod_placed");
 
     if(isDefined(s_result.pod)) {
@@ -1715,7 +1715,7 @@ ammo_watch(str_event) {
       wait randomfloatrange(1, 2.5);
       var_d9fa3a2c = self getammocount(self.currentweapon);
 
-      if(var_d9fa3a2c <= var_75d65e7e && !(isDefined(self.var_1e0b475b) && self.var_1e0b475b)) {
+      if(var_d9fa3a2c <= var_75d65e7e && !(isDefined(self.b_reloaded) && self.b_reloaded)) {
         if(isDefined(str_event)) {
           self.v_org = struct::get("s_cover_scorestreak_" + self.n_index, "script_noteworthy").origin;
           self.v_ang = struct::get("s_cover_scorestreak_" + self.n_index, "script_noteworthy").angles;
@@ -1732,7 +1732,7 @@ ammo_watch(str_event) {
 
         level.pod.in_use = 1;
 
-        while(!(isDefined(self.var_1e0b475b) && self.var_1e0b475b)) {
+        while(!(isDefined(self.b_reloaded) && self.b_reloaded)) {
           v_dir = anglesToForward(level.pod.angles);
           var_c657828f = level.pod.origin + v_dir * 100;
           queryresults = positionquery_source_navigation(level.pod.origin, 48, 156, 8, 32, 1);
@@ -1753,7 +1753,7 @@ ammo_watch(str_event) {
           self bot_action::reset();
           waitframe(1);
           self waittill(#"hash_69dbfbd660f8c53e");
-          self.var_1e0b475b = 1;
+          self.b_reloaded = 1;
           wait 1.5;
           self thread ct_utils::function_5b59f3b7(self.v_org, self.v_ang, 16);
           wait 1;
@@ -1776,7 +1776,7 @@ function_70fb1a55() {
 
   foreach(bot in a_bots) {
     bot thread ct_utils::function_5b59f3b7(self.v_org, self.angles, 32);
-    bot.var_1e0b475b = 0;
+    bot.b_reloaded = 0;
   }
 }
 
@@ -1969,9 +1969,9 @@ function_fa5d9e36() {
   self endon(#"death");
 
   while(true) {
-    var_3ba4bf7d = self getweaponslistprimaries();
+    a_w_primaries = self getweaponslistprimaries();
 
-    foreach(w_primary in var_3ba4bf7d) {
+    foreach(w_primary in a_w_primaries) {
       if(self getammocount(w_primary) < 10) {
         self givemaxammo(w_primary);
       }

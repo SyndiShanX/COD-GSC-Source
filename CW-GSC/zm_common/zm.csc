@@ -408,7 +408,7 @@ function force_update_player_clientfields(localclientnum) {
 function init_blocker_fx() {}
 
 function init_riser_fx() {
-  if(isDefined(level.var_7f632569) && level.var_7f632569) {}
+  if(isDefined(level.use_new_riser_water) && level.use_new_riser_water) {}
 
   level._effect[#"rise_burst"] = #"hash_355ef8d541b9f5c4";
   level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";

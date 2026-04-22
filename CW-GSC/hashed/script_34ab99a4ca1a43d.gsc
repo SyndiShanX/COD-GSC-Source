@@ -1178,10 +1178,10 @@ function private function_cb742921(s_result) {
     playsoundatposition(#"hash_54c5c342b84cf845", self.origin);
 
     if(isPlayer(s_result.attacker) && s_result.attacker isinvehicle()) {
-      var_80730518 = s_result.attacker getvehicleoccupied();
+      vh_player = s_result.attacker getvehicleoccupied();
 
-      if(isDefined(var_80730518)) {
-        var_80730518 thread function_df0dbb31();
+      if(isDefined(vh_player)) {
+        vh_player thread function_df0dbb31();
       }
     }
 

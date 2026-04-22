@@ -226,7 +226,7 @@ function propcontrolshud() {
   self.clonekey = addupperrighthudelem(#"hash_2f560292a2fb7eab");
   self.changepropkey = addupperrighthudelem(#"mp_ph_change", 0);
   self.currenthudy -= 20;
-  self.var_8e3b5c8c = addupperrighthudelem(#"hash_fb73fdc2aff963f");
+  self.hidepropkey = addupperrighthudelem(#"hash_fb73fdc2aff963f");
   self.matchslopekey = addupperrighthudelem(#"hash_7f59350f5f223501", undefined, undefined, #"hash_4c7fbb5c1ccd5107");
   self.lockpropkey = addupperrighthudelem(#"mp_ph_lock");
   self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, #"hash_39e61050ab8d325e");
@@ -258,7 +258,7 @@ function cleanuppropcontrolshud() {
   self.zoomkey = undefined;
   self.spectatekey = undefined;
   self.clonekey = undefined;
-  self.var_8e3b5c8c = undefined;
+  self.hidepropkey = undefined;
 }
 
 function updatetextongamepadchange() {
@@ -665,8 +665,8 @@ function set_pitch_roll_for_ground_normal(traceignore) {
   new_angles = vectortoangles(groundnormal);
   pitch = angleclamp180(new_angles[0] + 90);
   new_angles = (0, new_angles[1], 0);
-  var_c13d4c82 = anglesToForward(new_angles);
-  mod = vectordot(var_c13d4c82, ovr);
+  nvf = anglesToForward(new_angles);
+  mod = vectordot(nvf, ovr);
 
   if(mod < 0) {
     mod = -1;
@@ -674,7 +674,7 @@ function set_pitch_roll_for_ground_normal(traceignore) {
     mod = 1;
   }
 
-  dot = vectordot(var_c13d4c82, ovf);
+  dot = vectordot(nvf, ovf);
   newpitch = dot * pitch;
   newroll = (1 - abs(dot)) * pitch * mod;
   self.angles = (newpitch, self.angles[1], newroll);
@@ -1472,7 +1472,7 @@ function function_d08dcbaf(issolid) {
 
 function function_44a27dd6(issolid) {
   foreach(player in level.players) {
-    if(!player prop::function_84793f03() || !isalive(player)) {
+    if(!player prop::ishunter() || !isalive(player)) {
       continue;
     }
 
@@ -1528,7 +1528,7 @@ function propabilitykeysvisible(visible, override) {
     safesetalpha(self.abilitykey, alphavalue);
     safesetalpha(self.clonekey, alphavalue);
     safesetalpha(self.zoomkey, alphavalue);
-    safesetalpha(self.var_8e3b5c8c, alphavalue);
+    safesetalpha(self.hidepropkey, alphavalue);
 
     if(!is_true(level.nopropsspectate)) {
       safesetalpha(self.spectatekey, alphavalue);
@@ -1537,17 +1537,17 @@ function propabilitykeysvisible(visible, override) {
 }
 
 function function_2b14e8b1() {
-  if(!isDefined(self.var_b251eb4f)) {
-    self.var_b251eb4f = 1;
+  if(!isDefined(self.prophidden)) {
+    self.prophidden = 1;
   } else {
-    self.var_b251eb4f = !self.var_b251eb4f;
+    self.prophidden = !self.prophidden;
   }
 
-  if(self.var_b251eb4f) {
+  if(self.prophidden) {
     self clientfield::set_to_player("PROP.hide_prop", 1);
 
     if(prop::useprophudserver()) {
-      self.var_8e3b5c8c.label = #"hash_54ba1311175de71e";
+      self.hidepropkey.label = #"hash_54ba1311175de71e";
     }
 
     return;
@@ -1556,6 +1556,6 @@ function function_2b14e8b1() {
   self clientfield::set_to_player("PROP.hide_prop", 0);
 
   if(prop::useprophudserver()) {
-    self.var_8e3b5c8c.label = #"hash_fb73fdc2aff963f";
+    self.hidepropkey.label = #"hash_fb73fdc2aff963f";
   }
 }

@@ -103,7 +103,7 @@ function private function_43e771ee(died = 0) {
       }
 
       var_27047881 = int(timeused / 1000);
-      attachments = bb::function_285f8efd(self.var_3dc66299.currentweapon);
+      attachments = bb::getattachmentsforweapon(self.var_3dc66299.currentweapon);
       reticle = hash(self getweaponoptic(self.var_3dc66299.currentweapon));
       var_178db383 = spawnStruct();
       var_178db383.shots = self.var_3dc66299.shots;

@@ -63,15 +63,15 @@ init() {
   level.mdl_ring_middle linkto(level.mdl_ring_middle.e_linkto);
   level.mdl_ring_inner.e_linkto = getent("ring_inner_linkto", "targetname");
   level.mdl_ring_inner linkto(level.mdl_ring_inner.e_linkto);
-  level.mdl_ring_outer.var_846c254a = getent(level.mdl_ring_outer.target, "targetname");
-  level.mdl_ring_middle.var_846c254a = getent(level.mdl_ring_middle.target, "targetname");
-  level.mdl_ring_inner.var_846c254a = getent(level.mdl_ring_inner.target, "targetname");
-  level.mdl_ring_outer.var_846c254a linkto(level.mdl_ring_outer);
-  level.mdl_ring_middle.var_846c254a linkto(level.mdl_ring_middle);
-  level.mdl_ring_inner.var_846c254a linkto(level.mdl_ring_inner);
-  level.mdl_ring_outer.v_start = level.mdl_ring_outer.var_846c254a.origin;
-  level.mdl_ring_middle.v_start = level.mdl_ring_middle.var_846c254a.origin;
-  level.mdl_ring_inner.v_start = level.mdl_ring_inner.var_846c254a.origin;
+  level.mdl_ring_outer.e_pos = getent(level.mdl_ring_outer.target, "targetname");
+  level.mdl_ring_middle.e_pos = getent(level.mdl_ring_middle.target, "targetname");
+  level.mdl_ring_inner.e_pos = getent(level.mdl_ring_inner.target, "targetname");
+  level.mdl_ring_outer.e_pos linkto(level.mdl_ring_outer);
+  level.mdl_ring_middle.e_pos linkto(level.mdl_ring_middle);
+  level.mdl_ring_inner.e_pos linkto(level.mdl_ring_inner);
+  level.mdl_ring_outer.v_start = level.mdl_ring_outer.e_pos.origin;
+  level.mdl_ring_middle.v_start = level.mdl_ring_middle.e_pos.origin;
+  level.mdl_ring_inner.v_start = level.mdl_ring_inner.e_pos.origin;
   mdl_stone = getent("stone_obs", "targetname");
   mdl_stone ghost();
   level thread function_5f259315();
@@ -474,8 +474,8 @@ ring_reset() {
   level.mdl_ring_outer.e_linkto waittilltimeout(2, #"rotatedone");
 }
 
-ring_rotate(str_pos, s_ring, var_50cc0d4f = 1) {
-  if(var_50cc0d4f) {
+ring_rotate(str_pos, s_ring, b_starting = 1) {
+  if(b_starting) {
     n_move_time = 0.1;
   } else {
     n_move_time = 2;
@@ -486,14 +486,14 @@ ring_rotate(str_pos, s_ring, var_50cc0d4f = 1) {
     n_rot = 30;
     var_6c4c2561 = -30;
 
-    if(!var_50cc0d4f) {
+    if(!b_starting) {
       level thread scene::play(s_ring.script_noteworthy + "_control", "wheel_right");
     }
   } else {
     n_rot = -30;
     var_6c4c2561 = 30;
 
-    if(!var_50cc0d4f) {
+    if(!b_starting) {
       level thread scene::play(s_ring.script_noteworthy + "_control", "wheel_left");
     }
   }
@@ -520,7 +520,7 @@ ring_rotate(str_pos, s_ring, var_50cc0d4f = 1) {
       break;
   }
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level.mdl_ring_inner.e_linkto.var_5287d229 = level.mdl_ring_inner.e_linkto.angles;
     level.mdl_ring_middle.e_linkto.var_5287d229 = level.mdl_ring_middle.e_linkto.angles;
     level.mdl_ring_outer.e_linkto.var_5287d229 = level.mdl_ring_outer.e_linkto.angles;
@@ -622,13 +622,13 @@ function_ea49787e(a_ents) {
 
 function_f856cc2() {
   level.mdl_ring_outer.e_linkto delete();
-  level.mdl_ring_outer.var_846c254a delete();
+  level.mdl_ring_outer.e_pos delete();
   level.mdl_ring_outer delete();
   level.mdl_ring_middle.e_linkto delete();
-  level.mdl_ring_middle.var_846c254a delete();
+  level.mdl_ring_middle.e_pos delete();
   level.mdl_ring_middle delete();
   level.mdl_ring_inner.e_linkto delete();
-  level.mdl_ring_inner.var_846c254a delete();
+  level.mdl_ring_inner.e_pos delete();
   level.mdl_ring_inner delete();
   level.e_blue delete();
   level.e_red delete();
@@ -960,7 +960,7 @@ function_8ced5d5b() {
   for(i = 0; i < 3; i++) {
     level.var_d181080c[i].origin = level.var_d181080c[i].s_loc.origin;
     level.var_d181080c[i].angles = level.var_d181080c[i].s_loc.angles;
-    level.var_d181080c[i].var_19d827d = var_db303d4f[i];
+    level.var_d181080c[i].n_hints = var_db303d4f[i];
     level.var_d181080c[i] thread function_7cc34fef();
   }
 }
@@ -970,7 +970,7 @@ function_7cc34fef() {
   self.a_s_locs = struct::get_array(self.s_loc.script_noteworthy);
   self.a_s_locs = array::randomize(self.a_s_locs);
 
-  switch (self.var_19d827d) {
+  switch (self.n_hints) {
     case 7:
       self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
       self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_04_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);

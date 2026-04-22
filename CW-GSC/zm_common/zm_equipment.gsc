@@ -249,7 +249,7 @@ function register(equipment_name, hint, howto_hint, hint_icon, equipmentvo) {
   struct.notify_strings.pickup = equipment.name + "_pickup";
   level.zombie_equipment[equipment] = struct;
 
-  level thread function_1d34b98d(equipment);
+  level thread add_devgui_equipment(equipment);
 }
 
 function register_slot_watcher_override(str_equipment, func_slot_watcher_override) {
@@ -941,7 +941,7 @@ function function_4f51b6ea(weapon, str_means_of_death) {
   return false;
 }
 
-function function_e418901e() {
+function run_equipment_devgui() {
   setDvar(#"give_equipment", "<dev string:x174>");
   waitframe(1);
   level flag::wait_till("<dev string:x178>");
@@ -971,7 +971,7 @@ function function_e418901e() {
   }
 }
 
-function function_1d34b98d(equipment) {
+function add_devgui_equipment(equipment) {
   waitframe(1);
   level flag::wait_till("<dev string:x178>");
   waitframe(1);

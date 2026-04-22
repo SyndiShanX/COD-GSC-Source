@@ -2283,16 +2283,16 @@ function_3c71e07d() {
       }
 
       a_ai_catalysts = getaiarchetypearray(#"catalyst");
-      var_e7f5b3e0 = 1;
+      b_can_spawn = 1;
 
       foreach(ai_catalyst in a_ai_catalysts) {
         if(isalive(ai_catalyst) && ai_catalyst.subarchetype == #"catalyst_electric") {
-          var_e7f5b3e0 = 0;
+          b_can_spawn = 0;
           break;
         }
       }
 
-      if(var_e7f5b3e0 && !zm_transform::function_abf1dcb4(#"catalyst_electric")) {
+      if(b_can_spawn && !zm_transform::function_abf1dcb4(#"catalyst_electric")) {
         a_ai_zombies = getaiarchetypearray(#"zombie");
         a_ai_zombies = array::randomize(a_ai_zombies);
 
@@ -2423,8 +2423,8 @@ init_light() {
   s_light = spawnStruct();
   level.var_5299790a = s_light;
   s_lid = struct::get(#"hash_629b7a21e0492c7f");
-  s_light.var_7b57e2cc = util::spawn_model(s_lid.model, s_lid.origin, s_lid.angles);
-  s_light.var_7b57e2cc setscale(0.5);
+  s_light.mdl_lid = util::spawn_model(s_lid.model, s_lid.origin, s_lid.angles);
+  s_light.mdl_lid setscale(0.5);
   s_lid struct::delete();
   level scene::add_scene_func(#"p8_fxanim_zm_red_ankh_chaos_scene", &function_9d73ee19, "init");
   level thread scene::init(#"p8_fxanim_zm_red_ankh_chaos_scene");
@@ -2505,7 +2505,7 @@ function_11d400f9() {
   mdl_fx clientfield::set("" + # "hash_6d76e4b7a31537af", 0);
   level clientfield::increment("" + # "hash_4d77ba61cd7f3eb7");
   s_light = level.var_5299790a;
-  s_light.var_7b57e2cc delete();
+  s_light.mdl_lid delete();
 }
 
 function_38548080() {
@@ -2889,10 +2889,10 @@ function_e5352d71() {
   s_light = level.var_5299790a;
   var_8d5cca6b = s_light.var_8d5cca6b;
   n_runes = var_8d5cca6b.size;
-  var_e41dced6 = 60 / (n_runes + 1);
+  n_increments = 60 / (n_runes + 1);
 
-  foreach(var_740e1e0e in var_8d5cca6b) {
-    n_time_left = var_e41dced6;
+  foreach(mdl_rune in var_8d5cca6b) {
+    n_time_left = n_increments;
 
     while(true) {
       n_start_time = gettime();
@@ -2914,7 +2914,7 @@ function_e5352d71() {
       break;
     }
 
-    var_740e1e0e clientfield::set("" + # "hash_125706eb7b363924", 1);
+    mdl_rune clientfield::set("" + # "hash_125706eb7b363924", 1);
   }
 }
 
@@ -5427,10 +5427,10 @@ function_b224d9eb(s_params) {
     return;
   }
 
-  var_2ed6f142 = self getweaponmuzzlepoint();
+  v_view_pos = self getweaponmuzzlepoint();
   v_forward = self getweaponforwarddir();
-  v_end = var_2ed6f142 + v_forward * 10000;
-  a_trace = bulletTrace(var_2ed6f142, v_end, 0, self);
+  v_end = v_view_pos + v_forward * 10000;
+  a_trace = bulletTrace(v_view_pos, v_end, 0, self);
 
   if(isDefined(a_trace)) {
     mdl_hit = a_trace[#"entity"];
@@ -6220,12 +6220,12 @@ cleanse_setup(b_skipped) {
   level thread function_f2fa1520();
   level thread function_482dc5ac();
   s_rune = struct::get(#"hash_7a21f9a230f88631");
-  var_740e1e0e = util::spawn_model(s_rune.model, s_rune.origin, s_rune.angles);
+  mdl_rune = util::spawn_model(s_rune.model, s_rune.origin, s_rune.angles);
   var_db8ec3ee = util::spawn_model(#"tag_origin", s_rune.origin);
   var_db8ec3ee clientfield::set("" + # "hash_297c800c6e18f746", 1);
   var_db8ec3ee playLoopSound(#"hash_6f30c390503d064f");
   s_cleanse = level.var_29e8cce2;
-  s_cleanse.var_740e1e0e = var_740e1e0e;
+  s_cleanse.mdl_rune = mdl_rune;
   s_cleanse.var_db8ec3ee = var_db8ec3ee;
   s_cleanse.var_8121ef9f = level.var_b3b0d9d7;
   level.var_b3b0d9d7 = &function_cecc7973;
@@ -6234,10 +6234,10 @@ cleanse_setup(b_skipped) {
 
 cleanse_cleanup(b_skipped, var_19e802fa) {
   s_cleanse = level.var_29e8cce2;
-  var_740e1e0e = s_cleanse.var_740e1e0e;
+  mdl_rune = s_cleanse.mdl_rune;
 
-  if(isDefined(var_740e1e0e)) {
-    var_740e1e0e delete();
+  if(isDefined(mdl_rune)) {
+    mdl_rune delete();
   }
 
   var_db8ec3ee = s_cleanse.var_db8ec3ee;
@@ -6384,10 +6384,10 @@ function_cecc7973(e_grenade, e_player) {
 
   if(isDefined(e_player)) {
     s_cleanse = level.var_29e8cce2;
-    var_740e1e0e = s_cleanse.var_740e1e0e;
+    mdl_rune = s_cleanse.mdl_rune;
 
-    if(isDefined(s_cleanse) && isDefined(var_740e1e0e)) {
-      n_dist = distance2dsquared(e_player.origin, var_740e1e0e.origin);
+    if(isDefined(s_cleanse) && isDefined(mdl_rune)) {
+      n_dist = distance2dsquared(e_player.origin, mdl_rune.origin);
 
       if(n_dist <= 64 * 64) {
         s_cleanse.var_e935dae1 = e_player;

@@ -112,11 +112,11 @@ function_37d1ee2e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self notify(#"hash_5531647ca0352039");
+  self notify(#"stop_arc_fx");
 }
 
 function_e9aa9e80(localclientnum) {
-  self endon(#"death", #"hash_5531647ca0352039");
+  self endon(#"death", #"stop_arc_fx");
 
   while(!isDefined(level.var_76234ae5[localclientnum])) {
     waitframe(1);
@@ -155,7 +155,7 @@ function_e9aa9e80(localclientnum) {
 }
 
 function_954b9602(localclientnum) {
-  self waittill(#"death", #"hash_5531647ca0352039");
+  self waittill(#"death", #"stop_arc_fx");
 
   if(isDefined(self.fx_arc)) {
     stopfx(localclientnum, self.fx_arc);

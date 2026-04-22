@@ -65,57 +65,57 @@ enable_brutus() {
 
   level.var_57d61da9 = struct::get_array("brutus_location", "script_noteworthy");
   level.var_361ec6d1 = 0;
-  level.var_bedcc65f = 500;
+  level.brutus_health = 500;
   level.brutus_round_count = 0;
   level.var_152c591 = 1;
   level.brutus_last_spawn_round = 0;
   level.brutus_count = 0;
   level.brutus_max_count = 4;
   level.brutus_damage_percent = 0.1;
-  level.var_8e570217 = 500;
-  level.var_b0b1d70a = 250;
+  level.brutus_team_points_for_death = 500;
+  level.brutus_player_points_for_death = 250;
   level.brutus_points_for_helmet = 250;
-  level.var_cc879537 = 100;
-  level.var_e56a97ab = 100;
-  level.var_5ade4e2f = 10;
-  level.var_49efbc6d = 200;
-  level.var_deee7afe = 4;
-  level.var_66ff42da = 7;
+  level.brutus_alarm_chance = 100;
+  level.brutus_min_alarm_chance = 100;
+  level.brutus_alarm_chance_increment = 10;
+  level.brutus_max_alarm_chance = 200;
+  level.brutus_min_round_fq = 4;
+  level.brutus_max_round_fq = 7;
 
   if(zm_utility::is_standard()) {
-    level.var_deee7afe = 8;
-    level.var_66ff42da = 12;
+    level.brutus_min_round_fq = 8;
+    level.brutus_max_round_fq = 12;
   }
 
-  level.var_55b6e02f = 1;
-  level.var_549a1590 = 120;
+  level.brutus_zombie_per_round = 1;
+  level.brutus_players_in_zone_spawn_point_cap = 120;
   level.var_a33d6e46 = 0;
-  level.var_87dac1c6 = 4;
-  level.var_391991e0 = 600;
-  level.var_8d201cbe = 4;
+  level.brutus_min_pulls_between_box_spawns = 4;
+  level.brutus_explosive_damage_increase = 600;
+  level.brutus_failed_paths_to_teleport = 4;
   level.brutus_do_prologue = 1;
-  level.var_dc8fa5e1 = 10;
-  level.var_63a02bd7 = 60;
-  level.var_9b5c03bf = 1;
-  level.var_4d04bf1 = 0;
+  level.brutus_min_spawn_delay = 10;
+  level.brutus_max_spawn_delay = 60;
+  level.brutus_respawn_after_despawn = 1;
+  level.brutus_in_grief = 0;
 
   if(level.scr_zm_ui_gametype == "zgrief") {
-    level.var_4d04bf1 = 1;
+    level.brutus_in_grief = 1;
   }
 
-  level.var_ecaf813c = 48;
+  level.brutus_custom_goalradius = 48;
   level thread brutus_spawning_logic();
 
-  if(!level.var_4d04bf1) {
+  if(!level.brutus_in_grief) {
     level.custom_perk_validation = &check_perk_machine_valid;
-    level.var_1c4fa781 = &check_craftable_table_valid;
+    level.custom_craftable_validation = &check_craftable_table_valid;
   }
 }
 
 brutus_prespawn() {}
 
 brutus_spawning_logic() {
-  if(level.var_4d04bf1 || isDefined(level.var_153e9058) && level.var_153e9058 || isDefined(level.var_a2831281) && level.var_a2831281) {
+  if(level.brutus_in_grief || isDefined(level.var_153e9058) && level.var_153e9058 || isDefined(level.var_a2831281) && level.var_a2831281) {
     return;
   }
 
@@ -192,12 +192,12 @@ zombie_setup_attack_properties() {
   self.disableexits = 1;
 }
 
-brutus_spawn(starting_health, has_helmet, var_21b0fc34, var_7f2b0069, zone_name) {
+brutus_spawn(starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zone_name) {
   self endon(#"death");
   level.var_a33d6e46 = 0;
   self.has_helmet = isDefined(has_helmet) ? has_helmet : 1;
-  self.var_21b0fc34 = isDefined(var_21b0fc34) ? var_21b0fc34 : 0;
-  self.var_7f2b0069 = isDefined(var_7f2b0069) ? var_7f2b0069 : 0;
+  self.helmet_hits = isDefined(helmet_hits) ? helmet_hits : 0;
+  self.explosive_dmg_taken = isDefined(explosive_dmg_taken) ? explosive_dmg_taken : 0;
 
   if(isDefined(starting_health)) {
     self.starting_health = starting_health;
@@ -210,7 +210,7 @@ brutus_spawn(starting_health, has_helmet, var_21b0fc34, var_7f2b0069, zone_name)
   self endon(#"death");
   level endon(#"intermission");
   self.animname = "brutus_zombie";
-  self.var_9d6e31d4 = "brutus";
+  self.audio_type = "brutus";
   self.has_legs = 1;
   self.is_brutus = 1;
 
@@ -219,8 +219,8 @@ brutus_spawn(starting_health, has_helmet, var_21b0fc34, var_7f2b0069, zone_name)
   }
 
   self.var_db8b3627 = 0;
-  self.var_1fdb8f4e = 1000;
-  self.var_41455ab0 = 0;
+  self.custom_item_dmg = 1000;
+  self.brutus_lockdown_state = 0;
   self setphysparams(20, 0, 60);
   self.zombie_init_done = 1;
   self notify(#"zombie_init_done");
@@ -338,9 +338,9 @@ get_best_brutus_spawn_pos(zone_name) {
   return undefined;
 }
 
-get_brutus_spawn_pos_val(var_ed72e56b) {
+get_brutus_spawn_pos_val(brutus_pos) {
   n_score = 0;
-  zone_name = var_ed72e56b.zone_name;
+  zone_name = brutus_pos.zone_name;
 
   if(!zm_zonemgr::zone_is_enabled(zone_name)) {
     return 0;
@@ -354,14 +354,14 @@ get_brutus_spawn_pos_val(var_ed72e56b) {
   n_score_addition = 1;
 
   for(i = 0; i < a_players_in_zone.size; i++) {
-    if(self findpath(var_ed72e56b.origin, a_players_in_zone[i].origin, 0, 0)) {
-      n_dist = distance2d(var_ed72e56b.origin, a_players_in_zone[i].origin);
-      n_score_addition += math::linear_map(n_dist, 128, 4016, 0, level.var_549a1590);
+    if(self findpath(brutus_pos.origin, a_players_in_zone[i].origin, 0, 0)) {
+      n_dist = distance2d(brutus_pos.origin, a_players_in_zone[i].origin);
+      n_score_addition += math::linear_map(n_dist, 128, 4016, 0, level.brutus_players_in_zone_spawn_point_cap);
     }
   }
 
-  if(n_score_addition > level.var_549a1590) {
-    n_score_addition = level.var_549a1590;
+  if(n_score_addition > level.brutus_players_in_zone_spawn_point_cap) {
+    n_score_addition = level.brutus_players_in_zone_spawn_point_cap;
   }
 
   n_score += n_score_addition;
@@ -384,13 +384,13 @@ function_6340fe2() {
 }
 
 enable_brutus_rounds() {
-  level.var_fa6f7e27 = 1;
+  level.brutus_rounds_enabled = 1;
   level flag::init("brutus_round");
   level thread brutus_round_tracker();
 }
 
 brutus_round_tracker() {
-  level.var_33be9958 = level.round_number + randomintrange(level.var_deee7afe, level.var_66ff42da);
+  level.next_brutus_round = level.round_number + randomintrange(level.brutus_min_round_fq, level.brutus_max_round_fq);
   old_spawn_func = level.round_spawn_func;
   old_wait_func = level.round_wait_func;
 
@@ -398,13 +398,13 @@ brutus_round_tracker() {
     level waittill(#"between_round_over");
     players = getplayers();
 
-    if(isDefined(level.next_dog_round) && level.next_dog_round == level.var_33be9958) {
-      level.var_33be9958 += 2;
+    if(isDefined(level.next_dog_round) && level.next_dog_round == level.next_brutus_round) {
+      level.next_brutus_round += 2;
     }
 
     if(level.round_number < 6 && isDefined(level.is_forever_solo_game) && level.is_forever_solo_game && !(isDefined(level.var_cab8d080) && level.var_cab8d080)) {
-      if(level.var_33be9958 < 6) {
-        level.var_33be9958 = 6;
+      if(level.next_brutus_round < 6) {
+        level.next_brutus_round = 6;
       }
 
       continue;
@@ -414,16 +414,16 @@ brutus_round_tracker() {
       continue;
     }
 
-    if(level.var_33be9958 <= level.round_number) {
+    if(level.next_brutus_round <= level.round_number) {
       if(isDefined(level.var_cab8d080) && level.var_cab8d080) {
         level.var_cab8d080 = undefined;
       } else {
-        wait randomfloatrange(level.var_dc8fa5e1, level.var_63a02bd7);
+        wait randomfloatrange(level.brutus_min_spawn_delay, level.brutus_max_spawn_delay);
       }
 
       if(attempt_brutus_spawn(function_7265bed3())) {
-        level.var_6e1b47ab = 1;
-        level.var_33be9958 = level.round_number + randomintrange(level.var_deee7afe, level.var_66ff42da);
+        level.music_round_override = 1;
+        level.next_brutus_round = level.round_number + randomintrange(level.brutus_min_round_fq, level.brutus_max_round_fq);
       }
     }
   }
@@ -431,14 +431,14 @@ brutus_round_tracker() {
 
 function_7265bed3() {
   if(level.round_number >= 30) {
-    level.var_55b6e02f = 4;
+    level.brutus_zombie_per_round = 4;
   } else if(level.round_number >= 25) {
-    level.var_55b6e02f = 3;
+    level.brutus_zombie_per_round = 3;
   } else if(level.round_number >= 17) {
-    level.var_55b6e02f = 2;
+    level.brutus_zombie_per_round = 2;
   }
 
-  return level.var_55b6e02f;
+  return level.brutus_zombie_per_round;
 }
 
 brutus_round_spawn_failsafe_respawn() {
@@ -451,8 +451,8 @@ brutus_round_spawn_failsafe_respawn() {
   }
 }
 
-attempt_brutus_spawn(var_d8206b1d, str_zone_name, var_dde9ff11 = 0, var_68ffecfb = 0) {
-  if(level.brutus_count + var_d8206b1d > level.brutus_max_count && !(isDefined(level.var_a2831281) && level.var_a2831281) || isDefined(level.var_153e9058) && level.var_153e9058) {
+attempt_brutus_spawn(n_spawn_num, str_zone_name, var_dde9ff11 = 0, var_68ffecfb = 0) {
+  if(level.brutus_count + n_spawn_num > level.brutus_max_count && !(isDefined(level.var_a2831281) && level.var_a2831281) || isDefined(level.var_153e9058) && level.var_153e9058) {
     iprintln("<dev string:x82>");
 
     level thread function_5e4d2f31();
@@ -460,7 +460,7 @@ attempt_brutus_spawn(var_d8206b1d, str_zone_name, var_dde9ff11 = 0, var_68ffecfb
   }
 
   level notify(#"spawn_brutus", {
-    #n_spawn: var_d8206b1d, #str_zone_name: str_zone_name, #var_dde9ff11: var_dde9ff11, #var_68ffecfb: var_68ffecfb
+    #n_spawn: n_spawn_num, #str_zone_name: str_zone_name, #var_dde9ff11: var_dde9ff11, #var_68ffecfb: var_68ffecfb
   });
   return true;
 }
@@ -474,7 +474,7 @@ brutus_death() {
   self endon(#"brutus_cleanup");
   self thread brutus_cleanup();
 
-  if(level.var_4d04bf1) {
+  if(level.brutus_in_grief) {
     self thread brutus_cleanup_at_end_of_grief_round();
   }
 
@@ -489,13 +489,13 @@ brutus_death() {
   level.brutus_count--;
 
   if(zombie_utility::get_current_zombie_count() == 0 && level.zombie_total == 0) {
-    level.var_5726b2fa = self.origin;
+    level.last_brutus_origin = self.origin;
     level notify(#"last_brutus_down");
 
-    if(isDefined(self.var_37aafb5) && self.var_37aafb5) {
-      level.var_33be9958 = level.round_number + 1;
+    if(isDefined(self.brutus_round_spawn_failsafe) && self.brutus_round_spawn_failsafe) {
+      level.next_brutus_round = level.round_number + 1;
     }
-  } else if(isDefined(self.var_37aafb5) && self.var_37aafb5) {
+  } else if(isDefined(self.brutus_round_spawn_failsafe) && self.brutus_round_spawn_failsafe) {
     level.zombie_total++;
     level.zombie_total_subtract++;
     level thread brutus_round_spawn_failsafe_respawn();
@@ -521,7 +521,7 @@ brutus_death() {
   }
 
   if(!(isDefined(self.var_db8b3627) && self.var_db8b3627)) {
-    if(!(isDefined(level.var_7fd2edf6) && level.var_7fd2edf6)) {
+    if(!(isDefined(level.global_brutus_powerup_prevention) && level.global_brutus_powerup_prevention)) {
       if(level.powerup_drop_count >= level.zombie_vars[#"zombie_powerup_drop_max_per_round"]) {
         level.powerup_drop_count = level.zombie_vars[#"zombie_powerup_drop_max_per_round"] - 1;
       }
@@ -534,14 +534,14 @@ brutus_death() {
   if(isPlayer(self.attacker)) {
     event = "death";
 
-    if(level.var_4d04bf1) {
-      team_points = level.var_8e570217;
-      player_points = level.var_b0b1d70a;
+    if(level.brutus_in_grief) {
+      team_points = level.brutus_team_points_for_death;
+      player_points = level.brutus_player_points_for_death;
       a_players = getplayers(self.team);
     } else {
       multiplier = zm_score::get_points_multiplier(self.attacker);
-      team_points = multiplier * zm_utility::round_up_score(level.var_8e570217, 5);
-      player_points = multiplier * zm_utility::round_up_score(level.var_b0b1d70a, 5);
+      team_points = multiplier * zm_utility::round_up_score(level.brutus_team_points_for_death, 5);
+      player_points = multiplier * zm_utility::round_up_score(level.brutus_player_points_for_death, 5);
       a_players = getplayers();
     }
 
@@ -633,9 +633,9 @@ brutus_cleanup() {
   self waittill(#"brutus_cleanup");
   level.var_361ec6d1 = 0;
 
-  if(isDefined(self.var_cc9c93ed)) {
-    self.var_cc9c93ed delete();
-    self.var_cc9c93ed = undefined;
+  if(isDefined(self.sndbrutusmusicent)) {
+    self.sndbrutusmusicent delete();
+    self.sndbrutusmusicent = undefined;
   }
 
   a_ai_brutus = getaiarchetypearray(#"brutus");
@@ -660,36 +660,36 @@ wait_on_box_alarm() {
     self.zbarrier waittill(#"randomization_done");
     level.var_a33d6e46++;
 
-    if(level.var_4d04bf1) {
-      level.var_87dac1c6 = randomintrange(7, 10);
+    if(level.brutus_in_grief) {
+      level.brutus_min_pulls_between_box_spawns = randomintrange(7, 10);
     }
 
-    if(level.var_a33d6e46 >= level.var_87dac1c6) {
+    if(level.var_a33d6e46 >= level.brutus_min_pulls_between_box_spawns) {
       rand = randomint(500);
 
-      if(level.var_4d04bf1) {
+      if(level.brutus_in_grief) {
         attempt_brutus_spawn(1);
         continue;
       }
 
-      if(rand <= level.var_cc879537) {
+      if(rand <= level.brutus_alarm_chance) {
         if(level flag::get("moving_chest_now")) {
           continue;
         }
 
         if(attempt_brutus_spawn(1)) {
-          if(level.var_33be9958 == level.round_number + 1) {
-            level.var_33be9958++;
+          if(level.next_brutus_round == level.round_number + 1) {
+            level.next_brutus_round++;
           }
 
-          level.var_cc879537 = level.var_e56a97ab;
+          level.brutus_alarm_chance = level.brutus_min_alarm_chance;
         }
 
         continue;
       }
 
-      if(level.var_cc879537 < level.var_49efbc6d) {
-        level.var_cc879537 += level.var_5ade4e2f;
+      if(level.brutus_alarm_chance < level.brutus_max_alarm_chance) {
+        level.brutus_alarm_chance += level.brutus_alarm_chance_increment;
       }
     }
   }
@@ -697,11 +697,11 @@ wait_on_box_alarm() {
 
 check_perk_machine_valid(player) {
   if(isDefined(self.is_locked) && self.is_locked) {
-    if(player zm_score::can_player_purchase(self.var_9c6a6ebb)) {
-      player zm_score::minus_to_player_score(self.var_9c6a6ebb);
+    if(player zm_score::can_player_purchase(self.locked_cost)) {
+      player zm_score::minus_to_player_score(self.locked_cost);
       self.is_locked = 0;
-      self.var_9c6a6ebb = undefined;
-      self.var_58a5f973 delete();
+      self.locked_cost = undefined;
+      self.lock_fx delete();
       self zm_perks::reset_vending_hint_string();
     }
 
@@ -713,20 +713,20 @@ check_perk_machine_valid(player) {
 
 check_craftable_table_valid(player) {
   if(!isDefined(self.stub) && isDefined(self.is_locked) && self.is_locked) {
-    if(player zm_score::can_player_purchase(self.var_9c6a6ebb)) {
-      player zm_score::minus_to_player_score(self.var_9c6a6ebb);
+    if(player zm_score::can_player_purchase(self.locked_cost)) {
+      player zm_score::minus_to_player_score(self.locked_cost);
       self.is_locked = 0;
-      self.var_9c6a6ebb = undefined;
-      self.var_58a5f973 delete();
+      self.locked_cost = undefined;
+      self.lock_fx delete();
     }
 
     return false;
   } else if(isDefined(self.stub) && isDefined(self.stub.is_locked) && self.stub.is_locked) {
-    if(player zm_score::can_player_purchase(self.stub.var_9c6a6ebb)) {
-      player zm_score::minus_to_player_score(self.stub.var_9c6a6ebb);
+    if(player zm_score::can_player_purchase(self.stub.locked_cost)) {
+      player zm_score::minus_to_player_score(self.stub.locked_cost);
       self.stub.is_locked = 0;
-      self.stub.var_9c6a6ebb = undefined;
-      self.stub.var_58a5f973 delete();
+      self.stub.locked_cost = undefined;
+      self.stub.lock_fx delete();
       self sethintstring(self.stub.hint_string);
     }
 
@@ -738,10 +738,10 @@ check_craftable_table_valid(player) {
 
 brutus_check_zone() {
   self endon(#"death", #"brutus_cleanup");
-  self.var_8d6b1f59 = 0;
+  self.in_player_zone = 0;
 
   while(true) {
-    self.var_8d6b1f59 = 0;
+    self.in_player_zone = 0;
 
     foreach(zone in level.zones) {
       if(!isDefined(zone.volumes) || zone.volumes.size == 0) {
@@ -752,7 +752,7 @@ brutus_check_zone() {
 
       if(self zm_zonemgr::entity_in_zone(zone_name)) {
         if(isDefined(zone.is_occupied) && zone.is_occupied) {
-          self.var_8d6b1f59 = 1;
+          self.in_player_zone = 1;
           break;
         }
       }
@@ -811,13 +811,13 @@ brutus_lockdown_client_effects(delay) {
     wait delay;
   }
 
-  if(self.var_41455ab0) {
-    self.var_41455ab0 = 0;
+  if(self.brutus_lockdown_state) {
+    self.brutus_lockdown_state = 0;
     self clientfield::set("brutus_lock_down", 0);
     return;
   }
 
-  self.var_41455ab0 = 1;
+  self.brutus_lockdown_state = 1;
   self clientfield::set("brutus_lock_down", 1);
 }
 
@@ -863,7 +863,7 @@ function_ba497d2d(e_brutus) {
 
   if(isDefined(e_brutus) && isalive(e_brutus)) {
     var_1a8c05ae = {
-      #n_health: e_brutus.health, #var_37d3fab9: e_brutus.has_helmet, #var_1e1ce722: e_brutus.var_21b0fc34, #var_72275733: e_brutus.var_7f2b0069
+      #n_health: e_brutus.health, #var_37d3fab9: e_brutus.has_helmet, #var_1e1ce722: e_brutus.helmet_hits, #var_72275733: e_brutus.explosive_dmg_taken
     };
 
     if(!isDefined(level.var_f158b05c)) {
@@ -916,8 +916,8 @@ function_2e0d129b(cmd) {
     case # "hash_4d20b9f9a8da7a33":
       level.var_cab8d080 = 1;
 
-      if(isDefined(level.var_33be9958)) {
-        zm_devgui::zombie_devgui_goto_round(level.var_33be9958);
+      if(isDefined(level.next_brutus_round)) {
+        zm_devgui::zombie_devgui_goto_round(level.next_brutus_round);
       }
 
       break;

@@ -175,11 +175,11 @@ function function_8d346fd8(winningteam) {
 }
 
 function inithud() {
-  level.var_43406ee9 = spawnStruct();
-  level.var_43406ee9.label = #"hash_7bf80a392d947b6e";
-  level.var_43406ee9.alpha = 0;
-  level.var_43406ee9.archived = 0;
-  level.var_43406ee9.hidewheninmenu = 1;
+  level.infect_timerdisplay = spawnStruct();
+  level.infect_timerdisplay.label = #"hash_7bf80a392d947b6e";
+  level.infect_timerdisplay.alpha = 0;
+  level.infect_timerdisplay.archived = 0;
+  level.infect_timerdisplay.hidewheninmenu = 1;
   level.var_6c6b8981 = spawnStruct();
   level.var_6c6b8981.label = #"hash_29028683f846db5d";
   level.var_6c6b8981.alpha = 0;
@@ -188,7 +188,7 @@ function inithud() {
 }
 
 function onplayerconnect() {
-  self.var_9007c3f6 = 1;
+  self.infect_firstspawn = 1;
   self.var_fc81f69c = level.inprematchperiod;
 
   if(isbot(self) && !isDefined(self.pers[#"team"])) {
@@ -548,7 +548,7 @@ function function_4928e571() {
 function finalsurvivoruav(finalsurvivor) {
   level endon(#"game_ended");
   finalsurvivor endon(#"disconnect", #"death");
-  level endon(#"hash_c99e3873a00e736");
+  level endon(#"infect_latejoiner");
   level thread enduavonlatejoiner(finalsurvivor);
   setteamspyplane(game.attackers, 1);
   util::set_team_radar(game.attackers, 1);
@@ -586,7 +586,7 @@ function enduavonlatejoiner(finalsurvivor) {
     var_63f8204e = function_4d9c9e8e(game.defenders);
 
     if(var_63f8204e > 1) {
-      level notify(#"hash_c99e3873a00e736");
+      level notify(#"infect_latejoiner");
       waitframe(1);
       setteamspyplane(game.attackers, 1);
       util::set_team_radar(game.attackers, 1);
@@ -788,8 +788,8 @@ function function_a6489256() {
   while(true) {
     waitresult = level waittill(#"game_ended", #"hash_367e3645fd146620");
 
-    if(isDefined(level.var_43406ee9)) {
-      level.var_43406ee9.alpha = 0;
+    if(isDefined(level.infect_timerdisplay)) {
+      level.infect_timerdisplay.alpha = 0;
     }
 
     if(waitresult._notify == "game_ended") {
@@ -802,10 +802,10 @@ function function_a6489256() {
 
 function function_a5abd7ee() {
   level notify(#"timeextended");
-  level endon(#"game_ended", #"hash_14fed44cd3ece79d", #"timeextended");
+  level endon(#"game_ended", #"infect_stoptimeextended", #"timeextended");
   timeout = 0;
 
-  while(isDefined(level.var_43406ee9) && level.var_43406ee9.alpha > 0) {
+  while(isDefined(level.infect_timerdisplay) && level.infect_timerdisplay.alpha > 0) {
     hostmigration::waitlongdurationwithhostmigrationpause(0.5);
     timeout++;
 
@@ -821,7 +821,7 @@ function function_a5abd7ee() {
 
 function function_3ba09e5e() {
   while(true) {
-    waitresult = level waittill(#"game_ended", #"hash_14fed44cd3ece79d");
+    waitresult = level waittill(#"game_ended", #"infect_stoptimeextended");
 
     if(isDefined(level.var_6c6b8981)) {
       level.var_6c6b8981.alpha = 0;

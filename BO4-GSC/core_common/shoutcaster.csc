@@ -284,7 +284,7 @@ shoutcaster_monitor_player_pucks(localclientnum) {
     var_436f361e = function_ea9917ce(localclientnum);
 
     foreach(player in getplayers(localclientnum)) {
-      if(isDefined(player) && !function_3132f113(player)) {
+      if(isDefined(player) && !isremovedentity(player)) {
         if(isalive(player)) {
           if(var_436f361e) {
             if(!function_7ed4edd3(player.name)) {

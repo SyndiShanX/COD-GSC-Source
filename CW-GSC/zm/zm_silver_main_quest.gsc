@@ -3366,17 +3366,17 @@ function function_165ebd72(str_zone_name) {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    var_bdf9e3c2 = player zm_zonemgr::get_player_zone();
+    str_current_zone = player zm_zonemgr::get_player_zone();
 
-    if(var_bdf9e3c2 === str_zone_name) {
+    if(str_current_zone === str_zone_name) {
       player function_ec732196(0);
     }
   }
 }
 
-function function_cd1efeed(str_zone_name, var_e7f5b3e0) {
+function function_cd1efeed(str_zone_name, b_can_spawn) {
   if(isDefined(level.zones[str_zone_name])) {
-    level.zones[str_zone_name].is_spawning_allowed = var_e7f5b3e0;
+    level.zones[str_zone_name].is_spawning_allowed = b_can_spawn;
   }
 }
 

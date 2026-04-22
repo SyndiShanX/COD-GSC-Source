@@ -573,7 +573,7 @@ function_9be06570() {
       }
     }
 
-    if(s_moveto.var_ff81609a !== 1) {
+    if(s_moveto.b_no_wait !== 1) {
       wait randomfloatrange(1, 2);
 
       if(!isalive(level.var_33918b88) || isDefined(level.var_33918b88) && distancesquared(level.var_33918b88.origin, var_a3b04877.origin) > 65536) {

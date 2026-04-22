@@ -94,7 +94,7 @@ vo() {
   }
 }
 
-function_c03b6f46(var_4e77d211, var_3551e3b9) {
+function_c03b6f46(n_min_dist_sq, n_max_dist_sq) {
   self endon(#"death");
 
   while(true) {
@@ -103,7 +103,7 @@ function_c03b6f46(var_4e77d211, var_3551e3b9) {
     if(zm_utility::is_player_valid(self.enemy)) {
       n_dist_sq = distance2dsquared(self.origin, self.enemy.origin);
 
-      if(n_dist_sq > var_4e77d211 && n_dist_sq < var_3551e3b9) {
+      if(n_dist_sq > n_min_dist_sq && n_dist_sq < n_max_dist_sq) {
         break;
       }
 
@@ -141,7 +141,7 @@ function_bfa79e98(sp_spawner = level.var_4d136b9a[0], s_spot, str_type, n_round)
   return ai;
 }
 
-function_69f309b(n_to_spawn = 1, str_type, var_1fafa3fc, b_force_spawn = 0, var_eb3a8721 = undefined, n_round) {
+function_69f309b(n_to_spawn = 1, str_type, func_on_spawned, b_force_spawn = 0, var_eb3a8721 = undefined, n_round) {
   n_spawned = 0;
 
   if(!isDefined(str_type)) {
@@ -175,8 +175,8 @@ function_69f309b(n_to_spawn = 1, str_type, var_1fafa3fc, b_force_spawn = 0, var_
       ai.find_flesh_struct_string = s_spawn_loc.find_flesh_struct_string;
       n_spawned++;
 
-      if(isDefined(var_1fafa3fc)) {
-        ai thread[[var_1fafa3fc]](s_spawn_loc);
+      if(isDefined(func_on_spawned)) {
+        ai thread[[func_on_spawned]](s_spawn_loc);
       }
     }
 

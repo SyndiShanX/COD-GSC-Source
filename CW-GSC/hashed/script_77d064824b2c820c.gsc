@@ -49,8 +49,8 @@ function function_ad51fa26(str_objective) {
   namespace_b61bbd82::music("12.1_exit");
 }
 
-function function_bb5a40cc(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_bb5a40cc(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level thread function_ad066a85();
   level thread function_7afbb8d0();
@@ -58,10 +58,10 @@ function function_bb5a40cc(str_objective, var_50cc0d4f) {
   level thread function_20d4e36c();
   level thread function_2bd1a728();
   level flag::wait_till("flg_facades_end");
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function function_7c8934a0(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_7c8934a0(str_objective, b_starting, var_aa1a6455, player) {
   level flag::set("flg_facades_dropdown");
 }
 
@@ -364,10 +364,10 @@ function function_3c9f8a88(str_objective) {
   namespace_b61bbd82::music("12.1_exit");
 }
 
-function rooftops_main(str_objective, var_50cc0d4f) {
+function rooftops_main(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::checkpoint_save(1);
   }
 
@@ -380,7 +380,7 @@ function rooftops_main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_21fbbfb2(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_21fbbfb2(str_objective, b_starting, var_aa1a6455, player) {
   if(!isDefined(level.vh_escape_apc)) {
     level.vh_escape_apc = vehicle::simple_spawn_single("vh_escape_apc");
     level.vh_escape_apc util::magic_bullet_shield();
@@ -501,10 +501,10 @@ function function_69d1435d(str_objective) {
   namespace_b61bbd82::music("12.1_exit");
 }
 
-function function_f13abd77(str_objective, var_50cc0d4f) {
+function function_f13abd77(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::checkpoint_save(1);
   }
 
@@ -518,7 +518,7 @@ function function_f13abd77(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_80555a03(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_80555a03(str_objective, b_starting, var_aa1a6455, player) {
   level thread namespace_fc3e8cb::function_6fe40e14("storage_gun_rack4", "storage_gun_rack5", "storage_gun_rack6");
 }
 
@@ -568,10 +568,10 @@ function function_36c18ca(str_objective) {
   namespace_b61bbd82::music("12.1_exit");
 }
 
-function function_3b55ec61(str_objective, var_50cc0d4f) {
+function function_3b55ec61(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread cp_rus_amerika::function_f6b6f426("apc_townsquare");
   }
 
@@ -587,7 +587,7 @@ function function_3b55ec61(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_b78a9ad4(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_b78a9ad4(str_objective, b_starting, var_aa1a6455, player) {
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_facades", 1);
 
   if(player) {

@@ -263,7 +263,7 @@ function onendgame(var_c1e98979) {
   match::set_winner(player);
 }
 
-function function_bbf3128e() {
+function playerhumiliation() {
   self endon(#"death");
 }
 

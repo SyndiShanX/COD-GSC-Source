@@ -230,8 +230,8 @@ function function_38e5adc8(str_objective) {
   level thread namespace_c6aa31df::function_d1fa28d3("rice_paddies", 1);
 }
 
-function function_a0bcc84e(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_a0bcc84e(str_objective, b_starting) {
+  if(b_starting) {
     if(str_objective != "middle_paths_4") {
       level thread namespace_1bc068e2::function_41b7e43b();
     }
@@ -347,7 +347,7 @@ function function_d2f93be3(var_290853ad, var_3a44f626, turn_off, districts) {
   }
 }
 
-function function_b78161a2(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_b78161a2(str_objective, b_starting, var_aa1a6455, player) {
   if(player == "middle_paths_1") {
     level thread namespace_c6aa31df::function_c8f499c5("rice_paddies_1");
   }
@@ -404,7 +404,7 @@ function function_89a69212(str_objective) {
   }
 }
 
-function function_1f911b89(str_objective, var_50cc0d4f) {
+function function_1f911b89(str_objective, b_starting) {
   level thread namespace_d9b153b9::function_5f3438c4();
   level flag::set("flag_in_end_path");
   var_4ddb3cd5 = [];
@@ -506,10 +506,10 @@ function function_1f911b89(str_objective, var_50cc0d4f) {
   }
 
   level flag::clear("flag_in_end_path");
-  level skipto::function_4e3ab877(var_50cc0d4f);
+  level skipto::function_4e3ab877(b_starting);
 }
 
-function function_aa96d24b(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_aa96d24b(str_objective, b_starting, var_aa1a6455, player) {
   level thread namespace_d9b153b9::function_5f3438c4();
 
   if(player == "path_end_1") {
@@ -687,7 +687,7 @@ function function_3fbf16c1(var_e5c02698) {
 }
 
 function on_player_connect() {
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "intro") || level.var_28c22d88.size == 0) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "intro") || level.skipto_current_objective.size == 0) {
     util::function_f3cadc9a("cp_nam_prisoner_player_ready");
 
     if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
@@ -723,8 +723,8 @@ function function_48737ebb() {
 function on_player_spawned() {
   level.player = getplayers()[0];
 
-  if(isDefined(level.var_28c22d88)) {
-    level thread namespace_d9b153b9::force_weapon_loadout(level.var_28c22d88[0]);
+  if(isDefined(level.skipto_current_objective)) {
+    level thread namespace_d9b153b9::force_weapon_loadout(level.skipto_current_objective[0]);
   } else {
     level thread namespace_d9b153b9::force_weapon_loadout("");
   }
@@ -1030,11 +1030,11 @@ function function_e5c19f38(visit, section) {
 }
 
 function function_767a5911() {
-  while(!isDefined(level.var_28c22d88) || level.var_28c22d88.size == 0) {
+  while(!isDefined(level.skipto_current_objective) || level.skipto_current_objective.size == 0) {
     wait 0.05;
   }
 
-  switch (level.var_28c22d88[0]) {
+  switch (level.skipto_current_objective[0]) {
     case # "intro":
       break;
     case # "dev_rice_paddies_1_all_districts":
@@ -1219,7 +1219,7 @@ function function_767a5911() {
       break;
   }
 
-  if(level.var_28c22d88[0] != "dev_lab") {
+  if(level.skipto_current_objective[0] != "dev_lab") {
     level thread namespace_d9b153b9::function_c318ce4a("lab_brainwash_spov_lights");
     lab_brainwash_spov_lights = getEntArray("lab_brainwash_spov_lights", "targetname");
     array::thread_all(lab_brainwash_spov_lights, &namespace_d9b153b9::ent_cleanup);
@@ -1360,18 +1360,18 @@ function function_5988c333() {
 
 function function_b171555f(str_objective) {}
 
-function function_12df253a(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f == "<dev string:x260>" || var_50cc0d4f == "<dev string:x28c>" || var_50cc0d4f == "<dev string:x2b8>" || var_50cc0d4f == "<dev string:x2e4>" || var_50cc0d4f == "<dev string:x22b>") {
-    if(var_50cc0d4f == "<dev string:x260>") {
+function function_12df253a(str_objective, b_starting) {
+  if(b_starting == "<dev string:x260>" || b_starting == "<dev string:x28c>" || b_starting == "<dev string:x2b8>" || b_starting == "<dev string:x2e4>" || b_starting == "<dev string:x22b>") {
+    if(b_starting == "<dev string:x260>") {
       level thread function_796816e2(1);
       level thread namespace_b508dca::function_690ab87a("<dev string:x4d9>", 1);
-    } else if(var_50cc0d4f == "<dev string:x28c>") {
+    } else if(b_starting == "<dev string:x28c>") {
       level thread function_796816e2(2);
       level thread namespace_b508dca::function_690ab87a("<dev string:x4e5>", 1);
-    } else if(var_50cc0d4f == "<dev string:x2b8>") {
+    } else if(b_starting == "<dev string:x2b8>") {
       level thread function_796816e2(3);
       level thread namespace_b508dca::function_690ab87a("<dev string:x4f1>", 1);
-    } else if(var_50cc0d4f == "<dev string:x2e4>" || var_50cc0d4f == "<dev string:x22b>") {
+    } else if(b_starting == "<dev string:x2e4>" || b_starting == "<dev string:x22b>") {
       level thread function_796816e2(3);
       level.var_2ae942a4 = 3;
       level.var_7f958422 = 1;
@@ -1386,15 +1386,15 @@ function function_12df253a(str_objective, var_50cc0d4f) {
     }
 
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(var_50cc0d4f, 0);
-  } else if(var_50cc0d4f == "<dev string:x4ab>") {
+    level skipto::function_4e3ab877(b_starting, 0);
+  } else if(b_starting == "<dev string:x4ab>") {
     level thread function_796816e2(3);
     level flag::set("<dev string:x555>");
     level.var_872cf153 = 1;
     level thread namespace_b508dca::function_690ab87a("<dev string:x4f1>", 1);
   }
 
-  if(var_50cc0d4f == "<dev string:x318>") {
+  if(b_starting == "<dev string:x318>") {
     door_struct = namespace_d9b153b9::door_setup("<dev string:x570>");
     door_struct namespace_b508dca::function_133140de("<dev string:x1c9>", "<dev string:x58f>");
     level thread namespace_b508dca::function_690ab87a("<dev string:x4f1>", 1);
@@ -1402,10 +1402,10 @@ function function_12df253a(str_objective, var_50cc0d4f) {
     level thread namespace_d9b153b9::force_weapon_loadout("<dev string:x344>");
     level thread function_796816e2(3);
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(var_50cc0d4f, 0);
+    level skipto::function_4e3ab877(b_starting, 0);
   }
 
-  if(var_50cc0d4f == "<dev string:x344>") {
+  if(b_starting == "<dev string:x344>") {
     level thread function_796816e2(3);
     level.var_2ae942a4 = 1;
     level.var_7f958422 = 1;
@@ -1417,10 +1417,10 @@ function function_12df253a(str_objective, var_50cc0d4f) {
 
     level.infinite_hallway_exit_unlock_door_struct.door_left setModel("<dev string:x51f>");
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(var_50cc0d4f, 0);
+    level skipto::function_4e3ab877(b_starting, 0);
   }
 
-  if(var_50cc0d4f == "<dev string:x37e>") {
+  if(b_starting == "<dev string:x37e>") {
     level thread function_796816e2(3);
     level.var_2ae942a4 = 2;
     level.var_7f958422 = 1;
@@ -1432,10 +1432,10 @@ function function_12df253a(str_objective, var_50cc0d4f) {
 
     level.infinite_hallway_exit_unlock_door_struct.door_left setModel("<dev string:x51f>");
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(var_50cc0d4f, 0);
+    level skipto::function_4e3ab877(b_starting, 0);
   }
 
-  if(var_50cc0d4f == "<dev string:x3b9>") {
+  if(b_starting == "<dev string:x3b9>") {
     level thread function_796816e2(3);
     level.var_2ae942a4 = 3;
     level.var_7f958422 = 1;
@@ -1448,7 +1448,7 @@ function function_12df253a(str_objective, var_50cc0d4f) {
 
     level.infinite_hallway_exit_unlock_door_struct.door_left setModel("<dev string:x51f>");
     level flag::wait_till("<dev string:x544>");
-    level skipto::function_4e3ab877(var_50cc0d4f, 0);
+    level skipto::function_4e3ab877(b_starting, 0);
   }
 }
 
@@ -1475,7 +1475,7 @@ function function_796816e2(visit) {
   }
 }
 
-function function_442af1f7(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_442af1f7(str_objective, b_starting, var_aa1a6455, player) {
   if(player == "<dev string:x260>") {
     level thread namespace_b508dca::function_e4f91def("<dev string:x4d9>");
   }
@@ -1489,7 +1489,7 @@ function function_442af1f7(str_objective, var_50cc0d4f, var_aa1a6455, player) {
   }
 }
 
-function function_e14708f(str_objective, var_50cc0d4f) {
+function function_e14708f(str_objective, b_starting) {
   level.player val::set(#"hash_8afeb39b36eac06", "<dev string:x62e>", 1);
   level.player val::set(#"hash_4def8e7d4212f296", "<dev string:x641>", 0);
   level scene::init("<dev string:x64d>");

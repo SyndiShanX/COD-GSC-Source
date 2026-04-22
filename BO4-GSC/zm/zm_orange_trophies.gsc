@@ -17,7 +17,7 @@
 #namespace zm_orange_trophies;
 
 init() {
-  level function_e12fb431();
+  level init_bells();
   level function_2b6fe83b();
 
   if(zm_custom::function_901b751c(#"zmpowerdoorstate") != 2) {
@@ -62,7 +62,7 @@ function_ea67bd7c() {
   self zm_utility::giveachievement_wrapper("zm_orange_ascend", 1);
 }
 
-function_e12fb431() {
+init_bells() {
   a_e_bells = getEntArray("challenges_bell", "targetname");
 
   foreach(e_bell in a_e_bells) {

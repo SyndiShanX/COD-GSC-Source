@@ -162,8 +162,8 @@ ai_damage(e_trap) {
     e_trap.activated_by_player zm_stats::increment_challenge_stat(#"zombie_hunter_kill_trap");
     e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
 
-    if(isDefined(e_trap.activated_by_player.var_a8049e3d)) {
-      e_trap.activated_by_player.var_a8049e3d++;
+    if(isDefined(e_trap.activated_by_player.zapped_zombies)) {
+      e_trap.activated_by_player.zapped_zombies++;
       e_trap.activated_by_player notify(#"zombie_zapped");
     }
   }
@@ -174,7 +174,7 @@ ai_damage(e_trap) {
   if(self.archetype === #"werewolf") {
     self thread zm_traps::electroctute_death_fx();
     self thread zm_traps::play_elec_vocals();
-    self function_a3059f6(e_trap);
+    self electric_trap_damage(e_trap);
   } else if(self.archetype === #"zombie") {
     refs[0] = "guts";
     refs[1] = "right_arm";
@@ -194,21 +194,21 @@ ai_damage(e_trap) {
     self notify(#"bhtn_action_notify", {
       #action: "electrocute"});
     wait randomfloat(1.25);
-    self function_a3059f6(e_trap);
+    self electric_trap_damage(e_trap);
   } else {
-    self function_a3059f6(e_trap);
+    self electric_trap_damage(e_trap);
   }
 
   wait 2;
   self.var_3e60a85e = undefined;
 }
 
-function_a3059f6(e_trap) {
+electric_trap_damage(e_trap) {
   self endon(#"death");
   [[level.var_7aa02c24]] - > waitinqueue(self);
 
-  if(isDefined(self.var_5475b4ad)) {
-    self[[self.var_5475b4ad]](e_trap);
+  if(isDefined(self.fire_damage_func)) {
+    self[[self.fire_damage_func]](e_trap);
     return;
   }
 

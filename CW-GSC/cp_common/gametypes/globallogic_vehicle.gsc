@@ -42,24 +42,24 @@ function private function_80238885() {
 
   while(true) {
     waitresult = self waittill(#"enter_vehicle");
-    var_80730518 = waitresult.vehicle;
-    self.var_80730518 = var_80730518;
+    vh_player = waitresult.vehicle;
+    self.vh_player = vh_player;
     self.canbemeleed = 0;
 
     if(isbot(self)) {
       self.seat_index = waitresult.seat_index;
-      w_weapon = var_80730518 turret::get_weapon(self.seat_index);
+      w_weapon = vh_player turret::get_weapon(self.seat_index);
 
       if(w_weapon != level.weaponnone) {
-        var_80730518 turret::enable(self.seat_index);
+        vh_player turret::enable(self.seat_index);
       }
     }
 
-    var_80730518 val::reset(#"player_vehicle", "ignoreme");
+    vh_player val::reset(#"player_vehicle", "ignoreme");
     self val::set(#"player_vehicle", "ignoreme");
 
-    if(is_true(var_80730518.var_932a203f)) {
-      var_80730518 makevehicleunusable();
+    if(is_true(vh_player.var_932a203f)) {
+      vh_player makevehicleunusable();
     }
   }
 }
@@ -69,31 +69,31 @@ function private function_d521a2c1() {
 
   while(true) {
     waitresult = self waittill(#"exit_vehicle");
-    var_80730518 = waitresult.vehicle;
+    vh_player = waitresult.vehicle;
     self.canbemeleed = 1;
 
     if(isalive(self)) {
-      self.var_80730518 = undefined;
+      self.vh_player = undefined;
 
-      if(var_80730518.scriptvehicletype === "player_hunter" && isalive(var_80730518)) {
-        var_80730518 makevehicleusable();
+      if(vh_player.scriptvehicletype === "player_hunter" && isalive(vh_player)) {
+        vh_player makevehicleusable();
       }
 
       if(isbot(self)) {
         if(isDefined(self.seat_index) && self.seat_index >= 0) {
-          w_weapon = var_80730518 turret::get_weapon(self.seat_index);
+          w_weapon = vh_player turret::get_weapon(self.seat_index);
 
           if(w_weapon != level.weaponnone) {
-            var_80730518 turret::disable(self.seat_index);
+            vh_player turret::disable(self.seat_index);
           }
 
           self.seat_index = -1;
         }
       }
-    } else if(isalive(var_80730518)) {}
+    } else if(isalive(vh_player)) {}
 
-    if(isalive(var_80730518)) {
-      var_80730518 val::set(#"player_vehicle", "ignoreme");
+    if(isalive(vh_player)) {
+      vh_player val::set(#"player_vehicle", "ignoreme");
     }
 
     self val::reset(#"player_vehicle", "ignoreme");

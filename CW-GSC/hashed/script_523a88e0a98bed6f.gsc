@@ -42,8 +42,8 @@ function function_25a6167c(str_objective) {
   var_fd4c649f namespace_534279a::function_86201bb7();
 }
 
-function function_41e4735f(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_41e4735f(str_objective, b_starting) {
+  if(b_starting) {
     exploder::exploder("fxexp_env_fx_set_courtyard");
     objectives::set(#"cp_scripted", undefined, undefined, #"hash_7956ac3690b300bb", #"hash_74dd5a3afb4c014e");
   }
@@ -65,7 +65,7 @@ function function_41e4735f(str_objective, var_50cc0d4f) {
   level thread skipto::function_4e3ab877("catacombs");
 }
 
-function function_fa1a97a3(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_fa1a97a3(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_116c72af() {
   level.adler ai::set_behavior_attribute("disablelean", 1);

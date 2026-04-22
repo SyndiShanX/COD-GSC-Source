@@ -628,7 +628,7 @@ function_e11ac4f5() {
     level.var_b2b15659 = undefined;
   }
 
-  if(!level.var_a3f67fc2) {
+  if(!level.dog_rounds_enabled) {
     level.var_973488a5 = level.round_number + 1;
     level thread zombie_dog_util::dog_enable_rounds(1);
   }

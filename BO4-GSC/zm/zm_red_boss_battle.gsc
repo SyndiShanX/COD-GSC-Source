@@ -2156,7 +2156,7 @@ function_6401a80e() {
           n_char_index = self zm_characters::function_d35e4c92();
           str_vo_alias = "vox_plateau_jump_plr_" + n_char_index;
           a_variants = zm_audio::get_valid_lines(str_vo_alias);
-          self.var_2790fd8b thread zm_vo::vo_say(array::random(a_variants), 0, 1, 9999);
+          self.vh_rail thread zm_vo::vo_say(array::random(a_variants), 0, 1, 9999);
           self.var_362f68d6 = randomintrangeinclusive(4, 8);
         } else {
           self.var_362f68d6--;

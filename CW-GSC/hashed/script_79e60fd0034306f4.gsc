@@ -65,8 +65,8 @@ function intro_start(str_objective) {
   level.var_375ea1c1 = spawner::simple_spawn_single("warehouse_volkov");
 }
 
-function intro_main(str_objective, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function intro_main(str_objective, b_starting) {
+  if(b_starting) {
     clientfield::set("force_stream_warehouse", 1);
   }
 
@@ -98,7 +98,7 @@ function intro_main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("warehouse_intro");
 }
 
-function intro_catchup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function intro_catchup(str_objective, b_starting, var_aa1a6455, player) {
   clientfield::set("cull_rear_warehouse", 1);
 }
 
@@ -476,10 +476,10 @@ function function_a0f6825d() {
   level thread scene::play("scene_z_stk_warehouse_dt_greta", "dead_loop");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_5ceacc03::music("16.0_finale");
     tag_align = struct::get("tag_align_warehouse_start", "targetname");
     briefcase = getent("warehouse_briefcase", "targetname");
@@ -809,10 +809,10 @@ function outro_start(str_objective) {
   level thread scene::skipto_end_noai("scene_z_stk_warehouse_door_kick", "Last_Frame", undefined, 1);
 }
 
-function outro_main(str_objective, var_50cc0d4f) {
+function outro_main(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     tag_align = struct::get("tag_align_warehouse_start", "targetname");
     briefcase = getent("warehouse_briefcase", "targetname");
     briefcase useanimtree("generic");

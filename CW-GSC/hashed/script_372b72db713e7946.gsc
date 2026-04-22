@@ -50,13 +50,13 @@ function starting(str_objective) {
   snd::client_msg("audio_intro_triton_disable");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   level.player.var_46111c07 = 0;
   level.player.var_ee4032c4 = 0;
   level util::create_streamer_hint((7833.92, -3391.2, 161.25), (0, 200, 0), 1);
   savegame::checkpoint_save();
 
-  if(var_50cc0d4f === 1) {
+  if(b_starting === 1) {
     level.var_77be18d2 thread vehicle::lights_on();
     level thread namespace_ce17746::function_ee43d0f7();
     level thread namespace_ce17746::function_53c16fe1();
@@ -436,7 +436,7 @@ function function_86531f64() {
   level notify(#"camera_movement");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_669e6733() {
   level waittill(#"hash_39210373f249ed12");

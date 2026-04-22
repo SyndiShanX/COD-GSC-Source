@@ -663,11 +663,11 @@ function function_acaab828(b_disabled = 1) {
   }
 }
 
-function function_ffc2d0bc() {
+function get_player_score() {
   return self.pers[#"score"];
 }
 
-function function_c1f146ff(score) {
+function set_player_score(score) {
   self.pers[#"score"] = score;
   self.score = score;
 }

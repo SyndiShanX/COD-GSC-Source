@@ -69,7 +69,7 @@ function start(str_objective) {
   level.park setthreatbiasgroup("allies");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   hms_util::function_eaa0342e("rooftop_containment_warnings", "rooftop_containment_fails");
@@ -654,7 +654,7 @@ function private function_b8f67d09(origin) {
   highlight_ent delete();
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x8c>");
 
   level.player stoprumble("fallwind_loop_fast");

@@ -35,17 +35,17 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_vault;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
   level thread scene::init_streamer("scene_kgb_env_server_loops", getplayers());
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_vault_begin");
   level battlechatter::function_2ab9360b(1);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450);
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
@@ -54,7 +54,7 @@ function main(var_d3440450, var_50cc0d4f) {
     level thread scene::init("scene_kgb_door_shoulder");
     level flag::set("adler_entered_vault");
     level flag::set("vault_opened");
-    level thread function_833a9413(var_50cc0d4f);
+    level thread function_833a9413(b_starting);
     level thread function_46fe3d22(undefined);
     level thread kgb_aslt_bunker_escape::function_bfe40bf0();
     level thread kgb_aslt_escape_lights_out::function_a0d18564();
@@ -62,7 +62,7 @@ function main(var_d3440450, var_50cc0d4f) {
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_bunker", "player_grabbed_armor");
   }
 
-  level thread namespace_e77bf565::function_7feb07bb(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::function_7feb07bb(str_skipto, b_starting);
   namespace_353d803e::music("12.0_intel");
   level thread function_cb6665bc();
   level thread function_b735db01();
@@ -72,8 +72,8 @@ function main(var_d3440450, var_50cc0d4f) {
   spawner::add_spawn_function_ai_group("macguffin_vault_door_closing_guys", &function_c35f7ff1);
   level flag::wait_till("aslt_vault_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -454,21 +454,21 @@ function function_f7fd6a9d() {
   level flag::set("aslt_vault_complete");
 }
 
-function function_833a9413(var_50cc0d4f = 0) {
+function function_833a9413(b_starting = 0) {
   var_23d03ce = struct::get_array("vault_reel_to_reel", "targetname");
-  array::thread_all(var_23d03ce, &function_74aac033, "scene_kgb_env_server_loops", var_50cc0d4f);
+  array::thread_all(var_23d03ce, &function_74aac033, "scene_kgb_env_server_loops", b_starting);
   var_708f97a7 = struct::get_array("vault_reel_to_reel_no_glass", "targetname");
-  array::thread_all(var_708f97a7, &function_74aac033, "scene_kgb_env_server_loops_no_glass", var_50cc0d4f);
+  array::thread_all(var_708f97a7, &function_74aac033, "scene_kgb_env_server_loops_no_glass", b_starting);
 }
 
-function function_74aac033(var_40498194, var_50cc0d4f = 0) {
+function function_74aac033(var_40498194, b_starting = 0) {
   level endon(#"aslt_bunker_escape_complete");
   loops = [];
   loops[loops.size] = "loop_a";
   loops[loops.size] = "loop_b";
   loops[loops.size] = "loop_c";
 
-  if(is_true(var_50cc0d4f)) {
+  if(is_true(b_starting)) {
     self scene::play(var_40498194, array::random(loops));
   }
 

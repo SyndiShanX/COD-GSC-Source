@@ -53,7 +53,7 @@ function init() {
   level.var_cc43b632 = struct::get_array("control_point_pos", "targetname");
   level.var_547f9dd5 = [];
   level.dont_unset_perk_when_machine_paused = 1;
-  level.var_cc984236 = &function_cc984236;
+  level.zone_occupied_func = &function_cc984236;
   array::thread_all(level.var_cc43b632, &function_e199d168);
   level thread function_ef4139d1();
   callback::add_callback(#"hash_594217387367ebb4", &function_d81240c3);

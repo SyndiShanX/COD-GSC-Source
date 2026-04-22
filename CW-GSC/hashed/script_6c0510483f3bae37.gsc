@@ -37,10 +37,10 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_elev_down;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread scene::init("scene_kgb_poison_tea");
-  level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450);
+  level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
   level.adler.ignoreme = 1;
   level.adler.ignoreall = 1;
   level thread scene::init("scene_kgb_elevator_holdup");
@@ -50,7 +50,7 @@ function starting(var_d3440450) {
   level thread util::function_3e65fe0b(1);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.player endon(#"death");
   level flag::set("aslt_elev_down_start");
   level thread function_a8bd0b05();
@@ -64,10 +64,10 @@ function main(var_d3440450, var_50cc0d4f) {
   level.player.ignoreme = 1;
   level.player.ignoreall = 1;
 
-  if(is_true(var_50cc0d4f)) {
-    kgb_ins_prepare::function_52f0fcb3(var_d3440450);
+  if(is_true(b_starting)) {
+    kgb_ins_prepare::function_52f0fcb3(str_skipto);
     kgb_ins_prepare::function_84d00884();
-    level thread namespace_99e99ffa::function_99e99ffa(var_d3440450);
+    level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
     namespace_e77bf565::function_c4de67de();
     namespace_e77bf565::function_a43c15af();
@@ -83,8 +83,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread util::function_3e65fe0b(0);
   level thread namespace_e77bf565::cleanup_corpses();
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

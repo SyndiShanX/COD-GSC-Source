@@ -221,7 +221,7 @@ is_valid() {
   return true;
 }
 
-function_a8176b98(v_pos, n_radius) {
+get_drop_pos(v_pos, n_radius) {
   if(!isDefined(v_pos)) {
     return;
   }
@@ -343,7 +343,7 @@ function_9e147e0c(s_params) {
         var_9cb648a3 = self.angles;
 
         if(isDefined(var_9420259c)) {
-          v_drop = function_a8176b98(var_9420259c, 360);
+          v_drop = get_drop_pos(var_9420259c, 360);
         }
 
         if(isDefined(v_drop)) {

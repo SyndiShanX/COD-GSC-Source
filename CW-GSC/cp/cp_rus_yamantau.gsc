@@ -98,7 +98,7 @@ function ai_cold_breath() {
   self endon(#"death");
   wait 0.2;
 
-  if(level.var_28c22d88[0] != "intro_heli" && !isvehicle(self)) {
+  if(level.skipto_current_objective[0] != "intro_heli" && !isvehicle(self)) {
     self clientfield::increment("ai_cold_breath");
   }
 }
@@ -108,7 +108,7 @@ function function_2675a176() {
     level.player = self;
   }
 
-  if(!isDefined(level.var_28c22d88[0])) {
+  if(!isDefined(level.skipto_current_objective[0])) {
     return;
   }
 
@@ -116,7 +116,7 @@ function function_2675a176() {
   self setcharacteroutfit(6);
   self.var_9d386cb9 = "Mason";
 
-  switch (level.var_28c22d88[0]) {
+  switch (level.skipto_current_objective[0]) {
     case # "mountain_summit":
     case # "intro_heli":
     case # "zipline_intro":

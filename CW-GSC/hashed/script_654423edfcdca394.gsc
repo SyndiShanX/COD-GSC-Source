@@ -1987,7 +1987,7 @@ function function_ac499c2b(instance) {
 
     foreach(player in a_players) {
       if(isalive(player)) {
-        if(player zm_utility::function_ab9a9770()) {
+        if(player zm_utility::duf47()) {
           self setvisibletoplayer(player);
           continue;
         }

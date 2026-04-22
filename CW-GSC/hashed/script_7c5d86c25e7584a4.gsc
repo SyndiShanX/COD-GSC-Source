@@ -25,7 +25,7 @@
 
 function start(str_objective) {}
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   var_b6ac0499 = struct::get("rooftop_regroup_obj_pos", "targetname");
@@ -91,7 +91,7 @@ function function_cabf998b() {
   }
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x4c>");
 }
 

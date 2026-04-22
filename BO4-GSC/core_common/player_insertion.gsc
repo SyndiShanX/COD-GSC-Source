@@ -1229,7 +1229,7 @@ function_e3f18577() {
   return height;
 }
 
-function_7d880672(original_origin, var_9f8395cb, refly) {
+function_7d880672(original_origin, original_yaw, refly) {
   self notify("<dev string:xb9>");
   self endon("<dev string:xb9>");
   self endon(#"disconnect");
@@ -1245,7 +1245,7 @@ function_7d880672(original_origin, var_9f8395cb, refly) {
       var_59526dd5 = 0;
       break;
     case 1:
-      var_59526dd5 = var_9f8395cb;
+      var_59526dd5 = original_yaw;
       break;
     case 2:
       var_59526dd5 = randomint(360);
@@ -1275,7 +1275,7 @@ function_7d880672(original_origin, var_9f8395cb, refly) {
           waitframe(1);
         }
 
-        self thread function_7d880672(original_origin, var_9f8395cb, refly);
+        self thread function_7d880672(original_origin, original_yaw, refly);
         return;
       }
     }

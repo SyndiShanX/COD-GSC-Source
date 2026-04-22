@@ -39,7 +39,7 @@ function start(str_objective) {
   namespace_232ddc52::music("3.0_plaza");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   level.player endon(#"death");
@@ -351,7 +351,7 @@ function function_302b4058(var_9608b240, min_delay = 1, max_delay = 4, var_22660
   self ai::force_goal(fallback_vol, var_226603c5);
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:xde>");
 
   level notify(#"hash_4b94195c7c990e8f");

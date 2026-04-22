@@ -596,9 +596,9 @@ function function_ace83e8e() {
   level flag::set("flg_audio_tunnels_tvs");
   var_136b3fde = getdynentarray("audio_tunnels_tv_dyent");
 
-  foreach(var_21f452ad in var_136b3fde) {
-    var_e9853265 = snd::play("amb_emt_tv_static_03", var_21f452ad.origin);
-    var_e9853265 thread function_37294a47(var_21f452ad);
+  foreach(e_tv in var_136b3fde) {
+    var_e9853265 = snd::play("amb_emt_tv_static_03", e_tv.origin);
+    var_e9853265 thread function_37294a47(e_tv);
   }
 }
 
@@ -704,9 +704,9 @@ function function_55f97b00() {
   level flag::set("flg_audio_tv_store_tvs");
   var_136b3fde = getdynentarray("audio_tv_store_tv_dyent");
 
-  foreach(var_21f452ad in var_136b3fde) {
-    var_e9853265 = snd::play("dst_amk_tv_lp", var_21f452ad.origin);
-    var_e9853265 thread function_37294a47(var_21f452ad);
+  foreach(e_tv in var_136b3fde) {
+    var_e9853265 = snd::play("dst_amk_tv_lp", e_tv.origin);
+    var_e9853265 thread function_37294a47(e_tv);
   }
 }
 

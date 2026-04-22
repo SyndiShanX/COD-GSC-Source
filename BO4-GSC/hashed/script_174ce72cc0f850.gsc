@@ -10,13 +10,13 @@
 #include scripts\zm_common\zm_sq_modules;
 #namespace namespace_bd74bbd2;
 
-register(id, version, script_noteworthy, var_92f252fd, var_af245552) {
+register(id, version, script_noteworthy, var_92f252fd, func_fail) {
   zm_sq_modules::function_d8383812(id, version, script_noteworthy, &is_soul_capture, &soul_captured, 1);
   s_sc = struct::get(script_noteworthy, "script_noteworthy");
-  s_sc.var_f929d531 = getent(s_sc.var_5ca82ce, "targetname");
+  s_sc.var_f929d531 = getent(s_sc.player_area, "targetname");
   s_sc.var_f929d531.id = id;
   s_sc.var_92f252fd = var_92f252fd;
-  s_sc.var_af245552 = var_af245552;
+  s_sc.func_fail = func_fail;
   level.var_345df07[id] = s_sc;
 }
 
@@ -104,6 +104,6 @@ player_enter_watcher() {
 function_b1e6482f() {
   self endon(#"death", #"player_enter", #"event_end");
   wait 5;
-  level thread[[level.var_345df07[self.id].var_af245552]]();
+  level thread[[level.var_345df07[self.id].func_fail]]();
   end(self.id);
 }

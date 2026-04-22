@@ -42,7 +42,7 @@
 #using scripts\cp_common\util;
 #namespace tkdn_raid_capture;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   thread objectives::scripted("obj_takedown_capture", undefined, #"hash_49c1d860c97e3792");
   player = getplayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
@@ -121,10 +121,10 @@ function function_d40d301c() {
   self thread scene::play("scene_tkd_hit2_canal_ambience_boat_large", self);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_a052577e::function_724cb241();
   }
 
@@ -189,8 +189,8 @@ function main(var_d3440450, var_50cc0d4f) {
     }
   }
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

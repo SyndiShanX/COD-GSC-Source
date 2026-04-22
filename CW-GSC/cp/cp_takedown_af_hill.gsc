@@ -41,8 +41,8 @@
 #using scripts\weapons\cp\spy_camera;
 #namespace tkdn_af_hill;
 
-function starting(var_d3440450) {
-  function_a2015343(var_d3440450);
+function starting(str_skipto) {
+  function_a2015343(str_skipto);
   plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(plane, 0);
   exploder::stop_exploder("airfield_assault_lighting_noplane");
@@ -57,7 +57,7 @@ function starting(var_d3440450) {
   level thread scene::play_from_time("scene_tkd_hit3_intro", "shot 1", undefined, 1, 1, 1, 0, 0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   if(!isDefined(level objectives::function_285e460("af_follow_adler", level.adler))) {
     level objectives::follow("af_follow_adler", level.adler, undefined, 0, 0);
   }
@@ -184,8 +184,8 @@ function main(var_d3440450, var_50cc0d4f) {
 
   level flag::wait_till("arash_in_plane");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -614,7 +614,7 @@ function function_cc465a2(player) {
   level.player notifyonplayercommandremove("blow_rc_car", "+attack");
 }
 
-function function_a2015343(var_d3440450) {
+function function_a2015343(str_skipto) {
   spawners = getspawnerarray("af_adler", "targetname");
   level.adler = spawners[0] spawner::spawn(1);
   level.adler val::set(#"airfield", "ignoreall", 1);
@@ -636,8 +636,8 @@ function function_a2015343(var_d3440450) {
   level.woods.radius = 50;
   level.woods.enableterrainik = 1;
 
-  if(isDefined(var_d3440450)) {
-    start_spots = struct::get_array(var_d3440450 + "_start", "targetname");
+  if(isDefined(str_skipto)) {
+    start_spots = struct::get_array(str_skipto + "_start", "targetname");
 
     foreach(spot in start_spots) {
       if(spot.script_noteworthy == "adler") {

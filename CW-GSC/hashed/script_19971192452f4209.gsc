@@ -198,7 +198,7 @@ function private function_f78628e6() {
 }
 
 function on_player_connect() {
-  if(isDefined(level.var_28c22d88)) {
+  if(isDefined(level.skipto_current_objective)) {
     util::function_f3cadc9a("cp_player_ready");
 
     if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {
@@ -297,9 +297,9 @@ function function_d3918b2e(var_1ef13f7e) {
   }
 }
 
-function function_4613fab8(var_d3440450) {}
+function function_4613fab8(str_skipto) {}
 
-function function_13fc27ea(var_d3440450, var_50cc0d4f) {
+function function_13fc27ea(str_skipto, b_starting) {
   var_7a191936 = savegame::function_8136eb5a();
   level thread pstfx_teleport(5.5, 1, 1, 1);
 
@@ -345,8 +345,8 @@ function function_13fc27ea(var_d3440450, var_50cc0d4f) {
     level thread function_98bc17c8();
   }
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -368,9 +368,9 @@ function function_cbec2adc() {
   level.player val::set(#"temp_intro", "hide");
 }
 
-function function_b438df4d(var_d3440450) {}
+function function_b438df4d(str_skipto) {}
 
-function function_58f8a0d8(var_d3440450, var_50cc0d4f) {
+function function_58f8a0d8(str_skipto, b_starting) {
   videostart("cp_shared_vietnam_brainwash", 1);
 
   while(!isDefined(level.player_connected) || isDefined(level.player_connected) && level.player_connected != 1) {
@@ -388,7 +388,7 @@ function function_58f8a0d8(var_d3440450, var_50cc0d4f) {
   tag setModel("tag_origin");
   level.player playerlinkto(tag);
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 
@@ -410,8 +410,8 @@ function function_58f8a0d8(var_d3440450, var_50cc0d4f) {
   level.player setcinematicmotionoverride("default_cinematicmotion");
   level thread savegame::function_7790f03();
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 
   level thread namespace_4ed3ce47::function_a0289367();
@@ -1020,7 +1020,7 @@ function function_7fd3a4d8(var_7784a8ae = 0, var_a8627b29 = undefined, n_wait_ti
     level notify(#"hash_6b714d5d8d203c49");
     level.var_4032a278 = undefined;
 
-    if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+    if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
       level.player flag::set(level.var_d7d201ba);
     }
 
@@ -1044,7 +1044,7 @@ function function_7fd3a4d8(var_7784a8ae = 0, var_a8627b29 = undefined, n_wait_ti
       wait n_wait_time;
     }
 
-    if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+    if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
       level.player flag::set(level.var_d7d201ba);
     }
 

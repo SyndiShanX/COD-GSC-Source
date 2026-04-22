@@ -1796,7 +1796,7 @@ function callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, wea
       shitloc = self.laststandparams.shitloc;
       self.vattackerorigin = self.laststandparams.vattackerorigin;
       deathtimeoffset = (gettime() - self.laststandparams.laststandstarttime) / 1000;
-      self.bleedout_time = math::clamp(self.var_84c0402e - deathtimeoffset, 0, self.var_84c0402e);
+      self.bleedout_time = math::clamp(self.last_bleedout_time - deathtimeoffset, 0, self.last_bleedout_time);
 
       if(isDefined(self.var_f68bf742)) {
         wasinlaststand = 1;
@@ -2122,14 +2122,14 @@ function callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, wea
       player_pos = self getplayercamerapos();
       var_cac40761 = self getplayerangles();
 
-      if(isDefined(self.var_80730518)) {
-        camera_pos = self.var_80730518 gettagorigin("tag_driver_camera");
+      if(isDefined(self.vh_player)) {
+        camera_pos = self.vh_player gettagorigin("tag_driver_camera");
 
         if(isDefined(camera_pos)) {
           player_pos = camera_pos;
         }
 
-        var_cac40761 = self.var_80730518.angles;
+        var_cac40761 = self.vh_player.angles;
       }
 
       self camerasetposition(player_pos, var_cac40761);
@@ -2137,13 +2137,13 @@ function callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, wea
       self healthoverlay::function_8335b12();
       self thread lui::screen_fade_out(defaultplayerdeathwatchtime, "black");
 
-      if(isDefined(self.var_80730518)) {
-        if(is_true(self.var_80730518.var_4dba1441)) {
+      if(isDefined(self.vh_player)) {
+        if(is_true(self.vh_player.var_4dba1441)) {
           wait 0.3;
 
           if(!isbot(self)) {
-            self.var_80730518 setinvisibletoall();
-            self.var_80730518 setvisibletoplayer(self);
+            self.vh_player setinvisibletoall();
+            self.vh_player setvisibletoplayer(self);
           }
         }
       }

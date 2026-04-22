@@ -660,7 +660,7 @@ vtoldestructiblecallback(brokennotify, eattacker, weapon, pieceindex, dir, mod) 
   mainturretdestroyed(ac130, eattacker, weapon);
 }
 
-function_8721028e(player, ownerleft, var_dbcb1965 = 0) {
+function_8721028e(player, ownerleft, should_explode = 0) {
   if(isbot(player)) {
     player ai::set_behavior_attribute("control", "commander");
   }
@@ -703,14 +703,14 @@ function_8721028e(player, ownerleft, var_dbcb1965 = 0) {
     level.ac130 function_60d50ea4();
   }
 
-  if(var_dbcb1965) {
+  if(should_explode) {
     var_15f570c1 += (0, 0, -8000);
   }
 
   level.ac130 thread helicopter::heli_leave(var_15f570c1, 1);
   level.ac130 thread audio::sndupdatevehiclecontext(0);
 
-  if(var_dbcb1965) {
+  if(should_explode) {
     level.ac130 thread function_60e3edcc();
   }
 
@@ -845,8 +845,8 @@ function_46d0e4e5() {
   ac130 thread remote_weapons::do_static_fx();
   failsafe_timeout = 5;
   ac130 waittilltimeout(failsafe_timeout, #"static_fx_done");
-  var_dbcb1965 = 1;
-  function_8721028e(ac130.owner, 1, var_dbcb1965);
+  should_explode = 1;
+  function_8721028e(ac130.owner, 1, should_explode);
 }
 
 helicoptedetonateviaemp(attacker, weapon) {

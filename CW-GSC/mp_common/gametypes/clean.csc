@@ -15,12 +15,12 @@ function event_handler[gametype_init] main(eventstruct) {
   clientfield::register("allplayers", "taco_carry", 14000, 1, "int", &function_aa7bb941, 0, 0);
   clientfield::register("scriptmover", "taco_waypoint", 14000, 1, "int", &function_a4a5d612, 0, 0);
   level.var_aaaae0b = #"hash_206afab0af20880d";
-  level.var_5844252c = #"hash_672b6ef826294e77";
+  level.tacofx = #"hash_672b6ef826294e77";
   level.var_ce64ea3e = #"clean_taco";
 
   if(is_true(getgametypesetting(#"hash_5cc4c3042b7d4935"))) {
     level.var_aaaae0b = #"hash_464eae7df8ee284a";
-    level.var_5844252c = #"hash_2b379a7d7b261710";
+    level.tacofx = #"hash_2b379a7d7b261710";
     level.var_ce64ea3e = #"hash_3a64e972390f43aa";
     setsoundcontext("ltm", "paddy");
     function_52ee8599();
@@ -55,10 +55,10 @@ function function_11abf5b2(localclientnum, oldval, newval, bnewent, binitialsnap
       self thread function_bcb88fb7(fieldname);
     }
 
-    self.var_5844252c = util::playFXOnTag(fieldname, level.var_5844252c, self.var_47b256ef, "tag_origin");
+    self.tacofx = util::playFXOnTag(fieldname, level.tacofx, self.var_47b256ef, "tag_origin");
     self function_1f0c7136(5);
     self function_dfbd048b(25);
-    setfxteam(fieldname, self.var_5844252c, self.team);
+    setfxteam(fieldname, self.tacofx, self.team);
   }
 
   if(bwastimejump == 1) {
@@ -67,7 +67,7 @@ function function_11abf5b2(localclientnum, oldval, newval, bnewent, binitialsnap
   }
 
   if(bwastimejump == 2) {
-    self thread function_d1834e16(fieldname);
+    self thread bounce_effect(fieldname);
   }
 }
 
@@ -84,13 +84,13 @@ function function_bcb88fb7(localclientnum) {
 }
 
 function function_81431153(localclientnum) {
-  if(isDefined(self.var_5844252c)) {
-    killfx(localclientnum, self.var_5844252c);
-    self.var_5844252c = undefined;
+  if(isDefined(self.tacofx)) {
+    killfx(localclientnum, self.tacofx);
+    self.tacofx = undefined;
   }
 }
 
-function function_d1834e16(localclientnum) {
+function bounce_effect(localclientnum) {
   self endon(#"stopbounce");
   self endon(#"death");
   toppos = self.origin + (0, 0, 12);

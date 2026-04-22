@@ -377,7 +377,7 @@ function turn_perk_off(ishidden) {
 }
 
 function play_loop_on_machine() {
-  if(isDefined(level.var_29a12b0)) {
+  if(isDefined(level.sndperksacolaloopoverride)) {
     return;
   }
 
@@ -701,8 +701,8 @@ function vending_trigger_post_think(player, perk) {
 
   player notify(#"burp");
 
-  if(isDefined(level.var_c4bedce3)) {
-    player[[level.var_c4bedce3]](perk);
+  if(isDefined(level.perk_bought_func)) {
+    player[[level.perk_bought_func]](perk);
   }
 
   player.perk_purchased = undefined;
@@ -826,8 +826,8 @@ function perk_think(perk) {
   self set_perk_clientfield(perk, 0);
   self.perk_purchased = undefined;
 
-  if(isDefined(level.var_a903ab55)) {
-    self[[level.var_a903ab55]](perk);
+  if(isDefined(level.perk_lost_func)) {
+    self[[level.perk_lost_func]](perk);
   }
 
   self function_2ac7579(-1, 0, level._custom_perks[hash(perk)].alias);
@@ -947,7 +947,7 @@ function quantum_bomb_give_nearest_perk_validation(position) {
 }
 
 function quantum_bomb_give_nearest_perk_result(position) {
-  [[level.var_77926928]](position);
+  [[level.quantum_bomb_play_mystery_effect_func]](position);
   vending_machines = get_perk_machines();
   nearest = 0;
 
@@ -969,7 +969,7 @@ function quantum_bomb_give_nearest_perk_result(position) {
 
     if(!player hasperk(perk) && (!isDefined(player.perk_purchased) || player.perk_purchased != perk) && randomint(5)) {
       player function_a7ae070c(perk);
-      player[[level.var_cbbe9244]]();
+      player[[level.quantum_bomb_play_player_effect_func]]();
     }
   }
 }
@@ -2273,8 +2273,8 @@ function taking_cover_tanks_(player, perk, n_slot, var_3468124) {
 
     player thread function_9bdf581f(perk, n_slot, 1);
 
-    if(isDefined(level.var_c4bedce3)) {
-      player[[level.var_c4bedce3]](perk);
+    if(isDefined(level.perk_bought_func)) {
+      player[[level.perk_bought_func]](perk);
     }
 
     return;
@@ -2581,8 +2581,8 @@ function function_329ae65e(perk, n_slot) {
     }
   }
 
-  if(isDefined(level.var_a903ab55)) {
-    self[[level.var_a903ab55]](perk);
+  if(isDefined(level.perk_lost_func)) {
+    self[[level.perk_lost_func]](perk);
   }
 
   arrayremovevalue(self.var_466b927f, perk, 0);

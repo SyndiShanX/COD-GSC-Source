@@ -1444,16 +1444,16 @@ function function_9feae843(var_fda8dff8) {
     var_e532fd36 = 0;
 
     if(var_9cc58c14 && var_4bf95f4c.list_name == #"survival_ai_zombie") {
-      var_82706add = array::random(array(#"spawner_zm_steiner", #"spawner_bo5_mechz_sr"));
+      str_ai_type = array::random(array(#"spawner_zm_steiner", #"spawner_bo5_mechz_sr"));
       b_force_spawn = 1;
       var_e532fd36 = 1;
     } else {
-      var_82706add = var_4bf95f4c.aitype_name;
+      str_ai_type = var_4bf95f4c.aitype_name;
     }
 
     s_spawn_point = a_s_points[i];
 
-    if(is_true(s_spawn_point.var_8789040f) && (var_82706add == #"spawner_zm_steiner" || var_82706add == #"spawner_bo5_mechz_sr" || var_82706add == #"hash_4f87aa2a203d37d0")) {
+    if(is_true(s_spawn_point.var_8789040f) && (str_ai_type == #"spawner_zm_steiner" || str_ai_type == #"spawner_bo5_mechz_sr" || str_ai_type == #"hash_4f87aa2a203d37d0")) {
       s_spawn_point = array::random(var_fc44ef88);
     }
 
@@ -1464,11 +1464,11 @@ function function_9feae843(var_fda8dff8) {
         if(math::cointoss(25)) {
           ai = zombie_utility::spawn_zombie(level.zombie_spawners[0], "exfil_ai", undefined, level.round_number);
         } else {
-          ai = namespace_85745671::function_9d3ad056(var_82706add, s_spawn_point.origin, (0, randomint(360), 0), "exfil_ai", 0, s_spawn_point.var_90d0c0ff);
+          ai = namespace_85745671::function_9d3ad056(str_ai_type, s_spawn_point.origin, (0, randomint(360), 0), "exfil_ai", 0, s_spawn_point.var_90d0c0ff);
         }
       }
     } else {
-      ai = namespace_85745671::function_9d3ad056(var_82706add, s_spawn_point.origin, (0, randomint(360), 0), "exfil_ai", b_force_spawn, s_spawn_point.var_90d0c0ff);
+      ai = namespace_85745671::function_9d3ad056(str_ai_type, s_spawn_point.origin, (0, randomint(360), 0), "exfil_ai", b_force_spawn, s_spawn_point.var_90d0c0ff);
     }
 
     if(isDefined(ai)) {
@@ -1886,10 +1886,10 @@ function function_5a957da0(destination) {
           var_df889249 = undefined;
         }
 
-        var_a9dd0fe1 = getdvarint(#"hash_33b0be96bf3cd69a", 0);
+        n_test = getdvarint(#"hash_33b0be96bf3cd69a", 0);
 
-        if(var_a9dd0fe1) {
-          if(var_a9dd0fe1 === instance.script_int) {
+        if(n_test) {
+          if(n_test === instance.script_int) {
             return instance;
           } else {
             continue;

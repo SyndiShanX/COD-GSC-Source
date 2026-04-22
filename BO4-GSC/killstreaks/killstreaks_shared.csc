@@ -190,7 +190,7 @@ on_player_spawned(localclientnum) {
 function_17381fe(localclientnum) {
   if(shoutcaster::function_2e6e4ee0(localclientnum)) {
     foreach(player in getplayers(localclientnum)) {
-      if(isDefined(player) && !function_3132f113(player)) {
+      if(isDefined(player) && !isremovedentity(player)) {
         player renderoverridebundle::function_f4eab437(localclientnum, 0, #"hash_2c6fce4151016478");
       }
     }

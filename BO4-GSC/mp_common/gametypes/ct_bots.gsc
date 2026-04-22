@@ -608,7 +608,7 @@ function_c03a6bb8(params) {
   self callback::remove_on_death(&function_c03a6bb8);
 }
 
-activate_bots(var_9bff2467, str_team, str_targetname, var_216e25ba = 0) {
+activate_bots(n_max_bots, str_team, str_targetname, var_216e25ba = 0) {
   level endon(#"combattraining_logic_finished");
   entities = function_66ced330();
   var_e8d6f89 = 0;
@@ -620,7 +620,7 @@ activate_bots(var_9bff2467, str_team, str_targetname, var_216e25ba = 0) {
         entity.dontdropweapon = 1;
         var_e8d6f89++;
 
-        if(var_e8d6f89 >= var_9bff2467) {
+        if(var_e8d6f89 >= n_max_bots) {
           break;
         }
 

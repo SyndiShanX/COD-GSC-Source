@@ -20,8 +20,8 @@
 #using scripts\cp_common\hms_util;
 #namespace namespace_7468806b;
 
-function function_79af70ae(var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function function_79af70ae(b_starting) {
+  if(b_starting) {
     wait 1;
   }
 
@@ -60,8 +60,8 @@ function function_b85233a1(var_6e96c1c2) {
   }
 }
 
-function function_ba5a28f(var_50cc0d4f = 0) {
-  if(var_50cc0d4f) {
+function function_ba5a28f(b_starting = 0) {
+  if(b_starting) {
     wait 1;
   }
 

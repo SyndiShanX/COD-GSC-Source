@@ -44,8 +44,8 @@ on_spawned() {
 }
 
 function_ee114cab() {
-  if(isDefined(level.var_e0f12444)) {
-    [[level.var_e0f12444]]();
+  if(isDefined(level.electric_cherry_precache_override_func)) {
+    [[level.electric_cherry_precache_override_func]]();
     return;
   }
 
@@ -106,7 +106,7 @@ function_f86e4c3d() {
 
 function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
   self endon(#"disconnect");
-  var_2ed6f142 = self getplayercamerapos();
+  v_view_pos = self getplayercamerapos();
   v_angles = self getplayerangles();
   v_norm = vectornormalize(anglesToForward(v_angles));
   a_e_targets = function_fa63958c();
@@ -134,13 +134,13 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
     }
 
     test_origin = e_target getcentroid();
-    n_dist_sq = distancesquared(var_2ed6f142, test_origin);
+    n_dist_sq = distancesquared(v_view_pos, test_origin);
 
     if(n_dist_sq > 10000 && !is_lunge) {
       continue;
     }
 
-    var_c04cadc7 = e_target sightconetrace(var_2ed6f142, self, v_norm, var_2b9d3880);
+    var_c04cadc7 = e_target sightconetrace(v_view_pos, self, v_norm, var_2b9d3880);
 
     if(var_c04cadc7 == 0 && !isDefined(e_target.var_39c64392)) {
       continue;

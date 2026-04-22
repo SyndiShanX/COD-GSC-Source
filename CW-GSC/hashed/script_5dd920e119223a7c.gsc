@@ -548,7 +548,7 @@ function private function_4b4ffd20(s_instance, e_activator) {
 
     a_ai = [];
     var_e905c444 = isDefined(self.contentgroups[#"attack_trigger"]) ? self.contentgroups[#"attack_trigger"] : [];
-    var_ff81609a = var_e905c444.size <= 0;
+    b_no_wait = var_e905c444.size <= 0;
 
     for(i = 0; i < n_size; i++) {
       level flag::wait_till("spawn_zombies");
@@ -576,8 +576,8 @@ function private function_4b4ffd20(s_instance, e_activator) {
         var_865d8aac[var_865d8aac.size] = str_aitype;
       }
 
-      var_82706add = function_4674880c(s_instance);
-      ai = s_spawn function_41f7333b(var_82706add, (0, randomfloat(360), 0));
+      str_ai_type = function_4674880c(s_instance);
+      ai = s_spawn function_41f7333b(str_ai_type, (0, randomfloat(360), 0));
 
       if(namespace_7589cf5c::function_82e262cf(ai.aitype)) {
         s_instance.var_38c710c3 = float(gettime()) / 1000;
@@ -604,7 +604,7 @@ function private function_4b4ffd20(s_instance, e_activator) {
 
       a_ai[a_ai.size] = ai;
 
-      if(var_ff81609a) {
+      if(b_no_wait) {
         if(is_true(self.var_9d2375f4)) {
           ai thread function_a810bd2f();
         }
@@ -620,7 +620,7 @@ function private function_4b4ffd20(s_instance, e_activator) {
       }
     }
 
-    if(!var_ff81609a) {
+    if(!b_no_wait) {
       var_e905c444 = isDefined(self.contentgroups[#"attack_trigger"]) ? self.contentgroups[#"attack_trigger"] : [];
 
       if(var_e905c444.size > 0) {
@@ -809,13 +809,13 @@ function private function_cf54aadd(var_f5064815, s_instance, var_e905c444) {
       v_spawn = self.origin;
     }
 
-    var_82706add = function_4674880c(var_e905c444);
+    str_ai_type = function_4674880c(var_e905c444);
 
     while(level.var_1f73a372.n_active >= level.var_1f73a372.n_max) {
       wait 0.1;
     }
 
-    var_900d7dee = spawn_ai(var_82706add, v_spawn, (0, randomfloat(360), 0));
+    var_900d7dee = spawn_ai(str_ai_type, v_spawn, (0, randomfloat(360), 0));
 
     if(isDefined(var_900d7dee)) {
       if(namespace_7589cf5c::function_82e262cf(var_900d7dee.aitype)) {
@@ -910,13 +910,13 @@ function private function_dd27cb14(var_f5064815, s_instance, var_559503f1) {
         s_spawnpt = array::random(var_559503f1);
       }
 
-      var_82706add = function_a45cb92c(s_instance);
+      str_ai_type = function_a45cb92c(s_instance);
 
       while(level.var_1f73a372.n_active >= level.var_1f73a372.n_max) {
         wait 0.1;
       }
 
-      ai_rusher = spawn_ai(var_82706add, s_spawnpt.origin, s_spawnpt.angles);
+      ai_rusher = spawn_ai(str_ai_type, s_spawnpt.origin, s_spawnpt.angles);
 
       if(isDefined(ai_rusher)) {
         if(namespace_7589cf5c::function_82e262cf(ai_rusher.aitype)) {
@@ -1139,13 +1139,13 @@ function private function_15bda870(s_spawn, var_109708e0, s_instance) {
 
   v_spawn = s_spawn.origin;
   v_angles = s_spawn.angles;
-  var_82706add = var_109708e0.ai_type;
+  str_ai_type = var_109708e0.ai_type;
 
-  if(!isDefined(var_82706add)) {
-    var_82706add = s_spawn.ai_type;
+  if(!isDefined(str_ai_type)) {
+    str_ai_type = s_spawn.ai_type;
   }
 
-  str_aitype = get_spawner(var_82706add);
+  str_aitype = get_spawner(str_ai_type);
   self.mdl_portal = util::spawn_model("tag_origin", v_spawn, v_angles);
   wait 1;
   level clientfield::set("" + # "console_stream", 0);
@@ -2103,11 +2103,11 @@ function private function_bb9468f8(var_c79f5f0) {
   }
 }
 
-function private function_41f7333b(var_82706add, v_angles = self.angles) {
-  return spawn_ai(var_82706add, self.origin, v_angles);
+function private function_41f7333b(str_ai_type, v_angles = self.angles) {
+  return spawn_ai(str_ai_type, self.origin, v_angles);
 }
 
-function private spawn_ai(var_82706add, v_origin = (0, 0, 0), v_angles = (0, 0, 0), var_94d02b5b = 0) {
+function private spawn_ai(str_ai_type, v_origin = (0, 0, 0), v_angles = (0, 0, 0), var_94d02b5b = 0) {
   str_targetname = "kill_hvt_ai";
 
   if(var_94d02b5b) {
@@ -2115,7 +2115,7 @@ function private spawn_ai(var_82706add, v_origin = (0, 0, 0), v_angles = (0, 0, 
   }
 
   while(true) {
-    str_aitype = get_spawner(var_82706add);
+    str_aitype = get_spawner(str_ai_type);
 
     if(namespace_7589cf5c::function_82e262cf(str_aitype)) {
       if(isDefined(level.contentmanager.activeobjective.var_38c710c3)) {
@@ -2456,8 +2456,8 @@ function private function_a810bd2f() {
   }
 }
 
-function private get_spawner(var_82706add = "") {
-  switch (var_82706add) {
+function private get_spawner(str_ai_type = "") {
+  switch (str_ai_type) {
     default:
       return # "hash_7cba8a05511ceedf";
     case # "spawner_bo5_mimic":

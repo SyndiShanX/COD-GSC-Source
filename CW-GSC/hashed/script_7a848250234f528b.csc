@@ -415,9 +415,9 @@ function function_f0f5eef2() {
   level flag::set("flg_audio_cctv_tvs");
   var_136b3fde = getdynentarray("audio_cctv_tv_dyent");
 
-  foreach(var_21f452ad in var_136b3fde) {
-    var_e9853265 = snd::play("dst_amk_tv_lp", var_21f452ad.origin);
-    var_e9853265 thread function_37294a47(var_21f452ad);
+  foreach(e_tv in var_136b3fde) {
+    var_e9853265 = snd::play("dst_amk_tv_lp", e_tv.origin);
+    var_e9853265 thread function_37294a47(e_tv);
   }
 }
 

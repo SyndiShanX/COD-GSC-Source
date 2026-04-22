@@ -28,7 +28,7 @@
 #using scripts\cp_common\util;
 #namespace tkdn_af_skid;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   namespace_b100dd86::function_5aabc3fb();
   level.af_plane = namespace_b100dd86::function_5431431d();
   namespace_b100dd86::function_c8381339(level.af_plane, 1);
@@ -45,7 +45,7 @@ function starting(var_d3440450) {
   thread namespace_a052577e::function_3dbad6f5();
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   player = getplayers()[0];
   setDvar(#"hash_3d9a09e7ecea2271", 0);
   level clientfield::set("crash_models", 1);
@@ -64,8 +64,8 @@ function main(var_d3440450, var_50cc0d4f) {
 
   setDvar(#"hash_3d9a09e7ecea2271", 1);
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

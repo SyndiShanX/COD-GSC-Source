@@ -32,7 +32,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_c9f7b6af;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   player = getplayers()[0];
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
@@ -57,8 +57,8 @@ function starting(var_d3440450) {
   var_b7ec8c4b delete();
 }
 
-function main(var_d3440450, var_50cc0d4f) {
-  if(var_50cc0d4f) {
+function main(str_skipto, b_starting) {
+  if(b_starting) {
     player = getplayers()[0];
     player setmovespeedscale(0.4);
     objectives::scripted("obj_takedown_capture", undefined, #"hash_49c1d860c97e3792");
@@ -113,8 +113,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread savegame::function_7790f03(1);
   level thread scene::play("scene_tkd_hit2_adler_alley", "Yard");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

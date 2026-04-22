@@ -605,8 +605,8 @@ function wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap,
 
       break;
     case 2:
-      if(isDefined(level.var_680d143d)) {
-        struct.models[bnewent][[level.var_680d143d]]();
+      if(isDefined(level.wallbuy_callback_hack_override)) {
+        struct.models[bnewent][[level.wallbuy_callback_hack_override]]();
       }
 
       break;
@@ -643,8 +643,8 @@ function wallbuy_callback_idx(localclientnum, oldval, newval, bnewent, binitials
 
       angles = target_struct.angles;
 
-      if(isDefined(level.var_d9d93dd9[weaponname])) {
-        switch (level.var_d9d93dd9[weaponname]) {
+      if(isDefined(level.buildable_wallbuy_weapon_angles[weaponname])) {
+        switch (level.buildable_wallbuy_weapon_angles[weaponname]) {
           case 90:
             angles = vectortoangles(anglestoright(angles));
             break;

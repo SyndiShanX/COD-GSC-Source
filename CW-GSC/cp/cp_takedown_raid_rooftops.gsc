@@ -38,7 +38,7 @@
 #using scripts\cp_common\util;
 #namespace tkdn_raid_roof;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   var_8a3bb97c = getspawnerarray("raid_adler", "targetname");
   var_8a3bb97c[0] spawner::add_spawn_function(&namespace_b100dd86::function_9109a1fe);
   woods_spawner = getspawnerarray("raid_woods", "targetname");
@@ -72,12 +72,12 @@ function starting(var_d3440450) {
   thread objectives::scripted("obj_takedown_capture", undefined, #"hash_49c1d860c97e3792");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   exploder::exploder("lgt_vista_lights");
   level notify(#"hash_530a04ce72c2c9");
   level thread namespace_b100dd86::function_c212022b(180);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level namespace_a052577e::function_1dc92e4f();
     level thread scene::init("scene_tkd_hit2_adler_alley");
     level thread scene::play("scene_tkd_hit2_adler_alley", "gate_closed");
@@ -101,8 +101,8 @@ function main(var_d3440450, var_50cc0d4f) {
   self util::blend_movespeedscale(0.85, 1);
   level flag::wait_till("raid_roof_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

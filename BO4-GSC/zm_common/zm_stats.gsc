@@ -245,8 +245,8 @@ player_stats_init() {
   self add_map_stat("score", self.score);
   self globallogic_score::initpersstat(#"zteam", 0);
 
-  if(isDefined(level.var_4b5a61cf)) {
-    [[level.var_4b5a61cf]]();
+  if(isDefined(level.level_specific_stats_init)) {
+    [[level.level_specific_stats_init]]();
   }
 
   if(!isDefined(self.stats_this_frame)) {
@@ -1514,7 +1514,7 @@ function_ea5b4947(b_end_game = 0) {
         }
 
         player reportlootconsume(bgb, player.bgb_stats[bgb].bgb_used_this_game);
-        player.bgb_stats[bgb].var_c2a984f0 -= player.bgb_stats[bgb].bgb_used_this_game;
+        player.bgb_stats[bgb].bgb_available_at_start -= player.bgb_stats[bgb].bgb_used_this_game;
         player.bgb_stats[bgb].bgb_used_this_game = 0;
       }
     }

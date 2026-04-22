@@ -32,7 +32,7 @@
 #using scripts\cp_common\util;
 #namespace tkdn_af_wreck;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   namespace_b100dd86::function_5aabc3fb();
   flag::set("af_skid_complete");
   level.arash = spawner::simple_spawn_single("arash");
@@ -43,7 +43,7 @@ function starting(var_d3440450) {
   namespace_82bfe441::fade(1, "FadeImmediate");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   if(!isalive(level.arash)) {
     level.arash = spawner::simple_spawn_single("arash");
     level.arash namespace_979752dc::function_2324f175(0);
@@ -83,7 +83,7 @@ function main(var_d3440450, var_50cc0d4f) {
   arash.var_c681e4c1 = 1;
   music::setmusicstate("b7.0_aftermath");
   level thread scene::play("scene_tkd_hit3_outro_interrogation", [arash]);
-  level thread function_ea2f2e25(var_50cc0d4f);
+  level thread function_ea2f2e25(b_starting);
   level waittill(#"hash_285b0696c88c644a");
   thread namespace_a052577e::function_4788a209();
   objectives::complete("obj_arash");
@@ -91,8 +91,8 @@ function main(var_d3440450, var_50cc0d4f) {
   wait 1;
   level lui::screen_fade_out(2.5);
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 
   wait 1;
@@ -166,14 +166,14 @@ function function_70dd6f0e() {
   level clientfield::set("wreck_volume_decals", 1);
 }
 
-function function_ea2f2e25(var_50cc0d4f) {
+function function_ea2f2e25(b_starting) {
   adler = getactorarray("af_adler", "targetname")[0];
   adler hide();
   player = getplayers()[0];
   setDvar(#"hash_252e699c41531f1a", 0);
   player clientfield::set_to_player("wreck_vision", 1);
 
-  if(is_true(var_50cc0d4f)) {
+  if(is_true(b_starting)) {
     wait level.var_c0c469ea + 0.55;
   } else {
     wait 0.55;

@@ -55,7 +55,7 @@ function_4b163259(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
         self function_c5d307a1(n_cost);
         return 0;
       } else {
-        n_cost = zm_score::function_ffc2d0bc();
+        n_cost = zm_score::get_player_score();
 
         if(n_cost == 0) {
           n_damage = idamage;

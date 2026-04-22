@@ -70,7 +70,7 @@ onoutofboundschange(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
   localplayer = function_5c10bd79(localclientnum);
 
-  if(function_3132f113(localplayer)) {
+  if(isremovedentity(localplayer)) {
     return;
   }
 

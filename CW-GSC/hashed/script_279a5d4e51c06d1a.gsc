@@ -70,10 +70,10 @@ function function_9de162de(str_objective) {
   doors::lock("bar_bathroom_door");
 }
 
-function function_b3837ddc(str_objective, var_50cc0d4f) {
+function function_b3837ddc(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     namespace_5ceacc03::music("6.0_incoming_skipto");
     namespace_11998b8f::stakeout_stow_weapon();
     level thread function_da707a70();
@@ -122,7 +122,7 @@ function function_b3837ddc(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_4f2cda6a(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_4f2cda6a(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("flag_show_vista_tower_02");
     exploder::stop_exploder("fx_exp_vista_tower1");
@@ -398,10 +398,10 @@ function function_2d6c81be(str_objective) {
   level thread function_f1d4ab4b();
 }
 
-function function_34ee80b8(str_objective, var_50cc0d4f) {
+function function_34ee80b8(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread function_c5a860f1(1);
     level thread function_da707a70(1);
     level battlechatter::function_2ab9360b(0);
@@ -453,7 +453,7 @@ function function_34ee80b8(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_821fcf7c(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_821fcf7c(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_d2de5ec5(scenedef) {
   if(level scene::is_active(scenedef)) {
@@ -1758,13 +1758,13 @@ function function_8262abe1(str_objective) {
   doors::open("alley_1_tutorial_door");
 }
 
-function function_b4ae0031(str_objective, var_50cc0d4f) {
+function function_b4ae0031(str_objective, b_starting) {
   player = getplayers()[0];
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread function_c5a860f1(1);
     level thread namespace_11998b8f::function_81fce913();
-    level function_3e93882(var_50cc0d4f);
+    level function_3e93882(b_starting);
   }
 
   level.var_351720cf = getent("alley_3_courtyard_door_blocker", "targetname");
@@ -1782,7 +1782,7 @@ function function_b4ae0031(str_objective, var_50cc0d4f) {
     level flag::wait_till("flag_alley_3_lazar_close_door");
   }
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     if(!level flag::get("alley_2_stealth_was_broken")) {
       player stats::function_dad108fa(#"hash_36d0e0af1bd1b8c7", 1);
     }
@@ -1884,14 +1884,14 @@ function function_26f625c() {
   level thread namespace_fba81a7f::function_47620ece();
 }
 
-function function_e73c0be(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_e73c0be(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     trigger::use("cleanup_alley_spawners", "targetname", undefined, 0);
   }
 }
 
-function function_3e93882(var_50cc0d4f) {
-  if(!is_true(var_50cc0d4f)) {
+function function_3e93882(b_starting) {
+  if(!is_true(b_starting)) {
     level flag::wait_till("alley_2_spawn_lazar");
   }
 

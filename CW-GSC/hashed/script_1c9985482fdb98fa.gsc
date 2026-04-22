@@ -26,16 +26,16 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_vault_breach;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_vault_breach_begin");
   level battlechatter::function_2ab9360b(1);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450);
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto);
     level.adler namespace_e77bf565::function_5770c74("assault");
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
     level thread scene::init("scene_kgb_open_vault");
@@ -45,13 +45,13 @@ function main(var_d3440450, var_50cc0d4f) {
   }
 
   level thread scene::skipto_end_noai("scene_kgb_utility_room_adler", "Door_Closed", undefined, 1);
-  level thread namespace_e77bf565::function_7feb07bb(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::function_7feb07bb(str_skipto, b_starting);
   namespace_353d803e::music("deactivate_11.3_combat2");
-  level thread function_b735db01(var_50cc0d4f);
+  level thread function_b735db01(b_starting);
   level flag::wait_till("aslt_vault_breach_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -76,7 +76,7 @@ function function_22b7fffd() {
   animation::add_notetrack_func("kgb_aslt_vault_breach::player_end_function", &function_a5bde76d);
 }
 
-function function_b735db01(var_50cc0d4f = 0) {
+function function_b735db01(b_starting = 0) {
   level.player endon(#"death");
   level thread function_7adf5eeb();
   level thread function_1b4d1d8b();
@@ -92,7 +92,7 @@ function function_b735db01(var_50cc0d4f = 0) {
   level thread kgb_aslt_vault::function_259d8d6f();
   vault_breach_obj_org util::remove_cursor_hint();
   level flag::set("vault_breach_started");
-  level thread kgb_aslt_vault::function_833a9413(var_50cc0d4f);
+  level thread kgb_aslt_vault::function_833a9413(b_starting);
   level notify(#"hash_46aa399eec4ff274");
   level thread function_3f313a71();
   level flag::set("adler_enter_vault");

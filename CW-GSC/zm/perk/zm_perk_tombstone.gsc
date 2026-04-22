@@ -59,8 +59,8 @@ function function_27473e44() {
 }
 
 function precache() {
-  if(isDefined(level.var_cf57ff63)) {
-    [[level.var_cf57ff63]]();
+  if(isDefined(level.staminup_precache_override_func)) {
+    [[level.staminup_precache_override_func]]();
     return;
   }
 
@@ -610,8 +610,8 @@ function function_9ebf012d() {
   angles = spawnpoint.angles;
   new_origin = undefined;
 
-  if(isDefined(level.var_5816975b)) {
-    new_origin = [[level.var_5816975b]](self);
+  if(isDefined(level.check_valid_spawn_override)) {
+    new_origin = [[level.check_valid_spawn_override]](self);
   }
 
   if(isDefined(level.var_8179368e)) {

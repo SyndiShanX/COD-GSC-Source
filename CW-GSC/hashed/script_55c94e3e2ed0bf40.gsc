@@ -44,8 +44,8 @@ function function_a5ad7a90(str_objective) {
   namespace_fc3e8cb::function_2987fd4c("s_teleport_woods_perimeter", 1, 0);
 }
 
-function function_709fd94e(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_709fd94e(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level flag::set(#"flg_lockpick_start");
   clientfield::set("cull_allinterior", 1);
@@ -54,10 +54,10 @@ function function_709fd94e(str_objective, var_50cc0d4f) {
   level thread function_bb9839d8();
   level thread namespace_979752dc::function_740dbf99();
   level flag::wait_till(#"hash_6ddc7c0cf621eef8");
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function function_70073b6b(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_70073b6b(str_objective, b_starting, var_aa1a6455, player) {
   level flag::clear("flg_woods_radio");
 
   if(player) {
@@ -421,7 +421,7 @@ function function_debfe625(str_objective) {
   level thread namespace_fc3e8cb::function_6fe40e14("side_door_gun_rack1", "side_door_gun_rack2", "side_door_gun_rack3");
 }
 
-function tunnels_main(str_objective, var_50cc0d4f) {
+function tunnels_main(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
   transient = savegame::function_6440b06b(#"transient");
@@ -430,7 +430,7 @@ function tunnels_main(str_objective, var_50cc0d4f) {
     level.player stats::function_dad108fa(#"hash_5846fb59bec18f77", 1);
   }
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::function_7790f03();
   }
 
@@ -445,7 +445,7 @@ function tunnels_main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function tunnels_cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function tunnels_cleanup(str_objective, b_starting, var_aa1a6455, player) {
   clientfield::set("cull_mainstreet", 1);
   clientfield::set("cull_helipad", 2);
   level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_townsquare_keys", 1, "flg_terminal_end");

@@ -45,9 +45,9 @@ function function_f50bc4b9() {
   level flag::init("flag_post_prisoner_complete");
 }
 
-function starting(var_d3440450) {}
+function starting(str_skipto) {}
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   if(level.var_b28c2c3a == "dev_post_prisoner_park_survived") {
     level.player player_decision::function_ff7e19cb(0);
   }
@@ -68,7 +68,7 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread namespace_31c67f6d::function_12e3ea01();
   level namespace_31c67f6d::function_6194f34a("post_prisoner", 1);
   level thread function_dbf5481b();
-  level thread namespace_4ed3ce47::function_7edafa59(var_50cc0d4f + "_briefing");
+  level thread namespace_4ed3ce47::function_7edafa59(b_starting + "_briefing");
   level thread exploder::exploder("exp_post_armada_lazar_workbench");
   level thread exploder::exploder("exp_lgt_post_prioner_dialog");
   collision = getent("gurney_collision", "targetname");
@@ -98,7 +98,7 @@ function function_3b9f24df() {
   level thread function_474dc7d3();
   wait 2;
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 
@@ -672,7 +672,7 @@ function function_49369331() {
   level thread namespace_4ed3ce47::function_ef8c9b18();
 }
 
-function function_c649acda(var_d3440450) {
+function function_c649acda(str_skipto) {
   level thread scene::play(level.str_scene_name, "zone_idle", level.var_58ccee4);
   level thread exploder::exploder("exp_post_armada_lazar_workbench");
   level thread namespace_31c67f6d::function_b0558ba2("8");
@@ -684,26 +684,26 @@ function function_55851873(str_scene_name) {
   level notify(#"white_screen_over");
 }
 
-function function_6be7ec40(var_d3440450) {
+function function_6be7ec40(str_skipto) {
   level thread scene::play(level.str_scene_name, "zone_idle", level.var_58ccee4);
   level thread exploder::exploder("exp_post_armada_lazar_workbench");
   level thread namespace_31c67f6d::function_b0558ba2("8");
   level flag::set("flag_post_prisoner_truth");
 }
 
-function function_82c37b22(var_d3440450, var_50cc0d4f) {
+function function_82c37b22(str_skipto, b_starting) {
   while(!isDefined(level.player_connected) || isDefined(level.player_connected) && level.player_connected != 1) {
     waitframe(1);
   }
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 
   level function_d6d3bd92();
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 
@@ -828,9 +828,9 @@ function function_c21e258e() {
   level.player player_decision::function_cde4f4e9(0);
 }
 
-function function_fb10b77d(var_d3440450) {}
+function function_fb10b77d(str_skipto) {}
 
-function function_cbf93ca7(var_d3440450, var_50cc0d4f) {
+function function_cbf93ca7(str_skipto, b_starting) {
   level thread namespace_31c67f6d::function_f2cd5fc0();
   level namespace_31c67f6d::function_1f4ed1b4("dev_burn_safehouse");
   level scene::init("scene_hub_safehouse_burns");
@@ -844,7 +844,7 @@ function function_cbf93ca7(var_d3440450, var_50cc0d4f) {
   wait 3;
   level.player stopgestureviewmodel();
 
-  if(isDefined(level.var_d7d201ba) && isDefined(level.var_28c22d88)) {
+  if(isDefined(level.var_d7d201ba) && isDefined(level.skipto_current_objective)) {
     level.player flag::set(level.var_d7d201ba);
   }
 
@@ -873,7 +873,7 @@ function function_62a6be7() {
   namespace_4ed3ce47::function_8d5b23ae();
 }
 
-function function_6bb0fd28(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_6bb0fd28(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_cb6a2e9b() {
   wait 7;

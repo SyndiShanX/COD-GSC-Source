@@ -33,21 +33,21 @@ function player_any_player_in_laststand() {
 }
 
 function function_7fb2bbfc() {
-  var_5eb47b1d = [];
+  a_active_players = [];
 
   foreach(player in function_a1ef346b()) {
     if(!player inlaststand()) {
-      if(!isDefined(var_5eb47b1d)) {
-        var_5eb47b1d = [];
-      } else if(!isarray(var_5eb47b1d)) {
-        var_5eb47b1d = array(var_5eb47b1d);
+      if(!isDefined(a_active_players)) {
+        a_active_players = [];
+      } else if(!isarray(a_active_players)) {
+        a_active_players = array(a_active_players);
       }
 
-      var_5eb47b1d[var_5eb47b1d.size] = player;
+      a_active_players[a_active_players.size] = player;
     }
   }
 
-  return var_5eb47b1d;
+  return a_active_players;
 }
 
 function is_facing(facee, requireddot = 0.9) {

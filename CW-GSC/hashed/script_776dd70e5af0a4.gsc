@@ -51,8 +51,8 @@ function function_1bfb5e75(str_objective) {
   level thread namespace_fc3e8cb::function_6fe40e14("video_store_gun_rack1", "video_store_gun_rack2", "video_store_gun_rack3");
 }
 
-function function_6fc923cc(str_objective, var_50cc0d4f) {
-  namespace_fc3e8cb::function_44a6fc04(var_50cc0d4f);
+function function_6fc923cc(str_objective, b_starting) {
+  namespace_fc3e8cb::function_44a6fc04(b_starting);
 
   level thread function_50c0c9bc();
   level thread function_ab2e5181();
@@ -60,10 +60,10 @@ function function_6fc923cc(str_objective, var_50cc0d4f) {
   level thread function_c3206d47();
   level thread function_bdbde0c9();
   flag::wait_till("flg_main_street_start");
-  skipto::function_4e3ab877(var_50cc0d4f);
+  skipto::function_4e3ab877(b_starting);
 }
 
-function function_b85d7b0c(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_b85d7b0c(str_objective, b_starting, var_aa1a6455, player) {
   if(player == 1) {
     level flag::set("flg_arcade_end_gundown");
     level thread function_bdbde0c9();
@@ -394,12 +394,12 @@ function function_eea61ebe() {
   level flag::set("flg_video_store_path_3_1_exit");
 }
 
-function function_c5b43ce(str_objective, var_50cc0d4f) {
+function function_c5b43ce(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
   level thread cp_rus_amerika::function_f6b6f426("terminal");
 
-  if(!var_50cc0d4f) {
+  if(!b_starting) {
     savegame::checkpoint_save(1);
   }
 
@@ -419,7 +419,7 @@ function function_c5b43ce(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_c76d36b0(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function function_c76d36b0(str_objective, b_starting, var_aa1a6455, player) {
   if(player) {
     level flag::set("flg_stop_corner_area_main_street_optional_spawns");
     level thread namespace_f6d09d1a::function_7b9feaa3("lgtexp_perf_mainstreet_keys_a", 1);
@@ -942,10 +942,10 @@ function function_e169c9d8(str_objective) {
   level thread function_8a32e8b0();
 }
 
-function function_f7a489fd(str_objective, var_50cc0d4f) {
+function function_f7a489fd(str_objective, b_starting) {
   namespace_fc3e8cb::function_44a6fc04(str_objective);
 
-  if(var_50cc0d4f) {
+  if(b_starting) {
     level thread cp_rus_amerika::function_f6b6f426("terminal");
   }
 
@@ -959,7 +959,7 @@ function function_f7a489fd(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877(str_objective);
 }
 
-function function_5ce25b5(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function function_5ce25b5(str_objective, b_starting, var_aa1a6455, player) {}
 
 function function_1dba4c53() {
   level.player endon(#"death");

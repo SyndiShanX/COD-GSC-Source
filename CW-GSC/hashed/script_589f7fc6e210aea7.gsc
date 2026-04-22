@@ -28,7 +28,7 @@ function starting(str_objective) {
   fav::init();
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   level spawner::simple_spawn("ally_breach_spawner");
   level waittill(#"hash_465d6bb5960c37f8");
   var_3e3877e9 = spawner::get_ai_group_ai("initial_ally_group");
@@ -41,7 +41,7 @@ function main(str_objective, var_50cc0d4f) {
   level flag::set("flg_fav_exit_hint");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {}
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {}
 
 function private function_28dee3ce() {
   level waittill(#"hash_3a698db448edb3a");

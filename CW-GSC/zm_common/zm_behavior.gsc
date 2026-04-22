@@ -794,7 +794,7 @@ function zombiefindflesh(behaviortreeentity) {
     [[level.var_d22435d9]](behaviortreeentity);
   }
 
-  if(!isDefined(level.var_4bde8b8f) || ![[level.var_4bde8b8f]]()) {
+  if(!isDefined(level.check_for_alternate_poi) || ![[level.check_for_alternate_poi]]()) {
     if(isDefined(zombie_poi)) {
       behaviortreeentity.enemy_override = zombie_poi.poi_ent;
       behaviortreeentity.enemy_override.var_dfa42180 = &zm_utility::function_49f80b6f;

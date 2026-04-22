@@ -166,20 +166,20 @@ function private function_55ce3493() {
   while(true) {
     waitresult = self waittill(#"hash_1748b3e6967cf7aa", #"hash_45aa77702fef26f4");
     var_1b8b64ca = self.attack_spots_taken.size;
-    var_6195506c = 0;
+    used_spots = 0;
 
     foreach(spot in self.attack_spots_taken) {
       if(spot) {
-        var_6195506c++;
+        used_spots++;
       }
     }
 
-    if(var_6195506c == var_1b8b64ca) {
+    if(used_spots == var_1b8b64ca) {
       setenablenode(self.neg_start, 0);
       continue;
     }
 
-    if(waitresult._notify === #"hash_45aa77702fef26f4" && var_6195506c == var_1b8b64ca - 1) {
+    if(waitresult._notify === #"hash_45aa77702fef26f4" && used_spots == var_1b8b64ca - 1) {
       setenablenode(self.neg_start, 1);
     }
   }

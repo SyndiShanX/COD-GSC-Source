@@ -30,7 +30,7 @@
 #using scripts\cp_common\skipto;
 #namespace namespace_1ca393d1;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level.var_aece851d = [];
   level.var_33621ea7 = 1;
   namespace_42da7c51::function_ed760ecb("woods");
@@ -42,7 +42,7 @@ function starting(var_d3440450) {
   level flag::set("flag_assault_heli_1");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level thread function_22755a86();
   level notify(#"hash_4f6dc93101e62ff5");
   level.var_7c11765c = 0;
@@ -52,8 +52,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level util::delay_notify(1, "heli_focus_gas_garage");
   level flag::wait_till("flag_trailer_park_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

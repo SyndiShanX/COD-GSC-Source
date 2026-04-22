@@ -180,7 +180,7 @@ function propdevgui() {
 
     if(getdvarint(#"hash_618be616410fad95", 0) != var_94dbbfd9 && isDefined(level.players)) {
       foreach(player in level.players) {
-        if(player prop::function_84793f03()) {
+        if(player prop::ishunter()) {
           var_94dbbfd9 = getdvarint(#"hash_618be616410fad95", 0);
           player.var_8df5658d = !is_true(player.var_8df5658d);
           player iprintlnbold(player.var_8df5658d ? "<dev string:xbec>" : "<dev string:xbff>");
@@ -336,8 +336,8 @@ function function_fd3c3ed0(enabled) {
   return 1;
 }
 
-function function_9cd2eb63(color, label, value, text, var_e1fb743e) {
-  hudelem = prop_controls::addupperrighthudelem(label, value, text, var_e1fb743e);
+function function_9cd2eb63(color, label, value, text, textpc) {
+  hudelem = prop_controls::addupperrighthudelem(label, value, text, textpc);
   hudelem.alpha = 0.5;
   hudelem.color = color;
   return hudelem;
@@ -737,26 +737,26 @@ function plaza_dom_point_neutral_b_secured(file, propsizetext) {
   }
 }
 
-function function_79d57521(file, var_7723a9cd) {
-  var_7e52c89c = var_7723a9cd + "<dev string:xdfc>";
-  var_44c49e4e = var_7723a9cd + "<dev string:xe04>";
-  var_473e8b8d = var_7723a9cd + "<dev string:xe0c>";
-  var_ca180226 = level.script + "<dev string:xe15>";
+function function_79d57521(file, filename_base) {
+  var_7e52c89c = filename_base + "<dev string:xdfc>";
+  filename_header = filename_base + "<dev string:xe04>";
+  var_473e8b8d = filename_base + "<dev string:xe0c>";
+  filename_zone = level.script + "<dev string:xe15>";
   var_19494914 = level.script + "<dev string:xe1e>";
-  var_155d523d = "<dev string:xe26>";
+  dir_zone = "<dev string:xe26>";
   var_7770e500 = "<dev string:xe42>";
   var_d6ade535 = "<dev string:xe61>";
   fprintln(file, "<dev string:xe88>");
   fprintln(file, "<dev string:xdc8>");
   fprintln(file, "<dev string:xf31>");
   fprintln(file, "<dev string:xf3c>" + var_7e52c89c + "<dev string:xf56>");
-  fprintln(file, "<dev string:xf6b>" + var_44c49e4e + "<dev string:xf56>");
-  fprintln(file, "<dev string:xf85>" + var_473e8b8d + "<dev string:xf9b>" + var_155d523d);
+  fprintln(file, "<dev string:xf6b>" + filename_header + "<dev string:xf56>");
+  fprintln(file, "<dev string:xf85>" + var_473e8b8d + "<dev string:xf9b>" + dir_zone);
   fprintln(file, "<dev string:xfa3>" + var_7e52c89c + "<dev string:xf9b>" + var_d6ade535);
-  fprintln(file, "<dev string:xfb9>" + var_44c49e4e + "<dev string:xf9b>" + var_7770e500);
+  fprintln(file, "<dev string:xfb9>" + filename_header + "<dev string:xf9b>" + var_7770e500);
   fprintln(file, "<dev string:xfcf>");
-  fprintln(file, "<dev string:xff3>" + var_ca180226 + "<dev string:x1011>" + var_7723a9cd);
-  fprintln(file, "<dev string:x101f>" + var_19494914 + "<dev string:x103d>" + var_44c49e4e + "<dev string:x1056>");
+  fprintln(file, "<dev string:xff3>" + filename_zone + "<dev string:x1011>" + filename_base);
+  fprintln(file, "<dev string:x101f>" + var_19494914 + "<dev string:x103d>" + filename_header + "<dev string:x1056>");
   fprintln(file, "<dev string:xdc8>");
   fprintln(file, "<dev string:x105b>");
   fprintln(file, "<dev string:xdc8>");
@@ -771,8 +771,8 @@ function function_cb8ecc99() {
     platform = "<dev string:x109d>";
   }
 
-  var_7723a9cd = level.script + "<dev string:x10a8>";
-  var_7e52c89c = var_7723a9cd + "<dev string:xdfc>";
+  filename_base = level.script + "<dev string:x10a8>";
+  var_7e52c89c = filename_base + "<dev string:xdfc>";
   var_b522696f = "<dev string:x10af>" + platform + "<dev string:x10b8>";
   var_d6ade535 = "<dev string:xe61>";
   file = openfile(var_7e52c89c, "<dev string:x10c8>");
@@ -783,7 +783,7 @@ function function_cb8ecc99() {
     return;
   }
 
-  function_79d57521(file, var_7723a9cd);
+  function_79d57521(file, filename_base);
   fprintln(file, "<dev string:x10f7>");
   function_62b9b9ac(file, "<dev string:xcb6>");
   fprintln(file, "<dev string:xdc8>");
@@ -812,8 +812,8 @@ function function_2b23b2b6() {
     platform = "<dev string:x109d>";
   }
 
-  var_7723a9cd = level.script + "<dev string:x10a8>";
-  var_7e52c89c = var_7723a9cd + "<dev string:xe04>";
+  filename_base = level.script + "<dev string:x10a8>";
+  var_7e52c89c = filename_base + "<dev string:xe04>";
   var_b522696f = "<dev string:x10af>" + platform + "<dev string:x10b8>";
   var_d6ade535 = "<dev string:xe42>";
   file = openfile(var_7e52c89c, "<dev string:x10c8>");
@@ -852,14 +852,14 @@ function function_f2e19297() {
     platform = "<dev string:x109d>";
   }
 
-  var_7723a9cd = level.script + "<dev string:x10a8>";
-  var_7e52c89c = var_7723a9cd + "<dev string:xdfc>";
-  var_44c49e4e = var_7723a9cd + "<dev string:xe04>";
-  var_473e8b8d = var_7723a9cd + "<dev string:xe0c>";
-  var_ca180226 = level.script + "<dev string:xe15>";
+  filename_base = level.script + "<dev string:x10a8>";
+  var_7e52c89c = filename_base + "<dev string:xdfc>";
+  filename_header = filename_base + "<dev string:xe04>";
+  var_473e8b8d = filename_base + "<dev string:xe0c>";
+  filename_zone = level.script + "<dev string:xe15>";
   var_19494914 = level.script + "<dev string:xe1e>";
   var_b522696f = "<dev string:x10af>" + platform + "<dev string:x10b8>";
-  var_155d523d = "<dev string:xe26>";
+  dir_zone = "<dev string:xe26>";
   var_7770e500 = "<dev string:xe42>";
   var_d6ade535 = "<dev string:xe61>";
   file = openfile(var_7e52c89c, "<dev string:x10c8>");
@@ -870,7 +870,7 @@ function function_f2e19297() {
     return;
   }
 
-  function_79d57521(file, var_7723a9cd);
+  function_79d57521(file, filename_base);
   fprintln(file, "<dev string:x10f7>");
   fprintln(file, "<dev string:x11d3>");
   fprintln(file, "<dev string:x11d3>");
@@ -905,11 +905,11 @@ function function_f2e19297() {
   fprintln(file, "<dev string:x123f>");
   fprintln(file, "<dev string:x123f>");
   closefile(file);
-  file = openfile(var_44c49e4e, "<dev string:x10c8>");
+  file = openfile(filename_header, "<dev string:x10c8>");
 
   if(file == -1) {
-    iprintlnbold("<dev string:x10d1>" + var_b522696f + var_44c49e4e + "<dev string:x10e7>");
-    println("<dev string:x10d1>" + var_b522696f + var_44c49e4e + "<dev string:x10e7>");
+    iprintlnbold("<dev string:x10d1>" + var_b522696f + filename_header + "<dev string:x10e7>");
+    println("<dev string:x10d1>" + var_b522696f + filename_header + "<dev string:x10e7>");
     return;
   }
 
@@ -956,7 +956,7 @@ function function_f2e19297() {
   }
 
   fprintln(file, "<dev string:x127d>" + var_7e52c89c);
-  fprintln(file, "<dev string:x12a0>" + var_44c49e4e);
+  fprintln(file, "<dev string:x12a0>" + filename_header);
   closefile(file);
   iprintlnbold("<dev string:x12b7>" + var_b522696f);
   println("<dev string:x12b7>" + var_b522696f);

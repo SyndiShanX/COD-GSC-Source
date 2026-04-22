@@ -449,8 +449,8 @@ function_d0bb3c35() {
   self endon(#"death", #"hash_4ecfa36be208fd5f");
   n_wait_time = 25;
 
-  if(isDefined(level.var_977f68ea)) {
-    n_time = [[level.var_977f68ea]](self);
+  if(isDefined(level._powerup_timeout_custom_time)) {
+    n_time = [[level._powerup_timeout_custom_time]](self);
 
     if(n_time == 0) {
       return;

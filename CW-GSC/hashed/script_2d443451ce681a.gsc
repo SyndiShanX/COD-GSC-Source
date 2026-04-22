@@ -247,11 +247,11 @@ function function_3ff06c1e(var_cd0c8024, var_69747751, var_7b2eb76f, var_89c6f2d
   level function_6706a21c(var_8564fb5f, var_69747751, var_7b2eb76f, b_shoot);
 }
 
-function function_c3314131(var_2795777d, var_82706add = "targetname", var_69747751, var_7b2eb76f, var_89c6f2db, n_timeout, str_flagname, b_shoot) {
+function function_c3314131(var_2795777d, str_ai_type = "targetname", var_69747751, var_7b2eb76f, var_89c6f2db, n_timeout, str_flagname, b_shoot) {
   e_goal = spawnStruct();
 
   if(isDefined(var_2795777d)) {
-    a_e_ai = getaiarray(var_2795777d, var_82706add);
+    a_e_ai = getaiarray(var_2795777d, str_ai_type);
   } else {
     a_e_ai = getaiarray();
   }

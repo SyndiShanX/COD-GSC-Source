@@ -899,9 +899,9 @@ function function_9a92c603(localclientnum, var_150143d0) {
 
 function function_3ce17e62(localclientnum, var_ab7c878c, var_393b2936, durationseconds) {
   assert(localclientnum >= 0 && localclientnum <= 1);
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
   n_time_end = gettime() + int(durationseconds * 1000);
-  n_timer = var_8fc81e63;
+  n_timer = n_time_start;
 
   while(isDefined(self) && [[self]] - > is_open(localclientnum)) {
     n_timer = gettime();
@@ -910,7 +910,7 @@ function function_3ce17e62(localclientnum, var_ab7c878c, var_393b2936, durations
       [[self]] - > set_alpha(localclientnum, var_393b2936);
       return;
     } else {
-      var_5db054c7 = mapfloat(var_8fc81e63, n_time_end, var_ab7c878c, var_393b2936, n_timer);
+      var_5db054c7 = mapfloat(n_time_start, n_time_end, var_ab7c878c, var_393b2936, n_timer);
       [[self]] - > set_alpha(localclientnum, var_5db054c7);
     }
 
@@ -920,9 +920,9 @@ function function_3ce17e62(localclientnum, var_ab7c878c, var_393b2936, durations
 
 function function_c11d702b(localclientnum, durationseconds, lowalpha, highalpha) {
   assert(localclientnum >= 0 && localclientnum <= 1);
-  var_8fc81e63 = gettime();
+  n_time_start = gettime();
   n_time_end = gettime() + int(durationseconds * 1000);
-  n_timer = var_8fc81e63;
+  n_timer = n_time_start;
   targetalpha = lowalpha;
   startalpha = highalpha;
 
@@ -931,14 +931,14 @@ function function_c11d702b(localclientnum, durationseconds, lowalpha, highalpha)
 
     if(n_timer >= n_time_end) {
       [[self]] - > set_alpha(localclientnum, targetalpha);
-      var_8fc81e63 = gettime();
+      n_time_start = gettime();
       n_time_end = gettime() + int(durationseconds * 1000);
-      n_timer = var_8fc81e63;
+      n_timer = n_time_start;
       temp = startalpha;
       startalpha = targetalpha;
       targetalpha = temp;
     } else {
-      var_5db054c7 = mapfloat(var_8fc81e63, n_time_end, startalpha, targetalpha, n_timer);
+      var_5db054c7 = mapfloat(n_time_start, n_time_end, startalpha, targetalpha, n_timer);
       [[self]] - > set_alpha(localclientnum, var_5db054c7);
     }
 

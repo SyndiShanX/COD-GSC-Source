@@ -362,11 +362,11 @@ function function_ae2c0ba5() {
   return (self.n_tribute - n_step * self.var_9e09931e) / n_step;
 }
 
-function function_d36fb590(var_aa4f9213, var_6c9485fc, var_b7e0faf0 = 3) {
+function function_d36fb590(var_aa4f9213, var_6c9485fc, n_fx_type = 3) {
   self endon(#"death");
 
-  if(var_b7e0faf0) {
-    self thread function_29e6dc49(0, var_b7e0faf0);
+  if(n_fx_type) {
+    self thread function_29e6dc49(0, n_fx_type);
   }
 
   var_8b84b3ce = self.var_642ed51a.var_f693bf0b.origin;

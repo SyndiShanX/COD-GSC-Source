@@ -188,9 +188,9 @@ function function_5c18a7f4(player) {
   player globallogic::function_d96c031e();
 
   if(isDefined(level.var_e9737821)) {
-    var_235457fd = self[[level.var_e9737821]](player, self.stub.var_8d5d092c);
+    b_can_use = self[[level.var_e9737821]](player, self.stub.var_8d5d092c);
   } else {
-    var_235457fd = self function_c52e8ba(player, self.stub.var_8d5d092c);
+    b_can_use = self function_c52e8ba(player, self.stub.var_8d5d092c);
   }
 
   if(!is_true(player.var_9c7b96ed[self.stub.var_8d5d092c])) {
@@ -213,7 +213,7 @@ function function_5c18a7f4(player) {
     }
   }
 
-  return var_235457fd;
+  return b_can_use;
 }
 
 function function_c52e8ba(player, var_8d5d092c) {
@@ -796,34 +796,34 @@ function fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
   self endon(#"death");
 
   while(true) {
-    self.var_2790fd8b = spawner::simple_spawn_single(var_5314bd63);
+    self.vh_rail = spawner::simple_spawn_single(var_5314bd63);
 
-    if(isDefined(self.var_2790fd8b)) {
+    if(isDefined(self.vh_rail)) {
       break;
     }
 
     waitframe(1);
   }
 
-  self.var_2790fd8b val::set("fasttravel_spline", "takedamage", 0);
-  self.var_2790fd8b val::set("fasttravel_spline", "allowdeath", 0);
-  self.var_2790fd8b setignorepauseworld(1);
+  self.vh_rail val::set("fasttravel_spline", "takedamage", 0);
+  self.vh_rail val::set("fasttravel_spline", "allowdeath", 0);
+  self.vh_rail setignorepauseworld(1);
 
   if(isDefined(level.var_a38d293a)) {
-    self.var_2790fd8b setacceleration(level.var_a38d293a);
+    self.vh_rail setacceleration(level.var_a38d293a);
   } else {
-    self.var_2790fd8b setacceleration(40);
+    self.vh_rail setacceleration(40);
   }
 
   if(isDefined(level.var_ce0f67cf)) {
-    self.var_2790fd8b setspeed(level.var_ce0f67cf);
+    self.vh_rail setspeed(level.var_ce0f67cf);
   } else {
-    self.var_2790fd8b setspeed(55);
+    self.vh_rail setspeed(55);
   }
 
-  self.var_2790fd8b setturningability(0.03);
-  self.var_2790fd8b.origin = nd_path_start.origin;
-  self.var_2790fd8b.angles = nd_path_start.angles;
+  self.vh_rail setturningability(0.03);
+  self.vh_rail.origin = nd_path_start.origin;
+  self.vh_rail.angles = nd_path_start.angles;
   self dontinterpolate();
   self setorigin(nd_path_start.origin);
 
@@ -831,22 +831,22 @@ function fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
     self setplayerangles(nd_path_start.angles);
   }
 
-  self.var_2790fd8b.e_parent = self;
+  self.vh_rail.e_parent = self;
 
   if(is_true(level.var_dfd49265)) {
-    self playerlinktodelta(self.var_2790fd8b, undefined, 0.5, 0, 0, 0, 0);
+    self playerlinktodelta(self.vh_rail, undefined, 0.5, 0, 0, 0, 0);
   } else if(is_true(level.var_9d19ea6d)) {
-    self playerlinktodelta(self.var_2790fd8b, undefined, 0.5, 180, 180, 180, 180, 1, 0);
+    self playerlinktodelta(self.vh_rail, undefined, 0.5, 180, 180, 180, 180, 1, 0);
   } else if(is_true(level.var_7ac95f85)) {
-    self playerlinktodelta(self.var_2790fd8b, undefined, 0.5, 180, 180, 20, 20);
+    self playerlinktodelta(self.vh_rail, undefined, 0.5, 180, 180, 20, 20);
   } else {
-    self playerlinktodelta(self.var_2790fd8b, undefined, 0.5, 30, 30, 15, 30);
+    self playerlinktodelta(self.vh_rail, undefined, 0.5, 30, 30, 15, 30);
   }
 
   self val::reset(#"fasttravel", "freezecontrols");
   self allowcrouch(0);
   self allowprone(0);
-  self.var_2790fd8b vehicle::get_on_path(nd_path_start);
+  self.vh_rail vehicle::get_on_path(nd_path_start);
   util::wait_network_frame();
   self clientfield::set("fasttravel_rail_fx", 1);
   self clientfield::set("" + # "hash_1747eb69683ce477", 1);
@@ -971,7 +971,7 @@ function function_5165d69() {
       continue;
     }
 
-    if(!isDefined(player.var_2790fd8b)) {
+    if(!isDefined(player.vh_rail)) {
       assert(0, "<dev string:x282>");
       continue;
     }
@@ -979,16 +979,16 @@ function function_5165d69() {
     player endon(#"death");
     player.var_3011d31c = 1;
     player notify(#"switch_rail");
-    player.var_2790fd8b vehicle::detach_path();
-    player.var_2790fd8b vehicle::get_on_path(var_616025ba);
+    player.vh_rail vehicle::detach_path();
+    player.vh_rail vehicle::get_on_path(var_616025ba);
     player clientfield::set("fasttravel_rail_fx", 2);
-    player.var_2790fd8b vehicle::go_path();
+    player.vh_rail vehicle::go_path();
     player notify(#"fasttravel_over");
     player unlink();
     wait 0.3;
 
-    if(isDefined(player.var_2790fd8b)) {
-      player.var_2790fd8b delete();
+    if(isDefined(player.vh_rail)) {
+      player.vh_rail delete();
     }
   }
 }
@@ -1012,22 +1012,22 @@ function function_ab80021(var_384528) {
   self endon(#"disconnect", #"switch_rail");
   self playrumblelooponentity(#"hash_5d8a1a68b12dfb24");
 
-  if(isDefined(self.var_2790fd8b)) {
-    self.var_2790fd8b vehicle::go_path();
+  if(isDefined(self.vh_rail)) {
+    self.vh_rail vehicle::go_path();
   }
 
   if(isDefined(var_384528)) {
-    if(isDefined(self.var_2790fd8b)) {
-      self.var_2790fd8b.origin = var_384528.origin;
+    if(isDefined(self.vh_rail)) {
+      self.vh_rail.origin = var_384528.origin;
     }
 
     self dontinterpolate();
     self setorigin(var_384528.origin);
     self setplayerangles(var_384528.angles);
 
-    if(isDefined(self.var_2790fd8b)) {
-      self.var_2790fd8b vehicle::get_on_path(var_384528);
-      self.var_2790fd8b vehicle::go_path();
+    if(isDefined(self.vh_rail)) {
+      self.vh_rail vehicle::get_on_path(var_384528);
+      self.vh_rail vehicle::go_path();
     }
   }
 
@@ -1036,8 +1036,8 @@ function function_ab80021(var_384528) {
   self unlink();
   wait 0.3;
 
-  if(isDefined(self.var_2790fd8b)) {
-    self.var_2790fd8b delete();
+  if(isDefined(self.vh_rail)) {
+    self.vh_rail delete();
   }
 }
 

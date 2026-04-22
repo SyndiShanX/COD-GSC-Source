@@ -1409,7 +1409,7 @@ function showdeathsdebug() {
     for(i = 0; i < oldspawnkills.size; i++) {
       spawnkill = oldspawnkills[i];
 
-      if(spawnkill.var_47d2dfb) {
+      if(spawnkill.dierwasspawner) {
         line(spawnkill.spawnpointorigin, spawnkill.dierorigin, (0.4, 0.5, 0.4));
         line(spawnkill.dierorigin, spawnkill.killerorigin, (0, 1, 1));
         print3d(spawnkill.dierorigin + (0, 0, 32), "<dev string:x28b>", (0, 1, 1));

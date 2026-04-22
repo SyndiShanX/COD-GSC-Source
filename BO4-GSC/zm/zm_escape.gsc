@@ -1070,7 +1070,7 @@ function_4b511c76() {
   foreach(var_46bf10d9 in level.var_4952e1) {
     var_46bf10d9 notify(#"hash_13c5316203561c4f");
     var_46bf10d9 notify(#"fully_charged");
-    var_46bf10d9.var_740e1e0e setModel("<dev string:x4ba>");
+    var_46bf10d9.mdl_rune setModel("<dev string:x4ba>");
   }
 
   level.n_soul_catchers_charged = level.var_4952e1.size;

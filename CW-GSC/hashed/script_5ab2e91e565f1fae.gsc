@@ -34,7 +34,7 @@ function start(str_objective) {
   level.player setmovespeedscale(0.85);
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   hms_util::function_eaa0342e("church_containment_warnings", "church_containment_fails");
@@ -69,7 +69,7 @@ function function_9c0ed7ec() {
   namespace_232ddc52::music("3.0_plaza");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x4b>");
 }
 

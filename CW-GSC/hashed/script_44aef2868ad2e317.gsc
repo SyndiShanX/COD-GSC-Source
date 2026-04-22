@@ -61,7 +61,7 @@
 #using scripts\cp_common\util;
 #namespace kgb_ins_prepare;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread scene::init("scene_kgb_poison_tea");
   level thread scene::init("scene_kgb_elevator_holdup");
@@ -73,7 +73,7 @@ function starting(var_d3440450) {
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.var_b3cae252 = 0;
   setDvar(#"hash_a794df2c802865c", 650);
   setDvar(#"hash_4b04afdbb8712861", 750);
@@ -84,10 +84,10 @@ function main(var_d3440450, var_50cc0d4f) {
     level flag::set("<dev string:x5e>");
   }
 
-  if(is_true(var_50cc0d4f)) {
-    level function_52f0fcb3(var_d3440450);
+  if(is_true(b_starting)) {
+    level function_52f0fcb3(str_skipto);
     level function_84d00884();
-    level thread namespace_99e99ffa::function_99e99ffa(var_d3440450);
+    level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
 
     if(namespace_94c47ce5::function_11b2b847()) {
@@ -124,8 +124,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level flag::wait_till("flag_open_basement");
   level thread function_c7476e69();
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -1444,7 +1444,7 @@ function function_33e0fa9c() {
   objectives::complete(#"hash_32c4531a044c1283");
 }
 
-function function_52f0fcb3(var_d3440450) {
+function function_52f0fcb3(str_skipto) {
   level.var_dae73e42 = [];
   level.var_dae73e42[level.var_dae73e42.size] = "player_in_restricted_area";
   level.var_dae73e42[level.var_dae73e42.size] = "player_in_restricted_area_charkov_office";
@@ -1491,7 +1491,7 @@ function function_52f0fcb3(var_d3440450) {
   namespace_979752dc::set_disguised(1);
   level.armory_guard = spawner::simple_spawn_single("armory_guard", &function_f632133);
 
-  if(var_d3440450 == "kgb_ins_activation" || var_d3440450 == "kgb_ins_briefing" || var_d3440450 == "kgb_ins_tutorial") {
+  if(str_skipto == "kgb_ins_activation" || str_skipto == "kgb_ins_briefing" || str_skipto == "kgb_ins_tutorial") {
     level.doorman = spawner::simple_spawn_single("doorman", &function_e8e968a5);
     level.doorman thread function_23df39ab();
     spawner::simple_spawn("kgb_hq_guard_second_floor", &function_e8e968a5);
@@ -5276,7 +5276,7 @@ function function_9202e546() {
 
 function function_1e1716d5() {}
 
-function function_a79c8909(var_d3440450) {
+function function_a79c8909(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread scene::init("scene_kgb_poison_tea");
   level thread scene::init("scene_kgb_elevator_holdup");
@@ -5288,11 +5288,11 @@ function function_a79c8909(var_d3440450) {
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
 
-function function_79e00661(var_d3440450, var_50cc0d4f) {
-  if(is_true(var_50cc0d4f)) {
-    level function_52f0fcb3(var_d3440450);
+function function_79e00661(str_skipto, b_starting) {
+  if(is_true(b_starting)) {
+    level function_52f0fcb3(str_skipto);
     level function_84d00884();
-    level thread namespace_99e99ffa::function_99e99ffa(var_d3440450);
+    level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
     namespace_e77bf565::function_e2e72d4(1);
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_inside_man", "team_in_elevator");
@@ -5301,8 +5301,8 @@ function function_79e00661(var_d3440450, var_50cc0d4f) {
   level.var_1b4de43 = [];
   level function_b797bde9();
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

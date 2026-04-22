@@ -79,14 +79,14 @@ function function_5507f3ad() {}
 function function_8106e2e1() {
   self setcharacterbodytype(1);
   self setcharacteroutfit(2);
-  thread namespace_42da7c51::setup_objectives(level.var_28c22d88[0]);
+  thread namespace_42da7c51::setup_objectives(level.skipto_current_objective[0]);
   knife = getweapon(#"knife_held");
 
   if(self hasweapon(knife, 1)) {
     self takeweapon(knife, 1);
   }
 
-  switch (level.var_28c22d88[0]) {
+  switch (level.skipto_current_objective[0]) {
     default:
       namespace_42da7c51::function_6154e4c2();
       break;

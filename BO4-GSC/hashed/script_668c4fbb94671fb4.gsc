@@ -953,7 +953,7 @@ function_4e69659c() {
 }
 
 function_23d7198d(e_player) {
-  if(self zm_utility::function_ab9a9770() && !e_player zm_utility::function_ab9a9770()) {
+  if(self zm_utility::duf47() && !e_player zm_utility::duf47()) {
     n_distance = distance(self.origin, e_player.origin);
 
     if(n_distance > 128 && !(isDefined(self.b_teleported) && self.b_teleported)) {
@@ -961,7 +961,7 @@ function_23d7198d(e_player) {
     }
   }
 
-  if(self zm_utility::function_ab9a9770() && e_player zm_utility::function_ab9a9770()) {
+  if(self zm_utility::duf47() && e_player zm_utility::duf47()) {
     if(isDefined(self.t_interact) && !(isDefined(e_player.var_c0a4d6b1) && e_player.var_c0a4d6b1)) {
       e_player.var_c0a4d6b1 = 1;
       self.t_interact setinvisibletoplayer(e_player);
@@ -974,7 +974,7 @@ function_524c833(e_player) {
   self endon(#"death");
   e_player endon(#"death");
 
-  while(self zm_utility::function_ab9a9770() && e_player zm_utility::function_ab9a9770()) {
+  while(self zm_utility::duf47() && e_player zm_utility::duf47()) {
     wait 0.2;
   }
 
@@ -2178,10 +2178,10 @@ function_c8d4b885(s_params) {
   }
 }
 
-function_580723de(var_1bb50dab = 1, e_player) {
+function_580723de(b_shown = 1, e_player) {
   self endon(#"death", #"hash_60f9171b687c9d06", #"hash_4636f041ae52f0fa", #"hash_300e9fed7925cd69");
 
-  if(var_1bb50dab) {
+  if(b_shown) {
     if(isDefined(level.var_7c9cd6ae)) {
       level.var_7c9cd6ae unlink();
       level.var_7c9cd6ae delete();
@@ -2207,10 +2207,10 @@ function_580723de(var_1bb50dab = 1, e_player) {
 }
 
 function_3854c592() {
-  var_bdf9e3c2 = "cellblock_shower";
-  a_str_active_zones = zm_cleanup::get_adjacencies_to_zone(var_bdf9e3c2);
-  arrayremovevalue(a_str_active_zones, var_bdf9e3c2);
-  zone_shower = level.zones[var_bdf9e3c2];
+  str_current_zone = "cellblock_shower";
+  a_str_active_zones = zm_cleanup::get_adjacencies_to_zone(str_current_zone);
+  arrayremovevalue(a_str_active_zones, str_current_zone);
+  zone_shower = level.zones[str_current_zone];
   a_str_zones = arraycopy(a_str_active_zones);
 
   foreach(str_zones in a_str_zones) {
@@ -3229,8 +3229,8 @@ function_cd0d0123(a_s_firewalls, str_exploder) {
   level zm_bgb_anywhere_but_here::function_886fce8f(0);
 
   foreach(s_firewall in a_s_firewalls) {
-    s_firewall.var_3cefdbf5 = util::spawn_model("collision_player_wall_128x128x10", s_firewall.origin + var_d3c21d73, s_firewall.angles);
-    s_firewall.var_3cefdbf5 ghost();
+    s_firewall.mdl_collision = util::spawn_model("collision_player_wall_128x128x10", s_firewall.origin + var_d3c21d73, s_firewall.angles);
+    s_firewall.mdl_collision ghost();
   }
 
   if(isDefined(str_exploder)) {
@@ -3244,8 +3244,8 @@ function_cd0d0123(a_s_firewalls, str_exploder) {
   }
 
   foreach(s_firewall in a_s_firewalls) {
-    if(isDefined(s_firewall.var_3cefdbf5)) {
-      s_firewall.var_3cefdbf5 delete();
+    if(isDefined(s_firewall.mdl_collision)) {
+      s_firewall.mdl_collision delete();
     }
   }
 

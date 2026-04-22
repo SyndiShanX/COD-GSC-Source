@@ -2992,7 +2992,7 @@ damage_over_time(dmg, delay, attacker) {
   }
 }
 
-function_2d87c1f1(str_zone, v_loc) {
+drop_max_ammo(str_zone, v_loc) {
   e_pickup = spawn("script_model", v_loc);
   e_pickup.targetname = "zm_ammo_pickup";
   e_pickup setModel(#"p7_zm_power_up_max_ammo");

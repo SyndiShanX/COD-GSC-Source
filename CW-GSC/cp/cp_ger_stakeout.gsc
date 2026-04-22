@@ -125,7 +125,7 @@ function init_callbacks() {
 }
 
 function on_player_connect() {
-  if(isDefined(level.var_28c22d88) && array::contains(level.var_28c22d88, "train") || level.var_28c22d88.size == 0) {
+  if(isDefined(level.skipto_current_objective) && array::contains(level.skipto_current_objective, "train") || level.skipto_current_objective.size == 0) {
     util::function_f3cadc9a("cp_ger_stakeout_train_ready");
 
     if(isDefined(level.var_d7d201ba) && !self flag::exists(level.var_d7d201ba)) {

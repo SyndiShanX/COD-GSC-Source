@@ -676,7 +676,7 @@ function private function_42a1dabd() {
     self.marked_for_death = undefined;
 
     if(isDefined(var_708e5e40) && isDefined(var_708e5e40.tacpoint)) {
-      var_708e5e40.tacpoint.var_94bf7609 = undefined;
+      var_708e5e40.tacpoint.claimed_by = undefined;
     }
   }
 

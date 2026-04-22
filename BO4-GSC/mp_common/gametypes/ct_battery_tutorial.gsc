@@ -144,15 +144,15 @@ function_753148fe() {
   self takeweapon(getweapon(#"bare_hands_ct"));
   self giveweapon(getweapon(#"ar_damage_t8", "holo", "damage", "damage2"));
   self giveweapon(getweapon(#"pistol_standard_t8"));
-  var_3ba4bf7d = self getweaponslistprimaries();
+  a_w_primaries = self getweaponslistprimaries();
 
-  for(i = 0; i < var_3ba4bf7d.size; i++) {
-    self giveweapon(var_3ba4bf7d[i]);
-    self givemaxammo(var_3ba4bf7d[i]);
+  for(i = 0; i < a_w_primaries.size; i++) {
+    self giveweapon(a_w_primaries[i]);
+    self givemaxammo(a_w_primaries[i]);
   }
 
-  self switchtoweapon(var_3ba4bf7d[0]);
-  self setspawnweapon(var_3ba4bf7d[0]);
+  self switchtoweapon(a_w_primaries[0]);
+  self setspawnweapon(a_w_primaries[0]);
 }
 
 callback_player_damage(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, weapon, v_point, v_dir, str_hit_loc, n_psoffsettime, var_8b69d5cf) {

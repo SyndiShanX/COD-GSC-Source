@@ -111,7 +111,7 @@ function function_d64a7119() {
   self.health = 100;
 }
 
-function function_60a583d8(str_objective, var_50cc0d4f) {
+function function_60a583d8(str_objective, b_starting) {
   level.var_c0c469ea = 2.5;
   level battlechatter::function_2ab9360b(0);
   level thread function_7de1bd9d();
@@ -171,7 +171,7 @@ function function_60a583d8(str_objective, var_50cc0d4f) {
 
   if(s_result._notify === "flag_ambush_signaled") {
     level flag::set("flag_comprimised_complete");
-    skipto::function_4e3ab877(var_50cc0d4f);
+    skipto::function_4e3ab877(b_starting);
     return;
   }
 

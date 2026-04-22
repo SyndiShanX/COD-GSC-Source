@@ -142,8 +142,8 @@ function function_7ceb96bf(player, endon_condition) {
 
   new_origin = undefined;
 
-  if(isDefined(level.var_5816975b)) {
-    new_origin = endon_condition[[level.var_5816975b]](endon_condition);
+  if(isDefined(level.check_valid_spawn_override)) {
+    new_origin = endon_condition[[level.check_valid_spawn_override]](endon_condition);
   }
 
   if(isDefined(level.var_8179368e)) {

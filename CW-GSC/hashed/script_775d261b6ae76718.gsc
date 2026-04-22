@@ -35,19 +35,19 @@
 #using scripts\cp_common\util;
 #namespace kgb_aslt_exfil;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(0);
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level flag::set("aslt_exfil_begin");
   level battlechatter::function_2ab9360b(1);
 
-  if(is_true(var_50cc0d4f)) {
-    level.adler = namespace_e77bf565::function_52fe0eb3(var_d3440450, "adler_shotgun");
+  if(is_true(b_starting)) {
+    level.adler = namespace_e77bf565::function_52fe0eb3(str_skipto, "adler_shotgun");
     level.adler kgb_aslt_escape_deploy_gas::function_dfe94ac6();
     level.adler kgb_aslt_escape_deploy_gas::function_7dbd8101();
-    level.inside_man = namespace_e77bf565::function_e4660071(var_d3440450, "inside_man_shotgun");
+    level.inside_man = namespace_e77bf565::function_e4660071(str_skipto, "inside_man_shotgun");
     level.inside_man kgb_aslt_escape_deploy_gas::function_bd86663d();
     level.inside_man kgb_aslt_escape_deploy_gas::function_ba4e8f8f();
     level thread scene::skipto_end_noai("scene_kgb_door_kick", "Last_Frame", undefined, 1);
@@ -64,10 +64,10 @@ function main(var_d3440450, var_50cc0d4f) {
   }
 
   namespace_e77bf565::function_e2e72d4(0, 1);
-  level thread namespace_e77bf565::escape_objective(var_d3440450, var_50cc0d4f);
+  level thread namespace_e77bf565::escape_objective(str_skipto, b_starting);
   wait 0.05;
   namespace_353d803e::music("deactivate_14.0b_full_alert");
-  level thread function_67c25994(var_d3440450);
+  level thread function_67c25994(str_skipto);
   level thread function_b735db01();
   level thread function_d883a464();
   level thread doors::close_all();
@@ -76,8 +76,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level flag::wait_till("aslt_exfil_player_left_elevator");
   level flag::wait_till("aslt_exfil_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 
@@ -119,7 +119,7 @@ function function_22b7fffd() {
   animation::add_notetrack_func("kgb_aslt_exfil::take_off_gasmask", &function_c230d01c);
 }
 
-function function_67c25994(var_d3440450) {
+function function_67c25994(str_skipto) {
   level.player endon(#"death");
   level flag::set("enable_gas_mask_interact");
   exfil_player_grab_armor_org = struct::get("exfil_player_grab_armor_org", "targetname");

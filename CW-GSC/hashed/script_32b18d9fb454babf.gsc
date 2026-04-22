@@ -209,7 +209,7 @@ function private function_66855ea6(destination, str_type) {
     var_97aab885 = location.instances[str_type];
 
     if(isDefined(var_97aab885)) {
-      var_e7f5b3e0 = 1;
+      b_can_spawn = 1;
 
       if(!getdvarint(#"hash_730311c63805303a", 0)) {
         if(isDefined(var_97aab885.var_501bc8c9)) {
@@ -217,14 +217,14 @@ function private function_66855ea6(destination, str_type) {
 
           foreach(var_a2593226 in var_2685dd6d) {
             if(level.contentmanager.var_1fcbdf50 === var_a2593226) {
-              var_e7f5b3e0 = 0;
+              b_can_spawn = 0;
               break;
             }
           }
         }
       }
 
-      if(var_e7f5b3e0) {
+      if(b_can_spawn) {
         content_manager::spawn_instance(var_97aab885);
       }
 
@@ -263,7 +263,7 @@ function private function_9b9c7696(destination, str_type) {
     s_instance = s_location.instances[str_type];
 
     if(isDefined(s_instance)) {
-      var_e7f5b3e0 = 1;
+      b_can_spawn = 1;
 
       if(!isDefined(var_dc84dad0)) {
         var_dc84dad0 = [];
@@ -279,7 +279,7 @@ function private function_9b9c7696(destination, str_type) {
 
           foreach(var_a2593226 in var_2685dd6d) {
             if(level.contentmanager.var_1fcbdf50 === var_a2593226) {
-              var_e7f5b3e0 = 0;
+              b_can_spawn = 0;
               break;
             }
           }
@@ -287,17 +287,17 @@ function private function_9b9c7696(destination, str_type) {
 
         foreach(var_6be26b52 in level.var_3ed04e02) {
           if(distancesquared(s_instance.origin, var_6be26b52.origin) < sqr(level.var_b8c0d7a2)) {
-            var_e7f5b3e0 = 0;
+            b_can_spawn = 0;
             break;
           }
         }
 
-        if(var_e7f5b3e0 && isDefined(s_player_start) && distancesquared(s_player_start.origin, s_instance.origin) < sqr(level.var_e6b49685)) {
-          var_e7f5b3e0 = 0;
+        if(b_can_spawn && isDefined(s_player_start) && distancesquared(s_player_start.origin, s_instance.origin) < sqr(level.var_e6b49685)) {
+          b_can_spawn = 0;
         }
       }
 
-      if(var_e7f5b3e0) {
+      if(b_can_spawn) {
         if(!isDefined(var_ba9835cd)) {
           var_ba9835cd = [];
         } else if(!isarray(var_ba9835cd)) {

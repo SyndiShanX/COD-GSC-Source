@@ -39,7 +39,7 @@
 #using scripts\cp_common\util;
 #namespace namespace_fe8e156a;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   namespace_42da7c51::function_ed760ecb("woods");
   level.var_9a3944f4 = ai::array_spawn("exfil_heli")[0];
   level.var_9a3944f4 thread namespace_42da7c51::function_fbb0d73f();
@@ -56,7 +56,7 @@ function starting(var_d3440450) {
   snd::client_msg("stop_camera_zoom");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level thread function_3a20dd4c();
   level flag::wait_till_all_timeout(20, array("balcony_complete"));
 
@@ -73,8 +73,8 @@ function main(var_d3440450, var_50cc0d4f) {
   level thread function_848ad996();
   level flag::wait_till("gas_station_escape_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 
   safehouse = skipto::function_6914f647();
@@ -99,7 +99,7 @@ function function_787dbb94(v_location, v_angles, v_offset = (0, 0, 0), str_model
   return e_origin;
 }
 
-function function_3a20dd4c(var_50cc0d4f) {
+function function_3a20dd4c(b_starting) {
   level thread exfil_heli();
   level.woods thread ai::force_goal(getnode("woods_exfil_cover", "targetname"));
   level flag::wait_till("heli_explosion_done");

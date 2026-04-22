@@ -26,7 +26,7 @@ function start(str_objective) {
   level flag::set("flg_turn_on_rooftop_kill_volume");
 }
 
-function main(str_objective, var_50cc0d4f) {
+function main(str_objective, b_starting) {
   hms_util::print("<dev string:x38>");
 
   hms_util::function_eaa0342e("rooftop_containment_warnings", "rooftop_containment_fails");
@@ -42,7 +42,7 @@ function main(str_objective, var_50cc0d4f) {
   skipto::function_4e3ab877("rooftop_exit");
 }
 
-function cleanup(str_objective, var_50cc0d4f, var_aa1a6455, player) {
+function cleanup(str_objective, b_starting, var_aa1a6455, player) {
   hms_util::print("<dev string:x51>");
 }
 

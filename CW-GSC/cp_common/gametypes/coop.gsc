@@ -58,7 +58,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level.onspawnplayer = &onspawnplayer;
   level.onspawnplayerunified = undefined;
   level.onplayerkilled = &onplayerkilled;
-  level.var_c3a79d20 = 1;
+  level.disable_last_stand = 1;
   level.takelivesondeath = 0;
   level.livesdonotreset = 1;
   level.ondeadevent = undefined;

@@ -85,11 +85,11 @@ function function_26312171() {
   spawner::add_spawn_function_group("player_seek_flashlight", "script_noteworthy", &player_seek_flashlight);
 }
 
-function function_52fe0eb3(var_d3440450, spawner = "adler") {
+function function_52fe0eb3(str_skipto, spawner = "adler") {
   adler = spawner::simple_spawn_single(spawner);
 
-  if(isDefined(var_d3440450)) {
-    loc = struct::get(var_d3440450 + "_adler_start", "targetname");
+  if(isDefined(str_skipto)) {
+    loc = struct::get(str_skipto + "_adler_start", "targetname");
 
     if(isDefined(loc)) {
       adler forceteleport(loc.origin, loc.angles);
@@ -99,11 +99,11 @@ function function_52fe0eb3(var_d3440450, spawner = "adler") {
   return adler;
 }
 
-function function_e4660071(var_d3440450, spawner = "inside_man") {
+function function_e4660071(str_skipto, spawner = "inside_man") {
   inside_man = spawner::simple_spawn_single(spawner);
 
-  if(isDefined(var_d3440450)) {
-    loc = struct::get(var_d3440450 + "_inside_man_start", "targetname");
+  if(isDefined(str_skipto)) {
+    loc = struct::get(str_skipto + "_inside_man_start", "targetname");
 
     if(isDefined(loc)) {
       inside_man forceteleport(loc.origin, loc.angles);
@@ -312,8 +312,8 @@ function rotating_object() {
   }
 }
 
-function function_7feb07bb(var_d3440450, var_50cc0d4f) {
-  if(var_50cc0d4f == "kgb_aslt_bunker") {
+function function_7feb07bb(str_skipto, b_starting) {
+  if(b_starting == "kgb_aslt_bunker") {
     level flag::wait_till("aslt_bunker_begin");
   }
 
@@ -323,7 +323,7 @@ function function_7feb07bb(var_d3440450, var_50cc0d4f) {
     objectives::scripted("obj_retrieve_intel", undefined, #"hash_2f94fe6c683f39ef");
   }
 
-  switch (var_50cc0d4f) {
+  switch (b_starting) {
     case # "kgb_aslt_bunker":
       level flag::wait_till("bunker_intro_security_cleared");
       objectives::follow("follow_adler", level.adler);
@@ -377,14 +377,14 @@ function function_7feb07bb(var_d3440450, var_50cc0d4f) {
   }
 }
 
-function escape_objective(var_d3440450, var_50cc0d4f) {
+function escape_objective(str_skipto, b_starting) {
   id = objectives::function_285e460("obj_escape");
 
   if(!isDefined(id)) {
     objectives::scripted("obj_escape", undefined, #"hash_3c61b0f317a4032c");
   }
 
-  switch (var_50cc0d4f) {
+  switch (b_starting) {
     case # "kgb_aslt_bunker_escape":
       while(!isDefined(level.adler)) {
         wait 0.05;
@@ -561,7 +561,7 @@ function function_363ebd5a(tname) {
   }
 }
 
-function function_2fa39d6d(tname, var_50cc0d4f) {
+function function_2fa39d6d(tname, b_starting) {
   lights = getEntArray(tname, "targetname");
 
   if(!isDefined(lights)) {
@@ -571,7 +571,7 @@ function function_2fa39d6d(tname, var_50cc0d4f) {
   foreach(light in lights) {
     if(isDefined(light.default_intensity)) {
       if(isDefined(light.script_noteworthy) && light.script_noteworthy == "flicker_on") {
-        if(is_true(var_50cc0d4f)) {
+        if(is_true(b_starting)) {
           light setlightintensity(light.default_intensity);
         } else {
           light thread function_7c64b9aa();
@@ -742,8 +742,8 @@ function function_249a18d5(params) {
   }
 }
 
-function function_8191bcdc(var_50cc0d4f = 0) {
-  if(var_50cc0d4f) {
+function function_8191bcdc(b_starting = 0) {
+  if(b_starting) {
     level flag::wait_till("level_is_go");
   }
 

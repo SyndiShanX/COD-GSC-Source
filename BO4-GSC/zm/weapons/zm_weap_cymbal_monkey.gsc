@@ -387,7 +387,7 @@ player_throw_cymbal_monkey(e_grenade, num_attractors, max_attract_dist, attract_
   }
 }
 
-function_ab9a9770() {
+duf47() {
   s_trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
   if(isDefined(s_trace[#"entity"])) {

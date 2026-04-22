@@ -678,7 +678,7 @@ laststand_bleedout_damage() {
       self.bleedout_time = 0;
     } else {
       damagefrac = waitresult.idamage / self.var_969fabf4;
-      damagetime = self.var_84c0402e * damagefrac;
+      damagetime = self.last_bleedout_time * damagefrac;
       self.bleedout_time -= damagetime;
     }
 
@@ -715,7 +715,7 @@ function_72e0c544() {
 laststand_bleedout(bleedouttime, var_969fabf4) {
   level endon(#"game_ended");
   self endon(#"player_revived", #"player_bleedout", #"death");
-  self.var_84c0402e = bleedouttime;
+  self.last_bleedout_time = bleedouttime;
   self.bleedout_time = bleedouttime;
   self.var_969fabf4 = var_969fabf4;
   self.var_2d19ce3c = 0;
@@ -877,11 +877,11 @@ bleed_out(var_40d90c02) {
   self suicide(suicide_mod);
 
   if(getdvarint(#"hash_62b8db0428755a32", 1) && isPlayer(self)) {
-    var_d7e063c = getdvarfloat(#"hash_44de9418bb6289ac", 1.5);
+    bleed_out_fade_time = getdvarfloat(#"hash_44de9418bb6289ac", 1.5);
     self playsoundtoplayer(#"hash_11d39dca0f911535", self);
-    self lui::screen_fade(var_d7e063c, 1, 0, "black", 0);
-    wait var_d7e063c + 0.2;
-    self lui::screen_fade(var_d7e063c, 0, 1, "black", 0);
+    self lui::screen_fade(bleed_out_fade_time, 1, 0, "black", 0);
+    wait bleed_out_fade_time + 0.2;
+    self lui::screen_fade(bleed_out_fade_time, 0, 1, "black", 0);
   }
 
   self notify(#"hash_6b045e0bc320bbee");
@@ -1555,7 +1555,7 @@ function_b1ad0b64(idamage, smeansofdeath) {
   }
 
   damagefrac = idamage / self.var_969fabf4;
-  damagetime = self.var_84c0402e * damagefrac;
+  damagetime = self.last_bleedout_time * damagefrac;
   return self.bleedout_time <= damagetime;
 }
 

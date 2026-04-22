@@ -125,7 +125,7 @@ function_593774d0() {
   }
 }
 
-function_a5ed4dd9(var_6c367c57, var_e7c0257b, var_4eec77ed) {
+function_a5ed4dd9(var_6c367c57, var_e7c0257b, n_time_between) {
   var_93a7b94d = randomintrangeinclusive(1, 7);
 
   switch (var_93a7b94d) {

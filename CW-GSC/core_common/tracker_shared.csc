@@ -93,7 +93,7 @@ function private function_8c47bbe5(localclientnum) {
     if(isDefined(self.var_d3fe9463) && !var_4731ce01) {
       self.var_d3fe9463 = undefined;
 
-      if(!function_3132f113(self)) {
+      if(!isremovedentity(self)) {
         self serverfield::set("sf_tracker_spotting", 0);
       }
     }

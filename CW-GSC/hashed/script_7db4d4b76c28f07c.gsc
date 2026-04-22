@@ -43,9 +43,9 @@
 #using scripts\weapons\cp\spy_camera;
 #namespace namespace_4e717b5b;
 
-function function_ae18fec1(var_d3440450) {}
+function function_ae18fec1(str_skipto) {}
 
-function intro_main(var_d3440450, var_50cc0d4f) {
+function intro_main(str_skipto, b_starting) {
   while(!isDefined(level.player_connected) || isDefined(level.player_connected) && level.player_connected != 1) {
     wait 0.1;
   }

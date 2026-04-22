@@ -964,7 +964,7 @@ function_235b259b() {
   self thread function_25bdd976(0, 0);
   self thread function_f4ca14fb();
   self thread ct_vo::function_625a37f9("vox_tvoi_tutor_prop_wine_chain_success", "enemy_tempest_chained", 1, 0);
-  level waittill(#"hash_5d67cd17870cf7b6");
+  level waittill(#"player_can_see_enemy");
   level.var_3f7591c4 = 1;
   ct_utils::function_9aca2fa0("ct_action2");
   level notify(#"hash_60e26e14a51c5211");
@@ -986,7 +986,7 @@ function_235b259b() {
   level.var_c271b8e0 = level.var_72c3ea74.size;
   ct_utils::function_9aca2fa0("ct_action2");
   self thread function_f4ca14fb(1);
-  level waittill(#"hash_5d67cd17870cf7b6");
+  level waittill(#"player_can_see_enemy");
   level.var_3f7591c4 = 1;
   level notify(#"hash_60e26e14a51c5211");
   waitframe(1);
@@ -1001,7 +1001,7 @@ function_235b259b() {
 }
 
 function_f4ca14fb(var_a8183c4a = 0) {
-  level endon(#"combattraining_logic_finished", #"hash_5d67cd17870cf7b6");
+  level endon(#"combattraining_logic_finished", #"player_can_see_enemy");
 
   while(true) {
     self thread ct_vo::function_261ed63c("vox_tvoi_tutor_prop_wine_seeker_deploy_nag", 10, 15);
@@ -1076,8 +1076,8 @@ function_aae68385(s_loc) {
     }
   }
 
-  e_player notify(#"hash_5d67cd17870cf7b6");
-  level notify(#"hash_5d67cd17870cf7b6");
+  e_player notify(#"player_can_see_enemy");
+  level notify(#"player_can_see_enemy");
 }
 
 function_4938210c(s_loc) {

@@ -29,7 +29,7 @@ __init__() {
   function_e9e03d6f(#"gameobject_interact", &function_daab6847);
   function_e9e03d6f(#"hash_797d652ff338b7d4", &function_90ff35fc);
   function_e9e03d6f(#"visible_enemy", &handle_visible_enemy);
-  function_e9e03d6f(#"hash_608fe62234892b49", &function_7ed3ada6);
+  function_e9e03d6f(#"find_best_cover", &function_7ed3ada6);
   function_aa8c6854(#"goal", &get_goal_center);
   function_aa8c6854(#"gameobject_interact", &function_4fa26afe);
   function_aa8c6854(#"revive_target", &function_f94e1790);
@@ -831,7 +831,7 @@ function_b33e4e67(center, fillpos, enemy, querylist) {
 
     self bot::record_text("<dev string:x1e3>" + function_9e72a96(query.name), (1, 1, 1), "<dev string:x4e>");
 
-    if(!isDefined(enemy) || function_3132f113(enemy)) {
+    if(!isDefined(enemy) || isremovedentity(enemy)) {
       enemy = lastenemypos;
     } else if(isentity(enemy)) {
       lastenemypos = enemy.origin;

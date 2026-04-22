@@ -36,7 +36,7 @@
 #using scripts\cp_common\util;
 #namespace kgb_ins_briefing;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level thread namespace_e77bf565::function_277bceaa(1);
   level thread scene::init("scene_kgb_elevator_holdup");
   level thread scene::init("scene_kgb_walkup_adler");
@@ -49,25 +49,25 @@ function starting(var_d3440450) {
   level thread namespace_99e99ffa::function_1d90bc4a();
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level scene::add_scene_func("scene_kgb_briefing", &function_20ecf97d);
   level scene::init("scene_kgb_briefing");
   level thread function_e526d368();
   doors::function_f35467ac();
   namespace_e77bf565::function_e2e72d4(1);
 
-  if(is_true(var_50cc0d4f)) {
-    kgb_ins_prepare::function_52f0fcb3(var_d3440450);
+  if(is_true(b_starting)) {
+    kgb_ins_prepare::function_52f0fcb3(str_skipto);
     kgb_ins_prepare::function_84d00884();
-    level thread namespace_99e99ffa::function_99e99ffa(var_d3440450);
+    level thread namespace_99e99ffa::function_99e99ffa(str_skipto);
     level thread namespace_e77bf565::function_ada6d016();
     level thread namespace_e77bf565::function_1067ebf5("rotating_object_inside_man", "team_in_elevator");
   }
 
   level flag::wait_till("ins_briefing_complete");
 
-  if(isDefined(var_d3440450)) {
-    skipto::function_4e3ab877(var_d3440450);
+  if(isDefined(str_skipto)) {
+    skipto::function_4e3ab877(str_skipto);
   }
 }
 

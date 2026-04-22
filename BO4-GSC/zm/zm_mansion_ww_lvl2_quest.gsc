@@ -65,9 +65,9 @@ function_27b91fdb() {
   while(true) {
     var_e7df750a = 0;
     s_result = self waittill(#"weapon_change");
-    var_3ba4bf7d = self getweaponslistprimaries();
+    a_w_primaries = self getweaponslistprimaries();
 
-    foreach(w_primary in var_3ba4bf7d) {
+    foreach(w_primary in a_w_primaries) {
       if(w_primary == level.var_f086136b) {
         var_e7df750a = 1;
 

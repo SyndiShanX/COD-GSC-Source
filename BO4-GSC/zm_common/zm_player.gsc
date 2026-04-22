@@ -807,25 +807,25 @@ function_de3936f8(var_ffb1863c) {
     return;
   }
 
-  var_287a8343 = zm_utility::get_player_weapon_limit(self);
-  var_3ba4bf7d = self getweaponslistprimaries();
+  n_weapon_limit = zm_utility::get_player_weapon_limit(self);
+  a_w_primaries = self getweaponslistprimaries();
 
-  if(var_3ba4bf7d.size > var_287a8343) {
+  if(a_w_primaries.size > n_weapon_limit) {
     self zm_melee_weapon::take_fallback_weapon();
-    var_3ba4bf7d = self getweaponslistprimaries();
+    a_w_primaries = self getweaponslistprimaries();
 
-    if(var_3ba4bf7d.size > var_287a8343) {
+    if(a_w_primaries.size > n_weapon_limit) {
       self zm_stats::increment_map_cheat_stat("cheat_too_many_weapons");
       self zm_stats::increment_client_stat("cheat_too_many_weapons", 0);
       self zm_stats::increment_client_stat("cheat_total", 0);
       self playlocalsound(level.zmb_laugh_alias);
 
-      if(isDefined(var_ffb1863c) && self hasweapon(var_ffb1863c) && isinarray(var_3ba4bf7d, var_ffb1863c)) {
+      if(isDefined(var_ffb1863c) && self hasweapon(var_ffb1863c) && isinarray(a_w_primaries, var_ffb1863c)) {
         self takeweapon(var_ffb1863c);
-      } else if(isinarray(var_3ba4bf7d, self.currentweapon)) {
+      } else if(isinarray(a_w_primaries, self.currentweapon)) {
         self takeweapon(self.currentweapon);
       } else {
-        self takeweapon(var_3ba4bf7d[0]);
+        self takeweapon(a_w_primaries[0]);
       }
 
       wait 1;
@@ -1098,8 +1098,8 @@ spawnspectator() {
   println("<dev string:x282>");
   self detachall();
 
-  if(isDefined(level.var_7abfc4ea)) {
-    self[[level.var_7abfc4ea]]();
+  if(isDefined(level.custom_spectate_permissions)) {
+    self[[level.custom_spectate_permissions]]();
   } else {
     self setspectatepermissions(1);
   }
@@ -1182,8 +1182,8 @@ spectator_respawn_player() {
     if(isDefined(level.script) && level.round_number > 6 && self.score < 1500) {
       self.old_score = self.score;
 
-      if(isDefined(level.var_cf66a6f6)) {
-        self[[level.var_cf66a6f6]]();
+      if(isDefined(level.spectator_respawn_custom_score)) {
+        self[[level.spectator_respawn_custom_score]]();
       }
 
       self.score = 1500;
@@ -1208,8 +1208,8 @@ spectator_respawn() {
   self setspectatepermissions(0);
   new_origin = undefined;
 
-  if(isDefined(level.var_5816975b)) {
-    new_origin = [[level.var_5816975b]](self);
+  if(isDefined(level.check_valid_spawn_override)) {
+    new_origin = [[level.check_valid_spawn_override]](self);
   }
 
   if(!isDefined(new_origin)) {
@@ -1760,12 +1760,12 @@ player_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, w
     return finaldamage;
   }
 
-  if(isDefined(level.var_57cc29f3) && [[level.var_57cc29f3]](self)) {
+  if(isDefined(level.check_end_game_override) && [[level.check_end_game_override]](self)) {
     return finaldamage;
   }
 
   if(getplayers().size == 1 && level flag::get("solo_game")) {
-    if(isDefined(level.var_fb697fca) && [[level.var_fb697fca]]()) {
+    if(isDefined(level.check_end_solo_game_override) && [[level.check_end_solo_game_override]]()) {
       return finaldamage;
     } else {
       self.intermission = 1;

@@ -1219,8 +1219,8 @@ function_432f35f8(v_obj) {
 
 function_e19de01() {
   str_name = "s_nomad_easy_enemy_" + level.var_ad7c0539;
-  var_40118c33 = struct::get_array(str_name, "targetname");
-  level thread ct_bots::activate_bots(var_40118c33.size, #"axis");
+  a_s_spawn_loc = struct::get_array(str_name, "targetname");
+  level thread ct_bots::activate_bots(a_s_spawn_loc.size, #"axis");
 }
 
 function_3b95089d(var_df7e07e5, var_7c876c46, var_2e663c1b) {
@@ -1523,11 +1523,11 @@ function_e8009771() {
 
   while(true) {
     waitresult = level waittill(#"tripwire_detonation");
-    var_2249999 = waitresult.entity;
+    e_soldier = waitresult.entity;
     wait 0.1;
 
-    if(isalive(var_2249999)) {
-      var_2249999 thread ct_utils::function_3e0767e2(0);
+    if(isalive(e_soldier)) {
+      e_soldier thread ct_utils::function_3e0767e2(0);
       level flag::set("tripwire_kill");
       level notify(#"tripwire_kill");
     }

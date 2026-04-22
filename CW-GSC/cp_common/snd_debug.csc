@@ -62,7 +62,7 @@ function private function_43c85ce2() {
     self.var_3f03e75e = 1;
   }
 
-  if(function_3132f113(self) == 1) {
+  if(isremovedentity(self) == 1) {
     return undefined;
   }
 
@@ -83,7 +83,7 @@ function private function_cb457f5b() {
     self.var_45dbf7c9 = 1;
   }
 
-  if(function_3132f113(self) == 1) {
+  if(isremovedentity(self) == 1) {
     return undefined;
   }
 
@@ -737,7 +737,7 @@ function private function_fa2bfbd1() {
   player endon(#"death");
   player endon(#"hash_1c8039ff7519235");
 
-  while(!function_3132f113(player)) {
+  while(!isremovedentity(player)) {
     var_5e193409 = function_827811b5();
     var_9e35ce44 = var_5e193409[0] * 0.5;
     var_749dfb19 = var_5e193409[1] * 0.5;
@@ -802,7 +802,7 @@ function private function_27e49109(distance) {
     distance = 2400;
   }
 
-  while(!function_3132f113(player)) {
+  while(!isremovedentity(player)) {
     scale = -1 * level._snd._debug.scale_3d;
     zinc = 6 * level._snd._debug.scale_3d;
     playervieworg = player getplayervieworigin();

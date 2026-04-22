@@ -26,19 +26,19 @@
 #using scripts\cp_common\skipto;
 #namespace tkdn_heli_convoy_aslt;
 
-function starting(var_d3440450) {
+function starting(str_skipto) {
   level.var_aece851d = [];
   flag::set("heli_door_opening");
 }
 
-function main(var_d3440450, var_50cc0d4f) {
+function main(str_skipto, b_starting) {
   level.var_33621ea7 = 0;
   thread function_a7dc18f3();
   thread namespace_a052577e::function_e04b45ab();
   level flag::wait_till("heli_convoy_aslt_complete");
 
-  if(isDefined(var_50cc0d4f)) {
-    skipto::function_4e3ab877(var_50cc0d4f);
+  if(isDefined(b_starting)) {
+    skipto::function_4e3ab877(b_starting);
   }
 }
 

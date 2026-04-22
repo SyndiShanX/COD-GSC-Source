@@ -170,7 +170,7 @@ function private function_ef6f1667() {
     var_4359175b = array();
 
     foreach(hud in level.var_9c2f3e27) {
-      assert(function_3132f113(hud) == 0);
+      assert(isremovedentity(hud) == 0);
 
       if(hud.duration > 0) {
         var_4359175b[var_4359175b.size] = hud;
@@ -203,7 +203,7 @@ function private function_b506ee85(duration) {
   timeofdeath = duration * 50;
 
   foreach(hud in level.var_9c2f3e27) {
-    assert(function_3132f113(hud) == 0);
+    assert(isremovedentity(hud) == 0);
 
     if(now >= hud.timeofdeath) {
       hud.time = now;

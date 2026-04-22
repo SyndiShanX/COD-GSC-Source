@@ -617,7 +617,7 @@ function_8e22d234() {
 
 function_b4ebcd8a() {
   wait 0.5;
-  var_10e6d37f = 0;
+  n_completed = 0;
   var_3e22bae5 = [];
   mode = currentsessionmode();
   var_40682b3d = getplayerroletemplatecount(mode);
@@ -634,11 +634,11 @@ function_b4ebcd8a() {
     str_state = self function_c2c1d36b(index);
 
     if(str_state == #"tutorial_completed" || str_state == #"skirmish_completed" || str_state == #"skirmish_started") {
-      var_10e6d37f++;
+      n_completed++;
     }
   }
 
-  if(var_10e6d37f > 9) {
+  if(n_completed > 9) {
     self giveachievement("st_mp101");
     self function_ea859fe2();
   }
