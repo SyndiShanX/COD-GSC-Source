@@ -951,7 +951,7 @@ elevator2_3d_audio() {
     ent = spawn("script_origin", self.origin + (0, 0, 30));
     ent linkto(self);
     ent playSound(#"evt_elevator_office_start");
-    ent playLoopSound(#"hash_3a6fc5051c04a776");
+    ent playLoopSound(#"evt_elevator_office_run_3d");
     self waittill(#"reached_end_node");
     ent delete();
     playsoundatposition(#"hash_b696d1d50b35e32", self.origin + (0, 0, 120));

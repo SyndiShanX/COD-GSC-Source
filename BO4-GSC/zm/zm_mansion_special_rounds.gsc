@@ -81,7 +81,7 @@ function_6957c745(str_archetype, n_round, var_b2239dab) {
   if(isDefined(var_b2239dab)) {
     level thread function_36c1dcca(n_round, var_b2239dab);
     level flag::wait_till(var_b2239dab);
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
     n_round = level.round_number;
   }
 

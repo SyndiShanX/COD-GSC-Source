@@ -234,7 +234,7 @@ function_cf3224fe(b_success) {
     level.ai_vip flag::clear("vip_checkpoint_goto");
     level.ai_vip flag::clear("vip_checkpoint_action");
     level.ai_vip.waypoint_defend ct_utils::function_f9ed304d();
-    level.ai_vip.var_ebc76246 ct_utils::function_f9ed304d();
+    level.ai_vip.waypoint_escort ct_utils::function_f9ed304d();
     level.ai_vip = undefined;
 
     foreach(var_94dda6f in level.var_ac03813) {
@@ -693,8 +693,8 @@ function_3e213427() {
   level.ai_vip.var_38b6161f = 1;
   level.ai_vip.waypoint_defend = level.ai_vip ct_utils::create_waypoint(#"hash_1a511b2e1cdb8c7f", level.ai_vip.origin, level.ai_vip.angles, #"allies", undefined, 0, undefined);
   level.ai_vip.waypoint_defend gameobjects::set_visible_team("none");
-  level.ai_vip.var_ebc76246 = level.ai_vip ct_utils::create_waypoint(#"hash_69b9c95819486ff3", level.ai_vip.origin, level.ai_vip.angles, #"allies", undefined, 0, undefined);
-  level.ai_vip.var_ebc76246 gameobjects::set_visible_team("any");
+  level.ai_vip.waypoint_escort = level.ai_vip ct_utils::create_waypoint(#"hash_69b9c95819486ff3", level.ai_vip.origin, level.ai_vip.angles, #"allies", undefined, 0, undefined);
+  level.ai_vip.waypoint_escort gameobjects::set_visible_team("any");
   level.ai_vip clientfield::set("set_vip", 2);
   level.ai_vip.health = 250;
 
@@ -801,7 +801,7 @@ function_c633f931() {
 vip_checkpoint_action() {
   self endon(#"death");
   self.waypoint_defend gameobjects::set_visible_team("any");
-  self.var_ebc76246 gameobjects::set_visible_team("none");
+  self.waypoint_escort gameobjects::set_visible_team("none");
   self.var_d8f38f = getnode(level.var_94dda6f.target, "targetname");
   self.var_33b6732b = getclosestpointonnavmesh(self.var_d8f38f.origin);
   self setgoal(self.var_33b6732b, 1, 1);
@@ -834,7 +834,7 @@ vip_checkpoint_action() {
   self.var_ef59b90 = 3;
   self function_4852f39d();
   self.waypoint_defend gameobjects::set_visible_team("none");
-  self.var_ebc76246 gameobjects::set_visible_team("any");
+  self.waypoint_escort gameobjects::set_visible_team("any");
 }
 
 function_7af8c620() {

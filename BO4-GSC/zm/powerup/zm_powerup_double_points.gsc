@@ -24,7 +24,7 @@ __init__() {
   zm_powerups::register_powerup("double_points", &grab_double_points);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("double_points", "p7_zm_power_up_double_points", #"hash_774207d74b355a8a", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_double_points_time", "zombie_powerup_double_points_on");
+    zm_powerups::add_zombie_powerup("double_points", "p7_zm_power_up_double_points", #"zombie/powerup_double_points", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_double_points", "zombie_powerup_double_points_time", "zombie_powerup_double_points_on");
   }
 }
 

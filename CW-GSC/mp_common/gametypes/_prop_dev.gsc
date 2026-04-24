@@ -312,7 +312,7 @@ function function_ad983215(enabled) {
   setDvar(#"cg_drawfps", enabled);
   setDvar(#"cg_drawtime", enabled);
   setDvar(#"cg_drawviewpos", enabled);
-  setDvar(#"hash_173fd7265ae0b7b1", enabled);
+  setDvar(#"cg_drawbuildname", enabled);
   setDvar(#"hash_2d3acd259cd6aca6", enabled);
 }
 

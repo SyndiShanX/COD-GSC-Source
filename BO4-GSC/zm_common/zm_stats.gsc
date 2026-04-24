@@ -1455,11 +1455,11 @@ function_b14863c1() {
 
 function_cb8a5c29() {
   while(true) {
-    s_result = level waittilltimeout(60, #"hash_3fdaafe712252cf5", #"trap_kill");
+    s_result = level waittilltimeout(60, #"zombie_attacked_by_player", #"trap_kill");
 
     if(s_result._notify == "timeout") {
       level.var_b8cbd9e6 = 1;
-      level waittill(#"hash_3fdaafe712252cf5", #"trap_kill");
+      level waittill(#"zombie_attacked_by_player", #"trap_kill");
       level.var_b8cbd9e6 = undefined;
     }
   }

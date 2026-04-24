@@ -115,21 +115,21 @@ function_82ca1565(spawnpoint, gametype) {
       return (isDefined(spawnpoint.domination_flag_b) && spawnpoint.domination_flag_b);
     case # "dom_flag_c":
       return (isDefined(spawnpoint.domination_flag_c) && spawnpoint.domination_flag_c);
-    case # "hash_6056c310624d5afd":
+    case # "dem_attacker_a":
       return (isDefined(spawnpoint.demolition_attacker_a) && spawnpoint.demolition_attacker_a);
-    case # "hash_6056c010624d55e4":
+    case # "dem_attacker_b":
       return (isDefined(spawnpoint.demolition_attacker_b) && spawnpoint.demolition_attacker_b);
-    case # "hash_6ef2d89ce8ee9a32":
+    case # "dem_remove_a":
       return (isDefined(spawnpoint.demolition_remove_a) && spawnpoint.demolition_remove_a);
-    case # "hash_6ef2d79ce8ee987f":
+    case # "dem_remove_b":
       return (isDefined(spawnpoint.demolition_remove_b) && spawnpoint.demolition_remove_b);
     case # "dem_overtime":
       return (isDefined(spawnpoint.demolition_overtime) && spawnpoint.demolition_overtime);
-    case # "hash_7cb9d0a58715cebe":
+    case # "dem_start_spawn":
       return (isDefined(spawnpoint.demolition_start_spawn) && spawnpoint.demolition_start_spawn);
-    case # "hash_6d83e5f1bdefa7dd":
+    case # "dem_defender_a":
       return (isDefined(spawnpoint.demolition_defender_a) && spawnpoint.demolition_defender_a);
-    case # "hash_6d83e2f1bdefa2c4":
+    case # "dem_defender_b":
       return (isDefined(spawnpoint.demolition_defender_b) && spawnpoint.demolition_defender_b);
     case # "control_attack_add_0":
       return (isDefined(spawnpoint.control_attack_add_a) && spawnpoint.control_attack_add_a);

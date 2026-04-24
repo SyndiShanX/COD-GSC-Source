@@ -21,7 +21,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_27897abffa9137fc", &on_begin, &on_end);
+  zm_trial::register_challenge(#"death_from_above", &on_begin, &on_end);
 }
 
 on_begin() {
@@ -75,7 +75,7 @@ on_end(round_reset) {
 }
 
 is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_27897abffa9137fc");
+  challenge = zm_trial::function_a36e8c38(#"death_from_above");
   return isDefined(challenge);
 }
 

@@ -174,7 +174,7 @@ play_initial_alarm() {
   structs = struct::get_array("defcon_alarms", "targetname");
 
   for(i = 0; i < structs.size; i++) {
-    playsoundatposition(#"hash_703767be61fa24c0", structs[i].origin);
+    playsoundatposition(#"evt_thief_alarm_single", structs[i].origin);
   }
 
   wait 0.5;

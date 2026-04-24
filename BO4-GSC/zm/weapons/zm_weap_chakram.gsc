@@ -761,7 +761,7 @@ function_f9b883ea() {
   self endon(#"disconnect");
   self notify("beb94ee3d73772a");
   self endon("beb94ee3d73772a");
-  self waittill(#"death", #"weapon_change", #"hash_1c35eb15aa210d6", #"hash_62fb3ab92a1f20cd");
+  self waittill(#"death", #"weapon_change", #"player_begin_fasttravel_rail", #"hash_62fb3ab92a1f20cd");
 
   if(isDefined(self)) {
     self thread function_892bdee2();

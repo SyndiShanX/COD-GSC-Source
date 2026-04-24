@@ -301,7 +301,7 @@ function_57abef39(n_round_number) {
   level endon(#"end_game");
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"crimson_nosferatu")) {
       level.var_da92f51a = level.round_number + randomintrangeinclusive(2, 3);

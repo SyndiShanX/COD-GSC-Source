@@ -372,7 +372,7 @@ clock_run(time_values) {
       case # "alaska":
         hour = curr_time[0] - 9;
         break;
-      case # "hash_2facbe04e87432ac":
+      case # "los angeles":
         hour = curr_time[0] - 8;
         break;
       case # "denver":

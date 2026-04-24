@@ -223,13 +223,13 @@ function propcontrolshud() {
   }
 
   self.abilitykey = addupperrighthudelem();
-  self.clonekey = addupperrighthudelem(#"hash_2f560292a2fb7eab");
+  self.clonekey = addupperrighthudelem(#"mp_ph_clone");
   self.changepropkey = addupperrighthudelem(#"mp_ph_change", 0);
   self.currenthudy -= 20;
-  self.hidepropkey = addupperrighthudelem(#"hash_fb73fdc2aff963f");
-  self.matchslopekey = addupperrighthudelem(#"hash_7f59350f5f223501", undefined, undefined, #"hash_4c7fbb5c1ccd5107");
+  self.hidepropkey = addupperrighthudelem(#"mp_ph_hideprop");
+  self.matchslopekey = addupperrighthudelem(#"mp_ph_slope", undefined, undefined, #"mp_ph_slope_pc");
   self.lockpropkey = addupperrighthudelem(#"mp_ph_lock");
-  self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, #"hash_39e61050ab8d325e");
+  self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, #"mp_ph_spin_pc");
   self setnewabilityhud();
   self.zoomkey = addupperrighthudelem(#"mp_ph_zoom");
   self thread updatetextongamepadchange();
@@ -280,20 +280,20 @@ function updatetextongamepadchange() {
 
       if(var_4084aa7) {
         if(!is_true(self.slopelocked)) {
-          self.matchslopekey.label = #"hash_7f59350f5f223501";
+          self.matchslopekey.label = #"mp_ph_slope";
         } else {
-          self.matchslopekey.label = #"hash_6ca8e1ea720ba9f";
+          self.matchslopekey.label = #"mp_ph_sloped";
         }
 
         self.spinpropkey.label = #"mp_ph_spin";
       } else {
         if(!is_true(self.slopelocked)) {
-          self.matchslopekey.label = #"hash_4c7fbb5c1ccd5107";
+          self.matchslopekey.label = #"mp_ph_slope_pc";
         } else {
-          self.matchslopekey.label = #"hash_3cd8ecbf9f39b3e9";
+          self.matchslopekey.label = #"mp_ph_sloped_pc";
         }
 
-        self.spinpropkey.label = #"hash_39e61050ab8d325e";
+        self.spinpropkey.label = #"mp_ph_spin_pc";
       }
     }
 
@@ -545,9 +545,9 @@ function propmatchslope() {
 
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = #"hash_6ca8e1ea720ba9f";
+        self.matchslopekey.label = #"mp_ph_sloped";
       } else {
-        self.matchslopekey.label = #"hash_3cd8ecbf9f39b3e9";
+        self.matchslopekey.label = #"mp_ph_sloped_pc";
       }
     }
 
@@ -565,11 +565,11 @@ function propmatchslope() {
 
   if(prop::useprophudserver()) {
     if(self is_player_gamepad_enabled()) {
-      self.matchslopekey.label = #"hash_7f59350f5f223501";
+      self.matchslopekey.label = #"mp_ph_slope";
       return;
     }
 
-    self.matchslopekey.label = #"hash_4c7fbb5c1ccd5107";
+    self.matchslopekey.label = #"mp_ph_slope_pc";
   }
 }
 
@@ -719,7 +719,7 @@ function get_ground_normal(traceignore, debug) {
 
   tracepoints = array(self.origin);
 
-  if(getdvarint(#"hash_32aee631b4444f90", 1)) {
+  if(getdvarint(#"scr_ph_useboundsforgroundnormal", 1)) {
     i = -1;
 
     while(i <= 1) {
@@ -1547,7 +1547,7 @@ function function_2b14e8b1() {
     self clientfield::set_to_player("PROP.hide_prop", 1);
 
     if(prop::useprophudserver()) {
-      self.hidepropkey.label = #"hash_54ba1311175de71e";
+      self.hidepropkey.label = #"mp_ph_showprop";
     }
 
     return;
@@ -1556,6 +1556,6 @@ function function_2b14e8b1() {
   self clientfield::set_to_player("PROP.hide_prop", 0);
 
   if(prop::useprophudserver()) {
-    self.hidepropkey.label = #"hash_fb73fdc2aff963f";
+    self.hidepropkey.label = #"mp_ph_hideprop";
   }
 }

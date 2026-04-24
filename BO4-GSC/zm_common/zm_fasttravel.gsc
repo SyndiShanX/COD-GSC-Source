@@ -206,16 +206,16 @@ function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c]) {
-    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     b_result = 1;
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
     self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
     b_result = 1;
   } else {
     if(function_8b1a219a()) {
-      self.hint_string[n_player_index] = #"hash_47b20f457b370888";
+      self.hint_string[n_player_index] = #"zombie/fasttravel_generic_use_keyboard";
     } else {
-      self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
+      self.hint_string[n_player_index] = #"zombie/fasttravel_generic_use";
     }
 
     b_result = 1;
@@ -416,7 +416,7 @@ function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
   }
 
   self function_c1f603e(var_12230d08, n_cooldown_timer, var_8d5d092c);
-  self notify(#"hash_178a3d0115bc972e", {
+  self notify(#"fasttravel_cooldown_done", {
     #var_9fa6220c: var_12230d08
   });
 }
@@ -557,7 +557,7 @@ function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, var_6c365
     }
   }
 
-  self notify(#"hash_1c35eb15aa210d6", {
+  self notify(#"player_begin_fasttravel_rail", {
     #var_9fa6220c: var_12230d08
   });
 

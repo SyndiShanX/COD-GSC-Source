@@ -78,8 +78,8 @@ function_cfc02934() {
 }
 
 event_handler[player_medal] codecallback_medal(eventstruct) {
-  if(isDefined(eventstruct) && isDefined(eventstruct.var_7fcb97e3) && isDefined(level.scoreinfo) && isDefined(level.scoreinfo[eventstruct.var_7fcb97e3])) {
-    medalinfo = level.scoreinfo[eventstruct.var_7fcb97e3];
+  if(isDefined(eventstruct) && isDefined(eventstruct.medal_name) && isDefined(level.scoreinfo) && isDefined(level.scoreinfo[eventstruct.medal_name])) {
+    medalinfo = level.scoreinfo[eventstruct.medal_name];
     self give_xp("medal", #"medalxp", medalinfo[#"xp"]);
   }
 }

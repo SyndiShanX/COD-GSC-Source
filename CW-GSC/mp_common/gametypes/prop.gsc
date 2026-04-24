@@ -1775,7 +1775,7 @@ function givelastonteamwarning() {
   self waittillrecoveredhealth(3);
 
   if(self util::isprop()) {
-    level notify(#"hash_2732c975dc66dd9e");
+    level notify(#"nopropstospectate");
     level.nopropsspectate = 1;
   }
 

@@ -77,7 +77,7 @@ registernotetracks() {
   anim.notetracks[#"anim_alertness = alert"] = &notetrackalertnessalert;
   anim.notetracks[#"gravity on"] = &notetrackgravity;
   anim.notetracks[#"gravity off"] = &notetrackgravity;
-  anim.notetracks[#"hash_3a65333187809d2e"] = &notetrackgravity;
+  anim.notetracks[#"gravity code"] = &notetrackgravity;
   anim.notetracks[#"bodyfall large"] = &notetrackbodyfall;
   anim.notetracks[#"bodyfall small"] = &notetrackbodyfall;
   anim.notetracks[#"footstep"] = &notetrackfootstep;
@@ -228,10 +228,10 @@ handlenotetrack(note, flagname, customfunction, var1) {
     case # "end":
     case # "finish":
       return note;
-    case # "hash_701bc5c059dfaa52":
+    case # "swish small":
       self thread sound::play_in_space("fly_gear_enemy", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "hash_5f5e275b9f3b93ee":
+    case # "swish large":
       self thread sound::play_in_space("fly_gear_enemy_large", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
     case # "no death":
@@ -240,7 +240,7 @@ handlenotetrack(note, flagname, customfunction, var1) {
     case # "no pain":
       self.allowpain = 0;
       break;
-    case # "hash_50c6c08f5de3ec2a":
+    case # "allow pain":
       self.allowpain = 1;
       break;
     case # "anim_melee = right":

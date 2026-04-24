@@ -90,7 +90,7 @@ function function_3c35fb99() {
   level.no_powerups = 1;
   level flag::clear("spawn_zombies");
   level flag::clear("zombie_drop_powerups");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set("hold_round_end");
   level flag::clear(#"hash_25372b8b89ab540c");
@@ -101,7 +101,7 @@ function function_3c35fb99() {
   level flag::wait_till(#"hash_20afa38b1f1c339e");
   level.no_powerups = undefined;
   level flag::set("zombie_drop_powerups");
-  level flag::set(#"hash_21921ed511559aa3");
+  level flag::set(#"nuke_stop_special_spawning");
   level flag::set(#"hash_25372b8b89ab540c");
 }
 

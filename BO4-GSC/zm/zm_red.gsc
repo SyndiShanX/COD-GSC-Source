@@ -220,7 +220,7 @@ event_handler[level_init] main(eventstruct) {
   level.var_e120ae98 = &function_46159bb7;
   function_625a9bcf();
   function_8f72e6b8();
-  zm_custom::function_a00576dd(&function_7722c6f0, undefined, &function_c8ce0a17, undefined);
+  zm_custom::earing(&function_7722c6f0, undefined, &function_c8ce0a17, undefined);
   level.var_338bae81 = &function_338bae81;
   level.var_d99d49fd = &function_7c7c6a1;
 
@@ -255,9 +255,9 @@ function_95db9900(weapon) {
 function_269f27a9() {
   level.var_ab5b85bf = "bonus_points_team";
   n_players = getplayers().size;
-  var_b67b53e8 = zombie_utility::get_zombie_var(#"hash_434b3261c607850" + n_players);
+  var_b67b53e8 = zombie_utility::get_zombie_var(#"zombie_powerup_drop_min_" + n_players);
   var_ee327079 = zombie_utility::get_zombie_var(#"zombie_powerup_drop_max_" + n_players);
-  zombie_utility::set_zombie_var(#"hash_434b3261c607850" + n_players, n_players * 5);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_" + n_players, n_players * 5);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_" + n_players, n_players * 5);
   level.var_1dce56cc = n_players * 5;
 
@@ -272,7 +272,7 @@ function_269f27a9() {
   }
 
   zm_utility::function_fdb0368(4);
-  zombie_utility::set_zombie_var(#"hash_434b3261c607850" + n_players, var_b67b53e8 + 3);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_" + n_players, var_b67b53e8 + 3);
   zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_" + n_players, var_ee327079 + 3);
 }
 

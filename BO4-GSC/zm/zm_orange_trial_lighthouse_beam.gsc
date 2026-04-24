@@ -97,7 +97,7 @@ setup_lighthouse() {
   }
 
   if(level.var_ab11c23d.var_58df9892 == 3 || level.var_ab11c23d.var_58df9892 == 8) {
-    level.var_ab11c23d notify(#"hash_1aa56851d9d4ec0d");
+    level.var_ab11c23d notify(#"trap_state_change");
 
     if(isDefined(level.var_ab11c23d.vh_target)) {
       level.var_ab11c23d.vh_target.b_moving = 0;

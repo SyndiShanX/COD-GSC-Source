@@ -1217,7 +1217,7 @@ function function_587a3171(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"catalyst")) {
       if(isDefined(var_f31e767a)) {

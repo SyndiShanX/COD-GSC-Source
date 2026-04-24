@@ -257,10 +257,10 @@ onstartgametype() {
 
   if(var_b1f5f155 == game.var_b40d8319) {
     game.var_b40d8319 += getgametypesetting(#"hash_7e30d3849ca91b60");
-    thread function_bdba96e1();
+    thread bountydrop();
   }
 
-  level.var_7e7897b8 = function_b3faa437();
+  level.bagomoney = function_b3faa437();
   thread function_c04cc87c();
 
   if(level.scoreroundwinbased) {
@@ -343,13 +343,13 @@ buy_menu_close() {
     level.var_968635ea bountyhunterbuy::close(self);
   }
 
-  level.var_7e7897b8 gameobjects::set_visible_team(#"any");
+  level.bagomoney gameobjects::set_visible_team(#"any");
 }
 
 function_c04cc87c() {
   level.var_324e2795 = 1;
   level.var_7aa0d894 = 1;
-  objective_setinvisibletoall(level.var_7e7897b8.objectiveid);
+  objective_setinvisibletoall(level.bagomoney.objectiveid);
 
   while(game.state != "playing") {
     waitframe(1);
@@ -442,7 +442,7 @@ function_c04cc87c() {
   level.var_7aa0d894 = undefined;
   level clientfield::set_world_uimodel("hudItems.specialistSwitchIsLethal", 1);
   globallogic_utils::resumetimer();
-  objective_setvisibletoall(level.var_7e7897b8.objectiveid);
+  objective_setvisibletoall(level.bagomoney.objectiveid);
   thread radar_sweeps::radarsweeps();
 }
 
@@ -695,11 +695,11 @@ function_8cac4c76() {
 }
 
 function_4f2c425d() {
-  if(!isDefined(level.var_7e7897b8)) {
+  if(!isDefined(level.bagomoney)) {
     return;
   }
 
-  if(!isDefined(level.var_7e7897b8.carrier)) {
+  if(!isDefined(level.bagomoney.carrier)) {
     return;
   }
 
@@ -710,14 +710,14 @@ function_4f2c425d() {
   var_fe63ca41 = getteamplayersalive(self.team);
 
   if(var_fe63ca41 <= 0) {
-    self.var_6bd898f7 = level.var_7e7897b8.carrier getentitynumber();
+    self.var_6bd898f7 = level.bagomoney.carrier getentitynumber();
     return;
   }
 
   teammates = getplayers(self.team);
 
   foreach(teammate in teammates) {
-    if(teammate == level.var_7e7897b8.carrier) {
+    if(teammate == level.bagomoney.carrier) {
       self.var_6bd898f7 = teammate getentitynumber();
       return;
     }
@@ -800,24 +800,24 @@ function_b3faa437() {
   var_8b6f8e45 = [];
   var_8b6f8e45[0] = spawn("script_model", var_85b31568);
   var_8b6f8e45[0] setModel("p8_heist_duffel_bag_set_open");
-  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), #"bag_o_money");
-  var_7e7897b8 gameobjects::set_use_hint_text(#"hash_ee4d709a0f80280");
-  var_7e7897b8 gameobjects::allow_carry(#"any");
-  var_7e7897b8 gameobjects::set_visible_team(#"any");
-  var_7e7897b8 gameobjects::set_use_time(level.var_8cfdca96);
-  var_7e7897b8 gameobjects::set_objective_entity(var_7e7897b8);
-  var_7e7897b8 gameobjects::function_63f73e1d(#"hash_510667a4ac8024c3");
-  var_7e7897b8.objectiveonself = 1;
-  var_7e7897b8.allowweapons = 1;
-  var_7e7897b8.onpickup = &function_cd23eebc;
-  var_7e7897b8.ondrop = &function_62d627a0;
-  var_7e7897b8.var_22389d70 = 0;
-  var_7e7897b8.var_78149e41 = gameobjects::get_next_obj_id();
-  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, #"hash_34a0ac740c9d0bc2");
-  objective_onentity(var_7e7897b8.var_78149e41, var_7e7897b8);
-  var_7e7897b8 gameobjects::set_visible_team(#"none");
-  level.var_7e7897b8 = var_7e7897b8;
-  return var_7e7897b8;
+  bagomoney = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), #"bag_o_money");
+  bagomoney gameobjects::set_use_hint_text(#"hash_ee4d709a0f80280");
+  bagomoney gameobjects::allow_carry(#"any");
+  bagomoney gameobjects::set_visible_team(#"any");
+  bagomoney gameobjects::set_use_time(level.var_8cfdca96);
+  bagomoney gameobjects::set_objective_entity(bagomoney);
+  bagomoney gameobjects::function_63f73e1d(#"hash_510667a4ac8024c3");
+  bagomoney.objectiveonself = 1;
+  bagomoney.allowweapons = 1;
+  bagomoney.onpickup = &function_cd23eebc;
+  bagomoney.ondrop = &function_62d627a0;
+  bagomoney.var_22389d70 = 0;
+  bagomoney.var_78149e41 = gameobjects::get_next_obj_id();
+  objective_add(bagomoney.var_78149e41, "invisible", bagomoney, #"hash_34a0ac740c9d0bc2");
+  objective_onentity(bagomoney.var_78149e41, bagomoney);
+  bagomoney gameobjects::set_visible_team(#"none");
+  level.bagomoney = bagomoney;
+  return bagomoney;
 }
 
 function_cd23eebc(player) {
@@ -937,7 +937,7 @@ function_7f8c4043() {
     closestindex = -1;
 
     for(i = 0; i < var_1c8f5a97.size; i++) {
-      dist = distancesquared(level.var_7e7897b8.origin, var_1c8f5a97[i].origin);
+      dist = distancesquared(level.bagomoney.origin, var_1c8f5a97[i].origin);
 
       if(dist < closestdist) {
         closestdist = dist;
@@ -1376,7 +1376,7 @@ function_8debcb6(origin) {
   useobj gameobjects::allow_use(#"any");
   useobj gameobjects::set_owner_team(#"neutral");
   useobj gameobjects::set_use_time(level.bountydepositsitecapturetime);
-  useobj gameobjects::set_key_object(level.var_7e7897b8);
+  useobj gameobjects::set_key_object(level.bagomoney);
   useobj gameobjects::set_onbeginuse_event(&function_9ef02b1b);
   useobj gameobjects::set_onuse_event(&function_37e1bbbf);
   useobj gameobjects::function_3510971a(1);
@@ -1390,7 +1390,7 @@ function_8debcb6(origin) {
 }
 
 function_a800815(victim, attacker) {
-  if(isDefined(level.var_7e7897b8) && (isDefined(level.var_7e7897b8.carrier) && level.var_7e7897b8.carrier == victim || isDefined(victim.var_ea1458aa) && isDefined(victim.var_ea1458aa.var_cba684c2) && victim.var_ea1458aa.var_cba684c2[level.var_7e7897b8 getentitynumber()] === 1)) {
+  if(isDefined(level.bagomoney) && (isDefined(level.bagomoney.carrier) && level.bagomoney.carrier == victim || isDefined(victim.var_ea1458aa) && isDefined(victim.var_ea1458aa.var_cba684c2) && victim.var_ea1458aa.var_cba684c2[level.bagomoney getentitynumber()] === 1)) {
     if(isDefined(level.var_ad7774db) && isDefined(level.var_ad7774db.trigger) && victim istouching(level.var_ad7774db.trigger)) {
       return true;
     }
@@ -1509,7 +1509,7 @@ function_17debb33() {
   pickup_ammo::function_cff1656d();
 }
 
-function_bdba96e1() {
+bountydrop() {
   waitframe(1);
   droplocations = struct::get_array("bounty_drop", "variantname");
   droppoint = droplocations[randomint(droplocations.size)].origin;

@@ -1888,7 +1888,7 @@ function function_f1355240(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"raz")) {
       level.var_2f45d799++;
@@ -1912,7 +1912,7 @@ function function_5e8a178a(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"mechz")) {
       level.var_ea1e9b1e++;
@@ -1963,7 +1963,7 @@ function function_2927859c(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"soa")) {
       level.var_d8db349d++;

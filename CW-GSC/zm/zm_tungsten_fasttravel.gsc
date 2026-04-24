@@ -112,7 +112,7 @@ function function_c52e8ba(player, var_8d5d092c) {
   } else if(is_true(player.var_9c7b96ed[var_8d5d092c])) {
     switch (self.stub.script_string) {
       default:
-        self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+        self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
         b_result = 1;
         break;
     }
@@ -152,7 +152,7 @@ function function_c52e8ba(player, var_8d5d092c) {
         self.hint_string[n_player_index] = #"hash_3b286335feef3751";
         break;
       default:
-        self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_generic_use";
         break;
     }
 

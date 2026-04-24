@@ -235,7 +235,7 @@ function function_a459deb9() {
   }
 
   level notify(#"hash_1f303ec0c8e6bc2b");
-  level thread function_203098f4();
+  level thread fade_back_in();
   level.adler namespace_e77bf565::function_5770c74();
   struct = struct::get("tag_align_security");
   door = getent("kgb_boiler_room_door", "targetname");
@@ -435,7 +435,7 @@ function function_8f07753c() {
   level thread scene::play("scene_kgb_acquire_disguises_actors", "Fail_Loop");
 }
 
-function function_203098f4() {
+function fade_back_in() {
   level.player endon(#"death");
   wait 0.5;
   level.player thread lui::screen_fade_in(1);

@@ -104,7 +104,7 @@ function watch_player_drowning() {
 
       if(gettime() - self.lastwaterdamagetime > n_swimtime - var_c1e8fa5d && self.drownstage == 0) {
         self thread battlechatter::pain_vox("MOD_DROWN");
-        var_c1e8fa5d -= int(self.playerrole.var_f0886300 * 1000);
+        var_c1e8fa5d -= int(self.playerrole.swimdamagerinterval * 1000);
       }
 
       if(gettime() - self.lastwaterdamagetime > n_swimtime - level.drown_pre_damage_stage_time && self.drownstage == 0) {
@@ -113,7 +113,7 @@ function watch_player_drowning() {
       }
 
       if(gettime() - self.lastwaterdamagetime > n_swimtime) {
-        self.lastwaterdamagetime += int(self.playerrole.var_f0886300 * 1000);
+        self.lastwaterdamagetime += int(self.playerrole.swimdamagerinterval * 1000);
         self dodamage(self.playerrole.swimdamage, self.origin, undefined, undefined, undefined, "MOD_DROWN", 6);
         self activate_player_health_visionset();
 

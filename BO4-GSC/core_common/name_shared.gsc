@@ -368,7 +368,7 @@ getrankfromname(name) {
     case # "pfc.":
       self.airank = "private";
       break;
-    case # "hash_2116fd90943206f0":
+    case # "cpl.":
       self.airank = "corporal";
       break;
     case # "sgt.":
@@ -377,7 +377,7 @@ getrankfromname(name) {
     case # "lt.":
       self.airank = "lieutenant";
       break;
-    case # "hash_21327d909449a828":
+    case # "cpt.":
       self.airank = "captain";
       break;
     default:

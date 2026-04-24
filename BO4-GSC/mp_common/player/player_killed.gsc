@@ -251,7 +251,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
   attacker callback::callback(#"on_killed_player");
   self thread globallogic_audio::flush_leader_dialog_key_on_player("equipmentDestroyed");
   weapon = update_weapon(einflictor, weapon);
-  pixbeginevent(#"hash_47eb123ec5413349");
+  pixbeginevent(#"playerkilled pre constants");
   self thread audio::function_30d4f8c4(attacker, smeansofdeath, weapon);
   wasinlaststand = 0;
   bledout = 0;
@@ -492,7 +492,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
         }
       }
     } else {
-      pixbeginevent(#"hash_3c7e54851be0668");
+      pixbeginevent(#"playerkilled attacker");
       lpattacknum = attacker getentitynumber();
       dokillcam = 1;
 
@@ -596,7 +596,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
     self function_48a1200f(einflictor, attacker, weapon, lpattackteam);
   }
 
-  pixbeginevent(#"hash_6f37a114f9261138");
+  pixbeginevent(#"playerkilled post constants");
   self.lastattacker = attacker;
   self.lastdeathpos = self.origin;
 
@@ -741,7 +741,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, vdir
 
   self weapons::detach_carry_object_model();
   pixendevent();
-  pixbeginevent(#"hash_6a07afbdee38d766");
+  pixbeginevent(#"playerkilled body and gibbing");
   vattackerorigin = undefined;
 
   if(isDefined(attacker)) {
@@ -1487,7 +1487,7 @@ wait_and_suicide() {
 }
 
 function_48a1200f(einflictor, attacker, weapon, lpattackteam) {
-  pixbeginevent(#"hash_115d2072d5ab2061");
+  pixbeginevent(#"playerkilled assists");
 
   if(isDefined(self.attackers)) {
     for(j = 0; j < self.attackers.size; j++) {

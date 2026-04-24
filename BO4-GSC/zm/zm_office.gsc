@@ -168,7 +168,7 @@ event_handler[level_init] main(eventstruct) {
   level thread function_785cadc4();
   zm_sq::register(#"main_quest", #"step1", #"main_quest_step1", &main_quest_step1_setup, &main_quest_step1_cleanup, 1);
   zm_sq::start(#"main_quest");
-  zm_custom::function_a00576dd(undefined, undefined, &function_c8ce0a17, &function_e5086229);
+  zm_custom::earing(undefined, undefined, &function_c8ce0a17, &function_e5086229);
 
   if(zm_custom::function_901b751c(#"zmenhancedstate") == 2) {
     level flag::set(#"hash_2a1fc2e349c48462");

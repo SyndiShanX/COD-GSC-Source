@@ -176,12 +176,12 @@ function function_8d346fd8(winningteam) {
 
 function inithud() {
   level.infect_timerdisplay = spawnStruct();
-  level.infect_timerdisplay.label = #"hash_7bf80a392d947b6e";
+  level.infect_timerdisplay.label = #"mp_draft_starts_in";
   level.infect_timerdisplay.alpha = 0;
   level.infect_timerdisplay.archived = 0;
   level.infect_timerdisplay.hidewheninmenu = 1;
   level.var_6c6b8981 = spawnStruct();
-  level.var_6c6b8981.label = #"hash_29028683f846db5d";
+  level.var_6c6b8981.label = #"mp_infected_time_extended";
   level.var_6c6b8981.alpha = 0;
   level.var_6c6b8981.archived = 0;
   level.var_6c6b8981.hidewheninmenu = 1;
@@ -384,16 +384,16 @@ function private function_fe1ee745(victim, attacker, weapon) {
   }
 
   if(!weapon hastalent(#"hash_2e1dc098c9d99751")) {
-    weapon function_986114ce(#"hash_2e1dc098c9d99751");
+    weapon give_talent(#"hash_2e1dc098c9d99751");
     weapon clientfield::set_player_uimodel("hud_items_cranked.infectedSurvivorTier", 1);
   } else if(!weapon hastalent(#"hash_92aa9267254980")) {
-    weapon function_986114ce(#"hash_92aa9267254980");
+    weapon give_talent(#"hash_92aa9267254980");
     weapon clientfield::set_player_uimodel("hud_items_cranked.infectedSurvivorTier", 2);
   } else if(!weapon hastalent(#"hash_3f3eea064c89666")) {
-    weapon function_986114ce(#"hash_3f3eea064c89666");
+    weapon give_talent(#"hash_3f3eea064c89666");
     weapon clientfield::set_player_uimodel("hud_items_cranked.infectedSurvivorTier", 3);
   } else if(!weapon hastalent(#"hash_343efcca1cdc353b")) {
-    weapon function_986114ce(#"hash_343efcca1cdc353b");
+    weapon give_talent(#"hash_343efcca1cdc353b");
     weapon clientfield::set_player_uimodel("hud_items_cranked.infectedSurvivorTier", 4);
   }
 
@@ -1131,7 +1131,7 @@ function function_1a87243c() {
   game.musicset = "_zm_0" + n_random_int;
 }
 
-function private function_986114ce(talent) {
+function private give_talent(talent) {
   if(!isPlayer(self) || !isalive(self)) {
     return;
   }

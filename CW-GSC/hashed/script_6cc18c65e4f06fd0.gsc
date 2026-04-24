@@ -172,7 +172,7 @@ function function_671424c7() {
   level.no_powerups = 1;
   level flag::clear("spawn_zombies");
   level flag::clear("zombie_drop_powerups");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set("hold_round_end");
   level zm_utility::function_9ad5aeb1(0, 0, 1, 0);
@@ -1627,7 +1627,7 @@ function function_2b6b4a44() {
 }
 
 function function_e2f134ce() {
-  level flag::wait_till_clear(#"hash_21921ed511559aa3");
+  level flag::wait_till_clear(#"nuke_stop_special_spawning");
 }
 
 function function_37597f29() {

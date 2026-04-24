@@ -182,12 +182,12 @@ function_8d346fd8(winningteam) {
 
 inithud() {
   level.infect_timerdisplay = spawnStruct();
-  level.infect_timerdisplay.label = #"hash_7bf80a392d947b6e";
+  level.infect_timerdisplay.label = #"mp_draft_starts_in";
   level.infect_timerdisplay.alpha = 0;
   level.infect_timerdisplay.archived = 0;
   level.infect_timerdisplay.hidewheninmenu = 1;
   level.var_6c6b8981 = spawnStruct();
-  level.var_6c6b8981.label = #"hash_29028683f846db5d";
+  level.var_6c6b8981.label = #"mp_infected_time_extended";
   level.var_6c6b8981.alpha = 0;
   level.var_6c6b8981.archived = 0;
   level.var_6c6b8981.hidewheninmenu = 1;
@@ -420,7 +420,7 @@ onfinalsurvivor() {
     level.infect_awardedfinalsurvivor = 1;
   }
 
-  var_816446f3 = getdvarint(#"hash_a7883ea30e7608a", 0);
+  var_816446f3 = getdvarint(#"scr_infect_finaluav", 0);
 
   if(var_816446f3) {
     level thread finalsurvivoruav(finalsurvivor);

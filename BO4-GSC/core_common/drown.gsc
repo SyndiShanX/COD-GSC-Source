@@ -105,7 +105,7 @@ watch_player_drowning() {
           self thread[[level.var_9f155bf4]]("MOD_DROWN");
         }
 
-        var_c1e8fa5d -= int(self.playerrole.var_f0886300 * 1000);
+        var_c1e8fa5d -= int(self.playerrole.swimdamagerinterval * 1000);
       }
 
       if(gettime() - self.lastwaterdamagetime > n_swimtime - level.drown_pre_damage_stage_time && self.drownstage == 0) {
@@ -114,11 +114,11 @@ watch_player_drowning() {
       } else if(self.drownstage == 0 && var_790acff6) {
         self.drownstage++;
         self clientfield::set_to_player("drown_stage", self.drownstage);
-        self.lastwaterdamagetime = gettime() - n_swimtime + int(self.playerrole.var_f0886300 * 1000);
+        self.lastwaterdamagetime = gettime() - n_swimtime + int(self.playerrole.swimdamagerinterval * 1000);
       }
 
       if(gettime() - self.lastwaterdamagetime > n_swimtime) {
-        self.lastwaterdamagetime += int(self.playerrole.var_f0886300 * 1000);
+        self.lastwaterdamagetime += int(self.playerrole.swimdamagerinterval * 1000);
         self dodamage(self.playerrole.swimdamage, self.origin, undefined, undefined, undefined, "MOD_DROWN", 6);
         self activate_player_health_visionset();
 

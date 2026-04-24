@@ -501,7 +501,7 @@ function function_f81bfa93(a_ents) {
 
 function function_671424c7() {
   level flag::clear("spawn_zombies");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set("hold_round_end");
   level thread zm_utility::function_9ad5aeb1(0, 1, 0, 0);

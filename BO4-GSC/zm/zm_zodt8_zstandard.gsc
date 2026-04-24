@@ -321,7 +321,7 @@ function function_c52e8ba(player, var_8d5d092c) {
 
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c]) {
-    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     b_result = 1;
   } else {
     self.hint_string[n_player_index] = #"hash_204ec88c63b3436b";

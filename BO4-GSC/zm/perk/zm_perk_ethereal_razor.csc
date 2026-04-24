@@ -38,7 +38,7 @@ on_localplayer_spawned(localclientnum) {
 
 function_32981481() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[#"ethereal_razor_light"] = #"hash_1442db17b83460ad";
+    level._effect[#"ethereal_razor_light"] = #"_t6/misc/fx_zombie_cola_revive_on";
   }
 }
 

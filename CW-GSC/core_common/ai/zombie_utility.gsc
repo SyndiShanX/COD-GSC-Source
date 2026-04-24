@@ -623,7 +623,7 @@ function getnodeoffset(node) {
   forward = anglesToForward(node.angles);
 
   switch (node.type) {
-    case # "hash_4767a02d3b3b87cc":
+    case # "cover left wide":
     case # "cover left":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_crouch_offset);
@@ -633,7 +633,7 @@ function getnodeoffset(node) {
 
       break;
     case # "cover right":
-    case # "hash_3aeea178f890eb31":
+    case # "cover right wide":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_crouch_offset);
       } else {

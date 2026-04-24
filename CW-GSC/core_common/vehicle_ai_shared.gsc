@@ -20,7 +20,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  animation::add_notetrack_func("vehicle_ai::SetRotorSpeedCallback", &function_7ae52016);
+  animation::add_notetrack_func("vehicle_ai::SetRotorSpeedCallback", &setrotorspeedcallback);
 }
 
 function entityisarchetype(entity, archetype) {
@@ -1659,7 +1659,7 @@ function event_handler[exit_vehicle] function_b7880090(eventstruct) {
   }
 }
 
-function function_7ae52016(val) {
+function setrotorspeedcallback(val) {
   if(isairborne(self)) {
     self setrotorspeed(float(val));
   }

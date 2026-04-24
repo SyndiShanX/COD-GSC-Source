@@ -61,8 +61,8 @@ init_shared(bundle_name) {
     level.chopper_fx[#"damage"][#"heavy_smoke"] = "destruct/fx8_atk_chppr_exp_trail";
     level.chopper_fx[#"smoke"][#"trail"] = "destruct/fx8_atk_chppr_exp_trail";
     level.chopper_fx[#"fire"][#"trail"][#"large"] = "killstreaks/fx_heli_smk_trail_engine";
-    level._effect[#"heli_comlink_light"][#"friendly"] = #"hash_33eb8912b6c63ecd";
-    level._effect[#"heli_comlink_light"][#"enemy"] = #"hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"friendly"] = #"_debug/fx_debug_deleted_fx";
+    level._effect[#"heli_comlink_light"][#"enemy"] = #"_debug/fx_debug_deleted_fx";
     bundle = struct::get_script_bundle("killstreak", bundle_name);
     killstreaks::register_bundle(bundle, &usekillstreakhelicopter);
     killstreaks::set_team_kill_penalty_scale("helicopter_comlink", 0);

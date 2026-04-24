@@ -12,10 +12,10 @@ function handlenotetrack(note, flagname, customfunction, var1) {
     case # "end":
     case # "finish":
       return flagname;
-    case # "hash_701bc5c059dfaa52":
+    case # "swish small":
       self thread sound::play_in_space("fly_gear_enemy", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
-    case # "hash_5f5e275b9f3b93ee":
+    case # "swish large":
       self thread sound::play_in_space("fly_gear_enemy_large", self gettagorigin("TAG_WEAPON_RIGHT"));
       break;
     case # "no death":
@@ -24,7 +24,7 @@ function handlenotetrack(note, flagname, customfunction, var1) {
     case # "no pain":
       self.allowpain = 0;
       break;
-    case # "hash_50c6c08f5de3ec2a":
+    case # "allow pain":
       self.allowpain = 1;
       break;
     case # "anim_melee = right":

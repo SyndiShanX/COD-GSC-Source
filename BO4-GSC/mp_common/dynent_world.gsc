@@ -359,7 +359,7 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
       starttime = 0;
       rate = isDefined(newstate.animrate) ? newstate.animrate : 0;
 
-      if(isDefined(newstate.var_8725802) && newstate.var_8725802) {
+      if(isDefined(newstate.absolutestarttime) && newstate.absolutestarttime) {
         gametime = gettime();
 
         if(isDefined(newstate.var_e23400ad) && newstate.var_e23400ad) {

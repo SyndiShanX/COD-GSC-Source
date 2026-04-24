@@ -74,7 +74,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
 
   update_attacker(einflictor, eattacker, smeansofdeath);
   weapon = function_f4f77cfb(weapon, einflictor);
-  pixbeginevent(#"hash_5a86c546901702e2");
+  pixbeginevent(#"playerdamage flags/tweaks");
 
   if(!isDefined(vdir)) {
     idflags |= 4;

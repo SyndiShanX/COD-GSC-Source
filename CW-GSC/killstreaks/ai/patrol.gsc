@@ -15,10 +15,10 @@ function init() {
   ai_state::function_e9b061a8(0, &function_42ed4af0, &update_patrol, &function_97a138d5, &update_enemy, &function_4af1ff64, &function_a78474f2);
 }
 
-function function_7d8be726(patrol_radius, var_edc20efd, var_d73e0c6e, marker_fx, marker_objective, var_861daf20, var_a85cb855, var_52e43a03, var_544ae93d, var_7d9560c1) {
+function function_7d8be726(patrol_radius, attack_radius, var_d73e0c6e, marker_fx, marker_objective, var_861daf20, var_a85cb855, var_52e43a03, var_544ae93d, var_7d9560c1) {
   assert(isDefined(self.ai));
   self.ai.patrol = {
-    #state: 2, #patrol_radius: patrol_radius, #var_edc20efd: var_edc20efd, #var_d73e0c6e: var_d73e0c6e, #marker_fx: marker_fx, #marker_objective: marker_objective, #var_861daf20: var_861daf20, #var_a85cb855: var_a85cb855, #var_52e43a03: var_52e43a03, #var_544ae93d: var_544ae93d, #var_7d9560c1: var_7d9560c1
+    #state: 2, #patrol_radius: patrol_radius, #attack_radius: attack_radius, #var_d73e0c6e: var_d73e0c6e, #marker_fx: marker_fx, #marker_objective: marker_objective, #var_861daf20: var_861daf20, #var_a85cb855: var_a85cb855, #var_52e43a03: var_52e43a03, #var_544ae93d: var_544ae93d, #var_7d9560c1: var_7d9560c1
   };
 }
 
@@ -46,7 +46,7 @@ function function_97a138d5() {
 
 function function_4af1ff64() {
   if(self function_63b383f3()) {
-    return self.ai.patrol.var_edc20efd;
+    return self.ai.patrol.attack_radius;
   }
 
   return self.ai.patrol.var_d73e0c6e;
@@ -272,7 +272,7 @@ function update_patrol() {
   }
 
   recordcircle(self.ai.patrol.var_9033671b, self.ai.patrol.patrol_radius, (0, 0, 1), "<dev string:x38>");
-  recordcircle(self.ai.patrol.var_9033671b, self.ai.patrol.var_edc20efd, (1, 0, 0), "<dev string:x38>");
+  recordcircle(self.ai.patrol.var_9033671b, self.ai.patrol.attack_radius, (1, 0, 0), "<dev string:x38>");
 }
 
 function update_enemy() {

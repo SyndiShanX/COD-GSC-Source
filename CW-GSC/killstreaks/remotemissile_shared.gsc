@@ -133,7 +133,7 @@ function tryusepredatormissile(killstreaktype) {
   return returnvar;
 }
 
-function function_203098f4(waittime) {
+function fade_back_in(waittime) {
   self endon(#"disconnect");
   wait waittime;
   lui::screen_fade_in(0.1);

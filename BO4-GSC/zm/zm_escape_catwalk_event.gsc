@@ -535,7 +535,7 @@ function_e7c9f15b(a_ents) {
 
 play_brutus_scene_done(a_ents) {
   level.disable_nuke_delay_spawning = undefined;
-  level flag::wait_till_clear(#"hash_21921ed511559aa3");
+  level flag::wait_till_clear(#"nuke_stop_special_spawning");
   level flag::set("spawn_zombies");
   a_enemy = getaiarchetypearray(#"brutus");
   level.brutus_count = a_enemy.size;

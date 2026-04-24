@@ -385,7 +385,7 @@ on_begin(var_e097dc07, var_f5300808) {
 
   callback::function_33f0ddd3(&function_33f0ddd3);
   callback::on_weapon_change(&zm_trial_util::function_79518194);
-  zm_traps::function_6966417b();
+  zm_traps::disable_all_traps();
   self function_e20ebcfd();
 
   if(isDefined(var_fda63ae3)) {

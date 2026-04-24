@@ -263,7 +263,7 @@ function_a66f0de2() {
   zm_sq_modules::function_2a94055d(self.var_b9989e12);
   playsoundatposition(#"hash_7cef2cb8d950a50", self.origin);
   level.var_6b43507a -= 1;
-  self notify(#"hash_1f9b852104ab2c13");
+  self notify(#"soul_capture_complete");
 }
 
 function_3d5a45fb(var_a276c861, var_19e802fa) {

@@ -895,7 +895,7 @@ function trap_enable(var_f9afc2b3, var_b8c50025 = #"hash_23c1c09e94181fdb") {
   self trap_lights_green();
 }
 
-function function_6966417b(var_ccf895cc = #"zombie/trap_locked") {
+function disable_all_traps(var_ccf895cc = #"zombie/trap_locked") {
   a_t_traps = getEntArray("zombie_trap", "targetname");
 
   foreach(t_trap in a_t_traps) {

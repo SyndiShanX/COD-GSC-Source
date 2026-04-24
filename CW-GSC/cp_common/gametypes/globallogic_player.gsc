@@ -2103,7 +2103,7 @@ function callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, wea
   if(!is_true(level.var_6cc58e4b) || level.players.size > 1) {
     defaultplayerdeathwatchtime = 4;
 
-    if(getdvarint(#"hash_62b8db0428755a32", 1)) {
+    if(getdvarint(#"enable_new_death_cam", 1)) {
       defaultplayerdeathwatchtime = getdvarfloat(#"defaultplayerdeathwatchtime", 2.5);
     }
 

@@ -659,7 +659,7 @@ play_avalanche() {
 }
 
 function_4dacc177() {
-  zm_custom::function_a00576dd(undefined, undefined, &function_c8ce0a17, &function_e5086229);
+  zm_custom::earing(undefined, undefined, &function_c8ce0a17, &function_e5086229);
   level waittill(#"start_zombie_round_logic");
 
   switch (zm_custom::function_901b751c(#"zmpowerstate")) {

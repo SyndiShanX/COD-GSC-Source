@@ -1906,7 +1906,7 @@ function_5b526135() {
   }
 }
 
-function_a00576dd(var_72e7aa12, var_9ad65420, var_15fca790, var_bb4f5acb) {
+earing(var_72e7aa12, var_9ad65420, var_15fca790, var_bb4f5acb) {
   if(isDefined(level.var_a2831281) && level.var_a2831281) {
     level.var_78afc69 = var_72e7aa12;
     return;

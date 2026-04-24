@@ -236,8 +236,8 @@ function_d6d0a32e(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
 }
 
 function_4f9ebad6(entity) {
-  var_14e113b = entity.var_40543c03;
-  return var_14e113b === "concussion" || var_14e113b === "electrical" || var_14e113b === "flash";
+  damageeffecttype = entity.var_40543c03;
+  return damageeffecttype === "concussion" || damageeffecttype === "electrical" || damageeffecttype === "flash";
 }
 
 function_81c29086(entity) {
@@ -409,11 +409,11 @@ function_a78474f2() {
 }
 
 get_favorite_enemy() {
-  var_edc20efd = self ai_state::function_4af1ff64();
+  attack_radius = self ai_state::function_4af1ff64();
   attack_origin = self function_a78474f2();
 
   if(isDefined(attack_origin)) {
-    return ai_target::function_84235351(attack_origin, var_edc20efd);
+    return ai_target::function_84235351(attack_origin, attack_radius);
   }
 }
 

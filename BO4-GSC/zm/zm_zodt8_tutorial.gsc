@@ -302,7 +302,7 @@ open_door(str_door_name) {
   }
 }
 
-function_204dd117(targetname) {
+teleport_to(targetname) {
   node = getnode(targetname, "targetname");
   self setorigin(node.origin);
   self setplayerangles(node.angles);
@@ -604,7 +604,7 @@ function_513e90cf() {
 
   zm_characters::set_character(array(#"hash_f531a8c2df891cc", #"hash_26072a3b34719d22"));
   music::setmusicstate("tutorial_beginner_start");
-  self function_204dd117("tutorial_beginner_start");
+  self teleport_to("tutorial_beginner_start");
   self takeallweapons();
   self function_3fe47ed7("pistol_topbreak_t8");
   self giveweapon(level.weaponbasemelee);
@@ -647,7 +647,7 @@ function_5bc503b1() {
 }
 
 function_1dab7ef1() {
-  self function_204dd117("tutorial_beginner_start");
+  self teleport_to("tutorial_beginner_start");
   self function_fac53b63(array("tutorial_zm_spawner_shoot_zombie"), 1);
   level.var_a4ad706d[0] thread function_16c8867e(self);
 }
@@ -737,7 +737,7 @@ wallbuy() {
 }
 
 points_reset() {
-  self function_204dd117("tutorial_points_start");
+  self teleport_to("tutorial_points_start");
   self thread function_fac53b63(array("tutorial_zm_spawner_points_1", "tutorial_zm_spawner_points_2", "tutorial_zm_spawner_points_3", "tutorial_zm_spawner_points_4"), 1);
 }
 
@@ -778,7 +778,7 @@ doorbuy() {
 }
 
 function_979b1a9f() {
-  self function_204dd117("tutorial_rounds_start");
+  self teleport_to("tutorial_rounds_start");
   self function_fac53b63(array("tutorial_zm_spawner_rounds_1", "tutorial_zm_spawner_rounds_2", "tutorial_zm_spawner_rounds_3"));
 }
 
@@ -790,7 +790,7 @@ rounds() {
 }
 
 function_c55bfc51() {
-  self function_204dd117("tutorial_barrierrepair_start");
+  self teleport_to("tutorial_barrierrepair_start");
   self function_fac53b63(array("tutorial_zm_spawner_barrier"));
 }
 
@@ -874,7 +874,7 @@ magicbox() {
 }
 
 function_dc366ad7() {
-  self function_204dd117("tutorial_playerwilldie_start");
+  self teleport_to("tutorial_playerwilldie_start");
   self function_fac53b63(array("tutorial_zm_spawner_playerwilldie_1", "tutorial_zm_spawner_playerwilldie_2", "tutorial_zm_spawner_playerwilldie_3", "tutorial_zm_spawner_playerwilldie_4", "tutorial_zm_spawner_playerwilldie_5", "tutorial_zm_spawner_playerwilldie_6"));
 }
 
@@ -897,7 +897,7 @@ function_88b4ae49() {
 
 function_bfd3a7b1() {
   zm_characters::set_character(array(#"hash_68255d9ce2a09382", #"hash_1a427f842f175b3c"));
-  self function_204dd117("tutorial_intermediate_start");
+  self teleport_to("tutorial_intermediate_start");
   music::setmusicstate("tutorial_intermediate_start");
   var_1c8259f7 = getweapon("zitem_rocketshield_part_2");
   var_57654fbc = getweapon("zitem_rocketshield_part_3");
@@ -941,7 +941,7 @@ function_bfd3a7b1() {
   self lui::screen_fade_out(5);
   level thread bot::remove_bot(level.tutorialbot);
   zm_characters::set_character(array(#"hash_3e63362aea484e09", #"hash_5a906d7137467771"));
-  self function_204dd117("tutorial_advanced_start");
+  self teleport_to("tutorial_advanced_start");
   self.is_drinking = 0;
   a_pap = struct::get_array("pap_quest_interact", "targetname");
   a_pap[0].unitrigger_stub thread zodt8_pap_quest::function_5c299a0f(self);
@@ -990,7 +990,7 @@ perks() {
 }
 
 function_7cc916a4() {
-  self function_204dd117("tutorial_equipment_start");
+  self teleport_to("tutorial_equipment_start");
   a_grenades = getEntArray("grenade", "classname");
   array::delete_all(a_grenades);
   function_fac53b63(array("tutorial_zm_spawner_equipment_1", "tutorial_zm_spawner_equipment_2", "tutorial_zm_spawner_equipment_3"), 1);
@@ -1068,7 +1068,7 @@ function_2d2a2ec6() {
 }
 
 function_a52087a1() {
-  self function_204dd117("tutorial_bot_start");
+  self teleport_to("tutorial_bot_start");
 
   if(isDefined(level.var_634ee380)) {
     level.var_634ee380 delete();
@@ -1316,7 +1316,7 @@ function_e35fa479() {
 }
 
 power_reset() {
-  self function_204dd117("tutorial_power_start");
+  self teleport_to("tutorial_power_start");
   function_fac53b63(array("tutorial_zm_spawner_power_1", "tutorial_zm_spawner_power_2", "tutorial_zm_spawner_power_3", "tutorial_zm_spawner_power_4", "tutorial_zm_spawner_power_5"));
   level.tutorialbot thread function_e35fa479();
 }
@@ -1354,7 +1354,7 @@ function_4491a7c() {
 }
 
 function_23dadcc9() {
-  self function_204dd117("tutorial_special_weapons_start");
+  self teleport_to("tutorial_special_weapons_start");
   function_cf5f5964("tutorial_zm_spawner_specialweapons_charge");
   function_fac53b63(array("tutorial_zm_spawner_specialweapons_1", "tutorial_zm_spawner_specialweapons_2", "tutorial_zm_spawner_specialweapons_3", "tutorial_zm_spawner_specialweapons_4", "tutorial_zm_spawner_specialweapons_5", "tutorial_zm_spawner_specialweapons_6", "tutorial_zm_spawner_specialweapons_7", "tutorial_zm_spawner_specialweapons_8", "tutorial_zm_spawner_specialweapons_9", "tutorial_zm_spawner_specialweapons_10"));
   self gadgetpowerset(2, 100);
@@ -1428,7 +1428,7 @@ elixirs() {
 
   self thread function_3e1e39f8(#"hash_52ed5bafc1e1a62c", "tutorial_used_anywhere_but_here");
   level waittill(#"tutorial_used_anywhere_but_here");
-  self function_204dd117("tutorial_elixers");
+  self teleport_to("tutorial_elixers");
   level.var_3c8ad64b = -1;
 }
 
@@ -1442,7 +1442,7 @@ function_3901e82e() {
 function_818a3a72() {
   self function_3fe47ed7("smg_handling_t8");
   self function_3fe47ed7("ar_stealth_t8");
-  self function_204dd117("tutorial_PAP_start");
+  self teleport_to("tutorial_PAP_start");
   self thread function_3901e82e();
 }
 
@@ -1470,7 +1470,7 @@ pap() {
 }
 
 function_737ee059() {
-  self function_204dd117("tutorial_fast_travel_start");
+  self teleport_to("tutorial_fast_travel_start");
   function_fac53b63(array("tutorial_zm_spawner_fast_travel_1", "tutorial_zm_spawner_fast_travel_2", "tutorial_zm_spawner_fast_travel_3", "tutorial_zm_spawner_fast_travel_4", "tutorial_zm_spawner_fast_travel_5"));
 }
 

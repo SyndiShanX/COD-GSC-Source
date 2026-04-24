@@ -16,10 +16,10 @@ function init() {
   ai_state::function_e9b061a8(1, &function_ae92f67d, &update_escort, undefined, &update_enemy, &function_4af1ff64, &function_a78474f2, &update_debug);
 }
 
-function private init_escort(var_5a529222, var_edc20efd, var_d73e0c6e, var_544ae93d, var_db083d2c) {
+function private init_escort(var_5a529222, attack_radius, var_d73e0c6e, var_544ae93d, var_db083d2c) {
   assert(isDefined(self.ai));
   self.ai.escort = {
-    #state: 2, #var_5a529222: var_5a529222, #var_edc20efd: var_edc20efd, #var_d73e0c6e: var_d73e0c6e, #var_544ae93d: var_544ae93d, #var_db083d2c: var_db083d2c
+    #state: 2, #var_5a529222: var_5a529222, #attack_radius: attack_radius, #var_d73e0c6e: var_d73e0c6e, #var_544ae93d: var_544ae93d, #var_db083d2c: var_db083d2c
   };
 }
 
@@ -34,7 +34,7 @@ function function_ae92f67d() {
 
 function function_4af1ff64() {
   if(self function_7e09d4ab()) {
-    return self.ai.escort.var_edc20efd;
+    return self.ai.escort.attack_radius;
   }
 
   return self.ai.escort.var_d73e0c6e;

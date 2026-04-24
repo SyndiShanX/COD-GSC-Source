@@ -203,7 +203,7 @@ event_handler[level_init] main(eventstruct) {
   }
 
   zm_ui_inventory::function_7df6bb60(#"zm_white_breakfast_trial", 0);
-  zm_custom::function_a00576dd(undefined, undefined, &function_c8ce0a17, &function_e5086229);
+  zm_custom::earing(undefined, undefined, &function_c8ce0a17, &function_e5086229);
   level.var_e120ae98 = &function_e120ae98;
   level thread function_7e6cf034();
   callback::on_grenade_fired(&zm_white_util::function_c05cc102);

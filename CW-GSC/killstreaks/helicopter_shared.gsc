@@ -57,8 +57,8 @@ function init_shared() {
     level.last_start_node_index = 0;
     level.chopper_fx[#"smoke"][#"trail"] = "destruct/fx8_atk_chppr_exp_trail";
     level.chopper_fx[#"fire"][#"trail"][#"large"] = "killstreaks/fx_heli_smk_trail_engine";
-    level._effect[#"heli_comlink_light"][#"friendly"] = #"hash_33eb8912b6c63ecd";
-    level._effect[#"heli_comlink_light"][#"enemy"] = #"hash_33eb8912b6c63ecd";
+    level._effect[#"heli_comlink_light"][#"friendly"] = #"_debug/fx_debug_deleted_fx";
+    level._effect[#"heli_comlink_light"][#"enemy"] = #"_debug/fx_debug_deleted_fx";
 
     if(!path_start.size && !loop_start.size) {
       return;

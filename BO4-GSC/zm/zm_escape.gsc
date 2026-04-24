@@ -201,7 +201,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread function_acb5b0ec();
 
-  zm_custom::function_a00576dd(&function_7722c6f0, undefined, undefined, &function_e5086229);
+  zm_custom::earing(&function_7722c6f0, undefined, undefined, &function_e5086229);
   level thread function_30a6ae7c();
 
   if(zm_utility::is_trials()) {

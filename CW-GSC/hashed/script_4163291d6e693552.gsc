@@ -276,7 +276,7 @@ function function_df51a2e8(var_5314bd63, nd_path_start, var_384528, str_notify, 
     }
   }
 
-  self notify(#"hash_1c35eb15aa210d6", {
+  self notify(#"player_begin_fasttravel_rail", {
     #var_9fa6220c: var_5817f611
   });
   self zm_stats::increment_challenge_stat(#"fast_travels");

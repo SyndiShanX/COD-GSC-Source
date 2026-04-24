@@ -52,9 +52,9 @@ function private preinit() {
   function_5ae4a10c(array(#"p9_sur_machine_mule_kick", #"hash_47b744b5982bc2a4", #"p9_fxanim_zm_gp_mule_kick_mod"), "perk_mule_kick", #"hash_69c36ca7036b925d", #"hash_68784da81f2a99f7", #"ui_icon_minimap_mulekick", 1, -20);
   function_5ae4a10c(array(#"p9_sur_machine_death_perception"), "perk_death_perception", #"hash_4c319044777c42e5", #"hash_4df32dcf844b0659", #"ui_icon_minimap_deathperception", 1, -20);
   function_5ae4a10c(#"p7_zm_power_up_nuke", "powerup_nuke", #"zombie/powerup_nuke", #"hash_db9d5c95dfea201", #"ui_icon_zombie_powerup_nuke_large");
-  function_5ae4a10c(#"p7_zm_power_up_insta_kill", "powerup_insta_kill", #"hash_1784640b956f2f85", #"hash_504ad9537b38881f", #"ui_icon_zombie_powerup_instakill_large");
+  function_5ae4a10c(#"p7_zm_power_up_insta_kill", "powerup_insta_kill", #"zombie/powerup_insta_kill", #"hash_504ad9537b38881f", #"ui_icon_zombie_powerup_instakill_large");
   function_5ae4a10c(#"p7_zm_power_up_max_ammo", "powerup_max_ammo", #"zombie/powerup_max_ammo", #"hash_2a901c3db306ba24", #"ui_icon_zombie_powerup_max_ammo_large");
-  function_5ae4a10c(#"p7_zm_power_up_double_points", "powerup_double_points", #"hash_774207d74b355a8a", #"hash_25d360e4ab517722", #"ui_icon_zombie_powerup_double_points_large");
+  function_5ae4a10c(#"p7_zm_power_up_double_points", "powerup_double_points", #"zombie/powerup_double_points", #"hash_25d360e4ab517722", #"ui_icon_zombie_powerup_double_points_large");
   function_5ae4a10c(#"p7_zm_power_up_carpenter", "powerup_carpenter", #"hash_7ee3cb05607f53f3", #"hash_23e7594539b63cb8", #"ui_icon_zombie_powerup_carpenter_large");
   function_5ae4a10c(#"p7_zm_power_up_firesale", "powerup_firesale", #"hash_2c7bc0fa0980f8f5", #"hash_365549a15c5bde23", #"ui_icon_zombie_powerup_firesale_large");
   function_5ae4a10c(#"wpn_t9_zm_perk_can_powerup", "powerup_free_perk", #"hash_165c84a677f7a58c", #"zmpingperkcan", #"ui_icon_zombie_powerup_random_perk_can_large");

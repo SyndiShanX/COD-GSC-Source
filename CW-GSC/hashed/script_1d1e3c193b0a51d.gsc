@@ -22,7 +22,7 @@ function private preinit() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_322751dde777c910", &on_begin, &on_end);
+  zm_trial::register_challenge(#"damage_during_movement", &on_begin, &on_end);
 }
 
 function private on_begin(var_c8a36f90, var_16e6b8ea) {

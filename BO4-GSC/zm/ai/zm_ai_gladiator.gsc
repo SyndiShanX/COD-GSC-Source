@@ -174,8 +174,8 @@ registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_1c6cfcf6fdb404ff", &function_dfbf9d5e);
   assert(isscriptfunctionptr(&function_8d49edfa));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_50e5d4b2634f5877", &function_8d49edfa);
-  assert(isscriptfunctionptr(&function_990c9627));
-  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_52aa25564f02b9a1", &function_990c9627);
+  assert(isscriptfunctionptr(&amias));
+  behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_52aa25564f02b9a1", &amias);
   assert(isscriptfunctionptr(&function_6ba071ff));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_2d6fdeb321d8ce80", &function_6ba071ff);
   assert(isscriptfunctionptr(&function_3ca98f5a));
@@ -186,7 +186,7 @@ registerbehaviorscriptfunctions() {
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_3378ea427701f557", &function_c6c44df1);
   assert(isscriptfunctionptr(&function_c6c44df1));
   behaviorstatemachine::registerbsmscriptapiinternal(#"hash_3378ea427701f557", &function_c6c44df1);
-  animationstatenetwork::registeranimationmocomp("mocomp_gladiator_leap", &registerhud_message_electricity_, &function_3f15e557, &function_96f1cbf6);
+  animationstatenetwork::registeranimationmocomp("mocomp_gladiator_leap", &registerhud_message_electricity_, &function_3f15e557, &mocompgladiatorleapend);
   animationstatenetwork::registeranimationmocomp("mocomp_gladiator_throw", &function_3137174f, &function_64cd870, &function_d9e4ebc8);
   animationstatenetwork::registeranimationmocomp("mocomp_gladiator_run_melee", &function_37d33f09, &function_3f7c46a, &function_2bc1ffb8);
   animationstatenetwork::registernotetrackhandlerfunction("gladiator_melee", &function_cdef55f0);
@@ -693,7 +693,7 @@ function_dfbf9d5e(entity) {
   }
 }
 
-function_990c9627(entity) {
+amias(entity) {
   entity pathmode("dont move", 1);
 }
 
@@ -831,7 +831,7 @@ function_3f15e557(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mo
   }
 }
 
-function_96f1cbf6(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
+mocompgladiatorleapend(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {
   entity.blockingpain = 0;
   entity.var_5dd07a80 = undefined;
   entity.var_c2986b66 = undefined;

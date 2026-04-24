@@ -338,7 +338,7 @@ function_dc380897() {
   var_deb6871b.var_b9989e12 = hash(var_deb6871b.script_noteworthy);
   zm_sq_modules::function_3f808d3d(var_deb6871b.var_b9989e12);
   level flag::set(#"infinite_round_spawning");
-  var_deb6871b waittill(#"hash_1f9b852104ab2c13");
+  var_deb6871b waittill(#"soul_capture_complete");
 
   if(getdvarint(#"zm_debug_ee", 0)) {
     if(getdvarint(#"zm_debug_ee", 0)) {
@@ -432,7 +432,7 @@ soul_captured(var_f0e6c7a2, ent) {
 function_a66f0de2() {
   zm_sq_modules::function_2a94055d(self.var_b9989e12);
   level.var_d7374603++;
-  self notify(#"hash_1f9b852104ab2c13");
+  self notify(#"soul_capture_complete");
   level flag::clear(#"infinite_round_spawning");
 
   if(level.var_d7374603 > 3) {

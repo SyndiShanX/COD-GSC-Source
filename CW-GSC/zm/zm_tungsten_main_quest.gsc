@@ -547,7 +547,7 @@ function function_2f0a2ce2() {
   level.no_powerups = 1;
   level flag::clear("spawn_zombies");
   level flag::clear("zombie_drop_powerups");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set("hold_round_end");
   level thread zm_tungsten::function_aa863ff1();
@@ -606,7 +606,7 @@ function function_2f0a2ce2() {
   level.no_powerups = undefined;
   level flag::set("spawn_zombies");
   level flag::set("zombie_drop_powerups");
-  level flag::set(#"hash_21921ed511559aa3");
+  level flag::set(#"nuke_stop_special_spawning");
   level flag::clear(#"pause_round_timeout");
   level flag::clear("hold_round_end");
   level flag::set(#"hash_264e763f3fa44810");
@@ -1529,7 +1529,7 @@ function function_6790ba9f(n_timer) {
 function function_9589412a() {
   self endon(#"death");
   level endon(#"tanks_done", #"tanks_completed");
-  self waittill(#"hash_1c35eb15aa210d6");
+  self waittill(#"player_begin_fasttravel_rail");
   self thread function_2fa25e79();
   level flag::set(#"hash_7b312d4275e203a6");
   waitframe(1);

@@ -2183,7 +2183,7 @@ function function_dca16fc0() {
   level.no_powerups = 1;
   level flag::clear("spawn_zombies");
   level flag::clear("zombie_drop_powerups");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set("hold_round_end");
 }

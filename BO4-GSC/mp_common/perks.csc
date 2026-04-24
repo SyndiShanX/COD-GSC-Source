@@ -657,14 +657,14 @@ monitor_detectnearbyenemies(local_client_num) {
         }
 
         localplayeranglestoright = anglestoright(playerangles);
-        var_21060744 = vectordot(vectorflat, localplayeranglestoright) < 0;
+        onleftside = vectordot(vectorflat, localplayeranglestoright) < 0;
 
         if(cosangle > 0) {
-          enemydetectedbitfield |= var_c729e60c << (var_21060744 ? 15 : 3);
+          enemydetectedbitfield |= var_c729e60c << (onleftside ? 15 : 3);
           continue;
         }
 
-        enemydetectedbitfield |= var_c729e60c << (var_21060744 ? 12 : 6);
+        enemydetectedbitfield |= var_c729e60c << (onleftside ? 12 : 6);
       }
     }
 

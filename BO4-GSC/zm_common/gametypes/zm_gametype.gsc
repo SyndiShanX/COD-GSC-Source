@@ -306,7 +306,7 @@ onfindvalidspawnpoint() {
 }
 
 onspawnplayer(predictedspawn = 0) {
-  pixbeginevent(#"hash_45a46111e3862b44");
+  pixbeginevent(#"zsurvival:onspawnplayer");
   self.usingobj = undefined;
   self.is_zombie = 0;
   zm_player::updateplayernum(self);

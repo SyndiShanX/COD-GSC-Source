@@ -2534,7 +2534,7 @@ function_aabfb424() {
   level endon(#"end_game", #"free_ankh" + "_ended_early", #"hash_6a89add74b46c461");
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
     level thread function_49b3f5aa();
   }
 }

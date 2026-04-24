@@ -48,7 +48,7 @@ function_aa1c61e() {
     return;
   }
 
-  level._effect[#"divetonuke_light"] = #"hash_2225287695ddf9c9";
+  level._effect[#"divetonuke_light"] = #"_t6/misc/fx_zombie_cola_dtap_on";
   level.machine_assets[#"specialty_berserker"] = spawnStruct();
   level.machine_assets[#"specialty_berserker"].weapon = getweapon("zombie_perk_bottle_dying_wish");
   level.machine_assets[#"specialty_berserker"].off_model = "p7_zm_vending_nuke";
@@ -75,7 +75,7 @@ function_32b9bac(use_trigger, perk_machine, bump_trigger, collision) {
 }
 
 function_d1c19f4e() {
-  level._effect[#"divetonuke_light"] = #"hash_2225287695ddf9c9";
+  level._effect[#"divetonuke_light"] = #"_t6/misc/fx_zombie_cola_dtap_on";
 }
 
 function_2aefd3c4() {

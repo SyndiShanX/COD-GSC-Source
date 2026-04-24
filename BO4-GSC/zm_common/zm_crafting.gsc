@@ -1117,7 +1117,7 @@ function_9693e041(player) {
       self.cost = undefined;
       return true;
     }
-  } else if(!player function_2d53738e(self.blueprint.var_54a97edd) && (isDefined(self.blueprint.var_c028dcfe) && self.blueprint.var_c028dcfe && !player function_48ce9379(self.blueprint.var_54a97edd) || isDefined(level.var_905507c3) && level.var_905507c3)) {
+  } else if(!player function_2d53738e(self.blueprint.var_54a97edd) && (isDefined(self.blueprint.firstonefree) && self.blueprint.firstonefree && !player function_48ce9379(self.blueprint.var_54a97edd) || isDefined(level.var_905507c3) && level.var_905507c3)) {
     str = self.blueprint.var_abd9b2d0;
     var_e7ed2264 = function_c9163c5d(str);
     hint_str = zm_utility::function_d6046228(str, var_e7ed2264);
@@ -1305,7 +1305,7 @@ function_df8ce6e2(player) {
   }
 
   if(isDefined(var_f66d1847) && var_f66d1847 > 0) {
-    if(isDefined(self.stub.blueprint.var_c028dcfe) && self.stub.blueprint.var_c028dcfe && !player function_48ce9379(self.stub.blueprint.var_54a97edd)) {
+    if(isDefined(self.stub.blueprint.firstonefree) && self.stub.blueprint.firstonefree && !player function_48ce9379(self.stub.blueprint.var_54a97edd)) {
       if(!isDefined(player.var_4e90ce0c)) {
         player.var_4e90ce0c = [];
       }

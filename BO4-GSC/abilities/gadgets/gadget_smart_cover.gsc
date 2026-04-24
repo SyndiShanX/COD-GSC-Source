@@ -170,7 +170,7 @@ setupdvars() {
   setDvar(#"hash_4f4ce3cb18b004bc", 8);
   setDvar(#"hash_417afa70d515fba5", isDefined(level.smartcoversettings.bundle.var_76d79155) ? level.smartcoversettings.bundle.var_76d79155 : 0);
   setDvar(#"hash_1d8eb304f5cf8033", 1);
-  setDvar(#"hash_71f8bd4cd30de4b3", isDefined(level.smartcoversettings.bundle.var_e35fc674) ? level.smartcoversettings.bundle.var_e35fc674 : 0);
+  setDvar(#"hash_71f8bd4cd30de4b3", isDefined(level.smartcoversettings.bundle.zthreshold) ? level.smartcoversettings.bundle.zthreshold : 0);
   setDvar(#"hash_39a564d4801c4b2e", isDefined(level.smartcoversettings.bundle.var_1f0ae388) ? level.smartcoversettings.bundle.var_1f0ae388 : 0);
 }
 

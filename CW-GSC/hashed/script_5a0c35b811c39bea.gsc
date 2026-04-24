@@ -40,7 +40,7 @@ function private preinit() {
   spawner::add_archetype_spawn_function(#"avogadro", &function_f34df3c);
   spawner::function_89a2cd87(#"avogadro", &function_c41e67c);
   level.var_8791f7c5 = &function_ac94df05;
-  level.var_a35afcb2 = &function_7d5cf0e4;
+  level.var_a35afcb2 = &bohorok;
   assert(isscriptfunctionptr(&function_f498585b));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_76e19aed5b42448f", &function_f498585b);
   assert(isscriptfunctionptr(&function_5871bcf8));
@@ -482,7 +482,7 @@ function function_ac94df05(entity) {
   return isDefined(entity.current_state) && entity.current_state.name === #"chase" && (entity.var_9bff71aa < 2 || gettime() - entity.last_phase_time > 1000);
 }
 
-function function_7d5cf0e4(entity) {
+function bohorok(entity) {
   return isDefined(entity.current_state) && entity.current_state.name == #"chase";
 }
 

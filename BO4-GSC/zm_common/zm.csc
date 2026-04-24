@@ -230,7 +230,7 @@ init_riser_fx() {
   level._effect[#"rise_dust"] = #"zombie/fx_spawn_dirt_body_dustfalling_zmb";
 
   if(isDefined(level.riser_type) && level.riser_type == "snow") {
-    level._effect[#"rise_billow_snow"] = #"hash_793798659a4b9560";
+    level._effect[#"rise_billow_snow"] = #"_t6/maps/zombie/fx_mp_zombie_body_snow_billowing";
   }
 }
 

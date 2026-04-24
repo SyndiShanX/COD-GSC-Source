@@ -114,7 +114,7 @@ function function_f11e26f9() {
 
 function function_79868b3b(b_skipped) {
   level flag::set(#"hash_2145c074d359b87d");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set(#"hold_round_end");
   level flag::clear(#"spawn_zombies");

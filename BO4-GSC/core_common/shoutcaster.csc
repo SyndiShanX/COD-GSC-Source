@@ -90,13 +90,13 @@ shoutcaster_monitor_xray_change(local_client_num) {
     var_52fe6881 = getshoutcastersetting(local_client_num, "shoutcaster_qs_xray");
     var_a6f20d43 = (getshoutcastersetting(local_client_num, "shoutcaster_ds_xray_1p_allies") ? 1 : 0) + (getshoutcastersetting(local_client_num, "shoutcaster_ds_xray_1p_enemies") ? 2 : 0);
     var_c1e644b1 = (getshoutcastersetting(local_client_num, "shoutcaster_ds_xray_air_allies") ? 1 : 0) + (getshoutcastersetting(local_client_num, "shoutcaster_ds_xray_air_enemies") ? 2 : 0);
-    var_36f13a21 = function_2e6e4ee0(local_client_num);
+    aerialcam = function_2e6e4ee0(local_client_num);
     needupdate = 0;
 
     if(firsttime) {
       firsttime = 0;
       needupdate = 1;
-    } else if(team != lastteam || var_52fe6881 != var_f4e066d || var_a6f20d43 != var_821a5c52 || var_c1e644b1 != var_28f6bf0f || var_c1935186 != var_36f13a21) {
+    } else if(team != lastteam || var_52fe6881 != var_f4e066d || var_a6f20d43 != var_821a5c52 || var_c1e644b1 != var_28f6bf0f || var_c1935186 != aerialcam) {
       needupdate = 1;
     }
 
@@ -105,8 +105,8 @@ shoutcaster_monitor_xray_change(local_client_num) {
       var_f4e066d = var_52fe6881;
       var_821a5c52 = var_a6f20d43;
       var_28f6bf0f = var_c1e644b1;
-      var_c1935186 = var_36f13a21;
-      self function_4c4946d4(local_client_num, team, var_52fe6881, var_36f13a21 ? var_c1e644b1 : var_a6f20d43);
+      var_c1935186 = aerialcam;
+      self function_4c4946d4(local_client_num, team, var_52fe6881, aerialcam ? var_c1e644b1 : var_a6f20d43);
     }
   }
 }

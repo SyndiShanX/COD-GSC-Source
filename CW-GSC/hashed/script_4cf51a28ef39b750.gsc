@@ -72,7 +72,7 @@ function function_c52e8ba(player, var_8d5d092c) {
   if(level flag::get(#"hash_322c7f92525e008e")) {
     self.hint_string[n_player_index] = #"";
   } else if(is_true(player.var_9c7b96ed[var_8d5d092c])) {
-    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     b_result = 1;
   } else if(level flag::get(#"hash_268c943ffdd74fa")) {
     if(is_true(level.var_fe6ca5e8)) {
@@ -82,7 +82,7 @@ function function_c52e8ba(player, var_8d5d092c) {
         player globallogic::function_d1924f29(#"hash_6e3ae7967dc5d414");
       }
 
-      self.hint_string[n_player_index] = player zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", #"hash_47b20f457b370888");
+      self.hint_string[n_player_index] = player zm_utility::function_d6046228(#"zombie/fasttravel_generic_use", #"zombie/fasttravel_generic_use_keyboard");
       b_result = 1;
     }
   } else if(!level flag::get(#"dark_aether_active")) {
@@ -131,7 +131,7 @@ function function_c52e8ba(player, var_8d5d092c) {
         player globallogic::function_d1924f29(#"hash_6e3ae7967dc5d414");
       }
 
-      self.hint_string[n_player_index] = player zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", #"hash_47b20f457b370888");
+      self.hint_string[n_player_index] = player zm_utility::function_d6046228(#"zombie/fasttravel_generic_use", #"zombie/fasttravel_generic_use_keyboard");
     }
 
     b_result = 1;

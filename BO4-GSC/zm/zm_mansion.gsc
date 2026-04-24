@@ -259,7 +259,7 @@ event_handler[level_init] main(eventstruct) {
   }
 
   level thread zm_mansion_sound::main();
-  zm_custom::function_a00576dd(undefined, &function_389e7c22, &function_c8ce0a17, undefined);
+  zm_custom::earing(undefined, &function_389e7c22, &function_c8ce0a17, undefined);
   level flag::wait_till("all_players_spawned");
 
   if(zm_custom::function_901b751c(#"zmpowerstate") == 2 || zm_custom::function_901b751c(#"zmpowerdoorstate") == 2) {
@@ -1197,7 +1197,7 @@ function_c52e8ba(player, var_8d5d092c) {
 
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c]) {
-    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     b_result = 1;
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
     self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
@@ -1215,7 +1215,7 @@ function_c52e8ba(player, var_8d5d092c) {
         self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_65cbaa6146c8a85", #"hash_aed57a705546ebb", #"hash_471da16d5cb1956c", #"hash_276bed61279c11e0");
         break;
       default:
-        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"hash_2731cc5c1208e2e4", #"hash_47b20f457b370888");
+        self.hint_string[n_player_index] = zm_utility::function_d6046228(#"zombie/fasttravel_generic_use", #"zombie/fasttravel_generic_use_keyboard");
         break;
     }
 

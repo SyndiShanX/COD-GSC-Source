@@ -25,7 +25,7 @@ __init__() {
   clientfield::register("actor", "zm_nuked", 1, 1, "int");
   clientfield::register("vehicle", "zm_nuked", 1, 1, "int");
   zm_powerups::add_zombie_powerup("nuke", "p7_zm_power_up_nuke", #"zombie/powerup_nuke", &zm_powerups::func_should_always_drop, 0, 0, 0, "zombie/fx_powerup_nuke_zmb");
-  level flag::init(#"hash_21921ed511559aa3");
+  level flag::init(#"nuke_stop_special_spawning");
 }
 
 grab_nuke(player) {
@@ -138,12 +138,12 @@ nuke_delay_spawning(n_spawn_delay) {
   }
 
   b_spawn_zombies_before_nuke = level flag::get("spawn_zombies");
-  level flag::set(#"hash_21921ed511559aa3");
+  level flag::set(#"nuke_stop_special_spawning");
   level flag::clear("spawn_zombies");
   level waittill(#"nuke_complete");
 
   if(isDefined(level.disable_nuke_delay_spawning) && level.disable_nuke_delay_spawning) {
-    level flag::clear(#"hash_21921ed511559aa3");
+    level flag::clear(#"nuke_stop_special_spawning");
     return;
   }
 
@@ -153,11 +153,11 @@ nuke_delay_spawning(n_spawn_delay) {
     level flag::set("spawn_zombies");
   }
 
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
 }
 
 function_406d206b(var_c34665fc) {
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
 }
 
 function_9a79647b(var_8de6cf73) {

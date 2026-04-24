@@ -147,7 +147,7 @@ event_handler[level_init] main(eventstruct) {
   level thread function_96c0d840();
   level thread function_255747bd();
   level thread function_172ac1b5();
-  zm_custom::function_a00576dd(&function_7722c6f0, &function_389e7c22, &function_c8ce0a17);
+  zm_custom::earing(&function_7722c6f0, &function_389e7c22, &function_c8ce0a17);
   water_init();
 }
 
@@ -2008,7 +2008,7 @@ function_c52e8ba(player, var_8d5d092c) {
 
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c]) {
-    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     b_result = 1;
   } else if(isDefined(self.stub.delay) && !self.stub flag::get("delayed")) {
     self.hint_string[n_player_index] = #"zombie/fasttravel_delay";
@@ -2128,7 +2128,7 @@ function_c52e8ba(player, var_8d5d092c) {
 
         break;
       default:
-        self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_generic_use";
         break;
     }
 

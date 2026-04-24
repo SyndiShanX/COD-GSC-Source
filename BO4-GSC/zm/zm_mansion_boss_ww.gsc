@@ -488,7 +488,7 @@ boss_teleport_players(var_a88dacea) {
     var_45e1b44b.scene_ents[#"fakeactor 1"] thread function_8d29523e(#"boss_invisible");
     var_45e1b44b.scene_ents[#"fakeactor 1"] function_d84758c();
     wait 0.2;
-    level notify(#"hash_1b248026aeb05066");
+    level notify(#"boss_intro_done");
     level.var_b88cf121 = 1;
     level zm_audio::sndvoxoverride(0);
     return;
@@ -533,7 +533,7 @@ function_528abede(s_loc, var_79bdd0d5) {
     self val::set("bossfight_intro", "disable_weapons", 1);
     level waittill(#"hash_4b195fabca6f5aaf");
     self thread lui::screen_fade_in(0.1);
-    level waittill(#"hash_1b248026aeb05066");
+    level waittill(#"boss_intro_done");
     self val::reset("bossfight_intro", "freezecontrols");
     self val::reset("bossfight_intro", "disable_weapons");
   } else {
@@ -1736,7 +1736,7 @@ function_2b6b4a44() {
 }
 
 function_e2f134ce() {
-  level flag::wait_till_clear(#"hash_21921ed511559aa3");
+  level flag::wait_till_clear(#"nuke_stop_special_spawning");
 }
 
 function_de60e752() {

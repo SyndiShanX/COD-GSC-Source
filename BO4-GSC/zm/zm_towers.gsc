@@ -253,7 +253,7 @@ event_handler[level_init] main(eventstruct) {
 
   if(zm_trial::is_trial_mode()) {}
 
-  zm_custom::function_a00576dd(&function_7722c6f0, &function_389e7c22, &function_c8ce0a17, undefined);
+  zm_custom::earing(&function_7722c6f0, &function_389e7c22, &function_c8ce0a17, undefined);
   level.var_43216bdf = &function_b2b69ce5;
 }
 

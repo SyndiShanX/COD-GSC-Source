@@ -749,7 +749,7 @@ function_f067d867(concertinawire) {
       player.var_45650309 = gettime();
 
       if((isDefined(var_50487836) ? var_50487836 : 0) && !var_434fa90d) {
-        player gestures::function_56e00fbf(#"hash_3e06c757e4b20f4f", undefined, 0);
+        player gestures::function_56e00fbf(#"gestable_concertina_reaction", undefined, 0);
       }
     }
 

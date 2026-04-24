@@ -838,7 +838,7 @@ function function_822214be(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"mimic")) {
       level.var_9c55e25a++;
@@ -861,7 +861,7 @@ function function_42885f70(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"tormentor")) {
       level.var_3bb8de45++;
@@ -878,7 +878,7 @@ function function_1ec597c3(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"zombie_dog")) {
       level.var_b0e7164b++;
@@ -901,7 +901,7 @@ function function_2927859c(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"soa")) {
       level.var_d8db349d++;
@@ -924,7 +924,7 @@ function function_f1355240(n_round_number) {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(zm_round_spawning::function_d0db51fc(#"raz")) {
       level.var_2f45d799++;
@@ -1248,7 +1248,7 @@ function function_53555fd2() {
   }
 
   while(true) {
-    level waittill(#"hash_5d3012139f083ccb");
+    level waittill(#"round_spawns_constructed");
 
     if(level.round_number < level.var_4096945a) {
       continue;

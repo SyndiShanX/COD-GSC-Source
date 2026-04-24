@@ -166,7 +166,7 @@ function function_8c6ab347() {
   level.var_64606faa = 0;
   zm_utility_zsurvival::function_7c97e961(level.var_b48509f9 + 1);
   level notify(#"hash_6a805bca389d1daf");
-  level flag::wait_till_clear(#"hash_21921ed511559aa3");
+  level flag::wait_till_clear(#"nuke_stop_special_spawning");
 
   switch (level.var_b48509f9) {
     case 2:

@@ -913,7 +913,7 @@ function_40744a4() {
 
   while(!level flag::get(#"catalyst_encounters_completed")) {
     if(!zm_round_spawning::function_d0db51fc(#"stoker") && isDefined(level.var_1643d0d) && level.var_1643d0d.size == 1) {
-      level waittill(#"hash_5d3012139f083ccb");
+      level waittill(#"round_spawns_constructed");
       waitframe(1);
       continue;
     }
@@ -4070,7 +4070,7 @@ function_43a16eb7(var_e6d63e1c, s_loc) {
 }
 
 function_26284c6a(a_players) {
-  array::wait_till(a_players, #"hash_1c35eb15aa210d6", 1);
+  array::wait_till(a_players, #"player_begin_fasttravel_rail", 1);
   level notify(#"hash_332a98e65f5dce4");
 }
 

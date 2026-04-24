@@ -101,9 +101,9 @@ function get_targets() {
   return valid_targets;
 }
 
-function function_84235351(attack_origin, var_edc20efd) {
+function function_84235351(attack_origin, attack_radius) {
   targets = self get_targets();
-  var_e0c224a4 = var_edc20efd * var_edc20efd;
+  var_e0c224a4 = attack_radius * attack_radius;
   least_hunted = undefined;
   closest_target_dist_squared = undefined;
 
@@ -160,10 +160,10 @@ function function_84235351(attack_origin, var_edc20efd) {
   return least_hunted;
 }
 
-function function_a13468f5(attack_origin, var_edc20efd) {
+function function_a13468f5(attack_origin, attack_radius) {
   targets = self get_targets();
   valid_targets = [];
-  var_e0c224a4 = var_edc20efd * var_edc20efd;
+  var_e0c224a4 = attack_radius * attack_radius;
 
   foreach(target in targets) {
     dist_squared = distancesquared(attack_origin, target.origin);

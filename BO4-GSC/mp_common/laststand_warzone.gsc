@@ -876,8 +876,8 @@ bleed_out(var_40d90c02) {
   self function_2907ce7a();
   self suicide(suicide_mod);
 
-  if(getdvarint(#"hash_62b8db0428755a32", 1) && isPlayer(self)) {
-    bleed_out_fade_time = getdvarfloat(#"hash_44de9418bb6289ac", 1.5);
+  if(getdvarint(#"enable_new_death_cam", 1) && isPlayer(self)) {
+    bleed_out_fade_time = getdvarfloat(#"bleed_out_screen_fade_speed", 1.5);
     self playsoundtoplayer(#"hash_11d39dca0f911535", self);
     self lui::screen_fade(bleed_out_fade_time, 1, 0, "black", 0);
     wait bleed_out_fade_time + 0.2;

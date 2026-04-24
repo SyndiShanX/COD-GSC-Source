@@ -12,15 +12,15 @@ init() {
   ai_state::function_e9b061a8(2, &make_leave, &update_leave, undefined, &update_enemy, &function_4af1ff64, &function_a78474f2);
 }
 
-init_leave(var_edc20efd) {
+init_leave(attack_radius) {
   assert(isDefined(self.ai));
   self.ai.leave = {
-    #state: 0, #var_edc20efd: var_edc20efd
+    #state: 0, #attack_radius: attack_radius
   };
 }
 
 function_4af1ff64() {
-  return self.ai.leave.var_edc20efd;
+  return self.ai.leave.attack_radius;
 }
 
 function_a78474f2() {

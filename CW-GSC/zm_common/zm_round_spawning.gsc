@@ -385,7 +385,7 @@ function function_b2dabfc() {
     }
   }
 
-  level notify(#"hash_5d3012139f083ccb");
+  level notify(#"round_spawns_constructed");
 }
 
 function function_4990741c() {

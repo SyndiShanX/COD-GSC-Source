@@ -196,7 +196,7 @@ register() {
   clientfield::register("toplayer", "ai_tank_jam_hud", 9000, 1, "int");
 }
 
-function_203098f4(waittime) {
+fade_back_in(waittime) {
   self endon(#"disconnect");
   wait waittime;
   lui::screen_fade_in(0);
@@ -207,7 +207,7 @@ watchforentervehicle() {
   self waittill(#"enter_vehicle");
 
   if(self remote_weapons::allowremotestart(1) && isDefined(self.ai_tank_drone)) {
-    thread function_203098f4(3);
+    thread fade_back_in(3);
     lui::screen_fade_out(0.1);
     self thread remote_weapons::useremoteweapon(self.ai_tank_drone, "killstreak_ai_tank", 1, 1, 1);
   }
@@ -929,8 +929,8 @@ cobra_raise() {
     playFXOnTag(self.settings.cobra_fx_1, self, self.settings.cobra_tag_1);
   }
 
-  self asmrequestsubstate(#"hash_3e3fc20d5fcbf6e0");
-  self vehicle_ai::waittill_asm_complete(#"hash_3e3fc20d5fcbf6e0", 4);
+  self asmrequestsubstate(#"cobra@stationary");
+  self vehicle_ai::waittill_asm_complete(#"cobra@stationary", 4);
   self laseron();
 }
 

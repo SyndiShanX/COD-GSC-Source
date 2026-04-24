@@ -54,7 +54,7 @@ function private function_3aa023f1(name) {
     gibstruct.gibfx = definition.(gibpiece + "_gibfx");
     gibstruct.gibfxtag = definition.(gibpiece + "_gibeffecttag");
     gibstruct.gibdynentfx = definition.(gibpiece + "_gibdynentfx");
-    gibstruct.var_42c89fa1 = definition.(gibpiece + "_gibcinematicfx");
+    gibstruct.gibcinematicfx = definition.(gibpiece + "_gibcinematicfx");
     gibstruct.gibsound = definition.(gibpiece + "_gibsound");
     gibstruct.gibhidetag = definition.(gibpiece + "_gibhidetag");
     gibpieces[gibflag] = gibstruct;
@@ -113,7 +113,7 @@ function private function_9fe14ca3(entity, gibflag, var_c3317960) {
     gibstruct.gibfx = definition.(gibpiece + "_gibfx");
     gibstruct.gibfxtag = definition.(gibpiece + "_gibeffecttag");
     gibstruct.gibdynentfx = definition.(gibpiece + "_gibdynentfx");
-    gibstruct.var_42c89fa1 = definition.(gibpiece + "_gibcinematicfx");
+    gibstruct.gibcinematicfx = definition.(gibpiece + "_gibcinematicfx");
     gibstruct.gibsound = definition.(gibpiece + "_gibsound");
     gibstruct.gibhidetag = definition.(gibpiece + "_gibhidetag");
     gibpieces[side] = gibstruct;
@@ -334,9 +334,9 @@ function private _gibentity(localclientnum, gibflags, shouldspawngibs, var_c3317
           if(isDefined(gibpiece)) {
             _playgibfx(localclientnum, entity, gibpiece.gibfx, gibpiece.gibfxtag);
 
-            if(isDefined(gibpiece.var_42c89fa1)) {
+            if(isDefined(gibpiece.gibcinematicfx)) {
               if(function_92beaa28(localclientnum)) {
-                _playgibfx(localclientnum, entity, gibpiece.var_42c89fa1, gibpiece.gibfxtag);
+                _playgibfx(localclientnum, entity, gibpiece.gibcinematicfx, gibpiece.gibfxtag);
               }
             }
 
@@ -361,9 +361,9 @@ function private _gibentity(localclientnum, gibflags, shouldspawngibs, var_c3317
 
           _playgibfx(localclientnum, entity, gibpiece.gibfx, gibpiece.gibfxtag);
 
-          if(isDefined(gibpiece.var_42c89fa1)) {
+          if(isDefined(gibpiece.gibcinematicfx)) {
             if(function_92beaa28(localclientnum)) {
-              _playgibfx(localclientnum, entity, gibpiece.var_42c89fa1, gibpiece.gibfxtag);
+              _playgibfx(localclientnum, entity, gibpiece.gibcinematicfx, gibpiece.gibfxtag);
             }
           }
 

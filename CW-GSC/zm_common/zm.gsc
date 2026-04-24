@@ -1153,8 +1153,8 @@ function init_fx() {
   level._effect[#"animscript_gibtrail_fx"] = #"blood/fx_blood_gib_limb_trail";
   level._effect[#"switch_sparks"] = #"hash_26f37488feec03c3";
   level._effect[#"hash_4159f23a18f644a7"] = #"hash_71ed4f412b17e19e";
-  level._effect[#"fx_zombie_bar_break"] = #"hash_718a24841c1e00c9";
-  level._effect[#"fx_zombie_bar_break_lite"] = #"hash_35ee6425adf16fb6";
+  level._effect[#"fx_zombie_bar_break"] = #"_t6/maps/zombie/fx_zombie_bar_break";
+  level._effect[#"fx_zombie_bar_break_lite"] = #"_t6/maps/zombie/fx_zombie_bar_break_lite";
 
   if(!is_true(level.fx_exclude_edge_fog)) {
     level._effect[#"edge_fog"] = #"_t6/maps/zombie/fx_fog_zombie_amb";
@@ -1167,7 +1167,7 @@ function init_fx() {
   level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
 
   if(!is_true(level.fx_exclude_tesla_head_light)) {
-    level._effect[#"tesla_head_light"] = #"hash_757d002378ec934c";
+    level._effect[#"tesla_head_light"] = #"_t6/maps/zombie/fx_zombie_tesla_neck_spurt";
   }
 
   level._effect[#"zombie_guts_explosion"] = #"zombie/fx_blood_torso_explo_lg_zmb";
@@ -1188,7 +1188,7 @@ function init_fx() {
   }
 
   if(!is_true(level.disable_fx_upgrade_aquired)) {
-    level._effect[#"upgrade_aquired"] = #"hash_359f0993cf4ebe66";
+    level._effect[#"upgrade_aquired"] = #"_t6/maps/zombie/fx_zmb_tanzit_upgrade";
   }
 }
 
@@ -1422,7 +1422,7 @@ function actor_damage_override(inflictor, attacker, damage, flags, meansofdeath,
   attacker thread zm_audio::sndplayerhitalert(self, meansofdeath, inflictor, weapon, shitloc, damage);
 
   if(!isbot(attacker)) {
-    level notify(#"hash_3fdaafe712252cf5");
+    level notify(#"zombie_attacked_by_player");
   }
 
   if(is_true(level.zm_bots_scale) && isbot(attacker)) {

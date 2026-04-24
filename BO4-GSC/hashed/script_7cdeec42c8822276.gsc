@@ -115,7 +115,7 @@ round_spawning() {
       wait 0.1;
     }
 
-    level flag::wait_till_clear(#"hash_21921ed511559aa3");
+    level flag::wait_till_clear(#"nuke_stop_special_spawning");
     str_archetype = get_archetype();
     ai = spawn_archetype(str_archetype);
 

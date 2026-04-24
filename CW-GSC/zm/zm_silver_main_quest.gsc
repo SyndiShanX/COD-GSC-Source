@@ -2741,7 +2741,7 @@ function function_912f5a00(var_ee4872c1, var_7928fb3d) {
 
     if(gettime() >= level.var_fc5dfa9) {
       if(level.var_46a47223.size < var_ee4872c1) {
-        function_5237db24();
+        spawn_normal_zombie();
         level.var_fc5dfa9 = gettime() + 500;
       }
     }
@@ -2750,7 +2750,7 @@ function function_912f5a00(var_ee4872c1, var_7928fb3d) {
   }
 }
 
-function function_5237db24() {
+function spawn_normal_zombie() {
   ai = zombie_utility::spawn_zombie(level.zombie_spawners[0], undefined, undefined, 20);
 
   if(isDefined(ai)) {
@@ -2875,10 +2875,10 @@ function function_78507a9f(var_b2eb7b6b) {
       }
 
       if(!is_true(var_67840931)) {
-        var_7fbbd018 = function_5237db24();
+        var_7fbbd018 = spawn_normal_zombie();
       }
     } else {
-      var_7fbbd018 = function_5237db24();
+      var_7fbbd018 = spawn_normal_zombie();
     }
 
     if(isDefined(var_7fbbd018)) {

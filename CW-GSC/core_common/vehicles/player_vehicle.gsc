@@ -925,9 +925,9 @@ function event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
       }
     }
 
-    var_1861e0b1 = vehicle clientfield::get("toggle_horn_sound");
+    siren_on = vehicle clientfield::get("toggle_horn_sound");
 
-    if(is_true(var_1861e0b1)) {
+    if(is_true(siren_on)) {
       self clientfield::set_to_player("toggle_vehicle_sensor", 1);
     }
   }
@@ -1109,9 +1109,9 @@ function event_handler[change_seat] function_2aa4e6cf(eventstruct) {
           vehicle vehicle::function_bbc1d940(1);
         }
 
-        var_1861e0b1 = vehicle clientfield::get("toggle_horn_sound");
+        siren_on = vehicle clientfield::get("toggle_horn_sound");
 
-        if(is_true(var_1861e0b1)) {
+        if(is_true(siren_on)) {
           self clientfield::set_to_player("toggle_vehicle_sensor", 1);
         }
       }

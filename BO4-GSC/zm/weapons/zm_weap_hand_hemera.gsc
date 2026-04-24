@@ -604,7 +604,7 @@ player_charged_shot(weapon) {
   self.mdl_beam clientfield::set("" + # "hemera_beam", 1);
   self playSound(#"hash_1f3a25ed02b0fb5f");
   self thread function_1e39fbc5(weapon);
-  self thread function_8bf301a6();
+  self thread beam_attack();
   self thread function_a2065170();
 
   while(zm_utility::is_player_valid(self) && self attackButtonPressed() && self getweaponammostock(weapon) && self getcurrentweapon() === weapon) {
@@ -658,7 +658,7 @@ function_a2065170() {
   }
 }
 
-function_8bf301a6() {
+beam_attack() {
   self endon(#"death", #"weapon_change", #"stop_beaming");
   self.mdl_beam endon(#"death");
 

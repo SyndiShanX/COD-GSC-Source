@@ -110,7 +110,7 @@ tryusepredatormissile(lifeid) {
   return returnvar;
 }
 
-function_203098f4(waittime) {
+fade_back_in(waittime) {
   self endon(#"disconnect");
   wait waittime;
   lui::screen_fade_in(0.1);
@@ -227,7 +227,7 @@ _fire(lifeid, player, team, killstreak_id) {
     return false;
   }
 
-  thread function_203098f4(0.3);
+  thread fade_back_in(0.3);
   lui::screen_fade_out(0.1);
   startpos = veh.origin - (0, 0, 30);
   rocket = magicbullet(getweapon(#"remote_missile_missile"), startpos, targetpos, player);

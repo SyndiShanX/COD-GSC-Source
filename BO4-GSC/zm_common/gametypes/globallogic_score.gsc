@@ -192,7 +192,7 @@ function giveteamscore(event, team, player, victim) {
     return;
   }
 
-  pixbeginevent(#"hash_66d4a941ef078585");
+  pixbeginevent(#"level.onteamscore");
   teamscore = game.stat[#"teamscores"][team];
   [[level.onteamscore]](event, team);
   pixendevent();

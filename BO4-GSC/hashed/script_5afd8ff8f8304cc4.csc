@@ -16,7 +16,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_250115340b2e27a5", &on_begin, &on_end);
+  zm_trial::register_challenge(#"kill_enemies_for_health", &on_begin, &on_end);
 }
 
 on_begin(local_client_num, params) {
@@ -28,7 +28,7 @@ on_end(local_client_num) {
 }
 
 is_active() {
-  challenge = zm_trial::function_a36e8c38(#"hash_250115340b2e27a5");
+  challenge = zm_trial::function_a36e8c38(#"kill_enemies_for_health");
   return isDefined(challenge);
 }
 

@@ -28,7 +28,7 @@ function private preinit() {
 function private on_begin(weapon_name) {
   level.var_b38bb71 = 1;
   level.var_ef0aada0 = 1;
-  zm_traps::function_6966417b();
+  zm_traps::disable_all_traps();
 
   foreach(player in getplayers()) {
     foreach(var_5a1e3e5b in level.hero_weapon) {

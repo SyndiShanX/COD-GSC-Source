@@ -26,7 +26,7 @@ __init__() {
 
 function_387d8f36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self thread postfx::playpostfxbundle(#"hash_129cb5a3537b76f4");
+    self thread postfx::playpostfxbundle(#"pstfx_zm_bgb_now_you_see_me");
 
     if(!isDefined(self.var_ab7bde88)) {
       self playSound(localclientnum, #"hash_7b2800dd9e263794");
@@ -36,7 +36,7 @@ function_387d8f36(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     return;
   }
 
-  self postfx::stoppostfxbundle(#"hash_129cb5a3537b76f4");
+  self postfx::stoppostfxbundle(#"pstfx_zm_bgb_now_you_see_me");
 
   if(isDefined(self.var_ab7bde88)) {
     self stoploopsound(self.var_ab7bde88);

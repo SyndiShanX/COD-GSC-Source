@@ -123,9 +123,9 @@ function_b23e4b45() {
     }
 
     if(!isDefined(newpos)) {
-      var_68860686 = ai::t_cylinder(self.origin, 10, 60);
+      near_me = ai::t_cylinder(self.origin, 10, 60);
       cylinder = ai::t_cylinder(self.origin, 300, 60);
-      tacpoints = tacticalquery("mp_seeker_seek_no_enemy_fallback", self.origin, self, var_68860686, cylinder);
+      tacpoints = tacticalquery("mp_seeker_seek_no_enemy_fallback", self.origin, self, near_me, cylinder);
 
       if(isDefined(tacpoints) && tacpoints.size > 0) {
         foreach(tacpoint in tacpoints) {
@@ -572,8 +572,8 @@ function_3e16dec3(params) {
 
       forward = anglesToForward(self.angles);
       forwardpos = self.origin + forward * 500;
-      var_68860686 = ai::t_cylinder(self.origin, 200, 60);
-      tacpoints = tacticalquery("mp_seeker_seek_no_enemy", self.origin, self, var_68860686, forwardpos);
+      near_me = ai::t_cylinder(self.origin, 200, 60);
+      tacpoints = tacticalquery("mp_seeker_seek_no_enemy", self.origin, self, near_me, forwardpos);
       tacpoints = damage_armor_activati_(self, tacpoints);
 
       if(isDefined(tacpoints) && tacpoints.size != 0) {
@@ -598,9 +598,9 @@ function_3e16dec3(params) {
         newpos = getclosestpointonnavmesh(self.origin, 1000, 10);
 
         if(isDefined(newpos)) {
-          var_68860686 = ai::t_cylinder(self.origin, 400, 60);
+          near_me = ai::t_cylinder(self.origin, 400, 60);
           cylinder = ai::t_cylinder(self.origin, 1500, 150);
-          tacpoints = tacticalquery("mp_seeker_seek_no_enemy_fallback", newpos, self, var_68860686, cylinder);
+          tacpoints = tacticalquery("mp_seeker_seek_no_enemy_fallback", newpos, self, near_me, cylinder);
           tacpoints = damage_armor_activati_(self, tacpoints);
 
           if(isDefined(tacpoints) && tacpoints.size != 0) {

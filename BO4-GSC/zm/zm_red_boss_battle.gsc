@@ -2122,7 +2122,7 @@ function_6401a80e() {
   self endon(#"death");
 
   while(true) {
-    s_notify = self waittill(#"hash_1c35eb15aa210d6", #"fasttravel_finished", #"hash_178a3d0115bc972e");
+    s_notify = self waittill(#"player_begin_fasttravel_rail", #"fasttravel_finished", #"fasttravel_cooldown_done");
 
     if(!isDefined(s_notify.var_9fa6220c) || !isDefined(s_notify.var_9fa6220c.script_noteworthy) || s_notify.var_9fa6220c.script_noteworthy != "traverse") {
       continue;
@@ -2143,7 +2143,7 @@ function_6401a80e() {
     var_2d54d86e = s_notify.var_9fa6220c.var_85e825a7;
 
     switch (s_notify._notify) {
-      case # "hash_1c35eb15aa210d6":
+      case # "player_begin_fasttravel_rail":
         if(isDefined(var_2d54d86e)) {
           level flag::set(var_2d54d86e);
         }
@@ -2176,7 +2176,7 @@ function_6401a80e() {
         }
 
         break;
-      case # "hash_178a3d0115bc972e":
+      case # "fasttravel_cooldown_done":
         if(!(isDefined(var_e1284bee.var_5a099a2d) && var_e1284bee.var_5a099a2d)) {
           self zm_red_fasttravel::function_28deccf1(var_e1284bee, 1);
         }

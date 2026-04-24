@@ -22,7 +22,7 @@ __init__() {
     return;
   }
 
-  zm_trial::register_challenge(#"hash_250115340b2e27a5", &on_begin, &on_end);
+  zm_trial::register_challenge(#"kill_enemies_for_health", &on_begin, &on_end);
 }
 
 on_begin(var_b9c6550, var_50d1120, var_43f824d6, var_73d6ae36) {
@@ -96,7 +96,7 @@ function_e997bb0b(var_73d6ae36) {
 }
 
 function_49091c27() {
-  challenge = zm_trial::function_a36e8c38(#"hash_250115340b2e27a5");
+  challenge = zm_trial::function_a36e8c38(#"kill_enemies_for_health");
   assert(isDefined(challenge));
   new_health = self.health + challenge.var_97330ad2;
   self.health = int(math::clamp(floor(new_health), 0, max(self.maxhealth, self.var_66cb03ad)));

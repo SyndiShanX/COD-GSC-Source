@@ -350,7 +350,7 @@ update_wave_water(localclientnum) {
   var_b965688c = function_67b634e6(self.origin);
 
   if(!self flag::get("water_drained")) {
-    function_c1129a39(var_b965688c, (0, 0, -1), 30);
+    puppying(var_b965688c, (0, 0, -1), 30);
   }
 
   while(isDefined(self) && self flag::get("update_water")) {
@@ -359,7 +359,7 @@ update_wave_water(localclientnum) {
     waitframe(1);
   }
 
-  function_c1129a39(var_b965688c, (0, 0, 0), 0);
+  puppying(var_b965688c, (0, 0, 0), 0);
 }
 
 tilt(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

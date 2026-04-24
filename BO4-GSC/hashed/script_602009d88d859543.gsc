@@ -122,7 +122,7 @@ function_c52e8ba(player, var_8d5d092c) {
     self.hint_string[n_player_index] = #"zombie/fasttravel_locked";
     b_result = 1;
   } else if(isDefined(player.var_9c7b96ed[var_8d5d092c]) && player.var_9c7b96ed[var_8d5d092c] || isDefined(level.var_8f8f85f5) && level.var_8f8f85f5 && isDefined(level.var_261ad4d[var_8d5d092c]) && level.var_261ad4d[var_8d5d092c]) {
-    self.hint_string[n_player_index] = #"hash_7667bd0f83307360";
+    self.hint_string[n_player_index] = #"zombie/generic_fasttravel_cooldown";
     self sethintstringforplayer(player, self.hint_string[n_player_index]);
     b_result = 1;
   } else {
@@ -187,7 +187,7 @@ function_c52e8ba(player, var_8d5d092c) {
 
         break;
       default:
-        self.hint_string[n_player_index] = #"hash_2731cc5c1208e2e4";
+        self.hint_string[n_player_index] = #"zombie/fasttravel_generic_use";
         break;
     }
 

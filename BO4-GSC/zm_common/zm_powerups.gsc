@@ -51,16 +51,16 @@ init() {
     zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_per_round", 4);
   }
 
-  zombie_utility::set_zombie_var(#"hash_604cac237ec8cd3", 12);
-  zombie_utility::set_zombie_var(#"hash_8b7fc80184dc451", 16);
-  zombie_utility::set_zombie_var(#"hash_604cbc237ec8e86", 14);
-  zombie_utility::set_zombie_var(#"hash_8b7f980184dbf38", 18);
-  zombie_utility::set_zombie_var(#"hash_604ccc237ec9039", 17);
-  zombie_utility::set_zombie_var(#"hash_8b7fa80184dc0eb", 21);
-  zombie_utility::set_zombie_var(#"hash_604cdc237ec91ec", 20);
-  zombie_utility::set_zombie_var(#"hash_8b7ff80184dc96a", 24);
-  zombie_utility::set_zombie_var(#"hash_4d2cc817490bcca", 4);
-  zombie_utility::set_zombie_var(#"hash_4edd68174a79580", 7);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_1", 12);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_1", 16);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_2", 14);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_2", 18);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_3", 17);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_3", 21);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_4", 20);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_4", 24);
+  zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_min", 4);
+  zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_max", 7);
 
   if(!isDefined(level.zombie_powerups)) {
     level.zombie_powerups = [];
@@ -87,7 +87,7 @@ init_powerups() {
     level.active_powerups = [];
   }
 
-  add_zombie_powerup("insta_kill_ug", "zombie_skull", #"hash_1784640b956f2f85", &func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
+  add_zombie_powerup("insta_kill_ug", "zombie_skull", #"zombie/powerup_insta_kill", &func_should_never_drop, 1, 0, 0, undefined, "powerup_instant_kill_ug", "zombie_powerup_insta_kill_ug_time", "zombie_powerup_insta_kill_ug_on", 1);
 
   if(isDefined(level.level_specific_init_powerups)) {
     [[level.level_specific_init_powerups]]();
@@ -97,7 +97,7 @@ init_powerups() {
   level.zombie_powerup_index = 0;
   randomize_powerups();
   level.rare_powerups_active = 0;
-  level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"hash_4d2cc817490bcca"), zombie_utility::get_zombie_var(#"hash_4edd68174a79580"));
+  level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_min"), zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_max"));
   level.firesale_vox_firstime = 0;
   level thread powerup_hud_monitor();
   clientfield::register("scriptmover", "powerup_fx", 1, 3, "int");
@@ -363,7 +363,7 @@ function_2ff352cc() {
     n_players = a_e_players.size;
   }
 
-  n_kill_count = randomintrangeinclusive(zombie_utility::get_zombie_var(#"hash_434b3261c607850" + n_players), zombie_utility::get_zombie_var(#"zombie_powerup_drop_max_" + n_players));
+  n_kill_count = randomintrangeinclusive(zombie_utility::get_zombie_var(#"zombie_powerup_drop_min_" + n_players), zombie_utility::get_zombie_var(#"zombie_powerup_drop_max_" + n_players));
 
   if(zm_custom::function_901b751c(#"zmpowerupfrequency") == 0) {
     n_kill_count *= 2;
@@ -384,7 +384,7 @@ function_2ff352cc() {
 
 function_a7a5570e() {
   for(i = 1; i <= 4; i++) {
-    zombie_utility::set_zombie_var(#"hash_434b3261c607850" + i, int(min(990, zombie_utility::get_zombie_var(#"hash_434b3261c607850" + i) + 1)));
+    zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_" + i, int(min(990, zombie_utility::get_zombie_var(#"zombie_powerup_drop_min_" + i) + 1)));
     zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_" + i, int(min(999, zombie_utility::get_zombie_var(#"zombie_powerup_drop_max_" + i) + 1)));
   }
 }
@@ -940,7 +940,7 @@ powerup_setup(powerup_override, powerup_team, powerup_location, powerup_player, 
   }
 
   if(powerup == "full_ammo") {
-    level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"hash_4d2cc817490bcca"), zombie_utility::get_zombie_var(#"hash_4edd68174a79580"));
+    level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_min"), zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_max"));
   } else if(!isDefined(powerup_override)) {
     level.zm_genesis_robot_pay_towardsreactswordstart--;
   }

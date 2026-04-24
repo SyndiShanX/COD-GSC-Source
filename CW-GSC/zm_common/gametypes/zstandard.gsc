@@ -1167,19 +1167,19 @@ function init_powerups() {
     zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_per_round", 4);
   }
 
-  zombie_utility::set_zombie_var(#"hash_604cac237ec8cd3", 4);
-  zombie_utility::set_zombie_var(#"hash_8b7fc80184dc451", 7);
-  zombie_utility::set_zombie_var(#"hash_604cbc237ec8e86", 5);
-  zombie_utility::set_zombie_var(#"hash_8b7f980184dbf38", 8);
-  zombie_utility::set_zombie_var(#"hash_604ccc237ec9039", 6);
-  zombie_utility::set_zombie_var(#"hash_8b7fa80184dc0eb", 9);
-  zombie_utility::set_zombie_var(#"hash_604cdc237ec91ec", 6);
-  zombie_utility::set_zombie_var(#"hash_8b7ff80184dc96a", 10);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_1", 4);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_1", 7);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_2", 5);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_2", 8);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_3", 6);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_3", 9);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_min_4", 6);
+  zombie_utility::set_zombie_var(#"zombie_powerup_drop_max_4", 10);
   zombie_utility::set_zombie_var(#"hash_604cec237ec939f", 6);
   zombie_utility::set_zombie_var(#"hash_8b80080184dcb1d", 10);
-  zombie_utility::set_zombie_var(#"hash_4d2cc817490bcca", 8);
-  zombie_utility::set_zombie_var(#"hash_4edd68174a79580", 14);
-  level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"hash_4d2cc817490bcca"), zombie_utility::get_zombie_var(#"hash_4edd68174a79580"));
+  zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_min", 8);
+  zombie_utility::set_zombie_var(#"zombie_powerup_ammo_spacing_max", 14);
+  level.zm_genesis_robot_pay_towardsreactswordstart = randomintrange(zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_min"), zombie_utility::get_zombie_var(#"zombie_powerup_ammo_spacing_max"));
   zm_powerups::add_zombie_powerup("bonus_points_player", #"p8_zm_powerup_rush_point", #"zombie_powerup_bonus_points", &zm_powerups::func_should_never_drop, 1, 0, 0);
   zm_powerups::powerup_remove_from_regular_drops("hero_weapon_power");
   zm_powerups::powerup_remove_from_regular_drops("bonus_points_team");
@@ -1373,7 +1373,7 @@ function function_75ebd926(e_player) {
     self.hint_string = #"zombie/wallbuy_cooldown";
     self.cost = n_cooldown;
     return true;
-  } else if(is_true(self.blueprint.var_54a97edd.isriotshield) && isDefined(e_player.player_shield_reset_health) && is_true(e_player.var_d3345483) || !e_player zm_crafting::function_2d53738e(self.blueprint.var_54a97edd) && (is_true(self.blueprint.var_c028dcfe) && !e_player zm_crafting::function_48ce9379(self.blueprint.var_54a97edd) || is_true(level.var_905507c3))) {
+  } else if(is_true(self.blueprint.var_54a97edd.isriotshield) && isDefined(e_player.player_shield_reset_health) && is_true(e_player.var_d3345483) || !e_player zm_crafting::function_2d53738e(self.blueprint.var_54a97edd) && (is_true(self.blueprint.firstonefree) && !e_player zm_crafting::function_48ce9379(self.blueprint.var_54a97edd) || is_true(level.var_905507c3))) {
     if(e_player function_8b1a219a()) {
       self.hint_string = isDefined(self.blueprint.var_abd9b2d0) ? self.blueprint.var_abd9b2d0 : # "hash_40987a3e6d86b097";
     } else {

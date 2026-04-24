@@ -5,9 +5,9 @@
 
 #namespace ai_state;
 
-function function_e9b061a8(state, start, update_goal, end, update_enemy, var_edc20efd, attack_origin, update_debug) {
+function function_e9b061a8(state, start, update_goal, end, update_enemy, attack_radius, attack_origin, update_debug) {
   level.extra_screen_electricity_.functions[state] = {
-    #start: start, #update_goal: update_goal, #end: end, #update_enemy: update_enemy, #var_edc20efd: var_edc20efd, #attack_origin: attack_origin, #update_debug: update_debug
+    #start: start, #update_goal: update_goal, #end: end, #update_enemy: update_enemy, #attack_radius: attack_radius, #attack_origin: attack_origin, #update_debug: update_debug
   };
 }
 
@@ -36,8 +36,8 @@ function function_e0e1a7fc() {
 }
 
 function function_4af1ff64() {
-  if(isDefined(self.ai.state) && isDefined(level.extra_screen_electricity_.functions[self.ai.state].var_edc20efd)) {
-    return self[[level.extra_screen_electricity_.functions[self.ai.state].var_edc20efd]]();
+  if(isDefined(self.ai.state) && isDefined(level.extra_screen_electricity_.functions[self.ai.state].attack_radius)) {
+    return self[[level.extra_screen_electricity_.functions[self.ai.state].attack_radius]]();
   }
 
   return 0;

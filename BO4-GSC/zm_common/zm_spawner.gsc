@@ -1221,7 +1221,7 @@ zombie_death_event(zombie) {
   if(isDefined(attacker) && isPlayer(attacker) && attacker player_can_score_from_zombies()) {
     if(isDefined(zombie.script_parameters)) {
       attacker notify(#"zombie_death_params", {
-        #params: zombie.script_parameters, #var_3ef38c68: isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area
+        #params: zombie.script_parameters, #in_playable_space: isDefined(zombie.completed_emerging_into_playable_area) && zombie.completed_emerging_into_playable_area
       });
     }
 

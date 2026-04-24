@@ -12,7 +12,7 @@
 #namespace killstreak_vehicle;
 
 function init() {
-  level._effect[#"rcbomb_stunned"] = #"hash_622d3cdb93e01de5";
+  level._effect[#"rcbomb_stunned"] = #"_t6/weapon/grenade/fx_spark_disabled_rc_car";
 }
 
 function init_killstreak(bundle) {

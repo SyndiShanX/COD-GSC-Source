@@ -264,7 +264,7 @@ function_ad646ef8(n_state) {
   e_lighthouse = level.var_ab11c23d;
 
   if(e_lighthouse.var_58df9892 !== n_state) {
-    e_lighthouse notify(#"hash_1aa56851d9d4ec0d");
+    e_lighthouse notify(#"trap_state_change");
     e_lighthouse.var_58df9892 = n_state;
 
     iprintln("<dev string:x38>" + level.var_4b3d7dc1[e_lighthouse.var_58df9892]);
@@ -327,7 +327,7 @@ function_74b930af(n_time, n_state) {
 }
 
 function_71399d9c() {
-  self endon(#"death", #"hash_1aa56851d9d4ec0d");
+  self endon(#"death", #"trap_state_change");
 
   for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
     waitframe(1);
@@ -404,14 +404,14 @@ function_56b9aca4(e_activator) {
 }
 
 function_72ff128e(v_target) {
-  self endon(#"death", #"hash_1aa56851d9d4ec0d");
+  self endon(#"death", #"trap_state_change");
   self function_1b488412(v_target, 1);
   self waittill(#"rotatedone");
   level thread function_ad646ef8(6);
 }
 
 shoot_trap_target(v_target, e_activator) {
-  self endon(#"death", #"hash_1aa56851d9d4ec0d");
+  self endon(#"death", #"trap_state_change");
   wait 0.5;
   trigger_trap_explosion(v_target, e_activator);
   level thread function_ad646ef8(7);
@@ -459,7 +459,7 @@ function_27304b98(var_a5a067c5, var_a75e9b3b) {
 }
 
 function_ef69a891(var_a5a067c5, e_activator) {
-  self endon(#"death", #"hash_1aa56851d9d4ec0d");
+  self endon(#"death", #"trap_state_change");
   e_target = var_a5a067c5 function_56b9aca4(e_activator);
 
   if(!isDefined(e_target)) {
@@ -476,7 +476,7 @@ function_ef69a891(var_a5a067c5, e_activator) {
 }
 
 function_ea089392() {
-  self endon(#"death", #"hash_1aa56851d9d4ec0d");
+  self endon(#"death", #"trap_state_change");
 
   while(true) {
     self function_27304b98(self.var_a5a067c5, 2);

@@ -23,7 +23,7 @@ __init__() {
   zm_powerups::register_powerup("insta_kill", &grab_insta_kill);
 
   if(zm_powerups::function_cc33adc8()) {
-    zm_powerups::add_zombie_powerup("insta_kill", "p7_zm_power_up_insta_kill", #"hash_1784640b956f2f85", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
+    zm_powerups::add_zombie_powerup("insta_kill", "p7_zm_power_up_insta_kill", #"zombie/powerup_insta_kill", &zm_powerups::func_should_always_drop, 0, 0, 0, undefined, "powerup_instant_kill", "zombie_powerup_insta_kill_time", "zombie_powerup_insta_kill_on");
   }
 }
 

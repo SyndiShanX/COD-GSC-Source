@@ -639,7 +639,7 @@ function function_fa6cc1f2() {
   level.no_powerups = 1;
   level flag::clear("spawn_zombies");
   level flag::clear("zombie_drop_powerups");
-  level flag::clear(#"hash_21921ed511559aa3");
+  level flag::clear(#"nuke_stop_special_spawning");
   level flag::set(#"pause_round_timeout");
   level flag::set("hold_round_end");
   level clientfield::set("" + # "hash_22d24ba0bcf94c3f", 2);
@@ -655,7 +655,7 @@ function function_fa6cc1f2() {
   level.no_powerups = undefined;
   level flag::set("spawn_zombies");
   level flag::set("zombie_drop_powerups");
-  level flag::set(#"hash_21921ed511559aa3");
+  level flag::set(#"nuke_stop_special_spawning");
   level flag::clear(#"pause_round_timeout");
   level flag::clear("hold_round_end");
 }

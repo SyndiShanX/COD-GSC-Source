@@ -327,9 +327,9 @@ body_customization_process_command(character_index) {
       bodytype = int(command0[1]);
       command1 = strtok(split[1], "<dev string:x112>");
       outfitindex = int(command1[1]);
-      var_e7f74d2b = strtok(split[2], "<dev string:x112>");
-      var_c1154821 = var_e7f74d2b[0];
-      index = int(var_e7f74d2b[1]);
+      command2 = strtok(split[2], "<dev string:x112>");
+      var_c1154821 = command2[0];
+      index = int(command2[1]);
       println("<dev string:x168>" + bodytype + "<dev string:x158>" + outfitindex + "<dev string:x19d>" + var_c1154821 + "<dev string:x1a6>" + index + "<dev string:x154>");
       function_f413b4d5(bodytype, outfitindex, var_c1154821, index);
       break;

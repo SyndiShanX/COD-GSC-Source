@@ -49,7 +49,7 @@ function_ee114cab() {
     return;
   }
 
-  level._effect[#"ethereal_razor_light"] = #"hash_1442db17b83460ad";
+  level._effect[#"ethereal_razor_light"] = #"_t6/misc/fx_zombie_cola_revive_on";
   level.machine_assets[#"specialty_etherealrazor"] = spawnStruct();
   level.machine_assets[#"specialty_etherealrazor"].weapon = getweapon("zombie_perk_bottle_ethereal_razor");
   level.machine_assets[#"specialty_etherealrazor"].off_model = "p7_zm_vending_nuke";

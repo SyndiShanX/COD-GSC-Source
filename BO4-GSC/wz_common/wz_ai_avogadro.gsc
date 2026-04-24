@@ -30,7 +30,7 @@ __init__() {
   spawner::add_archetype_spawn_function(#"avogadro", &function_f34df3c);
   spawner::function_89a2cd87(#"avogadro", &function_c41e67c);
   level.var_8791f7c5 = &function_ac94df05;
-  level.var_a35afcb2 = &function_7d5cf0e4;
+  level.var_a35afcb2 = &bohorok;
   assert(isscriptfunctionptr(&avogadrodespawn));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"avogadrodespawn", &avogadrodespawn);
   assert(isscriptfunctionptr(&avogadrorespawn));
@@ -209,7 +209,7 @@ function_ac94df05(entity) {
   return isDefined(entity.current_state) && entity.current_state.name === #"chase" && (entity.var_9bff71aa < 2 || gettime() - entity.last_phase_time > 1000);
 }
 
-function_7d5cf0e4(entity) {
+bohorok(entity) {
   if(!getdvarint(#"survival_prototype", 0)) {
     return (entity.aistate === 3);
   }

@@ -731,7 +731,7 @@ function private zodcompanioncollisionservice(entity) {
     }
   }
 
-  var_26cddecd = 0;
+  stop_pushing = 0;
   zombies = getaiteamarray(level.zombie_team);
 
   foreach(zombie in zombies) {
@@ -744,12 +744,12 @@ function private zodcompanioncollisionservice(entity) {
     if(dist_sq < 14400) {
       if(is_true(zombie.cant_move)) {
         zombie thread function_d0371e1e();
-        var_26cddecd = 1;
+        stop_pushing = 1;
       }
     }
   }
 
-  if(var_26cddecd) {
+  if(stop_pushing) {
     entity collidewithactors(0);
     entity.dontpushtime = gettime() + 2000;
     return true;

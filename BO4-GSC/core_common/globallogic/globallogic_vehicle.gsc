@@ -492,7 +492,7 @@ allowfriendlyfiredamage(einflictor, eattacker, smeansofdeath, weapon) {
 }
 
 vehiclekilled_awardassists(einflictor, eattacker, weapon, lpattackteam) {
-  pixbeginevent(#"hash_1ec5cd32e99d8672");
+  pixbeginevent(#"vehiclekilled assists");
 
   if(!isDefined(self.scoretype) || self.scoretype == "none") {
     return;

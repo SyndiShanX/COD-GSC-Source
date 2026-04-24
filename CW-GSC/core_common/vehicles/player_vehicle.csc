@@ -124,9 +124,9 @@ function function_3ec2efae(localclientnum) {
   }
 
   if(isDefined(vehicle.settings) && is_true(vehicle.settings.var_2627e80a)) {
-    var_1861e0b1 = vehicle clientfield::get("toggle_horn_sound");
+    siren_on = vehicle clientfield::get("toggle_horn_sound");
 
-    if(is_true(var_1861e0b1)) {
+    if(is_true(siren_on)) {
       return true;
     }
   }
