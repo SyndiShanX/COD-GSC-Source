@@ -771,7 +771,7 @@ function_11d4db33() {
 }
 
 function_4b206a3b(entity) {
-  entity clientfield::set("" + # "avogadro_health_fx", 0);
+  entity clientfield::set("" + #"avogadro_health_fx", 0);
 }
 
 function_1661ef70(entity) {

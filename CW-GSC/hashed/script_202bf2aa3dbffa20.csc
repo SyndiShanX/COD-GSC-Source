@@ -13,10 +13,10 @@ function private autoexec __init__system__() {
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "" + # "hash_322ed89801938bb9", 1, 1, "counter", &function_40fcb7b0, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6d9aa5215e695ca2", 1, 1, "counter", &function_65502dee, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1f232116f775fa91", 1, 1, "counter", &function_de8dd244, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4719ef7fda616f3a", 1, 1, "counter", &function_b6000359, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_322ed89801938bb9", 1, 1, "counter", &function_40fcb7b0, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6d9aa5215e695ca2", 1, 1, "counter", &function_65502dee, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1f232116f775fa91", 1, 1, "counter", &function_de8dd244, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4719ef7fda616f3a", 1, 1, "counter", &function_b6000359, 0, 0);
   clientfield::register_clientuimodel("hudItems.reinforcing", #"hud_items", #"reinforcing", 1, 1, "int", undefined, 0, 0);
 }
 

@@ -37,11 +37,11 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "charon_pool", 16000, 1, "int");
   clientfield::register("scriptmover", "charon_shoot", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "charon_impact", 16000, 2, "int");
+  clientfield::register("scriptmover", "" + #"charon_impact", 16000, 2, "int");
   clientfield::register("allplayers", "charon_flash", 16000, 1, "int");
-  clientfield::register("actor", "" + # "charon_death", 16000, 1, "counter");
-  clientfield::register("actor", "" + # "charon_zombie_impact", 16000, 1, "counter");
-  clientfield::register("actor", "" + # "charon_pool_victim", 16000, 1, "int");
+  clientfield::register("actor", "" + #"charon_death", 16000, 1, "counter");
+  clientfield::register("actor", "" + #"charon_zombie_impact", 16000, 1, "counter");
+  clientfield::register("actor", "" + #"charon_pool_victim", 16000, 1, "int");
   level.w_hand_charon = getweapon(#"ww_hand_c");
   level.w_hand_charon_charged = getweapon(#"ww_hand_c_charged");
   level.w_hand_charon_uncharged = getweapon(#"ww_hand_c_uncharged");
@@ -284,7 +284,7 @@ function_26819e32(e_projectile, ai_zombie, n_damage) {
   if(!isDefined(ai_zombie) || isDefined(ai_zombie.var_3df1a748) && ai_zombie.var_3df1a748) {
     e_projectile moveto(v_end, n_time);
     e_projectile waittill(#"movedone");
-    e_projectile clientfield::set("" + # "charon_impact", 1);
+    e_projectile clientfield::set("" + #"charon_impact", 1);
     waitframe(1);
   } else {
     v_view_pos = self getweaponmuzzlepoint();
@@ -475,7 +475,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, v_to_target, n_damage) {
         e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
         break;
       case # "miniboss":
-        e_target clientfield::increment("" + # "charon_zombie_impact");
+        e_target clientfield::increment("" + #"charon_zombie_impact");
         n_damage = int(n_damage * 0.3);
         e_target dodamage(n_damage, e_target.origin, self, self, "none", "MOD_UNKNOWN", 0, weapon);
 
@@ -490,7 +490,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, v_to_target, n_damage) {
         break;
       case # "boss":
         if(!isactor(e_target)) {
-          e_target clientfield::set("" + # "charon_impact", 1);
+          e_target clientfield::set("" + #"charon_impact", 1);
         }
 
         n_damage = 175;
@@ -630,7 +630,7 @@ function_39e6dc29(v_end) {
 
   self moveto(v_end, n_time);
   self waittill(#"movedone");
-  self clientfield::set("" + # "charon_impact", 2);
+  self clientfield::set("" + #"charon_impact", 2);
   wait 0.1;
   self delete();
 }
@@ -775,7 +775,7 @@ function_31d8c58() {
   self.no_powerups = 1;
   self.var_131a4fb0 = 1;
   self notsolid();
-  self clientfield::set("" + # "charon_pool_victim", 1);
+  self clientfield::set("" + #"charon_pool_victim", 1);
   var_f9d1df1d = vectornormalize(anglesToForward(self.angles));
   mdl_tag = util::spawn_model("tag_origin", self.origin, self.angles);
   mdl_tag.var_58b95 = util::spawn_model("tag_origin", anglestoright(self.angles) * 8 + self.origin + var_f9d1df1d * 6, self.angles + (0, -90, 0));
@@ -845,7 +845,7 @@ function_197896ad(e_target, n_damage) {
     e_target.var_61768419 = 1;
 
     if(e_target.health <= n_damage) {
-      e_target clientfield::increment("" + # "charon_death");
+      e_target clientfield::increment("" + #"charon_death");
       e_target.skipdeath = 1;
       e_target.diedinscriptedanim = 1;
       n_damage = e_target.health + 999;
@@ -854,7 +854,7 @@ function_197896ad(e_target, n_damage) {
     }
 
     [[level.var_844d377c]] - > waitinqueue(e_target);
-    e_target clientfield::increment("" + # "charon_zombie_impact");
+    e_target clientfield::increment("" + #"charon_zombie_impact");
     e_target ai::stun(3);
     wait 0.8;
 

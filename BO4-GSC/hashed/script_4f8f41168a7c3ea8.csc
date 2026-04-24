@@ -15,20 +15,20 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "magma_fireplace_fx", 1, getminbitcountfornum(4), "int", &magma_fireplace_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_fireplace_skull_fx", 1, 1, "int", &magma_fireplace_skull_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_door_barrier_fx", 1, 1, "int", &magma_door_barrier_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_glow_fx", 1, 1, "int", &magma_glow_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_urn_fire_fx", 1, 2, "int", &magma_urn_fire_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "bg_spawn_fx", 1, 1, "int", &function_4707df22, 0, 0);
-  clientfield::register("toplayer", "" + # "magma_gat_glow_override", 1, 1, "int", &magma_gat_glow_override, 0, 0);
-  clientfield::register("toplayer", "" + # "magma_gat_glow_recharge", 1, 1, "counter", &magma_gat_glow_recharge, 0, 0);
-  clientfield::register("toplayer", "" + # "magma_gat_glow_shot_fired", 1, 1, "counter", &magma_gat_glow_shot_fired, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_essence_explode_fx", 1, 1, "int", &magma_essence_explode_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_gat_essence_fx", 1, 1, "int", &magma_gat_essence_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_gat_disappear_fx", 1, 1, "counter", &magma_gat_disappear_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "magma_urn_triggered_fx", 1, 1, "counter", &magma_urn_triggered_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7692067c56d8b6cc", 1, 2, "int", &function_84e77740, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_fireplace_fx", 1, getminbitcountfornum(4), "int", &magma_fireplace_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_fireplace_skull_fx", 1, 1, "int", &magma_fireplace_skull_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_door_barrier_fx", 1, 1, "int", &magma_door_barrier_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_glow_fx", 1, 1, "int", &magma_glow_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_urn_fire_fx", 1, 2, "int", &magma_urn_fire_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"bg_spawn_fx", 1, 1, "int", &function_4707df22, 0, 0);
+  clientfield::register("toplayer", "" + #"magma_gat_glow_override", 1, 1, "int", &magma_gat_glow_override, 0, 0);
+  clientfield::register("toplayer", "" + #"magma_gat_glow_recharge", 1, 1, "counter", &magma_gat_glow_recharge, 0, 0);
+  clientfield::register("toplayer", "" + #"magma_gat_glow_shot_fired", 1, 1, "counter", &magma_gat_glow_shot_fired, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_essence_explode_fx", 1, 1, "int", &magma_essence_explode_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_gat_essence_fx", 1, 1, "int", &magma_gat_essence_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_gat_disappear_fx", 1, 1, "counter", &magma_gat_disappear_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"magma_urn_triggered_fx", 1, 1, "counter", &magma_urn_triggered_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7692067c56d8b6cc", 1, 2, "int", &function_84e77740, 0, 0);
   level._effect[#"magma_fireplace"] = #"hash_50cd5a75aebe8def";
   level._effect[#"hash_22aea05cb07dd55e"] = #"hash_51005475aee9dd56";
   level._effect[#"hash_70407be743f59f31"] = #"hash_2fcb634860aadcc5";

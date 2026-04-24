@@ -137,7 +137,7 @@ function private _activate_immolation(slot, weapon) {
   foreach(item in self.cybercom.lock_targets) {
     if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
-        if(!cybercom::targetisvalid(item.target, weapon)) {
+        if(!cybercom::targetisValid(item.target, weapon)) {
           continue;
         }
         self thread challenges::function_96ed590f("cybercom_uses_chaos");
@@ -238,7 +238,7 @@ function _immolatehuman(attacker, upgraded, immediate = 0) {
     return;
   }
   wait(randomfloatrange(0.1, 0.75));
-  if(!attacker cybercom::targetisvalid(self, weapon, 0)) {
+  if(!attacker cybercom::targetisValid(self, weapon, 0)) {
     return;
   }
   self.is_disabled = 1;
@@ -281,7 +281,7 @@ function _immolaterobot(attacker, upgraded, immediate = 0) {
     wait(randomfloatrange(0.1, 0.75));
   }
   weapon = getweapon("gadget_immolation");
-  if(!attacker cybercom::targetisvalid(self, weapon, 0)) {
+  if(!attacker cybercom::targetisValid(self, weapon, 0)) {
     return;
   }
   self.is_disabled = 1;
@@ -363,7 +363,7 @@ function private _detonate_grenades_inrange(player, rangemax) {
   enemies = arraycombine(getaispeciesarray("axis", "robot"), getaispeciesarray("team3", "robot"), 0, 0);
   closetargets = arraysortclosest(enemies, self.origin, enemies.size, 0, rangemax);
   foreach(guy in closetargets) {
-    if(player cybercom::targetisvalid(guy, weapon)) {
+    if(player cybercom::targetisValid(guy, weapon)) {
       if(isDefined(guy.grenades_detonated) && guy.grenades_detonated) {
         continue;
       }
@@ -387,7 +387,7 @@ function immolate_nearby(attacker, upgraded) {
         break;
       }
     }
-    if(attacker cybercom::targetisvalid(guy, weapon)) {
+    if(attacker cybercom::targetisValid(guy, weapon)) {
       if(!isDefined(attacker.var_a691a602)) {
         attacker thread function_4f174738();
       } else {
@@ -438,7 +438,7 @@ function ai_activateimmolate(target, var_9bc2efcb = 1, upgraded) {
   }
   weapon = getweapon("gadget_immolation");
   foreach(guy in validtargets) {
-    if(!self cybercom::targetisvalid(guy, weapon)) {
+    if(!self cybercom::targetisValid(guy, weapon)) {
       continue;
     }
     guy thread _immolate(self, upgraded, 0, getweapon("gadget_immolation"));

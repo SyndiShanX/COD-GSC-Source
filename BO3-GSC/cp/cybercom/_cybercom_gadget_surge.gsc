@@ -137,7 +137,7 @@ function private _activate_surge(slot, weapon) {
   foreach(item in self.cybercom.lock_targets) {
     if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
-        if(!cybercom::targetisvalid(item.target, weapon)) {
+        if(!cybercom::targetisValid(item.target, weapon)) {
           continue;
         }
         self thread challenges::function_96ed590f("cybercom_uses_control");
@@ -330,7 +330,7 @@ function private function_3e621fd5(origin, distance, max) {
     if(distancesquared(origin, enemy.origin) > distance_squared) {
       continue;
     }
-    if(!cybercom::targetisvalid(enemy, weapon, 0)) {
+    if(!cybercom::targetisValid(enemy, weapon, 0)) {
       continue;
     }
     if(!_lock_requirement(enemy, 1)) {
@@ -429,7 +429,7 @@ function ai_activatesurge(target, var_9bc2efcb = 1, upgraded = 0) {
   }
   weapon = getweapon("gadget_surge");
   foreach(guy in validtargets) {
-    if(!cybercom::targetisvalid(guy, weapon)) {
+    if(!cybercom::targetisValid(guy, weapon)) {
       continue;
     }
     guy thread _surge(self, upgraded);

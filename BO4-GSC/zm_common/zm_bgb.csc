@@ -111,7 +111,7 @@ bgb_finalize() {
 
 register(name, limit_type) {
   assert(isDefined(name), "<dev string:x79>");
-  assert(#"none" != name, "<dev string:xa1>" + # "none" + "<dev string:xc5>");
+  assert(#"none" != name, "<dev string:xa1>" + #"none" + "<dev string:xc5>");
   assert(!isDefined(level.bgb[name]), "<dev string:xfe>" + name + "<dev string:x117>");
   assert(isDefined(limit_type), "<dev string:xfe>" + name + "<dev string:x137>");
   level.bgb[name] = spawnStruct();

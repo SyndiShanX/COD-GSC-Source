@@ -35,11 +35,11 @@
 #namespace objective_retrieval;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("toplayer", "" + # "canister_effect", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "canister_shockwave", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "container_collect", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "canister_glow", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "rocket_thruster", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"canister_effect", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"canister_shockwave", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"container_collect", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"canister_glow", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"rocket_thruster", 1, 1, "int");
   objective_manager::register_script(#"retrieval", &init, &retrieval_start, #"retrieval", #"hash_449cd1c65196f3a8", #"hash_70343e0c02c9f7b9", 7, #"hash_ed63c368c1fca8f");
   callback::on_laststand(&function_f1ae312a);
   callback::on_disconnect(&function_a93074b0);
@@ -206,7 +206,7 @@ function function_94e78240(params) {
 
   if(isDefined(self.var_67aa3392)) {
     self.var_67aa3392.var_5b5d9768 = 0;
-    self.var_67aa3392 clientfield::increment("" + # "canister_shockwave");
+    self.var_67aa3392 clientfield::increment("" + #"canister_shockwave");
   }
 
   self function_62801b2f();
@@ -491,7 +491,7 @@ function function_eae9567f() {
     wait 3;
 
     if(isDefined(self.var_1ac40948)) {
-      self.var_1ac40948 clientfield::set("" + # "rocket_thruster", 1);
+      self.var_1ac40948 clientfield::set("" + #"rocket_thruster", 1);
     }
 
     if(isDefined(self.var_5ea363c) && isDefined(self.var_1ac40948)) {
@@ -510,7 +510,7 @@ function function_eae9567f() {
     wait 1;
 
     if(isDefined(self.var_1ac40948)) {
-      self.var_1ac40948 clientfield::set("" + # "rocket_thruster", 0);
+      self.var_1ac40948 clientfield::set("" + #"rocket_thruster", 0);
       self.var_1ac40948 thread scene::play(#"p9_fxanim_sv_rocket_take_off_bundle", "Shot 4", self.var_1ac40948);
     }
 
@@ -615,7 +615,7 @@ function function_f5087df2() {
   wait 1;
 
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "canister_effect", 0);
+    player clientfield::set_to_player("" + #"canister_effect", 0);
 
     if(isDefined(player) && level.zm_hint_text zm_hint_text::is_open(player)) {
       level.zm_hint_text zm_hint_text::close(player);
@@ -648,7 +648,7 @@ function function_1fc51f74(player) {
   if(isPlayer(player)) {
     if(isDefined(player)) {
       player playrumblelooponentity("damage_light");
-      player clientfield::set_to_player("" + # "canister_effect", 0);
+      player clientfield::set_to_player("" + #"canister_effect", 0);
 
       if(isDefined(player.var_67aa3392)) {
         player.var_67aa3392 setinvisibletoplayer(player, 1);
@@ -686,7 +686,7 @@ function function_c8bfd10b(str_team, e_player, b_result) {
       var_67aa3392 flag::set(#"installed");
       var_67aa3392 notify(#"installed");
       var_67aa3392 unlink();
-      var_67aa3392 clientfield::set("" + # "canister_glow", 0);
+      var_67aa3392 clientfield::set("" + #"canister_glow", 0);
 
       if(isDefined(var_67aa3392.var_1474d2ee)) {
         var_67aa3392 zm_utility::function_48d9a9c9();
@@ -704,7 +704,7 @@ function function_c8bfd10b(str_team, e_player, b_result) {
     }
 
     if(isDefined(e_player)) {
-      e_player clientfield::set_to_player("" + # "canister_effect", 0);
+      e_player clientfield::set_to_player("" + #"canister_effect", 0);
       e_player.var_28107825 = 0;
       e_player.var_4cd303ca = 1;
       e_player notify(#"drop_comp");
@@ -765,7 +765,7 @@ function function_c8bfd10b(str_team, e_player, b_result) {
   }
 
   if(isDefined(e_player) && is_true(e_player.var_28107825)) {
-    e_player clientfield::set_to_player("" + # "canister_effect", 1);
+    e_player clientfield::set_to_player("" + #"canister_effect", 1);
   }
 }
 
@@ -1000,7 +1000,7 @@ function function_6acbc957(instance) {
   self.var_e16d0db5 show();
   self.var_e16d0db5 solid();
   self.var_e16d0db5 playrumblelooponentity("sr_machinery_rumble");
-  self.var_e16d0db5 clientfield::set("" + # "container_collect", 1);
+  self.var_e16d0db5 clientfield::set("" + #"container_collect", 1);
   self.var_3aee78d5 = spawn("trigger_radius_use", self.origin + (0, 0, 8), 0, 96, 96, 1);
   self.var_3aee78d5 triggerignoreteam();
   self.var_3aee78d5 setcursorhint("HINT_NOICON");
@@ -1421,15 +1421,15 @@ function function_95aeefa7(instance) {
   }
 
   self notify(#"open");
-  self.var_e16d0db5 clientfield::set("" + # "container_collect", 0);
-  self.var_e16d0db5 clientfield::set("" + # "canister_glow", 1);
+  self.var_e16d0db5 clientfield::set("" + #"container_collect", 0);
+  self.var_e16d0db5 clientfield::set("" + #"canister_glow", 1);
   self.var_e16d0db5 scene::play(#"p9_fxanim_sv_canister_open_bundle", "Shot 1", self.var_e16d0db5);
   self notify(#"ready");
   self show();
   self.var_e16d0db5 hidepart("p9_sur_console_control_01_canister_jnt", "", 1);
   self.v_start = self.origin;
-  self clientfield::set("" + # "canister_glow", 1);
-  self.var_e16d0db5 clientfield::set("" + # "canister_glow", 0);
+  self clientfield::set("" + #"canister_glow", 1);
+  self.var_e16d0db5 clientfield::set("" + #"canister_glow", 0);
 }
 
 function function_20ab9060(instance) {
@@ -1439,7 +1439,7 @@ function function_20ab9060(instance) {
   while(true) {
     s_result = self.var_3aee78d5 waittill(#"trigger");
     self notify(#"stop_bobbing");
-    self clientfield::set("" + # "canister_glow", 0);
+    self clientfield::set("" + #"canister_glow", 0);
     s_pt = array::random(instance.var_ba44fadd);
     e_activator = s_result.activator;
     self zm_utility::function_48d9a9c9();
@@ -1503,8 +1503,8 @@ function function_20ab9060(instance) {
         self linkto(player, undefined, (-12, 0, 45), (-5, 0, 0));
       }
 
-      self clientfield::set("" + # "canister_glow", 1);
-      player clientfield::set_to_player("" + # "canister_effect", 1);
+      self clientfield::set("" + #"canister_glow", 1);
+      player clientfield::set_to_player("" + #"canister_effect", 1);
 
       if(!is_true(player.var_7cd1b025)) {
         player.var_7cd1b025 = 1;
@@ -1904,7 +1904,7 @@ function canister_drop() {
 
   var_ce819c69 = self.e_owner depthofplayerinwater();
   self.e_owner = undefined;
-  self clientfield::set("" + # "canister_glow", 0);
+  self clientfield::set("" + #"canister_glow", 0);
   self.b_pickedup = 0;
   self.var_470d03b1 = 1;
   self unlink();
@@ -1945,7 +1945,7 @@ function canister_drop() {
   }
 
   playsoundatposition(#"hash_3047775b10faeffc", self.origin + (0, 0, 25));
-  self clientfield::set("" + # "canister_glow", 1);
+  self clientfield::set("" + #"canister_glow", 1);
 
   if(isDefined(self.var_1474d2ee)) {
     objective_setvisibletoall(self.var_1474d2ee);
@@ -1981,7 +1981,7 @@ function function_f1ae312a() {
       self.var_67aa3392 zm_utility::function_747180ea(self.var_67aa3392.var_1474d2ee, undefined, self.var_67aa3392.var_3aee78d5);
     }
 
-    self clientfield::set_to_player("" + # "canister_effect", 0);
+    self clientfield::set_to_player("" + #"canister_effect", 0);
     self.var_28107825 = 0;
     self.var_67aa3392 = undefined;
 

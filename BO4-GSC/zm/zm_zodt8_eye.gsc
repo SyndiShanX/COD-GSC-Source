@@ -674,7 +674,7 @@ function_c8f90603(str_blocker, b_solid) {
     foreach(s_fx in a_s_fx) {
       mdl_fx = util::spawn_model(#"p8_zm_power_door_symbol_01", s_fx.origin, s_fx.angles);
       mdl_fx.objectid = "symbol_front_power";
-      mdl_fx clientfield::set("" + # "blocker_fx", 1);
+      mdl_fx clientfield::set("" + #"blocker_fx", 1);
 
       if(!isDefined(e_blocker.a_mdl_fx)) {
         e_blocker.a_mdl_fx = [];
@@ -695,7 +695,7 @@ function_c8f90603(str_blocker, b_solid) {
     if(isDefined(e_blocker.a_mdl_fx)) {
       foreach(mdl_fx in e_blocker.a_mdl_fx) {
         mdl_fx thread zodt8_sentinel::function_73145dbe();
-        mdl_fx clientfield::set("" + # "blocker_fx", 0);
+        mdl_fx clientfield::set("" + #"blocker_fx", 0);
       }
 
       e_blocker.a_mdl_fx = undefined;
@@ -866,7 +866,7 @@ function_8f3497ee(n_stage, str_loc) {
         mdl.origin -= (0, 0, 13800);
         mdl show();
         mdl.origin += (0, 0, 13800);
-        mdl clientfield::set("" + # "hash_15b23de7589e61a", 1);
+        mdl clientfield::set("" + #"hash_15b23de7589e61a", 1);
       }
 
       function_901c5ffe("pd", 1);

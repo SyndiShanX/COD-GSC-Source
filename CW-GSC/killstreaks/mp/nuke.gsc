@@ -24,10 +24,10 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   killstreaks::register_killstreak("killstreak_nuke", &function_41743630);
-  clientfield::register("scriptmover", "" + # "hash_494d8af20db4dc73", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_6a6a21b8c5e1528e", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_1559e8163efbdb7a", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_50ae988d8c6973f5", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_494d8af20db4dc73", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_6a6a21b8c5e1528e", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_1559e8163efbdb7a", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_50ae988d8c6973f5", 1, 2, "int");
   callback::function_5fb139ea(&function_5fb139ea);
   level.var_e4c3d310 = 0;
 }
@@ -138,7 +138,7 @@ function private function_36f60a32(delay) {
     }
 
     level.var_667ac9a6 = util::spawn_model("tag_origin", var_b50f54e3.origin, var_b50f54e3.angles);
-    level.var_667ac9a6 clientfield::set("" + # "hash_494d8af20db4dc73", 1);
+    level.var_667ac9a6 clientfield::set("" + #"hash_494d8af20db4dc73", 1);
   }
 }
 
@@ -201,17 +201,17 @@ function private function_e57eeb2e(delay, gesture) {
 
 function function_ee2773cf(delay) {
   wait isDefined(delay) ? delay : 0;
-  level clientfield::set("" + # "hash_6a6a21b8c5e1528e", 1);
+  level clientfield::set("" + #"hash_6a6a21b8c5e1528e", 1);
 }
 
 function function_cf719322(delay) {
   wait isDefined(delay) ? delay : 0;
-  level clientfield::set("" + # "hash_1559e8163efbdb7a", 1);
+  level clientfield::set("" + #"hash_1559e8163efbdb7a", 1);
 }
 
 function function_67753fb9(var_f4d36dde = 0, var_8259c81c) {
   wait isDefined(var_f4d36dde) ? var_f4d36dde : 0;
-  level clientfield::set("" + # "hash_50ae988d8c6973f5", 1);
+  level clientfield::set("" + #"hash_50ae988d8c6973f5", 1);
 
   if(!isDefined(var_8259c81c)) {
     var_8259c81c = 0;
@@ -219,12 +219,12 @@ function function_67753fb9(var_f4d36dde = 0, var_8259c81c) {
 
   var_68a17fa6 = var_8259c81c - var_f4d36dde;
   wait var_68a17fa6;
-  level clientfield::set("" + # "hash_50ae988d8c6973f5", 2);
+  level clientfield::set("" + #"hash_50ae988d8c6973f5", 2);
 }
 
 function function_a109b3d3() {
-  level clientfield::set("" + # "hash_6a6a21b8c5e1528e", 0);
-  level clientfield::set("" + # "hash_1559e8163efbdb7a", 0);
+  level clientfield::set("" + #"hash_6a6a21b8c5e1528e", 0);
+  level clientfield::set("" + #"hash_1559e8163efbdb7a", 0);
   bundle = getscriptbundle("killstreak_nuke");
   var_1c09d5b2 = bundle.var_5b844ce9;
   var_4bfe0994 = bundle.var_b41208d8;

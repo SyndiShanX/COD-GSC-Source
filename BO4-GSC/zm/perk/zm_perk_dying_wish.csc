@@ -34,7 +34,7 @@ enable_dying_wish_perk_for_level() {
 function_536f842f() {}
 
 function_6e5c87d() {
-  clientfield::register("allplayers", "" + # "hash_10f459edea6b3eb", 1, 1, "int", &function_bd2b1ccb, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_10f459edea6b3eb", 1, 1, "int", &function_bd2b1ccb, 0, 0);
 }
 
 function_36db14fb() {}

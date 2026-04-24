@@ -82,10 +82,10 @@ function function_89e748a7() {
   }
 
   if(level.var_c3e5c4cd == 2) {
-    clientfield::register("world", "" + # "hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
-    clientfield::register("scriptmover", "" + # "hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
-    clientfield::register("allplayers", "" + # "hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
-    clientfield::register("toplayer", "" + # "hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
+    clientfield::register("world", "" + #"hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
+    clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
+    clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
+    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
   }
 
   level thread perk_init_code_callbacks();

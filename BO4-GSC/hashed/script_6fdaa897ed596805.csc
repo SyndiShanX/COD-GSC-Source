@@ -26,8 +26,8 @@ init_clientfields() {
   zm_sq_modules::function_d8383812(#"sc_pap_ship", 24000, "sc_pap_ship", 400, level._effect[#"pap_soul"], level._effect[#"hash_1549a7f7c4a3d66e"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"sc_pap_lagoon", 24000, "sc_pap_lagoon", 400, level._effect[#"pap_soul"], level._effect[#"hash_1549a7f7c4a3d66e"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"sc_pap_island", 24000, "sc_pap_island", 400, level._effect[#"pap_soul"], level._effect[#"hash_1549a7f7c4a3d66e"], undefined, undefined, 1);
-  clientfield::register("scriptmover", "" + # "hash_411947cf11cffb69", 24000, 1, "int", &pap_explosion, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_249c83f6060ea7ba", 24000, 1, "int", &pap_fire, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_411947cf11cffb69", 24000, 1, "int", &pap_explosion, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_249c83f6060ea7ba", 24000, 1, "int", &pap_fire, 0, 0);
 }
 
 pap_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

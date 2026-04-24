@@ -12,8 +12,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_dfecc4e02f58398", 1, 3, "int");
-  clientfield::register("zbarrier", "" + # "hash_dfecc4e02f58398", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_dfecc4e02f58398", 1, 3, "int");
+  clientfield::register("zbarrier", "" + #"hash_dfecc4e02f58398", 1, 2, "int");
   level.var_142ecedc = &function_142ecedc;
 }
 
@@ -24,7 +24,7 @@ function function_9e0598bb(id) {
     return;
   }
 
-  self clientfield::set("" + # "hash_dfecc4e02f58398", id);
+  self clientfield::set("" + #"hash_dfecc4e02f58398", id);
 }
 
 function function_550247bd(id) {

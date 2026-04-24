@@ -17,17 +17,17 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + # "zombie_scepter_melee_impact", 1, 1, "counter", &function_abff2ba8, 1, 0);
-  clientfield::register("allplayers", "" + # "zombie_scepter_melee", 1, 1, "counter", &function_cde26b0e, 1, 0);
-  clientfield::register("allplayers", "" + # "zombie_scepter_heal", 1, 1, "counter", &function_3f83a22f, 0, 0);
-  clientfield::register("scriptmover", "" + # "beacon_fx", 1, 1, "int", &beacon_fx, 0, 0);
-  clientfield::register("allplayers", "" + # "skull_turret_beam_fire", 1, 2, "int", &skull_turret_beam_fire, 0, 1);
-  clientfield::register("allplayers", "" + # "scepter_beam_flash", 1, 2, "int", &flash_fx, 0, 0);
-  clientfield::register("toplayer", "" + # "hero_scepter_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
-  clientfield::register("allplayers", "" + # "zombie_scepter_revive", 1, 1, "int", &revive_fx, 0, 0);
-  clientfield::register("actor", "" + # "zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
-  clientfield::register("vehicle", "" + # "zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
-  clientfield::register("toplayer", "" + # "scepter_rumble", 1, 3, "counter", &scepter_rumble, 0, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_melee_impact", 1, 1, "counter", &function_abff2ba8, 1, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_melee", 1, 1, "counter", &function_cde26b0e, 1, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_heal", 1, 1, "counter", &function_3f83a22f, 0, 0);
+  clientfield::register("scriptmover", "" + #"beacon_fx", 1, 1, "int", &beacon_fx, 0, 0);
+  clientfield::register("allplayers", "" + #"skull_turret_beam_fire", 1, 2, "int", &skull_turret_beam_fire, 0, 1);
+  clientfield::register("allplayers", "" + #"scepter_beam_flash", 1, 2, "int", &flash_fx, 0, 0);
+  clientfield::register("toplayer", "" + #"hero_scepter_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
+  clientfield::register("allplayers", "" + #"zombie_scepter_revive", 1, 1, "int", &revive_fx, 0, 0);
+  clientfield::register("actor", "" + #"zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
+  clientfield::register("vehicle", "" + #"zombie_scepter_stun", 1, 1, "int", &function_f11b8d1d, 0, 0);
+  clientfield::register("toplayer", "" + #"scepter_rumble", 1, 3, "counter", &scepter_rumble, 0, 0);
   level._effect[#"hash_1c2f974106158a5f"] = #"hash_7c1a6aad09dc0d7a";
   level._effect[#"hash_1c28ab41060f8dad"] = #"hash_7c145ead09d78d68";
   level._effect[#"scepter_bubble"] = #"hash_17756eb35aac3766";

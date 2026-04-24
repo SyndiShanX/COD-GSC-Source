@@ -26,8 +26,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "nightingale_deployed", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_7c2ee5bfa7cad803", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"nightingale_deployed", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_7c2ee5bfa7cad803", 1, 1, "int");
   weapon_name = sessionmodeiszombiesgame() ? # "nightingale_zm" : # "nightingale";
   weapon = getweapon(weapon_name);
   level.var_432fa05c = {
@@ -163,7 +163,7 @@ function private function_6ab1797f(decoygrenade) {
 
   if(isDefined(decoygrenade.var_20a0f018)) {
     decoygrenade.var_20a0f018 clientfield::set("isJammed", 1);
-    decoygrenade.var_20a0f018 clientfield::set("" + # "hash_7c2ee5bfa7cad803", 0);
+    decoygrenade.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 0);
     decoygrenade.var_20a0f018 stoploopsound(0.5);
   }
 
@@ -180,7 +180,7 @@ function private function_7dfb4daa(decoygrenade) {
   }
 
   decoygrenade.var_20a0f018 clientfield::set("isJammed", 0);
-  decoygrenade.var_20a0f018 clientfield::set("" + # "hash_7c2ee5bfa7cad803", 1);
+  decoygrenade.var_20a0f018 clientfield::set("" + #"hash_7c2ee5bfa7cad803", 1);
   decoygrenade.var_20a0f018 playLoopSound(#"hash_6e07f5906d35471");
   decoygrenade thread scene::play(#"scene_grenade_decoy_footsteps", decoygrenade.var_20a0f018);
 }
@@ -237,7 +237,7 @@ function function_db24f032() {
     decoy setowner(self.originalowner);
   }
 
-  decoy clientfield::set("" + # "nightingale_deployed", 1);
+  decoy clientfield::set("" + #"nightingale_deployed", 1);
   self ghost();
   self notsolid();
 
@@ -245,7 +245,7 @@ function function_db24f032() {
     decoy clientfield::set("isJammed", 1);
   } else {
     self thread scene::play(#"scene_grenade_decoy_footsteps", decoy);
-    decoy clientfield::set("" + # "hash_7c2ee5bfa7cad803", 1);
+    decoy clientfield::set("" + #"hash_7c2ee5bfa7cad803", 1);
     decoy playLoopSound(#"hash_6e07f5906d35471");
   }
 

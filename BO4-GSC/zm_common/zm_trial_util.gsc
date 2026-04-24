@@ -75,7 +75,7 @@ function_f79b96ac() {
 
 finalize_clientfields() {
   clientfield::register("world", "ZMHudGlobal.trials.trialIndex", 1, getminbitcountfornum(15), "int");
-  clientfield::register("toplayer", "" + # "hash_6536ca4fb2858a9f", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_6536ca4fb2858a9f", 16000, 1, "int");
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundNumber", 1, getminbitcountfornum(30), "int");
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundSuccess", 1, getminbitcountfornum(1), "int");
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.strikes", 1, getminbitcountfornum(3), "int");

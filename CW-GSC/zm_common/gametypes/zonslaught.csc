@@ -32,7 +32,7 @@ function event_handler[gametype_init] main(eventstruct) {
   level._zombie_gamemodemain = &onstartgametype;
   println("<dev string:x38>");
   level.var_36a81b25 = 1;
-  clientfield::register("scriptmover", "" + # "hash_56a6be021662c82e", 1, 2, "int", &function_bed6f88d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_56a6be021662c82e", 1, 2, "int", &function_bed6f88d, 0, 0);
   clientfield::register_clientuimodel("hudItems.onslaught.wave_number", #"hud_items", [#"onslaught", #"wave_number"], 1, 7, "int", undefined, 0, 0);
   clientfield::register_clientuimodel("hudItems.onslaught.bosskill_count", #"hud_items", [#"onslaught", #"bosskill_count"], 1, 7, "int", undefined, 0, 0);
   clientfield::register("scriptmover", "orb_spawn", 1, 1, "int", &orb_spawn, 0, 0);

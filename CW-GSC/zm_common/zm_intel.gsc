@@ -30,9 +30,9 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  clientfield::register("scriptmover", "" + # "hash_475f3329eaf62eaf", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_1a818fdb4337dc5e", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_711c8fee28432b7", 1, getminbitcountfornum(28), "int");
+  clientfield::register("scriptmover", "" + #"hash_475f3329eaf62eaf", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_1a818fdb4337dc5e", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_711c8fee28432b7", 1, getminbitcountfornum(28), "int");
   level.var_238bd723 = struct::get_script_bundle_instances("zmintel");
   level.var_14e8600c = 6;
   level.var_eb704e15 = [];
@@ -507,7 +507,7 @@ function function_2ba45c94(var_d5fa8477, v_pos, v_ang = (0, 0, 0), var_cd038aea,
   }
 
   if(b_play_fx) {
-    mdl_intel clientfield::set("" + # "hash_475f3329eaf62eaf", 1);
+    mdl_intel clientfield::set("" + #"hash_475f3329eaf62eaf", 1);
   }
 
   if(is_true(var_3e4e3c6a)) {
@@ -1018,7 +1018,7 @@ function function_3a2dd570(e_player) {
       self hidefromplayer(e_player);
     }
 
-    e_player clientfield::increment_to_player("" + # "hash_1a818fdb4337dc5e");
+    e_player clientfield::increment_to_player("" + #"hash_1a818fdb4337dc5e");
     util::wait_network_frame();
   }
 }
@@ -1265,7 +1265,7 @@ function function_2bcfd899(var_f84ece9f, player) {
     if(isDefined(player)) {
       if(!player function_f0f36d47(var_a36fa2c6.var_cb9cd317) && function_43abed5a(var_a36fa2c6.var_cb9cd317)) {
         if(var_f84ece9f === #"hash_71c51f24f7f3037d") {
-          player clientfield::set_to_player("" + # "hash_711c8fee28432b7", n_index);
+          player clientfield::set_to_player("" + #"hash_711c8fee28432b7", n_index);
         }
 
         return var_a36fa2c6.var_cb9cd317;

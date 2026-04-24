@@ -24,9 +24,9 @@ __init__() {
   zm::function_84d343d(#"wraith_fire_fire_tall", &function_2b4945e4);
   zm::function_84d343d(#"wraith_fire_fire_wall", &function_2b4945e4);
   zm::function_84d343d(#"wraith_fire_steam", &function_2b4945e4);
-  namespace_9ff9f642::register_burn(#"eq_wraith_fire", 50, 5, "" + # "hash_682f9312e30af478", "" + # "hash_7fcff4f8340f11f7");
-  clientfield::register("actor", "" + # "hash_682f9312e30af478", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_7fcff4f8340f11f7", 1, 1, "int");
+  namespace_9ff9f642::register_burn(#"eq_wraith_fire", 50, 5, "" + #"hash_682f9312e30af478", "" + #"hash_7fcff4f8340f11f7");
+  clientfield::register("actor", "" + #"hash_682f9312e30af478", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_7fcff4f8340f11f7", 1, 1, "int");
 }
 
 __main__() {

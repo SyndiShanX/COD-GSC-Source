@@ -31,7 +31,7 @@ function private preinit() {
   level aat::function_571fceb("ammomod_napalmburst", &ammomod_napalmburst::init_napalmburst);
   level aat::function_571fceb("ammomod_electriccherry", &ammomod_electriccherry::init_electriccherry);
   level aat::function_571fceb("ammomod_shatterblast", &ammomod_shatterblast::init_shatterblast);
-  clientfield::register("toplayer", "" + # "hash_10f9eacd143d57ae", 1, 1, "int", &function_6ab142a9, 1, 0);
+  clientfield::register("toplayer", "" + #"hash_10f9eacd143d57ae", 1, 1, "int", &function_6ab142a9, 1, 0);
   clientfield::register("toplayer", "ammomod_play_rob_tier", 15000, 3, "int", &function_cc40e7e2, 1, 0);
   clientfield::register("toplayer", "ammomod_cryofreeze_idle", 1, 1, "int", &function_c62bfdf2, 1, 0);
   clientfield::register("toplayer", "ammomod_napalmburst_idle", 1, 1, "int", &function_f745370f, 1, 0);

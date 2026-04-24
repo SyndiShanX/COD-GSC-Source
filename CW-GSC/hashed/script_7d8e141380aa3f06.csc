@@ -13,7 +13,7 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  clientfield::register("toplayer", "" + # "hash_69dc133e22a2769f", 16000, 1, "int", &function_6b66a9a3, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_69dc133e22a2769f", 16000, 1, "int", &function_6b66a9a3, 0, 0);
 }
 
 function function_2376fab8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

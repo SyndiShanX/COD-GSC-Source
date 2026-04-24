@@ -55,7 +55,7 @@ function preinit() {
   namespace_52c8f34d::preinit();
   callback::on_spawned(&function_ef39f61b);
   callback::on_item_pickup(&on_item_pickup);
-  clientfield::register("scriptmover", "" + # "hash_7dfc37315a4eff0", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_7dfc37315a4eff0", 1, 1, "int");
 }
 
 function postinit() {
@@ -156,11 +156,11 @@ function function_38ac8b73() {
     self thread scene::play("p9_fxanim_zm_gp_armor_station_bundle", "Shot 1", self);
   }
 
-  self clientfield::set("" + # "hash_7dfc37315a4eff0", 1);
+  self clientfield::set("" + #"hash_7dfc37315a4eff0", 1);
 }
 
 function function_e255b251() {
-  self clientfield::set("" + # "hash_7dfc37315a4eff0", 0);
+  self clientfield::set("" + #"hash_7dfc37315a4eff0", 0);
 }
 
 function function_fe5f8894(eventstruct) {

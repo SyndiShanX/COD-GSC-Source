@@ -461,7 +461,7 @@ function function_866080d3(skill) {
       player thread[[level.var_40683d3d[var_ada67e63]]]();
     }
   } else {
-    notify_name = "" + # "use_skill_" + var_ada67e63;
+    notify_name = "" + #"use_skill_" + var_ada67e63;
     player notifyonplayercommand(notify_name, skill.var_5fcde6a8);
   }
 

@@ -26,9 +26,9 @@ autoexec __init__system__() {
 __init__() {
   registerbehaviorscriptfunctions();
   function_6bb82ac9();
-  clientfield::register("scriptmover", "" + # "avogadro_bolt_fx", 16000, 1, "int");
-  clientfield::register("actor", "" + # "avogadro_phase_fx", 16000, 1, "int");
-  clientfield::register("actor", "" + # "avogadro_health_fx", 16000, 2, "int");
+  clientfield::register("scriptmover", "" + #"avogadro_bolt_fx", 16000, 1, "int");
+  clientfield::register("actor", "" + #"avogadro_phase_fx", 16000, 1, "int");
+  clientfield::register("actor", "" + #"avogadro_health_fx", 16000, 2, "int");
   spawner::add_archetype_spawn_function(#"avogadro", &function_ee579eb5);
   spawner::function_89a2cd87(#"avogadro", &function_d1359818);
   callback::on_player_damage(&function_99ce086a);
@@ -126,16 +126,16 @@ function_99ce086a(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
 function_dbc638a8(entity) {
   if(entity.health < entity.maxhealth * 0.33) {
-    entity clientfield::set("" + # "avogadro_health_fx", 1);
+    entity clientfield::set("" + #"avogadro_health_fx", 1);
     return;
   }
 
   if(entity.health < entity.maxhealth * 0.66) {
-    entity clientfield::set("" + # "avogadro_health_fx", 2);
+    entity clientfield::set("" + #"avogadro_health_fx", 2);
     return;
   }
 
-  entity clientfield::set("" + # "avogadro_health_fx", 3);
+  entity clientfield::set("" + #"avogadro_health_fx", 3);
 }
 
 function_50a86206(params) {
@@ -151,7 +151,7 @@ function_80fc1a78(time) {
 
 function_66dd488a() {
   foreach(bolt in level.avogadrobolts) {
-    if(isalive(bolt.owner) || bolt clientfield::get("" + # "avogadro_bolt_fx") == 1) {
+    if(isalive(bolt.owner) || bolt clientfield::get("" + #"avogadro_bolt_fx") == 1) {
       continue;
     }
 
@@ -272,17 +272,17 @@ shoot_bolt_wait(entity) {
   enemy = entity.favoriteenemy;
   self.shield = 0;
   self notify(#"stop_health");
-  self clientfield::set("" + # "avogadro_health_fx", 0);
+  self clientfield::set("" + #"avogadro_health_fx", 0);
   source_pos = self gettagorigin("tag_weapon_right");
   target_pos = enemy getEye();
   bolt.origin = source_pos;
   bolt endon(#"death");
   wait 0.1;
-  bolt clientfield::set("" + # "avogadro_bolt_fx", 1);
+  bolt clientfield::set("" + #"avogadro_bolt_fx", 1);
   bolt moveto(target_pos, 0.2);
   bolt waittill(#"movedone");
   bolt check_bolt_impact(entity, enemy);
-  bolt clientfield::set("" + # "avogadro_bolt_fx", 0);
+  bolt clientfield::set("" + #"avogadro_bolt_fx", 0);
 
   if(isDefined(bolt.owner)) {
     releasebolt(bolt);
@@ -367,7 +367,7 @@ function_3b8d314c(entity) {
   entity.is_phasing = 1;
 
   if(isDefined(self.var_f3bbe853) && self.var_f3bbe853) {
-    entity clientfield::set("" + # "avogadro_phase_fx", 1);
+    entity clientfield::set("" + #"avogadro_phase_fx", 1);
   }
 
   if(gettime() - entity.last_phase_time > 1000) {
@@ -391,7 +391,7 @@ function_dbba31c1(entity) {
   entity.last_phase_time = gettime();
 
   if(isDefined(self.var_f3bbe853) && self.var_f3bbe853) {
-    entity clientfield::set("" + # "avogadro_phase_fx", 0);
+    entity clientfield::set("" + #"avogadro_phase_fx", 0);
   }
 }
 

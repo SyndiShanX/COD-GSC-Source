@@ -27,7 +27,7 @@ function private preinit() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + # "zm_trial_door_lockdown", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"zm_trial_door_lockdown", 16000, 1, "int");
   zm_trial::register_challenge(#"door_lockdown", &on_begin, &on_end);
 }
 
@@ -66,7 +66,7 @@ function function_58fc4e38(n_delay = 0) {
 
     s_blocker.mdl_blocker ghost();
     util::wait_network_frame();
-    s_blocker.mdl_blocker clientfield::set("" + # "zm_trial_door_lockdown", 1);
+    s_blocker.mdl_blocker clientfield::set("" + #"zm_trial_door_lockdown", 1);
   }
 }
 
@@ -77,7 +77,7 @@ function function_92f23ef0(n_delay = 0) {
 
   foreach(s_blocker in a_s_blockers) {
     if(isDefined(s_blocker.mdl_blocker)) {
-      s_blocker.mdl_blocker clientfield::set("" + # "zm_trial_door_lockdown", 0);
+      s_blocker.mdl_blocker clientfield::set("" + #"zm_trial_door_lockdown", 0);
       util::wait_network_frame();
       s_blocker.mdl_blocker delete();
     }

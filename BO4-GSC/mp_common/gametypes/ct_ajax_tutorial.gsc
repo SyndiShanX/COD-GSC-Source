@@ -1188,7 +1188,7 @@ function_c3ccdcf5() {
 
 function_537c9eea() {
   self endon(#"death");
-  self waittill("killstreak_quantity_" + # "recon_car");
+  self waittill("killstreak_quantity_" + #"recon_car");
   self.var_51ff7a58 = 1;
   self ct_utils::function_1bb93418();
 }

@@ -68,8 +68,8 @@ __main__() {
 
 init_clientfields() {
   clientfield::register("scriptmover", "lighthouse_on", 24000, 3, "int");
-  clientfield::register("vehicle", "" + # "hash_19bce46b8ab82440", 24000, 1, "int");
-  clientfield::register("actor", "" + # "hash_5af1cd27f90895ae", 24000, 1, "counter");
+  clientfield::register("vehicle", "" + #"hash_19bce46b8ab82440", 24000, 1, "int");
+  clientfield::register("actor", "" + #"hash_5af1cd27f90895ae", 24000, 1, "counter");
 }
 
 function_6a10478() {
@@ -340,7 +340,7 @@ function_71399d9c() {
   self function_1b488412(vh_target.origin, 1);
   self waittill(#"rotatedone");
   level.var_ab11c23d clientfield::set("lighthouse_on", 4);
-  self.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 1);
+  self.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 1);
   self.vh_target thread function_18f63949();
   self function_2b2f2a7f();
   self.t_trap thread zm_traps::trap_damage();
@@ -388,7 +388,7 @@ function_76ff758d() {
   self.vh_target.b_moving = 0;
   wait 2;
   self.t_trap notify(#"trap_done");
-  self.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
+  self.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
   self.t_trap delete();
   self.vh_target delete();
   level thread function_ad646ef8(1);
@@ -639,7 +639,7 @@ is_trap_active() {
 
 function_2853c44e(e_trap) {
   self endon(#"death");
-  self clientfield::increment("" + # "hash_5af1cd27f90895ae", 1);
+  self clientfield::increment("" + #"hash_5af1cd27f90895ae", 1);
 
   if(isDefined(self.fire_damage_func)) {
     self[[self.fire_damage_func]](e_trap);

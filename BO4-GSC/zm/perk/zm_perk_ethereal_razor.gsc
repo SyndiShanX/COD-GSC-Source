@@ -57,9 +57,9 @@ function_ee114cab() {
 }
 
 function_f20b4260() {
-  clientfield::register("actor", "" + # "hash_29c26fb019da89f3", 13000, 1, "counter");
-  clientfield::register("allplayers", "" + # "hash_450d9f824068dcc2", 13000, 1, "counter");
-  clientfield::register("allplayers", "" + # "hash_4de2dbcd551f1fb7", 13000, 1, "counter");
+  clientfield::register("actor", "" + #"hash_29c26fb019da89f3", 13000, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_450d9f824068dcc2", 13000, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_4de2dbcd551f1fb7", 13000, 1, "counter");
 }
 
 function_f3043027(state) {}
@@ -89,9 +89,9 @@ function_f86e4c3d() {
 
     if(self hasperk(#"specialty_etherealrazor") && function_866130c7(w_melee)) {
       if(w_melee === level.w_bowie_knife) {
-        self clientfield::increment("" + # "hash_4de2dbcd551f1fb7");
+        self clientfield::increment("" + #"hash_4de2dbcd551f1fb7");
       } else {
-        self clientfield::increment("" + # "hash_450d9f824068dcc2");
+        self clientfield::increment("" + #"hash_450d9f824068dcc2");
       }
 
       if(var_c34665fc === #"weapon_melee_charge") {
@@ -167,7 +167,7 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
     e_target playSound(#"hash_444f738bd1d3fd8");
 
     if(isactor(e_target)) {
-      e_target clientfield::increment("" + # "hash_29c26fb019da89f3");
+      e_target clientfield::increment("" + #"hash_29c26fb019da89f3");
     }
 
     var_5f96a3db++;

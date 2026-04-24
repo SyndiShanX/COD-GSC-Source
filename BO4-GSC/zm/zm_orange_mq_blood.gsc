@@ -23,9 +23,9 @@
 #namespace zm_orange_mq_blood;
 
 preload() {
-  clientfield::register("scriptmover", "" + # "hash_10906b9ce905bda8", 24000, 3, "int");
-  clientfield::register("scriptmover", "" + # "hash_5dd642a0bd6e6cb9", 24000, 2, "int");
-  clientfield::register("scriptmover", "" + # "hash_1b72c208f2964e24", 24000, 3, "int");
+  clientfield::register("scriptmover", "" + #"hash_10906b9ce905bda8", 24000, 3, "int");
+  clientfield::register("scriptmover", "" + #"hash_5dd642a0bd6e6cb9", 24000, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_1b72c208f2964e24", 24000, 3, "int");
 }
 
 main() {
@@ -46,7 +46,7 @@ main() {
   level waittill(#"start_zombie_round_logic");
   level.s_mq_blood_vessel_loc thread blood_think();
   level.var_4adebdfc moveto(level.var_63a35083[0].origin, 1, 0.1, 0.3);
-  level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
+  level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
   level.var_9928b94b = [];
   level.var_9928b94b[0] = array("docks_1", "docks_2", "boathouse", "frozen_crevasse", "ice_grotto", "lagoon");
   level.var_9928b94b[1] = array("beach", "lighthouse_approach", "lighthouse_station", "lighthouse_cove", "hidden_path");
@@ -105,7 +105,7 @@ function_2d9e1e29(var_5ea5c94d, ended_early) {
     }
 
     level.var_9e3c632e++;
-    level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
+    level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
     level.var_ed1e7d4d = level.var_9e3c632e - 1;
 
     foreach(wisp in level.var_4adebdfc.a_wisps) {
@@ -183,11 +183,11 @@ function_ee4a200b() {
   }
 
   level.var_ed1e7d4d++;
-  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", level.var_ed1e7d4d);
+  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
   self waittill(#"trigger_activated");
   self.vessel hide();
   self.vessel playSound("zmb_vessel_pickup");
-  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", 0);
+  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   level notify(#"vessel_collected");
   level flag::clear(#"blood_waiting");
   wait 2;
@@ -235,7 +235,7 @@ blood_event() {
   self moveto(level.var_63a35083[0].origin, 1, 0.1, 0.5);
   self.var_d0fed9fb = undefined;
   level.var_9e3c632e++;
-  level.var_4adebdfc clientfield::set("" + # "hash_10906b9ce905bda8", level.var_9e3c632e);
+  level.var_4adebdfc clientfield::set("" + #"hash_10906b9ce905bda8", level.var_9e3c632e);
   level zm_utility::function_9ad5aeb1(1, 1, 0, 1, 0);
   level flag::clear(#"infinite_round_spawning");
 
@@ -301,7 +301,7 @@ blood_move() {
 function_9a991dc2(n_index) {
   var_c80c2ab6 = spawn("script_model", level.var_4adebdfc.origin);
   var_c80c2ab6 setModel("apothican_blood_sphere_16");
-  var_c80c2ab6 clientfield::set("" + # "hash_5dd642a0bd6e6cb9", 1);
+  var_c80c2ab6 clientfield::set("" + #"hash_5dd642a0bd6e6cb9", 1);
   var_c80c2ab6.b_frozen = 0;
   var_c80c2ab6.b_primed = 0;
   var_c80c2ab6.health = 999;
@@ -331,7 +331,7 @@ function_c2d403f(n_index) {
           wait var_3a253a6f;
           self.b_primed = 1;
           self notify(#"primed");
-          self clientfield::set("" + # "hash_5dd642a0bd6e6cb9", 1);
+          self clientfield::set("" + #"hash_5dd642a0bd6e6cb9", 1);
           self.b_frozen = 0;
         }
 
@@ -339,7 +339,7 @@ function_c2d403f(n_index) {
       }
 
       if(isinarray(level.var_16972e5c, s_notify.weapon.name)) {
-        self clientfield::set("" + # "hash_5dd642a0bd6e6cb9", 2);
+        self clientfield::set("" + #"hash_5dd642a0bd6e6cb9", 2);
         self.b_frozen = 1;
         continue;
       }

@@ -11,7 +11,7 @@
 #namespace namespace_7fe06af4;
 
 function event_handler[gametype_init] init(eventstruct) {
-  clientfield::register("world", "" + # "hash_5e7d02ead4a03f50", 1, 2, "int", &function_409efbe2, 0, 1);
+  clientfield::register("world", "" + #"hash_5e7d02ead4a03f50", 1, 2, "int", &function_409efbe2, 0, 1);
   util::waitforclient(0);
 }
 

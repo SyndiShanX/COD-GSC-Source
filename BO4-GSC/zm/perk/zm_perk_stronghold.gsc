@@ -58,7 +58,7 @@ function_e03779ee() {
 }
 
 function_356a31cb() {
-  clientfield::register("toplayer", "" + # "hash_24e322568c9492c5", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_24e322568c9492c5", 1, 1, "int");
 }
 
 function_721cc6dc(state) {}
@@ -117,7 +117,7 @@ function_7424eebb() {
 }
 
 function_7b5fc171() {
-  self clientfield::set_to_player("" + # "hash_24e322568c9492c5", 0);
+  self clientfield::set_to_player("" + #"hash_24e322568c9492c5", 0);
   self zm_armor::remove(#"stronghold_armor", 1);
   self.var_3748ec02 = undefined;
   self.var_807f94d7 = undefined;
@@ -131,7 +131,7 @@ function_a84fcb78(var_3a553e99) {
   if(var_3a553e99 == var_cf385861) {
     self.var_7d0e99f3 = 1;
     self.var_3748ec02 = self.origin;
-    self clientfield::set_to_player("" + # "hash_24e322568c9492c5", 1);
+    self clientfield::set_to_player("" + #"hash_24e322568c9492c5", 1);
   }
 
   if(var_3a553e99 % var_cf385861 == 0) {

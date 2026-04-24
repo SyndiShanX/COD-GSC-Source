@@ -15,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + # "hash_2e38cc453c5ecb9c", 16000, 2, "int", &function_a45824f, 0, 0);
+  clientfield::register("world", "" + #"hash_2e38cc453c5ecb9c", 16000, 2, "int", &function_a45824f, 0, 0);
 }
 
 __main__() {}

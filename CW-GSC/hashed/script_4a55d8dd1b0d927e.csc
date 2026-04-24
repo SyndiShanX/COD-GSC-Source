@@ -27,18 +27,18 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("missile", "" + # "hash_51901507983013f5", 28000, 1, "int", &function_fd43b4c0, 0, 0);
+  clientfield::register("missile", "" + #"hash_51901507983013f5", 28000, 1, "int", &function_fd43b4c0, 0, 0);
   clientfield::register("toplayer", "using_bomb", 28000, 1, "int", &function_18272d54, 0, 0);
   clientfield::register("toplayer", "killed_by_client_num", 28000, 4, "int", &function_d4209aa4, 0, 0);
   clientfield::register("toplayer", "killed_by_role", 28000, 2, "int", &function_224355c0, 0, 0);
   clientfield::register("toplayer", "to_player_notification", 28000, 5, "int", &function_cee5c029, 0, 0);
   clientfield::register("world", "wanted_client_num", 28000, 5, "int", &function_1e427c79, 0, 0);
   clientfield::register("world", "bomb_id", 28000, 2, "int", &function_50394a1c, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_732102339886b628", 28000, 1, "int", &function_9d843b2d, 0, 0);
-  clientfield::register("missile", "" + # "hash_7850e541b1606b4a", 28000, 1, "int", &function_9d843b2d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3b8f220452f1fe4c", 28000, 1, "int", &function_14082bc6, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3cb0242230f3f716", 28000, 2, "int", &function_d3bf8e92, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_508b8b3b9ba62e53", 28000, 1, "int", &function_ca974780, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_732102339886b628", 28000, 1, "int", &function_9d843b2d, 0, 0);
+  clientfield::register("missile", "" + #"hash_7850e541b1606b4a", 28000, 1, "int", &function_9d843b2d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3b8f220452f1fe4c", 28000, 1, "int", &function_14082bc6, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3cb0242230f3f716", 28000, 2, "int", &function_d3bf8e92, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_508b8b3b9ba62e53", 28000, 1, "int", &function_ca974780, 0, 0);
 }
 
 function function_dd83b835() {

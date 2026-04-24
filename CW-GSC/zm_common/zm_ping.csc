@@ -80,8 +80,8 @@ function private preinit() {
   function_5ae4a10c(array(#"p9_sur_machine_phd_slider"), "perk_phd_slider", #"hash_79fbaba94cc08a3d", #"hash_2be744903390f195", #"ui_icon_minimap_phdslider", 1, -20);
   function_5ae4a10c(#"p9_fxanim_zm_tungsten_pn_full_mod", "aetherium_neutralizer", #"hash_348e920f379ab2a8", undefined, #"hash_541d134aef3a5f87", 1, 0);
   function_5ae4a10c(undefined, "mimic_prop_spawn");
-  clientfield::register("scriptmover", "" + # "hash_dfecc4e02f58398", 1, 3, "int", &function_3ed2984b, 0, 0);
-  clientfield::register("zbarrier", "" + # "hash_dfecc4e02f58398", 1, 2, "int", &function_1bcf5171, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_dfecc4e02f58398", 1, 3, "int", &function_3ed2984b, 0, 0);
+  clientfield::register("zbarrier", "" + #"hash_dfecc4e02f58398", 1, 2, "int", &function_1bcf5171, 0, 0);
 }
 
 function function_3ed2984b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

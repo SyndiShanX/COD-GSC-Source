@@ -34,7 +34,7 @@ register_clientfields() {
   clientfield::register("world", "portal_map_gas_indicator_yellow_house", 1, 1, "int", &portal_map_gas_indicator_yellow_house, 0, 0);
   clientfield::register("world", "portal_map_gas_indicator_generators", 1, 1, "int", &portal_map_gas_indicator_generators, 0, 0);
   clientfield::register("world", "generator_sound_sweetner", 1, 1, "int", &play_generator_sound_sweetner, 0, 0);
-  clientfield::register("world", "" + # "hash_1c11f70bb8445095", 1, 3, "int", &function_88991669, 0, 0);
+  clientfield::register("world", "" + #"hash_1c11f70bb8445095", 1, 3, "int", &function_88991669, 0, 0);
   clientfield::register("toplayer", "vent_interact_feedback", 20000, 1, "counter", &vent_interact_feedback, 0, 0);
 }
 

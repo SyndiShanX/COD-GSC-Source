@@ -50,10 +50,10 @@ __main__() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_7327d0447d656234", 1, 1, "int");
-  clientfield::register("item", "" + # "hash_76662556681a502c", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_59be891b288663cc", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_257c215ab25a21c5", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_7327d0447d656234", 1, 1, "int");
+  clientfield::register("item", "" + #"hash_76662556681a502c", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_59be891b288663cc", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_257c215ab25a21c5", 1, 1, "counter");
 }
 
 function_28d0cf11(str_script_noteworthy) {
@@ -230,7 +230,7 @@ function_1abf5396(var_cba19e17) {
 
     if(isPlayer(waitresult.activator) && var_cba19e17.var_ead5d884) {
       waitresult.activator dodamage(10, waitresult.activator.origin);
-      waitresult.activator clientfield::increment_to_player("" + # "hash_257c215ab25a21c5");
+      waitresult.activator clientfield::increment_to_player("" + #"hash_257c215ab25a21c5");
       waitresult.activator playsoundtoplayer(#"hash_75318bcffca7ff06", waitresult.activator);
       wait 4;
     }
@@ -279,7 +279,7 @@ function_2def6c82() {
 
   foreach(mdl_part in a_mdl_parts) {
     if(mdl_part.item == getweapon(#"zitem_spectral_shield_part_2")) {
-      mdl_part clientfield::set("" + # "hash_76662556681a502c", 1);
+      mdl_part clientfield::set("" + #"hash_76662556681a502c", 1);
     }
   }
 }
@@ -707,12 +707,12 @@ function_5d3c7c04() {
 
     if(s_result._notify == #"brutus_locked") {
       var_89ddd572 = util::spawn_model("tag_origin", s_result.s_stub.origin, s_result.s_stub.angles);
-      var_89ddd572 clientfield::set("" + # "hash_59be891b288663cc", 1);
+      var_89ddd572 clientfield::set("" + #"hash_59be891b288663cc", 1);
       continue;
     }
 
     if(isDefined(var_89ddd572)) {
-      var_89ddd572 clientfield::set("" + # "hash_59be891b288663cc", 0);
+      var_89ddd572 clientfield::set("" + #"hash_59be891b288663cc", 0);
       var_89ddd572 delete();
     }
   }

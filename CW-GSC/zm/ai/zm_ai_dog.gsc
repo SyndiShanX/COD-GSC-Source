@@ -2118,7 +2118,7 @@ function function_5b561e92(player) {
   }
 
   player status_effect::status_effect_apply(params, var_7e6e7f9f, self);
-  player clientfield::increment_to_player("" + # "hash_10eff6a8464fb235", 1);
+  player clientfield::increment_to_player("" + #"hash_10eff6a8464fb235", 1);
 }
 
 function function_f7d44ebf() {

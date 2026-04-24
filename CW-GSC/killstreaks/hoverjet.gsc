@@ -30,13 +30,13 @@ function private init_shared() {
   remote_weapons::init_shared();
   killstreaks::register_killstreak("killstreak_hoverjet", &function_6bbdb500);
   remote_weapons::registerremoteweapon("hoverjet", #"", &function_80586c75, &function_cb79fdd4, 1);
-  clientfield::register("toplayer", "" + # "hash_312f8015c2d5dff", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_1a4b729551097abf", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hoverjet_crash", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_623d35a1d3211bdb", 1, 2, "int");
-  clientfield::register("vehicle", "" + # "hash_48b649c323ba0f95", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_228ec5a218e1d2f1", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_3a74d4ba3c54d57b", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_312f8015c2d5dff", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_1a4b729551097abf", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hoverjet_crash", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_623d35a1d3211bdb", 1, 2, "int");
+  clientfield::register("vehicle", "" + #"hash_48b649c323ba0f95", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_228ec5a218e1d2f1", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_3a74d4ba3c54d57b", 1, 1, "int");
 }
 
 function function_6bbdb500(killstreaktype) {
@@ -187,12 +187,12 @@ function function_3588c7d8(einflictor, eattacker, idamage, idflags, smeansofdeat
 
   if(self.damagestate < 1 && var_902cbab5 <= self.maxhealth * (isDefined(bundle.var_36adfd06) ? bundle.var_36adfd06 : 0.66)) {
     self.damagestate = 1;
-    self clientfield::set("" + # "hash_623d35a1d3211bdb", 1);
+    self clientfield::set("" + #"hash_623d35a1d3211bdb", 1);
   }
 
   if(self.damagestate < 2 && var_902cbab5 <= self.maxhealth * (isDefined(bundle.var_f0a5d04d) ? bundle.var_f0a5d04d : 0.33)) {
     self.damagestate = 2;
-    self clientfield::set("" + # "hash_623d35a1d3211bdb", 2);
+    self clientfield::set("" + #"hash_623d35a1d3211bdb", 2);
   }
 
   if(self.health > 0 && var_902cbab5 <= 0 && !is_true(self.destroyed)) {
@@ -261,7 +261,7 @@ function function_830d6b7(point, dir, smeansofdeath) {
   }
 
   self thread vehicle_death::helicopter_crash(point, dir, 2.75);
-  self clientfield::set("" + # "hoverjet_crash", 1);
+  self clientfield::set("" + #"hoverjet_crash", 1);
   self waittilltimeout(2.25, #"death");
   function_c85eb0a9();
 }
@@ -344,7 +344,7 @@ function function_8a865fc8(jet) {
   jet thread function_e6b2dc3e();
   jet playSound(#"hash_6f66776e9247eccc");
   jet takeplayercontrol();
-  self clientfield::set_to_player("" + # "hash_1a4b729551097abf", 1);
+  self clientfield::set_to_player("" + #"hash_1a4b729551097abf", 1);
 }
 
 function function_746680dc(jet) {
@@ -355,7 +355,7 @@ function function_746680dc(jet) {
   }
 
   if(isDefined(self)) {
-    self clientfield::set_to_player("" + # "hash_1a4b729551097abf", 0);
+    self clientfield::set_to_player("" + #"hash_1a4b729551097abf", 0);
     self notify(#"off_spline");
     self val::reset(#"hash_8110844715cf5ff", "freezecontrols");
   }
@@ -436,7 +436,7 @@ function function_7725894b() {
   }
 
   self playSound(#"hash_6f66776e9247eccc");
-  self clientfield::set("" + # "hash_3a74d4ba3c54d57b", 1);
+  self clientfield::set("" + #"hash_3a74d4ba3c54d57b", 1);
   var_6221de3 = int(3 * 1000);
   var_c347ff91 = gettime();
   exittime = int(10 * 1000);
@@ -491,7 +491,7 @@ function function_7725894b() {
   self.mover = undefined;
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "hash_3a74d4ba3c54d57b", 0);
+    self clientfield::set("" + #"hash_3a74d4ba3c54d57b", 0);
     self stoploopsound(1);
     self util::death_notify_wrapper();
 
@@ -532,7 +532,7 @@ function function_80586c75(jet) {
     weapon = heatseekingmissile::getappropriateplayerweapon();
     player thread heatseekingmissile::stingerirtloop(weapon);
     player thread function_c077f369(weapon);
-    player clientfield::set_to_player("" + # "hash_312f8015c2d5dff", 1);
+    player clientfield::set_to_player("" + #"hash_312f8015c2d5dff", 1);
     player setplayerangles((pitch_down, vectortoyaw(jet.var_ced649a0 - jet.origin), 0));
     player oob::function_93bd17f6("hoverjet", 10);
     player.var_5c5fca5 = 1;
@@ -570,7 +570,7 @@ function function_c85eb0a9() {
   jet.is_shutting_down = 1;
 
   if(isDefined(owner)) {
-    owner clientfield::set_to_player("" + # "hash_312f8015c2d5dff", 0);
+    owner clientfield::set_to_player("" + #"hash_312f8015c2d5dff", 0);
     owner oob::function_e2d18c01("hoverjet");
     owner.var_5c5fca5 = undefined;
     owner vehicle::stop_monitor_missiles_locked_on_to_me();
@@ -651,21 +651,21 @@ function function_61c4894(ent, weapon) {
 function function_e9a13002() {
   if(self isinvehicle()) {
     jet = self getvehicleoccupied();
-    jet clientfield::set("" + # "hash_48b649c323ba0f95", 1);
+    jet clientfield::set("" + #"hash_48b649c323ba0f95", 1);
   }
 }
 
 function function_bb75386c() {
   if(self isinvehicle()) {
     jet = self getvehicleoccupied();
-    jet clientfield::set("" + # "hash_48b649c323ba0f95", 0);
+    jet clientfield::set("" + #"hash_48b649c323ba0f95", 0);
   }
 }
 
 function function_fa687280() {
-  self clientfield::set("" + # "hash_228ec5a218e1d2f1", 1);
+  self clientfield::set("" + #"hash_228ec5a218e1d2f1", 1);
 }
 
 function function_63ec1d12() {
-  self clientfield::set("" + # "hash_228ec5a218e1d2f1", 0);
+  self clientfield::set("" + #"hash_228ec5a218e1d2f1", 0);
 }

@@ -48,15 +48,15 @@ function private preinit() {
 
 function init_clientfields() {
   clientfield::register("world", "fasttravel_exploder", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "wormhole_fx", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"wormhole_fx", 1, 2, "int");
   clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int");
   clientfield::register("toplayer", "player_chaos_light_rail_fx", 1, 1, "int");
   clientfield::register("toplayer", "fasttravel_teleport_sfx", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_638ce9451eb0ea49", 1, 3, "int");
+  clientfield::register("toplayer", "" + #"hash_638ce9451eb0ea49", 1, 3, "int");
   clientfield::register("allplayers", "fasttravel_start_fx", 1, 1, "counter");
   clientfield::register("allplayers", "fasttravel_end_fx", 1, 1, "counter");
   clientfield::register("allplayers", "fasttravel_rail_fx", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_1747eb69683ce477", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_1747eb69683ce477", 1, 1, "int");
 }
 
 function function_44a82004(str_flag) {
@@ -119,7 +119,7 @@ function wormhole_fx(a_ents) {
   }
   while(!e_wormhole isplayinganimscripted());
 
-  e_wormhole clientfield::set("" + # "wormhole_fx", zm_utility::get_story());
+  e_wormhole clientfield::set("" + #"wormhole_fx", zm_utility::get_story());
 }
 
 function function_ac7928bd(a_ents) {
@@ -130,7 +130,7 @@ function function_ac7928bd(a_ents) {
   }
   while(!e_wormhole isplayinganimscripted());
 
-  e_wormhole clientfield::set("" + # "wormhole_fx", 2);
+  e_wormhole clientfield::set("" + #"wormhole_fx", 2);
 }
 
 function function_cdbbf1ee() {
@@ -676,7 +676,7 @@ function function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, 
   if(isDefined(var_5314bd63)) {
     self clientfield::set("fasttravel_rail_fx", 0);
     self clientfield::set_to_player("player_chaos_light_rail_fx", 0);
-    self clientfield::set("" + # "hash_1747eb69683ce477", 0);
+    self clientfield::set("" + #"hash_1747eb69683ce477", 0);
     util::wait_network_frame();
     self allowcrouch(1);
     self allowprone(1);
@@ -849,7 +849,7 @@ function fasttravel_spline(var_5314bd63, nd_path_start, var_384528) {
   self.vh_rail vehicle::get_on_path(nd_path_start);
   util::wait_network_frame();
   self clientfield::set("fasttravel_rail_fx", 1);
-  self clientfield::set("" + # "hash_1747eb69683ce477", 1);
+  self clientfield::set("" + #"hash_1747eb69683ce477", 1);
   self thread function_ab80021(var_384528);
 }
 
@@ -1077,7 +1077,7 @@ function private function_fdb3b5(var_a16f5b07, s_teleport_room, var_98b11ed9) {
   self childthread function_e4af83af(s_teleport_room);
   waittillframeend();
   self playrumblelooponentity(#"hash_5d8a1a68b12dfb24");
-  self clientfield::set_to_player("" + # "hash_638ce9451eb0ea49", var_98b11ed9);
+  self clientfield::set_to_player("" + #"hash_638ce9451eb0ea49", var_98b11ed9);
 }
 
 function function_a78584c0(var_6c365dbf, var_896486fb, var_1f8fbe0b = 0) {
@@ -1109,7 +1109,7 @@ function function_a78584c0(var_6c365dbf, var_896486fb, var_1f8fbe0b = 0) {
   v_vortex_origin = s_teleport_room.origin + anglesToForward(s_teleport_room.angles) * 1000;
   var_291fc0f7 = struct::spawn(v_vortex_origin, s_teleport_room.angles - (0, 90, 0));
   self function_82c1415f(var_291fc0f7, var_1f8fbe0b);
-  self clientfield::set_to_player("" + # "hash_638ce9451eb0ea49", 0);
+  self clientfield::set_to_player("" + #"hash_638ce9451eb0ea49", 0);
 
   if(isDefined(self.var_805b8325)) {
     self.var_805b8325 delete();

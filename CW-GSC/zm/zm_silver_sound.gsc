@@ -35,7 +35,7 @@ function function_acd83a15() {
 
     if(waitresult._notify === "musRoundEnd") {
       foreach(player in getplayers()) {
-        player clientfield::set_to_player("" + # "music_underscore", 2);
+        player clientfield::set_to_player("" + #"music_underscore", 2);
       }
 
       continue;
@@ -43,7 +43,7 @@ function function_acd83a15() {
 
     if(function_e840d5a5()) {
       foreach(player in getplayers()) {
-        player clientfield::set_to_player("" + # "music_underscore", 3);
+        player clientfield::set_to_player("" + #"music_underscore", 3);
       }
     }
   }
@@ -81,7 +81,7 @@ function function_2cf67660() {
 
 function function_cb5a4b1a() {
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "music_underscore", 2);
+    player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
   music::setmusicstate("silver_exfil");
@@ -98,7 +98,7 @@ function function_613a7ccc(b_success = 0) {
 
 function function_da00670e() {
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "music_underscore", 2);
+    player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
   wait 1;
@@ -122,7 +122,7 @@ function function_d0f24e17() {
 
   if(function_e840d5a5()) {
     foreach(player in getplayers()) {
-      player clientfield::set_to_player("" + # "music_underscore", 3);
+      player clientfield::set_to_player("" + #"music_underscore", 3);
     }
   }
 }

@@ -182,7 +182,7 @@ function function_9e8d4999(title = #"", descriptions, interactions, object) {
   }
 
   if(var_fadf668d) {
-    player prompts::function_46f198(#"interactive_map", "cursor" + "." + "mapObjects" + "." + # "cursor" + "." + "interactionList");
+    player prompts::function_46f198(#"interactive_map", "cursor" + "." + "mapObjects" + "." + #"cursor" + "." + "interactionList");
   }
 
   level.interactive_map.var_2c15274b = {

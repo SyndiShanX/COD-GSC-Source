@@ -15,7 +15,7 @@ function event_handler[level_init] main(eventstruct) {
   setsaveddvar(#"wind_global_low_altitude", 0);
   setsaveddvar(#"wind_global_hi_altitude", 10000);
   setsaveddvar(#"wind_global_low_strength_percent", 100);
-  clientfield::register("world", "" + # "hash_7de1e9f42b73bf42", 1, 1, "int", &function_383aad7d, 0, 0);
+  clientfield::register("world", "" + #"hash_7de1e9f42b73bf42", 1, 1, "int", &function_383aad7d, 0, 0);
   callback::on_gameplay_started(&on_gameplay_started);
   load::main();
   util::waitforclient(0);

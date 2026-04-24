@@ -42,7 +42,7 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_61ff06b1f8850806", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_61ff06b1f8850806", 1, 1, "int");
 }
 
 function_1bfc7178() {
@@ -463,7 +463,7 @@ function_3410748f() {
   level.var_3bf3d61e[22].fx moveto(level.var_3bf3d61e[22].fx.origin + (-3.5, 13, 0), 0.3);
   level.var_3bf3d61e[23].fx moveto(level.var_3bf3d61e[23].fx.origin + (-3.5, 13, 0), 0.3);
   playsoundatposition(#"hash_7c109876c748f07c", level.s_code_drawer.e_drawer.origin);
-  waitresult.activator clientfield::set_to_player("" + # "hash_61ff06b1f8850806", 1);
+  waitresult.activator clientfield::set_to_player("" + #"hash_61ff06b1f8850806", 1);
   zm_unitrigger::unregister_unitrigger(self.stub);
 }
 

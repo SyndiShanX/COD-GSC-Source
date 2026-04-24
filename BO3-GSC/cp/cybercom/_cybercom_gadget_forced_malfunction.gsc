@@ -125,7 +125,7 @@ function private _activate_forced_malfunction(slot, weapon) {
   foreach(item in self.cybercom.lock_targets) {
     if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
-        if(!cybercom::targetisvalid(item.target, weapon)) {
+        if(!cybercom::targetisValid(item.target, weapon)) {
           continue;
         }
         self thread challenges::function_96ed590f("cybercom_uses_martial");
@@ -194,7 +194,7 @@ function private _force_malfunction(attacker, disabletimemsec) {
   } else {
     disabletime = getdvarint("scr_malfunction_duration", 15) * 1000;
   }
-  if(!attacker cybercom::targetisvalid(self, weapon)) {
+  if(!attacker cybercom::targetisValid(self, weapon)) {
     return;
   }
   if(self cybercom::function_421746e0()) {
@@ -277,7 +277,7 @@ function ai_activateforcedmalfuncton(target, var_9bc2efcb = 1) {
   }
   weapon = getweapon("gadget_forced_malfunction");
   foreach(guy in validtargets) {
-    if(!cybercom::targetisvalid(guy, weapon)) {
+    if(!cybercom::targetisValid(guy, weapon)) {
       continue;
     }
     guy thread _force_malfunction(self);

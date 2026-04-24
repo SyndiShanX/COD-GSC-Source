@@ -41,8 +41,8 @@
 
 function event_handler[level_init] main(eventstruct) {
   level.var_8bef1f53 = sr_beacon_menu::register();
-  clientfield::register("toplayer", "" + # "teleport_started", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "teleport_ended", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"teleport_started", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"teleport_ended", 1, 1, "counter");
   namespace_52c8f34d::preinit();
 }
 
@@ -224,7 +224,7 @@ function warp(mdl_beacon) {
   foreach(player in getplayers()) {
     player zm_stats::function_945c7ce2(#"hash_1a5bd2708defa02b", 1);
     player chopper_gunner::function_24fbd61e();
-    player clientfield::increment_to_player("" + # "teleport_started", 1);
+    player clientfield::increment_to_player("" + #"teleport_started", 1);
   }
 
   destination = level.contentmanager.var_d60029a6[level.contentmanager.var_46849b1b];
@@ -297,7 +297,7 @@ function warp(mdl_beacon) {
 
   foreach(player in getplayers()) {
     player player_free_fall::allow_player_basejumping(1);
-    player clientfield::increment_to_player("" + # "teleport_ended", 1);
+    player clientfield::increment_to_player("" + #"teleport_ended", 1);
   }
 }
 

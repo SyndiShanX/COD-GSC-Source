@@ -36,7 +36,7 @@ function private preinit() {
   level aat::function_571fceb("ammomod_napalmburst", &ammomod_napalmburst::init_napalmburst);
   level aat::function_571fceb("ammomod_electriccherry", &ammomod_electriccherry::init_electriccherry);
   level aat::function_571fceb("ammomod_shatterblast", &ammomod_shatterblast::init_shatterblast);
-  clientfield::register("toplayer", "" + # "hash_10f9eacd143d57ae", 6000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_10f9eacd143d57ae", 6000, 1, "int");
   clientfield::register("toplayer", "ammomod_play_rob_tier", 15000, 3, "int");
   clientfield::register("toplayer", "ammomod_cryofreeze_idle", 1, 1, "int");
   clientfield::register("toplayer", "ammomod_napalmburst_idle", 1, 1, "int");
@@ -84,7 +84,7 @@ function function_bf51f3cc() {
   clientfield::set_to_player("ammomod_napalmburst_idle", 0);
   clientfield::set_to_player("ammomod_brainrot_idle", 0);
   clientfield::set_to_player("ammomod_deadwire_idle", 0);
-  clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 0);
+  clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 0);
 }
 
 function function_ec7953fa() {
@@ -110,7 +110,7 @@ function function_ec7953fa() {
       clientfield::set_to_player("ammomod_napalmburst_idle", 0);
       clientfield::set_to_player("ammomod_brainrot_idle", 0);
       clientfield::set_to_player("ammomod_deadwire_idle", 0);
-      clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 0);
+      clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 0);
     } else if(function_9022de1(aat_name)) {
       tier = function_9022de1(aat_name);
       clientfield::set_to_player("ammomod_play_rob_tier", tier);
@@ -118,7 +118,7 @@ function function_ec7953fa() {
       clientfield::set_to_player("ammomod_napalmburst_idle", 1);
       clientfield::set_to_player("ammomod_brainrot_idle", 0);
       clientfield::set_to_player("ammomod_deadwire_idle", 0);
-      clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 0);
+      clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 0);
     } else if(function_8bd7087d(aat_name)) {
       tier = function_8bd7087d(aat_name);
       clientfield::set_to_player("ammomod_play_rob_tier", tier);
@@ -126,7 +126,7 @@ function function_ec7953fa() {
       clientfield::set_to_player("ammomod_napalmburst_idle", 0);
       clientfield::set_to_player("ammomod_brainrot_idle", 1);
       clientfield::set_to_player("ammomod_deadwire_idle", 0);
-      clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 0);
+      clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 0);
     } else if(function_eb854b26(aat_name)) {
       tier = function_eb854b26(aat_name);
       clientfield::set_to_player("ammomod_play_rob_tier", tier);
@@ -134,7 +134,7 @@ function function_ec7953fa() {
       clientfield::set_to_player("ammomod_napalmburst_idle", 0);
       clientfield::set_to_player("ammomod_brainrot_idle", 0);
       clientfield::set_to_player("ammomod_deadwire_idle", 1);
-      clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 0);
+      clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 0);
     } else if(function_ef10106(aat_name)) {
       tier = function_ef10106(aat_name);
       clientfield::set_to_player("ammomod_play_rob_tier", tier);
@@ -142,7 +142,7 @@ function function_ec7953fa() {
       clientfield::set_to_player("ammomod_napalmburst_idle", 0);
       clientfield::set_to_player("ammomod_brainrot_idle", 0);
       clientfield::set_to_player("ammomod_deadwire_idle", 0);
-      clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 1);
+      clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 1);
     }
 
     return;
@@ -153,7 +153,7 @@ function function_ec7953fa() {
   clientfield::set_to_player("ammomod_napalmburst_idle", 0);
   clientfield::set_to_player("ammomod_brainrot_idle", 0);
   clientfield::set_to_player("ammomod_deadwire_idle", 0);
-  clientfield::set_to_player("" + # "hash_10f9eacd143d57ae", 0);
+  clientfield::set_to_player("" + #"hash_10f9eacd143d57ae", 0);
 }
 
 function function_4b36d8a(aat_name = "none") {

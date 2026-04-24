@@ -48,7 +48,7 @@ function_a874e5d0(var_5ea5c94d, ended_early) {
   if(var_5ea5c94d || ended_early) {
     level notify(#"hash_18c97556779d2ace");
     level.var_f1907c72.vessel hide();
-    level.var_f1907c72.vessel clientfield::set("" + # "hash_1b72c208f2964e24", 0);
+    level.var_f1907c72.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   }
 
   level notify(#"hash_1f0238cda598f6e9");
@@ -152,7 +152,7 @@ function_561d9cff() {
   }
 
   self.vessel playSound("zmb_vessel_drop");
-  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", level.var_ed1e7d4d);
+  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
   self.vessel thread function_af39e9d5();
   self waittill(#"music_box");
   level flag::set(#"music_box_first_use");
@@ -202,7 +202,7 @@ function_561d9cff() {
 
   self.vessel hide();
   self.vessel playSound("zmb_vessel_pickup");
-  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", 0);
+  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   level flag::set(#"hash_43c116bdb3a96e16");
 }
 

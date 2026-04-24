@@ -74,9 +74,9 @@ function init() {
   callback::on_item_pickup(&function_3cd87dd2);
   callback::on_actor_killed(&function_9de5caaf);
   level thread function_9f6ba259();
-  clientfield::register("world", "" + # "hash_1c39840b9d4a1796", 24000, 1, "int");
-  clientfield::register("world", "" + # "hash_9472de3e8d1f6e1", 24000, 1, "int");
-  clientfield::register("world", "" + # "hash_6f9aa7ac9543a791", 24000, 1, "int");
+  clientfield::register("world", "" + #"hash_1c39840b9d4a1796", 24000, 1, "int");
+  clientfield::register("world", "" + #"hash_9472de3e8d1f6e1", 24000, 1, "int");
+  clientfield::register("world", "" + #"hash_6f9aa7ac9543a791", 24000, 1, "int");
 
   level thread function_cd7a3de4();
 }
@@ -112,11 +112,11 @@ function function_7ccb07c6() {
   level.var_7b6eae07 playSound(#"hash_43dad678bc35ddb7");
   wait 1;
   level thread scene::play("p9_fxanim_zm_platinum_fuse_box_open_bundle", "play");
-  clientfield::set("" + # "hash_6f9aa7ac9543a791", 1);
+  clientfield::set("" + #"hash_6f9aa7ac9543a791", 1);
   level flag::set("fuse_box_exploded");
-  clientfield::set("" + # "hash_1c39840b9d4a1796", 1);
+  clientfield::set("" + #"hash_1c39840b9d4a1796", 1);
   wait 1;
-  clientfield::set("" + # "hash_9472de3e8d1f6e1", 1);
+  clientfield::set("" + #"hash_9472de3e8d1f6e1", 1);
   wait 0.1;
   level.var_7b6eae07 rotateroll(90, 0.25);
   level.var_7b6eae07 playSound(#"hash_33440052dad5d98b");
@@ -366,7 +366,7 @@ function function_f021f2da() {
 function function_9f6ba259() {
   level flag::wait_till_all([#"hash_63567177313a4f07", #"hash_1937be129b1e59eb"]);
   level flag::set(#"hash_7d72f2dda7a4104e");
-  clientfield::set("" + # "hash_1c39840b9d4a1796", 0);
+  clientfield::set("" + #"hash_1c39840b9d4a1796", 0);
 }
 
 function function_a2e9d398(var_6152b664) {

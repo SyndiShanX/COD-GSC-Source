@@ -87,7 +87,7 @@ init_alcatraz_zipline() {
   e_gondola gondola_doors_move("roof", 1);
   level flag::set("gondola_initialized");
   gondola_lights_green();
-  e_gondola clientfield::set("" + # "gondola_light", 1);
+  e_gondola clientfield::set("" + #"gondola_light", 1);
   level.var_b9656485 = 0;
   level.var_cf10ac23 = 0;
   level.var_b5f05d46 = 0;
@@ -567,7 +567,7 @@ move_gondola(b_suppress_doors_close = 0) {
 
   foreach(player in a_players) {
     if(player function_9a8ab327()) {
-      player clientfield::set_to_player("" + # "rumble_gondola", 1);
+      player clientfield::set_to_player("" + #"rumble_gondola", 1);
       player.is_on_gondola = 1;
     }
   }
@@ -631,7 +631,7 @@ move_gondola(b_suppress_doors_close = 0) {
 
   foreach(player in a_players) {
     if(isDefined(player.is_on_gondola) && player.is_on_gondola) {
-      player clientfield::set_to_player("" + # "rumble_gondola", 0);
+      player clientfield::set_to_player("" + #"rumble_gondola", 0);
       player.is_on_gondola = undefined;
     }
   }

@@ -9,13 +9,13 @@
 #namespace namespace_8a08914c;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "hash_76ffee0aa9eae3ce", 28000, 1, "int", &function_d4759f99, 0, 0);
-  clientfield::register("world", "" + # "hash_45b04d88564a1cd", 28000, 1, "int", &function_e6332b8c, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4fcb640ca703e121", 28000, 1, "int", &function_b6d451e2, 0, 0);
-  clientfield::register("world", "" + # "hash_22d24ba0bcf94c3f", 28000, getminbitcountfornum(2), "int", &function_c8ff2bab, 0, 0);
-  clientfield::register("world", "" + # "hash_2d4fdf69e826bcc4", 28000, getminbitcountfornum(2), "int", &function_761411a9, 0, 0);
-  clientfield::register("actor", "" + # "zombie_soul", 28000, 1, "int", &function_bb5d646a, 0, 0);
-  clientfield::register("world", "" + # "ww_crystalaxe_glow", 28000, 1, "int", &ww_crystalaxe_glow, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_76ffee0aa9eae3ce", 28000, 1, "int", &function_d4759f99, 0, 0);
+  clientfield::register("world", "" + #"hash_45b04d88564a1cd", 28000, 1, "int", &function_e6332b8c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4fcb640ca703e121", 28000, 1, "int", &function_b6d451e2, 0, 0);
+  clientfield::register("world", "" + #"hash_22d24ba0bcf94c3f", 28000, getminbitcountfornum(2), "int", &function_c8ff2bab, 0, 0);
+  clientfield::register("world", "" + #"hash_2d4fdf69e826bcc4", 28000, getminbitcountfornum(2), "int", &function_761411a9, 0, 0);
+  clientfield::register("actor", "" + #"zombie_soul", 28000, 1, "int", &function_bb5d646a, 0, 0);
+  clientfield::register("world", "" + #"ww_crystalaxe_glow", 28000, 1, "int", &ww_crystalaxe_glow, 0, 0);
 }
 
 function function_d4759f99(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

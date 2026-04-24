@@ -29,8 +29,8 @@
 
 preload() {
   namespace_bd74bbd2::register(#"sc_mk2x", 20000, "sc_mk2x", &function_a66f0de2, &function_17f3e9e2);
-  clientfield::register("scriptmover", "" + # "hash_56a1bc72bf8de8f1", 20000, 1, "int");
-  clientfield::register("actor", "" + # "hash_38c69da8fb2b74e4", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_56a1bc72bf8de8f1", 20000, 1, "int");
+  clientfield::register("actor", "" + #"hash_38c69da8fb2b74e4", 20000, 1, "int");
 }
 
 init() {
@@ -186,7 +186,7 @@ function_ecdebc72() {
       self.var_13a2274b = 1;
       self.actor_damage_func = &function_cdddec81;
       self zombie_utility::set_zombie_run_cycle("walk");
-      self clientfield::set("" + # "hash_38c69da8fb2b74e4", 1);
+      self clientfield::set("" + #"hash_38c69da8fb2b74e4", 1);
     }
   }
 }
@@ -221,7 +221,7 @@ function_cdddec81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
       }
 
       self zombie_utility::zombie_eye_glow_stop();
-      self clientfield::set("" + # "hash_757f891a37d3db00", 1);
+      self clientfield::set("" + #"hash_757f891a37d3db00", 1);
       return (self.health + 666);
     }
   }
@@ -231,17 +231,17 @@ function_cdddec81(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
 set_frozen(b_frozen = 1) {
   if(b_frozen) {
-    self clientfield::set("" + # "hash_5ad28d5f104a6e3b", 1);
-    self clientfield::set("" + # "hash_1aa3522b88c2b76f", 1);
-    self clientfield::set("" + # "hash_259cdeffe60fe48f", 1);
+    self clientfield::set("" + #"hash_5ad28d5f104a6e3b", 1);
+    self clientfield::set("" + #"hash_1aa3522b88c2b76f", 1);
+    self clientfield::set("" + #"hash_259cdeffe60fe48f", 1);
     self namespace_9ff9f642::freeze();
     self.var_7ba65499 = 1;
     return;
   }
 
-  self clientfield::set("" + # "hash_5ad28d5f104a6e3b", 0);
-  self clientfield::set("" + # "hash_1aa3522b88c2b76f", 0);
-  self clientfield::set("" + # "hash_259cdeffe60fe48f", 0);
+  self clientfield::set("" + #"hash_5ad28d5f104a6e3b", 0);
+  self clientfield::set("" + #"hash_1aa3522b88c2b76f", 0);
+  self clientfield::set("" + #"hash_259cdeffe60fe48f", 0);
   self namespace_9ff9f642::unfreeze();
   self.var_7ba65499 = undefined;
 }
@@ -352,7 +352,7 @@ function_a66f0de2() {
   s_unitrigger = level.var_ae5fb719.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_b9a31cb, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_ae5fb719.var_fead3ae9 setModel("p8_zm_whi_fuse_pickup_fluid_purple");
-  level.var_ae5fb719.var_fead3ae9 clientfield::set("" + # "hash_56a1bc72bf8de8f1", 1);
+  level.var_ae5fb719.var_fead3ae9 clientfield::set("" + #"hash_56a1bc72bf8de8f1", 1);
 }
 
 function_b9a31cb(e_item, e_player) {

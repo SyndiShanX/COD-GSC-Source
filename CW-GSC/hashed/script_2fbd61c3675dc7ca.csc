@@ -13,26 +13,26 @@
 #namespace namespace_4e8d47b1;
 
 function init() {
-  clientfield::register("toplayer", "" + # "hash_529b556128a8587d", 24000, 1, "int", &function_ff7f32ae, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4a3af1d46621f069", 24000, 1, "int", &function_910d2164, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_45d9cedaf4fb4aa2", 24000, 1, "int", &function_7e8bc554, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4a7733d2f4b25e81", 24000, 1, "int", &function_b42a918, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_41ba39a474a3503f", 24000, getminbitcountfornum(2), "int", &function_adfd1e5b, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2951f2625695bd6b", 24000, getminbitcountfornum(2), "int", &function_7c865e3a, 0, 0);
-  clientfield::register("world", "" + # "hash_74c14ea3fcc781ea", 24000, getminbitcountfornum(2), "int", &function_fa856271, 0, 0);
-  clientfield::register("actor", "" + # "hash_636aa4e3dd50512a", 24000, 1, "counter", &function_d51885ac, 0, 0);
-  clientfield::register("actor", "" + # "hash_498f233d25448db3", 24000, 1, "int", &function_f0e25204, 0, 0);
-  clientfield::register("actor", "" + # "hash_5f6e0119d9eee00c", 24000, getminbitcountfornum(2), "int", &function_1e07ed6f, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_78efd0fabb77e1ea", 24000, 1, "int", &function_ab446ca9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7006a5e1e75527f3", 24000, 1, "int", &function_92c90a4f, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_45456ed33ab0037a", 24000, getminbitcountfornum(2), "int", &function_55488fca, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_bae11639a0dd182", 24000, 1, "int", &function_8f860b91, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_57e0dbfd7a91b69d", 24000, 1, "int", &function_90383e67, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7cd1cb3f455a77cf", 24000, 1, "int", &function_63f6e3bf, 0, 0);
-  clientfield::register("world", "" + # "hash_4b15b3ade2772206", 24000, getminbitcountfornum(2), "int", &function_ab0de377, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_7857b61586fd957b", 24000, 1, "int", &function_5477ed5b, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_765ec7ef8a874f2a", 24000, 1, "int", &function_7c29d2b9, 0, 0);
-  clientfield::register("world", "" + # "hash_3c1773045b663eac", 24000, 1, "counter", &function_ec198408, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_529b556128a8587d", 24000, 1, "int", &function_ff7f32ae, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4a3af1d46621f069", 24000, 1, "int", &function_910d2164, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_45d9cedaf4fb4aa2", 24000, 1, "int", &function_7e8bc554, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4a7733d2f4b25e81", 24000, 1, "int", &function_b42a918, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_41ba39a474a3503f", 24000, getminbitcountfornum(2), "int", &function_adfd1e5b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2951f2625695bd6b", 24000, getminbitcountfornum(2), "int", &function_7c865e3a, 0, 0);
+  clientfield::register("world", "" + #"hash_74c14ea3fcc781ea", 24000, getminbitcountfornum(2), "int", &function_fa856271, 0, 0);
+  clientfield::register("actor", "" + #"hash_636aa4e3dd50512a", 24000, 1, "counter", &function_d51885ac, 0, 0);
+  clientfield::register("actor", "" + #"hash_498f233d25448db3", 24000, 1, "int", &function_f0e25204, 0, 0);
+  clientfield::register("actor", "" + #"hash_5f6e0119d9eee00c", 24000, getminbitcountfornum(2), "int", &function_1e07ed6f, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_78efd0fabb77e1ea", 24000, 1, "int", &function_ab446ca9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7006a5e1e75527f3", 24000, 1, "int", &function_92c90a4f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_45456ed33ab0037a", 24000, getminbitcountfornum(2), "int", &function_55488fca, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_bae11639a0dd182", 24000, 1, "int", &function_8f860b91, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_57e0dbfd7a91b69d", 24000, 1, "int", &function_90383e67, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7cd1cb3f455a77cf", 24000, 1, "int", &function_63f6e3bf, 0, 0);
+  clientfield::register("world", "" + #"hash_4b15b3ade2772206", 24000, getminbitcountfornum(2), "int", &function_ab0de377, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7857b61586fd957b", 24000, 1, "int", &function_5477ed5b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_765ec7ef8a874f2a", 24000, 1, "int", &function_7c29d2b9, 0, 0);
+  clientfield::register("world", "" + #"hash_3c1773045b663eac", 24000, 1, "counter", &function_ec198408, 0, 0);
   level.var_ecc60e04 = zm_corrupted_health_bar::register();
 }
 

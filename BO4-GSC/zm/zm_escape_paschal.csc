@@ -15,31 +15,31 @@
 
 init() {
   var_440ad52e = getminbitcountfornum(6);
-  clientfield::register("scriptmover", "" + # "hash_1f572bbcdde55d9d", 1, getminbitcountfornum(5), "int", &function_49b054dd, 0, 0);
-  clientfield::register("scriptmover", "" + # "dm_energy", 1, var_440ad52e, "int", &function_d36b21ad, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4bea78fdf78a2613", 1, 1, "int", &function_c8043066, 0, 0);
-  clientfield::register("scriptmover", "" + # "orb_explosion", 1, 1, "int", &orb_explosion, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6e2f9a57d1bc4b6a", 1, 1, "int", &function_e5437696, 0, 0);
-  clientfield::register("scriptmover", "" + # "ritual_gobo", 1, 1, "int", &function_d598fd7e, 0, 0);
-  clientfield::register("scriptmover", "" + # "seagull_fx", 1, 1, "int", &seagull_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7c708a514455bf88", 1, 1, "int", &function_430edc4e, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_592c96b2803d9fd5", 1, 1, "int", &function_a4c0dc8a, 0, 0);
-  clientfield::register("scriptmover", "" + # "summoning_key_glow", 1, 1, "int", &summoning_key_glow, 0, 0);
-  clientfield::register("actor", "" + # "hash_2b6e463a7a482630", 1, 1, "counter", &function_de16ce8a, 0, 0);
-  clientfield::register("actor", "" + # "hash_29d283d7f747d358", 1, 1, "counter", &function_9c59bce1, 0, 0);
-  clientfield::register("actor", "" + # "hash_df589cc30f4c7dd", 1, 1, "int", &function_e482b6b8, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_4f58771e117ee3ee", 1, 1, "int", &function_a596ea8d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2928b6d60aaacda6", 1, getminbitcountfornum(7), "int", &function_6357e884, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_670a34b297f8faca", 1, 1, "int", &function_d326587e, 0, 0);
-  clientfield::register("toplayer", "" + # "duffel_prison", 1, 1, "int", &duffel_prison, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1ee540924e569350", 1, 1, "int", &function_e83bf3a, 0, 0);
-  clientfield::register("actor", "" + # "hash_27db1707c088563c", 1, 1, "int", &function_e33e10b9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_376c030aee1d6ccb", 1, 2, "int", &function_3537ad19, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_201ef69f0a0a5dce", 1, 1, "int", &group_bot_mp, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_b8601726e1e4a6a", 1, 1, "int", &function_5688631d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_624198b41791933f", 1, 1, "int", &function_8fe4f2a7, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_5cab8aa95fc9ea84", 1, 1, "counter", &function_d663c13e, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_506164c22c4c7ca8", 1, 1, "counter", &function_42693309, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1f572bbcdde55d9d", 1, getminbitcountfornum(5), "int", &function_49b054dd, 0, 0);
+  clientfield::register("scriptmover", "" + #"dm_energy", 1, var_440ad52e, "int", &function_d36b21ad, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4bea78fdf78a2613", 1, 1, "int", &function_c8043066, 0, 0);
+  clientfield::register("scriptmover", "" + #"orb_explosion", 1, 1, "int", &orb_explosion, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6e2f9a57d1bc4b6a", 1, 1, "int", &function_e5437696, 0, 0);
+  clientfield::register("scriptmover", "" + #"ritual_gobo", 1, 1, "int", &function_d598fd7e, 0, 0);
+  clientfield::register("scriptmover", "" + #"seagull_fx", 1, 1, "int", &seagull_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7c708a514455bf88", 1, 1, "int", &function_430edc4e, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_592c96b2803d9fd5", 1, 1, "int", &function_a4c0dc8a, 0, 0);
+  clientfield::register("scriptmover", "" + #"summoning_key_glow", 1, 1, "int", &summoning_key_glow, 0, 0);
+  clientfield::register("actor", "" + #"hash_2b6e463a7a482630", 1, 1, "counter", &function_de16ce8a, 0, 0);
+  clientfield::register("actor", "" + #"hash_29d283d7f747d358", 1, 1, "counter", &function_9c59bce1, 0, 0);
+  clientfield::register("actor", "" + #"hash_df589cc30f4c7dd", 1, 1, "int", &function_e482b6b8, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_4f58771e117ee3ee", 1, 1, "int", &function_a596ea8d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2928b6d60aaacda6", 1, getminbitcountfornum(7), "int", &function_6357e884, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_670a34b297f8faca", 1, 1, "int", &function_d326587e, 0, 0);
+  clientfield::register("toplayer", "" + #"duffel_prison", 1, 1, "int", &duffel_prison, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1ee540924e569350", 1, 1, "int", &function_e83bf3a, 0, 0);
+  clientfield::register("actor", "" + #"hash_27db1707c088563c", 1, 1, "int", &function_e33e10b9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_376c030aee1d6ccb", 1, 2, "int", &function_3537ad19, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_201ef69f0a0a5dce", 1, 1, "int", &group_bot_mp, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_b8601726e1e4a6a", 1, 1, "int", &function_5688631d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_624198b41791933f", 1, 1, "int", &function_8fe4f2a7, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_5cab8aa95fc9ea84", 1, 1, "counter", &function_d663c13e, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_506164c22c4c7ca8", 1, 1, "counter", &function_42693309, 0, 0);
   level._effect[#"brutus_energy"] = #"hash_aced2664257a0ca";
   level._effect[#"energy_blue"] = #"hash_5a51f6c91ceb37a5";
   level._effect[#"energy_green"] = #"hash_24e8d0b53e783e64";
@@ -65,7 +65,7 @@ init() {
   level._effect[#"hash_6b3f19f4c90a1b75"] = #"hash_6f69cced7e86cb70";
   level._effect[#"hash_508055920f327121"] = #"hash_8c3d3c756b91f54";
   level._effect[#"hash_201ef69f0a0a5dce"] = #"hash_1f06be75e7efc6a2";
-  level._effect["" + # "hash_3fafd72f00908d53"] = #"hash_992fe8f8e8dfb1";
+  level._effect["" + #"hash_3fafd72f00908d53"] = #"hash_992fe8f8e8dfb1";
   scene::add_scene_func(#"p8_fxanim_zm_esc_blast_afterlife_seagull_ghost_bundle", &function_bbf4268e, "shot_1");
 }
 
@@ -317,7 +317,7 @@ summoning_key_glow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 }
 
 function_de16ce8a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  util::playFXOnTag(localclientnum, level._effect["" + # "hash_3fafd72f00908d53"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect["" + #"hash_3fafd72f00908d53"], self, "tag_origin");
 }
 
 function_9c59bce1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

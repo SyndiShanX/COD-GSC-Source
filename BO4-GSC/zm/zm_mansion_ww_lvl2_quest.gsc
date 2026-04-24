@@ -98,7 +98,7 @@ function_6b6712e3() {
   level waittill(#"hash_2588983e2be22ca5");
   s_loc = struct::get("s_wwlvl2_quest_pickup_1", "targetname");
   var_ef5b83bb = mansion_util::function_89e9bca5(#"hash_5dba840c6ed3ea3b", s_loc.origin, s_loc.angles);
-  var_ef5b83bb clientfield::set("" + # "ww_pickup_part", 1);
+  var_ef5b83bb clientfield::set("" + #"ww_pickup_part", 1);
 }
 
 function_4a81e337() {

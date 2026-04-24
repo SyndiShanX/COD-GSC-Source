@@ -23,7 +23,7 @@ preload() {
   zm_orange_mq_fuse::preload();
   namespace_4b68b2b3::preload();
   zm_orange_mq_sendoff::preload();
-  clientfield::register("toplayer", "" + # "hash_668f474410d5c1d0", 24000, 1, "int", &clear_hud, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_668f474410d5c1d0", 24000, 1, "int", &clear_hud, 0, 0);
 }
 
 clear_hud(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

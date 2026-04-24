@@ -65,7 +65,7 @@ function event_handler[gametype_init] main(eventstruct) {
   println("<dev string:x38>");
   level.dog_round_count = 0;
   changeadvertisedstatus(0);
-  clientfield::register("scriptmover", "" + # "hash_56a6be021662c82e", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_56a6be021662c82e", 1, 2, "int");
   clientfield::register_clientuimodel("hudItems.onslaught.wave_number", 1, 7, "int");
   clientfield::register_clientuimodel("hudItems.onslaught.bosskill_count", 1, 7, "int");
   clientfield::register("scriptmover", "orb_spawn", 1, 1, "int");

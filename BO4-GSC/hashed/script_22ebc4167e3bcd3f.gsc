@@ -74,7 +74,7 @@ step_1(var_a276c861) {
   level flag::wait_till("start_zombie_round_logic");
   level thread function_3fcb1e5e();
   level thread function_1c5d2f2();
-  var_b09af3eb = "" + # "spoon_quest_step_1" + "_";
+  var_b09af3eb = "" + #"spoon_quest_step_1" + "_";
   level waittill(var_b09af3eb + "completed", var_b09af3eb + "skipped_over", var_b09af3eb + "ended_early");
 }
 

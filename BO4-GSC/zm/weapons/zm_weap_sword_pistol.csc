@@ -14,18 +14,18 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "sword_pistol_slice_right", 1, 1, "counter", &function_8e1552b1, 1, 0);
-  clientfield::register("vehicle", "" + # "sword_pistol_slice_right", 1, 1, "counter", &function_8e1552b1, 1, 0);
-  clientfield::register("actor", "" + # "sword_pistol_slice_left", 1, 1, "counter", &function_6831ee4b, 1, 0);
-  clientfield::register("vehicle", "" + # "sword_pistol_slice_left", 1, 1, "counter", &function_6831ee4b, 1, 0);
-  clientfield::register("actor", "" + # "dragon_roar_impact", 1, 1, "counter", &dragon_roar_impact, 1, 0);
-  clientfield::register("vehicle", "" + # "dragon_roar_impact", 1, 1, "counter", &dragon_roar_impact, 1, 0);
-  clientfield::register("scriptmover", "" + # "dragon_roar_explosion", 1, 1, "counter", &dragon_roar_explosion, 1, 0);
-  clientfield::register("scriptmover", "" + # "viper_bite_projectile", 1, 1, "int", &viper_bite_projectile, 1, 0);
-  clientfield::register("actor", "" + # "viper_bite_projectile_impact", 1, 1, "counter", &viper_bite_projectile_impact, 1, 0);
-  clientfield::register("vehicle", "" + # "viper_bite_projectile_impact", 1, 1, "counter", &viper_bite_projectile_impact, 1, 0);
-  clientfield::register("actor", "" + # "viper_bite_bitten_fx", 1, 1, "int", &viper_bite_bitten_fx, 1, 0);
-  clientfield::register("toplayer", "" + # "swordpistol_rumble", 1, 3, "counter", &swordpistol_rumble, 0, 0);
+  clientfield::register("actor", "" + #"sword_pistol_slice_right", 1, 1, "counter", &function_8e1552b1, 1, 0);
+  clientfield::register("vehicle", "" + #"sword_pistol_slice_right", 1, 1, "counter", &function_8e1552b1, 1, 0);
+  clientfield::register("actor", "" + #"sword_pistol_slice_left", 1, 1, "counter", &function_6831ee4b, 1, 0);
+  clientfield::register("vehicle", "" + #"sword_pistol_slice_left", 1, 1, "counter", &function_6831ee4b, 1, 0);
+  clientfield::register("actor", "" + #"dragon_roar_impact", 1, 1, "counter", &dragon_roar_impact, 1, 0);
+  clientfield::register("vehicle", "" + #"dragon_roar_impact", 1, 1, "counter", &dragon_roar_impact, 1, 0);
+  clientfield::register("scriptmover", "" + #"dragon_roar_explosion", 1, 1, "counter", &dragon_roar_explosion, 1, 0);
+  clientfield::register("scriptmover", "" + #"viper_bite_projectile", 1, 1, "int", &viper_bite_projectile, 1, 0);
+  clientfield::register("actor", "" + #"viper_bite_projectile_impact", 1, 1, "counter", &viper_bite_projectile_impact, 1, 0);
+  clientfield::register("vehicle", "" + #"viper_bite_projectile_impact", 1, 1, "counter", &viper_bite_projectile_impact, 1, 0);
+  clientfield::register("actor", "" + #"viper_bite_bitten_fx", 1, 1, "int", &viper_bite_bitten_fx, 1, 0);
+  clientfield::register("toplayer", "" + #"swordpistol_rumble", 1, 3, "counter", &swordpistol_rumble, 0, 0);
   level._effect[#"hash_25626300bbf56aa7"] = #"hash_6a8080a7153541f6";
   level._effect[#"hash_67085795f324f6b5"] = #"hash_6a8080a7153541f6";
   level._effect[#"hash_72dcd3be23419b87"] = #"hash_597abd90e7ff80e0";

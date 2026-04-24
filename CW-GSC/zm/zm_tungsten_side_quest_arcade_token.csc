@@ -22,11 +22,11 @@
 #namespace zm_tungsten_side_quest_arcade_token;
 
 function init() {
-  clientfield::register("world", "" + # "hash_7017982268bd7369", 1, 1, "int", &function_91074d15, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_721d42a28d7461ea", 24000, 1, "int", &function_eebdf718, 0, 1);
-  clientfield::register("scriptmover", "" + # "hash_4b1b4c1785fdd11d", 24000, 1, "counter", &function_d5faead3, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_63da9d5355659678", 24000, 1, "int", &function_cc885b38, 0, 0);
-  clientfield::register("playercorpse", "" + # "hash_4a22451481253e54", 28000, 1, "int", &function_e7e29c4c, 0, 0);
+  clientfield::register("world", "" + #"hash_7017982268bd7369", 1, 1, "int", &function_91074d15, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_721d42a28d7461ea", 24000, 1, "int", &function_eebdf718, 0, 1);
+  clientfield::register("scriptmover", "" + #"hash_4b1b4c1785fdd11d", 24000, 1, "counter", &function_d5faead3, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_63da9d5355659678", 24000, 1, "int", &function_cc885b38, 0, 0);
+  clientfield::register("playercorpse", "" + #"hash_4a22451481253e54", 28000, 1, "int", &function_e7e29c4c, 0, 0);
 }
 
 function function_91074d15(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

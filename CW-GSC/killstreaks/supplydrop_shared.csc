@@ -19,7 +19,7 @@ function init_shared() {
     level._effect[#"heli_guard_light"][#"enemy"] = params.var_1d8c24a8;
     clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int", &supplydrop_care_package_state, 0, 0);
     clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int", &supplydrop_ai_tank_state, 0, 0);
-    clientfield::register("vehicle", "" + # "hash_e4eb5c0853abab8", 6000, 1, "int", &function_feeeb71b, 0, 0);
+    clientfield::register("vehicle", "" + #"hash_e4eb5c0853abab8", 6000, 1, "int", &function_feeeb71b, 0, 0);
     clientfield::register("scriptmover", "crate_landed", 1, 1, "int", &function_4559c532, 0, 0);
 
     if(sessionmodeismultiplayergame() && is_false(getgametypesetting(#"useitemspawns"))) {

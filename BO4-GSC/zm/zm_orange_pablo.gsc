@@ -297,7 +297,7 @@ function_5ff0d681(index) {
   level.var_f45a0bfd.var_e205fbb showpart("tag_item_" + index);
 
   if(index === 5) {
-    level.var_f45a0bfd.var_e205fbb clientfield::set("" + # "hash_1b72c208f2964e24", level.var_ed1e7d4d);
+    level.var_f45a0bfd.var_e205fbb clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
   }
 }
 
@@ -305,7 +305,7 @@ function_d9161909(index) {
   level.var_f45a0bfd.var_e205fbb hidepart("tag_item_" + index);
 
   if(index === 5) {
-    level.var_f45a0bfd.var_e205fbb clientfield::set("" + # "hash_1b72c208f2964e24", 0);
+    level.var_f45a0bfd.var_e205fbb clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   }
 }
 

@@ -41,8 +41,8 @@ function private preinit() {
     return;
   }
 
-  clientfield::register("toplayer", "" + # "ritual_activation", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "ritual_remove", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"ritual_activation", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"ritual_remove", 1, 1, "counter");
   callback::on_spawned(&function_483192e9);
   callback::on_disconnect(&function_1edea331);
 }
@@ -192,7 +192,7 @@ function function_a00c368c(params) {
 
   player.var_586fcf0e = undefined;
   player playSound(#"hash_2938f2f8d24851e5");
-  player clientfield::increment_to_player("" + # "ritual_remove");
+  player clientfield::increment_to_player("" + #"ritual_remove");
   self setinvisibletoall();
   wait 5;
 
@@ -310,7 +310,7 @@ function function_b6b75a5c(params) {
 
     player stats::set_stat(#"hash_2dd2a2b3580dd409", #"rarity_upgrade", var_dbf6fe1f);
     iprintlnbold("Pact is made. Player starting weapon rarity increased to level " + var_dbf6fe1f);
-    player clientfield::increment_to_player("" + # "ritual_activation");
+    player clientfield::increment_to_player("" + #"ritual_activation");
     wait 2.5 + 1.3 * player.var_213dd9cc;
     var_6a25fa7 = player getlightingstate();
     player setlightingstate(2);

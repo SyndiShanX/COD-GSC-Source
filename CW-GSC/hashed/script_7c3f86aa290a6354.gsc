@@ -20,10 +20,10 @@ function private autoexec __init__system__() {
 }
 
 function __init__() {
-  clientfield::register("scriptmover", "" + # "hash_322ed89801938bb9", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_6d9aa5215e695ca2", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_1f232116f775fa91", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_4719ef7fda616f3a", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_322ed89801938bb9", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_6d9aa5215e695ca2", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_1f232116f775fa91", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_4719ef7fda616f3a", 1, 1, "counter");
   clientfield::register_clientuimodel("hudItems.reinforcing", 1, 1, "int", 0);
   level thread init_doors();
   level thread function_e5d01ba1();
@@ -268,7 +268,7 @@ function function_ae47792b(eventstruct) {
   }
 
   if(self.damage_level > 8 || !self.reinforced && self.damage_level > 4) {
-    self.parent_struct.fx_org clientfield::increment("" + # "hash_6d9aa5215e695ca2");
+    self.parent_struct.fx_org clientfield::increment("" + #"hash_6d9aa5215e695ca2");
 
     if(level flag::get("obj_defend_start") && !level flag::get("obj_defend_complete") && level.var_dd9a04c9 < 3) {
       level thread globallogic_audio::leader_dialog("objectiveDefendBarrierBroken");
@@ -290,7 +290,7 @@ function function_ae47792b(eventstruct) {
 
   if(self.reinforced) {
     if(self.model != parent_struct.var_a7417bea[self.damage_level]) {
-      self.parent_struct.fx_org clientfield::increment("" + # "hash_322ed89801938bb9");
+      self.parent_struct.fx_org clientfield::increment("" + #"hash_322ed89801938bb9");
     }
 
     self playSound(#"hash_7c72cea06ae4906c");
@@ -452,7 +452,7 @@ function private function_994e81b7(eventstruct) {
   }
 
   if(self.damage_level > 5) {
-    self.parent_struct.fx_org clientfield::increment("" + # "hash_4719ef7fda616f3a");
+    self.parent_struct.fx_org clientfield::increment("" + #"hash_4719ef7fda616f3a");
     self playSound(#"hash_bf0f566d836c8a2");
     self.parent_struct.trigger sethintstring(#"hash_3766e0d30f6782ad");
     waittillframeend();
@@ -462,7 +462,7 @@ function private function_994e81b7(eventstruct) {
 
   if(self.damage_level > 0) {
     if(self.model != self.parent_struct.var_811c2d3a[self.damage_level]) {
-      self.parent_struct.fx_org clientfield::increment("" + # "hash_1f232116f775fa91");
+      self.parent_struct.fx_org clientfield::increment("" + #"hash_1f232116f775fa91");
     }
 
     self playSound(#"hash_6d3a81cd3c4049f4");

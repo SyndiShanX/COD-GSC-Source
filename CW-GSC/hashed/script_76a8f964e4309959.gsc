@@ -27,7 +27,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_3220b44880f1807c", 24000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_3220b44880f1807c", 24000, 1, "counter");
   zm_round_spawning::register_archetype(#"tormentor", &function_44d45595, &round_spawn, &function_dfa96d1f, 25);
   spawner::add_archetype_spawn_function(#"tormentor", &function_a5cd9e54);
   zm_cleanup::function_cdf5a512(#"tormentor", &function_d8461453);
@@ -182,7 +182,7 @@ function function_44d45595(var_dbce0c44) {
 function function_55413772(s_spawn_loc) {
   level endon(#"end_game");
   var_c0ef5a0c = util::spawn_model("tag_origin", s_spawn_loc.origin, s_spawn_loc.angles);
-  var_c0ef5a0c clientfield::increment("" + # "hash_3220b44880f1807c");
+  var_c0ef5a0c clientfield::increment("" + #"hash_3220b44880f1807c");
   wait 5;
 
   if(isDefined(var_c0ef5a0c)) {

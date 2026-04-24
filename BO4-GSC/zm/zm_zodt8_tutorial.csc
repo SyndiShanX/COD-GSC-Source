@@ -19,8 +19,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("zbarrier", "tutorial_keyline_fx", 1, 2, "int", &function_a9c8f9d2, 0, 0);
   clientfield::register("item", "tutorial_keyline_fx", 1, 2, "int", &tutorial_fx, 0, 0);
   clientfield::register("scriptmover", "tutorial_keyline_fx", 1, 2, "int", &tutorial_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1b509b0ba634a25a", 1, 1, "int", &function_7c8084eb, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1390e08de02cbdc7", 1, 1, "int", &function_8057ebca, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1b509b0ba634a25a", 1, 1, "int", &function_7c8084eb, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1390e08de02cbdc7", 1, 1, "int", &function_8057ebca, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showLocation", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showPerks", 1, 1, "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "hudItems.ztut.showEquipment", 1, 1, "int", undefined, 0, 0);

@@ -11,11 +11,11 @@
 #namespace zm_platinum_pap_quest;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "pap_machine_fx", 1, getminbitcountfornum(3), "int", &pap_machine_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_44cce9f2e2fd1c96", 1, getminbitcountfornum(2), "int", &function_cc365474, 0, 0);
-  clientfield::register("world", "" + # "pap_portal_fx", 1, 1, "int", &pap_portal_fx, 0, 0);
-  clientfield::register("world", "" + # "pap_quest_beam_start", 1, getminbitcountfornum(10), "int", &pap_quest_beam_start, 0, 0);
-  clientfield::register("world", "" + # "hash_3fb8ca8c017ba7ac", 1, getminbitcountfornum(10), "int", &function_c6f8ff7b, 0, 0);
+  clientfield::register("scriptmover", "" + #"pap_machine_fx", 1, getminbitcountfornum(3), "int", &pap_machine_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_44cce9f2e2fd1c96", 1, getminbitcountfornum(2), "int", &function_cc365474, 0, 0);
+  clientfield::register("world", "" + #"pap_portal_fx", 1, 1, "int", &pap_portal_fx, 0, 0);
+  clientfield::register("world", "" + #"pap_quest_beam_start", 1, getminbitcountfornum(10), "int", &pap_quest_beam_start, 0, 0);
+  clientfield::register("world", "" + #"hash_3fb8ca8c017ba7ac", 1, getminbitcountfornum(10), "int", &function_c6f8ff7b, 0, 0);
 }
 
 function pap_machine_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

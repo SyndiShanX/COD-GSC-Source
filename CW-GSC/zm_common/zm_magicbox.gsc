@@ -60,8 +60,8 @@ function private preinit() {
   clientfield::register("zbarrier", "zbarrier_leaving_sounds", 1, 1, "counter");
   clientfield::register("zbarrier", "force_stream_magicbox", 1, 1, "int");
   clientfield::register("zbarrier", "force_stream_magicbox_leave", 1, 1, "int");
-  clientfield::register("zbarrier", "" + # "hash_2fcdae6b889933c7", 1, 1, "int");
-  clientfield::register("zbarrier", "" + # "hash_66b8b96e588ce1ac", 1, 3, "int");
+  clientfield::register("zbarrier", "" + #"hash_2fcdae6b889933c7", 1, 1, "int");
+  clientfield::register("zbarrier", "" + #"hash_66b8b96e588ce1ac", 1, 3, "int");
   clientfield::register("toplayer", "stream_magicbox_guns", 1, 1, "int");
   level thread magicbox_host_migration();
   level.var_11ab9932 = [];
@@ -770,9 +770,9 @@ function default_pandora_show_func(anchor, anchortarget, pieces) {
 
 function function_ecf6901d() {
   self endoncallback(&function_62197845, #"death");
-  self clientfield::set("" + # "hash_2fcdae6b889933c7", 1);
+  self clientfield::set("" + #"hash_2fcdae6b889933c7", 1);
   self waittill(#"zbarrier_state_change");
-  self clientfield::set("" + # "hash_2fcdae6b889933c7", 0);
+  self clientfield::set("" + #"hash_2fcdae6b889933c7", 0);
 }
 
 function function_c8745555(params) {
@@ -2416,34 +2416,34 @@ function treasure_chest_weapon_spawn(chest, player, respin) {
 
 function function_a6d171f4(str_rarity) {
   if(!isDefined(str_rarity) || str_rarity == "") {
-    self clientfield::set("" + # "hash_66b8b96e588ce1ac", 0);
+    self clientfield::set("" + #"hash_66b8b96e588ce1ac", 0);
     return;
   }
 
   switch (str_rarity) {
     case # "none":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 1);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 1);
       break;
     case # "resource":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 2);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 2);
       break;
     case # "uncommon":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 3);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 3);
       break;
     case # "rare":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 4);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 4);
       break;
     case # "epic":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 5);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 5);
       break;
     case # "legendary":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 6);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 6);
       break;
     case # "ultra":
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 7);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 7);
       break;
     default:
-      self clientfield::set("" + # "hash_66b8b96e588ce1ac", 0);
+      self clientfield::set("" + #"hash_66b8b96e588ce1ac", 0);
       break;
   }
 }

@@ -16,7 +16,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("allplayers", "" + # "being_robot_revived", 24000, 1, "int", &play_revival_fx, 0, 0);
+  clientfield::register("allplayers", "" + #"being_robot_revived", 24000, 1, "int", &play_revival_fx, 0, 0);
   ai::add_archetype_spawn_function(#"zod_companion", &zodcompanionspawnsetup);
   level._effect[#"fx_dest_robot_head_sparks"] = "destruct/fx_dest_robot_head_sparks";
   level._effect[#"fx_dest_robot_body_sparks"] = "destruct/fx_dest_robot_body_sparks";

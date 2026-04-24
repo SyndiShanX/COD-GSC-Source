@@ -28,7 +28,7 @@ init() {
   level.var_ef785c4c = 0;
   level.pack_a_punch.custom_power_think = &function_9b917fd5;
   zm_pap_util::function_11fdb083(32);
-  clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int");
   level thread function_834ab8cc();
   level thread function_ee662714();
 }
@@ -157,7 +157,7 @@ function_cb235436() {
 
 function_da95f7() {
   wait 0.5;
-  self clientfield::set("" + # "hash_28b770e7e782837", 1);
+  self clientfield::set("" + #"hash_28b770e7e782837", 1);
   wait 0.8;
   self delete();
 }

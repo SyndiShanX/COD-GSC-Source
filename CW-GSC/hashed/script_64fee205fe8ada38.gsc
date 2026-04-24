@@ -21,12 +21,12 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "dog_launcher_explode_fx", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"dog_launcher_explode_fx", 16000, 1, "int");
   clientfield::register("scriptmover", "hs_swarm_state", 1, 1, "counter");
   clientfield::register("allplayers", "hs_swarm_damage", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "hash_2201faa112c8313", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_2201faa112c8313", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "dog_projectile_fx", 16000, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_2201faa112c8313", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_2201faa112c8313", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"dog_projectile_fx", 16000, 1, "int");
 }
 
 function function_4b462025(enemy, b_ignore_cleanup) {
@@ -36,7 +36,7 @@ function function_4b462025(enemy, b_ignore_cleanup) {
     return false;
   }
 
-  enemy clientfield::increment("" + # "hash_2201faa112c8313", 1);
+  enemy clientfield::increment("" + #"hash_2201faa112c8313", 1);
   var_d54a1968 = getweapon(#"hash_7b102ea666456cda");
   var_dd6bc3a6 = var_d54a1968.projectilespeed;
   target_pos = enemy.origin;
@@ -105,7 +105,7 @@ function function_4b462025(enemy, b_ignore_cleanup) {
   playsoundatposition(#"hash_4897d1a140f146f5", var_8598bad6);
   var_9f0ffc57 = (0, 0, 30);
   var_b1d0a64 = util::spawn_model(#"c_t9_zmb_hellhound", var_8598bad6 + var_9f0ffc57, grenade.angles);
-  var_b1d0a64 clientfield::set("" + # "dog_projectile_fx", 1);
+  var_b1d0a64 clientfield::set("" + #"dog_projectile_fx", 1);
   var_b1d0a64 linkto(grenade, "tag_origin", var_9f0ffc57);
   var_b1d0a64 useanimtree("generic");
   var_b1d0a64 thread animation::play(#"ai_t9_zm_zombie_dog_orda_pose_hellhound_01", var_b1d0a64, (30, var_b1d0a64.angles[1], var_b1d0a64.angles[2]));
@@ -141,7 +141,7 @@ function private function_b38c1846(e_projectile, target, b_ignore_cleanup, orda)
     e_projectile deletedelay();
     a_players = function_a1ef346b();
     var_2cadffe7 = util::spawn_model("tag_origin", self.origin);
-    var_2cadffe7 clientfield::set("" + # "dog_launcher_explode_fx", 1);
+    var_2cadffe7 clientfield::set("" + #"dog_launcher_explode_fx", 1);
 
     if(isDefined(target.targetname) && target.targetname == #"mdl_support_machine") {
       if(level.var_f0fc72bc > 0 && distancesquared(target.origin, var_2cadffe7.origin) < 40000) {

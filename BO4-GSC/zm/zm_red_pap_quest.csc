@@ -13,14 +13,14 @@
 #namespace zm_red_pap_quest;
 
 init_clientfield() {
-  clientfield::register("scriptmover", "" + # "hash_38dbf4f346c0b609", -15000, 1, "counter", &function_56b9111c, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_9055852bfeb9f00", -15000, 1, "counter", &function_f2332be2, 0, 0);
-  clientfield::register("scriptmover", "" + # "crystal_explosion", 16000, 1, "counter", &crystal_explosion_func, 0, 0);
-  clientfield::register("vehicle", "" + # "spartoi_charge", 16000, 1, "counter", &function_417c12e1, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_687fbbd292ea6be0", 16000, 1, "int", &function_5783c958, 0, 0);
-  clientfield::register("toplayer", "" + # "pegasus_shellshock", 16000, 1, "int", &function_e83bf3a, 0, 0);
-  clientfield::register("toplayer", "" + # "waterfall_passthrough", 16000, 1, "int", &function_11d62eb0, 0, 0);
-  clientfield::register("world", "" + # "hash_28eb5e403f599ce2", 17000, 1, "int", &function_6c40f793, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_38dbf4f346c0b609", -15000, 1, "counter", &function_56b9111c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_9055852bfeb9f00", -15000, 1, "counter", &function_f2332be2, 0, 0);
+  clientfield::register("scriptmover", "" + #"crystal_explosion", 16000, 1, "counter", &crystal_explosion_func, 0, 0);
+  clientfield::register("vehicle", "" + #"spartoi_charge", 16000, 1, "counter", &function_417c12e1, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_687fbbd292ea6be0", 16000, 1, "int", &function_5783c958, 0, 0);
+  clientfield::register("toplayer", "" + #"pegasus_shellshock", 16000, 1, "int", &function_e83bf3a, 0, 0);
+  clientfield::register("toplayer", "" + #"waterfall_passthrough", 16000, 1, "int", &function_11d62eb0, 0, 0);
+  clientfield::register("world", "" + #"hash_28eb5e403f599ce2", 17000, 1, "int", &function_6c40f793, 0, 0);
   level._effect[#"hash_38dbf4f346c0b609"] = #"hash_66e87f89740f4b2c";
   level._effect[#"crystal_explosion"] = #"hash_6e87fbd77320ada5";
   level._effect[#"spartoi_charged"] = #"hash_1a06427eff8dfe13";

@@ -31,22 +31,22 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_64f62d9a3170948e", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_6848ec3d200d443b", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_6848ec3d200d443b", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_6f59675863e19a50", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_6f59675863e19a50", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_32156a79f13e8c37", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_30c86f39ae8ea002", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_1dd40649a6474f30", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_1dd40649a6474f30", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_12b19992ccb300e7", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_54fdcf7f8eb5449e", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_69b312bcaae6308b", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_2ff818c8cb4c17ba", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_2ff818c8cb4c17ba", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_3bedaaea2c17af23", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_3bedaaea2c17af23", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_64f62d9a3170948e", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_6848ec3d200d443b", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_6848ec3d200d443b", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_6f59675863e19a50", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_6f59675863e19a50", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_32156a79f13e8c37", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_30c86f39ae8ea002", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_1dd40649a6474f30", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_1dd40649a6474f30", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_12b19992ccb300e7", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_54fdcf7f8eb5449e", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_69b312bcaae6308b", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_2ff818c8cb4c17ba", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_2ff818c8cb4c17ba", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_3bedaaea2c17af23", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_3bedaaea2c17af23", 1, 1, "int");
   zm::function_84d343d(#"ww_random_ray_gun2_charged", &function_14a32f64);
   zm::function_84d343d(#"ww_random_ray_gun3_charged", &function_14a32f64);
   namespace_9ff9f642::register_slowdown(#"hash_7f87c0765184088f", 0.7);
@@ -652,18 +652,18 @@ function_a851c777(var_ea0a46dc, e_attacker) {
 
   switch (var_ea0a46dc) {
     case 0:
-      self clientfield::set("" + # "hash_1dd40649a6474f30", 0);
+      self clientfield::set("" + #"hash_1dd40649a6474f30", 0);
       self.var_6a36f6dc = 0;
       break;
     case 1:
       self.var_bd48b030 = 0;
       break;
     case 2:
-      self clientfield::set("" + # "hash_2ff818c8cb4c17ba", 0);
+      self clientfield::set("" + #"hash_2ff818c8cb4c17ba", 0);
       self.var_7fcb707c = 0;
       break;
     case 3:
-      self clientfield::set("" + # "hash_6f59675863e19a50", 0);
+      self clientfield::set("" + #"hash_6f59675863e19a50", 0);
       self.var_780857a = 0;
       break;
   }
@@ -734,9 +734,9 @@ function_9b512839(e_trigger) {
 
 shrink_globe() {
   waitframe(1);
-  self clientfield::set("" + # "hash_64f62d9a3170948e", 1);
+  self clientfield::set("" + #"hash_64f62d9a3170948e", 1);
   self waittill(#"hash_775ddc8cde7b36e4");
-  self clientfield::set("" + # "hash_64f62d9a3170948e", 0);
+  self clientfield::set("" + #"hash_64f62d9a3170948e", 0);
   wait 2;
   self delete();
 }
@@ -771,7 +771,7 @@ function_c9b2e87f(...) {
     return;
   }
 
-  self clientfield::set("" + # "hash_6f59675863e19a50", 1);
+  self clientfield::set("" + #"hash_6f59675863e19a50", 1);
   waitframe(1);
 
   switch (self.archetype) {
@@ -783,7 +783,7 @@ function_c9b2e87f(...) {
       self val::set(#"hash_16bf0b1b6bc69c97", "ignoreall", 1);
       self val::set(#"hash_7e08001e1389be82", "ignoreme", 1);
       self.marked_for_death = 1;
-      self clientfield::set("" + # "hash_6848ec3d200d443b", 1);
+      self clientfield::set("" + #"hash_6848ec3d200d443b", 1);
       waitframe(1);
       self ghost();
       self thread namespace_9ff9f642::slowdown(#"hash_193617f42c166879");
@@ -810,7 +810,7 @@ function_936c6968(v_origin, e_attacker, var_a257f75d, var_41bf50f) {
     return;
   }
 
-  e_vortex clientfield::set("" + # "hash_32156a79f13e8c37", 1);
+  e_vortex clientfield::set("" + #"hash_32156a79f13e8c37", 1);
   e_attacker.e_trigger = spawn("trigger_radius", v_origin, 512 | 1, 160, 160);
   e_trigger = e_attacker.e_trigger;
   e_trigger thread function_e46e9108(e_vortex, v_origin, e_attacker);
@@ -829,7 +829,7 @@ function_936c6968(v_origin, e_attacker, var_a257f75d, var_41bf50f) {
 
   e_trigger notify(#"hash_51bbb146cbe1a24d");
   e_trigger delete();
-  e_vortex clientfield::set("" + # "hash_32156a79f13e8c37", 0);
+  e_vortex clientfield::set("" + #"hash_32156a79f13e8c37", 0);
   e_vortex notify(#"hash_51bbb146cbe1a24d");
 
   if(level.var_2ec91d6e[var_a257f75d] == 0) {
@@ -880,7 +880,7 @@ function_f724358c(e_attacker) {
     return;
   }
 
-  self clientfield::set("" + # "hash_1dd40649a6474f30", 1);
+  self clientfield::set("" + #"hash_1dd40649a6474f30", 1);
 
   switch (self.archetype) {
     case # "bat":
@@ -965,7 +965,7 @@ function_e313ef46(str_notify) {
 
   if(isalive(self) && var_81c53418) {
     self.var_6a36f6dc = 0;
-    self clientfield::set("" + # "hash_1dd40649a6474f30", 0);
+    self clientfield::set("" + #"hash_1dd40649a6474f30", 0);
     self.v_zombie_custom_goal_pos = undefined;
     self.n_zombie_custom_goal_radius = undefined;
   }
@@ -980,7 +980,7 @@ function_9537d6cb(v_origin, e_attacker, var_a257f75d, var_41bf50f) {
     return;
   }
 
-  e_tornado clientfield::set("" + # "hash_12b19992ccb300e7", 1);
+  e_tornado clientfield::set("" + #"hash_12b19992ccb300e7", 1);
   e_tornado.targetname = "spin_cycle_entity";
   e_tornado.var_9f00aa3b = [];
   e_tornado.var_9f00aa3b[0] = 0;
@@ -1006,7 +1006,7 @@ function_9537d6cb(v_origin, e_attacker, var_a257f75d, var_41bf50f) {
   e_trigger notify(#"end_spin_cycle");
   e_trigger delete();
   e_tornado notify(#"end_spin_cycle");
-  e_tornado clientfield::set("" + # "hash_12b19992ccb300e7", 0);
+  e_tornado clientfield::set("" + #"hash_12b19992ccb300e7", 0);
 
   if(level.var_2ec91d6e[var_a257f75d] == 1) {
     if(isDefined(e_attacker)) {
@@ -1202,7 +1202,7 @@ function_b9078d40(v_origin, e_attacker, var_a257f75d) {
   e_portal.targetname = "entity_drag";
   e_attacker.e_trigger = spawn("trigger_radius", v_origin, 512 | 1, 128, 128);
   e_trigger = e_attacker.e_trigger;
-  e_portal clientfield::set("" + # "hash_54fdcf7f8eb5449e", 1);
+  e_portal clientfield::set("" + #"hash_54fdcf7f8eb5449e", 1);
   waitframe(1);
   e_trigger thread function_1250965b(e_attacker);
   e_trigger thread function_1beb7376(e_attacker);
@@ -1223,7 +1223,7 @@ function_b9078d40(v_origin, e_attacker, var_a257f75d) {
 
   e_trigger notify(#"hash_7e07bb5b7a331e0b");
   e_trigger delete();
-  e_portal clientfield::set("" + # "hash_54fdcf7f8eb5449e", 0);
+  e_portal clientfield::set("" + #"hash_54fdcf7f8eb5449e", 0);
   waitframe(1);
   e_portal delete();
 
@@ -1298,7 +1298,7 @@ function_886f2b8d(...) {
     return;
   }
 
-  self clientfield::set("" + # "hash_2ff818c8cb4c17ba", 1);
+  self clientfield::set("" + #"hash_2ff818c8cb4c17ba", 1);
 
   switch (self.archetype) {
     case # "bat":
@@ -1314,7 +1314,7 @@ function_886f2b8d(...) {
       wait 1.5;
       self thread namespace_9ff9f642::slowdown(#"hash_193617f42c166879");
       wait 0.7;
-      self clientfield::set("" + # "hash_3bedaaea2c17af23", 1);
+      self clientfield::set("" + #"hash_3bedaaea2c17af23", 1);
       self notsolid();
 
       if(isDefined(v_trigger_origin)) {
@@ -1334,7 +1334,7 @@ function_886f2b8d(...) {
 
 function_e8ab7e4d(v_trigger_origin, var_446e486f, n_move_time) {
   var_2d9e33ca = util::spawn_model(#"tag_origin", var_446e486f);
-  var_2d9e33ca clientfield::set("" + # "hash_69b312bcaae6308b", 1);
+  var_2d9e33ca clientfield::set("" + #"hash_69b312bcaae6308b", 1);
   var_2d9e33ca moveto(v_trigger_origin, n_move_time);
   wait n_move_time;
   var_2d9e33ca delete();

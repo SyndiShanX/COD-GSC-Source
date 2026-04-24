@@ -107,7 +107,7 @@ function zone_init() {
   zm_zonemgr::add_adjacent_zone("zone_american_sector_street", "zone_american_sector_right_building", "power_on", 0);
   zm_zonemgr::add_adjacent_zone("zone_american_sector_street", "zone_american_sector_left_building", "power_on", 0);
   zm_zonemgr::add_adjacent_zone("zone_no_mans_land_1", "zone_east_berlin_street_4", "connect_no_mans_land_to_east_berlin_street", 0);
-  level clientfield::set("" + # "hash_2971ea22ea5a646a", 1);
+  level clientfield::set("" + #"hash_2971ea22ea5a646a", 1);
   scene::add_scene_func(#"p9_fxanim_zm_platinum_zipline_bundle", &function_f63d1381, "init");
   scene::add_scene_func(#"p9_fxanim_zm_platinum_rappel_bundle", &function_f63d1381, "init");
   level thread function_59d4fec2();
@@ -155,48 +155,48 @@ function function_44b1279a() {
   var_7002212e = self zm_zonemgr::is_player_in_zone(level.var_65c43c31, 0);
 
   if(var_7002212e) {
-    self clientfield::set_to_player("" + # "hash_3c8a07f3b4eaf129", 0);
+    self clientfield::set_to_player("" + #"hash_3c8a07f3b4eaf129", 0);
     util::wait_network_frame();
-    self clientfield::set_to_player("" + # "hash_3c8a07f3b4eaf129", 1);
+    self clientfield::set_to_player("" + #"hash_3c8a07f3b4eaf129", 1);
   } else {
-    self clientfield::set_to_player("" + # "hash_3c8a07f3b4eaf129", 1);
+    self clientfield::set_to_player("" + #"hash_3c8a07f3b4eaf129", 1);
     util::wait_network_frame();
-    self clientfield::set_to_player("" + # "hash_3c8a07f3b4eaf129", 0);
+    self clientfield::set_to_player("" + #"hash_3c8a07f3b4eaf129", 0);
   }
 
   var_63ee6d40 = self zm_zonemgr::is_player_in_zone(level.var_aeef5b56, 0);
 
   if(var_63ee6d40) {
     self.var_ed2e19c8 = 1;
-    self clientfield::set_to_player("" + # "music_underscore", 0);
+    self clientfield::set_to_player("" + #"music_underscore", 0);
     util::wait_network_frame();
-    self clientfield::set_to_player("" + # "music_underscore", 1);
+    self clientfield::set_to_player("" + #"music_underscore", 1);
   } else if(!var_63ee6d40) {
     self.var_ed2e19c8 = 0;
-    self clientfield::set_to_player("" + # "music_underscore", 1);
+    self clientfield::set_to_player("" + #"music_underscore", 1);
     util::wait_network_frame();
-    self clientfield::set_to_player("" + # "music_underscore", 0);
+    self clientfield::set_to_player("" + #"music_underscore", 0);
   }
 
   while(true) {
     is_player_in_zone = self zm_zonemgr::is_player_in_zone(level.var_65c43c31, 0);
-    minimap_underground = self clientfield::get_to_player("" + # "hash_3c8a07f3b4eaf129");
+    minimap_underground = self clientfield::get_to_player("" + #"hash_3c8a07f3b4eaf129");
 
     if(is_player_in_zone && minimap_underground == 0) {
-      self clientfield::set_to_player("" + # "hash_3c8a07f3b4eaf129", 1);
+      self clientfield::set_to_player("" + #"hash_3c8a07f3b4eaf129", 1);
     } else if(!is_player_in_zone && minimap_underground == 1) {
-      self clientfield::set_to_player("" + # "hash_3c8a07f3b4eaf129", 0);
-      self clientfield::set_to_player("" + # "music_underscore", 0);
+      self clientfield::set_to_player("" + #"hash_3c8a07f3b4eaf129", 0);
+      self clientfield::set_to_player("" + #"music_underscore", 0);
     }
 
     var_63ee6d40 = self zm_zonemgr::is_player_in_zone(level.var_aeef5b56, 0);
 
     if(var_63ee6d40 && !is_true(self.var_ed2e19c8)) {
       self.var_ed2e19c8 = 1;
-      self clientfield::set_to_player("" + # "music_underscore", 1);
+      self clientfield::set_to_player("" + #"music_underscore", 1);
     } else if(!var_63ee6d40 && is_true(self.var_ed2e19c8)) {
       self.var_ed2e19c8 = 0;
-      self clientfield::set_to_player("" + # "music_underscore", 0);
+      self clientfield::set_to_player("" + #"music_underscore", 0);
     }
 
     s_waitresult = self waittill(#"zone_change");
@@ -244,7 +244,7 @@ function function_59d4fec2() {
 
   var_4eb19bad = struct::get("zipline_destroyed_rooftops_upper");
   var_8b0c7673 = struct::get(var_4eb19bad.target);
-  level clientfield::set("" + # "hash_2971ea22ea5a646a", 2);
+  level clientfield::set("" + #"hash_2971ea22ea5a646a", 2);
   zipline_player::function_2a1bd467(var_4eb19bad);
   zipline_player::function_2a1bd467(var_8b0c7673);
 }
@@ -269,7 +269,7 @@ function function_fc7b3c20() {
 
   var_4eb19bad = struct::get("zipline_rooftop_interior");
   var_8b0c7673 = struct::get(var_4eb19bad.target);
-  level clientfield::set("" + # "hash_2971ea22ea5a646a", 3);
+  level clientfield::set("" + #"hash_2971ea22ea5a646a", 3);
   zipline_player::function_2a1bd467(var_4eb19bad);
   zipline_player::function_2a1bd467(var_8b0c7673);
 }
@@ -293,7 +293,7 @@ function function_6453e9bd() {
 
   var_4eb19bad = struct::get("zipline_korber_rooftop");
   var_8b0c7673 = struct::get(var_4eb19bad.target);
-  level clientfield::set("" + # "hash_2971ea22ea5a646a", 4);
+  level clientfield::set("" + #"hash_2971ea22ea5a646a", 4);
   zipline_player::function_2a1bd467(var_4eb19bad);
   zipline_player::function_2a1bd467(var_8b0c7673);
 }
@@ -312,7 +312,7 @@ function function_89bc492d() {
 
   level thread scene::init(#"hash_1aaf6533fa8de56");
   level flag::wait_till("power_on");
-  level clientfield::set("" + # "hash_2971ea22ea5a646a", 0);
+  level clientfield::set("" + #"hash_2971ea22ea5a646a", 0);
   zm_zonemgr::enable_zone("zone_secret_spy_tunnel");
   zm_zonemgr::enable_zone("zone_sewers_and_escape_tunnel");
   zm_zonemgr::enable_zone("zone_destroyed_upper_floors");

@@ -9,13 +9,13 @@
 #namespace zm_tungsten_pap_quest;
 
 function init() {
-  clientfield::register("world", "" + # "hash_2c7fb1cc66c590a0", 28000, getminbitcountfornum(2), "int", &function_68bbfe, 0, 0);
-  clientfield::register("world", "" + # "hash_18f96dcb4766fbe8", 28000, 1, "int", &function_34eb3249, 0, 0);
-  clientfield::register("world", "" + # "hash_45c3013f063fe2c7", 28000, getminbitcountfornum(2), "int", &function_2d49baf, 0, 0);
-  clientfield::register("world", "" + # "hash_3432d09ff93c9a0c", 28000, 1, "int", &function_794730f, 0, 0);
-  clientfield::register("world", "" + # "hash_27308a7dd991ce8d", 28000, 1, "int", &function_8c88a649, 0, 0);
-  clientfield::register("actor", "" + # "hash_54e2a4e02a26cc62", 28000, 1, "counter", &function_95190421, 0, 0);
-  clientfield::register("world", "" + # "hash_12eb39113e9737f8", 28000, 1, "int", &function_1446ef30, 0, 0);
+  clientfield::register("world", "" + #"hash_2c7fb1cc66c590a0", 28000, getminbitcountfornum(2), "int", &function_68bbfe, 0, 0);
+  clientfield::register("world", "" + #"hash_18f96dcb4766fbe8", 28000, 1, "int", &function_34eb3249, 0, 0);
+  clientfield::register("world", "" + #"hash_45c3013f063fe2c7", 28000, getminbitcountfornum(2), "int", &function_2d49baf, 0, 0);
+  clientfield::register("world", "" + #"hash_3432d09ff93c9a0c", 28000, 1, "int", &function_794730f, 0, 0);
+  clientfield::register("world", "" + #"hash_27308a7dd991ce8d", 28000, 1, "int", &function_8c88a649, 0, 0);
+  clientfield::register("actor", "" + #"hash_54e2a4e02a26cc62", 28000, 1, "counter", &function_95190421, 0, 0);
+  clientfield::register("world", "" + #"hash_12eb39113e9737f8", 28000, 1, "int", &function_1446ef30, 0, 0);
 }
 
 function function_68bbfe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

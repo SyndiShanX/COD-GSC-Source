@@ -34,12 +34,12 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("scriptmover", "hemera_shoot", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hemera_beam", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hemera_impact", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hemera_beam", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hemera_impact", 16000, 1, "counter");
   clientfield::register("allplayers", "hemera_proj_flash", 16000, 1, "int");
   clientfield::register("allplayers", "hemera_beam_flash", 16000, 1, "int");
   clientfield::register("actor", "hemera_proj_death", 16000, 1, "int");
-  clientfield::register("actor", "" + # "hemera_beam_death", 16000, 1, "int");
+  clientfield::register("actor", "" + #"hemera_beam_death", 16000, 1, "int");
   level.w_hand_hemera = getweapon(#"ww_hand_h");
   level.w_hand_hemera_charged = getweapon(#"ww_hand_h_charged");
   level.w_hand_hemera_uncharged = getweapon(#"ww_hand_h_uncharged");
@@ -85,7 +85,7 @@ function_3f8da82c() {
     }
 
     if(isDefined(self.mdl_beam)) {
-      self.mdl_beam clientfield::set("" + # "hemera_beam", 0);
+      self.mdl_beam clientfield::set("" + #"hemera_beam", 0);
       self.mdl_beam delete();
     }
   }
@@ -322,7 +322,7 @@ function_8e7f5291(e_projectile, ai_zombie, n_damage) {
   if(!isDefined(ai_zombie) || isDefined(ai_zombie.var_3df1a748) && ai_zombie.var_3df1a748) {
     e_projectile moveto(v_end, n_time);
     e_projectile waittill(#"movedone");
-    e_projectile clientfield::increment("" + # "hemera_impact");
+    e_projectile clientfield::increment("" + #"hemera_impact");
     waitframe(1);
   } else {
     v_view_pos = self getweaponmuzzlepoint();
@@ -537,7 +537,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged) {
         break;
       case # "boss":
         if(!isactor(e_target)) {
-          e_target clientfield::increment("" + # "hemera_impact");
+          e_target clientfield::increment("" + #"hemera_impact");
         }
 
         n_damage = 175;
@@ -601,7 +601,7 @@ player_charged_shot(weapon) {
 
   self notify(#"hash_4969a839c4e666dc");
   self clientfield::set("hemera_beam_flash", 1);
-  self.mdl_beam clientfield::set("" + # "hemera_beam", 1);
+  self.mdl_beam clientfield::set("" + #"hemera_beam", 1);
   self playSound(#"hash_1f3a25ed02b0fb5f");
   self thread function_1e39fbc5(weapon);
   self thread beam_attack();
@@ -625,7 +625,7 @@ player_charged_shot(weapon) {
   self clientfield::set("hemera_beam_flash", 0);
 
   if(isDefined(self.mdl_beam)) {
-    self.mdl_beam clientfield::set("" + # "hemera_beam", 0);
+    self.mdl_beam clientfield::set("" + #"hemera_beam", 0);
     self.mdl_beam delete();
   }
 
@@ -638,7 +638,7 @@ function_8a56ed15(s_notify) {
 
   if(isDefined(self.mdl_beam)) {
     self playSound(#"hash_7aeea3d29c1624a");
-    self.mdl_beam clientfield::set("" + # "hemera_beam", 0);
+    self.mdl_beam clientfield::set("" + #"hemera_beam", 0);
     self.mdl_beam delete();
   }
 
@@ -746,7 +746,7 @@ function_e56c350e(e_target, b_charged, n_damage) {
   w_weapon = level.w_hand_hemera_uncharged;
 
   if(isDefined(b_charged)) {
-    e_target clientfield::set("" + # "hemera_beam_death", 1);
+    e_target clientfield::set("" + #"hemera_beam_death", 1);
     e_target.var_4dcd7a1c = 1;
     n_damage = e_target.health + 999;
     w_weapon = level.w_hand_hemera;

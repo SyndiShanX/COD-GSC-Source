@@ -44,14 +44,14 @@ autoexec opt_in() {
 
 event_handler[level_init] main(eventstruct) {
   clientfield::register("clientuimodel", "player_lives", 16000, 2, "int", undefined, 0, 0);
-  clientfield::register("scriptmover", "" + # "register_pegasus", 16000, 1, "counter", &register_pegasus, 0, 0);
-  clientfield::register("scriptmover", "" + # "medusa_eyes", 16000, 1, "int", &function_deaba617, 0, 0);
-  clientfield::register("scriptmover", "" + # "special_target", 16000, 1, "int", &function_adad910c, 0, 0);
-  clientfield::register("actor", "" + # "hash_2856f87ecdfaf62", 16000, 1, "counter", &function_f02d282d, 0, 0);
-  clientfield::register("actor", "" + # "hash_1bdce857fd614cef", 16000, 1, "counter", &function_ef690ed4, 0, 0);
-  clientfield::register("world", "" + # "postfx_play", 16000, 2, "int", &function_ea4a65c1, 0, 0);
-  clientfield::register("world", "" + # "hash_71f9fcfb2cd84a9c", 16000, 1, "int", &function_b16ffc7a, 0, 0);
-  clientfield::register("toplayer", "" + # "eye_vignette", 16000, 1, "int", &function_3b118f17, 0, 0);
+  clientfield::register("scriptmover", "" + #"register_pegasus", 16000, 1, "counter", &register_pegasus, 0, 0);
+  clientfield::register("scriptmover", "" + #"medusa_eyes", 16000, 1, "int", &function_deaba617, 0, 0);
+  clientfield::register("scriptmover", "" + #"special_target", 16000, 1, "int", &function_adad910c, 0, 0);
+  clientfield::register("actor", "" + #"hash_2856f87ecdfaf62", 16000, 1, "counter", &function_f02d282d, 0, 0);
+  clientfield::register("actor", "" + #"hash_1bdce857fd614cef", 16000, 1, "counter", &function_ef690ed4, 0, 0);
+  clientfield::register("world", "" + #"postfx_play", 16000, 2, "int", &function_ea4a65c1, 0, 0);
+  clientfield::register("world", "" + #"hash_71f9fcfb2cd84a9c", 16000, 1, "int", &function_b16ffc7a, 0, 0);
+  clientfield::register("toplayer", "" + #"eye_vignette", 16000, 1, "int", &function_3b118f17, 0, 0);
   level._uses_default_wallbuy_fx = 1;
   level._uses_sticky_grenades = 1;
   level._uses_taser_knuckles = 1;

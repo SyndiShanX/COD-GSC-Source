@@ -17,9 +17,9 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_47e7d5219a26a786", 16000, 3, "int", &function_dd46bc90, 0, 0);
-  clientfield::register("actor", "" + # "hash_3a47820a21ce3170", 16000, 2, "int", &function_219213be, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_7508e13e17dd1e3c", 16000, 4, "int", &function_95ad29e7, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_47e7d5219a26a786", 16000, 3, "int", &function_dd46bc90, 0, 0);
+  clientfield::register("actor", "" + #"hash_3a47820a21ce3170", 16000, 2, "int", &function_219213be, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_7508e13e17dd1e3c", 16000, 4, "int", &function_95ad29e7, 0, 0);
 }
 
 function postinit() {

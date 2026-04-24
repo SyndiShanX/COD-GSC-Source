@@ -84,7 +84,7 @@ melee_resetaction() {
 }
 
 melee_chooseaction() {
-  if(!melee_isvalid())
+  if(!melee_isValid())
     return 0;
 
   self.melee.initiated = 1;
@@ -163,7 +163,7 @@ melee_updateandvalidatestartpos() {
   return 1;
 }
 
-melee_isvalid() {
+melee_isValid() {
   if(!isDefined(self.melee.target))
     return 0;
 
@@ -392,7 +392,7 @@ melee_standard_updateandvalidatetarget() {
   if(!isDefined(self.enemy))
     return 0;
 
-  if(!melee_isvalid())
+  if(!melee_isValid())
     return 0;
 
   var_0 = vectornormalize(self.melee.target.origin - self.origin);
@@ -847,7 +847,7 @@ melee_aivsai_getinposition_updateandvalidatetarget(var_0, var_1) {
   if(isDefined(var_1) && var_1 <= gettime())
     return 0;
 
-  if(!melee_isvalid())
+  if(!melee_isValid())
     return 0;
 
   var_2 = self.melee.target;
@@ -899,7 +899,7 @@ melee_aivsai_getinposition_finalize(var_0) {
 }
 
 melee_aivsai_getinposition() {
-  if(!melee_isvalid())
+  if(!melee_isValid())
     return 0;
 
   melee_startmovement();

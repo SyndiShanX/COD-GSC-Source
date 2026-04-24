@@ -19,22 +19,22 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_64f62d9a3170948e", 1, 1, "int", &shrink_globe, 0, 0);
-  clientfield::register("actor", "" + # "hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
-  clientfield::register("actor", "" + # "hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_32156a79f13e8c37", 1, 1, "int", &function_751c64a4, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_30c86f39ae8ea002", 1, 1, "int", &function_7fe3e4c8, 0, 0);
-  clientfield::register("actor", "" + # "hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_12b19992ccb300e7", 1, 1, "int", &function_ac54fdec, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_54fdcf7f8eb5449e", 1, 1, "int", &drag_portal, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_69b312bcaae6308b", 1, 1, "int", &function_68a87cde, 0, 0);
-  clientfield::register("actor", "" + # "hash_2ff818c8cb4c17ba", 1, 1, "int", &function_332e7c58, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_2ff818c8cb4c17ba", 1, 1, "int", &function_3b7e3b9, 0, 0);
-  clientfield::register("actor", "" + # "hash_3bedaaea2c17af23", 1, 1, "int", &function_dd9a8d7c, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_3bedaaea2c17af23", 1, 1, "int", &function_51595e12, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_64f62d9a3170948e", 1, 1, "int", &shrink_globe, 0, 0);
+  clientfield::register("actor", "" + #"hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
+  clientfield::register("actor", "" + #"hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_32156a79f13e8c37", 1, 1, "int", &function_751c64a4, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_30c86f39ae8ea002", 1, 1, "int", &function_7fe3e4c8, 0, 0);
+  clientfield::register("actor", "" + #"hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_12b19992ccb300e7", 1, 1, "int", &function_ac54fdec, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_54fdcf7f8eb5449e", 1, 1, "int", &drag_portal, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_69b312bcaae6308b", 1, 1, "int", &function_68a87cde, 0, 0);
+  clientfield::register("actor", "" + #"hash_2ff818c8cb4c17ba", 1, 1, "int", &function_332e7c58, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_2ff818c8cb4c17ba", 1, 1, "int", &function_3b7e3b9, 0, 0);
+  clientfield::register("actor", "" + #"hash_3bedaaea2c17af23", 1, 1, "int", &function_dd9a8d7c, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_3bedaaea2c17af23", 1, 1, "int", &function_51595e12, 0, 0);
 }
 
 shrink_globe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

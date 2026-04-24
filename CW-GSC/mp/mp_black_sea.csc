@@ -11,7 +11,7 @@
 #namespace mp_black_sea;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("vehicle", "" + # "hash_51d1d2a4c63ed960", 1, 1, "int", &function_74feb59, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_51d1d2a4c63ed960", 1, 1, "int", &function_74feb59, 0, 0);
   setsaveddvar(#"enable_global_wind", 1);
   setsaveddvar(#"wind_global_vector", "88 0 0");
   setsaveddvar(#"wind_global_low_altitude", 0);

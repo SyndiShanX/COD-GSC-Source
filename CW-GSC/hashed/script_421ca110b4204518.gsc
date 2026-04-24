@@ -29,11 +29,11 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_142ed640bf2e09b9", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_717ed5a81b281ebd", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_717ed5a81b281ebd", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_177f6b02e0b5436b", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_40a7e84c380b9b1a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_142ed640bf2e09b9", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_717ed5a81b281ebd", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_717ed5a81b281ebd", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_177f6b02e0b5436b", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_40a7e84c380b9b1a", 1, 1, "int");
   callback::on_connect(&on_connect);
   namespace_1b527536::function_36e0540e(#"ring_of_fire", 1, 35, "field_upgrade_ring_of_fire_item_sr");
   namespace_1b527536::function_36e0540e(#"ring_of_fire_1", 1, 35, "field_upgrade_ring_of_fire_1_item_sr");
@@ -47,12 +47,12 @@ function private preinit() {
   namespace_1b527536::function_dbd391bf(#"ring_of_fire_3", &function_309daad7);
   namespace_1b527536::function_dbd391bf(#"ring_of_fire_4", &function_309daad7);
   namespace_1b527536::function_dbd391bf(#"ring_of_fire_5", &function_309daad7);
-  namespace_9ff9f642::register_burn(#"ring_of_fire", 25, 5, "" + # "hash_177f6b02e0b5436b", "" + # "hash_40a7e84c380b9b1a");
-  namespace_9ff9f642::register_burn(#"ring_of_fire_1", 25, 10, "" + # "hash_177f6b02e0b5436b", "" + # "hash_40a7e84c380b9b1a");
-  namespace_9ff9f642::register_burn(#"ring_of_fire_2", 25, 10, "" + # "hash_177f6b02e0b5436b", "" + # "hash_40a7e84c380b9b1a");
-  namespace_9ff9f642::register_burn(#"ring_of_fire_3", 25, 10, "" + # "hash_177f6b02e0b5436b", "" + # "hash_40a7e84c380b9b1a");
-  namespace_9ff9f642::register_burn(#"ring_of_fire_4", 25, 10, "" + # "hash_177f6b02e0b5436b", "" + # "hash_40a7e84c380b9b1a");
-  namespace_9ff9f642::register_burn(#"ring_of_fire_5", 25, 10, "" + # "hash_177f6b02e0b5436b", "" + # "hash_40a7e84c380b9b1a");
+  namespace_9ff9f642::register_burn(#"ring_of_fire", 25, 5, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+  namespace_9ff9f642::register_burn(#"ring_of_fire_1", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+  namespace_9ff9f642::register_burn(#"ring_of_fire_2", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+  namespace_9ff9f642::register_burn(#"ring_of_fire_3", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+  namespace_9ff9f642::register_burn(#"ring_of_fire_4", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
+  namespace_9ff9f642::register_burn(#"ring_of_fire_5", 25, 10, "" + #"hash_177f6b02e0b5436b", "" + #"hash_40a7e84c380b9b1a");
   zm_equipment::function_76beede2(#"ring_of_fire", "MOD_BURNED");
   zm_equipment::function_76beede2(#"ring_of_fire_1", "MOD_BURNED");
   zm_equipment::function_76beede2(#"ring_of_fire_2", "MOD_BURNED");
@@ -157,7 +157,7 @@ function private function_1cbc22b0(weapon, n_radius) {
       break;
   }
 
-  var_3889eb68 clientfield::set("" + # "hash_142ed640bf2e09b9", 1);
+  var_3889eb68 clientfield::set("" + #"hash_142ed640bf2e09b9", 1);
 
   level thread function_da2298bc();
 
@@ -195,7 +195,7 @@ function private function_1cbc22b0(weapon, n_radius) {
   }
 
   arrayremovevalue(level.var_686c81d7, var_3889eb68);
-  var_3889eb68 clientfield::set("" + # "hash_142ed640bf2e09b9", 0);
+  var_3889eb68 clientfield::set("" + #"hash_142ed640bf2e09b9", 0);
   var_3889eb68 thread util::delayed_delete(0.5);
 }
 
@@ -204,7 +204,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
     foreach(player in getplayers()) {
       if(isalive(player) && !isinarray(player.var_d93ab65, self) && function_baaff75b(self, player)) {
         if(!player.var_d93ab65.size) {
-          player clientfield::set_to_player("" + # "hash_717ed5a81b281ebd", 1);
+          player clientfield::set_to_player("" + #"hash_717ed5a81b281ebd", 1);
         }
 
         if(!isDefined(player.var_d93ab65)) {
@@ -230,7 +230,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
         }
 
         if(!player.var_d93ab65.size) {
-          player clientfield::set_to_player("" + # "hash_717ed5a81b281ebd", 0);
+          player clientfield::set_to_player("" + #"hash_717ed5a81b281ebd", 0);
         }
       }
     }
@@ -243,7 +243,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
       }
 
       if(!is_true(ai.var_25e2200c) && function_ca26e871(ai)) {
-        ai clientfield::increment("" + # "hash_717ed5a81b281ebd", 1);
+        ai clientfield::increment("" + #"hash_717ed5a81b281ebd", 1);
         ai.var_25e2200c = 1;
         continue;
       }
@@ -350,7 +350,7 @@ function private function_64a3f9c6(var_dfbbc9a0 = 0, var_feefd408 = 0, var_cf53a
         player perks::perk_unsetperk("specialty_ammodrainsfromstockfirst");
       }
 
-      player clientfield::set_to_player("" + # "hash_717ed5a81b281ebd", 0);
+      player clientfield::set_to_player("" + #"hash_717ed5a81b281ebd", 0);
     }
   }
 

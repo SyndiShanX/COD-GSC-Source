@@ -15,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_60a7e5b79e8064a5", 1, 1, "int", &monkey_spawns, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_60a7e5b79e8064a5", 1, 1, "int", &monkey_spawns, 0, 0);
 
   if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";

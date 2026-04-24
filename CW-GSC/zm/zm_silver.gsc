@@ -86,13 +86,13 @@ function event_handler[level_init] main(eventstruct) {
   level.var_ac94c2b8 = 2;
   level.var_7b24e6e4 = 1;
   clientfield::register_clientuimodel("player_lives", 1, 2, "int");
-  clientfield::register("world", "" + # "hash_5e38b0496d9664bb", 1, 3, "int");
-  clientfield::register("world", "" + # "hash_2690e69916d071d9", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "minimap_underground", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "music_underscore", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "interact_rumble_small", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_7a769c728c89b6b5", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_20d620050345e82", 6000, 1, "int");
+  clientfield::register("world", "" + #"hash_5e38b0496d9664bb", 1, 3, "int");
+  clientfield::register("world", "" + #"hash_2690e69916d071d9", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"minimap_underground", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"music_underscore", 1, 2, "int");
+  clientfield::register("toplayer", "" + #"interact_rumble_small", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_7a769c728c89b6b5", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_20d620050345e82", 6000, 1, "int");
   level.default_start_location = "zone_proto_start";
   level.default_game_mode = "zclassic";
   level._allow_melee_weapon_switching = 1;
@@ -104,7 +104,7 @@ function event_handler[level_init] main(eventstruct) {
   level.var_dbf9c70d = &function_452e5ad6;
   load::main();
   compass::setupminimap("");
-  clientfield::set("" + # "hash_2690e69916d071d9", 1);
+  clientfield::set("" + #"hash_2690e69916d071d9", 1);
   namespace_812a8849::init();
   zm_silver_ww_quest::init();
   zm_silver_main_quest::init();
@@ -146,7 +146,7 @@ function event_handler[level_init] main(eventstruct) {
   level thread function_ec9000ea();
 
   setDvar(#"hash_7b06b8037c26b99b", 72);
-  level thread clientfield::set("" + # "hash_5e38b0496d9664bb", 5);
+  level thread clientfield::set("" + #"hash_5e38b0496d9664bb", 5);
   setDvar(#"hkai_pathfinditerationlimit", 1050);
   level.missileremotelaunchvert = 9000;
   level.missileremotelaunchhorz = 4000;
@@ -159,7 +159,7 @@ function event_handler[level_init] main(eventstruct) {
 
 function function_44ed971() {
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "hash_20d620050345e82", 1);
+    player clientfield::set_to_player("" + #"hash_20d620050345e82", 1);
   }
 }
 
@@ -322,14 +322,14 @@ function setupmusic() {
 function function_65c65feb(b_active = 0) {
   if(b_active) {
     foreach(player in getplayers()) {
-      player clientfield::set_to_player("" + # "music_underscore", 2);
+      player clientfield::set_to_player("" + #"music_underscore", 2);
     }
 
     return;
   }
 
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "music_underscore", 3);
+    player clientfield::set_to_player("" + #"music_underscore", 3);
   }
 }
 
@@ -553,7 +553,7 @@ function function_7cdd91fd() {
   level flag::clear(#"snowfall_fade_out");
 
   if(!level flag::get("dog_round")) {
-    level thread clientfield::set("" + # "hash_5e38b0496d9664bb", 3);
+    level thread clientfield::set("" + #"hash_5e38b0496d9664bb", 3);
     level flag::set(#"snowfall_loop");
     exploder::stop_exploder("fxexp_snow_blizzard_fade_in");
     exploder::exploder("fxexp_snow_blizzard_loop");
@@ -587,7 +587,7 @@ function function_7bb4a5d7(state) {
     case # "snowfall_fade_in":
       if(!level flag::get("dog_round")) {
         level flag::set(#"snowfall_fade_in");
-        level thread clientfield::set("" + # "hash_5e38b0496d9664bb", 1);
+        level thread clientfield::set("" + #"hash_5e38b0496d9664bb", 1);
         exploder::exploder("fxexp_snow_blizzard_fade_in");
         exploder::stop_exploder("fxexp_snow_blizzard_loop");
         setDvar(#"hash_7b06b8037c26b99b", 195);
@@ -607,7 +607,7 @@ function function_7bb4a5d7(state) {
       if(!level flag::get("dog_round") && level flag::get(#"snowfall_loop")) {
         level flag::clear(#"snowfall_loop");
         level flag::set(#"snowfall_fade_out");
-        level thread clientfield::set("" + # "hash_5e38b0496d9664bb", 0);
+        level thread clientfield::set("" + #"hash_5e38b0496d9664bb", 0);
         exploder::stop_exploder("fxexp_snow_blizzard_fade_in");
         exploder::stop_exploder("fxexp_snow_blizzard_loop");
         setDvar(#"hash_7b06b8037c26b99b", 72);
@@ -626,7 +626,7 @@ function function_7bb4a5d7(state) {
       level flag::clear(#"snowfall_fade_in");
       level flag::clear(#"snowfall_loop");
       level flag::clear(#"snowfall_fade_out");
-      level thread clientfield::set("" + # "hash_5e38b0496d9664bb", 2);
+      level thread clientfield::set("" + #"hash_5e38b0496d9664bb", 2);
       exploder::stop_exploder("fxexp_snow_blizzard_fade_in");
       exploder::stop_exploder("fxexp_snow_blizzard_loop");
       break;

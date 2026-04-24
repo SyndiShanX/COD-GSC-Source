@@ -18,20 +18,20 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("allplayers", "" + # "hash_2c387ea19f228b5d", 1, 1, "int", &function_bfdd6659, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_794e5d0769b1d497", 1, 1, "int", &function_54655580, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7876f33937c8a764", 1, 1, "int", &vomit, 0, 0);
-  clientfield::register("scriptmover", "" + # "safe_fx", 1, 1, "int", &safe_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "flare_fx", 1, 2, "int", &flare_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2042191a7fc75994", 1, 2, "int", &function_563778cc, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2ec182fecae80e80", 1, 1, "int", &function_584fb3c8, 0, 0);
-  clientfield::register("scriptmover", "" + # "portal_pass", 1, 2, "int", &function_eabe4696, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1cf8b9339139c50d", 1, 1, "int", &function_34f5c98, 0, 0);
-  clientfield::register("scriptmover", "" + # "car_fx", 1, 1, "int", &function_ae668ae9, 0, 0);
-  clientfield::register("world", "" + # "hash_1166237b92466ac9", 1, 1, "int", &function_5218405b, 0, 0);
-  clientfield::register("world", "" + # "fireworks_fx", 1, 2, "counter", &fireworks_fx, 0, 0);
-  clientfield::register("world", "" + # "crash_fx", 1, 1, "int", &function_711366fa, 0, 0);
-  clientfield::register("world", "" + # "hash_4f672a8a7ae530e5", 1, 1, "int", &function_f99ce12b, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_2c387ea19f228b5d", 1, 1, "int", &function_bfdd6659, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_794e5d0769b1d497", 1, 1, "int", &function_54655580, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7876f33937c8a764", 1, 1, "int", &vomit, 0, 0);
+  clientfield::register("scriptmover", "" + #"safe_fx", 1, 1, "int", &safe_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"flare_fx", 1, 2, "int", &flare_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2042191a7fc75994", 1, 2, "int", &function_563778cc, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2ec182fecae80e80", 1, 1, "int", &function_584fb3c8, 0, 0);
+  clientfield::register("scriptmover", "" + #"portal_pass", 1, 2, "int", &function_eabe4696, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1cf8b9339139c50d", 1, 1, "int", &function_34f5c98, 0, 0);
+  clientfield::register("scriptmover", "" + #"car_fx", 1, 1, "int", &function_ae668ae9, 0, 0);
+  clientfield::register("world", "" + #"hash_1166237b92466ac9", 1, 1, "int", &function_5218405b, 0, 0);
+  clientfield::register("world", "" + #"fireworks_fx", 1, 2, "counter", &fireworks_fx, 0, 0);
+  clientfield::register("world", "" + #"crash_fx", 1, 1, "int", &function_711366fa, 0, 0);
+  clientfield::register("world", "" + #"hash_4f672a8a7ae530e5", 1, 1, "int", &function_f99ce12b, 0, 0);
 }
 
 init_flags() {}

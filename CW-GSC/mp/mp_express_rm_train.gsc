@@ -17,9 +17,9 @@
 function autoexec __init__() {}
 
 function function_39da2f0() {
-  clientfield::register("vehicle", "" + # "hash_7882b7772f4ea0a8", 9000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_7882b7772f4ea0a8", 9000, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_5dd246706762931", 9000, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_7882b7772f4ea0a8", 9000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_7882b7772f4ea0a8", 9000, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_5dd246706762931", 9000, 1, "int");
 }
 
 function main() {
@@ -135,7 +135,7 @@ function function_872decff(var_82b681fa, var_2f5e0848, var_1011159c, var_166a40a
       }
 
       var_49360986 show();
-      var_49360986 clientfield::set("" + # "hash_7882b7772f4ea0a8", 1);
+      var_49360986 clientfield::set("" + #"hash_7882b7772f4ea0a8", 1);
       var_49360986 playLoopSound("amb_train_lp" + var_d32723ab);
 
       switch (var_d32723ab) {
@@ -196,7 +196,7 @@ function function_d5152215() {
 
   self notify(#"hash_644079e27ed61486");
   self ghost();
-  self clientfield::set("" + # "hash_7882b7772f4ea0a8", 0);
+  self clientfield::set("" + #"hash_7882b7772f4ea0a8", 0);
   self stoploopsound(0.2);
   self playSound("amb_train_end");
 }
@@ -220,7 +220,7 @@ function function_3bd4a776() {
 
 function function_ae88ee4b() {
   self waittill(#"reached_end_node");
-  self clientfield::set("" + # "hash_7882b7772f4ea0a8", 0);
+  self clientfield::set("" + #"hash_7882b7772f4ea0a8", 0);
   self ghost();
   self stoploopsound(0.2);
   self playSound("amb_train_end");
@@ -293,7 +293,7 @@ function function_70406b5f() {
 function function_3c65801() {
   self endon(#"death");
   self waittill(#"hash_26f91f11d12e4a44");
-  self clientfield::set("" + # "hash_5dd246706762931", 1);
+  self clientfield::set("" + #"hash_5dd246706762931", 1);
   self waittill(#"debris_a");
   level thread function_f704054e("fxexp_trigger_train_debris_a");
   self waittill(#"sparks_a");
@@ -323,7 +323,7 @@ function function_3c65801() {
   self waittill(#"sparks_g");
   level thread function_f704054e("fxexp_trigger_train_sparks_g");
   self waittill(#"hash_7e23976f90243496");
-  self clientfield::set("" + # "hash_5dd246706762931", 0);
+  self clientfield::set("" + #"hash_5dd246706762931", 0);
 }
 
 function function_f704054e(explodername) {

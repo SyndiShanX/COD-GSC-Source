@@ -16,7 +16,7 @@
 #namespace namespace_f2050961;
 
 init() {
-  clientfield::register("toplayer", "" + # "hash_686e5c0d7af86361", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_686e5c0d7af86361", 16000, 1, "int");
   zm_traps::register_trap_basic_info("venom_spray", &trap_activate, &trap_audio);
   zm_traps::register_trap_damage("venom_spray", &trap_player_damage, &trap_damage);
   t_trap = getent("venom_spray", "script_noteworthy");
@@ -86,12 +86,12 @@ function_d5ee5b15() {
 
   if(!(isDefined(self.var_31f1bba7) && self.var_31f1bba7)) {
     self.var_31f1bba7 = 1;
-    self clientfield::set_to_player("" + # "hash_686e5c0d7af86361", 1);
+    self clientfield::set_to_player("" + #"hash_686e5c0d7af86361", 1);
   }
 
   wait 5;
   self.var_31f1bba7 = undefined;
-  self clientfield::set_to_player("" + # "hash_686e5c0d7af86361", 0);
+  self clientfield::set_to_player("" + #"hash_686e5c0d7af86361", 0);
 }
 
 trap_damage(t_trap) {

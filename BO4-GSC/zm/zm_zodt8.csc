@@ -45,10 +45,10 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "narrative_trigger", 1, 1, "int", &function_94a217a5, 0, 0);
   clientfield::register("world", "sfx_waterdrain_fore", 1, 1, "int", &sfx_waterdrain_fore, 0, 0);
   clientfield::register("world", "sfx_waterdrain_aft", 1, 1, "int", &sfx_waterdrain_aft, 0, 0);
-  clientfield::register("world", "" + # "hash_2994a957c49bf321", 1, 1, "int", &function_f31c22d6, 0, 0);
-  clientfield::register("world", "" + # "hash_7e91637e80ad93", 1, 1, "int", &function_1e917f6a, 0, 0);
-  clientfield::register("world", "" + # "hash_16cc25b3f87f06ad", 1, 1, "int", &function_53da552d, 0, 0);
-  clientfield::register("world", "" + # "hash_7f2f74f05d1f1b75", 1, 2, "int", &function_5b0384a, 0, 0);
+  clientfield::register("world", "" + #"hash_2994a957c49bf321", 1, 1, "int", &function_f31c22d6, 0, 0);
+  clientfield::register("world", "" + #"hash_7e91637e80ad93", 1, 1, "int", &function_1e917f6a, 0, 0);
+  clientfield::register("world", "" + #"hash_16cc25b3f87f06ad", 1, 1, "int", &function_53da552d, 0, 0);
+  clientfield::register("world", "" + #"hash_7f2f74f05d1f1b75", 1, 2, "int", &function_5b0384a, 0, 0);
   clientfield::register("scriptmover", "tilt", 1, 1, "int", &tilt, 0, 0);
   clientfield::register("scriptmover", "change_wave_water_height", 1, 1, "int", &change_wave_water_height, 0, 0);
   clientfield::register("scriptmover", "update_wave_water_height", 1, 1, "counter", &update_wave_water_height, 0, 0);
@@ -136,7 +136,7 @@ function_efae9657(localclientnum, var_630fc8b) {
         self thread postfx::playpostfxbundle(#"hash_5249b3ef8b2f1988");
       }
     } else {
-      if(self clientfield::get_to_player("" + # "boiler_fx")) {
+      if(self clientfield::get_to_player("" + #"boiler_fx")) {
         setpbgactivebank(localclientnum, 4);
       } else {
         setpbgactivebank(localclientnum, 1);
@@ -173,7 +173,7 @@ function_33eae096(localclientnum, b_underwater) {
 
   self notify(#"hash_32c7af154e6c4ded");
 
-  if(self clientfield::get_to_player("" + # "boiler_fx")) {
+  if(self clientfield::get_to_player("" + #"boiler_fx")) {
     setpbgactivebank(localclientnum, 4);
   } else {
     setpbgactivebank(localclientnum, 1);

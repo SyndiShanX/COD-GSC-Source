@@ -78,8 +78,8 @@ function function_720ddf7f(func) {
 }
 
 function register() {
-  clientfield::register("missile", "" + # "hash_644cb829d0133e99", 1, 1, "int");
-  clientfield::register("missile", "" + # "hash_78a094001c919359", 1, 7, "float");
+  clientfield::register("missile", "" + #"hash_644cb829d0133e99", 1, 1, "int");
+  clientfield::register("missile", "" + #"hash_78a094001c919359", 1, 7, "float");
 }
 
 function on_player_killed(s_params) {
@@ -580,11 +580,11 @@ function ammo_weapon_pickup(ammo) {
 function deployanim() {
   self endon(#"death");
   self setanim(#"hash_70b2041b1f6ad89", 1, 0, 0);
-  self clientfield::set("" + # "hash_644cb829d0133e99", 1);
+  self clientfield::set("" + #"hash_644cb829d0133e99", 1);
   self waittill(#"trophysystemstopped");
   wait 0.1;
   self setanim(#"hash_70b2041b1f6ad89");
-  self clientfield::set("" + # "hash_644cb829d0133e99", 0);
+  self clientfield::set("" + #"hash_644cb829d0133e99", 0);
   self playSound(#"wpn_trophy_deploy_start");
   self playLoopSound(#"hash_656f8209ae1d1424", 0.25);
   wait getanimlength(#"hash_70b2041b1f6ad89");

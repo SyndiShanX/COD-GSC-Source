@@ -1650,13 +1650,13 @@ function pstfx_teleport(var_e503e5a9, var_fd343efd, var_95d10fa4 = 0) {
   if(is_true(var_e503e5a9)) {
     level thread lui::screen_fade_out(var_fd343efd, "white", "pstfx_teleport_fade");
     wait 0.75;
-    level.player clientfield::set_to_player("" + # "pstfx_teleport", 1);
+    level.player clientfield::set_to_player("" + #"pstfx_teleport", 1);
     return;
   }
 
   level thread lui::screen_fade_in(var_fd343efd, "white", "pstfx_teleport_fade", undefined, var_95d10fa4);
   wait 0.15;
-  level.player clientfield::set_to_player("" + # "pstfx_teleport", 0);
+  level.player clientfield::set_to_player("" + #"pstfx_teleport", 0);
 }
 
 function function_51923449() {

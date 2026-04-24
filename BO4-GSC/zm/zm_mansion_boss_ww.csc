@@ -29,14 +29,14 @@ __init__() {
 }
 
 init_clientfields() {
-  clientfield::register("world", "" + # "hash_2709d50a7b0a2b01", 8000, 1, "int", &function_6e123c7b, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_87483ed44cb2791", 8000, 1, "int", &function_a346a156, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_69c1868b7a8a7beb", 8000, 1, "int", &function_72efa790, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1bf2c2f62ad1bf56", 8000, 1, "int", &function_931bac5a, 0, 0);
+  clientfield::register("world", "" + #"hash_2709d50a7b0a2b01", 8000, 1, "int", &function_6e123c7b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_87483ed44cb2791", 8000, 1, "int", &function_a346a156, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_69c1868b7a8a7beb", 8000, 1, "int", &function_72efa790, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1bf2c2f62ad1bf56", 8000, 1, "int", &function_931bac5a, 0, 0);
   clientfield::register("scriptmover", "bs_sigil_fx", 8000, 3, "int", &function_1d15a456, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5cca35fc43fa51e6", 8000, 3, "int", &function_444660d9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6ad20bd0d84e8602", 8000, 1, "int", &function_abea158a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4ca506515aec02d3", 8000, 1, "int", &function_b5901c02, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5cca35fc43fa51e6", 8000, 3, "int", &function_444660d9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6ad20bd0d84e8602", 8000, 1, "int", &function_abea158a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4ca506515aec02d3", 8000, 1, "int", &function_b5901c02, 0, 0);
   clientfield::register("allplayers", "pstfx_zm_man_targeted_cf", 8000, 1, "int", &function_2a48bf1c, 0, 0);
 }
 

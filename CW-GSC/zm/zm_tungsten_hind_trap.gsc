@@ -90,7 +90,7 @@ function function_f13155cb() {
   self function_7265ebeb(undefined);
   level flag::wait_till("power_on");
   self function_7265ebeb(1);
-  self.var_d6b3b6e0 clientfield::set("" + # "hash_16e5e4d2ea0716b7", 2);
+  self.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 2);
 }
 
 function function_3c3b85e6() {
@@ -167,8 +167,8 @@ function function_4eaecff9() {
   self playSound(#"hash_137dbe10929df4eb");
   self.var_fdec2822 waittill(#"rotatedone");
   self function_7265ebeb(0);
-  self.var_fdec2822 clientfield::increment("" + # "hash_575d68a64ff032b2", 1);
-  self.var_d6b3b6e0 clientfield::set("" + # "hash_16e5e4d2ea0716b7", 1);
+  self.var_fdec2822 clientfield::increment("" + #"hash_575d68a64ff032b2", 1);
+  self.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 1);
 }
 
 function function_b53f905a() {
@@ -177,7 +177,7 @@ function function_b53f905a() {
   wait 0.3;
   self playSound(#"hash_7744ef898bf5b90e");
   self function_7265ebeb(0);
-  self.var_d6b3b6e0 clientfield::set("" + # "hash_16e5e4d2ea0716b7", 1);
+  self.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 1);
 }
 
 function private function_795e2881(e_owner) {
@@ -224,7 +224,7 @@ function private function_9f433625() {
   self playSound(#"hash_59680d123025c6f0");
   wait 0.3;
   self function_7265ebeb(1);
-  self.var_d6b3b6e0 clientfield::set("" + # "hash_16e5e4d2ea0716b7", 2);
+  self.var_d6b3b6e0 clientfield::set("" + #"hash_16e5e4d2ea0716b7", 2);
 }
 
 function private function_8ff4b970() {
@@ -592,7 +592,7 @@ function function_f35a7c49(target) {
         var_8d2dfb7b = 1;
       }
 
-      self clientfield::increment("" + # "hash_27556b053ce9a6a2", 1);
+      self clientfield::increment("" + #"hash_27556b053ce9a6a2", 1);
       var_72f571c9++;
       var_9920b31d++;
     } else {
@@ -603,7 +603,7 @@ function function_f35a7c49(target) {
         v_offset = (0, 0, randomfloatrange(0, 40));
       }
 
-      self clientfield::increment("" + # "hash_27556b053ce9a6a2", 1);
+      self clientfield::increment("" + #"hash_27556b053ce9a6a2", 1);
     }
 
     var_cbe2a4ad = self.var_b74bb962.origin + anglesToForward(self.var_b74bb962.angles) * 2000;

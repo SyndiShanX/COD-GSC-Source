@@ -977,10 +977,10 @@ setupweapontoitemmapping() {
 
 playerhasvalidweapon() {
   var_0 = self getcurrentprimaryweapon();
-  return weaponisvalid(var_0);
+  return weaponisValid(var_0);
 }
 
-weaponisvalid(var_0) {
+weaponisValid(var_0) {
   return var_0 != "" && var_0 != "none" && !maps\mp\zombies\_util::iszombiekillstreakweapon(var_0) && !maps\mp\zombies\_util::isrippedturretweapon(var_0) && !maps\mp\zombies\_util::iszombieequipment(var_0);
 }
 
@@ -1189,12 +1189,12 @@ playergiveammo() {
   self endon("disconnect");
   var_0 = self getcurrentprimaryweapon();
 
-  if(!weaponisvalid(var_0)) {
+  if(!weaponisValid(var_0)) {
     var_0 = undefined;
     var_1 = self getweaponslistprimaries();
 
     foreach(var_3 in var_1) {
-      if(weaponisvalid(var_3)) {
+      if(weaponisValid(var_3)) {
         var_0 = var_3;
         break;
       }

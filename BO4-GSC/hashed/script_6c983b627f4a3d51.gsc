@@ -27,7 +27,7 @@ function_29bff3c6() {
   level.var_d5ba7324 = util::spawn_model(#"tag_origin", level.s_apollo_bowl.origin, level.s_apollo_bowl.angles);
   waitframe(1);
   level.var_705db276 = 1;
-  level.var_d5ba7324 clientfield::set("" + # "hash_74fc30de57a0657a", level.var_705db276);
+  level.var_d5ba7324 clientfield::set("" + #"hash_74fc30de57a0657a", level.var_705db276);
   a_players = getplayers();
   level.var_6a1bdc96 = 16 * a_players.size;
   level.var_ba3adfd9 = [];
@@ -59,7 +59,7 @@ function_9c8540b4(e_player, n_amount) {
         }
       }
 
-      level.var_d5ba7324 clientfield::set("" + # "hash_74fc30de57a0657a", level.var_705db276);
+      level.var_d5ba7324 clientfield::set("" + #"hash_74fc30de57a0657a", level.var_705db276);
     }
 
     if(level.var_705db276 == 5) {
@@ -118,5 +118,5 @@ function_407b2b88() {
   level flag::wait_till("all_players_connected");
   level flag::wait_till("power_on");
   level.var_483180c5 = getent("coal_brazier_apollo", "targetname");
-  level.var_483180c5 clientfield::set("" + # "rob_coals", 1);
+  level.var_483180c5 clientfield::set("" + #"rob_coals", 1);
 }

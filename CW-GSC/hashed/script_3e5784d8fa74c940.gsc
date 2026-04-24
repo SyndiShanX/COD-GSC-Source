@@ -43,9 +43,9 @@ function private preinit() {
   callback::add_weapon_fired(level.var_a467bdbc, &function_43a02dae);
   callback::add_weapon_fired(level.ray_rifle_upgraded, &function_a70ad564);
   callback::add_weapon_fired(level.var_3415bf61, &function_43a02dae);
-  clientfield::register("scriptmover", "" + # "hash_47e7d5219a26a786", 16000, 3, "int");
-  clientfield::register("actor", "" + # "hash_3a47820a21ce3170", 16000, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_7508e13e17dd1e3c", 16000, 4, "int");
+  clientfield::register("scriptmover", "" + #"hash_47e7d5219a26a786", 16000, 3, "int");
+  clientfield::register("actor", "" + #"hash_3a47820a21ce3170", 16000, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_7508e13e17dd1e3c", 16000, 4, "int");
   namespace_9ff9f642::register_slowdown(#"hash_5c37161904f4bcc9", 0.8, 3);
   namespace_9ff9f642::register_slowdown(#"hash_21cb91304fde349a", 0.5, 5);
   callback::on_weapon_change(&function_54e9969b);
@@ -148,7 +148,7 @@ function function_d4759f13(ammo_state, var_a444fb = 0, var_93eafdc0 = 0) {
     ammo_state += 8;
   }
 
-  self clientfield::set("" + # "hash_7508e13e17dd1e3c", ammo_state);
+  self clientfield::set("" + #"hash_7508e13e17dd1e3c", ammo_state);
 }
 
 function function_2715ee2d(weapon) {
@@ -597,7 +597,7 @@ function function_b198b062(stage) {
     stage += 4;
   }
 
-  self clientfield::set("" + # "hash_47e7d5219a26a786", stage);
+  self clientfield::set("" + #"hash_47e7d5219a26a786", stage);
 }
 
 function function_65ba5ec2(params) {
@@ -608,9 +608,9 @@ function function_65ba5ec2(params) {
   if(function_2715ee2d(params.weapon)) {
     if(self function_bdb8126a()) {
       if(isPlayer(params.eattacker) && params.eattacker function_4ba529a7(params.weapon)) {
-        self clientfield::set("" + # "hash_3a47820a21ce3170", 2);
+        self clientfield::set("" + #"hash_3a47820a21ce3170", 2);
       } else {
-        self clientfield::set("" + # "hash_3a47820a21ce3170", 1);
+        self clientfield::set("" + #"hash_3a47820a21ce3170", 1);
       }
 
       self thread function_5a2447b1(2);

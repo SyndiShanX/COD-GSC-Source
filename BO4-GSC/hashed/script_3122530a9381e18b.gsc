@@ -25,7 +25,7 @@
 
 preload() {
   namespace_bd74bbd2::register(#"sc_mk2v", 20000, "sc_mk2v", &function_a66f0de2, &function_17f3e9e2);
-  clientfield::register("scriptmover", "" + # "hash_7b37fadc13d402a3", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_7b37fadc13d402a3", 20000, 1, "int");
 }
 
 init() {
@@ -271,7 +271,7 @@ function_a66f0de2() {
   s_unitrigger = level.var_9eccff99.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_e90f6026, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_9eccff99.var_fead3ae9 setModel("p8_zm_whi_fuse_pickup_fluid_yellow");
-  level.var_9eccff99.var_fead3ae9 clientfield::set("" + # "hash_7b37fadc13d402a3", 1);
+  level.var_9eccff99.var_fead3ae9 clientfield::set("" + #"hash_7b37fadc13d402a3", 1);
   level notify(#"hash_b8dfde4a4e85cd2");
 }
 

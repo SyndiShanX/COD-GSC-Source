@@ -27,7 +27,7 @@ function init_shared() {
   clientfield::register("scriptmover", "standardTagFxSet", 1, 1, "int", &function_eef48704, 0, 0);
   clientfield::register("scriptmover", "lowHealthTagFxSet", 1, 1, "int", &function_11044e2b, 0, 0);
   clientfield::register("scriptmover", "deathTagFxSet", 1, 1, "int", &function_d440313, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_524d30f5676b2070", 1, 1, "int", &function_ce367b0c, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_524d30f5676b2070", 1, 1, "int", &function_ce367b0c, 0, 0);
   clientfield::register("vehicle", "scorestreakActive", 1, 1, "int", &function_5ec060c4, 0, 0);
   clientfield::register("scriptmover", "scorestreakActive", 1, 1, "int", &function_5ec060c4, 0, 0);
   callback::on_spawned(&on_player_spawned);

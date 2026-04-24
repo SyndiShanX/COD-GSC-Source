@@ -12,9 +12,9 @@
 #namespace zm_platinum_ww_quest;
 
 function function_f8a8ff3f() {
-  clientfield::register("scriptmover", "" + # "hash_1fc683b0af884f6b", 24000, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_6d58634b9c00e983", 24000, 1, "int");
-  clientfield::register("scriptmover", "" + # "highlight_dial", 24000, 4, "int");
+  clientfield::register("scriptmover", "" + #"hash_1fc683b0af884f6b", 24000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_6d58634b9c00e983", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"highlight_dial", 24000, 4, "int");
   level.var_ea51eeb9 = {};
   level.var_ea51eeb9 thread function_756f46cf();
   level.var_ea51eeb9 thread function_faf723a();
@@ -63,7 +63,7 @@ function function_756f46cf() {
   util::wait_network_frame();
 
   if(isDefined(var_4188f862)) {
-    var_4188f862 clientfield::set("" + # "hash_1fc683b0af884f6b", 1);
+    var_4188f862 clientfield::set("" + #"hash_1fc683b0af884f6b", 1);
   }
 }
 
@@ -74,8 +74,8 @@ function function_19a410e2(var_a370eede) {
     var_4d05aafa |= 4;
   }
 
-  self clientfield::set("" + # "highlight_dial", var_4d05aafa);
-  self.var_2cc651d5 clientfield::set("" + # "highlight_dial", var_4d05aafa | 8);
+  self clientfield::set("" + #"highlight_dial", var_4d05aafa);
+  self.var_2cc651d5 clientfield::set("" + #"highlight_dial", var_4d05aafa | 8);
 }
 
 function function_faf723a() {

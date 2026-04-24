@@ -29,7 +29,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_399ab6541d717dc7", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_399ab6541d717dc7", 1, 1, "int");
   level.var_2e1abf5f = getweapon(#"hash_6a4dd5ed56f6e3f6");
   weaponobjects::function_e6400478(#"hash_6a4dd5ed56f6e3f6", &function_54881ba1, 1);
   zm_weapons::function_404c3ad5(level.var_2e1abf5f, &function_995359b9);
@@ -354,7 +354,7 @@ function function_9c0c8ac3(v_vortex_origin, n_vortex_radius, n_start_time, n_vor
         continue;
       }
 
-      ai_zombie clientfield::set("" + # "hash_399ab6541d717dc7", 1);
+      ai_zombie clientfield::set("" + #"hash_399ab6541d717dc7", 1);
       ai_zombie.blockingpain = 1;
       ai_zombie thread function_fb7c4f41();
 
@@ -450,7 +450,7 @@ function private function_fb7c4f41() {
   self notify(#"affected_fx");
   self endon(#"death", #"affected_fx");
   wait 0.25;
-  self clientfield::set("" + # "hash_399ab6541d717dc7", 0);
+  self clientfield::set("" + #"hash_399ab6541d717dc7", 0);
   self.blockingpain = 0;
 }
 

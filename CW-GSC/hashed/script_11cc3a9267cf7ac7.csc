@@ -14,7 +14,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("toplayer", "" + # "hash_3a86c740229275b7", 1, 3, "counter", &function_d5270d1a, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_3a86c740229275b7", 1, 3, "counter", &function_d5270d1a, 0, 0);
 }
 
 function function_d5270d1a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

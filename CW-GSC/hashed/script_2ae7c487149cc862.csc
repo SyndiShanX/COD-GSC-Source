@@ -12,19 +12,19 @@
 #namespace namespace_4db53432;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("allplayers", "" + # "hash_63af42145e260fb5", 1, 2, "int", &function_4fd00e1f, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_5323a6afe3b7e366", 1, 1, "counter", &function_53ab1c7, 0, 0);
-  clientfield::register("allplayers", "" + # "turnoff_scrambler", 1, 1, "counter", &function_ebf5d79, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_bd79b6ca5ca6bc0", 1, 2, "int", &function_f002c513, 0, 0);
-  clientfield::register("toplayer", "" + # "dark_aether", 1, 1, "int", &function_98c5cac0, 0, 0);
-  clientfield::register("toplayer", "" + # "teleport_blur", 1, 1, "int", &teleport_blur, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_37895eb34ae6a3b0", 1, 1, "counter", &function_9609c8b9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2a3141c1214d6eaa", 1, 1, "counter", &function_6a4e64d1, 0, 0);
-  clientfield::register("scriptmover", "" + # "aether_beam", 1, 1, "int", &function_94fa6eb5, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_bd6060c10031f98", 1, 1, "int", &function_7999ed44, 0, 0);
-  clientfield::register("scriptmover", "" + # "barrier_fx", 1, 1, "int", &barrier_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "jellyfish_trail", 1, 1, "counter", &function_20a79dc5, 0, 0);
-  clientfield::register("world", "" + # "hash_77ba2c603a746873", 1, 1, "int", &function_eac49163, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_63af42145e260fb5", 1, 2, "int", &function_4fd00e1f, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_5323a6afe3b7e366", 1, 1, "counter", &function_53ab1c7, 0, 0);
+  clientfield::register("allplayers", "" + #"turnoff_scrambler", 1, 1, "counter", &function_ebf5d79, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_bd79b6ca5ca6bc0", 1, 2, "int", &function_f002c513, 0, 0);
+  clientfield::register("toplayer", "" + #"dark_aether", 1, 1, "int", &function_98c5cac0, 0, 0);
+  clientfield::register("toplayer", "" + #"teleport_blur", 1, 1, "int", &teleport_blur, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_37895eb34ae6a3b0", 1, 1, "counter", &function_9609c8b9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2a3141c1214d6eaa", 1, 1, "counter", &function_6a4e64d1, 0, 0);
+  clientfield::register("scriptmover", "" + #"aether_beam", 1, 1, "int", &function_94fa6eb5, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_bd6060c10031f98", 1, 1, "int", &function_7999ed44, 0, 0);
+  clientfield::register("scriptmover", "" + #"barrier_fx", 1, 1, "int", &barrier_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"jellyfish_trail", 1, 1, "counter", &function_20a79dc5, 0, 0);
+  clientfield::register("world", "" + #"hash_77ba2c603a746873", 1, 1, "int", &function_eac49163, 0, 0);
   util::waitforclient(0);
 }
 

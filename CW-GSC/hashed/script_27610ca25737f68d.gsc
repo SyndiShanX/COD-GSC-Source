@@ -22,8 +22,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("missile", "" + # "hash_36112e7cad541b66", 1, 2, "int");
-  clientfield::register("missile", "" + # "hash_2d55ead1309349bc", 1, 3, "int");
+  clientfield::register("missile", "" + #"hash_36112e7cad541b66", 1, 2, "int");
+  clientfield::register("missile", "" + #"hash_2d55ead1309349bc", 1, 3, "int");
   level.var_887c77a4 = "destroyed_armor_zm";
   callback::on_ai_killed(&function_9b6145a);
   namespace_1b527536::function_36e0540e(#"energy_mine", 1, 30, "field_upgrade_energy_mine_item_sr");
@@ -95,8 +95,8 @@ function function_a6da15be(params) {
 
   if(isDefined(e_mine)) {
     e_mine notify(#"starting_detonation");
-    e_mine clientfield::set("" + # "hash_36112e7cad541b66", 0);
-    e_mine clientfield::set("" + # "hash_2d55ead1309349bc", var_79e920ac);
+    e_mine clientfield::set("" + #"hash_36112e7cad541b66", 0);
+    e_mine clientfield::set("" + #"hash_2d55ead1309349bc", var_79e920ac);
     v_origin = e_mine.origin;
   }
 
@@ -152,7 +152,7 @@ function private function_1e6559d5(var_29030410) {
 
   self util::waittillnotmoving();
   wait 0.5;
-  self clientfield::set("" + # "hash_36112e7cad541b66", var_29030410);
+  self clientfield::set("" + #"hash_36112e7cad541b66", var_29030410);
 }
 
 function private function_a24e7103(e_player, n_radius) {

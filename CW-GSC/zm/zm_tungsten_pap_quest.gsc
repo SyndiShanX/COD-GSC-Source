@@ -39,13 +39,13 @@
 #namespace zm_tungsten_pap_quest;
 
 function init() {
-  clientfield::register("world", "" + # "hash_2c7fb1cc66c590a0", 28000, getminbitcountfornum(2), "int");
-  clientfield::register("world", "" + # "hash_18f96dcb4766fbe8", 28000, 1, "int");
-  clientfield::register("world", "" + # "hash_45c3013f063fe2c7", 28000, getminbitcountfornum(2), "int");
-  clientfield::register("world", "" + # "hash_3432d09ff93c9a0c", 28000, 1, "int");
-  clientfield::register("world", "" + # "hash_27308a7dd991ce8d", 28000, 1, "int");
-  clientfield::register("actor", "" + # "hash_54e2a4e02a26cc62", 28000, 1, "counter");
-  clientfield::register("world", "" + # "hash_12eb39113e9737f8", 28000, 1, "int");
+  clientfield::register("world", "" + #"hash_2c7fb1cc66c590a0", 28000, getminbitcountfornum(2), "int");
+  clientfield::register("world", "" + #"hash_18f96dcb4766fbe8", 28000, 1, "int");
+  clientfield::register("world", "" + #"hash_45c3013f063fe2c7", 28000, getminbitcountfornum(2), "int");
+  clientfield::register("world", "" + #"hash_3432d09ff93c9a0c", 28000, 1, "int");
+  clientfield::register("world", "" + #"hash_27308a7dd991ce8d", 28000, 1, "int");
+  clientfield::register("actor", "" + #"hash_54e2a4e02a26cc62", 28000, 1, "counter");
+  clientfield::register("world", "" + #"hash_12eb39113e9737f8", 28000, 1, "int");
   level zm_sq::register(#"pap_quest", #"hash_2567a4f3df93c2b0", #"hash_b71b93f558098d2", &function_d6912122, &function_901d4808);
   level zm_sq::register(#"pap_quest", #"hash_6552da7c5bcf7970", #"pap_quest_holdout_until_teleporter_restart_step", &function_15cbe9b3, &function_ae76d66e);
   level zm_sq::register(#"pap_quest", #"hash_3a495b8c519be728", #"hash_10767b6cc12968e", &function_4a137892, &function_150a6555);
@@ -63,13 +63,13 @@ function init() {
 }
 
 function function_5a72edf0() {
-  level clientfield::set("" + # "hash_45c3013f063fe2c7", 1);
+  level clientfield::set("" + #"hash_45c3013f063fe2c7", 1);
   portal_fx = getent("portal_fx_bunker_to_observation", "targetname");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   portal_fx = getent("portal_fx_helipads_to_observation", "targetname");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_7c52431e19ff8737", "targetname");
-  level clientfield::set("" + # "hash_27308a7dd991ce8d", 1);
+  level clientfield::set("" + #"hash_27308a7dd991ce8d", 1);
   level thread gestures::function_ba4529d4(#"hash_606686a1b66827ac");
   level thread function_266ae0b1();
   level thread function_5ad3e281();
@@ -224,7 +224,7 @@ function function_901d4808(b_skipped, var_19e802fa) {
   level.var_150884c = undefined;
   zm_sq::objective_complete(#"hash_6b0d99dea8e99af5");
   level flag::set(#"hash_5981a23fdea21f78");
-  level clientfield::set("" + # "hash_2c7fb1cc66c590a0", 1);
+  level clientfield::set("" + #"hash_2c7fb1cc66c590a0", 1);
   portal_fx = getent("portal_fx_helipads_to_main_street", "targetname");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_5b9b9143bf52fa5f", "targetname");
@@ -248,7 +248,7 @@ function function_ae76d66e(b_skipped, var_19e802fa) {
 
   zm_sq::objective_complete(#"hash_6b0d96dea8e995dc");
   level flag::set(#"hash_23042147964b0bc2");
-  level clientfield::set("" + # "hash_2c7fb1cc66c590a0", 2);
+  level clientfield::set("" + #"hash_2c7fb1cc66c590a0", 2);
 }
 
 function function_4a137892(b_skipped) {
@@ -595,11 +595,11 @@ function function_57c1663d(b_skipped) {
   level flag::wait_till(#"hash_219a3f198a6aa63");
   zm_crafting::function_ca244624(#"hash_434e63df930cc195");
   zm_sq::objective_complete(#"hash_6b0d93dea8e990c3");
-  level clientfield::set("" + # "hash_18f96dcb4766fbe8", 1);
+  level clientfield::set("" + #"hash_18f96dcb4766fbe8", 1);
   portal_fx = getent("portal_fx_anytown_usa_to_bunker", "targetname");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_12a9771a2346ed59", "targetname");
-  level clientfield::set("" + # "hash_27308a7dd991ce8d", 0);
+  level clientfield::set("" + #"hash_27308a7dd991ce8d", 0);
   level function_891d8fc(#"hash_3976f9f041f5b338");
 }
 
@@ -615,9 +615,9 @@ function function_1446ef30() {
     player = waitresult.activator;
 
     if(waitresult.unitrigger.stub.blueprint.name === "zblueprint_tungsten_damaged_teleporter") {
-      level clientfield::set("" + # "hash_12eb39113e9737f8", 1);
+      level clientfield::set("" + #"hash_12eb39113e9737f8", 1);
       player waittill(#"crafting_fail", #"death", #"disconnect");
-      level clientfield::set("" + # "hash_12eb39113e9737f8", 0);
+      level clientfield::set("" + #"hash_12eb39113e9737f8", 0);
     }
   }
 }
@@ -627,24 +627,24 @@ function function_80f4c05c(b_skipped, var_19e802fa) {
     level flag::set(#"hash_219a3f198a6aa63");
     zm_sq::objective_complete(#"hash_6b0d93dea8e990c3");
     zm_crafting::function_ca244624(#"hash_434e63df930cc195");
-    level clientfield::set("" + # "hash_18f96dcb4766fbe8", 1);
+    level clientfield::set("" + #"hash_18f96dcb4766fbe8", 1);
     portal_fx = getent("portal_fx_anytown_usa_to_bunker", "targetname");
     playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
     level thread scene::play(#"hash_12a9771a2346ed59", "targetname");
-    level clientfield::set("" + # "hash_27308a7dd991ce8d", 0);
+    level clientfield::set("" + #"hash_27308a7dd991ce8d", 0);
     level flag::set(#"hash_3976f9f041f5b338");
   } else if(b_skipped) {
     zm_crafting::function_ca244624(#"hash_434e63df930cc195");
-    level clientfield::set("" + # "hash_18f96dcb4766fbe8", 1);
+    level clientfield::set("" + #"hash_18f96dcb4766fbe8", 1);
     portal_fx = getent("portal_fx_anytown_usa_to_bunker", "targetname");
     playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
     level thread scene::play(#"hash_12a9771a2346ed59", "targetname");
-    level clientfield::set("" + # "hash_27308a7dd991ce8d", 0);
+    level clientfield::set("" + #"hash_27308a7dd991ce8d", 0);
     level flag::set(#"hash_3976f9f041f5b338");
   }
 
   callback::remove_on_spawned(&on_player_spawned);
-  level util::delay(5, "end_game", &clientfield::set, "" + # "hash_12eb39113e9737f8", 0);
+  level util::delay(5, "end_game", &clientfield::set, "" + #"hash_12eb39113e9737f8", 0);
 }
 
 function function_71d12bb(b_skipped) {
@@ -701,7 +701,7 @@ function function_cb435598(b_skipped, var_19e802fa) {
   }
 
   zm_sq::objective_complete(#"hash_132e68438fc2576c");
-  level clientfield::set("" + # "hash_45c3013f063fe2c7", 2);
+  level clientfield::set("" + #"hash_45c3013f063fe2c7", 2);
 }
 
 function function_4710b248(b_skipped) {
@@ -775,7 +775,7 @@ function private function_168d593a() {
 
         if(isDefined(ai)) {
           ai thread function_43ea27c1();
-          ai clientfield::increment("" + # "hash_54e2a4e02a26cc62", 1);
+          ai clientfield::increment("" + #"hash_54e2a4e02a26cc62", 1);
         } else {
           wait 1;
         }
@@ -827,7 +827,7 @@ function function_a5034a1(b_skipped, var_19e802fa) {
     level flag::clear("pause_round_timeout");
   }
 
-  level clientfield::set("" + # "hash_45c3013f063fe2c7", 1);
+  level clientfield::set("" + #"hash_45c3013f063fe2c7", 1);
   exploder::stop_exploder("lgt_env_teleporter_red");
   exploder::exploder("lgt_env_teleporter_purple");
 }
@@ -898,7 +898,7 @@ function function_8ad7a0a7(b_skipped, var_19e802fa) {
   level flag::clear(#"disable_weapon_machine");
   zm_unitrigger::unregister_unitrigger(level.var_2932d13.s_unitrigger);
   level flag::set("enable_round_timeout");
-  level clientfield::set("" + # "hash_3432d09ff93c9a0c", 1);
+  level clientfield::set("" + #"hash_3432d09ff93c9a0c", 1);
   portal_fx = getent("portal_fx_observation_to_helipads", "targetname");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_6331244ff2bb3ab1", "targetname");
@@ -1031,17 +1031,17 @@ function function_891d8fc(var_324be745) {
 
 function function_8ac7a154() {
   level flag::set(#"hash_23042147964b0bc2");
-  level clientfield::set("<dev string:x38>" + # "hash_2c7fb1cc66c590a0", 1);
+  level clientfield::set("<dev string:x38>" + #"hash_2c7fb1cc66c590a0", 1);
   portal_fx = getent("<dev string:x3c>", "<dev string:x61>");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   level thread scene::play(#"hash_5b9b9143bf52fa5f", "<dev string:x61>");
   level flag::set(#"hash_3976f9f041f5b338");
-  level clientfield::set("<dev string:x38>" + # "hash_18f96dcb4766fbe8", 1);
+  level clientfield::set("<dev string:x38>" + #"hash_18f96dcb4766fbe8", 1);
   portal_fx = getent("<dev string:x6f>", "<dev string:x61>");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
-  level clientfield::set("<dev string:x38>" + # "hash_27308a7dd991ce8d", 0);
+  level clientfield::set("<dev string:x38>" + #"hash_27308a7dd991ce8d", 0);
   level thread scene::play(#"hash_12a9771a2346ed59", "<dev string:x61>");
-  level clientfield::set("<dev string:x38>" + # "hash_3432d09ff93c9a0c", 1);
+  level clientfield::set("<dev string:x38>" + #"hash_3432d09ff93c9a0c", 1);
   portal_fx = getent("<dev string:x92>", "<dev string:x61>");
   playsoundatposition(#"hash_4e9f052116a0cb95", portal_fx.origin);
   portal_fx = getent("<dev string:xb7>", "<dev string:x61>");

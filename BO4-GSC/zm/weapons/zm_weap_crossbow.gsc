@@ -35,14 +35,14 @@ __init__() {
   level.w_crossbow_charged = getweapon(#"ww_crossbow_charged_t8");
   level.w_crossbow_charged_upgraded = getweapon(#"ww_crossbow_charged_t8_upgraded");
   level.var_7cfd8159 = [];
-  clientfield::register("missile", "" + # "hash_6308b5ed3cbd99e3", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_37c2ef99d645cf87", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_37c2ef99d645cf87", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_690509b9a2ec2ef3", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_290836b72f987780", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_faa2f4808c12f8d", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_6c3560ab45e186ec", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "hash_b38c687db71dae", 1, 1, "int");
+  clientfield::register("missile", "" + #"hash_6308b5ed3cbd99e3", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_37c2ef99d645cf87", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_37c2ef99d645cf87", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_690509b9a2ec2ef3", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_6c3560ab45e186ec", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_b38c687db71dae", 1, 1, "int");
   callback::on_ai_damage(&function_615d8c38);
   callback::on_connect(&function_39ffd9fc);
   callback::on_connect(&function_89ec3604);
@@ -77,12 +77,12 @@ function_89ec3604() {
         self.var_bcc8f4f0 = 0;
       }
 
-      self clientfield::set("" + # "hash_290836b72f987780", 1);
+      self clientfield::set("" + #"hash_290836b72f987780", 1);
       b_charged = 0;
 
       while(self attackButtonPressed() && is_crossbow(w_current) && !self meleeButtonPressed() && !self laststand::player_is_in_laststand()) {
         if(!b_charged && is_crossbow_charged(w_current, self)) {
-          self clientfield::set("" + # "hash_290836b72f987780", 0);
+          self clientfield::set("" + #"hash_290836b72f987780", 0);
           b_charged = 1;
         }
 
@@ -90,7 +90,7 @@ function_89ec3604() {
         waitframe(1);
       }
 
-      self clientfield::set("" + # "hash_290836b72f987780", 0);
+      self clientfield::set("" + #"hash_290836b72f987780", 0);
     } else if(is_crossbow(w_current) && !self isreloading() && !self function_8426ad52(w_current) && !self.var_bcc8f4f0) {
       self.var_bcc8f4f0 = 1;
     }
@@ -139,7 +139,7 @@ function_8426ad52(weapon) {
 
 crossbow_weapon_change(params) {
   if(is_crossbow(params.weapon) && !is_crossbow_charged(params.weapon)) {
-    self clientfield::set("" + # "hash_b38c687db71dae", 1);
+    self clientfield::set("" + #"hash_b38c687db71dae", 1);
     self thread function_7157628d();
     return;
   }
@@ -157,7 +157,7 @@ function_7157628d() {
     w_current = self getcurrentweapon();
 
     if(is_crossbow(w_current) && self ismeleeing()) {
-      self clientfield::set("" + # "hash_b38c687db71dae", 0);
+      self clientfield::set("" + #"hash_b38c687db71dae", 0);
 
       while(self ismeleeing()) {
         waitframe(1);
@@ -166,15 +166,15 @@ function_7157628d() {
       w_current = self getcurrentweapon();
 
       if(is_crossbow(w_current)) {
-        self clientfield::set("" + # "hash_b38c687db71dae", 1);
+        self clientfield::set("" + #"hash_b38c687db71dae", 1);
       }
     } else if(is_crossbow(w_current) && function_8426ad52(w_current) && self.chargeshotlevel > 1 && !self.b_crossbow_charged && self attackButtonPressed()) {
-      self clientfield::set("" + # "hash_faa2f4808c12f8d", 1);
-      self clientfield::set("" + # "hash_b38c687db71dae", 0);
+      self clientfield::set("" + #"hash_faa2f4808c12f8d", 1);
+      self clientfield::set("" + #"hash_b38c687db71dae", 0);
       self.b_crossbow_charged = 1;
     } else if(self.b_crossbow_charged && (self.chargeshotlevel <= 1 || !self attackButtonPressed())) {
-      self clientfield::set("" + # "hash_faa2f4808c12f8d", 0);
-      self clientfield::set("" + # "hash_b38c687db71dae", 1);
+      self clientfield::set("" + #"hash_faa2f4808c12f8d", 0);
+      self clientfield::set("" + #"hash_b38c687db71dae", 1);
       self.b_crossbow_charged = 0;
     }
 
@@ -183,7 +183,7 @@ function_7157628d() {
 }
 
 function_a4d47b95(str_notify) {
-  self clientfield::set("" + # "hash_b38c687db71dae", 0);
+  self clientfield::set("" + #"hash_b38c687db71dae", 0);
 }
 
 function_39ffd9fc() {
@@ -275,7 +275,7 @@ function_6d8527c2(var_37fa9b04, str_scene, str_shot) {
   params = {
     #eattacker: var_37fa9b04.attacker, #einflictor: var_37fa9b04.inflictor, #weapon: var_37fa9b04.weapon, #smeansofdeath: var_37fa9b04.mod, #shitloc: "none"};
   self.var_2c2980d3 = 1;
-  self clientfield::set("" + # "hash_37c2ef99d645cf87", 1);
+  self clientfield::set("" + #"hash_37c2ef99d645cf87", 1);
 
   if(isDefined(str_scene)) {
     if(isDefined(str_shot)) {
@@ -288,7 +288,7 @@ function_6d8527c2(var_37fa9b04, str_scene, str_shot) {
   }
 
   self function_e1c4ab06(params);
-  self clientfield::set("" + # "hash_37c2ef99d645cf87", 0);
+  self clientfield::set("" + #"hash_37c2ef99d645cf87", 0);
   self.var_2c2980d3 = undefined;
 
   if(isDefined(str_scene)) {
@@ -385,7 +385,7 @@ function_c805f2f9(params) {
   }
 
   player.var_7cfd8159[player.var_7cfd8159.size] = self;
-  self clientfield::set("" + # "hash_37c2ef99d645cf87", 1);
+  self clientfield::set("" + #"hash_37c2ef99d645cf87", 1);
   str_scene = self function_e43d1b24();
 
   if(isDefined(str_scene) && isalive(self)) {
@@ -425,7 +425,7 @@ function_c805f2f9(params) {
     self.var_2c2980d3 = undefined;
     self.var_427e5396 = undefined;
     self.instakill_func = undefined;
-    self clientfield::set("" + # "hash_37c2ef99d645cf87", 0);
+    self clientfield::set("" + #"hash_37c2ef99d645cf87", 0);
 
     if(self.health <= 0 && self.archetype !== #"elephant") {
       self playSound("wpn_scorpion_zombie_explode");
@@ -554,10 +554,10 @@ function_e1c4ab06(params) {
           ai.var_427e5396 = 1;
 
           if(is_crossbow_upgraded(w_crossbow)) {
-            ai clientfield::set("" + # "hash_690509b9a2ec2ef3", 2);
+            ai clientfield::set("" + #"hash_690509b9a2ec2ef3", 2);
             ai function_9fa5e527(10);
           } else {
-            ai clientfield::set("" + # "hash_690509b9a2ec2ef3", 1);
+            ai clientfield::set("" + #"hash_690509b9a2ec2ef3", 1);
             ai function_9fa5e527(5);
           }
 
@@ -598,7 +598,7 @@ function_e1c4ab06(params) {
       }
 
       ai.var_427e5396 = undefined;
-      ai clientfield::set("" + # "hash_690509b9a2ec2ef3", 0);
+      ai clientfield::set("" + #"hash_690509b9a2ec2ef3", 0);
       ai function_43f61cad();
       util::wait_network_frame();
     }
@@ -778,7 +778,7 @@ function_62d37304(weapon) {
   self endon(#"disconnect");
 
   if(is_crossbow_charged(weapon, self)) {
-    self clientfield::increment("" + # "hash_6c3560ab45e186ec");
+    self clientfield::increment("" + #"hash_6c3560ab45e186ec");
   }
 
   if(level flagsys::get(#"hash_cad6742c753621")) {

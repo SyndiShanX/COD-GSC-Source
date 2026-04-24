@@ -9,11 +9,11 @@
 #namespace objective_retrieval;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("toplayer", "" + # "canister_effect", 1, 1, "int", &function_d3af9ddb, 0, 0);
-  clientfield::register("scriptmover", "" + # "canister_shockwave", 1, 1, "counter", &canister_shockwave, 0, 0);
-  clientfield::register("scriptmover", "" + # "container_collect", 1, 1, "int", &function_6b90cf3a, 0, 0);
-  clientfield::register("scriptmover", "" + # "canister_glow", 1, 1, "int", &function_1eb1d4d6, 0, 0);
-  clientfield::register("scriptmover", "" + # "rocket_thruster", 1, 1, "int", &function_5ce76614, 0, 0);
+  clientfield::register("toplayer", "" + #"canister_effect", 1, 1, "int", &function_d3af9ddb, 0, 0);
+  clientfield::register("scriptmover", "" + #"canister_shockwave", 1, 1, "counter", &canister_shockwave, 0, 0);
+  clientfield::register("scriptmover", "" + #"container_collect", 1, 1, "int", &function_6b90cf3a, 0, 0);
+  clientfield::register("scriptmover", "" + #"canister_glow", 1, 1, "int", &function_1eb1d4d6, 0, 0);
+  clientfield::register("scriptmover", "" + #"rocket_thruster", 1, 1, "int", &function_5ce76614, 0, 0);
   util::waitforclient(0);
 }
 

@@ -41,8 +41,8 @@
 #namespace zm_orange_ee_misc;
 
 preload() {
-  clientfield::register("toplayer", "" + # "hash_12114abc7407913b", 24000, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_5e38e846ce88405b", 24000, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_12114abc7407913b", 24000, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_5e38e846ce88405b", 24000, 1, "counter");
 }
 
 main() {
@@ -585,7 +585,7 @@ function_dbb49281() {
 
     if(n_time >= 30 && self adsButtonPressed() && (self zm_zonemgr::entity_in_zone("main_entrance") || self zm_zonemgr::entity_in_zone("outer_walkway") || self zm_zonemgr::entity_in_zone("loading_platform")) && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
-      self clientfield::increment_to_player("" + # "hash_12114abc7407913b", 1);
+      self clientfield::increment_to_player("" + #"hash_12114abc7407913b", 1);
       j_time = 0;
 
       while(self adsButtonPressed() && j_time < 5) {
@@ -627,7 +627,7 @@ function_b6b24d3a() {
 
     if(n_time >= 30 && distance(self.origin, var_616e76c5.origin) <= var_11dc5e9d && self zm_zonemgr::entity_in_zone("forecastle") && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self) && self getstance() === "crouch") {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
-      self clientfield::increment_to_player("" + # "hash_5e38e846ce88405b", 1);
+      self clientfield::increment_to_player("" + #"hash_5e38e846ce88405b", 1);
       b_saw_the_wth = 1;
     }
 

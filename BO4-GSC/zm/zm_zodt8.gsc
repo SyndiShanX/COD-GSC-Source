@@ -76,10 +76,10 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "narrative_trigger", 1, 1, "int");
   clientfield::register("world", "sfx_waterdrain_fore", 1, 1, "int");
   clientfield::register("world", "sfx_waterdrain_aft", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_2994a957c49bf321", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_7e91637e80ad93", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_16cc25b3f87f06ad", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_7f2f74f05d1f1b75", 1, 2, "int");
+  clientfield::register("world", "" + #"hash_2994a957c49bf321", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_7e91637e80ad93", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_16cc25b3f87f06ad", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_7f2f74f05d1f1b75", 1, 2, "int");
   clientfield::register("scriptmover", "tilt", 1, 1, "int");
   clientfield::register("scriptmover", "change_wave_water_height", 1, 1, "int");
   clientfield::register("scriptmover", "update_wave_water_height", 1, 1, "counter");
@@ -123,9 +123,9 @@ event_handler[level_init] main(eventstruct) {
     level thread function_3ad6764f();
   }
 
-  level clientfield::set("" + # "hash_3c58464f16d8a1be", 0);
-  level clientfield::set("" + # "hash_2994a957c49bf321", 1);
-  level clientfield::set("" + # "hash_7e91637e80ad93", 1);
+  level clientfield::set("" + #"hash_3c58464f16d8a1be", 0);
+  level clientfield::set("" + #"hash_2994a957c49bf321", 1);
+  level clientfield::set("" + #"hash_7e91637e80ad93", 1);
   e_clip = getent("e_clip_lifeboat", "targetname");
 
   if(isDefined(e_clip)) {
@@ -870,12 +870,12 @@ function_b40f577b(var_eb6a4856, var_bbaf1a87, n_time, var_65feb6ff, var_c6653d4,
 
   if(b_drain) {
     if(var_bbaf1a87 == "water_drained_fore") {
-      level clientfield::set("" + # "hash_7f2f74f05d1f1b75", 2);
+      level clientfield::set("" + #"hash_7f2f74f05d1f1b75", 2);
       level thread scene::play("p8_fxanim_zm_zod_cargo_hold_net_02_bundle", "Shot 2");
-      level thread function_94040dcd(1, var_eb6a4856, "" + # "hash_2994a957c49bf321", 570);
+      level thread function_94040dcd(1, var_eb6a4856, "" + #"hash_2994a957c49bf321", 570);
       level thread function_39dfeedc();
     } else {
-      level thread function_94040dcd(1, var_eb6a4856, "" + # "hash_7e91637e80ad93", 200);
+      level thread function_94040dcd(1, var_eb6a4856, "" + #"hash_7e91637e80ad93", 200);
     }
 
     level notify(var_bbaf1a87 + "_drain_start");
@@ -889,11 +889,11 @@ function_b40f577b(var_eb6a4856, var_bbaf1a87, n_time, var_65feb6ff, var_c6653d4,
   }
 
   if(var_bbaf1a87 == "water_drained_fore") {
-    level clientfield::set("" + # "hash_7f2f74f05d1f1b75", 3);
+    level clientfield::set("" + #"hash_7f2f74f05d1f1b75", 3);
     level thread scene::play("p8_fxanim_zm_zod_cargo_hold_net_02_bundle", "Shot 3");
-    level thread function_94040dcd(0, var_eb6a4856, "" + # "hash_7e91637e80ad93", 570);
+    level thread function_94040dcd(0, var_eb6a4856, "" + #"hash_7e91637e80ad93", 570);
   } else {
-    level thread function_94040dcd(0, var_eb6a4856, "" + # "hash_7e91637e80ad93", 200);
+    level thread function_94040dcd(0, var_eb6a4856, "" + #"hash_7e91637e80ad93", 200);
   }
 
   level notify(var_bbaf1a87 + "_refill_start");

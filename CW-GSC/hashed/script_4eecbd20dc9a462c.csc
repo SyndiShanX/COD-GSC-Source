@@ -10,10 +10,10 @@
 #namespace namespace_e8c18978;
 
 function preinit(bundlename) {
-  clientfield::register("toplayer", "" + # "hash_7c907650b14abbbe", 1, 1, "int", &function_d3a9eef4, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_4ddf67f7aa0f6884", 1, 1, "int", &function_241229f1, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_46646871455cab15", 1, 2, "int", &function_1da732e, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_6cf1a3b26118d892", 1, 1, "int", &function_d6f6757c, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7c907650b14abbbe", 1, 1, "int", &function_d3a9eef4, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_4ddf67f7aa0f6884", 1, 1, "int", &function_241229f1, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_46646871455cab15", 1, 2, "int", &function_1da732e, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_6cf1a3b26118d892", 1, 1, "int", &function_d6f6757c, 0, 0);
   level.var_f7dac9d2 = getscriptbundle("killstreak_chopper_gunner");
 
   if(!getdvarint(#"hash_4aad305a4a7f93db", 0)) {

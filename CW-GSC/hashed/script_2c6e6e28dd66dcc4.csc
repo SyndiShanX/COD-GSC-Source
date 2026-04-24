@@ -19,7 +19,7 @@ function preinit() {
 }
 
 function init_clientfields() {
-  clientfield::register("scriptmover", "" + # "fasttravel_playfx", 1, 2, "int", &fasttravel_playfx, 0, 0);
+  clientfield::register("scriptmover", "" + #"fasttravel_playfx", 1, 2, "int", &fasttravel_playfx, 0, 0);
 }
 
 function fasttravel_playFX(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

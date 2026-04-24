@@ -33,7 +33,7 @@ function private preinit() {
   clientfield::register("actor", "objective_cf_callout_rob", 1, 2, "int");
   clientfield::register("toplayer", "sr_defend_timer", 18000, getminbitcountfornum(900), "int");
   clientfield::register("scriptmover", "objective_cf_callout_rob", 1, 2, "int");
-  clientfield::register("scriptmover", "" + # "beam_source", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"beam_source", 1, 1, "int");
   clientfield::register("vehicle", "objective_cf_callout_rob", 1, 2, "int");
   clientfield::function_5b7d846d("hudItems.warzone.objectiveTotal", 1, 5, "int");
   clientfield::function_5b7d846d("hudItems.warzone.objectivesCompleted", 1, 5, "int");

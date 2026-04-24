@@ -59,7 +59,7 @@ __main__() {
 
   level flag::wait_till("all_players_spawned");
   level.var_4cca20a9 = getent("mdl_ww_trap_machine", "targetname");
-  level.var_4cca20a9 clientfield::set("" + # "hash_17df66ef5f71c0de", 1);
+  level.var_4cca20a9 clientfield::set("" + #"hash_17df66ef5f71c0de", 1);
 }
 
 function_670dda89() {
@@ -83,7 +83,7 @@ function_670dda89() {
   }
 
   self.mdl_handle rotatepitch(90, 0.5);
-  level.var_4cca20a9 clientfield::set("" + # "hash_17df66ef5f71c0de", 2);
+  level.var_4cca20a9 clientfield::set("" + #"hash_17df66ef5f71c0de", 2);
   fx_points = struct::get_array(self.target, "targetname");
 
   for(i = 0; i < fx_points.size; i++) {
@@ -121,7 +121,7 @@ function_38b44aab() {
   wait n_cooldown;
   self.mdl_handle rotatepitch(-90, 0.5);
   wait 0.5;
-  level.var_4cca20a9 clientfield::set("" + # "hash_17df66ef5f71c0de", 1);
+  level.var_4cca20a9 clientfield::set("" + #"hash_17df66ef5f71c0de", 1);
   level notify(#"traps_available", {
     #var_be3f58a: self.script_string
   });

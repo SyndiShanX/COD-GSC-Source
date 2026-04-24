@@ -10,17 +10,17 @@
 #namespace namespace_fa1c4f0a;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("scriptmover", "" + # "portal", 1, 1, "int", &portal_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2a7da9a87ecef87b", 1, 1, "int", &function_36ab0d37, 0, 0);
-  clientfield::register("scriptmover", "" + # "payload_teleport", 1, 2, "int", &function_5884461e, 0, 0);
-  clientfield::register("toplayer", "" + # "portal_blur", 1, 1, "int", &function_fa7a206b, 0, 0);
-  clientfield::register("scriptmover", "" + # "portal_shockwave", 1, 1, "counter", &function_96636479, 0, 0);
-  clientfield::register("vehicle", "" + # "teleport_trail", 1, 1, "int", &function_691412b4, 0, 0);
-  clientfield::register("vehicle", "" + # "payload_health", 1, 1, "counter", &function_612a9925, 0, 0);
-  clientfield::register("vehicle", "" + # "payload_activate", 1, 1, "int", &payload_activate, 0, 0);
-  clientfield::register("vehicle", "" + # "payload_scan", 1, 1, "counter", &payload_scan, 0, 0);
-  clientfield::register("vehicle", "" + # "payload_running", 1, 1, "int", &function_89fa474d, 0, 0);
-  clientfield::register("vehicle", "" + # "payload_enter", 1, 1, "int", &function_41bc60b6, 0, 0);
+  clientfield::register("scriptmover", "" + #"portal", 1, 1, "int", &portal_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2a7da9a87ecef87b", 1, 1, "int", &function_36ab0d37, 0, 0);
+  clientfield::register("scriptmover", "" + #"payload_teleport", 1, 2, "int", &function_5884461e, 0, 0);
+  clientfield::register("toplayer", "" + #"portal_blur", 1, 1, "int", &function_fa7a206b, 0, 0);
+  clientfield::register("scriptmover", "" + #"portal_shockwave", 1, 1, "counter", &function_96636479, 0, 0);
+  clientfield::register("vehicle", "" + #"teleport_trail", 1, 1, "int", &function_691412b4, 0, 0);
+  clientfield::register("vehicle", "" + #"payload_health", 1, 1, "counter", &function_612a9925, 0, 0);
+  clientfield::register("vehicle", "" + #"payload_activate", 1, 1, "int", &payload_activate, 0, 0);
+  clientfield::register("vehicle", "" + #"payload_scan", 1, 1, "counter", &payload_scan, 0, 0);
+  clientfield::register("vehicle", "" + #"payload_running", 1, 1, "int", &function_89fa474d, 0, 0);
+  clientfield::register("vehicle", "" + #"payload_enter", 1, 1, "int", &function_41bc60b6, 0, 0);
   callback::on_vehicle_spawned(&on_vehicle_spawned);
   util::waitforclient(0);
 }

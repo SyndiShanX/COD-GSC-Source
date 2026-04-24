@@ -22,7 +22,7 @@ __init__() {
   callback::on_weapon_change(&on_weapon_change);
   callback::add_weapon_fired(level.var_585eeded.var_ba76fe32[#"ray_gun_mk2y_charged"], &function_8a977b42);
   callback::add_weapon_fired(level.var_585eeded.var_ba76fe32[#"ray_gun_mk2y_upgraded_charged"], &function_8a977b42);
-  clientfield::register("allplayers", "" + # "ray_gun_mk2y_charged", 20000, 1, "int");
+  clientfield::register("allplayers", "" + #"ray_gun_mk2y_charged", 20000, 1, "int");
 }
 
 on_weapon_change(s_params) {
@@ -46,7 +46,7 @@ function_54922a21() {
     while(self attackButtonPressed() && !self meleeButtonPressed() && !self laststand::player_is_in_laststand()) {
       if(!b_charged && isDefined(self.chargeshotlevel) && self.chargeshotlevel > 1) {
         self function_bfbef8cc(self getcurrentweapon());
-        self clientfield::set("" + # "ray_gun_mk2y_charged", 1);
+        self clientfield::set("" + #"ray_gun_mk2y_charged", 1);
         b_charged = 1;
       }
 
@@ -64,7 +64,7 @@ function_54922a21() {
 }
 
 function_a059fe7f(str_notify) {
-  self clientfield::set("" + # "ray_gun_mk2y_charged", 0);
+  self clientfield::set("" + #"ray_gun_mk2y_charged", 0);
 }
 
 function_5b0214e(weapon) {

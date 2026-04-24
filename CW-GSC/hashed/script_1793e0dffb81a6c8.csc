@@ -24,7 +24,7 @@ function private preinit() {
     return;
   }
 
-  clientfield::register("zbarrier", "" + # "hash_100f180bf5d2a517", 14000, 1, "int", &function_b245db69, 0, 0);
+  clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int", &function_b245db69, 0, 0);
   level._effect[#"hash_1d15a2dad558ac8c"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
   level._effect[#"hash_1d15a5dad558b1a5"] = "zombie/fx8_packapunch_zmb_red_gauntlet";
   zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);

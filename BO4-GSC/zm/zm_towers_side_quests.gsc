@@ -354,7 +354,7 @@ arena_rock() {
   var_c2b730ca thread function_3ce07a2b();
   level waittill(#"21_guns");
   level flag::set(#"hash_6205682540170b8");
-  level clientfield::set("" + # "hash_39e6b14b9e5b0f3d", 1);
+  level clientfield::set("" + #"hash_39e6b14b9e5b0f3d", 1);
 }
 
 function_5ca13573() {
@@ -441,7 +441,7 @@ function_5d0d1807() {
   level thread scene::init("special_rounds_scene_alt", "targetname");
 
   foreach(model in a_mdl_fire) {
-    model clientfield::set("" + # "hash_5afda864f8b64f5c", 1);
+    model clientfield::set("" + #"hash_5afda864f8b64f5c", 1);
   }
 
   level waittill(#"hash_7b9245ff51f3d4f7");
@@ -453,7 +453,7 @@ function_5d0d1807() {
   }
 
   foreach(model in a_mdl_fire) {
-    model clientfield::set("" + # "hash_5afda864f8b64f5c", 0);
+    model clientfield::set("" + #"hash_5afda864f8b64f5c", 0);
   }
 }
 

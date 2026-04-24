@@ -55,17 +55,17 @@ autoexec opt_in() {
 }
 
 event_handler[level_init] main(eventstruct) {
-  clientfield::register("clientuimodel", "" + # "player_lives", 1, 2, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "" + # "rumble_gondola", 1, 1, "int", &rumble_gondola, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_51b0de5e2b184c28", 1, 1, "int", &function_1bccf046, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4be2ce4248d80d22", 1, 1, "int", &function_e6537e9f, 0, 0);
-  clientfield::register("world", "" + # "hash_24deaa9795e06d41", 1, 1, "int", &function_eef4ae09, 0, 0);
-  clientfield::register("world", "" + # "hash_4a8a7b58bf6cd5d8", 1, 1, "int", &function_516663f8, 0, 0);
-  clientfield::register("world", "" + # "hash_29fea4571b8649a0", 1, 1, "int", &function_d8b90aba, 0, 0);
-  clientfield::register("world", "" + # "hash_cd028842e18845e", 1, 1, "counter", &function_a104a4cb, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_500a87b29014ef02", 1, 1, "int", &function_5e901c8c, 0, 1);
-  clientfield::register("toplayer", "" + # "player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
-  clientfield::register("vehicle", "" + # "gondola_light", 1, 1, "int", &gondola_light, 0, 1);
+  clientfield::register("clientuimodel", "" + #"player_lives", 1, 2, "int", undefined, 0, 0);
+  clientfield::register("toplayer", "" + #"rumble_gondola", 1, 1, "int", &rumble_gondola, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_51b0de5e2b184c28", 1, 1, "int", &function_1bccf046, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4be2ce4248d80d22", 1, 1, "int", &function_e6537e9f, 0, 0);
+  clientfield::register("world", "" + #"hash_24deaa9795e06d41", 1, 1, "int", &function_eef4ae09, 0, 0);
+  clientfield::register("world", "" + #"hash_4a8a7b58bf6cd5d8", 1, 1, "int", &function_516663f8, 0, 0);
+  clientfield::register("world", "" + #"hash_29fea4571b8649a0", 1, 1, "int", &function_d8b90aba, 0, 0);
+  clientfield::register("world", "" + #"hash_cd028842e18845e", 1, 1, "counter", &function_a104a4cb, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_500a87b29014ef02", 1, 1, "int", &function_5e901c8c, 0, 1);
+  clientfield::register("toplayer", "" + #"player_pbg_bank", 1, 1, "int", &set_player_pbg_bank, 0, 1);
+  clientfield::register("vehicle", "" + #"gondola_light", 1, 1, "int", &gondola_light, 0, 1);
   zm_escape_catwalk_event::init_clientfields();
   namespace_9d58c1cd::init_clientfields();
   zm_escape_util::init_clientfields();

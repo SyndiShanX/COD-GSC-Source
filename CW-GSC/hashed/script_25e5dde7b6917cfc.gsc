@@ -46,7 +46,7 @@ function intro_flow(str_skipto, b_starting) {
   level util::delay(2, undefined, &function_3f7b5c03);
   level thread function_19aa0f5d();
   level flag::set("flag_vo_intro_start");
-  level.player clientfield::set_to_player("" + # "force_stream_weapons", 1);
+  level.player clientfield::set_to_player("" + #"force_stream_weapons", 1);
   level.player thread namespace_b7cfe907::function_6666cad6("flag_intro_adler_walk_talk_pos_1");
   level thread function_d7d6110f();
   level thread function_9180c609("intro_ambient_runners_loopers", "flag_intro_start_fake_runners");
@@ -69,7 +69,7 @@ function intro_flow(str_skipto, b_starting) {
   }
 
   level thread objectives::follow("armada_obj_intro_follow_vip", level.vip, #"hash_33eb8fa6e913e996");
-  level clientfield::set("" + # "hash_7705eee7a483781a", 0);
+  level clientfield::set("" + #"hash_7705eee7a483781a", 0);
   level savegame::checkpoint_save();
   level flag::wait_till("flag_intro_base_tent_leave");
   level flag::set("flag_intro_ambient_vehicles_start");

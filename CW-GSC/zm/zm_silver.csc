@@ -35,13 +35,13 @@ function autoexec opt_in() {
 
 function event_handler[level_init] main(eventstruct) {
   clientfield::register_clientuimodel("player_lives", #"zm_hud", #"player_lives", 1, 2, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "" + # "minimap_underground", 1, 1, "int", &minimap_underground, 0, 0);
-  clientfield::register("toplayer", "" + # "music_underscore", 1, 2, "int", &zm_silver_sound::function_2f3017ad, 0, 0);
-  clientfield::register("world", "" + # "hash_5e38b0496d9664bb", 1, 3, "int", &function_ce2c0029, 0, 0);
-  clientfield::register("world", "" + # "hash_2690e69916d071d9", 1, 1, "int", &function_49d2af47, 0, 0);
-  clientfield::register("toplayer", "" + # "interact_rumble_small", 1, 1, "counter", &interact_rumble_small, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_7a769c728c89b6b5", 1, 1, "counter", &function_83c1bbf4, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_20d620050345e82", 6000, 1, "int", &function_f16e4af0, 0, 0);
+  clientfield::register("toplayer", "" + #"minimap_underground", 1, 1, "int", &minimap_underground, 0, 0);
+  clientfield::register("toplayer", "" + #"music_underscore", 1, 2, "int", &zm_silver_sound::function_2f3017ad, 0, 0);
+  clientfield::register("world", "" + #"hash_5e38b0496d9664bb", 1, 3, "int", &function_ce2c0029, 0, 0);
+  clientfield::register("world", "" + #"hash_2690e69916d071d9", 1, 1, "int", &function_49d2af47, 0, 0);
+  clientfield::register("toplayer", "" + #"interact_rumble_small", 1, 1, "counter", &interact_rumble_small, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7a769c728c89b6b5", 1, 1, "counter", &function_83c1bbf4, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_20d620050345e82", 6000, 1, "int", &function_f16e4af0, 0, 0);
   setsoundcontext("dark_aether", "inactive");
   function_5ea2c6e3("mute_blizzard", 1, 1);
   callback::on_localplayer_spawned(&on_localplayer_spawned);
@@ -97,7 +97,7 @@ function minimap_underground(localclientnum, oldval, newval, bnewent, binitialsn
 }
 
 function on_localplayer_spawned(localclientnum) {
-  var_337eb9fb = self clientfield::get_to_player("" + # "minimap_underground");
+  var_337eb9fb = self clientfield::get_to_player("" + #"minimap_underground");
   function_f58e42ae(localclientnum, var_337eb9fb);
 }
 

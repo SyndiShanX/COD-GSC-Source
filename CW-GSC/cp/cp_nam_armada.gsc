@@ -92,19 +92,19 @@ function event_handler[level_init] main(eventstruct) {
   clientfield::register("vehicle", "adler_chopper_mortar_village", 1, 1, "int");
   clientfield::register("world", "toggle_dynsignage_mortartown", 1, 1, "int");
   clientfield::register("world", "toggle_gameplay_character_visibility", 1, 2, "int");
-  clientfield::register("vehicle", "" + # "hash_4ddf67f7aa0f6884", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_354296015ca81fd", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "pstfx_teleport", 1, getminbitcountfornum(2), "int");
-  clientfield::register("vehicle", "" + # "hash_2299cc8957801441", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_5a188b1de711e5ca", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_7705eee7a483781a", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_4ee03d623b77b0c2", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_16a1381cc22da440", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_147afd2c82d374fe", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "force_stream_weapons", 1, 2, "int");
+  clientfield::register("vehicle", "" + #"hash_4ddf67f7aa0f6884", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_354296015ca81fd", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"pstfx_teleport", 1, getminbitcountfornum(2), "int");
+  clientfield::register("vehicle", "" + #"hash_2299cc8957801441", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_5a188b1de711e5ca", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_7705eee7a483781a", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_4ee03d623b77b0c2", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_16a1381cc22da440", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_147afd2c82d374fe", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"force_stream_weapons", 1, 2, "int");
   clientfield::register("toplayer", "pstfx_script_vignette", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "hash_1d5f8429329030", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "hash_4e480e273ade4c04", 1, 2, "int");
+  clientfield::register("toplayer", "" + #"hash_1d5f8429329030", 1, 2, "int");
+  clientfield::register("toplayer", "" + #"hash_4e480e273ade4c04", 1, 2, "int");
   namespace_9a981837::function_c44464c8();
   function_37dfd679();
   function_13237d0a();
@@ -177,7 +177,7 @@ function function_fb3e29d5(str_skipto) {
   level.var_cb4dca51 = 2;
   level.var_c0c469ea = 0.5;
   var_49cf9916 = struct::get("armada_start_streamer_hint");
-  level clientfield::set("" + # "hash_7705eee7a483781a", 1);
+  level clientfield::set("" + #"hash_7705eee7a483781a", 1);
   level.player util::create_streamer_hint(var_49cf9916.origin, var_49cf9916.angles, 1, 30);
   level namespace_82bfe441::fade(1, "FadeImmediate");
   level.player util::function_749362d7(1);
@@ -1257,18 +1257,18 @@ function function_cc00984b() {
       wait 1;
     }
 
-    self clientfield::set("" + # "hash_2299cc8957801441", 1);
+    self clientfield::set("" + #"hash_2299cc8957801441", 1);
 
     while(self getspeed() > 0) {
       wait 1;
     }
 
-    self clientfield::set("" + # "hash_2299cc8957801441", 0);
+    self clientfield::set("" + #"hash_2299cc8957801441", 0);
   }
 }
 
 function function_e4bfb57e(str_notify) {
-  self clientfield::set("" + # "hash_2299cc8957801441", 0);
+  self clientfield::set("" + #"hash_2299cc8957801441", 0);
 }
 
 function function_fb080e60(var_b6fdd6f2, var_7af285a8 = 0) {
@@ -6922,7 +6922,7 @@ function function_2870229e(str_skipto, b_starting) {
   scene::function_27f5972e(#"hash_ee8053ecf9e94ed");
   scene::function_27f5972e(#"hash_72c6c90c740fc9de");
   scene::function_27f5972e(#"armada_crash_start");
-  level clientfield::set("" + # "hash_4ee03d623b77b0c2", 1);
+  level clientfield::set("" + #"hash_4ee03d623b77b0c2", 1);
   var_96c2a0a6 = struct::get_array(#"hash_4483879458d31dab", "ripcord_ambient");
 
   foreach(var_bd01b58f in var_96c2a0a6) {
@@ -7082,10 +7082,10 @@ function function_e0fedfbc() {
 
 function function_2dca33ef() {
   self endon(#"death");
-  self clientfield::set_to_player("" + # "hash_4e480e273ade4c04", 1);
+  self clientfield::set_to_player("" + #"hash_4e480e273ade4c04", 1);
   waitframe(1);
   self flag::wait_till(#"scene");
-  self clientfield::set_to_player("" + # "hash_4e480e273ade4c04", 2);
+  self clientfield::set_to_player("" + #"hash_4e480e273ade4c04", 2);
 }
 
 function function_62f48e6c(a_ents) {

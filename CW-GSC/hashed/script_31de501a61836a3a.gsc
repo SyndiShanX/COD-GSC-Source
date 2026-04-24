@@ -35,17 +35,17 @@
 #namespace namespace_fa1c4f0a;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("scriptmover", "" + # "portal", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_2a7da9a87ecef87b", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "payload_teleport", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "portal_blur", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "portal_shockwave", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "teleport_trail", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "payload_health", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "payload_activate", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "payload_scan", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "payload_running", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "payload_enter", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"portal", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_2a7da9a87ecef87b", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"payload_teleport", 1, 2, "int");
+  clientfield::register("toplayer", "" + #"portal_blur", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"portal_shockwave", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"teleport_trail", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"payload_health", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"payload_activate", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"payload_scan", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"payload_running", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"payload_enter", 1, 1, "int");
   objective_manager::register_script(#"payload_escort", &init, &function_d137dbd4, #"payload", #"hash_6df9aea076cea4ba", #"hash_4ddf1b97bee2b93", 6, #"hash_7cd75fcb4650df62");
   callback::on_spawned(&on_player_spawned);
 }
@@ -668,7 +668,7 @@ function function_27033bf7(instance) {
   self thread function_89951438(instance);
   self.var_a123c71 = 1;
   self waittill(#"deployed");
-  self clientfield::increment("" + # "payload_health");
+  self clientfield::increment("" + #"payload_health");
   self.var_a123c71 = 0;
   self thread function_e45c5bc0(instance);
   self thread function_1eef26bc(instance);
@@ -689,7 +689,7 @@ function function_27033bf7(instance) {
   }
 
   self.mdl_portal = util::spawn_model("tag_origin", nd_start.var_d5ebc20b.origin, (0, 90, 0));
-  self.mdl_portal clientfield::set("" + # "portal", 1);
+  self.mdl_portal clientfield::set("" + #"portal", 1);
   self.var_edbf8a99 = util::spawn_model("collision_player_only_192", self.mdl_portal.origin, self.mdl_portal.angles);
   self.var_3e5ed63d = util::spawn_model("tag_origin", self.mdl_portal.origin + (0, 0, -1000), self.mdl_portal.angles);
   self.mdl_portal thread function_fd3059d0(instance);
@@ -708,7 +708,7 @@ function function_3b34bc1b(instance) {
 
   if(isDefined(self.mdl_beam)) {
     wait 1.5;
-    self.mdl_beam clientfield::set("" + # "payload_teleport", 2);
+    self.mdl_beam clientfield::set("" + #"payload_teleport", 2);
     self thread function_e0c5b0a4(instance);
   }
 }
@@ -742,7 +742,7 @@ function function_33284b66(instance) {
     instance.var_f2065b9e solid();
   }
 
-  self clientfield::set("" + # "payload_activate", 1);
+  self clientfield::set("" + #"payload_activate", 1);
   wait 2;
   self notify(#"active");
 }
@@ -810,7 +810,7 @@ function function_6e7546c5() {
       }
 
       if(s_result._notify === "rift") {
-        self.var_b8ca9d7 clientfield::increment("" + # "payload_scan");
+        self.var_b8ca9d7 clientfield::increment("" + #"payload_scan");
         self.var_b8ca9d7.var_ee53f643 = 1;
 
         if(self.variant === "payload_noteleport") {
@@ -850,9 +850,9 @@ function function_41bc60b6(instance) {
   while(true) {
     self waittill(#"enter");
     self thread function_1bb2940d(instance);
-    self clientfield::set("" + # "payload_enter", 1);
+    self clientfield::set("" + #"payload_enter", 1);
     self waittill(#"reached_end_node");
-    self clientfield::set("" + # "payload_enter", 0);
+    self clientfield::set("" + #"payload_enter", 0);
   }
 }
 
@@ -870,7 +870,7 @@ function function_c9b143b(var_edf7d1ed) {
   self.var_f16db373 playrumblelooponentity(#"hash_1903f70fddbadc53");
   wait 7.5;
   self.var_f16db373 stoprumble(#"hash_1903f70fddbadc53");
-  self.var_f16db373 clientfield::set("" + # "hash_2a7da9a87ecef87b", 0);
+  self.var_f16db373 clientfield::set("" + #"hash_2a7da9a87ecef87b", 0);
   wait 3;
   self.var_f16db373 moveto(self.var_fa6b9965[var_edf7d1ed].origin, 0.05);
 }
@@ -880,7 +880,7 @@ function function_4ef90aaa() {
   self.var_b8ca9d7 endon(#"death");
   self.var_f16db373 endon(#"death");
   self.var_b8ca9d7 waittill(#"scan");
-  self.var_f16db373 clientfield::set("" + # "hash_2a7da9a87ecef87b", 1);
+  self.var_f16db373 clientfield::set("" + #"hash_2a7da9a87ecef87b", 1);
 }
 
 function function_1c8e1b20() {
@@ -1570,8 +1570,8 @@ function function_785ea4f4(instance) {
   self notify(#"approach");
 
   if(isDefined(self.mdl_portal)) {
-    self.mdl_portal clientfield::increment("" + # "portal_shockwave");
-    self.mdl_portal clientfield::set("" + # "portal", 0);
+    self.mdl_portal clientfield::increment("" + #"portal_shockwave");
+    self.mdl_portal clientfield::set("" + #"portal", 0);
   }
 
   wait 2.75;
@@ -1605,7 +1605,7 @@ function function_785ea4f4(instance) {
 
   foreach(player in getplayers()) {
     player.var_d23362c = 0;
-    player clientfield::set_to_player("" + # "portal_blur", 0);
+    player clientfield::set_to_player("" + #"portal_blur", 0);
   }
 }
 
@@ -1698,7 +1698,7 @@ function function_dd677e5d() {
 
   foreach(player in getplayers()) {
     player.var_d23362c = 0;
-    player clientfield::set_to_player("" + # "portal_blur", 0);
+    player clientfield::set_to_player("" + #"portal_blur", 0);
   }
 }
 
@@ -1781,7 +1781,7 @@ function function_6ae999c2(instance) {
       self.var_a123c71 = 0;
       self setbrake(1);
       self vehicle::toggle_lights_group(4, 1);
-      self clientfield::set("" + # "payload_running", 0);
+      self clientfield::set("" + #"payload_running", 0);
       self notify(#"hash_734e3e2063a699a2");
 
       if(!isDefined(self.var_b79a8ac7) && !self.var_f8edfabd && !self.var_b591d382) {
@@ -1796,7 +1796,7 @@ function function_6ae999c2(instance) {
     self.var_a123c71 = 1;
     self setbrake(0);
     self vehicle::toggle_lights_group(4, 0);
-    self clientfield::set("" + # "payload_running", 1);
+    self clientfield::set("" + #"payload_running", 1);
     self.var_a2c49add = undefined;
     self.var_f8edfabd = 0;
     namespace_85745671::cleanup_attackable(self);
@@ -1980,14 +1980,14 @@ function payload_teleport(instance) {
       wait 1;
 
       if(isDefined(self.mdl_portal)) {
-        self.mdl_portal clientfield::increment("" + # "portal_shockwave");
-        self.mdl_portal clientfield::set("" + # "portal", 0);
+        self.mdl_portal clientfield::increment("" + #"portal_shockwave");
+        self.mdl_portal clientfield::set("" + #"portal", 0);
       }
 
       wait 2.75;
 
       if(isDefined(self.mdl_portal)) {
-        self.mdl_portal clientfield::set("" + # "payload_teleport", 1);
+        self.mdl_portal clientfield::set("" + #"payload_teleport", 1);
       }
 
       wait 0.1;
@@ -2022,7 +2022,7 @@ function payload_teleport(instance) {
       wait 2;
 
       if(isDefined(self.var_cb43e7ed)) {
-        self.var_cb43e7ed clientfield::set("" + # "portal", 0);
+        self.var_cb43e7ed clientfield::set("" + #"portal", 0);
         self.var_cb43e7ed delete();
       }
 
@@ -2063,13 +2063,13 @@ function payload_teleport(instance) {
 
         if(isDefined(self.mdl_beam)) {
           wait 1.5;
-          self.mdl_beam clientfield::set("" + # "payload_teleport", 2);
+          self.mdl_beam clientfield::set("" + #"payload_teleport", 2);
           self thread function_e0c5b0a4(instance);
         }
       }
 
       self.mdl_portal = util::spawn_model("tag_origin", var_b5ec4cd3.var_d5ebc20b.origin, (0, 90, 0));
-      self.mdl_portal clientfield::set("" + # "portal", 1);
+      self.mdl_portal clientfield::set("" + #"portal", 1);
       self.mdl_portal thread function_fd3059d0(instance);
 
       if(isDefined(self.var_edbf8a99)) {
@@ -2104,7 +2104,7 @@ function function_e0c5b0a4(instance) {
   self waittill(#"enter");
 
   if(isDefined(self.mdl_beam)) {
-    self.mdl_beam clientfield::set("" + # "payload_teleport", 0);
+    self.mdl_beam clientfield::set("" + #"payload_teleport", 0);
   }
 }
 
@@ -2131,7 +2131,7 @@ function function_fd3059d0(instance) {
       if(isalive(player)) {
         if(distance2dsquared(self.origin, player.origin) <= sqr(120) && !is_true(player.var_d23362c)) {
           player dodamage(20, self.origin, self, self, undefined, "MOD_DEATH_CIRCLE");
-          player clientfield::set_to_player("" + # "portal_blur", 1);
+          player clientfield::set_to_player("" + #"portal_blur", 1);
           player function_bc82f900("damage_heavy");
           player.var_d23362c = 1;
           continue;
@@ -2139,7 +2139,7 @@ function function_fd3059d0(instance) {
 
         if(distance2dsquared(self.origin, player.origin) <= sqr(150) && !is_true(player.var_d23362c)) {
           player dodamage(10, self.origin, self, self, undefined, "MOD_DEATH_CIRCLE");
-          player clientfield::set_to_player("" + # "portal_blur", 1);
+          player clientfield::set_to_player("" + #"portal_blur", 1);
           player function_bc82f900("damage_heavy");
           player.var_d23362c = 1;
           continue;
@@ -2147,7 +2147,7 @@ function function_fd3059d0(instance) {
 
         if(distance2dsquared(self.origin, player.origin) <= sqr(180) && !is_true(player.var_d23362c)) {
           player dodamage(5, self.origin, self, self, undefined, "MOD_DEATH_CIRCLE");
-          player clientfield::set_to_player("" + # "portal_blur", 1);
+          player clientfield::set_to_player("" + #"portal_blur", 1);
           player function_bc82f900("damage_light");
           player.var_d23362c = 1;
           continue;
@@ -2155,7 +2155,7 @@ function function_fd3059d0(instance) {
 
         if(is_true(player.var_d23362c)) {
           player.var_d23362c = 0;
-          player clientfield::set_to_player("" + # "portal_blur", 0);
+          player clientfield::set_to_player("" + #"portal_blur", 0);
         }
       }
     }
@@ -2180,7 +2180,7 @@ function function_42fbf5d9(instance, var_f00d1e) {
   objective_setvisibletoall(self.n_objective_id);
   self.var_a0bd9710 rotateto(var_f00d1e.angles, n_time + 6);
   self.var_a0bd9710 playrumbleonentity(#"hash_2d43d9987e4a73a8");
-  self clientfield::set("" + # "teleport_trail", 1);
+  self clientfield::set("" + #"teleport_trail", 1);
   level thread namespace_7589cf5c::play_vo("objectivePayloadRiftCollapseResponse");
 
   while(true) {
@@ -2203,14 +2203,14 @@ function function_42fbf5d9(instance, var_f00d1e) {
 
   foreach(player in getplayers()) {
     player.var_d23362c = 0;
-    player clientfield::set_to_player("" + # "portal_blur", 0);
+    player clientfield::set_to_player("" + #"portal_blur", 0);
   }
 
   n_dist = distance(self.var_a0bd9710.origin, var_f00d1e.origin);
   n_time = n_dist / 600;
   self.var_a0bd9710 moveto(var_f00d1e.origin + (0, 0, 40), n_time);
   self.var_a0bd9710 waittill(#"movedone");
-  self clientfield::set("" + # "teleport_trail", 0);
+  self clientfield::set("" + #"teleport_trail", 0);
   self.var_a0bd9710 playrumbleonentity(#"sr_transmitter_impact");
   self thread function_de22e1a0();
   self unlink();

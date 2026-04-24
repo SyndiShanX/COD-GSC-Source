@@ -22,8 +22,8 @@ __init__() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "trap_light", 8000, 2, "int", &function_1d5b8b9f, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_17df66ef5f71c0de", 8000, 2, "int", &function_b3f0f5cd, 0, 0);
+  clientfield::register("scriptmover", "" + #"trap_light", 8000, 2, "int", &function_1d5b8b9f, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_17df66ef5f71c0de", 8000, 2, "int", &function_b3f0f5cd, 0, 0);
 }
 
 function_1d5b8b9f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

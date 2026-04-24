@@ -59,7 +59,7 @@ function event_handler[gametype_init] main(eventstruct) {
   spawning::addsupportedspawnpointtype("tdm");
   spawning::function_32b97d1b(&spawning::function_90dee50d);
   spawning::function_adbbb58a(&spawning::function_c24e290c);
-  clientfield::register("world", "" + # "hash_69d32ac298f2aa22", 1, 2, "int");
+  clientfield::register("world", "" + #"hash_69d32ac298f2aa22", 1, 2, "int");
   level.var_2ee800c8 = "dropkickNearWinning";
   level.var_78739954 = "dropkickNearLosing";
 }
@@ -612,11 +612,11 @@ function function_3f367c2e() {
 }
 
 function function_1a67afed() {
-  clientfield::set("" + # "hash_69d32ac298f2aa22", 1);
+  clientfield::set("" + #"hash_69d32ac298f2aa22", 1);
   level waittill(#"pre_potm");
-  clientfield::set("" + # "hash_69d32ac298f2aa22", 2);
+  clientfield::set("" + #"hash_69d32ac298f2aa22", 2);
   level waittill(#"potm_finished");
-  clientfield::set("" + # "hash_69d32ac298f2aa22", 3);
+  clientfield::set("" + #"hash_69d32ac298f2aa22", 3);
 }
 
 function private function_311e397d() {

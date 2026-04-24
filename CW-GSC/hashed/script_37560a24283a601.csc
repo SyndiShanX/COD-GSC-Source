@@ -16,8 +16,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("missile", "" + # "hash_36112e7cad541b66", 1, 2, "int", &function_9cb928dc, 1, 0);
-  clientfield::register("missile", "" + # "hash_2d55ead1309349bc", 1, 3, "int", &function_6bd975fa, 1, 0);
+  clientfield::register("missile", "" + #"hash_36112e7cad541b66", 1, 2, "int", &function_9cb928dc, 1, 0);
+  clientfield::register("missile", "" + #"hash_2d55ead1309349bc", 1, 3, "int", &function_6bd975fa, 1, 0);
 }
 
 function function_9cb928dc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

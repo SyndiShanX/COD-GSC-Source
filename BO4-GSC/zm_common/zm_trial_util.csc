@@ -53,7 +53,7 @@ on_localplayer_connect(localclientnum) {
 
 finalize_clientfields(localclientnum) {
   clientfield::register("world", "ZMHudGlobal.trials.trialIndex", 1, getminbitcountfornum(15), "int", &function_741dae5b, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_6536ca4fb2858a9f", 16000, 1, "int", &function_ff287922, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_6536ca4fb2858a9f", 16000, 1, "int", &function_ff287922, 0, 0);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundNumber", 1, getminbitcountfornum(30), "int", &function_88806df3, 0, 0);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.roundSuccess", 1, getminbitcountfornum(1), "int", undefined, 0, 0);
   clientfield::register("worlduimodel", "ZMHudGlobal.trials.strikes", 1, getminbitcountfornum(3), "int", undefined, 0, 0);

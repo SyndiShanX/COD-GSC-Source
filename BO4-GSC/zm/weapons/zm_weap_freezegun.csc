@@ -14,13 +14,13 @@ autoexec __init__system__() {
 }
 
 _init_() {
-  clientfield::register("actor", "" + # "hash_2f305a0bea20d6ed", 1, 1, "int", &function_16d503c6, 0, 0);
-  clientfield::register("actor", "" + # "hash_757f891a37d3db00", 1, 1, "int", &function_64927e54, 0, 0);
-  clientfield::register("actor", "" + # "hash_26d3eeef96a2291e", 1, 1, "int", &function_89a4ffa9, 0, 0);
-  clientfield::register("actor", "" + # "hash_32ec41222f58aa75", 1, 1, "int", &function_407434d9, 0, 0);
-  clientfield::register("actor", "" + # "hash_1aa3522b88c2b76f", 1, 1, "int", &function_7cdb7d7f, 0, 0);
-  clientfield::register("actor", "" + # "hash_259cdeffe60fe48f", 1, 1, "int", &function_bf0f2e8f, 0, 0);
-  clientfield::register("actor", "" + # "hash_5ad28d5f104a6e3b", 1, 1, "int", &function_3b23bb2f, 0, 0);
+  clientfield::register("actor", "" + #"hash_2f305a0bea20d6ed", 1, 1, "int", &function_16d503c6, 0, 0);
+  clientfield::register("actor", "" + #"hash_757f891a37d3db00", 1, 1, "int", &function_64927e54, 0, 0);
+  clientfield::register("actor", "" + #"hash_26d3eeef96a2291e", 1, 1, "int", &function_89a4ffa9, 0, 0);
+  clientfield::register("actor", "" + #"hash_32ec41222f58aa75", 1, 1, "int", &function_407434d9, 0, 0);
+  clientfield::register("actor", "" + #"hash_1aa3522b88c2b76f", 1, 1, "int", &function_7cdb7d7f, 0, 0);
+  clientfield::register("actor", "" + #"hash_259cdeffe60fe48f", 1, 1, "int", &function_bf0f2e8f, 0, 0);
+  clientfield::register("actor", "" + #"hash_5ad28d5f104a6e3b", 1, 1, "int", &function_3b23bb2f, 0, 0);
   level._effect[#"hash_2f305a0bea20d6ed"] = #"hash_6910f1de979f539f";
   level._effect[#"hash_757f891a37d3db00"] = #"hash_3da4857b4b1553dc";
   level._effect[#"hash_26d3eeef96a2291e"] = #"hash_35e2193ab697e2f1";

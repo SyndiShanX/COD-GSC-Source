@@ -16,11 +16,11 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_142ed640bf2e09b9", 1, 1, "int", &function_9ab6532, 0, 0);
-  clientfield::register("actor", "" + # "hash_717ed5a81b281ebd", 1, 1, "counter", &function_49585088, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_717ed5a81b281ebd", 1, 1, "int", &function_1408657d, 0, 0);
-  clientfield::register("actor", "" + # "hash_177f6b02e0b5436b", 1, 1, "int", &function_c284174e, 0, 0);
-  clientfield::register("actor", "" + # "hash_40a7e84c380b9b1a", 1, 1, "int", &function_4d8be86, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_142ed640bf2e09b9", 1, 1, "int", &function_9ab6532, 0, 0);
+  clientfield::register("actor", "" + #"hash_717ed5a81b281ebd", 1, 1, "counter", &function_49585088, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_717ed5a81b281ebd", 1, 1, "int", &function_1408657d, 0, 0);
+  clientfield::register("actor", "" + #"hash_177f6b02e0b5436b", 1, 1, "int", &function_c284174e, 0, 0);
+  clientfield::register("actor", "" + #"hash_40a7e84c380b9b1a", 1, 1, "int", &function_4d8be86, 0, 0);
 }
 
 function function_9ab6532(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

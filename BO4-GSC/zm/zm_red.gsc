@@ -111,14 +111,14 @@ event_handler[level_init] main(eventstruct) {
   ability_player::register_gadget_possession_callbacks(6, &function_f2427bae);
   zm::init_fx();
   clientfield::register("clientuimodel", "player_lives", 16000, 2, "int");
-  clientfield::register("scriptmover", "" + # "register_pegasus", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "special_target", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "medusa_eyes", 16000, 1, "int");
-  clientfield::register("actor", "" + # "hash_2856f87ecdfaf62", 16000, 1, "counter");
-  clientfield::register("actor", "" + # "hash_1bdce857fd614cef", 16000, 1, "counter");
-  clientfield::register("world", "" + # "postfx_play", 16000, 2, "int");
-  clientfield::register("world", "" + # "hash_71f9fcfb2cd84a9c", 16000, 1, "int");
-  clientfield::register("toplayer", "" + # "eye_vignette", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"register_pegasus", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"special_target", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"medusa_eyes", 16000, 1, "int");
+  clientfield::register("actor", "" + #"hash_2856f87ecdfaf62", 16000, 1, "counter");
+  clientfield::register("actor", "" + #"hash_1bdce857fd614cef", 16000, 1, "counter");
+  clientfield::register("world", "" + #"postfx_play", 16000, 2, "int");
+  clientfield::register("world", "" + #"hash_71f9fcfb2cd84a9c", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"eye_vignette", 16000, 1, "int");
   level._effect[#"headshot"] = #"zombie/fx_bul_flesh_head_fatal_zmb";
   level._effect[#"headshot_nochunks"] = #"zombie/fx_bul_flesh_head_nochunks_zmb";
   level._effect[#"bloodspurt"] = #"zombie/fx_bul_flesh_neck_spurt_zmb";
@@ -771,7 +771,7 @@ function_a4e2970b(var_4e4cc9a9 = 1, s_damage) {
       self thread util::delayed_delete(float(function_60d95f53()) / 1000);
     }
 
-    ai_zombie clientfield::increment("" + # "zombie_breakout");
+    ai_zombie clientfield::increment("" + #"zombie_breakout");
 
     if(isDefined(self.mdl_chaos)) {
       if(zm_utility::is_trials() && var_4e4cc9a9) {
@@ -1052,8 +1052,8 @@ play_outro() {
       player disableweaponfire();
     }
 
-    if(player clientfield::get("" + # "chakram_whirlwind_fx")) {
-      player clientfield::set("" + # "chakram_whirlwind_fx", 0);
+    if(player clientfield::get("" + #"chakram_whirlwind_fx")) {
+      player clientfield::set("" + #"chakram_whirlwind_fx", 0);
     }
   }
 
@@ -1106,45 +1106,45 @@ function_bff9977d(a_ents) {
   if(isDefined(a_ents[#"scarlett_eyes"])) {
     scarlett_eyes = a_ents[#"scarlett_eyes"];
     level waittill(#"eyes_start");
-    scarlett_eyes clientfield::set("" + # "medusa_eyes", 1);
+    scarlett_eyes clientfield::set("" + #"medusa_eyes", 1);
   }
 }
 
 function_b5670bb7(a_ents) {
   if(isDefined(a_ents[#"scarlett_eyes"])) {
     scarlett_eyes = a_ents[#"scarlett_eyes"];
-    scarlett_eyes clientfield::set("" + # "medusa_eyes", 1);
+    scarlett_eyes clientfield::set("" + #"medusa_eyes", 1);
     level waittill(#"eyes_done");
-    scarlett_eyes clientfield::set("" + # "medusa_eyes", 0);
+    scarlett_eyes clientfield::set("" + #"medusa_eyes", 0);
   }
 }
 
 function_924ba3d(a_ents) {
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "eye_vignette", 1);
+    player clientfield::set_to_player("" + #"eye_vignette", 1);
   }
 
   if(isDefined(a_ents[#"medusa_eyes"])) {
     medusa_eyes = a_ents[#"medusa_eyes"];
     level waittill(#"eyes_start");
-    medusa_eyes clientfield::set("" + # "medusa_eyes", 1);
+    medusa_eyes clientfield::set("" + #"medusa_eyes", 1);
     level waittill(#"eyes_done");
-    medusa_eyes clientfield::set("" + # "medusa_eyes", 0);
+    medusa_eyes clientfield::set("" + #"medusa_eyes", 0);
   }
 }
 
 function_b648a6d9(a_ents) {
   if(isDefined(a_ents[#"medusa_eyes"])) {
     medusa_eyes = a_ents[#"medusa_eyes"];
-    medusa_eyes clientfield::set("" + # "medusa_eyes", 1);
+    medusa_eyes clientfield::set("" + #"medusa_eyes", 1);
     level waittill(#"eyes_done");
-    medusa_eyes clientfield::set("" + # "medusa_eyes", 0);
+    medusa_eyes clientfield::set("" + #"medusa_eyes", 0);
   }
 }
 
 function_5b984671(a_ents) {
   zm_utility::function_9ad5aeb1(0, 1, 1, 0);
-  level clientfield::set("" + # "postfx_play", 1);
+  level clientfield::set("" + #"postfx_play", 1);
   zm_red_challenges::function_304fb042();
 
   foreach(e_player in util::get_active_players()) {
@@ -1165,7 +1165,7 @@ function_509bbc5b(a_ents) {
 function_75ef7b1f(a_ents) {
   level scene::function_f81475ae(#"cin_zm_red_outro_temple");
   level scene::function_27f5972e(#"cin_zm_red_outro_temple_part4");
-  level clientfield::set("" + # "postfx_play", 2);
+  level clientfield::set("" + #"postfx_play", 2);
 
   foreach(e_player in util::get_active_players()) {
     e_player val::reset(#"outro", "freezecontrols");
@@ -1173,7 +1173,7 @@ function_75ef7b1f(a_ents) {
 }
 
 function_883a1fb8(a_ents) {
-  level clientfield::set("" + # "postfx_play", 3);
+  level clientfield::set("" + #"postfx_play", 3);
 
   foreach(e_player in util::get_active_players()) {
     e_player val::reset(#"outro", "freezecontrols");
@@ -1181,7 +1181,7 @@ function_883a1fb8(a_ents) {
 }
 
 function_ea8d45ef(a_ents) {
-  level clientfield::set("" + # "postfx_play", 0);
+  level clientfield::set("" + #"postfx_play", 0);
 }
 
 function_625a9bcf() {

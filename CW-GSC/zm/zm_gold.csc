@@ -35,10 +35,10 @@ function autoexec opt_in() {
 
 function event_handler[level_init] main(eventstruct) {
   clientfield::register_clientuimodel("player_lives", #"zm_hud", #"player_lives", 1, 2, "int", undefined, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_697cae64fbcf81f8", 1, 1, "int", &function_6c117bd1, 0, 0);
-  clientfield::register("world", "" + # "hash_7d7dcebcb0511b14", 1, 1, "int", &function_84e68eed, 0, 0);
-  clientfield::register("world", "" + # "hash_5368b2aa337a0ec3", 16000, 2, "int", &function_36f11a86, 0, 0);
-  clientfield::register("world", "" + # "hash_4c60439fcb3b4056", 16000, 1, "int", &function_d03c22c, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_697cae64fbcf81f8", 1, 1, "int", &function_6c117bd1, 0, 0);
+  clientfield::register("world", "" + #"hash_7d7dcebcb0511b14", 1, 1, "int", &function_84e68eed, 0, 0);
+  clientfield::register("world", "" + #"hash_5368b2aa337a0ec3", 16000, 2, "int", &function_36f11a86, 0, 0);
+  clientfield::register("world", "" + #"hash_4c60439fcb3b4056", 16000, 1, "int", &function_d03c22c, 0, 0);
   level.setupcustomcharacterexerts = &setup_personality_character_exerts;
   level.var_d0ab70a2 = #"hash_466c279241bfbf7c";
   level.var_a7c8e7d7 = 1;

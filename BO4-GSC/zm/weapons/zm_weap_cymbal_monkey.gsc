@@ -27,7 +27,7 @@ __init__() {
   level.weaponzmcymbalmonkey = getweapon(#"cymbal_monkey");
   zm_weapons::register_zombie_weapon_callback(level.weaponzmcymbalmonkey, &player_give_cymbal_monkey);
   zm_loadout::register_lethal_grenade_for_level(#"cymbal_monkey");
-  clientfield::register("scriptmover", "" + # "hash_60a7e5b79e8064a5", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_60a7e5b79e8064a5", 1, 1, "int");
   zm::function_84d343d(#"cymbal_monkey", &function_3681e2bc);
 }
 
@@ -662,7 +662,7 @@ is_on_navmesh(e_player) {
 
     if(isDefined(self.mdl_monkey)) {
       self.mdl_monkey.origin = self.origin;
-      self.mdl_monkey clientfield::set("" + # "hash_60a7e5b79e8064a5", 1);
+      self.mdl_monkey clientfield::set("" + #"hash_60a7e5b79e8064a5", 1);
     }
 
     self.var_45eaa114 = 1;

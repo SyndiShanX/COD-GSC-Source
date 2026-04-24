@@ -16,8 +16,8 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   namespace_e8c18978::preinit();
-  clientfield::register("vehicle", "" + # "hash_164696e86d29988d", 1, 1, "int", &function_d4e58332, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_dae8b06d746fac5", 8000, 1, "int", &function_99879bf2, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_164696e86d29988d", 1, 1, "int", &function_d4e58332, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_dae8b06d746fac5", 8000, 1, "int", &function_99879bf2, 0, 0);
 }
 
 function private function_d4e58332(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

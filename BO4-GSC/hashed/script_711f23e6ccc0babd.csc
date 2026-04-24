@@ -22,7 +22,7 @@ init_fx() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_671ee63741834a25", 1, 1, "int", &function_c95aa114, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_671ee63741834a25", 1, 1, "int", &function_c95aa114, 0, 0);
 }
 
 function_c95aa114(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

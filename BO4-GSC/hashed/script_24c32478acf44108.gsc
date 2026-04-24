@@ -14,7 +14,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "hash_419c1c8da4dc53a9", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_419c1c8da4dc53a9", 1, 1, "int");
 }
 
 register_burn(str_type, n_dps, n_duration, var_f472bfc, var_5713c703) {
@@ -90,7 +90,7 @@ function_8aefaae3(s_burn) {
     if(isDefined(s_burn.var_f472bfc)) {
       str_clientfield = s_burn.var_f472bfc;
     } else {
-      str_clientfield = "" + # "hash_419c1c8da4dc53a9";
+      str_clientfield = "" + #"hash_419c1c8da4dc53a9";
     }
 
     self clientfield::set(str_clientfield, 1);

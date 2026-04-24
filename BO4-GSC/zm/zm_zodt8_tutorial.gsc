@@ -54,8 +54,8 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("zbarrier", "tutorial_keyline_fx", 1, 2, "int");
   clientfield::register("item", "tutorial_keyline_fx", 1, 2, "int");
   clientfield::register("scriptmover", "tutorial_keyline_fx", 1, 2, "int");
-  clientfield::register("scriptmover", "" + # "hash_1b509b0ba634a25a", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_1390e08de02cbdc7", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_1b509b0ba634a25a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_1390e08de02cbdc7", 1, 1, "int");
   clientfield::register("worlduimodel", "hudItems.ztut.showLocation", 1, 1, "int");
   clientfield::register("worlduimodel", "hudItems.ztut.showPerks", 1, 1, "int");
   clientfield::register("worlduimodel", "hudItems.ztut.showEquipment", 1, 1, "int");
@@ -1799,9 +1799,9 @@ function_269d9f82(str_barrier, b_on = 1) {
   if(isDefined(b_on) && b_on) {
     foreach(s_position in a_s_positions) {
       s_position.mdl_pos = util::spawn_model("tag_origin", s_position.origin, s_position.angles);
-      s_position.mdl_pos clientfield::set("" + # "hash_1b509b0ba634a25a", 1);
+      s_position.mdl_pos clientfield::set("" + #"hash_1b509b0ba634a25a", 1);
       s_position.mdl_fx = util::spawn_model(#"p8_zm_power_door_symbol_01", s_position.origin + var_d3c21d73, s_position.angles);
-      s_position.mdl_fx clientfield::set("" + # "hash_1390e08de02cbdc7", 1);
+      s_position.mdl_fx clientfield::set("" + #"hash_1390e08de02cbdc7", 1);
       s_position.mdl_collision = util::spawn_model("collision_player_wall_128x128x10", s_position.origin + var_d3c21d73, s_position.angles);
       s_position.mdl_collision disconnectpaths();
       s_position.mdl_collision ghost();
@@ -1812,13 +1812,13 @@ function_269d9f82(str_barrier, b_on = 1) {
 
   foreach(s_position in a_s_positions) {
     if(isDefined(s_position.mdl_pos)) {
-      s_position.mdl_pos clientfield::set("" + # "hash_1b509b0ba634a25a", 0);
+      s_position.mdl_pos clientfield::set("" + #"hash_1b509b0ba634a25a", 0);
       util::wait_network_frame();
       s_position.mdl_pos delete();
     }
 
     if(isDefined(s_position.mdl_fx)) {
-      s_position.mdl_fx clientfield::set("" + # "hash_1390e08de02cbdc7", 0);
+      s_position.mdl_fx clientfield::set("" + #"hash_1390e08de02cbdc7", 0);
       util::wait_network_frame();
       s_position.mdl_fx delete();
     }

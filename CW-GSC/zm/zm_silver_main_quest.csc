@@ -20,24 +20,24 @@ function init() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + # "hash_8358a32177aa60e", 1, 1, "int", &function_f03e2a9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_654274a0648df21d", 1, 1, "int", &function_779a8e5b, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6dc2bf4e960f0495", 1, 1, "int", &function_c3ed4d53, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_77df0b1fb17c3a18", 1, 1, "int", &function_c2ba61dd, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_17ea9211637fa6cf", 1, 1, "int", &function_bfce814a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2f17676fe2c8e396", 1, 1, "int", &function_f8d671e1, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_3f49ce049c9da7d", 1, 1, "int", &function_be9e97b1, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_404a977ff0098cf", 1, 1, "counter", &function_d23b3778, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_3cc984f9a32f1508", 1, 1, "int", &function_11e1fa9a, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_41658211f38c2b02", 1, 1, "int", &function_2929e754, 0, 0);
-  clientfield::register("world", "" + # "hash_5c2cc65ae866b3f4", 1, 1, "int", &function_52eda57a, 0, 0);
-  clientfield::register("world", "" + # "hash_48df238a087c684e", 1, 1, "int", &function_fdc7d35f, 0, 1);
-  clientfield::register("world", "" + # "hash_17466a1bb2380af6", 1, getminbitcountfornum(4), "int", &function_fdd966d7, 0, 1);
-  clientfield::register("world", "" + # "hash_6f13307bc53f2de5", 1, 1, "int", &function_6f615c6d, 0, 0);
-  clientfield::register("world", "" + # "falling_concrete", 1, 1, "int", &falling_concrete, 0, 1);
-  clientfield::register("world", "" + # "hash_718b0f4fd6db0bb4", 1, 1, "int", &function_46350cca, 0, 1);
-  clientfield::register("world", "" + # "hash_575a337754ccd980", 1, 1, "int", &function_85d502d3, 0, 0);
-  clientfield::register("world", "" + # "hash_3fd05810b220d13a", 1, 1, "int", &function_7593da3, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_8358a32177aa60e", 1, 1, "int", &function_f03e2a9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_654274a0648df21d", 1, 1, "int", &function_779a8e5b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6dc2bf4e960f0495", 1, 1, "int", &function_c3ed4d53, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_77df0b1fb17c3a18", 1, 1, "int", &function_c2ba61dd, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_17ea9211637fa6cf", 1, 1, "int", &function_bfce814a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2f17676fe2c8e396", 1, 1, "int", &function_f8d671e1, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_3f49ce049c9da7d", 1, 1, "int", &function_be9e97b1, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_404a977ff0098cf", 1, 1, "counter", &function_d23b3778, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_3cc984f9a32f1508", 1, 1, "int", &function_11e1fa9a, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_41658211f38c2b02", 1, 1, "int", &function_2929e754, 0, 0);
+  clientfield::register("world", "" + #"hash_5c2cc65ae866b3f4", 1, 1, "int", &function_52eda57a, 0, 0);
+  clientfield::register("world", "" + #"hash_48df238a087c684e", 1, 1, "int", &function_fdc7d35f, 0, 1);
+  clientfield::register("world", "" + #"hash_17466a1bb2380af6", 1, getminbitcountfornum(4), "int", &function_fdd966d7, 0, 1);
+  clientfield::register("world", "" + #"hash_6f13307bc53f2de5", 1, 1, "int", &function_6f615c6d, 0, 0);
+  clientfield::register("world", "" + #"falling_concrete", 1, 1, "int", &falling_concrete, 0, 1);
+  clientfield::register("world", "" + #"hash_718b0f4fd6db0bb4", 1, 1, "int", &function_46350cca, 0, 1);
+  clientfield::register("world", "" + #"hash_575a337754ccd980", 1, 1, "int", &function_85d502d3, 0, 0);
+  clientfield::register("world", "" + #"hash_3fd05810b220d13a", 1, 1, "int", &function_7593da3, 0, 0);
 }
 
 function function_85d502d3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

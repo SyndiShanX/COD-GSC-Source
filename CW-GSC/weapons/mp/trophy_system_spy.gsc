@@ -24,8 +24,8 @@ function private preinit() {
   trophydeployanim = "p8_fxanim_mp_eqp_trophy_system_world_anim";
   trophyspinanim = "p8_fxanim_mp_eqp_trophy_system_world_open_anim";
   level.var_4f3822f4 = &trophysystemdetonate;
-  clientfield::register("missile", "" + # "hash_65fa2e5290be670e", 1, 1, "int");
-  clientfield::register("missile", "" + # "hash_19f94fb667823a5a", 1, 7, "float");
+  clientfield::register("missile", "" + #"hash_65fa2e5290be670e", 1, 1, "int");
+  clientfield::register("missile", "" + #"hash_19f94fb667823a5a", 1, 7, "float");
   callback::on_player_killed(&on_player_killed);
   callback::on_spawned(&ammo_reset);
   weaponobjects::function_e6400478("trophy_system_spy", &createtrophysystemwatcher, 1);

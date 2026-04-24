@@ -15,8 +15,8 @@ autoexec __init__system__() {
 
 __init__() {
   if(getdvarint(#"zm_holiday_event", 0)) {
-    clientfield::register("actor", "" + # "hash_59e8c30d5e28dad3", 14000, 1, "int", &function_b245ef9e, 0, 0);
-    clientfield::register("scriptmover", "" + # "hash_d260ef4191c5b3d", 14000, 1, "int", &function_9a20c93e, 0, 0);
+    clientfield::register("actor", "" + #"hash_59e8c30d5e28dad3", 14000, 1, "int", &function_b245ef9e, 0, 0);
+    clientfield::register("scriptmover", "" + #"hash_d260ef4191c5b3d", 14000, 1, "int", &function_9a20c93e, 0, 0);
   }
 }
 

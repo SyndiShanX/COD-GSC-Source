@@ -19,8 +19,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("allplayers", "" + # "hash_1668fcf85f7c231", 1, 2, "int", &function_1e0fa475, 0, 0);
-  clientfield::register("actor", "" + # "hash_70a85ea8b0e1b09c", 1, 2, "int", &function_9db3514d, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_1668fcf85f7c231", 1, 2, "int", &function_1e0fa475, 0, 0);
+  clientfield::register("actor", "" + #"hash_70a85ea8b0e1b09c", 1, 2, "int", &function_9db3514d, 0, 0);
   callback::on_spawned(&on_spawned);
 }
 

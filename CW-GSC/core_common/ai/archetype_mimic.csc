@@ -22,7 +22,7 @@ function preinit() {
     return;
   }
 
-  clientfield::register("actor", "" + # "hash_2f1c34ea62d86c57", 1, 1, "int", &function_ef33ecb7, 0, 0);
+  clientfield::register("actor", "" + #"hash_2f1c34ea62d86c57", 1, 1, "int", &function_ef33ecb7, 0, 0);
   clientfield::register("toplayer", "mimic_force_stream", 1, 1, "int", &mimic_force_stream, 0, 0);
   clientfield::register("actor", "mimic_emerge_fx", 1, 1, "int", &function_807a046, 0, 0);
   clientfield::register("toplayer", "mimic_attack_hit", 1, 1, "int", &mimic_attack_hit, 0, 0);

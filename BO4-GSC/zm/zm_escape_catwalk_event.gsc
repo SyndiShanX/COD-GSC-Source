@@ -29,8 +29,8 @@
 #namespace zm_escape_catwalk_event;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_144c7c2895ed95c", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_48f1f50c412d80c7", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_144c7c2895ed95c", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_48f1f50c412d80c7", 1, 1, "counter");
 }
 
 function_4989fd7e() {
@@ -112,7 +112,7 @@ function_84f1c310() {
     music::setmusicstate("escape_catwalk");
     s_sparks = struct::get("catwalk_door_spark");
     mdl_sparks = util::spawn_model("tag_origin", s_sparks.origin, s_sparks.angles);
-    mdl_sparks clientfield::set("" + # "hash_144c7c2895ed95c", 1);
+    mdl_sparks clientfield::set("" + #"hash_144c7c2895ed95c", 1);
     mdl_gate = undefined;
 
     foreach(mdl_door in t_catwalk_door.doors) {
@@ -126,7 +126,7 @@ function_84f1c310() {
       level thread function_40312eda(mdl_sparks, mdl_gate);
     }
 
-    level.var_2ea46461 clientfield::increment("" + # "hash_48f1f50c412d80c7");
+    level.var_2ea46461 clientfield::increment("" + #"hash_48f1f50c412d80c7");
     level.var_b2b15659 = 1;
   } else if(zm_custom::function_901b751c("zmPowerState") == 2 || zm_custom::function_901b751c(#"zmpowerdoorstate") == 2) {
     var_40762d8a sethintstring(#"");

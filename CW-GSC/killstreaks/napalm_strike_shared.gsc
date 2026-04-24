@@ -26,9 +26,9 @@
 function init_shared(bundlename, var_b083dcd0) {
   assert(!isDefined(var_b083dcd0) || isfunctionptr(var_b083dcd0));
   killstreaks::register_killstreak(bundlename, isDefined(var_b083dcd0) ? var_b083dcd0 : &function_aad649e1);
-  clientfield::register("scriptmover", "" + # "hash_72f92383f772d276", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_3d8e05debfa62f2d", 1, 1, "int");
-  clientfield::register("missile", "" + # "hash_77346335cbe9ecde", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_72f92383f772d276", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_3d8e05debfa62f2d", 1, 1, "int");
+  clientfield::register("missile", "" + #"hash_77346335cbe9ecde", 1, 1, "int");
   level.var_ea918548 = scene::get_all_shot_names(#"p9_fxanim_mp_napalm_strike_spin");
   level.napalmstrike = {
     #var_cf856437: [], #var_9bac810c: [], #affectedplayers: []
@@ -139,7 +139,7 @@ function function_88e2e18a(killstreaktype, location, team, killstreak_id, startd
     dosound = 0;
 
     if(index == 0) {
-      plane clientfield::set("" + # "hash_3d8e05debfa62f2d", 1);
+      plane clientfield::set("" + #"hash_3d8e05debfa62f2d", 1);
 
       if(isDefined(killstreak_id)) {
         plane killstreakrules::function_2e6ff61a(bundlename, killstreak_id, {
@@ -255,7 +255,7 @@ function private function_c248485(plane, targetpoint, team, owner, dosound = 0, 
     waitframe(1);
   }
 
-  plane clientfield::set("" + # "hash_72f92383f772d276", 1);
+  plane clientfield::set("" + #"hash_72f92383f772d276", 1);
   self waittill(#"drop_bombs");
 
   if(dosound) {
@@ -344,7 +344,7 @@ function private function_c4cbfac7(plane, team, killstreakbundle, var_8be94730, 
   }
 
   if(result._notify == "projectile_impact_explode") {
-    bomb clientfield::set("" + # "hash_77346335cbe9ecde", 1);
+    bomb clientfield::set("" + #"hash_77346335cbe9ecde", 1);
     level function_77ba1651(result.position, self, result.normal, forward, bomb.killcament, team);
   }
 }

@@ -30,10 +30,10 @@
 function preinit(bundlename) {
   profilestart();
   level.var_b3e433ae = [];
-  clientfield::register("toplayer", "" + # "hash_7c907650b14abbbe", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_4ddf67f7aa0f6884", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_46646871455cab15", 1, 2, "int");
-  clientfield::register("vehicle", "" + # "hash_6cf1a3b26118d892", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_7c907650b14abbbe", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_4ddf67f7aa0f6884", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_46646871455cab15", 1, 2, "int");
+  clientfield::register("vehicle", "" + #"hash_6cf1a3b26118d892", 1, 1, "int");
   init_shared();
   killstreaks::register_killstreak(bundlename, &activatemaingunner);
   profilestop();
@@ -127,7 +127,7 @@ function function_5160bb1e(killstreaktype) {
   level.chopper_gunner killstreak_dialog::play_pilot_dialog_on_owner("arrive", "chopper_gunner", killstreak_id);
   level.chopper_gunner thread killstreaks::player_killstreak_threat_tracking("chopper_gunner", 0.866025);
   self stats::function_e24eec31(bundle.ksweapon, #"used", 1);
-  self clientfield::set_to_player("" + # "hash_7c907650b14abbbe", 1);
+  self clientfield::set_to_player("" + #"hash_7c907650b14abbbe", 1);
   profilestop();
 
   if(sessionmodeiszombiesgame() && is_true(level.var_68e3cf24) && !is_true(level.var_d5ad2e35)) {
@@ -321,18 +321,18 @@ function function_dede0607(isowner, killstreaktype) {
   self.var_5c5fca5 = 1;
   bundle = killstreaks::get_script_bundle("chopper_gunner");
   assert(isDefined(bundle));
-  choppergunner clientfield::set("" + # "hash_4ddf67f7aa0f6884", 1);
+  choppergunner clientfield::set("" + #"hash_4ddf67f7aa0f6884", 1);
   choppergunner thread scene::play(#"chopper_gunner_door_open");
   choppergunner setanim(#"hash_7483c325182bab52");
   var_df4a5052 = choppergunner waittilltimeout(getanimlength(#"hash_7483c325182bab52") - float(function_60d95f53()) / 1000, #"hash_623a20b6b2608171");
   choppergunner clearanim(#"hash_7483c325182bab52", 0.2);
-  choppergunner clientfield::set("" + # "hash_4ddf67f7aa0f6884", 0);
+  choppergunner clientfield::set("" + #"hash_4ddf67f7aa0f6884", 0);
 
   if(var_df4a5052._notify == #"hash_623a20b6b2608171") {
     choppergunner thread scene::stop(#"chopper_gunner_door_open");
 
     if(sessionmodeiszombiesgame()) {
-      choppergunner clientfield::set("" + # "hash_164696e86d29988d", 1);
+      choppergunner clientfield::set("" + #"hash_164696e86d29988d", 1);
     }
   }
 
@@ -608,7 +608,7 @@ function function_cf58dcdd(player, var_a6648780 = 1) {
 
     player.var_5c5fca5 = undefined;
     player killstreaks::clear_using_remote();
-    player clientfield::set_to_player("" + # "hash_7c907650b14abbbe", 0);
+    player clientfield::set_to_player("" + #"hash_7c907650b14abbbe", 0);
 
     if(isDefined(level.var_399dc69a)) {
       player[[level.var_399dc69a]]();
@@ -680,7 +680,7 @@ function function_77784598(einflictor, eattacker, idamage, idflags, smeansofdeat
     self.damagestate = 1;
 
     if(isDefined(self.var_5efaff3e)) {
-      self clientfield::set("" + # "hash_46646871455cab15", 1);
+      self clientfield::set("" + #"hash_46646871455cab15", 1);
     }
   }
 
@@ -689,7 +689,7 @@ function function_77784598(einflictor, eattacker, idamage, idflags, smeansofdeat
     self.damagestate = 2;
 
     if(isDefined(self.var_ba5009c3)) {
-      self clientfield::set("" + # "hash_46646871455cab15", 2);
+      self clientfield::set("" + #"hash_46646871455cab15", 2);
     }
   }
 
@@ -761,7 +761,7 @@ function function_80ae938e(point, dir) {
   }
 
   self thread vehicle_death::helicopter_crash(point, dir, 2.75);
-  self clientfield::set("" + # "hash_6cf1a3b26118d892", 1);
+  self clientfield::set("" + #"hash_6cf1a3b26118d892", 1);
   self waittilltimeout(2.25, #"death");
   function_cf58dcdd(self.owner, 0);
 }

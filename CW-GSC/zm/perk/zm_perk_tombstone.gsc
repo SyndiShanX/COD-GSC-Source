@@ -72,11 +72,11 @@ function precache() {
 }
 
 function register_clientfield() {
-  clientfield::register("allplayers", "" + # "hash_46072c670fdaf2fa", 8000, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_46072c670fdaf2fa", 8000, 1, "int");
   clientfield::register_clientuimodel("hud_items.tombstonePerkAvailable", 8000, 3, "int");
   clientfield::register_clientuimodel("hud_items.tombstoneReviveTimerShorten", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_2897f04212a28873", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_5d96e4c9a397fa0", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_2897f04212a28873", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_5d96e4c9a397fa0", 8000, 1, "int");
 }
 
 function set_clientfield(state) {
@@ -336,7 +336,7 @@ function spawn_corpse() {
   var_5716a6f5 = playerphysicstrace(trace_start, trace_end);
   playFX(#"hash_7338c45a04f946da", self.origin);
   corpse = util::spawn_player_clone(self, #"pb_tombstone_idle", undefined, 0);
-  corpse clientfield::set("" + # "hash_5d96e4c9a397fa0", 1);
+  corpse clientfield::set("" + #"hash_5d96e4c9a397fa0", 1);
   corpse.owner = self;
   corpse thread revive_trigger_spawn();
   self.var_57b374b4 = gameobjects::get_next_obj_id();
@@ -544,7 +544,7 @@ function function_fe8b87d5() {
   }
 
   self childthread function_3c87c880();
-  self clientfield::set("" + # "hash_46072c670fdaf2fa", 1);
+  self clientfield::set("" + #"hash_46072c670fdaf2fa", 1);
   self.var_dc4f101 waittill(#"player_revived");
   self notify(#"player_revived");
   self.var_4eea3759 = 1;
@@ -724,7 +724,7 @@ function function_6cc3fb63() {
 function function_575d770f() {
   if(isDefined(self.var_dc4f101)) {
     playFX(#"hash_7338c45a04f946da", self.var_dc4f101.origin);
-    self.var_dc4f101 clientfield::set("" + # "hash_5d96e4c9a397fa0", 0);
+    self.var_dc4f101 clientfield::set("" + #"hash_5d96e4c9a397fa0", 0);
   }
 
   if(isDefined(self.var_57b374b4)) {
@@ -748,7 +748,7 @@ function function_575d770f() {
 function function_3db7ced3() {
   self val::reset("tombstone_shadow", "health_regen");
   self val::reset("tombstone_shadow", "disable_usability");
-  self clientfield::set("" + # "hash_46072c670fdaf2fa", 0);
+  self clientfield::set("" + #"hash_46072c670fdaf2fa", 0);
   self.armor = self.var_8f0245d0.armor;
   self.var_8f0245d0 struct::delete();
   self.var_8f0245d0 = undefined;
@@ -802,7 +802,7 @@ function function_8fddd50e() {
   a_str_models = [#"hash_4bee36a9434de051", #"hash_4bee33a9434ddb38", #"hash_4bee34a9434ddceb", #"hash_4bee39a9434de56a"];
   stash = util::spawn_model(a_str_models[self.entity_num], var_dfa8eaa5 + (0, 0, 15));
   stash function_619a5c20();
-  stash clientfield::set("" + # "hash_2897f04212a28873", 1);
+  stash clientfield::set("" + #"hash_2897f04212a28873", 1);
   stash.owner = self;
   stash thread function_330c66cc();
   stash thread function_f11599cf(self);
@@ -860,7 +860,7 @@ function function_64d23fc() {
     zm_unitrigger::unregister_unitrigger(self.s_unitrigger);
   }
 
-  self clientfield::set("" + # "hash_2897f04212a28873", 0);
+  self clientfield::set("" + #"hash_2897f04212a28873", 0);
 
   if(isDefined(self.var_eeef4e4)) {
     objective_delete(self.var_eeef4e4);

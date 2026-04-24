@@ -29,7 +29,7 @@ enable_slider_perk_for_level() {
 init_slider() {}
 
 function_4bb29d61() {
-  clientfield::register("allplayers", "" + # "hash_7b8ad0ed3ef67813", 1, 1, "counter", &function_4feff2f7, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_7b8ad0ed3ef67813", 1, 1, "counter", &function_4feff2f7, 0, 0);
 }
 
 function_90b5e96c() {}

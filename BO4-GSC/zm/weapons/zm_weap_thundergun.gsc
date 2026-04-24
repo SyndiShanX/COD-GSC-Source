@@ -23,7 +23,7 @@ autoexec __init__system__() {
 __init__() {
   level.w_thundergun = getweapon(#"thundergun");
   level.w_thundergun_upgraded = getweapon(#"thundergun_upgraded");
-  clientfield::register("actor", "" + # "hash_7549405bcfcbcfb", 24000, 1, "counter");
+  clientfield::register("actor", "" + #"hash_7549405bcfcbcfb", 24000, 1, "counter");
 }
 
 __main__() {
@@ -286,7 +286,7 @@ thundergun_fling_zombie(player, fling_vec, index) {
     self.thundergun_death = 1;
   }
 
-  self clientfield::increment("" + # "hash_7549405bcfcbcfb", 1);
+  self clientfield::increment("" + #"hash_7549405bcfcbcfb", 1);
 }
 
 zombie_knockdown(player, gib) {
@@ -361,7 +361,7 @@ thundergun_knockdown_zombie(player, gib) {
 
   if(isDefined(self.thundergun_knockdown_func)) {
     self[[self.thundergun_knockdown_func]](player, gib);
-    self clientfield::increment("" + # "hash_7549405bcfcbcfb", 1);
+    self clientfield::increment("" + #"hash_7549405bcfcbcfb", 1);
   }
 }
 

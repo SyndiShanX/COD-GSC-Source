@@ -776,7 +776,7 @@ function private _get_valid_targets() {
 }
 
 function private _lock_requirement(target) {
-  if(isDefined(self.owner) && !self.owner cybercom::targetisvalid(target, getweapon("gadget_firefly_swarm"))) {
+  if(isDefined(self.owner) && !self.owner cybercom::targetisValid(target, getweapon("gadget_firefly_swarm"))) {
     return false;
   }
   if(target.archetype != "human" && target.archetype != "human_riotshield" && target.archetype != "zombie" && target.archetype != "warlord") {

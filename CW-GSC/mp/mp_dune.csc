@@ -18,11 +18,11 @@ function event_handler[level_init] main(eventstruct) {
   }
 
   if(function_be90acca(util::get_game_type()) === #"zsurvival") {
-    clientfield::register("toplayer", "" + # "hash_732e76418cbd8453", 1, 1, "int", &function_8f4ebcaf, 0, 0);
+    clientfield::register("toplayer", "" + #"hash_732e76418cbd8453", 1, 1, "int", &function_8f4ebcaf, 0, 0);
     callback::on_spawned(&on_player_spawned);
   }
 
-  clientfield::register("toplayer", "" + # "hash_5e463693d1dbcf1c", 1, 1, "int", &function_a30c2dd0, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_5e463693d1dbcf1c", 1, 1, "int", &function_a30c2dd0, 0, 0);
   setsaveddvar(#"enable_global_wind", 1);
   setsaveddvar(#"wind_global_vector", "88 0 0");
   setsaveddvar(#"wind_global_low_altitude", 0);

@@ -27,9 +27,9 @@ function private autoexec __init__system__() {
 }
 
 function init_shared() {
-  clientfield::register("actor", "" + # "hash_584428de7fdfefe2", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_313a6af163e4bef1", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_10eff6a8464fb235", 1, 1, "counter");
+  clientfield::register("actor", "" + #"hash_584428de7fdfefe2", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_313a6af163e4bef1", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_10eff6a8464fb235", 1, 1, "counter");
   clientfield::register("actor", "pustule_pulse_plague", 1, 1, "int");
   namespace_9ff9f642::register_slowdown(#"hash_10d83afaeb265fde", 0.85, 2);
   spawner::add_archetype_spawn_function(#"zombie_dog", &function_4f3cd1f0);
@@ -48,7 +48,7 @@ function function_a6c93300(params) {
 
   if(!isDefined(self.exploded) && !is_true(self.var_270befd2)) {
     self.exploded = 1;
-    self clientfield::set("" + # "hash_584428de7fdfefe2", 1);
+    self clientfield::set("" + #"hash_584428de7fdfefe2", 1);
     var_659d1778 = spawn("script_origin", self.origin);
     var_659d1778.targetname = "zombie_dog_toxic_cloud";
     var_659d1778 thread function_659d1778(self.attacker);
@@ -84,7 +84,7 @@ function function_659d1778(attacker) {
         }
 
         player status_effect::status_effect_apply(params, var_7e6e7f9f, self);
-        player clientfield::increment_to_player("" + # "hash_313a6af163e4bef1", 1);
+        player clientfield::increment_to_player("" + #"hash_313a6af163e4bef1", 1);
       }
     }
 

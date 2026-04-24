@@ -296,8 +296,8 @@ function zone_init() {
   zm_zonemgr::add_adjacent_zone("zone_town_square_02", "zone_town_square_03", #"hash_2145c074d359b87d", 0);
   zm_zonemgr::add_adjacent_zone("zone_town_square_02", "zone_town_square_04", #"hash_2145c074d359b87d", 0);
   zm_zonemgr::add_adjacent_zone("zone_town_square_03", "zone_town_square_04", #"hash_2145c074d359b87d", 0);
-  level clientfield::set("" + # "hash_2a35f1483d5f5467", 1);
-  level clientfield::set("" + # "hash_deec7a5e441c482", 1);
+  level clientfield::set("" + #"hash_2a35f1483d5f5467", 1);
+  level clientfield::set("" + #"hash_deec7a5e441c482", 1);
   level thread function_49779a9c();
   level thread function_9dd333eb();
   level.ascendstarts = struct::get_array("zm_ascend_begin", "script_noteworthy");
@@ -447,8 +447,8 @@ function function_44b1279a() {
   self endon("b16a9f8e903683d");
   self endon(#"disconnect", #"death");
   self setupminimap("", "amerika");
-  self clientfield::set_to_player("" + # "minimap_underground", 0);
-  self clientfield::set_to_player("" + # "music_underscore", 4);
+  self clientfield::set_to_player("" + #"minimap_underground", 0);
+  self clientfield::set_to_player("" + #"music_underscore", 4);
   self.var_9767e0af = 0;
   util::wait_network_frame();
 
@@ -457,34 +457,34 @@ function function_44b1279a() {
       return;
     }
 
-    if(!clientfield::function_ec6130f9("" + # "minimap_underground")) {
+    if(!clientfield::function_ec6130f9("" + #"minimap_underground")) {
       waitframe(1);
       continue;
     }
 
     is_player_in_zone = self zm_zonemgr::is_player_in_zone(level.var_65c43c31, 0);
-    minimap_underground = self clientfield::get_to_player("" + # "minimap_underground");
+    minimap_underground = self clientfield::get_to_player("" + #"minimap_underground");
 
     if(is_player_in_zone && minimap_underground == 0) {
       self setupminimap("", "tunnel");
-      self clientfield::set_to_player("" + # "minimap_underground", 1);
+      self clientfield::set_to_player("" + #"minimap_underground", 1);
     } else if(!is_player_in_zone && minimap_underground == 1) {
       self setupminimap("", "amerika");
-      self clientfield::set_to_player("" + # "minimap_underground", 0);
+      self clientfield::set_to_player("" + #"minimap_underground", 0);
     }
 
     var_6444ee1f = self zm_zonemgr::is_player_in_zone(level.var_6eacc74a, 0);
     var_52764a82 = self zm_zonemgr::is_player_in_zone(level.var_359fd531, 0);
-    var_710b2d6e = self clientfield::get_to_player("" + # "music_underscore");
+    var_710b2d6e = self clientfield::get_to_player("" + #"music_underscore");
 
     if(var_6444ee1f || var_52764a82) {
       if(var_6444ee1f && var_710b2d6e != 0) {
-        self clientfield::set_to_player("" + # "music_underscore", 0);
+        self clientfield::set_to_player("" + #"music_underscore", 0);
       } else if(var_52764a82 && var_710b2d6e != 1) {
-        self clientfield::set_to_player("" + # "music_underscore", 1);
+        self clientfield::set_to_player("" + #"music_underscore", 1);
       }
     } else if(var_710b2d6e != 4) {
-      self clientfield::set_to_player("" + # "music_underscore", 4);
+      self clientfield::set_to_player("" + #"music_underscore", 4);
     }
 
     s_waitresult = self waittill(#"zone_change");

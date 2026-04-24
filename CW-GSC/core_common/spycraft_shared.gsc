@@ -43,8 +43,8 @@ function private preinit() {
 }
 
 function private register_clientfields() {
-  clientfield::register("vehicle", "" + # "hash_2d5a2cd7892a4fdc", 1, 1, "counter");
-  clientfield::register("missile", "" + # "hash_2d5a2cd7892a4fdc", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"hash_2d5a2cd7892a4fdc", 1, 1, "counter");
+  clientfield::register("missile", "" + #"hash_2d5a2cd7892a4fdc", 1, 1, "counter");
 }
 
 function function_1b900c1d(weapon, var_5651313e) {
@@ -248,7 +248,7 @@ function function_dce89a3e(entityweapon, targetentity, var_288da8b5) {
     var_288da8b5 contracts::increment_contract(#"hash_43530a1351ecbed6");
   }
 
-  targetentity clientfield::increment("" + # "hash_2d5a2cd7892a4fdc");
+  targetentity clientfield::increment("" + #"hash_2d5a2cd7892a4fdc");
 }
 
 function function_b82a484d(objid, var_288da8b5) {

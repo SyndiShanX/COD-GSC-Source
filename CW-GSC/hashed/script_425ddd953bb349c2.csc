@@ -23,7 +23,7 @@ function private preinit() {
   }
 
   clientfield::register("allplayers", "phase_rift_player_fx", 1, 2, "int", &phase_rift_player_fx, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1b01e37683714902", 1, 1, "int", &function_1f107cad, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1b01e37683714902", 1, 1, "int", &function_1f107cad, 0, 0);
 }
 
 function phase_rift_player_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

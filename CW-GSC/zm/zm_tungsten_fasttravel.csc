@@ -11,8 +11,8 @@
 #namespace zm_tungsten_fasttravel;
 
 function init() {
-  clientfield::register("world", "" + # "hash_666ad912cb4541f1", 28000, 1, "int", &function_7d467651, 0, 0);
-  clientfield::register("world", "" + # "hash_6601c584f23761c4", 28000, 1, "int", &function_e746b148, 0, 0);
+  clientfield::register("world", "" + #"hash_666ad912cb4541f1", 28000, 1, "int", &function_7d467651, 0, 0);
+  clientfield::register("world", "" + #"hash_6601c584f23761c4", 28000, 1, "int", &function_e746b148, 0, 0);
   level.var_b41e82d4 = 1;
 }
 

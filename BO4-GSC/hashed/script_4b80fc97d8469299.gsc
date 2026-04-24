@@ -36,8 +36,8 @@ preload() {
   zm_sq_modules::function_d8383812(#"sc_pap_ship", 24000, "sc_pap_ship", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"sc_pap_lagoon", 24000, "sc_pap_lagoon", &is_soul_capture, &soul_captured, 1);
   zm_sq_modules::function_d8383812(#"sc_pap_island", 24000, "sc_pap_island", &is_soul_capture, &soul_captured, 1);
-  clientfield::register("scriptmover", "" + # "hash_411947cf11cffb69", 24000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_249c83f6060ea7ba", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_411947cf11cffb69", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_249c83f6060ea7ba", 24000, 1, "int");
 }
 
 main() {
@@ -312,14 +312,14 @@ function_dc380897() {
   self thread function_d584f1a8();
   self.vessel show();
   self.vessel playSound("zmb_vessel_drop");
-  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", level.var_ed1e7d4d);
+  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
   self.vessel.return_loc = self.vessel.origin;
   self.vessel playSound(#"hash_8655fa14e357e9a");
   self.vessel playLoopSound(#"hash_3c00e3a927df9b2e");
   var_deb6871b = struct::get(self.vessel.target, "targetname");
   self.vessel moveto(var_deb6871b.origin, 1.5);
   self.vessel waittill(#"movedone");
-  self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", 0);
+  self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", 0);
   var_deb6871b.var_7944be4a = 0;
 
   switch (getplayers().size) {
@@ -352,15 +352,15 @@ function_dc380897() {
   self.e_fire = spawn("script_model", pos);
   self.e_fire.angles = var_deb6871b.angles + (0, 90, 0);
   self.e_fire setModel("tag_origin");
-  self.e_fire clientfield::set("" + # "hash_249c83f6060ea7ba", 1);
-  self.vessel clientfield::set("" + # "hash_411947cf11cffb69", 1);
+  self.e_fire clientfield::set("" + #"hash_249c83f6060ea7ba", 1);
+  self.vessel clientfield::set("" + #"hash_411947cf11cffb69", 1);
   self.e_fire playSound(#"hash_49156c17a247721c");
   arrayremovevalue(level.var_4d8e32c8, self);
 
   if(!level flag::get(#"hash_3028604821838259")) {
     wait 1;
     level notify(#"hash_39b6629ce957cce9");
-    self.vessel clientfield::set("" + # "hash_1b72c208f2964e24", level.var_ed1e7d4d);
+    self.vessel clientfield::set("" + #"hash_1b72c208f2964e24", level.var_ed1e7d4d);
     self.vessel moveto(self.vessel.return_loc, 0.5);
     self.vessel playSound(#"hash_1ae6116ea0aa080f");
     self.vessel stoploopsound();

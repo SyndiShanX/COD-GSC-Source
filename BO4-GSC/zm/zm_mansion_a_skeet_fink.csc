@@ -17,18 +17,18 @@
 #namespace mansion_a_skeet_fink;
 
 init() {
-  clientfield::register("world", "" + # "hash_3b4f11e825b1f62b", 8000, 1, "int", &function_5980b4fd, 0, 0);
-  clientfield::register("world", "" + # "hash_300ef0a8a2afdab9", 8000, 3, "int", &function_8b09185, 0, 0);
-  clientfield::register("world", "" + # "hash_300eefa8a2afd906", 8000, 3, "int", &function_1a723508, 0, 0);
-  clientfield::register("world", "" + # "hash_300eeea8a2afd753", 8000, 3, "int", &function_e34446ad, 0, 0);
-  clientfield::register("world", "" + # "hash_300eeda8a2afd5a0", 8000, 3, "int", &function_f4fe6a21, 0, 0);
-  clientfield::register("world", "" + # "hash_155407a9010f2b23", 8000, 1, "int", &function_1edcfaa9, 0, 0);
-  clientfield::register("world", "" + # "hash_70b438bea0135fc8", 8000, 3, "int", &function_860933ea, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_693891d7b7f47419", 8000, 2, "int", &function_813aa911, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_c2169a9806df05e", 8000, 1, "int", &function_4a77ba1b, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_7a260c02e8c345c2", 8000, 1, "int", &function_6736abbe, 0, 0);
-  clientfield::register("actor", "" + # "hash_7a260c02e8c345c2", 8000, 1, "int", &function_6736abbe, 0, 0);
-  clientfield::register("world", "" + # "hash_5f0c4b68b2a6a75d", 16000, 1, "int", &function_36123d34, 0, 0);
+  clientfield::register("world", "" + #"hash_3b4f11e825b1f62b", 8000, 1, "int", &function_5980b4fd, 0, 0);
+  clientfield::register("world", "" + #"hash_300ef0a8a2afdab9", 8000, 3, "int", &function_8b09185, 0, 0);
+  clientfield::register("world", "" + #"hash_300eefa8a2afd906", 8000, 3, "int", &function_1a723508, 0, 0);
+  clientfield::register("world", "" + #"hash_300eeea8a2afd753", 8000, 3, "int", &function_e34446ad, 0, 0);
+  clientfield::register("world", "" + #"hash_300eeda8a2afd5a0", 8000, 3, "int", &function_f4fe6a21, 0, 0);
+  clientfield::register("world", "" + #"hash_155407a9010f2b23", 8000, 1, "int", &function_1edcfaa9, 0, 0);
+  clientfield::register("world", "" + #"hash_70b438bea0135fc8", 8000, 3, "int", &function_860933ea, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_693891d7b7f47419", 8000, 2, "int", &function_813aa911, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_c2169a9806df05e", 8000, 1, "int", &function_4a77ba1b, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_7a260c02e8c345c2", 8000, 1, "int", &function_6736abbe, 0, 0);
+  clientfield::register("actor", "" + #"hash_7a260c02e8c345c2", 8000, 1, "int", &function_6736abbe, 0, 0);
+  clientfield::register("world", "" + #"hash_5f0c4b68b2a6a75d", 16000, 1, "int", &function_36123d34, 0, 0);
   zm_sq_modules::function_d8383812("ee_asf_altar", 1, #"a_skeet_fink_charge", 400, level._effect[#"pap_projectile"], level._effect[#"pap_projectile_end"], undefined, undefined, 1);
   level._effect[#"hash_1a9940efe1d3ed25"] = #"hash_4fc9f92d9016ecad";
   level._effect[#"hash_7cd0c2ae0222691"] = #"hash_4a2a2a8ca5ef4c74";

@@ -62,7 +62,7 @@ function private preinit() {
     spawner::function_89a2cd87(#"zombie", &function_95d1bec9);
   }
 
-  clientfield::register("toplayer", "" + # "hash_3a86c740229275b7", 1, 3, "counter");
+  clientfield::register("toplayer", "" + #"hash_3a86c740229275b7", 1, 3, "counter");
   initzombiebehaviors();
 }
 
@@ -371,7 +371,7 @@ function private function_6f78caa9() {
       direction = 2;
     }
 
-    player clientfield::increment_to_player(isDefined(attacker.var_22492afd) ? attacker.var_22492afd : "" + # "hash_3a86c740229275b7", direction);
+    player clientfield::increment_to_player(isDefined(attacker.var_22492afd) ? attacker.var_22492afd : "" + #"hash_3a86c740229275b7", direction);
   } else if(isDefined(self)) {
     vehicles = getentitiesinradius(self.origin, 1, 12);
 

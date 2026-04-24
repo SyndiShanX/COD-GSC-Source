@@ -15,10 +15,10 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   level.var_bdab9ccd = getscriptbundle("killstreak_nuke");
-  clientfield::register("scriptmover", "" + # "hash_494d8af20db4dc73", 1, 1, "int", &function_fd98ff7f, 0, 0);
-  clientfield::register("world", "" + # "hash_6a6a21b8c5e1528e", 1, 1, "int", &function_977aa020, 0, 0);
-  clientfield::register("world", "" + # "hash_1559e8163efbdb7a", 1, 1, "int", &function_b5fd20b3, 0, 0);
-  clientfield::register("world", "" + # "hash_50ae988d8c6973f5", 1, 2, "int", &function_43cfe793, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_494d8af20db4dc73", 1, 1, "int", &function_fd98ff7f, 0, 0);
+  clientfield::register("world", "" + #"hash_6a6a21b8c5e1528e", 1, 1, "int", &function_977aa020, 0, 0);
+  clientfield::register("world", "" + #"hash_1559e8163efbdb7a", 1, 1, "int", &function_b5fd20b3, 0, 0);
+  clientfield::register("world", "" + #"hash_50ae988d8c6973f5", 1, 2, "int", &function_43cfe793, 0, 0);
   callback::on_localplayer_spawned(&on_localplayer_spawned);
 }
 
@@ -31,7 +31,7 @@ function function_b2067aca(localclientnum) {
   self endon("10969d89536716a2");
   self endon(#"death");
   util::function_89a98f85();
-  var_82a0a786 = level clientfield::get("" + # "hash_50ae988d8c6973f5");
+  var_82a0a786 = level clientfield::get("" + #"hash_50ae988d8c6973f5");
 
   if(var_82a0a786 == 0) {
     if(isDefined(level.var_e1dcc9e7) || isDefined(level.var_8bb199d1)) {

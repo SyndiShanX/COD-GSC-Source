@@ -46,8 +46,8 @@ __init__() {
 }
 
 init_clientfield() {
-  clientfield::register("world", "" + # "lightning_far", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "lightning_near", 1, 1, "counter");
+  clientfield::register("world", "" + #"lightning_far", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"lightning_near", 1, 1, "counter");
 }
 
 __main__() {
@@ -136,7 +136,7 @@ function_26cff57(a_ents) {
 
   if(!level flag::get(#"pap_quest_completed")) {
     s_lightning_bridge = struct::get("lightning_bridge");
-    level clientfield::increment("" + # "lightning_far");
+    level clientfield::increment("" + #"lightning_far");
     playsoundatposition(#"hash_7804a63a2ff82145", s_lightning_bridge.origin);
     a_ents[#"pap"] waittill(#"fade_in_end");
     s_lightning_near = struct::get("lightning_near");
@@ -158,7 +158,7 @@ function_59093304(str_zone, var_e07ad59f = 0) {
   self ghost();
   self waittill(#"fade_in_start");
   self show();
-  self clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  self clientfield::set("" + #"hash_504d26c38b96651c", 1);
 
   if(var_e07ad59f) {
     s_lightning_near = struct::get("lightning_near");
@@ -168,31 +168,31 @@ function_59093304(str_zone, var_e07ad59f = 0) {
   }
 
   self waittill(#"fade_in_end");
-  self clientfield::increment("" + # "lightning_near");
+  self clientfield::increment("" + #"lightning_near");
   self waittill(#"debris_disappear");
   pap_debris(0, str_zone);
 }
 
 function_86f1ed70(a_ents) {
   a_ents[#"pap"] thread function_25adf2e0("roof", #"hash_79b5f8e539d36a49");
-  a_ents[#"pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  a_ents[#"pap"] clientfield::set("" + #"hash_504d26c38b96651c", 1);
 }
 
 function_8d3078dc(a_ents) {
   a_ents[#"pap"] thread function_25adf2e0("building_64", #"hash_1fc69d74f13da62e");
-  a_ents[#"pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  a_ents[#"pap"] clientfield::set("" + #"hash_504d26c38b96651c", 1);
 }
 
 function_a340ee90(a_ents) {
   a_ents[#"pap"] thread function_25adf2e0("power_house", #"hash_6d668f3614ed2393");
-  a_ents[#"pap"] clientfield::set("" + # "hash_504d26c38b96651c", 1);
+  a_ents[#"pap"] clientfield::set("" + #"hash_504d26c38b96651c", 1);
 }
 
 function_25adf2e0(str_zone, var_410775ce) {
   self ghost();
   self waittill(#"fade_in_start");
   self show();
-  self clientfield::increment("" + # "lightning_near");
+  self clientfield::increment("" + #"lightning_near");
   playsoundatposition(#"hash_6c4553b9c8847808", self.origin);
   self waittill(#"debris_appear");
   pap_debris(1, str_zone);

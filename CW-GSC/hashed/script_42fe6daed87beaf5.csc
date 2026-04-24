@@ -14,7 +14,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_547dd74a97b1fdba", 24000, 2, "int", &function_28f9f58c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_547dd74a97b1fdba", 24000, 2, "int", &function_28f9f58c, 0, 0);
   level.var_75653eb2 = &function_288ebce4;
 }
 

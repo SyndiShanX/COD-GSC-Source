@@ -9,8 +9,8 @@
 
 preload() {
   level._effect[#"trials_lighthouse_beam"] = #"hash_7249b8c6a93aa3a3";
-  clientfield::register("scriptmover", "" + # "hash_71906a124221219", 24000, 1, "int", &function_8532d13f, 0, 0);
-  clientfield::register("scriptmover", "" + # "trials_lighthouse_beam", 24000, 1, "int", &function_804015d2, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_71906a124221219", 24000, 1, "int", &function_8532d13f, 0, 0);
+  clientfield::register("scriptmover", "" + #"trials_lighthouse_beam", 24000, 1, "int", &function_804015d2, 0, 0);
 }
 
 function_8532d13f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

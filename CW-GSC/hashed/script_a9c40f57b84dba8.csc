@@ -26,15 +26,15 @@ function preinit() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + # "hash_627fe6d726003b48", 1, 1, "int", &function_a233f763, 0, 0);
-  clientfield::register("world", "" + # "hash_1ff35e37755facac", 1, getminbitcountfornum(6), "int", &function_a913a80c, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_583ce51cd4d9a904", 1, getminbitcountfornum(6), "int", &function_bbadd47c, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_33e8b606c01f74ee", 1, 1, "int", &function_42b24a10, 0, 0);
-  clientfield::register("world", "" + # "hash_645bdb2b2ae769ef", 1, 1, "int", &function_f23a642e, 0, 0);
-  clientfield::register("world", "" + # "hash_6d4501b4a27d3b0f", 1, getminbitcountfornum(6), "int", &function_5e51d561, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_723ddf6790b39408", 1, getminbitcountfornum(5), "int", &function_54098fb4, 0, 0);
-  clientfield::register("world", "" + # "hash_6eb00b16d3628642", 1, 1, "int", &function_761f03cf, 0, 0);
-  clientfield::register("world", "" + # "hash_763dd8035e80f7c", 1, 1, "int", &function_44dc8dc9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_627fe6d726003b48", 1, 1, "int", &function_a233f763, 0, 0);
+  clientfield::register("world", "" + #"hash_1ff35e37755facac", 1, getminbitcountfornum(6), "int", &function_a913a80c, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_583ce51cd4d9a904", 1, getminbitcountfornum(6), "int", &function_bbadd47c, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_33e8b606c01f74ee", 1, 1, "int", &function_42b24a10, 0, 0);
+  clientfield::register("world", "" + #"hash_645bdb2b2ae769ef", 1, 1, "int", &function_f23a642e, 0, 0);
+  clientfield::register("world", "" + #"hash_6d4501b4a27d3b0f", 1, getminbitcountfornum(6), "int", &function_5e51d561, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_723ddf6790b39408", 1, getminbitcountfornum(5), "int", &function_54098fb4, 0, 0);
+  clientfield::register("world", "" + #"hash_6eb00b16d3628642", 1, 1, "int", &function_761f03cf, 0, 0);
+  clientfield::register("world", "" + #"hash_763dd8035e80f7c", 1, 1, "int", &function_44dc8dc9, 0, 0);
 
   if(!is_true(getgametypesetting(#"hash_759fe9a9853a9b36")) && !getdvarint(#"hash_730311c63805303a", 0)) {
     level.var_3c3b40c7 = sr_orda_health_bar::register();

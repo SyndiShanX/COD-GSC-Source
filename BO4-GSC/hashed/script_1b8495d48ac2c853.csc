@@ -17,7 +17,7 @@ __init__() {
 }
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_7eefa4acee4c1d55", 1, 1, "counter", &function_f90464da, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7eefa4acee4c1d55", 1, 1, "counter", &function_f90464da, 0, 0);
 }
 
 function_f90464da(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

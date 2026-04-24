@@ -36,7 +36,7 @@ __init__() {
   zm::function_84d343d(#"ww_tesla_sniper_t8", &function_5ff12a45);
   zm::function_84d343d(#"ww_tesla_sniper_upgraded_t8", &function_5ff12a45);
   callback::on_weapon_change(&on_weapon_change);
-  clientfield::register("toplayer", "" + # "hash_3aad9502fc3b54f2", 24000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_3aad9502fc3b54f2", 24000, 1, "int");
   clientfield::register("actor", "zm_weapons/fx8_ww_tesla_sniper_impact_lg", 24000, 1, "counter");
 }
 
@@ -56,12 +56,12 @@ function_5ff12a45(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
 on_weapon_change(s_params) {
   if(function_b7a6f208(s_params.weapon)) {
-    self clientfield::set_to_player("" + # "hash_3aad9502fc3b54f2", 1);
+    self clientfield::set_to_player("" + #"hash_3aad9502fc3b54f2", 1);
     return;
   }
 
   if(function_b7a6f208(s_params.last_weapon)) {
-    self clientfield::set_to_player("" + # "hash_3aad9502fc3b54f2", 0);
+    self clientfield::set_to_player("" + #"hash_3aad9502fc3b54f2", 0);
   }
 }
 

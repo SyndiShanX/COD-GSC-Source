@@ -42,7 +42,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("allplayers", "" + # "hash_63af42145e260fb5", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_63af42145e260fb5", 1, 2, "int");
 }
 
 function private postinit() {
@@ -60,11 +60,11 @@ function on_player_spawned() {
 }
 
 function on_death() {
-  self clientfield::set("" + # "hash_63af42145e260fb5", 0);
+  self clientfield::set("" + #"hash_63af42145e260fb5", 0);
 }
 
 function function_31b6f21e(str_notify) {
-  self clientfield::set("" + # "hash_63af42145e260fb5", 0);
+  self clientfield::set("" + #"hash_63af42145e260fb5", 0);
 }
 
 function function_23c31b4e() {
@@ -76,9 +76,9 @@ function function_23c31b4e() {
 
   while(true) {
     if(level flag::get(#"dark_aether_active")) {
-      self clientfield::set("" + # "hash_63af42145e260fb5", 2);
+      self clientfield::set("" + #"hash_63af42145e260fb5", 2);
     } else if(level flag::get("power_on")) {
-      self clientfield::set("" + # "hash_63af42145e260fb5", 0);
+      self clientfield::set("" + #"hash_63af42145e260fb5", 0);
     } else {
       self childthread function_3ba2978d();
     }
@@ -100,9 +100,9 @@ function function_3ba2978d() {
 
   while(true) {
     if(self zm_zonemgr::is_player_in_zone(level.var_b80c4ecc)) {
-      self clientfield::set("" + # "hash_63af42145e260fb5", 1);
+      self clientfield::set("" + #"hash_63af42145e260fb5", 1);
     } else {
-      self clientfield::set("" + # "hash_63af42145e260fb5", 0);
+      self clientfield::set("" + #"hash_63af42145e260fb5", 0);
     }
 
     self waittill(#"zone_change");
@@ -113,7 +113,7 @@ function function_57cc7ff7() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    player clientfield::set("" + # "hash_63af42145e260fb5", 0);
+    player clientfield::set("" + #"hash_63af42145e260fb5", 0);
   }
 }
 

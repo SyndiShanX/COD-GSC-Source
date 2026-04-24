@@ -46,7 +46,7 @@ __init__() {
 
 init_clientfields() {
   clientfield::register("world", "fasttravel_exploder", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "wormhole_fx", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"wormhole_fx", 1, 2, "int");
   clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int");
   clientfield::register("toplayer", "player_chaos_light_rail_fx", 1, 1, "int");
   clientfield::register("toplayer", "fasttravel_teleport_sfx", 1, 1, "int");
@@ -113,7 +113,7 @@ wormhole_fx(a_ents) {
   }
   while(!e_wormhole isplayinganimscripted());
 
-  e_wormhole clientfield::set("" + # "wormhole_fx", zm_utility::get_story());
+  e_wormhole clientfield::set("" + #"wormhole_fx", zm_utility::get_story());
 }
 
 function_cdbbf1ee() {

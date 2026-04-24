@@ -383,7 +383,7 @@ function private function_82b49ecb() {
     wait 2;
   }
 
-  level notify("objective_search_area_" + # "hash_501dd5bd78d2273");
+  level notify("objective_search_area_" + #"hash_501dd5bd78d2273");
 }
 
 function function_7c239699() {

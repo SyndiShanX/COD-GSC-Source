@@ -13,7 +13,7 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_7876f33937c8a764", 20000, 1, "int", &vomit, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7876f33937c8a764", 20000, 1, "int", &vomit, 0, 0);
 }
 
 init_fx() {

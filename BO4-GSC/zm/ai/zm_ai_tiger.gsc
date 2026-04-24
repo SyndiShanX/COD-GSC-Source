@@ -29,7 +29,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "hash_14c746e550d9f3ca", 1, 2, "counter");
+  clientfield::register("toplayer", "" + #"hash_14c746e550d9f3ca", 1, 2, "counter");
   function_d5ccdca1();
   zm_player::register_player_damage_callback(&function_9808e44f);
   spawner::add_archetype_spawn_function(#"tiger", &tiger_init);
@@ -318,10 +318,10 @@ function_9808e44f(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon
 function_8fc19416(notetrack) {
   switch (notetrack) {
     case # "tiger_melee_left":
-      self clientfield::increment_to_player("" + # "hash_14c746e550d9f3ca", 2);
+      self clientfield::increment_to_player("" + #"hash_14c746e550d9f3ca", 2);
       break;
     case # "tiger_melee_right":
-      self clientfield::increment_to_player("" + # "hash_14c746e550d9f3ca", 1);
+      self clientfield::increment_to_player("" + #"hash_14c746e550d9f3ca", 1);
       break;
   }
 }

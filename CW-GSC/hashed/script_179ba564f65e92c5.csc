@@ -16,7 +16,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_3220b44880f1807c", 24000, 1, "counter", &function_9eb59632, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3220b44880f1807c", 24000, 1, "counter", &function_9eb59632, 0, 0);
   ai::add_archetype_spawn_function(#"tormentor", &function_a5cd9e54);
 }
 

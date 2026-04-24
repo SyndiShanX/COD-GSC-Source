@@ -420,7 +420,7 @@ function_e7d4e4f0() {
 
   level.var_98cb7c84[level.var_98cb7c84.size] = self;
   util::wait_network_frame();
-  self.mdl_pickup clientfield::set("" + # "hash_487e544e29aa8e45", 1);
+  self.mdl_pickup clientfield::set("" + #"hash_487e544e29aa8e45", 1);
   playsoundatposition(#"zmb_sq_souls_release", self.mdl_pickup.origin);
   self.origin += (0, 0, 8);
   e_holder = self zm_unitrigger::function_fac87205(&function_f3d694d6, (64, 64, 100));

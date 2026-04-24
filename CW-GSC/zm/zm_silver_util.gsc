@@ -160,9 +160,9 @@ function function_834fd6bc(team, player, success) {
 
 function function_4cc5fca6() {
   level endon(#"end_game");
-  level clientfield::set("" + # "hash_7b3ada6e5b1cf81e", 1);
+  level clientfield::set("" + #"hash_7b3ada6e5b1cf81e", 1);
   array::wait_till(function_a1ef346b(), "fasttravel_over", 15);
-  level clientfield::set("" + # "hash_7b3ada6e5b1cf81e", 0);
+  level clientfield::set("" + #"hash_7b3ada6e5b1cf81e", 0);
 }
 
 function function_dd9482b7(e_player) {

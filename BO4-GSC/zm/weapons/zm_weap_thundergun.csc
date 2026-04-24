@@ -16,7 +16,7 @@ autoexec __init__system__() {
 __init__() {
   level.w_thundergun = getweapon(#"thundergun");
   level.w_thundergun_upgraded = getweapon(#"thundergun_upgraded");
-  clientfield::register("actor", "" + # "hash_7549405bcfcbcfb", 24000, 1, "counter", &function_5059c81b, 0, 0);
+  clientfield::register("actor", "" + #"hash_7549405bcfcbcfb", 24000, 1, "counter", &function_5059c81b, 0, 0);
 }
 
 __main__() {

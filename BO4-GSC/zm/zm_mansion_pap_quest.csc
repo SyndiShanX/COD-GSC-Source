@@ -20,17 +20,17 @@
 #namespace mansion_pap;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_51257ec597a8f84f", 8000, getminbitcountfornum(3), "int", &function_9e5522ac, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_47b8db8cde2c4291", 8000, getminbitcountfornum(13), "int", &function_731e7fcf, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6babc320ed9a08f1", 8000, 1, "int", &function_828749d4, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1f18edb30c01161a", 8000, 1, "int", &function_9d797e21, 0, 0);
-  clientfield::register("scriptmover", "" + # "ghost_trail", 8000, 1, "int", &ghost_trail_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_11eb6b7dc7db71ad", 8000, getminbitcountfornum(1), "int", &function_924f922d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_58b293ceeb7f93e4", 8000, 1, "int", &function_5fc23aa1, 0, 0);
-  clientfield::register("scriptmover", "" + # "vision_stone_wormhole", 8000, getminbitcountfornum(17), "int", &function_c0257c1d, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_2d63a1398e98f279", 8000, 1, "int", &function_6812bd74, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_ea66e39c63f5b41", 13000, 1, "int", &function_ec12026f, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_49de76d6c4f95e5d", 8000, 1, "int", &function_738252b1, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_51257ec597a8f84f", 8000, getminbitcountfornum(3), "int", &function_9e5522ac, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_47b8db8cde2c4291", 8000, getminbitcountfornum(13), "int", &function_731e7fcf, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6babc320ed9a08f1", 8000, 1, "int", &function_828749d4, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1f18edb30c01161a", 8000, 1, "int", &function_9d797e21, 0, 0);
+  clientfield::register("scriptmover", "" + #"ghost_trail", 8000, 1, "int", &ghost_trail_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_11eb6b7dc7db71ad", 8000, getminbitcountfornum(1), "int", &function_924f922d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_58b293ceeb7f93e4", 8000, 1, "int", &function_5fc23aa1, 0, 0);
+  clientfield::register("scriptmover", "" + #"vision_stone_wormhole", 8000, getminbitcountfornum(17), "int", &function_c0257c1d, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_2d63a1398e98f279", 8000, 1, "int", &function_6812bd74, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_ea66e39c63f5b41", 13000, 1, "int", &function_ec12026f, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_49de76d6c4f95e5d", 8000, 1, "int", &function_738252b1, 0, 0);
 
   if(zm_utility::is_standard() || zm_custom::function_901b751c(#"zmpapenabled") == 2) {
     return;

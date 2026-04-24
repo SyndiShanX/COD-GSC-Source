@@ -28,14 +28,14 @@ function preinit() {
     level.var_957b495e = 90;
   }
 
-  clientfield::register("scriptmover", "" + # "reward_fx", 1, 1, "int", &reward_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_21f5fab6a3d22093", 1, 3, "int", &function_9ed71eeb, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3dbe7851af541017", 1, 1, "int", &function_7cae1028, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_31bea9cf1e6f76a0", 1, getminbitcountfornum(level.var_957b495e), "int", &function_bb753058, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_216c75103f478671", 1, 4, "int", &function_b5557b14, 0, 0);
+  clientfield::register("scriptmover", "" + #"reward_fx", 1, 1, "int", &reward_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_21f5fab6a3d22093", 1, 3, "int", &function_9ed71eeb, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3dbe7851af541017", 1, 1, "int", &function_7cae1028, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_31bea9cf1e6f76a0", 1, getminbitcountfornum(level.var_957b495e), "int", &function_bb753058, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_216c75103f478671", 1, 4, "int", &function_b5557b14, 0, 0);
 
   if(zm_utility::is_survival()) {
-    clientfield::register("scriptmover", "" + # "hash_33c54759cc1e7a71", 1, 1, "int", &function_dd279aeb, 0, 0);
+    clientfield::register("scriptmover", "" + #"hash_33c54759cc1e7a71", 1, 1, "int", &function_dd279aeb, 0, 0);
   }
 }
 

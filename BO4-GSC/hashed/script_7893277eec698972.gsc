@@ -73,14 +73,14 @@ init() {
     util::delay("all_players_spawned", undefined, &function_d159d50e);
   }
 
-  clientfield::register("scriptmover", "" + # "clue_fx", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "despawn_fx", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_1c8f8a5e03b36070", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"clue_fx", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"despawn_fx", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_1c8f8a5e03b36070", 1, 1, "int");
 }
 
 function_d159d50e() {
   zm_weapons::function_603af7a8(level.w_tricannon_base);
-  clientfield::set("" + # "hash_16cc25b3f87f06ad", 1);
+  clientfield::set("" + #"hash_16cc25b3f87f06ad", 1);
 }
 
 chest_init() {
@@ -376,7 +376,7 @@ function_a8fff4b0() {
   }
 
   var_5792d83f rotate((0, 22, 0));
-  var_5792d83f clientfield::set("" + # "clue_fx", 1);
+  var_5792d83f clientfield::set("" + #"clue_fx", 1);
   self.mdl_chest thread scene::play(#"p8_fxanim_zm_zod_kraken_chest_bundle", "open", self.mdl_chest);
   level flag::wait_till(#"hash_2889330d50a4cc38");
   self.mdl_chest thread scene::play(#"p8_fxanim_zm_zod_kraken_chest_bundle", "close", self.mdl_chest);
@@ -391,7 +391,7 @@ spawn_tricannon(a_ents) {
   if(self.targetname !== #"offering_scene") {
     exploder::exploder(level.var_f3abf34a.str_exploder);
     mdl_tricannon = a_ents[#"kraken_weapon_drop"];
-    mdl_tricannon clientfield::set("" + # "despawn_fx", 1);
+    mdl_tricannon clientfield::set("" + #"despawn_fx", 1);
     mdl_tricannon waittill(#"kraken_dropped");
     mdl_tricannon playSound(#"hash_70efc268d0becb47");
     mdl_tricannon playLoopSound(#"hash_61486fb02b77eed8", 2);
@@ -798,7 +798,7 @@ function_7edbaf3a(v_origin) {
   self endon(#"death");
   self moveto(v_origin + (0, 0, 1), 0.5, 0.4);
   self waittill(#"movedone");
-  self clientfield::set("" + # "hash_1c8f8a5e03b36070", 1);
+  self clientfield::set("" + #"hash_1c8f8a5e03b36070", 1);
   wait randomfloat(2);
 
   for(n_wait = 3; true; n_wait = max(0.25, n_wait - 0.25)) {

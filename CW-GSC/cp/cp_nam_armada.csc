@@ -48,18 +48,18 @@ function init_clientfields() {
   clientfield::register("toplayer", "pstfx_script_vignette", 1, 2, "int", &namespace_f180c0d7::pstfx_script_vignette, 0, 0);
   clientfield::register("toplayer", "forest_pbg_switch", 1, 1, "int", &forest_pbg_switch, 0, 0);
   clientfield::register("world", "toggle_gameplay_character_visibility", 1, 2, "int", &toggle_gameplay_character_visibility, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_4ddf67f7aa0f6884", 1, 1, "int", &function_241229f1, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_354296015ca81fd", 1, 1, "int", &function_936cacda, 0, 0);
-  clientfield::register("toplayer", "" + # "pstfx_teleport", 1, getminbitcountfornum(2), "int", &pstfx_teleport, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_2299cc8957801441", 1, 1, "int", &function_ba96d53c, 0, 0);
-  clientfield::register("world", "" + # "hash_5a188b1de711e5ca", 1, 1, "int", &function_69d7c128, 0, 0);
-  clientfield::register("world", "" + # "hash_7705eee7a483781a", 1, 1, "int", &function_a7313d0d, 0, 0);
-  clientfield::register("world", "" + # "hash_4ee03d623b77b0c2", 1, 1, "int", &function_855380ee, 0, 0);
-  clientfield::register("world", "" + # "hash_16a1381cc22da440", 1, 1, "int", &function_c10a31d2, 0, 0);
-  clientfield::register("world", "" + # "hash_147afd2c82d374fe", 1, 1, "int", &function_9bf56dad, 0, 0);
-  clientfield::register("toplayer", "" + # "force_stream_weapons", 1, 2, "int", &force_stream_weapons, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1d5f8429329030", 1, 2, "int", &function_35172364, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4e480e273ade4c04", 1, 2, "int", &function_2dca33ef, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_4ddf67f7aa0f6884", 1, 1, "int", &function_241229f1, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_354296015ca81fd", 1, 1, "int", &function_936cacda, 0, 0);
+  clientfield::register("toplayer", "" + #"pstfx_teleport", 1, getminbitcountfornum(2), "int", &pstfx_teleport, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_2299cc8957801441", 1, 1, "int", &function_ba96d53c, 0, 0);
+  clientfield::register("world", "" + #"hash_5a188b1de711e5ca", 1, 1, "int", &function_69d7c128, 0, 0);
+  clientfield::register("world", "" + #"hash_7705eee7a483781a", 1, 1, "int", &function_a7313d0d, 0, 0);
+  clientfield::register("world", "" + #"hash_4ee03d623b77b0c2", 1, 1, "int", &function_855380ee, 0, 0);
+  clientfield::register("world", "" + #"hash_16a1381cc22da440", 1, 1, "int", &function_c10a31d2, 0, 0);
+  clientfield::register("world", "" + #"hash_147afd2c82d374fe", 1, 1, "int", &function_9bf56dad, 0, 0);
+  clientfield::register("toplayer", "" + #"force_stream_weapons", 1, 2, "int", &force_stream_weapons, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1d5f8429329030", 1, 2, "int", &function_35172364, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4e480e273ade4c04", 1, 2, "int", &function_2dca33ef, 0, 0);
 }
 
 function toggle_gameplay_character_visibility(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

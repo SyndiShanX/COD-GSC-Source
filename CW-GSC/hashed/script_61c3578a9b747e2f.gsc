@@ -27,8 +27,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("allplayers", "" + # "hash_1668fcf85f7c231", 1, 2, "int");
-  clientfield::register("actor", "" + # "hash_70a85ea8b0e1b09c", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_1668fcf85f7c231", 1, 2, "int");
+  clientfield::register("actor", "" + #"hash_70a85ea8b0e1b09c", 1, 2, "int");
   namespace_1b527536::function_36e0540e(#"lightning_links", 1, 50, #"field_upgrade_lightning_links_item_sr");
   namespace_1b527536::function_36e0540e(#"lightning_links_1", 1, 50, #"field_upgrade_lightning_links_1_item_sr");
   namespace_1b527536::function_36e0540e(#"lightning_links_2", 1, 50, #"field_upgrade_lightning_links_2_item_sr");
@@ -76,7 +76,7 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration) {
 
   if(is_true(self.var_23fa23a9)) {
     self.var_23fa23a9 = undefined;
-    self clientfield::set("" + # "hash_1668fcf85f7c231", 0);
+    self clientfield::set("" + #"hash_1668fcf85f7c231", 0);
     self function_7b69ae3f();
     util::wait_network_frame();
 
@@ -87,7 +87,7 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration) {
 
   self flag::increment("zm_field_upgrade_in_use");
   self function_65e5989c(weapon);
-  self clientfield::set("" + # "hash_1668fcf85f7c231", 1);
+  self clientfield::set("" + #"hash_1668fcf85f7c231", 1);
   util::wait_network_frame();
 
   while(isalive(self) && !self laststand::player_is_in_laststand() && !self scene::is_igc_active() && n_duration > 0) {
@@ -106,22 +106,22 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration) {
       if(self function_6c7755f9(player, 1) && !isDefined(player.var_65a13a0f)) {
         player.var_23fa23a9 = 1;
         player.var_65a13a0f = self;
-        player clientfield::set("" + # "hash_1668fcf85f7c231", 3);
+        player clientfield::set("" + #"hash_1668fcf85f7c231", 3);
         continue;
       }
 
       if(!self function_6c7755f9(player, 1, 0) && is_true(player.var_60b31640) && is_true(player.var_23fa23a9) && player.var_65a13a0f === self) {
         n_current_time = gettime();
-        player clientfield::set("" + # "hash_1668fcf85f7c231", 1);
+        player clientfield::set("" + #"hash_1668fcf85f7c231", 1);
         player.var_23fa23a9 = undefined;
         player.var_65a13a0f = undefined;
-        self clientfield::set("" + # "hash_1668fcf85f7c231", 0);
+        self clientfield::set("" + #"hash_1668fcf85f7c231", 0);
         self.var_23fa23a9 = undefined;
         self.var_65a13a0f = undefined;
         util::wait_network_frame();
 
         if(is_true(self.var_60b31640) && !is_true(self.var_23fa23a9) && !isDefined(self.var_65a13a0f)) {
-          self clientfield::set("" + # "hash_1668fcf85f7c231", 1);
+          self clientfield::set("" + #"hash_1668fcf85f7c231", 1);
         }
 
         var_600ca6d2 = float(gettime() - n_current_time) / 1000;
@@ -149,7 +149,7 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration) {
   if(isDefined(self)) {
     self flag::decrement("zm_field_upgrade_in_use");
     self.var_60b31640 = undefined;
-    self clientfield::set("" + # "hash_1668fcf85f7c231", 0);
+    self clientfield::set("" + #"hash_1668fcf85f7c231", 0);
     self util::delay(2, ["disconnect", #"hash_2873117ec68db93c"], &function_7b69ae3f);
     util::wait_network_frame();
 
@@ -162,7 +162,7 @@ function function_1e0fa475(weapon, var_2b003a39, var_5baceff5, n_duration) {
 
 function function_5bcee875(player_source, weapon, var_5baceff5, var_2b003a39) {
   self.var_23fa23a9 = 1;
-  self clientfield::set("" + # "hash_1668fcf85f7c231", 2);
+  self clientfield::set("" + #"hash_1668fcf85f7c231", 2);
   self function_65e5989c(weapon);
   var_e041507a = player_source getentitynumber();
   var_e42a877c = 0;
@@ -199,7 +199,7 @@ function function_5bcee875(player_source, weapon, var_5baceff5, var_2b003a39) {
   if(isDefined(self)) {
     self.var_23fa23a9 = undefined;
     self.var_65a13a0f = undefined;
-    self clientfield::set("" + # "hash_1668fcf85f7c231", 0);
+    self clientfield::set("" + #"hash_1668fcf85f7c231", 0);
     self util::delay(2, ["disconnect", #"hash_2873117ec68db93c"], &function_7b69ae3f);
   }
 }
@@ -352,7 +352,7 @@ function function_c79f4bd7(weapon, player_source, var_15625d6b) {
 
     if(isDefined(var_70ab6bc) && isDefined(n_clientfield) && isalive(player_source) && isalive(var_15625d6b)) {
       self.var_5f6261a5 = var_15625d6b;
-      self clientfield::set("" + # "hash_70a85ea8b0e1b09c", n_clientfield);
+      self clientfield::set("" + #"hash_70a85ea8b0e1b09c", n_clientfield);
       scoreevents::processscoreevent("tesla_storm_stun_zm", var_15625d6b, self, weapon);
       self ai::stun(1);
       self namespace_42457a0::function_601fabe9(#"electrical", var_70ab6bc, player_source.origin, var_15625d6b, var_15625d6b, "none", "MOD_ELECTROCUTED", 0, weapon);
@@ -361,6 +361,6 @@ function function_c79f4bd7(weapon, player_source, var_15625d6b) {
 
     self.var_5f6261a5 = undefined;
     self flag::clear(#"hash_6ab8e3db32b20d33");
-    self clientfield::set("" + # "hash_70a85ea8b0e1b09c", 0);
+    self clientfield::set("" + #"hash_70a85ea8b0e1b09c", 0);
   }
 }

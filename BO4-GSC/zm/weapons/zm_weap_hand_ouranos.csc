@@ -21,10 +21,10 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "ouranos_shoot", 16000, 1, "counter", &function_b3ffbfd, 0, 0);
   clientfield::register("scriptmover", "ouranos_impact", 16000, 1, "counter", &ouranos_impact_fx, 0, 0);
-  clientfield::register("allplayers", "" + # "ouranos_beam_fire", 16000, 1, "int", &skull_turret_beam_fire, 0, 1);
-  clientfield::register("allplayers", "" + # "hash_4fb73e88d45af0ef", 16000, 1, "int", &function_98b06f97, 0, 1);
-  clientfield::register("actor", "" + # "ouranos_proj_knock", 16000, getminbitcountfornum(3), "int", &function_a1d614f9, 0, 1);
-  clientfield::register("actor", "" + # "ouranos_zombie_impact", 16000, 1, "counter", &function_1322534b, 0, 0);
+  clientfield::register("allplayers", "" + #"ouranos_beam_fire", 16000, 1, "int", &skull_turret_beam_fire, 0, 1);
+  clientfield::register("allplayers", "" + #"hash_4fb73e88d45af0ef", 16000, 1, "int", &function_98b06f97, 0, 1);
+  clientfield::register("actor", "" + #"ouranos_proj_knock", 16000, getminbitcountfornum(3), "int", &function_a1d614f9, 0, 1);
+  clientfield::register("actor", "" + #"ouranos_zombie_impact", 16000, 1, "counter", &function_1322534b, 0, 0);
   serverfield::register("ouranos_feather_hit", 16000, getminbitcountfornum(3), "int");
   level._effect[#"ouranos_wind"] = #"hash_3ee5b689d09f0824";
   level._effect[#"ouranos_trail"] = #"hash_62f4ee1a2e3c46fc";

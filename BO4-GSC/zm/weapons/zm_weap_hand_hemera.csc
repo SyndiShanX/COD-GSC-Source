@@ -18,12 +18,12 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("scriptmover", "hemera_shoot", 16000, 1, "counter", &hemera_shoot_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hemera_beam", 16000, 1, "int", &function_70e72eac, 0, 0);
-  clientfield::register("scriptmover", "" + # "hemera_impact", 16000, 1, "counter", &hemera_impact_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hemera_beam", 16000, 1, "int", &function_70e72eac, 0, 0);
+  clientfield::register("scriptmover", "" + #"hemera_impact", 16000, 1, "counter", &hemera_impact_fx, 0, 0);
   clientfield::register("allplayers", "hemera_proj_flash", 16000, 1, "int", &function_c6d1bdb0, 0, 0);
   clientfield::register("allplayers", "hemera_beam_flash", 16000, 1, "int", &function_68e9fdbb, 0, 0);
   clientfield::register("actor", "hemera_proj_death", 16000, 1, "int", &function_ab086ad8, 0, 0);
-  clientfield::register("actor", "" + # "hemera_beam_death", 16000, 1, "int", &function_3fd7be85, 0, 0);
+  clientfield::register("actor", "" + #"hemera_beam_death", 16000, 1, "int", &function_3fd7be85, 0, 0);
   level._effect[#"hemera_shoot"] = #"hash_520fd2427c5fcea3";
   level._effect[#"hash_b9d4268e0a3bccc"] = #"hash_2de436091e3fa43c";
   level._effect[#"hash_ba44e68e0a9efde"] = #"hash_2deb42091e45d74e";

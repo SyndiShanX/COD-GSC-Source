@@ -20,7 +20,7 @@ function private preinit() {
     return 0;
   }
 
-  clientfield::register("vehicle", "" + # "hash_5b4b44738e08c9b9", 28000, 1, "counter", &function_86e8d9af, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_5b4b44738e08c9b9", 28000, 1, "counter", &function_86e8d9af, 0, 0);
   killstreak_detect::init_shared();
   level.var_af161ca6 = getscriptbundle("killstreak_recon_car_zm");
   killstreak_vehicle::init_killstreak(level.var_af161ca6);

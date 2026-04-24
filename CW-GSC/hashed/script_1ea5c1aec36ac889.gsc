@@ -28,7 +28,7 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   level.var_b617b3fe = getweapon(#"hash_7993749c94189bd9");
-  clientfield::register("scriptmover", "" + # "hash_547dd74a97b1fdba", 24000, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_547dd74a97b1fdba", 24000, 2, "int");
   weaponobjects::function_e6400478(#"hash_7993749c94189bd9", &function_c3a836cd, 1);
   zm_perk_tombstone::function_7c589e7("tactical", #"hash_7ada82abc5dad90e");
   callback::on_item_pickup(&function_18140c5c);
@@ -91,7 +91,7 @@ function function_dec85954(str_vo, var_ac39950d = 0) {
   }
 
   var_59c3e157 = str_vo == "zber_mq4_cmdstp";
-  self clientfield::set("" + # "hash_703543ca871a0f75", 2);
+  self clientfield::set("" + #"hash_703543ca871a0f75", 2);
   e_leader = self.leader;
 
   if(isDefined(e_leader) && !var_59c3e157) {
@@ -101,7 +101,7 @@ function function_dec85954(str_vo, var_ac39950d = 0) {
   }
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "hash_703543ca871a0f75", 1);
+    self clientfield::set("" + #"hash_703543ca871a0f75", 1);
     self.var_dd756dc = time + 10000;
   }
 }
@@ -125,7 +125,7 @@ function function_eb6180c9(watcher) {
 function private function_d6f65535(str_notify) {
   if(isDefined(self.var_310a3632.mdl_target)) {
     self.var_310a3632.mdl_target notify(#"hash_7adeef9b9b822b42");
-    self.var_310a3632.mdl_target clientfield::set("" + # "hash_547dd74a97b1fdba", 0);
+    self.var_310a3632.mdl_target clientfield::set("" + #"hash_547dd74a97b1fdba", 0);
   }
 }
 
@@ -199,7 +199,7 @@ function private function_b66d4fac() {
     self function_9132ad8e();
     self.var_310a3632.mdl_target moveto(self.var_310a3632.var_689f4026, float(function_60d95f53()) / 1000);
     b_valid = function_b864b947(self.var_310a3632.var_6164d302);
-    self.var_310a3632.mdl_target clientfield::set("" + # "hash_547dd74a97b1fdba", is_true(b_valid) ? 1 : 2);
+    self.var_310a3632.mdl_target clientfield::set("" + #"hash_547dd74a97b1fdba", is_true(b_valid) ? 1 : 2);
     wait 0.1;
 
     debugstar(self.var_310a3632.mdl_target.origin);
@@ -260,7 +260,7 @@ function event_handler[grenade_fire] function_6ed5772c(eventstruct) {
     }
 
     if(is_true(b_valid)) {
-      self.var_310a3632.mdl_target util::delay(0.1, array("death", #"hash_7adeef9b9b822b42"), &clientfield::set, "" + # "hash_547dd74a97b1fdba", 3);
+      self.var_310a3632.mdl_target util::delay(0.1, array("death", #"hash_7adeef9b9b822b42"), &clientfield::set, "" + #"hash_547dd74a97b1fdba", 3);
       self notify(#"hash_7f812cfd98c00a7b");
 
       if(is_true(self.var_310a3632.var_c40de8a0)) {

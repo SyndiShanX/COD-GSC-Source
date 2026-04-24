@@ -26,8 +26,8 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   profilestart();
-  clientfield::register("vehicle", "" + # "hash_164696e86d29988d", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_dae8b06d746fac5", 8000, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_164696e86d29988d", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_dae8b06d746fac5", 8000, 1, "int");
   level.var_2d4792e7 = &function_5160bb1e;
   level.var_80f71aee = &function_425e60e5;
   level.var_399dc69a = &function_6c2b8199;
@@ -159,12 +159,12 @@ function private function_5160bb1e(killstreaktype) {
 }
 
 function function_425e60e5() {
-  self clientfield::set_to_player("" + # "hash_dae8b06d746fac5", 1);
+  self clientfield::set_to_player("" + #"hash_dae8b06d746fac5", 1);
 }
 
 function function_6c2b8199() {
   level.var_a246c3cf = gettime();
-  self clientfield::set_to_player("" + # "hash_dae8b06d746fac5", 0);
+  self clientfield::set_to_player("" + #"hash_dae8b06d746fac5", 0);
 }
 
 function function_e6d10d94() {

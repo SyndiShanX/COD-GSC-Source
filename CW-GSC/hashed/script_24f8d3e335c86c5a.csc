@@ -12,12 +12,12 @@
 #namespace namespace_7a518726;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "hash_8b9fe3412e34513", 24000, 1, "int", &function_6b0f6eb8, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2e4913c031d2a97c", 24000, 1, "int", &function_955683ea, 0, 0);
-  clientfield::register("world", "" + # "hash_33f337fe0df045df", 24000, 1, "int", &function_1d298e01, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_85303d8249a5451", 24000, 1, "counter", &function_19a36115, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_47839169ce0224b7", 24000, 1, "counter", &function_ccffa08c, 0, 0);
-  clientfield::register("actor", "" + # "hash_3d52751d686c4865", 24000, 1, "counter", &function_d66a6869, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_8b9fe3412e34513", 24000, 1, "int", &function_6b0f6eb8, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2e4913c031d2a97c", 24000, 1, "int", &function_955683ea, 0, 0);
+  clientfield::register("world", "" + #"hash_33f337fe0df045df", 24000, 1, "int", &function_1d298e01, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_85303d8249a5451", 24000, 1, "counter", &function_19a36115, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_47839169ce0224b7", 24000, 1, "counter", &function_ccffa08c, 0, 0);
+  clientfield::register("actor", "" + #"hash_3d52751d686c4865", 24000, 1, "counter", &function_d66a6869, 0, 0);
   level.var_1a3fe1eb = [];
 }
 

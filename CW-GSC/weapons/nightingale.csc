@@ -14,8 +14,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "nightingale_deployed", 1, 1, "int", &nightingale_deployed, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7c2ee5bfa7cad803", 1, 1, "int", &function_52240d18, 0, 0);
+  clientfield::register("scriptmover", "" + #"nightingale_deployed", 1, 1, "int", &nightingale_deployed, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7c2ee5bfa7cad803", 1, 1, "int", &function_52240d18, 0, 0);
 
   if(!isDefined(level.var_17d9f80)) {
     level.var_17d9f80 = [];

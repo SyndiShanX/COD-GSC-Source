@@ -13,7 +13,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_46c612ad0b7cbdb1", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_46c612ad0b7cbdb1", 1, 1, "int");
 }
 
 function register_burn(str_type, n_dps, n_duration, var_f472bfc, var_5713c703) {
@@ -89,7 +89,7 @@ function private function_8aefaae3(s_burn) {
     if(isDefined(s_burn.var_f472bfc)) {
       str_clientfield = s_burn.var_f472bfc;
     } else {
-      str_clientfield = "" + # "hash_46c612ad0b7cbdb1";
+      str_clientfield = "" + #"hash_46c612ad0b7cbdb1";
     }
 
     self clientfield::set(str_clientfield, 1);

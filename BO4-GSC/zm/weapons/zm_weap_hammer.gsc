@@ -29,19 +29,19 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + # "lightning_bolt_fx", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hero_hammer_armor_postfx", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "lightning_miss_fx", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hammer_storm", 1, 1, "int");
-  clientfield::register("actor", "" + # "lightning_impact_fx", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "lightning_impact_fx", 1, 1, "int");
-  clientfield::register("actor", "" + # "hero_hammer_melee_impact_trail", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "hero_hammer_melee_impact_trail", 1, 1, "counter");
-  clientfield::register("actor", "" + # "lightning_arc_fx", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "lightning_arc_fx", 1, 1, "int");
-  clientfield::register("actor", "" + # "hero_hammer_stun", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hero_hammer_stun", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hammer_rumble", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"lightning_bolt_fx", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hero_hammer_armor_postfx", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"lightning_miss_fx", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hammer_storm", 1, 1, "int");
+  clientfield::register("actor", "" + #"lightning_impact_fx", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"lightning_impact_fx", 1, 1, "int");
+  clientfield::register("actor", "" + #"hero_hammer_melee_impact_trail", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"hero_hammer_melee_impact_trail", 1, 1, "counter");
+  clientfield::register("actor", "" + #"lightning_arc_fx", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"lightning_arc_fx", 1, 1, "int");
+  clientfield::register("actor", "" + #"hero_hammer_stun", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hero_hammer_stun", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hammer_rumble", 1, 1, "counter");
   level.hero_weapon[#"hammer"][0] = getweapon(#"hero_hammer_lv1");
   level.hero_weapon[#"hammer"][1] = getweapon(#"hero_hammer_lv2");
   level.hero_weapon[#"hammer"][2] = getweapon(#"hero_hammer_lv3");
@@ -184,15 +184,15 @@ storm_think() {
   self endon(#"storm_think");
   waitframe(3);
 
-  if(self.e_storm clientfield::get("" + # "hammer_storm")) {
-    self.e_storm clientfield::set("" + # "hammer_storm", 0);
+  if(self.e_storm clientfield::get("" + #"hammer_storm")) {
+    self.e_storm clientfield::set("" + #"hammer_storm", 0);
     util::wait_network_frame();
   }
 
-  self.e_storm clientfield::set("" + # "hammer_storm", 1);
+  self.e_storm clientfield::set("" + #"hammer_storm", 1);
   self thread function_fd8e3604();
   wait 10;
-  self.e_storm clientfield::set("" + # "hammer_storm", 0);
+  self.e_storm clientfield::set("" + #"hammer_storm", 0);
   util::wait_network_frame();
   self.e_storm delete();
 }
@@ -228,7 +228,7 @@ function_439c9b04(player) {
 
 activate_armor(weapon) {
   level callback::on_ai_killed(&function_1286cbf);
-  self clientfield::increment_to_player("" + # "hero_hammer_armor_postfx");
+  self clientfield::increment_to_player("" + #"hero_hammer_armor_postfx");
   self waittill(#"weapon_change");
   level callback::remove_on_ai_killed(&function_1286cbf);
 }
@@ -290,7 +290,7 @@ function_9799924f(e_target, weapon = level.weaponnone, var_3e3892a7, v_to_target
     e_target dodamage(n_damage, self.origin, self, self, "none", "MOD_MELEE", 0, weapon);
 
     if(e_target.health <= 0) {
-      e_target clientfield::increment("" + # "hero_hammer_melee_impact_trail");
+      e_target clientfield::increment("" + #"hero_hammer_melee_impact_trail");
       e_target.ignoremelee = 1;
 
       switch (var_3e3892a7) {
@@ -397,7 +397,7 @@ lightning_bolt(weapon) {
   e_ball_fx.str_weapon = weapon;
   e_ball_fx.n_range = 250;
   e_ball_fx.n_damage_per_sec = 1000;
-  e_ball_fx clientfield::set("" + # "lightning_miss_fx", 1);
+  e_ball_fx clientfield::set("" + #"lightning_miss_fx", 1);
   e_ball_fx playLoopSound(#"hash_15299b453cf5dd24", 0.5);
   v_end = var_d0407533 + anglesToForward(var_d571151f) * 600;
   trace = bulletTrace(var_d0407533, v_end, 0, self);
@@ -428,7 +428,7 @@ lightning_bolt(weapon) {
     e_ball_fx playSound(#"hash_3f29c3ebe4a7417a");
     e_ball_fx notify(#"stop_killing");
     e_ball_fx notify(#"stop_debug_position");
-    e_ball_fx clientfield::set("" + # "lightning_miss_fx", 0);
+    e_ball_fx clientfield::set("" + #"lightning_miss_fx", 0);
   }
 
   waitframe(1);
@@ -507,8 +507,8 @@ function_97429d68() {
   self ai::stun();
   self.var_c6aafbdb = 1;
 
-  if(!self clientfield::get("" + # "hero_hammer_stun")) {
-    self clientfield::set("" + # "hero_hammer_stun", 1);
+  if(!self clientfield::get("" + #"hero_hammer_stun")) {
+    self clientfield::set("" + #"hero_hammer_stun", 1);
 
     if(self.archetype == #"zombie") {
       bhtnactionstartevent(self, "electrocute");
@@ -517,7 +517,7 @@ function_97429d68() {
 
   wait 0.2;
   self ai::clear_stun();
-  self clientfield::set("" + # "hero_hammer_stun", 0);
+  self clientfield::set("" + #"hero_hammer_stun", 0);
   self.var_c6aafbdb = 0;
 }
 
@@ -615,7 +615,7 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
     return;
   }
 
-  e_target clientfield::set("" + # "lightning_impact_fx", 1);
+  e_target clientfield::set("" + #"lightning_impact_fx", 1);
 
   if(e_target.archetype === #"zombie") {
     bhtnactionstartevent(e_target, "electrocute");
@@ -623,7 +623,7 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
 
   n_range_sq = e_source.n_range * e_source.n_range;
   e_target.is_being_zapped = 1;
-  e_target clientfield::set("" + # "lightning_arc_fx", 1);
+  e_target clientfield::set("" + #"lightning_arc_fx", 1);
 
   if(isDefined(e_source)) {
     if(!isDefined(e_source.n_damage_per_sec)) {
@@ -662,8 +662,8 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
 
   if(isalive(e_target)) {
     e_target.is_being_zapped = 0;
-    e_target clientfield::set("" + # "lightning_arc_fx", 0);
-    e_target clientfield::set("" + # "lightning_impact_fx", 0);
+    e_target clientfield::set("" + #"lightning_arc_fx", 0);
+    e_target clientfield::set("" + #"lightning_impact_fx", 0);
   }
 }
 
@@ -778,7 +778,7 @@ on_player_disconnect() {
 
 function_371c585a() {
   if(isDefined(self.e_storm)) {
-    self.e_storm clientfield::set("" + # "hammer_storm", 0);
+    self.e_storm clientfield::set("" + #"hammer_storm", 0);
     self.e_storm delete();
   }
 }
@@ -805,7 +805,7 @@ hammer_rumble(n_index) {
         playrumbleonposition("zm_weap_hammer_storm_rumble", self.origin);
         break;
       case 4:
-        self clientfield::increment_to_player("" + # "hammer_rumble", 4);
+        self clientfield::increment_to_player("" + #"hammer_rumble", 4);
         break;
     }
   }

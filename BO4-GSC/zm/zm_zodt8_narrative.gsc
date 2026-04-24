@@ -43,7 +43,7 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "morse_star", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"morse_star", 1, 1, "int");
 }
 
 init_flags() {
@@ -228,7 +228,7 @@ function_d3a41243() {
     if(s_result.weapon === w_sticky) {
       mdl_fx = util::spawn_model("tag_origin", struct::get(#"macaroni_puddle").origin);
       mdl_fx linkto(level.e_sway);
-      mdl_fx clientfield::set("" + # "morse_star", 1);
+      mdl_fx clientfield::set("" + #"morse_star", 1);
       break;
     }
   }

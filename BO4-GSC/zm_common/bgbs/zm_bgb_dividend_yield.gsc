@@ -19,8 +19,8 @@ __init__() {
     return;
   }
 
-  clientfield::register("allplayers", "" + # "hash_11a25fb3db96fc2d", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_31b61c511ced94d7", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_11a25fb3db96fc2d", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_31b61c511ced94d7", 1, 1, "int");
   bgb::register(#"zm_bgb_dividend_yield", "time", 300, &enable, &disable, undefined, undefined);
   bgb::register_add_to_player_score_override(#"zm_bgb_dividend_yield", &add_to_player_score_override, 1);
 }
@@ -35,9 +35,9 @@ disable() {}
 
 function_5cf91552() {
   self endon(#"disconnect");
-  self clientfield::set("" + # "hash_11a25fb3db96fc2d", 1);
+  self clientfield::set("" + #"hash_11a25fb3db96fc2d", 1);
   self util::waittill_either("bled_out", "bgb_update");
-  self clientfield::set("" + # "hash_11a25fb3db96fc2d", 0);
+  self clientfield::set("" + #"hash_11a25fb3db96fc2d", 0);
   self notify(#"dividend_yield_complete");
 }
 
@@ -104,7 +104,7 @@ function_cbaf1f69(e_player) {
 function_51e0947e() {
   if(!isDefined(self.var_836ebde0) || self.var_836ebde0 == 0) {
     self.var_836ebde0 = 1;
-    self clientfield::set_to_player("" + # "hash_31b61c511ced94d7", 1);
+    self clientfield::set_to_player("" + #"hash_31b61c511ced94d7", 1);
     return;
   }
 
@@ -115,6 +115,6 @@ function_68790c5a() {
   self.var_836ebde0--;
 
   if(self.var_836ebde0 == 0) {
-    self clientfield::set_to_player("" + # "hash_31b61c511ced94d7", 0);
+    self clientfield::set_to_player("" + #"hash_31b61c511ced94d7", 0);
   }
 }

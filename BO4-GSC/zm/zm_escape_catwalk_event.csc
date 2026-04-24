@@ -12,8 +12,8 @@ init_fx() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_144c7c2895ed95c", 1, 1, "int", &function_a3874ae0, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_48f1f50c412d80c7", 1, 1, "counter", &function_1fe913e0, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_144c7c2895ed95c", 1, 1, "int", &function_a3874ae0, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_48f1f50c412d80c7", 1, 1, "counter", &function_1fe913e0, 0, 0);
 }
 
 function_a3874ae0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

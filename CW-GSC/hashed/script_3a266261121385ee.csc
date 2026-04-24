@@ -33,12 +33,12 @@ function init() {
   namespace_cf4aa5f0::function_6dbaba52("failed_open_power_light_on", "lgt_env_fail_power_on", undefined, undefined, undefined);
   namespace_cf4aa5f0::function_6dbaba52("failed_open_power_light_off", undefined, undefined, "lgt_env_fail_power_on", undefined);
   namespace_cf4aa5f0::function_6dbaba52("lgt_env_fx_moths_on", var_f81ee838, undefined, undefined, undefined);
-  clientfield::register("world", "" + # "hash_11f590eba265ab9e", 24000, 4, "int", &function_95a3fa7e, 1, 0);
-  clientfield::register("world", "" + # "hash_3227b9d6476c5f3b", 24000, 1, "int", &function_7573534c, 1, 0);
-  clientfield::register("world", "" + # "hash_5d84af8c16684d61", 24000, 1, "int", &function_96d7a08a, 1, 0);
-  clientfield::register("world", "" + # "hash_17dd998c0d1ddef9", 24000, 2, "int", &function_3cbd013d, 1, 0);
-  clientfield::register("world", "" + # "hash_6e50c5223648d97", 24000, 1, "int", &function_9a13661b, 1, 0);
-  clientfield::register("world", "" + # "hash_2c8008207dc4c591", 24000, 1, "int", &function_5423fcc2, 1, 0);
+  clientfield::register("world", "" + #"hash_11f590eba265ab9e", 24000, 4, "int", &function_95a3fa7e, 1, 0);
+  clientfield::register("world", "" + #"hash_3227b9d6476c5f3b", 24000, 1, "int", &function_7573534c, 1, 0);
+  clientfield::register("world", "" + #"hash_5d84af8c16684d61", 24000, 1, "int", &function_96d7a08a, 1, 0);
+  clientfield::register("world", "" + #"hash_17dd998c0d1ddef9", 24000, 2, "int", &function_3cbd013d, 1, 0);
+  clientfield::register("world", "" + #"hash_6e50c5223648d97", 24000, 1, "int", &function_9a13661b, 1, 0);
+  clientfield::register("world", "" + #"hash_2c8008207dc4c591", 24000, 1, "int", &function_5423fcc2, 1, 0);
 }
 
 function function_dcf22669() {

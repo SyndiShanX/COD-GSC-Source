@@ -17,7 +17,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("allplayers", "" + # "hash_59400ab6cbfaec5d", 1, 1, "int", &function_3d1947be, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_59400ab6cbfaec5d", 1, 1, "int", &function_3d1947be, 0, 0);
   callback::on_spawned(&on_spawned);
 }
 

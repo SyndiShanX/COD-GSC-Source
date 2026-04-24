@@ -242,7 +242,7 @@ function onallcracks(entity) {
   entity ghost();
   entity notsolid();
   entity val::set(#"avogadro_despawn", "ignoreall", 1);
-  entity clientfield::set("" + # "avogadro_health_fx", 0);
+  entity clientfield::set("" + #"avogadro_health_fx", 0);
   entity notify(#"is_underground");
 }
 

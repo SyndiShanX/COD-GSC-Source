@@ -22,7 +22,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "hash_14c746e550d9f3ca", 1, 2, "counter", &function_76110e92, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_14c746e550d9f3ca", 1, 2, "counter", &function_76110e92, 0, 0);
   ai::add_archetype_spawn_function(#"tiger", &function_6d7e1f79);
 }
 

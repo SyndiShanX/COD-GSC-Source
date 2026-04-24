@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function preinit() {
   level.var_2a994cc0 = sr_armor_menu::register();
   namespace_52c8f34d::preinit();
-  clientfield::register("scriptmover", "" + # "hash_7dfc37315a4eff0", 1, 1, "int", &function_af3e97c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7dfc37315a4eff0", 1, 1, "int", &function_af3e97c, 0, 0);
 }
 
 function postinit() {}

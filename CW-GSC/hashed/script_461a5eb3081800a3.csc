@@ -8,15 +8,15 @@
 #namespace namespace_bff7ce85;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("scriptmover", "" + # "screen_left", 1, 1, "int", &function_471ae845, 0, 0);
-  clientfield::register("scriptmover", "" + # "screen_right", 1, 1, "int", &function_fb755c48, 0, 0);
-  clientfield::register("scriptmover", "" + # "screen_top", 1, 1, "int", &function_6115628b, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_225aa48dd3b91fe7", 1, 1, "int", &function_9fdbcf3f, 0, 0);
-  clientfield::register("scriptmover", "" + # "console_lights", 1, 1, "int", &console_lights, 0, 0);
-  clientfield::register("scriptmover", "" + # "console_kill", 1, 1, "counter", &console_kill, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_18bcf106c476dfeb", 1, 1, "counter", &function_32398bfc, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_186c35405f4624bc", 1, 2, "int", &function_968ccb74, 0, 0);
-  clientfield::register("vehicle", "" + # "vehicle_teleport", 1, 1, "counter", &function_b0e818e8, 0, 0);
+  clientfield::register("scriptmover", "" + #"screen_left", 1, 1, "int", &function_471ae845, 0, 0);
+  clientfield::register("scriptmover", "" + #"screen_right", 1, 1, "int", &function_fb755c48, 0, 0);
+  clientfield::register("scriptmover", "" + #"screen_top", 1, 1, "int", &function_6115628b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_225aa48dd3b91fe7", 1, 1, "int", &function_9fdbcf3f, 0, 0);
+  clientfield::register("scriptmover", "" + #"console_lights", 1, 1, "int", &console_lights, 0, 0);
+  clientfield::register("scriptmover", "" + #"console_kill", 1, 1, "counter", &console_kill, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_18bcf106c476dfeb", 1, 1, "counter", &function_32398bfc, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_186c35405f4624bc", 1, 2, "int", &function_968ccb74, 0, 0);
+  clientfield::register("vehicle", "" + #"vehicle_teleport", 1, 1, "counter", &function_b0e818e8, 0, 0);
   util::waitforclient(0);
 }
 

@@ -26,7 +26,7 @@ function autoexec function_7defddbd() {
 }
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("vehicle", "" + # "hash_51d1d2a4c63ed960", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_51d1d2a4c63ed960", 1, 1, "int");
   callback::on_vehicle_spawned(&on_vehicle_spawned);
   callback::on_game_playing(&on_game_playing);
   namespace_66d6aa44::function_3f3466c9();
@@ -113,9 +113,9 @@ function function_c628239e(a_ents) {
   var_a6eece5c = a_ents[#"raft"];
   var_a6eece5c endon(#"death");
   var_a6eece5c waittill(#"hash_c29a94baff41fde");
-  var_a6eece5c clientfield::set("" + # "hash_51d1d2a4c63ed960", 1);
+  var_a6eece5c clientfield::set("" + #"hash_51d1d2a4c63ed960", 1);
   var_a6eece5c waittill(#"hash_1ecf339bfbbacc60");
-  var_a6eece5c clientfield::set("" + # "hash_51d1d2a4c63ed960", 0);
+  var_a6eece5c clientfield::set("" + #"hash_51d1d2a4c63ed960", 0);
 }
 
 function function_29584e41() {

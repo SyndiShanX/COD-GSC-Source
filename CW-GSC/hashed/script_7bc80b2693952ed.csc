@@ -18,7 +18,7 @@ function private autoexec __init__system__() {
 function preload() {
   clientfield::register("toplayer", "player_death_shield", 1, 1, "int", &function_2b83fc6e, 0, 0);
   clientfield::register("toplayer", "player_death_gesture", 1, 1, "int", &death_gesture, 0, 0);
-  clientfield::register("world", "" + # "hash_7dc38a630ed68eb3", 1, 1, "int", &function_100ac98f, 0, 0);
+  clientfield::register("world", "" + #"hash_7dc38a630ed68eb3", 1, 1, "int", &function_100ac98f, 0, 0);
 }
 
 function postload() {

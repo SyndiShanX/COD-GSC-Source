@@ -42,7 +42,7 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_7876f33937c8a764", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_7876f33937c8a764", 20000, 1, "int");
 }
 
 fall() {
@@ -514,7 +514,7 @@ function_82457e35(params) {
     v_down = v_origin + var_4095cc33 * -4;
     mdl_fx = util::spawn_model("tag_origin", v_origin, v_angles);
     mdl_fx linkto(self, "tag_eye", v_down - v_origin, (60, 0, 90));
-    mdl_fx clientfield::set("" + # "hash_7876f33937c8a764", 1);
+    mdl_fx clientfield::set("" + #"hash_7876f33937c8a764", 1);
 
     while(isDefined(self) && self ai::is_stunned()) {
       waitframe(1);

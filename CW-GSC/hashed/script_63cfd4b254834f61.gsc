@@ -13,6 +13,6 @@ function private autoexec __init__system__() {
 
 function preload() {
   if(sessionmodeiscampaigngame()) {
-    clientfield::register("world", "" + # "hash_7dc38a630ed68eb3", 1, 1, "int");
+    clientfield::register("world", "" + #"hash_7dc38a630ed68eb3", 1, 1, "int");
   }
 }

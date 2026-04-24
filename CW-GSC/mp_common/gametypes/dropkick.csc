@@ -9,7 +9,7 @@
 #namespace dropkick;
 
 function event_handler[gametype_init] main(eventstruct) {
-  clientfield::register("world", "" + # "hash_69d32ac298f2aa22", 1, 2, "int", &function_311e397d, 0, 0);
+  clientfield::register("world", "" + #"hash_69d32ac298f2aa22", 1, 2, "int", &function_311e397d, 0, 0);
   callback::function_56df655f(&function_56df655f);
 }
 

@@ -56,7 +56,7 @@ function_aa1c61e() {
 }
 
 function_bee10d1f() {
-  clientfield::register("allplayers", "" + # "hash_10f459edea6b3eb", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_10f459edea6b3eb", 1, 1, "int");
 }
 
 function_dbf100ee(state) {}
@@ -152,7 +152,7 @@ function_d752a094() {
   self.var_eb319d10 = 1;
   self zm_perks::function_f0ac059f(self.var_95df0a1b, self.var_eb319d10, #"perk_dying_wish");
   self thread function_eeb3bf92(10);
-  self clientfield::set("" + # "hash_10f459edea6b3eb", 1);
+  self clientfield::set("" + #"hash_10f459edea6b3eb", 1);
   self waittilltimeout(10, #"fake_death", #"scene_igc_shot_started");
   self function_2ca96414();
 
@@ -169,7 +169,7 @@ function_2ca96414() {
   self thread function_d2bbaa76(self.var_740ffad6);
   self.var_30d7498d++;
   self.var_740ffad6 += 60 * self.var_30d7498d;
-  self clientfield::set("" + # "hash_10f459edea6b3eb", 0);
+  self clientfield::set("" + #"hash_10f459edea6b3eb", 0);
 }
 
 function_ab41c8ab(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {

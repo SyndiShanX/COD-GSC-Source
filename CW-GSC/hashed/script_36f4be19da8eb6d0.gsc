@@ -84,36 +84,36 @@ function private preinit() {
   zm::function_84d343d(level.var_6b41a8a1.name, &function_fd195372);
   callback::add_weapon_fired(level.var_12b450dc, &function_d6ae76f5);
   callback::add_weapon_fired(level.var_6b41a8a1, &function_d6ae76f5);
-  clientfield::register("actor", "" + # "hash_77e641a4db48ad0f", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_492f4817c4296ddf", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "hash_89386ef1bb99cdf", 1, 2, "int");
-  clientfield::register("actor", "" + # "hash_380d2d329a41c90e", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_392d4dd36fe37ce7", 1, 1, "counter");
-  clientfield::register("actor", "" + # "hash_7e9eb1c31cf618f0", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_40635c43f5d87929", 1, 3, "int");
-  clientfield::register("actor", "" + # "hash_306339376ad218f0", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_4061bf5adf6ebd2", 1, 3, "int");
-  clientfield::register("allplayers", "" + # "hash_7c865b5dcfbe46c0", 1, 1, "int");
-  clientfield::register("missile", "" + # "hash_685e6cfaf658518e", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_77e641a4db48ad0f", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_492f4817c4296ddf", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_89386ef1bb99cdf", 1, 2, "int");
+  clientfield::register("actor", "" + #"hash_380d2d329a41c90e", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_392d4dd36fe37ce7", 1, 1, "counter");
+  clientfield::register("actor", "" + #"hash_7e9eb1c31cf618f0", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_40635c43f5d87929", 1, 3, "int");
+  clientfield::register("actor", "" + #"hash_306339376ad218f0", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_4061bf5adf6ebd2", 1, 3, "int");
+  clientfield::register("allplayers", "" + #"hash_7c865b5dcfbe46c0", 1, 1, "int");
+  clientfield::register("missile", "" + #"hash_685e6cfaf658518e", 1, 1, "int");
   level.var_e0be56c0 = getweapon(#"ww_ieu_electric_t9");
   level.var_e80744aa = getweapon(#"ww_ieu_electric_t9_upgraded");
   function_efcce3c1();
   callback::add_weapon_fired(level.var_e0be56c0, &function_5a9a8abc);
   callback::add_weapon_fired(level.var_e80744aa, &function_5a9a8abc);
-  clientfield::register("allplayers", "" + # "hash_2eb1021a0e4110d1", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_2eb1021a0e4110d1", 1, 2, "int");
   namespace_9ff9f642::register_slowdown(#"hash_659e542bc102c218", 0.8, 0.5);
   namespace_9ff9f642::register_slowdown(#"hash_e5fddce96190022", 1, 0);
   namespace_9ff9f642::register_slowdown(#"hash_37ca44613f9ed8bc", 1, 0);
   namespace_9ff9f642::register_slowdown(#"hash_1262748e23d5dff8", 1, 0);
   namespace_9ff9f642::register_slowdown(#"hash_a40f7d48ac714db", 1, 0);
   namespace_9ff9f642::register_slowdown(#"hash_40ca16d063cdb34f", 0.5, 5);
-  clientfield::register("actor", "" + # "hash_6dca42b5563953ef", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_2a7b72235f0b387e", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_1709a7bbfac5e1e0", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_3a35110e6ccc5486", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_48257c0dba76b140", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_97d03a2a0786ba6", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_3c92af57fde1f8f7", 1, 4, "int");
+  clientfield::register("actor", "" + #"hash_6dca42b5563953ef", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_2a7b72235f0b387e", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_1709a7bbfac5e1e0", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_3a35110e6ccc5486", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_48257c0dba76b140", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_97d03a2a0786ba6", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"hash_3c92af57fde1f8f7", 1, 4, "int");
   level.var_58e6238 = &function_caac60f2;
   level.var_f975b6ae = &function_301812b0;
   level.var_2f81d430 = &function_a93a6096;
@@ -445,7 +445,7 @@ function function_33fb41f6(params) {
         self callback::callback(#"hash_7f690ab86160d4f6");
 
         if(isactor(self) && self.zm_ai_category !== #"boss") {
-          self clientfield::set("" + # "hash_48257c0dba76b140", 1);
+          self clientfield::set("" + #"hash_48257c0dba76b140", 1);
         }
 
         self thread function_71c72692();
@@ -468,7 +468,7 @@ function function_71c72692() {
     wait var_e6d88abc;
 
     if(gettime() - self.var_423a9ef2 > int(var_e6d88abc * 1000)) {
-      self clientfield::set("" + # "hash_48257c0dba76b140", 0);
+      self clientfield::set("" + #"hash_48257c0dba76b140", 0);
       self.var_423a9ef2 = undefined;
       break;
     }
@@ -544,7 +544,7 @@ function function_d72b9d03(params) {
     self function_f2262f33(params);
 
     if(self function_ac1ff86e()) {
-      self clientfield::set("" + # "hash_77e641a4db48ad0f", 2);
+      self clientfield::set("" + #"hash_77e641a4db48ad0f", 2);
       self thread function_5a2447b1(2.2);
     }
 
@@ -563,7 +563,7 @@ function function_d72b9d03(params) {
 
   if(function_f17bb85a(params.weapon)) {
     if(self function_ac1ff86e()) {
-      self clientfield::set("" + # "hash_77e641a4db48ad0f", 1);
+      self clientfield::set("" + #"hash_77e641a4db48ad0f", 1);
       self thread function_5a2447b1(1.2);
     }
   }
@@ -837,10 +837,10 @@ function function_da9c3239(player) {
 }
 
 function function_13acb37c() {
-  self clientfield::set("" + # "hash_7e9eb1c31cf618f0", 1);
+  self clientfield::set("" + #"hash_7e9eb1c31cf618f0", 1);
   self waittill(#"death", #"hash_384ffc276b7de7");
   self.var_335a665c = [];
-  self clientfield::set("" + # "hash_7e9eb1c31cf618f0", 0);
+  self clientfield::set("" + #"hash_7e9eb1c31cf618f0", 0);
 }
 
 function function_f0c18475(weapon, var_d3c8f6cd = 1) {
@@ -958,9 +958,9 @@ function function_7e071045(player) {
   self.skip_death_notetracks = 1;
   self.nodeathragdoll = 1;
   self.var_49fdad6a = 1;
-  self clientfield::set("" + # "hash_77e641a4db48ad0f", 1);
+  self clientfield::set("" + #"hash_77e641a4db48ad0f", 1);
   waittime = 0.5;
-  self clientfield::set("" + # "hash_306339376ad218f0", 1);
+  self clientfield::set("" + #"hash_306339376ad218f0", 1);
 
   while(waittime > 0 && isDefined(self)) {
     if(!mayspawnentity()) {
@@ -980,7 +980,7 @@ function function_7e071045(player) {
   wait 0.5;
 
   if(isPlayer(player)) {
-    player clientfield::increment("" + # "hash_392d4dd36fe37ce7");
+    player clientfield::increment("" + #"hash_392d4dd36fe37ce7");
   }
 }
 
@@ -1005,9 +1005,9 @@ function function_6dbf1bb3(player, var_77c89bbd = 1, start_pos = undefined) {
   var_d58aca35 = spawn("script_model", start_pos);
   var_d58aca35 setModel(#"tag_origin");
   var_d58aca35 linkto(player);
-  var_d58aca35 clientfield::set("" + # "hash_4061bf5adf6ebd2", var_77c89bbd);
+  var_d58aca35 clientfield::set("" + #"hash_4061bf5adf6ebd2", var_77c89bbd);
   wait 2;
-  var_d58aca35 clientfield::set("" + # "hash_4061bf5adf6ebd2", 0);
+  var_d58aca35 clientfield::set("" + #"hash_4061bf5adf6ebd2", 0);
   wait 0.5;
   var_d58aca35 delete();
 }
@@ -1054,15 +1054,15 @@ function function_96db9f3(weapon, delta) {
 
 function function_a0a2d8ee(turnon) {
   if(turnon) {
-    self clientfield::set("" + # "hash_7c865b5dcfbe46c0", 1);
+    self clientfield::set("" + #"hash_7c865b5dcfbe46c0", 1);
     return;
   }
 
-  self clientfield::set("" + # "hash_7c865b5dcfbe46c0", 0);
+  self clientfield::set("" + #"hash_7c865b5dcfbe46c0", 0);
 }
 
 function function_42402593(value) {
-  self clientfield::set("" + # "hash_40635c43f5d87929", value);
+  self clientfield::set("" + #"hash_40635c43f5d87929", value);
 }
 
 function function_d48a01a5(watcher) {
@@ -1073,7 +1073,7 @@ function function_cdb97cd1(watcher, player) {
   if(isDefined(player)) {
     var_deaac196 = player getcurrentweapon();
     var_d3c8f6cd = player function_c3b3603d(var_deaac196, 0);
-    self clientfield::set("" + # "hash_685e6cfaf658518e", 1);
+    self clientfield::set("" + #"hash_685e6cfaf658518e", 1);
     self thread function_8811e4ff(player, var_d3c8f6cd);
   }
 }
@@ -1392,7 +1392,7 @@ function function_4942e7b9() {
     return;
   }
 
-  self clientfield::set("" + # "hash_3a35110e6ccc5486", 1);
+  self clientfield::set("" + #"hash_3a35110e6ccc5486", 1);
 }
 
 function function_97bcf56f() {
@@ -1400,7 +1400,7 @@ function function_97bcf56f() {
     return;
   }
 
-  self clientfield::set("" + # "hash_3a35110e6ccc5486", 0);
+  self clientfield::set("" + #"hash_3a35110e6ccc5486", 0);
 }
 
 function function_f94aa073() {
@@ -1408,7 +1408,7 @@ function function_f94aa073() {
     return;
   }
 
-  self clientfield::set("" + # "hash_1709a7bbfac5e1e0", 1);
+  self clientfield::set("" + #"hash_1709a7bbfac5e1e0", 1);
 }
 
 function function_8af9f027() {
@@ -1416,7 +1416,7 @@ function function_8af9f027() {
     return;
   }
 
-  self clientfield::set("" + # "hash_1709a7bbfac5e1e0", 0);
+  self clientfield::set("" + #"hash_1709a7bbfac5e1e0", 0);
 }
 
 function function_ae87eaf() {
@@ -1424,7 +1424,7 @@ function function_ae87eaf() {
     return;
   }
 
-  self clientfield::set("" + # "hash_6dca42b5563953ef", 1);
+  self clientfield::set("" + #"hash_6dca42b5563953ef", 1);
 }
 
 function function_2a7980e() {
@@ -1432,7 +1432,7 @@ function function_2a7980e() {
     return;
   }
 
-  self clientfield::set("" + # "hash_2a7b72235f0b387e", 1);
+  self clientfield::set("" + #"hash_2a7b72235f0b387e", 1);
 }
 
 function function_47c38bc8(watcher) {
@@ -1541,7 +1541,7 @@ function function_c9ccbd54() {
   }
 
   if(self function_ac1ff86e()) {
-    self clientfield::set("" + # "hash_77e641a4db48ad0f", 3);
+    self clientfield::set("" + #"hash_77e641a4db48ad0f", 3);
     self thread function_5a2447b1(2);
     return;
   }
@@ -1577,18 +1577,18 @@ function function_c8adf16f(weapon) {
 
 function function_74be4c3e(stage) {
   if(isactor(self) || isactorcorpse(self)) {
-    self clientfield::set("" + # "hash_97d03a2a0786ba6", stage);
+    self clientfield::set("" + #"hash_97d03a2a0786ba6", stage);
   }
 }
 
 function function_41ac088f() {
   if(isactor(self) || isactorcorpse(self)) {
-    self clientfield::set("" + # "hash_97d03a2a0786ba6", 0);
+    self clientfield::set("" + #"hash_97d03a2a0786ba6", 0);
   }
 }
 
 function function_53e5275c(ammo_count) {
-  self clientfield::set("" + # "hash_3c92af57fde1f8f7", ammo_count);
+  self clientfield::set("" + #"hash_3c92af57fde1f8f7", ammo_count);
 }
 
 function function_3c39516d(watcher) {
@@ -1646,7 +1646,7 @@ function function_fd195372(inflictor, attacker, damage, flags, meansofdeath, wea
     shitloc.var_4bc2bb56 -= boneindex;
 
     if(isPlayer(psoffsettime)) {
-      psoffsettime clientfield::increment("" + # "hash_492f4817c4296ddf");
+      psoffsettime clientfield::increment("" + #"hash_492f4817c4296ddf");
     }
 
     if(shitloc.var_4bc2bb56 == 0) {
@@ -1654,7 +1654,7 @@ function function_fd195372(inflictor, attacker, damage, flags, meansofdeath, wea
     }
 
     if(isactor(self)) {
-      self clientfield::set("" + # "hash_380d2d329a41c90e", 1);
+      self clientfield::set("" + #"hash_380d2d329a41c90e", 1);
     }
   }
 
@@ -1662,7 +1662,7 @@ function function_fd195372(inflictor, attacker, damage, flags, meansofdeath, wea
 }
 
 function function_de1f133e(ammo_state) {
-  self clientfield::set("" + # "hash_89386ef1bb99cdf", ammo_state);
+  self clientfield::set("" + #"hash_89386ef1bb99cdf", ammo_state);
 }
 
 function function_efcce3c1() {
@@ -1687,7 +1687,7 @@ function function_5a9a8abc(weapon) {
     self.var_7c223de7 = gettime();
     self.var_9cb64422 = 0;
     self.var_c627b034 = 1;
-    self clientfield::set("" + # "hash_2eb1021a0e4110d1", self.var_c627b034);
+    self clientfield::set("" + #"hash_2eb1021a0e4110d1", self.var_c627b034);
     thread function_4a074bb5(weapon);
     thread function_a8733e49(weapon);
   } else {
@@ -1697,7 +1697,7 @@ function function_5a9a8abc(weapon) {
 
     if(isDefined(level.var_284e25d2[self.var_c627b034].var_4a0c6d55) && self.var_9cb64422 > level.var_284e25d2[self.var_c627b034].var_4a0c6d55) {
       self.var_c627b034 += 1;
-      self clientfield::set("" + # "hash_2eb1021a0e4110d1", self.var_c627b034);
+      self clientfield::set("" + #"hash_2eb1021a0e4110d1", self.var_c627b034);
     }
   }
 
@@ -1816,7 +1816,7 @@ function function_a8733e49(weapon) {
 function function_1f8640bc(s_notify) {
   self.var_3f74bd46 = undefined;
   self.var_c627b034 = 1;
-  self clientfield::set("" + # "hash_2eb1021a0e4110d1", 0);
+  self clientfield::set("" + #"hash_2eb1021a0e4110d1", 0);
   self notify(#"stop_damage");
 }
 

@@ -16,12 +16,12 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  clientfield::register("scriptmover", "" + # "dog_launcher_explode_fx", 16000, 1, "int", &function_9666c7b1, 0, 0);
+  clientfield::register("scriptmover", "" + #"dog_launcher_explode_fx", 16000, 1, "int", &function_9666c7b1, 0, 0);
   clientfield::register("scriptmover", "hs_swarm_state", 1, 1, "counter", &function_440e968, 0, 0);
   clientfield::register("allplayers", "hs_swarm_damage", 1, 1, "counter", &function_64d1f09b, 1, 0);
-  clientfield::register("allplayers", "" + # "hash_2201faa112c8313", 16000, 1, "counter", &function_ea257a5f, 1, 0);
-  clientfield::register("scriptmover", "" + # "hash_2201faa112c8313", 16000, 1, "counter", &function_ea257a5f, 1, 0);
-  clientfield::register("scriptmover", "" + # "dog_projectile_fx", 16000, 1, "int", &dog_projectile_fx, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_2201faa112c8313", 16000, 1, "counter", &function_ea257a5f, 1, 0);
+  clientfield::register("scriptmover", "" + #"hash_2201faa112c8313", 16000, 1, "counter", &function_ea257a5f, 1, 0);
+  clientfield::register("scriptmover", "" + #"dog_projectile_fx", 16000, 1, "int", &dog_projectile_fx, 0, 0);
 }
 
 function function_9666c7b1(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -27,13 +27,13 @@ autoexec __init__system__() {
 
 __init__() {
   zm_loadout::register_lethal_grenade_for_level(#"thunderstorm");
-  clientfield::register("scriptmover", "" + # "aoe_indicator", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "electric_storm", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_7006a7d528a6f05c", 16000, 3, "int");
-  clientfield::register("actor", "" + # "hash_51b05e5d116438a9", 16000, 3, "int");
-  clientfield::register("actor", "" + # "hash_561a1fd86bc1a53a", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_43cf6c236d2e9ba", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_1187b848bf7868c5", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"aoe_indicator", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"electric_storm", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_7006a7d528a6f05c", 16000, 3, "int");
+  clientfield::register("actor", "" + #"hash_51b05e5d116438a9", 16000, 3, "int");
+  clientfield::register("actor", "" + #"hash_561a1fd86bc1a53a", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_43cf6c236d2e9ba", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_1187b848bf7868c5", 16000, 1, "int");
   weaponobjects::function_e6400478(#"thunderstorm", &function_72e5d54f, undefined);
   deployable::register_deployable(getweapon(#"thunderstorm"), &function_3b0168a9, undefined, undefined, #"hash_3b6c37d4718707a2");
   level.a_mdl_pegasus = [];
@@ -301,7 +301,7 @@ function_b603ab34(e_player, var_10d4f67d) {
   v_pos = util::ground_position(v_pos + (0, 0, 30), 1000, 12);
   mdl_temp = util::spawn_model(#"hash_30b0badbca0a10de", v_pos + (0, 0, -5), (0, 0, 0));
   waitframe(1);
-  mdl_temp clientfield::set("" + # "hash_1187b848bf7868c5", 1);
+  mdl_temp clientfield::set("" + #"hash_1187b848bf7868c5", 1);
   var_10d4f67d waittill(#"hash_7a19b162c9e303dc");
   mdl_temp delete();
 }
@@ -316,12 +316,12 @@ function_57011892(e_player) {
 }
 
 pegasus_think() {
-  self clientfield::set("" + # "hash_7006a7d528a6f05c", self.player getentitynumber() + 1);
+  self clientfield::set("" + #"hash_7006a7d528a6f05c", self.player getentitynumber() + 1);
   self thread scene::play("aib_zm_red_vign_peg_inair_flapattack_01", "loop", self);
-  self clientfield::set("" + # "electric_storm", 1);
+  self clientfield::set("" + #"electric_storm", 1);
   self waittill(#"hash_7a19b162c9e303dc");
-  self clientfield::set("" + # "electric_storm", 0);
-  self clientfield::set("" + # "hash_7006a7d528a6f05c", 5);
+  self clientfield::set("" + #"electric_storm", 0);
+  self clientfield::set("" + #"hash_7006a7d528a6f05c", 5);
   wait 0.1;
   self delete();
 }
@@ -486,9 +486,9 @@ function_97429d68(n_player_index) {
   }
 
   self.var_c6aafbdb = 1;
-  self clientfield::set("" + # "hash_51b05e5d116438a9", n_player_index);
+  self clientfield::set("" + #"hash_51b05e5d116438a9", n_player_index);
   wait 0.3;
-  self clientfield::set("" + # "hash_51b05e5d116438a9", 0);
+  self clientfield::set("" + #"hash_51b05e5d116438a9", 0);
   self.var_c6aafbdb = 0;
   self ai::clear_stun();
 }

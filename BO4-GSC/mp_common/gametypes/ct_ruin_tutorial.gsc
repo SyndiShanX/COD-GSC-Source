@@ -1302,7 +1302,7 @@ earn_the_hellstorm_objective() {
     e_player ct_utils::function_61c3d59c(undefined, undefined, "dynobj_KillToEarnHellstorm");
     e_player ct_utils::function_80bf685b(e_player.momentum);
     level thread update_momentum();
-    var_ab60380 = "killstreak_quantity_" + # "remote_missile";
+    var_ab60380 = "killstreak_quantity_" + #"remote_missile";
     result = e_player waittilltimeout(var_40b03ff, #"death", var_ab60380);
     level notify(#"hash_271b3e8ba24ae2e2");
     setbombtimer("A", 0);
@@ -1340,7 +1340,7 @@ earn_the_hellstorm_objective() {
 }
 
 function_e2a79d4() {
-  self waittill("killstreak_quantity_" + # "remote_missile");
+  self waittill("killstreak_quantity_" + #"remote_missile");
   level flag::set("killstreak_earned");
 }
 

@@ -55,7 +55,7 @@ event_handler[level_init] main(eventstruct) {
   level._effect[#"hash_4cee8d16fd03fab3"] = #"hash_d763bb85d068431";
   level._effect[#"hash_b6fb18d53b3ba8f"] = #"hash_2a09c05622f43005";
   level._effect[#"hash_50a4de8d221c0d88"] = #"hash_5088b0c20d6a9452";
-  clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int", &function_61c6d401, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int", &function_61c6d401, 0, 0);
   clientfield::register("world", "portal_map_magicbox_lights_init", 1, 1, "int", &portal_map_magicbox_lights_init, 0, 0);
   clientfield::register("world", "portal_map_start_chest1", 1, 1, "int", &portal_map_start_chest1, 0, 0);
   clientfield::register("world", "portal_map_start_chest2", 1, 1, "int", &portal_map_start_chest2, 0, 0);

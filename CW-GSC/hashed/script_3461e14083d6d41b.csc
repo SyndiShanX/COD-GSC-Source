@@ -14,9 +14,9 @@
 #namespace zm_platinum_ww_quest;
 
 function function_f8a8ff3f() {
-  clientfield::register("scriptmover", "" + # "hash_1fc683b0af884f6b", 24000, 1, "int", &function_78d34bcb, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_6d58634b9c00e983", 24000, 1, "int", &function_84decde0, 0, 0);
-  clientfield::register("scriptmover", "" + # "highlight_dial", 24000, 4, "int", &highlight_dial, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1fc683b0af884f6b", 24000, 1, "int", &function_78d34bcb, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_6d58634b9c00e983", 24000, 1, "int", &function_84decde0, 0, 0);
+  clientfield::register("scriptmover", "" + #"highlight_dial", 24000, 4, "int", &highlight_dial, 0, 0);
 }
 
 function function_58ac9d9c(s_loc, n_idx) {

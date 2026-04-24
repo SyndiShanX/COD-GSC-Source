@@ -16,16 +16,16 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "hash_11ff39a3100ac894", 1, 1, "int", &function_e7b6c72b, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_37c33178198d54e4", 1, 1, "int", &function_2a127860, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_5d9808a62579e894", 1, 1, "int", &function_f0e07568, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4ec2b359458774e4", 1, 1, "int", &function_7353e021, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4724376be4e925a3", 1, 1, "int", &function_3b405536, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1aa1c7790dc67d1e", 1, 1, "int", &function_46b21d8a, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_7cdfc8f4819bab2e", 1, 1, "int", &function_73ca75df, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_61ed2f45564d54f9", 1, 1, "int", &function_fa6bb35e, 0, 0);
-  clientfield::register("toplayer", "" + # "totem_fall", 1, 1, "int", &totem_fall, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2a7ceb22f84e5aa9", 1, 1, "int", &function_85aab97f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_11ff39a3100ac894", 1, 1, "int", &function_e7b6c72b, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_37c33178198d54e4", 1, 1, "int", &function_2a127860, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_5d9808a62579e894", 1, 1, "int", &function_f0e07568, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4ec2b359458774e4", 1, 1, "int", &function_7353e021, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4724376be4e925a3", 1, 1, "int", &function_3b405536, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1aa1c7790dc67d1e", 1, 1, "int", &function_46b21d8a, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7cdfc8f4819bab2e", 1, 1, "int", &function_73ca75df, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_61ed2f45564d54f9", 1, 1, "int", &function_fa6bb35e, 0, 0);
+  clientfield::register("toplayer", "" + #"totem_fall", 1, 1, "int", &totem_fall, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2a7ceb22f84e5aa9", 1, 1, "int", &function_85aab97f, 0, 0);
   level._effect[#"hash_1aa1c7790dc67d1e"] = #"hash_2a9ea20e6cb5f0fb";
   level._effect[#"hash_7cdfc8f4819bab2e"] = #"hash_e1bfaf62712f587";
   level._effect[#"hash_61ed2f45564d54f9"] = #"hash_5531980ba0ce0b70";

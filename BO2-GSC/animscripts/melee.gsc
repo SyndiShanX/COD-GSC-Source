@@ -49,7 +49,7 @@ melee_resetaction() {
 }
 
 melee_chooseaction() {
-  if(!melee_isvalid()) {
+  if(!melee_isValid()) {
     return false;
   }
 
@@ -142,7 +142,7 @@ melee_updateandvalidatestartpos() {
   return true;
 }
 
-melee_isvalid() {
+melee_isValid() {
   if(!isDefined(self.melee.target)) {
     return false;
   }
@@ -429,7 +429,7 @@ melee_standard_updateandvalidatetarget() {
     return 0;
   }
 
-  if(!melee_isvalid()) {
+  if(!melee_isValid()) {
     return 0;
   }
 
@@ -714,7 +714,7 @@ melee_aivsai_getinposition() {
   assert(isDefined(self));
   assert(isDefined(self.melee));
 
-  if(!melee_isvalid()) {
+  if(!melee_isValid()) {
     return 0;
   }
 
@@ -819,7 +819,7 @@ melee_aivsai_getinposition_updateandvalidatetarget(initialtargetorigin, giveupti
     return false;
   }
 
-  if(!melee_isvalid()) {
+  if(!melee_isValid()) {
     return false;
   }
 

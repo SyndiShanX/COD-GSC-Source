@@ -22,7 +22,7 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  clientfield::register("toplayer", "" + # "hash_69dc133e22a2769f", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_69dc133e22a2769f", 16000, 1, "int");
   level.var_5bfd847e = #"power_fasttravel";
   level.var_e9737821 = &function_c52e8ba;
   level.var_352c9e03 = &function_af65fe93;
@@ -152,7 +152,7 @@ function function_bce9fcbe() {
 
   while(true) {
     var_e8178f0 = self zm_zonemgr::is_player_in_zone(["zone_portal_transfer", "zone_firebase2", "zone_firebase3"]);
-    self clientfield::set_to_player("" + # "hash_69dc133e22a2769f", var_e8178f0);
+    self clientfield::set_to_player("" + #"hash_69dc133e22a2769f", var_e8178f0);
     self waittill(#"zone_change");
   }
 }

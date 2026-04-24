@@ -19,8 +19,8 @@
 #namespace namespace_c4d353e7;
 
 function init() {
-  clientfield::register("world", "" + # "hide_scene_models", 1, getminbitcountfornum(2), "int", &hide_scene_models, 0, 0);
-  clientfield::register("world", "" + # "hash_763dd8035e80f7c", 1, 1, "int", &function_44dc8dc9, 0, 0);
+  clientfield::register("world", "" + #"hide_scene_models", 1, getminbitcountfornum(2), "int", &hide_scene_models, 0, 0);
+  clientfield::register("world", "" + #"hash_763dd8035e80f7c", 1, 1, "int", &function_44dc8dc9, 0, 0);
 }
 
 function hide_scene_models(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -25,8 +25,8 @@ init_fx() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_6d40a3f1944d81b2", 20000, 2, "int", &function_946acaec, 0, 0);
-  clientfield::register("actor", "" + # "electrocute_ai_fx", 20000, 1, "int", &electrocute_ai, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6d40a3f1944d81b2", 20000, 2, "int", &function_946acaec, 0, 0);
+  clientfield::register("actor", "" + #"electrocute_ai_fx", 20000, 1, "int", &electrocute_ai, 0, 0);
 }
 
 function_946acaec(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

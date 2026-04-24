@@ -16,11 +16,11 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "place_spoon", 1, 1, "int", &function_9e8baed0, 0, 0);
-  clientfield::register("toplayer", "" + # "fill_blood", 1, 4, "int", &function_f72f97af, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_2058d8d474a6b3e1", 1, 1, "int", &function_b42c46e3, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_cc5b97a575d4d6d", 1, 1, "int", &function_f4b5e072, 0, 0);
-  clientfield::register("world", "" + # "hash_ef497244490a0fc", 1, 3, "int", &function_1d683667, 0, 0);
+  clientfield::register("toplayer", "" + #"place_spoon", 1, 1, "int", &function_9e8baed0, 0, 0);
+  clientfield::register("toplayer", "" + #"fill_blood", 1, 4, "int", &function_f72f97af, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_2058d8d474a6b3e1", 1, 1, "int", &function_b42c46e3, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_cc5b97a575d4d6d", 1, 1, "int", &function_f4b5e072, 0, 0);
+  clientfield::register("world", "" + #"hash_ef497244490a0fc", 1, 3, "int", &function_1d683667, 0, 0);
   level._effect[#"spk_glint"] = #"zombie/fx_bmode_glint_hook_zod_zmb";
   level._effect[#"hash_7bd7f11175082774"] = #"hash_aca33e8f743523b";
 }

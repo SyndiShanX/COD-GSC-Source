@@ -5784,7 +5784,7 @@ function function_78e620d() {
   }
 
   if(isDefined(self)) {
-    self clientfield::increment("" + # "vehicle_teleport");
+    self clientfield::increment("" + #"vehicle_teleport");
     wait 1.5;
 
     if(isDefined(self.var_e6604bb)) {

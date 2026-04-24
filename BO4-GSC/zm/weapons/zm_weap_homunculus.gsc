@@ -32,8 +32,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_2d49d2cf3d339e18", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_32c5838be960cfee", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_2d49d2cf3d339e18", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_32c5838be960cfee", 1, 1, "int");
   zm_loadout::register_lethal_grenade_for_level(#"homunculus");
 }
 
@@ -157,7 +157,7 @@ function_dcaa7a4a(e_grenade, var_bbab4f84, var_c4a5788c, var_2f916462) {
   e_grenade thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", e_grenade.mdl_anchor);
   waitresult = e_grenade waittill(#"stationary");
   e_grenade.var_255a121f = 0;
-  e_grenade.mdl_anchor clientfield::set("" + # "hash_32c5838be960cfee", 1);
+  e_grenade.mdl_anchor clientfield::set("" + #"hash_32c5838be960cfee", 1);
   e_grenade resetmissiledetonationtime(30);
   var_3fb36683 = e_grenade is_on_navmesh(self);
 
@@ -602,7 +602,7 @@ function_e383ca2f() {
   self.var_69e642c7 scene::stop();
   self.var_69e642c7 scene::play(#"aib_t8_zm_zod_homunculus_dth_01", self.mdl_anchor);
   mdl_anchor = self.mdl_anchor;
-  mdl_anchor clientfield::set("" + # "hash_2d49d2cf3d339e18", 1);
+  mdl_anchor clientfield::set("" + #"hash_2d49d2cf3d339e18", 1);
   self flag::set(#"hash_5e780b1a8f2d1e3b");
   wait 0.2;
   mdl_anchor delete();

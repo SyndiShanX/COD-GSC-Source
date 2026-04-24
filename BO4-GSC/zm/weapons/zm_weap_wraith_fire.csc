@@ -14,8 +14,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "hash_682f9312e30af478", 1, 1, "int", &function_87bfd935, 0, 0);
-  clientfield::register("actor", "" + # "hash_7fcff4f8340f11f7", 1, 1, "int", &function_f144789c, 0, 0);
+  clientfield::register("actor", "" + #"hash_682f9312e30af478", 1, 1, "int", &function_87bfd935, 0, 0);
+  clientfield::register("actor", "" + #"hash_7fcff4f8340f11f7", 1, 1, "int", &function_f144789c, 0, 0);
 }
 
 function_87bfd935(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

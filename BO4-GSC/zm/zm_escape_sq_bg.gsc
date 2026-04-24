@@ -132,7 +132,7 @@ tomahawk_the_macguffin(e_grenade, n_grenade_charge_power) {
       mdl_skull notify(#"caught_by_tomahawk");
       mdl_skull.origin = e_grenade.origin;
       mdl_skull linkto(mdl_tomahawk);
-      mdl_skull clientfield::set("" + # "afterlife_entity_visibility", 2);
+      mdl_skull clientfield::set("" + #"afterlife_entity_visibility", 2);
       self thread zm_weap_tomahawk::tomahawk_return_player(mdl_tomahawk, undefined, 800);
       self thread give_player_macguffin_upon_receipt(mdl_tomahawk, mdl_skull);
       return true;
@@ -194,7 +194,7 @@ give_sq_bg_reward(var_dd7441ab) {
   t_near = spawn("trigger_radius", var_dd7441ab.origin, 0, 196, 64);
   t_near thread sq_bg_spawn_rumble();
   mdl_reward = zm_utility::spawn_weapon_model(getweapon(#"ww_blundergat_t8"), undefined, var_dd7441ab.origin + (0, 0, 6), var_dd7441ab.angles);
-  mdl_reward clientfield::set("" + # "bg_spawn_fx", 1);
+  mdl_reward clientfield::set("" + #"bg_spawn_fx", 1);
   mdl_reward thread scene::play(#"p8_fxanim_zm_esc_blundergat_fireplace_hover_bundle", mdl_reward);
 
   while(isDefined(self)) {
@@ -237,7 +237,7 @@ give_sq_bg_reward(var_dd7441ab) {
 }
 
 function_d61275a7() {
-  self clientfield::set("" + # "bg_spawn_fx", 0);
+  self clientfield::set("" + #"bg_spawn_fx", 0);
   self ghost();
   wait 5;
   self delete();

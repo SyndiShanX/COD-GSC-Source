@@ -13,8 +13,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "hash_f2d0b920043dbbd", 1, 1, "counter", &function_87d68f99, 0, 0);
-  clientfield::register("world", "" + # "narrative_room", 1, 1, "int", &narrative_room, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_f2d0b920043dbbd", 1, 1, "counter", &function_87d68f99, 0, 0);
+  clientfield::register("world", "" + #"narrative_room", 1, 1, "int", &narrative_room, 0, 0);
 }
 
 function_87d68f99(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

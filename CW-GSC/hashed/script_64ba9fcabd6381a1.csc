@@ -14,9 +14,9 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_452045cf5cb8bc4c", 16000, 2, "int", &function_830c306e, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7833487f87cacad1", 16000, 1, "int", &function_aa0ed712, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1e3fecb02ce56163", 16000, 1, "int", &function_6a360cde, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_452045cf5cb8bc4c", 16000, 2, "int", &function_830c306e, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7833487f87cacad1", 16000, 1, "int", &function_aa0ed712, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1e3fecb02ce56163", 16000, 1, "int", &function_6a360cde, 0, 0);
 }
 
 function function_6a360cde(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

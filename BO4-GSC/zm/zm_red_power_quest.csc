@@ -13,26 +13,26 @@
 #namespace zm_red_power_quest;
 
 init() {
-  clientfield::register("actor", "" + # "zombie_breakout", 16000, 1, "counter", &zombie_breakout_func, 0, 0);
-  clientfield::register("actor", "" + # "zombie_delete", 16000, 1, "counter", &function_638482f6, 0, 0);
-  clientfield::register("actor", "" + # "hash_6d5686b05e69fcb0", 16000, 1, "counter", &function_988637e5, 0, 0);
-  clientfield::register("actor", "" + # "pegasus_beam", 16000, 2, "int", &pegasus_beam_fx, 0, 0);
+  clientfield::register("actor", "" + #"zombie_breakout", 16000, 1, "counter", &zombie_breakout_func, 0, 0);
+  clientfield::register("actor", "" + #"zombie_delete", 16000, 1, "counter", &function_638482f6, 0, 0);
+  clientfield::register("actor", "" + #"hash_6d5686b05e69fcb0", 16000, 1, "counter", &function_988637e5, 0, 0);
+  clientfield::register("actor", "" + #"pegasus_beam", 16000, 2, "int", &pegasus_beam_fx, 0, 0);
 
   if(!zm_utility::is_trials()) {
-    clientfield::register("scriptmover", "" + # "hash_440ca00839d907a8", -17000, 1, "int", &function_785a67c5, 0, 0);
+    clientfield::register("scriptmover", "" + #"hash_440ca00839d907a8", -17000, 1, "int", &function_785a67c5, 0, 0);
   }
 
-  clientfield::register("scriptmover", "" + # "hash_2a586a321116326c", 16000, 1, "int", &function_cca9b50e, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3ec0452110ea5621", 16000, 1, "int", &function_8d9ce264, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5da65e20d966c63f", 16000, 1, "counter", &function_cb64dcb1, 0, 0);
-  clientfield::register("scriptmover", "" + # "artifact_glow", 16000, 1, "int", &artifact_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "perseus_teleport", 16000, 1, "counter", &perseus_teleport_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "pegasus_teleport", 16000, 1, "int", &pegasus_teleport_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "pegasus_ambient", 16000, 1, "int", &pegasus_ambient_fx, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_5da65e20d966c63f", 16000, 1, "counter", &function_cb64dcb1, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_463ff879b8d656bb", 16000, 1, "int", &function_c96c5397, 0, 0);
-  clientfield::register("vehicle", "" + # "perseus_energy", 16000, 1, "int", &function_192be936, 0, 0);
-  clientfield::register("world", "" + # "amphi_blood", 16000, 1, "int", &function_5f8c1946, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2a586a321116326c", 16000, 1, "int", &function_cca9b50e, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3ec0452110ea5621", 16000, 1, "int", &function_8d9ce264, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5da65e20d966c63f", 16000, 1, "counter", &function_cb64dcb1, 0, 0);
+  clientfield::register("scriptmover", "" + #"artifact_glow", 16000, 1, "int", &artifact_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"perseus_teleport", 16000, 1, "counter", &perseus_teleport_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"pegasus_teleport", 16000, 1, "int", &pegasus_teleport_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"pegasus_ambient", 16000, 1, "int", &pegasus_ambient_fx, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_5da65e20d966c63f", 16000, 1, "counter", &function_cb64dcb1, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_463ff879b8d656bb", 16000, 1, "int", &function_c96c5397, 0, 0);
+  clientfield::register("vehicle", "" + #"perseus_energy", 16000, 1, "int", &function_192be936, 0, 0);
+  clientfield::register("world", "" + #"amphi_blood", 16000, 1, "int", &function_5f8c1946, 0, 0);
   level._effect[#"hash_6d5686b05e69fcb0"] = #"zombie/fx_spawn_body_cp_zmb";
   level._effect[#"hash_440ca00839d907a8"] = #"hash_4c14004cd89a0d66";
   level._effect[#"hash_2a586a321116326c"] = #"hash_7770e29dfcabc1cb";

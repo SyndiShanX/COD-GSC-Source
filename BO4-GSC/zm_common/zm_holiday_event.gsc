@@ -24,8 +24,8 @@ autoexec __init__system__() {
 
 __init__() {
   if(getdvarint(#"zm_holiday_event", 0)) {
-    clientfield::register("actor", "" + # "hash_59e8c30d5e28dad3", 14000, 1, "int");
-    clientfield::register("scriptmover", "" + # "hash_d260ef4191c5b3d", 14000, 1, "int");
+    clientfield::register("actor", "" + #"hash_59e8c30d5e28dad3", 14000, 1, "int");
+    clientfield::register("scriptmover", "" + #"hash_d260ef4191c5b3d", 14000, 1, "int");
     zm_loadout::register_lethal_grenade_for_level(#"homunculus_leprechaun");
   }
 }
@@ -84,7 +84,7 @@ function_e12bc077() {
     }
 
     if(isalive(self)) {
-      self clientfield::set("" + # "hash_59e8c30d5e28dad3", 1);
+      self clientfield::set("" + #"hash_59e8c30d5e28dad3", 1);
       return;
     }
 
@@ -97,7 +97,7 @@ function_cfe06357(attacker) {
     return;
   }
 
-  level.var_17bf15ba clientfield::set("" + # "hash_59e8c30d5e28dad3", 0);
+  level.var_17bf15ba clientfield::set("" + #"hash_59e8c30d5e28dad3", 0);
 
   if(isPlayer(attacker) && !(isDefined(attacker.var_ccd959e1) && attacker.var_ccd959e1)) {
     if(!isDefined(level.var_1cd9760e)) {
@@ -139,7 +139,7 @@ function_a33a15c() {
 function_23287dd() {
   if(!isDefined(level.var_23d44713)) {
     level.var_23d44713 = util::spawn_model("tag_origin", level.var_17bf15ba.origin + (0, 0, 60));
-    level.var_23d44713 clientfield::set("" + # "hash_d260ef4191c5b3d", 1);
+    level.var_23d44713 clientfield::set("" + #"hash_d260ef4191c5b3d", 1);
     level.var_c94d8a40 = 1;
   }
 
@@ -173,7 +173,7 @@ function_23287dd() {
 
         if(isalive(ai_zombie)) {
           level.var_23d44713 playSound(#"zmb_sq_souls_impact");
-          ai_zombie clientfield::set("" + # "hash_59e8c30d5e28dad3", 1);
+          ai_zombie clientfield::set("" + #"hash_59e8c30d5e28dad3", 1);
           level.var_17bf15ba = ai_zombie;
         } else {
           level thread function_23287dd();
@@ -218,7 +218,7 @@ function_1443aaa(b_success = 0) {
 
 function_ded808d5() {
   mdl_soul = util::spawn_model("tag_origin", self.origin + (0, 0, 60));
-  mdl_soul clientfield::set("" + # "hash_d260ef4191c5b3d", 1);
+  mdl_soul clientfield::set("" + #"hash_d260ef4191c5b3d", 1);
   n_move_dist = 10;
 
   for(i = 0; i < 6; i++) {
@@ -325,7 +325,7 @@ function_705afbf2() {
 
   foreach(ai_zombie in a_ai_zombies) {
     if(ai_zombie.archetype === #"zombie") {
-      ai_zombie clientfield::set("<dev string:x24d>" + # "hash_59e8c30d5e28dad3", 1);
+      ai_zombie clientfield::set("<dev string:x24d>" + #"hash_59e8c30d5e28dad3", 1);
       level.var_17bf15ba = ai_zombie;
       return;
     }

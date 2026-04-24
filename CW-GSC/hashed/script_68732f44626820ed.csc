@@ -17,7 +17,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("allplayers", "" + # "hash_63af42145e260fb5", 1, 2, "int", &function_4fd00e1f, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_63af42145e260fb5", 1, 2, "int", &function_4fd00e1f, 0, 0);
 }
 
 function private postinit() {}

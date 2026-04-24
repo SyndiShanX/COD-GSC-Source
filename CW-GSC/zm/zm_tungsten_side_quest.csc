@@ -37,25 +37,25 @@ function init() {
   }
 
   level.var_3a2ad19b[level.var_3a2ad19b.size] = #"item_zmquest_sr_ltm_food_burger";
-  clientfield::register("world", "" + # "hash_112d67305f861fe", 28000, 3, "int", &function_3bab499f, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3d5c2390c0768ed2", 28000, 1, "int", &function_dc99662d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_79077a9af52542c8", 28000, 1, "int", &function_f0302ec9, 0, 0);
-  clientfield::register("scriptmover", "" + # "dome_shader", 28000, 1, "int", &dome_shader, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6e68f1a9f11ee7a7", 28000, 1, "int", &function_4aa76e8d, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1c5f8a62c31e12a5", 28000, 1, "int", &function_50f28f68, 0, 0);
-  clientfield::register("world", "" + # "hash_1050257bf996b481", 28000, 4, "int", &function_e03501a6, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_696368486685bb5c", 28000, 1, "int", &function_3cfac49e, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1a1bf38ae538a50d", 28000, 1, "int", &function_331544ce, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_2b3bf178344cc787", 28000, 1, "int", &function_8376a0af, 0, 0);
-  clientfield::register("actor", "" + # "hash_303ed2c4515453aa", 28000, 1, "counter", &function_b6ea5740, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_24b93fe5f3d174f8", 28000, 3, "int", &function_b794d678, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_355304ea91d4edc8", 28000, 1, "counter", &function_3493f111, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_6324044c00c5672d", 28000, 4, "int", &function_1bac5158, 0, 0);
-  clientfield::register("world", "" + # "hash_6c40bdc03cfa78bb", 28000, 1, "int", &function_53f2d015, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2777a21403131281", 28000, 1, "int", &function_58ef33dd, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4a1dfb77dccf6587", 28000, 1, "counter", &function_ecd6d914, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3215084197667777", 28000, 1, "int", &function_96148291, 0, 0);
-  clientfield::register("world", "" + # "hash_665b17bb90845861", 28000, 2, "int", &function_30aa821d, 0, 0);
+  clientfield::register("world", "" + #"hash_112d67305f861fe", 28000, 3, "int", &function_3bab499f, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3d5c2390c0768ed2", 28000, 1, "int", &function_dc99662d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_79077a9af52542c8", 28000, 1, "int", &function_f0302ec9, 0, 0);
+  clientfield::register("scriptmover", "" + #"dome_shader", 28000, 1, "int", &dome_shader, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6e68f1a9f11ee7a7", 28000, 1, "int", &function_4aa76e8d, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1c5f8a62c31e12a5", 28000, 1, "int", &function_50f28f68, 0, 0);
+  clientfield::register("world", "" + #"hash_1050257bf996b481", 28000, 4, "int", &function_e03501a6, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_696368486685bb5c", 28000, 1, "int", &function_3cfac49e, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1a1bf38ae538a50d", 28000, 1, "int", &function_331544ce, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_2b3bf178344cc787", 28000, 1, "int", &function_8376a0af, 0, 0);
+  clientfield::register("actor", "" + #"hash_303ed2c4515453aa", 28000, 1, "counter", &function_b6ea5740, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_24b93fe5f3d174f8", 28000, 3, "int", &function_b794d678, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_355304ea91d4edc8", 28000, 1, "counter", &function_3493f111, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_6324044c00c5672d", 28000, 4, "int", &function_1bac5158, 0, 0);
+  clientfield::register("world", "" + #"hash_6c40bdc03cfa78bb", 28000, 1, "int", &function_53f2d015, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2777a21403131281", 28000, 1, "int", &function_58ef33dd, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4a1dfb77dccf6587", 28000, 1, "counter", &function_ecd6d914, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3215084197667777", 28000, 1, "int", &function_96148291, 0, 0);
+  clientfield::register("world", "" + #"hash_665b17bb90845861", 28000, 2, "int", &function_30aa821d, 0, 0);
 }
 
 function function_3bab499f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

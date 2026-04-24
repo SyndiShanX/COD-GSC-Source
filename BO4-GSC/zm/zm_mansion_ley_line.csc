@@ -17,19 +17,19 @@
 #namespace namespace_a8113e97;
 
 init_clientfields() {
-  clientfield::register("allplayers", "" + # "hash_5370f4bc9fc25d13", 8000, 1, "int", &function_bdecc239, 0, 1);
-  clientfield::register("scriptmover", "" + # "ley_lines", 8000, 2, "int", &ley_lines, 0, 0);
-  clientfield::register("scriptmover", "" + # "power_beam", 8000, 2, "int", &power_beam, 0, 0);
-  clientfield::register("scriptmover", "" + # "red_ray", 8000, 2, "int", &red_ray, 0, 0);
-  clientfield::register("scriptmover", "" + # "green_ray", 8000, 2, "int", &green_ray, 0, 0);
-  clientfield::register("scriptmover", "" + # "blue_ray", 8000, 2, "int", &blue_ray, 0, 0);
-  clientfield::register("scriptmover", "" + # "stone_glow", 8000, 1, "int", &function_b75c6b4f, 0, 0);
-  clientfield::register("scriptmover", "" + # "stone_despawn", 8000, 1, "counter", &function_dea9fad1, 0, 0);
-  clientfield::register("scriptmover", "" + # "stone_soul", 8000, 1, "int", &function_6628d887, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_34c5ab29531f15f0", 8000, 1, "int", &crystal_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_546e7612359187c3", 8000, 1, "counter", &function_a0d4ae11, 0, 0);
-  clientfield::register("toplayer", "" + # "mansion_mq_rumble", 8000, 1, "counter", &mansion_mq_rumble, 0, 0);
-  clientfield::register("world", "" + # "skybox_stream", 8000, 1, "int", &function_bca55d4e, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_5370f4bc9fc25d13", 8000, 1, "int", &function_bdecc239, 0, 1);
+  clientfield::register("scriptmover", "" + #"ley_lines", 8000, 2, "int", &ley_lines, 0, 0);
+  clientfield::register("scriptmover", "" + #"power_beam", 8000, 2, "int", &power_beam, 0, 0);
+  clientfield::register("scriptmover", "" + #"red_ray", 8000, 2, "int", &red_ray, 0, 0);
+  clientfield::register("scriptmover", "" + #"green_ray", 8000, 2, "int", &green_ray, 0, 0);
+  clientfield::register("scriptmover", "" + #"blue_ray", 8000, 2, "int", &blue_ray, 0, 0);
+  clientfield::register("scriptmover", "" + #"stone_glow", 8000, 1, "int", &function_b75c6b4f, 0, 0);
+  clientfield::register("scriptmover", "" + #"stone_despawn", 8000, 1, "counter", &function_dea9fad1, 0, 0);
+  clientfield::register("scriptmover", "" + #"stone_soul", 8000, 1, "int", &function_6628d887, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_34c5ab29531f15f0", 8000, 1, "int", &crystal_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_546e7612359187c3", 8000, 1, "counter", &function_a0d4ae11, 0, 0);
+  clientfield::register("toplayer", "" + #"mansion_mq_rumble", 8000, 1, "counter", &mansion_mq_rumble, 0, 0);
+  clientfield::register("world", "" + #"skybox_stream", 8000, 1, "int", &function_bca55d4e, 0, 0);
   level._effect[#"red_ray"] = #"hash_7046110ad3c65161";
   level._effect[#"green_ray"] = #"hash_532ac819595d9bb5";
   level._effect[#"blue_ray"] = #"hash_4a495cef0ef4aee2";

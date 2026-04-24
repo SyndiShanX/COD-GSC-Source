@@ -23,11 +23,11 @@ function init() {
   namespace_cf4aa5f0::function_6dbaba52("cp_defence_3_light_off", "lgt_env_omega_defence_03_off", undefined, undefined, "lgt_env_omega_defence_03_on");
   namespace_cf4aa5f0::function_6dbaba52("peck_room_fire_on", "fxexp_turn_on_fire", undefined, undefined, undefined);
   namespace_cf4aa5f0::function_6dbaba52("peck_room_fire_off", "fxexp_turn_off_fire", undefined, undefined, "fxexp_turn_on_fire");
-  clientfield::register("world", "" + # "hash_5a41b1632428880c", 1, 1, "int", &function_36d3a2ae, 1, 0);
-  clientfield::register("world", "" + # "hash_22f0944e4bd4dea9", 1, 1, "int", &function_7cc2cca5, 1, 0);
-  clientfield::register("world", "" + # "hash_c9774e0d25f882a", 1, 1, "int", &function_72aa9b9b, 1, 0);
-  clientfield::register("world", "" + # "hash_21e00c65edc6594c", 1, 1, "int", &function_a7e6c47e, 1, 0);
-  clientfield::register("world", "" + # "hash_249ac6ef9989bee4", 1, 1, "int", &function_a20b24ac, 1, 0);
+  clientfield::register("world", "" + #"hash_5a41b1632428880c", 1, 1, "int", &function_36d3a2ae, 1, 0);
+  clientfield::register("world", "" + #"hash_22f0944e4bd4dea9", 1, 1, "int", &function_7cc2cca5, 1, 0);
+  clientfield::register("world", "" + #"hash_c9774e0d25f882a", 1, 1, "int", &function_72aa9b9b, 1, 0);
+  clientfield::register("world", "" + #"hash_21e00c65edc6594c", 1, 1, "int", &function_a7e6c47e, 1, 0);
+  clientfield::register("world", "" + #"hash_249ac6ef9989bee4", 1, 1, "int", &function_a20b24ac, 1, 0);
 }
 
 function function_a7e6c47e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

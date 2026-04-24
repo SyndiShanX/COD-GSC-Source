@@ -15,8 +15,8 @@
 #namespace namespace_2a67e53;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "hash_4545e81f76244b", 16000, 1, "int");
-  clientfield::register("world", "" + # "hash_5c8a1cf9b543c223", 16000, getminbitcountfornum(5), "int");
+  clientfield::register("scriptmover", "" + #"hash_4545e81f76244b", 16000, 1, "int");
+  clientfield::register("world", "" + #"hash_5c8a1cf9b543c223", 16000, getminbitcountfornum(5), "int");
   level thread function_613baf1b();
 }
 
@@ -111,12 +111,12 @@ function function_902089af(e_player) {
   level.terminal.screen.entity setModel(level.terminal.screen.model);
   level.terminal.screen.entity playSound(#"hash_50335038922faab3");
   level.terminal.screen.entity playLoopSound(#"hash_5037543892339a56");
-  level.terminal.control clientfield::set("" + # "hash_4545e81f76244b", 1);
+  level.terminal.control clientfield::set("" + #"hash_4545e81f76244b", 1);
   level thread function_d59c42ab(level.terminal);
   s_result = e_player function_f3c47da1(level.terminal, self);
   level notify(#"terminal_off");
   level.terminal.screen.info function_92c05efb(undefined);
-  level.terminal.control clientfield::set("" + # "hash_4545e81f76244b", 0);
+  level.terminal.control clientfield::set("" + #"hash_4545e81f76244b", 0);
   level.terminal.screen.entity stoploopsound();
   level.terminal.screen.entity playSound(#"hash_76f715206715f477");
   level.terminal.screen.entity setModel(#"p9_zm_gold_screen_02_off");

@@ -29,7 +29,7 @@ function preinit() {
   level.var_ce0f67cf = 5;
   level.var_e9737821 = &function_c52e8ba;
   level.var_d0fafce1 = 1;
-  clientfield::register("scriptmover", "" + # "fasttravel_playfx", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"fasttravel_playfx", 1, 2, "int");
   callback::function_74872db6(&function_786c864d);
   level thread function_76138a38();
   level thread function_d794f3ac();
@@ -280,9 +280,9 @@ function fasttravel_playFX() {
           }
 
           if(s_fasttravel.var_d7a120b9 === "up") {
-            s_fasttravel.unitrigger_stub.var_4eadb6a8 clientfield::set("" + # "fasttravel_playfx", 1);
+            s_fasttravel.unitrigger_stub.var_4eadb6a8 clientfield::set("" + #"fasttravel_playfx", 1);
           } else {
-            s_fasttravel.unitrigger_stub.var_4eadb6a8 clientfield::set("" + # "fasttravel_playfx", 2);
+            s_fasttravel.unitrigger_stub.var_4eadb6a8 clientfield::set("" + #"fasttravel_playfx", 2);
           }
 
           s_fasttravel.unitrigger_stub.b_play = 1;
@@ -307,7 +307,7 @@ function function_2b30b25d() {
   foreach(s_fasttravel in a_s_fasttravel) {
     if(is_true(s_fasttravel.unitrigger_stub.b_play)) {
       if(isDefined(s_fasttravel.unitrigger_stub.var_4eadb6a8)) {
-        s_fasttravel.unitrigger_stub.var_4eadb6a8 clientfield::set("" + # "fasttravel_playfx", 0);
+        s_fasttravel.unitrigger_stub.var_4eadb6a8 clientfield::set("" + #"fasttravel_playfx", 0);
         util::wait_network_frame();
 
         if(isDefined(s_fasttravel.unitrigger_stub.var_4eadb6a8)) {

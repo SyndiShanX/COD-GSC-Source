@@ -36,8 +36,8 @@ __init__() {
   zm_devgui::add_custom_devgui_callback(&function_6ae10cf1);
   level function_6d3ecc88();
 
-  clientfield::register("scriptmover", "" + # "spartoi_reassemble_clientfield", 16000, 1, "int");
-  clientfield::register("actor", "" + # "hash_3a6a3e4ef0a1a999", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"spartoi_reassemble_clientfield", 16000, 1, "int");
+  clientfield::register("actor", "" + #"hash_3a6a3e4ef0a1a999", 16000, 1, "counter");
   spawner::add_archetype_spawn_function(#"skeleton", &function_902ba58c);
   spawner::function_89a2cd87(#"skeleton", &function_e75e796);
   level.var_dd9ff360 = &function_af85a094;
@@ -143,7 +143,7 @@ function_af85a094(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     if(bonename === "j_skeleton_shield" || bonename === "tag_weapon_left") {
       if(self.var_490042cd <= gettime()) {
         self.var_490042cd = gettime() + 300;
-        self clientfield::increment("" + # "hash_3a6a3e4ef0a1a999", 1);
+        self clientfield::increment("" + #"hash_3a6a3e4ef0a1a999", 1);
       }
 
       return 0;
@@ -412,7 +412,7 @@ function_f78e62a8() {
 
   if(isDefined(var_51601537) && isDefined(self.var_fab8d6ce)) {
     to_point = var_51601537.origin - self.var_fab8d6ce.origin;
-    self.var_fab8d6ce clientfield::set("" + # "spartoi_reassemble_clientfield", 1);
+    self.var_fab8d6ce clientfield::set("" + #"spartoi_reassemble_clientfield", 1);
     self.var_fab8d6ce moveto(self.var_fab8d6ce.origin + to_point / 2 + (0, 0, 20), 1.6, 0.5);
     wait 1.6;
 
@@ -460,7 +460,7 @@ function_3400b39f() {
 
 function_a334d2be(var_fab8d6ce) {
   if(isDefined(var_fab8d6ce)) {
-    var_fab8d6ce clientfield::set("" + # "spartoi_reassemble_clientfield", 0);
+    var_fab8d6ce clientfield::set("" + #"spartoi_reassemble_clientfield", 0);
     var_fab8d6ce.owner = undefined;
   }
 

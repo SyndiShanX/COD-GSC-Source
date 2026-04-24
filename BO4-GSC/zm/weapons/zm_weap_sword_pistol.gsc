@@ -21,18 +21,18 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "sword_pistol_slice_right", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "sword_pistol_slice_right", 1, 1, "counter");
-  clientfield::register("actor", "" + # "sword_pistol_slice_left", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "sword_pistol_slice_left", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "viper_bite_projectile", 1, 1, "int");
-  clientfield::register("actor", "" + # "viper_bite_projectile_impact", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "viper_bite_projectile_impact", 1, 1, "counter");
-  clientfield::register("actor", "" + # "viper_bite_bitten_fx", 1, 1, "int");
-  clientfield::register("actor", "" + # "dragon_roar_impact", 1, 1, "counter");
-  clientfield::register("vehicle", "" + # "dragon_roar_impact", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "dragon_roar_explosion", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "swordpistol_rumble", 1, 3, "counter");
+  clientfield::register("actor", "" + #"sword_pistol_slice_right", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"sword_pistol_slice_right", 1, 1, "counter");
+  clientfield::register("actor", "" + #"sword_pistol_slice_left", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"sword_pistol_slice_left", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"viper_bite_projectile", 1, 1, "int");
+  clientfield::register("actor", "" + #"viper_bite_projectile_impact", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"viper_bite_projectile_impact", 1, 1, "counter");
+  clientfield::register("actor", "" + #"viper_bite_bitten_fx", 1, 1, "int");
+  clientfield::register("actor", "" + #"dragon_roar_impact", 1, 1, "counter");
+  clientfield::register("vehicle", "" + #"dragon_roar_impact", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"dragon_roar_explosion", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"swordpistol_rumble", 1, 3, "counter");
   level.hero_weapon[#"sword_pistol"][0] = getweapon(#"hero_sword_pistol_lv1");
   level.hero_weapon[#"sword_pistol"][1] = getweapon(#"hero_sword_pistol_lv2");
   level.hero_weapon[#"sword_pistol"][2] = getweapon(#"hero_sword_pistol_lv3");
@@ -154,11 +154,11 @@ function_6fe1307b(weapon) {
 blood_death_fx(var_14ef0a6c) {
   if(self.archetype === #"zombie") {
     if(var_14ef0a6c) {
-      self clientfield::increment("" + # "sword_pistol_slice_left", 1);
+      self clientfield::increment("" + #"sword_pistol_slice_left", 1);
       return;
     }
 
-    self clientfield::increment("" + # "sword_pistol_slice_right", 1);
+    self clientfield::increment("" + #"sword_pistol_slice_right", 1);
   }
 }
 
@@ -498,7 +498,7 @@ function_698ddbd9(weapon) {
       }
 
       if(isactor(e_target)) {
-        e_target clientfield::increment("" + # "dragon_roar_impact");
+        e_target clientfield::increment("" + #"dragon_roar_impact");
 
         if(n_level > 0 && i == a_e_targets.size - 1) {
           var_fb504c3b = a_e_targets[i] getcentroid();
@@ -542,7 +542,7 @@ function_698ddbd9(weapon) {
 
     self.var_4ecb8a5c dontinterpolate();
     self.var_4ecb8a5c.origin = var_fb504c3b;
-    self.var_4ecb8a5c clientfield::increment("" + # "dragon_roar_explosion");
+    self.var_4ecb8a5c clientfield::increment("" + #"dragon_roar_explosion");
     var_2069eb4c = zm_hero_weapon::function_7c3681f7();
     var_2069eb4c = arraysortclosest(var_2069eb4c, v_view_pos, undefined, undefined, level.hero_weapon_stats[#"sword_pistol"][#"hash_634b06c9d5064145"]);
 
@@ -669,7 +669,7 @@ function_e47a52e0(weapon) {
   n_time_travel = var_6ff1bf88 / n_move_speed;
   var_f0ccd955 = n_time_travel < 0.1 ? 0.1 : n_time_travel;
   self.var_7c78b80e moveto(v_end, var_f0ccd955);
-  self.var_7c78b80e clientfield::set("" + # "viper_bite_projectile", 1);
+  self.var_7c78b80e clientfield::set("" + #"viper_bite_projectile", 1);
   self thread swordpistol_rumble(5);
   n_time_started = gettime() / 1000;
   n_time_elapsed = 0;
@@ -718,7 +718,7 @@ function_e47a52e0(weapon) {
     n_time_elapsed = n_time_current - n_time_started;
   }
 
-  self.var_7c78b80e clientfield::set("" + # "viper_bite_projectile", 0);
+  self.var_7c78b80e clientfield::set("" + #"viper_bite_projectile", 0);
 
   if(isalive(var_3c23401c)) {
     var_3c23401c thread function_72070f02(self, weapon);
@@ -880,7 +880,7 @@ function_37106789(player, weapon) {
     }
   }
 
-  self clientfield::increment("" + # "viper_bite_projectile_impact");
+  self clientfield::increment("" + #"viper_bite_projectile_impact");
   self notify(#"hash_1404343e2a1a434c");
   waitframe(1);
 
@@ -904,7 +904,7 @@ function_571d2d19(player, weapon) {
 
   if(isalive(self)) {
     self thread zm_hero_weapon::function_acee2761();
-    self clientfield::increment("" + # "viper_bite_projectile_impact");
+    self clientfield::increment("" + #"viper_bite_projectile_impact");
     waitframe(1);
     self dodamage(1000, self.origin, player, undefined, "none", "MOD_PROJECTILE", 0, weapon);
   }
@@ -912,7 +912,7 @@ function_571d2d19(player, weapon) {
 
 function_3295542a(player, weapon) {
   var_344157ae = self getcentroid();
-  self clientfield::set("" + # "viper_bite_bitten_fx", 1);
+  self clientfield::set("" + #"viper_bite_bitten_fx", 1);
 
   if(!isDefined(player.var_94a84ade)) {
     player.var_94a84ade = util::spawn_model("tag_origin", var_344157ae);
@@ -923,7 +923,7 @@ function_3295542a(player, weapon) {
   self waittill(#"hash_1404343e2a1a434c", #"death");
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "viper_bite_bitten_fx", 0);
+    self clientfield::set("" + #"viper_bite_bitten_fx", 0);
     self.var_69a981e6 = undefined;
   }
 
@@ -981,16 +981,16 @@ swordpistol_rumble(var_b2e05bae) {
         self playrumbleonentity("zm_weap_special_activate_rumble");
         break;
       case 2:
-        self clientfield::increment_to_player("" + # "swordpistol_rumble", 2);
+        self clientfield::increment_to_player("" + #"swordpistol_rumble", 2);
         break;
       case 3:
         self playrumbleonentity("zm_weap_swordpistol_melee_hit_rumble");
         break;
       case 4:
-        self clientfield::increment_to_player("" + # "swordpistol_rumble", 4);
+        self clientfield::increment_to_player("" + #"swordpistol_rumble", 4);
         break;
       case 5:
-        self clientfield::increment_to_player("" + # "swordpistol_rumble", 5);
+        self clientfield::increment_to_player("" + #"swordpistol_rumble", 5);
         break;
     }
   }

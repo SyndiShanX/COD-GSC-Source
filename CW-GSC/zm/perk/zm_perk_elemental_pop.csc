@@ -37,8 +37,8 @@ function init_perk() {
 }
 
 function client_field_func() {
-  clientfield::register("scriptmover", "" + # "hash_2bc83061af453e44", 1, 1, "counter", &function_9717930f, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_12c6e46c315cd43b", 1, 1, "counter", &function_2d190a32, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2bc83061af453e44", 1, 1, "counter", &function_9717930f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_12c6e46c315cd43b", 1, 1, "counter", &function_2d190a32, 0, 0);
 }
 
 function callback_func() {}

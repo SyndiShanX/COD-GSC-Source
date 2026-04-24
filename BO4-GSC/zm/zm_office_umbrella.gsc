@@ -30,8 +30,8 @@ __main__() {
 }
 
 init_clientfield() {
-  clientfield::register("toplayer", "" + # "hash_f2d0b920043dbbd", 1, 1, "counter");
-  clientfield::register("world", "" + # "narrative_room", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_f2d0b920043dbbd", 1, 1, "counter");
+  clientfield::register("world", "" + #"narrative_room", 1, 1, "int");
 }
 
 init_quests() {
@@ -75,7 +75,7 @@ track_player_eyes() {
 
     if(n_time >= 25 && self adsButtonPressed() && self zm_zonemgr::entity_in_zone("cage") && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
-      self clientfield::increment_to_player("" + # "hash_f2d0b920043dbbd", 1);
+      self clientfield::increment_to_player("" + #"hash_f2d0b920043dbbd", 1);
       j_time = 0;
 
       while(self adsButtonPressed() && j_time < 5) {
@@ -117,7 +117,7 @@ narrative_room(var_a276c861) {
   level.var_ff3d8977 delete();
   level.ls_door rotateyaw(90, 1.6);
   level.ls_door connectpaths();
-  level clientfield::set("" + # "narrative_room", 1);
+  level clientfield::set("" + #"narrative_room", 1);
 }
 
 narrative_room_cleanup(var_a276c861, var_19e802fa) {}

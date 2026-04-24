@@ -9,7 +9,7 @@
 
 preload() {
   level._effect[#"hash_490bb70162069301"] = #"hash_406e48055b40a506";
-  clientfield::register("vehicle", "" + # "wisp_fx", 24000, 1, "int", &function_e5ecfa90, 0, 0);
+  clientfield::register("vehicle", "" + #"wisp_fx", 24000, 1, "int", &function_e5ecfa90, 0, 0);
 }
 
 function_e5ecfa90(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

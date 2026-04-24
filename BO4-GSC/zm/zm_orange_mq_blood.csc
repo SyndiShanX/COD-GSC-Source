@@ -13,12 +13,12 @@ preload() {
   level._effect[#"hash_69e92c9c52f7ffc5"] = #"hash_73e8d2cf76175901";
   level._effect[#"hash_748a2e401bbe345c"] = #"hash_7f7ec340b96e5096";
   level._effect[#"hash_2717a5ed66a93a2d"] = #"hash_483b6baf03385a7d";
-  clientfield::register("scriptmover", "" + # "hash_10906b9ce905bda8", 24000, 3, "int", &function_80d2bf71, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5dd642a0bd6e6cb9", 24000, 2, "int", &function_aae8819, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_10906b9ce905bda8", 24000, 3, "int", &function_80d2bf71, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5dd642a0bd6e6cb9", 24000, 2, "int", &function_aae8819, 0, 0);
   level._effect[#"hash_2aea4060746fe17a"] = #"hash_45c853fb6ff73c34";
   level._effect[#"hash_2aea3f60746fdfc7"] = #"hash_3b65f2e4019b78eb";
   level._effect[#"hash_2aea3e60746fde14"] = #"hash_8c5d404ef012ce";
-  clientfield::register("scriptmover", "" + # "hash_1b72c208f2964e24", 24000, 3, "int", &function_3a0ab08b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1b72c208f2964e24", 24000, 3, "int", &function_3a0ab08b, 0, 0);
 }
 
 function_80d2bf71(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

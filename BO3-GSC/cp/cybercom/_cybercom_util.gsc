@@ -483,7 +483,7 @@ function private _lock_sighttest(target, var_b3464abe = 1) {
   return 0;
 }
 
-function targetisvalid(target, weapon, lockreq = 1) {
+function targetisValid(target, weapon, lockreq = 1) {
   result = 1;
   if(!isDefined(target)) {
     return 0;
@@ -564,7 +564,7 @@ function weapon_lock_meetsrequirement(target, radius, weapon, maxrange) {
       return var_a3ded052;
     }
   }
-  isvalid = self targetisvalid(target, weapon);
+  isvalid = self targetisValid(target, weapon);
   if(!(isDefined(isvalid) && isvalid)) {
     self function_29bf9dee(target, 1);
     return 0;
@@ -832,7 +832,7 @@ function function_b5f4e597(weapon) {
         }
         var_b766574c = self.cybercom.var_b766574c;
         var_42d20903 = self.cybercom.var_42d20903;
-        if(!targetisvalid(enemy, weapon)) {
+        if(!targetisValid(enemy, weapon)) {
           self.cybercom.var_b766574c = var_b766574c;
           self.cybercom.var_42d20903 = var_42d20903;
           continue;

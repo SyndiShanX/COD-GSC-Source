@@ -17,8 +17,8 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   sr_beacon_menu::register();
-  clientfield::register("toplayer", "" + # "teleport_started", 1, 1, "counter", &function_595556d0, 0, 0);
-  clientfield::register("toplayer", "" + # "teleport_ended", 1, 1, "counter", &function_cc5db8e3, 0, 0);
+  clientfield::register("toplayer", "" + #"teleport_started", 1, 1, "counter", &function_595556d0, 0, 0);
+  clientfield::register("toplayer", "" + #"teleport_ended", 1, 1, "counter", &function_cc5db8e3, 0, 0);
   namespace_52c8f34d::preinit();
 }
 

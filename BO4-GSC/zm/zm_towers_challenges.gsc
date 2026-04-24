@@ -42,7 +42,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + # "hash_2e38cc453c5ecb9c", 16000, 2, "int");
+  clientfield::register("world", "" + #"hash_2e38cc453c5ecb9c", 16000, 2, "int");
   callback::on_finalize_initialization(&init);
 }
 
@@ -1834,7 +1834,7 @@ _good_door_opened(e_player, e_trig) {
   var_50ed6de = (0, 90, 0);
   var_aa4f9213 = level.var_5d1e28ac[self.var_860b8f1e];
   e_player thread function_ae982bb9(#"challenge_completed");
-  e_player clientfield::increment_to_player("" + # "hash_2bbcb9e09bd7bb26");
+  e_player clientfield::increment_to_player("" + #"hash_2bbcb9e09bd7bb26");
 
   switch (var_aa4f9213) {
     case # "self_revive":
@@ -2027,17 +2027,17 @@ function_e2e90905() {
   var_aa4f9213 = level.var_5d1e28ac[self.challenge_struct.var_860b8f1e];
 
   if(var_aa4f9213 === #"pistol_standard_t8_upgraded") {
-    level clientfield::set("" + # "hash_2e38cc453c5ecb9c", 1);
+    level clientfield::set("" + #"hash_2e38cc453c5ecb9c", 1);
     return;
   }
 
   if(var_aa4f9213 === #"lmg_spray_t8_upgraded") {
-    level clientfield::set("" + # "hash_2e38cc453c5ecb9c", 2);
+    level clientfield::set("" + #"hash_2e38cc453c5ecb9c", 2);
     return;
   }
 
-  if(level clientfield::get("" + # "hash_2e38cc453c5ecb9c")) {
-    level clientfield::set("" + # "hash_2e38cc453c5ecb9c", 0);
+  if(level clientfield::get("" + #"hash_2e38cc453c5ecb9c")) {
+    level clientfield::set("" + #"hash_2e38cc453c5ecb9c", 0);
   }
 }
 

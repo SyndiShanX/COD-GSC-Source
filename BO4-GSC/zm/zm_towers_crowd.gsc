@@ -205,7 +205,7 @@ function_10ef0925(e_homunculus) {
   wait 3;
   function_8237489a(1);
   function_5c1184e(0);
-  level clientfield::set("" + # "crowd_react_wave", 1);
+  level clientfield::set("" + #"crowd_react_wave", 1);
 
   if(isDefined(e_homunculus)) {
     e_homunculus waittill(#"death");
@@ -213,7 +213,7 @@ function_10ef0925(e_homunculus) {
     wait 30;
   }
 
-  level clientfield::set("" + # "crowd_react_wave", 0);
+  level clientfield::set("" + #"crowd_react_wave", 0);
   wait 3;
   function_5c1184e(1);
   function_8237489a(0);
@@ -233,8 +233,8 @@ function_1493a309(e_player) {
 
   if(self.powerup_name === "dung") {
     e_player playSound(#"hash_66a500811a472fac");
-    e_player clientfield::set_to_player("" + # "pickup_dung", 1);
-    e_player util::delay(5, "disconnect", &clientfield::set_to_player, "" + # "pickup_dung", 0);
+    e_player clientfield::set_to_player("" + #"pickup_dung", 1);
+    e_player util::delay(5, "disconnect", &clientfield::set_to_player, "" + #"pickup_dung", 0);
     level notify(#"hash_694f58e8bc5dd48", {
       #e_player: e_player
     });

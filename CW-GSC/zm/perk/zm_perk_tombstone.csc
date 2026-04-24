@@ -38,9 +38,9 @@ function init_staminup() {
 }
 
 function client_field_func() {
-  clientfield::register("allplayers", "" + # "hash_46072c670fdaf2fa", 8000, 1, "int", &function_e32c696e, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2897f04212a28873", 8000, 1, "int", &function_2f3a5c2, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5d96e4c9a397fa0", 8000, 1, "int", &function_e2f686a3, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_46072c670fdaf2fa", 8000, 1, "int", &function_e32c696e, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2897f04212a28873", 8000, 1, "int", &function_2f3a5c2, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5d96e4c9a397fa0", 8000, 1, "int", &function_e2f686a3, 0, 0);
 }
 
 function callback_func() {}

@@ -20,7 +20,7 @@ function private preinit() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + # "zm_trial_door_lockdown", 16000, 1, "int", &zm_trial_door_lockdown, 0, 0);
+  clientfield::register("scriptmover", "" + #"zm_trial_door_lockdown", 16000, 1, "int", &zm_trial_door_lockdown, 0, 0);
   level._effect[#"hash_351debe7af1f588b"] = "maps/zm_escape/fx8_flame_wall_64x64";
   level._effect[#"hash_257bf4ae70b5a852"] = "maps/zm_escape/fx8_flame_wall_128x128";
   level._effect[#"hash_3ea271ae7eb7fdce"] = "maps/zm_escape/fx8_flame_wall_256x256";

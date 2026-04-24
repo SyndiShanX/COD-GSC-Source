@@ -22,9 +22,9 @@ autoexec __init__system__() {
 
 __init__() {
   level.w_music_box = getweapon(#"music_box");
-  clientfield::register("scriptmover", "" + # "music_box_light_fx", 24000, 1, "int");
-  clientfield::register("scriptmover", "" + # "music_box_teleport", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_4881cb6bc59fdc49", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"music_box_light_fx", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"music_box_teleport", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_4881cb6bc59fdc49", 24000, 1, "int");
   callback::on_grenade_fired(&on_grenade_fired);
   zm_loadout::register_lethal_grenade_for_level(#"music_box");
 
@@ -46,7 +46,7 @@ on_grenade_fired(s_params) {
     e_grenade ghost();
     e_grenade.var_1a61db89 = util::spawn_model(e_grenade.model, e_grenade.origin, (0, self.angles[1] - 75, 0));
     e_grenade.var_1a61db89 linkto(e_grenade);
-    e_grenade.var_1a61db89 clientfield::set("" + # "music_box_light_fx", 1);
+    e_grenade.var_1a61db89 clientfield::set("" + #"music_box_light_fx", 1);
     e_grenade.weapon = s_params.weapon;
     s_waitresult = s_params.projectile waittill(#"stationary");
 
@@ -95,7 +95,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
   e_sam thread scene::play(#"p8_zm_ora_music_box_bundle", "one_shot", e_sam);
   wait 0.5;
   self.var_1a61db89 hide();
-  self.var_1a61db89 clientfield::set("" + # "music_box_light_fx", 0);
+  self.var_1a61db89 clientfield::set("" + #"music_box_light_fx", 0);
   wait 1;
 
   foreach(e_zombie in a_zombies) {
@@ -130,7 +130,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
       var_23ef51ef = vectornormalize(e_zombie getcentroid() - var_b7fc8c3e) * randomfloatrange(150, 250);
       e_zombie launchragdoll(var_23ef51ef + (0, 0, 32));
       e_zombie dodamage(e_zombie.maxhealth, e_zombie.origin, attacker, self, 0, "MOD_GRENADE", 0, self.weapon);
-      e_zombie clientfield::set("" + # "hash_4881cb6bc59fdc49", 1);
+      e_zombie clientfield::set("" + #"hash_4881cb6bc59fdc49", 1);
     }
   }
 
@@ -219,7 +219,7 @@ in_bounds(e_owner) {
 
     if(var_3fb36683) {
       self.origin = v_valid_point;
-      self.var_1a61db89 clientfield::set("" + # "hash_60a7e5b79e8064a5", 1);
+      self.var_1a61db89 clientfield::set("" + #"hash_60a7e5b79e8064a5", 1);
       return true;
     }
   }

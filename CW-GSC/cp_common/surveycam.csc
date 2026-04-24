@@ -43,7 +43,7 @@ function private function_52917166(localclientnum, oldval, newval, bnewent, bini
 }
 
 function private function_80847fa6() {
-  return getuimodel(function_5c2e399f(), "ScriptedWidgetData.widgetModels." + # "hash_71351bf35e6d6353");
+  return getuimodel(function_5c2e399f(), "ScriptedWidgetData.widgetModels." + #"hash_71351bf35e6d6353");
 }
 
 function private function_32cdd3ef() {

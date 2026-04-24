@@ -28,7 +28,7 @@ MELEE_ACTOR_BOUNDS_RADIUS_MINUS_EPSILON = (MELEE_ACTOR_BOUNDS_RADIUS - 0.1); // 
 CHARGE_RANGE_SQ = 160 * 160;
 CHARGE_RANGE_SQ_VS_PLAYER = 200 * 200;
 
-FAILED_INIT_NEXT_MELEE_TIME = 150; // basic IsValid() falure
+FAILED_INIT_NEXT_MELEE_TIME = 150; // basic isValid() falure
 FAILED_CHARGE_NEXT_MELEE_TIME = 1500; // charge failures (both standard/aiVSai)
 FAILED_STANDARD_NEXT_MELEE_TIME = 2500; // standard melee failure
 
@@ -98,7 +98,7 @@ Melee_ResetAction() {
 
 // After succesfully checking for melee, initialize our move
 Melee_ChooseAction() {
-  if(!Melee_IsValid())
+  if(!Melee_isValid())
     return false;
 
   self.melee.initiated = true;
@@ -198,7 +198,7 @@ Melee_UpdateAndValidateStartPos() {
 }
 
 // Checks for various self / target conditions. Does not check for pathing issues.
-Melee_IsValid() {
+Melee_isValid() {
   // Must have a target still
   if(!isDefined(self.melee.target))
     return false;
@@ -484,7 +484,7 @@ Melee_Standard_UpdateAndValidateTarget() {
   if(!isDefined(self.melee.target))
     return false;
 
-  if(!Melee_IsValid())
+  if(!Melee_isValid())
     return false;
 
   dirToTarget = vectorNormalize(self.melee.target.origin - self.origin);
@@ -1018,7 +1018,7 @@ Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin, giveUpTi
     return false;
 
   // Check if we can still melee while charging
-  if(!Melee_IsValid())
+  if(!Melee_isValid())
     return false;
 
   target = self.melee.target;
@@ -1096,7 +1096,7 @@ Melee_AIvsAI_GetInPosition() {
   assert(isDefined(self.melee));
 
   // Check if we can still melee while charging
-  if(!Melee_IsValid())
+  if(!Melee_isValid())
     return false;
 
   Melee_StartMovement();

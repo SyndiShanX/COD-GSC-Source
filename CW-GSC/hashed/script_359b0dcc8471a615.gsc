@@ -11,7 +11,7 @@
 #namespace namespace_7fe06af4;
 
 function event_handler[gametype_init] init(eventstruct) {
-  clientfield::register("world", "" + # "hash_5e7d02ead4a03f50", 1, 2, "int");
+  clientfield::register("world", "" + #"hash_5e7d02ead4a03f50", 1, 2, "int");
 }
 
 function event_handler[gametype_start] main(eventstruct) {
@@ -131,7 +131,7 @@ function function_a150d07b(randomize = 0) {
     level.var_97902f80 = 0;
   }
 
-  level clientfield::set("" + # "hash_5e7d02ead4a03f50", state);
+  level clientfield::set("" + #"hash_5e7d02ead4a03f50", state);
 }
 
 function function_a23c96ea() {

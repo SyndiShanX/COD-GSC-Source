@@ -50,9 +50,9 @@ enable_zombshell_perk_for_level() {
 }
 
 function_137d1be7() {
-  clientfield::register("scriptmover", "" + # "zombshell_aoe", 15000, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_5f545b88ba3e2938", 15000, 1, "int");
-  clientfield::register("actor", "" + # "zombshell_explosion", 15000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"zombshell_aoe", 15000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_5f545b88ba3e2938", 15000, 1, "int");
+  clientfield::register("actor", "" + #"zombshell_explosion", 15000, 1, "counter");
 }
 
 function_1ab3592a(state) {}
@@ -116,14 +116,14 @@ shell_explosion(e_attacker, w_weapon) {
   }
 
   v_origin = self.origin + (0, 0, 20);
-  self clientfield::increment("" + # "zombshell_explosion");
+  self clientfield::increment("" + #"zombshell_explosion");
 
   if(!isDefined(e_attacker.e_zombshell)) {
     e_attacker.e_zombshell = util::spawn_model("tag_origin", v_origin);
   }
 
   e_attacker.e_zombshell.origin = v_origin;
-  e_attacker.e_zombshell clientfield::set("" + # "zombshell_aoe", 1);
+  e_attacker.e_zombshell clientfield::set("" + #"zombshell_aoe", 1);
   a_enemies = getaiteamarray(#"axis");
 
   if(isDefined(self)) {
@@ -146,7 +146,7 @@ shell_explosion(e_attacker, w_weapon) {
     wait 8;
   }
 
-  e_attacker.e_zombshell clientfield::set("" + # "zombshell_aoe", 0);
+  e_attacker.e_zombshell clientfield::set("" + #"zombshell_aoe", 0);
   e_attacker notify(#"zombshell_aoe");
   e_attacker function_993d228c();
   e_attacker thread zombshell_cooldown(e_attacker.var_c0832831);
@@ -274,7 +274,7 @@ function_279e31b8(e_owner) {
   while(isDefined(e_owner.e_zombshell) && distancesquared(self.origin, var_fc7bb684) < var_bbf6e7fd && self hasperk(#"specialty_mod_zombshell")) {
     if(!isDefined(self.var_9c1c5b59)) {
       self val::set(#"perk_zombshell", "ignoreme");
-      self clientfield::set_to_player("" + # "hash_5f545b88ba3e2938", 1);
+      self clientfield::set_to_player("" + #"hash_5f545b88ba3e2938", 1);
       self.var_9c1c5b59 = 1;
     }
 
@@ -288,7 +288,7 @@ function_279e31b8(e_owner) {
 
 function_993d228c() {
   self val::reset(#"perk_zombshell", "ignoreme");
-  self clientfield::set_to_player("" + # "hash_5f545b88ba3e2938", 0);
+  self clientfield::set_to_player("" + #"hash_5f545b88ba3e2938", 0);
   self.var_9c1c5b59 = undefined;
 }
 

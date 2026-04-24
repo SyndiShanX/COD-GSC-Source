@@ -34,14 +34,14 @@ __init__() {
   level._effect[#"hash_650bbbea29506d1e"] = #"hash_2b4f0b7b45b86a3d";
   level._effect[#"hash_cfd019f2f01e866"] = #"hash_2c30b8327eb9deaa";
   level.var_7cfd8159 = [];
-  clientfield::register("missile", "" + # "hash_6308b5ed3cbd99e3", 1, 1, "counter", &function_75a608a3, 0, 0);
-  clientfield::register("actor", "" + # "hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);
-  clientfield::register("actor", "" + # "hash_690509b9a2ec2ef3", 1, 2, "int", &function_59a204ea, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_290836b72f987780", 1, 1, "int", &function_b6e5e889, 0, 1);
-  clientfield::register("allplayers", "" + # "hash_faa2f4808c12f8d", 1, 1, "int", &function_bec8c33, 0, 1);
-  clientfield::register("allplayers", "" + # "hash_6c3560ab45e186ec", 1, 1, "counter", &function_fc035b41, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_b38c687db71dae", 1, 1, "int", &function_7157628d, 0, 1);
+  clientfield::register("missile", "" + #"hash_6308b5ed3cbd99e3", 1, 1, "counter", &function_75a608a3, 0, 0);
+  clientfield::register("actor", "" + #"hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_37c2ef99d645cf87", 1, 1, "int", &function_8635aaf9, 0, 0);
+  clientfield::register("actor", "" + #"hash_690509b9a2ec2ef3", 1, 2, "int", &function_59a204ea, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_290836b72f987780", 1, 1, "int", &function_b6e5e889, 0, 1);
+  clientfield::register("allplayers", "" + #"hash_faa2f4808c12f8d", 1, 1, "int", &function_bec8c33, 0, 1);
+  clientfield::register("allplayers", "" + #"hash_6c3560ab45e186ec", 1, 1, "counter", &function_fc035b41, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_b38c687db71dae", 1, 1, "int", &function_7157628d, 0, 1);
 }
 
 function_7157628d(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

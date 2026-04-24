@@ -32,7 +32,7 @@ __init__() {
   clientfield::register("scriptmover", "force_stream", 1, 1, "int", &force_stream_changed, 0, 0);
   clientfield::register("zbarrier", "t8_magicbox_crack_glow_fx", 1, 1, "int", &t8_magicbox_crack_glow_fx, 0, 0);
   clientfield::register("zbarrier", "t8_magicbox_ambient_fx", 1, 1, "int", &t8_magicbox_ambient_fx, 0, 0);
-  clientfield::register("zbarrier", "" + # "hash_2fcdae6b889933c7", 1, 1, "int", &function_b5807489, 0, 0);
+  clientfield::register("zbarrier", "" + #"hash_2fcdae6b889933c7", 1, 1, "int", &function_b5807489, 0, 0);
 }
 
 force_stream_magicbox(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

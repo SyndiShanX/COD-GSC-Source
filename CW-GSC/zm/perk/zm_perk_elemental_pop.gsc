@@ -60,8 +60,8 @@ function precache() {
 }
 
 function register_clientfield() {
-  clientfield::register("scriptmover", "" + # "hash_2bc83061af453e44", 1, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_12c6e46c315cd43b", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_2bc83061af453e44", 1, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_12c6e46c315cd43b", 1, 1, "counter");
 }
 
 function set_clientfield(state) {}
@@ -120,7 +120,7 @@ function function_abddd809(inflictor, attacker, damage, flags, meansofdeath, wea
         damage.aat[w_aat] = str_choice;
 
         if(self.zm_ai_category === #"normal" || self.zm_ai_category === #"special" && isDefined(n_tier) && n_tier > 3) {
-          damage clientfield::increment_to_player("" + # "hash_12c6e46c315cd43b", 1);
+          damage clientfield::increment_to_player("" + #"hash_12c6e46c315cd43b", 1);
           aat::aat_response(b_death, attacker, damage, flags, meansofdeath, weapon, w_aat, var_bebe15e1, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
           damage.var_4caed594 = gettime();
         }
@@ -165,7 +165,7 @@ function is_valid_weapon(weapon) {
 }
 
 function on_use(player) {
-  self clientfield::increment("" + # "hash_2bc83061af453e44");
+  self clientfield::increment("" + #"hash_2bc83061af453e44");
 }
 
 function function_fdaa251f() {

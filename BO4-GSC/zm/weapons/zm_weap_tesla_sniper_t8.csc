@@ -15,7 +15,7 @@ __init__() {
   level.w_tesla_sniper_t8 = getweapon(#"ww_tesla_sniper_t8");
   level.w_tesla_sniper_upgraded_t8 = getweapon(#"ww_tesla_sniper_upgraded_t8");
   level.var_490afdb9 = array(undefined, "zm_weapons/fx8_ww_tesla_sniper_bulb_d", "zm_weapons/fx8_ww_tesla_sniper_bulb_c", "zm_weapons/fx8_ww_tesla_sniper_bulb_b", "zm_weapons/fx8_ww_tesla_sniper_bulb_a");
-  clientfield::register("toplayer", "" + # "hash_3aad9502fc3b54f2", 24000, 1, "int", &function_87dc06ae, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_3aad9502fc3b54f2", 24000, 1, "int", &function_87dc06ae, 0, 0);
   clientfield::register("actor", "zm_weapons/fx8_ww_tesla_sniper_impact_lg", 24000, 1, "counter", &function_190ae9a1, 0, 0);
 }
 

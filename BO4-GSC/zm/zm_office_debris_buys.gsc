@@ -13,7 +13,7 @@ autoexec __init__system__() {
 }
 
 init() {
-  clientfield::register("zbarrier", "" + # "hash_7e15d8abc4d6c79a", 1, 1, "int");
+  clientfield::register("zbarrier", "" + #"hash_7e15d8abc4d6c79a", 1, 1, "int");
   level thread function_ffef72a();
 }
 
@@ -53,7 +53,7 @@ function_31a1d10f() {
 
     foreach(e_zbarrier in self.a_e_zbarriers) {
       e_zbarrier playSound(#"hash_144408a3c1139f01");
-      e_zbarrier clientfield::set("" + # "hash_7e15d8abc4d6c79a", 1);
+      e_zbarrier clientfield::set("" + #"hash_7e15d8abc4d6c79a", 1);
     }
   }
 }

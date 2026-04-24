@@ -39,7 +39,7 @@ init_decals() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "morse_star", 1, 1, "int", &function_3653f153, 0, 0);
+  clientfield::register("scriptmover", "" + #"morse_star", 1, 1, "int", &function_3653f153, 0, 0);
 }
 
 function_3653f153(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

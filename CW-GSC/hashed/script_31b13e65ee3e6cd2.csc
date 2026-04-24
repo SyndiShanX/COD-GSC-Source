@@ -29,8 +29,8 @@ function private preinit() {
     return;
   }
 
-  clientfield::register("toplayer", "" + # "ritual_activation", 1, 1, "counter", &function_8452bba2, 0, 0);
-  clientfield::register("toplayer", "" + # "ritual_remove", 1, 1, "counter", &function_f7aa12ff, 0, 0);
+  clientfield::register("toplayer", "" + #"ritual_activation", 1, 1, "counter", &function_8452bba2, 0, 0);
+  clientfield::register("toplayer", "" + #"ritual_remove", 1, 1, "counter", &function_f7aa12ff, 0, 0);
   level.var_b6218854 = [];
   level.var_eb731edb = [];
   level.var_d75ff406 = [];

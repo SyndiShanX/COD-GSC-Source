@@ -17,25 +17,25 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_77e641a4db48ad0f", 1, 2, "int", &function_8964c489, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_492f4817c4296ddf", 1, 1, "counter", &function_4df1985a, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_89386ef1bb99cdf", 1, 2, "int", &function_4264d325, 0, 0);
-  clientfield::register("actor", "" + # "hash_380d2d329a41c90e", 1, 1, "int", &function_ab048a51, 0, 0);
-  clientfield::register("actor", "" + # "hash_7e9eb1c31cf618f0", 1, 1, "int", &function_86ab58c7, 0, 0);
-  clientfield::register("actor", "" + # "hash_306339376ad218f0", 1, 1, "int", &function_d31198e7, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4061bf5adf6ebd2", 1, 3, "int", &function_97f75611, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_392d4dd36fe37ce7", 1, 1, "counter", &function_ddb51446, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_7c865b5dcfbe46c0", 1, 1, "int", &function_20c975a8, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_40635c43f5d87929", 1, 3, "int", &function_f06d4b4, 0, 0);
-  clientfield::register("actor", "" + # "hash_6dca42b5563953ef", 1, 1, "int", &function_6832bb19, 0, 0);
-  clientfield::register("actor", "" + # "hash_2a7b72235f0b387e", 1, 1, "int", &function_6c72aae7, 0, 0);
-  clientfield::register("actor", "" + # "hash_1709a7bbfac5e1e0", 1, 1, "int", &function_e807cd32, 0, 0);
-  clientfield::register("actor", "" + # "hash_3a35110e6ccc5486", 1, 1, "int", &function_11695595, 0, 0);
-  clientfield::register("actor", "" + # "hash_48257c0dba76b140", 1, 1, "int", &function_c5d4038a, 0, 0);
-  clientfield::register("actor", "" + # "hash_97d03a2a0786ba6", 1, 2, "int", &function_cd07a2bb, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_3c92af57fde1f8f7", 1, 4, "int", &function_c72e22ff, 0, 0);
-  clientfield::register("missile", "" + # "hash_685e6cfaf658518e", 1, 1, "int", &function_48f0fe69, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_2eb1021a0e4110d1", 1, 2, "int", &function_656016f4, 0, 1);
+  clientfield::register("actor", "" + #"hash_77e641a4db48ad0f", 1, 2, "int", &function_8964c489, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_492f4817c4296ddf", 1, 1, "counter", &function_4df1985a, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_89386ef1bb99cdf", 1, 2, "int", &function_4264d325, 0, 0);
+  clientfield::register("actor", "" + #"hash_380d2d329a41c90e", 1, 1, "int", &function_ab048a51, 0, 0);
+  clientfield::register("actor", "" + #"hash_7e9eb1c31cf618f0", 1, 1, "int", &function_86ab58c7, 0, 0);
+  clientfield::register("actor", "" + #"hash_306339376ad218f0", 1, 1, "int", &function_d31198e7, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4061bf5adf6ebd2", 1, 3, "int", &function_97f75611, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_392d4dd36fe37ce7", 1, 1, "counter", &function_ddb51446, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_7c865b5dcfbe46c0", 1, 1, "int", &function_20c975a8, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_40635c43f5d87929", 1, 3, "int", &function_f06d4b4, 0, 0);
+  clientfield::register("actor", "" + #"hash_6dca42b5563953ef", 1, 1, "int", &function_6832bb19, 0, 0);
+  clientfield::register("actor", "" + #"hash_2a7b72235f0b387e", 1, 1, "int", &function_6c72aae7, 0, 0);
+  clientfield::register("actor", "" + #"hash_1709a7bbfac5e1e0", 1, 1, "int", &function_e807cd32, 0, 0);
+  clientfield::register("actor", "" + #"hash_3a35110e6ccc5486", 1, 1, "int", &function_11695595, 0, 0);
+  clientfield::register("actor", "" + #"hash_48257c0dba76b140", 1, 1, "int", &function_c5d4038a, 0, 0);
+  clientfield::register("actor", "" + #"hash_97d03a2a0786ba6", 1, 2, "int", &function_cd07a2bb, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_3c92af57fde1f8f7", 1, 4, "int", &function_c72e22ff, 0, 0);
+  clientfield::register("missile", "" + #"hash_685e6cfaf658518e", 1, 1, "int", &function_48f0fe69, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_2eb1021a0e4110d1", 1, 2, "int", &function_656016f4, 0, 1);
 }
 
 function postinit() {

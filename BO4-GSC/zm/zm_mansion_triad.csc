@@ -25,10 +25,10 @@ init_clientfields() {
   level._effect[#"hash_2e3e645052f77846"] = #"hash_78712d347cdd5147";
   level._effect[#"hash_3953ee06542d1089"] = #"hash_795ee7d89d6f10d2";
   level._effect[#"hash_48b3ee505e47cbfc"] = #"hash_69f0c87c19162d91";
-  clientfield::register("allplayers", "" + # "shield_fire", 8000, 1, "int", &function_da63d789, 0, 0);
-  clientfield::register("scriptmover", "" + # "triad_beam", 8000, getminbitcountfornum(3), "int", &triad_beam, 0, 0);
-  clientfield::register("scriptmover", "" + # "wisp_fx", 8000, 2, "int", &function_41640257, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2108935a0c33f89a", 8000, getminbitcountfornum(3), "int", &function_b24b4025, 0, 0);
+  clientfield::register("allplayers", "" + #"shield_fire", 8000, 1, "int", &function_da63d789, 0, 0);
+  clientfield::register("scriptmover", "" + #"triad_beam", 8000, getminbitcountfornum(3), "int", &triad_beam, 0, 0);
+  clientfield::register("scriptmover", "" + #"wisp_fx", 8000, 2, "int", &function_41640257, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2108935a0c33f89a", 8000, getminbitcountfornum(3), "int", &function_b24b4025, 0, 0);
   zm_sq_modules::function_d8383812(#"soul_capture_kp1", 8000, #"kp_1", 400, level._effect[#"kp_projectile"], level._effect[#"hash_27063b90fbaa52"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"soul_capture_kp2", 8000, #"kp_2", 400, level._effect[#"kp_projectile"], level._effect[#"hash_27063b90fbaa52"], undefined, undefined, 1);
   zm_sq_modules::function_d8383812(#"soul_capture_kp3", 8000, #"kp_3", 400, level._effect[#"kp_projectile"], level._effect[#"hash_27063b90fbaa52"], undefined, undefined, 1);

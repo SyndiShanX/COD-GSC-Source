@@ -17,10 +17,10 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("missile", "" + # "avogadro_bolt_fx", 1, 2, "int", &function_9452b8f1, 0, 0);
-  clientfield::register("actor", "" + # "avogadro_phase_fx", 1, 1, "int", &function_1d2d070c, 0, 0);
-  clientfield::register("actor", "" + # "avogadro_health_fx", 1, 2, "int", &function_ae4cd3d4, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_183ef3538fd62563", 1, 1, "int", &function_9beb815c, 0, 0);
+  clientfield::register("missile", "" + #"avogadro_bolt_fx", 1, 2, "int", &function_9452b8f1, 0, 0);
+  clientfield::register("actor", "" + #"avogadro_phase_fx", 1, 1, "int", &function_1d2d070c, 0, 0);
+  clientfield::register("actor", "" + #"avogadro_health_fx", 1, 2, "int", &function_ae4cd3d4, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_183ef3538fd62563", 1, 1, "int", &function_9beb815c, 0, 0);
   clientfield::register("scriptmover", "avogadro_phase_beam", 1, getminbitcountfornum(3), "int", &function_6ddf79a2, 0, 0);
   ai::add_archetype_spawn_function(#"avogadro", &initavogadro);
 }

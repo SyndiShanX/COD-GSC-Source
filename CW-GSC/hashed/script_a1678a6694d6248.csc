@@ -20,13 +20,13 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_d1d4ed99da50a4b", 28000, 1, "int", &function_72dbb6b0, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_403f172f69819024", 28000, 1, "int", &function_c4b67b53, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2b223a333ab436cd", 28000, 1, "int", &function_3a8acde0, 0, 0);
-  clientfield::register("actor", "" + # "hash_4189b622ab06c2d5", 28000, 1, "counter", &function_6f0e3ec, 0, 0);
-  clientfield::register("actor", "" + # "hash_5c2324e6d994b886", 28000, 1, "counter", &function_21f99cd2, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_5d6139b1ce0e7c82", 28000, 2, "int", &function_f564024f, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_13f32f06b0e858dd", 28000, 3, "int", &function_36ef6d02, 0, 0);
+  clientfield::register("actor", "" + #"hash_d1d4ed99da50a4b", 28000, 1, "int", &function_72dbb6b0, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_403f172f69819024", 28000, 1, "int", &function_c4b67b53, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2b223a333ab436cd", 28000, 1, "int", &function_3a8acde0, 0, 0);
+  clientfield::register("actor", "" + #"hash_4189b622ab06c2d5", 28000, 1, "counter", &function_6f0e3ec, 0, 0);
+  clientfield::register("actor", "" + #"hash_5c2324e6d994b886", 28000, 1, "counter", &function_21f99cd2, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_5d6139b1ce0e7c82", 28000, 2, "int", &function_f564024f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_13f32f06b0e858dd", 28000, 3, "int", &function_36ef6d02, 0, 0);
   callback::on_weapon_change(&on_weapon_change);
 
   if(!isDefined(level.var_5bc34f35)) {

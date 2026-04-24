@@ -19,8 +19,8 @@ function private preinit() {
   }
 
   for(i = 0; i < 6; i++) {
-    clientfield::register("actor", "" + # "weakpoint_state" + i, 1, 1, "int", &function_9c1a4204, 0, 0);
-    clientfield::register("actor", "" + # "weakpoint_fx" + i, 1, 1, "counter", &function_e5efcc39, 0, 0);
+    clientfield::register("actor", "" + #"weakpoint_state" + i, 1, 1, "int", &function_9c1a4204, 0, 0);
+    clientfield::register("actor", "" + #"weakpoint_fx" + i, 1, 1, "counter", &function_e5efcc39, 0, 0);
   }
 
   ai::add_ai_spawn_function(&initweakpoints);
@@ -92,7 +92,7 @@ function initweakpoints() {
     }
 
     entity.var_5ace757d[entity.var_5ace757d.size] = {
-      #var_ee8794bf: "" + # "weakpoint_state" + clientfield_index, #var_98634dc5: "" + # "weakpoint_fx" + clientfield_index, #hitfx: var_8cc382e6.var_4aa216c9, #var_6fb74226: var_8cc382e6.fxtag, #var_47b606f3: function_aed4cd9e(var_8cc382e6), #currstate: 2
+      #var_ee8794bf: "" + #"weakpoint_state" + clientfield_index, #var_98634dc5: "" + #"weakpoint_fx" + clientfield_index, #hitfx: var_8cc382e6.var_4aa216c9, #var_6fb74226: var_8cc382e6.fxtag, #var_47b606f3: function_aed4cd9e(var_8cc382e6), #currstate: 2
     };
     clientfield_index++;
   }

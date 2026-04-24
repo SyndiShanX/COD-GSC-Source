@@ -19,11 +19,11 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "charon_pool", 16000, 1, "int", &function_a083252d, 0, 0);
   clientfield::register("scriptmover", "charon_shoot", 16000, 1, "counter", &function_3762b44b, 0, 0);
-  clientfield::register("scriptmover", "" + # "charon_impact", 16000, 2, "int", &function_12c042fc, 0, 0);
+  clientfield::register("scriptmover", "" + #"charon_impact", 16000, 2, "int", &function_12c042fc, 0, 0);
   clientfield::register("allplayers", "charon_flash", 16000, 1, "int", &function_3b17ff6f, 0, 0);
-  clientfield::register("actor", "" + # "charon_death", 16000, 1, "counter", &function_120153b7, 0, 0);
-  clientfield::register("actor", "" + # "charon_zombie_impact", 16000, 1, "counter", &function_b10c4057, 0, 0);
-  clientfield::register("actor", "" + # "charon_pool_victim", 16000, 1, "int", &function_d64a6790, 0, 0);
+  clientfield::register("actor", "" + #"charon_death", 16000, 1, "counter", &function_120153b7, 0, 0);
+  clientfield::register("actor", "" + #"charon_zombie_impact", 16000, 1, "counter", &function_b10c4057, 0, 0);
+  clientfield::register("actor", "" + #"charon_pool_victim", 16000, 1, "int", &function_d64a6790, 0, 0);
   level._effect[#"charon_proj"] = #"hash_4952906e2b897ac8";
   level._effect[#"charon_proj_charged"] = #"hash_3a0c132d4e39ba81";
   level._effect[#"charon_proj_impact"] = #"hash_25c4a39b373bfc67";

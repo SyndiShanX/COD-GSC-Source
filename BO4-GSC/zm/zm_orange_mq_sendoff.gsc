@@ -26,7 +26,7 @@
 #namespace zm_orange_mq_sendoff;
 
 preload() {
-  clientfield::register("vehicle", "" + # "wisp_fx", 24000, 1, "int");
+  clientfield::register("vehicle", "" + #"wisp_fx", 24000, 1, "int");
 }
 
 init() {
@@ -160,7 +160,7 @@ function_8a707841(n_loop_time) {
   self clientfield::set("lighthouse_on", 0);
 
   while(n_time_elapsed < n_loop_time) {
-    self clientfield::increment("" + # "hash_6c84cb8d22df46f0", 1);
+    self clientfield::increment("" + #"hash_6c84cb8d22df46f0", 1);
     wait n_wait_time;
     n_time_elapsed += n_wait_time;
     n_wait_time = max(n_wait_time * 0.85, 0.1);
@@ -186,7 +186,7 @@ function_bf106bdf() {
     waitframe(1);
   }
 
-  vh_wisp clientfield::set("" + # "wisp_fx", 1);
+  vh_wisp clientfield::set("" + #"wisp_fx", 1);
   nd_start = getvehiclenode("portal_wisp_start", "targetname");
   vh_wisp setspeed(20);
   vh_wisp vehicle::get_on_and_go_path(nd_start);

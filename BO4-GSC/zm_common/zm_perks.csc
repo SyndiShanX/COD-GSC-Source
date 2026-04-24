@@ -92,17 +92,17 @@ perks_register_clientfield() {
     clientfield::register("clientuimodel", "hudItems.extraPerkVapor." + i + ".specialEffectActive", n_version, 1, "int", undefined, 0, 0);
   }
 
-  clientfield::register("scriptmover", "" + # "hash_cf74c35ecc5a49", 1, 1, "int", &function_bb184fed, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_35fe26fc5cb223b3", 1, 3, "int", &_train_sd_bombexplode, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_6fb426c48a4877e0", 1, 3, "int", &function_d5f2f6ac, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_345845080e40675d", 1, 3, "int", &function_136826b0, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_1da6660f0414562", 1, 3, "int", &function_a4c33786, 0, 1);
+  clientfield::register("scriptmover", "" + #"hash_cf74c35ecc5a49", 1, 1, "int", &function_bb184fed, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_35fe26fc5cb223b3", 1, 3, "int", &_train_sd_bombexplode, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_6fb426c48a4877e0", 1, 3, "int", &function_d5f2f6ac, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_345845080e40675d", 1, 3, "int", &function_136826b0, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_1da6660f0414562", 1, 3, "int", &function_a4c33786, 0, 1);
 
   if(level.var_c3e5c4cd == 2) {
-    clientfield::register("world", "" + # "hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
-    clientfield::register("scriptmover", "" + # "hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
-    clientfield::register("allplayers", "" + # "hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
-    clientfield::register("toplayer", "" + # "hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
+    clientfield::register("world", "" + #"hash_46334db9e3c76275", 1, 1, "int", &function_9b4bc8e7, 0, 0);
+    clientfield::register("scriptmover", "" + #"hash_50eb488e58f66198", 1, 1, "int", &function_52c149b2, 0, 0);
+    clientfield::register("allplayers", "" + #"hash_222c3403d2641ea6", 1, 3, "int", &function_ab7cd429, 0, 0);
+    clientfield::register("toplayer", "" + #"hash_17283692696da23b", 1, 1, "counter", &function_ccbdf992, 0, 0);
   }
 
   level thread perk_init_code_callbacks();

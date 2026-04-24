@@ -1324,8 +1324,8 @@ function function_575c37e0(weapon, enemy) {
     self zm_stats::function_7ec42fbf(#"hash_4124fad6c16b36d3");
   }
 
-  if(is_true(self clientfield::is_registered("" + # "hash_63af42145e260fb5"))) {
-    var_19f4406e = self clientfield::get("" + # "hash_63af42145e260fb5");
+  if(is_true(self clientfield::is_registered("" + #"hash_63af42145e260fb5"))) {
+    var_19f4406e = self clientfield::get("" + #"hash_63af42145e260fb5");
 
     if(var_19f4406e === 1) {
       self zm_stats::increment_challenge_stat(#"hash_4184958c0a55d46f");

@@ -17,7 +17,7 @@
 function autoexec main() {
   level endon(#"end_game");
   function_e8fa58f2();
-  clientfield::register("world", "" + # "hash_2e92282adde859ff", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_2e92282adde859ff", 1, 1, "int");
   callback::on_connect(&function_94b08ecc);
   callback::on_spawned(&function_cfbece05);
   callback::on_ai_damage(&on_ai_damage);
@@ -435,7 +435,7 @@ function private function_9fb424f8() {
 }
 
 function function_94b08ecc(params) {
-  level clientfield::set("" + # "hash_2e92282adde859ff", 1);
+  level clientfield::set("" + #"hash_2e92282adde859ff", 1);
 }
 
 function function_cfbece05(params) {
@@ -490,8 +490,8 @@ function function_42fbf5d9(var_956ca580, s_dest) {
 
   var_956ca580 linkto(teleport_ent);
 
-  if(teleport_ent clientfield::is_registered("" + # "hash_6d05bbcab1912e5a")) {
-    teleport_ent clientfield::set("" + # "hash_6d05bbcab1912e5a", 1);
+  if(teleport_ent clientfield::is_registered("" + #"hash_6d05bbcab1912e5a")) {
+    teleport_ent clientfield::set("" + #"hash_6d05bbcab1912e5a", 1);
   }
 
   wait 1;
@@ -547,8 +547,8 @@ function function_42fbf5d9(var_956ca580, s_dest) {
     teleport_ent stoploopsound();
   }
 
-  if(var_956ca580 clientfield::is_registered("" + # "hash_3049a409503be8a0")) {
-    var_956ca580 clientfield::set("" + # "hash_3049a409503be8a0", 1);
+  if(var_956ca580 clientfield::is_registered("" + #"hash_3049a409503be8a0")) {
+    var_956ca580 clientfield::set("" + #"hash_3049a409503be8a0", 1);
   }
 
   var_956ca580 unlink();
@@ -562,8 +562,8 @@ function function_42fbf5d9(var_956ca580, s_dest) {
 
   var_956ca580 notify(#"teleported");
 
-  if(var_956ca580 clientfield::is_registered("" + # "hash_3049a409503be8a0")) {
-    var_956ca580 clientfield::set("" + # "hash_3049a409503be8a0", 0);
+  if(var_956ca580 clientfield::is_registered("" + #"hash_3049a409503be8a0")) {
+    var_956ca580 clientfield::set("" + #"hash_3049a409503be8a0", 0);
   }
 
   var_956ca580.var_df972d6 = undefined;
@@ -574,8 +574,8 @@ function function_313a13db() {
   wait 1;
 
   if(isDefined(self)) {
-    if(self clientfield::is_registered("" + # "hash_6d05bbcab1912e5a")) {
-      self clientfield::set("" + # "hash_6d05bbcab1912e5a", 0);
+    if(self clientfield::is_registered("" + #"hash_6d05bbcab1912e5a")) {
+      self clientfield::set("" + #"hash_6d05bbcab1912e5a", 0);
     }
 
     self delete();

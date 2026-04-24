@@ -39,7 +39,7 @@ function on_gameplay_started(localclientnum) {
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_802934d416ac981", 1, 1, "int", &function_6b8c4c36, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_802934d416ac981", 1, 1, "int", &function_6b8c4c36, 0, 0);
 }
 
 function function_b02d88a3() {

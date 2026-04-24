@@ -14,10 +14,10 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "" + # "flinger_pad_fling", 1, 1, "int", &function_9199e921, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_31c153af499657fd", 1, 1, "int", &function_4a0e5efb, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5822132672ad230f", 1, 1, "int", &function_2c087855, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6219dce209d171ed", 1, 2, "int", &function_fccba5d0, 0, 0);
+  clientfield::register("toplayer", "" + #"flinger_pad_fling", 1, 1, "int", &function_9199e921, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_31c153af499657fd", 1, 1, "int", &function_4a0e5efb, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5822132672ad230f", 1, 1, "int", &function_2c087855, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6219dce209d171ed", 1, 2, "int", &function_fccba5d0, 0, 0);
   zm_ping::function_5ae4a10c("p9_zm_gold_jumppads_machine_mod", "gold_jump_pad", #"hash_7f09cfa60a53e5da", undefined, #"hash_78c19a4e1e68d0c4", 1, -20);
   zm_ping::function_5ae4a10c("p9_zm_gold_jumppads_machine_sub", "gold_landing_pad", #"hash_5d6fe9e2bb10532d", undefined, #"hash_3a19bc129f8b2b4b");
 }

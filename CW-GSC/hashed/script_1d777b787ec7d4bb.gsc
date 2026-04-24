@@ -41,15 +41,15 @@
 #namespace namespace_f7b3ed9;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "damaged_sparks", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "damaged_smoke", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_20b22d2242b107cc", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_4cf52ac8c941f331", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_354f2f0ca110088b", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_221e597b28199323", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_48cdaba6cfee3ee8", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_11d9c3835adcaece", 16000, 1, "int");
-  clientfield::register("actor", "" + # "zombie_soul", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"damaged_sparks", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"damaged_smoke", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_20b22d2242b107cc", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_4cf52ac8c941f331", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_354f2f0ca110088b", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_221e597b28199323", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_48cdaba6cfee3ee8", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_11d9c3835adcaece", 16000, 1, "int");
+  clientfield::register("actor", "" + #"zombie_soul", 16000, 1, "int");
   level.var_cc43b632 = struct::get_array("control_point_pos", "targetname");
   level.var_547f9dd5 = [];
   level.dont_unset_perk_when_machine_paused = 1;
@@ -433,12 +433,12 @@ function function_1ef4bcd6(var_14a22ccd = 0) {
   self.var_fb721650 = [];
 
   if(self.var_269ad176 !== 2) {
-    self.mdl_tag clientfield::set("" + # "hash_48cdaba6cfee3ee8", 1);
+    self.mdl_tag clientfield::set("" + #"hash_48cdaba6cfee3ee8", 1);
     self thread function_c1bde2a0();
   }
 
-  self.mdl_tag clientfield::set("" + # "damaged_sparks", 0);
-  self.mdl_tag clientfield::set("" + # "damaged_smoke", 0);
+  self.mdl_tag clientfield::set("" + #"damaged_sparks", 0);
+  self.mdl_tag clientfield::set("" + #"damaged_smoke", 0);
   level.available_slots = [];
 
   if(!var_14a22ccd) {
@@ -453,7 +453,7 @@ function function_1ef4bcd6(var_14a22ccd = 0) {
 
   foreach(satellite_pos in self.var_547f9dd5) {
     if(self.var_269ad176 !== 2) {
-      satellite_pos.mdl clientfield::set("" + # "hash_4cf52ac8c941f331", 1);
+      satellite_pos.mdl clientfield::set("" + #"hash_4cf52ac8c941f331", 1);
       satellite_pos thread function_741d2259();
     }
   }
@@ -524,7 +524,7 @@ function function_c1bde2a0() {
 function function_8ab36f01() {
   self endon(#"anim_deactivate");
   self flag::set(#"exploded");
-  self.var_af9beb09 clientfield::set("" + # "hash_11d9c3835adcaece", 1);
+  self.var_af9beb09 clientfield::set("" + #"hash_11d9c3835adcaece", 1);
   wait 3;
   playrumbleonposition(#"hash_605684c23d123c36", self.origin);
   playsoundatposition(#"hash_302f5ee824b9e9eb", self.origin);
@@ -565,7 +565,7 @@ function function_ca558ad5() {
 
       if(var_c2b976ac.dis <= 600) {
         killed_ai.var_923bed7a = var_c2b976ac.entity;
-        killed_ai clientfield::set("" + # "zombie_soul", 1);
+        killed_ai clientfield::set("" + #"zombie_soul", 1);
         n_killed++;
         sndonoverride_eye_(n_killed, var_10ff40e4);
       }
@@ -634,7 +634,7 @@ function function_30f8cfb4(satellite, zone_index, var_14a22ccd = 0) {
       }
 
       if(!var_14a22ccd && isDefined(satellite.mdl)) {
-        satellite.mdl clientfield::increment("" + # "hash_354f2f0ca110088b");
+        satellite.mdl clientfield::increment("" + #"hash_354f2f0ca110088b");
       }
     }
   }
@@ -800,12 +800,12 @@ function function_bc369205(var_14a22ccd = 0, var_17f8efd5 = 0, var_d219813c = 0)
 
     if(!self.var_16ad7e31 && self.var_2b239c6f >= 2000) {
       self.var_16ad7e31 = 1;
-      self.mdl_tag clientfield::set("" + # "damaged_sparks", 1);
+      self.mdl_tag clientfield::set("" + #"damaged_sparks", 1);
     }
 
     if(!self.var_ff770ca && self.var_2b239c6f >= 3000) {
       self.var_ff770ca = 1;
-      self.mdl_tag clientfield::set("" + # "damaged_smoke", 1);
+      self.mdl_tag clientfield::set("" + #"damaged_smoke", 1);
     }
   }
 }
@@ -884,7 +884,7 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
   if(!var_d219813c && isDefined(level.var_6fad6ea9)) {
     level.zombie_ai_limit += level.var_6fad6ea9;
     level.var_6fad6ea9 = undefined;
-    self.mdl_tag clientfield::set("" + # "hash_48cdaba6cfee3ee8", 0);
+    self.mdl_tag clientfield::set("" + #"hash_48cdaba6cfee3ee8", 0);
   }
 
   if(is_true(var_14a22ccd)) {
@@ -903,15 +903,15 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
       level thread namespace_47809ab2::function_b858693f(self.script_int);
       level notify(#"captured_control_point");
       level flag::set("captured_control_point" + self.script_int);
-      self.mdl_tag clientfield::set("" + # "hash_221e597b28199323", 1);
+      self.mdl_tag clientfield::set("" + #"hash_221e597b28199323", 1);
 
       if(zm_utility::is_ee_enabled()) {
         level thread zm_gold_main_quest::function_9e39dad3(self.script_int);
       }
 
       foreach(satellite in self.var_547f9dd5) {
-        satellite.mdl clientfield::set("" + # "hash_4cf52ac8c941f331", 0);
-        satellite.mdl clientfield::set("" + # "hash_20b22d2242b107cc", 1);
+        satellite.mdl clientfield::set("" + #"hash_4cf52ac8c941f331", 0);
+        satellite.mdl clientfield::set("" + #"hash_20b22d2242b107cc", 1);
       }
 
       iprintlnbold("<dev string:x4a>" + self.script_int);
@@ -923,12 +923,12 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
     self thread function_5bd01372();
     self.var_269ad176 = 0;
     namespace_8dac58da::function_1a3aacac(self.script_int + 3);
-    self.mdl_tag clientfield::set("" + # "hash_221e597b28199323", 0);
+    self.mdl_tag clientfield::set("" + #"hash_221e597b28199323", 0);
     self notify(#"hash_327866e1223171e5");
     self notify(#"anim_deactivate");
 
     if(self flag::get(#"exploded")) {
-      self.var_af9beb09 clientfield::set("" + # "hash_11d9c3835adcaece", 0);
+      self.var_af9beb09 clientfield::set("" + #"hash_11d9c3835adcaece", 0);
       self.var_af9beb09 thread scene::play(#"hash_5ee79d3fbd128d25", "collapse_fall", self.var_af9beb09);
       self flag::clear(#"exploded");
     } else {
@@ -937,7 +937,7 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
     }
 
     foreach(satellite in self.var_547f9dd5) {
-      satellite.mdl clientfield::set("" + # "hash_20b22d2242b107cc", 0);
+      satellite.mdl clientfield::set("" + #"hash_20b22d2242b107cc", 0);
       satellite notify(#"anim_deactivate");
       satellite thread scene::play(#"hash_e47497b4ff880f5", "stop");
     }
@@ -976,8 +976,8 @@ function function_21a9e71b(success, var_14a22ccd, var_d219813c = 0) {
   }
 
   level flag::clear(#"hash_1c70d74ceb5e9aa2");
-  self.mdl_tag clientfield::set("" + # "damaged_sparks", 0);
-  self.mdl_tag clientfield::set("" + # "damaged_smoke", 0);
+  self.mdl_tag clientfield::set("" + #"damaged_sparks", 0);
+  self.mdl_tag clientfield::set("" + #"damaged_smoke", 0);
 
   if(!var_d219813c) {
     level flag::clear(#"hash_5dce120a8e013b48");
@@ -1208,16 +1208,16 @@ function function_2ecb6786() {
 function function_b2d9913a() {
   foreach(control_point in level.var_cc43b632) {
     if(isDefined(control_point.mdl_tag)) {
-      control_point.mdl_tag clientfield::set("<dev string:x248>" + # "hash_221e597b28199323", 0);
-      control_point.mdl_tag clientfield::set("<dev string:x248>" + # "hash_48cdaba6cfee3ee8", 1);
+      control_point.mdl_tag clientfield::set("<dev string:x248>" + #"hash_221e597b28199323", 0);
+      control_point.mdl_tag clientfield::set("<dev string:x248>" + #"hash_48cdaba6cfee3ee8", 1);
     }
 
     satellites = struct::get_array(control_point.target, "<dev string:x24c>");
 
     foreach(satellite in satellites) {
       if(isDefined(satellite.mdl)) {
-        satellite.mdl clientfield::set("<dev string:x248>" + # "hash_20b22d2242b107cc", 0);
-        satellite.mdl clientfield::set("<dev string:x248>" + # "hash_4cf52ac8c941f331", 1);
+        satellite.mdl clientfield::set("<dev string:x248>" + #"hash_20b22d2242b107cc", 0);
+        satellite.mdl clientfield::set("<dev string:x248>" + #"hash_4cf52ac8c941f331", 1);
       }
     }
   }
@@ -1226,16 +1226,16 @@ function function_b2d9913a() {
 function function_c4d7b0f0() {
   foreach(control_point in level.var_cc43b632) {
     if(isDefined(control_point.mdl_tag)) {
-      control_point.mdl_tag clientfield::set("<dev string:x248>" + # "hash_48cdaba6cfee3ee8", 0);
-      control_point.mdl_tag clientfield::set("<dev string:x248>" + # "hash_221e597b28199323", 1);
+      control_point.mdl_tag clientfield::set("<dev string:x248>" + #"hash_48cdaba6cfee3ee8", 0);
+      control_point.mdl_tag clientfield::set("<dev string:x248>" + #"hash_221e597b28199323", 1);
     }
 
     satellites = struct::get_array(control_point.target, "<dev string:x24c>");
 
     foreach(satellite in satellites) {
       if(isDefined(satellite.mdl)) {
-        satellite.mdl clientfield::set("<dev string:x248>" + # "hash_4cf52ac8c941f331", 0);
-        satellite.mdl clientfield::set("<dev string:x248>" + # "hash_20b22d2242b107cc", 1);
+        satellite.mdl clientfield::set("<dev string:x248>" + #"hash_4cf52ac8c941f331", 0);
+        satellite.mdl clientfield::set("<dev string:x248>" + #"hash_20b22d2242b107cc", 1);
       }
     }
   }
@@ -1244,16 +1244,16 @@ function function_c4d7b0f0() {
 function function_353c005c() {
   foreach(control_point in level.var_cc43b632) {
     if(isDefined(control_point.mdl_tag)) {
-      control_point.mdl_tag clientfield::set("<dev string:x248>" + # "hash_48cdaba6cfee3ee8", 0);
-      control_point.mdl_tag clientfield::set("<dev string:x248>" + # "hash_221e597b28199323", 0);
+      control_point.mdl_tag clientfield::set("<dev string:x248>" + #"hash_48cdaba6cfee3ee8", 0);
+      control_point.mdl_tag clientfield::set("<dev string:x248>" + #"hash_221e597b28199323", 0);
     }
 
     satellites = struct::get_array(control_point.target, "<dev string:x24c>");
 
     foreach(satellite in satellites) {
       if(isDefined(satellite.mdl)) {
-        satellite.mdl clientfield::set("<dev string:x248>" + # "hash_4cf52ac8c941f331", 0);
-        satellite.mdl clientfield::set("<dev string:x248>" + # "hash_20b22d2242b107cc", 0);
+        satellite.mdl clientfield::set("<dev string:x248>" + #"hash_4cf52ac8c941f331", 0);
+        satellite.mdl clientfield::set("<dev string:x248>" + #"hash_20b22d2242b107cc", 0);
       }
     }
   }

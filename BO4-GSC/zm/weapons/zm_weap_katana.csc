@@ -18,9 +18,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + # "hero_katana_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
-  clientfield::register("allplayers", "" + # "katana_rush_postfx", 1, 1, "int", &katana_rush_postfx, 0, 1);
-  clientfield::register("allplayers", "" + # "katana_rush_sfx", 1, 1, "int", &katana_rush_sfx, 0, 1);
+  clientfield::register("toplayer", "" + #"hero_katana_vigor_postfx", 1, 1, "counter", &function_d05553c6, 0, 0);
+  clientfield::register("allplayers", "" + #"katana_rush_postfx", 1, 1, "int", &katana_rush_postfx, 0, 1);
+  clientfield::register("allplayers", "" + #"katana_rush_sfx", 1, 1, "int", &katana_rush_sfx, 0, 1);
 }
 
 function_d05553c6(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {

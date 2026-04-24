@@ -1944,9 +1944,9 @@ function function_26667466() {
           }
 
           if(level.var_cd1e3b1f === 1) {
-            level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 0);
+            level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 0);
             waitframe(1);
-            level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 1);
+            level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 1);
           }
 
           if(isDefined(level.var_a7bd1c53)) {
@@ -2520,11 +2520,11 @@ function setup_zones() {
     zone.objectiveanchor.var_8ea4667d = nodes[random_index];
 
     if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e") {
-      zone.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 1);
+      zone.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 1);
       continue;
     }
 
-    zone.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 0);
+    zone.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 0);
   }
 
   if(isDefined(level.var_d4c0ef1a) && level.var_d4c0ef1a.size > 0 || is_true(getgametypesetting(#"hash_3846b38f23c3d539"))) {
@@ -2574,9 +2574,9 @@ function function_582988d8(zone) {
     zone.objectiveanchor = function_eb82ad56(nodes[random_index].origin);
 
     if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e") {
-      zone.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 1);
+      zone.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 1);
     } else {
-      zone.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 0);
+      zone.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 0);
     }
   }
 
@@ -2648,7 +2648,7 @@ function function_f19e31a2() {
       level.var_15c1545d.objectiveanchor.origin = level.var_df7b46d1.origin;
     }
 
-    level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 2);
+    level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 2);
     wait 2;
 
     if(level.var_9b7bd0e8 === 0) {
@@ -2690,7 +2690,7 @@ function function_f19e31a2() {
       var_9f0bcfaa = trace[#"position"] + (0, 0, 8);
     }
 
-    level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 3);
+    level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 3);
 
     if(level.var_2812b9f5 == #"spawner_zm_steiner" || level.var_2812b9f5 == #"hash_acac3fe7a341329" || level.var_2812b9f5 == #"hash_43b8d4f24851653e" || level.var_2812b9f5 == #"hash_156c697af81feaf9") {
       level.boss_ai = spawnactor(level.var_2812b9f5, var_9f0bcfaa, (0, 0, 0));
@@ -2720,7 +2720,7 @@ function function_f19e31a2() {
         }
       }
 
-      level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 3);
+      level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 3);
     }
 
     if(level.var_9b7bd0e8 > 0 || is_true(level.var_e35c191f) || util::get_game_type() === #"hash_125fc0c0065c7dea") {
@@ -2742,9 +2742,9 @@ function function_f19e31a2() {
     level.var_15c1545d.is_active = 0;
 
     if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e") {
-      level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 1);
+      level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 1);
     } else {
-      level.var_15c1545d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 0);
+      level.var_15c1545d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 0);
     }
 
     level.var_df7b46d1.state = 6;
@@ -2804,9 +2804,9 @@ function function_310986be() {
       var_2f31324d.objectiveanchor = function_eb82ad56(var_2f31324d.origin);
 
       if(is_true(level.var_612d6a21) || util::get_game_type() === #"hash_75aa82b3ae89f54e") {
-        var_2f31324d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 1);
+        var_2f31324d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 1);
       } else {
-        var_2f31324d.objectiveanchor clientfield::set("" + # "hash_56a6be021662c82e", 0);
+        var_2f31324d.objectiveanchor clientfield::set("" + #"hash_56a6be021662c82e", 0);
       }
     }
 

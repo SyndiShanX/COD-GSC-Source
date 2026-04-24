@@ -11,14 +11,14 @@
 #namespace namespace_662ff671;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("actor", "" + # "hash_74382f598f4de051", 1, 1, "counter", &function_9f72eb8b, 0, 0);
-  clientfield::register("actor", "" + # "hash_b74182bd1e44a44", 1, 1, "int", &function_cdc867b2, 0, 0);
-  clientfield::register("actor", "" + # "hash_435db79c304e12a5", 1, 1, "counter", &function_f15a1018, 0, 0);
-  clientfield::register("actor", "" + # "hash_3049a409503be8a0", 1, 1, "int", &function_f471577a, 0, 0);
-  clientfield::register("actor", "" + # "hash_4460e5ee368004ed", 1, 1, "int", &function_dea39d5a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_60e4230d63925ac1", 1, 1, "int", &function_60886116, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6d05bbcab1912e5a", 1, 1, "int", &function_691412b4, 0, 0);
-  clientfield::register("world", "" + # "console_stream", 1, 1, "int", &function_a2e43552, 0, 0);
+  clientfield::register("actor", "" + #"hash_74382f598f4de051", 1, 1, "counter", &function_9f72eb8b, 0, 0);
+  clientfield::register("actor", "" + #"hash_b74182bd1e44a44", 1, 1, "int", &function_cdc867b2, 0, 0);
+  clientfield::register("actor", "" + #"hash_435db79c304e12a5", 1, 1, "counter", &function_f15a1018, 0, 0);
+  clientfield::register("actor", "" + #"hash_3049a409503be8a0", 1, 1, "int", &function_f471577a, 0, 0);
+  clientfield::register("actor", "" + #"hash_4460e5ee368004ed", 1, 1, "int", &function_dea39d5a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_60e4230d63925ac1", 1, 1, "int", &function_60886116, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6d05bbcab1912e5a", 1, 1, "int", &function_691412b4, 0, 0);
+  clientfield::register("world", "" + #"console_stream", 1, 1, "int", &function_a2e43552, 0, 0);
 }
 
 function function_a2e43552(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

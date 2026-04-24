@@ -30,9 +30,9 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_5808d23568bc787", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_50dd9d9bf6b71a00", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_464c0289eeaff2a8", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_5808d23568bc787", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_50dd9d9bf6b71a00", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_464c0289eeaff2a8", 1, 1, "int");
 }
 
 function init_quests() {
@@ -235,7 +235,7 @@ function function_667bc5b7() {
 function function_a7cf8b16(a_ents) {
   level endon(#"end_game", #"hash_bd7f36c4031280d");
   var_e82701bb = a_ents[#"hash_4b65a37172a01802"];
-  var_e82701bb clientfield::set("" + # "hash_5808d23568bc787", 1);
+  var_e82701bb clientfield::set("" + #"hash_5808d23568bc787", 1);
   var_e82701bb setCanDamage(1);
   var_e82701bb.health = 1000;
   var_22a80ca2 = getent("col_ronnie_raygun", "targetname");
@@ -243,7 +243,7 @@ function function_a7cf8b16(a_ents) {
 
   while(var_e82701bb.health > 0) {
     s_waitresult = var_e82701bb waittill(#"damage");
-    var_e82701bb clientfield::increment("" + # "hash_50dd9d9bf6b71a00", 1);
+    var_e82701bb clientfield::increment("" + #"hash_50dd9d9bf6b71a00", 1);
 
     if(s_waitresult.amount > 0) {
       var_e82701bb.health -= s_waitresult.amount;
@@ -252,8 +252,8 @@ function function_a7cf8b16(a_ents) {
     }
   }
 
-  var_e82701bb clientfield::set("" + # "hash_464c0289eeaff2a8", 1);
-  var_e82701bb clientfield::set("" + # "hash_5808d23568bc787", 0);
+  var_e82701bb clientfield::set("" + #"hash_464c0289eeaff2a8", 1);
+  var_e82701bb clientfield::set("" + #"hash_5808d23568bc787", 0);
   var_22a80ca2 connectpaths();
 
   if(isDefined(var_22a80ca2)) {

@@ -27,7 +27,7 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("toplayer", "tomahawk_in_use", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "upgraded_tomahawk_in_use", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"upgraded_tomahawk_in_use", 1, 1, "int");
   clientfield::register("scriptmover", "play_tomahawk_fx", 1, 2, "int");
   clientfield::register("actor", "play_tomahawk_hit_sound", 1, 1, "int");
   clientfield::register("toplayer", "tomahawk_rumble", 1, 2, "counter");

@@ -44,7 +44,7 @@
 #namespace archetype_zod_companion;
 
 function autoexec main() {
-  clientfield::register("allplayers", "" + # "being_robot_revived", 24000, 1, "int");
+  clientfield::register("allplayers", "" + #"being_robot_revived", 24000, 1, "int");
   spawner::add_archetype_spawn_function(#"zod_companion", &zodcompanionbehavior::archetypezodcompanionblackboardinit);
   spawner::add_archetype_spawn_function(#"zod_companion", &zodcompanionserverutils::zodcompanionsoldierspawnsetup);
   zodcompanioninterface::registerzodcompanioninterfaceattributes();
@@ -972,7 +972,7 @@ function zod_companion_revive_player(player) {
     }
 
     wait 0.67;
-    player clientfield::set("" + # "being_robot_revived", 1);
+    player clientfield::set("" + #"being_robot_revived", 1);
 
     if(!is_true(player.var_b895a3ff)) {
       player val::set(#"zod_revived", "allow_movement", 0);
@@ -1075,7 +1075,7 @@ function zod_companion_revive_cleanup(player) {
     }
 
     player.var_c6a6f334 = 0;
-    player clientfield::set("" + # "being_robot_revived", 0);
+    player clientfield::set("" + #"being_robot_revived", 0);
     player val::reset(#"zod_revived", "allow_movement");
   }
 
@@ -1935,7 +1935,7 @@ function function_fc7a4f48(goalpos, var_f36009e2 = 0) {
 }
 
 function private function_9660ee54() {
-  var_17b7891d = "8f51a1643370f5e" + # "hash_27c2dda34d73743a";
+  var_17b7891d = "8f51a1643370f5e" + #"hash_27c2dda34d73743a";
   self notify(var_17b7891d);
   self endon(var_17b7891d);
   level endon(#"end_game");

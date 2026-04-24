@@ -140,7 +140,7 @@ function create_damage_wave(damage, attacker) {
       if(!isDefined(enemy) || !isDefined(enemy.origin)) {
         continue;
       }
-      if(!cybercom::targetisvalid(enemy, weapon)) {
+      if(!cybercom::targetisValid(enemy, weapon)) {
         continue;
       }
       enemy notify("hash_f8c5dd60", weapon, attacker);

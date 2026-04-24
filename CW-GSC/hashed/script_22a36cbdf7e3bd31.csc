@@ -13,16 +13,16 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_18735ccb22cdefb5", 1, 1, "int", &function_d9576449, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1df73c94e87e145c", 1, 1, "int", &function_7d5ce4d9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_615d25f799b80ed7", 1, 1, "int", &function_672b008a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7e481cd16f021d79", 1, 1, "int", &function_5402e221, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_acf98ff6d976e10", 1, 1, "int", &function_1a90da2b, 0, 0);
-  clientfield::register("world", "" + # "hash_58dd30074d399de5", 1, 1, "int", &function_8772dde6, 0, 0);
-  clientfield::register("world", "" + # "hash_195f6fa038980aca", 1, 1, "int", &function_38a832d2, 0, 0);
-  clientfield::register("actor", "" + # "hash_3d14472eb7838c71", 1, 1, "int", &function_33d52b21, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_734d80bbfc2cb595", 1, 2, "counter", &function_ccd8d6e0, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_802934d416ac981", 1, 1, "int", &function_6b8c4c36, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_18735ccb22cdefb5", 1, 1, "int", &function_d9576449, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1df73c94e87e145c", 1, 1, "int", &function_7d5ce4d9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_615d25f799b80ed7", 1, 1, "int", &function_672b008a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7e481cd16f021d79", 1, 1, "int", &function_5402e221, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_acf98ff6d976e10", 1, 1, "int", &function_1a90da2b, 0, 0);
+  clientfield::register("world", "" + #"hash_58dd30074d399de5", 1, 1, "int", &function_8772dde6, 0, 0);
+  clientfield::register("world", "" + #"hash_195f6fa038980aca", 1, 1, "int", &function_38a832d2, 0, 0);
+  clientfield::register("actor", "" + #"hash_3d14472eb7838c71", 1, 1, "int", &function_33d52b21, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_734d80bbfc2cb595", 1, 2, "counter", &function_ccd8d6e0, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_802934d416ac981", 1, 1, "int", &function_6b8c4c36, 0, 0);
 }
 
 function function_d9576449(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

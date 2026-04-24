@@ -26,8 +26,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_6a9eb737488c81c7", 11000, 1, "counter");
-  clientfield::register("actor", "" + # "hash_13a6ddf6358f814", 11000, 1, "int");
+  clientfield::register("actor", "" + #"hash_6a9eb737488c81c7", 11000, 1, "counter");
+  clientfield::register("actor", "" + #"hash_13a6ddf6358f814", 11000, 1, "int");
   level.var_1765ad79 = 0;
   level.var_c23218c7 = [];
   namespace_1b527536::function_36e0540e(#"toxic_growth", 1, 30, #"field_upgrade_toxic_growth_item_sr");
@@ -118,7 +118,7 @@ function private function_ef5cde9f(str_weapon_name) {
 
 function on_ai_killed(params) {
   if(params.weapon.name === #"toxic_growth_5" && is_true(self.var_d0de7f41) && params.einflictor.weapon === params.weapon) {
-    self clientfield::increment("" + # "hash_6a9eb737488c81c7", 1);
+    self clientfield::increment("" + #"hash_6a9eb737488c81c7", 1);
     var_a0722b6e = getaiteamarray(level.zombie_team);
     var_a0722b6e = arraysortclosest(var_a0722b6e, self.origin, undefined, 0, 64);
 
@@ -328,7 +328,7 @@ function function_9ed9a337() {
   self.var_9258f88f = undefined;
   self.var_19ec2cc3 = undefined;
   self.var_10552fac = undefined;
-  self clientfield::set("" + # "hash_13a6ddf6358f814", 0);
+  self clientfield::set("" + #"hash_13a6ddf6358f814", 0);
   self.var_207045e5 = gettime();
 }
 
@@ -370,7 +370,7 @@ function function_5276a443(var_9055f9a9, var_f968837d, var_6254bcaf, var_8689013
   var_6b140fb2 = 1;
   self.var_9258f88f = var_f968837d.owner;
   weapon = var_f968837d.weapon;
-  self clientfield::set("" + # "hash_13a6ddf6358f814", 1);
+  self clientfield::set("" + #"hash_13a6ddf6358f814", 1);
 
   if(isDefined(var_86890135)) {
     if(is_true(self.var_7b0667d9) || is_true(self.var_b736fc8b)) {

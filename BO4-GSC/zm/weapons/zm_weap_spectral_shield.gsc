@@ -60,22 +60,22 @@ __init__() {
   }
 
   level.var_c7626f2a = [];
-  clientfield::register("allplayers", "" + # "afterlife_vision_play", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "afterlife_window", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "afterlife_entity_visibility", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "spectral_key_beam_fire", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "spectral_key_beam_flash", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"afterlife_vision_play", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"afterlife_window", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"afterlife_entity_visibility", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"spectral_key_beam_fire", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"spectral_key_beam_flash", 1, 2, "int");
   n_bits = getminbitcountfornum(4);
-  clientfield::register("actor", "" + # "zombie_spectral_key_stun", 1, n_bits, "int");
-  clientfield::register("vehicle", "" + # "zombie_spectral_key_stun", 1, n_bits, "int");
-  clientfield::register("scriptmover", "" + # "zombie_spectral_key_stun", 1, n_bits, "int");
-  clientfield::register("scriptmover", "" + # "spectral_key_essence", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_7663ae2eb866d2eb", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "spectral_key_charging", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "spectral_shield_blast", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "shield_crafting_fx", 1, 1, "counter");
-  clientfield::register("actor", "" + # "spectral_blast_death", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "zombie_spectral_heal", 1, 1, "counter");
+  clientfield::register("actor", "" + #"zombie_spectral_key_stun", 1, n_bits, "int");
+  clientfield::register("vehicle", "" + #"zombie_spectral_key_stun", 1, n_bits, "int");
+  clientfield::register("scriptmover", "" + #"zombie_spectral_key_stun", 1, n_bits, "int");
+  clientfield::register("scriptmover", "" + #"spectral_key_essence", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_7663ae2eb866d2eb", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"spectral_key_charging", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"spectral_shield_blast", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"shield_crafting_fx", 1, 1, "counter");
+  clientfield::register("actor", "" + #"spectral_blast_death", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"zombie_spectral_heal", 1, 1, "counter");
   namespace_9ff9f642::register_slowdown(#"hash_119644e9a557f4e9", 0.5, 1);
   callback::on_ai_killed(&function_90a37da4);
   callback::on_connect(&function_70072647);
@@ -176,8 +176,8 @@ function_4173ee30() {
     }
   }
 
-  if(!self clientfield::get_to_player("" + # "afterlife_window")) {
-    self clientfield::set_to_player("" + # "afterlife_window", 1);
+  if(!self clientfield::get_to_player("" + #"afterlife_window")) {
+    self clientfield::set_to_player("" + #"afterlife_window", 1);
   }
 
   if(w_current == level.var_4e845c84 || w_current == level.var_58e17ce3) {
@@ -185,7 +185,7 @@ function_4173ee30() {
       return;
     }
 
-    if(self clientfield::get("" + # "spectral_key_charging")) {
+    if(self clientfield::get("" + #"spectral_key_charging")) {
       zm_hero_weapon::show_hint(w_current, #"hash_7c3a1b7b56c4fac1");
     }
 
@@ -215,8 +215,8 @@ function_401e4768() {
     self.var_8d49716e = undefined;
   }
 
-  if(self clientfield::get_to_player("" + # "afterlife_window")) {
-    self clientfield::set_to_player("" + # "afterlife_window", 0);
+  if(self clientfield::get_to_player("" + #"afterlife_window")) {
+    self clientfield::set_to_player("" + #"afterlife_window", 0);
   }
 
   self notify(#"hash_1b7c4bada7fa6175");
@@ -230,8 +230,8 @@ function_401e4768() {
 }
 
 function_90a37da4(s_params) {
-  if(self clientfield::get("" + # "zombie_spectral_key_stun")) {
-    self clientfield::set("" + # "zombie_spectral_key_stun", 0);
+  if(self clientfield::get("" + #"zombie_spectral_key_stun")) {
+    self clientfield::set("" + #"zombie_spectral_key_stun", 0);
   }
 
   if(isPlayer(s_params.eattacker) && (s_params.weapon == level.var_d7e67022 || s_params.weapon == level.var_637136f3 || s_params.weapon == level.var_4e845c84 || s_params.weapon == level.var_58e17ce3)) {
@@ -244,7 +244,7 @@ function_90a37da4(s_params) {
 }
 
 function_a8b4c2a7(einflictor, eattacker, idamage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(self clientfield::get("" + # "zombie_spectral_key_stun") && meansofdeath !== "MOD_ELECTROCUTED") {
+  if(self clientfield::get("" + #"zombie_spectral_key_stun") && meansofdeath !== "MOD_ELECTROCUTED") {
     return 0;
   }
 
@@ -259,8 +259,8 @@ function_a8b4c2a7(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
   if(isPlayer(eattacker)) {
     if(self.animname === "zombie_eaten" && !(isDefined(self.allowdeath) && self.allowdeath) && self.health <= 1) {
       if((weapon == level.var_d7e67022 || weapon == level.var_637136f3) && meansofdeath === "MOD_ELECTROCUTED") {
-        if(self clientfield::get("" + # "zombie_spectral_key_stun")) {
-          self clientfield::set("" + # "zombie_spectral_key_stun", 0);
+        if(self clientfield::get("" + #"zombie_spectral_key_stun")) {
+          self clientfield::set("" + #"zombie_spectral_key_stun", 0);
         }
 
         eattacker thread function_b952c1b(self);
@@ -275,7 +275,7 @@ function_b952c1b(ai_zombie) {
   self endon(#"disconnect");
   v_pos = ai_zombie getcentroid();
   var_88f24b00 = util::spawn_model("tag_origin", v_pos + (0, 0, 12), ai_zombie.angles);
-  var_88f24b00 clientfield::set("" + # "spectral_key_essence", 1);
+  var_88f24b00 clientfield::set("" + #"spectral_key_essence", 1);
   var_88f24b00 playSound(#"zmb_sq_souls_release");
   n_dist = distance(var_88f24b00.origin, self function_7eae6d92(var_88f24b00));
   n_move_time = n_dist / 1200;
@@ -300,12 +300,12 @@ function_b952c1b(ai_zombie) {
     }
   }
 
-  var_88f24b00 clientfield::set("" + # "spectral_key_essence", 0);
+  var_88f24b00 clientfield::set("" + #"spectral_key_essence", 0);
   util::wait_network_frame();
   var_88f24b00 delete();
   wait 0.1;
   self playsoundontag(#"zmb_sq_souls_impact", "tag_weapon_right");
-  self clientfield::increment("" + # "hash_7663ae2eb866d2eb");
+  self clientfield::increment("" + #"hash_7663ae2eb866d2eb");
   self.var_9fd623ed = math::clamp(self.var_9fd623ed + 1, 0, self.var_f7c822b5 * 3);
   self thread function_804309c();
   self notify(#"hash_22a49f7903e394a5");
@@ -358,11 +358,11 @@ function_5f950378() {
 
   while(true) {
     s_result = self waittill(#"hash_22a49f7903e394a5", #"hash_1a22e1dd781f58d6", #"weapon_change", #"weapon_change_complete");
-    var_74e62fc6 = self clientfield::get("" + # "spectral_key_charging");
+    var_74e62fc6 = self clientfield::get("" + #"spectral_key_charging");
 
     if((s_result._notify == "weapon_change" || s_result._notify == "weapon_change_complete") && !(isDefined(function_98890cd8(s_result.weapon)) && function_98890cd8(s_result.weapon))) {
       if(var_74e62fc6 != 0) {
-        self clientfield::set("" + # "spectral_key_charging", 0);
+        self clientfield::set("" + #"spectral_key_charging", 0);
       }
 
       continue;
@@ -370,15 +370,15 @@ function_5f950378() {
 
     if(self.var_9fd623ed >= var_18138fac) {
       if(var_74e62fc6 != 2) {
-        self clientfield::set("" + # "spectral_key_charging", 2);
+        self clientfield::set("" + #"spectral_key_charging", 2);
         self thread zm_audio::create_and_play_dialog(#"shield", #"charged", undefined, 1);
       }
     } else if(self.var_9fd623ed >= 3) {
       if(var_74e62fc6 != 1) {
-        self clientfield::set("" + # "spectral_key_charging", 1);
+        self clientfield::set("" + #"spectral_key_charging", 1);
       }
     } else if(var_74e62fc6 != 0) {
-      self clientfield::set("" + # "spectral_key_charging", 0);
+      self clientfield::set("" + #"spectral_key_charging", 0);
     }
 
     if(s_result._notify === #"hash_1a22e1dd781f58d6") {
@@ -391,8 +391,8 @@ function_cb1c46b8(b_enabled) {
   self endon(#"death");
 
   if(isDefined(b_enabled) && b_enabled) {
-    if(!self clientfield::get("" + # "afterlife_vision_play")) {
-      self clientfield::set("" + # "afterlife_vision_play", 1);
+    if(!self clientfield::get("" + #"afterlife_vision_play")) {
+      self clientfield::set("" + #"afterlife_vision_play", 1);
       self.snd_ent = spawn("script_origin", self.origin);
       self.snd_ent linkto(self);
       self.snd_ent playLoopSound(#"hash_197dd6d18afad004");
@@ -401,8 +401,8 @@ function_cb1c46b8(b_enabled) {
     return;
   }
 
-  if(self clientfield::get("" + # "afterlife_vision_play")) {
-    self clientfield::set("" + # "afterlife_vision_play", 0);
+  if(self clientfield::get("" + #"afterlife_vision_play")) {
+    self clientfield::set("" + #"afterlife_vision_play", 0);
   }
 
   if(isDefined(self.snd_ent)) {
@@ -413,12 +413,12 @@ function_cb1c46b8(b_enabled) {
 
 function_16dd8932() {
   level flag::wait_till("start_zombie_round_logic");
-  self clientfield::set("" + # "afterlife_entity_visibility", 1);
+  self clientfield::set("" + #"afterlife_entity_visibility", 1);
 }
 
 melee_power(weapon) {
   if(self.var_9fd623ed >= 3 && (weapon == level.var_4e845c84 || weapon == level.var_58e17ce3)) {
-    self clientfield::increment("" + # "spectral_shield_blast", 1);
+    self clientfield::increment("" + #"spectral_shield_blast", 1);
     self playSound(#"hash_4fa7a7bff648310f");
     self.var_9fd623ed = math::clamp(self.var_9fd623ed - 3, 0, self.var_f7c822b5 * 3);
     self thread function_804309c();
@@ -492,7 +492,7 @@ function_b18688c9() {
 set_player_health() {
   if(self.health < self.var_66cb03ad) {
     self.health = self.var_66cb03ad;
-    self clientfield::increment("" + # "zombie_spectral_heal", 1);
+    self clientfield::increment("" + #"zombie_spectral_heal", 1);
   }
 }
 
@@ -702,7 +702,7 @@ zombie_knockdown(player, gib) {
   }
 
   if(self.health < 15 && self.zm_ai_category !== #"popcorn") {
-    self clientfield::set("" + # "spectral_blast_death", 1);
+    self clientfield::set("" + #"spectral_blast_death", 1);
   }
 
   self dodamage(15, player.origin, player, player, undefined, "MOD_IMPACT", 0, player getcurrentweapon());
@@ -727,7 +727,7 @@ function_68871817(e_attacker) {
     }
 
     if(self.zm_ai_category !== #"popcorn") {
-      self clientfield::set("" + # "spectral_blast_death", 1);
+      self clientfield::set("" + #"spectral_blast_death", 1);
     }
 
     self dodamage(self.health + 666, e_attacker.origin, e_attacker, e_attacker, undefined, "MOD_IMPACT", 0, w_damage);
@@ -759,8 +759,8 @@ function_1b33fb6d(var_155e1cdd) {
       continue;
     }
 
-    self clientfield::set("" + # "spectral_key_beam_fire", 1);
-    self clientfield::set("" + # "spectral_key_beam_flash", 1);
+    self clientfield::set("" + #"spectral_key_beam_fire", 1);
+    self clientfield::set("" + #"spectral_key_beam_flash", 1);
     self thread function_d1a7390b(var_155e1cdd);
     self thread function_423e10ee();
 
@@ -773,8 +773,8 @@ function_1b33fb6d(var_155e1cdd) {
     }
 
     self.var_f1b20bef = undefined;
-    self clientfield::set("" + # "spectral_key_beam_fire", 0);
-    self clientfield::set("" + # "spectral_key_beam_flash", 0);
+    self clientfield::set("" + #"spectral_key_beam_fire", 0);
+    self clientfield::set("" + #"spectral_key_beam_flash", 0);
     self notify(#"hash_7a5ea8904c04f16b");
     self thread function_804309c();
 
@@ -790,8 +790,8 @@ function_dc44932e(var_c34665fc) {
   if(var_c34665fc == #"hash_1b7c4bada7fa6175" || var_c34665fc == "weapon_change") {
     self.var_f1b20bef = undefined;
     self.var_4154aa8f = undefined;
-    self clientfield::set("" + # "spectral_key_beam_fire", 0);
-    self clientfield::set("" + # "spectral_key_beam_flash", 0);
+    self clientfield::set("" + #"spectral_key_beam_fire", 0);
+    self clientfield::set("" + #"spectral_key_beam_flash", 0);
     self notify(#"hash_7a5ea8904c04f16b");
   }
 }
@@ -996,10 +996,10 @@ function_35d74d73(e_attacker) {
   self ai::stun();
   self.instakill_func = &function_6472c628;
 
-  if(!self clientfield::get("" + # "zombie_spectral_key_stun")) {
+  if(!self clientfield::get("" + #"zombie_spectral_key_stun")) {
     var_21c1ba1 = e_attacker getentitynumber();
-    self clientfield::set("" + # "zombie_spectral_key_stun", var_21c1ba1 + 1);
-    e_attacker clientfield::set("" + # "spectral_key_beam_flash", 2);
+    self clientfield::set("" + #"zombie_spectral_key_stun", var_21c1ba1 + 1);
+    e_attacker clientfield::set("" + #"spectral_key_beam_flash", 2);
 
     if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
       bhtnactionstartevent(self, "electrocute");
@@ -1020,15 +1020,15 @@ function_35d74d73(e_attacker) {
     self.is_floating = undefined;
   }
 
-  var_d64818ae = e_attacker clientfield::get("" + # "spectral_key_beam_flash");
+  var_d64818ae = e_attacker clientfield::get("" + #"spectral_key_beam_flash");
 
   if(e_attacker attackButtonPressed() && var_d64818ae === 2) {
-    e_attacker clientfield::set("" + # "spectral_key_beam_flash", 1);
+    e_attacker clientfield::set("" + #"spectral_key_beam_flash", 1);
   }
 
   if(isalive(self)) {
-    if(self clientfield::get("" + # "zombie_spectral_key_stun")) {
-      self clientfield::set("" + # "zombie_spectral_key_stun", 0);
+    if(self clientfield::get("" + #"zombie_spectral_key_stun")) {
+      self clientfield::set("" + #"zombie_spectral_key_stun", 0);
     }
 
     self.var_5bf7575e = 0;
@@ -1057,25 +1057,25 @@ function_986701ac(e_attacker) {
 
   self.var_5bf7575e = 1;
 
-  if(!self clientfield::get("" + # "zombie_spectral_key_stun")) {
+  if(!self clientfield::get("" + #"zombie_spectral_key_stun")) {
     var_21c1ba1 = e_attacker getentitynumber();
-    self clientfield::set("" + # "zombie_spectral_key_stun", var_21c1ba1 + 1);
-    e_attacker clientfield::set("" + # "spectral_key_beam_flash", 2);
+    self clientfield::set("" + #"zombie_spectral_key_stun", var_21c1ba1 + 1);
+    e_attacker clientfield::set("" + #"spectral_key_beam_flash", 2);
   }
 
   while(e_attacker.var_f1b20bef === self && isalive(self)) {
     waitframe(1);
   }
 
-  var_d64818ae = e_attacker clientfield::get("" + # "spectral_key_beam_flash");
+  var_d64818ae = e_attacker clientfield::get("" + #"spectral_key_beam_flash");
 
   if(e_attacker attackButtonPressed() && var_d64818ae === 2) {
-    e_attacker clientfield::set("" + # "spectral_key_beam_flash", 1);
+    e_attacker clientfield::set("" + #"spectral_key_beam_flash", 1);
   }
 
   if(isDefined(self)) {
-    if(self clientfield::get("" + # "zombie_spectral_key_stun")) {
-      self clientfield::set("" + # "zombie_spectral_key_stun", 0);
+    if(self clientfield::get("" + #"zombie_spectral_key_stun")) {
+      self clientfield::set("" + #"zombie_spectral_key_stun", 0);
     }
 
     self.var_5bf7575e = 0;
@@ -1107,25 +1107,25 @@ function_a370d183(e_attacker) {
   self.var_5bf7575e = 1;
   self ai::stun();
 
-  if(!self clientfield::get("" + # "zombie_spectral_key_stun")) {
+  if(!self clientfield::get("" + #"zombie_spectral_key_stun")) {
     var_21c1ba1 = e_attacker getentitynumber();
-    self clientfield::set("" + # "zombie_spectral_key_stun", var_21c1ba1 + 1);
-    e_attacker clientfield::set("" + # "spectral_key_beam_flash", 2);
+    self clientfield::set("" + #"zombie_spectral_key_stun", var_21c1ba1 + 1);
+    e_attacker clientfield::set("" + #"spectral_key_beam_flash", 2);
   }
 
   while(e_attacker.var_f1b20bef === self && isalive(self)) {
     waitframe(1);
   }
 
-  var_d64818ae = e_attacker clientfield::get("" + # "spectral_key_beam_flash");
+  var_d64818ae = e_attacker clientfield::get("" + #"spectral_key_beam_flash");
 
   if(e_attacker attackButtonPressed() && var_d64818ae === 2) {
-    e_attacker clientfield::set("" + # "spectral_key_beam_flash", 1);
+    e_attacker clientfield::set("" + #"spectral_key_beam_flash", 1);
   }
 
   if(isDefined(self)) {
-    if(self clientfield::get("" + # "zombie_spectral_key_stun")) {
-      self clientfield::set("" + # "zombie_spectral_key_stun", 0);
+    if(self clientfield::get("" + #"zombie_spectral_key_stun")) {
+      self clientfield::set("" + #"zombie_spectral_key_stun", 0);
     }
 
     self.var_5bf7575e = undefined;
@@ -1198,7 +1198,7 @@ function_d0b3a2c6() {
       s_progress = self waittill(#"hash_6db03c91467a21f5");
 
       if(isDefined(s_progress.b_completed) && s_progress.b_completed) {
-        self.stub.model clientfield::increment("" + # "shield_crafting_fx");
+        self.stub.model clientfield::increment("" + #"shield_crafting_fx");
       }
     }
   }

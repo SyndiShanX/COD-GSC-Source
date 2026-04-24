@@ -899,7 +899,7 @@ clear_timer() {
 
 register(name, limit_type, limit, enable_func, disable_func, validation_func, activation_func) {
   assert(isDefined(name), "<dev string:x1f4>");
-  assert(#"none" != name, "<dev string:x21c>" + # "none" + "<dev string:x240>");
+  assert(#"none" != name, "<dev string:x21c>" + #"none" + "<dev string:x240>");
   assert(!isDefined(level.bgb[name]), "<dev string:x279>" + name + "<dev string:x292>");
   assert(isDefined(limit_type), "<dev string:x279>" + name + "<dev string:x2b2>");
   assert(isDefined(limit), "<dev string:x279>" + name + "<dev string:x2d2>");

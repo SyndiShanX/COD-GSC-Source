@@ -36,17 +36,17 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + # "zombie_scepter_melee_impact", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "zombie_scepter_melee", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "zombie_scepter_heal", 1, 1, "counter");
-  clientfield::register("actor", "" + # "zombie_scepter_stun", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "zombie_scepter_stun", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "beacon_fx", 1, 1, "int");
-  clientfield::register("allplayers", "" + # "skull_turret_beam_fire", 1, 2, "int");
-  clientfield::register("allplayers", "" + # "scepter_beam_flash", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "hero_scepter_vigor_postfx", 1, 1, "counter");
-  clientfield::register("allplayers", "" + # "zombie_scepter_revive", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "scepter_rumble", 1, 3, "counter");
+  clientfield::register("allplayers", "" + #"zombie_scepter_melee_impact", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"zombie_scepter_melee", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"zombie_scepter_heal", 1, 1, "counter");
+  clientfield::register("actor", "" + #"zombie_scepter_stun", 1, 1, "int");
+  clientfield::register("vehicle", "" + #"zombie_scepter_stun", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"beacon_fx", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"skull_turret_beam_fire", 1, 2, "int");
+  clientfield::register("allplayers", "" + #"scepter_beam_flash", 1, 2, "int");
+  clientfield::register("toplayer", "" + #"hero_scepter_vigor_postfx", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"zombie_scepter_revive", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"scepter_rumble", 1, 3, "counter");
   level.hero_weapon[#"scepter"][0] = getweapon(#"hero_scepter_lv1");
   level.hero_weapon[#"scepter"][1] = getweapon(#"hero_scepter_lv2");
   level.hero_weapon[#"scepter"][2] = getweapon(#"hero_scepter_lv3");
@@ -89,8 +89,8 @@ function_63e57124() {
 
     if(wpn_prev == level.hero_weapon[#"scepter"][0] || wpn_prev == level.hero_weapon[#"scepter"][1] || wpn_prev == level.hero_weapon[#"scepter"][2]) {
       self thread scepter_rumble(1);
-      self clientfield::set("" + # "skull_turret_beam_fire", 0);
-      self clientfield::set("" + # "scepter_beam_flash", 0);
+      self clientfield::set("" + #"skull_turret_beam_fire", 0);
+      self clientfield::set("" + #"scepter_beam_flash", 0);
       self notify(#"stop_damage");
 
       if(wpn_prev == level.hero_weapon[#"scepter"][1]) {
@@ -138,8 +138,8 @@ function_63e57124() {
 
 function_304a3c9b(var_c34665fc) {
   if(var_c34665fc === "hero_weapon_power_off" || var_c34665fc === "player_downed") {
-    self clientfield::set("" + # "skull_turret_beam_fire", 0);
-    self clientfield::set("" + # "scepter_beam_flash", 0);
+    self clientfield::set("" + #"skull_turret_beam_fire", 0);
+    self clientfield::set("" + #"scepter_beam_flash", 0);
     self.var_1de56cc8 = undefined;
     self notify(#"stop_damage");
   }
@@ -165,8 +165,8 @@ function_4521ac7e(w_curr, n_lvl) {
       continue;
     }
 
-    self clientfield::set("" + # "skull_turret_beam_fire", n_lvl);
-    self clientfield::set("" + # "scepter_beam_flash", n_lvl);
+    self clientfield::set("" + #"skull_turret_beam_fire", n_lvl);
+    self clientfield::set("" + #"scepter_beam_flash", n_lvl);
     self.var_1de56cc8 = 1;
     self thread function_be8ae52f(w_curr);
     self notify(#"ammo_reduction", {
@@ -188,8 +188,8 @@ function_4521ac7e(w_curr, n_lvl) {
     }
     while(zm_utility::is_player_valid(self) && self attackButtonPressed() && !self fragButtonPressed());
 
-    self clientfield::set("" + # "skull_turret_beam_fire", 0);
-    self clientfield::set("" + # "scepter_beam_flash", 0);
+    self clientfield::set("" + #"skull_turret_beam_fire", 0);
+    self clientfield::set("" + #"scepter_beam_flash", 0);
     self.var_1de56cc8 = undefined;
     self notify(#"stop_damage");
   }
@@ -215,7 +215,7 @@ function_4493c71b(weapon, n_lvl = 1) {
 
 function_eae0296b(str_level, b_postfx = 0) {
   if(b_postfx) {
-    self clientfield::increment_to_player("" + # "hero_scepter_vigor_postfx");
+    self clientfield::increment_to_player("" + #"hero_scepter_vigor_postfx");
   }
 
   self.var_a0a1475c = 1;
@@ -318,7 +318,7 @@ melee_zombies(weapon = level.weaponnone) {
   view_pos = self getweaponmuzzlepoint();
   forward_view_angles = self getweaponforwarddir();
   var_537e767d = 130 * 130;
-  self clientfield::increment("" + # "zombie_scepter_melee");
+  self clientfield::increment("" + #"zombie_scepter_melee");
   a_e_targets = zm_hero_weapon::function_7c3681f7();
   var_f3edb3a6 = 0;
 
@@ -349,7 +349,7 @@ melee_zombies(weapon = level.weaponnone) {
     e_target.chopped = 1;
 
     if(!var_f3edb3a6) {
-      self clientfield::increment("" + # "zombie_scepter_melee_impact");
+      self clientfield::increment("" + #"zombie_scepter_melee_impact");
       var_f3edb3a6 = 1;
     }
 
@@ -606,9 +606,9 @@ reset_override(s_params) {
     wait 0.2;
     e_revivee.var_fbc66a96 = undefined;
 
-    if(e_revivee clientfield::get("" + # "zombie_scepter_revive")) {
+    if(e_revivee clientfield::get("" + #"zombie_scepter_revive")) {
       if(isDefined(e_revivee)) {
-        e_revivee clientfield::set("" + # "zombie_scepter_revive", 0);
+        e_revivee clientfield::set("" + #"zombie_scepter_revive", 0);
       }
     }
   }
@@ -620,10 +620,10 @@ function_37946a1d(s_params) {
       continue;
     }
 
-    player.n_level = player clientfield::get("" + # "scepter_beam_flash");
+    player.n_level = player clientfield::get("" + #"scepter_beam_flash");
 
     if(player.n_level) {
-      player clientfield::set("" + # "scepter_beam_flash", 0);
+      player clientfield::set("" + #"scepter_beam_flash", 0);
     }
   }
 
@@ -631,7 +631,7 @@ function_37946a1d(s_params) {
 
   foreach(player in level.players) {
     if(zm_utility::is_player_valid(player) && isDefined(player.var_1de56cc8) && player.var_1de56cc8 && isDefined(player.n_level)) {
-      player clientfield::set("" + # "scepter_beam_flash", player.n_level);
+      player clientfield::set("" + #"scepter_beam_flash", player.n_level);
     }
   }
 }
@@ -697,7 +697,7 @@ function_1f6199f0(e_reviver) {
     if(self.health < self.var_66cb03ad) {
       n_health_regen = int(self.health + 5);
       self.health = math::clamp(n_health_regen, 1, self.var_66cb03ad);
-      self clientfield::increment("" + # "zombie_scepter_heal", 1);
+      self clientfield::increment("" + #"zombie_scepter_heal", 1);
       e_reviver.var_ec334996 += 1;
     }
   }
@@ -717,7 +717,7 @@ function_fa095da6(e_reviver) {
     self.var_84280a99 = e_reviver;
     self.var_4fc8bf2a = 1;
     self.var_fbc66a96 = 1;
-    self clientfield::set("" + # "zombie_scepter_revive", 1);
+    self clientfield::set("" + #"zombie_scepter_revive", 1);
   }
 }
 
@@ -756,11 +756,11 @@ function_97429d68(n_time = 5) {
     self thread namespace_9ff9f642::slowdown(#"hash_6c580993aa401a5b");
   }
 
-  self clientfield::set("" + # "zombie_scepter_stun", 1);
+  self clientfield::set("" + #"zombie_scepter_stun", 1);
   wait n_time;
 
   if(!(isDefined(self.var_693f4e69) && self.var_693f4e69)) {
-    self clientfield::set("" + # "zombie_scepter_stun", 0);
+    self clientfield::set("" + #"zombie_scepter_stun", 0);
   }
 
   self.var_25cb9682 = 0;
@@ -787,7 +787,7 @@ function_75e6e51c(n_time = 5, e_attacker) {
     self thread namespace_9ff9f642::slowdown(#"hash_6c580993aa401a5b");
   }
 
-  self clientfield::set("" + # "zombie_scepter_stun", 1);
+  self clientfield::set("" + #"zombie_scepter_stun", 1);
 
   for(x = 0; x < n_time / 0.5; x++) {
     wait 0.5;
@@ -795,7 +795,7 @@ function_75e6e51c(n_time = 5, e_attacker) {
     self dodamage(n_damage, self.origin, e_attacker, e_attacker);
   }
 
-  self clientfield::set("" + # "zombie_scepter_stun", 0);
+  self clientfield::set("" + #"zombie_scepter_stun", 0);
   self.var_61435d9 = 0;
 }
 
@@ -1024,13 +1024,13 @@ beacon_smash(player) {
 }
 
 beacon_fx_on() {
-  self.mdl_beacon clientfield::set("" + # "beacon_fx", 1);
+  self.mdl_beacon clientfield::set("" + #"beacon_fx", 1);
   self thread beacon_rumble();
 }
 
 beacon_fx_off() {
   if(isDefined(self)) {
-    self clientfield::set("" + # "beacon_fx", 0);
+    self clientfield::set("" + #"beacon_fx", 0);
   }
 }
 
@@ -1224,7 +1224,7 @@ function_cd010531(e_reviver, var_84280a99) {
     return 1;
   }
 
-  if(self clientfield::get("" + # "zombie_scepter_revive")) {
+  if(self clientfield::get("" + #"zombie_scepter_revive")) {
     return 1;
   }
 
@@ -1245,8 +1245,8 @@ function_cc91b3fe(e_attacker) {
     return;
   }
 
-  if(self clientfield::get("" + # "zombie_scepter_stun")) {
-    self clientfield::set("" + # "zombie_scepter_stun", 0);
+  if(self clientfield::get("" + #"zombie_scepter_stun")) {
+    self clientfield::set("" + #"zombie_scepter_stun", 0);
   }
 }
 
@@ -1281,7 +1281,7 @@ scepter_rumble(var_b2e05bae) {
         self playrumbleonentity("zm_weap_special_activate_rumble");
         break;
       case 2:
-        self clientfield::increment_to_player("" + # "scepter_rumble", 2);
+        self clientfield::increment_to_player("" + #"scepter_rumble", 2);
         break;
       case 3:
         self playrumbleonentity("zm_weap_scepter_melee_hit_rumble");
@@ -1290,10 +1290,10 @@ scepter_rumble(var_b2e05bae) {
         playrumbleonposition("zm_weap_scepter_plant_rumble", self.origin);
         break;
       case 5:
-        self clientfield::increment_to_player("" + # "scepter_rumble", 5);
+        self clientfield::increment_to_player("" + #"scepter_rumble", 5);
         break;
       case 6:
-        self clientfield::increment_to_player("" + # "scepter_rumble", 6);
+        self clientfield::increment_to_player("" + #"scepter_rumble", 6);
         break;
     }
   }

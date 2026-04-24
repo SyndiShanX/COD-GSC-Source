@@ -12,11 +12,11 @@
 #namespace namespace_178eb32b;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "hash_eb1d61f9d0ab6ab", 1, 2, "int", &function_968feb60, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4ace5aed82d35b19", 1, 1, "int", &function_63dce83f, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_32d35af47559b320", 1, 1, "int", &function_6c47410d, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_575d68a64ff032b2", 1, 1, "counter", &function_1fa52d9a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_16e5e4d2ea0716b7", 1, 2, "int", &function_2879e60b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_eb1d61f9d0ab6ab", 1, 2, "int", &function_968feb60, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4ace5aed82d35b19", 1, 1, "int", &function_63dce83f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_32d35af47559b320", 1, 1, "int", &function_6c47410d, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_575d68a64ff032b2", 1, 1, "counter", &function_1fa52d9a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_16e5e4d2ea0716b7", 1, 2, "int", &function_2879e60b, 0, 0);
 }
 
 function function_968feb60(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

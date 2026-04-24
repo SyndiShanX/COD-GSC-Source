@@ -53,7 +53,7 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_275c4e6783b917f8", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_275c4e6783b917f8", 1, 1, "int");
 }
 
 function_cdbbf1ee() {
@@ -310,9 +310,9 @@ function_c179676a() {
 
 function_402d070f() {
   self endon(#"disconnect");
-  self clientfield::set_to_player("" + # "hash_275c4e6783b917f8", 1);
+  self clientfield::set_to_player("" + #"hash_275c4e6783b917f8", 1);
   self waittill(#"fasttravel_over");
-  self clientfield::set_to_player("" + # "hash_275c4e6783b917f8", 0);
+  self clientfield::set_to_player("" + #"hash_275c4e6783b917f8", 0);
 }
 
 function_d7af842d(e_unitrigger) {

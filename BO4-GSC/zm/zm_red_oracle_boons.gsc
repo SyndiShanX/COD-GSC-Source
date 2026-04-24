@@ -38,8 +38,8 @@ autoexec __init__system__() {
 
 __init__() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("item", "" + # "hash_7e5c581ade235dfc", 16000, n_bits, "int");
-  clientfield::register("toplayer", "" + # "hash_403e80cafccc207c", 16000, 1, "int");
+  clientfield::register("item", "" + #"hash_7e5c581ade235dfc", 16000, n_bits, "int");
+  clientfield::register("toplayer", "" + #"hash_403e80cafccc207c", 16000, 1, "int");
   callback::on_connecting(&on_player_connect);
 }
 
@@ -390,7 +390,7 @@ function_4e1abe8f() {
 function_fa31ee20(e_item) {
   self thread function_c3778d8a(2, undefined);
   var_21c1ba1 = self getentitynumber();
-  e_item clientfield::set("" + # "hash_7e5c581ade235dfc", var_21c1ba1 + 1);
+  e_item clientfield::set("" + #"hash_7e5c581ade235dfc", var_21c1ba1 + 1);
 }
 
 function_d71a9fa1() {
@@ -667,9 +667,9 @@ function_c3778d8a(n_boon, n_delay = undefined) {
       break;
   }
 
-  self clientfield::set_to_player("" + # "hash_403e80cafccc207c", 1);
+  self clientfield::set_to_player("" + #"hash_403e80cafccc207c", 1);
   b_say = self zm_vo::vo_say(var_8b7ccae4, 0, 1, 9999, 1, 1, 1);
-  self clientfield::set_to_player("" + # "hash_403e80cafccc207c", 0);
+  self clientfield::set_to_player("" + #"hash_403e80cafccc207c", 0);
 
   if(b_say && self zm_audio::can_speak() && !(isDefined(self.var_e0ffa699) && self.var_e0ffa699)) {
     self.var_e0ffa699 = 1;

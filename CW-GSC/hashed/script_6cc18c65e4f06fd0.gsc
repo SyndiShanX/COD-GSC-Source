@@ -44,8 +44,8 @@
 #namespace namespace_c4d353e7;
 
 function init() {
-  clientfield::register("world", "" + # "hide_scene_models", 1, getminbitcountfornum(2), "int");
-  clientfield::register("world", "" + # "hash_763dd8035e80f7c", 1, 1, "int");
+  clientfield::register("world", "" + #"hide_scene_models", 1, getminbitcountfornum(2), "int");
+  clientfield::register("world", "" + #"hash_763dd8035e80f7c", 1, 1, "int");
   scene::add_scene_func(#"hash_1be24c2c65ab0233", &function_56700eee, "play");
   scene::add_scene_func(#"hash_7a0ecc691a5a3bfe", &function_56700eee, "play");
   scene::add_scene_func(#"hash_7a0ecc691a5a3bfe", &function_2996c15f, "shot230");
@@ -281,14 +281,14 @@ function function_56700eee(a_ents) {
 
   hidemiscmodels("village_courtyard_side_gate");
   level thread function_1d66a215();
-  level clientfield::set("" + # "hash_763dd8035e80f7c", 1);
+  level clientfield::set("" + #"hash_763dd8035e80f7c", 1);
 }
 
 function function_2996c15f(a_ents) {
   var_a6e592f0 = a_ents[#"hash_5caebe2b8de202c6"];
 
   if(isDefined(var_a6e592f0)) {
-    var_a6e592f0 clientfield::set("" + # "orda_dissolve", 1);
+    var_a6e592f0 clientfield::set("" + #"orda_dissolve", 1);
   }
 
   hidemiscmodels("village_courtyard_side_gate");
@@ -307,14 +307,14 @@ function function_318f5bad(a_ents) {
   var_a6e592f0 = a_ents[#"hash_5caebe2b8de202c6"];
 
   if(isDefined(var_a6e592f0)) {
-    var_a6e592f0 clientfield::set("" + # "orda_dissolve", 1);
+    var_a6e592f0 clientfield::set("" + #"orda_dissolve", 1);
   }
 
-  level clientfield::set("" + # "hash_763dd8035e80f7c", 1);
+  level clientfield::set("" + #"hash_763dd8035e80f7c", 1);
   level waittill(#"hash_bc6b9462ca86b70");
 
   if(isDefined(var_a6e592f0)) {
-    var_a6e592f0 clientfield::set("" + # "orda_dissolve", 0);
+    var_a6e592f0 clientfield::set("" + #"orda_dissolve", 0);
   }
 }
 
@@ -328,7 +328,7 @@ function function_324cf392(a_ents) {
 }
 
 function function_e3c65980(a_ents) {
-  level clientfield::set("" + # "hash_763dd8035e80f7c", 0);
+  level clientfield::set("" + #"hash_763dd8035e80f7c", 0);
 }
 
 function hide_scene_models() {
@@ -392,7 +392,7 @@ function function_32d60e81(ents) {
   level.var_d99f785b = ents[#"hash_5caebe2b8de202c6"];
   level.var_d99f785b function_619a5c20();
   level.var_d99f785b setCanDamage(1);
-  level.var_d99f785b clientfield::set("" + # "orda_dissolve", 1);
+  level.var_d99f785b clientfield::set("" + #"orda_dissolve", 1);
 
   if(!isDefined(level.var_d99f785b.var_86a21346)) {
     level.var_d99f785b.var_86a21346 = &function_b8f5e813;

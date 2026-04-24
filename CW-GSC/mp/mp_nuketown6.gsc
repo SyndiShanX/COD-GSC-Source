@@ -54,7 +54,7 @@ function on_player_spawned() {
 }
 
 function init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_802934d416ac981", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_802934d416ac981", 1, 1, "int");
 }
 
 function function_c6c7166a() {
@@ -193,7 +193,7 @@ function function_dc41f225(player) {
   if(isDefined(player)) {
     player flag::set("grab_done");
     player capturnrate(0, 0);
-    player clientfield::set_to_player("" + # "hash_802934d416ac981", 0);
+    player clientfield::set_to_player("" + #"hash_802934d416ac981", 0);
   }
 
   n_scale = 1;
@@ -220,7 +220,7 @@ function function_93a73f43() {
   level endon(#"hash_3c62d3b6b67922c0");
   player = self;
   player endon(#"death", #"grab_done");
-  player clientfield::set_to_player("" + # "hash_802934d416ac981", 1);
+  player clientfield::set_to_player("" + #"hash_802934d416ac981", 1);
   wait 1;
 
   while(true) {

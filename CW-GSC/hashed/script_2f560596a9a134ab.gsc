@@ -382,7 +382,7 @@ function function_d36fb590(var_aa4f9213, var_6c9485fc, n_fx_type = 3) {
   }
 
   mdl_reward = util::spawn_model(var_24a867e4, var_8b84b3ce, v_spawn_angles);
-  self.var_642ed51a.var_f693bf0b clientfield::set("" + # "reward_fx", 1);
+  self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 1);
   self.var_642ed51a.var_f92a5f81 = mdl_reward;
   mdl_reward playSound(#"hash_52de50e5184d1c7");
   mdl_reward playLoopSound(#"hash_601ae32339098104");
@@ -1022,7 +1022,7 @@ function function_7dc3dfdb(var_6c9485fc = 0) {
   v_spawn_angles = self.var_642ed51a.var_f693bf0b.angles;
   v_forward = anglesToForward(v_spawn_angles);
   mdl_reward = util::spawn_model("p8_zm_powerup_aat", var_8b84b3ce, v_spawn_angles);
-  self.var_642ed51a.var_f693bf0b clientfield::set("" + # "reward_fx", 1);
+  self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 1);
   self.var_642ed51a.var_f92a5f81 = mdl_reward;
   b_taken = self function_dcda5d87(mdl_reward, 1, 1);
 
@@ -1064,7 +1064,7 @@ function give_perk_reward(var_16c042b8, var_6c9485fc = 10) {
   v_spawn_angles = self.var_642ed51a.var_f693bf0b.angles;
   var_242c6a7b = zm_perks::get_perk_weapon_model(var_16c042b8);
   mdl_reward = util::spawn_model(var_242c6a7b, var_8b84b3ce, v_spawn_angles);
-  self.var_642ed51a.var_f693bf0b clientfield::set("" + # "reward_fx", 1);
+  self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 1);
   self.var_642ed51a.var_f92a5f81 = mdl_reward;
   self thread function_545834dc(var_16c042b8);
   b_taken = self function_dcda5d87(mdl_reward, 1, 1);
@@ -1159,7 +1159,7 @@ function function_c2e444e6(str_type = #"essence", n_amount, var_b492d948, var_6c
       mdl_reward clientfield::set("perk_death_perception_item_marked_for_rob", 1);
     }
 
-    self.var_642ed51a.var_f693bf0b clientfield::set("" + # "reward_fx", 1);
+    self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 1);
   }
 
   if(isDefined(n_scale)) {
@@ -1291,7 +1291,7 @@ function function_53a333a8(var_38f795c7, var_41f9c5ff = undefined, var_893baaf =
 
   if(isPlayer(self) && isDefined(self.var_642ed51a)) {
     if(isDefined(self.var_642ed51a.var_f693bf0b) && isDefined(self.var_9e09931e)) {
-      self.var_642ed51a.var_f693bf0b clientfield::set("" + # "hash_21f5fab6a3d22093", self.var_9e09931e);
+      self.var_642ed51a.var_f693bf0b clientfield::set("" + #"hash_21f5fab6a3d22093", self.var_9e09931e);
     }
 
     if(isDefined(self.var_9e09931e) && self.var_9e09931e != 0) {
@@ -1546,7 +1546,7 @@ function function_ae58bd73(var_8b84b3ce) {
     waitframe(1);
   }
 
-  mdl_reward clientfield::set("" + # "hash_3dbe7851af541017", 1);
+  mdl_reward clientfield::set("" + #"hash_3dbe7851af541017", 1);
   var_cef149e8 = mdl_reward zm_utility::fake_physicslaunch(v_loc + (0, 0, 25), n_power);
   wait var_cef149e8;
   e_player = level function_c45635c7(mdl_reward, 1, 1);
@@ -1602,7 +1602,7 @@ function function_445c5623(var_aa4f9213, var_8b84b3ce, reward_terminal) {
     waitframe(1);
   }
 
-  mdl_reward clientfield::set("" + # "hash_3dbe7851af541017", 1);
+  mdl_reward clientfield::set("" + #"hash_3dbe7851af541017", 1);
   var_cef149e8 = mdl_reward zm_utility::fake_physicslaunch(v_loc + (0, 0, 25), n_power);
   wait var_cef149e8;
   e_player = level function_c45635c7(mdl_reward, 1, 1, 0);
@@ -1721,7 +1721,7 @@ function function_dcda5d87(mdl_reward, b_rotate = 1, var_b9b24 = 1, var_d1bb6924
     }
   }
 
-  self.var_642ed51a.var_f693bf0b clientfield::set("" + # "reward_fx", 0);
+  self.var_642ed51a.var_f693bf0b clientfield::set("" + #"reward_fx", 0);
   self notify(#"hash_358f065cca50b2a7");
 
   if(is_true(b_timeout)) {

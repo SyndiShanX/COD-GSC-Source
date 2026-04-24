@@ -26,11 +26,11 @@
 #namespace zm_platinum_pap_quest;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "pap_machine_fx", 1, getminbitcountfornum(3), "int");
-  clientfield::register("scriptmover", "" + # "hash_44cce9f2e2fd1c96", 1, getminbitcountfornum(2), "int");
-  clientfield::register("world", "" + # "pap_portal_fx", 1, 1, "int");
-  clientfield::register("world", "" + # "pap_quest_beam_start", 1, getminbitcountfornum(10), "int");
-  clientfield::register("world", "" + # "hash_3fb8ca8c017ba7ac", 1, getminbitcountfornum(10), "int");
+  clientfield::register("scriptmover", "" + #"pap_machine_fx", 1, getminbitcountfornum(3), "int");
+  clientfield::register("scriptmover", "" + #"hash_44cce9f2e2fd1c96", 1, getminbitcountfornum(2), "int");
+  clientfield::register("world", "" + #"pap_portal_fx", 1, 1, "int");
+  clientfield::register("world", "" + #"pap_quest_beam_start", 1, getminbitcountfornum(10), "int");
+  clientfield::register("world", "" + #"hash_3fb8ca8c017ba7ac", 1, getminbitcountfornum(10), "int");
   level thread function_cdc6589b();
   level thread function_3c35fb99();
   level thread function_9d367ce1();
@@ -110,13 +110,13 @@ function pap_machine_fx() {
   s_pap_machine_fx = struct::get("s_pap_machine_fx");
   level flag::wait_till("start_zombie_round_logic");
   var_748011b3 = util::spawn_model("tag_origin", s_pap_machine_fx.origin, s_pap_machine_fx.angles);
-  var_748011b3 clientfield::set("" + # "pap_machine_fx", 1);
+  var_748011b3 clientfield::set("" + #"pap_machine_fx", 1);
   level flag::wait_till_any([#"hash_434bc775e67b7233", #"hash_20afa38b1f1c339e"]);
-  var_748011b3 clientfield::set("" + # "pap_machine_fx", 2);
+  var_748011b3 clientfield::set("" + #"pap_machine_fx", 2);
   level flag::wait_till(#"hash_20afa38b1f1c339e");
-  var_748011b3 clientfield::set("" + # "pap_machine_fx", 3);
+  var_748011b3 clientfield::set("" + #"pap_machine_fx", 3);
   util::wait_network_frame();
-  var_748011b3 clientfield::set("" + # "pap_machine_fx", 0);
+  var_748011b3 clientfield::set("" + #"pap_machine_fx", 0);
 }
 
 function function_bf1953a() {
@@ -132,7 +132,7 @@ function function_bf1953a() {
     mdl_zombie = var_8a36246d.scene_ents[#"actor 1"];
 
     if(isDefined(mdl_zombie)) {
-      mdl_zombie clientfield::set("" + # "hash_44cce9f2e2fd1c96", 1);
+      mdl_zombie clientfield::set("" + #"hash_44cce9f2e2fd1c96", 1);
     }
 
     wait randomfloatrange(0.25, 0.5);
@@ -144,17 +144,17 @@ function function_bf1953a() {
     var_8a36246d thread scene::play("awake");
     var_922a1dba++;
     n_count++;
-    level clientfield::set("" + # "pap_quest_beam_start", n_count);
+    level clientfield::set("" + #"pap_quest_beam_start", n_count);
 
     if(n_count == 9) {
       wait 0.15;
-      level clientfield::set("" + # "pap_quest_beam_start", n_count + 1);
+      level clientfield::set("" + #"pap_quest_beam_start", n_count + 1);
     }
 
     mdl_zombie = var_8a36246d.scene_ents[#"actor 1"];
 
     if(isDefined(mdl_zombie)) {
-      mdl_zombie clientfield::set("" + # "hash_44cce9f2e2fd1c96", 2);
+      mdl_zombie clientfield::set("" + #"hash_44cce9f2e2fd1c96", 2);
     }
 
     if(var_922a1dba == 2) {
@@ -166,7 +166,7 @@ function function_bf1953a() {
   }
 
   wait 0.25;
-  level clientfield::set("" + # "pap_quest_beam_start", 0);
+  level clientfield::set("" + #"pap_quest_beam_start", 0);
   var_67a6506b = struct::get_script_bundle_instances("scene", ["scene_zombie_pap_land", "targetname"]);
   var_67a6506b = array::sort_by_script_int(var_67a6506b, 1);
   n_count = 0;
@@ -181,12 +181,12 @@ function function_bf1953a() {
     n_count++;
 
     if(n_count == 1 || n_count == 2) {
-      level clientfield::set("" + # "hash_3fb8ca8c017ba7ac", n_count);
+      level clientfield::set("" + #"hash_3fb8ca8c017ba7ac", n_count);
       util::wait_network_frame();
       wait 0.25;
     }
 
-    level clientfield::set("" + # "hash_3fb8ca8c017ba7ac", n_count + 2);
+    level clientfield::set("" + #"hash_3fb8ca8c017ba7ac", n_count + 2);
     util::wait_network_frame();
     wait randomfloatrange(0.15, 0.25);
   }
@@ -409,10 +409,10 @@ function function_f8cbb582() {
   level thread zm_audio::function_b36aeaf6("papevent");
 
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "music_underscore", 2);
+    player clientfield::set_to_player("" + #"music_underscore", 2);
   }
 
-  level clientfield::set("" + # "pap_portal_fx", 1);
+  level clientfield::set("" + #"pap_portal_fx", 1);
   level.var_7ff7eaf9 = [];
   a_s_loc = array::sort_by_script_int(struct::get_array("s_pap_quest_boss_spawn"), 1);
   var_5e5e4c63 = getent("spawner_bo5_soa", "targetname");
@@ -476,11 +476,11 @@ function function_f8cbb582() {
   }
 
   array::wait_till(level.var_7ff7eaf9, "death");
-  level clientfield::set("" + # "pap_portal_fx", 0);
+  level clientfield::set("" + #"pap_portal_fx", 0);
   level thread zm_audio::function_2354b945("papevent");
 
   foreach(player in getplayers()) {
-    player clientfield::set_to_player("" + # "music_underscore", 3);
+    player clientfield::set_to_player("" + #"music_underscore", 3);
   }
 
   namespace_b574e135::function_8d857888(1);
@@ -495,7 +495,7 @@ function function_4df61aed(b_teleport) {
     self forceteleport(a_s_loc[0].origin, a_s_loc[0].angles);
   }
 
-  self clientfield::set("" + # "hash_3e4641a9ea00d061", 0);
+  self clientfield::set("" + #"hash_3e4641a9ea00d061", 0);
   self val::reset(#"hash_2892ab448df38143", "allowdeath");
   self.var_306ee014 = undefined;
   aiutility::removeaioverridedamagecallback(self, &function_5d4aa7f8);
@@ -545,7 +545,7 @@ function function_5fc5de3e(ents) {
   }
 
   level.var_1ceed659 = var_e8cb6c46;
-  var_e8cb6c46 clientfield::set("" + # "hash_3e4641a9ea00d061", 1);
+  var_e8cb6c46 clientfield::set("" + #"hash_3e4641a9ea00d061", 1);
   var_e8cb6c46 val::set(#"hash_2892ab448df38143", "allowdeath", 0);
   var_e8cb6c46.var_306ee014 = &function_1a49126a;
   aiutility::addaioverridedamagecallback(var_e8cb6c46, &function_5d4aa7f8);
@@ -628,7 +628,7 @@ function cmd(cmd) {
   switch (cmd) {
     case # "hash_4f52dabbc7c7806b":
       level flag::set(#"hash_20afa38b1f1c339e");
-      level clientfield::set("<dev string:x90>" + # "pap_portal_fx", 0);
+      level clientfield::set("<dev string:x90>" + #"pap_portal_fx", 0);
       var_b9deb373 = struct::get_script_bundle_instances("<dev string:x94>", ["<dev string:x9d>", "<dev string:xb7>"]);
       var_f501ee56 = struct::get_script_bundle_instances("<dev string:x94>", ["<dev string:xc5>", "<dev string:xb7>"]);
       var_bc5ea9bc = arraycombine(var_b9deb373, var_f501ee56, 0, 0);
@@ -642,7 +642,7 @@ function cmd(cmd) {
       }
 
       for(i = 0; i <= 10; i++) {
-        level clientfield::set("<dev string:x90>" + # "hash_3fb8ca8c017ba7ac", i);
+        level clientfield::set("<dev string:x90>" + #"hash_3fb8ca8c017ba7ac", i);
         waitframe(1);
       }
 

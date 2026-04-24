@@ -10,9 +10,9 @@
 #namespace zm_gold_pap_quest;
 
 function init() {
-  clientfield::register("world", "" + # "hash_666ad912cb4541f1", 16000, 1, "int", &function_7d467651, 0, 0);
-  clientfield::register("world", "" + # "hash_18c31f1201f7c968", 16000, 1, "counter", &function_e4ea3f5f, 0, 0);
-  clientfield::register("world", "" + # "teleporter_minimap", 16000, 1, "counter", &teleporter_minimap, 0, 0);
+  clientfield::register("world", "" + #"hash_666ad912cb4541f1", 16000, 1, "int", &function_7d467651, 0, 0);
+  clientfield::register("world", "" + #"hash_18c31f1201f7c968", 16000, 1, "counter", &function_e4ea3f5f, 0, 0);
+  clientfield::register("world", "" + #"teleporter_minimap", 16000, 1, "counter", &teleporter_minimap, 0, 0);
   zm_ping::function_5ae4a10c(undefined, "gold_teleporter", #"hash_4046a68ee9d717fc", undefined, #"ui_hud_minimap_teleporter");
 }
 

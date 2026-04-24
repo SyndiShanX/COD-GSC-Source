@@ -18,14 +18,14 @@
 #namespace mansion_storage;
 
 init() {
-  clientfield::register("scriptmover", "" + # "hash_65a58403194ef1b4", 8000, 1, "int", &function_438d8674, 0, 0);
-  clientfield::register("world", "" + # "start_billiards", 8000, 1, "int", &start_billiards, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_65a58403194ef1b4", 8000, 1, "int", &function_438d8674, 0, 0);
+  clientfield::register("world", "" + #"start_billiards", 8000, 1, "int", &start_billiards, 0, 0);
   serverfield::register("billiard_ball_sunk_sf", 8000, getminbitcountfornum(9), "int");
-  clientfield::register("world", "" + # "hash_354bb8ac5de6640a", 8000, getminbitcountfornum(9), "int", &function_954a27a2, 0, 0);
-  clientfield::register("world", "" + # "hash_75594bca6b54706e", 8000, 1, "int", &function_68e49445, 0, 0);
-  clientfield::register("world", "" + # "hash_2c115514da4cee51", 17000, 1, "int", &function_2dbadedf, 0, 0);
-  clientfield::register("scriptmover", "" + # "barrel_drip", 8000, 1, "counter", &function_3e37bb63, 0, 0);
-  clientfield::register("scriptmover", "" + # "barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
+  clientfield::register("world", "" + #"hash_354bb8ac5de6640a", 8000, getminbitcountfornum(9), "int", &function_954a27a2, 0, 0);
+  clientfield::register("world", "" + #"hash_75594bca6b54706e", 8000, 1, "int", &function_68e49445, 0, 0);
+  clientfield::register("world", "" + #"hash_2c115514da4cee51", 17000, 1, "int", &function_2dbadedf, 0, 0);
+  clientfield::register("scriptmover", "" + #"barrel_drip", 8000, 1, "counter", &function_3e37bb63, 0, 0);
+  clientfield::register("scriptmover", "" + #"barrel_spray", 8000, 1, "counter", &function_5e130882, 0, 0);
   level._effect[#"barrel_drip"] = #"hash_657c3b5d3d9bfdfa";
   level._effect[#"barrel_splash"] = #"hash_42bcb312df258591";
   level._effect[#"hash_6a63e8eb86cc88e2"] = #"hash_5934158bcfb9c884";

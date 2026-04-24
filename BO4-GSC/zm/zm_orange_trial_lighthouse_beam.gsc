@@ -101,7 +101,7 @@ setup_lighthouse() {
 
     if(isDefined(level.var_ab11c23d.vh_target)) {
       level.var_ab11c23d.vh_target.b_moving = 0;
-      level.var_ab11c23d.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
+      level.var_ab11c23d.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
       waitframe(1);
       level.var_ab11c23d.vh_target delete();
     }
@@ -136,7 +136,7 @@ function_dbad2f5a() {
   self.vh_target.e_spotlight linkto(self.vh_target, "tag_origin", (0, 0, 390), (90, 0, 0));
   self waittill(#"rotatedone");
   level.var_ab11c23d clientfield::set("lighthouse_on", 3);
-  self.vh_target.e_spotlight clientfield::set("" + # "trials_lighthouse_beam", 2);
+  self.vh_target.e_spotlight clientfield::set("" + #"trials_lighthouse_beam", 2);
   self.vh_target thread zm_orange_lighthouse::function_18f63949();
   self zm_orange_lighthouse::function_2b2f2a7f();
   wait 1;
@@ -158,7 +158,7 @@ function_f223e16f(round_reset) {
   self endon(#"death");
   self.vh_target.b_moving = 0;
   wait 2;
-  self.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
+  self.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
   self.vh_target.e_spotlight delete();
   self.vh_target delete();
 

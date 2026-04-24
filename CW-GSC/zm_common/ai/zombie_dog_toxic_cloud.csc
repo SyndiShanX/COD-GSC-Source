@@ -19,9 +19,9 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_584428de7fdfefe2", 1, 1, "int", &function_3c2a50f4, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_313a6af163e4bef1", 1, 1, "counter", &function_d89c5699, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_10eff6a8464fb235", 1, 1, "counter", &function_29b682f8, 0, 0);
+  clientfield::register("actor", "" + #"hash_584428de7fdfefe2", 1, 1, "int", &function_3c2a50f4, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_313a6af163e4bef1", 1, 1, "counter", &function_d89c5699, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_10eff6a8464fb235", 1, 1, "counter", &function_29b682f8, 0, 0);
   clientfield::register("actor", "pustule_pulse_plague", 1, 1, "int", &function_a17af3df, 0, 0);
 }
 

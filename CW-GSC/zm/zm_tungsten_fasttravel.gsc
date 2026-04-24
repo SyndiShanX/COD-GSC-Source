@@ -19,8 +19,8 @@
 #namespace zm_tungsten_fasttravel;
 
 function init() {
-  clientfield::register("world", "" + # "hash_666ad912cb4541f1", 28000, 1, "int");
-  clientfield::register("world", "" + # "hash_6601c584f23761c4", 28000, 1, "int");
+  clientfield::register("world", "" + #"hash_666ad912cb4541f1", 28000, 1, "int");
+  clientfield::register("world", "" + #"hash_6601c584f23761c4", 28000, 1, "int");
   level.var_5bfd847e = #"hash_1446e25b57f66305";
   level.var_352c9e03 = &function_af65fe93;
   level.var_e9737821 = &function_c52e8ba;
@@ -28,13 +28,13 @@ function init() {
   level.var_ce0f67cf = 5;
   level.var_d0fafce1 = 1;
   level.var_11b26237 = 96;
-  level clientfield::set("" + # "hash_6601c584f23761c4", 1);
+  level clientfield::set("" + #"hash_6601c584f23761c4", 1);
   function_56987d5e();
 }
 
 function start_fasttravel() {
   level flag::set(#"hash_1446e25b57f66305");
-  level clientfield::set("" + # "hash_666ad912cb4541f1", 1);
+  level clientfield::set("" + #"hash_666ad912cb4541f1", 1);
   function_becf7525("portal_fx_main_street_to_helipads");
   function_becf7525("portal_fx_main_street_to_anytown_usa");
   function_becf7525("portal_fx_anytown_usa_to_main_street");

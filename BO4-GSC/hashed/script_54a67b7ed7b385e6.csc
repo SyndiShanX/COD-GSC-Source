@@ -26,9 +26,9 @@ init() {
     zm_sq_modules::function_d8383812(s_chest.script_noteworthy, 1, s_chest.script_noteworthy, 400, level._effect[#"soul_fx"], level._effect[#"hash_169b53a5e4572fdc"]);
   }
 
-  clientfield::register("scriptmover", "" + # "clue_fx", 1, 1, "int", &clue_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "despawn_fx", 1, 1, "int", &despawn_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1c8f8a5e03b36070", 1, 1, "int", &function_65b179f4, 0, 0);
+  clientfield::register("scriptmover", "" + #"clue_fx", 1, 1, "int", &clue_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"despawn_fx", 1, 1, "int", &despawn_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1c8f8a5e03b36070", 1, 1, "int", &function_65b179f4, 0, 0);
 }
 
 function_65b179f4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

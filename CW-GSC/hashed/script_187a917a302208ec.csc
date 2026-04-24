@@ -7,7 +7,7 @@
 #namespace namespace_98521e8b;
 
 function event_handler[level_init] function_9347830c(eventstruct) {
-  clientfield::register("world", "" + # "hash_6789a69336880f89", 10000, 1, "int", &function_e3b277ad, 0, 0);
+  clientfield::register("world", "" + #"hash_6789a69336880f89", 10000, 1, "int", &function_e3b277ad, 0, 0);
 }
 
 function function_e3b277ad(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

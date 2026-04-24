@@ -123,7 +123,7 @@ function private _activate_sensory_overload(slot, weapon) {
   foreach(item in self.cybercom.lock_targets) {
     if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
-        if(!cybercom::targetisvalid(item.target, weapon)) {
+        if(!cybercom::targetisValid(item.target, weapon)) {
           continue;
         }
         self thread challenges::function_96ed590f("cybercom_uses_chaos");
@@ -179,7 +179,7 @@ function ai_activatesensoryoverload(target, var_9bc2efcb = 1) {
   }
   weapon = getweapon("gadget_sensory_overload");
   foreach(guy in validtargets) {
-    if(!cybercom::targetisvalid(guy, weapon)) {
+    if(!cybercom::targetisValid(guy, weapon)) {
       continue;
     }
     guy thread sensory_overload(self);
@@ -197,7 +197,7 @@ function sensory_overload(attacker, var_7d4fd98c) {
     loops = 1;
   }
   wait(randomfloatrange(0, 0.75));
-  if(!attacker cybercom::targetisvalid(self, weapon)) {
+  if(!attacker cybercom::targetisValid(self, weapon)) {
     return;
   }
   if(self cybercom::function_421746e0()) {

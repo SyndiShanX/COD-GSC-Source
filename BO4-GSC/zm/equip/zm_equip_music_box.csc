@@ -13,9 +13,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "music_box_light_fx", 24000, 1, "int", &music_box_light_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "music_box_teleport", 1, 1, "int", &music_box_teleport, 0, 0);
-  clientfield::register("actor", "" + # "hash_4881cb6bc59fdc49", 24000, 1, "int", &function_e722a4fd, 0, 0);
+  clientfield::register("scriptmover", "" + #"music_box_light_fx", 24000, 1, "int", &music_box_light_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"music_box_teleport", 1, 1, "int", &music_box_teleport, 0, 0);
+  clientfield::register("actor", "" + #"hash_4881cb6bc59fdc49", 24000, 1, "int", &function_e722a4fd, 0, 0);
 }
 
 function_3224694(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

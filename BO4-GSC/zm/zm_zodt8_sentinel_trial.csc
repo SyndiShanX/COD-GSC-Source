@@ -26,31 +26,31 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("world", "" + # "hash_3c58464f16d8a1be", 1, 1, "int", &function_503f6096, 0, 0);
-  clientfield::register("scriptmover", "" + # "land_fx", 1, 1, "int", &function_48719840, 0, 0);
-  clientfield::register("scriptmover", "" + # "essence_fx", 1, 1, "int", &function_92436a06, 0, 0);
-  clientfield::register("scriptmover", "" + # "planet_light", 1, getminbitcountfornum(9), "int", &function_e7c0fb8c, 0, 0);
-  clientfield::register("scriptmover", "" + # "planet_fx", 1, getminbitcountfornum(9), "int", &planet_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "pulse_shader", 1, 1, "int", &function_14dcccc6, 0, 0);
-  clientfield::register("scriptmover", "" + # "sentinel_shader", 1, 1, "int", &function_b59986cf, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3400ccffbd3d73b3", 1, 2, "int", &function_49661954, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_15b23de7589e61a", 1, 1, "int", &function_25a6443, 0, 0);
-  clientfield::register("scriptmover", "" + # "blocker_fx", 1, 1, "int", &function_74e395f7, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_68e2384b254175da", 1, 1, "counter", &function_9a686624, 0, 0);
-  clientfield::register("scriptmover", "" + # "pipe_fx", 1, 2, "int", &pipe_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "teleport_sigil", 1, 1, "int", &teleport_sigil, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_46e2ed49fb0f55c6", 1, 1, "int", &function_9f92e675, 0, 0);
-  clientfield::register("scriptmover", "" + # "water_props", 1, 1, "int", &function_2d798d9a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6e41de51a0092771", 1, 1, "int", &function_dd0c6ccb, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_53c7d27cc9130e8f", 1, getminbitcountfornum(4), "int", &function_33aa16f0, 0, 0);
-  clientfield::register("toplayer", "" + # "boiler_fx", 1, 1, "int", &function_d592393d, 0, 0);
-  clientfield::register("toplayer", "" + # "main_flash", 1, 1, "int", &function_94822f89, 0, 0);
-  clientfield::register("toplayer", "" + # "iceberg_rumbles", 1, 1, "int", &function_ac4395b, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_7a927551ca199a1c", 1, 1, "counter", &function_9491a41e, 0, 0);
-  clientfield::register("toplayer", "" + # "icy_bubbles", 1, 1, "int", &function_c6880d07, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_58b44c320123e829", 1, 1, "int", &function_1697bc59, 0, 0);
-  clientfield::register("toplayer", "" + # "camera_snow", 1, 1, "int", &camera_snow, 0, 0);
-  clientfield::register("vehicle", "" + # "orb_fx", 1, 1, "int", &function_57196646, 0, 0);
+  clientfield::register("world", "" + #"hash_3c58464f16d8a1be", 1, 1, "int", &function_503f6096, 0, 0);
+  clientfield::register("scriptmover", "" + #"land_fx", 1, 1, "int", &function_48719840, 0, 0);
+  clientfield::register("scriptmover", "" + #"essence_fx", 1, 1, "int", &function_92436a06, 0, 0);
+  clientfield::register("scriptmover", "" + #"planet_light", 1, getminbitcountfornum(9), "int", &function_e7c0fb8c, 0, 0);
+  clientfield::register("scriptmover", "" + #"planet_fx", 1, getminbitcountfornum(9), "int", &planet_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"pulse_shader", 1, 1, "int", &function_14dcccc6, 0, 0);
+  clientfield::register("scriptmover", "" + #"sentinel_shader", 1, 1, "int", &function_b59986cf, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3400ccffbd3d73b3", 1, 2, "int", &function_49661954, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_15b23de7589e61a", 1, 1, "int", &function_25a6443, 0, 0);
+  clientfield::register("scriptmover", "" + #"blocker_fx", 1, 1, "int", &function_74e395f7, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_68e2384b254175da", 1, 1, "counter", &function_9a686624, 0, 0);
+  clientfield::register("scriptmover", "" + #"pipe_fx", 1, 2, "int", &pipe_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"teleport_sigil", 1, 1, "int", &teleport_sigil, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_46e2ed49fb0f55c6", 1, 1, "int", &function_9f92e675, 0, 0);
+  clientfield::register("scriptmover", "" + #"water_props", 1, 1, "int", &function_2d798d9a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6e41de51a0092771", 1, 1, "int", &function_dd0c6ccb, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_53c7d27cc9130e8f", 1, getminbitcountfornum(4), "int", &function_33aa16f0, 0, 0);
+  clientfield::register("toplayer", "" + #"boiler_fx", 1, 1, "int", &function_d592393d, 0, 0);
+  clientfield::register("toplayer", "" + #"main_flash", 1, 1, "int", &function_94822f89, 0, 0);
+  clientfield::register("toplayer", "" + #"iceberg_rumbles", 1, 1, "int", &function_ac4395b, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_7a927551ca199a1c", 1, 1, "counter", &function_9491a41e, 0, 0);
+  clientfield::register("toplayer", "" + #"icy_bubbles", 1, 1, "int", &function_c6880d07, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_58b44c320123e829", 1, 1, "int", &function_1697bc59, 0, 0);
+  clientfield::register("toplayer", "" + #"camera_snow", 1, 1, "int", &camera_snow, 0, 0);
+  clientfield::register("vehicle", "" + #"orb_fx", 1, 1, "int", &function_57196646, 0, 0);
 }
 
 init_flags() {}

@@ -72,7 +72,7 @@ function_68b149a2(var_64e17761) {
     if(!var_4cda8676 && isalive(self) && !self laststand::player_is_in_laststand()) {
       if(!isDefined(self.var_86278a02) || self.var_86278a02 === 1) {
         self.var_86278a02 = 0;
-        self clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 1);
+        self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 1);
         self allowsprint(0);
 
         if(self issliding()) {
@@ -90,7 +90,7 @@ function_68b149a2(var_64e17761) {
         self allowsprint(1);
         self allowslide(1);
         self thread function_d2dd1f2b();
-        self clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 0);
+        self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
       }
 
       wait 1;
@@ -138,8 +138,8 @@ function_202ee8fa() {
   self.var_7dc2d507 = 1;
   self notify(#"player_frozen");
   self zm_orange_water::function_bad6907c();
-  self clientfield::set("" + # "hash_55543319943057f1", 1);
-  self clientfield::set_to_player("" + # "hash_5160727729fd57a2", 1);
+  self clientfield::set("" + #"hash_55543319943057f1", 1);
+  self clientfield::set_to_player("" + #"hash_5160727729fd57a2", 1);
   t_ice = spawn("trigger_damage", self.origin, 0, 15, 72);
   t_ice enablelinkto();
   t_ice linkto(self);
@@ -161,20 +161,20 @@ function_202ee8fa() {
   self playSound(#"hash_2f8c9575cb36a298");
   self.var_7dc2d507 = 0;
   self zm_orange_water::function_46c3bbf7();
-  self clientfield::set("" + # "hash_55543319943057f1", 0);
-  self clientfield::set_to_player("" + # "hash_5160727729fd57a2", 0);
-  self clientfield::set_to_player("" + # "hash_603fc9d210bdbc4d", 1);
+  self clientfield::set("" + #"hash_55543319943057f1", 0);
+  self clientfield::set_to_player("" + #"hash_5160727729fd57a2", 0);
+  self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 1);
   waitframe(2);
-  self clientfield::set_to_player("" + # "hash_603fc9d210bdbc4d", 0);
+  self clientfield::set_to_player("" + #"hash_603fc9d210bdbc4d", 0);
 
   if(isDefined(t_ice)) {
     t_ice delete();
     self.t_ice = undefined;
   }
 
-  self clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 0);
+  self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 0);
   waitframe(2);
-  self clientfield::set_to_player("" + # "hash_13f1aaee7ebf9986", 1);
+  self clientfield::set_to_player("" + #"hash_13f1aaee7ebf9986", 1);
   self allowsprint(0);
 
   if(self issliding()) {

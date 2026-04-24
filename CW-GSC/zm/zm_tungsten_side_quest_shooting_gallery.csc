@@ -22,8 +22,8 @@
 #namespace zm_tungsten_side_quest_shooting_gallery;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "hash_193cb3d6820f32c9", 28000, 1, "int", &function_3aea3305, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_b386e95b77069e4", 28000, 1, "int", &function_140c21d6, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_193cb3d6820f32c9", 28000, 1, "int", &function_3aea3305, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_b386e95b77069e4", 28000, 1, "int", &function_140c21d6, 0, 0);
 }
 
 function function_3aea3305(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

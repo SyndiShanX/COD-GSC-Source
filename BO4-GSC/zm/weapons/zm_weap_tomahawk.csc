@@ -15,7 +15,7 @@ autoexec __init__system__() {
 
 __init__() {
   clientfield::register("toplayer", "tomahawk_in_use", 1, 2, "int", &tomahawk_in_use, 0, 1);
-  clientfield::register("toplayer", "" + # "upgraded_tomahawk_in_use", 1, 1, "int", &tomahawk_in_use, 0, 1);
+  clientfield::register("toplayer", "" + #"upgraded_tomahawk_in_use", 1, 1, "int", &tomahawk_in_use, 0, 1);
   clientfield::register("scriptmover", "play_tomahawk_fx", 1, 2, "int", &play_tomahawk_pickup_fx, 0, 0);
   clientfield::register("actor", "play_tomahawk_hit_sound", 1, 1, "int", &function_9a3953ea, 0, 0);
   clientfield::register("toplayer", "tomahawk_rumble", 1, 2, "counter", &tomahawk_rumble, 0, 0);
@@ -25,7 +25,7 @@ __init__() {
   clientfield::register("scriptmover", "tomahawk_trail_fx", 1, var_92c56e8d, "int", &tomahawk_trail_fx, 0, 0);
   clientfield::register("missile", "tomahawk_trail_fx", 1, var_92c56e8d, "int", &tomahawk_trail_fx, 0, 0);
   setupclientfieldcodecallbacks("toplayer", 1, "tomahawk_in_use");
-  setupclientfieldcodecallbacks("toplayer", 1, "" + # "upgraded_tomahawk_in_use");
+  setupclientfieldcodecallbacks("toplayer", 1, "" + #"upgraded_tomahawk_in_use");
   level._effect[#"tomahawk_pickup"] = #"hash_589d0bc9c10726fb";
   level._effect[#"tomahawk_pickup_upgrade"] = #"hash_5f183257769badd4";
   level._effect[#"tomahawk_trail"] = #"hash_77b995b902df3cd9";

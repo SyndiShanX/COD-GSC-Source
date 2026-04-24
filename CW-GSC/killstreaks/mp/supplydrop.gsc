@@ -64,7 +64,7 @@ function private preinit() {
   level.var_f90e0e29 = &cratedelete;
   clientfield::register("vehicle", "supplydrop_care_package_state", 1, 1, "int");
   clientfield::register("vehicle", "supplydrop_ai_tank_state", 1, 1, "int");
-  clientfield::register("vehicle", "" + # "hash_e4eb5c0853abab8", 6000, 1, "int");
+  clientfield::register("vehicle", "" + #"hash_e4eb5c0853abab8", 6000, 1, "int");
   clientfield::register("scriptmover", "crate_landed", 1, 1, "int");
 
   if(sessionmodeismultiplayergame() && is_false(getgametypesetting(#"useitemspawns"))) {
@@ -3106,7 +3106,7 @@ function helidropcrate(killstreak, originalowner, offset, killcament, killstreak
 
   if(getdvarint(#"hash_3f663d1e38d10d99", 0) == 1 || is_true(crate.var_e8a59c52)) {
     self.var_11031e00 = 1;
-    self clientfield::set("" + # "hash_e4eb5c0853abab8", 1);
+    self clientfield::set("" + #"hash_e4eb5c0853abab8", 1);
     self playSound(#"hash_2548935de6c0af");
   }
 
@@ -3176,7 +3176,7 @@ function lbexplode() {
   }
 
   if(self.var_11031e00 === 1) {
-    self clientfield::set("" + # "hash_e4eb5c0853abab8", 0);
+    self clientfield::set("" + #"hash_e4eb5c0853abab8", 0);
   }
 
   self playSound(level.heli_sound[#"crash"]);

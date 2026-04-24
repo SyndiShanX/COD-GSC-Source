@@ -21,9 +21,9 @@ init() {
   clientfield::register("toplayer", "fountain_to_column", 16000, 2, "int");
   clientfield::register("toplayer", "park_to_column", 16000, 2, "int");
   clientfield::register("toplayer", "park_to_fountain", 16000, 2, "int");
-  clientfield::register("allplayers", "" + # "hash_52693a3ba1bbc7ea", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "forcestream_crafted_item", 16000, 1, "int");
-  clientfield::register("world", "" + # "hash_761511e09cb8324e", 16000, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_52693a3ba1bbc7ea", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"forcestream_crafted_item", 16000, 1, "int");
+  clientfield::register("world", "" + #"hash_761511e09cb8324e", 16000, 1, "int");
   level.var_5bfd847e = #"zm_red_fasttravel_open";
   level.var_91f96fcd = struct::get_array("fasttravel_trigger", "targetname");
   level.var_352c9e03 = &function_af65fe93;
@@ -95,9 +95,9 @@ function_91fabcb(mdl_item, b_clean_up = 0) {
 
   while(true) {
     s_result = self waittill(#"trigger");
-    mdl_item clientfield::set("" + # "forcestream_crafted_item", 1);
+    mdl_item clientfield::set("" + #"forcestream_crafted_item", 1);
     wait 3;
-    mdl_item clientfield::set("" + # "forcestream_crafted_item", 0);
+    mdl_item clientfield::set("" + #"forcestream_crafted_item", 0);
 
     while(isDefined(s_result.activator) && s_result.activator istouching(self)) {
       wait 1.6;
@@ -133,9 +133,9 @@ function_e968fd4f() {
     s_result = self waittill(#"player_begin_fasttravel_rail");
 
     if(isDefined(s_result.var_9fa6220c) && isDefined(s_result.var_9fa6220c.script_string) && s_result.var_9fa6220c.script_string == "center_of_the_world") {
-      level clientfield::set("" + # "hash_761511e09cb8324e", 1);
+      level clientfield::set("" + #"hash_761511e09cb8324e", 1);
       wait 3;
-      level clientfield::set("" + # "hash_761511e09cb8324e", 0);
+      level clientfield::set("" + #"hash_761511e09cb8324e", 0);
     }
   }
 }
@@ -152,7 +152,7 @@ function_a5689564(s_loc) {
     s_loc.unitrigger_stub.s_loc = s_loc;
     s_loc.unitrigger_stub.var_638d9008 = 1;
     s_loc.unitrigger_stub.var_694cbc6f = 1;
-    s_loc.unitrigger_stub.var_cafe149c = "" + # "hash_52693a3ba1bbc7ea";
+    s_loc.unitrigger_stub.var_cafe149c = "" + #"hash_52693a3ba1bbc7ea";
     s_loc.unitrigger_stub.var_a4134e51 = s_loc.var_a4134e51;
 
     if(!isDefined(level.var_4775015b)) {

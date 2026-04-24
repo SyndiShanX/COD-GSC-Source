@@ -38,7 +38,7 @@
 
 function function_945def6e(str_skipto, b_starting) {
   level function_7b315e60();
-  level clientfield::set("" + # "hash_16a1381cc22da440", 1);
+  level clientfield::set("" + #"hash_16a1381cc22da440", 1);
   level battlechatter::function_2ab9360b(0);
   level flag::set("flag_vo_crash_rpg");
 
@@ -109,8 +109,8 @@ function function_9eecfef5(name, starting, direct, player) {
     level.buddy val::reset(#"hash_3bb822ac59ad80", "take_weapons");
   }
 
-  level clientfield::set("" + # "hash_4ee03d623b77b0c2", 0);
-  level clientfield::set("" + # "hash_16a1381cc22da440", 0);
+  level clientfield::set("" + #"hash_4ee03d623b77b0c2", 0);
+  level clientfield::set("" + #"hash_16a1381cc22da440", 0);
   level clientfield::set("toggle_gameplay_character_visibility", 2);
   level thread function_6ac5ef82();
 
@@ -134,11 +134,11 @@ function function_6ac5ef82() {
   level flag::wait_till(#"all_players_spawned");
   level.player setmovespeedscale(0.6);
   level.player val::set(#"hash_296522f55a840af7", "allow_sprint", 0);
-  level clientfield::set("" + # "hash_7dc38a630ed68eb3", 1);
+  level clientfield::set("" + #"hash_7dc38a630ed68eb3", 1);
   level waittill(#"hash_73a21eed3846c3a9");
   level.player setmovespeedscale(1);
   level.player val::reset(#"hash_296522f55a840af7", "allow_sprint");
-  level clientfield::set("" + # "hash_7dc38a630ed68eb3", 0);
+  level clientfield::set("" + #"hash_7dc38a630ed68eb3", 0);
 }
 
 function function_58ef8b05(str_objective, b_starting) {
@@ -286,7 +286,7 @@ function function_398bee81(name, starting, direct, player) {
     objectives::scripted(#"last_stand", undefined, #"hash_512f51804b601599");
   }
 
-  clientfield::set("" + # "hash_5a188b1de711e5ca", 1);
+  clientfield::set("" + #"hash_5a188b1de711e5ca", 1);
 }
 
 function function_a337b00e() {
@@ -327,7 +327,7 @@ function function_cd3c6f53(str_objective, b_starting) {
   level snd::client_msg(#"hash_763d59f6976503eb");
   namespace_72b0499b::music("13.0_last_stand");
   util::delay(6, undefined, &spawn_manager::enable, "last_stand_spawn_manager");
-  level.player clientfield::set_to_player("" + # "force_stream_weapons", 2);
+  level.player clientfield::set_to_player("" + #"force_stream_weapons", 2);
   scene::add_scene_func(#"hash_30c1ba04c9ba0bf3", &function_151b3bc9, "transition");
   scene::add_scene_func(#"hash_30c1ba04c9ba0bf3", &function_151b3bc9, "outro");
 

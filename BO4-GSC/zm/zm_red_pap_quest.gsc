@@ -53,14 +53,14 @@
 #namespace zm_red_pap_quest;
 
 init() {
-  clientfield::register("scriptmover", "" + # "hash_38dbf4f346c0b609", -15000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_9055852bfeb9f00", -15000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "crystal_explosion", 16000, 1, "counter");
-  clientfield::register("vehicle", "" + # "spartoi_charge", 16000, 1, "counter");
-  clientfield::register("toplayer", "" + # "hash_687fbbd292ea6be0", 16000, 1, "int");
-  clientfield::register("toplayer", "" + # "pegasus_shellshock", 16000, 1, "int");
-  clientfield::register("toplayer", "" + # "waterfall_passthrough", 16000, 1, "int");
-  clientfield::register("world", "" + # "hash_28eb5e403f599ce2", 17000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_38dbf4f346c0b609", -15000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_9055852bfeb9f00", -15000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"crystal_explosion", 16000, 1, "counter");
+  clientfield::register("vehicle", "" + #"spartoi_charge", 16000, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_687fbbd292ea6be0", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"pegasus_shellshock", 16000, 1, "int");
+  clientfield::register("toplayer", "" + #"waterfall_passthrough", 16000, 1, "int");
+  clientfield::register("world", "" + #"hash_28eb5e403f599ce2", 17000, 1, "int");
   level zm_audio::function_6191af93(#"location_enter", #"hash_4576fb3345db827b", "", "");
   level.var_2e32e0bb = 1;
   callback::on_spawned(&on_player_spawned);
@@ -310,7 +310,7 @@ function_5c803daa(var_5ea5c94d) {
 
   level.var_c89378af = util::spawn_model(level.var_51e9c177.model, level.var_51e9c177.origin, level.var_51e9c177.angles);
   wait 0.1;
-  level clientfield::set("" + # "hash_28eb5e403f599ce2", 1);
+  level clientfield::set("" + #"hash_28eb5e403f599ce2", 1);
   level.var_51e9c177.var_303cab7f = level.var_51e9c177 zm_unitrigger::create(&function_64e44dd, 96, &function_dfd958e5);
 }
 
@@ -342,7 +342,7 @@ function_dfd958e5() {
 
 function_5a06e111(player) {
   level flag::set(#"flag_gegenees_set_intro");
-  level clientfield::set("" + # "hash_28eb5e403f599ce2", 0);
+  level clientfield::set("" + #"hash_28eb5e403f599ce2", 0);
 
   if(isDefined(level.var_c89378af)) {
     level.var_c89378af delete();
@@ -587,7 +587,7 @@ function_e56c27aa() {
 
 function_d02f7723() {
   self endon(#"death");
-  self clientfield::set("" + # "pegasus_ambient", 1);
+  self clientfield::set("" + #"pegasus_ambient", 1);
   level flag::wait_till(#"hash_ec641f342e0d032");
 
   if(isDefined(self)) {
@@ -689,7 +689,7 @@ spawn_pegasus() {
   var_10d4f67d linkto(level.var_cb0e9f8e);
   var_10d4f67d thread function_79c0fdf3();
   var_10d4f67d thread function_551b832a();
-  var_10d4f67d clientfield::set("" + # "pegasus_teleport", 1);
+  var_10d4f67d clientfield::set("" + #"pegasus_teleport", 1);
   level.var_cb0e9f8e thread scene::play("aib_zm_red_vign_peg_inair_flight_cycle_01", "loop", var_10d4f67d);
 
   while(!level flag::get(#"hash_1b6616e730b1235b")) {
@@ -858,7 +858,7 @@ function_810c4f44(s_ride) {
   waitframe(1);
 
   while(true) {
-    self.var_f58528f4 clientfield::increment("" + # "hash_43cf6c236d2e9ba");
+    self.var_f58528f4 clientfield::increment("" + #"hash_43cf6c236d2e9ba");
     wait 1.5;
   }
 }
@@ -879,8 +879,8 @@ function_d851273d() {
       player thread zm_equipment::show_hint_text(#"hash_2635b6ade6ebd4", 10);
       wait 0.1;
 
-      if(!player clientfield::get_to_player("" + # "hash_687fbbd292ea6be0") && zm_utility::is_player_valid(player)) {
-        player clientfield::set_to_player("" + # "hash_687fbbd292ea6be0", 1);
+      if(!player clientfield::get_to_player("" + #"hash_687fbbd292ea6be0") && zm_utility::is_player_valid(player)) {
+        player clientfield::set_to_player("" + #"hash_687fbbd292ea6be0", 1);
       }
     }
 
@@ -931,7 +931,7 @@ pegasus_strike(ai_target) {
     return;
   }
 
-  ai_target clientfield::set("" + # "hash_51b05e5d116438a9", 5);
+  ai_target clientfield::set("" + #"hash_51b05e5d116438a9", 5);
   wait 2;
   waitframe(1);
 
@@ -1041,8 +1041,8 @@ function_fe0a763c() {
       player.var_f4e33249 = 1;
       player thread zm_equipment::function_57fbff5c();
 
-      if(player clientfield::get_to_player("" + # "hash_687fbbd292ea6be0")) {
-        player clientfield::set_to_player("" + # "hash_687fbbd292ea6be0", 0);
+      if(player clientfield::get_to_player("" + #"hash_687fbbd292ea6be0")) {
+        player clientfield::set_to_player("" + #"hash_687fbbd292ea6be0", 0);
       }
 
       if(player laststand::player_is_in_laststand() && !(isDefined(player.var_c6a6f334) && player.var_c6a6f334)) {
@@ -1245,7 +1245,7 @@ function_8c5f16dd() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    player clientfield::set_to_player("" + # "waterfall_passthrough", 1);
+    player clientfield::set_to_player("" + #"waterfall_passthrough", 1);
   }
 
   wait 2.5;
@@ -1266,7 +1266,7 @@ function_8c5f16dd() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-    player clientfield::set_to_player("" + # "waterfall_passthrough", 0);
+    player clientfield::set_to_player("" + #"waterfall_passthrough", 0);
   }
 }
 
@@ -1290,7 +1290,7 @@ function_db68db95(s_pos) {
     level lui::screen_fade_in(0.5);
   }
 
-  self clientfield::set_to_player("" + # "pegasus_shellshock", 1);
+  self clientfield::set_to_player("" + #"pegasus_shellshock", 1);
   self val::reset(#"pegasus_ride", "takedamage");
   self val::reset(#"pegasus_prep", "freezecontrols");
   self unlink();
@@ -1305,7 +1305,7 @@ function_db68db95(s_pos) {
   self.var_f43d8eba = 0;
   self.var_f22c83f5 = undefined;
   wait 1.5;
-  self clientfield::set_to_player("" + # "pegasus_shellshock", 0);
+  self clientfield::set_to_player("" + #"pegasus_shellshock", 0);
   wait 5;
   self.ignoreme = 0;
   wait 6;
@@ -1487,7 +1487,7 @@ function_7d85e8ea() {
 
 function_f41b632f() {
   self thread function_c20c157a("cliff_tombs");
-  self clientfield::set("" + # "special_target", 1);
+  self clientfield::set("" + #"special_target", 1);
   level flag::wait_till(#"hash_61de3b8fe6f6a35");
   level thread scene::play(#"p8_fxanim_zm_red_eagle_cage_bundle", "open");
   s_scene = struct::get("tag_align_red_eagles");
@@ -1520,7 +1520,7 @@ function_697a602a(mdl_cage) {
   }
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "special_target", 1);
+    self clientfield::set("" + #"special_target", 1);
     self thread function_c20c157a("serpent_pass");
   }
 
@@ -1652,7 +1652,7 @@ function_f95a14a0() {
   self.no_powerups = 1;
   self.var_ae4569d5 = 1;
   self thread scene::play(#"aib_vign_cust_zm_red_spar_swrd_build_01", self);
-  self clientfield::increment("" + # "hash_6d5686b05e69fcb0");
+  self clientfield::increment("" + #"hash_6d5686b05e69fcb0");
 }
 
 rock_fall() {
@@ -1832,7 +1832,7 @@ function_76678dd2() {
 }
 
 function_c97fc55b() {
-  self.mdl_bones clientfield::set("" + # "spartoi_reassemble_clientfield", 1);
+  self.mdl_bones clientfield::set("" + #"spartoi_reassemble_clientfield", 1);
   self.mdl_bones moveto(self.s_pt.origin, 1);
   self.mdl_bones waittill(#"movedone");
   ai_zombie = zombie_skeleton_util::function_1ea880bd(1, self.s_pt, level.round_number);
@@ -1846,7 +1846,7 @@ function_c97fc55b() {
       ai_zombie thread scene::play(#"aib_vign_cust_zm_red_spar_swrd_build_01", ai_zombie);
     }
 
-    ai_zombie clientfield::increment("" + # "hash_6d5686b05e69fcb0");
+    ai_zombie clientfield::increment("" + #"hash_6d5686b05e69fcb0");
   }
 
   self.mdl_bones delete();
@@ -1962,11 +1962,11 @@ raw\sound\amb\chain\sway_loop\amb_lamp_sway_01.LL55.pc.snd() {
 
 function_1984219e(nd_start) {
   self endon(#"death");
-  self clientfield::set("" + # "perseus_energy", 1);
+  self clientfield::set("" + #"perseus_energy", 1);
   self vehicle::get_on_and_go_path(nd_start);
   self playSound(#"hash_7c51534a91103a32");
-  self clientfield::set("" + # "perseus_energy", 0);
-  self clientfield::increment("" + # "spartoi_charge");
+  self clientfield::set("" + #"perseus_energy", 0);
+  self clientfield::increment("" + #"spartoi_charge");
   wait 0.1;
   self delete();
 }
@@ -2033,7 +2033,7 @@ function_a8f9c9c4() {
     } else {
       s_scene thread scene::play(str_scene, "hover_attack", self);
       self waittill(#"impact");
-      self clientfield::increment("" + # "crystal_explosion");
+      self clientfield::increment("" + #"crystal_explosion");
       self playrumbleonentity("zm_red_eagle_impact_rumble");
 
       if(level.n_attacks) {

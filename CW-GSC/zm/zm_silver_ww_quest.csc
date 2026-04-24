@@ -14,24 +14,24 @@ function init() {
     return 0;
   }
 
-  clientfield::register("scriptmover", "" + # "hash_7159facf785aad53", 1, 1, "int", &function_7bceb311, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_864ef374ea11ea7", 1, 1, "int", &function_37ba0961, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_18f64f139f905f76", 1, 1, "int", &function_f875612b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7159facf785aad53", 1, 1, "int", &function_7bceb311, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_864ef374ea11ea7", 1, 1, "int", &function_37ba0961, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_18f64f139f905f76", 1, 1, "int", &function_f875612b, 0, 0);
   clientfield::register("scriptmover", "crystal_energy_fx", 1, 1, "int", &crystal_energy_fx, 0, 0);
   clientfield::register("allplayers", "ww_vacuum_crystal_fx", 1, 1, "int", &ww_vacuum_crystal_fx, 0, 0);
   clientfield::register("allplayers", "hold_crystal_energy", 1, 1, "int", &hold_crystal_energy, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_21ba194bb9030d0c", 1, 1, "int", &function_f0bc5344, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5e31ed9954a7a58a", 1, 2, "int", &function_29b9f19b, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5020565243fa510a", 1, 1, "int", &function_c4793fe5, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4119827af45a4ba7", 1, 1, "int", &function_48124b82, 0, 0);
-  clientfield::register("toplayer", "" + # "interact_rumble", 1, 1, "int", &interact_rumble, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_6a198759db0810a6", 1, 1, "int", &function_1534626e, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7862b1e62306df36", 1, 1, "int", &function_408232a7, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_196eef041ba86f9a", 1, 1, "counter", &function_1385b26c, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5a932b901b9a5d0d", 1, 2, "int", &function_167bea22, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_20066374c799cb61", 1, 1, "int", &function_4c8d91b3, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7aeee79e85f9273c", 1, 3, "int", &function_cadc50d8, 0, 0);
-  clientfield::register("world", "" + # "hash_31ddead700f0e24c", 1, 1, "int", &function_c35975ed, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_21ba194bb9030d0c", 1, 1, "int", &function_f0bc5344, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5e31ed9954a7a58a", 1, 2, "int", &function_29b9f19b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5020565243fa510a", 1, 1, "int", &function_c4793fe5, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4119827af45a4ba7", 1, 1, "int", &function_48124b82, 0, 0);
+  clientfield::register("toplayer", "" + #"interact_rumble", 1, 1, "int", &interact_rumble, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_6a198759db0810a6", 1, 1, "int", &function_1534626e, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7862b1e62306df36", 1, 1, "int", &function_408232a7, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_196eef041ba86f9a", 1, 1, "counter", &function_1385b26c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5a932b901b9a5d0d", 1, 2, "int", &function_167bea22, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_20066374c799cb61", 1, 1, "int", &function_4c8d91b3, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7aeee79e85f9273c", 1, 3, "int", &function_cadc50d8, 0, 0);
+  clientfield::register("world", "" + #"hash_31ddead700f0e24c", 1, 1, "int", &function_c35975ed, 0, 0);
 }
 
 function function_cadc50d8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

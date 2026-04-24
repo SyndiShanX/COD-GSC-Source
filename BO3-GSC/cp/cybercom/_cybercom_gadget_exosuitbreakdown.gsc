@@ -119,7 +119,7 @@ function _activate_exo_breakdown(slot, weapon) {
   foreach(item in self.cybercom.lock_targets) {
     if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
-        if(!cybercom::targetisvalid(item.target, weapon)) {
+        if(!cybercom::targetisValid(item.target, weapon)) {
           continue;
         }
         self thread challenges::function_96ed590f("cybercom_uses_control");
@@ -175,7 +175,7 @@ function ai_activateexosuitbreakdown(target, var_9bc2efcb = 1) {
   }
   weapon = getweapon("gadget_exo_breakdown");
   foreach(guy in validtargets) {
-    if(!cybercom::targetisvalid(guy, weapon)) {
+    if(!cybercom::targetisValid(guy, weapon)) {
       continue;
     }
     guy thread _exo_breakdown(self);
@@ -212,7 +212,7 @@ function private _exo_breakdown(attacker) {
     loops = 1;
   }
   wait(randomfloatrange(0, 0.75));
-  if(!attacker cybercom::targetisvalid(self, weapon)) {
+  if(!attacker cybercom::targetisValid(self, weapon)) {
     return;
   }
   if(self cybercom::function_421746e0()) {

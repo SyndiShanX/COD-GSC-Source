@@ -55,8 +55,8 @@ __init__() {
 __main__() {}
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "trap_light", 8000, 2, "int");
-  clientfield::register("scriptmover", "" + # "hash_17df66ef5f71c0de", 8000, 2, "int");
+  clientfield::register("scriptmover", "" + #"trap_light", 8000, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_17df66ef5f71c0de", 8000, 2, "int");
 }
 
 init() {
@@ -637,13 +637,13 @@ function_e714e3a8(str_state = "off") {
       self showpart("light_off");
       break;
     case # "green":
-      self clientfield::set("" + # "trap_light", 1);
+      self clientfield::set("" + #"trap_light", 1);
       self hidepart("light_off");
       self hidepart("light_red");
       self showpart("light_green");
       break;
     case # "red":
-      self clientfield::set("" + # "trap_light", 2);
+      self clientfield::set("" + #"trap_light", 2);
       self hidepart("light_green");
       self hidepart("light_off");
       self showpart("light_red");

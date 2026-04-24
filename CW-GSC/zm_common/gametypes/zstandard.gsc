@@ -1723,13 +1723,13 @@ function function_9850b18() {
   self val::set("zm_arcade", "takedamage", 0);
   self val::set("zm_arcade", "ignoreme", 1);
   self.var_800f306a = 1;
-  self clientfield::set_to_player("" + # "hash_321b58d22755af74", 1);
+  self clientfield::set_to_player("" + #"hash_321b58d22755af74", 1);
   self playSound(#"zmb_bgb_plainsight_start");
   self playLoopSound(#"zmb_bgb_plainsight_loop", 1);
   wait 6;
   self stoploopsound(1);
   self playSound(#"zmb_bgb_plainsight_end");
-  self clientfield::set_to_player("" + # "hash_321b58d22755af74", 0);
+  self clientfield::set_to_player("" + #"hash_321b58d22755af74", 0);
   self val::reset("zm_arcade", "takedamage");
   self val::reset("zm_arcade", "ignoreme");
   self.var_800f306a = undefined;
@@ -1738,7 +1738,7 @@ function function_9850b18() {
 function function_4faf4020(str_notify) {
   foreach(player in level.players) {
     if(is_true(player.var_800f306a)) {
-      player clientfield::set_to_player("" + # "hash_321b58d22755af74", 0);
+      player clientfield::set_to_player("" + #"hash_321b58d22755af74", 0);
       player stoploopsound(1);
       player.var_800f306a = undefined;
     }

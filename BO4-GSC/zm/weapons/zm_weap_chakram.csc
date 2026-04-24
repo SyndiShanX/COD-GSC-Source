@@ -16,19 +16,19 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "zombie_slice_right", 1, 2, "counter", &function_8e1552b1, 1, 0);
-  clientfield::register("actor", "" + # "zombie_slice_left", 1, 2, "counter", &function_6831ee4b, 1, 0);
-  clientfield::register("allplayers", "" + # "chakram_melee_hit", 1, 1, "counter", &chakram_melee_hit, 1, 0);
-  clientfield::register("actor", "" + # "chakram_head_pop_fx", 1, 1, "int", &chakram_head_pop_fx, 1, 0);
-  clientfield::register("vehicle", "" + # "chakram_head_pop_fx", 1, 1, "int", &chakram_head_pop_fx, 1, 0);
-  clientfield::register("scriptmover", "" + # "chakram_throw_trail_fx", 1, 1, "int", &chakram_throw_trail_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "chakram_throw_impact_fx", 1, 1, "int", &chakram_throw_impact_fx, 0, 0);
-  clientfield::register("actor", "" + # "chakram_throw_special_impact_fx", 1, 1, "counter", &chakram_throw_special_impact_fx, 0, 0);
-  clientfield::register("allplayers", "" + # "chakram_whirlwind_fx", 1, 1, "int", &chakram_whirlwind_fx, 0, 0);
-  clientfield::register("actor", "" + # "chakram_whirlwind_shred_fx", 1, 1, "counter", &chakram_whirlwind_shred_fx, 1, 0);
-  clientfield::register("vehicle", "" + # "chakram_whirlwind_shred_fx", 1, 1, "counter", &chakram_whirlwind_shred_fx, 1, 0);
-  clientfield::register("toplayer", "" + # "chakram_speed_buff_postfx", 1, 1, "counter", &chakram_speed_buff_postfx, 0, 0);
-  clientfield::register("toplayer", "" + # "chakram_rumble", 1, 3, "counter", &chakram_rumble, 0, 0);
+  clientfield::register("actor", "" + #"zombie_slice_right", 1, 2, "counter", &function_8e1552b1, 1, 0);
+  clientfield::register("actor", "" + #"zombie_slice_left", 1, 2, "counter", &function_6831ee4b, 1, 0);
+  clientfield::register("allplayers", "" + #"chakram_melee_hit", 1, 1, "counter", &chakram_melee_hit, 1, 0);
+  clientfield::register("actor", "" + #"chakram_head_pop_fx", 1, 1, "int", &chakram_head_pop_fx, 1, 0);
+  clientfield::register("vehicle", "" + #"chakram_head_pop_fx", 1, 1, "int", &chakram_head_pop_fx, 1, 0);
+  clientfield::register("scriptmover", "" + #"chakram_throw_trail_fx", 1, 1, "int", &chakram_throw_trail_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"chakram_throw_impact_fx", 1, 1, "int", &chakram_throw_impact_fx, 0, 0);
+  clientfield::register("actor", "" + #"chakram_throw_special_impact_fx", 1, 1, "counter", &chakram_throw_special_impact_fx, 0, 0);
+  clientfield::register("allplayers", "" + #"chakram_whirlwind_fx", 1, 1, "int", &chakram_whirlwind_fx, 0, 0);
+  clientfield::register("actor", "" + #"chakram_whirlwind_shred_fx", 1, 1, "counter", &chakram_whirlwind_shred_fx, 1, 0);
+  clientfield::register("vehicle", "" + #"chakram_whirlwind_shred_fx", 1, 1, "counter", &chakram_whirlwind_shred_fx, 1, 0);
+  clientfield::register("toplayer", "" + #"chakram_speed_buff_postfx", 1, 1, "counter", &chakram_speed_buff_postfx, 0, 0);
+  clientfield::register("toplayer", "" + #"chakram_rumble", 1, 3, "counter", &chakram_rumble, 0, 0);
   level._effect[#"sword_bloodswipe_r_1p"] = #"zombie/fx_sword_slash_right_1p_zod_zmb";
   level._effect[#"sword_bloodswipe_l_1p"] = #"zombie/fx_sword_slash_left_1p_zod_zmb";
   level._effect[#"hash_720f204e4406ddbf"] = #"hash_59cdb0226e644934";

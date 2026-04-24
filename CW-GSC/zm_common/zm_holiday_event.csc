@@ -22,7 +22,7 @@ function private preinit() {
   if(is_true(getgametypesetting(#"hash_4751990deae37e66"))) {
     callback::on_localclient_connect(&on_localclient_connect);
     callback::function_675f0963(&function_675f0963);
-    clientfield::register("actor", "" + # "hash_477ed992854f5645", 28000, 1, "counter", &function_3b11146f, 0, 0);
+    clientfield::register("actor", "" + #"hash_477ed992854f5645", 28000, 1, "counter", &function_3b11146f, 0, 0);
     level thread function_ff03ce49();
   }
 }

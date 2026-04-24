@@ -101,14 +101,14 @@ function private function_f4804ac(localclientnum) {
 }
 
 function private function_b1a83ab() {
-  return getuimodel(function_5c2e399f(), "ScriptedWidgetData.widgetModels." + # "interactive_map");
+  return getuimodel(function_5c2e399f(), "ScriptedWidgetData.widgetModels." + #"interactive_map");
 }
 
 function private function_644b2f6d() {
   ui_model = function_b1a83ab();
 
   if(isDefined(ui_model)) {
-    return getuimodel(ui_model, "cursor.mapObjects." + # "cursor");
+    return getuimodel(ui_model, "cursor.mapObjects." + #"cursor");
   }
 
   return undefined;

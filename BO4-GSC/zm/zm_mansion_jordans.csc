@@ -14,11 +14,11 @@
 #namespace mansion_jordans;
 
 init() {
-  clientfield::register("scriptmover", "" + # "hash_54cceab249a41cde", 8000, 1, "int", &function_5869f09a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_336942eaf5fcd809", 8000, 1, "int", &function_c51132ba, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_54cceab249a41cde", 8000, 1, "int", &function_5869f09a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_336942eaf5fcd809", 8000, 1, "int", &function_c51132ba, 0, 0);
 
-  clientfield::register("<dev string:x38>", "<dev string:x46>" + # "hash_3efe70d8ad68a07d", 8000, 4, "<dev string:x49>", &function_230ff6dc, 0, 0);
-  clientfield::register("<dev string:x38>", "<dev string:x46>" + # "hash_4d30672cd0a2ef31", 8000, 1, "<dev string:x49>", &function_bb6fcc6a, 0, 0);
+  clientfield::register("<dev string:x38>", "<dev string:x46>" + #"hash_3efe70d8ad68a07d", 8000, 4, "<dev string:x49>", &function_230ff6dc, 0, 0);
+  clientfield::register("<dev string:x38>", "<dev string:x46>" + #"hash_4d30672cd0a2ef31", 8000, 1, "<dev string:x49>", &function_bb6fcc6a, 0, 0);
 }
 
 function_5869f09a(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

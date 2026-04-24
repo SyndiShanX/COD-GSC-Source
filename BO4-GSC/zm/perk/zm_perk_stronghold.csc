@@ -32,7 +32,7 @@ enable_stronghold_perk_for_level() {
 init_stronghold() {}
 
 function_5a4557ee() {
-  clientfield::register("toplayer", "" + # "hash_24e322568c9492c5", 1, 1, "int", &function_2400dd1d, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_24e322568c9492c5", 1, 1, "int", &function_2400dd1d, 0, 1);
 }
 
 function_44bd921f() {}

@@ -9,8 +9,8 @@
 #namespace namespace_2a67e53;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "hash_4545e81f76244b", 16000, 1, "int", &function_2810997c, 0, 0);
-  clientfield::register("world", "" + # "hash_5c8a1cf9b543c223", 16000, getminbitcountfornum(5), "int", &function_114cfee9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4545e81f76244b", 16000, 1, "int", &function_2810997c, 0, 0);
+  clientfield::register("world", "" + #"hash_5c8a1cf9b543c223", 16000, getminbitcountfornum(5), "int", &function_114cfee9, 0, 0);
 }
 
 function function_114cfee9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

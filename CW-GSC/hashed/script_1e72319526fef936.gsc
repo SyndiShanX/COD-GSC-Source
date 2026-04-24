@@ -36,7 +36,7 @@ function private preinit() {
 
   content_manager::register_script(#"hash_2ff0859bce056c66", &function_ea2db6a9);
   clientfield::register("allplayers", "phase_rift_player_fx", 1, 2, "int");
-  clientfield::register("toplayer", "" + # "hash_1b01e37683714902", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_1b01e37683714902", 1, 1, "int");
   callback::add_callback(#"on_host_migration_end", &function_16ee428c);
 }
 
@@ -196,7 +196,7 @@ function private function_dda69211(player, vehicle, var_2b357ce9) {
     }
 
     if(isDefined(vehicle)) {
-      vehicle clientfield::increment("" + # "vehicle_teleport");
+      vehicle clientfield::increment("" + #"vehicle_teleport");
       var_9cfd0ea9 = vehicle getvehoccupants();
 
       foreach(rider in var_9cfd0ea9) {
@@ -208,13 +208,13 @@ function private function_dda69211(player, vehicle, var_2b357ce9) {
     player playsoundtoplayer(#"hash_5ccf2f0b27ccbf41", player);
 
     if(is_true(var_2b357ce9.var_40803981)) {
-      player clientfield::set_to_player("" + # "hash_1b01e37683714902", 1);
+      player clientfield::set_to_player("" + #"hash_1b01e37683714902", 1);
     }
 
     player namespace_dbb31ff3::function_7b3dca17(self);
 
     if(is_true(var_2b357ce9.var_40803981)) {
-      player clientfield::set_to_player("" + # "hash_1b01e37683714902", 0);
+      player clientfield::set_to_player("" + #"hash_1b01e37683714902", 0);
     }
 
     if(isalive(player)) {

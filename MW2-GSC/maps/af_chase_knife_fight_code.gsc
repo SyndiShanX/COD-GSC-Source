@@ -9,7 +9,7 @@
 #include maps\_anim;
 #include maps\_vehicle;
 
-/include maps\af_chase_code; /#include
+/include maps\af_chase_code; include
 maps\af_chase_zodiac;#include maps\_hud_util;
 
 ENDING_MOVE_SPEED = 0.45;

@@ -28,7 +28,7 @@ function private autoexec __init__system__() {
 function private preinit() {
   level.var_ff7ae671 = [];
   level.var_f3346ffc = [];
-  clientfield::register("allplayers", "" + # "hash_59400ab6cbfaec5d", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_59400ab6cbfaec5d", 1, 1, "int");
   callback::on_spawned(&on_spawned);
   namespace_1b527536::function_36e0540e(#"aether_shroud", 1, 45, "field_upgrade_aether_shroud_item_sr");
   namespace_1b527536::function_36e0540e(#"aether_shroud_1", 1, 45, "field_upgrade_aether_shroud_1_item_sr");
@@ -167,7 +167,7 @@ function private function_e41cc86b() {
 
 function on_spawned() {
   self.var_b1164fd0 = undefined;
-  self clientfield::set("" + # "hash_59400ab6cbfaec5d", 0);
+  self clientfield::set("" + #"hash_59400ab6cbfaec5d", 0);
   self val::reset(#"aether_shroud", "ignoreme");
 }
 
@@ -240,7 +240,7 @@ function function_84c43da8(params) {
 function function_ff022837(n_duration, weapon) {
   self endon(#"disconnect");
   self.var_b1164fd0 = 1;
-  self clientfield::set("" + # "hash_59400ab6cbfaec5d", 1);
+  self clientfield::set("" + #"hash_59400ab6cbfaec5d", 1);
   self val::set(#"aether_shroud", "ignoreme", 1);
   s_waitresult = self waittilltimeout(n_duration, #"scene_igc_shot_started", #"player_downed", #"death");
   self thread function_c8e90b89(s_waitresult._notify, weapon);
@@ -258,7 +258,7 @@ function function_c8e90b89(str_notify, weapon) {
   }
 
   self.var_b1164fd0 = undefined;
-  self clientfield::set("" + # "hash_59400ab6cbfaec5d", 0);
+  self clientfield::set("" + #"hash_59400ab6cbfaec5d", 0);
   self val::reset(#"aether_shroud", "ignoreme");
 }
 

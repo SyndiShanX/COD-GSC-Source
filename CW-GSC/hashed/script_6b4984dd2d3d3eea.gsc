@@ -143,16 +143,16 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("missile", "" + # "hash_51901507983013f5", 28000, 1, "int");
+  clientfield::register("missile", "" + #"hash_51901507983013f5", 28000, 1, "int");
   clientfield::register("toplayer", "using_bomb", 28000, 1, "int");
   clientfield::register("toplayer", "to_player_notification", 28000, 5, "int");
   clientfield::register("world", "bomb_id", 28000, 2, "int");
   clientfield::register("world", "wanted_client_num", 28000, 5, "int");
-  clientfield::register("scriptmover", "" + # "hash_732102339886b628", 28000, 1, "int");
-  clientfield::register("missile", "" + # "hash_7850e541b1606b4a", 28000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_3b8f220452f1fe4c", 28000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_3cb0242230f3f716", 28000, 2, "int");
-  clientfield::register("vehicle", "" + # "hash_508b8b3b9ba62e53", 28000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_732102339886b628", 28000, 1, "int");
+  clientfield::register("missile", "" + #"hash_7850e541b1606b4a", 28000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_3b8f220452f1fe4c", 28000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_3cb0242230f3f716", 28000, 2, "int");
+  clientfield::register("vehicle", "" + #"hash_508b8b3b9ba62e53", 28000, 1, "int");
 }
 
 function function_dfead3bd() {
@@ -335,7 +335,7 @@ function function_3a93afbe(attacker) {
 
   arrayremovevalue(level.var_56a47a6d, self);
   self function_f3da38fe();
-  self.ent clientfield::set("" + # "hash_732102339886b628", 0);
+  self.ent clientfield::set("" + #"hash_732102339886b628", 0);
   level thread function_4f53c9a2(2);
 
   if(level.var_28f7b75b == level.var_1424a0f7) {
@@ -356,7 +356,7 @@ function function_3a93afbe(attacker) {
 function private function_31f25d73(offsets, angle_offset, trigger_length, trigger_height) {
   level endon(#"game_ended");
   level waittill(#"hash_2f26b8ad3c26a7cb", #"hash_63497adad2aaccba");
-  self.ent clientfield::set("" + # "hash_732102339886b628", 1);
+  self.ent clientfield::set("" + #"hash_732102339886b628", 1);
   self.trigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
   self.trigger triggerignoreteam();
   self.trigger triggerenable(1);
@@ -420,7 +420,7 @@ function private function_13f62d64(triggerstruct, angle_offset) {
     return;
   }
 
-  deaddrop.ent clientfield::set("" + # "hash_732102339886b628", 0);
+  deaddrop.ent clientfield::set("" + #"hash_732102339886b628", 0);
 }
 
 function private function_d0c47f4f(offsets, trigger_length, trigger_height) {
@@ -646,7 +646,7 @@ function private function_78a857df(offsets, trigger_length, trigger_height) {
     return;
   }
 
-  self.e_device clientfield::set("" + # "hash_7850e541b1606b4a", 1);
+  self.e_device clientfield::set("" + #"hash_7850e541b1606b4a", 1);
   self.e_device.trigger = spawn("trigger_radius_use", self.origin + offsets, 0, trigger_length, trigger_height);
   self.e_device.trigger triggerenable(1);
   self.e_device.trigger triggerignoreteam();
@@ -750,7 +750,7 @@ function private function_a961266f(owner) {
 function private function_8832951f() {
   if(isDefined(self)) {
     self clientfield::set("isJammed", 1);
-    self clientfield::set("" + # "hash_51901507983013f5", 1);
+    self clientfield::set("" + #"hash_51901507983013f5", 1);
   }
 }
 
@@ -792,7 +792,7 @@ function private function_4d118352(attacker, callback_data) {
   }
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "hash_51901507983013f5", 0);
+    self clientfield::set("" + #"hash_51901507983013f5", 0);
     return;
   }
 }
@@ -828,7 +828,7 @@ function function_7ddae2fa(listeningdevice) {
 
   if(isDefined(self)) {
     self clientfield::set("isJammed", 0);
-    self clientfield::set("" + # "hash_51901507983013f5", 0);
+    self clientfield::set("" + #"hash_51901507983013f5", 0);
   }
 }
 
@@ -1893,7 +1893,7 @@ function function_70b57ee6() {
   var_57e06aea = item_supply_drop::function_47ec98c4(startpoint, endpoint, heli_drop_goal, 0, undefined, undefined, undefined, #"hash_579c1ac14abd2355");
   var_7b3f193d = level.supplydrop;
   var_b29eedbb = level.supplydropveh;
-  var_b29eedbb clientfield::set("" + # "hash_508b8b3b9ba62e53", 1);
+  var_b29eedbb clientfield::set("" + #"hash_508b8b3b9ba62e53", 1);
   level thread function_2398866a(13);
   level thread function_4f53c9a2(1);
   stashes = getEntArray(var_7b3f193d.targetname, "targetname");
@@ -2097,7 +2097,7 @@ function private function_9d70f23a(offsets, trigger_length, trigger_height) {
   self.trigger usetriggerignoreuseholdtime();
   self.trigger sethintstring(#"hash_76430d002eba2777");
   self.trigger.encodedradio = self;
-  self.ent clientfield::set("" + # "hash_3b8f220452f1fe4c", 1);
+  self.ent clientfield::set("" + #"hash_3b8f220452f1fe4c", 1);
   self.ent playSound(#"hash_54c2b44022415883");
   self.ent playLoopSound(#"hash_61dcb32e56041c08");
   util::wait_network_frame();
@@ -2404,20 +2404,20 @@ function function_61a3a6a0() {
         objective_setinvisibletoall(marker.var_81e11916);
         marker function_a19ce5a8(var_9af06a57.origin, 400);
         util::wait_network_frame();
-        marker clientfield::set("" + # "hash_3cb0242230f3f716", 1);
+        marker clientfield::set("" + #"hash_3cb0242230f3f716", 1);
         marker function_61203128();
         wait 10;
         marker function_a19ce5a8(var_9af06a57.origin, 300);
         util::wait_network_frame();
-        marker clientfield::set("" + # "hash_3cb0242230f3f716", 2);
+        marker clientfield::set("" + #"hash_3cb0242230f3f716", 2);
         marker function_61203128();
         wait 10;
         marker function_a19ce5a8(var_9af06a57.origin, 200);
         util::wait_network_frame();
-        marker clientfield::set("" + # "hash_3cb0242230f3f716", 3);
+        marker clientfield::set("" + #"hash_3cb0242230f3f716", 3);
         marker function_61203128();
         wait 10;
-        marker clientfield::set("" + # "hash_3cb0242230f3f716", 0);
+        marker clientfield::set("" + #"hash_3cb0242230f3f716", 0);
         objective_delete(marker.objidfriendly);
         objective_delete(marker.var_81e11916);
         util::wait_network_frame();
@@ -2510,7 +2510,7 @@ function function_cd002276() {
 
         if(isDefined(level.var_efd26964)) {
           marker = level.var_efd26964;
-          marker clientfield::set("" + # "hash_3cb0242230f3f716", 0);
+          marker clientfield::set("" + #"hash_3cb0242230f3f716", 0);
           util::wait_network_frame();
 
           if(isDefined(marker.objidfriendly)) {

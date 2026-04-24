@@ -15,7 +15,7 @@
 #namespace zm_orange_audiologs;
 
 preload() {
-  clientfield::register("scriptmover", "" + # "hash_4a18e1ea1950215d", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_4a18e1ea1950215d", 24000, 1, "int");
 }
 
 init() {
@@ -174,7 +174,7 @@ setup_orb() {
   self setCanDamage(1);
   self.allowdeath = 0;
   self thread function_530a6195();
-  self clientfield::set("" + # "hash_4a18e1ea1950215d", 1);
+  self clientfield::set("" + #"hash_4a18e1ea1950215d", 1);
 }
 
 function_530a6195() {

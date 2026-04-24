@@ -8,9 +8,9 @@
 #namespace namespace_af0fb818;
 
 function function_39da2f0() {
-  clientfield::register("vehicle", "" + # "hash_7882b7772f4ea0a8", 9000, 1, "int", &train_move, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7882b7772f4ea0a8", 9000, 1, "int", &train_move, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_5dd246706762931", 9000, 1, "int", &function_e8c79645, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_7882b7772f4ea0a8", 9000, 1, "int", &train_move, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7882b7772f4ea0a8", 9000, 1, "int", &train_move, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_5dd246706762931", 9000, 1, "int", &function_e8c79645, 0, 0);
 }
 
 function main() {}

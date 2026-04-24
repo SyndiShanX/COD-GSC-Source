@@ -10,11 +10,11 @@
 #namespace namespace_b2add33c;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("scriptmover", "" + # "hash_699685336205339b", 1, 1, "int", &function_6020a772, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1cf7ea5253c0a857", 1, 1, "int", &function_a1fa260e, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_2833af7211f19903", 1, 2, "int", &function_8c61edee, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7434dc21c6d7b515", 1, 2, "int", &function_3f561fa0, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_2c70ab0c21e69749", 1, 1, "int", &function_5bdf2437, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_699685336205339b", 1, 1, "int", &function_6020a772, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1cf7ea5253c0a857", 1, 1, "int", &function_a1fa260e, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2833af7211f19903", 1, 2, "int", &function_8c61edee, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7434dc21c6d7b515", 1, 2, "int", &function_3f561fa0, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_2c70ab0c21e69749", 1, 1, "int", &function_5bdf2437, 0, 0);
   util::waitforclient(0);
 }
 

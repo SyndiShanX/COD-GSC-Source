@@ -18,9 +18,9 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("world", "" + # "hash_59ec82b1a72deb72", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "remotemissile_fov", 6000, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_4241f7b51f8c144", 8000, 1, "int");
+  clientfield::register("world", "" + #"hash_59ec82b1a72deb72", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"remotemissile_fov", 6000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_4241f7b51f8c144", 8000, 1, "int");
   init_shared("killstreak_remote_missile" + "_zm", &function_ea3ce28b);
 
   if(isDefined(level.killstreakrules[#"hero_weapons"])) {
@@ -46,14 +46,14 @@ function function_ea3ce28b(killstreaktype) {
 function function_903cf6aa() {
   self thread killstreakrules::function_24241971();
   level function_f7599440(1);
-  self clientfield::set_to_player("" + # "hash_4241f7b51f8c144", 1);
+  self clientfield::set_to_player("" + #"hash_4241f7b51f8c144", 1);
   self val::set(#"remote_missile", "ignoreme", 1);
   self val::set(#"remote_missile", "takedamage", 0);
 }
 
 function function_3e6a41b7() {
   level function_f7599440(0);
-  self clientfield::set_to_player("" + # "hash_4241f7b51f8c144", 0);
+  self clientfield::set_to_player("" + #"hash_4241f7b51f8c144", 0);
   wait 2;
 
   if(isPlayer(self)) {
@@ -68,7 +68,7 @@ function function_f7599440(on) {
   }
 
   if(on) {
-    clientfield::set("" + # "hash_59ec82b1a72deb72", 1);
+    clientfield::set("" + #"hash_59ec82b1a72deb72", 1);
     level.var_15ebb842++;
     return;
   }
@@ -76,7 +76,7 @@ function function_f7599440(on) {
   level.var_15ebb842--;
 
   if(level.var_15ebb842 <= 0) {
-    clientfield::set("" + # "hash_59ec82b1a72deb72", 0);
+    clientfield::set("" + #"hash_59ec82b1a72deb72", 0);
     level.var_15ebb842 = undefined;
   }
 }

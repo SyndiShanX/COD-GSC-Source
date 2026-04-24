@@ -22,7 +22,7 @@ function autoexec function_7defddbd() {
 }
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("toplayer", "" + # "hash_5e463693d1dbcf1c", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_5e463693d1dbcf1c", 1, 1, "int");
   level thread function_7f639bc1();
   function_19c4a6dc();
   load::main();
@@ -51,7 +51,7 @@ function function_19c4a6dc() {
   str_gametype = function_be90acca(util::get_game_type());
 
   if(str_gametype === "zsurvival") {
-    clientfield::register("toplayer", "" + # "hash_732e76418cbd8453", 1, 1, "int");
+    clientfield::register("toplayer", "" + #"hash_732e76418cbd8453", 1, 1, "int");
     level.var_b8c0d7a2 = 5000;
     level.var_e6b49685 = 3000;
     setDvar(#"hash_7b06b8037c26b99b", 200);
@@ -136,18 +136,18 @@ function function_7f639bc1() {
 }
 
 function function_53147f52(player) {
-  player clientfield::set_to_player("" + # "hash_5e463693d1dbcf1c", 1);
+  player clientfield::set_to_player("" + #"hash_5e463693d1dbcf1c", 1);
 }
 
 function function_10eb2d4b(player) {
   str_gametype = function_be90acca(util::get_game_type());
 
   if(str_gametype === "zsurvival") {
-    player clientfield::set_to_player("" + # "hash_732e76418cbd8453", 1);
+    player clientfield::set_to_player("" + #"hash_732e76418cbd8453", 1);
     return;
   }
 
-  player clientfield::set_to_player("" + # "hash_5e463693d1dbcf1c", 0);
+  player clientfield::set_to_player("" + #"hash_5e463693d1dbcf1c", 0);
 }
 
 function function_900862de() {

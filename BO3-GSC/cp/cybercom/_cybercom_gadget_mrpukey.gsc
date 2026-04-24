@@ -127,7 +127,7 @@ function private function_2de61c3f(slot, weapon) {
   foreach(item in self.cybercom.lock_targets) {
     if(isDefined(item.target) && (isDefined(item.inrange) && item.inrange)) {
       if(item.inrange == 1) {
-        if(!cybercom::targetisvalid(item.target, weapon)) {
+        if(!cybercom::targetisValid(item.target, weapon)) {
           continue;
         }
         self thread challenges::function_96ed590f("cybercom_uses_chaos");
@@ -216,7 +216,7 @@ function function_da7ef8ba(target, var_9bc2efcb = 1, upgraded) {
   }
   weapon = getweapon("gadget_mrpukey");
   foreach(guy in validtargets) {
-    if(!cybercom::targetisvalid(guy, weapon)) {
+    if(!cybercom::targetisValid(guy, weapon)) {
       continue;
     }
     guy thread function_25411db1(upgraded, 0, self);

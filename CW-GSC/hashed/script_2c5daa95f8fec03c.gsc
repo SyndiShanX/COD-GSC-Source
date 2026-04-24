@@ -22,8 +22,8 @@ function private preinit() {
   }
 
   for(i = 0; i < 6; i++) {
-    clientfield::register("actor", "" + # "weakpoint_state" + i, 1, 1, "int");
-    clientfield::register("actor", "" + # "weakpoint_fx" + i, 1, 1, "counter");
+    clientfield::register("actor", "" + #"weakpoint_state" + i, 1, 1, "int");
+    clientfield::register("actor", "" + #"weakpoint_fx" + i, 1, 1, "counter");
   }
 }
 
@@ -107,8 +107,8 @@ function function_bd0bd9f4(entity, &var_426069a) {
       continue;
     }
 
-    entity.var_5ace757d[var_8cc382e6.weakpoint - 1].var_ee8794bf = "" + # "weakpoint_state" + clientfield_index;
-    entity.var_5ace757d[var_8cc382e6.weakpoint - 1].var_98634dc5 = "" + # "weakpoint_fx" + clientfield_index;
+    entity.var_5ace757d[var_8cc382e6.weakpoint - 1].var_ee8794bf = "" + #"weakpoint_state" + clientfield_index;
+    entity.var_5ace757d[var_8cc382e6.weakpoint - 1].var_98634dc5 = "" + #"weakpoint_fx" + clientfield_index;
     clientfield_index++;
     assert(clientfield_index <= 6, "<dev string:x38>");
   }

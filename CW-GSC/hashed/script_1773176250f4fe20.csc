@@ -18,8 +18,8 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("actor", "" + # "hash_6a9eb737488c81c7", 11000, 1, "counter", &function_77972a15, 0, 0);
-  clientfield::register("actor", "" + # "hash_13a6ddf6358f814", 11000, 1, "int", &function_7431f6cc, 0, 0);
+  clientfield::register("actor", "" + #"hash_6a9eb737488c81c7", 11000, 1, "counter", &function_77972a15, 0, 0);
+  clientfield::register("actor", "" + #"hash_13a6ddf6358f814", 11000, 1, "int", &function_7431f6cc, 0, 0);
   level.var_1765ad79 = 0;
 }
 

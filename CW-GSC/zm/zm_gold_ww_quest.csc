@@ -10,12 +10,12 @@
 #namespace zm_gold_ww_quest;
 
 function init() {
-  clientfield::register("world", "" + # "hash_e3e178ca4bfed0a", 16000, 1, "int", &function_770151a9, 0, 0);
-  clientfield::register("world", "" + # "hash_4bbd14acfb65a055", 16000, 1, "counter", &function_e9ae3d81, 0, 0);
-  clientfield::register("world", "" + # "hash_6ad15545c118bf44", 16000, 6, "int", &function_9b54b294, 0, 0);
-  clientfield::register("world", "" + # "play_charge_fx", 16000, 1, "int", &play_charge_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_438f8800ecce6fba", 16000, 1, "int", &function_b5268151, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_631477f00832803c", 16000, 1, "int", &function_aa1d2bf6, 0, 0);
+  clientfield::register("world", "" + #"hash_e3e178ca4bfed0a", 16000, 1, "int", &function_770151a9, 0, 0);
+  clientfield::register("world", "" + #"hash_4bbd14acfb65a055", 16000, 1, "counter", &function_e9ae3d81, 0, 0);
+  clientfield::register("world", "" + #"hash_6ad15545c118bf44", 16000, 6, "int", &function_9b54b294, 0, 0);
+  clientfield::register("world", "" + #"play_charge_fx", 16000, 1, "int", &play_charge_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_438f8800ecce6fba", 16000, 1, "int", &function_b5268151, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_631477f00832803c", 16000, 1, "int", &function_aa1d2bf6, 0, 0);
 }
 
 function play_charge_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {

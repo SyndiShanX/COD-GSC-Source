@@ -20,9 +20,9 @@
 #namespace zm_gold_pap_quest;
 
 function init() {
-  clientfield::register("world", "" + # "hash_666ad912cb4541f1", 16000, 1, "int");
-  clientfield::register("world", "" + # "hash_18c31f1201f7c968", 16000, 1, "counter");
-  clientfield::register("world", "" + # "teleporter_minimap", 16000, 1, "counter");
+  clientfield::register("world", "" + #"hash_666ad912cb4541f1", 16000, 1, "int");
+  clientfield::register("world", "" + #"hash_18c31f1201f7c968", 16000, 1, "counter");
+  clientfield::register("world", "" + #"teleporter_minimap", 16000, 1, "counter");
   level.var_ce45839f = #"pap_quest_completed";
   level.var_2645bbc0 = 0;
   function_675b2881();
@@ -46,7 +46,7 @@ function function_d81240c3() {
 function function_aaf8fd90() {
   level endon(#"end_game");
   level flag::wait_till(#"all_players_spawned");
-  level clientfield::increment("" + # "teleporter_minimap");
+  level clientfield::increment("" + #"teleporter_minimap");
 }
 
 function function_34427db() {
@@ -218,7 +218,7 @@ function function_da010d65(b_skipped) {
   level.var_2645bbc0 = 2;
 
   if(b_skipped || zm_utility::function_c4b020f8()) {
-    level clientfield::increment("" + # "hash_18c31f1201f7c968", 1);
+    level clientfield::increment("" + #"hash_18c31f1201f7c968", 1);
     return;
   }
 
@@ -239,7 +239,7 @@ function function_da010d65(b_skipped) {
   level thread function_a2854e57();
   level flag::wait_till("enable_firebase_zone");
   zm_sq::objective_complete(#"hash_69cca9825b7edc33");
-  level clientfield::increment("" + # "hash_18c31f1201f7c968", 1);
+  level clientfield::increment("" + #"hash_18c31f1201f7c968", 1);
 }
 
 function function_c3ff2857(b_skipped, var_19e802fa) {
@@ -258,14 +258,14 @@ function function_ed6d34fb() {
 
     foreach(portal_fx in var_73524bb4) {
       portal_fx.var_2c517d4c = util::spawn_model("tag_origin", portal_fx.origin, portal_fx.angles);
-      level clientfield::set("" + # "hash_666ad912cb4541f1", 1);
+      level clientfield::set("" + #"hash_666ad912cb4541f1", 1);
       playsoundatposition(#"hash_5f27432854b069c9", portal_fx.var_2c517d4c.origin);
     }
   }
 }
 
 function function_e7aacbc9() {
-  level clientfield::set("" + # "hash_666ad912cb4541f1", 0);
+  level clientfield::set("" + #"hash_666ad912cb4541f1", 0);
 }
 
 function function_1574da8d(b_skipped) {

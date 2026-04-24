@@ -17,8 +17,8 @@ function private preinit() {
 }
 
 function private register_clientfields() {
-  clientfield::register("vehicle", "" + # "hash_2d5a2cd7892a4fdc", 1, 1, "counter", &function_a874e85b, 0, 0);
-  clientfield::register("missile", "" + # "hash_2d5a2cd7892a4fdc", 1, 1, "counter", &function_a874e85b, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_2d5a2cd7892a4fdc", 1, 1, "counter", &function_a874e85b, 0, 0);
+  clientfield::register("missile", "" + #"hash_2d5a2cd7892a4fdc", 1, 1, "counter", &function_a874e85b, 0, 0);
 }
 
 function function_a874e85b(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

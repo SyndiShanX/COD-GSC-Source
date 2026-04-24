@@ -27,7 +27,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("world", "" + # "hash_681de2aa531ffcd0", 20000, 1, "int");
+  clientfield::register("world", "" + #"hash_681de2aa531ffcd0", 20000, 1, "int");
 }
 
 __main__() {
@@ -138,7 +138,7 @@ private_mannequin_step1_setup(var_5ea5c94d) {
 
       level play_start_vo();
       level thread timer_countdown();
-      level clientfield::set("" + # "hash_681de2aa531ffcd0", 1);
+      level clientfield::set("" + #"hash_681de2aa531ffcd0", 1);
       a_flags = array(#"hash_315d0bf1d50724f0", #"hash_7524c96c167377ef");
       level flag::wait_till_any(a_flags);
 
@@ -398,7 +398,7 @@ function_88265619() {
       e_part show();
     }
 
-    level clientfield::set("" + # "hash_681de2aa531ffcd0", 0);
+    level clientfield::set("" + #"hash_681de2aa531ffcd0", 0);
     var_e3d10631[0] zm_unitrigger::create(&function_11862a9b, 96, undefined, 1, 1);
     var_e3d10631[0] thread function_1e88595a();
 

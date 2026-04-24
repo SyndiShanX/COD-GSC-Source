@@ -24,7 +24,7 @@ preload() {
 }
 
 init_clientfields() {
-  clientfield::register("toplayer", "" + # "hash_33c373888aa78dc2", 20000, 1, "counter");
+  clientfield::register("toplayer", "" + #"hash_33c373888aa78dc2", 20000, 1, "counter");
 }
 
 init() {
@@ -248,7 +248,7 @@ function_bcec00bc(origin, arc_angle_degrees = 90, do_trace, e_ignore = undefined
 }
 
 function_f359c8a0(s_key, e_player) {
-  e_player clientfield::increment_to_player("" + # "hash_33c373888aa78dc2", 1);
+  e_player clientfield::increment_to_player("" + #"hash_33c373888aa78dc2", 1);
   level.var_f13364b4.var_12633dc5 = e_player;
 
   switch (s_key.script_string) {

@@ -35,7 +35,7 @@ function private preinit() {
   killstreak_detect::init_shared();
   remote_weapons::init_shared();
   killstreaks::function_b5b6ef3e(&init_killstreak);
-  clientfield::register("vehicle", "" + # "hash_5b4b44738e08c9b9", 28000, 1, "counter");
+  clientfield::register("vehicle", "" + #"hash_5b4b44738e08c9b9", 28000, 1, "counter");
 }
 
 function init_killstreak() {
@@ -205,7 +205,7 @@ function function_86e8d9af(n_radius = 200) {
     self notify(#"pulse_red");
   }
 
-  self clientfield::increment("" + # "hash_5b4b44738e08c9b9");
+  self clientfield::increment("" + #"hash_5b4b44738e08c9b9");
   a_zombies = self.owner getenemiesinradius(self.origin, n_radius);
 
   foreach(ai_zombie in a_zombies) {

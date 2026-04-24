@@ -112,7 +112,7 @@ function function_6ad1ac64(str_skipto, b_starting) {
   level.var_52874eb2 thread vehicle::go_path();
   level.var_7466d419 thread function_19288a46();
   level.var_7466d419 thread function_6cce8b8e();
-  level.var_7466d419 clientfield::set("" + # "hash_354296015ca81fd", 1);
+  level.var_7466d419 clientfield::set("" + #"hash_354296015ca81fd", 1);
   level.var_7466d419 setspeedimmediate(77);
   level.var_7466d419 vehicle::go_path();
   level flag::set("flag_orbit_mortar_allow_land");
@@ -350,7 +350,7 @@ function function_9ca7e163() {
   trigger = getent("trigger_bell_tower_damage", "targetname");
   hidemiscmodels("bell_tower_final");
   var_4e227252 = 0;
-  level clientfield::set("" + # "hash_147afd2c82d374fe", 1);
+  level clientfield::set("" + #"hash_147afd2c82d374fe", 1);
 
   while(true) {
     s_waitresult = trigger waittill(#"damage");
@@ -388,7 +388,7 @@ function function_2c4d7184() {
   level waittill(#"hash_3057933f3c7c3d18");
   showmiscmodels("bell_tower_final");
   level scene::function_f81475ae(#"hash_45aea7646e25ef1f");
-  level clientfield::set("" + # "hash_147afd2c82d374fe", 0);
+  level clientfield::set("" + #"hash_147afd2c82d374fe", 0);
 }
 
 function function_19288a46() {
@@ -403,7 +403,7 @@ function function_19288a46() {
   level util::delay(0.65, undefined, &snd::client_msg, #"hash_4a41082a1d97f925");
   namespace_72b0499b::music("4.0_chopper_combat", 0.65);
   snd::client_msg(#"hash_3d8cbffebe7b249f");
-  self clientfield::set("" + # "hash_4ddf67f7aa0f6884", 1);
+  self clientfield::set("" + #"hash_4ddf67f7aa0f6884", 1);
   self thread scene::play(#"hash_40dd76ac89c3fdb5", a_ents);
   self setanim(#"hash_30cafb59b2924e48");
   wait getanimlength(#"hash_30cafb59b2924e48");
@@ -485,7 +485,7 @@ function function_6acbfbb1(b_starting = 0) {
     var_67ae4496 delete();
   }
 
-  level.var_7466d419 clientfield::set("" + # "hash_354296015ca81fd", 0);
+  level.var_7466d419 clientfield::set("" + #"hash_354296015ca81fd", 0);
   function_114d3739();
   level util::delay(7.5, undefined, &function_8199c444);
   level namespace_b7cfe907::function_3af72756(level.var_7466d419, level.pilot, "driver");
@@ -504,7 +504,7 @@ function function_6acbfbb1(b_starting = 0) {
   }
 
   level flag::set("flag_start_mortar_landing_scene");
-  level.var_7466d419 clientfield::set("" + # "hash_4ddf67f7aa0f6884", 0);
+  level.var_7466d419 clientfield::set("" + #"hash_4ddf67f7aa0f6884", 0);
   level.var_7466d419 thread function_15739fec();
   self thread function_2ee152cc();
   self val::set(#"mortar_transition", "takedamage", 0);
@@ -543,7 +543,7 @@ function function_2ee152cc() {
 }
 
 function function_4ca07f70(a_ents) {
-  level.player clientfield::set_to_player("" + # "hash_1d5f8429329030", 2);
+  level.player clientfield::set_to_player("" + #"hash_1d5f8429329030", 2);
   level.player val::reset(#"mortar_transition", "takedamage");
 }
 
@@ -620,7 +620,7 @@ function function_4d73a251() {
 function function_1eb807e1() {
   level endon(#"flag_mortar_orbit_complete");
   level flag::wait_till(#"hash_5c48d464408d21ee");
-  level.player clientfield::set_to_player("" + # "hash_1d5f8429329030", 1);
+  level.player clientfield::set_to_player("" + #"hash_1d5f8429329030", 1);
   level.player thread dialogue::queue("vox_cp_armd_00004_plt2_visualonlztakin_f1");
 }
 
@@ -2264,11 +2264,11 @@ function function_4bf5cfff() {
   self endon(#"disconnect");
   self thread lui::screen_fade(1.5, 0.5, 0, "white", 0, "red_door_postfx_fade", 0);
   wait 0.15;
-  self clientfield::set_to_player("" + # "pstfx_teleport", 2);
+  self clientfield::set_to_player("" + #"pstfx_teleport", 2);
   wait 2;
   self thread lui::screen_fade(1.5, 0, 0.5, "white", 0, "red_door_postfx_fade", 0);
   wait 0.15;
-  self clientfield::set_to_player("" + # "pstfx_teleport", 0);
+  self clientfield::set_to_player("" + #"pstfx_teleport", 0);
 }
 
 function function_a1de7ea2(b_init = 0) {
@@ -2554,7 +2554,7 @@ function function_58771ad7() {
   level.gunner sethighdetail(1);
   level.vip sethighdetail(1);
   level.buddy sethighdetail(1);
-  level clientfield::set("" + # "hash_4ee03d623b77b0c2", 1);
+  level clientfield::set("" + #"hash_4ee03d623b77b0c2", 1);
   level.var_7466d419 makevehicleunusable();
   level.var_7466d419 thread function_7cbced04();
   level.buddy thread function_79299255();
@@ -2575,7 +2575,7 @@ function function_58771ad7() {
   level.gunner sethighdetail(0);
   level.vip sethighdetail(0);
   level.buddy sethighdetail(0);
-  level clientfield::set("" + # "hash_4ee03d623b77b0c2", 0);
+  level clientfield::set("" + #"hash_4ee03d623b77b0c2", 0);
   level.player val::reset(#"animation_shared", "disable_weapons");
   level vehicle::get_in(level.pilot, level.var_7466d419, "driver");
   level vehicle::get_in(level.copilot, level.var_7466d419, "passenger1");

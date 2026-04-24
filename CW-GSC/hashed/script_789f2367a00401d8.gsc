@@ -32,7 +32,7 @@ function private autoexec __init__system__() {
 }
 
 function init_shared() {
-  clientfield::register("actor", "" + # "hash_c5d06ae18fde4c0", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_c5d06ae18fde4c0", 1, 1, "int");
   params = getstatuseffect("dot_molotov_dog");
   level.var_e6a4f161 = params.var_18d16a6b;
   level.var_5d450296 = params.setype;
@@ -50,7 +50,7 @@ function function_4f3cd1f0() {
 function function_84a3128e() {
   if(!isDefined(self.exploded) && !is_true(self.var_270befd2)) {
     self.exploded = 1;
-    self clientfield::set("" + # "hash_c5d06ae18fde4c0", 1);
+    self clientfield::set("" + #"hash_c5d06ae18fde4c0", 1);
     var_3e7a440 = getscriptbundle("molotov_custom_settings");
     blast_radius = 65;
     attacker = undefined;

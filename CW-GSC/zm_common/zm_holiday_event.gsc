@@ -42,7 +42,7 @@ function private preinit() {
     callback::on_ai_killed(&function_7d47c6f7);
     callback::on_item_pickup(&function_5da12481);
     zm::register_actor_damage_callback(&function_cb059f82);
-    clientfield::register("actor", "" + # "hash_477ed992854f5645", 28000, 1, "counter");
+    clientfield::register("actor", "" + #"hash_477ed992854f5645", 28000, 1, "counter");
     level thread function_cf4230c2();
   }
 }
@@ -303,7 +303,7 @@ function function_3ba5772b() {
 function private function_cb059f82(inflictor, attacker, damage, flags, meansofdeath, weapon, var_fd90b0bb, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
   if(is_true(self.var_4356b0bd) && (shitloc === "neck" || shitloc === "head" || shitloc === "helmet" || shitloc === "torso_upper")) {
     self.var_4356b0bd = undefined;
-    self clientfield::increment("" + # "hash_477ed992854f5645");
+    self clientfield::increment("" + #"hash_477ed992854f5645");
 
     if(isPlayer(attacker)) {
       level thread scoreevents::doscoreeventcallback("scoreEventZM", {

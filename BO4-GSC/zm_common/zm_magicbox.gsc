@@ -61,7 +61,7 @@ __init__() {
   clientfield::register("scriptmover", "force_stream", 1, 1, "int");
   clientfield::register("zbarrier", "t8_magicbox_crack_glow_fx", 1, 1, "int");
   clientfield::register("zbarrier", "t8_magicbox_ambient_fx", 1, 1, "int");
-  clientfield::register("zbarrier", "" + # "hash_2fcdae6b889933c7", 1, 1, "int");
+  clientfield::register("zbarrier", "" + #"hash_2fcdae6b889933c7", 1, 1, "int");
   level flag::init("magicbox_initialized");
   level thread magicbox_host_migration();
 }
@@ -549,9 +549,9 @@ function_504f4fcb() {
 }
 
 function_ecf6901d() {
-  self clientfield::set("" + # "hash_2fcdae6b889933c7", 1);
+  self clientfield::set("" + #"hash_2fcdae6b889933c7", 1);
   self waittill(#"zbarrier_state_change");
-  self clientfield::set("" + # "hash_2fcdae6b889933c7", 0);
+  self clientfield::set("" + #"hash_2fcdae6b889933c7", 0);
 }
 
 unregister_unitrigger_on_kill_think() {

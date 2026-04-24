@@ -28,9 +28,9 @@
 #namespace namespace_54685ebd;
 
 function init() {
-  clientfield::register("world", "" + # "hash_1c39840b9d4a1796", 24000, 1, "int", &function_1eabdf8e, 0, 0);
-  clientfield::register("world", "" + # "hash_9472de3e8d1f6e1", 24000, 1, "int", &function_3bb686a9, 0, 0);
-  clientfield::register("world", "" + # "hash_6f9aa7ac9543a791", 24000, 1, "int", &function_d3e5f256, 0, 0);
+  clientfield::register("world", "" + #"hash_1c39840b9d4a1796", 24000, 1, "int", &function_1eabdf8e, 0, 0);
+  clientfield::register("world", "" + #"hash_9472de3e8d1f6e1", 24000, 1, "int", &function_3bb686a9, 0, 0);
+  clientfield::register("world", "" + #"hash_6f9aa7ac9543a791", 24000, 1, "int", &function_d3e5f256, 0, 0);
 }
 
 function function_1eabdf8e(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

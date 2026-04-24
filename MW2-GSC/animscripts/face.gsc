@@ -424,7 +424,7 @@ PlayFace_WaitForTime(time, notifyString, killmeString) {
   self notify(notifyString);
 }
 
-#using_animtree("generic_human"); // This section of the file calls animations directly since it's only used on AI.
+#using_animtree("generic_human");\\This section of the file calls animations directly since it's only used on AI.
 InitLevelFace() {
   // Does per-level initialization of facial stuff.
 

@@ -185,12 +185,12 @@ function_3165516b(var_1e2067f4, n_phase) {
       break;
   }
 
-  self clientfield::set("" + # "hash_47490b879090eb55", n_color);
+  self clientfield::set("" + #"hash_47490b879090eb55", n_color);
   util::wait_network_frame();
-  self clientfield::set("" + # "hash_7b1dd5c08e2585c", var_1e2067f4);
+  self clientfield::set("" + #"hash_7b1dd5c08e2585c", var_1e2067f4);
   util::wait_network_frame();
-  self clientfield::set("" + # "hash_47490b879090eb55", 0);
-  self clientfield::set("" + # "hash_7b1dd5c08e2585c", 0);
+  self clientfield::set("" + #"hash_47490b879090eb55", 0);
+  self clientfield::set("" + #"hash_7b1dd5c08e2585c", 0);
   wait 1.3;
   level thread namespace_c8efdadc::function_9c8540b4(self, var_a3f33bc5);
 }
@@ -655,7 +655,7 @@ function_b858f95a() {
     s_bowl = self.s_tribute_bowl;
 
     if(isDefined(s_bowl.var_9d32404) && isDefined(self.var_9e09931e)) {
-      s_bowl.var_9d32404 clientfield::set("" + # "hash_21f5fab6a3d22093", self.var_9e09931e);
+      s_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", self.var_9e09931e);
     }
   }
 }

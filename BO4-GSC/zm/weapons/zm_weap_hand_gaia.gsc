@@ -35,11 +35,11 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("actor", "" + # "gaia_impact_zombie", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "gaia_shoot", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "gaia_impact", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "spike_explode", 16000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "spike_spawn", 16000, 1, "counter");
+  clientfield::register("actor", "" + #"gaia_impact_zombie", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"gaia_shoot", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"gaia_impact", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"spike_explode", 16000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"spike_spawn", 16000, 1, "counter");
   level.w_hand_gaia = getweapon(#"ww_hand_g");
   level.w_hand_gaia_charged = getweapon(#"ww_hand_g_charged");
   level.w_hand_gaia_uncharged = getweapon(#"ww_hand_g_uncharged");
@@ -288,7 +288,7 @@ set_projectile(n_index) {
   self endon(#"death");
   self.n_index = n_index;
   wait 0.1;
-  self clientfield::increment("" + # "gaia_shoot");
+  self clientfield::increment("" + #"gaia_shoot");
 }
 
 gaia_projectile(e_projectile, ai_zombie, n_damage) {
@@ -306,7 +306,7 @@ gaia_projectile(e_projectile, ai_zombie, n_damage) {
   if(!isDefined(ai_zombie)) {
     e_projectile moveto(v_end, n_time);
     e_projectile waittill(#"movedone");
-    e_projectile clientfield::increment("" + # "gaia_impact");
+    e_projectile clientfield::increment("" + #"gaia_impact");
     waitframe(1);
   } else {
     v_view_pos = self getweaponmuzzlepoint();
@@ -499,7 +499,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged, v_di
         break;
       case # "miniboss":
         if(!isDefined(b_charged)) {
-          e_target clientfield::increment("" + # "gaia_impact_zombie");
+          e_target clientfield::increment("" + #"gaia_impact_zombie");
         }
 
         n_damage = int(n_damage * 0.3);
@@ -513,7 +513,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, b_charged, v_di
         break;
       case # "boss":
         if(!isactor(e_target)) {
-          e_target clientfield::increment("" + # "gaia_impact");
+          e_target clientfield::increment("" + #"gaia_impact");
         }
 
         n_damage = 175;
@@ -752,7 +752,7 @@ function_85d88e17(e_target, b_charged, v_dir, n_damage) {
   }
 
   if(isalive(e_target)) {
-    e_target clientfield::increment("" + # "gaia_impact_zombie");
+    e_target clientfield::increment("" + #"gaia_impact_zombie");
     waitframe(1);
 
     if(n_damage >= e_target.health) {

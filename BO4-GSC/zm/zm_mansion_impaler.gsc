@@ -35,14 +35,14 @@
 #namespace mansion_impaler;
 
 init() {
-  clientfield::register("scriptmover", "" + # "candle_light", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + # "monolith_water", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_4d45dc65a8307183", 8000, 1, "counter");
-  clientfield::register("actor", "" + # "soul_possess", 8000, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_3d7d4c5e6ed616e9", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + # "jewelry_dropped", 8000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_3d5a64bed5e39d24", 8000, 1, "int");
-  clientfield::register("world", "" + # "hash_73123721764d7374", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"candle_light", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"monolith_water", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_4d45dc65a8307183", 8000, 1, "counter");
+  clientfield::register("actor", "" + #"soul_possess", 8000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_3d7d4c5e6ed616e9", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"jewelry_dropped", 8000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_3d5a64bed5e39d24", 8000, 1, "int");
+  clientfield::register("world", "" + #"hash_73123721764d7374", 8000, 1, "int");
   level.var_e93e5852 = 0;
   level.w_crossbow = getweapon(#"ww_crossbow_impaler_t8");
   zm_weapons::include_zombie_weapon(#"ww_crossbow_impaler_t8", 0);
@@ -99,7 +99,7 @@ function_edb1add2() {
   level flag::wait_till("all_players_spawned");
   self.mdl_candle = util::spawn_model(self.model, self.origin, self.angles);
   util::wait_network_frame();
-  self.mdl_candle clientfield::set("" + # "candle_light", 1);
+  self.mdl_candle clientfield::set("" + #"candle_light", 1);
   self.mdl_candle setCanDamage(1);
   self.mdl_candle.health = 10000;
   self thread function_d84548e7();
@@ -119,7 +119,7 @@ cleanup_step_1(var_5ea5c94d, ended_early) {
   a_s_candles = struct::get_array("s_burn");
 
   foreach(s_candle in a_s_candles) {
-    s_candle.mdl_candle clientfield::set("" + # "candle_light", 0);
+    s_candle.mdl_candle clientfield::set("" + #"candle_light", 0);
   }
 
   level notify(#"hash_785f94bb8c05dc05");
@@ -130,7 +130,7 @@ init_step_2(var_a276c861) {
     s_monolith = struct::get("s_monolith");
     s_monolith.var_f4ecfb70 = util::spawn_model("tag_origin", s_monolith.origin, s_monolith.angles);
     util::wait_network_frame();
-    s_monolith.var_f4ecfb70 clientfield::set("" + # "monolith_water", 1);
+    s_monolith.var_f4ecfb70 clientfield::set("" + #"monolith_water", 1);
     var_47323b73 = s_monolith zm_unitrigger::create(undefined, 64, &registerremaining_retreat_, 1, 1);
     var_a6356bbe = array::random(struct::get_array("s_monolith_ghost"));
     s_monolith thread function_d17deac0(var_a6356bbe);
@@ -145,7 +145,7 @@ cleanup_step_2(var_5ea5c94d, ended_early) {
   s_monolith = struct::get("s_monolith");
 
   if(isDefined(s_monolith.var_f4ecfb70)) {
-    s_monolith.var_f4ecfb70 clientfield::set("" + # "monolith_water", 0);
+    s_monolith.var_f4ecfb70 clientfield::set("" + #"monolith_water", 0);
   }
 
   if(isDefined(level.monolith_ghost) && isDefined(level.monolith_ghost.var_c176969a)) {
@@ -201,7 +201,7 @@ init_step_3(var_a276c861) {
       level.monolith_ghost linkto(level.monolith_ghost.var_dafa2b89);
       level.monolith_ghost.mdl_head linkto(level.monolith_ghost);
       level.monolith_ghost thread mansion_pap::function_c9c7a593();
-      level.monolith_ghost clientfield::set("" + # "ghost_trail", 1);
+      level.monolith_ghost clientfield::set("" + #"ghost_trail", 1);
       util::wait_network_frame();
       level.monolith_ghost.var_dafa2b89 thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", level.monolith_ghost);
       level.monolith_ghost thread scene::play(#"aib_vign_zm_mnsn_ghost_idle_01", level.monolith_ghost.mdl_head);
@@ -273,7 +273,7 @@ function_d84548e7() {
     s_notify = self.mdl_candle waittill(#"damage");
 
     if(s_notify.mod === "MOD_MELEE") {
-      self.mdl_candle clientfield::set("" + # "candle_light", 0);
+      self.mdl_candle clientfield::set("" + #"candle_light", 0);
       level.var_e93e5852++;
       break;
     }
@@ -327,7 +327,7 @@ function_c929af49() {
   self playSound(#"zmb_bgb_nysm_start");
   self playLoopSound(#"zmb_bgb_nysm_loop", 1);
   self util::delay(0.75, "death", &zm_audio::create_and_play_dialog, #"stone_drink", #"water_react");
-  self clientfield::set_to_player("" + # "hash_3d7d4c5e6ed616e9", 1);
+  self clientfield::set_to_player("" + #"hash_3d7d4c5e6ed616e9", 1);
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     n_duration = 120;
@@ -339,7 +339,7 @@ function_c929af49() {
   self waittilltimeout(0.5 + n_duration, #"hash_115d2cc01ac8b1e9", #"end_game", #"bgb_update");
   self stoploopsound(1);
   self playSound(#"zmb_bgb_nysm_end");
-  self clientfield::set_to_player("" + # "hash_3d7d4c5e6ed616e9", 0);
+  self clientfield::set_to_player("" + #"hash_3d7d4c5e6ed616e9", 0);
   self.b_is_designated_target = 0;
   self.bgb_active = 0;
   self notify(#"hash_398b46ae1d545804");
@@ -391,7 +391,7 @@ function_a6978e42(nd_start) {
   self.mdl_head = util::spawn_model(#"c_t8_zmb_dlc1_catherine_ghost_head", self.origin, self.angles);
   self.mdl_head linkto(self);
   util::wait_network_frame();
-  self clientfield::set("" + # "ghost_trail", 1);
+  self clientfield::set("" + #"ghost_trail", 1);
   array::thread_all(getplayers(), &function_92e77dc6);
   self.var_c176969a = spawner::simple_spawn_single(getent("veh_power_on_projectile", "targetname"));
   self.var_c176969a.team = #"allies";
@@ -619,7 +619,7 @@ function_9ee098d5() {
     wait 0.15;
 
     if(isDefined(e_possessed)) {
-      fx_org clientfield::increment("" + # "hash_4d45dc65a8307183");
+      fx_org clientfield::increment("" + #"hash_4d45dc65a8307183");
       n_time = function_c5a4ae6(fx_org.origin, e_possessed.origin);
       fx_org moveto(e_possessed gettagorigin("j_spine4"), n_time);
       level.monolith_ghost notify(#"hash_6edff0409a51550e");
@@ -630,7 +630,7 @@ function_9ee098d5() {
     }
 
     if(isDefined(e_possessed)) {
-      e_possessed clientfield::set("" + # "soul_possess", 1);
+      e_possessed clientfield::set("" + #"soul_possess", 1);
       e_possessed thread function_99257c19();
       waitresult = e_possessed waittill(#"death");
     }
@@ -716,7 +716,7 @@ function_9ee098d5() {
 function_99257c19() {
   self endon(#"death");
   level waittill(#"hash_aa10db1b6143db9");
-  self clientfield::set("" + # "soul_possess", 0);
+  self clientfield::set("" + #"soul_possess", 0);
 }
 
 function_c5a4ae6(v_start, v_end) {
@@ -763,7 +763,7 @@ function_7de84c26(v_drop, n_drop) {
 
   mdl_drop = util::spawn_model(var_8dd283dd, v_drop + (0, 0, 12));
   util::wait_network_frame();
-  mdl_drop clientfield::set("" + # "jewelry_dropped", 1);
+  mdl_drop clientfield::set("" + #"jewelry_dropped", 1);
   mdl_drop bobbing((0, 0, 1), 2, 3);
 
   var_ffba68db = mdl_drop zm_unitrigger::create(undefined, 64, &function_3c1f242b, 1, 1);
@@ -815,7 +815,7 @@ function_3c1f242b() {
 function_e7423237() {
   level endon(#"hash_38fe2a57d5f9d6ba");
   mdl_symbol = getent(self.target, "targetname");
-  mdl_symbol clientfield::set("" + # "hash_3d5a64bed5e39d24", 1);
+  mdl_symbol clientfield::set("" + #"hash_3d5a64bed5e39d24", 1);
   var_ffba68db = self zm_unitrigger::create(undefined, 80, &function_9f0de8b3, 1, 1);
   var_ffba68db.script_int = self.script_int;
 
@@ -843,8 +843,8 @@ function_e7423237() {
 
   util::wait_network_frame();
   wpn_betty_explo_vox bobbing((0, 0, 1), 2, 3);
-  wpn_betty_explo_vox clientfield::set("" + # "jewelry_dropped", 1);
-  mdl_symbol clientfield::set("" + # "hash_3d5a64bed5e39d24", 0);
+  wpn_betty_explo_vox clientfield::set("" + #"jewelry_dropped", 1);
+  mdl_symbol clientfield::set("" + #"hash_3d5a64bed5e39d24", 0);
   level flag::wait_till(#"hash_61263135b6fb6340");
 
   if(isDefined(wpn_betty_explo_vox)) {
@@ -890,13 +890,13 @@ function_9768c04b() {
   var_7853cc7c = getent("imp_symbol_base", "targetname");
   level.var_6a17ff24 = 0;
   callback::on_ai_killed(&on_nosferatu_killed);
-  var_7853cc7c clientfield::set("" + # "hash_3d5a64bed5e39d24", 1);
+  var_7853cc7c clientfield::set("" + #"hash_3d5a64bed5e39d24", 1);
 
   while(!level flag::get(#"hash_54326b9f13bd4f1")) {
     level flag::wait_till(#"hash_2e0f59cef233a264");
-    var_7853cc7c clientfield::set("" + # "hash_3d5a64bed5e39d24", 0);
+    var_7853cc7c clientfield::set("" + #"hash_3d5a64bed5e39d24", 0);
     function_cc11b6fd();
-    var_7853cc7c clientfield::set("" + # "hash_3d5a64bed5e39d24", 1);
+    var_7853cc7c clientfield::set("" + #"hash_3d5a64bed5e39d24", 1);
   }
 }
 
@@ -952,7 +952,7 @@ function_886c88e() {
 
 open_crypt() {
   level endon(#"hash_69c33933b1ab3e2b");
-  clientfield::set("" + # "hash_73123721764d7374", 1);
+  clientfield::set("" + #"hash_73123721764d7374", 1);
   e_floor = getent("imp_open2", "targetname");
   e_clip = getent("imp_blocker", "targetname");
 

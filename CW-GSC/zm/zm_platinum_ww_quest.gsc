@@ -32,7 +32,7 @@
 #namespace zm_platinum_ww_quest;
 
 function init() {
-  clientfield::register("toplayer", "" + # "hash_548794e256c5bad6", 24000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_548794e256c5bad6", 24000, 1, "int");
   function_f8a8ff3f();
   level thread function_1b65b01d();
   level thread function_743996c0();
@@ -176,7 +176,7 @@ function function_bb30710d() {
       player flag::set(#"hash_2d6980738132f263");
       player thread zm_equipment::show_hint_text(#"hash_77929503066a286b", 10);
       player playSound(#"hash_6d7a3786a05ee05d");
-      player clientfield::set_to_player("" + # "hash_548794e256c5bad6", 1);
+      player clientfield::set_to_player("" + #"hash_548794e256c5bad6", 1);
 
       if(isDefined(self.stub.vo_string)) {
         player thread zm_vo::function_7622cb70(self.stub.vo_string);

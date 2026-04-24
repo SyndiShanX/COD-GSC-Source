@@ -15,9 +15,9 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("world", "" + # "hash_59ec82b1a72deb72", 1, 1, "int", &function_c668b489, 0, 0);
-  clientfield::register("toplayer", "" + # "remotemissile_fov", 6000, 1, "int", &remotemissile_fov, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_4241f7b51f8c144", 8000, 1, "int", &function_73155fe5, 0, 0);
+  clientfield::register("world", "" + #"hash_59ec82b1a72deb72", 1, 1, "int", &function_c668b489, 0, 0);
+  clientfield::register("toplayer", "" + #"remotemissile_fov", 6000, 1, "int", &remotemissile_fov, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_4241f7b51f8c144", 8000, 1, "int", &function_73155fe5, 0, 0);
   init_shared();
 }
 

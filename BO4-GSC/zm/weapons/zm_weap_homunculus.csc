@@ -17,8 +17,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "hash_2d49d2cf3d339e18", 1, 1, "int", &function_6fcc4908, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_32c5838be960cfee", 1, 1, "int", &function_3e362ad8, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2d49d2cf3d339e18", 1, 1, "int", &function_6fcc4908, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_32c5838be960cfee", 1, 1, "int", &function_3e362ad8, 0, 0);
 }
 
 __main__() {

@@ -30,7 +30,7 @@ init() {
 }
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_671ee63741834a25", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_671ee63741834a25", 1, 1, "int");
 }
 
 function_a8fa5ac7(var_5ea5c94d) {

@@ -20,7 +20,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_5f124a31eeb3904a", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_5f124a31eeb3904a", 24000, 1, "int");
   weaponobjects::function_e6400478(#"hash_2e725023a28bcc4e", &function_907f6acc, 1);
 }
 
@@ -55,7 +55,7 @@ function function_7a20f9a3(watcher, owner) {
   waitframe(1);
   self hide();
   wait 1;
-  anim_model clientfield::set("" + # "hash_5f124a31eeb3904a", 1);
+  anim_model clientfield::set("" + #"hash_5f124a31eeb3904a", 1);
   zombie_count = 0;
   var_9af5cd8d = 0;
   var_6b0bc36d = 0;
@@ -103,7 +103,7 @@ function function_7a20f9a3(watcher, owner) {
   }
 
   wait 0.5;
-  anim_model clientfield::set("" + # "hash_5f124a31eeb3904a", 0);
+  anim_model clientfield::set("" + #"hash_5f124a31eeb3904a", 0);
   waitframe(1);
   anim_model delete();
   self delete();

@@ -12,7 +12,7 @@
 
 function autoexec main() {
   level endon(#"end_game");
-  clientfield::register("world", "" + # "hash_2e92282adde859ff", 1, 1, "int", &function_7d6a713b, 0, 0);
+  clientfield::register("world", "" + #"hash_2e92282adde859ff", 1, 1, "int", &function_7d6a713b, 0, 0);
   callback::on_spawned(&on_player_spawned);
 }
 

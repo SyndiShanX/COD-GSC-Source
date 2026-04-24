@@ -35,8 +35,8 @@ function private preinit() {
   clientfield::register("zbarrier", "zbarrier_leaving_sounds", 1, 1, "counter", &magicbox_leave_sounds_callback, 1, 0);
   clientfield::register("zbarrier", "force_stream_magicbox", 1, 1, "int", &force_stream_magicbox, 0, 0);
   clientfield::register("zbarrier", "force_stream_magicbox_leave", 1, 1, "int", &force_stream_magicbox_leave, 0, 0);
-  clientfield::register("zbarrier", "" + # "hash_2fcdae6b889933c7", 1, 1, "int", &function_b5807489, 0, 0);
-  clientfield::register("zbarrier", "" + # "hash_66b8b96e588ce1ac", 1, 3, "int", &function_abe84c14, 0, 0);
+  clientfield::register("zbarrier", "" + #"hash_2fcdae6b889933c7", 1, 1, "int", &function_b5807489, 0, 0);
+  clientfield::register("zbarrier", "" + #"hash_66b8b96e588ce1ac", 1, 3, "int", &function_abe84c14, 0, 0);
   clientfield::register("toplayer", "stream_magicbox_guns", 1, 1, "int", &stream_magicbox_guns, 0, 0);
 }
 

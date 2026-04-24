@@ -10,13 +10,13 @@
 #namespace namespace_24fd6413;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("scriptmover", "" + # "hash_502be00d1af105e9", 1, 1, "int", &function_9c4c4f14, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_771abe419eda7442", 1, 1, "int", &function_10ea3e76, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_76d1986dfad6a190", 1, 1, "counter", &function_55b89b40, 0, 0);
-  clientfield::register("scriptmover", "" + # "zombie_marked", 1, 1, "int", &function_fd381218, 0, 0);
-  clientfield::register("scriptmover", "" + # "rocket_damage", 1, 1, "counter", &function_c4893dbf, 0, 0);
-  clientfield::register("actor", "" + # "zombie_soul", 1, 1, "int", &function_bb5d646a, 0, 0);
-  clientfield::register("world", "" + # "hash_71f053fa597abb52", 1, 1, "int", &function_a2e43552, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_502be00d1af105e9", 1, 1, "int", &function_9c4c4f14, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_771abe419eda7442", 1, 1, "int", &function_10ea3e76, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_76d1986dfad6a190", 1, 1, "counter", &function_55b89b40, 0, 0);
+  clientfield::register("scriptmover", "" + #"zombie_marked", 1, 1, "int", &function_fd381218, 0, 0);
+  clientfield::register("scriptmover", "" + #"rocket_damage", 1, 1, "counter", &function_c4893dbf, 0, 0);
+  clientfield::register("actor", "" + #"zombie_soul", 1, 1, "int", &function_bb5d646a, 0, 0);
+  clientfield::register("world", "" + #"hash_71f053fa597abb52", 1, 1, "int", &function_a2e43552, 0, 0);
   sr_objective_secure_hud::register();
   util::waitforclient(0);
 }

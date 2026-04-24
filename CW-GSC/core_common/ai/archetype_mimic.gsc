@@ -36,7 +36,7 @@ function preinit() {
     return;
   }
 
-  clientfield::register("actor", "" + # "hash_2f1c34ea62d86c57", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_2f1c34ea62d86c57", 1, 1, "int");
   clientfield::register("toplayer", "mimic_force_stream", 1, 1, "int");
   clientfield::register("actor", "mimic_emerge_fx", 1, 1, "int");
   clientfield::register("toplayer", "mimic_attack_hit", 1, 1, "int");
@@ -432,7 +432,7 @@ function function_9e27379a() {
 }
 
 function function_4654959e(notifyhash) {
-  self clientfield::set("" + # "hash_2f1c34ea62d86c57", 1);
+  self clientfield::set("" + #"hash_2f1c34ea62d86c57", 1);
 }
 
 function function_f3b371f1() {
@@ -442,7 +442,7 @@ function function_f3b371f1() {
     return;
   }
 
-  self clientfield::set("" + # "hash_2f1c34ea62d86c57", 0);
+  self clientfield::set("" + #"hash_2f1c34ea62d86c57", 0);
   self orientmode("face angle", self.var_a516906f.angles[1]);
   self animmode("nogravity");
   self pathmode("dont move", 1);
@@ -456,7 +456,7 @@ function function_f3b371f1() {
     self.favoriteenemy = self.var_a516906f.activator;
   }
 
-  self clientfield::set("" + # "hash_2f1c34ea62d86c57", 1);
+  self clientfield::set("" + #"hash_2f1c34ea62d86c57", 1);
 }
 
 function function_4eb15d93(entity) {
@@ -547,7 +547,7 @@ function function_d291b5a9(player, var_1b024168, var_52a75904, player_anim) {
     self.favoriteenemy = player;
   }
 
-  self clientfield::set("" + # "hash_2f1c34ea62d86c57", 1);
+  self clientfield::set("" + #"hash_2f1c34ea62d86c57", 1);
 }
 
 function private function_224f342a(player_anim, mimic, origin, angles) {
@@ -621,7 +621,7 @@ function function_d3b009d4(entity) {
 
 function function_15ef07a4(entity, asmstatename) {
   animationstatenetworkutility::requeststate(entity, asmstatename);
-  entity clientfield::set("" + # "hash_2f1c34ea62d86c57", 0);
+  entity clientfield::set("" + #"hash_2f1c34ea62d86c57", 0);
   return 5;
 }
 
@@ -674,7 +674,7 @@ function function_5b50f629(entity, asmstatename) {
 function function_3678cec8(entity) {}
 
 function function_5eb9b69e(entity) {
-  entity clientfield::set("" + # "hash_2f1c34ea62d86c57", 1);
+  entity clientfield::set("" + #"hash_2f1c34ea62d86c57", 1);
 }
 
 function function_20d2827d(entity) {

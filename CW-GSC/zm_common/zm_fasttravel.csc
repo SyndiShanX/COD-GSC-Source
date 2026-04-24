@@ -24,15 +24,15 @@ function private preinit() {
 
 function init_clientfields() {
   clientfield::register("world", "fasttravel_exploder", 1, 1, "int", &fasttravel_exploder, 0, 0);
-  clientfield::register("scriptmover", "" + # "wormhole_fx", 1, 2, "int", &wormhole_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"wormhole_fx", 1, 2, "int", &wormhole_fx, 0, 0);
   clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int", &player_stargate_fx, 0, 1);
   clientfield::register("toplayer", "player_chaos_light_rail_fx", 1, 1, "int", &player_chaos_light_rail_fx, 0, 1);
   clientfield::register("toplayer", "fasttravel_teleport_sfx", 1, 1, "int", &fasttravel_teleport_sfx, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_638ce9451eb0ea49", 1, 3, "int", &function_f998fa4c, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_638ce9451eb0ea49", 1, 3, "int", &function_f998fa4c, 0, 0);
   clientfield::register("allplayers", "fasttravel_start_fx", 1, 1, "counter", &fasttravel_start_fx, 0, 0);
   clientfield::register("allplayers", "fasttravel_end_fx", 1, 1, "counter", &fasttravel_end_fx, 0, 0);
   clientfield::register("allplayers", "fasttravel_rail_fx", 1, 2, "int", &fasttravel_rail_fx, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_1747eb69683ce477", 1, 1, "int", &function_7287c2e4, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_1747eb69683ce477", 1, 1, "int", &function_7287c2e4, 0, 0);
 }
 
 function init_fx() {

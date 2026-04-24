@@ -17,9 +17,9 @@ function private autoexec __init__system__() {
 }
 
 function preinit() {
-  clientfield::register("scriptmover", "" + # "hash_475f3329eaf62eaf", 1, 1, "int", &function_63960208, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1a818fdb4337dc5e", 1, 1, "counter", &function_3a2dd570, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_711c8fee28432b7", 1, getminbitcountfornum(28), "int", &function_5fa73633, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_475f3329eaf62eaf", 1, 1, "int", &function_63960208, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1a818fdb4337dc5e", 1, 1, "counter", &function_3a2dd570, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_711c8fee28432b7", 1, getminbitcountfornum(28), "int", &function_5fa73633, 0, 0);
   level.var_238bd723 = struct::get_script_bundle_instances("zmintel");
   level.var_604b606e = struct::get_array("zm_intel_radio_transmission_locations");
   callback::on_localclient_connect(&on_localclient_connect);
@@ -259,7 +259,7 @@ function function_2bcfd899(localclientnum, var_f84ece9f, var_2b372cf6) {
   }
 
   if(var_2b372cf6 === #"hash_71c51f24f7f3037d") {
-    n_index = self clientfield::get_to_player("" + # "hash_711c8fee28432b7");
+    n_index = self clientfield::get_to_player("" + #"hash_711c8fee28432b7");
     var_d5fa8477 = var_71b26808.var_572513bb[n_index].var_cb9cd317;
     return var_d5fa8477;
   }

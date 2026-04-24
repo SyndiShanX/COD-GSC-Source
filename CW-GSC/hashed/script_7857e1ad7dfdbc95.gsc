@@ -33,8 +33,8 @@
 #namespace namespace_d1abdcb5;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "spartoi_reassemble_clientfield", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_3a6a3e4ef0a1a999", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"spartoi_reassemble_clientfield", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_3a6a3e4ef0a1a999", 1, 1, "counter");
   clientfield::register("actor", "skel_spawn_fx", 1, 1, "counter");
   namespace_250e9486::function_252dff4d("skeleton", 12, &function_2ee0142d, undefined, 65);
   namespace_250e9486::function_252dff4d("skeleton_spear", -1, &function_a54cde8b, undefined);
@@ -471,7 +471,7 @@ function private function_af85a094(inflictor, attacker, damage, idflags, meansof
 
       if(self.var_490042cd <= gettime()) {
         self.var_490042cd = gettime() + 300;
-        self clientfield::increment("" + # "hash_3a6a3e4ef0a1a999", 1);
+        self clientfield::increment("" + #"hash_3a6a3e4ef0a1a999", 1);
 
         if(self.var_dafc95a5 <= 0) {
           destructserverutils::togglespawngibs(self, 1);

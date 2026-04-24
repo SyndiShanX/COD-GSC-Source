@@ -16,19 +16,19 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + # "hash_26af481b9a9d41ce", 1, 1, "counter", &function_618e1db4, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_18fc1da5f1785e6b", 1, 1, "counter", &function_311767a6, 0, 0);
-  clientfield::register("allplayers", "" + # "charge_gem", 1, 2, "int", &function_8a2b203b, 0, 1);
-  clientfield::register("allplayers", "" + # "hash_275debebcd185ea1", 1, 1, "int", &function_467afa20, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_dc971935944f005", 1, 1, "counter", &function_b975154f, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_6b725eefec5d09d1", 1, 1, "counter", &function_e8244a0c, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_73e9280f74528e8f", 1, 1, "counter", &function_3864f492, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_21ff5b4eccea85ff", 1, 1, "counter", &function_200650fb, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_64a830301c1adbf3", 1, 1, "counter", &function_781821bc, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4f32455c6a0286cd", 1, 1, "counter", &function_f6ec8d80, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_32ef1785f4e55e5c", 1, 1, "counter", &function_bee087e9, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_2cd1bb15f71aedb8", 1, 1, "counter", &function_7faf18dd, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1769e95fdb10dfae", 1, 1, "counter", &function_f2c5818e, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_26af481b9a9d41ce", 1, 1, "counter", &function_618e1db4, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_18fc1da5f1785e6b", 1, 1, "counter", &function_311767a6, 0, 0);
+  clientfield::register("allplayers", "" + #"charge_gem", 1, 2, "int", &function_8a2b203b, 0, 1);
+  clientfield::register("allplayers", "" + #"hash_275debebcd185ea1", 1, 1, "int", &function_467afa20, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_dc971935944f005", 1, 1, "counter", &function_b975154f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_6b725eefec5d09d1", 1, 1, "counter", &function_e8244a0c, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_73e9280f74528e8f", 1, 1, "counter", &function_3864f492, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_21ff5b4eccea85ff", 1, 1, "counter", &function_200650fb, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_64a830301c1adbf3", 1, 1, "counter", &function_781821bc, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4f32455c6a0286cd", 1, 1, "counter", &function_f6ec8d80, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_32ef1785f4e55e5c", 1, 1, "counter", &function_bee087e9, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_2cd1bb15f71aedb8", 1, 1, "counter", &function_7faf18dd, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1769e95fdb10dfae", 1, 1, "counter", &function_f2c5818e, 0, 0);
   level._effect[#"charged_eyes"] = #"hash_2d151fbde925d3e";
   level._effect[#"hash_5a722d93fee71051"] = #"hash_7a37d99aaa7057cf";
   level._effect[#"firestorm_1p"] = #"hash_5a45cca38c2dd6c8";

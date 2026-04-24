@@ -161,7 +161,7 @@ useradaritem(hardpointtype, team, displaymessage) {
   if(displaymessage) {
     if(isDefined(level.killstreaks[hardpointtype]) && isDefined(level.killstreaks[hardpointtype].inboundtext)) {
       level thread maps\mp\_popups::displaykillstreakteammessagetoall(hardpointtype, self);
-		}
+    }
   }
 
   return viewtime;

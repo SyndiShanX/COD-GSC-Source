@@ -15,8 +15,8 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "spartoi_reassemble_clientfield", 16000, 1, "int", &function_d83c0144, 0, 0);
-  clientfield::register("actor", "" + # "hash_3a6a3e4ef0a1a999", 16000, 1, "counter", &function_9e6319c8, 0, 0);
+  clientfield::register("scriptmover", "" + #"spartoi_reassemble_clientfield", 16000, 1, "int", &function_d83c0144, 0, 0);
+  clientfield::register("actor", "" + #"hash_3a6a3e4ef0a1a999", 16000, 1, "counter", &function_9e6319c8, 0, 0);
   ai::add_archetype_spawn_function(#"skeleton", &skeletonspawnsetup);
   ai::add_archetype_spawn_function(#"skeleton", &function_3b8e5273);
 }

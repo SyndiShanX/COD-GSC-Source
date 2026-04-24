@@ -16,13 +16,13 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + # "aoe_indicator", 16000, 1, "counter", &aoe_indicator_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "electric_storm", 16000, 1, "int", &electric_storm_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7006a7d528a6f05c", 16000, 3, "int", &function_6e837718, 0, 0);
-  clientfield::register("actor", "" + # "hash_51b05e5d116438a9", 16000, 3, "int", &function_46a56fe2, 0, 0);
-  clientfield::register("actor", "" + # "hash_561a1fd86bc1a53a", 16000, 1, "int", &function_ab086ad8, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_43cf6c236d2e9ba", 16000, 1, "counter", &function_acecb36a, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_1187b848bf7868c5", 16000, 1, "int", &function_5b4619, 0, 0);
+  clientfield::register("scriptmover", "" + #"aoe_indicator", 16000, 1, "counter", &aoe_indicator_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"electric_storm", 16000, 1, "int", &electric_storm_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7006a7d528a6f05c", 16000, 3, "int", &function_6e837718, 0, 0);
+  clientfield::register("actor", "" + #"hash_51b05e5d116438a9", 16000, 3, "int", &function_46a56fe2, 0, 0);
+  clientfield::register("actor", "" + #"hash_561a1fd86bc1a53a", 16000, 1, "int", &function_ab086ad8, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_43cf6c236d2e9ba", 16000, 1, "counter", &function_acecb36a, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_1187b848bf7868c5", 16000, 1, "int", &function_5b4619, 0, 0);
   level._effect[#"electric_storm"] = #"hash_162a58538b5d6db0";
   level._effect[#"hash_11c14ffaefdfd970"] = #"hash_515548ac872ebd06";
   level._effect[#"hash_3d5823fb08a48ea1"] = #"hash_58e484ac8b26c8ef";

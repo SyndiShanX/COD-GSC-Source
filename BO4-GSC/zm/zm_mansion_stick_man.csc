@@ -11,14 +11,14 @@
 #namespace namespace_b6ca3ccc;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "falling_leaves", 8000, 1, "int", &function_664898b6, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_34321e7ca580e772", 8000, 1, "int", &function_f6c7ad1b, 0, 0);
-  clientfield::register("scriptmover", "" + # "stick_fire", 8000, 2, "int", &function_959fcbff, 0, 0);
-  clientfield::register("scriptmover", "" + # "stone_rise", 8000, 1, "counter", &function_a7012457, 0, 0);
-  clientfield::register("toplayer", "" + # "player_dragged", 8000, 1, "int", &function_a5f32c8f, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4be98315796ad666", 8000, 1, "int", &function_f568352e, 0, 0);
-  clientfield::register("allplayers", "" + # "sacrifice_player", 8000, 1, "int", &function_d61c8c59, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_30aa04edc476253f", 8000, 1, "int", &function_3c4642b1, 0, 0);
+  clientfield::register("scriptmover", "" + #"falling_leaves", 8000, 1, "int", &function_664898b6, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_34321e7ca580e772", 8000, 1, "int", &function_f6c7ad1b, 0, 0);
+  clientfield::register("scriptmover", "" + #"stick_fire", 8000, 2, "int", &function_959fcbff, 0, 0);
+  clientfield::register("scriptmover", "" + #"stone_rise", 8000, 1, "counter", &function_a7012457, 0, 0);
+  clientfield::register("toplayer", "" + #"player_dragged", 8000, 1, "int", &function_a5f32c8f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4be98315796ad666", 8000, 1, "int", &function_f568352e, 0, 0);
+  clientfield::register("allplayers", "" + #"sacrifice_player", 8000, 1, "int", &function_d61c8c59, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_30aa04edc476253f", 8000, 1, "int", &function_3c4642b1, 0, 0);
   level._effect[#"stick_fire"] = #"hash_31d36dbca458b0dd";
   level._effect[#"falling_leaves"] = #"hash_6d3c039680511839";
   level._effect[#"hash_dea2f3dceff7569"] = #"zombie/fx_spawn_dirt_body_billowing_zmb";

@@ -21,10 +21,10 @@ function init() {
   namespace_cf4aa5f0::function_6dbaba52("pistol_light_on", "lgt_env_shooting_gallery_pistol", undefined, undefined, undefined);
   namespace_cf4aa5f0::function_6dbaba52("pistol_light_off", undefined, undefined, "lgt_env_shooting_gallery_pistol", undefined);
   namespace_cf4aa5f0::function_6dbaba52("dark_aether_light_on", "zm_tungsten_dark_aether", undefined, undefined, undefined);
-  clientfield::register("world", "" + # "hash_658f225a02b95617", 28000, 1, "int", &function_c5a7e457, 1, 0);
-  clientfield::register("world", "" + # "hash_5e34e1c50fd13b32", 28000, 1, "int", &function_bdf1c128, 1, 0);
-  clientfield::register("world", "" + # "pistol_light_on", 28000, 1, "int", &pistol_light_on, 1, 0);
-  clientfield::register("world", "" + # "dark_aether_light_on", 28000, 1, "int", &dark_aether_light_on, 1, 0);
+  clientfield::register("world", "" + #"hash_658f225a02b95617", 28000, 1, "int", &function_c5a7e457, 1, 0);
+  clientfield::register("world", "" + #"hash_5e34e1c50fd13b32", 28000, 1, "int", &function_bdf1c128, 1, 0);
+  clientfield::register("world", "" + #"pistol_light_on", 28000, 1, "int", &pistol_light_on, 1, 0);
+  clientfield::register("world", "" + #"dark_aether_light_on", 28000, 1, "int", &dark_aether_light_on, 1, 0);
 }
 
 function function_dcf22669() {

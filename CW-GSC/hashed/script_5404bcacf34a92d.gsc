@@ -37,9 +37,9 @@ function private preinit() {
   level.var_d385a742[level.var_d385a742.size] = entry;
   zm_perk_tombstone::function_7c589e7("tactical", #"item_zmintel_gold_omega_artifact_4");
   weaponobjects::function_e6400478(#"hash_f223cacb02788e3", &function_36bda67f, 1);
-  clientfield::register("scriptmover", "" + # "hash_452045cf5cb8bc4c", 16000, 2, "int");
-  clientfield::register("scriptmover", "" + # "hash_7833487f87cacad1", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_1e3fecb02ce56163", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_452045cf5cb8bc4c", 16000, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_7833487f87cacad1", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_1e3fecb02ce56163", 16000, 1, "int");
   callback::on_item_pickup(&on_item_pickup);
   callback::on_item_drop(&on_item_drop);
   callback::on_bleedout(&function_b31c7f6);
@@ -605,15 +605,15 @@ function function_6fff9b43() {
 }
 
 function function_e512e77b(state) {
-  self clientfield::set("" + # "hash_452045cf5cb8bc4c", state);
+  self clientfield::set("" + #"hash_452045cf5cb8bc4c", state);
 }
 
 function function_6018b54a(state) {
-  self clientfield::set("" + # "hash_7833487f87cacad1", state);
+  self clientfield::set("" + #"hash_7833487f87cacad1", state);
 }
 
 function function_652b9314(state) {
-  self clientfield::set("" + # "hash_1e3fecb02ce56163", state);
+  self clientfield::set("" + #"hash_1e3fecb02ce56163", state);
 }
 
 function empty_function(watcher, player) {}

@@ -35,18 +35,18 @@ function preinit() {
   level.var_89331302 = findvolumedecalindexarray("mq4_choppercrash");
   level.var_45ee6e2d = findvolumedecalindexarray("end_of_level_corpses");
   level.var_95d07441 = findvolumedecalindexarray("end_of_level_exfil_outro_igc_props");
-  clientfield::register("toplayer", "" + # "hash_5ef33fc92614c211", 1, 1, "int", &function_29a047dc, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_34af381c063f6611", 1, 1, "int", &function_1b52db57, 0, 0);
-  clientfield::register("scriptmover", "" + # "ambient_fx", 1, 1, "int", &ambient_fx, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_705c1eb33e79522b", 1, 1, "int", &function_f33e1112, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4bedc093642e28f6", 1, 1, "int", &function_1b83f2b2, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_7d17014634879c10", 1, 1, "counter", &function_eb56183c, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_1e59af4706036a79", 1, 1, "int", &function_858fe85a, 0, 0);
-  clientfield::register("vehicle", "" + # "hash_3178e1dcaee33fd3", 1, 1, "int", &laser_fx, 0, 0);
-  clientfield::register("world", "" + # "chopper_crash", 1, 1, "int", &function_3ec12c82, 0, 0);
-  clientfield::register("world", "" + # "end_of_level_corpses", 1, 1, "int", &function_1c47acdc, 0, 0);
-  clientfield::register("world", "" + # "end_of_level_exfil_outro_igc_props", 1, 1, "int", &function_e4145df1, 0, 0);
-  clientfield::register("world", "" + # "hash_46265c2ce587e427", 1, 1, "int", &function_62b0987f, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_5ef33fc92614c211", 1, 1, "int", &function_29a047dc, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_34af381c063f6611", 1, 1, "int", &function_1b52db57, 0, 0);
+  clientfield::register("scriptmover", "" + #"ambient_fx", 1, 1, "int", &ambient_fx, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_705c1eb33e79522b", 1, 1, "int", &function_f33e1112, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4bedc093642e28f6", 1, 1, "int", &function_1b83f2b2, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_7d17014634879c10", 1, 1, "counter", &function_eb56183c, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_1e59af4706036a79", 1, 1, "int", &function_858fe85a, 0, 0);
+  clientfield::register("vehicle", "" + #"hash_3178e1dcaee33fd3", 1, 1, "int", &laser_fx, 0, 0);
+  clientfield::register("world", "" + #"chopper_crash", 1, 1, "int", &function_3ec12c82, 0, 0);
+  clientfield::register("world", "" + #"end_of_level_corpses", 1, 1, "int", &function_1c47acdc, 0, 0);
+  clientfield::register("world", "" + #"end_of_level_exfil_outro_igc_props", 1, 1, "int", &function_e4145df1, 0, 0);
+  clientfield::register("world", "" + #"hash_46265c2ce587e427", 1, 1, "int", &function_62b0987f, 0, 0);
   animation::add_notetrack_func("play_outro_music", &play_outro_music);
 }
 

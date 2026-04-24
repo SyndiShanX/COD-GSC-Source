@@ -228,7 +228,7 @@ function_f118f554() {
   s_info = self waittill(#"trigger");
   e_player = s_info.activator;
   exploder::exploder("fxexplo_catwalk_lava_burst");
-  level clientfield::set("" + # "hash_24deaa9795e06d41", 1);
+  level clientfield::set("" + #"hash_24deaa9795e06d41", 1);
   e_player thread function_5860fce9();
 }
 

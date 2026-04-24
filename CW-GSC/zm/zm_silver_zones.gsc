@@ -168,14 +168,14 @@ function function_44b1279a() {
 
   while(true) {
     is_player_in_zone = self zm_zonemgr::is_player_in_zone(level.var_65c43c31, 0);
-    minimap_underground = self clientfield::get_to_player("" + # "minimap_underground");
+    minimap_underground = self clientfield::get_to_player("" + #"minimap_underground");
 
     if(is_player_in_zone && minimap_underground == 0) {
-      self clientfield::set_to_player("" + # "music_underscore", 1);
-      self clientfield::set_to_player("" + # "minimap_underground", 1);
+      self clientfield::set_to_player("" + #"music_underscore", 1);
+      self clientfield::set_to_player("" + #"minimap_underground", 1);
     } else if(!is_player_in_zone && minimap_underground == 1) {
-      self clientfield::set_to_player("" + # "minimap_underground", 0);
-      self clientfield::set_to_player("" + # "music_underscore", 0);
+      self clientfield::set_to_player("" + #"minimap_underground", 0);
+      self clientfield::set_to_player("" + #"music_underscore", 0);
     }
 
     s_waitresult = self waittill(#"zone_change");

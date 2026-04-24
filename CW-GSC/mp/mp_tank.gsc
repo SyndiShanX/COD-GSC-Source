@@ -13,7 +13,7 @@
 #namespace mp_tank;
 
 function event_handler[level_init] main(eventstruct) {
-  clientfield::register("world", "" + # "hash_7de1e9f42b73bf42", 1, 1, "int");
+  clientfield::register("world", "" + #"hash_7de1e9f42b73bf42", 1, 1, "int");
   level thread function_21acba11();
   killstreaks::function_257a5f13("straferun", 40);
   killstreaks::function_257a5f13("helicopter_comlink", 75);
@@ -27,11 +27,11 @@ function event_handler[level_init] main(eventstruct) {
 }
 
 function function_8d9c0c2d(a_ents) {
-  level clientfield::set("" + # "hash_7de1e9f42b73bf42", 1);
+  level clientfield::set("" + #"hash_7de1e9f42b73bf42", 1);
 }
 
 function function_a4fed09f(a_ents) {
-  level clientfield::set("" + # "hash_7de1e9f42b73bf42", 0);
+  level clientfield::set("" + #"hash_7de1e9f42b73bf42", 0);
 }
 
 function function_21acba11() {

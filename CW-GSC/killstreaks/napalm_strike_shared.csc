@@ -13,9 +13,9 @@
 function init_shared(bundlename) {
   killstreak_detect::init_shared();
   level.var_30e551f4 = getscriptbundle(bundlename);
-  clientfield::register("scriptmover", "" + # "hash_72f92383f772d276", 1, 1, "int", &function_e0221c63, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_3d8e05debfa62f2d", 1, 1, "int", &function_818e69da, 0, 0);
-  clientfield::register("missile", "" + # "hash_77346335cbe9ecde", 1, 1, "int", &function_344bba9b, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_72f92383f772d276", 1, 1, "int", &function_e0221c63, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_3d8e05debfa62f2d", 1, 1, "int", &function_818e69da, 0, 0);
+  clientfield::register("missile", "" + #"hash_77346335cbe9ecde", 1, 1, "int", &function_344bba9b, 0, 0);
   level.var_a25fd5e1 = [];
 }
 

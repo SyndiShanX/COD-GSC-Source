@@ -103,13 +103,13 @@ function private preinit() {
   zm_weapons::function_90953640(level.var_948e5165, 5, float(function_60d95f53()) / 1000);
   zm_weapons::function_90953640(level.axe_gun_upgraded, 5, float(function_60d95f53()) / 1000);
   zm_weapons::function_90953640(level.var_3e316c1b, 5, float(function_60d95f53()) / 1000);
-  clientfield::register("actor", "" + # "hash_d1d4ed99da50a4b", 28000, 1, "int");
-  clientfield::register("actor", "" + # "hash_4189b622ab06c2d5", 28000, 1, "counter");
-  clientfield::register("actor", "" + # "hash_5c2324e6d994b886", 28000, 1, "counter");
-  clientfield::register("scriptmover", "" + # "hash_403f172f69819024", 28000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_2b223a333ab436cd", 28000, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_5d6139b1ce0e7c82", 28000, 2, "int");
-  clientfield::register("toplayer", "" + # "hash_13f32f06b0e858dd", 28000, 3, "int");
+  clientfield::register("actor", "" + #"hash_d1d4ed99da50a4b", 28000, 1, "int");
+  clientfield::register("actor", "" + #"hash_4189b622ab06c2d5", 28000, 1, "counter");
+  clientfield::register("actor", "" + #"hash_5c2324e6d994b886", 28000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"hash_403f172f69819024", 28000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_2b223a333ab436cd", 28000, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_5d6139b1ce0e7c82", 28000, 2, "int");
+  clientfield::register("toplayer", "" + #"hash_13f32f06b0e858dd", 28000, 3, "int");
   namespace_9ff9f642::register_slowdown(#"hash_4d4e7225b8223af5", 0.75, 10);
   zm::function_84d343d(#"hash_18696150427f2efb", &function_adc762ac);
   zm::function_84d343d(#"hash_7eab88123b09e2c", &function_adc762ac);
@@ -137,7 +137,7 @@ function private function_b4b736a0() {
 
     if(isDefined(self.var_c926b4fc)) {
       self.var_c926b4fc = 5;
-      self clientfield::set_to_player("" + # "hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
+      self clientfield::set_to_player("" + #"hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
     }
   }
 }
@@ -179,7 +179,7 @@ function function_f53bdacf(weapon) {
   self setweaponammoclip(smg_weapon, smg_weapon.clipsize);
   self setweaponammostock(smg_weapon, smg_weapon.maxammo);
   self.var_c926b4fc = 5;
-  self clientfield::set_to_player("" + # "hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
+  self clientfield::set_to_player("" + #"hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
 }
 
 function function_16139ef4(params) {
@@ -194,14 +194,14 @@ function function_16139ef4(params) {
     if(function_565c848a(params.weapon)) {
       self thread axe_right_melee_attack_think(params.weapon);
       self thread function_219565f5(params.weapon);
-      self clientfield::set("" + # "hash_5d6139b1ce0e7c82", 1);
+      self clientfield::set("" + #"hash_5d6139b1ce0e7c82", 1);
 
       if(!is_true(self.var_7fe71a4d)) {
         self thread zm_equipment::show_hint_text(#"hash_43c861740b7191e5", 10);
         self.var_7fe71a4d = 1;
       }
     } else {
-      self clientfield::set("" + # "hash_5d6139b1ce0e7c82", 2);
+      self clientfield::set("" + #"hash_5d6139b1ce0e7c82", 2);
 
       if(!is_true(self.var_cbab3c85)) {
         self thread zm_equipment::show_hint_text(#"hash_5f1191a53e87c640", 10);
@@ -213,13 +213,13 @@ function function_16139ef4(params) {
       self.var_c926b4fc = 5;
     }
 
-    self clientfield::set_to_player("" + # "hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
+    self clientfield::set_to_player("" + #"hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
     return;
   }
 
   if(!function_58d581b6(params.weapon) && function_58d581b6(params.last_weapon)) {
     self setactionslot(1, "");
-    self clientfield::set("" + # "hash_5d6139b1ce0e7c82", 0);
+    self clientfield::set("" + #"hash_5d6139b1ce0e7c82", 0);
   }
 }
 
@@ -515,7 +515,7 @@ function private function_219565f5(weapon) {
 
     if(isDefined(self.var_c926b4fc) && self.var_c926b4fc > 0) {
       self.var_c926b4fc--;
-      self clientfield::set_to_player("" + # "hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
+      self clientfield::set_to_player("" + #"hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
       self.var_92188e6b = 1;
       self thread function_2d708b10();
       self thread axe_throw_start(weapon, var_9040b50d);
@@ -543,8 +543,8 @@ function private function_2d708b10() {
 function function_a5abfa4a(str_notify) {
   if(isDefined(self.var_c5165568)) {
     self.var_c5165568 hide();
-    self.var_c5165568 clientfield::set("" + # "hash_2b223a333ab436cd", 0);
-    self.var_c5165568 clientfield::set("" + # "hash_403f172f69819024", 0);
+    self.var_c5165568 clientfield::set("" + #"hash_2b223a333ab436cd", 0);
+    self.var_c5165568 clientfield::set("" + #"hash_403f172f69819024", 0);
     self.var_c5165568 thread function_766433e5();
   }
 }
@@ -592,9 +592,9 @@ function private axe_throw_start(weapon, start_origin) {
   var_c5165568 show();
 
   if(paped) {
-    var_c5165568 clientfield::set("" + # "hash_2b223a333ab436cd", 1);
+    var_c5165568 clientfield::set("" + #"hash_2b223a333ab436cd", 1);
   } else {
-    var_c5165568 clientfield::set("" + # "hash_403f172f69819024", 1);
+    var_c5165568 clientfield::set("" + #"hash_403f172f69819024", 1);
   }
 
   self.var_9996fc0f = 1;
@@ -692,9 +692,9 @@ function private axe_throw_start(weapon, start_origin) {
 
   if(isDefined(var_c5165568)) {
     if(paped) {
-      var_c5165568 clientfield::set("" + # "hash_2b223a333ab436cd", 0);
+      var_c5165568 clientfield::set("" + #"hash_2b223a333ab436cd", 0);
     } else {
-      var_c5165568 clientfield::set("" + # "hash_403f172f69819024", 0);
+      var_c5165568 clientfield::set("" + #"hash_403f172f69819024", 0);
     }
   }
 
@@ -737,11 +737,11 @@ function function_28a475cb(start_pos, end_pos, var_e7b59cda, var_50ebbc23, var_5
       target dodamage(var_55b935c, end_pos, self, undefined, undefined, "MOD_RIFLE_BULLET", 0, var_50ebbc23);
 
       if(paped) {
-        target clientfield::increment("" + # "hash_5c2324e6d994b886", 1);
+        target clientfield::increment("" + #"hash_5c2324e6d994b886", 1);
         continue;
       }
 
-      target clientfield::increment("" + # "hash_4189b622ab06c2d5", 1);
+      target clientfield::increment("" + #"hash_4189b622ab06c2d5", 1);
     }
 
     return 1;
@@ -842,7 +842,7 @@ function function_d1534cde(params) {
 
 function function_f81a3f00(params) {
   self.var_687de2a9 = 1;
-  self clientfield::set("" + # "hash_d1d4ed99da50a4b", 1);
+  self clientfield::set("" + #"hash_d1d4ed99da50a4b", 1);
   self.var_d7b66cd8 = 0;
   self.var_3af9cf02 = 0;
   self thread function_f0be6705();
@@ -875,7 +875,7 @@ function function_ed0d6200(attacker, weapon) {
 
   if(!zm_utility::is_magic_bullet_shield_enabled(self)) {
     self.var_4169c3be = 1;
-    self clientfield::set("" + # "hash_d1d4ed99da50a4b", 0);
+    self clientfield::set("" + #"hash_d1d4ed99da50a4b", 0);
     self thread function_b9e23a1e(attacker, weapon);
   }
 }
@@ -978,7 +978,7 @@ function on_item_pickup(params) {
         self.var_c926b4fc = 5;
       }
 
-      self clientfield::set_to_player("" + # "hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
+      self clientfield::set_to_player("" + #"hash_13f32f06b0e858dd", self.var_c926b4fc + 1);
 
       iprintlnbold("<dev string:x6c>" + self.var_c926b4fc);
 

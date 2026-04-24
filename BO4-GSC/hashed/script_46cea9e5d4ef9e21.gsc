@@ -19,8 +19,8 @@
 #namespace namespace_1063645;
 
 init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_3e57db9b106dff0a", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_4ccf2ce25e0dc836", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_3e57db9b106dff0a", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_4ccf2ce25e0dc836", 1, 1, "int");
 }
 
 function_fb0bd6b9() {
@@ -112,7 +112,7 @@ function_89f2ec87() {
 function_e5c8fd1d() {
   level endon(#"hash_7ebd1255a2e91e3e");
   self waittill(#"blast_attack");
-  self thread clientfield::set("" + # "hash_4ccf2ce25e0dc836", 1);
+  self thread clientfield::set("" + #"hash_4ccf2ce25e0dc836", 1);
   level notify(#"hash_dfac532bccdb293");
 }
 
@@ -166,7 +166,7 @@ function_172e72fa() {
       mdl_tube hidepart("tag_nixie_" + i);
     }
 
-    mdl_tube thread clientfield::set("" + # "hash_4ccf2ce25e0dc836", 0);
+    mdl_tube thread clientfield::set("" + #"hash_4ccf2ce25e0dc836", 0);
     mdl_tube showpart("tag_nixie_off");
 
     if(s_tube.targetname == "nixie_tube_2") {
@@ -412,7 +412,7 @@ function_f2f53f97() {
   level.var_461a9705 = 1;
   s_spawn_location = struct::get("nixie_tube_zombie_blood_start");
   mdl_powerup = util::spawn_model(s_spawn_location.model, s_spawn_location.origin, s_spawn_location.angles);
-  mdl_powerup clientfield::set("" + # "hash_3e57db9b106dff0a", 1);
+  mdl_powerup clientfield::set("" + #"hash_3e57db9b106dff0a", 1);
 
   for(s_target = struct::get(s_spawn_location.target); isDefined(s_target); s_target = struct::get(s_target.target)) {
     n_time = distance(mdl_powerup.origin, s_target.origin) / 300;

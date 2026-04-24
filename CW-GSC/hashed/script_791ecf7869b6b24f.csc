@@ -11,15 +11,15 @@
 #namespace namespace_f7b3ed9;
 
 function init() {
-  clientfield::register("scriptmover", "" + # "damaged_sparks", 16000, 1, "int", &damaged_sparks, 0, 0);
-  clientfield::register("scriptmover", "" + # "damaged_smoke", 16000, 1, "int", &damaged_smoke, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_4cf52ac8c941f331", 16000, 1, "int", &function_38a9e5d1, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_20b22d2242b107cc", 16000, 1, "int", &function_33827fb9, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_354f2f0ca110088b", 16000, 1, "counter", &function_773683a7, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_221e597b28199323", 16000, 1, "int", &function_a229f8c1, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_48cdaba6cfee3ee8", 16000, 1, "int", &function_4c4184dd, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_11d9c3835adcaece", 16000, 1, "int", &function_6909812d, 0, 0);
-  clientfield::register("actor", "" + # "zombie_soul", 16000, 1, "int", &function_bb5d646a, 0, 0);
+  clientfield::register("scriptmover", "" + #"damaged_sparks", 16000, 1, "int", &damaged_sparks, 0, 0);
+  clientfield::register("scriptmover", "" + #"damaged_smoke", 16000, 1, "int", &damaged_smoke, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_4cf52ac8c941f331", 16000, 1, "int", &function_38a9e5d1, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_20b22d2242b107cc", 16000, 1, "int", &function_33827fb9, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_354f2f0ca110088b", 16000, 1, "counter", &function_773683a7, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_221e597b28199323", 16000, 1, "int", &function_a229f8c1, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_48cdaba6cfee3ee8", 16000, 1, "int", &function_4c4184dd, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_11d9c3835adcaece", 16000, 1, "int", &function_6909812d, 0, 0);
+  clientfield::register("actor", "" + #"zombie_soul", 16000, 1, "int", &function_bb5d646a, 0, 0);
   zm_control_point_hud::register();
 }
 

@@ -13,7 +13,7 @@ function private autoexec __init__system__() {
 }
 
 function private preinit() {
-  clientfield::register("scriptmover", "" + # "hash_5f124a31eeb3904a", 24000, 1, "int", &function_6142e681, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5f124a31eeb3904a", 24000, 1, "int", &function_6142e681, 0, 0);
 }
 
 function function_6142e681(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

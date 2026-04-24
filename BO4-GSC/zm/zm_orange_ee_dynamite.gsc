@@ -30,9 +30,9 @@
 #namespace zm_orange_ee_dynamite;
 
 init() {
-  clientfield::register("scriptmover", "" + # "dynamite_explosion_fx", 24000, 1, "counter");
-  clientfield::register("actor", "" + # "hash_6adfdd12c9656e1c", 24000, 1, "int");
-  clientfield::register("actor", "" + # "hash_147a734966a62e10", 24000, 1, "counter");
+  clientfield::register("scriptmover", "" + #"dynamite_explosion_fx", 24000, 1, "counter");
+  clientfield::register("actor", "" + #"hash_6adfdd12c9656e1c", 24000, 1, "int");
+  clientfield::register("actor", "" + #"hash_147a734966a62e10", 24000, 1, "counter");
 }
 
 main() {
@@ -198,7 +198,7 @@ function_8427e524() {
   level.var_1daa43ee = 0;
   level flag::clear(#"debug_dynamite_zombie");
   self.var_f3908ae9 = 1;
-  self clientfield::set("" + # "hash_6adfdd12c9656e1c", 1);
+  self clientfield::set("" + #"hash_6adfdd12c9656e1c", 1);
   self function_4baeb885();
   self.ignoremelee = 1;
   self playLoopSound(#"hash_494dd6f60ab1e3a8");
@@ -209,7 +209,7 @@ function_8427e524() {
   self waittill(#"death");
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "hash_6adfdd12c9656e1c", 0);
+    self clientfield::set("" + #"hash_6adfdd12c9656e1c", 0);
 
     if(self.water_damage === 1) {
       self.e_killer = isPlayer(self.attacker) ? self.attacker : self.last_closest_player;
@@ -217,7 +217,7 @@ function_8427e524() {
     } else {
       if(self.b_cleaned_up !== 1) {
         gibserverutils::annihilate(self);
-        self clientfield::increment("" + # "hash_147a734966a62e10", 1);
+        self clientfield::increment("" + #"hash_147a734966a62e10", 1);
         level function_d8f300c3(self.origin);
         playsoundatposition(#"hash_7b838586b7ef0d9d", self.origin);
       } else {
@@ -367,7 +367,7 @@ function_2e1427a3() {
   iprintln("<dev string:x53>");
 
   wait 1;
-  e_bomb clientfield::increment("" + # "dynamite_explosion_fx", 1);
+  e_bomb clientfield::increment("" + #"dynamite_explosion_fx", 1);
   level function_d8f300c3(self.origin);
   playsoundatposition(#"hash_2b694b905abf1892", e_bomb.origin);
   e_bomb playrumbleonentity("zm_orange_dynamite_bomb_explosion");

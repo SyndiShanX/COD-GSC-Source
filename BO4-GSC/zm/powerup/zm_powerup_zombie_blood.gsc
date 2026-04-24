@@ -20,7 +20,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("allplayers", "" + # "player_zombie_blood_fx", 1, 1, "int");
+  clientfield::register("allplayers", "" + #"player_zombie_blood_fx", 1, 1, "int");
   zm_powerups::register_powerup("zombie_blood", &grab_zombie_blood);
 
   if(zm_powerups::function_cc33adc8()) {
@@ -70,7 +70,7 @@ zombie_blood_powerup(mdl_powerup, e_player) {
   e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"] = 1;
   e_player setcharacteroutfit(1);
   level notify(#"player_zombie_blood", e_player);
-  e_player clientfield::set("" + # "player_zombie_blood_fx", 1);
+  e_player clientfield::set("" + #"player_zombie_blood_fx", 1);
   level.a_zombie_blood_entities = array::remove_undefined(level.a_zombie_blood_entities);
 
   foreach(e_zombie_blood in level.a_zombie_blood_entities) {
@@ -102,7 +102,7 @@ zombie_blood_powerup(mdl_powerup, e_player) {
   e_player.zombie_vars[#"zombie_powerup_zombie_blood_on"] = 0;
   e_player.zombie_vars[#"zombie_powerup_zombie_blood_time"] = 30;
   e_player._show_solo_hud = 0;
-  e_player clientfield::set("" + # "player_zombie_blood_fx", 0);
+  e_player clientfield::set("" + #"player_zombie_blood_fx", 0);
   e_player val::reset("zombie_blood", "ignoreme");
   level.a_zombie_blood_entities = array::remove_undefined(level.a_zombie_blood_entities);
 

@@ -51,7 +51,7 @@ function init_shared() {
   clientfield::register("scriptmover", "standardTagFxSet", 1, 1, "int");
   clientfield::register("scriptmover", "lowHealthTagFxSet", 1, 1, "int");
   clientfield::register("scriptmover", "deathTagFxSet", 1, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_524d30f5676b2070", 1, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_524d30f5676b2070", 1, 1, "int");
   clientfield::register("vehicle", "scorestreakActive", 1, 1, "int");
   clientfield::register("scriptmover", "scorestreakActive", 1, 1, "int");
   killstreak_dialog::function_196f2c38();
@@ -2481,11 +2481,11 @@ function function_cfa9cec5(startwait) {
     return;
   }
 
-  self clientfield::set_to_player("" + # "hash_524d30f5676b2070", 1);
+  self clientfield::set_to_player("" + #"hash_524d30f5676b2070", 1);
 }
 
 function function_50b430e0() {
-  self clientfield::set_to_player("" + # "hash_524d30f5676b2070", 0);
+  self clientfield::set_to_player("" + #"hash_524d30f5676b2070", 0);
 }
 
 function is_interacting_with_object() {

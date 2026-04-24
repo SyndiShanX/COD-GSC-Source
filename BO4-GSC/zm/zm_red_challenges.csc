@@ -16,16 +16,16 @@ init() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + # "hash_74fc30de57a0657a", 16000, 3, "int", &function_de1bffd6, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_21f5fab6a3d22093", 16000, 3, "int", &function_9ed71eeb, 0, 0);
-  clientfield::register("scriptmover", "" + # "keyline_model", 16000, 1, "int", &keyline_model, 0, 0);
-  clientfield::register("scriptmover", "" + # "pickup_glow", 16000, 1, "int", &pickup_glow, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_8b48433c3fe40e4", 16000, 3, "int", &function_75ac8f21, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_4bde11d71410ea67", 16000, 3, "int", &function_250bbf4e, 0, 0);
-  clientfield::register("world", "" + # "cleanup_challenges", 16000, 1, "int", &cleanup_challenges, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_47490b879090eb55", 16000, 3, "int", &function_840d5e0b, 0, 0);
-  clientfield::register("allplayers", "" + # "hash_7b1dd5c08e2585c", 16000, 3, "int", &function_c63a4f32, 0, 0);
-  clientfield::register("scriptmover", "" + # "rob_coals", 16000, 1, "int", &rob_coals, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_74fc30de57a0657a", 16000, 3, "int", &function_de1bffd6, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_21f5fab6a3d22093", 16000, 3, "int", &function_9ed71eeb, 0, 0);
+  clientfield::register("scriptmover", "" + #"keyline_model", 16000, 1, "int", &keyline_model, 0, 0);
+  clientfield::register("scriptmover", "" + #"pickup_glow", 16000, 1, "int", &pickup_glow, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_8b48433c3fe40e4", 16000, 3, "int", &function_75ac8f21, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_4bde11d71410ea67", 16000, 3, "int", &function_250bbf4e, 0, 0);
+  clientfield::register("world", "" + #"cleanup_challenges", 16000, 1, "int", &cleanup_challenges, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_47490b879090eb55", 16000, 3, "int", &function_840d5e0b, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_7b1dd5c08e2585c", 16000, 3, "int", &function_c63a4f32, 0, 0);
+  clientfield::register("scriptmover", "" + #"rob_coals", 16000, 1, "int", &rob_coals, 0, 0);
   level._effect[#"hash_379eadfebd945316"] = #"hash_556b5a8aa255768d";
   level._effect[#"hash_3229d3874a037840"] = #"hash_48053ee21dfed9c9";
   level._effect[#"hash_31c3f08749acf655"] = #"hash_482741e21e1bc548";

@@ -12,25 +12,25 @@
 #namespace zm_silver_pap_quest;
 
 function init_clientfield() {
-  clientfield::register("world", "" + # "hash_27895772c4825a7a", 1, 1, "int", &function_619cd4e5, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_14ba797c22b75dda", 1, 1, "counter", &function_483f3ae0, 0, 0);
+  clientfield::register("world", "" + #"hash_27895772c4825a7a", 1, 1, "int", &function_619cd4e5, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_14ba797c22b75dda", 1, 1, "counter", &function_483f3ae0, 0, 0);
 
   if(getgametypesetting(#"zmpapenabled") !== 1) {
     return;
   }
 
-  clientfield::register("world", "" + # "hash_5cf186464ce9cdd6", 1, 1, "counter", &function_33082eb4, 0, 0);
-  clientfield::register("world", "" + # "hash_7b3ada6e5b1cf81e", 1, 1, "int", &function_167fc35, 0, 0);
-  clientfield::register("world", "" + # "hash_53c6d001e2faecab", 1, 1, "counter", &function_c4603212, 0, 0);
-  clientfield::register("world", "" + # "hash_266f6fe481bab1bc", 1, 1, "int", &function_4dff5056, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_1fa45e1c3652d753", 1, 1, "int", &function_6902ffa4, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_c34d1c4bd1aa84a", 1, 1, "counter", &function_b56e6c7e, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_385053c55d081e0d", 1, 1, "counter", &function_ceb6041f, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7ec80a02e9bb051a", 1, 1, "int", &function_760c94c, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_5a293ad1c677dc7e", 1, 1, "int", &function_2424f2ac, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_7919b736a767a0f5", 1, 2, "int", &function_e5ffabef, 0, 0);
-  clientfield::register("scriptmover", "" + # "hash_54d221181b1a11f", 1, 2, "int", &function_840cc260, 0, 0);
-  clientfield::register("world", "" + # "hash_51ed1d1064cfb0e", 1, 1, "int", &function_32b2a189, 0, 0);
+  clientfield::register("world", "" + #"hash_5cf186464ce9cdd6", 1, 1, "counter", &function_33082eb4, 0, 0);
+  clientfield::register("world", "" + #"hash_7b3ada6e5b1cf81e", 1, 1, "int", &function_167fc35, 0, 0);
+  clientfield::register("world", "" + #"hash_53c6d001e2faecab", 1, 1, "counter", &function_c4603212, 0, 0);
+  clientfield::register("world", "" + #"hash_266f6fe481bab1bc", 1, 1, "int", &function_4dff5056, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_1fa45e1c3652d753", 1, 1, "int", &function_6902ffa4, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_c34d1c4bd1aa84a", 1, 1, "counter", &function_b56e6c7e, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_385053c55d081e0d", 1, 1, "counter", &function_ceb6041f, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7ec80a02e9bb051a", 1, 1, "int", &function_760c94c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_5a293ad1c677dc7e", 1, 1, "int", &function_2424f2ac, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_7919b736a767a0f5", 1, 2, "int", &function_e5ffabef, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_54d221181b1a11f", 1, 2, "int", &function_840cc260, 0, 0);
+  clientfield::register("world", "" + #"hash_51ed1d1064cfb0e", 1, 1, "int", &function_32b2a189, 0, 0);
 }
 
 function function_ceb6041f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -30,8 +30,8 @@ __init__() {
 }
 
 init_clientfields() {
-  clientfield::register("actor", "" + # "electrocute_ai_fx", 20000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_6d40a3f1944d81b2", 20000, 2, "int");
+  clientfield::register("actor", "" + #"electrocute_ai_fx", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_6d40a3f1944d81b2", 20000, 2, "int");
 }
 
 __main__() {
@@ -264,15 +264,15 @@ function_70557fa2(n_sequence) {
   foreach(var_131f4c21 in self.var_5aecd907) {
     if(var_131f4c21.script_int === n_sequence) {
       if(var_131f4c21.var_7f831216 === 2) {
-        var_131f4c21.mdl_laser clientfield::set("" + # "hash_6d40a3f1944d81b2", 2);
+        var_131f4c21.mdl_laser clientfield::set("" + #"hash_6d40a3f1944d81b2", 2);
       } else {
-        var_131f4c21.mdl_laser clientfield::set("" + # "hash_6d40a3f1944d81b2", 1);
+        var_131f4c21.mdl_laser clientfield::set("" + #"hash_6d40a3f1944d81b2", 1);
       }
 
       continue;
     }
 
-    var_131f4c21.mdl_laser clientfield::set("" + # "hash_6d40a3f1944d81b2", 0);
+    var_131f4c21.mdl_laser clientfield::set("" + #"hash_6d40a3f1944d81b2", 0);
   }
 }
 
@@ -349,7 +349,7 @@ function_242055cf() {
 function_3b764073() {
   foreach(var_131f4c21 in self.var_5aecd907) {
     if(isDefined(var_131f4c21.mdl_laser)) {
-      var_131f4c21.mdl_laser clientfield::set("" + # "hash_6d40a3f1944d81b2", 1);
+      var_131f4c21.mdl_laser clientfield::set("" + #"hash_6d40a3f1944d81b2", 1);
     }
   }
 }
@@ -357,14 +357,14 @@ function_3b764073() {
 function_8f250fa1() {
   foreach(var_131f4c21 in self.var_5aecd907) {
     if(isDefined(var_131f4c21.mdl_laser)) {
-      var_131f4c21.mdl_laser clientfield::set("" + # "hash_6d40a3f1944d81b2", 0);
+      var_131f4c21.mdl_laser clientfield::set("" + #"hash_6d40a3f1944d81b2", 0);
     }
   }
 }
 
 electrocute_zombie(e_activator, e_volume) {
   self endon(#"death");
-  self clientfield::set("" + # "electrocute_ai_fx", 1);
+  self clientfield::set("" + #"electrocute_ai_fx", 1);
   self.marked_for_death = 1;
 
   if(isactor(self)) {

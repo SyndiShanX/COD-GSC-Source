@@ -23,7 +23,7 @@ function private preinit() {
     return;
   }
 
-  clientfield::register("zbarrier", "" + # "hash_100f180bf5d2a517", 14000, 1, "int");
+  clientfield::register("zbarrier", "" + #"hash_100f180bf5d2a517", 14000, 1, "int");
   zm_trial::register_challenge(#"hash_28d1b9857e2ca681", &on_begin, &on_end);
 }
 
@@ -105,9 +105,9 @@ function private pap_machine_fx() {
       continue;
     }
 
-    var_4c755588 clientfield::set("" + # "hash_100f180bf5d2a517", 1);
+    var_4c755588 clientfield::set("" + #"hash_100f180bf5d2a517", 1);
     var_4c755588 waittill(#"pap_taken", #"pap_timeout");
-    var_4c755588 clientfield::set("" + # "hash_100f180bf5d2a517", 0);
+    var_4c755588 clientfield::set("" + #"hash_100f180bf5d2a517", 0);
   }
 }
 

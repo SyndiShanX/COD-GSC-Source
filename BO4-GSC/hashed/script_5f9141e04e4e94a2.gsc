@@ -26,9 +26,9 @@
 
 preload() {
   namespace_bd74bbd2::register(#"sc_mk2y", 20000, "sc_mk2y", &function_a66f0de2, &function_17f3e9e2);
-  clientfield::register("scriptmover", "" + # "hash_70251001fe8c4abe", 20000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_b0298e980bd8da0", 20000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_1e4555a911a24ab7", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_70251001fe8c4abe", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_b0298e980bd8da0", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_1e4555a911a24ab7", 20000, 1, "int");
 }
 
 init() {
@@ -207,7 +207,7 @@ start_step_2() {
   e_wisp.e_model = util::spawn_model(#"p7_zm_ori_orb_wind", e_wisp.origin, e_wisp.angles);
   e_wisp.e_model linkto(e_wisp);
   e_wisp.e_model ghost();
-  e_wisp clientfield::set("" + # "hash_b0298e980bd8da0", 1);
+  e_wisp clientfield::set("" + #"hash_b0298e980bd8da0", 1);
   e_wisp moveto(s_canister.origin + (0, 0, 64), 0.75);
   e_wisp waittill(#"movedone");
   level thread function_eddc2ed3();
@@ -246,7 +246,7 @@ function_fe82c566() {
     self waittill(#"movedone");
     playFX(level._effect[#"portal_origin"], var_bc569584, (1, 0, 0), (0, 0, 1));
     playsoundatposition(#"evt_teleporter_out", var_bc569584);
-    self clientfield::set("" + # "hash_b0298e980bd8da0", 0);
+    self clientfield::set("" + #"hash_b0298e980bd8da0", 0);
     level flag::set(#"hash_11513646e875455c");
     wait 10;
     level flag::clear(#"hash_11513646e875455c");
@@ -256,7 +256,7 @@ function_fe82c566() {
       level.var_23674b8f.var_c8a6d360 = 0;
     }
 
-    self clientfield::set("" + # "hash_b0298e980bd8da0", 1);
+    self clientfield::set("" + #"hash_b0298e980bd8da0", 1);
     var_838db546 = level.var_23674b8f.var_80284ca5[level.var_23674b8f.var_c8a6d360].origin;
     self.origin = var_838db546 - (0, 0, 64);
     self moveto(var_838db546 + (0, 0, 64), 1);
@@ -296,11 +296,11 @@ function_92344a03() {
       var_59bd625c += (0, 0, 22);
       e_wisp.origin = var_59bd625c;
       e_wisp.angles = self.angles;
-      e_wisp clientfield::set("" + # "hash_1e4555a911a24ab7", 1);
+      e_wisp clientfield::set("" + #"hash_1e4555a911a24ab7", 1);
       wait 1.5;
       e_wisp moveto(self getcentroid(), 1);
       e_wisp waittill(#"movedone");
-      e_wisp clientfield::set("" + # "hash_1e4555a911a24ab7", 0);
+      e_wisp clientfield::set("" + #"hash_1e4555a911a24ab7", 0);
       var_135425aa = 1;
 
       iprintlnbold("<dev string:xa4>");
@@ -335,7 +335,7 @@ start_step_3() {
   level.var_23674b8f.n_step = 3;
   wait 0.25;
   e_wisp = level.var_23674b8f.e_wisp;
-  e_wisp clientfield::set("" + # "hash_b0298e980bd8da0", 1);
+  e_wisp clientfield::set("" + #"hash_b0298e980bd8da0", 1);
   e_wisp.origin = level.var_23674b8f.e_player getcentroid();
   e_wisp.angles = level.var_23674b8f.e_player.angles;
   var_59bd625c = level.var_23674b8f.e_player getcentroid() + 96 * vectornormalize(anglesToForward(level.var_23674b8f.e_player.angles));
@@ -382,7 +382,7 @@ function_a66f0de2() {
   s_unitrigger = level.var_23674b8f.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_b9a31cb, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_23674b8f.var_fead3ae9 setModel(#"hash_7b9a3cdf5dd8b4d7");
-  level.var_23674b8f.var_fead3ae9 clientfield::set("" + # "hash_70251001fe8c4abe", 1);
+  level.var_23674b8f.var_fead3ae9 clientfield::set("" + #"hash_70251001fe8c4abe", 1);
 }
 
 function_b9a31cb(e_item, e_player) {
@@ -394,7 +394,7 @@ function_b9a31cb(e_item, e_player) {
   zm_ui_inventory::function_7df6bb60("zm_white_ww_mk2y_ammo", 2, e_player);
   e_player.var_f7694097 = 2;
   e_player playSound("evt_canister_pickup");
-  level.var_23674b8f.e_wisp clientfield::set("" + # "hash_b0298e980bd8da0", 0);
+  level.var_23674b8f.e_wisp clientfield::set("" + #"hash_b0298e980bd8da0", 0);
   level.var_23674b8f.e_wisp.e_model delete();
   level.var_23674b8f.e_wisp delete();
   start_step_4();

@@ -33,14 +33,14 @@ autoexec __init__system__() {
 
 __init__() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("scriptmover", "" + # "hash_5ecbfb9042fc7f38", 1, 1, "int");
-  clientfield::register("actor", "" + # "hash_588871862d19b97d", 1, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_2be4ce9b84bd3b58", 1, 1, "counter");
-  clientfield::register("actor", "" + # "hash_338ecd1287d0623b", 1, 1, "counter");
-  clientfield::register("scriptmover", "" + # "tomahawk_pickup_fx", 1, n_bits, "int");
-  clientfield::register("scriptmover", "" + # "hash_51657261e835ac7c", 1, n_bits, "int");
-  clientfield::register("toplayer", "" + # "tomahawk_pickup_fx", 13000, 1, "int");
-  clientfield::register("toplayer", "" + # "hash_51657261e835ac7c", 13000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_5ecbfb9042fc7f38", 1, 1, "int");
+  clientfield::register("actor", "" + #"hash_588871862d19b97d", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_2be4ce9b84bd3b58", 1, 1, "counter");
+  clientfield::register("actor", "" + #"hash_338ecd1287d0623b", 1, 1, "counter");
+  clientfield::register("scriptmover", "" + #"tomahawk_pickup_fx", 1, n_bits, "int");
+  clientfield::register("scriptmover", "" + #"hash_51657261e835ac7c", 1, n_bits, "int");
+  clientfield::register("toplayer", "" + #"tomahawk_pickup_fx", 13000, 1, "int");
+  clientfield::register("toplayer", "" + #"hash_51657261e835ac7c", 13000, 1, "int");
   callback::on_start_gametype(&function_bad944b5);
 }
 
@@ -199,7 +199,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
   var_66a8d5fc = scene::function_8582657c(#"ai_zm_esc_zombie_dreamcatch_rise", "rise");
 
   if(isDefined(ai_zombie)) {
-    ai_zombie clientfield::set("" + # "hash_588871862d19b97d", 1);
+    ai_zombie clientfield::set("" + #"hash_588871862d19b97d", 1);
   }
 
   vec_dir = self.s_scene.origin - var_678e573f.origin;
@@ -255,13 +255,13 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
 
   if(isDefined(ai_zombie)) {
     ai_zombie unlink();
-    ai_zombie clientfield::set("" + # "hash_588871862d19b97d", 0);
+    ai_zombie clientfield::set("" + #"hash_588871862d19b97d", 0);
     self.s_scene scene::play(var_3e4fd9fd, ai_zombie);
   } else {
     self.s_scene scene::play(var_3e4fd9fd);
   }
 
-  var_3e1900e4 clientfield::increment("" + # "hash_2be4ce9b84bd3b58");
+  var_3e1900e4 clientfield::increment("" + #"hash_2be4ce9b84bd3b58");
   self.var_43bd3b5++;
   self notify(#"finished_eating");
   self.var_aa1a7f2e = 0;
@@ -276,7 +276,7 @@ function_e40e9d94(n_eating_anim, ai_zombie, e_activator) {
 function_37937b33() {
   self endon(#"death");
   self waittill(#"zombie_eaten_hide");
-  self clientfield::increment("" + # "hash_338ecd1287d0623b");
+  self clientfield::increment("" + #"hash_338ecd1287d0623b");
   self ghost();
 }
 
@@ -316,7 +316,7 @@ soul_catcher_state_manager() {
     self.t_hurt show();
   }
 
-  self.mdl_rune clientfield::set("" + # "hash_5ecbfb9042fc7f38", 1);
+  self.mdl_rune clientfield::set("" + #"hash_5ecbfb9042fc7f38", 1);
   self.s_scene scene::play("Start");
   self flag::set(#"wolf_intro_anim_complete");
   self waittill(#"finished_eating");
@@ -327,7 +327,7 @@ soul_catcher_state_manager() {
   }
 
   self notify(#"hash_1c2dd0a16f7ac134");
-  self.mdl_rune clientfield::set("" + # "hash_5ecbfb9042fc7f38", 0);
+  self.mdl_rune clientfield::set("" + #"hash_5ecbfb9042fc7f38", 0);
   self.mdl_rune setModel("p8_zm_esc_dream_catcher");
   self.s_scene scene::play("Depart");
 }
@@ -567,7 +567,7 @@ function_f0ef3897(e_player) {
   e_player zm_stats::increment_client_stat("prison_tomahawk_acquired", 0);
 
   if(e_player flag::exists(#"hash_11ab20934759ebc3") && e_player flag::get(#"hash_11ab20934759ebc3")) {
-    e_player clientfield::set_to_player("" + # "upgraded_tomahawk_in_use", 1);
+    e_player clientfield::set_to_player("" + #"upgraded_tomahawk_in_use", 1);
   }
 
   e_player zm_utility::enable_player_move_states();
@@ -606,22 +606,22 @@ function_6300f001() {
           mdl_tomahawk setvisibletoplayer(self);
 
           if(self flag::exists(#"hash_11ab20934759ebc3") && self flag::get(#"hash_11ab20934759ebc3")) {
-            self clientfield::set_to_player("" + # "hash_51657261e835ac7c", 1);
+            self clientfield::set_to_player("" + #"hash_51657261e835ac7c", 1);
           } else {
-            self clientfield::set_to_player("" + # "tomahawk_pickup_fx", 1);
+            self clientfield::set_to_player("" + #"tomahawk_pickup_fx", 1);
           }
         } else {
           var_6668e57a setinvisibletoplayer(self);
           mdl_tomahawk setinvisibletoplayer(self);
-          self clientfield::set_to_player("" + # "tomahawk_pickup_fx", 0);
-          self clientfield::set_to_player("" + # "hash_51657261e835ac7c", 0);
+          self clientfield::set_to_player("" + #"tomahawk_pickup_fx", 0);
+          self clientfield::set_to_player("" + #"hash_51657261e835ac7c", 0);
           waitframe(1);
         }
       } else {
         var_6668e57a setinvisibletoplayer(self);
         mdl_tomahawk setinvisibletoplayer(self);
-        self clientfield::set_to_player("" + # "tomahawk_pickup_fx", 0);
-        self clientfield::set_to_player("" + # "hash_51657261e835ac7c", 0);
+        self clientfield::set_to_player("" + #"tomahawk_pickup_fx", 0);
+        self clientfield::set_to_player("" + #"hash_51657261e835ac7c", 0);
         waitframe(1);
       }
     }

@@ -18,8 +18,8 @@ __init__() {
     return;
   }
 
-  clientfield::register("allplayers", "" + # "hash_11a25fb3db96fc2d", 1, 1, "int", &function_441dc042, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_31b61c511ced94d7", 1, 1, "int", &function_1e792793, 0, 1);
+  clientfield::register("allplayers", "" + #"hash_11a25fb3db96fc2d", 1, 1, "int", &function_441dc042, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_31b61c511ced94d7", 1, 1, "int", &function_1e792793, 0, 1);
   bgb::register(#"zm_bgb_dividend_yield", "time");
   level.var_b28c30ba = [];
 }

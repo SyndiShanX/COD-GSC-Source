@@ -81,10 +81,10 @@ function_53e45f4e() {
       }
     }
 
-    if(isDefined(b_in_range) && b_in_range && !(isDefined(self clientfield::get("" + # "force_stream_model")) && self clientfield::get("" + # "force_stream_model"))) {
-      self clientfield::set("" + # "force_stream_model", 1);
-    } else if(!isDefined(b_in_range) && isDefined(self clientfield::get("" + # "force_stream_model")) && self clientfield::get("" + # "force_stream_model")) {
-      self clientfield::set("" + # "force_stream_model", 0);
+    if(isDefined(b_in_range) && b_in_range && !(isDefined(self clientfield::get("" + #"force_stream_model")) && self clientfield::get("" + #"force_stream_model"))) {
+      self clientfield::set("" + #"force_stream_model", 1);
+    } else if(!isDefined(b_in_range) && isDefined(self clientfield::get("" + #"force_stream_model")) && self clientfield::get("" + #"force_stream_model")) {
+      self clientfield::set("" + #"force_stream_model", 0);
     }
 
     b_in_range = undefined;

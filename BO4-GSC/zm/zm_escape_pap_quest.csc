@@ -15,8 +15,8 @@ init() {
 }
 
 init_clientfield() {
-  clientfield::register("world", "" + # "lightning_far", 1, 1, "counter", &function_5cb90582, 0, 0);
-  clientfield::register("scriptmover", "" + # "lightning_near", 1, 1, "counter", &lightning_near_fx, 0, 0);
+  clientfield::register("world", "" + #"lightning_far", 1, 1, "counter", &function_5cb90582, 0, 0);
+  clientfield::register("scriptmover", "" + #"lightning_near", 1, 1, "counter", &lightning_near_fx, 0, 0);
 }
 
 lightning_near_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

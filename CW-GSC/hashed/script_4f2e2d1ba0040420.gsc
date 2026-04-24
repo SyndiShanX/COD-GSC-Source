@@ -53,14 +53,14 @@ function function_42818ffd(instance) {
     foreach(i, player in getplayers()) {
       player setorigin(var_841d9acf[i].origin);
       player setplayerangles(var_841d9acf[i].angles);
-      player clientfield::set_to_player("" + # "hash_34af381c063f6611", 1);
+      player clientfield::set_to_player("" + #"hash_34af381c063f6611", 1);
     }
   }
 
   namespace_d0ab5955::function_d4dec4e8(instance.location.destination, #"hash_77c04aaf41a18e41");
   namespace_d0ab5955::function_f1ad7968(instance.location.destination, #"hash_1d72c1d85b91814e");
   showmiscmodels("end_of_level_corpses");
-  level clientfield::set("" + # "end_of_level_corpses", 1);
+  level clientfield::set("" + #"end_of_level_corpses", 1);
   exploder::exploder("fxexp_island_worklight");
   level.var_97e461d4 = "chopper_gunner_path_sanatorium_exfil_end_of_level";
   level flag::set(#"hash_3070ff342f14b371");
@@ -394,21 +394,21 @@ function private on_item_pickup(params) {
 function function_29430f26(a_ents, b_enable) {
   if(is_true(b_enable)) {
     showmiscmodels("end_of_level_exfil_outro_igc_props");
-    level clientfield::set("" + # "end_of_level_exfil_outro_igc_props", 1);
+    level clientfield::set("" + #"end_of_level_exfil_outro_igc_props", 1);
     return;
   }
 
   hidemiscmodels("end_of_level_exfil_outro_igc_props");
-  level clientfield::set("" + # "end_of_level_exfil_outro_igc_props", 0);
+  level clientfield::set("" + #"end_of_level_exfil_outro_igc_props", 0);
 }
 
 function function_dd0d40c4(a_ents, b_enable) {
   if(b_enable) {
-    level clientfield::set("" + # "hash_46265c2ce587e427", 1);
+    level clientfield::set("" + #"hash_46265c2ce587e427", 1);
     return;
   }
 
-  level clientfield::set("" + # "hash_46265c2ce587e427", 0);
+  level clientfield::set("" + #"hash_46265c2ce587e427", 0);
 }
 
 function function_f0e44578(a_ents) {

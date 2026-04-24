@@ -14,7 +14,7 @@
 #namespace namespace_98521e8b;
 
 function event_handler[level_init] function_9347830c(eventstruct) {
-  clientfield::register("world", "" + # "hash_6789a69336880f89", 10000, 1, "int");
+  clientfield::register("world", "" + #"hash_6789a69336880f89", 10000, 1, "int");
   var_b3160934 = function_1ead85cd();
 
   if(isDefined(var_b3160934)) {
@@ -43,7 +43,7 @@ function function_d6b2318a() {
   }
 
   level util::function_f6847a11();
-  level clientfield::set("" + # "hash_6789a69336880f89", 1);
+  level clientfield::set("" + #"hash_6789a69336880f89", 1);
 
   if(isDefined(level.var_ecb89926)) {
     var_abb4b791 = getentitiesinradius(level.var_ecb89926, 1000, 12);
@@ -77,7 +77,7 @@ function function_d6b2318a() {
     level scene::play(var_b3160934, level.var_3eada96b);
   }
 
-  level clientfield::set("" + # "hash_6789a69336880f89", 0);
+  level clientfield::set("" + #"hash_6789a69336880f89", 0);
 }
 
 function function_9cc2688d(str_scene) {

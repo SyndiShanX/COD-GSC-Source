@@ -15,7 +15,7 @@ preload() {
   namespace_bd74bbd2::register(#"sc_mk2z_1", 20000, "sc_mk2z_1", level._effect[#"hash_5167810d20f56cde"], level._effect[#"hash_7076baef5f9776c0"]);
   namespace_bd74bbd2::register(#"sc_mk2z_2", 20000, "sc_mk2z_2", level._effect[#"hash_5167810d20f56cde"], level._effect[#"hash_7076baef5f9776c0"]);
   namespace_bd74bbd2::register(#"sc_mk2z_3", 20000, "sc_mk2z_3", level._effect[#"hash_5167810d20f56cde"], level._effect[#"hash_7076baef5f9776c0"]);
-  clientfield::register("scriptmover", "" + # "hash_2184dd4e9090521f", 20000, 1, "int", &function_7cd6e78c, 0, 0);
+  clientfield::register("scriptmover", "" + #"hash_2184dd4e9090521f", 20000, 1, "int", &function_7cd6e78c, 0, 0);
 }
 
 function_7cd6e78c(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

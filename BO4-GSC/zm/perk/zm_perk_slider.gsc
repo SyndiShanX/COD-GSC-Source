@@ -52,7 +52,7 @@ function_1781c013() {
 }
 
 function_5ba17a72() {
-  clientfield::register("allplayers", "" + # "hash_7b8ad0ed3ef67813", 1, 1, "counter");
+  clientfield::register("allplayers", "" + #"hash_7b8ad0ed3ef67813", 1, 1, "counter");
 }
 
 function_90f58801(state) {}
@@ -165,7 +165,7 @@ slide_explosion(n_slot) {
     if(isarray(var_1574e1cf) && var_1574e1cf.size) {
       a_ai = self getenemiesinradius(self.origin, 256);
       a_ai = arraysortclosest(a_ai, self.origin);
-      self clientfield::increment("" + # "hash_7b8ad0ed3ef67813");
+      self clientfield::increment("" + #"hash_7b8ad0ed3ef67813");
       self zm_perks::function_13880aa5(n_slot, 0.05, #"perk_slider");
       self zm_perks::function_c8c7bc5(n_slot, 0, #"perk_slider");
       var_708c0444 = 0;

@@ -114,7 +114,7 @@ register_clientfields() {
   clientfield::register("world", "portal_map_gas_indicator_yellow_house", 1, 1, "int");
   clientfield::register("world", "portal_map_gas_indicator_generators", 1, 1, "int");
   clientfield::register("world", "generator_sound_sweetner", 1, 1, "int");
-  clientfield::register("world", "" + # "hash_1c11f70bb8445095", 1, 3, "int");
+  clientfield::register("world", "" + #"hash_1c11f70bb8445095", 1, 3, "int");
   clientfield::register("toplayer", "vent_interact_feedback", 20000, 1, "counter");
 }
 
@@ -1140,12 +1140,12 @@ function_2791c411() {
 }
 
 function_feab1e8a() {
-  level clientfield::set("" + # "hash_1c11f70bb8445095", 4);
+  level clientfield::set("" + #"hash_1c11f70bb8445095", 4);
   level.var_7a86ba58 function_ccc74648("string_01");
 }
 
 function_5be4c9e4(var_49c1a8cf) {
-  level clientfield::set("" + # "hash_1c11f70bb8445095", var_49c1a8cf);
+  level clientfield::set("" + #"hash_1c11f70bb8445095", var_49c1a8cf);
 }
 
 function_f79e10f9(e_door) {

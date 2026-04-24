@@ -37,10 +37,10 @@ function private autoexec __init__system__() {
 
 function private preinit() {
   registerbehaviorscriptfunctions();
-  clientfield::register("missile", "" + # "avogadro_bolt_fx", 1, 2, "int");
-  clientfield::register("actor", "" + # "avogadro_phase_fx", 1, 1, "int");
-  clientfield::register("actor", "" + # "avogadro_health_fx", 1, 2, "int");
-  clientfield::register("scriptmover", "" + # "hash_183ef3538fd62563", 1, 1, "int");
+  clientfield::register("missile", "" + #"avogadro_bolt_fx", 1, 2, "int");
+  clientfield::register("actor", "" + #"avogadro_phase_fx", 1, 1, "int");
+  clientfield::register("actor", "" + #"avogadro_health_fx", 1, 2, "int");
+  clientfield::register("scriptmover", "" + #"hash_183ef3538fd62563", 1, 1, "int");
   clientfield::register("scriptmover", "avogadro_phase_beam", 1, getminbitcountfornum(3), "int");
   spawner::add_archetype_spawn_function(#"avogadro", &function_ee579eb5);
   spawner::function_89a2cd87(#"avogadro", &function_d1359818);
@@ -171,7 +171,7 @@ function function_dbc638a8(entity) {
     var_f8c4006a = 2;
   }
 
-  entity clientfield::set("" + # "avogadro_health_fx", var_f8c4006a);
+  entity clientfield::set("" + #"avogadro_health_fx", var_f8c4006a);
 }
 
 function function_50a86206(params) {
@@ -577,7 +577,7 @@ function private shoot_bolt_wait(entity) {
 function function_b1b41f33(owner) {
   self endon(#"death");
   self.owner = owner;
-  self clientfield::set("" + # "avogadro_bolt_fx", 1);
+  self clientfield::set("" + #"avogadro_bolt_fx", 1);
   self thread function_dec8144d();
   waitresult = self function_5f86757d();
 
@@ -620,7 +620,7 @@ function function_dec8144d() {
 }
 
 function function_5f54a393() {
-  self clientfield::set("" + # "hash_183ef3538fd62563", 1);
+  self clientfield::set("" + #"hash_183ef3538fd62563", 1);
   wait 5;
   self deletedelay();
 }
@@ -634,7 +634,7 @@ function function_5f86757d() {
   }
 
   playsoundatposition(#"hash_525786cd7853a7a0", self.origin);
-  self clientfield::set("" + # "avogadro_bolt_fx", 0);
+  self clientfield::set("" + #"avogadro_bolt_fx", 0);
   return waitresult;
 }
 
@@ -935,7 +935,7 @@ function function_c3ceb539(entity) {
 
 function function_77788917(entity) {
   self playSound(#"hash_64bb457a8c6f828c");
-  self clientfield::set("" + # "avogadro_health_fx", 120);
+  self clientfield::set("" + #"avogadro_health_fx", 120);
   self ghost();
   self notsolid();
 

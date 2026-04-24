@@ -395,7 +395,7 @@ function function_44b1279a() {
   self endon("55c572a8dde62114");
   self endon(#"death");
   self zm_gold::setupminimap("", "village");
-  self clientfield::set_to_player("" + # "hash_697cae64fbcf81f8", 0);
+  self clientfield::set_to_player("" + #"hash_697cae64fbcf81f8", 0);
   util::wait_network_frame();
 
   while(true) {
@@ -403,20 +403,20 @@ function function_44b1279a() {
       return;
     }
 
-    if(!clientfield::function_ec6130f9("" + # "hash_697cae64fbcf81f8")) {
+    if(!clientfield::function_ec6130f9("" + #"hash_697cae64fbcf81f8")) {
       waitframe(1);
       continue;
     }
 
     is_player_in_zone = self zm_zonemgr::is_player_in_zone(level.var_4b35561a, 0);
-    var_6c117bd1 = self clientfield::get_to_player("" + # "hash_697cae64fbcf81f8");
+    var_6c117bd1 = self clientfield::get_to_player("" + #"hash_697cae64fbcf81f8");
 
     if(is_player_in_zone && var_6c117bd1 == 0) {
       self zm_gold::setupminimap("", "firebase");
-      self clientfield::set_to_player("" + # "hash_697cae64fbcf81f8", 1);
+      self clientfield::set_to_player("" + #"hash_697cae64fbcf81f8", 1);
     } else if(!is_player_in_zone && var_6c117bd1 == 1) {
       self zm_gold::setupminimap("", "village");
-      self clientfield::set_to_player("" + # "hash_697cae64fbcf81f8", 0);
+      self clientfield::set_to_player("" + #"hash_697cae64fbcf81f8", 0);
     }
 
     s_waitresult = self waittill(#"zone_change");

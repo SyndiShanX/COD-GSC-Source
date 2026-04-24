@@ -32,16 +32,16 @@ init() {
     return;
   }
 
-  clientfield::register("scriptmover", "" + # "hash_74fc30de57a0657a", 16000, 3, "int");
-  clientfield::register("scriptmover", "" + # "hash_21f5fab6a3d22093", 16000, 3, "int");
-  clientfield::register("scriptmover", "" + # "keyline_model", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "pickup_glow", 16000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_8b48433c3fe40e4", 16000, 3, "int");
-  clientfield::register("toplayer", "" + # "hash_4bde11d71410ea67", 16000, 3, "int");
-  clientfield::register("world", "" + # "cleanup_challenges", 16000, 1, "int");
-  clientfield::register("allplayers", "" + # "hash_47490b879090eb55", 16000, 3, "int");
-  clientfield::register("allplayers", "" + # "hash_7b1dd5c08e2585c", 16000, 3, "int");
-  clientfield::register("scriptmover", "" + # "rob_coals", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_74fc30de57a0657a", 16000, 3, "int");
+  clientfield::register("scriptmover", "" + #"hash_21f5fab6a3d22093", 16000, 3, "int");
+  clientfield::register("scriptmover", "" + #"keyline_model", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"pickup_glow", 16000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_8b48433c3fe40e4", 16000, 3, "int");
+  clientfield::register("toplayer", "" + #"hash_4bde11d71410ea67", 16000, 3, "int");
+  clientfield::register("world", "" + #"cleanup_challenges", 16000, 1, "int");
+  clientfield::register("allplayers", "" + #"hash_47490b879090eb55", 16000, 3, "int");
+  clientfield::register("allplayers", "" + #"hash_7b1dd5c08e2585c", 16000, 3, "int");
+  clientfield::register("scriptmover", "" + #"rob_coals", 16000, 1, "int");
   level flag::init("fl_challenge_phase_1");
   level flag::init("fl_challenge_phase_2");
   level flag::init("fl_challenge_phase_3");
@@ -200,7 +200,7 @@ player_death_watcher(a_params) {
   self waittill(#"death");
 
   if(isDefined(s_bowl) && isDefined(s_bowl.var_9d32404)) {
-    s_bowl.var_9d32404 clientfield::set("" + # "hash_21f5fab6a3d22093", 0);
+    s_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
   }
 }
 
@@ -536,7 +536,7 @@ setup_models() {
 
   foreach(s_info in level.var_3e72dc3c) {
     s_info.var_e668d197 = var_e668d197;
-    s_info.var_126ddafe clientfield::set("" + # "hash_8b48433c3fe40e4", s_info.var_e668d197);
+    s_info.var_126ddafe clientfield::set("" + #"hash_8b48433c3fe40e4", s_info.var_e668d197);
     var_e668d197++;
   }
 }
@@ -617,7 +617,7 @@ function_7e8e23a6() {
   if(true) {
     n_index = self getentitynumber();
     s_bowl = level.var_3e72dc3c[n_index];
-    self clientfield::set_to_player("" + # "hash_4bde11d71410ea67", s_bowl.var_e668d197);
+    self clientfield::set_to_player("" + #"hash_4bde11d71410ea67", s_bowl.var_e668d197);
     return s_bowl;
   } else {
     while(true) {
@@ -629,7 +629,7 @@ function_7e8e23a6() {
       }
 
       if(!maxis_quest_(s_bowl)) {
-        self clientfield::set_to_player("" + # "hash_4bde11d71410ea67", s_bowl.var_e668d197);
+        self clientfield::set_to_player("" + #"hash_4bde11d71410ea67", s_bowl.var_e668d197);
         return s_bowl;
       }
     }
@@ -1346,9 +1346,9 @@ pause_challenges(b_pause) {
 
 function_304fb042() {
   if(!(isDefined(level.var_7aec13aa) && level.var_7aec13aa)) {
-    level clientfield::set("" + # "cleanup_challenges", 1);
-    level.var_483180c5 clientfield::set("" + # "rob_coals", 0);
-    level.var_d5ba7324 clientfield::set("" + # "hash_74fc30de57a0657a", 0);
+    level clientfield::set("" + #"cleanup_challenges", 1);
+    level.var_483180c5 clientfield::set("" + #"rob_coals", 0);
+    level.var_d5ba7324 clientfield::set("" + #"hash_74fc30de57a0657a", 0);
 
     foreach(player in getplayers()) {
       player zm_red_util::function_7e30f24c();
@@ -1356,7 +1356,7 @@ function_304fb042() {
       s_bowl = player.s_tribute_bowl;
 
       if(isDefined(s_bowl) && isDefined(s_bowl.var_9d32404)) {
-        s_bowl.var_9d32404 clientfield::set("" + # "hash_21f5fab6a3d22093", 0);
+        s_bowl.var_9d32404 clientfield::set("" + #"hash_21f5fab6a3d22093", 0);
       }
     }
 

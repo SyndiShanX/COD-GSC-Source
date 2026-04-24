@@ -31,9 +31,9 @@ function init() {
 }
 
 function init_clientfields() {
-  clientfield::register("scriptmover", "" + # "hash_193cb3d6820f32c9", 28000, 1, "int");
-  clientfield::register("scriptmover", "" + # "hash_b386e95b77069e4", 28000, 1, "int");
-  clientfield::register("world", "" + # "pistol_light_on", 28000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_193cb3d6820f32c9", 28000, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_b386e95b77069e4", 28000, 1, "int");
+  clientfield::register("world", "" + #"pistol_light_on", 28000, 1, "int");
 }
 
 function function_6269d18d() {
@@ -163,7 +163,7 @@ function private activate_target(b_active = 0, n_delay = undefined) {
 
   if(b_active) {
     if(is_true(self.s_spawn.var_e845250)) {
-      self clientfield::set("" + # "hash_b386e95b77069e4", 1);
+      self clientfield::set("" + #"hash_b386e95b77069e4", 1);
     }
   }
 
@@ -186,7 +186,7 @@ function private activate_target(b_active = 0, n_delay = undefined) {
 
   if(!b_active) {
     if(is_true(self.s_spawn.var_e845250)) {
-      self clientfield::set("" + # "hash_b386e95b77069e4", 0);
+      self clientfield::set("" + #"hash_b386e95b77069e4", 0);
     }
   }
 
@@ -752,7 +752,7 @@ function function_b50370f6(var_2c4d5a05) {
   }
 
   if(isDefined(self)) {
-    self clientfield::set("" + # "hash_193cb3d6820f32c9", 1);
+    self clientfield::set("" + #"hash_193cb3d6820f32c9", 1);
   }
 }
 
@@ -1233,7 +1233,7 @@ function function_af0fa53c(e_player, a_params) {
   level flag::set(#"hash_51bc8a36bd7e5d27");
   self flag::set(#"hash_5422d37665a74906");
   a_params val::set("shooting_gallery_ignore", "ignoreme", 1);
-  level clientfield::set("" + # "pistol_light_on", 1);
+  level clientfield::set("" + #"pistol_light_on", 1);
   b_complete = self function_c47f596a(a_params);
   a_params val::reset("shooting_gallery_ignore", "ignoreme");
   level thread function_a6b2956();
@@ -1447,7 +1447,7 @@ function function_44edd841(mdl_target, var_d8f1c196, n_round, e_player) {
 function function_a6b2956() {
   level endon(#"end_game");
   wait 2;
-  level clientfield::set("" + # "pistol_light_on", 0);
+  level clientfield::set("" + #"pistol_light_on", 0);
 }
 
 function function_ca6685bb() {

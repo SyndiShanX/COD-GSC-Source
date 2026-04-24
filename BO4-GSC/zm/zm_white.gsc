@@ -102,7 +102,7 @@ event_handler[level_init] main(eventstruct) {
   zm_white_perk_pap::init_fx();
   level.var_ef785c4c = 0;
   level thread init_pap();
-  clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int");
+  clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int");
   clientfield::register("world", "portal_map_magicbox_lights_init", 1, 1, "int");
   clientfield::register("world", "portal_map_start_chest1", 1, 1, "int");
   clientfield::register("world", "portal_map_start_chest2", 1, 1, "int");

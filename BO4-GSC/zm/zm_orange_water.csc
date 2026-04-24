@@ -14,11 +14,11 @@
 #namespace zm_orange_water;
 
 init() {
-  clientfield::register("allplayers", "" + # "hash_55543319943057f1", 24000, 1, "int", &function_e8d94580, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_5160727729fd57a2", 24000, 1, "int", &function_a2d360f1, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_13f1aaee7ebf9986", 24000, 2, "int", &function_3c820626, 0, 1);
-  clientfield::register("toplayer", "" + # "hash_603fc9d210bdbc4d", 24000, 1, "int", &function_45df4c17, 0, 0);
-  clientfield::register("toplayer", "" + # "hash_67340426cd141891", 24000, 2, "int", &function_6b5ed7f9, 0, 0);
+  clientfield::register("allplayers", "" + #"hash_55543319943057f1", 24000, 1, "int", &function_e8d94580, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_5160727729fd57a2", 24000, 1, "int", &function_a2d360f1, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_13f1aaee7ebf9986", 24000, 2, "int", &function_3c820626, 0, 1);
+  clientfield::register("toplayer", "" + #"hash_603fc9d210bdbc4d", 24000, 1, "int", &function_45df4c17, 0, 0);
+  clientfield::register("toplayer", "" + #"hash_67340426cd141891", 24000, 2, "int", &function_6b5ed7f9, 0, 0);
   level._effect[#"hash_4a12914ab0026a9d"] = #"hash_50599e96f376b4fa";
   level._effect[#"hash_211384df1c05676c"] = #"hash_434ed0cd342c0caa";
   level._effect[#"hash_3cf697eb0a408b2e"] = #"hash_432cd0cd340f2644";
