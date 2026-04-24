@@ -1031,7 +1031,7 @@ function function_da10fc8f(localclientnum, imagepath) {
 function function_5d6480a0(localclientnum, weapon, weapon_model, weapon_name, var_2d8a24a3, var_f879230e) {
   if(ishash(var_2d8a24a3.name)) {
     camo_index = var_2d8a24a3.item_index == 0 ? 0 : function_8b51d9d1(var_2d8a24a3.name);
-    var_9ce34e01 = function_9e72a96(var_2d8a24a3.name);
+    var_9ce34e01 = hashtostring(var_2d8a24a3.name);
   } else {
     camo_index = var_2d8a24a3.item_index == 0 ? 0 : function_8b51d9d1(hash(var_2d8a24a3.name));
     var_9ce34e01 = var_2d8a24a3.name;
@@ -1045,7 +1045,7 @@ function function_5d6480a0(localclientnum, weapon, weapon_model, weapon_name, va
 
       if(!is_true(var_3594168e.disabled)) {
         camo_index = function_8b51d9d1(var_3594168e.camooption);
-        var_9ce34e01 = function_9e72a96(var_3594168e.camooption);
+        var_9ce34e01 = hashtostring(var_3594168e.camooption);
       } else {
         var_3594168e = undefined;
       }
@@ -1130,7 +1130,7 @@ function function_f2c538de(localclientnum, menu_name, state) {
       var_2d8a24a3 = options[i];
 
       if(filter != "<dev string:x129>") {
-        category = function_57411076(function_9e72a96(var_2d8a24a3.name));
+        category = function_57411076(hashtostring(var_2d8a24a3.name));
 
         if(filter == "<dev string:x131>") {
           if(category != "<dev string:x140>" && category != "<dev string:x148>" && category != "<dev string:x150>") {
@@ -1227,7 +1227,7 @@ function function_db3c4c69(localclientnum) {
           options = function_ea647602("<dev string:x121>");
 
           foreach(i, option in options) {
-            adddebugcommand(localclientnum, "<dev string:x1da>" + var_c001baa1 + "<dev string:xa9>" + function_9e72a96(option.name) + "<dev string:x1ea>" + "<dev string:x243>" + "<dev string:xd4>" + name + "<dev string:xd4>" + i + "<dev string:xd4>" + -2 + "<dev string:xd4>" + "<dev string:x129>" + "<dev string:x209>");
+            adddebugcommand(localclientnum, "<dev string:x1da>" + var_c001baa1 + "<dev string:xa9>" + hashtostring(option.name) + "<dev string:x1ea>" + "<dev string:x243>" + "<dev string:xd4>" + name + "<dev string:xd4>" + i + "<dev string:xd4>" + -2 + "<dev string:xd4>" + "<dev string:x129>" + "<dev string:x209>");
           }
 
           for(i = 0; i < weapon.blueprintcount; i++) {
@@ -2480,7 +2480,7 @@ function function_c47e078a(var_bf321a0c, var_302876c9 = 1, character, localclien
       if(var_302876c9) {
         var_f647c5b2 = array::random(var_78651d54);
         var_559c5c3e = strreplace(var_f647c5b2, "intro", "idle");
-        assert(isinarray(var_fc395698, var_559c5c3e), "<dev string:x2b4>" + var_559c5c3e + "<dev string:x2dc>" + function_9e72a96(str_scene) + "<dev string:x2e4>" + var_f647c5b2);
+        assert(isinarray(var_fc395698, var_559c5c3e), "<dev string:x2b4>" + var_559c5c3e + "<dev string:x2dc>" + hashtostring(str_scene) + "<dev string:x2e4>" + var_f647c5b2);
 
         if(!isinarray(var_fc395698, var_559c5c3e)) {
           var_559c5c3e = array::random(var_fc395698);
@@ -3494,9 +3494,9 @@ function function_2a0a1f1a() {
       str_suffix = "low";
     }
 
-    var_f9d98743 = randomfloatrange(var_ac0c1ab5, var_4e3a3f7d);
+    n_volume = randomfloatrange(var_ac0c1ab5, var_4e3a3f7d);
     var_fd343efd = randomfloatrange(var_a4d9975b, var_58d3d289);
-    function_672403ca(str_prefix + str_suffix, var_fd343efd, var_f9d98743);
+    function_672403ca(str_prefix + str_suffix, var_fd343efd, n_volume);
     wait var_fd343efd;
   }
 }
@@ -3531,12 +3531,12 @@ function function_74553225() {
   level notify(#"hash_6d06f88e8d5ec88a");
 }
 
-function function_b8a526ac(var_f9d98743 = 0, var_ac30bc43) {
+function function_b8a526ac(n_volume = 0, var_ac30bc43) {
   audioent = level.var_96d63e5f;
   var_cd20722b = audioent.var_2788b16c;
 
   foreach(id in var_ac30bc43) {
-    setsoundvolume(var_cd20722b[id], var_f9d98743);
+    setsoundvolume(var_cd20722b[id], n_volume);
   }
 }
 

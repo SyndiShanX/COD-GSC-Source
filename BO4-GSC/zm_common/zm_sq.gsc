@@ -124,12 +124,12 @@ start(name, var_9d8cf7f = 0) {
   }
 
   assert(ishash(name), "<dev string:x77>");
-  assert(isDefined(level._ee[name]), "<dev string:x244>" + function_9e72a96(name) + "<dev string:x24a>");
+  assert(isDefined(level._ee[name]), "<dev string:x244>" + hashtostring(name) + "<dev string:x24a>");
 
   if(level._ee[name].started) {
     if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-      iprintlnbold("<dev string:x244>" + function_9e72a96(name) + "<dev string:x265>");
-      println("<dev string:x244>" + function_9e72a96(name) + "<dev string:x265>");
+      iprintlnbold("<dev string:x244>" + hashtostring(name) + "<dev string:x265>");
+      println("<dev string:x244>" + hashtostring(name) + "<dev string:x265>");
     }
 
     return;
@@ -153,11 +153,11 @@ start(name, var_9d8cf7f = 0) {
 
 is_complete(name) {
   assert(ishash(name), "<dev string:x77>");
-  assert(isDefined(level._ee[name]), "<dev string:x244>" + function_9e72a96(name) + "<dev string:x24a>");
+  assert(isDefined(level._ee[name]), "<dev string:x244>" + hashtostring(name) + "<dev string:x24a>");
   return level._ee[name].completed;
 }
 
-function_9212ff4d(ee_name, step_name) {
+get_step_index(ee_name, step_name) {
   assert(ishash(ee_name), "<dev string:x77>");
   assert(ishash(step_name), "<dev string:x90>");
   assert(isDefined(level._ee[ee_name]), "<dev string:x244>" + ee_name + "<dev string:x2a5>");
@@ -175,8 +175,8 @@ run_step(ee, step, var_5ea5c94d) {
   level endon(#"game_ended");
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2c8>");
-    println(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2c8>");
+    iprintlnbold(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2c8>");
+    println(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2c8>");
   }
 
   ee.started = 1;
@@ -188,8 +188,8 @@ run_step(ee, step, var_5ea5c94d) {
   }
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2da>");
-    println(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2da>");
+    iprintlnbold(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2da>");
+    println(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2da>");
   }
 
   if(game.state === "postgame") {
@@ -200,8 +200,8 @@ run_step(ee, step, var_5ea5c94d) {
   [[step.cleanup_func]](var_5ea5c94d, ended_early);
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2ef>");
-    println(function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step.name) + "<dev string:x2ef>");
+    iprintlnbold(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2ef>");
+    println(hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step.name) + "<dev string:x2ef>");
   }
 
   step.cleaned_up = 1;
@@ -267,8 +267,8 @@ run_step(ee, step, var_5ea5c94d) {
   }
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold("<dev string:x244>" + function_9e72a96(ee.name) + "<dev string:x306>");
-    println("<dev string:x244>" + function_9e72a96(ee.name) + "<dev string:x306>");
+    iprintlnbold("<dev string:x244>" + hashtostring(ee.name) + "<dev string:x306>");
+    println("<dev string:x244>" + hashtostring(ee.name) + "<dev string:x306>");
   }
 }
 
@@ -283,8 +283,8 @@ function_3f795dc3(ee, step, var_5ea5c94d) {
 
 function_df365859(notifyhash) {
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold(function_9e72a96(self.ee.name) + "<dev string:x2c4>" + function_9e72a96(self.name) + "<dev string:x316>");
-    println(function_9e72a96(self.ee.name) + "<dev string:x2c4>" + function_9e72a96(self.name) + "<dev string:x316>");
+    iprintlnbold(hashtostring(self.ee.name) + "<dev string:x2c4>" + hashtostring(self.name) + "<dev string:x316>");
+    println(hashtostring(self.ee.name) + "<dev string:x2c4>" + hashtostring(self.name) + "<dev string:x316>");
   }
 
   self.completed = 1;
@@ -296,45 +296,45 @@ function_f09763fd(ee_name, step_name) {
   assert(ishash(ee_name), "<dev string:x77>");
   assert(isDefined(level._ee[ee_name]), "<dev string:x244>" + ee_name + "<dev string:x2a5>");
   var_da601d7f = function_44e256d8(ee_name);
-  index = function_9212ff4d(ee_name, step_name);
+  index = get_step_index(ee_name, step_name);
 
   if(index == -1) {
     if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-      iprintlnbold("<dev string:x244>" + function_9e72a96(ee_name) + "<dev string:x325>" + function_9e72a96(step_name));
-      println("<dev string:x244>" + function_9e72a96(ee_name) + "<dev string:x325>" + function_9e72a96(step_name));
+      iprintlnbold("<dev string:x244>" + hashtostring(ee_name) + "<dev string:x325>" + hashtostring(step_name));
+      println("<dev string:x244>" + hashtostring(ee_name) + "<dev string:x325>" + hashtostring(step_name));
     }
 
     return;
   }
 
-  return var_da601d7f + "<dev string:x33f>" + function_9e72a96(step_name) + "<dev string:x348>" + index + "<dev string:x34c>";
+  return var_da601d7f + "<dev string:x33f>" + hashtostring(step_name) + "<dev string:x348>" + index + "<dev string:x34c>";
 }
 
 function_44e256d8(ee_name) {
   assert(ishash(ee_name), "<dev string:x77>");
-  return "<dev string:x350>" + function_9e72a96(ee_name) + "<dev string:x34c>";
+  return "<dev string:x350>" + hashtostring(ee_name) + "<dev string:x34c>";
 }
 
 function_28aee167(ee_name) {
   assert(ishash(ee_name), "<dev string:x77>");
   ee_path = function_44e256d8(ee_name);
   util::waittill_can_add_debug_command();
-  adddebugcommand("<dev string:x359>" + ee_path + "<dev string:x368>" + function_9e72a96(ee_name) + "<dev string:x38b>");
+  adddebugcommand("<dev string:x359>" + ee_path + "<dev string:x368>" + hashtostring(ee_name) + "<dev string:x38b>");
 }
 
 function_b3da1a16(ee_name, step_name) {
   assert(ishash(ee_name), "<dev string:x77>");
   assert(ishash(step_name), "<dev string:x90>");
   step_path = function_f09763fd(ee_name, step_name);
-  index = function_9212ff4d(ee_name, step_name);
+  index = get_step_index(ee_name, step_name);
   util::waittill_can_add_debug_command();
-  adddebugcommand("<dev string:x359>" + step_path + "<dev string:x390>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + index + "<dev string:x38b>");
-  adddebugcommand("<dev string:x359>" + step_path + "<dev string:x3b7>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + index + "<dev string:x38b>");
+  adddebugcommand("<dev string:x359>" + step_path + "<dev string:x390>" + hashtostring(ee_name) + "<dev string:x2c4>" + index + "<dev string:x38b>");
+  adddebugcommand("<dev string:x359>" + step_path + "<dev string:x3b7>" + hashtostring(ee_name) + "<dev string:x2c4>" + index + "<dev string:x38b>");
 }
 
 function_87306f8a(ee_name, step_name) {
   ee = level._ee[ee_name];
-  step_index = function_9212ff4d(ee_name, step_name);
+  step_index = get_step_index(ee_name, step_name);
 
   if(ee.started && step_index <= ee.current_step) {
     return 0;
@@ -360,8 +360,8 @@ function_614612f(ee_name) {
   }
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold("<dev string:x3e0>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name) + "<dev string:x3f6>");
-    println("<dev string:x3e0>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name) + "<dev string:x3f6>");
+    iprintlnbold("<dev string:x3e0>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x3f6>");
+    println("<dev string:x3e0>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x3f6>");
   }
 }
 
@@ -377,8 +377,8 @@ function_f2dd8601(ee_name, var_f2c264bb) {
 
       if(waitresult._notify == #"timeout") {
         if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-          iprintlnbold("<dev string:x41e>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
-          println("<dev string:x41e>" + function_9e72a96(ee_name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
+          iprintlnbold("<dev string:x41e>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
+          println("<dev string:x41e>" + hashtostring(ee_name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
         }
 
         return;
@@ -389,8 +389,8 @@ function_f2dd8601(ee_name, var_f2c264bb) {
   }
 
   if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-    iprintlnbold("<dev string:x448>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name) + "<dev string:x456>");
-    println("<dev string:x448>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name) + "<dev string:x456>");
+    iprintlnbold("<dev string:x448>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x456>");
+    println("<dev string:x448>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x456>");
   }
 
   function_614612f(ee_name);
@@ -423,18 +423,18 @@ devgui_think() {
 
         if(var_f2c264bb < ee.current_step) {
           if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-            iprintlnbold("<dev string:x45f>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
-            println("<dev string:x45f>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
+            iprintlnbold("<dev string:x45f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
+            println("<dev string:x45f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
           }
         } else if(var_f2c264bb == ee.current_step) {
           if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-            iprintlnbold("<dev string:x48f>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step_name));
-            println("<dev string:x48f>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step_name));
+            iprintlnbold("<dev string:x48f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name));
+            println("<dev string:x48f>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name));
           }
         } else {
           if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-            iprintlnbold("<dev string:x4a2>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step_name) + "<dev string:x456>");
-            println("<dev string:x4a2>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(step_name) + "<dev string:x456>");
+            iprintlnbold("<dev string:x4a2>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name) + "<dev string:x456>");
+            println("<dev string:x4a2>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(step_name) + "<dev string:x456>");
           }
 
           function_87306f8a(ee.name, step_name);
@@ -452,8 +452,8 @@ devgui_think() {
 
         if(var_f2c264bb < ee.current_step) {
           if(getdvarint(#"hash_7919e37cd5d57659", 0)) {
-            iprintlnbold("<dev string:x4b1>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
-            println("<dev string:x4b1>" + function_9e72a96(ee.name) + "<dev string:x2c4>" + function_9e72a96(ee.steps[ee.current_step].name));
+            iprintlnbold("<dev string:x4b1>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
+            println("<dev string:x4b1>" + hashtostring(ee.name) + "<dev string:x2c4>" + hashtostring(ee.steps[ee.current_step].name));
           }
         } else {
           level thread function_f2dd8601(ee.name, var_f2c264bb);
@@ -518,7 +518,7 @@ function_5df75220() {
       ee.debug_hudelem = create_hudelem(current_y, current_x);
     }
 
-    ee.debug_hudelem settext(function_9e72a96(ee.name));
+    ee.debug_hudelem settext(hashtostring(ee.name));
     ee.debug_hudelem.fontscale = 1.5;
     current_x += 5;
     step_string = "<dev string:x4f8>";
@@ -530,7 +530,7 @@ function_5df75220() {
         step.debug_hudelem = create_hudelem(current_y, current_x);
       }
 
-      step.debug_hudelem settext(step_string + function_9e72a96(step.name));
+      step.debug_hudelem settext(step_string + hashtostring(step.name));
       step.debug_hudelem.fontscale = 1.5;
     }
 
@@ -578,10 +578,10 @@ function_9bee49bf() {
   }
 }
 
-function_1091b2a0(var_4f1c1316) {
-  if(!var_4f1c1316.started) {
+function_1091b2a0(ee_or_step) {
+  if(!ee_or_step.started) {
     color = (0.75, 0.75, 0.75);
-  } else if(!var_4f1c1316.completed) {
+  } else if(!ee_or_step.completed) {
     color = (1, 0, 0);
   } else {
     color = (0, 1, 0);

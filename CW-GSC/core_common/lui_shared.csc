@@ -97,7 +97,7 @@ class cluielem {
         if(isDefined(local_client_num)) {
           if(isDefined(data[local_client_num])) {
             foreach(kvp in data[local_client_num]) {
-              function_bcc2134a(local_client_num, hash(var_d5213cbb), var_bf9c8c95, kvp.field, kvp.value);
+              setluielemdata(local_client_num, hash(var_d5213cbb), var_bf9c8c95, kvp.field, kvp.value);
             }
           }
 
@@ -106,7 +106,7 @@ class cluielem {
 
         foreach(local_client_num in data) {
           foreach(kvp in data[local_client_num]) {
-            function_bcc2134a(local_client_num, hash(var_d5213cbb), var_bf9c8c95, kvp.field, kvp.value);
+            setluielemdata(local_client_num, hash(var_d5213cbb), var_bf9c8c95, kvp.field, kvp.value);
           }
         }
       }
@@ -115,7 +115,7 @@ class cluielem {
 
   function set_data(local_client_num, field, value) {
     assert(var_47d8642e, "<dev string:x167>");
-    function_bcc2134a(local_client_num, hash(var_d5213cbb), var_bf9c8c95, field, value);
+    setluielemdata(local_client_num, hash(var_d5213cbb), var_bf9c8c95, field, value);
 
     if(lui::function_4206783a() && !level flag::get(#"player_spawning") && isDefined(level.var_a706401b[hash(var_d5213cbb)][var_bf9c8c95])) {
       if(!isDefined(level.var_a706401b[hash(var_d5213cbb)][var_bf9c8c95].data)) {

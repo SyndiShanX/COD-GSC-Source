@@ -695,7 +695,7 @@ function function_f47a0e3b(localclientnum, speakingplayer, dialogkey) {
         }
       }
     } else {
-      iprintlnbold("<dev string:x38>" + function_9e72a96(dialogkey) + "<dev string:x4d>");
+      iprintlnbold("<dev string:x38>" + hashtostring(dialogkey) + "<dev string:x4d>");
     }
   } else if(isDefined(playerbundle.voiceprefix) && isDefined(playerbundle.(dialogkey))) {
     dialogalias = playerbundle.voiceprefix + playerbundle.(dialogkey);

@@ -1375,17 +1375,17 @@ function function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28
   var_900768bc = function_79c0d595(bookmarkname, inflictorenttype, var_50d1e41a);
 
   if(!isDefined(var_900768bc)) {
-    println(function_9e72a96(modulename) + "<dev string:x6c6>" + bookmarkname + "<dev string:x6e4>" + inflictorenttype + "<dev string:x6f4>" + var_6f810a5 + "<dev string:x70b>");
+    println(hashtostring(modulename) + "<dev string:x6c6>" + bookmarkname + "<dev string:x6e4>" + inflictorenttype + "<dev string:x6f4>" + var_6f810a5 + "<dev string:x70b>");
     return undefined;
   }
 
   if(var_7491f0eb && isDefined(var_81538b15) && isPlayer(var_81538b15) && !isalive(var_81538b15)) {
-    println(function_9e72a96(modulename) + "<dev string:x6c6>" + bookmarkname + "<dev string:x6e4>" + inflictorenttype + "<dev string:x6f4>" + var_6f810a5 + "<dev string:x738>" + var_81538b15 getentitynumber() + "<dev string:x74a>");
+    println(hashtostring(modulename) + "<dev string:x6c6>" + bookmarkname + "<dev string:x6e4>" + inflictorenttype + "<dev string:x6f4>" + var_6f810a5 + "<dev string:x738>" + var_81538b15 getentitynumber() + "<dev string:x74a>");
     return undefined;
   }
 
   if(is_true(level.infinalkillcam)) {
-    println(function_9e72a96(modulename) + "<dev string:x6c6>" + bookmarkname + "<dev string:x6e4>" + inflictorenttype + "<dev string:x6f4>" + var_6f810a5 + "<dev string:x75d>");
+    println(hashtostring(modulename) + "<dev string:x6c6>" + bookmarkname + "<dev string:x6e4>" + inflictorenttype + "<dev string:x6f4>" + var_6f810a5 + "<dev string:x75d>");
     return undefined;
   }
 
@@ -1579,7 +1579,7 @@ function function_66d09fea(bookmarkname, var_81538b15, var_f28fb772, einflictor,
   }
 
   if(game.actsq) {
-    println(function_9e72a96(game.var_8ea529d1) + "<dev string:x8a1>");
+    println(hashtostring(game.var_8ea529d1) + "<dev string:x8a1>");
     return;
   }
 

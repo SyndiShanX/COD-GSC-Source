@@ -656,7 +656,7 @@ function function_78e3c2ba(var_5817f611) {
   level.var_d03afa3[var_5817f611] = undefined;
 }
 
-function function_c78572ab(var_f80635c, var_7ccf65c7) {
+function function_c78572ab(str_start_loc, var_7ccf65c7) {
   str_volume = "red_door_volume";
   var_f0bbde5 = self function_4e050b78(str_volume);
   return var_f0bbde5;

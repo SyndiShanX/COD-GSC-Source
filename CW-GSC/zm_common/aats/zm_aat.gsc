@@ -298,7 +298,7 @@ function function_296cde87(aat_name) {
 }
 
 function function_70c0e823(aat_name) {
-  assert(isDefined(level.aat[aat_name]), "<dev string:x38>" + (ishash(aat_name) ? function_9e72a96(aat_name) : aat_name));
+  assert(isDefined(level.aat[aat_name]), "<dev string:x38>" + (ishash(aat_name) ? hashtostring(aat_name) : aat_name));
   return level.aat[aat_name].element;
 }
 

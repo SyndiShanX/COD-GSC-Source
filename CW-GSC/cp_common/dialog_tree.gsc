@@ -860,7 +860,7 @@ function private function_58881e72(sb, str_shot, anim_struct) {
               db.var_30468601 = check_time / anim_len;
               db.var_4fc15872 = notetrack[3] * anim_len;
 
-              db.vox = function_9e72a96(notetrack[6]);
+              db.vox = hashtostring(notetrack[6]);
             }
           }
         }

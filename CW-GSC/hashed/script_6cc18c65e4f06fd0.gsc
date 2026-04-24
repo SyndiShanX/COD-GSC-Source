@@ -368,8 +368,8 @@ function function_79ae7b73() {
   hidemiscmodels("village_courtyard_side_gate");
   level thread zm_gold_pap_quest::function_e7aacbc9();
   level zm_utility::function_9ad5aeb1(0, 0, 1, 0);
-  level.var_923e8cb4 = struct::get_array("end_fight_spawn_points");
-  level teleport_players(level.var_923e8cb4);
+  level.a_s_respawn_locs = struct::get_array("end_fight_spawn_points");
+  level teleport_players(level.a_s_respawn_locs);
   level.zones[#"zone_radio_room"].is_enabled = 0;
   level.var_d6f059f7 = max(level.round_number, 20);
   level thread function_995832fb();

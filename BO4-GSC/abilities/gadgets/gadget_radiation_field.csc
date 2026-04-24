@@ -151,7 +151,7 @@ function_671d7ad5(localclientnum, attacker_entnum) {
   self endon(#"hash_31934c905f88261b");
   self endon(#"death");
   var_4c6480bf = level.var_2e0bd467.var_641f6852 * level.var_2e0bd467.var_641f6852;
-  var_572ced0c = level.var_2e0bd467.var_cbe3d2b8 * level.var_2e0bd467.var_cbe3d2b8;
+  var_572ced0c = level.var_2e0bd467.finalradius * level.var_2e0bd467.finalradius;
   var_8acd204b = #"hash_1a49fb45be903460";
   var_daa90ad6 = #"hash_1cc8ef91832fa038";
 
@@ -252,7 +252,7 @@ function_7bf69748(localclientnum) {
   self endon(#"disconnect");
   var_e60f94d0 = 0;
   var_4c6480bf = level.var_2e0bd467.var_641f6852 * level.var_2e0bd467.var_641f6852;
-  var_572ced0c = level.var_2e0bd467.var_cbe3d2b8 * level.var_2e0bd467.var_cbe3d2b8;
+  var_572ced0c = level.var_2e0bd467.finalradius * level.var_2e0bd467.finalradius;
 
   while(true) {
     dist2 = function_68a9578(localclientnum);

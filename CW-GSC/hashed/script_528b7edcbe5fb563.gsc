@@ -507,17 +507,17 @@ function private function_3dd3f3b6() {
 
     foreach(team, slotcount in teamcounts) {
       y = 30;
-      debug2dtext((x, y, 0), function_9e72a96(team), undefined, undefined, undefined, 1);
+      debug2dtext((x, y, 0), hashtostring(team), undefined, undefined, undefined, 1);
       y += 22;
       x += 20;
 
       foreach(slot, itemnames in slotcount) {
-        debug2dtext((x, y, 0), function_9e72a96(slot), undefined, undefined, undefined, 1);
+        debug2dtext((x, y, 0), hashtostring(slot), undefined, undefined, undefined, 1);
         y += 22;
         x += 20;
 
         foreach(itemname, count in itemnames) {
-          debug2dtext((x, y, 0), function_9e72a96(itemname) + "<dev string:x49>" + count, undefined, undefined, undefined, 1);
+          debug2dtext((x, y, 0), hashtostring(itemname) + "<dev string:x49>" + count, undefined, undefined, undefined, 1);
           y += 22;
         }
 

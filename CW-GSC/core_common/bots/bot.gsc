@@ -611,7 +611,7 @@ function private check_stuck() {
 
   self notify(#"bot_stuck");
 
-  record3dtext(function_9e72a96(#"stuck"), self.origin, (1, 0, 1), "<dev string:x3d>", undefined, 5);
+  record3dtext(hashtostring(#"stuck"), self.origin, (1, 0, 1), "<dev string:x3d>", undefined, 5);
   recordbox(self.origin, self getmaxs(), self getmins(), self.angles[1], (1, 0, 1), "<dev string:x3d>");
   recordbox(self.origin, (64, 64, 0), (64 * -1, 64 * -1, 0), 0, (1, 0, 1), "<dev string:x3d>");
   recordline(self.origin, self.origin + movedir * 128, (1, 0, 1), "<dev string:x3d>");
@@ -933,7 +933,7 @@ function private function_ef4e01f() {
   }
 
   if(!isDefined(self.bot.difficulty)) {
-    record3dtext(function_9e72a96(#"hash_34d3ed856dad1a43"), self.origin, (1, 1, 1), "<dev string:x3d>", self, 0.5);
+    record3dtext(hashtostring(#"hash_34d3ed856dad1a43"), self.origin, (1, 1, 1), "<dev string:x3d>", self, 0.5);
     return;
   }
 
@@ -946,7 +946,7 @@ function private function_cf9ffac7() {
   }
 
   color = function_5d55f3c9(self.combatstate);
-  record3dtext(function_9e72a96(self.combatstate), self.origin, color, "<dev string:x3d>", self, 0.5);
+  record3dtext(hashtostring(self.combatstate), self.origin, color, "<dev string:x3d>", self, 0.5);
 }
 
 function private function_5d55f3c9(combatstate) {
@@ -986,7 +986,7 @@ function private function_4c0124cd() {
   characterfields = getcharacterfields(characterindex, sessionmode);
   rolefields = getplayerrolefields(characterindex, sessionmode);
   var_270eb160 = is_true(rolefields.var_ae8ab113) ? (0, 1, 0) : (1, 0, 0);
-  record3dtext(characterindex + "<dev string:x47>" + function_9e72a96(assetname) + "<dev string:x4c>" + displayname, self.origin, var_270eb160, "<dev string:x3d>", self);
+  record3dtext(characterindex + "<dev string:x47>" + hashtostring(assetname) + "<dev string:x4c>" + displayname, self.origin, var_270eb160, "<dev string:x3d>", self);
   factioncolor = (1, 1, 1);
   var_99dffb44 = isDefined(characterfields.superfaction) ? characterfields.superfaction : "<dev string:x52>";
   teamfaction = undefined;
@@ -1001,8 +1001,8 @@ function private function_4c0124cd() {
     factioncolor = var_501b8f06 == var_99dffb44 ? (0, 1, 0) : (1, 0, 0);
   }
 
-  record3dtext("<dev string:x5a>" + function_9e72a96(var_99dffb44), self.origin, factioncolor, "<dev string:x3d>", self);
-  record3dtext(function_9e72a96(self.team) + "<dev string:x6c>" + function_9e72a96(var_501b8f06), self.origin, factioncolor, "<dev string:x3d>", self);
+  record3dtext("<dev string:x5a>" + hashtostring(var_99dffb44), self.origin, factioncolor, "<dev string:x3d>", self);
+  record3dtext(hashtostring(self.team) + "<dev string:x6c>" + hashtostring(var_501b8f06), self.origin, factioncolor, "<dev string:x3d>", self);
 }
 
 function map_color(val, maxval, ...) {

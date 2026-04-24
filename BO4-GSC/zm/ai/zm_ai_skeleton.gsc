@@ -200,7 +200,7 @@ function_c9f197d2(var_4c3c217a = 1) {
   self endon(#"death");
 
   if(isDefined(self.isdying) && self.isdying) {
-    iprintlnbold("<dev string:x56>" + self getentitynumber() + "<dev string:x61>" + function_9e72a96(isDefined(self.var_a6ddd958) ? self.var_a6ddd958 : "<dev string:x88>"));
+    iprintlnbold("<dev string:x56>" + self getentitynumber() + "<dev string:x61>" + hashtostring(isDefined(self.var_a6ddd958) ? self.var_a6ddd958 : "<dev string:x88>"));
   }
 
   if(var_4c3c217a) {

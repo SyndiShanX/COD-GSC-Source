@@ -782,7 +782,7 @@ aigroup_debug() {
           if(isDefined(spawner) && spawner.count > 0) {
             sphere(spawner.origin + (0, 0, 10), 4, (1, 0, 0), 1, 0, 8, 1);
             line(spawner.origin + (0, 0, 10), spawner.origin + (0, 0, 50), (1, 0, 0), 1, 1);
-            print3d(spawner.origin + (0, 0, 20), function_9e72a96(spawner.archetype), (1, 0, 0), 1, 0.4, 1);
+            print3d(spawner.origin + (0, 0, 20), hashtostring(spawner.archetype), (1, 0, 0), 1, 0.4, 1);
             print3d(spawner.origin + (0, 0, 30), "<dev string:x233>" + spawner.count, (1, 0, 0), 1, 0.4, 1);
           }
         }

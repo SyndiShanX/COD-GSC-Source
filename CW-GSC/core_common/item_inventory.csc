@@ -3049,7 +3049,7 @@ function function_31868137(localclientnum, item) {
         playSound(localclientnum, #"fly_pickup_generic", item.origin);
         break;
       case # "armor":
-        playSound(localclientnum, #"hash_2d8e1c5a5387840f", item.origin);
+        playSound(localclientnum, #"fly_pickup_armor", item.origin);
         break;
       case # "backpack":
         playSound(localclientnum, #"hash_69949bb7db9ef21e", item.origin);

@@ -70,7 +70,7 @@ function private function_bebe535() {
   var_9243cc66 = 0;
 
   foreach(i, list in level.var_2e96a450) {
-    str_set = function_9e72a96(i);
+    str_set = hashtostring(i);
     println(str_set + "<dev string:xba>" + list);
     n_total += list;
     a_tokens = strtok(str_set, "<dev string:xcb>");
@@ -178,7 +178,7 @@ function private function_10b50848() {
         }
 
         if(isDefined(the_item[0].itementry)) {
-          debug_string = the_item[0].itementry.name + "<dev string:x364>" + function_9e72a96(the_item[0].targetname) + "<dev string:x364>" + the_item[0].origin + "<dev string:x364>" + type + "<dev string:x364>" + the_item[0].itementry.rarity;
+          debug_string = the_item[0].itementry.name + "<dev string:x364>" + hashtostring(the_item[0].targetname) + "<dev string:x364>" + the_item[0].origin + "<dev string:x364>" + type + "<dev string:x364>" + the_item[0].itementry.rarity;
           fprintln(file, debug_string);
           item_count++;
         }
@@ -266,7 +266,7 @@ function private function_b6ea080() {
         }
 
         if(isDefined(the_item[0].itementry)) {
-          debug_string = the_item[0].itementry.name + "<dev string:x364>" + function_9e72a96(the_item[0].targetname) + "<dev string:x364>" + the_item[0].origin + "<dev string:x364>" + type;
+          debug_string = the_item[0].itementry.name + "<dev string:x364>" + hashtostring(the_item[0].targetname) + "<dev string:x364>" + the_item[0].origin + "<dev string:x364>" + type;
           fprintln(file, debug_string);
           item_count++;
         }
@@ -338,7 +338,7 @@ function private function_938d798a() {
         item = var_f4b807cb[0];
 
         if(isDefined(item.targetname)) {
-          print3d(item.origin + (0, 0, 32), function_9e72a96(item.targetname), (1, 0, 0), 1, 0.3, 20);
+          print3d(item.origin + (0, 0, 32), hashtostring(item.targetname), (1, 0, 0), 1, 0.3, 20);
         }
       }
     }
@@ -1029,7 +1029,7 @@ function private function_cdd9b388() {
               sphere(item.origin, radius, color, 1, 0, 10, 20);
 
               if(isDefined(item.targetname)) {
-                print3d(item.origin + (0, 0, 32), function_9e72a96(item.targetname), color, 1, 0.3, 20);
+                print3d(item.origin + (0, 0, 32), hashtostring(item.targetname), color, 1, 0.3, 20);
               }
 
               break;
@@ -1038,7 +1038,7 @@ function private function_cdd9b388() {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
 
                 if(isDefined(item.targetname)) {
-                  print3d(item.origin + (0, 0, 32), function_9e72a96(item.targetname), color, 1, 0.3, 20);
+                  print3d(item.origin + (0, 0, 32), hashtostring(item.targetname), color, 1, 0.3, 20);
                 }
               }
             case 3:
@@ -1046,7 +1046,7 @@ function private function_cdd9b388() {
                 sphere(item.origin, radius, color, 1, 0, 10, 20);
 
                 if(isDefined(item.targetname)) {
-                  print3d(item.origin + (0, 0, 32), function_9e72a96(item.targetname), color, 1, 0.3, 20);
+                  print3d(item.origin + (0, 0, 32), hashtostring(item.targetname), color, 1, 0.3, 20);
                 }
               }
 
@@ -1251,7 +1251,7 @@ function private function_cdd9b388() {
               sphere(item.origin, radius, color, 1, 0, 10, 20);
 
               if(isDefined(item.targetname)) {
-                print3d(item.origin + (0, 0, 32), function_9e72a96(item.targetname), color, 1, 0.3, 20);
+                print3d(item.origin + (0, 0, 32), hashtostring(item.targetname), color, 1, 0.3, 20);
               }
 
               break;
@@ -1537,7 +1537,7 @@ function function_9cc59537() {
 
         foreach(i, item_drop in var_796ab805) {
           var_bd9acc19 += 24;
-          var_6abd8aff = function_9e72a96(i) + "<dev string:x8f3>" + item_drop.size;
+          var_6abd8aff = hashtostring(i) + "<dev string:x8f3>" + item_drop.size;
           debug2dtext((810, var_bd9acc19, 0), var_6abd8aff, (1, 1, 1), undefined, undefined, undefined, undefined, 8);
 
           if(getdvarint(#"hash_156f2cf900b33f9f", 0)) {
@@ -1774,8 +1774,8 @@ function function_9cc59537() {
               }
 
               if(var_4b82457c < 512) {
-                print3d(point.origin + (0, 0, 48), function_9e72a96(group.targetname), v_color, 1, 0.3, 8);
-                print3d(point.origin + (0, 0, 42), function_9e72a96(point.targetname), v_color, 1, 0.3, 8);
+                print3d(point.origin + (0, 0, 48), hashtostring(group.targetname), v_color, 1, 0.3, 8);
+                print3d(point.origin + (0, 0, 42), hashtostring(point.targetname), v_color, 1, 0.3, 8);
 
                 if(var_4b82457c < 256 && level.players[0] util::is_player_looking_at(point.origin, 0.87, 0)) {
                   print3d(point.origin + (0, 0, 36), itemlistbundle.name, v_color, 1, 0.3, 8);

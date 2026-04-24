@@ -45,9 +45,9 @@ function function_9780725f() {
   level endon(#"end_game");
   level flag::wait_till("all_players_spawned");
   level flag::wait_till(level.var_5bfd847e);
-  var_1d1bbd52 = struct::get_array("fasttravel_trigger", "targetname");
+  a_s_fasttravel_locs = struct::get_array("fasttravel_trigger", "targetname");
 
-  foreach(s_loc in var_1d1bbd52) {
+  foreach(s_loc in a_s_fasttravel_locs) {
     if(isDefined(s_loc.unitrigger_stub.delay)) {
       s_loc.unitrigger_stub flag::delay_set(s_loc.unitrigger_stub.delay, "delayed");
     }

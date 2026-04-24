@@ -73,7 +73,7 @@ function_26edbcdc(inflictor, attacker, damage, flags, meansofdeath, weapon, poin
 function_545d53bf() {
   self endon(#"disconnect");
   level endon(#"hash_7646638df88a3656");
-  var_407eb07 = 0;
+  b_locked_weapons = 0;
 
   while(true) {
     var_972e1f84 = 0;
@@ -83,12 +83,12 @@ function_545d53bf() {
       var_972e1f84 = 1;
     }
 
-    if(var_972e1f84 && var_407eb07) {
+    if(var_972e1f84 && b_locked_weapons) {
       self zm_trial_util::function_dc0859e();
-      var_407eb07 = 0;
-    } else if(!var_972e1f84 && !var_407eb07) {
+      b_locked_weapons = 0;
+    } else if(!var_972e1f84 && !b_locked_weapons) {
       self zm_trial_util::function_bf710271();
-      var_407eb07 = 1;
+      b_locked_weapons = 1;
     }
 
     waitframe(1);

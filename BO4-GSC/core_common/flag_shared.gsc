@@ -29,20 +29,20 @@ exists(str_flag) {
 }
 
 set(str_flag) {
-  assert(exists(str_flag), "<dev string:x71>" + function_9e72a96(str_flag) + "<dev string:x8e>");
+  assert(exists(str_flag), "<dev string:x71>" + hashtostring(str_flag) + "<dev string:x8e>");
   self.flag[str_flag] = 1;
   self notify(str_flag);
   trigger::set_flag_permissions(str_flag);
 }
 
 increment(str_flag) {
-  assert(exists(str_flag), "<dev string:xaa>" + function_9e72a96(str_flag) + "<dev string:x8e>");
+  assert(exists(str_flag), "<dev string:xaa>" + hashtostring(str_flag) + "<dev string:x8e>");
   self.flag_count[str_flag]++;
   set(str_flag);
 }
 
 decrement(str_flag) {
-  assert(exists(str_flag), "<dev string:xcd>" + function_9e72a96(str_flag) + "<dev string:x8e>");
+  assert(exists(str_flag), "<dev string:xcd>" + hashtostring(str_flag) + "<dev string:x8e>");
   assert(self.flag_count[str_flag] > 0, "<dev string:xf0>");
   self.flag_count[str_flag]--;
 

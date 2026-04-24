@@ -221,8 +221,8 @@ class csceneplayer: csceneobject {
     }
 
     if(getdvarint(#"debug_scene", 0) > 0) {
-      csceneobject::log(toupper(_s.type) + "<dev string:x118>" + function_9e72a96(animation) + "<dev string:x128>");
-      printtoprightln("<dev string:x135>" + (isDefined(_s.name) ? _s.name : _s.model) + "<dev string:x111>" + function_9e72a96(animation));
+      csceneobject::log(toupper(_s.type) + "<dev string:x118>" + hashtostring(animation) + "<dev string:x128>");
+      printtoprightln("<dev string:x135>" + (isDefined(_s.name) ? _s.name : _s.model) + "<dev string:x111>" + hashtostring(animation));
     }
 
     if(getdvarint(#"debug_scene_skip", 0) > 0) {
@@ -507,7 +507,7 @@ class csceneplayer: csceneobject {
       level.hud_scene_dev_info1.y = 400;
       level.hud_scene_dev_info1.fontscale = 1.3;
       level.hud_scene_dev_info1.color = (0.439216, 0.501961, 0.564706);
-      level.hud_scene_dev_info1 settext("<dev string:x1c2>" + toupper(function_9e72a96(_o_scene._str_name)));
+      level.hud_scene_dev_info1 settext("<dev string:x1c2>" + toupper(hashtostring(_o_scene._str_name)));
 
       if(!isDefined(level.hud_scene_dev_info2)) {
         level.hud_scene_dev_info2 = newdebughudelem();
@@ -519,7 +519,7 @@ class csceneplayer: csceneobject {
       level.hud_scene_dev_info2.y = 420;
       level.hud_scene_dev_info2.fontscale = 1.3;
       level.hud_scene_dev_info2.color = (0.439216, 0.501961, 0.564706);
-      level.hud_scene_dev_info2 settext("<dev string:x1cd>" + function_9e72a96(_str_shot));
+      level.hud_scene_dev_info2 settext("<dev string:x1cd>" + hashtostring(_str_shot));
 
       if(!isDefined(level.hud_scene_dev_info3)) {
         level.hud_scene_dev_info3 = newdebughudelem();
@@ -532,7 +532,7 @@ class csceneplayer: csceneobject {
       level.hud_scene_dev_info3.fontscale = 1.3;
       level.hud_scene_dev_info3.color = (0.439216, 0.501961, 0.564706);
       var_208dd9f0 = isDefined(var_55b4f21e.devstate) ? var_55b4f21e.devstate : _o_scene._s.devstate;
-      level.hud_scene_dev_info3 settext("<dev string:x1d7>" + function_9e72a96(var_208dd9f0));
+      level.hud_scene_dev_info3 settext("<dev string:x1d7>" + hashtostring(var_208dd9f0));
 
       if(!isDefined(level.var_6e7be24a)) {
         level.var_6e7be24a = newdebughudelem();
@@ -820,8 +820,8 @@ class csceneplayer: csceneobject {
         thread function_8966b27e(player, e_player_link);
 
         if(isanimlooping(var_efc540b6)) {
-          var_912e843b = util::spawn_player_clone(player, var_efc540b6, csceneobject::function_bc0facbb().ent, 1);
-          var_912e843b setinvisibletoplayer(player);
+          e_player_clone = util::spawn_player_clone(player, var_efc540b6, csceneobject::function_bc0facbb().ent, 1);
+          e_player_clone setinvisibletoplayer(player);
           player setinvisibletoall();
         }
 
@@ -839,8 +839,8 @@ class csceneplayer: csceneobject {
           e_player_link delete();
         }
 
-        if(isDefined(var_912e843b)) {
-          var_912e843b delete();
+        if(isDefined(e_player_clone)) {
+          e_player_clone delete();
         }
 
         player setvisibletoall();
@@ -2076,7 +2076,7 @@ class cscenesharedplayer: csceneplayer, csceneobject {
       }
 
       if(getdvarint(#"debug_scene", 0) > 0) {
-        printtoprightln("<dev string:x2ac>" + _s.name + "<dev string:x2f7>" + function_9e72a96(player_animation));
+        printtoprightln("<dev string:x2ac>" + _s.name + "<dev string:x2f7>" + hashtostring(player_animation));
       }
     }
   }

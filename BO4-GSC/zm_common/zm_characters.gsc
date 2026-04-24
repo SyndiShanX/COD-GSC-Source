@@ -86,8 +86,8 @@ function_b04c6f1f() {
   }
 
   if(var_8e495b9e.size > 0) {
-    var_2d9ca68d = array::random(var_8e495b9e);
-    n_character_index = array::random(var_2d9ca68d);
+    a_n_character_index = array::random(var_8e495b9e);
+    n_character_index = array::random(a_n_character_index);
     return n_character_index;
   }
 

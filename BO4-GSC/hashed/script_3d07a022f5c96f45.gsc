@@ -80,7 +80,7 @@ is_active(var_a75461b4) {
   s_challenge = zm_trial::function_a36e8c38(#"hash_53a5a75770adb550");
 
   if(isDefined(var_a75461b4)) {
-    if(isDefined(s_challenge) && isarray(level.var_692c062e) && isinarray(level.var_692c062e, var_a75461b4)) {
+    if(isDefined(s_challenge) && isarray(level.a_w_allowed) && isinarray(level.a_w_allowed, var_a75461b4)) {
       return true;
     }
 

@@ -90,27 +90,27 @@ function private preinit() {
 function private function_52ce9654() {
   if(isarray(level.zm_loc_types) && level.zm_loc_types[#"zombie_location"].size > 0) {
     a_s_spawn_locs = level.zm_loc_types[#"zombie_location"];
-    var_31b16a0 = [];
+    a_s_valid_spawns = [];
 
     foreach(s_spawn_loc in a_s_spawn_locs) {
       if(isDefined(s_spawn_loc.script_noteworthy) && (s_spawn_loc.script_noteworthy == "riser_location" || s_spawn_loc.script_noteworthy == "faller_location")) {
         continue;
       }
 
-      if(!isDefined(var_31b16a0)) {
-        var_31b16a0 = [];
-      } else if(!isarray(var_31b16a0)) {
-        var_31b16a0 = array(var_31b16a0);
+      if(!isDefined(a_s_valid_spawns)) {
+        a_s_valid_spawns = [];
+      } else if(!isarray(a_s_valid_spawns)) {
+        a_s_valid_spawns = array(a_s_valid_spawns);
       }
 
-      var_31b16a0[var_31b16a0.size] = s_spawn_loc;
+      a_s_valid_spawns[a_s_valid_spawns.size] = s_spawn_loc;
     }
 
     if(isarray(level.zm_loc_types[#"blight_father_location"]) && level.zm_loc_types[#"blight_father_location"].size > 0) {
-      var_31b16a0 = arraycombine(var_31b16a0, level.zm_loc_types[#"blight_father_location"], 0, 0);
+      a_s_valid_spawns = arraycombine(a_s_valid_spawns, level.zm_loc_types[#"blight_father_location"], 0, 0);
     }
 
-    ai_catalyst = zombie_utility::spawn_zombie(array::random(level.a_sp_catalyst), undefined, array::random(var_31b16a0));
+    ai_catalyst = zombie_utility::spawn_zombie(array::random(level.a_sp_catalyst), undefined, array::random(a_s_valid_spawns));
 
     if(isDefined(ai_catalyst)) {
       ai_catalyst zm_transform::function_bbaec2fd();

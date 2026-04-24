@@ -329,7 +329,7 @@ function get_player_dialog_alias(dialogkey, meansofdeath) {
     if(isDefined(level.var_4edd846)) {
       dialogalias = self[[level.var_4edd846]](playerbundle, dialogkey);
     } else {
-      iprintlnbold("<dev string:x38>" + function_9e72a96(dialogkey) + "<dev string:x4d>");
+      iprintlnbold("<dev string:x38>" + hashtostring(dialogkey) + "<dev string:x4d>");
     }
   } else {
     dialogalias = playerbundle.(dialogkey);

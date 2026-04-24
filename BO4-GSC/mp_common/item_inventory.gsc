@@ -228,7 +228,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
       }
     }
 
-    var_aec6fa7f = undefined;
+    itemamount = undefined;
 
     if(!var_994e5c9a) {
       weapon = eventstruct.weapon;
@@ -238,7 +238,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
         item = self get_inventory_item(networkid);
 
         if(isDefined(item) && item.amount > 0) {
-          var_aec6fa7f = item.amount;
+          itemamount = item.amount;
         }
       }
 
@@ -268,7 +268,7 @@ event_handler[grenade_fire] function_4776caf4(eventstruct) {
 
         if(weaponname == #"trophy_system") {
           if(isDefined(item)) {
-            self._trophy_system_ammo1 = var_aec6fa7f;
+            self._trophy_system_ammo1 = itemamount;
           }
         }
 
@@ -1048,7 +1048,7 @@ consume_item(item) {
 
     currentweapon = self getcurrentweapon();
 
-    if(isDefined(currentweapon) && isDefined(currentweapon.var_29d24e37) && currentweapon.var_29d24e37) {
+    if(isDefined(currentweapon) && isDefined(currentweapon.isvehicleturret) && currentweapon.isvehicleturret) {
       self playsoundtoplayer(#"uin_unavailable_charging", self);
       return 0;
     }
@@ -1652,13 +1652,13 @@ drop_inventory_item(networkid, stashitem = 0, var_7cab8e12 = undefined, targetna
   return dropitem;
 }
 
-equip_ammo(item, var_aec6fa7f) {
+equip_ammo(item, itemamount) {
   assert(isPlayer(self));
   assert(isDefined(item));
   self function_db2abc4(item);
   itementry = item.itementry;
   ammoweapon = itementry.weapon;
-  ammoamount = isDefined(itementry.amount) ? itementry.amount : isDefined(var_aec6fa7f) ? var_aec6fa7f : 1;
+  ammoamount = isDefined(itementry.amount) ? itementry.amount : isDefined(itemamount) ? itemamount : 1;
   maxstockammo = item_inventory_util::function_2879cbe0(self.inventory.var_7658cbec, ammoweapon);
   currentammostock = self getweaponammostock(ammoweapon);
   var_9b9ba643 = maxstockammo - currentammostock;
@@ -1668,7 +1668,7 @@ equip_ammo(item, var_aec6fa7f) {
     self.inventory.ammo[ammoweapon.name] = item.id;
     self function_fc9f8b05(ammoweapon, addammo);
 
-    if(isDefined(var_aec6fa7f)) {
+    if(isDefined(itemamount)) {
       return (ammoamount - addammo);
     }
 
@@ -1823,7 +1823,7 @@ debug_print(message, weapon) {
     weaponname = "<dev string:x59>";
 
     if(isDefined(weapon)) {
-      weaponname = "<dev string:x5c>" + function_9e72a96(weapon.name);
+      weaponname = "<dev string:x5c>" + hashtostring(weapon.name);
     }
 
     self iprintlnbold("<dev string:x69>" + message + weaponname);
@@ -2289,7 +2289,7 @@ function_bad4a3a5() {
   weapons = self getweaponslistprimaries();
 
   foreach(weapon in weapons) {
-    if(isDefined(weapon.var_29d24e37) && weapon.var_29d24e37) {
+    if(isDefined(weapon.isvehicleturret) && weapon.isvehicleturret) {
       continue;
     }
 
@@ -2523,7 +2523,7 @@ function_3f7ef88() {
   }
 }
 
-give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
+give_inventory_item(item, itemcount = 1, itemamount = 0, slotid = undefined) {
   if(!isPlayer(self) || !isDefined(self.inventory)) {
     assert(0, "<dev string:x13f>");
     return 0;
@@ -2556,7 +2556,7 @@ give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
   }
 
   maxstacksize = item_inventory_util::function_cfa794ca(self.inventory.var_7658cbec, item.itementry);
-  var_1393d318 = maxstacksize > 1;
+  isstackable = maxstacksize > 1;
 
   if(item.itementry.itemtype == #"resource" && item_world_util::function_41f06d9d(item.itementry)) {
     var_92d652f2 = self.inventory.items[slotid];
@@ -2564,7 +2564,7 @@ give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
     maxstacksize = var_b41045b2 + (isDefined(var_92d652f2.count) ? var_92d652f2.count : 0);
   }
 
-  if(isDefined(itementry.name) && var_1393d318) {
+  if(isDefined(itementry.name) && isstackable) {
     for(i = 0; i < self.inventory.items.size; i++) {
       if(self.inventory.items[i].id != 32767) {
         if(self.inventory.items[i].itementry.name != itementry.name) {
@@ -2620,7 +2620,7 @@ give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
       var_8c6165fc = int(min(itemcount, maxstacksize));
       item.networkid = item_world_util::function_970b8d86(self, slotid);
       item_inventory_util::function_6e9e7169(item);
-      var_92d652f2.amount = var_aec6fa7f;
+      var_92d652f2.amount = itemamount;
       var_92d652f2.count = var_8c6165fc;
       var_92d652f2.id = itemid;
       var_92d652f2.networkid = item.networkid;
@@ -2706,7 +2706,7 @@ give_inventory_item(item, itemcount = 1, var_aec6fa7f = 0, slotid = undefined) {
     if(self.inventory.items[i].networkid === 32767) {
       var_8c6165fc = int(min(itemcount, maxstacksize));
       item.networkid = item_world_util::function_970b8d86(self, i);
-      self.inventory.items[i].amount = var_aec6fa7f;
+      self.inventory.items[i].amount = itemamount;
       self.inventory.items[i].count = var_8c6165fc;
       self.inventory.items[i].id = itemid;
       self.inventory.items[i].networkid = item.networkid;

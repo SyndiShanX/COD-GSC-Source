@@ -1019,7 +1019,7 @@ function private function_c7ffe282(params) {
       assert(isDefined(blackboard.var_c5bde695));
       safehouse = savegame::function_8136eb5a();
       nextmission = blackboard.var_c5bde695;
-      var_cc500e2b = function_2717b55f(nextmission);
+      var_cc500e2b = getmapscriptbundle(nextmission);
       savegame::set_player_data("previous_safehouse", safehouse);
       var_a71d5880 = savegame::function_6440b06b(#"persistent", nextmission);
       namespace_61e6d095::function_73c9a490(#"hash_3ccc1702bc979da8", 0);

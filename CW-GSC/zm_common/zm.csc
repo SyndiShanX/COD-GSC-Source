@@ -1384,7 +1384,7 @@ function function_6ee4a2c(localclientnum) {
 }
 
 function function_f73c3352() {
-  mapbundle = function_2717b55f();
+  mapbundle = getmapscriptbundle();
 
   if(!isDefined(mapbundle.var_c5d172c6)) {
     return;

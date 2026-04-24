@@ -3099,7 +3099,7 @@ function private function_3624d1c8() {
 
     if(isDefined(vehicle)) {
       var_d4862d39 = undefined;
-      vehiclename = function_9e72a96(vehicle.vehicletype);
+      vehiclename = hashtostring(vehicle.vehicletype);
       debug2dtext((0, 50, 0), vehiclename);
       var_6a8c15bb = undefined;
 
@@ -3260,7 +3260,7 @@ function private function_f4c8a8ec(root, pname, index, a_vehicles, vehicle_type,
 
   if(isDefined(vehicle_type)) {
     for(i = 0; i < vehicle_type.size; i++) {
-      name = function_9e72a96(vehicle_type[i]);
+      name = hashtostring(vehicle_type[i]);
       function_9db84b1b(devgui_root, a_vehicles, name, i + 1, name);
     }
   }

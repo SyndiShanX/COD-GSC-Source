@@ -820,7 +820,7 @@ setup_devgui() {
   adddebugcommand(bgb_devgui_base + "<dev string:x45d>" + "<dev string:x47a>");
 
   foreach(key in keys) {
-    name = function_9e72a96(level.bgb[key].name);
+    name = hashtostring(level.bgb[key].name);
     adddebugcommand(bgb_devgui_base + name + "<dev string:x485>" + name + "<dev string:x4a4>");
   }
 }

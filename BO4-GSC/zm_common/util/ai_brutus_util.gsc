@@ -505,7 +505,7 @@ brutus_death() {
   a_s_blueprints = zm_crafting::function_31d883d7();
 
   foreach(s_blueprint in a_s_blueprints) {
-    if(s_blueprint.var_54a97edd == getweapon(#"zhield_spectral_dw")) {
+    if(s_blueprint.w_result == getweapon(#"zhield_spectral_dw")) {
       var_1982af82 = 1;
       break;
     }

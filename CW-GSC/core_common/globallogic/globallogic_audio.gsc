@@ -764,7 +764,7 @@ function get_dialog_bundle_alias(dialogbundle, dialogkey, var_6ad14004) {
     if(isDefined(level.var_3727097e)) {
       dialogalias = self[[level.var_3727097e]](dialogbundle, dialogkey);
     } else {
-      iprintlnbold("<dev string:x62>" + function_9e72a96(dialogkey) + "<dev string:x77>");
+      iprintlnbold("<dev string:x62>" + hashtostring(dialogkey) + "<dev string:x77>");
     }
   } else {
     dialogalias = dialogbundle.(dialogkey);
@@ -818,7 +818,7 @@ function function_f554c1ad(dialogbundle, dialogkey) {
     if(isDefined(level.var_9f234058)) {
       var_3a0f7868 = self[[level.var_9f234058]](dialogbundle, dialogkey);
     } else {
-      iprintlnbold("<dev string:x62>" + function_9e72a96(dialogkey) + "<dev string:x130>");
+      iprintlnbold("<dev string:x62>" + hashtostring(dialogkey) + "<dev string:x130>");
     }
   } else {
     var_3a0f7868 = dialogbundle.(dialogkey);
@@ -847,7 +847,7 @@ function function_ec14f55(dialogbundle, dialogkey) {
     if(isDefined(level.var_695f6028)) {
       var_d042255d = self[[level.var_695f6028]](dialogbundle, dialogkey);
     } else {
-      iprintlnbold("<dev string:x62>" + function_9e72a96(dialogkey) + "<dev string:x1eb>");
+      iprintlnbold("<dev string:x62>" + hashtostring(dialogkey) + "<dev string:x1eb>");
     }
   } else {
     var_d042255d = dialogbundle.(dialogkey);
@@ -966,7 +966,7 @@ function set_music_global(state, wait_time, save_state, return_state = 0) {
   music::setmusicstate(save_state + game.musicset, undefined, return_state);
 }
 
-function function_85818e24(var_9c1ed9ea, team) {}
+function function_85818e24(str_musicstate, team) {}
 
 function function_c246758e(str_state, n_delay = 0) {
   assert(isPlayer(self));
@@ -1226,7 +1226,7 @@ function function_d9079fc1(str_alias, var_3cd9c84b) {
 
   if(getdvarint(#"debug_vo", 0)) {
     if(!var_a1f778fa) {
-      var_2dbe34fe = "<dev string:x2a8>" + "<dev string:x2b6>" + function_9e72a96(str_alias) + "<dev string:x2c7>";
+      var_2dbe34fe = "<dev string:x2a8>" + "<dev string:x2b6>" + hashtostring(str_alias) + "<dev string:x2c7>";
       iprintlnbold(var_2dbe34fe);
       println(var_2dbe34fe);
     }
@@ -1234,8 +1234,8 @@ function function_d9079fc1(str_alias, var_3cd9c84b) {
 
   if(var_a1f778fa) {
     if(getdvarint(#"debug_vo", 0)) {
-      iprintlnbold(var_3cd9c84b + function_9e72a96(str_alias));
-      println(var_3cd9c84b + function_9e72a96(str_alias));
+      iprintlnbold(var_3cd9c84b + hashtostring(str_alias));
+      println(var_3cd9c84b + hashtostring(str_alias));
     }
   }
 }

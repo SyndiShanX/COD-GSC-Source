@@ -72,7 +72,7 @@ function collision_thread(localclientnum) {
         self playSound(localclientnum, alias, undefined, volume);
 
         if(getdvarint(#"hash_1ea6228199536d7e", 0) == 1) {
-          debug2dtext((0, 100, 0), function_9e72a96(alias) + "<dev string:x38>" + volume + "<dev string:x41>", undefined, undefined, (0, 0, 0), 1, 3, 16);
+          debug2dtext((0, 100, 0), hashtostring(alias) + "<dev string:x38>" + volume + "<dev string:x41>", undefined, undefined, (0, 0, 0), 1, 3, 16);
         }
 
         if(isDefined(self.heavycollisionrumble) && player function_21c0fa55() && self isdrivingvehicle(player)) {
@@ -95,7 +95,7 @@ function collision_thread(localclientnum) {
         self playSound(localclientnum, alias, undefined, volume);
 
         if(getdvarint(#"hash_1ea6228199536d7e", 0) == 1) {
-          debug2dtext((0, 200, 0), function_9e72a96(alias) + "<dev string:x38>" + volume + "<dev string:x55>", undefined, undefined, (0, 0, 0), 1, 3, 16);
+          debug2dtext((0, 200, 0), hashtostring(alias) + "<dev string:x38>" + volume + "<dev string:x55>", undefined, undefined, (0, 0, 0), 1, 3, 16);
         }
 
         if(isDefined(self.lightcollisionrumble) && player function_21c0fa55() && self isdrivingvehicle(player)) {
@@ -132,7 +132,7 @@ function jump_landing_thread(localclientnum) {
       self playSound(localclientnum, alias, undefined, volume);
 
       if(getdvarint(#"hash_1ea6228199536d7e", 0) == 1) {
-        debug2dtext((0, 0, 0), function_9e72a96(alias) + "<dev string:x38>" + volume + "<dev string:x69>", undefined, undefined, (0, 0, 0), 1, 3, 16);
+        debug2dtext((0, 0, 0), hashtostring(alias) + "<dev string:x38>" + volume + "<dev string:x69>", undefined, undefined, (0, 0, 0), 1, 3, 16);
       }
 
       if(isDefined(self.jumplandingrumble) && player function_21c0fa55() && self isdrivingvehicle(player)) {
@@ -163,7 +163,7 @@ function suspension_thread(localclientnum) {
       self playSound(localclientnum, alias, undefined, volume);
 
       if(getdvarint(#"hash_1ea6228199536d7e", 0) == 1) {
-        debug2dtext((0, 300, 0), function_9e72a96(alias) + "<dev string:x38>" + volume + "<dev string:x77>", undefined, undefined, (0, 0, 0), 1, 3, 16);
+        debug2dtext((0, 300, 0), hashtostring(alias) + "<dev string:x38>" + volume + "<dev string:x77>", undefined, undefined, (0, 0, 0), 1, 3, 16);
       }
 
       if(player function_21c0fa55() && self isdrivingvehicle(player)) {

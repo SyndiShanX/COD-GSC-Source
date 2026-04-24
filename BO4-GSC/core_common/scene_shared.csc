@@ -1952,7 +1952,7 @@ _trigger_stop(trig) {
 }
 
 add_scene_func(str_scenedef, func, var_e21c4c4c = "play", ...) {
-  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x155>" + function_9e72a96(str_scenedef) + "<dev string:x13d>");
+  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x155>" + hashtostring(str_scenedef) + "<dev string:x13d>");
   var_e21c4c4c = tolower(var_e21c4c4c);
 
   if(!isDefined(level.scene_funcs)) {
@@ -2033,7 +2033,7 @@ init(arg1, arg2, arg3, b_test_run) {
 
 get_scenedef(str_scenedef) {
   s_scriptbundle = getscriptbundle(str_scenedef);
-  assert(isDefined(s_scriptbundle) && isDefined(s_scriptbundle.objects), "<dev string:x1df>" + function_9e72a96(str_scenedef) + "<dev string:x1ef>");
+  assert(isDefined(s_scriptbundle) && isDefined(s_scriptbundle.objects), "<dev string:x1df>" + hashtostring(str_scenedef) + "<dev string:x1ef>");
   s_scriptbundle = fixup_scenedef(s_scriptbundle);
   return s_scriptbundle;
 }
@@ -2554,9 +2554,9 @@ function_6f382548(struct, str_scene_name) {
 
   if(struct.disableinsplitscreen == 2 && getdvarint(#"splitscreen_playercount", 1) > 1 || struct.disableinsplitscreen == 3 && getdvarint(#"splitscreen_playercount", 1) > 2 || struct.disableinsplitscreen == 4 && getdvarint(#"splitscreen_playercount", 1) > 3) {
     if(struct.type === "<dev string:x326>") {
-      str_debug = "<dev string:x32e>" + function_9e72a96(str_scene_name) + "<dev string:x337>";
+      str_debug = "<dev string:x32e>" + hashtostring(str_scene_name) + "<dev string:x337>";
     } else {
-      str_debug = "<dev string:x370>" + function_9e72a96(struct.name) + "<dev string:x380>" + str_scene_name + "<dev string:x38d>";
+      str_debug = "<dev string:x370>" + hashtostring(struct.name) + "<dev string:x380>" + str_scene_name + "<dev string:x38d>";
     }
 
     println(str_debug);

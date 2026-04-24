@@ -216,16 +216,16 @@ function private function_62c0d32d(index, item_name, stashitem = 0, falling = 2)
   }
 
   itemcount = isDefined(itementry.amount) ? itementry.amount : 1;
-  var_aec6fa7f = 0;
+  itemamount = 0;
 
   if(itementry.itemtype == #"weapon") {
-    var_aec6fa7f = itementry.amount * weapon.clipsize;
+    itemamount = itementry.amount * weapon.clipsize;
   } else if(itementry.itemtype == #"armor" || itementry.itemtype == #"ammo") {
-    var_aec6fa7f = itementry.amount;
+    itemamount = itementry.amount;
     itemcount = 1;
   }
 
-  item = item_drop::function_fd9026e4(index, weapon, itemcount, var_aec6fa7f, itemspawnpoint.id, origin, angles, falling, stashitem, undefined, undefined, undefined, undefined, undefined, undefined, var_e91aba42);
+  item = item_drop::function_fd9026e4(index, weapon, itemcount, itemamount, itemspawnpoint.id, origin, angles, falling, stashitem, undefined, undefined, undefined, undefined, undefined, undefined, var_e91aba42);
 
   if(isDefined(item)) {
     item.spawning = 1;

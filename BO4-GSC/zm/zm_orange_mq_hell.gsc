@@ -296,7 +296,7 @@ function_a340f5a2() {
   level.var_5d5b7e8e.var_a41818b5 clientfield::set("" + #"lantern_fx", 1);
 
   foreach(s_altar in level.var_76a7ad28) {
-    s_altar.var_3468124 zm_perks::function_efd2c9e6();
+    s_altar.s_vapor_altar zm_perks::function_efd2c9e6();
   }
 
   foreach(e_pap in level.var_4d8e32c8) {
@@ -703,7 +703,7 @@ test_hell() {
   level clientfield::set("<dev string:x149>" + #"hash_5e69ee96304ec40b", 1);
 
   foreach(s_altar in level.var_76a7ad28) {
-    s_altar.var_3468124 zm_perks::function_efd2c9e6();
+    s_altar.s_vapor_altar zm_perks::function_efd2c9e6();
   }
 
   foreach(e_pap in level.var_4d8e32c8) {

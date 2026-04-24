@@ -559,7 +559,7 @@ function function_6a09928b(location, type) {
   model = undefined;
 
   if(isDefined(modelname)) {
-    namespace_1e25ad94::debugmsg("<dev string:x51>" + function_9e72a96(type) + "<dev string:x60>" + modelname + "<dev string:x6c>" + location.origin);
+    namespace_1e25ad94::debugmsg("<dev string:x51>" + hashtostring(type) + "<dev string:x60>" + modelname + "<dev string:x6c>" + location.origin);
 
     model = namespace_ec06fe4a::spawnmodel(0, location.origin, modelname, location.angles, "dungeon floor decor " + modelname);
 

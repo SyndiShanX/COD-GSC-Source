@@ -1521,7 +1521,7 @@ function function_3dcfe42e() {
           function_18610fa3(self, actor);
         } else {
           damage = (isDefined(actor.maxhealth) ? actor.maxhealth : 0) * 0.3;
-          assert(isDefined(actor.maxhealth), "<dev string:x186>" + function_9e72a96(actor.archetype) + "<dev string:x190>");
+          assert(isDefined(actor.maxhealth), "<dev string:x186>" + hashtostring(actor.archetype) + "<dev string:x190>");
           actor ai::stun(2);
           actor dodamage(damage, actor.origin, self);
 
@@ -2373,7 +2373,7 @@ function function_6bf79248() {
 function function_bef51ab1() {
   level flag::wait_till(#"start_zombie_round_logic");
 
-  foreach(trigger in level.var_4fe2f84d[#"ztable_platinum_klaus_helm"]) {
+  foreach(trigger in level.a_t_crafting[#"ztable_platinum_klaus_helm"]) {
     trigger.prompt_and_visibility_func = &function_1c6f91fc;
   }
 }
@@ -2381,7 +2381,7 @@ function function_bef51ab1() {
 function function_88f9645b() {
   level endon(#"end_game");
 
-  foreach(trigger in level.var_4fe2f84d[#"ztable_platinum_klaus_helm"]) {
+  foreach(trigger in level.a_t_crafting[#"ztable_platinum_klaus_helm"]) {
     trigger.prompt_and_visibility_func = &function_1c6f91fc;
   }
 
@@ -2399,13 +2399,13 @@ function function_88f9645b() {
   while(true) {
     level flag::wait_till_clear(#"hash_6d16c284cbb301d1");
 
-    foreach(trigger in level.var_4fe2f84d[#"ztable_platinum_klaus_helm"]) {
+    foreach(trigger in level.a_t_crafting[#"ztable_platinum_klaus_helm"]) {
       trigger.prompt_and_visibility_func = &zm_crafting::function_126fc77c;
     }
 
     level flag::wait_till(#"hash_6d16c284cbb301d1");
 
-    foreach(trigger in level.var_4fe2f84d[#"ztable_platinum_klaus_helm"]) {
+    foreach(trigger in level.a_t_crafting[#"ztable_platinum_klaus_helm"]) {
       trigger.prompt_and_visibility_func = &function_1c6f91fc;
     }
   }

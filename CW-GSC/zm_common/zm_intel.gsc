@@ -549,7 +549,7 @@ function private function_6efd4108() {
       }
     }
 
-    print3d(self.origin, "<dev string:x50>" + function_9e72a96(self.var_d5fa8477), (0, 1, 0), undefined, 0.2);
+    print3d(self.origin, "<dev string:x50>" + hashtostring(self.var_d5fa8477), (0, 1, 0), undefined, 0.2);
     circle(self.origin, 40, (0, 1, 0));
     waitframe(1);
   }
@@ -577,7 +577,7 @@ function function_c1974629(v_target_loc, n_power = 200) {
     var_efc184d0 = target.angles;
   }
 
-  assert(isDefined(v_target_loc), "<dev string:x62>" + function_9e72a96(mdl_intel.var_d5fa8477));
+  assert(isDefined(v_target_loc), "<dev string:x62>" + hashtostring(mdl_intel.var_d5fa8477));
 
   if(is_true(mdl_intel.var_cbbbaf39)) {
     n_time = mdl_intel zm_utility::fake_physicslaunch(v_target_loc, n_power);
@@ -711,7 +711,7 @@ function collect_intel(var_d5fa8477, mdl_intel, var_eac6151d, var_54c59ebe = 0) 
   }
 
   var_65679637 = getscriptbundlenames("<dev string:x8d>");
-  assert(isinarray(var_65679637, var_d5fa8477), function_9e72a96(var_d5fa8477) + "<dev string:x98>");
+  assert(isinarray(var_65679637, var_d5fa8477), hashtostring(var_d5fa8477) + "<dev string:x98>");
 
   if(!self function_f0f36d47(var_d5fa8477)) {
     var_f83e960b = 1;
@@ -744,7 +744,7 @@ function collect_intel(var_d5fa8477, mdl_intel, var_eac6151d, var_54c59ebe = 0) 
     self playlocalsound(#"hash_68c4c53739928215");
   }
 
-  iprintln("<dev string:xba>" + self getentitynumber() + "<dev string:xc5>" + function_9e72a96(var_d5fa8477));
+  iprintln("<dev string:xba>" + self getentitynumber() + "<dev string:xc5>" + hashtostring(var_d5fa8477));
 
   level.var_eb704e15[var_d5fa8477][self.name] = 1;
 
@@ -1454,18 +1454,18 @@ function function_ded2880a() {
   util::add_debug_command("<dev string:x190>");
 
   foreach(var_d5fa8477 in level.var_54f9341) {
-    var_d5fa8477 = function_9e72a96(var_d5fa8477);
+    var_d5fa8477 = hashtostring(var_d5fa8477);
     s_bundle = getscriptbundle(var_d5fa8477);
 
     if(isDefined(s_bundle)) {
       if(isDefined(s_bundle.var_ad4ad686)) {
-        str_faction = function_9e72a96(s_bundle.var_ad4ad686);
+        str_faction = hashtostring(s_bundle.var_ad4ad686);
       } else {
         str_faction = "<dev string:x1e8>";
       }
 
       if(isDefined(s_bundle.var_9be0526e)) {
-        str_type = function_9e72a96(s_bundle.var_9be0526e);
+        str_type = hashtostring(s_bundle.var_9be0526e);
       } else {
         str_type = "<dev string:x1f6>";
       }

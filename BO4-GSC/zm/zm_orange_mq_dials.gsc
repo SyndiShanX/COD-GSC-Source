@@ -185,9 +185,9 @@ lavapit_breach_(object) {
 }
 
 function_a02dfba() {
-  var_aff5104e = getEntArray("mq_dial_number", "targetname");
+  a_e_code_numbers = getEntArray("mq_dial_number", "targetname");
 
-  foreach(e_code in var_aff5104e) {
+  foreach(e_code in a_e_code_numbers) {
     e_code function_eb2835af();
   }
 }

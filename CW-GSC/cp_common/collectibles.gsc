@@ -45,7 +45,7 @@ function function_5a395617() {
         collectible.index = k;
 
         if(collectible.index >= 10) {
-          assert(0, "<dev string:x38>" + function_9e72a96(collectible.var_430d1d6a) + "<dev string:x68>" + 10);
+          assert(0, "<dev string:x38>" + hashtostring(collectible.var_430d1d6a) + "<dev string:x68>" + 10);
         }
 
         if(!isDefined(var_bdf7b99d[collectible.UnlockType])) {
@@ -87,7 +87,7 @@ function function_5a395617() {
           assert(isDefined(collectible.UnlockMap));
 
           if(collectible.var_f3575c58 > 6) {
-            assert(0, "<dev string:x92>" + function_9e72a96(collectible.UnlockMap) + "<dev string:xb9>" + 6);
+            assert(0, "<dev string:x92>" + hashtostring(collectible.UnlockMap) + "<dev string:xb9>" + 6);
           }
 
           if(isDefined(collectible.var_f3575c58) && isDefined(collectible.UnlockMap)) {
@@ -95,7 +95,7 @@ function function_5a395617() {
               var_7bb83649[collectible.var_f3575c58] = collectible;
             } else {
               var_91783c0f = var_7bb83649[collectible.var_f3575c58].name;
-              assert(0, "<dev string:xec>" + function_9e72a96(collectible.UnlockMap) + "<dev string:x114>" + collectible.var_f3575c58 + "<dev string:x11e>" + function_9e72a96(collectible.name) + "<dev string:x124>" + function_9e72a96(var_91783c0f));
+              assert(0, "<dev string:xec>" + hashtostring(collectible.UnlockMap) + "<dev string:x114>" + collectible.var_f3575c58 + "<dev string:x11e>" + hashtostring(collectible.name) + "<dev string:x124>" + hashtostring(var_91783c0f));
             }
 
             if(!isDefined(var_bdf7b99d[collectible.UnlockType][collectible.var_f3575c58])) {

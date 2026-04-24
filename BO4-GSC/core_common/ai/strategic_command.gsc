@@ -257,7 +257,7 @@ function_7c3d768e(var_1b2a0645, var_d695a79f, commander) {
   team = blackboard::getstructblackboardattribute(commander, #"team");
   paused = isDefined(commander.pause) && commander.pause;
   squadcount = commander.squads.size;
-  debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xc4>" + function_9e72a96(team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
+  debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xc4>" + hashtostring(team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
   var_1b2a0645 += var_6e868cb7;
   var_d695a79f += yspacing;
   var_1b2a0645 += 25;
@@ -284,7 +284,7 @@ function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
 
   foreach(member in members) {
     yoffset = var_d695a79f;
-    debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xfb>" + member getentitynumber() + "<dev string:x100>" + member.name + "<dev string:x104>" + function_9e72a96(member.team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
+    debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xfb>" + member getentitynumber() + "<dev string:x100>" + member.name + "<dev string:x104>" + hashtostring(member.team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
     var_1b2a0645 += var_6e868cb7;
     var_d695a79f += yspacing;
     var_1b2a0645 += var_96e1d277;
@@ -321,7 +321,7 @@ function_df74a8f3(var_1b2a0645, var_d695a79f, members, commander) {
       seatnum = vehicle getoccupantseat(member);
       var_d695a79f = yoffset;
       var_1b2a0645 += var_4fe31551;
-      debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xfb>" + vehicle getentitynumber() + "<dev string:x100>" + vehicle.scriptvehicletype + "<dev string:x104>" + function_9e72a96(vehicle.team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
+      debug2dtext((var_1b2a0645, var_d695a79f, 0), "<dev string:xfb>" + vehicle getentitynumber() + "<dev string:x100>" + vehicle.scriptvehicletype + "<dev string:x104>" + hashtostring(vehicle.team) + "<dev string:xa2>", textcolor, textalpha, backgroundcolor, backgroundalpha, textsize);
       var_1b2a0645 += var_6e868cb7;
       var_d695a79f += yspacing;
       var_1b2a0645 += var_96e1d277;
@@ -528,8 +528,8 @@ function_3ed19fa3(gameobject, position) {
   origintext = "<dev string:x195>" + int(origin[0]) + "<dev string:x19f>" + int(origin[1]) + "<dev string:x19f>" + int(origin[2]) + "<dev string:x1a4>";
   var_7358fe8e = "<dev string:x2b3>";
   var_8de0589e = "<dev string:x2c2>";
-  var_4fea471b = "<dev string:x1a9>" + function_9e72a96(gameobject.team) + "<dev string:xa2>";
-  var_8dbcaed7 = "<dev string:x2d3>" + (isDefined(gameobject.absolute_visible_and_interact_team) ? function_9e72a96(gameobject.absolute_visible_and_interact_team) : "<dev string:x1df>") + "<dev string:xa2>";
+  var_4fea471b = "<dev string:x1a9>" + hashtostring(gameobject.team) + "<dev string:xa2>";
+  var_8dbcaed7 = "<dev string:x2d3>" + (isDefined(gameobject.absolute_visible_and_interact_team) ? hashtostring(gameobject.absolute_visible_and_interact_team) : "<dev string:x1df>") + "<dev string:xa2>";
   tacpointtext = "<dev string:x1fa>";
   errortext = undefined;
   var_7ddeb599 = "<dev string:x1df>";
@@ -1451,9 +1451,9 @@ querypointsinsideposition(bot, position, radius, halfheight) {
 
 function_1891d0d2(points, obb) {
   var_2586092e = 50;
-  var_c2a08848 = 0;
+  serverframecount = 0;
 
-  while(var_c2a08848 < var_2586092e) {
+  while(serverframecount < var_2586092e) {
     if(getdvarint(#"ai_debugsquadpointquery", 0)) {
       recordbox(obb.center, obb.halfsize * -1, obb.halfsize, obb.angles[1], (0, 1, 0), "<dev string:x21e>");
 
@@ -1462,7 +1462,7 @@ function_1891d0d2(points, obb) {
       }
     }
 
-    var_c2a08848++;
+    serverframecount++;
     waitframe(1);
   }
 }

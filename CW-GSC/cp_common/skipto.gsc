@@ -85,7 +85,7 @@ function function_228558fd(var_f2d4fd10 = 0, var_7a646627 = 0) {
       break;
     }
 
-    mapbundle = function_2717b55f(mapname);
+    mapbundle = getmapscriptbundle(mapname);
 
     if(isDefined(mapbundle)) {
       if(is_true(mapbundle.isSideMission)) {
@@ -641,7 +641,7 @@ function function_5a61e21a(var_7e8557ba) {
 }
 
 function function_5011fee2(missionname = savegame::function_8136eb5a()) {
-  mapbundle = function_2717b55f(missionname);
+  mapbundle = getmapscriptbundle(missionname);
 
   if(isDefined(mapbundle) && isDefined(mapbundle.var_a04dfce6)) {
     return mapbundle.var_a04dfce6;
@@ -651,7 +651,7 @@ function function_5011fee2(missionname = savegame::function_8136eb5a()) {
 }
 
 function function_547ca7d2(safehouse, var_fc9732a9 = 1) {
-  mapbundle = function_2717b55f(safehouse);
+  mapbundle = getmapscriptbundle(safehouse);
   assert(isDefined(mapbundle) && isDefined(mapbundle.issafehouse));
 
   if(safehouse == #"cp_ger_hub_post_cuba" || safehouse == #"cp_ger_hub8") {
@@ -812,7 +812,7 @@ function handle() {
   callback::callback(#"hash_7177603f5415549b");
   savegame::save();
   currentmission = savegame::function_8136eb5a();
-  mapbundle = function_2717b55f(currentmission);
+  mapbundle = getmapscriptbundle(currentmission);
 
   if(isDefined(mapbundle) && !is_true(mapbundle.isSideMission)) {
     evidencedata = collectibles::function_293d81b4(1, currentmission);
@@ -1586,7 +1586,7 @@ function function_455cb6c5(var_83104433) {
     rootmapname = getrootmapname(tolower(var_83104433));
 
     if(var_266acb38 >= 0) {
-      mapbundle = function_2717b55f(savegame::function_8136eb5a());
+      mapbundle = getmapscriptbundle(savegame::function_8136eb5a());
 
       if(isDefined(mapbundle) && isDefined(mapbundle.var_c9d6f30a)) {
         foreach(var_5c9a8c92 in mapbundle.var_c9d6f30a) {
@@ -1596,7 +1596,7 @@ function function_455cb6c5(var_83104433) {
         }
       }
 
-      var_cc500e2b = function_2717b55f(var_83104433);
+      var_cc500e2b = getmapscriptbundle(var_83104433);
 
       if(isDefined(var_cc500e2b) && isDefined(var_cc500e2b.var_a04dfce6)) {
         return var_cc500e2b.var_a04dfce6;
@@ -1628,7 +1628,7 @@ function function_6914f647() {
     return safehouse;
   } else {
     missionindex = 0;
-    var_4d75d53a = function_2717b55f(currentmission);
+    var_4d75d53a = getmapscriptbundle(currentmission);
 
     if(isDefined(var_4d75d53a) && is_true(var_4d75d53a.isSideMission)) {
       missionindex = player stats::get_stat(#"hash_1e7fdd28f2a28f78", currentmission, #"missionindex");
@@ -1640,7 +1640,7 @@ function function_6914f647() {
 
     for(i = missionindex - 1; i >= 0; i--) {
       missionname = getmapatindex(i);
-      mapbundle = function_2717b55f(missionname);
+      mapbundle = getmapscriptbundle(missionname);
       missiondata = savegame::function_6440b06b(#"persistent", missionname);
 
       if(isDefined(mapbundle) && is_true(mapbundle.issafehouse) && is_true(missiondata.unlocked) && missionname != #"cp_ger_hub_post_cuba" && missionname != #"cp_ger_hub8") {
@@ -1753,14 +1753,14 @@ function function_1c2dfc20(var_83104433 = function_60ca00f5(), var_585e39fb = fu
   currentmission = savegame::function_8136eb5a();
 
   if(!function_3b424100()) {
-    var_4d75d53a = function_2717b55f(currentmission);
+    var_4d75d53a = getmapscriptbundle(currentmission);
     is_safehouse = is_true(var_4d75d53a.issafehouse);
     var_510f193a = is_true(var_4d75d53a.isSideMission);
     var_5e7454e = 0;
     var_9ba5cef7 = savegame::function_2ee66e93("previous_mission", "");
 
     if(var_9ba5cef7 != "") {
-      var_43758eae = function_2717b55f(var_9ba5cef7);
+      var_43758eae = getmapscriptbundle(var_9ba5cef7);
       var_5e7454e = is_true(var_43758eae.issafehouse) && var_9ba5cef7 != #"cp_ger_hub_post_cuba" && var_9ba5cef7 != #"cp_ger_hub8";
     }
 

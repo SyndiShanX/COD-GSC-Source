@@ -176,16 +176,16 @@ function_62c0d32d(item_name, stashitem = 0) {
   itementry = isDefined(level.var_de3d5d56) ? level.var_de3d5d56[item_name] : getscriptbundle(item_name);
   weapon = item_world_util::function_35e06774(itementry, isDefined(itementry.attachments));
   itemcount = isDefined(itementry.amount) ? itementry.amount : 1;
-  var_aec6fa7f = 0;
+  itemamount = 0;
 
   if(itementry.itemtype == #"weapon") {
-    var_aec6fa7f = itementry.amount * weapon.clipsize;
+    itemamount = itementry.amount * weapon.clipsize;
   } else if(itementry.itemtype == #"armor" || itementry.itemtype == #"ammo") {
-    var_aec6fa7f = itementry.amount;
+    itemamount = itementry.amount;
     itemcount = 1;
   }
 
-  item = item_drop::drop_item(weapon, itemcount, var_aec6fa7f, itemspawnpoint.id, origin, angles, stashitem);
+  item = item_drop::drop_item(weapon, itemcount, itemamount, itemspawnpoint.id, origin, angles, stashitem);
 
   if(isDefined(item)) {
     item.spawning = 1;

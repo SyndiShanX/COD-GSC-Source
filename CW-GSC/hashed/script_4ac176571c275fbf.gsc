@@ -239,7 +239,7 @@ function function_d765ccad() {
     return;
   }
 
-  str_type = function_9e72a96(self.vehicletype);
+  str_type = hashtostring(self.vehicletype);
 
   if(str_type === "<dev string:x38>") {
     return;
@@ -251,17 +251,17 @@ function function_d765ccad() {
     level.var_6eef6733 = [];
   }
 
-  if(!isDefined(level.var_6eef6733[function_9e72a96(self.vehicletype)])) {
-    level.var_6eef6733[function_9e72a96(self.vehicletype)] = [];
+  if(!isDefined(level.var_6eef6733[hashtostring(self.vehicletype)])) {
+    level.var_6eef6733[hashtostring(self.vehicletype)] = [];
   }
 
-  if(!isDefined(level.var_6eef6733[function_9e72a96(self.vehicletype)])) {
-    level.var_6eef6733[function_9e72a96(self.vehicletype)] = [];
-  } else if(!isarray(level.var_6eef6733[function_9e72a96(self.vehicletype)])) {
-    level.var_6eef6733[function_9e72a96(self.vehicletype)] = array(level.var_6eef6733[function_9e72a96(self.vehicletype)]);
+  if(!isDefined(level.var_6eef6733[hashtostring(self.vehicletype)])) {
+    level.var_6eef6733[hashtostring(self.vehicletype)] = [];
+  } else if(!isarray(level.var_6eef6733[hashtostring(self.vehicletype)])) {
+    level.var_6eef6733[hashtostring(self.vehicletype)] = array(level.var_6eef6733[hashtostring(self.vehicletype)]);
   }
 
-  level.var_6eef6733[function_9e72a96(self.vehicletype)][level.var_6eef6733[function_9e72a96(self.vehicletype)].size] = self;
+  level.var_6eef6733[hashtostring(self.vehicletype)][level.var_6eef6733[hashtostring(self.vehicletype)].size] = self;
   v_spawn_pos = self.origin;
   level thread function_f567f0cd();
   level flag::wait_till("<dev string:x5c>");
@@ -319,7 +319,7 @@ function function_f567f0cd() {
 
       foreach(var_3ed342fe in var_f0ffe8b2) {
         if(isvehicle(var_3ed342fe) && isDefined(var_f0ffe8b2) && isDefined(var_f0ffe8b2[0]) && isDefined(var_f0ffe8b2[0].vehicletype)) {
-          debug2dtext((810, var_bd9acc19, 0), function_9e72a96(var_f0ffe8b2[0].vehicletype) + "<dev string:x74>" + var_f0ffe8b2.size, var_3ed342fe function_b2775b52());
+          debug2dtext((810, var_bd9acc19, 0), hashtostring(var_f0ffe8b2[0].vehicletype) + "<dev string:x74>" + var_f0ffe8b2.size, var_3ed342fe function_b2775b52());
           break;
         }
       }

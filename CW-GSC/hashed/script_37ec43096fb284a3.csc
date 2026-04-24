@@ -42,28 +42,28 @@ function postinit() {}
 
 function function_a380fe5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isinarray(array(#"p9_sur_fow_path_capsule_forest_cap", #"hash_57b5acde2128e4b4", #"p9_sur_fow_path_capsule_golova_cap", #"p9_sur_fow_path_capsule_sanatorium_cap", #"hash_7b74b9b952f922d3", #"hash_181d690a4afd8b13", #"p9_sur_fow_path_capsule_sanatorium_s4_mq_cap", #"p9_sur_fow_path_capsule_dunes_cap", #"p9_sur_fow_path_capsule_black_sea_cap"), hash(self.model))) {
-    var_ee6bcd51 = #"hash_515a30ee41d5cb3c";
+    str_rob = #"hash_515a30ee41d5cb3c";
   } else {
-    var_ee6bcd51 = #"hash_4a9cb80afea6f8cb";
+    str_rob = #"hash_4a9cb80afea6f8cb";
   }
 
   if(util::get_map_name() === "wz_sanatorium") {
-    var_ee6bcd51 += "_sanatorium";
+    str_rob += "_sanatorium";
   } else if(util::get_map_name() === "mp_black_sea") {
-    var_ee6bcd51 += "_black_sea";
+    str_rob += "_black_sea";
   }
 
   if(hash(self.model) === #"p9_sur_fow_path_capsule_forest_battery") {
-    var_ee6bcd51 = #"hash_1a5c12ea1f8d94e7";
+    str_rob = #"hash_1a5c12ea1f8d94e7";
   }
 
   if(bwastimejump) {
-    self playrenderoverridebundle(var_ee6bcd51);
-    self function_78233d29(var_ee6bcd51, "", "Scale", 1);
+    self playrenderoverridebundle(str_rob);
+    self function_78233d29(str_rob, "", "Scale", 1);
     return;
   }
 
-  self stoprenderoverridebundle(var_ee6bcd51);
+  self stoprenderoverridebundle(str_rob);
 }
 
 function function_ec0b7087(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

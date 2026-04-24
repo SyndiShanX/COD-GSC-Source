@@ -284,7 +284,7 @@ function_48d7e846() {
   level.var_4b9d0136 thread scene::play(#"p8_fxanim_zm_esc_water_tower_bundle", level.var_4b9d0136);
   level thread clientfield::increment("" + #"hash_cd028842e18845e", 1);
   wait 3;
-  e_closest = arraygetclosest(level.var_4b9d0136.origin, zm_vo::function_347f7d34());
+  e_closest = arraygetclosest(level.var_4b9d0136.origin, zm_vo::get_valid_players());
 
   if(isalive(e_closest)) {
     e_closest thread zm_audio::create_and_play_dialog(#"catwalk", #"hash_30b3d33fbe5f5328");

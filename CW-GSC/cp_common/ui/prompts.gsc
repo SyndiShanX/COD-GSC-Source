@@ -232,7 +232,7 @@ function function_c97a48c7(prompt, prompt_struct) {
 
 function function_46df0bc7(prompt, priority) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   priority = int(priority * 10);
   arrayremoveindex(self.var_3e95b88f.var_294a441e, prompt, 1);
 
@@ -365,7 +365,7 @@ function set_objective(str_objective) {
 
 function function_263320e2(prompt, prompt_text) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
 
   if(self.var_3e95b88f.prompts[prompt].prompt_text === prompt_text) {
     return;
@@ -386,19 +386,19 @@ function function_263320e2(prompt, prompt_text) {
 
 function function_75d5e526(prompt, complete_callback) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].complete_callback = complete_callback;
 }
 
 function function_a4a9acfc(prompt, var_531201f1) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_531201f1 = var_531201f1;
 }
 
 function function_cd2391cb(prompt, notify_string) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].notify_string = notify_string;
 }
 
@@ -464,7 +464,7 @@ function function_4b556f63(prompt, flags, var_cca4e0db = 0) {
 
 function function_d03d79d6(prompt, var_de6f0004) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_de6f0004 = var_de6f0004;
 
   if(self.var_3e95b88f.prompts[prompt].var_de6f0004 === 0.25) {
@@ -474,7 +474,7 @@ function function_d03d79d6(prompt, var_de6f0004) {
 
 function function_8f5eb0a6(prompt, var_4ac77177) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_4ac77177 = var_4ac77177;
 
   if(self.var_3e95b88f.prompts[prompt].var_4ac77177 === 0.1) {
@@ -484,7 +484,7 @@ function function_8f5eb0a6(prompt, var_4ac77177) {
 
 function function_5fe46a16(prompt, var_71b9f0c0) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_71b9f0c0 = var_71b9f0c0;
 
   if(self.var_3e95b88f.prompts[prompt].var_71b9f0c0 === 240) {
@@ -494,7 +494,7 @@ function function_5fe46a16(prompt, var_71b9f0c0) {
 
 function function_cf884581(prompt, var_79a4cbfc) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_9c89c587 = var_79a4cbfc;
 
   if(self.var_3e95b88f.prompts[prompt].var_9c89c587 === 0) {
@@ -504,7 +504,7 @@ function function_cf884581(prompt, var_79a4cbfc) {
 
 function function_5698d1c9(prompt, var_5f57572a) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_f17a78a7 = var_5f57572a;
 
   if(self.var_3e95b88f.prompts[prompt].var_f17a78a7 === 180) {
@@ -514,7 +514,7 @@ function function_5698d1c9(prompt, var_5f57572a) {
 
 function function_68782902(prompt, var_87c991f3) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_87c991f3 = var_87c991f3;
 
   if(self.var_3e95b88f.prompts[prompt].var_87c991f3 === 85) {
@@ -524,7 +524,7 @@ function function_68782902(prompt, var_87c991f3) {
 
 function function_2557566(prompt, var_7faab93d) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_7faab93d = var_7faab93d;
 
   if(self.var_3e95b88f.prompts[prompt].var_7faab93d === 1) {
@@ -534,7 +534,7 @@ function function_2557566(prompt, var_7faab93d) {
 
 function function_b95d71cd(prompt, var_5e83875a) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_5e83875a = var_5e83875a;
 
   if(self.var_3e95b88f.prompts[prompt].var_5e83875a === 30) {
@@ -544,14 +544,14 @@ function function_b95d71cd(prompt, var_5e83875a) {
 
 function function_1a5e1da6(prompt, var_3c8a8153, var_c8a53909) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_3c8a8153 = var_3c8a8153;
   self.var_3e95b88f.prompts[prompt].var_88ceabd = var_c8a53909;
 }
 
 function function_4cb5d3a1(prompt, var_8ce60046) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_8ce60046 = var_8ce60046;
 
   if(self.var_3e95b88f.prompts[prompt].var_8ce60046 === 1) {
@@ -561,7 +561,7 @@ function function_4cb5d3a1(prompt, var_8ce60046) {
 
 function function_dcf99fad(prompt, var_9a27c4ee, ignore_ent) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_9a27c4ee = var_9a27c4ee;
   self.var_3e95b88f.prompts[prompt].var_1e4cbecf = ignore_ent;
 
@@ -572,7 +572,7 @@ function function_dcf99fad(prompt, var_9a27c4ee, ignore_ent) {
 
 function function_2bd2431a(prompt, var_be77841a) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_be77841a = var_be77841a;
 
   if(self.var_3e95b88f.prompts[prompt].var_be77841a === 1) {
@@ -582,7 +582,7 @@ function function_2bd2431a(prompt, var_be77841a) {
 
 function function_3171730f(prompt, groups) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
 
   if(!isDefined(groups)) {
     groups = [];
@@ -609,7 +609,7 @@ function function_398ab9eb() {
 
 function function_2e6d74f5(prompt, pause) {
   assert(isDefined(self.var_3e95b88f), "<dev string:x333>");
-  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + function_9e72a96(prompt) + "<dev string:x3f1>");
+  assert(isDefined(self.var_3e95b88f.prompts[prompt]), "<dev string:x390>" + hashtostring(prompt) + "<dev string:x3f1>");
   self.var_3e95b88f.prompts[prompt].var_f14d06ca = pause;
 }
 
@@ -914,15 +914,15 @@ function private function_eee54dd8(prompt_struct) {
       model = undefined;
 
       if(prompt_struct.player gamepadusedlast()) {
-        assert(isDefined(level.prompts[prompt_struct.prompt].lui_button), "<dev string:x4a7>" + function_9e72a96(prompt_struct.prompt));
+        assert(isDefined(level.prompts[prompt_struct.prompt].lui_button), "<dev string:x4a7>" + hashtostring(prompt_struct.prompt));
         var_d75b2384 = function_90d058e8(#"buttons");
         model = getuimodel(var_d75b2384, string(level.prompts[prompt_struct.prompt].lui_button));
-        assert(isDefined(model), "<dev string:x4d1>" + level.prompts[prompt_struct.prompt].lui_button + "<dev string:x4df>" + function_9e72a96(prompt_struct.prompt));
+        assert(isDefined(model), "<dev string:x4d1>" + level.prompts[prompt_struct.prompt].lui_button + "<dev string:x4df>" + hashtostring(prompt_struct.prompt));
       } else {
-        assert(isDefined(level.prompts[prompt_struct.prompt].var_b35ba5c), "<dev string:x4f7>" + function_9e72a96(prompt_struct.prompt));
+        assert(isDefined(level.prompts[prompt_struct.prompt].var_b35ba5c), "<dev string:x4f7>" + hashtostring(prompt_struct.prompt));
         var_31a34837 = function_90d058e8(#"hash_48b37823078b5999");
         model = getuimodel(var_31a34837, level.prompts[prompt_struct.prompt].var_b35ba5c);
-        assert(isDefined(model), "<dev string:x525>" + level.prompts[prompt_struct.prompt].var_b35ba5c + "<dev string:x4df>" + function_9e72a96(prompt_struct.prompt));
+        assert(isDefined(model), "<dev string:x525>" + level.prompts[prompt_struct.prompt].var_b35ba5c + "<dev string:x4df>" + hashtostring(prompt_struct.prompt));
       }
 
       return (getuimodelvalue(model) > 0);

@@ -319,7 +319,7 @@ function function_38184bf8() {
         }
 
         circle(print_origin, 30, color);
-        print3d(print_origin, function_9e72a96(var_375627f0), color, 1, 0.5);
+        print3d(print_origin, hashtostring(var_375627f0), color, 1, 0.5);
         print3d(print_origin + (0, 0, -10), "<dev string:x56b>" + zone_path.cost, color, 1, 0.5);
 
         if(isDefined(zone_path.to_zone)) {
@@ -349,7 +349,7 @@ function function_38184bf8() {
             print_origin = zone.volumes[0].origin;
           }
 
-          print3d(print_origin, function_9e72a96(zone_name), (1, 0, 0), 1, 0.5);
+          print3d(print_origin, hashtostring(zone_name), (1, 0, 0), 1, 0.5);
           circle(print_origin, 30, (1, 0, 0));
           circle(print_origin, 35, (1, 0, 0));
           circle(print_origin, 40, (1, 0, 0));
@@ -646,8 +646,8 @@ function validate_to_board(spawn_point, spawn_point_origin_backup) {
       thread drawvalidation(spawn_point_origin_backup, undefined, undefined, node.origin, undefined, self.archetype);
 
       if(isDefined(self.archetype)) {
-        println("<dev string:x877>" + function_9e72a96(self.archetype) + "<dev string:x888>" + spawn_point_origin_backup + "<dev string:x8aa>" + spawn_point.targetname);
-        iprintlnbold("<dev string:x877>" + function_9e72a96(self.archetype) + "<dev string:x888>" + spawn_point_origin_backup + "<dev string:x8aa>" + spawn_point.targetname);
+        println("<dev string:x877>" + hashtostring(self.archetype) + "<dev string:x888>" + spawn_point_origin_backup + "<dev string:x8aa>" + spawn_point.targetname);
+        iprintlnbold("<dev string:x877>" + hashtostring(self.archetype) + "<dev string:x888>" + spawn_point_origin_backup + "<dev string:x8aa>" + spawn_point.targetname);
       } else {
         println("<dev string:x8c6>" + spawn_point_origin_backup + "<dev string:x8aa>" + spawn_point.targetname);
         iprintlnbold("<dev string:x8c6>" + spawn_point_origin_backup + "<dev string:x8aa>" + spawn_point.targetname);
@@ -682,8 +682,8 @@ function validate_to_wait_point(zone, new_spawn_point_origin, spawn_point) {
           thread drawvalidation(new_spawn_point_origin, undefined, new_wait_point, undefined, undefined, self.archetype);
 
           if(isDefined(self.archetype)) {
-            println("<dev string:x8fb>" + function_9e72a96(self.archetype) + "<dev string:x888>" + new_spawn_point_origin + "<dev string:x90b>" + spawn_point.targetname);
-            iprintlnbold("<dev string:x877>" + function_9e72a96(self.archetype) + "<dev string:x888>" + new_spawn_point_origin + "<dev string:x90b>" + spawn_point.targetname);
+            println("<dev string:x8fb>" + hashtostring(self.archetype) + "<dev string:x888>" + new_spawn_point_origin + "<dev string:x90b>" + spawn_point.targetname);
+            iprintlnbold("<dev string:x877>" + hashtostring(self.archetype) + "<dev string:x888>" + new_spawn_point_origin + "<dev string:x90b>" + spawn_point.targetname);
           } else {
             println("<dev string:x8c6>" + new_spawn_point_origin + "<dev string:x90b>" + spawn_point.targetname);
             iprintlnbold("<dev string:x8c6>" + new_spawn_point_origin + "<dev string:x90b>" + spawn_point.targetname);
@@ -720,7 +720,7 @@ function drawvalidation(origin, zone_name, nav_mesh_wait_point, boards_point, zo
   }
 
   if(isDefined(archetype)) {
-    archetype = function_9e72a96(archetype);
+    archetype = hashtostring(archetype);
   }
 
   while(true) {
@@ -835,13 +835,13 @@ function draw_zone_adjacencies_validation(zone, status, name, current_zone, offs
 
   if(status == 2) {
     circle(print_origin, 30, (0, 1, 0));
-    print3d(print_origin, function_9e72a96(name), (0, 1, 0), 1, 0.5);
+    print3d(print_origin, hashtostring(name), (0, 1, 0), 1, 0.5);
     return;
   }
 
   if(status == 1) {
     circle(print_origin, 30, (0, 0, 1));
-    print3d(print_origin, function_9e72a96(name), (0, 0, 1), 1, 0.5);
+    print3d(print_origin, hashtostring(name), (0, 0, 1), 1, 0.5);
 
     if(isDefined(current_zone.nodes[0])) {
       print_origin = current_zone.nodes[0].origin;
@@ -851,12 +851,12 @@ function draw_zone_adjacencies_validation(zone, status, name, current_zone, offs
       print_origin = current_zone.volumes[0].origin;
     }
 
-    print3d(print_origin + (0, 20, offset * -1), function_9e72a96(name), (0, 0, 1), 1, 0.5);
+    print3d(print_origin + (0, 20, offset * -1), hashtostring(name), (0, 0, 1), 1, 0.5);
     return;
   }
 
   circle(print_origin, 30, (1, 0, 0));
-  print3d(print_origin, function_9e72a96(name), (1, 0, 0), 1, 0.5);
+  print3d(print_origin, hashtostring(name), (1, 0, 0), 1, 0.5);
 }
 
 function function_f4669d7b(zones, zone) {
@@ -1070,7 +1070,7 @@ function zombie_weapon_devgui_think() {
 }
 
 function zombie_devgui_weapon_give(weapon_name) {
-  split = strtok(function_9e72a96(weapon_name), "<dev string:xaa1>");
+  split = strtok(hashtostring(weapon_name), "<dev string:xaa1>");
 
   switch (split.size) {
     case 1:
@@ -1112,20 +1112,20 @@ function function_bb54e671(weapon) {
   self notify(#"hash_7c6363440c125d8b");
   self endon(#"disconnect", #"hash_7c6363440c125d8b");
 
-  if(!isDefined(self.var_8d5839f4)) {
-    self.var_8d5839f4 = [];
-  } else if(!isarray(self.var_8d5839f4)) {
-    self.var_8d5839f4 = array(self.var_8d5839f4);
+  if(!isDefined(self.a_w_devgui)) {
+    self.a_w_devgui = [];
+  } else if(!isarray(self.a_w_devgui)) {
+    self.a_w_devgui = array(self.a_w_devgui);
   }
 
-  self.var_8d5839f4[self.var_8d5839f4.size] = weapon;
+  self.a_w_devgui[self.a_w_devgui.size] = weapon;
 
   while(true) {
     self waittill(#"weapon_change_complete");
 
-    foreach(weapon in arraycopy(self.var_8d5839f4)) {
+    foreach(weapon in arraycopy(self.a_w_devgui)) {
       if(!self hasweapon(weapon)) {
-        arrayremovevalue(self.var_8d5839f4, weapon);
+        arrayremovevalue(self.a_w_devgui, weapon);
       }
     }
   }
@@ -4498,8 +4498,8 @@ function function_7c9dd642() {
     num = pow(2, mapping.numbits);
 
     for(i = 0; i < num; i++) {
-      cmdarg = function_9e72a96(key) + "<dev string:x1587>" + i;
-      util::add_devgui(path + function_9e72a96(key) + "<dev string:x15c2>" + i, cmd + cmdarg);
+      cmdarg = hashtostring(key) + "<dev string:x1587>" + i;
+      util::add_devgui(path + hashtostring(key) + "<dev string:x15c2>" + i, cmd + cmdarg);
     }
   }
 
@@ -4545,9 +4545,9 @@ function bunker_entrance_zoned() {
         v_color = (0, 0, 1);
 
         if(isDefined(key.targetname)) {
-          str_type = function_9e72a96(key.targetname);
+          str_type = hashtostring(key.targetname);
         } else if(isDefined(key.model)) {
-          str_type = function_9e72a96(key.model);
+          str_type = hashtostring(key.model);
         } else {
           str_type = key.origin;
         }
@@ -4640,7 +4640,7 @@ function private function_62e3e0a() {
 
     foreach(key, array in level.zm_loc_types) {
       color = (1, 1, 1);
-      var_10623ec8 = function_9e72a96(key);
+      var_10623ec8 = hashtostring(key);
 
       if(key == #"zombie_location") {
         color = (1, 0, 0);

@@ -281,7 +281,7 @@ notif_devgui_gun_rank() {
   foreach(group_name, gun_group in a_weapons) {
     foreach(gun, attachment_group in gun_group) {
       foreach(attachment, attachment_data in attachment_group[#"attachments"]) {
-        devgui_cmd_gun_path = notif_gun_rank_devgui_base + function_9e72a96(group_name) + "<dev string:x142>" + function_9e72a96(gun_group[gun][#"ref"]) + "<dev string:x142>" + function_9e72a96(attachment);
+        devgui_cmd_gun_path = notif_gun_rank_devgui_base + hashtostring(group_name) + "<dev string:x142>" + hashtostring(gun_group[gun][#"ref"]) + "<dev string:x142>" + hashtostring(attachment);
         util::waittill_can_add_debug_command();
         adddebugcommand(devgui_cmd_gun_path + "<dev string:xc9>" + "<dev string:xce>" + "<dev string:x146>" + "<dev string:x14e>" + "<dev string:xea>" + attachment_data[#"xp"] + "<dev string:x146>" + "<dev string:x16c>" + "<dev string:xea>" + attachment_data[#"itemindex"] + "<dev string:x146>" + "<dev string:x198>" + "<dev string:xea>" + gun_group[gun][#"itemindex"] + "<dev string:x146>" + "<dev string:x1be>" + "<dev string:xea>" + attachment_data[#"rankid"] + "<dev string:xee>");
       }
@@ -337,7 +337,7 @@ notif_devgui_challenges() {
         }
 
         name = tablelookupcolumnforrow(tablename, j, 5);
-        devgui_cmd_challenge_path = notif_challenges_devgui_base + function_9e72a96(type) + "<dev string:x142>" + function_9e72a96(name) + "<dev string:x142>" + challengetierstring + "<dev string:x20c>" + challengeid;
+        devgui_cmd_challenge_path = notif_challenges_devgui_base + hashtostring(type) + "<dev string:x142>" + hashtostring(name) + "<dev string:x142>" + challengetierstring + "<dev string:x20c>" + challengeid;
         util::waittill_can_add_debug_command();
         adddebugcommand(devgui_cmd_challenge_path + "<dev string:xc9>" + "<dev string:xce>" + "<dev string:x146>" + "<dev string:x214>" + "<dev string:xea>" + j + "<dev string:x146>" + "<dev string:x235>" + "<dev string:xea>" + i + "<dev string:xee>");
 

@@ -222,7 +222,7 @@ gladiatortargetservice(entity) {
   entity.zombie_poi = entity zm_utility::get_zombie_point_of_interest(entity.origin);
   entity zombie_utility::run_ignore_player_handler();
 
-  if(isDefined(entity.var_4f1b8d2b) && entity.var_4f1b8d2b && isDefined(entity.favoriteenemy) && isPlayer(entity.favoriteenemy) && !isDefined(zm_zonemgr::function_54fc7938(entity.favoriteenemy, entity))) {
+  if(isDefined(entity.var_4f1b8d2b) && entity.var_4f1b8d2b && isDefined(entity.favoriteenemy) && isPlayer(entity.favoriteenemy) && !isDefined(zm_zonemgr::get_zone_path(entity.favoriteenemy, entity))) {
     entity.var_4f1b8d2b = 0;
   }
 
@@ -981,7 +981,7 @@ function_75f32da6(inflictor, attacker, damage, idflags, meansofdeath, weapon, po
     return 0;
   }
 
-  if(isDefined(attacker) && isPlayer(attacker) && self.subarchetype == #"gladiator_marauder" && !isDefined(self.var_4f1b8d2b) && isDefined(zm_zonemgr::function_54fc7938(attacker, self))) {
+  if(isDefined(attacker) && isPlayer(attacker) && self.subarchetype == #"gladiator_marauder" && !isDefined(self.var_4f1b8d2b) && isDefined(zm_zonemgr::get_zone_path(attacker, self))) {
     self.favoriteenemy = attacker;
     self.var_4f1b8d2b = 1;
     self.var_cb89528d = 1;

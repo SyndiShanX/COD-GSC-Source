@@ -645,7 +645,7 @@ function draw_struct(struct, color, parent, extrastr) {
 
 function function_4636f4cb(str, append) {
   if(ishash(append)) {
-    append = function_9e72a96(append);
+    append = hashtostring(append);
   }
 
   if(!isDefined(str)) {

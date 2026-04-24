@@ -46,7 +46,7 @@ function function_5e62ed5c() {
       continue;
     }
 
-    a_players = namespace_85745671::function_347f7d34();
+    a_players = namespace_85745671::get_valid_players();
     a_ai_zombies = getaiarray();
     var_571f5454 = undefined;
     e_target = undefined;
@@ -190,7 +190,7 @@ function function_156560eb(var_cf21a49f, var_aa19ae, var_437c9d8d = 1500, var_f2
     var_bb956a6c = function_48defc2d(var_cf21a49f, var_663d8b4e, var_437c9d8d, var_f24d0052, var_6a7b6ec4, n_height);
 
     for(i = 0; i < var_bb956a6c.size; i++) {
-      a_players = namespace_85745671::function_347f7d34(var_dc0c4612);
+      a_players = namespace_85745671::get_valid_players(var_dc0c4612);
 
       if(!a_players.size) {
         wait 1;
@@ -256,7 +256,7 @@ function function_156560eb(var_cf21a49f, var_aa19ae, var_437c9d8d = 1500, var_f2
     }
 
     wait randomfloatrange(4, 5);
-    a_players = namespace_85745671::function_347f7d34(var_dc0c4612);
+    a_players = namespace_85745671::get_valid_players(var_dc0c4612);
 
     if(a_players.size) {
       var_cf21a49f = arraygetclosest(var_11a3ade0, a_players).origin;

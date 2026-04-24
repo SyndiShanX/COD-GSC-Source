@@ -106,7 +106,7 @@ function function_3ecbd9d(w_weapon) {
   n_slot = self gadgetgetslot(w_weapon);
 
   if(w_weapon == getweapon(#"tomahawk_t8") || w_weapon == getweapon(#"tomahawk_t8_upgraded")) {
-    while(self function_36dfc05f(n_slot)) {
+    while(self gadgetisdeployed(n_slot)) {
       waitframe(1);
     }
 

@@ -113,7 +113,7 @@ function function_cfca77a7(var_42de336c, id, condition_func, cooldown_time, intr
   }
 
   if(!isentity(var_42de336c) && !isassetloaded("<dev string:x22c>", var_42de336c)) {
-    println("<dev string:xaf>" + id + "<dev string:x236>" + (ishash(var_42de336c) ? function_9e72a96(var_42de336c) : var_42de336c) + "<dev string:x252>");
+    println("<dev string:xaf>" + id + "<dev string:x236>" + (ishash(var_42de336c) ? hashtostring(var_42de336c) : var_42de336c) + "<dev string:x252>");
     return;
   }
 
@@ -631,7 +631,7 @@ function private update() {
   }
 }
 
-function private function_4c0d0d28(var_201c5b1f) {
+function private function_4c0d0d28(notify_hash) {
   function_e95ec8df();
   function_fb608075();
 }
@@ -648,9 +648,9 @@ function private devgui() {
   adddebugcommand("<dev string:x48f>");
 
   foreach(id, transformation in level.var_b175714d) {
-    adddebugcommand("<dev string:x4fc>" + function_9e72a96(id) + "<dev string:x524>" + function_9e72a96(id) + "<dev string:x54f>");
-    adddebugcommand("<dev string:x555>" + function_9e72a96(id) + "<dev string:x57d>" + function_9e72a96(id) + "<dev string:x54f>");
-    adddebugcommand("<dev string:x5a8>" + function_9e72a96(id) + "<dev string:x5d0>" + function_9e72a96(id) + "<dev string:x54f>");
+    adddebugcommand("<dev string:x4fc>" + hashtostring(id) + "<dev string:x524>" + hashtostring(id) + "<dev string:x54f>");
+    adddebugcommand("<dev string:x555>" + hashtostring(id) + "<dev string:x57d>" + hashtostring(id) + "<dev string:x54f>");
+    adddebugcommand("<dev string:x5a8>" + hashtostring(id) + "<dev string:x5d0>" + hashtostring(id) + "<dev string:x54f>");
   }
 
   registershack_walla = 0;
@@ -837,7 +837,7 @@ function private setup_status() {
     y += 10;
     current_color = colors[i % colors.size];
     id_elem = create_hudelem(y);
-    id_elem settext(function_9e72a96(id));
+    id_elem settext(hashtostring(id));
     id_elem.color = current_color;
     id_elem.fontscale = 1.2;
     var_83db7237 = create_hudelem(y, 160);
@@ -872,7 +872,7 @@ function private function_4a065e66(id, color) {
   self.var_30acf8aa = 1;
 
   while(true) {
-    record3dtext(function_9e72a96(id), self.origin + (0, 0, self.maxs[2]), color);
+    record3dtext(hashtostring(id), self.origin + (0, 0, self.maxs[2]), color);
     waitframe(1);
   }
 }
@@ -922,7 +922,7 @@ function private function_dfd1a1c0() {
     var_b010a959 += 25;
 
     foreach(pauser in level.var_50f7dbd5) {
-      debug2dtext((var_c2624dfc, var_b010a959, 0), function_9e72a96(pauser), (1, 1, 1), 1, (0, 0, 0), 0.8, 1);
+      debug2dtext((var_c2624dfc, var_b010a959, 0), hashtostring(pauser), (1, 1, 1), 1, (0, 0, 0), 0.8, 1);
       var_b010a959 += 25;
     }
 

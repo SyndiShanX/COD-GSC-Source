@@ -34,12 +34,12 @@ init() {
     #start_func: &function_6882655b, #end_func: &function_55f180c2, #n_index: 5, #n_target: 10
   };
   level.var_f0efd877 = 0;
-  function_1525b94c();
+  start_next_challenge();
   function_a5cebb9a(0);
   level thread function_1b350677();
 }
 
-function_1525b94c() {
+start_next_challenge() {
   start_challenge(array::pop_front(level.var_a7b0c29c));
 }
 
@@ -53,7 +53,7 @@ challenge_completed() {
     return;
   }
 
-  function_1525b94c();
+  start_next_challenge();
 }
 
 function_bc0ec5b3(b_activate) {

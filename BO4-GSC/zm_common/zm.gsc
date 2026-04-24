@@ -792,12 +792,12 @@ function_268ef952() {
       break;
   }
 
-  foreach(var_c9db62d5 in array("zomMoveSpeedMult", "zomBaseHealth", "zomHealthIncrease", "zomHealthIncreaseMult", "zomSpawnDelay", "zomNewRunnerInt", "zomMaxCount", "zomMaxCountPerPlayer", "zomCountScalar", "zomCountSoloMult", "zomPointScalar", "plyBaseHealth", "plyPenaltyNoRevive", "plyPenaltyDeath", "plyPenaltyDowned", "plyPenaltyDownedPointStep", "plySelfReviveCountCoop", "plySelfReviveCountSolo", "zomMixedStart", "zomMixedStartSolo", "zomCatalystStart", "zomCatalystStartSolo", "zomStokerStart", "zomStokerStartSolo", "plyShieldDamageMult", "plyRetainWeapons", "plyPerksDecay", "plyHealthRegenRate", "plyHealthRegenDelay", "plyXPModfier", "plyHighlightCraftables")) {
-    if(!isDefined(zmdifficultysettings.(var_c9db62d5 + str_suffix))) {
-      zmdifficultysettings.(var_c9db62d5 + str_suffix) = 0;
+  foreach(str_setting in array("zomMoveSpeedMult", "zomBaseHealth", "zomHealthIncrease", "zomHealthIncreaseMult", "zomSpawnDelay", "zomNewRunnerInt", "zomMaxCount", "zomMaxCountPerPlayer", "zomCountScalar", "zomCountSoloMult", "zomPointScalar", "plyBaseHealth", "plyPenaltyNoRevive", "plyPenaltyDeath", "plyPenaltyDowned", "plyPenaltyDownedPointStep", "plySelfReviveCountCoop", "plySelfReviveCountSolo", "zomMixedStart", "zomMixedStartSolo", "zomCatalystStart", "zomCatalystStartSolo", "zomStokerStart", "zomStokerStartSolo", "plyShieldDamageMult", "plyRetainWeapons", "plyPerksDecay", "plyHealthRegenRate", "plyHealthRegenDelay", "plyXPModfier", "plyHighlightCraftables")) {
+    if(!isDefined(zmdifficultysettings.(str_setting + str_suffix))) {
+      zmdifficultysettings.(str_setting + str_suffix) = 0;
     }
 
-    var_c6ceb446[var_c9db62d5] = zmdifficultysettings.(var_c9db62d5 + str_suffix);
+    var_c6ceb446[str_setting] = zmdifficultysettings.(str_setting + str_suffix);
   }
 
   return var_c6ceb446;
@@ -2157,7 +2157,7 @@ printhashids() {
       continue;
     }
 
-    outputstring += function_9e72a96(perk.alias) + "<dev string:x19c>" + perk.alias + "<dev string:x1a0>";
+    outputstring += hashtostring(perk.alias) + "<dev string:x19c>" + perk.alias + "<dev string:x1a0>";
   }
 
   outputstring += "<dev string:x1c7>";

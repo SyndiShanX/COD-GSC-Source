@@ -159,10 +159,10 @@ function function_d14c2698() {
   var_81fd4bd0 = function_72eeb31d();
 
   foreach(item_hash, callouts in var_81fd4bd0) {
-    item_root = player_devgui_base + function_9e72a96(item_hash) + "<dev string:x2d9>";
+    item_root = player_devgui_base + hashtostring(item_hash) + "<dev string:x2d9>";
 
     foreach(callout in callouts) {
-      util::add_devgui(item_root + function_9e72a96(callout), "<dev string:x2b4>" + "<dev string:x2bc>" + "<dev string:x23f>" + function_9e72a96(callout));
+      util::add_devgui(item_root + hashtostring(callout), "<dev string:x2b4>" + "<dev string:x2bc>" + "<dev string:x23f>" + hashtostring(callout));
     }
 
     waitframe(1);
@@ -236,7 +236,7 @@ function function_caed2ca6() {
     foreach(execution in var_eb7a15a5) {
       if(isDefined(execution.execution)) {
         count++;
-        util::add_devgui(item_root + function_9e72a96(execution.execution), "<dev string:x2b4>" + "<dev string:x31a>" + "<dev string:x23f>" + function_9e72a96(execution.execution));
+        util::add_devgui(item_root + hashtostring(execution.execution), "<dev string:x2b4>" + "<dev string:x31a>" + "<dev string:x23f>" + hashtostring(execution.execution));
         waitframe(1);
       }
     }

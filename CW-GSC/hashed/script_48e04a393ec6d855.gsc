@@ -37,8 +37,8 @@ function init() {
       continue;
     }
 
-    name = function_9e72a96(dungeon.name);
-    locstr = function_9e72a96(dungeon.locstring);
+    name = hashtostring(dungeon.name);
+    locstr = hashtostring(dungeon.locstring);
     cmdline = "<dev string:x4f>" + name + "<dev string:x6a>";
     util::add_devgui(var_663588d + name, cmdline);
   }

@@ -314,30 +314,30 @@ function function_7df47abd() {
   switch (n_players) {
     case 1:
     default:
-      var_4f886dd2 = 10;
+      n_count_min = 10;
       var_b90dca7b = 12;
       break;
     case 2:
-      var_4f886dd2 = 13;
+      n_count_min = 13;
       var_b90dca7b = 15;
       break;
     case 3:
-      var_4f886dd2 = 16;
+      n_count_min = 16;
       var_b90dca7b = 18;
       break;
     case 4:
-      var_4f886dd2 = 19;
+      n_count_min = 19;
       var_b90dca7b = 21;
       break;
   }
 
   var_37c20fcf = 5;
-  var_4340bf8a = var_b90dca7b - var_4f886dd2;
+  var_4340bf8a = var_b90dca7b - n_count_min;
   var_3b3dba11 = var_4340bf8a / var_37c20fcf;
-  n_count = int(var_4f886dd2 + var_3b3dba11 * (n_round - var_37c20fcf));
+  n_count = int(n_count_min + var_3b3dba11 * (n_round - var_37c20fcf));
 
-  if(n_count < var_4f886dd2) {
-    n_count = var_4f886dd2;
+  if(n_count < n_count_min) {
+    n_count = n_count_min;
   } else if(n_count > var_b90dca7b) {
     n_count = var_b90dca7b;
   }

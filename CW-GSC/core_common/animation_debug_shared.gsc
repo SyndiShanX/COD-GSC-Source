@@ -127,14 +127,14 @@ function anim_info_render_thread() {
 
     if(true) {
       print3d(maso_they_don_t_see_us_ye_, self getentnum() + get_ent_type() + "<dev string:xbe>" + str_name, color, 0.8, 0.3);
-      print3d(maso_they_don_t_see_us_ye_ - (0, 0, 5), "<dev string:xca>" + (isanimlooping(animation) ? "<dev string:xd2>" : "<dev string:xdd>") + function_9e72a96(animation), color, 0.8, 0.3);
+      print3d(maso_they_don_t_see_us_ye_ - (0, 0, 5), "<dev string:xca>" + (isanimlooping(animation) ? "<dev string:xd2>" : "<dev string:xdd>") + hashtostring(animation), color, 0.8, 0.3);
       print3d(maso_they_don_t_see_us_ye_ - (0, 0, 11), str_extra_info, color, 0.8, 0.3);
 
       if(isarray(var_f4b34dc1) && var_f4b34dc1.size) {
         n_z_offset = 17;
 
         foreach(var_21c1ba1, str_anim in var_f4b34dc1) {
-          var_1c56a327 = "<dev string:xe3>" + var_21c1ba1 + "<dev string:xee>" + function_9e72a96(str_anim);
+          var_1c56a327 = "<dev string:xe3>" + var_21c1ba1 + "<dev string:xee>" + hashtostring(str_anim);
           print3d(maso_they_don_t_see_us_ye_ - (0, 0, n_z_offset), var_1c56a327, (0, 1, 1), 0.8, 0.15);
           n_z_offset += 6;
         }

@@ -72,17 +72,17 @@ function private postinit() {
     var_7b5d3a70 = level.var_a5689564;
   }
 
-  var_1d1bbd52 = struct::get_array("fasttravel_trigger", "targetname");
+  a_s_fasttravel_locs = struct::get_array("fasttravel_trigger", "targetname");
 
-  foreach(s_loc in var_1d1bbd52) {
+  foreach(s_loc in a_s_fasttravel_locs) {
     level thread[[var_7b5d3a70]](s_loc);
   }
 
   callback::on_spawned(&function_cdbbf1ee);
-  level.var_f410ef3b = [];
+  level.a_b_ziplines = [];
 
   for(i = 0; i < 4; i++) {
-    level.var_f410ef3b[i] = 0;
+    level.a_b_ziplines[i] = 0;
   }
 
   var_a3101e2f = getEntArray("fasttravel_dropout", "targetname");
@@ -194,8 +194,8 @@ function function_5c18a7f4(player) {
   }
 
   if(!is_true(player.var_9c7b96ed[self.stub.var_8d5d092c])) {
-    if(isDefined(player.var_d883eecd)) {
-      n_cost = player.var_d883eecd;
+    if(isDefined(player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d)) {
+      n_cost = player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d;
     } else if(isDefined(self.stub)) {
       n_cost = self.stub.zombie_cost;
     } else {
@@ -315,8 +315,8 @@ function function_6cde5436() {
       continue;
     }
 
-    if(isDefined(player.var_d883eecd)) {
-      n_cost = player.var_d883eecd;
+    if(isDefined(player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d)) {
+      n_cost = player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d;
     } else if(isDefined(self.stub)) {
       n_cost = self.stub.zombie_cost;
     } else {
@@ -358,10 +358,10 @@ function function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
   level endon(#"end_game");
   self endon(#"death");
   n_index = get_player_index(self);
-  var_f80635c = var_12230d08.script_string;
-  self.var_388ee880 = var_f80635c;
+  str_start_loc = var_12230d08.script_string;
+  self.var_388ee880 = str_start_loc;
   self.var_3011d31c = 0;
-  level notify(var_f80635c + "_start", {
+  level notify(str_start_loc + "_start", {
     #player: self, #s_unitrigger: var_12230d08
   });
   var_4500bf3f = var_12230d08.script_noteworthy;
@@ -371,10 +371,10 @@ function function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
   switch (var_4500bf3f) {
     case # "traverse":
       if(var_829a20a8) {
-        if(var_f80635c === "dropout") {
+        if(str_start_loc === "dropout") {
           n_idx = self.var_85c91ccc;
         } else {
-          n_idx = function_de173abb(var_f80635c);
+          n_idx = function_de173abb(str_start_loc);
 
           if(!isDefined(n_idx)) {
             return;
@@ -383,12 +383,12 @@ function function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
           self.var_85c91ccc = n_idx;
         }
 
-        nd_path_start = getvehiclenode("fasttravel_" + var_f80635c + "_start_" + n_idx, "targetname");
-        var_384528 = getvehiclenode("fasttravel_" + var_f80635c + "_zipline_end_" + n_idx, "targetname");
-        str_notify = "fasttravel_" + var_f80635c + "_zipline_end_" + n_idx;
+        nd_path_start = getvehiclenode("fasttravel_" + str_start_loc + "_start_" + n_idx, "targetname");
+        var_384528 = getvehiclenode("fasttravel_" + str_start_loc + "_zipline_end_" + n_idx, "targetname");
+        str_notify = "fasttravel_" + str_start_loc + "_zipline_end_" + n_idx;
       } else {
-        nd_path_start = getvehiclenode("fasttravel_" + var_f80635c + "_start", "targetname");
-        str_notify = var_f80635c + "_end";
+        nd_path_start = getvehiclenode("fasttravel_" + str_start_loc + "_start", "targetname");
+        str_notify = str_start_loc + "_end";
       }
 
       var_5314bd63 = getent("veh_fasttravel_cam", "targetname");
@@ -396,20 +396,20 @@ function function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
       break;
     case # "flinger":
     case # "teleport":
-      n_idx = function_de173abb(var_f80635c);
+      n_idx = function_de173abb(str_start_loc);
 
       if(!isDefined(n_idx)) {
         return;
       }
 
       self.var_85c91ccc = n_idx;
-      str_notify = "fasttravel_" + var_f80635c + "_end_" + n_idx;
+      str_notify = "fasttravel_" + str_start_loc + "_end_" + n_idx;
       self function_66d020b0(undefined, undefined, undefined, str_notify, undefined, var_12230d08, undefined, undefined);
       break;
   }
 
   if(!var_829a20a8) {
-    var_f0bbde5 = self function_c78572ab(var_f80635c);
+    var_f0bbde5 = self function_c78572ab(str_start_loc);
   }
 
   vgt_vtx_cnt_en = 1;
@@ -451,12 +451,12 @@ function function_b9c7ccbb(var_12230d08, var_829a20a8 = 0) {
   });
 }
 
-function function_c78572ab(var_f80635c) {
+function function_c78572ab(str_start_loc) {
   if(self.var_3011d31c) {
-    var_6a4c362c = function_7a74dbfd(var_f80635c + "_dropdown_end_");
+    var_6a4c362c = function_7a74dbfd(str_start_loc + "_dropdown_end_");
     var_f0bbde5 = self function_d4fbc062(var_6a4c362c);
   } else {
-    var_6a4c362c = function_7a74dbfd(var_f80635c + "_end_");
+    var_6a4c362c = function_7a74dbfd(str_start_loc + "_end_");
     var_f0bbde5 = self function_d4fbc062(var_6a4c362c);
   }
 
@@ -512,13 +512,13 @@ function function_f86439bc() {
 }
 
 function function_de173abb(str_loc) {
-  var_33c06362 = level.var_f410ef3b.size;
+  var_33c06362 = level.a_b_ziplines.size;
 
   for(i = 0; i < var_33c06362; i++) {
     n_idx = randomint(var_33c06362);
 
-    if(level.var_f410ef3b[n_idx] == 0) {
-      level.var_f410ef3b[n_idx] = 1;
+    if(level.a_b_ziplines[n_idx] == 0) {
+      level.a_b_ziplines[n_idx] = 1;
       return n_idx;
     }
   }
@@ -693,7 +693,7 @@ function function_66d020b0(var_5314bd63, nd_path_start, var_384528, str_notify, 
   self show();
 
   if(isDefined(self.var_85c91ccc)) {
-    level.var_f410ef3b[self.var_85c91ccc] = 0;
+    level.a_b_ziplines[self.var_85c91ccc] = 0;
   }
 
   if(isDefined(str_notify)) {
@@ -998,9 +998,9 @@ function function_1ab837f6() {
   level waittill(#"all_players_spawned");
   level flag::wait_till(level.var_5bfd847e);
   level clientfield::set("fasttravel_exploder", 1);
-  var_1d1bbd52 = struct::get_array("fasttravel_trigger", "targetname");
+  a_s_fasttravel_locs = struct::get_array("fasttravel_trigger", "targetname");
 
-  foreach(s_loc in var_1d1bbd52) {
+  foreach(s_loc in a_s_fasttravel_locs) {
     if(isDefined(s_loc.unitrigger_stub.delay)) {
       s_loc.unitrigger_stub flag::delay_set(s_loc.unitrigger_stub.delay, "delayed");
     }

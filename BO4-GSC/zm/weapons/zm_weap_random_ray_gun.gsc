@@ -178,7 +178,7 @@ function_1ec5c573(weapon, n_damage, meansofdeath) {
     var_aebb78d5 = int(var_d6f1df38 * 3);
     var_aebb78d5 = zm_utility::round_up_to_ten(var_aebb78d5);
 
-    iprintln("<dev string:x38>" + function_9e72a96(self.archetype) + "<dev string:x42>" + self getentnum() + "<dev string:x46>" + var_aebb78d5 + "<dev string:x4b>" + function_9e72a96(meansofdeath));
+    iprintln("<dev string:x38>" + hashtostring(self.archetype) + "<dev string:x42>" + self getentnum() + "<dev string:x46>" + var_aebb78d5 + "<dev string:x4b>" + hashtostring(meansofdeath));
   }
 
   return var_aebb78d5;
@@ -415,31 +415,31 @@ function_5114b093() {
   self notify("11bb4425fa0edb34");
   self endon("11bb4425fa0edb34");
   self endon(#"death");
-  var_97e851d8 = array(level.var_74cf08b1, level.var_4b14202f);
+  a_w_wonder_weapons = array(level.var_74cf08b1, level.var_4b14202f);
 
   if(isDefined(0) && false) {
-    if(!isDefined(var_97e851d8)) {
-      var_97e851d8 = [];
-    } else if(!isarray(var_97e851d8)) {
-      var_97e851d8 = array(var_97e851d8);
+    if(!isDefined(a_w_wonder_weapons)) {
+      a_w_wonder_weapons = [];
+    } else if(!isarray(a_w_wonder_weapons)) {
+      a_w_wonder_weapons = array(a_w_wonder_weapons);
     }
 
-    var_97e851d8[var_97e851d8.size] = level.var_6fe89212;
+    a_w_wonder_weapons[a_w_wonder_weapons.size] = level.var_6fe89212;
 
-    if(!isDefined(var_97e851d8)) {
-      var_97e851d8 = [];
-    } else if(!isarray(var_97e851d8)) {
-      var_97e851d8 = array(var_97e851d8);
+    if(!isDefined(a_w_wonder_weapons)) {
+      a_w_wonder_weapons = [];
+    } else if(!isarray(a_w_wonder_weapons)) {
+      a_w_wonder_weapons = array(a_w_wonder_weapons);
     }
 
-    var_97e851d8[var_97e851d8.size] = level.var_7b9ca97a;
+    a_w_wonder_weapons[a_w_wonder_weapons.size] = level.var_7b9ca97a;
   }
 
   var_c74d5934 = undefined;
   var_8c561676 = undefined;
   s_waitresult = self waittill(#"projectile_impact");
 
-  if(isDefined(s_waitresult.weapon) && isinarray(var_97e851d8, s_waitresult.weapon)) {
+  if(isDefined(s_waitresult.weapon) && isinarray(a_w_wonder_weapons, s_waitresult.weapon)) {
     var_5dcc0b6c = getaiteamarray(#"axis");
     var_4a7cc161 = arraysortclosest(var_5dcc0b6c, s_waitresult.position, 16, 0, 128);
 
@@ -625,7 +625,7 @@ function function_2d3beb68(var_ea0a46dc, e_attacker) {
 
   self dodamage(w_damage_weapon.damagevalues[0], self.origin, e_attacker, e_attacker, undefined, "MOD_UNKNOWN", 0, w_damage_weapon);
 
-  iprintlnbold("<dev string:x24b>" + var_1deac56b + "<dev string:x251>" + level.var_74cf08b1.damagevalues[0] + "<dev string:x265>" + function_9e72a96(self.archetype));
+  iprintlnbold("<dev string:x24b>" + var_1deac56b + "<dev string:x251>" + level.var_74cf08b1.damagevalues[0] + "<dev string:x265>" + hashtostring(self.archetype));
 
   wait 0.6;
 }
@@ -646,7 +646,7 @@ function_a851c777(var_ea0a46dc, e_attacker) {
 
   self dodamage(n_damage, self.origin, e_attacker, e_attacker, undefined, "MOD_UNKNOWN", 0, level.var_4b14202f);
 
-  iprintln("<dev string:x38>" + function_9e72a96(self.archetype) + "<dev string:x42>" + self getentnum() + "<dev string:x46>" + n_damage);
+  iprintln("<dev string:x38>" + hashtostring(self.archetype) + "<dev string:x42>" + self getentnum() + "<dev string:x46>" + n_damage);
 
   wait 0.6;
 

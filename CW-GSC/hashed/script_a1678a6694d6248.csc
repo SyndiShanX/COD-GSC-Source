@@ -531,25 +531,25 @@ function function_413411e1() {
   }
 }
 
-function function_60baf83(var_ee6bcd51) {
+function function_60baf83(str_rob) {
   if(isPlayer(self)) {
-    self zm_utility::function_f933b697(var_ee6bcd51);
+    self zm_utility::function_f933b697(str_rob);
   }
 
-  self stoprenderoverridebundle(var_ee6bcd51);
+  self stoprenderoverridebundle(str_rob);
 }
 
-function function_2f16cef6(var_ee6bcd51) {
+function function_2f16cef6(str_rob) {
   if(isPlayer(self)) {
-    if(self zm_utility::function_10df0b9c(var_ee6bcd51)) {
-      self playrenderoverridebundle(var_ee6bcd51);
+    if(self zm_utility::function_10df0b9c(str_rob)) {
+      self playrenderoverridebundle(str_rob);
     }
 
-    self zm_utility::function_8065ace2(var_ee6bcd51);
+    self zm_utility::function_8065ace2(str_rob);
     return;
   }
 
-  self playrenderoverridebundle(var_ee6bcd51);
+  self playrenderoverridebundle(str_rob);
 }
 
 function private function_1807e3d(localclientnum, is_upgraded) {

@@ -749,8 +749,8 @@ function_b475223e(weapon) {
   }
 }
 
-function_7d1739b8(var_201c5b1f) {
-  assert(var_201c5b1f == #"round_reset");
+function_7d1739b8(notify_hash) {
+  assert(notify_hash == #"round_reset");
 
   foreach(player in getplayers()) {
     player function_892bdee2();

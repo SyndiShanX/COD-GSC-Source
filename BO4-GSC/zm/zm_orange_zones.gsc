@@ -332,7 +332,7 @@ function_8e0b371() {
 
   while(true) {
     if(isalive(self)) {
-      str_location = function_ab7f70b9(self);
+      str_location = get_location_string(self);
       self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
@@ -342,7 +342,7 @@ function_8e0b371() {
   }
 }
 
-function_ab7f70b9(e_player, str_zone) {
+get_location_string(e_player, str_zone) {
   if(isDefined(e_player)) {
     str_zone = e_player zm_zonemgr::get_player_zone();
   }
@@ -497,11 +497,11 @@ function_f7a190a8(str_wait_flag, var_ab660f9a, str_location, var_39acfdda) {
     wait var_ab660f9a;
   }
 
-  for(var_33625d75 = function_ab7f70b9(self); var_33625d75 !== str_location; var_33625d75 = function_ab7f70b9(self)) {
+  for(var_33625d75 = get_location_string(self); var_33625d75 !== str_location; var_33625d75 = get_location_string(self)) {
     wait 0.5;
   }
 
-  for(var_33625d75 = function_ab7f70b9(self); var_33625d75 === str_location; var_33625d75 = function_ab7f70b9(self)) {
+  for(var_33625d75 = get_location_string(self); var_33625d75 === str_location; var_33625d75 = get_location_string(self)) {
     wait 0.5;
   }
 
@@ -535,7 +535,7 @@ function_9d1d7efd() {
       a_players = arraycombine(a_players, zm_zonemgr::get_players_in_zone(zone, 1), 0, 0);
     }
 
-    if(a_players.size > 0 && level.pablo_npc.var_f75b1f16.size < 1) {
+    if(a_players.size > 0 && level.pablo_npc.a_n_interacts.size < 1) {
       if(a_players[0] zm_audio::can_speak() && !level flag::get(#"hell_on_earth")) {
         player = array::random(a_players);
         player thread zm_orange_util::function_51b752a9(#"hash_14a884c0dda265b2", -1, 0, 1);

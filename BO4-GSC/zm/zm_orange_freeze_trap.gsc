@@ -37,7 +37,7 @@ function_e62e184a() {
   s_trap._trap_type = "freeze";
   s_trap.e_volume = getent(s_trap.target, "targetname");
   s_trap.e_volume._trap_type = "freeze";
-  s_trap.var_28ea1870 = struct::get_array(s_trap.target3, "targetname");
+  s_trap.a_s_trap_fx = struct::get_array(s_trap.target3, "targetname");
   s_trap.a_s_buttons = struct::get_array(s_trap.target2, "targetname");
   s_trap.a_e_lights = getEntArray(s_trap.target4, "targetname");
   s_trap.a_s_panels = struct::get_array(s_trap.target5, "targetname");

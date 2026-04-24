@@ -224,7 +224,7 @@ function_e0bf989(planner, params) {
 
   altar = params.altar[#"__unsafe__"][#"altar"];
 
-  if(!isDefined(altar) || altar.var_3468124.var_2977c27 != "on" || function_d6d5e252(params.bots[0], altar)) {
+  if(!isDefined(altar) || altar.s_vapor_altar.var_2977c27 != "on" || function_d6d5e252(params.bots[0], altar)) {
     params.bots[0] bot::clear_interact();
     return 2;
   }
@@ -253,7 +253,7 @@ function_14c67eb3(planner, constants) {
     if(isDefined(var_509f4558)) {
       altar = var_509f4558[#"__unsafe__"][#"altar"];
 
-      if(altar.var_3468124.var_2977c27 != "on") {
+      if(altar.s_vapor_altar.var_2977c27 != "on") {
         continue;
       }
 

@@ -111,15 +111,15 @@ function function_2c8aac6() {
   }
 
   if(player.pers[#"teameliminatedtime"]) {
-    var_c06441ec = max(gettime() - self.pers[#"teameliminatedtime"], 0);
+    ui_icon_weapon_t10_me_p30_cleaver_cartoon_dfx_preview_flipbook = max(gettime() - self.pers[#"teameliminatedtime"], 0);
   } else {
-    var_c06441ec = 0;
+    ui_icon_weapon_t10_me_p30_cleaver_cartoon_dfx_preview_flipbook = 0;
   }
 
   var_3e32dc53 = 0;
 
   if(isDefined(self.pers[#"hash_150795bee4d46ce4"])) {
-    var_3e32dc53 = max(gettime() - self.pers[#"hash_150795bee4d46ce4"] - var_c06441ec, 0);
+    var_3e32dc53 = max(gettime() - self.pers[#"hash_150795bee4d46ce4"] - ui_icon_weapon_t10_me_p30_cleaver_cartoon_dfx_preview_flipbook, 0);
   }
 
   player contracts::function_78083139();

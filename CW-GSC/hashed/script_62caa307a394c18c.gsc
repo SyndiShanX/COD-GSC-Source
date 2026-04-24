@@ -210,7 +210,7 @@ function function_793d38f() {
     for(i = 0; i < level.var_cc43c151.size; i++) {
       index = (level.var_536f1a3 - i + level.var_cc43c151.size - 1) % level.var_cc43c151.size;
       debug_struct = level.var_cc43c151[index];
-      string = debug_struct.timestamp + "<dev string:x384>" + "<dev string:x35f>" + debug_struct.attacker + "<dev string:x38b>" + "<dev string:x391>" + "<dev string:x365>" + debug_struct.damage + "<dev string:x39c>" + debug_struct.var_d036befe + "<dev string:x38b>" + "<dev string:x3a2>" + var_92abc4e4[debug_struct.element] + function_9e72a96(debug_struct.element) + "<dev string:x38b>" + "<dev string:x3a7>" + "<dev string:x36b>" + debug_struct.entity;
+      string = debug_struct.timestamp + "<dev string:x384>" + "<dev string:x35f>" + debug_struct.attacker + "<dev string:x38b>" + "<dev string:x391>" + "<dev string:x365>" + debug_struct.damage + "<dev string:x39c>" + debug_struct.var_d036befe + "<dev string:x38b>" + "<dev string:x3a2>" + var_92abc4e4[debug_struct.element] + hashtostring(debug_struct.element) + "<dev string:x38b>" + "<dev string:x3a7>" + "<dev string:x36b>" + debug_struct.entity;
       debug2dtext((105, offset * 0.85, 0), string, (1, 1, 1), undefined, i == 0 ? (0.2, 0.2, 0.2) : (0.1, 0.1, 0.1), 0.9, 0.85);
       offset -= 22;
     }
@@ -219,7 +219,7 @@ function function_793d38f() {
 
 function function_8666eb93(damage, var_d036befe, element, attacker, entity) {
   level.var_cc43c151[level.var_536f1a3] = {
-    #damage: damage, #var_d036befe: var_d036befe, #element: element, #attacker: isDefined(attacker) ? isPlayer(attacker) ? "<dev string:x3b6>" + attacker getentitynumber() : isactor(attacker) ? function_9e72a96(isDefined(attacker.subarchetype) ? attacker.subarchetype : attacker.archetype) : attacker getentitynumber() : "<dev string:x3c0>", #entity: isDefined(entity) ? isPlayer(entity) ? "<dev string:x3b6>" + entity getentitynumber() : isactor(entity) ? function_9e72a96(isDefined(entity.subarchetype) ? entity.subarchetype : entity.archetype) : entity getentitynumber() : "<dev string:x3c0>", #timestamp: gettime()
+    #damage: damage, #var_d036befe: var_d036befe, #element: element, #attacker: isDefined(attacker) ? isPlayer(attacker) ? "<dev string:x3b6>" + attacker getentitynumber() : isactor(attacker) ? hashtostring(isDefined(attacker.subarchetype) ? attacker.subarchetype : attacker.archetype) : attacker getentitynumber() : "<dev string:x3c0>", #entity: isDefined(entity) ? isPlayer(entity) ? "<dev string:x3b6>" + entity getentitynumber() : isactor(entity) ? hashtostring(isDefined(entity.subarchetype) ? entity.subarchetype : entity.archetype) : entity getentitynumber() : "<dev string:x3c0>", #timestamp: gettime()
   };
   level.var_536f1a3 = (level.var_536f1a3 + 1) % 10;
 }

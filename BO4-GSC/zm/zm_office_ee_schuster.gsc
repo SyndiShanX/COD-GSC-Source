@@ -100,8 +100,8 @@ ee_schuster_step1_cleanup(var_5ea5c94d, ended_early) {
     var_66ef9199 = struct::get_array("office_audio_log_schuster");
 
     foreach(var_9dc0380f in var_66ef9199) {
-      if(isDefined(var_9dc0380f.var_b53bedef)) {
-        array::delete_all(var_9dc0380f.var_b53bedef);
+      if(isDefined(var_9dc0380f.a_e_trigs)) {
+        array::delete_all(var_9dc0380f.a_e_trigs);
       }
     }
   }
@@ -114,10 +114,10 @@ function_84471080(var_9dc0380f, e_player) {
 }
 
 function_488e39dc() {
-  self.var_b53bedef = getEntArray(self.target, "targetname");
+  self.a_e_trigs = getEntArray(self.target, "targetname");
 
-  foreach(e_trig in self.var_b53bedef) {
-    e_trig.var_6a633cb2 = self;
+  foreach(e_trig in self.a_e_trigs) {
+    e_trig.s_audio_log = self;
 
     if(e_trig.classname == "trigger_use_touch_new") {
       e_trig thread function_20b4f09a();
@@ -134,17 +134,17 @@ function_20b4f09a() {
   self setcursorhint("HINT_NOICON");
   self sethintstring("");
   s_notify = self waittill(#"trigger");
-  self.var_6a633cb2 thread function_8c80503();
+  self.s_audio_log thread function_8c80503();
 }
 
 function_938d4207() {
   self endon(#"death");
   s_notify = self waittill(#"damage");
-  self.var_6a633cb2 thread function_8c80503();
+  self.s_audio_log thread function_8c80503();
 }
 
 function_8c80503() {
-  array::delete_all(self.var_b53bedef);
+  array::delete_all(self.a_e_trigs);
 
   switch (self.var_614bfc5c) {
     case 0:

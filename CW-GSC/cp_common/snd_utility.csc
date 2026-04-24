@@ -276,7 +276,7 @@ function function_783b69(s, wrap) {
       str = "<dev string:x99>";
     }
 
-    s = function_9e72a96(s);
+    s = hashtostring(s);
   }
 
   str += wrap + s + wrap;
@@ -1196,7 +1196,7 @@ function function_cc5643b5(str) {
 
 function function_3626f311(hex) {
   hashvalue = function_35dccf3f(hex);
-  stringvalue = function_9e72a96(hashvalue);
+  stringvalue = hashtostring(hashvalue);
   return stringvalue;
 }
 

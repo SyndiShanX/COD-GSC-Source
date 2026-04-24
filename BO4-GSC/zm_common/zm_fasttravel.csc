@@ -147,8 +147,8 @@ fasttravel_start_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
   if(self != function_5c10bd79(localclientnum)) {
     if(newval == 1) {
-      var_1d1bbd52 = struct::get_array("fasttravel_trigger", "targetname");
-      var_4d611aa2 = arraygetclosest(self.origin, var_1d1bbd52);
+      a_s_fasttravel_locs = struct::get_array("fasttravel_trigger", "targetname");
+      var_4d611aa2 = arraygetclosest(self.origin, a_s_fasttravel_locs);
 
       if(!isDefined(var_4d611aa2)) {
         return;

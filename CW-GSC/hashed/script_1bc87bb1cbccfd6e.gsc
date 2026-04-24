@@ -85,7 +85,7 @@ function function_d7c9c129() {
       a_trace = bulletTrace(v_origin, v_origin + vectorscale(v_angles, 30000), 1, level.var_7466d419, 1, 0, self);
       var_fd92bc1 = a_trace[#"entity"];
       str_name = #"";
-      var_dfc4aab4 = 0;
+      n_team = 0;
 
       if(isDefined(var_fd92bc1)) {
         if(isalive(var_fd92bc1) && isvehicle(var_fd92bc1) && var_fd92bc1 util::is_on_side(#"allies")) {
@@ -93,7 +93,7 @@ function function_d7c9c129() {
 
           if(isDefined(var_fd92bc1.var_97de493f)) {
             str_name = var_fd92bc1.var_97de493f;
-            var_dfc4aab4 = 1;
+            n_team = 1;
           }
         } else if(var_fd92bc1 util::is_on_side(#"axis")) {
           if(isalive(var_fd92bc1)) {
@@ -108,7 +108,7 @@ function function_d7c9c129() {
         if(isDefined(v_hit) && istouching(v_hit, var_e583559a)) {
           var_2f37fbd = 1;
           str_name = #"hash_37c430482010f0d0";
-          var_dfc4aab4 = 1;
+          n_team = 1;
         }
       }
 
@@ -116,7 +116,7 @@ function function_d7c9c129() {
         level flag::set("chopper_hud_target_highlighted");
         level flag::clear("chopper_hud_delayed_reticle_clear");
         namespace_61e6d095::set_text(#"hash_10ec463196b21e75", str_name);
-        namespace_61e6d095::set_state(#"hash_10ec463196b21e75", var_dfc4aab4);
+        namespace_61e6d095::set_state(#"hash_10ec463196b21e75", n_team);
         globallogic_ui::function_9ed5232e("cp_chopper_hud.weaponOverFriendly", var_2f37fbd, 0);
         globallogic_ui::function_9ed5232e("cp_chopper_hud.weaponOverEnemy", weaponoverenemy, 0);
       } else if(level flag::get("chopper_hud_target_highlighted") && !level flag::get("chopper_hud_delayed_reticle_clear")) {

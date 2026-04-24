@@ -32,7 +32,7 @@ init() {
   var_7febdbb2 = getEntArray("trig_buy_bladepillars_to_upper_south", "targetname");
   array::thread_all(var_7febdbb2, &function_ea998c9, 0, 1);
 
-  foreach(t_crafting in level.var_4fe2f84d[#"zblueprint_trap_hellpools"]) {
+  foreach(t_crafting in level.a_t_crafting[#"zblueprint_trap_hellpools"]) {
     if(t_crafting.script_noteworthy === "danu" || t_crafting.script_noteworthy === "ra") {
       t_crafting thread function_ea998c9(1, 0);
     }
@@ -108,10 +108,10 @@ function_baf2d8eb() {
   self.scene_ents[#"prop 1"] clientfield::set("trap_switch_smoke", 1);
 }
 
-function_ea998c9(var_458e12fe = 0, var_1798e06d = 0) {
+function_ea998c9(b_unitrigger = 0, var_1798e06d = 0) {
   self endon(#"death");
 
-  if(var_458e12fe) {
+  if(b_unitrigger) {
     if(self.script_noteworthy === "danu") {
       self.script_flag = "connect_starting_area_to_danu_hallway";
     } else {
@@ -137,7 +137,7 @@ function_ea998c9(var_458e12fe = 0, var_1798e06d = 0) {
     s_switch.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
   }
 
-  if(var_458e12fe) {
+  if(b_unitrigger) {
     self.prompt_and_visibility_func = visibility_func;
     return;
   }

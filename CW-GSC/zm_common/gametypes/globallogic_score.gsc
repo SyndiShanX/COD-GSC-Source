@@ -494,7 +494,7 @@ function getpersstat(dataname) {
 
 function incpersstat(dataname, increment, record_stats, includegametype) {
   pixbeginevent(#"");
-  assert(isDefined(self.pers[increment]), function_9e72a96(increment) + "<dev string:x38>");
+  assert(isDefined(self.pers[increment]), hashtostring(increment) + "<dev string:x38>");
   self.pers[increment] += record_stats;
   self stats::function_dad108fa(increment, record_stats);
 

@@ -926,18 +926,18 @@ function function_c0f77370() {
   adddebugcommand("<dev string:x133>" + "<dev string:x17e>" + "<dev string:x8e>");
   adddebugcommand("<dev string:x183>" + "<dev string:x1ce>" + "<dev string:x8e>");
   adddebugcommand("<dev string:x1d3>" + "<dev string:x21e>" + "<dev string:x8e>");
-  adddebugcommand("<dev string:x223>" + function_9e72a96(#"talent_quickrevive") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x26d>" + function_9e72a96(#"talent_speedcola") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x2b3>" + function_9e72a96(#"talent_deadshot") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x2f7>" + function_9e72a96(#"hash_47d7a8105237c88") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x33c>" + function_9e72a96(#"talent_staminup") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x380>" + function_9e72a96(#"talent_elemental_pop") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x3c9>" + function_9e72a96(#"hash_38c08136902fd553") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x40e>" + function_9e72a96(#"talent_mulekick") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x453>" + function_9e72a96(#"talent_deathperception") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x49f>" + function_9e72a96(#"talent_phdslider") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x4e5>" + function_9e72a96(#"talent_quickrevive") + "<dev string:x8e>");
-  adddebugcommand("<dev string:x530>" + function_9e72a96(#"talent_speedcola") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x223>" + hashtostring(#"talent_quickrevive") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x26d>" + hashtostring(#"talent_speedcola") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x2b3>" + hashtostring(#"talent_deadshot") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x2f7>" + hashtostring(#"hash_47d7a8105237c88") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x33c>" + hashtostring(#"talent_staminup") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x380>" + hashtostring(#"talent_elemental_pop") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x3c9>" + hashtostring(#"hash_38c08136902fd553") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x40e>" + hashtostring(#"talent_mulekick") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x453>" + hashtostring(#"talent_deathperception") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x49f>" + hashtostring(#"talent_phdslider") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x4e5>" + hashtostring(#"talent_quickrevive") + "<dev string:x8e>");
+  adddebugcommand("<dev string:x530>" + hashtostring(#"talent_speedcola") + "<dev string:x8e>");
 }
 
 function function_1d36527d(params) {

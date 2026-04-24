@@ -2365,7 +2365,7 @@ play_sound_2d(sound) {
 }
 
 include_weapon(weapon_name, in_box) {
-  println("<dev string:x22f>" + function_9e72a96(weapon_name));
+  println("<dev string:x22f>" + hashtostring(weapon_name));
 
   if(!isDefined(in_box)) {
     in_box = 1;
@@ -4514,7 +4514,7 @@ is_jumping() {
   return !isDefined(ground_ent);
 }
 
-function_9f7fd525(var_c61df77f = "zombie_location", a_str_zones, var_a6f0ec9f = 1) {
+get_spawn_locs(var_c61df77f = "zombie_location", a_str_zones, var_a6f0ec9f = 1) {
   a_s_locs = [];
 
   if(isDefined(a_str_zones)) {

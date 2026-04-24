@@ -1102,25 +1102,25 @@ function private function_c50d8500(canpickup) {
   }
 }
 
-function private function_18f58ab2(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_18f58ab2(item, player, networkid, itemid, itemcount, itemamount, slot) {
   pickup = 0;
 
   switch (item.itementry.name) {
     case # "armor_pouch_item_t9":
-      pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "satlink_battery_large_item_t9":
-      pickup = function_a22bb806(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = function_a22bb806(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "signal_booster_item_t9":
-      pickup = function_60d1226(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = function_60d1226(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
   }
 
   return itemcount - pickup;
 }
 
-function private function_a22bb806(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_a22bb806(item, player, networkid, itemid, itemcount, itemamount, slot) {
   if(is_true(slot.var_8c9cccf2)) {
     return false;
   }
@@ -1170,23 +1170,23 @@ function private function_a22bb806(item, player, networkid, itemid, itemcount, v
   return true;
 }
 
-function private function_60d1226(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
-  var_e3483afe = var_aec6fa7f clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
+function private function_60d1226(item, player, networkid, itemid, itemcount, itemamount, slot) {
+  var_e3483afe = itemamount clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
   pickup = int(min(5 - var_e3483afe, slot));
-  var_aec6fa7f clientfield::set_player_uimodel("hudItems.uraniumCarryCount", var_e3483afe + pickup);
+  itemamount clientfield::set_player_uimodel("hudItems.uraniumCarryCount", var_e3483afe + pickup);
 
   if(pickup > 0) {
-    var_aec6fa7f playSound("fly_uranium_pickup");
+    itemamount playSound("fly_uranium_pickup");
 
-    if(!isDefined(var_aec6fa7f.var_47ad3ff0) || var_aec6fa7f.var_47ad3ff0 <= gettime()) {
-      var_aec6fa7f globallogic_audio::leader_dialog_on_player("satlinkBoosterCollect");
-      var_aec6fa7f.var_47ad3ff0 = gettime() + 15000;
+    if(!isDefined(itemamount.var_47ad3ff0) || itemamount.var_47ad3ff0 <= gettime()) {
+      itemamount globallogic_audio::leader_dialog_on_player("satlinkBoosterCollect");
+      itemamount.var_47ad3ff0 = gettime() + 15000;
     }
   }
 
-  if(!isDefined(var_aec6fa7f.var_a5f63144)) {
-    var_aec6fa7f luinotifyevent(#"hash_6b67aa04e378d681", 1, 17);
-    var_aec6fa7f.var_a5f63144 = 1;
+  if(!isDefined(itemamount.var_a5f63144)) {
+    itemamount luinotifyevent(#"hash_6b67aa04e378d681", 1, 17);
+    itemamount.var_a5f63144 = 1;
   }
 
   return pickup;
@@ -1215,17 +1215,17 @@ function function_28039abb(var_aaba141c) {
 
   if(var_aaba141c >= 0.8) {
     if(var_aaba141c >= 0.9) {
-      var_9c1ed9ea = "ftdb_endgame_high";
+      str_musicstate = "ftdb_endgame_high";
     } else {
-      var_9c1ed9ea = "ftdb_endgame_med";
+      str_musicstate = "ftdb_endgame_med";
     }
   } else {
-    var_9c1ed9ea = "ftdb_endgame_low";
+    str_musicstate = "ftdb_endgame_low";
   }
 
-  if(level.var_ada8ae30 !== var_9c1ed9ea) {
-    level thread globallogic_audio::function_6fbfba95(var_9c1ed9ea);
-    level.var_ada8ae30 = var_9c1ed9ea;
+  if(level.var_ada8ae30 !== str_musicstate) {
+    level thread globallogic_audio::function_6fbfba95(str_musicstate);
+    level.var_ada8ae30 = str_musicstate;
 
     if(!is_true(level.var_acf54eb7)) {
       level.var_acf54eb7 = 1;

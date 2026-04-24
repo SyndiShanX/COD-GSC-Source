@@ -96,7 +96,7 @@ function private function_bebdaa6b(actionparams) {
   }
 
   if(getdvarint(#"hash_7140b31f7170f18b", 0)) {
-    actionparams.debug[actionparams.debug.size] = function_9e72a96(#"hash_7140b31f7170f18b") + "<dev string:x44>";
+    actionparams.debug[actionparams.debug.size] = hashtostring(#"hash_7140b31f7170f18b") + "<dev string:x44>";
 
     return undefined;
   }

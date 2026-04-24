@@ -714,7 +714,7 @@ log_debug_event(str_event, data1, data2, data3) {
 
 function_df54cbcd() {
   if(!isvehicle(self)) {
-    log_debug_event("<dev string:xa0>", self.actor_id, function_9e72a96(self.archetype));
+    log_debug_event("<dev string:xa0>", self.actor_id, hashtostring(self.archetype));
     self thread function_fc28e798();
   }
 }
@@ -726,7 +726,7 @@ function_86b062a6(s_params) {
     str_event = "<dev string:xb9>";
   }
 
-  log_debug_event(str_event, self.actor_id, function_9e72a96(self.archetype));
+  log_debug_event(str_event, self.actor_id, hashtostring(self.archetype));
 }
 
 function_acd2ba83() {
@@ -741,7 +741,7 @@ function_84b292b4() {
 function_fc28e798() {
   self endon(#"death");
   self waittill(#"completed_emerging_into_playable_area");
-  log_debug_event("<dev string:xd7>", self.actor_id, function_9e72a96(self.archetype));
+  log_debug_event("<dev string:xd7>", self.actor_id, hashtostring(self.archetype));
 }
 
 function_4eb5a6ad() {

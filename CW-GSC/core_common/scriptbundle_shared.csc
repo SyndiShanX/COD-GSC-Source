@@ -15,7 +15,7 @@ class cscriptbundleobjectbase {
       if([[_o_scene]] - > is_testing()) {
         scriptbundle::error_on_screen(str_msg);
       } else {
-        assertmsg([[_o_scene]] - > get_type() + "<dev string:x59>" + function_9e72a96(_o_scene._str_name) + "<dev string:x5e>" + (isDefined("<dev string:x69>") ? "<dev string:x65>" + "<dev string:x69>" : isDefined(_s.name) ? "<dev string:x65>" + _s.name : "<dev string:x65>") + "<dev string:x74>" + str_msg);
+        assertmsg([[_o_scene]] - > get_type() + "<dev string:x59>" + hashtostring(_o_scene._str_name) + "<dev string:x5e>" + (isDefined("<dev string:x69>") ? "<dev string:x65>" + "<dev string:x69>" : isDefined(_s.name) ? "<dev string:x65>" + _s.name : "<dev string:x65>") + "<dev string:x74>" + str_msg);
       }
 
       thread[[_o_scene]] - > on_error();
@@ -48,7 +48,7 @@ class cscriptbundleobjectbase {
   }
 
   function log(str_msg) {
-    println([[_o_scene]] - > get_type() + "<dev string:x59>" + function_9e72a96(_o_scene._str_name) + "<dev string:x5e>" + (isDefined("<dev string:x69>") ? "<dev string:x65>" + "<dev string:x69>" : isDefined(_s.name) ? "<dev string:x65>" + _s.name : "<dev string:x65>") + "<dev string:x74>" + str_msg);
+    println([[_o_scene]] - > get_type() + "<dev string:x59>" + hashtostring(_o_scene._str_name) + "<dev string:x5e>" + (isDefined("<dev string:x69>") ? "<dev string:x65>" + "<dev string:x69>" : isDefined(_s.name) ? "<dev string:x65>" + _s.name : "<dev string:x65>") + "<dev string:x74>" + str_msg);
   }
 }
 class cscriptbundlebase {
@@ -65,7 +65,7 @@ class cscriptbundlebase {
   function error(condition, str_msg) {
     if(condition) {
       if(_testing) {} else {
-        assertmsg(_s.type + "<dev string:x59>" + function_9e72a96(_str_name) + "<dev string:x7a>" + str_msg);
+        assertmsg(_s.type + "<dev string:x59>" + hashtostring(_str_name) + "<dev string:x7a>" + str_msg);
       }
 
       thread on_error();

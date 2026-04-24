@@ -630,7 +630,7 @@ function function_6e9e7169(item) {
     weapon = function_eeddea9a(weapon, item.var_59361ab4);
   }
 
-  assert(weapon.attachments.size == attachments.size, "<dev string:x98>" + attachments.size + "<dev string:xa5>" + function_9e72a96(weapon.name) + "<dev string:xc5>" + weapon.attachments.size);
+  assert(weapon.attachments.size == attachments.size, "<dev string:x98>" + attachments.size + "<dev string:xa5>" + hashtostring(weapon.name) + "<dev string:xc5>" + weapon.attachments.size);
   item.var_627c698b = weapon;
 }
 

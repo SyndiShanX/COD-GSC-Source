@@ -296,7 +296,7 @@ ww_lvl2_crafted(e_player) {
   unitrigger_stub = self.stub;
   e_player zm_weapons::weapon_take(level.var_f086136b);
   e_player thread zm_vo::function_a2bd5a0c(#"hash_ab2e19733266586", 1);
-  e_player zm_weapons::weapon_give(self.stub.blueprint.var_54a97edd);
+  e_player zm_weapons::weapon_give(self.stub.blueprint.w_result);
   wait 0.1;
   unitrigger_stub zm_crafting::reset_table();
   unitrigger_stub.prompt_and_visibility_func = &function_7aa50bb7;

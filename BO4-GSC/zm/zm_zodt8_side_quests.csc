@@ -9,7 +9,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_b45e3f05;
+#namespace zodt8_side_quests;
 
 init() {
   init_clientfields();

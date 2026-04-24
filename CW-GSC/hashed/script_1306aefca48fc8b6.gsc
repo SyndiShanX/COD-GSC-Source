@@ -559,7 +559,7 @@ function function_6a09928b(location, type) {
   model = undefined;
 
   if(isDefined(modelname)) {
-    namespace_1e25ad94::debugmsg("<dev string:x51>" + function_9e72a96(type) + "<dev string:x5d>" + modelname + "<dev string:x68>" + location.origin);
+    namespace_1e25ad94::debugmsg("<dev string:x51>" + hashtostring(type) + "<dev string:x5d>" + modelname + "<dev string:x68>" + location.origin);
   }
 
   return model;

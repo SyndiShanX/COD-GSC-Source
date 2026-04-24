@@ -117,7 +117,7 @@ function private function_531d4c52() {
     foreach(var_e925bc18, var_5eb04963 in level.weapon_position) {
       if(sessionmodeiszombiesgame() && isinarray(var_ce681ff1, var_e925bc18) || !sessionmodeiszombiesgame() && isinarray(var_eb8df6e7, var_e925bc18)) {
         circle(var_5eb04963.origin, 0.5, (1, 0, 0));
-        print3d(var_5eb04963.origin, function_9e72a96(var_e925bc18) + "<dev string:x38>" + var_5eb04963.origin, (1, 1, 1), undefined, 0.015625);
+        print3d(var_5eb04963.origin, hashtostring(var_e925bc18) + "<dev string:x38>" + var_5eb04963.origin, (1, 1, 1), undefined, 0.015625);
       }
     }
 
@@ -1685,7 +1685,7 @@ function function_d39cd2b5(var_8a4ba442 = "", str_weapon, var_cc6c0ec0 = 0, var_
         var_23f6420e = "wrist_accessories";
         break;
       default:
-        assertmsg("<dev string:x3d>" + function_9e72a96(var_c6abe208) + "<dev string:x57>" + var_8a4ba442);
+        assertmsg("<dev string:x3d>" + hashtostring(var_c6abe208) + "<dev string:x57>" + var_8a4ba442);
         break;
     }
   }

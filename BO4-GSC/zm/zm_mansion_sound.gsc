@@ -259,7 +259,7 @@ function_a3a23636() {
   while(!(isDefined(level.var_d2867f97) && level.var_d2867f97) && !level flag::get_all(array(#"knight_main_hall_stationed", #"knight_cemetery_stationed", #"knight_greenhouse_stationed"))) {
     b_play_vo = 0;
 
-    foreach(e_player in zm_vo::function_347f7d34()) {
+    foreach(e_player in zm_vo::get_valid_players()) {
       if(!isDefined(e_player)) {
         continue;
       }

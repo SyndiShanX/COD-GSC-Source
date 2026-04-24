@@ -46,7 +46,7 @@ function private function_a5ce91f1(val) {
   }
 }
 
-function function_81d670f5() {
+function using_new_transitions() {
   if(isDefined(level.var_d1455682)) {
     if(!isDefined(level.var_d1455682.finaldisplaytransition) || level.var_d1455682.finaldisplaytransition.size == 0) {
       return false;
@@ -74,7 +74,7 @@ function function_12d1f62a(outcome) {
   function_2fa975e0(util::getroundsplayed(), outcome.var_c1e98979, outcome::function_2e00fa44(outcome), #"none", outcome.team, outcome.players);
 }
 
-function function_19adc0b7(outcome) {
+function display_match_end(outcome) {
   thread globallogic_audio::function_91d557d3(outcome);
   player::function_2f80d95b(&function_3f65d5d3);
   function_e6b4f2f7(outcome);

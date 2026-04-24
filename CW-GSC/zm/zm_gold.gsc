@@ -233,11 +233,11 @@ function function_d4738f46() {
   level endon(#"end_game");
   var_f27ded04 = getent("vol_player_in_village", "targetname");
   var_417f8343 = getent("vol_player_in_firebase", "targetname");
-  var_1d1bbd52[#"village"] = struct::get_array("initial_spawn_points", "targetname");
-  var_1d1bbd52[#"firebase"] = [];
+  a_s_fasttravel_locs[#"village"] = struct::get_array("initial_spawn_points", "targetname");
+  a_s_fasttravel_locs[#"firebase"] = [];
 
   for(i = 0; i < 4; i++) {
-    var_1d1bbd52[#"firebase"][i] = struct::get("firebase_end_" + i, "targetname");
+    a_s_fasttravel_locs[#"firebase"][i] = struct::get("firebase_end_" + i, "targetname");
   }
 
   while(true) {
@@ -280,7 +280,7 @@ function function_d4738f46() {
 
           n_closest_dist = 999999999;
 
-          foreach(a_s_loc in var_1d1bbd52) {
+          foreach(a_s_loc in a_s_fasttravel_locs) {
             n_dist = distance2d(player.origin, a_s_loc[0].origin);
 
             if(n_dist < n_closest_dist) {

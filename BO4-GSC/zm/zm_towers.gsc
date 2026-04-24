@@ -305,7 +305,7 @@ function_c8ce0a17(var_404e4288, var_8dd554ee) {
 
 function_f6e12f01() {
   a_s_acid_traps = struct::get_array("s_ww_quest_acid_trap_unitrigger");
-  var_7eb95af0 = arraycopy(level.var_4fe2f84d[#"zblueprint_trap_hellpools"]);
+  var_7eb95af0 = arraycopy(level.a_t_crafting[#"zblueprint_trap_hellpools"]);
   var_7eb95af0 = array::randomize(var_7eb95af0);
 
   foreach(s_acid_trap in a_s_acid_traps) {
@@ -853,9 +853,9 @@ function_58a931ce() {
 }
 
 function_5b2f92b3() {
-  var_8011b2df = getEntArray("lore_room", "targetname");
+  a_e_lore_room = getEntArray("lore_room", "targetname");
 
-  foreach(e_door in var_8011b2df) {
+  foreach(e_door in a_e_lore_room) {
     e_door delete();
   }
 

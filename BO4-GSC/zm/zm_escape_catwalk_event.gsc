@@ -227,8 +227,8 @@ function_40312eda(mdl_sparks, mdl_gate) {
   mdl_sparks delete();
 }
 
-function_1b943b6c(var_5213b44c) {
-  a_spots = struct::get_array(var_5213b44c, "catwalk_spawner");
+function_1b943b6c(str_catwalk_spawner) {
+  a_spots = struct::get_array(str_catwalk_spawner, "catwalk_spawner");
 
   if(a_spots.size > 0) {
     foreach(s_spot in a_spots) {

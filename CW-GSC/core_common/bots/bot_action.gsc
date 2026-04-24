@@ -236,7 +236,7 @@ function private function_9e181b0f() {
     if(!isDefined(endtime) || endtime > gettime()) {
       params = self.bot.var_e6a1f475;
 
-      record3dtext("<dev string:x38>" + function_9e72a96(params.name) + "<dev string:x3e>", self.origin, (1, 0, 1), "<dev string:x4a>", self, 0.5);
+      record3dtext("<dev string:x38>" + hashtostring(params.name) + "<dev string:x3e>", self.origin, (1, 0, 1), "<dev string:x4a>", self, 0.5);
 
       if(isDefined(params.weapon)) {
         clipammo = self getweaponammoclip(params.weapon);
@@ -320,10 +320,10 @@ function private weight_actions(&paramslist) {
         }
       }
 
-      record3dtext(headerstr + function_9e72a96(actionparams.name) + "<dev string:x9f>" + recordweight, self.origin, color, "<dev string:x4a>", self, 0.5);
+      record3dtext(headerstr + hashtostring(actionparams.name) + "<dev string:x9f>" + recordweight, self.origin, color, "<dev string:x4a>", self, 0.5);
 
       foreach(entry in actionparams.debug) {
-        record3dtext("<dev string:xa5>" + function_9e72a96(entry), self.origin, color, "<dev string:x4a>", self, 0.5);
+        record3dtext("<dev string:xa5>" + hashtostring(entry), self.origin, color, "<dev string:x4a>", self, 0.5);
       }
     }
   }

@@ -66,11 +66,11 @@ function private on_player_loadout() {
   }
 }
 
-function private function_e74225a7(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_e74225a7(item, player, networkid, itemid, itemcount, itemamount, slot) {
   if(itemcount.itementry.itemtype == #"armor_shard") {
-    var_82da4e0 = int(min(slot, self.var_c52363ab - var_aec6fa7f.armorplatecount));
-    var_aec6fa7f.armorplatecount += var_82da4e0;
-    var_aec6fa7f clientfield::set_player_uimodel("hudItems.armorPlateCount", var_aec6fa7f.armorplatecount);
+    var_82da4e0 = int(min(slot, self.var_c52363ab - itemamount.armorplatecount));
+    itemamount.armorplatecount += var_82da4e0;
+    itemamount clientfield::set_player_uimodel("hudItems.armorPlateCount", itemamount.armorplatecount);
     return (slot - var_82da4e0);
   }
 
@@ -192,7 +192,7 @@ function private function_ce353466(last_weapon) {
     return false;
   }
 
-  if(last_weapon.isgameplayweapon || last_weapon.var_29d24e37 || last_weapon.var_9a789947 || last_weapon.isnotdroppable) {
+  if(last_weapon.isgameplayweapon || last_weapon.isvehicleturret || last_weapon.var_9a789947 || last_weapon.isnotdroppable) {
     return false;
   }
 

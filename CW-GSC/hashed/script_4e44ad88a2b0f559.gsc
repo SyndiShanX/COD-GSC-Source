@@ -309,7 +309,7 @@ function private function_b5460039(point, var_e125ba43, debugcolor) {
 
   if(self bot::should_record("<dev string:x38>")) {
     recordbox(point, (-1.5, -1.5, -1.5), (1.5, 1.5, 1.5), self.angles[1], debugcolor, "<dev string:x49>", self);
-    record3dtext(function_9e72a96(var_e125ba43), point + (0, 0, -0.75), (1, 1, 1), "<dev string:x49>", self, 0.5);
+    record3dtext(hashtostring(var_e125ba43), point + (0, 0, -0.75), (1, 1, 1), "<dev string:x49>", self, 0.5);
 
     if(isDefined(var_a3375299)) {
       recordbox(var_a3375299, (-1.5, -1.5, -1.5), (1.5, 1.5, 1.5), self.angles[1], (0.75, 0.75, 0.75), "<dev string:x49>", self);

@@ -712,7 +712,7 @@ function objective_exists(destination, var_a3b3f1b, variant) {
   }
 
   if(getdvarstring(#"hash_5dcd31d8e8a23597", "<dev string:x113>") != "<dev string:x113>") {
-    if(issubstr(getdvarstring(#"hash_5dcd31d8e8a23597", "<dev string:x113>"), function_9e72a96(var_a3b3f1b))) {
+    if(issubstr(getdvarstring(#"hash_5dcd31d8e8a23597", "<dev string:x113>"), hashtostring(var_a3b3f1b))) {
       return false;
     }
   }

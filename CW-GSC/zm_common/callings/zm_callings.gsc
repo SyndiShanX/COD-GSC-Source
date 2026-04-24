@@ -198,7 +198,7 @@ function private function_104c5d35() {
       self luinotifyevent(#"zombie_callings_notification", 4, 3, function_7b01d125(self.var_e06cb519, self.var_d0b65bbe) + 1, self.var_e06cb519 + 1, self getentitynumber());
       self stats::inc_stat(#"playercalling", #"seasons", self.var_e06cb519, #"factions", self.var_d0b65bbe, #"hash_7a54171ce10db54f", 1);
 
-      iprintln("<dev string:x38>" + function_9e72a96(var_acbd7392) + "<dev string:x54>" + function_9e72a96(self.var_d0b65bbe));
+      iprintln("<dev string:x38>" + hashtostring(var_acbd7392) + "<dev string:x54>" + hashtostring(self.var_d0b65bbe));
     }
   }
 }
@@ -213,7 +213,7 @@ function function_4368582a(var_d1017f27, n_value = 1) {
       self function_a6a40735(var_d1017f27, self.var_e06cb519, self.var_bf6f8ec3, n_target, 1);
       self luinotifyevent(#"zombie_callings_notification", 3, 2, var_d1017f27.var_de86e878, self getentitynumber());
 
-      iprintln(self.name + "<dev string:x7e>" + function_9e72a96(var_d1017f27.var_ad971622) + "<dev string:x92>" + var_d1017f27.n_xp + "<dev string:xab>");
+      iprintln(self.name + "<dev string:x7e>" + hashtostring(var_d1017f27.var_ad971622) + "<dev string:x92>" + var_d1017f27.n_xp + "<dev string:xab>");
 
       self function_104c5d35();
       uploadstats(self);
@@ -221,7 +221,7 @@ function function_4368582a(var_d1017f27, n_value = 1) {
     } else {
       progress = var_e4edaaf0 + n_value;
       target = n_target;
-      iprintln(self.name + "<dev string:x7e>" + function_9e72a96(var_d1017f27.var_ad971622) + "<dev string:xb2>" + progress + "<dev string:xc5>" + target);
+      iprintln(self.name + "<dev string:x7e>" + hashtostring(var_d1017f27.var_ad971622) + "<dev string:xb2>" + progress + "<dev string:xc5>" + target);
 
       self function_66714869(var_d1017f27, self.var_e06cb519, self.var_bf6f8ec3, n_value);
     }

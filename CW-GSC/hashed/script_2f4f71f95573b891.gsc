@@ -136,9 +136,9 @@ function private function_1e0501c8(eventstruct) {
   var_9d27f60c = getentitiesinradius(dynent.origin, 170, 15);
 
   foreach(actor in var_9d27f60c) {
-    var_dfc4aab4 = actor getteam();
+    n_team = actor getteam();
 
-    if(var_dfc4aab4 == #"axis") {
+    if(n_team == #"axis") {
       actor dodamage(1, dynent.origin, undefined, undefined, 0, "MOD_UNKNOWN", 0, undefined, undefined, var_f2f0344e);
     }
   }

@@ -427,7 +427,7 @@ function function_78083139() {
 
     if(getdvarint(#"scr_contract_debug", 0) > 0) {
       var_7b6acdb1 = var_9224acc ? "<dev string:x27a>" : "<dev string:x1e4>";
-      iprintln("<dev string:x28b>" + function_9e72a96(var_38280f2f) + "<dev string:x29a>" + delta + "<dev string:x2a9>" + var_4b67585c + "<dev string:x2ca>" + var_2de8a050 + var_7b6acdb1);
+      iprintln("<dev string:x28b>" + hashtostring(var_38280f2f) + "<dev string:x29a>" + delta + "<dev string:x2a9>" + var_4b67585c + "<dev string:x2ca>" + var_2de8a050 + var_7b6acdb1);
     }
 
     flags = player function_507247e8(var_9224acc);

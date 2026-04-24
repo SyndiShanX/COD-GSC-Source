@@ -134,14 +134,14 @@ function pap_quest_beam_start(localclientnum, oldval, newval, bnewent, binitials
   s_start = a_s_start[n_index];
   s_end = var_c2f24bc[n_index];
 
-  if(isDefined(s_start) && isDefined(s_end) && !(isDefined(s_start.mdl_start) && isDefined(s_end.var_b5d35012))) {
+  if(isDefined(s_start) && isDefined(s_end) && !(isDefined(s_start.mdl_start) && isDefined(s_end.mdl_end))) {
     v_start_origin = s_start.origin;
     var_e64db026 = s_end.origin;
     v_start_angles = vectortoangles(v_start_origin - var_e64db026);
     v_end_angles = vectortoangles(var_e64db026 - v_start_origin);
     s_start.mdl_start = util::spawn_model(fieldname, #"tag_origin", v_start_origin, v_start_angles);
-    s_end.var_b5d35012 = util::spawn_model(fieldname, #"tag_origin", var_e64db026, v_end_angles);
-    level beam::launch(s_start.mdl_start, "tag_origin", s_end.var_b5d35012, "tag_origin", "beam9_zm_platinum_pap_beam", 1);
+    s_end.mdl_end = util::spawn_model(fieldname, #"tag_origin", var_e64db026, v_end_angles);
+    level beam::launch(s_start.mdl_start, "tag_origin", s_end.mdl_end, "tag_origin", "beam9_zm_platinum_pap_beam", 1);
   }
 }
 
@@ -154,9 +154,9 @@ function function_c6f8ff7b(localclientnum, oldval, newval, bnewent, binitialsnap
   s_start = a_s_start[n_index];
   s_end = var_c2f24bc[n_index];
 
-  if(isDefined(s_start.mdl_start) && isDefined(s_end) && isDefined(s_start) && isDefined(s_end.var_b5d35012)) {
-    level beam::kill(s_start.mdl_start, "tag_origin", s_end.var_b5d35012, "tag_origin", "beam9_zm_platinum_pap_beam");
+  if(isDefined(s_start.mdl_start) && isDefined(s_end) && isDefined(s_start) && isDefined(s_end.mdl_end)) {
+    level beam::kill(s_start.mdl_start, "tag_origin", s_end.mdl_end, "tag_origin", "beam9_zm_platinum_pap_beam");
     s_start.mdl_start delete();
-    s_end.var_b5d35012 delete();
+    s_end.mdl_end delete();
   }
 }

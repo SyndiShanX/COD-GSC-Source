@@ -142,9 +142,9 @@ function function_f8c70ad7(localclientnum) {
         setsoundvolume(var_408847b6.var_41266084, 0);
         setsoundvolume(var_408847b6.var_2f3960f5, 0);
       } else if(var_ebe45f6a <= 7500) {
-        var_f9d98743 = (var_ebe45f6a - 3000) / 4500;
-        setsoundvolume(var_408847b6.var_41266084, var_f9d98743);
-        setsoundvolume(var_408847b6.var_2f3960f5, var_f9d98743);
+        n_volume = (var_ebe45f6a - 3000) / 4500;
+        setsoundvolume(var_408847b6.var_41266084, n_volume);
+        setsoundvolume(var_408847b6.var_2f3960f5, n_volume);
       } else {
         setsoundvolume(var_408847b6.var_41266084, 1);
         setsoundvolume(var_408847b6.var_2f3960f5, 1);

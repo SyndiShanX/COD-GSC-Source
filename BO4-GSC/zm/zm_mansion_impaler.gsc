@@ -51,7 +51,7 @@ init() {
   callback::on_ai_damage(&function_615d8c38);
   register_steps();
   init_flags();
-  function_c6e2a4fd();
+  init_components();
 
   if(zm_custom::function_901b751c(#"zmwonderweaponisenabled") && zm_custom::function_901b751c(#"zmpapenabled") != 2) {
     zm_sq::start(#"zm_mansion_impaler", 1);
@@ -83,7 +83,7 @@ init_flags() {
   level flag::init(#"hash_f3875ca909e696f");
 }
 
-function_c6e2a4fd() {
+init_components() {
   array::thread_all(struct::get_array("s_burn"), &function_edb1add2);
   level thread function_355450a4();
 }

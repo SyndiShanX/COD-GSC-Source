@@ -94,8 +94,8 @@ zombie_death_gib() {
   }
 }
 
-function_89e9bca5(var_df1a3385, v_origin, v_angles) {
-  w_component = zm_crafting::get_component(var_df1a3385);
+function_89e9bca5(str_component, v_origin, v_angles) {
+  w_component = zm_crafting::get_component(str_component);
   crafting_component = zm_items::spawn_item(w_component, v_origin, v_angles);
   return crafting_component;
 }
@@ -488,8 +488,8 @@ function_7d92a49c(b_disable = 1) {
 }
 
 function_b1fb2b71() {
-  if(isDefined(level.var_923e8cb4)) {
-    foreach(s_loc in level.var_923e8cb4) {
+  if(isDefined(level.a_s_respawn_locs)) {
+    foreach(s_loc in level.a_s_respawn_locs) {
       if(s_loc.script_int === self.playernum) {
         self.spectator_respawn = s_loc;
         break;
@@ -568,7 +568,7 @@ function_f1c106b(str_blocker, b_solid) {
     }
 
     if(isDefined(str_spawner)) {
-      level.var_923e8cb4 = struct::get_array(str_spawner, "targetname");
+      level.a_s_respawn_locs = struct::get_array(str_spawner, "targetname");
     }
 
     level zm_bgb_anywhere_but_here::function_886fce8f(0);
@@ -582,7 +582,7 @@ function_f1c106b(str_blocker, b_solid) {
     return;
   }
 
-  level.var_923e8cb4 = undefined;
+  level.a_s_respawn_locs = undefined;
   level zm_bgb_anywhere_but_here::function_886fce8f(1);
   function_4aea06b0(0);
   function_7d92a49c(0);
@@ -593,7 +593,7 @@ function_f1c106b(str_blocker, b_solid) {
 }
 
 function_5f310cf9() {
-  level.var_923e8cb4 = undefined;
+  level.a_s_respawn_locs = undefined;
 
   for(i = 0; i <= 3; i++) {
     switch (i) {
@@ -623,13 +623,13 @@ function_5f310cf9() {
       s_respawn.script_int = i;
       s_respawn.script_noteworthy = "player_" + i;
 
-      if(!isDefined(level.var_923e8cb4)) {
-        level.var_923e8cb4 = [];
-      } else if(!isarray(level.var_923e8cb4)) {
-        level.var_923e8cb4 = array(level.var_923e8cb4);
+      if(!isDefined(level.a_s_respawn_locs)) {
+        level.a_s_respawn_locs = [];
+      } else if(!isarray(level.a_s_respawn_locs)) {
+        level.a_s_respawn_locs = array(level.a_s_respawn_locs);
       }
 
-      level.var_923e8cb4[level.var_923e8cb4.size] = s_respawn;
+      level.a_s_respawn_locs[level.a_s_respawn_locs.size] = s_respawn;
     }
   }
 }
@@ -771,7 +771,7 @@ function_268efa09(b_active = 0) {
 
 function_dce687ca() {
   while(isDefined(self) && getdvarint(#"hash_3c4df2fe4b1618d5", 0)) {
-    draw_arrow(self.origin, anglesToForward(self.angles), (0, 1, 0), function_9e72a96(self.model));
+    draw_arrow(self.origin, anglesToForward(self.angles), (0, 1, 0), hashtostring(self.model));
     waitframe(1);
   }
 }

@@ -6,7 +6,7 @@
 #namespace namespace_e4c964e8;
 
 function private function_7b29177a() {
-  mapbundle = function_2717b55f();
+  mapbundle = getmapscriptbundle();
   var_fc0caf4 = mapbundle.var_39cc9e65;
 
   if(isDefined(var_fc0caf4)) {

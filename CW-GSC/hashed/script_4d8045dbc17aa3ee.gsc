@@ -720,7 +720,7 @@ function function_9ec06f93() {
   itemdefs = [];
 
   foreach(def in level.doa.pickups.itemdefs) {
-    def.var_88ce3439 = function_9e72a96([[def]] - > getname());
+    def.var_88ce3439 = hashtostring([[def]] - > getname());
 
     if(!isDefined(itemdefs)) {
       itemdefs = [];
@@ -1855,7 +1855,7 @@ function function_61b604bf() {
       continue;
     }
 
-    name = function_9e72a96([[def]] - > getname());
+    name = hashtostring([[def]] - > getname());
     toks = strtok(name, var_b0d28a7);
     label = var_663588d;
 
@@ -1878,7 +1878,7 @@ function function_61b604bf() {
       continue;
     }
 
-    name = function_9e72a96([[def]] - > getname());
+    name = hashtostring([[def]] - > getname());
     toks = strtok(name, var_b0d28a7);
     label = var_663588d;
 
@@ -1901,7 +1901,7 @@ function function_61b604bf() {
       continue;
     }
 
-    name = function_9e72a96([[def]] - > getname());
+    name = hashtostring([[def]] - > getname());
     toks = strtok(name, var_b0d28a7);
     label = var_663588d;
 
@@ -2183,7 +2183,7 @@ function function_598305fe() {
     text = "<dev string:x1c8>" + victim.maxhealth;
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
     y += 30;
-    text = "<dev string:x1d9>" + function_9e72a96(player1.doa.currentweaponname);
+    text = "<dev string:x1d9>" + hashtostring(player1.doa.currentweaponname);
     namespace_1e25ad94::function_70e370a(x, y, text, (1, 1, 1), 1, 1, 0.05);
     y += 20;
     text = "<dev string:x1ed>" + victim.var_3d8e0261 + "<dev string:x20a>" + victim.var_cb0de45e;

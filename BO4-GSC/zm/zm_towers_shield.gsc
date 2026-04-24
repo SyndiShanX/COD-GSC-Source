@@ -150,7 +150,7 @@ function_28f576a9(player) {
   }
 
   if(player hasweapon(w_shield_upgraded)) {
-    if(isDefined(self.blueprint.var_54a97edd.isriotshield) && self.blueprint.var_54a97edd.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
+    if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
       self.cost = self zm_crafting::function_ceac3bf9(player, 1);
       self.hint_string = zm_utility::function_d6046228(#"hash_4b00caebf5058f14", #"hash_5db3ede8aef13738");
       _shad_turret_debug_server = 1;
@@ -204,7 +204,7 @@ function_22d79d55(player) {
   }
 
   if(player zm_crafting::function_2d53738e(w_shield_upgraded)) {
-    if(isDefined(self.stub.blueprint.var_54a97edd.isriotshield) && self.stub.blueprint.var_54a97edd.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
+    if(isDefined(self.stub.blueprint.w_result.isriotshield) && self.stub.blueprint.w_result.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
       var_d97673ff = 1;
     } else {
       return false;

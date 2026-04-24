@@ -39,33 +39,33 @@ function private on_begin(var_8a72a00b, var_49d8a02c, var_325ff213, var_dd2fad64
   }
 
   if(isDefined(var_873a1b70)) {
-    if(!isDefined(level.var_692c062e)) {
-      level.var_692c062e = [];
-    } else if(!isarray(level.var_692c062e)) {
-      level.var_692c062e = array(level.var_692c062e);
+    if(!isDefined(level.a_w_allowed)) {
+      level.a_w_allowed = [];
+    } else if(!isarray(level.a_w_allowed)) {
+      level.a_w_allowed = array(level.a_w_allowed);
     }
 
-    level.var_692c062e[level.var_692c062e.size] = getweapon(var_873a1b70);
+    level.a_w_allowed[level.a_w_allowed.size] = getweapon(var_873a1b70);
   }
 
   if(isDefined(var_957937ee)) {
-    if(!isDefined(level.var_692c062e)) {
-      level.var_692c062e = [];
-    } else if(!isarray(level.var_692c062e)) {
-      level.var_692c062e = array(level.var_692c062e);
+    if(!isDefined(level.a_w_allowed)) {
+      level.a_w_allowed = [];
+    } else if(!isarray(level.a_w_allowed)) {
+      level.a_w_allowed = array(level.a_w_allowed);
     }
 
-    level.var_692c062e[level.var_692c062e.size] = getweapon(var_957937ee);
+    level.a_w_allowed[level.a_w_allowed.size] = getweapon(var_957937ee);
   }
 
   if(isDefined(var_9c56c5a9)) {
-    if(!isDefined(level.var_692c062e)) {
-      level.var_692c062e = [];
-    } else if(!isarray(level.var_692c062e)) {
-      level.var_692c062e = array(level.var_692c062e);
+    if(!isDefined(level.a_w_allowed)) {
+      level.a_w_allowed = [];
+    } else if(!isarray(level.a_w_allowed)) {
+      level.a_w_allowed = array(level.a_w_allowed);
     }
 
-    level.var_692c062e[level.var_692c062e.size] = getweapon(var_9c56c5a9);
+    level.a_w_allowed[level.a_w_allowed.size] = getweapon(var_9c56c5a9);
   }
 
   callback::on_ai_killed(&on_ai_killed);
@@ -111,7 +111,7 @@ function private on_ai_killed(params) {
   w_root = zm_weapons::function_386dacbc(params.weapon);
   b_valid_weapon = 0;
 
-  if(isinarray(level.var_692c062e, w_root)) {
+  if(isinarray(level.a_w_allowed, w_root)) {
     b_valid_weapon = 1;
   } else if(w_root === getweapon(#"zhield_zpear_dw") && (params.smeansofdeath === "MOD_PROJECTILE" || params.smeansofdeath === "MOD_PROJECTILE_SPLASH")) {
     b_valid_weapon = 1;
@@ -135,7 +135,7 @@ function is_active(var_a75461b4) {
   s_challenge = zm_trial::function_a36e8c38(#"hash_53a5a75770adb550");
 
   if(isDefined(var_a75461b4)) {
-    if(isDefined(s_challenge) && isarray(level.var_692c062e) && isinarray(level.var_692c062e, var_a75461b4)) {
+    if(isDefined(s_challenge) && isarray(level.a_w_allowed) && isinarray(level.a_w_allowed, var_a75461b4)) {
       return true;
     }
 

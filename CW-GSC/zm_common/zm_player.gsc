@@ -1072,14 +1072,14 @@ function player_prevent_damage(einflictor, eattacker, idamage, idflags, smeansof
   }
 
   if(isai(vdir) && self.ignoreme && !is_true(var_3d9a5390)) {
-    println("<dev string:x193>" + function_9e72a96(vdir.archetype) + "<dev string:x1cd>" + psoffsettime);
+    println("<dev string:x193>" + hashtostring(vdir.archetype) + "<dev string:x1cd>" + psoffsettime);
   }
 
   if(is_true(self.bgb_in_plain_sight_active)) {
     str = "<dev string:x1d7>";
 
     if(isai(vdir)) {
-      str += function_9e72a96(vdir.archetype);
+      str += hashtostring(vdir.archetype);
     } else if(isDefined(vdir)) {
       str = str + "<dev string:x207>" + vdir getentitynumber();
     } else {

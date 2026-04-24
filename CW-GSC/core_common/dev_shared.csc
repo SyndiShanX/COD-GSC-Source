@@ -74,7 +74,7 @@ function function_f3346975() {
   bodies = getallcharacterbodies(mode);
 
   foreach(playerbodytype in bodies) {
-    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x255>" + function_9e72a96(getcharacterassetname(playerbodytype, mode));
+    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x255>" + hashtostring(getcharacterassetname(playerbodytype, mode));
     add_devgui_cmd(0, "<dev string:x25a>" + body_name + "<dev string:x27d>", "<dev string:x289>" + playerbodytype + "<dev string:x29d>");
     outfitcount = function_d299ef16(playerbodytype, mode);
 
@@ -83,7 +83,7 @@ function function_f3346975() {
 
       if(var_9cf37283.valid) {
         var_346660ac = function_2c6232e5(makelocalizedstring(var_9cf37283.var_74996050));
-        var_1bf829f2 = outfitindex + "<dev string:x255>" + var_346660ac + "<dev string:x255>" + function_9e72a96(var_9cf37283.namehash) + "<dev string:x2a3>" + outfitindex;
+        var_1bf829f2 = outfitindex + "<dev string:x255>" + var_346660ac + "<dev string:x255>" + hashtostring(var_9cf37283.namehash) + "<dev string:x2a3>" + outfitindex;
         add_devgui_cmd(0, "<dev string:x25a>" + body_name + "<dev string:x2a8>" + var_1bf829f2, "<dev string:x289>" + playerbodytype + "<dev string:x2ad>" + outfitindex);
       }
     }

@@ -712,10 +712,10 @@ function_ffc00d17(var_10372151) {
   return var_30cf8a0a && b_lookat_check;
 }
 
-function_9215e9d(var_1e99deea, var_711067a4) {
+function_9215e9d(t_unitrigger, var_711067a4) {
   self endon(#"left_trigger", #"death");
-  var_1e99deea endon(#"death");
-  self thread function_123c7022(var_1e99deea, var_711067a4);
+  t_unitrigger endon(#"death");
+  self thread function_123c7022(t_unitrigger, var_711067a4);
   n_time = 1;
 
   if(isDefined(var_711067a4.script_float)) {
@@ -727,15 +727,15 @@ function_9215e9d(var_1e99deea, var_711067a4) {
   return true;
 }
 
-function_123c7022(var_1e99deea, var_711067a4) {
+function_123c7022(t_unitrigger, var_711067a4) {
   self endon(#"hash_36de4efbe292709d", #"death");
-  var_1e99deea endon(#"death");
+  t_unitrigger endon(#"death");
 
   do {
     wait 0.2;
     var_6e84d29e = self function_ffc00d17(var_711067a4);
   }
-  while(self istouching(var_1e99deea) && var_6e84d29e);
+  while(self istouching(t_unitrigger) && var_6e84d29e);
 
   self notify(#"left_trigger");
 }
@@ -916,7 +916,7 @@ function_70d155c5() {
     var_16c042b8 = self zm_perks::function_b2cba45a();
 
     if(isDefined(var_16c042b8)) {
-      iprintlnbold("<dev string:xd7>" + function_9e72a96(var_16c042b8));
+      iprintlnbold("<dev string:xd7>" + hashtostring(var_16c042b8));
     }
   }
 }
@@ -933,7 +933,7 @@ function_1704df5e() {
   var_c2415b72 = zm_weapons::function_93cd8e76(var_94899c49);
   var_c2415b72 = zm_weapons::get_base_weapon(var_c2415b72);
 
-  iprintlnbold("<dev string:x67>" + self getentnum() + "<dev string:xec>" + function_9e72a96(var_c2415b72.name));
+  iprintlnbold("<dev string:x67>" + self getentnum() + "<dev string:xec>" + hashtostring(var_c2415b72.name));
 
   while(self function_1ec86044(var_c2415b72) || isDefined(level.pap_machine) && level.pap_machine.pack_player === self || self scene::function_c935c42()) {
     if(isDefined(level.pap_machine) && level.pap_machine.pack_player === self) {
@@ -1051,10 +1051,10 @@ function_eb269563() {
   }
 }
 
-function_e92918f6(var_1e99deea, s_lookat) {
+function_e92918f6(t_unitrigger, s_lookat) {
   self endoncallback(&function_dc123817, #"left_trigger", #"death");
   self.var_4522314f = 1;
-  self thread function_da604bc0(var_1e99deea, s_lookat.origin);
+  self thread function_da604bc0(t_unitrigger, s_lookat.origin);
   wait 30;
 
   if(level flag::get(#"hash_11cbce4fcf9f3aec")) {
@@ -1096,7 +1096,7 @@ function_dc123817(str_notify) {
   }
 }
 
-function_da604bc0(var_1e99deea, var_1611e2c0) {
+function_da604bc0(t_unitrigger, var_1611e2c0) {
   self endon(#"hash_36de4efbe292709d", #"death");
 
   iprintlnbold("<dev string:x15f>" + self.playernum);
@@ -1104,15 +1104,15 @@ function_da604bc0(var_1e99deea, var_1611e2c0) {
   do {
     wait 0.2;
   }
-  while(function_533ca98d(var_1e99deea, var_1611e2c0));
+  while(function_533ca98d(t_unitrigger, var_1611e2c0));
 
   self notify(#"left_trigger");
 
   iprintlnbold("<dev string:x176>" + self.playernum);
 }
 
-function_533ca98d(var_1e99deea, var_1611e2c0) {
-  return isDefined(var_1e99deea) && self istouching(var_1e99deea) && self util::is_looking_at(var_1611e2c0, 0.89);
+function_533ca98d(t_unitrigger, var_1611e2c0) {
+  return isDefined(t_unitrigger) && self istouching(t_unitrigger) && self util::is_looking_at(var_1611e2c0, 0.89);
 }
 
 function_c9854faa() {

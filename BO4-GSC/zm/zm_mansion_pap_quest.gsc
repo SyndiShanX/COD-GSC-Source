@@ -92,7 +92,7 @@ init(var_5ea5c94d) {
   level.var_a46e88e5.var_db9b80c9 = "greenhouse";
   level.a_str_zones = array::randomize(array("main_hall", "library", "greenhouse"));
   level.var_28edc152 = array("cemetery", "garden");
-  level.var_c25e1f9c = array(0, 1);
+  level.a_n_index = array(0, 1);
   level thread setup_clocks();
 
   if(!zm_utility::is_standard()) {
@@ -297,7 +297,7 @@ function_9ce2b677(var_f0e6c7a2, ent) {
       var_47323b73.var_1ed09409 = function_4e8b75e0();
     }
 
-    var_47323b73.str_hint = function_639c87e1(var_47323b73.var_1ed09409);
+    var_47323b73.str_hint = get_key_location(var_47323b73.var_1ed09409);
     var_47323b73.mdl_key = level.var_eab529d7;
     var_47323b73.s_loc = struct::get("key_main_hall_loc");
     var_47323b73.var_e62bb9d2 = getent("gazing_stone_main_hall", "targetname");
@@ -351,7 +351,7 @@ function_2c902b77(var_f0e6c7a2, ent) {
     if(var_47323b73.var_1ed09409 === "trophy") {
       var_47323b73.str_hint = array::random(array("bull_loc", "dl_loc"));
     } else {
-      var_47323b73.str_hint = function_639c87e1(var_47323b73.var_1ed09409);
+      var_47323b73.str_hint = get_key_location(var_47323b73.var_1ed09409);
     }
 
     var_47323b73.mdl_key = level.var_192555d1;
@@ -408,7 +408,7 @@ function_da937c94(var_f0e6c7a2, ent) {
     if(var_47323b73.var_1ed09409 === "trophy") {
       var_47323b73.str_hint = array::random(array("monkey_loc", "dl_loc"));
     } else {
-      var_47323b73.str_hint = function_639c87e1(var_47323b73.var_1ed09409);
+      var_47323b73.str_hint = get_key_location(var_47323b73.var_1ed09409);
     }
 
     var_47323b73.mdl_key = level.var_a46e88e5;
@@ -1089,8 +1089,8 @@ function_212eae28(str_model) {
 }
 
 function_4e8b75e0() {
-  n_random = array::random(level.var_c25e1f9c);
-  arrayremovevalue(level.var_c25e1f9c, n_random);
+  n_random = array::random(level.a_n_index);
+  arrayremovevalue(level.a_n_index, n_random);
 
   switch (n_random) {
     case 0:
@@ -1104,7 +1104,7 @@ function_4e8b75e0() {
   return str_type;
 }
 
-function_639c87e1(str_type) {
+get_key_location(str_type) {
   switch (str_type) {
     case # "nos":
       str_loc = array::random(level.var_28edc152);
@@ -1944,10 +1944,10 @@ function_d93fdc8f() {
   level endon(#"end_game");
   self endon(#"death");
   wait 1;
-  var_844489a = self mansion_util::_print_player_out();
+  s_player_index = self mansion_util::_print_player_out();
 
-  if(isDefined(var_844489a)) {
-    n_player_index = var_844489a.n_index;
+  if(isDefined(s_player_index)) {
+    n_player_index = s_player_index.n_index;
 
     switch (n_player_index) {
       case 10:
@@ -1969,8 +1969,8 @@ function_d93fdc8f() {
     wait 1;
     self function_4e550169(str_vo);
 
-    if(isDefined(var_844489a)) {
-      e_player = var_844489a.e_player;
+    if(isDefined(s_player_index)) {
+      e_player = s_player_index.e_player;
 
       if(zm_utility::is_player_valid(e_player) && !(isDefined(e_player.var_85028f37) && e_player.var_85028f37)) {
         e_player.var_85028f37 = 1;
@@ -1984,10 +1984,10 @@ function_d93fdc8f() {
 function_679cf27a() {
   level endon(#"end_game");
   self endon(#"death");
-  var_844489a = self mansion_util::_print_player_out();
+  s_player_index = self mansion_util::_print_player_out();
 
-  if(isDefined(var_844489a)) {
-    n_player_index = var_844489a.n_index;
+  if(isDefined(s_player_index)) {
+    n_player_index = s_player_index.n_index;
 
     switch (n_player_index) {
       case 10:
@@ -2012,10 +2012,10 @@ function_7c045e39() {
   level endon(#"end_game");
   self endon(#"death");
   level waittill(#"hash_5927e3d93a01cc61");
-  var_844489a = self mansion_util::_print_player_out();
+  s_player_index = self mansion_util::_print_player_out();
 
-  if(isDefined(var_844489a)) {
-    n_player_index = var_844489a.n_index;
+  if(isDefined(s_player_index)) {
+    n_player_index = s_player_index.n_index;
 
     switch (n_player_index) {
       case 10:
@@ -2042,10 +2042,10 @@ function_52980a22() {
 
   while(true) {
     self waittill(#"ghost_lost");
-    var_844489a = self mansion_util::_print_player_out();
+    s_player_index = self mansion_util::_print_player_out();
 
-    if(isDefined(var_844489a)) {
-      n_player_index = var_844489a.n_index;
+    if(isDefined(s_player_index)) {
+      n_player_index = s_player_index.n_index;
 
       switch (n_player_index) {
         case 10:
@@ -2398,10 +2398,10 @@ function_b5697137() {
   level endon(#"end_game");
   self endon(#"death");
   level waittill(#"ghostleading_halfway");
-  var_844489a = self mansion_util::_print_player_out();
+  s_player_index = self mansion_util::_print_player_out();
 
-  if(isDefined(var_844489a)) {
-    n_player_index = var_844489a.n_index;
+  if(isDefined(s_player_index)) {
+    n_player_index = s_player_index.n_index;
 
     switch (n_player_index) {
       case 10:
@@ -2437,10 +2437,10 @@ function_9874e47() {
   level endon(#"end_game");
   self endon(#"death", #"hash_10580fbe74622186");
   level waittill(#"hash_5ed8f262549ea460");
-  var_844489a = self mansion_util::_print_player_out();
+  s_player_index = self mansion_util::_print_player_out();
 
-  if(isDefined(var_844489a)) {
-    n_player_index = var_844489a.n_index;
+  if(isDefined(s_player_index)) {
+    n_player_index = s_player_index.n_index;
 
     switch (n_player_index) {
       case 10:
@@ -2464,10 +2464,10 @@ function_9874e47() {
 function_58cb08ba() {
   level endon(#"end_game");
   self endon(#"death");
-  var_844489a = self mansion_util::_print_player_out();
+  s_player_index = self mansion_util::_print_player_out();
 
-  if(isDefined(var_844489a)) {
-    n_player_index = var_844489a.n_index;
+  if(isDefined(s_player_index)) {
+    n_player_index = s_player_index.n_index;
 
     switch (n_player_index) {
       case 10:
@@ -2581,12 +2581,12 @@ function_d29a3f81() {
 function_e8355769(vol_defend, str_flag) {
   level endon(#"end_game");
   wait 3;
-  var_ef6d594a = mansion_util::function_91dfc9d4(vol_defend);
+  jup_emblem_b5012_5 = mansion_util::function_91dfc9d4(vol_defend);
 
   while(!level flag::get(str_flag)) {
     a_players_touching = mansion_util::function_91dfc9d4(vol_defend);
 
-    foreach(var_b930e62d in array::remove_undefined(var_ef6d594a)) {
+    foreach(var_b930e62d in array::remove_undefined(jup_emblem_b5012_5)) {
       if(!isinarray(a_players_touching, var_b930e62d)) {
         var_b930e62d.var_e6abb74b = 1;
       }
@@ -2595,7 +2595,7 @@ function_e8355769(vol_defend, str_flag) {
     wait 1;
   }
 
-  foreach(e_starting in array::remove_undefined(var_ef6d594a)) {
+  foreach(e_starting in array::remove_undefined(jup_emblem_b5012_5)) {
     if(!(isDefined(e_starting.var_e6abb74b) && e_starting.var_e6abb74b)) {
       e_starting notify(#"hash_305ca852d958a7e1");
     }
@@ -3067,7 +3067,7 @@ function_eecfbd25() {
 }
 
 function_f728c266() {
-  switch (function_9e72a96(self.id)) {
+  switch (hashtostring(self.id)) {
     case # "sc_mh1":
       break;
     case # "sc_mh2":

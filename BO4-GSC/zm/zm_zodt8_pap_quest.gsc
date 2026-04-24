@@ -244,9 +244,9 @@ function_668e3f89(e_player) {
     return b_can_use;
   }
 
-  var_d679d54f = !isDefined(level.s_pap_quest.var_69e563d);
+  var_d679d54f = !isDefined(level.s_pap_quest.s_last_loc);
   var_7cee75e6 = level.s_pap_quest.a_s_locations[level.s_pap_quest.var_4ee2e2ab].unitrigger_stub === self.stub;
-  var_cd46bf62 = isDefined(level.s_pap_quest.var_69e563d) && level.s_pap_quest.var_69e563d.unitrigger_stub === self.stub;
+  var_cd46bf62 = isDefined(level.s_pap_quest.s_last_loc) && level.s_pap_quest.s_last_loc.unitrigger_stub === self.stub;
 
   if(!(isDefined(level.var_efaaea43) && level.var_efaaea43) && var_7cee75e6 || isDefined(level.var_a5340531) && level.var_a5340531 && var_d679d54f || isDefined(level.var_a5340531) && level.var_a5340531 && var_7cee75e6 || isDefined(level.var_a8626e72) && level.var_a8626e72 && var_cd46bf62 || isDefined(level.var_fea7bdae) && level.var_fea7bdae || level flag::exists(#"hash_598d4e6af1cf4c39") && level flag::get(#"hash_598d4e6af1cf4c39") || zm_custom::function_901b751c(#"zmpapenabled") == 2) {
     return 0;
@@ -342,7 +342,7 @@ function_306b4f35(b_initial = 0) {
     level notify(#"hash_14c80c5abb28b07b");
     function_ef3c219a();
     var_3eee8fb4 = level.s_pap_quest.var_4ee2e2ab;
-    level.s_pap_quest.var_69e563d = level.s_pap_quest.a_s_locations[var_3eee8fb4];
+    level.s_pap_quest.s_last_loc = level.s_pap_quest.a_s_locations[var_3eee8fb4];
 
     if(!isDefined(level.var_dd2ac1f3)) {
       level.var_dd2ac1f3 = [];

@@ -113,17 +113,17 @@ function private function_d45dd62(localclientnum, b_state, currentplayer) {
 
 function function_9b05e2c0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(self.model === #"hash_1d9e6c13811400c6" || self.model === #"hash_1d9e6b138113ff13") {
-    var_ee6bcd51 = #"hash_1a6400b20e8126bf";
+    str_rob = #"hash_1a6400b20e8126bf";
   } else {
-    var_ee6bcd51 = #"hash_4a9cb80afea6f8cb";
+    str_rob = #"hash_4a9cb80afea6f8cb";
   }
 
   if(bwastimejump) {
-    self playrenderoverridebundle(var_ee6bcd51);
+    self playrenderoverridebundle(str_rob);
     return;
   }
 
-  self stoprenderoverridebundle(var_ee6bcd51);
+  self stoprenderoverridebundle(str_rob);
 }
 
 function device_rotate(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -158,8 +158,8 @@ function device_rotate(localclientnum, oldval, newval, bnewent, binitialsnap, fi
     self.var_eb1b20d = undefined;
   }
 
-  if(isDefined(self.var_ee6bcd51) && isDefined(self)) {
-    self function_78233d29(self.var_ee6bcd51, "", "Alpha", 0);
+  if(isDefined(self.str_rob) && isDefined(self)) {
+    self function_78233d29(self.str_rob, "", "Alpha", 0);
   }
 }
 
@@ -279,20 +279,20 @@ function function_651b7e42(localclientnum, oldval, newval, bnewent, binitialsnap
 
 function function_a84c11f7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
-  self.var_ee6bcd51 = "rob_zm_fuel_tank_script";
+  self.str_rob = "rob_zm_fuel_tank_script";
   var_1105889c = 0;
   self.var_38fee6d5 = 100;
   self.var_7d8e0749 = self.var_38fee6d5;
-  self playrenderoverridebundle(self.var_ee6bcd51);
-  self function_78233d29(self.var_ee6bcd51, "", "Brightness", 1);
-  self function_78233d29(self.var_ee6bcd51, "", "Alpha", var_1105889c);
+  self playrenderoverridebundle(self.str_rob);
+  self function_78233d29(self.str_rob, "", "Brightness", 1);
+  self function_78233d29(self.str_rob, "", "Alpha", var_1105889c);
   self playSound(bwastimejump, #"hash_61951b05c7932ba6");
   self.var_f1c4246e = self playLoopSound(#"hash_22d6d61841f2b48a");
 
   while(true) {
     wait 0.5;
     var_1105889c += 0.01;
-    self function_78233d29(self.var_ee6bcd51, "", "Alpha", var_1105889c);
+    self function_78233d29(self.str_rob, "", "Alpha", var_1105889c);
 
     if(var_1105889c >= 1) {
       var_1105889c = 1;
@@ -315,7 +315,7 @@ function function_2117533c(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(isDefined(self.var_7d8e0749)) {
     var_1105889c = self.var_7d8e0749 / self.var_38fee6d5;
-    self function_78233d29(self.var_ee6bcd51, "", "Alpha", var_1105889c);
+    self function_78233d29(self.str_rob, "", "Alpha", var_1105889c);
   }
 }
 

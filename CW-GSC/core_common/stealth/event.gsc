@@ -255,10 +255,10 @@ function event_listener_thread() {
       typeorig = "<dev string:x51>";
 
       if(isDefined(event.typeorig)) {
-        typeorig = "<dev string:x55>" + (ishash(event.typeorig) ? function_9e72a96(event.typeorig) : event.typeorig) + "<dev string:x5b>";
+        typeorig = "<dev string:x55>" + (ishash(event.typeorig) ? hashtostring(event.typeorig) : event.typeorig) + "<dev string:x5b>";
       }
 
-      event_str = "<dev string:x60>" + (ishash(event.type) ? function_9e72a96(event.type) : event.type) + typeorig;
+      event_str = "<dev string:x60>" + (ishash(event.type) ? hashtostring(event.type) : event.type) + typeorig;
 
       if(isDefined(eventhandled) && !eventhandled) {
         event_str += "<dev string:x6b>";

@@ -18,14 +18,14 @@
 #namespace namespace_8f53e87b;
 
 init() {
-  callback::on_spawned(&function_ea6a4006);
+  callback::on_spawned(&setup_character_vo);
 
   if(!zm_utility::is_standard()) {
     level thread function_132e0bea();
   }
 }
 
-function_ea6a4006() {
+setup_character_vo() {
   if(!zm_trial::is_trial_mode() && !zm_utility::is_standard()) {
     if(self zm_characters::is_character(array(#"hash_59f3598ad57dadd8", #"hash_2bcebdf1bef33311", #"hash_5a715cb0a6e071ae"))) {
       self thread function_5bd0ee94();
@@ -200,7 +200,7 @@ function_d7b93e68(e_player, n_index) {
 }
 
 function_d62aaf66() {
-  a_players = zm_vo::function_347f7d34();
+  a_players = zm_vo::get_valid_players();
   e_player = array::random(a_players);
   return e_player;
 }

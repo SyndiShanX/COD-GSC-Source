@@ -416,14 +416,14 @@ function_6ecfea46() {
   if(level.var_37078af7 < 4) {
     function_e55e2a5e();
 
-    if(isarray(level.var_4fe2f84d[#"ztable_orange_dynamite_bomb"])) {
-      foreach(s_crafting in level.var_4fe2f84d[#"ztable_orange_dynamite_bomb"]) {
+    if(isarray(level.a_t_crafting[#"ztable_orange_dynamite_bomb"])) {
+      foreach(s_crafting in level.a_t_crafting[#"ztable_orange_dynamite_bomb"]) {
         if(isDefined(s_crafting.blueprint) && s_crafting.blueprint.name === "zblueprint_orange_dynamite_bomb" && !(isDefined(s_crafting.registered) && s_crafting.registered)) {
           s_crafting zm_crafting::reset_table();
         }
       }
     } else {
-      foreach(s_crafting in level.var_4fe2f84d[#"ztable_orange_open"]) {
+      foreach(s_crafting in level.a_t_crafting[#"ztable_orange_open"]) {
         if(isDefined(s_crafting.blueprint) && s_crafting.blueprint.name === "zblueprint_orange_dynamite_bomb" && !(isDefined(s_crafting.registered) && s_crafting.registered)) {
           s_crafting zm_crafting::reset_table();
         }

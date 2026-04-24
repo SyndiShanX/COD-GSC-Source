@@ -241,7 +241,7 @@ round_spawning() {
 
   if(!(isDefined(level.kill_counter_hud) && level.zombie_total > 0)) {
     level.zombie_total = get_zombie_count_for_round(level.round_number, level.players.size);
-    level.var_38b15968 = level.zombie_total;
+    level.n_zombie_spawns = level.zombie_total;
     level.var_9427911d = level.zombie_total;
     level.var_412516cb = level.var_2125984b;
     level.zombie_respawns = level.var_2125984b;

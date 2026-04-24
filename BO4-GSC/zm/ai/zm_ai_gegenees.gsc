@@ -914,18 +914,18 @@ function_a231dd3b(s_params) {
       }
     }
 
-    self.var_d0686fde = [];
-    self.var_d0686fde[self.var_d0686fde.size] = #"fire_sale";
-    self.var_d0686fde[self.var_d0686fde.size] = #"nuke";
+    self.a_str_powerups = [];
+    self.a_str_powerups[self.a_str_powerups.size] = #"fire_sale";
+    self.a_str_powerups[self.a_str_powerups.size] = #"nuke";
 
     if(var_67a1b262) {
-      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
-      self.var_d0686fde[self.var_d0686fde.size] = #"full_ammo";
+      self.a_str_powerups[self.a_str_powerups.size] = #"full_ammo";
+      self.a_str_powerups[self.a_str_powerups.size] = #"full_ammo";
     }
 
     level.var_51c8013a = n_time;
     self.no_powerups = 1;
-    level thread zm_powerups::specific_powerup_drop(self.var_d0686fde, self.origin, undefined, undefined, undefined, undefined, undefined, undefined, 0, 1);
+    level thread zm_powerups::specific_powerup_drop(self.a_str_powerups, self.origin, undefined, undefined, undefined, undefined, undefined, undefined, 0, 1);
   }
 
   if(!isPlayer(s_params.eattacker)) {

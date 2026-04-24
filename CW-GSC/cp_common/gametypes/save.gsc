@@ -83,7 +83,7 @@ function save(var_116ab377, var_296c7056) {
     return;
   }
 
-  mapbundle = function_2717b55f(var_116ab377);
+  mapbundle = getmapscriptbundle(var_116ab377);
 
   if(!isDefined(var_296c7056) && isDefined(mapbundle) && is_true(mapbundle.issafehouse)) {
     transient = function_6440b06b(#"transient");

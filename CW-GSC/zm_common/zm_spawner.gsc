@@ -1781,7 +1781,7 @@ function do_zombie_spawn() {
 
   if(spots.size == 0) {
     if(!level util::function_88c74107() && !level.gameended) {
-      println("<dev string:x1a5>" + function_9e72a96(self.archetype) + "<dev string:x1cc>" + (isDefined(self.script_int) ? self.script_int : "<dev string:x1e1>") + "<dev string:x1ee>");
+      println("<dev string:x1a5>" + hashtostring(self.archetype) + "<dev string:x1cc>" + (isDefined(self.script_int) ? self.script_int : "<dev string:x1e1>") + "<dev string:x1ee>");
       println("<dev string:x253>" + (isDefined(level.spawner_int) ? level.spawner_int : "<dev string:x1e1>"));
       println("<dev string:x26b>");
 

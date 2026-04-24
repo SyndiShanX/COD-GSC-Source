@@ -67,7 +67,7 @@ init() {
   zm_sq_modules::function_d8383812("ee_asf_altar", 8000, #"a_skeet_fink_charge", &function_123eb361, &function_9bb74431, 1);
   register_steps();
   level.w_stake_knife = getweapon(#"stake_knife");
-  level thread function_93bd3e32();
+  level thread start_a_skeet_fink();
 }
 
 register_steps() {
@@ -77,11 +77,11 @@ register_steps() {
   zm_sq::register(#"zm_mansion_a_skeet_fink", #"step_4", #"a_skeet_fink_step_4", &function_2879cfed, &function_354f0b24);
 }
 
-function_93bd3e32() {
+start_a_skeet_fink() {
   level flagsys::wait_till("start_zombie_round_logic");
   clientfield::set("" + #"hash_3b4f11e825b1f62b", 1);
 
-  foreach(s_unitrigger_stub in level.var_4fe2f84d[#"zblueprint_mansion_a_skeet_fink"]) {
+  foreach(s_unitrigger_stub in level.a_t_crafting[#"zblueprint_mansion_a_skeet_fink"]) {
     s_unitrigger_stub.locked = 1;
   }
 
@@ -492,7 +492,7 @@ function_ed59d8e4() {
 
 function_2879cfed(var_a276c861) {
   if(level flag::get(#"hash_6df692c4073d421b")) {
-    foreach(s_unitrigger_stub in level.var_4fe2f84d[#"zblueprint_mansion_a_skeet_fink"]) {
+    foreach(s_unitrigger_stub in level.a_t_crafting[#"zblueprint_mansion_a_skeet_fink"]) {
       s_unitrigger_stub.locked = undefined;
     }
 

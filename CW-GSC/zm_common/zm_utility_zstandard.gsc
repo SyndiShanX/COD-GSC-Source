@@ -481,7 +481,7 @@ function function_34bcd465() {
   }
 }
 
-function function_742f2c18(n_round, archetype, n_count_total, var_4f886dd2, var_37dc6df8, var_d58fab26, var_8857c54d) {
+function function_742f2c18(n_round, archetype, n_count_total, n_count_min, var_37dc6df8, var_d58fab26, var_8857c54d) {
   if(!isDefined(level.var_f944d22e)) {
     level.var_f944d22e = [];
   }
@@ -503,7 +503,7 @@ function function_742f2c18(n_round, archetype, n_count_total, var_4f886dd2, var_
     }
 
     var_4debc821 = spawnStruct();
-    var_4debc821.var_4f886dd2 = var_4f886dd2;
+    var_4debc821.n_count_min = n_count_min;
     var_4debc821.n_count_total = n_count_total;
     level.var_ea47b206[n_round] = var_4debc821;
   }
@@ -545,10 +545,10 @@ function function_1e856719() {
   a_str_defend_areas = getarraykeys(level.a_s_defend_areas);
 
   foreach(str_index, s_defend_area in level.a_s_defend_areas) {
-    assert(isarray(s_defend_area.a_str_next_defend), "<dev string:x176>" + function_9e72a96(str_index) + "<dev string:x186>");
+    assert(isarray(s_defend_area.a_str_next_defend), "<dev string:x176>" + hashtostring(str_index) + "<dev string:x186>");
 
     foreach(str_next_defend in s_defend_area.a_str_next_defend) {
-      assert(isinarray(a_str_defend_areas, str_next_defend), "<dev string:x176>" + function_9e72a96(str_next_defend) + "<dev string:x1cc>");
+      assert(isinarray(a_str_defend_areas, str_next_defend), "<dev string:x176>" + hashtostring(str_next_defend) + "<dev string:x1cc>");
     }
   }
 }
@@ -611,7 +611,7 @@ function function_defc6586(var_3d15828d, b_random = 1) {
 }
 
 function function_a877cd10(str_index) {
-  assert(isDefined(level.a_s_defend_areas[str_index]), "<dev string:x1ec>" + function_9e72a96(str_index) + "<dev string:x1fd>");
+  assert(isDefined(level.a_s_defend_areas[str_index]), "<dev string:x1ec>" + hashtostring(str_index) + "<dev string:x1fd>");
   return level.a_s_defend_areas[str_index];
 }
 

@@ -1532,11 +1532,11 @@ function function_884143e(attacker) {
     } else if(isDefined(attacker.var_fd5301f9)) {
       text = attacker.var_fd5301f9;
     } else if(isDefined(attacker.model)) {
-      text = function_9e72a96(attacker.model);
+      text = hashtostring(attacker.model);
     } else if(isDefined(attacker.targetname)) {
-      text = function_9e72a96(attacker.targetname);
+      text = hashtostring(attacker.targetname);
     } else if(isDefined(attacker.classname)) {
-      text = function_9e72a96(attacker.classname);
+      text = hashtostring(attacker.classname);
     } else {
       text = "<dev string:x3ce>";
     }

@@ -346,7 +346,7 @@ function_20fe0559() {
     sound = "evt_bottle_dispense";
     playsoundatposition(sound, self.origin);
     player zm_score::minus_to_player_score(n_cost);
-    var_cc1db3c1 = array::exclude(level.var_b8be892e, player.perks_active);
+    var_cc1db3c1 = array::exclude(level.a_str_vapors, player.perks_active);
     var_62fef0f1 = array::random(var_cc1db3c1);
 
     if(!isDefined(var_62fef0f1)) {
@@ -413,7 +413,7 @@ function_44481969() {
   function_7d881772();
 }
 
-function_2cc4144b(var_83225a27) {
+function_2cc4144b(str_vapor) {
   if(isDefined(level.bottle_spawn_location)) {
     level.bottle_spawn_location delete();
   }
@@ -426,19 +426,19 @@ function_2cc4144b(var_83225a27) {
     self notify(#"bottle_spawned");
     self thread start_perk_bottle_cycling();
     self thread perk_bottle_motion();
-    var_ceb50987 = zm_perks::get_perk_weapon_model(var_83225a27);
+    mdl_vapor = zm_perks::get_perk_weapon_model(str_vapor);
     wait 3;
     self notify(#"done_cycling");
 
     if(isDefined(level.bottle_spawn_location)) {
-      level.bottle_spawn_location setModel(var_ceb50987);
+      level.bottle_spawn_location setModel(mdl_vapor);
     }
   }
 }
 
 start_perk_bottle_cycling() {
   self endon(#"done_cycling");
-  var_f0f641ad = level.var_b8be892e;
+  var_f0f641ad = level.a_str_vapors;
   var_f0f641ad = array::exclude(var_f0f641ad, #"specialty_mystery");
 
   if(!var_f0f641ad.size) {

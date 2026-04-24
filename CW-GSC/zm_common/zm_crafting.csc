@@ -91,7 +91,7 @@ function function_b18074d0(name) {
           break;
       }
 
-      blueprint.var_54a97edd = get_component(blueprint.result);
+      blueprint.w_result = get_component(blueprint.result);
       level.var_5df2581a[name] = blueprint;
 
       if(!isDefined(blueprint.var_4dbc4aee)) {

@@ -262,7 +262,7 @@ function_8e0b371() {
 
   while(true) {
     if(isalive(self)) {
-      str_location = function_ab7f70b9(self);
+      str_location = get_location_string(self);
       self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
@@ -272,7 +272,7 @@ function_8e0b371() {
   }
 }
 
-function_ab7f70b9(e_player) {
+get_location_string(e_player) {
   str_zone = e_player zm_zonemgr::get_player_zone();
 
   if(!isDefined(str_zone)) {
@@ -425,7 +425,7 @@ function_f7a190a8(str_wait_flag, var_ab660f9a, str_location, var_39acfdda) {
     wait var_ab660f9a;
   }
 
-  for(var_33625d75 = function_ab7f70b9(self); var_33625d75 === str_location; var_33625d75 = function_ab7f70b9(self)) {
+  for(var_33625d75 = get_location_string(self); var_33625d75 === str_location; var_33625d75 = get_location_string(self)) {
     wait 0.5;
   }
 

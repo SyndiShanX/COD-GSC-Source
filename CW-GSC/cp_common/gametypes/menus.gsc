@@ -286,7 +286,7 @@ function private function_c35a1bfc() {
   world.var_b86bf11e = undefined;
   globallogic_ui::function_760546ce();
   missionname = savegame::function_8136eb5a();
-  mapbundle = function_2717b55f(missionname);
+  mapbundle = getmapscriptbundle(missionname);
 
   if(isDefined(mapbundle) && isDefined(mapbundle.var_a04dfce6)) {
     var_a04dfce6 = mapbundle.var_a04dfce6;

@@ -112,7 +112,7 @@ function private spawn_enemy() {
   assert(isDefined(challenge));
 
   assert(isDefined(level.var_1cc18005));
-  assert(isDefined(level.var_1cc18005[challenge.enemy_type]), "<dev string:x5b>" + function_9e72a96(challenge.enemy_type));
+  assert(isDefined(level.var_1cc18005[challenge.enemy_type]), "<dev string:x5b>" + hashtostring(challenge.enemy_type));
 
   spawn_callback = level.var_1cc18005[challenge.enemy_type];
   spawn_success = [[spawn_callback]]();

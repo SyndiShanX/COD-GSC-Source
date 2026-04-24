@@ -308,7 +308,7 @@ function soundrandom_thread(localclientnum, randsound) {
     }
 
     if(getdvarint(#"debug_audio", 0) > 0) {
-      print3d(randsound.origin, function_9e72a96(randsound.script_sound), (0, 0.8, 0), 1, 3, 45);
+      print3d(randsound.origin, hashtostring(randsound.script_sound), (0, 0.8, 0), 1, 3, 45);
     }
   }
 }

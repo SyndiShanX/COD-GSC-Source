@@ -1473,46 +1473,46 @@ function function_de2018e3(item, player, slotid = undefined, playgesture = 1, va
     handlerfunc = level.var_66383953[itementry.handler];
 
     if(isDefined(handlerfunc)) {
-      var_aec6fa7f = item.amount;
+      itemamount = item.amount;
 
-      if(!isDefined(var_aec6fa7f) || item.amount == 0) {
+      if(!isDefined(itemamount) || item.amount == 0) {
         if(itementry.itemtype == #"ammo") {
-          if(!isDefined(var_aec6fa7f)) {
-            var_aec6fa7f = itementry.amount;
+          if(!isDefined(itemamount)) {
+            itemamount = itementry.amount;
           }
         } else if(itementry.itemtype == #"weapon") {
           if(!isDefined(item.amount)) {
             weapon = item_inventory_util::function_2b83d3ff(item);
-            var_aec6fa7f = itementry.amount;
+            itemamount = itementry.amount;
 
             if(isDefined(weapon)) {
-              var_aec6fa7f = itementry.amount * weapon.clipsize;
+              itemamount = itementry.amount * weapon.clipsize;
             }
           }
         } else if(itementry.itemtype == #"armor") {
           if(!is_true(itementry.var_b5b2485b)) {
             armoramount = isDefined(item.amount) ? item.amount : itementry.amount;
-            var_aec6fa7f = armoramount;
+            itemamount = armoramount;
           } else {
-            var_aec6fa7f = itementry.amount;
+            itemamount = itementry.amount;
           }
         } else if(item_inventory_util::function_1507e6f0(itementry)) {
           if(isentity(item)) {
-            var_aec6fa7f = item.ammo;
+            itemamount = item.ammo;
           }
 
-          if(!isDefined(var_aec6fa7f)) {
-            var_aec6fa7f = 0;
+          if(!isDefined(itemamount)) {
+            itemamount = 0;
           }
         } else {
-          var_aec6fa7f = 0;
+          itemamount = 0;
         }
       }
 
       var_d72b1a4b = function_c8ab2022(item, 0);
       var_8cd447d8 = function_c8ab2022(item, 1);
       profilestart();
-      var_c5781c22 = player[[handlerfunc]](item, player, item.networkid, item.id, var_8cd447d8, var_aec6fa7f, slotid);
+      var_c5781c22 = player[[handlerfunc]](item, player, item.networkid, item.id, var_8cd447d8, itemamount, slotid);
       profilestop();
       var_c5781c22 += var_d72b1a4b - var_8cd447d8;
       assert(isint(var_c5781c22) && var_c5781c22 >= 0);

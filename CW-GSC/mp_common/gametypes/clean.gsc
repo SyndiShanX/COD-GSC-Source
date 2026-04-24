@@ -389,14 +389,14 @@ function private function_8be56c1(targetname) {
   structs = struct::get_array(targetname);
 
   foreach(struct in structs) {
-    assert(isDefined(struct.script_index), function_9e72a96(targetname) + "<dev string:x7f>");
-    assert(!isDefined(level.cleandeposithubs[struct.script_index]), function_9e72a96(targetname) + "<dev string:x9d>");
+    assert(isDefined(struct.script_index), hashtostring(targetname) + "<dev string:x7f>");
+    assert(!isDefined(level.cleandeposithubs[struct.script_index]), hashtostring(targetname) + "<dev string:x9d>");
 
     level.cleandeposithubs[struct.script_index] = function_bad2b0d4(struct.origin);
   }
 
   for(i = 0; i < level.cleandeposithubs.size; i++) {
-    assert(isDefined(level.cleandeposithubs[i]), "<dev string:xc3>" + function_9e72a96(targetname) + "<dev string:xcf>" + i);
+    assert(isDefined(level.cleandeposithubs[i]), "<dev string:xc3>" + hashtostring(targetname) + "<dev string:xcf>" + i);
   }
 }
 

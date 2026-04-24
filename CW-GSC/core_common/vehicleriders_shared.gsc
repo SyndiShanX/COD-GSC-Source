@@ -434,11 +434,11 @@ function private init_rider(ai, vehicle, seat) {
   ai.var_5574287b = seat;
 
   if(isDefined(ai.var_ec30f5da.rideanim) && !isanimlooping(ai.var_ec30f5da.rideanim)) {
-    assertmsg("<dev string:x178>" + seat + "<dev string:x19e>" + function_9e72a96(ai.vehicle.vehicletype) + "<dev string:x1af>");
+    assertmsg("<dev string:x178>" + seat + "<dev string:x19e>" + hashtostring(ai.vehicle.vehicletype) + "<dev string:x1af>");
   }
 
   if(isDefined(ai.var_ec30f5da.aligntag) && !isDefined(ai.vehicle gettagorigin(ai.var_ec30f5da.aligntag))) {
-    assertmsg("<dev string:x178>" + seat + "<dev string:x19e>" + function_9e72a96(ai.vehicle.vehicletype) + "<dev string:x1cb>" + ai.var_ec30f5da.aligntag + "<dev string:x1e1>");
+    assertmsg("<dev string:x178>" + seat + "<dev string:x19e>" + hashtostring(ai.vehicle.vehicletype) + "<dev string:x1cb>" + ai.var_ec30f5da.aligntag + "<dev string:x1e1>");
   }
 
   if(!ai flag::exists("in_vehicle")) {
@@ -454,7 +454,7 @@ function fill_riders(a_ai, vehicle, seat) {
   assert(isvehicle(vehicle));
 
   if(!function_196797c9(vehicle)) {
-    assertmsg("<dev string:x1e7>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x1fb>");
+    assertmsg("<dev string:x1e7>" + hashtostring(vehicle.vehicletype) + "<dev string:x1fb>");
     return;
   }
 
@@ -542,7 +542,7 @@ function unload(seat) {
   assert(isvehicle(self));
 
   if(!function_196797c9(self)) {
-    assertmsg("<dev string:x1e7>" + function_9e72a96(self.vehicletype) + "<dev string:x1fb>");
+    assertmsg("<dev string:x1e7>" + hashtostring(self.vehicletype) + "<dev string:x1fb>");
     return;
   }
 
@@ -1185,7 +1185,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
     case # "driver":
       if(vehicle.var_761c973.var_9e2a2132 && vehicle flag::get("driver_occupied")) {
         if(var_7c3e4d44) {
-          assertmsg("<dev string:x3a8>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x3d0>");
+          assertmsg("<dev string:x3a8>" + hashtostring(vehicle.vehicletype) + "<dev string:x3d0>");
         }
 
         return 0;
@@ -1196,7 +1196,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
     case # "passenger1":
       if(vehicle.var_761c973.var_709c0a6f && vehicle flag::get("passenger1_occupied")) {
         if(var_7c3e4d44) {
-          assertmsg("<dev string:x3fd>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x428>");
+          assertmsg("<dev string:x3fd>" + hashtostring(vehicle.vehicletype) + "<dev string:x428>");
         }
 
         return 0;
@@ -1211,7 +1211,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
         if(vehicle.var_761c973.var_cc0d1da) {
           if(vehicle flag::get("gunner2_occupied")) {
             if(var_7c3e4d44) {
-              assertmsg("<dev string:x458>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x480>");
+              assertmsg("<dev string:x458>" + hashtostring(vehicle.vehicletype) + "<dev string:x480>");
             }
 
             return 0;
@@ -1221,7 +1221,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
           }
         } else {
           if(var_7c3e4d44) {
-            assertmsg("<dev string:x4b0>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x4d9>");
+            assertmsg("<dev string:x4b0>" + hashtostring(vehicle.vehicletype) + "<dev string:x4d9>");
           }
 
           return 0;
@@ -1233,7 +1233,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
     case # "gunner2":
       if(vehicle.var_761c973.var_cc0d1da && vehicle flag::get("gunner2_occupied")) {
         if(var_7c3e4d44) {
-          assertmsg("<dev string:x507>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x530>");
+          assertmsg("<dev string:x507>" + hashtostring(vehicle.vehicletype) + "<dev string:x530>");
         }
 
         return 0;
@@ -1246,7 +1246,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
 
       if(var_b11e7fca == "none") {
         if(var_7c3e4d44) {
-          assertmsg("<dev string:x55e>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x584>");
+          assertmsg("<dev string:x55e>" + hashtostring(vehicle.vehicletype) + "<dev string:x584>");
         }
 
         return 0;
@@ -1261,7 +1261,7 @@ function get_in(ai, vehicle, seat, var_7c3e4d44 = 1) {
   assert(isDefined(ai.vehicle));
 
   if(!isDefined(ai.var_ec30f5da.rideanim)) {
-    assertmsg("<dev string:x5c2>" + seat + "<dev string:x19e>" + function_9e72a96(vehicle.vehicletype) + "<dev string:x5e6>" + function_e84837df(ai, vehicle));
+    assertmsg("<dev string:x5c2>" + seat + "<dev string:x19e>" + hashtostring(vehicle.vehicletype) + "<dev string:x5e6>" + function_e84837df(ai, vehicle));
     return;
   }
 

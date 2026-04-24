@@ -1188,7 +1188,7 @@ function add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, wea
     struct.var_51344511 = [];
   }
 
-  println("<dev string:x6a>" + function_9e72a96(weapon_name));
+  println("<dev string:x6a>" + hashtostring(weapon_name));
   struct.is_in_box = level.zombie_include_weapons[weapon];
 
   if(!isDefined(ammo_cost) || ammo_cost == 0) {
@@ -1233,7 +1233,7 @@ function include_zombie_weapon(weapon_name, in_box) {
     in_box = 1;
   }
 
-  println("<dev string:x89>" + function_9e72a96(weapon_name));
+  println("<dev string:x89>" + hashtostring(weapon_name));
   level.zombie_include_weapons[getweapon(weapon_name)] = in_box;
 }
 
@@ -1540,12 +1540,12 @@ function player_can_use_content(weapon) {
 }
 
 function get_weapon_hint(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:xa6>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:xa6>");
   return level.zombie_weapons[weapon].hint;
 }
 
 function get_weapon_cost(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:xa6>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:xa6>");
   return level.zombie_weapons[weapon].cost;
 }
 
@@ -1578,12 +1578,12 @@ function function_5d47055e(str_rarity) {
 }
 
 function get_ammo_cost(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:xa6>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:xa6>");
   return level.zombie_weapons[weapon].ammo_cost;
 }
 
 function get_upgraded_ammo_cost(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:xa6>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:xa6>");
 
   if(isDefined(level.zombie_weapons[weapon].upgraded_ammo_cost)) {
     return level.zombie_weapons[weapon].upgraded_ammo_cost;
@@ -1758,7 +1758,7 @@ function get_upgrade_weapon(weapon, add_attachment) {
     return add_attachment;
   }
 
-  if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, add_attachment) && add_attachment.attachments.size) {
+  if(isDefined(self.a_w_devgui) && isinarray(self.a_w_devgui, add_attachment) && add_attachment.attachments.size) {
     newweapon = getweapon(newweapon.name, add_attachment.attachments);
     return newweapon;
   }
@@ -1833,7 +1833,7 @@ function get_weapon_with_attachments(weapon) {
   rootweapon = function_386dacbc(weapon);
 
   if(self has_weapon_or_attachments(rootweapon)) {
-    if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, weapon) && weapon.attachments.size) {
+    if(isDefined(self.a_w_devgui) && isinarray(self.a_w_devgui, weapon) && weapon.attachments.size) {
       return weapon;
     }
 
@@ -2760,7 +2760,7 @@ function weapondata_take(weapondata) {
     alt_weapon = alt_weapon.altweapon;
 
     if(isinarray(a_alt_weapons, alt_weapon)) {
-      println("<dev string:x187>" + function_9e72a96(alt_weapon.name) + "<dev string:x1a7>");
+      println("<dev string:x187>" + hashtostring(alt_weapon.name) + "<dev string:x1a7>");
       break;
     }
   }
@@ -4127,7 +4127,7 @@ function function_9aaa198a(var_5302a1ef = 0, var_a0cc02cf = 0, var_96c71057 = 0,
 
 function function_800654fc() {
   level endon(#"game_ended");
-  adddebugcommand("<dev string:x274>" + function_9e72a96(#"ray_gun_item_sr") + "<dev string:x2d4>");
+  adddebugcommand("<dev string:x274>" + hashtostring(#"ray_gun_item_sr") + "<dev string:x2d4>");
   namespace_420b39d3::function_d8ef0f00(&function_8610a5cc);
 }
 

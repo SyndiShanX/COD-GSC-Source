@@ -1647,7 +1647,7 @@ function private function_54d75299(entity, mocompanim, mocompanimblendouttime, m
 
   recordcircle(endpoint, 3, (1, 0, 0), "<dev string:x9e>");
   recordline(mocompanimflag.origin, endpoint, (1, 0, 0), "<dev string:x9e>");
-  record3dtext("<dev string:xa8>" + distance(mocompanimflag.origin, endpoint) + "<dev string:xb1>" + function_9e72a96(mocompduration), endpoint, (1, 0, 0), "<dev string:x46>");
+  record3dtext("<dev string:xa8>" + distance(mocompanimflag.origin, endpoint) + "<dev string:xb1>" + hashtostring(mocompduration), endpoint, (1, 0, 0), "<dev string:x46>");
 }
 
 function private function_d1474842(entity, mocompanim, mocompanimblendouttime, mocompanimflag, mocompduration) {

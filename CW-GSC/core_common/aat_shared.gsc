@@ -105,7 +105,7 @@ function setup_devgui(var_e73fddff) {
 
   foreach(key, v in level.aat) {
     if(key != "<dev string:xb0>") {
-      name = function_9e72a96(key);
+      name = hashtostring(key);
       util::add_debug_command(aat_devgui_base + name + "<dev string:xb8>" + "<dev string:xc3>" + "<dev string:xd9>" + name + "<dev string:xde>");
     }
   }
@@ -704,13 +704,13 @@ function function_7a12b737(stat_name, amount = 1) {
 
   if(isDefined(var_ba1fb8c1)) {
     if(isDefined(self.entity_num)) {
-      println("<dev string:x853>" + self.entity_num + "<dev string:xd9>" + function_9e72a96(stat_name) + "<dev string:x85e>" + var_ba1fb8c1);
+      println("<dev string:x853>" + self.entity_num + "<dev string:xd9>" + hashtostring(stat_name) + "<dev string:x85e>" + var_ba1fb8c1);
     } else {
-      println("<dev string:x853>" + function_9e72a96(stat_name) + "<dev string:x85e>" + var_ba1fb8c1);
+      println("<dev string:x853>" + hashtostring(stat_name) + "<dev string:x85e>" + var_ba1fb8c1);
     }
   }
 
   if(!isDefined(var_ba1fb8c1)) {
-    println("<dev string:x853>" + self.entity_num + "<dev string:xd9>" + function_9e72a96(stat_name) + "<dev string:x870>");
+    println("<dev string:x853>" + self.entity_num + "<dev string:xd9>" + hashtostring(stat_name) + "<dev string:x870>");
   }
 }

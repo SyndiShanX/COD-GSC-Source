@@ -720,7 +720,7 @@ function private third_person_weapon_upgrade(current_weapon, current_weaponoptio
   var_d85decd8 = self getbuildkitweapon(current_weaponoptions);
   var_1eca29de = self getbuildkitweapon(packa_rollers);
 
-  if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, current_weaponoptions) && current_weaponoptions.attachments.size) {
+  if(isDefined(self.a_w_devgui) && isinarray(self.a_w_devgui, current_weaponoptions) && current_weaponoptions.attachments.size) {
     var_d85decd8 = current_weaponoptions;
     var_1eca29de = packa_rollers;
     pap_machine.unitrigger_stub.var_16aa21d4 = 1;
@@ -827,13 +827,13 @@ function private wait_for_player_to_take(player, weapon, packa_timer, var_a86430
         player zm_weapons::take_fallback_weapon();
 
         if(is_true(pap_machine.unitrigger_stub.var_16aa21d4)) {
-          if(!isDefined(player.var_8d5839f4)) {
-            player.var_8d5839f4 = [];
-          } else if(!isarray(player.var_8d5839f4)) {
-            player.var_8d5839f4 = array(player.var_8d5839f4);
+          if(!isDefined(player.a_w_devgui)) {
+            player.a_w_devgui = [];
+          } else if(!isarray(player.a_w_devgui)) {
+            player.a_w_devgui = array(player.a_w_devgui);
           }
 
-          player.var_8d5839f4[player.var_8d5839f4.size] = upgrade_weapon;
+          player.a_w_devgui[player.a_w_devgui.size] = upgrade_weapon;
         }
 
         primaries = player getweaponslistprimaries();

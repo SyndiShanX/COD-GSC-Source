@@ -33,8 +33,8 @@ function function_df1192a7() {}
 function give_achievement(achievement, var_a299f0b3) {
   assert(ishash(var_a299f0b3), "<dev string:x38>");
 
-  printtoprightln("<dev string:x59>" + function_9e72a96(var_a299f0b3), (1, 1, 1));
-  println("<dev string:x59>" + function_9e72a96(var_a299f0b3));
+  printtoprightln("<dev string:x59>" + hashtostring(var_a299f0b3), (1, 1, 1));
+  println("<dev string:x59>" + hashtostring(var_a299f0b3));
 
   if(!isDefined(self.var_b34a7212)) {
     self.var_b34a7212 = [];

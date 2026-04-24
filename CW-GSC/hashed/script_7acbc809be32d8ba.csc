@@ -49,25 +49,25 @@ function private postinit() {
   zm_weapons::function_8389c033(#"ww_mega_barrel_fullauto_micro_missile_t9", #"ww_mega_barrel_fullauto_micro_missile_t9");
 }
 
-function function_6b945d59(var_ee6bcd51) {
+function function_6b945d59(str_rob) {
   if(isPlayer(self)) {
-    self zm_utility::function_f933b697(var_ee6bcd51);
+    self zm_utility::function_f933b697(str_rob);
   }
 
-  self stoprenderoverridebundle(var_ee6bcd51);
+  self stoprenderoverridebundle(str_rob);
 }
 
-function function_4e818189(var_ee6bcd51) {
+function function_4e818189(str_rob) {
   if(isPlayer(self)) {
-    if(self zm_utility::function_10df0b9c(var_ee6bcd51)) {
-      self playrenderoverridebundle(var_ee6bcd51);
+    if(self zm_utility::function_10df0b9c(str_rob)) {
+      self playrenderoverridebundle(str_rob);
     }
 
-    self zm_utility::function_8065ace2(var_ee6bcd51);
+    self zm_utility::function_8065ace2(str_rob);
     return;
   }
 
-  self playrenderoverridebundle(var_ee6bcd51);
+  self playrenderoverridebundle(str_rob);
 }
 
 function function_af4c580b(localclientnum, itementry) {

@@ -470,7 +470,7 @@ class class_727456f3 {
     }
   }
 
-  function function_64d6a132(s_gameobject, var_2605b4dd, b_inside) {
+  function function_64d6a132(s_gameobject, b_call, b_inside) {
     var_a7a692e3 = isDefined(s_gameobject.script_int) ? s_gameobject.script_int : 1;
 
     if(b_inside) {
@@ -481,7 +481,7 @@ class class_727456f3 {
       waitresult = s_gameobject.mdl_gameobject waittill(#"gameobject_end_use_player");
       e_player = waitresult.player;
 
-      if(var_2605b4dd) {
+      if(b_call) {
         function_47b06180(var_a7a692e3);
       } else if(b_inside) {
         flag::set("inner_button_menu_active");
@@ -558,14 +558,14 @@ class class_727456f3 {
     var_10b20309 gameobjects::disable_object();
   }
 
-  function function_8986542b(s_gameobject, var_2605b4dd, b_inside) {
+  function function_8986542b(s_gameobject, b_call, b_inside) {
     if(b_inside) {
       var_10b20309 = s_gameobject;
       s_gameobject.mdl_gameobject.trigger enablelinkto();
       s_gameobject.mdl_gameobject.trigger linkto(var_2af3d553);
     }
 
-    thread function_64d6a132(s_gameobject, var_2605b4dd, b_inside);
+    thread function_64d6a132(s_gameobject, b_call, b_inside);
   }
 
   function function_cae3f0e7() {
@@ -682,9 +682,9 @@ __init__() {
     }
   }
 
-  var_9ee4aad1 = struct::get("elevator_doors_roof", "targetname");
+  s_roof = struct::get("elevator_doors_roof", "targetname");
 
-  if(isDefined(var_9ee4aad1)) {
+  if(isDefined(s_roof)) {
     level scene::init("elevator_doors_roof", "targetname");
   }
 

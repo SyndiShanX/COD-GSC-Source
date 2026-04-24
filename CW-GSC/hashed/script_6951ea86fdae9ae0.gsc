@@ -77,10 +77,10 @@ function private function_1633056a(var_a9dd1993, var_2953986a, var_3790b4e4, var
   }
 
   wait 1;
-  var_407eb07 = 0;
+  b_locked_weapons = 0;
 
   while(true) {
-    if(self function_26f124d8() && var_407eb07) {
+    if(self function_26f124d8() && b_locked_weapons) {
       var_9d590e70 = 1;
 
       if(isDefined(var_3b058622)) {
@@ -108,10 +108,10 @@ function private function_1633056a(var_a9dd1993, var_2953986a, var_3790b4e4, var
         self zm_trial_util::function_dc0859e(var_3940c585);
       }
 
-      var_407eb07 = 0;
-    } else if(!self function_26f124d8() && !var_407eb07) {
+      b_locked_weapons = 0;
+    } else if(!self function_26f124d8() && !b_locked_weapons) {
       self zm_trial_util::function_bf710271();
-      var_407eb07 = 1;
+      b_locked_weapons = 1;
     }
 
     waitframe(1);

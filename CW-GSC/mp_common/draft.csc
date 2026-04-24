@@ -668,7 +668,7 @@ function watchkillcam() {
   }
 }
 
-function function_9afd868e(localclientnum) {
+function setup_draft(localclientnum) {
   self notify("2b032b5e2a06f25b");
   self endon("2b032b5e2a06f25b");
   self endon(#"draft_closed");
@@ -698,7 +698,7 @@ function function_ca03ab69() {
     localclientnum = waitresult.localclientnum;
     localplayer = function_5c10bd79(localclientnum);
     localplayer serverfield::set("PositionDraft.uiLoaded", 1);
-    level thread function_9afd868e(localclientnum);
+    level thread setup_draft(localclientnum);
   }
 }
 

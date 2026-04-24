@@ -739,7 +739,7 @@ function_9b2c973f() {
   level endon(#"squad_dead");
   a_bots = self ct_bots::function_71ec2b36();
   n_squad_size = a_bots.size;
-  var_c378327e = 0;
+  n_start_ammo = 0;
   var_2cf11630 = 0;
   n_start_health = 0;
   n_current_health = 0;
@@ -749,11 +749,11 @@ function_9b2c973f() {
 
   foreach(bot in a_bots) {
     n_start_health += bot.health;
-    var_c378327e += bot getammocount(bot.currentweapon);
+    n_start_ammo += bot getammocount(bot.currentweapon);
   }
 
   var_9192acd9 = int(n_start_health * 0.5);
-  var_8fe4b14 = int(var_c378327e * 0.5);
+  var_8fe4b14 = int(n_start_ammo * 0.5);
 
   while(true) {
     if(isalive(self)) {
@@ -1022,12 +1022,12 @@ function_85903699() {
   s_goto = struct::get("s_assault_pack_goto_" + self.n_index);
   self.s_pod = struct::get(s_goto.target);
   self.s_cover = struct::get(self.s_pod.target);
-  self.var_df772c06 = struct::get("face_second_battle");
-  self.s_lookat = self.var_df772c06;
+  self.s_face = struct::get("face_second_battle");
+  self.s_lookat = self.s_face;
   wait self.n_wait;
   self thread ct_utils::function_5b59f3b7(s_goto.origin, s_goto.angles, 16);
   self waittill(#"goal");
-  self function_89cd182c(self.var_df772c06);
+  self function_89cd182c(self.s_face);
 
   if(s_goto.script_noteworthy === "crouch") {
     self bot_stance::crouch();
@@ -1063,19 +1063,19 @@ function_68ac03e(s_loc) {
   }
 
   if(self.n_index === 1 || self.n_index === 2) {
-    var_df772c06 = struct::get("s_bathhouse_face_1");
+    s_face = struct::get("s_bathhouse_face_1");
   } else {
-    var_df772c06 = struct::get("s_bathhouse_face_2");
+    s_face = struct::get("s_bathhouse_face_2");
   }
 
-  self function_89cd182c(var_df772c06);
+  self function_89cd182c(s_face);
   level flag::wait_till("flash_bang_done");
   wait randomfloatrange(0.8, 1.5);
   self bot_stance::stand();
   self thread ct_utils::function_5b59f3b7(s_cover.origin, s_cover.angles, 16);
   self waittill(#"goal");
   wait 0.3;
-  self function_89cd182c(var_df772c06);
+  self function_89cd182c(s_face);
 }
 
 function_d43893a9(s_loc) {
@@ -1102,7 +1102,7 @@ function_d43893a9(s_loc) {
   self bot_stance::crouch();
 }
 
-function_bd8a36e(var_df772c06) {
+function_bd8a36e(s_face) {
   self endon(#"death");
   self thread ct_utils::function_5b59f3b7(self.s_cover.origin, self.s_cover.angles, 16);
 
@@ -1110,14 +1110,14 @@ function_bd8a36e(var_df772c06) {
     waitframe(1);
   }
 
-  self function_89cd182c(var_df772c06);
+  self function_89cd182c(s_face);
   wait 2;
 
   if(self.s_cover.script_noteworthy === "crouch") {
     self bot_stance::crouch();
   }
 
-  self function_89cd182c(var_df772c06);
+  self function_89cd182c(s_face);
 }
 
 function_da2f82f1(n_radius) {
@@ -1147,7 +1147,7 @@ function_da2f82f1(n_radius) {
 
 function_b03052f5() {
   self endon(#"death");
-  self function_89cd182c(self.var_df772c06);
+  self function_89cd182c(self.s_face);
   wait 1.5;
   self bot_action::reset();
   wait 2;
@@ -1171,7 +1171,7 @@ function_13b1605() {
       a_bots[i] function_da2f82f1(32);
     }
 
-    a_bots[i] thread function_bd8a36e(a_bots[i].var_df772c06);
+    a_bots[i] thread function_bd8a36e(a_bots[i].s_face);
   }
 
   wait 2;
@@ -1705,7 +1705,7 @@ ammo_watch(str_event) {
   wait 1;
 
   while(true) {
-    var_75d65e7e = self getammocount(self.currentweapon);
+    n_ammo_start = self getammocount(self.currentweapon);
     self.b_reloaded = 0;
     s_result = level.players[0] waittill(#"supplypod_placed");
 
@@ -1715,7 +1715,7 @@ ammo_watch(str_event) {
       wait randomfloatrange(1, 2.5);
       var_d9fa3a2c = self getammocount(self.currentweapon);
 
-      if(var_d9fa3a2c <= var_75d65e7e && !(isDefined(self.b_reloaded) && self.b_reloaded)) {
+      if(var_d9fa3a2c <= n_ammo_start && !(isDefined(self.b_reloaded) && self.b_reloaded)) {
         if(isDefined(str_event)) {
           self.v_org = struct::get("s_cover_scorestreak_" + self.n_index, "script_noteworthy").origin;
           self.v_ang = struct::get("s_cover_scorestreak_" + self.n_index, "script_noteworthy").angles;

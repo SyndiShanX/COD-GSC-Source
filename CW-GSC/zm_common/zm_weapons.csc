@@ -275,7 +275,7 @@ function include_weapon(weapon_name, display_in_box, cost, ammo_cost, upgraded =
   }
 
   if(!isDefined(weapon.worldmodel)) {
-    thread util::error("<dev string:x38>" + function_9e72a96(weapon_name) + "<dev string:x5a>");
+    thread util::error("<dev string:x38>" + hashtostring(weapon_name) + "<dev string:x5a>");
 
     return;
   }

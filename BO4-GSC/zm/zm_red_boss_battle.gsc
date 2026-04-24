@@ -2367,7 +2367,7 @@ function_99f0123d() {
   while(true) {
     foreach(n_index, e_player in util::get_active_players(#"allies")) {
       n_y_pos = 480 + 18.7 * n_index;
-      str_hero_weapon = function_9e72a96(e_player.var_b708af7b);
+      str_hero_weapon = hashtostring(e_player.var_b708af7b);
 
       if(!isDefined(level.s_boss_battle.var_5015427)) {
         n_total_damage = 0;

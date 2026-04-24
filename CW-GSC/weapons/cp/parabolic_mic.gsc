@@ -663,7 +663,7 @@ function private function_622d474a(data) {
     }
 
     if(!soundexists(alias)) {
-      iprintlnbold("<dev string:x11c>" + function_9e72a96(alias) + "<dev string:x135>");
+      iprintlnbold("<dev string:x11c>" + hashtostring(alias) + "<dev string:x135>");
 
       wait 3;
 

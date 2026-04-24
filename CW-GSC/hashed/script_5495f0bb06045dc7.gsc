@@ -876,7 +876,7 @@ function function_73b0f715(player) {
   }
 
   if(isdedicated()) {
-    if(getdvarint(#"hash_41feb500743b0d15", 0) != 0) {
+    if(getdvarint(#"sv_wznostartever", 0) != 0) {
       return;
     }
   }

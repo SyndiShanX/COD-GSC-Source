@@ -1091,7 +1091,7 @@ function private function_50cda95() {
   }
 
   foreach(player in function_a1ef346b()) {
-    if(isarray(player.var_7341f980) && player.var_7341f980.size < level.var_b8be892e.size) {
+    if(isarray(player.var_7341f980) && player.var_7341f980.size < level.a_str_vapors.size) {
       return true;
     }
   }
@@ -3460,27 +3460,27 @@ function function_a2f55e89(var_511659b1 = 0) {
     level.var_4ea64c7f = "";
   }
 
-  var_9c1ed9ea = undefined;
+  str_musicstate = undefined;
 
   if(var_511659b1) {
-    var_9c1ed9ea = "energy_low";
+    str_musicstate = "energy_low";
   } else if(is_true(level.var_6d24574d)) {
-    var_9c1ed9ea = "energy_epic";
+    str_musicstate = "energy_epic";
   } else if(level.wave_number >= 16) {
-    var_9c1ed9ea = "energy_high";
+    str_musicstate = "energy_high";
   } else if(level.wave_number >= 6) {
-    var_9c1ed9ea = "energy_med";
+    str_musicstate = "energy_med";
   } else {
-    var_9c1ed9ea = "energy_low";
+    str_musicstate = "energy_low";
   }
 
   if(is_true(level.var_dff684cf)) {
-    var_9c1ed9ea = undefined;
+    str_musicstate = undefined;
   }
 
-  if(isDefined(var_9c1ed9ea)) {
-    level.var_4ea64c7f = var_9c1ed9ea;
-    music::setmusicstate(var_9c1ed9ea);
+  if(isDefined(str_musicstate)) {
+    level.var_4ea64c7f = str_musicstate;
+    music::setmusicstate(str_musicstate);
   }
 }
 

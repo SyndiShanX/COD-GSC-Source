@@ -299,7 +299,7 @@ function private postinit() {
 
   foreach(s_instance in a_instances) {
     s_scenedef = getscriptbundle(s_instance.scriptbundlename);
-    assert(isDefined(s_scenedef), "<dev string:x38>" + function_9e72a96(s_instance.scriptbundlename) + "<dev string:x49>");
+    assert(isDefined(s_scenedef), "<dev string:x38>" + hashtostring(s_instance.scriptbundlename) + "<dev string:x49>");
 
     if(s_scenedef.vmtype === "client") {
       continue;
@@ -503,7 +503,7 @@ function _trigger_stop(trig) {
 }
 
 function add_scene_func(str_scenedef, func, var_e21c4c4c = "play", ...) {
-  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x21f>" + function_9e72a96(str_scenedef) + "<dev string:x24d>");
+  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x21f>" + hashtostring(str_scenedef) + "<dev string:x24d>");
 
   if(!isDefined(level.scene_funcs)) {
     level.scene_funcs = [];
@@ -537,7 +537,7 @@ function function_d0d7d9f7(str_scenedef, func) {
 }
 
 function function_d8a83a50(str_scenedef, func, var_e21c4c4c = "play", ...) {
-  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x21f>" + function_9e72a96(str_scenedef) + "<dev string:x24d>");
+  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x21f>" + hashtostring(str_scenedef) + "<dev string:x24d>");
 
   if(!isDefined(level.var_4247a0d6)) {
     level.var_4247a0d6 = [];
@@ -657,8 +657,8 @@ function private function_c776e5bd(str_scenedef, str_state) {
 
 function get_scenedef(str_scenedef) {
   s_scriptbundle = getscriptbundle(str_scenedef);
-  assert(isDefined(s_scriptbundle), "<dev string:x38>" + function_9e72a96(str_scenedef) + "<dev string:x30d>");
-  assert(isDefined(s_scriptbundle.objects), "<dev string:x38>" + function_9e72a96(str_scenedef) + "<dev string:x36a>");
+  assert(isDefined(s_scriptbundle), "<dev string:x38>" + hashtostring(str_scenedef) + "<dev string:x30d>");
+  assert(isDefined(s_scriptbundle.objects), "<dev string:x38>" + hashtostring(str_scenedef) + "<dev string:x36a>");
   return s_scriptbundle;
 }
 
@@ -862,7 +862,7 @@ function init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnera
     return;
   }
 
-  iprintln("<dev string:x3b7>" + function_9e72a96(str_scenedef));
+  iprintln("<dev string:x3b7>" + hashtostring(str_scenedef));
 
   if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame()) {
     var_b6213032 = 0;
@@ -1011,9 +1011,9 @@ function function_6f382548(struct, str_scene_name) {
 
   if(struct.disableinsplitscreen == 2 && getdvarint(#"splitscreen_playercount", 1) > 1 || struct.disableinsplitscreen == 3 && getdvarint(#"splitscreen_playercount", 1) > 2 || struct.disableinsplitscreen == 4 && getdvarint(#"splitscreen_playercount", 1) > 3) {
     if(struct.type === "<dev string:x431>") {
-      str_debug = "<dev string:x43a>" + function_9e72a96(str_scene_name) + "<dev string:x444>";
+      str_debug = "<dev string:x43a>" + hashtostring(str_scene_name) + "<dev string:x444>";
     } else {
-      str_debug = "<dev string:x47e>" + function_9e72a96(struct.name) + "<dev string:x48f>" + str_scene_name + "<dev string:x444>";
+      str_debug = "<dev string:x47e>" + hashtostring(struct.name) + "<dev string:x48f>" + str_scene_name + "<dev string:x444>";
     }
 
     println(str_debug);
@@ -1099,7 +1099,7 @@ function function_de6a7579(str_scenedef, str_mode) {
 function play(arg1, arg2, arg3, b_test_run = 0, str_mode = "", n_time, var_f7d56e76) {
   if(getdvarint(#"debug_scene", 0) > 0) {
     if(isDefined(arg1) && (isstring(arg1) || ishash(arg1))) {
-      printtoprightln("<dev string:x49d>" + function_9e72a96(arg1));
+      printtoprightln("<dev string:x49d>" + hashtostring(arg1));
     } else {
       printtoprightln("<dev string:x4af>");
     }
@@ -1666,7 +1666,7 @@ function _get_scene_instances(str_value, str_key = "targetname", str_scenedef, b
 
   if(isDefined(str_value)) {
     a_instances = struct::get_array(str_value, str_key);
-    assert(a_instances.size, "<dev string:x58b>" + str_key + "<dev string:x5ac>" + function_9e72a96(str_value) + "<dev string:x5b3>");
+    assert(a_instances.size, "<dev string:x58b>" + str_key + "<dev string:x5ac>" + hashtostring(str_value) + "<dev string:x5b3>");
   }
 
   if(isDefined(str_scenedef)) {
@@ -2611,7 +2611,7 @@ function _get_existing_ent(val, key, b_ignore_spawners = 0, str_scene) {
     str_scene = "<dev string:x651>";
   }
 
-  assert(a_ents.size <= 1, "<dev string:x655>" + function_9e72a96(val) + "<dev string:x68e>" + function_9e72a96(str_scene) + "<dev string:x69c>");
+  assert(a_ents.size <= 1, "<dev string:x655>" + hashtostring(val) + "<dev string:x68e>" + hashtostring(str_scene) + "<dev string:x69c>");
 
   return a_ents[0];
 }
@@ -2652,7 +2652,7 @@ function synced_delete(str_scene) {
 }
 
 function error_on_screen(str_msg) {
-  str_msg = function_9e72a96(str_msg);
+  str_msg = hashtostring(str_msg);
 
   if(str_msg != "<dev string:x651>") {
     if(!isDefined(level.scene_error_hud)) {
@@ -2679,7 +2679,7 @@ function _destroy_error_on_screen() {
 }
 
 function warning_on_screen(str_msg) {
-  str_msg = function_9e72a96(str_msg);
+  str_msg = hashtostring(str_msg);
 
   if(str_msg != "<dev string:x651>") {
     if(!isDefined(level.scene_warning_hud)) {

@@ -8,7 +8,7 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-#namespace namespace_b6ca3ccc;
+#namespace mansion_stick_man;
 
 init_clientfields() {
   clientfield::register("scriptmover", "" + #"falling_leaves", 8000, 1, "int", &function_664898b6, 0, 0);
@@ -54,9 +54,9 @@ function_664898b6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_959fcbff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
 
-  if(isDefined(self.var_d8243293)) {
-    stopfx(localclientnum, self.var_d8243293);
-    self.var_d8243293 = undefined;
+  if(isDefined(self.n_fire_fx)) {
+    stopfx(localclientnum, self.n_fire_fx);
+    self.n_fire_fx = undefined;
   }
 
   if(isDefined(self.var_f756621f)) {
@@ -70,7 +70,7 @@ function_959fcbff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval == 1) {
-    self.var_d8243293 = util::playFXOnTag(localclientnum, level._effect[#"stick_fire"], self, "tag_origin");
+    self.n_fire_fx = util::playFXOnTag(localclientnum, level._effect[#"stick_fire"], self, "tag_origin");
 
     if(!isDefined(self.var_a0bfa25b)) {
       self playSound(localclientnum, #"hash_4c82cdad375db1a2");
@@ -83,7 +83,7 @@ function_959fcbff(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   if(newval == 2) {
     forcestreamxmodel(#"p8_zm_man_dead_tree_branches_burned");
     util::delay(2, undefined, &stopforcestreamingxmodel, #"p8_zm_man_dead_tree_branches_burned");
-    self.var_d8243293 = util::playFXOnTag(localclientnum, level._effect[#"stick_fire"], self, "tag_origin");
+    self.n_fire_fx = util::playFXOnTag(localclientnum, level._effect[#"stick_fire"], self, "tag_origin");
 
     if(!isDefined(self.var_a0bfa25b)) {
       self playSound(localclientnum, #"hash_4c82cdad375db1a2");

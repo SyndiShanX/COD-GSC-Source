@@ -1495,9 +1495,9 @@ function on_player_damage(einflictor, eattacker, idamage, idflags, smeansofdeath
 
 function on_player_disconnect() {
   if(!self util::is_spectating()) {
-    var_2e07b8ff = self getweaponslistprimaries();
+    a_w_primary_weapons = self getweaponslistprimaries();
 
-    foreach(w_weapon in var_2e07b8ff) {
+    foreach(w_weapon in a_w_primary_weapons) {
       if(w_weapon === level.var_5e824298) {
         self thread function_86404122();
       }

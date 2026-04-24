@@ -85,7 +85,7 @@ function_24167ed8() {
 }
 
 function_ab07399f() {
-  foreach(t_crafting in level.var_4fe2f84d[#"ztable_white_open"]) {
+  foreach(t_crafting in level.a_t_crafting[#"ztable_white_open"]) {
     if(isDefined(t_crafting.var_4f749ffe)) {
       t_crafting.var_ae360c37 = getent(t_crafting.var_4f749ffe.target, "targetname");
       t_crafting.var_ae360c37 ghost();

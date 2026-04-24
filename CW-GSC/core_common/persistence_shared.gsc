@@ -283,7 +283,7 @@ function challenge_complete(eventstruct) {
 
   if(var_5d5d13c3 != "<dev string:x38>") {
     challengestat = tablelookupcolumnforrow(tablename, row, 4);
-    var_40fdd9a5 = ishash(challengestat) ? function_9e72a96(challengestat) : challengestat;
+    var_40fdd9a5 = ishash(challengestat) ? hashtostring(challengestat) : challengestat;
 
     if(!issubstr(tolower(var_40fdd9a5), tolower(var_5d5d13c3))) {
       return;

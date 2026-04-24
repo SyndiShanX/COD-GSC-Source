@@ -543,10 +543,10 @@ function_8e0b371() {
 
   while(true) {
     if(isalive(self)) {
-      str_location = self function_ab7f70b9();
+      str_location = self get_location_string();
 
-      if(isDefined(level.var_bc410725) && level.var_bc410725 && isDefined(level.var_dcc985c4)) {
-        str_location = self function_ab7f70b9(level.var_dcc985c4.script_string);
+      if(isDefined(level.var_bc410725) && level.var_bc410725 && isDefined(level.s_bird_loc)) {
+        str_location = self get_location_string(level.s_bird_loc.script_string);
       }
 
       self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
@@ -558,7 +558,7 @@ function_8e0b371() {
   }
 }
 
-function_ab7f70b9(str_location) {
+get_location_string(str_location) {
   str_zone = self zm_zonemgr::get_player_zone();
 
   if(!isDefined(str_zone)) {
@@ -1067,13 +1067,13 @@ function_4a3c0c1c(var_3a1b23c2) {
 }
 
 function_4b511c76() {
-  foreach(var_46bf10d9 in level.var_4952e1) {
-    var_46bf10d9 notify(#"hash_13c5316203561c4f");
-    var_46bf10d9 notify(#"fully_charged");
-    var_46bf10d9.mdl_rune setModel("<dev string:x4ba>");
+  foreach(s_soul_catcher in level.a_s_soul_catchers) {
+    s_soul_catcher notify(#"hash_13c5316203561c4f");
+    s_soul_catcher notify(#"fully_charged");
+    s_soul_catcher.mdl_rune setModel("<dev string:x4ba>");
   }
 
-  level.n_soul_catchers_charged = level.var_4952e1.size;
+  level.n_soul_catchers_charged = level.a_s_soul_catchers.size;
   level thread zm_escape_weap_quest::function_5fd2c72e();
 }
 

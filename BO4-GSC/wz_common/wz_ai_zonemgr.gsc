@@ -1176,11 +1176,11 @@ function_5f0d105a(zone_category, zone_name, spawner_type, var_aeae9f59, var_f1fb
 
   level.var_5b357434[level.var_5b357434.size] = var_a59ba023;
 
-  path = "<dev string:x6d3>" + var_a59ba023.zone_name + "<dev string:x6f3>" + function_9e72a96(var_a59ba023.var_cafac64a) + "<dev string:x6f7>" + "<dev string:x703>";
-  command = "<dev string:x707>" + var_a59ba023.zone_name + "<dev string:x5ef>" + function_9e72a96(var_a59ba023.var_cafac64a) + "<dev string:x703>";
+  path = "<dev string:x6d3>" + var_a59ba023.zone_name + "<dev string:x6f3>" + hashtostring(var_a59ba023.var_cafac64a) + "<dev string:x6f7>" + "<dev string:x703>";
+  command = "<dev string:x707>" + var_a59ba023.zone_name + "<dev string:x5ef>" + hashtostring(var_a59ba023.var_cafac64a) + "<dev string:x703>";
   adddebugcommand(path + "<dev string:x72a>" + command + "<dev string:x72e>");
-  path = "<dev string:x6d3>" + var_a59ba023.zone_name + "<dev string:x6f3>" + function_9e72a96(var_a59ba023.var_cafac64a) + "<dev string:x733>" + "<dev string:x703>";
-  command = "<dev string:x741>" + var_a59ba023.zone_name + "<dev string:x5ef>" + function_9e72a96(var_a59ba023.var_cafac64a) + "<dev string:x703>";
+  path = "<dev string:x6d3>" + var_a59ba023.zone_name + "<dev string:x6f3>" + hashtostring(var_a59ba023.var_cafac64a) + "<dev string:x733>" + "<dev string:x703>";
+  command = "<dev string:x741>" + var_a59ba023.zone_name + "<dev string:x5ef>" + hashtostring(var_a59ba023.var_cafac64a) + "<dev string:x703>";
   adddebugcommand(path + "<dev string:x72a>" + command + "<dev string:x72e>");
 
   return var_a59ba023;

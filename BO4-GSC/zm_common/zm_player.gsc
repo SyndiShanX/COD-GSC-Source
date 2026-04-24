@@ -976,14 +976,14 @@ player_prevent_damage(einflictor, eattacker, idamage, idflags, smeansofdeath, we
   }
 
   if(isai(eattacker) && self.ignoreme) {
-    println("<dev string:x185>" + function_9e72a96(eattacker.archetype) + "<dev string:x1be>" + smeansofdeath);
+    println("<dev string:x185>" + hashtostring(eattacker.archetype) + "<dev string:x1be>" + smeansofdeath);
   }
 
   if(isDefined(self.bgb_in_plain_sight_active) && self.bgb_in_plain_sight_active) {
     str = "<dev string:x1c7>";
 
     if(isai(eattacker)) {
-      str += function_9e72a96(eattacker.archetype);
+      str += hashtostring(eattacker.archetype);
     } else if(isDefined(eattacker)) {
       str = str + "<dev string:x1f6>" + eattacker getentitynumber();
     } else {

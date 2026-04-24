@@ -28,7 +28,7 @@ __init__() {
 }
 
 on_begin() {
-  level thread function_eb301e1b();
+  level thread ghost_path();
 }
 
 on_end(round_reset) {
@@ -87,7 +87,7 @@ function_889abd74() {
   }
 }
 
-function_eb301e1b() {
+ghost_path() {
   level endon(#"hash_7646638df88a3656");
   wait randomintrange(0, 3);
   var_c98c4943 = array::random(array("monkey_loc", "bull_loc", "dl_loc"));

@@ -73,7 +73,7 @@ function function_d912fa6e(player) {
   return player.var_c52363ab == 10;
 }
 
-function function_dd8cb464(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function function_dd8cb464(item, player, networkid, itemid, itemcount, itemamount, slot) {
   if(!function_d912fa6e(slot)) {
     slot armor_carrier::function_e12c220a(10);
     return true;
@@ -193,15 +193,15 @@ function function_b0000c15() {
   self clientfield::set_player_uimodel("hudItems.radiationVestHealth", 0);
 }
 
-function function_98942433(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function function_98942433(item, player, networkid, itemid, itemcount, itemamount, slot) {
   if(function_36b9f4fe(slot)) {
     return false;
   }
 
   slot clientfield::set_player_uimodel("hudItems.radiationVestHealth", 1);
-  slot.var_1181c08b = isDefined(var_aec6fa7f.itementry.var_1181c08b) ? var_aec6fa7f.itementry.var_1181c08b : 0;
+  slot.var_1181c08b = isDefined(itemamount.itementry.var_1181c08b) ? itemamount.itementry.var_1181c08b : 0;
   slot.var_4a1cb171 = slot.var_1181c08b;
-  slot.var_dba54111 = isDefined(var_aec6fa7f.itementry.var_dba54111) ? var_aec6fa7f.itementry.var_dba54111 : 0;
+  slot.var_dba54111 = isDefined(itemamount.itementry.var_dba54111) ? itemamount.itementry.var_dba54111 : 0;
   return true;
 }
 

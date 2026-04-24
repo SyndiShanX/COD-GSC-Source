@@ -268,7 +268,7 @@ killed_callback(e_attacker) {
   }
 
   if(level flag::get("zombie_drop_powerups") && !zm_utility::is_standard()) {
-    self thread zm_powerups::specific_powerup_drop(self.var_d0686fde, self.origin, undefined, undefined, undefined, undefined, undefined, undefined, 0, 1);
+    self thread zm_powerups::specific_powerup_drop(self.a_str_powerups, self.origin, undefined, undefined, undefined, undefined, undefined, undefined, 0, 1);
   }
 }
 
@@ -771,12 +771,12 @@ function_911c3934(entity) {
   entity.favoriteenemy = entity.var_93a62fe;
 }
 
-function_51dbdb8f(var_9cb85074) {
-  if(!isDefined(var_9cb85074) || !isarray(level.var_fe96a4c4)) {
+function_51dbdb8f(w_poi) {
+  if(!isDefined(w_poi) || !isarray(level.var_fe96a4c4)) {
     return false;
   }
 
-  if(isinarray(level.var_fe96a4c4, var_9cb85074)) {
+  if(isinarray(level.var_fe96a4c4, w_poi)) {
     return true;
   }
 
@@ -2131,8 +2131,8 @@ function_19249d10(entity) {
   forward = anglesToForward(entity.angles);
   forward2d = vectornormalize((forward[0], forward[1], 0));
   dirtotarget = entity.favoriteenemy.origin - entity.origin;
-  var_854904a = vectornormalize((dirtotarget[0], dirtotarget[1], 0));
-  dot = vectordot(forward2d, var_854904a);
+  dirtotarget2d = vectornormalize((dirtotarget[0], dirtotarget[1], 0));
+  dot = vectordot(forward2d, dirtotarget2d);
 
   if(dot < entity ai::function_9139c839().var_aa503e5a) {
     return false;

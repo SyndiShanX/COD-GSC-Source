@@ -118,9 +118,9 @@ zombie_breakout_func(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
 pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   self endon(#"death");
-  var_10d4f67d = level.var_1c8295a8;
+  mdl_pegasus = level.var_1c8295a8;
 
-  if(!isDefined(var_10d4f67d)) {
+  if(!isDefined(mdl_pegasus)) {
     return;
   }
 
@@ -131,7 +131,7 @@ pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
   }
 
   if(newval == 1) {
-    if(isDefined(var_10d4f67d gettagorigin("j_feather_le_10"))) {
+    if(isDefined(mdl_pegasus gettagorigin("j_feather_le_10"))) {
       str_feather = "j_feather_le_10";
     } else {
       str_feather = "tag_origin";
@@ -140,11 +140,11 @@ pegasus_beam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
     str_feather = "j_feather_ri_10";
   }
 
-  level beam::launch(var_10d4f67d, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike", 1);
+  level beam::launch(mdl_pegasus, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike", 1);
   self playSound(localclientnum, #"hash_61c057ffadb7a5af");
   level thread chaos_explosion(localclientnum);
   wait 0.3;
-  level beam::kill(var_10d4f67d, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike");
+  level beam::kill(mdl_pegasus, str_feather, self, str_tag, "beam8_zm_red_peg_lightning_strike");
 }
 
 chaos_explosion(localclientnum) {

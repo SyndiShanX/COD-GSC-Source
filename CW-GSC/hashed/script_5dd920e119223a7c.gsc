@@ -1805,7 +1805,7 @@ function private function_90591f67(var_f5064815, var_109708e0, s_instance) {
   self.mdl_trail playLoopSound(#"hash_734cc0f685efb122");
   wait 0.1;
   var_6e468adf = isDefined(var_a2b4a7d6.contentgroups[#"spawn"]) ? var_a2b4a7d6.contentgroups[#"spawn"] : [];
-  var_1e001170 = var_6e468adf[0];
+  s_next_spawn = var_6e468adf[0];
 
   if(isDefined(self.mdl_trail)) {
     self linkto(self.mdl_trail, "tag_origin");
@@ -1835,7 +1835,7 @@ function private function_90591f67(var_f5064815, var_109708e0, s_instance) {
     }
 
     if(isDefined(self.mdl_trail)) {
-      self.mdl_trail thread function_42fbf5d9(var_1e001170, s_instance, var_f5064815);
+      self.mdl_trail thread function_42fbf5d9(s_next_spawn, s_instance, var_f5064815);
     }
 
     if(isDefined(self)) {
@@ -1847,7 +1847,7 @@ function private function_90591f67(var_f5064815, var_109708e0, s_instance) {
   function_3ef1d58a(s_instance, self.var_6a4ec994 + 1);
   self val::reset("hvt_teleport_ignoreall", "ignoreall");
   self flag::clear(#"pause_awareness");
-  self thread function_fc515700(var_1e001170, var_f5064815, var_a2b4a7d6, s_instance);
+  self thread function_fc515700(s_next_spawn, var_f5064815, var_a2b4a7d6, s_instance);
   self show();
   self flag::clear("kill_hvt_teleporting");
 }

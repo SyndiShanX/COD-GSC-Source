@@ -73,7 +73,7 @@ setup_devgui() {
 
   foreach(key, v in level.aat) {
     if(key != "<dev string:x55>") {
-      name = function_9e72a96(key);
+      name = hashtostring(key);
       adddebugcommand(aat_devgui_base + name + "<dev string:x5c>" + "<dev string:x66>" + "<dev string:x7b>" + name + "<dev string:x7f>");
     }
   }

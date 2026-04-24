@@ -32,13 +32,13 @@ function private init_postload() {
 }
 
 function on_end_game() {
-  var_9c1ed9ea = "gameover_survival";
+  str_musicstate = "gameover_survival";
 
   if(isDefined(level.var_e6512c09)) {
-    var_9c1ed9ea = level.var_e6512c09;
+    str_musicstate = level.var_e6512c09;
   }
 
-  function_5a47adab(var_9c1ed9ea);
+  function_5a47adab(str_musicstate);
 }
 
 function on_player_spawned() {
@@ -113,12 +113,12 @@ function function_df47d1da(str_objective_name) {
   var_71ce1ff1 = function_86df3ee8(str_objective_name);
 
   if(isDefined(var_71ce1ff1)) {
-    var_9c1ed9ea = var_71ce1ff1;
+    str_musicstate = var_71ce1ff1;
   } else {
-    var_9c1ed9ea = "survival_objective_" + randomintrange(0, 3);
+    str_musicstate = "survival_objective_" + randomintrange(0, 3);
   }
 
-  function_5a47adab(var_9c1ed9ea);
+  function_5a47adab(str_musicstate);
 }
 
 function function_a9cc2e9f(b_completed, str_objective_name = 1) {
@@ -159,7 +159,7 @@ function function_16bede30() {
   }
 }
 
-function function_9f5c2ff2(var_9c1ed9ea) {
+function function_9f5c2ff2(str_musicstate) {
   if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
     return;
   }
@@ -167,7 +167,7 @@ function function_9f5c2ff2(var_9c1ed9ea) {
   level notify(#"hash_65e9b602c68b844d");
   level.var_d4a9453c = 1;
   function_5d985962(0);
-  function_5a47adab(var_9c1ed9ea);
+  function_5a47adab(str_musicstate);
 }
 
 function function_b8af32da() {
@@ -221,8 +221,8 @@ function underscore() {
     waitresult = self waittill(#"change_underscore");
 
     if(is_true(level.var_b375589a)) {
-      if(isDefined(waitresult.var_9c1ed9ea)) {
-        self.var_187e3f7e = waitresult.var_9c1ed9ea;
+      if(isDefined(waitresult.str_musicstate)) {
+        self.var_187e3f7e = waitresult.str_musicstate;
       }
 
       if(self.var_edc6d524 !== self.var_187e3f7e) {
@@ -249,22 +249,22 @@ function function_28f119be() {
 
     if(var_3ac2b3dc && self.var_edc6d524 != "survival_underscore_active") {
       self notify(#"change_underscore", {
-        #var_9c1ed9ea: "survival_underscore_active"});
+        #str_musicstate: "survival_underscore_active"});
     } else if(var_d300714c.var_8cebd3a9 && !var_3ac2b3dc && self.var_edc6d524 === "") {
       self notify(#"change_underscore", {
-        #var_9c1ed9ea: "survival_underscore"});
+        #str_musicstate: "survival_underscore"});
     } else if(!var_d300714c.var_8cebd3a9 && !var_3ac2b3dc && self.var_edc6d524 != "survival_underscore") {
       if(function_2d36215b(self, a_enemies)) {
         self notify(#"change_underscore", {
-          #var_9c1ed9ea: "survival_underscore"});
+          #str_musicstate: "survival_underscore"});
       } else {
         self notify(#"change_underscore", {
-          #var_9c1ed9ea: ""});
+          #str_musicstate: ""});
       }
     } else if(!var_d300714c.var_8cebd3a9 && !var_3ac2b3dc && self.var_edc6d524 != "") {
       if(!function_2d36215b(self, a_enemies)) {
         self notify(#"change_underscore", {
-          #var_9c1ed9ea: ""});
+          #str_musicstate: ""});
       }
     }
 
@@ -313,16 +313,16 @@ function function_61eeb910(e_player, a_enemies) {
   };
 }
 
-function function_5a47adab(var_9c1ed9ea) {
-  level.var_d1b0ffd = var_9c1ed9ea;
+function function_5a47adab(str_musicstate) {
+  level.var_d1b0ffd = str_musicstate;
 
   foreach(player in level.players) {
-    player set_to_player(var_9c1ed9ea);
+    player set_to_player(str_musicstate);
   }
 }
 
-function set_to_player(var_9c1ed9ea) {
-  music::setmusicstate(var_9c1ed9ea, self);
+function set_to_player(str_musicstate) {
+  music::setmusicstate(str_musicstate, self);
 }
 
 function function_86df3ee8(str_objective_name) {
@@ -351,17 +351,17 @@ function function_86df3ee8(str_objective_name) {
 }
 
 function function_57292af3() {
-  var_9c1ed9ea = "survival_intro";
+  str_musicstate = "survival_intro";
 
   if(isDefined(level.var_f546b995)) {
-    var_9c1ed9ea = "survival_intro_" + level.var_f546b995;
+    str_musicstate = "survival_intro_" + level.var_f546b995;
   }
 
   if(is_true(getgametypesetting(#"hash_1e8998fd7f271bb7"))) {
-    var_9c1ed9ea = "";
+    str_musicstate = "";
   }
 
-  function_5a47adab(var_9c1ed9ea);
+  function_5a47adab(str_musicstate);
 }
 
 function insertion(var_df887556) {

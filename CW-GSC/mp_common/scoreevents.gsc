@@ -713,7 +713,7 @@ function scoreeventplayerkill(data, time) {
         }
 
         data.var_7b4d33ac = 1;
-      } else if(weapon.var_29d24e37) {
+      } else if(weapon.isvehicleturret) {
         if(data.var_1ebff6a5 !== 0 || data.var_8badc7f8 !== 1) {
           attacker stats::function_dad108fa(#"hash_492a4e8875009b7b", 1);
         }

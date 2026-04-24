@@ -46,7 +46,7 @@ init() {
   zm_sq_modules::function_d8383812(#"soul_capture_forest", 8000, #"kp_forest", &is_soul_capture_forest, &function_b570f926, 1);
   init_flags();
   register_steps();
-  level thread function_c6e2a4fd();
+  level thread init_components();
   level thread function_6eb39fe4();
   level thread function_b8cc9d7e();
 }
@@ -70,7 +70,7 @@ function_b8cc9d7e() {
   var_5528f605 hidepart("tag_stone_03", "p8_zm_man_statue_kisa_stone_03", 1);
 }
 
-function_c6e2a4fd() {
+init_components() {
   level flag::wait_till("all_players_spawned");
   level thread forest_entrance();
   level thread zmb_ee_key_pickupmemberdeath();
@@ -1505,7 +1505,7 @@ function_de68c9b7(s_params) {
 
 function_5ffc956(v_zombie_origin) {
   level endon(#"end_game", #"hash_6402d013069eb3a");
-  e_closest_player = arraygetclosest(v_zombie_origin, zm_vo::function_347f7d34());
+  e_closest_player = arraygetclosest(v_zombie_origin, zm_vo::get_valid_players());
 
   if(isalive(e_closest_player) && e_closest_player util::is_player_looking_at(v_zombie_origin) && distance2dsquared(v_zombie_origin, e_closest_player.origin) < 147456) {
     level.var_be97413 = 1 === e_closest_player zm_audio::create_and_play_dialog(#"kill", #"knight_trap", undefined, 1);
@@ -1798,7 +1798,7 @@ trigger_forest_entrance() {
     wait 0.1;
   }
 
-  player = array::random(zm_vo::function_347f7d34());
+  player = array::random(zm_vo::get_valid_players());
 
   if(isDefined(player)) {
     player thread zm_vo::function_a2bd5a0c(#"hash_7cedb4ec0f14ff50", 1);

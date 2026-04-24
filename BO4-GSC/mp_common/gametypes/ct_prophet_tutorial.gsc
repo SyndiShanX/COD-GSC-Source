@@ -950,11 +950,11 @@ function_235b259b() {
   self thread function_222141a5();
   a_str_spawns = array("s_tut_fin1_wave1_enemy_a", "s_tut_fin1_wave1_enemy_b");
   str_spawns = array::random(a_str_spawns);
-  var_31879d4d = [];
-  var_31879d4d[#"s_tut_fin1_wave1_enemy_a"] = "s_tut_fin1_respawn_a";
-  var_31879d4d[#"s_tut_fin1_wave1_enemy_b"] = "s_tut_fin1_respawn_b";
-  var_31879d4d[#"s_tut_fin1_wave2_enemy"] = "s_tut_fin1_respawn_wave_2";
-  str_respawn = var_31879d4d[str_spawns];
+  a_str_player_respawn = [];
+  a_str_player_respawn[#"s_tut_fin1_wave1_enemy_a"] = "s_tut_fin1_respawn_a";
+  a_str_player_respawn[#"s_tut_fin1_wave1_enemy_b"] = "s_tut_fin1_respawn_b";
+  a_str_player_respawn[#"s_tut_fin1_wave2_enemy"] = "s_tut_fin1_respawn_wave_2";
+  str_respawn = a_str_player_respawn[str_spawns];
   level.var_3f7591c4 = 0;
   level.var_72c3ea74 = struct::get_array(str_spawns, "targetname");
   level.var_da5432a2 = 0;
@@ -979,7 +979,7 @@ function_235b259b() {
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_prop_wine_comp_0"));
   level.var_3f7591c4 = 0;
   str_spawns = "s_tut_fin1_wave2_enemy";
-  str_respawn = var_31879d4d[str_spawns];
+  str_respawn = a_str_player_respawn[str_spawns];
   level.var_72c3ea74 = struct::get_array(str_spawns, "targetname");
   level.var_da5432a2 = 0;
   level thread ct_bots::activate_bots(level.var_72c3ea74.size, #"axis");

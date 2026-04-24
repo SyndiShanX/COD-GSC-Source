@@ -14,7 +14,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
-#namespace namespace_a8113e97;
+#namespace mansion_ley_line;
 
 init_clientfields() {
   clientfield::register("allplayers", "" + #"hash_5370f4bc9fc25d13", 8000, 1, "int", &function_bdecc239, 0, 1);

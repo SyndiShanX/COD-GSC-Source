@@ -60,7 +60,7 @@ init() {
   function_91be5845();
   function_4e7d0566();
   function_5659cbef();
-  function_c1a4b575();
+  init_glyphs();
   level thread function_b2901ae4();
 
   if(zm_utility::is_ee_enabled()) {
@@ -145,15 +145,15 @@ init_steps() {
 
 function_91be5845() {
   level.a_s_sparks = array::randomize(struct::get_array(#"hash_b29f24eab97a1d"));
-  var_ffba1428 = array(#"hash_41a5c5168ffb2a97", #"hash_400a481490a4e390", #"hash_5562e324d230f057", #"hash_41fae186552f1259");
+  a_str_noteworthy = array(#"hash_41a5c5168ffb2a97", #"hash_400a481490a4e390", #"hash_5562e324d230f057", #"hash_41fae186552f1259");
 
-  while(level.a_s_sparks.size > var_ffba1428.size) {
+  while(level.a_s_sparks.size > a_str_noteworthy.size) {
     arrayremoveindex(level.a_s_sparks, 0, 0);
   }
 
   foreach(s_spark in level.a_s_sparks) {
-    s_spark.script_noteworthy = var_ffba1428[0];
-    arrayremovevalue(var_ffba1428, var_ffba1428[0], 0);
+    s_spark.script_noteworthy = a_str_noteworthy[0];
+    arrayremovevalue(a_str_noteworthy, a_str_noteworthy[0], 0);
     zm_sq_modules::function_d8383812(s_spark.script_noteworthy, 1, s_spark, &function_b6db8da0, &function_6ae57d29);
   }
 
@@ -207,7 +207,7 @@ function_b2901ae4() {
   hidemiscmodels("bridge_controls");
 }
 
-function_c1a4b575() {
+init_glyphs() {
   var_5aa39ae9 = struct::get_array(#"planet_glyph", "script_noteworthy");
 
   foreach(s_loc in var_5aa39ae9) {

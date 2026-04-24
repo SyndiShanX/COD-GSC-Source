@@ -2265,7 +2265,7 @@ function_400149db() {
   }
 }
 
-function_6ad22c31(var_9a9deac6, var_227aa02e, str_objective = #"hash_5fadc5cf57233ef4") {
+function_6ad22c31(var_9a9deac6, a_str_vo_obj, str_objective = #"hash_5fadc5cf57233ef4") {
   level endon(#"combattraining_logic_finished");
   self ct_utils::function_1bb93418();
   level waittill(#"enemy_stuck_in_razorwire");
@@ -2274,7 +2274,7 @@ function_6ad22c31(var_9a9deac6, var_227aa02e, str_objective = #"hash_5fadc5cf572
     self ct_vo::function_831e0584(var_9a9deac6);
   }
 
-  self ct_utils::function_61c3d59c(str_objective, var_227aa02e);
+  self ct_utils::function_61c3d59c(str_objective, a_str_vo_obj);
 }
 
 on_concertinawire_placed(newcover) {

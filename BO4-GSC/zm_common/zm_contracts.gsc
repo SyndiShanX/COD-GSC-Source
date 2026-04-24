@@ -232,10 +232,10 @@ function_902ef0de(var_38280f2f, delta) {
   }
 
   if(getdvarint(#"scr_contract_debug", 0) > 0) {
-    iprintln(function_9e72a96(var_38280f2f) + "<dev string:x38>" + new_progress + "<dev string:x46>" + target_value);
+    iprintln(hashtostring(var_38280f2f) + "<dev string:x38>" + new_progress + "<dev string:x46>" + target_value);
 
     if(old_progress < target_value && target_value <= new_progress) {
-      iprintln(function_9e72a96(var_38280f2f) + "<dev string:x4a>");
+      iprintln(hashtostring(var_38280f2f) + "<dev string:x4a>");
     }
   }
 

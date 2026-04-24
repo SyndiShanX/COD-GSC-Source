@@ -123,7 +123,7 @@ function private function_c4fe091c() {
   var_de82b392 = function_19df1c1c();
 
   foreach(str_aitype in var_de82b392) {
-    str_aitype = function_9e72a96(str_aitype);
+    str_aitype = hashtostring(str_aitype);
     util::add_debug_command("<dev string:x5ac>" + str_aitype + "<dev string:x5c8>" + str_aitype + "<dev string:x19c>");
     util::add_debug_command("<dev string:x5ac>" + str_aitype + "<dev string:x5fd>" + str_aitype + "<dev string:x19c>");
     util::add_debug_command("<dev string:x5ac>" + str_aitype + "<dev string:x62f>" + str_aitype + "<dev string:x19c>");
@@ -366,11 +366,11 @@ function function_8cf627fd(params) {
 
       for(i = 0; i < list.size; i++) {
         if(i === index) {
-          println("<dev string:x6b8>" + function_9e72a96(list[i]) + "<dev string:x6be>");
+          println("<dev string:x6b8>" + hashtostring(list[i]) + "<dev string:x6be>");
           continue;
         }
 
-        println(function_9e72a96(list[i]) + "<dev string:x6be>");
+        println(hashtostring(list[i]) + "<dev string:x6be>");
       }
 
       break;
@@ -748,9 +748,9 @@ function private print_zombie_counts() {
     foreach(ai in a_ai) {
       if(isalive(ai) && isDefined(ai.archetype)) {
         if(isDefined(ai.subarchetype)) {
-          str_archetype = function_9e72a96(ai.archetype) + "<dev string:x7fb>" + function_9e72a96(ai.subarchetype) + "<dev string:x801>";
+          str_archetype = hashtostring(ai.archetype) + "<dev string:x7fb>" + hashtostring(ai.subarchetype) + "<dev string:x801>";
         } else {
-          str_archetype = function_9e72a96(ai.archetype);
+          str_archetype = hashtostring(ai.archetype);
         }
 
         if(!isDefined(var_6a432250[str_archetype])) {
@@ -767,7 +767,7 @@ function private print_zombie_counts() {
 
     foreach(str_archetype, n_ai_count in var_6a432250) {
       var_c708e6e1 += 22;
-      debug2dtext((700, var_c708e6e1, 0), function_9e72a96(str_archetype) + "<dev string:x84b>" + n_ai_count + "<dev string:x6be>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 5);
+      debug2dtext((700, var_c708e6e1, 0), hashtostring(str_archetype) + "<dev string:x84b>" + n_ai_count + "<dev string:x6be>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 5);
     }
 
     waitframe(5);
@@ -840,12 +840,12 @@ function function_2fab7a62(str_type) {
   if(isDefined(str_type) && str_type != "<dev string:x38>") {
     str_dvar = "<dev string:x881>" + str_type;
     util::init_dvar(str_dvar, 0, &function_2a3a4bf6);
-    util::add_devgui(content_manager::devgui_path("<dev string:x899>", function_9e72a96(str_type), 103), "<dev string:x8b7>" + str_dvar + "<dev string:x8c2>");
+    util::add_devgui(content_manager::devgui_path("<dev string:x899>", hashtostring(str_type), 103), "<dev string:x8b7>" + str_dvar + "<dev string:x8c2>");
   }
 }
 
 function function_2a3a4bf6(params) {
-  var_806a0877 = function_9e72a96(params.name);
+  var_806a0877 = hashtostring(params.name);
   a_str_tokens = strtok(var_806a0877, "<dev string:x197>");
   assert(isDefined(a_str_tokens) && a_str_tokens.size > 1, var_806a0877 + "<dev string:x8ca>");
   str_type = a_str_tokens[1];
@@ -1171,7 +1171,7 @@ function function_fabd315d(spawn_point, var_957493b8) {
       errormsg = "<dev string:xc47>" + spawn_point.origin;
 
       if(isDefined(self.var_90d0c0ff) && isDefined(self.var_1a02009e)) {
-        errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + function_9e72a96(self.var_1a02009e);
+        errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
       }
 
       level.var_135a36f7[level.var_135a36f7.size] = errormsg;
@@ -1179,7 +1179,7 @@ function function_fabd315d(spawn_point, var_957493b8) {
       errormsg = "<dev string:xc47>" + spawn_point.origin;
 
       if(isDefined(self.var_90d0c0ff) && isDefined(self.var_1a02009e)) {
-        errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + function_9e72a96(self.var_1a02009e);
+        errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
       }
 
       println("<dev string:xc89>" + errormsg);
@@ -1214,7 +1214,7 @@ function function_fabd315d(spawn_point, var_957493b8) {
         errormsg = "<dev string:xcee>" + spawn_point.origin;
 
         if(isDefined(self.var_90d0c0ff) && isDefined(self.var_1a02009e)) {
-          errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + function_9e72a96(self.var_1a02009e);
+          errormsg += "<dev string:xc70>" + self.var_90d0c0ff + "<dev string:xc7d>" + hashtostring(self.var_1a02009e);
         }
 
         level.var_135a36f7[level.var_135a36f7.size] = errormsg;

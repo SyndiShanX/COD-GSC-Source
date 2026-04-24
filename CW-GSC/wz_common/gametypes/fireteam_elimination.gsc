@@ -700,28 +700,28 @@ function function_c05c19ed() {
   var_2dd14343 animation::play(#"hash_74a9c4a2475fa8f1", self gettagorigin("tag_passenger3"), self gettagangles("tag_passenger3"), 1, 0.2, 0.1, undefined, undefined, undefined, 0);
 }
 
-function private function_18f58ab2(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_18f58ab2(item, player, networkid, itemid, itemcount, itemamount, slot) {
   pickup = 0;
 
   switch (item.itementry.name) {
     case # "hash_6ebec4f42d4b01c":
-      pickup = function_dc3115e2(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = function_dc3115e2(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "hash_2ec97717fa7f8ee":
-      pickup = function_a882bcee(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = function_a882bcee(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "armor_pouch_item_t9":
-      pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "hash_583f1687cefbd3f3":
-      pickup = namespace_234f0efc::function_98942433(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = namespace_234f0efc::function_98942433(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
   }
 
   return itemcount - pickup;
 }
 
-function private function_dc3115e2(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_dc3115e2(item, player, networkid, itemid, itemcount, itemamount, slot) {
   if(slot.pers[#"lives"] > 5) {
     return false;
   }
@@ -734,7 +734,7 @@ function private function_dc3115e2(item, player, networkid, itemid, itemcount, v
   return true;
 }
 
-function private function_a882bcee(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_a882bcee(item, player, networkid, itemid, itemcount, itemamount, slot) {
   squadplayers = function_c65231e2(slot.squad);
 
   foreach(squadplayer in squadplayers) {

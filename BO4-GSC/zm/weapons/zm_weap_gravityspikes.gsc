@@ -166,7 +166,7 @@ function_e0537f19(w_gravityspikes) {
   self endon(#"disconnect");
   n_slot = self gadgetgetslot(w_gravityspikes);
 
-  if(self function_36dfc05f(n_slot)) {
+  if(self gadgetisdeployed(n_slot)) {
     for(var_966dad48 = self gadgetpowerget(n_slot); var_966dad48 > 0; var_966dad48 = self gadgetpowerget(n_slot)) {
       waitframe(1);
     }

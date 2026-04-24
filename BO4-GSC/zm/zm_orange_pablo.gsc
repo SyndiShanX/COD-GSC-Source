@@ -33,7 +33,7 @@ init() {
   level flag::init(#"hash_6e81da82129193f6");
   level flag::init(#"hash_6a7b24db9087b2eb");
   level.pablo_npc.var_3e21d491 = struct::get("s_pap_rock_dropoff");
-  level.pablo_npc.var_f75b1f16 = [];
+  level.pablo_npc.a_n_interacts = [];
   level.pablo_npc.var_cb3ed98f = [];
   level.pablo_npc.var_cb3ed98f[2] = {
     #var_fcab5f41: # "hash_22abfa5a48ecff33", #var_e7b75754: # "hash_22abfa5a48ecff33", #var_c67e664c: 1, #var_23d421c1: # "", #n_obj: 2
@@ -188,7 +188,7 @@ function_57c115a8() {
   var_de23a374 = array("lighthouse_level_1");
 
   while(true) {
-    if(self.isspeaking == 0 && self.var_f75b1f16.size > 0 && zm_hms_util::any_player_in_zone(var_de23a374) && !zm_hms_util::any_player_in_zone("lighthouse_level_4")) {
+    if(self.isspeaking == 0 && self.a_n_interacts.size > 0 && zm_hms_util::any_player_in_zone(var_de23a374) && !zm_hms_util::any_player_in_zone("lighthouse_level_4")) {
       str_nag = self function_e81ee0e3();
 
       if(str_nag === #"hash_75f4c63702dc54e") {
@@ -213,8 +213,8 @@ function_57c115a8() {
 }
 
 function_e81ee0e3() {
-  for(i = 0; i < self.var_f75b1f16.size; i++) {
-    var_4ad2924d = self.var_f75b1f16[i];
+  for(i = 0; i < self.a_n_interacts.size; i++) {
+    var_4ad2924d = self.a_n_interacts[i];
 
     if(isDefined(self.var_cb3ed98f[var_4ad2924d].var_23d421c1)) {
       return self.var_cb3ed98f[var_4ad2924d].var_23d421c1;
@@ -225,8 +225,8 @@ function_e81ee0e3() {
 }
 
 function_17440011() {
-  for(i = 0; i < self.var_f75b1f16.size; i++) {
-    var_4ad2924d = self.var_f75b1f16[i];
+  for(i = 0; i < self.a_n_interacts.size; i++) {
+    var_4ad2924d = self.a_n_interacts[i];
 
     if(isDefined(self.var_cb3ed98f[var_4ad2924d].var_f26e362)) {
       return self.var_cb3ed98f[var_4ad2924d].var_f26e362;
@@ -255,19 +255,19 @@ function_3f9e02b8(n_pick_up, str_hint, var_306b9dd6, func_interact, func_hint = 
 }
 
 function_d83490c5(n_quest) {
-  if(!isDefined(level.pablo_npc.var_f75b1f16)) {
-    level.pablo_npc.var_f75b1f16 = [];
-  } else if(!isarray(level.pablo_npc.var_f75b1f16)) {
-    level.pablo_npc.var_f75b1f16 = array(level.pablo_npc.var_f75b1f16);
+  if(!isDefined(level.pablo_npc.a_n_interacts)) {
+    level.pablo_npc.a_n_interacts = [];
+  } else if(!isarray(level.pablo_npc.a_n_interacts)) {
+    level.pablo_npc.a_n_interacts = array(level.pablo_npc.a_n_interacts);
   }
 
-  level.pablo_npc.var_f75b1f16[level.pablo_npc.var_f75b1f16.size] = n_quest;
-  level.pablo_npc.var_f75b1f16 = array::sort_by_value(level.pablo_npc.var_f75b1f16, 1);
+  level.pablo_npc.a_n_interacts[level.pablo_npc.a_n_interacts.size] = n_quest;
+  level.pablo_npc.a_n_interacts = array::sort_by_value(level.pablo_npc.a_n_interacts, 1);
 }
 
 function_6aaeff92(n_quest) {
-  arrayremovevalue(level.pablo_npc.var_f75b1f16, n_quest);
-  level.pablo_npc.var_f75b1f16 = array::sort_by_value(level.pablo_npc.var_f75b1f16, 1);
+  arrayremovevalue(level.pablo_npc.a_n_interacts, n_quest);
+  level.pablo_npc.a_n_interacts = array::sort_by_value(level.pablo_npc.a_n_interacts, 1);
 }
 
 pablo_lift_init() {
@@ -329,7 +329,7 @@ function_12d23d57() {
 }
 
 function_39614d4b() {
-  arrayremovevalue(self.var_f75b1f16, self.var_df3d62aa);
+  arrayremovevalue(self.a_n_interacts, self.var_df3d62aa);
   s_info = level.pablo_npc.var_cb3ed98f[level.pablo_npc.var_df3d62aa];
   level.var_f45a0bfd.is_moving = 1;
 
@@ -391,8 +391,8 @@ function_1dc9b29a() {
   self endon(#"death");
 
   while(true) {
-    if(self.var_f75b1f16.size > 0 && zm_hms_util::any_player_in_zone("lighthouse_level_4")) {
-      self.var_df3d62aa = self.var_f75b1f16[getfirstarraykey(self.var_f75b1f16)];
+    if(self.a_n_interacts.size > 0 && zm_hms_util::any_player_in_zone("lighthouse_level_4")) {
+      self.var_df3d62aa = self.a_n_interacts[getfirstarraykey(self.a_n_interacts)];
       s_info = self.var_cb3ed98f[self.var_df3d62aa];
       self.var_3e21d491.s_info = s_info;
 
@@ -456,12 +456,12 @@ function_e435077() {
   var_a3992d9c = 0;
 
   while(var_a3992d9c < 10) {
-    var_a10acf3c = zm_zonemgr::get_players_in_zone("lighthouse_level_4", 1);
+    a_e_valid_players = zm_zonemgr::get_players_in_zone("lighthouse_level_4", 1);
     var_23cd9374 = 0;
 
-    if(self.var_f75b1f16.size > 0 && var_a10acf3c.size > 0) {
+    if(self.a_n_interacts.size > 0 && a_e_valid_players.size > 0) {
       if(isDefined(s_info.func_hint)) {
-        foreach(e_player in var_a10acf3c) {
+        foreach(e_player in a_e_valid_players) {
           if(level[[s_info.func_hint]](e_player)) {
             var_23cd9374 = 1;
           }

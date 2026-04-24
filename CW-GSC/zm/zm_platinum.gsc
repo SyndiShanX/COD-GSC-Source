@@ -643,14 +643,14 @@ function function_6f6cc58(e_player) {
           return 1;
         }
 
-        zone_path = zm_zonemgr::function_54fc7938(e_player, self);
+        zone_path = zm_zonemgr::get_zone_path(e_player, self);
 
         if(isDefined(zone_path)) {
           return 1;
         }
       }
     } else if(isPlayer(e_player) && self.archetype === #"soa") {
-      zone_path = zm_zonemgr::function_54fc7938(e_player, self);
+      zone_path = zm_zonemgr::get_zone_path(e_player, self);
       zipline = zm_ai_soa::function_4a3e695a(self, e_player);
 
       if(isDefined(zipline) || isDefined(zone_path)) {
@@ -671,7 +671,7 @@ function function_6f6cc58(e_player) {
           zone_name = self.var_5e54763a;
         }
 
-        zone_path = zm_zonemgr::function_54fc7938(e_player, zone_name);
+        zone_path = zm_zonemgr::get_zone_path(e_player, zone_name);
 
         if(isinarray(var_1ea000f7, zone_name)) {
           var_b41144a7 = isDefined(zone_path) && (!isDefined(zone_path.to_zone) || !isinarray(var_1ea000f7, zone_path.to_zone));
@@ -821,23 +821,23 @@ function function_41a4961d(get_all = 0) {
         }
 
         target_zone = level.zones[str_target_zone];
-        var_24f5d9f8 = array(target_zone.name);
+        a_str_valid_zones = array(target_zone.name);
         a_str_adj_zones = getarraykeys(target_zone.adjacent_zones);
 
         foreach(str_zone in a_str_adj_zones) {
           if(target_zone.adjacent_zones[str_zone].is_connected) {
-            if(!isDefined(var_24f5d9f8)) {
-              var_24f5d9f8 = [];
-            } else if(!isarray(var_24f5d9f8)) {
-              var_24f5d9f8 = array(var_24f5d9f8);
+            if(!isDefined(a_str_valid_zones)) {
+              a_str_valid_zones = [];
+            } else if(!isarray(a_str_valid_zones)) {
+              a_str_valid_zones = array(a_str_valid_zones);
             }
 
-            var_24f5d9f8[var_24f5d9f8.size] = str_zone;
+            a_str_valid_zones[a_str_valid_zones.size] = str_zone;
           }
         }
 
         foreach(loc in locs) {
-          if(array::contains(var_24f5d9f8, loc.zone_name)) {
+          if(array::contains(a_str_valid_zones, loc.zone_name)) {
             if(!isDefined(var_a6c95035)) {
               var_a6c95035 = [];
             } else if(!isarray(var_a6c95035)) {
@@ -2791,7 +2791,7 @@ function function_c026e69b() {
 
 function function_284985a5(ee_name, step_name) {
   ee = self._ee[ee_name];
-  step_index = zm_sq::function_9212ff4d(ee_name, step_name);
+  step_index = zm_sq::get_step_index(ee_name, step_name);
 
   if(ee.started && step_index <= ee.current_step) {
     return 0;

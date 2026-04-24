@@ -857,7 +857,7 @@ function is_player_valid(e_player) {
   return zm_utility::is_player_valid(e_player, 0, 0, 0);
 }
 
-function function_347f7d34() {
+function get_valid_players() {
   a_valid_players = [];
 
   foreach(player in getplayers()) {
@@ -877,7 +877,7 @@ function function_347f7d34() {
 
 function function_2ee2ece4(var_79dbc69 = 1) {
   while(true) {
-    a_valid_players = function_347f7d34();
+    a_valid_players = get_valid_players();
 
     if(a_valid_players.size >= var_79dbc69) {
       break;
@@ -945,7 +945,7 @@ function function_8abe0568(str_type, n_delay, str_sound, b_wait_if_busy = 0, var
 
       if(getdvarint(#"debug_vo", 0)) {
         if(!soundexists(str_sound)) {
-          var_2dbe34fe = "<dev string:x44>" + "<dev string:x52>" + function_9e72a96(str_sound) + "<dev string:x63>";
+          var_2dbe34fe = "<dev string:x44>" + "<dev string:x52>" + hashtostring(str_sound) + "<dev string:x63>";
           iprintlnbold(var_2dbe34fe);
           println(var_2dbe34fe);
         }
@@ -995,8 +995,8 @@ function private function_1eac234a(str_type) {
     str_alias = function_d3fc42dc(level.var_9182a974[str_type]);
   } else {
     if(getdvarint(#"debug_vo", 0)) {
-      iprintlnbold("<dev string:x77>" + function_9e72a96(str_type) + "<dev string:x89>");
-      println("<dev string:x77>" + function_9e72a96(str_type) + "<dev string:x89>");
+      iprintlnbold("<dev string:x77>" + hashtostring(str_type) + "<dev string:x89>");
+      println("<dev string:x77>" + hashtostring(str_type) + "<dev string:x89>");
     }
   }
 
@@ -1080,8 +1080,8 @@ function function_d342796e(var_7382ea8b, n_delay, var_67fee570 = 0, var_299a320 
 
     if(!isDefined(str_vo_alias)) {
       if(getdvarint(#"debug_vo", 0)) {
-        iprintlnbold("<dev string:xba>" + function_9e72a96(var_7382ea8b) + "<dev string:xd2>" + function_9e72a96(self getmpdialogname()) + "<dev string:xe9>");
-        println("<dev string:xba>" + function_9e72a96(var_7382ea8b) + "<dev string:xd2>" + function_9e72a96(self getmpdialogname()) + "<dev string:xe9>");
+        iprintlnbold("<dev string:xba>" + hashtostring(var_7382ea8b) + "<dev string:xd2>" + hashtostring(self getmpdialogname()) + "<dev string:xe9>");
+        println("<dev string:xba>" + hashtostring(var_7382ea8b) + "<dev string:xd2>" + hashtostring(self getmpdialogname()) + "<dev string:xe9>");
       }
 
       return;
@@ -1127,8 +1127,8 @@ function function_d342796e(var_7382ea8b, n_delay, var_67fee570 = 0, var_299a320 
     var_2690dae = function_f577c17d(str_vo_alias);
 
     if(getdvarint(#"debug_vo", 0)) {
-      iprintlnbold("<dev string:xfa>" + function_9e72a96(str_vo_alias) + "<dev string:x106>" + function_9e72a96(self getmpdialogname()) + "<dev string:xe9>");
-      println("<dev string:xfa>" + function_9e72a96(str_vo_alias) + "<dev string:x106>" + function_9e72a96(self getmpdialogname()) + "<dev string:xe9>");
+      iprintlnbold("<dev string:xfa>" + hashtostring(str_vo_alias) + "<dev string:x106>" + hashtostring(self getmpdialogname()) + "<dev string:xe9>");
+      println("<dev string:xfa>" + hashtostring(str_vo_alias) + "<dev string:x106>" + hashtostring(self getmpdialogname()) + "<dev string:xe9>");
     }
 
     self battlechatter::function_a48c33ff(str_vo_alias, dialogflags);
@@ -1478,8 +1478,8 @@ function private function_f2efbd1c(var_64edfc97, var_b4dd2e62, var_dcfc156f, var
 
   if(!isDefined(var_64edfc97)) {
     if(getdvarint(#"debug_vo", 0)) {
-      iprintlnbold("<dev string:x15f>" + function_9e72a96(var_a44937e5) + "<dev string:x16f>");
-      println("<dev string:x15f>" + function_9e72a96(var_a44937e5) + "<dev string:x16f>");
+      iprintlnbold("<dev string:x15f>" + hashtostring(var_a44937e5) + "<dev string:x16f>");
+      println("<dev string:x15f>" + hashtostring(var_a44937e5) + "<dev string:x16f>");
     }
 
     return;
@@ -1488,8 +1488,8 @@ function private function_f2efbd1c(var_64edfc97, var_b4dd2e62, var_dcfc156f, var
   str_bundle = isDefined(level.var_e2f95698) ? level.var_e2f95698 : a_players[0].pers[level.var_7ee6af9f];
 
   if(getdvarint(#"debug_vo", 0)) {
-    iprintlnbold(function_9e72a96(str_bundle) + "<dev string:x182>" + function_9e72a96(var_a44937e5));
-    println(function_9e72a96(str_bundle) + "<dev string:x182>" + function_9e72a96(var_a44937e5));
+    iprintlnbold(hashtostring(str_bundle) + "<dev string:x182>" + hashtostring(var_a44937e5));
+    println(hashtostring(str_bundle) + "<dev string:x182>" + hashtostring(var_a44937e5));
   }
 
   foreach(player in a_players) {
@@ -1602,8 +1602,8 @@ function function_c4303dda(str_vo_alias, n_delay, b_wait_if_busy) {
 
   if(!isDefined(str_vo_alias)) {
     if(getdvarint(#"debug_vo", 0)) {
-      iprintlnbold("<dev string:x15f>" + function_9e72a96(var_d9dd4565) + "<dev string:x16f>");
-      println("<dev string:x15f>" + function_9e72a96(var_d9dd4565) + "<dev string:x16f>");
+      iprintlnbold("<dev string:x15f>" + hashtostring(var_d9dd4565) + "<dev string:x16f>");
+      println("<dev string:x15f>" + hashtostring(var_d9dd4565) + "<dev string:x16f>");
     }
 
     return;
@@ -1629,8 +1629,8 @@ function function_c4303dda(str_vo_alias, n_delay, b_wait_if_busy) {
   }
 
   if(getdvarint(#"debug_vo", 0)) {
-    iprintlnbold("<dev string:x198>" + function_9e72a96(str_vo_alias));
-    println("<dev string:x198>" + function_9e72a96(str_vo_alias));
+    iprintlnbold("<dev string:x198>" + hashtostring(str_vo_alias));
+    println("<dev string:x198>" + hashtostring(str_vo_alias));
   }
 
   self.str_vo_being_spoken = str_vo_alias;
@@ -1668,8 +1668,8 @@ function function_d6f8bbd9(str_vo_alias, n_delay, a_players, b_wait_if_busy) {
 
     if(!isDefined(str_vo_alias)) {
       if(getdvarint(#"debug_vo", 0)) {
-        iprintlnbold("<dev string:x15f>" + function_9e72a96(var_d9dd4565) + "<dev string:x16f>");
-        println("<dev string:x15f>" + function_9e72a96(var_d9dd4565) + "<dev string:x16f>");
+        iprintlnbold("<dev string:x15f>" + hashtostring(var_d9dd4565) + "<dev string:x16f>");
+        println("<dev string:x15f>" + hashtostring(var_d9dd4565) + "<dev string:x16f>");
       }
 
       return;
@@ -1688,8 +1688,8 @@ function function_d6f8bbd9(str_vo_alias, n_delay, a_players, b_wait_if_busy) {
     }
 
     if(getdvarint(#"debug_vo", 0)) {
-      iprintlnbold("<dev string:x198>" + function_9e72a96(str_vo_alias));
-      println("<dev string:x198>" + function_9e72a96(str_vo_alias));
+      iprintlnbold("<dev string:x198>" + hashtostring(str_vo_alias));
+      println("<dev string:x198>" + hashtostring(str_vo_alias));
     }
 
     self.str_vo_being_spoken = str_vo_alias;

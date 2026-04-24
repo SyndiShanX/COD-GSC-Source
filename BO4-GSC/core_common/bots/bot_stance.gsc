@@ -134,12 +134,12 @@ function_ab5be907(tacbundle, params, node) {
   func = level.var_17a3a139[params.name];
 
   if(!isDefined(func)) {
-    self botprinterror("<dev string:x76>" + function_9e72a96(params.name));
+    self botprinterror("<dev string:x76>" + hashtostring(params.name));
 
     return 0;
   }
 
-  self bot::record_text(function_9e72a96(params.name), (1, 1, 1), "<dev string:x4c>");
+  self bot::record_text(hashtostring(params.name), (1, 1, 1), "<dev string:x4c>");
 
   pixbeginevent("bot_stance_handler: " + params.name);
   aiprofile_beginentry("bot_stance_handler: " + params.name);
@@ -157,12 +157,12 @@ g_stop_player_too_many_weapons_monitor(name) {
   func = level.botstances[name];
 
   if(!isDefined(func)) {
-    self botprinterror("<dev string:x98>" + function_9e72a96(name));
+    self botprinterror("<dev string:x98>" + hashtostring(name));
 
     return false;
   }
 
-  self bot::record_text("<dev string:xb2>" + function_9e72a96(name), (1, 1, 0), "<dev string:x4c>");
+  self bot::record_text("<dev string:xb2>" + hashtostring(name), (1, 1, 0), "<dev string:x4c>");
 
   self[[func]]();
   return true;

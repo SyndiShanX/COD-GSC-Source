@@ -565,7 +565,7 @@ function_e1c4ab06(params) {
         }
 
         if(isalive(ai) && !isDefined(ai.maxhealth) && isDefined(ai.archetype)) {
-          iprintlnbold("<dev string:x38>" + function_9e72a96(ai.archetype) + "<dev string:x62>");
+          iprintlnbold("<dev string:x38>" + hashtostring(ai.archetype) + "<dev string:x62>");
         }
 
         if(isalive(ai) && isDefined(ai.maxhealth)) {
@@ -756,7 +756,7 @@ function_b3ac0cab(params) {
   }
 
   if(!isDefined(self.maxhealth) && isDefined(self.archetype)) {
-    iprintlnbold("<dev string:x38>" + function_9e72a96(self.archetype) + "<dev string:x62>");
+    iprintlnbold("<dev string:x38>" + hashtostring(self.archetype) + "<dev string:x62>");
   }
 
   n_damage = 0;

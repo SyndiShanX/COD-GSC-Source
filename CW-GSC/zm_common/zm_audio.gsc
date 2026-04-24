@@ -862,7 +862,7 @@ function private function_bf1b121a(timeout, n_range, var_618a04) {
 }
 
 function function_bca32e49(category, subcategory, force_variant, b_wait_if_busy = 0) {
-  e_player = array::random(zm_vo::function_347f7d34());
+  e_player = array::random(zm_vo::get_valid_players());
 
   if(isDefined(e_player)) {
     return (1 === e_player create_and_play_dialog(category, subcategory, force_variant, b_wait_if_busy));
@@ -1579,18 +1579,18 @@ function function_a3c4af48(str_location) {
   self thread location_vox(str_location);
 }
 
-function function_3442c81a(str_location, var_f9761829, b_repeat = 0, var_57b726a7 = 1, var_22324b12 = 2) {
+function function_3442c81a(str_location, str_music_state, b_repeat = 0, var_57b726a7 = 1, var_22324b12 = 2) {
   if(!isDefined(level.var_4d771f19)) {
     level.var_4d771f19 = [];
   }
 
   level.var_4d771f19[str_location] = spawnStruct();
-  level.var_4d771f19[str_location].var_f9761829 = var_f9761829;
+  level.var_4d771f19[str_location].str_music_state = str_music_state;
   level.var_4d771f19[str_location].b_repeat = b_repeat;
   level.var_4d771f19[str_location].var_496a8f95 = 0;
   level.var_4d771f19[str_location].b_played = 0;
   level.var_4d771f19[str_location].var_57b726a7 = var_57b726a7;
-  musicstate_create(var_f9761829, var_22324b12, var_f9761829);
+  musicstate_create(str_music_state, var_22324b12, str_music_state);
 }
 
 function function_6c53ab30(str_location) {
@@ -1641,7 +1641,7 @@ function function_b9d832a0(var_790f33a7) {
 
   var_790f33a7.b_played = 1;
   var_790f33a7.var_496a8f95 = 0;
-  level thread sndmusicsystem_playstate(var_790f33a7.var_f9761829);
+  level thread sndmusicsystem_playstate(var_790f33a7.str_music_state);
 }
 
 function function_85c0295a() {
@@ -2073,7 +2073,7 @@ function sndannouncerplayvox(type, player, str_sound, var_e08a84d6, b_wait_if_bu
 
       if(getdvarint(#"debug_audio", 0)) {
         if(!soundexists(str_sound)) {
-          var_2dbe34fe = "<dev string:x19d>" + "<dev string:x1ae>" + function_9e72a96(str_sound) + "<dev string:x1bf>";
+          var_2dbe34fe = "<dev string:x19d>" + "<dev string:x1ae>" + hashtostring(str_sound) + "<dev string:x1bf>";
           iprintlnbold(var_2dbe34fe);
           println(var_2dbe34fe);
         }

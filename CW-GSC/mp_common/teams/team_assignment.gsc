@@ -705,7 +705,7 @@ function function_58b6d2c9() {
           var_f554d31e = var_f554d31e + player.name + "<dev string:x434>" + party.party_id + "<dev string:x442>";
         }
 
-        assertmsg("<dev string:x447>" + self.name + "<dev string:x45d>" + (ishash(team) ? function_9e72a96(team) : team) + "<dev string:x483>" + var_dcbb8617.size + "<dev string:x498>" + level.maxteamplayers + "<dev string:x442>" + var_f554d31e);
+        assertmsg("<dev string:x447>" + self.name + "<dev string:x45d>" + (ishash(team) ? hashtostring(team) : team) + "<dev string:x483>" + var_dcbb8617.size + "<dev string:x498>" + level.maxteamplayers + "<dev string:x442>" + var_f554d31e);
       }
     }
 
@@ -723,7 +723,7 @@ function function_58b6d2c9() {
           }
 
           if(party_member.team != player.team) {
-            assertmsg("<dev string:x4a9>" + player.name + "<dev string:x4d8>" + function_9e72a96(player.team) + "<dev string:x4de>" + party_member.name + "<dev string:x4d8>" + function_9e72a96(party_member.team) + "<dev string:x4e4>");
+            assertmsg("<dev string:x4a9>" + player.name + "<dev string:x4d8>" + hashtostring(player.team) + "<dev string:x4de>" + party_member.name + "<dev string:x4d8>" + hashtostring(party_member.team) + "<dev string:x4e4>");
           }
         }
       }

@@ -452,7 +452,7 @@ function init_traps() {
 init_crafting() {
   level waittill(#"all_players_spawned");
 
-  foreach(a_s_crafting in level.var_4fe2f84d) {
+  foreach(a_s_crafting in level.a_t_crafting) {
     foreach(s_crafting in a_s_crafting) {
       if(isarray(s_crafting.craftfoundry.blueprints)) {
         foreach(s_blueprint in s_crafting.craftfoundry.blueprints) {

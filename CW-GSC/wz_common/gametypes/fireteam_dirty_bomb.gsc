@@ -277,60 +277,60 @@ function private function_3f63e44f(item) {
   return 0;
 }
 
-function private function_18f58ab2(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_18f58ab2(item, player, networkid, itemid, itemcount, itemamount, slot) {
   pickup = 0;
 
   switch (item.itementry.name) {
     case # "uranium_item_t9":
-      pickup = function_bf46e093(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = function_bf46e093(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "uranium_pouch_item_t9":
-      pickup = function_fa78e80b(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = function_fa78e80b(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "armor_pouch_item_t9":
-      pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = namespace_234f0efc::function_dd8cb464(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
     case # "hash_583f1687cefbd3f3":
-      pickup = namespace_234f0efc::function_98942433(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot);
+      pickup = namespace_234f0efc::function_98942433(item, player, networkid, itemid, itemcount, itemamount, slot);
       break;
   }
 
   return itemcount - pickup;
 }
 
-function private function_bf46e093(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
-  var_e3483afe = var_aec6fa7f clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
-  pickup = int(min(function_ec3e7325(var_aec6fa7f) - var_e3483afe, slot));
-  var_aec6fa7f clientfield::set_player_uimodel("hudItems.uraniumCarryCount", var_e3483afe + pickup);
+function private function_bf46e093(item, player, networkid, itemid, itemcount, itemamount, slot) {
+  var_e3483afe = itemamount clientfield::get_player_uimodel("hudItems.uraniumCarryCount");
+  pickup = int(min(function_ec3e7325(itemamount) - var_e3483afe, slot));
+  itemamount clientfield::set_player_uimodel("hudItems.uraniumCarryCount", var_e3483afe + pickup);
 
   if(var_e3483afe + pickup > 0) {
-    var_aec6fa7f clientfield::set("carryingUranium", 1);
-    var_aec6fa7f function_53d7badf(1);
+    itemamount clientfield::set("carryingUranium", 1);
+    itemamount function_53d7badf(1);
   }
 
   if(pickup > 0) {
-    var_aec6fa7f playSound("fly_uranium_pickup");
+    itemamount playSound("fly_uranium_pickup");
 
-    if(!isDefined(itemcount.var_d25a1503) || itemcount.var_d25a1503 != var_aec6fa7f.team) {
-      scoreevents::processscoreevent(#"hash_64121166dc49f54a", var_aec6fa7f);
-      var_aec6fa7f contracts::increment_contract(#"hash_56ebf21401c9782c");
+    if(!isDefined(itemcount.var_d25a1503) || itemcount.var_d25a1503 != itemamount.team) {
+      scoreevents::processscoreevent(#"hash_64121166dc49f54a", itemamount);
+      itemamount contracts::increment_contract(#"hash_56ebf21401c9782c");
     }
   }
 
-  if(var_e3483afe + pickup >= function_ec3e7325(var_aec6fa7f) || !is_true(var_aec6fa7f.var_2faaa10)) {
-    var_aec6fa7f globallogic_audio::leader_dialog_on_player("dirtyBombUraniumMaxHold");
-    var_aec6fa7f.var_2faaa10 = 1;
+  if(var_e3483afe + pickup >= function_ec3e7325(itemamount) || !is_true(itemamount.var_2faaa10)) {
+    itemamount globallogic_audio::leader_dialog_on_player("dirtyBombUraniumMaxHold");
+    itemamount.var_2faaa10 = 1;
   }
 
-  if(!isDefined(var_aec6fa7f.var_96c3af63)) {
-    var_aec6fa7f luinotifyevent(#"hash_6b67aa04e378d681", 1, 14);
-    var_aec6fa7f.var_96c3af63 = 1;
+  if(!isDefined(itemamount.var_96c3af63)) {
+    itemamount luinotifyevent(#"hash_6b67aa04e378d681", 1, 14);
+    itemamount.var_96c3af63 = 1;
   }
 
   return pickup;
 }
 
-function private function_fa78e80b(item, player, networkid, itemid, itemcount, var_aec6fa7f, slot) {
+function private function_fa78e80b(item, player, networkid, itemid, itemcount, itemamount, slot) {
   if(!function_cc2c46fd(slot)) {
     slot clientfield::set_player_uimodel("hudItems.uraniumMaxCarry", 10);
     return true;
@@ -1975,17 +1975,17 @@ function function_28039abb(var_aaba141c) {
 
   if(var_aaba141c >= 0.85) {
     if(var_aaba141c >= 0.925) {
-      var_9c1ed9ea = "ftdb_endgame_high";
+      str_musicstate = "ftdb_endgame_high";
     } else {
-      var_9c1ed9ea = "ftdb_endgame_med";
+      str_musicstate = "ftdb_endgame_med";
     }
   } else {
-    var_9c1ed9ea = "ftdb_endgame_low";
+    str_musicstate = "ftdb_endgame_low";
   }
 
-  if(level.var_7392007f !== var_9c1ed9ea) {
-    level thread globallogic_audio::function_6fbfba95(var_9c1ed9ea);
-    level.var_7392007f = var_9c1ed9ea;
+  if(level.var_7392007f !== str_musicstate) {
+    level thread globallogic_audio::function_6fbfba95(str_musicstate);
+    level.var_7392007f = str_musicstate;
 
     if(!is_true(level.var_acf54eb7)) {
       level.var_acf54eb7 = 1;

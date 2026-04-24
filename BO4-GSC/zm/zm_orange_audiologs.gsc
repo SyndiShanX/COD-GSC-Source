@@ -23,7 +23,7 @@ init() {
 
   if(zm_utility::is_ee_enabled()) {
     init_records();
-    function_d6fec498();
+    init_reels();
     function_ecba80df();
     function_922ff46a();
     init_orbs();
@@ -80,7 +80,7 @@ function_aef698f1() {
   }
 }
 
-function_d6fec498() {
+init_reels() {
   level.s_audiologs.s_reels = spawnStruct();
   level.s_audiologs.s_reels.n_collected = 0;
   level.s_audiologs.s_reels.n_played = 0;

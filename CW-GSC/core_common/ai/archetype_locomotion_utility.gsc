@@ -683,7 +683,7 @@ function traversesetup(behaviortreeentity, asmstatename) {
 
       self.var_2136d4d3 = gettime();
     } else {
-      record3dtext("<dev string:x2f5>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
+      record3dtext("<dev string:x2f5>" + (ishash(result[#"animation"]) ? hashtostring(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
     }
   }
 
@@ -712,7 +712,7 @@ function traverseactionstart(behaviortreeentity, asmstatename) {
     if(!isDefined(result[#"animation"])) {
       record3dtext("<dev string:x2bc>", self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
     } else {
-      record3dtext("<dev string:x2f5>" + (ishash(result[#"animation"]) ? function_9e72a96(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
+      record3dtext("<dev string:x2f5>" + (ishash(result[#"animation"]) ? hashtostring(result[#"animation"]) : result[#"animation"]), self.origin + (0, 0, 16), (1, 0, 0), "<dev string:x242>");
     }
   }
 

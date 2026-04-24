@@ -202,7 +202,7 @@ function may_drop(weapon) {
     return false;
   }
 
-  if(weapon.var_29d24e37) {
+  if(weapon.isvehicleturret) {
     return false;
   }
 

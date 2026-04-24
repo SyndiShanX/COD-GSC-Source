@@ -480,7 +480,7 @@ function_44a776ee() {
     node = function_52c1730(level.var_5f2726dc, zone.nodes, 500);
 
     if(isDefined(node)) {
-      iprintln("<dev string:x5a>" + function_9e72a96(keys[i]));
+      iprintln("<dev string:x5a>" + hashtostring(keys[i]));
     }
   }
 
@@ -966,7 +966,7 @@ function_c1c2fc5b(n_to_spawn) {
     return;
   }
 
-  var_8deb2034 = var_f1c4ec4f.a_loc_types[#"bat_location"];
+  a_s_zone_spawners = var_f1c4ec4f.a_loc_types[#"bat_location"];
 
   foreach(var_c92978fa in getarraykeys(var_f1c4ec4f.adjacent_zones)) {
     var_c714ccfe = level.zones[var_c92978fa];
@@ -974,25 +974,25 @@ function_c1c2fc5b(n_to_spawn) {
 
     if(isDefined(var_9387e4ab)) {
       foreach(s_spawner in var_9387e4ab) {
-        if(!isDefined(var_8deb2034)) {
-          var_8deb2034 = [];
-        } else if(!isarray(var_8deb2034)) {
-          var_8deb2034 = array(var_8deb2034);
+        if(!isDefined(a_s_zone_spawners)) {
+          a_s_zone_spawners = [];
+        } else if(!isarray(a_s_zone_spawners)) {
+          a_s_zone_spawners = array(a_s_zone_spawners);
         }
 
-        var_8deb2034[var_8deb2034.size] = s_spawner;
+        a_s_zone_spawners[a_s_zone_spawners.size] = s_spawner;
       }
     }
   }
 
   while(n_spawned < n_to_spawn) {
-    s_pos = array::random(var_8deb2034);
+    s_pos = array::random(a_s_zone_spawners);
 
     if(isDefined(s_pos)) {
       ai = bat::function_2e37549f(1, s_pos, level.round_number);
 
       if(isDefined(ai)) {
-        arrayremovevalue(var_8deb2034, s_pos);
+        arrayremovevalue(a_s_zone_spawners, s_pos);
         n_spawned++;
         zm_mansion_special_rounds::function_f46db405();
       }
@@ -1157,7 +1157,7 @@ function_1b4df249() {
 function_25058256() {
   level flagsys::wait_till(#"load_main_complete");
 
-  foreach(s_stub in level.var_4fe2f84d[#"zblueprint_chaos_lvl3"]) {
+  foreach(s_stub in level.a_t_crafting[#"zblueprint_chaos_lvl3"]) {
     s_stub.var_c060d2c8 = 0;
   }
 }
@@ -1174,7 +1174,7 @@ ww_lvl3_crafted(e_player) {
 
   e_player zm_weapons::weapon_take(level.var_6fe89212);
   e_player thread zm_vo::function_a2bd5a0c(#"hash_1bee1f8c64cef00f", 1);
-  e_player zm_weapons::weapon_give(unitrigger_stub.blueprint.var_54a97edd);
+  e_player zm_weapons::weapon_give(unitrigger_stub.blueprint.w_result);
   wait 0.1;
   unitrigger_stub zm_crafting::reset_table();
   unitrigger_stub.prompt_and_visibility_func = &function_7aa50bb7;

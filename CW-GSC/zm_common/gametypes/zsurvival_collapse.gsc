@@ -77,15 +77,15 @@ function on_game_playing() {
 
 function function_c8fb4513(var_63c85287 = 600, var_1f7b3936 = int(600 / 5)) {
   level flag::wait_till_all([#"intro_scene_done", #"start_zombie_round_logic"]);
-  var_9c1ed9ea = "collapse_underscore";
+  str_musicstate = "collapse_underscore";
 
   if(isDefined(level.var_f546b995)) {
-    var_9c1ed9ea = "collapse_underscore_" + level.var_f546b995;
+    str_musicstate = "collapse_underscore_" + level.var_f546b995;
     level.var_75b02512 = "objective_" + level.var_f546b995;
     level.var_e6512c09 = "gameover_survival_halloween";
   }
 
-  namespace_9b972177::function_9f5c2ff2(var_9c1ed9ea);
+  namespace_9b972177::function_9f5c2ff2(str_musicstate);
   level thread function_e0d97436();
   var_135e25da = function_a42a57d2();
 

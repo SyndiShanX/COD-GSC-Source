@@ -372,7 +372,7 @@ function function_b3810444(entity, name) {
 }
 
 function set_state(entity, state_name) {
-  assert(isDefined(entity.var_d2a0e298[state_name]), "<dev string:xd6>" + (ishash(state_name) ? function_9e72a96(state_name) : state_name));
+  assert(isDefined(entity.var_d2a0e298[state_name]), "<dev string:xd6>" + (ishash(state_name) ? hashtostring(state_name) : state_name));
   state = entity.var_d2a0e298[state_name];
 
   if(isDefined(entity.current_state)) {
@@ -444,9 +444,9 @@ function function_fa6e010d() {
 
     if(isDefined(self.current_state) && getdvarint(#"awareness_debug", 0)) {
       if(getdvarint(#"recorder_enablerec", 0)) {
-        record3dtext(function_9e72a96(self.current_state.name), self.origin, (0, 1, 1), "<dev string:x38>", self);
+        record3dtext(hashtostring(self.current_state.name), self.origin, (0, 1, 1), "<dev string:x38>", self);
       } else {
-        print3d(self.origin, function_9e72a96(self.current_state.name), (0, 1, 1), 1, 1);
+        print3d(self.origin, hashtostring(self.current_state.name), (0, 1, 1), 1, 1);
       }
 
       if(is_true(self.var_1033fa72)) {

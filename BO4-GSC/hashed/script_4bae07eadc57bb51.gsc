@@ -58,25 +58,25 @@ init_quests() {
 }
 
 function_b540b576() {
-  level.var_5849269a = [];
+  level.a_s_audio_logs = [];
   var_1c8e90b4 = array(#"hash_7d77026116381bc8");
   var_ab6a16ff = array(#"hash_2511d5011d40cbd2");
   var_e6c1fe70 = array(#"hash_85c1a5d874f4cca", #"hash_6ba76f0dae639fda", #"hash_3cf4fec50390cfc4", #"hash_7dedea74983affc4", #"hash_1c38fdc40339b86e", #"hash_704a6e82a159cc1e", #"hash_3b5addc029eb24b8", #"hash_5f090d187dae1178", #"hash_75901c4c2a6309e2");
   var_51ba7b4a = array(#"hash_79fe2d0224018f5c");
   var_68e586cf = array(#"hash_2b4e25f8eaed9341");
-  level.var_5849269a[0] = {
+  level.a_s_audio_logs[0] = {
     #in_inventory: 0, #vo_line: var_1c8e90b4
   };
-  level.var_5849269a[1] = {
+  level.a_s_audio_logs[1] = {
     #in_inventory: 0, #vo_line: var_ab6a16ff
   };
-  level.var_5849269a[2] = {
+  level.a_s_audio_logs[2] = {
     #in_inventory: 0, #vo_line: var_e6c1fe70, #var_46db68fd: 1
   };
-  level.var_5849269a[3] = {
+  level.a_s_audio_logs[3] = {
     #in_inventory: 0, #vo_line: var_51ba7b4a
   };
-  level.var_5849269a[4] = {
+  level.a_s_audio_logs[4] = {
     #in_inventory: 0, #vo_line: var_68e586cf
   };
   level.var_e046b238 = struct::get(#"hash_5201d44a6f57e32a");
@@ -100,7 +100,7 @@ function_b540b576() {
 }
 
 function_1792ae3(e_item) {
-  s_reel = level.var_5849269a[level.var_804a56e3];
+  s_reel = level.a_s_audio_logs[level.var_804a56e3];
 
   if(isDefined(s_reel)) {
     s_reel.in_inventory = 1;
@@ -137,9 +137,9 @@ function_6fb01110(player) {
 function_f370d99() {
   level.var_b63bccb7 = undefined;
 
-  for(i = 0; i < level.var_5849269a.size; i++) {
-    if(level.var_5849269a[i].in_inventory) {
-      level.var_b63bccb7 = level.var_5849269a[i];
+  for(i = 0; i < level.a_s_audio_logs.size; i++) {
+    if(level.a_s_audio_logs[i].in_inventory) {
+      level.var_b63bccb7 = level.a_s_audio_logs[i];
       break;
     }
   }
@@ -695,7 +695,7 @@ dog_ambush() {
 
   while(var_a9e4d1ee > 0) {
     var_c6bd50df = self zm_zonemgr::get_player_zone();
-    var_4974e492 = [];
+    a_s_valid_locs = [];
 
     foreach(loc in level.zm_loc_types[#"dog_location"]) {
       if(!isDefined(var_c6bd50df)) {
@@ -704,17 +704,17 @@ dog_ambush() {
       }
 
       if(loc.zone_name == var_c6bd50df) {
-        if(!isDefined(var_4974e492)) {
-          var_4974e492 = [];
-        } else if(!isarray(var_4974e492)) {
-          var_4974e492 = array(var_4974e492);
+        if(!isDefined(a_s_valid_locs)) {
+          a_s_valid_locs = [];
+        } else if(!isarray(a_s_valid_locs)) {
+          a_s_valid_locs = array(a_s_valid_locs);
         }
 
-        var_4974e492[var_4974e492.size] = loc;
+        a_s_valid_locs[a_s_valid_locs.size] = loc;
       }
     }
 
-    e_dog = zombie_dog_util::function_62db7b1c(0, array::random(var_4974e492));
+    e_dog = zombie_dog_util::function_62db7b1c(0, array::random(a_s_valid_locs));
 
     if(isDefined(e_dog)) {
       var_a9e4d1ee--;
@@ -814,7 +814,7 @@ function_8039854f() {
   level waittill(#"hash_253a424c838fcd19");
   level flag::clear("spawn_zombies");
   wait 3;
-  a_valid = zm_vo::function_347f7d34();
+  a_valid = zm_vo::get_valid_players();
   a_floor = zm_office_floors::function_df2506d3(4);
   a_players = arrayintersect(a_valid, a_floor);
 

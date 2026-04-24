@@ -563,7 +563,7 @@ function set_global_stat(stat_name, value) {
   self stats::set_stat(#"playerstatslist", stat_name, #"statvalue", value);
 
   var_ba1fb8c1 = self stats::get_stat(#"playerstatslist", stat_name, #"statvalue");
-  println("<dev string:x38>" + self getentitynumber() + "<dev string:x43>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+  println("<dev string:x38>" + self getentitynumber() + "<dev string:x43>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
 }
 
 function add_global_stat(stat_name, value) {
@@ -958,11 +958,11 @@ function function_51c1448(stat_name, amount = 1, var_4261ca42, str_weapon_name) 
   var_ba1fb8c1 = self stats::get_stat_global(stat_name);
 
   if(isDefined(self.entity_num)) {
-    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
     return;
   }
 
-  println("<dev string:x38>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+  println("<dev string:x38>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
 }
 
 function increment_challenge_stat(stat_name, amount = 1, var_b68b08b1 = 0) {
@@ -985,11 +985,11 @@ function increment_challenge_stat(stat_name, amount = 1, var_b68b08b1 = 0) {
   var_ba1fb8c1 = self stats::get_stat_global(stat_name);
 
   if(isDefined(self.entity_num)) {
-    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
     return;
   }
 
-  println("<dev string:x38>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+  println("<dev string:x38>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
 }
 
 function function_fbce465a(stat_name, amount = 1, var_b68b08b1 = 0) {
@@ -1012,11 +1012,11 @@ function function_fbce465a(stat_name, amount = 1, var_b68b08b1 = 0) {
   var_ba1fb8c1 = self stats::function_e3eb9a8b(stat_name);
 
   if(isDefined(self.entity_num)) {
-    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
     return;
   }
 
-  println("<dev string:x38>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+  println("<dev string:x38>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
 }
 
 function function_17ee4529(stat_name, amount = 1, var_4261ca42, var_b68b08b1 = 0) {
@@ -1043,11 +1043,11 @@ function function_17ee4529(stat_name, amount = 1, var_4261ca42, var_b68b08b1 = 0
   var_ba1fb8c1 = self stats::function_e3eb9a8b(stat_name);
 
   if(isDefined(self.entity_num)) {
-    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+    println("<dev string:x38>" + self.entity_num + "<dev string:x43>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
     return;
   }
 
-  println("<dev string:x38>" + function_9e72a96(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
+  println("<dev string:x38>" + hashtostring(stat_name) + "<dev string:x48>" + var_ba1fb8c1);
 }
 
 function function_a6b15f2c(var_d5fa8477, b_value = 1) {
@@ -1058,7 +1058,7 @@ function function_a6b15f2c(var_d5fa8477, b_value = 1) {
   b_result = self stats::set_stat(#"hash_118b6e7581ca3893", var_d5fa8477, b_value);
 
   if(stats::function_f94325d3() && !is_true(b_result)) {
-    assertmsg("<dev string:x16c>" + function_9e72a96(var_d5fa8477) + "<dev string:x185>");
+    assertmsg("<dev string:x16c>" + hashtostring(var_d5fa8477) + "<dev string:x185>");
   }
 }
 
@@ -1986,13 +1986,13 @@ function function_7f377150(s_event_calling_task, n_value = 1) {
       self addrankxpvalue("event_calling_task", s_event_calling_task.n_xp, 5);
       self stats::set_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, s_event_calling_task.var_1f2bdb95, 1);
       uploadstats(self);
-      println(function_9e72a96(level.var_6ad5a223) + "<dev string:x254>" + self stats::get_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, "<dev string:x266>") + "<dev string:x277>" + function_9e72a96(s_event_calling_task.var_ad971622));
+      println(hashtostring(level.var_6ad5a223) + "<dev string:x254>" + self stats::get_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, "<dev string:x266>") + "<dev string:x277>" + hashtostring(s_event_calling_task.var_ad971622));
       return;
     }
 
     progress = var_e4edaaf0 + n_value;
     target = s_event_calling_task.var_e226ec4f;
-    iprintln(self.name + "<dev string:x287>" + function_9e72a96(s_event_calling_task.var_ad971622) + "<dev string:x2a1>" + progress + "<dev string:x2b4>" + target);
+    iprintln(self.name + "<dev string:x287>" + hashtostring(s_event_calling_task.var_ad971622) + "<dev string:x2a1>" + progress + "<dev string:x2b4>" + target);
 
     self stats::inc_stat(#"hash_3b52e51401f0229c", level.var_6ad5a223, #"progress", n_value);
   }
@@ -2036,16 +2036,16 @@ function function_55109709(s_daily_calling_task, n_value = 1) {
       var_ae857992 = getdvarint(#"hash_60d812bef0f782fb", 2);
       uploadstats(self);
       self function_4835d26a();
-      println("<dev string:x2b9>" + function_9e72a96(s_daily_calling_task.var_ad971622));
+      println("<dev string:x2b9>" + hashtostring(s_daily_calling_task.var_ad971622));
 
-      iprintln(self.name + "<dev string:x2d6>" + function_9e72a96(s_daily_calling_task.var_ad971622) + "<dev string:x2e8>" + s_daily_calling_task.n_xp + "<dev string:x301>");
+      iprintln(self.name + "<dev string:x2d6>" + hashtostring(s_daily_calling_task.var_ad971622) + "<dev string:x2e8>" + s_daily_calling_task.n_xp + "<dev string:x301>");
 
       return;
     }
 
     progress = var_e4edaaf0 + n_value;
     target = s_daily_calling_task.var_e226ec4f;
-    iprintln(self.name + "<dev string:x2d6>" + function_9e72a96(s_daily_calling_task.var_ad971622) + "<dev string:x2a1>" + progress + "<dev string:x2b4>" + target);
+    iprintln(self.name + "<dev string:x2d6>" + hashtostring(s_daily_calling_task.var_ad971622) + "<dev string:x2a1>" + progress + "<dev string:x2b4>" + target);
 
     self stats::inc_stat(#"hash_18e3320ccf4091e5", #"progress", n_value);
   }

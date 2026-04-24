@@ -96,8 +96,8 @@ guns() {
 
   foreach(e_player in a_e_players) {
     e_player.var_679c4d4e = e_player zm_weapons::player_get_loadout();
-    var_dac0c546 = e_player getweaponslist();
-    e_player switchtoweaponimmediate(var_dac0c546[0], 1);
+    a_w_order = e_player getweaponslist();
+    e_player switchtoweaponimmediate(a_w_order[0], 1);
     e_player disableweaponcycling();
     e_player perks::perk_setperk("specialty_ammodrainsfromstockfirst");
     e_player thread function_9992bb68();
@@ -202,8 +202,8 @@ function_ad15a8b3() {
 
     self.var_3be6d813 = 1;
     wait 3;
-    var_dac0c546 = self getweaponslist();
-    self switchtoweaponimmediate(var_dac0c546[0], 1);
+    a_w_order = self getweaponslist();
+    self switchtoweaponimmediate(a_w_order[0], 1);
     wait 2;
     self.var_3be6d813 = 0;
   }

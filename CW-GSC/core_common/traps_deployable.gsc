@@ -36,7 +36,7 @@ class class_7b5e0861 {
   var var_656cbe2d;
   var var_b4662b52;
   var var_c59ba447;
-  var var_e84fc5dc;
+  var m_validmodel;
   var var_f81e0192;
 
   function destructor() {
@@ -51,7 +51,7 @@ class class_7b5e0861 {
     m_weapon = bundle.weapon;
     m_vehicle = bundle.vehicle;
     m_model = bundle.model;
-    var_e84fc5dc = bundle.var_f495bc84;
+    m_validmodel = bundle.model_valid;
     var_28f1ce55 = bundle.var_90f05429;
     m_spawnsentity = bundle.spawnsentity;
     var_656cbe2d = bundle.str_pickup;
@@ -550,7 +550,7 @@ function function_a879466e(var_3af54106, origin, angles) {
       return;
     }
 
-    placeable = player placeables::spawnplaceable(level._traps_deployable.traptypes[type].onplacecallback, level._traps_deployable.traptypes[type].oncancelcallback, onmovecallback, level._traps_deployable.traptypes[type].onshutdowncallback, level._traps_deployable.traptypes[type].ondeathcallback, level._traps_deployable.traptypes[type].onempcallback, level._traps_deployable.traptypes[type].ondamagecallback, level._traps_deployable.traptypes[type].var_d0dd7e76, angles.m_model, angles.var_e84fc5dc, angles.var_28f1ce55, angles.m_spawnsentity, angles.var_656cbe2d, angles.m_timeout, angles.m_health, angles.m_empdamage, angles.var_f81e0192, angles.var_b4662b52, angles.m_placeimmediately, level._traps_deployable.traptypes[type].damagewrapper);
+    placeable = player placeables::spawnplaceable(level._traps_deployable.traptypes[type].onplacecallback, level._traps_deployable.traptypes[type].oncancelcallback, onmovecallback, level._traps_deployable.traptypes[type].onshutdowncallback, level._traps_deployable.traptypes[type].ondeathcallback, level._traps_deployable.traptypes[type].onempcallback, level._traps_deployable.traptypes[type].ondamagecallback, level._traps_deployable.traptypes[type].var_d0dd7e76, angles.m_model, angles.m_validmodel, angles.var_28f1ce55, angles.m_spawnsentity, angles.var_656cbe2d, angles.m_timeout, angles.m_health, angles.m_empdamage, angles.var_f81e0192, angles.var_b4662b52, angles.m_placeimmediately, level._traps_deployable.traptypes[type].damagewrapper);
     placeable.var_3af54106 = angles;
     placeable.is_placeable = 1;
     placeable.var_25404db4 = 1;

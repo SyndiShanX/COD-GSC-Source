@@ -142,8 +142,8 @@ function_8b87e57c(timer_label, grace_period, timer_value) {
     level.var_489d6aa2 = timer_label;
   }
 
-  if(!isDefined(level.var_869f4c31)) {
-    level.var_869f4c31 = timer_value;
+  if(!isDefined(level.n_trial_timer)) {
+    level.n_trial_timer = timer_value;
   }
 
   wait grace_period;

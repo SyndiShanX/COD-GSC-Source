@@ -620,7 +620,7 @@ __main__() {
 
   foreach(s_instance in a_instances) {
     s_scenedef = getscriptbundle(s_instance.scriptbundlename);
-    assert(isDefined(s_scenedef), "<dev string:x38>" + function_9e72a96(s_instance.scriptbundlename) + "<dev string:x48>");
+    assert(isDefined(s_scenedef), "<dev string:x38>" + hashtostring(s_instance.scriptbundlename) + "<dev string:x48>");
 
     if(s_scenedef.vmtype === "client") {
       continue;
@@ -818,7 +818,7 @@ _trigger_stop(trig) {
 }
 
 add_scene_func(str_scenedef, func, var_e21c4c4c = "play", ...) {
-  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x213>" + function_9e72a96(str_scenedef) + "<dev string:x240>");
+  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x213>" + hashtostring(str_scenedef) + "<dev string:x240>");
 
   if(!isDefined(level.scene_funcs)) {
     level.scene_funcs = [];
@@ -844,7 +844,7 @@ add_scene_func(str_scenedef, func, var_e21c4c4c = "play", ...) {
 }
 
 function_d8a83a50(str_scenedef, func, var_e21c4c4c = "play", ...) {
-  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x213>" + function_9e72a96(str_scenedef) + "<dev string:x240>");
+  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x213>" + hashtostring(str_scenedef) + "<dev string:x240>");
 
   if(!isDefined(level.var_4247a0d6)) {
     level.var_4247a0d6 = [];
@@ -914,7 +914,7 @@ function_c776e5bd(str_scenedef, str_state) {
 
 get_scenedef(str_scenedef) {
   s_scriptbundle = getscriptbundle(str_scenedef);
-  assert(isDefined(s_scriptbundle) && isDefined(s_scriptbundle.objects), "<dev string:x38>" + function_9e72a96(str_scenedef) + "<dev string:x288>");
+  assert(isDefined(s_scriptbundle) && isDefined(s_scriptbundle.objects), "<dev string:x38>" + hashtostring(str_scenedef) + "<dev string:x288>");
   s_scriptbundle = fixup_scenedef(s_scriptbundle);
   return s_scriptbundle;
 }
@@ -1049,7 +1049,7 @@ init_streamer(str_scenedef, var_1b38cf1d, var_b6213032 = 0, b_invulnerable = 1) 
     level flag::wait_till("draft_complete");
   }
 
-  iprintln("<dev string:x323>" + function_9e72a96(str_scenedef));
+  iprintln("<dev string:x323>" + hashtostring(str_scenedef));
 
   if(var_b6213032) {
     array::thread_all(a_players, &val::set, "init_streamer", "freezecontrols", 1);
@@ -1134,9 +1134,9 @@ function_6f382548(struct, str_scene_name) {
 
   if(struct.disableinsplitscreen == 2 && getdvarint(#"splitscreen_playercount", 1) > 1 || struct.disableinsplitscreen == 3 && getdvarint(#"splitscreen_playercount", 1) > 2 || struct.disableinsplitscreen == 4 && getdvarint(#"splitscreen_playercount", 1) > 3) {
     if(struct.type === "<dev string:x398>") {
-      str_debug = "<dev string:x3a0>" + function_9e72a96(str_scene_name) + "<dev string:x3a9>";
+      str_debug = "<dev string:x3a0>" + hashtostring(str_scene_name) + "<dev string:x3a9>";
     } else {
-      str_debug = "<dev string:x3e2>" + function_9e72a96(struct.name) + "<dev string:x3f2>" + str_scene_name + "<dev string:x3a9>";
+      str_debug = "<dev string:x3e2>" + hashtostring(struct.name) + "<dev string:x3f2>" + str_scene_name + "<dev string:x3a9>";
     }
 
     println(str_debug);
@@ -1222,7 +1222,7 @@ function_de6a7579(str_scenedef, str_mode) {
 play(arg1, arg2, arg3, b_test_run = 0, str_mode = "", n_time, var_f7d56e76) {
   if(getdvarint(#"debug_scene", 0) > 0) {
     if(isDefined(arg1) && (isstring(arg1) || ishash(arg1))) {
-      printtoprightln("<dev string:x3ff>" + function_9e72a96(arg1));
+      printtoprightln("<dev string:x3ff>" + hashtostring(arg1));
     } else {
       printtoprightln("<dev string:x410>");
     }
@@ -2600,7 +2600,7 @@ _get_existing_ent(val, key, b_ignore_spawners = 0, str_scene) {
     str_scene = "<dev string:x5a4>";
   }
 
-  assert(a_ents.size <= 1, "<dev string:x5a7>" + function_9e72a96(val) + "<dev string:x5df>" + function_9e72a96(str_scene) + "<dev string:x5ec>");
+  assert(a_ents.size <= 1, "<dev string:x5a7>" + hashtostring(val) + "<dev string:x5df>" + hashtostring(str_scene) + "<dev string:x5ec>");
 
   return a_ents[0];
 }
@@ -2641,7 +2641,7 @@ synced_delete(str_scene) {
 }
 
 error_on_screen(str_msg) {
-  str_msg = function_9e72a96(str_msg);
+  str_msg = hashtostring(str_msg);
 
   if(str_msg != "<dev string:x5a4>") {
     if(!isDefined(level.scene_error_hud)) {
@@ -2668,7 +2668,7 @@ _destroy_error_on_screen() {
 }
 
 warning_on_screen(str_msg) {
-  str_msg = function_9e72a96(str_msg);
+  str_msg = hashtostring(str_msg);
 
   if(str_msg != "<dev string:x5a4>") {
     if(!isDefined(level.scene_warning_hud)) {

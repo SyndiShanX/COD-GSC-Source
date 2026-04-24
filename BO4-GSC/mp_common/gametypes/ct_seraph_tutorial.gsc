@@ -1745,9 +1745,9 @@ function_e47d773c() {
   level notify(#"stop_flood_spawners");
 }
 
-function_b8fea992(var_cd83876, var_264ee2f5, str_endon_notify) {
+function_b8fea992(str_spawn_locs, var_264ee2f5, str_endon_notify) {
   level endon(#"combattraining_logic_finished", str_endon_notify);
-  a_s_locs = struct::get_array(var_cd83876, "targetname");
+  a_s_locs = struct::get_array(str_spawn_locs, "targetname");
   n_index = 0;
   var_d7e81496 = 0;
 

@@ -104,7 +104,7 @@ function private function_871649b9(instance, var_eece1f6a, var_f8dfa2cf, n_spawn
   instance.a_items = a_items;
   instance callback::function_d8abfc3d(#"portal_activated", &function_149da5dd);
 
-  level util::delay(1, undefined, &function_95da1d88, instance, function_9e72a96(var_eece1f6a), var_f8dfa2cf);
+  level util::delay(1, undefined, &function_95da1d88, instance, hashtostring(var_eece1f6a), var_f8dfa2cf);
 }
 
 function private function_149da5dd() {
@@ -164,7 +164,7 @@ function private function_95da1d88(instance, var_eece1f6a, var_f8dfa2cf) {
     if(var_794c9d5f) {
       if(var_794c9d5f == 2) {
         setDvar(var_9911be33, 1);
-        iprintlnbold("<dev string:x349>" + function_9e72a96(var_eece1f6a) + "<dev string:x35a>");
+        iprintlnbold("<dev string:x349>" + hashtostring(var_eece1f6a) + "<dev string:x35a>");
 
         if(var_9911be33 == "<dev string:x36e>") {
           v_offset = (0, 0, -12);

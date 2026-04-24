@@ -533,7 +533,7 @@ function_82732ced() {
     var_7afe66bc = self.var_17a22c08;
   } else {
     var_7afe66bc = function_e5ca5733(self.archetype);
-    assert(var_7afe66bc, "<dev string:xd2>" + function_9e72a96(self.archetype) + "<dev string:xee>");
+    assert(var_7afe66bc, "<dev string:xd2>" + hashtostring(self.archetype) + "<dev string:xee>");
   }
 
   self.var_f256a4d9 = var_7afe66bc;

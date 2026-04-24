@@ -543,7 +543,7 @@ function_466c2fa3(str_fx, newval) {
   str_hint = function_f415205b(newval);
 
   while(getdvarint(#"hash_3c4df2fe4b1618d5", 0) && isDefined(self)) {
-    debug2dtext((100, 800, 0), "<dev string:x51>" + newval + "<dev string:x5b>" + str_hint + "<dev string:x60>" + function_9e72a96(str_fx), (1, 1, 1));
+    debug2dtext((100, 800, 0), "<dev string:x51>" + newval + "<dev string:x5b>" + str_hint + "<dev string:x60>" + hashtostring(str_fx), (1, 1, 1));
     waitframe(1);
   }
 }
@@ -571,7 +571,7 @@ function_5545acc1(newval) {
 
     foreach(i, n_step in level.var_d23472c9) {
       var_8b7c6b64 += n_offset;
-      debug2dtext(v_pos + (0, var_8b7c6b64, 0), function_9e72a96(i) + "<dev string:x5b>" + n_step, (0, 1, 0));
+      debug2dtext(v_pos + (0, var_8b7c6b64, 0), hashtostring(i) + "<dev string:x5b>" + n_step, (0, 1, 0));
     }
 
     waitframe(1);

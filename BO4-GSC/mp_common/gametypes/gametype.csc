@@ -6,6 +6,6 @@
 #namespace gametype;
 
 init() {
-  bundle = function_302bd0b9();
+  bundle = getgametypescriptbundle();
   level.var_d1455682 = bundle;
 }

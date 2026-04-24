@@ -238,7 +238,7 @@ function private function_160aeb02() {
     var_6cbd4315 = tablelookup(#"gamedata/stats/cp/statsmilestones1.csv", 0, challengeindex, 4);
 
     if(isDefined(var_6cbd4315)) {
-      var_6cbd4315 = function_9e72a96(var_6cbd4315);
+      var_6cbd4315 = hashtostring(var_6cbd4315);
       adddebugcommand("<dev string:x55>" + var_6cbd4315 + "<dev string:x7e>" + challengeindex - 1 + "<dev string:x83>" + challengeindex + "<dev string:xa8>");
     }
   }

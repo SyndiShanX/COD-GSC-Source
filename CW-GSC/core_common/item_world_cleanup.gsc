@@ -23,7 +23,7 @@ function private preinit() {
 function private _cleanup() {
   level flag::wait_till(#"item_world_reset");
   var_ce255078 = array(&function_b465b436, &function_35e11623, &function_b7c5f376, &function_6ef5c287, &function_ada16428);
-  var_314770d8 = array(&function_a534560c);
+  cleanupfuncs = array(&function_a534560c);
 
   while(true) {
     if(death_circle::is_active()) {
@@ -33,7 +33,7 @@ function private _cleanup() {
       }
     }
 
-    foreach(func in var_314770d8) {
+    foreach(func in cleanupfuncs) {
       util::wait_network_frame(1);
       [[func]]();
     }

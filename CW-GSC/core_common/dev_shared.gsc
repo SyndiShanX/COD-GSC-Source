@@ -369,7 +369,7 @@ function function_970d4891(mode) {
   bodies = getallcharacterbodies(mode);
 
   foreach(playerbodytype in bodies) {
-    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1ff>" + function_9e72a96(getcharacterassetname(playerbodytype, mode));
+    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1ff>" + hashtostring(getcharacterassetname(playerbodytype, mode));
     util::add_devgui("<dev string:x204>" + body_name + "<dev string:x222>", "<dev string:x238>" + "<dev string:x240>" + "<dev string:x1b8>" + body_name);
   }
 }
@@ -388,7 +388,7 @@ function body_customization_populate(mode, var_ef4940a5) {
     #path: "<dev string:x31f>", #field: "<dev string:xe0>"}];
 
   foreach(playerbodytype in bodies) {
-    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1ff>" + function_9e72a96(getcharacterassetname(playerbodytype, mode));
+    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1ff>" + hashtostring(getcharacterassetname(playerbodytype, mode));
 
     if(isDefined(var_ef4940a5) && var_ef4940a5 != body_name) {
       continue;
@@ -402,7 +402,7 @@ function body_customization_populate(mode, var_ef4940a5) {
 
       if(var_9cf37283.valid) {
         var_346660ac = function_2c6232e5(makelocalizedstring(var_9cf37283.var_74996050));
-        var_1bf829f2 = outfitindex + "<dev string:x1ff>" + var_346660ac + "<dev string:x1ff>" + function_c807b11d(function_9e72a96(var_9cf37283.namehash)) + "<dev string:x11e>" + outfitindex;
+        var_1bf829f2 = outfitindex + "<dev string:x1ff>" + var_346660ac + "<dev string:x1ff>" + function_c807b11d(hashtostring(var_9cf37283.namehash)) + "<dev string:x11e>" + outfitindex;
         var_a818c4e = body_customization_devgui_base + body_name + "<dev string:x343>" + var_1bf829f2;
         util::add_debug_command(var_a818c4e + "<dev string:x337>" + "<dev string:x1bd>" + "<dev string:x1c8>" + "<dev string:x1b8>" + "<dev string:x1d7>" + playerbodytype + "<dev string:x119>" + "<dev string:x1e4>" + outfitindex + "<dev string:x1ef>");
 
@@ -423,7 +423,7 @@ function body_customization_populate(mode, var_ef4940a5) {
           }
 
           util::waittill_can_add_debug_command();
-          util::add_debug_command(var_a818c4e + "<dev string:x343>" + "<dev string:x348>" + presetindex + "<dev string:x35b>" + function_9e72a96(preset.lootid) + "<dev string:x114>" + "<dev string:x11e>" + presetindex + "<dev string:x1bd>" + "<dev string:x1c8>" + "<dev string:x1b8>" + "<dev string:x1d7>" + playerbodytype + "<dev string:x119>" + "<dev string:x1e4>" + outfitindex + "<dev string:x119>" + "<dev string:xd6>" + "<dev string:x11e>" + presetindex + "<dev string:x1ef>");
+          util::add_debug_command(var_a818c4e + "<dev string:x343>" + "<dev string:x348>" + presetindex + "<dev string:x35b>" + hashtostring(preset.lootid) + "<dev string:x114>" + "<dev string:x11e>" + presetindex + "<dev string:x1bd>" + "<dev string:x1c8>" + "<dev string:x1b8>" + "<dev string:x1d7>" + playerbodytype + "<dev string:x119>" + "<dev string:x1e4>" + outfitindex + "<dev string:x119>" + "<dev string:xd6>" + "<dev string:x11e>" + presetindex + "<dev string:x1ef>");
         }
       }
 
@@ -468,7 +468,7 @@ function function_986c93f0() {
 
       if(isDefined(namehash)) {
         pos = v.origin + (0, 0, 100);
-        text = "<dev string:x375>" + roleindex + "<dev string:x380>" + function_9e72a96(namehash) + "<dev string:x386>";
+        text = "<dev string:x375>" + roleindex + "<dev string:x380>" + hashtostring(namehash) + "<dev string:x386>";
         color = (1, 1, 1);
         alpha = 1;
         scale = 1;

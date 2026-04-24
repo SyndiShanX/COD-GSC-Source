@@ -8,7 +8,7 @@
 
 function register(str_name, func_preinit, func_postinit, var_e9137475, reqs) {
   if(isDefined(level.system_funcs[str_name])) {
-    assert(level.system_funcs[str_name].flags & 1, "<dev string:x38>" + function_9e72a96(str_name) + "<dev string:x44>");
+    assert(level.system_funcs[str_name].flags & 1, "<dev string:x38>" + hashtostring(str_name) + "<dev string:x44>");
     return;
   }
 
@@ -53,7 +53,7 @@ function function_5095b2c6(func) {
       return;
     }
 
-    assert(isDefined(level.system_funcs[func.reqs]), "<dev string:xfb>" + (ishash(func.reqs) ? function_9e72a96(func.reqs) : func.reqs) + "<dev string:x124>");
+    assert(isDefined(level.system_funcs[func.reqs]), "<dev string:xfb>" + (ishash(func.reqs) ? hashtostring(func.reqs) : func.reqs) + "<dev string:x124>");
     thread exec_post_system(level.system_funcs[func.reqs]);
   }
 }
@@ -93,7 +93,7 @@ function function_8dfa23e0(func) {
       return;
     }
 
-    assert(isDefined(level.system_funcs[func.reqs]), "<dev string:xfb>" + (ishash(func.reqs) ? function_9e72a96(func.reqs) : func.reqs) + "<dev string:x124>");
+    assert(isDefined(level.system_funcs[func.reqs]), "<dev string:xfb>" + (ishash(func.reqs) ? hashtostring(func.reqs) : func.reqs) + "<dev string:x124>");
     thread exec_pre_system(level.system_funcs[func.reqs]);
   }
 }
@@ -131,7 +131,7 @@ function function_3e3686fa(func) {
       return;
     }
 
-    assert(isDefined(level.system_funcs[func.reqs]), "<dev string:xfb>" + (ishash(func.reqs) ? function_9e72a96(func.reqs) : func.reqs) + "<dev string:x124>");
+    assert(isDefined(level.system_funcs[func.reqs]), "<dev string:xfb>" + (ishash(func.reqs) ? hashtostring(func.reqs) : func.reqs) + "<dev string:x124>");
     thread function_6cc01f0(level.system_funcs[func.reqs]);
   }
 }

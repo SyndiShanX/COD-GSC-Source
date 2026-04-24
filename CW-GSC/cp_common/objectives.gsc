@@ -674,6 +674,6 @@ function private function_37cf9b17(str_objective, pos, radius, var_4003470b) {
   }
 }
 
-function private function_d5874fcc(var_201c5b1f) {
+function private function_d5874fcc(notify_hash) {
   objectives_ui::function_be5b472b();
 }

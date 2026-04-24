@@ -900,11 +900,11 @@ function_76739a65() {
   e_player thread ct_utils::function_68848e5("ultimate_turret");
   e_player thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_KillToEarnNomadKS");
   e_player ct_utils::function_80bf685b(0);
-  level.var_a934617 = [];
-  level.var_a934617[level.var_a934617.size] = struct::get("s_ks_righ_path1", "targetname");
-  level.var_a934617[level.var_a934617.size] = struct::get("s_ks_righ_path2", "targetname");
-  level.var_a934617[level.var_a934617.size] = struct::get("s_ks_left_path1", "targetname");
-  level.var_a934617[level.var_a934617.size] = struct::get("s_ks_left_path2", "targetname");
+  level.a_s_paths = [];
+  level.a_s_paths[level.a_s_paths.size] = struct::get("s_ks_righ_path1", "targetname");
+  level.a_s_paths[level.a_s_paths.size] = struct::get("s_ks_righ_path2", "targetname");
+  level.a_s_paths[level.a_s_paths.size] = struct::get("s_ks_left_path1", "targetname");
+  level.a_s_paths[level.a_s_paths.size] = struct::get("s_ks_left_path2", "targetname");
   level.n_path_index = 0;
 
   while(!(isDefined(e_player.var_d5d10814) && e_player.var_d5d10814)) {
@@ -1460,10 +1460,10 @@ function_54f2fd97(b_keyline) {
 
   self setorigin(s_loc.origin);
   self setplayerangles(s_loc.angles);
-  s_path = level.var_a934617[level.n_path_index];
+  s_path = level.a_s_paths[level.n_path_index];
   level.n_path_index++;
 
-  if(level.n_path_index >= level.var_a934617.size) {
+  if(level.n_path_index >= level.a_s_paths.size) {
     level.n_path_index = 0;
   }
 

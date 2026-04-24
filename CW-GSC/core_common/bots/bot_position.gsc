@@ -269,7 +269,7 @@ function private function_f14a768c(trigger, var_e125ba43) {
     return self set_position(var_1ccbeeaa, var_e125ba43);
   }
 
-  self function_b39b0b55(trigger.origin, (1, 0, 0), var_e125ba43 + function_9e72a96(#"hash_7d1aa4caccc3dd42"));
+  self function_b39b0b55(trigger.origin, (1, 0, 0), var_e125ba43 + hashtostring(#"hash_7d1aa4caccc3dd42"));
 
   pixendevent();
   return 0;
@@ -307,7 +307,7 @@ function private set_position(point, var_e125ba43) {
   navmeshpoint = function_13796beb(point);
 
   if(!isDefined(navmeshpoint)) {
-    self function_b39b0b55(point, (1, 0, 0), var_e125ba43 + function_9e72a96(#"hash_7d1aa4caccc3dd42"));
+    self function_b39b0b55(point, (1, 0, 0), var_e125ba43 + hashtostring(#"hash_7d1aa4caccc3dd42"));
 
     if(self bot::should_record(#"hash_6356356a050dc83d")) {
       recordline(self.origin, point, (1, 0, 0), "<dev string:x38>", self);
@@ -405,7 +405,7 @@ function private function_b39b0b55(origin, color, label) {
   recordline(origin, top, color, "<dev string:x38>", self);
 
   if(isDefined(label)) {
-    record3dtext(function_9e72a96(label), top, (1, 1, 1), "<dev string:x38>", self, 0.5);
+    record3dtext(hashtostring(label), top, (1, 1, 1), "<dev string:x38>", self, 0.5);
   }
 
   return 1;
@@ -433,14 +433,14 @@ function private function_7e6af638() {
 
     foreach(failure in failures) {
       if(isDefined(failure.end)) {
-        print3d(failure.end, function_9e72a96(#"failed"), (1, 0, 1), 1, 2.5, 1, 1);
+        print3d(failure.end, hashtostring(#"failed"), (1, 0, 1), 1, 2.5, 1, 1);
         angles = vectortoangles(failure.end - failure.start);
         circle(failure.end, 15, (1, 0, 1), 0, 1);
         line(failure.start, failure.end, (1, 0, 1));
         continue;
       }
 
-      print3d(failure.start, function_9e72a96(#"failed"), (1, 0, 1), 1, 2.5, 1, 1);
+      print3d(failure.start, hashtostring(#"failed"), (1, 0, 1), 1, 2.5, 1, 1);
       box(failure.start, (-15, -15, 0), (15, 15, 72), 0, (1, 0, 1));
     }
 

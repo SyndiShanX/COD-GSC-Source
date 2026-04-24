@@ -291,18 +291,18 @@ function function_ded2880a(localclientnum) {
   var_65679637 = getscriptbundlenames("<dev string:xbb>");
 
   foreach(var_d5fa8477 in var_65679637) {
-    var_d5fa8477 = function_9e72a96(var_d5fa8477);
+    var_d5fa8477 = hashtostring(var_d5fa8477);
     s_bundle = getscriptbundle(var_d5fa8477);
 
     if(isDefined(s_bundle)) {
       if(isDefined(s_bundle.var_ad4ad686)) {
-        str_faction = function_9e72a96(s_bundle.var_ad4ad686);
+        str_faction = hashtostring(s_bundle.var_ad4ad686);
       } else {
         str_faction = "<dev string:xc6>";
       }
 
       if(isDefined(s_bundle.var_9be0526e)) {
-        str_type = function_9e72a96(s_bundle.var_9be0526e);
+        str_type = hashtostring(s_bundle.var_9be0526e);
       } else {
         str_type = "<dev string:xd4>";
       }

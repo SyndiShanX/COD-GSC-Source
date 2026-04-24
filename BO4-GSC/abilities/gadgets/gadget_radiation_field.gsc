@@ -516,7 +516,7 @@ function_a1cc4c59(weapon, killcament) {
   player.var_d44d1214 clientfield::set("self_destruct_start", 1);
   player function_6b83f6a9(1);
   player function_ad7b9f4a("RAISEWEAPON", weapon, 0, 0, 1, 0);
-  damage_state(3, weapon, level.radiationfield_bundle.var_2b4199b5, level.radiationfield_bundle.var_cbe3d2b8, level.radiationfield_bundle.midheight, level.radiationfield_bundle.finalheight, level.radiationfield_bundle.finalduration, level.radiationfield_bundle.var_3ef39bc5, level.radiationfield_bundle.var_d0e0a088, level.radiationfield_bundle.var_8d1e6357, killcament);
+  damage_state(3, weapon, level.radiationfield_bundle.var_2b4199b5, level.radiationfield_bundle.finalradius, level.radiationfield_bundle.midheight, level.radiationfield_bundle.finalheight, level.radiationfield_bundle.finalduration, level.radiationfield_bundle.var_3ef39bc5, level.radiationfield_bundle.var_d0e0a088, level.radiationfield_bundle.var_8d1e6357, killcament);
   player function_c5a2e918();
 }
 

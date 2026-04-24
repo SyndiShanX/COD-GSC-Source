@@ -716,7 +716,7 @@ function private function_7a7ab1a2() {
           continue;
         }
 
-        record3dtext(level.teams[team] + "<dev string:x42>" + objective.count + "<dev string:x48>" + function_9e72a96(objective.var_a1980fcb) + "<dev string:x4f>" + function_9e72a96(objective.var_5e99151a), objective.info.target.origin + (0, 0, zoffset), (0, 1, 1), "<dev string:x38>");
+        record3dtext(level.teams[team] + "<dev string:x42>" + objective.count + "<dev string:x48>" + hashtostring(objective.var_a1980fcb) + "<dev string:x4f>" + hashtostring(objective.var_5e99151a), objective.info.target.origin + (0, 0, zoffset), (0, 1, 1), "<dev string:x38>");
 
         if(isDefined(objective.info.var_dd2331cb)) {
           foreach(id in objective.info.var_dd2331cb) {
@@ -760,9 +760,9 @@ function private function_26b3a2f() {
   order = self.bot.order;
 
   if(!isDefined(order)) {
-    record3dtext(function_9e72a96(#"hash_266967e49741306c"), self.origin, (0, 1, 1), "<dev string:x38>", self, 0.5);
+    record3dtext(hashtostring(#"hash_266967e49741306c"), self.origin, (0, 1, 1), "<dev string:x38>", self, 0.5);
   } else {
-    record3dtext(function_9e72a96(#"hash_15017f84fb1a2e46") + function_9e72a96(order), self.origin, (0, 1, 1), "<dev string:x38>", self, 0.5);
+    record3dtext(hashtostring(#"hash_15017f84fb1a2e46") + hashtostring(order), self.origin, (0, 1, 1), "<dev string:x38>", self, 0.5);
   }
 
   objective = self.bot.objective;

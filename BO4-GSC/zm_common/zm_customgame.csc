@@ -101,12 +101,12 @@ function_ecc5a0b9(local_client_num, player, damage) {
   return false;
 }
 
-function_901b751c(var_c9db62d5) {
-  if(var_c9db62d5 === "") {
+function_901b751c(str_setting) {
+  if(str_setting === "") {
     return undefined;
   }
 
-  setting = getgametypesetting(var_c9db62d5);
-  assert(isDefined(setting), "<dev string:x38>" + var_c9db62d5 + "<dev string:x50>");
+  setting = getgametypesetting(str_setting);
+  assert(isDefined(setting), "<dev string:x38>" + str_setting + "<dev string:x50>");
   return setting;
 }

@@ -101,8 +101,8 @@ function function_a10bb198(a_ents, str_side) {
   str_team = util::get_team_mapping(str_side);
 }
 
-function function_aad02bd0(a_ents, str_side, var_9c1ed9ea) {
-  str_team = util::get_team_mapping(var_9c1ed9ea);
+function function_aad02bd0(a_ents, str_side, str_musicstate) {
+  str_team = util::get_team_mapping(str_musicstate);
   function_75125d25();
   function_f5692e0c("intro_cinematic", str_team);
 }
@@ -149,24 +149,24 @@ function function_75125d25(b_state = 1) {
   level.var_3a701785 = b_state;
 }
 
-function function_f5692e0c(var_9c1ed9ea, str_team, player) {
+function function_f5692e0c(str_musicstate, str_team, player) {
   if(isDefined(game.musicset)) {
-    var_9c1ed9ea += game.musicset;
+    str_musicstate += game.musicset;
   } else {
-    var_9c1ed9ea += "_default";
+    str_musicstate += "_default";
   }
 
   if(isDefined(str_team)) {
-    music::setmusicstatebyteam(var_9c1ed9ea, str_team);
+    music::setmusicstatebyteam(str_musicstate, str_team);
     return;
   }
 
   if(isDefined(player)) {
-    music::setmusicstate(var_9c1ed9ea, player);
+    music::setmusicstate(str_musicstate, player);
     return;
   }
 
-  music::setmusicstate(var_9c1ed9ea);
+  music::setmusicstate(str_musicstate);
 }
 
 function function_14956b80() {

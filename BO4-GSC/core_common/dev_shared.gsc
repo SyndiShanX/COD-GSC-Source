@@ -355,7 +355,7 @@ function_970d4891(mode) {
   bodies = getallcharacterbodies(mode);
 
   foreach(playerbodytype in bodies) {
-    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1e1>" + function_9e72a96(getcharacterassetname(playerbodytype, mode));
+    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1e1>" + hashtostring(getcharacterassetname(playerbodytype, mode));
     util::add_devgui("<dev string:x1e5>" + body_name + "<dev string:x202>", "<dev string:x217>" + "<dev string:x21e>" + "<dev string:x1a6>" + body_name);
   }
 }
@@ -365,7 +365,7 @@ body_customization_populate(mode, var_ef4940a5) {
   body_customization_devgui_base = "<dev string:x23e>" + "<dev string:x1e5>";
 
   foreach(playerbodytype in bodies) {
-    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1e1>" + function_9e72a96(getcharacterassetname(playerbodytype, mode));
+    body_name = function_2c6232e5(makelocalizedstring(getcharacterdisplayname(playerbodytype, mode))) + "<dev string:x1e1>" + hashtostring(getcharacterassetname(playerbodytype, mode));
 
     if(isDefined(var_ef4940a5) && var_ef4940a5 != body_name) {
       continue;
@@ -378,8 +378,8 @@ body_customization_populate(mode, var_ef4940a5) {
       var_9cf37283 = function_d7c3cf6c(playerbodytype, outfitindex, mode);
 
       if(var_9cf37283.valid) {
-        var_346660ac = function_2c6232e5(makelocalizedstring(function_9e72a96(var_9cf37283.var_74996050)));
-        var_1bf829f2 = outfitindex + "<dev string:x1e1>" + var_346660ac + "<dev string:x1e1>" + function_9e72a96(var_9cf37283.namehash) + "<dev string:x112>" + outfitindex;
+        var_346660ac = function_2c6232e5(makelocalizedstring(hashtostring(var_9cf37283.var_74996050)));
+        var_1bf829f2 = outfitindex + "<dev string:x1e1>" + var_346660ac + "<dev string:x1e1>" + hashtostring(var_9cf37283.namehash) + "<dev string:x112>" + outfitindex;
         var_a818c4e = body_customization_devgui_base + body_name + "<dev string:x258>" + var_1bf829f2;
         util::add_debug_command(var_a818c4e + "<dev string:x24d>" + "<dev string:x1aa>" + "<dev string:x1b4>" + "<dev string:x1a6>" + "<dev string:x1c2>" + playerbodytype + "<dev string:x10e>" + "<dev string:x1ce>" + outfitindex + "<dev string:x1d8>");
         types = [{

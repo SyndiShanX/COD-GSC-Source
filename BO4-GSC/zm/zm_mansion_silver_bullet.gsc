@@ -89,12 +89,12 @@ function_766980a4() {
 function_79fad591() {
   level flagsys::wait_till(#"load_main_complete");
 
-  foreach(s_stub in level.var_4fe2f84d[#"zblueprint_mansion_silver_bullet"]) {
+  foreach(s_stub in level.a_t_crafting[#"zblueprint_mansion_silver_bullet"]) {
     s_stub.prompt_and_visibility_func = &function_62018caa;
     s_stub.var_c060d2c8 = 0;
   }
 
-  foreach(s_stub in level.var_4fe2f84d[#"zblueprint_mansion_silver_molten"]) {
+  foreach(s_stub in level.a_t_crafting[#"zblueprint_mansion_silver_molten"]) {
     s_stub.var_c060d2c8 = 0;
   }
 }
@@ -236,7 +236,7 @@ function_252cf612(player) {
       if(isDefined(n_cost)) {
         self sethintstring(#"hash_9c2f7742abf6acb", n_cost);
       } else {
-        iprintln("<dev string:x4f>" + function_9e72a96(var_12680c28.name) + "<dev string:x59>");
+        iprintln("<dev string:x4f>" + hashtostring(var_12680c28.name) + "<dev string:x59>");
 
         return 0;
       }
@@ -259,7 +259,7 @@ function_dad1960c() {
     if(!isDefined(n_cost)) {
       w_weapon = player getcurrentweapon();
 
-      iprintln("<dev string:x4f>" + function_9e72a96(w_weapon.name) + "<dev string:x59>");
+      iprintln("<dev string:x4f>" + hashtostring(w_weapon.name) + "<dev string:x59>");
 
       continue;
     }
@@ -377,10 +377,10 @@ function_5a2bd56f(var_e7b17c0d) {
   }
 
   while(true) {
-    var_54a97edd = self waittill(#"weapon_give", #"pap_timeout");
+    w_result = self waittill(#"weapon_give", #"pap_timeout");
 
-    if(isDefined(var_54a97edd) && zm_weapons::function_93cd8e76(var_54a97edd) === var_e7b17c0d) {
-      zm_utility::function_28ee38f4(var_54a97edd, 0, 0);
+    if(isDefined(w_result) && zm_weapons::function_93cd8e76(w_result) === var_e7b17c0d) {
+      zm_utility::function_28ee38f4(w_result, 0, 0);
       return;
     }
   }

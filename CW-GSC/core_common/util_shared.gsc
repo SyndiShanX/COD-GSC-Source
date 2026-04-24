@@ -246,7 +246,7 @@ function function_819c50c3(n_stream_request_id, str_scenedef) {
 
 function function_20120d2a(n_stream_request_id, str_scenedef) {
   if(isDefined(str_scenedef)) {
-    return ("<dev string:x9c>" + function_9e72a96(str_scenedef) + "<dev string:xa1>");
+    return ("<dev string:x9c>" + hashtostring(str_scenedef) + "<dev string:xa1>");
   }
 
   return "<dev string:x9c>" + (isDefined(isDefined(n_stream_request_id) ? n_stream_request_id : self.var_ecd30af1) ? isDefined(n_stream_request_id) ? n_stream_request_id : self.var_ecd30af1 : -1) + "<dev string:xa1>";

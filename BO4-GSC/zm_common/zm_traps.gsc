@@ -1023,7 +1023,7 @@ register_trap_damage(str_trap, func_player_damage, func_damage) {
   level._custom_traps[str_trap].damage = func_damage;
 }
 
-function_60d9e800(str_trap, var_75734507, var_53d35f37) {
+register_trap_lights(str_trap, var_75734507, var_53d35f37) {
   assert(isDefined(str_trap), "<dev string:x38>");
   _register_undefined_trap(str_trap);
   level._custom_traps[str_trap].var_75734507 = var_75734507;

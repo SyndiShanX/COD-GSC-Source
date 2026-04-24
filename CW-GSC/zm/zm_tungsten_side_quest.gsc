@@ -2365,7 +2365,7 @@ function function_6f4c3279() {
 
   wait 2;
 
-  foreach(perk in level.var_b8be892e) {
+  foreach(perk in level.a_str_vapors) {
     var_11868f5d = self namespace_791d0451::function_b852953c(perk);
 
     if(!isinarray(self.var_7341f980, perk)) {
@@ -2843,7 +2843,7 @@ function cmd(cmd) {
       break;
     case # "give_reward":
       foreach(player in function_a1ef346b()) {
-        foreach(perk in level.var_b8be892e) {
+        foreach(perk in level.a_str_vapors) {
           var_11868f5d = player namespace_791d0451::function_b852953c(perk);
 
           if(!isinarray(player.var_7341f980, var_11868f5d)) {

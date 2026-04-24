@@ -18,7 +18,7 @@ function private preinit() {
   callback::on_localplayer_spawned(&on_player_spawned);
 }
 
-function function_ab7f70b9(str_zone) {
+function get_location_string(str_zone) {
   if(!isDefined(str_zone) || !isDefined(level.var_b6d0f0ba)) {
     return undefined;
   }
@@ -49,7 +49,7 @@ function get_current_zone() {
 function function_5f3b1735(point) {
   foreach(zone in level.var_1383915) {
     if(istouching(point, zone)) {
-      return function_ab7f70b9(zone.script_location);
+      return get_location_string(zone.script_location);
     }
   }
 
@@ -63,7 +63,7 @@ function function_f6ad2be6(localclientnum) {
   while(true) {
     if(isDefined(self)) {
       str_location = get_current_zone();
-      str_location = function_ab7f70b9(str_location);
+      str_location = get_location_string(str_location);
       setuimodelvalue(uimodel, isDefined(str_location) ? str_location : # "");
     }
 

@@ -823,7 +823,7 @@ function private setup_devgui() {
   adddebugcommand(bgb_devgui_base + "<dev string:x481>" + "<dev string:x49f>");
 
   foreach(key in keys) {
-    name = function_9e72a96(level.bgb[key].name);
+    name = hashtostring(level.bgb[key].name);
     adddebugcommand(bgb_devgui_base + name + "<dev string:x4ab>" + name + "<dev string:x4cb>");
   }
 }

@@ -229,7 +229,7 @@ function_8e0b371() {
 
   while(true) {
     if(isalive(self)) {
-      str_location = function_ab7f70b9(self);
+      str_location = get_location_string(self);
       self zm_hud::function_29780fb5(isDefined(str_location) ? str_location : # "");
     } else {
       self zm_hud::function_29780fb5(#"");
@@ -239,7 +239,7 @@ function_8e0b371() {
   }
 }
 
-function_ab7f70b9(e_player) {
+get_location_string(e_player) {
   str_zone = e_player zm_zonemgr::get_player_zone();
 
   if(!isDefined(str_zone)) {

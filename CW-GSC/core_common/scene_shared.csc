@@ -675,7 +675,7 @@ class csceneplayer: cscriptbundleobjectbase, csceneobject {
 
       v_pos = (1350, 195, 0);
       var_c74251a4 = scene::function_8582657c(_o_scene._s, _str_shot);
-      var_962ef8af = "<dev string:xd2>" + function_9e72a96(_o_scene._str_name) + "<dev string:xdd>" + _str_shot + "<dev string:xe8>" + var_c74251a4 + "<dev string:x10d>" + var_c74251a4 * 30;
+      var_962ef8af = "<dev string:xd2>" + hashtostring(_o_scene._str_name) + "<dev string:xdd>" + _str_shot + "<dev string:xe8>" + var_c74251a4 + "<dev string:x10d>" + var_c74251a4 * 30;
       debug2dtext(v_pos, var_962ef8af, undefined, undefined, undefined, 1, 0.8);
       v_pos += (0, 20, 0) * 2;
       waitframe(1);
@@ -2185,7 +2185,7 @@ function _trigger_stop(trig) {
 }
 
 function add_scene_func(str_scenedef, func, var_e21c4c4c = "play", ...) {
-  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x1b4>" + function_9e72a96(str_scenedef) + "<dev string:x19b>");
+  assert(isDefined(getscriptbundle(str_scenedef)), "<dev string:x1b4>" + hashtostring(str_scenedef) + "<dev string:x19b>");
   var_e21c4c4c = tolower(var_e21c4c4c);
 
   if(!isDefined(level.scene_funcs)) {
@@ -2266,7 +2266,7 @@ function init(arg1, arg2, arg3, b_test_run) {
 
 function get_scenedef(str_scenedef) {
   s_scriptbundle = getscriptbundle(str_scenedef);
-  assert(isDefined(s_scriptbundle) && isDefined(s_scriptbundle.objects), "<dev string:x241>" + function_9e72a96(str_scenedef) + "<dev string:x252>");
+  assert(isDefined(s_scriptbundle) && isDefined(s_scriptbundle.objects), "<dev string:x241>" + hashtostring(str_scenedef) + "<dev string:x252>");
   return s_scriptbundle;
 }
 
@@ -2435,9 +2435,9 @@ function function_6f382548(struct, str_scene_name) {
 
   if(struct.disableinsplitscreen == 2 && getdvarint(#"splitscreen_playercount", 1) > 1 || struct.disableinsplitscreen == 3 && getdvarint(#"splitscreen_playercount", 1) > 2 || struct.disableinsplitscreen == 4 && getdvarint(#"splitscreen_playercount", 1) > 3) {
     if(struct.type === "<dev string:x314>") {
-      str_debug = "<dev string:x31d>" + function_9e72a96(str_scene_name) + "<dev string:x327>";
+      str_debug = "<dev string:x31d>" + hashtostring(str_scene_name) + "<dev string:x327>";
     } else {
-      str_debug = "<dev string:x361>" + function_9e72a96(struct.name) + "<dev string:x372>" + str_scene_name + "<dev string:x380>";
+      str_debug = "<dev string:x361>" + hashtostring(struct.name) + "<dev string:x372>" + str_scene_name + "<dev string:x380>";
     }
 
     println(str_debug);

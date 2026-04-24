@@ -450,8 +450,8 @@ function private function_3cadc363(prompt_struct) {
   return isweapon(prompt_struct.player action_utility::function_1a2a3654());
 }
 
-function private function_7d4b1333(var_201c5b1f) {
-  if(var_201c5b1f != #"death" && var_201c5b1f != #"disconnect") {
+function private function_7d4b1333(notify_hash) {
+  if(notify_hash != #"death" && notify_hash != #"disconnect") {
     self function_7a061b23(1, undefined);
   }
 }

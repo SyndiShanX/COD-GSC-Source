@@ -2303,12 +2303,12 @@ function private beacon_cp_biodomes_server_room_top_floor_door_rumble() {
   thread function_5c159ad3();
 
   if(!isDefined(level.skipgameend) || !level.skipgameend) {
-    display_transition::function_19adc0b7(outcome);
+    display_transition::display_match_end(outcome);
   }
 
   function_bd1e54e7(outcome);
 
-  if(util::isoneround() && !display_transition::function_81d670f5()) {
+  if(util::isoneround() && !display_transition::using_new_transitions()) {
     globallogic_utils::executepostroundevents();
   }
 
@@ -3897,7 +3897,7 @@ function function_b9b7618() {
     util::registerroundwinlimit(0, 10);
   }
 
-  if(!display_transition::function_81d670f5()) {
+  if(!display_transition::using_new_transitions()) {
     globallogic_utils::registerpostroundevent(&killcam::function_a26057ee);
     globallogic_utils::registerpostroundevent(&potm::post_round_potm);
   }

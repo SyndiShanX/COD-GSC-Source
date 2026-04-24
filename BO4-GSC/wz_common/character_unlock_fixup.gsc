@@ -48,7 +48,7 @@ function_90ee7a97(unlock_name, activation_func) {
   var_9ba1646c = level.var_7d8da246[unlock_name];
 
   if(!isDefined(var_9ba1646c)) {
-    assertmsg("<dev string:x7c>" + function_9e72a96(unlock_name) + "<dev string:x94>");
+    assertmsg("<dev string:x7c>" + hashtostring(unlock_name) + "<dev string:x94>");
     return;
   }
 

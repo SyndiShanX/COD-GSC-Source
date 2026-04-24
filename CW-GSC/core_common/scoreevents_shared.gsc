@@ -109,7 +109,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
       level.var_10cd7193 = [];
     }
 
-    eventstr = ishash(event) ? function_9e72a96(event) : event;
+    eventstr = ishash(event) ? hashtostring(event) : event;
 
     if(!isDefined(level.var_10cd7193)) {
       level.var_10cd7193 = [];
@@ -141,7 +141,7 @@ function processscoreevent(event, player, victim, weapon, playersaffected, var_d
         player ability_power::power_gain_event_score(event, victim, scoregiven, weapon);
 
         if(getdvarint(#"hash_628a73b6809e0598", 0) > 0) {
-          println("<dev string:x38>" + player.playername + "<dev string:x55>" + function_9e72a96(event) + "<dev string:x60>" + scoregiven);
+          println("<dev string:x38>" + player.playername + "<dev string:x55>" + hashtostring(event) + "<dev string:x60>" + scoregiven);
         }
       }
     }
@@ -407,7 +407,7 @@ function function_2b96d7dc() {
       scoreinfotableloaded = 1;
     }
 
-    assert(scoreinfotableloaded, "<dev string:xa5>" + function_9e72a96(getscoreeventtablename()));
+    assert(scoreinfotableloaded, "<dev string:xa5>" + hashtostring(getscoreeventtablename()));
     return scoreinfotableid;
   }
 

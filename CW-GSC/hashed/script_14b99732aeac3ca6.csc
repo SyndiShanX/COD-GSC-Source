@@ -81,19 +81,19 @@ function function_eebdf718(localclientnum, oldval, newval, bnewent, binitialsnap
 }
 
 function function_ee0c0073(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  var_fcec724a = struct::get("bny_clb_strobe_fx");
+  s_fx_loc = struct::get("bny_clb_strobe_fx");
 
   if(bwastimejump) {
-    if(!isDefined(var_fcec724a.var_f01d5034)) {
-      var_fcec724a.var_f01d5034 = playFX(fieldname, #"hash_ae69a5490ab1a42", var_fcec724a.origin, anglesToForward(var_fcec724a.angles), anglestoup(var_fcec724a.angles));
+    if(!isDefined(s_fx_loc.var_f01d5034)) {
+      s_fx_loc.var_f01d5034 = playFX(fieldname, #"hash_ae69a5490ab1a42", s_fx_loc.origin, anglesToForward(s_fx_loc.angles), anglestoup(s_fx_loc.angles));
     }
 
     return;
   }
 
-  if(isDefined(var_fcec724a.var_f01d5034)) {
-    stopfx(fieldname, var_fcec724a.var_f01d5034);
-    var_fcec724a.var_f01d5034 = undefined;
+  if(isDefined(s_fx_loc.var_f01d5034)) {
+    stopfx(fieldname, s_fx_loc.var_f01d5034);
+    s_fx_loc.var_f01d5034 = undefined;
   }
 }
 

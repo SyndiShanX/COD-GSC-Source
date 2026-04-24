@@ -1081,9 +1081,9 @@ function function_8f9ea01c(einflictor, eattacker, idamage, idflags, smeansofdeat
 
 function function_2085bf3b() {
   if(!self util::is_spectating()) {
-    var_2e07b8ff = self getweaponslistprimaries();
+    a_w_primary_weapons = self getweaponslistprimaries();
 
-    foreach(w_weapon in var_2e07b8ff) {
+    foreach(w_weapon in a_w_primary_weapons) {
       if(w_weapon === level.var_e4731251) {
         self function_98957f5b();
         level thread function_6413e9b();

@@ -2141,7 +2141,7 @@ function private function_529b6f7d(waitresult) {
     reason = "<dev string:x163>";
 
     if(ishash(waitresult.reason)) {
-      reason += function_9e72a96(waitresult.reason);
+      reason += hashtostring(waitresult.reason);
     } else if(isstring(waitresult.reason)) {
       reason += waitresult.reason;
     }
@@ -2919,7 +2919,7 @@ function function_2c96cf0e(event) {
 
 function function_d3113f01(var_bfe774a8) {
   var_ee65a0a8 = isDefined(level.var_acd0f67e) ? level.var_acd0f67e : 0;
-  var_931577c = isDefined(function_302bd0b9().var_4f7d48d7) ? function_302bd0b9().var_4f7d48d7 : # "gamedata/tables/zm/zm_perroundxp.csv";
+  var_931577c = isDefined(getgametypescriptbundle().var_4f7d48d7) ? getgametypescriptbundle().var_4f7d48d7 : # "gamedata/tables/zm/zm_perroundxp.csv";
 
   assert(isDefined(var_931577c), "<dev string:x1b7>");
   assert(tablelookupcolumnforrow(var_931577c, 0, 0) == 1, "<dev string:x1f6>");
@@ -3262,7 +3262,7 @@ function printhashids() {
         continue;
       }
 
-      println(function_9e72a96(perk.alias) + "<dev string:x322>" + perk.alias);
+      println(hashtostring(perk.alias) + "<dev string:x322>" + perk.alias);
     }
   }
 

@@ -33,7 +33,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-#namespace namespace_b6ca3ccc;
+#namespace mansion_stick_man;
 
 init() {
   clientfield::register("scriptmover", "" + #"falling_leaves", 8000, 1, "int");
@@ -46,7 +46,7 @@ init() {
   clientfield::register("allplayers", "" + #"hash_30aa04edc476253f", 8000, 1, "int");
   register_steps();
   init_flags();
-  function_c6e2a4fd();
+  init_components();
 
   if(zm_utility::is_ee_enabled()) {
     if(zm_custom::function_901b751c(#"hash_3c5363541b97ca3e") && zm_custom::function_901b751c(#"zmpapenabled") != 2) {
@@ -56,8 +56,8 @@ init() {
   }
 }
 
-function_c6e2a4fd() {
-  level.var_d70578ff = [];
+init_components() {
+  level.a_mdl_pics = [];
   level.player_out_of_playable_area_override = &function_8b12e689;
   mdl_stone = getent("health_stone", "targetname");
   mdl_stone setinvisibletoall();
@@ -160,15 +160,15 @@ function_55b79f54() {
 }
 
 init_sticks() {
-  var_e036b66c = getEntArray("stick_man_stick", "script_noteworthy");
+  a_mdl_sticks = getEntArray("stick_man_stick", "script_noteworthy");
 
-  foreach(var_1f23d8cf in var_e036b66c) {
-    var_1f23d8cf.s_form = struct::get(var_1f23d8cf.target);
-    var_1f23d8cf.s_fall = struct::get(var_1f23d8cf.targetname);
-    var_1f23d8cf thread function_e8f819b0();
+  foreach(mdl_stick in a_mdl_sticks) {
+    mdl_stick.s_form = struct::get(mdl_stick.target);
+    mdl_stick.s_fall = struct::get(mdl_stick.targetname);
+    mdl_stick thread function_e8f819b0();
   }
 
-  level.var_94975706 = 0;
+  level.n_sticks = 0;
   level waittill(#"hash_68c10418963ac1fc");
   array::run_all(getEntArray("stick_man_stick", "script_noteworthy"), &delete);
   hidemiscmodels("misc_sticks");
@@ -192,7 +192,7 @@ function_e8f819b0() {
       s_scene scene::play("Shot 1");
       s_target = struct::get(self.target);
       var_47323b73 = s_target zm_unitrigger::create(undefined, (92, 92, 100), &function_ff1dea25);
-      var_47323b73.var_1f23d8cf = self;
+      var_47323b73.mdl_stick = self;
       break;
     }
   }
@@ -209,15 +209,15 @@ function_ff1dea25() {
       continue;
     }
 
-    level thread function_1ca135cf(self.stub.var_1f23d8cf.script_int);
+    level thread function_1ca135cf(self.stub.mdl_stick.script_int);
     zm_unitrigger::unregister_unitrigger(self.stub);
   }
 }
 
 function_1ca135cf(n_int) {
-  level.var_94975706++;
+  level.n_sticks++;
 
-  if(level.var_94975706 >= 5) {
+  if(level.n_sticks >= 5) {
     level flag::set(#"stick_done");
   }
 
@@ -226,7 +226,7 @@ function_1ca135cf(n_int) {
   s_scene = struct::get(str_scene, "scriptbundlename");
   s_scene scene::play("Shot 2");
 
-  if(level.var_94975706 == 1) {
+  if(level.n_sticks == 1) {
     e_bush = getent("burning_man_shrub", "targetname");
     e_bush clientfield::set("" + #"stick_fire", 1);
     wait 1;
@@ -335,7 +335,7 @@ cleanup_step_2(var_5ea5c94d, ended_early) {
 }
 
 function_2345b68a() {
-  foreach(mdl_pic in level.var_d70578ff) {
+  foreach(mdl_pic in level.a_mdl_pics) {
     if(isDefined(mdl_pic.s_trig.s_unitrigger)) {
       level thread zm_unitrigger::unregister_unitrigger(mdl_pic.s_trig.s_unitrigger);
     }
@@ -1745,19 +1745,19 @@ function_2c554640() {
   var_1b2ca394.var_3916fb8b = #"p8_zm_headstone_engraving_1918";
   var_3c9ce3a9.var_3916fb8b = #"p8_zm_headstone_engraving_1927";
   var_36ebb951.var_3916fb8b = #"p8_zm_headstone_engraving_1945";
-  level.var_d70578ff = array(var_6adbf325, var_1b2ca394, var_3c9ce3a9, var_36ebb951);
+  level.a_mdl_pics = array(var_6adbf325, var_1b2ca394, var_3c9ce3a9, var_36ebb951);
 
-  for(i = 0; i < level.var_d70578ff.size; i++) {
-    level.var_d70578ff[i].origin = a_s_locs[i].origin;
-    level.var_d70578ff[i].angles = a_s_locs[i].angles;
-    level.var_d70578ff[i].s_loc = a_s_locs[i];
-    level.var_d70578ff[i] setscale(a_s_locs[i].modelscale);
-    level.var_d70578ff[i].s_trig = struct::get(a_s_locs[i].target);
-    level.var_d70578ff[i].s_trig.n_character_index = level.var_d70578ff[i].character_index;
-    level.var_d70578ff[i].s_trig zm_unitrigger::create(undefined, (64, 64, 100), &turn_to_zombie_damage_);
-    level.var_d70578ff[i].mdl_bd = util::spawn_model(level.var_d70578ff[i].var_3916fb8b, a_s_locs[i].origin + anglestoup(level.var_d70578ff[i].angles) * -19, a_s_locs[i].angles);
-    level.var_d70578ff[i].mdl_bd setscale(0.55);
-    var_fbd8294c = util::spawn_model(#"p8_zm_headstone_engraving_died", a_s_locs[i].origin + anglestoup(level.var_d70578ff[i].angles) * -12, a_s_locs[i].angles);
+  for(i = 0; i < level.a_mdl_pics.size; i++) {
+    level.a_mdl_pics[i].origin = a_s_locs[i].origin;
+    level.a_mdl_pics[i].angles = a_s_locs[i].angles;
+    level.a_mdl_pics[i].s_loc = a_s_locs[i];
+    level.a_mdl_pics[i] setscale(a_s_locs[i].modelscale);
+    level.a_mdl_pics[i].s_trig = struct::get(a_s_locs[i].target);
+    level.a_mdl_pics[i].s_trig.n_character_index = level.a_mdl_pics[i].character_index;
+    level.a_mdl_pics[i].s_trig zm_unitrigger::create(undefined, (64, 64, 100), &turn_to_zombie_damage_);
+    level.a_mdl_pics[i].mdl_bd = util::spawn_model(level.a_mdl_pics[i].var_3916fb8b, a_s_locs[i].origin + anglestoup(level.a_mdl_pics[i].angles) * -19, a_s_locs[i].angles);
+    level.a_mdl_pics[i].mdl_bd setscale(0.55);
+    var_fbd8294c = util::spawn_model(#"p8_zm_headstone_engraving_died", a_s_locs[i].origin + anglestoup(level.a_mdl_pics[i].angles) * -12, a_s_locs[i].angles);
     var_fbd8294c setscale(0.55);
   }
 }

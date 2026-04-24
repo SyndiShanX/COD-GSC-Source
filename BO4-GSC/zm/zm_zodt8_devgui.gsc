@@ -80,7 +80,7 @@ function_78c32556(cmd) {
       return 1;
     case # "hash_687e53bfcb79ec3b":
       if(isDefined(level.chests) && isDefined(level.chest_index) && isDefined(level.chests[level.chest_index].zbarrier)) {
-        level.chests[level.chest_index].zbarrier thread namespace_b45e3f05::function_8baed388();
+        level.chests[level.chest_index].zbarrier thread zodt8_side_quests::function_8baed388();
       }
 
       break;
@@ -199,13 +199,13 @@ give_flare(str_color) {
   foreach(e_player in a_e_players) {
     switch (str_color) {
       case # "red":
-        namespace_b45e3f05::give_flare("<dev string:x567>");
+        zodt8_side_quests::give_flare("<dev string:x567>");
         break;
       case # "green":
-        namespace_b45e3f05::give_flare("<dev string:x56d>");
+        zodt8_side_quests::give_flare("<dev string:x56d>");
         break;
       case # "blue":
-        namespace_b45e3f05::give_flare("<dev string:x575>");
+        zodt8_side_quests::give_flare("<dev string:x575>");
         break;
     }
   }
@@ -226,9 +226,9 @@ function_51855e65(round_number) {
   }
 
   if(round_number >= 8) {
-    assert(isDefined(level.var_4fe2f84d[#"zblueprint_shield_dual_wield"]));
+    assert(isDefined(level.a_t_crafting[#"zblueprint_shield_dual_wield"]));
 
-    foreach(trigger in level.var_4fe2f84d[#"zblueprint_shield_dual_wield"]) {
+    foreach(trigger in level.a_t_crafting[#"zblueprint_shield_dual_wield"]) {
       trigger.crafted = 1;
       trigger.blueprint = trigger.craftfoundry;
 

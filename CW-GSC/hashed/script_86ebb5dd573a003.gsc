@@ -201,7 +201,7 @@ function function_85682927(a_ents, str_endon) {
           str_name = "<dev string:x74>";
         }
 
-        debug2dtext((50, ypos, 0), str_name + "<dev string:x7f>" + function_9e72a96(ent.model) + "<dev string:x8b>" + str_origin + "<dev string:xa1>" + ent.origin);
+        debug2dtext((50, ypos, 0), str_name + "<dev string:x7f>" + hashtostring(ent.model) + "<dev string:x8b>" + str_origin + "<dev string:xa1>" + ent.origin);
       }
 
       ypos += 20;

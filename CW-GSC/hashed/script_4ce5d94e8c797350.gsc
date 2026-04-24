@@ -706,10 +706,10 @@ function on_ai_killed(s_params) {
       return;
     }
 
-    if(is_challenge_active(#"hash_6541d5a40f6a8dcc") && (isvehicle(s_params.einflictor) || is_true(s_params.einflictor.weapon.var_29d24e37))) {
+    if(is_challenge_active(#"hash_6541d5a40f6a8dcc") && (isvehicle(s_params.einflictor) || is_true(s_params.einflictor.weapon.isvehicleturret))) {
       if(isvehicle(s_params.einflictor)) {
         var_e6d713ec = s_params.einflictor;
-      } else if(is_true(s_params.einflictor.weapon.var_29d24e37)) {
+      } else if(is_true(s_params.einflictor.weapon.isvehicleturret)) {
         foreach(player in function_a1ef346b()) {
           if(player isinvehicle() && s_params.einflictor.owner === player) {
             var_e6d713ec = player getvehicleoccupied();
@@ -810,7 +810,7 @@ function create_challenge(var_38f795c7, var_6346e7b, zonenames, weaponname, var_
     array::run_all(var_77cd2496, &notsolid);
   }
 
-  var_7ab69ae2 = function_9e72a96(var_38f795c7);
+  var_7ab69ae2 = hashtostring(var_38f795c7);
   level thread util::add_debug_command("<dev string:x16b>" + var_7ab69ae2 + "<dev string:x1ab>" + var_7ab69ae2 + "<dev string:x1cc>");
 
   return s_challenge;

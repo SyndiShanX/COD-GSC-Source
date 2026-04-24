@@ -330,7 +330,7 @@ function_bc194310() {
       level notify(#"start_grapple_fail_collision");
       level notify(#"start_grapple_fail_door_collision");
       level thread ct_vo::function_831e0584(array(#"vox_tvoi_tutor_ruin_slide_3_miss_nag"));
-      var_d21ccff6 = 1;
+      b_respawn_player = 1;
       n_start_time = gettime() / 1000;
 
       while(true) {
@@ -341,7 +341,7 @@ function_bc194310() {
             e_player = getplayers()[0];
 
             if(isalive(e_player)) {
-              var_d21ccff6 = 0;
+              b_respawn_player = 0;
               break;
             }
 
@@ -361,7 +361,7 @@ function_bc194310() {
 
       ct_utils::function_a61ebb46(function_8b1a219a() ? # "hash_4e50694e1653efaf" : # "hash_71cd040e856d2d69");
 
-      if(var_d21ccff6) {
+      if(b_respawn_player) {
         ct_utils::function_79957328();
       }
 

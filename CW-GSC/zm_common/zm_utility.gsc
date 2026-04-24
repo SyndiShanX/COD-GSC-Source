@@ -2753,7 +2753,7 @@ function play_sound_2d(sound) {
 }
 
 function include_weapon(weapon_name, in_box) {
-  println("<dev string:x2d0>" + function_9e72a96(weapon_name));
+  println("<dev string:x2d0>" + hashtostring(weapon_name));
 
   if(!isDefined(in_box)) {
     in_box = 1;
@@ -4582,7 +4582,7 @@ function function_452938ed(params) {
       println("<dev string:x506>" + level.var_e63703cd.size + "<dev string:x522>");
 
       foreach(n_obj_id, s_objective in level.var_e63703cd) {
-        println("<dev string:x533>" + n_obj_id + "<dev string:x545>" + function_9e72a96(s_objective.var_6cc77d4e));
+        println("<dev string:x533>" + n_obj_id + "<dev string:x545>" + hashtostring(s_objective.var_6cc77d4e));
       }
     }
 
@@ -5063,7 +5063,7 @@ function is_jumping() {
   return !isDefined(ground_ent);
 }
 
-function function_9f7fd525(var_c61df77f = "zombie_location", a_str_zones, var_a6f0ec9f = 1) {
+function get_spawn_locs(var_c61df77f = "zombie_location", a_str_zones, var_a6f0ec9f = 1) {
   a_s_locs = [];
 
   if(isDefined(a_str_zones)) {

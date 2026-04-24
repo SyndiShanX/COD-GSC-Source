@@ -848,18 +848,18 @@ function_39f9d433() {
 
 function_94c8f1d8(n_max_zombies) {
   level endon(#"combattraining_logic_finished");
-  var_856f9e3e = struct::get_array("s_vp_zombie_loc", "targetname");
-  var_856f9e3e = array::randomize(var_856f9e3e);
+  a_s_zombie_locs = struct::get_array("s_vp_zombie_loc", "targetname");
+  a_s_zombie_locs = array::randomize(a_s_zombie_locs);
   var_4001313 = 0;
 
   while(true) {
     a_ai = getaiarray();
 
     if(a_ai.size < n_max_zombies) {
-      s_loc = var_856f9e3e[var_4001313];
+      s_loc = a_s_zombie_locs[var_4001313];
       var_4001313++;
 
-      if(var_4001313 >= var_856f9e3e.size) {
+      if(var_4001313 >= a_s_zombie_locs.size) {
         var_4001313 = 0;
       }
 
@@ -909,8 +909,8 @@ kill_all_zombies() {
 function_bb44f289(var_7e6c18d7, var_d8036031, var_8a787b15) {
   level endon(#"combattraining_logic_finished", #"stop_zombies");
   level.var_6cd64bc3 = 0;
-  var_856f9e3e = struct::get_array("s_zombie_spawn_loc", "targetname");
-  var_856f9e3e = array::randomize(var_856f9e3e);
+  a_s_zombie_locs = struct::get_array("s_zombie_spawn_loc", "targetname");
+  a_s_zombie_locs = array::randomize(a_s_zombie_locs);
   var_4001313 = 0;
   level.var_6f71c916 = var_d8036031;
 
@@ -936,10 +936,10 @@ function_bb44f289(var_7e6c18d7, var_d8036031, var_8a787b15) {
     a_zombies = function_75c5b3ae();
 
     if(level.var_6f71c916 && a_zombies.size < var_7e6c18d7) {
-      s_loc = var_856f9e3e[var_4001313];
+      s_loc = a_s_zombie_locs[var_4001313];
       var_4001313++;
 
-      if(var_4001313 >= var_856f9e3e.size) {
+      if(var_4001313 >= a_s_zombie_locs.size) {
         var_4001313 = 0;
       }
 
@@ -1234,7 +1234,7 @@ function_9b0a398a(s_loc) {
   n_start_time = gettime() / 1000;
   var_3a9de7bb = 0;
   var_e4e157c8 = 0;
-  var_49f58f36 = 1;
+  b_ignore_me = 1;
 
   while(true) {
     n_time = gettime() / 1000;
@@ -1242,8 +1242,8 @@ function_9b0a398a(s_loc) {
     dt = n_time - n_start_time;
 
     if(dt > 7) {
-      if(isDefined(var_49f58f36) && var_49f58f36) {
-        var_49f58f36 = 0;
+      if(isDefined(b_ignore_me) && b_ignore_me) {
+        b_ignore_me = 0;
         self val::reset(#"bot", "ignoreme");
       }
 

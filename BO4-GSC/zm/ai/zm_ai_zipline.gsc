@@ -23,9 +23,9 @@ __init__() {
   assert(isscriptfunctionptr(&function_79554a79));
   behaviortreenetworkutility::registerbehaviortreescriptapi(#"hash_6049ac9ce94751b0", &function_79554a79);
   assert(!isDefined(&function_fc646a7e) || isscriptfunctionptr(&function_fc646a7e));
-  assert(!isDefined(&function_d31cb502) || isscriptfunctionptr(&function_d31cb502));
+  assert(!isDefined(&ui_reticle_preview_hybrid_03_vday) || isscriptfunctionptr(&ui_reticle_preview_hybrid_03_vday));
   assert(!isDefined(&function_1a4b60ca) || isscriptfunctionptr(&function_1a4b60ca));
-  behaviortreenetworkutility::registerbehaviortreeaction(#"ziplinetraverse", &function_fc646a7e, &function_d31cb502, &function_1a4b60ca);
+  behaviortreenetworkutility::registerbehaviortreeaction(#"ziplinetraverse", &function_fc646a7e, &ui_reticle_preview_hybrid_03_vday, &function_1a4b60ca);
   assert(!isDefined(&function_a2185434) || isscriptfunctionptr(&function_a2185434));
   assert(!isDefined(&function_48ef356e) || isscriptfunctionptr(&function_48ef356e));
   assert(!isDefined(undefined) || isscriptfunctionptr(undefined));
@@ -161,7 +161,7 @@ function_fc646a7e(entity, asmstatename) {
   return 5;
 }
 
-function_d31cb502(entity, asmstatename) {
+ui_reticle_preview_hybrid_03_vday(entity, asmstatename) {
   result = 5;
 
   if(isDefined(entity.var_b20b0960)) {

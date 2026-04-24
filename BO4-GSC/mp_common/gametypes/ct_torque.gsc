@@ -397,7 +397,7 @@ function_944278fd(n_count, var_6448415b = 0, var_29a34c68 = 1000, var_719f528b =
   spawn_zombies(self, n_count, var_6448415b, var_37fa3d92, 1, var_c69d025b, var_68863e93);
 }
 
-function_db21e968(var_36778522, var_6448415b = 0, var_29a34c68 = 800, var_719f528b = 1600, var_c69d025b = 50, var_677d04ac = 1) {
+function_db21e968(n_maxcount, var_6448415b = 0, var_29a34c68 = 800, var_719f528b = 1600, var_c69d025b = 50, var_677d04ac = 1) {
   level endon(#"combattraining_logic_finished");
   self notify(#"hash_3bd66153d302d5e3");
   waitframe(1);
@@ -407,8 +407,8 @@ function_db21e968(var_36778522, var_6448415b = 0, var_29a34c68 = 800, var_719f52
   while(true) {
     self function_27bf93d(var_719f528b + 50, 1);
 
-    if(var_36778522 > level.a_ai_zombies.size) {
-      n_count = var_36778522 - level.a_ai_zombies.size;
+    if(n_maxcount > level.a_ai_zombies.size) {
+      n_count = n_maxcount - level.a_ai_zombies.size;
       self function_944278fd(n_count, var_6448415b, var_29a34c68, var_719f528b, var_c69d025b, 1);
     }
 

@@ -1029,7 +1029,7 @@ devgui_bot_loop() {
       }
 
       displayname = makelocalizedstring(getcharacterdisplayname(index, sessionmode));
-      assetname = function_9e72a96(getcharacterassetname(index, sessionmode));
+      assetname = hashtostring(getcharacterassetname(index, sessionmode));
       name = displayname + "<dev string:xe9>" + assetname + "<dev string:xee>";
       cmd = "<dev string:xf2>" + name + "<dev string:x126>" + index + "<dev string:x12a>" + index + "<dev string:x158>";
       adddebugcommand(cmd);

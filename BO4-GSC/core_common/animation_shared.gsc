@@ -86,7 +86,7 @@ debug_print(str_animation, str_msg) {
 
   if(str_dvar != "<dev string:x38>") {
     if(!isstring(str_animation)) {
-      str_animation = isDefined(function_9e72a96(str_animation)) ? "<dev string:x38>" + function_9e72a96(str_animation) : "<dev string:x38>";
+      str_animation = isDefined(hashtostring(str_animation)) ? "<dev string:x38>" + hashtostring(str_animation) : "<dev string:x38>";
     }
 
     b_print = 0;
@@ -131,7 +131,7 @@ _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, n_blend_o
     str_tag = v_angles_or_tag;
     v_origin = v_origin_or_ent gettagorigin(str_tag);
     v_angles = v_origin_or_ent gettagangles(str_tag);
-    assert(isDefined(v_origin) && isDefined(v_angles), "<dev string:x54>" + function_9e72a96(animation) + "<dev string:x87>" + v_origin_or_ent getentitynumber() + "<dev string:x96>" + v_angles_or_tag + "<dev string:xa3>");
+    assert(isDefined(v_origin) && isDefined(v_angles), "<dev string:x54>" + hashtostring(animation) + "<dev string:x87>" + v_origin_or_ent getentitynumber() + "<dev string:x96>" + v_angles_or_tag + "<dev string:xa3>");
   } else {
     v_angles = isDefined(v_origin_or_ent.angles) ? v_origin_or_ent.angles : (0, 0, 0);
   }

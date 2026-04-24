@@ -79,7 +79,7 @@ function dailychallengedevguiinit() {
   for(row_num = 2; row_num < num_rows; row_num++) {
     challenge_name = tablelookupcolumnforrow(#"gamedata/stats/zm/statsmilestones4.csv", row_num, 5);
     display_row_num = row_num - 2;
-    devgui_string = "<dev string:x38>" + "<dev string:x48>" + (display_row_num > 10 ? display_row_num : "<dev string:x60>" + display_row_num) + "<dev string:x65>" + function_9e72a96(challenge_name) + "<dev string:x6a>" + row_num + "<dev string:x85>";
+    devgui_string = "<dev string:x38>" + "<dev string:x48>" + (display_row_num > 10 ? display_row_num : "<dev string:x60>" + display_row_num) + "<dev string:x65>" + hashtostring(challenge_name) + "<dev string:x6a>" + row_num + "<dev string:x85>";
     adddebugcommand(devgui_string);
   }
 }
@@ -152,7 +152,7 @@ function event_handler[ui_menuresponse] codecallback_menuresponse(eventstruct) {
       wait 0.1;
     }
 
-    var_175d3c32 = function_9e72a96(response);
+    var_175d3c32 = hashtostring(response);
     tokens = strtok(var_175d3c32, "<dev string:x133>");
     spawn = spawnStruct();
     spawn.origin = (int(tokens[0]), int(tokens[1]), int(tokens[2]) - 60);
@@ -435,7 +435,7 @@ function function_daf9ea48() {
         }
 
         name = tablelookupcolumnforrow(tablename, j, 5);
-        devgui_cmd_challenge_path = notif_challenges_devgui_base + function_9e72a96(type) + "<dev string:x2d3>" + function_9e72a96(name) + "<dev string:x2d3>" + challengetierstring + "<dev string:x8f1>" + challengeid;
+        devgui_cmd_challenge_path = notif_challenges_devgui_base + hashtostring(type) + "<dev string:x2d3>" + hashtostring(name) + "<dev string:x2d3>" + challengetierstring + "<dev string:x8f1>" + challengeid;
         util::waittill_can_add_debug_command();
         adddebugcommand(devgui_cmd_challenge_path + "<dev string:x8fa>" + "<dev string:x900>" + "<dev string:x905>" + "<dev string:x90e>" + "<dev string:x65>" + j + "<dev string:x905>" + "<dev string:x927>" + "<dev string:x65>" + i + "<dev string:x905>" + "<dev string:x7da>" + "<dev string:x942>" + "<dev string:x85>");
 

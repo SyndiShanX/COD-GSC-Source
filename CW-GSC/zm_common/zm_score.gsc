@@ -606,7 +606,7 @@ function function_82732ced() {
     var_7afe66bc = self function_e5ca5733();
 
     if(!var_7afe66bc && !self function_5f41330c()) {
-      assert(var_7afe66bc, "<dev string:xd5>" + function_9e72a96(self.archetype) + "<dev string:xf2>");
+      assert(var_7afe66bc, "<dev string:xd5>" + hashtostring(self.archetype) + "<dev string:xf2>");
     }
   }
 

@@ -1837,7 +1837,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
     } else {
       var_e082d5c = var_8e0c4587 seatgetweapon(victim.vehicleposition);
 
-      if(is_true(var_e082d5c.var_29d24e37)) {
+      if(is_true(var_e082d5c.isvehicleturret)) {
         data.var_58ecc225 = 1;
       }
     }
@@ -1851,7 +1851,7 @@ function playerkilled(einflictor, attacker, idamage, smeansofdeath, weapon, shit
     } else if(isDefined(victim.var_6309c512)) {
       var_e082d5c = victim.var_6309c512 seatgetweapon(victim.var_65b3d786);
 
-      if(is_true(var_e082d5c.var_29d24e37)) {
+      if(is_true(var_e082d5c.isvehicleturret)) {
         data.var_58ecc225 = 1;
       }
     }

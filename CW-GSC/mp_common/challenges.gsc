@@ -4322,7 +4322,7 @@ function vehiclekilled(inflictor, attacker, damage, mod, weapon, hitloc) {
 
     var_e082d5c = self seatgetweapon(i);
 
-    if(isDefined(var_e082d5c) && var_e082d5c.var_29d24e37 && !var_e082d5c.var_9a789947) {
+    if(isDefined(var_e082d5c) && var_e082d5c.isvehicleturret && !var_e082d5c.var_9a789947) {
       data.var_c8757561 = 1;
       break;
     }

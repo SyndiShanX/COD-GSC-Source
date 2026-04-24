@@ -258,13 +258,13 @@ debug_colornodes() {
 
 draw_colornodes(array, team) {
   foreach(k, v in array[team]) {
-    color = _get_debug_color(function_9e72a96(k)[0]);
+    color = _get_debug_color(hashtostring(k)[0]);
 
     if(isDefined(level.colornodes_debug_array[team][k])) {
       a_team_nodes = level.colornodes_debug_array[team][k];
 
       for(p = 0; p < a_team_nodes.size; p++) {
-        print3d(a_team_nodes[p].origin, "<dev string:x90>" + function_9e72a96(k), color, 1, 0.7);
+        print3d(a_team_nodes[p].origin, "<dev string:x90>" + hashtostring(k), color, 1, 0.7);
 
         if(getDvar(#"debug_colornodes", 0) == 2 && isDefined(a_team_nodes[p].script_color_allies_old)) {
           if(isDefined(a_team_nodes[p].color_user) && isalive(a_team_nodes[p].color_user) && isDefined(a_team_nodes[p].color_user.script_forcecolor)) {

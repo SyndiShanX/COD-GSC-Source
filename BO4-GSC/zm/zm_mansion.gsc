@@ -135,8 +135,8 @@ event_handler[level_init] main(eventstruct) {
   mansion_storage::init();
   mansion_pap::init_clientfields();
   mansion_pap::function_7255025f();
-  namespace_a8113e97::init();
-  namespace_b6ca3ccc::init();
+  mansion_ley_line::init();
+  mansion_stick_man::init();
   mansion_triad::init();
   mansion_impaler::init();
   mansion_a_skeet_fink::init();
@@ -246,7 +246,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread devgui_setup();
 
-  function_2c7766d0();
+  init_fasttravel();
   function_7abcb565();
   function_38c64c43();
   level thread function_fa17b8da();
@@ -1167,7 +1167,7 @@ debris_scene(str_targetname, str_script_flag, var_d46cd47, var_d6d5180b) {
   level scene::delete_scene_spawned_ents(str_targetname);
 }
 
-function_2c7766d0() {
+init_fasttravel() {
   zm_fasttravel::function_44a82004("power_on1");
   level.var_5bfd847e = #"power_on1";
   level.var_e9737821 = &function_c52e8ba;

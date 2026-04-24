@@ -454,7 +454,7 @@ add_zombie_weapon(weapon_name, upgrade_name, is_ee, cost, weaponvo, weaponvoresp
   struct.vox_response = weaponvoresp;
   struct.is_wonder_weapon = is_wonder_weapon;
   struct.tier = tier;
-  println("<dev string:x38>" + function_9e72a96(weapon_name));
+  println("<dev string:x38>" + hashtostring(weapon_name));
   struct.is_in_box = level.zombie_include_weapons[weapon];
 
   if(!isDefined(ammo_cost) || ammo_cost == 0) {
@@ -499,7 +499,7 @@ include_zombie_weapon(weapon_name, in_box) {
     in_box = 1;
   }
 
-  println("<dev string:x56>" + function_9e72a96(weapon_name));
+  println("<dev string:x56>" + hashtostring(weapon_name));
   level.zombie_include_weapons[getweapon(weapon_name)] = in_box;
 }
 
@@ -662,22 +662,22 @@ player_can_use_content(weapon) {
 }
 
 get_weapon_hint(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:x72>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:x72>");
   return level.zombie_weapons[weapon].hint;
 }
 
 get_weapon_cost(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:x72>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:x72>");
   return level.zombie_weapons[weapon].cost;
 }
 
 get_ammo_cost(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:x72>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:x72>");
   return level.zombie_weapons[weapon].ammo_cost;
 }
 
 get_upgraded_ammo_cost(weapon) {
-  assert(isDefined(level.zombie_weapons[weapon]), function_9e72a96(weapon.name) + "<dev string:x72>");
+  assert(isDefined(level.zombie_weapons[weapon]), hashtostring(weapon.name) + "<dev string:x72>");
 
   if(isDefined(level.zombie_weapons[weapon].upgraded_ammo_cost)) {
     return level.zombie_weapons[weapon].upgraded_ammo_cost;
@@ -854,7 +854,7 @@ get_upgrade_weapon(weapon, add_attachment) {
     return weapon;
   }
 
-  if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, weapon) && weapon.attachments.size) {
+  if(isDefined(self.a_w_devgui) && isinarray(self.a_w_devgui, weapon) && weapon.attachments.size) {
     newweapon = getweapon(newweapon.name, weapon.attachments);
     return newweapon;
   }
@@ -929,7 +929,7 @@ get_weapon_with_attachments(weapon) {
   rootweapon = function_386dacbc(weapon);
 
   if(self has_weapon_or_attachments(rootweapon)) {
-    if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, weapon) && weapon.attachments.size) {
+    if(isDefined(self.a_w_devgui) && isinarray(self.a_w_devgui, weapon) && weapon.attachments.size) {
       return weapon;
     }
 
@@ -1118,7 +1118,7 @@ give_build_kit_weapon(weapon, var_51ec4e93, var_bd5d43c6, b_switch_weapon = 1) {
     base_weapon = get_base_weapon(weapon);
   }
 
-  if(isDefined(self.var_8d5839f4) && isinarray(self.var_8d5839f4, weapon) && weapon.attachments.size) {
+  if(isDefined(self.a_w_devgui) && isinarray(self.a_w_devgui, weapon) && weapon.attachments.size) {
     if(!isDefined(n_camo)) {
       n_camo = 0;
     }
@@ -1595,7 +1595,7 @@ weapondata_take(weapondata) {
     alt_weapon = alt_weapon.altweapon;
 
     if(isinarray(a_alt_weapons, alt_weapon)) {
-      println("<dev string:xe9>" + function_9e72a96(alt_weapon.name) + "<dev string:x108>");
+      println("<dev string:xe9>" + hashtostring(alt_weapon.name) + "<dev string:x108>");
       break;
     }
   }

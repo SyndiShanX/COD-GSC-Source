@@ -276,10 +276,10 @@ function function_fc37bb4f(str_type) {
   }
 }
 
-function function_68aac628(instance, var_9c1ed9ea) {
-  if(!isDefined(instance.var_de3f63de) || instance.var_de3f63de != var_9c1ed9ea) {
-    instance.var_de3f63de = var_9c1ed9ea;
-    level namespace_9b972177::function_9a65b730(var_9c1ed9ea);
+function function_68aac628(instance, str_musicstate) {
+  if(!isDefined(instance.var_de3f63de) || instance.var_de3f63de != str_musicstate) {
+    instance.var_de3f63de = str_musicstate;
+    level namespace_9b972177::function_9a65b730(str_musicstate);
   }
 }
 

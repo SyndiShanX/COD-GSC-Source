@@ -14,7 +14,7 @@
 
 function init_mp() {
   if(!isDefined(level.var_d1455682)) {
-    level.var_d1455682 = function_302bd0b9();
+    level.var_d1455682 = getgametypescriptbundle();
   }
 
   if(!isDefined(level.var_d1455682)) {

@@ -250,7 +250,7 @@ setup_devgui() {
   keys = getarraykeys(level.bgb);
 
   foreach(key in keys) {
-    name = function_9e72a96(level.bgb[key].name);
+    name = hashtostring(level.bgb[key].name);
     adddebugcommand(bgb_devgui_base + name + "<dev string:x92>" + "<dev string:xa2>" + "<dev string:xb7>" + name + "<dev string:xbb>");
   }
 
@@ -350,10 +350,10 @@ bgb_set_debug_text(name, activations_remaining) {
 }
 
 bgb_print_stats(bgb) {
-  printtoprightln(function_9e72a96(bgb) + "<dev string:x169>" + self.bgb_stats[bgb].bgb_available_at_start, (1, 1, 1));
-  printtoprightln(function_9e72a96(bgb) + "<dev string:x185>" + self.bgb_stats[bgb].bgb_used_this_game, (1, 1, 1));
+  printtoprightln(hashtostring(bgb) + "<dev string:x169>" + self.bgb_stats[bgb].bgb_available_at_start, (1, 1, 1));
+  printtoprightln(hashtostring(bgb) + "<dev string:x185>" + self.bgb_stats[bgb].bgb_used_this_game, (1, 1, 1));
   n_available = self.bgb_stats[bgb].bgb_available_at_start - self.bgb_stats[bgb].bgb_used_this_game;
-  printtoprightln(function_9e72a96(bgb) + "<dev string:x19c>" + n_available, (1, 1, 1));
+  printtoprightln(hashtostring(bgb) + "<dev string:x19c>" + n_available, (1, 1, 1));
 }
 
 function private has_consumable_bgb(bgb) {
@@ -504,17 +504,17 @@ run_activation_func(bgb) {
 }
 
 bgb_get_gumball_anim_weapon(bgb) {
-  var_ab8d8da3 = undefined;
+  w_elixir = undefined;
 
   if(isDefined(level.bgb[bgb])) {
     n_rarity = level.bgb[bgb].rarity;
 
     if(isDefined(level.var_ddff6359) && isDefined(n_rarity)) {
-      var_ab8d8da3 = level.var_ddff6359[n_rarity];
+      w_elixir = level.var_ddff6359[n_rarity];
     }
   }
 
-  return var_ab8d8da3;
+  return w_elixir;
 }
 
 function_16670e75(bgb) {
@@ -1006,7 +1006,7 @@ give(name) {
 
   assert(isDefined(level.bgb[name]), "<dev string:x6d0>" + name + "<dev string:x4c0>");
   self notify(#"bgb_update", {
-    #var_3aee8e4: name, #var_826ddd38: self.bgb
+    #to_bgb: name, #var_826ddd38: self.bgb
   });
   self notify("bgb_update_give_" + name);
   self.bgb = name;
@@ -1041,7 +1041,7 @@ take() {
 
   self bgb_clear_monitors_and_clientfields();
   self notify(#"bgb_update", {
-    #var_3aee8e4: # "none", #var_826ddd38: self.bgb
+    #to_bgb: # "none", #var_826ddd38: self.bgb
   });
   self notify("bgb_update_take_" + self.bgb);
   self.bgb = #"none";

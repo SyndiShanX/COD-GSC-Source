@@ -42,10 +42,10 @@ function private _checkprerequisites(entity, attribute) {
     assert(isentity(entity) || isstruct(entity), "<dev string:x158>");
     assert(isactor(entity) || isvehicle(entity) || isstruct(entity) || isbot(entity), "<dev string:x18b>");
     assert(isstring(attribute), "<dev string:x1c8>");
-    assert(isarray(entity.__interface), "<dev string:x1f4>" + function_9e72a96(entity.archetype) + "<dev string:x203>" + "<dev string:x237>");
+    assert(isarray(entity.__interface), "<dev string:x1f4>" + hashtostring(entity.archetype) + "<dev string:x203>" + "<dev string:x237>");
     assert(isarray(level.__ai_interface), "<dev string:x269>");
-    assert(isarray(level.__ai_interface[entity.archetype]), "<dev string:x2b5>" + function_9e72a96(entity.archetype) + "<dev string:x2da>");
-    assert(isarray(level.__ai_interface[entity.archetype][attribute]), "<dev string:x7d>" + attribute + "<dev string:x2f5>" + function_9e72a96(entity.archetype) + "<dev string:x322>");
+    assert(isarray(level.__ai_interface[entity.archetype]), "<dev string:x2b5>" + hashtostring(entity.archetype) + "<dev string:x2da>");
+    assert(isarray(level.__ai_interface[entity.archetype][attribute]), "<dev string:x7d>" + attribute + "<dev string:x2f5>" + hashtostring(entity.archetype) + "<dev string:x322>");
     assert(isstring(level.__ai_interface[entity.archetype][attribute][#"type"]), "<dev string:x32c>" + attribute + "<dev string:x77>");
   }
 }

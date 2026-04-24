@@ -1892,7 +1892,7 @@ function_777fb794() {
   level thread function_612f03f0();
 
   while(!level flag::get(#"crawler_step_complete")) {
-    n_zombie_count = level.var_38b15968;
+    n_zombie_count = level.n_zombie_spawns;
     var_26d4dd52 = floor(randomfloatrange(floor(n_zombie_count / 3), floor(n_zombie_count * 2 / 3)));
 
     while(level.var_9427911d > var_26d4dd52) {

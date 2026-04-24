@@ -210,7 +210,7 @@ function function_43b5625e(tablenum) {
       }
 
       name = tablelookupcolumnforrow(tablename, j, 5);
-      devgui_cmd_challenge_path = notif_challenges_devgui_base + function_9e72a96(type) + "<dev string:x5e3>" + function_9e72a96(name) + "<dev string:x5e3>" + challengetierstring + "<dev string:x5e8>" + challengeid;
+      devgui_cmd_challenge_path = notif_challenges_devgui_base + hashtostring(type) + "<dev string:x5e3>" + hashtostring(name) + "<dev string:x5e3>" + challengetierstring + "<dev string:x5e8>" + challengeid;
       util::waittill_can_add_debug_command();
       adddebugcommand(devgui_cmd_challenge_path + "<dev string:x5f1>" + "<dev string:x5f7>" + "<dev string:x5fc>" + "<dev string:x605>" + "<dev string:x627>" + j + "<dev string:x5fc>" + "<dev string:x62c>" + "<dev string:x627>" + tablenum + "<dev string:x650>");
 
@@ -345,7 +345,7 @@ function notif_devgui_gun_rank() {
   foreach(group_name, gun_group in a_weapons) {
     foreach(gun, attachment_group in gun_group) {
       foreach(attachment, attachment_data in attachment_group[#"attachments"]) {
-        devgui_cmd_gun_path = notif_gun_rank_devgui_base + function_9e72a96(group_name) + "<dev string:x5e3>" + function_9e72a96(gun_group[gun][#"ref"]) + "<dev string:x5e3>" + function_9e72a96(attachment);
+        devgui_cmd_gun_path = notif_gun_rank_devgui_base + hashtostring(group_name) + "<dev string:x5e3>" + hashtostring(gun_group[gun][#"ref"]) + "<dev string:x5e3>" + hashtostring(attachment);
         util::waittill_can_add_debug_command();
         adddebugcommand(devgui_cmd_gun_path + "<dev string:x5f1>" + "<dev string:x5f7>" + "<dev string:x5fc>" + "<dev string:x6ed>" + "<dev string:x627>" + attachment_data[#"xp"] + "<dev string:x5fc>" + "<dev string:x70c>" + "<dev string:x627>" + attachment_data[#"itemindex"] + "<dev string:x5fc>" + "<dev string:x739>" + "<dev string:x627>" + gun_group[gun][#"itemindex"] + "<dev string:x5fc>" + "<dev string:x760>" + "<dev string:x627>" + attachment_data[#"rankid"] + "<dev string:x650>");
       }

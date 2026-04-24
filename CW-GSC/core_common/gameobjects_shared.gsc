@@ -338,13 +338,13 @@ class cinteractobj {
       return;
     }
 
-    var_9c2f0815 = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : # "group_none";
+    str_side_team = var_15547ed4 || isDefined(e_object.var_f66cebb1) ? m_str_team : # "group_none";
 
     for(var_fb20e730 = getplayers(m_str_team); var_fb20e730.size; var_fb20e730 = getplayers(m_str_team)) {
       foreach(e_player in var_fb20e730) {
         if(function_aa070e6f(e_player) && !isinarray(var_2854e7f7, e_player.team) && !e_player isinvehicle()) {
           voiceparams = {
-            #team: m_str_team, #side: var_9c2f0815, #targetname: e_object.var_f66cebb1
+            #team: m_str_team, #side: str_side_team, #targetname: e_object.var_f66cebb1
           };
           array::add(var_2854e7f7, e_player.team);
           break;

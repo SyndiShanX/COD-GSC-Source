@@ -659,7 +659,7 @@ function private _validate_value(str_name, value, b_assert) {
   b_match = current_value === value;
 
   if(b_assert) {
-    assert(b_match, "<dev string:xd0>" + function_9e72a96(str_name) + "<dev string:xe6>" + current_value + "<dev string:xf0>" + value + "<dev string:x105>");
+    assert(b_match, "<dev string:xd0>" + hashtostring(str_name) + "<dev string:xe6>" + current_value + "<dev string:xf0>" + value + "<dev string:x105>");
   }
 
   return b_match;
@@ -728,11 +728,11 @@ function private display_value(index, str_name, str_id, value, b_valid, on_hud) 
   }
 
   if(ishash(str_name)) {
-    str_name = function_9e72a96(str_name);
+    str_name = hashtostring(str_name);
   }
 
   if(ishash(str_id)) {
-    str_id = function_9e72a96(str_id);
+    str_id = hashtostring(str_id);
   }
 
   str_value = "<dev string:x136>";

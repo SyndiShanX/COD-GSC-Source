@@ -257,7 +257,7 @@ function_af2eff2e() {
     }
 
     callback::on_connect(&function_76007e28);
-    self thread function_1525b94c();
+    self thread start_next_challenge();
 
     if(self.script_location != "frozen_crevasse") {
       return;
@@ -271,7 +271,7 @@ function_2a4de81f() {
   self.var_5ac3d786 = 1;
 }
 
-function_1525b94c() {
+start_next_challenge() {
   n_size = self.a_s_challenges.size;
 
   if(n_size > 0) {
@@ -445,7 +445,7 @@ start_challenge() {
     self function_98233b53();
   }
 
-  self function_1525b94c();
+  self start_next_challenge();
 }
 
 function_616536b0() {
@@ -969,31 +969,31 @@ function_89754c19(var_d6578e1f) {
 }
 
 function_dfeb1c1b() {
-  var_7176f841 = struct::get_array("pablo_soup_ingredients", "targetname");
+  a_s_soup_ingredients = struct::get_array("pablo_soup_ingredients", "targetname");
   a_s_meats = [];
   a_s_spices = [];
   a_s_vegetables = [];
 
-  foreach(var_33e4d4f0 in var_7176f841) {
-    if(var_33e4d4f0.script_string === "meats") {
+  foreach(s_soup_ingredient in a_s_soup_ingredients) {
+    if(s_soup_ingredient.script_string === "meats") {
       if(!isDefined(a_s_meats)) {
         a_s_meats = [];
       } else if(!isarray(a_s_meats)) {
         a_s_meats = array(a_s_meats);
       }
 
-      a_s_meats[a_s_meats.size] = var_33e4d4f0;
+      a_s_meats[a_s_meats.size] = s_soup_ingredient;
       continue;
     }
 
-    if(var_33e4d4f0.script_string === "spices") {
+    if(s_soup_ingredient.script_string === "spices") {
       if(!isDefined(a_s_spices)) {
         a_s_spices = [];
       } else if(!isarray(a_s_spices)) {
         a_s_spices = array(a_s_spices);
       }
 
-      a_s_spices[a_s_spices.size] = var_33e4d4f0;
+      a_s_spices[a_s_spices.size] = s_soup_ingredient;
       continue;
     }
 
@@ -1003,7 +1003,7 @@ function_dfeb1c1b() {
       a_s_vegetables = array(a_s_vegetables);
     }
 
-    a_s_vegetables[a_s_vegetables.size] = var_33e4d4f0;
+    a_s_vegetables[a_s_vegetables.size] = s_soup_ingredient;
   }
 
   self.a_s_ingredients = [];

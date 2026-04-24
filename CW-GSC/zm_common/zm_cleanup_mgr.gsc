@@ -359,7 +359,7 @@ function private get_wait_locations_in_zones(a_zones) {
       continue;
     }
 
-    str_zone = function_9e72a96(zone);
+    str_zone = hashtostring(zone);
     println("<dev string:x88>" + str_zone + "<dev string:x9c>");
     iprintln("<dev string:x88>" + str_zone + "<dev string:x9c>");
   }

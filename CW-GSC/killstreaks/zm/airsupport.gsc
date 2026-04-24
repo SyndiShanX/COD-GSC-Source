@@ -81,9 +81,9 @@ function private function_a2eec6c2(killstreaktype, killstreakweapon) {
     return;
   }
 
-  str_notify = function_9e72a96(waitresult._notify);
-  str_weapon = function_9e72a96(waitresult.weapon.name);
-  var_d8d53d01 = isDefined(waitresult.last_weapon) ? function_9e72a96(waitresult.last_weapon.name) : "<dev string:x38>";
+  str_notify = hashtostring(waitresult._notify);
+  str_weapon = hashtostring(waitresult.weapon.name);
+  var_d8d53d01 = isDefined(waitresult.last_weapon) ? hashtostring(waitresult.last_weapon.name) : "<dev string:x38>";
   assertmsg("<dev string:x45>" + str_notify + "<dev string:x54>" + str_weapon + "<dev string:x65>" + var_d8d53d01);
 
   self notify(#"cancel_selection");

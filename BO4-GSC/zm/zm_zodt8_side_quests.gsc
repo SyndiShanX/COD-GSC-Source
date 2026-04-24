@@ -39,7 +39,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-#namespace namespace_b45e3f05;
+#namespace zodt8_side_quests;
 
 init() {
   init_fx();
@@ -260,7 +260,7 @@ function_a0f5819b(b_on = 1) {
     }
 
     level.var_bceee222 = undefined;
-    level.s_pap_quest.var_69e563d = level.s_pap_quest.a_s_locations[i];
+    level.s_pap_quest.s_last_loc = level.s_pap_quest.a_s_locations[i];
     zodt8_pap_quest::function_ef3c219a();
   }
 
@@ -634,7 +634,7 @@ function_cbee939b(var_a9e11cb7) {
 
 function_76351c42() {
   self endon(#"disconnect");
-  self.var_d883eecd = 0;
+  self.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d = 0;
   var_f3ca036b = 0;
 
   for(n_current_round = level.round_number; true; n_current_round = level.round_number) {
@@ -646,14 +646,14 @@ function_76351c42() {
       if(var_f3ca036b < 3) {
         continue;
       } else {
-        self.var_d883eecd = undefined;
+        self.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d = undefined;
       }
     } else {
       continue;
     }
 
     level waittill(#"end_of_round");
-    self.var_d883eecd = 0;
+    self.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d = 0;
     var_f3ca036b = 0;
   }
 }
@@ -861,8 +861,8 @@ function_ebb2139() {
 
 function_5daf1bb7() {
   level flag::set(#"hash_480b6b675a3076ec");
-  var_fcec724a = struct::get(#"floaters_fx");
-  playrumbleonposition("grenade_rumble", var_fcec724a.origin);
+  s_fx_loc = struct::get(#"floaters_fx");
+  playrumbleonposition("grenade_rumble", s_fx_loc.origin);
   level waittill(#"start_of_round");
   level flag::set(#"activate_sea_walkers");
   exploder::exploder("exp_eye_glow");
@@ -1495,7 +1495,7 @@ function_73bdaf30() {
     }
   }
 
-  var_425fb862 = level.var_4fe2f84d[#"zblueprint_shield_dual_wield"];
+  var_425fb862 = level.a_t_crafting[#"zblueprint_shield_dual_wield"];
 
   foreach(struct in var_425fb862) {
     if(struct.script_noteworthy === #"shield_table") {
@@ -1539,7 +1539,7 @@ function_9693e041(player) {
   w_frost_shield = getweapon(#"zhield_frost_dw");
 
   if(player hasweapon(w_frost_shield)) {
-    if(isDefined(self.blueprint.var_54a97edd.isriotshield) && self.blueprint.var_54a97edd.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
+    if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
       self.hint_string = zm_utility::function_d6046228(#"hash_5c35bbb6c39ba19a", #"hash_3bf7b3dc87b1015e");
       _shad_turret_debug_server = 1;
     }
@@ -2229,7 +2229,7 @@ function_6d5cf6b2(str_text, str_endon) {
   }
 
   while(true) {
-    print3d(self.origin, function_9e72a96(str_text), (1, 1, 0), 1, 1, 30);
+    print3d(self.origin, hashtostring(str_text), (1, 1, 0), 1, 1, 30);
     wait 0.5;
   }
 }

@@ -266,7 +266,7 @@ gadget_reset(gadgetweapon, changedclass, roundbased, firstround, changedspeciali
     var_9468eb59 = isDefined(self.switchedteamsresetgadgets) && self.switchedteamsresetgadgets && getdvarint(#"hash_8351525729015ab", 0);
     deployed = 0;
 
-    if(isDefined(self.pers[#"hash_68cdf8807cfaabff"]) && isDefined(self.pers[#"hash_68cdf8807cfaabff"][gadgetweapon]) && self.pers[#"hash_68cdf8807cfaabff"][gadgetweapon]) {
+    if(isDefined(self.pers[#"held_gadgets_deployed"]) && isDefined(self.pers[#"held_gadgets_deployed"][gadgetweapon]) && self.pers[#"held_gadgets_deployed"][gadgetweapon]) {
       if((gadgetweapon.var_7b5016a7 || !changedclass) && !isfirstspawn) {
         deployed = 1;
         self function_ac25fc1f(slot, gadgetweapon);

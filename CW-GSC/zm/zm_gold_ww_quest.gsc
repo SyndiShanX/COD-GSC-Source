@@ -522,7 +522,7 @@ function function_a8890244(var_c8e10123) {
     waitresult = self waittill(#"damage");
 
     if(isPlayer(waitresult.attacker) && (waitresult.mod === "MOD_PISTOL_BULLET" || waitresult.mod === "MOD_RIFLE_BULLET")) {
-      iprintlnbold(function_9e72a96(var_c8e10123));
+      iprintlnbold(hashtostring(var_c8e10123));
 
       level flag::set(var_c8e10123);
     }

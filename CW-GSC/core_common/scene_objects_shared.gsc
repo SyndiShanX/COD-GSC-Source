@@ -273,7 +273,7 @@ class csceneobject {
 
   function error(condition, str_msg) {
     if(condition) {
-      str_msg = "<dev string:x33c>" + function_9e72a96(_o_scene._str_name) + "<dev string:x342>" + (isDefined("<dev string:x34a>") ? "<dev string:x226>" + "<dev string:x34a>" : isDefined(_str_shot) ? "<dev string:x226>" + _str_shot : "<dev string:x226>") + "<dev string:x35a>" + (isDefined("<dev string:x32b>") ? "<dev string:x226>" + "<dev string:x32b>" : isDefined(_s.name) ? "<dev string:x226>" + _s.name : "<dev string:x226>") + "<dev string:x361>" + str_msg;
+      str_msg = "<dev string:x33c>" + hashtostring(_o_scene._str_name) + "<dev string:x342>" + (isDefined("<dev string:x34a>") ? "<dev string:x226>" + "<dev string:x34a>" : isDefined(_str_shot) ? "<dev string:x226>" + _str_shot : "<dev string:x226>") + "<dev string:x35a>" + (isDefined("<dev string:x32b>") ? "<dev string:x226>" + "<dev string:x32b>" : isDefined(_s.name) ? "<dev string:x226>" + _s.name : "<dev string:x226>") + "<dev string:x361>" + str_msg;
 
       if(is_true(_o_scene._b_testing)) {
         scene::error_on_screen(str_msg);
@@ -411,7 +411,7 @@ class csceneobject {
     }
 
     if(getdvarint(#"debug_scene", 0) > 0) {
-      printtoprightln("<dev string:x249>" + (isDefined(_s.name) ? _s.name : _s.model) + "<dev string:x27b>" + function_9e72a96(animation));
+      printtoprightln("<dev string:x249>" + (isDefined(_s.name) ? _s.name : _s.model) + "<dev string:x27b>" + hashtostring(animation));
     }
 
     if(getdvarint(#"debug_scene_skip", 0) > 0) {
@@ -459,8 +459,8 @@ class csceneobject {
     }
 
     if(getdvarint(#"debug_scene", 0) > 0) {
-      log(toupper(_s.type) + "<dev string:x282>" + function_9e72a96(animation) + "<dev string:x292>");
-      printtoprightln("<dev string:x29f>" + (isDefined(_s.name) ? _s.name : _s.model) + "<dev string:x27b>" + function_9e72a96(animation));
+      log(toupper(_s.type) + "<dev string:x282>" + hashtostring(animation) + "<dev string:x292>");
+      printtoprightln("<dev string:x29f>" + (isDefined(_s.name) ? _s.name : _s.model) + "<dev string:x27b>" + hashtostring(animation));
     }
 
     if(getdvarint(#"debug_scene_skip", 0) > 0) {
@@ -1708,7 +1708,7 @@ class csceneobject {
 
     if(!isDefined(n_shot) && !has_streamer_hint()) {
       if(level flag::get("<dev string:x4c>")) {
-        var_320710a9 = "<dev string:x5a>" + str_shot + "<dev string:x65>" + _str_name + "<dev string:x77>" + function_9e72a96(_o_scene._str_name);
+        var_320710a9 = "<dev string:x5a>" + str_shot + "<dev string:x65>" + _str_name + "<dev string:x77>" + hashtostring(_o_scene._str_name);
         iprintln(var_320710a9);
         println(var_320710a9);
       }
@@ -1774,7 +1774,7 @@ class csceneobject {
               case # "cameraswitcher":
 
                 if(ishash(entry)) {
-                  error(!isassetloaded("<dev string:xb2>", entry), "<dev string:xba>" + function_9e72a96(entry) + "<dev string:xc3>");
+                  error(!isassetloaded("<dev string:xb2>", entry), "<dev string:xba>" + hashtostring(entry) + "<dev string:xc3>");
                 } else {
                   error(!isassetloaded("<dev string:xb2>", entry), "<dev string:xba>" + entry + "<dev string:xc3>");
                 }
@@ -1786,12 +1786,12 @@ class csceneobject {
 
                 if(is_true(_s.issiege)) {
                   if(ishash(entry)) {
-                    error(!isassetloaded("<dev string:x111>", entry), "<dev string:x11a>" + function_9e72a96(entry) + "<dev string:x124>");
+                    error(!isassetloaded("<dev string:x111>", entry), "<dev string:x11a>" + hashtostring(entry) + "<dev string:x124>");
                   } else {
                     error(!isassetloaded("<dev string:x111>", entry), "<dev string:x11a>" + entry + "<dev string:x17d>");
                   }
                 } else if(ishash(entry)) {
-                  error(!isassetloaded("<dev string:x1d5>", entry), "<dev string:x1de>" + function_9e72a96(entry) + "<dev string:xc3>");
+                  error(!isassetloaded("<dev string:x1d5>", entry), "<dev string:x1de>" + hashtostring(entry) + "<dev string:xc3>");
                 } else {
                   error(!isassetloaded("<dev string:x1d5>", entry), "<dev string:x1de>" + entry + "<dev string:xc3>");
                 }
@@ -1872,7 +1872,7 @@ class csceneobject {
   }
 
   function log(str_msg) {
-    println(_o_scene._s.type + "<dev string:x31f>" + function_9e72a96(_o_scene._str_name) + "<dev string:x324>" + (isDefined("<dev string:x32b>") ? "<dev string:x226>" + "<dev string:x32b>" : isDefined(_s.name) ? "<dev string:x226>" + _s.name : "<dev string:x226>") + "<dev string:x336>" + str_msg);
+    println(_o_scene._s.type + "<dev string:x31f>" + hashtostring(_o_scene._str_name) + "<dev string:x324>" + (isDefined("<dev string:x32b>") ? "<dev string:x226>" + "<dev string:x32b>" : isDefined(_s.name) ? "<dev string:x226>" + _s.name : "<dev string:x226>") + "<dev string:x336>" + str_msg);
   }
 
   function is_player() {
@@ -2336,7 +2336,7 @@ class cscene {
       if(_b_testing) {
         scene::error_on_screen(str_msg);
       } else {
-        assertmsg(_s.type + "<dev string:x31f>" + function_9e72a96(_str_name) + "<dev string:x361>" + function_9e72a96(str_msg));
+        assertmsg(_s.type + "<dev string:x31f>" + hashtostring(_str_name) + "<dev string:x361>" + hashtostring(str_msg));
       }
 
       thread on_error();
@@ -2512,7 +2512,7 @@ class cscene {
           var_7b160393 = ceil(obj._e getanimtime(animation) * var_13edeb1f);
           var_958054e5 = getanimlength(animation);
           var_f667af2f = obj._e getanimtime(animation) * var_958054e5;
-          var_2e63fccd = obj._str_name + "<dev string:x3b3>" + function_9e72a96(animation);
+          var_2e63fccd = obj._str_name + "<dev string:x3b3>" + hashtostring(animation);
           var_1cae5962 = "<dev string:x3be>" + str_shot + "<dev string:x3c8>" + var_7b160393 + "<dev string:x394>" + var_13edeb1f + "<dev string:x3d4>" + var_f667af2f + "<dev string:x394>" + var_958054e5 + "<dev string:x3ac>";
           debug2dtext(v_pos, var_2e63fccd, undefined, undefined, undefined, 1, 0.8);
           v_pos += (0, 20, 0);
@@ -3574,7 +3574,7 @@ class cscene {
   }
 
   function log(str_msg) {
-    println(_s.type + "<dev string:x31f>" + function_9e72a96(_str_name) + "<dev string:x361>" + str_msg);
+    println(_s.type + "<dev string:x31f>" + hashtostring(_str_name) + "<dev string:x361>" + str_msg);
   }
 
   function has_player() {

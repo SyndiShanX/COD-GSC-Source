@@ -110,8 +110,8 @@ function_b42c46e3(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_17825742.var_e88acf63 = self.var_17825742 gettagorigin("tag_spork");
     self.var_17825742.var_a9a3211a = self.var_17825742 gettagangles("tag_spork");
     self.mdl_spork = util::spawn_model(localclientnum, "wpn_t8_zm_spork_world", self.var_17825742.var_e88acf63, self.var_17825742.var_a9a3211a);
-    var_fcec724a = struct::get("s_sp_fx_glint_loc");
-    self.var_4e35f286 = playFX(localclientnum, level._effect[#"spk_glint"], var_fcec724a.origin);
+    s_fx_loc = struct::get("s_sp_fx_glint_loc");
+    self.var_4e35f286 = playFX(localclientnum, level._effect[#"spk_glint"], s_fx_loc.origin);
     return;
   }
 

@@ -101,8 +101,8 @@ function_1ad84248() {
     if(level.var_80c25d0a < 7) {
       if(getdvarint(#"zm_debug_ee", 0)) {
         if(getdvarint(#"zm_debug_ee", 0)) {
-          iprintlnbold("<dev string:x38>" + function_9e72a96(story));
-          println("<dev string:x38>" + function_9e72a96(story));
+          iprintlnbold("<dev string:x38>" + hashtostring(story));
+          println("<dev string:x38>" + hashtostring(story));
         }
       }
 
@@ -179,8 +179,8 @@ function_561d9cff() {
 
   if(getdvarint(#"zm_debug_ee", 0)) {
     if(getdvarint(#"zm_debug_ee", 0)) {
-      iprintlnbold("<dev string:x38>" + function_9e72a96(story));
-      println("<dev string:x38>" + function_9e72a96(story));
+      iprintlnbold("<dev string:x38>" + hashtostring(story));
+      println("<dev string:x38>" + hashtostring(story));
     }
   }
 

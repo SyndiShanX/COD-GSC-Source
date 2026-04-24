@@ -47,7 +47,7 @@ function private function_45ed4ebd(eventstruct) {
 }
 
 function private function_b1528302(eventstruct, type) {
-  self thread function_c20f7b00(eventstruct, "<dev string:x38>" + function_9e72a96(type));
+  self thread function_c20f7b00(eventstruct, "<dev string:x38>" + hashtostring(type));
 
   eventstruct.type = type;
   self.bot.traversal = eventstruct;

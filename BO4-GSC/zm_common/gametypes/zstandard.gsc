@@ -157,7 +157,7 @@ function_6c2b3729() {
     a_str_defend_areas = getarraykeys(level.a_s_defend_areas);
 
     foreach(str_defend_area in a_str_defend_areas) {
-      str_name = function_9e72a96(str_defend_area);
+      str_name = hashtostring(str_defend_area);
       util::add_debug_command("<dev string:x19f>" + str_name + "<dev string:x1c4>" + "<dev string:x1d2>" + str_name + "<dev string:x1e6>" + "<dev string:x1f4>");
       util::add_debug_command("<dev string:x19f>" + str_name + "<dev string:x1f9>" + "<dev string:x1d2>" + str_name + "<dev string:x205>" + "<dev string:x1f4>");
     }
@@ -486,7 +486,7 @@ bonus_points_powerup_override(player) {
 
 function_e0c53cf(params) {
   if(!isDefined(self.maxhealth)) {
-    iprintlnbold(function_9e72a96(self.archetype) + "<dev string:x283>");
+    iprintlnbold(hashtostring(self.archetype) + "<dev string:x283>");
 
     self.maxhealth = self.health;
     return;
@@ -1136,8 +1136,8 @@ function_ac4cc1ba() {
 }
 
 function_cd83246f() {
-  foreach(var_51958981 in level.var_4fe2f84d) {
-    foreach(t_trigger in var_51958981) {
+  foreach(a_t_trigger in level.a_t_crafting) {
+    foreach(t_trigger in a_t_trigger) {
       t_trigger.locked = 1;
       level thread zm_unitrigger::unregister_unitrigger(t_trigger);
     }
@@ -1164,7 +1164,7 @@ function_9c062829() {
     }
   }
 
-  foreach(a_s_crafting in level.var_4fe2f84d) {
+  foreach(a_s_crafting in level.a_t_crafting) {
     foreach(s_crafting in a_s_crafting) {
       if(!(isDefined(s_crafting.var_95f72816) && s_crafting.var_95f72816)) {
         s_crafting zm_crafting::function_a187b293();
@@ -1377,8 +1377,8 @@ function_d679a241(player) {
   function_51e47b48(player, #"crafting_table", 120000);
 }
 
-function_36f1c05b(e_player, var_29827302) {
-  return function_2b580cd4(e_player, var_29827302) || function_2b580cd4(level, var_29827302);
+function_36f1c05b(e_player, str_crafting_table) {
+  return function_2b580cd4(e_player, str_crafting_table) || function_2b580cd4(level, str_crafting_table);
 }
 
 function_75ebd926(e_player) {
@@ -1388,7 +1388,7 @@ function_75ebd926(e_player) {
     self.hint_string = #"zombie/wallbuy_cooldown";
     self.cost = n_cooldown;
     return true;
-  } else if(isDefined(self.blueprint.var_54a97edd.isriotshield) && self.blueprint.var_54a97edd.isriotshield && isDefined(e_player.player_shield_reset_health) && isDefined(e_player.var_d3345483) && e_player.var_d3345483 || !e_player zm_crafting::function_2d53738e(self.blueprint.var_54a97edd) && (isDefined(self.blueprint.firstonefree) && self.blueprint.firstonefree && !e_player zm_crafting::function_48ce9379(self.blueprint.var_54a97edd) || isDefined(level.var_905507c3) && level.var_905507c3)) {
+  } else if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(e_player.player_shield_reset_health) && isDefined(e_player.var_d3345483) && e_player.var_d3345483 || !e_player zm_crafting::function_2d53738e(self.blueprint.w_result) && (isDefined(self.blueprint.firstonefree) && self.blueprint.firstonefree && !e_player zm_crafting::function_48ce9379(self.blueprint.w_result) || isDefined(level.var_905507c3) && level.var_905507c3)) {
     if(function_8b1a219a()) {
       self.hint_string = isDefined(self.blueprint.var_abd9b2d0) ? self.blueprint.var_abd9b2d0 : # "hash_40987a3e6d86b097";
     } else {
@@ -2016,11 +2016,11 @@ get_zombie_count_for_round(n_round, n_player_count) {
 }
 
 function_1687c93(n_round, n_player_count) {
-  if(!isDefined(level.var_ea47b206) || !isDefined(level.var_ea47b206[n_round]) || !isDefined(level.var_ea47b206[n_round].var_4f886dd2)) {
+  if(!isDefined(level.var_ea47b206) || !isDefined(level.var_ea47b206[n_round]) || !isDefined(level.var_ea47b206[n_round].n_count_min)) {
     return -1;
   }
 
-  return level.var_ea47b206[n_round].var_4f886dd2;
+  return level.var_ea47b206[n_round].n_count_min;
 }
 
 function_399fa32() {

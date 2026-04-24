@@ -273,7 +273,7 @@ function private function_9a6b2309() {
   assert(isDefined(level.var_6d87ac05));
 
   foreach(round_info in level.var_6d87ac05.rounds) {
-    adddebugcommand("<dev string:xee>" + round_info.round + "<dev string:x112>" + function_9e72a96(round_info.name) + "<dev string:x117>" + round_info.round + "<dev string:x11c>" + round_info.round + "<dev string:x13f>");
+    adddebugcommand("<dev string:xee>" + round_info.round + "<dev string:x112>" + hashtostring(round_info.name) + "<dev string:x117>" + round_info.round + "<dev string:x11c>" + round_info.round + "<dev string:x13f>");
   }
 
   for(i = 0; i <= 3; i++) {

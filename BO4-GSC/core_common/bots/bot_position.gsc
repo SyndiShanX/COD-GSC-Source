@@ -383,7 +383,7 @@ function_22d4d2d(params, tacbundle) {
     return 0;
   }
 
-  self bot::record_text(function_9e72a96(params.name), (1, 1, 1), "<dev string:x4e>");
+  self bot::record_text(hashtostring(params.name), (1, 1, 1), "<dev string:x4e>");
 
   handled = self[[func]](params, tacbundle);
   return handled;
@@ -393,7 +393,7 @@ function_795a469(name) {
   func = level.var_ce8d80ba[name];
 
   if(!isDefined(func)) {
-    self botprinterror("<dev string:x138>" + function_9e72a96(name));
+    self botprinterror("<dev string:x138>" + hashtostring(name));
 
     return undefined;
   }
@@ -409,7 +409,7 @@ handle_default(params, tacbundle) {
   center = self function_795a469(params.center);
 
   if(!isDefined(center)) {
-    self bot::record_text("<dev string:x15b>" + function_9e72a96(params.center), (1, 0, 0), "<dev string:x4e>");
+    self bot::record_text("<dev string:x15b>" + hashtostring(params.center), (1, 0, 0), "<dev string:x4e>");
 
     return 0;
   }
@@ -435,8 +435,8 @@ handle_default(params, tacbundle) {
     if(query.centeronnav) {
       position = center.origin;
     } else {
-      self bot::record_text("<dev string:x17b>" + function_9e72a96(params.center), (1, 0, 0), "<dev string:x4e>");
-      self botprinterror(function_9e72a96(params.name) + "<dev string:x195>" + params.center);
+      self bot::record_text("<dev string:x17b>" + hashtostring(params.center), (1, 0, 0), "<dev string:x4e>");
+      self botprinterror(hashtostring(params.name) + "<dev string:x195>" + params.center);
 
       return 0;
     }
@@ -749,7 +749,7 @@ function_d0cf287b(params, tacbundle) {
   center = self function_795a469(params.center);
 
   if(!isDefined(center)) {
-    self bot::record_text("<dev string:x15b>" + function_9e72a96(params.center), (1, 0, 0), "<dev string:x4e>");
+    self bot::record_text("<dev string:x15b>" + hashtostring(params.center), (1, 0, 0), "<dev string:x4e>");
 
     return false;
   }
@@ -767,8 +767,8 @@ function_d0cf287b(params, tacbundle) {
   position = function_b33e4e67(center, self.origin, enemy, params.querylist);
 
   if(!isDefined(position)) {
-    self bot::record_text("<dev string:x17b>" + function_9e72a96(params.center), (1, 0, 0), "<dev string:x4e>");
-    self botprinterror(function_9e72a96(params.name) + "<dev string:x195>" + params.center);
+    self bot::record_text("<dev string:x17b>" + hashtostring(params.center), (1, 0, 0), "<dev string:x4e>");
+    self botprinterror(hashtostring(params.name) + "<dev string:x195>" + params.center);
 
     return false;
   }
@@ -829,7 +829,7 @@ function_b33e4e67(center, fillpos, enemy, querylist) {
   foreach(query in querylist) {
     [[level.var_d1a4558d]] - > waitinqueue(self);
 
-    self bot::record_text("<dev string:x1e3>" + function_9e72a96(query.name), (1, 1, 1), "<dev string:x4e>");
+    self bot::record_text("<dev string:x1e3>" + hashtostring(query.name), (1, 1, 1), "<dev string:x4e>");
 
     if(!isDefined(enemy) || isremovedentity(enemy)) {
       enemy = lastenemypos;

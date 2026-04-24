@@ -87,7 +87,7 @@ function on_player_spawned() {
   if(!is_true(self.pers[#"changed_class"])) {
     self.pers[#"held_gadgets_power"] = [];
     self.pers[#"hash_7a954c017d693f69"] = [];
-    self.pers[#"hash_68cdf8807cfaabff"] = [];
+    self.pers[#"held_gadgets_deployed"] = [];
   }
 
   self.heroabilityactivatetime = undefined;
@@ -126,7 +126,7 @@ function gadgets_save_power(game_ended) {
     gadgetweapon = self._gadgets_player[slot];
     powerleft = self gadgetpowerchange(slot, 0);
     var_51ec1787 = self function_adc6203f(slot);
-    deployed = self function_36dfc05f(slot);
+    deployed = self gadgetisdeployed(slot);
 
     if(game_ended && (deployed || util::gadget_is_in_use(slot))) {
       if(gadgetweapon.gadget_power_round_end_active_penalty > 0) {
@@ -137,7 +137,7 @@ function gadgets_save_power(game_ended) {
 
     self.pers[#"held_gadgets_power"][gadgetweapon] = powerleft;
     self.pers[#"hash_7a954c017d693f69"][gadgetweapon] = var_51ec1787;
-    self.pers[#"hash_68cdf8807cfaabff"][gadgetweapon] = deployed;
+    self.pers[#"held_gadgets_deployed"][gadgetweapon] = deployed;
   }
 }
 
@@ -235,7 +235,7 @@ function function_95218c27(slot, var_4dd90b81 = 0) {
     return;
   }
 
-  self.pers[#"hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
+  self.pers[#"held_gadgets_deployed"][self._gadgets_player[slot]] = 0;
   self function_48e08b4(slot, self._gadgets_player[slot], var_4dd90b81);
 }
 
@@ -501,7 +501,7 @@ function give_gadget(slot, weapon) {
 
   if(isDefined(self._gadgets_player[slot])) {
     if(self._gadgets_player[slot] != weapon) {
-      self.pers[#"hash_68cdf8807cfaabff"][self._gadgets_player[slot]] = 0;
+      self.pers[#"held_gadgets_deployed"][self._gadgets_player[slot]] = 0;
     }
 
     self take_gadget(slot, self._gadgets_player[slot]);
@@ -1019,7 +1019,7 @@ function function_fc4dc54(var_6fcde3b6) {
 
 function function_374c4352(str) {
   if(ishash(str)) {
-    str = function_9e72a96(str);
+    str = hashtostring(str);
   }
 
   toprint = "<dev string:x38>" + str;
@@ -1130,7 +1130,7 @@ function function_2e0162e9(add_cmd_with_root, pid, menu_index) {
     }
 
     var_d59b8ebf = getplayerrolecategoryinfo(var_854a6ba2);
-    var_eb49090f = function_9e72a96(function_b14806c6(i, session_mode));
+    var_eb49090f = hashtostring(function_b14806c6(i, session_mode));
     var_4f6b7b98 = isDefined(var_eb49090f) ? var_eb49090f : "<dev string:x1b8>";
 
     if(!isDefined(var_d59b8ebf.enabled) || var_d59b8ebf.enabled == 0) {
@@ -1604,7 +1604,7 @@ function abilities_devgui_power_toggle_auto_fill_think() {
       if(isDefined(self._gadgets_player[i]) && self hasweapon(self._gadgets_player[i])) {
         n_power = self gadgetpowerget(i);
 
-        if(!self util::gadget_is_in_use(i) && !self function_36dfc05f(i) && n_power < self._gadgets_player[i].gadget_powermax) {
+        if(!self util::gadget_is_in_use(i) && !self gadgetisdeployed(i) && n_power < self._gadgets_player[i].gadget_powermax) {
           self gadgetpowerset(i, self._gadgets_player[i].gadget_powermax);
         }
       }

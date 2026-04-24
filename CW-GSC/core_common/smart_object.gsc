@@ -946,7 +946,7 @@ function private function_23eef632() {
       scriptbundlename = obj.scriptbundlename;
 
       if(ishash(scriptbundlename)) {
-        scriptbundlename = function_9e72a96(scriptbundlename);
+        scriptbundlename = hashtostring(scriptbundlename);
       }
 
       print3d(obj.origin + (0, 0, 80), scriptbundlename, (0.5, 0.5, 0), 1, 0.25, 1, 1);
@@ -990,7 +990,7 @@ function private function_ed7733c7() {
       scriptbundlename = obj.scriptbundlename;
 
       if(ishash(scriptbundlename)) {
-        scriptbundlename = function_9e72a96(scriptbundlename);
+        scriptbundlename = hashtostring(scriptbundlename);
       }
 
       print3d(obj.origin + (0, 0, 80), scriptbundlename, (0.5, 0, 0), 1, 0.25, 1, 1);

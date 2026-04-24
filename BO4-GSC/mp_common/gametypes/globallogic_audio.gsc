@@ -998,12 +998,12 @@ set_music_global(state, wait_time = 0, save_state = 0, return_state = 0) {
   music::setmusicstate(state + game.musicset);
 }
 
-function_85818e24(var_9c1ed9ea, team) {
+function_85818e24(str_musicstate, team) {
   if(!isDefined(game.musicset)) {
     return;
   }
 
-  if(!isDefined(var_9c1ed9ea)) {
+  if(!isDefined(str_musicstate)) {
     return;
   }
 
@@ -1017,11 +1017,11 @@ function_85818e24(var_9c1ed9ea, team) {
         continue;
       }
 
-      music::setmusicstate(var_9c1ed9ea + game.musicset, player);
+      music::setmusicstate(str_musicstate + game.musicset, player);
     }
 
     return;
   }
 
-  music::setmusicstate(var_9c1ed9ea + game.musicset);
+  music::setmusicstate(str_musicstate + game.musicset);
 }

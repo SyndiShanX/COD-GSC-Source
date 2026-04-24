@@ -286,7 +286,7 @@ function private function_d3901b82() {
       }
 
       displayname = makelocalizedstring(getcharacterdisplayname(index, sessionmode));
-      assetname = function_9e72a96(function_ac0419ac(index, sessionmode));
+      assetname = hashtostring(function_ac0419ac(index, sessionmode));
       name = displayname + "<dev string:x38>" + assetname + "<dev string:x3e>";
       cmd = "<dev string:x43>" + name + "<dev string:x78>" + index + "<dev string:x7d>" + index + "<dev string:xac>";
       util::add_debug_command(cmd);

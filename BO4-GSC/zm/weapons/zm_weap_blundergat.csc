@@ -115,19 +115,19 @@ zombie_magma_fire_explosion(localclientnum, oldval, newval, bnewent, binitialsna
 }
 
 positional_zombie_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(isDefined(self.var_70ed1f91) && self.var_70ed1f91.size) {
-    foreach(n_fx in self.var_70ed1f91) {
+  if(isDefined(self.a_n_fire_fx) && self.a_n_fire_fx.size) {
+    foreach(n_fx in self.a_n_fire_fx) {
       if(isDefined(n_fx)) {
         stopfx(localclientnum, n_fx);
       }
     }
 
-    self.var_70ed1f91 = undefined;
+    self.a_n_fire_fx = undefined;
     self notify(#"hash_78e383e31572444d");
   }
 
-  if(!isDefined(self.var_70ed1f91)) {
-    self.var_70ed1f91 = [];
+  if(!isDefined(self.a_n_fire_fx)) {
+    self.a_n_fire_fx = [];
   }
 
   if(newval >= 1) {
@@ -191,7 +191,7 @@ positional_zombie_fire_fx(localclientnum, oldval, newval, bnewent, binitialsnap,
         break;
     }
 
-    self.var_70ed1f91[self.var_70ed1f91.size] = util::playFXOnTag(localclientnum, level._effect[var_5f2b0dab], self, str_tag);
+    self.a_n_fire_fx[self.a_n_fire_fx.size] = util::playFXOnTag(localclientnum, level._effect[var_5f2b0dab], self, str_tag);
     self thread function_6af9874(localclientnum, newval);
     return;
   }
@@ -320,7 +320,7 @@ function_6af9874(localclientnum, newval) {
   }
 
   while(isalive(self) && isDefined(var_ea2ed6dc[n_spread])) {
-    self.var_70ed1f91[self.var_70ed1f91.size] = util::playFXOnTag(localclientnum, level._effect[var_ea2ed6dc[n_spread]], self, var_aebebb0e[n_spread]);
+    self.a_n_fire_fx[self.a_n_fire_fx.size] = util::playFXOnTag(localclientnum, level._effect[var_ea2ed6dc[n_spread]], self, var_aebebb0e[n_spread]);
     n_spread++;
     wait 0.5;
   }

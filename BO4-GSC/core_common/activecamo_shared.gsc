@@ -175,7 +175,7 @@ function_3aa81e0e(activecamoinfo) {
         }
 
         if(!isDefined(stage.var_19b6044e)) {
-          self debug_error("<dev string:x38>" + info.name + "<dev string:x3d>" + function_9e72a96(isDefined(var_3594168e.camooption) ? var_3594168e.camooption : "<dev string:x59>") + "<dev string:x63>" + key);
+          self debug_error("<dev string:x38>" + info.name + "<dev string:x3d>" + hashtostring(isDefined(var_3594168e.camooption) ? var_3594168e.camooption : "<dev string:x59>") + "<dev string:x63>" + key);
         } else {
           activecamoname = getactivecamo(stage.var_19b6044e);
           var_31567a86 = undefined;
@@ -545,7 +545,7 @@ function_896ac347(oweapon, statname, value) {
   weapon = function_94c2605(oweapon);
 
   if(!isDefined(weapon)) {
-    assertmsg("<dev string:xff>" + function_9e72a96(oweapon.name));
+    assertmsg("<dev string:xff>" + hashtostring(oweapon.name));
     return;
   }
 
@@ -559,12 +559,12 @@ function_896ac347(oweapon, statname, value) {
       activecamo.baseweapon = function_c14cb514(activecamo.weapon);
 
       if(!isDefined(activecamo.baseweapon)) {
-        assertmsg("<dev string:x144>" + function_9e72a96(activecamo.weapon.name));
+        assertmsg("<dev string:x144>" + hashtostring(activecamo.weapon.name));
         return;
       }
 
       if(!isDefined(activecamo.var_dd54a13b[activecamo.baseweapon])) {
-        assertmsg("<dev string:x192>" + function_9e72a96(activecamo.baseweapon.name) + "<dev string:x1c2>");
+        assertmsg("<dev string:x192>" + hashtostring(activecamo.baseweapon.name) + "<dev string:x1c2>");
         return;
       }
 
@@ -922,7 +922,7 @@ debug_error(message, weapon) {
     weaponname = "<dev string:x217>";
 
     if(isDefined(weapon)) {
-      weaponname = "<dev string:x21a>" + function_9e72a96(weapon.name);
+      weaponname = "<dev string:x21a>" + hashtostring(weapon.name);
     }
 
     self iprintlnbold("<dev string:x227>" + message + weaponname);
@@ -935,7 +935,7 @@ debug_print(message, weapon) {
     weaponname = "<dev string:x217>";
 
     if(isDefined(weapon)) {
-      weaponname = "<dev string:x21a>" + function_9e72a96(weapon.name);
+      weaponname = "<dev string:x21a>" + hashtostring(weapon.name);
     }
 
     self iprintlnbold("<dev string:x247>" + message + weaponname);
@@ -1032,7 +1032,7 @@ function_85cb822d(root, index) {
   activecamos = function_2c48197b();
 
   foreach(activecamo in activecamos) {
-    activecamoname = function_9e72a96(activecamo);
+    activecamoname = hashtostring(activecamo);
     cmd = var_37949de1 + activecamoname + "<dev string:x3a9>" + activecamoname + "<dev string:x3d9>" + index + "<dev string:x322>";
     thread util::add_debug_command(cmd);
   }

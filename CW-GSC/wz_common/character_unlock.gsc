@@ -33,7 +33,7 @@ function function_b3681acb() {
 
 function function_d7e6fa92(unlock_name) {
   var_9ba1646c = level.var_7d8da246[unlock_name];
-  assert(isDefined(var_9ba1646c), "<dev string:x38>" + function_9e72a96(unlock_name) + "<dev string:x51>");
+  assert(isDefined(var_9ba1646c), "<dev string:x38>" + hashtostring(unlock_name) + "<dev string:x51>");
 
   if(!isDefined(var_9ba1646c)) {
     return false;
@@ -162,9 +162,9 @@ function function_c8beca5e(unlock_name, var_1d208aea, state) {
 
   var_9ba1646c = level.var_7d8da246[unlock_name];
 
-  assert(isDefined(var_9ba1646c), "<dev string:x38>" + function_9e72a96(unlock_name) + "<dev string:x51>");
-  assert(isinarray(var_9ba1646c.var_3845495, var_1d208aea), "<dev string:x63>" + function_9e72a96(var_1d208aea) + "<dev string:x76>" + function_9e72a96(unlock_name));
-  assert(isinarray(array(0, 1, 2), state), "<dev string:x94>" + function_9e72a96(var_1d208aea) + "<dev string:xc9>" + function_9e72a96(unlock_name));
+  assert(isDefined(var_9ba1646c), "<dev string:x38>" + hashtostring(unlock_name) + "<dev string:x51>");
+  assert(isinarray(var_9ba1646c.var_3845495, var_1d208aea), "<dev string:x63>" + hashtostring(var_1d208aea) + "<dev string:x76>" + hashtostring(unlock_name));
+  assert(isinarray(array(0, 1, 2), state), "<dev string:x94>" + hashtostring(var_1d208aea) + "<dev string:xc9>" + hashtostring(unlock_name));
 
   if(!self function_c70bcc7a(unlock_name)) {
     assertmsg("<dev string:xd9>" + unlock_name + "<dev string:x10a>");
@@ -189,7 +189,7 @@ function function_c8beca5e(unlock_name, var_1d208aea, state) {
 
 function function_20b0ca2e(unlock_name) {
   var_9ba1646c = level.var_7d8da246[unlock_name];
-  assert(isDefined(var_9ba1646c), "<dev string:x38>" + function_9e72a96(unlock_name) + "<dev string:x51>");
+  assert(isDefined(var_9ba1646c), "<dev string:x38>" + hashtostring(unlock_name) + "<dev string:x51>");
   itembundle = getscriptbundle(var_9ba1646c.required_item);
 
   if(!isDefined(itembundle.unlockableitemref)) {

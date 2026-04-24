@@ -1466,7 +1466,7 @@ function function_1a530376(hotzone, array_index, scale) {
 
   print3d(hotzone.origin + (0, 0, index), function_89a74781(hotzone) + "<dev string:x9ae>" + hotzone.instance.tier, var_a7c842b3, 1, scale * 0.8, 1);
   index += 17 * scale * 0.8;
-  print3d(hotzone.origin + (0, 0, index), function_9e72a96(hotzone.scriptbundlename), var_a7c842b3, 1, scale * 1, 1);
+  print3d(hotzone.origin + (0, 0, index), hashtostring(hotzone.scriptbundlename), var_a7c842b3, 1, scale * 1, 1);
   index += 17 * scale * 1;
   print3d(hotzone.origin + (0, 0, index), is_true(hotzone.instance.disabled) ? "<dev string:x9b8>" : "<dev string:x9c4>", is_true(hotzone.instance.disabled) ? (1, 0, 1) : (0, 1, 1), 1, scale * 1, 1);
   index += 17 * scale * 1;
@@ -1531,7 +1531,7 @@ function function_af798ce8(index, scale, alpha, color, var_5ab1a705, hotzone) {
   index += 17 * scale * 1;
 
   foreach(key, value in hotzone.instance.priority_debug) {
-    print3d(hotzone.origin + (0, 0, index), function_9e72a96(key) + "<dev string:x34f>" + value, color, alpha, scale * 1, 1);
+    print3d(hotzone.origin + (0, 0, index), hashtostring(key) + "<dev string:x34f>" + value, color, alpha, scale * 1, 1);
     index += 17 * scale * 1;
   }
 
@@ -1601,7 +1601,7 @@ function function_22dd41d8(index, scale, alpha, var_a7c842b3, hotzone, options) 
   scale += 17 * alpha * 0.75;
 
   foreach(state_name, count in options.instance.var_ac7b2365) {
-    print3d(options.origin + (0, 0, scale), "<dev string:xa8b>" + function_9e72a96(state_name) + "<dev string:xa70>" + count, hotzone, var_a7c842b3, alpha * 0.75, 1);
+    print3d(options.origin + (0, 0, scale), "<dev string:xa8b>" + hashtostring(state_name) + "<dev string:xa70>" + count, hotzone, var_a7c842b3, alpha * 0.75, 1);
     scale += 17 * alpha * 0.75;
   }
 

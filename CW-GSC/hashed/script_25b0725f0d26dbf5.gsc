@@ -302,7 +302,7 @@ function function_9ebb66cb() {
   a_weapon_list = self getweaponslist();
 
   foreach(weapon in a_weapon_list) {
-    if(!is_true(weapon.var_29d24e37)) {
+    if(!is_true(weapon.isvehicleturret)) {
       self takeweapon(weapon);
     }
   }

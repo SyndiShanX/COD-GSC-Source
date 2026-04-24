@@ -27,7 +27,7 @@ init() {
   level thread function_393e6d42();
 }
 
-function_47569560() {
+get_draft_struct() {
   if(currentsessionmode() == 0) {
     return # "zm_lobby_struct";
   }
@@ -142,7 +142,7 @@ show_cam(localclientnum, xcam, animname, lerpduration, force) {
     return;
   }
 
-  draftstruct = struct::get(function_47569560(), "targetname");
+  draftstruct = struct::get(get_draft_struct(), "targetname");
 
   if(isDefined(draftstruct)) {
     playmaincamxcam(localclientnum, xcam, lerpduration, animname, "", draftstruct.origin, draftstruct.angles);
@@ -568,7 +568,7 @@ function_37313c1b(localclientnum) {
   }
 }
 
-function_9afd868e(localclientnum) {
+setup_draft(localclientnum) {
   self notify("2a36a3356b6e1b6f");
   self endon("2a36a3356b6e1b6f");
   self endon(#"draft_closed");
@@ -590,7 +590,7 @@ function_ca03ab69() {
   while(true) {
     waitresult = level waittill(#"positiondraft_open");
     localclientnum = waitresult.localclientnum;
-    function_9afd868e(localclientnum);
+    setup_draft(localclientnum);
   }
 }
 

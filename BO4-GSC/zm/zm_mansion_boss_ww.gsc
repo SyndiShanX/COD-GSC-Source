@@ -128,7 +128,7 @@ init_traps() {
 }
 
 init_boss() {
-  level.var_923e8cb4 = struct::get_array("boss_plr_tele_in", "targetname");
+  level.a_s_respawn_locs = struct::get_array("boss_plr_tele_in", "targetname");
   level.s_boss = spawnStruct();
   level.s_boss.a_s_align = [];
 
@@ -233,8 +233,8 @@ init_boss() {
 }
 
 init_spawns() {
-  var_67c45f02 = struct::get_array("arena_spawns");
-  level.var_db1658d1 = array::filter(var_67c45f02, 0, &function_c41d732d, "werewolf_location");
+  a_s_spawnlocs = struct::get_array("arena_spawns");
+  level.var_db1658d1 = array::filter(a_s_spawnlocs, 0, &function_c41d732d, "werewolf_location");
 }
 
 function_8dec32e2() {
@@ -357,7 +357,7 @@ function_92a12286() {
     }
 
     if(!var_4935908f) {
-      s_loc = level.var_923e8cb4[self.playernum];
+      s_loc = level.a_s_respawn_locs[self.playernum];
 
       if(!isDefined(s_loc)) {
         s_loc = struct::get_array("boss_plr_tele_in", "targetname")[0];
@@ -372,12 +372,12 @@ function_92a12286() {
 }
 
 function_9bc4f8cb() {
-  self.spectator_respawn = level.var_923e8cb4[self.playernum];
+  self.spectator_respawn = level.a_s_respawn_locs[self.playernum];
   self zm_player::spectator_respawn();
 }
 
 function_714f8756(a_s_valid_respawn_points) {
-  return level.var_923e8cb4;
+  return level.a_s_respawn_locs;
 }
 
 boss_intro(n_stage) {
@@ -797,9 +797,9 @@ function_f433c7f5(n_stage) {
     }
 
     n_index = 0;
-    var_52eca4bf = var_aa39009c.var_6f05a409[n_index];
+    n_start_loc = var_aa39009c.var_6f05a409[n_index];
     var_efc198c = var_aa39009c.var_6f05a409[n_index] + 1;
-    var_f26f9e5a = level.s_boss.var_f4aac79b[var_52eca4bf];
+    var_f26f9e5a = level.s_boss.var_f4aac79b[n_start_loc];
     var_c43c78f9 = var_f26f9e5a.var_5d259c63[n_index];
     n_dist_sq = distance2dsquared(e_target.origin, var_c43c78f9.origin);
 

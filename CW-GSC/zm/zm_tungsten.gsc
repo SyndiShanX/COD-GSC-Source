@@ -501,14 +501,14 @@ function function_6f6cc58(e_player) {
           return true;
         }
 
-        zone_path = zm_zonemgr::function_54fc7938(e_player, isDefined(self.cached_zone_name) ? self.cached_zone_name : self);
+        zone_path = zm_zonemgr::get_zone_path(e_player, isDefined(self.cached_zone_name) ? self.cached_zone_name : self);
 
         if(isDefined(zone_path)) {
           return true;
         }
       }
     } else if(isPlayer(e_player) && self.archetype === #"soa") {
-      zone_path = zm_zonemgr::function_54fc7938(e_player, isDefined(self.cached_zone_name) ? self.cached_zone_name : self);
+      zone_path = zm_zonemgr::get_zone_path(e_player, isDefined(self.cached_zone_name) ? self.cached_zone_name : self);
 
       if(isDefined(zone_path)) {
         return true;
@@ -527,7 +527,7 @@ function function_6f6cc58(e_player) {
           zone_name = self.var_5e54763a;
         }
 
-        zone_path = zm_zonemgr::function_54fc7938(e_player, zone_name);
+        zone_path = zm_zonemgr::get_zone_path(e_player, zone_name);
         return isDefined(zone_path);
       }
 
@@ -708,23 +708,23 @@ function function_41a4961d(get_all = 0) {
         }
 
         target_zone = level.zones[str_target_zone];
-        var_24f5d9f8 = array(target_zone.name);
+        a_str_valid_zones = array(target_zone.name);
         a_str_adj_zones = getarraykeys(target_zone.adjacent_zones);
 
         foreach(str_zone in a_str_adj_zones) {
           if(target_zone.adjacent_zones[str_zone].is_connected) {
-            if(!isDefined(var_24f5d9f8)) {
-              var_24f5d9f8 = [];
-            } else if(!isarray(var_24f5d9f8)) {
-              var_24f5d9f8 = array(var_24f5d9f8);
+            if(!isDefined(a_str_valid_zones)) {
+              a_str_valid_zones = [];
+            } else if(!isarray(a_str_valid_zones)) {
+              a_str_valid_zones = array(a_str_valid_zones);
             }
 
-            var_24f5d9f8[var_24f5d9f8.size] = str_zone;
+            a_str_valid_zones[a_str_valid_zones.size] = str_zone;
           }
         }
 
         foreach(loc in locs) {
-          if(array::contains(var_24f5d9f8, loc.zone_name)) {
+          if(array::contains(a_str_valid_zones, loc.zone_name)) {
             if(!isDefined(var_a6c95035)) {
               var_a6c95035 = [];
             } else if(!isarray(var_a6c95035)) {
@@ -2319,7 +2319,7 @@ function function_e4462dce() {
 
 function function_284985a5(ee_name, step_name) {
   ee = self._ee[ee_name];
-  step_index = zm_sq::function_9212ff4d(ee_name, step_name);
+  step_index = zm_sq::get_step_index(ee_name, step_name);
 
   if(ee.started && step_index <= ee.current_step) {
     return 0;
@@ -2445,7 +2445,7 @@ function function_23031ae8(ee_name, var_f2c264bb) {
       waitresult = self waittilltimeout(wait_time, step.var_e788cdd7 + "<dev string:x3d0>");
 
       if(waitresult._notify == #"timeout") {
-        iprintlnbold("<dev string:x3dc>" + function_9e72a96(ee_name) + "<dev string:x407>" + function_9e72a96(ee.steps[ee.current_step].name));
+        iprintlnbold("<dev string:x3dc>" + hashtostring(ee_name) + "<dev string:x407>" + hashtostring(ee.steps[ee.current_step].name));
 
         return;
       }
@@ -2454,7 +2454,7 @@ function function_23031ae8(ee_name, var_f2c264bb) {
     wait 1;
   }
 
-  iprintlnbold("<dev string:x40c>" + function_9e72a96(ee.name) + "<dev string:x407>" + function_9e72a96(ee.steps[ee.current_step].name) + "<dev string:x41b>");
+  iprintlnbold("<dev string:x40c>" + hashtostring(ee.name) + "<dev string:x407>" + hashtostring(ee.steps[ee.current_step].name) + "<dev string:x41b>");
 
   function_905781df(ee_name);
 }
@@ -2618,14 +2618,14 @@ function function_d4738f46() {
   array::add(var_18e0dde5, getent("vol_player_in_intermission_space", "targetname"));
   array::add(var_18e0dde5, getent("vol_player_on_ground", "targetname"));
   array::add(var_18e0dde5, getent("vol_player_in_bunker", "targetname"));
-  var_1d1bbd52[#"main_street_to_helipads"] = function_4c324227("main_street_to_helipads_end");
-  var_1d1bbd52[#"anytown_usa_to_main_street"] = function_4c324227("anytown_usa_to_main_street_end");
-  var_1d1bbd52[#"main_street_to_anytown_usa"] = function_4c324227("main_street_to_anytown_usa_end");
-  var_1d1bbd52[#"anytown_usa_to_bunker"] = function_4c324227("anytown_usa_to_bunker_end");
-  var_1d1bbd52[#"helipads_to_main_street"] = function_4c324227("helipads_to_main_street_end");
-  var_1d1bbd52[#"bunker_to_observation"] = function_4c324227("bunker_to_observation_end");
-  var_1d1bbd52[#"helipads_to_observation"] = function_4c324227("helipads_to_observation_end");
-  var_1d1bbd52[#"observation_to_helipads"] = function_4c324227("observation_to_helipads_end");
+  a_s_fasttravel_locs[#"main_street_to_helipads"] = function_4c324227("main_street_to_helipads_end");
+  a_s_fasttravel_locs[#"anytown_usa_to_main_street"] = function_4c324227("anytown_usa_to_main_street_end");
+  a_s_fasttravel_locs[#"main_street_to_anytown_usa"] = function_4c324227("main_street_to_anytown_usa_end");
+  a_s_fasttravel_locs[#"anytown_usa_to_bunker"] = function_4c324227("anytown_usa_to_bunker_end");
+  a_s_fasttravel_locs[#"helipads_to_main_street"] = function_4c324227("helipads_to_main_street_end");
+  a_s_fasttravel_locs[#"bunker_to_observation"] = function_4c324227("bunker_to_observation_end");
+  a_s_fasttravel_locs[#"helipads_to_observation"] = function_4c324227("helipads_to_observation_end");
+  a_s_fasttravel_locs[#"observation_to_helipads"] = function_4c324227("observation_to_helipads_end");
 
   while(true) {
     players = getplayers();
@@ -2679,7 +2679,7 @@ function function_d4738f46() {
 
         n_closest_dist = 999999999;
 
-        foreach(a_s_loc in var_1d1bbd52) {
+        foreach(a_s_loc in a_s_fasttravel_locs) {
           n_dist = distance2d(player.origin, a_s_loc[0].origin);
 
           if(n_dist < n_closest_dist) {
@@ -2777,7 +2777,7 @@ function function_71a6c3ea() {
   level notify(#"hash_50d92ca3c6c7c2a8");
   level.var_f925c697 = 1;
   zm_devgui::zombie_devgui_open_sesame();
-  level thread zm_sq::function_f2dd8601(#"pap_quest", zm_sq::function_9212ff4d(#"pap_quest", #"release_lockdown"));
+  level thread zm_sq::function_f2dd8601(#"pap_quest", zm_sq::get_step_index(#"pap_quest", #"release_lockdown"));
   level flag::set("<dev string:x26c>");
   zm_tungsten_zones::function_2d12df62();
 }

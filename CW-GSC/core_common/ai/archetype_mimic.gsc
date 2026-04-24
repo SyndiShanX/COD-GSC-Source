@@ -858,7 +858,7 @@ function function_c5a69992(__index) {
   }
 
   foreach(name_index, name in scriptbundlenames) {
-    util::add_debug_command("<dev string:x659>" + __index + "<dev string:x689>" + function_9e72a96(name) + "<dev string:x13e>" + name_index + "<dev string:x68e>" + function_9e72a96(name) + "<dev string:x172>");
+    util::add_debug_command("<dev string:x659>" + __index + "<dev string:x689>" + hashtostring(name) + "<dev string:x13e>" + name_index + "<dev string:x68e>" + hashtostring(name) + "<dev string:x172>");
   }
 }
 

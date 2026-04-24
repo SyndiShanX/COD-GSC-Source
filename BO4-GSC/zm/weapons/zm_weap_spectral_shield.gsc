@@ -1193,7 +1193,7 @@ function_b84d0267() {
 function_d0b3a2c6() {
   self endon(#"death");
 
-  if(isDefined(self.stub.blueprint) && isDefined(self.stub.blueprint.var_54a97edd) && self.stub.blueprint.var_54a97edd === level.var_d7e67022) {
+  if(isDefined(self.stub.blueprint) && isDefined(self.stub.blueprint.w_result) && self.stub.blueprint.w_result === level.var_d7e67022) {
     if(isDefined(self.stub.model)) {
       s_progress = self waittill(#"hash_6db03c91467a21f5");
 
@@ -1218,7 +1218,7 @@ function_9693e041(player) {
   }
 
   if(player hasweapon(level.var_637136f3)) {
-    if(isDefined(self.blueprint.var_54a97edd.isriotshield) && self.blueprint.var_54a97edd.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
+    if(isDefined(self.blueprint.w_result.isriotshield) && self.blueprint.w_result.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
       self.cost = self zm_crafting::function_ceac3bf9(player, 1);
       self.hint_string = zm_utility::function_d6046228(#"hash_35387f35bd87b96b", #"hash_3ee2e0100fefb461");
       _shad_turret_debug_server = 1;
@@ -1259,7 +1259,7 @@ function_df8ce6e2(player) {
   }
 
   if(player zm_crafting::function_2d53738e(w_shield_upgraded)) {
-    if(isDefined(self.stub.blueprint.var_54a97edd.isriotshield) && self.stub.blueprint.var_54a97edd.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
+    if(isDefined(self.stub.blueprint.w_result.isriotshield) && self.stub.blueprint.w_result.isriotshield && isDefined(player.player_shield_reset_health) && isDefined(player.var_d3345483) && player.var_d3345483) {
       var_d97673ff = 1;
     } else {
       return false;
@@ -1305,7 +1305,7 @@ function_df8ce6e2(player) {
   }
 
   player notify(#"hash_77d44943fb143b18", {
-    #weapon: self.stub.blueprint.var_54a97edd
+    #weapon: self.stub.blueprint.w_result
   });
   return false;
 }

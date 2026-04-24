@@ -2935,7 +2935,7 @@ function private evaluatehulkexposedarrivalanimations(entity, animations) {
       var_5e259f59 = animation_selector_table_evaluators::evaluator_findfirstvalidanimation(entity, animations, array(&function_50c1352d));
 
       if(isDefined(var_5e259f59)) {
-        record3dtext("<dev string:x1d7>" + function_9e72a96(var_5e259f59), entity.origin, (1, 0.5, 0), "<dev string:xa5>", entity, 0.65);
+        record3dtext("<dev string:x1d7>" + hashtostring(var_5e259f59), entity.origin, (1, 0.5, 0), "<dev string:xa5>", entity, 0.65);
       } else {
         record3dtext("<dev string:x204>", entity.origin, (1, 0.5, 0), "<dev string:xa5>", entity, 0.65);
       }

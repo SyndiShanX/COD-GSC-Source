@@ -52,7 +52,7 @@ function register_script(scriptname, spawncallback, startcallback, category, way
   assert(isstring(scriptname) || ishash(scriptname));
   assert(isfunctionptr(startcallback));
   assert(ishash(category));
-  assert(isinarray(level.var_4e996a3f, category), "<dev string:x38>" + function_9e72a96(category) + "<dev string:x64>");
+  assert(isinarray(level.var_4e996a3f, category), "<dev string:x38>" + hashtostring(category) + "<dev string:x64>");
   script = content_manager::register_script(scriptname, isDefined(var_549cb6f6) ? var_549cb6f6 : &function_4e8b29ac);
   script.var_32523552 = spawncallback;
   script.var_11dcc37e = startcallback;

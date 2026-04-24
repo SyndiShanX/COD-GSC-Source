@@ -323,7 +323,7 @@ function createplanner(name) {
 function createpostcondition(functionname, constants) {
   assert(ishash(functionname));
   assert(!isDefined(constants) || isarray(constants));
-  assert(isfunctionptr(plannerutility::getplannerapifunction(functionname)), "<dev string:xd7>" + function_9e72a96(functionname) + "<dev string:xe6>");
+  assert(isfunctionptr(plannerutility::getplannerapifunction(functionname)), "<dev string:xd7>" + hashtostring(functionname) + "<dev string:xe6>");
   node = spawnStruct();
   node.type = "postcondition";
   node.api = functionname;
@@ -334,7 +334,7 @@ function createpostcondition(functionname, constants) {
 function createprecondition(functionname, constants) {
   assert(ishash(functionname));
   assert(!isDefined(constants) || isarray(constants));
-  assert(isfunctionptr(plannerutility::getplannerapifunction(functionname)), "<dev string:xd7>" + function_9e72a96(functionname) + "<dev string:xe6>");
+  assert(isfunctionptr(plannerutility::getplannerapifunction(functionname)), "<dev string:xd7>" + hashtostring(functionname) + "<dev string:xe6>");
   node = spawnStruct();
   node.type = "precondition";
   node.api = functionname;
@@ -598,19 +598,19 @@ function createplannerfromasset(assetname) {
 
 function getplannerapifunction(functionname) {
   assert(ishash(functionname) && functionname != "<dev string:x149>", "<dev string:x160>");
-  assert(isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x19b>" + function_9e72a96(functionname) + "<dev string:x1bb>");
+  assert(isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x19b>" + hashtostring(functionname) + "<dev string:x1bb>");
   return level._plannerscriptfunctions[#"api"][functionname];
 }
 
 function getplanneractionfunctions(actionname) {
   assert(ishash(actionname) && actionname != "<dev string:x149>", "<dev string:x1d4>");
-  assert(isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x20d>" + function_9e72a96(actionname) + "<dev string:x1bb>");
+  assert(isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x20d>" + hashtostring(actionname) + "<dev string:x1bb>");
   return level._plannerscriptfunctions[#"action"][actionname];
 }
 
 function registerplannerapi(functionname, functionptr) {
   assert(ishash(functionname) && functionname != "<dev string:x149>", "<dev string:x22b>");
-  assert(isfunctionptr(functionptr), "<dev string:x26b>" + function_9e72a96(functionname) + "<dev string:x29b>");
+  assert(isfunctionptr(functionptr), "<dev string:x26b>" + hashtostring(functionname) + "<dev string:x29b>");
   planner::_initializeplannerfunctions(#"api");
   assert(!isDefined(level._plannerscriptfunctions[#"api"][functionname]), "<dev string:x19b>" + functionname + "<dev string:x2bd>");
   level._plannerscriptfunctions[#"api"][functionname] = functionptr;
@@ -619,7 +619,7 @@ function registerplannerapi(functionname, functionptr) {
 function registerplanneraction(actionname, paramfuncptr, initializefuncptr, updatefuncptr, terminatefuncptr) {
   assert(ishash(actionname) && actionname != "<dev string:x149>", "<dev string:x2d4>");
   planner::_initializeplannerfunctions("Action");
-  assert(!isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x20d>" + function_9e72a96(actionname) + "<dev string:x2bd>");
+  assert(!isDefined(level._plannerscriptfunctions[#"action"][actionname]), "<dev string:x20d>" + hashtostring(actionname) + "<dev string:x2bd>");
   level._plannerscriptfunctions[#"action"][actionname] = [];
 
   if(isfunctionptr(paramfuncptr)) {

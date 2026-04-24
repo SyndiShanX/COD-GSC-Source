@@ -177,7 +177,7 @@ function_89c6128e(mode) {
       if(isDefined(scene_def)) {
         prtname = function_b14806c6(index, mode);
 
-        prtname = function_9e72a96(prtname);
+        prtname = hashtostring(prtname);
 
         function_3a965fac(fields.var_4c65efc8, prtname, mode, fields);
       }
@@ -661,12 +661,12 @@ function_23bc6f08(localclientnum, var_d0b01271, itemtype, item_data, mode, chara
   }
   while(![[var_d0b01271]] - > function_ea4ac9f8());
 
-  var_f75a02ea = function_9e72a96(function_b14806c6(character_index, mode));
+  var_f75a02ea = hashtostring(function_b14806c6(character_index, mode));
 
   if(var_b34f01f0) {
-    shot_name = "<dev string:x118>" + var_f75a02ea + "<dev string:x12a>" + function_9e72a96(item_data.lootid) + "<dev string:x12e>";
+    shot_name = "<dev string:x118>" + var_f75a02ea + "<dev string:x12a>" + hashtostring(item_data.lootid) + "<dev string:x12e>";
   } else {
-    shot_name = "<dev string:x118>" + var_f75a02ea + "<dev string:x12a>" + function_9e72a96(item_data.lootid) + "<dev string:x148>";
+    shot_name = "<dev string:x118>" + var_f75a02ea + "<dev string:x12a>" + hashtostring(item_data.lootid) + "<dev string:x148>";
   }
 
   function_da10fc8f(localclientnum, shot_name);
@@ -821,16 +821,16 @@ function_fb399a61(localclientnum) {
     var_82414930 = var_663588d + display_name + "<dev string:x12a>";
 
     for(index = 0; index < getplayerroletemplatecount(mode); index++) {
-      var_f75a02ea = function_9e72a96(function_b14806c6(index, mode));
-      var_11f96a92 = var_82414930 + var_f75a02ea + "<dev string:x12a>";
-      adddebugcommand(localclientnum, "<dev string:x66>" + var_11f96a92 + "<dev string:x250>" + "<dev string:x256>" + "<dev string:x25b>" + "<dev string:x263>" + "<dev string:x167>" + mode + "<dev string:x167>" + index + "<dev string:x167>" + -1 + "<dev string:x167>" + -1 + "<dev string:x271>" + "<dev string:x275>");
+      var_f75a02ea = hashtostring(function_b14806c6(index, mode));
+      player_path = var_82414930 + var_f75a02ea + "<dev string:x12a>";
+      adddebugcommand(localclientnum, "<dev string:x66>" + player_path + "<dev string:x250>" + "<dev string:x256>" + "<dev string:x25b>" + "<dev string:x263>" + "<dev string:x167>" + mode + "<dev string:x167>" + index + "<dev string:x167>" + -1 + "<dev string:x167>" + -1 + "<dev string:x271>" + "<dev string:x275>");
       outfitcount = function_d299ef16(index, mode);
 
       for(outfitindex = 0; outfitindex < outfitcount; outfitindex++) {
         var_9cf37283 = function_d7c3cf6c(index, outfitindex, mode);
 
         if(var_9cf37283.valid) {
-          var_b614b3ba = var_11f96a92 + function_9e72a96(var_9cf37283.namehash) + "<dev string:x12a>";
+          var_b614b3ba = player_path + hashtostring(var_9cf37283.namehash) + "<dev string:x12a>";
           adddebugcommand(localclientnum, "<dev string:x66>" + var_b614b3ba + "<dev string:x250>" + "<dev string:x256>" + "<dev string:x25b>" + "<dev string:x263>" + "<dev string:x167>" + mode + "<dev string:x167>" + index + "<dev string:x167>" + outfitindex + "<dev string:x167>" + -1 + "<dev string:x271>" + "<dev string:x275>");
 
           if(mode == 1) {
@@ -883,7 +883,7 @@ function_5d6480a0(localclientnum, weapon, weapon_model, weapon_name, var_2d8a24a
 
       if(!(isDefined(var_3594168e.disabled) && var_3594168e.disabled)) {
         camo_index = function_8b51d9d1(var_3594168e.camooption);
-        var_9ce34e01 = function_9e72a96(var_3594168e.camooption);
+        var_9ce34e01 = hashtostring(var_3594168e.camooption);
       } else {
         var_3594168e = undefined;
       }
@@ -1099,7 +1099,7 @@ function_ea9a5e69(localclientnum) {
   jumpkits = namespace_eb06e24d::get_jumpkits();
 
   foreach(i, jumpkit in jumpkits) {
-    name = function_9e72a96(jumpkit);
+    name = hashtostring(jumpkit);
     markswarzone = "<dev string:x3cb>" + name + "<dev string:x12a>";
     adddebugcommand(localclientnum, "<dev string:x66>" + markswarzone + "<dev string:x250>" + "<dev string:x369>" + "<dev string:x42e>" + "<dev string:x167>" + i + "<dev string:x167>" + -1 + "<dev string:x9a>");
 
@@ -1195,7 +1195,7 @@ t10_lasers_mixlaser2_sn_droger(localclientnum, menu_name, state) {
             var_351da865.origin += step_size;
           }
 
-          function_da10fc8f(localclientnum, "<dev string:x46f>" + function_9e72a96(kit_name) + "<dev string:x12a>" + function_9e72a96(trail.name) + "<dev string:x482>");
+          function_da10fc8f(localclientnum, "<dev string:x46f>" + hashtostring(kit_name) + "<dev string:x12a>" + hashtostring(trail.name) + "<dev string:x482>");
           killfx(localclientnum, handle);
           break;
         default:

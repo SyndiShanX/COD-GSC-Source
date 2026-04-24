@@ -67,14 +67,14 @@ function function_c484a9be(...) {
 
     foreach(path in vararg) {
       if(ishash(path)) {
-        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + function_9e72a96(path);
+        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + hashtostring(path);
         continue;
       }
 
       var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + path;
     }
 
-    println("<dev string:x41>" + "<dev string:x54>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? function_9e72a96(value) : "<dev string:x6a>"));
+    println("<dev string:x41>" + "<dev string:x54>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? hashtostring(value) : "<dev string:x6a>"));
   }
 
   function_138a6b4b(vararg, value);
@@ -125,14 +125,14 @@ function function_53721fc4(player, ...) {
 
     foreach(path in path_array) {
       if(ishash(path)) {
-        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + function_9e72a96(path);
+        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + hashtostring(path);
         continue;
       }
 
       var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + path;
     }
 
-    println("<dev string:x41>" + "<dev string:x54>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? function_9e72a96(value) : "<dev string:x6a>"));
+    println("<dev string:x41>" + "<dev string:x54>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? hashtostring(value) : "<dev string:x6a>"));
   }
 
   function_138a6b4b(path_array, value);
@@ -437,14 +437,14 @@ function function_21d402f4(...) {
 
     foreach(path in vararg) {
       if(ishash(path)) {
-        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + function_9e72a96(path);
+        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + hashtostring(path);
         continue;
       }
 
       var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + path;
     }
 
-    println("<dev string:x41>" + "<dev string:x77>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? function_9e72a96(value) : "<dev string:x6a>"));
+    println("<dev string:x41>" + "<dev string:x77>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? hashtostring(value) : "<dev string:x6a>"));
   }
 
   return value;
@@ -489,14 +489,14 @@ function function_48b5c403(player, ...) {
 
     foreach(path in path_array) {
       if(ishash(path)) {
-        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + function_9e72a96(path);
+        var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + hashtostring(path);
         continue;
       }
 
       var_7e5020cb = var_7e5020cb + "<dev string:x3c>" + path;
     }
 
-    println("<dev string:x41>" + "<dev string:x77>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? function_9e72a96(value) : "<dev string:x6a>"));
+    println("<dev string:x41>" + "<dev string:x77>" + "<dev string:x5d>" + var_7e5020cb + "<dev string:x63>" + (isDefined(value) ? value : ishash(value) ? hashtostring(value) : "<dev string:x6a>"));
   }
 
   return value;
@@ -588,7 +588,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
   }
 
   if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-    println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x8a>" + function_9e72a96(weapon_name));
+    println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x8a>" + hashtostring(weapon_name));
   }
 
   attachments = [];
@@ -613,7 +613,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
   aat = hash(function_48b5c403(player, #"weapons", index, #"aat"));
 
   if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-    println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xb0>" + function_9e72a96(aat));
+    println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xb0>" + hashtostring(aat));
   }
 
   rarity = hash(function_48b5c403(player, #"weapons", index, #"rarity"));
@@ -666,7 +666,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
 
   if(isweapon(var_f259d9cd)) {
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xe3>" + (ishash(var_f259d9cd.name) ? function_9e72a96(var_f259d9cd.name) : var_f259d9cd.name));
+      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xe3>" + (ishash(var_f259d9cd.name) ? hashtostring(var_f259d9cd.name) : var_f259d9cd.name));
     }
 
     weapon = player zm_weapons::weapon_give(var_f259d9cd, 1, 1, undefined, var_b3546c09, undefined, attachments, 0);
@@ -674,7 +674,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
     item = function_4ba8fde(var_f259d9cd);
 
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xfc>" + (ishash(var_f259d9cd) ? function_9e72a96(var_f259d9cd) : var_f259d9cd));
+      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:xfc>" + (ishash(var_f259d9cd) ? hashtostring(var_f259d9cd) : var_f259d9cd));
     }
 
     weapon = player zm_weapons::function_943eabd9(item, 1, 0, var_b3546c09, attachments, weaponoptions, var_e91aba42, var_908f65ca);
@@ -684,13 +684,13 @@ function function_7695efd4(player, index, var_d17eb4df) {
     item = player.inventory.items[var_6653c106[var_d17eb4df]];
 
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x11a>" + (ishash(item.itementry.name) ? function_9e72a96(item.itementry.name) : item.itementry.name) + "<dev string:x129>" + var_6653c106[var_d17eb4df]);
+      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x11a>" + (ishash(item.itementry.name) ? hashtostring(item.itementry.name) : item.itementry.name) + "<dev string:x129>" + var_6653c106[var_d17eb4df]);
     }
 
     var_d17eb4df++;
   } else {
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x13d>" + var_6653c106[var_d17eb4df] + "<dev string:x157>" + (ishash(weapon.rootweapon.name) ? function_9e72a96(weapon.rootweapon.name) : weapon.rootweapon.name) + "<dev string:x16a>");
+      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x13d>" + var_6653c106[var_d17eb4df] + "<dev string:x157>" + (ishash(weapon.rootweapon.name) ? hashtostring(weapon.rootweapon.name) : weapon.rootweapon.name) + "<dev string:x16a>");
     }
 
     foreach(slot in [17 + 1, 17 + 1 + 8 + 1, 17 + 1 + 8 + 1 + 8 + 1]) {
@@ -716,7 +716,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
 
   if(aat !== #"") {
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x18d>" + function_9e72a96(aat) + "<dev string:x19f>" + (ishash(item.var_627c698b.name) ? function_9e72a96(item.var_627c698b.name) : item.var_627c698b.name));
+      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x18d>" + hashtostring(aat) + "<dev string:x19f>" + (ishash(item.var_627c698b.name) ? hashtostring(item.var_627c698b.name) : item.var_627c698b.name));
     }
 
     player zm_weapons::function_37e9e0cb(item, item.var_627c698b, aat);
@@ -724,7 +724,7 @@ function function_7695efd4(player, index, var_d17eb4df) {
 
   if(paplv > 0) {
     if(getDvar(#"hash_64ed0f72b786103", 0) !== 0) {
-      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x1ae>" + paplv + "<dev string:x19f>" + (ishash(item.var_627c698b.name) ? function_9e72a96(item.var_627c698b.name) : item.var_627c698b.name));
+      println("<dev string:x7f>" + player getentitynumber() + "<dev string:x5d>" + "<dev string:x1ae>" + paplv + "<dev string:x19f>" + (ishash(item.var_627c698b.name) ? hashtostring(item.var_627c698b.name) : item.var_627c698b.name));
     }
 
     item.paplv = paplv;

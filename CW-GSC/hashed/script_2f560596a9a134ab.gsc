@@ -251,7 +251,7 @@ function function_123bcbcf() {
         self zm_stats::increment_challenge_stat(#"hash_3e8fc17206dbe863");
       }
 
-      if(isDefined(level.var_b8be892e) && isDefined(self.var_7341f980) && isDefined(self.var_67ba1237) && (self.var_123836f9 >= 2 || self.var_7341f980.size >= level.var_b8be892e.size || self.var_67ba1237.size >= level.var_b8be892e.size)) {
+      if(isDefined(level.a_str_vapors) && isDefined(self.var_7341f980) && isDefined(self.var_67ba1237) && (self.var_123836f9 >= 2 || self.var_7341f980.size >= level.a_str_vapors.size || self.var_67ba1237.size >= level.a_str_vapors.size)) {
         arrayremovevalue(a_str_rewards, #"free_perk");
       }
 

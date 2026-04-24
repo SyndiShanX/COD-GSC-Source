@@ -129,7 +129,7 @@ function function_af57ad40() {
 }
 
 function function_9451b95c(equipment_name, var_92746e82, var_f3af4e17, var_5ef88cf) {
-  assert(!isDefined(level.var_4bcd94b[equipment_name]), "<dev string:x38>" + (ishash(equipment_name) ? function_9e72a96(equipment_name) : equipment_name));
+  assert(!isDefined(level.var_4bcd94b[equipment_name]), "<dev string:x38>" + (ishash(equipment_name) ? hashtostring(equipment_name) : equipment_name));
   level.var_4bcd94b[equipment_name] = {
     #var_fd2db56a: var_92746e82, #special_event: var_f3af4e17, #var_9b275351: var_5ef88cf
   };
@@ -2121,7 +2121,7 @@ function updatemultikill(params) {
           }
         }
 
-        if(isDefined(params.weapon) && is_true(params.weapon.var_29d24e37)) {
+        if(isDefined(params.weapon) && is_true(params.weapon.isvehicleturret)) {
           params.eattacker contracts::increment_zm_contract(#"hash_19119ba23b3826c7");
           var_d285ed68 = function_2bf1d1bb("passenger_gunner_multikill_zm", params.eattacker, #"vehicle_turret", params.weapon, 2000, 3);
 

@@ -51,12 +51,12 @@ function play_siege(str_anim, n_rate = 1) {
   self endon(#"death", #"scene_stop", #"stop_siege_anim");
 
   if(sessionmodeismultiplayergame() || sessionmodeiswarzonegame()) {
-    iprintlnbold("<dev string:x38>" + function_9e72a96(str_anim) + "<dev string:x50>");
-    println("<dev string:x38>" + function_9e72a96(str_anim) + "<dev string:x50>");
+    iprintlnbold("<dev string:x38>" + hashtostring(str_anim) + "<dev string:x50>");
+    println("<dev string:x38>" + hashtostring(str_anim) + "<dev string:x50>");
   }
 
   if(isdedicated()) {
-    println("<dev string:xa4>" + function_9e72a96(str_anim) + "<dev string:xbb>");
+    println("<dev string:xa4>" + hashtostring(str_anim) + "<dev string:xbb>");
     waitframe(1);
     return;
   }
@@ -99,7 +99,7 @@ function debug_print(str_animation, str_msg) {
 
   if(str_dvar != "<dev string:x136>") {
     if(!isstring(str_animation)) {
-      str_animation = isDefined(function_9e72a96(str_animation)) ? "<dev string:x136>" + function_9e72a96(str_animation) : "<dev string:x136>";
+      str_animation = isDefined(hashtostring(str_animation)) ? "<dev string:x136>" + hashtostring(str_animation) : "<dev string:x136>";
     }
 
     b_print = 0;
@@ -149,7 +149,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
     str_tag = v_angles_or_tag;
     v_origin = v_origin_or_ent gettagorigin(str_tag);
     v_angles = v_origin_or_ent gettagangles(str_tag);
-    assert(isDefined(v_origin) && isDefined(v_angles), "<dev string:x157>" + function_9e72a96(animation) + "<dev string:x18b>" + v_origin_or_ent getentitynumber() + "<dev string:x19b>" + v_angles_or_tag + "<dev string:x1a9>");
+    assert(isDefined(v_origin) && isDefined(v_angles), "<dev string:x157>" + hashtostring(animation) + "<dev string:x18b>" + v_origin_or_ent getentitynumber() + "<dev string:x19b>" + v_angles_or_tag + "<dev string:x1a9>");
 
     if(!isDefined(v_origin)) {
       v_origin = v_origin_or_ent.origin;
@@ -222,7 +222,7 @@ function _play(animation, v_origin_or_ent, v_angles_or_tag, n_rate, n_blend_in, 
     self animscripted(animation, v_origin, v_angles, animation, mode, undefined, n_rate, n_blend_in, n_lerp, n_start_time, 1, b_show_player_firstperson_weapon, var_f4b34dc1, paused, var_dc569aa8, var_1971fee9);
     var_1abb7e22 = 1;
   } else {
-    println("<dev string:x1ae>" + self getentitynumber() + "<dev string:x1cf>" + function_9e72a96(animation));
+    println("<dev string:x1ae>" + self getentitynumber() + "<dev string:x1cf>" + hashtostring(animation));
   }
 
   if(isPlayer(self)) {
@@ -414,8 +414,8 @@ function _reach(s_tracker, animation, v_origin_or_ent, v_angles_or_tag, b_disabl
     s_waitresult = self waittill(#"goal", #"new_anim_reach", #"new_scripted_anim", #"stop_scripted_anim", #"reach_timed_out");
 
     if(s_waitresult._notify === "<dev string:x239>") {
-      iprintlnbold("<dev string:x24c>" + function_9e72a96(animation) + "<dev string:x264>" + v_goal);
-      println("<dev string:x24c>" + function_9e72a96(animation) + "<dev string:x264>" + v_goal);
+      iprintlnbold("<dev string:x24c>" + hashtostring(animation) + "<dev string:x264>" + v_goal);
+      println("<dev string:x24c>" + hashtostring(animation) + "<dev string:x264>" + v_goal);
     }
 
     if(ai::has_behavior_attribute("disablearrivals")) {
@@ -486,7 +486,7 @@ function debug_anim_reach(v_goal, str_anim) {
 
   while(true) {
     level flag::wait_till("<dev string:x1f9>");
-    print3d(self.origin, "<dev string:x269>" + function_9e72a96(str_anim) + "<dev string:x279>" + v_goal + "<dev string:x27e>" + (ispointonnavmesh(v_goal) ? "<dev string:x296>" : "<dev string:x29e>"), (1, 0, 0), 1, 0.4, 1);
+    print3d(self.origin, "<dev string:x269>" + hashtostring(str_anim) + "<dev string:x279>" + v_goal + "<dev string:x27e>" + (ispointonnavmesh(v_goal) ? "<dev string:x296>" : "<dev string:x29e>"), (1, 0, 0), 1, 0.4, 1);
     line(self.origin, v_goal, (1, 0, 0));
     circle(v_goal, 10, (1, 0, 0));
     waitframe(1);

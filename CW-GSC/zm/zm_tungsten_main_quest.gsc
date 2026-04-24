@@ -204,7 +204,7 @@ function function_d7f67c90() {
   level thread function_4907b660();
   level flag::wait_till("all_players_spawned");
 
-  foreach(t_crafting in level.var_4fe2f84d) {
+  foreach(t_crafting in level.a_t_crafting) {
     if(t_crafting[0].craftfoundry.name === "ztable_tungsten_neutralizer_device") {
       t_crafting[0].usetime = 5000;
     }
@@ -4313,7 +4313,7 @@ function cmd(cmd) {
 
   switch (cmd) {
     case # "hash_390016349056b819":
-      zm_sq::function_f2dd8601(#"tungsten_main_quest", zm_sq::function_9212ff4d(#"tungsten_main_quest", #"hash_2cec5bd1113224f4"));
+      zm_sq::function_f2dd8601(#"tungsten_main_quest", zm_sq::get_step_index(#"tungsten_main_quest", #"hash_2cec5bd1113224f4"));
       iprintlnbold("<dev string:x684>");
       level thread function_a4c80826(struct::get_array(#"hash_12376e3570660abc"));
       break;
@@ -4399,7 +4399,7 @@ function cmd(cmd) {
       iprintlnbold("<dev string:x7d4>");
       break;
     case # "hash_32de2812b8f91f4c":
-      level thread zm_sq::function_f2dd8601(#"tungsten_main_quest", zm_sq::function_9212ff4d(#"tungsten_main_quest", #"hash_2cec5bd1113224f4"));
+      level thread zm_sq::function_f2dd8601(#"tungsten_main_quest", zm_sq::get_step_index(#"tungsten_main_quest", #"hash_2cec5bd1113224f4"));
       level flag::set(#"hash_331ca6d639f4883d");
       level flag::set(#"step_2_completed");
       level flag::set(#"hash_717f6f193982a127");
@@ -4408,7 +4408,7 @@ function cmd(cmd) {
       iprintlnbold("<dev string:x7ee>");
       break;
     case # "complete_phase":
-      level thread zm_sq::function_f2dd8601(#"tungsten_main_quest", zm_sq::function_9212ff4d(#"tungsten_main_quest", #"hash_2cec5bd1113224f4"));
+      level thread zm_sq::function_f2dd8601(#"tungsten_main_quest", zm_sq::get_step_index(#"tungsten_main_quest", #"hash_2cec5bd1113224f4"));
       level flag::set(#"hash_331ca6d639f4883d");
       level flag::set(#"step_2_completed");
       level flag::set(#"hash_717f6f193982a127");

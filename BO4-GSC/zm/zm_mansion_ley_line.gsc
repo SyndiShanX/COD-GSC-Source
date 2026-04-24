@@ -31,7 +31,7 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-#namespace namespace_a8113e97;
+#namespace mansion_ley_line;
 
 init() {
   clientfield::register("allplayers", "" + #"hash_5370f4bc9fc25d13", 8000, 1, "int");
@@ -74,7 +74,7 @@ init() {
   level.mdl_ring_inner.v_start = level.mdl_ring_inner.e_pos.origin;
   mdl_stone = getent("stone_obs", "targetname");
   mdl_stone ghost();
-  level thread function_5f259315();
+  level thread start_ley_line();
   level thread function_30fcf7ae();
 
   if(zm_utility::is_ee_enabled()) {
@@ -113,7 +113,7 @@ function_30fcf7ae() {
   level.e_red clientfield::set("" + #"red_ray", 1);
 }
 
-function_5f259315() {
+start_ley_line() {
   level flag::wait_till(#"open_pap");
 
   if(zm_utility::is_ee_enabled()) {
@@ -867,22 +867,22 @@ function_9513d3a6() {
   level flag::wait_till(#"rings_done");
   a_s_locs = struct::get_array("symbol_combo_loc");
   struct::get("s_zodiac_symbol_spawn");
-  var_3ab52107 = [];
+  a_n_symbols = [];
 
   for(i = 1; i <= 12; i++) {
-    if(!isDefined(var_3ab52107)) {
-      var_3ab52107 = [];
-    } else if(!isarray(var_3ab52107)) {
-      var_3ab52107 = array(var_3ab52107);
+    if(!isDefined(a_n_symbols)) {
+      a_n_symbols = [];
+    } else if(!isarray(a_n_symbols)) {
+      a_n_symbols = array(a_n_symbols);
     }
 
-    var_3ab52107[var_3ab52107.size] = i;
+    a_n_symbols[a_n_symbols.size] = i;
   }
 
   if(isDefined(level.var_d181080c)) {
     foreach(mdl_symbol in level.var_d181080c) {
-      if(isDefined(mdl_symbol.var_c6f538f0)) {
-        array::run_all(mdl_symbol.var_c6f538f0, &delete);
+      if(isDefined(mdl_symbol.a_mdl_hints)) {
+        array::run_all(mdl_symbol.a_mdl_hints, &delete);
       }
 
       mdl_symbol delete();
@@ -893,8 +893,8 @@ function_9513d3a6() {
   level.var_5c086e54 = [];
 
   for(i = 0; i < 3; i++) {
-    n_symbol = array::random(var_3ab52107);
-    arrayremovevalue(var_3ab52107, n_symbol);
+    n_symbol = array::random(a_n_symbols);
+    arrayremovevalue(a_n_symbols, n_symbol);
 
     switch (n_symbol) {
       case 1:
@@ -955,51 +955,51 @@ function_8ced5d5b() {
     arrayremovevalue(a_n_numbers, n_num);
   }
 
-  var_db303d4f = array::sort_by_value(var_679750f5, 1);
+  a_n_hints = array::sort_by_value(var_679750f5, 1);
 
   for(i = 0; i < 3; i++) {
     level.var_d181080c[i].origin = level.var_d181080c[i].s_loc.origin;
     level.var_d181080c[i].angles = level.var_d181080c[i].s_loc.angles;
-    level.var_d181080c[i].n_hints = var_db303d4f[i];
+    level.var_d181080c[i].n_hints = a_n_hints[i];
     level.var_d181080c[i] thread function_7cc34fef();
   }
 }
 
 function_7cc34fef() {
-  self.var_c6f538f0 = [];
+  self.a_mdl_hints = [];
   self.a_s_locs = struct::get_array(self.s_loc.script_noteworthy);
   self.a_s_locs = array::randomize(self.a_s_locs);
 
   switch (self.n_hints) {
     case 7:
-      self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
-      self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_04_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
+      self.a_mdl_hints[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
+      self.a_mdl_hints[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_04_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
       break;
     case 9:
       if(math::cointoss()) {
-        self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_04_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
-        self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
+        self.a_mdl_hints[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_04_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
+        self.a_mdl_hints[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
       } else {
-        self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
-        self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
-        self.var_c6f538f0[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
+        self.a_mdl_hints[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
+        self.a_mdl_hints[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
+        self.a_mdl_hints[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
       }
 
       break;
     case 11:
-      self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
-      self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
-      self.var_c6f538f0[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
+      self.a_mdl_hints[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
+      self.a_mdl_hints[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
+      self.a_mdl_hints[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
       break;
     case 13:
-      self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
-      self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
-      self.var_c6f538f0[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
+      self.a_mdl_hints[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_03_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
+      self.a_mdl_hints[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
+      self.a_mdl_hints[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
       break;
     case 15:
-      self.var_c6f538f0[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
-      self.var_c6f538f0[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
-      self.var_c6f538f0[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
+      self.a_mdl_hints[0] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[0].origin, self.a_s_locs[0].angles);
+      self.a_mdl_hints[1] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[1].origin, self.a_s_locs[1].angles);
+      self.a_mdl_hints[2] = util::spawn_model("p8_zm_werewolf_claw_marks_grp_05_01", self.a_s_locs[2].origin, self.a_s_locs[2].angles);
       break;
   }
 }
@@ -1434,7 +1434,7 @@ wave_1() {
       break;
   }
 
-  level.var_e12e0420 = 0;
+  level.n_bats = 0;
   level.var_84b2907f = &function_a9b81878;
   a_s_locs = array::randomize(struct::get_array("greenhouse_bat"));
   x = 0;
@@ -1448,7 +1448,7 @@ wave_1() {
     ai_bat = bat::function_2e37549f(1, a_s_locs[x], 20);
 
     if(isDefined(ai_bat)) {
-      level.var_e12e0420++;
+      level.n_bats++;
       x++;
       ai_bat.no_powerups = 1;
       ai_bat zm_score::function_acaab828();
@@ -1458,7 +1458,7 @@ wave_1() {
         x = 0;
       }
 
-      while(level.var_e12e0420 >= n_current || getaiteamarray(level.zombie_team).size >= 24) {
+      while(level.n_bats >= n_current || getaiteamarray(level.zombie_team).size >= 24) {
         waitframe(1);
       }
     }
@@ -1477,14 +1477,14 @@ function_a9b81878(ai) {
     ai zm_score::function_acaab828();
     ai waittill(#"death");
 
-    if(isDefined(level.var_e12e0420)) {
-      level.var_e12e0420--;
+    if(isDefined(level.n_bats)) {
+      level.n_bats--;
     }
   }
 }
 
 function_3da8da85(params) {
-  level.var_e12e0420--;
+  level.n_bats--;
 }
 
 function_aa1d0bc6() {
@@ -1499,7 +1499,7 @@ function_aa1d0bc6() {
 
 function_655a2fcc() {
   while(true) {
-    if(level.var_e12e0420 < 5) {
+    if(level.n_bats < 5) {
       return;
     }
 

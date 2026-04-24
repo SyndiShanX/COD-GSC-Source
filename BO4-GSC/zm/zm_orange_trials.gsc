@@ -390,7 +390,7 @@ blood_buff() {
 
   if(isDefined(self)) {
     level.var_4adebdfc unlink();
-    level.var_4adebdfc.origin = level.var_63a35083[0].origin;
+    level.var_4adebdfc.origin = level.a_s_mq_blood_locs[0].origin;
     self zombie_utility::zombie_head_gib();
   }
 }

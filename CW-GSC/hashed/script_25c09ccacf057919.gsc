@@ -80,13 +80,13 @@ function function_51acf127() {
   util::waittill_can_add_debug_command();
 
   foreach(str_name, s_teleport in level.var_4aca3c1) {
-    adddebugcommand("<dev string:x1d3>" + function_9e72a96(str_name) + "<dev string:x208>" + function_9e72a96(str_name) + "<dev string:x22c>");
+    adddebugcommand("<dev string:x1d3>" + hashtostring(str_name) + "<dev string:x208>" + hashtostring(str_name) + "<dev string:x22c>");
   }
 
   foreach(var_80b4780d, s_instance in level.var_2fb0636f) {
-    adddebugcommand("<dev string:x232>" + function_9e72a96(var_80b4780d) + "<dev string:x260>" + function_9e72a96(var_80b4780d) + "<dev string:x22c>");
-    adddebugcommand("<dev string:x284>" + function_9e72a96(var_80b4780d) + "<dev string:x2b5>" + function_9e72a96(var_80b4780d) + "<dev string:x22c>");
-    adddebugcommand("<dev string:x2dc>" + function_9e72a96(var_80b4780d) + "<dev string:x313>" + function_9e72a96(var_80b4780d) + "<dev string:x22c>");
+    adddebugcommand("<dev string:x232>" + hashtostring(var_80b4780d) + "<dev string:x260>" + hashtostring(var_80b4780d) + "<dev string:x22c>");
+    adddebugcommand("<dev string:x284>" + hashtostring(var_80b4780d) + "<dev string:x2b5>" + hashtostring(var_80b4780d) + "<dev string:x22c>");
+    adddebugcommand("<dev string:x2dc>" + hashtostring(var_80b4780d) + "<dev string:x313>" + hashtostring(var_80b4780d) + "<dev string:x22c>");
     util::waittill_can_add_debug_command();
   }
 
@@ -694,7 +694,7 @@ function spawn_asset(s_instance, var_b9701a73, var_2ceba174) {
       s_instance.var_906f7138 = function_ff217e96(isDefined(var_b9701a73) ? var_b9701a73 : var_9eb2d2aa, v_pos, v_ang, s_instance, var_2ceba174);
 
       if(!isDefined(s_instance.var_906f7138)) {
-        iprintlnbold("<dev string:x58a>" + function_9e72a96(isDefined(var_b9701a73) ? var_b9701a73 : var_9eb2d2aa) + "<dev string:x59c>");
+        iprintlnbold("<dev string:x58a>" + hashtostring(isDefined(var_b9701a73) ? var_b9701a73 : var_9eb2d2aa) + "<dev string:x59c>");
         s_instance.var_906f7138 = util::spawn_anim_player_model("<dev string:x548>", v_pos, v_ang);
       }
 
@@ -1001,12 +1001,12 @@ function function_c88700() {
   if(level.var_59a2c772) {
     foreach(s_instance in level.var_2fb0636f) {
       if(isDefined(s_instance.var_906f7138)) {
-        var_c954ac15 = "<dev string:x931>" + (isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_label) ? "<dev string:x66>" + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_label : "<dev string:x66>") + "<dev string:x93b>" + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_type + "<dev string:x946>" + function_9e72a96(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_name) + "<dev string:x951>" + s_instance.targetname;
+        var_c954ac15 = "<dev string:x931>" + (isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_label) ? "<dev string:x66>" + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_label : "<dev string:x66>") + "<dev string:x93b>" + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_type + "<dev string:x946>" + hashtostring(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].str_name) + "<dev string:x951>" + s_instance.targetname;
 
         if(is_true(s_instance.var_906f7138.var_734e9da0) && isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_30bd5f98) && isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_ab3948d3[s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_30bd5f98].var_867459dc)) {
-          var_c954ac15 = var_c954ac15 + "<dev string:x960>" + function_9e72a96(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_ab3948d3[s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_30bd5f98].var_867459dc);
+          var_c954ac15 = var_c954ac15 + "<dev string:x960>" + hashtostring(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_ab3948d3[s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_30bd5f98].var_867459dc);
         } else if(isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_867459dc)) {
-          var_c954ac15 = var_c954ac15 + "<dev string:x978>" + function_9e72a96(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_867459dc);
+          var_c954ac15 = var_c954ac15 + "<dev string:x978>" + hashtostring(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_867459dc);
         }
 
         if(isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_67bb5365)) {
@@ -1016,7 +1016,7 @@ function function_c88700() {
             var_9e3d7699 = "<dev string:x9a9>";
           }
 
-          var_c954ac15 = var_c954ac15 + "<dev string:x9bb>" + var_9e3d7699 + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_50f3b70e + 1 + "<dev string:x9c0>" + function_9e72a96(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_67bb5365);
+          var_c954ac15 = var_c954ac15 + "<dev string:x9bb>" + var_9e3d7699 + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_50f3b70e + 1 + "<dev string:x9c0>" + hashtostring(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_67bb5365);
 
           if(isDefined(s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_2ceba174)) {
             var_c954ac15 += "<dev string:x9c6>" + s_instance.var_e3cf25b2[s_instance.var_d6cb6df6].var_2ceba174;

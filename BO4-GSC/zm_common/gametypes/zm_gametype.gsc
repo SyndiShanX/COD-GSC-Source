@@ -121,7 +121,7 @@ main() {
   zm_utility::set_gamemode_var("post_init_zombie_spawn_func", undefined);
   zm_utility::set_gamemode_var("match_end_notify", undefined);
   zm_utility::set_gamemode_var("match_end_func", undefined);
-  bundle = function_302bd0b9();
+  bundle = getgametypescriptbundle();
   setvisiblescoreboardcolumns(bundle.scoreboard_1, bundle.scoreboard_2, bundle.scoreboard_3, bundle.scoreboard_4, bundle.scoreboard_5, bundle.var_d4259e74, bundle.var_54dd9ff6, bundle.var_5ee7b40a);
   callback::on_connect(&onplayerconnect_check_for_hotjoin);
 }

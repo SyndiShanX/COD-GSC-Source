@@ -162,7 +162,7 @@ function private evaluator_checkanimationforovershootinggoal(entity, animation) 
       return true;
     }
 
-    record3dtext("<dev string:x46>" + function_9e72a96(animation) + "<dev string:x63>" + sqrt(animdistsq) + "<dev string:x72>" + sqrt(disttogoalsq), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.4);
+    record3dtext("<dev string:x46>" + hashtostring(animation) + "<dev string:x63>" + sqrt(animdistsq) + "<dev string:x72>" + sqrt(disttogoalsq), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.4);
   } else {
     record3dtext("<dev string:x83>", entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.4);
   }
@@ -301,7 +301,7 @@ function private evaluatemovetocqbanimations(entity, animations) {
   anim = evaluateblockedanimations(entity, animations);
 
   if(isDefined(anim)) {
-    record3dtext("<dev string:x199>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+    record3dtext("<dev string:x199>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
   } else {
     record3dtext("<dev string:x1bd>", entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
   }
@@ -314,7 +314,7 @@ function private evaluateblockedanimations(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstnavmesh, &evaluator_checkanimationforovershootinggoal));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x1ea>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x1ea>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -330,7 +330,7 @@ function private evaluateblockedcoverarrivalanimations(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&function_da29fa63));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x237>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x237>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -346,7 +346,7 @@ function private evaluateblockedcoverexitanimations(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstnavmesh, &function_3c7d2020, &function_89b21ba9, &function_8bd6d54d));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x29c>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x29c>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -362,7 +362,7 @@ function private evaluateblockednostairsanimations(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstnavmesh, &evaluator_checkanimationforovershootinggoal, &function_89b21ba9));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x2fb>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x2fb>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -378,7 +378,7 @@ function private evaluateblockedanimationsrelaxed(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationforovershootinggoal));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x358>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x358>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -394,7 +394,7 @@ function private evaluateblockedanimationsoffnavmesh(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&evaluator_checkanimationagainstgeo));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x381>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x381>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -416,7 +416,7 @@ function private evaluatehumanturnanimations(entity, animations) {
     anim = evaluator_findfirstvalidanimation(entity, animations, array(&function_91a832bb, &evaluator_checkanimationagainstgeo, &evaluator_checkanimationagainstnavmesh));
 
     if(isDefined(anim)) {
-      record3dtext("<dev string:x3fa>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+      record3dtext("<dev string:x3fa>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
 
       return anim;
     }
@@ -433,7 +433,7 @@ function evaluatehumanexposedarrivalanimations(entity, animations) {
       var_5e259f59 = evaluator_findfirstvalidanimation(entity, animations, array(&function_50c1352d));
 
       if(isDefined(var_5e259f59)) {
-        record3dtext("<dev string:x44b>" + function_9e72a96(var_5e259f59), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+        record3dtext("<dev string:x44b>" + hashtostring(var_5e259f59), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
       } else {
         record3dtext("<dev string:x479>", entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
       }
@@ -447,7 +447,7 @@ function evaluatehumanexposedarrivalanimations(entity, animations) {
           anim = aliasanimations[0];
 
           if(isDefined(anim)) {
-            record3dtext("<dev string:x44b>" + function_9e72a96(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
+            record3dtext("<dev string:x44b>" + hashtostring(anim), entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
           } else {
             record3dtext("<dev string:x479>", entity.origin, (1, 0.5, 0), "<dev string:x38>", entity, 0.65);
           }
@@ -480,7 +480,7 @@ function private function_382b0cfb(animation) {
 
   if(animhasnotetrack(animation, "corner")) {
     times = getnotetracktimes(animation, "corner");
-    assert(times.size == 1, "<dev string:x4b0>" + function_9e72a96(animation) + "<dev string:x4bf>" + "<dev string:x4de>" + "<dev string:x4e8>");
+    assert(times.size == 1, "<dev string:x4b0>" + hashtostring(animation) + "<dev string:x4bf>" + "<dev string:x4de>" + "<dev string:x4e8>");
     splittime = times[0];
   }
 
@@ -513,7 +513,7 @@ function private planhumanturnanimations(entity, animations) {
       halftime = splittime * 0.5;
       speed = animation::function_a23b2a60(var_bff64930, 0, halftime);
 
-      record3dtext("<dev string:x3e2>" + gettime() + "<dev string:x4f7>" + function_9e72a96(var_bff64930) + "<dev string:x50e>" + speed, entity.origin, (1, 0.5, 0), "<dev string:x38>", entity);
+      record3dtext("<dev string:x3e2>" + gettime() + "<dev string:x4f7>" + hashtostring(var_bff64930) + "<dev string:x50e>" + speed, entity.origin, (1, 0.5, 0), "<dev string:x38>", entity);
 
       entity.var_3b77553e = speed;
       entity.var_7b1f015a.pos = entity.var_14b548c5;

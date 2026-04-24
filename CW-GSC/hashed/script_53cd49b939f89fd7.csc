@@ -340,7 +340,7 @@ function private function_2a35a5f(var_a14cc36b) {
   var_12fe97ab = "<dev string:xfd>";
 
   foreach(menu_item in var_a14cc36b) {
-    var_12fe97ab += "<dev string:x110>" + (isDefined(menu_item.menu_name) ? "<dev string:xfd>" + menu_item.menu_name : ishash(menu_item.menu_name) ? function_9e72a96(menu_item.menu_name) : "<dev string:xfd>") + "<dev string:x115>";
+    var_12fe97ab += "<dev string:x110>" + (isDefined(menu_item.menu_name) ? "<dev string:xfd>" + menu_item.menu_name : ishash(menu_item.menu_name) ? hashtostring(menu_item.menu_name) : "<dev string:xfd>") + "<dev string:x115>";
   }
 
   return var_12fe97ab;

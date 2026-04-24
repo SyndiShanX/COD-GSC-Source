@@ -23,14 +23,14 @@ __init__() {
 }
 
 enable() {
-  zm_wallbuy::function_c047c228(&function_84832f40);
-  zm_wallbuy::function_33023da5(&function_84832f40);
+  zm_wallbuy::function_c047c228(&override_wallbuy_cost);
+  zm_wallbuy::function_33023da5(&override_wallbuy_cost);
   zm_wallbuy::function_48f914bd(&override_ammo_cost);
 }
 
 disable() {
-  zm_wallbuy::function_a6889c(&function_84832f40);
-  zm_wallbuy::function_782e8955(&function_84832f40);
+  zm_wallbuy::function_a6889c(&override_wallbuy_cost);
+  zm_wallbuy::function_782e8955(&override_wallbuy_cost);
   zm_wallbuy::function_99911dae(&override_ammo_cost);
 }
 
@@ -42,7 +42,7 @@ validation() {
   return true;
 }
 
-function_84832f40(w_wallbuy, var_2b6f3563) {
+override_wallbuy_cost(w_wallbuy, t_wallbuy) {
   return 10;
 }
 

@@ -407,7 +407,7 @@ function function_4990741c() {
       var_3c73ecd4 = level.zombie_total;
     }
 
-    var_a6559064 = 1 + level.var_38b15968 - var_3c73ecd4;
+    var_a6559064 = 1 + level.n_zombie_spawns - var_3c73ecd4;
 
     if(var_a6559064 > level.var_fb9b5925 && isDefined(level.var_c1a3937d[var_a6559064])) {
       var_75b393f9 = level.var_819e7dfd[level.var_c1a3937d[var_a6559064]];
@@ -418,10 +418,10 @@ function function_4990741c() {
         var_79976254 = [[var_9e2294d7.var_ef500cb7]]();
       }
 
-      foreach(var_c28e5f72 in level.var_50cfb6c2) {
-        foreach(var_e5aaf7f4 in var_c28e5f72) {
-          if(var_e5aaf7f4.n_spawn == var_a6559064) {
-            var_e5aaf7f4.b_spawned = 1;
+      foreach(a_s_ai_spawn in level.var_50cfb6c2) {
+        foreach(s_ai_spawn in a_s_ai_spawn) {
+          if(s_ai_spawn.n_spawn == var_a6559064) {
+            s_ai_spawn.b_spawned = 1;
           }
         }
       }
@@ -449,7 +449,7 @@ function private function_3d5b3f85(str_archetype) {
   var_31b155cf = randomintrangeinclusive(6, int(min(10, level.zombie_total)));
   level.var_c1a3937d[var_31b155cf] = str_archetype;
 
-  var_e5aaf7f4 = {
+  s_ai_spawn = {
     #str_archetype: str_archetype, #n_spawn: var_31b155cf, #b_spawned: 0
   };
 
@@ -459,7 +459,7 @@ function private function_3d5b3f85(str_archetype) {
     level.var_50cfb6c2[0] = array(level.var_50cfb6c2[0]);
   }
 
-  level.var_50cfb6c2[0][level.var_50cfb6c2[0].size] = var_e5aaf7f4;
+  level.var_50cfb6c2[0][level.var_50cfb6c2[0].size] = s_ai_spawn;
 
   if(!isDefined(level.var_f4e76c2[str_archetype])) {
     level.var_f4e76c2[str_archetype] = 0;
@@ -710,7 +710,7 @@ function function_e84b609c(s_params) {
 }
 
 function private function_44298b05() {
-  level.var_722fb772 = level.var_38b15968;
+  level.var_722fb772 = level.n_zombie_spawns;
   var_d43195ce = array::randomize(getarraykeys(level.var_c1a3937d));
   var_e6f6bd65 = [];
 
@@ -987,7 +987,7 @@ function private function_d7864087(var_dbce0c44) {
         n_spawn += var_5dc6da8e;
         level.var_c1a3937d[n_spawn] = str_archetype;
 
-        var_e5aaf7f4 = {
+        s_ai_spawn = {
           #str_archetype: str_archetype, #n_spawn: n_spawn, #b_spawned: 0
         };
 
@@ -997,7 +997,7 @@ function private function_d7864087(var_dbce0c44) {
           level.var_50cfb6c2[i] = array(level.var_50cfb6c2[i]);
         }
 
-        level.var_50cfb6c2[i][level.var_50cfb6c2[i].size] = var_e5aaf7f4;
+        level.var_50cfb6c2[i][level.var_50cfb6c2[i].size] = s_ai_spawn;
 
         if(!isDefined(level.var_f4e76c2[str_archetype])) {
           level.var_f4e76c2[str_archetype] = 0;
@@ -1224,7 +1224,7 @@ function private function_fc42d325() {
       var_c708e6e1 += 33;
       debug2dtext((510, var_c708e6e1, 0), "<dev string:x5a8>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
       var_c708e6e1 += 22;
-      debug2dtext((510, var_c708e6e1, 0), "<dev string:x5d3>" + level.var_38b15968 + "<dev string:x5eb>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
+      debug2dtext((510, var_c708e6e1, 0), "<dev string:x5d3>" + level.n_zombie_spawns + "<dev string:x5eb>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
       var_c708e6e1 += 22;
       debug2dtext((510, var_c708e6e1, 0), "<dev string:x5f0>" + level.var_e654b7de + "<dev string:x5eb>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
       var_c708e6e1 += 22;
@@ -1232,7 +1232,7 @@ function private function_fc42d325() {
       var_c708e6e1 += 22;
 
       foreach(str_archetype in level.var_5d2cd3b1) {
-        str_text = "<dev string:x612>" + function_9e72a96(str_archetype);
+        str_text = "<dev string:x612>" + hashtostring(str_archetype);
 
         if(isDefined(level.var_f4e76c2[str_archetype])) {
           str_text += "<dev string:x619>" + level.var_f4e76c2[str_archetype];
@@ -1261,7 +1261,7 @@ function private function_fc42d325() {
           str_color = (1, 0, 0);
         }
 
-        str_text = "<dev string:x630>" + var_27100bc7 + "<dev string:x619>" + function_9e72a96(str_archetype) + "<dev string:x5eb>";
+        str_text = "<dev string:x630>" + var_27100bc7 + "<dev string:x619>" + hashtostring(str_archetype) + "<dev string:x5eb>";
         debug2dtext((510, var_c708e6e1, 0), str_text, str_color, 1, (0, 0, 0), 0.8, 1, 2);
       }
 
@@ -1300,7 +1300,7 @@ function private function_fc42d325() {
           str_text += "<dev string:x6c4>";
         } else {
           foreach(str_archetype in var_a630f8a4.var_d7d3cd31) {
-            str_text += function_9e72a96(str_archetype) + "<dev string:x5eb>";
+            str_text += hashtostring(str_archetype) + "<dev string:x5eb>";
           }
         }
 
@@ -1332,7 +1332,7 @@ function private function_fc42d325() {
       foreach(var_ec9d31d7 in level.var_33e85fa1) {
         foreach(var_1bda1c94 in var_ec9d31d7) {
           var_c708e6e1 += 22;
-          str_archetype = function_9e72a96(var_1bda1c94.var_2ecba2c5);
+          str_archetype = hashtostring(var_1bda1c94.var_2ecba2c5);
           str_text = str_archetype + "<dev string:x619>" + var_1bda1c94.var_123aa3d9 + "<dev string:x5eb>";
 
           if(var_1bda1c94.var_74f6178a) {
@@ -1411,7 +1411,7 @@ function private function_fc42d325() {
       }
 
       var_c708e6e1 += 22;
-      debug2dtext((1020, var_c708e6e1, 0), "<dev string:x5d3>" + level.var_38b15968 + "<dev string:x5eb>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
+      debug2dtext((1020, var_c708e6e1, 0), "<dev string:x5d3>" + level.n_zombie_spawns + "<dev string:x5eb>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
       var_c708e6e1 += 22;
       var_73f63202 = 0;
 
@@ -1424,7 +1424,7 @@ function private function_fc42d325() {
 
       foreach(str_archetype in level.var_5d2cd3b1) {
         if(isDefined(level.var_f4e76c2[str_archetype])) {
-          str_text = "<dev string:x612>" + function_9e72a96(str_archetype) + "<dev string:x619>" + level.var_f4e76c2[str_archetype];
+          str_text = "<dev string:x612>" + hashtostring(str_archetype) + "<dev string:x619>" + level.var_f4e76c2[str_archetype];
           debug2dtext((1020, var_c708e6e1, 0), str_text, (0, 1, 1), 1, (0, 0, 0), 0.8, 0.85, 2);
           var_c708e6e1 += 18.7;
         }
@@ -1433,16 +1433,16 @@ function private function_fc42d325() {
       if(level.var_810c1c3) {
         debug2dtext((1020, var_c708e6e1, 0), "<dev string:x870>", (0, 1, 0), 1, (0, 0, 0), 0.8, 1, 2);
         var_c708e6e1 += 22;
-        var_e5aaf7f4 = level.var_50cfb6c2[0][0];
+        s_ai_spawn = level.var_50cfb6c2[0][0];
 
-        if(isDefined(var_e5aaf7f4)) {
-          if(var_e5aaf7f4.b_spawned) {
+        if(isDefined(s_ai_spawn)) {
+          if(s_ai_spawn.b_spawned) {
             str_color = (0, 1, 1);
           } else {
             str_color = (1, 0, 0);
           }
 
-          str_text = "<dev string:x881>" + var_e5aaf7f4.n_spawn + "<dev string:x619>" + function_9e72a96(var_e5aaf7f4.str_archetype) + "<dev string:x5eb>";
+          str_text = "<dev string:x881>" + s_ai_spawn.n_spawn + "<dev string:x619>" + hashtostring(s_ai_spawn.str_archetype) + "<dev string:x5eb>";
           debug2dtext((1020, var_c708e6e1, 0), str_text, str_color, 1, (0, 0, 0), 0.8, 0.85, 2);
           var_c708e6e1 += 18.7;
         }
@@ -1453,14 +1453,14 @@ function private function_fc42d325() {
           var_c708e6e1 += 22;
 
           if(level.var_50cfb6c2[i].size < 10) {
-            foreach(var_e5aaf7f4 in level.var_50cfb6c2[i]) {
-              if(var_e5aaf7f4.b_spawned) {
+            foreach(s_ai_spawn in level.var_50cfb6c2[i]) {
+              if(s_ai_spawn.b_spawned) {
                 str_color = (0, 1, 1);
               } else {
                 str_color = (1, 0, 0);
               }
 
-              str_text = "<dev string:x881>" + var_e5aaf7f4.n_spawn + "<dev string:x619>" + function_9e72a96(var_e5aaf7f4.str_archetype) + "<dev string:x5eb>";
+              str_text = "<dev string:x881>" + s_ai_spawn.n_spawn + "<dev string:x619>" + hashtostring(s_ai_spawn.str_archetype) + "<dev string:x5eb>";
               debug2dtext((1020, var_c708e6e1, 0), str_text, str_color, 1, (0, 0, 0), 0.8, 0.85, 2);
               var_c708e6e1 += 18.7;
             }

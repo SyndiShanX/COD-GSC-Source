@@ -202,9 +202,9 @@ function function_1ac3c612(var_243d9caf, str_tag) {
 
   while(true) {
     var_a272d6b0 = var_243d9caf gettagorigin(str_tag);
-    print3d(self.origin, function_9e72a96(self.model), (1, 0, 0), 1, 0.5);
+    print3d(self.origin, hashtostring(self.model), (1, 0, 0), 1, 0.5);
     circle(self.origin, 30, (1, 0, 0));
-    print3d(var_a272d6b0, function_9e72a96(str_tag), (0, 1, 0), 1, 0.5);
+    print3d(var_a272d6b0, hashtostring(str_tag), (0, 1, 0), 1, 0.5);
     circle(var_a272d6b0, 15, (0, 1, 0));
     line(var_a272d6b0, self.origin, (1, 1, 0));
     waitframe(1);

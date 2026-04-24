@@ -100,8 +100,8 @@ function function_b4f41a02() {
 
   foreach(type in aitypes) {
     if(function_e949cfd7(type)) {
-      util::add_debug_command("<dev string:x3c>" + function_9e72a96(type) + "<dev string:x5d>" + function_9e72a96(type) + "<dev string:x84>");
-      util::add_debug_command("<dev string:x8a>" + function_9e72a96(type) + "<dev string:xb0>" + function_9e72a96(type) + "<dev string:x84>");
+      util::add_debug_command("<dev string:x3c>" + hashtostring(type) + "<dev string:x5d>" + hashtostring(type) + "<dev string:x84>");
+      util::add_debug_command("<dev string:x8a>" + hashtostring(type) + "<dev string:xb0>" + hashtostring(type) + "<dev string:x84>");
     }
   }
 
@@ -362,7 +362,7 @@ function function_2089690e() {
   self notify(#"hash_790882ac8688cee5");
 }
 
-function function_347f7d34(var_dc0c4612 = 0) {
+function get_valid_players(var_dc0c4612 = 0) {
   a_valid_players = [];
 
   foreach(player in getplayers()) {

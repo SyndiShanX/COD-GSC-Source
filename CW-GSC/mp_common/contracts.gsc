@@ -302,7 +302,7 @@ function contract_kills(data) {
     }
   }
 
-  if(weapon.var_29d24e37 === 1) {
+  if(weapon.isvehicleturret === 1) {
     attacker function_fd9fb79b(#"hash_768c7a6a36bcc892");
   }
 
@@ -568,10 +568,10 @@ function private function_902ef0de(var_38280f2f, delta) {
   }
 
   if(getdvarint(#"scr_contract_debug", 0) > 0) {
-    iprintln(function_9e72a96(var_38280f2f) + "<dev string:x38>" + new_progress + "<dev string:x47>" + target_value);
+    iprintln(hashtostring(var_38280f2f) + "<dev string:x38>" + new_progress + "<dev string:x47>" + target_value);
 
     if(old_progress < target_value && target_value <= new_progress) {
-      iprintln(function_9e72a96(var_38280f2f) + "<dev string:x4c>");
+      iprintln(hashtostring(var_38280f2f) + "<dev string:x4c>");
     }
   }
 

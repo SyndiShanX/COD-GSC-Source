@@ -128,8 +128,8 @@ function event_handler[gametype_init] main(eventstruct) {
     var_bb63d618 = sessionmodeisonlinegame() && is_true(getgametypesetting(map.gts));
 
     println(map.name + "<dev string:x52>");
-    println("<dev string:x57>" + (var_d0972d81 ? "<dev string:x6e>" : "<dev string:x76>") + "<dev string:x7f>" + (isDefined(fields.var_694983ad) ? function_9e72a96(fields.var_694983ad) : "<dev string:x9d>") + "<dev string:xaa>" + (isDefined(fields.var_cf58b6a2) ? "<dev string:x76>" : is_true(getdvarint(fields.var_694983ad, 0)) ? "<dev string:x6e>" : "<dev string:x9d>"));
-    println("<dev string:xb1>" + (var_bb63d618 ? "<dev string:x6e>" : "<dev string:x76>") + "<dev string:xc7>" + function_9e72a96(map.gts) + "<dev string:xaa>" + (is_true(getgametypesetting(map.gts)) ? "<dev string:x6e>" : "<dev string:x76>"));
+    println("<dev string:x57>" + (var_d0972d81 ? "<dev string:x6e>" : "<dev string:x76>") + "<dev string:x7f>" + (isDefined(fields.var_694983ad) ? hashtostring(fields.var_694983ad) : "<dev string:x9d>") + "<dev string:xaa>" + (isDefined(fields.var_cf58b6a2) ? "<dev string:x76>" : is_true(getdvarint(fields.var_694983ad, 0)) ? "<dev string:x6e>" : "<dev string:x9d>"));
+    println("<dev string:xb1>" + (var_bb63d618 ? "<dev string:x6e>" : "<dev string:x76>") + "<dev string:xc7>" + hashtostring(map.gts) + "<dev string:xaa>" + (is_true(getgametypesetting(map.gts)) ? "<dev string:x6e>" : "<dev string:x76>"));
 
     if(util::get_map_name() === map.name && (var_bb63d618 || var_d0972d81)) {
       register_clientfields = 1;
@@ -1524,7 +1524,7 @@ function private function_128f8f9f() {
 function private function_2531fcc8() {
   foreach(map in namespace_18bbc38e::function_3cdae979()) {
     foreach(category in level.var_4e996a3f) {
-      util::add_debug_command("<dev string:x4f7>" + map.name + "<dev string:x529>" + function_9e72a96(category) + "<dev string:x3c3>" + map.name + "<dev string:x52e>" + function_9e72a96(category) + "<dev string:x3e2>");
+      util::add_debug_command("<dev string:x4f7>" + map.name + "<dev string:x529>" + hashtostring(category) + "<dev string:x3c3>" + map.name + "<dev string:x52e>" + hashtostring(category) + "<dev string:x3e2>");
     }
   }
 }

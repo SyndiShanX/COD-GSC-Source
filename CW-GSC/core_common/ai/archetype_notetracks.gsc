@@ -169,7 +169,7 @@ function private notetrackstartragdoll(entity) {
   text = "<dev string:x38>";
 
   if(isDefined(var_89953da0) && var_89953da0 != "<dev string:x51>") {
-    text += "<dev string:x55>" + function_9e72a96(var_89953da0);
+    text += "<dev string:x55>" + hashtostring(var_89953da0);
     notetracks = getnotetracktimes(var_89953da0, "<dev string:x5c>");
 
     if(notetracks.size == 1) {
@@ -337,7 +337,7 @@ function private function_a5af97c9(animationentity, clip, tag) {
     weaponname = "<dev string:xcc>";
 
     if(isDefined(animationentity.weapon.name)) {
-      weaponname = function_9e72a96(animationentity.weapon.name);
+      weaponname = hashtostring(animationentity.weapon.name);
     }
 
     assertmsg("<dev string:xd9>" + weaponname + "<dev string:x122>" + animationentity.aitype);

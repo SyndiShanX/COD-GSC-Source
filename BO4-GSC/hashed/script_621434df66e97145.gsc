@@ -45,7 +45,7 @@ init() {
   level thread function_33e9442f();
   level thread function_31c7123b();
   level thread function_d8a7606();
-  level thread function_982029e3();
+  level thread init_spinning_trap();
 }
 
 init_weapons_locker() {
@@ -102,7 +102,7 @@ function_31c7123b() {
   s_trap._trap_type = "acid";
   s_trap.e_volume = getent(s_trap.target, "targetname");
   s_trap.e_volume._trap_type = "acid";
-  s_trap.var_28ea1870 = struct::get_array(s_trap.target3, "targetname");
+  s_trap.a_s_trap_fx = struct::get_array(s_trap.target3, "targetname");
   s_trap.a_s_buttons = struct::get_array(s_trap.target2, "targetname");
   s_trap.a_e_lights = getEntArray(s_trap.target4, "targetname");
   s_trap.a_s_panels = struct::get_array(s_trap.target5, "targetname");
@@ -237,18 +237,18 @@ function_a77f3804(e_activator, e_volume) {
 
 shower_trap_fx(b_is_on) {
   if(b_is_on) {
-    foreach(var_9e659454 in self.var_28ea1870) {
-      var_9e659454.mdl_fx = util::spawn_model("tag_origin", var_9e659454.origin, var_9e659454.angles);
-      var_9e659454.mdl_fx clientfield::set("shower_trap_fx", 1);
+    foreach(s_trap_fx in self.a_s_trap_fx) {
+      s_trap_fx.mdl_fx = util::spawn_model("tag_origin", s_trap_fx.origin, s_trap_fx.angles);
+      s_trap_fx.mdl_fx clientfield::set("shower_trap_fx", 1);
     }
 
     return;
   }
 
-  foreach(var_9e659454 in self.var_28ea1870) {
-    var_9e659454.mdl_fx clientfield::set("shower_trap_fx", 0);
+  foreach(s_trap_fx in self.a_s_trap_fx) {
+    s_trap_fx.mdl_fx clientfield::set("shower_trap_fx", 0);
     waitframe(1);
-    var_9e659454.mdl_fx delete();
+    s_trap_fx.mdl_fx delete();
   }
 }
 
@@ -317,7 +317,7 @@ function_d8a7606() {
   s_trap._trap_type = "fire";
   s_trap.e_volume = getent(s_trap.target, "targetname");
   s_trap.e_volume._trap_type = "fire";
-  s_trap.var_28ea1870 = struct::get_array(s_trap.target3, "targetname");
+  s_trap.a_s_trap_fx = struct::get_array(s_trap.target3, "targetname");
   s_trap.a_s_buttons = struct::get_array(s_trap.target2, "targetname");
   s_trap.a_e_lights = getEntArray(s_trap.target4, "targetname");
   s_trap.a_s_panels = struct::get_array(s_trap.target5, "targetname");
@@ -470,18 +470,18 @@ function_11e5b2ee(e_activator, e_volume) {
 
 fire_trap_fx(b_is_on) {
   if(b_is_on) {
-    foreach(var_9e659454 in self.var_28ea1870) {
-      var_9e659454.mdl_fx = util::spawn_model("tag_origin", var_9e659454.origin, var_9e659454.angles);
-      var_9e659454.mdl_fx clientfield::set("fire_trap_fx", 1);
+    foreach(s_trap_fx in self.a_s_trap_fx) {
+      s_trap_fx.mdl_fx = util::spawn_model("tag_origin", s_trap_fx.origin, s_trap_fx.angles);
+      s_trap_fx.mdl_fx clientfield::set("fire_trap_fx", 1);
     }
 
     return;
   }
 
-  foreach(var_9e659454 in self.var_28ea1870) {
-    var_9e659454.mdl_fx clientfield::set("fire_trap_fx", 0);
+  foreach(s_trap_fx in self.a_s_trap_fx) {
+    s_trap_fx.mdl_fx clientfield::set("fire_trap_fx", 0);
     waitframe(1);
-    var_9e659454.mdl_fx delete();
+    s_trap_fx.mdl_fx delete();
   }
 }
 
@@ -530,7 +530,7 @@ function_867c70bf() {
   self clientfield::set_to_player("player_fire_trap_post_fx", 0);
 }
 
-function_982029e3() {
+init_spinning_trap() {
   level.s_spinning_trap = struct::get("s_spinning_trap", "targetname");
   s_trap = level.s_spinning_trap;
   s_trap._trap_type = "rotating";

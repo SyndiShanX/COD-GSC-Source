@@ -1114,10 +1114,10 @@ function function_e4dcca48() {
   self.var_481aa649 = 0;
   self.var_c2f3a87c = 0;
   var_369ce419 = self.chest_user;
-  var_63f52acb = self.zbarrier.weapon_model;
+  mdl_weapon_model = self.zbarrier.weapon_model;
 
-  if(isDefined(var_63f52acb)) {
-    var_63f52acb endon(#"death");
+  if(isDefined(mdl_weapon_model)) {
+    mdl_weapon_model endon(#"death");
   }
 
   var_13370b92 = self.trigger;
@@ -1131,8 +1131,8 @@ function function_e4dcca48() {
   while(isDefined(var_13370b92) && isDefined(self)) {
     self.var_c2f3a87c = 0;
 
-    if(isDefined(var_369ce419) && isDefined(var_63f52acb)) {
-      if(var_369ce419 util::is_looking_at(var_63f52acb)) {
+    if(isDefined(var_369ce419) && isDefined(mdl_weapon_model)) {
+      if(var_369ce419 util::is_looking_at(mdl_weapon_model)) {
         self.var_c2f3a87c = 1;
       }
     }
@@ -1143,8 +1143,8 @@ function function_e4dcca48() {
       self.var_481aa649 = 1;
       self.var_75c86f89 = var_369ce419;
 
-      if(isDefined(var_63f52acb)) {
-        var_63f52acb clientfield::set("powerup_fx", 1);
+      if(isDefined(mdl_weapon_model)) {
+        mdl_weapon_model clientfield::set("powerup_fx", 1);
       }
 
       var_369ce419 thread zm_audio::create_and_play_dialog(#"magicbox", #"share");

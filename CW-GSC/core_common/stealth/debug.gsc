@@ -810,7 +810,7 @@ function function_613009e2() {
     }
 
     draw_axis(obj.origin, angles, 12);
-    print3d(obj.origin - (0, 0, 12), function_9e72a96(obj.scriptbundlename), color, 1, 0.3, 1);
+    print3d(obj.origin - (0, 0, 12), hashtostring(obj.scriptbundlename), color, 1, 0.3, 1);
 
     if(!canuse) {
       print3d(obj.origin - (0, 0, 20), "<dev string:x495>" + obj.nextusetime - gettime(), color, 1, 0.3, 1);

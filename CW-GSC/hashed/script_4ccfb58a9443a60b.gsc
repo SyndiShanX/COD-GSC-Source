@@ -650,30 +650,30 @@ function function_18dfa93a(destination) {
 }
 
 function function_633b283d() {
-  adddebugcommand("<dev string:xe1>" + function_9e72a96(#"concussion_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x136>" + function_9e72a96(#"cymbal_monkey_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x187>" + function_9e72a96(#"item_survival_scorestreak_deathmachine") + "<dev string:x131>");
-  adddebugcommand("<dev string:x1d8>" + function_9e72a96(#"item_survival_scorestreak_flamethrower") + "<dev string:x131>");
-  adddebugcommand("<dev string:x228>" + function_9e72a96(#"frag_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x278>" + function_9e72a96(#"item_survival_scorestreak_pineapple_gun") + "<dev string:x131>");
-  adddebugcommand("<dev string:x2cc>" + function_9e72a96(#"molotov_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x316>" + function_9e72a96(#"satchel_charge_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x368>" + function_9e72a96(#"stimshot_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x3b5>" + function_9e72a96(#"self_revive_sr_item") + "<dev string:x131>");
-  adddebugcommand("<dev string:x404>" + function_9e72a96(#"semtex_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x44e>" + function_9e72a96(#"item_survival_scorestreak_ultimate_turret") + "<dev string:x131>");
-  adddebugcommand("<dev string:x49f>" + function_9e72a96(#"hatchet_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x4ed>" + function_9e72a96(#"item_survival_scorestreak_chopper_gunner") + "<dev string:x131>");
-  adddebugcommand("<dev string:x53f>" + function_9e72a96(#"item_survival_scorestreak_bow") + "<dev string:x131>");
-  adddebugcommand("<dev string:x53f>" + function_9e72a96(#"item_survival_scorestreak_hand_cannon") + "<dev string:x131>");
-  adddebugcommand("<dev string:x586>" + function_9e72a96(#"decoy_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x5d7>" + function_9e72a96(#"item_survival_scorestreak_napalm_strike") + "<dev string:x131>");
-  adddebugcommand("<dev string:x628>" + function_9e72a96(#"item_survival_scorestreak_remote_missile") + "<dev string:x131>");
-  adddebugcommand("<dev string:x67a>" + function_9e72a96(#"item_survival_scorestreak_artillery_strike") + "<dev string:x131>");
-  adddebugcommand("<dev string:x6ce>" + function_9e72a96(#"black_hole_bomb_item_t9_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x721>" + function_9e72a96(#"grapple_t9_item_sr") + "<dev string:x131>");
-  adddebugcommand("<dev string:x770>" + function_9e72a96(#"item_survival_scorestreak_arcxd") + "<dev string:x131>");
-  adddebugcommand("<dev string:x7ba>" + function_9e72a96(#"item_survival_scorestreak_hand_cannon") + "<dev string:x131>");
+  adddebugcommand("<dev string:xe1>" + hashtostring(#"concussion_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x136>" + hashtostring(#"cymbal_monkey_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x187>" + hashtostring(#"item_survival_scorestreak_deathmachine") + "<dev string:x131>");
+  adddebugcommand("<dev string:x1d8>" + hashtostring(#"item_survival_scorestreak_flamethrower") + "<dev string:x131>");
+  adddebugcommand("<dev string:x228>" + hashtostring(#"frag_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x278>" + hashtostring(#"item_survival_scorestreak_pineapple_gun") + "<dev string:x131>");
+  adddebugcommand("<dev string:x2cc>" + hashtostring(#"molotov_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x316>" + hashtostring(#"satchel_charge_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x368>" + hashtostring(#"stimshot_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x3b5>" + hashtostring(#"self_revive_sr_item") + "<dev string:x131>");
+  adddebugcommand("<dev string:x404>" + hashtostring(#"semtex_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x44e>" + hashtostring(#"item_survival_scorestreak_ultimate_turret") + "<dev string:x131>");
+  adddebugcommand("<dev string:x49f>" + hashtostring(#"hatchet_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x4ed>" + hashtostring(#"item_survival_scorestreak_chopper_gunner") + "<dev string:x131>");
+  adddebugcommand("<dev string:x53f>" + hashtostring(#"item_survival_scorestreak_bow") + "<dev string:x131>");
+  adddebugcommand("<dev string:x53f>" + hashtostring(#"item_survival_scorestreak_hand_cannon") + "<dev string:x131>");
+  adddebugcommand("<dev string:x586>" + hashtostring(#"decoy_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x5d7>" + hashtostring(#"item_survival_scorestreak_napalm_strike") + "<dev string:x131>");
+  adddebugcommand("<dev string:x628>" + hashtostring(#"item_survival_scorestreak_remote_missile") + "<dev string:x131>");
+  adddebugcommand("<dev string:x67a>" + hashtostring(#"item_survival_scorestreak_artillery_strike") + "<dev string:x131>");
+  adddebugcommand("<dev string:x6ce>" + hashtostring(#"black_hole_bomb_item_t9_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x721>" + hashtostring(#"grapple_t9_item_sr") + "<dev string:x131>");
+  adddebugcommand("<dev string:x770>" + hashtostring(#"item_survival_scorestreak_arcxd") + "<dev string:x131>");
+  adddebugcommand("<dev string:x7ba>" + hashtostring(#"item_survival_scorestreak_hand_cannon") + "<dev string:x131>");
   namespace_420b39d3::function_d8ef0f00(&function_7a1fc37c);
 }
 

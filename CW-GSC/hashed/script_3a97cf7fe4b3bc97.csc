@@ -47,13 +47,13 @@ function sr_demented_echo_fx(localclientnum, oldval, newval, bnewent, binitialsn
   if(bwastimejump == 1) {
     if(self.model === #"hash_2641cfb5c2cdcc85") {
       var_1e7f4865 = getscriptbundle("fxd9_zm_char_ndu_ghoul_dark");
-      var_ee6bcd51 = #"hash_611d3f9c34b1cbd1";
+      str_rob = #"hash_611d3f9c34b1cbd1";
     } else {
       var_1e7f4865 = getscriptbundle("fxd9_zm_char_ndu_ghoul");
     }
 
-    if(isDefined(var_ee6bcd51)) {
-      self playrenderoverridebundle(var_ee6bcd51);
+    if(isDefined(str_rob)) {
+      self playrenderoverridebundle(str_rob);
     }
 
     if(isDefined(var_1e7f4865.effectcount) &!is_true(self.var_255d9872)) {

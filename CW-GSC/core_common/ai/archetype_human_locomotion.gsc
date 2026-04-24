@@ -585,10 +585,10 @@ function private getarrivalsplittime(arrivalanim) {
 
   if(animhasnotetrack(arrivalanim, "corner")) {
     times = getnotetracktimes(arrivalanim, "corner");
-    assert(times.size == 1, "<dev string:xde>" + function_9e72a96(arrivalanim) + "<dev string:xf0>" + "<dev string:x10f>" + "<dev string:x119>");
+    assert(times.size == 1, "<dev string:xde>" + hashtostring(arrivalanim) + "<dev string:xf0>" + "<dev string:x10f>" + "<dev string:x119>");
     bestsplit = times[0];
   } else {
-    var_1e582813 = function_9e72a96(arrivalanim);
+    var_1e582813 = hashtostring(arrivalanim);
     var_ccd34262 = issubstr(var_1e582813, "<dev string:x128>") || issubstr(var_1e582813, "<dev string:x12e>") || issubstr(var_1e582813, "<dev string:x134>");
     var_ffc4381b = issubstr(var_1e582813, "<dev string:x13a>");
 
@@ -824,7 +824,7 @@ function function_b1092561(entity) {
 
     if(animhasnotetrack(entity.var_7b1f015a.animation, "corner")) {
       times = getnotetracktimes(entity.var_7b1f015a.animation, "corner");
-      assert(times.size == 1, "<dev string:x183>" + function_9e72a96(entity.var_7b1f015a.animation) + "<dev string:xf0>" + "<dev string:x10f>" + "<dev string:x119>");
+      assert(times.size == 1, "<dev string:x183>" + hashtostring(entity.var_7b1f015a.animation) + "<dev string:xf0>" + "<dev string:x10f>" + "<dev string:x119>");
       splittime = times[0];
     }
 

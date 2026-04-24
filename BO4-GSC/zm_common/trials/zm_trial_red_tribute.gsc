@@ -142,7 +142,7 @@ track_spawns() {
   if(!(isDefined(self.var_12745932) && self.var_12745932)) {
     level.var_ddd04c77++;
 
-    if(level.var_ddd04c77 >= level.var_38b15968) {
+    if(level.var_ddd04c77 >= level.n_zombie_spawns) {
       self zm_score::function_acaab828(1);
     }
   }

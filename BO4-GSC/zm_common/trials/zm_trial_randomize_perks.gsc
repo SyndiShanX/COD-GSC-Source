@@ -58,13 +58,13 @@ function_83fa47e8() {
   self.var_cd5d9345 = [];
 
   for(n_slot = 0; n_slot < 4; n_slot++) {
-    var_67017da5 = self.var_5046ea5e.var_8f0c164f[n_slot];
+    var_67017da5 = self.var_5046ea5e.a_str_vapor_names[n_slot];
 
     if(!isDefined(var_67017da5)) {
       continue;
     }
 
-    var_52bb1366 = arraycopy(self.var_5046ea5e.var_8f0c164f);
+    var_52bb1366 = arraycopy(self.var_5046ea5e.a_str_vapor_names);
 
     if(isarray(self.var_5046ea5e.var_724d826b)) {
       var_52bb1366 = arraycombine(var_52bb1366, self.var_5046ea5e.var_724d826b, 0, 0);
