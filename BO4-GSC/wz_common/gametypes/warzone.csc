@@ -181,7 +181,7 @@ function_41f9de03() {
 on_localclient_connect(localclientnum) {
   if(isDefined(getgametypesetting(#"hash_418adedc5cf0a538")) && getgametypesetting(#"hash_418adedc5cf0a538")) {
     player = function_27673a7(localclientnum);
-    player thread function_7e3a43c3(localclientnum);
+    player thread cartoon_mode(localclientnum);
   }
 }
 
@@ -384,7 +384,7 @@ function_3dadedf8(localclientnum) {
   }
 }
 
-function_7e3a43c3(localclientnum) {
+cartoon_mode(localclientnum) {
   self notify("2dfbcba8182d1332");
   self endon("2dfbcba8182d1332");
 

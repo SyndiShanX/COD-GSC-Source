@@ -145,10 +145,10 @@ init() {
   }
 
   level thread zm_ffotd::main_end();
-  level thread function_7e3a43c3();
+  level thread cartoon_mode();
 }
 
-function_7e3a43c3() {
+cartoon_mode() {
   level.var_bcb2da96 = 0;
   util::waitforallclients();
 
