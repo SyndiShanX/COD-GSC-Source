@@ -634,7 +634,7 @@ function_cbee939b(var_a9e11cb7) {
 
 function_76351c42() {
   self endon(#"disconnect");
-  self.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d = 0;
+  self.var_d883eecd = 0;
   var_f3ca036b = 0;
 
   for(n_current_round = level.round_number; true; n_current_round = level.round_number) {
@@ -646,14 +646,14 @@ function_76351c42() {
       if(var_f3ca036b < 3) {
         continue;
       } else {
-        self.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d = undefined;
+        self.var_d883eecd = undefined;
       }
     } else {
       continue;
     }
 
     level waittill(#"end_of_round");
-    self.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d = 0;
+    self.var_d883eecd = 0;
     var_f3ca036b = 0;
   }
 }

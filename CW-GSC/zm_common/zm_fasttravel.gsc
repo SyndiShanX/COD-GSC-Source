@@ -194,8 +194,8 @@ function function_5c18a7f4(player) {
   }
 
   if(!is_true(player.var_9c7b96ed[self.stub.var_8d5d092c])) {
-    if(isDefined(player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d)) {
-      n_cost = player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d;
+    if(isDefined(player.var_d883eecd)) {
+      n_cost = player.var_d883eecd;
     } else if(isDefined(self.stub)) {
       n_cost = self.stub.zombie_cost;
     } else {
@@ -315,8 +315,8 @@ function function_6cde5436() {
       continue;
     }
 
-    if(isDefined(player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d)) {
-      n_cost = player.rock_cliff_scotland_04_closed_lod1_b45d8bc9d5647932003cc8a9d;
+    if(isDefined(player.var_d883eecd)) {
+      n_cost = player.var_d883eecd;
     } else if(isDefined(self.stub)) {
       n_cost = self.stub.zombie_cost;
     } else {

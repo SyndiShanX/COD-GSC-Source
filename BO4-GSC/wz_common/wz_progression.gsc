@@ -202,15 +202,15 @@ function_2c8aac6() {
 
 function_59c85637() {
   if(self.pers[#"teameliminatedtime"]) {
-    ui_icon_weapon_t10_me_p30_cleaver_cartoon_dfx_preview_flipbook = max(gettime() - self.pers[#"teameliminatedtime"], 0);
+    var_c06441ec = max(gettime() - self.pers[#"teameliminatedtime"], 0);
   } else {
-    ui_icon_weapon_t10_me_p30_cleaver_cartoon_dfx_preview_flipbook = 0;
+    var_c06441ec = 0;
   }
 
   var_1ef5a3ba = 0;
 
   if(isDefined(self.pers[#"hash_150795bee4d46ce4"])) {
-    var_1ef5a3ba = max(gettime() - self.pers[#"hash_150795bee4d46ce4"] - ui_icon_weapon_t10_me_p30_cleaver_cartoon_dfx_preview_flipbook, 0);
+    var_1ef5a3ba = max(gettime() - self.pers[#"hash_150795bee4d46ce4"] - var_c06441ec, 0);
   }
 
   return var_1ef5a3ba;
